@@ -2,10 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const EMAIL = "eleveai974@gmail.com";
-const SUBJECT = "Concours logo EleveAI";
-const MAILTO = `mailto:${EMAIL}?subject=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(
-  "Bonjour,\n\nJe participe au concours logo EleveAI.\n\nPrenom :\nClasse :\nEtablissement :\n\nJ'ajoute mon logo en piece jointe.\n\nMerci."
-)}`;
 
 const ideas = [
   "l'ile de La Reunion",
@@ -42,17 +38,13 @@ export default function ConcoursLogoPage() {
               >
                 Telecharger le modele
               </a>
-              <a
-                href={MAILTO}
-                className="inline-flex items-center justify-center rounded-full border border-cyan-200/40 bg-white/10 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-white/15"
-              >
-                Envoyer mon logo
-              </a>
+              <span className="inline-flex items-center justify-center rounded-full border border-cyan-200/40 bg-white/10 px-5 py-3 text-sm font-black text-cyan-100">
+                {EMAIL}
+              </span>
             </div>
 
             <p className="mt-4 text-sm font-semibold text-white/60">
-              Si le bouton email ne s'ouvre pas, envoie ton fichier directement a{" "}
-              <span className="text-cyan-200">{EMAIL}</span>.
+              Envoie ton logo a cette adresse avec ton prenom, ta classe et ton etablissement.
             </p>
           </div>
 
@@ -140,12 +132,9 @@ export default function ConcoursLogoPage() {
             >
               Modele
             </a>
-            <a
-              href={MAILTO}
-              className="rounded-full bg-amber-300 px-5 py-2.5 text-sm font-black text-slate-950 transition hover:-translate-y-0.5 hover:bg-amber-200"
-            >
-              Envoyer
-            </a>
+            <span className="rounded-full bg-amber-300 px-5 py-2.5 text-sm font-black text-slate-950">
+              {EMAIL}
+            </span>
           </div>
         </div>
 

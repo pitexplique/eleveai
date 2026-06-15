@@ -125,6 +125,24 @@ function getPct(score: number, total: number) {
   return Math.round((Number(score) / Number(total)) * 100);
 }
 
+// Le champ `nom` est saisi au format « NOM EN MAJUSCULES prénom en minuscules »
+// (ex. « DIDUX Lucie »). On n'affiche que le prénom : on garde les mots qui ne
+// sont pas entièrement en majuscules.
+function prenomFromNom(nom: string | null | undefined) {
+  if (!nom) return null;
+  const prenom = nom
+    .trim()
+    .split(/\s+/)
+    .filter((mot) => mot !== mot.toLocaleUpperCase("fr-FR"))
+    .map((mot) =>
+      mot.charAt(0).toLocaleUpperCase("fr-FR") +
+      mot.slice(1).toLocaleLowerCase("fr-FR")
+    )
+    .join(" ")
+    .trim();
+  return prenom || null;
+}
+
 const MATIERE_LABELS: Record<string, string> = {
   maths: "🔢 Maths",
   francais: "📚 Français",
@@ -318,7 +336,7 @@ export default function DashboardEleveClient() {
           </div>
 
           <h1 className="mt-4 text-3xl font-black md:text-5xl">
-            Bonjour {eleve.nom ?? "élève"} 👋
+            Bonjour {prenomFromNom(eleve.nom) ?? "élève"} 👋
           </h1>
 
           <p className="mt-3 font-semibold text-slate-700">
