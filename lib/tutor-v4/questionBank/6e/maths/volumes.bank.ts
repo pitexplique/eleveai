@@ -8,6 +8,16 @@ function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function expl(calcul: string) {
+  return (
+    "Définition : un volume mesure la place occupée par un solide.\n\n" +
+    "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+    "Calcul : " +
+    calcul +
+    "\n\nConclusion : on garde la réponse obtenue."
+  );
+}
+
 export const volumesBank: TutorBankItemV4[] = [
   // =========================
   // VOLUME_UNITE
@@ -1082,4 +1092,65 @@ export const volumesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ===== TOP-UP — VOLUME_UNITE =====
+  { kind: "fixed", id: "volume_unite_topup_1", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_unite", difficulty: 1, theme: "neutral",
+    text: "Quelle unité est adaptée pour mesurer le volume d’une piscine ?", format: "qcm", choices: ["m³", "m²", "m", "kg"], expected: ["m³"], comparator: "mcq_exact",
+    hint: "Une grande place occupée en 3 dimensions.", explanation: expl("Une piscine occupe un grand espace en trois dimensions. On utilise une unité cube adaptée aux grandes tailles : le mètre cube (m³)."), tags: ["volume_solide", "unite", "qcm"] },
+  { kind: "fixed", id: "volume_unite_topup_2", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_unite", difficulty: 2, theme: "neutral",
+    text: "Un volume se mesure avec des unités...", format: "qcm", choices: ["cubes", "carrées", "de longueur", "de masse"], expected: ["cubes"], comparator: "mcq_exact",
+    hint: "Le volume occupe l’espace en 3 dimensions.", explanation: expl("Un volume occupe l’espace en trois dimensions. On le mesure avec des unités cubes (cm³, m³…)."), tags: ["volume_solide", "unite", "qcm"] },
+  { kind: "fixed", id: "volume_unite_topup_3", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_unite", difficulty: 2, theme: "neutral",
+    text: "Laquelle de ces écritures est une mesure de volume ?", format: "qcm", choices: ["12 cm³", "12 cm²", "12 cm", "12 kg"], expected: ["12 cm³"], comparator: "mcq_exact",
+    hint: "Le petit « 3 » indique une unité cube.", explanation: expl("Le cm³ (centimètre cube) est une unité de volume. « 12 cm³ » est donc une mesure de volume (cm² = aire, cm = longueur, kg = masse)."), tags: ["volume_solide", "unite", "qcm"] },
+
+  // ===== TOP-UP — VOLUME_LIRE =====
+  { kind: "fixed", id: "volume_lire_topup_1", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_lire", difficulty: 1, theme: "neutral",
+    text: "Dans l’écriture 25 cm³, quel est le volume ?", format: "short", expected: ["25"], comparator: "number_equal",
+    hint: "Lis le nombre avant l’unité.", explanation: expl("Dans 25 cm³, le nombre 25 indique la quantité de volume. Le volume vaut 25 cm³."), tags: ["volume_solide", "lire"] },
+  { kind: "fixed", id: "volume_lire_topup_2", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_lire", difficulty: 1, theme: "neutral",
+    text: "Un petit cube unité mesure 1 cm de côté. Quel est son volume ?", format: "short", expected: ["1"], comparator: "number_equal",
+    hint: "C’est le cube unité.", explanation: expl("Un cube de 1 cm de côté est le cube unité : son volume est 1 cm³."), tags: ["volume_solide", "lire", "cube_unite"] },
+  { kind: "fixed", id: "volume_lire_topup_3", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_lire", difficulty: 2, theme: "neutral",
+    text: "Un solide est formé de 14 cubes unités. Quel est son volume ?", format: "short", expected: ["14"], comparator: "number_equal",
+    hint: "Chaque cube vaut 1 cm³.", explanation: expl("Chaque cube unité vaut 1 cm³. Un solide de 14 cubes a donc un volume de 14 cm³."), tags: ["volume_solide", "lire"] },
+
+  // ===== TOP-UP — VOLUME_COMPARER =====
+  { kind: "fixed", id: "volume_comparer_topup_1", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_comparer", difficulty: 1, theme: "neutral",
+    text: "Le solide A est fait de 12 cubes, le solide B de 9 cubes. Lequel a le plus grand volume ?", format: "qcm", choices: ["le solide A", "le solide B", "ils sont égaux"], expected: ["le solide A"], comparator: "mcq_exact",
+    hint: "Compare le nombre de cubes.", explanation: expl("On compte les cubes : A = 12, B = 9. Comme 12 > 9, le solide A a le plus grand volume."), tags: ["volume_solide", "comparer", "qcm"] },
+  { kind: "fixed", id: "volume_comparer_topup_2", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_comparer", difficulty: 2, theme: "neutral",
+    text: "Deux solides sont faits chacun de 8 cubes. Ont-ils le même volume ?", format: "qcm", choices: ["oui", "non"], expected: ["oui"], comparator: "mcq_exact",
+    hint: "Compte les cubes de chacun.", explanation: expl("Les deux solides ont 8 cubes, donc le même volume : 8 cm³. La forme peut être différente, mais le volume est identique."), tags: ["volume_solide", "comparer", "qcm"] },
+  { kind: "fixed", id: "volume_comparer_topup_3", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_comparer", difficulty: 2, theme: "neutral",
+    text: "Un solide a 15 cubes, un autre 9 cubes. Combien de cubes de plus a le premier ?", format: "short", expected: ["6"], comparator: "number_equal",
+    hint: "Calcule 15 − 9.", explanation: expl("On calcule l’écart : 15 - 9 = 6. Le premier solide a 6 cubes de plus."), tags: ["volume_solide", "comparer"] },
+
+  // ===== TOP-UP — VOLUME_ASSEMBLAGE =====
+  { kind: "fixed", id: "volume_assemblage_topup_1", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_assemblage", difficulty: 2, theme: "neutral",
+    text: "On assemble un solide de 5 cubes et un solide de 6 cubes. Quel est le volume total ?", format: "short", expected: ["11"], comparator: "number_equal",
+    hint: "Additionne les cubes.", explanation: expl("On additionne les volumes : 5 + 6 = 11 cubes, soit 11 cm³."), tags: ["volume_solide", "assemblage"] },
+  { kind: "fixed", id: "volume_assemblage_topup_2", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_assemblage", difficulty: 2, theme: "neutral",
+    text: "Un pavé est formé de 2 couches de 6 cubes. Combien de cubes contient-il ?", format: "short", expected: ["12"], comparator: "number_equal",
+    hint: "2 × 6.", explanation: expl("Chaque couche a 6 cubes, et il y a 2 couches : 2 × 6 = 12 cubes."), tags: ["volume_solide", "assemblage"] },
+  { kind: "fixed", id: "volume_assemblage_topup_3", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_assemblage", difficulty: 3, theme: "neutral",
+    text: "Un grand cube est formé de petits cubes : 2 sur chaque arête (2 × 2 × 2). Combien de petits cubes contient-il ?", format: "short", expected: ["8"], comparator: "number_equal",
+    hint: "2 × 2 × 2.", explanation: expl("On multiplie les trois dimensions : 2 × 2 × 2 = 8 petits cubes."), tags: ["volume_solide", "assemblage"] },
+  { kind: "fixed", id: "volume_assemblage_topup_4", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_assemblage", difficulty: 2, theme: "neutral",
+    text: "On empile 3 étages de 4 cubes chacun. Combien de cubes en tout ?", format: "short", expected: ["12"], comparator: "number_equal",
+    hint: "3 × 4.", explanation: expl("3 étages de 4 cubes : 3 × 4 = 12 cubes."), tags: ["volume_solide", "assemblage"] },
+
+  // ===== TOP-UP — VOLUME_DEFI =====
+  { kind: "fixed", id: "volume_defi_topup_1", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : quel est le volume (en cm³) d’un pavé droit de dimensions 3 cm × 2 cm × 4 cm ?", format: "short", expected: ["24"], comparator: "number_equal",
+    hint: "Volume = Longueur × largeur × hauteur.", explanation: expl("Le volume d’un pavé droit est Longueur × largeur × hauteur : 3 × 2 × 4 = 24, donc 24 cm³."), tags: ["volume_solide", "defi", "pave"] },
+  { kind: "fixed", id: "volume_defi_topup_2", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : quel est le volume (en cm³) d’un cube d’arête 3 cm ?", format: "short", expected: ["27"], comparator: "number_equal",
+    hint: "3 × 3 × 3.", explanation: expl("Le volume d’un cube est arête × arête × arête : 3 × 3 × 3 = 27, donc 27 cm³."), tags: ["volume_solide", "defi", "cube"] },
+  { kind: "fixed", id: "volume_defi_topup_3", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_defi", difficulty: 2, theme: "neutral",
+    text: "Défi : un pavé droit mesure 5 cm × 2 cm × 1 cm. Quel est son volume en cm³ ?", format: "short", expected: ["10"], comparator: "number_equal",
+    hint: "5 × 2 × 1.", explanation: expl("Volume = 5 × 2 × 1 = 10, donc 10 cm³."), tags: ["volume_solide", "defi", "pave"] },
+  { kind: "fixed", id: "volume_defi_topup_4", niveau: "6e", matiere: "maths", notionId: "volume_solide", microId: "volume_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : combien de cubes de 1 cm³ faut-il pour remplir entièrement une boîte de 2 cm × 3 cm × 2 cm ?", format: "short", expected: ["12"], comparator: "number_equal",
+    hint: "Calcule le volume de la boîte.", explanation: expl("Le volume de la boîte est 2 × 3 × 2 = 12 cm³. Il faut donc 12 cubes de 1 cm³ pour la remplir."), tags: ["volume_solide", "defi"] },
 ];
