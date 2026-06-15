@@ -321,19 +321,6 @@ export default function AccueilPage({
           <p className="text-2xl font-black tracking-wide text-white sm:text-3xl">
             La liberté d&apos;apprendre
           </p>
-          <button
-            type="button"
-            onClick={() => setShowSignatureMeaning((value) => !value)}
-            className="mt-2 inline-flex items-center justify-center rounded-full border border-yellow-300/70 bg-yellow-300 px-4 py-1.5 text-sm font-black tracking-[0.16em] text-slate-950 shadow-lg shadow-yellow-950/20 transition hover:-translate-y-0.5 hover:bg-yellow-200 sm:text-base"
-            aria-expanded={showSignatureMeaning}
-          >
-            ε → ∞
-          </button>
-          {showSignatureMeaning && (
-            <p className="mx-auto mt-2 inline-flex max-w-full rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs font-black text-yellow-100 shadow-lg backdrop-blur-sm sm:text-sm">
-              &quot;Un petit détail peut tout changer&quot;
-            </p>
-          )}
         </div>
         <Image
           src="/images/accueil-eleveai-reunion.webp"
