@@ -23,6 +23,10 @@ function calculPoseCanvas(
   return { kind: "calcul_pose", ...data };
 }
 
+function cpe(def: string, meth: string, calc: string, ccl: string) {
+  return `Définition : ${def}\n\nMéthode : ${meth}\n\nCalcul : ${calc}\n\nConclusion : ${ccl}`;
+}
+
 export const calculPoseBank: TutorBankItemV4[] = [
   /* =========================
      POSE_ADDITION
@@ -1575,4 +1579,38 @@ export const calculPoseBank: TutorBankItemV4[] = [
       "Observation : un résultat numérique seul peut être incomplet.\n\n" +
       "Conclusion : la phrase-réponse permet de conclure clairement.",
     tags: ["entier_calcul_pose", "defi", "open", "redaction", "conclusion"],
-  },]
+  },
+
+  /* ===== TOP-UP — ENTIER_CALCUL_VERIFIER ===== */
+  { kind: "fixed", id: "6e_entier_calcul_verifier_topup_1", niveau: "6e", matiere: "maths", notionId: "entier_calcul_pose", microId: "entier_calcul_verifier", difficulty: 2, theme: "neutral",
+    text: "Quelle addition permet de vérifier la soustraction 50 − 17 = 33 ?", format: "qcm",
+    choices: ["33 + 17 = 50", "50 + 17 = 33", "33 + 50 = 17", "17 + 17 = 33"], expected: ["33 + 17 = 50"], comparator: "mcq_exact",
+    hint: "résultat + nombre enlevé = nombre de départ.", explanation: cpe("on vérifie une soustraction par l’addition inverse.", "on additionne le résultat et le nombre enlevé.", "33 + 17 = 50, ce qui redonne le nombre de départ.", "la soustraction est correcte."), tags: ["entier_calcul_pose", "verifier", "qcm"] },
+  { kind: "fixed", id: "6e_entier_calcul_verifier_topup_2", niveau: "6e", matiere: "maths", notionId: "entier_calcul_pose", microId: "entier_calcul_verifier", difficulty: 2, theme: "neutral",
+    text: "Quelle multiplication permet de vérifier la division 24 ÷ 4 = 6 ?", format: "qcm",
+    choices: ["4 × 6 = 24", "24 × 4 = 6", "6 × 24 = 4", "4 + 6 = 24"], expected: ["4 × 6 = 24"], comparator: "mcq_exact",
+    hint: "diviseur × quotient = dividende.", explanation: cpe("on vérifie une division par la multiplication inverse.", "on multiplie le diviseur par le quotient.", "4 × 6 = 24, ce qui redonne le dividende.", "la division est correcte."), tags: ["entier_calcul_pose", "verifier", "qcm"] },
+  { kind: "fixed", id: "6e_entier_calcul_verifier_topup_3", niveau: "6e", matiere: "maths", notionId: "entier_calcul_pose", microId: "entier_calcul_verifier", difficulty: 3, theme: "neutral",
+    text: "Un élève écrit 234 + 158 = 382. Ce résultat est-il correct ?", format: "qcm",
+    choices: ["non", "oui"], expected: ["non"], comparator: "mcq_exact",
+    hint: "Recalcule la somme.", explanation: cpe("on vérifie une addition en recalculant.", "on additionne colonne par colonne.", "234 + 158 = 392, et non 382.", "le résultat de l’élève est faux : c’est 392."), tags: ["entier_calcul_pose", "verifier", "qcm"] },
+  { kind: "fixed", id: "6e_entier_calcul_verifier_topup_4", niveau: "6e", matiere: "maths", notionId: "entier_calcul_pose", microId: "entier_calcul_verifier", difficulty: 2, theme: "neutral",
+    text: "Pour vérifier le résultat d’une soustraction, on peut...", format: "qcm",
+    choices: ["additionner le résultat et le nombre enlevé", "multiplier les deux nombres", "diviser par 2", "compter les chiffres"],
+    expected: ["additionner le résultat et le nombre enlevé"], comparator: "mcq_exact",
+    hint: "L’addition est l’opération inverse de la soustraction.", explanation: cpe("la soustraction se vérifie par l’addition inverse.", "on additionne le résultat trouvé et le nombre que l’on a enlevé.", "si on retombe sur le nombre de départ, le calcul est juste.", "on additionne le résultat et le nombre enlevé."), tags: ["entier_calcul_pose", "verifier", "qcm"] },
+
+  /* ===== TOP-UP — ENTIER_CALCUL_POSE_DEFI ===== */
+  { kind: "fixed", id: "6e_entier_calcul_pose_defi_topup_1", niveau: "6e", matiere: "maths", notionId: "entier_calcul_pose", microId: "entier_calcul_pose_defi", difficulty: 2, theme: "neutral",
+    text: "Défi : pose et calcule 456 + 378.", format: "short", expected: ["834"], comparator: "number_equal",
+    hint: "Aligne les unités et additionne colonne par colonne.", explanation: cpe("on pose l’addition en alignant les rangs.", "on additionne unités, dizaines, centaines avec les retenues.", "456 + 378 = 834.", "le résultat est 834."), tags: ["entier_calcul_pose", "defi", "addition"] },
+  { kind: "fixed", id: "6e_entier_calcul_pose_defi_topup_2", niveau: "6e", matiere: "maths", notionId: "entier_calcul_pose", microId: "entier_calcul_pose_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : pose et calcule 803 − 547.", format: "short", expected: ["256"], comparator: "number_equal",
+    hint: "Attention aux retenues.", explanation: cpe("on pose la soustraction en alignant les rangs.", "on soustrait colonne par colonne avec les retenues.", "803 - 547 = 256.", "le résultat est 256."), tags: ["entier_calcul_pose", "defi", "soustraction"] },
+  { kind: "fixed", id: "6e_entier_calcul_pose_defi_topup_3", niveau: "6e", matiere: "maths", notionId: "entier_calcul_pose", microId: "entier_calcul_pose_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : pose et calcule 47 × 6.", format: "short", expected: ["282"], comparator: "number_equal",
+    hint: "6 × 7, puis 6 × 4 (dizaines), avec la retenue.", explanation: cpe("on pose la multiplication.", "on multiplie chaque chiffre par 6 en gérant la retenue.", "47 × 6 = 282.", "le résultat est 282."), tags: ["entier_calcul_pose", "defi", "multiplication"] },
+  { kind: "fixed", id: "6e_entier_calcul_pose_defi_topup_4", niveau: "6e", matiere: "maths", notionId: "entier_calcul_pose", microId: "entier_calcul_pose_defi", difficulty: 4, theme: "neutral",
+    text: "Défi : pose et calcule 125 × 8.", format: "short", expected: ["1000", "1 000"], comparator: "number_equal",
+    hint: "125 × 8, un résultat rond.", explanation: cpe("on pose la multiplication.", "on multiplie chaque chiffre de 125 par 8 avec les retenues.", "125 × 8 = 1 000.", "le résultat est 1 000."), tags: ["entier_calcul_pose", "defi", "multiplication"] },
+]

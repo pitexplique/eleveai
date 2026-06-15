@@ -12,6 +12,16 @@ function percentToDecimalString(p: number) {
   return formatComma((p / 100).toFixed(2).replace(/0+$/, "").replace(/\.$/, ""));
 }
 
+function expl(calcul: string) {
+  return (
+    "Définition : un pourcentage exprime une proportion sur 100.\n\n" +
+    "Méthode : on ramène la situation à une proportion sur 100 ou à une part simple.\n\n" +
+    "Calcul : " +
+    calcul +
+    "\n\nConclusion : on garde la réponse obtenue."
+  );
+}
+
 export const pourcentagesBank: TutorBankItemV4[] = [
   // =========================
   // POURCENTAGE_COMPRENDRE
@@ -1285,4 +1295,15 @@ export const pourcentagesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ===== TOP-UP — POURCENTAGE_LIRE =====
+  { kind: "fixed", id: "pourcentage_lire_topup_1", niveau: "6e", matiere: "maths", notionId: "pourcentage_nombre", microId: "pourcentage_lire", difficulty: 2, theme: "neutral",
+    text: "Dans une classe de 100 élèves, 40 % aiment le sport. Combien d’élèves cela représente-t-il ?", format: "short", expected: ["40"], comparator: "number_equal",
+    hint: "40 % = 40 sur 100.", explanation: expl("Sur 100 élèves, 40 % signifie 40 sur 100. Cela représente donc 40 élèves."), tags: ["pourcentage_nombre", "lecture"] },
+  { kind: "fixed", id: "pourcentage_lire_topup_2", niveau: "6e", matiere: "maths", notionId: "pourcentage_nombre", microId: "pourcentage_lire", difficulty: 2, theme: "neutral",
+    text: "Un article affiche « −50 % ». Quelle fraction du prix est enlevée ?", format: "qcm", choices: ["la moitié", "le quart", "le tiers", "rien"], expected: ["la moitié"], comparator: "mcq_exact",
+    hint: "50 % = 50 sur 100 = 1/2.", explanation: expl("50 % signifie 50 sur 100, soit 1/2 : on enlève la moitié du prix."), tags: ["pourcentage_nombre", "lecture", "qcm"] },
+  { kind: "fixed", id: "pourcentage_lire_topup_3", niveau: "6e", matiere: "maths", notionId: "pourcentage_nombre", microId: "pourcentage_lire", difficulty: 2, theme: "neutral",
+    text: "Sur 100 voitures, 25 % sont rouges. Combien de voitures sont rouges ?", format: "short", expected: ["25"], comparator: "number_equal",
+    hint: "25 % = 25 sur 100.", explanation: expl("Sur 100 voitures, 25 % signifie 25 sur 100 : cela représente 25 voitures rouges."), tags: ["pourcentage_nombre", "lecture"] },
 ];
