@@ -1,7 +1,8 @@
-import Link from "next/link";
-import { createClient } from "@supabase/supabase-js";
+"use client";
 
-export const dynamic = "force-dynamic";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useEleve } from "@/context/EleveContext";
 
 type Logo = {
   id: string;
@@ -10,23 +11,30 @@ type Logo = {
   image_url: string;
 };
 
-async function getLogos(): Promise<Logo[]> {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) return [];
+export default function GalerieConcoursLogoPage() {
+  const { eleve } = useEleve();
+  const [logos, setLogos] = useState<Logo[] | null>(null);
+  const [erreur, setErreur] = useState("");
 
-  const supabase = createClient(url, key);
-  const { data } = await supabase
-    .from("concours_logos")
-    .select("id, prenom, classe, image_url")
-    .eq("masque", false)
-    .order("created_at", { ascending: false })
-    .limit(300);
-  return data ?? [];
-}
-
-export default async function GalerieConcoursLogoPage() {
-  const logos = await getLogos();
+  useEffect(() => {
+    if (!eleve?.token) return;
+    let actif = true;
+    (async () => {
+      try {
+        const res = await fetch("/api/concours-logo", {
+          headers: { Authorization: `Bearer ${eleve.token}` },
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data?.ok) throw new Error(data?.error || "Erreur");
+        if (actif) setLogos(data.logos ?? []);
+      } catch (e: any) {
+        if (actif) setErreur(e?.message || "Impossible de charger la galerie.");
+      }
+    })();
+    return () => {
+      actif = false;
+    };
+  }, [eleve?.token]);
 
   return (
     <main className="min-h-screen bg-[#041B33] text-white">
@@ -39,8 +47,8 @@ export default async function GalerieConcoursLogoPage() {
             Les logos proposés par les élèves
           </h1>
           <p className="mt-3 max-w-2xl text-sm font-semibold text-white/70">
-            Chaque proposition est affichée avec le prénom et la classe de l'élève,
-            jamais le nom de famille.
+            Réservée aux élèves connectés. Chaque proposition est affichée avec le
+            prénom et la classe de l'élève, jamais le nom de famille.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -52,7 +60,27 @@ export default async function GalerieConcoursLogoPage() {
             </Link>
           </div>
 
-          {logos.length === 0 ? (
+          {!eleve?.token ? (
+            <div className="mt-10 rounded-2xl border border-white/10 bg-white/5 p-8 text-center">
+              <p className="text-sm font-semibold text-white/70">
+                Connecte-toi avec ton code élève pour découvrir les logos.
+              </p>
+              <Link
+                href="/auth/signin"
+                className="mt-4 inline-flex rounded-full border border-cyan-200/40 bg-white/10 px-5 py-3 text-sm font-black text-cyan-100 transition hover:-translate-y-0.5 hover:bg-white/20"
+              >
+                Se connecter
+              </Link>
+            </div>
+          ) : erreur ? (
+            <div className="mt-10 rounded-2xl border border-rose-300/20 bg-rose-300/10 p-8 text-center">
+              <p className="text-sm font-semibold text-rose-200">{erreur}</p>
+            </div>
+          ) : logos === null ? (
+            <div className="mt-10 rounded-2xl border border-white/10 bg-white/5 p-8 text-center">
+              <p className="text-sm font-semibold text-white/70">Chargement…</p>
+            </div>
+          ) : logos.length === 0 ? (
             <div className="mt-10 rounded-2xl border border-white/10 bg-white/5 p-8 text-center">
               <p className="text-sm font-semibold text-white/70">
                 Aucun logo pour l'instant. Sois le premier à proposer le tien !

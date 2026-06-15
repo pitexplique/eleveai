@@ -123,8 +123,17 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    const auth = req.headers.get("authorization") ?? "";
+    const token = auth.startsWith("Bearer ") ? auth.slice(7) : "";
+    if (!verifySessionToken(token)) {
+      return NextResponse.json(
+        { ok: false, error: "Connecte-toi pour voir la galerie.", logos: [] },
+        { status: 401 }
+      );
+    }
+
     const supabase = admin();
     const { data, error } = await supabase
       .from("concours_logos")
