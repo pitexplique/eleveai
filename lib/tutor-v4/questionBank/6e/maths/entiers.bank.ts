@@ -12,6 +12,16 @@ function chunkedNumber(n: number) {
   return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
+function expl(calcul: string) {
+  return (
+    "Définition : un nombre entier sert à compter ou à ranger des quantités.\n\n" +
+    "Méthode : on lit bien les chiffres et leur position, puis on applique la règle demandée.\n\n" +
+    "Calcul : " +
+    calcul +
+    "\n\nConclusion : on garde la réponse obtenue."
+  );
+}
+
 function numberBelow100ToFrench(n: number): string {
   const units = [
     "zéro",
@@ -1194,4 +1204,74 @@ export const entiersBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ===== TOP-UP — ENTIER_COMPARER =====
+  { kind: "fixed", id: "entier_comparer_topup_1", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_comparer", difficulty: 1, theme: "neutral",
+    text: "Quel est le plus grand nombre : 4 506 ou 4 560 ?", format: "qcm", choices: ["4 560", "4 506"], expected: ["4 560"], comparator: "mcq_exact",
+    hint: "Compare les chiffres de gauche à droite.", explanation: expl("Les deux nombres commencent par 4 5. On compare ensuite les dizaines : 6 dizaines (4 560) est plus grand que 0 dizaine (4 506). Le plus grand est 4 560."), tags: ["entiers", "comparaison", "qcm"] },
+  { kind: "fixed", id: "entier_comparer_topup_2", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_comparer", difficulty: 1, theme: "neutral",
+    text: "Complète avec < ou > : 12 340 ... 12 304", format: "qcm", choices: [">", "<", "="], expected: [">"], comparator: "mcq_exact",
+    hint: "Compare les dizaines.", explanation: expl("12 340 et 12 304 commencent pareil (12 3). Ensuite 4 dizaines est plus grand que 0 dizaine, donc 12 340 > 12 304."), tags: ["entiers", "comparaison", "qcm"] },
+  { kind: "fixed", id: "entier_comparer_topup_3", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_comparer", difficulty: 2, theme: "neutral",
+    text: "Quel rangement est dans l’ordre croissant ?", format: "qcm",
+    choices: ["3 045 < 3 405 < 3 450", "3 405 < 3 045 < 3 450", "3 450 < 3 405 < 3 045", "3 045 < 3 450 < 3 405"],
+    expected: ["3 045 < 3 405 < 3 450"], comparator: "mcq_exact",
+    hint: "Du plus petit au plus grand.", explanation: expl("On range du plus petit au plus grand : 3 045 < 3 405 < 3 450."), tags: ["entiers", "ordre", "qcm"] },
+
+  // ===== TOP-UP — ENTIER_DECOMPOSER =====
+  { kind: "fixed", id: "entier_decomposer_topup_1", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_decomposer", difficulty: 2, theme: "neutral",
+    text: "Quel nombre vaut 4 000 + 500 + 30 + 2 ?", format: "short", expected: ["4532", "4 532"], comparator: "number_equal",
+    hint: "Regroupe les valeurs.", explanation: expl("On additionne les valeurs : 4 000 + 500 + 30 + 2 = 4 532."), tags: ["entiers", "decomposition"] },
+  { kind: "fixed", id: "entier_decomposer_topup_2", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_decomposer", difficulty: 2, theme: "neutral",
+    text: "Dans le nombre 2 845, quelle est la valeur du chiffre 8 ?", format: "short", expected: ["800"], comparator: "number_equal",
+    hint: "Le 8 est le chiffre des centaines.", explanation: expl("Dans 2 845, le chiffre 8 est à la position des centaines : il vaut 8 × 100 = 800."), tags: ["entiers", "decomposition", "valeur_position"] },
+  { kind: "fixed", id: "entier_decomposer_topup_3", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_decomposer", difficulty: 1, theme: "neutral",
+    text: "Quelle est la décomposition de 706 ?", format: "qcm",
+    choices: ["700 + 6", "700 + 60", "70 + 6", "700 + 0 + 60"], expected: ["700 + 6"], comparator: "mcq_exact",
+    hint: "Le chiffre des dizaines est 0.", explanation: expl("Dans 706 : 7 centaines (700), 0 dizaine, 6 unités. Donc 706 = 700 + 6."), tags: ["entiers", "decomposition", "qcm"] },
+  { kind: "fixed", id: "entier_decomposer_topup_4", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_decomposer", difficulty: 2, theme: "neutral",
+    text: "Quel nombre vaut 5 000 + 60 ?", format: "short", expected: ["5060", "5 060"], comparator: "number_equal",
+    hint: "Il n’y a ni centaines ni unités.", explanation: expl("5 000 + 60 = 5 060 (les centaines et les unités sont nulles, on garde les zéros)."), tags: ["entiers", "decomposition", "zeros"] },
+
+  // ===== TOP-UP — ENTIER_ENCADRER =====
+  { kind: "fixed", id: "entier_encadrer_topup_1", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_encadrer", difficulty: 1, theme: "neutral",
+    text: "Entre quelles dizaines consécutives se trouve 47 ?", format: "qcm",
+    choices: ["40 et 50", "30 et 40", "47 et 48", "40 et 60"], expected: ["40 et 50"], comparator: "mcq_exact",
+    hint: "Cherche la dizaine juste avant et juste après.", explanation: expl("47 est compris entre 40 et 50 : on écrit 40 < 47 < 50."), tags: ["entiers", "encadrement", "qcm"] },
+  { kind: "fixed", id: "entier_encadrer_topup_2", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_encadrer", difficulty: 2, theme: "neutral",
+    text: "Entre quelles centaines consécutives se trouve 380 ?", format: "qcm",
+    choices: ["300 et 400", "380 et 390", "200 et 300", "300 et 500"], expected: ["300 et 400"], comparator: "mcq_exact",
+    hint: "La centaine juste avant et juste après.", explanation: expl("380 est compris entre 300 et 400 : on écrit 300 < 380 < 400."), tags: ["entiers", "encadrement", "qcm"] },
+  { kind: "fixed", id: "entier_encadrer_topup_3", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_encadrer", difficulty: 2, theme: "neutral",
+    text: "Entre quels milliers consécutifs se trouve 5 280 ?", format: "qcm",
+    choices: ["5 000 et 6 000", "4 000 et 5 000", "5 200 et 5 300", "5 000 et 7 000"], expected: ["5 000 et 6 000"], comparator: "mcq_exact",
+    hint: "Le millier juste avant et juste après.", explanation: expl("5 280 est compris entre 5 000 et 6 000 : on écrit 5 000 < 5 280 < 6 000."), tags: ["entiers", "encadrement", "qcm"] },
+  { kind: "fixed", id: "entier_encadrer_topup_4", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_encadrer", difficulty: 2, theme: "neutral",
+    text: "Quel est l’arrondi de 47 à la dizaine la plus proche ?", format: "short", expected: ["50"], comparator: "number_equal",
+    hint: "47 est plus proche de 50 que de 40.", explanation: expl("47 est entre 40 et 50. Comme le chiffre des unités (7) est ≥ 5, on arrondit à 50."), tags: ["entiers", "encadrement", "arrondi"] },
+
+  // ===== TOP-UP — ENTIER_RANG =====
+  { kind: "fixed", id: "entier_rang_topup_1", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_rang", difficulty: 1, theme: "neutral",
+    text: "Dans le nombre 3 482, quel est le chiffre des centaines ?", format: "short", expected: ["4"], comparator: "number_equal",
+    hint: "Centaines = 3ᵉ chiffre en partant de la droite.", explanation: expl("Dans 3 482 : 2 unités, 8 dizaines, 4 centaines, 3 milliers. Le chiffre des centaines est 4."), tags: ["entiers", "rang"] },
+  { kind: "fixed", id: "entier_rang_topup_2", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_rang", difficulty: 1, theme: "neutral",
+    text: "Dans le nombre 7 305, quel est le chiffre des dizaines ?", format: "short", expected: ["0"], comparator: "number_equal",
+    hint: "Dizaines = 2ᵉ chiffre en partant de la droite.", explanation: expl("Dans 7 305 : 5 unités, 0 dizaine, 3 centaines, 7 milliers. Le chiffre des dizaines est 0."), tags: ["entiers", "rang", "zeros"] },
+  { kind: "fixed", id: "entier_rang_topup_3", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_rang", difficulty: 2, theme: "neutral",
+    text: "Dans le nombre 9 261, quel est le chiffre des unités de mille ?", format: "short", expected: ["9"], comparator: "number_equal",
+    hint: "Le chiffre le plus à gauche ici.", explanation: expl("Dans 9 261, le chiffre des unités de mille (les milliers) est 9."), tags: ["entiers", "rang"] },
+
+  // ===== TOP-UP — ENTIER_DEFI =====
+  { kind: "fixed", id: "entier_defi_topup_1", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_defi", difficulty: 2, theme: "neutral",
+    text: "Défi : quel est le plus grand nombre que l’on peut écrire avec 3 chiffres ?", format: "short", expected: ["999"], comparator: "number_equal",
+    hint: "Utilise le plus grand chiffre partout.", explanation: expl("Le plus grand chiffre est 9. Avec 3 chiffres, le plus grand nombre est 999."), tags: ["entiers", "defi"] },
+  { kind: "fixed", id: "entier_defi_topup_2", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_defi", difficulty: 2, theme: "neutral",
+    text: "Défi : quel est le plus petit nombre que l’on peut écrire avec 4 chiffres ?", format: "short", expected: ["1000", "1 000"], comparator: "number_equal",
+    hint: "Il ne peut pas commencer par 0.", explanation: expl("Un nombre à 4 chiffres ne peut pas commencer par 0. Le plus petit est donc 1 000."), tags: ["entiers", "defi"] },
+  { kind: "fixed", id: "entier_defi_topup_3", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : avec les chiffres 3, 1 et 8, quel est le plus grand nombre à 3 chiffres ?", format: "short", expected: ["831"], comparator: "number_equal",
+    hint: "Place le plus grand chiffre en premier.", explanation: expl("On range les chiffres du plus grand au plus petit : 8, puis 3, puis 1. Le plus grand nombre est 831."), tags: ["entiers", "defi"] },
+  { kind: "fixed", id: "entier_defi_topup_4", niveau: "6e", matiere: "maths", notionId: "entier_nombre", microId: "entier_defi", difficulty: 3, theme: "neutral",
+    text: "Défi : avec les chiffres 5, 0 et 2, quel est le plus petit nombre à 3 chiffres (sans commencer par 0) ?", format: "short", expected: ["205"], comparator: "number_equal",
+    hint: "Le nombre ne peut pas commencer par 0.", explanation: expl("On ne peut pas commencer par 0. On place le plus petit chiffre non nul (2), puis 0, puis 5. Le plus petit nombre est 205."), tags: ["entiers", "defi"] },
 ];
