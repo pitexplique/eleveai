@@ -1,0 +1,26 @@
+<svg width="1240" height="1754" viewBox="0 0 1240 1754" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1240" height="1754" fill="#F8FAFC"/>
+  <rect x="70" y="70" width="1100" height="1614" rx="36" fill="white" stroke="#CBD5E1" stroke-width="4"/>
+
+  <text x="620" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="52" font-weight="800" fill="#041B33">Concours logo EleveAI</text>
+  <text x="620" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#0E7490">Ile de La Reunion + margouillat + EleveAI</text>
+
+  <rect x="150" y="270" width="940" height="900" rx="24" fill="#F8FAFC" stroke="#94A3B8" stroke-width="4" stroke-dasharray="18 14"/>
+  <text x="620" y="720" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="800" fill="#CBD5E1">Dessine ton logo ici</text>
+
+  <text x="150" y="1245" font-family="Arial, sans-serif" font-size="30" font-weight="800" fill="#041B33">Ton logo peut contenir :</text>
+  <text x="170" y="1305" font-family="Arial, sans-serif" font-size="26" fill="#334155">- la forme de l'ile de La Reunion</text>
+  <text x="170" y="1350" font-family="Arial, sans-serif" font-size="26" fill="#334155">- un margouillat</text>
+  <text x="170" y="1395" font-family="Arial, sans-serif" font-size="26" fill="#334155">- le nom EleveAI</text>
+  <text x="170" y="1440" font-family="Arial, sans-serif" font-size="26" fill="#334155">- le symbole epsilon -> infini</text>
+  <text x="170" y="1485" font-family="Arial, sans-serif" font-size="26" fill="#334155">- des couleurs lisibles et simples</text>
+
+  <rect x="150" y="1545" width="285" height="70" rx="16" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="3"/>
+  <rect x="475" y="1545" width="285" height="70" rx="16" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="3"/>
+  <rect x="800" y="1545" width="285" height="70" rx="16" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="3"/>
+  <text x="175" y="1590" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#334155">Prenom :</text>
+  <text x="500" y="1590" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#334155">Classe :</text>
+  <text x="825" y="1590" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#334155">Etablissement :</text>
+
+  <text x="620" y="1660" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#64748B">A envoyer a eleveai974@gmail.com avec ton fichier en piece jointe.</text>
+</svg>
