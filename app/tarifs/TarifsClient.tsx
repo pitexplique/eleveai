@@ -4,66 +4,66 @@ import Link from "next/link";
 
 const offres = [
   {
+    nom: "Classe",
+    badge: "🧑‍🏫 Un enseignant",
+    badgeColor: "bg-blue-100 text-blue-800",
+    prix: "5 € / élève / an",
+    soustitre: "ex. 30 élèves = 150 € / classe · ≤ 35 élèves par classe",
+    description: "Pour un enseignant qui veut équiper sa ou ses classes. Pris en charge par la coopérative, le FSE ou l'établissement — jamais par les familles.",
+    inclus: [
+      "5 € / élève — ex. 30 élèves = 150 €",
+      "Gratuit pour chaque élève",
+      "Évaluation automatique, sans correction",
+      "Devoirs maison faits et suivis en ligne",
+      "Dashboard professeur inclus",
+      "Suivi notion par notion par élève",
+    ],
+    cta: "Demander un accès classe",
+    ctaHref: "/contact",
+    ctaColor: "bg-blue-600 hover:bg-blue-500 text-white",
+    highlight: false,
+    soon: false,
+  },
+  {
+    nom: "Établissement",
+    badge: "⭐ Tous les élèves couverts",
+    badgeColor: "bg-emerald-100 text-emerald-800",
+    prix: "4 € / élève / an",
+    soustitre: "dégressif dès 600 élèves · ex. 420 élèves = 1 680 € / an",
+    description: "Tout un collège ou lycée, toutes les matières, tous les profs. Facturé globalement à l'établissement — gratuit pour chaque élève, sans aucun paiement demandé aux familles.",
+    inclus: [
+      "Tous les élèves, toutes les classes",
+      "Évaluation automatique, sans correction",
+      "Devoirs maison faits et suivis en ligne",
+      "Accès 100 % gratuit pour chaque élève",
+      "Dashboard principal + par classe et élève",
+      "Éligible REP/REP+, fonds sociaux, coopérative",
+      "Contrat RGPD inclus",
+    ],
+    cta: "Demander un devis établissement",
+    ctaHref: "/contact",
+    ctaColor: "bg-emerald-600 hover:bg-emerald-500 text-white",
+    highlight: true,
+    soon: false,
+  },
+  {
     nom: "Famille",
-    badge: "🚀 Prix de lancement",
+    badge: "🏠 Hors cadre scolaire",
     badgeColor: "bg-violet-100 text-violet-800",
-    prix: "4,99 €",
-    soustitre: "par mois · ou 49 € / an (2 mois offerts)",
-    description: "Un accès complet pour votre enfant, sans passer par l'établissement. Prix de lancement : les premiers abonnés le gardent à vie.",
+    prix: "4,99 € / mois",
+    soustitre: "ou 49 € / an (2 mois offerts)",
+    description: "Pour les parents qui veulent un accès à la maison, sans passer par l'établissement. Prix de lancement : les premiers abonnés le gardent à vie.",
     inclus: [
       "Prix de lancement bloqué à vie",
       "1 élève, tous les outils débloqués",
       "Coach Maths IA · Coach Français IA",
       "English Maths A1 → B2",
       "Parcours · Calcul rapide · Défis",
-      "Dashboard de progression",
       "Résiliation libre à tout moment",
     ],
     cta: "Commencer — 4,99 €/mois",
     ctaHref: "/contact",
     ctaColor: "bg-violet-600 hover:bg-violet-500 text-white",
-    highlight: false,
-    soon: false,
-  },
-  {
-    nom: "Classe",
-    badge: "🧑‍🏫 Enseignants",
-    badgeColor: "bg-blue-100 text-blue-800",
-    prix: "Sur devis",
-    soustitre: "une ou plusieurs classes · jusqu'à 35 élèves par classe",
-    description: "Un accès annuel pour vos classes. Idéal pour un enseignant qui veut intégrer EleveAI dans ses cours. Tarif adapté au nombre de classes — contactez-nous.",
-    inclus: [
-      "Jusqu'à 35 élèves",
-      "Codes élèves créés par nos soins",
-      "Dashboard professeur inclus",
-      "Suivi notion par notion par élève",
-      "Support email prioritaire",
-      "Formation initiale en visio",
-    ],
-    cta: "Demander un accès classe",
-    ctaHref: "/contact",
-    ctaColor: "bg-blue-600 hover:bg-blue-500 text-white",
-    highlight: true,
-    soon: false,
-  },
-  {
-    nom: "Établissement",
-    badge: "Multi-classes",
-    badgeColor: "bg-emerald-100 text-emerald-800",
-    prix: "Sur devis",
-    soustitre: "à partir de 599 € / an",
-    description: "Accès pour plusieurs classes ou un établissement complet. Tarif dégressif selon le nombre d'élèves.",
-    inclus: [
-      "Nombre de classes illimité",
-      "Dashboard principal établissement",
-      "Tableaux de bord par classe et par élève",
-      "Accompagnement personnalisé",
-      "Contrat RGPD inclus",
-      "Formation et support dédiés",
-    ],
-    cta: "Demander un devis",
-    ctaHref: "/contact",
-    ctaColor: "bg-emerald-600 hover:bg-emerald-500 text-white",
     highlight: false,
     soon: false,
   },
@@ -73,7 +73,7 @@ const comparatif = [
   { outil: "Kwyk",       prix: "6 € / élève / mois",   soit: "72 € / an / élève" },
   { outil: "Mathia",     prix: "8 € / élève / mois",   soit: "96 € / an / élève" },
   { outil: "Lumni Pro",  prix: "5,99 € / mois",        soit: "72 € / an" },
-  { outil: "EleveAI 🟢", prix: "4,99 € / mois",        soit: "49 € / an — soit 4× moins cher" },
+  { outil: "EleveAI 🟢", prix: "4 € / élève / an",     soit: "établissement — soit 18× moins cher" },
 ];
 
 const valeur = [
@@ -91,6 +91,10 @@ const faq = [
   {
     q: "Les élèves doivent-ils payer ?",
     a: "Dans le cadre scolaire, non. Les élèves accèdent à EleveAI avec un code fourni par leur établissement. Aucun paiement n'est demandé aux élèves ni aux familles.",
+  },
+  {
+    q: "Un prof seul peut-il inscrire ses classes ?",
+    a: "Oui. Comptez 5 €/élève/an (ex. 150 € pour une classe de 30). C'est en général pris en charge par la coopérative ou le FSE. Dès que plusieurs profs sont intéressés, l'offre Établissement (4 €/élève) devient plus avantageuse et couvre tout le monde.",
   },
   {
     q: "Comment se passe la mise en place pour une classe ?",
@@ -161,9 +165,13 @@ export default function TarifsClient() {
           </h1>
           <p className="mt-4 mx-auto max-w-2xl text-base font-semibold leading-relaxed text-slate-600">
             Développé par un enseignant de La Réunion en 5 mois. Sans équipe commerciale, sans intermédiaire.
-            <br />Le prix reflète l&apos;essentiel : que vos élèves progressent.
+            <br />Le prix reflète l&apos;essentiel : que chaque élève progresse, quels que soient ses moyens.
           </p>
-          <div className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-slate-100 px-6 py-3 text-sm font-bold text-slate-700">
+          <div className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-emerald-100 px-6 py-3 text-sm font-black text-emerald-800 ring-1 ring-emerald-200">
+            <span className="text-lg">💚</span>
+            Gratuit pour l&apos;élève · Aucun paiement demandé aux familles
+          </div>
+          <div className="mt-3 inline-flex items-center gap-3 rounded-2xl bg-slate-100 px-6 py-3 text-sm font-bold text-slate-700">
             <span className="text-lg">🧑‍🏫</span>
             Conçu par un prof · Pour les profs · Utilisé à La Réunion
           </div>

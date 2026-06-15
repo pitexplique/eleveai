@@ -653,10 +653,8 @@ useEffect(() => {
   }, [classBoard]);
 
   // Flèches ← → pour enchaîner les notions (télécommande de présentation),
-  // sauf quand le focus est dans un champ de saisie.
+  // dans les deux modes (simple et complet), sauf focus dans un champ.
   useEffect(() => {
-    if (displayMode !== "complete") return;
-
     function onKey(event: WindowEventMap["keydown"]) {
       const target = event.target as HTMLElement | null;
       const tag = target?.tagName;
@@ -1321,6 +1319,14 @@ function handleInputKeyDown(
           streak={visibleProgress.streak}
           classBoard={classBoard}
           onToggleClassBoard={() => setClassBoard((v) => !v)}
+          notion={notion}
+          notionOptions={notionOptions.map((id) => ({
+            id,
+            label: notionLabel(id, classe, matiere),
+          }))}
+          onSelectNotion={goToNotion}
+          onPrevNotion={() => shiftNotion(-1)}
+          onNextNotion={() => shiftNotion(1)}
           renderCanvas={(question) => renderCanvas(question.canvas)}
           onBackCoach={() => router.push(`/coach-ia/${matiere}`)}
           onSwitchToComplete={() => setDisplayMode("complete")}

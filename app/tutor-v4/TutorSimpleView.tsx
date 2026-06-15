@@ -28,6 +28,11 @@ type TutorSimpleViewProps = {
   streak: number;
   classBoard: boolean;
   onToggleClassBoard: () => void;
+  notion: string;
+  notionOptions: { id: string; label: string }[];
+  onSelectNotion: (notionId: string) => void;
+  onPrevNotion: () => void;
+  onNextNotion: () => void;
   renderCanvas: (question: TutorQuestionOption) => ReactNode;
   onBackCoach: () => void;
   onSwitchToComplete: () => void;
@@ -72,6 +77,11 @@ export default function TutorSimpleView({
   streak,
   classBoard,
   onToggleClassBoard,
+  notion,
+  notionOptions,
+  onSelectNotion,
+  onPrevNotion,
+  onNextNotion,
   renderCanvas,
   onBackCoach,
   onSwitchToComplete,
@@ -139,6 +149,46 @@ export default function TutorSimpleView({
             </button>
           </div>
         </header>
+
+        {/* Navigation entre notions : ◀ ▶ (ou flèches clavier), le changement
+            démarre directement une nouvelle question. */}
+        {notionOptions.length > 0 ? (
+          <div className="mb-4 flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onPrevNotion}
+              disabled={busy || notionOptions.length < 2}
+              aria-label="Notion précédente"
+              title="Notion précédente (←)"
+              className="rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-black text-slate-700 shadow-sm hover:bg-slate-50 disabled:opacity-40"
+            >
+              ◀
+            </button>
+            <select
+              aria-label="Notion"
+              value={notion}
+              onChange={(e) => onSelectNotion(e.target.value)}
+              disabled={busy}
+              className="min-w-0 flex-1 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-bold text-slate-900 outline-none focus:border-sky-500 disabled:opacity-60"
+            >
+              {notionOptions.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <button
+              type="button"
+              onClick={onNextNotion}
+              disabled={busy || notionOptions.length < 2}
+              aria-label="Notion suivante"
+              title="Notion suivante (→)"
+              className="rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-black text-slate-700 shadow-sm hover:bg-slate-50 disabled:opacity-40"
+            >
+              ▶
+            </button>
+          </div>
+        ) : null}
 
         {/* Bandeau mission sur une seule ligne (identique au mode complet). */}
         <div className="mb-4 flex flex-wrap items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-4 py-2 text-white shadow-sm">
