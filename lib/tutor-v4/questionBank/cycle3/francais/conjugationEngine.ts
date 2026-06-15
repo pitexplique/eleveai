@@ -29,10 +29,14 @@ const ER_VERBS = [
   "coller", "sonner", "tomber", "dessiner", "ramasser", "klaxonner", "discuter",
 ];
 
+// NB : on n'inclut ici que des verbes dont TOUTES les formes regulieres
+// (present/imparfait/futur) sont reellement sans accent, car la reponse libre
+// compare a l'accent pres. Les verbes a radical accentue (obeir -> j'obeis,
+// reflechir -> je reflechis, reunir, guerir) sont volontairement exclus.
 const IR_VERBS = [
   "finir", "choisir", "grandir", "remplir", "ralentir", "punir", "salir",
   "unir", "nourrir", "applaudir", "avertir", "rougir", "maigrir", "jaunir",
-  "blanchir", "obeir", "reflechir", "reunir", "guerir", "saisir",
+  "blanchir", "saisir",
 ];
 
 const ER_PRESENT = ["e", "es", "e", "ons", "ez", "ent"];
@@ -56,9 +60,9 @@ type IrregularTable = { inf: string; present: string[]; imparfait: string[]; fut
 
 const IRREGULARS: IrregularTable[] = [
   {
-    inf: "etre",
-    present: ["suis", "es", "est", "sommes", "etes", "sont"],
-    imparfait: ["etais", "etais", "etait", "etions", "etiez", "etaient"],
+    inf: "être",
+    present: ["suis", "es", "est", "sommes", "êtes", "sont"],
+    imparfait: ["étais", "étais", "était", "étions", "étiez", "étaient"],
     futur: ["serai", "seras", "sera", "serons", "serez", "seront"],
   },
   {
@@ -141,12 +145,12 @@ function pick<T>(items: readonly T[]): T {
 
 // Avec elision correcte devant voyelle : "a l'imparfait", pas "au imparfait".
 const TENSE_PHRASE: Record<ConjTense, string> = {
-  present: "au present",
-  imparfait: "a l'imparfait",
+  present: "au présent",
+  imparfait: "à l'imparfait",
   futur: "au futur",
 };
 const TENSE_OF: Record<ConjTense, string> = {
-  present: "du present",
+  present: "du présent",
   imparfait: "de l'imparfait",
   futur: "du futur",
 };
@@ -196,9 +200,9 @@ export function generateConjugationItem(tense: ConjTense): ConjItem {
     if (Math.random() < 0.5) {
       return {
         kind: "short",
-        text: `Conjugue le verbe '${inf}' ${TENSE_PHRASE[tense]} avec '${PRONOUNS[person]}'.`,
+        text: `Conjugue le verbe « ${inf} » ${TENSE_PHRASE[tense]} avec « ${PRONOUNS[person]} ».`,
         answers: [correct],
-        methode: `On prend le radical de '${inf}' et la terminaison ${TENSE_OF[tense]} pour '${PRONOUNS[person]}'.`,
+        methode: `On prend le radical de « ${inf} » et la terminaison ${TENSE_OF[tense]} pour « ${PRONOUNS[person]} ».`,
       };
     }
 
@@ -212,10 +216,10 @@ export function generateConjugationItem(tense: ConjTense): ConjItem {
     );
     return {
       kind: "qcm",
-      text: `Choisis la bonne forme : '${inf}' ${TENSE_PHRASE[tense]} avec '${PRONOUNS[person]}'.`,
+      text: `Choisis la bonne forme : « ${inf} » ${TENSE_PHRASE[tense]} avec « ${PRONOUNS[person]} ».`,
       correct,
       wrongs,
-      methode: `On accorde la terminaison ${TENSE_OF[tense]} avec '${PRONOUNS[person]}'.`,
+      methode: `On accorde la terminaison ${TENSE_OF[tense]} avec « ${PRONOUNS[person]} ».`,
     };
   }
 
@@ -228,10 +232,10 @@ export function generateConjugationItem(tense: ConjTense): ConjItem {
   const wrongs = buildWrongs(correct, table, verb[others[0]], verb[others[1]], [verb.inf]);
   return {
     kind: "qcm",
-    text: `Choisis la bonne forme : '${verb.inf}' ${TENSE_PHRASE[tense]} avec '${PRONOUNS[person]}'.`,
+    text: `Choisis la bonne forme : « ${verb.inf} » ${TENSE_PHRASE[tense]} avec « ${PRONOUNS[person]} ».`,
     correct,
     wrongs,
-    methode: `'${verb.inf}' est un verbe irregulier : on retient sa forme ${TENSE_PHRASE[tense]} pour '${PRONOUNS[person]}'.`,
+    methode: `« ${verb.inf} » est un verbe irrégulier : on retient sa forme ${TENSE_PHRASE[tense]} pour « ${PRONOUNS[person]} ».`,
   };
 }
 
@@ -249,14 +253,14 @@ export function generateInfinitifItem(): ConjItem {
       // demander l'infinitif (reponse libre, infinitifs reguliers sans accent ici)
       return {
         kind: "short",
-        text: `Quel est l'infinitif du verbe dans la forme '${forme}' ?`,
+        text: `Quel est l'infinitif du verbe dans la forme « ${forme} » ?`,
         answers: [inf],
-        methode: "On enleve la terminaison et on retrouve la forme de base du verbe.",
+        methode: "On enlève la terminaison et on retrouve la forme de base du verbe.",
       };
     }
     return {
       kind: "qcm",
-      text: `A quel groupe appartient le verbe '${inf}' ?`,
+      text: `À quel groupe appartient le verbe « ${inf} » ?`,
       correct: groupLabel,
       wrongs: ["1er groupe", "2e groupe", "3e groupe", "aucun des trois"].filter((g) => g !== groupLabel).slice(0, 3),
       methode: "Les verbes en -er (sauf aller) sont du 1er groupe ; ceux en -ir comme finir (nous finissons) du 2e.",
@@ -268,7 +272,7 @@ export function generateInfinitifItem(): ConjItem {
   const forme = verb[tense][person];
   return {
     kind: "qcm",
-    text: `Quel est l'infinitif de la forme '${forme}' ?`,
+    text: `Quel est l'infinitif de la forme « ${forme} » ?`,
     correct: verb.inf,
     wrongs: buildWrongs(
       verb.inf,

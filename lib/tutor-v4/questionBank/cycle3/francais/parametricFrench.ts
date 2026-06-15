@@ -26,11 +26,11 @@ const NOUNS: Noun[] = [
   { sing: "livre", plur: "livres", genre: "m" },
   { sing: "jardin", plur: "jardins", genre: "m" },
   { sing: "ballon", plur: "ballons", genre: "m" },
-  { sing: "gateau", plur: "gateaux", genre: "m" },
+  { sing: "gâteau", plur: "gâteaux", genre: "m" },
   { sing: "bateau", plur: "bateaux", genre: "m" },
   { sing: "cheval", plur: "chevaux", genre: "m" },
   { sing: "journal", plur: "journaux", genre: "m" },
-  { sing: "velo", plur: "velos", genre: "m" },
+  { sing: "vélo", plur: "vélos", genre: "m" },
   { sing: "cahier", plur: "cahiers", genre: "m" },
   { sing: "chapeau", plur: "chapeaux", genre: "m" },
   { sing: "mouton", plur: "moutons", genre: "m" },
@@ -41,7 +41,7 @@ const NOUNS: Noun[] = [
   { sing: "table", plur: "tables", genre: "f" },
   { sing: "pomme", plur: "pommes", genre: "f" },
   { sing: "chaise", plur: "chaises", genre: "f" },
-  { sing: "fenetre", plur: "fenetres", genre: "f" },
+  { sing: "fenêtre", plur: "fenêtres", genre: "f" },
   { sing: "route", plur: "routes", genre: "f" },
   { sing: "montagne", plur: "montagnes", genre: "f" },
   { sing: "valise", plur: "valises", genre: "f" },
@@ -116,10 +116,10 @@ export function generateAgreementItem(): ConjItem {
 
   return {
     kind: "qcm",
-    text: "Choisis le groupe nominal correctement accorde.",
+    text: "Choisis le groupe nominal correctement accordé.",
     correct,
     wrongs: wrongs.slice(0, 3),
-    methode: "Le determinant, le nom et l'adjectif s'accordent en genre et en nombre.",
+    methode: "Le déterminant, le nom et l'adjectif s'accordent en genre et en nombre.",
   };
 }
 
@@ -137,10 +137,10 @@ const HOMOPHONE_FAMILIES: HomophoneFamily[] = [
   {
     forms: ["a", "à", "as", "ah"],
     frames: [
-      { slot: "Il ___ un nouveau velo.", correct: "a" },
-      { slot: "Elle va ___ l'ecole.", correct: "à" },
+      { slot: "Il ___ un nouveau vélo.", correct: "a" },
+      { slot: "Elle va ___ l'école.", correct: "à" },
       { slot: "Tu ___ raison.", correct: "as" },
-      { slot: "Lea ___ gagne le match.", correct: "a" },
+      { slot: "Léa ___ gagné le match.", correct: "a" },
       { slot: "On part ___ midi.", correct: "à" },
       { slot: "Tu ___ de la chance.", correct: "as" },
     ],
@@ -148,7 +148,7 @@ const HOMOPHONE_FAMILIES: HomophoneFamily[] = [
   {
     forms: ["et", "est", "es", "ai"],
     frames: [
-      { slot: "Mon frere ___ grand.", correct: "est" },
+      { slot: "Mon frère ___ grand.", correct: "est" },
       { slot: "Le chat ___ le chien dorment.", correct: "et" },
       { slot: "Tu ___ gentil avec moi.", correct: "es" },
       { slot: "J'___ faim ce matin.", correct: "ai" },
@@ -160,18 +160,18 @@ const HOMOPHONE_FAMILIES: HomophoneFamily[] = [
     forms: ["ces", "ses", "c'est", "s'est"],
     frames: [
       { slot: "Range ___ affaires (les tiennes).", correct: "ses" },
-      { slot: "Regarde ___ fleurs-la.", correct: "ces" },
-      { slot: "___ tres joli.", correct: "c'est" },
-      { slot: "Il ___ cache derriere l'arbre.", correct: "s'est" },
-      { slot: "Elle a perdu ___ cles (les siennes).", correct: "ses" },
-      { slot: "___ bientot les vacances.", correct: "c'est" },
+      { slot: "Regarde ___ fleurs-là.", correct: "ces" },
+      { slot: "___ très joli.", correct: "c'est" },
+      { slot: "Il ___ caché derrière l'arbre.", correct: "s'est" },
+      { slot: "Elle a perdu ___ clés (les siennes).", correct: "ses" },
+      { slot: "___ bientôt les vacances.", correct: "c'est" },
     ],
   },
   {
     forms: ["la", "là", "l'a", "l'as"],
     frames: [
       { slot: "Pose ___ valise sur la table.", correct: "la" },
-      { slot: "Viens ___, pres de moi.", correct: "là" },
+      { slot: "Viens ___, près de moi.", correct: "là" },
       { slot: "Il ___ pris dans son sac.", correct: "l'a" },
       { slot: "Tu ___ vu hier ?", correct: "l'as" },
       { slot: "Mets ___ voiture au garage.", correct: "la" },
@@ -180,10 +180,10 @@ const HOMOPHONE_FAMILIES: HomophoneFamily[] = [
   {
     forms: ["mes", "mais", "mai", "met"],
     frames: [
-      { slot: "J'ai range ___ livres.", correct: "mes" },
-      { slot: "Il pleut, ___ je sors quand meme.", correct: "mais" },
+      { slot: "J'ai rangé ___ livres.", correct: "mes" },
+      { slot: "Il pleut, ___ je sors quand même.", correct: "mais" },
       { slot: "On est au mois de ___.", correct: "mai" },
-      { slot: "Elle ___ la table pour le diner.", correct: "met" },
+      { slot: "Elle ___ la table pour le dîner.", correct: "met" },
       { slot: "Voici ___ deux chiens.", correct: "mes" },
     ],
   },
@@ -204,7 +204,7 @@ export function generateHomophoneItem(): ConjItem {
 
   return {
     kind: "qcm",
-    text: "Choisis la phrase correctement ecrite.",
+    text: "Choisis la phrase correctement écrite.",
     correct: correctSentence,
     wrongs,
     methode: `On choisit le bon homophone : ici, c'est « ${frame.correct} ».`,
@@ -223,7 +223,7 @@ const SV_SUBJECTS: SvSubject[] = [
   { display: "Elle", person: 2 },
   { display: "On", person: 2 },
   { display: "Le chat", person: 2 },
-  { display: "La maitresse", person: 2 },
+  { display: "La maîtresse", person: 2 },
   { display: "Mon ami", person: 2 },
   { display: "Tom", person: 2 },
   { display: "Nous", person: 3 },
@@ -233,11 +233,11 @@ const SV_SUBJECTS: SvSubject[] = [
   { display: "Les chats", person: 5 },
   { display: "Les enfants", person: 5 },
   { display: "Mes amis", person: 5 },
-  { display: "Paul et Lea", person: 5 },
+  { display: "Paul et Léa", person: 5 },
 ];
 
 const ER_PRESENT_SV = ["e", "es", "e", "ons", "ez", "ent"];
-const ETRE_PRES = ["suis", "es", "est", "sommes", "etes", "sont"];
+const ETRE_PRES = ["suis", "es", "est", "sommes", "êtes", "sont"];
 const AVOIR_PRES = ["ai", "as", "a", "avons", "avez", "ont"];
 
 type SvVerb =
@@ -249,7 +249,7 @@ const SV_VERBS: SvVerb[] = [
   { type: "er", inf: "jouer", comp: "dans la cour" },
   { type: "er", inf: "chanter", comp: "une belle chanson" },
   { type: "er", inf: "danser", comp: "tous les samedis" },
-  { type: "er", inf: "marcher", comp: "jusqu'a l'ecole" },
+  { type: "er", inf: "marcher", comp: "jusqu'à l'école" },
   { type: "er", inf: "regarder", comp: "un film" },
   { type: "er", inf: "parler", comp: "doucement" },
   { type: "er", inf: "travailler", comp: "le matin" },
@@ -295,7 +295,7 @@ export function generateSubjectVerbItem(): ConjItem {
 
   return {
     kind: "qcm",
-    text: "Choisis la phrase ou le verbe est bien accorde avec le sujet.",
+    text: "Choisis la phrase où le verbe est bien accordé avec le sujet.",
     correct,
     wrongs: wrongs.slice(0, 3),
     methode: "Le verbe s'accorde avec son sujet : on cherche qui fait l'action.",
@@ -308,21 +308,21 @@ const SYNONYMS: { mot: string; syn: string }[] = [
   { mot: "rapide", syn: "vif" }, { mot: "content", syn: "heureux" },
   { mot: "joli", syn: "beau" }, { mot: "grand", syn: "immense" },
   { mot: "maison", syn: "demeure" }, { mot: "peur", syn: "crainte" },
-  { mot: "calme", syn: "tranquille" }, { mot: "fatigue", syn: "epuise" },
-  { mot: "drole", syn: "amusant" }, { mot: "rapidement", syn: "vite" },
+  { mot: "calme", syn: "tranquille" }, { mot: "fatigué", syn: "épuisé" },
+  { mot: "drôle", syn: "amusant" }, { mot: "rapidement", syn: "vite" },
   { mot: "content", syn: "ravi" }, { mot: "difficile", syn: "dur" },
-  { mot: "gentil", syn: "aimable" }, { mot: "bizarre", syn: "etrange" },
-  { mot: "debut", syn: "commencement" }, { mot: "bateau", syn: "navire" },
+  { mot: "gentil", syn: "aimable" }, { mot: "bizarre", syn: "étrange" },
+  { mot: "début", syn: "commencement" }, { mot: "bateau", syn: "navire" },
 ];
 
 const ANTONYMS: { mot: string; ant: string }[] = [
   { mot: "grand", ant: "petit" }, { mot: "content", ant: "triste" },
-  { mot: "monter", ant: "descendre" }, { mot: "ouvert", ant: "ferme" },
+  { mot: "monter", ant: "descendre" }, { mot: "ouvert", ant: "fermé" },
   { mot: "jour", ant: "nuit" }, { mot: "chaud", ant: "froid" },
   { mot: "rapide", ant: "lent" }, { mot: "propre", ant: "sale" },
   { mot: "plein", ant: "vide" }, { mot: "facile", ant: "difficile" },
   { mot: "haut", ant: "bas" }, { mot: "vieux", ant: "jeune" },
-  { mot: "debut", ant: "fin" }, { mot: "premier", ant: "dernier" },
+  { mot: "début", ant: "fin" }, { mot: "premier", ant: "dernier" },
   { mot: "ami", ant: "ennemi" }, { mot: "fort", ant: "faible" },
 ];
 
@@ -333,12 +333,12 @@ const FAMILIES: { mot: string; membre: string }[] = [
   { mot: "livre", membre: "librairie" }, { mot: "danse", membre: "danseur" },
   { mot: "mer", membre: "marin" }, { mot: "froid", membre: "refroidir" },
   { mot: "grand", membre: "grandir" }, { mot: "porte", membre: "portier" },
-  { mot: "montagne", membre: "montagnard" }, { mot: "soleil", membre: "ensoleille" },
+  { mot: "montagne", membre: "montagnard" }, { mot: "soleil", membre: "ensoleillé" },
 ];
 
 // Mots quelconques pour les distracteurs (sans rapport avec la bonne reponse).
 const DISTRACTOR_WORDS = [
-  "table", "voiture", "nuage", "crayon", "fenetre", "ballon", "tortue",
+  "table", "voiture", "nuage", "crayon", "fenêtre", "ballon", "tortue",
   "musique", "chaussure", "ordinateur", "banane", "montre", "lampe",
   "valise", "casquette", "trottoir", "fourchette", "parapluie", "carotte",
 ];
@@ -364,17 +364,17 @@ export function generateVocabularyItem(kind: "syn" | "ant" | "famille"): ConjIte
         [item.ant, item.mot],
         3
       ),
-      methode: "Un antonyme a le sens oppose.",
+      methode: "Un antonyme a le sens opposé.",
     };
   }
   if (kind === "famille") {
     const item = pick(FAMILIES);
     return {
       kind: "qcm",
-      text: `Quel mot appartient a la meme famille que « ${item.mot} » ?`,
+      text: `Quel mot appartient à la même famille que « ${item.mot} » ?`,
       correct: item.membre,
       wrongs: distractorsFrom(DISTRACTOR_WORDS, [item.membre, item.mot], 3),
-      methode: "Les mots d'une meme famille partagent une racine et un sens proche.",
+      methode: "Les mots d'une même famille partagent une racine et un sens proche.",
     };
   }
   const item = pick(SYNONYMS);
@@ -387,6 +387,6 @@ export function generateVocabularyItem(kind: "syn" | "ant" | "famille"): ConjIte
       [item.syn, item.mot],
       3
     ),
-    methode: "Un synonyme a (a peu pres) le meme sens.",
+    methode: "Un synonyme a (à peu près) le même sens.",
   };
 }

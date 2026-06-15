@@ -8,7 +8,7 @@ import { createClient } from "@supabase/supabase-js";
 import { verifySessionToken } from "@/lib/server/session";
 import { calculerPointsAvis } from "@/lib/points/feedbackPoints";
 
-// « ULRICH Arthur » -> « Arthur » ; « MAIR Victor Rafael » -> « Victor Rafael ».
+// « DUPONT Lucas » -> « Lucas » ; « MAIR Victor Rafael » -> « Victor Rafael ».
 // Heuristique : le nom de famille est en MAJUSCULES, le prenom est capitalise.
 function prenomCourt(full: string | null): string {
   if (!full) return "Élève";

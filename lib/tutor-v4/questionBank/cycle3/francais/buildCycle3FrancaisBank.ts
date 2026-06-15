@@ -34,7 +34,7 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
 }
 
 function exp(methode: string, exemple: string, conclusion: string) {
-  return `Methode : ${methode}\n\nExemple : ${exemple}\n\nConclusion : ${conclusion}`;
+  return `Méthode : ${methode}\n\nExemple : ${exemple}\n\nConclusion : ${conclusion}`;
 }
 
 function pick<T>(items: readonly T[]): T {
@@ -66,8 +66,8 @@ function asQcm(item: QcmItem): Generated {
     comparator: "mcq_exact",
     explanation: exp(
       item.methode ?? "On observe la phrase avec attention.",
-      `La bonne reponse est : ${item.correct}.`,
-      "On verifie en relisant la phrase entiere."
+      `La bonne réponse est : ${item.correct}.`,
+      "On vérifie en relisant la phrase entière."
     ),
   };
 }
@@ -79,9 +79,9 @@ function asShort(item: ShortItem): Generated {
     expected: item.answers,
     comparator: "exact_text",
     explanation: exp(
-      item.methode ?? "On ecrit la forme demandee sans se tromper.",
-      `La reponse attendue est : ${item.answers[0]}.`,
-      "On relit pour verifier la terminaison."
+      item.methode ?? "On écrit la forme demandée sans se tromper.",
+      `La réponse attendue est : ${item.answers[0]}.`,
+      "On relit pour vérifier la terminaison."
     ),
   };
 }
@@ -108,70 +108,70 @@ const LECTURE: QcmItem[] = [
     text: 'Lis ce passage :\n"Le vent secouait les volets. Nina serra son manteau et traversa la cour sans courir."\n\nQuel indice montre qu\'il fait probablement froid ?',
     correct: "Nina serre son manteau",
     wrongs: ["Nina court vite", "les volets sont rouges", "la cour est vide"],
-    methode: "On justifie sa reponse avec un indice precis du texte.",
+    methode: "On justifie sa réponse avec un indice précis du texte.",
   },
   {
-    text: 'Lis ce passage :\n"Le rideau se leve. Deux personnages entrent et parlent chacun leur tour."\n\nDe quel genre de texte s\'agit-il surtout ?',
-    correct: "un extrait de theatre",
+    text: 'Lis ce passage :\n"Le rideau se lève. Deux personnages entrent et parlent chacun leur tour."\n\nDe quel genre de texte s\'agit-il surtout ?',
+    correct: "un extrait de théâtre",
     wrongs: ["un article documentaire", "une recette", "une lettre"],
-    methode: "Les didascalies et les dialogues signalent le theatre.",
+    methode: "Les didascalies et les dialogues signalent le théâtre.",
   },
   {
     text: 'Lis ce passage :\n"Sur la branche, l\'oiseau lissait ses plumes. Soudain, un bruit le fit s\'envoler."\n\nPourquoi l\'oiseau s\'envole-t-il ?',
-    correct: "a cause d'un bruit soudain",
+    correct: "à cause d'un bruit soudain",
     wrongs: ["parce qu'il a faim", "parce qu'il fait nuit", "parce qu'il pleut"],
-    methode: "On relie la cause et la consequence dans le texte.",
+    methode: "On relie la cause et la conséquence dans le texte.",
   },
   {
     text: 'Lis ce passage :\n"Tom rangea ses crayons, ferma son cahier et sortit en classe."\n\nDans quel ordre Tom fait-il ces actions ?',
     correct: "ranger, fermer, sortir",
     wrongs: ["sortir, ranger, fermer", "fermer, sortir, ranger", "sortir, fermer, ranger"],
-    methode: "On repere les mots qui marquent l'ordre des actions.",
+    methode: "On repère les mots qui marquent l'ordre des actions.",
   },
   {
-    text: 'Lis ce passage :\n"La pluie tombait depuis le matin. Les rues etaient desertes et brillantes."\n\nQuel temps fait-il dans ce passage ?',
+    text: 'Lis ce passage :\n"La pluie tombait depuis le matin. Les rues étaient désertes et brillantes."\n\nQuel temps fait-il dans ce passage ?',
     correct: "il pleut",
     wrongs: ["il neige", "il fait grand soleil", "il y a du vent chaud"],
-    methode: "On s'appuie sur les details decrits.",
+    methode: "On s'appuie sur les détails décrits.",
   },
   {
-    text: 'Lis ce passage :\n"- Tu viens ? demanda Lea. - J\'arrive ! repondit Sami en attrapant son sac."\n\nQue montre la ponctuation ?',
+    text: 'Lis ce passage :\n"- Tu viens ? demanda Léa. - J\'arrive ! répondit Sami en attrapant son sac."\n\nQue montre la ponctuation ?',
     correct: "c'est un dialogue entre deux personnages",
-    wrongs: ["c'est une liste", "c'est un titre", "c'est une definition"],
-    methode: "Les tirets et les guillemets signalent les paroles echangees.",
+    wrongs: ["c'est une liste", "c'est un titre", "c'est une définition"],
+    methode: "Les tirets et les guillemets signalent les paroles échangées.",
   },
   {
-    text: 'Lis ce passage :\n"Le petit chat gris dormait, roule en boule au creux du fauteuil."\n\nOu dort le chat ?',
+    text: 'Lis ce passage :\n"Le petit chat gris dormait, roulé en boule au creux du fauteuil."\n\nOù dort le chat ?',
     correct: "au creux du fauteuil",
     wrongs: ["sur le lit", "dans le jardin", "sous la table"],
-    methode: "On prend l'information explicite donnee par le texte.",
+    methode: "On prend l'information explicite donnée par le texte.",
   },
 ];
 
 const DOCUMENT: QcmItem[] = [
   {
     text: "Un document indique : Titre : Les volcans. Source : magazine scientifique junior. Date : mars 2025.\n\nQuelle information donne la source ?",
-    correct: "d'ou vient le document",
+    correct: "d'où vient le document",
     wrongs: ["le sujet principal", "le nom du lecteur", "la conclusion du texte"],
     methode: "La source indique l'origine du document.",
   },
   {
-    text: "Sur une affiche : Spectacle samedi 14 juin a 18h, salle des fetes.\n\nQuelle information manque si on veut venir ?",
+    text: "Sur une affiche : Spectacle samedi 14 juin à 18h, salle des fêtes.\n\nQuelle information manque si on veut venir ?",
     correct: "rien : on a le jour, l'heure et le lieu",
     wrongs: ["le jour", "l'heure", "le lieu"],
-    methode: "On verifie quelles informations utiles sont presentes.",
+    methode: "On vérifie quelles informations utiles sont présentes.",
   },
   {
-    text: "Dans un sommaire : 'Les insectes ........ page 12'.\n\nA quoi sert ce sommaire ?",
+    text: "Dans un sommaire : 'Les insectes ........ page 12'.\n\nÀ quoi sert ce sommaire ?",
     correct: "trouver rapidement une page",
-    wrongs: ["raconter une histoire", "donner son avis", "decrire un personnage"],
-    methode: "Le sommaire aide a se reperer dans un livre documentaire.",
+    wrongs: ["raconter une histoire", "donner son avis", "décrire un personnage"],
+    methode: "Le sommaire aide à se repérer dans un livre documentaire.",
   },
   {
-    text: "Une recette commence par : 'Ingredients : farine, oeufs, lait.'\n\nQue donne cette partie ?",
+    text: "Une recette commence par : 'Ingrédients : farine, œufs, lait.'\n\nQue donne cette partie ?",
     correct: "la liste de ce qu'il faut",
-    wrongs: ["les etapes a suivre", "le temps de cuisson", "le nom du cuisinier"],
-    methode: "Une recette separe les ingredients et les etapes.",
+    wrongs: ["les étapes à suivre", "le temps de cuisson", "le nom du cuisinier"],
+    methode: "Une recette sépare les ingrédients et les étapes.",
   },
   {
     text: "Un graphique a pour titre : 'Nombre de livres lus par mois'.\n\nQue lit-on sur ce graphique ?",
@@ -185,34 +185,34 @@ const DOCUMENT: QcmItem[] = [
 
 const OEUVRE: QcmItem[] = [
   {
-    text: "Apres la lecture d'un conte, quelle trace est la plus utile dans un carnet de lecteur ?",
+    text: "Après la lecture d'un conte, quelle trace est la plus utile dans un carnet de lecteur ?",
     correct: "un avis personnel avec un passage qui le justifie",
     wrongs: ["seulement le nombre de pages", "une liste de calculs", "la couleur de la couverture seulement"],
-    methode: "Un carnet de lecteur garde la memoire de ce qu'on a compris et ressenti.",
+    methode: "Un carnet de lecteur garde la mémoire de ce qu'on a compris et ressenti.",
   },
   {
-    text: "Dans un recit, le personnage principal qui vit l'aventure s'appelle le plus souvent...",
-    correct: "le heros",
+    text: "Dans un récit, le personnage principal qui vit l'aventure s'appelle le plus souvent...",
+    correct: "le héros",
     wrongs: ["le narrateur seulement", "le lecteur", "l'auteur"],
-    methode: "Le heros est au centre de l'histoire.",
+    methode: "Le héros est au centre de l'histoire.",
   },
   {
-    text: "Quelle phrase exprime une reaction personnelle de lecteur ?",
+    text: "Quelle phrase exprime une réaction personnelle de lecteur ?",
     correct: "J'ai eu peur quand le loup est apparu.",
     wrongs: ["Le livre a 64 pages.", "C'est un conte.", "Il y a trois chapitres."],
-    methode: "Une reaction de lecteur dit ce qu'on a ressenti.",
+    methode: "Une réaction de lecteur dit ce qu'on a ressenti.",
   },
   {
     text: "Pour comprendre les liens entre les personnages, il est utile de...",
     correct: "noter qui est ami, ennemi ou famille",
-    wrongs: ["compter les pages", "regarder la date d'edition", "mesurer le livre"],
+    wrongs: ["compter les pages", "regarder la date d'édition", "mesurer le livre"],
     methode: "On suit les relations entre les personnages.",
   },
   {
     text: "Pour s'engager dans une lecture longue, le mieux est de...",
     correct: "lire un peu chaque jour et garder le fil",
     wrongs: ["tout lire en une fois sans pause", "lire la fin d'abord", "sauter des chapitres"],
-    methode: "Perseverer aide a profiter d'une oeuvre entiere.",
+    methode: "Persévérer aide à profiter d'une œuvre entière.",
   },
 ];
 
@@ -220,20 +220,20 @@ const OEUVRE: QcmItem[] = [
 
 const ECRITURE: QcmItem[] = [
   {
-    text: "Quelle phrase est la plus claire et correctement ponctuee ?",
-    correct: "Le cheval traverse la prairie, puis il rejoint l'etable.",
+    text: "Quelle phrase est la plus claire et correctement ponctuée ?",
+    correct: "Le cheval traverse la prairie, puis il rejoint l'étable.",
     wrongs: [
       "Le cheval traverse la prairie puis",
-      "traverse prairie cheval etable",
-      "Le cheval traverse la prairie puis il rejoint l'etable",
+      "traverse prairie cheval étable",
+      "Le cheval traverse la prairie puis il rejoint l'étable",
     ],
     methode: "Une phrase claire a un sens complet et une ponctuation correcte.",
   },
   {
-    text: "Pour ameliorer un paragraphe, que faut-il verifier en priorite ?",
-    correct: "l'ordre des idees, les accords et la ponctuation",
+    text: "Pour améliorer un paragraphe, que faut-il vérifier en priorité ?",
+    correct: "l'ordre des idées, les accords et la ponctuation",
     wrongs: ["uniquement la couleur du stylo", "le nombre exact de lignes", "la taille du cahier"],
-    methode: "Relire sert a rendre l'ecrit plus clair et plus correct.",
+    methode: "Relire sert à rendre l'écrit plus clair et plus correct.",
   },
   {
     text: "Quelle phrase commence et finit correctement ?",
@@ -242,22 +242,22 @@ const ECRITURE: QcmItem[] = [
     methode: "Une phrase commence par une majuscule et finit par un point.",
   },
   {
-    text: "Quel connecteur organise le mieux un recit ?",
+    text: "Quel connecteur organise le mieux un récit ?",
     correct: "d'abord, ensuite, enfin",
     wrongs: ["pomme, table, chat", "et et et", "ou bien ou bien"],
-    methode: "Les connecteurs marquent les etapes du recit.",
+    methode: "Les connecteurs marquent les étapes du récit.",
   },
   {
-    text: "Pour ecrire une courte description, on choisit surtout...",
-    correct: "des adjectifs et des details precis",
+    text: "Pour écrire une courte description, on choisit surtout...",
+    correct: "des adjectifs et des détails précis",
     wrongs: ["seulement des chiffres", "des mots au hasard", "uniquement des verbes"],
-    methode: "Une description s'appuie sur des details qui font voir.",
+    methode: "Une description s'appuie sur des détails qui font voir.",
   },
   {
-    text: "Avant de rendre un texte, la derniere etape utile est de...",
+    text: "Avant de rendre un texte, la dernière étape utile est de...",
     correct: "se relire pour corriger les erreurs",
     wrongs: ["le plier en quatre", "compter les mots", "changer de stylo"],
-    methode: "La relecture est une etape de la production d'ecrit.",
+    methode: "La relecture est une étape de la production d'écrit.",
   },
 ];
 
@@ -265,34 +265,34 @@ const ECRITURE: QcmItem[] = [
 
 const ORAL: QcmItem[] = [
   {
-    text: "Pendant un debat en classe, quelle attitude est attendue ?",
-    correct: "ecouter les autres et justifier son avis",
-    wrongs: ["couper la parole pour parler plus fort", "changer de sujet sans prevenir", "repeter exactement la meme phrase"],
-    methode: "Participer a un echange suppose d'ecouter et de repondre clairement.",
+    text: "Pendant un débat en classe, quelle attitude est attendue ?",
+    correct: "écouter les autres et justifier son avis",
+    wrongs: ["couper la parole pour parler plus fort", "changer de sujet sans prévenir", "répéter exactement la même phrase"],
+    methode: "Participer à un échange suppose d'écouter et de répondre clairement.",
   },
   {
-    text: "Pour bien presenter un livre a la classe, il vaut mieux...",
+    text: "Pour bien présenter un livre à la classe, il vaut mieux...",
     correct: "parler clairement et regarder son public",
-    wrongs: ["lire tout, tete baissee, tres vite", "parler tres bas", "tourner le dos"],
-    methode: "Une bonne presentation se fait audible et claire.",
+    wrongs: ["lire tout, tête baissée, très vite", "parler très bas", "tourner le dos"],
+    methode: "Une bonne présentation se fait audible et claire.",
   },
   {
     text: "Reformuler une consigne entendue, c'est...",
     correct: "la redire avec ses propres mots",
-    wrongs: ["la repeter mot pour mot sans comprendre", "l'ignorer", "la lire a l'ecrit seulement"],
+    wrongs: ["la répéter mot pour mot sans comprendre", "l'ignorer", "la lire à l'écrit seulement"],
     methode: "Reformuler montre qu'on a compris.",
   },
   {
-    text: "Donner un avis justifie, c'est dire...",
+    text: "Donner un avis justifié, c'est dire...",
     correct: "ce qu'on pense et pourquoi",
     wrongs: ["seulement oui ou non", "ce que pense le voisin", "une phrase sans rapport"],
     methode: "Un avis devient solide quand on donne une raison.",
   },
   {
-    text: "Quand quelqu'un parle dans un echange, on doit...",
+    text: "Quand quelqu'un parle dans un échange, on doit...",
     correct: "attendre son tour pour parler",
-    wrongs: ["parler en meme temps", "se boucher les oreilles", "sortir de la classe"],
-    methode: "On respecte la parole d'autrui dans un echange.",
+    wrongs: ["parler en même temps", "se boucher les oreilles", "sortir de la classe"],
+    methode: "On respecte la parole d'autrui dans un échange.",
   },
 ];
 
@@ -300,37 +300,37 @@ const ORAL: QcmItem[] = [
 
 const VOC_CONTEXTE: QcmItem[] = [
   {
-    text: "Dans 'Le sentier etait escarpe, difficile a grimper', que veut dire escarpe ?",
-    correct: "tres pentu",
-    wrongs: ["tres plat", "tres large", "tres court"],
-    methode: "Le contexte 'difficile a grimper' aide a deviner le sens.",
+    text: "Dans 'Le sentier était escarpé, difficile à grimper', que veut dire escarpé ?",
+    correct: "très pentu",
+    wrongs: ["très plat", "très large", "très court"],
+    methode: "Le contexte 'difficile à grimper' aide à deviner le sens.",
   },
   {
-    text: "Dans 'Il etait ravi d'avoir gagne', que veut dire ravi ?",
-    correct: "tres content",
-    wrongs: ["tres fache", "tres fatigue", "tres surpris"],
-    methode: "Le contexte 'avoir gagne' oriente vers la joie.",
+    text: "Dans 'Il était ravi d'avoir gagné', que veut dire ravi ?",
+    correct: "très content",
+    wrongs: ["très fâché", "très fatigué", "très surpris"],
+    methode: "Le contexte 'avoir gagné' oriente vers la joie.",
   },
   {
-    text: "Dans 'La piece est sombre', quel synonyme peut remplacer sombre ?",
+    text: "Dans 'La pièce est sombre', quel synonyme peut remplacer sombre ?",
     correct: "obscure",
     wrongs: ["bruyante", "rapide", "ancienne"],
-    methode: "On cherche un mot de meme sens qui garde la phrase correcte.",
+    methode: "On cherche un mot de même sens qui garde la phrase correcte.",
   },
   {
-    text: "Dans 'Le vieil homme avancait peniblement', que veut dire peniblement ?",
-    correct: "avec difficulte",
-    wrongs: ["avec joie", "tres vite", "en chantant"],
+    text: "Dans 'Le vieil homme avançait péniblement', que veut dire péniblement ?",
+    correct: "avec difficulté",
+    wrongs: ["avec joie", "très vite", "en chantant"],
     methode: "Le contexte donne le sens du mot inconnu.",
   },
 ];
 
 const VOC_FAMILLE: QcmItem[] = [
   {
-    text: "Quel mot appartient a la meme famille que terre ?",
+    text: "Quel mot appartient à la même famille que terre ?",
     correct: "terrien",
     wrongs: ["terreur", "tasse", "tour"],
-    methode: "Les mots d'une famille partagent une meme racine et un sens proche.",
+    methode: "Les mots d'une famille partagent une même racine et un sens proche.",
   },
   {
     text: "Quel mot est de la famille de dent ?",
@@ -339,21 +339,21 @@ const VOC_FAMILLE: QcmItem[] = [
     methode: "On cherche la racine commune 'dent'.",
   },
   {
-    text: "Avec le prefixe 're-', que veut dire 'refaire' ?",
-    correct: "faire a nouveau",
-    wrongs: ["ne pas faire", "faire a moitie", "defaire pour toujours"],
-    methode: "Le prefixe 're-' indique souvent la repetition.",
+    text: "Avec le préfixe 're-', que veut dire 'refaire' ?",
+    correct: "faire à nouveau",
+    wrongs: ["ne pas faire", "faire à moitié", "défaire pour toujours"],
+    methode: "Le préfixe 're-' indique souvent la répétition.",
   },
   {
     text: "Avec le suffixe '-able', 'lavable' signifie...",
-    correct: "qui peut etre lave",
-    wrongs: ["qui ne se lave jamais", "deja lave", "qui salit"],
-    methode: "Le suffixe '-able' veut dire 'qui peut etre'.",
+    correct: "qui peut être lavé",
+    wrongs: ["qui ne se lave jamais", "déjà lavé", "qui salit"],
+    methode: "Le suffixe '-able' veut dire 'qui peut être'.",
   },
   {
     text: "Quel est le mot-racine de 'fleuriste, fleurir, fleuri' ?",
     correct: "fleur",
-    wrongs: ["fleuve", "flute", "feu"],
+    wrongs: ["fleuve", "flûte", "feu"],
     methode: "La racine commune se retrouve dans tous les mots de la famille.",
   },
 ];
@@ -363,30 +363,30 @@ const VOC_SYN_ANT: QcmItem[] = [
     text: "Quel est un synonyme de 'rapide' ?",
     correct: "vif",
     wrongs: ["lent", "lourd", "calme"],
-    methode: "Un synonyme a le meme sens.",
+    methode: "Un synonyme a le même sens.",
   },
   {
     text: "Quel est le contraire de 'content' ?",
     correct: "triste",
     wrongs: ["joyeux", "heureux", "ravi"],
-    methode: "Un antonyme a le sens oppose.",
+    methode: "Un antonyme a le sens opposé.",
   },
   {
     text: "Quel est un synonyme de 'maison' ?",
     correct: "demeure",
     wrongs: ["voiture", "jardin", "rue"],
-    methode: "On choisit un mot de meme sens.",
+    methode: "On choisit un mot de même sens.",
   },
   {
     text: "Quel est le contraire de 'monter' ?",
     correct: "descendre",
     wrongs: ["grimper", "sauter", "courir"],
-    methode: "On cherche l'action opposee.",
+    methode: "On cherche l'action opposée.",
   },
   {
-    text: "Pour eviter de repeter 'grand', on peut dire...",
+    text: "Pour éviter de répéter 'grand', on peut dire...",
     correct: "immense",
-    wrongs: ["petit", "minuscule", "etroit"],
+    wrongs: ["petit", "minuscule", "étroit"],
     methode: "On remplace par un synonyme pour varier.",
   },
 ];
@@ -396,40 +396,40 @@ const VOC_POLYSEMIE: QcmItem[] = [
     text: "Dans 'la glace du miroir' et 'manger une glace', le mot glace...",
     correct: "a plusieurs sens",
     wrongs: ["est toujours un dessert", "n'a aucun sens", "est un verbe"],
-    methode: "Un mot polysemique a plusieurs sens selon le contexte.",
+    methode: "Un mot polysémique a plusieurs sens selon le contexte.",
   },
   {
     text: "Dans 'la feuille de l'arbre' et 'une feuille de papier', feuille...",
-    correct: "a deux sens differents",
+    correct: "a deux sens différents",
     wrongs: ["veut toujours dire papier", "est un verbe", "est un nom propre"],
-    methode: "Le contexte precise le sens du mot.",
+    methode: "Le contexte précise le sens du mot.",
   },
   {
     text: "Quelle phrase utilise 'pied' au sens du corps ?",
     correct: "Il s'est fait mal au pied.",
-    wrongs: ["Le pied de la table est casse.", "Au pied de la montagne.", "Un pied de salade."],
+    wrongs: ["Le pied de la table est cassé.", "Au pied de la montagne.", "Un pied de salade."],
     methode: "On choisit le contexte qui donne le bon sens.",
   },
   {
-    text: "Dans 'une operation a l'hopital' et 'une operation de maths', operation...",
+    text: "Dans 'une opération à l'hôpital' et 'une opération de maths', opération...",
     correct: "a plusieurs sens",
-    wrongs: ["est toujours un calcul", "est un determinant", "n'a aucun sens"],
-    methode: "Le meme mot peut designer des realites differentes.",
+    wrongs: ["est toujours un calcul", "est un déterminant", "n'a aucun sens"],
+    methode: "Le même mot peut désigner des réalités différentes.",
   },
 ];
 
 const VOC_REEMPLOI: QcmItem[] = [
   {
-    text: "Quelle phrase reemploie correctement le mot 'courageux' ?",
-    correct: "Le pompier courageux a sauve le chat.",
-    wrongs: ["Le courageux de table est casse.", "Il a mange un courageux.", "Courageux vite a la maison."],
-    methode: "On reemploie un mot dans une phrase qui a du sens.",
+    text: "Quelle phrase réemploie correctement le mot 'courageux' ?",
+    correct: "Le pompier courageux a sauvé le chat.",
+    wrongs: ["Le courageux de table est cassé.", "Il a mangé un courageux.", "Courageux vite à la maison."],
+    methode: "On réemploie un mot dans une phrase qui a du sens.",
   },
   {
     text: "Quelle phrase emploie bien le mot 'fragile' ?",
     correct: "Ce vase est fragile, attention !",
     wrongs: ["Il court fragile le matin.", "Le fragile mange une pomme.", "Fragile sur la table bleue."],
-    methode: "Le mot doit etre a la bonne place et avoir du sens.",
+    methode: "Le mot doit être à la bonne place et avoir du sens.",
   },
   {
     text: "Quelle phrase utilise correctement 'rapidement' ?",
@@ -444,13 +444,13 @@ const VOC_ORTH: QcmItem[] = [
     text: "Quelle est l'orthographe correcte ?",
     correct: "aujourd'hui",
     wrongs: ["aujourdhui", "aujour'dui", "aujourd'huit"],
-    methode: "On memorise l'orthographe des mots frequents.",
+    methode: "On mémorise l'orthographe des mots fréquents.",
   },
   {
     text: "Quelle est l'orthographe correcte ?",
     correct: "beaucoup",
     wrongs: ["beaucou", "beacoup", "beaucoupe"],
-    methode: "On retient les lettres muettes des mots etudies.",
+    methode: "On retient les lettres muettes des mots étudiés.",
   },
   {
     text: "Quelle est l'orthographe correcte ?",
@@ -460,9 +460,9 @@ const VOC_ORTH: QcmItem[] = [
   },
   {
     text: "Quelle est l'orthographe correcte ?",
-    correct: "ecole",
+    correct: "école",
     wrongs: ["ecolle", "aicole", "ekole"],
-    methode: "On verifie l'orthographe des mots usuels.",
+    methode: "On vérifie l'orthographe des mots usuels.",
   },
 ];
 
@@ -470,34 +470,34 @@ const VOC_ORTH: QcmItem[] = [
 
 const PHRASE_SIMPLE: QcmItem[] = [
   {
-    text: "Quelle phrase est une phrase simple (un seul verbe conjugue) ?",
+    text: "Quelle phrase est une phrase simple (un seul verbe conjugué) ?",
     correct: "Le soleil brille.",
     wrongs: ["Le soleil brille et les oiseaux chantent.", "Quand il pleut, je lis.", "Il court, puis il saute."],
-    methode: "Une phrase simple contient un seul verbe conjugue.",
+    methode: "Une phrase simple contient un seul verbe conjugué.",
   },
   {
-    text: "Combien de verbes conjugues dans 'Le chat dort sur le canape' ?",
+    text: "Combien de verbes conjugués dans 'Le chat dort sur le canapé' ?",
     correct: "1",
     wrongs: ["2", "0", "3"],
     methode: "On cherche le mot qui se conjugue.",
   },
   {
-    text: "Quelle est la ponctuation correcte d'une phrase declarative ?",
+    text: "Quelle est la ponctuation correcte d'une phrase déclarative ?",
     correct: "Elle finit par un point.",
     wrongs: ["Elle finit par une virgule.", "Elle n'a pas de majuscule.", "Elle finit par deux points."],
-    methode: "Une phrase declarative se termine par un point.",
+    methode: "Une phrase déclarative se termine par un point.",
   },
   {
     text: "Quel est le type de la phrase 'Quel beau jardin !' ?",
     correct: "exclamative",
-    wrongs: ["interrogative", "declarative", "imperative"],
+    wrongs: ["interrogative", "déclarative", "impérative"],
     methode: "Le point d'exclamation marque la phrase exclamative.",
   },
   {
-    text: "Quel est le type de 'Ranges ta chambre.' ?",
-    correct: "imperative (un ordre)",
+    text: "Quel est le type de 'Range ta chambre.' ?",
+    correct: "impérative (un ordre)",
     wrongs: ["interrogative", "exclamative", "une question"],
-    methode: "Une phrase qui donne un ordre est imperative.",
+    methode: "Une phrase qui donne un ordre est impérative.",
   },
 ];
 
@@ -506,17 +506,17 @@ const SUJET_VERBE: QcmItem[] = [
     text: "Dans 'Les grands arbres bougent doucement', quel est le sujet ?",
     correct: "Les grands arbres",
     wrongs: ["bougent", "doucement", "grands"],
-    methode: "Le sujet repond a 'qui est-ce qui ...?'.",
+    methode: "Le sujet répond à 'qui est-ce qui ...?'.",
   },
   {
-    text: "Dans 'Le chien aboie tres fort', quel est le verbe conjugue ?",
+    text: "Dans 'Le chien aboie très fort', quel est le verbe conjugué ?",
     correct: "aboie",
     wrongs: ["chien", "fort", "le"],
     methode: "Le verbe exprime l'action et se conjugue.",
   },
   {
-    text: "Dans 'Demain, Lea partira en voyage', quel est le sujet ?",
-    correct: "Lea",
+    text: "Dans 'Demain, Léa partira en voyage', quel est le sujet ?",
+    correct: "Léa",
     wrongs: ["Demain", "voyage", "partira"],
     methode: "On pose la question 'qui partira ?'.",
   },
@@ -524,7 +524,7 @@ const SUJET_VERBE: QcmItem[] = [
     text: "Dans 'Sous la table dort un petit chat', quel est le sujet ?",
     correct: "un petit chat",
     wrongs: ["la table", "dort", "sous"],
-    methode: "Le sujet peut etre place apres le verbe.",
+    methode: "Le sujet peut être placé après le verbe.",
   },
   {
     text: "Dans 'Nous lisons une belle histoire', quel est le verbe ?",
@@ -545,82 +545,82 @@ const GN: QcmItem[] = [
     text: "Dans 'la maison du voisin', quelle est l'expansion du nom ?",
     correct: "du voisin",
     wrongs: ["la", "maison", "."],
-    methode: "L'expansion precise le nom principal.",
+    methode: "L'expansion précise le nom principal.",
   },
   {
-    text: "Quel est le determinant dans 'ces jolies fleurs' ?",
+    text: "Quel est le déterminant dans 'ces jolies fleurs' ?",
     correct: "ces",
     wrongs: ["jolies", "fleurs", "joli"],
-    methode: "Le determinant accompagne le nom et le precede.",
+    methode: "Le déterminant accompagne le nom et le précède.",
   },
   {
     text: "Dans 'une voiture rouge', quel mot est un adjectif ?",
     correct: "rouge",
     wrongs: ["une", "voiture", "."],
-    methode: "L'adjectif donne une qualite du nom.",
+    methode: "L'adjectif donne une qualité du nom.",
   },
   {
     text: "Quel groupe est un groupe nominal ?",
     correct: "le grand jardin fleuri",
-    wrongs: ["il court vite", "manger une pomme", "tres rapidement"],
-    methode: "Un groupe nominal est organise autour d'un nom.",
+    wrongs: ["il court vite", "manger une pomme", "très rapidement"],
+    methode: "Un groupe nominal est organisé autour d'un nom.",
   },
 ];
 
 const COMPLEMENTS: QcmItem[] = [
   {
-    text: "Dans 'Le matin, Tom lit un livre', quel est le complement circonstanciel de temps ?",
+    text: "Dans 'Le matin, Tom lit un livre', quel est le complément circonstanciel de temps ?",
     correct: "Le matin",
     wrongs: ["un livre", "Tom", "lit"],
-    methode: "Le complement circonstanciel de temps dit quand.",
+    methode: "Le complément circonstanciel de temps dit quand.",
   },
   {
-    text: "Dans 'Elle range ses affaires dans le tiroir', quel groupe dit ou ?",
+    text: "Dans 'Elle range ses affaires dans le tiroir', quel groupe dit où ?",
     correct: "dans le tiroir",
     wrongs: ["ses affaires", "Elle", "range"],
-    methode: "Le complement de lieu repond a 'ou ?'.",
+    methode: "Le complément de lieu répond à 'où ?'.",
   },
   {
-    text: "Dans 'Le chat mange sa croquette', quel est le complement essentiel ?",
+    text: "Dans 'Le chat mange sa croquette', quel est le complément essentiel ?",
     correct: "sa croquette",
     wrongs: ["Le chat", "mange", "."],
-    methode: "Le complement essentiel ne peut pas etre supprime.",
+    methode: "Le complément essentiel ne peut pas être supprimé.",
   },
   {
-    text: "Quel complement peut etre deplace ou supprime ?",
-    correct: "le complement circonstanciel",
-    wrongs: ["le sujet", "le verbe", "le complement essentiel"],
-    methode: "Les complements circonstanciels sont mobiles et facultatifs.",
+    text: "Quel complément peut être déplacé ou supprimé ?",
+    correct: "le complément circonstanciel",
+    wrongs: ["le sujet", "le verbe", "le complément essentiel"],
+    methode: "Les compléments circonstanciels sont mobiles et facultatifs.",
   },
 ];
 
 const ACCORD_GN: QcmItem[] = [
   {
-    text: "Quel groupe nominal est correctement accorde ?",
+    text: "Quel groupe nominal est correctement accordé ?",
     correct: "les fleurs rouges",
     wrongs: ["les fleur rouge", "la fleurs rouges", "un fleurs rouge"],
-    methode: "Determinant, nom et adjectif s'accordent en genre et en nombre.",
+    methode: "Déterminant, nom et adjectif s'accordent en genre et en nombre.",
   },
   {
-    text: "Quel groupe est bien accorde ?",
+    text: "Quel groupe est bien accordé ?",
     correct: "des chats noirs",
     wrongs: ["des chat noirs", "des chats noir", "un chats noir"],
     methode: "Au pluriel, le nom et l'adjectif prennent souvent un 's'.",
   },
   {
-    text: "Quel groupe est bien accorde ?",
+    text: "Quel groupe est bien accordé ?",
     correct: "une grande maison",
     wrongs: ["une grand maison", "un grande maison", "une grandes maison"],
-    methode: "Au feminin, l'adjectif s'accorde avec le nom.",
+    methode: "Au féminin, l'adjectif s'accorde avec le nom.",
   },
   {
-    text: "Quel groupe est bien accorde ?",
+    text: "Quel groupe est bien accordé ?",
     correct: "les petits chiens",
     wrongs: ["les petit chiens", "les petits chien", "le petits chiens"],
     methode: "Tout le groupe nominal s'accorde au pluriel.",
   },
   {
-    text: "Quel groupe est bien accorde ?",
+    text: "Quel groupe est bien accordé ?",
     correct: "des jolies fleurs blanches",
     wrongs: ["des joli fleurs blanches", "des jolies fleur blanche", "des jolies fleurs blanc"],
     methode: "Chaque adjectif du groupe s'accorde avec le nom.",
@@ -635,15 +635,15 @@ const ACCORD_SUJET_VERBE: QcmItem[] = [
     methode: "Le verbe s'accorde avec le sujet (ici pluriel : -ent).",
   },
   {
-    text: "Quelle phrase est correctement accordee ?",
+    text: "Quelle phrase est correctement accordée ?",
     correct: "Le chien et le chat dorment.",
     wrongs: ["Le chien et le chat dort.", "Le chien et le chat dormons.", "Le chien et le chat dormez."],
-    methode: "Deux sujets relies par 'et' donnent un verbe au pluriel.",
+    methode: "Deux sujets reliés par 'et' donnent un verbe au pluriel.",
   },
   {
     text: "Quelle phrase est correcte ?",
-    correct: "Nous mangeons a midi.",
-    wrongs: ["Nous mange a midi.", "Nous mangent a midi.", "Nous mangez a midi."],
+    correct: "Nous mangeons à midi.",
+    wrongs: ["Nous mange à midi.", "Nous mangent à midi.", "Nous mangez à midi."],
     methode: "Avec 'nous', le verbe se termine souvent par '-ons'.",
   },
   {
@@ -653,42 +653,42 @@ const ACCORD_SUJET_VERBE: QcmItem[] = [
     methode: "Un sujet pluriel commande un verbe au pluriel.",
   },
   {
-    text: "Dans 'Les eleves de la classe ___ attentifs', quelle forme convient ?",
+    text: "Dans 'Les élèves de la classe ___ attentifs', quelle forme convient ?",
     correct: "sont",
-    wrongs: ["est", "es", "etes"],
-    methode: "Le sujet 'les eleves' est pluriel : le verbe etre devient 'sont'.",
+    wrongs: ["est", "es", "êtes"],
+    methode: "Le sujet 'les élèves' est pluriel : le verbe être devient 'sont'.",
   },
 ];
 
 const HOMOPHONES: QcmItem[] = [
   {
     text: "Homophones 'a' / 'à' : choisis la phrase correcte.",
-    correct: "Il a un nouveau velo.",
-    wrongs: ["Il à un nouveau velo.", "Il as un nouveau velo.", "Il a un nouveau velo à."],
-    methode: "'a' = verbe avoir ; 'à' = preposition.",
+    correct: "Il a un nouveau vélo.",
+    wrongs: ["Il à un nouveau vélo.", "Il as un nouveau vélo.", "Il a un nouveau vélo à."],
+    methode: "'a' = verbe avoir ; 'à' = préposition.",
   },
   {
     text: "Homophones 'a' / 'à' : choisis la phrase correcte.",
-    correct: "Elle va à l'ecole.",
-    wrongs: ["Elle va a l'ecole.", "Elle va as l'ecole.", "Elle va a l'ecole à."],
+    correct: "Elle va à l'école.",
+    wrongs: ["Elle va a l'école.", "Elle va as l'école.", "Elle va a l'école à."],
     methode: "'à' avec accent indique le lieu ou la direction.",
   },
   {
     text: "Homophones 'est' / 'et' : choisis la phrase correcte.",
-    correct: "Mon frere est grand et fort.",
-    wrongs: ["Mon frere et grand et fort.", "Mon frere es grand et fort.", "Mon frere est grand est fort."],
-    methode: "'est' = verbe etre ; 'et' = pour relier.",
+    correct: "Mon frère est grand et fort.",
+    wrongs: ["Mon frère et grand et fort.", "Mon frère es grand et fort.", "Mon frère est grand est fort."],
+    methode: "'est' = verbe être ; 'et' = pour relier.",
   },
   {
     text: "Homophones 'son' / 'sont' : choisis la phrase correcte.",
     correct: "Les enfants sont contents de leur cadeau.",
     wrongs: ["Les enfants son contents.", "Les enfants sont content.", "Les enfants sonts contents."],
-    methode: "'sont' = verbe etre ; 'son' = a lui.",
+    methode: "'sont' = verbe être ; 'son' = à lui.",
   },
   {
     text: "Homophones 'on' / 'ont' : choisis la phrase correcte.",
-    correct: "Ils ont gagne le match.",
-    wrongs: ["Ils on gagne le match.", "Ils ont gagner le match.", "Il ont gagne le match."],
+    correct: "Ils ont gagné le match.",
+    wrongs: ["Ils on gagné le match.", "Ils ont gagner le match.", "Il ont gagné le match."],
     methode: "'ont' = verbe avoir ; 'on' = pronom.",
   },
   {
@@ -700,8 +700,8 @@ const HOMOPHONES: QcmItem[] = [
   {
     text: "Homophones 'ses' / 'ces' : choisis la phrase correcte.",
     correct: "Il range ses affaires.",
-    wrongs: ["Il range ces affaires a lui.", "Il range ses affaire.", "Il range ce affaires."],
-    methode: "'ses' = les siens (a lui) ; 'ces' = ceux-la (que je montre).",
+    wrongs: ["Il range ces affaires à lui.", "Il range ses affaire.", "Il range ce affaires."],
+    methode: "'ses' = les siens (à lui) ; 'ces' = ceux-là (que je montre).",
   },
 ];
 
@@ -711,67 +711,67 @@ const HOMOPHONES: QcmItem[] = [
 
 const CONJ_PASSE_COMPOSE: QcmItem[] = [
   {
-    text: "Quel auxiliaire complete : 'Elle ___ tombee dans l'escalier.' ?",
+    text: "Quel auxiliaire complète : 'Elle ___ tombée dans l'escalier.' ?",
     correct: "est",
     wrongs: ["a", "ont", "avait"],
-    methode: "Avec le verbe tomber, on utilise l'auxiliaire etre.",
+    methode: "Avec le verbe tomber, on utilise l'auxiliaire être.",
   },
   {
-    text: "Choisis le passe compose correct : 'Nous ___ un film.'",
-    correct: "avons regarde",
-    wrongs: ["avons regarder", "avez regarde", "ont regarde"],
-    methode: "Passe compose = auxiliaire avoir + participe passe.",
+    text: "Choisis le passé composé correct : 'Nous ___ un film.'",
+    correct: "avons regardé",
+    wrongs: ["avons regarder", "avez regardé", "ont regardé"],
+    methode: "Passé composé = auxiliaire avoir + participe passé.",
   },
   {
-    text: "Choisis la forme correcte : 'Ils ___ partis tot.'",
+    text: "Choisis la forme correcte : 'Ils ___ partis tôt.'",
     correct: "sont",
     wrongs: ["ont", "est", "avaient"],
-    methode: "Avec partir, l'auxiliaire est etre : ils sont partis.",
+    methode: "Avec partir, l'auxiliaire est être : ils sont partis.",
   },
   {
-    text: "Choisis le passe compose : 'Tu ___ une pomme.'",
-    correct: "as mange",
-    wrongs: ["as manger", "a mange", "es mange"],
-    methode: "Avec 'tu', auxiliaire avoir : tu as mange.",
+    text: "Choisis le passé composé : 'Tu ___ une pomme.'",
+    correct: "as mangé",
+    wrongs: ["as manger", "a mangé", "es mangé"],
+    methode: "Avec 'tu', auxiliaire avoir : tu as mangé.",
   },
   {
-    text: "Quel est le participe passe de 'finir' ?",
+    text: "Quel est le participe passé de 'finir' ?",
     correct: "fini",
     wrongs: ["finir", "finit", "finissant"],
-    methode: "Le participe passe de finir est 'fini'.",
+    methode: "Le participe passé de finir est 'fini'.",
   },
 ];
 
 const CONJ_VALEUR_TEMPS: QcmItem[] = [
   {
-    text: "Dans 'Demain, nous partirons', quel temps est utilise ?",
+    text: "Dans 'Demain, nous partirons', quel temps est utilisé ?",
     correct: "le futur",
-    wrongs: ["le present", "l'imparfait", "le passe compose"],
+    wrongs: ["le présent", "l'imparfait", "le passé composé"],
     methode: "'Demain' annonce une action future.",
   },
   {
-    text: "Dans 'Hier, il pleuvait sans arret', quel temps est utilise ?",
+    text: "Dans 'Hier, il pleuvait sans arrêt', quel temps est utilisé ?",
     correct: "l'imparfait",
-    wrongs: ["le futur", "le present", "le passe compose"],
-    methode: "L'imparfait decrit une action passee qui dure.",
+    wrongs: ["le futur", "le présent", "le passé composé"],
+    methode: "L'imparfait décrit une action passée qui dure.",
   },
   {
-    text: "Dans 'Maintenant, je lis un livre', quel temps est utilise ?",
-    correct: "le present",
-    wrongs: ["le futur", "l'imparfait", "le passe compose"],
-    methode: "Le present exprime ce qui se passe maintenant.",
+    text: "Dans 'Maintenant, je lis un livre', quel temps est utilisé ?",
+    correct: "le présent",
+    wrongs: ["le futur", "l'imparfait", "le passé composé"],
+    methode: "Le présent exprime ce qui se passe maintenant.",
   },
   {
-    text: "Dans 'Elle a fini ses devoirs', quel temps est utilise ?",
-    correct: "le passe compose",
-    wrongs: ["le present", "le futur", "l'imparfait"],
-    methode: "Le passe compose exprime une action passee terminee.",
+    text: "Dans 'Elle a fini ses devoirs', quel temps est utilisé ?",
+    correct: "le passé composé",
+    wrongs: ["le présent", "le futur", "l'imparfait"],
+    methode: "Le passé composé exprime une action passée terminée.",
   },
   {
-    text: "Quel temps raconte le mieux une action soudaine dans un recit au passe ?",
-    correct: "le passe compose (ou le passe simple)",
-    wrongs: ["le futur", "le present de demain", "l'imparfait seul"],
-    methode: "L'imparfait pose le decor, le passe compose marque l'action breve.",
+    text: "Quel temps raconte le mieux une action soudaine dans un récit au passé ?",
+    correct: "le passé composé (ou le passé simple)",
+    wrongs: ["le futur", "le présent de demain", "l'imparfait seul"],
+    methode: "L'imparfait pose le décor, le passé composé marque l'action brève.",
   },
 ];
 
