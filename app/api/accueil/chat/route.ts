@@ -102,7 +102,8 @@ export async function POST(req: Request) {
           role: "system",
           content: [
             "Tu es le coach EleveAI sur la page d'accueil.",
-            `Tu reponds a un eleve connecte (${eleve.nom ?? codeUtilisateur}) qui pose une question rapide.`,
+            // RGPD : on n'envoie AUCUN nom d'eleve au modele externe.
+            "Tu reponds a un eleve connecte qui pose une question rapide.",
             "Reponds en francais simple, en 3 a 5 phrases maximum.",
             consigneSalutation,
             "Aide sans faire tout le travail a la place de l'eleve.",

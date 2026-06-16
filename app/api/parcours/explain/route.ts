@@ -123,7 +123,7 @@ export async function POST(req: Request) {
           role: "user",
           content: [
             `Classe : ${classe || "non precisee"}`,
-            `Eleve connecte : ${eleve.nom ?? codeUtilisateur}`,
+            // RGPD : aucun nom d'eleve transmis au modele externe.
             `Notion : ${notionLabel || "non precisee"}`,
             "",
             "Exercice :",

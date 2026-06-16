@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
+import { prenomFromNom } from "@/lib/prenom";
 
 type UserSession = {
   acces_id?: string | null;
@@ -260,7 +261,7 @@ export default function DashboardPrincipalClient() {
                 🏫 Dashboard Principal
               </div>
               <h1 className="mt-4 text-3xl font-black md:text-5xl">
-                Bonjour {user.nom ?? "Principal"} 👋
+                Bonjour {prenomFromNom(user.nom) ?? "Principal"} 👋
               </h1>
               <p className="mt-2 font-semibold text-slate-600">
                 Établissement : <span className="font-black text-slate-950">{codeEtab}</span>

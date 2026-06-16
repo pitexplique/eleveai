@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { useEleve } from "@/context/EleveContext";
 import ClassementAvis from "@/components/points/ClassementAvis";
+import { prenomFromNom } from "@/lib/prenom";
 
 type EleveSession = {
   acces_id?: string | null;
@@ -123,24 +124,6 @@ function formatDate(value: string) {
 function getPct(score: number, total: number) {
   if (!total || total <= 0) return 0;
   return Math.round((Number(score) / Number(total)) * 100);
-}
-
-// Le champ `nom` est saisi au format « NOM EN MAJUSCULES prénom en minuscules »
-// (ex. « DIDUX Lucie »). On n'affiche que le prénom : on garde les mots qui ne
-// sont pas entièrement en majuscules.
-function prenomFromNom(nom: string | null | undefined) {
-  if (!nom) return null;
-  const prenom = nom
-    .trim()
-    .split(/\s+/)
-    .filter((mot) => mot !== mot.toLocaleUpperCase("fr-FR"))
-    .map((mot) =>
-      mot.charAt(0).toLocaleUpperCase("fr-FR") +
-      mot.slice(1).toLocaleLowerCase("fr-FR")
-    )
-    .join(" ")
-    .trim();
-  return prenom || null;
 }
 
 const MATIERE_LABELS: Record<string, string> = {

@@ -9,6 +9,7 @@ import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
 import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
+import { prenomFromNom } from "@/lib/prenom";
 
 // ─── Drag-to-scroll (glisser à la souris sur desktop) ──────────────────────────
 // Sur mobile le scroll horizontal au doigt est natif. Sur desktop il n'y a pas de
@@ -147,16 +148,13 @@ const FEATURES = [
 
 function getPrenomAffiche(nom?: string | null) {
   // En base, le nom de famille est en MAJUSCULES et le prénom en minuscules
-  // (ex. "DUPONT Jean"). On garde donc le premier mot qui n'est pas
-  // entièrement en majuscules : c'est le prénom.
-  const mots = nom?.trim().split(/\s+/).filter(Boolean) ?? [];
-  const estToutMajuscule = (mot: string) => mot === mot.toUpperCase();
-  const premierMot = mots.find((mot) => !estToutMajuscule(mot)) ?? mots[0] ?? "";
-  const normalise = premierMot.toLowerCase();
-  if (!premierMot || normalise === "élève" || normalise === "eleve") {
+  // (ex. "DUPONT Jean"). prenomFromNom ne garde que le prénom.
+  const prenom = prenomFromNom(nom);
+  const normalise = prenom?.toLowerCase();
+  if (!prenom || normalise === "élève" || normalise === "eleve") {
     return null;
   }
-  return premierMot;
+  return prenom;
 }
 
 export type AvisPublic = {
