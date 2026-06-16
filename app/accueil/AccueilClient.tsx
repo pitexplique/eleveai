@@ -146,7 +146,12 @@ const FEATURES = [
 // ─── Main component ───────────────────────────────────────────────────────────
 
 function getPrenomAffiche(nom?: string | null) {
-  const premierMot = nom?.trim().split(/\s+/)[0] ?? "";
+  // En base, le nom de famille est en MAJUSCULES et le prénom en minuscules
+  // (ex. "DUPONT Jean"). On garde donc le premier mot qui n'est pas
+  // entièrement en majuscules : c'est le prénom.
+  const mots = nom?.trim().split(/\s+/).filter(Boolean) ?? [];
+  const estToutMajuscule = (mot: string) => mot === mot.toUpperCase();
+  const premierMot = mots.find((mot) => !estToutMajuscule(mot)) ?? mots[0] ?? "";
   const normalise = premierMot.toLowerCase();
   if (!premierMot || normalise === "élève" || normalise === "eleve") {
     return null;
