@@ -1618,4 +1618,203 @@ export const airesBank: TutorBankItemV4[] = [
       "Conclusion : il faut vérifier avec un calcul.",
     tags: ["aire_surface", "raisonnement", "defi"],
   },
+
+  /* =========================
+     TOP-UP — AIRE_COMPRENDRE (+2)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_aire_comprendre_qcm_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "En quelle unité exprime-t-on une aire ?",
+    format: "qcm",
+    choices: ["en cm²", "en cm", "en cm³", "en degrés"],
+    expected: ["en cm²"],
+    comparator: "mcq_exact",
+    hint: "Une surface → unité au carré.",
+    explanation:
+      "Définition : l’aire mesure la surface occupée par une figure.\n\n" +
+      "Méthode : on choisit une unité de surface.\n\n" +
+      "Observation : une longueur s’exprime en cm, une aire en cm², un volume en cm³.\n\n" +
+      "Conclusion : une aire s’exprime en cm².",
+    tags: ["aire_surface", "unite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "5e_aire_comprendre_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique la différence entre l’aire et le périmètre d’une figure.",
+    format: "open",
+    expected: ["surface", "contour", "périmètre"],
+    comparator: "contains_keyword",
+    hint: "L’un mesure l’intérieur, l’autre le tour.",
+    explanation:
+      "Définition : l’aire mesure la surface intérieure, le périmètre mesure la longueur du contour.\n\n" +
+      "Méthode : on repère si l’on parle de l’intérieur ou du tour.\n\n" +
+      "Observation : l’aire s’exprime en cm², le périmètre en cm.\n\n" +
+      "Conclusion : l’aire est la surface, le périmètre est le tour de la figure.",
+    tags: ["aire_surface", "perimetre", "open"],
+  },
+
+  /* =========================
+     TOP-UP — AIRE_TRIANGLE (+1)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_aire_triangle_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_triangle",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un triangle a une base de 8 cm et une hauteur de 5 cm. Quelle est son aire ?",
+    format: "short",
+    expected: ["20"],
+    comparator: "number_equal",
+    hint: "Aire = base × hauteur ÷ 2.",
+    explanation:
+      "Définition : l’aire d’un triangle est la moitié de celle du rectangle de mêmes base et hauteur.\n\n" +
+      "Méthode : on calcule base × hauteur, puis on divise par 2.\n\n" +
+      "Calcul : 8 × 5 ÷ 2 = 40 ÷ 2 = 20.\n\n" +
+      "Conclusion : l’aire du triangle est 20 cm².",
+    tags: ["aire_surface", "triangle", "canvas"],
+    canvas: triangleAireCanvas("8 cm"),
+  },
+
+  /* =========================
+     TOP-UP — AIRE_PARALLELOGRAMME (+2)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_aire_parallelogramme_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_parallelogramme",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un parallélogramme a une base de 7 cm et une hauteur de 4 cm. Quelle est son aire ?",
+    format: "short",
+    expected: ["28"],
+    comparator: "number_equal",
+    hint: "Aire = base × hauteur.",
+    explanation:
+      "Définition : l’aire d’un parallélogramme est base × hauteur.\n\n" +
+      "Méthode : on multiplie la base par la hauteur correspondante.\n\n" +
+      "Calcul : 7 × 4 = 28.\n\n" +
+      "Conclusion : l’aire du parallélogramme est 28 cm².",
+    tags: ["aire_surface", "parallelogramme", "canvas"],
+    canvas: parallelogrammeAireCanvas("7 cm", "4 cm"),
+  },
+  {
+    kind: "template",
+    id: "5e_aire_parallelogramme_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_parallelogramme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Aire = base × hauteur.",
+    tags: ["aire_surface", "parallelogramme", "template", "canvas"],
+    generate: () => {
+      const base = randomChoice([5, 6, 8, 9, 10]);
+      const hauteur = randomChoice([3, 4, 5, 6]);
+      const aire = base * hauteur;
+      return {
+        text: `Un parallélogramme a une base de ${base} cm et une hauteur de ${hauteur} cm. Quelle est son aire ?`,
+        format: "short",
+        expected: [formatNumber(aire)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : l’aire d’un parallélogramme est base × hauteur.\n\n" +
+          "Méthode : on multiplie la base par la hauteur.\n\n" +
+          `Calcul : ${base} × ${hauteur} = ${aire}.\n\n` +
+          `Conclusion : l’aire est ${aire} cm².`,
+        canvas: parallelogrammeAireCanvas(`${base} cm`, `${hauteur} cm`),
+      };
+    },
+  },
+
+  /* =========================
+     TOP-UP — AIRE_COMPOSER (+2)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_aire_composer_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_composer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Une figure est formée d’un rectangle de 24 cm² et d’un carré de 9 cm². Quelle est son aire totale ?",
+    format: "short",
+    expected: ["33"],
+    comparator: "number_equal",
+    hint: "On additionne les aires des morceaux.",
+    explanation:
+      "Définition : l’aire d’une figure composée est la somme des aires de ses morceaux.\n\n" +
+      "Méthode : on découpe en figures simples puis on additionne.\n\n" +
+      "Calcul : 24 + 9 = 33.\n\n" +
+      "Conclusion : l’aire totale est 33 cm².",
+    tags: ["aire_surface", "composer"],
+  },
+  {
+    kind: "fixed",
+    id: "5e_aire_composer_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_composer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique comment calculer l’aire d’une figure en forme de L.",
+    format: "open",
+    expected: ["découpe", "rectangles", "additionne"],
+    comparator: "contains_keyword",
+    hint: "On la sépare en rectangles.",
+    explanation:
+      "Définition : une figure en L peut se décomposer en figures simples.\n\n" +
+      "Méthode : on découpe le L en deux rectangles.\n\n" +
+      "Calcul : on calcule l’aire de chaque rectangle puis on les additionne.\n\n" +
+      "Conclusion : l’aire du L est la somme des aires des deux rectangles.",
+    tags: ["aire_surface", "composer", "open"],
+  },
+
+  /* =========================
+     TOP-UP — AIRE_DEFI (+1)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_aire_defi_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_defi",
+    difficulty: 5,
+    theme: "reunion",
+    text: "Un terrain rectangulaire de 12 m sur 8 m contient un bassin carré de 3 m de côté. Quelle est l’aire restante (hors bassin) ?",
+    format: "short",
+    expected: ["87"],
+    comparator: "number_equal",
+    hint: "Aire du terrain moins aire du bassin.",
+    explanation:
+      "Définition : l’aire restante est la différence entre l’aire totale et l’aire enlevée.\n\n" +
+      "Méthode : on calcule chaque aire puis on soustrait.\n\n" +
+      "Calcul : terrain = 12 × 8 = 96 m² ; bassin = 3 × 3 = 9 m² ; reste = 96 − 9 = 87 m².\n\n" +
+      "Conclusion : l’aire restante est 87 m².",
+    tags: ["aire_surface", "defi", "reunion"],
+  },
 ];

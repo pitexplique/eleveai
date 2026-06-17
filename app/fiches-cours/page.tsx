@@ -17,6 +17,14 @@ const fiches = [
     resume:
       "Reconnaitre une situation proportionnelle, completer un tableau et revenir a l'unite.",
   },
+  {
+    href: "/fiches-cours/cosinus-4e",
+    niveau: "4e",
+    matiere: "Maths",
+    titre: "Cosinus",
+    resume:
+      "Utiliser le cosinus dans un triangle rectangle pour calculer une longueur.",
+  },
 ];
 
 export default function FichesCoursPage() {
