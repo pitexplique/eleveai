@@ -19,6 +19,15 @@ function scratchCanvas(title: string, blocks: any[], description?: string) {
   };
 }
 
+function expl(def: string, meth: string, exec: string, concl: string) {
+  return (
+    `Définition : ${def}\n\n` +
+    `Méthode : ${meth}\n\n` +
+    `Exécution : ${exec}\n\n` +
+    `Conclusion : ${concl}`
+  );
+}
+
 export const algorithmiqueBank: TutorBankItemV4[] = [
   /* =========================
      ALGO_SEQUENCE
