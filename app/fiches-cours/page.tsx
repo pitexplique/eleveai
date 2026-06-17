@@ -25,6 +25,14 @@ const fiches = [
     resume:
       "Utiliser le cosinus dans un triangle rectangle pour calculer une longueur.",
   },
+  {
+    href: "/fiches-cours/maths/4e/pythagore",
+    niveau: "4e",
+    matiere: "Maths",
+    titre: "Théorème de Pythagore",
+    resume:
+      "Calculer une longueur dans un triangle rectangle et vérifier qu'un triangle est rectangle.",
+  },
 ];
 
 export default function FichesCoursPage() {
