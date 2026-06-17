@@ -2099,4 +2099,904 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "Conclusion : on compare le résultat obtenu avec le résultat attendu.",
     tags: ["algo_programmation", "defi", "debug", "open", "methode"],
   },
+
+  /* =========================
+     TOP-UP — ALGO_SEQUENCE (+4)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_algo_sequence_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_sequence",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Que se passe-t-il si on échange l’ordre de deux blocs dans une séquence ?",
+    format: "qcm",
+    choices: [
+      "le programme peut donner un résultat différent",
+      "rien ne change jamais",
+      "le programme s’arrête toujours",
+      "les blocs disparaissent",
+    ],
+    expected: ["le programme peut donner un résultat différent"],
+    comparator: "mcq_exact",
+    hint: "L’ordre est important dans une séquence.",
+    explanation: expl(
+      "une séquence est une suite d’instructions exécutées dans l’ordre.",
+      "on compare le résultat avant et après l’échange.",
+      "changer l’ordre des blocs peut modifier les actions et donc le résultat.",
+      "l’ordre des blocs est important."
+    ),
+    tags: ["algo_programmation", "sequence", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "5e_algo_sequence_fixed_x2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_sequence",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans ce programme, quelle est la deuxième action après le drapeau vert ?",
+    format: "qcm",
+    choices: ["avancer de 20", "dire Bonjour", "tourner de 90°", "attendre"],
+    expected: ["avancer de 20"],
+    comparator: "mcq_exact",
+    hint: "Compte les blocs sous le drapeau.",
+    explanation: expl(
+      "une séquence se lit dans l’ordre, de haut en bas.",
+      "on repère le deuxième bloc sous l’événement de départ.",
+      "après “dire Bonjour”, le deuxième bloc est “avancer de 20”.",
+      "la deuxième action est “avancer de 20”."
+    ),
+    tags: ["algo_programmation", "sequence", "ordre", "qcm"],
+    canvas: scratchCanvas("Ordre des blocs", [
+      { type: "event" },
+      { type: "say", text: "Bonjour" },
+      { type: "move", value: 20 },
+      { type: "turn", value: 90 },
+    ]),
+  },
+  {
+    kind: "fixed",
+    id: "5e_algo_sequence_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_sequence",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique ce qu’est une séquence d’instructions.",
+    format: "open",
+    expected: ["suite", "ordre", "instructions"],
+    comparator: "contains_keyword",
+    hint: "Pense à une recette.",
+    explanation: expl(
+      "une séquence est une suite d’instructions.",
+      "on exécute chaque instruction l’une après l’autre.",
+      "comme une recette, on suit les blocs dans l’ordre, de haut en bas.",
+      "une séquence est une suite d’instructions exécutées dans l’ordre."
+    ),
+    tags: ["algo_programmation", "sequence", "open"],
+  },
+  {
+    kind: "template",
+    id: "5e_algo_sequence_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_sequence",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Additionne les deux blocs “avancer”.",
+    tags: ["algo_programmation", "sequence", "template", "canvas"],
+    generate: () => {
+      const a = randomChoice([10, 15, 20, 25]);
+      const b = randomChoice([10, 30, 40]);
+      const total = a + b;
+      return {
+        text: `Le lutin avance de ${a}, puis de ${b}. Quelle distance totale a-t-il parcourue ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: expl(
+          "une séquence exécute les blocs dans l’ordre.",
+          "on additionne les distances des blocs “avancer”.",
+          `${a} + ${b} = ${total}.`,
+          `le lutin a parcouru ${total} pas.`
+        ),
+        canvas: scratchCanvas("Deux avancées", [
+          { type: "event" },
+          { type: "move", value: a },
+          { type: "move", value: b },
+        ]),
+      };
+    },
+  },
+
+  /* =========================
+     TOP-UP — ALGO_ENTREE_SORTIE (+3)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_algo_entree_sortie_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_entree_sortie",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quel bloc Scratch sert à obtenir une entrée de l’utilisateur ?",
+    format: "qcm",
+    choices: [
+      "demander … et attendre",
+      "avancer de 10",
+      "dire Bonjour",
+      "tourner de 90°",
+    ],
+    expected: ["demander … et attendre"],
+    comparator: "mcq_exact",
+    hint: "C’est le bloc qui pose une question.",
+    explanation: expl(
+      "une entrée est une donnée fournie par l’utilisateur.",
+      "on repère le bloc qui demande une information.",
+      "le bloc “demander … et attendre” récupère la saisie de l’utilisateur.",
+      "c’est le bloc “demander … et attendre”."
+    ),
+    tags: ["algo_programmation", "entree", "qcm"],
+    canvas: scratchCanvas("Bloc demander", [
+      { type: "event" },
+      { type: "ask", text: "Quel est ton âge ?" },
+      { type: "say", text: "réponse" },
+    ]),
+  },
+  {
+    kind: "fixed",
+    id: "5e_algo_entree_sortie_fixed_x2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_entree_sortie",
+    difficulty: 3,
+    theme: "neutral",
+    text: "L’utilisateur saisit 7. Le programme multiplie par 2 puis affiche. Que montre-t-il ?",
+    format: "short",
+    expected: ["14"],
+    comparator: "number_equal",
+    hint: "Entrée × 2.",
+    explanation: expl(
+      "un programme transforme une entrée en sortie.",
+      "on applique le calcul à la valeur saisie.",
+      "7 × 2 = 14.",
+      "le programme affiche 14."
+    ),
+    tags: ["algo_programmation", "entree", "sortie"],
+    canvas: scratchCanvas("Entrée → ×2 → sortie", [
+      { type: "event" },
+      { type: "ask", text: "Choisis un nombre" },
+      { type: "set_variable", variable: "nombre", value: 7 },
+      { type: "operator", left: "nombre", operator: "×", right: 2 },
+      { type: "say", text: "résultat" },
+    ]),
+  },
+  {
+    kind: "template",
+    id: "5e_algo_entree_sortie_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_entree_sortie",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Suis la valeur étape par étape.",
+    tags: ["algo_programmation", "entree", "sortie", "template", "canvas"],
+    generate: () => {
+      const entree = randomChoice([3, 4, 6, 8]);
+      const facteur = randomChoice([2, 3, 5]);
+      const sortie = entree * facteur;
+      return {
+        text: `L’utilisateur répond ${entree}. Le programme multiplie par ${facteur} puis affiche. Quelle valeur s’affiche ?`,
+        format: "short",
+        expected: [String(sortie)],
+        comparator: "number_equal",
+        explanation: expl(
+          "un programme transforme une entrée en sortie.",
+          "on applique le calcul à la valeur saisie.",
+          `${entree} × ${facteur} = ${sortie}.`,
+          `le programme affiche ${sortie}.`
+        ),
+        canvas: scratchCanvas("Entrée → calcul → sortie", [
+          { type: "event" },
+          { type: "ask", text: "Choisis un nombre" },
+          { type: "set_variable", variable: "nombre", value: entree },
+          { type: "operator", left: "nombre", operator: "×", right: facteur },
+          { type: "say", text: "résultat" },
+        ]),
+      };
+    },
+  },
+
+  /* =========================
+     TOP-UP — ALGO_FORMULE_BLOC (+3)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_algo_formule_bloc_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_formule_bloc",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quel bloc opérateur traduit la formule « périmètre = côté × 4 » d’un carré ?",
+    format: "qcm",
+    choices: ["côté × 4", "côté + 4", "côté ÷ 4", "côté − 4"],
+    expected: ["côté × 4"],
+    comparator: "mcq_exact",
+    hint: "Le périmètre d’un carré est 4 fois le côté.",
+    explanation: expl(
+      "une formule peut se traduire par un bloc opérateur.",
+      "on identifie l’opération de la formule.",
+      "le périmètre d’un carré est côté × 4.",
+      "le bloc correct est “côté × 4”."
+    ),
+    tags: ["algo_programmation", "formule", "qcm"],
+    canvas: scratchCanvas("Formule du carré", [
+      { type: "event" },
+      { type: "operator", left: "côté", operator: "×", right: 4 },
+    ]),
+  },
+  {
+    kind: "fixed",
+    id: "5e_algo_formule_bloc_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_formule_bloc",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique comment traduire la formule « aire = longueur × largeur » avec des blocs.",
+    format: "open",
+    expected: ["opérateur", "multiplier", "longueur"],
+    comparator: "contains_keyword",
+    hint: "On utilise un bloc opérateur ×.",
+    explanation: expl(
+      "une formule se traduit par un assemblage de blocs opérateurs.",
+      "on relie les variables avec l’opérateur de la formule.",
+      "on place “longueur × largeur” dans un bloc opérateur de multiplication.",
+      "l’aire est donnée par le bloc “longueur × largeur”."
+    ),
+    tags: ["algo_programmation", "formule", "open"],
+  },
+  {
+    kind: "template",
+    id: "5e_algo_formule_bloc_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_formule_bloc",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Applique la formule du périmètre du carré.",
+    tags: ["algo_programmation", "formule", "template", "canvas"],
+    generate: () => {
+      const cote = randomChoice([3, 5, 6, 8, 10]);
+      const perimetre = cote * 4;
+      return {
+        text: `Le bloc calcule “côté × 4” pour le périmètre d’un carré. Si côté vaut ${cote}, quel est le périmètre ?`,
+        format: "short",
+        expected: [String(perimetre)],
+        comparator: "number_equal",
+        explanation: expl(
+          "une formule en blocs se calcule en remplaçant la variable.",
+          "on remplace côté par sa valeur dans le bloc opérateur.",
+          `${cote} × 4 = ${perimetre}.`,
+          `le périmètre est ${perimetre}.`
+        ),
+        canvas: scratchCanvas("Périmètre du carré", [
+          { type: "event" },
+          { type: "set_variable", variable: "côté", value: cote },
+          { type: "operator", left: "côté", operator: "×", right: 4 },
+        ]),
+      };
+    },
+  },
+
+  /* =========================
+     TOP-UP — ALGO_EXPRESSION_VALEUR (+3)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_algo_expression_valeur_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_expression_valeur",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Si x vaut 6, quelle est la valeur de x − 2 ?",
+    format: "short",
+    expected: ["4"],
+    comparator: "number_equal",
+    hint: "Remplace x par 6.",
+    explanation: expl(
+      "calculer une expression, c’est remplacer la variable par sa valeur.",
+      "on remplace x puis on calcule.",
+      "x − 2 = 6 − 2 = 4.",
+      "la valeur de l’expression est 4."
+    ),
+    tags: ["algo_programmation", "expression", "valeur"],
+    canvas: scratchCanvas("Valeur d’une expression", [
+      { type: "event" },
+      { type: "set_variable", variable: "x", value: 6 },
+      { type: "operator", left: "x", operator: "−", right: 2 },
+    ]),
+  },
+  {
+    kind: "fixed",
+    id: "5e_algo_expression_valeur_qcm_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_expression_valeur",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Si a vaut 3, quelle est la valeur de 2 × a + 1 ?",
+    format: "qcm",
+    choices: ["7", "6", "9", "8"],
+    expected: ["7"],
+    comparator: "mcq_exact",
+    hint: "Calcule d’abord 2 × a.",
+    explanation: expl(
+      "on calcule l’expression en remplaçant la variable.",
+      "on respecte la priorité de la multiplication.",
+      "2 × 3 + 1 = 6 + 1 = 7.",
+      "la valeur est 7."
+    ),
+    tags: ["algo_programmation", "expression", "valeur", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "5e_algo_expression_valeur_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_expression_valeur",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Remplace x puis calcule.",
+    tags: ["algo_programmation", "expression", "valeur", "template", "canvas"],
+    generate: () => {
+      const x = randomChoice([2, 3, 5, 6]);
+      const k = randomChoice([2, 3, 4]);
+      const result = k * x;
+      return {
+        text: `Si x vaut ${x}, quelle est la valeur de ${k} × x ?`,
+        format: "short",
+        expected: [String(result)],
+        comparator: "number_equal",
+        explanation: expl(
+          "on calcule l’expression en remplaçant x.",
+          "on multiplie le coefficient par la valeur de x.",
+          `${k} × ${x} = ${result}.`,
+          `la valeur de l’expression est ${result}.`
+        ),
+        canvas: scratchCanvas("Valeur d’une expression", [
+          { type: "event" },
+          { type: "set_variable", variable: "x", value: x },
+          { type: "operator", left: k, operator: "×", right: "x" },
+        ]),
+      };
+    },
+  },
+
+  /* =========================
+     TOP-UP — ALGO_PREVOIR_EXPRESSION (+4)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_algo_prevoir_expression_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_prevoir_expression",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un programme calcule x + 5. Que faut-il connaître pour prévoir le résultat ?",
+    format: "qcm",
+    choices: ["la valeur de x", "la couleur du lutin", "le nombre de blocs", "la taille de l’écran"],
+    expected: ["la valeur de x"],
+    comparator: "mcq_exact",
+    hint: "Le résultat dépend de la variable.",
+    explanation: expl(
+      "prévoir un résultat, c’est anticiper la sortie d’un calcul.",
+      "on identifie la variable dont dépend l’expression.",
+      "x + 5 dépend de la valeur de x.",
+      "il faut connaître la valeur de x."
+    ),
+    tags: ["algo_programmation", "prevoir", "expression", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "5e_algo_prevoir_expression_fixed_x2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_prevoir_expression",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Le programme calcule x × 3. Si x augmente, le résultat...",
+    format: "qcm",
+    choices: ["augmente", "diminue", "reste identique", "devient nul"],
+    expected: ["augmente"],
+    comparator: "mcq_exact",
+    hint: "Multiplier par 3 conserve le sens de variation.",
+    explanation: expl(
+      "prévoir, c’est anticiper l’effet d’une variation.",
+      "on observe comment le résultat change quand x change.",
+      "si x augmente, x × 3 augmente aussi.",
+      "le résultat augmente."
+    ),
+    tags: ["algo_programmation", "prevoir", "expression", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "5e_algo_prevoir_expression_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_prevoir_expression",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique comment prévoir la valeur affichée par un programme qui calcule x + 10.",
+    format: "open",
+    expected: ["valeur", "x", "remplace"],
+    comparator: "contains_keyword",
+    hint: "On remplace x par la valeur saisie.",
+    explanation: expl(
+      "prévoir, c’est calculer le résultat à l’avance.",
+      "on remplace la variable par la valeur d’entrée.",
+      "on calcule x + 10 avec la valeur de x choisie.",
+      "le résultat affiché est x + 10 pour la valeur de x donnée."
+    ),
+    tags: ["algo_programmation", "prevoir", "expression", "open"],
+  },
+  {
+    kind: "template",
+    id: "5e_algo_prevoir_expression_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_prevoir_expression",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Remplace x puis calcule.",
+    tags: ["algo_programmation", "prevoir", "expression", "template", "canvas"],
+    generate: () => {
+      const x = randomChoice([4, 5, 7, 9]);
+      const a = randomChoice([3, 6, 10]);
+      const result = x + a;
+      return {
+        text: `Le programme affiche x + ${a}. Si l’utilisateur saisit ${x}, quelle valeur sera affichée ?`,
+        format: "short",
+        expected: [String(result)],
+        comparator: "number_equal",
+        explanation: expl(
+          "prévoir, c’est calculer le résultat à l’avance.",
+          "on remplace x par la valeur saisie.",
+          `${x} + ${a} = ${result}.`,
+          `le programme affichera ${result}.`
+        ),
+        canvas: scratchCanvas("Prévoir une sortie", [
+          { type: "event" },
+          { type: "set_variable", variable: "x", value: x },
+          { type: "operator", left: "x", operator: "+", right: a },
+          { type: "say", text: "résultat" },
+        ]),
+      };
+    },
+  },
+
+  /* =========================
+     TOP-UP — ALGO_PARAMETRE (+3)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_algo_parametre_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_parametre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans le bloc “tourner de 90°”, quel est le paramètre ?",
+    format: "qcm",
+    choices: ["90°", "tourner", "le lutin", "le drapeau vert"],
+    expected: ["90°"],
+    comparator: "mcq_exact",
+    hint: "C’est la valeur que l’on peut changer.",
+    explanation: expl(
+      "un paramètre est une valeur modifiable dans un bloc.",
+      "on repère la valeur que l’on peut changer.",
+      "dans “tourner de 90°”, la valeur 90° est le paramètre.",
+      "le paramètre est 90°."
+    ),
+    tags: ["algo_programmation", "parametre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "5e_algo_parametre_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_parametre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique à quoi sert un paramètre dans un bloc Scratch.",
+    format: "open",
+    expected: ["valeur", "modifier", "bloc"],
+    comparator: "contains_keyword",
+    hint: "Il permet d’adapter le comportement du bloc.",
+    explanation: expl(
+      "un paramètre est une valeur que l’on peut régler dans un bloc.",
+      "on change le paramètre pour adapter l’action.",
+      "par exemple, changer la distance d’“avancer de …” modifie le déplacement.",
+      "le paramètre permet de modifier le comportement du bloc."
+    ),
+    tags: ["algo_programmation", "parametre", "open"],
+  },
+  {
+    kind: "template",
+    id: "5e_algo_parametre_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_parametre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Distance totale = répétitions × paramètre.",
+    tags: ["algo_programmation", "parametre", "boucle", "template", "canvas"],
+    generate: () => {
+      const times = randomChoice([3, 4, 5]);
+      const pas = randomChoice([15, 20, 30]);
+      const total = times * pas;
+      return {
+        text: `Une boucle répète ${times} fois “avancer de ${pas}”. Si on garde le même nombre de répétitions, quelle distance totale avec ce paramètre ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: expl(
+          "le paramètre “distance” agit à chaque répétition.",
+          "on multiplie le nombre de répétitions par le paramètre.",
+          `${times} × ${pas} = ${total}.`,
+          `la distance totale est ${total}.`
+        ),
+        canvas: scratchCanvas("Paramètre dans une boucle", [
+          { type: "event" },
+          { type: "repeat", times, children: [{ type: "move", value: pas }] },
+        ]),
+      };
+    },
+  },
+
+  /* =========================
+     TOP-UP — ALGO_TEST_CONDITION (+3)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_algo_test_condition_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_test_condition",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Le score vaut 8. La condition “si score > 10” est-elle vraie ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Compare 8 et 10.",
+    explanation: expl(
+      "une condition teste une comparaison.",
+      "on compare les deux nombres.",
+      "8 > 10 est faux.",
+      "la condition n’est pas vraie : “non”."
+    ),
+    tags: ["algo_programmation", "condition", "qcm"],
+    canvas: scratchCanvas("Tester une condition", [
+      { type: "event" },
+      { type: "set_variable", variable: "score", value: 8 },
+      { type: "if", condition: "score > 10", children: [{ type: "say", text: "Gagné" }] },
+    ]),
+  },
+  {
+    kind: "fixed",
+    id: "5e_algo_test_condition_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_test_condition",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique ce que fait un bloc “si … alors” en Scratch.",
+    format: "open",
+    expected: ["condition", "vraie", "exécute"],
+    comparator: "contains_keyword",
+    hint: "Le bloc à l’intérieur ne s’exécute pas toujours.",
+    explanation: expl(
+      "le bloc “si … alors” teste une condition.",
+      "on regarde si la condition est vraie ou fausse.",
+      "si la condition est vraie, les blocs à l’intérieur s’exécutent ; sinon ils sont ignorés.",
+      "le bloc “si” exécute son contenu seulement quand la condition est vraie."
+    ),
+    tags: ["algo_programmation", "condition", "open"],
+  },
+  {
+    kind: "template",
+    id: "5e_algo_test_condition_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_test_condition",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare les deux nombres.",
+    tags: ["algo_programmation", "condition", "template", "canvas"],
+    generate: () => {
+      const valeur = randomChoice([4, 7, 9, 12, 15]);
+      const limite = randomChoice([5, 8, 10]);
+      const vrai = valeur < limite;
+      return {
+        text: `La variable n vaut ${valeur}. La condition “si n < ${limite}” est-elle vraie ?`,
+        format: "qcm",
+        choices: shuffle(["oui", "non"]),
+        expected: [vrai ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation: expl(
+          "une condition teste une comparaison.",
+          "on compare n et la limite.",
+          `${valeur} < ${limite} est ${vrai ? "vrai" : "faux"}.`,
+          `la réponse est “${vrai ? "oui" : "non"}”.`
+        ),
+        canvas: scratchCanvas("Condition à tester", [
+          { type: "event" },
+          { type: "set_variable", variable: "n", value: valeur },
+          { type: "if", condition: `n < ${limite}`, children: [{ type: "say", text: "OK" }] },
+        ]),
+      };
+    },
+  },
+
+  /* =========================
+     TOP-UP — ALGO_BOUCLE (+3)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_algo_boucle_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_boucle",
+    difficulty: 2,
+    theme: "neutral",
+    text: "À quoi sert une boucle “répéter” dans un programme ?",
+    format: "qcm",
+    choices: [
+      "à répéter plusieurs fois les mêmes blocs",
+      "à arrêter le programme",
+      "à changer la couleur du lutin",
+      "à supprimer une variable",
+    ],
+    expected: ["à répéter plusieurs fois les mêmes blocs"],
+    comparator: "mcq_exact",
+    hint: "Boucle = répétition.",
+    explanation: expl(
+      "une boucle répète des instructions.",
+      "on identifie le rôle du bloc “répéter”.",
+      "le bloc “répéter” exécute plusieurs fois les blocs qu’il contient.",
+      "une boucle sert à répéter plusieurs fois les mêmes blocs."
+    ),
+    tags: ["algo_programmation", "boucle", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "5e_algo_boucle_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_boucle",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique l’avantage d’utiliser une boucle plutôt que de répéter les blocs à la main.",
+    format: "open",
+    expected: ["répéter", "court", "blocs"],
+    comparator: "contains_keyword",
+    hint: "Pense à la longueur du programme.",
+    explanation: expl(
+      "une boucle factorise des instructions répétées.",
+      "on compare un programme avec et sans boucle.",
+      "la boucle évite d’écrire plusieurs fois les mêmes blocs : le programme est plus court et plus clair.",
+      "la boucle rend le programme plus court à écrire."
+    ),
+    tags: ["algo_programmation", "boucle", "open"],
+  },
+  {
+    kind: "template",
+    id: "5e_algo_boucle_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_boucle",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Multiplie les répétitions par l’ajout.",
+    tags: ["algo_programmation", "boucle", "variable", "template", "canvas"],
+    generate: () => {
+      const debut = randomChoice([0, 5, 10]);
+      const ajout = randomChoice([2, 3, 5]);
+      const times = randomChoice([3, 4, 5]);
+      const final = debut + ajout * times;
+      return {
+        text: `La variable total vaut ${debut}. On ajoute ${ajout} à total pendant ${times} répétitions. Quelle est la valeur finale ?`,
+        format: "short",
+        expected: [String(final)],
+        comparator: "number_equal",
+        explanation: expl(
+          "une boucle répète l’ajout à chaque tour.",
+          "on calcule l’augmentation totale puis on l’ajoute au départ.",
+          `${debut} + ${ajout} × ${times} = ${debut} + ${ajout * times} = ${final}.`,
+          `total vaut ${final}.`
+        ),
+        canvas: scratchCanvas("Boucle et variable", [
+          { type: "event" },
+          { type: "set_variable", variable: "total", value: debut },
+          { type: "repeat", times, children: [{ type: "change_variable", variable: "total", value: ajout }] },
+          { type: "say", text: "total" },
+        ]),
+      };
+    },
+  },
+
+  /* =========================
+     TOP-UP — ALGO_DEFI (+5)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_algo_defi_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un programme : total = 0, puis répéter 4 fois (ajouter 5 à total). Quelle est la valeur finale de total ?",
+    format: "short",
+    expected: ["20"],
+    comparator: "number_equal",
+    hint: "4 × 5.",
+    explanation: expl(
+      "il faut suivre la variable dans la boucle.",
+      "on calcule l’augmentation totale.",
+      "4 répétitions de +5 : 4 × 5 = 20.",
+      "total vaut 20."
+    ),
+    tags: ["algo_programmation", "defi", "boucle"],
+    canvas: scratchCanvas("Boucle compteur", [
+      { type: "event" },
+      { type: "set_variable", variable: "total", value: 0 },
+      { type: "repeat", times: 4, children: [{ type: "change_variable", variable: "total", value: 5 }] },
+      { type: "say", text: "total" },
+    ]),
+  },
+  {
+    kind: "fixed",
+    id: "5e_algo_defi_qcm_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour tracer un pentagone régulier avec une boucle, combien de fois faut-il répéter “avancer puis tourner” ?",
+    format: "qcm",
+    choices: ["5", "4", "6", "3"],
+    expected: ["5"],
+    comparator: "mcq_exact",
+    hint: "Un pentagone a 5 côtés.",
+    explanation: expl(
+      "le nombre de répétitions correspond au nombre de côtés.",
+      "on compte les côtés du polygone.",
+      "un pentagone a 5 côtés.",
+      "il faut répéter 5 fois."
+    ),
+    tags: ["algo_programmation", "defi", "boucle", "geometrie", "qcm"],
+    canvas: scratchCanvas("Tracer un pentagone", [
+      { type: "event" },
+      { type: "repeat", times: 5, children: [{ type: "move", value: 50 }, { type: "turn", value: 72 }] },
+    ]),
+  },
+  {
+    kind: "fixed",
+    id: "5e_algo_defi_fixed_x2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un programme : x = 3, puis x devient 2 × x + 1. Quelle est la valeur finale de x ?",
+    format: "short",
+    expected: ["7"],
+    comparator: "number_equal",
+    hint: "2 × 3 + 1.",
+    explanation: expl(
+      "on suit la transformation de la variable.",
+      "on remplace x par sa valeur dans le calcul.",
+      "2 × 3 + 1 = 6 + 1 = 7.",
+      "x vaut 7."
+    ),
+    tags: ["algo_programmation", "defi", "expression"],
+  },
+  {
+    kind: "fixed",
+    id: "5e_algo_defi_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un élève dit : « Une boucle qui répète 0 fois exécute quand même les blocs une fois ». Explique son erreur.",
+    format: "open",
+    expected: ["0", "aucune", "exécute"],
+    comparator: "contains_keyword",
+    hint: "Combien de fois répète-t-on si le nombre est 0 ?",
+    explanation: expl(
+      "une boucle “répéter n fois” exécute les blocs exactement n fois.",
+      "on remplace n par 0.",
+      "répéter 0 fois signifie n’exécuter aucune fois les blocs.",
+      "l’élève se trompe : avec 0, les blocs ne sont pas exécutés."
+    ),
+    tags: ["algo_programmation", "defi", "boucle", "open", "erreur"],
+  },
+  {
+    kind: "template",
+    id: "5e_algo_defi_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Suis la variable étape par étape.",
+    tags: ["algo_programmation", "defi", "template", "canvas"],
+    generate: () => {
+      const debut = randomChoice([1, 2, 3]);
+      const ajout = randomChoice([4, 6, 10]);
+      const times = randomChoice([2, 3, 4]);
+      const final = debut + ajout * times;
+      return {
+        text: `score vaut ${debut}. On répète ${times} fois “ajouter ${ajout} à score”. Quelle est la valeur finale de score ?`,
+        format: "short",
+        expected: [String(final)],
+        comparator: "number_equal",
+        explanation: expl(
+          "on suit la variable dans la boucle.",
+          "on ajoute l’augmentation totale à la valeur de départ.",
+          `${debut} + ${ajout} × ${times} = ${debut} + ${ajout * times} = ${final}.`,
+          `score vaut ${final}.`
+        ),
+        canvas: scratchCanvas("Compteur", [
+          { type: "event" },
+          { type: "set_variable", variable: "score", value: debut },
+          { type: "repeat", times, children: [{ type: "change_variable", variable: "score", value: ajout }] },
+          { type: "say", text: "score" },
+        ]),
+      };
+    },
+  },
 ];
