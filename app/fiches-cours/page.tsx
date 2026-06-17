@@ -33,6 +33,14 @@ const fiches = [
     resume:
       "Calculer une longueur dans un triangle rectangle et vérifier qu'un triangle est rectangle.",
   },
+  {
+    href: "/fiches-cours/maths/5e/pourcentages",
+    niveau: "5e",
+    matiere: "Maths",
+    titre: "Les pourcentages",
+    resume:
+      "Calculer un pourcentage d'un nombre, une réduction ou une augmentation.",
+  },
 ];
 
 export default function FichesCoursPage() {
