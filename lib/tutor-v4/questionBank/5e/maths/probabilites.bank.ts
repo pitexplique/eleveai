@@ -97,6 +97,15 @@ function tableauCanvas(
   };
 }
 
+function expl(calcul: string) {
+  return (
+    "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
+    "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
+    calcul +
+    "\n\nConclusion : la probabilité obtenue répond à la question."
+  );
+}
+
 export const probabilitesBank: TutorBankItemV4[] = [
   // =========================
   // PROBA_VOCABULAIRE
@@ -935,6 +944,425 @@ export const probabilitesBank: TutorBankItemV4[] = [
           { label: "Bleu", poids: 1, couleur: couleurs.bleu },
           { label: "Vert", poids: 1, couleur: couleurs.vert },
         ]),
+      };
+    },
+  },
+
+  // =========================
+  // TOP-UP — PROBA_VOCABULAIRE (+5)
+  // =========================
+  {
+    kind: "fixed",
+    id: "proba_vocabulaire_fixed_3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Une probabilité est toujours un nombre compris entre :",
+    format: "qcm",
+    choices: ["0 et 1", "1 et 10", "0 et 100", "-1 et 1"],
+    expected: ["0 et 1"],
+    comparator: "mcq_exact",
+    hint: "Une probabilité ne dépasse jamais 1.",
+    explanation: expl("Une probabilité est toujours comprise entre 0 (impossible) et 1 (certain)."),
+    tags: ["proba_experience", "vocabulaire", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "proba_vocabulaire_fixed_4",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un événement qui ne peut jamais se produire a une probabilité de :",
+    format: "short",
+    expected: ["0"],
+    comparator: "number_equal",
+    hint: "Impossible = aucune chance.",
+    explanation: expl("Un événement impossible a une probabilité de 0."),
+    tags: ["proba_experience", "vocabulaire"],
+  },
+  {
+    kind: "fixed",
+    id: "proba_vocabulaire_fixed_5",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un événement certain a une probabilité de :",
+    format: "short",
+    expected: ["1"],
+    comparator: "number_equal",
+    hint: "Certain = se produit toujours.",
+    explanation: expl("Un événement certain a une probabilité de 1."),
+    tags: ["proba_experience", "vocabulaire"],
+  },
+  {
+    kind: "fixed",
+    id: "proba_vocabulaire_qcm_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Comment appelle-t-on l’ensemble des résultats possibles d’une expérience aléatoire ?",
+    format: "qcm",
+    choices: ["les issues", "les fréquences", "les moyennes", "les effectifs"],
+    expected: ["les issues"],
+    comparator: "mcq_exact",
+    hint: "Chaque résultat possible porte ce nom.",
+    explanation: expl("Les résultats possibles d’une expérience aléatoire s’appellent les issues."),
+    tags: ["proba_experience", "vocabulaire", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "proba_vocabulaire_open_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique la différence entre une issue et un événement.",
+    format: "open",
+    expected: ["issue", "événement", "résultat"],
+    comparator: "contains_keyword",
+    hint: "Un événement peut regrouper plusieurs issues.",
+    explanation: expl("Une issue est un seul résultat possible (ex. obtenir 4). Un événement peut regrouper plusieurs issues (ex. obtenir un nombre pair : 2, 4 ou 6)."),
+    tags: ["proba_experience", "vocabulaire", "open"],
+  },
+
+  // =========================
+  // TOP-UP — PROBA_ISSUE (+4)
+  // =========================
+  {
+    kind: "fixed",
+    id: "proba_issue_fixed_4",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_issue",
+    difficulty: 2,
+    theme: "neutral",
+    text: "On lance un dé. Combien y a-t-il d’issues favorables à « obtenir un nombre supérieur ou égal à 5 » ?",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
+    hint: "Liste les nombres concernés.",
+    explanation: expl("Les issues favorables sont 5 et 6 : il y en a 2."),
+    tags: ["proba_experience", "issue", "de"],
+    canvas: deCanvas([5, 6]),
+  },
+  {
+    kind: "fixed",
+    id: "proba_issue_qcm_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_issue",
+    difficulty: 2,
+    theme: "neutral",
+    text: "On tire une carte parmi les 4 as d’un jeu. Combien y a-t-il d’issues possibles ?",
+    format: "qcm",
+    choices: ["4", "2", "8", "52"],
+    expected: ["4"],
+    comparator: "mcq_exact",
+    hint: "Il y a 4 as.",
+    explanation: expl("Il y a 4 as, donc 4 issues possibles."),
+    tags: ["proba_experience", "issue", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "proba_issue_open_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_issue",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique la différence entre une issue favorable et une issue possible.",
+    format: "open",
+    expected: ["favorable", "possible", "événement"],
+    comparator: "contains_keyword",
+    hint: "Les favorables réalisent l’événement.",
+    explanation: expl("Les issues possibles sont tous les résultats de l’expérience. Les issues favorables sont celles qui réalisent l’événement demandé."),
+    tags: ["proba_experience", "issue", "open"],
+  },
+  {
+    kind: "template",
+    id: "proba_issue_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_issue",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compte les billes de la couleur demandée.",
+    tags: ["proba_experience", "issue", "billes", "template"],
+    generate: () => {
+      const rouges = randomInt(2, 5);
+      const bleues = randomInt(2, 5);
+      return {
+        text: `Un sac contient ${rouges} billes rouges et ${bleues} billes bleues. Combien y a-t-il d’issues favorables à « tirer une bille rouge » ?`,
+        format: "short",
+        expected: [String(rouges)],
+        comparator: "number_equal",
+        explanation: expl(`Il y a ${rouges} billes rouges : ${rouges} issues favorables.`),
+        canvas: billesCanvas([
+          ...Array.from({ length: rouges }, () => ({ couleur: couleurs.rouge, label: "R" })),
+          ...Array.from({ length: bleues }, () => ({ couleur: couleurs.bleu, label: "B" })),
+        ]),
+      };
+    },
+  },
+
+  // =========================
+  // TOP-UP — PROBA_EQUIPROBABILITE (+5)
+  // =========================
+  {
+    kind: "fixed",
+    id: "proba_equiprobabilite_fixed_4",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_equiprobabilite",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Lancer une pièce de monnaie équilibrée (pile ou face) est-il équiprobable ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Pile et face ont la même chance.",
+    explanation: expl("Oui : pile et face ont chacun une probabilité de 1/2, c’est équiprobable."),
+    tags: ["proba_experience", "equiprobabilite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "proba_equiprobabilite_fixed_5",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_equiprobabilite",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Dans une situation équiprobable à 5 issues, quelle est la probabilité de chaque issue ?",
+    format: "short",
+    expected: ["1/5"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Toutes les issues ont la même probabilité.",
+    explanation: expl("Avec 5 issues équiprobables, chaque issue a une probabilité de 1/5."),
+    tags: ["proba_experience", "equiprobabilite"],
+  },
+  {
+    kind: "fixed",
+    id: "proba_equiprobabilite_qcm_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_equiprobabilite",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelle situation est équiprobable ?",
+    format: "qcm",
+    choices: [
+      "un sac avec 3 billes rouges et 3 billes bleues",
+      "un sac avec 5 billes rouges et 1 bleue",
+      "une roue avec un grand secteur et un petit",
+      "un dé pipé",
+    ],
+    expected: ["un sac avec 3 billes rouges et 3 billes bleues"],
+    comparator: "mcq_exact",
+    hint: "Cherche des quantités égales.",
+    explanation: expl("Avec 3 billes rouges et 3 bleues, tirer rouge et tirer bleu ont la même probabilité : c’est équiprobable."),
+    tags: ["proba_experience", "equiprobabilite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "proba_equiprobabilite_open_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_equiprobabilite",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique ce que signifie « équiprobable ».",
+    format: "open",
+    expected: ["même", "chance", "issues"],
+    comparator: "contains_keyword",
+    hint: "Toutes les issues...",
+    explanation: expl("Une situation est équiprobable quand toutes les issues ont la même chance de se produire."),
+    tags: ["proba_experience", "equiprobabilite", "open"],
+  },
+  {
+    kind: "template",
+    id: "proba_equiprobabilite_tpl_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_equiprobabilite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compte les billes de chaque couleur.",
+    tags: ["proba_experience", "equiprobabilite", "billes", "template"],
+    generate: () => {
+      const equal = randomChoice([true, false]);
+      const rouges = 3;
+      const bleues = equal ? 3 : randomInt(1, 2);
+      return {
+        text: `Un sac contient ${rouges} billes rouges et ${bleues} billes bleues. Tirer rouge et tirer bleu sont-ils équiprobables ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [equal ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation: expl(
+          equal
+            ? `Il y a ${rouges} rouges et ${bleues} bleues : mêmes quantités, donc équiprobable.`
+            : `Il y a ${rouges} rouges et ${bleues} bleues : quantités différentes, donc pas équiprobable.`
+        ),
+        canvas: billesCanvas([
+          ...Array.from({ length: rouges }, () => ({ couleur: couleurs.rouge, label: "R" })),
+          ...Array.from({ length: bleues }, () => ({ couleur: couleurs.bleu, label: "B" })),
+        ]),
+      };
+    },
+  },
+
+  // =========================
+  // TOP-UP — PROBA_CALCULER (+2)
+  // =========================
+  {
+    kind: "fixed",
+    id: "proba_calculer_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_calculer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "On lance un dé équilibré. Quelle est la probabilité d’obtenir le nombre 3 ?",
+    format: "short",
+    expected: ["1/6"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "1 issue favorable sur 6 possibles.",
+    explanation: expl("Il y a 1 issue favorable (le 3) sur 6 issues possibles : la probabilité est 1/6."),
+    tags: ["proba_experience", "calculer", "de"],
+    canvas: deCanvas([3]),
+  },
+  {
+    kind: "template",
+    id: "proba_calculer_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_calculer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Probabilité = favorables ÷ total.",
+    tags: ["proba_experience", "calculer", "billes", "template"],
+    generate: () => {
+      const rouges = randomInt(1, 4);
+      const bleues = randomInt(1, 4);
+      const total = rouges + bleues;
+      return {
+        text: `Un sac contient ${rouges} bille(s) rouge(s) et ${bleues} bille(s) bleue(s). Quelle est la probabilité de tirer une bille rouge ?`,
+        format: "short",
+        expected: [rawFraction(rouges, total), fraction(rouges, total)],
+        comparator: "fraction_decimal_equivalent",
+        explanation: expl(`Il y a ${rouges} billes rouges sur ${total} au total : probabilité = ${rawFraction(rouges, total)}.`),
+        canvas: billesCanvas([
+          ...Array.from({ length: rouges }, () => ({ couleur: couleurs.rouge, label: "R" })),
+          ...Array.from({ length: bleues }, () => ({ couleur: couleurs.bleu, label: "B" })),
+        ]),
+      };
+    },
+  },
+
+  // =========================
+  // TOP-UP — PROBA_DEFI (+4)
+  // =========================
+  {
+    kind: "fixed",
+    id: "proba_defi_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "On lance un dé. Quelle est la probabilité de NE PAS obtenir 6 ?",
+    format: "short",
+    expected: ["5/6"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "5 issues sur 6 ne sont pas le 6.",
+    explanation: expl("Il y a 5 issues favorables (1, 2, 3, 4, 5) sur 6 : la probabilité est 5/6."),
+    tags: ["proba_experience", "defi", "de"],
+    canvas: deCanvas([1, 2, 3, 4, 5]),
+  },
+  {
+    kind: "fixed",
+    id: "proba_defi_qcm_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "La probabilité d’un événement est 3/10. Quelle est la probabilité de l’événement contraire ?",
+    format: "qcm",
+    choices: ["7/10", "3/10", "10/3", "1/10"],
+    expected: ["7/10"],
+    comparator: "mcq_exact",
+    hint: "Les deux probabilités font 1 au total.",
+    explanation: expl("Probabilité du contraire = 1 − 3/10 = 10/10 − 3/10 = 7/10."),
+    tags: ["proba_experience", "defi", "qcm", "contraire"],
+  },
+  {
+    kind: "fixed",
+    id: "proba_defi_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un élève dit : « La probabilité de tirer une bille rouge est 4 ». Explique pourquoi c’est impossible.",
+    format: "open",
+    expected: ["0", "1", "probabilité"],
+    comparator: "contains_keyword",
+    hint: "Une probabilité a des bornes.",
+    explanation: expl("Une probabilité est toujours comprise entre 0 et 1. La valeur 4 est impossible : l’élève a sûrement donné un effectif, pas une probabilité."),
+    tags: ["proba_experience", "defi", "open", "erreur"],
+  },
+  {
+    kind: "template",
+    id: "proba_defi_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Compte les issues favorables sur 6.",
+    tags: ["proba_experience", "defi", "de", "template"],
+    generate: () => {
+      const seuil = randomChoice([2, 3, 4]);
+      const favorables = 6 - seuil;
+      const faces = Array.from({ length: 6 }, (_, i) => i + 1).filter((n) => n > seuil);
+      return {
+        text: `On lance un dé. Quelle est la probabilité d’obtenir un nombre strictement supérieur à ${seuil} ?`,
+        format: "short",
+        expected: [rawFraction(favorables, 6), fraction(favorables, 6)],
+        comparator: "fraction_decimal_equivalent",
+        explanation: expl(`Les issues favorables sont ${faces.join(", ")} : ${favorables} sur 6, soit ${rawFraction(favorables, 6)}.`),
+        canvas: deCanvas(faces),
       };
     },
   },
