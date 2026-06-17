@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const fiches = [
   {
-    href: "/fiches-cours/proportionnalite-6e",
+    href: "/fiches-cours/maths/6e/proportionnalite",
     niveau: "6e",
     matiere: "Maths",
     titre: "Proportionnalite",
@@ -18,7 +18,7 @@ const fiches = [
       "Reconnaitre une situation proportionnelle, completer un tableau et revenir a l'unite.",
   },
   {
-    href: "/fiches-cours/cosinus-4e",
+    href: "/fiches-cours/maths/4e/cosinus",
     niveau: "4e",
     matiere: "Maths",
     titre: "Cosinus",

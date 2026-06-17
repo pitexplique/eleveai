@@ -10,6 +10,7 @@ import {
   Download,
   Lightbulb,
   Printer,
+  Sparkles,
 } from "lucide-react";
 
 const identite = [
@@ -63,10 +64,28 @@ const aRetenir = [
 ];
 
 const entrainement = [
-  "Dans un triangle rectangle, l'hypotenuse mesure 12 cm et un angle mesure 30 degres. Calcule le cote adjacent.",
-  "Dans un triangle rectangle, le cote adjacent mesure 8 cm et l'angle mesure 50 degres. Calcule l'hypotenuse.",
-  "Dans le triangle RST rectangle en S, RT = 15 cm et l'angle R vaut 42 degres. Calcule RS.",
-  "Explique pourquoi il faut d'abord reperer l'hypotenuse avant d'utiliser le cosinus.",
+  {
+    question:
+      "Dans un triangle rectangle, l'hypotenuse mesure 12 cm et un angle mesure 30 degres. Calcule le cote adjacent.",
+    correction: "adjacent = 12 x cos(30) = 12 x 0,866 = environ 10,4 cm.",
+  },
+  {
+    question:
+      "Dans un triangle rectangle, le cote adjacent mesure 8 cm et l'angle mesure 50 degres. Calcule l'hypotenuse.",
+    correction: "hypotenuse = 8 / cos(50) = 8 / 0,643 = environ 12,4 cm.",
+  },
+  {
+    question:
+      "Dans le triangle RST rectangle en S, RT = 15 cm et l'angle R vaut 42 degres. Calcule RS.",
+    correction:
+      "RS est l'adjacent a l'angle R et RT l'hypotenuse, donc RS = 15 x cos(42) = environ 11,1 cm.",
+  },
+  {
+    question:
+      "Explique pourquoi il faut d'abord reperer l'hypotenuse avant d'utiliser le cosinus.",
+    correction:
+      "Le cosinus est le rapport adjacent / hypotenuse. Sans reperer l'hypotenuse (le cote oppose a l'angle droit), on ne peut pas ecrire le bon rapport.",
+  },
 ];
 
 export default function CosinusQuatriemePage() {
@@ -322,11 +341,34 @@ export default function CosinusQuatriemePage() {
               <Calculator className="h-6 w-6 text-cyan-200 print:hidden" />
               Je m&apos;entraine
             </h2>
-            <ol className="mt-4 grid gap-3 text-sm leading-6 text-slate-300 print:gap-2 print:text-xs print:text-slate-700">
-              {entrainement.map((question) => (
-                <li key={question}>{question}</li>
+            <ol className="mt-4 grid gap-4 text-sm leading-6 text-slate-300 print:gap-2 print:text-xs print:text-slate-700">
+              {entrainement.map((item, index) => (
+                <li
+                  key={item.question}
+                  className="rounded-lg border border-white/10 bg-white/[0.03] p-4 print:border-slate-300 print:bg-white"
+                >
+                  <p className="font-bold text-slate-100 print:text-slate-900">
+                    {index + 1}. {item.question}
+                  </p>
+                  <details className="fiche-correction mt-2">
+                    <summary className="cursor-pointer text-sm font-bold text-cyan-200 print:text-slate-700">
+                      Voir la correction
+                    </summary>
+                    <p className="mt-2 rounded-md bg-cyan-300/10 p-3 text-sm leading-6 text-cyan-100 print:border print:border-slate-300 print:bg-white print:text-slate-700">
+                      {item.correction}
+                    </p>
+                  </details>
+                </li>
               ))}
             </ol>
+
+            <Link
+              href="/coach-ia/maths?classe=4e"
+              className="screen-only mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-cyan-300 px-5 py-3 text-sm font-black text-slate-950 shadow-lg shadow-cyan-950/40 transition hover:bg-cyan-200"
+            >
+              <Sparkles className="h-4 w-4" />
+              M&apos;entrainer avec le Coach IA
+            </Link>
           </section>
 
           <footer className="mt-8 flex items-center justify-between border-t border-white/10 pt-5 text-xs text-slate-400 print:mt-6 print:border-slate-300 print:text-slate-600">
@@ -374,6 +416,16 @@ export default function CosinusQuatriemePage() {
             min-height: auto !important;
             background: white !important;
             color: #020617 !important;
+          }
+
+          .fiche-correction > summary {
+            list-style: none;
+            font-weight: 700;
+            color: #475569 !important;
+          }
+
+          .fiche-correction > *:not(summary) {
+            display: block !important;
           }
         }
       `}</style>

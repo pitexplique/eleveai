@@ -10,6 +10,7 @@ import {
   Download,
   Lightbulb,
   Printer,
+  Sparkles,
 } from "lucide-react";
 
 const identite = [
@@ -47,10 +48,23 @@ const aRetenir = [
 ];
 
 const entrainement = [
-  "2 stylos coutent 4 euros. Combien coutent 7 stylos ?",
-  "5 tickets coutent 15 euros. Combien coutent 3 tickets ?",
-  "Pour 10 crepes, il faut 250 g de farine. Combien faut-il pour 20 crepes ?",
-  "Un cycliste parcourt 12 km en 30 min a vitesse reguliere. Quelle distance parcourt-il en 1 h ?",
+  {
+    question: "2 stylos coutent 4 euros. Combien coutent 7 stylos ?",
+    correction: "1 stylo coute 4 / 2 = 2 euros, donc 7 stylos coutent 7 x 2 = 14 euros.",
+  },
+  {
+    question: "5 tickets coutent 15 euros. Combien coutent 3 tickets ?",
+    correction: "1 ticket coute 15 / 5 = 3 euros, donc 3 tickets coutent 3 x 3 = 9 euros.",
+  },
+  {
+    question: "Pour 10 crepes, il faut 250 g de farine. Combien faut-il pour 20 crepes ?",
+    correction: "20 crepes, c'est 2 x 10 crepes, donc il faut 2 x 250 = 500 g de farine.",
+  },
+  {
+    question:
+      "Un cycliste parcourt 12 km en 30 min a vitesse reguliere. Quelle distance parcourt-il en 1 h ?",
+    correction: "1 h = 2 x 30 min, donc il parcourt 2 x 12 = 24 km.",
+  },
 ];
 
 export default function ProportionnaliteSixiemePage() {
@@ -301,11 +315,34 @@ export default function ProportionnaliteSixiemePage() {
               <Calculator className="h-6 w-6 text-emerald-200 print:hidden" />
               Je m&apos;entraine
             </h2>
-            <ol className="mt-4 grid gap-3 text-sm leading-6 text-slate-300 print:gap-2 print:text-xs print:text-slate-700">
-              {entrainement.map((question) => (
-                <li key={question}>{question}</li>
+            <ol className="mt-4 grid gap-4 text-sm leading-6 text-slate-300 print:gap-2 print:text-xs print:text-slate-700">
+              {entrainement.map((item, index) => (
+                <li
+                  key={item.question}
+                  className="rounded-lg border border-white/10 bg-white/[0.03] p-4 print:border-slate-300 print:bg-white"
+                >
+                  <p className="font-bold text-slate-100 print:text-slate-900">
+                    {index + 1}. {item.question}
+                  </p>
+                  <details className="fiche-correction mt-2">
+                    <summary className="cursor-pointer text-sm font-bold text-emerald-200 print:text-slate-700">
+                      Voir la correction
+                    </summary>
+                    <p className="mt-2 rounded-md bg-emerald-300/10 p-3 text-sm leading-6 text-emerald-100 print:border print:border-slate-300 print:bg-white print:text-slate-700">
+                      {item.correction}
+                    </p>
+                  </details>
+                </li>
               ))}
             </ol>
+
+            <Link
+              href="/coach-ia/maths?classe=6e"
+              className="screen-only mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-emerald-400 px-5 py-3 text-sm font-black text-slate-950 shadow-lg shadow-emerald-950/40 transition hover:bg-emerald-300"
+            >
+              <Sparkles className="h-4 w-4" />
+              M&apos;entrainer avec le Coach IA
+            </Link>
           </section>
 
           <footer className="mt-8 flex items-center justify-between border-t border-white/10 pt-5 text-xs text-slate-400 print:mt-6 print:border-slate-300 print:text-slate-600">
@@ -353,6 +390,16 @@ export default function ProportionnaliteSixiemePage() {
             min-height: auto !important;
             background: white !important;
             color: #020617 !important;
+          }
+
+          .fiche-correction > summary {
+            list-style: none;
+            font-weight: 700;
+            color: #475569 !important;
+          }
+
+          .fiche-correction > *:not(summary) {
+            display: block !important;
           }
         }
       `}</style>
