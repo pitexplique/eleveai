@@ -18,10 +18,11 @@ export function normalizeAnswer(value: string) {
 
 type NumberWithUnit = { num: number; unit: string };
 
-// « 190cm », « 190 cm », « 12 élèves », « -1.5 » → nombre + unité éventuelle.
-// L'unité doit être un seul mot (lettres, %, °, €, ², ³) : « 4 ou 5 » ne passe pas.
+// « 190cm », « 190 cm », « 12 élèves », « 25 cm² », « 8 m3 », « -1.5 » → nombre
+// + unité éventuelle. L'unité doit être un seul mot (lettres, chiffres pour les
+// exposants « cm2 », %, °, €, ², ³) : « 4 ou 5 » ne passe pas.
 function parseNumberWithUnit(value: string): NumberWithUnit | null {
-  const match = value.match(/^(-?\d+(?:\.\d+)?)\s*([a-zà-öø-ÿ€%°²³]{0,15})$/);
+  const match = value.match(/^(-?\d+(?:\.\d+)?)\s*([a-zà-öø-ÿ€%°²³0-9]{0,15})$/);
   if (!match) return null;
 
   const num = Number(match[1]);
@@ -33,12 +34,15 @@ function parseNumberWithUnit(value: string): NumberWithUnit | null {
 function sameUnit(userUnit: string, expectedUnit: string) {
   // Unité omise d'un côté : l'énoncé fixe déjà l'unité, on accepte.
   if (!userUnit || !expectedUnit) return true;
-  // Tolère le pluriel et les accents (« eleve » vs « élèves ») : c'est une
-  // unité, pas un exercice d'orthographe.
+  // Tolère le pluriel, les accents (« eleve » vs « élèves ») et les exposants
+  // tapés en chiffres (« cm2 » vs « cm² », « m3 » vs « m³ ») : c'est une unité,
+  // pas un exercice d'orthographe ni de saisie de caractères spéciaux.
   const strip = (u: string) =>
     u
       .normalize("NFD")
       .replace(/[̀-ͯ]/g, "")
+      .replace(/²/g, "2")
+      .replace(/³/g, "3")
       .replace(/s$/, "");
   return strip(userUnit) === strip(expectedUnit);
 }
