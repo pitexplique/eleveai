@@ -193,7 +193,7 @@ export default function CosinusQuatriemePage() {
                   <text x="151" y="166" fill="#e0f2fe" fontSize="17" fontWeight="800" textAnchor="middle">
                     adjacent
                   </text>
-                  <text x="172" y="84" fill="#e0f2fe" fontSize="17" fontWeight="800" textAnchor="middle">
+                  <text x="172" y="84" fill="#1d4ed8" fontSize="17" fontWeight="900" textAnchor="middle">
                     hypotenuse
                   </text>
                   <text x="244" y="118" fill="#fbcfe8" fontSize="18" fontWeight="900">
