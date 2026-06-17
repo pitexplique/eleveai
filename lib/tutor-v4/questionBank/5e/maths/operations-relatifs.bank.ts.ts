@@ -20,6 +20,15 @@ function asExpectedNumber(n: number): string[] {
   return [String(n), signed(n)];
 }
 
+function expl(calcul: string) {
+  return (
+    "Définition : les opérations sur les nombres relatifs utilisent les signes et les distances à zéro.\n\n" +
+    "Méthode : on applique la règle des signes, puis on calcule les distances à zéro.\n\nCalcul : " +
+    calcul +
+    "\n\nConclusion : le résultat obtenu est la bonne réponse."
+  );
+}
+
 export const operationsRelatifsBank: TutorBankItemV4[] = [
   // =========================
   // RELATIF_ADDITION
@@ -740,5 +749,354 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
           ("L’élève a traité -(-4) comme -4. Or soustraire -4 revient à ajouter 4 : -7 - (-4) = -7 + 4 = -3.") +
           "\n\nConclusion : le résultat obtenu est la bonne réponse.",
     tags: ["relatif", "open", "defi", "erreur"],
+  },
+
+  // =========================
+  // TOP-UP — RELATIF_ADDITION (+2)
+  // =========================
+  {
+    kind: "fixed",
+    id: "relatif_addition_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_addition",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Calcule : -8 + 8",
+    format: "short",
+    expected: ["0"],
+    comparator: "number_equal",
+    hint: "Deux nombres opposés.",
+    explanation: expl("-8 + 8 = 0 car ce sont deux nombres opposés."),
+    tags: ["relatif", "addition"],
+  },
+  {
+    kind: "template",
+    id: "relatif_addition_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_addition",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Même signe : on additionne les distances. Signes différents : on soustrait.",
+    tags: ["relatif", "addition", "template"],
+    generate: () => {
+      const a = randomChoice([-9, -7, -5, -3, 4, 6, 8]);
+      const b = randomChoice([-6, -4, -2, 3, 5, 7]);
+      const result = a + b;
+      return {
+        text: `Calcule : ${signed(a)} + ${withParens(b)}`,
+        format: "short",
+        expected: asExpectedNumber(result),
+        comparator: "number_equal",
+        explanation: expl(`${signed(a)} + ${withParens(b)} = ${signed(result)}.`),
+      };
+    },
+  },
+
+  // =========================
+  // TOP-UP — RELATIF_SOUSTRACTION (+1)
+  // =========================
+  {
+    kind: "template",
+    id: "relatif_soustraction_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_soustraction",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Soustraire un nombre, c’est ajouter son opposé.",
+    tags: ["relatif", "soustraction", "template"],
+    generate: () => {
+      const a = randomChoice([-8, -5, -3, 2, 4, 6]);
+      const b = randomChoice([-7, -4, -2, 3, 5]);
+      const result = a - b;
+      return {
+        text: `Calcule : ${signed(a)} - ${withParens(b)}`,
+        format: "short",
+        expected: asExpectedNumber(result),
+        comparator: "number_equal",
+        explanation: expl(`${signed(a)} - ${withParens(b)} = ${signed(a)} + ${signed(-b)} = ${signed(result)}.`),
+      };
+    },
+  },
+
+  // =========================
+  // TOP-UP — RELATIF_CALCUL (+4)
+  // =========================
+  {
+    kind: "fixed",
+    id: "relatif_calcul_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_calcul",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Calcule : 5 - 8 + 2",
+    format: "short",
+    expected: ["-1"],
+    comparator: "number_equal",
+    hint: "De gauche à droite.",
+    explanation: expl("5 - 8 = -3 puis -3 + 2 = -1."),
+    tags: ["relatif", "calcul"],
+  },
+  {
+    kind: "fixed",
+    id: "relatif_calcul_fixed_x2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_calcul",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Calcule : -3 - (-7) - 2",
+    format: "short",
+    expected: ["2", "+2"],
+    comparator: "number_equal",
+    hint: "Soustraire -7 revient à ajouter 7.",
+    explanation: expl("-3 - (-7) - 2 = -3 + 7 - 2 = 4 - 2 = 2."),
+    tags: ["relatif", "calcul", "parentheses"],
+  },
+  {
+    kind: "fixed",
+    id: "relatif_calcul_qcm_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_calcul",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Quel est le résultat de -10 + 4 - (-3) ?",
+    format: "qcm",
+    choices: ["-3", "-9", "3", "-17"],
+    expected: ["-3"],
+    comparator: "mcq_exact",
+    hint: "Transforme -(-3).",
+    explanation: expl("-10 + 4 - (-3) = -10 + 4 + 3 = -6 + 3 = -3."),
+    tags: ["relatif", "calcul", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "relatif_calcul_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_calcul",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Calcule de gauche à droite.",
+    tags: ["relatif", "calcul", "template"],
+    generate: () => {
+      const a = randomChoice([-7, -5, -3, 4, 6]);
+      const b = randomChoice([3, 5, 7, 9]);
+      const c = randomChoice([2, 4, 6, 8]);
+      const result = a - b + c;
+      return {
+        text: `Calcule : ${signed(a)} - ${b} + ${c}`,
+        format: "short",
+        expected: asExpectedNumber(result),
+        comparator: "number_equal",
+        explanation: expl(`${signed(a)} - ${b} = ${signed(a - b)} puis ${signed(a - b)} + ${c} = ${signed(result)}.`),
+      };
+    },
+  },
+
+  // =========================
+  // TOP-UP — RELATIF_PROBLEME (+5)
+  // =========================
+  {
+    kind: "fixed",
+    id: "relatif_probleme_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_probleme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un ascenseur est au niveau -2. Il monte de 5 étages. À quel niveau arrive-t-il ?",
+    format: "short",
+    expected: ["3", "+3"],
+    comparator: "number_equal",
+    hint: "Monter, c’est ajouter.",
+    explanation: expl("-2 + 5 = 3. L’ascenseur arrive au niveau 3."),
+    tags: ["relatif", "probleme"],
+  },
+  {
+    kind: "fixed",
+    id: "relatif_probleme_fixed_x2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_probleme",
+    difficulty: 4,
+    theme: "neutral",
+    text: "La température passe de -3 °C à 4 °C. De combien de degrés a-t-elle augmenté ?",
+    format: "short",
+    expected: ["7"],
+    comparator: "number_equal",
+    hint: "Différence : 4 - (-3).",
+    explanation: expl("Variation = 4 - (-3) = 4 + 3 = 7 °C."),
+    tags: ["relatif", "probleme", "temperature"],
+  },
+  {
+    kind: "fixed",
+    id: "relatif_probleme_qcm_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_probleme",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un compte est à -12 €. On dépense encore 4 €. Quel est le nouveau solde ?",
+    format: "qcm",
+    choices: ["-16 €", "-8 €", "8 €", "16 €"],
+    expected: ["-16 €"],
+    comparator: "mcq_exact",
+    hint: "Dépenser, c’est soustraire.",
+    explanation: expl("-12 - 4 = -16. Le nouveau solde est -16 €."),
+    tags: ["relatif", "probleme", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "relatif_probleme_fixed_x3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_probleme",
+    difficulty: 4,
+    theme: "reunion",
+    text: "Au Piton des Neiges, il fait -2 °C. La température baisse de 6 °C la nuit. Quelle est la température minimale ?",
+    format: "short",
+    expected: ["-8"],
+    comparator: "number_equal",
+    hint: "Baisser, c’est soustraire.",
+    explanation: expl("-2 - 6 = -8. La température minimale est -8 °C."),
+    tags: ["relatif", "probleme", "reunion", "temperature"],
+  },
+  {
+    kind: "template",
+    id: "relatif_probleme_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_probleme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Gagner = +, perdre = -.",
+    tags: ["relatif", "probleme", "template", "sport"],
+    generate: () => {
+      const perte = randomChoice([3, 5, 7, 9]);
+      const gain = randomChoice([4, 6, 8, 10]);
+      const result = -perte + gain;
+      return {
+        text: `Dans un jeu, un joueur perd ${perte} points puis gagne ${gain} points. Quelle est la variation totale de son score ?`,
+        format: "short",
+        expected: asExpectedNumber(result),
+        comparator: "number_equal",
+        explanation: expl(`Perdre ${perte} → -${perte} ; gagner ${gain} → +${gain}. Total : -${perte} + ${gain} = ${signed(result)} points.`),
+      };
+    },
+  },
+
+  // =========================
+  // TOP-UP — RELATIF_OPERATION_DEFI (+5)
+  // =========================
+  {
+    kind: "fixed",
+    id: "relatif_operation_defi_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_operation_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Calcule : -5 - (-8) + (-2) - 1",
+    format: "short",
+    expected: ["0"],
+    comparator: "number_equal",
+    hint: "Transforme les doubles signes puis calcule.",
+    explanation: expl("-5 - (-8) + (-2) - 1 = -5 + 8 - 2 - 1 = 3 - 2 - 1 = 0."),
+    tags: ["relatif", "operation_defi", "calcul"],
+  },
+  {
+    kind: "fixed",
+    id: "relatif_operation_defi_qcm_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_operation_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Quel est le résultat de (-3) + (-3) + (-3) ?",
+    format: "qcm",
+    choices: ["-9", "-6", "9", "0"],
+    expected: ["-9"],
+    comparator: "mcq_exact",
+    hint: "Trois fois -3.",
+    explanation: expl("(-3) + (-3) + (-3) = -9."),
+    tags: ["relatif", "operation_defi", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "relatif_operation_defi_fixed_x2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_operation_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Quel nombre faut-il ajouter à -6 pour obtenir 0 ?",
+    format: "short",
+    expected: ["6", "+6"],
+    comparator: "number_equal",
+    hint: "C’est l’opposé de -6.",
+    explanation: expl("Il faut ajouter l’opposé de -6, soit +6 : -6 + 6 = 0."),
+    tags: ["relatif", "operation_defi"],
+  },
+  {
+    kind: "fixed",
+    id: "relatif_operation_defi_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_operation_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique la règle « soustraire un nombre revient à ajouter son opposé » avec un exemple.",
+    format: "open",
+    expected: ["opposé", "ajouter", "soustraire"],
+    comparator: "contains_keyword",
+    hint: "Donne un exemple comme 5 - (-3).",
+    explanation: expl("Soustraire un nombre revient à ajouter son opposé. Par exemple 5 - (-3) = 5 + 3 = 8."),
+    tags: ["relatif", "operation_defi", "open"],
+  },
+  {
+    kind: "template",
+    id: "relatif_operation_defi_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_operation",
+    microId: "relatif_operation_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Simplifie les écritures à double signe.",
+    tags: ["relatif", "operation_defi", "template", "calcul"],
+    generate: () => {
+      const a = randomChoice([-6, -4, 3, 5]);
+      const b = randomChoice([-5, -3, 2, 4]);
+      const c = randomChoice([-4, -2, 3, 5]);
+      const result = a - b + c;
+      return {
+        text: `Calcule : ${signed(a)} - ${withParens(b)} + ${withParens(c)}`,
+        format: "short",
+        expected: asExpectedNumber(result),
+        comparator: "number_equal",
+        explanation: expl(`${signed(a)} - ${withParens(b)} + ${withParens(c)} = ${signed(result)}.`),
+      };
+    },
   },
 ];

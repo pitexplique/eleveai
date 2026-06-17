@@ -18,6 +18,36 @@ function uniqueNumbers(values: number[]): number[] {
   return Array.from(new Set(values));
 }
 
+function expl(calcul: string) {
+  return (
+    "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
+    "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
+    calcul +
+    "\n\nConclusion : le nombre relatif choisi répond à la question."
+  );
+}
+
+function numberLine(
+  points: { value: number; label: string }[],
+  min = -5,
+  max = 5
+) {
+  return {
+    kind: "number_line" as const,
+    min,
+    max,
+    step: 1,
+    points,
+    display: {
+      showTicks: true,
+      showValues: true,
+      showPoints: true,
+      showPointLabels: true,
+      showZero: true,
+    },
+  };
+}
+
 export const nombresRelatifsBank: TutorBankItemV4[] = [
   // =========================
   // RELATIF_LIRE
@@ -1476,5 +1506,383 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
           ("L’élève compare seulement 8 et 3, mais il oublie les signes. Sur une droite graduée, -3 est plus proche de 0 et se trouve à droite de -8. Donc -3 > -8.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
     tags: ["relatif", "open", "defi", "erreur"],
+  },
+
+  // =========================
+  // TOP-UP — RELATIF_LIRE (+3)
+  // =========================
+  {
+    kind: "fixed",
+    id: "relatif_lire_fixed_6",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_lire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Écris avec son signe : 12 au-dessous de zéro.",
+    format: "short",
+    expected: ["-12"],
+    comparator: "number_equal",
+    hint: "Au-dessous de zéro → signe -.",
+    explanation: expl("Un nombre au-dessous de zéro est négatif : on écrit -12."),
+    tags: ["relatif", "lecture", "negatif"],
+  },
+  {
+    kind: "fixed",
+    id: "relatif_lire_qcm_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_lire",
+    difficulty: 2,
+    theme: "reunion",
+    text: "Un plongeur descend à 15 m sous le niveau de la mer. Quelle altitude relative ?",
+    format: "qcm",
+    choices: ["-15 m", "+15 m", "15 m", "0 m"],
+    expected: ["-15 m"],
+    comparator: "mcq_exact",
+    hint: "Sous le niveau de la mer → négatif.",
+    explanation: expl("Sous le niveau de la mer, l’altitude est négative : -15 m."),
+    tags: ["relatif", "lecture", "reunion", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "relatif_lire_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_lire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Au-dessus → +, au-dessous → -.",
+    tags: ["relatif", "lecture", "template"],
+    generate: () => {
+      const n = shuffle([3, 5, 6, 8, 9, 11])[0];
+      const dessous = shuffle([true, false])[0];
+      return {
+        text: `Écris avec son signe : ${n} ${dessous ? "au-dessous" : "au-dessus"} de zéro.`,
+        format: "short",
+        expected: dessous ? [`-${n}`] : [`+${n}`, `${n}`],
+        comparator: "number_equal",
+        explanation: expl(
+          dessous
+            ? `Au-dessous de zéro → négatif : -${n}.`
+            : `Au-dessus de zéro → positif : +${n}.`
+        ),
+      };
+    },
+  },
+
+  // =========================
+  // TOP-UP — RELATIF_SIGNE (+4)
+  // =========================
+  {
+    kind: "fixed",
+    id: "relatif_signe_fixed_5",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_signe",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Le nombre -14 est-il positif ou négatif ?",
+    format: "qcm",
+    choices: ["positif", "négatif"],
+    expected: ["négatif"],
+    comparator: "mcq_exact",
+    hint: "Regarde le signe.",
+    explanation: expl("Le signe - indique que -14 est négatif."),
+    tags: ["relatif", "signe", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "relatif_signe_fixed_6",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_signe",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un nombre situé à droite de 0 sur une droite graduée est ...",
+    format: "short",
+    expected: ["positif"],
+    comparator: "contains_keyword",
+    hint: "À droite de 0.",
+    explanation: expl("À droite de 0, les nombres sont positifs."),
+    tags: ["relatif", "signe"],
+  },
+  {
+    kind: "fixed",
+    id: "relatif_signe_qcm_3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_signe",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Parmi ces nombres, lequel est positif ?",
+    format: "qcm",
+    choices: ["+5", "-2", "-9", "-1"],
+    expected: ["+5"],
+    comparator: "mcq_exact",
+    hint: "Le signe + (ou aucun signe).",
+    explanation: expl("Seul +5 porte le signe + : c’est le nombre positif."),
+    tags: ["relatif", "signe", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "relatif_signe_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_signe",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le signe donne la réponse.",
+    tags: ["relatif", "signe", "template"],
+    generate: () => {
+      const n = shuffle([-12, -7, -3, 4, 6, 9])[0];
+      return {
+        text: `Le nombre ${formatSigned(n)} est-il positif ou négatif ?`,
+        format: "qcm",
+        choices: ["positif", "négatif"],
+        expected: [n < 0 ? "négatif" : "positif"],
+        comparator: "mcq_exact",
+        explanation: expl(
+          n < 0
+            ? `${formatSigned(n)} porte le signe -, il est négatif.`
+            : `${formatSigned(n)} porte le signe +, il est positif.`
+        ),
+      };
+    },
+  },
+
+  // =========================
+  // TOP-UP — RELATIF_OPPOSE (+4)
+  // =========================
+  {
+    kind: "fixed",
+    id: "relatif_oppose_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_oppose",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quel est l’opposé de +9 ?",
+    format: "short",
+    expected: ["-9"],
+    comparator: "number_equal",
+    hint: "On change le signe.",
+    explanation: expl("L’opposé de +9 est -9."),
+    tags: ["relatif", "oppose"],
+  },
+  {
+    kind: "fixed",
+    id: "relatif_oppose_fixed_x2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_oppose",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quel est l’opposé de -15 ?",
+    format: "short",
+    expected: ["+15", "15"],
+    comparator: "number_equal",
+    hint: "On change le signe.",
+    explanation: expl("L’opposé de -15 est +15."),
+    tags: ["relatif", "oppose"],
+  },
+  {
+    kind: "fixed",
+    id: "relatif_oppose_qcm_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_oppose",
+    difficulty: 2,
+    theme: "neutral",
+    text: "La somme d’un nombre et de son opposé vaut :",
+    format: "qcm",
+    choices: ["0", "1", "le double", "le nombre lui-même"],
+    expected: ["0"],
+    comparator: "mcq_exact",
+    hint: "Essaie +5 et -5.",
+    explanation: expl("Un nombre plus son opposé donne toujours 0 (ex. +5 + (-5) = 0)."),
+    tags: ["relatif", "oppose", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "relatif_oppose_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_oppose",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "On change uniquement le signe.",
+    tags: ["relatif", "oppose", "template"],
+    generate: () => {
+      const n = shuffle([-13, -8, -4, 6, 10, 14])[0];
+      const oppose = -n;
+      return {
+        text: `Quel est l’opposé de ${formatSigned(n)} ?`,
+        format: "short",
+        expected: oppose > 0 ? [`+${oppose}`, `${oppose}`] : [`${oppose}`],
+        comparator: "number_equal",
+        explanation: expl(`On change le signe : l’opposé de ${formatSigned(n)} est ${formatSigned(oppose)}.`),
+      };
+    },
+  },
+
+  // =========================
+  // TOP-UP — RELATIF_COMPARER (+1)
+  // =========================
+  {
+    kind: "fixed",
+    id: "relatif_comparer_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_comparer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Complète avec > ou < : -2 ... -6",
+    format: "short",
+    expected: [">"],
+    comparator: "exact_text",
+    hint: "Le plus grand des négatifs est le plus proche de 0.",
+    explanation: expl("-2 est plus proche de 0 que -6, donc -2 > -6."),
+    tags: ["relatif", "comparer"],
+  },
+
+  // =========================
+  // TOP-UP — RELATIF_PLACER (+3)
+  // =========================
+  {
+    kind: "fixed",
+    id: "relatif_placer_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_placer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est l’abscisse du point C ?",
+    format: "short",
+    expected: ["3"],
+    comparator: "number_equal",
+    hint: "Lis le nombre sous le point C.",
+    explanation: expl("Le point C est placé au-dessus de 3 : son abscisse est 3."),
+    tags: ["relatif", "placement", "abscisse", "canvas"],
+    canvas: numberLine([
+      { value: -4, label: "A" },
+      { value: -1, label: "B" },
+      { value: 3, label: "C" },
+    ]),
+  },
+  {
+    kind: "fixed",
+    id: "relatif_placer_qcm_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_placer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quel point correspond au nombre -2 ?",
+    format: "qcm",
+    choices: ["A", "B", "C", "D"],
+    expected: ["B"],
+    comparator: "mcq_exact",
+    hint: "Cherche le point au-dessus de -2.",
+    explanation: expl("Le point B est placé au-dessus de -2."),
+    tags: ["relatif", "placement", "qcm", "canvas"],
+    canvas: numberLine([
+      { value: -5, label: "A" },
+      { value: -2, label: "B" },
+      { value: 1, label: "C" },
+      { value: 4, label: "D" },
+    ]),
+  },
+  {
+    kind: "fixed",
+    id: "relatif_placer_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_placer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique comment placer le nombre -4 sur une droite graduée.",
+    format: "open",
+    expected: ["gauche", "zéro", "4"],
+    comparator: "contains_keyword",
+    hint: "On part de 0 vers la gauche.",
+    explanation: expl("On part de 0 et on compte 4 graduations vers la gauche : on arrive au point d’abscisse -4."),
+    tags: ["relatif", "placement", "open"],
+  },
+
+  // =========================
+  // TOP-UP — RELATIF_VALEUR_ABSOLUE (+3)
+  // =========================
+  {
+    kind: "fixed",
+    id: "relatif_valeur_absolue_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_valeur_absolue",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quelle est la valeur absolue de -12 ?",
+    format: "short",
+    expected: ["12"],
+    comparator: "number_equal",
+    hint: "C’est la distance à 0.",
+    explanation: expl("La valeur absolue de -12 est sa distance à 0, soit 12."),
+    tags: ["relatif", "valeur_absolue"],
+  },
+  {
+    kind: "fixed",
+    id: "relatif_valeur_absolue_qcm_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_valeur_absolue",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Deux nombres opposés ont-ils la même valeur absolue ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Ils sont à la même distance de 0.",
+    explanation: expl("Oui : deux nombres opposés (ex. -5 et +5) sont à la même distance de 0, donc même valeur absolue."),
+    tags: ["relatif", "valeur_absolue", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "relatif_valeur_absolue_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_valeur_absolue",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Valeur absolue = distance à 0 (toujours positive).",
+    tags: ["relatif", "valeur_absolue", "template"],
+    generate: () => {
+      const n = shuffle([-15, -11, -8, -6, 7, 13])[0];
+      return {
+        text: `Quelle est la valeur absolue de ${formatSigned(n)} ?`,
+        format: "short",
+        expected: [String(Math.abs(n))],
+        comparator: "number_equal",
+        explanation: expl(`La valeur absolue de ${formatSigned(n)} est sa distance à 0, soit ${Math.abs(n)}.`),
+      };
+    },
   },
 ];
