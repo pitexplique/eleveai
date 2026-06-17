@@ -1676,9 +1676,9 @@ function handleInputKeyDown(
                       </div>
                     ) : null}
 
-                    <p className={`leading-6 text-slate-900 ${boardQuestionClass}`}>
+                    <MarkdownMath className={`leading-6 text-slate-900 ${boardQuestionClass}`}>
                       {option.text}
-                    </p>
+                    </MarkdownMath>
 
                     {option.audioSrc ? (
                       <div

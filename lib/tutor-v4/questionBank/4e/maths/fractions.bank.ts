@@ -2022,7 +2022,7 @@ export const fractionsBank: TutorBankItemV4[] = [
         explanation:
           "Définition : pour additionner, il faut un dénominateur commun.\n\n" +
           `Méthode : on transforme $\\frac{${a}}{${d1}}$ en $\\frac{${a * k}}{${d2}}$.\n\n` +
-          `Calcul : $\\frac{${a * k}}{${d2}} + \\frac{${b}}{${d2}} = \\frac{${num}}{${d2}} = ${correct}$.\n\n` +
+          `Calcul : $\\frac{${a * k}}{${d2}} + \\frac{${b}}{${d2}} = \\frac{${num}}{${d2}} = ${correct.slice(1, -1)}$.\n\n` +
           `Conclusion : le résultat est ${correct}.`,
       };
     },
@@ -2058,7 +2058,7 @@ export const fractionsBank: TutorBankItemV4[] = [
         explanation:
           "Définition : à dénominateur égal, on additionne les numérateurs.\n\n" +
           "Méthode : on garde le dénominateur commun.\n\n" +
-          `Calcul : $\\frac{${a}}{${d}} + \\frac{${b}}{${d}} = \\frac{${a + b}}{${d}} = ${correct}$.\n\n` +
+          `Calcul : $\\frac{${a}}{${d}} + \\frac{${b}}{${d}} = \\frac{${a + b}}{${d}} = ${correct.slice(1, -1)}$.\n\n` +
           `Conclusion : le résultat est ${correct}.`,
       };
     },
@@ -2097,7 +2097,7 @@ export const fractionsBank: TutorBankItemV4[] = [
         explanation:
           "Définition : pour additionner, il faut un dénominateur commun.\n\n" +
           `Méthode : on prend ${denom} comme dénominateur commun.\n\n` +
-          `Calcul : $\\frac{${a * d2}}{${denom}} + \\frac{${b * d1}}{${denom}} = \\frac{${num}}{${denom}} = ${correct}$.\n\n` +
+          `Calcul : $\\frac{${a * d2}}{${denom}} + \\frac{${b * d1}}{${denom}} = \\frac{${num}}{${denom}} = ${correct.slice(1, -1)}$.\n\n` +
           `Conclusion : le résultat est ${correct}.`,
       };
     },
@@ -2202,7 +2202,7 @@ export const fractionsBank: TutorBankItemV4[] = [
         explanation:
           "Définition : pour multiplier deux fractions, on multiplie les numérateurs et les dénominateurs.\n\n" +
           "Méthode : on calcule puis on simplifie.\n\n" +
-          `Calcul : $\\frac{${a}}{${b}} \\times \\frac{${c}}{${d}} = \\frac{${a * c}}{${b * d}} = ${correct}$.\n\n` +
+          `Calcul : $\\frac{${a}}{${b}} \\times \\frac{${c}}{${d}} = \\frac{${a * c}}{${b * d}} = ${correct.slice(1, -1)}$.\n\n` +
           `Conclusion : le résultat est ${correct}.`,
       };
     },
@@ -2238,7 +2238,7 @@ export const fractionsBank: TutorBankItemV4[] = [
         explanation:
           "Définition : multiplier une fraction par un entier multiplie le numérateur.\n\n" +
           `Méthode : $\\frac{${a}}{${b}} \\times ${k} = \\frac{${a} \\times ${k}}{${b}}$.\n\n` +
-          `Calcul : $= \\frac{${a * k}}{${b}} = ${correct}$.\n\n` +
+          `Calcul : $= \\frac{${a * k}}{${b}} = ${correct.slice(1, -1)}$.\n\n` +
           `Conclusion : le résultat est ${correct}.`,
       };
     },
@@ -2564,7 +2564,7 @@ export const fractionsBank: TutorBankItemV4[] = [
         explanation:
           "Définition : diviser par une fraction revient à multiplier par son inverse.\n\n" +
           `Méthode : $\\frac{${a}}{${b}} \\div \\frac{${c}}{${d}} = \\frac{${a}}{${b}} \\times \\frac{${d}}{${c}}$.\n\n` +
-          `Calcul : $= \\frac{${a * d}}{${b * c}} = ${correct}$.\n\n` +
+          `Calcul : $= \\frac{${a * d}}{${b * c}} = ${correct.slice(1, -1)}$.\n\n` +
           `Conclusion : le résultat est ${correct}.`,
       };
     },
@@ -2600,7 +2600,7 @@ export const fractionsBank: TutorBankItemV4[] = [
         explanation:
           "Définition : diviser par un entier n, c’est multiplier par $\\frac{1}{n}$.\n\n" +
           `Méthode : $\\frac{${a}}{${b}} \\div ${k} = \\frac{${a}}{${b}} \\times \\frac{1}{${k}}$.\n\n` +
-          `Calcul : $= \\frac{${a}}{${b * k}} = ${correct}$.\n\n` +
+          `Calcul : $= \\frac{${a}}{${b * k}} = ${correct.slice(1, -1)}$.\n\n` +
           `Conclusion : le résultat est ${correct}.`,
       };
     },
