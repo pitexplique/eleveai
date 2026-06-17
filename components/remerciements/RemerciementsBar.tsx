@@ -1,12 +1,18 @@
+"use client";
+
 // components/remerciements/RemerciementsBar.tsx
 
+import { usePathname } from "next/navigation";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
 
 export default function RemerciementsBar() {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/fiches-cours")) return null;
   if (elevesRemercies.length === 0) return null;
 
   return (
-    <section className="w-full border-t border-yellow-300/20 bg-[#171b2b] px-4 py-4 text-white shadow-[0_-10px_30px_rgba(0,0,0,0.25)] backdrop-blur-md">
+    <section className="remerciements-bar w-full border-t border-yellow-300/20 bg-[#171b2b] px-4 py-4 text-white shadow-[0_-10px_30px_rgba(0,0,0,0.25)] backdrop-blur-md">
       <div className="mx-auto max-w-7xl text-center">
         <p className="mb-3 text-sm font-black uppercase tracking-[0.18em] text-yellow-300">
           Remerciements

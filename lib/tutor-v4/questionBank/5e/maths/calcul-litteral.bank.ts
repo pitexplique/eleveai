@@ -17,6 +17,15 @@ function formatSigned(n: number): string {
   return n >= 0 ? `+${n}` : `${n}`;
 }
 
+function expl(calcul: string) {
+  return (
+    "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
+    "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
+    calcul +
+    "\n\nConclusion : l’expression obtenue répond à la question."
+  );
+}
+
 export const calculLitteralBank: TutorBankItemV4[] = [
   // =========================
   // LITTERAL_EXPRESSION
@@ -1007,5 +1016,206 @@ export const calculLitteralBank: TutorBankItemV4[] = [
           ("L’élève confond addition et multiplication. Dans 2x + 3x, on additionne seulement les coefficients : 2 + 3 = 5. Donc 2x + 3x = 5x, pas 5x².") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["litteral_calcul", "open", "defi", "erreur"],
+  },
+
+  // =========================
+  // TOP-UP — LITTERAL_EXPRESSION_COMPRENDRE (+3)
+  // =========================
+  {
+    kind: "fixed",
+    id: "litteral_expression_comprendre_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_expression_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Dans l’expression 4x + 7, quel est le coefficient de x ?",
+    format: "short",
+    expected: ["4"],
+    comparator: "number_equal",
+    hint: "Le coefficient est le nombre collé à la lettre.",
+    explanation: expl("Dans 4x + 7, le nombre collé à x est 4 : c’est le coefficient de x."),
+    tags: ["litteral_calcul", "expression"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_expression_comprendre_qcm_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_expression_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Que signifie l’écriture « ab » ?",
+    format: "qcm",
+    choices: ["a × b", "a + b", "a − b", "a ÷ b"],
+    expected: ["a × b"],
+    comparator: "mcq_exact",
+    hint: "Deux lettres collées indiquent une multiplication.",
+    explanation: expl("Deux lettres collées signifient une multiplication : ab = a × b."),
+    tags: ["litteral_calcul", "expression", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_expression_comprendre_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_expression_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Explique pourquoi on peut écrire 3 × x plus simplement.",
+    format: "open",
+    expected: ["3x", "signe", "multiplication"],
+    comparator: "contains_keyword",
+    hint: "On peut supprimer le signe ×.",
+    explanation: expl("Quand un nombre multiplie une lettre, on supprime le signe × : 3 × x s’écrit 3x."),
+    tags: ["litteral_calcul", "expression", "open"],
+  },
+
+  // =========================
+  // TOP-UP — LITTERAL_TRADUIRE (+3)
+  // =========================
+  {
+    kind: "fixed",
+    id: "litteral_traduire_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_traduire",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Traduis par une expression littérale : « un nombre x diminué de 7 »",
+    format: "short",
+    expected: ["x-7", "x - 7"],
+    comparator: "contains_keyword",
+    hint: "Diminuer, c’est soustraire.",
+    explanation: expl("« diminué de 7 » se traduit par − 7 : l’expression est x − 7."),
+    tags: ["litteral_calcul", "traduire"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_traduire_qcm_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_traduire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle expression traduit « le triple de x » ?",
+    format: "qcm",
+    choices: ["3x", "x+3", "x/3", "x-3"],
+    expected: ["3x"],
+    comparator: "mcq_exact",
+    hint: "Triple = ×3.",
+    explanation: expl("Le triple de x est 3 × x, c’est-à-dire 3x."),
+    tags: ["litteral_calcul", "traduire", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "litteral_traduire_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_traduire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Augmenter, c’est ajouter.",
+    tags: ["litteral_calcul", "traduire", "template"],
+    generate: () => {
+      const n = randomInt(2, 9);
+      return {
+        text: `Traduis par une expression littérale : « un nombre n augmenté de ${n} »`,
+        format: "short",
+        expected: [`n+${n}`, `n + ${n}`],
+        comparator: "contains_keyword",
+        explanation: expl(`« augmenté de ${n} » se traduit par + ${n} : l’expression est n + ${n}.`),
+      };
+    },
+  },
+
+  // =========================
+  // TOP-UP — LITTERAL_SUBSTITUER (+3)
+  // =========================
+  {
+    kind: "fixed",
+    id: "litteral_substituer_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_substituer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Calcule la valeur de 5x pour x = 3.",
+    format: "short",
+    expected: ["15"],
+    comparator: "number_equal",
+    hint: "5 × 3.",
+    explanation: expl("5x = 5 × 3 = 15."),
+    tags: ["litteral_calcul", "substituer"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_substituer_fixed_x2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_substituer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Calcule la valeur de 4x − 5 pour x = 2.",
+    format: "short",
+    expected: ["3", "+3"],
+    comparator: "number_equal",
+    hint: "Remplace x par 2 puis calcule.",
+    explanation: expl("4x − 5 = 4 × 2 − 5 = 8 − 5 = 3."),
+    tags: ["litteral_calcul", "substituer"],
+  },
+  {
+    kind: "template",
+    id: "litteral_substituer_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_substituer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Remplace x puis effectue le calcul.",
+    tags: ["litteral_calcul", "substituer", "template"],
+    generate: () => {
+      const a = randomInt(2, 6);
+      const b = randomInt(1, 9);
+      const x = randomInt(2, 7);
+      const result = a * x + b;
+      return {
+        text: `Calcule la valeur de ${a}x + ${b} pour x = ${x}.`,
+        format: "short",
+        expected: [String(result), formatSigned(result)],
+        comparator: "number_equal",
+        explanation: expl(`${a}x + ${b} = ${a} × ${x} + ${b} = ${a * x} + ${b} = ${result}.`),
+      };
+    },
+  },
+
+  // =========================
+  // TOP-UP — LITTERAL_REDUIRE (+1)
+  // =========================
+  {
+    kind: "fixed",
+    id: "litteral_reduire_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_reduire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Réduis : 2x + 5x",
+    format: "short",
+    expected: ["7x", "7*x", "7 x"],
+    comparator: "contains_keyword",
+    hint: "On additionne les coefficients de x.",
+    explanation: expl("On additionne les coefficients : 2 + 5 = 7, donc 2x + 5x = 7x."),
+    tags: ["litteral_calcul", "reduire"],
   },
 ];

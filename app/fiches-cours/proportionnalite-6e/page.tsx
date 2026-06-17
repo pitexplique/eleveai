@@ -35,8 +35,30 @@ const entrainement = [
 
 export default function ProportionnaliteSixiemePage() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="screen-only border-b border-white/10 bg-slate-900">
+    <main className="relative isolate min-h-screen overflow-hidden bg-[#07111f] text-slate-100">
+      <div
+        aria-hidden="true"
+        className="screen-only pointer-events-none absolute inset-0 -z-10"
+      >
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(125,211,252,0.08)_1px,transparent_1px),linear-gradient(0deg,rgba(125,211,252,0.08)_1px,transparent_1px)] bg-[size:34px_34px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(16,185,129,0.24),transparent_32%),linear-gradient(225deg,rgba(251,191,36,0.18),transparent_28%),linear-gradient(315deg,rgba(56,189,248,0.18),transparent_34%)]" />
+        <div className="absolute left-0 top-24 h-24 w-full -rotate-3 bg-cyan-300/10" />
+        <div className="absolute bottom-24 right-0 h-28 w-full rotate-2 bg-emerald-300/10" />
+        <div className="absolute left-8 top-40 rounded-md border border-white/10 bg-white/10 px-4 py-2 text-3xl font-black text-cyan-100/40 shadow-lg shadow-slate-950/20">
+          x2
+        </div>
+        <div className="absolute right-10 top-52 rounded-md border border-white/10 bg-white/10 px-4 py-2 text-3xl font-black text-amber-100/45 shadow-lg shadow-slate-950/20">
+          %
+        </div>
+        <div className="absolute bottom-44 left-12 rounded-md border border-white/10 bg-white/10 px-4 py-2 text-2xl font-black text-emerald-100/45 shadow-lg shadow-slate-950/20">
+          1 {">"} 4
+        </div>
+        <div className="absolute bottom-60 right-16 rounded-md border border-white/10 bg-white/10 px-4 py-2 text-2xl font-black text-pink-100/40 shadow-lg shadow-slate-950/20">
+          =
+        </div>
+      </div>
+
+      <div className="screen-only border-b border-white/10 bg-slate-950/70 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl flex-col gap-5 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
           <Link
             href="/fiches-cours"
@@ -57,7 +79,7 @@ export default function ProportionnaliteSixiemePage() {
       </div>
 
       <article className="mx-auto max-w-5xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0">
-        <section className="rounded-lg border border-white/10 bg-white/[0.04] p-6 sm:p-8 print:border-0 print:bg-white print:p-0">
+        <section className="rounded-lg border border-white/15 bg-slate-950/72 p-6 shadow-2xl shadow-slate-950/30 backdrop-blur-md sm:p-8 print:border-0 print:bg-white print:p-0 print:shadow-none">
           <header className="border-b border-slate-200/20 pb-6 print:border-slate-300">
             <div className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-normal print:text-slate-700">
               <span className="rounded-full bg-cyan-300/15 px-3 py-1 text-cyan-200 print:border print:border-slate-300 print:bg-white print:text-slate-700">
@@ -73,6 +95,24 @@ export default function ProportionnaliteSixiemePage() {
             <h1 className="mt-5 text-3xl font-black tracking-normal text-white sm:text-5xl print:text-3xl print:text-slate-950">
               La proportionnalite
             </h1>
+            <div className="mt-5 grid gap-3 rounded-lg border border-white/10 bg-white/[0.03] p-4 text-sm print:grid-cols-2 print:border-slate-300 print:bg-white print:p-3">
+              <div>
+                <span className="block text-xs font-black uppercase text-slate-400 print:text-slate-600">
+                  Titre
+                </span>
+                <span className="mt-1 block font-black text-white print:text-slate-950">
+                  La proportionnalite
+                </span>
+              </div>
+              <div>
+                <span className="block text-xs font-black uppercase text-slate-400 print:text-slate-600">
+                  Classe
+                </span>
+                <span className="mt-1 block font-black text-white print:text-slate-950">
+                  6e
+                </span>
+              </div>
+            </div>
             <p className="mt-4 max-w-3xl text-base leading-7 text-slate-300 print:text-sm print:text-slate-700">
               Une situation est proportionnelle quand on passe d&apos;une grandeur a
               l&apos;autre en multipliant toujours par le meme nombre.
@@ -227,6 +267,10 @@ export default function ProportionnaliteSixiemePage() {
       </div>
 
       <style jsx global>{`
+        .remerciements-bar {
+          display: none !important;
+        }
+
         @media print {
           @page {
             size: A4;
@@ -239,8 +283,8 @@ export default function ProportionnaliteSixiemePage() {
             color: #020617 !important;
           }
 
-          header,
-          footer,
+          body > header,
+          body > footer,
           .screen-only {
             display: none !important;
           }
