@@ -9,11 +9,11 @@ import {
   CheckCircle2,
   ChevronRight,
   Download,
-  History,
+  Landmark,
   Lightbulb,
   Printer,
-  ShoppingBag,
   Sparkles,
+  Wrench,
 } from "lucide-react";
 
 const identite = [
@@ -127,7 +127,7 @@ export default function PourcentagesCinquiemePage() {
           >
             <Link
               href="/fiches-cours"
-              className="inline-flex items-center gap-1.5 text-slate-600 transition hover:text-slate-900"
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3.5 py-1.5 text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-50"
             >
               <ArrowLeft className="h-4 w-4" />
               Fiches de cours
@@ -198,7 +198,7 @@ export default function PourcentagesCinquiemePage() {
             <div className="grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3">
               <div className="rounded-2xl border border-violet-200 bg-violet-50 p-4">
                 <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
-                  <ShoppingBag className="h-5 w-5 text-violet-500 print:hidden" />
+                  <Wrench className="h-5 w-5 text-violet-500 print:hidden" />
                   À quoi ça sert ?
                 </h2>
                 <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
@@ -210,7 +210,7 @@ export default function PourcentagesCinquiemePage() {
               </div>
               <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
                 <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
-                  <History className="h-5 w-5 text-amber-500 print:hidden" />
+                  <Landmark className="h-5 w-5 text-amber-500 print:hidden" />
                   Le savais-tu ?
                 </h2>
                 <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">

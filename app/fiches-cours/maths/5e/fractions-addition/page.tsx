@@ -17,101 +17,102 @@ import {
 } from "lucide-react";
 
 const identite = [
-  { label: "Prérequis", valeur: "Triangle rectangle, hypoténuse" },
-  { label: "Formule clé", valeur: "cos = adjacent / hypoténuse" },
-  { label: "Outil", valeur: "Calculatrice en mode degré" },
+  { label: "Prérequis", valeur: "Multiples, tables de multiplication" },
+  { label: "Formule clé", valeur: "a/d + b/d = (a + b)/d" },
+  { label: "Astuce", valeur: "Même dénominateur d'abord" },
 ];
 
 const usages = [
   {
-    titre: "Trouver le côté adjacent",
-    detail: "On connaît l'angle et l'hypoténuse : adjacent = hypoténuse x cos(angle).",
+    titre: "Additionner",
+    detail: "Au même dénominateur, on additionne les numérateurs et on garde le dénominateur.",
   },
   {
-    titre: "Trouver l'hypoténuse",
-    detail: "On connaît l'angle et le côté adjacent : hypoténuse = adjacent / cos(angle).",
+    titre: "Soustraire",
+    detail: "Même principe : au même dénominateur, on soustrait les numérateurs.",
   },
   {
-    titre: "Trouver l'angle",
-    detail: "On connaît les deux côtés : angle = cos⁻¹ de (adjacent / hypoténuse).",
+    titre: "Simplifier",
+    detail: "À la fin, on simplifie la fraction obtenue si c'est possible.",
   },
 ];
 
 const exemples = [
   {
-    titre: "Calculer un côté adjacent",
-    donnees: "Dans le triangle ABC rectangle en A, BC = 10 cm et l'angle B vaut 60 degrés.",
-    question: "Calculer AB.",
+    titre: "Même dénominateur",
+    donnees: "On calcule 1/4 + 2/4.",
+    question: "Quel est le résultat ?",
     solution:
-      "AB est le côté adjacent à l'angle B et BC est l'hypoténuse. cos(60) = AB / BC, donc AB = 10 x cos(60) = 10 x 0,5 = 5 cm.",
+      "Les dénominateurs sont déjà égaux : on additionne les numérateurs. 1/4 + 2/4 = 3/4.",
   },
   {
-    titre: "Calculer l'hypoténuse",
-    donnees: "Dans un triangle rectangle, le côté adjacent à un angle de 40 degrés mesure 7 cm.",
-    question: "Calculer l'hypoténuse au dixième près.",
+    titre: "Dénominateurs différents",
+    donnees: "On calcule 1/2 + 1/3.",
+    question: "Quel est le résultat ?",
     solution:
-      "cos(40) = adjacent / hypoténuse, donc hypoténuse = 7 / cos(40), soit environ 7 / 0,766 = 9,1 cm.",
+      "On met au même dénominateur (6) : 1/2 = 3/6 et 1/3 = 2/6. Donc 1/2 + 1/3 = 3/6 + 2/6 = 5/6.",
   },
 ];
 
 const pieges = [
-  "Confondre le côté adjacent et le côté opposé à l'angle.",
-  "Laisser la calculatrice en radians au lieu des degrés.",
-  "Diviser quand il faut multiplier, ou l'inverse, selon l'inconnue.",
+  "Additionner les dénominateurs entre eux : on ne le fait jamais.",
+  "Oublier de mettre au même dénominateur avant d'additionner.",
+  "Oublier de simplifier le résultat à la fin.",
 ];
 
 const aRetenir = [
-  "cos(angle) = adjacent / hypoténuse : on retient CAH.",
-  "L'hypoténuse est toujours le côté opposé à l'angle droit.",
-  "Le cosinus d'un angle aigu est toujours compris entre 0 et 1.",
+  "Au même dénominateur : a/d + b/d = (a + b)/d.",
+  "Dénominateurs différents : on les rend égaux d'abord.",
+  "On n'additionne jamais les dénominateurs entre eux.",
 ];
 
 const entrainement = [
   {
-    question:
-      "Dans un triangle rectangle, l'hypoténuse mesure 12 cm et un angle mesure 30 degrés. Calcule le côté adjacent.",
-    correction: "adjacent = 12 x cos(30) = 12 x 0,866 = environ 10,4 cm.",
+    question: "Calcule 2/7 + 3/7.",
+    correction: "Même dénominateur : 2/7 + 3/7 = 5/7.",
   },
   {
-    question:
-      "Dans un triangle rectangle, le côté adjacent mesure 8 cm et l'angle mesure 50 degrés. Calcule l'hypoténuse.",
-    correction: "hypoténuse = 8 / cos(50) = 8 / 0,643 = environ 12,4 cm.",
+    question: "Calcule 1/2 + 1/4.",
+    correction: "1/2 = 2/4, donc 1/2 + 1/4 = 2/4 + 1/4 = 3/4.",
   },
   {
-    question:
-      "Dans le triangle RST rectangle en S, RT = 15 cm et l'angle R vaut 42 degrés. Calcule RS.",
+    question: "Calcule 2/3 + 1/6.",
+    correction: "2/3 = 4/6, donc 2/3 + 1/6 = 4/6 + 1/6 = 5/6.",
+  },
+  {
+    question: "Pourquoi ne peut-on pas additionner 1/2 et 1/3 directement ?",
     correction:
-      "RS est l'adjacent à l'angle R et RT l'hypoténuse, donc RS = 15 x cos(42) = environ 11,1 cm.",
-  },
-  {
-    question:
-      "Explique pourquoi il faut d'abord repérer l'hypoténuse avant d'utiliser le cosinus.",
-    correction:
-      "Le cosinus est le rapport adjacent / hypoténuse. Sans repérer l'hypoténuse (le côté opposé à l'angle droit), on ne peut pas écrire le bon rapport.",
+      "Parce que les parts ne sont pas de la même taille. Il faut d'abord les mettre au même dénominateur (sur 6) : 3/6 + 2/6 = 5/6.",
   },
 ];
 
-export default function CosinusQuatriemePage() {
+const bars = [
+  { label: "1/2", filled: 3 },
+  { label: "1/3", filled: 2 },
+  { label: "5/6", filled: 5 },
+];
+
+export default function FractionsAdditionCinquiemePage() {
   return (
-    <main className="relative isolate min-h-screen overflow-hidden bg-[#f5f8ff] text-slate-800">
+    <main className="relative isolate min-h-screen overflow-hidden bg-[#fff5f8] text-slate-800">
       <div
         aria-hidden="true"
         className="screen-only pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute -left-20 top-6 h-72 w-72 rounded-full bg-cyan-200/50 blur-3xl" />
-        <div className="absolute right-0 top-32 h-80 w-80 rounded-full bg-pink-200/50 blur-3xl" />
+        <div className="absolute -left-20 top-6 h-72 w-72 rounded-full bg-rose-200/50 blur-3xl" />
+        <div className="absolute right-0 top-32 h-80 w-80 rounded-full bg-amber-200/45 blur-3xl" />
         <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-emerald-200/45 blur-3xl" />
-        <div className="absolute left-8 top-40 rotate-[-6deg] rounded-2xl border border-white bg-white/80 px-4 py-2 text-3xl font-black text-cyan-500 shadow-sm">
-          cos
+        <div className="absolute left-8 top-40 rotate-[-6deg] rounded-2xl border border-white bg-white/80 px-4 py-2 text-2xl font-black text-rose-500 shadow-sm">
+          a/d
         </div>
         <div className="absolute right-10 top-56 rotate-3 rounded-2xl border border-white bg-white/80 px-4 py-2 text-2xl font-black text-amber-500 shadow-sm">
-          90°
+          +
         </div>
-        <div className="absolute bottom-44 left-12 -rotate-3 rounded-2xl border border-white bg-white/80 px-4 py-2 text-xl font-black text-emerald-500 shadow-sm">
-          adj / hyp
+        <div className="absolute bottom-44 left-12 -rotate-3 rounded-2xl border border-white bg-white/80 px-4 py-2 text-2xl font-black text-emerald-500 shadow-sm">
+          = 5/6
         </div>
         <div className="absolute bottom-60 right-16 rotate-6 rounded-2xl border border-white bg-white/80 px-4 py-2 text-2xl font-black text-pink-500 shadow-sm">
-          △
+          ½
         </div>
       </div>
 
@@ -131,14 +132,14 @@ export default function CosinusQuatriemePage() {
             <ChevronRight className="h-4 w-4 text-slate-400" />
             <span>Maths</span>
             <ChevronRight className="h-4 w-4 text-slate-400" />
-            <span>4e</span>
+            <span>5e</span>
             <ChevronRight className="h-4 w-4 text-slate-400" />
-            <span className="text-slate-900">Cosinus</span>
+            <span className="text-slate-900">Additionner des fractions</span>
           </nav>
           <button
             type="button"
             onClick={() => window.print()}
-            className="inline-flex w-fit items-center gap-2 rounded-full bg-cyan-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-cyan-500/30 transition hover:bg-cyan-400"
+            className="inline-flex w-fit items-center gap-2 rounded-full bg-rose-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-rose-500/30 transition hover:bg-rose-400"
           >
             <Download className="h-4 w-4" />
             Télécharger en PDF
@@ -150,35 +151,31 @@ export default function CosinusQuatriemePage() {
         <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 sm:p-8 print:rounded-none print:border-0 print:p-0 print:shadow-none">
           <header className="border-b border-slate-200 pb-6">
             <div className="mb-4 flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span className="flex items-center gap-2 text-lg font-black tracking-tight text-cyan-600">
+              <span className="flex items-center gap-2 text-lg font-black tracking-tight text-rose-600">
                 <Sparkles className="h-5 w-5" />
                 eleveai.fr
               </span>
               <span className="text-sm font-bold italic text-slate-500">
-La liberté d&apos;apprendre
+                La liberté d&apos;apprendre
               </span>
             </div>
             <div className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-normal">
               <span className="rounded-full bg-cyan-100 px-3 py-1 text-cyan-700">
                 Maths
               </span>
-              <span className="rounded-full bg-pink-100 px-3 py-1 text-pink-700">
-                4e
+              <span className="rounded-full bg-rose-100 px-3 py-1 text-rose-700">
+                5e
               </span>
               <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-600">
                 Fiche de cours
               </span>
-              <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-600">
-                Trigonométrie
-              </span>
             </div>
             <h1 className="mt-5 text-3xl font-black tracking-normal text-slate-900 sm:text-5xl print:text-3xl">
-              Le cosinus
+              Additionner des fractions
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 print:text-sm">
-              Dans un triangle rectangle, le cosinus d&apos;un angle aigu relie
-              le côté adjacent à cet angle et l&apos;hypoténuse. Il sert à
-              calculer une longueur ou un angle.
+              Pour additionner deux fractions, il faut d&apos;abord les mettre au
+              même dénominateur, puis additionner les numérateurs.
             </p>
             <div className="mt-5 grid gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm sm:grid-cols-3 print:grid-cols-3 print:p-3">
               {identite.map((item) => (
@@ -196,16 +193,16 @@ La liberté d&apos;apprendre
 
           <section className="py-6 print:py-4">
             <div className="grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3">
-              <div className="rounded-2xl border border-cyan-200 bg-cyan-50 p-4">
+              <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4">
                 <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
-                  <Wrench className="h-5 w-5 text-cyan-500 print:hidden" />
+                  <Wrench className="h-5 w-5 text-rose-500 print:hidden" />
                   À quoi ça sert ?
                 </h2>
                 <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
-                  La trigonométrie sert à calculer des distances ou des hauteurs
-                  sans les mesurer directement : hauteur d&apos;un bâtiment, pente
-                  d&apos;une route, navigation des bateaux et des avions, ou encore
-                  les angles de vue dans les jeux vidéo.
+                  Les fractions servent à partager (parts de pizza ou de
+                  gâteau), à cuisiner (1/2 litre, 1/4 de tablette), à mesurer des
+                  durées (un quart d&apos;heure), et même en musique pour les
+                  rythmes (la noire, la croche...).
                 </p>
               </div>
               <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
@@ -214,44 +211,44 @@ La liberté d&apos;apprendre
                   Le savais-tu ?
                 </h2>
                 <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
-                  La trigonométrie a été développée par les astronomes grecs et
-                  indiens, puis par les savants arabes au Moyen Âge, pour étudier
-                  le ciel et calculer la position des étoiles. Le mot « sinus »
-                  vient d&apos;une traduction latine de l&apos;arabe.
+                  Les fractions sont très anciennes : les Égyptiens, il y a près
+                  de 4000 ans, utilisaient surtout des fractions « unitaires »
+                  comme 1/2, 1/3 ou 1/4. La barre de fraction nous vient des
+                  mathématiciens arabes et indiens du Moyen Âge.
                 </p>
               </div>
             </div>
           </section>
 
           <div className="grid gap-5 py-6 md:grid-cols-3 print:grid-cols-3 print:gap-3 print:py-4">
-            <div className="rounded-2xl border border-cyan-200 bg-cyan-50 p-4">
-              <BookOpen className="h-5 w-5 text-cyan-500 print:hidden" />
+            <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4">
+              <BookOpen className="h-5 w-5 text-rose-500 print:hidden" />
               <h2 className="mt-3 text-lg font-black text-slate-900 print:mt-0 print:text-base">
-                1. Repérer
+                1. Même dénominateur
               </h2>
               <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
-                On trouve l&apos;angle droit, puis l&apos;hypoténuse : c&apos;est
-                le plus grand côté, opposé à l&apos;angle droit.
+                On cherche un dénominateur commun, souvent un multiple commun aux
+                deux dénominateurs.
               </p>
             </div>
-            <div className="rounded-2xl border border-pink-200 bg-pink-50 p-4">
-              <Lightbulb className="h-5 w-5 text-pink-500 print:hidden" />
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
+              <Lightbulb className="h-5 w-5 text-amber-500 print:hidden" />
               <h2 className="mt-3 text-lg font-black text-slate-900 print:mt-0 print:text-base">
-                2. Choisir
+                2. Transformer
               </h2>
               <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
-                Par rapport à l&apos;angle choisi, on identifie le côté
-                adjacent, puis on écrit cos(angle) = adjacent / hypoténuse.
+                On réécrit chaque fraction avec ce dénominateur commun (en
+                multipliant en haut et en bas).
               </p>
             </div>
             <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
               <CheckCircle2 className="h-5 w-5 text-emerald-500 print:hidden" />
               <h2 className="mt-3 text-lg font-black text-slate-900 print:mt-0 print:text-base">
-                3. Calculer
+                3. Additionner
               </h2>
               <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
-                On isole l&apos;inconnue, puis on calcule à la calculatrice en
-                vérifiant le mode degré.
+                On additionne les numérateurs, on garde le dénominateur, puis on
+                simplifie si possible.
               </p>
             </div>
           </div>
@@ -261,52 +258,53 @@ La liberté d&apos;apprendre
               La formule
             </h2>
             <div className="mt-4 grid gap-4 md:grid-cols-[1fr_1.25fr] print:grid-cols-[1fr_1.25fr]">
-              <div className="rounded-2xl border border-cyan-200 bg-cyan-50 p-5 text-center">
-                <p className="text-sm font-bold uppercase text-cyan-600">
-                  Dans un triangle rectangle
+              <div className="rounded-2xl border border-rose-200 bg-rose-50 p-5 text-center">
+                <p className="text-sm font-bold uppercase text-rose-600">
+                  Au même dénominateur
                 </p>
                 <p className="mt-4 text-2xl font-black text-slate-900 print:text-xl">
-                  cos(angle) = adjacent / hypoténuse
+                  a/d + b/d = (a + b)/d
                 </p>
                 <p className="mt-4 text-sm font-bold text-slate-600">
-                  Moyen mnémotechnique : CAH (Cosinus = Adjacent / Hypoténuse).
+                  Exemple : 1/2 + 1/3 = 3/6 + 2/6 = 5/6.
                 </p>
               </div>
               <div className="rounded-2xl border border-slate-200 bg-white p-5">
+                <p className="mb-3 text-sm font-bold text-slate-600">
+                  1/2 + 1/3 ramenés sur 6 :
+                </p>
                 <svg
-                  viewBox="0 0 320 190"
+                  viewBox="0 0 320 170"
                   className="h-auto w-full"
                   role="img"
-                  aria-label="Triangle rectangle avec angle, côté adjacent et hypoténuse"
+                  aria-label="Barres de fractions montrant 1/2 plus 1/3 égale 5/6"
                 >
-                  <path
-                    d="M45 145 L270 145 L45 35 Z"
-                    fill="rgba(14,165,233,0.12)"
-                    stroke="#0ea5e9"
-                    strokeWidth="5"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M45 122 L68 122 L68 145"
-                    fill="none"
-                    stroke="#f59e0b"
-                    strokeWidth="4"
-                  />
-                  <path
-                    d="M225 145 A45 45 0 0 0 237 114"
-                    fill="none"
-                    stroke="#ec4899"
-                    strokeWidth="5"
-                  />
-                  <text x="151" y="166" fill="#334155" fontSize="17" fontWeight="800" textAnchor="middle">
-                    adjacent
-                  </text>
-                  <text x="168" y="84" fill="#334155" fontSize="17" fontWeight="800" textAnchor="middle">
-                    hypoténuse
-                  </text>
-                  <text x="244" y="118" fill="#db2777" fontSize="18" fontWeight="900">
-                    angle
-                  </text>
+                  {bars.map((bar, row) => (
+                    <g key={bar.label}>
+                      <text
+                        x="52"
+                        y={43 + row * 50}
+                        fill="#0f172a"
+                        fontSize="16"
+                        fontWeight="800"
+                        textAnchor="end"
+                      >
+                        {bar.label}
+                      </text>
+                      {[0, 1, 2, 3, 4, 5].map((i) => (
+                        <rect
+                          key={i}
+                          x={72 + i * 36}
+                          y={20 + row * 50}
+                          width={36}
+                          height={30}
+                          fill={i < bar.filled ? "#fb7185" : "#ffffff"}
+                          stroke="#cbd5e1"
+                          strokeWidth={1.5}
+                        />
+                      ))}
+                    </g>
+                  ))}
                 </svg>
               </div>
             </div>
@@ -348,7 +346,7 @@ La liberté d&apos;apprendre
                   <p className="mt-1 text-sm font-bold text-slate-900 print:text-xs">
                     {exemple.question}
                   </p>
-                  <p className="mt-3 rounded-xl border border-cyan-100 bg-cyan-50 p-3 text-sm leading-6 text-cyan-800 print:text-xs">
+                  <p className="mt-3 rounded-xl border border-rose-100 bg-rose-50 p-3 text-sm leading-6 text-rose-800 print:text-xs">
                     {exemple.solution}
                   </p>
                 </div>
@@ -385,7 +383,7 @@ La liberté d&apos;apprendre
 
           <section className="border-t border-slate-200 pt-6 print:pt-4">
             <h2 className="flex items-center gap-2 text-2xl font-black text-slate-900 print:text-xl">
-              <Calculator className="h-6 w-6 text-cyan-500 print:hidden" />
+              <Calculator className="h-6 w-6 text-rose-500 print:hidden" />
               Je m&apos;entraîne
             </h2>
             <ol className="mt-4 grid gap-4 text-sm leading-6 text-slate-700 print:gap-2 print:text-xs">
@@ -398,10 +396,10 @@ La liberté d&apos;apprendre
                     {index + 1}. {item.question}
                   </p>
                   <details className="fiche-correction mt-2">
-                    <summary className="cursor-pointer text-sm font-bold text-cyan-600">
+                    <summary className="cursor-pointer text-sm font-bold text-rose-600">
                       Voir la correction
                     </summary>
-                    <p className="mt-2 rounded-xl border border-cyan-100 bg-cyan-50 p-3 text-sm leading-6 text-cyan-800">
+                    <p className="mt-2 rounded-xl border border-rose-100 bg-rose-50 p-3 text-sm leading-6 text-rose-800">
                       {item.correction}
                     </p>
                   </details>
@@ -410,8 +408,8 @@ La liberté d&apos;apprendre
             </ol>
 
             <Link
-              href="/coach-ia/maths?classe=4e"
-              className="screen-only mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-cyan-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-cyan-500/30 transition hover:bg-cyan-400"
+              href="/coach-ia/maths?classe=5e"
+              className="screen-only mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-rose-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-rose-500/30 transition hover:bg-rose-400"
             >
               <Sparkles className="h-4 w-4" />
               M&apos;entraîner avec le Coach IA
@@ -420,7 +418,7 @@ La liberté d&apos;apprendre
 
           <footer className="mt-8 flex items-center justify-between border-t border-slate-200 pt-5 text-xs text-slate-500 print:mt-6">
             <span>eleveai.fr - Fiche de cours</span>
-            <span>Cosinus - 4e</span>
+            <span>Additionner des fractions - 5e</span>
           </footer>
         </section>
       </article>

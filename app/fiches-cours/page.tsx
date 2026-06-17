@@ -49,6 +49,14 @@ const fiches = [
     resume:
       "Calculer une longueur avec les rapports égaux et prouver un parallélisme.",
   },
+  {
+    href: "/fiches-cours/maths/5e/fractions-addition",
+    niveau: "5e",
+    matiere: "Maths",
+    titre: "Additionner des fractions",
+    resume:
+      "Mettre au même dénominateur, puis additionner les numérateurs.",
+  },
 ];
 
 export default function FichesCoursPage() {
