@@ -57,6 +57,22 @@ const fiches = [
     resume:
       "Mettre au même dénominateur, puis additionner les numérateurs.",
   },
+  {
+    href: "/fiches-cours/maths/4e/statistiques",
+    niveau: "4e",
+    matiere: "Maths",
+    titre: "Les statistiques",
+    resume:
+      "Calculer une moyenne, une médiane et l'étendue d'une série de données.",
+  },
+  {
+    href: "/fiches-cours/maths/4e/probabilites",
+    niveau: "4e",
+    matiere: "Maths",
+    titre: "Les probabilités",
+    resume:
+      "Calculer la probabilité d'un événement (cas favorables sur cas possibles).",
+  },
 ];
 
 export default function FichesCoursPage() {
