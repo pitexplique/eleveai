@@ -41,6 +41,14 @@ const fiches = [
     resume:
       "Calculer un pourcentage d'un nombre, une réduction ou une augmentation.",
   },
+  {
+    href: "/fiches-cours/maths/3e/thales",
+    niveau: "3e",
+    matiere: "Maths",
+    titre: "Théorème de Thalès",
+    resume:
+      "Calculer une longueur avec les rapports égaux et prouver un parallélisme.",
+  },
 ];
 
 export default function FichesCoursPage() {

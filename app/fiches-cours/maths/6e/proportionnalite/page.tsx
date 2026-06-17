@@ -9,8 +9,10 @@ import {
   CheckCircle2,
   ChevronRight,
   Download,
+  History,
   Lightbulb,
   Printer,
+  ShoppingBag,
   Sparkles,
 } from "lucide-react";
 
@@ -182,6 +184,34 @@ La liberté d&apos;apprendre
               ))}
             </div>
           </header>
+
+          <section className="py-6 print:py-4">
+            <div className="grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3">
+              <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+                <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
+                  <ShoppingBag className="h-5 w-5 text-emerald-500 print:hidden" />
+                  À quoi ça sert ?
+                </h2>
+                <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
+                  La proportionnalité est partout : recettes de cuisine, échelles
+                  des cartes et des plans, conversions, prix au kilo, vitesse, ou
+                  encore les mélanges (sirop, peinture).
+                </p>
+              </div>
+              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
+                <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
+                  <History className="h-5 w-5 text-amber-500 print:hidden" />
+                  Le savais-tu ?
+                </h2>
+                <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
+                  On utilise les proportions depuis l&apos;Antiquité. Les Égyptiens
+                  et les Grecs s&apos;en servaient pour leurs plans de construction
+                  et pour le commerce. La fameuse « règle de trois » est enseignée
+                  depuis des siècles.
+                </p>
+              </div>
+            </div>
+          </section>
 
           <div className="grid gap-5 py-6 md:grid-cols-3 print:grid-cols-3 print:gap-3 print:py-4">
             <div className="rounded-2xl border border-cyan-200 bg-cyan-50 p-4">

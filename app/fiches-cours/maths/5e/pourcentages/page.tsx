@@ -194,6 +194,35 @@ export default function PourcentagesCinquiemePage() {
             </div>
           </header>
 
+          <section className="py-6 print:py-4">
+            <div className="grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3">
+              <div className="rounded-2xl border border-violet-200 bg-violet-50 p-4">
+                <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
+                  <ShoppingBag className="h-5 w-5 text-violet-500 print:hidden" />
+                  À quoi ça sert ?
+                </h2>
+                <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
+                  Les pourcentages sont partout dans la vie : les soldes
+                  (−30 %), la batterie du téléphone (80 %), les résultats de
+                  sondages, les taux d&apos;intérêt, les réductions, ou encore le
+                  pourcentage de matières grasses sur les étiquettes.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
+                <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
+                  <History className="h-5 w-5 text-amber-500 print:hidden" />
+                  Le savais-tu ?
+                </h2>
+                <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
+                  Le mot vient du latin « per centum », qui veut dire « pour
+                  cent ». Les marchands italiens de la Renaissance l&apos;utilisaient
+                  déjà pour les intérêts et les taxes. Le symbole % est apparu
+                  petit à petit vers le XVIIᵉ siècle.
+                </p>
+              </div>
+            </div>
+          </section>
+
           <div className="grid gap-5 py-6 md:grid-cols-3 print:grid-cols-3 print:gap-3 print:py-4">
             <div className="rounded-2xl border border-violet-200 bg-violet-50 p-4">
               <BookOpen className="h-5 w-5 text-violet-500 print:hidden" />
@@ -224,35 +253,6 @@ export default function PourcentagesCinquiemePage() {
               </p>
             </div>
           </div>
-
-          <section className="border-t border-slate-200 py-6 print:py-4">
-            <div className="grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3">
-              <div className="rounded-2xl border border-violet-200 bg-violet-50 p-4">
-                <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
-                  <ShoppingBag className="h-5 w-5 text-violet-500 print:hidden" />
-                  À quoi ça sert ?
-                </h2>
-                <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
-                  Les pourcentages sont partout dans la vie : les soldes
-                  (−30 %), la batterie du téléphone (80 %), les résultats de
-                  sondages, les taux d&apos;intérêt, les réductions, ou encore le
-                  pourcentage de matières grasses sur les étiquettes.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
-                <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
-                  <History className="h-5 w-5 text-amber-500 print:hidden" />
-                  Le savais-tu ?
-                </h2>
-                <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
-                  Le mot vient du latin « per centum », qui veut dire « pour
-                  cent ». Les marchands italiens de la Renaissance l&apos;utilisaient
-                  déjà pour les intérêts et les taxes. Le symbole % est apparu
-                  petit à petit vers le XVIIᵉ siècle.
-                </p>
-              </div>
-            </div>
-          </section>
 
           <section className="border-t border-slate-200 py-6 print:py-4">
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">

@@ -9,8 +9,10 @@ import {
   CheckCircle2,
   ChevronRight,
   Download,
+  History,
   Lightbulb,
   Printer,
+  Ruler,
   Sparkles,
 } from "lucide-react";
 
@@ -188,6 +190,36 @@ export default function PythagoreQuatriemePage() {
               ))}
             </div>
           </header>
+
+          <section className="py-6 print:py-4">
+            <div className="grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3">
+              <div className="rounded-2xl border border-sky-200 bg-sky-50 p-4">
+                <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
+                  <Ruler className="h-5 w-5 text-sky-500 print:hidden" />
+                  À quoi ça sert ?
+                </h2>
+                <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
+                  Pythagore sert à calculer des distances et à vérifier des
+                  angles droits : maçons et charpentiers s&apos;en servent pour des
+                  murs bien droits, on calcule la longueur d&apos;une diagonale,
+                  d&apos;une rampe ou d&apos;un toit, et il est utilisé en navigation
+                  et en informatique.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
+                <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
+                  <History className="h-5 w-5 text-amber-500 print:hidden" />
+                  Le savais-tu ?
+                </h2>
+                <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
+                  Le théorème porte le nom de Pythagore, savant grec du VIᵉ siècle
+                  avant J.-C. Mais les Babyloniens et les Égyptiens connaissaient
+                  déjà des triangles comme 3-4-5, plus de mille ans avant lui,
+                  pour tracer des angles droits.
+                </p>
+              </div>
+            </div>
+          </section>
 
           <div className="grid gap-5 py-6 md:grid-cols-3 print:grid-cols-3 print:gap-3 print:py-4">
             <div className="rounded-2xl border border-sky-200 bg-sky-50 p-4">
