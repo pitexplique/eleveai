@@ -2,13 +2,36 @@
 
 import Link from "next/link";
 import {
+  AlertTriangle,
   ArrowLeft,
   BookOpen,
+  Calculator,
   CheckCircle2,
   Download,
   Lightbulb,
   Printer,
 } from "lucide-react";
+
+const identite = [
+  { label: "Prerequis", valeur: "Triangle rectangle, hypotenuse" },
+  { label: "Formule cle", valeur: "cos = adjacent / hypotenuse" },
+  { label: "Outil", valeur: "Calculatrice en mode degre" },
+];
+
+const usages = [
+  {
+    titre: "Trouver le cote adjacent",
+    detail: "On connait l'angle et l'hypotenuse : adjacent = hypotenuse x cos(angle).",
+  },
+  {
+    titre: "Trouver l'hypotenuse",
+    detail: "On connait l'angle et le cote adjacent : hypotenuse = adjacent / cos(angle).",
+  },
+  {
+    titre: "Trouver l'angle",
+    detail: "On connait les deux cotes : angle = cos puissance -1 de (adjacent / hypotenuse).",
+  },
+];
 
 const exemples = [
   {
@@ -16,15 +39,27 @@ const exemples = [
     donnees: "Dans le triangle ABC rectangle en A, BC = 10 cm et l'angle B vaut 60 degres.",
     question: "Calculer AB.",
     solution:
-      "AB est le cote adjacent a l'angle B et BC est l'hypotenuse. cos(60) = AB / BC, donc AB = 10 x cos(60) = 5 cm.",
+      "AB est le cote adjacent a l'angle B et BC est l'hypotenuse. cos(60) = AB / BC, donc AB = 10 x cos(60) = 10 x 0,5 = 5 cm.",
   },
   {
     titre: "Calculer l'hypotenuse",
     donnees: "Dans un triangle rectangle, le cote adjacent a un angle de 40 degres mesure 7 cm.",
     question: "Calculer l'hypotenuse au dixieme pres.",
     solution:
-      "cos(40) = adjacent / hypotenuse, donc hypotenuse = 7 / cos(40), soit environ 9,1 cm.",
+      "cos(40) = adjacent / hypotenuse, donc hypotenuse = 7 / cos(40), soit environ 7 / 0,766 = 9,1 cm.",
   },
+];
+
+const pieges = [
+  "Confondre le cote adjacent et le cote oppose a l'angle.",
+  "Laisser la calculatrice en radians au lieu des degres.",
+  "Diviser quand il faut multiplier, ou l'inverse, selon l'inconnue.",
+];
+
+const aRetenir = [
+  "cos(angle) = adjacent / hypotenuse : on retient CAH.",
+  "L'hypotenuse est toujours le cote oppose a l'angle droit.",
+  "Le cosinus d'un angle aigu est toujours compris entre 0 et 1.",
 ];
 
 const entrainement = [
@@ -92,32 +127,30 @@ export default function CosinusQuatriemePage() {
               <span className="rounded-full bg-white/10 px-3 py-1 text-slate-200 print:border print:border-slate-300 print:bg-white print:text-slate-700">
                 Fiche de cours
               </span>
+              <span className="rounded-full bg-white/10 px-3 py-1 text-slate-200 print:border print:border-slate-300 print:bg-white print:text-slate-700">
+                Trigonometrie
+              </span>
             </div>
             <h1 className="mt-5 text-3xl font-black tracking-normal text-white sm:text-5xl print:text-3xl print:text-slate-950">
               Le cosinus
             </h1>
-            <div className="mt-5 grid gap-3 rounded-lg border border-white/10 bg-white/[0.03] p-4 text-sm print:grid-cols-2 print:border-slate-300 print:bg-white print:p-3">
-              <div>
-                <span className="block text-xs font-black uppercase text-slate-400 print:text-slate-600">
-                  Titre
-                </span>
-                <span className="mt-1 block font-black text-white print:text-slate-950">
-                  Le cosinus
-                </span>
-              </div>
-              <div>
-                <span className="block text-xs font-black uppercase text-slate-400 print:text-slate-600">
-                  Classe
-                </span>
-                <span className="mt-1 block font-black text-white print:text-slate-950">
-                  4e
-                </span>
-              </div>
-            </div>
             <p className="mt-4 max-w-3xl text-base leading-7 text-slate-300 print:text-sm print:text-slate-700">
               Dans un triangle rectangle, le cosinus d&apos;un angle aigu relie
-              le cote adjacent a cet angle et l&apos;hypotenuse.
+              le cote adjacent a cet angle et l&apos;hypotenuse. Il sert a
+              calculer une longueur ou un angle.
             </p>
+            <div className="mt-5 grid gap-3 rounded-lg border border-white/10 bg-white/[0.03] p-4 text-sm sm:grid-cols-3 print:grid-cols-3 print:border-slate-300 print:bg-white print:p-3">
+              {identite.map((item) => (
+                <div key={item.label}>
+                  <span className="block text-xs font-black uppercase text-slate-400 print:text-slate-600">
+                    {item.label}
+                  </span>
+                  <span className="mt-1 block font-black text-white print:text-slate-950">
+                    {item.valeur}
+                  </span>
+                </div>
+              ))}
+            </div>
           </header>
 
           <div className="grid gap-5 py-6 md:grid-cols-3 print:grid-cols-3 print:gap-3 print:py-4">
@@ -127,8 +160,8 @@ export default function CosinusQuatriemePage() {
                 1. Reperer
               </h2>
               <p className="mt-2 text-sm leading-6 text-slate-300 print:text-xs print:text-slate-700">
-                On commence par trouver l&apos;angle droit, puis l&apos;hypotenuse :
-                c&apos;est le plus grand cote.
+                On trouve l&apos;angle droit, puis l&apos;hypotenuse : c&apos;est
+                le plus grand cote, oppose a l&apos;angle droit.
               </p>
             </div>
             <div className="rounded-lg border border-pink-300/20 bg-pink-300/10 p-4 print:border-slate-300 print:bg-white">
@@ -137,7 +170,8 @@ export default function CosinusQuatriemePage() {
                 2. Choisir
               </h2>
               <p className="mt-2 text-sm leading-6 text-slate-300 print:text-xs print:text-slate-700">
-                Par rapport a l&apos;angle choisi, on identifie le cote adjacent.
+                Par rapport a l&apos;angle choisi, on identifie le cote
+                adjacent, puis on ecrit cos(angle) = adjacent / hypotenuse.
               </p>
             </div>
             <div className="rounded-lg border border-emerald-300/20 bg-emerald-300/10 p-4 print:border-slate-300 print:bg-white">
@@ -146,7 +180,8 @@ export default function CosinusQuatriemePage() {
                 3. Calculer
               </h2>
               <p className="mt-2 text-sm leading-6 text-slate-300 print:text-xs print:text-slate-700">
-                On utilise la formule : cos(angle) = adjacent / hypotenuse.
+                On isole l&apos;inconnue, puis on calcule a la calculatrice en
+                verifiant le mode degre.
               </p>
             </div>
           </div>
@@ -162,6 +197,9 @@ export default function CosinusQuatriemePage() {
                 </p>
                 <p className="mt-4 text-2xl font-black text-white print:text-xl print:text-slate-950">
                   cos(angle) = adjacent / hypotenuse
+                </p>
+                <p className="mt-4 text-sm font-bold text-slate-300 print:text-slate-700">
+                  Moyen mnemotechnique : CAH (Cosinus = Adjacent / Hypotenuse).
                 </p>
               </div>
               <div className="rounded-lg border border-white/10 bg-white/[0.03] p-5 print:border-slate-300 print:bg-white">
@@ -193,7 +231,7 @@ export default function CosinusQuatriemePage() {
                   <text x="151" y="166" fill="#e0f2fe" fontSize="17" fontWeight="800" textAnchor="middle">
                     adjacent
                   </text>
-                  <text x="172" y="84" fill="#1d4ed8" fontSize="17" fontWeight="900" textAnchor="middle">
+                  <text x="172" y="84" fill="#e0f2fe" fontSize="17" fontWeight="800" textAnchor="middle">
                     hypotenuse
                   </text>
                   <text x="244" y="118" fill="#fbcfe8" fontSize="18" fontWeight="900">
@@ -201,6 +239,27 @@ export default function CosinusQuatriemePage() {
                   </text>
                 </svg>
               </div>
+            </div>
+          </section>
+
+          <section className="border-t border-white/10 py-6 print:border-slate-300 print:py-4">
+            <h2 className="text-2xl font-black text-white print:text-xl print:text-slate-950">
+              Selon ce que l&apos;on cherche
+            </h2>
+            <div className="mt-4 grid gap-4 md:grid-cols-3 print:grid-cols-3 print:gap-3">
+              {usages.map((usage) => (
+                <div
+                  key={usage.titre}
+                  className="rounded-lg border border-white/10 bg-white/[0.03] p-4 print:border-slate-300 print:bg-white"
+                >
+                  <h3 className="font-black text-white print:text-slate-950">
+                    {usage.titre}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-300 print:text-xs print:text-slate-700">
+                    {usage.detail}
+                  </p>
+                </div>
+              ))}
             </div>
           </section>
 
@@ -232,24 +291,35 @@ export default function CosinusQuatriemePage() {
           </section>
 
           <section className="border-t border-white/10 py-6 print:border-slate-300 print:py-4">
-            <h2 className="text-2xl font-black text-white print:text-xl print:text-slate-950">
-              A retenir
-            </h2>
-            <ul className="mt-4 grid gap-3 text-sm leading-6 text-slate-300 print:gap-2 print:text-xs print:text-slate-700">
-              <li>
-                Le cosinus s&apos;utilise uniquement dans un triangle rectangle.
-              </li>
-              <li>
-                L&apos;hypotenuse est toujours le cote oppose a l&apos;angle droit.
-              </li>
-              <li>
-                Le cote adjacent depend de l&apos;angle choisi.
-              </li>
-            </ul>
+            <div className="grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3">
+              <div className="rounded-lg border border-amber-300/20 bg-amber-300/10 p-4 print:border-slate-300 print:bg-white">
+                <h2 className="flex items-center gap-2 text-lg font-black text-white print:text-base print:text-slate-950">
+                  <AlertTriangle className="h-5 w-5 text-amber-200 print:hidden" />
+                  Pieges a eviter
+                </h2>
+                <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-300 print:text-xs print:text-slate-700">
+                  {pieges.map((piege) => (
+                    <li key={piege}>{piege}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-lg border border-emerald-300/20 bg-emerald-300/10 p-4 print:border-slate-300 print:bg-white">
+                <h2 className="flex items-center gap-2 text-lg font-black text-white print:text-base print:text-slate-950">
+                  <CheckCircle2 className="h-5 w-5 text-emerald-200 print:hidden" />
+                  A retenir
+                </h2>
+                <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-300 print:text-xs print:text-slate-700">
+                  {aRetenir.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </section>
 
           <section className="border-t border-white/10 pt-6 print:border-slate-300 print:pt-4">
-            <h2 className="text-2xl font-black text-white print:text-xl print:text-slate-950">
+            <h2 className="flex items-center gap-2 text-2xl font-black text-white print:text-xl print:text-slate-950">
+              <Calculator className="h-6 w-6 text-cyan-200 print:hidden" />
               Je m&apos;entraine
             </h2>
             <ol className="mt-4 grid gap-3 text-sm leading-6 text-slate-300 print:gap-2 print:text-xs print:text-slate-700">
