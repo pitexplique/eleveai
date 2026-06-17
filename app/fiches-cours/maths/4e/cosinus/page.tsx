@@ -7,6 +7,7 @@ import {
   BookOpen,
   Calculator,
   CheckCircle2,
+  ChevronRight,
   Download,
   Lightbulb,
   Printer,
@@ -14,157 +15,167 @@ import {
 } from "lucide-react";
 
 const identite = [
-  { label: "Prerequis", valeur: "Triangle rectangle, hypotenuse" },
-  { label: "Formule cle", valeur: "cos = adjacent / hypotenuse" },
-  { label: "Outil", valeur: "Calculatrice en mode degre" },
+  { label: "Prérequis", valeur: "Triangle rectangle, hypoténuse" },
+  { label: "Formule clé", valeur: "cos = adjacent / hypoténuse" },
+  { label: "Outil", valeur: "Calculatrice en mode degré" },
 ];
 
 const usages = [
   {
-    titre: "Trouver le cote adjacent",
-    detail: "On connait l'angle et l'hypotenuse : adjacent = hypotenuse x cos(angle).",
+    titre: "Trouver le côté adjacent",
+    detail: "On connaît l'angle et l'hypoténuse : adjacent = hypoténuse x cos(angle).",
   },
   {
-    titre: "Trouver l'hypotenuse",
-    detail: "On connait l'angle et le cote adjacent : hypotenuse = adjacent / cos(angle).",
+    titre: "Trouver l'hypoténuse",
+    detail: "On connaît l'angle et le côté adjacent : hypoténuse = adjacent / cos(angle).",
   },
   {
     titre: "Trouver l'angle",
-    detail: "On connait les deux cotes : angle = cos puissance -1 de (adjacent / hypotenuse).",
+    detail: "On connaît les deux côtés : angle = cos⁻¹ de (adjacent / hypoténuse).",
   },
 ];
 
 const exemples = [
   {
-    titre: "Calculer un cote adjacent",
-    donnees: "Dans le triangle ABC rectangle en A, BC = 10 cm et l'angle B vaut 60 degres.",
+    titre: "Calculer un côté adjacent",
+    donnees: "Dans le triangle ABC rectangle en A, BC = 10 cm et l'angle B vaut 60 degrés.",
     question: "Calculer AB.",
     solution:
-      "AB est le cote adjacent a l'angle B et BC est l'hypotenuse. cos(60) = AB / BC, donc AB = 10 x cos(60) = 10 x 0,5 = 5 cm.",
+      "AB est le côté adjacent à l'angle B et BC est l'hypoténuse. cos(60) = AB / BC, donc AB = 10 x cos(60) = 10 x 0,5 = 5 cm.",
   },
   {
-    titre: "Calculer l'hypotenuse",
-    donnees: "Dans un triangle rectangle, le cote adjacent a un angle de 40 degres mesure 7 cm.",
-    question: "Calculer l'hypotenuse au dixieme pres.",
+    titre: "Calculer l'hypoténuse",
+    donnees: "Dans un triangle rectangle, le côté adjacent à un angle de 40 degrés mesure 7 cm.",
+    question: "Calculer l'hypoténuse au dixième près.",
     solution:
-      "cos(40) = adjacent / hypotenuse, donc hypotenuse = 7 / cos(40), soit environ 7 / 0,766 = 9,1 cm.",
+      "cos(40) = adjacent / hypoténuse, donc hypoténuse = 7 / cos(40), soit environ 7 / 0,766 = 9,1 cm.",
   },
 ];
 
 const pieges = [
-  "Confondre le cote adjacent et le cote oppose a l'angle.",
-  "Laisser la calculatrice en radians au lieu des degres.",
+  "Confondre le côté adjacent et le côté opposé à l'angle.",
+  "Laisser la calculatrice en radians au lieu des degrés.",
   "Diviser quand il faut multiplier, ou l'inverse, selon l'inconnue.",
 ];
 
 const aRetenir = [
-  "cos(angle) = adjacent / hypotenuse : on retient CAH.",
-  "L'hypotenuse est toujours le cote oppose a l'angle droit.",
+  "cos(angle) = adjacent / hypoténuse : on retient CAH.",
+  "L'hypoténuse est toujours le côté opposé à l'angle droit.",
   "Le cosinus d'un angle aigu est toujours compris entre 0 et 1.",
 ];
 
 const entrainement = [
   {
     question:
-      "Dans un triangle rectangle, l'hypotenuse mesure 12 cm et un angle mesure 30 degres. Calcule le cote adjacent.",
+      "Dans un triangle rectangle, l'hypoténuse mesure 12 cm et un angle mesure 30 degrés. Calcule le côté adjacent.",
     correction: "adjacent = 12 x cos(30) = 12 x 0,866 = environ 10,4 cm.",
   },
   {
     question:
-      "Dans un triangle rectangle, le cote adjacent mesure 8 cm et l'angle mesure 50 degres. Calcule l'hypotenuse.",
-    correction: "hypotenuse = 8 / cos(50) = 8 / 0,643 = environ 12,4 cm.",
+      "Dans un triangle rectangle, le côté adjacent mesure 8 cm et l'angle mesure 50 degrés. Calcule l'hypoténuse.",
+    correction: "hypoténuse = 8 / cos(50) = 8 / 0,643 = environ 12,4 cm.",
   },
   {
     question:
-      "Dans le triangle RST rectangle en S, RT = 15 cm et l'angle R vaut 42 degres. Calcule RS.",
+      "Dans le triangle RST rectangle en S, RT = 15 cm et l'angle R vaut 42 degrés. Calcule RS.",
     correction:
-      "RS est l'adjacent a l'angle R et RT l'hypotenuse, donc RS = 15 x cos(42) = environ 11,1 cm.",
+      "RS est l'adjacent à l'angle R et RT l'hypoténuse, donc RS = 15 x cos(42) = environ 11,1 cm.",
   },
   {
     question:
-      "Explique pourquoi il faut d'abord reperer l'hypotenuse avant d'utiliser le cosinus.",
+      "Explique pourquoi il faut d'abord repérer l'hypoténuse avant d'utiliser le cosinus.",
     correction:
-      "Le cosinus est le rapport adjacent / hypotenuse. Sans reperer l'hypotenuse (le cote oppose a l'angle droit), on ne peut pas ecrire le bon rapport.",
+      "Le cosinus est le rapport adjacent / hypoténuse. Sans repérer l'hypoténuse (le côté opposé à l'angle droit), on ne peut pas écrire le bon rapport.",
   },
 ];
 
 export default function CosinusQuatriemePage() {
   return (
-    <main className="relative isolate min-h-screen overflow-hidden bg-[#07111f] text-slate-100">
+    <main className="relative isolate min-h-screen overflow-hidden bg-[#f5f8ff] text-slate-800">
       <div
         aria-hidden="true"
-        className="screen-only pointer-events-none absolute inset-0 -z-10"
+        className="screen-only pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(125,211,252,0.08)_1px,transparent_1px),linear-gradient(0deg,rgba(125,211,252,0.08)_1px,transparent_1px)] bg-[size:34px_34px]" />
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(59,130,246,0.24),transparent_32%),linear-gradient(225deg,rgba(244,114,182,0.16),transparent_28%),linear-gradient(315deg,rgba(16,185,129,0.18),transparent_34%)]" />
-        <div className="absolute left-0 top-24 h-24 w-full -rotate-3 bg-blue-300/10" />
-        <div className="absolute bottom-24 right-0 h-28 w-full rotate-2 bg-pink-300/10" />
-        <div className="absolute left-8 top-40 rounded-md border border-white/10 bg-white/10 px-4 py-2 text-3xl font-black text-cyan-100/40 shadow-lg shadow-slate-950/20">
+        <div className="absolute -left-20 top-6 h-72 w-72 rounded-full bg-cyan-200/50 blur-3xl" />
+        <div className="absolute right-0 top-32 h-80 w-80 rounded-full bg-pink-200/50 blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-emerald-200/45 blur-3xl" />
+        <div className="absolute left-8 top-40 rotate-[-6deg] rounded-2xl border border-white bg-white/80 px-4 py-2 text-3xl font-black text-cyan-500 shadow-sm">
           cos
         </div>
-        <div className="absolute right-10 top-52 rounded-md border border-white/10 bg-white/10 px-4 py-2 text-3xl font-black text-amber-100/45 shadow-lg shadow-slate-950/20">
-          90 deg
+        <div className="absolute right-10 top-56 rotate-3 rounded-2xl border border-white bg-white/80 px-4 py-2 text-2xl font-black text-amber-500 shadow-sm">
+          90°
         </div>
-        <div className="absolute bottom-44 left-12 rounded-md border border-white/10 bg-white/10 px-4 py-2 text-2xl font-black text-emerald-100/45 shadow-lg shadow-slate-950/20">
+        <div className="absolute bottom-44 left-12 -rotate-3 rounded-2xl border border-white bg-white/80 px-4 py-2 text-xl font-black text-emerald-500 shadow-sm">
           adj / hyp
         </div>
-        <div className="absolute bottom-60 right-16 rounded-md border border-white/10 bg-white/10 px-4 py-2 text-2xl font-black text-pink-100/40 shadow-lg shadow-slate-950/20">
-          triangle
+        <div className="absolute bottom-60 right-16 rotate-6 rounded-2xl border border-white bg-white/80 px-4 py-2 text-2xl font-black text-pink-500 shadow-sm">
+          △
         </div>
       </div>
 
-      <div className="screen-only border-b border-white/10 bg-slate-950/70 backdrop-blur-md">
+      <div className="screen-only border-b border-slate-200 bg-white/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl flex-col gap-5 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-          <Link
-            href="/fiches-cours"
-            className="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-slate-200 transition hover:bg-white/10"
+          <nav
+            aria-label="Fil d'ariane"
+            className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm font-bold text-slate-500"
           >
-            <ArrowLeft className="h-4 w-4" />
-            Fiches de cours
-          </Link>
+            <Link
+              href="/fiches-cours"
+              className="inline-flex items-center gap-1.5 text-slate-600 transition hover:text-slate-900"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Fiches de cours
+            </Link>
+            <ChevronRight className="h-4 w-4 text-slate-400" />
+            <span>Maths</span>
+            <ChevronRight className="h-4 w-4 text-slate-400" />
+            <span>4e</span>
+            <ChevronRight className="h-4 w-4 text-slate-400" />
+            <span className="text-slate-900">Cosinus</span>
+          </nav>
           <button
             type="button"
             onClick={() => window.print()}
-            className="inline-flex w-fit items-center gap-2 rounded-full bg-cyan-300 px-5 py-3 text-sm font-black text-slate-950 shadow-lg shadow-cyan-950/40 transition hover:bg-cyan-200"
+            className="inline-flex w-fit items-center gap-2 rounded-full bg-cyan-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-cyan-500/30 transition hover:bg-cyan-400"
           >
             <Download className="h-4 w-4" />
-            Telecharger en PDF
+            Télécharger en PDF
           </button>
         </div>
       </div>
 
       <article className="mx-auto max-w-5xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0">
-        <section className="rounded-lg border border-white/15 bg-slate-950/72 p-6 shadow-2xl shadow-slate-950/30 backdrop-blur-md sm:p-8 print:border-0 print:bg-white print:p-0 print:shadow-none">
-          <header className="border-b border-slate-200/20 pb-6 print:border-slate-300">
-            <div className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-normal print:text-slate-700">
-              <span className="rounded-full bg-cyan-300/15 px-3 py-1 text-cyan-200 print:border print:border-slate-300 print:bg-white print:text-slate-700">
+        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 sm:p-8 print:rounded-none print:border-0 print:p-0 print:shadow-none">
+          <header className="border-b border-slate-200 pb-6">
+            <div className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-normal">
+              <span className="rounded-full bg-cyan-100 px-3 py-1 text-cyan-700">
                 Maths
               </span>
-              <span className="rounded-full bg-pink-300/15 px-3 py-1 text-pink-200 print:border print:border-slate-300 print:bg-white print:text-slate-700">
+              <span className="rounded-full bg-pink-100 px-3 py-1 text-pink-700">
                 4e
               </span>
-              <span className="rounded-full bg-white/10 px-3 py-1 text-slate-200 print:border print:border-slate-300 print:bg-white print:text-slate-700">
+              <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-600">
                 Fiche de cours
               </span>
-              <span className="rounded-full bg-white/10 px-3 py-1 text-slate-200 print:border print:border-slate-300 print:bg-white print:text-slate-700">
-                Trigonometrie
+              <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-600">
+                Trigonométrie
               </span>
             </div>
-            <h1 className="mt-5 text-3xl font-black tracking-normal text-white sm:text-5xl print:text-3xl print:text-slate-950">
+            <h1 className="mt-5 text-3xl font-black tracking-normal text-slate-900 sm:text-5xl print:text-3xl">
               Le cosinus
             </h1>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-300 print:text-sm print:text-slate-700">
+            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 print:text-sm">
               Dans un triangle rectangle, le cosinus d&apos;un angle aigu relie
-              le cote adjacent a cet angle et l&apos;hypotenuse. Il sert a
+              le côté adjacent à cet angle et l&apos;hypoténuse. Il sert à
               calculer une longueur ou un angle.
             </p>
-            <div className="mt-5 grid gap-3 rounded-lg border border-white/10 bg-white/[0.03] p-4 text-sm sm:grid-cols-3 print:grid-cols-3 print:border-slate-300 print:bg-white print:p-3">
+            <div className="mt-5 grid gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm sm:grid-cols-3 print:grid-cols-3 print:p-3">
               {identite.map((item) => (
                 <div key={item.label}>
-                  <span className="block text-xs font-black uppercase text-slate-400 print:text-slate-600">
+                  <span className="block text-xs font-black uppercase text-slate-500">
                     {item.label}
                   </span>
-                  <span className="mt-1 block font-black text-white print:text-slate-950">
+                  <span className="mt-1 block font-black text-slate-900">
                     {item.valeur}
                   </span>
                 </div>
@@ -173,87 +184,87 @@ export default function CosinusQuatriemePage() {
           </header>
 
           <div className="grid gap-5 py-6 md:grid-cols-3 print:grid-cols-3 print:gap-3 print:py-4">
-            <div className="rounded-lg border border-cyan-300/20 bg-cyan-300/10 p-4 print:border-slate-300 print:bg-white">
-              <BookOpen className="h-5 w-5 text-cyan-200 print:hidden" />
-              <h2 className="mt-3 text-lg font-black text-white print:mt-0 print:text-base print:text-slate-950">
-                1. Reperer
+            <div className="rounded-2xl border border-cyan-200 bg-cyan-50 p-4">
+              <BookOpen className="h-5 w-5 text-cyan-500 print:hidden" />
+              <h2 className="mt-3 text-lg font-black text-slate-900 print:mt-0 print:text-base">
+                1. Repérer
               </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-300 print:text-xs print:text-slate-700">
-                On trouve l&apos;angle droit, puis l&apos;hypotenuse : c&apos;est
-                le plus grand cote, oppose a l&apos;angle droit.
+              <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
+                On trouve l&apos;angle droit, puis l&apos;hypoténuse : c&apos;est
+                le plus grand côté, opposé à l&apos;angle droit.
               </p>
             </div>
-            <div className="rounded-lg border border-pink-300/20 bg-pink-300/10 p-4 print:border-slate-300 print:bg-white">
-              <Lightbulb className="h-5 w-5 text-pink-200 print:hidden" />
-              <h2 className="mt-3 text-lg font-black text-white print:mt-0 print:text-base print:text-slate-950">
+            <div className="rounded-2xl border border-pink-200 bg-pink-50 p-4">
+              <Lightbulb className="h-5 w-5 text-pink-500 print:hidden" />
+              <h2 className="mt-3 text-lg font-black text-slate-900 print:mt-0 print:text-base">
                 2. Choisir
               </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-300 print:text-xs print:text-slate-700">
-                Par rapport a l&apos;angle choisi, on identifie le cote
-                adjacent, puis on ecrit cos(angle) = adjacent / hypotenuse.
+              <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
+                Par rapport à l&apos;angle choisi, on identifie le côté
+                adjacent, puis on écrit cos(angle) = adjacent / hypoténuse.
               </p>
             </div>
-            <div className="rounded-lg border border-emerald-300/20 bg-emerald-300/10 p-4 print:border-slate-300 print:bg-white">
-              <CheckCircle2 className="h-5 w-5 text-emerald-200 print:hidden" />
-              <h2 className="mt-3 text-lg font-black text-white print:mt-0 print:text-base print:text-slate-950">
+            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+              <CheckCircle2 className="h-5 w-5 text-emerald-500 print:hidden" />
+              <h2 className="mt-3 text-lg font-black text-slate-900 print:mt-0 print:text-base">
                 3. Calculer
               </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-300 print:text-xs print:text-slate-700">
-                On isole l&apos;inconnue, puis on calcule a la calculatrice en
-                verifiant le mode degre.
+              <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
+                On isole l&apos;inconnue, puis on calcule à la calculatrice en
+                vérifiant le mode degré.
               </p>
             </div>
           </div>
 
-          <section className="border-t border-white/10 py-6 print:border-slate-300 print:py-4">
-            <h2 className="text-2xl font-black text-white print:text-xl print:text-slate-950">
+          <section className="border-t border-slate-200 py-6 print:py-4">
+            <h2 className="text-2xl font-black text-slate-900 print:text-xl">
               La formule
             </h2>
             <div className="mt-4 grid gap-4 md:grid-cols-[1fr_1.25fr] print:grid-cols-[1fr_1.25fr]">
-              <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5 text-center print:border-slate-300 print:bg-white">
-                <p className="text-sm font-bold uppercase text-cyan-200 print:text-slate-600">
+              <div className="rounded-2xl border border-cyan-200 bg-cyan-50 p-5 text-center">
+                <p className="text-sm font-bold uppercase text-cyan-600">
                   Dans un triangle rectangle
                 </p>
-                <p className="mt-4 text-2xl font-black text-white print:text-xl print:text-slate-950">
-                  cos(angle) = adjacent / hypotenuse
+                <p className="mt-4 text-2xl font-black text-slate-900 print:text-xl">
+                  cos(angle) = adjacent / hypoténuse
                 </p>
-                <p className="mt-4 text-sm font-bold text-slate-300 print:text-slate-700">
-                  Moyen mnemotechnique : CAH (Cosinus = Adjacent / Hypotenuse).
+                <p className="mt-4 text-sm font-bold text-slate-600">
+                  Moyen mnémotechnique : CAH (Cosinus = Adjacent / Hypoténuse).
                 </p>
               </div>
-              <div className="rounded-lg border border-white/10 bg-white/[0.03] p-5 print:border-slate-300 print:bg-white">
+              <div className="rounded-2xl border border-slate-200 bg-white p-5">
                 <svg
                   viewBox="0 0 320 190"
                   className="h-auto w-full"
                   role="img"
-                  aria-label="Triangle rectangle avec angle, cote adjacent et hypotenuse"
+                  aria-label="Triangle rectangle avec angle, côté adjacent et hypoténuse"
                 >
                   <path
                     d="M45 145 L270 145 L45 35 Z"
                     fill="rgba(14,165,233,0.12)"
-                    stroke="#7dd3fc"
+                    stroke="#0ea5e9"
                     strokeWidth="5"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M45 122 L68 122 L68 145"
                     fill="none"
-                    stroke="#fbbf24"
+                    stroke="#f59e0b"
                     strokeWidth="4"
                   />
                   <path
                     d="M225 145 A45 45 0 0 0 237 114"
                     fill="none"
-                    stroke="#f472b6"
+                    stroke="#ec4899"
                     strokeWidth="5"
                   />
-                  <text x="151" y="166" fill="#e0f2fe" fontSize="17" fontWeight="800" textAnchor="middle">
+                  <text x="151" y="166" fill="#334155" fontSize="17" fontWeight="800" textAnchor="middle">
                     adjacent
                   </text>
-                  <text x="172" y="84" fill="#e0f2fe" fontSize="17" fontWeight="800" textAnchor="middle">
-                    hypotenuse
+                  <text x="168" y="84" fill="#334155" fontSize="17" fontWeight="800" textAnchor="middle">
+                    hypoténuse
                   </text>
-                  <text x="244" y="118" fill="#fbcfe8" fontSize="18" fontWeight="900">
+                  <text x="244" y="118" fill="#db2777" fontSize="18" fontWeight="900">
                     angle
                   </text>
                 </svg>
@@ -261,20 +272,18 @@ export default function CosinusQuatriemePage() {
             </div>
           </section>
 
-          <section className="border-t border-white/10 py-6 print:border-slate-300 print:py-4">
-            <h2 className="text-2xl font-black text-white print:text-xl print:text-slate-950">
+          <section className="border-t border-slate-200 py-6 print:py-4">
+            <h2 className="text-2xl font-black text-slate-900 print:text-xl">
               Selon ce que l&apos;on cherche
             </h2>
             <div className="mt-4 grid gap-4 md:grid-cols-3 print:grid-cols-3 print:gap-3">
               {usages.map((usage) => (
                 <div
                   key={usage.titre}
-                  className="rounded-lg border border-white/10 bg-white/[0.03] p-4 print:border-slate-300 print:bg-white"
+                  className="rounded-2xl border border-slate-200 bg-white p-4"
                 >
-                  <h3 className="font-black text-white print:text-slate-950">
-                    {usage.titre}
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-300 print:text-xs print:text-slate-700">
+                  <h3 className="font-black text-slate-900">{usage.titre}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
                     {usage.detail}
                   </p>
                 </div>
@@ -282,26 +291,24 @@ export default function CosinusQuatriemePage() {
             </div>
           </section>
 
-          <section className="border-t border-white/10 py-6 print:border-slate-300 print:py-4">
-            <h2 className="text-2xl font-black text-white print:text-xl print:text-slate-950">
-              Exemples corriges
+          <section className="border-t border-slate-200 py-6 print:py-4">
+            <h2 className="text-2xl font-black text-slate-900 print:text-xl">
+              Exemples corrigés
             </h2>
             <div className="mt-4 grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3">
               {exemples.map((exemple) => (
                 <div
                   key={exemple.titre}
-                  className="rounded-lg border border-white/10 bg-white/[0.03] p-4 print:border-slate-300 print:bg-white"
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
                 >
-                  <h3 className="font-black text-white print:text-slate-950">
-                    {exemple.titre}
-                  </h3>
-                  <p className="mt-2 text-sm text-slate-300 print:text-xs print:text-slate-700">
+                  <h3 className="font-black text-slate-900">{exemple.titre}</h3>
+                  <p className="mt-2 text-sm text-slate-600 print:text-xs">
                     {exemple.donnees}
                   </p>
-                  <p className="mt-1 text-sm font-bold text-slate-100 print:text-xs print:text-slate-900">
+                  <p className="mt-1 text-sm font-bold text-slate-900 print:text-xs">
                     {exemple.question}
                   </p>
-                  <p className="mt-3 rounded-md bg-cyan-300/10 p-3 text-sm leading-6 text-cyan-100 print:border print:border-slate-300 print:bg-white print:text-xs print:text-slate-700">
+                  <p className="mt-3 rounded-xl border border-cyan-100 bg-cyan-50 p-3 text-sm leading-6 text-cyan-800 print:text-xs">
                     {exemple.solution}
                   </p>
                 </div>
@@ -309,25 +316,25 @@ export default function CosinusQuatriemePage() {
             </div>
           </section>
 
-          <section className="border-t border-white/10 py-6 print:border-slate-300 print:py-4">
+          <section className="border-t border-slate-200 py-6 print:py-4">
             <div className="grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3">
-              <div className="rounded-lg border border-amber-300/20 bg-amber-300/10 p-4 print:border-slate-300 print:bg-white">
-                <h2 className="flex items-center gap-2 text-lg font-black text-white print:text-base print:text-slate-950">
-                  <AlertTriangle className="h-5 w-5 text-amber-200 print:hidden" />
-                  Pieges a eviter
+              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
+                <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
+                  <AlertTriangle className="h-5 w-5 text-amber-500 print:hidden" />
+                  Pièges à éviter
                 </h2>
-                <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-300 print:text-xs print:text-slate-700">
+                <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-700 print:text-xs">
                   {pieges.map((piege) => (
                     <li key={piege}>{piege}</li>
                   ))}
                 </ul>
               </div>
-              <div className="rounded-lg border border-emerald-300/20 bg-emerald-300/10 p-4 print:border-slate-300 print:bg-white">
-                <h2 className="flex items-center gap-2 text-lg font-black text-white print:text-base print:text-slate-950">
-                  <CheckCircle2 className="h-5 w-5 text-emerald-200 print:hidden" />
-                  A retenir
+              <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+                <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
+                  <CheckCircle2 className="h-5 w-5 text-emerald-500 print:hidden" />
+                  À retenir
                 </h2>
-                <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-300 print:text-xs print:text-slate-700">
+                <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-700 print:text-xs">
                   {aRetenir.map((point) => (
                     <li key={point}>{point}</li>
                   ))}
@@ -336,25 +343,25 @@ export default function CosinusQuatriemePage() {
             </div>
           </section>
 
-          <section className="border-t border-white/10 pt-6 print:border-slate-300 print:pt-4">
-            <h2 className="flex items-center gap-2 text-2xl font-black text-white print:text-xl print:text-slate-950">
-              <Calculator className="h-6 w-6 text-cyan-200 print:hidden" />
-              Je m&apos;entraine
+          <section className="border-t border-slate-200 pt-6 print:pt-4">
+            <h2 className="flex items-center gap-2 text-2xl font-black text-slate-900 print:text-xl">
+              <Calculator className="h-6 w-6 text-cyan-500 print:hidden" />
+              Je m&apos;entraîne
             </h2>
-            <ol className="mt-4 grid gap-4 text-sm leading-6 text-slate-300 print:gap-2 print:text-xs print:text-slate-700">
+            <ol className="mt-4 grid gap-4 text-sm leading-6 text-slate-700 print:gap-2 print:text-xs">
               {entrainement.map((item, index) => (
                 <li
                   key={item.question}
-                  className="rounded-lg border border-white/10 bg-white/[0.03] p-4 print:border-slate-300 print:bg-white"
+                  className="rounded-2xl border border-slate-200 bg-white p-4"
                 >
-                  <p className="font-bold text-slate-100 print:text-slate-900">
+                  <p className="font-bold text-slate-900">
                     {index + 1}. {item.question}
                   </p>
                   <details className="fiche-correction mt-2">
-                    <summary className="cursor-pointer text-sm font-bold text-cyan-200 print:text-slate-700">
+                    <summary className="cursor-pointer text-sm font-bold text-cyan-600">
                       Voir la correction
                     </summary>
-                    <p className="mt-2 rounded-md bg-cyan-300/10 p-3 text-sm leading-6 text-cyan-100 print:border print:border-slate-300 print:bg-white print:text-slate-700">
+                    <p className="mt-2 rounded-xl border border-cyan-100 bg-cyan-50 p-3 text-sm leading-6 text-cyan-800">
                       {item.correction}
                     </p>
                   </details>
@@ -364,14 +371,14 @@ export default function CosinusQuatriemePage() {
 
             <Link
               href="/coach-ia/maths?classe=4e"
-              className="screen-only mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-cyan-300 px-5 py-3 text-sm font-black text-slate-950 shadow-lg shadow-cyan-950/40 transition hover:bg-cyan-200"
+              className="screen-only mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-cyan-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-cyan-500/30 transition hover:bg-cyan-400"
             >
               <Sparkles className="h-4 w-4" />
-              M&apos;entrainer avec le Coach IA
+              M&apos;entraîner avec le Coach IA
             </Link>
           </section>
 
-          <footer className="mt-8 flex items-center justify-between border-t border-white/10 pt-5 text-xs text-slate-400 print:mt-6 print:border-slate-300 print:text-slate-600">
+          <footer className="mt-8 flex items-center justify-between border-t border-slate-200 pt-5 text-xs text-slate-500 print:mt-6">
             <span>eleveai.fr - Fiche de cours</span>
             <span>Cosinus - 4e</span>
           </footer>
@@ -382,7 +389,7 @@ export default function CosinusQuatriemePage() {
         <button
           type="button"
           onClick={() => window.print()}
-          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-900 px-4 py-3 text-sm font-black text-white shadow-2xl transition hover:bg-slate-800"
+          className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-3 text-sm font-black text-slate-700 shadow-xl shadow-slate-300/50 transition hover:bg-slate-100"
         >
           <Printer className="h-4 w-4" />
           Imprimer
@@ -403,7 +410,7 @@ export default function CosinusQuatriemePage() {
           html,
           body {
             background: white !important;
-            color: #020617 !important;
+            color: #0f172a !important;
           }
 
           body > header,
@@ -415,7 +422,7 @@ export default function CosinusQuatriemePage() {
           main {
             min-height: auto !important;
             background: white !important;
-            color: #020617 !important;
+            color: #0f172a !important;
           }
 
           .fiche-correction > summary {
