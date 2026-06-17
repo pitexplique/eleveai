@@ -147,6 +147,15 @@ export default function CosinusQuatriemePage() {
       <article className="mx-auto max-w-5xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0">
         <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 sm:p-8 print:rounded-none print:border-0 print:p-0 print:shadow-none">
           <header className="border-b border-slate-200 pb-6">
+            <div className="mb-4 flex flex-wrap items-center gap-x-2 gap-y-1">
+              <span className="flex items-center gap-2 text-lg font-black tracking-tight text-cyan-600">
+                <Sparkles className="h-5 w-5" />
+                eleveai.fr
+              </span>
+              <span className="text-sm font-bold italic text-slate-500">
+La liberté d&apos;apprendre
+              </span>
+            </div>
             <div className="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-normal">
               <span className="rounded-full bg-cyan-100 px-3 py-1 text-cyan-700">
                 Maths
