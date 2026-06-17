@@ -1325,7 +1325,7 @@ export const algorithmiquePythonBank: TutorBankItemV4[] = [
     microId: "python_simulation_proba",
     difficulty: 5,
     theme: "neutral",
-    text: "Suite de la simulation précédente : pour estimer $P(\\text{« 6 »})$, on calcule :",
+    text: "Suite de la simulation précédente : pour estimer la probabilité d'obtenir « 6 », notée $P(6)$, on calcule :",
     format: "qcm",
     choices: [
       "`s / 1000`",
