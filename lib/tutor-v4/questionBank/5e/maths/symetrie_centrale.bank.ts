@@ -19,6 +19,15 @@ function transformationCanvas(
   return { kind: "transformation", ...data };
 }
 
+function expl(calcul: string) {
+  return (
+    "Définition : une symétrie centrale est un demi-tour autour d’un point appelé centre.\n\n" +
+    "Méthode : on relie chaque point au centre et on reporte la même distance de l’autre côté.\n\nCalcul : " +
+    calcul +
+    "\n\nConclusion : la figure ou le point obtenu est l’image par la symétrie centrale."
+  );
+}
+
 export const symetrieCentraleBank: TutorBankItemV4[] = [
   /* =========================
      SYM_CENTRALE_RECONNAITRE
@@ -1218,5 +1227,233 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       "Calcul : l’image du centre O est O lui-même.\n\n" +
       "Conclusion : O ne change pas de position car c’est le point invariant de la symétrie centrale.",
     tags: ["sym_centrale", "defi", "point_invariant", "open"],
+  },
+
+  /* =========================
+     TOP-UP — SYM_CENTRALE_RECONNAITRE (+3)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_sym_centrale_reconnaitre_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "À quelle rotation correspond une symétrie centrale ?",
+    format: "qcm",
+    choices: ["une rotation de 180°", "une rotation de 90°", "une rotation de 360°", "une translation"],
+    expected: ["une rotation de 180°"],
+    comparator: "mcq_exact",
+    hint: "Un demi-tour.",
+    explanation: expl("Une symétrie centrale est un demi-tour, c’est-à-dire une rotation de 180° autour du centre."),
+    tags: ["sym_centrale", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "5e_sym_centrale_reconnaitre_fixed_x2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la différence principale entre une symétrie axiale et une symétrie centrale ?",
+    format: "qcm",
+    choices: [
+      "l’une utilise un axe, l’autre un centre",
+      "elles sont identiques",
+      "l’une agrandit la figure",
+      "l’une déplace sans tourner",
+    ],
+    expected: ["l’une utilise un axe, l’autre un centre"],
+    comparator: "mcq_exact",
+    hint: "Axe vs point.",
+    explanation: expl("La symétrie axiale se fait par rapport à un axe (une droite) ; la symétrie centrale se fait par rapport à un centre (un point)."),
+    tags: ["sym_centrale", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "5e_sym_centrale_reconnaitre_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Cite un exemple de la vie courante qui évoque une symétrie centrale.",
+    format: "open",
+    expected: ["demi-tour", "carte", "roue", "centre"],
+    comparator: "contains_keyword",
+    hint: "Pense aux cartes à jouer ou à un demi-tour.",
+    explanation: expl("Une carte à jouer (comme une dame ou un roi) reste identique après un demi-tour : c’est un exemple de symétrie centrale autour de son centre."),
+    tags: ["sym_centrale", "reconnaitre", "open"],
+  },
+
+  /* =========================
+     TOP-UP — SYM_CENTRALE_POINT (+3)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_sym_centrale_point_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_point",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans une symétrie centrale de centre O, que peut-on dire des points A, O et A' ?",
+    format: "qcm",
+    choices: [
+      "ils sont alignés et O est le milieu de [AA']",
+      "ils forment un triangle",
+      "A et A' sont confondus",
+      "O est en dehors de la droite (AA')",
+    ],
+    expected: ["ils sont alignés et O est le milieu de [AA']"],
+    comparator: "mcq_exact",
+    hint: "Le centre est au milieu.",
+    explanation: expl("A, O et A' sont alignés et O est le milieu du segment [AA'] : OA = OA'."),
+    tags: ["sym_centrale", "point", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "5e_sym_centrale_point_tpl_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_point",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Coordonnées de A' : (2×ox − x ; 2×oy − y).",
+    tags: ["sym_centrale", "point", "coordonnees", "template"],
+    generate: () => {
+      const ox = randomChoice([3, 4, 5]);
+      const oy = randomChoice([3, 4, 5]);
+      const x = randomChoice([0, 1, 2]);
+      const y = randomChoice([0, 1, 2]);
+      const xp = 2 * ox - x;
+      const yp = 2 * oy - y;
+      return {
+        text: `O(${ox};${oy}) est le centre de symétrie et A(${x};${y}). Quelles sont les coordonnées de A' ?`,
+        format: "short",
+        expected: [`(${xp};${yp})`, `(${xp}; ${yp})`, `${xp};${yp}`],
+        comparator: "contains_keyword",
+        explanation: expl(`A' a pour coordonnées (2×${ox} − ${x} ; 2×${oy} − ${y}) = (${xp};${yp}).`),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "5e_sym_centrale_point_fixed_x2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_point",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans une symétrie centrale de centre O, on sait que OA = 7 cm. Quelle est la longueur OA' ?",
+    format: "short",
+    expected: ["7"],
+    comparator: "number_equal",
+    hint: "O est le milieu de [AA'].",
+    explanation: expl("O est le milieu de [AA'], donc OA' = OA = 7 cm."),
+    tags: ["sym_centrale", "point"],
+  },
+
+  /* =========================
+     TOP-UP — SYM_CENTRALE_FIGURE (+2)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_sym_centrale_figure_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_figure",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Par une symétrie centrale, une figure et son image ont-elles la même aire ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "La symétrie conserve les longueurs et les aires.",
+    explanation: expl("La symétrie centrale conserve les longueurs et les aires : la figure et son image ont la même aire."),
+    tags: ["sym_centrale", "figure", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "5e_sym_centrale_figure_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_figure",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique pourquoi il suffit de construire l’image des sommets pour obtenir l’image d’un polygone.",
+    format: "open",
+    expected: ["sommets", "relie", "image"],
+    comparator: "contains_keyword",
+    hint: "On relie ensuite les images.",
+    explanation: expl("On construit l’image de chaque sommet, puis on relie ces images dans le même ordre : on obtient l’image du polygone."),
+    tags: ["sym_centrale", "figure", "open"],
+  },
+
+  /* =========================
+     TOP-UP — SYM_CENTRALE_DEFI (+3)
+  ========================= */
+  {
+    kind: "fixed",
+    id: "5e_sym_centrale_defi_fixed_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Quelle figure possède un centre de symétrie ?",
+    format: "qcm",
+    choices: ["un parallélogramme", "un triangle quelconque", "la lettre F", "la lettre P"],
+    expected: ["un parallélogramme"],
+    comparator: "mcq_exact",
+    hint: "Pense à un demi-tour qui laisse la figure inchangée.",
+    explanation: expl("Le parallélogramme possède un centre de symétrie : un demi-tour autour du point d’intersection de ses diagonales le laisse inchangé."),
+    tags: ["sym_centrale", "defi", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "5e_sym_centrale_defi_fixed_x2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "A(1;2) a pour image A'(5;6) par une symétrie centrale. Quelles sont les coordonnées du centre O ?",
+    format: "short",
+    expected: ["(3;4)", "(3; 4)", "3;4"],
+    comparator: "contains_keyword",
+    hint: "O est le milieu de [AA'].",
+    explanation: expl("O est le milieu de [AA'] : ((1+5)/2 ; (2+6)/2) = (3;4)."),
+    tags: ["sym_centrale", "defi", "coordonnees"],
+  },
+  {
+    kind: "fixed",
+    id: "5e_sym_centrale_defi_open_x1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un élève dit : « La symétrie centrale change la taille de la figure ». Explique son erreur.",
+    format: "open",
+    expected: ["conserve", "longueurs", "taille", "même"],
+    comparator: "contains_keyword",
+    hint: "La symétrie conserve les longueurs.",
+    explanation: expl("La symétrie centrale conserve les longueurs et les angles : la figure image a exactement la même taille que la figure de départ."),
+    tags: ["sym_centrale", "defi", "open", "erreur"],
   },
 ];
