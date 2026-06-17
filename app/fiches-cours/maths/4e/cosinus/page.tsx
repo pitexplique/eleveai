@@ -372,7 +372,7 @@ export default function CosinusQuatriemePage() {
           </section>
 
           <footer className="mt-8 flex items-center justify-between border-t border-white/10 pt-5 text-xs text-slate-400 print:mt-6 print:border-slate-300 print:text-slate-600">
-            <span>EleveAI - Fiche de cours</span>
+            <span>eleveai.fr - Fiche de cours</span>
             <span>Cosinus - 4e</span>
           </footer>
         </section>

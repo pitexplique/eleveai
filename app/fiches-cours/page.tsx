@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { BookOpen, Download, FileText } from "lucide-react";
+import { BookOpen, Download, FileText, MessageCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Fiches de cours",
@@ -45,6 +45,31 @@ export default function FichesCoursPage() {
               depuis le navigateur.
             </p>
           </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 pt-8 sm:px-8">
+        <div className="flex flex-col gap-4 rounded-2xl border border-emerald-300/30 bg-emerald-300/10 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <div className="flex items-start gap-3">
+            <MessageCircle className="mt-0.5 h-6 w-6 shrink-0 text-emerald-200" />
+            <div>
+              <p className="text-base font-black text-white">
+                Teste les nouvelles fiches de cours
+              </p>
+              <p className="mt-1 text-sm leading-6 text-slate-200">
+                Ces fiches sont toutes neuves. Lis-les, entraine-toi, puis
+                dis-nous si elles t&apos;aident a mieux comprendre. Ton avis nous
+                aide a les ameliorer pour toute la classe.
+              </p>
+            </div>
+          </div>
+          <Link
+            href="/votre-avis"
+            className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full bg-emerald-400 px-5 py-3 text-sm font-black text-slate-950 transition hover:bg-emerald-300"
+          >
+            <MessageCircle className="h-4 w-4" />
+            Donner mon avis
+          </Link>
         </div>
       </section>
 
