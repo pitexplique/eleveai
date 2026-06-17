@@ -324,12 +324,16 @@ export default function AccueilPage({
           <p className="text-2xl font-black tracking-wide text-white sm:text-3xl">
             La liberté d&apos;apprendre
           </p>
+          <p className="mx-auto mt-2 max-w-2xl text-sm font-semibold leading-6 text-white/75 sm:text-base">
+            Teste les nouvelles fiches de cours, entraîne-toi, puis dis-nous si
+            elles t&apos;aident à mieux comprendre.
+          </p>
           <Link
-            href="/concours-logo"
-            className="group mt-3 inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-300/10 px-4 py-1.5 text-xs font-black tracking-wide text-amber-200 transition hover:scale-105 hover:border-amber-300/70 hover:bg-amber-300/20 sm:text-sm"
+            href="/fiches-cours"
+            className="group mt-3 inline-flex items-center gap-2 rounded-full border border-emerald-300/40 bg-emerald-300/10 px-4 py-1.5 text-xs font-black tracking-wide text-emerald-200 transition hover:scale-105 hover:border-emerald-300/70 hover:bg-emerald-300/20 sm:text-sm"
           >
-            <span aria-hidden="true">🏆</span>
-            Le concours dessine le logo
+            <span aria-hidden="true">📚</span>
+            Tester les fiches de cours
             <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
           </Link>
         </div>
