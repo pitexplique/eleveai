@@ -13,8 +13,8 @@ import { useEleve } from "@/context/EleveContext";
  * role="Élève", topic="Question", source="eleve-message" → filtrable dans
  * l'admin. Composant autonome : il suffit de poser <EcrireAuProf />.
  *
- * Position : bas À DROITE, empilé AU-DESSUS du [[FloatingCoach]] (bottom-24),
- * pour ne pas heurter la Calculatrice (bas-gauche) ni le Coach IA (bas-droite).
+ * Position : bas AU CENTRE (les coins sont pris : Calculatrice à gauche,
+ * Coach IA à droite). Bouton et panneau centrés horizontalement.
  */
 export default function EcrireAuProf() {
   const { eleve } = useEleve();
@@ -101,7 +101,7 @@ export default function EcrireAuProf() {
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Écris à ton prof"
-        className="fixed bottom-24 right-5 z-50 flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-pink-500 px-5 py-3 text-sm font-black text-white shadow-2xl ring-2 ring-white/50 transition hover:scale-105 print:hidden"
+        className="fixed bottom-5 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-pink-500 px-5 py-3 text-sm font-black text-white shadow-2xl ring-2 ring-white/50 transition hover:scale-105 print:hidden"
       >
         ✉️ <span className="hidden sm:inline">Écris-moi</span>
       </button>
@@ -109,7 +109,7 @@ export default function EcrireAuProf() {
   }
 
   return (
-    <aside className="fixed bottom-5 right-5 z-50 flex w-[300px] flex-col overflow-hidden rounded-3xl border border-amber-200 bg-white text-slate-800 shadow-2xl sm:w-[340px] print:hidden">
+    <aside className="fixed bottom-5 left-1/2 z-50 flex w-[300px] -translate-x-1/2 flex-col overflow-hidden rounded-3xl border border-amber-200 bg-white text-slate-800 shadow-2xl sm:w-[340px] print:hidden">
       <div className="flex items-center justify-between bg-gradient-to-br from-amber-500 via-orange-500 to-pink-500 px-5 py-4">
         <div>
           <p className="font-black text-white">✉️ Écris à ton prof</p>
