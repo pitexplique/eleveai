@@ -15,6 +15,7 @@ import {
   Sparkles,
   Wrench,
 } from "lucide-react";
+import ModeClasse, { type ClasseSlide } from "@/components/fiches/ModeClasse";
 
 const identite = [
   { label: "Prérequis", valeur: "Addition, division, ranger des nombres" },
@@ -89,6 +90,144 @@ const entrainement = [
 const serie = [8, 12, 10, 14, 16];
 const moyenne = 12;
 
+const notions = [
+  {
+    titre: "La moyenne",
+    texte:
+      "On additionne toutes les valeurs, puis on divise par le nombre de valeurs.",
+  },
+  {
+    titre: "La médiane",
+    texte: "On range les valeurs dans l'ordre : la médiane est la valeur du milieu.",
+  },
+  {
+    titre: "L'étendue",
+    texte:
+      "On calcule la différence entre la plus grande et la plus petite valeur.",
+  },
+];
+
+const classeSlides: ClasseSlide[] = [
+  {
+    titre: "Objectif du cours",
+    badge: "Statistiques - 4e",
+    section: {
+      type: "objectif",
+      phrase: "Résumer une série de données",
+      sousPhrase: "On utilise trois indicateurs : moyenne, médiane, étendue.",
+      encadre: {
+        titre: "L'idée",
+        texte: "Un seul nombre peut décrire toute une série.",
+      },
+    },
+  },
+  {
+    titre: "À quoi ça sert ?",
+    badge: "Utilité & histoire",
+    section: {
+      type: "duo",
+      gauche: {
+        variante: "info",
+        titre: "Au quotidien",
+        contenu:
+          "Moyenne des notes, températures moyennes, sondages, scores au sport, données des entreprises pour décider.",
+      },
+      droite: {
+        variante: "histoire",
+        titre: "Le savais-tu ?",
+        contenu:
+          "« Statistique » est lié au mot « État » : on comptait la population et les richesses. Les recensements existaient en Égypte et à Rome.",
+      },
+    },
+  },
+  {
+    titre: "Les 3 indicateurs",
+    badge: "Méthode",
+    section: { type: "cartes", cartes: notions },
+  },
+  {
+    titre: "La formule",
+    badge: "À connaître par cœur",
+    section: {
+      type: "objectif",
+      phrase: "Moyenne = somme des valeurs ÷ nombre de valeurs",
+      sousPhrase: "Médiane = valeur du milieu (série rangée). Étendue = max − min.",
+      encadre: {
+        titre: "Astuce",
+        texte: "On range toujours la série avant de chercher la médiane.",
+      },
+    },
+  },
+  {
+    titre: "À quoi sert chaque indicateur",
+    badge: "3 situations",
+    section: {
+      type: "cartes",
+      cartes: usages.map((u) => ({ titre: u.titre, texte: u.detail })),
+    },
+  },
+  {
+    titre: "Exemple guidé",
+    badge: "Calculer une moyenne",
+    section: {
+      type: "exemple",
+      enonce: "Les notes d'un élève : 8, 12, 10, 14 et 16.",
+      question: "Calculer la moyenne.",
+      correction: "Moyenne = (8 + 12 + 10 + 14 + 16) ÷ 5 = 60 ÷ 5 = 12.",
+    },
+  },
+  {
+    titre: "Autre exemple",
+    badge: "Médiane et étendue",
+    section: {
+      type: "exemple",
+      enonce: "Série rangée : 8, 10, 12, 14, 16.",
+      question: "Donner la médiane et l'étendue.",
+      correction: "5 valeurs : médiane = 12 (milieu). Étendue = 16 − 8 = 8.",
+    },
+  },
+  {
+    titre: "Pièges & à retenir",
+    badge: "Vigilance",
+    section: {
+      type: "duo",
+      gauche: {
+        variante: "piege",
+        titre: "Pièges à éviter",
+        contenu: (
+          <ul className="grid gap-3 text-2xl leading-snug">
+            {pieges.map((piege) => (
+              <li key={piege}>• {piege}</li>
+            ))}
+          </ul>
+        ),
+      },
+      droite: {
+        variante: "ok",
+        titre: "À retenir",
+        contenu: (
+          <ul className="grid gap-3 text-2xl leading-snug">
+            {aRetenir.map((point) => (
+              <li key={point}>• {point}</li>
+            ))}
+          </ul>
+        ),
+      },
+    },
+  },
+  {
+    titre: "À toi de jouer",
+    badge: "Exercice flash",
+    section: {
+      type: "exercice",
+      enonce: "Série : 3, 7, 8, 10, 15.",
+      question: "Donne la médiane.",
+      indice: "La médiane est la valeur du milieu (série rangée).",
+      correction: "5 valeurs rangées : la médiane est celle du milieu, soit 8.",
+    },
+  },
+];
+
 export default function StatistiquesQuatriemePage() {
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#f2fbf9] text-slate-800">
@@ -133,14 +272,17 @@ export default function StatistiquesQuatriemePage() {
             <ChevronRight className="h-4 w-4 text-slate-400" />
             <span className="text-slate-900">Les statistiques</span>
           </nav>
-          <button
-            type="button"
-            onClick={() => window.print()}
-            className="inline-flex w-fit items-center gap-2 rounded-full bg-teal-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-500/30 transition hover:bg-teal-400"
-          >
-            <Download className="h-4 w-4" />
-            Télécharger en PDF
-          </button>
+          <div className="flex flex-wrap gap-2">
+            <ModeClasse sousTitre="Statistiques - 4e" slides={classeSlides} />
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-teal-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-500/30 transition hover:bg-teal-400"
+            >
+              <Download className="h-4 w-4" />
+              Télécharger en PDF
+            </button>
+          </div>
         </div>
       </div>
 

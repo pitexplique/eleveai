@@ -15,6 +15,7 @@ import {
   Sparkles,
   Wrench,
 } from "lucide-react";
+import ModeClasse, { type ClasseSlide } from "@/components/fiches/ModeClasse";
 
 const identite = [
   { label: "Prérequis", valeur: "Droites parallèles, produit en croix" },
@@ -91,6 +92,146 @@ const entrainement = [
   },
 ];
 
+const notions = [
+  {
+    titre: "Repérer",
+    texte:
+      "On vérifie la configuration : deux droites sécantes en A et deux droites parallèles.",
+  },
+  {
+    titre: "Écrire",
+    texte:
+      "On écrit l'égalité des rapports en respectant l'ordre des sommets : AM / AB = AN / AC = MN / BC.",
+  },
+  {
+    titre: "Calculer",
+    texte:
+      "On garde les deux rapports utiles, puis on calcule la longueur manquante par produit en croix.",
+  },
+];
+
+const classeSlides: ClasseSlide[] = [
+  {
+    titre: "Objectif du cours",
+    badge: "Thalès - 3e",
+    section: {
+      type: "objectif",
+      phrase: "Calculer une longueur avec le théorème de Thalès",
+      sousPhrase:
+        "Deux parallèles coupant deux sécantes donnent des rapports de longueurs égaux.",
+      encadre: {
+        titre: "L'idée",
+        texte: "Des triangles emboîtés ont des côtés proportionnels.",
+      },
+    },
+  },
+  {
+    titre: "À quoi ça sert ?",
+    badge: "Utilité & histoire",
+    section: {
+      type: "duo",
+      gauche: {
+        variante: "info",
+        titre: "Au quotidien",
+        contenu:
+          "Mesurer la hauteur d'un arbre par son ombre, la largeur d'une rivière, les agrandissements et réductions (plans, maquettes, échelles).",
+      },
+      droite: {
+        variante: "histoire",
+        titre: "Le savais-tu ?",
+        contenu:
+          "Thalès de Milet (vers 600 av. J.-C.) aurait mesuré la hauteur de la grande pyramide en comparant son ombre à celle d'un bâton.",
+      },
+    },
+  },
+  {
+    titre: "Les 3 réflexes",
+    badge: "Méthode",
+    section: { type: "cartes", cartes: notions },
+  },
+  {
+    titre: "La formule",
+    badge: "À connaître par cœur",
+    section: {
+      type: "objectif",
+      phrase: "AM / AB = AN / AC = MN / BC",
+      sousPhrase: "A est le sommet commun aux deux droites sécantes.",
+      encadre: {
+        titre: "Condition",
+        texte: "(MN) doit être parallèle à (BC).",
+      },
+    },
+  },
+  {
+    titre: "Selon l'inconnue",
+    badge: "3 situations",
+    section: {
+      type: "cartes",
+      cartes: usages.map((u) => ({ titre: u.titre, texte: u.detail })),
+    },
+  },
+  {
+    titre: "Exemple guidé",
+    badge: "Calculer une longueur",
+    section: {
+      type: "exemple",
+      enonce: "(MN) // (BC). AM = 2 cm, AB = 8 cm, AC = 12 cm.",
+      question: "Calculer AN.",
+      correction: "AM / AB = AN / AC, donc AN = 12 x 2 / 8 = 3 cm.",
+    },
+  },
+  {
+    titre: "Autre exemple",
+    badge: "Calculer le grand côté",
+    section: {
+      type: "exemple",
+      enonce: "(MN) // (BC). AM = 3 cm, AB = 9 cm, MN = 4 cm.",
+      question: "Calculer BC.",
+      correction: "AM / AB = MN / BC, donc BC = 4 x 9 / 3 = 12 cm.",
+    },
+  },
+  {
+    titre: "Pièges & à retenir",
+    badge: "Vigilance",
+    section: {
+      type: "duo",
+      gauche: {
+        variante: "piege",
+        titre: "Pièges à éviter",
+        contenu: (
+          <ul className="grid gap-3 text-2xl leading-snug">
+            {pieges.map((piege) => (
+              <li key={piege}>• {piege}</li>
+            ))}
+          </ul>
+        ),
+      },
+      droite: {
+        variante: "ok",
+        titre: "À retenir",
+        contenu: (
+          <ul className="grid gap-3 text-2xl leading-snug">
+            {aRetenir.map((point) => (
+              <li key={point}>• {point}</li>
+            ))}
+          </ul>
+        ),
+      },
+    },
+  },
+  {
+    titre: "À toi de jouer",
+    badge: "Exercice flash",
+    section: {
+      type: "exercice",
+      enonce: "(MN) // (BC). AM = 4 cm, AB = 10 cm, MN = 6 cm.",
+      question: "Calcule BC.",
+      indice: "AM / AB = MN / BC, puis produit en croix.",
+      correction: "BC = 6 x 10 / 4 = 15 cm.",
+    },
+  },
+];
+
 export default function ThalesTroisiemePage() {
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#f5f6ff] text-slate-800">
@@ -135,14 +276,17 @@ export default function ThalesTroisiemePage() {
             <ChevronRight className="h-4 w-4 text-slate-400" />
             <span className="text-slate-900">Théorème de Thalès</span>
           </nav>
-          <button
-            type="button"
-            onClick={() => window.print()}
-            className="inline-flex w-fit items-center gap-2 rounded-full bg-indigo-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-400"
-          >
-            <Download className="h-4 w-4" />
-            Télécharger en PDF
-          </button>
+          <div className="flex flex-wrap gap-2">
+            <ModeClasse sousTitre="Thalès - 3e" slides={classeSlides} />
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-indigo-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-400"
+            >
+              <Download className="h-4 w-4" />
+              Télécharger en PDF
+            </button>
+          </div>
         </div>
       </div>
 

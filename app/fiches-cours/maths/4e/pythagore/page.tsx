@@ -15,6 +15,7 @@ import {
   Sparkles,
   Wrench,
 } from "lucide-react";
+import ModeClasse, { type ClasseSlide } from "@/components/fiches/ModeClasse";
 
 const identite = [
   { label: "Prérequis", valeur: "Triangle rectangle, carrés, racine carrée" },
@@ -91,6 +92,146 @@ const entrainement = [
   },
 ];
 
+const notions = [
+  {
+    titre: "Repérer",
+    texte:
+      "On trouve l'angle droit, puis l'hypoténuse : le côté opposé à l'angle droit, le plus grand.",
+  },
+  {
+    titre: "Écrire",
+    texte:
+      "On applique l'égalité : hypoténuse² = côté² + côté² (les deux côtés de l'angle droit).",
+  },
+  {
+    titre: "Calculer",
+    texte:
+      "On remplace, on calcule les carrés, puis on prend la racine carrée pour la longueur cherchée.",
+  },
+];
+
+const classeSlides: ClasseSlide[] = [
+  {
+    titre: "Objectif du cours",
+    badge: "Pythagore - 4e",
+    section: {
+      type: "objectif",
+      phrase: "Calculer une longueur dans un triangle rectangle",
+      sousPhrase:
+        "Le théorème de Pythagore relie les longueurs des trois côtés d'un triangle rectangle.",
+      encadre: {
+        titre: "L'idée",
+        texte: "En connaissant deux côtés, on trouve toujours le troisième.",
+      },
+    },
+  },
+  {
+    titre: "À quoi ça sert ?",
+    badge: "Utilité & histoire",
+    section: {
+      type: "duo",
+      gauche: {
+        variante: "info",
+        titre: "Au quotidien",
+        contenu:
+          "Murs bien droits des maçons, diagonale d'un terrain, longueur d'une rampe ou d'un toit, navigation, informatique.",
+      },
+      droite: {
+        variante: "histoire",
+        titre: "Le savais-tu ?",
+        contenu:
+          "Babyloniens et Égyptiens connaissaient le triangle 3-4-5 plus de 1000 ans avant Pythagore pour tracer des angles droits.",
+      },
+    },
+  },
+  {
+    titre: "Les 3 réflexes",
+    badge: "Méthode",
+    section: { type: "cartes", cartes: notions },
+  },
+  {
+    titre: "La formule",
+    badge: "À connaître par cœur",
+    section: {
+      type: "objectif",
+      phrase: "BC² = AB² + AC²",
+      sousPhrase: "BC est l'hypoténuse, le côté opposé à l'angle droit.",
+      encadre: {
+        titre: "Attention",
+        texte: "Pythagore ne s'applique que dans un triangle rectangle.",
+      },
+    },
+  },
+  {
+    titre: "Selon l'inconnue",
+    badge: "3 situations",
+    section: {
+      type: "cartes",
+      cartes: usages.map((u) => ({ titre: u.titre, texte: u.detail })),
+    },
+  },
+  {
+    titre: "Exemple guidé",
+    badge: "Calculer l'hypoténuse",
+    section: {
+      type: "exemple",
+      enonce: "ABC rectangle en A, AB = 3 cm, AC = 4 cm.",
+      question: "Calculer BC.",
+      correction: "BC² = 3² + 4² = 9 + 16 = 25, donc BC = 5 cm.",
+    },
+  },
+  {
+    titre: "Autre exemple",
+    badge: "Calculer un côté",
+    section: {
+      type: "exemple",
+      enonce: "ABC rectangle en A, BC = 13 cm, AB = 5 cm.",
+      question: "Calculer AC.",
+      correction: "AC² = 13² − 5² = 169 − 25 = 144, donc AC = 12 cm.",
+    },
+  },
+  {
+    titre: "Pièges & à retenir",
+    badge: "Vigilance",
+    section: {
+      type: "duo",
+      gauche: {
+        variante: "piege",
+        titre: "Pièges à éviter",
+        contenu: (
+          <ul className="grid gap-3 text-2xl leading-snug">
+            {pieges.map((piege) => (
+              <li key={piege}>• {piege}</li>
+            ))}
+          </ul>
+        ),
+      },
+      droite: {
+        variante: "ok",
+        titre: "À retenir",
+        contenu: (
+          <ul className="grid gap-3 text-2xl leading-snug">
+            {aRetenir.map((point) => (
+              <li key={point}>• {point}</li>
+            ))}
+          </ul>
+        ),
+      },
+    },
+  },
+  {
+    titre: "À toi de jouer",
+    badge: "Exercice flash",
+    section: {
+      type: "exercice",
+      enonce: "ABC rectangle en A, AB = 6 cm, AC = 8 cm.",
+      question: "Calcule BC.",
+      indice: "BC² = AB² + AC², puis racine carrée.",
+      correction: "BC² = 6² + 8² = 36 + 64 = 100, donc BC = 10 cm.",
+    },
+  },
+];
+
 export default function PythagoreQuatriemePage() {
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#f5f8ff] text-slate-800">
@@ -135,14 +276,17 @@ export default function PythagoreQuatriemePage() {
             <ChevronRight className="h-4 w-4 text-slate-400" />
             <span className="text-slate-900">Théorème de Pythagore</span>
           </nav>
-          <button
-            type="button"
-            onClick={() => window.print()}
-            className="inline-flex w-fit items-center gap-2 rounded-full bg-sky-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-sky-500/30 transition hover:bg-sky-400"
-          >
-            <Download className="h-4 w-4" />
-            Télécharger en PDF
-          </button>
+          <div className="flex flex-wrap gap-2">
+            <ModeClasse sousTitre="Pythagore - 4e" slides={classeSlides} />
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-sky-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-sky-500/30 transition hover:bg-sky-400"
+            >
+              <Download className="h-4 w-4" />
+              Télécharger en PDF
+            </button>
+          </div>
         </div>
       </div>
 

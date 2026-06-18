@@ -15,6 +15,7 @@ import {
   Sparkles,
   Wrench,
 } from "lucide-react";
+import ModeClasse, { type ClasseSlide } from "@/components/fiches/ModeClasse";
 
 const identite = [
   { label: "Prérequis", valeur: "Triangle rectangle, hypoténuse" },
@@ -91,6 +92,146 @@ const entrainement = [
   },
 ];
 
+const notions = [
+  {
+    titre: "Repérer",
+    texte:
+      "On trouve l'angle droit, puis l'hypoténuse : le plus grand côté, opposé à l'angle droit.",
+  },
+  {
+    titre: "Choisir",
+    texte:
+      "Par rapport à l'angle choisi, on identifie le côté adjacent, puis on écrit cos = adjacent / hypoténuse.",
+  },
+  {
+    titre: "Calculer",
+    texte:
+      "On isole l'inconnue, puis on calcule à la calculatrice en vérifiant le mode degré.",
+  },
+];
+
+const classeSlides: ClasseSlide[] = [
+  {
+    titre: "Objectif du cours",
+    badge: "Cosinus - 4e",
+    section: {
+      type: "objectif",
+      phrase: "Utiliser le cosinus dans un triangle rectangle",
+      sousPhrase:
+        "Le cosinus relie un angle aigu au côté adjacent et à l'hypoténuse.",
+      encadre: {
+        titre: "L'idée",
+        texte: "Connaître un angle et un côté permet de retrouver les autres.",
+      },
+    },
+  },
+  {
+    titre: "À quoi ça sert ?",
+    badge: "Utilité & histoire",
+    section: {
+      type: "duo",
+      gauche: {
+        variante: "info",
+        titre: "Au quotidien",
+        contenu:
+          "Hauteur d'un bâtiment, pente d'une route, navigation des bateaux et des avions, angles de vue dans les jeux vidéo.",
+      },
+      droite: {
+        variante: "histoire",
+        titre: "Le savais-tu ?",
+        contenu:
+          "La trigonométrie a été développée par les astronomes grecs, indiens puis arabes pour étudier le ciel.",
+      },
+    },
+  },
+  {
+    titre: "Les 3 réflexes",
+    badge: "Méthode",
+    section: { type: "cartes", cartes: notions },
+  },
+  {
+    titre: "La formule",
+    badge: "À connaître par cœur",
+    section: {
+      type: "objectif",
+      phrase: "cos(angle) = adjacent / hypoténuse",
+      sousPhrase: "Moyen mnémotechnique : CAH (Cosinus = Adjacent / Hypoténuse).",
+      encadre: {
+        titre: "Attention",
+        texte: "L'hypoténuse est toujours le côté opposé à l'angle droit.",
+      },
+    },
+  },
+  {
+    titre: "Selon l'inconnue",
+    badge: "3 situations",
+    section: {
+      type: "cartes",
+      cartes: usages.map((u) => ({ titre: u.titre, texte: u.detail })),
+    },
+  },
+  {
+    titre: "Exemple guidé",
+    badge: "Calculer un côté",
+    section: {
+      type: "exemple",
+      enonce: "ABC rectangle en A, BC = 10 cm, angle B = 60°.",
+      question: "Calculer AB.",
+      correction: "AB = BC x cos(60) = 10 x 0,5 = 5 cm.",
+    },
+  },
+  {
+    titre: "Autre exemple",
+    badge: "Calculer l'hypoténuse",
+    section: {
+      type: "exemple",
+      enonce: "Côté adjacent à un angle de 40° : 7 cm.",
+      question: "Calculer l'hypoténuse au dixième.",
+      correction: "hypoténuse = 7 / cos(40) ≈ 7 / 0,766 ≈ 9,1 cm.",
+    },
+  },
+  {
+    titre: "Pièges & à retenir",
+    badge: "Vigilance",
+    section: {
+      type: "duo",
+      gauche: {
+        variante: "piege",
+        titre: "Pièges à éviter",
+        contenu: (
+          <ul className="grid gap-3 text-2xl leading-snug">
+            {pieges.map((piege) => (
+              <li key={piege}>• {piege}</li>
+            ))}
+          </ul>
+        ),
+      },
+      droite: {
+        variante: "ok",
+        titre: "À retenir",
+        contenu: (
+          <ul className="grid gap-3 text-2xl leading-snug">
+            {aRetenir.map((point) => (
+              <li key={point}>• {point}</li>
+            ))}
+          </ul>
+        ),
+      },
+    },
+  },
+  {
+    titre: "À toi de jouer",
+    badge: "Exercice flash",
+    section: {
+      type: "exercice",
+      enonce: "Hypoténuse = 12 cm, angle = 30°.",
+      question: "Calcule le côté adjacent.",
+      indice: "adjacent = hypoténuse x cos(angle).",
+      correction: "adjacent = 12 x cos(30) ≈ 12 x 0,866 ≈ 10,4 cm.",
+    },
+  },
+];
+
 export default function CosinusQuatriemePage() {
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#f5f8ff] text-slate-800">
@@ -135,14 +276,17 @@ export default function CosinusQuatriemePage() {
             <ChevronRight className="h-4 w-4 text-slate-400" />
             <span className="text-slate-900">Cosinus</span>
           </nav>
-          <button
-            type="button"
-            onClick={() => window.print()}
-            className="inline-flex w-fit items-center gap-2 rounded-full bg-cyan-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-cyan-500/30 transition hover:bg-cyan-400"
-          >
-            <Download className="h-4 w-4" />
-            Télécharger en PDF
-          </button>
+          <div className="flex flex-wrap gap-2">
+            <ModeClasse sousTitre="Cosinus - 4e" slides={classeSlides} />
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-cyan-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-cyan-500/30 transition hover:bg-cyan-400"
+            >
+              <Download className="h-4 w-4" />
+              Télécharger en PDF
+            </button>
+          </div>
         </div>
       </div>
 

@@ -15,6 +15,7 @@ import {
   Sparkles,
   Wrench,
 } from "lucide-react";
+import ModeClasse, { type ClasseSlide } from "@/components/fiches/ModeClasse";
 
 const identite = [
   { label: "Prérequis", valeur: "Multiples, tables de multiplication" },
@@ -92,6 +93,146 @@ const bars = [
   { label: "5/6", filled: 5 },
 ];
 
+const notions = [
+  {
+    titre: "Même dénominateur",
+    texte:
+      "On cherche un dénominateur commun, souvent un multiple commun aux deux dénominateurs.",
+  },
+  {
+    titre: "Transformer",
+    texte:
+      "On réécrit chaque fraction avec ce dénominateur commun (en multipliant en haut et en bas).",
+  },
+  {
+    titre: "Additionner",
+    texte:
+      "On additionne les numérateurs, on garde le dénominateur, puis on simplifie si possible.",
+  },
+];
+
+const classeSlides: ClasseSlide[] = [
+  {
+    titre: "Objectif du cours",
+    badge: "Fractions - 5e",
+    section: {
+      type: "objectif",
+      phrase: "Additionner deux fractions",
+      sousPhrase:
+        "On les met au même dénominateur, puis on additionne les numérateurs.",
+      encadre: {
+        titre: "L'idée",
+        texte: "On ne peut additionner que des parts de même taille.",
+      },
+    },
+  },
+  {
+    titre: "À quoi ça sert ?",
+    badge: "Utilité & histoire",
+    section: {
+      type: "duo",
+      gauche: {
+        variante: "info",
+        titre: "Au quotidien",
+        contenu:
+          "Partager (parts de pizza), cuisiner (1/2 litre, 1/4 de tablette), mesurer le temps (un quart d'heure), les rythmes en musique.",
+      },
+      droite: {
+        variante: "histoire",
+        titre: "Le savais-tu ?",
+        contenu:
+          "Il y a 4000 ans, les Égyptiens utilisaient surtout des fractions « unitaires » (1/2, 1/3, 1/4). La barre de fraction vient des savants arabes et indiens.",
+      },
+    },
+  },
+  {
+    titre: "Les 3 réflexes",
+    badge: "Méthode",
+    section: { type: "cartes", cartes: notions },
+  },
+  {
+    titre: "La formule",
+    badge: "À connaître par cœur",
+    section: {
+      type: "objectif",
+      phrase: "a/d + b/d = (a + b)/d",
+      sousPhrase:
+        "Au même dénominateur, on additionne les numérateurs et on garde le dénominateur.",
+      encadre: {
+        titre: "Interdit",
+        texte: "On n'additionne jamais les dénominateurs entre eux.",
+      },
+    },
+  },
+  {
+    titre: "Selon le calcul",
+    badge: "3 situations",
+    section: {
+      type: "cartes",
+      cartes: usages.map((u) => ({ titre: u.titre, texte: u.detail })),
+    },
+  },
+  {
+    titre: "Exemple guidé",
+    badge: "Même dénominateur",
+    section: {
+      type: "exemple",
+      enonce: "On calcule 1/4 + 2/4.",
+      question: "Quel est le résultat ?",
+      correction: "Dénominateurs déjà égaux : 1/4 + 2/4 = 3/4.",
+    },
+  },
+  {
+    titre: "Autre exemple",
+    badge: "Dénominateurs différents",
+    section: {
+      type: "exemple",
+      enonce: "On calcule 1/2 + 1/3.",
+      question: "Quel est le résultat ?",
+      correction: "Au même dénominateur (6) : 3/6 + 2/6 = 5/6.",
+    },
+  },
+  {
+    titre: "Pièges & à retenir",
+    badge: "Vigilance",
+    section: {
+      type: "duo",
+      gauche: {
+        variante: "piege",
+        titre: "Pièges à éviter",
+        contenu: (
+          <ul className="grid gap-3 text-2xl leading-snug">
+            {pieges.map((piege) => (
+              <li key={piege}>• {piege}</li>
+            ))}
+          </ul>
+        ),
+      },
+      droite: {
+        variante: "ok",
+        titre: "À retenir",
+        contenu: (
+          <ul className="grid gap-3 text-2xl leading-snug">
+            {aRetenir.map((point) => (
+              <li key={point}>• {point}</li>
+            ))}
+          </ul>
+        ),
+      },
+    },
+  },
+  {
+    titre: "À toi de jouer",
+    badge: "Exercice flash",
+    section: {
+      type: "exercice",
+      enonce: "Calcule 2/3 + 1/6.",
+      indice: "Mets d'abord 2/3 au dénominateur 6.",
+      correction: "2/3 = 4/6, donc 4/6 + 1/6 = 5/6.",
+    },
+  },
+];
+
 export default function FractionsAdditionCinquiemePage() {
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#fff5f8] text-slate-800">
@@ -136,14 +277,17 @@ export default function FractionsAdditionCinquiemePage() {
             <ChevronRight className="h-4 w-4 text-slate-400" />
             <span className="text-slate-900">Additionner des fractions</span>
           </nav>
-          <button
-            type="button"
-            onClick={() => window.print()}
-            className="inline-flex w-fit items-center gap-2 rounded-full bg-rose-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-rose-500/30 transition hover:bg-rose-400"
-          >
-            <Download className="h-4 w-4" />
-            Télécharger en PDF
-          </button>
+          <div className="flex flex-wrap gap-2">
+            <ModeClasse sousTitre="Fractions - 5e" slides={classeSlides} />
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-rose-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-rose-500/30 transition hover:bg-rose-400"
+            >
+              <Download className="h-4 w-4" />
+              Télécharger en PDF
+            </button>
+          </div>
         </div>
       </div>
 

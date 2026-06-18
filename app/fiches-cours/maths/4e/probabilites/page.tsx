@@ -15,6 +15,7 @@ import {
   Sparkles,
   Wrench,
 } from "lucide-react";
+import ModeClasse, { type ClasseSlide } from "@/components/fiches/ModeClasse";
 
 const identite = [
   { label: "Prérequis", valeur: "Fractions, dénombrer des cas" },
@@ -88,6 +89,143 @@ const entrainement = [
   },
 ];
 
+const notions = [
+  {
+    titre: "Cas possibles",
+    texte: "On compte toutes les issues possibles de l'expérience.",
+  },
+  {
+    titre: "Cas favorables",
+    texte: "On compte les issues qui réalisent l'événement cherché.",
+  },
+  {
+    titre: "Calculer",
+    texte: "On divise : p = favorables ÷ possibles, puis on simplifie.",
+  },
+];
+
+const classeSlides: ClasseSlide[] = [
+  {
+    titre: "Objectif du cours",
+    badge: "Probabilités - 4e",
+    section: {
+      type: "objectif",
+      phrase: "Mesurer la chance qu'un événement se produise",
+      sousPhrase:
+        "Une probabilité est comprise entre 0 (impossible) et 1 (certain).",
+      encadre: {
+        titre: "L'idée",
+        texte: "On compte les cas favorables parmi tous les cas possibles.",
+      },
+    },
+  },
+  {
+    titre: "À quoi ça sert ?",
+    badge: "Utilité & histoire",
+    section: {
+      type: "duo",
+      gauche: {
+        variante: "info",
+        titre: "Au quotidien",
+        contenu:
+          "Jeux de hasard (dés, cartes, loto), météo (« 70 % de pluie »), assurances, sport, médecine pour évaluer des risques.",
+      },
+      droite: {
+        variante: "histoire",
+        titre: "Le savais-tu ?",
+        contenu:
+          "La théorie des probabilités est née au XVIIe siècle d'une correspondance entre Blaise Pascal et Pierre de Fermat sur les jeux de dés.",
+      },
+    },
+  },
+  {
+    titre: "Les 3 réflexes",
+    badge: "Méthode",
+    section: { type: "cartes", cartes: notions },
+  },
+  {
+    titre: "La formule",
+    badge: "À connaître par cœur",
+    section: {
+      type: "objectif",
+      phrase: "p = favorables / possibles",
+      sousPhrase: "Une probabilité est toujours comprise entre 0 et 1.",
+      encadre: {
+        titre: "Équiprobable",
+        texte: "Quand chaque issue a la même chance, il suffit de compter.",
+      },
+    },
+  },
+  {
+    titre: "3 réflexes utiles",
+    badge: "3 situations",
+    section: {
+      type: "cartes",
+      cartes: usages.map((u) => ({ titre: u.titre, texte: u.detail })),
+    },
+  },
+  {
+    titre: "Exemple guidé",
+    badge: "Obtenir un nombre précis",
+    section: {
+      type: "exemple",
+      enonce: "On lance un dé équilibré à 6 faces.",
+      question: "Probabilité d'obtenir un 4 ?",
+      correction: "6 issues possibles, 1 seule favorable (le 4). p = 1/6.",
+    },
+  },
+  {
+    titre: "Autre exemple",
+    badge: "Obtenir un nombre pair",
+    section: {
+      type: "exemple",
+      enonce: "On lance le même dé à 6 faces.",
+      question: "Probabilité d'un nombre pair ?",
+      correction: "Favorables : 2, 4 et 6, soit 3 cas sur 6. p = 3/6 = 1/2.",
+    },
+  },
+  {
+    titre: "Pièges & à retenir",
+    badge: "Vigilance",
+    section: {
+      type: "duo",
+      gauche: {
+        variante: "piege",
+        titre: "Pièges à éviter",
+        contenu: (
+          <ul className="grid gap-3 text-2xl leading-snug">
+            {pieges.map((piege) => (
+              <li key={piege}>• {piege}</li>
+            ))}
+          </ul>
+        ),
+      },
+      droite: {
+        variante: "ok",
+        titre: "À retenir",
+        contenu: (
+          <ul className="grid gap-3 text-2xl leading-snug">
+            {aRetenir.map((point) => (
+              <li key={point}>• {point}</li>
+            ))}
+          </ul>
+        ),
+      },
+    },
+  },
+  {
+    titre: "À toi de jouer",
+    badge: "Exercice flash",
+    section: {
+      type: "exercice",
+      enonce: "Un sac contient 3 billes rouges et 2 bleues.",
+      question: "Probabilité de tirer une rouge ?",
+      indice: "p = cas favorables / cas possibles.",
+      correction: "3 cas favorables sur 5 possibles : p = 3/5.",
+    },
+  },
+];
+
 export default function ProbabilitesQuatriemePage() {
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#fdf4fb] text-slate-800">
@@ -132,14 +270,17 @@ export default function ProbabilitesQuatriemePage() {
             <ChevronRight className="h-4 w-4 text-slate-400" />
             <span className="text-slate-900">Les probabilités</span>
           </nav>
-          <button
-            type="button"
-            onClick={() => window.print()}
-            className="inline-flex w-fit items-center gap-2 rounded-full bg-fuchsia-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-fuchsia-500/30 transition hover:bg-fuchsia-400"
-          >
-            <Download className="h-4 w-4" />
-            Télécharger en PDF
-          </button>
+          <div className="flex flex-wrap gap-2">
+            <ModeClasse sousTitre="Probabilités - 4e" slides={classeSlides} />
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-fuchsia-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-fuchsia-500/30 transition hover:bg-fuchsia-400"
+            >
+              <Download className="h-4 w-4" />
+              Télécharger en PDF
+            </button>
+          </div>
         </div>
       </div>
 

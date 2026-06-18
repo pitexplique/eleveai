@@ -15,6 +15,7 @@ import {
   Sparkles,
   Wrench,
 } from "lucide-react";
+import ModeClasse, { type ClasseSlide } from "@/components/fiches/ModeClasse";
 
 const identite = [
   { label: "Prérequis", valeur: "Fractions, multiplication, division" },
@@ -95,6 +96,143 @@ const entrainement = [
   },
 ];
 
+const notions = [
+  {
+    titre: "Comprendre",
+    texte: "p % signifie « p sur 100 ». Par exemple 20 % = 20 / 100 = 0,2.",
+  },
+  {
+    titre: "Calculer",
+    texte: "Pour prendre p % d'un nombre N, on calcule N x p / 100.",
+  },
+  {
+    titre: "Vérifier",
+    texte:
+      "On vérifie avec un cas facile : 50 % = la moitié, 25 % = le quart, 10 % = diviser par 10.",
+  },
+];
+
+const classeSlides: ClasseSlide[] = [
+  {
+    titre: "Objectif du cours",
+    badge: "Pourcentages - 5e",
+    section: {
+      type: "objectif",
+      phrase: "Calculer un pourcentage d'un nombre",
+      sousPhrase: "Un pourcentage exprime une proportion sur 100.",
+      encadre: {
+        titre: "L'idée",
+        texte: "p % veut dire « p pour cent », donc p sur 100.",
+      },
+    },
+  },
+  {
+    titre: "À quoi ça sert ?",
+    badge: "Utilité & histoire",
+    section: {
+      type: "duo",
+      gauche: {
+        variante: "info",
+        titre: "Au quotidien",
+        contenu:
+          "Les soldes (−30 %), la batterie du téléphone (80 %), les sondages, les taux d'intérêt, les étiquettes.",
+      },
+      droite: {
+        variante: "histoire",
+        titre: "Le savais-tu ?",
+        contenu:
+          "« Pour cent » vient du latin per centum. Les marchands italiens de la Renaissance l'utilisaient déjà pour les intérêts.",
+      },
+    },
+  },
+  {
+    titre: "Les 3 réflexes",
+    badge: "Méthode",
+    section: { type: "cartes", cartes: notions },
+  },
+  {
+    titre: "La formule",
+    badge: "À connaître par cœur",
+    section: {
+      type: "objectif",
+      phrase: "p % de N = N x p / 100",
+      sousPhrase: "On divise par 100, puis on multiplie par le nombre.",
+      encadre: {
+        titre: "Cas faciles",
+        texte: "50 % = la moitié · 25 % = le quart · 10 % = diviser par 10.",
+      },
+    },
+  },
+  {
+    titre: "Selon le calcul",
+    badge: "3 situations",
+    section: {
+      type: "cartes",
+      cartes: usages.map((u) => ({ titre: u.titre, texte: u.detail })),
+    },
+  },
+  {
+    titre: "Exemple guidé",
+    badge: "Calculer une part",
+    section: {
+      type: "exemple",
+      enonce: "Une classe de 25 élèves, 40 % de demi-pensionnaires.",
+      question: "Combien de demi-pensionnaires ?",
+      correction: "40 % de 25 = 25 x 40 / 100 = 10 élèves.",
+    },
+  },
+  {
+    titre: "Autre exemple",
+    badge: "Une réduction",
+    section: {
+      type: "exemple",
+      enonce: "Un article coûte 40 euros, avec 10 % de réduction.",
+      question: "Réduction, puis prix payé ?",
+      correction: "Réduction = 40 x 10 / 100 = 4 euros. Prix payé = 40 − 4 = 36 euros.",
+    },
+  },
+  {
+    titre: "Pièges & à retenir",
+    badge: "Vigilance",
+    section: {
+      type: "duo",
+      gauche: {
+        variante: "piege",
+        titre: "Pièges à éviter",
+        contenu: (
+          <ul className="grid gap-3 text-2xl leading-snug">
+            {pieges.map((piege) => (
+              <li key={piege}>• {piege}</li>
+            ))}
+          </ul>
+        ),
+      },
+      droite: {
+        variante: "ok",
+        titre: "À retenir",
+        contenu: (
+          <ul className="grid gap-3 text-2xl leading-snug">
+            {aRetenir.map((point) => (
+              <li key={point}>• {point}</li>
+            ))}
+          </ul>
+        ),
+      },
+    },
+  },
+  {
+    titre: "À toi de jouer",
+    badge: "Exercice flash",
+    section: {
+      type: "exercice",
+      enonce: "Un jean coûte 60 euros, avec 20 % de réduction.",
+      question: "Quel est le montant de la réduction ?",
+      indice: "réduction = prix x p / 100.",
+      correction: "60 x 20 / 100 = 12 euros de réduction.",
+    },
+  },
+];
+
 export default function PourcentagesCinquiemePage() {
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#f8f6ff] text-slate-800">
@@ -139,14 +277,17 @@ export default function PourcentagesCinquiemePage() {
             <ChevronRight className="h-4 w-4 text-slate-400" />
             <span className="text-slate-900">Les pourcentages</span>
           </nav>
-          <button
-            type="button"
-            onClick={() => window.print()}
-            className="inline-flex w-fit items-center gap-2 rounded-full bg-violet-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-violet-500/30 transition hover:bg-violet-400"
-          >
-            <Download className="h-4 w-4" />
-            Télécharger en PDF
-          </button>
+          <div className="flex flex-wrap gap-2">
+            <ModeClasse sousTitre="Pourcentages - 5e" slides={classeSlides} />
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-violet-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-violet-500/30 transition hover:bg-violet-400"
+            >
+              <Download className="h-4 w-4" />
+              Télécharger en PDF
+            </button>
+          </div>
         </div>
       </div>
 

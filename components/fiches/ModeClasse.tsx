@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { ArrowLeft, Maximize, Minimize, Monitor } from "lucide-react";
 
 /**
@@ -47,7 +48,7 @@ export type ClasseSection =
   | {
       type: "exercice";
       enonce: string;
-      question: string;
+      question?: string;
       indice?: string;
       correction: string;
     };
@@ -195,9 +196,11 @@ function Section({
             <p className="text-5xl font-black leading-tight text-slate-950">
               {section.enonce}
             </p>
-            <p className="mt-8 text-5xl font-black leading-tight text-cyan-700">
-              {section.question}
-            </p>
+            {section.question ? (
+              <p className="mt-8 text-5xl font-black leading-tight text-cyan-700">
+                {section.question}
+              </p>
+            ) : null}
           </div>
           <div className="flex flex-col rounded-3xl border-4 border-amber-200 bg-amber-50 p-10">
             <p className="text-3xl font-black uppercase text-amber-700">
@@ -303,25 +306,27 @@ export default function ModeClasse({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ouvert, slides.length]);
 
-  if (!ouvert) {
-    return (
-      <button
-        type="button"
-        onClick={() => setOuvert(true)}
-        className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-200 bg-white px-5 py-3 text-sm font-black text-emerald-700 shadow-sm transition hover:bg-emerald-50"
-      >
-        <Monitor className="h-4 w-4" />
-        Mode classe
-      </button>
-    );
+  const declencheur = (
+    <button
+      type="button"
+      onClick={() => setOuvert(true)}
+      className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-200 bg-white px-5 py-3 text-sm font-black text-emerald-700 shadow-sm transition hover:bg-emerald-50"
+    >
+      <Monitor className="h-4 w-4" />
+      Mode classe
+    </button>
+  );
+
+  if (!ouvert || typeof document === "undefined") {
+    return declencheur;
   }
 
   const slide = slides[index];
 
-  return (
+  const overlay = (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex flex-col bg-[#eef8f2] text-slate-950"
+      className="fixed inset-0 z-[100] flex flex-col bg-[#eef8f2] text-slate-950"
     >
       <header className="border-b border-emerald-200 bg-white px-6 py-4">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
@@ -398,5 +403,12 @@ export default function ModeClasse({
         </div>
       </section>
     </div>
+  );
+
+  return (
+    <>
+      {declencheur}
+      {createPortal(overlay, document.body)}
+    </>
   );
 }
