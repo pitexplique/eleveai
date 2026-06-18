@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 
 import { useEleve } from "@/context/EleveContext";
 import { prenomFromNom } from "@/lib/prenom";
@@ -449,9 +449,8 @@ export default function DashboardProfClient() {
                     </thead>
                     <tbody>
                       {elevesAvecStatut.map((s) => (
-                        <>
+                        <Fragment key={s.code_utilisateur}>
                           <tr
-                            key={s.code_utilisateur}
                             onClick={() => setSelectedEleve(selectedEleve === s.code_utilisateur ? null : s.code_utilisateur)}
                             className={`cursor-pointer border-b border-slate-100 transition hover:bg-blue-50/60 ${selectedEleve === s.code_utilisateur ? "bg-blue-50" : ""}`}
                           >
@@ -488,7 +487,7 @@ export default function DashboardProfClient() {
 
                           {/* DÉTAIL ÉLÈVE (inline expand) */}
                           {selectedEleve === s.code_utilisateur && (
-                            <tr key={`${s.code_utilisateur}-detail`}>
+                            <tr>
                               <td colSpan={10} className="bg-blue-50 px-4 pb-4 pt-2">
                                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                                   {[
@@ -520,7 +519,7 @@ export default function DashboardProfClient() {
                               </td>
                             </tr>
                           )}
-                        </>
+                        </Fragment>
                       ))}
                     </tbody>
                   </table>
