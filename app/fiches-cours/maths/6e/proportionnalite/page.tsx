@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   AlertTriangle,
@@ -12,6 +12,8 @@ import {
   Download,
   Landmark,
   Lightbulb,
+  Maximize,
+  Minimize,
   Monitor,
   Printer,
   Sparkles,
@@ -91,6 +93,8 @@ export default function ProportionnaliteSixiemePage() {
   const [modeClasse, setModeClasse] = useState(false);
   const [classeSlide, setClasseSlide] = useState(0);
   const [showClasseCorrection, setShowClasseCorrection] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const classeRef = useRef<HTMLElement>(null);
   const classeSlides = [
     {
       titre: "Objectif du cours",
@@ -235,6 +239,19 @@ export default function ProportionnaliteSixiemePage() {
             <p className="mt-5 text-4xl font-black leading-tight text-slate-950">
               Cherche d’abord le prix d’un stylo.
             </p>
+            {showClasseCorrection ? (
+              <p className="mt-8 text-4xl font-black leading-tight text-emerald-700">
+                1 stylo = 2 euros, donc 7 stylos = 14 euros.
+              </p>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setShowClasseCorrection(true)}
+                className="mt-8 rounded-full bg-emerald-500 px-8 py-5 text-2xl font-black text-white shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-400"
+              >
+                Révéler la correction
+              </button>
+            )}
           </div>
         </div>
       ),
@@ -246,10 +263,64 @@ export default function ProportionnaliteSixiemePage() {
     setShowClasseCorrection(false);
   }
 
+  function toggleFullscreen() {
+    if (typeof document === "undefined") return;
+    if (document.fullscreenElement) {
+      document.exitFullscreen?.();
+    } else {
+      classeRef.current?.requestFullscreen?.();
+    }
+  }
+
+  useEffect(() => {
+    function onFullscreenChange() {
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    }
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+    return () =>
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
+  }, []);
+
+  useEffect(() => {
+    if (!modeClasse) return;
+    function handleKey(event: KeyboardEvent) {
+      switch (event.key) {
+        case "ArrowRight":
+        case "PageDown":
+          event.preventDefault();
+          setClasseSlide((current) =>
+            Math.min(classeSlides.length - 1, current + 1),
+          );
+          setShowClasseCorrection(false);
+          break;
+        case "ArrowLeft":
+        case "PageUp":
+          event.preventDefault();
+          setClasseSlide((current) => Math.max(0, current - 1));
+          setShowClasseCorrection(false);
+          break;
+        case " ":
+        case "Enter":
+          event.preventDefault();
+          setShowClasseCorrection(true);
+          break;
+        case "Escape":
+          // En plein écran, on laisse le navigateur sortir du fullscreen ;
+          // un second Échap quittera le mode classe.
+          if (!document.fullscreenElement) setModeClasse(false);
+          break;
+        default:
+          break;
+      }
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [modeClasse, classeSlides.length]);
+
   if (modeClasse) {
     const slide = classeSlides[classeSlide];
     return (
-      <main className="min-h-screen bg-[#eef8f2] text-slate-950">
+      <main ref={classeRef} className="min-h-screen bg-[#eef8f2] text-slate-950">
         <div className="flex min-h-screen flex-col">
           <header className="screen-only border-b border-emerald-200 bg-white px-6 py-4">
             <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
@@ -268,8 +339,23 @@ export default function ProportionnaliteSixiemePage() {
                 <p className="text-xl font-black text-slate-950">
                   Proportionnalité - 6e
                 </p>
+                <p className="mt-0.5 text-xs font-bold text-slate-400">
+                  ← → naviguer · Espace révéler · Échap quitter
+                </p>
               </div>
               <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={toggleFullscreen}
+                  className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-black text-slate-700 shadow-sm transition hover:bg-slate-50"
+                >
+                  {isFullscreen ? (
+                    <Minimize className="h-4 w-4" />
+                  ) : (
+                    <Maximize className="h-4 w-4" />
+                  )}
+                  {isFullscreen ? "Quitter" : "Plein écran"}
+                </button>
                 <button
                   type="button"
                   onClick={() => goToClasseSlide(Math.max(0, classeSlide - 1))}
