@@ -9,6 +9,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { EleveProvider } from "@/context/EleveContext";
 import RemerciementsBar from "@/components/remerciements/RemerciementsBar";
+import EcrireAuProf from "@/components/EcrireAuProf";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -169,6 +170,7 @@ export default function RootLayout({
 
           <Footer />
           <RemerciementsBar />
+          <EcrireAuProf />
         </EleveProvider>
 
         <script

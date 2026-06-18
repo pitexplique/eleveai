@@ -13,11 +13,24 @@ type ContactMessage = {
   message: string;
   status: string;
   admin_notes: string | null;
+  source: string | null;
 };
 
 type SortOrder = "newest" | "oldest";
 type StatusFilter = "all" | "new" | "in_progress" | "done";
 type RoleFilter = "all" | ContactMessage["role"];
+type SourceFilter = "all" | string;
+
+// Libellés lisibles pour les sources connues (sinon on affiche la valeur brute).
+const SOURCE_LABELS: Record<string, string> = {
+  "eleve-message": "👩‍🎓 Messages d'élèves",
+  contact: "Site (contact)",
+};
+
+function sourceLabel(source: string | null) {
+  if (!source) return "—";
+  return SOURCE_LABELS[source] ?? source;
+}
 
 export default function AdminContactMessagesClient() {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
@@ -28,6 +41,7 @@ export default function AdminContactMessagesClient() {
   const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
   const [roleFilter, setRoleFilter] = useState<RoleFilter>("all");
+  const [sourceFilter, setSourceFilter] = useState<SourceFilter>("all");
 
   async function loadMessages() {
     try {
@@ -66,6 +80,21 @@ export default function AdminContactMessagesClient() {
     return ["all", ...Array.from(set).sort()] as RoleFilter[];
   }, [messages]);
 
+  // ✅ options source dynamiques (eleve-message, contact…)
+  const sourceOptions = useMemo(() => {
+    const set = new Set<string>();
+    for (const m of messages) if (m.source) set.add(m.source);
+    return ["all", ...Array.from(set).sort()] as SourceFilter[];
+  }, [messages]);
+
+  // Nombre de messages d'élèves non traités (pour le raccourci).
+  const nbElevesNew = useMemo(
+    () =>
+      messages.filter((m) => m.source === "eleve-message" && m.status === "new")
+        .length,
+    [messages]
+  );
+
   // ✅ messages affichés = filtres + tri
   const visibleMessages = useMemo(() => {
     let list = [...messages];
@@ -78,6 +107,10 @@ export default function AdminContactMessagesClient() {
       list = list.filter((m) => m.role === roleFilter);
     }
 
+    if (sourceFilter !== "all") {
+      list = list.filter((m) => m.source === sourceFilter);
+    }
+
     list.sort((a, b) => {
       const ta = new Date(a.created_at).getTime();
       const tb = new Date(b.created_at).getTime();
@@ -85,7 +118,7 @@ export default function AdminContactMessagesClient() {
     });
 
     return list;
-  }, [messages, sortOrder, statusFilter, roleFilter]);
+  }, [messages, sortOrder, statusFilter, roleFilter, sourceFilter]);
 
   if (loading) return <p className="text-slate-400">Chargement des messages…</p>;
   if (error) return <p className="text-red-400">{error}</p>;
@@ -93,7 +126,30 @@ export default function AdminContactMessagesClient() {
   return (
     <section className="rounded-2xl border border-slate-800 bg-slate-900/40 p-5 space-y-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <h2 className="text-lg font-semibold">📩 Messages de contact</h2>
+        <div className="flex items-center gap-3">
+          <h2 className="text-lg font-semibold">📩 Messages de contact</h2>
+          <button
+            type="button"
+            onClick={() =>
+              setSourceFilter((s) =>
+                s === "eleve-message" ? "all" : "eleve-message"
+              )
+            }
+            className={[
+              "rounded-full px-3 py-1.5 text-xs font-bold transition",
+              sourceFilter === "eleve-message"
+                ? "bg-amber-500 text-white"
+                : "bg-amber-500/15 text-amber-300 hover:bg-amber-500/25",
+            ].join(" ")}
+          >
+            👩‍🎓 Messages d&apos;élèves
+            {nbElevesNew > 0 ? (
+              <span className="ml-1.5 rounded-full bg-pink-500 px-1.5 py-0.5 text-[10px] font-black text-white">
+                {nbElevesNew}
+              </span>
+            ) : null}
+          </button>
+        </div>
 
         {/* ✅ barre tri/filtre ultra simple */}
         <div className="flex flex-wrap gap-2 items-center">
@@ -116,6 +172,18 @@ export default function AdminContactMessagesClient() {
             {roleOptions.map((r) => (
               <option key={r} value={r}>
                 {r === "all" ? "Tous rôles" : r}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={sourceFilter}
+            onChange={(e) => setSourceFilter(e.target.value as SourceFilter)}
+            className="rounded-lg border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100"
+          >
+            {sourceOptions.map((s) => (
+              <option key={s} value={s}>
+                {s === "all" ? "Toutes sources" : sourceLabel(s)}
               </option>
             ))}
           </select>
@@ -152,12 +220,24 @@ export default function AdminContactMessagesClient() {
         {visibleMessages.map((m) => (
           <div
             key={m.id}
-            className="rounded-xl border border-slate-800 bg-slate-950/50 p-4 space-y-2"
+            className={[
+              "rounded-xl border p-4 space-y-2",
+              m.source === "eleve-message"
+                ? "border-amber-500/40 bg-amber-500/5"
+                : "border-slate-800 bg-slate-950/50",
+            ].join(" ")}
           >
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <div className="text-sm font-semibold text-emerald-300">
-                {m.role}
-                {m.name && ` — ${m.name}`}
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-sm font-semibold text-emerald-300">
+                  {m.role}
+                  {m.name && ` — ${m.name}`}
+                </span>
+                {m.source === "eleve-message" ? (
+                  <span className="rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-bold text-amber-300">
+                    👩‍🎓 Élève
+                  </span>
+                ) : null}
               </div>
               <div className="text-xs text-slate-400">
                 {new Date(m.created_at).toLocaleString()}
