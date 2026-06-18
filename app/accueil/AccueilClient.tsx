@@ -321,6 +321,12 @@ export default function AccueilPage({
             les élèves essayaient de cliquer sur les cartes dessinées (retours du
             11-12/06/2026). Les vraies actions sont sous l'image. */}
         <div className="relative z-10 mx-auto max-w-5xl px-4 py-3 text-center md:w-[72%] xl:w-[56rem]">
+          {/* Prénom uniquement : aucun nom de famille n'est affiché. */}
+          {prenomAffiche && (
+            <p className="mx-auto mb-3 inline-block rounded-full border border-white/20 bg-black/40 px-4 py-1.5 text-xs font-black text-white backdrop-blur-sm sm:text-sm">
+              Bonjour, {prenomAffiche} 👋
+            </p>
+          )}
           <p className="text-2xl font-black tracking-wide text-white sm:text-3xl">
             La liberté d&apos;apprendre
           </p>
@@ -348,15 +354,6 @@ export default function AccueilPage({
         />
         {/* Fondu bas vers le fond de page */}
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[#041B33]" />
-
-        {/* Prénom uniquement : aucun nom de famille n'est affiché. */}
-        {prenomAffiche && (
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
-            <p className="rounded-full bg-black/50 border border-white/20 px-5 py-2 text-sm font-black text-white backdrop-blur-sm whitespace-nowrap">
-              Bonjour, {prenomAffiche}
-            </p>
-          </div>
-        )}
 
         {/* Brevet countdown si 3e/4e */}
         {(eleveClasse === "3e" || eleveClasse === "4e") && (
