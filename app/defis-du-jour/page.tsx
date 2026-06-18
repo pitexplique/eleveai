@@ -8,6 +8,7 @@ import { useEleve } from "@/context/EleveContext";
 
 import { problemesFixed } from "@/lib/defis-du-jour/problemes.fixed";
 import { problemeDuJourWeekly } from "@/lib/defis-du-jour/weekly";
+import BoiteAOutils from "@/components/BoiteAOutils";
 
 type EleveSession = {
   acces_id?: string | null;
@@ -404,6 +405,7 @@ export default function DefisDuJourPage() {
           </section>
         ) : null}
       </section>
+      <BoiteAOutils />
     </main>
   );
 }
