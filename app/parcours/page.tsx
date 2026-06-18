@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ParcoursClient from "./ParcoursClient";
 import BoiteAOutils from "@/components/BoiteAOutils";
+import FloatingCoach from "@/components/FloatingCoach";
 
 export const metadata: Metadata = {
   title: "Parcours Maths - EleveAI",
@@ -13,6 +14,7 @@ export default function ParcoursPage() {
     <>
       <ParcoursClient />
       <BoiteAOutils />
+      <FloatingCoach />
     </>
   );
 }

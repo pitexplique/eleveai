@@ -109,6 +109,46 @@ function PctBadge({ pct }: { pct: number | null }) {
   return <span className={`rounded-full px-3 py-1 text-xs font-black ${color}`}>{pct} %</span>;
 }
 
+// --- Suivi pendant les vacances : statut d'engagement par élève ------------
+// Un élève est « actif » s'il a travaillé dans les 7 derniers jours, « a
+// ralenti » s'il a une activité depuis le début des vacances mais plus rien de
+// récent, « inactif » s'il n'a rien fait depuis le début des vacances.
+const JOURS_ACTIF = 7;
+
+type Engagement = "actif" | "ralenti" | "inactif";
+
+function toutesActivites(s: EleveSynthese) {
+  return [...s.parcours, ...s.calculs, ...s.defis, ...s.english, ...s.tutor];
+}
+
+function derniereActiviteMs(s: EleveSynthese): number | null {
+  const all = toutesActivites(s);
+  if (all.length === 0) return null;
+  return Math.max(...all.map((r) => new Date(r.created_at).getTime()));
+}
+
+function compterDepuis(s: EleveSynthese, depuisMs: number): number {
+  return toutesActivites(s).filter((r) => new Date(r.created_at).getTime() >= depuisMs).length;
+}
+
+function statutEngagement(s: EleveSynthese, debutMs: number, nowMs: number): Engagement {
+  if (compterDepuis(s, debutMs) === 0) return "inactif";
+  const last = derniereActiviteMs(s);
+  if (last !== null && last >= nowMs - JOURS_ACTIF * 86_400_000) return "actif";
+  return "ralenti";
+}
+
+const ENGAGEMENT_META: Record<Engagement, { label: string; cls: string; ordre: number }> = {
+  inactif: { label: "🔴 Inactif", cls: "bg-red-100 text-red-800", ordre: 0 },
+  ralenti: { label: "🟠 A ralenti", cls: "bg-amber-100 text-amber-800", ordre: 1 },
+  actif: { label: "🟢 Actif", cls: "bg-emerald-100 text-emerald-800", ordre: 2 },
+};
+
+function StatutBadge({ statut }: { statut: Engagement }) {
+  const m = ENGAGEMENT_META[statut];
+  return <span className={`rounded-full px-3 py-1 text-xs font-black ${m.cls}`}>{m.label}</span>;
+}
+
 export default function DashboardProfClient() {
   const userContext = useEleve() as unknown as {
     eleve?: UserSession | null;
@@ -128,6 +168,11 @@ export default function DashboardProfClient() {
   const [resultatsTutor, setResultatsTutor] = useState<ResultatTutor[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [selectedEleve, setSelectedEleve] = useState<string | null>(null);
+  // Suivi vacances : date de début (par défaut il y a 14 jours) + tri.
+  const [vacancesDebut, setVacancesDebut] = useState<string>(() =>
+    new Date(Date.now() - 14 * 86_400_000).toISOString().slice(0, 10)
+  );
+  const [triInactifs, setTriInactifs] = useState(true);
 
   useEffect(() => {
     async function load() {
@@ -219,6 +264,35 @@ export default function DashboardProfClient() {
       };
     });
   }, [eleves, resultatsParcours, resultatsCalculRapide, resultatsDefisJour, resultatsEnglish, resultatsTutor]);
+
+  // Élèves enrichis du statut d'engagement, triés (moins actifs d'abord).
+  const debutMs = useMemo(() => {
+    const t = new Date(`${vacancesDebut}T00:00:00`).getTime();
+    return Number.isFinite(t) ? t : 0;
+  }, [vacancesDebut]);
+
+  const elevesAvecStatut = useMemo(() => {
+    const now = Date.now();
+    const list = syntheses.map((s) => ({
+      ...s,
+      statut: statutEngagement(s, debutMs, now),
+      activitesPeriode: compterDepuis(s, debutMs),
+    }));
+    if (triInactifs) {
+      list.sort((a, b) => {
+        const diff = ENGAGEMENT_META[a.statut].ordre - ENGAGEMENT_META[b.statut].ordre;
+        if (diff !== 0) return diff; // inactif → ralenti → actif
+        return (derniereActiviteMs(a) ?? 0) - (derniereActiviteMs(b) ?? 0); // plus ancien d'abord
+      });
+    }
+    return list;
+  }, [syntheses, debutMs, triInactifs]);
+
+  const compteStatut = useMemo(() => {
+    const c = { actif: 0, ralenti: 0, inactif: 0 };
+    for (const e of elevesAvecStatut) c[e.statut] += 1;
+    return c;
+  }, [elevesAvecStatut]);
 
   const totalEleves = eleves.length;
   const totalActifs = syntheses.filter((s) => s.totalActivites > 0).length;
@@ -323,6 +397,35 @@ export default function DashboardProfClient() {
                 </div>
               </div>
 
+              {/* SUIVI VACANCES : période + tri + comptes d'engagement */}
+              <div className="mb-4 flex flex-wrap items-center gap-3 rounded-2xl bg-slate-50 p-3">
+                <label className="flex items-center gap-2 text-sm font-bold text-slate-600">
+                  🏖️ Vacances depuis
+                  <input
+                    type="date"
+                    value={vacancesDebut}
+                    onChange={(e) => setVacancesDebut(e.target.value)}
+                    className="rounded-lg border border-slate-300 bg-white px-2 py-1 text-sm font-bold text-slate-800"
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setTriInactifs((v) => !v)}
+                  className={`rounded-full px-3 py-1.5 text-xs font-black transition ${
+                    triInactifs
+                      ? "bg-blue-600 text-white"
+                      : "bg-slate-200 text-slate-600 hover:bg-slate-300"
+                  }`}
+                >
+                  ↕️ Moins actifs d&apos;abord
+                </button>
+                <div className="ml-auto flex items-center gap-2 text-xs font-black">
+                  <span className="rounded-full bg-emerald-100 px-2 py-1 text-emerald-800">🟢 {compteStatut.actif}</span>
+                  <span className="rounded-full bg-amber-100 px-2 py-1 text-amber-800">🟠 {compteStatut.ralenti}</span>
+                  <span className="rounded-full bg-red-100 px-2 py-1 text-red-800">🔴 {compteStatut.inactif}</span>
+                </div>
+              </div>
+
               {syntheses.length === 0 ? (
                 <div className="rounded-2xl bg-amber-50 p-4 font-bold text-amber-800">
                   Aucun élève trouvé pour cet établissement.
@@ -334,6 +437,7 @@ export default function DashboardProfClient() {
                       <tr className="border-b-2 border-slate-200 bg-slate-50 text-slate-600">
                         <th className="px-4 py-3 font-black">Élève</th>
                         <th className="px-4 py-3 font-black">Code</th>
+                        <th className="px-4 py-3 font-black text-center">🏖️ Vacances</th>
                         <th className="px-4 py-3 font-black text-center">Activités</th>
                         <th className="px-4 py-3 font-black text-center">Moyenne</th>
                         <th className="px-4 py-3 font-black text-center">🛤️ Parcours</th>
@@ -344,7 +448,7 @@ export default function DashboardProfClient() {
                       </tr>
                     </thead>
                     <tbody>
-                      {syntheses.map((s) => (
+                      {elevesAvecStatut.map((s) => (
                         <>
                           <tr
                             key={s.code_utilisateur}
@@ -353,6 +457,14 @@ export default function DashboardProfClient() {
                           >
                             <td className="px-4 py-3 font-black text-slate-950">{s.nom}</td>
                             <td className="px-4 py-3 font-bold text-slate-500">{s.code_utilisateur}</td>
+                            <td className="px-4 py-3 text-center">
+                              <StatutBadge statut={s.statut} />
+                              {s.activitesPeriode > 0 ? (
+                                <span className="mt-1 block text-[11px] font-bold text-slate-400">
+                                  {s.activitesPeriode} act. depuis
+                                </span>
+                              ) : null}
+                            </td>
                             <td className="px-4 py-3 text-center font-black">{s.totalActivites}</td>
                             <td className="px-4 py-3 text-center">
                               <PctBadge pct={s.moyenneGlobale} />
@@ -377,7 +489,7 @@ export default function DashboardProfClient() {
                           {/* DÉTAIL ÉLÈVE (inline expand) */}
                           {selectedEleve === s.code_utilisateur && (
                             <tr key={`${s.code_utilisateur}-detail`}>
-                              <td colSpan={9} className="bg-blue-50 px-4 pb-4 pt-2">
+                              <td colSpan={10} className="bg-blue-50 px-4 pb-4 pt-2">
                                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                                   {[
                                     { label: "Dernier parcours", value: s.dernierParcours ? `${matiereLabel(s.dernierParcours.matiere)} · ${s.dernierParcours.score}/${s.dernierParcours.total} · ${formatDate(s.dernierParcours.created_at)}` : "—" },
