@@ -12,6 +12,7 @@ import {
   type Matiere,
 } from "@/lib/tutor-v4/catalog";
 import FloatingCoach from "@/components/FloatingCoach";
+import BoiteAOutils from "@/components/BoiteAOutils";
 
 const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe", "adulte"];
 const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
@@ -345,6 +346,7 @@ export default function CoachIA() {
       </div>
 
       <FloatingCoach />
+      {matiere === "maths" && <BoiteAOutils />}
     </main>
   );
 }

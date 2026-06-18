@@ -81,6 +81,7 @@ import { LessonPanel } from "@/lib/tutor-v4/lessons/components/LessonPanel";
 import TutorSimpleView from "./TutorSimpleView";
 import AudioBoost from "@/components/AudioBoost";
 import { MarkdownMath } from "@/components/MarkdownMath";
+import BoiteAOutils from "@/components/BoiteAOutils";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -1337,6 +1338,7 @@ function handleInputKeyDown(
           onShowLesson={() => setShowLesson(true)}
         />
         {lessonModal}
+        {matiere === "maths" && <BoiteAOutils />}
       </>
     );
   }
@@ -1964,6 +1966,7 @@ function handleInputKeyDown(
         </aside>
       </div>
     </div>
+    {matiere === "maths" && <BoiteAOutils />}
   </main>
 );
 }
