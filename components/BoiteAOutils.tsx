@@ -8,8 +8,8 @@ import { useEffect, useRef, useState } from "react";
  * état, il suffit de poser <BoiteAOutils /> sur une page.
  *
  * Demande élèves (2026-06-18) : une calculatrice accessible pendant les
- * exercices et la lecture des fiches. Placée en BAS À GAUCHE (une élève l'a
- * demandé là), pour ne pas heurter le Coach IA flottant en bas à droite.
+ * exercices et la lecture des fiches. Placée en BAS AU CENTRE (Écris-moi à
+ * gauche, Coach IA à droite).
  *
  * Deux modes : simple (par défaut, primaire/collège) et scientifique (sin, cos,
  * tan + inverses, ln, log, exp, π, e) avec bascule DEG/RAD pour la trigo.
@@ -361,7 +361,7 @@ export default function BoiteAOutils() {
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Ouvrir la calculatrice"
-        className="fixed bottom-5 left-5 z-50 flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 px-5 py-3 text-sm font-black text-white shadow-2xl ring-2 ring-white/50 transition hover:scale-105 print:hidden"
+        className="fixed bottom-5 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 px-5 py-3 text-sm font-black text-white shadow-2xl ring-2 ring-white/50 transition hover:scale-105 print:hidden"
       >
         🧮 <span className="hidden sm:inline">Calculatrice</span>
       </button>
@@ -369,7 +369,7 @@ export default function BoiteAOutils() {
   }
 
   return (
-    <aside className="fixed bottom-5 left-5 z-50 flex w-[290px] flex-col overflow-hidden rounded-3xl border border-cyan-200 bg-[#f5f8ff] text-slate-800 shadow-2xl sm:w-[320px] print:hidden">
+    <aside className="fixed bottom-5 left-1/2 z-50 flex w-[290px] -translate-x-1/2 flex-col overflow-hidden rounded-3xl border border-cyan-200 bg-[#f5f8ff] text-slate-800 shadow-2xl sm:w-[320px] print:hidden">
       <div className="flex items-center justify-between bg-gradient-to-br from-emerald-500 via-cyan-500 to-blue-500 px-5 py-4">
         <div>
           <p className="font-black text-white">🧮 Calculatrice</p>
