@@ -554,13 +554,23 @@ export default function PythagoreQuatriemePage() {
               ))}
             </ol>
 
-            <Link
-              href="/coach-ia/maths?classe=4e"
-              className="screen-only mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-sky-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-sky-500/30 transition hover:bg-sky-400"
-            >
-              <Sparkles className="h-4 w-4" />
-              M&apos;entraîner avec le Coach IA
-            </Link>
+            <div className="screen-only mt-6 flex flex-wrap gap-2">
+              <Link
+                href="/coach-ia/maths?classe=4e"
+                className="inline-flex w-fit items-center gap-2 rounded-full bg-sky-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-sky-500/30 transition hover:bg-sky-400"
+              >
+                <Sparkles className="h-4 w-4" />
+                M&apos;entraîner avec le Coach IA
+              </Link>
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="inline-flex w-fit items-center gap-2 rounded-full border border-sky-200 bg-white px-5 py-3 text-sm font-black text-sky-700 shadow-sm transition hover:bg-sky-50"
+              >
+                <Download className="h-4 w-4" />
+                Télécharger en PDF
+              </button>
+            </div>
           </section>
 
           <footer className="mt-8 flex items-center justify-between border-t border-slate-200 pt-5 text-xs text-slate-500 print:mt-6">
