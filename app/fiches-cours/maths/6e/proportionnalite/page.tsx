@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import {
   AlertTriangle,
@@ -11,6 +12,7 @@ import {
   Download,
   Landmark,
   Lightbulb,
+  Monitor,
   Printer,
   Sparkles,
   Wrench,
@@ -86,6 +88,241 @@ const entrainement = [
 ];
 
 export default function ProportionnaliteSixiemePage() {
+  const [modeClasse, setModeClasse] = useState(false);
+  const [classeSlide, setClasseSlide] = useState(0);
+  const [showClasseCorrection, setShowClasseCorrection] = useState(false);
+  const classeSlides = [
+    {
+      titre: "Objectif du cours",
+      badge: "Proportionnalité - 6e",
+      contenu: (
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          <div>
+            <p className="text-5xl font-black leading-tight text-slate-950">
+              Reconnaître une situation proportionnelle
+            </p>
+            <p className="mt-6 text-3xl font-bold leading-snug text-slate-700">
+              On vérifie si les deux grandeurs changent toujours avec le même
+              multiplicateur.
+            </p>
+          </div>
+          <div className="rounded-3xl border-4 border-emerald-200 bg-emerald-50 p-8">
+            <p className="text-2xl font-black uppercase text-emerald-700">
+              Question à poser
+            </p>
+            <p className="mt-5 text-4xl font-black leading-tight text-slate-950">
+              Si je multiplie une ligne, est-ce que l’autre est multipliée
+              pareil ?
+            </p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      titre: "Idée clé",
+      badge: "Même multiplicateur",
+      contenu: (
+        <div className="grid gap-8 lg:grid-cols-3">
+          <div className="rounded-3xl border-4 border-cyan-200 bg-cyan-50 p-8">
+            <p className="text-7xl font-black text-cyan-700">x2</p>
+            <p className="mt-4 text-3xl font-black text-slate-950">
+              Si une quantité double...
+            </p>
+          </div>
+          <div className="rounded-3xl border-4 border-emerald-200 bg-emerald-50 p-8">
+            <p className="text-7xl font-black text-emerald-700">x2</p>
+            <p className="mt-4 text-3xl font-black text-slate-950">
+              ...l’autre double aussi.
+            </p>
+          </div>
+          <div className="rounded-3xl border-4 border-amber-200 bg-amber-50 p-8">
+            <p className="text-7xl font-black text-amber-600">!</p>
+            <p className="mt-4 text-3xl font-black text-slate-950">
+              Ce n’est pas une addition.
+            </p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      titre: "Méthode au tableau",
+      badge: "Passage par l’unité",
+      contenu: (
+        <div className="grid gap-6">
+          {methode.map((m, index) => (
+            <div
+              key={m.etape}
+              className="grid gap-5 rounded-3xl border-4 border-slate-200 bg-white p-7 shadow-sm md:grid-cols-[220px_1fr]"
+            >
+              <p className="text-4xl font-black text-emerald-600">
+                {index + 1}
+              </p>
+              <p className="text-4xl font-black leading-tight text-slate-950">
+                {m.detail}
+              </p>
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      titre: "Exemple guidé",
+      badge: "3 cahiers coûtent 6 euros",
+      contenu: (
+        <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
+          <div className="overflow-hidden rounded-3xl border-4 border-slate-200 bg-white">
+            <table className="w-full border-collapse text-center text-4xl font-black">
+              <tbody className="divide-y-4 divide-slate-200">
+                <tr>
+                  <th className="bg-slate-100 px-8 py-7 text-left text-3xl text-slate-900">
+                    Cahiers
+                  </th>
+                  <td className="px-8 py-7 text-slate-900">1</td>
+                  <td className="px-8 py-7 text-slate-900">3</td>
+                  <td className="px-8 py-7 text-slate-900">5</td>
+                </tr>
+                <tr>
+                  <th className="bg-slate-100 px-8 py-7 text-left text-3xl text-slate-900">
+                    Prix
+                  </th>
+                  <td className="px-8 py-7 text-emerald-700">2</td>
+                  <td className="px-8 py-7 text-emerald-700">6</td>
+                  <td className="px-8 py-7 text-emerald-700">
+                    {showClasseCorrection ? "10" : "?"}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="rounded-3xl border-4 border-emerald-200 bg-emerald-50 p-8">
+            <p className="text-3xl font-black text-slate-950">
+              Combien coûtent 5 cahiers ?
+            </p>
+            {showClasseCorrection ? (
+              <p className="mt-8 text-5xl font-black leading-tight text-emerald-700">
+                1 cahier = 2 euros, donc 5 cahiers = 10 euros.
+              </p>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setShowClasseCorrection(true)}
+                className="mt-8 rounded-full bg-emerald-500 px-8 py-5 text-2xl font-black text-white shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-400"
+              >
+                Révéler la correction
+              </button>
+            )}
+          </div>
+        </div>
+      ),
+    },
+    {
+      titre: "À toi",
+      badge: "Exercice flash",
+      contenu: (
+        <div className="grid gap-8 lg:grid-cols-[1fr_0.85fr]">
+          <div className="rounded-3xl border-4 border-cyan-200 bg-cyan-50 p-10">
+            <p className="text-5xl font-black leading-tight text-slate-950">
+              2 stylos coûtent 4 euros.
+            </p>
+            <p className="mt-8 text-5xl font-black leading-tight text-cyan-700">
+              Combien coûtent 7 stylos ?
+            </p>
+          </div>
+          <div className="rounded-3xl border-4 border-amber-200 bg-amber-50 p-10">
+            <p className="text-3xl font-black uppercase text-amber-700">
+              Consigne
+            </p>
+            <p className="mt-5 text-4xl font-black leading-tight text-slate-950">
+              Cherche d’abord le prix d’un stylo.
+            </p>
+          </div>
+        </div>
+      ),
+    },
+  ];
+
+  function goToClasseSlide(nextSlide: number) {
+    setClasseSlide(nextSlide);
+    setShowClasseCorrection(false);
+  }
+
+  if (modeClasse) {
+    const slide = classeSlides[classeSlide];
+    return (
+      <main className="min-h-screen bg-[#eef8f2] text-slate-950">
+        <div className="flex min-h-screen flex-col">
+          <header className="screen-only border-b border-emerald-200 bg-white px-6 py-4">
+            <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
+              <button
+                type="button"
+                onClick={() => setModeClasse(false)}
+                className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-black text-slate-700 shadow-sm transition hover:bg-slate-50"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Retour à la fiche
+              </button>
+              <div className="text-center">
+                <p className="text-sm font-black uppercase text-emerald-700">
+                  Mode classe
+                </p>
+                <p className="text-xl font-black text-slate-950">
+                  Proportionnalité - 6e
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => goToClasseSlide(Math.max(0, classeSlide - 1))}
+                  disabled={classeSlide === 0}
+                  className="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-black text-slate-700 shadow-sm transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  Précédent
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    goToClasseSlide(
+                      Math.min(classeSlides.length - 1, classeSlide + 1),
+                    )
+                  }
+                  disabled={classeSlide === classeSlides.length - 1}
+                  className="rounded-full bg-emerald-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  Suivant
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <section className="flex flex-1 items-center px-6 py-8">
+            <div className="mx-auto w-full max-w-7xl rounded-[2rem] border-4 border-white bg-white/90 p-10 shadow-2xl shadow-emerald-900/10">
+              <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <p className="text-2xl font-black uppercase text-emerald-700">
+                    {slide.badge}
+                  </p>
+                  <h1 className="mt-3 text-6xl font-black tracking-normal text-slate-950">
+                    {slide.titre}
+                  </h1>
+                </div>
+                <p className="rounded-full bg-slate-100 px-5 py-3 text-xl font-black text-slate-700">
+                  {classeSlide + 1} / {classeSlides.length}
+                </p>
+              </div>
+              {slide.contenu}
+            </div>
+          </section>
+        </div>
+
+        <style jsx global>{`
+          .remerciements-bar {
+            display: none !important;
+          }
+        `}</style>
+      </main>
+    );
+  }
+
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#f4fbf6] text-slate-800">
       <div
@@ -129,14 +366,24 @@ export default function ProportionnaliteSixiemePage() {
             <ChevronRight className="h-4 w-4 text-slate-400" />
             <span className="text-slate-900">Proportionnalité</span>
           </nav>
-          <button
-            type="button"
-            onClick={() => window.print()}
-            className="inline-flex w-fit items-center gap-2 rounded-full bg-emerald-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-400"
-          >
-            <Download className="h-4 w-4" />
-            Télécharger en PDF
-          </button>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => setModeClasse(true)}
+              className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-200 bg-white px-5 py-3 text-sm font-black text-emerald-700 shadow-sm transition hover:bg-emerald-50"
+            >
+              <Monitor className="h-4 w-4" />
+              Mode classe
+            </button>
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-emerald-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-400"
+            >
+              <Download className="h-4 w-4" />
+              Télécharger en PDF
+            </button>
+          </div>
         </div>
       </div>
 
