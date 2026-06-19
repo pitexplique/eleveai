@@ -225,9 +225,9 @@ export async function GET(req: Request) {
   const pctList: number[] = [];
   const actifs7 = new Set<string>();
   const actifs30 = new Set<string>();
-  // Engagement : 7 derniers jours (index 0 = aujourd'hui).
+  // Engagement : 30 derniers jours (le client peut afficher 7 ou 30 j).
   const engagement: { date: string; count: number }[] = [];
-  for (let i = 6; i >= 0; i--) {
+  for (let i = 29; i >= 0; i--) {
     const d = new Date(startTodayMs - i * JOUR_MS);
     engagement.push({ date: localDay(d), count: 0 });
   }

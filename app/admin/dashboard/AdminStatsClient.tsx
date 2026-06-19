@@ -85,6 +85,7 @@ function Kpi({
 
 export default function AdminStatsClient() {
   const [scope, setScope] = useState("all");
+  const [engRange, setEngRange] = useState<7 | 30>(7);
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -114,9 +115,14 @@ export default function AdminStatsClient() {
     return `Collège ${scope}`;
   }, [scope]);
 
+  // Le graphe couvre 30 j ; on affiche les 7 ou 30 derniers selon le toggle.
+  const shownEngagement = useMemo(() => {
+    const all = stats?.engagement ?? [];
+    return engRange === 7 ? all.slice(-7) : all;
+  }, [stats, engRange]);
   const maxEngagement = useMemo(
-    () => Math.max(1, ...(stats?.engagement.map((e) => e.count) ?? [1])),
-    [stats]
+    () => Math.max(1, ...shownEngagement.map((e) => e.count)),
+    [shownEngagement]
   );
   const totalModules = useMemo(
     () =>
@@ -243,31 +249,66 @@ export default function AdminStatsClient() {
           </div>
 
           <div className="grid gap-4 lg:grid-cols-2">
-            {/* Engagement 7 jours */}
+            {/* Engagement élèves connectés */}
             <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-5">
-              <h3 className="text-sm font-bold text-slate-200">
-                📈 Engagement — élèves connectés (7 j)
-              </h3>
-              <p className="mt-0.5 text-[11px] font-semibold text-slate-500">
-                Nombre d&apos;élèves distincts actifs par jour
-              </p>
-              <div className="mt-4 flex h-32 items-end justify-between gap-2">
-                {stats.engagement.map((e) => (
-                  <div key={e.date} className="flex flex-1 flex-col items-center gap-1">
-                    <span className="text-[10px] font-bold text-slate-400">
-                      {e.count}
-                    </span>
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <h3 className="text-sm font-bold text-slate-200">
+                    📈 Engagement — élèves connectés
+                  </h3>
+                  <p className="mt-0.5 text-[11px] font-semibold text-slate-500">
+                    Élèves distincts actifs par jour
+                  </p>
+                </div>
+                <div className="flex rounded-lg border border-slate-700 bg-slate-950/60 p-0.5 text-xs font-bold">
+                  {([7, 30] as const).map((r) => (
+                    <button
+                      key={r}
+                      type="button"
+                      onClick={() => setEngRange(r)}
+                      className={[
+                        "rounded-md px-2.5 py-1 transition",
+                        engRange === r
+                          ? "bg-emerald-600 text-white"
+                          : "text-slate-400 hover:text-slate-200",
+                      ].join(" ")}
+                    >
+                      {r}j
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="mt-4 flex h-32 items-end justify-between gap-px sm:gap-1">
+                {shownEngagement.map((e, i) => {
+                  const showLabel =
+                    engRange === 7 || i % 5 === 0 || i === shownEngagement.length - 1;
+                  return (
                     <div
-                      className="w-full rounded-t bg-gradient-to-t from-emerald-600 to-emerald-400"
-                      style={{
-                        height: `${Math.max(4, (e.count / maxEngagement) * 100)}px`,
-                      }}
-                    />
-                    <span className="text-[10px] font-semibold capitalize text-slate-500">
-                      {jourCourt(e.date)}
-                    </span>
-                  </div>
-                ))}
+                      key={e.date}
+                      title={`${e.date} : ${e.count} élève(s)`}
+                      className="flex flex-1 flex-col items-center gap-1"
+                    >
+                      {engRange === 7 && (
+                        <span className="text-[10px] font-bold text-slate-400">
+                          {e.count}
+                        </span>
+                      )}
+                      <div
+                        className="w-full rounded-t bg-gradient-to-t from-emerald-600 to-emerald-400"
+                        style={{
+                          height: `${Math.max(3, (e.count / maxEngagement) * 100)}px`,
+                        }}
+                      />
+                      <span className="h-3 text-[9px] font-semibold capitalize text-slate-500">
+                        {showLabel
+                          ? engRange === 7
+                            ? jourCourt(e.date)
+                            : e.date.slice(8)
+                          : ""}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
