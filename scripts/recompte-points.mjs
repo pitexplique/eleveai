@@ -16,11 +16,18 @@ const env = loadEnv();
 const supabase = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY);
 
 const POINTS_PAR_RETOUR = 5, BONUS_RETOUR_TRAITE = 20;
+// Copie alignee sur lib/prenom.ts (ce script .mjs ne peut pas importer le TS) :
+// « NOM Prenom » -> prenom seul, on retire tous les tokens MAJUSCULES de tete.
+const estTokenMajuscule = (t) =>
+  t === t.toLocaleUpperCase("fr-FR") && t !== t.toLocaleLowerCase("fr-FR");
 const prenomCourt = (n) => {
   const v = (n ?? "").trim().replace(/\s+/g, " ");
   if (!v) return "Élève";
   const t = v.split(" ");
-  return t.length > 1 ? t.slice(1).join(" ") : t[0];
+  let i = 0;
+  while (i < t.length && estTokenMajuscule(t[i])) i++;
+  const reste = t.slice(i);
+  return reste.length > 0 ? reste.join(" ") : "Élève";
 };
 
 const { data } = await supabase

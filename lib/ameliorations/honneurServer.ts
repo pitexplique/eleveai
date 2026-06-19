@@ -10,13 +10,11 @@ import "server-only";
 import { createClient } from "@supabase/supabase-js";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 
-// Format saisi : « NOM Prénom » → on ne garde que le(s) prénom(s).
-export function prenomCourt(nomComplet: string | null): string {
-  const v = (nomComplet ?? "").trim().replace(/\s+/g, " ");
-  if (!v) return "Élève";
-  const tokens = v.split(" ");
-  return tokens.length > 1 ? tokens.slice(1).join(" ") : tokens[0];
-}
+// Extraction du prénom (« NOM Prénom » → prénom seul, jamais le nom de famille).
+// Heuristique partagée : voir lib/prenom.ts. Réexporté pour les consommateurs
+// existants (app/accueil/page.tsx).
+import { prenomCourt } from "@/lib/prenom";
+export { prenomCourt };
 
 // Palmarès calculé sur les 14 derniers jours : le·la plus actif·ve par
 // catégorie (idées, bugs, avis, total). Prénoms seuls, jamais deux fois le

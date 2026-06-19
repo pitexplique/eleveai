@@ -7,16 +7,9 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { verifySessionToken } from "@/lib/server/session";
 import { calculerPointsAvis } from "@/lib/points/feedbackPoints";
-
-// « DUPONT Lucas » -> « Lucas » ; « MAIR Victor Rafael » -> « Victor Rafael ».
-// Heuristique : le nom de famille est en MAJUSCULES, le prenom est capitalise.
-function prenomCourt(full: string | null): string {
-  if (!full) return "Élève";
-  const tokens = full.trim().split(/\s+/).filter(Boolean);
-  const nonUpper = tokens.filter((t) => t !== t.toUpperCase());
-  if (nonUpper.length > 0) return nonUpper.join(" ");
-  return tokens[tokens.length - 1] ?? "Élève";
-}
+// « PONTALBA TURPIN Kathalynna » -> « Kathalynna » : prenom seul, jamais le nom
+// de famille (RGPD). Heuristique partagee, voir lib/prenom.ts.
+import { prenomCourt } from "@/lib/prenom";
 
 export async function GET(req: Request) {
   const auth = req.headers.get("authorization") ?? "";
