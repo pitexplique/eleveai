@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
 import { AdminLogoutButton } from "@/components/AdminLogoutButton";
+import AdminStatsClient from "./AdminStatsClient";
 import AdminContactMessagesClient from "./AdminContactMessagesClient";
 
 export default async function AdminDashboardPage() {
@@ -18,7 +19,7 @@ export default async function AdminDashboardPage() {
 
   return (
     <main className="min-h-screen bg-slate-950 text-white p-6">
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <header className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold">Dashboard Admin</h1>
@@ -29,13 +30,17 @@ export default async function AdminDashboardPage() {
           <AdminLogoutButton />
         </header>
 
+        {/* Statistiques agrégées + sélecteur de périmètre */}
+        <AdminStatsClient />
+
         <Link
           href="/admin/retours"
           className="block rounded-xl border border-emerald-700 bg-emerald-900/30 p-4 transition hover:bg-emerald-900/50"
         >
-          <p className="font-bold text-emerald-300">📨 Retours élèves</p>
+          <p className="font-bold text-emerald-300">📨 Tous les retours élèves</p>
           <p className="mt-1 text-sm text-slate-400">
-            Avis (étoiles), bugs et idées envoyés depuis la page « Votre avis ».
+            Avis (étoiles), bugs et idées envoyés depuis la page « Votre avis » —
+            avec export CSV.
           </p>
         </Link>
 
