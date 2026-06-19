@@ -193,12 +193,25 @@ export default function AdminStatsClient() {
               sub="collèges actifs"
               color="text-sky-400"
             />
-            <Kpi
-              label="Élèves actifs (7j)"
-              value={stats.kpis.elevesActifs7j}
-              sub={`${stats.kpis.elevesActifs30j} sur 30j`}
-              color="text-pink-400"
-            />
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-4">
+              <p className="text-[11px] font-bold uppercase tracking-wide text-slate-500">
+                Élèves actifs
+              </p>
+              <div className="mt-1.5 flex items-end gap-4">
+                <div>
+                  <p className="text-2xl font-black text-pink-400">
+                    {stats.kpis.elevesActifs7j}
+                  </p>
+                  <p className="text-[11px] font-semibold text-slate-500">sur 7 jours</p>
+                </div>
+                <div className="border-l border-slate-700 pl-4">
+                  <p className="text-2xl font-black text-pink-300">
+                    {stats.kpis.elevesActifs30j}
+                  </p>
+                  <p className="text-[11px] font-semibold text-slate-500">sur 30 jours</p>
+                </div>
+              </div>
+            </div>
             <Kpi
               label="Activités totales"
               value={stats.kpis.activitesTotal}
@@ -233,8 +246,11 @@ export default function AdminStatsClient() {
             {/* Engagement 7 jours */}
             <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-5">
               <h3 className="text-sm font-bold text-slate-200">
-                📈 Engagement — 7 derniers jours
+                📈 Engagement — élèves connectés (7 j)
               </h3>
+              <p className="mt-0.5 text-[11px] font-semibold text-slate-500">
+                Nombre d&apos;élèves distincts actifs par jour
+              </p>
               <div className="mt-4 flex h-32 items-end justify-between gap-2">
                 {stats.engagement.map((e) => (
                   <div key={e.date} className="flex flex-1 flex-col items-center gap-1">

@@ -232,6 +232,8 @@ export async function GET(req: Request) {
     engagement.push({ date: localDay(d), count: 0 });
   }
   const engIndex = new Map(engagement.map((e, idx) => [e.date, idx]));
+  // Engagement = nb d'élèves CONNECTÉS (distincts) par jour, pas nb d'activités.
+  const engSets: Set<string>[] = engagement.map(() => new Set<string>());
 
   for (const r of rows) {
     activitesTotal += 1;
@@ -248,9 +250,15 @@ export async function GET(req: Request) {
       if (t >= since30 && r.code_utilisateur) actifs30.add(r.code_utilisateur);
       const dayKey = localDay(new Date(r.created_at));
       const idx = engIndex.get(dayKey);
-      if (idx !== undefined) engagement[idx].count += 1;
+      if (idx !== undefined && r.code_utilisateur) {
+        engSets[idx].add(r.code_utilisateur);
+      }
     }
   }
+  // Convertit les ensembles d'élèves distincts en compteur par jour.
+  engagement.forEach((e, idx) => {
+    e.count = engSets[idx].size;
+  });
 
   const moyenneGenerale =
     pctList.length > 0
