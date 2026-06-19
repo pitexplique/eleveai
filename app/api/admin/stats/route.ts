@@ -161,6 +161,14 @@ export async function GET(req: Request) {
     etabFilter
   );
 
+  // 5) Connexions (journal de login) — source des « élèves connectés ».
+  const connexions = await fetchAll(
+    supabase,
+    "connexions",
+    "code_utilisateur, created_at",
+    etabFilter
+  );
+
   // ---- Sélecteur d'établissements (depuis acces_etablissement) ----
   const etabMap = new Map<string, { eleves: number; profs: number }>();
   for (const a of accesAll) {
@@ -223,18 +231,8 @@ export async function GET(req: Request) {
     coach: 0,
   };
   const pctList: number[] = [];
-  const actifs7 = new Set<string>();
-  const actifs30 = new Set<string>();
-  // Engagement : 30 derniers jours (le client peut afficher 7 ou 30 j).
-  const engagement: { date: string; count: number }[] = [];
-  for (let i = 29; i >= 0; i--) {
-    const d = new Date(startTodayMs - i * JOUR_MS);
-    engagement.push({ date: localDay(d), count: 0 });
-  }
-  const engIndex = new Map(engagement.map((e, idx) => [e.date, idx]));
-  // Engagement = nb d'élèves CONNECTÉS (distincts) par jour, pas nb d'activités.
-  const engSets: Set<string>[] = engagement.map(() => new Set<string>());
 
+  // --- Activités (depuis les résultats) : volume, modules, moyenne ---
   for (const r of rows) {
     activitesTotal += 1;
     parModule[r.module] = (parModule[r.module] ?? 0) + 1;
@@ -243,19 +241,35 @@ export async function GET(req: Request) {
     const t = new Date(r.created_at).getTime();
     if (Number.isFinite(t)) {
       if (t >= startTodayMs) activitesAujourdhui += 1;
-      if (t >= since7) {
-        activites7j += 1;
-        if (r.code_utilisateur) actifs7.add(r.code_utilisateur);
-      }
-      if (t >= since30 && r.code_utilisateur) actifs30.add(r.code_utilisateur);
-      const dayKey = localDay(new Date(r.created_at));
-      const idx = engIndex.get(dayKey);
-      if (idx !== undefined && r.code_utilisateur) {
-        engSets[idx].add(r.code_utilisateur);
-      }
+      if (t >= since7) activites7j += 1;
     }
   }
-  // Convertit les ensembles d'élèves distincts en compteur par jour.
+
+  // --- Connexions (depuis le journal de login) : élèves connectés ---
+  // Engagement = nb d'élèves DISTINCTS connectés par jour (30 j, le client
+  // affiche 7 ou 30). + ensembles distincts sur 7 / 30 j glissants.
+  const engagement: { date: string; count: number }[] = [];
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(startTodayMs - i * JOUR_MS);
+    engagement.push({ date: localDay(d), count: 0 });
+  }
+  const engIndex = new Map(engagement.map((e, idx) => [e.date, idx]));
+  const engSets: Set<string>[] = engagement.map(() => new Set<string>());
+  const connectes7 = new Set<string>();
+  const connectes30 = new Set<string>();
+  const connectesAujourdSet = new Set<string>();
+
+  for (const c of connexions) {
+    const code = c.code_utilisateur as string | null;
+    if (!code) continue;
+    const t = new Date(c.created_at as string).getTime();
+    if (!Number.isFinite(t)) continue;
+    if (t >= startTodayMs) connectesAujourdSet.add(code);
+    if (t >= since7) connectes7.add(code);
+    if (t >= since30) connectes30.add(code);
+    const idx = engIndex.get(localDay(new Date(c.created_at as string)));
+    if (idx !== undefined) engSets[idx].add(code);
+  }
   engagement.forEach((e, idx) => {
     e.count = engSets[idx].size;
   });
@@ -300,8 +314,9 @@ export async function GET(req: Request) {
       activitesAujourdhui,
       activites7j,
       moyenneGenerale,
-      elevesActifs7j: actifs7.size,
-      elevesActifs30j: actifs30.size,
+      connectesAujourdhui: connectesAujourdSet.size,
+      connectes7j: connectes7.size,
+      connectes30j: connectes30.size,
     },
     parModule,
     engagement,

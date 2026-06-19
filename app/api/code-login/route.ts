@@ -91,6 +91,21 @@ export async function POST(req: Request) {
     return INVALID;
   }
 
+  // Journal de connexion (suivi d'activité). Non bloquant : une erreur ici
+  // (ex. table connexions pas encore créée) ne doit pas empêcher le login.
+  try {
+    await supabaseAdmin.from("connexions").insert({
+      code_etablissement: acces.code_etablissement,
+      code_utilisateur: acces.code_utilisateur,
+      type_utilisateur: acces.type_utilisateur,
+      nom: acces.nom ?? null,
+      classe: acces.classe ?? null,
+      source: "code",
+    });
+  } catch {
+    /* ignore */
+  }
+
   const token = signSessionToken({
     acces_id: String(acces.id),
     code_etablissement: acces.code_etablissement,

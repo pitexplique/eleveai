@@ -48,6 +48,20 @@ export async function POST(req: Request) {
     );
   }
 
+  // Journal de connexion (suivi d'activité). Non bloquant.
+  try {
+    await supabaseAdmin.from("connexions").insert({
+      code_etablissement: "INDEPENDANT",
+      code_utilisateur: `EMAIL-${profile.id}`,
+      type_utilisateur: profile.type_utilisateur ?? "perso",
+      nom: profile.nom ?? profile.email ?? null,
+      classe: null,
+      source: "email",
+    });
+  } catch {
+    /* ignore */
+  }
+
   const token = signSessionToken({
     acces_id: String(profile.id),
     code_etablissement: "INDEPENDANT",

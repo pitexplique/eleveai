@@ -17,8 +17,9 @@ type Stats = {
     activitesAujourdhui: number;
     activites7j: number;
     moyenneGenerale: number | null;
-    elevesActifs7j: number;
-    elevesActifs30j: number;
+    connectesAujourdhui: number;
+    connectes7j: number;
+    connectes30j: number;
   };
   parModule: Record<string, number>;
   engagement: { date: string; count: number }[];
@@ -201,18 +202,18 @@ export default function AdminStatsClient() {
             />
             <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-4">
               <p className="text-[11px] font-bold uppercase tracking-wide text-slate-500">
-                Élèves actifs
+                Élèves connectés
               </p>
               <div className="mt-1.5 flex items-end gap-4">
                 <div>
                   <p className="text-2xl font-black text-pink-400">
-                    {stats.kpis.elevesActifs7j}
+                    {stats.kpis.connectes7j}
                   </p>
                   <p className="text-[11px] font-semibold text-slate-500">sur 7 jours</p>
                 </div>
                 <div className="border-l border-slate-700 pl-4">
                   <p className="text-2xl font-black text-pink-300">
-                    {stats.kpis.elevesActifs30j}
+                    {stats.kpis.connectes30j}
                   </p>
                   <p className="text-[11px] font-semibold text-slate-500">sur 30 jours</p>
                 </div>
@@ -254,10 +255,10 @@ export default function AdminStatsClient() {
               <div className="flex items-start justify-between gap-2">
                 <div>
                   <h3 className="text-sm font-bold text-slate-200">
-                    📈 Engagement — élèves connectés
+                    📈 Connexions — élèves / jour
                   </h3>
                   <p className="mt-0.5 text-[11px] font-semibold text-slate-500">
-                    Élèves distincts actifs par jour
+                    Élèves distincts connectés par jour
                   </p>
                 </div>
                 <div className="flex rounded-lg border border-slate-700 bg-slate-950/60 p-0.5 text-xs font-bold">
