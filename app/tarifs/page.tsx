@@ -5,17 +5,17 @@ import TarifsClient from "./TarifsClient";
 const url = "https://eleveai.fr/tarifs";
 
 export const metadata: Metadata = {
-  title: "Tarifs EleveAI — Pilote gratuit, établissements, familles",
+  title: "Tarifs EleveAI — Le juste prix, en réflexion avec vous",
   description:
-    "Accès pilote gratuit 4 semaines pour les collèges et lycées. Offre établissement sur devis. Abonnement famille bientôt disponible.",
+    "EleveAI ne fige pas son tarif : gratuit pour l'élève, jamais payé par les familles, payé globalement par l'établissement. Fourchette 2 à 7 €/élève/an en réflexion — donnez votre avis.",
   alternates: { canonical: url },
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     url,
-    title: "Tarifs EleveAI — Formules mensuelle et annuelle",
+    title: "Tarifs EleveAI — Le juste prix, en réflexion avec vous",
     description:
-      "Découvrez les tarifs EleveAI : formules mensuelle et annuelle, accès maths, exercices guidés et suivi personnalisé des progrès.",
+      "Gratuit pour l'élève, jamais payé par les familles. Fourchette 2 à 7 €/élève/an payée par l'établissement, en réflexion. Donnez votre avis sur le juste prix.",
     siteName: "EleveAI",
     locale: "fr_FR",
     images: [
@@ -29,9 +29,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tarifs EleveAI — Formules mensuelle et annuelle",
+    title: "Tarifs EleveAI — Le juste prix, en réflexion avec vous",
     description:
-      "Tarifs EleveAI : formules mensuelle et annuelle, ajout d’enfants, exercices guidés et suivi personnalisé.",
+      "Gratuit pour l'élève, jamais payé par les familles. Fourchette 2 à 7 €/élève/an, en réflexion. Donnez votre avis.",
     images: ["/preview.jpg"],
   },
 };
