@@ -388,6 +388,15 @@ export default function VotreAvisClient({
                     placeholder={selected.placeholder}
                     className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950/60 px-3 py-2.5 text-sm leading-6 text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-emerald-500/60"
                   />
+                  <p className="mt-2 flex items-start gap-1.5 text-xs leading-5 text-amber-300/90">
+                    <span aria-hidden>✍️</span>
+                    <span>
+                      Écris ton retour avec{" "}
+                      <span className="font-semibold">tes propres mots</span>. Les avis
+                      copiés-collés depuis une IA (ChatGPT…) sont supprimés et ne
+                      rapportent aucun point.
+                    </span>
+                  </p>
                 </div>
 
                 {/* Identité si non connecté */}
@@ -468,6 +477,7 @@ export default function VotreAvisClient({
             <li>• <span className="font-semibold text-slate-50">Précis</span> : « le bouton Valider ne marche pas sur Coach Maths en 3e » plutôt que « ça bug ».</li>
             <li>• <span className="font-semibold text-slate-50">Reproductible</span> : explique ce que tu as fait juste avant le problème.</li>
             <li>• <span className="font-semibold text-slate-50">Honnête</span> : les avis négatifs aident autant que les positifs — dis ce que tu penses vraiment.</li>
+            <li>• <span className="font-semibold text-slate-50">Écrit par toi</span> : pas de copier-coller d&apos;une IA (ChatGPT…). Ce sont tes idées qu&apos;on veut lire. Les retours générés par IA sont supprimés et ne comptent pas dans tes points.</li>
           </ul>
           <p className="mt-4 text-xs text-slate-500">
             Seuls ton prénom, ta classe et tes codes EleveAI (ou l&apos;e-mail de ton compte) sont
