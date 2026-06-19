@@ -10,6 +10,7 @@ import FloatingCoach from "@/components/FloatingCoach";
 import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
+import { elevesRemercies } from "@/lib/remerciements/eleves";
 
 // ─── Drag-to-scroll (glisser à la souris sur desktop) ──────────────────────────
 // Sur mobile le scroll horizontal au doigt est natif. Sur desktop il n'y a pas de
@@ -671,6 +672,45 @@ export default function AccueilPage({
               </p>
               <p className="mt-2 text-xs font-black text-sky-300 transition group-hover:translate-x-1">Notre politique →</p>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── REMERCIEMENTS ────────────────────────────────────────────────────── */}
+      <section className="px-4 pb-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl overflow-hidden rounded-2xl border border-yellow-300/25 bg-gradient-to-br from-white/[0.07] to-yellow-300/[0.04] p-6 sm:p-8">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="flex flex-wrap items-center gap-2 text-lg font-black text-white">
+              🙏 Merci à nos élèves testeurs
+              <span className="rounded-full border border-yellow-300/30 bg-yellow-300/10 px-2 py-0.5 text-[11px] font-black text-yellow-200">
+                {elevesRemercies.length} élèves
+              </span>
+            </h2>
+            <Link
+              href="/remerciements"
+              className="text-xs font-black text-yellow-300 transition hover:translate-x-1 hover:text-yellow-200"
+            >
+              Voir la page →
+            </Link>
+          </div>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/65">
+            EleveAI est construit <span className="font-bold text-white/90">avec ses élèves</span> : leurs idées,
+            les bugs qu&apos;ils repèrent et leurs avis font avancer la plateforme.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-2.5">
+            {/* clé prénom + action : deux élèves peuvent porter le même prénom (deux Maëlle) */}
+            {elevesRemercies.map((e) => (
+              <span
+                key={`${e.prenom}-${e.action}`}
+                title={e.action}
+                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] py-1.5 pl-2 pr-3.5 text-sm font-bold text-white/90 transition hover:-translate-y-0.5 hover:border-yellow-300/50 hover:bg-white/[0.12]"
+              >
+                <span className="grid h-5 w-5 place-items-center rounded-full bg-gradient-to-br from-yellow-300 to-amber-500 text-[11px] font-black text-slate-900">
+                  {e.prenom.charAt(0)}
+                </span>
+                <span className="font-black text-yellow-300">{e.prenom}</span>
+              </span>
+            ))}
           </div>
         </div>
       </section>
