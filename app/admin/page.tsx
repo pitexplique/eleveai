@@ -12,7 +12,7 @@ export default async function AdminPage() {
 
   // ✅ Si déjà connecté, on va direct au dashboard (sinon il peut boucler)
   if (isAuthed) {
-    redirect("accueil");
+    redirect("/admin/dashboard");
   }
 
   // ✅ Sinon on affiche le formulaire
