@@ -15,6 +15,8 @@ type ContactMessage = {
   status: string;
   admin_notes: string | null;
   source: string | null;
+  reponse: string | null;
+  reponse_at: string | null;
 };
 
 type SortOrder = "newest" | "oldest";
@@ -68,6 +70,21 @@ export default function AdminContactMessagesClient() {
       body: JSON.stringify({ id, status }),
     });
     loadMessages();
+  }
+
+  // Brouillons de réponse, indexés par id de message.
+  const [drafts, setDrafts] = useState<Record<string, string>>({});
+  const [savingReply, setSavingReply] = useState<number | null>(null);
+
+  async function saveReply(id: number, reponse: string) {
+    setSavingReply(id);
+    await fetch("/api/admin/contact-messages", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, reponse }),
+    });
+    await loadMessages();
+    setSavingReply(null);
   }
 
   async function deleteMessage(id: number) {
@@ -263,6 +280,38 @@ export default function AdminContactMessagesClient() {
             {m.email && <p className="text-xs text-slate-300">✉️ {m.email}</p>}
 
             <p className="text-sm text-slate-200 whitespace-pre-wrap">{m.message}</p>
+
+            {/* Réponse du prof */}
+            <div className="rounded-lg border border-slate-800 bg-slate-950/40 p-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold uppercase tracking-wide text-slate-500">
+                  ✍️ Ma réponse
+                </span>
+                {m.reponse_at && (
+                  <span className="text-[10px] font-semibold text-emerald-400">
+                    envoyée le {new Date(m.reponse_at).toLocaleString()}
+                  </span>
+                )}
+              </div>
+              <textarea
+                value={drafts[String(m.id)] ?? m.reponse ?? ""}
+                onChange={(e) =>
+                  setDrafts((d) => ({ ...d, [String(m.id)]: e.target.value }))
+                }
+                placeholder="Écris ta réponse à l'élève…"
+                rows={2}
+                className="mt-1.5 w-full resize-y rounded-md border border-slate-700 bg-slate-950/60 px-2.5 py-1.5 text-sm text-slate-100 placeholder-slate-500"
+              />
+              <div className="mt-1.5 flex justify-end">
+                <button
+                  onClick={() => saveReply(m.id, drafts[String(m.id)] ?? m.reponse ?? "")}
+                  disabled={savingReply === m.id}
+                  className="rounded-md bg-emerald-600 px-3 py-1 text-xs font-bold text-white hover:bg-emerald-500 disabled:opacity-50"
+                >
+                  {savingReply === m.id ? "Enregistrement…" : "💬 Enregistrer la réponse"}
+                </button>
+              </div>
+            </div>
 
             <div className="flex flex-wrap items-center gap-2 pt-2">
               <span className="text-xs text-slate-400">Statut :</span>

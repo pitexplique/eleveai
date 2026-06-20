@@ -187,25 +187,9 @@ export default function AdminStatsClient() {
               sub="collèges actifs"
               color="text-sky-400"
             />
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-4">
-              <p className="text-[11px] font-bold uppercase tracking-wide text-slate-500">
-                Élèves connectés
-              </p>
-              <div className="mt-1.5 flex items-end gap-4">
-                <div>
-                  <p className="text-2xl font-black text-pink-400">
-                    {stats.kpis.connectes7j}
-                  </p>
-                  <p className="text-[11px] font-semibold text-slate-500">sur 7 jours</p>
-                </div>
-                <div className="border-l border-slate-700 pl-4">
-                  <p className="text-2xl font-black text-pink-300">
-                    {stats.kpis.connectes30j}
-                  </p>
-                  <p className="text-[11px] font-semibold text-slate-500">sur 30 jours</p>
-                </div>
-              </div>
-            </div>
+            {/* Carte « Élèves connectés » retirée : le suivi de connexion n'est pas
+                fiable (seuls les logins explicites sont logués, pas les sessions
+                persistantes) → le chiffre était trompeur. */}
             <Kpi
               label="Avis"
               value={stats.avis.total}

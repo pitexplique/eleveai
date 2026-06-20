@@ -124,17 +124,26 @@ export async function PATCH(request: Request) {
   const body = await request.json().catch(() => null);
   const id = typeof body?.id === "string" ? body.id : null;
   const traite = typeof body?.traite === "boolean" ? body.traite : null;
+  const aReponse = body?.reponse !== undefined;
 
-  if (!id || traite === null) {
+  if (!id || (traite === null && !aReponse)) {
     return NextResponse.json(
       { ok: false, error: "Requête invalide." },
       { status: 400 }
     );
   }
 
+  const update: Record<string, unknown> = {};
+  if (traite !== null) update.traite = traite;
+  if (aReponse) {
+    const reponse = String(body.reponse).trim();
+    update.reponse = reponse || null;
+    update.reponse_at = reponse ? new Date().toISOString() : null;
+  }
+
   const { error } = await serviceClient()
     .from("retours_eleves")
-    .update({ traite })
+    .update(update)
     .eq("id", id);
 
   if (error) {

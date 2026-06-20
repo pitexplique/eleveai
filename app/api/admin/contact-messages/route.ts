@@ -34,7 +34,7 @@ export async function GET() {
   return NextResponse.json(data);
 }
 
-// Mise à jour du statut (new / in_progress / done).
+// Mise à jour : statut (new / in_progress / done) et/ou réponse du prof.
 export async function PATCH(req: Request) {
   if (!(await isAdmin())) {
     return new NextResponse("Unauthorized", { status: 401 });
@@ -42,15 +42,32 @@ export async function PATCH(req: Request) {
 
   const body = await req.json().catch(() => null);
   const id = body?.id;
-  const status = body?.status;
+  if (id === undefined || id === null) {
+    return NextResponse.json({ error: "id manquant." }, { status: 400 });
+  }
 
-  if (id === undefined || id === null || !STATUTS.includes(status)) {
-    return NextResponse.json({ error: "Requête invalide." }, { status: 400 });
+  const update: Record<string, unknown> = {};
+
+  if (body?.status !== undefined) {
+    if (!STATUTS.includes(body.status)) {
+      return NextResponse.json({ error: "Statut invalide." }, { status: 400 });
+    }
+    update.status = body.status;
+  }
+
+  if (body?.reponse !== undefined) {
+    const reponse = String(body.reponse).trim();
+    update.reponse = reponse || null;
+    update.reponse_at = reponse ? new Date().toISOString() : null;
+  }
+
+  if (Object.keys(update).length === 0) {
+    return NextResponse.json({ error: "Rien à mettre à jour." }, { status: 400 });
   }
 
   const { error } = await serviceClient()
     .from("contact_messages")
-    .update({ status })
+    .update(update)
     .eq("id", id);
 
   if (error) {

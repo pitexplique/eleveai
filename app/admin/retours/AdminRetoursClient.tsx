@@ -16,6 +16,8 @@ type Retour = {
   email: string | null;
   traite: boolean;
   created_at: string;
+  reponse: string | null;
+  reponse_at: string | null;
 };
 
 const TYPE_META: Record<
@@ -55,6 +57,32 @@ export default function AdminRetoursClient() {
   const [etablissement, setEtablissement] = useState<string>("tous");
   const [recherche, setRecherche] = useState("");
   const [patching, setPatching] = useState<string | null>(null);
+  const [drafts, setDrafts] = useState<Record<string, string>>({});
+  const [savingReply, setSavingReply] = useState<string | null>(null);
+
+  async function saveReply(retour: Retour, reponse: string) {
+    setSavingReply(retour.id);
+    try {
+      const res = await fetch("/api/admin/retours", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: retour.id, reponse }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data?.ok) {
+        setRetours((prev) =>
+          prev.map((r) =>
+            r.id === retour.id
+              ? { ...r, reponse: reponse.trim() || null, reponse_at: new Date().toISOString() }
+              : r
+          )
+        );
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    setSavingReply(null);
+  }
 
   async function load(offset: number) {
     const isFirst = offset === 0;
@@ -361,6 +389,39 @@ export default function AdminRetoursClient() {
                           >
                             {r.traite ? "↩️ Remettre à traiter" : "✅ Marquer traité"}
                           </button>
+                        </div>
+
+                        {/* Réponse du prof */}
+                        <div className="mt-3 rounded-xl border border-slate-200 bg-white p-3">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[11px] font-black uppercase tracking-wide text-slate-500">
+                              ✍️ Ma réponse
+                            </span>
+                            {r.reponse_at ? (
+                              <span className="text-[10px] font-bold text-emerald-600">
+                                envoyée le {formatDate(r.reponse_at)}
+                              </span>
+                            ) : null}
+                          </div>
+                          <textarea
+                            value={drafts[r.id] ?? r.reponse ?? ""}
+                            onChange={(e) =>
+                              setDrafts((d) => ({ ...d, [r.id]: e.target.value }))
+                            }
+                            placeholder="Écris ta réponse à l'élève…"
+                            rows={2}
+                            className="mt-1.5 w-full resize-y rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                          />
+                          <div className="mt-1.5 flex justify-end">
+                            <button
+                              type="button"
+                              onClick={() => saveReply(r, drafts[r.id] ?? r.reponse ?? "")}
+                              disabled={savingReply === r.id}
+                              className="rounded-xl bg-emerald-500 px-3 py-1.5 text-xs font-black text-white shadow transition hover:brightness-95 disabled:opacity-50"
+                            >
+                              {savingReply === r.id ? "Enregistrement…" : "💬 Enregistrer la réponse"}
+                            </button>
+                          </div>
                         </div>
                       </li>
                     );
