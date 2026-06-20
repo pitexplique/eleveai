@@ -43,6 +43,10 @@ const TYPES = [
   },
 ];
 
+// Aligné sur la limite serveur (app/api/retours/route.ts) : 200 mots suffisent
+// pour un avis honnête, au-delà c'est un copier-collé d'IA.
+const MAX_MOTS = 200;
+
 const PAGES = [
   "Coach Maths",
   "Coach Français",
@@ -118,6 +122,8 @@ export default function VotreAvisClient({
   const [count, setCount] = useState(0);
 
   const selected = TYPES.find((t) => t.id === type)!;
+  const nbMots = message.trim() ? message.trim().split(/\s+/).length : 0;
+  const tropLong = nbMots > MAX_MOTS;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -125,6 +131,12 @@ export default function VotreAvisClient({
 
     if (message.trim().length < 10) {
       setError("Décris ton retour en quelques mots (10 caractères minimum).");
+      return;
+    }
+    if (tropLong) {
+      setError(
+        `Ton retour fait ${nbMots} mots (max ${MAX_MOTS}). Va à l'essentiel, avec tes propres mots.`
+      );
       return;
     }
     if (type === "avis" && note === 0) {
@@ -388,15 +400,27 @@ export default function VotreAvisClient({
                     placeholder={selected.placeholder}
                     className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950/60 px-3 py-2.5 text-sm leading-6 text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-emerald-500/60"
                   />
-                  <p className="mt-2 flex items-start gap-1.5 text-xs leading-5 text-amber-300/90">
-                    <span aria-hidden>✍️</span>
-                    <span>
-                      Écris ton retour avec{" "}
-                      <span className="font-semibold">tes propres mots</span>. Les avis
-                      copiés-collés depuis une IA (ChatGPT…) sont supprimés et ne
-                      rapportent aucun point.
+                  <div className="mt-2 flex items-start justify-between gap-3">
+                    <p className="flex items-start gap-1.5 text-xs leading-5 text-amber-300/90">
+                      <span aria-hidden>✍️</span>
+                      <span>
+                        Écris ton retour avec{" "}
+                        <span className="font-semibold">tes propres mots</span>. Les avis
+                        copiés-collés depuis une IA (ChatGPT…) sont supprimés et ne
+                        rapportent aucun point.
+                      </span>
+                    </p>
+                    <span
+                      className={[
+                        "shrink-0 rounded-full px-2 py-0.5 text-xs font-bold tabular-nums",
+                        tropLong
+                          ? "bg-red-500/15 text-red-300"
+                          : "bg-slate-800 text-slate-400",
+                      ].join(" ")}
+                    >
+                      {nbMots} / {MAX_MOTS} mots
                     </span>
-                  </p>
+                  </div>
                 </div>
 
                 {/* Identité si non connecté */}
@@ -460,7 +484,7 @@ export default function VotreAvisClient({
 
                 <button
                   type="submit"
-                  disabled={sending}
+                  disabled={sending || tropLong}
                   className="inline-flex items-center rounded-full bg-emerald-500 px-6 py-3 text-sm font-black text-white transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {sending ? "Envoi en cours…" : `${selected.emoji} Envoyer mon retour`}

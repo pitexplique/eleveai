@@ -31,6 +31,17 @@ function asString(v: any) {
   return String(v ?? "").trim();
 }
 
+// Anti-spam : un avis honnête tient en 200 mots largement. Au-delà, c'est un
+// pavé copié-collé depuis une IA (ChatGPT/Gemini). Voir scripts/purge-avis-ia.mjs.
+const MAX_MOTS = 200;
+// Délai minimum entre deux retours d'un même élève (anti-farming de points).
+const DELAI_MIN_MS = 20_000;
+
+function compterMots(s: string) {
+  const t = s.trim();
+  return t ? t.split(/\s+/).length : 0;
+}
+
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 function validateEmailLoose(v: string) {
@@ -75,6 +86,15 @@ export async function POST(req: Request) {
     if (message.length > 3000) {
       return NextResponse.json({ ok: false, error: "Message trop long" }, { status: 400 });
     }
+    if (compterMots(message) > MAX_MOTS) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: `Ton retour fait plus de ${MAX_MOTS} mots. Va à l'essentiel, avec tes propres mots (les pavés copiés-collés d'une IA ne sont pas acceptés).`,
+        },
+        { status: 400 }
+      );
+    }
     if (type === "avis" && !(note >= 1 && note <= 5)) {
       return NextResponse.json(
         { ok: false, error: "Choisis une note entre 1 et 5 étoiles." },
@@ -92,6 +112,35 @@ export async function POST(req: Request) {
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
+
+    // Anti-farming : pour un élève identifié (codes), on bloque les doublons et
+    // les envois en rafale. Un élève anonyme (sans codes) ne gagne pas de points,
+    // l'abus est donc sans intérêt → on ne filtre pas.
+    if (codeEtablissement && codeEleve) {
+      const { data: recents } = await supabase
+        .from("retours_eleves")
+        .select("message, created_at")
+        .eq("code_etablissement", codeEtablissement)
+        .eq("code_eleve", codeEleve)
+        .order("created_at", { ascending: false })
+        .limit(20);
+
+      if (recents && recents.length) {
+        const dernier = new Date(recents[0].created_at).getTime();
+        if (Date.now() - dernier < DELAI_MIN_MS) {
+          return NextResponse.json(
+            { ok: false, error: "Tu envoies trop vite. Attends quelques secondes avant ton prochain retour." },
+            { status: 429 }
+          );
+        }
+        if (recents.some((r) => (r.message ?? "").trim() === message)) {
+          return NextResponse.json(
+            { ok: false, error: "Tu as déjà envoyé ce retour. Propose quelque chose de nouveau 😉" },
+            { status: 409 }
+          );
+        }
+      }
+    }
 
     const { error } = await supabase.from("retours_eleves").insert({
       type,
