@@ -69,6 +69,18 @@ export default function AdminContactMessagesClient() {
     loadMessages();
   }
 
+  async function deleteMessage(id: number) {
+    if (!confirm("Supprimer définitivement ce message ?")) return;
+    // Retrait optimiste immédiat, puis suppression côté serveur.
+    setMessages((prev) => prev.filter((m) => m.id !== id));
+    await fetch("/api/admin/contact-messages", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    loadMessages();
+  }
+
   useEffect(() => {
     loadMessages();
   }, []);
@@ -249,7 +261,7 @@ export default function AdminContactMessagesClient() {
 
             <p className="text-sm text-slate-200 whitespace-pre-wrap">{m.message}</p>
 
-            <div className="flex items-center gap-2 pt-2">
+            <div className="flex flex-wrap items-center gap-2 pt-2">
               <span className="text-xs text-slate-400">Statut :</span>
 
               {["new", "in_progress", "done"].map((s) => (
@@ -266,6 +278,14 @@ export default function AdminContactMessagesClient() {
                   {s}
                 </button>
               ))}
+
+              <button
+                onClick={() => deleteMessage(m.id)}
+                className="ml-auto rounded bg-red-500/15 px-2 py-1 text-xs font-semibold text-red-300 hover:bg-red-500/30"
+                title="Supprimer ce message"
+              >
+                🗑 Supprimer
+              </button>
             </div>
           </div>
         ))}
