@@ -1,6 +1,7 @@
 "use client";
 
 import type { KeyboardEvent, ReactNode } from "react";
+import Link from "next/link";
 import { Video } from "lucide-react";
 import AudioBoost from "@/components/AudioBoost";
 import { MarkdownMath } from "@/components/MarkdownMath";
@@ -41,6 +42,13 @@ type TutorSimpleViewProps = {
   onQcmClick: (choice: string) => void;
   onInputKeyDown: (event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onShowLesson: () => void;
+  // Enregistrement de la séance (comme en mode complet) : un élève connecté
+  // doit pouvoir sauvegarder son score depuis le mode simple aussi.
+  isLoggedIn: boolean;
+  canSave: boolean;
+  saving: boolean;
+  saveMessage: string | null;
+  onSave: () => void;
 };
 
 function classLabel(classe: Classe) {
@@ -90,6 +98,11 @@ export default function TutorSimpleView({
   onQcmClick,
   onInputKeyDown,
   onShowLesson,
+  isLoggedIn,
+  canSave,
+  saving,
+  saveMessage,
+  onSave,
 }: TutorSimpleViewProps) {
   const learningVideoHref = currentQuestion
     ? buildLearningVideoHref({
@@ -355,6 +368,42 @@ export default function TutorSimpleView({
             <SimpleStat title="Score" value={`${score}/20`} tone="orange" />
           </aside>
         </div>
+
+        {/* Enregistrement de la séance : visible dès la première réponse, comme
+            en mode complet. Un élève non connecté est invité à se connecter. */}
+        {canSave ? (
+          <div className="mt-4 flex flex-col items-center gap-2">
+            {isLoggedIn ? (
+              <button
+                type="button"
+                onClick={onSave}
+                disabled={saving}
+                className="rounded-md bg-emerald-500 px-8 py-3 text-base font-black text-white shadow-sm hover:bg-emerald-600 disabled:opacity-60"
+              >
+                {saving ? "Enregistrement..." : "✅ Enregistrer ma séance"}
+              </button>
+            ) : (
+              <Link
+                href="/auth/signin-eleve"
+                className="rounded-md bg-amber-500 px-8 py-3 text-center text-base font-black text-white shadow-sm hover:bg-amber-600"
+              >
+                Se connecter pour enregistrer
+              </Link>
+            )}
+
+            {saveMessage ? (
+              <p
+                className={`rounded-md px-4 py-2 text-sm font-black ${
+                  saveMessage.includes("✅")
+                    ? "bg-emerald-100 text-emerald-800"
+                    : "bg-red-100 text-red-700"
+                }`}
+              >
+                {saveMessage}
+              </p>
+            ) : null}
+          </div>
+        ) : null}
 
         <div className="mt-3 text-center text-xs font-semibold text-slate-500">
           Progression automatique : niveau {Math.max(1, Math.min(5, currentStar))}

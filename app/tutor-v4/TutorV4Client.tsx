@@ -1336,6 +1336,11 @@ function handleInputKeyDown(
           onQcmClick={(choice) => void handleQcmClick(choice)}
           onInputKeyDown={handleInputKeyDown}
           onShowLesson={() => setShowLesson(true)}
+          isLoggedIn={!!eleve}
+          canSave={nbTentatives > 0}
+          saving={saving}
+          saveMessage={saveMessage}
+          onSave={() => void enregistrerSeance()}
         />
         {lessonModal}
         {matiere === "maths" && <BoiteAOutils />}
