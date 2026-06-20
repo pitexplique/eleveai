@@ -39,6 +39,12 @@ const PREFIXES_IA = [
   "Pour que le rendu soit parfait sur le site",
   "Voici comment on peut imaginer la structure finale",
   "C'est une excellente idée de stratégie",
+  // Spam IA d'Ayden (DIMITILE/6C01) du 19/06/2026 : mêmes sorties ChatGPT/Gemini
+  // collées 42×, 21× et 8× en quelques minutes pour farmer des points.
+  "1. Enrichir l'Intelligence et la Pertinence",
+  "Idée 1 : Le \"Moteur Socratique\"",
+  "« Bonjour à l'équipe,",
+  "Conversation avec Gemini",
 ];
 
 const { data, error } = await supabase
@@ -48,7 +54,13 @@ const { data, error } = await supabase
   .limit(5000);
 if (error) { console.error("ERREUR lecture:", error.message); process.exit(1); }
 
-const estIA = (m) => PREFIXES_IA.some((p) => (m ?? "").trimStart().startsWith(p));
+// Normalise les espaces (les collages IA contiennent des \n internes qui
+// cassaient un startsWith sur le texte brut, ex. « Comment ça marche ?\n\nAu lieu »).
+const norm = (s) => (s ?? "").replace(/\s+/g, " ").trimStart();
+const estIA = (m) => {
+  const nm = norm(m);
+  return PREFIXES_IA.some((p) => nm.startsWith(norm(p)));
+};
 const aSupprimer = data.filter((r) => estIA(r.message));
 
 console.log(`${APPLY ? "SUPPRESSION" : "APERÇU (aucune suppression)"}\n`);
