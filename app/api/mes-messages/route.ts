@@ -1,0 +1,45 @@
+// Messages « Écris-moi » d'un élève + la réponse de son prof.
+// Lecture sécurisée : on ne renvoie que les messages dont les codes
+// correspondent au jeton de session signé (un élève ne voit que les siens).
+
+import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
+import { verifySessionToken } from "@/lib/server/session";
+
+export const dynamic = "force-dynamic";
+
+export async function GET(req: Request) {
+  const auth = req.headers.get("authorization") ?? "";
+  const token = auth.startsWith("Bearer ") ? auth.slice(7) : "";
+
+  const session = verifySessionToken(token);
+  if (!session) {
+    return NextResponse.json(
+      { ok: false, error: "Session expirée. Reconnecte-toi." },
+      { status: 401 }
+    );
+  }
+
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+
+  const { data, error } = await supabase
+    .from("contact_messages")
+    .select("id, message, created_at, reponse, reponse_at, status")
+    .eq("code_etablissement", session.code_etablissement)
+    .eq("code_utilisateur", session.code_utilisateur)
+    .eq("source", "eleve-message")
+    .order("created_at", { ascending: false })
+    .limit(50);
+
+  if (error) {
+    return NextResponse.json(
+      { ok: false, error: "Impossible de charger tes messages." },
+      { status: 500 }
+    );
+  }
+
+  return NextResponse.json({ ok: true, messages: data ?? [] });
+}

@@ -61,6 +61,9 @@ export async function POST(req: Request) {
     const email = asString(body.email);
     const message = asString(body.message);
     const source = asString(body.source) || "contact";
+    // Codes élève (source eleve-message) pour relier le message à son auteur.
+    const codeEtablissement = asString(body.code_etablissement).slice(0, 100);
+    const codeUtilisateur = asString(body.code_utilisateur).slice(0, 100);
 
     // Validation minimale
     if (!ROLES.has(role)) {
@@ -113,6 +116,8 @@ export async function POST(req: Request) {
       message,
       source,
       status: "new",
+      code_etablissement: codeEtablissement || null,
+      code_utilisateur: codeUtilisateur || null,
     });
 
     if (error) throw error;

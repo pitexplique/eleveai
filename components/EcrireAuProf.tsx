@@ -77,6 +77,11 @@ export default function EcrireAuProf() {
           name: prenomOuCode,
           org,
           message: texte,
+          // Codes joints pour relier le message à l'élève (réponse du prof
+          // affichée ensuite sur SON dashboard).
+          code_etablissement: eleve?.code_etablissement?.trim() || null,
+          // Pour un élève collège, le code utilisateur du jeton = le code élève.
+          code_utilisateur: eleve?.code_eleve?.trim() || null,
         }),
       });
       const data = (await res.json().catch(() => ({}))) as {

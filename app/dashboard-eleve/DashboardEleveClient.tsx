@@ -111,6 +111,15 @@ type ResultatDefiJour = {
   created_at: string;
 };
 
+type MessageProf = {
+  id: string;
+  message: string;
+  created_at: string;
+  reponse: string | null;
+  reponse_at: string | null;
+  status: string;
+};
+
 // Date sans heure : retour élève du 11/06/2026, afficher l'heure des activités
 // était vécu comme intrusif (« je n'aime pas être stalké »).
 function formatDate(value: string) {
@@ -175,6 +184,7 @@ export default function DashboardEleveClient() {
   const [resultatsEnglish, setResultatsEnglish] = useState<ResultatEnglishMaths[]>([]);
   const [resultatsTutor, setResultatsTutor] = useState<ResultatTutor[]>([]);
   const [pointsAvis, setPointsAvis] = useState(0);
+  const [messagesProf, setMessagesProf] = useState<MessageProf[]>([]);
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -254,6 +264,19 @@ export default function DashboardEleveClient() {
 
     loadResultats();
   }, [codeEtablissement, codeUtilisateur, eleve?.token]);
+
+  // Messages « Écris-moi » de l'élève + réponses du prof.
+  useEffect(() => {
+    if (!eleve?.token) return;
+    fetch("/api/mes-messages", {
+      headers: { Authorization: `Bearer ${eleve.token}` },
+    })
+      .then((r) => r.json())
+      .then((d) => {
+        if (d?.ok) setMessagesProf(d.messages as MessageProf[]);
+      })
+      .catch(() => {});
+  }, [eleve?.token]);
 
   const dernierParcours = resultatsParcours[0] ?? null;
   const meilleurParcours = useMemo(
@@ -344,6 +367,47 @@ export default function DashboardEleveClient() {
             </p>
           </div>
         </div>
+
+        {messagesProf.length > 0 && (
+          <div className="mt-6 rounded-[2rem] border border-amber-200 bg-white p-6 shadow-xl">
+            <h2 className="text-xl font-black text-slate-900">
+              ✉️ Mes messages avec mon prof
+            </h2>
+            <p className="mt-1 text-sm font-semibold text-slate-500">
+              Ce que tu as écrit avec « Écris-moi », et la réponse de ton prof.
+            </p>
+            <ul className="mt-4 space-y-3">
+              {messagesProf.map((m) => (
+                <li
+                  key={m.id}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                >
+                  <p className="text-xs font-bold text-slate-400">
+                    Toi · {formatDate(m.created_at)}
+                  </p>
+                  <p className="mt-1 whitespace-pre-wrap text-sm font-medium text-slate-800">
+                    {m.message}
+                  </p>
+                  {m.reponse ? (
+                    <div className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 p-3">
+                      <p className="text-xs font-black uppercase tracking-wide text-emerald-700">
+                        👩‍🏫 Réponse de ton prof
+                        {m.reponse_at ? ` · ${formatDate(m.reponse_at)}` : ""}
+                      </p>
+                      <p className="mt-1 whitespace-pre-wrap text-sm font-semibold text-emerald-900">
+                        {m.reponse}
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="mt-3 text-xs font-bold text-amber-600">
+                      ⏳ En attente de la réponse de ton prof…
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {loading ? (
           <div className="mt-6 rounded-3xl bg-white p-6 font-black text-slate-700 shadow-xl">
