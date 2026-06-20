@@ -1,6 +1,7 @@
 // lib/tutor-v4/question-banks/maths/cm1/index.ts
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { applyMathsKeyboardFree } from "../../mathsKeyboardFreeTransform";
 
 import { nombresEntiersBank } from "./nombres-entiers.bank";
 import { suitesBank } from "./suites.bank";
@@ -34,16 +35,17 @@ import { algorithmiqueBank } from "./algorithmique.bank";
 export const mathsCm1QuestionBank: TutorBankItemV4[] = [
   ...nombresEntiersBank,
   ...suitesBank,
-  ...MultiplicationTablesBank,
+  // --- TEST conversion short -> QCM (zéro clavier) sur quelques banques CM1 ---
+  ...applyMathsKeyboardFree(MultiplicationTablesBank),
   ...multiplicationBank,
-  ...divisionBank,
-  ...fractionsBank,
+  ...applyMathsKeyboardFree(divisionBank),
+  ...applyMathsKeyboardFree(fractionsBank),
   ...decimauxBank,
   ...calculBank,
   ...problemesBank,
   ...algebreBank,
   ...proportionnaliteBank,
-  ...longueurBank,
+  ...applyMathsKeyboardFree(longueurBank),
   ...masseBank,
   ...contenanceBank,
   ...dureesBank,
