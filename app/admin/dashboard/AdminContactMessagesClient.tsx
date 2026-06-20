@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { prenomCourt } from "@/lib/prenom";
 
 type ContactMessage = {
   id: number;
@@ -241,9 +242,11 @@ export default function AdminContactMessagesClient() {
           >
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex flex-wrap items-center gap-2">
+                {/* Prénom seul, jamais le nom de famille (prenomCourt : « NOM Prénom »
+                    → « Prénom »). Règle RGPD du site. */}
                 <span className="text-sm font-semibold text-emerald-300">
                   {m.role}
-                  {m.name && ` — ${m.name}`}
+                  {m.name ? ` — ${prenomCourt(m.name)}` : ""}
                 </span>
                 {m.source === "eleve-message" ? (
                   <span className="rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-bold text-amber-300">

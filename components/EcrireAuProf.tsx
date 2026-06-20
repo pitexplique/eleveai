@@ -3,6 +3,10 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
 
+// Aligné sur la limite serveur (app/api/contact/route.ts, source=eleve-message) :
+// 200 mots suffisent pour un message honnête, au-delà c'est un copier-collé d'IA.
+const MAX_MOTS = 200;
+
 /**
  * Bouton flottant « Écris à ton prof », réservé aux ÉLÈVES CONNECTÉS.
  * Demande des élèves (2026-06-18) : pouvoir écrire au professeur même pendant
@@ -36,12 +40,20 @@ export default function EcrireAuProf() {
   if (!connecte) return null;
 
   const prenomOuCode = eleve?.nom?.trim() || `Élève ${eleve?.code_eleve}`;
+  const nbMots = message.trim() ? message.trim().split(/\s+/).length : 0;
+  const tropLong = nbMots > MAX_MOTS;
 
   async function onSend(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const texte = message.trim();
     if (texte.length < 10) {
       setErreur("Écris un message d'au moins 10 caractères.");
+      return;
+    }
+    if (tropLong) {
+      setErreur(
+        `Ton message fait ${nbMots} mots (max ${MAX_MOTS}). Va à l'essentiel, avec tes propres mots.`
+      );
       return;
     }
     if (envoi) return;
@@ -160,12 +172,24 @@ export default function EcrireAuProf() {
             disabled={envoi}
             className="w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-800 placeholder-slate-400 outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 disabled:opacity-50"
           />
-          {erreur ? (
-            <p className="text-xs font-bold text-pink-600">{erreur}</p>
-          ) : null}
+          <div className="flex items-center justify-between">
+            {erreur ? (
+              <p className="text-xs font-bold text-pink-600">{erreur}</p>
+            ) : (
+              <span />
+            )}
+            <span
+              className={[
+                "shrink-0 rounded-full px-2 py-0.5 text-[11px] font-bold tabular-nums",
+                tropLong ? "bg-pink-100 text-pink-700" : "bg-slate-100 text-slate-500",
+              ].join(" ")}
+            >
+              {nbMots} / {MAX_MOTS} mots
+            </span>
+          </div>
           <button
             type="submit"
-            disabled={message.trim().length < 10 || envoi}
+            disabled={message.trim().length < 10 || tropLong || envoi}
             className="w-full rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 py-2.5 text-sm font-black text-white transition hover:from-amber-400 hover:to-orange-400 disabled:cursor-not-allowed disabled:opacity-40"
           >
             {envoi ? "Envoi…" : "Envoyer à mon prof"}

@@ -2,6 +2,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { prenomCourt } from "@/lib/prenom";
 
 type EtabItem = { code: string; eleves: number; profs: number };
 
@@ -310,9 +311,11 @@ export default function AdminStatsClient() {
                         onClick={() => toggleAvis(a.id)}
                         className="flex w-full flex-wrap items-center justify-between gap-2 p-3 text-left text-xs"
                       >
+                        {/* Prénom seul (jamais le nom de famille) via prenomCourt :
+                            « NOM Prénom » → « Prénom ». Règle RGPD du site. */}
                         <span className="flex items-center gap-1.5 font-bold text-emerald-300">
                           <span className="text-slate-500">{ouvert ? "▾" : "▸"}</span>
-                          {a.prenom || "Élève"}
+                          {prenomCourt(a.prenom)}
                           {a.classe ? ` · ${a.classe}` : ""}
                           {a.code_etablissement ? ` · ${a.code_etablissement}` : ""}
                         </span>

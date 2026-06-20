@@ -26,6 +26,17 @@ function asString(v: any) {
   return String(v ?? "").trim();
 }
 
+// Anti-spam IA ciblé sur les messages d'élèves (« Écris à ton prof »,
+// source=eleve-message) : un message honnête tient en 200 mots, au-delà c'est un
+// pavé copié-collé d'une IA. Le contact adulte (contact, avis-tarifs…) n'est pas
+// limité — un vrai message peut être long. Cf. app/api/retours/route.ts.
+const MAX_MOTS_ELEVE = 200;
+
+function compterMots(s: string) {
+  const t = s.trim();
+  return t ? t.split(/\s+/).length : 0;
+}
+
 function validateEmailLoose(v: string) {
   if (!v) return true;
   if (v.length > 200) return false;
@@ -72,6 +83,16 @@ export async function POST(req: Request) {
     if (message.length > 8000) {
       return NextResponse.json(
         { ok: false, error: "Message trop long" },
+        { status: 400 }
+      );
+    }
+    // Limite ciblée : messages d'élèves uniquement (anti-copier-coller d'IA).
+    if (source === "eleve-message" && compterMots(message) > MAX_MOTS_ELEVE) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: `Ton message fait plus de ${MAX_MOTS_ELEVE} mots. Écris à ton prof avec tes propres mots, va à l'essentiel (les pavés copiés-collés d'une IA ne sont pas acceptés).`,
+        },
         { status: 400 }
       );
     }
