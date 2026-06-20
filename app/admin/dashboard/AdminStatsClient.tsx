@@ -22,6 +22,7 @@ type Stats = {
     connectes30j: number;
   };
   parModule: Record<string, number>;
+  moyenneParModule: Record<string, number | null>;
   engagement: { date: string; count: number }[];
   avis: {
     total: number;
@@ -47,11 +48,6 @@ const MODULES: { key: string; label: string; color: string }[] = [
   { key: "coach", label: "🧠 Coach IA", color: "bg-indigo-500" },
   { key: "english", label: "🇬🇧 English-Maths", color: "bg-sky-500" },
 ];
-
-function jourCourt(iso: string) {
-  const d = new Date(iso + "T00:00:00");
-  return new Intl.DateTimeFormat("fr-FR", { weekday: "short" }).format(d);
-}
 
 function dateAvis(iso: string) {
   return new Intl.DateTimeFormat("fr-FR", {
@@ -86,10 +82,18 @@ function Kpi({
 
 export default function AdminStatsClient() {
   const [scope, setScope] = useState("all");
-  const [engRange, setEngRange] = useState<7 | 30>(7);
+  const [openAvis, setOpenAvis] = useState<Set<string | number>>(new Set());
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Avis repliés par défaut : on n'affiche que le titre, le texte se déplie au clic.
+  const toggleAvis = (id: string | number) =>
+    setOpenAvis((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
 
   const load = useCallback(async (s: string) => {
     try {
@@ -115,24 +119,6 @@ export default function AdminStatsClient() {
     if (scope === "INDEPENDANT") return "Comptes sans collège";
     return `Collège ${scope}`;
   }, [scope]);
-
-  // Le graphe couvre 30 j ; on affiche les 7 ou 30 derniers selon le toggle.
-  const shownEngagement = useMemo(() => {
-    const all = stats?.engagement ?? [];
-    return engRange === 7 ? all.slice(-7) : all;
-  }, [stats, engRange]);
-  const maxEngagement = useMemo(
-    () => Math.max(1, ...shownEngagement.map((e) => e.count)),
-    [shownEngagement]
-  );
-  const totalModules = useMemo(
-    () =>
-      Math.max(
-        1,
-        Object.values(stats?.parModule ?? {}).reduce((s, n) => s + n, 0)
-      ),
-    [stats]
-  );
 
   return (
     <section className="space-y-5">
@@ -220,21 +206,21 @@ export default function AdminStatsClient() {
               </div>
             </div>
             <Kpi
-              label="Activités totales"
-              value={stats.kpis.activitesTotal}
-              sub="tous modules"
-              color="text-white"
+              label="Avis"
+              value={stats.avis.total}
+              sub={`note moy. ${stats.avis.noteMoyenne ?? "—"}`}
+              color="text-amber-400"
             />
             <Kpi
-              label="Aujourd'hui"
+              label="Évaluations aujourd'hui"
               value={stats.kpis.activitesAujourdhui}
-              sub="activités"
+              sub="résultats enregistrés"
               color="text-white"
             />
             <Kpi
-              label="7 derniers jours"
+              label="Évaluations 7 jours"
               value={stats.kpis.activites7j}
-              sub="activités"
+              sub="résultats enregistrés"
               color="text-white"
             />
             <Kpi
@@ -249,79 +235,19 @@ export default function AdminStatsClient() {
             />
           </div>
 
-          <div className="grid gap-4 lg:grid-cols-2">
-            {/* Engagement élèves connectés */}
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-5">
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <h3 className="text-sm font-bold text-slate-200">
-                    📈 Connexions — élèves / jour
-                  </h3>
-                  <p className="mt-0.5 text-[11px] font-semibold text-slate-500">
-                    Élèves distincts connectés par jour
-                  </p>
-                </div>
-                <div className="flex rounded-lg border border-slate-700 bg-slate-950/60 p-0.5 text-xs font-bold">
-                  {([7, 30] as const).map((r) => (
-                    <button
-                      key={r}
-                      type="button"
-                      onClick={() => setEngRange(r)}
-                      className={[
-                        "rounded-md px-2.5 py-1 transition",
-                        engRange === r
-                          ? "bg-emerald-600 text-white"
-                          : "text-slate-400 hover:text-slate-200",
-                      ].join(" ")}
-                    >
-                      {r}j
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className="mt-4 flex h-32 items-end justify-between gap-px sm:gap-1">
-                {shownEngagement.map((e, i) => {
-                  const showLabel =
-                    engRange === 7 || i % 5 === 0 || i === shownEngagement.length - 1;
-                  return (
-                    <div
-                      key={e.date}
-                      title={`${e.date} : ${e.count} élève(s)`}
-                      className="flex flex-1 flex-col items-center gap-1"
-                    >
-                      {engRange === 7 && (
-                        <span className="text-[10px] font-bold text-slate-400">
-                          {e.count}
-                        </span>
-                      )}
-                      <div
-                        className="w-full rounded-t bg-gradient-to-t from-emerald-600 to-emerald-400"
-                        style={{
-                          height: `${Math.max(3, (e.count / maxEngagement) * 100)}px`,
-                        }}
-                      />
-                      <span className="h-3 text-[9px] font-semibold capitalize text-slate-500">
-                        {showLabel
-                          ? engRange === 7
-                            ? jourCourt(e.date)
-                            : e.date.slice(8)
-                          : ""}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Répartition par module */}
+          <div className="grid gap-4">
+            {/* Évaluation par module */}
             <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-5">
               <h3 className="text-sm font-bold text-slate-200">
-                🧩 Répartition par module
+                🎯 Évaluation par module
               </h3>
+              <p className="mt-0.5 text-[11px] font-semibold text-slate-500">
+                Moyenne des élèves par module
+              </p>
               <div className="mt-4 space-y-2.5">
                 {MODULES.map((m) => {
+                  const moy = stats.moyenneParModule[m.key];
                   const n = stats.parModule[m.key] ?? 0;
-                  const pct = Math.round((n / totalModules) * 100);
                   return (
                     <div key={m.key}>
                       <div className="flex items-center justify-between text-xs">
@@ -329,13 +255,16 @@ export default function AdminStatsClient() {
                           {m.label}
                         </span>
                         <span className="font-bold text-slate-400">
-                          {n} · {pct}%
+                          {moy !== null ? `${moy}%` : "—"}
+                          <span className="ml-1 font-medium text-slate-600">
+                            ({n})
+                          </span>
                         </span>
                       </div>
                       <div className="mt-1 h-2 overflow-hidden rounded-full bg-slate-800">
                         <div
                           className={`h-full rounded-full ${m.color}`}
-                          style={{ width: `${pct}%` }}
+                          style={{ width: `${moy ?? 0}%` }}
                         />
                       </div>
                     </div>
@@ -368,34 +297,44 @@ export default function AdminStatsClient() {
               <p className="mt-4 text-sm text-slate-400">Aucun avis sur ce périmètre.</p>
             ) : (
               <div className="mt-4 space-y-2">
-                {stats.avis.derniers.map((a) => (
-                  <div
-                    key={a.id}
-                    className="rounded-xl border border-slate-800 bg-slate-950/50 p-3"
-                  >
-                    <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-                      <span className="font-bold text-emerald-300">
-                        {a.prenom || "Élève"}
-                        {a.classe ? ` · ${a.classe}` : ""}
-                        {a.code_etablissement ? ` · ${a.code_etablissement}` : ""}
-                      </span>
-                      <span className="flex items-center gap-2 text-slate-400">
-                        {a.note ? (
-                          <span className="text-amber-300">
-                            {"★".repeat(Math.round(a.note))}
-                          </span>
-                        ) : null}
-                        {a.type ? <span>{a.type}</span> : null}
-                        <span>{dateAvis(a.created_at)}</span>
-                      </span>
+                {stats.avis.derniers.map((a) => {
+                  const ouvert = openAvis.has(a.id);
+                  return (
+                    <div
+                      key={a.id}
+                      className="rounded-xl border border-slate-800 bg-slate-950/50"
+                    >
+                      {/* En-tête cliquable : seul le titre est visible par défaut */}
+                      <button
+                        type="button"
+                        onClick={() => toggleAvis(a.id)}
+                        className="flex w-full flex-wrap items-center justify-between gap-2 p-3 text-left text-xs"
+                      >
+                        <span className="flex items-center gap-1.5 font-bold text-emerald-300">
+                          <span className="text-slate-500">{ouvert ? "▾" : "▸"}</span>
+                          {a.prenom || "Élève"}
+                          {a.classe ? ` · ${a.classe}` : ""}
+                          {a.code_etablissement ? ` · ${a.code_etablissement}` : ""}
+                        </span>
+                        <span className="flex items-center gap-2 text-slate-400">
+                          {a.note ? (
+                            <span className="text-amber-300">
+                              {"★".repeat(Math.round(a.note))}
+                            </span>
+                          ) : null}
+                          {a.type ? <span>{a.type}</span> : null}
+                          <span>{dateAvis(a.created_at)}</span>
+                        </span>
+                      </button>
+                      {/* Texte déplié au clic */}
+                      {ouvert && a.message && (
+                        <p className="whitespace-pre-wrap px-3 pb-3 text-sm text-slate-200">
+                          {a.message}
+                        </p>
+                      )}
                     </div>
-                    {a.message && (
-                      <p className="mt-1.5 whitespace-pre-wrap text-sm text-slate-200">
-                        {a.message}
-                      </p>
-                    )}
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>

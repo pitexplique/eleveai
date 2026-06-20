@@ -223,20 +223,28 @@ export async function GET(req: Request) {
   let activitesTotal = 0;
   let activitesAujourdhui = 0;
   let activites7j = 0;
-  const parModule: Record<string, number> = {
-    parcours: 0,
-    calcul: 0,
-    defis: 0,
-    english: 0,
-    coach: 0,
-  };
+  const MODULE_KEYS = ["parcours", "calcul", "defis", "english", "coach"];
+  const parModule: Record<string, number> = Object.fromEntries(
+    MODULE_KEYS.map((k) => [k, 0])
+  );
+  // Somme et nombre des % par module, pour la moyenne (évaluation par module).
+  const moduleScoreSum: Record<string, number> = Object.fromEntries(
+    MODULE_KEYS.map((k) => [k, 0])
+  );
+  const moduleScoreN: Record<string, number> = Object.fromEntries(
+    MODULE_KEYS.map((k) => [k, 0])
+  );
   const pctList: number[] = [];
 
   // --- Activités (depuis les résultats) : volume, modules, moyenne ---
   for (const r of rows) {
     activitesTotal += 1;
     parModule[r.module] = (parModule[r.module] ?? 0) + 1;
-    if (r.pct !== null) pctList.push(r.pct);
+    if (r.pct !== null) {
+      pctList.push(r.pct);
+      moduleScoreSum[r.module] = (moduleScoreSum[r.module] ?? 0) + r.pct;
+      moduleScoreN[r.module] = (moduleScoreN[r.module] ?? 0) + 1;
+    }
 
     const t = new Date(r.created_at).getTime();
     if (Number.isFinite(t)) {
@@ -244,6 +252,14 @@ export async function GET(req: Request) {
       if (t >= since7) activites7j += 1;
     }
   }
+
+  // Moyenne (%) par module : null si aucune activité notée.
+  const moyenneParModule: Record<string, number | null> = Object.fromEntries(
+    MODULE_KEYS.map((k) => [
+      k,
+      moduleScoreN[k] > 0 ? Math.round(moduleScoreSum[k] / moduleScoreN[k]) : null,
+    ])
+  );
 
   // --- Connexions (depuis le journal de login) : élèves connectés ---
   // Engagement = nb d'élèves DISTINCTS connectés par jour (30 j, le client
@@ -319,6 +335,7 @@ export async function GET(req: Request) {
       connectes30j: connectes30.size,
     },
     parModule,
+    moyenneParModule,
     engagement,
     avis,
   });
