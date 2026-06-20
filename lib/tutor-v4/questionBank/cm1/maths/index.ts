@@ -32,36 +32,37 @@ import { figuresPlanesBank } from "./figures-planes.bank";
 import { solidesBank } from "./solides.bank";
 import { algorithmiqueBank } from "./algorithmique.bank";
 
+// Zéro clavier en CM1 : short numériques -> QCM, et open « Explique… » retirées
+// (cf. applyMathsKeyboardFree). Appliqué à TOUTES les banques maths CM1.
 export const mathsCm1QuestionBank: TutorBankItemV4[] = [
-  ...nombresEntiersBank,
-  ...suitesBank,
-  // --- TEST conversion short -> QCM (zéro clavier) sur quelques banques CM1 ---
+  ...applyMathsKeyboardFree(nombresEntiersBank),
+  ...applyMathsKeyboardFree(suitesBank),
   ...applyMathsKeyboardFree(MultiplicationTablesBank),
-  ...multiplicationBank,
+  ...applyMathsKeyboardFree(multiplicationBank),
   ...applyMathsKeyboardFree(divisionBank),
   ...applyMathsKeyboardFree(fractionsBank),
-  ...decimauxBank,
-  ...calculBank,
-  ...problemesBank,
-  ...algebreBank,
-  ...proportionnaliteBank,
+  ...applyMathsKeyboardFree(decimauxBank),
+  ...applyMathsKeyboardFree(calculBank),
+  ...applyMathsKeyboardFree(problemesBank),
+  ...applyMathsKeyboardFree(algebreBank),
+  ...applyMathsKeyboardFree(proportionnaliteBank),
   ...applyMathsKeyboardFree(longueurBank),
-  ...masseBank,
-  ...contenanceBank,
-  ...dureesBank,
-  ...perimetresBank,
-  ...airesBank,
-  ...anglesBank,
-  ...reperageBank,
-  ...droitesBank,
+  ...applyMathsKeyboardFree(masseBank),
+  ...applyMathsKeyboardFree(contenanceBank),
+  ...applyMathsKeyboardFree(dureesBank),
+  ...applyMathsKeyboardFree(perimetresBank),
+  ...applyMathsKeyboardFree(airesBank),
+  ...applyMathsKeyboardFree(anglesBank),
+  ...applyMathsKeyboardFree(reperageBank),
+  ...applyMathsKeyboardFree(droitesBank),
 
-  ...tableauxBank,
-  ...graphiquesBank,
-  ...probabilitesBank,
-  ...symetrieBank,
-  ...figuresPlanesBank,
-  ...solidesBank,
-  ...algorithmiqueBank,
+  ...applyMathsKeyboardFree(tableauxBank),
+  ...applyMathsKeyboardFree(graphiquesBank),
+  ...applyMathsKeyboardFree(probabilitesBank),
+  ...applyMathsKeyboardFree(symetrieBank),
+  ...applyMathsKeyboardFree(figuresPlanesBank),
+  ...applyMathsKeyboardFree(solidesBank),
+  ...applyMathsKeyboardFree(algorithmiqueBank),
 ];
 
 export function getMathCm1QuestionBank(args?: {
