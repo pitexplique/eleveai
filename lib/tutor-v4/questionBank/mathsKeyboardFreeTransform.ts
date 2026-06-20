@@ -87,7 +87,7 @@ function pickDistractorValues(parsed: Parsed): number[] {
   const out: number[] = [];
   const isValid = (c: number) =>
     c !== v &&
-    c >= 0 && // pas de nombre négatif au primaire
+    (c >= 0 || v < 0) && // pas de négatif, sauf si la réponse est négative
     (parsed.decimals > 0 || Number.isInteger(c)) &&
     !out.includes(c);
 
