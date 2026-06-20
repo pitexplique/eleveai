@@ -1,4 +1,5 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { applyMathsKeyboardFree } from "../../mathsKeyboardFreeTransform";
 
 import { proportionnaliteBank } from "./proportionnalite.bank";
 import { algebreBank } from "./algebre.bank";
@@ -29,36 +30,38 @@ import { massesBank} from "./masses.bank"
 
 import { contenancesBank} from "./contenance.bank"
 
+// Zéro clavier en CM2 : short numériques -> QCM, et open « Explique… » retirées
+// (cf. applyMathsKeyboardFree). Appliqué à TOUTES les banques maths CM2.
 export const mathsCm2QuestionBank: TutorBankItemV4[] = [
-  ...proportionnaliteBank,
-  ...algebreBank,
-  ...nombresDecimauxBank,
-  ...suitesBank,
-  ...multiplicationBank,
-  ...divisionBank,
-  ...nombresEntiersBank,
-  ...fractionsBank,
-  ...algorithmiqueBank,
-  ...calculBank,
-  ...problemeBank,
-  ...pourcentagesBank,
-  ...longueursBank,
-  ...perimetresBank,
-  ...airesBank,
-  ...dureesBank,
-  ...anglesBank,
-  ...reperageBank,
-  ...droitesBank,
-  ...tableauxBank,
-  ...graphiquesBank,
-  ...probabilitesBank,
+  ...applyMathsKeyboardFree(proportionnaliteBank),
+  ...applyMathsKeyboardFree(algebreBank),
+  ...applyMathsKeyboardFree(nombresDecimauxBank),
+  ...applyMathsKeyboardFree(suitesBank),
+  ...applyMathsKeyboardFree(multiplicationBank),
+  ...applyMathsKeyboardFree(divisionBank),
+  ...applyMathsKeyboardFree(nombresEntiersBank),
+  ...applyMathsKeyboardFree(fractionsBank),
+  ...applyMathsKeyboardFree(algorithmiqueBank),
+  ...applyMathsKeyboardFree(calculBank),
+  ...applyMathsKeyboardFree(problemeBank),
+  ...applyMathsKeyboardFree(pourcentagesBank),
+  ...applyMathsKeyboardFree(longueursBank),
+  ...applyMathsKeyboardFree(perimetresBank),
+  ...applyMathsKeyboardFree(airesBank),
+  ...applyMathsKeyboardFree(dureesBank),
+  ...applyMathsKeyboardFree(anglesBank),
+  ...applyMathsKeyboardFree(reperageBank),
+  ...applyMathsKeyboardFree(droitesBank),
+  ...applyMathsKeyboardFree(tableauxBank),
+  ...applyMathsKeyboardFree(graphiquesBank),
+  ...applyMathsKeyboardFree(probabilitesBank),
 
-  ...figuresPlanesBank,
-  ...symetrieBank,
-  ...solidesBank,
+  ...applyMathsKeyboardFree(figuresPlanesBank),
+  ...applyMathsKeyboardFree(symetrieBank),
+  ...applyMathsKeyboardFree(solidesBank),
 
-  ...massesBank,
-  ...contenancesBank
+  ...applyMathsKeyboardFree(massesBank),
+  ...applyMathsKeyboardFree(contenancesBank),
 ];
 
 export function getMathCm2QuestionBank(args?: {

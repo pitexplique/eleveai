@@ -168,6 +168,133 @@ export const perimetresBank: TutorBankItemV4[] = [
     tags: ["cm2", "perimetre", "comprendre", "erreur", "aire", "qcm"],
   },
 
+  {
+    kind: "fixed",
+    id: "cm2_perimetre_comprendre_fixed_6_tour",
+    niveau: "cm2",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "perimetre_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Faire le tour complet d’une figure permet de trouver son...",
+    format: "qcm",
+    choices: ["périmètre", "aire", "volume", "poids"],
+    expected: ["périmètre"],
+    comparator: "mcq_exact",
+    hint: "Le tour d’une figure, c’est son périmètre.",
+    explanation: exp(
+      "Le périmètre est la longueur du contour d’une figure.",
+      "On suit le bord de la figure en faisant tout le tour.",
+      "Faire le tour de la figure revient à mesurer son périmètre.",
+      "On trouve donc son périmètre."
+    ),
+    tags: ["cm2", "perimetre", "comprendre", "tour", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm2_perimetre_comprendre_fixed_7_grillage",
+    niveau: "cm2",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "perimetre_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Pour savoir quelle longueur de grillage il faut pour entourer un champ, on calcule son...",
+    format: "qcm",
+    choices: ["périmètre", "aire", "volume", "contenance"],
+    expected: ["périmètre"],
+    comparator: "mcq_exact",
+    hint: "Le grillage suit le bord du champ.",
+    explanation: exp(
+      "Le périmètre mesure la longueur du contour.",
+      "Le grillage est posé tout autour du champ, le long de son bord.",
+      "La longueur de grillage nécessaire correspond au périmètre du champ.",
+      "On calcule donc son périmètre."
+    ),
+    tags: ["cm2", "perimetre", "comprendre", "grillage", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm2_perimetre_comprendre_fixed_8_reunion_bordure",
+    niveau: "cm2",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "perimetre_comprendre",
+    difficulty: 2,
+    theme: "reunion",
+    text: "On veut poser une bordure tout autour d’un terrain de pétanque à Saint-Denis. On a besoin de connaître son...",
+    format: "qcm",
+    choices: ["périmètre", "aire", "masse", "volume"],
+    expected: ["périmètre"],
+    comparator: "mcq_exact",
+    hint: "La bordure fait le tour du terrain.",
+    explanation: exp(
+      "Le périmètre mesure le contour d’un terrain.",
+      "La bordure est posée tout le long du bord du terrain.",
+      "La longueur de bordure correspond au périmètre du terrain.",
+      "On calcule donc son périmètre."
+    ),
+    tags: ["cm2", "perimetre", "comprendre", "reunion", "bordure", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm2_perimetre_comprendre_fixed_9_unite_metre",
+    niveau: "cm2",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "perimetre_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Parmi ces unités, laquelle peut exprimer un périmètre ?",
+    format: "qcm",
+    choices: ["m", "m²", "L", "kg"],
+    expected: ["m"],
+    comparator: "mcq_exact",
+    hint: "Un périmètre est une longueur.",
+    explanation: exp(
+      "Un périmètre est une longueur.",
+      "On l’exprime donc avec une unité de longueur.",
+      "Le mètre (m) est une unité de longueur ; le m² mesure une aire.",
+      "Une unité possible pour un périmètre est le m."
+    ),
+    tags: ["cm2", "perimetre", "comprendre", "unite", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "cm2_perimetre_comprendre_fixed_10_addition_cotes",
+    niveau: "cm2",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "perimetre_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelle phrase est correcte ?",
+    format: "qcm",
+    choices: [
+      "Pour trouver le périmètre, on additionne les longueurs de tous les côtés.",
+      "Pour trouver le périmètre, on multiplie deux côtés.",
+      "Pour trouver le périmètre, on compte les carreaux à l’intérieur.",
+      "Pour trouver le périmètre, on mesure un seul côté.",
+    ],
+    expected: [
+      "Pour trouver le périmètre, on additionne les longueurs de tous les côtés.",
+    ],
+    comparator: "mcq_exact",
+    hint: "Le périmètre, c’est tout le contour, donc tous les côtés.",
+    explanation: exp(
+      "Le périmètre est la longueur du contour d’une figure.",
+      "On parcourt tout le bord, donc on prend en compte chaque côté.",
+      "On additionne les longueurs de tous les côtés de la figure.",
+      "La phrase correcte est : on additionne les longueurs de tous les côtés."
+    ),
+    tags: ["cm2", "perimetre", "comprendre", "methode", "qcm"],
+  },
+
   /* ============================================================
      PERIMETRE_TRIANGLE
   ============================================================ */
