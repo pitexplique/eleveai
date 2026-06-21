@@ -3,7 +3,11 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 // --- Banques par notion (standard terminale, ~10 items/micro) ---
 import { reelsIntervallesBank } from "./reels-intervalles.bank";
 import { arithmetiqueEntiersBank } from "./arithmetique-entiers.bank";
-import { calculLitteralPuissancesRacinesBank } from "./calcul-litteral-puissances-racines.bank";
+import { puissancesBank } from "./puissances.bank";
+import { racineCarreeBank } from "./racine-carree.bank";
+import { developpementFactorisationBank } from "./developpement-factorisation.bank";
+import { identitesRemarquablesBank } from "./identites-remarquables.bank";
+import { expressionsLitteralesBank } from "./expressions-litterales.bank";
 
 // --- Anciennes banques groupées (provisoires, en cours de remplacement) ---
 import { algorithmiqueSecondeBank } from "./algorithmique.bank";
@@ -16,7 +20,11 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   // Notions refaites au standard terminale
   ...reelsIntervallesBank,
   ...arithmetiqueEntiersBank,
-  ...calculLitteralPuissancesRacinesBank,
+  ...puissancesBank,
+  ...racineCarreeBank,
+  ...developpementFactorisationBank,
+  ...identitesRemarquablesBank,
+  ...expressionsLitteralesBank,
   // Notions encore servies par les anciennes banques groupées
   ...nombresCalculsSecondeBank,
   ...geometrieSecondeBank,

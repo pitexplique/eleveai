@@ -6,9 +6,6 @@ export const nombresCalculsSecondeBank: TutorBankItemV4[] = [
   // sont servis par leurs banques dédiées.
   // Couverture provisoire des chapitres calcul littéral pas encore refaits :
   ...buildMicroSkillCheckBank("nombres_calculs", [
-    "developpement_factorisation_2de",
-    "identites_remarquables_2de",
-    "expressions_litterales_2de",
     "equations_inequations_1er_degre",
   ]),
   {
