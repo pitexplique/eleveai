@@ -12,11 +12,11 @@ import { equationsInequationsBank } from "./equations-inequations.bank";
 import { repereCoordonneesBank } from "./repere-coordonnees.bank";
 import { droitesPlanBank } from "./droites-plan.bank";
 import { vecteursPlanBank } from "./vecteurs-plan.bank";
+import { geometrieProblemesPlanBank } from "./geometrie-problemes-plan.bank";
 
 // --- Anciennes banques groupées (provisoires, en cours de remplacement) ---
 import { algorithmiqueSecondeBank } from "./algorithmique.bank";
 import { fonctionsSecondeBank } from "./fonctions.bank";
-import { geometrieSecondeBank } from "./geometrie.bank";
 import { statistiquesProbabilitesSecondeBank } from "./statistiques-probabilites.bank";
 
 export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
@@ -33,8 +33,8 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...repereCoordonneesBank,
   ...droitesPlanBank,
   ...vecteursPlanBank,
+  ...geometrieProblemesPlanBank,
   // === Domaines encore servis par les anciennes banques groupées (provisoires) ===
-  ...geometrieSecondeBank,
   ...fonctionsSecondeBank,
   ...statistiquesProbabilitesSecondeBank,
   ...algorithmiqueSecondeBank,

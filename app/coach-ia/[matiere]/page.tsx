@@ -218,7 +218,8 @@ export default function CoachIA() {
               type="button"
               onClick={() => setClasse(item)}
               className={[
-                "flex items-center justify-center border text-center font-bold transition",`r`n                getClasseButtonSize(item),
+                "flex items-center justify-center border text-center font-bold transition",
+                getClasseButtonSize(item),
                 getClasseBadgeColor(item, classe === item),
               ].join(" ")}
             >
