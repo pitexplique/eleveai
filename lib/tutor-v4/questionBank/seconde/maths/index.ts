@@ -22,9 +22,7 @@ import { statistiquesDescriptivesBank } from "./statistiques-descriptives.bank";
 import { probabilitesBank } from "./probabilites.bank";
 import { echantillonnageBank } from "./echantillonnage.bank";
 import { algorithmiquePythonBank } from "./algorithmique-python.bank";
-
-// --- Anciennes banques groupées (provisoires, en cours de remplacement) ---
-import { algorithmiqueSecondeBank } from "./algorithmique.bank";
+import { logiqueEnsemblesBank } from "./logique-ensembles.bank";
 
 export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   // === Domaine NOMBRES ET CALCULS — entièrement refait (1 banque par notion) ===
@@ -53,8 +51,8 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...echantillonnageBank,
   // === Domaine ALGORITHMIQUE — refait (1 banque par notion) ===
   ...algorithmiquePythonBank,
-  // === Logique : encore servie par l'ancienne banque groupée (provisoire) ===
-  ...algorithmiqueSecondeBank,
+  // === Domaine VOCABULAIRE ENSEMBLISTE ET LOGIQUE ===
+  ...logiqueEnsemblesBank,
 ];
 
 export function getMathsSecondeQuestionBank(args?: {
