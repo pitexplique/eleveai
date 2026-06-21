@@ -3,6 +3,7 @@ import { buildMicroSkillCheckBank } from "./core";
 
 export const statistiquesProbabilitesSecondeBank: TutorBankItemV4[] = [
   ...buildMicroSkillCheckBank("stats_probas", [
+    "information_chiffree_evolutions",
     "statistiques_descriptives",
     "probabilites_ensemble_fini",
     "echantillonnage_simulation",

@@ -3,6 +3,8 @@ import { buildMicroSkillCheckBank } from "./core";
 
 export const algorithmiqueSecondeBank: TutorBankItemV4[] = [
   ...buildMicroSkillCheckBank("algorithmique", ["algorithmique_python_2de"]),
+  // Couverture provisoire de la notion transversale logique (banque dediee a venir)
+  ...buildMicroSkillCheckBank("logique", ["logique_ensembles"]),
   {
     kind: "fixed",
     id: "seconde_python_condition_fixed_1",

@@ -1,6 +1,8 @@
 import type { NotionSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
+// Notions de seconde alignées sur le programme officiel (BO 2019).
 export const notions: NotionSource[] = [
+  /* ===================== NOMBRES ET CALCULS (BO2N1) ===================== */
   {
     id: "reels_intervalles",
     label: "Nombres reels et intervalles",
@@ -16,19 +18,49 @@ export const notions: NotionSource[] = [
     levels: [1, 2],
   },
   {
-    id: "calcul_litteral_2de",
-    label: "Calcul litteral",
+    id: "puissances_2de",
+    label: "Puissances",
     boId: "BO2N1",
     prerequis: ["reels_intervalles"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "racine_carree_2de",
+    label: "Racine carree",
+    boId: "BO2N1",
+    prerequis: ["reels_intervalles"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "developpement_factorisation_2de",
+    label: "Developpement et factorisation",
+    boId: "BO2N1",
+    prerequis: ["reels_intervalles"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "identites_remarquables_2de",
+    label: "Identites remarquables",
+    boId: "BO2N1",
+    prerequis: ["developpement_factorisation_2de"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "expressions_litterales_2de",
+    label: "Expressions litterales",
+    boId: "BO2N1",
+    prerequis: ["developpement_factorisation_2de"],
     levels: [1, 2, 3],
   },
   {
     id: "equations_inequations_1er_degre",
     label: "Equations et inequations du premier degre",
     boId: "BO2N1",
-    prerequis: ["calcul_litteral_2de", "reels_intervalles"],
+    prerequis: ["developpement_factorisation_2de", "reels_intervalles"],
     levels: [1, 2, 3],
   },
+
+  /* ===================== GEOMETRIE (BO2G1) ===================== */
   {
     id: "vecteurs_plan",
     label: "Vecteurs du plan",
@@ -47,16 +79,18 @@ export const notions: NotionSource[] = [
     id: "droites_plan",
     label: "Droites du plan",
     boId: "BO2G1",
-    prerequis: ["repere_coordonnees", "equations_inequations_1er_degre"],
+    prerequis: ["repere_coordonnees", "equations_inequations_1er_degre", "vecteurs_plan"],
     levels: [1, 2, 3],
   },
   {
-    id: "geometrie_espace_2de",
-    label: "Geometrie dans l'espace",
+    id: "geometrie_problemes_plan",
+    label: "Problemes de geometrie plane",
     boId: "BO2G1",
-    prerequis: ["repere_coordonnees"],
-    levels: [1, 2],
+    prerequis: [],
+    levels: [1, 2, 3],
   },
+
+  /* ===================== FONCTIONS (BO2F1) ===================== */
   {
     id: "fonction_vocabulaire_2de",
     label: "Fonctions : vocabulaire et representations",
@@ -82,7 +116,16 @@ export const notions: NotionSource[] = [
     id: "fonctions_reference_2de",
     label: "Fonctions de reference",
     boId: "BO2F1",
-    prerequis: ["fonction_variations_extremums", "calcul_litteral_2de"],
+    prerequis: ["fonction_variations_extremums", "developpement_factorisation_2de"],
+    levels: [1, 2, 3],
+  },
+
+  /* ===================== STATISTIQUES ET PROBABILITES (BO2D1) ===================== */
+  {
+    id: "information_chiffree_evolutions",
+    label: "Information chiffree : proportions, pourcentages et evolutions",
+    boId: "BO2D1",
+    prerequis: [],
     levels: [1, 2, 3],
   },
   {
@@ -106,11 +149,22 @@ export const notions: NotionSource[] = [
     prerequis: ["probabilites_ensemble_fini", "statistiques_descriptives"],
     levels: [2, 3],
   },
+
+  /* ===================== ALGORITHMIQUE (BO2I1) ===================== */
   {
     id: "algorithmique_python_2de",
     label: "Algorithmique et Python",
     boId: "BO2I1",
-    prerequis: ["calcul_litteral_2de"],
+    prerequis: ["expressions_litterales_2de"],
+    levels: [1, 2, 3],
+  },
+
+  /* ===================== VOCABULAIRE ENSEMBLISTE ET LOGIQUE (BO2L1) ===================== */
+  {
+    id: "logique_ensembles",
+    label: "Vocabulaire ensembliste et logique",
+    boId: "BO2L1",
+    prerequis: [],
     levels: [1, 2, 3],
   },
 ];

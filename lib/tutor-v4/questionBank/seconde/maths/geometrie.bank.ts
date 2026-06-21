@@ -6,7 +6,7 @@ export const geometrieSecondeBank: TutorBankItemV4[] = [
     "vecteurs_plan",
     "repere_coordonnees",
     "droites_plan",
-    "geometrie_espace_2de",
+    "geometrie_problemes_plan",
   ]),
   {
     kind: "template",
