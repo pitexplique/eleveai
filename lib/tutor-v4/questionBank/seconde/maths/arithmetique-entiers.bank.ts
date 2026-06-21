@@ -1076,4 +1076,182 @@ export const arithmetiqueEntiersBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* =========================================================
+     QCM DE RAISONNEMENT (option D : "pourquoi", "a quoi sert")
+  ========================================================= */
+
+  {
+    kind: "fixed",
+    id: "seconde_arith_multdiv_raison_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "arithmetique_entiers",
+    microId: "arith_multiple_diviseur",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la différence entre « multiple » et « diviseur » ?",
+    format: "qcm",
+    choices: [
+      "$12$ est un multiple de $3$, et $3$ est un diviseur de $12$",
+      "Multiple et diviseur veulent dire la même chose",
+      "Un multiple est toujours plus petit",
+      "Un diviseur est toujours pair",
+    ],
+    expected: ["$12$ est un multiple de $3$, et $3$ est un diviseur de $12$"],
+    comparator: "mcq_exact",
+    hint: "$12 = 3 \\times 4$ : qui est multiple, qui est diviseur ?",
+    explanation: exp(
+      "Les deux notions sont liées mais décrivent des rôles inverses.",
+      "Dans $12 = 3 \\times 4$, $12$ est un multiple de $3$ et de $4$.",
+      "Et $3$ (comme $4$) est un diviseur de $12$.",
+      "$12$ est multiple de $3$, et $3$ est diviseur de $12$."
+    ),
+    tags: ["seconde", "maths", "arithmetique", "multiple_diviseur", "raisonnement", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_arith_multdiv_raison_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "arithmetique_entiers",
+    microId: "arith_multiple_diviseur",
+    difficulty: 2,
+    theme: "neutral",
+    text: "À quoi servent les critères de divisibilité (par $2$, $3$, $5$, $9$…) ?",
+    format: "qcm",
+    choices: [
+      "À savoir rapidement si une division tombe juste, sans la poser",
+      "À calculer une moyenne",
+      "À mesurer un angle",
+      "À arrondir un nombre",
+    ],
+    expected: ["À savoir rapidement si une division tombe juste, sans la poser"],
+    comparator: "mcq_exact",
+    hint: "Ils évitent d'effectuer la division.",
+    explanation: exp(
+      "Un critère de divisibilité teste la divisibilité sans poser l'opération.",
+      "Ex. somme des chiffres divisible par $3$ → le nombre l'est aussi.",
+      "C'est un gain de temps pour reconnaître multiples et diviseurs.",
+      "Ils servent à savoir vite si une division tombe juste."
+    ),
+    tags: ["seconde", "maths", "arithmetique", "multiple_diviseur", "raisonnement", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_arith_premier_raison_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "arithmetique_entiers",
+    microId: "arith_nombre_premier",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour tester si $n$ est premier, pourquoi suffit-il d'essayer les diviseurs jusqu'à $\\sqrt{n}$ ?",
+    format: "qcm",
+    choices: [
+      "Car au-delà de $\\sqrt{n}$, un diviseur aurait un « partenaire » déjà testé en dessous",
+      "Car $\\sqrt{n}$ est toujours entier",
+      "Car les nombres premiers sont petits",
+      "Car $n$ est toujours pair",
+    ],
+    expected: ["Car au-delà de $\\sqrt{n}$, un diviseur aurait un « partenaire » déjà testé en dessous"],
+    comparator: "mcq_exact",
+    hint: "Les diviseurs vont par paires $d \\times \\dfrac{n}{d}$.",
+    explanation: exp(
+      "Les diviseurs d'un nombre vont par paires dont le produit vaut $n$.",
+      "Si $d > \\sqrt{n}$, alors $\\dfrac{n}{d} < \\sqrt{n}$ a déjà été testé.",
+      "Inutile donc d'aller au-delà de $\\sqrt{n}$.",
+      "Car au-delà de $\\sqrt{n}$, le diviseur a un partenaire déjà testé en dessous."
+    ),
+    tags: ["seconde", "maths", "arithmetique", "premier", "raisonnement", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_arith_premier_raison_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "arithmetique_entiers",
+    microId: "arith_nombre_premier",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Pourquoi $1$ n'est-il pas considéré comme un nombre premier ?",
+    format: "qcm",
+    choices: [
+      "Parce qu'il n'a qu'un seul diviseur, alors qu'un premier en a exactement deux",
+      "Parce qu'il est trop petit",
+      "Parce qu'il est impair",
+      "Parce qu'il est positif",
+    ],
+    expected: ["Parce qu'il n'a qu'un seul diviseur, alors qu'un premier en a exactement deux"],
+    comparator: "mcq_exact",
+    hint: "Combien $1$ a-t-il de diviseurs ?",
+    explanation: exp(
+      "Un nombre premier a exactement deux diviseurs distincts.",
+      "Or $1$ n'a qu'un seul diviseur : lui-même.",
+      "Il ne remplit donc pas la définition.",
+      "Car $1$ n'a qu'un seul diviseur, pas deux."
+    ),
+    tags: ["seconde", "maths", "arithmetique", "premier", "raisonnement", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_arith_irreductible_raison_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "arithmetique_entiers",
+    microId: "arith_fraction_irreductible",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Pourquoi rend-on une fraction irréductible ?",
+    format: "qcm",
+    choices: [
+      "Pour l'écrire sous sa forme la plus simple et la comparer plus facilement",
+      "Pour la rendre plus grande",
+      "Pour la transformer en entier",
+      "Pour changer sa valeur",
+    ],
+    expected: ["Pour l'écrire sous sa forme la plus simple et la comparer plus facilement"],
+    comparator: "mcq_exact",
+    hint: "Simplifier ne change pas la valeur, juste l'écriture.",
+    explanation: exp(
+      "Rendre irréductible simplifie l'écriture sans changer la valeur.",
+      "$\\dfrac{6}{8} = \\dfrac{3}{4}$ : même valeur, écriture plus simple.",
+      "Cela facilite les comparaisons et les calculs.",
+      "On le fait pour obtenir la forme la plus simple."
+    ),
+    tags: ["seconde", "maths", "arithmetique", "irreductible", "raisonnement", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_arith_probleme_raison_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "arithmetique_entiers",
+    microId: "arith_probleme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Dans un problème, à quoi reconnaît-on qu'il faut utiliser la divisibilité ?",
+    format: "qcm",
+    choices: [
+      "Quand on doit répartir une quantité en parts égales sans reste",
+      "Quand on calcule une moyenne",
+      "Quand on mesure une longueur",
+      "Quand on trace une figure",
+    ],
+    expected: ["Quand on doit répartir une quantité en parts égales sans reste"],
+    comparator: "mcq_exact",
+    hint: "« Sans reste », « parts égales » sont des indices.",
+    explanation: exp(
+      "La divisibilité intervient dans les répartitions exactes.",
+      "« En parts égales sans reste » signale un multiple/diviseur.",
+      "On vérifie alors si le total est divisible par la taille des parts.",
+      "Quand on répartit en parts égales sans reste."
+    ),
+    tags: ["seconde", "maths", "arithmetique", "probleme", "raisonnement", "qcm"],
+  },
 ];

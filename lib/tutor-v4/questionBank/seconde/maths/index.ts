@@ -9,6 +9,8 @@ import { developpementFactorisationBank } from "./developpement-factorisation.ba
 import { identitesRemarquablesBank } from "./identites-remarquables.bank";
 import { expressionsLitteralesBank } from "./expressions-litterales.bank";
 import { equationsInequationsBank } from "./equations-inequations.bank";
+import { repereCoordonneesBank } from "./repere-coordonnees.bank";
+import { droitesPlanBank } from "./droites-plan.bank";
 
 // --- Anciennes banques groupées (provisoires, en cours de remplacement) ---
 import { algorithmiqueSecondeBank } from "./algorithmique.bank";
@@ -26,6 +28,9 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...identitesRemarquablesBank,
   ...expressionsLitteralesBank,
   ...equationsInequationsBank,
+  // === Domaine GEOMETRIE — en cours de refonte (1 banque par notion) ===
+  ...repereCoordonneesBank,
+  ...droitesPlanBank,
   // === Domaines encore servis par les anciennes banques groupées (provisoires) ===
   ...geometrieSecondeBank,
   ...fonctionsSecondeBank,

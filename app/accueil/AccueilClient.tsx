@@ -330,11 +330,12 @@ export default function AccueilPage({
             </p>
           )}
           <p className="text-2xl font-black tracking-wide text-white sm:text-3xl">
-            La liberté d&apos;apprendre
+            Comprendre, s&apos;entraîner, progresser
           </p>
           <p className="mx-auto mt-2 max-w-2xl text-sm font-semibold leading-6 text-white/75 sm:text-base">
-            Teste les nouvelles fiches de cours, entraîne-toi, puis dis-nous si
-            elles t&apos;aident à mieux comprendre.
+            EleveAI t&apos;aide à travailler avec un coach IA encadré : indices,
+            entraînements courts, parcours et corrections pour apprendre sans
+            faire à ta place.
           </p>
           <Link
             href="/fiches-cours"
