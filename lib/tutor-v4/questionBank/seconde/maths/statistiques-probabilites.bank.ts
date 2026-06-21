@@ -2,10 +2,8 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { buildMicroSkillCheckBank } from "./core";
 
 export const statistiquesProbabilitesSecondeBank: TutorBankItemV4[] = [
-  // information_chiffree_evolutions est désormais servi par information-chiffree.bank.ts
+  // info_chiffree, statistiques_descriptives et probabilites ont leurs banques dédiées
   ...buildMicroSkillCheckBank("stats_probas", [
-    "statistiques_descriptives",
-    "probabilites_ensemble_fini",
     "echantillonnage_simulation",
   ]),
   {

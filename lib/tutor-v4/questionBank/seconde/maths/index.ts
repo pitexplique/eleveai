@@ -18,6 +18,8 @@ import { fonctionVariationsBank } from "./fonction-variations.bank";
 import { fonctionsAffinesBank } from "./fonctions-affines.bank";
 import { fonctionsReferenceBank } from "./fonctions-reference.bank";
 import { informationChiffreeBank } from "./information-chiffree.bank";
+import { statistiquesDescriptivesBank } from "./statistiques-descriptives.bank";
+import { probabilitesBank } from "./probabilites.bank";
 
 // --- Anciennes banques groupées (provisoires, en cours de remplacement) ---
 import { algorithmiqueSecondeBank } from "./algorithmique.bank";
@@ -45,6 +47,8 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...fonctionsReferenceBank,
   // === Domaine STATS & PROBAS — en cours de refonte (1 banque par notion) ===
   ...informationChiffreeBank,
+  ...statistiquesDescriptivesBank,
+  ...probabilitesBank,
   // === Domaines encore servis par les anciennes banques groupées (provisoires) ===
   ...statistiquesProbabilitesSecondeBank,
   ...algorithmiqueSecondeBank,

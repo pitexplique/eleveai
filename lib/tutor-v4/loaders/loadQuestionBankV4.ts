@@ -28,6 +28,11 @@ import { espagnolA1QuestionBank } from "@/lib/tutor-v4/questionBank/a1/espagnol"
 import { espagnolA2QuestionBank } from "@/lib/tutor-v4/questionBank/a2/espagnol";
 import { espagnolB1QuestionBank } from "@/lib/tutor-v4/questionBank/b1/espagnol";
 import { espagnolB2QuestionBank } from "@/lib/tutor-v4/questionBank/b2/espagnol";
+import { iaA1QuestionBank } from "@/lib/tutor-v4/questionBank/a1/ia";
+import { iaA2QuestionBank } from "@/lib/tutor-v4/questionBank/a2/ia";
+import { iaB1QuestionBank } from "@/lib/tutor-v4/questionBank/b1/ia";
+import { iaB2QuestionBank } from "@/lib/tutor-v4/questionBank/b2/ia";
+import { iaC1QuestionBank } from "@/lib/tutor-v4/questionBank/c1/ia";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 export async function loadQuestionBankV4(
@@ -104,6 +109,12 @@ export async function loadQuestionBankV4(
   if (classe === "a2" && matiere === "espagnol") return espagnolA2QuestionBank;
   if (classe === "b1" && matiere === "espagnol") return espagnolB1QuestionBank;
   if (classe === "b2" && matiere === "espagnol") return espagnolB2QuestionBank;
+
+  if (classe === "a1" && matiere === "ia") return iaA1QuestionBank;
+  if (classe === "a2" && matiere === "ia") return iaA2QuestionBank;
+  if (classe === "b1" && matiere === "ia") return iaB1QuestionBank;
+  if (classe === "b2" && matiere === "ia") return iaB2QuestionBank;
+  if (classe === "c1" && matiere === "ia") return iaC1QuestionBank;
 
   throw new Error(`QuestionBank V4 introuvable pour ${classe}/${matiere}`);
 }

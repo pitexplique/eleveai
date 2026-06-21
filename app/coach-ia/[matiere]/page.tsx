@@ -18,11 +18,13 @@ const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "
 const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
 const ECONOMIE_CLASSES: Classe[] = ["eco-decouverte", "eco-college", "eco-lycee"];
 const ESPAGNOL_CLASSES: Classe[] = ["a1", "a2", "b1", "b2"];
+const IA_CLASSES: Classe[] = ["a1", "a2", "b1", "b2", "c1"];
 
 function getClassesForMatiere(matiere: Matiere): Classe[] {
   if (matiere === "francais") return FRANCAIS_READY_CLASSES;
   if (matiere === "economie") return ECONOMIE_CLASSES;
   if (matiere === "espagnol") return ESPAGNOL_CLASSES;
+  if (matiere === "ia") return IA_CLASSES;
   return CLASSES;
 }
 
@@ -58,6 +60,7 @@ function getMatiereTitle(matiere: string, classe: Classe) {
     economie: "Économie",
     espagnol: "Espagnol",
     "english-maths": "English",
+    ia: "IA",
   };
   return `${matiereLabel[matiere] ?? matiere} ${classeLabel[classe] ?? classe}`;
 }
@@ -95,6 +98,7 @@ function getMatiereColor(matiere: string) {
     case "economie": return "text-amber-600";
     case "espagnol": return "text-red-600";
     case "english-maths": return "text-sky-600";
+    case "ia": return "text-cyan-700";
     default:         return "text-slate-700";
   }
 }
@@ -115,6 +119,7 @@ function getClasseBadgeColor(item: Classe, active: boolean) {
   if (item === "a2") return "border-sky-500 bg-sky-500 text-white";
   if (item === "b1") return "border-indigo-500 bg-indigo-500 text-white";
   if (item === "b2") return "border-violet-500 bg-violet-500 text-white";
+  if (item === "c1") return "border-cyan-600 bg-cyan-600 text-white";
   return "border-violet-500 bg-violet-500 text-white";
 }
 
@@ -142,7 +147,9 @@ function getDomaineAccent(domaineId: string) {
   // Espagnol A2/B1/B2
   if (domaineId.startsWith("ESP_A2_") || domaineId.startsWith("ESP_B1_") || domaineId.startsWith("ESP_B2_"))
     return { title: "text-red-700", pill: "bg-red-100 text-red-800" };
-  // Économie
+  // IA
+  if (domaineId.startsWith("IA_")) return { title: "text-cyan-800", pill: "bg-cyan-100 text-cyan-800" };
+  // ?conomie
   if (domaineId === "ECO_4E_ENTREPRISE") return { title: "text-amber-700",   pill: "bg-amber-100 text-amber-800"   };
   if (domaineId === "ECO_4E_MARCHE")     return { title: "text-emerald-700", pill: "bg-emerald-100 text-emerald-800"};
   if (domaineId === "ECO_4E_TRAVAIL")    return { title: "text-sky-700",     pill: "bg-sky-100 text-sky-800"       };
@@ -173,6 +180,7 @@ export default function CoachIA() {
     matiere === "economie" ? "eco-college" :
     matiere === "espagnol" ? "a1" :
     matiere === "english-maths" ? "a1" :
+    matiere === "ia" ? "a1" :
     "6e";
   const classes = useMemo(() => getClassesForMatiere(matiere), [matiere]);
   const [classe, setClasse] = useState<Classe>(() =>

@@ -28,6 +28,11 @@ import { buildKnowledgeA1Espagnol } from "@/lib/tutor-v4/knowledge/espagnol/a1/b
 import { buildKnowledgeA2Espagnol } from "@/lib/tutor-v4/knowledge/espagnol/a2/buildKnowledgeA2Espagnol";
 import { buildKnowledgeB1Espagnol } from "@/lib/tutor-v4/knowledge/espagnol/b1/buildKnowledgeB1Espagnol";
 import { buildKnowledgeB2Espagnol } from "@/lib/tutor-v4/knowledge/espagnol/b2/buildKnowledgeB2Espagnol";
+import { buildKnowledgeA1Ia } from "@/lib/tutor-v4/knowledge/ia/a1/buildKnowledgeA1Ia";
+import { buildKnowledgeA2Ia } from "@/lib/tutor-v4/knowledge/ia/a2/buildKnowledgeA2Ia";
+import { buildKnowledgeB1Ia } from "@/lib/tutor-v4/knowledge/ia/b1/buildKnowledgeB1Ia";
+import { buildKnowledgeB2Ia } from "@/lib/tutor-v4/knowledge/ia/b2/buildKnowledgeB2Ia";
+import { buildKnowledgeC1Ia } from "@/lib/tutor-v4/knowledge/ia/c1/buildKnowledgeC1Ia";
 
 // =========================
 // TYPES
@@ -50,13 +55,15 @@ export type Classe =
   | "a2"
   | "b1"
   | "b2"
+  | "c1"
   | "eco-decouverte"
   | "eco-college"
   | "eco-lycee";
 
-export type Matiere = "maths" | "francais" | "english-maths" | "economie" | "espagnol";
+export type Matiere = "maths" | "francais" | "english-maths" | "economie" | "espagnol" | "ia";
 export type NiveauEconomie = "eco-decouverte" | "eco-college" | "eco-lycee";
 export type NiveauEnglish = "a1" | "a2" | "b1" | "b2";
+export type NiveauIa = "a1" | "a2" | "b1" | "b2" | "c1";
 
 // =========================
 // KNOWLEDGE PAR CLASSE + MATIERE
@@ -89,8 +96,19 @@ function getKnowledge(classe: Classe, matiere: Matiere = "maths") {
       default:   return buildKnowledgeA1Espagnol();
     }
   }
+  // IA
+  if (matiere === "ia") {
+    switch (classe) {
+      case "a1": return buildKnowledgeA1Ia();
+      case "a2": return buildKnowledgeA2Ia();
+      case "b1": return buildKnowledgeB1Ia();
+      case "b2": return buildKnowledgeB2Ia();
+      case "c1": return buildKnowledgeC1Ia();
+      default:   return buildKnowledgeA1Ia();
+    }
+  }
 
-  // Économie
+  // ?conomie
   if (matiere === "economie") {
     switch (classe) {
       case "eco-college": return buildKnowledgeEco4e();

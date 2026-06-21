@@ -29,6 +29,11 @@ import { matrixA1Espagnol } from "@/lib/tutor-v4/matrix/matrixA1Espagnol";
 import { matrixA2Espagnol } from "@/lib/tutor-v4/matrix/matrixA2Espagnol";
 import { matrixB1Espagnol } from "@/lib/tutor-v4/matrix/matrixB1Espagnol";
 import { matrixB2Espagnol } from "@/lib/tutor-v4/matrix/matrixB2Espagnol";
+import { matrixA1Ia } from "@/lib/tutor-v4/matrix/matrixA1Ia";
+import { matrixA2Ia } from "@/lib/tutor-v4/matrix/matrixA2Ia";
+import { matrixB1Ia } from "@/lib/tutor-v4/matrix/matrixB1Ia";
+import { matrixB2Ia } from "@/lib/tutor-v4/matrix/matrixB2Ia";
+import { matrixC1Ia } from "@/lib/tutor-v4/matrix/matrixC1Ia";
 import type { SkillMatrix } from "@/lib/tutor-v4/types";
 
 export async function loadMatrixV4(
@@ -104,6 +109,12 @@ export async function loadMatrixV4(
   if (classe === "a2" && matiere === "espagnol") return matrixA2Espagnol;
   if (classe === "b1" && matiere === "espagnol") return matrixB1Espagnol;
   if (classe === "b2" && matiere === "espagnol") return matrixB2Espagnol;
+
+  if (classe === "a1" && matiere === "ia") return matrixA1Ia;
+  if (classe === "a2" && matiere === "ia") return matrixA2Ia;
+  if (classe === "b1" && matiere === "ia") return matrixB1Ia;
+  if (classe === "b2" && matiere === "ia") return matrixB2Ia;
+  if (classe === "c1" && matiere === "ia") return matrixC1Ia;
 
   throw new Error(`Matrix V4 introuvable pour ${classe}/${matiere}`);
 }
