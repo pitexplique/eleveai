@@ -8,16 +8,16 @@ import { racineCarreeBank } from "./racine-carree.bank";
 import { developpementFactorisationBank } from "./developpement-factorisation.bank";
 import { identitesRemarquablesBank } from "./identites-remarquables.bank";
 import { expressionsLitteralesBank } from "./expressions-litterales.bank";
+import { equationsInequationsBank } from "./equations-inequations.bank";
 
 // --- Anciennes banques groupées (provisoires, en cours de remplacement) ---
 import { algorithmiqueSecondeBank } from "./algorithmique.bank";
 import { fonctionsSecondeBank } from "./fonctions.bank";
 import { geometrieSecondeBank } from "./geometrie.bank";
-import { nombresCalculsSecondeBank } from "./nombres-calculs.bank";
 import { statistiquesProbabilitesSecondeBank } from "./statistiques-probabilites.bank";
 
 export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
-  // Notions refaites au standard terminale
+  // === Domaine NOMBRES ET CALCULS — entièrement refait (1 banque par notion) ===
   ...reelsIntervallesBank,
   ...arithmetiqueEntiersBank,
   ...puissancesBank,
@@ -25,8 +25,8 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...developpementFactorisationBank,
   ...identitesRemarquablesBank,
   ...expressionsLitteralesBank,
-  // Notions encore servies par les anciennes banques groupées
-  ...nombresCalculsSecondeBank,
+  ...equationsInequationsBank,
+  // === Domaines encore servis par les anciennes banques groupées (provisoires) ===
   ...geometrieSecondeBank,
   ...fonctionsSecondeBank,
   ...statistiquesProbabilitesSecondeBank,
