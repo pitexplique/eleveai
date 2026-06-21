@@ -351,6 +351,7 @@ function normalizeClasse(value: string | null): Classe {
     value === "a2" ||
     value === "b1" ||
     value === "b2" ||
+    value === "c1" ||
     value === "eco-decouverte" ||
     value === "eco-college" ||
     value === "eco-lycee"
@@ -366,6 +367,7 @@ function normalizeMatiere(value: string | null): Matiere {
   if (value === "english-maths") return "english-maths";
   if (value === "economie") return "economie";
   if (value === "espagnol") return "espagnol";
+  if (value === "ia") return "ia";
   return "maths";
 }
 

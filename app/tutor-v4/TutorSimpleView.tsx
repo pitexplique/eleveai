@@ -58,6 +58,9 @@ function classLabel(classe: Classe) {
 function matiereLabel(matiere: Matiere) {
   if (matiere === "francais") return "Français";
   if (matiere === "english-maths") return "English Maths";
+  if (matiere === "economie") return "?conomie";
+  if (matiere === "espagnol") return "Espagnol";
+  if (matiere === "ia") return "IA";
   return "Maths";
 }
 

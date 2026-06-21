@@ -42,6 +42,15 @@ const NAV_ESPAGNOL = [
   { href: "/coach-ia/espagnol?classe=b2",icon: "🎓",  label: "Niveau B2",          desc: "Géopolitique, littérature, culture"  },
 ];
 
+const NAV_IA = [
+  { href: "/coach-ia/ia",          icon: "IA", label: "Coach IA", desc: "A1 -> C1, comprendre, utiliser, verifier, creer" },
+  { href: "/coach-ia/ia?classe=a1", icon: "A1", label: "A1 Comprendre", desc: "Comprendre et expliquer" },
+  { href: "/coach-ia/ia?classe=a2", icon: "A2", label: "A2 Utiliser", desc: "Utiliser pour apprendre" },
+  { href: "/coach-ia/ia?classe=b1", icon: "B1", label: "B1 Securite", desc: "Verifier et se proteger" },
+  { href: "/coach-ia/ia?classe=b2", icon: "B2", label: "B2 Creer", desc: "Produire avec methode" },
+  { href: "/coach-ia/ia?classe=c1", icon: "C1", label: "C1 Projet", desc: "Concevoir un projet utile" },
+];
+
 const NAV_ECONOMIE = [
   { href: "/coach-ia/economie",                          icon: "💰", label: "Coach Économie IA",    desc: "Entreprise, marché, travail, fiscalité"  },
   { href: "/coach-ia/economie?classe=eco-decouverte",    icon: "🌱", label: "Découverte",            desc: "Budget famille, argent, épargne"         },
