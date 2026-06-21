@@ -11,6 +11,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { verifySessionToken } from "@/lib/server/session";
 import { calculerPointsAvis } from "@/lib/points/feedbackPoints";
+import { estProbablementIA } from "@/lib/detection-ia";
 
 const ROLES_ETABLISSEMENT = new Set(["prof", "principal", "boss"]);
 
@@ -131,12 +132,14 @@ export async function GET(req: Request) {
   if (!etabScope) {
     const { data: retours } = await supabaseAdmin
       .from("retours_eleves")
-      .select("traite")
+      .select("message, traite")
       .eq("code_etablissement", session.code_etablissement)
       .eq("code_eleve", session.code_utilisateur);
+    // Les retours « IA probable » ne comptent pas dans les points (anti-farming).
+    const valides = (retours ?? []).filter((r) => !estProbablementIA(r.message));
     pointsAvis = calculerPointsAvis(
-      retours?.length ?? 0,
-      retours?.filter((r) => r.traite).length ?? 0
+      valides.length,
+      valides.filter((r) => r.traite).length
     );
   }
 

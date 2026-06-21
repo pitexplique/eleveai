@@ -1,0 +1,41 @@
+import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { buildMicroSkillCheckBank } from "./core";
+
+export const algorithmiqueSecondeBank: TutorBankItemV4[] = [
+  ...buildMicroSkillCheckBank("algorithmique", ["algorithmique_python_2de"]),
+  {
+    kind: "fixed",
+    id: "seconde_python_condition_fixed_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "algorithmique_python_2de",
+    microId: "python_condition",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quel mot-cle Python permet d'ecrire une condition ?",
+    format: "qcm",
+    choices: ["if", "for", "def", "return"],
+    expected: ["if"],
+    comparator: "mcq_exact",
+    hint: "C'est le mot-cle utilise dans : ... x > 0:",
+    explanation: "Une condition s'ecrit avec if, suivi d'une expression booleenne puis de deux-points.",
+    tags: ["seconde", "python", "condition"],
+  },
+  {
+    kind: "fixed",
+    id: "seconde_python_boucle_fixed_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "algorithmique_python_2de",
+    microId: "python_boucle",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans `for i in range(5):`, combien de valeurs prend i ?",
+    format: "short",
+    expected: ["5"],
+    comparator: "number_equal",
+    hint: "range(5) donne 0, 1, 2, 3, 4.",
+    explanation: "range(5) contient cinq valeurs : 0, 1, 2, 3 et 4.",
+    tags: ["seconde", "python", "boucle"],
+  },
+];

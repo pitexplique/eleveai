@@ -5,6 +5,7 @@ import type { MouseEvent as ReactMouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
+import BulletinPreviewHome from "@/components/bulletin/BulletinPreviewHome";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
 import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
@@ -489,10 +490,10 @@ export default function AccueilPage({
         <div className="mx-auto max-w-6xl">
           <div className="mb-4">
             <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-200/70">
-              Progresser pas à pas
+              Diagnostic par matière
             </p>
             <h2 className="mt-1 text-xl font-black text-white">
-              Parcours guidés
+              Parcours d&apos;évaluation
             </h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -510,6 +511,9 @@ export default function AccueilPage({
           </div>
         </div>
       </section>
+
+      {/* ── APERÇU BULLETIN (visiteurs non connectés) ───────────────────────── */}
+      <BulletinPreviewHome />
 
       {/* ── NOUVEAUTÉS ───────────────────────────────────────────────────────── */}
       <section className="px-4 py-10 sm:px-6 lg:px-8">

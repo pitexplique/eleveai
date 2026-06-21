@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { verifySessionToken } from "@/lib/server/session";
 import { calculerPointsAvis } from "@/lib/points/feedbackPoints";
+import { estProbablementIA } from "@/lib/detection-ia";
 // « PONTALBA TURPIN Kathalynna » -> « Kathalynna » : prenom seul, jamais le nom
 // de famille (RGPD). Heuristique partagee, voir lib/prenom.ts.
 import { prenomCourt } from "@/lib/prenom";
@@ -29,7 +30,7 @@ export async function GET(req: Request) {
 
   const { data, error } = await supabase
     .from("retours_eleves")
-    .select("code_eleve, prenom, traite")
+    .select("code_eleve, prenom, message, traite")
     .eq("code_etablissement", session.code_etablissement)
     .not("code_eleve", "is", null)
     .limit(20000);
@@ -49,6 +50,8 @@ export async function GET(req: Request) {
   for (const r of data ?? []) {
     const key = r.code_eleve as string;
     if (!key) continue;
+    // Un retour « IA probable » ne rapporte aucun point dans le classement.
+    if (estProbablementIA(r.message)) continue;
     const e =
       parEleve.get(key) ?? { code_eleve: key, prenom: r.prenom, nb: 0, nbT: 0 };
     e.nb += 1;

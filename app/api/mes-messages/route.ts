@@ -25,6 +25,7 @@ export async function GET(req: Request) {
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
 
+  // 1) Messages « Écris-moi » de l'élève (+ réponse du prof éventuelle).
   const { data, error } = await supabase
     .from("contact_messages")
     .select("id, message, created_at, reponse, reponse_at, status")
@@ -41,5 +42,16 @@ export async function GET(req: Request) {
     );
   }
 
-  return NextResponse.json({ ok: true, messages: data ?? [] });
+  // 2) Avis / bugs / idées de l'élève AUXQUELS le prof a répondu (on n'affiche
+  // que ceux avec une réponse, pour ne pas noyer le dashboard).
+  const { data: avis } = await supabase
+    .from("retours_eleves")
+    .select("id, type, note, message, reponse, reponse_at, created_at")
+    .eq("code_etablissement", session.code_etablissement)
+    .eq("code_eleve", session.code_utilisateur)
+    .not("reponse", "is", null)
+    .order("reponse_at", { ascending: false })
+    .limit(50);
+
+  return NextResponse.json({ ok: true, messages: data ?? [], avis: avis ?? [] });
 }

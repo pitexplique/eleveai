@@ -11,7 +11,7 @@ const LASTMOD_HOME  = new Date("2026-06-07");
 const LASTMOD_CORE  = new Date("2026-06-07");
 const LASTMOD_LEGAL = new Date("2026-02-18");
 
-const MATHS_CLASSES    = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe"];
+const MATHS_CLASSES    = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "terminale-spe"];
 const FRANCAIS_CLASSES = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
 const ENGLISH_NIVEAUX  = ["a1", "a2", "b1", "b2"];
 

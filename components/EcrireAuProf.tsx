@@ -8,8 +8,9 @@ import { useEleve } from "@/context/EleveContext";
 const MAX_MOTS = 200;
 
 /**
- * Bouton flottant « Écris à ton prof », réservé aux ÉLÈVES CONNECTÉS.
- * Demande des élèves (2026-06-18) : pouvoir écrire au professeur même pendant
+ * Bouton flottant « Écris à l'équipe EleveAI », réservé aux ÉLÈVES CONNECTÉS.
+ * (Le destinataire est l'administrateur de la plateforme, pas le prof de classe.)
+ * Demande des élèves (2026-06-18) : pouvoir écrire à l'équipe EleveAI même pendant
  * les vacances. Message seul (pas de réponse demandée) ; l'identité de l'élève
  * (nom, classe, codes) est jointe automatiquement pour savoir qui écrit.
  *
@@ -116,7 +117,7 @@ export default function EcrireAuProf() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        aria-label="Écris à ton prof"
+        aria-label="Écris à l'équipe EleveAI"
         className="fixed bottom-5 left-5 z-50 flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-pink-500 px-5 py-3 text-sm font-black text-white shadow-2xl ring-2 ring-white/50 transition hover:scale-105 print:hidden"
       >
         ✉️ <span className="hidden sm:inline">Écris-moi</span>
@@ -128,7 +129,7 @@ export default function EcrireAuProf() {
     <aside className="fixed bottom-5 left-5 z-50 flex w-[300px] flex-col overflow-hidden rounded-3xl border border-amber-200 bg-white text-slate-800 shadow-2xl sm:w-[340px] print:hidden">
       <div className="flex items-center justify-between bg-gradient-to-br from-amber-500 via-orange-500 to-pink-500 px-5 py-4">
         <div>
-          <p className="font-black text-white">✉️ Écris à ton prof</p>
+          <p className="font-black text-white">✉️ Écris à l&apos;équipe EleveAI</p>
           <p className="text-[11px] font-bold text-white/80">
             Même pendant les vacances
           </p>
@@ -150,7 +151,7 @@ export default function EcrireAuProf() {
             Message envoyé, {prenomOuCode} !
           </p>
           <p className="text-sm font-semibold leading-relaxed text-slate-600">
-            Ton professeur l&apos;a bien reçu. Il te répondra dès que possible.
+            L&apos;équipe EleveAI l&apos;a bien reçu. On te répondra dès que possible.
           </p>
           <button
             type="button"
@@ -197,7 +198,7 @@ export default function EcrireAuProf() {
             disabled={message.trim().length < 10 || tropLong || envoi}
             className="w-full rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 py-2.5 text-sm font-black text-white transition hover:from-amber-400 hover:to-orange-400 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {envoi ? "Envoi…" : "Envoyer à mon prof"}
+            {envoi ? "Envoi…" : "Envoyer à l'équipe EleveAI"}
           </button>
         </form>
       )}

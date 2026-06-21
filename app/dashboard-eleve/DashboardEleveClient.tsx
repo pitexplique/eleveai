@@ -5,6 +5,8 @@ import { useEffect, useMemo, useState } from "react";
 
 import { useEleve } from "@/context/EleveContext";
 import ClassementAvis from "@/components/points/ClassementAvis";
+import BulletinDashboard from "@/components/bulletin/BulletinDashboard";
+import type { Bulletin } from "@/lib/bulletin/types";
 import { prenomFromNom } from "@/lib/prenom";
 
 type EleveSession = {
@@ -120,6 +122,22 @@ type MessageProf = {
   status: string;
 };
 
+type AvisRepondu = {
+  id: string;
+  type: string | null;
+  note: number | null;
+  message: string | null;
+  reponse: string | null;
+  reponse_at: string | null;
+  created_at: string;
+};
+
+const TYPE_AVIS_LABEL: Record<string, string> = {
+  avis: "⭐ Avis",
+  bug: "🐞 Bug",
+  idee: "💡 Idée",
+};
+
 // Date sans heure : retour élève du 11/06/2026, afficher l'heure des activités
 // était vécu comme intrusif (« je n'aime pas être stalké »).
 function formatDate(value: string) {
@@ -185,6 +203,8 @@ export default function DashboardEleveClient() {
   const [resultatsTutor, setResultatsTutor] = useState<ResultatTutor[]>([]);
   const [pointsAvis, setPointsAvis] = useState(0);
   const [messagesProf, setMessagesProf] = useState<MessageProf[]>([]);
+  const [avisRepondus, setAvisRepondus] = useState<AvisRepondu[]>([]);
+  const [bulletin, setBulletin] = useState<Bulletin | null>(null);
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -273,7 +293,23 @@ export default function DashboardEleveClient() {
     })
       .then((r) => r.json())
       .then((d) => {
-        if (d?.ok) setMessagesProf(d.messages as MessageProf[]);
+        if (d?.ok) {
+          setMessagesProf(d.messages as MessageProf[]);
+          setAvisRepondus((d.avis ?? []) as AvisRepondu[]);
+        }
+      })
+      .catch(() => {});
+  }, [eleve?.token]);
+
+  // Bulletin de l'élève (notes /20, progression, assiduité, appréciation).
+  useEffect(() => {
+    if (!eleve?.token) return;
+    fetch("/api/bulletin", {
+      headers: { Authorization: `Bearer ${eleve.token}` },
+    })
+      .then((r) => r.json())
+      .then((d) => {
+        if (d?.ok && d.bulletin) setBulletin(d.bulletin as Bulletin);
       })
       .catch(() => {});
   }, [eleve?.token]);
@@ -368,13 +404,22 @@ export default function DashboardEleveClient() {
           </div>
         </div>
 
+        {bulletin && (
+          <div className="mt-6">
+            <h2 className="mb-3 text-xl font-black text-slate-900">
+              🏁 Mon tableau de bord
+            </h2>
+            <BulletinDashboard bulletin={bulletin} />
+          </div>
+        )}
+
         {messagesProf.length > 0 && (
           <div className="mt-6 rounded-[2rem] border border-amber-200 bg-white p-6 shadow-xl">
             <h2 className="text-xl font-black text-slate-900">
-              ✉️ Mes messages avec mon prof
+              ✉️ Mes messages à l&apos;équipe EleveAI
             </h2>
             <p className="mt-1 text-sm font-semibold text-slate-500">
-              Ce que tu as écrit avec « Écris-moi », et la réponse de ton prof.
+              Ce que tu as écrit avec « Écris-moi », et la réponse de l&apos;équipe EleveAI.
             </p>
             <ul className="mt-4 space-y-3">
               {messagesProf.map((m) => (
@@ -391,7 +436,7 @@ export default function DashboardEleveClient() {
                   {m.reponse ? (
                     <div className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 p-3">
                       <p className="text-xs font-black uppercase tracking-wide text-emerald-700">
-                        👩‍🏫 Réponse de ton prof
+                        👩‍🏫 Réponse de l&apos;équipe EleveAI
                         {m.reponse_at ? ` · ${formatDate(m.reponse_at)}` : ""}
                       </p>
                       <p className="mt-1 whitespace-pre-wrap text-sm font-semibold text-emerald-900">
@@ -400,9 +445,49 @@ export default function DashboardEleveClient() {
                     </div>
                   ) : (
                     <p className="mt-3 text-xs font-bold text-amber-600">
-                      ⏳ En attente de la réponse de ton prof…
+                      ⏳ En attente de la réponse de l&apos;équipe EleveAI…
                     </p>
                   )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {avisRepondus.length > 0 && (
+          <div className="mt-6 rounded-[2rem] border border-emerald-200 bg-white p-6 shadow-xl">
+            <h2 className="text-xl font-black text-slate-900">
+              💬 L&apos;équipe EleveAI a répondu à mes avis
+            </h2>
+            <p className="mt-1 text-sm font-semibold text-slate-500">
+              Tes avis, bugs et idées envoyés depuis « Donner mon avis », et la
+              réponse de l&apos;équipe EleveAI.
+            </p>
+            <ul className="mt-4 space-y-3">
+              {avisRepondus.map((a) => (
+                <li
+                  key={a.id}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                >
+                  <p className="text-xs font-bold text-slate-400">
+                    {TYPE_AVIS_LABEL[a.type ?? ""] ?? "Retour"}
+                    {a.note ? ` · ${"★".repeat(Math.round(a.note))}` : ""} ·{" "}
+                    {formatDate(a.created_at)}
+                  </p>
+                  {a.message ? (
+                    <p className="mt-1 whitespace-pre-wrap text-sm font-medium text-slate-800">
+                      {a.message}
+                    </p>
+                  ) : null}
+                  <div className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 p-3">
+                    <p className="text-xs font-black uppercase tracking-wide text-emerald-700">
+                      👩‍🏫 Réponse de l&apos;équipe EleveAI
+                      {a.reponse_at ? ` · ${formatDate(a.reponse_at)}` : ""}
+                    </p>
+                    <p className="mt-1 whitespace-pre-wrap text-sm font-semibold text-emerald-900">
+                      {a.reponse}
+                    </p>
+                  </div>
                 </li>
               ))}
             </ul>

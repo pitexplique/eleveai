@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { createClient } from "@supabase/supabase-js";
 import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
+import { detecterIA } from "@/lib/detection-ia";
 
 const STATUTS = ["new", "in_progress", "done"];
 
@@ -31,7 +32,14 @@ export async function GET() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return NextResponse.json(data);
+  // Enrichit chaque message d'un drapeau « IA probable » (calculé à la lecture,
+  // pas stocké) → badge dans le dashboard, sans bloquer l'élève à l'envoi.
+  const enrichi = (data ?? []).map((m: Record<string, unknown>) => {
+    const det = detecterIA(m.message as string | null);
+    return { ...m, suspect_ia: det.suspect, raison_ia: det.raison };
+  });
+
+  return NextResponse.json(enrichi);
 }
 
 // Mise à jour : statut (new / in_progress / done) et/ou réponse du prof.

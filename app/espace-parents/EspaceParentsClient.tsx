@@ -4,9 +4,9 @@ import Link from "next/link";
 
 const outils = [
   {
-    emoji: "📊",
-    title: "Tableau de bord élève",
-    description: "Votre enfant peut consulter tous ses résultats enregistrés : parcours, calcul rapide, défis et English Maths.",
+    emoji: "🏁",
+    title: "Bulletin & tableau de bord",
+    description: "Le bulletin de votre enfant — notes sur 20 par matière, progression et assiduité — mis à jour automatiquement à chaque exercice, plus le détail de tous ses résultats.",
     href: "/dashboard-eleve",
     color: "from-emerald-400 to-teal-500",
   },

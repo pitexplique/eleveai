@@ -8,6 +8,7 @@ import { loadKnowledge6eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowl
 import { loadKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge5eMaths";
 import { loadKnowledge4eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge4eMaths";
 import { loadKnowledge3eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge3eMaths";
+import { loadKnowledgeSecondeMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeSecondeMaths";
 import { loadKnowledgeTerminaleSpeMaths} from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeTerminaleSpeMaths";
 import { loadKnowledgeAdulteMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeAdulteMaths";
 import { loadKnowledgeCpFrancais } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeCpFrancais";
@@ -68,6 +69,10 @@ export async function loadKnowledgeV4(
 
   if (classe === "3e" && matiere === "maths") {
     return loadKnowledge3eMaths() as KnowledgePack;
+  }
+
+  if (classe === "seconde" && matiere === "maths") {
+    return loadKnowledgeSecondeMaths() as KnowledgePack;
   }
     if (classe === "terminale-spe" && matiere === "maths") {
     return loadKnowledgeTerminaleSpeMaths() as KnowledgePack;

@@ -5,6 +5,7 @@ import {
   POINTS_PAR_RETOUR,
   calculerPointsAvis,
 } from "@/lib/points/feedbackPoints";
+import { estProbablementIA } from "@/lib/detection-ia";
 
 const TYPES = new Set(["bug", "idee", "avis"]);
 
@@ -36,6 +37,11 @@ function asString(v: any) {
 const MAX_MOTS = 200;
 // Délai minimum entre deux retours d'un même élève (anti-farming de points).
 const DELAI_MIN_MS = 20_000;
+// Plafond de retours par élève sur 24 h glissantes : un élève honnête en envoie
+// quelques-uns, jamais des dizaines. Ferme la porte au spam varié (que la
+// détection IA et l'anti-doublon ne captent pas toujours). Ajustable.
+const MAX_PAR_JOUR = 10;
+const FENETRE_24H_MS = 24 * 60 * 60 * 1000;
 
 function compterMots(s: string) {
   const t = s.trim();
@@ -123,13 +129,23 @@ export async function POST(req: Request) {
         .eq("code_etablissement", codeEtablissement)
         .eq("code_eleve", codeEleve)
         .order("created_at", { ascending: false })
-        .limit(20);
+        .limit(MAX_PAR_JOUR + 5);
 
       if (recents && recents.length) {
         const dernier = new Date(recents[0].created_at).getTime();
         if (Date.now() - dernier < DELAI_MIN_MS) {
           return NextResponse.json(
             { ok: false, error: "Tu envoies trop vite. Attends quelques secondes avant ton prochain retour." },
+            { status: 429 }
+          );
+        }
+        // Plafond journalier : nb de retours sur les 24 dernières heures.
+        const nb24h = recents.filter(
+          (r) => Date.now() - new Date(r.created_at).getTime() < FENETRE_24H_MS
+        ).length;
+        if (nb24h >= MAX_PAR_JOUR) {
+          return NextResponse.json(
+            { ok: false, error: `Tu as déjà envoyé ${MAX_PAR_JOUR} retours aujourd'hui. Reviens demain — merci pour ta participation 🙌` },
             { status: 429 }
           );
         }
@@ -166,14 +182,16 @@ export async function POST(req: Request) {
     if (codeEtablissement && codeEleve) {
       const { data: retours } = await supabase
         .from("retours_eleves")
-        .select("traite")
+        .select("message, traite")
         .eq("code_etablissement", codeEtablissement)
         .eq("code_eleve", codeEleve);
 
-      const nbRetours = retours?.length ?? 0;
-      const nbTraites = retours?.filter((r) => r.traite).length ?? 0;
-      pointsTotal = calculerPointsAvis(nbRetours, nbTraites);
-      pointsGagnes = POINTS_PAR_RETOUR;
+      // Les retours « IA probable » ne rapportent aucun point (anti-farming) :
+      // on les exclut du total, et l'envoi en cours ne gagne 0 s'il est détecté.
+      const valides = (retours ?? []).filter((r) => !estProbablementIA(r.message));
+      const nbTraites = valides.filter((r) => r.traite).length;
+      pointsTotal = calculerPointsAvis(valides.length, nbTraites);
+      pointsGagnes = estProbablementIA(message) ? 0 : POINTS_PAR_RETOUR;
     }
 
     return NextResponse.json({ ok: true, pointsGagnes, pointsTotal });

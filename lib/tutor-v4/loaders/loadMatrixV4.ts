@@ -7,6 +7,7 @@ import { matrix6eMaths } from "@/lib/tutor-v4/matrix/matrix6eMaths";
 import { matrix5eMaths } from "@/lib/tutor-v4/matrix/matrix5eMaths";
 import { matrix4eMaths } from "@/lib/tutor-v4/matrix/matrix4eMaths";
 import { matrix3eMaths } from "@/lib/tutor-v4/matrix/matrix3eMaths";
+import { matrixSecondeMaths } from "@/lib/tutor-v4/matrix/matrixSecondeMaths";
 import { matrixTerminaleSpeMaths } from "@/lib/tutor-v4/matrix/matrixTerminaleSpeMaths";
 import { matrixAdulteMaths } from "@/lib/tutor-v4/matrix/matrixAdulteMaths";
 import { matrixCpFrancais } from "@/lib/tutor-v4/matrix/matrixCpFrancais";
@@ -69,6 +70,10 @@ export async function loadMatrixV4(
 
   if (classe === "3e" && matiere === "maths") {
     return matrix3eMaths;
+  }
+
+  if (classe === "seconde" && matiere === "maths") {
+    return matrixSecondeMaths;
   }
     if (classe === "terminale-spe" && matiere === "maths") {
     return matrixTerminaleSpeMaths;

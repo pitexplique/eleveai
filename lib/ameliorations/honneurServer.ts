@@ -9,6 +9,7 @@
 import "server-only";
 import { createClient } from "@supabase/supabase-js";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
+import { estProbablementIA } from "@/lib/detection-ia";
 
 // Extraction du prénom (« NOM Prénom » → prénom seul, jamais le nom de famille).
 // Heuristique partagée : voir lib/prenom.ts. Réexporté pour les consommateurs
@@ -16,10 +17,14 @@ import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomCourt } from "@/lib/prenom";
 export { prenomCourt };
 
-// Palmarès calculé sur les 14 derniers jours : le·la plus actif·ve par
-// catégorie (idées, bugs, avis, total). Prénoms seuls, jamais deux fois le
-// même élève. Renvoie [] si la base ne répond pas (la vue retombe alors sur
-// la liste éditoriale par défaut).
+// Au-delà de ce délai, le snapshot pré-calculé est considéré périmé → recalcul.
+const PALMARES_TTL_MS = 60 * 60 * 1000; // 1 h
+
+// Lecture du palmarès « avis » depuis le snapshot pré-calculé (table palmares,
+// voir supabase/palmares.sql). Rafraîchissement PARESSEUX : si le snapshot a
+// plus de TTL (ou n'existe pas encore), on recalcule une fois, on réécrit la
+// ligne, et on la sert. Aucun cron requis ; le coût ne dépend plus du nombre
+// d'élèves ni du trafic (lecture d'1 ligne en régime courant).
 export async function getElevesALHonneur(): Promise<EleveALHonneur[]> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -27,10 +32,49 @@ export async function getElevesALHonneur(): Promise<EleveALHonneur[]> {
 
   try {
     const supabase = createClient(url, key);
+
+    const { data: snap } = await supabase
+      .from("palmares")
+      .select("data, computed_at")
+      .eq("id", "avis")
+      .maybeSingle();
+
+    const frais =
+      !!snap?.computed_at &&
+      Date.now() - new Date(snap.computed_at).getTime() < PALMARES_TTL_MS;
+    if (frais) return (snap!.data as EleveALHonneur[]) ?? [];
+
+    // Snapshot périmé ou absent : on recalcule et on le réécrit.
+    const calc = await calculerElevesALHonneur();
+    if (calc.length > 0) {
+      await supabase.from("palmares").upsert({
+        id: "avis",
+        data: calc,
+        computed_at: new Date().toISOString(),
+      });
+      return calc;
+    }
+    // Recalcul vide (probablement transitoire) : on garde le dernier snapshot.
+    return (snap?.data as EleveALHonneur[]) ?? [];
+  } catch {
+    return [];
+  }
+}
+
+// Calcul lourd du palmarès sur les 14 derniers jours : le·la plus actif·ve par
+// catégorie (idées, bugs, avis, total). Prénoms seuls, jamais deux fois le même
+// élève. Séparé pour être appelé par le rafraîchissement paresseux (ci-dessus)
+// — et un éventuel cron plus tard.
+async function calculerElevesALHonneur(): Promise<EleveALHonneur[]> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return [];
+  try {
+    const supabase = createClient(url, key);
     const depuis = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString();
     const { data, error } = await supabase
       .from("retours_eleves")
-      .select("type, note, prenom, code_etablissement, code_eleve")
+      .select("type, note, prenom, message, code_etablissement, code_eleve")
       .gte("created_at", depuis)
       .order("created_at", { ascending: false })
       .limit(2000);
@@ -48,6 +92,9 @@ export async function getElevesALHonneur(): Promise<EleveALHonneur[]> {
 
     const parEleve = new Map<string, Stat>();
     for (const r of data) {
+      // Un retour qui ressemble à un copier-collé d'IA ne met personne à
+      // l'honneur (sinon le spam IA fait grimper son auteur au palmarès).
+      if (estProbablementIA(r.message)) continue;
       const prenom = prenomCourt(r.prenom);
       if (!prenom || prenom === "Élève") continue;
       const id =

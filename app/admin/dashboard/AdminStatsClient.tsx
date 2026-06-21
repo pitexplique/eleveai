@@ -38,6 +38,8 @@ type Stats = {
       classe: string | null;
       code_etablissement: string | null;
       created_at: string;
+      suspectIA?: boolean;
+      raisonIA?: string | null;
     }[];
   };
 };
@@ -304,6 +306,14 @@ export default function AdminStatsClient() {
                           {a.code_etablissement ? ` · ${a.code_etablissement}` : ""}
                         </span>
                         <span className="flex items-center gap-2 text-slate-400">
+                          {a.suspectIA ? (
+                            <span
+                              title={a.raisonIA ?? "Ressemble à un copier-collé d'IA"}
+                              className="rounded-full bg-fuchsia-500/20 px-2 py-0.5 text-[10px] font-black text-fuchsia-300"
+                            >
+                              🤖 IA probable
+                            </span>
+                          ) : null}
                           {a.note ? (
                             <span className="text-amber-300">
                               {"★".repeat(Math.round(a.note))}

@@ -15,6 +15,7 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { createClient } from "@supabase/supabase-js";
 import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
+import { detecterIA } from "@/lib/detection-ia";
 
 export const dynamic = "force-dynamic";
 
@@ -306,16 +307,21 @@ export async function GET(req: Request) {
       notes.length > 0
         ? Math.round((notes.reduce((s, n) => s + n, 0) / notes.length) * 10) / 10
         : null,
-    derniers: retours.slice(0, 8).map((r) => ({
-      id: r.id,
-      type: r.type,
-      note: r.note,
-      message: r.message,
-      prenom: r.prenom,
-      classe: r.classe,
-      code_etablissement: r.code_etablissement,
-      created_at: r.created_at,
-    })),
+    derniers: retours.slice(0, 8).map((r) => {
+      const det = detecterIA(r.message as string | null);
+      return {
+        id: r.id,
+        type: r.type,
+        note: r.note,
+        message: r.message,
+        prenom: r.prenom,
+        classe: r.classe,
+        code_etablissement: r.code_etablissement,
+        created_at: r.created_at,
+        suspectIA: det.suspect,
+        raisonIA: det.raison,
+      };
+    }),
   };
 
   return NextResponse.json({

@@ -31,6 +31,10 @@ function asString(v: any) {
 // pavé copié-collé d'une IA. Le contact adulte (contact, avis-tarifs…) n'est pas
 // limité — un vrai message peut être long. Cf. app/api/retours/route.ts.
 const MAX_MOTS_ELEVE = 200;
+// Plafond de messages d'élèves sur 24 h glissantes (anti-spam, aligné sur
+// /api/retours). Un élève honnête n'écrit pas 10 messages par jour. Ajustable.
+const MAX_MESSAGES_ELEVE_PAR_JOUR = 10;
+const FENETRE_24H_MS = 24 * 60 * 60 * 1000;
 
 function compterMots(s: string) {
   const t = s.trim();
@@ -105,6 +109,27 @@ export async function POST(req: Request) {
         process.env.SUPABASE_SERVICE_ROLE_KEY!
       );
 
+    // Plafond journalier pour les messages d'élèves (élève identifié par ses
+    // codes). Empêche un élève d'inonder l'administrateur EleveAI.
+    if (source === "eleve-message" && codeEtablissement && codeUtilisateur) {
+      const depuis = new Date(Date.now() - FENETRE_24H_MS).toISOString();
+      const { count } = await supabase
+        .from("contact_messages")
+        .select("id", { count: "exact", head: true })
+        .eq("source", "eleve-message")
+        .eq("code_etablissement", codeEtablissement)
+        .eq("code_utilisateur", codeUtilisateur)
+        .gte("created_at", depuis);
+      if ((count ?? 0) >= MAX_MESSAGES_ELEVE_PAR_JOUR) {
+        return NextResponse.json(
+          {
+            ok: false,
+            error: `Tu as déjà envoyé ${MAX_MESSAGES_ELEVE_PAR_JOUR} messages aujourd'hui. Reviens demain 🙂`,
+          },
+          { status: 429 }
+        );
+      }
+    }
 
     const { error } = await supabase.from("contact_messages").insert({
       role,

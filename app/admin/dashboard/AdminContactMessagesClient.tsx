@@ -17,6 +17,8 @@ type ContactMessage = {
   source: string | null;
   reponse: string | null;
   reponse_at: string | null;
+  suspect_ia?: boolean;
+  raison_ia?: string | null;
 };
 
 type SortOrder = "newest" | "oldest";
@@ -268,6 +270,14 @@ export default function AdminContactMessagesClient() {
                 {m.source === "eleve-message" ? (
                   <span className="rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-bold text-amber-300">
                     👩‍🎓 Élève
+                  </span>
+                ) : null}
+                {m.suspect_ia ? (
+                  <span
+                    title={m.raison_ia ?? "Ressemble à un copier-collé d'IA"}
+                    className="rounded-full bg-fuchsia-500/20 px-2 py-0.5 text-[10px] font-black text-fuchsia-300"
+                  >
+                    🤖 IA probable
                   </span>
                 ) : null}
               </div>

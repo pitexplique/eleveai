@@ -8,6 +8,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { verifySessionToken } from "@/lib/server/session";
+import { mettreAJourBulletin } from "@/lib/bulletin/computeBulletin";
 
 // Colonnes que le client a le droit de fournir, par activité.
 // Tout le reste est ignoré ; pourcentage est une colonne générée en base.
@@ -131,6 +132,16 @@ export async function POST(req: Request) {
 
     const { error } = await supabaseAdmin.from(activite.table).insert(row);
     if (error) throw error;
+
+    // Recalcule le bulletin de l'élève (snapshot, table bulletins). Tolérant :
+    // mettreAJourBulletin n'échoue jamais → la sauvegarde du résultat est
+    // garantie même si le bulletin ne se met pas à jour (ex. table absente).
+    await mettreAJourBulletin({
+      codeEtablissement: session.code_etablissement,
+      codeUtilisateur: session.code_utilisateur,
+      nom: session.nom,
+      classe: session.classe,
+    });
 
     return NextResponse.json({ ok: true });
   } catch (e: any) {

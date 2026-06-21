@@ -17,6 +17,7 @@ import { maths6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/maths";
 import { maths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths";
 import { maths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths";
 import { maths3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/maths";
+import { mathsSecondeQuestionBank } from "@/lib/tutor-v4/questionBank/seconde/maths";
 import { mathsTerminaleSpeQuestionBank } from "@/lib/tutor-v4/questionBank/terminale-spe/maths";
 import { mathsAdulteQuestionBank } from "@/lib/tutor-v4/questionBank/adulte/maths";
 
@@ -30,6 +31,7 @@ function getQuestionBank(classe: ParcoursClasse): TutorBankItemV4[] {
   if (classe === "5e") return maths5eQuestionBank;
   if (classe === "4e") return maths4eQuestionBank;
   if (classe === "3e") return maths3eQuestionBank;
+  if (classe === "seconde") return mathsSecondeQuestionBank;
   if (classe === "terminale-spe") return mathsTerminaleSpeQuestionBank;
   if (classe === "adulte") return mathsAdulteQuestionBank;
 

@@ -18,6 +18,7 @@ import { getMaths6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/maths";
 import { getMaths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths";
 import { getMaths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths";
 import { getMaths3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/maths";
+import { getMathsSecondeQuestionBank } from "@/lib/tutor-v4/questionBank/seconde/maths";
 import { getMathTerminaleSpeQuestionBank } from "@/lib/tutor-v4/questionBank/terminale-spe/maths";
 
 type GetQuestionBankArgs = {
@@ -82,6 +83,9 @@ export function getLessonBank(args: {
 
     case "3e":
       return getMaths3eQuestionBank(bankArgs);
+
+    case "seconde":
+      return getMathsSecondeQuestionBank(bankArgs);
 
     case "terminale-spe":
       return getMathTerminaleSpeQuestionBank(bankArgs);

@@ -287,7 +287,7 @@ export default function VotreAvisClient({
                 </p>
                 <p className="mt-1 text-sm font-semibold text-slate-200">
                   Tu as maintenant <span className="font-black text-white">{pointsTotal} points</span>.
-                  Bonus de 20 points quand ton idée est retenue par ton prof !
+                  Bonus de 20 points quand ton idée est retenue par l&apos;équipe EleveAI !
                 </p>
               </div>
             ) : null}
