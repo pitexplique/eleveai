@@ -70,11 +70,11 @@ function getClasseNavLabel(classe: Classe) {
     cm1: "CM1",
     cm2: "CM2",
     seconde: "2de",
-    "terminale-spe": "Tle spé",
+    "terminale-spe": "Tle spï¿½",
     adulte: "Adulte",
-    "eco-decouverte": "Découverte",
-    "eco-college": "Collège",
-    "eco-lycee": "Lycée",
+    "eco-decouverte": "Dï¿½couverte",
+    "eco-college": "Collï¿½ge",
+    "eco-lycee": "Lycï¿½e",
   };
 
   return labels[classe] ?? classe;
@@ -214,7 +214,7 @@ export default function CoachIA() {
           </div>
           {classes.map((item) => (
             <button
-              key={item}
+              key={getClasseNavLabel(item)}
               type="button"
               onClick={() => setClasse(item)}
               className={[
@@ -234,7 +234,7 @@ export default function CoachIA() {
             <div className="mb-4 flex flex-wrap gap-2 md:hidden">
               {classes.map((item) => (
                 <button
-                  key={item}
+                  key={getClasseNavLabel(item)}
                   type="button"
                   onClick={() => setClasse(item)}
                   className={[
