@@ -62,6 +62,32 @@ function getMatiereTitle(matiere: string, classe: Classe) {
   return `${matiereLabel[matiere] ?? matiere} ${classeLabel[classe] ?? classe}`;
 }
 
+function getClasseNavLabel(classe: Classe) {
+  const labels: Partial<Record<Classe, string>> = {
+    cp: "CP",
+    ce1: "CE1",
+    ce2: "CE2",
+    cm1: "CM1",
+    cm2: "CM2",
+    seconde: "2de",
+    "terminale-spe": "Tle spé",
+    adulte: "Adulte",
+    "eco-decouverte": "Découverte",
+    "eco-college": "Collège",
+    "eco-lycee": "Lycée",
+  };
+
+  return labels[classe] ?? classe;
+}
+
+function getClasseButtonSize(classe: Classe) {
+  if (["seconde", "terminale-spe", "adulte", "eco-decouverte", "eco-college", "eco-lycee"].includes(classe)) {
+    return "h-14 min-w-16 px-2 rounded-full text-[0.72rem] leading-tight";
+  }
+
+  return "h-14 w-14 rounded-full text-lg";
+}
+
 function getMatiereColor(matiere: string) {
   switch (matiere) {
     case "maths":    return "text-orange-500";
@@ -182,7 +208,7 @@ export default function CoachIA() {
     <main className="min-h-screen bg-[#f5f8ef] text-slate-800">
       <div className="flex min-h-screen">
         {/* Sidebar classes */}
-        <aside className="sticky top-0 hidden h-screen w-24 shrink-0 border-r border-slate-200 bg-white md:flex md:flex-col md:items-center md:gap-3 md:py-6">
+        <aside className="sticky top-0 hidden h-screen w-28 shrink-0 border-r border-slate-200 bg-white md:flex md:flex-col md:items-center md:gap-3 md:py-6">
           <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-cyan-500 text-lg font-bold text-white">
             IA
           </div>
@@ -192,11 +218,11 @@ export default function CoachIA() {
               type="button"
               onClick={() => setClasse(item)}
               className={[
-                "flex h-14 w-14 items-center justify-center rounded-full border text-lg font-bold transition",
+                "flex items-center justify-center border text-center font-bold transition",`r`n                getClasseButtonSize(item),
                 getClasseBadgeColor(item, classe === item),
               ].join(" ")}
             >
-              {item}
+              {getClasseNavLabel(item)}
             </button>
           ))}
         </aside>
@@ -215,7 +241,7 @@ export default function CoachIA() {
                     getClasseBadgeColor(item, classe === item),
                   ].join(" ")}
                 >
-                  {item}
+                  {getClasseNavLabel(item)}
                 </button>
               ))}
             </div>

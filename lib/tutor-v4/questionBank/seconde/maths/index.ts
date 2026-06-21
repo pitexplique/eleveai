@@ -11,6 +11,7 @@ import { expressionsLitteralesBank } from "./expressions-litterales.bank";
 import { equationsInequationsBank } from "./equations-inequations.bank";
 import { repereCoordonneesBank } from "./repere-coordonnees.bank";
 import { droitesPlanBank } from "./droites-plan.bank";
+import { vecteursPlanBank } from "./vecteurs-plan.bank";
 
 // --- Anciennes banques groupées (provisoires, en cours de remplacement) ---
 import { algorithmiqueSecondeBank } from "./algorithmique.bank";
@@ -31,6 +32,7 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   // === Domaine GEOMETRIE — en cours de refonte (1 banque par notion) ===
   ...repereCoordonneesBank,
   ...droitesPlanBank,
+  ...vecteursPlanBank,
   // === Domaines encore servis par les anciennes banques groupées (provisoires) ===
   ...geometrieSecondeBank,
   ...fonctionsSecondeBank,
