@@ -20,10 +20,10 @@ import { fonctionsReferenceBank } from "./fonctions-reference.bank";
 import { informationChiffreeBank } from "./information-chiffree.bank";
 import { statistiquesDescriptivesBank } from "./statistiques-descriptives.bank";
 import { probabilitesBank } from "./probabilites.bank";
+import { echantillonnageBank } from "./echantillonnage.bank";
 
 // --- Anciennes banques groupées (provisoires, en cours de remplacement) ---
 import { algorithmiqueSecondeBank } from "./algorithmique.bank";
-import { statistiquesProbabilitesSecondeBank } from "./statistiques-probabilites.bank";
 
 export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   // === Domaine NOMBRES ET CALCULS — entièrement refait (1 banque par notion) ===
@@ -49,8 +49,8 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...informationChiffreeBank,
   ...statistiquesDescriptivesBank,
   ...probabilitesBank,
-  // === Domaines encore servis par les anciennes banques groupées (provisoires) ===
-  ...statistiquesProbabilitesSecondeBank,
+  ...echantillonnageBank,
+  // === Domaine encore servi par l'ancienne banque groupée (provisoire) ===
   ...algorithmiqueSecondeBank,
 ];
 

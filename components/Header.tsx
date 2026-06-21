@@ -320,6 +320,13 @@ export default function Header() {
           />
 
           <NavDropdown
+            label="IA"
+            items={NAV_IA}
+            active={anyActive(pathname, NAV_IA)}
+            accent="text-cyan-300"
+          />
+
+          <NavDropdown
             label="Économie"
             items={NAV_ECONOMIE}
             active={anyActive(pathname, NAV_ECONOMIE)}
@@ -411,6 +418,7 @@ export default function Header() {
             <MobileSection title="Français" accent="text-sky-300"    items={NAV_FRANCAIS} pathname={pathname} />
             <MobileSection title="Anglais"   accent="text-blue-300"   items={NAV_ANGLAIS}   pathname={pathname} />
             <MobileSection title="Espagnol" accent="text-red-300"    items={NAV_ESPAGNOL}  pathname={pathname} />
+            <MobileSection title="IA"       accent="text-cyan-300"   items={NAV_IA}       pathname={pathname} />
             <MobileSection title="Économie" accent="text-amber-300"  items={NAV_ECONOMIE}  pathname={pathname} />
 
           </div>
