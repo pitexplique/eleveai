@@ -13,10 +13,14 @@ import { repereCoordonneesBank } from "./repere-coordonnees.bank";
 import { droitesPlanBank } from "./droites-plan.bank";
 import { vecteursPlanBank } from "./vecteurs-plan.bank";
 import { geometrieProblemesPlanBank } from "./geometrie-problemes-plan.bank";
+import { fonctionVocabulaireBank } from "./fonction-vocabulaire.bank";
+import { fonctionVariationsBank } from "./fonction-variations.bank";
+import { fonctionsAffinesBank } from "./fonctions-affines.bank";
+import { fonctionsReferenceBank } from "./fonctions-reference.bank";
+import { informationChiffreeBank } from "./information-chiffree.bank";
 
 // --- Anciennes banques groupées (provisoires, en cours de remplacement) ---
 import { algorithmiqueSecondeBank } from "./algorithmique.bank";
-import { fonctionsSecondeBank } from "./fonctions.bank";
 import { statistiquesProbabilitesSecondeBank } from "./statistiques-probabilites.bank";
 
 export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
@@ -34,8 +38,14 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...droitesPlanBank,
   ...vecteursPlanBank,
   ...geometrieProblemesPlanBank,
+  // === Domaine FONCTIONS — en cours de refonte (1 banque par notion) ===
+  ...fonctionVocabulaireBank,
+  ...fonctionVariationsBank,
+  ...fonctionsAffinesBank,
+  ...fonctionsReferenceBank,
+  // === Domaine STATS & PROBAS — en cours de refonte (1 banque par notion) ===
+  ...informationChiffreeBank,
   // === Domaines encore servis par les anciennes banques groupées (provisoires) ===
-  ...fonctionsSecondeBank,
   ...statistiquesProbabilitesSecondeBank,
   ...algorithmiqueSecondeBank,
 ];
