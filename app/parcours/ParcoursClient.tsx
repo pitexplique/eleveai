@@ -41,6 +41,7 @@ const classes: ParcoursClasse[] = [
   "5e",
   "4e",
   "3e",
+  "seconde",
   "terminale-spe",
   "adulte",
 ];
@@ -55,6 +56,7 @@ const classeLabels: Record<ParcoursClasse, string> = {
   "5e": "5e",
   "4e": "4e",
   "3e": "3e",
+  seconde: "Seconde",
   "terminale-spe": "Terminale spé",
   adulte: "Calculs du quotidien",
 };
@@ -832,7 +834,7 @@ export default function ParcoursClient() {
                           Tu ne comprends pas la notion ?
                         </p>
                         <p className="mt-1 text-sm font-bold text-slate-700">
-                          Regarde une video d'explication avant de repondre.
+                          Regarde une video d&apos;explication avant de repondre.
                         </p>
                       </div>
 
@@ -1110,7 +1112,7 @@ function CorrectionChatBox({
         {messages.length === 0 ? (
           canAsk ? (
             <div className="rounded-2xl border border-sky-100 bg-sky-50 p-3 text-sm font-semibold text-sky-900">
-              Pose ta question sur l'explication ou sur la bonne réponse. Le coach
+              Pose ta question sur l&apos;explication ou sur la bonne réponse. Le coach
               utilise le contexte de cette correction.
             </div>
           ) : (

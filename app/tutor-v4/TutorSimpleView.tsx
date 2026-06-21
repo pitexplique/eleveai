@@ -228,7 +228,7 @@ export default function TutorSimpleView({
                 onClick={onShowLesson}
                 className="rounded-full bg-sky-100 px-4 py-2 text-sm font-black text-sky-700 hover:bg-sky-200"
               >
-                J'apprends !
+                J&apos;apprends !
               </button>
 
               {learningVideoHref ? (
@@ -236,8 +236,8 @@ export default function TutorSimpleView({
                   href={learningVideoHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  title="Regarder une video d'explication"
-                  aria-label="Regarder une video d'explication"
+                  title="Regarder une video d&apos;explication"
+                  aria-label="Regarder une video d&apos;explication"
                   className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sky-600 text-white shadow-sm hover:bg-sky-500"
                 >
                   <Video aria-hidden="true" size={18} strokeWidth={2.5} />
