@@ -21,6 +21,7 @@ import { informationChiffreeBank } from "./information-chiffree.bank";
 import { statistiquesDescriptivesBank } from "./statistiques-descriptives.bank";
 import { probabilitesBank } from "./probabilites.bank";
 import { echantillonnageBank } from "./echantillonnage.bank";
+import { algorithmiquePythonBank } from "./algorithmique-python.bank";
 
 // --- Anciennes banques groupées (provisoires, en cours de remplacement) ---
 import { algorithmiqueSecondeBank } from "./algorithmique.bank";
@@ -50,7 +51,9 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...statistiquesDescriptivesBank,
   ...probabilitesBank,
   ...echantillonnageBank,
-  // === Domaine encore servi par l'ancienne banque groupée (provisoire) ===
+  // === Domaine ALGORITHMIQUE — refait (1 banque par notion) ===
+  ...algorithmiquePythonBank,
+  // === Logique : encore servie par l'ancienne banque groupée (provisoire) ===
   ...algorithmiqueSecondeBank,
 ];
 
