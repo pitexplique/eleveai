@@ -13,6 +13,7 @@ import { buildKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/maths/5e/buildKn
 import { buildKnowledge4eMaths } from "@/lib/tutor-v4/knowledge/maths/4e/buildKnowledge4e";
 import { buildKnowledge3eMaths } from "@/lib/tutor-v4/knowledge/maths/3e/buildKnowledge3e";
 import { buildKnowledgeSecondeMaths } from "@/lib/tutor-v4/knowledge/maths/seconde/buildKnowledgeSeconde";
+import { buildKnowledgePremiereSpeMaths } from "@/lib/tutor-v4/knowledge/maths/premiere-spe/buildKnowledgePremiereSpe";
 import { buildKnowledgeTerminaleSpeMaths} from "@/lib/tutor-v4/knowledge/maths/terminale-spe/buildKnowledgeTerminaleSpe";
 import { buildKnowledgeAdulteMaths } from "@/lib/tutor-v4/knowledge/maths/adulte/buildKnowledgeAdulte";
 
@@ -56,6 +57,9 @@ export function getClasseNotions(
   }
   if (classe === "seconde") {
     return buildKnowledgeSecondeMaths().notions;
+  }
+  if (classe === "premiere-spe") {
+    return buildKnowledgePremiereSpeMaths().notions;
   }
     if (classe === "terminale-spe") {
     return buildKnowledgeTerminaleSpeMaths().notions;

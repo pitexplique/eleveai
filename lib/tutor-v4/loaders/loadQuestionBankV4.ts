@@ -8,6 +8,7 @@ import { maths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths";
 import { maths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths";
 import { maths3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/maths";
 import { mathsSecondeQuestionBank } from "@/lib/tutor-v4/questionBank/seconde/maths";
+import { mathsPremiereSpeQuestionBank } from "@/lib/tutor-v4/questionBank/premiere-spe/maths";
 import { mathsTerminaleSpeQuestionBank } from "@/lib/tutor-v4/questionBank/terminale-spe/maths";
 import { mathsAdulteQuestionBank } from "@/lib/tutor-v4/questionBank/adulte/maths";
 import { francaisCpQuestionBank } from "@/lib/tutor-v4/questionBank/cp/francais";
@@ -78,6 +79,10 @@ export async function loadQuestionBankV4(
 
   if (classe === "seconde" && matiere === "maths") {
     return mathsSecondeQuestionBank;
+  }
+
+  if (classe === "premiere-spe" && matiere === "maths") {
+    return mathsPremiereSpeQuestionBank;
   }
 
   if (classe === "terminale-spe" && matiere === "maths") {
