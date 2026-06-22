@@ -16,6 +16,7 @@ export type ParcoursClasse =
   | "4e"
   | "3e"
   | "seconde"
+  | "premiere-spe"
   | "terminale-spe"
   | "adulte";
 
