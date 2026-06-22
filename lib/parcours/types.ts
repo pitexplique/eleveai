@@ -22,6 +22,8 @@ export type ParcoursClasse =
 
 export type ParcoursNiveauEnglish = "a1" | "a2" | "b1" | "b2";
 
+export type ParcoursNiveauIa = "a1" | "a2" | "b1" | "b2" | "c1";
+
 export type ParcoursStatus = "maitrise" | "a_revoir" | "fragile";
 
 export type ParcoursNotion = {

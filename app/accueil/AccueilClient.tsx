@@ -144,6 +144,7 @@ const FEATURES = [
   { icon: "📖", label: "Parcours Français", desc: "Lecture, grammaire, expression",     href: "/parcours-francais"      },
   { icon: "🇬🇧", label: "Parcours English",  desc: "Bilan de niveau CECRL avec audio",   href: "/parcours-english-maths" },
   { icon: "🇪🇸", label: "Parcours Espagnol", desc: "Bilan de niveau A1 → B2 avec audio", href: "/parcours-espagnol"      },
+  { icon: "🤖", label: "Parcours IA",       desc: "Culture et bons réflexes IA, A1 → C1", href: "/parcours-ia"          },
 ];
 
 // ─── Main component ───────────────────────────────────────────────────────────
@@ -536,6 +537,7 @@ export default function AccueilPage({
               { icon: "🇪🇸", label: "Coach Espagnol",     desc: "A1 → B2, vocabulaire & audio",          href: "/coach-ia/espagnol",           color: "from-red-600 to-rose-800"     },
               { icon: "🇬🇧", label: "Coach English",       desc: "A1 → B2, vocabulaire maths en anglais",  href: "/coach-ia/english-maths",       color: "from-sky-600 to-blue-800"     },
               { icon: "🎧", label: "Parcours English",     desc: "Bilan de niveau CECRL avec audio",        href: "/parcours-english-maths",       color: "from-orange-600 to-amber-700" },
+              { icon: "🤖", label: "Parcours IA",          desc: "Culture & bons réflexes IA, A1 → C1",     href: "/parcours-ia",                  color: "from-violet-600 to-purple-800" },
               { icon: "💰", label: "Coach Économie",       desc: "Entreprise, marché, élections…",          href: "/coach-ia/economie",            color: "from-amber-600 to-yellow-700" },
               { icon: "🏃", label: "Défis du jour",        desc: "Grand Raid · Maths 974",                  href: "/defis-du-jour",                color: "from-emerald-600 to-teal-700" },
               { icon: "🌿", label: "Environnement B1",     desc: "Biodiversité, climat, écosystèmes",       href: "/coach-ia/english-maths?niveau=b1", color: "from-lime-600 to-green-700" },
