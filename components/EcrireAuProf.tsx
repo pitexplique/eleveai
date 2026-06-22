@@ -121,7 +121,7 @@ export default function EcrireAuProf() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        aria-label="Écris à l'équipe EleveAI"
+        aria-label="Écris-moi"
         className="fixed bottom-5 left-5 z-50 flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-pink-500 px-5 py-3 text-sm font-black text-white shadow-2xl ring-2 ring-white/50 transition hover:scale-105 print:hidden"
       >
         ✉️ <span className="hidden sm:inline">Écris-moi</span>
@@ -133,7 +133,7 @@ export default function EcrireAuProf() {
     <aside className="fixed bottom-5 left-5 z-50 flex w-[300px] flex-col overflow-hidden rounded-3xl border border-amber-200 bg-white text-slate-800 shadow-2xl sm:w-[340px] print:hidden">
       <div className="flex items-center justify-between bg-gradient-to-br from-amber-500 via-orange-500 to-pink-500 px-5 py-4">
         <div>
-          <p className="font-black text-white">✉️ Écris à l&apos;équipe EleveAI</p>
+          <p className="font-black text-white">✉️ Écris-moi</p>
           <p className="text-[11px] font-bold text-white/80">
             Même pendant les vacances
           </p>
@@ -155,7 +155,7 @@ export default function EcrireAuProf() {
             Message envoyé, {prenomAffiche} !
           </p>
           <p className="text-sm font-semibold leading-relaxed text-slate-600">
-            L&apos;équipe EleveAI l&apos;a bien reçu. On te répondra dès que possible.
+            Je l&apos;ai bien reçu, on se reparle vite.
           </p>
           <button
             type="button"
@@ -168,9 +168,8 @@ export default function EcrireAuProf() {
       ) : (
         <form onSubmit={onSend} className="space-y-3 p-4">
           <p className="text-sm font-semibold leading-relaxed text-slate-600">
-            Tu peux m&apos;écrire un message (une question, un blocage, un
-            bonjour…). Je sais que c&apos;est toi : <strong>{prenomAffiche}</strong>
-            {eleve?.classe ? ` · ${eleve.classe}` : ""}.
+            Bonjour <strong>{prenomAffiche}</strong> 👋 Tu peux m&apos;écrire un
+            message (une question, un blocage, un bonjour…).
           </p>
           <textarea
             ref={champRef}
@@ -202,7 +201,7 @@ export default function EcrireAuProf() {
             disabled={message.trim().length < 10 || tropLong || envoi}
             className="w-full rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 py-2.5 text-sm font-black text-white transition hover:from-amber-400 hover:to-orange-400 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {envoi ? "Envoi…" : "Envoyer à l'équipe EleveAI"}
+            {envoi ? "Envoi…" : "Envoyer"}
           </button>
         </form>
       )}
