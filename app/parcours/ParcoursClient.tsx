@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { CanvasRenderer } from "@/lib/canvas";
+import { MarkdownMath } from "@/components/MarkdownMath";
 import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
 import { buildLearningVideoHref } from "@/lib/videoSearch";
@@ -823,9 +824,9 @@ export default function ParcoursClient() {
                     </span>
                   </div>
 
-                  <p className={`whitespace-pre-line font-semibold leading-relaxed ${classText.question(classBoard)}`}>
+                  <MarkdownMath className={`whitespace-pre-line font-semibold leading-relaxed ${classText.question(classBoard)}`}>
                     {q.question.text}
-                  </p>
+                  </MarkdownMath>
 
                   <div className="mt-4 rounded-3xl border border-sky-100 bg-sky-50 p-4 text-slate-900">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -872,7 +873,7 @@ export default function ParcoursClient() {
                             submitted ? "cursor-not-allowed opacity-80" : "",
                           ].join(" ")}
                         >
-                          {choice}
+                          <MarkdownMath inline>{choice}</MarkdownMath>
                         </button>
                       ))}
                     </div>
@@ -912,17 +913,19 @@ export default function ParcoursClient() {
                         Ta réponse : {userAnswer || "Aucune réponse"}
                       </p>
 
-                      <p className="mt-1 text-sm font-bold text-emerald-700">
+                      <div className="mt-1 text-sm font-bold text-emerald-700">
                         Bonne réponse :{" "}
-                        {expected.length > 0
-                          ? expected.join(" ou ")
-                          : "Non disponible"}
-                      </p>
+                        {expected.length > 0 ? (
+                          <MarkdownMath inline>{expected.join(" ou ")}</MarkdownMath>
+                        ) : (
+                          "Non disponible"
+                        )}
+                      </div>
 
                       {q.question.explanation ? (
-                        <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-slate-700">
+                        <MarkdownMath className="mt-3 whitespace-pre-line text-sm leading-relaxed text-slate-700">
                           {q.question.explanation}
-                        </p>
+                        </MarkdownMath>
                       ) : null}
 
                       <button
