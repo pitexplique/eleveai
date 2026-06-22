@@ -1,4 +1,5 @@
 // app/admin/dashboard/page.tsx
+// redeploy: refonte dashboard admin + boucle réponses prof↔élève (2026-06-22)
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
