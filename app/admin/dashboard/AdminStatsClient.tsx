@@ -38,6 +38,8 @@ type Stats = {
       classe: string | null;
       code_etablissement: string | null;
       created_at: string;
+      reponse: string | null;
+      reponse_at: string | null;
       suspectIA?: boolean;
       raisonIA?: string | null;
     }[];
@@ -89,6 +91,21 @@ export default function AdminStatsClient() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Réponses aux avis (retours_eleves), saisies depuis le dashboard.
+  const [avisDrafts, setAvisDrafts] = useState<Record<string, string>>({});
+  const [savingAvis, setSavingAvis] = useState<string | number | null>(null);
+
+  async function saveAvisReply(id: string | number, reponse: string) {
+    setSavingAvis(id);
+    await fetch("/api/admin/retours", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, reponse }),
+    });
+    await load(scope);
+    setSavingAvis(null);
+  }
 
   // Avis repliés par défaut : on n'affiche que le titre, le texte se déplie au clic.
   const toggleAvis = (id: string | number) =>
@@ -323,11 +340,51 @@ export default function AdminStatsClient() {
                           <span>{dateAvis(a.created_at)}</span>
                         </span>
                       </button>
-                      {/* Texte déplié au clic */}
-                      {ouvert && a.message && (
-                        <p className="whitespace-pre-wrap px-3 pb-3 text-sm text-slate-200">
-                          {a.message}
-                        </p>
+                      {/* Texte + zone de réponse, dépliés au clic */}
+                      {ouvert && (
+                        <div className="px-3 pb-3">
+                          {a.message && (
+                            <p className="whitespace-pre-wrap text-sm text-slate-200">
+                              {a.message}
+                            </p>
+                          )}
+
+                          <div className="mt-2 rounded-lg border border-slate-800 bg-slate-950/40 p-2.5">
+                            <div className="flex items-center justify-between">
+                              <span className="text-[11px] font-bold uppercase tracking-wide text-slate-500">
+                                ✍️ Ma réponse
+                              </span>
+                              {a.reponse_at && (
+                                <span className="text-[10px] font-semibold text-emerald-400">
+                                  envoyée le {dateAvis(a.reponse_at)}
+                                </span>
+                              )}
+                            </div>
+                            <textarea
+                              value={avisDrafts[String(a.id)] ?? a.reponse ?? ""}
+                              onChange={(e) =>
+                                setAvisDrafts((d) => ({
+                                  ...d,
+                                  [String(a.id)]: e.target.value,
+                                }))
+                              }
+                              placeholder="Écris ta réponse à l'élève…"
+                              rows={2}
+                              className="mt-1.5 w-full resize-y rounded-md border border-slate-700 bg-slate-950/60 px-2.5 py-1.5 text-sm text-slate-100 placeholder-slate-500"
+                            />
+                            <div className="mt-1.5 flex justify-end">
+                              <button
+                                onClick={() =>
+                                  saveAvisReply(a.id, avisDrafts[String(a.id)] ?? a.reponse ?? "")
+                                }
+                                disabled={savingAvis === a.id}
+                                className="rounded-md bg-emerald-600 px-3 py-1 text-xs font-bold text-white hover:bg-emerald-500 disabled:opacity-50"
+                              >
+                                {savingAvis === a.id ? "Enregistrement…" : "💬 Enregistrer la réponse"}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
                       )}
                     </div>
                   );

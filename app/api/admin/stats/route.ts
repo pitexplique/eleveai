@@ -158,7 +158,7 @@ export async function GET(req: Request) {
   const retours = await fetchAll(
     supabase,
     "retours_eleves",
-    "id, type, note, message, prenom, classe, code_etablissement, traite, created_at",
+    "id, type, note, message, prenom, classe, code_etablissement, traite, created_at, reponse, reponse_at",
     etabFilter
   );
 
@@ -318,6 +318,8 @@ export async function GET(req: Request) {
         classe: r.classe,
         code_etablissement: r.code_etablissement,
         created_at: r.created_at,
+        reponse: r.reponse ?? null,
+        reponse_at: r.reponse_at ?? null,
         suspectIA: det.suspect,
         raisonIA: det.raison,
       };
