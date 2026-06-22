@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
+import { prenomFromNom } from "@/lib/prenom";
 
 // Aligné sur la limite serveur (app/api/contact/route.ts, source=eleve-message) :
 // 200 mots suffisent pour un message honnête, au-delà c'est un copier-collé d'IA.
@@ -41,6 +42,9 @@ export default function EcrireAuProf() {
   if (!connecte) return null;
 
   const prenomOuCode = eleve?.nom?.trim() || `Élève ${eleve?.code_eleve}`;
+  // Affichage à l'élève : prénom seul (jamais le nom de famille, règle RGPD).
+  // prenomOuCode (nom complet) reste envoyé au prof pour l'identification.
+  const prenomAffiche = prenomFromNom(eleve?.nom) || `Élève ${eleve?.code_eleve}`;
   const nbMots = message.trim() ? message.trim().split(/\s+/).length : 0;
   const tropLong = nbMots > MAX_MOTS;
 
@@ -148,7 +152,7 @@ export default function EcrireAuProf() {
         <div className="space-y-3 p-5 text-center">
           <p className="text-3xl">✅</p>
           <p className="text-sm font-bold text-slate-800">
-            Message envoyé, {prenomOuCode} !
+            Message envoyé, {prenomAffiche} !
           </p>
           <p className="text-sm font-semibold leading-relaxed text-slate-600">
             L&apos;équipe EleveAI l&apos;a bien reçu. On te répondra dès que possible.
@@ -165,7 +169,7 @@ export default function EcrireAuProf() {
         <form onSubmit={onSend} className="space-y-3 p-4">
           <p className="text-sm font-semibold leading-relaxed text-slate-600">
             Tu peux m&apos;écrire un message (une question, un blocage, un
-            bonjour…). Je sais que c&apos;est toi : <strong>{prenomOuCode}</strong>
+            bonjour…). Je sais que c&apos;est toi : <strong>{prenomAffiche}</strong>
             {eleve?.classe ? ` · ${eleve.classe}` : ""}.
           </p>
           <textarea
