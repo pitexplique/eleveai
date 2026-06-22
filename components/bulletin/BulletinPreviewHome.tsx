@@ -15,7 +15,7 @@ const DEMO: Bulletin = {
   computed_at: new Date().toISOString(),
   periodes: {
     "30j": {
-      moyenne: 16.1,
+      moyenne: 13.5,
       progression: 2.9,
       assiduite: { jours: 18, niveau: "Régulier" },
       matieres: [
@@ -28,7 +28,7 @@ const DEMO: Bulletin = {
         "Beau travail en anglais (16/20) ! Belle progression d'ensemble (+2,9 pts), continue comme ça. Encore un peu d'entraînement en français et tu décolles.",
     },
     trim: {
-      moyenne: 13.5,
+      moyenne: 13.0,
       progression: 1.4,
       assiduite: { jours: 47, niveau: "Régulier" },
       matieres: [
@@ -41,7 +41,7 @@ const DEMO: Bulletin = {
         "Trimestre solide et régulier : toutes tes matières sont au-dessus de 12/20, avec l'anglais en tête. Garde ce rythme, ça paie.",
     },
     debut: {
-      moyenne: 12.8,
+      moyenne: 12.6,
       progression: 4,
       assiduite: { jours: 120, niveau: "Assidu" },
       matieres: [
