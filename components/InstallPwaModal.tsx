@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { X, Smartphone, MonitorDown, Share2, MoreVertical } from "lucide-react";
 
 const MODAL_KEY = "eleveai_install_modal_seen_daily_v2";
@@ -32,8 +32,7 @@ function detectDevice(): DeviceType {
   const isAndroid = /android/.test(ua);
 
   const isChrome =
-    /chrome|crios/.test(ua) &&
-    !/edg|opr|opera|firefox|fxios/.test(ua);
+    /chrome|crios/.test(ua) && !/edg|opr|opera|firefox|fxios/.test(ua);
 
   if (isIOS) return "ios";
   if (isAndroid) return "android";
@@ -47,13 +46,39 @@ function todayKey() {
   return `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
 }
 
-export default function InstallPwaModal() {
-  const [open, setOpen] = useState(false);
+type InstallPwaModalProps = {
+  autoOpen?: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+};
+
+export default function InstallPwaModal({
+  autoOpen = true,
+  open: controlledOpen,
+  onOpenChange,
+}: InstallPwaModalProps) {
+  const [internalOpen, setInternalOpen] = useState(false);
   const [device, setDevice] = useState<DeviceType>("other");
+  const open = controlledOpen ?? internalOpen;
+
+  const setOpen = useCallback(
+    (nextOpen: boolean) => {
+      onOpenChange?.(nextOpen);
+
+      if (controlledOpen === undefined) {
+        setInternalOpen(nextOpen);
+      }
+    },
+    [controlledOpen, onOpenChange],
+  );
 
   useEffect(() => {
     const detectedDevice = detectDevice();
     setDevice(detectedDevice);
+
+    if (!autoOpen) {
+      return;
+    }
 
     // Si EleveAI est déjà ouvert comme une app, on n'affiche rien
     if (isStandalonePwa()) {
@@ -74,7 +99,7 @@ export default function InstallPwaModal() {
     } catch {
       setOpen(true);
     }
-  }, []);
+  }, [autoOpen, setOpen]);
 
   function closeModal() {
     setOpen(false);
@@ -100,8 +125,7 @@ export default function InstallPwaModal() {
           "Choisis “Ajouter à l’écran d’accueil”.",
           "Appuie sur “Ajouter”.",
         ],
-        note:
-          "Si tu es dans Chrome sur iPhone, ouvre d’abord le site dans Safari.",
+        note: "Si tu es dans Chrome sur iPhone, ouvre d’abord le site dans Safari.",
       };
     }
 
@@ -125,8 +149,7 @@ export default function InstallPwaModal() {
       return {
         title: "Installer EleveAI sur Chrome",
         icon: <MonitorDown className="h-6 w-6" />,
-        intro:
-          "Sur ordinateur, Chrome peut proposer une icône d’installation.",
+        intro: "Sur ordinateur, Chrome peut proposer une icône d’installation.",
         steps: [
           "Regarde la barre d’adresse.",
           "Clique sur l’icône d’installation si elle apparaît.",
