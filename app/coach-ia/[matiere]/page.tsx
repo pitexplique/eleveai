@@ -14,7 +14,7 @@ import {
 import FloatingCoach from "@/components/FloatingCoach";
 import BoiteAOutils from "@/components/BoiteAOutils";
 
-const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "terminale-spe", "adulte"];
+const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe", "adulte"];
 const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
 const ECONOMIE_CLASSES: Classe[] = ["eco-decouverte", "eco-college", "eco-lycee"];
 const ESPAGNOL_CLASSES: Classe[] = ["a1", "a2", "b1", "b2"];
@@ -44,6 +44,7 @@ function getMatiereTitle(matiere: string, classe: Classe) {
     "4e": "4e",
     "3e": "3e",
     seconde: "Seconde",
+    "premiere-spe": "Première",
     "terminale-spe": "Term Spe",
     adulte: "Calculs du quotidien",
     a1: "A1",
@@ -74,6 +75,7 @@ function getClasseNavLabel(classe: Classe) {
     cm1: "CM1",
     cm2: "CM2",
     seconde: "2nd",
+    "premiere-spe": "1re spé",
     "terminale-spe": "Term spec",
     adulte: "Adulte",
     "eco-decouverte": "D�couverte",
@@ -85,7 +87,7 @@ function getClasseNavLabel(classe: Classe) {
 }
 
 function getClasseButtonSize(classe: Classe) {
-  if (["seconde", "terminale-spe", "adulte", "eco-decouverte", "eco-college", "eco-lycee"].includes(classe)) {
+  if (["seconde", "premiere-spe", "terminale-spe", "adulte", "eco-decouverte", "eco-college", "eco-lycee"].includes(classe)) {
     return "h-14 min-w-16 px-2 rounded-full text-sm leading-tight";
   }
 
@@ -110,7 +112,7 @@ function getClasseBadgeColor(item: Classe, active: boolean) {
   }
   if (["cp", "ce1", "ce2", "cm1", "cm2", "6e"].includes(item))
     return "border-lime-500 bg-lime-500 text-white";
-  if (["5e", "4e", "3e", "seconde", "terminale-spe"].includes(item))
+  if (["5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe"].includes(item))
     return "border-sky-500 bg-sky-500 text-white";
   if (item === "adulte") return "border-violet-500 bg-violet-500 text-white";
   if (item === "eco-decouverte") return "border-lime-500 bg-lime-500 text-white";

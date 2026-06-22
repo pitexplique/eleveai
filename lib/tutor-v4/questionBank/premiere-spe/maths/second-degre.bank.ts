@@ -1,0 +1,1089 @@
+// lib/tutor-v4/questionBank/premiere-spe/maths/second-degre.bank.ts
+//
+// Chapitre : Second degré (notion "second_degre")
+// microSkills :
+//   sd_discriminant — calculer le discriminant Δ = b² - 4ac
+//   sd_racines      — résoudre une équation du second degré
+//   sd_factorisation — factoriser un trinôme (racine évidente, somme/produit)
+//   sd_signe        — étudier le signe d'un trinôme
+//   sd_canonique    — forme canonique, sommet, axe de symétrie
+//
+// PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM. Canvas : fonctionGraphique (parabole).
+
+import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
+
+function randomInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function exp(definition: string, methode: string, calcul: string, conclusion: string) {
+  return (
+    `Définition : ${definition}\n\n` +
+    `Méthode : ${methode}\n\n` +
+    `Calcul / Observation : ${calcul}\n\n` +
+    `Conclusion : ${conclusion}`
+  );
+}
+
+// Parabole y = a x² + b x + c avec sommet mis en évidence.
+function parabole(a: number, b: number, c: number): CanvasFigure {
+  const xs = -b / (2 * a);
+  const ys = a * xs * xs + b * xs + c;
+  return {
+    kind: "fonctionGraphique",
+    size: { width: 300, height: 300 },
+    xmin: -6,
+    xmax: 6,
+    ymin: -8,
+    ymax: 8,
+    grille: true,
+    courbes: [{ id: "f", type: "quadratique", a, b, c, couleur: "#2563eb" }],
+    misesEnEvidence: [
+      { point: { x: Math.round(xs * 100) / 100, y: Math.round(ys * 100) / 100, label: "S", couleur: "#dc2626" } },
+    ],
+  };
+}
+
+export const secondDegreBank: TutorBankItemV4[] = [
+  /* ===================== SD_DISCRIMINANT ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_sd_disc_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_discriminant",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Quelle est la formule du discriminant d'un trinôme $ax^2 + bx + c$ ?",
+    format: "qcm",
+    choices: ["$\\Delta = b^2 - 4ac$", "$\\Delta = b^2 + 4ac$", "$\\Delta = a^2 - 4bc$", "$\\Delta = 4ac - b^2$"],
+    expected: ["$\\Delta = b^2 - 4ac$"],
+    comparator: "mcq_exact",
+    hint: "Le discriminant fait intervenir $b^2$.",
+    explanation: exp(
+      "Le discriminant d'un trinôme $ax^2 + bx + c$ est noté $\\Delta$.",
+      "Il se calcule par la formule officielle.",
+      "$\\Delta = b^2 - 4ac$.",
+      "$\\Delta = b^2 - 4ac$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "discriminant", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_disc_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_discriminant",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Calcule le discriminant de $x^2 - 5x + 6$.",
+    format: "short",
+    expected: ["1"],
+    comparator: "number_equal",
+    hint: "$a = 1$, $b = -5$, $c = 6$.",
+    explanation: exp(
+      "On identifie $a = 1$, $b = -5$, $c = 6$.",
+      "$\\Delta = b^2 - 4ac = (-5)^2 - 4 \\times 1 \\times 6$.",
+      "$= 25 - 24 = 1$.",
+      "$\\Delta = 1$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "discriminant", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_disc_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_discriminant",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Calcule le discriminant de $x^2 + 2x + 1$.",
+    format: "short",
+    expected: ["0"],
+    comparator: "number_equal",
+    hint: "$a = 1$, $b = 2$, $c = 1$.",
+    explanation: exp(
+      "On identifie $a = 1$, $b = 2$, $c = 1$.",
+      "$\\Delta = 2^2 - 4 \\times 1 \\times 1$.",
+      "$= 4 - 4 = 0$.",
+      "$\\Delta = 0$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "discriminant", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_disc_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_discriminant",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Calcule le discriminant de $2x^2 - 3x - 2$.",
+    format: "short",
+    expected: ["25"],
+    comparator: "number_equal",
+    hint: "$a = 2$, $b = -3$, $c = -2$.",
+    explanation: exp(
+      "On identifie $a = 2$, $b = -3$, $c = -2$.",
+      "$\\Delta = (-3)^2 - 4 \\times 2 \\times (-2)$.",
+      "$= 9 + 16 = 25$.",
+      "$\\Delta = 25$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "discriminant", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_disc_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_discriminant",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Si $\\Delta > 0$, combien l'équation $ax^2 + bx + c = 0$ a-t-elle de solutions réelles ?",
+    format: "qcm",
+    choices: ["Deux solutions distinctes", "Une solution double", "Aucune solution", "Une infinité"],
+    expected: ["Deux solutions distinctes"],
+    comparator: "mcq_exact",
+    hint: "$\\Delta > 0$ : deux racines.",
+    explanation: exp(
+      "Le signe du discriminant donne le nombre de racines réelles.",
+      "Si $\\Delta > 0$, on peut prendre $\\pm\\sqrt{\\Delta}$ : deux valeurs.",
+      "L'équation admet alors deux solutions distinctes.",
+      "Deux solutions distinctes."
+    ),
+    tags: ["premiere", "maths", "second_degre", "discriminant", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_disc_fixed_6",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_discriminant",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Si $\\Delta = 0$, l'équation $ax^2 + bx + c = 0$ a :",
+    format: "qcm",
+    choices: ["une solution double", "deux solutions distinctes", "aucune solution réelle", "trois solutions"],
+    expected: ["une solution double"],
+    comparator: "mcq_exact",
+    hint: "$\\sqrt{0} = 0$.",
+    explanation: exp(
+      "Le signe de $\\Delta$ donne le nombre de racines.",
+      "Si $\\Delta = 0$, alors $\\pm\\sqrt{\\Delta} = 0$ : les deux racines sont confondues.",
+      "Il y a une seule racine, dite double : $x = \\dfrac{-b}{2a}$.",
+      "Une solution double."
+    ),
+    tags: ["premiere", "maths", "second_degre", "discriminant", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_disc_fixed_7",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_discriminant",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Si $\\Delta < 0$, l'équation $ax^2 + bx + c = 0$ a :",
+    format: "qcm",
+    choices: ["aucune solution réelle", "une solution double", "deux solutions distinctes", "une solution"],
+    expected: ["aucune solution réelle"],
+    comparator: "mcq_exact",
+    hint: "On ne peut pas prendre la racine carrée d'un négatif.",
+    explanation: exp(
+      "Le signe de $\\Delta$ donne le nombre de racines réelles.",
+      "Si $\\Delta < 0$, $\\sqrt{\\Delta}$ n'existe pas dans $\\mathbb{R}$.",
+      "L'équation n'a alors aucune solution réelle.",
+      "Aucune solution réelle."
+    ),
+    tags: ["premiere", "maths", "second_degre", "discriminant", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_disc_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_discriminant",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "$\\Delta = b^2 - 4ac$ avec $a = 1$.",
+    tags: ["premiere", "maths", "second_degre", "discriminant", "template"],
+    generate: () => {
+      const b = randomInt(-7, 7);
+      const c = randomInt(-6, 6);
+      const delta = b * b - 4 * c;
+      return {
+        text: `Calcule le discriminant de $x^2 ${b >= 0 ? "+ " + b : "- " + -b}x ${c >= 0 ? "+ " + c : "- " + -c}$.`,
+        format: "short",
+        expected: [String(delta)],
+        comparator: "number_equal",
+        explanation: exp(
+          "On identifie $a = 1$, $b$ et $c$.",
+          `$\\Delta = (${b})^2 - 4 \\times 1 \\times (${c})$.`,
+          `$= ${b * b} - ${4 * c} = ${delta}$.`,
+          `$\\Delta = ${delta}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_disc_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_discriminant",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Attention au coefficient $a \\neq 1$.",
+    tags: ["premiere", "maths", "second_degre", "discriminant", "template"],
+    generate: () => {
+      const a = randomInt(2, 4);
+      const b = randomInt(-6, 6);
+      const c = randomInt(-5, 5);
+      const delta = b * b - 4 * a * c;
+      return {
+        text: `Calcule le discriminant de $${a}x^2 ${b >= 0 ? "+ " + b : "- " + -b}x ${c >= 0 ? "+ " + c : "- " + -c}$.`,
+        format: "short",
+        expected: [String(delta)],
+        comparator: "number_equal",
+        explanation: exp(
+          "On identifie $a$, $b$, $c$.",
+          `$\\Delta = (${b})^2 - 4 \\times ${a} \\times (${c})$.`,
+          `$= ${b * b} - ${4 * a * c} = ${delta}$.`,
+          `$\\Delta = ${delta}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_disc_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_discriminant",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le signe de $\\Delta$ donne le nombre de racines.",
+    tags: ["premiere", "maths", "second_degre", "discriminant", "template"],
+    generate: () => {
+      const cas = randomInt(0, 2);
+      const delta = cas === 0 ? randomInt(1, 30) : cas === 1 ? 0 : -randomInt(1, 30);
+      const correct =
+        cas === 0 ? "deux solutions distinctes" : cas === 1 ? "une solution double" : "aucune solution réelle";
+      return {
+        text: `Un trinôme a pour discriminant $\\Delta = ${delta}$. Combien l'équation associée a-t-elle de solutions réelles ?`,
+        format: "qcm",
+        choices: ["deux solutions distinctes", "une solution double", "aucune solution réelle", "une infinité"],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le nombre de racines réelles dépend du signe de $\\Delta$.",
+          `Ici $\\Delta = ${delta}$.`,
+          `$\\Delta ${delta > 0 ? "> 0" : delta === 0 ? "= 0" : "< 0"}$ donc ${correct}.`,
+          `${correct.charAt(0).toUpperCase()}${correct.slice(1)}.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== SD_RACINES ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_sd_rac_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_racines",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la formule des racines quand $\\Delta > 0$ ?",
+    format: "qcm",
+    choices: [
+      "$x = \\dfrac{-b \\pm \\sqrt{\\Delta}}{2a}$",
+      "$x = \\dfrac{b \\pm \\sqrt{\\Delta}}{2a}$",
+      "$x = \\dfrac{-b \\pm \\sqrt{\\Delta}}{a}$",
+      "$x = -b \\pm \\sqrt{\\Delta}$",
+    ],
+    expected: ["$x = \\dfrac{-b \\pm \\sqrt{\\Delta}}{2a}$"],
+    comparator: "mcq_exact",
+    hint: "Au dénominateur : $2a$.",
+    explanation: exp(
+      "Quand $\\Delta > 0$, les deux racines sont données par une formule générale.",
+      "On utilise $-b$, $\\pm\\sqrt{\\Delta}$ et $2a$.",
+      "$x = \\dfrac{-b \\pm \\sqrt{\\Delta}}{2a}$.",
+      "$x = \\dfrac{-b \\pm \\sqrt{\\Delta}}{2a}$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "racines", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_rac_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_racines",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelles sont les solutions de $x^2 - 5x + 6 = 0$ ?",
+    format: "qcm",
+    choices: ["$2$ et $3$", "$-2$ et $-3$", "$1$ et $6$", "$5$ et $6$"],
+    expected: ["$2$ et $3$"],
+    comparator: "mcq_exact",
+    hint: "Somme $= 5$, produit $= 6$.",
+    explanation: exp(
+      "On cherche deux nombres de somme $5$ et de produit $6$.",
+      "$2 + 3 = 5$ et $2 \\times 3 = 6$.",
+      "Les racines sont donc $2$ et $3$.",
+      "$x = 2$ ou $x = 3$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "racines", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_rac_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_racines",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Résous $x^2 - 9 = 0$. Donne la solution positive.",
+    format: "short",
+    expected: ["3"],
+    comparator: "number_equal",
+    hint: "$x^2 = 9$.",
+    explanation: exp(
+      "On isole $x^2$.",
+      "$x^2 = 9$ donc $x = 3$ ou $x = -3$.",
+      "La solution positive est $3$.",
+      "$x = 3$ (ou $x = -3$)."
+    ),
+    tags: ["premiere", "maths", "second_degre", "racines", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_rac_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_racines",
+    difficulty: 3,
+    theme: "neutral",
+    text: "L'équation $x^2 - 6x + 9 = 0$ a une racine double. Laquelle ?",
+    format: "short",
+    expected: ["3"],
+    comparator: "number_equal",
+    hint: "$\\Delta = 0$, racine $= \\dfrac{-b}{2a}$.",
+    explanation: exp(
+      "Ici $\\Delta = 36 - 36 = 0$ : racine double.",
+      "La racine double est $x = \\dfrac{-b}{2a} = \\dfrac{6}{2}$.",
+      "$= 3$.",
+      "$x = 3$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "racines", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_rac_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_racines",
+    difficulty: 3,
+    theme: "neutral",
+    text: "L'équation $x^2 + x + 1 = 0$ a-t-elle des solutions réelles ?",
+    format: "qcm",
+    choices: ["Non, car $\\Delta < 0$", "Oui, deux solutions", "Oui, une solution double", "Oui, $x = 1$"],
+    expected: ["Non, car $\\Delta < 0$"],
+    comparator: "mcq_exact",
+    hint: "Calcule $\\Delta = 1 - 4$.",
+    explanation: exp(
+      "On calcule le discriminant.",
+      "$\\Delta = 1^2 - 4 \\times 1 \\times 1 = 1 - 4 = -3$.",
+      "$\\Delta < 0$ : pas de racine réelle.",
+      "Non, car $\\Delta < 0$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "racines", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_rac_fixed_6",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_racines",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelles sont les solutions de $x^2 - 7x + 10 = 0$ ?",
+    format: "qcm",
+    choices: ["$2$ et $5$", "$1$ et $10$", "$-2$ et $-5$", "$3$ et $4$"],
+    expected: ["$2$ et $5$"],
+    comparator: "mcq_exact",
+    hint: "Somme $= 7$, produit $= 10$.",
+    explanation: exp(
+      "On cherche deux nombres de somme $7$ et de produit $10$.",
+      "$2 + 5 = 7$ et $2 \\times 5 = 10$.",
+      "Les racines sont $2$ et $5$.",
+      "$x = 2$ ou $x = 5$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "racines", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_rac_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_racines",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche deux nombres de somme $-b$ et de produit $c$.",
+    tags: ["premiere", "maths", "second_degre", "racines", "template"],
+    generate: () => {
+      const p = randomInt(1, 6);
+      const q = randomInt(1, 6);
+      const b = -(p + q);
+      const c = p * q;
+      const correct = `$${Math.min(p, q)}$ et $${Math.max(p, q)}$`;
+      const choices = [
+        correct,
+        `$${-p}$ et $${-q}$`,
+        `$1$ et $${c}$`,
+        `$${p + q}$ et $${c}$`,
+      ];
+      return {
+        text: `Quelles sont les solutions de $x^2 ${b >= 0 ? "+ " + b : "- " + -b}x + ${c} = 0$ ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On cherche deux nombres dont la somme est $-b$ et le produit $c$.",
+          `Somme $= ${p + q}$, produit $= ${c}$.`,
+          `$${p} + ${q} = ${p + q}$ et $${p} \\times ${q} = ${c}$.`,
+          `Les racines sont $${Math.min(p, q)}$ et $${Math.max(p, q)}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_rac_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_racines",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$x^2 = k$ donne $x = \\pm\\sqrt{k}$.",
+    tags: ["premiere", "maths", "second_degre", "racines", "template"],
+    generate: () => {
+      const r = randomInt(2, 9);
+      const k = r * r;
+      return {
+        text: `Résous $x^2 - ${k} = 0$. Donne la solution positive.`,
+        format: "short",
+        expected: [String(r)],
+        comparator: "number_equal",
+        explanation: exp(
+          "On isole $x^2$.",
+          `$x^2 = ${k}$ donc $x = ${r}$ ou $x = -${r}$.`,
+          `La solution positive est $${r}$.`,
+          `$x = ${r}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_rac_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_racines",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Racine double $= \\dfrac{-b}{2a}$ quand $\\Delta = 0$.",
+    tags: ["premiere", "maths", "second_degre", "racines", "template"],
+    generate: () => {
+      const r = randomInt(2, 7);
+      const b = -2 * r;
+      const c = r * r;
+      return {
+        text: `L'équation $x^2 ${b >= 0 ? "+ " + b : "- " + -b}x + ${c} = 0$ a une racine double. Laquelle ?`,
+        format: "short",
+        expected: [String(r)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Ce trinôme est un carré parfait, donc $\\Delta = 0$.",
+          `La racine double est $\\dfrac{-b}{2a} = \\dfrac{${-b}}{2}$.`,
+          `$= ${r}$.`,
+          `$x = ${r}$.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== SD_FACTORISATION ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_sd_fact_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_factorisation",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Si un trinôme $ax^2 + bx + c$ a pour racines $x_1$ et $x_2$, sa forme factorisée est :",
+    format: "qcm",
+    choices: [
+      "$a(x - x_1)(x - x_2)$",
+      "$(x - x_1)(x - x_2)$",
+      "$a(x + x_1)(x + x_2)$",
+      "$a(x - x_1) + (x - x_2)$",
+    ],
+    expected: ["$a(x - x_1)(x - x_2)$"],
+    comparator: "mcq_exact",
+    hint: "Ne pas oublier le coefficient $a$.",
+    explanation: exp(
+      "Quand un trinôme a deux racines, il se factorise avec ces racines.",
+      "Il faut conserver le coefficient dominant $a$.",
+      "$ax^2 + bx + c = a(x - x_1)(x - x_2)$.",
+      "$a(x - x_1)(x - x_2)$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "factorisation", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_fact_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_factorisation",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Factorise $x^2 - 5x + 6$ (racines $2$ et $3$).",
+    format: "qcm",
+    choices: ["$(x - 2)(x - 3)$", "$(x + 2)(x + 3)$", "$(x - 2)(x + 3)$", "$(x - 5)(x - 6)$"],
+    expected: ["$(x - 2)(x - 3)$"],
+    comparator: "mcq_exact",
+    hint: "$a = 1$, racines $2$ et $3$.",
+    explanation: exp(
+      "On utilise $a(x - x_1)(x - x_2)$ avec $a = 1$.",
+      "Racines $x_1 = 2$, $x_2 = 3$.",
+      "$x^2 - 5x + 6 = (x - 2)(x - 3)$.",
+      "$(x - 2)(x - 3)$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "factorisation", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_fact_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_factorisation",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Le trinôme $x^2 - 4x$ a une racine évidente. Quelle est sa forme factorisée ?",
+    format: "qcm",
+    choices: ["$x(x - 4)$", "$(x - 2)^2$", "$x(x + 4)$", "$(x - 4)^2$"],
+    expected: ["$x(x - 4)$"],
+    comparator: "mcq_exact",
+    hint: "Facteur commun $x$.",
+    explanation: exp(
+      "Quand le coefficient de $x^0$ est nul, $0$ est racine.",
+      "On met $x$ en facteur.",
+      "$x^2 - 4x = x(x - 4)$.",
+      "$x(x - 4)$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "factorisation", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_fact_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_factorisation",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Pour le trinôme $x^2 - 9$, quelle factorisation est correcte ?",
+    format: "qcm",
+    choices: ["$(x - 3)(x + 3)$", "$(x - 3)^2$", "$(x - 9)(x + 1)$", "$x(x - 9)$"],
+    expected: ["$(x - 3)(x + 3)$"],
+    comparator: "mcq_exact",
+    hint: "Différence de carrés.",
+    explanation: exp(
+      "On reconnaît une différence de carrés $a^2 - b^2 = (a - b)(a + b)$.",
+      "$x^2 - 9 = x^2 - 3^2$.",
+      "$= (x - 3)(x + 3)$.",
+      "$(x - 3)(x + 3)$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "factorisation", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_fact_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_factorisation",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Deux nombres ont pour somme $7$ et pour produit $12$. Quels sont-ils ?",
+    format: "qcm",
+    choices: ["$3$ et $4$", "$2$ et $6$", "$1$ et $12$", "$5$ et $2$"],
+    expected: ["$3$ et $4$"],
+    comparator: "mcq_exact",
+    hint: "Ce sont les racines de $x^2 - 7x + 12$.",
+    explanation: exp(
+      "Deux nombres de somme $s$ et produit $p$ sont racines de $x^2 - sx + p$.",
+      "Ici $x^2 - 7x + 12$.",
+      "$3 + 4 = 7$ et $3 \\times 4 = 12$.",
+      "Ce sont $3$ et $4$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "factorisation", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_fact_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_factorisation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Forme factorisée $(x - x_1)(x - x_2)$.",
+    tags: ["premiere", "maths", "second_degre", "factorisation", "template"],
+    generate: () => {
+      const p = randomInt(1, 6);
+      const q = randomInt(1, 6);
+      const b = -(p + q);
+      const c = p * q;
+      const correct = `$(x - ${p})(x - ${q})$`;
+      const choices = [
+        correct,
+        `$(x + ${p})(x + ${q})$`,
+        `$(x - ${p})(x + ${q})$`,
+        `$(x - ${p + q})(x - ${c})$`,
+      ];
+      return {
+        text: `Factorise $x^2 ${b >= 0 ? "+ " + b : "- " + -b}x + ${c}$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On cherche les racines (somme $-b$, produit $c$), puis on factorise.",
+          `Racines $${p}$ et $${q}$.`,
+          `$x^2 ${b >= 0 ? "+ " + b : "- " + -b}x + ${c} = (x - ${p})(x - ${q})$.`,
+          `$(x - ${p})(x - ${q})$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_fact_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_factorisation",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Facteur commun $x$.",
+    tags: ["premiere", "maths", "second_degre", "factorisation", "template"],
+    generate: () => {
+      const k = randomInt(2, 9);
+      const correct = `$x(x - ${k})$`;
+      const choices = [correct, `$x(x + ${k})$`, `$(x - ${k})^2$`, `$(x - ${k})(x + ${k})$`];
+      return {
+        text: `Factorise $x^2 - ${k}x$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le coefficient constant est nul : $0$ est racine évidente.",
+          "On met $x$ en facteur.",
+          `$x^2 - ${k}x = x(x - ${k})$.`,
+          `$x(x - ${k})$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_fact_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_factorisation",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Somme $s$, produit $p$ → racines de $x^2 - sx + p$.",
+    tags: ["premiere", "maths", "second_degre", "factorisation", "template"],
+    generate: () => {
+      const p = randomInt(2, 6);
+      const q = randomInt(2, 6);
+      const s = p + q;
+      const pr = p * q;
+      const correct = `$${Math.min(p, q)}$ et $${Math.max(p, q)}$`;
+      const choices = [correct, `$1$ et $${pr}$`, `$${s}$ et $${pr}$`, `$${-p}$ et $${-q}$`];
+      return {
+        text: `Deux nombres ont pour somme $${s}$ et pour produit $${pr}$. Quels sont-ils ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Deux nombres de somme $s$ et produit $p$ sont racines de $x^2 - sx + p$.",
+          `Ici $x^2 - ${s}x + ${pr}$.`,
+          `$${p} + ${q} = ${s}$ et $${p} \\times ${q} = ${pr}$.`,
+          `Ce sont $${Math.min(p, q)}$ et $${Math.max(p, q)}$.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== SD_SIGNE ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_sd_signe_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_signe",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Pour un trinôme avec $a > 0$ et deux racines, quel est le signe « entre les racines » ?",
+    format: "qcm",
+    choices: ["du signe de $-a$ (négatif)", "du signe de $a$ (positif)", "nul partout", "indéterminé"],
+    expected: ["du signe de $-a$ (négatif)"],
+    comparator: "mcq_exact",
+    hint: "« Le trinôme est du signe de $a$ sauf entre les racines. »",
+    explanation: exp(
+      "Règle du signe : un trinôme est du signe de $a$ à l'extérieur des racines, du signe de $-a$ entre elles.",
+      "Ici $a > 0$, donc entre les racines le signe est celui de $-a$.",
+      "C'est-à-dire négatif.",
+      "Du signe de $-a$ (négatif)."
+    ),
+    tags: ["premiere", "maths", "second_degre", "signe", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_signe_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_signe",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Le trinôme $x^2 - 5x + 6$ (racines $2$ et $3$, $a > 0$). Quel est son signe pour $x = 2{,}5$ ?",
+    format: "qcm",
+    choices: ["négatif", "positif", "nul", "on ne peut pas savoir"],
+    expected: ["négatif"],
+    comparator: "mcq_exact",
+    hint: "$2{,}5$ est entre les deux racines.",
+    explanation: exp(
+      "Le trinôme est du signe de $-a$ entre les racines.",
+      "$2{,}5$ est entre $2$ et $3$, et $a = 1 > 0$.",
+      "Donc le trinôme est négatif en $x = 2{,}5$.",
+      "Négatif."
+    ),
+    canvas: parabole(1, -5, 6),
+    tags: ["premiere", "maths", "second_degre", "signe", "canvas", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_signe_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_signe",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Le trinôme $x^2 - 5x + 6$. Quel est son signe pour $x = 5$ ?",
+    format: "qcm",
+    choices: ["positif", "négatif", "nul", "indéterminé"],
+    expected: ["positif"],
+    comparator: "mcq_exact",
+    hint: "$5$ est à l'extérieur des racines $2$ et $3$.",
+    explanation: exp(
+      "À l'extérieur des racines, le trinôme est du signe de $a$.",
+      "$5 > 3$ (extérieur) et $a = 1 > 0$.",
+      "Donc le trinôme est positif. (Vérif : $25 - 25 + 6 = 6 > 0$.)",
+      "Positif."
+    ),
+    tags: ["premiere", "maths", "second_degre", "signe", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_signe_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_signe",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un trinôme a $\\Delta < 0$ et $a > 0$. Quel est son signe sur $\\mathbb{R}$ ?",
+    format: "qcm",
+    choices: ["toujours positif", "toujours négatif", "change de signe", "nul partout"],
+    expected: ["toujours positif"],
+    comparator: "mcq_exact",
+    hint: "Pas de racine : le signe ne change pas.",
+    explanation: exp(
+      "Si $\\Delta < 0$, le trinôme ne s'annule jamais : il garde un signe constant.",
+      "Ce signe constant est celui de $a$.",
+      "Ici $a > 0$, donc le trinôme est toujours positif.",
+      "Toujours positif."
+    ),
+    tags: ["premiere", "maths", "second_degre", "signe", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_signe_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_signe",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Résous l'inéquation $x^2 - 5x + 6 \\le 0$ (racines $2$ et $3$).",
+    format: "qcm",
+    choices: ["$[2 ; 3]$", "$]-\\infty ; 2]$", "$[3 ; +\\infty[$", "$\\mathbb{R}$"],
+    expected: ["$[2 ; 3]$"],
+    comparator: "mcq_exact",
+    hint: "« $\\le 0$ » : là où le trinôme est négatif ou nul.",
+    explanation: exp(
+      "On cherche où le trinôme est négatif ou nul.",
+      "Avec $a > 0$, il est négatif entre les racines.",
+      "Donc $x^2 - 5x + 6 \\le 0$ sur $[2 ; 3]$.",
+      "$S = [2 ; 3]$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "signe", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_signe_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_signe",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Du signe de $a$ à l'extérieur, de $-a$ entre les racines.",
+    tags: ["premiere", "maths", "second_degre", "signe", "template"],
+    generate: () => {
+      const p = randomInt(1, 4);
+      const q = p + randomInt(1, 4);
+      const entre = randomInt(0, 1) === 1;
+      const xval = entre ? p : q + randomInt(1, 3);
+      const correct = entre ? "négatif" : "positif";
+      return {
+        text: `Le trinôme $(x - ${p})(x - ${q})$ (donc racines $${p}$ et $${q}$). Quel est son signe pour $x = ${entre ? `${p}{,}5` : xval}$ ?`,
+        format: "qcm",
+        choices: ["positif", "négatif", "nul", "indéterminé"],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Avec $a = 1 > 0$ : positif à l'extérieur des racines, négatif entre.",
+          `La valeur est ${entre ? "entre" : "à l'extérieur des"} racines $${p}$ et $${q}$.`,
+          `Donc le trinôme est ${correct}.`,
+          `${correct.charAt(0).toUpperCase()}${correct.slice(1)}.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== SD_CANONIQUE ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_sd_canon_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_canonique",
+    difficulty: 2,
+    theme: "neutral",
+    text: "La forme canonique d'un trinôme s'écrit $a(x - \\alpha)^2 + \\beta$. Que représente le point $(\\alpha ; \\beta)$ ?",
+    format: "qcm",
+    choices: ["le sommet de la parabole", "une racine", "l'ordonnée à l'origine", "le point d'inflexion"],
+    expected: ["le sommet de la parabole"],
+    comparator: "mcq_exact",
+    hint: "$\\alpha = -\\dfrac{b}{2a}$.",
+    explanation: exp(
+      "La forme canonique fait apparaître le sommet de la parabole.",
+      "Le sommet a pour coordonnées $(\\alpha ; \\beta)$.",
+      "$\\alpha$ est l'abscisse de l'axe de symétrie.",
+      "C'est le sommet de la parabole."
+    ),
+    tags: ["premiere", "maths", "second_degre", "canonique", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_canon_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_canonique",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est l'abscisse de l'axe de symétrie d'une parabole $y = ax^2 + bx + c$ ?",
+    format: "qcm",
+    choices: [
+      "$x = -\\dfrac{b}{2a}$",
+      "$x = \\dfrac{b}{2a}$",
+      "$x = -\\dfrac{b}{a}$",
+      "$x = \\dfrac{c}{a}$",
+    ],
+    expected: ["$x = -\\dfrac{b}{2a}$"],
+    comparator: "mcq_exact",
+    hint: "Formule du sommet.",
+    explanation: exp(
+      "L'axe de symétrie passe par l'abscisse du sommet.",
+      "Cette abscisse vaut $\\alpha = -\\dfrac{b}{2a}$.",
+      "C'est aussi le milieu des racines quand elles existent.",
+      "$x = -\\dfrac{b}{2a}$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "canonique", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_canon_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_canonique",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Pour $f(x) = x^2 - 4x + 1$, quelle est l'abscisse du sommet ?",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
+    hint: "$-\\dfrac{b}{2a}$ avec $a = 1$, $b = -4$.",
+    explanation: exp(
+      "L'abscisse du sommet est $-\\dfrac{b}{2a}$.",
+      "$-\\dfrac{-4}{2 \\times 1} = \\dfrac{4}{2}$.",
+      "$= 2$.",
+      "L'abscisse du sommet est $2$."
+    ),
+    canvas: parabole(1, -4, 1),
+    tags: ["premiere", "maths", "second_degre", "canonique", "canvas", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_canon_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_canonique",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour $f(x) = x^2 - 4x + 1$, quelle est l'ordonnée du sommet ?",
+    format: "short",
+    expected: ["-3"],
+    comparator: "number_equal",
+    hint: "Calcule $f(2)$.",
+    explanation: exp(
+      "L'ordonnée du sommet est $f(\\alpha)$ avec $\\alpha = 2$.",
+      "$f(2) = 2^2 - 4 \\times 2 + 1 = 4 - 8 + 1$.",
+      "$= -3$.",
+      "L'ordonnée du sommet est $-3$."
+    ),
+    canvas: parabole(1, -4, 1),
+    tags: ["premiere", "maths", "second_degre", "canonique", "canvas", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_canon_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_canonique",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Si $a > 0$, le sommet de la parabole correspond à :",
+    format: "qcm",
+    choices: ["un minimum", "un maximum", "un point d'inflexion", "une racine"],
+    expected: ["un minimum"],
+    comparator: "mcq_exact",
+    hint: "Parabole tournée vers le haut.",
+    explanation: exp(
+      "Le signe de $a$ donne l'orientation de la parabole.",
+      "Si $a > 0$, la parabole est tournée vers le haut.",
+      "Son sommet est donc le point le plus bas : un minimum.",
+      "Un minimum."
+    ),
+    tags: ["premiere", "maths", "second_degre", "canonique", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_canon_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_canonique",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Abscisse du sommet $= -\\dfrac{b}{2a}$.",
+    tags: ["premiere", "maths", "second_degre", "canonique", "template"],
+    generate: () => {
+      const alpha = randomInt(1, 5);
+      const b = -2 * alpha;
+      const c = randomInt(-3, 4);
+      return {
+        text: `Pour $f(x) = x^2 ${b >= 0 ? "+ " + b : "- " + -b}x ${c >= 0 ? "+ " + c : "- " + -c}$, quelle est l'abscisse du sommet ?`,
+        format: "short",
+        expected: [String(alpha)],
+        comparator: "number_equal",
+        explanation: exp(
+          "L'abscisse du sommet est $-\\dfrac{b}{2a}$ avec $a = 1$.",
+          `$-\\dfrac{${b}}{2} = ${alpha}$.`,
+          `L'axe de symétrie est $x = ${alpha}$.`,
+          `L'abscisse du sommet est $${alpha}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_canon_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_canonique",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Ordonnée du sommet $= f(\\alpha)$.",
+    tags: ["premiere", "maths", "second_degre", "canonique", "template"],
+    generate: () => {
+      const alpha = randomInt(1, 4);
+      const b = -2 * alpha;
+      const c = randomInt(0, 5);
+      const ys = alpha * alpha + b * alpha + c; // = c - alpha^2
+      return {
+        text: `Pour $f(x) = x^2 ${b >= 0 ? "+ " + b : "- " + -b}x + ${c}$, quelle est l'ordonnée du sommet ?`,
+        format: "short",
+        expected: [String(ys)],
+        comparator: "number_equal",
+        explanation: exp(
+          "On calcule $f$ en l'abscisse du sommet $\\alpha = -\\dfrac{b}{2a}$.",
+          `$\\alpha = ${alpha}$, donc $f(${alpha}) = ${alpha}^2 ${b >= 0 ? "+ " + b : "- " + -b} \\times ${alpha} + ${c}$.`,
+          `$= ${alpha * alpha} ${b * alpha >= 0 ? "+ " + b * alpha : "- " + -(b * alpha)} + ${c} = ${ys}$.`,
+          `L'ordonnée du sommet est $${ys}$.`
+        ),
+      };
+    },
+  },
+];
