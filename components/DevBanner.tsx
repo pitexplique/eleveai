@@ -68,10 +68,11 @@ export default function DevBanner({
             <button
               type="button"
               onClick={() => setInstallModalOpen(true)}
-              className="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3 py-1 text-xs font-bold text-white transition hover:bg-blue-500"
+              className="inline-flex h-9 shrink-0 items-center justify-center gap-2 rounded-lg border border-white/25 bg-white px-3 text-xs font-black text-slate-950 shadow-sm transition hover:-translate-y-0.5 hover:bg-yellow-100 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-300/80 active:translate-y-0 sm:px-4 sm:text-sm"
             >
-              <Smartphone className="h-4 w-4" />
-              Télécharger
+              <Smartphone className="h-4 w-4 text-blue-700" />
+              <span className="hidden sm:inline">Installer l&apos;app</span>
+              <span className="sm:hidden">Installer</span>
             </button>
 
             {/* Fermer */}

@@ -50,6 +50,8 @@ Le **Parcours** (`app/parcours/ParcoursClient.tsx`) est **indépendant du moteur
 2. `lib/tutor-v4/catalog.ts` → type `Classe` (≈ ligne 41) : ajouter `| "premiere-spe"`.
 3. `lib/parcours/types.ts` → type `ParcoursClasse` : ajouter `| "premiere-spe"`.
 
+> 🛑 **PIÈGE VÉRIFIÉ (tsc ne l'attrape PAS)** : `app/tutor-v4/TutorV4Client.tsx` a sa **propre fonction `normalizeClasse`** (≈ ligne 336) avec une whitelist `value === "..."` hardcodée. Si la nouvelle classe n'y est pas, `?classe=premiere-spe` est **silencieusement remplacé par `6e`** (le coach et le parcours marchent, mais le tutor charge la mauvaise classe). → y ajouter `value === "premiere-spe" ||`.
+
 ### Étape B — Knowledge (dossier + builder + loader)
 Créer `lib/tutor-v4/knowledge/maths/premiere-spe/` avec 4 fichiers (copier ceux de `terminale-spe`) :
 4. `bo.ts` — les **grands domaines** du BO (KnowledgeBoCompetence[]).
