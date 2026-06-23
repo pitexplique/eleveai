@@ -14,6 +14,7 @@ const LASTMOD_LEGAL = new Date("2026-02-18");
 const MATHS_CLASSES    = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe"];
 const FRANCAIS_CLASSES = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
 const ENGLISH_NIVEAUX  = ["a1", "a2", "b1", "b2"];
+const IA_NIVEAUX       = ["a1", "a2", "b1", "b2", "c1"];
 
 // Rubriques Géographie - Voyage disponibles par niveau
 const ENGLISH_RUBRIQUES: Record<string, string[]> = {
@@ -44,6 +45,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/parcours",          priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/parcours-francais", priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/parcours-espagnol", priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
+  { path: "/parcours-ia",       priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/calcul-rapide",   priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/english-maths",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/defis-du-jour",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
@@ -101,6 +103,20 @@ const coachRoutes: RouteConfig[] = [
   // Parcours English — par niveau
   ...ENGLISH_NIVEAUX.map((niveau) => ({
     path: `/parcours-english-maths?niveau=${niveau}`,
+    priority: 0.85,
+    changeFrequency: "weekly" as const,
+    lastMod: LASTMOD_CORE,
+  })),
+  // Coach IA — par niveau
+  ...IA_NIVEAUX.map((niveau) => ({
+    path: `/coach-ia/ia?classe=${niveau}`,
+    priority: 0.9,
+    changeFrequency: "daily" as const,
+    lastMod: LASTMOD_CORE,
+  })),
+  // Parcours IA — par niveau
+  ...IA_NIVEAUX.map((niveau) => ({
+    path: `/parcours-ia?niveau=${niveau}`,
     priority: 0.85,
     changeFrequency: "weekly" as const,
     lastMod: LASTMOD_CORE,
