@@ -1,22 +1,39 @@
 import type { Dico, FamilleDico, GesteDico } from "./types";
 import { motsMaths6e } from "./maths/6e";
+import { motsFrancais6e } from "./francais/6e";
 
 export type { Dico, MotDico, FamilleDico, GesteDico, DefiDico } from "./types";
 
 // 🔹 Métadonnées d'affichage des familles de mots
 export const FAMILLES_DICO: Record<FamilleDico, { label: string; emoji: string }> = {
+  // Maths
   "nombres-calcul": { label: "Nombres & calcul", emoji: "🔢" },
   geometrie: { label: "Géométrie", emoji: "📐" },
   "grandeurs-mesures": { label: "Grandeurs & mesures", emoji: "📏" },
   "donnees-proba": { label: "Données & probabilités", emoji: "📊" },
+  // Français
+  "gram-nature": { label: "Nature des mots", emoji: "🔤" },
+  "gram-fonction": { label: "Fonctions", emoji: "🧩" },
+  conjugaison: { label: "Conjugaison", emoji: "⏳" },
+  "ortho-lexique": { label: "Orthographe & lexique", emoji: "✍️" },
+  texte: { label: "Texte & compréhension", emoji: "📖" },
+  // Partagé
   consignes: { label: "Mots-consignes", emoji: "🧭" },
 };
 
 export const ORDRE_FAMILLES: FamilleDico[] = [
+  // Maths
   "nombres-calcul",
   "geometrie",
   "grandeurs-mesures",
   "donnees-proba",
+  // Français
+  "gram-nature",
+  "gram-fonction",
+  "conjugaison",
+  "ortho-lexique",
+  "texte",
+  // Partagé
   "consignes",
 ];
 
@@ -37,6 +54,14 @@ const DICOS: Record<string, Dico> = {
     titre: "Dico Maths 6e",
     sousTitre: "50 mots & gestes pour l'éval nationale",
     mots: motsMaths6e,
+  },
+  "francais/6e": {
+    matiere: "francais",
+    matiereLabel: "Français",
+    niveau: "6e",
+    titre: "Dico Français 6e",
+    sousTitre: "50 mots & gestes pour l'éval nationale",
+    mots: motsFrancais6e,
   },
 };
 

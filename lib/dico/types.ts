@@ -3,10 +3,18 @@
 // taper au clavier, cliquer, choisir dans un menu déroulant, associer.
 
 export type FamilleDico =
+  // Maths
   | "nombres-calcul"
   | "geometrie"
   | "grandeurs-mesures"
   | "donnees-proba"
+  // Français
+  | "gram-nature"
+  | "gram-fonction"
+  | "conjugaison"
+  | "ortho-lexique"
+  | "texte"
+  // Partagé
   | "consignes";
 
 // Le geste numérique entraîné par le mot (= ce qu'on retrouve à l'éval nationale).

@@ -372,6 +372,33 @@ export default function AccueilPage({
         )}
       </section>
 
+      {/* ── MESSAGE DE VACANCES — mot de remerciement du professeur ──────────── */}
+      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-amber-300/30 bg-gradient-to-br from-amber-300/[0.10] via-emerald-300/[0.06] to-white/[0.04] p-6 text-center sm:p-8">
+          <p className="text-3xl sm:text-4xl" aria-hidden="true">🌴☀️</p>
+          <h2 className="mt-2 text-2xl font-black leading-tight text-white sm:text-3xl">
+            {prenomAffiche
+              ? `Bonnes vacances, ${prenomAffiche} !`
+              : "Bonnes vacances à toutes et à tous !"}
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+            Avant de refermer les cahiers, je tenais à vous dire un grand
+            <span className="font-black text-amber-200"> merci</span>. Merci pour votre
+            énergie, votre curiosité et vos efforts tout au long de l&apos;année. Vous
+            avez travaillé dur, et je suis fier du chemin parcouru ensemble.
+          </p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+            Maintenant, place au repos : profitez de vos proches, du soleil et du temps
+            qui ralentit. Et si l&apos;envie vous prend, l&apos;appli reste ouverte
+            pendant les vacances — quelques minutes par-ci par-là, à votre rythme, juste
+            pour le plaisir. 😉
+          </p>
+          <p className="mt-4 text-sm font-black text-emerald-200">
+            Reposez-vous bien et revenez en pleine forme. À très vite !
+          </p>
+        </div>
+      </section>
+
       {/* ── AVIS EN UNE LIGNE (sous l'image) — retour d'une élève ────────────── */}
       <section className="border-b border-white/10 bg-[#041B33] px-4 py-2.5 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-6xl items-center justify-center gap-2 sm:gap-3">

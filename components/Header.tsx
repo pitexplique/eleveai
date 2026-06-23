@@ -16,7 +16,7 @@ const NAV_MATHS = [
   { href: "/coach-brevet",     icon: "📚", label: "Coach Brevet",       desc: "Sprint J−30, toutes les notions" },
   { href: "/coach-bac-spe",    icon: "🎓", label: "Coach Bac Spé",      desc: "Suites, fonctions, proba" },
   { href: "/calcul-rapide",    icon: "⚡", label: "Calcul rapide",      desc: "5 min d'automatismes" },
-  { href: "/dico",             icon: "📒", label: "Dico 6e",            desc: "50 mots & gestes pour l'éval nationale" },
+  { href: "/dico/maths/6e",    icon: "📒", label: "Dico Maths 6e",      desc: "50 mots & gestes pour l'éval nationale" },
   { href: "/fiches-cours",     icon: "PDF", label: "Fiches de cours",    desc: "Cours courts à télécharger" },
   { href: "/concours-general", icon: "🏆", label: "Concours général",   desc: "Problèmes avancés" },
   { href: "/defis-du-jour",    icon: "🎯", label: "Défis du jour",      desc: "Grand Raid 2026" },
@@ -26,6 +26,7 @@ const NAV_MATHS = [
 const NAV_FRANCAIS = [
   { href: "/coach-ia/francais",  icon: "📖", label: "Coach Français IA", desc: "Grammaire, conjugaison, vocabulaire" },
   { href: "/parcours-francais",  icon: "🛤️", label: "Parcours Français", desc: "Bilan de compétences français" },
+  { href: "/dico/francais/6e",   icon: "📒", label: "Dico Français 6e",  desc: "50 mots & gestes pour l'éval nationale" },
 ];
 
 const NAV_ANGLAIS = [
