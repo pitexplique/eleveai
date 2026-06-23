@@ -3,7 +3,6 @@
 // lib/ameliorations/aLHonneur.ts.
 
 import { elevesALHonneur, type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
-import PrenomPublic from "@/components/PrenomPublic";
 
 // `eleves` peut être calculé depuis la base (page d'accueil). Sans données
 // (chargement, erreur, ou page sans branchement) on retombe sur la liste
@@ -40,7 +39,7 @@ export default function ElevesALHonneur({ eleves }: { eleves?: EleveALHonneur[] 
                 <p className="text-[11px] font-black uppercase tracking-wide text-amber-300">
                   {e.categorie}
                 </p>
-                <PrenomPublic prenom={e.eleve} className="mt-0.5 block text-base font-black text-slate-50" />
+                <p className="mt-0.5 text-base font-black text-slate-50">{e.eleve}</p>
                 <p className="mt-0.5 text-sm font-medium leading-5 text-slate-300">
                   {e.pour}
                 </p>

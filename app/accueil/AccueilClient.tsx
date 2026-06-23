@@ -9,7 +9,6 @@ import BulletinPreviewHome from "@/components/bulletin/BulletinPreviewHome";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
 import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
-import PrenomPublic from "@/components/PrenomPublic";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
@@ -716,7 +715,7 @@ export default function AccueilPage({
                 <span className="grid h-5 w-5 place-items-center rounded-full bg-gradient-to-br from-yellow-300 to-amber-500 text-[11px] font-black text-slate-900">
                   {e.prenom.charAt(0)}
                 </span>
-                <PrenomPublic prenom={e.prenom} className="font-black text-yellow-300" />
+                <span className="font-black text-yellow-300">{e.prenom}</span>
               </span>
             ))}
           </div>

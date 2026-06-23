@@ -4,7 +4,6 @@ export { metadata } from "./metadata";
 
 import Link from "next/link";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
-import PrenomPublic from "@/components/PrenomPublic";
 
 export default function RemerciementsPage() {
   const total = elevesRemercies.length;
@@ -68,10 +67,9 @@ export default function RemerciementsPage() {
                       </span>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center justify-between gap-2">
-                          <PrenomPublic
-                            prenom={eleve.prenom}
-                            className="truncate text-base font-black text-yellow-300"
-                          />
+                          <p className="truncate text-base font-black text-yellow-300">
+                            {eleve.prenom}
+                          </p>
                           {eleve.meta && (
                             <span className="shrink-0 rounded-full bg-emerald-400/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-wide text-emerald-300">
                               ★ {eleve.meta}

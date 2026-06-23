@@ -72,10 +72,10 @@ const sections = [
         <p>
           <span className="font-semibold text-slate-50">Base légale</span> : les données
           scolaires sont traitées sur la base du contrat conclu avec l&apos;établissement
-          (ou la famille) et de la mission éducative. Les affichages publics sont
-          volontairement limités (initiale du prénom, niveau de classe) afin qu&apos;aucun
-          élève ne soit identifiable ; tout élève ou représentant légal peut demander le
-          retrait d&apos;un prénom ou d&apos;un avis.
+          (ou la famille) et de la mission éducative. Lorsqu&apos;un prénom apparaît
+          publiquement, il n&apos;est jamais associé à une classe précise ni à un
+          établissement, de sorte qu&apos;aucun élève n&apos;est identifiable ; tout élève
+          ou représentant légal peut demander le retrait d&apos;un prénom ou d&apos;un avis.
         </p>
       </>
     ),
@@ -96,8 +96,8 @@ const sections = [
         <li>
           <span className="font-semibold text-slate-50">Aucune publication de nom de famille
           d&apos;élève</span> : sur les pages publiques (élèves remerciés, élèves à
-          l&apos;honneur), seule l&apos;initiale du prénom est affichée par défaut. Un élève
-          connecté voit son propre prénom en entier — jamais celui des autres.
+          l&apos;honneur), seul le prénom apparaît, et il n&apos;est jamais associé à une
+          classe précise ni à un établissement — ce qui empêche d&apos;identifier l&apos;élève.
         </li>
         <li>
           <span className="font-semibold text-slate-50">Avis publiés avec parcimonie</span> :
