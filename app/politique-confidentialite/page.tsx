@@ -62,12 +62,22 @@ const sections = [
     emoji: "🎯",
     titre: "3. Pourquoi ces données ?",
     contenu: (
-      <ul className="ml-5 list-disc space-y-2">
-        <li>Permettre à chaque élève d&apos;accéder à ses exercices et de suivre sa progression.</li>
-        <li>Donner aux professeurs et aux établissements un tableau de bord de suivi pédagogique.</li>
-        <li>Adapter les contenus au niveau de l&apos;élève.</li>
-        <li>Assurer la sécurité de la plateforme.</li>
-      </ul>
+      <>
+        <ul className="ml-5 list-disc space-y-2">
+          <li>Permettre à chaque élève d&apos;accéder à ses exercices et de suivre sa progression.</li>
+          <li>Donner aux professeurs et aux établissements un tableau de bord de suivi pédagogique.</li>
+          <li>Adapter les contenus au niveau de l&apos;élève.</li>
+          <li>Assurer la sécurité de la plateforme.</li>
+        </ul>
+        <p>
+          <span className="font-semibold text-slate-50">Base légale</span> : les données
+          scolaires sont traitées sur la base du contrat conclu avec l&apos;établissement
+          (ou la famille) et de la mission éducative. Les affichages publics sont
+          volontairement limités (initiale du prénom, niveau de classe) afin qu&apos;aucun
+          élève ne soit identifiable ; tout élève ou représentant légal peut demander le
+          retrait d&apos;un prénom ou d&apos;un avis.
+        </p>
+      </>
     ),
   },
   {
@@ -85,8 +95,15 @@ const sections = [
         </li>
         <li>
           <span className="font-semibold text-slate-50">Aucune publication de nom de famille
-          d&apos;élève</span> : lorsque des élèves testeurs sont remerciés publiquement, seuls les
-          prénoms apparaissent.
+          d&apos;élève</span> : sur les pages publiques (élèves remerciés, élèves à
+          l&apos;honneur), seule l&apos;initiale du prénom est affichée par défaut. Un élève
+          connecté voit son propre prénom en entier — jamais celui des autres.
+        </li>
+        <li>
+          <span className="font-semibold text-slate-50">Avis publiés avec parcimonie</span> :
+          lorsqu&apos;un avis d&apos;élève est mis en avant sur le site, seuls le prénom et le
+          niveau (par exemple « 6e ») apparaissent — jamais la classe précise, ni le nom de
+          famille. Le retrait d&apos;un avis peut être demandé à tout moment (voir la section 8).
         </li>
       </ul>
     ),
