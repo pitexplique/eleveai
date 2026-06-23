@@ -32,3 +32,8 @@ create index IF not exists resultats_parcours_ia_eleve_idx on public.resultats_p
 ) TABLESPACE pg_default;
 
 create index IF not exists resultats_parcours_ia_etablissement_idx on public.resultats_parcours_ia using btree (code_etablissement, created_at desc) TABLESPACE pg_default;
+
+-- RLS activé SANS aucune policy (même pattern que les autres tables resultats_*) :
+-- la clé anon (navigateur) ne peut ni lire ni écrire ; seule la clé service role
+-- utilisée par /api/resultats accède à la table.
+alter table public.resultats_parcours_ia enable row level security;
