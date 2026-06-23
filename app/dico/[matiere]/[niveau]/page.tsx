@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import {
@@ -33,12 +33,17 @@ export default function DicoPlayerPage() {
   // Filtre par famille de mots ("toutes" = tout le dico)
   const [famille, setFamille] = useState<FamilleDico | "toutes">("toutes");
 
+  // Le mélange aléatoire ne doit tourner qu'après l'hydratation, sinon le
+  // rendu serveur et le rendu client diffèrent (erreur d'hydratation).
+  const [monte, setMonte] = useState(false);
+  useEffect(() => setMonte(true), []);
+
   const deck = useMemo(() => {
     if (!dico) return [];
     const mots = famille === "toutes" ? dico.mots : dico.mots.filter((m) => m.famille === famille);
-    return shuffle(mots);
-    // on re-mélange quand on change de famille
-  }, [dico, famille]);
+    return monte ? shuffle(mots) : mots;
+    // on re-mélange quand on change de famille (côté client uniquement)
+  }, [dico, famille, monte]);
 
   const [index, setIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("question");
@@ -53,11 +58,15 @@ export default function DicoPlayerPage() {
   // Mélange des propositions, recalculé à chaque mot
   const propositions = useMemo(() => {
     if (!mot) return [];
-    if (mot.defi.geste === "clic" || mot.defi.geste === "association") return shuffle(mot.defi.choix);
-    if (mot.defi.geste === "menu") return shuffle(mot.defi.options);
-    return [];
+    const base =
+      mot.defi.geste === "clic" || mot.defi.geste === "association"
+        ? mot.defi.choix
+        : mot.defi.geste === "menu"
+          ? mot.defi.options
+          : [];
+    return monte ? shuffle(base) : base;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mot?.id]);
+  }, [mot?.id, monte]);
 
   if (!dico) {
     return (
