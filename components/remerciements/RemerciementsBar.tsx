@@ -5,6 +5,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
+import { initialePrenom } from "@/lib/prenom";
 
 export default function RemerciementsBar() {
   const pathname = usePathname();
@@ -38,7 +39,7 @@ export default function RemerciementsBar() {
               <span className="grid h-5 w-5 place-items-center rounded-full bg-gradient-to-br from-yellow-300 to-amber-500 text-[11px] font-black text-slate-900">
                 {eleve.prenom.charAt(0)}
               </span>
-              <span className="text-[15px] font-black text-yellow-300">{eleve.prenom}</span>
+              <span className="text-[15px] font-black text-yellow-300">{initialePrenom(eleve.prenom)}</span>
               <span className="text-white/30">·</span>
               <span className="text-white/70">{eleve.action}</span>
               {eleve.meta && (

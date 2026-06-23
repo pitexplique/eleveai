@@ -44,6 +44,16 @@ export function prenomFromNom(nom: string | null | undefined): string | null {
   return prenom || null;
 }
 
+// Réduit un prénom déjà extrait à sa seule initiale suivie d'un point, pour les
+// affichages PUBLICS (page d'accueil, remerciements, élèves à l'honneur). But :
+// célébrer les élèves sans exposer un prénom identifiant pour un mineur dans un
+// petit établissement. « Maëlle » → « M. », « Éléna » → « É. ». Chaîne vide → « • ».
+export function initialePrenom(prenom: string | null | undefined): string {
+  const p = (prenom ?? "").trim();
+  if (!p) return "•";
+  return p.charAt(0).toLocaleUpperCase("fr-FR") + ".";
+}
+
 // Champ saisi au format « NOM Prénom » (la table retours_eleves) → on ne garde
 // que le(s) prénom(s) et JAMAIS le nom de famille. Prénom(s) gardé(s) tels
 // quels (pas de re-capitalisation), fallback « Élève » s'il ne reste rien.
