@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
 import AccueilClient, { type AvisPublic } from "./AccueilClient";
 import { getElevesALHonneur, prenomCourt } from "@/lib/ameliorations/honneurServer";
+import { niveauPublic } from "@/lib/classe";
 
 // Les avis affichés sont rechargés au plus toutes les 5 minutes.
 export const revalidate = 300;
@@ -66,7 +67,7 @@ async function getDerniersAvis(): Promise<AvisPublic[]> {
       .filter((r) => String(r.message ?? "").trim().length > 0)
       .map((r) => ({
         prenom: prenomCourt(r.prenom),
-        detail: r.classe?.trim() || r.page?.trim() || "Élève",
+        detail: niveauPublic(r.classe) || r.page?.trim() || "Élève",
         note: Number(r.note) || 5,
         quote: String(r.message ?? "").trim(),
       }));

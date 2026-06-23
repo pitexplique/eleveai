@@ -54,6 +54,26 @@ export function initialePrenom(prenom: string | null | undefined): string {
   return p.charAt(0).toLocaleUpperCase("fr-FR") + ".";
 }
 
+// Compare deux prénoms de façon tolérante (insensible à la casse et aux
+// accents), sur le PREMIER token uniquement. Sert à reconnaître l'élève
+// connecté dans une liste publique : « Victor Rafael » (son `nom`) reconnaît
+// l'entrée « Victor ». Chaîne vide / null → jamais d'égalité.
+export function memePrenom(
+  a: string | null | undefined,
+  b: string | null | undefined
+): boolean {
+  const norm = (s: string) =>
+    s
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .toLocaleLowerCase("fr-FR")
+      .trim()
+      .split(/\s+/)[0] ?? "";
+  const ta = norm(a ?? "");
+  const tb = norm(b ?? "");
+  return ta.length > 0 && ta === tb;
+}
+
 // Champ saisi au format « NOM Prénom » (la table retours_eleves) → on ne garde
 // que le(s) prénom(s) et JAMAIS le nom de famille. Prénom(s) gardé(s) tels
 // quels (pas de re-capitalisation), fallback « Élève » s'il ne reste rien.
