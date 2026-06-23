@@ -21,9 +21,12 @@ export default function DicoHubPage() {
             Prépa éval nationale
           </div>
           <div className="max-w-3xl">
-            <h1 className="text-3xl font-black tracking-normal text-slate-900 sm:text-5xl">
-              Le Dico
+            <h1 className="text-4xl font-black tracking-normal text-slate-900 sm:text-6xl">
+              Dico
             </h1>
+            <h2 className="mt-2 text-xl font-black text-cyan-700 sm:text-2xl">
+              Préparation aux évaluations nationales
+            </h2>
             <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
               Les mots essentiels <strong>et</strong> les gestes numériques de
               l&apos;examen, dans le même exercice. On apprend le vocabulaire en

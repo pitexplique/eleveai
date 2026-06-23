@@ -161,6 +161,16 @@ export default function ParcoursIaClient() {
               Diagnostique ta culture et tes bons réflexes face à l&apos;IA.
             </p>
 
+            <Link
+              href="/eval-pix-ia"
+              className="mt-5 flex items-center justify-between gap-3 rounded-2xl border border-indigo-200 bg-indigo-50 px-4 py-3 transition hover:bg-indigo-100"
+            >
+              <span className="text-sm font-bold text-indigo-900">
+                🎓 Prépare l&apos;évaluation nationale <strong>Pix IA</strong> — fais une éval blanche
+              </span>
+              <span className="text-lg font-black text-indigo-600">→</span>
+            </Link>
+
             <div className="mt-8">
               <p className="mb-3 text-sm font-black uppercase tracking-wider text-slate-500">
                 Choisis ton niveau

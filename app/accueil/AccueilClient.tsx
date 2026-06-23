@@ -145,6 +145,7 @@ const FEATURES = [
   { icon: "🇬🇧", label: "Parcours English",  desc: "Bilan de niveau CECRL avec audio",   href: "/parcours-english-maths" },
   { icon: "🇪🇸", label: "Parcours Espagnol", desc: "Bilan de niveau A1 → B2 avec audio", href: "/parcours-espagnol"      },
   { icon: "🤖", label: "Parcours IA",       desc: "Culture et bons réflexes IA, A1 → C1", href: "/parcours-ia"          },
+  { icon: "🎓", label: "Éval blanche Pix IA", desc: "Prépare l'évaluation nationale Pix IA", href: "/eval-pix-ia"        },
 ];
 
 // ─── Main component ───────────────────────────────────────────────────────────
