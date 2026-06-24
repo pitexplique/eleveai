@@ -18,7 +18,7 @@ export const problemeDuJourWeekly = {
 
     {
       day: 3,
-      problemId: "coupe_monde_buts_003",
+      problemId: "coupe_monde_proba_003",
     },
 
     {

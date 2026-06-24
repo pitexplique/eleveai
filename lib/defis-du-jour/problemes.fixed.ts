@@ -101,46 +101,53 @@ export const problemesFixed: ProblemeDuJour[] = [
   },
 
   {
-    id: "coupe_monde_buts_003",
-    title: "Coupe du monde : les buts de la poule",
-    theme: "Tableau & moyenne",
+    id: "coupe_monde_proba_003",
+    title: "Coupe du monde : le pronostic France – Norvège",
+    theme: "Probabilités",
     image: "/images/defis-du-jour/coupe-monde-foot.webp",
     level: 3,
     statement:
-      "Lors des matchs de poule, une équipe marque : match 1 → 3 buts, match 2 → 5 buts, match 3 → 4 buts, match 4 → 8 buts.",
+      "Avant le match France – Norvège, 200 élèves donnent leur pronostic : 120 pensent que la France gagne, 50 prévoient un match nul, et 30 misent sur une victoire de la Norvège. On tire un pronostic au hasard : chacun a la même chance d'être choisi.",
     question:
-      "Combien de buts l'équipe a-t-elle marqués au total ? Quelle est la moyenne de buts par match ?",
-    expectedAnswer: "20 5",
+      "Quelle est la probabilité que le pronostic tiré prévoie une victoire de la France ? Et un match nul ? Donne tes réponses sous forme de fractions simplifiées.",
+    expectedAnswer: "3/5 1/4",
     explanation:
-      "Total : 3 + 5 + 4 + 8 = 20 buts. Il y a 4 matchs, donc la moyenne est 20 ÷ 4 = 5 buts par match.",
+      "Le total des cas possibles est 200 pronostics. Victoire de la France : 120 cas favorables sur 200, soit 120/200 = 3/5. Match nul : 50/200 = 1/4. Une probabilité est toujours comprise entre 0 et 1 : ici 3/5 = 0,6 et 1/4 = 0,25. (Pour info, victoire de la Norvège : 30/200 = 3/20.)",
     directions: [
       {
-        id: "total",
-        label: "Additionner les buts",
+        id: "cas_possibles",
+        label: "Compter les cas possibles",
         type: "guided",
         content:
-          "Additionne les quatre nombres : 3 + 5 + 4 + 8.",
+          "Une probabilité, c'est : nombre de cas favorables ÷ nombre de cas possibles.\nIci, le nombre de cas possibles est le nombre total de pronostics : 200.",
       },
       {
-        id: "moyenne",
-        label: "Calculer la moyenne",
+        id: "proba_france",
+        label: "Probabilité « victoire France »",
         type: "guided",
         content:
-          "Une moyenne se calcule en divisant le total par le nombre de matchs.",
+          "120 élèves sur 200 misent sur la France.\nÉcris la fraction 120/200, puis simplifie-la (divise le haut et le bas par 40).",
+      },
+      {
+        id: "proba_nul",
+        label: "Probabilité « match nul »",
+        type: "guided",
+        content:
+          "50 élèves sur 200 prévoient un match nul.\nÉcris la fraction 50/200, puis simplifie-la (divise le haut et le bas par 50).",
       },
       {
         id: "indice",
         label: "Demander un indice",
         type: "hint",
         content:
-          "Il y a 4 matchs. Après avoir trouvé le total, divise-le par 4.",
+          "120/200 : divise par 40 en haut et en bas → 3/5. 50/200 : divise par 50 → 1/4.",
       },
       {
         id: "open",
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "Explique pourquoi une moyenne peut aider à comparer deux équipes sur plusieurs matchs.",
+          "Le pronostic le plus choisi est la victoire de la France. Explique pourquoi une probabilité plus grande veut dire qu'un résultat est jugé plus probable — sans être pour autant certain.",
       },
     ],
   },
@@ -294,19 +301,19 @@ export const problemesFixed: ProblemeDuJour[] = [
     image: "/images/defis-du-jour/coupe-monde-foot.webp",
     level: 5,
     statement:
-      "Cette semaine, tu as étudié la Coupe du monde avec des nombres : 240 joueurs au tournoi de quartier dont 90 attaquants et 60 milieux, une pelouse de 7 140 m², une moyenne de 5 buts par match, 360 tirs dont 54 buts, et 30 litres d'eau prévus pour 10 joueurs.",
+      "Cette semaine, tu as étudié la Coupe du monde avec des nombres : 240 joueurs au tournoi de quartier dont 90 attaquants et 60 milieux, une pelouse de 7 140 m², un pronostic France – Norvège où la France gagne avec une probabilité de 3/5, 360 tirs dont 54 buts, et 30 litres d'eau prévus pour 10 joueurs.",
     question:
       "Rédige une courte présentation de la semaine Coupe du monde en utilisant au moins 4 données chiffrées. Explique pourquoi les maths sont utiles dans le sport.",
     expectedAnswer: "explication",
     explanation:
-      "Une bonne réponse utilise plusieurs données et les relie au sens du défi. Exemple : Le tournoi réunissait 240 joueurs, dont 90 attaquants et 60 milieux. Sur une pelouse de 7 140 m², une équipe a marqué en moyenne 5 buts par match et transformé 54 de ses 360 tirs. Les maths permettent de compter, comparer et analyser pour mieux comprendre le jeu.",
+      "Une bonne réponse utilise plusieurs données et les relie au sens du défi. Exemple : Le tournoi réunissait 240 joueurs, dont 90 attaquants et 60 milieux. Avant France – Norvège, les pronostics donnaient la France gagnante avec une probabilité de 3/5. Sur une pelouse de 7 140 m², une équipe a transformé 54 de ses 360 tirs. Les maths permettent de compter, comparer et analyser pour mieux comprendre le jeu.",
     directions: [
       {
         id: "choisir_chiffres",
         label: "Choisir les chiffres clés",
         type: "guided",
         content:
-          "Choisis au moins 4 chiffres parmi : 240 joueurs, 90 attaquants, 60 milieux, 7 140 m², 5 buts/match, 360 tirs, 54 buts, 30 litres.",
+          "Choisis au moins 4 chiffres parmi : 240 joueurs, 90 attaquants, 60 milieux, 7 140 m², 3/5 (proba victoire France), 360 tirs, 54 buts, 30 litres.",
       },
       {
         id: "organiser",
