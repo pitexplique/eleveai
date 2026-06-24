@@ -86,10 +86,6 @@ export default function FAQAdministration() {
 
         <div className="pt-6 border-t border-slate-800 text-sm text-slate-400">
           Pour cadrer :{" "}
-          <Link href="/atelier-IA/charte" className="text-emerald-300 font-semibold hover:text-emerald-200">
-            Charte EleveAI
-          </Link>
-          {" · "}
           <Link href="/contact" className="text-emerald-300 font-semibold hover:text-emerald-200">
             Contact / pilote
           </Link>

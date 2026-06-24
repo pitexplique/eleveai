@@ -86,10 +86,6 @@ export default function FAQProfesseurs() {
 
         <div className="pt-6 border-t border-slate-800 text-sm text-slate-400">
           Pour le cadre global :{" "}
-          <Link href="/atelier-IA/charte" className="text-emerald-300 font-semibold hover:text-emerald-200">
-            Charte EleveAI
-          </Link>
-          {" · "}
           <Link href="/qui-sommes-nous" className="text-emerald-300 font-semibold hover:text-emerald-200">
             Qui sommes-nous
           </Link>
