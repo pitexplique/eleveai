@@ -11,6 +11,16 @@ import { inferClasseFromCode, useEleve } from "@/context/EleveContext";
 
 const RESEND_COOLDOWN_SECONDS = 30;
 const INDEPENDENT_ETABLISSEMENT_CODE = "INDEPENDANT";
+const ADMIN_EMAIL = "eleveai974@gmail.com";
+
+type UserEmailType = "prof" | "eleve" | "parent" | "perso" | "admin";
+
+const PROFILE_OPTIONS: { value: Exclude<UserEmailType, "admin">; label: string }[] = [
+  { value: "prof", label: "Professeur" },
+  { value: "parent", label: "Parent" },
+  { value: "eleve", label: "Élève" },
+  { value: "perso", label: "Adulte / personnel" },
+];
 
 type UserEmailProfile = {
   id: string;
@@ -18,6 +28,12 @@ type UserEmailProfile = {
   email: string;
   nom: string | null;
   type_utilisateur: string | null;
+};
+
+type PendingAuth = {
+  authUserId: string;
+  email: string;
+  accessToken: string;
 };
 
 export default function SignInPage() {
@@ -32,6 +48,16 @@ export default function SignInPage() {
   const [sentEmail, setSentEmail] = useState<string | null>(null);
   const [otpCode, setOtpCode] = useState("");
   const [emailSent, setEmailSent] = useState(false);
+
+  // ---------------------------
+  // Complément de profil (nouveaux comptes uniquement)
+  // ---------------------------
+  const [needsProfile, setNeedsProfile] = useState(false);
+  const [pendingAuth, setPendingAuth] = useState<PendingAuth | null>(null);
+  const [nom, setNom] = useState("");
+  const [typeUtilisateur, setTypeUtilisateur] = useState<UserEmailType>("perso");
+  const [accepteCgv, setAccepteCgv] = useState(false);
+  const [accepteNewsletter, setAccepteNewsletter] = useState(false);
 
   // ---------------------------
   // UI feedback
@@ -65,6 +91,10 @@ export default function SignInPage() {
     const params = new URLSearchParams(window.location.search);
     const e = params.get("email");
     if (e) setEmail(e);
+    const t = params.get("type");
+    if (t === "prof" || t === "parent" || t === "eleve" || t === "perso") {
+      setTypeUtilisateur(t);
+    }
   }, []);
 
   // ✅ Décompte cooldown
@@ -102,6 +132,26 @@ export default function SignInPage() {
     }
   };
 
+  // Jeton de session signé pour /api/resultats et /api/dashboard.
+  // En cas d'échec on connecte quand même (dégradé : l'enregistrement des
+  // résultats demandera une reconnexion).
+  const fetchEmailSessionToken = async (
+    accessToken: string
+  ): Promise<string | null> => {
+    try {
+      const tokenRes = await fetch("/api/email-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ access_token: accessToken }),
+      });
+      const tokenData = await tokenRes.json().catch(() => ({}));
+      if (tokenRes.ok && tokenData?.token) return tokenData.token as string;
+    } catch {
+      /* dégradé */
+    }
+    return null;
+  };
+
   const resetEmailFlow = () => {
     setEmailSent(false);
     setSentEmail(null);
@@ -110,6 +160,8 @@ export default function SignInPage() {
     setErrorMsg(null);
     setLoading(false);
     setCooldown(0);
+    setNeedsProfile(false);
+    setPendingAuth(null);
   };
 
   const logSupabaseError = (label: string, err: any) => {
@@ -143,9 +195,13 @@ export default function SignInPage() {
 
     setLoading(true);
     try {
+      // Flux unifié : on crée l'utilisateur Auth si besoin. Le navigateur
+      // n'apprend jamais si un compte existait déjà (pas d'oracle
+      // d'énumération) ; l'éventuelle création du profil applicatif se fait
+      // après validation du code, une fois la boîte mail prouvée.
       const { error } = await supabase.auth.signInWithOtp({
         email: emailToUse,
-        options: { shouldCreateUser: false },
+        options: { shouldCreateUser: true },
       });
 
       if (error) {
@@ -153,7 +209,7 @@ export default function SignInPage() {
         setErrorMsg(
           process.env.NODE_ENV === "development"
             ? `Erreur Supabase: ${error.message}`
-            : "Impossible d'envoyer le code. Vérifiez l’email ou créez un compte."
+            : "Impossible d'envoyer le code. Vérifiez votre adresse email."
         );
         return;
       }
@@ -189,7 +245,7 @@ export default function SignInPage() {
     try {
       const { error } = await supabase.auth.signInWithOtp({
         email: sentEmail,
-        options: { shouldCreateUser: false },
+        options: { shouldCreateUser: true },
       });
 
       if (error) {
@@ -254,32 +310,96 @@ export default function SignInPage() {
         .eq("auth_user_id", authUser.id)
         .maybeSingle();
 
-      if (profileError || !profile) {
+      if (profileError) {
         logSupabaseError("users_email lookup error:", profileError);
-        setErrorMsg("Profil introuvable. Merci de créer un compte.");
+        setErrorMsg("Erreur de lecture du profil. Réessayez.");
         return;
       }
 
-      // Jeton de session signé pour /api/resultats et /api/dashboard.
-      // En cas d'échec on connecte quand même (dégradé : l'enregistrement
-      // des résultats demandera une reconnexion).
-      let sessionToken: string | null = null;
-      try {
-        const tokenRes = await fetch("/api/email-session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ access_token: data.session.access_token }),
+      // Nouvelle adresse : l'utilisateur vient de prouver qu'il possède cette
+      // boîte mail. On collecte son profil avant de créer le compte
+      // applicatif (étape « complète ton profil »).
+      if (!profile) {
+        const verifiedEmail = authUser.email ?? sentEmail;
+        setPendingAuth({
+          authUserId: authUser.id,
+          email: verifiedEmail,
+          accessToken: data.session.access_token,
         });
-        const tokenData = await tokenRes.json().catch(() => ({}));
-        if (tokenRes.ok && tokenData?.token) sessionToken = tokenData.token;
-      } catch {
-        sessionToken = null;
+        if (verifiedEmail === ADMIN_EMAIL) setTypeUtilisateur("admin");
+        setNeedsProfile(true);
+        setFeedback("Dernière étape : complète ton profil.");
+        return;
       }
+
+      const sessionToken = await fetchEmailSessionToken(
+        data.session.access_token
+      );
 
       setFeedback("Connexion réussie. Redirection…");
       routeEmailProfile(profile as UserEmailProfile, sessionToken);
     } catch (err: any) {
       console.error("Unexpected OTP verify error:", err);
+      setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ---------------------------
+  // 3) Complément de profil (nouveaux comptes uniquement)
+  // ---------------------------
+  const handleProfileSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setFeedback(null);
+    setErrorMsg(null);
+
+    if (!pendingAuth) {
+      setErrorMsg("Session expirée. Recommencez la connexion.");
+      resetEmailFlow();
+      return;
+    }
+
+    const nomToUse = nom.trim();
+    if (!nomToUse) {
+      setErrorMsg("Merci de renseigner votre nom.");
+      return;
+    }
+    if (!accepteCgv) {
+      setErrorMsg("Vous devez accepter les CGV pour créer votre compte.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const { data: profile, error: upsertError } = await supabase
+        .from("users_email")
+        .upsert(
+          {
+            auth_user_id: pendingAuth.authUserId,
+            email: pendingAuth.email,
+            nom: nomToUse,
+            type_utilisateur: typeUtilisateur,
+            accepte_cgv: accepteCgv,
+            accepte_newsletter: accepteNewsletter,
+          },
+          { onConflict: "email" }
+        )
+        .select("id, auth_user_id, email, nom, type_utilisateur")
+        .single();
+
+      if (upsertError || !profile) {
+        logSupabaseError("users_email upsert error:", upsertError);
+        setErrorMsg("Impossible de créer le profil. Merci de réessayer.");
+        return;
+      }
+
+      const sessionToken = await fetchEmailSessionToken(pendingAuth.accessToken);
+
+      setFeedback("Compte créé. Bienvenue sur EleveAI !");
+      routeEmailProfile(profile as UserEmailProfile, sessionToken);
+    } catch (err: any) {
+      console.error("Unexpected profile submit error:", err);
       setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
     } finally {
       setLoading(false);
@@ -381,38 +501,16 @@ export default function SignInPage() {
             </div>
 
             <div className="rounded-2xl bg-white p-6 shadow-lg shadow-slate-200/80 border border-slate-200">
-              {/* ✅ CHOIX CLAIR : s'inscrire ou se connecter */}
+              {/* ✅ Flux unifié : inscription ET connexion par le même email */}
               <div className="mb-5 rounded-xl border-2 border-emerald-200 bg-emerald-50 p-4">
                 <p className="text-sm font-bold text-slate-900">
-                  C&apos;est ta première fois sur EleveAI ?
+                  Inscription et connexion, au même endroit 👇
                 </p>
                 <p className="mt-0.5 text-xs text-slate-600">
-                  Tu dois d&apos;abord créer ton compte. Sinon, connecte-toi juste en dessous.
+                  Entrez votre adresse email : que vous ayez déjà un compte ou
+                  non, on vous envoie un code. Nouveau compte ? On vous demandera
+                  juste votre nom juste après.
                 </p>
-
-                <div className="mt-3 grid grid-cols-2 gap-2">
-                  <Link
-                    href="/auth/signup?type=eleve"
-                    className="flex flex-col items-center justify-center rounded-lg bg-emerald-600 px-3 py-3 text-center text-sm font-semibold text-white hover:bg-emerald-500 transition"
-                  >
-                    <span className="text-base">📝</span>
-                    Je m&apos;inscris
-                    <span className="mt-0.5 text-[10px] font-normal text-emerald-100">
-                      Nouveau compte
-                    </span>
-                  </Link>
-
-                  <a
-                    href="#connexion-existante"
-                    className="flex flex-col items-center justify-center rounded-lg border-2 border-slate-300 bg-white px-3 py-3 text-center text-sm font-semibold text-slate-800 hover:bg-slate-50 transition"
-                  >
-                    <span className="text-base">🔑</span>
-                    J&apos;ai déjà un compte
-                    <span className="mt-0.5 text-[10px] font-normal text-slate-500">
-                      Je me connecte
-                    </span>
-                  </a>
-                </div>
               </div>
 
               <h1 id="connexion-existante" className="text-lg font-semibold text-slate-900">
@@ -420,10 +518,11 @@ export default function SignInPage() {
               </h1>
 
               <p className="mt-1 text-sm text-slate-600">
-                Connectez-vous par email (code) – sans mot de passe.
+                Connexion par email (code à usage unique) – sans mot de passe.
               </p>
 
               {/* EMAIL */}
+              {!needsProfile && (
               <form onSubmit={handleEmailSubmit} className="mt-5 space-y-3">
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium text-slate-800">
@@ -457,20 +556,11 @@ export default function SignInPage() {
                 {feedback && (
                   <p className="text-xs text-emerald-600">{feedback}</p>
                 )}
-
-                <p className="text-xs text-slate-500">
-                  Pas encore de compte ?{" "}
-                  <Link
-                    href="/auth/signup?type=eleve"
-                    className="text-emerald-600 font-semibold"
-                  >
-                    Créer un compte élève, parent ou adulte
-                  </Link>
-                </p>
               </form>
+              )}
 
               {/* OTP */}
-              {emailSent && (
+              {emailSent && !needsProfile && (
                 <form
                   onSubmit={handleOtpSubmit}
                   className="mt-4 space-y-3 rounded-lg bg-emerald-50 p-3 border border-emerald-200"
@@ -524,6 +614,111 @@ export default function SignInPage() {
                       Changer d’email
                     </button>
                   </div>
+
+                  {errorMsg && (
+                    <p className="text-[11px] text-red-600">{errorMsg}</p>
+                  )}
+                  {feedback && (
+                    <p className="text-[11px] text-emerald-700">{feedback}</p>
+                  )}
+                </form>
+              )}
+
+              {/* COMPLÉMENT DE PROFIL (nouveaux comptes) */}
+              {needsProfile && (
+                <form
+                  onSubmit={handleProfileSubmit}
+                  className="mt-4 space-y-3 rounded-lg bg-emerald-50 p-3 border border-emerald-200"
+                >
+                  <p className="text-xs font-semibold text-emerald-800 uppercase">
+                    Bienvenue ! Complète ton profil
+                  </p>
+                  {pendingAuth?.email && (
+                    <p className="text-[11px] text-emerald-700">
+                      Compte créé pour{" "}
+                      <span className="font-semibold">{pendingAuth.email}</span>
+                    </p>
+                  )}
+
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium text-slate-800">
+                      Nom
+                    </label>
+                    <input
+                      type="text"
+                      value={nom}
+                      onChange={(e) => setNom(e.target.value)}
+                      placeholder="Votre nom"
+                      disabled={loading}
+                      className="w-full rounded-lg border border-emerald-300 px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring disabled:bg-slate-100"
+                    />
+                  </div>
+
+                  {pendingAuth?.email !== ADMIN_EMAIL && (
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-slate-800">
+                        Je suis
+                      </label>
+                      <div className="grid grid-cols-2 gap-2">
+                        {PROFILE_OPTIONS.map((option) => {
+                          const active = typeUtilisateur === option.value;
+                          return (
+                            <button
+                              key={option.value}
+                              type="button"
+                              onClick={() => setTypeUtilisateur(option.value)}
+                              disabled={loading}
+                              className={`rounded-lg border px-3 py-2 text-left text-xs font-semibold transition disabled:cursor-not-allowed disabled:opacity-60 ${
+                                active
+                                  ? "border-emerald-500 bg-white text-emerald-800"
+                                  : "border-emerald-200 bg-white/60 text-slate-700 hover:border-emerald-400"
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  <label className="flex items-start gap-2 text-xs text-slate-700">
+                    <input
+                      type="checkbox"
+                      checked={accepteCgv}
+                      onChange={(e) => setAccepteCgv(e.target.checked)}
+                      disabled={loading}
+                      className="mt-0.5 h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
+                    />
+                    <span>
+                      J&apos;accepte les{" "}
+                      <Link href="/cgu" className="text-emerald-600 underline">
+                        conditions générales de vente
+                      </Link>{" "}
+                      d&apos;EleveAI.
+                    </span>
+                  </label>
+
+                  <label className="flex items-start gap-2 text-xs text-slate-700">
+                    <input
+                      type="checkbox"
+                      checked={accepteNewsletter}
+                      onChange={(e) => setAccepteNewsletter(e.target.checked)}
+                      disabled={loading}
+                      className="mt-0.5 h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
+                    />
+                    <span>
+                      J&apos;accepte de recevoir des emails sur les nouveautés.
+                    </span>
+                  </label>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full rounded-lg bg-emerald-600 text-white py-2 text-sm font-semibold hover:bg-emerald-500 transition disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    {loading ? "Création..." : "Créer mon compte"}
+                  </button>
 
                   {errorMsg && (
                     <p className="text-[11px] text-red-600">{errorMsg}</p>

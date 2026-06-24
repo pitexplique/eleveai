@@ -10,6 +10,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { signSessionToken } from "@/lib/server/session";
+import { clientIp, rateLimitOk } from "@/lib/server/rateLimit";
 
 type AccesRow = {
   id: string;
@@ -51,6 +52,29 @@ export async function POST(req: Request) {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
+
+  // Anti-brute-force : par IP (anti-flood) et par couple de codes (anti
+  // devinette de mot de passe sur un compte précis). Fail-open tant que la
+  // fonction SQL rate_limit_hit n'est pas déployée (voir supabase/rate_limit.sql).
+  const ip = clientIp(req);
+  const [ipOk, credOk] = await Promise.all([
+    rateLimitOk(supabaseAdmin, `code-login:ip:${ip}`, 20, 60),
+    rateLimitOk(
+      supabaseAdmin,
+      `code-login:cred:${codeEtablissement.toUpperCase()}:${codeUtilisateur.toUpperCase()}`,
+      10,
+      600
+    ),
+  ]);
+  if (!ipOk || !credOk) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "Trop de tentatives. Réessayez dans quelques minutes.",
+      },
+      { status: 429 }
+    );
+  }
 
   let acces: AccesRow | null = null;
 

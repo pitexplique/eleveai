@@ -12,9 +12,14 @@ import {
   classText,
 } from "@/components/parcours/ClassBoard";
 
-import { getEvalBlanchePixIa, type PixEvalQuestion } from "@/lib/pix-ia/questions";
+import { getEvalBlanchePixIa, type PixEvalQuestion, type PixNiveau } from "@/lib/pix-ia/questions";
 import { computePixProfile } from "@/lib/pix-ia/score";
 import { PIX_DOMAINES } from "@/lib/pix-ia/referentiel";
+
+const NIVEAUX: { id: PixNiveau; label: string; desc: string }[] = [
+  { id: "college", label: "Collège", desc: "Novice / indépendant" },
+  { id: "lycee", label: "Lycée", desc: "Avancé / expert · dès la 2de" },
+];
 
 type EleveSession = {
   code_etablissement?: string | null;
@@ -44,6 +49,7 @@ export default function EvalPixIaClient() {
 
   const { classBoard, toggleClassBoard } = useClassBoard();
 
+  const [niveau, setNiveau] = useState<PixNiveau>("college");
   const [started, setStarted] = useState(false);
   const [questions, setQuestions] = useState<PixEvalQuestion[]>([]);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -65,9 +71,9 @@ export default function EvalPixIaClient() {
     // Anti-répétition : on mémorise les questions déjà vues d'une session à
     // l'autre (localStorage) et on en privilégie d'inédites. Fenêtre glissante
     // pour finir par autoriser de nouveau les anciennes quand le pool est épuisé.
-    const seen = readSeen();
-    const qs = getEvalBlanchePixIa(seen);
-    writeSeen([...seen, ...qs.map((q) => q.id)]);
+    const seen = readSeen(niveau);
+    const qs = getEvalBlanchePixIa(seen, niveau);
+    writeSeen(niveau, [...seen, ...qs.map((q) => q.id)]);
     setQuestions(qs);
     setAnswers({});
     setSubmitted(false);
@@ -91,11 +97,12 @@ export default function EvalPixIaClient() {
     }
     setSaving(true);
     const { error } = await saveResultat(eleve, "parcours_ia", {
-      niveau: "pix-ia",
+      niveau: `pix-ia-${niveau}`,
       score: profile.totalCorrect,
       total: profile.total,
       details: {
         type: "eval-blanche-pix-ia",
+        niveauScolaire: niveau,
         niveauEstime: profile.niveau.label,
         domaines: profile.domaines,
         competences: profile.competences,
@@ -124,6 +131,28 @@ export default function EvalPixIaClient() {
               Entraîne-toi pour l&apos;évaluation nationale <strong>Pix IA</strong>. {questionsCountLabel()} sur les
               3 domaines du référentiel, et tu obtiens ton profil de compétences.
             </p>
+
+            <div className="mt-6">
+              <p className="mb-2 text-sm font-black uppercase tracking-wider text-slate-500">Ton niveau</p>
+              <div className="grid grid-cols-2 gap-3">
+                {NIVEAUX.map((n) => (
+                  <button
+                    key={n.id}
+                    type="button"
+                    onClick={() => setNiveau(n.id)}
+                    className={[
+                      "rounded-2xl border p-3 text-left transition",
+                      niveau === n.id
+                        ? "border-indigo-500 bg-indigo-50 text-indigo-900"
+                        : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
+                    ].join(" ")}
+                  >
+                    <div className="text-sm font-black">{n.label}</div>
+                    <div className="text-xs text-slate-400">{n.desc}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
               {PIX_DOMAINES.map((d) => (
@@ -165,7 +194,7 @@ export default function EvalPixIaClient() {
             <div className="flex flex-wrap items-center gap-2">
               <ClassBoardToggle classBoard={classBoard} onToggle={toggleClassBoard} />
               <span className="rounded-full bg-indigo-100 px-4 py-2 text-sm font-black text-indigo-700">
-                Pix IA · {questions.length} questions
+                Pix IA · {niveau === "lycee" ? "Lycée" : "Collège"} · {questions.length} questions
               </span>
             </div>
           </div>
@@ -330,13 +359,13 @@ function questionsCountLabel() {
 
 // Suivi « déjà vu » (anti-répétition entre entraînements). Fenêtre glissante :
 // on ne garde que les N derniers ids, pour finir par réautoriser les anciennes.
-const SEEN_KEY = "pixia-seen";
 const SEEN_MAX = 150;
+const seenKey = (niveau: PixNiveau) => `pixia-seen-${niveau}`;
 
-function readSeen(): string[] {
+function readSeen(niveau: PixNiveau): string[] {
   if (typeof window === "undefined") return [];
   try {
-    const raw = window.localStorage.getItem(SEEN_KEY);
+    const raw = window.localStorage.getItem(seenKey(niveau));
     const arr = raw ? (JSON.parse(raw) as unknown) : [];
     return Array.isArray(arr) ? arr.filter((x): x is string => typeof x === "string") : [];
   } catch {
@@ -344,13 +373,13 @@ function readSeen(): string[] {
   }
 }
 
-function writeSeen(ids: string[]) {
+function writeSeen(niveau: PixNiveau, ids: string[]) {
   if (typeof window === "undefined") return;
   try {
     // dédoublonne en gardant l'ordre, puis ne conserve que les SEEN_MAX derniers
     const unique = Array.from(new Set(ids));
     const trimmed = unique.slice(-SEEN_MAX);
-    window.localStorage.setItem(SEEN_KEY, JSON.stringify(trimmed));
+    window.localStorage.setItem(seenKey(niveau), JSON.stringify(trimmed));
   } catch {
     /* localStorage indisponible : on ignore */
   }

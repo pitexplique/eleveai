@@ -10,6 +10,14 @@ export const metadata: Metadata = {
 
 const fiches = [
   {
+    href: "/fiches-cours/ia/usages/utiliser-ia-generative",
+    niveau: "Usages",
+    matiere: "IA",
+    titre: "Utiliser une IA générative",
+    resume:
+      "Écrire un bon prompt, itérer, vérifier les réponses et rester responsable.",
+  },
+  {
     href: "/fiches-cours/maths/6e/proportionnalite",
     niveau: "6e",
     matiere: "Maths",

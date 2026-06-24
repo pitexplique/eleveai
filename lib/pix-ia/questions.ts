@@ -11,6 +11,7 @@ import {
 import { d1Questions } from "./questions/d1";
 import { d2Questions } from "./questions/d2";
 import { d3Questions } from "./questions/d3";
+import { lyceeQuestions } from "./questions/lycee";
 
 export type { PixQuestion, PixEvalQuestion };
 export { questionId };
@@ -20,9 +21,17 @@ export const PIX_IA_QUESTIONS: PixQuestion[] = [
   ...d1Questions,
   ...d2Questions,
   ...d3Questions,
+  ...lyceeQuestions,
 ];
 
-const COLLEGE_PALIERS: PixPalier[] = ["novice", "independant"];
+export type PixNiveau = "college" | "lycee";
+
+export const COLLEGE_PALIERS: PixPalier[] = ["novice", "independant"];
+export const LYCEE_PALIERS: PixPalier[] = ["avance", "expert"];
+
+function palidersForNiveau(niveau: PixNiveau): PixPalier[] {
+  return niveau === "lycee" ? LYCEE_PALIERS : COLLEGE_PALIERS;
+}
 
 function palierOf(q: PixQuestion): PixPalier | undefined {
   return pixMicroskill(q.microskillId)?.palier;
@@ -55,24 +64,33 @@ function pickUnseen(pool: PixQuestion[], seen: Set<string>): PixQuestion {
   return from[Math.floor(Math.random() * from.length)];
 }
 
-// Éval blanche : 1 question (palier N/I) par compétence du référentiel (16),
-// ordre des domaines conservé, choix mélangés. `seenIds` = questions déjà vues
-// lors des entraînements précédents → l'éval privilégie des questions inédites.
-export function getEvalBlanchePixIa(seenIds: Iterable<string> = []): PixEvalQuestion[] {
+// Éval blanche : 1 question par compétence du référentiel (16), ordre des
+// domaines conservé, choix mélangés. `niveau` = college (N/I) ou lycee (A/E).
+// `seenIds` = questions déjà vues → on privilégie des questions inédites.
+// Repli : si une compétence n'a aucune question du niveau demandé (ex. 3.4 en
+// lycée), on bascule sur le pool collège pour ne pas laisser de trou.
+export function getEvalBlanchePixIa(
+  seenIds: Iterable<string> = [],
+  niveau: PixNiveau = "college"
+): PixEvalQuestion[] {
   const seen = new Set(seenIds);
-  const pool = questionsForPaliers(COLLEGE_PALIERS);
+  const wanted = questionsForPaliers(palidersForNiveau(niveau));
+  const fallback = questionsForPaliers(COLLEGE_PALIERS);
   const out: PixEvalQuestion[] = [];
   for (const comp of PIX_COMPETENCES) {
-    const candidates = pool.filter((q) => competenceOf(q.microskillId) === comp.id);
+    let candidates = wanted.filter((q) => competenceOf(q.microskillId) === comp.id);
+    if (candidates.length === 0) {
+      candidates = fallback.filter((q) => competenceOf(q.microskillId) === comp.id);
+    }
     if (candidates.length === 0) continue;
     out.push(toEval(pickUnseen(candidates, seen)));
   }
   return out;
 }
 
-// Combien de questions distinctes possibles par compétence (pour info / UI).
-export function poolSizeByCompetence(): Record<string, number> {
-  const pool = questionsForPaliers(COLLEGE_PALIERS);
+// Combien de questions distinctes possibles par compétence pour un niveau.
+export function poolSizeByCompetence(niveau: PixNiveau = "college"): Record<string, number> {
+  const pool = questionsForPaliers(palidersForNiveau(niveau));
   const out: Record<string, number> = {};
   for (const comp of PIX_COMPETENCES) {
     out[comp.id] = pool.filter((q) => competenceOf(q.microskillId) === comp.id).length;
