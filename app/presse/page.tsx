@@ -233,7 +233,7 @@ export default function PressePage() {
       {/* Footer */}
       <footer className="border-t border-slate-800 bg-slate-950">
         <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-slate-400 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
-          <p>🇫🇷 Hébergé en France · 🛡️ Conforme RGPD</p>
+          <p>🇫🇷 Hébergé en France · 🔒 Données chiffrées</p>
           <div className="flex gap-3">
             <Link href="/mentions-legales" className="hover:text-slate-200">
               Mentions légales

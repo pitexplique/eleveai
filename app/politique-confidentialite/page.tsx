@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Politique de confidentialité | EleveAI",
   description:
-    "Comment EleveAI protège les données des élèves, des professeurs et des établissements : données minimales, aucune revente, conformité RGPD.",
+    "Comment EleveAI protège les données des élèves, des professeurs et des établissements : données minimales, aucune revente, vos droits (accès, rectification, suppression).",
 };
 
 const sections = [
@@ -220,7 +220,7 @@ export default function PolitiqueConfidentialitePage() {
               <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-200">
                 <li>🔑 Les élèves se connectent avec des codes — sans e-mail ni téléphone.</li>
                 <li>🚫 Aucune donnée vendue, aucune publicité, aucun profilage.</li>
-                <li>🇪🇺 Conforme au RGPD : accès, rectification, suppression sur simple demande.</li>
+                <li>🇪🇺 Données hébergées dans l&apos;UE ; droits d&apos;accès, de rectification et de suppression sur simple demande.</li>
                 <li>🗑️ Données supprimées à la fin du contrat avec l&apos;établissement.</li>
               </ul>
             </div>

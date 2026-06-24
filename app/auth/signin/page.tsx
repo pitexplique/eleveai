@@ -827,8 +827,8 @@ export default function SignInPage() {
                 <span>Hébergé en France</span>
               </div>
               <div className="inline-flex items-center gap-1.5">
-                <span>🛡️</span>
-                <span>Conforme RGPD</span>
+                <span>🔒</span>
+                <span>Données chiffrées</span>
               </div>
             </div>
           </div>

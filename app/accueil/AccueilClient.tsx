@@ -703,7 +703,7 @@ export default function AccueilPage({
               <span className="text-2xl">🔒</span>
               <p className="mt-2 text-sm font-black text-white">Données protégées</p>
               <p className="mt-1 text-xs leading-relaxed text-white/60">
-                Conforme au RGPD : droit d&apos;accès et de suppression. Aucun nom de famille d&apos;élève n&apos;est publié.
+                Droit d&apos;accès et de suppression sur simple demande. Aucun nom de famille d&apos;élève n&apos;est publié.
               </p>
               <p className="mt-2 text-xs font-black text-sky-300 transition group-hover:translate-x-1">Notre politique →</p>
             </Link>

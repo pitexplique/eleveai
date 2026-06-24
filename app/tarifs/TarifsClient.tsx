@@ -106,7 +106,7 @@ const faq = [
   },
   {
     q: "Y a-t-il un contrat à signer ?",
-    a: "Pour l'accès établissement, oui — un contrat simple qui précise les conditions d'accès, la protection des données et la durée. Conforme au RGPD.",
+    a: "Pour l'accès établissement, oui — un contrat simple qui précise les conditions d'accès, la protection des données et la durée, dans le cadre du RGPD.",
   },
   {
     q: "Puis-je résilier à tout moment (offre famille) ?",
