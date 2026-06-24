@@ -53,6 +53,12 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/fiches-cours/maths", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/fiches-cours/ia",   priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/ia/fondements/definir-l-ia", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/ia/fondements/apprentissage-automatique", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/ia/fondements/modeles-apprentissage", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/ia/fondements/grands-modeles-de-langage", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/ia/fondements/algorithmes-de-recommandation", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/ia/fondements/ia-incarnee-robotique", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/fiches-cours/ia/usages/utiliser-ia-generative", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
 
   { path: "/calcul-rapide",   priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },

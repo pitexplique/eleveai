@@ -21,6 +21,50 @@ type FicheIa = {
 };
 
 const fiches: FicheIa[] = [
+  // ── Domaine 1 — Fondements ──
+  {
+    href: "/fiches-cours/ia/fondements/definir-l-ia",
+    domaineId: "1",
+    competence: "1.1",
+    titre: "Qu'est-ce que l'intelligence artificielle ?",
+    resume: "Définir l'IA, ses deux approches et pourquoi elle a explosé récemment.",
+  },
+  {
+    href: "/fiches-cours/ia/fondements/apprentissage-automatique",
+    domaineId: "1",
+    competence: "1.2",
+    titre: "L'apprentissage automatique",
+    resume: "Apprendre à partir de données : supervisé, non supervisé, renforcement.",
+  },
+  {
+    href: "/fiches-cours/ia/fondements/modeles-apprentissage",
+    domaineId: "1",
+    competence: "1.3",
+    titre: "Les modèles d'apprentissage",
+    resume: "Arbre de décision, régression, réseau de neurones et « boîte noire ».",
+  },
+  {
+    href: "/fiches-cours/ia/fondements/grands-modeles-de-langage",
+    domaineId: "1",
+    competence: "1.4",
+    titre: "Les grands modèles de langage",
+    resume: "Prédire le mot suivant, l'entraînement, et les hallucinations.",
+  },
+  {
+    href: "/fiches-cours/ia/fondements/algorithmes-de-recommandation",
+    domaineId: "1",
+    competence: "1.5",
+    titre: "Les algorithmes de recommandation",
+    resume: "Comment on te recommande des contenus, et la bulle de filtre.",
+  },
+  {
+    href: "/fiches-cours/ia/fondements/ia-incarnee-robotique",
+    domaineId: "1",
+    competence: "1.6",
+    titre: "L'IA incarnée et la robotique",
+    resume: "Percevoir, décider, agir : l'IA dans les robots du monde réel.",
+  },
+  // ── Domaine 2 — Usages ──
   {
     href: "/fiches-cours/ia/usages/utiliser-ia-generative",
     domaineId: "2",
