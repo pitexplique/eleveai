@@ -49,7 +49,8 @@ const NAV_IA = [
   { href: "/parcours-ia",          icon: "🛤️", label: "Parcours IA", desc: "Bilan de culture et de reflexes IA, A1 -> C1" },
   { href: "/eval-pix-ia",          icon: "🎓", label: "Éval blanche Pix IA", desc: "Prépa éval nationale : 3 domaines, profil de compétences" },
   { href: "/fiches-cours/ia",      icon: "PDF", label: "Fiches de cours IA", desc: "Cours IA par domaine, à lire ou télécharger en PDF" },
-  { href: "/fiches-cours/ia/livre", icon: "📕", label: "Le livre IA", desc: "Les 16 fiches compilées en un livre (PDF)" },
+  { href: "/fiches-cours/ia/livre", icon: "📕", label: "Le livre IA", desc: "Les 16 fiches en un livre, à télécharger en PDF ou EPUB" },
+  { href: "/livre/comprendre-l-ia.epub", icon: "⬇️", label: "Ebook IA (EPUB)", desc: "Télécharger le livre au format liseuse", download: true },
   { href: "/coach-ia/ia?classe=a1", icon: "A1", label: "A1 Comprendre", desc: "Comprendre et expliquer" },
   { href: "/coach-ia/ia?classe=a2", icon: "A2", label: "A2 Utiliser", desc: "Utiliser pour apprendre" },
   { href: "/coach-ia/ia?classe=b1", icon: "B1", label: "B1 Securite", desc: "Verifier et se proteger" },
@@ -72,7 +73,7 @@ const NAV_PARCOURS = [
   { href: "/parcours-ia",            icon: "🤖", label: "Parcours IA",       desc: "Culture et réflexes IA, A1 → C1" },
 ];
 
-type NavItem = { href: string; icon: string; label: string; desc: string };
+type NavItem = { href: string; icon: string; label: string; desc: string; download?: boolean };
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -155,24 +156,31 @@ function NavDropdown({
           onMouseEnter={cancelClose}
           onMouseLeave={scheduleClose}
         >
-          {items.map((item, i) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className={[
-                "flex items-start gap-3 px-4 py-3 transition hover:bg-white/10",
-                i === 0 ? "rounded-t-2xl" : "",
-                i === items.length - 1 ? "rounded-b-2xl" : "border-b border-white/5",
-              ].join(" ")}
-            >
-              <span className="mt-0.5 text-lg leading-none">{item.icon}</span>
-              <div>
-                <p className="text-sm font-bold text-white">{item.label}</p>
-                <p className="text-xs text-white/50">{item.desc}</p>
-              </div>
-            </Link>
-          ))}
+          {items.map((item, i) => {
+            const cls = [
+              "flex items-start gap-3 px-4 py-3 transition hover:bg-white/10",
+              i === 0 ? "rounded-t-2xl" : "",
+              i === items.length - 1 ? "rounded-b-2xl" : "border-b border-white/5",
+            ].join(" ");
+            const inner = (
+              <>
+                <span className="mt-0.5 text-lg leading-none">{item.icon}</span>
+                <div>
+                  <p className="text-sm font-bold text-white">{item.label}</p>
+                  <p className="text-xs text-white/50">{item.desc}</p>
+                </div>
+              </>
+            );
+            return item.download ? (
+              <a key={item.href} href={item.href} download onClick={() => setOpen(false)} className={cls}>
+                {inner}
+              </a>
+            ) : (
+              <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className={cls}>
+                {inner}
+              </Link>
+            );
+          })}
         </div>
       )}
     </div>
@@ -198,21 +206,29 @@ function MobileSection({
         {title}
       </p>
       <div className="grid grid-cols-2 gap-2">
-        {items.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={[
-              "flex items-center gap-2 rounded-xl border px-3 py-3 text-sm font-bold text-white transition hover:bg-white/15",
-              isActive(pathname, item.href)
-                ? "border-white/40 bg-white/15"
-                : "border-white/10 bg-white/5",
-            ].join(" ")}
-          >
-            <span className="text-base">{item.icon}</span>
-            <span className="leading-tight">{item.label}</span>
-          </Link>
-        ))}
+        {items.map((item) => {
+          const cls = [
+            "flex items-center gap-2 rounded-xl border px-3 py-3 text-sm font-bold text-white transition hover:bg-white/15",
+            isActive(pathname, item.href)
+              ? "border-white/40 bg-white/15"
+              : "border-white/10 bg-white/5",
+          ].join(" ");
+          const inner = (
+            <>
+              <span className="text-base">{item.icon}</span>
+              <span className="leading-tight">{item.label}</span>
+            </>
+          );
+          return item.download ? (
+            <a key={item.href} href={item.href} download className={cls}>
+              {inner}
+            </a>
+          ) : (
+            <Link key={item.href} href={item.href} className={cls}>
+              {inner}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
