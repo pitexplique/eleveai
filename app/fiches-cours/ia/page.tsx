@@ -66,12 +66,76 @@ const fiches: FicheIa[] = [
   },
   // ── Domaine 2 — Usages ──
   {
+    href: "/fiches-cours/ia/usages/familles-de-taches",
+    domaineId: "2",
+    competence: "2.1",
+    titre: "Ce que l'IA sait faire",
+    resume: "Reconnaissance, prédiction, recommandation, génération de contenu.",
+  },
+  {
     href: "/fiches-cours/ia/usages/utiliser-ia-generative",
     domaineId: "2",
     competence: "2.2",
     titre: "Utiliser une IA générative",
     resume:
       "Écrire un bon prompt, itérer, vérifier les réponses et rester responsable.",
+  },
+  {
+    href: "/fiches-cours/ia/usages/evaluer-l-information",
+    domaineId: "2",
+    competence: "2.3",
+    titre: "Évaluer l'information à l'ère de l'IA",
+    resume: "Hypertrucages, bots, et comment vérifier une information.",
+  },
+  {
+    href: "/fiches-cours/ia/usages/services-de-recommandation",
+    domaineId: "2",
+    competence: "2.4",
+    titre: "Utiliser les services de recommandation",
+    resume: "Avantages, limites et contrôle de la personnalisation.",
+  },
+  {
+    href: "/fiches-cours/ia/usages/ia-dans-une-organisation",
+    domaineId: "2",
+    competence: "2.5",
+    titre: "Utiliser l'IA dans une organisation",
+    resume: "Identifier le besoin, protéger les données, charte d'usage et RAG.",
+  },
+  // ── Domaine 3 — Enjeux ──
+  {
+    href: "/fiches-cours/ia/enjeux/empreinte-environnementale",
+    domaineId: "3",
+    competence: "3.1",
+    titre: "L'empreinte environnementale de l'IA",
+    resume: "Énergie des calculs, ressources rares et IA frugale.",
+  },
+  {
+    href: "/fiches-cours/ia/enjeux/gouvernance",
+    domaineId: "3",
+    competence: "3.2",
+    titre: "La gouvernance de l'IA",
+    resume: "Qui régule l'IA, l'IA Act, souveraineté et valeurs encodées.",
+  },
+  {
+    href: "/fiches-cours/ia/enjeux/ethique-et-transparence",
+    domaineId: "3",
+    competence: "3.3",
+    titre: "Éthique et transparence de l'IA",
+    resume: "Transparence, non-discrimination, responsabilité, RGPD et IA Act.",
+  },
+  {
+    href: "/fiches-cours/ia/enjeux/emploi-et-formation",
+    domaineId: "3",
+    competence: "3.4",
+    titre: "IA, emploi et formation",
+    resume: "Métiers qui changent, nouveaux métiers, travailleurs du clic.",
+  },
+  {
+    href: "/fiches-cours/ia/enjeux/enjeux-culturels-societaux",
+    domaineId: "3",
+    competence: "3.5",
+    titre: "Enjeux culturels et sociétaux de l'IA",
+    resume: "Biais, désinformation, diversité culturelle et droits des créateurs.",
   },
 ];
 
