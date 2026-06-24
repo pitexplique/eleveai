@@ -68,13 +68,6 @@ export default function ProfsPage() {
             {/* si vrai, tu peux ajouter : */}
             {/* <span className="ml-2 text-[11px] rounded-full bg-emerald-600/20 px-2 py-0.5">5 gratuits</span> */}
           </Link>
-
-          <Link
-            href="/atelier-IA"
-            className="inline-flex items-center rounded-xl border border-slate-700 px-4 py-2 text-sm text-slate-200 hover:bg-slate-900"
-          >
-            Découvrir l’Atelier-IA
-          </Link>
         </div>
       </section>
     </main>

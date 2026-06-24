@@ -245,7 +245,9 @@ export default function UtiliserIaGenerativePage() {
               Fiches de cours
             </Link>
             <ChevronRight className="h-4 w-4 text-slate-400" />
-            <span>IA</span>
+            <Link href="/fiches-cours/ia" className="transition hover:text-slate-700">
+              IA
+            </Link>
             <ChevronRight className="h-4 w-4 text-slate-400" />
             <span>Usages</span>
             <ChevronRight className="h-4 w-4 text-slate-400" />

@@ -1,0 +1,163 @@
+import Link from "next/link";
+import type { Metadata } from "next";
+import { ArrowLeft, BookOpen, ChevronRight, Download, FileText, MessageCircle } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Fiches de cours Maths",
+  description:
+    "Fiches de cours de mathématiques eleveai.fr à lire en ligne ou à télécharger en PDF.",
+};
+
+const fiches = [
+  {
+    href: "/fiches-cours/maths/6e/proportionnalite",
+    niveau: "6e",
+    titre: "Proportionnalité",
+    resume:
+      "Reconnaître une situation proportionnelle, compléter un tableau et revenir à l'unité.",
+  },
+  {
+    href: "/fiches-cours/maths/4e/cosinus",
+    niveau: "4e",
+    titre: "Cosinus",
+    resume:
+      "Utiliser le cosinus dans un triangle rectangle pour calculer une longueur.",
+  },
+  {
+    href: "/fiches-cours/maths/4e/pythagore",
+    niveau: "4e",
+    titre: "Théorème de Pythagore",
+    resume:
+      "Calculer une longueur dans un triangle rectangle et vérifier qu'un triangle est rectangle.",
+  },
+  {
+    href: "/fiches-cours/maths/5e/pourcentages",
+    niveau: "5e",
+    titre: "Les pourcentages",
+    resume:
+      "Calculer un pourcentage d'un nombre, une réduction ou une augmentation.",
+  },
+  {
+    href: "/fiches-cours/maths/3e/thales",
+    niveau: "3e",
+    titre: "Théorème de Thalès",
+    resume:
+      "Calculer une longueur avec les rapports égaux et prouver un parallélisme.",
+  },
+  {
+    href: "/fiches-cours/maths/5e/fractions-addition",
+    niveau: "5e",
+    titre: "Additionner des fractions",
+    resume: "Mettre au même dénominateur, puis additionner les numérateurs.",
+  },
+  {
+    href: "/fiches-cours/maths/4e/statistiques",
+    niveau: "4e",
+    titre: "Les statistiques",
+    resume:
+      "Calculer une moyenne, une médiane et l'étendue d'une série de données.",
+  },
+  {
+    href: "/fiches-cours/maths/4e/probabilites",
+    niveau: "4e",
+    titre: "Les probabilités",
+    resume:
+      "Calculer la probabilité d'un événement (cas favorables sur cas possibles).",
+  },
+];
+
+export default function FichesCoursMathsPage() {
+  return (
+    <main className="min-h-screen bg-[#f5f8ff] text-slate-800">
+      <section className="border-b border-slate-200 bg-gradient-to-br from-cyan-50 via-white to-emerald-50">
+        <div className="mx-auto flex max-w-6xl flex-col gap-5 px-5 py-12 sm:px-8">
+          <nav className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm font-bold text-slate-500">
+            <Link
+              href="/fiches-cours"
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3.5 py-1.5 text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-50"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Fiches de cours
+            </Link>
+            <ChevronRight className="h-4 w-4 text-slate-400" />
+            <span className="text-slate-900">Maths</span>
+          </nav>
+          <div className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-black uppercase text-emerald-700">
+            <BookOpen className="h-4 w-4" />
+            Mathématiques
+          </div>
+          <div className="max-w-3xl">
+            <h1 className="text-3xl font-black tracking-normal text-slate-900 sm:text-5xl">
+              Fiches de cours Maths
+            </h1>
+            <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
+              Des fiches courtes, colorées, lisibles sur téléphone et imprimables
+              en PDF depuis le navigateur.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 pt-8 sm:px-8">
+        <div className="flex flex-col gap-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <div className="flex items-start gap-3">
+            <MessageCircle className="mt-0.5 h-6 w-6 shrink-0 text-emerald-500" />
+            <div>
+              <p className="text-base font-black text-slate-900">
+                Teste les nouvelles fiches de cours
+              </p>
+              <p className="mt-1 text-sm leading-6 text-slate-600">
+                Ces fiches sont toutes neuves. Lis-les, entraîne-toi, puis dis-nous
+                si elles t&apos;aident à mieux comprendre. Ton avis nous aide à les
+                améliorer pour toute la classe.
+              </p>
+            </div>
+          </div>
+          <Link
+            href="/votre-avis"
+            className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full bg-emerald-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-400"
+          >
+            <MessageCircle className="h-4 w-4" />
+            Donner mon avis
+          </Link>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
+        <div className="grid gap-4 md:grid-cols-2">
+          {fiches.map((fiche) => (
+            <Link
+              key={fiche.href}
+              href={fiche.href}
+              className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-200/40"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <div className="flex flex-wrap gap-2 text-xs font-black uppercase">
+                    <span className="rounded-full bg-cyan-100 px-2.5 py-1 text-cyan-700">
+                      {fiche.niveau}
+                    </span>
+                    <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-emerald-700">
+                      Maths
+                    </span>
+                  </div>
+                  <h2 className="mt-4 text-xl font-black text-slate-900">
+                    {fiche.titre}
+                  </h2>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                    {fiche.resume}
+                  </p>
+                </div>
+                <FileText className="mt-1 h-6 w-6 shrink-0 text-emerald-500" />
+              </div>
+              <div className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-emerald-600">
+                <Download className="h-4 w-4" />
+                Ouvrir la fiche PDF
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+}

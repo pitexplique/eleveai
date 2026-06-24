@@ -58,12 +58,6 @@ export default function ElevesPage() {
           >
             Accéder à l’espace Élèves (générateur)
           </Link>
-          <Link
-            href="/atelier-IA/vision"
-            className="inline-flex items-center rounded-xl border border-slate-700 px-4 py-2 text-sm text-slate-200 hover:bg-slate-900"
-          >
-            Comprendre la pédagogie
-          </Link>
         </div>
       </section>
     </main>

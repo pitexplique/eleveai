@@ -79,3 +79,19 @@ body {
     animation: none;
   }
 }
+
+/* Fiches de cours — à l'écran, la correction est repliée derrière
+   « Voir la correction ». À l'impression / PDF, elle se déplie (géré dans
+   chaque fiche) et le libellé devient « Correction : » (raffinement 24/06/2026,
+   appliqué globalement à toutes les fiches d'un coup). */
+@media print {
+  .fiche-correction > summary {
+    font-size: 0 !important;
+  }
+  .fiche-correction > summary::before {
+    content: "Correction\00a0:";
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #475569;
+  }
+}

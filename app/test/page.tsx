@@ -68,7 +68,6 @@ type RouteItem = {
 
 const ROUTES_BASE: RouteItem[] = [
   { href: "/dashboard", label: "Dashboard", requiresLogin: true },
-  { href: "/espace-atelier-IA", label: "Espace Atelier-IA" },
   { href: "/espace-profs", label: "Espace Profs" },
   { href: "/espace-eleves", label: "Espace Élèves" },
   { href: "/espace-parents", label: "Espace Parents" },
