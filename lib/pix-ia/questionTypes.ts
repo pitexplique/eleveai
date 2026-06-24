@@ -13,6 +13,7 @@ export type PixQuestion = {
 };
 
 export type PixEvalQuestion = PixQuestion & {
+  id: string;
   competenceId: string;
   palier?: PixPalier;
   correct: string;
@@ -22,6 +23,15 @@ export type PixEvalQuestion = PixQuestion & {
 // "1.4.2" -> "1.4"
 export function competenceOf(microskillId: string): string {
   return microskillId.split(".").slice(0, 2).join(".");
+}
+
+// Identifiant stable d'une question (microskill + hash du texte), indépendant
+// de l'ordre dans le tableau. Sert au suivi « déjà vue » (anti-répétition).
+export function questionId(q: PixQuestion): string {
+  const s = `${q.microskillId}|${q.text}`;
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0;
+  return `${q.microskillId}#${(h >>> 0).toString(36)}`;
 }
 
 export function shuffle<T>(arr: readonly T[]): T[] {

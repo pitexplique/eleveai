@@ -1,8 +1,9 @@
 import type { PixQuestion } from "../questionTypes";
 
 // Domaine 2 — Usages et applications de l'IA. Paliers novice/indépendant.
+// Plusieurs variantes par microskill (rejouabilité / anti-répétition).
 export const d2Questions: PixQuestion[] = [
-  // 2.1 Familles de tâches
+  // ── 2.1 Familles de tâches ───────────────────────────────────────────────
   {
     microskillId: "2.1.1",
     text: "Lequel de ces usages repose sur de l'intelligence artificielle ?",
@@ -21,6 +22,16 @@ export const d2Questions: PixQuestion[] = [
       "rien de particulier",
       "un humain qui lit ton SMS en direct",
       "une simple ampoule",
+    ],
+  },
+  {
+    microskillId: "2.1.1",
+    text: "Un assistant vocal qui comprend ta question utilise de l'IA pour :",
+    choices: [
+      "reconnaître ta voix et interpréter ta demande",
+      "recharger le téléphone",
+      "régler l'heure",
+      "augmenter la luminosité",
     ],
   },
   {
@@ -44,6 +55,16 @@ export const d2Questions: PixQuestion[] = [
     ],
   },
   {
+    microskillId: "2.1.2",
+    text: "Un logiciel médical qui repère une anomalie sur une radio fait de la :",
+    choices: [
+      "reconnaissance d'images",
+      "traduction automatique",
+      "génération de musique",
+      "recommandation de vidéos",
+    ],
+  },
+  {
     microskillId: "2.1.3",
     text: "Reconnaissance, prédiction, recommandation, génération de contenu sont :",
     choices: [
@@ -51,6 +72,16 @@ export const d2Questions: PixQuestion[] = [
       "des marques de téléphones",
       "des langues parlées",
       "des types de batteries",
+    ],
+  },
+  {
+    microskillId: "2.1.3",
+    text: "Créer une image à partir d'une phrase est une tâche de :",
+    choices: [
+      "génération de contenu",
+      "reconnaissance vocale",
+      "calcul de distance",
+      "tri alphabétique",
     ],
   },
   {
@@ -63,8 +94,18 @@ export const d2Questions: PixQuestion[] = [
       "ton professeur",
     ],
   },
+  {
+    microskillId: "2.1.4",
+    text: "Quand une boutique en ligne te propose « des produits qui pourraient te plaire », c'est :",
+    choices: [
+      "une recommandation par IA",
+      "une simple horloge",
+      "un correcteur d'orthographe",
+      "un détecteur de fumée",
+    ],
+  },
 
-  // 2.2 Utiliser une IA générative
+  // ── 2.2 Utiliser une IA générative ───────────────────────────────────────
   {
     microskillId: "2.2.1",
     text: "Une bonne requête (prompt) pour une IA générative :",
@@ -86,6 +127,16 @@ export const d2Questions: PixQuestion[] = [
     ],
   },
   {
+    microskillId: "2.2.1",
+    text: "Pour avoir une réponse adaptée, il est utile d'indiquer dans le prompt :",
+    choices: [
+      "le contexte, l'objectif et la forme attendue",
+      "uniquement un mot",
+      "ton humeur du jour",
+      "la couleur de l'écran",
+    ],
+  },
+  {
     microskillId: "2.2.2",
     text: "Si la réponse de l'IA ne te convient pas, le mieux est de :",
     choices: [
@@ -93,6 +144,16 @@ export const d2Questions: PixQuestion[] = [
       "abandonner tout de suite",
       "recopier la réponse sans la lire",
       "éteindre l'ordinateur",
+    ],
+  },
+  {
+    microskillId: "2.2.2",
+    text: "Travailler « par itérations » avec une IA, c'est :",
+    choices: [
+      "améliorer progressivement la réponse en lui demandant des modifications",
+      "poser une seule question et ne jamais revenir",
+      "copier la première réponse venue",
+      "changer d'application",
     ],
   },
   {
@@ -106,6 +167,16 @@ export const d2Questions: PixQuestion[] = [
     ],
   },
   {
+    microskillId: "2.2.3",
+    text: "Laquelle de ces demandes est adaptée à une IA générative de texte ?",
+    choices: [
+      "« propose-moi un titre pour mon exposé »",
+      "« repasse mon tee-shirt »",
+      "« arrose les plantes »",
+      "« range ma chambre »",
+    ],
+  },
+  {
     microskillId: "2.2.4",
     text: "Après avoir reçu une réponse d'une IA, le bon réflexe est de :",
     choices: [
@@ -115,8 +186,18 @@ export const d2Questions: PixQuestion[] = [
       "l'effacer sans la lire",
     ],
   },
+  {
+    microskillId: "2.2.4",
+    text: "Une IA te donne une réponse sûre d'elle mais qui te semble étrange. Tu devrais :",
+    choices: [
+      "la recouper avec une source fiable",
+      "la recopier telle quelle",
+      "supposer qu'elle a forcément raison",
+      "la diffuser tout de suite",
+    ],
+  },
 
-  // 2.3 Évaluer l'information
+  // ── 2.3 Évaluer l'information ─────────────────────────────────────────────
   {
     microskillId: "2.3.1",
     text: "Devant une fausse vidéo très partagée, se demander « qui l'a publiée et pourquoi ? » sert à :",
@@ -125,6 +206,16 @@ export const d2Questions: PixQuestion[] = [
       "rien du tout",
       "accélérer ton téléphone",
       "gagner des abonnés",
+    ],
+  },
+  {
+    microskillId: "2.3.1",
+    text: "Un hypertrucage (deepfake), c'est :",
+    choices: [
+      "un contenu (photo/vidéo) truqué avec l'IA, qui imite une personne réelle",
+      "un vrai documentaire vérifié",
+      "une panne de caméra",
+      "un jeu de société",
     ],
   },
   {
@@ -138,6 +229,16 @@ export const d2Questions: PixQuestion[] = [
     ],
   },
   {
+    microskillId: "2.3.2",
+    text: "Voir une mention « contenu créé avec l'IA » doit t'inciter à :",
+    choices: [
+      "regarder le contenu avec esprit critique",
+      "le croire sans réfléchir",
+      "le supprimer de ton téléphone",
+      "le signaler à la police",
+    ],
+  },
+  {
     microskillId: "2.3.3",
     text: "Pour vérifier une information trouvée en ligne, une étape utile est de :",
     choices: [
@@ -145,6 +246,16 @@ export const d2Questions: PixQuestion[] = [
       "regarder seulement le nombre de « j'aime »",
       "la croire si elle est en couleur",
       "vérifier la taille du texte",
+    ],
+  },
+  {
+    microskillId: "2.3.3",
+    text: "Une bonne pratique de vérification (fact-checking) est de :",
+    choices: [
+      "vérifier si l'information apparaît dans plusieurs sources sérieuses",
+      "compter les emojis du message",
+      "regarder l'heure de publication uniquement",
+      "faire confiance au plus grand nombre de partages",
     ],
   },
   {
@@ -157,8 +268,18 @@ export const d2Questions: PixQuestion[] = [
       "l'IA générative ne se trompe jamais",
     ],
   },
+  {
+    microskillId: "2.3.4",
+    text: "Pour trouver la source exacte d'une information, il vaut souvent mieux :",
+    choices: [
+      "utiliser un moteur de recherche qui renvoie vers des pages identifiables",
+      "demander à une IA générative et la croire sans vérifier",
+      "regarder une seule vidéo",
+      "te fier à un commentaire anonyme",
+    ],
+  },
 
-  // 2.4 Services de recommandation
+  // ── 2.4 Services de recommandation ───────────────────────────────────────
   {
     microskillId: "2.4.1",
     text: "Lequel de ces services repose sur la recommandation ?",
@@ -167,6 +288,16 @@ export const d2Questions: PixQuestion[] = [
       "une calculatrice",
       "un thermomètre",
       "une règle graduée",
+    ],
+  },
+  {
+    microskillId: "2.4.1",
+    text: "La personnalisation des contenus repose sur :",
+    choices: [
+      "les traces que tu laisses (clics, vidéos vues, recherches)",
+      "la couleur de ta chambre",
+      "ta date d'anniversaire uniquement",
+      "rien du tout",
     ],
   },
   {
@@ -200,6 +331,16 @@ export const d2Questions: PixQuestion[] = [
     ],
   },
   {
+    microskillId: "2.4.3",
+    text: "Pour que les suggestions te correspondent mieux, tu peux :",
+    choices: [
+      "régler tes préférences et nettoyer ton historique",
+      "casser ton téléphone",
+      "attendre sans rien faire",
+      "supprimer Internet",
+    ],
+  },
+  {
     microskillId: "2.4.4",
     text: "Une « chambre d'écho », c'est quand :",
     choices: [
@@ -209,8 +350,18 @@ export const d2Questions: PixQuestion[] = [
       "tu vois absolument tous les avis possibles",
     ],
   },
+  {
+    microskillId: "2.4.4",
+    text: "Pour éviter l'enfermement algorithmique, une bonne habitude est de :",
+    choices: [
+      "diversifier ses sources et explorer d'autres contenus",
+      "ne suivre qu'un seul créateur",
+      "désactiver son cerveau critique",
+      "tout croire sur parole",
+    ],
+  },
 
-  // 2.5 IA dans une organisation
+  // ── 2.5 IA dans une organisation ─────────────────────────────────────────
   {
     microskillId: "2.5.1",
     text: "Lequel de ces outils peut intégrer de l'IA ?",
@@ -222,6 +373,16 @@ export const d2Questions: PixQuestion[] = [
     ],
   },
   {
+    microskillId: "2.5.1",
+    text: "Dans une suite bureautique, une fonction d'IA peut :",
+    choices: [
+      "proposer un brouillon de texte ou un résumé",
+      "repasser le linge",
+      "remplacer la prise électrique",
+      "faire le café",
+    ],
+  },
+  {
     microskillId: "2.5.2",
     text: "Une « charte d'usage de l'IA » dans un établissement sert à :",
     choices: [
@@ -229,6 +390,16 @@ export const d2Questions: PixQuestion[] = [
       "vendre des ordinateurs",
       "interdire Internet pour toujours",
       "noter les élèves",
+    ],
+  },
+  {
+    microskillId: "2.5.2",
+    text: "Respecter une charte d'usage de l'IA, c'est :",
+    choices: [
+      "n'utiliser l'IA que pour les tâches autorisées, en suivant les règles fixées",
+      "faire tout ce qu'on veut sans limite",
+      "ignorer les consignes",
+      "partager les mots de passe",
     ],
   },
   {
@@ -259,6 +430,16 @@ export const d2Questions: PixQuestion[] = [
       "le télécharger sans rien lire",
       "le partager à tout le monde d'abord",
       "changer ton nom d'utilisateur",
+    ],
+  },
+  {
+    microskillId: "2.5.4",
+    text: "Les mentions légales et conditions d'utilisation d'un outil d'IA renseignent surtout sur :",
+    choices: [
+      "ce qui est fait de tes données",
+      "la météo",
+      "le score d'un match",
+      "la recette du jour",
     ],
   },
 ];

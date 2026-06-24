@@ -62,7 +62,13 @@ export default function EvalPixIaClient() {
   }, [submitted, questions, answers]);
 
   function start() {
-    setQuestions(getEvalBlanchePixIa());
+    // Anti-répétition : on mémorise les questions déjà vues d'une session à
+    // l'autre (localStorage) et on en privilégie d'inédites. Fenêtre glissante
+    // pour finir par autoriser de nouveau les anciennes quand le pool est épuisé.
+    const seen = readSeen();
+    const qs = getEvalBlanchePixIa(seen);
+    writeSeen([...seen, ...qs.map((q) => q.id)]);
+    setQuestions(qs);
     setAnswers({});
     setSubmitted(false);
     setStarted(true);
@@ -320,4 +326,32 @@ export default function EvalPixIaClient() {
 
 function questionsCountLabel() {
   return "16 questions";
+}
+
+// Suivi « déjà vu » (anti-répétition entre entraînements). Fenêtre glissante :
+// on ne garde que les N derniers ids, pour finir par réautoriser les anciennes.
+const SEEN_KEY = "pixia-seen";
+const SEEN_MAX = 150;
+
+function readSeen(): string[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = window.localStorage.getItem(SEEN_KEY);
+    const arr = raw ? (JSON.parse(raw) as unknown) : [];
+    return Array.isArray(arr) ? arr.filter((x): x is string => typeof x === "string") : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeSeen(ids: string[]) {
+  if (typeof window === "undefined") return;
+  try {
+    // dédoublonne en gardant l'ordre, puis ne conserve que les SEEN_MAX derniers
+    const unique = Array.from(new Set(ids));
+    const trimmed = unique.slice(-SEEN_MAX);
+    window.localStorage.setItem(SEEN_KEY, JSON.stringify(trimmed));
+  } catch {
+    /* localStorage indisponible : on ignore */
+  }
 }

@@ -1,8 +1,10 @@
 import type { PixQuestion } from "../questionTypes";
 
 // Domaine 1 — Fondements de l'IA. Questions paliers novice/indépendant.
+// Plusieurs variantes par microskill pour permettre des entraînements répétés
+// sans répétition (le moteur anti-répétition s'appuie sur ce volume).
 export const d1Questions: PixQuestion[] = [
-  // 1.1 Définir l'IA, son histoire
+  // ── 1.1 Définir l'IA, son histoire ───────────────────────────────────────
   {
     microskillId: "1.1.1",
     text: "L'intelligence artificielle est avant tout :",
@@ -22,6 +24,16 @@ export const d1Questions: PixQuestion[] = [
       "ralentir les ordinateurs",
       "remplacer Internet",
       "fabriquer des meubles",
+    ],
+  },
+  {
+    microskillId: "1.1.1",
+    text: "Laquelle de ces phrases décrit le mieux l'IA ?",
+    choices: [
+      "un ensemble de techniques scientifiques pour réaliser des tâches « intelligentes »",
+      "un robot qui ressemble à un humain",
+      "un jeu vidéo en ligne",
+      "un réseau social",
     ],
   },
   {
@@ -46,6 +58,16 @@ export const d1Questions: PixQuestion[] = [
     ],
   },
   {
+    microskillId: "1.1.2",
+    text: "Sans grandes quantités de données, une IA moderne :",
+    choices: [
+      "a beaucoup plus de mal à apprendre correctement",
+      "apprend encore mieux et plus vite",
+      "n'a plus besoin d'électricité",
+      "devient un robot physique",
+    ],
+  },
+  {
     microskillId: "1.1.3",
     text: "Quand un journal parle d'« une IA » pour désigner un chatbot, c'est :",
     choices: [
@@ -55,8 +77,28 @@ export const d1Questions: PixQuestion[] = [
       "le nom officiel du logiciel",
     ],
   },
+  {
+    microskillId: "1.1.3",
+    text: "Le terme « intelligence artificielle » désignait à l'origine :",
+    choices: [
+      "une discipline scientifique",
+      "un téléphone portable",
+      "un site web précis",
+      "un robot ménager",
+    ],
+  },
+  {
+    microskillId: "1.1.3",
+    text: "« Cette IA a écrit le texte. » Une formulation plus juste serait :",
+    choices: [
+      "« ce logiciel d'IA générative a produit le texte »",
+      "« ce robot vivant a écrit le texte »",
+      "« ce cerveau humain a écrit le texte »",
+      "« ce moteur de recherche a écrit le texte »",
+    ],
+  },
 
-  // 1.2 Apprentissage automatique
+  // ── 1.2 Apprentissage automatique ────────────────────────────────────────
   {
     microskillId: "1.2.1",
     text: "La phase d'« entraînement » d'un modèle d'IA consiste à :",
@@ -79,6 +121,16 @@ export const d1Questions: PixQuestion[] = [
     explanation: "Le test mesure la capacité du modèle à généraliser à de nouveaux cas.",
   },
   {
+    microskillId: "1.2.1",
+    text: "Pendant l'entraînement, un modèle d'IA :",
+    choices: [
+      "apprend petit à petit à partir des exemples qu'on lui donne",
+      "est déjà parfait dès le départ",
+      "n'a besoin d'aucune donnée",
+      "recopie simplement Internet en direct",
+    ],
+  },
+  {
     microskillId: "1.2.2",
     text: "Dans l'apprentissage supervisé, on fournit au modèle :",
     choices: [
@@ -94,6 +146,16 @@ export const d1Questions: PixQuestion[] = [
     choices: ["supervisé", "non supervisé", "par renforcement", "sans aucune donnée"],
   },
   {
+    microskillId: "1.2.2",
+    text: "« Données étiquetées » signifie que chaque exemple :",
+    choices: [
+      "est accompagné de la bonne réponse attendue",
+      "porte une étiquette de prix",
+      "est en double",
+      "a été effacé",
+    ],
+  },
+  {
     microskillId: "1.2.3",
     text: "Tu veux entraîner une IA à trier des e-mails en « spam / pas spam ». Les étiquettes à fournir sont :",
     choices: [
@@ -103,8 +165,18 @@ export const d1Questions: PixQuestion[] = [
       "rien, l'IA devine toute seule",
     ],
   },
+  {
+    microskillId: "1.2.3",
+    text: "Pour entraîner une IA à reconnaître des fruits sur des photos, les bonnes étiquettes seraient :",
+    choices: [
+      "le nom du fruit sur chaque photo (« pomme », « banane »…)",
+      "la marque de l'appareil photo",
+      "l'heure de la prise de vue",
+      "la couleur du mur derrière",
+    ],
+  },
 
-  // 1.3 Modèles d'apprentissage
+  // ── 1.3 Modèles d'apprentissage ──────────────────────────────────────────
   {
     microskillId: "1.3.1",
     text: "Une droite de régression linéaire sert surtout à :",
@@ -116,6 +188,16 @@ export const d1Questions: PixQuestion[] = [
     ],
   },
   {
+    microskillId: "1.3.1",
+    text: "À partir de la taille d'une maison, estimer son prix avec une tendance, c'est un exemple de :",
+    choices: [
+      "régression (prédire une valeur)",
+      "traduction automatique",
+      "reconnaissance vocale",
+      "génération d'images",
+    ],
+  },
+  {
     microskillId: "1.3.2",
     text: "Un arbre de décision prend une décision en :",
     choices: [
@@ -123,6 +205,16 @@ export const d1Questions: PixQuestion[] = [
       "tirant au hasard",
       "comptant les pixels d'une image",
       "mesurant la température de la pièce",
+    ],
+  },
+  {
+    microskillId: "1.3.2",
+    text: "Dans un arbre de décision, une « feuille » correspond à :",
+    choices: [
+      "une décision ou une prédiction finale",
+      "une panne du modèle",
+      "une image décorative",
+      "un mot de passe",
     ],
   },
   {
@@ -155,8 +247,18 @@ export const d1Questions: PixQuestion[] = [
       "chiffrer un mot de passe",
     ],
   },
+  {
+    microskillId: "1.3.4",
+    text: "Un modèle de régression est surtout adapté quand :",
+    choices: [
+      "on veut prédire une valeur à partir de données bien structurées",
+      "on veut trier des e-mails par couleur",
+      "on veut dessiner au hasard",
+      "on n'a aucune donnée",
+    ],
+  },
 
-  // 1.4 Grands modèles de langage
+  // ── 1.4 Grands modèles de langage ────────────────────────────────────────
   {
     microskillId: "1.4.1",
     text: "Pour écrire sa réponse, un chatbot (IA générative) :",
@@ -165,6 +267,16 @@ export const d1Questions: PixQuestion[] = [
       "recopie une page Wikipédia entière",
       "téléphone à un humain en direct",
       "choisit des mots totalement au hasard",
+    ],
+  },
+  {
+    microskillId: "1.4.1",
+    text: "Un grand modèle de langage construit une phrase :",
+    choices: [
+      "mot après mot, en estimant la suite la plus probable",
+      "en copiant la réponse d'un autre élève",
+      "en cherchant la phrase exacte dans un livre",
+      "sans jamais utiliser de probabilités",
     ],
   },
   {
@@ -189,6 +301,16 @@ export const d1Questions: PixQuestion[] = [
     ],
   },
   {
+    microskillId: "1.4.2",
+    text: "Une IA invente le titre d'un livre qui n'existe pas, pour répondre. Le bon réflexe :",
+    choices: [
+      "vérifier que le livre existe vraiment avant de le citer",
+      "le recopier dans ton devoir tel quel",
+      "le partager comme une découverte",
+      "supposer qu'il existe forcément",
+    ],
+  },
+  {
     microskillId: "1.4.3",
     text: "Avant de pouvoir répondre, un grand modèle de langage est d'abord :",
     choices: [
@@ -196,6 +318,16 @@ export const d1Questions: PixQuestion[] = [
       "rempli à la main avec toutes les réponses possibles",
       "connecté directement à ton cerveau",
       "imprimé sur du papier",
+    ],
+  },
+  {
+    microskillId: "1.4.3",
+    text: "Un modèle de langage apprend surtout à partir de :",
+    choices: [
+      "très nombreux textes issus notamment du Web",
+      "ta seule conversation avec lui",
+      "un unique dictionnaire papier",
+      "rien, il est programmé à la main",
     ],
   },
   {
@@ -209,6 +341,16 @@ export const d1Questions: PixQuestion[] = [
     ],
   },
   {
+    microskillId: "1.4.4",
+    text: "Quand des humains notent les réponses d'une IA pour qu'elle s'améliore, on parle d'apprentissage :",
+    choices: [
+      "par renforcement à partir des retours humains",
+      "sans aucune intervention humaine",
+      "par recopie d'Internet",
+      "par tirage au sort",
+    ],
+  },
+  {
     microskillId: "1.4.5",
     text: "Pourquoi une IA générative peut-elle se tromper ?",
     choices: [
@@ -218,8 +360,18 @@ export const d1Questions: PixQuestion[] = [
       "seulement la nuit",
     ],
   },
+  {
+    microskillId: "1.4.5",
+    text: "Une IA générative garantit-elle que ses réponses sont vraies ?",
+    choices: [
+      "non : elle ne vérifie pas la véracité, il faut recouper",
+      "oui, toujours, à 100 %",
+      "oui, si la question est polie",
+      "oui, sauf le week-end",
+    ],
+  },
 
-  // 1.5 Algorithmes de recommandation
+  // ── 1.5 Algorithmes de recommandation ────────────────────────────────────
   {
     microskillId: "1.5.1",
     text: "Une recommandation « personnalisée » est :",
@@ -228,6 +380,16 @@ export const d1Questions: PixQuestion[] = [
       "la même pour tout le monde",
       "choisie totalement au hasard",
       "interdite par la loi",
+    ],
+  },
+  {
+    microskillId: "1.5.1",
+    text: "Deux personnes différentes ouvrent la même appli vidéo. Avec la recommandation personnalisée :",
+    choices: [
+      "elles voient des suggestions différentes selon leurs goûts",
+      "elles voient exactement les mêmes vidéos",
+      "elles ne voient rien",
+      "elles voient l'ordre alphabétique",
     ],
   },
   {
@@ -241,6 +403,16 @@ export const d1Questions: PixQuestion[] = [
     ],
   },
   {
+    microskillId: "1.5.2",
+    text: "Le fil d'actualité d'un réseau social qui s'adapte à toi est un exemple de :",
+    choices: [
+      "recommandation personnalisée",
+      "calcul de moyenne",
+      "reconnaissance vocale",
+      "traduction automatique",
+    ],
+  },
+  {
     microskillId: "1.5.3",
     text: "Sur quoi se base un algorithme de recommandation pour te proposer des contenus ?",
     choices: [
@@ -248,6 +420,16 @@ export const d1Questions: PixQuestion[] = [
       "ta taille et ton poids",
       "la météo de demain",
       "rien du tout",
+    ],
+  },
+  {
+    microskillId: "1.5.3",
+    text: "Parmi ces données, laquelle sert le plus à la recommandation ?",
+    choices: [
+      "les vidéos que tu as déjà regardées",
+      "la couleur de tes yeux",
+      "la marque de ta trousse",
+      "ta pointure",
     ],
   },
   {
@@ -261,8 +443,18 @@ export const d1Questions: PixQuestion[] = [
     ],
     explanation: "À force de personnalisation, on s'enferme dans des contenus similaires : c'est l'enfermement algorithmique.",
   },
+  {
+    microskillId: "1.5.4",
+    text: "Un risque de la recommandation personnalisée est :",
+    choices: [
+      "de t'enfermer dans une « bulle » de contenus toujours semblables",
+      "de te montrer trop d'idées nouvelles",
+      "de rendre ton téléphone plus rapide",
+      "de supprimer la publicité",
+    ],
+  },
 
-  // 1.6 IA incarnée / robotique
+  // ── 1.6 IA incarnée / robotique ──────────────────────────────────────────
   {
     microskillId: "1.6.1",
     text: "Les trois grandes fonctions d'un robot sont :",
@@ -271,6 +463,16 @@ export const d1Questions: PixQuestion[] = [
       "lire, écrire, compter",
       "manger, dormir, jouer",
       "acheter, vendre, payer",
+    ],
+  },
+  {
+    microskillId: "1.6.1",
+    text: "Les caméras et capteurs d'un robot servent surtout à :",
+    choices: [
+      "percevoir son environnement",
+      "le recharger",
+      "le décorer",
+      "le ralentir",
     ],
   },
   {
@@ -284,6 +486,16 @@ export const d1Questions: PixQuestion[] = [
     ],
   },
   {
+    microskillId: "1.6.2",
+    text: "Une voiture autonome qui reconnaît les piétons utilise :",
+    choices: [
+      "de l'IA (vision par ordinateur)",
+      "uniquement un volant",
+      "un simple klaxon",
+      "aucune technologie",
+    ],
+  },
+  {
     microskillId: "1.6.3",
     text: "On parle d'« IA incarnée » quand :",
     choices: [
@@ -294,6 +506,16 @@ export const d1Questions: PixQuestion[] = [
     ],
   },
   {
+    microskillId: "1.6.3",
+    text: "Un robot qui combine perception, décision et action dans le monde réel illustre :",
+    choices: [
+      "une IA incarnée",
+      "un simple tableur",
+      "un moteur de recherche",
+      "une calculatrice",
+    ],
+  },
+  {
     microskillId: "1.6.4",
     text: "Pourquoi est-ce difficile pour un robot d'agir dans le monde réel ?",
     choices: [
@@ -301,6 +523,16 @@ export const d1Questions: PixQuestion[] = [
       "le monde réel est trop simple",
       "il n'y a aucune difficulté",
       "parce qu'il fait toujours nuit",
+    ],
+  },
+  {
+    microskillId: "1.6.4",
+    text: "Face à un imprévu (un obstacle soudain), un bon robot doit :",
+    choices: [
+      "s'adapter rapidement et réagir",
+      "s'arrêter de fonctionner pour toujours",
+      "ignorer complètement l'obstacle",
+      "supprimer ses capteurs",
     ],
   },
 ];
