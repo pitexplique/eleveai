@@ -1,4 +1,4 @@
-// lib/defis-du-jour/weekly.ts
+// lib/defis-du-jour/weekly.ts — défis Coupe du monde de foot 2026
 
 export const problemeDuJourWeekly = {
   id: "coupe-monde-foot-2026-semaine-1",
