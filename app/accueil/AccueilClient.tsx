@@ -407,8 +407,22 @@ export default function AccueilPage({
           <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
             Et bonne nouvelle : <span className="font-black text-amber-200">chaque semaine,
             il y aura une nouveauté</span> à découvrir sur EleveAI ! La toute première,
-            c&apos;est l&apos;<span className="font-black text-amber-200">ebook IA</span> 📘 —
-            pour apprendre à utiliser l&apos;intelligence artificielle intelligemment.
+            c&apos;est l&apos;
+            <Link
+              href="/fiches-cours/ia/livre"
+              className="font-black text-amber-200 underline decoration-amber-300/60 underline-offset-2 transition hover:text-amber-100"
+            >
+              ebook IA
+            </Link>{" "}
+            📘 — pour apprendre à utiliser l&apos;intelligence artificielle intelligemment,
+            et te préparer à l&apos;
+            <Link
+              href="/eval-pix-ia"
+              className="font-black text-amber-200 underline decoration-amber-300/60 underline-offset-2 transition hover:text-amber-100"
+            >
+              évaluation nationale Pix IA
+            </Link>
+            .
           </p>
           <p className="mt-4 text-sm font-black text-emerald-200">
             Reposez-vous bien et revenez en pleine forme. À très vite !
