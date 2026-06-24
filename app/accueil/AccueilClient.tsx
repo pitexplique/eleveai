@@ -600,7 +600,7 @@ export default function AccueilPage({
               { icon: "🎧", label: "Parcours English",     desc: "Bilan de niveau CECRL avec audio",        href: "/parcours-english-maths",       color: "from-orange-600 to-amber-700" },
               { icon: "🤖", label: "Parcours IA",          desc: "Culture & bons réflexes IA, A1 → C1",     href: "/parcours-ia",                  color: "from-violet-600 to-purple-800" },
               { icon: "💰", label: "Coach Économie",       desc: "Entreprise, marché, élections…",          href: "/coach-ia/economie",            color: "from-amber-600 to-yellow-700" },
-              { icon: "🏃", label: "Défis du jour",        desc: "Grand Raid · Maths 974",                  href: "/defis-du-jour",                color: "from-emerald-600 to-teal-700" },
+              { icon: "⚽", label: "Défis du jour",        desc: "Coupe du monde · Maths",                  href: "/defis-du-jour",                color: "from-emerald-600 to-teal-700" },
               { icon: "🌿", label: "Environnement B1",     desc: "Biodiversité, climat, écosystèmes",       href: "/coach-ia/english-maths?niveau=b1", color: "from-lime-600 to-green-700" },
             ].map((n) => (
               <Link
@@ -645,17 +645,17 @@ export default function AccueilPage({
             </Link>
           ) : (
             <Link href="/defis-du-jour" className="group relative block h-[220px] overflow-hidden rounded-2xl shadow-2xl sm:h-[280px]">
-              <Image src="/images/lagon.webp" alt="Mission lagon" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
+              <Image src="/images/defis-du-jour/coupe-monde-foot.webp" alt="Coupe du monde de foot" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
               <div className="absolute bottom-0 left-0 p-6 sm:p-8">
                 <span className="mb-3 inline-block rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">🎯 Défi du jour</span>
-                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl">Mission lagon : compter pour protéger</h3>
-                <p className="mt-2 max-w-lg text-sm text-white/75">Poissons-perroquets, coraux, tortues, déchets… 7 défis maths pour observer et protéger le lagon de La Réunion.</p>
+                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl">Coupe du monde : le tournoi de quartier</h3>
+                <p className="mt-2 max-w-lg text-sm text-white/75">Effectifs, pelouse, buts, tirs, hydratation… 7 défis maths sur la Coupe du monde de foot.</p>
                 <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white transition-all group-hover:bg-emerald-400 group-hover:gap-3">Relever le défi <span className="transition-transform group-hover:translate-x-1">→</span></div>
               </div>
               <div className="absolute right-6 top-6 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-center backdrop-blur-sm">
                 <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">Aujourd&apos;hui</p>
-                <p className="text-2xl font-black text-white">🐠</p>
+                <p className="text-2xl font-black text-white">⚽</p>
                 <p className="text-[10px] font-bold text-white/60">7 défis</p>
               </div>
             </Link>

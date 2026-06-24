@@ -1,44 +1,44 @@
 // lib/defis-du-jour/weekly.ts
 
 export const problemeDuJourWeekly = {
-  id: "mission-lagon-reunion-semaine-1",
+  id: "coupe-monde-foot-2026-semaine-1",
 
-  title: "Défis du jour — Mission lagon",
+  title: "Défis du jour — Coupe du monde de foot",
 
   days: [
     {
       day: 1,
-      problemId: "mission_lagon_poissons_001",
+      problemId: "coupe_monde_effectif_001",
     },
 
     {
       day: 2,
-      problemId: "mission_lagon_surface_002",
+      problemId: "coupe_monde_pelouse_002",
     },
 
     {
       day: 3,
-      problemId: "mission_lagon_tortues_003",
+      problemId: "coupe_monde_buts_003",
     },
 
     {
       day: 4,
-      problemId: "mission_lagon_coraux_004",
+      problemId: "coupe_monde_tirs_004",
     },
 
     {
       day: 5,
-      problemId: "mission_lagon_dechets_005",
+      problemId: "coupe_monde_eau_005",
     },
 
     {
       day: 6,
-      problemId: "mission_lagon_temperature_006",
+      problemId: "coupe_monde_chaleur_006",
     },
 
     {
       day: 7,
-      problemId: "mission_lagon_synthese_007",
+      problemId: "coupe_monde_synthese_007",
     },
   ],
 };

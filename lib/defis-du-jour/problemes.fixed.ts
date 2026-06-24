@@ -2,6 +2,337 @@
 import type { ProblemeDuJour } from "./types";
 
 export const problemesFixed: ProblemeDuJour[] = [
+  // === Semaine en cours : Coupe du monde de foot 2026 (48 équipes, USA/Canada/Mexique) ===
+  {
+    id: "coupe_monde_effectif_001",
+    title: "Coupe du monde : le tournoi de quartier",
+    theme: "Fractions & pourcentages",
+    image: "/images/defis-du-jour/coupe-monde-foot.webp",
+    level: 3,
+    statement:
+      "Pour fêter la Coupe du monde, un quartier organise un grand tournoi avec 240 joueurs inscrits. Parmi eux, 3/8 jouent en attaque, 25 % au milieu de terrain, et les autres sont défenseurs ou gardiens.",
+    question:
+      "Combien y a-t-il d'attaquants ? Combien y a-t-il de milieux ? Combien reste-t-il de défenseurs et gardiens ?",
+    expectedAnswer: "90 60 90",
+    explanation:
+      "3/8 de 240 : 240 ÷ 8 = 30, puis 30 × 3 = 90 attaquants. 25 % de 240, c'est un quart : 240 ÷ 4 = 60 milieux. Total identifié : 90 + 60 = 150. Il reste 240 − 150 = 90 défenseurs et gardiens.",
+    directions: [
+      {
+        id: "fraction",
+        label: "Calculer les attaquants",
+        type: "guided",
+        content:
+          "Commence par 3/8 de 240.\n240 ÷ 8 = 30, puis 30 × 3 = ?",
+      },
+      {
+        id: "pourcentage",
+        label: "Calculer les milieux",
+        type: "guided",
+        content:
+          "25 %, c'est un quart.\nUn quart de 240 se calcule avec 240 ÷ 4.",
+      },
+      {
+        id: "reste",
+        label: "Trouver les défenseurs et gardiens",
+        type: "guided",
+        content:
+          "Additionne les joueurs déjà identifiés, puis soustrais ce total à 240.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Tu dois trouver trois nombres : attaquants, milieux, défenseurs/gardiens. Le total des trois doit faire 240.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi une équipe a besoin de joueurs à tous les postes. Utilise les nombres du défi dans ton explication.",
+      },
+    ],
+  },
+
+  {
+    id: "coupe_monde_pelouse_002",
+    title: "Coupe du monde : la pelouse du stade",
+    theme: "Aires & multiplication",
+    image: "/images/defis-du-jour/coupe-monde-foot.webp",
+    level: 2,
+    statement:
+      "Un terrain de football de Coupe du monde mesure 105 m de long et 68 m de large.",
+    question:
+      "Quelle est l'aire de la pelouse en mètres carrés ? Si les jardiniers ont déjà tondu 1 785 m², quelle fraction de la pelouse ont-ils tondue ?",
+    expectedAnswer: "7140 1/4",
+    explanation:
+      "Aire du rectangle : 105 × 68 = 7 140 m². Les jardiniers ont tondu 1 785 m². Comme 1 785 × 4 = 7 140, cela représente 1/4 de la pelouse.",
+    directions: [
+      {
+        id: "aire",
+        label: "Calculer l'aire",
+        type: "guided",
+        content:
+          "Pour un rectangle, aire = longueur × largeur.\nCalcule 105 × 68.",
+      },
+      {
+        id: "fraction",
+        label: "Trouver la fraction",
+        type: "guided",
+        content:
+          "Compare 1 785 m² à 7 140 m².\nCherche par combien il faut multiplier 1 785 pour obtenir 7 140.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "105 × 68 = 105 × 70 − 105 × 2. Ensuite, 1 785 est le quart de 7 140.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi il est important que tous les terrains aient des dimensions proches pour une compétition internationale.",
+      },
+    ],
+  },
+
+  {
+    id: "coupe_monde_buts_003",
+    title: "Coupe du monde : les buts de la poule",
+    theme: "Tableau & moyenne",
+    image: "/images/defis-du-jour/coupe-monde-foot.webp",
+    level: 3,
+    statement:
+      "Lors des matchs de poule, une équipe marque : match 1 → 3 buts, match 2 → 5 buts, match 3 → 4 buts, match 4 → 8 buts.",
+    question:
+      "Combien de buts l'équipe a-t-elle marqués au total ? Quelle est la moyenne de buts par match ?",
+    expectedAnswer: "20 5",
+    explanation:
+      "Total : 3 + 5 + 4 + 8 = 20 buts. Il y a 4 matchs, donc la moyenne est 20 ÷ 4 = 5 buts par match.",
+    directions: [
+      {
+        id: "total",
+        label: "Additionner les buts",
+        type: "guided",
+        content:
+          "Additionne les quatre nombres : 3 + 5 + 4 + 8.",
+      },
+      {
+        id: "moyenne",
+        label: "Calculer la moyenne",
+        type: "guided",
+        content:
+          "Une moyenne se calcule en divisant le total par le nombre de matchs.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Il y a 4 matchs. Après avoir trouvé le total, divise-le par 4.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi une moyenne peut aider à comparer deux équipes sur plusieurs matchs.",
+      },
+    ],
+  },
+
+  {
+    id: "coupe_monde_tirs_004",
+    title: "Coupe du monde : les tirs au but",
+    theme: "Pourcentages & comparaison",
+    image: "/images/defis-du-jour/coupe-monde-foot.webp",
+    level: 4,
+    statement:
+      "Pendant tout le tournoi, une équipe a tenté 360 tirs. Les statisticiens estiment que 15 % ont fini au fond des filets et que 70 % ont été arrêtés ou tirés hors du cadre.",
+    question:
+      "Combien de tirs sont devenus des buts ? Combien ont été arrêtés ou hors cadre ? Combien de tirs cadrés n'ont pas donné de but ?",
+    expectedAnswer: "54 252 54",
+    explanation:
+      "15 % de 360 = 54 buts. 70 % de 360 = 252 tirs arrêtés ou hors cadre. Il reste 360 − 54 − 252 = 54 tirs cadrés sans but (repoussés, sur le poteau...).",
+    directions: [
+      {
+        id: "buts",
+        label: "Calculer 15 %",
+        type: "guided",
+        content:
+          "10 % de 360 = 36 et 5 % de 360 = 18.\nDonc 15 % = 36 + 18.",
+      },
+      {
+        id: "arretes",
+        label: "Calculer 70 %",
+        type: "guided",
+        content:
+          "70 %, c'est 7 fois 10 %.\nCalcule 7 × 36.",
+      },
+      {
+        id: "reste",
+        label: "Calculer le reste",
+        type: "guided",
+        content:
+          "Soustrais les deux groupes connus au total : 360 − 54 − 252.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Les trois groupes doivent ensemble faire 360 tirs.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique ce qu'un faible pourcentage de tirs marqués peut indiquer sur l'efficacité d'une équipe.",
+      },
+    ],
+  },
+
+  {
+    id: "coupe_monde_eau_005",
+    title: "Coupe du monde : l'eau des joueurs",
+    theme: "Proportionnalité & unités",
+    image: "/images/defis-du-jour/coupe-monde-foot.webp",
+    level: 3,
+    statement:
+      "Pendant un entraînement sous la chaleur, 6 joueurs boivent au total 18 litres d'eau. On suppose que chaque joueur boit la même quantité.",
+    question:
+      "Combien de litres d'eau un joueur boit-il en moyenne ? Combien faudrait-il prévoir pour 10 joueurs au même rythme ?",
+    expectedAnswer: "3 30",
+    explanation:
+      "Un joueur boit en moyenne 18 ÷ 6 = 3 litres. Au même rythme, 10 joueurs boiraient 10 × 3 = 30 litres.",
+    directions: [
+      {
+        id: "un_joueur",
+        label: "Trouver pour 1 joueur",
+        type: "guided",
+        content:
+          "Si 6 joueurs boivent 18 L, alors 1 joueur boit 18 ÷ 6 L.",
+      },
+      {
+        id: "dix_joueurs",
+        label: "Passer à 10 joueurs",
+        type: "guided",
+        content:
+          "Quand tu connais la quantité pour 1 joueur, multiplie par 10.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "18 ÷ 6 = 3. Il reste à calculer 10 × 3.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi bien s'hydrater est important quand on joue au football sous la chaleur.",
+      },
+    ],
+  },
+
+  {
+    id: "coupe_monde_chaleur_006",
+    title: "Coupe du monde : la chaleur sur le terrain",
+    theme: "Écarts & décimaux",
+    image: "/images/defis-du-jour/coupe-monde-foot.webp",
+    level: 4,
+    statement:
+      "Dans un stade de la Coupe du monde 2026, la température sur la pelouse est de 26,4 °C le matin. Au coup d'envoi de l'après-midi, elle atteint 29,1 °C.",
+    question:
+      "De combien de degrés la température a-t-elle augmenté ? Si une pause-fraîcheur est imposée à partir de 30 °C, combien manque-t-il pour l'atteindre ?",
+    expectedAnswer: "2.7 0.9",
+    explanation:
+      "Augmentation : 29,1 − 26,4 = 2,7 °C. Écart au seuil de pause-fraîcheur : 30 − 29,1 = 0,9 °C.",
+    directions: [
+      {
+        id: "augmentation",
+        label: "Calculer l'augmentation",
+        type: "guided",
+        content:
+          "Soustrais la température du matin à celle de l'après-midi : 29,1 − 26,4.",
+      },
+      {
+        id: "seuil",
+        label: "Comparer au seuil",
+        type: "guided",
+        content:
+          "Pour savoir combien il manque avant 30 °C, calcule 30 − 29,1.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Tu peux écrire 30 comme 30,0 pour mieux soustraire les décimaux.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Explique pourquoi la chaleur peut être dangereuse pour les joueurs et pourquoi des pauses-fraîcheur existent.",
+      },
+    ],
+  },
+
+  {
+    id: "coupe_monde_synthese_007",
+    title: "Coupe du monde : raconter le tournoi en chiffres",
+    theme: "Synthèse & argumentation",
+    image: "/images/defis-du-jour/coupe-monde-foot.webp",
+    level: 5,
+    statement:
+      "Cette semaine, tu as étudié la Coupe du monde avec des nombres : 240 joueurs au tournoi de quartier dont 90 attaquants et 60 milieux, une pelouse de 7 140 m², une moyenne de 5 buts par match, 360 tirs dont 54 buts, et 30 litres d'eau prévus pour 10 joueurs.",
+    question:
+      "Rédige une courte présentation de la semaine Coupe du monde en utilisant au moins 4 données chiffrées. Explique pourquoi les maths sont utiles dans le sport.",
+    expectedAnswer: "explication",
+    explanation:
+      "Une bonne réponse utilise plusieurs données et les relie au sens du défi. Exemple : Le tournoi réunissait 240 joueurs, dont 90 attaquants et 60 milieux. Sur une pelouse de 7 140 m², une équipe a marqué en moyenne 5 buts par match et transformé 54 de ses 360 tirs. Les maths permettent de compter, comparer et analyser pour mieux comprendre le jeu.",
+    directions: [
+      {
+        id: "choisir_chiffres",
+        label: "Choisir les chiffres clés",
+        type: "guided",
+        content:
+          "Choisis au moins 4 chiffres parmi : 240 joueurs, 90 attaquants, 60 milieux, 7 140 m², 5 buts/match, 360 tirs, 54 buts, 30 litres.",
+      },
+      {
+        id: "organiser",
+        label: "Organiser ma réponse",
+        type: "guided",
+        content:
+          "Écris en 3 phrases :\n1. Présente la semaine Coupe du monde.\n2. Donne des observations chiffrées.\n3. Explique à quoi servent ces nombres.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Tu peux commencer par : Les maths aident à comprendre le football parce qu'elles permettent de mesurer...",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Rédige comme si tu présentais le bilan à une autre classe.",
+      },
+    ],
+  },
+
+  // Anciens défis Mission lagon conservés hors programmation (réserve semaine nature).
   {
     id: "mission_lagon_poissons_001",
     title: "Mission lagon : compter pour protéger",
