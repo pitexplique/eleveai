@@ -393,7 +393,7 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="border-t border-cyan-300/20 bg-gradient-to-b from-[#062A4F] to-[#041B33] px-4 pb-6 pt-4 lg:hidden">
+        <div className="max-h-[calc(100dvh-3.75rem)] overflow-y-auto overscroll-contain border-t border-cyan-300/20 bg-gradient-to-b from-[#062A4F] to-[#041B33] px-4 pb-10 pt-4 lg:hidden">
           <div className="space-y-5">
 
             {/* Auth mobile */}

@@ -404,6 +404,12 @@ export default function AccueilPage({
             pendant les vacances — quelques minutes par-ci par-là, à votre rythme, juste
             pour le plaisir. 😉
           </p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+            Et bonne nouvelle : <span className="font-black text-amber-200">chaque semaine,
+            il y aura une nouveauté</span> à découvrir sur EleveAI ! La toute première,
+            c&apos;est l&apos;<span className="font-black text-amber-200">ebook IA</span> 📘 —
+            pour apprendre à utiliser l&apos;intelligence artificielle intelligemment.
+          </p>
           <p className="mt-4 text-sm font-black text-emerald-200">
             Reposez-vous bien et revenez en pleine forme. À très vite !
           </p>
