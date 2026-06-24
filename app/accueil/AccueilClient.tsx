@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { MouseEvent as ReactMouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
+import { problemesFixed } from "@/lib/defis-du-jour/problemes.fixed";
+import { problemeDuJourWeekly } from "@/lib/defis-du-jour/weekly";
 import BulletinPreviewHome from "@/components/bulletin/BulletinPreviewHome";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
@@ -234,6 +236,18 @@ export default function AccueilPage({
   const prenomAffiche = getPrenomAffiche(eleve?.nom);
   const isCmPrimary = eleveClasse === "cm1" || eleveClasse === "cm2";
 
+  // Défi réellement programmé aujourd'hui (même logique que /defis-du-jour),
+  // pour que le bandeau d'accueil affiche le vrai défi du jour et pas un texte figé.
+  const defiDuJour = useMemo(() => {
+    const today = new Date().getDay();
+    const mapping: Record<number, number> = { 0: 6, 1: 0, 2: 1, 3: 2, 4: 3, 5: 4, 6: 5 };
+    const index = mapping[today] ?? 0;
+    const dayConfig = problemeDuJourWeekly.days[index];
+    const defi =
+      problemesFixed.find((p) => p.id === dayConfig.problemId) ?? problemesFixed[0];
+    return { defi, day: dayConfig.day };
+  }, []);
+
   // Passe la classe de l'élève au coach quand le niveau est géré, pour qu'il
   // atterrisse directement sur le bon niveau (sinon le coach ouvre 6e par défaut).
   function getHref(href: string) {
@@ -403,18 +417,18 @@ export default function AccueilPage({
             </Link>
           ) : (
             <Link href="/defis-du-jour" className="group relative block h-[220px] overflow-hidden rounded-2xl shadow-2xl sm:h-[280px]">
-              <Image src="/images/defis-du-jour/coupe-monde-foot.webp" alt="Coupe du monde de foot" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
+              <Image src={defiDuJour.defi.image ?? "/images/defis-du-jour/coupe-monde-foot.webp"} alt={defiDuJour.defi.title} fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
               <div className="absolute bottom-0 left-0 p-6 sm:p-8">
-                <span className="mb-3 inline-block rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">🎯 Défi du jour</span>
-                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl">Coupe du monde : le tournoi de quartier</h3>
-                <p className="mt-2 max-w-lg text-sm text-white/75">Effectifs, pelouse, buts, tirs, hydratation… 7 défis maths sur la Coupe du monde de foot.</p>
+                <span className="mb-3 inline-block rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">🎯 Défi du jour · {defiDuJour.defi.theme}</span>
+                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl">{defiDuJour.defi.title}</h3>
+                <p className="mt-2 line-clamp-2 max-w-lg text-sm text-white/75">{defiDuJour.defi.question}</p>
                 <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white transition-all group-hover:bg-emerald-400 group-hover:gap-3">Relever le défi <span className="transition-transform group-hover:translate-x-1">→</span></div>
               </div>
               <div className="absolute right-6 top-6 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-center backdrop-blur-sm">
                 <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">Aujourd&apos;hui</p>
                 <p className="text-2xl font-black text-white">⚽</p>
-                <p className="text-[10px] font-bold text-white/60">7 défis</p>
+                <p className="text-[10px] font-bold text-white/60">Jour {defiDuJour.day}/7</p>
               </div>
             </Link>
           )}
