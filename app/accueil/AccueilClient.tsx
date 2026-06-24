@@ -383,6 +383,44 @@ export default function AccueilPage({
         )}
       </section>
 
+      {/* ── FEATURED BANNER — Défi du jour mis en avant juste sous l'image ───── */}
+      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          {eleveClasse === "3e" || eleveClasse === "4e" ? (
+            <Link href="/coach-brevet" className="group relative block h-[220px] overflow-hidden rounded-2xl shadow-2xl sm:h-[280px]">
+              <Image src="/images/defis-du-jour/grand_raid_2026.webp" alt="Sprint Brevet" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6 sm:p-8">
+                <span className="mb-3 inline-block rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">🎯 Sprint Brevet · J−{jours}</span>
+                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl">{jours} jours pour décrocher ton brevet</h3>
+                <p className="mt-2 max-w-lg text-sm text-white/75">Fractions, Pythagore, probabilités, équations, Thalès… notion par notion jusqu&apos;au jour J.</p>
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white transition-all group-hover:bg-emerald-400 group-hover:gap-3">Commencer le sprint <span className="transition-transform group-hover:translate-x-1">→</span></div>
+              </div>
+              <div className="absolute right-6 top-6 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-center backdrop-blur-sm">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">Compte à rebours</p>
+                <p className="text-3xl font-black text-white">J−{jours}</p>
+              </div>
+            </Link>
+          ) : (
+            <Link href="/defis-du-jour" className="group relative block h-[220px] overflow-hidden rounded-2xl shadow-2xl sm:h-[280px]">
+              <Image src="/images/defis-du-jour/coupe-monde-foot.webp" alt="Coupe du monde de foot" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6 sm:p-8">
+                <span className="mb-3 inline-block rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">🎯 Défi du jour</span>
+                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl">Coupe du monde : le tournoi de quartier</h3>
+                <p className="mt-2 max-w-lg text-sm text-white/75">Effectifs, pelouse, buts, tirs, hydratation… 7 défis maths sur la Coupe du monde de foot.</p>
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white transition-all group-hover:bg-emerald-400 group-hover:gap-3">Relever le défi <span className="transition-transform group-hover:translate-x-1">→</span></div>
+              </div>
+              <div className="absolute right-6 top-6 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-center backdrop-blur-sm">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">Aujourd&apos;hui</p>
+                <p className="text-2xl font-black text-white">⚽</p>
+                <p className="text-[10px] font-bold text-white/60">7 défis</p>
+              </div>
+            </Link>
+          )}
+        </div>
+      </section>
+
       {/* ── MESSAGE DE VACANCES — mot de remerciement du professeur ──────────── */}
       <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-amber-300/30 bg-gradient-to-br from-amber-300/[0.10] via-emerald-300/[0.06] to-white/[0.04] p-6 text-center sm:p-8">
@@ -622,44 +660,6 @@ export default function AccueilPage({
           </div>
           <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#041B33] to-transparent" />
           </div>
-        </div>
-      </section>
-
-      {/* ── FEATURED BANNER ──────────────────────────────────────────────────── */}
-      <section className="px-4 pb-7 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          {eleveClasse === "3e" || eleveClasse === "4e" ? (
-            <Link href="/coach-brevet" className="group relative block h-[220px] overflow-hidden rounded-2xl shadow-2xl sm:h-[280px]">
-              <Image src="/images/defis-du-jour/grand_raid_2026.webp" alt="Sprint Brevet" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6 sm:p-8">
-                <span className="mb-3 inline-block rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">🎯 Sprint Brevet · J−{jours}</span>
-                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl">{jours} jours pour décrocher ton brevet</h3>
-                <p className="mt-2 max-w-lg text-sm text-white/75">Fractions, Pythagore, probabilités, équations, Thalès… notion par notion jusqu&apos;au jour J.</p>
-                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white transition-all group-hover:bg-emerald-400 group-hover:gap-3">Commencer le sprint <span className="transition-transform group-hover:translate-x-1">→</span></div>
-              </div>
-              <div className="absolute right-6 top-6 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-center backdrop-blur-sm">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">Compte à rebours</p>
-                <p className="text-3xl font-black text-white">J−{jours}</p>
-              </div>
-            </Link>
-          ) : (
-            <Link href="/defis-du-jour" className="group relative block h-[220px] overflow-hidden rounded-2xl shadow-2xl sm:h-[280px]">
-              <Image src="/images/defis-du-jour/coupe-monde-foot.webp" alt="Coupe du monde de foot" fill sizes="(max-width: 1200px) 100vw, 1200px" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6 sm:p-8">
-                <span className="mb-3 inline-block rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">🎯 Défi du jour</span>
-                <h3 className="text-2xl font-black leading-tight text-white sm:text-3xl">Coupe du monde : le tournoi de quartier</h3>
-                <p className="mt-2 max-w-lg text-sm text-white/75">Effectifs, pelouse, buts, tirs, hydratation… 7 défis maths sur la Coupe du monde de foot.</p>
-                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white transition-all group-hover:bg-emerald-400 group-hover:gap-3">Relever le défi <span className="transition-transform group-hover:translate-x-1">→</span></div>
-              </div>
-              <div className="absolute right-6 top-6 rounded-xl border border-white/20 bg-black/60 px-4 py-2 text-center backdrop-blur-sm">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-white/60">Aujourd&apos;hui</p>
-                <p className="text-2xl font-black text-white">⚽</p>
-                <p className="text-[10px] font-bold text-white/60">7 défis</p>
-              </div>
-            </Link>
-          )}
         </div>
       </section>
 
