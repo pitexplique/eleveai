@@ -76,10 +76,32 @@ RLS bloque la clé anon.
 - Les pages activités et les 3 dashboards n'utilisent plus le client
   Supabase anon pour ces tables.
 
+## Rate-limiting `/api/code-login` (anti brute-force)
+
+- [`rate_limit.sql`](rate_limit.sql) : table `rate_limits` + fonction
+  `rate_limit_hit` (fenêtre fixe, réservée à la service role). **À exécuter
+  une fois en base.** Le code (`lib/server/rateLimit.ts`) est *fail-open* :
+  tant que le script n'est pas lancé, la connexion fonctionne normalement
+  (aucune régression au déploiement).
+- Une fois lancé : `/api/code-login` bloque (HTTP 429) au-delà de 20
+  tentatives/min par IP **ou** 10 tentatives/10 min sur un même couple de
+  codes (anti-devinette de mot de passe sur un compte précis).
+- L'envoi d'OTP e-mail reste navigateur → Supabase et profite du
+  rate-limiting intégré de Supabase (par projet / par adresse).
+
+## Sign-in / sign-up e-mail : flux unifié (anti-énumération)
+
+- L'inscription et la connexion par e-mail passent par **une seule page**
+  (`/auth/signin`). `/auth/signup` ne fait que rediriger.
+- L'ancien `/api/auth/check-email` (qui révélait à un inconnu si une adresse
+  était inscrite) a été **supprimé**. Le navigateur n'apprend l'existence d'un
+  compte qu'**après** validation du code (preuve de possession de la boîte
+  mail) ; pour un nouveau compte, une étape « complète ton profil » collecte
+  nom / type / consentement CGV.
+
 ## Reste à faire (hors périmètre)
 
-- Pas de rate-limiting sur `/api/code-login` (force brute) : à envisager
-  (Vercel WAF, Upstash, ou compteur en base).
+- Purger la colonne `mot_de_passe` en clair (étape commentée).
 - Supprimer les fichiers morts `EspaceProfsClient copy.tsx` /
   `copy 2.tsx` / `AtelierIAClient copy.tsx` (seuls « utilisateurs » des
   écritures sur `presets_eleveai` / `presets_email`).
