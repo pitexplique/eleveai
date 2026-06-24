@@ -112,6 +112,16 @@ const SUBJECTS = [
     cm: false,
   },
   {
+    icon: "🤖",
+    label: "IA",
+    desc: "Comprendre et maîtriser l'IA",
+    href: "/coach-ia/ia",
+    bg: "from-indigo-500 to-violet-700",
+    border: "border-indigo-400/50",
+    glow: "group-hover:shadow-indigo-500/40",
+    cm: false,
+  },
+  {
     icon: "📊",
     label: "Économie",
     desc: "Comprendre le monde économique",
@@ -561,6 +571,9 @@ export default function AccueilPage({
             className="flex gap-3 overflow-x-auto pb-3 pr-12 cursor-grab active:cursor-grabbing select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {[
+              { icon: "🎓", label: "Éval blanche Pix IA",  desc: "Prépa éval nationale, collège & lycée",  href: "/eval-pix-ia",                  color: "from-indigo-600 to-violet-800" },
+              { icon: "📄", label: "Fiches de cours IA",   desc: "16 fiches par domaine du référentiel Pix", href: "/fiches-cours/ia",            color: "from-violet-600 to-fuchsia-800" },
+              { icon: "📕", label: "Ebook IA",             desc: "Le livre « Comprendre l'IA » (PDF/EPUB)", href: "/fiches-cours/ia/livre",        color: "from-blue-600 to-indigo-800"  },
               { icon: "🇪🇸", label: "Parcours Espagnol",  desc: "Bilan de niveau A1 → B2 avec audio",    href: "/parcours-espagnol",           color: "from-rose-600 to-red-800"     },
               { icon: "🇪🇸", label: "Coach Espagnol",     desc: "A1 → B2, vocabulaire & audio",          href: "/coach-ia/espagnol",           color: "from-red-600 to-rose-800"     },
               { icon: "🇬🇧", label: "Coach English",       desc: "A1 → B2, vocabulaire maths en anglais",  href: "/coach-ia/english-maths",       color: "from-sky-600 to-blue-800"     },

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Download, Printer } from "lucide-react";
+import { ArrowLeft, BookOpen, Download, Printer } from "lucide-react";
 import { PIX_DOMAINES } from "@/lib/pix-ia/referentiel";
 import type { FicheIaData } from "./FicheCoursIa";
 
@@ -37,14 +37,24 @@ export default function LivreIa({ chapitres }: { chapitres: ChapitreLivre[] }) {
             <ArrowLeft className="h-4 w-4" />
             Fiches IA
           </Link>
-          <button
-            type="button"
-            onClick={() => window.print()}
-            className="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-500"
-          >
-            <Download className="h-4 w-4" />
-            Télécharger le livre en PDF
-          </button>
+          <div className="flex flex-wrap items-center gap-2">
+            <a
+              href="/livre/comprendre-l-ia.pdf"
+              download
+              className="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-500"
+            >
+              <Download className="h-4 w-4" />
+              PDF
+            </a>
+            <a
+              href="/livre/comprendre-l-ia.epub"
+              download
+              className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white px-5 py-2.5 text-sm font-black text-indigo-700 shadow-sm transition hover:bg-indigo-50"
+            >
+              <BookOpen className="h-4 w-4" />
+              EPUB
+            </a>
+          </div>
         </div>
       </div>
 
