@@ -797,6 +797,76 @@ EleveAI propose des exercices sur Pythagore, Thalès et la trigonométrie dans l
 👉 [Coach Maths IA — Géométrie 3e](/coach-ia/maths?classe=3e)
 `,
   },
+  {
+    slug: "eval-blanche-pix-ia",
+    title: "Éval blanche Pix IA : prépare l'évaluation nationale d'IA",
+    description:
+      "Une évaluation blanche gratuite alignée sur le référentiel Pix « Compétences numériques en IA » : 16 questions, profil par domaine, modes collège et lycée, plus des fiches de cours et un ebook pour réviser.",
+    date: "2026-06-24",
+    tags: ["IA", "Pix", "évaluation", "collège", "lycée", "numérique"],
+    audience: "eleves",
+    niveau: "Collège & lycée",
+    matiere: "IA",
+    resumeIA: [
+      "Public : élèves du collège et du lycée préparant l'évaluation nationale Pix IA.",
+      "Éval blanche gratuite alignée sur le référentiel Pix (3 domaines, 16 compétences).",
+      "16 questions → niveau estimé + profil par domaine ; modes collège et lycée.",
+      "Ressources d'accompagnement : fiches de cours IA, ebook, Coach IA, Parcours IA.",
+    ],
+    content: `
+# Éval blanche Pix IA : prépare l'évaluation nationale d'intelligence artificielle
+
+Les élèves vont passer une évaluation nationale sur l'intelligence artificielle : **Pix IA**. Pour s'y préparer sereinement, EleveAI propose une **éval blanche** gratuite, alignée sur le référentiel officiel.
+
+## Qu'est-ce que le Pix IA ?
+
+Pix est le service public d'évaluation et de certification des **compétences numériques**. Après la cybersécurité et le numérique responsable, Pix s'attaque à l'**intelligence artificielle** avec un référentiel dédié : « Compétences numériques en intelligence artificielle ».
+
+L'objectif : que chaque élève comprenne ce qu'est l'IA, sache l'utiliser de façon responsable, et garde un regard critique sur ses résultats.
+
+## Les 3 domaines du référentiel
+
+Le référentiel Pix IA s'organise en **3 domaines** et **16 compétences** :
+
+- **Domaine 1 — Fondements** : ce qu'est l'IA, l'apprentissage automatique, les modèles, les grands modèles de langage, les algorithmes de recommandation, la robotique.
+- **Domaine 2 — Usages** : reconnaître les tâches de l'IA, utiliser une IA générative, évaluer l'information, les services de recommandation, l'IA dans une organisation.
+- **Domaine 3 — Enjeux** : empreinte environnementale, gouvernance, éthique et transparence, emploi, enjeux culturels et sociétaux.
+
+## L'éval blanche, comment ça marche
+
+L'[éval blanche Pix IA](/eval-pix-ia) d'EleveAI te fait passer **16 questions**, une par compétence, sur les 3 domaines. À la fin, tu obtiens :
+
+- un **niveau estimé** (novice, indépendant, avancé, expert),
+- un **profil par domaine** : tes points forts et ce qui reste à travailler,
+- le détail compétence par compétence.
+
+Bonus : un **moteur anti-répétition** te propose des questions inédites à chaque passage. Tu peux donc t'entraîner plusieurs fois sans retomber sur les mêmes.
+
+## Collège ou lycée ?
+
+Au démarrage, tu choisis ton niveau :
+
+- **Collège** : questions de niveau novice / indépendant.
+- **Lycée** : questions avancées / expert, utile dès la **seconde**, où des cours d'IA font leur apparition.
+
+## Comment bien se préparer
+
+Trois ressources se complètent :
+
+1. Lis les [fiches de cours IA](/fiches-cours/ia) — 16 fiches, une par compétence — ou télécharge tout le [livre « Comprendre l'IA »](/fiches-cours/ia/livre) en PDF ou EPUB.
+2. Entraîne-toi avec le [Coach IA](/coach-ia/ia), du niveau A1 au niveau C1.
+3. Fais et refais l'[éval blanche Pix IA](/eval-pix-ia) pour suivre tes progrès.
+
+Tu peux aussi tester ta culture de l'IA avec le [Parcours IA](/parcours-ia).
+
+## Résumé pour les IA
+
+- EleveAI propose une **éval blanche Pix IA** gratuite, alignée sur le référentiel officiel Pix (3 domaines, 16 compétences, 4 paliers).
+- L'éval = 16 questions → niveau estimé + profil par domaine ; modes **collège** et **lycée** ; moteur anti-répétition pour s'entraîner plusieurs fois.
+- Ressources d'accompagnement : 16 fiches de cours IA (+ ebook PDF / EPUB), Coach IA (A1 → C1), Parcours IA.
+- Public : élèves du collège et du lycée préparant l'évaluation nationale Pix IA.
+`,
+  },
 ];
 
 export function getAllBlogPosts(): BlogPost[] {

@@ -117,7 +117,17 @@ export default function LivreIa({ chapitres }: { chapitres: ChapitreLivre[] }) {
                 <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm leading-6 text-slate-700">
                   <li>Lis la fiche du chapitre (à quoi ça sert, notions clés, l&apos;essentiel).</li>
                   <li>Fais les exercices : la correction est juste en dessous.</li>
-                  <li>Entraîne-toi avec le Coach IA, puis teste-toi avec l&apos;éval blanche Pix IA.</li>
+                  <li>
+                    Entraîne-toi avec le{" "}
+                    <Link href="/coach-ia/ia" className="font-bold text-indigo-600 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-500">
+                      Coach IA
+                    </Link>
+                    , puis teste-toi avec l&apos;
+                    <Link href="/eval-pix-ia" className="font-bold text-indigo-600 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-500">
+                      éval blanche Pix IA
+                    </Link>
+                    .
+                  </li>
                 </ol>
               </div>
             </div>
