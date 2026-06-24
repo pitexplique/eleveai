@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Hypertrucages, bots, vérification des sources. Fiche de cours IA (référentiel Pix, Usages).",
 };
 
-const fiche: FicheIaData = {
+export const fiche: FicheIaData = {
   domaineId: "2",
   domaineLabel: "Usages",
   competence: "2.3",

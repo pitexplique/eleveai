@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Transparence, non-discrimination, responsabilité, RGPD et IA Act. Fiche de cours IA (référentiel Pix, Enjeux).",
 };
 
-const fiche: FicheIaData = {
+export const fiche: FicheIaData = {
   domaineId: "3",
   domaineLabel: "Enjeux",
   competence: "3.3",

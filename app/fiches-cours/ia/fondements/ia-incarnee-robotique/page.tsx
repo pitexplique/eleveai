@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Percevoir, décider, agir : l'IA incarnée dans les robots. Fiche de cours IA (référentiel Pix, Fondements).",
 };
 
-const fiche: FicheIaData = {
+export const fiche: FicheIaData = {
   domaineId: "1",
   domaineLabel: "Fondements",
   competence: "1.6",

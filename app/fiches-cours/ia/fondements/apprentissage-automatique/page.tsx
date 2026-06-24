@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Comment une IA apprend à partir de données : supervisé, non supervisé, renforcement. Fiche de cours IA (référentiel Pix, Fondements).",
 };
 
-const fiche: FicheIaData = {
+export const fiche: FicheIaData = {
   domaineId: "1",
   domaineLabel: "Fondements",
   competence: "1.2",

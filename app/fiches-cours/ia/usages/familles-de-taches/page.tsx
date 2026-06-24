@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Reconnaissance, prédiction, recommandation, génération : les familles de tâches de l'IA. Fiche de cours IA (référentiel Pix, Usages).",
 };
 
-const fiche: FicheIaData = {
+export const fiche: FicheIaData = {
   domaineId: "2",
   domaineLabel: "Usages",
   competence: "2.1",

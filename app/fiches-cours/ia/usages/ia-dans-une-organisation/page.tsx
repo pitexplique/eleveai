@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Identifier le besoin, choisir l'outil, protéger les données, charte d'usage et RAG. Fiche de cours IA (référentiel Pix, Usages).",
 };
 
-const fiche: FicheIaData = {
+export const fiche: FicheIaData = {
   domaineId: "2",
   domaineLabel: "Usages",
   competence: "2.5",

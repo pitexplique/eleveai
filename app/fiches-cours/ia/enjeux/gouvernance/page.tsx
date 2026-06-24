@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Qui régule l'IA, l'IA Act, souveraineté numérique, valeurs encodées. Fiche de cours IA (référentiel Pix, Enjeux).",
 };
 
-const fiche: FicheIaData = {
+export const fiche: FicheIaData = {
   domaineId: "3",
   domaineLabel: "Enjeux",
   competence: "3.2",

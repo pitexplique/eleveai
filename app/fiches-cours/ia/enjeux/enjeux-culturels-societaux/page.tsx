@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Biais, désinformation, diversité culturelle, droits des créateurs. Fiche de cours IA (référentiel Pix, Enjeux).",
 };
 
-const fiche: FicheIaData = {
+export const fiche: FicheIaData = {
   domaineId: "3",
   domaineLabel: "Enjeux",
   competence: "3.5",

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Comment YouTube, TikTok ou Netflix te recommandent des contenus, et la bulle de filtre. Fiche de cours IA (référentiel Pix, Fondements).",
 };
 
-const fiche: FicheIaData = {
+export const fiche: FicheIaData = {
   domaineId: "1",
   domaineLabel: "Fondements",
   competence: "1.5",

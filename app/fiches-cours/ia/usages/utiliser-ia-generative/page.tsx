@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Écrire un bon prompt, itérer, vérifier les réponses et rester responsable. Fiche de cours IA (référentiel Pix, domaine Usages).",
 };
 
-const fiche: FicheIaData = {
+export const fiche: FicheIaData = {
   domaineId: "2",
   domaineLabel: "Usages",
   competence: "2.2",

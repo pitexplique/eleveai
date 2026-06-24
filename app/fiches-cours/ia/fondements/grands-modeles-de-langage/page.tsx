@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Comment fonctionne un chatbot : prédire le mot suivant, entraînement, hallucinations. Fiche de cours IA (référentiel Pix, Fondements).",
 };
 
-const fiche: FicheIaData = {
+export const fiche: FicheIaData = {
   domaineId: "1",
   domaineLabel: "Fondements",
   competence: "1.4",

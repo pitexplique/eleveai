@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Arbre de décision, régression, réseau de neurones : les familles de modèles d'IA. Fiche de cours IA (référentiel Pix, Fondements).",
 };
 
-const fiche: FicheIaData = {
+export const fiche: FicheIaData = {
   domaineId: "1",
   domaineLabel: "Fondements",
   competence: "1.3",

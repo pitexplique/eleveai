@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Définir l'IA, son histoire et ses approches. Fiche de cours IA (référentiel Pix, domaine Fondements).",
 };
 
-const fiche: FicheIaData = {
+export const fiche: FicheIaData = {
   domaineId: "1",
   domaineLabel: "Fondements",
   competence: "1.1",

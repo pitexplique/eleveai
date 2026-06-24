@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Avantages, limites et contrôle de la personnalisation. Fiche de cours IA (référentiel Pix, Usages).",
 };
 
-const fiche: FicheIaData = {
+export const fiche: FicheIaData = {
   domaineId: "2",
   domaineLabel: "Usages",
   competence: "2.4",
