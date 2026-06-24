@@ -168,6 +168,13 @@ export default function FichesCoursIaPage() {
               référentiel Pix IA</strong>. Lis-les en ligne, télécharge-les en PDF,
               puis teste-toi avec l&apos;éval Pix IA.
             </p>
+            <Link
+              href="/fiches-cours/ia/livre"
+              className="mt-5 inline-flex w-fit items-center gap-2 rounded-full bg-indigo-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-500"
+            >
+              <BookOpen className="h-4 w-4" />
+              Lire tout le livre (16 fiches)
+            </Link>
           </div>
         </div>
       </section>
