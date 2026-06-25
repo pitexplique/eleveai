@@ -40,6 +40,13 @@ import {
   guardFeedback,
 } from "@/lib/tutor-v4/adapters";
 
+import {
+  isRemediationEnabled,
+  rankPrerequisitesByFragility,
+  diagnoseFromChoice,
+  REMEDIATION_MAX_STEPS,
+} from "@/lib/tutor-v4/remediation/diagnoseEngine";
+
 import type {
   StartTutorV4Input,
   StartTutorV4Response,
@@ -59,6 +66,7 @@ import type {
   SkillMatrix,
   TutorBankItemV4,
   TutorMode,
+  RevisionFocus,
 } from "@/lib/tutor-v4/types";
 
 function createDefaultLearnerProfile(): LearnerProfile {
@@ -244,7 +252,7 @@ function refreshVisibleProgress(
   }
 
   const currentMicroMastery = session.masteryByMicro[session.microFocus] ?? 0;
-  if (currentMicroMastery >= 0.7) {
+  if (currentMicroMastery >= 70) {
     lastUnlocked =
       unlockHiddenStar(
         session,
@@ -745,6 +753,17 @@ export async function answerTutorV4(
     throw new Error("Notion ou micro-compétence introuvable.");
   }
 
+  // Diagnostic « high confidence » : l'élève a coché un distracteur étiqueté
+  // (Phase 2). Permet de remédier dès la 1ʳᵉ erreur, sans attendre le blocage.
+  const suspectedPrereq =
+    !result.ok && isRemediationEnabled(session.matiere)
+      ? diagnoseFromChoice({
+          knowledge,
+          option: chosenOption,
+          normalizedAnswer: result.normalizedAnswer,
+        })
+      : null;
+
   if (result.ok) {
     session.consecutiveSuccess += 1;
     session.consecutiveErrors = 0;
@@ -816,6 +835,7 @@ export async function answerTutorV4(
       estimatedUnderstanding: normalizeEstimatedUnderstanding(
         result.estimatedUnderstanding
       ),
+      suspectedPrereq: suspectedPrereq ?? undefined,
     },
     usedHint: session.lastHintUsed,
     startedAt: session.turnStartedAt ?? Date.now(),
@@ -842,62 +862,201 @@ export async function answerTutorV4(
     usedHint: session.lastHintUsed,
   });
 
-  const currentMicroMastery = session.masteryByMicro[session.microFocus] ?? 0;
+  // ===========================================================
+  // Décision de la prochaine question.
+  // Priorité : REMÉDIATION PAR PRÉREQUIS (gatée maths|francais).
+  // Pour les autres matières, on retombe sur le comportement standard.
+  // ===========================================================
+  const remediationActive = isRemediationEnabled(session.matiere);
 
-  const shouldSwitchMicro =
-    session.consecutiveSuccess >= 2 ||
-    session.consecutiveErrorsSameStar >= 2 ||
-    currentMicroMastery >= 0.7;
-
-  let nextPair: TutorQuestionPair | null = null;
+  let nextNotionId = session.notionFocus;
   let nextMicroId = session.microFocus;
+  let nextPair: TutorQuestionPair | null = null;
+  let remediationNote: string | null = null;
+  let remediationEntry: RevisionFocus | null = null;
+  let decisionReason = "Maintien sur la même micro-compétence.";
 
-  if (!shouldSwitchMicro) {
-    nextPair = tryBuildPair({
+  const buildPairFor = (notionId: string, microId: string) =>
+    tryBuildPair({
       bank,
-      notionId: session.notionFocus,
-      microId: session.microFocus,
+      notionId,
+      microId,
       recommendedStar: session.recommendedStar,
       recentQuestionIds: session.recentQuestionIds,
       preferExactStar: isSimpleMode,
     });
+
+  // (1) Déjà en remédiation sur un prérequis : faut-il revenir à la cible ?
+  if (remediationActive && session.remediationReturnTo) {
+    const back = session.remediationReturnTo;
+    const consolidated = result.ok; // prérequis réussi ce tour-ci
+    const exhausted = back.steps + 1 >= REMEDIATION_MAX_STEPS;
+
+    if (consolidated || exhausted) {
+      const pair = buildPairFor(back.notionId, back.microId);
+      if (pair) {
+        const prereqLabel = findMicro(knowledge, session.microFocus).label;
+        nextNotionId = back.notionId;
+        nextMicroId = back.microId;
+        nextPair = pair;
+        remediationNote = consolidated
+          ? `Tu maîtrises mieux « ${prereqLabel} ». On revient à « ${back.label} ».`
+          : `On a consolidé « ${prereqLabel} ». On retourne à « ${back.label} » tranquillement.`;
+        decisionReason = "Retour à la compétence cible après remédiation.";
+        session.remediationReturnTo = undefined;
+        session.mode = "evaluation";
+        session.recommendedStar = 2;
+        session.recommendedDifficulty = 2;
+      }
+    }
+
+    // Sinon (ou si la cible n'a pas de paire) : on reste sur le prérequis.
+    if (!nextPair) {
+      const pair = buildPairFor(session.notionFocus, session.microFocus);
+      if (pair) {
+        nextPair = pair;
+        decisionReason = "Poursuite de la remédiation sur le prérequis.";
+      }
+      session.remediationReturnTo = { ...back, steps: back.steps + 1 };
+    }
   }
 
-  if (!nextPair) {
-    const fallback = findNextAvailableMicroInNotion({
+  // (2a) Entrée IMMÉDIATE : distracteur étiqueté → cause connue dès la 1ʳᵉ erreur.
+  if (
+    remediationActive &&
+    !nextPair &&
+    !result.ok &&
+    !session.remediationReturnTo &&
+    suspectedPrereq &&
+    suspectedPrereq.confidence === "high" &&
+    suspectedPrereq.microId !== session.microFocus
+  ) {
+    const targetMicro = findMicro(knowledge, suspectedPrereq.microId);
+
+    session.mode = "coaching";
+    session.recommendedStar = 1;
+    session.recommendedDifficulty = 1;
+
+    const pair = buildPairFor(targetMicro.notionId, targetMicro.id);
+    if (pair) {
+      const cibleLabel = findMicro(knowledge, session.microFocus).label;
+      session.remediationReturnTo = {
+        notionId: session.notionFocus,
+        microId: session.microFocus,
+        label: cibleLabel,
+        steps: 0,
+      };
+      nextNotionId = targetMicro.notionId;
+      nextMicroId = targetMicro.id;
+      nextPair = pair;
+      remediationNote = `${suspectedPrereq.cause}. On consolide d'abord « ${targetMicro.label} », puis on revient à « ${cibleLabel} ».`;
+      decisionReason = `Remédiation ciblée (distracteur étiqueté) : ${suspectedPrereq.cause}.`;
+      remediationEntry = {
+        microId: targetMicro.id,
+        label: targetMicro.label,
+        notionId: targetMicro.notionId,
+        notionLabel: findNotion(knowledge, targetMicro.notionId).label,
+        cause: suspectedPrereq.cause,
+      };
+    }
+  }
+
+  // (2b) Entrée en remédiation : l'élève bloque (2 erreurs) → prérequis fragile.
+  if (
+    remediationActive &&
+    !nextPair &&
+    !result.ok &&
+    !session.remediationReturnTo &&
+    session.consecutiveErrorsSameStar >= 2
+  ) {
+    const ranked = rankPrerequisitesByFragility({
       knowledge,
-      matrix,
-      bank,
-      notionId: session.notionFocus,
-      currentMicroId: session.microFocus,
+      microId: session.microFocus,
       masteryByMicro: session.masteryByMicro,
-      recommendedStar: session.recommendedStar,
-      recentQuestionIds: session.recentQuestionIds,
-      preferExactStar: isSimpleMode,
     });
 
-    if (fallback) {
-      nextMicroId = fallback.micro.id;
-      nextPair = fallback.pair;
+    for (const target of ranked) {
+      if (target.microId === session.microFocus) continue;
+
+      session.mode = "coaching";
+      session.recommendedStar = 1;
+      session.recommendedDifficulty = 1;
+
+      const pair = buildPairFor(target.notionId, target.microId);
+      if (!pair) continue;
+
+      const cibleLabel = findMicro(knowledge, session.microFocus).label;
+      session.remediationReturnTo = {
+        notionId: session.notionFocus,
+        microId: session.microFocus,
+        label: cibleLabel,
+        steps: 0,
+      };
+      nextNotionId = target.notionId;
+      nextMicroId = target.microId;
+      nextPair = pair;
+      remediationNote = `Ce n'est peut-être pas « ${cibleLabel} » qui bloque : on consolide d'abord un prérequis, « ${target.label} ». On y revient juste après.`;
+      decisionReason = "Entrée en remédiation : reroutage vers un prérequis fragile.";
+      remediationEntry = {
+        microId: target.microId,
+        label: target.label,
+        notionId: target.notionId,
+        notionLabel: findNotion(knowledge, target.notionId).label,
+        cause: "Prérequis à consolider",
+      };
+      break;
+    }
+  }
+
+  // (3) Comportement standard (toutes matières) si pas de remédiation.
+  if (!nextPair) {
+    const currentMicroMastery = session.masteryByMicro[session.microFocus] ?? 0;
+
+    const shouldSwitchMicro =
+      session.consecutiveSuccess >= 2 ||
+      session.consecutiveErrorsSameStar >= 2 ||
+      currentMicroMastery >= 70;
+
+    if (!shouldSwitchMicro) {
+      nextPair = buildPairFor(session.notionFocus, session.microFocus);
+    }
+
+    if (!nextPair) {
+      const fallback = findNextAvailableMicroInNotion({
+        knowledge,
+        matrix,
+        bank,
+        notionId: session.notionFocus,
+        currentMicroId: session.microFocus,
+        masteryByMicro: session.masteryByMicro,
+        recommendedStar: session.recommendedStar,
+        recentQuestionIds: session.recentQuestionIds,
+        preferExactStar: isSimpleMode,
+      });
+
+      if (fallback) {
+        nextMicroId = fallback.micro.id;
+        nextPair = fallback.pair;
+        decisionReason =
+          "Changement de micro-compétence (progression ou difficulté).";
+      }
     }
   }
 
   if (!nextPair) {
     throw new Error(
-      `Aucune paire disponible pour continuer dans la notion ${session.notionFocus}.`
+      `Aucune paire disponible pour continuer dans la notion ${nextNotionId}.`
     );
   }
 
   session.audit.push({
     at: new Date().toISOString(),
     event: "pedagogical_decision",
-    notionId: session.notionFocus,
+    notionId: nextNotionId,
     microId: nextMicroId,
     mode: session.mode,
-    reason: shouldSwitchMicro
-      ? "Changement de micro-compétence (progression ou difficulté)."
-      : "Maintien sur la même micro-compétence.",
-    flags: [],
+    reason: decisionReason,
+    flags: remediationNote ? ["remediation"] : [],
   });
 
   const nextCurrentPair: TutorQuestionPair = {
@@ -906,6 +1065,7 @@ export async function answerTutorV4(
     recommendedStar: session.recommendedStar,
   };
 
+  session.notionFocus = nextNotionId;
   session.microFocus = nextMicroId;
   session.currentPair = nextCurrentPair;
 
@@ -921,7 +1081,9 @@ export async function answerTutorV4(
   await saveSessionV4(session);
 
   return {
-    feedback: guarded.text,
+    feedback: remediationNote
+      ? `${guarded.text}\n\n${remediationNote}`
+      : guarded.text,
     result: {
       ok: result.ok,
       flags: [...result.flags, ...guarded.flags],
@@ -931,6 +1093,7 @@ export async function answerTutorV4(
     recommendedStar: session.recommendedStar,
     recommendedDifficulty: session.recommendedDifficulty,
     visibleProgress: session.visibleProgress,
+    aReviser: remediationEntry ?? undefined,
     mastery: {
       boMastery: session.masteryByBo,
       notionMastery: session.masteryByNotion,

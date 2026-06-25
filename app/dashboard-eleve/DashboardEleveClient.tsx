@@ -68,7 +68,18 @@ type ResultatTutor = {
   bonnes_reponses: number;
   nb_tentatives: number;
   temps_sec: number | null;
+  details: unknown;
   created_at: string;
+};
+
+type RevisionFocusRow = {
+  microId: string;
+  label: string;
+  notionId: string;
+  notionLabel?: string;
+  cause?: string;
+  classe: string;
+  matiere: string;
 };
 
 type ResultatEnglishMaths = {
@@ -341,6 +352,24 @@ export default function DashboardEleveClient() {
     [resultatsTutor]
   );
 
+  // « À réviser » : prérequis signalés par la remédiation du Coach, dérivés des
+  // résultats tutor (details.aReviser), dédupliqués par micro (le plus récent).
+  const aReviser = useMemo<RevisionFocusRow[]>(() => {
+    const seen = new Set<string>();
+    const out: RevisionFocusRow[] = [];
+    for (const r of resultatsTutor) {
+      const details = r.details as { aReviser?: unknown } | null;
+      const items = Array.isArray(details?.aReviser) ? details!.aReviser : [];
+      for (const it of items as RevisionFocusRow[]) {
+        if (!it?.microId || seen.has(it.microId)) continue;
+        seen.add(it.microId);
+        out.push({ ...it, classe: r.classe, matiere: r.matiere });
+      }
+      if (out.length >= 6) break;
+    }
+    return out;
+  }, [resultatsTutor]);
+
   const totalActivites =
     resultatsParcours.length +
     resultatsCalculRapide.length +
@@ -504,6 +533,52 @@ export default function DashboardEleveClient() {
           </div>
         ) : (
           <>
+            {aReviser.length > 0 && (
+              <div className="mt-6 rounded-[2rem] border border-amber-200 bg-white p-6 shadow-xl">
+                <h2 className="text-2xl font-black text-slate-900">
+                  📌 À réviser
+                </h2>
+                <p className="mt-1 text-sm font-semibold text-slate-600">
+                  Le Coach a repéré les bases à consolider pour débloquer la suite.
+                  Clique pour t&apos;entraîner dessus.
+                </p>
+                <ul className="mt-4 grid gap-3 md:grid-cols-2">
+                  {aReviser.map((r) => (
+                    <li
+                      key={r.microId}
+                      className="flex flex-col gap-2 rounded-2xl border border-amber-100 bg-amber-50/60 p-4"
+                    >
+                      <div>
+                        <p className="font-black text-slate-900">{r.label}</p>
+                        {r.cause ? (
+                          <p className="mt-1 text-sm font-semibold text-amber-800">
+                            {r.cause}
+                          </p>
+                        ) : null}
+                        {r.notionLabel ? (
+                          <p className="mt-1 text-xs font-bold uppercase tracking-wide text-slate-400">
+                            {r.notionLabel}
+                          </p>
+                        ) : null}
+                      </div>
+                      <Link
+                        href={`/tutor-v4?classe=${encodeURIComponent(
+                          r.classe
+                        )}&matiere=${encodeURIComponent(
+                          r.matiere
+                        )}&notion=${encodeURIComponent(
+                          r.notionId
+                        )}&microId=${encodeURIComponent(r.microId)}&display=simple`}
+                        className="inline-flex w-fit items-center gap-2 rounded-2xl bg-amber-500 px-4 py-2 text-sm font-black text-white shadow-lg transition hover:bg-amber-400"
+                      >
+                        🎯 Réviser maintenant
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-6">
               <div className="rounded-[2rem] bg-gradient-to-br from-fuchsia-500 to-violet-600 p-5 text-white shadow-xl">
                 <p className="text-sm font-black uppercase text-white/80">

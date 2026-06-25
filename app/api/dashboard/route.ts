@@ -29,7 +29,7 @@ const COLONNES = {
     english_maths:
       "id, code_etablissement, code_utilisateur, nom, niveau, jour, theme, score, total, pourcentage, created_at",
     tutor:
-      "id, code_etablissement, code_utilisateur, nom, classe, matiere, notion_id, mode, score_sur_20, earned_points, possible_points, bonnes_reponses, nb_tentatives, temps_sec, created_at",
+      "id, code_etablissement, code_utilisateur, nom, classe, matiere, notion_id, mode, score_sur_20, earned_points, possible_points, bonnes_reponses, nb_tentatives, temps_sec, details, created_at",
   },
   etablissement: {
     parcours:

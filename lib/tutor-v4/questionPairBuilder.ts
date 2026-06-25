@@ -21,6 +21,7 @@ function shuffleChoices(choices: string[], id: string): string[] {
 }
 import type {
   CanvasFigure,
+  ChoiceDiagnostic,
   ComparatorName,
   DifficultyLevel,
   QuestionFormat,
@@ -43,6 +44,7 @@ function materializeBankItem(item: TutorBankItemV4): {
   explanation?: string;
   canvas?: CanvasFigure;
   audioSrc?: string;
+  choiceDiagnostics?: ChoiceDiagnostic[];
   difficulty: number;
 } {
   if (item.kind === "fixed") {
@@ -59,6 +61,7 @@ function materializeBankItem(item: TutorBankItemV4): {
       explanation: item.explanation,
       canvas: item.canvas,
       audioSrc: item.audioSrc,
+      choiceDiagnostics: item.choiceDiagnostics,
       difficulty: item.difficulty,
     };
   }
@@ -78,6 +81,7 @@ function materializeBankItem(item: TutorBankItemV4): {
     hint: item.hint,
     explanation: generated.explanation,
     canvas: generated.canvas,
+    choiceDiagnostics: generated.choiceDiagnostics,
     difficulty: item.difficulty,
   };
 }
@@ -166,6 +170,7 @@ function toTutorQuestionOption(item: TutorBankItemV4): TutorQuestionOption {
     explanation: q.explanation,
     canvas: q.canvas,
     audioSrc: q.audioSrc,
+    choiceDiagnostics: q.choiceDiagnostics,
     meta: {
       familyId: inferFamilyId(item),
       theme: inferTheme(q.text),

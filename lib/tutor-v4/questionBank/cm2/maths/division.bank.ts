@@ -356,6 +356,27 @@ export const divisionBank: TutorBankItemV4[] = [
     choices: ["5 × 7 = 35", "35 × 5 = 7", "7 - 5 = 35", "35 + 5 = 40"],
     expected: ["5 × 7 = 35"],
     comparator: "mcq_exact",
+    choiceDiagnostics: [
+      {
+        choice: "35 × 5 = 7",
+        cause:
+          "Pour vérifier une division, on multiplie le diviseur par le quotient (5 × 7), pas le dividende",
+        prereqMicroId: "multiplication_table",
+        errorKind: "conceptual",
+      },
+      {
+        choice: "7 - 5 = 35",
+        cause: "Une division se vérifie avec une multiplication, pas une soustraction",
+        prereqMicroId: "division_sens",
+        errorKind: "conceptual",
+      },
+      {
+        choice: "35 + 5 = 40",
+        cause: "Une division se vérifie avec une multiplication, pas une addition",
+        prereqMicroId: "division_sens",
+        errorKind: "conceptual",
+      },
+    ],
     hint: "On vérifie une division avec diviseur × quotient.",
     explanation: exp(
       "On peut vérifier une division avec une multiplication.",
@@ -403,6 +424,26 @@ export const divisionBank: TutorBankItemV4[] = [
     choices: ["56 ÷ 8 = 7", "56 ÷ 7 = 9", "8 ÷ 56 = 7", "7 ÷ 8 = 56"],
     expected: ["56 ÷ 8 = 7"],
     comparator: "mcq_exact",
+    choiceDiagnostics: [
+      {
+        choice: "56 ÷ 7 = 9",
+        cause: "Erreur de table : 7 × 9 = 63, pas 56 (c'est 7 × 8 = 56)",
+        prereqMicroId: "multiplication_table",
+        errorKind: "conceptual",
+      },
+      {
+        choice: "8 ÷ 56 = 7",
+        cause: "Tu as inversé : on divise le produit (56) par un facteur, pas l'inverse",
+        prereqMicroId: "division_sens",
+        errorKind: "conceptual",
+      },
+      {
+        choice: "7 ÷ 8 = 56",
+        cause: "Tu as inversé le sens de la division : 56 est le nombre à partager",
+        prereqMicroId: "division_sens",
+        errorKind: "conceptual",
+      },
+    ],
     hint: "Le produit 56 peut être divisé par un facteur pour retrouver l’autre facteur.",
     explanation: exp(
       "Une multiplication donne une famille de calculs liés.",
@@ -543,6 +584,27 @@ export const divisionBank: TutorBankItemV4[] = [
         ]),
         expected: [correct],
         comparator: "mcq_exact",
+        choiceDiagnostics: [
+          {
+            choice: `${dividende} × ${diviseur} = ${quotient}`,
+            cause:
+              "Pour vérifier une division, on multiplie le diviseur par le quotient, pas le dividende",
+            prereqMicroId: "multiplication_table",
+            errorKind: "conceptual",
+          },
+          {
+            choice: `${quotient} + ${diviseur} = ${dividende}`,
+            cause: "Une division se vérifie avec une multiplication, pas une addition",
+            prereqMicroId: "division_sens",
+            errorKind: "conceptual",
+          },
+          {
+            choice: `${dividende} - ${diviseur} = ${quotient}`,
+            cause: "Une division se vérifie avec une multiplication, pas une soustraction",
+            prereqMicroId: "division_sens",
+            errorKind: "conceptual",
+          },
+        ],
         explanation: exp(
           "On vérifie une division avec une multiplication.",
           "On multiplie le diviseur par le quotient.",
@@ -645,6 +707,26 @@ export const divisionBank: TutorBankItemV4[] = [
         ]),
         expected: [correct],
         comparator: "mcq_exact",
+        choiceDiagnostics: [
+          {
+            choice: `${product} ÷ ${a} = ${a}`,
+            cause: `Erreur de table : ${a} × ${a} = ${a * a}, pas ${product} (c'est ${a} × ${b} = ${product})`,
+            prereqMicroId: "multiplication_table",
+            errorKind: "conceptual",
+          },
+          {
+            choice: `${a} ÷ ${product} = ${b}`,
+            cause: "Tu as inversé : on divise le produit par un facteur, pas l'inverse",
+            prereqMicroId: "division_sens",
+            errorKind: "conceptual",
+          },
+          {
+            choice: `${product} ÷ ${b} = ${product}`,
+            cause: "Diviser ne peut pas redonner le nombre de départ : revois le sens de la division",
+            prereqMicroId: "division_sens",
+            errorKind: "conceptual",
+          },
+        ],
         explanation: exp(
           "Une multiplication permet d’écrire des divisions associées.",
           "On divise le produit par un facteur pour retrouver l’autre facteur.",

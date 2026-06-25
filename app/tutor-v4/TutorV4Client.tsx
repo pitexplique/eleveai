@@ -74,6 +74,7 @@ import type {
   TutorQuestionPair,
   VisibleProgress,
   CanvasFigure,
+  RevisionFocus,
 } from "@/lib/tutor-v4/types";
 
 import { getTutorLesson } from "@/lib/tutor-v4/lessons/getTutorLesson";
@@ -517,6 +518,10 @@ function forceScrollTopOnArrival() {
   const [microScores, setMicroScores] = useState<Record<string, MicroScore>>({});
   const [activeMicroId, setActiveMicroId] = useState<string | null>(null);
 
+  // Prérequis signalés « à réviser » par la remédiation pendant la séance
+  // (dédupliqués par micro, le plus récent en tête). Sauvés dans details.
+  const [aReviserList, setAReviserList] = useState<RevisionFocus[]>([]);
+
   const [visibleProgress, setVisibleProgress] = useState<VisibleProgress>({
     unlockedStars: [],
     lastUnlockedStar: undefined,
@@ -737,6 +742,7 @@ useEffect(() => {
       initial[microId] = "idle";
     });
     setMicroStatuses(initial);
+    setAReviserList([]);
   }
 
   function initMicroScoresForNotion(notionId: string) {
@@ -1076,6 +1082,14 @@ function continueAfterExplanation() {
 
       const typed = data as AnswerResponse;
 
+      // Remédiation : on a été rerouté vers un prérequis → on le note « à réviser ».
+      if (typed.aReviser) {
+        const rev = typed.aReviser;
+        setAReviserList((prev) =>
+          [rev, ...prev.filter((r) => r.microId !== rev.microId)].slice(0, 8)
+        );
+      }
+
       setSessionResults((prev) => [...prev, typed.result.ok]);
       setPossiblePoints((prev) => prev + pointsForQuestion);
 
@@ -1261,6 +1275,7 @@ function handleInputKeyDown(
         notionLabel: notionLabel(notion, classe, matiere),
         microStatuses,
         microScores,
+        aReviser: aReviserList,
         badges: visibleProgress.unlockedStars,
         savedAt: new Date().toISOString(),
       },

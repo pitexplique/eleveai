@@ -146,6 +146,7 @@ export type TutorQuestionOption = {
   explanation?: string;
   canvas?: CanvasFigure;
   audioSrc?: string;
+  choiceDiagnostics?: ChoiceDiagnostic[];
   meta: QuestionVariantMeta;
 };
 
@@ -196,6 +197,31 @@ export type ErrorKind =
   | "format"
   | "incomplete";
 
+/**
+ * Diagnostic attaché à un distracteur de QCM : quand l'élève coche CE choix,
+ * on connaît la cause probable de l'erreur et le prérequis à remédier.
+ * (Phase 2 — étiquetage des distracteurs, maths/français.)
+ */
+export type ChoiceDiagnostic = {
+  /** Texte exact du distracteur (comparé à la réponse normalisée). */
+  choice: string;
+  /** Libellé lisible de la cause probable, ex. "erreur de table (7×8=56)". */
+  cause: string;
+  /** Micro-compétence prérequis à consolider, si identifiée. */
+  prereqMicroId?: string;
+  errorKind?: ErrorKind;
+};
+
+/**
+ * Prérequis suspecté comme cause d'une erreur.
+ * `high` = distracteur explicitement étiqueté ; `graph` = déduit du graphe.
+ */
+export type SuspectedPrereq = {
+  microId: string;
+  cause: string;
+  confidence: "high" | "graph";
+};
+
 export type AnswerEvaluation = {
   ok: boolean;
   normalizedAnswer?: string;
@@ -203,6 +229,7 @@ export type AnswerEvaluation = {
   flags: string[];
   errorKind?: ErrorKind;
   estimatedUnderstanding?: number;
+  suspectedPrereq?: SuspectedPrereq;
 };
 
 export type TurnAttempt = {
@@ -292,6 +319,17 @@ export type TutorSessionV4 = {
   attempts: TurnAttempt[];
   knowledgePackId: string;
   audit: TutorAuditEntryV4[];
+  /**
+   * Remédiation par prérequis (maths/français) : quand l'élève est rerouté vers
+   * un prérequis fragile, on mémorise ici la compétence cible à laquelle revenir
+   * une fois le prérequis consolidé. `undefined` = pas en remédiation.
+   */
+  remediationReturnTo?: {
+    notionId: string;
+    microId: string;
+    label: string;
+    steps: number;
+  };
 };
 
 export type StartTutorV4Input = {
@@ -327,6 +365,18 @@ export type AnswerInput = {
   answer: string;
 };
 
+/**
+ * Prérequis signalé « à réviser » lors d'une entrée en remédiation : sert à
+ * remonter au client (puis au dashboard élève) ce qu'il devrait consolider.
+ */
+export type RevisionFocus = {
+  microId: string;
+  label: string;
+  notionId: string;
+  notionLabel?: string;
+  cause?: string;
+};
+
 export type AnswerTutorV4Response = {
   feedback: string;
   result: { ok: boolean; flags: string[] };
@@ -335,6 +385,8 @@ export type AnswerTutorV4Response = {
   recommendedStar: StarLevel;
   recommendedDifficulty: DifficultyLevel;
   visibleProgress: VisibleProgress;
+  /** Présent uniquement quand on vient d'entrer en remédiation sur un prérequis. */
+  aReviser?: RevisionFocus;
   mastery?: {
     boMastery: MasteryMap;
     notionMastery: MasteryMap;
@@ -384,6 +436,7 @@ export type TutorGeneratedQuestionV4 = {
   comparator: ComparatorName;
   explanation?: string;
   canvas?: CanvasFigure;
+  choiceDiagnostics?: ChoiceDiagnostic[];
 };
 
 export type TutorBankItemFixedV4 = {
@@ -405,6 +458,7 @@ export type TutorBankItemFixedV4 = {
   tags?: string[];
   canvas?: CanvasFigure;
   audioSrc?: string;
+  choiceDiagnostics?: ChoiceDiagnostic[];
 };
 
 export type TutorBankItemTemplateV4 = {
