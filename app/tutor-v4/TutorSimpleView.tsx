@@ -20,6 +20,11 @@ type TutorSimpleViewProps = {
   busy: boolean;
   feedback: string;
   remediationBanner?: ReactNode;
+  // Accessibilité (élèves déficients visuels) : bouton d'écoute de la question +
+  // bascule « lecture auto » de l'énoncé/correction.
+  questionListenButton?: ReactNode;
+  autoRead: boolean;
+  onToggleAutoRead: () => void;
   wrongAnswerPanel: ReactNode;
   wrongAnswerPanelOpen: boolean;
   score: string;
@@ -80,6 +85,9 @@ export default function TutorSimpleView({
   busy,
   feedback,
   remediationBanner,
+  questionListenButton,
+  autoRead,
+  onToggleAutoRead,
   wrongAnswerPanel,
   wrongAnswerPanelOpen,
   score,
@@ -164,6 +172,19 @@ export default function TutorSimpleView({
               }`}
             >
               {classBoard ? "🔍 Affichage classe : on" : "🔍 Affichage classe"}
+            </button>
+            <button
+              type="button"
+              onClick={onToggleAutoRead}
+              aria-pressed={autoRead}
+              title="Lire automatiquement les questions et les corrections à voix haute"
+              className={`rounded-md border px-3 py-2 text-sm font-bold shadow-sm ${
+                autoRead
+                  ? "border-sky-500 bg-sky-600 text-white hover:bg-sky-500"
+                  : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+              }`}
+            >
+              {autoRead ? "🔊 Lecture auto : on" : "🔊 Lecture auto"}
             </button>
           </div>
         </header>
@@ -265,9 +286,13 @@ export default function TutorSimpleView({
                   </span>
                 </div>
 
-                <MarkdownMath className={`mb-6 text-slate-950 ${boardQuestionClass}`}>
+                <MarkdownMath className={`mb-3 text-slate-950 ${boardQuestionClass}`}>
                   {currentQuestion.text}
                 </MarkdownMath>
+
+                {questionListenButton ? (
+                  <div className="mb-5">{questionListenButton}</div>
+                ) : null}
 
                 {currentQuestion.audioSrc ? (
                   <div className="mb-6 rounded-2xl border border-sky-200 bg-sky-50 p-4">

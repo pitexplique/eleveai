@@ -80,6 +80,12 @@ import type {
 import { getTutorLesson } from "@/lib/tutor-v4/lessons/getTutorLesson";
 import { LessonPanel } from "@/lib/tutor-v4/lessons/components/LessonPanel";
 import TutorSimpleView from "./TutorSimpleView";
+import {
+  ListenButton,
+  speakText,
+  stopSpeak,
+  buildReadableQuestion,
+} from "./ListenButton";
 import AudioBoost from "@/components/AudioBoost";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import BoiteAOutils from "@/components/BoiteAOutils";
@@ -527,6 +533,41 @@ function forceScrollTopOnArrival() {
     prereqLabel: string;
     targetLabel: string;
   } | null>(null);
+
+  // ACCESSIBILITÉ — lecture auto à voix haute (pensé pour les élèves déficients
+  // visuels). Préférence mémorisée dans localStorage.
+  const [autoRead, setAutoRead] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setAutoRead(window.localStorage.getItem("tutorv4-auto-read") === "1");
+  }, []);
+  function toggleAutoRead() {
+    setAutoRead((v) => {
+      const next = !v;
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem("tutorv4-auto-read", next ? "1" : "0");
+      }
+      if (!next) stopSpeak();
+      return next;
+    });
+  }
+
+  // Lit automatiquement la question + les choix dès qu'elle apparaît
+  // (sauf sur l'écran de correction).
+  useEffect(() => {
+    if (!autoRead || wrongAnswerPanelOpen || !currentQuestion) return;
+    speakText(buildReadableQuestion(currentQuestion));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoRead, currentQuestion?.id, wrongAnswerPanelOpen]);
+
+  // Lit automatiquement la correction quand l'écran « mauvaise réponse » s'ouvre.
+  useEffect(() => {
+    if (!autoRead || !wrongAnswerPanelOpen || !currentQuestion) return;
+    const expected = currentQuestion.expected?.join(" ou ") ?? "";
+    const { brief } = extractConclusion(explanationText);
+    speakText(`Pas tout à fait. La bonne réponse était : ${expected}. ${brief}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoRead, wrongAnswerPanelOpen]);
 
   const [visibleProgress, setVisibleProgress] = useState<VisibleProgress>({
     unlockedStars: [],
@@ -1350,6 +1391,14 @@ function handleInputKeyDown(
     suggestions: coachSuggestions,
   };
 
+  const questionListenButton = currentQuestion ? (
+    <ListenButton
+      text={buildReadableQuestion(currentQuestion)}
+      label="Écouter la question"
+      className="inline-flex items-center gap-1 rounded-full border border-sky-300 bg-white px-3 py-1.5 text-xs font-black text-sky-700 shadow-sm hover:bg-sky-50"
+    />
+  ) : null;
+
   const remediationBanner = remediationState ? (
     <div className="mb-4 flex items-start gap-3 rounded-2xl border-2 border-amber-300 bg-amber-50 px-4 py-3 shadow-sm">
       <span className="text-xl leading-none">🔧</span>
@@ -1367,6 +1416,9 @@ function handleInputKeyDown(
       <>
         <TutorSimpleView
           remediationBanner={remediationBanner}
+          questionListenButton={questionListenButton}
+          autoRead={autoRead}
+          onToggleAutoRead={toggleAutoRead}
           classe={classe}
           matiere={matiere}
           notionLabel={notion ? notionLabel(notion, classe, matiere) : "Entraînement"}
@@ -2212,7 +2264,13 @@ function CoachErrorHelp({
                     : "ml-6 bg-emerald-500/30 text-white"
                 }`}
               >
-                {m.content}
+                <div>{m.content}</div>
+                {m.role === "coach" ? (
+                  <ListenButton
+                    text={m.content}
+                    className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-bold text-cyan-200 hover:bg-white/20"
+                  />
+                ) : null}
               </div>
             ))}
             {loading ? (
@@ -2319,15 +2377,18 @@ function WrongAnswerPanel({
           <span className="text-sm font-bold uppercase tracking-wide text-orange-500">
             Explication
           </span>
-          {hasMore ? (
-            <button
-              type="button"
-              onClick={() => setShowDetail((v) => !v)}
-              className="rounded-full border border-violet-200 px-3 py-1 text-xs font-bold text-violet-600 hover:bg-violet-50"
-            >
-              {showDetail ? "Masquer le détail" : "Voir le détail"}
-            </button>
-          ) : null}
+          <div className="flex items-center gap-2">
+            <ListenButton text={showDetail ? full : brief} />
+            {hasMore ? (
+              <button
+                type="button"
+                onClick={() => setShowDetail((v) => !v)}
+                className="rounded-full border border-violet-200 px-3 py-1 text-xs font-bold text-violet-600 hover:bg-violet-50"
+              >
+                {showDetail ? "Masquer le détail" : "Voir le détail"}
+              </button>
+            ) : null}
+          </div>
         </div>
         <MarkdownMath className="whitespace-pre-line text-[15px] leading-7 text-slate-900">
           {showDetail
