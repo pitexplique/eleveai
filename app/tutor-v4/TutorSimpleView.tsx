@@ -19,6 +19,7 @@ type TutorSimpleViewProps = {
   setAnswer: (value: string) => void;
   busy: boolean;
   feedback: string;
+  remediationBanner?: ReactNode;
   wrongAnswerPanel: ReactNode;
   wrongAnswerPanelOpen: boolean;
   score: string;
@@ -78,6 +79,7 @@ export default function TutorSimpleView({
   setAnswer,
   busy,
   feedback,
+  remediationBanner,
   wrongAnswerPanel,
   wrongAnswerPanelOpen,
   score,
@@ -222,6 +224,8 @@ export default function TutorSimpleView({
             <SimplePill>🔥 Série {streak}</SimplePill>
           </div>
         </div>
+
+        {remediationBanner}
 
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_120px]">
           <section className="min-h-[520px] rounded-2xl bg-white px-5 py-6 shadow-sm ring-1 ring-slate-200 sm:px-8 lg:px-12">

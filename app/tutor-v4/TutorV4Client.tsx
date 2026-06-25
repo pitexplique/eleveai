@@ -522,6 +522,12 @@ function forceScrollTopOnArrival() {
   // (dédupliqués par micro, le plus récent en tête). Sauvés dans details.
   const [aReviserList, setAReviserList] = useState<RevisionFocus[]>([]);
 
+  // Statut de remédiation EN COURS (bandeau persistant). null = pas en remédiation.
+  const [remediationState, setRemediationState] = useState<{
+    prereqLabel: string;
+    targetLabel: string;
+  } | null>(null);
+
   const [visibleProgress, setVisibleProgress] = useState<VisibleProgress>({
     unlockedStars: [],
     lastUnlockedStar: undefined,
@@ -743,6 +749,7 @@ useEffect(() => {
     });
     setMicroStatuses(initial);
     setAReviserList([]);
+    setRemediationState(null);
   }
 
   function initMicroScoresForNotion(notionId: string) {
@@ -897,6 +904,7 @@ function continueAfterExplanation() {
       const typed = data as StartResponse;
 
       setSessionId(typed.sessionId);
+      setRemediationState(null);
       setPair(typed.pair);
       setMode(typed.mode);
       setRecommendedStar(typed.recommendedStar);
@@ -1089,6 +1097,9 @@ function continueAfterExplanation() {
           [rev, ...prev.filter((r) => r.microId !== rev.microId)].slice(0, 8)
         );
       }
+
+      // Bandeau persistant : présent tant qu'on est en remédiation, null sinon.
+      setRemediationState(typed.remediation ?? null);
 
       setSessionResults((prev) => [...prev, typed.result.ok]);
       setPossiblePoints((prev) => prev + pointsForQuestion);
@@ -1305,10 +1316,23 @@ function handleInputKeyDown(
       </div>
     ) : null;
 
+  const remediationBanner = remediationState ? (
+    <div className="mb-4 flex items-start gap-3 rounded-2xl border-2 border-amber-300 bg-amber-50 px-4 py-3 shadow-sm">
+      <span className="text-xl leading-none">🔧</span>
+      <p className="text-sm font-bold text-amber-900">
+        Remédiation en cours — on consolide d&apos;abord «&nbsp;{remediationState.prereqLabel}&nbsp;».
+        <span className="font-semibold text-amber-700">
+          {" "}On reviendra à «&nbsp;{remediationState.targetLabel}&nbsp;» juste après.
+        </span>
+      </p>
+    </div>
+  ) : null;
+
   if (displayMode === "simple") {
     return (
       <>
         <TutorSimpleView
+          remediationBanner={remediationBanner}
           classe={classe}
           matiere={matiere}
           notionLabel={notion ? notionLabel(notion, classe, matiere) : "Entraînement"}
@@ -1374,6 +1398,7 @@ function handleInputKeyDown(
  return (
   <main className="min-h-screen bg-[#f3f4f6] px-2 py-3 sm:px-4 sm:py-6">
     <div className="mx-auto max-w-7xl">
+       {remediationBanner}
        <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
         <button
           type="button"

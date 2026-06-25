@@ -387,6 +387,11 @@ export type AnswerTutorV4Response = {
   visibleProgress: VisibleProgress;
   /** Présent uniquement quand on vient d'entrer en remédiation sur un prérequis. */
   aReviser?: RevisionFocus;
+  /**
+   * Présent TANT QUE la session est en remédiation (prérequis en cours +
+   * compétence cible où l'on reviendra) → bandeau persistant côté UI.
+   */
+  remediation?: { prereqLabel: string; targetLabel: string };
   mastery?: {
     boMastery: MasteryMap;
     notionMastery: MasteryMap;

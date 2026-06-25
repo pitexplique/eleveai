@@ -1059,6 +1059,15 @@ export async function answerTutorV4(
     flags: remediationNote ? ["remediation"] : [],
   });
 
+  // Statut de remédiation persistant : tant que remediationReturnTo est défini,
+  // l'élève travaille un prérequis (nextMicroId) avant de revenir à la cible.
+  const remediationStatus = session.remediationReturnTo
+    ? {
+        prereqLabel: findMicro(knowledge, nextMicroId).label,
+        targetLabel: session.remediationReturnTo.label,
+      }
+    : undefined;
+
   const nextCurrentPair: TutorQuestionPair = {
     ...nextPair,
     recommendedDifficulty: session.recommendedDifficulty,
@@ -1094,6 +1103,7 @@ export async function answerTutorV4(
     recommendedDifficulty: session.recommendedDifficulty,
     visibleProgress: session.visibleProgress,
     aReviser: remediationEntry ?? undefined,
+    remediation: remediationStatus,
     mastery: {
       boMastery: session.masteryByBo,
       notionMastery: session.masteryByNotion,
