@@ -1,10 +1,11 @@
 "use client";
 
-import type { KeyboardEvent, ReactNode } from "react";
+import { useEffect, useRef, type KeyboardEvent, type ReactNode } from "react";
 import Link from "next/link";
 import { Video } from "lucide-react";
 import AudioBoost from "@/components/AudioBoost";
 import { MarkdownMath } from "@/components/MarkdownMath";
+import { buildReadableQuestion } from "./ListenButton";
 import type { Classe, Matiere } from "@/lib/tutor-v4/catalog";
 import type { TutorMode, TutorQuestionOption } from "@/lib/tutor-v4/types";
 import { buildLearningVideoHref } from "@/lib/videoSearch";
@@ -137,6 +138,20 @@ export default function TutorSimpleView({
   const boardChoiceClass = classBoard ? "py-5 text-2xl sm:text-3xl" : "py-4 text-lg";
   const boardInputClass = classBoard ? "text-2xl sm:text-3xl" : "text-lg";
   const boardShortInputClass = classBoard ? "text-2xl sm:text-3xl" : "text-xl";
+
+  // Accessibilité : à chaque nouvelle question, on déplace le focus sur l'énoncé
+  // (porteur d'un aria-label complet : texte + choix) → le lecteur d'écran
+  // annonce immédiatement la question et ses réponses possibles.
+  const questionRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (currentQuestion && !wrongAnswerPanelOpen) {
+      questionRef.current?.focus();
+    }
+  }, [currentQuestion?.id, wrongAnswerPanelOpen]);
+
+  const readableQuestion = currentQuestion
+    ? buildReadableQuestion(currentQuestion)
+    : "";
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-100 via-cyan-50 to-emerald-100 px-3 py-4 text-slate-950 sm:px-5">
@@ -286,9 +301,17 @@ export default function TutorSimpleView({
                   </span>
                 </div>
 
-                <MarkdownMath className={`mb-3 text-slate-950 ${boardQuestionClass}`}>
-                  {currentQuestion.text}
-                </MarkdownMath>
+                <div
+                  ref={questionRef}
+                  tabIndex={-1}
+                  role="group"
+                  aria-label={`Question. ${readableQuestion}`}
+                  className="outline-none"
+                >
+                  <MarkdownMath className={`mb-3 text-slate-950 ${boardQuestionClass}`}>
+                    {currentQuestion.text}
+                  </MarkdownMath>
+                </div>
 
                 {questionListenButton ? (
                   <div className="mb-5">{questionListenButton}</div>
@@ -315,18 +338,26 @@ export default function TutorSimpleView({
                 ) : null}
 
                 {currentQuestion.format === "qcm" && currentQuestion.choices?.length ? (
-                  <div className="grid gap-3">
-                    {currentQuestion.choices.map((choice, index) => (
-                      <button
-                        key={`${choice}-${index}`}
-                        type="button"
-                        onClick={() => onQcmClick(choice)}
-                        disabled={busy}
-                        className={`rounded-lg border border-slate-300 bg-white px-4 text-left font-semibold text-slate-900 shadow-sm hover:bg-sky-50 disabled:opacity-60 ${boardChoiceClass}`}
-                      >
-                        <MarkdownMath inline>{choice}</MarkdownMath>
-                      </button>
-                    ))}
+                  <div
+                    className="grid gap-3"
+                    role="group"
+                    aria-label="Réponses possibles : utilise Tab pour les parcourir, Entrée pour choisir"
+                  >
+                    {currentQuestion.choices.map((choice, index) => {
+                      const lettre = ["A", "B", "C", "D", "E", "F"][index] ?? `${index + 1}`;
+                      return (
+                        <button
+                          key={`${choice}-${index}`}
+                          type="button"
+                          onClick={() => onQcmClick(choice)}
+                          disabled={busy}
+                          aria-label={`Réponse ${lettre} : ${choice}`}
+                          className={`rounded-lg border border-slate-300 bg-white px-4 text-left font-semibold text-slate-900 shadow-sm hover:bg-sky-50 disabled:opacity-60 ${boardChoiceClass}`}
+                        >
+                          <MarkdownMath inline>{choice}</MarkdownMath>
+                        </button>
+                      );
+                    })}
                   </div>
                 ) : currentQuestion.format === "open" ? (
                   <div className="space-y-4">
@@ -336,6 +367,7 @@ export default function TutorSimpleView({
                       onKeyDown={onInputKeyDown}
                       disabled={busy}
                       rows={5}
+                      aria-label="Ta réponse"
                       className={`w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none focus:border-sky-500 ${boardInputClass}`}
                       placeholder="Ta réponse..."
                     />
@@ -355,6 +387,7 @@ export default function TutorSimpleView({
                       onChange={(event) => setAnswer(event.target.value)}
                       onKeyDown={onInputKeyDown}
                       disabled={busy}
+                      aria-label="Ta réponse"
                       className={`w-full max-w-sm rounded-md border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none focus:border-sky-500 ${boardShortInputClass}`}
                       placeholder="Réponse"
                     />
@@ -371,11 +404,15 @@ export default function TutorSimpleView({
                   </div>
                 )}
 
-                {feedback ? (
-                  <div className="mt-6 rounded-lg bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">
-                    <MarkdownMath>{feedback}</MarkdownMath>
-                  </div>
-                ) : null}
+                {/* Région live : le lecteur d'écran annonce le résultat tout seul.
+                    Toujours présente dans le DOM pour que le changement soit lu. */}
+                <div role="status" aria-live="assertive" className="mt-6">
+                  {feedback ? (
+                    <div className="rounded-lg bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">
+                      <MarkdownMath>{feedback}</MarkdownMath>
+                    </div>
+                  ) : null}
+                </div>
               </div>
             ) : (
               <div className="flex min-h-[360px] flex-col items-center justify-center text-center">
