@@ -10,6 +10,7 @@ import { problemeDuJourWeekly } from "@/lib/defis-du-jour/weekly";
 import BulletinPreviewHome from "@/components/bulletin/BulletinPreviewHome";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
+import PresentationAudio from "./PresentationAudio";
 import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
@@ -363,6 +364,7 @@ export default function AccueilPage({
             coince vraiment et t&apos;entraîne dessus. Indices, exercices courts
             et un coach IA encadré pour apprendre — jamais à ta place.
           </p>
+          <PresentationAudio />
         </div>
         <Image
           src="/images/accueil-eleveai-reunion.webp"
