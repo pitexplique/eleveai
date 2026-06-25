@@ -42,7 +42,15 @@ type ResultatParcours = ResultatBase & { classe: string | null; niveau: string |
 type ResultatCalculRapide = ResultatBase & { classe: string | null; niveau: string | null; matiere: string; titre_session: string | null; theme: string | null };
 type ResultatDefiJour = ResultatBase & { titre_defi: string; theme: string | null };
 type ResultatEnglish = ResultatBase & { jour: number | null; theme: string | null };
-type ResultatTutor = ResultatBase & { classe: string; notion_id: string; mode: string | null; score_sur_20: number | null; bonnes_reponses: number; nb_tentatives: number };
+type ResultatTutor = ResultatBase & { classe: string; notion_id: string; mode: string | null; score_sur_20: number | null; bonnes_reponses: number; nb_tentatives: number; details?: unknown };
+
+type RevisionFocusRow = {
+  microId: string;
+  label: string;
+  notionId: string;
+  notionLabel?: string;
+  cause?: string;
+};
 
 type EleveSynthese = {
   code_utilisateur: string;
@@ -59,8 +67,30 @@ type EleveSynthese = {
   dernierDefi: ResultatDefiJour | null;
   dernierEnglish: ResultatEnglish | null;
   dernierTutor: ResultatTutor | null;
+  aReviser: RevisionFocusRow[];
   moyenneGlobale: number | null;
 };
+
+// Prérequis « à renforcer » d'un élève : agrégés depuis details.aReviser des
+// séances Coach (dédupliqués par micro, le plus récent d'abord, max 5).
+function aggregateAReviser(tutor: ResultatTutor[]): RevisionFocusRow[] {
+  const sorted = [...tutor].sort(
+    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  );
+  const seen = new Set<string>();
+  const out: RevisionFocusRow[] = [];
+  for (const r of sorted) {
+    const d = r.details as { aReviser?: unknown } | null;
+    const items = Array.isArray(d?.aReviser) ? d!.aReviser : [];
+    for (const it of items as RevisionFocusRow[]) {
+      if (!it?.microId || seen.has(it.microId)) continue;
+      seen.add(it.microId);
+      out.push(it);
+    }
+    if (out.length >= 5) break;
+  }
+  return out;
+}
 
 function formatDate(value?: string | null) {
   if (!value) return "—";
@@ -260,6 +290,7 @@ export default function DashboardProfClient() {
         dernierDefi: getLast(defis),
         dernierEnglish: getLast(english),
         dernierTutor: getLast(tutor),
+        aReviser: aggregateAReviser(tutor),
         moyenneGlobale: getAveragePct(allResults),
       };
     });
@@ -516,6 +547,28 @@ export default function DashboardProfClient() {
                                     </div>
                                   ))}
                                 </div>
+
+                                {/* À RENFORCER : prérequis fragiles repérés par la remédiation du Coach */}
+                                {s.aReviser.length > 0 && (
+                                  <div className="mt-3 rounded-2xl border border-amber-200 bg-amber-50 p-4">
+                                    <p className="text-xs font-black uppercase tracking-wide text-amber-700">
+                                      📌 À renforcer (repéré par le Coach)
+                                    </p>
+                                    <ul className="mt-2 space-y-2">
+                                      {s.aReviser.map((r) => (
+                                        <li key={r.microId} className="text-sm">
+                                          <span className="font-black text-slate-900">{r.label}</span>
+                                          {r.notionLabel ? (
+                                            <span className="font-bold text-slate-400"> · {r.notionLabel}</span>
+                                          ) : null}
+                                          {r.cause ? (
+                                            <p className="font-semibold text-amber-800">{r.cause}</p>
+                                          ) : null}
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                )}
                               </td>
                             </tr>
                           )}

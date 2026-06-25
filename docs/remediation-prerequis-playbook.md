@@ -196,7 +196,7 @@ suspectedPrereq?: { microId: string; cause: string; confidence: "high" | "graph"
 | **1 — MVP graphe** ✅ **LIVRÉE (25/06/2026)** | Brancher `remediate_prerequisite` (graphe + mastery existants). **Gating `maths\|francais`.** Aucun enrichissement de banque. | Faible (câblage) | **maths CP→term + français CP→3e, d'un coup** |
 | **2 — Distracteurs diagnostiques** ✅ **LIVRÉE (25/06/2026)** | Étiqueter les distracteurs sur **division CM2** (= l'exemple du principal, démo de rentrée). Le moteur remonte `suspectedPrereq` (confiance `high`) → remédiation dès la 1ʳᵉ erreur. | Moyen (contenu) | division CM2 (pilote), puis colonne vertébrale |
 | **3a — Restitution élève** ✅ **LIVRÉE (25/06/2026)** | Carte « 📌 À réviser » sur `dashboard-eleve` : les prérequis signalés par la remédiation + bouton « Réviser » qui relance le Coach pile sur la compétence. Sans nouvelle table (via `resultats_tutor.details`). | Moyen | maths/français |
-| **3b — Restitution prof** | Bloc « cause probable » sur `dashboard-prof`. | Moyen | — |
+| **3b — Restitution prof** ✅ **LIVRÉE (25/06/2026)** | Bloc « 📌 À renforcer » dans le détail élève de `dashboard-prof` (prérequis + cause), agrégé depuis `details.aReviser`. | Moyen | maths/français |
 | **4 — Inter-niveaux** | Option B (ou A), généralisation. | Élevé | — |
 
 ---
@@ -329,6 +329,17 @@ le contrat de données est validé au niveau moteur et tsc.
 
 **Reste Phase 3b (prof) :** même donnée (`suspectedPrereq` est déjà persisté dans les attempts,
 et `details.aReviser` dans `resultats_tutor`) → bloc « cause probable » sur `dashboard-prof`.
+
+### Phase 3b — restitution prof (25/06/2026)
+- `app/api/dashboard/route.ts` : `details` ajouté au select **tutor (scope établissement)**
+  (était omis « trop lourd » ; `aReviser` est léger → acceptable ; optim possible : projection
+  JSON `details->aReviser`).
+- `app/dashboard-prof/DashboardProfClient.tsx` : helper `aggregateAReviser(tutor)` (dédup micro,
+  max 5, plus récent) → `EleveSynthese.aReviser` → bloc « 📌 À renforcer (repéré par le Coach) »
+  dans le détail élève déplié (label + notion + cause). Pas de bouton « réviser » côté prof
+  (c'est informatif ; la révision se fait côté élève).
+- `tsc` clean. Rendu non vu en preview (besoin compte prof + données en base) ; contrat
+  `details.aReviser` identique à la 3a (déjà vérifié au moteur).
 
 ---
 
