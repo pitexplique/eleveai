@@ -1316,6 +1316,27 @@ function handleInputKeyDown(
       </div>
     ) : null;
 
+  // Ressources internes proposées après la réponse de l'IA : on entraîne sur le
+  // micro raté + quelques voisins de la même notion (liens vers le tutor ciblé).
+  const coachSuggestions = currentQuestion
+    ? (() => {
+        const nId = currentQuestion.notionId;
+        const micros = notionMicroMap[nId] ?? [];
+        const ordered = [
+          currentQuestion.microId,
+          ...micros.filter((m) => m !== currentQuestion.microId),
+        ];
+        return ordered.slice(0, 3).map((mId) => ({
+          label: microLabel(mId, classe, matiere),
+          href: `/tutor-v4?classe=${encodeURIComponent(
+            classe
+          )}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(
+            nId
+          )}&microId=${encodeURIComponent(mId)}&display=simple`,
+        }));
+      })()
+    : [];
+
   // Contexte transmis au Coach IA pour « Aide-toi de notre Coach IA » sur une
   // erreur. RGPD : classe oui, prénom/nom JAMAIS.
   const coachContext: CoachContext = {
@@ -1326,6 +1347,7 @@ function handleInputKeyDown(
     notionLabel: currentQuestion
       ? notionLabel(currentQuestion.notionId, classe, matiere)
       : "",
+    suggestions: coachSuggestions,
   };
 
   const remediationBanner = remediationState ? (
@@ -2057,6 +2079,8 @@ type CoachContext = {
   codeUtilisateur: string;
   classe: string;
   notionLabel: string;
+  // Ressources internes proposées après la réponse de l'IA (entraînements ciblés).
+  suggestions: { label: string; href: string }[];
 };
 
 // « Aide-toi de notre Coach IA » : à la demande, l'IA explique l'erreur précise
@@ -2197,6 +2221,26 @@ function CoachErrorHelp({
               </div>
             ) : null}
           </div>
+
+          {messages.some((m) => m.role === "coach") &&
+          coach.suggestions.length > 0 ? (
+            <div className="mt-3 rounded-2xl bg-white/5 p-3">
+              <p className="mb-2 text-xs font-black uppercase tracking-wide text-cyan-300">
+                📚 EleveAI te propose de réviser
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {coach.suggestions.map((s) => (
+                  <a
+                    key={s.href}
+                    href={s.href}
+                    className="rounded-full bg-emerald-500/20 px-3 py-1.5 text-xs font-bold text-emerald-100 transition hover:bg-emerald-500/30"
+                  >
+                    🎯 {s.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : null}
 
           <div className="mt-3 flex gap-2">
             <input
