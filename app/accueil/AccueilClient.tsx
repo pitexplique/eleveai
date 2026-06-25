@@ -468,6 +468,12 @@ export default function AccueilPage({
             </Link>
             .
           </p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+            Et une nouveauté qui me tient particulièrement à cœur : EleveAI est désormais
+            <span className="font-black text-amber-200"> adapté aux garçons et aux filles qui ont des difficultés de vue</span> 🔊
+            — les questions se lisent à voix haute et l&apos;appli fonctionne avec les lecteurs
+            d&apos;écran. Parce qu&apos;ici, chacun a sa place et personne ne reste sur le bord du chemin.
+          </p>
           <p className="mt-4 text-sm font-black text-emerald-200">
             Reposez-vous bien et revenez en pleine forme. À très vite !
           </p>
@@ -712,7 +718,7 @@ export default function AccueilPage({
       <section className="px-4 pb-10 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-lg font-black text-white mb-4">🤝 Une plateforme de confiance</h2>
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <Link
               href="/qui-sommes-nous"
               className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition-all hover:-translate-y-1 hover:border-emerald-400/40 hover:bg-white/10"
@@ -745,6 +751,17 @@ export default function AccueilPage({
                 Droit d&apos;accès et de suppression sur simple demande. Aucun nom de famille d&apos;élève n&apos;est publié.
               </p>
               <p className="mt-2 text-xs font-black text-sky-300 transition group-hover:translate-x-1">Notre politique →</p>
+            </Link>
+            <Link
+              href="/coach-ia/maths"
+              className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition-all hover:-translate-y-1 hover:border-fuchsia-400/40 hover:bg-white/10"
+            >
+              <span className="text-2xl">🔊</span>
+              <p className="mt-2 text-sm font-black text-white">Pensé pour les élèves déficients visuels</p>
+              <p className="mt-1 text-xs leading-relaxed text-white/60">
+                Lecture des questions à voix haute et compatibilité avec les lecteurs d&apos;écran (NVDA, VoiceOver) : un élève déficient visuel fait l&apos;exercice en autonomie.
+              </p>
+              <p className="mt-2 text-xs font-black text-fuchsia-300 transition group-hover:translate-x-1">Essayer la lecture →</p>
             </Link>
           </div>
         </div>
