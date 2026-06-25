@@ -2010,70 +2010,42 @@ function WrongAnswerPanel({
   explanation: string;
   onContinue: () => void;
 }) {
+  const correctAnswer =
+    question.expected && question.expected.length > 0
+      ? question.expected.join(" ou ")
+      : "—";
+
   return (
-    <div className="space-y-6">
-      <div className="rounded-[28px] border border-sky-200 bg-[#f5f7fa] p-6">
-        <div className="mb-5 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-          <div>
-            <h2 className="text-4xl font-light tracking-tight text-sky-500 md:text-6xl">
-              Hmm… pas tout à fait 🤖
-            </h2>
-            <div className="mt-4 text-lg text-lime-700">La bonne réponse est :</div>
-            <div className="mt-2 inline-flex min-w-[96px] items-center justify-center rounded-md border border-sky-400 bg-white px-4 py-2 text-3xl font-semibold text-slate-900 shadow-sm">
-              ?
-            </div>
-          </div>
+    <div className="space-y-4">
+      <div className="rounded-[28px] border border-sky-200 bg-[#f5f7fa] p-6 text-center">
+        <h2 className="text-3xl font-light tracking-tight text-sky-500 md:text-4xl">
+          Hmm… pas tout à fait 🤖
+        </h2>
 
-          <div className="pt-2">
-            <ContinueButton onClick={onContinue} />
-          </div>
+        <div className="mt-5 text-base font-medium text-slate-500">
+          La bonne réponse était :
+        </div>
+        <div className="mt-2 inline-flex min-w-[88px] items-center justify-center rounded-2xl border-2 border-lime-400 bg-white px-5 py-2 text-3xl font-bold text-lime-700 shadow-sm">
+          <MarkdownMath inline>{correctAnswer}</MarkdownMath>
         </div>
 
-        <div className="text-5xl font-light text-lime-700">Explication</div>
-      </div>
-
-      <div className="relative rounded-sm border border-violet-200 bg-white p-6 shadow-sm">
-        <VerticalRibbon label="examiner" colorClass="bg-lime-500" />
-        <div className="pl-2">
-          <div className="rounded-xl bg-white p-4">
-            <MarkdownMath className="mb-4 text-base text-slate-900">
-              {question.text}
-            </MarkdownMath>
-
-            {question.canvas ? (
-              <div className="mb-4 rounded-2xl bg-slate-50 p-3">
-                {renderCanvas(question.canvas)}
-              </div>
-            ) : null}
-
-            <div className="mb-4 inline-flex min-w-[88px] rounded-sm border border-sky-400 bg-[#eaf3ff] px-3 py-2 text-lg text-slate-900">
-              {""}
-            </div>
-
-            <div className="text-2xl font-light text-lime-700">Ta réponse :</div>
-            <div
-              className={`mt-3 rounded-sm border border-sky-400 bg-[#eaf3ff] px-3 py-2 text-slate-900 ${
-                question.format === "open"
-                  ? "min-h-[96px] whitespace-pre-wrap text-base"
-                  : "inline-flex min-w-[88px] text-lg"
-              }`}
-            >
-              <MarkdownMath inline>{userAnswer || "—"}</MarkdownMath>
-            </div>
+        {userAnswer ? (
+          <div className="mt-3 text-sm font-semibold text-slate-400">
+            Ta réponse : {userAnswer}
           </div>
-        </div>
+        ) : null}
       </div>
 
-      <div className="relative rounded-sm border border-violet-200 bg-white p-6 shadow-sm">
-        <VerticalRibbon label="résoudre" colorClass="bg-orange-400" />
-        <div className="pl-2">
-          <MarkdownMath className="whitespace-pre-line text-[15px] leading-8 text-slate-900">
-            {explanation || "Relis l’énoncé et compare bien les rangs des chiffres."}
-          </MarkdownMath>
+      <div className="rounded-[28px] border border-violet-200 bg-white p-5 shadow-sm">
+        <div className="mb-2 text-sm font-bold uppercase tracking-wide text-orange-500">
+          Explication
         </div>
+        <MarkdownMath className="whitespace-pre-line text-[15px] leading-7 text-slate-900">
+          {explanation || "Relis l’énoncé et compare bien les nombres."}
+        </MarkdownMath>
       </div>
 
-      <div className="flex justify-start">
+      <div className="flex justify-center">
         <ContinueButton onClick={onContinue} />
       </div>
     </div>
@@ -2089,23 +2061,6 @@ function ContinueButton({ onClick }: { onClick: () => void }) {
     >
       Question suivante
     </button>
-  );
-}
-
-function VerticalRibbon({
-  label,
-  colorClass,
-}: {
-  label: string;
-  colorClass: string;
-}) {
-  return (
-    <div
-      className={`absolute left-0 top-6 -translate-x-1/2 rounded-sm px-2 py-1 text-sm font-medium text-white shadow ${colorClass}`}
-      style={{ writingMode: "vertical-rl", transform: "translateX(-50%) rotate(180deg)" }}
-    >
-      {label}
-    </div>
   );
 }
 
