@@ -1166,7 +1166,11 @@ function continueAfterExplanation() {
         setPendingNextVisibleProgress(null);
       } else {
         closeSuccessBanner();
-        setFeedback("Ce n’est pas la bonne réponse…");
+        // Si la remédiation s'est déclenchée, on montre le message causal du
+        // serveur (« c'est les tables qui bloquent… »), sinon message générique.
+        setFeedback(
+          typed.aReviser ? typed.feedback : "Ce n’est pas la bonne réponse…"
+        );
         setLastSubmittedAnswer(finalAnswer);
 
         if (hasExplanation) {
