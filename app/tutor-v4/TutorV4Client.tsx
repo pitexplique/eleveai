@@ -1999,6 +1999,20 @@ function handleInputKeyDown(
 );
 }
 
+// Isole la « Conclusion : … » d'une explication structurée (Définition / Méthode
+// / Calcul / Conclusion) pour n'afficher que l'essentiel par défaut. Si le
+// format n'est pas reconnu, on garde le texte entier comme résumé.
+function extractConclusion(explanation: string): {
+  brief: string;
+  full: string;
+  hasMore: boolean;
+} {
+  const full = (explanation || "").trim();
+  const m = full.match(/Conclusion\s*:\s*([\s\S]*)$/i);
+  const brief = m ? m[1].trim() : full;
+  return { brief, full, hasMore: full.length > 0 && brief !== full };
+}
+
 function WrongAnswerPanel({
   question,
   userAnswer,
@@ -2010,10 +2024,14 @@ function WrongAnswerPanel({
   explanation: string;
   onContinue: () => void;
 }) {
+  const [showDetail, setShowDetail] = useState(false);
+
   const correctAnswer =
     question.expected && question.expected.length > 0
       ? question.expected.join(" ou ")
       : "—";
+
+  const { brief, full, hasMore } = extractConclusion(explanation);
 
   return (
     <div className="space-y-4">
@@ -2037,11 +2055,24 @@ function WrongAnswerPanel({
       </div>
 
       <div className="rounded-[28px] border border-violet-200 bg-white p-5 shadow-sm">
-        <div className="mb-2 text-sm font-bold uppercase tracking-wide text-orange-500">
-          Explication
+        <div className="mb-2 flex items-center justify-between gap-3">
+          <span className="text-sm font-bold uppercase tracking-wide text-orange-500">
+            Explication
+          </span>
+          {hasMore ? (
+            <button
+              type="button"
+              onClick={() => setShowDetail((v) => !v)}
+              className="rounded-full border border-violet-200 px-3 py-1 text-xs font-bold text-violet-600 hover:bg-violet-50"
+            >
+              {showDetail ? "Masquer le détail" : "Voir le détail"}
+            </button>
+          ) : null}
         </div>
         <MarkdownMath className="whitespace-pre-line text-[15px] leading-7 text-slate-900">
-          {explanation || "Relis l’énoncé et compare bien les nombres."}
+          {showDetail
+            ? full
+            : brief || "Relis l’énoncé et compare bien les nombres."}
         </MarkdownMath>
       </div>
 
