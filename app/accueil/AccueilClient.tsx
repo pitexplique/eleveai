@@ -363,14 +363,6 @@ export default function AccueilPage({
             coince vraiment et t&apos;entraîne dessus. Indices, exercices courts
             et un coach IA encadré pour apprendre — jamais à ta place.
           </p>
-          <Link
-            href="/fiches-cours"
-            className="group mt-3 inline-flex items-center gap-2 rounded-full border border-emerald-300/40 bg-emerald-300/10 px-4 py-1.5 text-xs font-black tracking-wide text-emerald-200 transition hover:scale-105 hover:border-emerald-300/70 hover:bg-emerald-300/20 sm:text-sm"
-          >
-            <span aria-hidden="true">📚</span>
-            Tester les fiches de cours
-            <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
-          </Link>
         </div>
         <Image
           src="/images/accueil-eleveai-reunion.webp"
