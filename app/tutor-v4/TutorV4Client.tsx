@@ -1316,6 +1316,18 @@ function handleInputKeyDown(
       </div>
     ) : null;
 
+  // Contexte transmis au Coach IA pour « Aide-toi de notre Coach IA » sur une
+  // erreur. RGPD : classe oui, prénom/nom JAMAIS.
+  const coachContext: CoachContext = {
+    codeEtablissement: eleve?.code_etablissement?.trim() ?? "",
+    codeUtilisateur:
+      eleve?.code_eleve?.trim() ?? eleve?.code_utilisateur?.trim() ?? "",
+    classe,
+    notionLabel: currentQuestion
+      ? notionLabel(currentQuestion.notionId, classe, matiere)
+      : "",
+  };
+
   const remediationBanner = remediationState ? (
     <div className="mb-4 flex items-start gap-3 rounded-2xl border-2 border-amber-300 bg-amber-50 px-4 py-3 shadow-sm">
       <span className="text-xl leading-none">🔧</span>
@@ -1356,6 +1368,7 @@ function handleInputKeyDown(
                 userAnswer={lastSubmittedAnswer}
                 explanation={explanationText}
                 onContinue={continueAfterExplanation}
+                coach={coachContext}
               />
             ) : null
           }
@@ -1888,6 +1901,7 @@ function handleInputKeyDown(
                   userAnswer={lastSubmittedAnswer}
                   explanation={explanationText}
                   onContinue={continueAfterExplanation}
+                  coach={coachContext}
                 />
               )}
             </section>
@@ -2038,16 +2052,193 @@ function extractConclusion(explanation: string): {
   return { brief, full, hasMore: full.length > 0 && brief !== full };
 }
 
+type CoachContext = {
+  codeEtablissement: string;
+  codeUtilisateur: string;
+  classe: string;
+  notionLabel: string;
+};
+
+// « Aide-toi de notre Coach IA » : à la demande, l'IA explique l'erreur précise
+// de l'élève et il peut rebondir. RGPD : on envoie la classe, JAMAIS le prénom.
+function CoachErrorHelp({
+  question,
+  userAnswer,
+  explanation,
+  coach,
+}: {
+  question: TutorQuestionOption;
+  userAnswer: string;
+  explanation: string;
+  coach: CoachContext;
+}) {
+  const [open, setOpen] = useState(false);
+  const [messages, setMessages] = useState<
+    { role: "coach" | "eleve"; content: string }[]
+  >([]);
+  const [followup, setFollowup] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const canAsk = Boolean(coach.codeEtablissement && coach.codeUtilisateur);
+  const expectedAnswer =
+    question.expected && question.expected.length > 0
+      ? question.expected.join(" ou ")
+      : "";
+
+  async function ask(studentQuestion: string, showUser: boolean) {
+    if (showUser) {
+      setMessages((prev) => [...prev, { role: "eleve", content: studentQuestion }]);
+    }
+    setLoading(true);
+    try {
+      const res = await fetch("/api/parcours/explain", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          // RGPD : classe envoyée, JAMAIS le prénom/nom de l'élève.
+          codeEtablissement: coach.codeEtablissement,
+          codeUtilisateur: coach.codeUtilisateur,
+          classe: coach.classe,
+          notionId: question.notionId,
+          notionLabel: coach.notionLabel,
+          questionText: question.text,
+          studentAnswer: userAnswer || "Aucune réponse",
+          expectedAnswer,
+          explanation,
+          studentQuestion,
+        }),
+      });
+      const data = (await res.json().catch(() => ({}))) as {
+        answer?: string;
+        error?: string;
+      };
+      if (!res.ok || !data.answer) throw new Error(data.error ?? "indisponible");
+      setMessages((prev) => [...prev, { role: "coach", content: data.answer! }]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "coach",
+          content:
+            "Je n'arrive pas à répondre pour le moment. Réessaie dans un instant.",
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function start() {
+    setOpen(true);
+    if (messages.length === 0) {
+      void ask(
+        "Aide-moi à comprendre mon erreur et ce que je dois corriger.",
+        false
+      );
+    }
+  }
+
+  function submitFollowup() {
+    const t = followup.trim();
+    if (!t || loading) return;
+    setFollowup("");
+    void ask(t, true);
+  }
+
+  if (!open) {
+    return (
+      <div className="flex justify-center">
+        <button
+          type="button"
+          onClick={start}
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 via-emerald-500 to-orange-400 px-5 py-2.5 text-sm font-black text-white shadow-md transition hover:brightness-105"
+        >
+          🤖 Aide-toi de notre Coach IA
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-[28px] border border-cyan-200 bg-[#05213f] p-4 text-white shadow-sm">
+      <div className="mb-2 flex items-center justify-between">
+        <span className="text-sm font-black">🤖 Coach IA — ton erreur</span>
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          className="rounded-full bg-white/20 px-2 py-0.5 text-xs font-bold hover:bg-white/30"
+        >
+          ✕
+        </button>
+      </div>
+
+      {!canAsk ? (
+        <p className="text-sm font-semibold text-white/80">
+          Connecte-toi pour demander de l&apos;aide au Coach IA.
+        </p>
+      ) : (
+        <>
+          <div className="space-y-2">
+            {messages.map((m, i) => (
+              <div
+                key={i}
+                className={`rounded-2xl px-3 py-2 text-sm font-semibold leading-relaxed ${
+                  m.role === "coach"
+                    ? "bg-white/10 text-white/90"
+                    : "ml-6 bg-emerald-500/30 text-white"
+                }`}
+              >
+                {m.content}
+              </div>
+            ))}
+            {loading ? (
+              <div className="rounded-2xl bg-white/10 px-3 py-2 text-sm text-white/60">
+                Je réfléchis…
+              </div>
+            ) : null}
+          </div>
+
+          <div className="mt-3 flex gap-2">
+            <input
+              value={followup}
+              onChange={(e) => setFollowup(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  submitFollowup();
+                }
+              }}
+              placeholder="Pose une question au coach…"
+              disabled={loading}
+              className="min-w-0 flex-1 rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-sm font-semibold text-white placeholder-white/40 outline-none focus:border-emerald-400 disabled:opacity-50"
+            />
+            <button
+              type="button"
+              onClick={submitFollowup}
+              disabled={!followup.trim() || loading}
+              className="rounded-xl bg-emerald-500 px-4 py-2 text-sm font-black text-white disabled:opacity-40"
+            >
+              Envoyer
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 function WrongAnswerPanel({
   question,
   userAnswer,
   explanation,
   onContinue,
+  coach,
 }: {
   question: TutorQuestionOption;
   userAnswer: string;
   explanation: string;
   onContinue: () => void;
+  coach?: CoachContext;
 }) {
   const [showDetail, setShowDetail] = useState(false);
 
@@ -2100,6 +2291,15 @@ function WrongAnswerPanel({
             : brief || "Relis l’énoncé et compare bien les nombres."}
         </MarkdownMath>
       </div>
+
+      {coach ? (
+        <CoachErrorHelp
+          question={question}
+          userAnswer={userAnswer}
+          explanation={explanation}
+          coach={coach}
+        />
+      ) : null}
 
       <div className="flex justify-center">
         <ContinueButton onClick={onContinue} />
