@@ -359,9 +359,9 @@ export default function AccueilPage({
             Comprendre, s&apos;entraîner, progresser
           </p>
           <p className="mx-auto mt-2 max-w-2xl text-sm font-semibold leading-6 text-white/75 sm:text-base">
-            EleveAI t&apos;aide à travailler avec un coach IA encadré : indices,
-            entraînements courts, parcours et corrections pour apprendre sans
-            faire à ta place.
+            EleveAI ne corrige pas juste : quand tu te trompes, il trouve ce qui
+            coince vraiment et t&apos;entraîne dessus. Indices, exercices courts
+            et un coach IA encadré pour apprendre — jamais à ta place.
           </p>
           <Link
             href="/fiches-cours"
