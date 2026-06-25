@@ -7,14 +7,16 @@ const BASE_URL = "https://eleveai.fr";
 
 const u = (path: string) => `${BASE_URL}${path}`;
 
-const LASTMOD_HOME  = new Date("2026-06-07");
-const LASTMOD_CORE  = new Date("2026-06-07");
+const LASTMOD_HOME  = new Date("2026-06-25");
+const LASTMOD_CORE  = new Date("2026-06-25");
 const LASTMOD_LEGAL = new Date("2026-02-18");
 
 const MATHS_CLASSES    = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe"];
 const FRANCAIS_CLASSES = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
 const ENGLISH_NIVEAUX  = ["a1", "a2", "b1", "b2"];
 const IA_NIVEAUX       = ["a1", "a2", "b1", "b2", "c1"];
+const ESPAGNOL_NIVEAUX = ["a1", "a2", "b1", "b2"];
+const ECONOMIE_NIVEAUX = ["eco-decouverte", "eco-college", "eco-lycee"];
 
 // Rubriques Géographie - Voyage disponibles par niveau
 const ENGLISH_RUBRIQUES: Record<string, string[]> = {
@@ -42,6 +44,8 @@ const ROUTES: RouteConfig[] = [
   { path: "/coach-ia/maths",    priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/coach-ia/francais", priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/coach-ia/ia",       priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
+  { path: "/coach-ia/espagnol", priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
+  { path: "/coach-ia/economie", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/parcours-english-maths",  priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/parcours",          priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/parcours-francais", priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
@@ -74,6 +78,13 @@ const ROUTES: RouteConfig[] = [
   { path: "/calcul-rapide",   priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/english-maths",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/defis-du-jour",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
+
+  // ── DICO (vocabulaire & gestes — prépa éval nationale) ─────────────────────
+  { path: "/dico",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/dico/maths/6e",   priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/dico/francais/6e",priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+
+  { path: "/concours-logo",   priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/podcast-maths",   priority: 0.85, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/concours-general",priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
 
@@ -158,6 +169,20 @@ const coachRoutes: RouteConfig[] = [
     path: `/coach-ia/francais?classe=${classe}`,
     priority: 0.9,
     changeFrequency: "daily" as const,
+    lastMod: LASTMOD_CORE,
+  })),
+  // Espagnol — par niveau
+  ...ESPAGNOL_NIVEAUX.map((niveau) => ({
+    path: `/coach-ia/espagnol?classe=${niveau}`,
+    priority: 0.85,
+    changeFrequency: "daily" as const,
+    lastMod: LASTMOD_CORE,
+  })),
+  // Économie — par niveau
+  ...ECONOMIE_NIVEAUX.map((classe) => ({
+    path: `/coach-ia/economie?classe=${classe}`,
+    priority: 0.8,
+    changeFrequency: "weekly" as const,
     lastMod: LASTMOD_CORE,
   })),
 ];
