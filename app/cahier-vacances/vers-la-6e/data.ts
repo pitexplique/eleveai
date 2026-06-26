@@ -3,37 +3,10 @@
 /*  Fil conducteur : Le grand voyage de Ti Margo vers la 6e — une expédition   */
 /*  à La Réunion en 6 étapes (une par semaine), du lagon jusqu'au sommet.      */
 /*  Difficulté progressive ; 1 objet `jour` = 1 page imprimée.                 */
+/*  Le moteur d'affichage est commun : components/cahier/CahierVacances.tsx.   */
 /* -------------------------------------------------------------------------- */
 
-export type Jour = {
-  numero: number;
-  semaine: number;
-  badge: string;
-  maths: {
-    /** Chaque calcul porte sa réponse → corrigés fiables et faciles à étendre. */
-    calcul: { q: string; r: string }[];
-    probleme: { enonce: string; correction: string };
-    illu: { emoji: string; label: string };
-  };
-  francais: {
-    regleTitre: string;
-    regle: string;
-    consigne: string;
-    items: string[];
-    correction: string;
-  };
-  mot: { mot: string; nature: string; definition: string; exemple: string };
-  geste: { titre: string; texte: string };
-  defi: { enonce: string; correction: string };
-};
-
-export type Etape = {
-  semaine: number;
-  etape: number;
-  emoji: string;
-  lieu: string;
-  intro: string;
-};
+import type { Etape, Jour } from "@/components/cahier/types";
 
 /** Les 6 étapes du parcours (fil conducteur de l'été). */
 export const parcours: Etape[] = [

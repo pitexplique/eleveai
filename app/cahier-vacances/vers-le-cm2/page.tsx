@@ -5,16 +5,16 @@ import type { CahierConfig } from "@/components/cahier/types";
 import { carnet, defisExpert, jours, leSaviasTu, parcours } from "./data";
 
 const config: CahierConfig = {
-  slug: "vers-la-6e",
-  titre: "Vers la 6ᵉ",
-  sousTitre: "Pour réviser tout l'été après le CM2",
-  mission: "Mission cap sur la 6ᵉ",
-  parcoursTitre: "Le grand voyage de Ti Margo vers la 6ᵉ — 6 étapes à La Réunion",
-  chipFin: "🎓 La 6ᵉ !",
-  coachClasse: "6e",
+  slug: "vers-le-cm2",
+  titre: "Vers le CM2",
+  sousTitre: "Pour réviser tout l'été après le CM1",
+  mission: "Mission cap sur le CM2",
+  parcoursTitre: "Ti Margo découvre son île — 6 étapes à La Réunion",
+  chipFin: "🎓 Le CM2 !",
+  coachClasse: "cm2",
 };
 
-export default function CahierVacancesVersLa6ePage() {
+export default function CahierVacancesVersLeCM2Page() {
   return (
     <CahierVacances
       data={{ jours, parcours, defisExpert, carnet, leSaviasTu }}
