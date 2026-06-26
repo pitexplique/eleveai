@@ -19,7 +19,7 @@ import {
   Target,
   TrendingUp,
 } from "lucide-react";
-import { jours, parcours, defisExpert } from "./data";
+import { jours, parcours, defisExpert, carnet } from "./data";
 
 const semaines = Array.from(new Set(jours.map((j) => j.semaine)));
 
@@ -318,10 +318,17 @@ export default function CahierVacancesVersLa6ePage() {
                       <span>
                         Étape {etape.etape} · {etape.lieu}
                       </span>
-                      <span className="hidden font-normal italic text-teal-600/80 sm:inline">
-                        — {etape.intro}
-                      </span>
                     </div>
+                  )}
+
+                  {/* Le carnet de Ti Margo — récit du jour (le voyage se vit) */}
+                  {carnet[jour.numero] && (
+                    <p className="mt-2 text-sm italic leading-6 text-slate-600">
+                      <span className="font-black not-italic text-teal-700">
+                        📖 Le carnet de Ti Margo —{" "}
+                      </span>
+                      {carnet[jour.numero]}
+                    </p>
                   )}
 
                   <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_15rem] print:grid-cols-[1fr_14rem]">
@@ -529,7 +536,22 @@ export default function CahierVacancesVersLa6ePage() {
                     </aside>
                   </div>
 
-                  <footer className="mt-5 border-t border-slate-200 pt-4">
+                  {/* Mon carnet de voyage — espace libre pour dessiner / écrire
+                     (flex-1 : remplit la place restante avant le footer) */}
+                  <div className="mt-4 flex flex-1 flex-col rounded-2xl border-2 border-dashed border-teal-300 bg-white p-3 print:mt-3">
+                    <p className="flex flex-wrap items-center gap-x-2 text-sm font-black text-teal-700">
+                      <span className="flex items-center gap-1.5">
+                        <Pencil className="h-4 w-4" />
+                        Mon carnet de voyage
+                      </span>
+                      <span className="text-xs font-normal italic text-slate-500">
+                        Dessine ou raconte ton étape du jour !
+                      </span>
+                    </p>
+                    <div className="mt-2 min-h-[110px] flex-1 print:min-h-[40px]" />
+                  </div>
+
+                  <footer className="mt-4 border-t border-slate-200 pt-3">
                     <FilProgression />
                     <p className="mt-3 text-center text-sm font-bold text-teal-600">
                       Un petit pas chaque jour, un grand pas pour tes connaissances !
@@ -630,7 +652,7 @@ export default function CahierVacancesVersLa6ePage() {
         @media print {
           @page {
             size: A4;
-            margin: 8mm;
+            margin: 6mm;
           }
 
           /* Chaque page-jour doit tenir sur une seule A4 : on compresse
@@ -645,51 +667,63 @@ export default function CahierVacancesVersLa6ePage() {
                de 281mm pour éviter une 2e page due aux arrondis. */
             display: flex !important;
             flex-direction: column !important;
-            min-height: 276mm !important;
+            min-height: 281mm !important;
             box-sizing: border-box !important;
           }
           .jour-page header {
-            margin-top: 5px !important;
-            padding-bottom: 6px !important;
+            margin-top: 3px !important;
+            padding-bottom: 4px !important;
           }
           .jour-page .rounded-2xl {
-            padding: 9px !important;
+            padding: 6px !important;
           }
           .jour-page .grid {
-            gap: 9px !important;
+            gap: 7px !important;
           }
           .jour-page .mt-4 {
-            margin-top: 9px !important;
+            margin-top: 7px !important;
           }
           .jour-page .mt-3 {
-            margin-top: 6px !important;
+            margin-top: 5px !important;
           }
           .jour-page .mt-2,
           .jour-page .mt-1 {
-            margin-top: 4px !important;
+            margin-top: 3px !important;
           }
           .jour-page h2 {
-            font-size: 13.5px !important;
+            font-size: 13px !important;
           }
           .jour-page .text-lg {
-            font-size: 13.5px !important;
+            font-size: 13px !important;
           }
           .jour-page .text-sm {
-            font-size: 11.5px !important;
+            font-size: 11px !important;
           }
           .jour-page .text-xs {
-            font-size: 10px !important;
+            font-size: 9.5px !important;
           }
           .jour-page .h-7 {
-            height: 15px !important;
+            height: 14px !important;
           }
+          /* Footer compact en impression */
           .jour-page footer {
             margin-top: auto !important;
-            padding-top: 7px !important;
+            padding-top: 5px !important;
+          }
+          .jour-page footer .h-9 {
+            height: 26px !important;
+            width: 26px !important;
+          }
+          .jour-page footer .h-5 {
+            height: 16px !important;
+            width: 16px !important;
+          }
+          .jour-page footer .mt-3 {
+            margin-top: 4px !important;
           }
           .jour-page li {
-            padding-top: 3px !important;
-            padding-bottom: 3px !important;
+            padding-top: 2px !important;
+            padding-bottom: 2px !important;
           }
 
           html,

@@ -1549,3 +1549,42 @@ export const defisExpert: Record<number, { enonce: string; correction: string }>
       "270 points : 15 jours pairs × 10 = 150, et 15 jours impairs × 8 = 120 ; 150 + 120 = 270 (et non 300 !).",
   },
 };
+
+/* -------------------------------------------------------------------------- */
+/*  Le carnet de Ti Margo — fil narratif quotidien (arc Jour 1 → Jour 30).    */
+/*  C'est ce qui fait « vivre » le voyage : Ti Margo raconte son étape, et    */
+/*  l'élève lui répond dans son propre encadré « Mon carnet de voyage ».      */
+/* -------------------------------------------------------------------------- */
+
+export const carnet: Record<number, string> = {
+  1: "Mon sac est prêt, mes crayons aussi ! Aujourd'hui, je quitte le lagon de l'Hermitage : le grand voyage vers la 6ᵉ commence. En route !",
+  2: "Sur la plage, je compte mes provisions avant de partir. Bien calculer, c'est déjà voyager malin !",
+  3: "Le soleil se lève sur le lagon. Je note tout dans mon carnet : un bon explorateur n'oublie rien.",
+  4: "Dernier jour au bord de l'eau. Je vérifie ma carte : demain, je quitte la côte pour les hauteurs.",
+  5: "Première étape réussie ! Je dis au revoir au lagon. Là-haut, une grande forêt m'attend… Tu me suis ?",
+  6: "J'entre dans la forêt de Bélouve. Les tamarins sont immenses et le sentier serpente. Avançons pas à pas !",
+  7: "Je cueille quelques goyaviers pour la route. Dans la forêt, il faut compter ses pas pour ne pas se perdre.",
+  8: "La brume descend entre les arbres. Je marche depuis des heures : les maths m'aident à mesurer le temps.",
+  9: "J'entends des oiseaux que je ne connais pas. J'ouvre l'œil… et mon carnet : chaque détail compte.",
+  10: "Je sors enfin de la forêt. Au loin, une montagne fume… un volcan ! Demain, l'ascension commence.",
+  11: "Me voici au pied du Piton de la Fournaise. La pente est raide, mais je grimpe : un calcul après l'autre !",
+  12: "L'air se rafraîchit en montant. Je note les températures : c'est fou comme ça change avec l'altitude.",
+  13: "Le sol est noir, couvert de lave refroidie. Je partage mon eau et j'avance prudemment vers le cratère.",
+  14: "Mes chaussures sont pleines de cendre ! Encore un effort : le sommet du volcan approche.",
+  15: "J'ai atteint le cratère ! Quelle vue ! Mais le voyage continue : un grand cirque sauvage m'attend, Mafate.",
+  16: "J'arrive à Mafate. Ici, aucune route : on se déplace seulement à pied, d'îlet en îlet. L'aventure, la vraie !",
+  17: "Je traverse un champ avant le prochain îlet. Mesurer les distances, c'est vital quand on marche tout le temps.",
+  18: "Ma boussole m'indique le chemin. Je fais mes comptes : il me reste des provisions à acheter au village.",
+  19: "Ma gourde se vide vite sous le soleil. Je gère mon eau goutte à goutte : un randonneur prévoyant va loin.",
+  20: "Dernier îlet de Mafate ! Je suis fier du chemin parcouru. Bientôt, j'entendrai gronder les cascades…",
+  21: "J'arrive près du Trou de Fer : des cascades vertigineuses tombent dans le vide. Prudence et calcul !",
+  22: "L'eau coule de partout. Je calcule les hauteurs : certaines chutes font plus de 200 mètres !",
+  23: "Je remplis ma gourde dans un bassin clair. L'eau, c'est la vie du voyageur : j'en mesure chaque litre.",
+  24: "Je traverse un pont au-dessus des chutes. Pas le droit à l'erreur : je vérifie tout, comme un bon mathématicien.",
+  25: "Je quitte les cascades, le cœur léger. Devant moi se dresse le plus haut sommet de l'île : le Piton des Neiges.",
+  26: "Dernière étape ! Je commence l'ascension du Piton des Neiges. Le souffle est court, mais le but est proche.",
+  27: "Je me lève avant le jour pour voir le lever du soleil du sommet. Il faut bien calculer son heure de réveil !",
+  28: "Je marche dans les nuages. Plus que quelques mètres… Je compte mes pas pour me donner du courage.",
+  29: "J'aperçois le sommet ! Je prépare déjà mon cartable : la 6ᵉ, c'est pour très bientôt. Encore un effort !",
+  30: "Ça y est : j'ai atteint le sommet du Piton des Neiges, tout en haut de l'île, et je suis prêt pour la 6ᵉ ! Bravo à toi qui m'as suivi : on a réussi le voyage ensemble !",
+};
