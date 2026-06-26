@@ -422,7 +422,7 @@ export default function CahierVacancesVersLa6ePage() {
               <Illu
                 emoji="🦎"
                 label="Ti Margo"
-                src="/cahier-vacances/ti-margo.png"
+                src="/cahier-vacances/ti-margo-cahier-sac-a-dos.png"
                 className="h-24 w-24"
               />
             </div>
@@ -626,9 +626,17 @@ export default function CahierVacancesVersLa6ePage() {
                         <p className="mt-2 text-sm font-bold text-emerald-700">
                           {jour.geste.titre}
                         </p>
-                        <p className="mt-1 text-sm leading-6 text-slate-700">
-                          {jour.geste.texte}
-                        </p>
+                        <div className="mt-1 flex items-end justify-between gap-2">
+                          <p className="text-sm leading-6 text-slate-700">
+                            {jour.geste.texte}
+                          </p>
+                          <Illu
+                            emoji="🦎"
+                            label="Ti Margo"
+                            src="/cahier-vacances/ti-margo-tablette-sac-a-dos.png"
+                            className="h-14 w-14 shrink-0"
+                          />
+                        </div>
                       </div>
                     </div>
 
