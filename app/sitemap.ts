@@ -7,9 +7,10 @@ const BASE_URL = "https://eleveai.fr";
 
 const u = (path: string) => `${BASE_URL}${path}`;
 
-const LASTMOD_HOME  = new Date("2026-06-25");
-const LASTMOD_CORE  = new Date("2026-06-25");
-const LASTMOD_LEGAL = new Date("2026-02-18");
+const LASTMOD_HOME    = new Date("2026-06-25");
+const LASTMOD_CORE    = new Date("2026-06-25");
+const LASTMOD_CAHIERS = new Date("2026-06-26");
+const LASTMOD_LEGAL   = new Date("2026-02-18");
 
 const MATHS_CLASSES    = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe"];
 const FRANCAIS_CLASSES = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
@@ -83,6 +84,10 @@ const ROUTES: RouteConfig[] = [
   { path: "/dico",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/dico/maths/6e",   priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/dico/francais/6e",priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+
+  // ── CAHIERS DE VACANCES (PDF imprimables) ──────────────────────────────────
+  { path: "/cahier-vacances/vers-le-cm2", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
+  { path: "/cahier-vacances/vers-la-6e",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
 
   { path: "/concours-logo",   priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/podcast-maths",   priority: 0.85, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
