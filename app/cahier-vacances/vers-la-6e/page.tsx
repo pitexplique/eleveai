@@ -459,26 +459,6 @@ export default function CahierVacancesVersLa6ePage() {
                         </p>
                         <div className="mt-2 h-7 border-b border-dashed border-slate-300" />
                       </div>
-
-                      {/* Défi ★★★★★ (expert / HPI) */}
-                      {defisExpert[jour.numero] && (
-                        <div className="rounded-2xl border-2 border-indigo-300 bg-indigo-50/60 p-4">
-                          <div className="flex items-center justify-between">
-                            <h2 className="flex items-center gap-2 text-base font-black text-indigo-700">
-                              <Star className="h-5 w-5 fill-indigo-400 text-indigo-500" />
-                              Défi ★★★★★
-                            </h2>
-                            <Termine />
-                          </div>
-                          <p className="text-xs font-bold uppercase tracking-wide text-indigo-500">
-                            Pour les champions · niveau expert
-                          </p>
-                          <p className="mt-1 text-sm leading-6 text-slate-700">
-                            {defisExpert[jour.numero].enonce}
-                          </p>
-                          <div className="mt-2 h-7 border-b border-dashed border-slate-300" />
-                        </div>
-                      )}
                     </div>
 
                     {/* ---------- Colonne latérale (gamification) ---------- */}
@@ -518,6 +498,27 @@ export default function CahierVacancesVersLa6ePage() {
                           <span className="text-lg font-black text-teal-700">/10</span>
                         </div>
                       </div>
+
+                      {/* Défi ★★★★★ (expert / HPI) — dans la sidebar pour
+                         laisser plus de place à l'encadré d'écriture en bas */}
+                      {defisExpert[jour.numero] && (
+                        <div className="rounded-2xl border-2 border-indigo-300 bg-indigo-50/60 p-3">
+                          <div className="flex items-center justify-between gap-2">
+                            <h2 className="flex items-center gap-1.5 text-sm font-black text-indigo-700">
+                              <Star className="h-4 w-4 fill-indigo-400 text-indigo-500" />
+                              Défi ★★★★★
+                            </h2>
+                            <Termine />
+                          </div>
+                          <p className="text-[10px] font-bold uppercase tracking-wide text-indigo-500">
+                            Pour les champions
+                          </p>
+                          <p className="mt-1 text-xs leading-5 text-slate-700">
+                            {defisExpert[jour.numero].enonce}
+                          </p>
+                          <div className="mt-2 h-7 border-b border-dashed border-slate-300" />
+                        </div>
+                      )}
 
                       {/* Encouragement mascotte (compact) */}
                       <div className="flex items-center gap-2 rounded-2xl border border-teal-200 bg-white p-2.5 text-left">
