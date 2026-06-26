@@ -778,6 +778,13 @@ export default function CahierVacancesVersLa6ePage() {
             padding: 0 !important;
             font-size: 12px;
             line-height: 1.35;
+            /* Occupe toute la hauteur utile d'une A4 (297 − 2×8mm de marge)
+               pour pouvoir coller le footer tout en bas. Un peu en dessous
+               de 281mm pour éviter une 2e page due aux arrondis. */
+            display: flex !important;
+            flex-direction: column !important;
+            min-height: 276mm !important;
+            box-sizing: border-box !important;
           }
           .jour-page header {
             margin-top: 5px !important;
@@ -815,7 +822,7 @@ export default function CahierVacancesVersLa6ePage() {
             height: 15px !important;
           }
           .jour-page footer {
-            margin-top: 7px !important;
+            margin-top: auto !important;
             padding-top: 7px !important;
           }
           .jour-page li {
