@@ -19,7 +19,7 @@ import {
   Target,
   TrendingUp,
 } from "lucide-react";
-import { jours, parcours } from "./data";
+import { jours, parcours, defisExpert } from "./data";
 
 const semaines = Array.from(new Set(jours.map((j) => j.semaine)));
 
@@ -452,6 +452,26 @@ export default function CahierVacancesVersLa6ePage() {
                         </p>
                         <div className="mt-2 h-7 border-b border-dashed border-slate-300" />
                       </div>
+
+                      {/* Défi ★★★★★ (expert / HPI) */}
+                      {defisExpert[jour.numero] && (
+                        <div className="rounded-2xl border-2 border-indigo-300 bg-indigo-50/60 p-4">
+                          <div className="flex items-center justify-between">
+                            <h2 className="flex items-center gap-2 text-base font-black text-indigo-700">
+                              <Star className="h-5 w-5 fill-indigo-400 text-indigo-500" />
+                              Défi ★★★★★
+                            </h2>
+                            <Termine />
+                          </div>
+                          <p className="text-xs font-bold uppercase tracking-wide text-indigo-500">
+                            Pour les champions · niveau expert
+                          </p>
+                          <p className="mt-1 text-sm leading-6 text-slate-700">
+                            {defisExpert[jour.numero].enonce}
+                          </p>
+                          <div className="mt-2 h-7 border-b border-dashed border-slate-300" />
+                        </div>
+                      )}
                     </div>
 
                     {/* ---------- Colonne latérale (gamification) ---------- */}
@@ -559,6 +579,12 @@ export default function CahierVacancesVersLa6ePage() {
                     <span className="font-bold text-orange-600">Défi : </span>
                     {jour.defi.correction}
                   </p>
+                  {defisExpert[jour.numero] && (
+                    <p>
+                      <span className="font-bold text-indigo-600">Défi ★★★★★ : </span>
+                      {defisExpert[jour.numero].correction}
+                    </p>
+                  )}
                 </div>
               </details>
             ))}

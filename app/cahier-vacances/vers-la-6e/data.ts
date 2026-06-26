@@ -1396,3 +1396,156 @@ export const jours: Jour[] = [
     },
   },
 ];
+
+/* -------------------------------------------------------------------------- */
+/*  Défis ★★★★★ (niveau expert) — différenciation pour les élèves rapides /   */
+/*  HPI. Un défi plus exigeant par jour, en plus du défi normal.              */
+/* -------------------------------------------------------------------------- */
+
+export const defisExpert: Record<number, { enonce: string; correction: string }> = {
+  1: {
+    enonce:
+      "Avec les chiffres 1, 2, 3 et 4 (une seule fois chacun), écris le plus grand nombre possible, puis le plus petit.",
+    correction: "Le plus grand : 4 321. Le plus petit : 1 234.",
+  },
+  2: {
+    enonce:
+      "Ti Margo a 24 coquillages. Il en donne la moitié à un ami, puis encore 3. Combien lui en reste-t-il ?",
+    correction: "24 ÷ 2 = 12, puis 12 − 3 = 9. Il lui reste 9 coquillages.",
+  },
+  3: {
+    enonce: "Quel nombre vient ensuite : 1, 1, 2, 3, 5, 8, … ?",
+    correction: "13 : chaque nombre est la somme des deux précédents (5 + 8 = 13).",
+  },
+  4: {
+    enonce:
+      "Avec seulement des pièces de 20 centimes et de 10 centimes, comment faire 70 centimes avec exactement 4 pièces ?",
+    correction: "Trois pièces de 20 c et une de 10 c : 20 + 20 + 20 + 10 = 70 c.",
+  },
+  5: {
+    enonce:
+      "Combien de rectangles (de toutes les tailles) peux-tu voir dans une grille de 2 cases sur 2 ?",
+    correction: "9 rectangles en tout (en comptant les carrés et les rectangles plus grands).",
+  },
+  6: {
+    enonce:
+      "Ti Margo plante un arbre tous les 5 m, le long d'un sentier de 50 m (un arbre au départ et un à l'arrivée). Combien d'arbres ?",
+    correction: "11 arbres : 50 ÷ 5 = 10 intervalles, donc 10 + 1 = 11 arbres.",
+  },
+  7: {
+    enonce:
+      "Un escargot grimpe un mur de 10 m. Le jour il monte de 3 m, la nuit il glisse de 2 m. En combien de jours atteint-il le sommet ?",
+    correction:
+      "8 jours : il gagne 1 m par jour, mais le 8e jour il part de 7 m et monte à 10 m avant de glisser.",
+  },
+  8: {
+    enonce:
+      "Je suis un nombre pair, entre 30 et 40, et la somme de mes deux chiffres fait 7. Qui suis-je ?",
+    correction: "34 (3 + 4 = 7, et 34 est pair).",
+  },
+  9: {
+    enonce: "Combien de fois écrit-on le chiffre 1 quand on compte de 1 à 20 ?",
+    correction:
+      "12 fois : 1, 10, 11 (deux fois), 12, 13, 14, 15, 16, 17, 18, 19.",
+  },
+  10: {
+    enonce:
+      "3 margouillats attrapent 3 mouches en 3 minutes. Combien de mouches attrapent 9 margouillats en 9 minutes ?",
+    correction:
+      "27 mouches : un margouillat attrape 1 mouche en 3 min, donc 9 margouillats en 9 min en attrapent 9 × 3 = 27.",
+  },
+  11: {
+    enonce:
+      "En montant le volcan, la température baisse de 2 °C tous les 300 m. Au sol il fait 30 °C. Quelle température à 1 500 m ?",
+    correction: "20 °C : 1 500 ÷ 300 = 5, donc on perd 5 × 2 = 10 °C ; 30 − 10 = 20 °C.",
+  },
+  12: {
+    enonce:
+      "On plie une feuille en deux, puis encore en deux, 4 fois de suite. Combien d'épaisseurs obtient-on ?",
+    correction: "16 épaisseurs : 2 × 2 × 2 × 2 = 16.",
+  },
+  13: {
+    enonce: "Trouve deux nombres dont la somme est 10 et le produit 21.",
+    correction: "3 et 7 (3 + 7 = 10 et 3 × 7 = 21).",
+  },
+  14: {
+    enonce: "Le double d'un nombre décimal est égal à 7. Quel est ce nombre ?",
+    correction: "3,5, car 3,5 × 2 = 7.",
+  },
+  15: {
+    enonce:
+      "Combien y a-t-il de nombres avec un seul chiffre après la virgule entre 2 et 3 (de 2,1 à 2,9) ?",
+    correction: "9 nombres : 2,1 · 2,2 · 2,3 · 2,4 · 2,5 · 2,6 · 2,7 · 2,8 · 2,9.",
+  },
+  16: {
+    enonce:
+      "Pour aller de l'îlet A à l'îlet B, il y a 3 chemins. De B à C, il y a 2 chemins. Combien de trajets différents de A à C ?",
+    correction: "6 trajets : 3 × 2 = 6.",
+  },
+  17: {
+    enonce:
+      "Un rectangle a un périmètre de 20 cm et une longueur de 6 cm. Quelle est sa largeur ?",
+    correction: "4 cm : la moitié du périmètre est 10 ; 10 − 6 = 4 cm.",
+  },
+  18: {
+    enonce:
+      "Le sentier fait 8 km. Ti Margo fait une pause tous les 2 km, mais pas à l'arrivée. Combien de pauses ?",
+    correction: "3 pauses : aux kilomètres 2, 4 et 6.",
+  },
+  19: {
+    enonce: "Le périmètre d'un carré est 36 cm. Quelle est son aire ?",
+    correction: "81 cm² : le côté est 36 ÷ 4 = 9 cm, et 9 × 9 = 81 cm².",
+  },
+  20: {
+    enonce: "Combien y a-t-il de demi-heures dans 3 jours ?",
+    correction: "144 : 3 × 24 = 72 heures, et 72 × 2 = 144 demi-heures.",
+  },
+  21: {
+    enonce: "Une cascade laisse tomber 6 litres d'eau par seconde. Combien en 1 minute ?",
+    correction: "360 litres : 6 × 60 = 360.",
+  },
+  22: {
+    enonce: "Dans une classe de 25 élèves, 60 % sont des filles. Combien y a-t-il de garçons ?",
+    correction: "10 garçons : 40 % de 25 = 25 × 40 / 100 = 10.",
+  },
+  23: {
+    enonce:
+      "Un bassin reçoit 5 L d'eau par minute et en perd 2 L par minute en même temps. Combien de litres après 10 minutes ?",
+    correction: "30 litres : il gagne 5 − 2 = 3 L par minute, donc 3 × 10 = 30 L.",
+  },
+  24: {
+    enonce:
+      "La moyenne de 3 nombres est 10. Deux de ces nombres sont 8 et 9. Quel est le troisième ?",
+    correction: "13 : la somme doit faire 3 × 10 = 30, et 30 − 8 − 9 = 13.",
+  },
+  25: {
+    enonce:
+      "Un rectangle a une aire de 24 cm² et une longueur de 8 cm. Quel est son périmètre ?",
+    correction: "22 cm : la largeur est 24 ÷ 8 = 3 cm, et 2 × (8 + 3) = 22 cm.",
+  },
+  26: {
+    enonce: "Il reste 600 m à grimper, à la vitesse de 200 m par heure. Combien de temps faut-il ?",
+    correction: "3 heures : 600 ÷ 200 = 3.",
+  },
+  27: {
+    enonce:
+      "Ti Margo monte un escalier en répétant : 2 marches en haut, 1 marche en bas. Après 30 mouvements, sur quelle marche est-il ?",
+    correction:
+      "Marche 15 : chaque cycle « +2 −1 » fait avancer de 1 marche en 2 mouvements ; 30 mouvements = 15 cycles.",
+  },
+  28: {
+    enonce: "30 % d'un nombre valent 30. Quel est ce nombre ?",
+    correction: "100, car 30 % de 100 = 30.",
+  },
+  29: {
+    enonce:
+      "Combien de nombres à 2 chiffres peux-tu écrire en utilisant seulement les chiffres 1, 2 et 3 (on peut répéter) ?",
+    correction: "9 nombres : 3 choix pour le 1er chiffre × 3 pour le 2e = 9.",
+  },
+  30: {
+    enonce:
+      "Ti Margo a fait 30 jours. Les jours pairs il a eu 10/10, les jours impairs 8/10. Combien de points en tout ? (Attention au piège !)",
+    correction:
+      "270 points : 15 jours pairs × 10 = 150, et 15 jours impairs × 8 = 120 ; 150 + 120 = 270 (et non 300 !).",
+  },
+};
