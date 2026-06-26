@@ -19,243 +19,7 @@ import {
   Target,
   TrendingUp,
 } from "lucide-react";
-
-/* -------------------------------------------------------------------------- */
-/*  Données du cahier — 1 objet = 1 page imprimée.                            */
-/*  Pour ajouter un jour : ajouter un objet ci-dessous. Rien d'autre à coder. */
-/* -------------------------------------------------------------------------- */
-
-type Jour = {
-  numero: number;
-  semaine: number;
-  badge: string;
-  maths: {
-    calcul: string[];
-    probleme: { enonce: string; correction: string };
-    illu: { emoji: string; label: string };
-  };
-  francais: {
-    regleTitre: string;
-    regle: string;
-    consigne: string;
-    items: string[];
-    correction: string;
-  };
-  mot: { mot: string; nature: string; definition: string; exemple: string };
-  geste: { titre: string; texte: string };
-  defi: { enonce: string; correction: string };
-};
-
-const jours: Jour[] = [
-  {
-    numero: 1,
-    semaine: 1,
-    badge: "Margouillat malin",
-    maths: {
-      calcul: ["7 × 8 =", "48 ÷ 6 =", "125 + 78 =", "1000 − 365 =", "9 × 6 ="],
-      probleme: {
-        enonce:
-          "Une boîte contient 6 paquets de 24 gâteaux. Combien y a-t-il de gâteaux en tout ?",
-        correction: "6 × 24 = 144. Il y a 144 gâteaux.",
-      },
-      illu: { emoji: "🎁", label: "boîte de gâteaux" },
-    },
-    francais: {
-      regleTitre: "Le sujet du verbe",
-      regle:
-        "Le sujet répond à la question « Qui est-ce qui… ? » ou « Qu'est-ce qui… ? » posée devant le verbe.",
-      consigne: "Souligne le sujet de chaque phrase.",
-      items: [
-        "Le chat dort sur le canapé.",
-        "Mes amis arrivent demain.",
-        "La grande tour brille au soleil.",
-      ],
-      correction:
-        "1. Le chat — 2. Mes amis — 3. La grande tour. (On pose « Qui est-ce qui… ? »)",
-    },
-    mot: {
-      mot: "Périmètre",
-      nature: "nom, maths",
-      definition: "Le périmètre, c'est la longueur du tour d'une figure.",
-      exemple: "Le périmètre d'un carré de 5 cm de côté est 5 + 5 + 5 + 5 = 20 cm.",
-    },
-    geste: {
-      titre: "Le clic gauche",
-      texte:
-        "On appuie une fois sur le bouton gauche de la souris pour sélectionner ou valider un élément.",
-    },
-    defi: {
-      enonce:
-        "Je suis un nombre. Si tu m'ajoutes 10, tu obtiens 25. Qui suis-je ?",
-      correction: "15, car 15 + 10 = 25.",
-    },
-  },
-  {
-    numero: 2,
-    semaine: 1,
-    badge: "Calculateur éclair",
-    maths: {
-      calcul: ["6 × 7 =", "56 ÷ 8 =", "240 + 160 =", "double de 45 =", "8 × 8 ="],
-      probleme: {
-        enonce:
-          "Léa a 3,50 €. Elle achète un cahier à 2,20 €. Combien lui reste-t-il ?",
-        correction: "3,50 − 2,20 = 1,30. Il lui reste 1,30 €.",
-      },
-      illu: { emoji: "💶", label: "pièces et billets" },
-    },
-    francais: {
-      regleTitre: "Le verbe",
-      regle:
-        "Le verbe est le mot qui change quand on change le temps (hier, aujourd'hui, demain). Il indique l'action.",
-      consigne: "Entoure le verbe de chaque phrase.",
-      items: [
-        "Nous mangeons à midi.",
-        "Le train partira bientôt.",
-        "Tu as fini ton travail.",
-      ],
-      correction:
-        "1. mangeons — 2. partira — 3. as fini. (Le verbe change si on change le temps.)",
-    },
-    mot: {
-      mot: "Quotient",
-      nature: "nom, maths",
-      definition: "Le quotient est le résultat d'une division.",
-      exemple: "Dans 20 ÷ 4 = 5, le quotient est 5.",
-    },
-    geste: {
-      titre: "Le double-clic",
-      texte:
-        "On appuie deux fois rapidement sur le bouton gauche pour ouvrir un dossier ou un fichier.",
-    },
-    defi: {
-      enonce:
-        "Dans une ferme, il y a des poules et des lapins, soit 8 têtes et 22 pattes. Combien de lapins ?",
-      correction: "3 lapins (12 pattes) et 5 poules (10 pattes) : 8 têtes, 22 pattes.",
-    },
-  },
-  {
-    numero: 3,
-    semaine: 1,
-    badge: "Explorateur des mots",
-    maths: {
-      calcul: ["9 × 7 =", "63 ÷ 9 =", "1/2 de 50 =", "350 + 450 =", "12 × 5 ="],
-      probleme: {
-        enonce:
-          "Un film dure 1 h 45 min. Il commence à 14 h 30. À quelle heure se termine-t-il ?",
-        correction: "14 h 30 + 1 h 45 = 16 h 15. Le film finit à 16 h 15.",
-      },
-      illu: { emoji: "🎬", label: "horloge et cinéma" },
-    },
-    francais: {
-      regleTitre: "Singulier et pluriel",
-      regle:
-        "Au pluriel, la plupart des noms prennent un -s. Certains prennent -x (un château → des châteaux).",
-      consigne: "Écris ces groupes au pluriel.",
-      items: ["un cheval →", "le beau gâteau →", "une souris →"],
-      correction: "des chevaux — les beaux gâteaux — des souris (déjà en -s).",
-    },
-    mot: {
-      mot: "Sommet",
-      nature: "nom, géométrie",
-      definition: "Un sommet est un point où se rejoignent deux côtés d'une figure.",
-      exemple: "Un triangle a 3 sommets.",
-    },
-    geste: {
-      titre: "Copier (Ctrl + C)",
-      texte:
-        "On sélectionne un texte, puis on appuie en même temps sur les touches Ctrl et C pour le copier.",
-    },
-    defi: {
-      enonce:
-        "Complète la suite logique : 2, 4, 8, 16, … Quel est le nombre suivant ?",
-      correction: "32 : à chaque fois, on multiplie par 2.",
-    },
-  },
-  {
-    numero: 4,
-    semaine: 1,
-    badge: "As de la logique",
-    maths: {
-      calcul: ["8 × 6 =", "72 ÷ 8 =", "0,5 + 0,5 =", "1000 − 250 =", "7 × 7 ="],
-      probleme: {
-        enonce:
-          "Un parking compte 5 rangées de 18 places. Combien de places en tout ?",
-        correction: "5 × 18 = 90. Il y a 90 places.",
-      },
-      illu: { emoji: "🅿️", label: "places de parking" },
-    },
-    francais: {
-      regleTitre: "a ou à ?",
-      regle:
-        "« a » (sans accent) est le verbe avoir (on peut dire « avait »). « à » (avec accent) est un mot invariable.",
-      consigne: "Complète avec « a » ou « à ».",
-      items: [
-        "Il ___ un vélo rouge.",
-        "Nous partons ___ la mer.",
-        "Elle pense ___ ses vacances.",
-      ],
-      correction: "1. a (avait un vélo) — 2. à — 3. à.",
-    },
-    mot: {
-      mot: "Différence",
-      nature: "nom, maths",
-      definition: "La différence est le résultat d'une soustraction.",
-      exemple: "La différence entre 10 et 4 est 6, car 10 − 4 = 6.",
-    },
-    geste: {
-      titre: "Coller (Ctrl + V)",
-      texte:
-        "Après avoir copié, on appuie en même temps sur Ctrl et V pour coller le texte au bon endroit.",
-    },
-    defi: {
-      enonce:
-        "J'ai 12 ans. Mon frère a la moitié de mon âge. Quel âge aura-t-il quand j'aurai 20 ans ?",
-      correction: "Il a 6 ans (12 − 6 = 6 d'écart). À mes 20 ans, il aura 14 ans.",
-    },
-  },
-  {
-    numero: 5,
-    semaine: 1,
-    badge: "Champion de la semaine",
-    maths: {
-      calcul: ["6 × 9 =", "81 ÷ 9 =", "1/4 de 100 =", "275 + 325 =", "11 × 4 ="],
-      probleme: {
-        enonce: "Un litre de jus coûte 1,80 €. Combien coûtent 3 litres ?",
-        correction: "3 × 1,80 = 5,40. Cela coûte 5,40 €.",
-      },
-      illu: { emoji: "🧃", label: "bouteilles de jus" },
-    },
-    francais: {
-      regleTitre: "Les homophones et / est",
-      regle:
-        "« et » relie deux mots (on peut dire « et puis »). « est » est le verbe être (on peut dire « était »).",
-      consigne: "Complète avec « et » ou « est ».",
-      items: [
-        "Le ciel ___ bleu.",
-        "Paul ___ Marie jouent.",
-        "Elle ___ contente ___ fière.",
-      ],
-      correction: "1. est (était bleu) — 2. et — 3. est … et.",
-    },
-    mot: {
-      mot: "Symétrie",
-      nature: "nom, géométrie",
-      definition:
-        "Une figure est symétrique quand on peut la plier en deux parties identiques le long d'un axe.",
-      exemple: "Un papillon est symétrique : ses deux ailes se superposent.",
-    },
-    geste: {
-      titre: "Le menu déroulant",
-      texte:
-        "Un menu déroulant s'ouvre quand on clique sur une petite flèche : on choisit ensuite une option dans la liste.",
-    },
-    defi: {
-      enonce:
-        "Combien de carrés vois-tu dans une grille de 2 cases sur 2 (en comptant le grand) ?",
-      correction: "5 : les 4 petits carrés + le grand carré qui les contient.",
-    },
-  },
-];
+import { jours, parcours } from "./data";
 
 const semaines = Array.from(new Set(jours.map((j) => j.semaine)));
 
@@ -274,9 +38,9 @@ const baremePoints = [
 /* -------------------------------------------------------------------------- */
 
 /**
- * Emplacement réservé pour une illustration. Pour l'instant on affiche un
- * emoji ; quand les vraies images (Ti Margo, visuels) seront fournies, il
- * suffira de remplacer le contenu ici (et de chercher data-illustration).
+ * Illustration : affiche une image si `src` est fourni, sinon un emoji.
+ * Tous les visuels passent par ici → un seul endroit pour brancher de vraies
+ * images (repérables aussi via l'attribut data-illustration).
  */
 function Illu({
   emoji,
@@ -287,7 +51,6 @@ function Illu({
   emoji: string;
   label: string;
   className?: string;
-  /** Si fourni, on affiche cette image au lieu de l'emoji. */
   src?: string;
 }) {
   if (src) {
@@ -390,7 +153,7 @@ export default function CahierVacancesVersLa6ePage() {
 
       <article className="mx-auto max-w-4xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0">
         {/* ================= PAGE DE GARDE ================= */}
-        <section className="cahier-page overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-300/40 print:rounded-none print:border-0 print:shadow-none">
+        <section className="cahier-page garde-page overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-300/40 print:rounded-none print:border-0 print:shadow-none">
           <PageEntete />
 
           <div className="mt-4 text-center text-base font-black tracking-tight text-teal-600">
@@ -445,7 +208,28 @@ export default function CahierVacancesVersLa6ePage() {
             </div>
           </div>
 
-          <div className="mx-auto mt-8 flex max-w-lg items-center gap-4 rounded-2xl border-2 border-dashed border-teal-200 bg-teal-50/40 p-6">
+          {/* Le parcours en 6 étapes (fil conducteur) */}
+          <div className="mt-7 rounded-2xl border border-teal-200 bg-teal-50/50 p-4">
+            <p className="text-center text-sm font-black text-teal-700">
+              Le grand voyage de Ti Margo vers la 6ᵉ — 6 étapes à La Réunion
+            </p>
+            <div className="mt-3 flex flex-wrap items-center justify-center gap-x-1.5 gap-y-2 text-xs font-bold text-slate-600">
+              {parcours.map((e) => (
+                <span key={e.etape} className="flex items-center gap-1.5">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 shadow-sm">
+                    <span className="text-sm">{e.emoji}</span>
+                    {e.lieu}
+                  </span>
+                  <span className="text-teal-400">→</span>
+                </span>
+              ))}
+              <span className="inline-flex items-center gap-1 rounded-full bg-teal-500 px-2.5 py-1 font-black text-white">
+                🎓 La 6ᵉ !
+              </span>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-7 flex max-w-lg items-center gap-4 rounded-2xl border-2 border-dashed border-teal-200 bg-teal-50/40 p-6">
             <div className="flex-1">
               <p className="text-sm font-black uppercase tracking-wide text-teal-600">
                 Ce cahier appartient à
@@ -455,7 +239,7 @@ export default function CahierVacancesVersLa6ePage() {
             <Illu emoji="🖊️" label="stylo" className="h-10 w-10 text-2xl" />
           </div>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+          <div className="mt-7 grid gap-3 sm:grid-cols-2">
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
               <h2 className="flex items-center gap-2 text-base font-black text-slate-900">
                 <BookOpen className="h-5 w-5 text-teal-500" />
@@ -495,7 +279,7 @@ export default function CahierVacancesVersLa6ePage() {
             <FilProgression />
           </div>
 
-          <p className="mt-8 text-center text-lg font-black italic text-teal-600">
+          <p className="mt-7 text-center text-lg font-black italic text-teal-600">
             Chaque jour, un pas de plus vers la réussite !
           </p>
         </section>
@@ -504,221 +288,236 @@ export default function CahierVacancesVersLa6ePage() {
         {semaines.map((sem) =>
           jours
             .filter((j) => j.semaine === sem)
-            .map((jour) => (
-              <section
-                key={jour.numero}
-                className="cahier-page jour-page mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 sm:p-8 print:mt-0 print:rounded-none print:border-0 print:p-4 print:shadow-none"
-              >
-                <PageEntete />
+            .map((jour) => {
+              const etape = parcours.find((e) => e.semaine === jour.semaine);
+              return (
+                <section
+                  key={jour.numero}
+                  className="cahier-page jour-page mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 sm:p-8 print:mt-0 print:rounded-none print:border-0 print:p-4 print:shadow-none"
+                >
+                  <PageEntete />
 
-                <header className="mt-3 flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
-                  <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wide">
-                    <span className="rounded-md bg-sky-500 px-3 py-1 text-white">
-                      Semaine {jour.semaine}
+                  <header className="mt-3 flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                    <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wide">
+                      <span className="rounded-md bg-sky-500 px-3 py-1 text-white">
+                        Semaine {jour.semaine}
+                      </span>
+                      <span className="rounded-md bg-orange-500 px-3 py-1 text-white">
+                        Jour {jour.numero}
+                      </span>
+                    </div>
+                    <span className="flex items-center gap-1.5 text-sm font-bold italic text-slate-400">
+                      eleveai.fr · Vers la 6ᵉ
+                      <Star className="h-4 w-4 fill-amber-300 text-amber-400" />
                     </span>
-                    <span className="rounded-md bg-orange-500 px-3 py-1 text-white">
-                      Jour {jour.numero}
-                    </span>
-                  </div>
-                  <span className="flex items-center gap-1.5 text-sm font-bold italic text-slate-400">
-                    eleveai.fr · Vers la 6ᵉ
-                    <Star className="h-4 w-4 fill-amber-300 text-amber-400" />
-                  </span>
-                </header>
+                  </header>
 
-                <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_15rem] print:grid-cols-[1fr_14rem]">
-                  {/* ---------- Colonne principale ---------- */}
-                  <div className="grid gap-4">
-                    {/* Maths */}
-                    <div className="rounded-2xl border border-sky-200 bg-sky-50/60 p-4">
-                      <div className="flex items-center justify-between">
-                        <h2 className="flex items-center gap-2 text-lg font-black text-sky-700">
-                          <Calculator className="h-5 w-5" />
-                          Maths
-                        </h2>
-                        <Termine />
-                      </div>
-                      <p className="mt-3 text-sm font-bold text-slate-700">
-                        Calcul mental
-                      </p>
-                      <div className="mt-2 grid grid-cols-2 gap-x-6 gap-y-2 text-sm text-slate-800 sm:grid-cols-3">
-                        {jour.maths.calcul.map((c) => (
-                          <span key={c} className="font-mono">
-                            {c} ____
-                          </span>
-                        ))}
-                      </div>
-                      <div className="mt-4 flex items-start justify-between gap-3">
-                        <div>
-                          <p className="text-sm font-bold text-slate-700">Problème</p>
-                          <p className="mt-1 text-sm leading-6 text-slate-700">
-                            {jour.maths.probleme.enonce}
-                          </p>
-                          <div className="mt-2 h-7 border-b border-dashed border-slate-300" />
+                  {etape && (
+                    <div className="mt-2 flex flex-wrap items-center gap-2 rounded-lg bg-teal-50 px-3 py-1.5 text-xs font-bold text-teal-700">
+                      <span className="text-sm">{etape.emoji}</span>
+                      <span>
+                        Étape {etape.etape} · {etape.lieu}
+                      </span>
+                      <span className="hidden font-normal italic text-teal-600/80 sm:inline">
+                        — {etape.intro}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_15rem] print:grid-cols-[1fr_14rem]">
+                    {/* ---------- Colonne principale ---------- */}
+                    <div className="grid gap-4">
+                      {/* Maths */}
+                      <div className="rounded-2xl border border-sky-200 bg-sky-50/60 p-4">
+                        <div className="flex items-center justify-between">
+                          <h2 className="flex items-center gap-2 text-lg font-black text-sky-700">
+                            <Calculator className="h-5 w-5" />
+                            Maths
+                          </h2>
+                          <Termine />
                         </div>
-                        <Illu emoji={jour.maths.illu.emoji} label={jour.maths.illu.label} />
+                        <p className="mt-3 text-sm font-bold text-slate-700">
+                          Calcul mental
+                        </p>
+                        <div className="mt-2 grid grid-cols-2 gap-x-6 gap-y-2 text-sm text-slate-800 sm:grid-cols-3">
+                          {jour.maths.calcul.map((c) => (
+                            <span key={c.q} className="font-mono">
+                              {c.q} ____
+                            </span>
+                          ))}
+                        </div>
+                        <div className="mt-4 flex items-start justify-between gap-3">
+                          <div>
+                            <p className="text-sm font-bold text-slate-700">Problème</p>
+                            <p className="mt-1 text-sm leading-6 text-slate-700">
+                              {jour.maths.probleme.enonce}
+                            </p>
+                            <div className="mt-2 h-7 border-b border-dashed border-slate-300" />
+                          </div>
+                          <Illu emoji={jour.maths.illu.emoji} label={jour.maths.illu.label} />
+                        </div>
+                      </div>
+
+                      {/* Français */}
+                      <div className="rounded-2xl border border-violet-200 bg-violet-50/60 p-4">
+                        <div className="flex items-center justify-between">
+                          <h2 className="flex items-center gap-2 text-lg font-black text-violet-700">
+                            <Pencil className="h-5 w-5" />
+                            Français — {jour.francais.regleTitre}
+                          </h2>
+                          <Termine />
+                        </div>
+                        <p className="mt-2 rounded-xl border border-violet-100 bg-white p-3 text-sm leading-6 text-slate-700">
+                          {jour.francais.regle}
+                        </p>
+                        <div className="mt-3 flex items-end justify-between gap-3">
+                          <div>
+                            <p className="text-sm font-bold text-slate-700">
+                              {jour.francais.consigne}
+                            </p>
+                            <ul className="mt-2 grid gap-2 text-sm leading-6 text-slate-800">
+                              {jour.francais.items.map((it) => (
+                                <li key={it}>• {it}</li>
+                              ))}
+                            </ul>
+                          </div>
+                          <Illu
+                            emoji="🦎"
+                            label="Ti Margo"
+                            src="/cahier-vacances/ti-margo.png"
+                            className="h-20 w-20"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Mot & geste */}
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div className="rounded-2xl border border-teal-200 bg-teal-50/60 p-4">
+                          <div className="flex items-center justify-between">
+                            <h2 className="flex items-center gap-2 text-base font-black text-teal-700">
+                              <BookOpen className="h-5 w-5" />
+                              Le mot du jour
+                            </h2>
+                            <Termine />
+                          </div>
+                          <p className="mt-2 text-sm">
+                            <span className="font-black text-teal-700">{jour.mot.mot}</span>{" "}
+                            <span className="text-xs italic text-slate-500">
+                              ({jour.mot.nature})
+                            </span>
+                          </p>
+                          <p className="mt-1 text-sm leading-6 text-slate-700">
+                            {jour.mot.definition}
+                          </p>
+                          <p className="mt-1 text-xs italic leading-5 text-slate-500">
+                            {jour.mot.exemple}
+                          </p>
+                        </div>
+                        <div className="rounded-2xl border border-emerald-200 bg-emerald-50/60 p-4">
+                          <div className="flex items-center justify-between">
+                            <h2 className="flex items-center gap-2 text-base font-black text-emerald-700">
+                              <Mouse className="h-5 w-5" />
+                              Le geste du jour
+                            </h2>
+                            <Termine />
+                          </div>
+                          <p className="mt-2 text-sm font-bold text-emerald-700">
+                            {jour.geste.titre}
+                          </p>
+                          <div className="mt-1 flex items-end justify-between gap-2">
+                            <p className="text-sm leading-6 text-slate-700">
+                              {jour.geste.texte}
+                            </p>
+                            <Illu
+                              emoji="🦎"
+                              label="Ti Margo"
+                              src="/cahier-vacances/ti-margo-tablette-sac-a-dos.png"
+                              className="h-14 w-14 shrink-0"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Défi */}
+                      <div className="rounded-2xl border border-orange-200 bg-orange-50/60 p-4">
+                        <div className="flex items-center justify-between">
+                          <h2 className="flex items-center gap-2 text-base font-black text-orange-600">
+                            <Target className="h-5 w-5" />
+                            Le défi du jour
+                          </h2>
+                          <Termine />
+                        </div>
+                        <p className="mt-1 text-sm leading-6 text-slate-700">
+                          {jour.defi.enonce}
+                        </p>
+                        <div className="mt-2 h-7 border-b border-dashed border-slate-300" />
                       </div>
                     </div>
 
-                    {/* Français */}
-                    <div className="rounded-2xl border border-violet-200 bg-violet-50/60 p-4">
-                      <div className="flex items-center justify-between">
-                        <h2 className="flex items-center gap-2 text-lg font-black text-violet-700">
-                          <Pencil className="h-5 w-5" />
-                          Français — {jour.francais.regleTitre}
-                        </h2>
-                        <Termine />
+                    {/* ---------- Colonne latérale (gamification) ---------- */}
+                    <aside className="grid content-start gap-4">
+                      {/* Badge du jour */}
+                      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-center">
+                        <p className="text-xs font-black uppercase tracking-wide text-amber-600">
+                          Badge du jour
+                        </p>
+                        <Illu emoji="🏅" label={`badge ${jour.badge}`} className="mx-auto mt-2 h-14 w-14 text-3xl" />
+                        <p className="mt-2 text-sm font-black uppercase leading-tight text-slate-800">
+                          {jour.badge}
+                        </p>
                       </div>
-                      <p className="mt-2 rounded-xl border border-violet-100 bg-white p-3 text-sm leading-6 text-slate-700">
-                        {jour.francais.regle}
-                      </p>
-                      <div className="mt-3 flex items-end justify-between gap-3">
-                        <div>
-                          <p className="text-sm font-bold text-slate-700">
-                            {jour.francais.consigne}
-                          </p>
-                          <ul className="mt-2 grid gap-2 text-sm leading-6 text-slate-800">
-                            {jour.francais.items.map((it) => (
-                              <li key={it}>• {it}</li>
-                            ))}
-                          </ul>
+
+                      {/* Points du jour */}
+                      <div className="overflow-hidden rounded-2xl border border-slate-200">
+                        <p className="bg-teal-600 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-white">
+                          Points du jour
+                        </p>
+                        <ul className="divide-y divide-slate-100 bg-white">
+                          {baremePoints.map((p) => (
+                            <li
+                              key={p.label}
+                              className="flex items-center justify-between px-4 py-2 text-sm"
+                            >
+                              <span className="flex items-center gap-2 font-bold text-slate-700">
+                                <p.icon className={`h-4 w-4 ${p.color}`} />
+                                {p.label}
+                              </span>
+                              <span className="font-black text-slate-900">{p.pts}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="flex items-center justify-between bg-teal-50 px-4 py-2">
+                          <span className="text-sm font-black text-teal-700">TOTAL</span>
+                          <span className="text-lg font-black text-teal-700">/10</span>
                         </div>
+                      </div>
+
+                      {/* Encouragement mascotte */}
+                      <div className="rounded-2xl border border-teal-200 bg-white p-4 text-center">
+                        <p className="text-sm font-black text-teal-700">Bravo !</p>
+                        <p className="mt-1 text-xs leading-5 text-slate-600">
+                          Continue à apprendre chaque jour. Avec Ti Margo, tu vas y
+                          arriver !
+                        </p>
                         <Illu
                           emoji="🦎"
                           label="Ti Margo"
                           src="/cahier-vacances/ti-margo.png"
-                          className="h-20 w-20"
+                          className="mx-auto mt-2 h-20 w-20"
                         />
                       </div>
-                    </div>
-
-                    {/* Mot & geste */}
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <div className="rounded-2xl border border-teal-200 bg-teal-50/60 p-4">
-                        <div className="flex items-center justify-between">
-                          <h2 className="flex items-center gap-2 text-base font-black text-teal-700">
-                            <BookOpen className="h-5 w-5" />
-                            Le mot du jour
-                          </h2>
-                          <Termine />
-                        </div>
-                        <p className="mt-2 text-sm">
-                          <span className="font-black text-teal-700">{jour.mot.mot}</span>{" "}
-                          <span className="text-xs italic text-slate-500">
-                            ({jour.mot.nature})
-                          </span>
-                        </p>
-                        <p className="mt-1 text-sm leading-6 text-slate-700">
-                          {jour.mot.definition}
-                        </p>
-                        <p className="mt-1 text-xs italic leading-5 text-slate-500">
-                          {jour.mot.exemple}
-                        </p>
-                      </div>
-                      <div className="rounded-2xl border border-emerald-200 bg-emerald-50/60 p-4">
-                        <div className="flex items-center justify-between">
-                          <h2 className="flex items-center gap-2 text-base font-black text-emerald-700">
-                            <Mouse className="h-5 w-5" />
-                            Le geste du jour
-                          </h2>
-                          <Termine />
-                        </div>
-                        <p className="mt-2 text-sm font-bold text-emerald-700">
-                          {jour.geste.titre}
-                        </p>
-                        <div className="mt-1 flex items-end justify-between gap-2">
-                          <p className="text-sm leading-6 text-slate-700">
-                            {jour.geste.texte}
-                          </p>
-                          <Illu
-                            emoji="🦎"
-                            label="Ti Margo"
-                            src="/cahier-vacances/ti-margo-tablette-sac-a-dos.png"
-                            className="h-14 w-14 shrink-0"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Défi */}
-                    <div className="rounded-2xl border border-orange-200 bg-orange-50/60 p-4">
-                      <div className="flex items-center justify-between">
-                        <h2 className="flex items-center gap-2 text-base font-black text-orange-600">
-                          <Target className="h-5 w-5" />
-                          Le défi du jour
-                        </h2>
-                        <Termine />
-                      </div>
-                      <p className="mt-1 text-sm leading-6 text-slate-700">
-                        {jour.defi.enonce}
-                      </p>
-                      <div className="mt-2 h-7 border-b border-dashed border-slate-300" />
-                    </div>
+                    </aside>
                   </div>
 
-                  {/* ---------- Colonne latérale (gamification) ---------- */}
-                  <aside className="grid content-start gap-4">
-                    {/* Badge du jour */}
-                    <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-center">
-                      <p className="text-xs font-black uppercase tracking-wide text-amber-600">
-                        Badge du jour
-                      </p>
-                      <Illu emoji="🏅" label={`badge ${jour.badge}`} className="mx-auto mt-2 h-14 w-14 text-3xl" />
-                      <p className="mt-2 text-sm font-black uppercase leading-tight text-slate-800">
-                        {jour.badge}
-                      </p>
-                    </div>
-
-                    {/* Points du jour */}
-                    <div className="overflow-hidden rounded-2xl border border-slate-200">
-                      <p className="bg-teal-600 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-white">
-                        Points du jour
-                      </p>
-                      <ul className="divide-y divide-slate-100 bg-white">
-                        {baremePoints.map((p) => (
-                          <li
-                            key={p.label}
-                            className="flex items-center justify-between px-4 py-2 text-sm"
-                          >
-                            <span className="flex items-center gap-2 font-bold text-slate-700">
-                              <p.icon className={`h-4 w-4 ${p.color}`} />
-                              {p.label}
-                            </span>
-                            <span className="font-black text-slate-900">{p.pts}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="flex items-center justify-between bg-teal-50 px-4 py-2">
-                        <span className="text-sm font-black text-teal-700">TOTAL</span>
-                        <span className="text-lg font-black text-teal-700">/10</span>
-                      </div>
-                    </div>
-
-                    {/* Encouragement mascotte */}
-                    <div className="rounded-2xl border border-teal-200 bg-white p-4 text-center">
-                      <p className="text-sm font-black text-teal-700">Bravo !</p>
-                      <p className="mt-1 text-xs leading-5 text-slate-600">
-                        Continue à apprendre chaque jour. Avec Ti Margo, tu vas y
-                        arriver !
-                      </p>
-                      <Illu
-                        emoji="🦎"
-                        label="Ti Margo"
-                        src="/cahier-vacances/ti-margo.png"
-                        className="mx-auto mt-2 h-20 w-20"
-                      />
-                    </div>
-                  </aside>
-                </div>
-
-                <footer className="mt-5 border-t border-slate-200 pt-4">
-                  <FilProgression />
-                  <p className="mt-3 text-center text-sm font-bold text-teal-600">
-                    Un petit pas chaque jour, un grand pas pour tes connaissances !
-                  </p>
-                </footer>
-              </section>
-            ))
+                  <footer className="mt-5 border-t border-slate-200 pt-4">
+                    <FilProgression />
+                    <p className="mt-3 text-center text-sm font-bold text-teal-600">
+                      Un petit pas chaque jour, un grand pas pour tes connaissances !
+                    </p>
+                  </footer>
+                </section>
+              );
+            })
         )}
 
         {/* ================= CORRIGÉS (page séparée) ================= */}
@@ -810,7 +609,7 @@ export default function CahierVacancesVersLa6ePage() {
 
           /* Chaque page-jour doit tenir sur une seule A4 : on compresse
              marges, paddings, gaps et tailles de texte à l'impression
-             (réglage calibré : ~864px de contenu pour ~1062px utiles). */
+             (réglage calibré : ~880px de contenu pour ~1062px utiles). */
           .jour-page {
             padding: 0 !important;
             font-size: 12px;
@@ -894,6 +693,23 @@ export default function CahierVacancesVersLa6ePage() {
             page-break-after: auto;
           }
 
+          /* La page de garde tient sur une seule A4 (marges resserrées). */
+          .garde-page {
+            padding: 6mm !important;
+          }
+          .garde-page .mt-8 {
+            margin-top: 14px !important;
+          }
+          .garde-page .mt-7 {
+            margin-top: 12px !important;
+          }
+          .garde-page .mt-6 {
+            margin-top: 10px !important;
+          }
+          .garde-page .mt-4 {
+            margin-top: 8px !important;
+          }
+
           /* Les corrigés démarrent toujours sur une page neuve. */
           .corriges-page {
             break-before: page;
@@ -935,35 +751,8 @@ export default function CahierVacancesVersLa6ePage() {
 }
 
 /** Réponses du calcul mental, dans l'ordre des énoncés. */
-function calculReponses(calcul: string[]): string {
-  const reponses: Record<string, string> = {
-    "7 × 8 =": "56",
-    "48 ÷ 6 =": "8",
-    "125 + 78 =": "203",
-    "1000 − 365 =": "635",
-    "9 × 6 =": "54",
-    "6 × 7 =": "42",
-    "56 ÷ 8 =": "7",
-    "240 + 160 =": "400",
-    "double de 45 =": "90",
-    "8 × 8 =": "64",
-    "9 × 7 =": "63",
-    "63 ÷ 9 =": "7",
-    "1/2 de 50 =": "25",
-    "350 + 450 =": "800",
-    "12 × 5 =": "60",
-    "8 × 6 =": "48",
-    "72 ÷ 8 =": "9",
-    "0,5 + 0,5 =": "1",
-    "1000 − 250 =": "750",
-    "7 × 7 =": "49",
-    "6 × 9 =": "54",
-    "81 ÷ 9 =": "9",
-    "1/4 de 100 =": "25",
-    "275 + 325 =": "600",
-    "11 × 4 =": "44",
-  };
+function calculReponses(calcul: { q: string; r: string }[]): string {
   return calcul
-    .map((c) => `${c.replace(/\s*=$/, "")} ${reponses[c] ?? "?"}`)
+    .map((c) => `${c.q.replace(/\s*=$/, "")} ${c.r}`)
     .join(" · ");
 }
