@@ -488,7 +488,7 @@ export default function CahierVacancesVersLa6ePage() {
             .map((jour) => (
               <section
                 key={jour.numero}
-                className="cahier-page mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 sm:p-8 print:mt-0 print:rounded-none print:border-0 print:p-4 print:shadow-none"
+                className="cahier-page jour-page mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 sm:p-8 print:mt-0 print:rounded-none print:border-0 print:p-4 print:shadow-none"
               >
                 <PageEntete />
 
@@ -768,7 +768,59 @@ export default function CahierVacancesVersLa6ePage() {
         @media print {
           @page {
             size: A4;
-            margin: 10mm;
+            margin: 8mm;
+          }
+
+          /* Chaque page-jour doit tenir sur une seule A4 : on compresse
+             marges, paddings, gaps et tailles de texte à l'impression
+             (réglage calibré : ~864px de contenu pour ~1062px utiles). */
+          .jour-page {
+            padding: 0 !important;
+            font-size: 12px;
+            line-height: 1.35;
+          }
+          .jour-page header {
+            margin-top: 5px !important;
+            padding-bottom: 6px !important;
+          }
+          .jour-page .rounded-2xl {
+            padding: 9px !important;
+          }
+          .jour-page .grid {
+            gap: 9px !important;
+          }
+          .jour-page .mt-4 {
+            margin-top: 9px !important;
+          }
+          .jour-page .mt-3 {
+            margin-top: 6px !important;
+          }
+          .jour-page .mt-2,
+          .jour-page .mt-1 {
+            margin-top: 4px !important;
+          }
+          .jour-page h2 {
+            font-size: 13.5px !important;
+          }
+          .jour-page .text-lg {
+            font-size: 13.5px !important;
+          }
+          .jour-page .text-sm {
+            font-size: 11.5px !important;
+          }
+          .jour-page .text-xs {
+            font-size: 10px !important;
+          }
+          .jour-page .h-7 {
+            height: 15px !important;
+          }
+          .jour-page footer {
+            margin-top: 7px !important;
+            padding-top: 7px !important;
+          }
+          .jour-page li {
+            padding-top: 3px !important;
+            padding-bottom: 3px !important;
           }
 
           html,
