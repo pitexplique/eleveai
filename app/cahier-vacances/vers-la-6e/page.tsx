@@ -19,7 +19,7 @@ import {
   Target,
   TrendingUp,
 } from "lucide-react";
-import { jours, parcours, defisExpert, carnet } from "./data";
+import { jours, parcours, defisExpert, carnet, leSaviasTu } from "./data";
 
 const semaines = Array.from(new Set(jours.map((j) => j.semaine)));
 
@@ -328,6 +328,24 @@ export default function CahierVacancesVersLa6ePage() {
                         📖 Le carnet de Ti Margo —{" "}
                       </span>
                       {carnet[jour.numero]}
+                    </p>
+                  )}
+
+                  {/* Le savais-tu ? — ancrage local 🌺 / ouverture monde 🌍 */}
+                  {leSaviasTu[jour.numero] && (
+                    <p
+                      className={`mt-2 rounded-lg px-3 py-1.5 text-xs leading-5 ${
+                        leSaviasTu[jour.numero].portee === "local"
+                          ? "bg-emerald-50 text-emerald-900"
+                          : "bg-sky-50 text-sky-900"
+                      }`}
+                    >
+                      <span className="font-black">
+                        {leSaviasTu[jour.numero].portee === "local"
+                          ? "🌺 Le savais-tu ? (La Réunion) — "
+                          : "🌍 Le savais-tu ? (dans le monde) — "}
+                      </span>
+                      {leSaviasTu[jour.numero].texte}
                     </p>
                   )}
 

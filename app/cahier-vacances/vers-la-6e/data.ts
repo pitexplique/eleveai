@@ -1588,3 +1588,42 @@ export const carnet: Record<number, string> = {
   29: "J'aperçois le sommet ! Je prépare déjà mon cartable : la 6ᵉ, c'est pour très bientôt. Encore un effort !",
   30: "Ça y est : j'ai atteint le sommet du Piton des Neiges, tout en haut de l'île, et je suis prêt pour la 6ᵉ ! Bravo à toi qui m'as suivi : on a réussi le voyage ensemble !",
 };
+
+/* -------------------------------------------------------------------------- */
+/*  « Le savais-tu ? » — une ligne culturelle par jour, qui alterne ancrage   */
+/*  local (🌺 La Réunion) et ouverture sur le monde (🌍). Enracine le cahier  */
+/*  ET ouvre une fenêtre sur le monde, au fil du voyage de Ti Margo.          */
+/* -------------------------------------------------------------------------- */
+
+export const leSaviasTu: Record<number, { portee: "local" | "monde"; texte: string }> = {
+  1: { portee: "local", texte: "Le margouillat, comme Ti Margo, est un petit lézard très commun à La Réunion : on le voit souvent sur les murs des maisons !" },
+  2: { portee: "monde", texte: "La Réunion est une île de l'océan Indien, à plus de 9 000 km de la France métropole." },
+  3: { portee: "local", texte: "Au bord du lagon de l'Hermitage vivent des poissons multicolores, protégés dans une réserve marine." },
+  4: { portee: "monde", texte: "Les chiffres que tu utilises (1, 2, 3…) sont nés en Inde il y a très longtemps, puis ont voyagé dans le monde entier." },
+  5: { portee: "local", texte: "En créole réunionnais, les enfants se disent « la marmaille »." },
+  6: { portee: "monde", texte: "À Madagascar, l'île voisine, vivent les lémuriens, des animaux qu'on ne trouve nulle part ailleurs." },
+  7: { portee: "local", texte: "Le tec-tec est un petit oiseau de La Réunion, curieux et pas farouche : il s'approche des promeneurs." },
+  8: { portee: "monde", texte: "Partout dans le monde, une heure dure 60 minutes : c'est une mesure que tous les pays partagent." },
+  9: { portee: "local", texte: "Le paille-en-queue est un oiseau blanc à longue plume, emblème des falaises réunionnaises." },
+  10: { portee: "monde", texte: "Sur l'île vivent ensemble des familles venues d'Afrique, d'Inde, de Chine, d'Europe et de Madagascar." },
+  11: { portee: "local", texte: "Le Piton de la Fournaise est l'un des volcans les plus actifs du monde : il entre en éruption presque chaque année." },
+  12: { portee: "monde", texte: "Il existe des volcans sur tous les continents, et même sur d'autres planètes : le plus grand est sur Mars !" },
+  13: { portee: "local", texte: "La lave refroidie forme une roche noire ; on en retrouve même sur certaines plages de sable noir." },
+  14: { portee: "monde", texte: "Le mot « volcan » vient de Vulcain, le dieu romain du feu et des forges." },
+  15: { portee: "local", texte: "Depuis les hauteurs du volcan, on aperçoit parfois la mer des deux côtés de l'île." },
+  16: { portee: "monde", texte: "Mafate ne se visite qu'à pied ou en hélicoptère : aucune route, comme dans certaines vallées de l'Himalaya." },
+  17: { portee: "local", texte: "Les habitants de Mafate, les Mafatais, reçoivent souvent leur ravitaillement par les airs." },
+  18: { portee: "monde", texte: "Une boussole indique le Nord partout sur la Terre, grâce au champ magnétique de la planète." },
+  19: { portee: "local", texte: "Le nom « Mafate » viendrait d'un chef « marron », un esclave en fuite qui s'y était réfugié." },
+  20: { portee: "monde", texte: "Marcher reste, partout dans le monde, le plus ancien moyen de voyager des êtres humains." },
+  21: { portee: "local", texte: "Au Trou de Fer, plusieurs cascades plongent de plus de 200 mètres : un site presque unique au monde." },
+  22: { portee: "monde", texte: "La plus haute cascade du monde, le Salto Ángel, est au Venezuela : près de 1 000 mètres de chute !" },
+  23: { portee: "local", texte: "L'eau des cascades alimente les rivières, puis les champs de canne à sucre de l'île." },
+  24: { portee: "monde", texte: "L'eau voyage : celle d'une cascade réunionnaise pourrait un jour s'évaporer et retomber en pluie ailleurs." },
+  25: { portee: "local", texte: "Beaucoup de cascades portent des noms créoles ; on les appelle « bassins » quand on peut s'y baigner." },
+  26: { portee: "monde", texte: "Le Piton des Neiges culmine à 3 070 m : c'est le plus haut sommet de tout l'océan Indien." },
+  27: { portee: "local", texte: "Son nom vient du gel qui blanchit parfois son sommet au petit matin, chose rare sous les tropiques !" },
+  28: { portee: "monde", texte: "Du sommet, par temps clair, on devine l'île Maurice à l'horizon, à environ 200 km." },
+  29: { portee: "local", texte: "La Réunion est française et européenne, tout en étant près de l'Afrique : un pont entre les mondes." },
+  30: { portee: "monde", texte: "Entrer en 6ᵉ, c'est comme atteindre un sommet : une nouvelle vue s'ouvre… sur le monde entier. Bon voyage !" },
+};
