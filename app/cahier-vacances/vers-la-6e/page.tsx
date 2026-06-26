@@ -282,11 +282,25 @@ function Illu({
   emoji,
   label,
   className = "h-14 w-14 text-3xl",
+  src,
 }: {
   emoji: string;
   label: string;
   className?: string;
+  /** Si fourni, on affiche cette image au lieu de l'emoji. */
+  src?: string;
 }) {
+  if (src) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={src}
+        alt={label}
+        data-illustration={label}
+        className={`inline-block shrink-0 object-contain ${className}`}
+      />
+    );
+  }
   return (
     <span
       role="img"
@@ -405,7 +419,12 @@ export default function CahierVacancesVersLa6ePage() {
               <h1 className="text-6xl font-black tracking-tight text-slate-900 print:text-5xl">
                 Vers la 6<sup>e</sup>
               </h1>
-              <Illu emoji="🦎" label="Ti Margo (salut)" className="h-20 w-20 text-5xl" />
+              <Illu
+                emoji="🦎"
+                label="Ti Margo"
+                src="/cahier-vacances/ti-margo.png"
+                className="h-24 w-24"
+              />
             </div>
             <p className="mt-4 text-xl font-black">
               <span className="text-sky-600">Maths</span>
@@ -422,7 +441,7 @@ export default function CahierVacancesVersLa6ePage() {
 
             <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-teal-500 px-6 py-3 text-lg font-black text-white shadow-lg shadow-teal-500/30">
               <Sparkles className="h-5 w-5" />
-              Mission cap sur la 6<sup>e</sup>
+              Mission cap sur la 6ᵉ
             </div>
           </div>
 
@@ -502,7 +521,7 @@ export default function CahierVacancesVersLa6ePage() {
                     </span>
                   </div>
                   <span className="flex items-center gap-1.5 text-sm font-bold italic text-slate-400">
-                    eleveai.fr · Vers la 6<sup>e</sup>
+                    eleveai.fr · Vers la 6ᵉ
                     <Star className="h-4 w-4 fill-amber-300 text-amber-400" />
                   </span>
                 </header>
@@ -564,7 +583,12 @@ export default function CahierVacancesVersLa6ePage() {
                             ))}
                           </ul>
                         </div>
-                        <Illu emoji="🦎" label="Ti Margo (crayon)" className="h-16 w-16 text-4xl" />
+                        <Illu
+                          emoji="🦎"
+                          label="Ti Margo"
+                          src="/cahier-vacances/ti-margo.png"
+                          className="h-20 w-20"
+                        />
                       </div>
                     </div>
 
@@ -669,7 +693,12 @@ export default function CahierVacancesVersLa6ePage() {
                         Continue à apprendre chaque jour. Avec Ti Margo, tu vas y
                         arriver !
                       </p>
-                      <Illu emoji="🦎" label="Ti Margo (pouce levé)" className="mx-auto mt-2 h-16 w-16 text-4xl" />
+                      <Illu
+                        emoji="🦎"
+                        label="Ti Margo"
+                        src="/cahier-vacances/ti-margo.png"
+                        className="mx-auto mt-2 h-20 w-20"
+                      />
                     </div>
                   </aside>
                 </div>
@@ -861,6 +890,25 @@ export default function CahierVacancesVersLa6ePage() {
           .corriges-page {
             break-before: page;
             page-break-before: always;
+            padding: 0 !important;
+          }
+          /* Compression légère pour éviter un débordement du pied sur une
+             page quasi vide. */
+          .corriges-page header {
+            padding-bottom: 8px !important;
+          }
+          .corriges-page .gap-3 {
+            gap: 8px !important;
+          }
+          .corriges-page .gap-2 {
+            gap: 3px !important;
+          }
+          .corriges-page .rounded-2xl {
+            padding: 9px !important;
+          }
+          .corriges-page footer {
+            margin-top: 12px !important;
+            padding-top: 8px !important;
           }
 
           /* À l'impression, les corrigés sont toujours dépliés. */
