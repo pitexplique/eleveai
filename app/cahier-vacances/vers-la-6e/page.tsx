@@ -392,7 +392,7 @@ export default function CahierVacancesVersLa6ePage() {
                             emoji="🦎"
                             label="Ti Margo"
                             src="/cahier-vacances/ti-margo.png"
-                            className="h-20 w-20"
+                            className="h-14 w-14"
                           />
                         </div>
                       </div>
@@ -416,7 +416,7 @@ export default function CahierVacancesVersLa6ePage() {
                           <p className="mt-1 text-sm leading-6 text-slate-700">
                             {jour.mot.definition}
                           </p>
-                          <p className="mt-1 text-xs italic leading-5 text-slate-500">
+                          <p className="mt-1 text-xs italic leading-5 text-slate-500 print:hidden">
                             {jour.mot.exemple}
                           </p>
                         </div>
@@ -519,19 +519,20 @@ export default function CahierVacancesVersLa6ePage() {
                         </div>
                       </div>
 
-                      {/* Encouragement mascotte */}
-                      <div className="rounded-2xl border border-teal-200 bg-white p-4 text-center">
-                        <p className="text-sm font-black text-teal-700">Bravo !</p>
-                        <p className="mt-1 text-xs leading-5 text-slate-600">
-                          Continue à apprendre chaque jour. Avec Ti Margo, tu vas y
-                          arriver !
-                        </p>
+                      {/* Encouragement mascotte (compact) */}
+                      <div className="flex items-center gap-2 rounded-2xl border border-teal-200 bg-white p-2.5 text-left">
                         <Illu
                           emoji="🦎"
                           label="Ti Margo"
                           src="/cahier-vacances/ti-margo.png"
-                          className="mx-auto mt-2 h-20 w-20"
+                          className="h-12 w-12 shrink-0"
                         />
+                        <div>
+                          <p className="text-sm font-black text-teal-700">Bravo !</p>
+                          <p className="text-xs leading-4 text-slate-600">
+                            Continue chaque jour, tu vas y arriver !
+                          </p>
+                        </div>
                       </div>
                     </aside>
                   </div>
@@ -702,13 +703,21 @@ export default function CahierVacancesVersLa6ePage() {
           .jour-page .text-xs {
             font-size: 9.5px !important;
           }
+          .jour-page .leading-6 {
+            line-height: 1.3 !important;
+          }
           .jour-page .h-7 {
             height: 14px !important;
           }
-          /* Footer compact en impression */
+          /* Footer compact en impression. Plus de margin-top:auto : c'est
+             l'encadré « Mon carnet de voyage » (flex-1) qui occupe l'espace
+             libre et pousse le footer en bas. */
           .jour-page footer {
-            margin-top: auto !important;
             padding-top: 5px !important;
+          }
+          /* L'encadré dessin/écriture récupère tout l'espace disponible. */
+          .jour-page .border-teal-300 {
+            flex: 1 1 auto !important;
           }
           .jour-page footer .h-9 {
             height: 26px !important;
