@@ -317,7 +317,7 @@ function PageEntete() {
       <span className="flex items-center gap-1.5">
         <span className="font-black text-teal-600">EleveAI</span>
         <span className="text-slate-300">—</span>
-        Plusieurs portes pour apprendre les maths
+        Plusieurs portes pour apprendre
       </span>
       <span className="hidden sm:inline">eleveai.fr/cahier-vacances/vers-la-6e</span>
     </div>
@@ -392,7 +392,7 @@ export default function CahierVacancesVersLa6ePage() {
               2 + 3 = 5
             </span>
             <span className="pointer-events-none absolute right-0 top-8 rotate-6 text-sm font-black text-violet-400">
-              √25 = 5
+              6 × 7 = 42
             </span>
             <span className="pointer-events-none absolute left-1/4 top-0 text-xl font-black text-amber-300">
               +
