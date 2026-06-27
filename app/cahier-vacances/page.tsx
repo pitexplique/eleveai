@@ -120,6 +120,16 @@ const cahiers = [
     chip: "bg-violet-500",
     bouton: "bg-violet-500 hover:bg-violet-400",
   },
+  {
+    slug: "vers-la-terminale",
+    niveau: "1ʳᵉ → Terminale",
+    titre: "Vers la Terminale",
+    theme: "Les maths et l'IA pour changer le monde",
+    emoji: "🤖",
+    accent: "border-emerald-200 bg-emerald-50/60",
+    chip: "bg-emerald-600",
+    bouton: "bg-emerald-600 hover:bg-emerald-500",
+  },
 ];
 
 export default function CahiersVacancesIndexPage() {
