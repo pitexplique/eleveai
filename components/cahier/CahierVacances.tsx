@@ -28,7 +28,7 @@ const baremePoints = [
   { label: "Mot du jour", pts: "1 pt", icon: BookOpen, color: "text-teal-600" },
   { label: "Geste du jour", pts: "1 pt", icon: Mouse, color: "text-emerald-600" },
   { label: "Défi du jour", pts: "2 pts", icon: Target, color: "text-orange-500" },
-  { label: "Bonus", pts: "+ 2 pts", icon: Star, color: "text-amber-500" },
+  { label: "Défi ★★★★★", pts: "+ 2 pts", icon: Star, color: "text-amber-500" },
 ];
 
 /* -------------------------------------------------------------------------- */
