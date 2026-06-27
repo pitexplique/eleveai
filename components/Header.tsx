@@ -18,7 +18,6 @@ const NAV_MATHS = [
   { href: "/calcul-rapide",    icon: "⚡", label: "Calcul rapide",      desc: "5 min d'automatismes" },
   { href: "/dico/maths/6e",    icon: "📒", label: "Dico Maths 6e",      desc: "50 mots & gestes pour l'éval nationale" },
   { href: "/fiches-cours/maths", icon: "PDF", label: "Fiches de cours",    desc: "Cours maths courts à télécharger" },
-  { href: "/cahier-vacances", icon: "☀️", label: "Cahiers de vacances", desc: "CE2 → Terminale : 1 page/jour à imprimer" },
   { href: "/concours-general", icon: "🏆", label: "Concours général",   desc: "Problèmes avancés" },
   { href: "/defis-du-jour",    icon: "🎯", label: "Défis du jour",      desc: "Grand Raid 2026" },
   { href: "/podcast-maths",    icon: "🎧", label: "Podcast maths",      desc: "Fractions, pourcentages, probas en audio" },
@@ -357,6 +356,18 @@ export default function Header() {
             accent="text-amber-300"
           />
 
+          {/* Cahiers de vacances — produit saisonnier, entrée mise en avant */}
+          <Link
+            href="/cahier-vacances"
+            className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition ${
+              isActive(pathname, "/cahier-vacances")
+                ? "bg-amber-300 text-[#041B33] shadow-lg"
+                : "bg-amber-300/15 text-amber-200 hover:bg-amber-300/25 hover:text-amber-100"
+            }`}
+          >
+            ☀️ Cahiers de vacances
+          </Link>
+
           {/* Auth */}
           {eleve ? (
             <div className="ml-3 flex items-center gap-2">
@@ -437,6 +448,14 @@ export default function Header() {
                 Connexion / inscription
               </Link>
             )}
+
+            <Link
+              href="/cahier-vacances"
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center justify-center gap-2 rounded-2xl bg-amber-300/15 border border-amber-300/30 px-4 py-3 text-sm font-black text-amber-200"
+            >
+              ☀️ Cahiers de vacances · CE2 → Terminale
+            </Link>
 
             <MobileSection title="Maths"    accent="text-orange-300" items={NAV_MATHS}    pathname={pathname} />
             <MobileSection title="Français" accent="text-sky-300"    items={NAV_FRANCAIS} pathname={pathname} />
