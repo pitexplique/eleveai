@@ -70,6 +70,16 @@ const cahiers = [
     chip: "bg-indigo-500",
     bouton: "bg-indigo-500 hover:bg-indigo-400",
   },
+  {
+    slug: "vers-la-3e",
+    niveau: "4ᵉ → 3ᵉ",
+    titre: "Vers la 3ᵉ",
+    theme: "Le grand voyage spatial, de la Lune aux étoiles",
+    emoji: "🚀",
+    accent: "border-fuchsia-200 bg-fuchsia-50/60",
+    chip: "bg-fuchsia-500",
+    bouton: "bg-fuchsia-500 hover:bg-fuchsia-400",
+  },
 ];
 
 export default function CahiersVacancesIndexPage() {
@@ -102,7 +112,7 @@ export default function CahiersVacancesIndexPage() {
         </header>
 
         {/* Cartes des cahiers */}
-        <section className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <section className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {cahiers.map((c) => (
             <Link
               key={c.slug}
