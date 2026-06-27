@@ -28,108 +28,19 @@ export const metadata: Metadata = {
   },
 };
 
-/* Catalogue des cahiers de vacances. Un niveau = une carte. */
+/* Catalogue des cahiers de vacances. Un niveau = une carte colorée.
+   Les classes de dégradé sont en clair (literals) pour que Tailwind les génère. */
 const cahiers = [
-  {
-    slug: "vers-le-ce2",
-    niveau: "CE1 → CE2",
-    titre: "Vers le CE2",
-    theme: "L'été des jeux de Ti Margo : on apprend en jouant",
-    emoji: "🎲",
-    accent: "border-orange-200 bg-orange-50/60",
-    chip: "bg-orange-500",
-    bouton: "bg-orange-500 hover:bg-orange-400",
-  },
-  {
-    slug: "vers-le-cm1",
-    niveau: "CE2 → CM1",
-    titre: "Vers le CM1",
-    theme: "Ti Margo explore son jardin créole",
-    emoji: "🌳",
-    accent: "border-lime-200 bg-lime-50/60",
-    chip: "bg-lime-600",
-    bouton: "bg-lime-600 hover:bg-lime-500",
-  },
-  {
-    slug: "vers-le-cm2",
-    niveau: "CM1 → CM2",
-    titre: "Vers le CM2",
-    theme: "Ti Margo découvre son île",
-    emoji: "🏖️",
-    accent: "border-teal-200 bg-teal-50/60",
-    chip: "bg-teal-500",
-    bouton: "bg-teal-500 hover:bg-teal-400",
-  },
-  {
-    slug: "vers-la-6e",
-    niveau: "CM2 → 6ᵉ",
-    titre: "Vers la 6ᵉ",
-    theme: "Le grand voyage vers la 6ᵉ, du lagon au sommet",
-    emoji: "🎓",
-    accent: "border-amber-200 bg-amber-50/60",
-    chip: "bg-amber-500",
-    bouton: "bg-amber-500 hover:bg-amber-400",
-  },
-  {
-    slug: "vers-la-5e",
-    niveau: "6ᵉ → 5ᵉ",
-    titre: "Vers la 5ᵉ",
-    theme: "Le tour de l'océan Indien, d'île en île",
-    emoji: "🐋",
-    accent: "border-sky-200 bg-sky-50/60",
-    chip: "bg-sky-500",
-    bouton: "bg-sky-500 hover:bg-sky-400",
-  },
-  {
-    slug: "vers-la-4e",
-    niveau: "5ᵉ → 4ᵉ",
-    titre: "Vers la 4ᵉ",
-    theme: "Le tour du monde en 80 jours, à la Jules Verne",
-    emoji: "🌍",
-    accent: "border-indigo-200 bg-indigo-50/60",
-    chip: "bg-indigo-500",
-    bouton: "bg-indigo-500 hover:bg-indigo-400",
-  },
-  {
-    slug: "vers-la-3e",
-    niveau: "4ᵉ → 3ᵉ",
-    titre: "Vers la 3ᵉ",
-    theme: "Le grand voyage spatial, de la Lune aux étoiles",
-    emoji: "🚀",
-    accent: "border-fuchsia-200 bg-fuchsia-50/60",
-    chip: "bg-fuchsia-500",
-    bouton: "bg-fuchsia-500 hover:bg-fuchsia-400",
-  },
-  {
-    slug: "vers-la-2nde",
-    niveau: "3ᵉ → 2ⁿᵈᵉ",
-    titre: "Vers la 2ⁿᵈᵉ",
-    theme: "Le grand zoom, de l'atome à l'univers",
-    emoji: "🔭",
-    accent: "border-rose-200 bg-rose-50/60",
-    chip: "bg-rose-500",
-    bouton: "bg-rose-500 hover:bg-rose-400",
-  },
-  {
-    slug: "vers-la-premiere",
-    niveau: "2ⁿᵈᵉ → 1ʳᵉ",
-    titre: "Vers la 1ʳᵉ",
-    theme: "La créativité pour changer le monde (la parabole de Mbappé !)",
-    emoji: "💡",
-    accent: "border-violet-200 bg-violet-50/60",
-    chip: "bg-violet-500",
-    bouton: "bg-violet-500 hover:bg-violet-400",
-  },
-  {
-    slug: "vers-la-terminale",
-    niveau: "1ʳᵉ → Terminale",
-    titre: "Vers la Terminale",
-    theme: "Les maths et l'IA pour changer le monde",
-    emoji: "🤖",
-    accent: "border-emerald-200 bg-emerald-50/60",
-    chip: "bg-emerald-600",
-    bouton: "bg-emerald-600 hover:bg-emerald-500",
-  },
+  { slug: "vers-le-ce2",       niveau: "CE1 → CE2",       titre: "Vers le CE2",       theme: "On apprend en jouant",                  emoji: "🎲", grad: "from-orange-400 to-amber-500" },
+  { slug: "vers-le-cm1",       niveau: "CE2 → CM1",       titre: "Vers le CM1",       theme: "Ti Margo explore son jardin créole",    emoji: "🌳", grad: "from-lime-400 to-green-600"  },
+  { slug: "vers-le-cm2",       niveau: "CM1 → CM2",       titre: "Vers le CM2",       theme: "Ti Margo découvre son île",             emoji: "🏖️", grad: "from-teal-400 to-emerald-600" },
+  { slug: "vers-la-6e",        niveau: "CM2 → 6ᵉ",        titre: "Vers la 6ᵉ",        theme: "Le grand voyage vers la 6ᵉ",            emoji: "🎓", grad: "from-yellow-400 to-amber-600" },
+  { slug: "vers-la-5e",        niveau: "6ᵉ → 5ᵉ",         titre: "Vers la 5ᵉ",        theme: "Le tour de l'océan Indien",             emoji: "🐋", grad: "from-sky-400 to-blue-600"    },
+  { slug: "vers-la-4e",        niveau: "5ᵉ → 4ᵉ",         titre: "Vers la 4ᵉ",        theme: "Le tour du monde en 80 jours",          emoji: "🌍", grad: "from-indigo-400 to-blue-700" },
+  { slug: "vers-la-3e",        niveau: "4ᵉ → 3ᵉ",         titre: "Vers la 3ᵉ",        theme: "Le grand voyage spatial",               emoji: "🚀", grad: "from-fuchsia-500 to-purple-700" },
+  { slug: "vers-la-2nde",      niveau: "3ᵉ → 2ⁿᵈᵉ",       titre: "Vers la 2ⁿᵈᵉ",      theme: "Le grand zoom, de l'atome à l'univers", emoji: "🔭", grad: "from-rose-400 to-pink-600"  },
+  { slug: "vers-la-premiere",  niveau: "2ⁿᵈᵉ → 1ʳᵉ",      titre: "Vers la 1ʳᵉ",       theme: "La créativité pour changer le monde",   emoji: "💡", grad: "from-violet-500 to-fuchsia-600" },
+  { slug: "vers-la-terminale", niveau: "1ʳᵉ → Terminale", titre: "Vers la Terminale", theme: "Les maths et l'IA pour changer le monde", emoji: "🤖", grad: "from-emerald-400 to-teal-700" },
 ];
 
 export default function CahiersVacancesIndexPage() {
@@ -167,26 +78,26 @@ export default function CahiersVacancesIndexPage() {
             <Link
               key={c.slug}
               href={`/cahier-vacances/${c.slug}`}
-              className={`group flex flex-col rounded-3xl border ${c.accent} p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl`}
+              className={`group relative flex flex-col overflow-hidden rounded-3xl bg-gradient-to-br ${c.grad} p-6 text-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:rotate-[-1.5deg] hover:scale-[1.03] hover:shadow-2xl`}
             >
-              <div className="flex items-start justify-between gap-3">
-                <span
-                  className={`inline-block rounded-full ${c.chip} px-3 py-1 text-[11px] font-black uppercase tracking-wider text-white`}
-                >
+              <div className="pointer-events-none absolute -right-6 -top-8 h-28 w-28 rounded-full bg-white/25 blur-2xl" />
+              <div className="relative z-10 flex items-start justify-between gap-3">
+                <span className="inline-block rounded-full bg-white/25 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-white backdrop-blur-sm">
                   {c.niveau}
                 </span>
-                <span className="text-4xl" aria-hidden="true">
+                <span
+                  className="text-5xl drop-shadow-md transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-125"
+                  aria-hidden="true"
+                >
                   {c.emoji}
                 </span>
               </div>
-              <h2 className="mt-4 text-2xl font-black text-slate-900">{c.titre}</h2>
-              <p className="mt-1 flex-1 text-sm leading-6 text-slate-600">{c.theme}</p>
-              <p className="mt-3 text-xs font-bold text-slate-500">
+              <h2 className="relative z-10 mt-4 text-2xl font-black drop-shadow-sm">{c.titre}</h2>
+              <p className="relative z-10 mt-1 flex-1 text-sm font-semibold leading-snug text-white/90">{c.theme}</p>
+              <p className="relative z-10 mt-3 text-[11px] font-black uppercase tracking-wider text-white/80">
                 30 jours · 6 semaines · corrigés inclus
               </p>
-              <span
-                className={`mt-4 inline-flex w-fit items-center gap-2 rounded-full ${c.bouton} px-4 py-2.5 text-sm font-black text-white shadow-lg transition-all group-hover:gap-3`}
-              >
+              <span className="relative z-10 mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-black text-slate-900 shadow-md transition-all group-hover:gap-3">
                 <Download className="h-4 w-4" />
                 Ouvrir &amp; imprimer
                 <span className="transition-transform group-hover:translate-x-1">→</span>

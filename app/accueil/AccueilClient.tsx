@@ -161,6 +161,21 @@ const FEATURES = [
   { icon: "🎓", label: "Éval blanche Pix IA", desc: "Prépare l'évaluation nationale Pix IA", href: "/eval-pix-ia"        },
 ];
 
+// ─── Cahiers de vacances (cartes colorées, du CE2 à la Terminale) ──────────────
+// Les classes de dégradé sont en clair (literals) pour que Tailwind les génère.
+const CAHIERS_VACANCES = [
+  { slug: "vers-le-ce2",       niveau: "CE1 → CE2",       titre: "Vers le CE2",       theme: "On apprend en jouant",                  emoji: "🎲", grad: "from-orange-400 to-amber-500" },
+  { slug: "vers-le-cm1",       niveau: "CE2 → CM1",       titre: "Vers le CM1",       theme: "Ti Margo explore son jardin",           emoji: "🌳", grad: "from-lime-400 to-green-600"  },
+  { slug: "vers-le-cm2",       niveau: "CM1 → CM2",       titre: "Vers le CM2",       theme: "Ti Margo découvre son île",             emoji: "🏖️", grad: "from-teal-400 to-emerald-600" },
+  { slug: "vers-la-6e",        niveau: "CM2 → 6ᵉ",        titre: "Vers la 6ᵉ",        theme: "Le grand voyage vers la 6ᵉ",            emoji: "🎓", grad: "from-yellow-400 to-amber-600" },
+  { slug: "vers-la-5e",        niveau: "6ᵉ → 5ᵉ",         titre: "Vers la 5ᵉ",        theme: "Le tour de l'océan Indien",             emoji: "🐋", grad: "from-sky-400 to-blue-600"    },
+  { slug: "vers-la-4e",        niveau: "5ᵉ → 4ᵉ",         titre: "Vers la 4ᵉ",        theme: "Le tour du monde en 80 jours",          emoji: "🌍", grad: "from-indigo-400 to-blue-700" },
+  { slug: "vers-la-3e",        niveau: "4ᵉ → 3ᵉ",         titre: "Vers la 3ᵉ",        theme: "Le grand voyage spatial",               emoji: "🚀", grad: "from-fuchsia-500 to-purple-700" },
+  { slug: "vers-la-2nde",      niveau: "3ᵉ → 2ⁿᵈᵉ",       titre: "Vers la 2ⁿᵈᵉ",      theme: "Le grand zoom, de l'atome à l'univers", emoji: "🔭", grad: "from-rose-400 to-pink-600"  },
+  { slug: "vers-la-premiere",  niveau: "2ⁿᵈᵉ → 1ʳᵉ",      titre: "Vers la 1ʳᵉ",       theme: "La créativité pour changer le monde",   emoji: "💡", grad: "from-violet-500 to-fuchsia-600" },
+  { slug: "vers-la-terminale", niveau: "1ʳᵉ → Terminale", titre: "Vers la Terminale", theme: "Les maths et l'IA pour changer le monde", emoji: "🤖", grad: "from-emerald-400 to-teal-700" },
+];
+
 // ─── Main component ───────────────────────────────────────────────────────────
 
 function getPrenomAffiche(nom?: string | null) {
@@ -444,249 +459,66 @@ export default function AccueilPage({
         </div>
       </section>
 
-      {/* ── CAHIERS DE VACANCES — produit saisonnier à imprimer ─────────────── */}
-      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
+      {/* ── CAHIERS DE VACANCES — produit saisonnier, cartes colorées & fun ──── */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#08294a] to-[#041B33] px-4 pb-2 pt-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
-          <div className="mb-4 text-center">
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-amber-200/70">
-              ☀️ Spécial été · à imprimer · gratuit
+          <div className="mb-6 text-center">
+            <p className="inline-flex items-center gap-2 rounded-full bg-amber-300/20 px-4 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-amber-200">
+              ☀️ Spécial été · à imprimer · 100% gratuit
             </p>
-            <h2 className="mt-1 text-2xl font-black text-white sm:text-3xl">
-              Les cahiers de vacances EleveAI
+            <h2 className="mt-3 text-3xl font-black text-white sm:text-4xl">
+              Les cahiers de vacances{" "}
+              <span className="bg-gradient-to-r from-amber-300 via-orange-300 to-pink-300 bg-clip-text text-transparent">
+                EleveAI
+              </span>{" "}
+              🦎
             </h2>
-            <p className="mx-auto mt-2 max-w-2xl text-sm font-semibold leading-6 text-white/70">
-              Une page par jour pendant 6 semaines : maths, français, un mot, un
-              défi — et le voyage de Ti Margo à La Réunion. À imprimer, corrigés
-              inclus.
+            <p className="mx-auto mt-2 max-w-2xl text-sm font-semibold leading-6 text-white/75">
+              Une page par jour, 6 semaines d&apos;aventure avec Ti Margo — du CE2
+              à la Terminale. Maths, français, un défi… et le voyage continue !
             </p>
             <Link
               href="/cahier-vacances"
-              className="mt-3 inline-flex items-center gap-1.5 text-xs font-black text-amber-300 transition hover:translate-x-0.5"
+              className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-2 text-xs font-black text-amber-200 transition hover:bg-white/20 hover:text-amber-100"
             >
-              Voir tous les cahiers →
+              Voir les 10 cahiers →
             </Link>
           </div>
+
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link
-              href="/cahier-vacances/vers-le-ce2"
-              className="group relative overflow-hidden rounded-2xl border border-orange-300/30 p-6 transition-all hover:-translate-y-1 hover:border-orange-300/60"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/25 via-amber-500/10 to-transparent" />
-              <div className="relative z-10 flex items-start justify-between gap-3">
-                <div>
-                  <span className="inline-block rounded-full bg-orange-400/20 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-orange-100">
-                    CE1 → CE2
+            {CAHIERS_VACANCES.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/cahier-vacances/${c.slug}`}
+                className={`group relative flex flex-col overflow-hidden rounded-3xl bg-gradient-to-br ${c.grad} p-5 shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-2 hover:rotate-[-1.5deg] hover:scale-[1.03] hover:shadow-2xl`}
+              >
+                <div className="pointer-events-none absolute -right-6 -top-8 h-28 w-28 rounded-full bg-white/25 blur-2xl" />
+                <div className="relative z-10 flex items-start justify-between gap-3">
+                  <span className="inline-block rounded-full bg-white/25 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-white backdrop-blur-sm">
+                    {c.niveau}
                   </span>
-                  <h3 className="mt-3 text-xl font-black text-white">Vers le CE2</h3>
-                  <p className="mt-1 text-sm text-white/70">
-                    On apprend en jouant · 30 jours
-                  </p>
-                </div>
-                <span className="text-4xl" aria-hidden="true">🎲</span>
-              </div>
-              <span className="relative z-10 mt-4 inline-flex items-center gap-2 rounded-full bg-orange-500 px-4 py-2 text-sm font-black text-white transition-all group-hover:gap-3">
-                Télécharger en PDF
-                <span className="transition-transform group-hover:translate-x-1">→</span>
-              </span>
-            </Link>
-            <Link
-              href="/cahier-vacances/vers-le-cm1"
-              className="group relative overflow-hidden rounded-2xl border border-lime-300/30 p-6 transition-all hover:-translate-y-1 hover:border-lime-300/60"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-lime-500/25 via-green-500/10 to-transparent" />
-              <div className="relative z-10 flex items-start justify-between gap-3">
-                <div>
-                  <span className="inline-block rounded-full bg-lime-400/20 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-lime-100">
-                    CE2 → CM1
+                  <span
+                    className="text-5xl drop-shadow-md transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-125"
+                    aria-hidden="true"
+                  >
+                    {c.emoji}
                   </span>
-                  <h3 className="mt-3 text-xl font-black text-white">Vers le CM1</h3>
-                  <p className="mt-1 text-sm text-white/70">
-                    Ti Margo explore son jardin · 30 jours
-                  </p>
                 </div>
-                <span className="text-4xl" aria-hidden="true">🌳</span>
-              </div>
-              <span className="relative z-10 mt-4 inline-flex items-center gap-2 rounded-full bg-lime-600 px-4 py-2 text-sm font-black text-white transition-all group-hover:gap-3">
-                Télécharger en PDF
-                <span className="transition-transform group-hover:translate-x-1">→</span>
-              </span>
-            </Link>
-            <Link
-              href="/cahier-vacances/vers-le-cm2"
-              className="group relative overflow-hidden rounded-2xl border border-teal-300/30 p-6 transition-all hover:-translate-y-1 hover:border-teal-300/60"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/25 via-sky-500/10 to-transparent" />
-              <div className="relative z-10 flex items-start justify-between gap-3">
-                <div>
-                  <span className="inline-block rounded-full bg-teal-400/20 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-teal-100">
-                    CM1 → CM2
-                  </span>
-                  <h3 className="mt-3 text-xl font-black text-white">Vers le CM2</h3>
-                  <p className="mt-1 text-sm text-white/70">
-                    Ti Margo découvre son île · 30 jours
-                  </p>
-                </div>
-                <span className="text-4xl" aria-hidden="true">🏖️</span>
-              </div>
-              <span className="relative z-10 mt-4 inline-flex items-center gap-2 rounded-full bg-teal-500 px-4 py-2 text-sm font-black text-white transition-all group-hover:gap-3">
-                Télécharger en PDF
-                <span className="transition-transform group-hover:translate-x-1">→</span>
-              </span>
-            </Link>
-            <Link
-              href="/cahier-vacances/vers-la-6e"
-              className="group relative overflow-hidden rounded-2xl border border-amber-300/30 p-6 transition-all hover:-translate-y-1 hover:border-amber-300/60"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/25 via-orange-500/10 to-transparent" />
-              <div className="relative z-10 flex items-start justify-between gap-3">
-                <div>
-                  <span className="inline-block rounded-full bg-amber-400/20 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-amber-100">
-                    CM2 → 6ᵉ
-                  </span>
-                  <h3 className="mt-3 text-xl font-black text-white">Vers la 6ᵉ</h3>
-                  <p className="mt-1 text-sm text-white/70">
-                    Le grand voyage vers la 6ᵉ · 30 jours
-                  </p>
-                </div>
-                <span className="text-4xl" aria-hidden="true">🎓</span>
-              </div>
-              <span className="relative z-10 mt-4 inline-flex items-center gap-2 rounded-full bg-amber-500 px-4 py-2 text-sm font-black text-white transition-all group-hover:gap-3">
-                Télécharger en PDF
-                <span className="transition-transform group-hover:translate-x-1">→</span>
-              </span>
-            </Link>
-            <Link
-              href="/cahier-vacances/vers-la-5e"
-              className="group relative overflow-hidden rounded-2xl border border-sky-300/30 p-6 transition-all hover:-translate-y-1 hover:border-sky-300/60"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-sky-500/25 via-blue-500/10 to-transparent" />
-              <div className="relative z-10 flex items-start justify-between gap-3">
-                <div>
-                  <span className="inline-block rounded-full bg-sky-400/20 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-sky-100">
-                    6ᵉ → 5ᵉ
-                  </span>
-                  <h3 className="mt-3 text-xl font-black text-white">Vers la 5ᵉ</h3>
-                  <p className="mt-1 text-sm text-white/70">
-                    Le tour de l&apos;océan Indien · 30 jours
-                  </p>
-                </div>
-                <span className="text-4xl" aria-hidden="true">🐋</span>
-              </div>
-              <span className="relative z-10 mt-4 inline-flex items-center gap-2 rounded-full bg-sky-500 px-4 py-2 text-sm font-black text-white transition-all group-hover:gap-3">
-                Télécharger en PDF
-                <span className="transition-transform group-hover:translate-x-1">→</span>
-              </span>
-            </Link>
-            <Link
-              href="/cahier-vacances/vers-la-4e"
-              className="group relative overflow-hidden rounded-2xl border border-indigo-300/30 p-6 transition-all hover:-translate-y-1 hover:border-indigo-300/60"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/25 via-violet-500/10 to-transparent" />
-              <div className="relative z-10 flex items-start justify-between gap-3">
-                <div>
-                  <span className="inline-block rounded-full bg-indigo-400/20 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-indigo-100">
-                    5ᵉ → 4ᵉ
-                  </span>
-                  <h3 className="mt-3 text-xl font-black text-white">Vers la 4ᵉ</h3>
-                  <p className="mt-1 text-sm text-white/70">
-                    Le tour du monde en 80 jours · 30 jours
-                  </p>
-                </div>
-                <span className="text-4xl" aria-hidden="true">🌍</span>
-              </div>
-              <span className="relative z-10 mt-4 inline-flex items-center gap-2 rounded-full bg-indigo-500 px-4 py-2 text-sm font-black text-white transition-all group-hover:gap-3">
-                Télécharger en PDF
-                <span className="transition-transform group-hover:translate-x-1">→</span>
-              </span>
-            </Link>
-            <Link
-              href="/cahier-vacances/vers-la-3e"
-              className="group relative overflow-hidden rounded-2xl border border-fuchsia-300/30 p-6 transition-all hover:-translate-y-1 hover:border-fuchsia-300/60"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/25 via-purple-500/10 to-transparent" />
-              <div className="relative z-10 flex items-start justify-between gap-3">
-                <div>
-                  <span className="inline-block rounded-full bg-fuchsia-400/20 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-fuchsia-100">
-                    4ᵉ → 3ᵉ
-                  </span>
-                  <h3 className="mt-3 text-xl font-black text-white">Vers la 3ᵉ</h3>
-                  <p className="mt-1 text-sm text-white/70">
-                    Le grand voyage spatial · 30 jours
-                  </p>
-                </div>
-                <span className="text-4xl" aria-hidden="true">🚀</span>
-              </div>
-              <span className="relative z-10 mt-4 inline-flex items-center gap-2 rounded-full bg-fuchsia-500 px-4 py-2 text-sm font-black text-white transition-all group-hover:gap-3">
-                Télécharger en PDF
-                <span className="transition-transform group-hover:translate-x-1">→</span>
-              </span>
-            </Link>
-            <Link
-              href="/cahier-vacances/vers-la-2nde"
-              className="group relative overflow-hidden rounded-2xl border border-rose-300/30 p-6 transition-all hover:-translate-y-1 hover:border-rose-300/60"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-rose-500/25 via-pink-500/10 to-transparent" />
-              <div className="relative z-10 flex items-start justify-between gap-3">
-                <div>
-                  <span className="inline-block rounded-full bg-rose-400/20 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-rose-100">
-                    3ᵉ → 2ⁿᵈᵉ
-                  </span>
-                  <h3 className="mt-3 text-xl font-black text-white">Vers la 2ⁿᵈᵉ</h3>
-                  <p className="mt-1 text-sm text-white/70">
-                    Le grand zoom, de l&apos;atome à l&apos;univers · 30 jours
-                  </p>
-                </div>
-                <span className="text-4xl" aria-hidden="true">🔭</span>
-              </div>
-              <span className="relative z-10 mt-4 inline-flex items-center gap-2 rounded-full bg-rose-500 px-4 py-2 text-sm font-black text-white transition-all group-hover:gap-3">
-                Télécharger en PDF
-                <span className="transition-transform group-hover:translate-x-1">→</span>
-              </span>
-            </Link>
-            <Link
-              href="/cahier-vacances/vers-la-premiere"
-              className="group relative overflow-hidden rounded-2xl border border-violet-300/30 p-6 transition-all hover:-translate-y-1 hover:border-violet-300/60"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-500/25 via-purple-500/10 to-transparent" />
-              <div className="relative z-10 flex items-start justify-between gap-3">
-                <div>
-                  <span className="inline-block rounded-full bg-violet-400/20 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-violet-100">
-                    2ⁿᵈᵉ → 1ʳᵉ
-                  </span>
-                  <h3 className="mt-3 text-xl font-black text-white">Vers la 1ʳᵉ</h3>
-                  <p className="mt-1 text-sm text-white/70">
-                    La créativité pour changer le monde · 30 jours
-                  </p>
-                </div>
-                <span className="text-4xl" aria-hidden="true">💡</span>
-              </div>
-              <span className="relative z-10 mt-4 inline-flex items-center gap-2 rounded-full bg-violet-500 px-4 py-2 text-sm font-black text-white transition-all group-hover:gap-3">
-                Télécharger en PDF
-                <span className="transition-transform group-hover:translate-x-1">→</span>
-              </span>
-            </Link>
-            <Link
-              href="/cahier-vacances/vers-la-terminale"
-              className="group relative overflow-hidden rounded-2xl border border-emerald-300/30 p-6 transition-all hover:-translate-y-1 hover:border-emerald-300/60"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/25 via-teal-500/10 to-transparent" />
-              <div className="relative z-10 flex items-start justify-between gap-3">
-                <div>
-                  <span className="inline-block rounded-full bg-emerald-400/20 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-emerald-100">
-                    1ʳᵉ → Terminale
-                  </span>
-                  <h3 className="mt-3 text-xl font-black text-white">Vers la Terminale</h3>
-                  <p className="mt-1 text-sm text-white/70">
-                    Les maths et l&apos;IA pour changer le monde · 30 jours
-                  </p>
-                </div>
-                <span className="text-4xl" aria-hidden="true">🤖</span>
-              </div>
-              <span className="relative z-10 mt-4 inline-flex items-center gap-2 rounded-full bg-emerald-600 px-4 py-2 text-sm font-black text-white transition-all group-hover:gap-3">
-                Télécharger en PDF
-                <span className="transition-transform group-hover:translate-x-1">→</span>
-              </span>
-            </Link>
+                <h3 className="relative z-10 mt-3 text-2xl font-black text-white drop-shadow-sm">
+                  {c.titre}
+                </h3>
+                <p className="relative z-10 mt-1 flex-1 text-sm font-semibold leading-snug text-white/90">
+                  {c.theme}
+                </p>
+                <p className="relative z-10 mt-2 text-[11px] font-black uppercase tracking-wider text-white/80">
+                  30 jours · corrigés inclus
+                </p>
+                <span className="relative z-10 mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-black text-slate-900 shadow-md transition-all group-hover:gap-3">
+                  Télécharger en PDF
+                  <span className="transition-transform group-hover:translate-x-1">→</span>
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
