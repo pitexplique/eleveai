@@ -310,6 +310,18 @@ export default function Header() {
         {/* Desktop nav */}
         <div className="hidden items-center gap-1 lg:flex">
 
+          {/* Cahiers de vacances — produit saisonnier, en tête de barre */}
+          <Link
+            href="/cahier-vacances"
+            className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition ${
+              isActive(pathname, "/cahier-vacances")
+                ? "bg-amber-300 text-[#041B33] shadow-lg"
+                : "bg-amber-300/15 text-amber-200 hover:bg-amber-300/25 hover:text-amber-100"
+            }`}
+          >
+            ☀️ Cahiers de vacances
+          </Link>
+
           <Link href="/accueil" className={linkBase(isActive(pathname, "/accueil"))}>
             Accueil
           </Link>
@@ -355,18 +367,6 @@ export default function Header() {
             active={anyActive(pathname, NAV_ECONOMIE)}
             accent="text-amber-300"
           />
-
-          {/* Cahiers de vacances — produit saisonnier, entrée mise en avant */}
-          <Link
-            href="/cahier-vacances"
-            className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition ${
-              isActive(pathname, "/cahier-vacances")
-                ? "bg-amber-300 text-[#041B33] shadow-lg"
-                : "bg-amber-300/15 text-amber-200 hover:bg-amber-300/25 hover:text-amber-100"
-            }`}
-          >
-            ☀️ Cahiers de vacances
-          </Link>
 
           {/* Auth */}
           {eleve ? (
