@@ -31,6 +31,16 @@ export const metadata: Metadata = {
 /* Catalogue des cahiers de vacances. Un niveau = une carte. */
 const cahiers = [
   {
+    slug: "vers-le-ce2",
+    niveau: "CE1 → CE2",
+    titre: "Vers le CE2",
+    theme: "L'été des jeux de Ti Margo : on apprend en jouant",
+    emoji: "🎲",
+    accent: "border-orange-200 bg-orange-50/60",
+    chip: "bg-orange-500",
+    bouton: "bg-orange-500 hover:bg-orange-400",
+  },
+  {
     slug: "vers-le-cm1",
     niveau: "CE2 → CM1",
     titre: "Vers le CM1",

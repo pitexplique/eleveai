@@ -468,6 +468,28 @@ export default function AccueilPage({
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link
+              href="/cahier-vacances/vers-le-ce2"
+              className="group relative overflow-hidden rounded-2xl border border-orange-300/30 p-6 transition-all hover:-translate-y-1 hover:border-orange-300/60"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/25 via-amber-500/10 to-transparent" />
+              <div className="relative z-10 flex items-start justify-between gap-3">
+                <div>
+                  <span className="inline-block rounded-full bg-orange-400/20 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-orange-100">
+                    CE1 → CE2
+                  </span>
+                  <h3 className="mt-3 text-xl font-black text-white">Vers le CE2</h3>
+                  <p className="mt-1 text-sm text-white/70">
+                    On apprend en jouant · 30 jours
+                  </p>
+                </div>
+                <span className="text-4xl" aria-hidden="true">🎲</span>
+              </div>
+              <span className="relative z-10 mt-4 inline-flex items-center gap-2 rounded-full bg-orange-500 px-4 py-2 text-sm font-black text-white transition-all group-hover:gap-3">
+                Télécharger en PDF
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </span>
+            </Link>
+            <Link
               href="/cahier-vacances/vers-le-cm1"
               className="group relative overflow-hidden rounded-2xl border border-lime-300/30 p-6 transition-all hover:-translate-y-1 hover:border-lime-300/60"
             >
@@ -824,7 +846,7 @@ export default function AccueilPage({
             className="flex gap-3 overflow-x-auto pb-3 pr-12 cursor-grab active:cursor-grabbing select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {[
-              { icon: "☀️", label: "Cahiers de vacances",  desc: "CM1 → 2nde · à imprimer",                 href: "/cahier-vacances",              color: "from-teal-600 to-emerald-800" },
+              { icon: "☀️", label: "Cahiers de vacances",  desc: "CE2 → 2nde · à imprimer",                 href: "/cahier-vacances",              color: "from-teal-600 to-emerald-800" },
               { icon: "🎓", label: "Éval blanche Pix IA",  desc: "Prépa éval nationale, collège & lycée",  href: "/eval-pix-ia",                  color: "from-indigo-600 to-violet-800" },
               { icon: "📄", label: "Fiches de cours IA",   desc: "16 fiches par domaine du référentiel Pix", href: "/fiches-cours/ia",            color: "from-violet-600 to-fuchsia-800" },
               { icon: "📕", label: "Ebook IA",             desc: "Le livre « Comprendre l'IA » (PDF/EPUB)", href: "/fiches-cours/ia/livre",        color: "from-blue-600 to-indigo-800"  },

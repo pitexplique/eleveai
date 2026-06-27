@@ -87,6 +87,7 @@ const ROUTES: RouteConfig[] = [
 
   // ── CAHIERS DE VACANCES (PDF imprimables) ──────────────────────────────────
   { path: "/cahier-vacances",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
+  { path: "/cahier-vacances/vers-le-ce2", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
   { path: "/cahier-vacances/vers-le-cm1", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
   { path: "/cahier-vacances/vers-le-cm2", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
   { path: "/cahier-vacances/vers-la-6e",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },

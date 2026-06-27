@@ -18,7 +18,7 @@ const NAV_MATHS = [
   { href: "/calcul-rapide",    icon: "⚡", label: "Calcul rapide",      desc: "5 min d'automatismes" },
   { href: "/dico/maths/6e",    icon: "📒", label: "Dico Maths 6e",      desc: "50 mots & gestes pour l'éval nationale" },
   { href: "/fiches-cours/maths", icon: "PDF", label: "Fiches de cours",    desc: "Cours maths courts à télécharger" },
-  { href: "/cahier-vacances", icon: "☀️", label: "Cahiers de vacances", desc: "CM1 → 2nde : 1 page/jour à imprimer" },
+  { href: "/cahier-vacances", icon: "☀️", label: "Cahiers de vacances", desc: "CE2 → 2nde : 1 page/jour à imprimer" },
   { href: "/concours-general", icon: "🏆", label: "Concours général",   desc: "Problèmes avancés" },
   { href: "/defis-du-jour",    icon: "🎯", label: "Défis du jour",      desc: "Grand Raid 2026" },
   { href: "/podcast-maths",    icon: "🎧", label: "Podcast maths",      desc: "Fractions, pourcentages, probas en audio" },
