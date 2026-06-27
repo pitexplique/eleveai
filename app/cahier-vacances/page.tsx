@@ -110,6 +110,16 @@ const cahiers = [
     chip: "bg-rose-500",
     bouton: "bg-rose-500 hover:bg-rose-400",
   },
+  {
+    slug: "vers-la-premiere",
+    niveau: "2ⁿᵈᵉ → 1ʳᵉ",
+    titre: "Vers la 1ʳᵉ",
+    theme: "La créativité pour changer le monde (la parabole de Mbappé !)",
+    emoji: "💡",
+    accent: "border-violet-200 bg-violet-50/60",
+    chip: "bg-violet-500",
+    bouton: "bg-violet-500 hover:bg-violet-400",
+  },
 ];
 
 export default function CahiersVacancesIndexPage() {
