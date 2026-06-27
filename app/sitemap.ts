@@ -90,6 +90,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/cahier-vacances/vers-le-cm2", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
   { path: "/cahier-vacances/vers-la-6e",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
   { path: "/cahier-vacances/vers-la-5e",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
+  { path: "/cahier-vacances/vers-la-4e",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
 
   { path: "/concours-logo",   priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/podcast-maths",   priority: 0.85, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
