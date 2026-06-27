@@ -90,6 +90,16 @@ const cahiers = [
     chip: "bg-fuchsia-500",
     bouton: "bg-fuchsia-500 hover:bg-fuchsia-400",
   },
+  {
+    slug: "vers-la-2nde",
+    niveau: "3ᵉ → 2ⁿᵈᵉ",
+    titre: "Vers la 2ⁿᵈᵉ",
+    theme: "Le grand zoom, de l'atome à l'univers",
+    emoji: "🔭",
+    accent: "border-rose-200 bg-rose-50/60",
+    chip: "bg-rose-500",
+    bouton: "bg-rose-500 hover:bg-rose-400",
+  },
 ];
 
 export default function CahiersVacancesIndexPage() {
