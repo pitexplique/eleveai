@@ -87,19 +87,18 @@ function anyActive(pathname: string, items: NavItem[]) {
   return items.some((item) => isActive(pathname, item.href));
 }
 
-// ─── Desktop Dropdown ─────────────────────────────────────────────────────────
+// ─── Desktop : un seul menu « Matières » (mega-menu en colonnes) ──────────────
 
-function NavDropdown({
-  label,
-  items,
-  active,
-  accent,
-}: {
-  label: string;
-  items: NavItem[];
-  active: boolean;
-  accent: string;
-}) {
+const MATIERES: { label: string; accent: string; items: NavItem[] }[] = [
+  { label: "Maths",    accent: "text-orange-300", items: NAV_MATHS },
+  { label: "Français", accent: "text-sky-300",    items: NAV_FRANCAIS },
+  { label: "Anglais",  accent: "text-blue-300",   items: NAV_ANGLAIS },
+  { label: "Espagnol", accent: "text-red-300",    items: NAV_ESPAGNOL },
+  { label: "IA",       accent: "text-cyan-300",   items: NAV_IA },
+  { label: "Économie", accent: "text-amber-300",  items: NAV_ECONOMIE },
+];
+
+function MatieresMenu({ pathname }: { pathname: string }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -128,6 +127,8 @@ function NavDropdown({
     };
   }, []);
 
+  const active = MATIERES.some((m) => anyActive(pathname, m.items));
+
   return (
     <div
       ref={ref}
@@ -145,7 +146,7 @@ function NavDropdown({
             : "text-white/90 hover:bg-white/15 hover:text-white",
         ].join(" ")}
       >
-        {label}
+        Matières
         <ChevronDown
           className={`h-3.5 w-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         />
@@ -153,35 +154,44 @@ function NavDropdown({
 
       {open && (
         <div
-          className="absolute left-0 top-full z-[80] mt-1 w-64 overflow-hidden rounded-2xl border border-white/10 bg-[#041B33] shadow-2xl"
+          className="absolute right-0 top-full z-[80] mt-1 max-h-[78vh] w-[min(92vw,720px)] overflow-y-auto overscroll-contain rounded-2xl border border-white/10 bg-[#041B33] p-4 shadow-2xl"
           onMouseEnter={cancelClose}
           onMouseLeave={scheduleClose}
         >
-          {items.map((item, i) => {
-            const cls = [
-              "flex items-start gap-3 px-4 py-3 transition hover:bg-white/10",
-              i === 0 ? "rounded-t-2xl" : "",
-              i === items.length - 1 ? "rounded-b-2xl" : "border-b border-white/5",
-            ].join(" ");
-            const inner = (
-              <>
-                <span className="mt-0.5 text-lg leading-none">{item.icon}</span>
-                <div>
-                  <p className="text-sm font-bold text-white">{item.label}</p>
-                  <p className="text-xs text-white/50">{item.desc}</p>
-                </div>
-              </>
-            );
-            return item.download ? (
-              <a key={item.href} href={item.href} download onClick={() => setOpen(false)} className={cls}>
-                {inner}
-              </a>
-            ) : (
-              <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className={cls}>
-                {inner}
-              </Link>
-            );
-          })}
+          <div className="grid grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-3">
+            {MATIERES.map((m) => (
+              <div key={m.label}>
+                <p className={`mb-1.5 text-[11px] font-black uppercase tracking-[0.18em] ${m.accent}`}>
+                  {m.label}
+                </p>
+                <ul className="space-y-0.5">
+                  {m.items.map((item) => {
+                    const cls =
+                      "flex items-center gap-2 rounded-lg px-2 py-1 text-sm text-white/80 transition hover:bg-white/10 hover:text-white";
+                    const inner = (
+                      <>
+                        <span className="text-base leading-none">{item.icon}</span>
+                        <span className="leading-tight">{item.label}</span>
+                      </>
+                    );
+                    return (
+                      <li key={item.href}>
+                        {item.download ? (
+                          <a href={item.href} download onClick={() => setOpen(false)} className={cls}>
+                            {inner}
+                          </a>
+                        ) : (
+                          <Link href={item.href} onClick={() => setOpen(false)} className={cls}>
+                            {inner}
+                          </Link>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
@@ -328,47 +338,7 @@ export default function Header() {
             🌋 Maths Réel · 974
           </Link>
 
-          <NavDropdown
-            label="Maths"
-            items={NAV_MATHS}
-            active={anyActive(pathname, NAV_MATHS)}
-            accent="text-orange-300"
-          />
-
-          <NavDropdown
-            label="Français"
-            items={NAV_FRANCAIS}
-            active={anyActive(pathname, NAV_FRANCAIS)}
-            accent="text-sky-300"
-          />
-
-          <NavDropdown
-            label="Anglais"
-            items={NAV_ANGLAIS}
-            active={anyActive(pathname, NAV_ANGLAIS)}
-            accent="text-blue-300"
-          />
-
-          <NavDropdown
-            label="Espagnol"
-            items={NAV_ESPAGNOL}
-            active={anyActive(pathname, NAV_ESPAGNOL)}
-            accent="text-red-300"
-          />
-
-          <NavDropdown
-            label="IA"
-            items={NAV_IA}
-            active={anyActive(pathname, NAV_IA)}
-            accent="text-cyan-300"
-          />
-
-          <NavDropdown
-            label="Économie"
-            items={NAV_ECONOMIE}
-            active={anyActive(pathname, NAV_ECONOMIE)}
-            accent="text-amber-300"
-          />
+          <MatieresMenu pathname={pathname} />
 
           {/* Auth */}
           {eleve ? (
