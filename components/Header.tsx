@@ -18,6 +18,7 @@ const NAV_MATHS = [
   { href: "/calcul-rapide",    icon: "⚡", label: "Calcul rapide",      desc: "5 min d'automatismes" },
   { href: "/dico/maths/6e",    icon: "📒", label: "Dico Maths 6e",      desc: "50 mots & gestes pour l'éval nationale" },
   { href: "/fiches-cours/maths", icon: "PDF", label: "Fiches de cours",    desc: "Cours maths courts à télécharger" },
+  { href: "/maths-974",        icon: "🌋", label: "Maths Réel · 974",       desc: "La Réunion en vidéo : à quoi servent les maths" },
   { href: "/concours-general", icon: "🏆", label: "Concours général",   desc: "Problèmes avancés" },
   { href: "/defis-du-jour",    icon: "🎯", label: "Défis du jour",      desc: "Grand Raid 2026" },
   { href: "/podcast-maths",    icon: "🎧", label: "Podcast maths",      desc: "Fractions, pourcentages, probas en audio" },
@@ -322,6 +323,18 @@ export default function Header() {
             ☀️ Cahiers de vacances
           </Link>
 
+          {/* Maths Réel · 974 — les vidéos terrain de La Réunion, en tête de barre */}
+          <Link
+            href="/maths-974"
+            className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition ${
+              isActive(pathname, "/maths-974")
+                ? "bg-rose-400 text-[#041B33] shadow-lg"
+                : "bg-rose-400/15 text-rose-200 hover:bg-rose-400/25 hover:text-rose-100"
+            }`}
+          >
+            🌋 Maths Réel · 974
+          </Link>
+
           <Link href="/accueil" className={linkBase(isActive(pathname, "/accueil"))}>
             Accueil
           </Link>
@@ -455,6 +468,14 @@ export default function Header() {
               className="flex items-center justify-center gap-2 rounded-2xl bg-amber-300/15 border border-amber-300/30 px-4 py-3 text-sm font-black text-amber-200"
             >
               ☀️ Cahiers de vacances · CE2 → Bac +1
+            </Link>
+
+            <Link
+              href="/maths-974"
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center justify-center gap-2 rounded-2xl bg-rose-400/15 border border-rose-300/30 px-4 py-3 text-sm font-black text-rose-200"
+            >
+              🌋 Maths Réel · 974 — La Réunion en vidéo
             </Link>
 
             <MobileSection title="Maths"    accent="text-orange-300" items={NAV_MATHS}    pathname={pathname} />

@@ -761,6 +761,22 @@ export default function AccueilPage({
       {/* ── ÉLÈVES À L'HONNEUR ───────────────────────────────────────────────── */}
       <ElevesALHonneur eleves={honneur} />
 
+      {/* ── CITATION ─────────────────────────────────────────────────────────── */}
+      <section className="px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <blockquote className="border-y border-amber-300/30 py-6">
+            <p className="text-lg font-semibold italic leading-8 text-white/90 sm:text-xl sm:leading-9">
+              «&nbsp;Le plus beau qu&apos;il nous soit donné de vivre, c&apos;est
+              le mystère&nbsp;: il est la source de tout art et de toute science
+              véritables.&nbsp;»
+            </p>
+            <footer className="mt-3 text-sm font-black uppercase tracking-[0.18em] text-amber-300">
+              — Albert Einstein
+            </footer>
+          </blockquote>
+        </div>
+      </section>
+
       {/* ── DERNIERS AVIS ────────────────────────────────────────────────────── */}
       <section className="px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8">
         <div className="mx-auto max-w-6xl">
