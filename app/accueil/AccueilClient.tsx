@@ -174,6 +174,7 @@ const CAHIERS_VACANCES = [
   { slug: "vers-la-2nde",      niveau: "3ᵉ → 2ⁿᵈᵉ",       titre: "Vers la 2ⁿᵈᵉ",      theme: "Le grand zoom, de l'atome à l'univers", emoji: "🔭", grad: "from-rose-400 to-pink-600"  },
   { slug: "vers-la-premiere",  niveau: "2ⁿᵈᵉ → 1ʳᵉ",      titre: "Vers la 1ʳᵉ",       theme: "La créativité pour changer le monde",   emoji: "💡", grad: "from-violet-500 to-fuchsia-600" },
   { slug: "vers-la-terminale", niveau: "1ʳᵉ → Terminale", titre: "Vers la Terminale", theme: "Les maths et l'IA pour changer le monde", emoji: "🤖", grad: "from-emerald-400 to-teal-700" },
+  { slug: "vers-le-bac-plus-1", niveau: "Terminale → Bac +1", titre: "Vers le Bac +1", theme: "Inventer les solutions de demain", emoji: "🛠️", grad: "from-cyan-400 to-indigo-600" },
 ];
 
 // ─── Main component ───────────────────────────────────────────────────────────
@@ -481,7 +482,7 @@ export default function AccueilPage({
               href="/cahier-vacances"
               className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-2 text-xs font-black text-amber-200 transition hover:bg-white/20 hover:text-amber-100"
             >
-              Voir les 10 cahiers →
+              Voir les 11 cahiers →
             </Link>
           </div>
 
@@ -722,7 +723,7 @@ export default function AccueilPage({
             className="flex gap-3 overflow-x-auto pb-3 pr-12 cursor-grab active:cursor-grabbing select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {[
-              { icon: "☀️", label: "Cahiers de vacances",  desc: "CE2 → Terminale · à imprimer",             href: "/cahier-vacances",              color: "from-teal-600 to-emerald-800" },
+              { icon: "☀️", label: "Cahiers de vacances",  desc: "CE2 → Bac +1 · à imprimer",                href: "/cahier-vacances",              color: "from-teal-600 to-emerald-800" },
               { icon: "🎓", label: "Éval blanche Pix IA",  desc: "Prépa éval nationale, collège & lycée",  href: "/eval-pix-ia",                  color: "from-indigo-600 to-violet-800" },
               { icon: "📄", label: "Fiches de cours IA",   desc: "16 fiches par domaine du référentiel Pix", href: "/fiches-cours/ia",            color: "from-violet-600 to-fuchsia-800" },
               { icon: "📕", label: "Ebook IA",             desc: "Le livre « Comprendre l'IA » (PDF/EPUB)", href: "/fiches-cours/ia/livre",        color: "from-blue-600 to-indigo-800"  },

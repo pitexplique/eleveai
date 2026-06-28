@@ -454,7 +454,7 @@ export default function Header() {
               onClick={() => setMobileOpen(false)}
               className="flex items-center justify-center gap-2 rounded-2xl bg-amber-300/15 border border-amber-300/30 px-4 py-3 text-sm font-black text-amber-200"
             >
-              ☀️ Cahiers de vacances · CE2 → Terminale
+              ☀️ Cahiers de vacances · CE2 → Bac +1
             </Link>
 
             <MobileSection title="Maths"    accent="text-orange-300" items={NAV_MATHS}    pathname={pathname} />
