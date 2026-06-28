@@ -275,13 +275,6 @@ export default function Header() {
     ? "bg-gradient-to-r from-blue-300 to-indigo-300"
     : "bg-gradient-to-r from-emerald-300 to-cyan-300";
 
-  const linkBase = (active: boolean) =>
-    `inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition ${
-      active
-        ? "bg-white text-[#041B33] shadow-lg"
-        : "text-white/90 hover:bg-white/15 hover:text-white"
-    }`;
-
   return (
     <header className="sticky top-0 z-50 border-b border-cyan-300/20 bg-gradient-to-r from-[#041B33]/95 via-[#062A4F]/95 to-[#073B63]/95 shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
@@ -333,10 +326,6 @@ export default function Header() {
             }`}
           >
             🌋 Maths Réel · 974
-          </Link>
-
-          <Link href="/accueil" className={linkBase(isActive(pathname, "/accueil"))}>
-            Accueil
           </Link>
 
           <NavDropdown

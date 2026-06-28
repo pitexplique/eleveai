@@ -197,6 +197,15 @@ export type AvisPublic = {
   quote: string;
 };
 
+export type Apercu974 = {
+  id: string;
+  lieu: string;
+  titre: string;
+  notion: string | null;
+  youtube_id: string | null;
+  image_url: string | null;
+};
+
 // Avis affichés si la base ne renvoie rien (chargement, erreur, env absente).
 const AVIS_FALLBACK: AvisPublic[] = [
   {
@@ -225,9 +234,11 @@ const AVIS_FALLBACK: AvisPublic[] = [
 export default function AccueilPage({
   avis,
   honneur,
+  apercu974,
 }: {
   avis?: AvisPublic[];
   honneur?: EleveALHonneur[];
+  apercu974?: Apercu974[];
 }) {
   const derniersAvis = avis && avis.length > 0 ? avis : AVIS_FALLBACK;
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -430,15 +441,28 @@ export default function AccueilPage({
           </p>
           <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
             Et bonne nouvelle : <span className="font-black text-amber-200">chaque semaine,
-            il y aura une nouveauté</span> à découvrir sur EleveAI ! La toute première,
-            c&apos;est l&apos;
+            une nouveauté</span> à découvrir sur EleveAI ! Cette semaine, je suis fier de
+            vous présenter{" "}
+            <Link
+              href="/maths-974"
+              className="font-black text-rose-200 underline decoration-rose-300/60 underline-offset-2 transition hover:text-rose-100"
+            >
+              Maths Réel · 974
+            </Link>{" "}
+            🌋 — une nouvelle rubrique où, en vrai, sur le terrain de La Réunion (le
+            volcan, le marché, le lagon, les sentiers de Mafate…), on découvre à quoi
+            servent les maths, en vidéo. Tu te demandais « ça sert à quoi&nbsp;?» : la
+            réponse est dehors, sous le soleil. ☀️
+          </p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+            Et il y a aussi l&apos;
             <Link
               href="/fiches-cours/ia/livre"
               className="font-black text-amber-200 underline decoration-amber-300/60 underline-offset-2 transition hover:text-amber-100"
             >
               ebook IA
             </Link>{" "}
-            📘 — pour apprendre à utiliser l&apos;intelligence artificielle intelligemment,
+            📘 pour apprendre à utiliser l&apos;intelligence artificielle intelligemment,
             et te préparer à l&apos;
             <Link
               href="/eval-pix-ia"
@@ -520,6 +544,88 @@ export default function AccueilPage({
                 </span>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── MATHS RÉEL · 974 — nouvelle rubrique, vidéos terrain de La Réunion ── */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#041B33] to-[#07231f] px-4 pb-2 pt-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="overflow-hidden rounded-3xl border border-rose-400/30 bg-gradient-to-br from-rose-500/15 via-orange-500/[0.08] to-emerald-500/[0.08] p-6 text-center sm:p-10">
+            <p className="inline-flex items-center gap-2 rounded-full bg-rose-400/20 px-4 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-rose-200">
+              🌋 Nouveau · La Réunion en vidéo
+            </p>
+            <h2 className="mt-3 text-3xl font-black text-white sm:text-4xl">
+              Maths Réel{" "}
+              <span className="bg-gradient-to-r from-rose-300 via-orange-300 to-amber-300 bg-clip-text text-transparent">
+                · 974
+              </span>
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-6 text-white/80 sm:text-base">
+              «&nbsp;À quoi ça sert, les maths&nbsp;?» La preuve par le terrain : le
+              volcan, le marché de Saint-Paul, le lagon, les sentiers de Mafate… De
+              vraies vidéos, et les maths qui se cachent derrière. À chaque étape, un
+              défi à relever.
+            </p>
+            <div className="mt-4 flex flex-wrap justify-center gap-2">
+              {["🌋 Volcan", "🛒 Marché", "🐠 Lagon", "🥾 Mafate", "🌾 Canne"].map((t) => (
+                <span key={t} className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-white/80">
+                  {t}
+                </span>
+              ))}
+            </div>
+
+            {/* Aperçu : quelques vraies cartes (vignette vidéo) */}
+            {apercu974 && apercu974.length > 0 && (
+              <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                {apercu974.map((u) => {
+                  const thumb = u.youtube_id
+                    ? `https://i.ytimg.com/vi/${u.youtube_id}/hqdefault.jpg`
+                    : u.image_url;
+                  return (
+                    <Link
+                      key={u.id}
+                      href="/maths-974"
+                      className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 text-left transition hover:-translate-y-1 hover:border-rose-400/40 hover:bg-white/10"
+                    >
+                      <div className="relative aspect-video w-full overflow-hidden bg-black/40">
+                        {thumb && (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={thumb}
+                            alt={u.lieu}
+                            loading="lazy"
+                            className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                          />
+                        )}
+                        <span className="absolute inset-0 flex items-center justify-center">
+                          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-black/55 text-base text-white backdrop-blur-sm transition group-hover:bg-rose-500/80">
+                            ▶
+                          </span>
+                        </span>
+                      </div>
+                      <div className="p-3">
+                        <p className="text-[11px] font-black uppercase tracking-wider text-rose-200">
+                          📍 {u.lieu}
+                        </p>
+                        <p className="mt-1 text-sm font-black leading-snug text-white">{u.titre}</p>
+                        {u.notion && (
+                          <p className="mt-1 line-clamp-1 text-xs font-semibold text-white/60">{u.notion}</p>
+                        )}
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+
+            <Link
+              href="/maths-974"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-rose-500 to-orange-500 px-6 py-3 text-sm font-black text-white shadow-lg transition hover:scale-105 hover:brightness-110"
+            >
+              🎬 Voir toutes les vidéos · Maths Réel 974
+              <span className="transition-transform">→</span>
+            </Link>
           </div>
         </div>
       </section>

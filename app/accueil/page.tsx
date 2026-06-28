@@ -1,7 +1,7 @@
 // app/accueil/page.tsx
 import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
-import AccueilClient, { type AvisPublic } from "./AccueilClient";
+import AccueilClient, { type AvisPublic, type Apercu974 } from "./AccueilClient";
 import { getElevesALHonneur, prenomCourt } from "@/lib/ameliorations/honneurServer";
 import { niveauPublic } from "@/lib/classe";
 
@@ -76,10 +76,33 @@ async function getDerniersAvis(): Promise<AvisPublic[]> {
   }
 }
 
+// Aperçu de « Maths Réel · 974 » : les 3 dernières cartes visibles.
+async function getApercuMaths974(): Promise<Apercu974[]> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return [];
+
+  try {
+    const supabase = createClient(url, key);
+    const { data, error } = await supabase
+      .from("maths_974")
+      .select("id, lieu, titre, notion, youtube_id, image_url")
+      .eq("masque", false)
+      .order("created_at", { ascending: false })
+      .limit(3);
+
+    if (error || !data) return [];
+    return data as Apercu974[];
+  } catch {
+    return [];
+  }
+}
+
 export default async function Page() {
-  const [avis, honneur] = await Promise.all([
+  const [avis, honneur, apercu974] = await Promise.all([
     getDerniersAvis(),
     getElevesALHonneur(),
+    getApercuMaths974(),
   ]);
-  return <AccueilClient avis={avis} honneur={honneur} />;
+  return <AccueilClient avis={avis} honneur={honneur} apercu974={apercu974} />;
 }
