@@ -376,46 +376,68 @@ export default function AccueilPage({
         {/* L'image ne doit pas contenir d'éléments qui ressemblent à des boutons :
             les élèves essayaient de cliquer sur les cartes dessinées (retours du
             11-12/06/2026). Les vraies actions sont sous l'image. */}
-        <div className="relative z-10 mx-auto max-w-5xl px-4 py-3 text-center md:w-[72%] xl:w-[56rem]">
+        {/* L'image hero d'abord. Le compte à rebours reste posé dessus. */}
+        <div className="relative mx-auto max-w-5xl md:w-[72%] xl:w-[56rem]">
+          <Image
+            src="/images/accueil-eleveai-reunion.webp"
+            alt="EleveAI – Comprendre, S'entraîner, Réussir – CP à Terminale"
+            width={1920}
+            height={1080}
+            priority
+            sizes="100vw"
+            className="block h-auto w-full border-x border-b border-white/10 shadow-2xl"
+          />
+          {/* Fondu bas vers le fond de page */}
+          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[#041B33]" />
+
+          {/* Brevet countdown si 3e/4e */}
+          {(eleveClasse === "3e" || eleveClasse === "4e") && (
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
+              <Link
+                href="/coach-brevet"
+                className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white shadow-lg transition hover:bg-emerald-400 hover:scale-105 whitespace-nowrap"
+              >
+                🎯 Sprint Brevet · J−{jours} → Commencer
+              </Link>
+            </div>
+          )}
+        </div>
+
+        {/* Message aux élèves + actions, SOUS l'image */}
+        <div className="relative z-10 mx-auto max-w-5xl px-4 pb-2 pt-6 text-center md:w-[72%] xl:w-[56rem]">
           {/* Prénom uniquement : aucun nom de famille n'est affiché. */}
           {prenomAffiche && (
             <p className="mx-auto mb-3 inline-block rounded-full border border-white/20 bg-black/40 px-4 py-1.5 text-xs font-black text-white backdrop-blur-sm sm:text-sm">
               Bonjour, {prenomAffiche} 👋
             </p>
           )}
-          <p className="text-2xl font-black tracking-wide text-white sm:text-3xl">
-            Comprendre, s&apos;entraîner, progresser
+          <p className="text-3xl font-black tracking-tight text-white sm:text-5xl">
+            Explore EleveAI <span className="text-amber-300">🧭</span>
           </p>
-          <p className="mx-auto mt-2 max-w-2xl text-sm font-semibold leading-6 text-white/75 sm:text-base">
-            EleveAI ne corrige pas juste : quand tu te trompes, il trouve ce qui
-            coince vraiment et t&apos;entraîne dessus. Indices, exercices courts
-            et un coach IA encadré pour apprendre — jamais à ta place.
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-6 text-white/80 sm:text-base">
+            Des coachs IA, des parcours, des défis, des cahiers de vacances et
+            <span className="font-black text-rose-200"> Maths Réel · 974</span> — La
+            Réunion en vidéo. Tout pour comprendre, t&apos;entraîner et progresser,
+            du CP à la Terminale. À toi de jouer&nbsp;: explore et trouve ta voie. ✨
           </p>
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="#explorer"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400 px-6 py-2.5 text-sm font-black text-[#041B33] shadow-lg transition hover:scale-105 hover:brightness-110"
+            >
+              🧭 Explorer
+            </a>
+            {!eleve && (
+              <Link
+                href="/auth/signin?mode=eleve"
+                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-2.5 text-sm font-black text-white shadow-lg transition hover:scale-105 hover:bg-white/20"
+              >
+                ✏️ M&apos;inscrire — gratuit
+              </Link>
+            )}
+          </div>
           <PresentationAudio />
         </div>
-        <Image
-          src="/images/accueil-eleveai-reunion.webp"
-          alt="EleveAI – Comprendre, S'entraîner, Réussir – CP à Terminale"
-          width={1920}
-          height={1080}
-          priority
-          sizes="100vw"
-          className="mx-auto block h-auto w-full max-w-5xl border-x border-b border-white/10 shadow-2xl md:w-[72%] xl:w-[56rem]"
-        />
-        {/* Fondu bas vers le fond de page */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[#041B33]" />
-
-        {/* Brevet countdown si 3e/4e */}
-        {(eleveClasse === "3e" || eleveClasse === "4e") && (
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
-            <Link
-              href="/coach-brevet"
-              className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white shadow-lg transition hover:bg-emerald-400 hover:scale-105 whitespace-nowrap"
-            >
-              🎯 Sprint Brevet · J−{jours} → Commencer
-            </Link>
-          </div>
-        )}
       </section>
 
       {/* ── MESSAGE DE VACANCES — mot de remerciement du professeur ──────────── */}
@@ -485,7 +507,7 @@ export default function AccueilPage({
       </section>
 
       {/* ── CAHIERS DE VACANCES — produit saisonnier, cartes colorées & fun ──── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#08294a] to-[#041B33] px-4 pb-2 pt-8 sm:px-6 lg:px-8">
+      <section id="explorer" className="relative scroll-mt-20 overflow-hidden bg-gradient-to-b from-[#08294a] to-[#041B33] px-4 pb-2 pt-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-6 text-center">
             <p className="inline-flex items-center gap-2 rounded-full bg-amber-300/20 px-4 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-amber-200">
