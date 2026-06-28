@@ -31,6 +31,8 @@ export const metadata: Metadata = {
 /* Catalogue des cahiers de vacances. Un niveau = une carte colorée.
    Les classes de dégradé sont en clair (literals) pour que Tailwind les génère. */
 const cahiers = [
+  { slug: "vers-le-cp",        niveau: "GS → CP",         titre: "Vers le CP",        theme: "Le tour de chez Ti Margo (sans savoir lire)", emoji: "🧸", grad: "from-pink-400 to-rose-500", duree: "15 jours · 3 semaines" },
+  { slug: "vers-le-ce1",       niveau: "CP → CE1",        titre: "Vers le CE1",       theme: "Le tour de l'île avec Ti Margo",        emoji: "🐠", grad: "from-rose-400 to-orange-500", duree: "15 jours · 3 semaines" },
   { slug: "vers-le-ce2",       niveau: "CE1 → CE2",       titre: "Vers le CE2",       theme: "On apprend en jouant",                  emoji: "🎲", grad: "from-orange-400 to-amber-500" },
   { slug: "vers-le-cm1",       niveau: "CE2 → CM1",       titre: "Vers le CM1",       theme: "Ti Margo explore son jardin créole",    emoji: "🌳", grad: "from-lime-400 to-green-600"  },
   { slug: "vers-le-cm2",       niveau: "CM1 → CM2",       titre: "Vers le CM2",       theme: "Ti Margo découvre son île",             emoji: "🏖️", grad: "from-teal-400 to-emerald-600" },
@@ -42,6 +44,7 @@ const cahiers = [
   { slug: "vers-la-premiere",  niveau: "2ⁿᵈᵉ → 1ʳᵉ",      titre: "Vers la 1ʳᵉ",       theme: "La créativité pour changer le monde",   emoji: "💡", grad: "from-violet-500 to-fuchsia-600" },
   { slug: "vers-la-terminale", niveau: "1ʳᵉ → Terminale", titre: "Vers la Terminale", theme: "Les maths et l'IA pour changer le monde", emoji: "🤖", grad: "from-emerald-400 to-teal-700" },
   { slug: "vers-le-bac-plus-1", niveau: "Terminale → Bac +1", titre: "Vers le Bac +1", theme: "Inventer les solutions de demain", emoji: "🛠️", grad: "from-cyan-400 to-indigo-600" },
+  { slug: "aider-mon-enfant",  niveau: "Pour les parents",   titre: "Aider mon enfant",  theme: "(Re)découvrir l'école d'aujourd'hui pour mieux l'accompagner", emoji: "👨‍👩‍👧", grad: "from-teal-500 to-slate-700", duree: "15 jours · 3 semaines" },
 ];
 
 export default function CahiersVacancesIndexPage() {
@@ -96,7 +99,7 @@ export default function CahiersVacancesIndexPage() {
               <h2 className="relative z-10 mt-4 text-2xl font-black drop-shadow-sm">{c.titre}</h2>
               <p className="relative z-10 mt-1 flex-1 text-sm font-semibold leading-snug text-white/90">{c.theme}</p>
               <p className="relative z-10 mt-3 text-[11px] font-black uppercase tracking-wider text-white/80">
-                30 jours · 6 semaines · corrigés inclus
+                {c.duree ?? "30 jours · 6 semaines"} · corrigés inclus
               </p>
               <span className="relative z-10 mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-black text-slate-900 shadow-md transition-all group-hover:gap-3">
                 <Download className="h-4 w-4" />

@@ -87,6 +87,8 @@ const ROUTES: RouteConfig[] = [
 
   // ── CAHIERS DE VACANCES (PDF imprimables) ──────────────────────────────────
   { path: "/cahier-vacances",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
+  { path: "/cahier-vacances/vers-le-cp",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
+  { path: "/cahier-vacances/vers-le-ce1", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
   { path: "/cahier-vacances/vers-le-ce2", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
   { path: "/cahier-vacances/vers-le-cm1", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
   { path: "/cahier-vacances/vers-le-cm2", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
@@ -98,6 +100,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/cahier-vacances/vers-la-premiere", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
   { path: "/cahier-vacances/vers-la-terminale", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
   { path: "/cahier-vacances/vers-le-bac-plus-1", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
+  { path: "/cahier-vacances/aider-mon-enfant", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
 
   { path: "/concours-logo",   priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/podcast-maths",   priority: 0.85, changeFrequency: "daily",  lastMod: LASTMOD_CORE },

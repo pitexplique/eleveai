@@ -217,6 +217,21 @@ export default function CahierVacances({
             </p>
             <p className="mt-2 text-base font-bold text-slate-500">{config.sousTitre}</p>
 
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-xs font-black text-rose-700">
+                🌺 100&nbsp;% Réunion
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-black text-emerald-700">
+                ✅ Conforme aux programmes
+              </span>
+            </div>
+            <p className="mt-2 text-sm font-bold italic text-slate-500">
+              Conçu à La Réunion par un professeur, pour ses élèves.
+            </p>
+            <p className="mt-1 text-base font-black text-teal-600">
+              « Nou la fé&nbsp;! » 🌺
+            </p>
+
             <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-teal-500 px-6 py-3 text-lg font-black text-white shadow-lg shadow-teal-500/30">
               <Sparkles className="h-5 w-5" />
               {config.mission}
