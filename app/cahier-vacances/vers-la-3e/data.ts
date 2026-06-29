@@ -10,7 +10,7 @@
 /*  Moteur d'affichage commun : components/cahier/CahierVacances.tsx.          */
 /* -------------------------------------------------------------------------- */
 
-import type { Etape, Jour } from "@/components/cahier/types";
+import type { Etape, Jour, MondeDemain } from "@/components/cahier/types";
 
 /** Les 6 escales du voyage spatial (une par semaine). */
 export const parcours: Etape[] = [
@@ -1454,4 +1454,53 @@ export const leSaviasTu: Record<number, { portee: "local" | "monde"; texte: stri
   28: { portee: "local", texte: "On peut faire de l'astronomie sans fusée : à La Réunion, un simple télescope révèle déjà les cratères de la Lune et les anneaux de Saturne." },
   29: { portee: "local", texte: "Plusieurs Réunionnais travaillent dans les sciences et l'espace : on peut rêver grand, même depuis une petite île." },
   30: { portee: "monde", texte: "En 3ᵉ, tu passeras le brevet et la certification Pix : ce cahier t'a entraîné pour les deux. À toi de jouer, et bon décollage !" },
+};
+
+/* « Comprendre le monde » — un thème par jour (Histoire / Écologie / Futur),
+   calé sur l'arc du voyage spatial : histoire de la conquête de l'espace et
+   de l'astronomie, écologie vue depuis l'orbite (Terre fragile, climat, déchets
+   spatiaux), exploration future (Mars, télescopes, IA), avec des ancrages à
+   La Réunion (observatoire du Maïdo, ciel pur du Sud). Niveau 4e → 3e. */
+export const mondeDemain: Record<number, MondeDemain> = {
+  // Semaine 1 — la Lune
+  1: { theme: "histoire", titre: "La course à la Lune", texte: "En 1969, Neil Armstrong est le premier humain à marcher sur la Lune, au terme d'une compétition technologique entre deux grandes puissances.", question: "Pourquoi un tel exploit a-t-il marqué le monde entier ?" },
+  2: { theme: "ecologie", titre: "La Terre vue de là-haut", texte: "Depuis la Lune, les astronautes ont photographié la Terre : une petite bille bleue et fragile, seule oasis de vie dans le noir.", question: "Que ressent-on, à ton avis, en voyant la Terre entière d'un seul coup d'œil ?" },
+  3: { theme: "futur", titre: "Retourner habiter la Lune", texte: "Des agences spatiales préparent des bases lunaires permanentes, qui serviraient un jour de tremplin vers des voyages plus lointains.", question: "Quel serait le plus grand défi pour vivre longtemps sur la Lune ?" },
+  4: { theme: "histoire", titre: "Lunettes et télescopes", texte: "Au XVIIᵉ siècle, Galilée pointe une lunette vers le ciel et découvre les cratères de la Lune et les lunes de Jupiter.", question: "En quoi un simple instrument peut-il changer notre vision du monde ?" },
+  5: { theme: "ecologie", titre: "Le ciel pur du Maïdo", texte: "À La Réunion, l'observatoire du Maïdo profite d'un air pur et sec ; la pollution lumineuse des villes, elle, masque les étoiles.", question: "Comment l'éclairage des villes gêne-t-il l'observation du ciel ?" },
+
+  // Semaine 2 — Mars
+  6: { theme: "histoire", titre: "Des robots sur Mars", texte: "Depuis 1997, des robots roulants explorent Mars, photographient ses déserts et analysent ses roches à des millions de km de nous.", question: "Pourquoi envoyer d'abord des robots plutôt que des humains ?" },
+  7: { theme: "ecologie", titre: "Mars, un avertissement", texte: "Mars a peut-être eu de l'eau et une atmosphère, aujourd'hui disparues : un rappel que le climat d'une planète peut basculer.", question: "Que nous apprend Mars sur la fragilité de notre propre atmosphère ?" },
+  8: { theme: "futur", titre: "Marcher sur Mars", texte: "Des projets visent à envoyer des humains sur Mars : un voyage de plusieurs mois, dans le froid et sans air respirable.", question: "Faut-il explorer Mars ou d'abord prendre soin de la Terre ? Qu'en penses-tu ?" },
+  9: { theme: "histoire", titre: "Cartographier le ciel", texte: "Depuis l'Antiquité, les humains dressent des cartes du ciel et nomment les étoiles pour se repérer et voyager.", question: "Comment les marins se servaient-ils des étoiles avant le GPS ?" },
+  10: { theme: "ecologie", titre: "Surveiller la Terre depuis l'espace", texte: "Des satellites mesurent chaque jour la fonte des glaces, les forêts et la pollution : l'espace aide à soigner la Terre.", question: "Quel phénomène serait impossible à observer sans satellites ?" },
+
+  // Semaine 3 — Jupiter
+  11: { theme: "futur", titre: "À la recherche de la vie", texte: "Sous la glace d'Europe, une lune de Jupiter, se cache peut-être un océan ; des sondes futures iront y chercher des traces de vie.", question: "Que changerait, pour l'humanité, la découverte d'une vie ailleurs ?" },
+  12: { theme: "histoire", titre: "Les voyageuses Voyager", texte: "Lancées en 1977, les sondes Voyager ont survolé Jupiter et Saturne, puis quitté le système solaire : nos messagères vers les étoiles.", question: "Pourquoi avoir embarqué des sons et des images de la Terre à bord ?" },
+  13: { theme: "ecologie", titre: "Un bouclier nommé Jupiter", texte: "Par son énorme gravité, Jupiter dévie ou capture des comètes qui, sinon, pourraient frapper la Terre.", question: "En quoi une planète lointaine peut-elle nous protéger ?" },
+  14: { theme: "futur", titre: "Des sondes plus intelligentes", texte: "Si loin de la Terre, les sondes doivent décider seules : l'intelligence artificielle les aide à réagir sans attendre nos ordres.", question: "Pourquoi un robot spatial ne peut-il pas tout demander à la Terre en direct ?" },
+  15: { theme: "histoire", titre: "Newton et la gravitation", texte: "Au XVIIᵉ siècle, Newton comprend que la force qui fait tomber une pomme retient aussi les planètes autour du Soleil.", question: "Pourquoi est-ce extraordinaire que la même loi vaille sur Terre et dans le ciel ?" },
+
+  // Semaine 4 — Saturne
+  16: { theme: "ecologie", titre: "Les anneaux, fragiles trésors", texte: "Les anneaux de Saturne, faits de glace, ne sont pas éternels : ils s'effritent lentement et finiront par disparaître.", question: "Pourquoi même les merveilles du cosmos ne durent-elles pas toujours ?" },
+  17: { theme: "futur", titre: "Voler sur Titan", texte: "Une mission prévoit un drone volant pour explorer Titan, la grande lune de Saturne couverte de lacs… de méthane liquide.", question: "Pourquoi un drone est-il utile sur un monde si différent du nôtre ?" },
+  18: { theme: "histoire", titre: "Cassini, l'exploratrice", texte: "La sonde Cassini a étudié Saturne pendant 13 ans, avant de plonger volontairement dans la planète pour ne pas polluer ses lunes.", question: "Pourquoi protéger d'éventuelles formes de vie sur d'autres mondes ?" },
+  19: { theme: "ecologie", titre: "Étudier d'autres climats", texte: "Comparer les tempêtes de Saturne aux nôtres aide les scientifiques à mieux comprendre le climat de la Terre.", question: "Comment l'étude d'autres planètes peut-elle nous être utile ici ?" },
+  20: { theme: "futur", titre: "Les déchets en orbite", texte: "Des milliers de débris de fusées et de satellites tournent autour de la Terre à grande vitesse, menaçant les engins spatiaux.", question: "Comment pourrait-on « nettoyer » l'espace autour de notre planète ?" },
+
+  // Semaine 5 — les confins
+  21: { theme: "histoire", titre: "Découvrir une planète par le calcul", texte: "Neptune fut trouvée en 1846 « au bout d'un crayon » : des mathématiciens avaient prédit sa position avant de la voir.", question: "Comment des calculs peuvent-ils révéler un astre invisible ?" },
+  22: { theme: "ecologie", titre: "Les messagères glacées", texte: "Les comètes, venues des confins, ont peut-être apporté de l'eau sur la jeune Terre : un peu de nos océans vient du froid lointain.", question: "Qu'est-ce que cela change de savoir d'où vient notre eau ?" },
+  23: { theme: "futur", titre: "Les télescopes du futur", texte: "Des télescopes géants, sur Terre comme dans l'espace, scrutent les confins pour observer les premières lumières de l'univers.", question: "Que voudrais-tu que les astronomes découvrent en premier ?" },
+  24: { theme: "histoire", titre: "Mesurer l'inaccessible", texte: "Grâce à la trigonométrie, les astronomes calculent depuis des siècles la distance d'astres qu'on ne pourra jamais toucher.", question: "Comment mesurer une distance qu'on ne peut pas parcourir ?" },
+  25: { theme: "ecologie", titre: "Sommes-nous seuls ?", texte: "Aux confins, le Soleil n'est qu'un point parmi des milliards : cette immensité rend notre petite Terre encore plus précieuse.", question: "Te sens-tu plus petit ou plus chanceux face à un univers si grand ?" },
+
+  // Semaine 6 — les étoiles, puis retour sur Terre
+  26: { theme: "histoire", titre: "Voir le passé de l'univers", texte: "La lumière des étoiles voyage des millions d'années : en les observant, les astronomes regardent littéralement dans le passé.", question: "Comment peut-on « voir » ce qui s'est passé il y a si longtemps ?" },
+  27: { theme: "futur", titre: "L'IA explore le cosmos", texte: "Face à des milliards d'images d'étoiles, l'intelligence artificielle aide à repérer galaxies et planètes lointaines plus vite que l'œil humain.", question: "Quelle tâche, dans la science, l'IA fait-elle mieux qu'un humain ?" },
+  28: { theme: "ecologie", titre: "La Terre, notre seul vaisseau", texte: "Aucune autre planète connue n'est vraiment habitable : la Terre reste, pour longtemps, le seul refuge de l'humanité.", question: "Pourquoi dit-on que la Terre est notre « vaisseau spatial » ?" },
+  29: { theme: "histoire", titre: "Rêver grand depuis une île", texte: "Des Réunionnais travaillent dans les sciences et l'espace : on peut viser les étoiles, même en partant d'une petite île.", question: "Qu'est-ce qui pourrait t'aider à réaliser un grand rêve ?" },
+  30: { theme: "futur", titre: "Les explorateurs de demain", texte: "La 3ᵉ et le brevet sont ton décollage : les sciences que tu apprends prépareront peut-être les voyages spatiaux de ta génération.", question: "Si tu pouvais explorer un endroit de l'univers, lequel choisirais-tu ?" },
 };

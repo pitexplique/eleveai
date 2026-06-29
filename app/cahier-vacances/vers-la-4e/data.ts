@@ -10,7 +10,7 @@
 /*  Moteur d'affichage commun : components/cahier/CahierVacances.tsx.          */
 /* -------------------------------------------------------------------------- */
 
-import type { Etape, Jour } from "@/components/cahier/types";
+import type { Etape, Jour, MondeDemain } from "@/components/cahier/types";
 
 /** Les 6 grandes escales du tour du monde (une par semaine). */
 export const parcours: Etape[] = [
@@ -1456,4 +1456,50 @@ export const leSaviasTu: Record<number, { portee: "local" | "monde"; texte: stri
   28: { portee: "monde", texte: "En faisant le tour de la Terre vers l'est, on gagne une journée entière : c'est tout le secret de la fin du roman de Jules Verne !" },
   29: { portee: "local", texte: "Depuis La Réunion, imaginer le tour du monde est facile : l'île est déjà au croisement de l'Afrique, de l'Asie et de l'Europe." },
   30: { portee: "monde", texte: "En 4ᵉ, en histoire et en géographie, tu étudieras justement le XIXe siècle, les révolutions et la mondialisation : ce cahier t'y prépare !" },
+};
+
+/* « Comprendre le monde » — un thème par jour (Histoire / Écologie / Futur),
+   calé sur le tour du monde (Angleterre → Égypte → Inde → Chine → Japon → Amérique). */
+export const mondeDemain: Record<number, MondeDemain> = {
+  // Semaine 1 — Londres, l'Angleterre, le grand départ
+  1: { theme: "histoire", titre: "L'atelier du monde", texte: "Au XIXe siècle, l'Angleterre lance la révolution industrielle : usines, charbon et machines à vapeur transforment d'abord ce pays, puis la planète entière.", question: "Qu'est-ce qui change dans la vie des gens quand les usines remplacent les ateliers ?" },
+  2: { theme: "ecologie", titre: "Le charbon et le ciel noir", texte: "Brûler du charbon pour faire avancer trains et usines a rendu l'air des villes anglaises si sale qu'on l'appelait le « brouillard noir ».", question: "Pourquoi un air pollué est-il dangereux pour la santé ?" },
+  3: { theme: "futur", titre: "Le train du futur", texte: "La vapeur a fait naître le chemin de fer ; aujourd'hui, des trains électriques sans conducteur filent à plus de 300 km/h sans brûler de charbon.", question: "Quel avantage un train électrique a-t-il sur un train à vapeur ?" },
+  4: { theme: "histoire", titre: "Une langue qui voyage", texte: "Grâce à son immense empire et à son commerce, l'Angleterre a répandu l'anglais sur tous les continents : c'est devenu la langue du voyage.", question: "À ton avis, pourquoi est-il utile de parler plusieurs langues aujourd'hui ?" },
+  5: { theme: "ecologie", titre: "Voyager pollue", texte: "Le bateau de Ti Margo brûle du charbon ; aujourd'hui encore, avions et navires rejettent beaucoup de gaz qui réchauffent la planète.", question: "Comment pourrait-on voyager loin en polluant moins ?" },
+
+  // Semaine 2 — l'Égypte et le canal de Suez
+  6: { theme: "histoire", titre: "Une civilisation millénaire", texte: "Les pyramides d'Égypte ont plus de 4 500 ans : bien avant l'Europe, ce peuple savait déjà compter, mesurer le ciel et bâtir des géants de pierre.", question: "Que faut-il maîtriser pour construire un monument aussi parfait ?" },
+  7: { theme: "futur", titre: "Le désert et le soleil", texte: "Dans les déserts ensoleillés d'Égypte, on installe d'immenses champs de panneaux solaires pour produire une électricité propre et abondante.", question: "Pourquoi le désert est-il un endroit idéal pour capter l'énergie du soleil ?" },
+  8: { theme: "ecologie", titre: "Le Nil, fil de vie", texte: "Presque tous les Égyptiens vivent le long du Nil : sans ce fleuve, le pays ne serait qu'un désert sans eau ni récoltes.", question: "Pourquoi l'eau douce décide-t-elle de l'endroit où vivent les hommes ?" },
+  9: { theme: "histoire", titre: "Couper à travers les terres", texte: "Ouvert en 1869, le canal de Suez relie deux mers et raccourcit le voyage de l'Europe vers l'Asie de plusieurs milliers de kilomètres.", question: "En quoi un raccourci comme Suez rapproche-t-il les peuples du monde ?" },
+  10: { theme: "futur", titre: "Le commerce mondial", texte: "Aujourd'hui, d'énormes porte-conteneurs traversent Suez chaque jour : la plupart des objets de ta maison ont voyagé par mer avant d'arriver chez toi.", question: "Cite un objet chez toi qui a peut-être traversé un océan." },
+
+  // Semaine 3 — l'Inde
+  11: { theme: "histoire", titre: "Le berceau du zéro", texte: "Nos chiffres (1, 2, 3…) et l'idée géniale du zéro sont nés en Inde il y a très longtemps, avant de gagner le monde entier.", question: "Imagine les calculs sans le zéro : serait-ce plus difficile ?" },
+  12: { theme: "ecologie", titre: "Un pays très peuplé", texte: "L'Inde est le pays le plus peuplé du monde, avec plus d'un milliard et demi d'habitants : nourrir tant de gens sans abîmer la nature est un grand défi.", question: "Pourquoi est-il plus dur de protéger la nature quand on est très nombreux ?" },
+  13: { theme: "futur", titre: "Cultiver malin", texte: "Pour nourrir tout le monde, des agriculteurs indiens utilisent des capteurs et des applications qui indiquent quand arroser, juste ce qu'il faut.", question: "Comment la technologie peut-elle aider à gaspiller moins d'eau ?" },
+  14: { theme: "histoire", titre: "La route des épices", texte: "Pendant des siècles, l'Europe a rêvé des épices d'Inde ; leur commerce a poussé les marins à explorer le monde et à dresser les premières cartes.", question: "Pourquoi le désir d'un produit lointain peut-il pousser à explorer ?" },
+  15: { theme: "ecologie", titre: "La mousson", texte: "Chaque été, des pluies géantes, la mousson, arrosent l'Inde : trop faibles, c'est la sécheresse ; trop fortes, ce sont les inondations.", question: "Pourquoi un climat déréglé est-il dangereux pour les récoltes ?" },
+
+  // Semaine 4 — la Chine, Hong Kong
+  16: { theme: "histoire", titre: "Les grandes inventions", texte: "La boussole, le papier, la poudre et l'imprimerie ont d'abord été inventés en Chine, bien avant l'Europe.", question: "Laquelle de ces inventions a, selon toi, le plus changé le monde ?" },
+  17: { theme: "futur", titre: "L'usine du monde", texte: "Une grande partie des objets fabriqués sur Terre sortent d'usines chinoises, désormais remplies de robots qui assemblent sans relâche.", question: "Quels avantages et quels risques vois-tu à faire travailler des robots ?" },
+  18: { theme: "ecologie", titre: "Des villes géantes", texte: "Hong Kong et les villes chinoises comptent des millions d'habitants ; les empiler dans des tours laisse plus de place à la nature autour.", question: "Vaut-il mieux des villes hautes et serrées, ou étalées ? Pourquoi ?" },
+  19: { theme: "histoire", titre: "La plus longue muraille", texte: "La Grande Muraille de Chine s'étire sur plus de 20 000 km : c'est la plus longue construction jamais réalisée par l'homme.", question: "Pourquoi un peuple bâtit-il un mur aussi immense ?" },
+  20: { theme: "futur", titre: "Respirer un air pur", texte: "Longtemps étouffée par la pollution de ses usines, la Chine installe aujourd'hui d'énormes parcs solaires et éoliens pour assainir son ciel.", question: "Que peut faire un pays pour rendre l'air de ses villes plus pur ?" },
+
+  // Semaine 5 — le Japon, le Pacifique
+  21: { theme: "histoire", titre: "L'île longtemps fermée", texte: "Pendant plus de deux siècles, le Japon a vécu replié sur lui-même ; en s'ouvrant au XIXe siècle, il s'est modernisé à une vitesse étonnante.", question: "Qu'est-ce qu'un pays gagne, et perd, en s'ouvrant au reste du monde ?" },
+  22: { theme: "futur", titre: "Le pays des robots", texte: "Le Japon est un champion de la robotique : des robots y aident déjà à soigner les malades et à accompagner les personnes âgées.", question: "Aimerais-tu qu'un robot t'aide au quotidien ? Pour quoi faire ?" },
+  23: { theme: "ecologie", titre: "Vivre avec les séismes", texte: "Posé sur des volcans, le Japon tremble souvent ; on y construit des immeubles spéciaux capables de plier sans s'effondrer.", question: "Comment les humains s'adaptent-ils à une nature dangereuse ?" },
+  24: { theme: "histoire", titre: "Le grand océan", texte: "Le Pacifique est si vaste qu'il couvre près d'un tiers de la planète ; le traverser en bateau prenait autrefois des semaines.", question: "Qu'est-ce qui a rendu les longues traversées plus rapides au fil du temps ?" },
+  25: { theme: "ecologie", titre: "L'océan en danger", texte: "Dans le Pacifique flotte un immense « continent » de plastiques rejetés par les humains, mortel pour les poissons et les oiseaux.", question: "D'où vient ce plastique, et comment éviter qu'il finisse à la mer ?" },
+
+  // Semaine 6 — l'Amérique, retour à Londres
+  26: { theme: "histoire", titre: "Le rail d'un océan à l'autre", texte: "Au XIXe siècle, un chemin de fer a traversé tous les États-Unis : on pouvait enfin relier l'Atlantique au Pacifique en quelques jours.", question: "En quoi relier deux côtes d'un pays change-t-il la vie de ses habitants ?" },
+  27: { theme: "futur", titre: "La ville qui monte vers le ciel", texte: "À New York, les premiers gratte-ciel ont permis d'entasser des bureaux sur peu de terrain ; demain, ils produiront leur propre énergie verte.", question: "Comment un grand immeuble pourrait-il fabriquer sa propre électricité ?" },
+  28: { theme: "ecologie", titre: "Une planète, un climat", texte: "Le réchauffement de la Terre ne connaît pas de frontières : ce qu'un pays rejette dans l'air change le climat de tous les autres.", question: "Pourquoi protéger le climat exige-t-il que les pays s'entendent ?" },
+  29: { theme: "histoire", titre: "Le monde s'est rétréci", texte: "Faire le tour de la Terre en 80 jours semblait fou en 1872 ; aujourd'hui, un avion le boucle en deux jours : le monde n'a jamais paru aussi petit.", question: "Qu'est-ce qui a tant raccourci les distances en un siècle et demi ?" },
+  30: { theme: "futur", titre: "Le monde de demain, c'est toi", texte: "En 4ᵉ, en histoire et en géographie, tu vas comprendre cette mondialisation pour, plus tard, aider à inventer un monde plus juste et plus propre.", question: "Quel défi du monde aimerais-tu aider à résoudre quand tu seras grand(e) ?" },
 };

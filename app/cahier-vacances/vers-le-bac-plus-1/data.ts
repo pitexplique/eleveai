@@ -11,7 +11,7 @@
 /*  Moteur d'affichage commun : components/cahier/CahierVacances.tsx.          */
 /* -------------------------------------------------------------------------- */
 
-import type { Etape, Jour } from "@/components/cahier/types";
+import type { Etape, Jour, MondeDemain } from "@/components/cahier/types";
 
 /** Les 6 étapes pour inventer les solutions de demain (une par semaine). */
 export const parcours: Etape[] = [
@@ -1450,4 +1450,51 @@ export const leSaviasTu: Record<number, { portee: "local" | "monde"; texte: stri
   28: { portee: "monde", texte: "Choisir les bons indicateurs (KPI) évite de courir après des chiffres trompeurs (les « vanity metrics »)." },
   29: { portee: "monde", texte: "Les 17 Objectifs de Développement Durable de l'ONU listent les grands défis à résoudre d'ici 2030." },
   30: { portee: "monde", texte: "« La meilleure façon de prédire l'avenir, c'est de l'inventer » (Alan Kay). À toi de jouer !" },
+};
+
+/* « Comprendre le monde » — un thème par jour (Histoire / Écologie / Futur),
+   calé sur l'arc « inventer les solutions de demain » : histoire d'innovateurs,
+   grands défis mondiaux et technologies/métiers/modèles de demain. */
+export const mondeDemain: Record<number, MondeDemain> = {
+  // Semaine 1 — Bien poser le problème
+  1: { theme: "histoire", titre: "Poser la bonne question", texte: "En 1854, à Londres, le médecin John Snow a cartographié les cas de choléra pour remonter à une pompe à eau contaminée : bien poser le problème a sauvé des vies.", question: "Face à un fléau, pourquoi mesurer d'abord vaut-il mieux qu'agir au hasard ?" },
+  2: { theme: "ecologie", titre: "Le vrai besoin derrière l'objet", texte: "Les gens ne veulent pas du pétrole, mais de la mobilité et du chaud : reformuler un défi par le besoin réel ouvre des solutions plus sobres et plus durables.", question: "Quel besoin profond se cache derrière « j'ai besoin d'une voiture » ?" },
+  3: { theme: "futur", titre: "Les métiers qui n'existent pas encore", texte: "La moitié des métiers de 2040 restent à inventer : éthicien de l'IA, ingénieur en énergies marines, concepteur de villes résilientes.", question: "Quel métier utile rêverais-tu de créer si rien n'existait déjà ?" },
+  4: { theme: "histoire", titre: "L'erreur qui devient invention", texte: "La pénicilline, le four à micro-ondes, le Post-it : tous nés d'un « accident » qu'un esprit curieux a su transformer en solution.", question: "Pourquoi un innovateur regarde-t-il un imprévu comme une chance plutôt qu'un échec ?" },
+  5: { theme: "ecologie", titre: "Voir le système entier", texte: "Recycler un plastique consomme parfois plus d'énergie qu'on en économise : seul un regard sur tout le cycle de vie évite les fausses bonnes idées.", question: "Avant de lancer une solution « verte », quelles étapes faut-il chiffrer ?" },
+
+  // Semaine 2 — Modéliser et comprendre
+  6: { theme: "histoire", titre: "Modéliser pour prévoir", texte: "En modélisant les orbites, les astronomes ont prédit l'existence de Neptune avant de l'observer : un bon modèle voit l'invisible.", question: "Qu'est-ce qu'un modèle te permet de faire qu'une simple observation ne permet pas ?" },
+  7: { theme: "ecologie", titre: "Le climat en équations", texte: "Les modèles climatiques traduisent l'atmosphère en équations pour anticiper +1,5 °C ou +3 °C : chiffrer le risque, c'est pouvoir le réduire.", question: "Pourquoi une décision politique a-t-elle besoin d'un modèle, et pas seulement d'une opinion ?" },
+  8: { theme: "futur", titre: "Les jumeaux numériques", texte: "On crée des copies virtuelles d'usines, de réseaux d'eau ou de villes pour tester des solutions sans risque avant de les construire pour de vrai.", question: "Quel système autour de toi gagnerait à être simulé avant d'être modifié ?" },
+  9: { theme: "histoire", titre: "Chiffrer l'incertitude", texte: "Né de l'assurance maritime, le calcul des probabilités a appris aux entrepreneurs à parier intelligemment plutôt qu'à craindre l'inconnu.", question: "Comment décider quand on ne peut pas tout prévoir ?" },
+  10: { theme: "ecologie", titre: "Les données qui pilotent", texte: "Des capteurs mesurent en continu l'eau, l'énergie ou la pollution d'un territoire ; bien lues, ces données orientent l'action là où elle compte le plus.", question: "Quelle donnée manquerait à La Réunion pour mieux gérer son eau ?" },
+
+  // Semaine 3 — Imaginer des solutions
+  11: { theme: "futur", titre: "L'IA qui aide à créer", texte: "L'IA générative propose des pistes, des designs, des molécules ; à l'innovateur de trier, vérifier et choisir — la machine élargit l'imagination, elle ne décide pas.", question: "Où s'arrête l'outil et où commence ta responsabilité de créateur ?" },
+  12: { theme: "histoire", titre: "Le biomimétisme", texte: "Le train le plus rapide du Japon a copié le bec du martin-pêcheur pour percer l'air sans bruit : la nature, ingénieure depuis des millions d'années, inspire nos solutions.", question: "Quel problème humain un animal ou une plante a-t-il déjà « résolu » ?" },
+  13: { theme: "ecologie", titre: "L'économie circulaire", texte: "Plutôt que jeter, on conçoit pour réparer, réemployer, recycler : le déchet d'un acteur devient la ressource d'un autre.", question: "Comment transformer un déchet de ton quotidien en ressource ?" },
+  14: { theme: "futur", titre: "Inverser le problème", texte: "Au lieu de dépolluer l'air, et si on captait le CO₂ pour en faire du carburant ou du béton ? Retourner la contrainte est souvent la voie de l'innovation de rupture.", question: "Quelle contrainte qui te bloque pourrais-tu transformer en atout ?" },
+  15: { theme: "histoire", titre: "Croiser les disciplines", texte: "Steve Jobs reliait calligraphie et informatique, Léonard de Vinci art et anatomie : les ruptures naissent au carrefour de domaines éloignés.", question: "Quels deux mondes qui te passionnent pourrais-tu relier ?" },
+
+  // Semaine 4 — Prototyper et tester
+  16: { theme: "futur", titre: "Échouer vite, échouer pas cher", texte: "SpaceX a fait exploser plusieurs fusées avant de réussir : prototyper, c'est tester tôt pour apprendre vite, quand l'erreur coûte encore peu.", question: "Pourquoi vaut-il mieux rater une maquette qu'un produit déjà lancé à grande échelle ?" },
+  17: { theme: "histoire", titre: "5 126 prototypes", texte: "James Dyson a construit 5 126 aspirateurs ratés avant le bon : chaque échec était une donnée de plus vers la solution.", question: "Qu'est-ce qui distingue celui qui abandonne de celui qui persévère ?" },
+  18: { theme: "ecologie", titre: "Tester en conditions réelles", texte: "Une éolienne, un potager urbain, un filtre à eau : rien ne remplace l'essai sur le terrain, là où le vent, le sol et les usagers décident vraiment.", question: "Pourquoi un prototype qui marche en labo peut-il échouer dehors ?" },
+  19: { theme: "futur", titre: "Le MVP, version minimale", texte: "Les plus grandes start-up ont commencé par une version minuscule mais réelle, lancée pour mesurer l'intérêt avant d'investir gros.", question: "Quelle est la plus petite version utile de ton idée que tu pourrais tester demain ?" },
+  20: { theme: "histoire", titre: "Passer à l'échelle", texte: "Une solution qui marche pour dix personnes doit être repensée pour en servir un million : c'est le défi qu'ont relevé l'imprimerie, l'électricité, puis Internet.", question: "Qu'est-ce qui casse en premier quand une bonne idée grandit trop vite ?" },
+
+  // Semaine 5 — Les grands défis du monde
+  21: { theme: "ecologie", titre: "Une île 100 % renouvelable", texte: "La Réunion vise l'autonomie énergétique : solaire, géothermie du volcan, énergie de la houle et des courants marins pourraient remplacer le fioul importé.", question: "Quelle énergie de l'île te semble la plus prometteuse, et pourquoi ?" },
+  22: { theme: "futur", titre: "Décarboner les transports", texte: "Avion bas-carbone, fret à la voile, batteries plus propres : relier des îles sans réchauffer la planète est l'un des grands chantiers d'ingénieurs de ta génération.", question: "Comment relier La Réunion au monde en émettant beaucoup moins de CO₂ ?" },
+  23: { theme: "histoire", titre: "Vaincre les épidémies", texte: "Du vaccin de Jenner à l'ARN messager, comprendre les maths d'une contagion (le fameux R0) a permis d'inventer les bonnes ripostes.", question: "Pourquoi anticiper une épidémie vaut-il mieux que la subir ?" },
+  24: { theme: "ecologie", titre: "L'eau, ressource sous tension", texte: "Entre saisons sèches et pluies torrentielles, La Réunion doit stocker, partager et économiser une eau douce de plus en plus précieuse.", question: "Quelle solution imaginerais-tu pour retenir l'eau des fortes pluies ?" },
+  25: { theme: "futur", titre: "Nourrir et bâtir autrement", texte: "Fermes verticales, protéines végétales, béton bas-carbone, matériaux biosourcés : produire pour 10 milliards d'humains sans épuiser la planète est un défi d'innovateurs.", question: "Faut-il d'abord changer ce qu'on produit, ou comment on le produit ?" },
+
+  // Semaine 6 — Lancer ton projet
+  26: { theme: "histoire", titre: "L'entreprise à mission", texte: "De plus en plus de fondateurs inscrivent dans leurs statuts un but social ou écologique, prouvant qu'un projet peut être viable ET utile au monde.", question: "Un projet doit-il choisir entre gagner de l'argent et faire le bien ?" },
+  27: { theme: "futur", titre: "Financer une idée", texte: "Financement participatif, business angels, concours, fonds à impact : jamais il n'a été aussi possible de financer une idée utile, même sans capital de départ.", question: "Comment convaincre quelqu'un de miser sur un projet qui n'existe pas encore ?" },
+  28: { theme: "ecologie", titre: "Mesurer son impact réel", texte: "Tonnes de CO₂ évitées, litres d'eau économisés, personnes aidées : choisir le bon indicateur distingue l'impact véritable du simple affichage « vert ».", question: "Quel chiffre prouverait que ta solution change vraiment les choses ?" },
+  29: { theme: "histoire", titre: "Les pionniers partis de rien", texte: "Beaucoup d'innovateurs majeurs ont démarré dans un garage ou un village, avec peu de moyens mais une vision claire : l'origine ne décide pas de l'avenir.", question: "En quoi venir d'un territoire insulaire peut-il être une force pour innover ?" },
+  30: { theme: "futur", titre: "À toi d'inventer demain", texte: "Tu as le toolkit complet : poser le problème, modéliser, imaginer, prototyper, mesurer, lancer. Le monde a des défis immenses et il a besoin de tes idées.", question: "Quelle solution de demain veux-tu commencer à inventer dès maintenant ?" },
 };

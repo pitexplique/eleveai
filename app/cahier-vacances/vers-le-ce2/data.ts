@@ -8,7 +8,7 @@
 /*  Moteur d'affichage commun : components/cahier/CahierVacances.tsx.          */
 /* -------------------------------------------------------------------------- */
 
-import type { Etape, Jour } from "@/components/cahier/types";
+import type { Etape, Jour, MondeDemain } from "@/components/cahier/types";
 
 /** Les 6 jeux de l'été (un par semaine). */
 export const parcours: Etape[] = [
@@ -1427,4 +1427,50 @@ export const leSaviasTu: Record<number, { portee: "local" | "monde"; texte: stri
   28: { portee: "monde", texte: "Couper un gâteau en parts égales, c'est de la géométrie… et de la gourmandise !" },
   29: { portee: "monde", texte: "Mesurer le tour d'un terrain, c'est calculer son périmètre : utile au sport comme en maths." },
   30: { portee: "monde", texte: "En CE2, tu apprendras encore plein de choses ; et le jeu restera une super façon d'apprendre !" },
+};
+
+/* « Comprendre le monde » — un thème par jour (Histoire / Écologie / Futur),
+   très simple (CE1), calé sur les jeux de l'été. */
+export const mondeDemain: Record<number, MondeDemain> = {
+  // Semaine 1 — les jeux de la cour
+  1: { theme: "histoire", titre: "Les billes, un vieux jeu", texte: "Il y a très longtemps, les enfants jouaient déjà aux billes, parfois avec des noix.", question: "À quel jeu très ancien aimerais-tu jouer ?" },
+  2: { theme: "ecologie", titre: "Jouer sans déchets", texte: "Une marelle se dessine à la craie : pas de plastique, rien à jeter, c'est bon pour la nature.", question: "Cite un jeu qui ne fait aucun déchet." },
+  3: { theme: "futur", titre: "Bouger, c'est la santé", texte: "Sauter à la corde rend le cœur fort ; demain tu seras en pleine forme si tu bouges souvent.", question: "Quel jeu te fait bien bouger ?" },
+  4: { theme: "histoire", titre: "Les jeux d'avant", texte: "Avant les écrans, les enfants jouaient dehors, dans la cour, avec presque rien.", question: "À quoi jouaient tes grands-parents petits ?" },
+  5: { theme: "ecologie", titre: "La cour, un coin de vie", texte: "Dans la cour, il y a des fourmis, des oiseaux, des fleurs : on les regarde sans les abîmer.", question: "Quel petit animal vois-tu dans ta cour ?" },
+
+  // Semaine 2 — les jeux de société
+  6: { theme: "histoire", titre: "Le dé très ancien", texte: "Le dé existe depuis des milliers d'années ; on en a trouvé dans de très vieilles tombes.", question: "Pourquoi les gens aiment-ils jouer depuis si longtemps ?" },
+  7: { theme: "futur", titre: "Des jeux qui apprennent", texte: "Demain, beaucoup de jeux t'aideront à apprendre en t'amusant, comme un vrai maître.", question: "Que voudrais-tu apprendre en jouant ?" },
+  8: { theme: "ecologie", titre: "Le bois des jeux", texte: "Un plateau ou des cubes en bois viennent des arbres ; il faut en planter pour en avoir toujours.", question: "Pourquoi faut-il protéger les arbres ?" },
+  9: { theme: "histoire", titre: "Les jeux du monde", texte: "Partout sur la Terre, les enfants jouent aux cartes et au plateau, chacun à sa façon.", question: "Connais-tu un jeu d'un autre pays ?" },
+  10: { theme: "futur", titre: "Jouer ensemble", texte: "Demain comme aujourd'hui, le plus beau, c'est de jouer avec des amis, pas tout seul.", question: "Avec qui aimes-tu le plus jouer ?" },
+
+  // Semaine 3 — les jeux de construction
+  11: { theme: "futur", titre: "Construire le futur", texte: "En empilant des cubes, tu fais comme les ingénieurs qui inventeront les maisons de demain.", question: "Quelle maison aimerais-tu construire plus tard ?" },
+  12: { theme: "ecologie", titre: "Des maisons qui durent", texte: "À La Réunion, on construit des maisons qui gardent le frais, sans trop user d'électricité.", question: "Comment garder une maison fraîche sans clim ?" },
+  13: { theme: "histoire", titre: "Les jolies cases créoles", texte: "À La Réunion, les vieilles cases créoles ont de belles dentelles en bois, les lambrequins.", question: "Quelle maison trouves-tu la plus belle ?" },
+  14: { theme: "futur", titre: "Des tours immenses", texte: "Dans le monde, des tours montent très haut, plus de 800 mètres : beaucoup de « cubes » !", question: "Aimerais-tu vivre tout en haut d'une tour ?" },
+  15: { theme: "ecologie", titre: "Réutiliser pour jouer", texte: "Avec des cartons et des boîtes vides, on peut bâtir un château sans rien acheter.", question: "Que pourrais-tu construire avec une boîte vide ?" },
+
+  // Semaine 4 — les jeux d'énigmes
+  16: { theme: "futur", titre: "Réfléchir comme un robot", texte: "Suivre une suite de nombres, c'est déjà penser un peu comme les ordinateurs de demain.", question: "Aimes-tu chercher la solution d'une énigme ?" },
+  17: { theme: "histoire", titre: "Des devinettes très vieilles", texte: "Depuis toujours, dans tous les pays, les gens aiment se poser des devinettes le soir.", question: "Connais-tu une devinette à raconter ?" },
+  18: { theme: "ecologie", titre: "L'énigme de la nature", texte: "La nature cache plein de mystères : pourquoi les feuilles tombent, d'où vient la pluie…", question: "Quel mystère de la nature aimerais-tu comprendre ?" },
+  19: { theme: "futur", titre: "Partager, c'est malin", texte: "Partager à parts égales est juste ; demain, bien partager aidera tout le monde sur Terre.", question: "Qu'aimes-tu partager avec tes amis ?" },
+  20: { theme: "ecologie", titre: "Jouer dehors", texte: "Les écrans, c'est bien, mais jouer dehors et respirer l'air, c'est encore mieux pour toi.", question: "Quel jeu préfères-tu faire dehors ?" },
+
+  // Semaine 5 — les jeux de plein air
+  21: { theme: "futur", titre: "Courir et grandir fort", texte: "Courir et sauter rendent ton corps solide pour toute la vie : un cadeau pour ton futur.", question: "Quel sport voudrais-tu essayer un jour ?" },
+  22: { theme: "ecologie", titre: "Le soleil de l'île", texte: "À La Réunion, le soleil est fort : il peut aussi donner de l'électricité toute propre.", question: "Que fait le soleil de bien pour nous ?" },
+  23: { theme: "histoire", titre: "Le foot sur la plage", texte: "À La Réunion, on joue au ballon partout : dans la cour comme sur le sable de la plage.", question: "Où aimes-tu jouer au ballon ?" },
+  24: { theme: "futur", titre: "L'esprit d'équipe", texte: "Gagner ensemble, s'entraider : c'est ce qui aidera le monde de demain à aller mieux.", question: "Comment aides-tu ton équipe à gagner ?" },
+  25: { theme: "ecologie", titre: "L'eau, c'est la vie", texte: "Quand on joue dehors par grand soleil, on boit de l'eau ; l'eau propre est très précieuse.", question: "Comment éviter de gaspiller l'eau ?" },
+
+  // Semaine 6 — la grande fête des jeux
+  26: { theme: "histoire", titre: "La fête à La Réunion", texte: "À La Réunion, les fêtes de quartier, les « kabars », réunissent petits et grands.", question: "Quelle fête aimes-tu le plus ?" },
+  27: { theme: "ecologie", titre: "Une fête sans déchets", texte: "Après la fête, on ramasse les papiers et les ballons : la nature reste propre et belle.", question: "Que peux-tu ramasser après une fête ?" },
+  28: { theme: "futur", titre: "Partager le gâteau", texte: "Couper un gâteau en parts égales, c'est partager ; demain, bien partager rendra le monde plus juste.", question: "Avec qui partagerais-tu ton gâteau ?" },
+  29: { theme: "histoire", titre: "Les jeux d'hier à demain", texte: "Cet été, tu as joué comme les enfants d'avant ; ces jeux passeront aussi à ceux d'après toi.", question: "Quel jeu voudrais-tu apprendre à un plus petit ?" },
+  30: { theme: "futur", titre: "Le monde, c'est toi", texte: "En jouant, tu apprends ; en grandissant, tu pourras à ton tour aider et inventer le monde.", question: "Que veux-tu faire de bien quand tu seras grand(e) ?" },
 };

@@ -13,7 +13,7 @@
 /*  Moteur d'affichage commun : components/cahier/CahierVacances.tsx.          */
 /* -------------------------------------------------------------------------- */
 
-import type { Etape, Jour } from "@/components/cahier/types";
+import type { Etape, Jour, MondeDemain } from "@/components/cahier/types";
 
 /** Les 6 terrains de la créativité (un par semaine). */
 export const parcours: Etape[] = [
@@ -1458,4 +1458,50 @@ export const leSaviasTu: Record<number, { portee: "local" | "monde"; texte: stri
   28: { portee: "monde", texte: "Comprendre les intérêts composés aide à épargner, à investir… et à financer un projet qui aide les autres." },
   29: { portee: "local", texte: "De jeunes Réunionnais créent des projets pour le tri des déchets, l'énergie solaire ou l'aide aux aînés : la créativité change déjà l'île." },
   30: { portee: "monde", texte: "Albert Einstein disait : « L'imagination est plus importante que le savoir. » En 1re et au-delà, ose imaginer le monde de demain !" },
+};
+
+/* « Comprendre le monde » — un thème par jour (Histoire des inventions / Écologie /
+   Futur), calé sur l'arc de la créativité qui change le monde. Niveau 1re. */
+export const mondeDemain: Record<number, MondeDemain> = {
+  // Semaine 1 — la créativité en mathématiques (les grandes idées)
+  1: { theme: "histoire", titre: "Le zéro, une invention", texte: "Le zéro, qui nous semble évident, fut une révolution née en Inde au Vᵉ siècle : sans lui, ni informatique, ni calcul moderne ne seraient possibles.", question: "Quelle idée « évidente » d'aujourd'hui pourrait avoir tout changé en son temps ?" },
+  2: { theme: "ecologie", titre: "Calculer pour le climat", texte: "Modéliser la hausse des températures repose sur des équations : les mathématiques sont devenues une arme essentielle contre le dérèglement climatique.", question: "En quoi un bon modèle mathématique peut-il aider à protéger la planète ?" },
+  3: { theme: "futur", titre: "L'intelligence artificielle", texte: "Derrière chaque IA se cachent des fonctions et des probabilités : comprendre les maths, c'est garder la main sur les outils qui façonnent demain.", question: "Préfères-tu subir une technologie ou la comprendre pour mieux la guider ?" },
+  4: { theme: "histoire", titre: "L'imprimerie de Gutenberg", texte: "Vers 1450, l'imprimerie a permis de copier les idées par milliers : une invention créative qui a diffusé le savoir dans tout le monde.", question: "Quelle invention récente diffuse les idées aussi vite aujourd'hui ?" },
+  5: { theme: "ecologie", titre: "L'économie circulaire", texte: "Plutôt que jeter, on répare, on recycle, on réutilise : repenser tout un système de production, c'est de la créativité au service de la Terre.", question: "Quel objet du quotidien pourrais-tu réparer plutôt que remplacer ?" },
+
+  // Semaine 2 — la créativité en sciences
+  6: { theme: "futur", titre: "Les énergies marines", texte: "À La Réunion, on imagine produire de l'électricité grâce à la chaleur et aux courants de l'océan : une énergie propre et quasi inépuisable.", question: "Quelle ressource naturelle de ton île reste encore à exploiter intelligemment ?" },
+  7: { theme: "histoire", titre: "Newton et la gravité", texte: "En comprenant que la même force fait tomber une pomme et tient la Lune, Newton a inventé une physique qui décrit aussi la trajectoire d'un ballon.", question: "Pourquoi relier deux phénomènes éloignés est-il un acte créatif ?" },
+  8: { theme: "ecologie", titre: "Le sport bas carbone", texte: "Stades alimentés au solaire, équipements recyclés : le sport de demain cherche à réduire son empreinte sans rien perdre de la performance.", question: "Comment un grand évènement sportif pourrait-il polluer moins ?" },
+  9: { theme: "futur", titre: "Les capteurs partout", texte: "Des capteurs mesurent en direct l'air, l'eau ou le trafic ; ces données, bien analysées, permettent d'inventer des villes plus vivables.", question: "Quelle donnée de ta ville aimerais-tu mesurer pour l'améliorer ?" },
+  10: { theme: "histoire", titre: "Mesurer la lumière", texte: "Déterminer la vitesse de la lumière a demandé des siècles d'ingéniosité ; cette quête a ouvert la voie à la relativité et à la physique moderne.", question: "Pourquoi une mesure très précise peut-elle changer toute une science ?" },
+
+  // Semaine 3 — la créativité dans l'écriture
+  11: { theme: "ecologie", titre: "Écrire pour alerter", texte: "Des récits et des essais ont éveillé les consciences sur la nature ; bien écrire reste l'un des moyens les plus puissants de changer les regards.", question: "Un texte t'a-t-il déjà fait changer d'avis sur un sujet ?" },
+  12: { theme: "futur", titre: "Écrire avec l'IA", texte: "Les IA génèrent désormais des textes en quelques secondes ; à toi d'en faire un outil de création, sans jamais y abandonner ta propre voix.", question: "Où s'arrête l'aide d'une machine et où commence ta créativité ?" },
+  13: { theme: "histoire", titre: "Des chiffres qui parlent", texte: "Dès le XIXᵉ siècle, présenter les données sous forme de graphiques a aidé à convaincre les gouvernants d'agir, notamment en santé publique.", question: "Pourquoi un bon graphique convainc-il parfois mieux qu'un long discours ?" },
+  14: { theme: "ecologie", titre: "La langue de la nature", texte: "Décrire précisément un écosystème, nommer les espèces, c'est déjà les protéger : on ne défend bien que ce que l'on sait nommer.", question: "Connais-tu le nom d'une espèce menacée près de chez toi ?" },
+  15: { theme: "futur", titre: "Vérifier l'information", texte: "Face au flot de contenus et de fausses nouvelles, savoir recouper ses sources devient une compétence clé du citoyen de demain.", question: "Quel réflexe adoptes-tu avant de croire une information en ligne ?" },
+
+  // Semaine 4 — la créativité dans les arts
+  16: { theme: "histoire", titre: "Le nombre d'or des artistes", texte: "Du Parthénon à Léonard de Vinci, des créateurs ont cherché des proportions harmonieuses : preuve que maths et beauté avancent souvent ensemble.", question: "Une règle mathématique peut-elle vraiment guider la beauté ?" },
+  17: { theme: "ecologie", titre: "L'art avec ce qu'on jette", texte: "Des artistes transforment déchets et plastiques en œuvres puissantes pour interpeller sur la pollution : la création donne une seconde vie à la matière.", question: "Quel déchet pourrais-tu transformer en objet utile ou beau ?" },
+  18: { theme: "futur", titre: "L'art génératif", texte: "Avec quelques lignes de code, on crée aujourd'hui images, musiques et animations : programmer devient un nouveau pinceau pour les artistes.", question: "Coderais-tu une œuvre, ou préfères-tu la créer à la main ?" },
+  19: { theme: "histoire", titre: "La perspective", texte: "À la Renaissance, des peintres ont inventé la perspective grâce à la géométrie, donnant l'illusion de la profondeur sur une toile plate.", question: "Comment une découverte technique peut-elle révolutionner un art ?" },
+  20: { theme: "ecologie", titre: "Les symétries du vivant", texte: "Fleurs, coquillages, flocons : la nature regorge de symétries que l'art imite ; s'en inspirer, c'est créer en respectant le monde vivant.", question: "Quelle forme de la nature t'inspirerait pour créer un objet ?" },
+
+  // Semaine 5 — la créativité face aux grands défis
+  21: { theme: "futur", titre: "Optimiser l'énergie", texte: "La dérivée sert à trouver le meilleur réglage d'un moteur ou d'un panneau solaire : optimiser, c'est obtenir plus en consommant moins.", question: "Où, dans ta vie, pourrais-tu obtenir mieux avec moins de moyens ?" },
+  22: { theme: "histoire", titre: "Soigner par la science", texte: "Vaccins et antibiotiques, fruits d'une recherche créative et tenace, ont sauvé des centaines de millions de vies au cours du dernier siècle.", question: "Pourquoi la persévérance compte-t-elle autant que l'idée de départ ?" },
+  23: { theme: "ecologie", titre: "Faire mieux avec moins", texte: "Optimiser un emballage, une tournée de livraison ou un réseau d'eau permet d'économiser matière et énergie : les maths sont une alliée de l'écologie.", question: "Quel gaspillage du quotidien aimerais-tu réduire par une idée simple ?" },
+  24: { theme: "futur", titre: "Les métiers de demain", texte: "Ingénieur en énergies propres, data scientist, bioinformaticien : beaucoup des métiers de 2040 mêleront sciences, créativité et utilité sociale.", question: "Quel métier 'utile au monde' aimerais-tu inventer ou exercer ?" },
+  25: { theme: "histoire", titre: "L'eau, défi de toujours", texte: "Aqueducs romains, puits, barrages : amener l'eau a toujours stimulé l'ingéniosité humaine, un défi encore brûlant à La Réunion comme ailleurs.", question: "Comment apporterais-tu de l'eau potable à un village isolé ?" },
+
+  // Semaine 6 — ton projet pour changer le monde
+  26: { theme: "ecologie", titre: "Modéliser pour décider", texte: "Le second degré décrit des trajectoires, mais aussi des courbes de pollution ou de coût : bien modéliser, c'est mieux décider pour la planète.", question: "Quel problème de ton île aimerais-tu mettre en équation ?" },
+  27: { theme: "futur", titre: "Décider sous incertitude", texte: "Lancer un projet, c'est accepter une part de hasard ; les probabilités aident à choisir lucidement plutôt qu'à parier à l'aveugle.", question: "Comment évalues-tu un risque avant de te lancer dans un projet ?" },
+  28: { theme: "histoire", titre: "L'entrepreneuriat social", texte: "Des pionniers ont prouvé qu'on peut créer une activité rentable ET utile : microcrédit, accès à l'eau, à l'école… changer le monde devient un métier.", question: "Quelle activité créerais-tu pour résoudre un problème de société ?" },
+  29: { theme: "ecologie", titre: "Mesurer son impact", texte: "Litres d'eau économisés, tonnes de CO₂ évitées, personnes aidées : chiffrer son projet le rend crédible et montre qu'il change vraiment les choses.", question: "Par quel chiffre prouverais-tu que ton idée est utile ?" },
+  30: { theme: "futur", titre: "Le monde de demain, c'est toi", texte: "Tu as désormais les outils pour analyser le réel ET la liberté de créer : la créativité bien guidée est ta force pour inventer un monde meilleur.", question: "Quel défi du monde rêves-tu de relever dans ta vie ?" },
 };

@@ -12,7 +12,7 @@
 /*  Moteur d'affichage commun : components/cahier/CahierVacances.tsx.          */
 /* -------------------------------------------------------------------------- */
 
-import type { Etape, Jour } from "@/components/cahier/types";
+import type { Etape, Jour, MondeDemain } from "@/components/cahier/types";
 
 /** Les 6 échelles du grand zoom (une par semaine). */
 export const parcours: Etape[] = [
@@ -1459,4 +1459,52 @@ export const leSaviasTu: Record<number, { portee: "local" | "monde"; texte: stri
   28: { portee: "monde", texte: "Tout nombre entier se décompose de façon unique en facteurs premiers : c'est le « théorème fondamental de l'arithmétique »." },
   29: { portee: "local", texte: "À La Réunion, on étudie aussi bien l'infiniment petit (la matière du volcan) que l'infiniment grand (le ciel du Maïdo)." },
   30: { portee: "monde", texte: "En 2nde, la SNT et les sciences t'emmèneront justement de l'atome aux galaxies : ce cahier t'a ouvert la route. Bon décollage !" },
+};
+
+/* « Comprendre le monde » — un thème par jour (Histoire / Écologie / Futur),
+   calé sur le grand zoom (humain → cellule → atome → Terre → galaxie → univers).
+   Histoire = histoire des sciences ; écologie = enjeux à toutes les échelles ;
+   futur = sciences et technologies de demain. */
+export const mondeDemain: Record<number, MondeDemain> = {
+  // Semaine 1 — l'échelle humaine
+  1: { theme: "histoire", titre: "Mesurer le monde", texte: "Pour s'accorder sur les distances, les savants ont défini le mètre à la Révolution comme une fraction du tour de la Terre, mesurée patiemment d'un bout du pays à l'autre.", question: "Pourquoi est-il si utile que tous les pays partagent les mêmes unités de mesure ?" },
+  2: { theme: "ecologie", titre: "Notre empreinte invisible", texte: "Chacun de nos gestes quotidiens, à notre échelle humaine, laisse une trace : eau consommée, énergie brûlée, déchets produits, qui s'additionnent à ceux de huit milliards d'habitants.", question: "Quel geste de ta vie quotidienne pèse, selon toi, le plus sur la planète ?" },
+  3: { theme: "futur", titre: "Le corps augmenté", texte: "Demain, prothèses pilotées par la pensée, capteurs sous la peau et exosquelettes repousseront les limites du corps humain, au service des malades comme des explorateurs.", question: "Jusqu'où trouves-tu souhaitable de « réparer » ou d'« augmenter » le corps humain ?" },
+  4: { theme: "histoire", titre: "Cartographier la Terre", texte: "Pendant des siècles, des géographes ont arpenté continents et océans pour dessiner des cartes de plus en plus justes, base de toute navigation et de tout voyage.", question: "Que nous apprend une carte qu'une simple photo du paysage ne montre pas ?" },
+  5: { theme: "ecologie", titre: "Compter pour protéger", texte: "Surveiller l'environnement, c'est d'abord mesurer : températures, populations d'animaux, taux de CO₂, dont les pourcentages d'évolution révèlent les tendances de la planète.", question: "En quoi des chiffres précis aident-ils à convaincre d'agir pour la nature ?" },
+
+  // Semaine 2 — l'infiniment petit : la cellule
+  6: { theme: "histoire", titre: "La cellule dévoilée", texte: "Au XVIIᵉ siècle, les premiers microscopes ont révélé un monde insoupçonné : Robert Hooke nomma « cellules » les compartiments du liège, et la biologie moderne était née.", question: "En quoi un nouvel instrument peut-il bouleverser notre vision du monde ?" },
+  7: { theme: "futur", titre: "Réparer le vivant", texte: "Les biotechnologies apprennent à corriger l'ADN, à cultiver des organes et à concevoir des médicaments sur mesure, ouvrant des soins inimaginables il y a peu.", question: "Quelles précautions faut-il garder quand on modifie le vivant lui-même ?" },
+  8: { theme: "ecologie", titre: "L'invasion des microplastiques", texte: "Des fragments de plastique de quelques micromètres, invisibles à l'œil nu, se retrouvent désormais dans l'eau, les sols et jusque dans nos propres cellules.", question: "Comment un déchet de la taille d'un grain de sable peut-il devenir un problème mondial ?" },
+  9: { theme: "histoire", titre: "Le code de la vie", texte: "En 1953, Watson, Crick et Rosalind Franklin percèrent la structure en double hélice de l'ADN, la molécule qui contient le mode d'emploi de tout être vivant.", question: "Pourquoi dit-on que l'ADN est un « langage » écrit avec quatre lettres ?" },
+  10: { theme: "futur", titre: "Des cellules qui soignent", texte: "La médecine de demain mobilise des cellules vivantes comme des outils : on entraîne nos défenses à reconnaître une tumeur, ou on cultive des tissus pour réparer un organe.", question: "Préférerais-tu une médecine qui répare ou une médecine qui prévient ? Pourquoi ?" },
+
+  // Semaine 3 — l'atome et son noyau
+  11: { theme: "histoire", titre: "Au cœur de la matière", texte: "L'idée d'atome, imaginée par les Grecs il y a 2 500 ans, n'a été confirmée qu'au XXᵉ siècle, quand on a compris qu'il cachait lui-même un noyau et des électrons.", question: "Pourquoi une intuition ancienne peut-elle mettre des siècles à être prouvée ?" },
+  12: { theme: "futur", titre: "L'énergie des étoiles", texte: "Maîtriser la fusion nucléaire, qui assemble des noyaux comme dans le Soleil, promet une énergie abondante et peu polluante ; des réacteurs expérimentaux la testent aujourd'hui.", question: "Pourquoi une énergie « propre et abondante » changerait-elle tout pour l'humanité ?" },
+  13: { theme: "ecologie", titre: "Le dilemme du nucléaire", texte: "L'énergie de l'atome produit de l'électricité sans rejeter de CO₂, mais laisse des déchets radioactifs à gérer pendant des milliers d'années : un choix lourd de conséquences.", question: "Comment pèses-tu un avantage immédiat face à un risque qui dure des siècles ?" },
+  14: { theme: "histoire", titre: "Marie Curie, deux fois Nobel", texte: "En étudiant la radioactivité, Marie Curie a découvert de nouveaux éléments et reçu deux prix Nobel, ouvrant la voie à la médecine nucléaire moderne.", question: "Qu'est-ce qui pousse un scientifique à explorer un domaine encore inconnu et risqué ?" },
+  15: { theme: "futur", titre: "Manipuler l'atome", texte: "Les nanotechnologies construisent des matériaux atome par atome : surfaces autonettoyantes, batteries plus puissantes, capteurs minuscules au service de la santé.", question: "À quoi rêverais-tu de servir si tu pouvais assembler la matière atome par atome ?" },
+
+  // Semaine 4 — la Terre et le système solaire
+  16: { theme: "histoire", titre: "La Terre n'est plus le centre", texte: "Au XVIᵉ siècle, Copernic puis Galilée montrèrent que la Terre tourne autour du Soleil : une révolution de la pensée autant que de l'astronomie.", question: "Pourquoi une découverte scientifique peut-elle bousculer toute une société ?" },
+  17: { theme: "ecologie", titre: "Une planète qui se réchauffe", texte: "En brûlant charbon, pétrole et gaz, l'humanité ajoute du CO₂ dans l'atmosphère et réchauffe le climat de toute la planète, à l'échelle du système Terre.", question: "Pourquoi un problème « global » est-il plus difficile à résoudre qu'un problème local ?" },
+  18: { theme: "futur", titre: "Habiter d'autres mondes", texte: "Des agences et des entreprises préparent le retour sur la Lune et des missions vers Mars : vivre ailleurs supposera de produire son air, son eau et sa nourriture.", question: "Faut-il explorer d'autres planètes, ou d'abord prendre soin de la nôtre ?" },
+  19: { theme: "histoire", titre: "Newton et la gravité", texte: "Au XVIIᵉ siècle, Newton comprit qu'une même force fait tomber la pomme et tient la Lune en orbite : la gravitation universelle relie le terrestre et le céleste.", question: "En quoi est-il puissant de découvrir qu'une seule loi explique des phénomènes très différents ?" },
+  20: { theme: "ecologie", titre: "La Terre vue d'en haut", texte: "Depuis l'espace, des satellites surveillent en permanence forêts, glaciers, océans et pollutions : un regard d'ensemble indispensable pour protéger la planète.", question: "Comment une vue « de très loin » peut-elle nous aider à agir « de très près » ?" },
+
+  // Semaine 5 — les étoiles et la galaxie
+  21: { theme: "histoire", titre: "Lire la lumière des étoiles", texte: "Au XIXᵉ siècle, on apprit à décomposer la lumière des astres pour connaître, à des années-lumière de distance, leur composition et leur température sans jamais s'y rendre.", question: "Comment peut-on savoir de quoi est faite une étoile qu'on ne touchera jamais ?" },
+  22: { theme: "futur", titre: "Les télescopes de demain", texte: "Des télescopes géants, au sol comme dans l'espace, scrutent des galaxies si lointaines qu'on les voit telles qu'elles étaient il y a des milliards d'années.", question: "Qu'est-ce que cela fait de penser qu'observer loin, c'est observer le passé ?" },
+  23: { theme: "ecologie", titre: "Préserver le ciel noir", texte: "L'éclairage des villes efface peu à peu les étoiles : cette pollution lumineuse gaspille de l'énergie et perturbe les animaux nocturnes, ici comme partout.", question: "À La Réunion, où irais-tu pour retrouver un ciel vraiment étoilé ?" },
+  24: { theme: "histoire", titre: "Mesurer l'immensité", texte: "Pour évaluer la distance des étoiles, les astronomes ont inventé des méthodes géométriques ingénieuses, comme la parallaxe, qui transforment un minuscule angle en une distance colossale.", question: "Comment un tout petit angle peut-il révéler une distance gigantesque ?" },
+  25: { theme: "futur", titre: "À la recherche d'une autre vie", texte: "On a déjà repéré des milliers de planètes autour d'autres étoiles ; les prochains instruments chercheront, dans leur atmosphère, les signes d'une vie possible.", question: "Que changerait pour l'humanité la découverte d'une vie ailleurs ?" },
+
+  // Semaine 6 — l'univers entier
+  26: { theme: "histoire", titre: "L'univers en expansion", texte: "Au XXᵉ siècle, on découvrit que les galaxies s'éloignent les unes des autres : l'univers grandit, et il a eu un commencement, le Big Bang.", question: "Qu'est-ce qui te semble le plus vertigineux : l'infiniment grand ou l'infiniment petit ?" },
+  27: { theme: "ecologie", titre: "La Terre, oasis fragile", texte: "Dans l'immensité connue, aucun autre lieu habitable n'a été trouvé : notre planète reste, jusqu'à preuve du contraire, le seul refuge de la vie.", question: "Si la Terre est unique, qu'est-ce que cela implique pour la façon d'en prendre soin ?" },
+  28: { theme: "futur", titre: "L'intelligence artificielle, outil de science", texte: "Pour explorer des milliards de données venues du cosmos, les chercheurs s'appuient sur l'intelligence artificielle, qui repère ce qu'un humain seul ne verrait jamais.", question: "Comment garder un esprit critique face à une machine qui « voit » plus vite que nous ?" },
+  29: { theme: "histoire", titre: "Le savoir, une aventure collective", texte: "De l'atome aux galaxies, aucune découverte n'est l'œuvre d'une seule personne : elle s'appuie sur des milliers de savants de toutes les époques et de tous les pays.", question: "Pourquoi la science avance-t-elle mieux quand elle se partage entre les peuples ?" },
+  30: { theme: "futur", titre: "Les sciences de demain, c'est toi", texte: "En 2nde, la SNT et les sciences te donneront les outils pour comprendre l'univers à toutes ses échelles, et peut-être pour inventer les réponses de demain.", question: "Quelle grande question, du minuscule à l'immense, rêverais-tu de résoudre un jour ?" },
 };

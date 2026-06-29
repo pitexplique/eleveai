@@ -9,7 +9,7 @@
 /*  Moteur d'affichage commun : components/cahier/CahierVacances.tsx.          */
 /* -------------------------------------------------------------------------- */
 
-import type { Etape, Jour } from "@/components/cahier/types";
+import type { Etape, Jour, MondeDemain } from "@/components/cahier/types";
 
 /** Les 6 étapes du tour de l'océan Indien (une île par semaine). */
 export const parcours: Etape[] = [
@@ -1451,4 +1451,51 @@ export const leSaviasTu: Record<number, { portee: "local" | "monde"; texte: stri
   28: { portee: "local", texte: "Voyager d'île en île a façonné la population métissée de La Réunion : Afrique, Inde, Chine, Europe, Madagascar." },
   29: { portee: "monde", texte: "En 5ᵉ, en histoire et en géographie, tu exploreras justement le monde et les grands voyages : ce cahier t'y prépare !" },
   30: { portee: "monde", texte: "Apprendre, c'est comme voyager : à chaque étape, l'horizon s'élargit. Bon cap vers la 5ᵉ !" },
+};
+
+/* « Comprendre le monde » — un thème par jour (Histoire / Écologie / Futur),
+   ancré à l'île visitée chaque semaine (Réunion → Maurice → Rodrigues →
+   Seychelles → Madagascar → Mayotte). */
+export const mondeDemain: Record<number, MondeDemain> = {
+  // Semaine 1 — La Réunion, le grand départ
+  1: { theme: "histoire", titre: "L'île du grand voyage", texte: "La Réunion s'est peuplée par la mer : tous ses habitants descendent de gens venus d'Afrique, d'Inde, de Chine et d'Europe en bateau.", question: "Pourquoi dit-on que La Réunion est une île métissée ?" },
+  2: { theme: "ecologie", titre: "Naviguer aux étoiles", texte: "Avant le GPS, les marins traversaient l'océan en lisant la position des étoiles, sans abîmer ni polluer la nature.", question: "Quel objet d'aujourd'hui remplace les étoiles pour se repérer ?" },
+  3: { theme: "futur", titre: "L'énergie de l'océan", texte: "Des ingénieurs réunionnais étudient comment produire de l'électricité propre grâce à la chaleur et aux vagues de la mer.", question: "Quelle force de la nature pourrait fournir de l'énergie sans polluer ?" },
+  4: { theme: "ecologie", titre: "Le lagon, un trésor fragile", texte: "Autour de l'île, le récif de corail protège les plages et abrite une vie marine immense, mais il est très sensible à la pollution.", question: "Cite un geste qui aide à protéger le lagon." },
+  5: { theme: "histoire", titre: "Bourbon puis Réunion", texte: "L'île s'est d'abord appelée île Bourbon ; elle a pris le nom de La Réunion en 1793, pendant la Révolution française.", question: "Connais-tu un autre lieu qui a changé de nom au cours de l'histoire ?" },
+
+  // Semaine 2 — L'île Maurice
+  6: { theme: "histoire", titre: "Le dodo disparu", texte: "À Maurice vivait le dodo, un gros oiseau qui ne volait pas ; chassé par les marins, il a disparu il y a plus de 300 ans.", question: "Que nous apprend la disparition du dodo sur notre façon de traiter les animaux ?" },
+  7: { theme: "ecologie", titre: "La canne à sucre", texte: "Maurice a longtemps couvert ses terres de canne à sucre ; aujourd'hui on cherche à mieux partager la place avec la nature sauvage.", question: "Pourquoi une seule culture sur toute une île pose-t-elle problème ?" },
+  8: { theme: "futur", titre: "Une île qui se réinvente", texte: "Maurice, longtemps tournée vers le sucre, mise désormais sur le tourisme propre et les technologies pour son avenir.", question: "Quel métier d'avenir aimerais-tu exercer sur une île ?" },
+  9: { theme: "ecologie", titre: "Sauver une espèce", texte: "La crécerelle de Maurice, un petit faucon, a failli disparaître : grâce aux scientifiques, il en reste aujourd'hui des centaines.", question: "Comment des humains peuvent-ils aider une espèce à survivre ?" },
+  10: { theme: "histoire", titre: "Un carrefour de langues", texte: "À Maurice on parle créole, français, anglais et d'autres langues encore : l'histoire des voyages a rassemblé tous ces peuples.", question: "Quel avantage y a-t-il à parler plusieurs langues ?" },
+
+  // Semaine 3 — Rodrigues
+  11: { theme: "ecologie", titre: "Les tortues géantes", texte: "Rodrigues protège des tortues géantes dans des réserves ; certaines tortues terrestres peuvent vivre plus de cent ans.", question: "Pourquoi faut-il protéger les animaux qui vivent très longtemps ?" },
+  12: { theme: "futur", titre: "Une île presque autonome", texte: "Petite et isolée, Rodrigues développe ses propres légumes, son miel et ses énergies pour moins dépendre des bateaux.", question: "Pourquoi est-il utile de produire soi-même sa nourriture ?" },
+  13: { theme: "histoire", titre: "Vivre au rythme de la mer", texte: "À Rodrigues, on pêche et on répare les filets à la main depuis très longtemps, en transmettant ces gestes de génération en génération.", question: "Pourquoi est-il précieux de transmettre un savoir-faire ?" },
+  14: { theme: "ecologie", titre: "Le lagon nourricier", texte: "Le grand lagon de Rodrigues nourrit ses habitants ; pêcher avec mesure permet aux poissons de se renouveler.", question: "Que se passerait-il si l'on pêchait tous les poissons d'un coup ?" },
+  15: { theme: "futur", titre: "L'énergie du soleil et du vent", texte: "Rodrigues installe des panneaux solaires et des éoliennes pour s'éclairer sans brûler de pétrole venu de loin.", question: "Quelles énergies une île ensoleillée et ventée peut-elle utiliser ?" },
+
+  // Semaine 4 — Les Seychelles
+  16: { theme: "ecologie", titre: "Un jardin de coraux", texte: "Les Seychelles abritent des récifs magnifiques ; quand l'eau se réchauffe trop, les coraux blanchissent et peuvent mourir.", question: "Qu'est-ce qui réchauffe l'eau des océans ?" },
+  17: { theme: "histoire", titre: "La plus grosse graine", texte: "Le coco de mer des Seychelles produit la plus grosse graine du monde ; on la protège depuis longtemps tant elle est rare.", question: "Pourquoi protège-t-on certaines plantes par des lois ?" },
+  18: { theme: "futur", titre: "Protéger l'océan en grand", texte: "Les Seychelles ont créé d'immenses zones marines protégées où la pêche est limitée pour laisser la vie revenir.", question: "Pourquoi mettre une partie de la mer « en réserve » ?" },
+  19: { theme: "ecologie", titre: "L'océan qui monte", texte: "Faites de petites îles basses, les Seychelles surveillent la mer : avec le réchauffement, son niveau monte peu à peu.", question: "Que risquent les îles très plates si la mer monte ?" },
+  20: { theme: "histoire", titre: "Des îles longtemps désertes", texte: "Personne ne vivait aux Seychelles avant le XVIIIᵉ siècle ; les premiers habitants y sont arrivés par bateau.", question: "Comment vivait-on sur une île sans électricité ni magasin ?" },
+
+  // Semaine 5 — Madagascar
+  21: { theme: "ecologie", titre: "Les lémuriens", texte: "Les lémuriens ne vivent que sur la grande île de Madagascar ; détruire leur forêt, c'est risquer de les faire disparaître.", question: "Pourquoi un animal qui vit à un seul endroit est-il plus fragile ?" },
+  22: { theme: "futur", titre: "Replanter la forêt", texte: "Madagascar a perdu beaucoup d'arbres ; aujourd'hui, des habitants et des associations replantent des forêts entières.", question: "À quoi servent les arbres pour le climat et les animaux ?" },
+  23: { theme: "histoire", titre: "Le pays de la vanille", texte: "Madagascar fournit une grande partie de la vanille du monde ; sa culture, patiente et minutieuse, fait vivre des familles entières.", question: "Pourquoi un produit rare et long à cultiver coûte-t-il cher ?" },
+  24: { theme: "ecologie", titre: "Le géant baobab", texte: "Le baobab stocke des milliers de litres d'eau dans son tronc pour résister à la saison sèche ; certains ont plus de mille ans.", question: "Comment une plante peut-elle survivre sans pluie pendant des mois ?" },
+  25: { theme: "futur", titre: "Une terre de richesses", texte: "Sous son sol, Madagascar cache des minerais utiles aux téléphones et aux batteries : un défi pour les extraire sans abîmer la nature.", question: "Comment utiliser les ressources de la Terre sans la détruire ?" },
+
+  // Semaine 6 — Mayotte, le grand lagon
+  26: { theme: "ecologie", titre: "L'un des plus beaux lagons", texte: "Mayotte possède un immense lagon où passent baleines, dauphins et tortues : un sanctuaire de vie à préserver.", question: "Pourquoi un lagon attire-t-il autant d'animaux marins ?" },
+  27: { theme: "histoire", titre: "Un territoire français", texte: "Mayotte, comme La Réunion, est un territoire français de l'océan Indien : ses habitants votent et étudient en français.", question: "Qu'est-ce qui relie des îles aussi éloignées de la France ?" },
+  28: { theme: "futur", titre: "L'eau, un défi de demain", texte: "À Mayotte, l'eau douce peut manquer ; on construit des usines pour dessaler l'eau de mer et économiser chaque goutte.", question: "Quels gestes simples permettent d'économiser l'eau ?" },
+  29: { theme: "ecologie", titre: "Protéger les tortues", texte: "Les tortues marines reviennent pondre sur les plages de Mayotte ; des gardes les surveillent la nuit contre le braconnage.", question: "Comment un promeneur peut-il éviter de déranger une tortue ?" },
+  30: { theme: "futur", titre: "Le monde de demain, c'est toi", texte: "Ce tour des îles t'a ouvert sur le monde ; en 5ᵉ, tu apprendras à comprendre la Terre et, plus tard, à la protéger.", question: "Quel problème de la planète aimerais-tu aider à résoudre ?" },
 };

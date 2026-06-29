@@ -627,7 +627,7 @@ export default function CahierVacances({
                         Mon carnet de voyage
                       </span>
                       <span className="text-xs font-normal italic text-slate-500">
-                        Dessine ou raconte ton étape du jour !
+                        Dessine ou raconte ton étape du jour… et change le monde !
                       </span>
                     </p>
                     <div className="mt-2 min-h-[110px] flex-1 print:min-h-[40px]" />

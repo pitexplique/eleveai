@@ -12,7 +12,7 @@
 /*  Moteur d'affichage commun : components/cahier/CahierVacances.tsx.          */
 /* -------------------------------------------------------------------------- */
 
-import type { Etape, Jour } from "@/components/cahier/types";
+import type { Etape, Jour, MondeDemain } from "@/components/cahier/types";
 
 /** Les 6 étapes vers l'IA et le monde de demain (une par semaine). */
 export const parcours: Etape[] = [
@@ -1455,4 +1455,49 @@ export const leSaviasTu: Record<number, { portee: "local" | "monde"; texte: stri
   28: { portee: "monde", texte: "La loi des grands nombres explique pourquoi les casinos gagnent toujours… et pourquoi l'IA a besoin de tant de données." },
   29: { portee: "local", texte: "De jeunes ingénieurs réunionnais développent des IA pour surveiller les requins, l'érosion des côtes ou l'énergie solaire." },
   30: { portee: "monde", texte: "Stephen Hawking disait que l'IA pourrait être « le meilleur ou le pire » pour l'humanité. Ce sera à ta génération d'en décider — et avec les maths, tu as les clés." },
+};
+
+/* « Comprendre le monde » — histoire des maths/info/IA, écologie par les données, futur de l'IA. */
+export const mondeDemain: Record<number, MondeDemain> = {
+  // Semaine 1 — les maths, ton langage pour créer
+  1: { theme: "histoire", titre: "Les maths, langage du réel", texte: "Depuis Pythagore et Euclide, l'humanité écrit le monde en équations : ce langage abstrait a permis de bâtir des ponts, d'envoyer des sondes et de penser l'infini.", question: "Pourquoi une idée écrite en langage mathématique voyage-t-elle mieux qu'une intuition ?" },
+  2: { theme: "ecologie", titre: "Modéliser le climat", texte: "Les climatologues décrivent l'atmosphère par des systèmes d'équations résolus sur des supercalculateurs : sans ces modèles, prévoir le réchauffement serait impossible.", question: "Un modèle peut se tromper : faut-il pour autant cesser de s'en servir ?" },
+  3: { theme: "futur", titre: "Poser ses idées, agir", texte: "Maîtriser les maths, c'est pouvoir formuler un problème assez précisément pour qu'une machine, ou la société, s'en empare et le résolve.", question: "Quelle injustice du monde aimerais-tu apprendre à formuler en problème résoluble ?" },
+  4: { theme: "histoire", titre: "Al-Khwârizmî et l'algèbre", texte: "Au IXᵉ siècle à Bagdad, Al-Khwârizmî pose les règles de l'algèbre ; son nom latinisé a donné le mot « algorithme », au cœur de toute l'informatique.", question: "Pourquoi tant de savoirs ont-ils transité par le monde arabe médiéval ?" },
+  5: { theme: "ecologie", titre: "Croissance et limites", texte: "Un modèle exponentiel décrit aussi bien une population qui explose qu'une ressource qui s'épuise : les maths rendent visibles les limites de la planète.", question: "Une croissance exponentielle peut-elle durer indéfiniment dans un monde fini ?" },
+
+  // Semaine 2 — l'IA, comment ça marche
+  6: { theme: "histoire", titre: "Turing et la machine pensante", texte: "En 1936, Alan Turing imagine la machine universelle qui fonde l'informatique ; en 1950, il demande déjà si une machine peut « penser ».", question: "Le test de Turing prouve-t-il vraiment qu'une machine pense, ou seulement qu'elle imite ?" },
+  7: { theme: "futur", titre: "Quand l'IA décide", texte: "Des IA trient des candidatures, accordent des crédits, orientent des patients : déléguer une décision à un calcul engage notre responsabilité collective.", question: "Quelles décisions ne devrait-on jamais confier entièrement à une machine ?" },
+  8: { theme: "ecologie", titre: "L'empreinte cachée du numérique", texte: "Entraîner un grand modèle d'IA consomme énormément d'électricité et d'eau de refroidissement : l'intelligence artificielle a un coût bien matériel.", question: "Comment peser l'utilité d'une IA face à son empreinte écologique ?" },
+  9: { theme: "histoire", titre: "Les pionnières de l'informatique", texte: "Ada Lovelace écrit le premier algorithme dès 1843, et les « calculatrices » humaines de la NASA furent souvent des femmes : l'histoire du code n'est pas qu'une histoire d'hommes.", question: "Pourquoi ces contributions ont-elles longtemps été oubliées ?" },
+  10: { theme: "ecologie", titre: "Les données du vivant", texte: "Capteurs, satellites et IA recensent espèces et forêts à grande échelle : à La Réunion, on suit ainsi le corail, l'érosion des côtes et les requins.", question: "Mieux mesurer la nature suffit-il à mieux la protéger ?" },
+
+  // Semaine 3 — l'exponentielle et la croissance
+  11: { theme: "histoire", titre: "Napier invente le logarithme", texte: "Vers 1614, John Napier crée le logarithme pour alléger les calculs des astronomes ; trois siècles plus tard, il structure encore nos échelles de données.", question: "Pourquoi une invention « pour gagner du temps » peut-elle traverser les siècles ?" },
+  12: { theme: "ecologie", titre: "La courbe d'une épidémie", texte: "Comprendre l'exponentielle, c'est comprendre pourquoi une épidémie semble anodine puis submerge tout : les mêmes maths décrivent la propagation d'une idée.", question: "Pourquoi notre intuition sous-estime-t-elle si souvent la croissance exponentielle ?" },
+  13: { theme: "futur", titre: "L'IA dépasse-t-elle l'humain ?", texte: "Certains annoncent une explosion exponentielle des capacités de l'IA ; d'autres rappellent que la puissance brute ne crée ni sagesse ni conscience.", question: "Faut-il craindre une IA plus rapide que nous, ou une IA mal orientée ?" },
+  14: { theme: "histoire", titre: "Mesurer les séismes", texte: "L'échelle de Richter, logarithmique, est née en 1935 pour comparer des énergies colossales ; à La Réunion, on surveille ainsi le Piton de la Fournaise.", question: "En quoi une échelle logarithmique aide-t-elle à penser des phénomènes très inégaux ?" },
+  15: { theme: "ecologie", titre: "Les seuils de bascule", texte: "En écologie, franchir un seuil peut tout faire basculer brutalement, comme une suite qui change de régime : la planète a des points de non-retour.", question: "Comment agir avant un seuil dont on ne connaît pas la valeur exacte ?" },
+
+  // Semaine 4 — optimiser : comment l'IA apprend
+  16: { theme: "histoire", titre: "Newton, Leibniz et la dérivée", texte: "À la fin du XVIIᵉ siècle, Newton et Leibniz inventent presque en même temps le calcul des dérivées : l'outil qui décrit le mouvement et, aujourd'hui, l'apprentissage des IA.", question: "Que nous apprend le fait que deux savants trouvent la même idée séparément ?" },
+  17: { theme: "futur", titre: "Optimiser sans tout sacrifier", texte: "Une IA cherche le minimum d'une fonction d'erreur ; nos sociétés, elles, optimisent des objectifs (profit, vitesse) parfois au détriment d'autres valeurs.", question: "Qui choisit ce qu'une IA doit maximiser, et au nom de quoi ?" },
+  18: { theme: "ecologie", titre: "Faire plus avec moins", texte: "Optimiser, c'est le cœur de la transition écologique : réduire l'eau, l'énergie ou les matériaux tout en gardant le service rendu.", question: "Optimiser une ressource suffit-il, ou faut-il aussi réduire nos besoins ?" },
+  19: { theme: "histoire", titre: "La descente de gradient", texte: "L'idée de « suivre la pente » pour minimiser une erreur remonte à Cauchy en 1847 ; oubliée, elle est devenue le moteur de presque toutes les IA actuelles.", question: "Pourquoi une vieille idée mathématique peut-elle resurgir et tout changer ?" },
+  20: { theme: "ecologie", titre: "Les réseaux d'énergie", texte: "Des algorithmes d'optimisation pilotent les réseaux électriques pour intégrer solaire et éolien ; à La Réunion, l'objectif d'une énergie 100 % propre en dépend.", question: "Une île isolée a-t-elle un avantage pour réussir sa transition énergétique ?" },
+
+  // Semaine 5 — l'IA face aux grands défis
+  21: { theme: "histoire", titre: "Bayes, le calcul de l'incertitude", texte: "Le théorème de Bayes, publié après la mort de son auteur en 1761, dit comment réviser une probabilité face à une preuve : c'est ainsi qu'une IA médicale raisonne.", question: "Pourquoi un test très fiable ne donne-t-il pas une certitude pour une maladie rare ?" },
+  22: { theme: "futur", titre: "L'IA et la vérité", texte: "Les IA génératives produisent textes et images crédibles mais parfois faux ; distinguer le vrai du vraisemblable devient une compétence citoyenne essentielle.", question: "À l'ère des deepfakes, sur quoi fonder encore notre confiance ?" },
+  23: { theme: "ecologie", titre: "L'intégrale du carbone", texte: "Calculer ce qui s'accumule — CO₂ dans l'air, énergie reçue, eau écoulée — c'est faire une intégrale : les maths additionnent les effets du temps.", question: "Pourquoi raisonner sur des cumuls, et pas seulement sur des instants, change-t-il tout en écologie ?" },
+  24: { theme: "histoire", titre: "Gauss et les moindres carrés", texte: "Vers 1800, Gauss ajuste un modèle aux données pour retrouver une planète perdue ; sa méthode des moindres carrés irrigue encore l'apprentissage automatique.", question: "Qu'est-ce qui rend une méthode mathématique « universelle » au point de durer deux siècles ?" },
+  25: { theme: "futur", titre: "Voir en trois dimensions", texte: "Voitures autonomes, robots et imagerie médicale se repèrent dans un espace à trois coordonnées : la géométrie de l'espace donne des yeux aux machines.", question: "Faut-il qu'une machine « voie » comme nous pour bien se déplacer parmi nous ?" },
+
+  // Semaine 6 — ton avenir : changer le monde
+  26: { theme: "histoire", titre: "Des géomètres aux satellites", texte: "La géométrie des droites et des plans, héritée des Grecs, permet aujourd'hui au GPS de te localiser au mètre près depuis l'espace.", question: "Comment une science vieille de millénaires peut-elle encore guider nos technologies ?" },
+  27: { theme: "futur", titre: "Comparer, c'est juger", texte: "Les IA comparent textes et images par un simple produit scalaire ; mais derrière chaque comparaison se cachent des choix humains sur ce qui « se ressemble ».", question: "Une mesure de ressemblance peut-elle être neutre, ou porte-t-elle toujours un point de vue ?" },
+  28: { theme: "ecologie", titre: "La science de l'air au Maïdo", texte: "À La Réunion, l'observatoire du Maïdo scrute l'atmosphère ; la loi des grands nombres rappelle qu'il faut beaucoup de mesures pour approcher la vérité.", question: "Combien de données faut-il pour avoir le droit d'affirmer quelque chose sur la planète ?" },
+  29: { theme: "futur", titre: "Inventer une IA utile", texte: "Repérer les sécheresses par satellite, économiser l'eau d'irrigation, surveiller les côtes : les maths transforment une bonne intention en projet réalisable.", question: "Quel problème de ton île ou du monde voudrais-tu confier, en partie, à une IA ?" },
+  30: { theme: "futur", titre: "Le monde de demain, c'est toi", texte: "Tu sais désormais calculer, démontrer, douter et argumenter : ces armes intellectuelles te donnent le pouvoir de poser tes idées et d'agir avec lucidité.", question: "Quelle grande question voudrais-tu résoudre pour rendre le monde plus juste ?" },
 };

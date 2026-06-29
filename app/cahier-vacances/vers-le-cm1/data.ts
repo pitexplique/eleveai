@@ -9,7 +9,7 @@
 /*  Moteur d'affichage commun : components/cahier/CahierVacances.tsx.          */
 /* -------------------------------------------------------------------------- */
 
-import type { Etape, Jour } from "@/components/cahier/types";
+import type { Etape, Jour, MondeDemain } from "@/components/cahier/types";
 
 /** Les 6 coins du jardin (un par semaine). */
 export const parcours: Etape[] = [
@@ -1433,4 +1433,51 @@ export const leSaviasTu: Record<number, { portee: "local" | "monde"; texte: stri
   28: { portee: "monde", texte: "Partager en parts égales, c'est exactement ce qu'on appelle… une division !" },
   29: { portee: "local", texte: "Faire le tour de son jardin, c'est déjà un petit voyage plein de découvertes." },
   30: { portee: "monde", texte: "En CM1, tu apprendras encore plein de choses : chaque année, on grandit un peu plus !" },
+};
+
+/* « Comprendre le monde » — un thème par jour (Histoire / Écologie / Futur),
+   calé sur le jardin de Ti Margo (cour → potager → fleurs → bêtes → mare → fête).
+   Niveau CE2 : phrases courtes et simples, tutoiement. */
+export const mondeDemain: Record<number, MondeDemain> = {
+  // Semaine 1 — la cour et le manguier
+  1: { theme: "histoire", titre: "Le manguier voyageur", texte: "Le manguier vient de très loin, d'Asie : des marins l'ont apporté en bateau il y a longtemps.", question: "Connais-tu un autre fruit qui vient d'ailleurs ?" },
+  2: { theme: "ecologie", titre: "Un arbre, c'est de l'ombre", texte: "Sous le grand manguier, il fait plus frais : les arbres rafraîchissent l'air et donnent de l'ombre.", question: "Pourquoi est-ce agréable de jouer sous un arbre quand il fait chaud ?" },
+  3: { theme: "futur", titre: "Planter pour demain", texte: "Si tu plantes un noyau de mangue, un arbre poussera dans quelques années pour les enfants de demain.", question: "Que pourrais-tu planter dans ton jardin ?" },
+  4: { theme: "histoire", titre: "Le margouillat de l'île", texte: "Le margouillat habite La Réunion depuis très longtemps : il aide en mangeant les moustiques.", question: "Quel petit animal vois-tu souvent près de chez toi ?" },
+  5: { theme: "ecologie", titre: "Ne pas gaspiller les fruits", texte: "Les mangues tombées par terre nourrissent les oiseaux et les insectes : rien ne se perd.", question: "Que peut-on faire des fruits trop mûrs au lieu de les jeter ?" },
+
+  // Semaine 2 — le potager
+  6: { theme: "futur", titre: "Faire pousser ses légumes", texte: "Demain, on aura de plus en plus de potagers, même en ville, pour manger des légumes tout frais.", question: "Quel légume aimerais-tu faire pousser toi-même ?" },
+  7: { theme: "histoire", titre: "Des légumes d'ici", texte: "Le chouchou et la patate douce poussent à La Réunion depuis longtemps : c'est la cuisine de l'île.", question: "Quel légume du jardin préfères-tu manger ?" },
+  8: { theme: "ecologie", titre: "Le compost magique", texte: "Les épluchures de légumes, mises en tas, deviennent une bonne terre pour le potager.", question: "Pourquoi est-ce mieux de composter que de tout jeter ?" },
+  9: { theme: "futur", titre: "Des potagers robots", texte: "Plus tard, de petits robots aideront peut-être à arroser et à surveiller les légumes du jardin.", question: "Quel travail du jardin aimerais-tu qu'un robot fasse ?" },
+  10: { theme: "ecologie", titre: "L'eau, c'est précieux", texte: "Les légumes ont besoin d'eau, mais l'eau est rare : il faut arroser sans gaspiller.", question: "Comment peux-tu arroser le jardin sans perdre d'eau ?" },
+
+  // Semaine 3 — le jardin de fleurs
+  11: { theme: "histoire", titre: "La fleur parfumée", texte: "La vanille de La Réunion vient d'une jolie fleur ; on s'en sert dans les gâteaux depuis très longtemps.", question: "Aimes-tu l'odeur de la vanille ?" },
+  12: { theme: "ecologie", titre: "Merci les abeilles", texte: "Les abeilles vont de fleur en fleur : sans elles, il y aurait beaucoup moins de fruits.", question: "Que peut-on faire pour aider les abeilles ?" },
+  13: { theme: "futur", titre: "Des villes pleines de fleurs", texte: "Demain, on plantera encore plus de fleurs en ville pour les abeilles et pour faire joli.", question: "Où planterais-tu des fleurs près de chez toi ?" },
+  14: { theme: "ecologie", titre: "Les fleurs sauvages", texte: "Les fleurs des champs nourrissent plein d'insectes : il ne faut pas toutes les couper.", question: "Pourquoi est-ce bien de laisser pousser quelques fleurs sauvages ?" },
+  15: { theme: "histoire", titre: "Des fleurs qui soignent", texte: "Autrefois, on soignait les petits bobos avec des plantes du jardin : c'est la médecine « péi ».", question: "Connais-tu une plante qui fait du bien ?" },
+
+  // Semaine 4 — les petites bêtes
+  16: { theme: "ecologie", titre: "La coccinelle amie", texte: "La coccinelle mange les pucerons qui abîment les plantes : c'est l'amie du jardinier.", question: "Pourquoi ne faut-il pas écraser les coccinelles ?" },
+  17: { theme: "futur", titre: "Apprendre des fourmis", texte: "Les fourmis travaillent ensemble ; les savants les observent pour inventer des robots malins.", question: "Qu'est-ce que les fourmis font très bien, ensemble ?" },
+  18: { theme: "histoire", titre: "Des insectes très anciens", texte: "Les insectes vivent sur la Terre depuis bien plus longtemps que les humains : des millions d'années.", question: "À ton avis, qui était là avant : la fourmi ou l'homme ?" },
+  19: { theme: "ecologie", titre: "Les papillons disparaissent", texte: "Il y a de moins en moins de papillons ; un jardin avec des fleurs les aide à revenir.", question: "Que peut-on planter pour attirer les papillons ?" },
+  20: { theme: "futur", titre: "Protéger les petites bêtes", texte: "Demain, on fera plus attention aux insectes, car ils sont utiles à toute la nature.", question: "Quel petit animal aimerais-tu protéger ?" },
+
+  // Semaine 5 — la petite mare
+  21: { theme: "ecologie", titre: "L'eau pleine de vie", texte: "Dans la mare vivent des grenouilles, des libellules et plein de petites bêtes : une eau propre les garde en vie.", question: "Qu'est-ce qui pourrait salir l'eau de la mare ?" },
+  22: { theme: "histoire", titre: "Porter l'eau autrefois", texte: "Avant le robinet, on allait chercher l'eau à la rivière et on la portait jusqu'à la maison.", question: "Est-ce plus facile aujourd'hui d'avoir de l'eau ? Pourquoi ?" },
+  23: { theme: "futur", titre: "Garder l'eau de pluie", texte: "Demain, on récupérera mieux l'eau de pluie dans des cuves pour arroser le jardin.", question: "Pourquoi est-ce malin de garder l'eau de pluie ?" },
+  24: { theme: "ecologie", titre: "Le voyage de l'eau", texte: "L'eau s'évapore, monte au ciel, forme les nuages, puis retombe en pluie : elle voyage sans fin.", question: "D'où vient la pluie qui remplit la mare ?" },
+  25: { theme: "futur", titre: "Une eau pour tous", texte: "Sur la Terre, des enfants n'ont pas d'eau propre ; demain, on veut que chacun en ait.", question: "Pourquoi l'eau propre est-elle si importante ?" },
+
+  // Semaine 6 — la fête au jardin, ouverture sur le monde
+  26: { theme: "histoire", titre: "La fête du partage", texte: "À La Réunion, on partage souvent les fruits et les plats avec les voisins : c'est une vieille tradition.", question: "Aimes-tu partager ? Pourquoi ?" },
+  27: { theme: "ecologie", titre: "Une fête sans déchets", texte: "Après la fête, on ramasse tout : un jardin propre reste beau et accueille la vie.", question: "Que fais-tu de tes déchets après un pique-nique ?" },
+  28: { theme: "futur", titre: "Le jardin de demain", texte: "Plus tard, on aura des jardins partout : sur les toits, dans les écoles, pour vivre avec la nature.", question: "Comment imagines-tu ton jardin idéal ?" },
+  29: { theme: "histoire", titre: "Un jardin, mille pays", texte: "Les plantes du jardin viennent du monde entier : le manguier d'Asie, la tomate d'Amérique.", question: "Trouves-tu joli que des plantes du monde poussent ensemble ?" },
+  30: { theme: "futur", titre: "La Terre, c'est toi", texte: "En grandissant, tu apprendras à connaître la nature et à la protéger, ici et partout dans le monde.", question: "Que feras-tu pour prendre soin de la planète ?" },
 };

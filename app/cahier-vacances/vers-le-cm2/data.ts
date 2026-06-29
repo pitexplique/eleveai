@@ -6,7 +6,7 @@
 /*  Moteur d'affichage commun : components/cahier/CahierVacances.tsx.          */
 /* -------------------------------------------------------------------------- */
 
-import type { Etape, Jour } from "@/components/cahier/types";
+import type { Etape, Jour, MondeDemain } from "@/components/cahier/types";
 
 /** Les 6 étapes du parcours « Ti Margo découvre son île ». */
 export const parcours: Etape[] = [
@@ -1456,4 +1456,50 @@ export const leSaviasTu: Record<number, { portee: "local" | "monde"; texte: stri
   28: { portee: "monde", texte: "Les premières photos en couleur datent d'il y a plus de 100 ans ; avant, tout était en noir et blanc." },
   29: { portee: "local", texte: "La Réunion est une petite île, mais on y trouve la mer, la forêt, des cascades et un volcan : tout un monde !" },
   30: { portee: "monde", texte: "En CM2, tu apprendras encore plein de choses : chaque année, tu deviens un peu plus grand et plus savant." },
+};
+
+/* « Comprendre le monde » — un thème par jour (Histoire / Écologie / Futur),
+   calé sur le voyage (plage → récif → forêt → cascades → marché → pique-nique). */
+export const mondeDemain: Record<number, MondeDemain> = {
+  // Semaine 1 — la plage et le lagon
+  1: { theme: "histoire", titre: "Le sable raconte le temps", texte: "Le sable est fait de petits bouts de coquillages et de roche, usés par la mer pendant très, très longtemps.", question: "À ton avis, le sable met-il longtemps à se former ?" },
+  2: { theme: "ecologie", titre: "Le lagon est fragile", texte: "Le lagon est protégé par le corail. Le corail est vivant : il faut le regarder sans le toucher ni marcher dessus.", question: "Pourquoi ne faut-il pas marcher sur le corail ?" },
+  3: { theme: "futur", titre: "L'énergie du soleil", texte: "À La Réunion, le soleil brille fort. Des panneaux peuvent capter sa lumière pour fabriquer de l'électricité propre.", question: "Connais-tu un objet qui marche grâce au soleil ?" },
+  4: { theme: "histoire", titre: "Une île longtemps déserte", texte: "Avant, personne ne vivait à La Réunion. Les premiers habitants sont venus par bateau, sans moteur ni électricité.", question: "Comment s'éclairait-on le soir à cette époque ?" },
+  5: { theme: "ecologie", titre: "La mer, pas une poubelle", texte: "Sur la plage, on rapporte tous ses déchets. Un sac en plastique dans la mer peut blesser les animaux.", question: "Que fais-tu de tes déchets après un pique-nique à la plage ?" },
+
+  // Semaine 2 — le récif et les tortues
+  6: { theme: "histoire", titre: "Des tortues très vieilles", texte: "Les tortues de mer vivent très longtemps, parfois plus de 80 ans : plus vieilles que tes arrière-grands-parents !", question: "À ton avis, quel autre animal vit très longtemps ?" },
+  7: { theme: "ecologie", titre: "Protéger les tortues", texte: "À La Réunion, les tortues vertes sont protégées. La nuit, elles viennent pondre leurs œufs sur le sable.", question: "Que peut faire un promeneur pour ne pas les déranger ?" },
+  8: { theme: "futur", titre: "Soigner les animaux blessés", texte: "À Saint-Leu, un centre soigne les tortues blessées puis les relâche dans la mer une fois guéries.", question: "Aimerais-tu un métier qui aide les animaux ?" },
+  9: { theme: "histoire", titre: "Le corail, un grand mur", texte: "Le récif de corail s'est construit petit à petit, sur des centaines d'années, par des milliers de petits animaux.", question: "Pourquoi le corail met-il si longtemps à grandir ?" },
+  10: { theme: "ecologie", titre: "L'eau trop chaude", texte: "Quand la mer devient trop chaude, le corail devient tout blanc et peut mourir : il faut protéger l'océan.", question: "Cite une chose qui réchauffe notre planète." },
+
+  // Semaine 3 — la forêt et les fleurs
+  11: { theme: "histoire", titre: "Une forêt très ancienne", texte: "La forêt de Bélouve est là depuis très longtemps. Souvent cachée dans les nuages, elle est très humide.", question: "Pourquoi une forêt ancienne est-elle précieuse ?" },
+  12: { theme: "ecologie", titre: "Des fleurs uniques", texte: "Certaines fleurs de La Réunion ne poussent nulle part ailleurs sur la Terre : on dit qu'elles sont endémiques.", question: "Pourquoi serait-ce triste qu'elles disparaissent ?" },
+  13: { theme: "futur", titre: "Replanter les arbres", texte: "Pour remettre des arbres sur les pentes, on essaie même des drones qui survolent la forêt et sèment des graines.", question: "Quel autre travail un robot pourrait-il faire pour la nature ?" },
+  14: { theme: "histoire", titre: "Les abeilles et les fleurs", texte: "Depuis toujours, les abeilles butinent les fleurs. En allant de l'une à l'autre, elles aident les fleurs à pousser.", question: "Que fabriquent les abeilles avec le nectar des fleurs ?" },
+  15: { theme: "ecologie", titre: "Protéger les abeilles", texte: "Les abeilles sont très utiles : sans elles, beaucoup de fruits et de fleurs ne pousseraient plus.", question: "Comment peut-on aider les abeilles près de chez soi ?" },
+
+  // Semaine 4 — la rivière et les cascades
+  16: { theme: "histoire", titre: "L'eau faisait tourner les moulins", texte: "Avant l'électricité, la force de l'eau des rivières faisait déjà tourner les moulins pour écraser le grain.", question: "Quelle autre force de la nature peut faire tourner une machine ?" },
+  17: { theme: "ecologie", titre: "Le voyage de l'eau", texte: "La pluie tombe sur la montagne, coule dans la rivière, puis va à la mer : c'est le voyage sans fin de l'eau.", question: "Peux-tu raconter le voyage d'une goutte d'eau ?" },
+  18: { theme: "futur", titre: "L'électricité de la cascade", texte: "L'eau qui tombe d'une cascade peut faire tourner une machine et fabriquer de l'électricité propre, sans pétrole.", question: "Pourquoi cette énergie est-elle bonne pour la planète ?" },
+  19: { theme: "ecologie", titre: "Une eau bien propre", texte: "Dans l'eau claire vivent poissons et grenouilles. Une rivière sale perd vite tous ses petits habitants.", question: "Qu'est-ce qui pourrait salir une rivière ?" },
+  20: { theme: "ecologie", titre: "Ne pas gaspiller l'eau", texte: "L'eau qu'on boit est précieuse : il ne faut pas la gaspiller. On ferme le robinet quand on se brosse les dents.", question: "Cite un geste simple pour économiser l'eau." },
+
+  // Semaine 5 — le marché et le village
+  21: { theme: "histoire", titre: "Avant l'argent, le troc", texte: "Avant les pièces et les billets, les gens échangeaient des objets : du poisson contre des fruits, par exemple.", question: "Qu'est-ce que tu échangerais contre une mangue ?" },
+  22: { theme: "ecologie", titre: "Manger les fruits d'ici", texte: "Au marché, les mangues et les ananas poussent sur l'île : ils n'ont pas voyagé en avion, c'est mieux pour la planète.", question: "Pourquoi est-ce mieux de manger des fruits du coin ?" },
+  23: { theme: "histoire", titre: "Le cari, un plat mélangé", texte: "Le cari réunionnais mélange des recettes venues d'Inde, d'Afrique, de Chine et d'Europe : un plat plein d'histoires.", question: "Connais-tu un plat qui vient d'un autre pays ?" },
+  24: { theme: "futur", titre: "Moins de plastique au marché", texte: "Demain, on utilisera de plus en plus de paniers et de sacs en tissu pour faire ses courses, au lieu du plastique.", question: "Que pourrais-tu emporter pour ne pas prendre de sac plastique ?" },
+  25: { theme: "ecologie", titre: "Ne rien jeter par terre", texte: "Au village comme partout, on met ses déchets à la poubelle : un papier par terre met longtemps à disparaître.", question: "Que fais-tu d'un emballage quand il n'y a pas de poubelle ?" },
+
+  // Semaine 6 — le grand pique-nique, ouverture sur le monde
+  26: { theme: "histoire", titre: "Le toit de l'océan Indien", texte: "Du point de vue, on voit très loin. Le plus haut sommet de l'île, le Piton des Neiges, monte à plus de 3 000 mètres !", question: "Qu'est-ce qui change quand on monte très haut ?" },
+  27: { theme: "ecologie", titre: "Prendre soin de la Terre", texte: "Depuis le sommet, on voit toute l'île. La protéger, c'est faire de petits gestes chaque jour pour la nature.", question: "Quel petit geste fais-tu déjà pour la planète ?" },
+  28: { theme: "futur", titre: "Les métiers de demain", texte: "Plus tard, beaucoup de métiers serviront à protéger la planète : garde forestier, scientifique de la mer, jardinier.", question: "Quel métier « utile à la Terre » aimerais-tu faire ?" },
+  29: { theme: "histoire", titre: "Une île, plein de cultures", texte: "À La Réunion vivent des familles venues d'Inde, d'Afrique, de Chine et d'Europe : on apprend à vivre ensemble.", question: "Qu'est-ce qu'on gagne à connaître d'autres cultures ?" },
+  30: { theme: "futur", titre: "Le monde de demain, c'est toi", texte: "En CM2, tu apprendras encore plein de choses pour comprendre la Terre et, plus tard, aider à la protéger.", question: "Quel problème du monde aimerais-tu résoudre plus tard ?" },
 };

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import CahierVacances from "@/components/cahier/CahierVacances";
 import type { CahierConfig } from "@/components/cahier/types";
-import { carnet, defisExpert, jours, leSaviasTu, parcours } from "./data";
+import { carnet, defisExpert, jours, leSaviasTu, mondeDemain, parcours } from "./data";
 
 const config: CahierConfig = {
   slug: "vers-la-2nde",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 export default function CahierVacancesVersLa2ndePage() {
   return (
     <CahierVacances
-      data={{ jours, parcours, defisExpert, carnet, leSaviasTu }}
+      data={{ jours, parcours, defisExpert, carnet, leSaviasTu, mondeDemain }}
       config={config}
     />
   );
