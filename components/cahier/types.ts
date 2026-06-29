@@ -30,6 +30,16 @@ export type Etape = {
   intro: string;
 };
 
+/** Rubrique « Comprendre le monde » : un thème par jour (Histoire / Écologie /
+ *  Futur) pour ouvrir le cahier sur le monde réel. Optionnel : un cahier qui ne
+ *  la fournit pas n'affiche tout simplement pas le bloc. */
+export type MondeDemain = {
+  theme: "histoire" | "ecologie" | "futur";
+  titre: string;
+  texte: string;
+  question: string;
+};
+
 /** Données complètes d'un cahier (un niveau). */
 export type CahierData = {
   jours: Jour[];
@@ -37,6 +47,8 @@ export type CahierData = {
   defisExpert: Record<number, { enonce: string; correction: string }>;
   carnet: Record<number, string>;
   leSaviasTu: Record<number, { portee: "local" | "monde"; texte: string }>;
+  /** Rubrique Histoire / Écologie / Futur (optionnelle, gatée par sa présence). */
+  mondeDemain?: Record<number, MondeDemain>;
 };
 
 /** Libellés propres à chaque niveau (le reste du moteur est commun). */

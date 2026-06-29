@@ -6,7 +6,7 @@
 /*  Le moteur d'affichage est commun : components/cahier/CahierVacances.tsx.   */
 /* -------------------------------------------------------------------------- */
 
-import type { Etape, Jour } from "@/components/cahier/types";
+import type { Etape, Jour, MondeDemain } from "@/components/cahier/types";
 
 /** Les 6 étapes du parcours (fil conducteur de l'été). */
 export const parcours: Etape[] = [
@@ -1599,4 +1599,50 @@ export const leSaviasTu: Record<number, { portee: "local" | "monde"; texte: stri
   28: { portee: "monde", texte: "Du sommet, par temps clair, on devine l'île Maurice à l'horizon, à environ 200 km." },
   29: { portee: "local", texte: "La Réunion est française et européenne, tout en étant près de l'Afrique : un pont entre les mondes." },
   30: { portee: "monde", texte: "Entrer en 6ᵉ, c'est comme atteindre un sommet : une nouvelle vue s'ouvre… sur le monde entier. Bon voyage !" },
+};
+
+/* « Comprendre le monde » — un thème par jour (Histoire / Écologie / Futur),
+   calé sur le voyage (lagon → forêt → volcan → Mafate → cascades → sommet). */
+export const mondeDemain: Record<number, MondeDemain> = {
+  // Semaine 1 — le lagon
+  1: { theme: "ecologie", titre: "Le corail est vivant", texte: "La barrière qui protège le lagon est faite de coraux, de minuscules animaux qui mettent des années à grandir et abritent des centaines de poissons.", question: "Pourquoi ne faut-il jamais marcher sur le corail ?" },
+  2: { theme: "histoire", titre: "Une île longtemps déserte", texte: "Avant le XVIIᵉ siècle, personne ne vivait à La Réunion : les premiers habitants sont arrivés par bateau, sans électricité ni moteur.", question: "Comment faisait-on pour s'éclairer et cuisiner à cette époque ?" },
+  3: { theme: "futur", titre: "L'énergie de l'océan", texte: "Des ingénieurs cherchent à produire de l'électricité grâce à la chaleur de la mer : une énergie propre et inépuisable.", question: "Quelle autre énergie la nature nous offre-t-elle gratuitement ?" },
+  4: { theme: "ecologie", titre: "La tortue verte", texte: "Les tortues marines viennent pondre la nuit sur le sable ; protégées aujourd'hui, elles avaient failli disparaître.", question: "Que peut faire un promeneur pour ne pas les déranger ?" },
+  5: { theme: "histoire", titre: "L'île aux mille noms", texte: "L'île s'est d'abord appelée île Bourbon, puis La Réunion en 1793, pendant la Révolution française.", question: "Connais-tu une ville ou un pays qui a changé de nom ?" },
+
+  // Semaine 2 — la forêt
+  6: { theme: "ecologie", titre: "Des plantes uniques au monde", texte: "Beaucoup d'arbres et de fleurs de la forêt réunionnaise ne poussent nulle part ailleurs : on dit qu'ils sont endémiques.", question: "Pourquoi serait-ce une catastrophe qu'ils disparaissent ?" },
+  7: { theme: "futur", titre: "Les métiers de la nature", texte: "Demain, de nombreux métiers serviront à protéger la planète : garde forestier, ingénieur en énergies propres, océanographe.", question: "Quel métier 'utile à la Terre' aimerais-tu faire ?" },
+  8: { theme: "histoire", titre: "Le 20 décembre 1848", texte: "Ce jour-là, l'esclavage a été aboli à La Réunion : on le fête chaque année, c'est le « Fèt Kaf », la fête de la liberté.", question: "Pourquoi est-il important de se souvenir de cette date ?" },
+  9: { theme: "ecologie", titre: "Les espèces envahissantes", texte: "Certaines plantes apportées par l'homme se répandent trop vite et étouffent les espèces locales de la forêt.", question: "À ton avis, comment une graine peut-elle voyager d'un pays à l'autre ?" },
+  10: { theme: "futur", titre: "Replanter les forêts", texte: "Pour reboiser plus vite, on teste des drones qui survolent les pentes et y sèment des graines.", question: "Quel autre travail un robot pourrait-il faire pour aider la nature ?" },
+
+  // Semaine 3 — le volcan
+  11: { theme: "histoire", titre: "Un volcan très surveillé", texte: "Le Piton de la Fournaise entre en éruption presque chaque année ; des scientifiques l'observent jour et nuit pour prévenir les habitants.", question: "Comment peut-on « écouter » un volcan avant qu'il se réveille ?" },
+  12: { theme: "ecologie", titre: "La lave devient une terre", texte: "En refroidissant puis en s'érodant pendant des siècles, la lave forme un sol très fertile où poussent fruits et canne à sucre.", question: "Pourquoi la nature a-t-elle besoin de beaucoup de temps ?" },
+  13: { theme: "futur", titre: "La chaleur de la Terre", texte: "La chaleur cachée sous les volcans, la géothermie, pourrait un jour chauffer et éclairer des maisons.", question: "Est-il mieux d'utiliser cette énergie ou de brûler du pétrole ? Pourquoi ?" },
+  14: { theme: "histoire", titre: "D'où vient le mot volcan", texte: "« Volcan » vient de Vulcain, le dieu romain du feu et des forges : les Anciens expliquaient ainsi le feu de la Terre.", question: "Connais-tu une autre légende qui explique un phénomène naturel ?" },
+  15: { theme: "ecologie", titre: "Un air à protéger", texte: "Lors d'une éruption, le volcan rejette des gaz ; respirer un air pur dépend aussi de ce que les humains rejettent chaque jour.", question: "Cite une action qui pollue l'air, et une qui le protège." },
+
+  // Semaine 4 — Mafate
+  16: { theme: "histoire", titre: "Le refuge des hommes libres", texte: "Le cirque de Mafate, sans aucune route, fut le refuge des « marrons », des esclaves qui avaient fui pour vivre libres.", question: "Pourquoi un endroit difficile d'accès offrait-il la liberté ?" },
+  17: { theme: "ecologie", titre: "Le cycle de l'eau", texte: "La pluie s'infiltre dans la montagne, puis ressort en sources claires : c'est le grand voyage de l'eau, sans fin.", question: "Peux-tu citer les étapes du voyage d'une goutte d'eau ?" },
+  18: { theme: "futur", titre: "Se déplacer autrement", texte: "À Mafate, tout arrive à pied ou en hélicoptère ; demain, des drones livreront peut-être le courrier et les colis.", question: "Quel moyen de transport propre imagines-tu pour l'avenir ?" },
+  19: { theme: "histoire", titre: "Des sentiers centenaires", texte: "Les chemins de Mafate, tracés il y a très longtemps, sont aujourd'hui entretenus à la main par des habitants.", question: "Pourquoi faut-il prendre soin d'un sentier de randonnée ?" },
+  20: { theme: "ecologie", titre: "Ne rien laisser derrière soi", texte: "En montagne, on rapporte tous ses déchets : la nature met parfois des centaines d'années à les faire disparaître.", question: "Combien de temps, à ton avis, met une bouteille en plastique à disparaître ?" },
+
+  // Semaine 5 — les cascades
+  21: { theme: "futur", titre: "L'électricité de l'eau", texte: "L'eau qui tombe d'une cascade peut faire tourner une turbine et produire de l'électricité propre : l'hydroélectricité.", question: "Pourquoi dit-on que cette énergie est « renouvelable » ?" },
+  22: { theme: "ecologie", titre: "L'eau douce est précieuse", texte: "Toute l'eau de la planète ne se boit pas : l'eau douce des rivières et des cascades est rare, il faut l'économiser.", question: "Cite deux gestes simples pour gaspiller moins d'eau." },
+  23: { theme: "histoire", titre: "Quand l'eau faisait tourner les moulins", texte: "Avant l'électricité, la force de l'eau faisait déjà tourner les moulins et les premières usines à sucre de l'île.", question: "Quelle force de la nature pourrait remplacer l'eau pour faire tourner une machine ?" },
+  24: { theme: "futur", titre: "Une île 100 % propre", texte: "La Réunion s'est donné un objectif : produire un jour toute son électricité sans pétrole ni charbon.", question: "Quelles énergies de l'île pourraient remplacer le pétrole ?" },
+  25: { theme: "ecologie", titre: "La vie des rivières", texte: "Dans l'eau claire vivent poissons, crevettes « bichiques » et insectes : une rivière polluée perd vite toute sa vie.", question: "Qu'est-ce qui pourrait salir une rivière ?" },
+
+  // Semaine 6 — le sommet, ouverture sur le monde
+  26: { theme: "histoire", titre: "Le toit de l'océan Indien", texte: "Le Piton des Neiges, 3 070 m, est le plus haut sommet de tout l'océan Indien ; le gravir prend des heures de marche.", question: "Qu'est-ce qui change quand on monte très haut en altitude ?" },
+  27: { theme: "ecologie", titre: "L'océan qui monte", texte: "Depuis le sommet on voit la mer : à cause du réchauffement de la planète, son niveau monte lentement chaque année.", question: "Qu'est-ce qui réchauffe la planète, et comment le ralentir ?" },
+  28: { theme: "futur", titre: "Observer le ciel et l'atmosphère", texte: "Tout près, l'observatoire du Maïdo étudie l'air et le ciel ; c'est là que se prépare la science de demain.", question: "Si tu étais scientifique, que voudrais-tu observer ou découvrir ?" },
+  29: { theme: "histoire", titre: "Un carrefour de cultures", texte: "La Réunion est française et européenne, au milieu de l'océan Indien, près de l'Afrique : un carrefour entre les peuples.", question: "Qu'est-ce qu'on gagne à connaître plusieurs cultures ?" },
+  30: { theme: "futur", titre: "Le monde de demain, c'est toi", texte: "En 6ᵉ, tu vas apprendre les outils pour comprendre la Terre et, plus tard, aider à la protéger et à l'inventer.", question: "Quel problème du monde aimerais-tu résoudre quand tu seras grand(e) ?" },
 };

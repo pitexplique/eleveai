@@ -21,6 +21,13 @@ import {
 } from "lucide-react";
 import type { CahierConfig, CahierData } from "./types";
 
+/* Habillage de la rubrique « Comprendre le monde » selon son thème du jour. */
+const themesMonde = {
+  histoire: { emoji: "📜", label: "Histoire", border: "border-amber-200", bg: "bg-amber-50/60", title: "text-amber-700" },
+  ecologie: { emoji: "🌱", label: "Écologie", border: "border-green-200", bg: "bg-green-50/60", title: "text-green-700" },
+  futur: { emoji: "🚀", label: "Demain", border: "border-indigo-200", bg: "bg-indigo-50/60", title: "text-indigo-700" },
+} as const;
+
 /* Barème de points commun à chaque jour (panneau latéral). */
 const baremePoints = [
   { label: "Maths", pts: "2 pts", icon: Calculator, color: "text-sky-600" },
@@ -142,7 +149,7 @@ export default function CahierVacances({
   data: CahierData;
   config: CahierConfig;
 }) {
-  const { jours, parcours, defisExpert, carnet, leSaviasTu } = data;
+  const { jours, parcours, defisExpert, carnet, leSaviasTu, mondeDemain } = data;
   const semaines = Array.from(new Set(jours.map((j) => j.semaine)));
 
   return (
@@ -585,6 +592,31 @@ export default function CahierVacances({
                       </div>
                     </aside>
                   </div>
+
+                  {/* Comprendre le monde — Histoire / Écologie / Futur (gaté :
+                     ne s'affiche que si le cahier fournit le contenu du jour). */}
+                  {mondeDemain?.[jour.numero] &&
+                    (() => {
+                      const md = mondeDemain[jour.numero];
+                      const t = themesMonde[md.theme];
+                      return (
+                        <div className={`mt-4 rounded-2xl border ${t.border} ${t.bg} p-4 print:mt-3`}>
+                          <div className="flex items-center justify-between">
+                            <h2 className={`flex items-center gap-2 text-base font-black ${t.title}`}>
+                              <span aria-hidden="true">🌍</span>
+                              Comprendre le monde — {t.label} {t.emoji}
+                            </h2>
+                            <Termine />
+                          </div>
+                          <p className="mt-1 text-sm leading-6 text-slate-700">
+                            <span className="font-bold">{md.titre}.</span> {md.texte}
+                          </p>
+                          <p className="mt-1 text-xs italic leading-5 text-slate-600">
+                            💭 À toi de réfléchir : {md.question}
+                          </p>
+                        </div>
+                      );
+                    })()}
 
                   {/* Mon carnet de voyage — espace libre pour dessiner / écrire
                      (flex-1 : remplit la place restante avant le footer) */}
