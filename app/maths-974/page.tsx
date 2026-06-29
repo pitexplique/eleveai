@@ -123,23 +123,6 @@ export default async function Maths974Page() {
             Mafate, les couleurs d&apos;un marché — il y a, derrière chaque
             instant, une beauté qu&apos;un chiffre éclaire sans jamais l&apos;éteindre.
           </p>
-
-          <blockquote className="mt-7 max-w-2xl border-l-4 border-amber-300 pl-4 text-base italic leading-7 text-white/90 sm:text-lg">
-            «&nbsp;Le plus beau qu&apos;il nous soit donné de vivre, c&apos;est
-            le mystère&nbsp;: il est la source de tout art et de toute science
-            véritables.&nbsp;»
-            <span className="mt-1 block text-sm font-bold not-italic text-amber-200">
-              — Albert Einstein
-            </span>
-          </blockquote>
-
-          <p className="mt-6 max-w-2xl text-base font-semibold leading-7 text-white/90 sm:text-lg">
-            Alors on apprend par <strong className="text-amber-200">curiosité</strong>,
-            par <strong className="text-amber-200">espoir</strong>, et — surtout —
-            par <strong className="text-amber-200">amour</strong>&nbsp;: l&apos;amour
-            d&apos;apprendre, et l&apos;amour qu&apos;on met à transmettre. Parce
-            que c&apos;est peut-être ça, au fond, qui change le monde. 🌺
-          </p>
         </div>
       </section>
 
