@@ -3,7 +3,7 @@
    accompagner son enfant, sans faire à sa place.
    S1 = les maths du primaire · S2 = le français · S3 = collège & méthode. */
 
-import type { CahierParentsData, JourParent } from "@/components/cahier/parents-types";
+import type { CahierParentsData, JourParent, MondeDemainParent } from "@/components/cahier/parents-types";
 
 export const semaines: CahierParentsData["semaines"] = [
   {
@@ -567,3 +567,99 @@ export const jours: JourParent[] = [
     },
   },
 ];
+
+/* « En parler avec votre enfant » : une ouverture quotidienne, à la maison.
+   Cycle histoire → écologie → futur. Angle PARENT : amorcer le dialogue,
+   valoriser la curiosité, sans faire à la place ni angoisser. */
+export const mondeDemain: Record<number, MondeDemainParent> = {
+  1: {
+    theme: "histoire",
+    titre: "Calculer avant la calculatrice",
+    texte:
+      "Racontez-lui comment vous posiez vos opérations à la main, ou comment ses grands-parents comptaient au marché sans machine. Il verra que sa division a une longue histoire.",
+  },
+  2: {
+    theme: "ecologie",
+    titre: "Partager équitablement",
+    texte:
+      "Au prochain repas, demandez-lui de partager un fruit ou un gâteau en parts vraiment égales : une façon concrète de relier les fractions au goût de ne rien gaspiller.",
+  },
+  3: {
+    theme: "futur",
+    titre: "Les métiers des nombres",
+    texte:
+      "Glissez dans la conversation que beaucoup de métiers d'avenir manient les chiffres — météorologue, ingénieur, codeur. Demandez-lui ce qu'il aimerait, sans pression.",
+  },
+  4: {
+    theme: "histoire",
+    titre: "Les marchands d'autrefois",
+    texte:
+      "Évoquez les marchands ambulants et les petites boutiques de votre enfance, qui calculaient les prix de tête. La proportionnalité, c'est le calcul des étals d'hier et d'aujourd'hui.",
+  },
+  5: {
+    theme: "ecologie",
+    titre: "Lire une étiquette",
+    texte:
+      "Devant un emballage, observez ensemble les prix au kilo ou la quantité de sucre : décimaux et comparaisons servent à mieux consommer, et à moins se faire avoir.",
+  },
+  6: {
+    theme: "futur",
+    titre: "Écrire sans se tromper",
+    texte:
+      "Demandez-lui s'il pense que les machines écriront un jour à notre place. Profitez-en pour valoriser le fait de comprendre soi-même les accords, au-delà du correcteur.",
+  },
+  7: {
+    theme: "histoire",
+    titre: "Le français d'avant",
+    texte:
+      "Montrez-lui une vieille lettre de famille, une carte postale, ou parlez du créole de La Réunion : la langue change, et c'est passionnant d'en parler ensemble.",
+  },
+  8: {
+    theme: "ecologie",
+    titre: "Le mot juste sur la nature",
+    texte:
+      "En promenade, nommez précisément ce que vous voyez — un paille-en-queue, un filao, un letchi. Bien nommer le vivant, c'est déjà apprendre à y faire attention.",
+  },
+  9: {
+    theme: "futur",
+    titre: "Parler à une machine",
+    texte:
+      "Les assistants vocaux comprennent de mieux en mieux nos phrases. Demandez-lui pourquoi bien conjuguer et bien construire ses phrases restera utile, même avec ces outils.",
+  },
+  10: {
+    theme: "histoire",
+    titre: "Les histoires qu'on se transmet",
+    texte:
+      "Racontez-lui un conte, une légende péi ou un souvenir de famille, puis demandez-lui de vous le redire à sa façon : comprendre et restituer un récit, ça se cultive à l'oral aussi.",
+  },
+  11: {
+    theme: "ecologie",
+    titre: "Compter ce qu'on consomme",
+    texte:
+      "Estimez ensemble la facture d'eau ou d'électricité du mois : les priorités de calcul deviennent concrètes quand il s'agit de comprendre ce que la maison dépense.",
+  },
+  12: {
+    theme: "futur",
+    titre: "Mesurer l'inaccessible",
+    texte:
+      "Expliquez-lui qu'on mesure la hauteur du Piton des Neiges ou la distance des étoiles sans y grimper. Pythagore et la géométrie ouvrent sur l'astronomie et l'ingénierie de demain.",
+  },
+  13: {
+    theme: "histoire",
+    titre: "Apprendre, hier et aujourd'hui",
+    texte:
+      "Parlez-lui de l'école de votre enfance — l'ardoise, les leçons par cœur, le maître unique. Il mesurera que les méthodes évoluent, et que vous apprenez encore à ses côtés.",
+  },
+  14: {
+    theme: "ecologie",
+    titre: "Une mémoire qui dure",
+    texte:
+      "Comparez la mémoire à un jardin : ce qu'on entretient un peu chaque jour prend racine. Un parallèle simple pour parler patience et efforts réguliers, sans le presser.",
+  },
+  15: {
+    theme: "futur",
+    titre: "Grandir avec les écrans",
+    texte:
+      "Demandez-lui à quoi ressembleront l'école et les outils numériques quand il sera grand. Un échange ouvert vaut mieux qu'une interdiction : on apprend à choisir ses usages.",
+  },
+};

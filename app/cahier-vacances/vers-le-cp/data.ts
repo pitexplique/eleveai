@@ -5,7 +5,7 @@
    la maison 🏠, le jardin 🌺, la plage 🏖️. */
 
 import type { Etape } from "@/components/cahier/types";
-import type { CahierDataPetit, JourPetit } from "@/components/cahier/petits-types";
+import type { CahierDataPetit, JourPetit, MondeDemainPetit } from "@/components/cahier/petits-types";
 
 export const parcours: Etape[] = [
   {
@@ -925,4 +925,28 @@ export const leSaviasTu: CahierDataPetit["leSaviasTu"] = {
   13: { portee: "local", texte: "Dans le lagon de La Réunion vivent des poissons-perroquets, tout colorés, avec un bec comme un oiseau !" },
   14: { portee: "local", texte: "À La Réunion, le soleil est très fort. On met un chapeau et de la crème pour protéger sa peau !" },
   15: { portee: "local", texte: "La Réunion est une île pleine de trésors : des maisons colorées, des jardins fleuris et de belles plages !" },
+};
+
+/* « Le monde de Ti Margo » — une phrase par jour, lue à voix haute par le parent.
+   Cycle histoire → écologie → futur. Pré-lecteur : jamais de texte affiché, juste
+   l'adulte qui raconte un petit fait et pose parfois une mini-question orale. */
+export const mondeDemain: Record<number, MondeDemainPetit> = {
+  /* ----- Semaine 1 : la maison ----- */
+  1: { theme: "histoire", parent: "Avant, il n'y avait pas de télé : le soir, on se racontait des histoires. Tu aimes les histoires, toi ?" },
+  2: { theme: "ecologie", parent: "Le margouillat sur le mur mange les moustiques : c'est notre petit ami, on le laisse tranquille." },
+  3: { theme: "futur", parent: "Demain, des petits robots aideront peut-être à ranger la maison. Et toi, qu'est-ce que tu rangerais ?" },
+  4: { theme: "histoire", parent: "Avant, il n'y avait pas de frigo : on gardait les fruits dans un endroit bien frais." },
+  5: { theme: "ecologie", parent: "On ferme l'eau quand on se lave les mains : l'eau, c'est précieux. Tu y penseras ?" },
+  /* ----- Semaine 2 : le jardin ----- */
+  6: { theme: "futur", parent: "Demain, on plantera encore plus d'arbres pour que la Terre reste toute verte." },
+  7: { theme: "histoire", parent: "Avant, on n'achetait pas les légumes : on les faisait pousser soi-même dans le jardin." },
+  8: { theme: "ecologie", parent: "L'abeille butine les fleurs pour faire le miel : sans elle, pas de fruits. On la protège !" },
+  9: { theme: "futur", parent: "Demain, des jardins pousseront peut-être sur les toits des maisons. Tu aimerais ça ?" },
+  10: { theme: "histoire", parent: "Avant, pas de voiture : on marchait beaucoup, ou on prenait la charrette à bœufs." },
+  /* ----- Semaine 3 : la plage ----- */
+  11: { theme: "ecologie", parent: "On ne jette rien sur la plage : un papier par terre peut rendre un poisson malade." },
+  12: { theme: "futur", parent: "Demain, des bateaux nettoieront la mer tout seuls. Et toi, comment garder le lagon propre ?" },
+  13: { theme: "histoire", parent: "Avant, les pêcheurs partaient en mer à la rame, sans moteur, dès le lever du soleil." },
+  14: { theme: "ecologie", parent: "La tortue de mer vit longtemps : pour la protéger, on garde le sable bien propre." },
+  15: { theme: "futur", parent: "Demain, c'est toi qui prendras soin de la Terre. Qu'est-ce que tu veux protéger en grand ?" },
 };

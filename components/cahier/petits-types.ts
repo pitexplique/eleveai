@@ -103,6 +103,15 @@ export type JourPetit = {
   defi: { consigne: string; correction: string };
 };
 
+/** « Le monde de Ti Margo » — ouverture quotidienne (Histoire / Écologie /
+ *  Futur) adaptée aux pré-lecteurs : pas de texte ni de question à lire pour
+ *  l'enfant, juste une phrase simple à dire à voix haute par le parent. */
+export type MondeDemainPetit = {
+  theme: "histoire" | "ecologie" | "futur";
+  /** La phrase lue à voix haute par le parent (fait simple + petite question orale). */
+  parent: string;
+};
+
 /** Données complètes d'un cahier « petits ». */
 export type CahierDataPetit = {
   jours: JourPetit[];
@@ -110,4 +119,6 @@ export type CahierDataPetit = {
   defisExpert: Record<number, { enonce: string; correction: string }>;
   carnet: Record<number, string>;
   leSaviasTu: Record<number, { portee: "local" | "monde"; texte: string }>;
+  /** Rubrique « Le monde de Ti Margo » (optionnelle, gatée par sa présence). */
+  mondeDemain?: Record<number, MondeDemainPetit>;
 };

@@ -4,7 +4,7 @@
    le jardin créole 🌺, la forêt et la montagne 🌴, le lagon 🐠. */
 
 import type { Etape } from "@/components/cahier/types";
-import type { CahierDataPetit, JourPetit } from "@/components/cahier/petits-types";
+import type { CahierDataPetit, JourPetit, MondeDemainPetit } from "@/components/cahier/petits-types";
 
 export const parcours: Etape[] = [
   {
@@ -971,6 +971,89 @@ export const carnet: CahierDataPetit["carnet"] = {
   13: "Midi ! C'est l'heure du pique-nique sur la plage. J'ai apporté des samoussas. On partage tout, c'est plus rigolo !",
   14: "Regarde ! Une baleine ! Chaque année, les baleines viennent près de La Réunion avec leurs bébés. Elles sont immenses et douces.",
   15: "On a fini notre grand tour : le jardin, la forêt, la montagne et le lagon ! Tu as été super. Tu es prêt pour le CE1. À bientôt ! 🦎❤️",
+};
+
+export const mondeDemain: Record<number, MondeDemainPetit> = {
+  /* === SEMAINE 1 — Le jardin créole 🌺 (histoire → ecologie → futur) === */
+  1: {
+    theme: "histoire",
+    parent:
+      "Avant, à La Réunion, les familles cultivaient leur jardin créole pour manger. Et chez nous, on a un jardin ?",
+  },
+  2: {
+    theme: "ecologie",
+    parent:
+      "Dans le jardin, les abeilles butinent les fleurs : sans elles, pas de fruits. On les laisse travailler tranquilles, d’accord ?",
+  },
+  3: {
+    theme: "futur",
+    parent:
+      "Demain, tu pourras planter une petite graine et la regarder grandir chaque jour. Quelle plante aimerais-tu faire pousser ?",
+  },
+  4: {
+    theme: "histoire",
+    parent:
+      "Il y a très longtemps, le volcan a fabriqué toute l’île de La Réunion. Sais-tu comment s’appelle ce volcan ?",
+  },
+  5: {
+    theme: "ecologie",
+    parent:
+      "Les papillons aident les fleurs à faire des graines. Pour les protéger, on garde le jardin sans produits qui piquent. C’est joli, un papillon, non ?",
+  },
+
+  /* === SEMAINE 2 — La forêt & la montagne 🌴 === */
+  6: {
+    theme: "futur",
+    parent:
+      "Demain, on plantera des arbres pour que la forêt reste verte et fraîche très longtemps. Tu veux en planter un avec moi ?",
+  },
+  7: {
+    theme: "ecologie",
+    parent:
+      "Le Tuit-tuit est un petit oiseau qui ne vit qu’à La Réunion. On le protège pour qu’il ne disparaisse pas. Tu sais imiter son chant ?",
+  },
+  8: {
+    theme: "histoire",
+    parent:
+      "Avant les voitures, on montait la montagne à pied ou à dos de mulet pendant des heures. Tu crois que c’était fatigant ?",
+  },
+  9: {
+    theme: "ecologie",
+    parent:
+      "Sur les sentiers, on remporte tous ses papiers : la forêt reste propre pour les animaux. On ne laisse rien par terre, d’accord ?",
+  },
+  10: {
+    theme: "futur",
+    parent:
+      "Demain, des promeneurs protégeront la montagne en marchant doucement, sans abîmer les plantes. Aimerais-tu être gardien de la forêt ?",
+  },
+
+  /* === SEMAINE 3 — Le lagon 🐠 === */
+  11: {
+    theme: "ecologie",
+    parent:
+      "Le corail du lagon est vivant : c’est la maison des petits poissons. On le regarde sans le toucher, tu veux bien ?",
+  },
+  12: {
+    theme: "histoire",
+    parent:
+      "Avant, les pêcheurs ramassaient les coquillages sur la plage pour faire de jolis colliers. Tu en as déjà trouvé un ?",
+  },
+  13: {
+    theme: "ecologie",
+    parent:
+      "Une bouteille jetée dans la mer fait du mal aux poissons. On met nos déchets à la poubelle. Tu m’aides à ramasser ?",
+  },
+  14: {
+    theme: "futur",
+    parent:
+      "Demain, si on garde la mer propre, les baleines reviendront chaque année près de l’île. Tu aimerais en revoir une ?",
+  },
+  15: {
+    theme: "futur",
+    parent:
+      "Demain, c’est toi qui prendras soin du jardin, de la forêt et du lagon de La Réunion. Lequel veux-tu protéger en premier ?",
+  },
 };
 
 export const leSaviasTu: CahierDataPetit["leSaviasTu"] = {

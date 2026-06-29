@@ -57,6 +57,13 @@ function PageEntete({ slug }: { slug: string }) {
   );
 }
 
+/* Habillage de la rubrique « En parler avec votre enfant » selon son thème. */
+const themesMonde = {
+  histoire: { emoji: "📜", label: "Histoire", border: "border-amber-200", bg: "bg-amber-50/60", title: "text-amber-700" },
+  ecologie: { emoji: "🌱", label: "Écologie", border: "border-green-200", bg: "bg-green-50/60", title: "text-green-700" },
+  futur: { emoji: "🚀", label: "Demain", border: "border-indigo-200", bg: "bg-indigo-50/60", title: "text-indigo-700" },
+} as const;
+
 export default function CahierParents({
   data,
   config,
@@ -64,7 +71,7 @@ export default function CahierParents({
   data: CahierParentsData;
   config: CahierParentsConfig;
 }) {
-  const { jours, semaines } = data;
+  const { jours, semaines, mondeDemain } = data;
   const avecExos = jours.filter((j) => j.exercices && j.exercices.length > 0);
 
   return (
@@ -324,6 +331,24 @@ export default function CahierParents({
                       {jour.piege.texte}
                     </p>
                   </div>
+
+                  {/* En parler avec votre enfant — Histoire / Écologie / Futur
+                     (gaté : ne s'affiche que si le cahier le fournit). */}
+                  {mondeDemain?.[jour.numero] &&
+                    (() => {
+                      const md = mondeDemain[jour.numero];
+                      const t = themesMonde[md.theme];
+                      return (
+                        <div className={`mt-3 rounded-2xl border ${t.border} ${t.bg} p-4`}>
+                          <h3 className={`flex items-center gap-2 text-sm font-black ${t.title}`}>
+                            <span aria-hidden="true">🌍</span>
+                            En parler avec votre enfant — {t.label} {t.emoji}
+                          </h3>
+                          <p className="mt-1 text-sm font-bold text-slate-800">{md.titre}</p>
+                          <p className="text-sm leading-6 text-slate-700">{md.texte}</p>
+                        </div>
+                      );
+                    })()}
 
                   <footer className="mt-4 flex items-center gap-2 border-t border-slate-200 pt-3 text-sm font-bold text-teal-700">
                     <Lightbulb className="h-4 w-4" />

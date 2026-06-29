@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import CahierParents from "@/components/cahier/CahierParents";
 import type { CahierParentsConfig } from "@/components/cahier/parents-types";
-import { jours, semaines } from "./data";
+import { jours, semaines, mondeDemain } from "./data";
 
 const config: CahierParentsConfig = {
   slug: "aider-mon-enfant",
@@ -40,5 +40,5 @@ export const metadata: Metadata = {
 };
 
 export default function CahierAiderMonEnfantPage() {
-  return <CahierParents data={{ jours, semaines }} config={config} />;
+  return <CahierParents data={{ jours, semaines, mondeDemain }} config={config} />;
 }

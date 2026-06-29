@@ -28,9 +28,20 @@ export type JourParent = {
   piege: { titre: string; texte: string };
 };
 
+/** « En parler avec votre enfant » — ouverture Histoire / Écologie / Futur :
+ *  une idée concrète pour aborder le sujet à la maison, dans l'esprit du cahier
+ *  parents (accompagner sans faire à la place). */
+export type MondeDemainParent = {
+  theme: "histoire" | "ecologie" | "futur";
+  titre: string;
+  texte: string;
+};
+
 export type CahierParentsData = {
   jours: JourParent[];
   semaines: { numero: number; titre: string; intro: string }[];
+  /** Rubrique « En parler avec votre enfant » (optionnelle, gatée par sa présence). */
+  mondeDemain?: Record<number, MondeDemainParent>;
 };
 
 /** Libellés propres au cahier parents. */

@@ -243,6 +243,13 @@ function corrigeActivite(a: Activite): string | null {
   }
 }
 
+/* Habillage de la rubrique « Le monde de Ti Margo » selon son thème du jour. */
+const themesMonde = {
+  histoire: { emoji: "📜", label: "Avant", border: "border-amber-200", bg: "bg-amber-50/60", title: "text-amber-700" },
+  ecologie: { emoji: "🌱", label: "La nature", border: "border-green-200", bg: "bg-green-50/60", title: "text-green-700" },
+  futur: { emoji: "🚀", label: "Demain", border: "border-indigo-200", bg: "bg-indigo-50/60", title: "text-indigo-700" },
+} as const;
+
 /* -------------------------------------------------------------------------- */
 /*  Moteur d'affichage des cahiers « petits ».                                 */
 /* -------------------------------------------------------------------------- */
@@ -253,7 +260,7 @@ export default function CahierPetits({
   data: CahierDataPetit;
   config: CahierConfig;
 }) {
-  const { jours, parcours, defisExpert, carnet, leSaviasTu } = data;
+  const { jours, parcours, defisExpert, carnet, leSaviasTu, mondeDemain } = data;
   const semaines = Array.from(new Set(jours.map((j) => j.semaine)));
 
   const mathsDe = (j: JourPetit) => j.activites.filter((a) => a.bloc === "maths");
@@ -644,6 +651,26 @@ export default function CahierPetits({
                       </div>
                     </aside>
                   </div>
+
+                  {/* Le monde de Ti Margo — Histoire / Écologie / Futur, lu par
+                     le parent (gaté : ne s'affiche que si le cahier le fournit). */}
+                  {mondeDemain?.[jour.numero] &&
+                    (() => {
+                      const md = mondeDemain[jour.numero];
+                      const t = themesMonde[md.theme];
+                      return (
+                        <div className={`mt-4 rounded-2xl border ${t.border} ${t.bg} p-4 print:mt-3`}>
+                          <h2 className={`flex items-center gap-2 text-base font-black ${t.title}`}>
+                            <span aria-hidden="true">🌍</span>
+                            Le monde de Ti Margo — {t.label} {t.emoji}
+                          </h2>
+                          <p className="mt-1 text-sm leading-6 text-slate-700">
+                            <span className="font-black text-orange-700">🗣️ Parent — </span>
+                            {md.parent}
+                          </p>
+                        </div>
+                      );
+                    })()}
 
                   {/* Mon dessin du jour */}
                   <div className="mt-4 flex flex-1 flex-col rounded-2xl border-2 border-dashed border-orange-300 bg-white p-3 print:mt-3">
