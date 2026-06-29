@@ -807,21 +807,31 @@ export default function CahierVacances({
             page-break-after: auto;
           }
 
-          /* La page de garde tient sur une seule A4 (marges resserrées). */
+          /* La page de garde tient sur une seule A4 (marges resserrées).
+             Resserrées davantage pour garder la dernière ligne sur la page. */
           .garde-page {
-            padding: 6mm !important;
+            padding: 5mm !important;
           }
           .garde-page .mt-8 {
-            margin-top: 14px !important;
-          }
-          .garde-page .mt-7 {
-            margin-top: 12px !important;
-          }
-          .garde-page .mt-6 {
             margin-top: 10px !important;
           }
-          .garde-page .mt-4 {
+          .garde-page .mt-7 {
             margin-top: 8px !important;
+          }
+          .garde-page .mt-6 {
+            margin-top: 7px !important;
+          }
+          .garde-page .mt-5 {
+            margin-top: 12px !important;
+          }
+          .garde-page .mt-4 {
+            margin-top: 7px !important;
+          }
+          .garde-page .mt-3 {
+            margin-top: 8px !important;
+          }
+          .garde-page .mt-2 {
+            margin-top: 5px !important;
           }
 
           /* Les corrigés démarrent toujours sur une page neuve. */
