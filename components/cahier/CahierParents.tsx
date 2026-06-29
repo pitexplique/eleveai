@@ -409,7 +409,9 @@ export default function CahierParents({
         @media print {
           @page {
             size: A4;
-            margin: 7mm;
+            /* haut · droite · bas · gauche — marge gauche élargie pour la
+               reliure (perforation / agrafage / spirale) sans rogner le contenu. */
+            margin: 7mm 7mm 7mm 16mm;
           }
           .jour-page {
             padding: 0 !important;

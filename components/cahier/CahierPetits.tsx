@@ -757,7 +757,9 @@ export default function CahierPetits({
         @media print {
           @page {
             size: A4;
-            margin: 6mm;
+            /* haut · droite · bas · gauche — marge gauche élargie pour la
+               reliure (perforation / agrafage / spirale) sans rogner le contenu. */
+            margin: 6mm 6mm 6mm 16mm;
           }
           .jour-page {
             padding: 0 !important;
