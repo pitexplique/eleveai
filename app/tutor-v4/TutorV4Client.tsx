@@ -404,7 +404,11 @@ function selectSimpleOption(pair: TutorQuestionPair): TutorQuestionOption {
       return a.meta.starLevel - b.meta.starLevel;
     }
 
-    return a.text.length - b.text.length;
+    // À pertinence égale, on départage AU HASARD (et non par longueur de texte) :
+    // sinon le mode simple choisissait toujours l'énoncé le plus court, donc
+    // toujours le QCM, et n'affichait jamais les questions en saisie libre
+    // (orthographe). Appelé dans un effet, pas au rendu → pas de souci d'hydratation.
+    return Math.random() - 0.5;
   })[0];
 }
 
