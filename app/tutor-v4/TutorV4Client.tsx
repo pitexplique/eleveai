@@ -85,6 +85,7 @@ import {
   speakText,
   stopSpeak,
   buildReadableQuestion,
+  speechLangForMatiere,
 } from "./ListenButton";
 import AudioBoost from "@/components/AudioBoost";
 import { MarkdownMath } from "@/components/MarkdownMath";
@@ -552,11 +553,14 @@ function forceScrollTopOnArrival() {
     });
   }
 
+  // Langue de lecture : anglais/espagnol → voix cible, le reste → français.
+  const speechLang = speechLangForMatiere(matiere);
+
   // Lit automatiquement la question + les choix dès qu'elle apparaît
   // (sauf sur l'écran de correction).
   useEffect(() => {
     if (!autoRead || wrongAnswerPanelOpen || !currentQuestion) return;
-    speakText(buildReadableQuestion(currentQuestion));
+    speakText(buildReadableQuestion(currentQuestion, speechLang), speechLang);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoRead, currentQuestion?.id, wrongAnswerPanelOpen]);
 
@@ -1393,7 +1397,8 @@ function handleInputKeyDown(
 
   const questionListenButton = currentQuestion ? (
     <ListenButton
-      text={buildReadableQuestion(currentQuestion)}
+      text={buildReadableQuestion(currentQuestion, speechLang)}
+      lang={speechLang}
       label="Écouter la question"
       className="inline-flex items-center gap-1 rounded-full border border-sky-300 bg-white px-3 py-1.5 text-xs font-black text-sky-700 shadow-sm hover:bg-sky-50"
     />

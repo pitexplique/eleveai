@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Video } from "lucide-react";
 import AudioBoost from "@/components/AudioBoost";
 import { MarkdownMath } from "@/components/MarkdownMath";
-import { buildReadableQuestion } from "./ListenButton";
+import { buildReadableQuestion, speechLangForMatiere } from "./ListenButton";
 import type { Classe, Matiere } from "@/lib/tutor-v4/catalog";
 import type { TutorMode, TutorQuestionOption } from "@/lib/tutor-v4/types";
 import { buildLearningVideoHref } from "@/lib/videoSearch";
@@ -150,7 +150,7 @@ export default function TutorSimpleView({
   }, [currentQuestion?.id, wrongAnswerPanelOpen]);
 
   const readableQuestion = currentQuestion
-    ? buildReadableQuestion(currentQuestion)
+    ? buildReadableQuestion(currentQuestion, speechLangForMatiere(matiere))
     : "";
 
   return (
