@@ -15,6 +15,8 @@ import { Volume2, Play, Pause } from "lucide-react";
 interface Props {
   src: string;
   autoPlay?: boolean;
+  autoPlayDelay?: number;  // délai avant l'autoplay (ms). Allongé quand la
+                           // « Lecture auto » lit la consigne, pour ne pas la couvrir.
   gain?: number;           // multiplicateur de volume, défaut 1.8
   className?: string;
   compact?: boolean;       // mode bouton uniquement (sans barre de progression)
@@ -23,6 +25,7 @@ interface Props {
 export default function AudioBoost({
   src,
   autoPlay = false,
+  autoPlayDelay = 120,
   gain = 3.5,
   className = "",
   compact = false,
@@ -78,8 +81,9 @@ export default function AudioBoost({
   // AutoPlay au montage (nécessite une interaction utilisateur sur mobile)
   useEffect(() => {
     if (autoPlay && audioRef.current) {
-      // délai court pour laisser le DOM se stabiliser
-      const t = setTimeout(() => play(), 120);
+      // délai court pour laisser le DOM se stabiliser (allongé si la Lecture
+      // auto doit lire la consigne d'abord, pour ne pas la couvrir).
+      const t = setTimeout(() => play(), autoPlayDelay);
       return () => clearTimeout(t);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

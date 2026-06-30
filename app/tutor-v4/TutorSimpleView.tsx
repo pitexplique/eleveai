@@ -326,6 +326,9 @@ export default function TutorSimpleView({
                       key={currentQuestion.audioSrc}
                       src={currentQuestion.audioSrc}
                       autoPlay
+                      // Lecture auto active : on laisse la voix lire la consigne
+                      // avant de jouer le mot (sinon le mp3 couvrait la lecture).
+                      autoPlayDelay={autoRead ? 2600 : 120}
                       gain={3.5}
                     />
                   </div>
