@@ -122,4 +122,24 @@ export const colorsA1Bank: TutorBankItemV4[] = WORDS.flatMap((word, idx) => [
     explanation: `"${word.en}" se dit « ${word.fr} » en français.`,
     tags: ["colors", "a1", "spelling-fr"],
   },
+  // Dictée (audio + saisie) — on ENTEND le mot anglais et on l'écrit.
+  // Réutilise les mp3 existants : apporte de l'audio dans la production,
+  // pas seulement dans la compétence « Listen » (demande fondateur 30/06/2026).
+  {
+    kind: "fixed" as const,
+    id: `en_a1_colors_dictation_${word.slug}`,
+    niveau: "a1" as const,
+    matiere: "english-maths" as const,
+    notionId: "en_a1_colors",
+    microId: "en_a1_colors_fr_to_en",
+    difficulty: 2 as const,
+    text: `Écoute et écris ce mot en anglais.`,
+    format: "short" as const,
+    expected: [word.en],
+    comparator: "exact_text" as const,
+    audioSrc: word.audio,
+    hint: `${word.en.length} lettres. Commence par « ${word.en[0]} ».`,
+    explanation: `Le mot était "${word.en}" (${word.fr}).`,
+    tags: ["colors", "a1", "dictation"],
+  },
 ]);
