@@ -86,8 +86,9 @@ export const colorsA1Bank: TutorBankItemV4[] = WORDS.flatMap((word, idx) => [
     explanation: `The colour you heard is "${word.en}" (${word.fr}).`,
     tags: ["colors", "a1", "listen"],
   },
-  // Orthographe (saisie libre) — densifie la micro fr→en sans nouvel audio
-  // pour réduire la répétition (Option B, pilote couleurs A1, 30/06/2026).
+  // Orthographe (saisie libre) — densifie les micros sans nouvel audio pour
+  // réduire la répétition (Option B, pilote couleurs A1, 30/06/2026).
+  // fr → en : produire le mot anglais.
   {
     kind: "fixed" as const,
     id: `en_a1_colors_spell_${word.slug}`,
@@ -103,5 +104,22 @@ export const colorsA1Bank: TutorBankItemV4[] = WORDS.flatMap((word, idx) => [
     hint: `${word.en.length} lettres. Commence par « ${word.en[0]} ».`,
     explanation: `« ${word.fr} » s'écrit "${word.en}" en anglais.`,
     tags: ["colors", "a1", "spelling"],
+  },
+  // en → fr : produire le mot français (couleurs sans accent → exact_text OK).
+  {
+    kind: "fixed" as const,
+    id: `en_a1_colors_spellfr_${word.slug}`,
+    niveau: "a1" as const,
+    matiere: "english-maths" as const,
+    notionId: "en_a1_colors",
+    microId: "en_a1_colors_en_to_fr",
+    difficulty: 1 as const,
+    text: `Écris en français le mot pour "${word.en}". Indice : ${maskWord(word.fr)}`,
+    format: "short" as const,
+    expected: [word.fr],
+    comparator: "exact_text" as const,
+    hint: `${word.fr.length} lettres. Commence par « ${word.fr[0]} ».`,
+    explanation: `"${word.en}" se dit « ${word.fr} » en français.`,
+    tags: ["colors", "a1", "spelling-fr"],
   },
 ]);
