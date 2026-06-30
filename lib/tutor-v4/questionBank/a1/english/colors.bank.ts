@@ -25,6 +25,14 @@ function distractorsEn(exclude: string, seed: number): string[] {
   return [...pool.slice(start), ...pool.slice(0, start)].slice(0, 3);
 }
 
+// Masque les lettres du milieu d'un mot pour l'exercice d'orthographe :
+// red → « r _ d », green → « g _ _ _ n ». On garde 1re + dernière lettre.
+function maskWord(w: string): string {
+  if (w.length <= 2) return w.split("").join(" ");
+  const middle = "_ ".repeat(w.length - 2).trim();
+  return `${w[0]} ${middle} ${w[w.length - 1]}`;
+}
+
 export const colorsA1Bank: TutorBankItemV4[] = WORDS.flatMap((word, idx) => [
   {
     kind: "fixed" as const,
@@ -77,5 +85,23 @@ export const colorsA1Bank: TutorBankItemV4[] = WORDS.flatMap((word, idx) => [
     hint: `Listen carefully.`,
     explanation: `The colour you heard is "${word.en}" (${word.fr}).`,
     tags: ["colors", "a1", "listen"],
+  },
+  // Orthographe (saisie libre) — densifie la micro fr→en sans nouvel audio
+  // pour réduire la répétition (Option B, pilote couleurs A1, 30/06/2026).
+  {
+    kind: "fixed" as const,
+    id: `en_a1_colors_spell_${word.slug}`,
+    niveau: "a1" as const,
+    matiere: "english-maths" as const,
+    notionId: "en_a1_colors",
+    microId: "en_a1_colors_fr_to_en",
+    difficulty: 2 as const,
+    text: `Écris en anglais le mot pour « ${word.fr} ». Indice : ${maskWord(word.en)}`,
+    format: "short" as const,
+    expected: [word.en],
+    comparator: "exact_text" as const,
+    hint: `${word.en.length} lettres. Commence par « ${word.en[0]} ».`,
+    explanation: `« ${word.fr} » s'écrit "${word.en}" en anglais.`,
+    tags: ["colors", "a1", "spelling"],
   },
 ]);

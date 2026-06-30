@@ -69,6 +69,14 @@ import type {
   RevisionFocus,
 } from "@/lib/tutor-v4/types";
 
+// Fenêtre anti-répétition : nombre d'ids de questions récentes conservés pour
+// éviter de reposer une question déjà vue. On garde large (≈12 derniers tours)
+// car certaines banques sont petites (ex. anglais ≈ 10 items/micro-compétence) :
+// une fenêtre courte rebouclait sur le même mot avant d'avoir épuisé le pool
+// (retour du prof d'anglais, 30/06/2026). Voir buildQuestionPair (filtre + repli
+// sur les moins récentes quand le pool est plus petit que la fenêtre).
+const RECENT_QUESTION_WINDOW = 24;
+
 function createDefaultLearnerProfile(): LearnerProfile {
   return {
     preferences: {
@@ -641,7 +649,7 @@ export async function jumpToMicroV4(
   });
 
   session.recentQuestionIds = [
-    ...session.recentQuestionIds.slice(-8),
+    ...session.recentQuestionIds.slice(-RECENT_QUESTION_WINDOW),
     nextCurrentPair.optionA.id,
     nextCurrentPair.optionB.id,
   ];
@@ -1079,7 +1087,7 @@ export async function answerTutorV4(
   session.currentPair = nextCurrentPair;
 
   session.recentQuestionIds = [
-    ...session.recentQuestionIds.slice(-8),
+    ...session.recentQuestionIds.slice(-RECENT_QUESTION_WINDOW),
     nextCurrentPair.optionA.id,
     nextCurrentPair.optionB.id,
   ];
