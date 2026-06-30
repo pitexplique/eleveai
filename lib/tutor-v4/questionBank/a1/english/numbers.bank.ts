@@ -13,6 +13,13 @@ const WORDS = [
 function dFr(exclude: string) { return WORDS.filter(w => w.fr !== exclude).map(w => w.fr).slice(0, 3); }
 function dEn(exclude: string) { return WORDS.filter(w => w.en !== exclude).map(w => w.en).slice(0, 3); }
 
+// Masque les lettres du milieu pour l'exercice d'orthographe (cf. colors.bank).
+function maskWord(w: string): string {
+  if (w.length <= 2) return w.split("").join(" ");
+  const middle = "_ ".repeat(w.length - 2).trim();
+  return `${w[0]} ${middle} ${w[w.length - 1]}`;
+}
+
 export const numbersA1Bank: TutorBankItemV4[] = WORDS.flatMap((word) => [
   {
     kind: "fixed" as const,
@@ -62,5 +69,38 @@ export const numbersA1Bank: TutorBankItemV4[] = WORDS.flatMap((word) => [
     audioSrc: word.audio,
     hint: `Listen carefully.`,
     explanation: `The word you heard is "${word.en}" (${word.fr}).`,
+  },
+  // Orthographe (saisie libre) — densifie sans nouvel audio (Option B).
+  // fr → en : produire le mot anglais.
+  {
+    kind: "fixed" as const,
+    id: `en_a1_numbers_spell_${word.slug}`,
+    niveau: "a1" as const,
+    matiere: "english-maths" as const,
+    notionId: "en_a1_numbers",
+    microId: "en_a1_numbers_fr_to_en",
+    difficulty: 2 as const,
+    text: `Écris en anglais le mot pour « ${word.fr} ». Indice : ${maskWord(word.en)}`,
+    format: "short" as const,
+    expected: [word.en],
+    comparator: "exact_text" as const,
+    hint: `${word.en.length} lettres. Commence par « ${word.en[0]} ».`,
+    explanation: `« ${word.fr} » s'écrit "${word.en}" en anglais.`,
+  },
+  // en → fr : produire le mot français (numbers sans accent → exact_text OK).
+  {
+    kind: "fixed" as const,
+    id: `en_a1_numbers_spellfr_${word.slug}`,
+    niveau: "a1" as const,
+    matiere: "english-maths" as const,
+    notionId: "en_a1_numbers",
+    microId: "en_a1_numbers_en_to_fr",
+    difficulty: 1 as const,
+    text: `Écris en français le mot pour "${word.en}". Indice : ${maskWord(word.fr)}`,
+    format: "short" as const,
+    expected: [word.fr],
+    comparator: "exact_text" as const,
+    hint: `${word.fr.length} lettres. Commence par « ${word.fr[0]} ».`,
+    explanation: `"${word.en}" se dit « ${word.fr} » en français.`,
   },
 ]);
