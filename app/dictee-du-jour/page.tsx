@@ -268,9 +268,16 @@ export default function DicteeDuJourPage() {
                     key={i}
                     className="flex items-center justify-between gap-2 rounded-lg bg-slate-50 px-3 py-2 text-sm"
                   >
-                    <span className="flex items-baseline gap-x-2 font-semibold text-slate-700">
-                      <span>{ok ? "✅" : "❌"}</span>
+                    <span className="flex flex-wrap items-baseline gap-x-1.5 font-semibold text-slate-700">
+                      {ok ? (
+                        <span className="font-black text-emerald-600">✓</span>
+                      ) : null}
                       <span className="font-black">{m.mot}</span>
+                      {!ok ? (
+                        <span className="text-xs font-semibold text-rose-500">
+                          ({reponses[i] || "—"} ✗)
+                        </span>
+                      ) : null}
                     </span>
                     <span
                       className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-bold ${
