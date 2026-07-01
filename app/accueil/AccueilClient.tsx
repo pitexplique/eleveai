@@ -535,7 +535,7 @@ export default function AccueilPage({
         <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-sky-300/30 bg-gradient-to-br from-sky-300/[0.10] via-cyan-300/[0.06] to-white/[0.04] p-6 text-center sm:p-8">
           <p className="text-3xl sm:text-4xl" aria-hidden="true">💛</p>
           <h2 className="mt-2 text-2xl font-black leading-tight text-white sm:text-3xl">
-            Aux élèves et à leurs parents
+            Aux parents et à leurs enfants
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
             Merci pour cette année. EleveAI est né dans ma classe, pour mes
