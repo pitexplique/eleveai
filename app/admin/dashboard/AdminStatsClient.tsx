@@ -17,6 +17,7 @@ type Stats = {
     activitesTotal: number;
     activitesAujourdhui: number;
     activites7j: number;
+    elevesAvecResultats: number;
     moyenneGenerale: number | null;
     connectesAujourdhui: number;
     connectes7j: number;
@@ -25,6 +26,14 @@ type Stats = {
   parModule: Record<string, number>;
   moyenneParModule: Record<string, number | null>;
   engagement: { date: string; count: number }[];
+  derniersConnectes: {
+    code_utilisateur: string | null;
+    nom: string | null;
+    classe: string | null;
+    type: string | null;
+    source: string | null;
+    created_at: string;
+  }[];
   avis: {
     total: number;
     nonTraites: number;
@@ -206,9 +215,21 @@ export default function AdminStatsClient() {
               sub="collèges actifs"
               color="text-sky-400"
             />
-            {/* Carte « Élèves connectés » retirée : le suivi de connexion n'est pas
-                fiable (seuls les logins explicites sont logués, pas les sessions
-                persistantes) → le chiffre était trompeur. */}
+            {/* Élèves connectés = vrais logins (code établissement ou email),
+                depuis la table `connexions`. À ne pas confondre avec les scores
+                enregistrés (l'ancien chiffre était mal labellisé). */}
+            <Kpi
+              label="Élèves connectés"
+              value={stats.kpis.connectesAujourdhui}
+              sub={`7j : ${stats.kpis.connectes7j} · 30j : ${stats.kpis.connectes30j}`}
+              color="text-cyan-400"
+            />
+            <Kpi
+              label="Élèves avec résultats"
+              value={stats.kpis.elevesAvecResultats}
+              sub="ont enregistré ≥ 1 exercice"
+              color="text-emerald-400"
+            />
             <Kpi
               label="Avis"
               value={stats.avis.total}
@@ -276,6 +297,59 @@ export default function AdminStatsClient() {
                 })}
               </div>
             </div>
+          </div>
+
+          {/* Derniers connectés = vrais logins (code établissement ou email) */}
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-5">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h3 className="text-sm font-bold text-slate-200">🔌 Derniers connectés</h3>
+              <span className="rounded-full bg-cyan-500/15 px-2.5 py-1 text-xs font-bold text-cyan-300">
+                {stats.kpis.connectesAujourdhui} aujourd'hui
+              </span>
+            </div>
+            <p className="mt-0.5 text-[11px] font-semibold text-slate-500">
+              Vrais logins (code établissement ou email), les plus récents en premier.
+            </p>
+
+            {stats.derniersConnectes.length === 0 ? (
+              <p className="mt-4 text-sm text-slate-400">
+                Aucune connexion enregistrée sur ce périmètre.
+              </p>
+            ) : (
+              <div className="mt-3 divide-y divide-slate-800">
+                {stats.derniersConnectes.map((c, i) => (
+                  <div
+                    key={`${c.code_utilisateur ?? "?"}-${c.created_at}-${i}`}
+                    className="flex flex-wrap items-center justify-between gap-2 py-2 text-xs"
+                  >
+                    {/* Prénom seul (jamais le nom de famille) via prenomCourt. */}
+                    <span className="flex items-center gap-1.5 font-bold text-emerald-300">
+                      {prenomCourt(c.nom) || c.code_utilisateur || "—"}
+                      {c.classe ? (
+                        <span className="font-medium text-slate-500">· {c.classe}</span>
+                      ) : null}
+                      {c.type && c.type !== "eleve" ? (
+                        <span className="rounded-full bg-slate-800 px-2 py-0.5 text-[10px] font-bold text-slate-300">
+                          {c.type}
+                        </span>
+                      ) : null}
+                    </span>
+                    <span className="flex items-center gap-2 text-slate-400">
+                      <span
+                        className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                          c.source === "email"
+                            ? "bg-amber-500/15 text-amber-300"
+                            : "bg-sky-500/15 text-sky-300"
+                        }`}
+                      >
+                        {c.source === "email" ? "✉️ email" : "🏫 code"}
+                      </span>
+                      <span>{dateAvis(c.created_at)}</span>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Derniers avis */}

@@ -170,6 +170,21 @@ export async function GET(req: Request) {
     etabFilter
   );
 
+  // Derniers connectés : petite requête DÉDIÉE (12 lignes), isolée des
+  // compteurs ci-dessus. Ainsi, si une colonne d'affichage manquait en base,
+  // seule cette liste serait vide — les chiffres « connectés » resteraient bons.
+  let derniersConnectesRaw: Record<string, unknown>[] = [];
+  {
+    let q = supabase
+      .from("connexions")
+      .select("code_utilisateur, nom, classe, type_utilisateur, source, created_at")
+      .order("created_at", { ascending: false })
+      .limit(12);
+    if (etabFilter) q = q.eq("code_etablissement", etabFilter);
+    const { data } = await q;
+    derniersConnectesRaw = (data ?? []) as Record<string, unknown>[];
+  }
+
   // ---- Sélecteur d'établissements (depuis acces_etablissement) ----
   const etabMap = new Map<string, { eleves: number; profs: number }>();
   for (const a of accesAll) {
@@ -291,6 +306,22 @@ export async function GET(req: Request) {
     e.count = engSets[idx].size;
   });
 
+  // ---- Derniers connectés (login réel, triés du plus récent) ----
+  const derniersConnectes = derniersConnectesRaw.map((c) => ({
+    code_utilisateur: (c.code_utilisateur as string) ?? null,
+    nom: (c.nom as string) ?? null,
+    classe: (c.classe as string) ?? null,
+    type: (c.type_utilisateur as string) ?? null,
+    source: (c.source as string) ?? null,
+    created_at: c.created_at as string,
+  }));
+
+  // Élèves DISTINCTS ayant enregistré au moins un résultat (≠ « connectés » :
+  // ici c'est « ont fait et sauvegardé un exercice », pas « se sont loggés »).
+  const elevesAvecResultats = new Set(
+    rows.map((r) => r.code_utilisateur).filter((c): c is string => !!c)
+  ).size;
+
   const moyenneGenerale =
     pctList.length > 0
       ? Math.round(pctList.reduce((s, p) => s + p, 0) / pctList.length)
@@ -337,6 +368,7 @@ export async function GET(req: Request) {
       activitesTotal,
       activitesAujourdhui,
       activites7j,
+      elevesAvecResultats,
       moyenneGenerale,
       connectesAujourdhui: connectesAujourdSet.size,
       connectes7j: connectes7.size,
@@ -345,6 +377,7 @@ export async function GET(req: Request) {
     parModule,
     moyenneParModule,
     engagement,
+    derniersConnectes,
     avis,
   });
 }
