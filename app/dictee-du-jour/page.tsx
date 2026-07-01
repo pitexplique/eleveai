@@ -41,7 +41,7 @@ const MSG_BIEN = [
 ];
 const MSG_ENCOURAGE = [
   "Pas grave, l'important c'est d'essayer ! 💛",
-  "Demain, 5 nouveaux mots, une nouvelle chance d'apprendre ! ☀️",
+  "Demain, 5 nouveaux mots,\nune nouvelle chance d'apprendre ! ☀️",
   "L'entraînement paie — reviens demain ! 🔁",
   "Chaque jour compte. On se retrouve demain ! 🌱",
 ];
@@ -248,7 +248,7 @@ export default function DicteeDuJourPage() {
             <p className="text-5xl font-black text-emerald-600">
               {score}/{total}
             </p>
-            <p className="mt-2 text-lg font-black text-slate-800">
+            <p className="mt-2 whitespace-pre-line text-lg font-black text-slate-800">
               {messageResultat(score, total, new Date().getDate())}
             </p>
             {streak > 0 && (
