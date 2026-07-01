@@ -440,6 +440,30 @@ export default function AccueilPage({
         </div>
       </section>
 
+      {/* ── DICTÉE DU JOUR — le rituel quotidien, tout en haut ───────────────── */}
+      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
+        <Link
+          href="/dictee-du-jour"
+          className="mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-cyan-300/30 bg-gradient-to-br from-cyan-400/[0.12] via-sky-400/[0.07] to-white/[0.04] p-6 text-center transition hover:border-cyan-300/60 sm:flex-row sm:justify-between sm:text-left sm:p-7"
+        >
+          <div>
+            <p className="text-xs font-black uppercase tracking-wide text-cyan-200">
+              ✍️ Nouveau chaque jour
+            </p>
+            <h2 className="mt-1 text-2xl font-black text-white sm:text-3xl">
+              La dictée du jour
+            </h2>
+            <p className="mt-1 text-sm font-semibold text-white/75">
+              Un mot à écouter et à écrire — français, maths, langues, histoire,
+              géo, écologie… 2 minutes, chaque matin. ☀️
+            </p>
+          </div>
+          <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-cyan-400 px-6 py-3 text-sm font-black text-[#041B33] shadow-lg">
+            Faire la dictée →
+          </span>
+        </Link>
+      </section>
+
       {/* ── MESSAGE DE VACANCES — mot de remerciement du professeur ──────────── */}
       <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-amber-300/30 bg-gradient-to-br from-amber-300/[0.10] via-emerald-300/[0.06] to-white/[0.04] p-6 text-center sm:p-8">

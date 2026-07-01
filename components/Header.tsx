@@ -314,6 +314,18 @@ export default function Header() {
         {/* Desktop nav */}
         <div className="hidden items-center gap-1 lg:flex">
 
+          {/* Dictée du jour — le rituel quotidien, tout en tête de barre */}
+          <Link
+            href="/dictee-du-jour"
+            className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition ${
+              isActive(pathname, "/dictee-du-jour")
+                ? "bg-cyan-300 text-[#041B33] shadow-lg"
+                : "bg-cyan-300/15 text-cyan-100 hover:bg-cyan-300/25 hover:text-white"
+            }`}
+          >
+            ✍️ Dictée du jour
+          </Link>
+
           {/* Cahiers de vacances — produit saisonnier, en tête de barre */}
           <Link
             href="/cahier-vacances"
@@ -420,6 +432,14 @@ export default function Header() {
                 Connexion / inscription
               </Link>
             )}
+
+            <Link
+              href="/dictee-du-jour"
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center justify-center gap-2 rounded-2xl bg-cyan-300/15 border border-cyan-300/30 px-4 py-3 text-sm font-black text-cyan-100"
+            >
+              ✍️ Dictée du jour · un mot chaque matin
+            </Link>
 
             <Link
               href="/cahier-vacances"
