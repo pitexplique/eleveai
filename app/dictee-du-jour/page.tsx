@@ -51,7 +51,9 @@ export default function DicteeDuJourPage() {
   const [dejaFait, setDejaFait] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const { eleve } = useEleve();
-  const savedRef = useRef(false);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [saveMsg, setSaveMsg] = useState<string | null>(null);
 
   useEffect(() => {
     // Précharge les voix (souvent vides au 1er appel) pour que la voix
@@ -91,12 +93,12 @@ export default function DicteeDuJourPage() {
   const current = mots && idx < total ? mots[idx] : null;
   const score = resultats.filter(Boolean).length;
 
-  // Enregistre le résultat pour un élève connecté (une seule fois, à la fin).
-  // L'identité est forcée côté serveur depuis le jeton (sécurisé).
-  useEffect(() => {
-    if (!fini || savedRef.current || !mots) return;
-    savedRef.current = true;
-    if (!eleve?.token) return; // non connecté : rien à enregistrer
+  // Enregistrement du score sur clic (élève connecté). L'identité est forcée
+  // côté serveur depuis le jeton (sécurisé) ; l'élève voit une confirmation.
+  async function enregistrerScore() {
+    if (!eleve?.token || !mots || saving || saved) return;
+    setSaving(true);
+    setSaveMsg(null);
     const details = {
       date: jourStr(new Date()),
       mots: mots.map((m, i) => ({
@@ -105,15 +107,37 @@ export default function DicteeDuJourPage() {
         ok: !!resultats[i],
       })),
     };
-    fetch("/api/resultats", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        token: eleve.token,
-        type: "dictee",
-        resultat: { classe: eleve.classe ?? null, score, total, details },
-      }),
-    }).catch(() => {});
+    try {
+      const res = await fetch("/api/resultats", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: eleve.token,
+          type: "dictee",
+          resultat: { classe: eleve.classe ?? null, score, total, details },
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data?.ok) {
+        setSaved(true);
+        setSaveMsg("✅ Score enregistré !");
+      } else {
+        setSaveMsg(data?.error || "Enregistrement impossible.");
+      }
+    } catch {
+      setSaveMsg("Erreur réseau. Réessaie.");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  // Enregistrement AUTOMATIQUE dès la fin (garantit la remontée dans Supabase =
+  // activité élève + dashboard), même si l'élève ne clique pas. Le bouton reste
+  // affiché pour la confirmation / un nouvel essai si l'auto-save a échoué.
+  useEffect(() => {
+    if (fini && eleve?.token && !saved && !saving) {
+      void enregistrerScore();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fini]);
 
@@ -225,6 +249,33 @@ export default function DicteeDuJourPage() {
                 </li>
               ))}
             </ul>
+
+            {/* Enregistrement du score (élève connecté). */}
+            {eleve?.token ? (
+              <div className="mt-5">
+                <button
+                  type="button"
+                  onClick={enregistrerScore}
+                  disabled={saving || saved}
+                  className="w-full rounded-xl bg-emerald-600 px-8 py-3 text-base font-black text-white shadow-sm hover:bg-emerald-500 disabled:opacity-60"
+                >
+                  {saved
+                    ? "✅ Score enregistré"
+                    : saving
+                      ? "Enregistrement…"
+                      : "💾 Enregistrer mon score"}
+                </button>
+                {saveMsg && !saved && (
+                  <p className="mt-2 text-sm font-semibold text-rose-600">
+                    {saveMsg}
+                  </p>
+                )}
+              </div>
+            ) : (
+              <p className="mt-5 rounded-lg bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-500">
+                Connecte-toi pour enregistrer ton score et suivre ta progression.
+              </p>
+            )}
 
             <p className="mt-5 text-sm font-bold text-slate-600">
               Reviens demain pour la prochaine dictée ! ☀️
