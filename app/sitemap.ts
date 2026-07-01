@@ -7,9 +7,10 @@ const BASE_URL = "https://eleveai.fr";
 
 const u = (path: string) => `${BASE_URL}${path}`;
 
-const LASTMOD_HOME    = new Date("2026-06-25");
+const LASTMOD_HOME    = new Date("2026-07-01");
 const LASTMOD_CORE    = new Date("2026-06-25");
 const LASTMOD_CAHIERS = new Date("2026-06-29");
+const LASTMOD_DICTEE  = new Date("2026-07-01");
 const LASTMOD_LEGAL   = new Date("2026-02-18");
 
 const MATHS_CLASSES    = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe"];
@@ -76,6 +77,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/ia/enjeux/emploi-et-formation", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/fiches-cours/ia/enjeux/enjeux-culturels-societaux", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
 
+  { path: "/dictee-du-jour",  priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_DICTEE },
   { path: "/calcul-rapide",   priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/english-maths",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/defis-du-jour",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
