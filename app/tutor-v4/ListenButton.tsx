@@ -74,8 +74,14 @@ function pickVoice(lang: SpeechLang): SpeechSynthesisVoice | null {
     );
     if (starts) return starts;
   }
-  // Aucune voix cible installée → repli français pour ne pas rester muet.
-  return pool.find((v) => v.lang && v.lang.toLowerCase().startsWith("fr")) ?? null;
+  // Pas de voix cible installée : pour le français, on prend n'importe quelle
+  // voix fr. Pour l'anglais/espagnol, on NE force PAS une voix française (sinon
+  // le mot est prononcé « à la française ») → on renvoie null et `utter.lang`
+  // (en-GB / es-ES) guidera le moteur vers la bonne langue.
+  if (lang === "fr") {
+    return pool.find((v) => v.lang && v.lang.toLowerCase().startsWith("fr")) ?? null;
+  }
+  return null;
 }
 
 function applyVoice(utter: SpeechSynthesisUtterance, lang: SpeechLang) {
