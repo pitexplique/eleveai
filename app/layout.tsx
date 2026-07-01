@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import { EleveProvider } from "@/context/EleveContext";
 import RemerciementsBar from "@/components/remerciements/RemerciementsBar";
 import EcrireAuProf from "@/components/EcrireAuProf";
+import PageViewTracker from "@/components/PageViewTracker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -163,6 +164,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased`}
       >
         <EleveProvider>
+          <PageViewTracker />
           <DevBanner />
           <Header />
 

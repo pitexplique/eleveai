@@ -185,6 +185,16 @@ export async function GET(req: Request) {
     derniersConnectesRaw = (data ?? []) as Record<string, unknown>[];
   }
 
+  // Navigation AGRÉGÉE (« où vont les élèves ») depuis pages_vues. Sans identité :
+  // on n'a que la section + le code établissement. Table optionnelle → si absente,
+  // fetchAll renvoie [] et l'encart s'affiche vide (pas d'erreur).
+  const pagesVues = await fetchAll(
+    supabase,
+    "pages_vues",
+    "page, created_at",
+    etabFilter
+  );
+
   // ---- Sélecteur d'établissements (depuis acces_etablissement) ----
   const etabMap = new Map<string, { eleves: number; profs: number }>();
   for (const a of accesAll) {
@@ -322,6 +332,25 @@ export async function GET(req: Request) {
     rows.map((r) => r.code_utilisateur).filter((c): c is string => !!c)
   ).size;
 
+  // Navigation agrégée : top des sections visitées (30 j), avec le sous-total 7 j.
+  const nav30 = new Map<string, number>();
+  const nav7 = new Map<string, number>();
+  for (const p of pagesVues) {
+    const page = p.page as string;
+    if (!page) continue;
+    const t = new Date(p.created_at as string).getTime();
+    if (!Number.isFinite(t)) continue;
+    if (t >= since30) nav30.set(page, (nav30.get(page) ?? 0) + 1);
+    if (t >= since7) nav7.set(page, (nav7.get(page) ?? 0) + 1);
+  }
+  const navigation = {
+    total30: Array.from(nav30.values()).reduce((s, n) => s + n, 0),
+    topPages: Array.from(nav30.entries())
+      .map(([page, count]) => ({ page, count, count7: nav7.get(page) ?? 0 }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 12),
+  };
+
   const moyenneGenerale =
     pctList.length > 0
       ? Math.round(pctList.reduce((s, p) => s + p, 0) / pctList.length)
@@ -378,6 +407,7 @@ export async function GET(req: Request) {
     moyenneParModule,
     engagement,
     derniersConnectes,
+    navigation,
     avis,
   });
 }

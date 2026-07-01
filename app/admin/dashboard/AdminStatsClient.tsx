@@ -34,6 +34,10 @@ type Stats = {
     source: string | null;
     created_at: string;
   }[];
+  navigation: {
+    total30: number;
+    topPages: { page: string; count: number; count7: number }[];
+  };
   avis: {
     total: number;
     nonTraites: number;
@@ -62,6 +66,25 @@ const MODULES: { key: string; label: string; color: string }[] = [
   { key: "coach", label: "🧠 Coach IA", color: "bg-indigo-500" },
   { key: "english", label: "🇬🇧 English-Maths", color: "bg-sky-500" },
 ];
+
+// Libellés lisibles des sections (1er segment d'URL) — « où vont les élèves ».
+const SECTION_LABELS: Record<string, string> = {
+  "/": "🏠 Accueil",
+  "/accueil": "🏠 Accueil",
+  "/tutor-v4": "🧠 Coach / Tutor",
+  "/coach-ia": "🧠 Coach IA",
+  "/parcours": "🛤️ Parcours",
+  "/parcours-ia": "🤖 Parcours IA",
+  "/calcul-rapide": "⚡ Calcul rapide",
+  "/dico": "📖 Dico",
+  "/fiches-cours": "📄 Fiches de cours",
+  "/maths-974": "🌋 Maths 974",
+  "/cahier-vacances": "☀️ Cahiers de vacances",
+  "/eval-pix-ia": "🤖 Éval Pix IA",
+};
+function sectionLabel(page: string) {
+  return SECTION_LABELS[page] ?? page;
+}
 
 function dateAvis(iso: string) {
   return new Intl.DateTimeFormat("fr-FR", {
@@ -297,6 +320,59 @@ export default function AdminStatsClient() {
                 })}
               </div>
             </div>
+          </div>
+
+          {/* Où vont les élèves (navigation agrégée, sans identité) */}
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-5">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h3 className="text-sm font-bold text-slate-200">📍 Où vont les élèves</h3>
+              <span className="rounded-full bg-slate-800 px-2.5 py-1 text-xs font-bold text-slate-300">
+                {stats.navigation.total30} vues · 30j
+              </span>
+            </div>
+            <p className="mt-0.5 text-[11px] font-semibold text-slate-500">
+              Sections les plus visitées par les élèves connectés — agrégé, sans identité.
+            </p>
+
+            {stats.navigation.topPages.length === 0 ? (
+              <p className="mt-4 text-sm text-slate-400">
+                Aucune donnée de navigation pour l'instant. (As-tu exécuté{" "}
+                <code className="rounded bg-slate-800 px-1 text-slate-300">
+                  supabase/pages_vues.sql
+                </code>{" "}
+                en base ?)
+              </p>
+            ) : (
+              <div className="mt-4 space-y-2.5">
+                {(() => {
+                  const max = Math.max(
+                    ...stats.navigation.topPages.map((p) => p.count),
+                    1
+                  );
+                  return stats.navigation.topPages.map((p) => (
+                    <div key={p.page}>
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="font-semibold text-slate-300">
+                          {sectionLabel(p.page)}
+                        </span>
+                        <span className="font-bold text-slate-400">
+                          {p.count}
+                          <span className="ml-1 font-medium text-slate-600">
+                            (7j : {p.count7})
+                          </span>
+                        </span>
+                      </div>
+                      <div className="mt-1 h-2 overflow-hidden rounded-full bg-slate-800">
+                        <div
+                          className="h-full rounded-full bg-cyan-500"
+                          style={{ width: `${(p.count / max) * 100}%` }}
+                        />
+                      </div>
+                    </div>
+                  ));
+                })()}
+              </div>
+            )}
           </div>
 
           {/* Derniers connectés = vrais logins (code établissement ou email) */}
