@@ -24,6 +24,34 @@ function jourStr(d: Date): string {
   return `${y}-${m}-${day}`;
 }
 
+// Messages de fin, variés par palier (tournent selon le jour) — ton juste :
+// on félicite un bon score, on encourage sans présumer un « progrès » sur un
+// score faible.
+const MSG_PARFAIT = [
+  "Sans faute, bravo ! 🎉",
+  "Un carton plein ! 🌟",
+  "5 sur 5, impeccable ! 🏆",
+  "Parfait, chapeau ! 👏",
+];
+const MSG_BIEN = [
+  "Bien joué ! 👏",
+  "Beau score ! 💪",
+  "Tu tiens le bon rythme ! ✨",
+  "Solide — continue comme ça ! 👍",
+];
+const MSG_ENCOURAGE = [
+  "Pas grave, l'important c'est d'essayer ! 💛",
+  "Demain, un nouveau mot, une nouvelle chance ! ☀️",
+  "L'entraînement paie — reviens demain ! 🔁",
+  "Chaque jour compte. On se retrouve demain ! 🌱",
+];
+
+function messageResultat(score: number, total: number, seed: number): string {
+  const pool =
+    score === total ? MSG_PARFAIT : score >= 3 ? MSG_BIEN : MSG_ENCOURAGE;
+  return pool[((seed % pool.length) + pool.length) % pool.length];
+}
+
 const matiereColor: Record<string, string> = {
   Français: "bg-rose-100 text-rose-700",
   Maths: "bg-violet-100 text-violet-700",
@@ -45,6 +73,7 @@ export default function DicteeDuJourPage() {
   const [saisie, setSaisie] = useState("");
   const [reveal, setReveal] = useState<{ ok: boolean } | null>(null);
   const [resultats, setResultats] = useState<boolean[]>([]);
+  const [reponses, setReponses] = useState<string[]>([]);
   const [fini, setFini] = useState(false);
   const [showIndice, setShowIndice] = useState(false);
   const [streak, setStreak] = useState(0);
@@ -150,6 +179,7 @@ export default function DicteeDuJourPage() {
     const ok = reponseCorrecte(saisie, current.mot);
     setReveal({ ok });
     setResultats((r) => [...r, ok]);
+    setReponses((a) => [...a, saisie]);
   }
 
   function suivant() {
@@ -218,11 +248,7 @@ export default function DicteeDuJourPage() {
               {score}/{total}
             </p>
             <p className="mt-2 text-lg font-black text-slate-800">
-              {score === total
-                ? "Sans faute, bravo ! 🎉"
-                : score >= 3
-                  ? "Bien joué ! 👏"
-                  : "Continue, tu progresses ! 💪"}
+              {messageResultat(score, total, new Date().getDate())}
             </p>
             {streak > 0 && (
               <p className="mt-2 inline-block rounded-full bg-orange-100 px-4 py-1.5 text-sm font-black text-orange-700">
@@ -230,24 +256,36 @@ export default function DicteeDuJourPage() {
               </p>
             )}
 
-            <ul className="mt-5 space-y-1.5 text-left">
-              {mots.map((m, i) => (
-                <li
-                  key={i}
-                  className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-sm"
-                >
-                  <span className="font-semibold text-slate-700">
-                    {resultats[i] ? "✅" : "❌"} {m.mot}
-                  </span>
-                  <span
-                    className={`rounded-full px-2 py-0.5 text-xs font-bold ${
-                      matiereColor[m.matiere] ?? "bg-slate-100 text-slate-700"
-                    }`}
+            <p className="mt-5 text-left text-xs font-bold uppercase tracking-wide text-slate-500">
+              📋 Les bonnes réponses
+            </p>
+            <ul className="mt-2 space-y-1.5 text-left">
+              {mots.map((m, i) => {
+                const ok = resultats[i];
+                return (
+                  <li
+                    key={i}
+                    className="flex items-center justify-between gap-2 rounded-lg bg-slate-50 px-3 py-2 text-sm"
                   >
-                    {m.matiere}
-                  </span>
-                </li>
-              ))}
+                    <span className="flex flex-wrap items-baseline gap-x-2 font-semibold text-slate-700">
+                      <span>{ok ? "✅" : "❌"}</span>
+                      <span className="font-black">{m.mot}</span>
+                      {!ok && reponses[i] ? (
+                        <span className="text-xs font-medium text-slate-400 line-through">
+                          {reponses[i]}
+                        </span>
+                      ) : null}
+                    </span>
+                    <span
+                      className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-bold ${
+                        matiereColor[m.matiere] ?? "bg-slate-100 text-slate-700"
+                      }`}
+                    >
+                      {m.matiere}
+                    </span>
+                  </li>
+                );
+              })}
             </ul>
 
             {/* Enregistrement du score (élève connecté). */}
