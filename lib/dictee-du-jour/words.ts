@@ -85,6 +85,8 @@ const HISTOIRE: DicteeMot[] = [
   { matiere: "Histoire", lang: "fr", mot: "démocratie", indice: "Le pouvoir appartient au peuple." },
   { matiere: "Histoire", lang: "fr", mot: "chevalier", indice: "Un guerrier du Moyen Âge, à cheval." },
   { matiere: "Histoire", lang: "fr", mot: "cathédrale", indice: "Une très grande église." },
+  { matiere: "Histoire", lang: "fr", mot: "empereur", indice: "Napoléon en était un." },
+  { matiere: "Histoire", lang: "fr", mot: "esclavage", indice: "Réduire un humain en propriété (aboli en 1848)." },
 ];
 
 // ── Géographie (mots français) ───────────────────────────────
@@ -97,6 +99,8 @@ const GEOGRAPHIE: DicteeMot[] = [
   { matiere: "Géographie", lang: "fr", mot: "frontière", indice: "La limite entre deux pays." },
   { matiere: "Géographie", lang: "fr", mot: "altitude", indice: "La hauteur au-dessus de la mer." },
   { matiere: "Géographie", lang: "fr", mot: "métropole", indice: "Une grande ville principale." },
+  { matiere: "Géographie", lang: "fr", mot: "latitude", indice: "La position nord-sud sur le globe." },
+  { matiere: "Géographie", lang: "fr", mot: "volcan", indice: "Une montagne qui peut cracher de la lave." },
 ];
 
 // ── Écologie (mots français) ─────────────────────────────────
@@ -109,10 +113,69 @@ const ECOLOGIE: DicteeMot[] = [
   { matiere: "Écologie", lang: "fr", mot: "pollution", indice: "La salissure de l'environnement." },
   { matiere: "Écologie", lang: "fr", mot: "oxygène", indice: "Le gaz que l'on respire." },
   { matiere: "Écologie", lang: "fr", mot: "planète", indice: "La Terre en est une." },
+  { matiere: "Écologie", lang: "fr", mot: "espèce", indice: "Un type d'animal ou de plante." },
+  { matiere: "Écologie", lang: "fr", mot: "déchet", indice: "Ce que l'on jette." },
+];
+
+// ── Physique (mots français) ─────────────────────────────────
+const PHYSIQUE: DicteeMot[] = [
+  { matiere: "Physique", lang: "fr", mot: "molécule", indice: "Un assemblage d'atomes." },
+  { matiere: "Physique", lang: "fr", mot: "énergie", indice: "Ce qui permet d'agir, de bouger, de chauffer." },
+  { matiere: "Physique", lang: "fr", mot: "électricité", indice: "Le courant qui circule dans les fils." },
+  { matiere: "Physique", lang: "fr", mot: "vitesse", indice: "La distance parcourue par unité de temps." },
+  { matiere: "Physique", lang: "fr", mot: "température", indice: "Ce que mesure un thermomètre." },
+  { matiere: "Physique", lang: "fr", mot: "lumière", indice: "Ce qui permet de voir." },
+  { matiere: "Physique", lang: "fr", mot: "pression", indice: "Une force exercée sur une surface." },
+  { matiere: "Physique", lang: "fr", mot: "aimant", indice: "Un objet qui attire le fer." },
+  { matiere: "Physique", lang: "fr", mot: "particule", indice: "Un tout petit morceau de matière." },
+  { matiere: "Physique", lang: "fr", mot: "circuit", indice: "Le chemin fermé où circule le courant." },
+];
+
+// ── SVT — Sciences de la Vie et de la Terre (mots français) ──
+const SVT: DicteeMot[] = [
+  { matiere: "SVT", lang: "fr", mot: "chromosome", indice: "Il porte les gènes dans la cellule." },
+  { matiere: "SVT", lang: "fr", mot: "photosynthèse", indice: "Les plantes fabriquent leur énergie grâce à la lumière." },
+  { matiere: "SVT", lang: "fr", mot: "respiration", indice: "Absorber de l'oxygène, rejeter du CO2." },
+  { matiere: "SVT", lang: "fr", mot: "cellule", indice: "La plus petite unité du vivant." },
+  { matiere: "SVT", lang: "fr", mot: "squelette", indice: "L'ensemble des os du corps." },
+  { matiere: "SVT", lang: "fr", mot: "digestion", indice: "La transformation des aliments." },
+  { matiere: "SVT", lang: "fr", mot: "organisme", indice: "Un être vivant." },
+  { matiere: "SVT", lang: "fr", mot: "neurone", indice: "Une cellule du cerveau." },
+  { matiere: "SVT", lang: "fr", mot: "génétique", indice: "L'étude des gènes et de l'hérédité." },
+  { matiere: "SVT", lang: "fr", mot: "muscle", indice: "Il permet le mouvement du corps." },
+];
+
+// ── Musique (mots français) ──────────────────────────────────
+const MUSIQUE: DicteeMot[] = [
+  { matiere: "Musique", lang: "fr", mot: "partition", indice: "La feuille où sont écrites les notes." },
+  { matiere: "Musique", lang: "fr", mot: "mélodie", indice: "Une suite de notes agréable." },
+  { matiere: "Musique", lang: "fr", mot: "croche", indice: "Une figure de note (avec une queue)." },
+  { matiere: "Musique", lang: "fr", mot: "portée", indice: "Les 5 lignes où l'on écrit les notes." },
+  { matiere: "Musique", lang: "fr", mot: "orchestre", indice: "Un grand ensemble de musiciens." },
+  { matiere: "Musique", lang: "fr", mot: "harmonie", indice: "Un accord agréable de plusieurs sons." },
+  { matiere: "Musique", lang: "fr", mot: "instrument", indice: "Un objet pour faire de la musique." },
+  { matiere: "Musique", lang: "fr", mot: "silence", indice: "Un moment sans son (il a une durée)." },
+  { matiere: "Musique", lang: "fr", mot: "tempo", indice: "La vitesse d'un morceau de musique." },
+  { matiere: "Musique", lang: "fr", mot: "symphonie", indice: "Une grande œuvre pour orchestre." },
+];
+
+// ── Arts plastiques (mots français) ──────────────────────────
+const ARTS: DicteeMot[] = [
+  { matiere: "Arts plastiques", lang: "fr", mot: "perspective", indice: "Donne l'impression de profondeur sur un dessin." },
+  { matiere: "Arts plastiques", lang: "fr", mot: "esquisse", indice: "Un premier dessin rapide." },
+  { matiere: "Arts plastiques", lang: "fr", mot: "nuance", indice: "Une variation légère de couleur." },
+  { matiere: "Arts plastiques", lang: "fr", mot: "pinceau", indice: "L'outil pour peindre." },
+  { matiere: "Arts plastiques", lang: "fr", mot: "sculpture", indice: "Une œuvre en volume." },
+  { matiere: "Arts plastiques", lang: "fr", mot: "palette", indice: "Le support où l'on mélange les couleurs." },
+  { matiere: "Arts plastiques", lang: "fr", mot: "contraste", indice: "Une opposition forte (clair / sombre)." },
+  { matiere: "Arts plastiques", lang: "fr", mot: "silhouette", indice: "La forme, le contour d'une figure." },
+  { matiere: "Arts plastiques", lang: "fr", mot: "aquarelle", indice: "Une peinture à l'eau." },
+  { matiere: "Arts plastiques", lang: "fr", mot: "collage", indice: "Assembler des morceaux collés." },
 ];
 
 // Entrelacement round-robin : chaque jour tombe sur une matière différente
-// (Français → Maths → Anglais → Espagnol → Histoire → Géographie → Écologie → …).
+// (Français → Maths → Anglais → Espagnol → Histoire → Géographie → Écologie →
+//  Physique → SVT → Musique → Arts plastiques → …).
 function entrelacer(groupes: DicteeMot[][]): DicteeMot[] {
   const out: DicteeMot[] = [];
   const max = Math.max(...groupes.map((g) => g.length));
@@ -130,6 +193,10 @@ export const DICTEE_MOTS: DicteeMot[] = entrelacer([
   HISTOIRE,
   GEOGRAPHIE,
   ECOLOGIE,
+  PHYSIQUE,
+  SVT,
+  MUSIQUE,
+  ARTS,
 ]);
 
 // Numéro de jour stable (jours depuis l'époque, en UTC pour éviter les demi-jours).

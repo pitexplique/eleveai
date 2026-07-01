@@ -109,6 +109,10 @@ export default function DicteeDuJourPage() {
     Histoire: "bg-orange-100 text-orange-700",
     Géographie: "bg-emerald-100 text-emerald-700",
     Écologie: "bg-lime-100 text-lime-700",
+    Physique: "bg-indigo-100 text-indigo-700",
+    SVT: "bg-teal-100 text-teal-700",
+    Musique: "bg-fuchsia-100 text-fuchsia-700",
+    "Arts plastiques": "bg-pink-100 text-pink-700",
   };
 
   return (
