@@ -41,7 +41,7 @@ const MSG_BIEN = [
 ];
 const MSG_ENCOURAGE = [
   "Pas grave, l'important c'est d'essayer ! 💛",
-  "Demain, un nouveau mot, une nouvelle chance ! ☀️",
+  "Demain, 5 nouveaux mots, une nouvelle chance ! ☀️",
   "L'entraînement paie — reviens demain ! 🔁",
   "Chaque jour compte. On se retrouve demain ! 🌱",
 ];
