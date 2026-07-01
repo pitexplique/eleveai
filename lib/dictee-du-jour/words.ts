@@ -173,19 +173,8 @@ const ARTS: DicteeMot[] = [
   { matiere: "Arts plastiques", lang: "fr", mot: "collage", indice: "Assembler des morceaux collés." },
 ];
 
-// Entrelacement round-robin : chaque jour tombe sur une matière différente
-// (Français → Maths → Anglais → Espagnol → Histoire → Géographie → Écologie →
-//  Physique → SVT → Musique → Arts plastiques → …).
-function entrelacer(groupes: DicteeMot[][]): DicteeMot[] {
-  const out: DicteeMot[] = [];
-  const max = Math.max(...groupes.map((g) => g.length));
-  for (let i = 0; i < max; i++) {
-    for (const g of groupes) if (i < g.length) out.push(g[i]);
-  }
-  return out;
-}
-
-export const DICTEE_MOTS: DicteeMot[] = entrelacer([
+// Les 11 matières (l'ordre fixe sert au tirage tournant).
+const GROUPES: DicteeMot[][] = [
   FRANCAIS,
   MATHS,
   ANGLAIS,
@@ -197,7 +186,7 @@ export const DICTEE_MOTS: DicteeMot[] = entrelacer([
   SVT,
   MUSIQUE,
   ARTS,
-]);
+];
 
 // Numéro de jour stable (jours depuis l'époque, en UTC pour éviter les demi-jours).
 function daySerial(date: Date): number {
@@ -206,15 +195,23 @@ function daySerial(date: Date): number {
   );
 }
 
-/** Index déterministe du mot du jour (même mot pour tous, ce jour-là). */
-export function motDuJourIndex(date: Date, total = DICTEE_MOTS.length): number {
+/**
+ * La dictée du jour : `n` mots (5 par défaut), de `n` MATIÈRES DIFFÉRENTES,
+ * tirés de façon DÉTERMINISTE par date (même dictée pour tous, ce jour-là).
+ * - Matières : fenêtre de n matières qui tourne chaque jour (n < 11 → distinctes).
+ * - Mot dans la matière : varie selon le jour.
+ * Le cycle complet (matières × mots) ne reboucle qu'au bout de ~110 jours.
+ */
+export function getDicteeDuJour(date: Date, n = 5): DicteeMot[] {
   const s = daySerial(date);
-  return ((s % total) + total) % total;
-}
-
-/** Le mot du jour pour une date donnée. */
-export function getMotDuJour(date: Date): DicteeMot {
-  return DICTEE_MOTS[motDuJourIndex(date)];
+  const M = GROUPES.length; // 11
+  const out: DicteeMot[] = [];
+  for (let i = 0; i < n; i++) {
+    const g = GROUPES[(((s * n + i) % M) + M) % M];
+    const wIdx = (((s + i) % g.length) + g.length) % g.length;
+    out.push(g[wIdx]);
+  }
+  return out;
 }
 
 /** Comparaison « dictée » : casse et espaces ignorés, mais ACCENTS conservés. */
