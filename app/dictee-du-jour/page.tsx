@@ -134,6 +134,7 @@ export default function DicteeDuJourPage() {
         mot: m.mot,
         matiere: m.matiere,
         ok: !!resultats[i],
+        saisie: reponses[i] ?? "",
       })),
     };
     try {
@@ -267,14 +268,9 @@ export default function DicteeDuJourPage() {
                     key={i}
                     className="flex items-center justify-between gap-2 rounded-lg bg-slate-50 px-3 py-2 text-sm"
                   >
-                    <span className="flex flex-wrap items-baseline gap-x-2 font-semibold text-slate-700">
+                    <span className="flex items-baseline gap-x-2 font-semibold text-slate-700">
                       <span>{ok ? "✅" : "❌"}</span>
                       <span className="font-black">{m.mot}</span>
-                      {!ok && reponses[i] ? (
-                        <span className="text-xs font-medium text-slate-400 line-through">
-                          {reponses[i]}
-                        </span>
-                      ) : null}
                     </span>
                     <span
                       className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-bold ${
