@@ -530,6 +530,37 @@ export default function AccueilPage({
         </div>
       </section>
 
+      {/* ── MOT AUX ÉLÈVES ET AUX PARENTS ────────────────────────────────────── */}
+      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-sky-300/30 bg-gradient-to-br from-sky-300/[0.10] via-cyan-300/[0.06] to-white/[0.04] p-6 text-center sm:p-8">
+          <p className="text-3xl sm:text-4xl" aria-hidden="true">💛</p>
+          <h2 className="mt-2 text-2xl font-black leading-tight text-white sm:text-3xl">
+            Aux élèves et à leurs parents
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+            Merci pour cette année. EleveAI est né dans ma classe, pour mes
+            élèves — et il reste{" "}
+            <span className="font-black text-sky-200">
+              gratuit et ouvert tout l&apos;été
+            </span>
+            .
+          </p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+            <span className="font-black text-sky-200">Aux parents :</span>{" "}
+            quelques minutes par jour suffisent — la dictée du jour, un défi, une
+            fiche. Aucune pression, juste le plaisir d&apos;apprendre à son
+            rythme, en confiance (et sans publicité — vos enfants sont en
+            sécurité).
+          </p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+            <span className="font-black text-sky-200">Aux élèves :</span> je suis
+            fier de vous. Reposez-vous, profitez des vôtres et du soleil… et
+            revenez quand l&apos;envie vous prend. 🌴
+          </p>
+          <p className="mt-4 text-sm font-black text-emerald-200">— M. Lacoste</p>
+        </div>
+      </section>
+
       {/* ── CAHIERS DE VACANCES — produit saisonnier, cartes colorées & fun ──── */}
       <section id="explorer" className="relative scroll-mt-20 overflow-hidden bg-gradient-to-b from-[#08294a] to-[#041B33] px-4 pb-2 pt-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
