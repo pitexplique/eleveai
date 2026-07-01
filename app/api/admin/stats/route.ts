@@ -31,6 +31,7 @@ const TABLES_RESULTATS: { table: string; module: string; hasScore: boolean }[] =
   { table: "resultats_calcul_rapide", module: "calcul", hasScore: true },
   { table: "resultats_defis_jour", module: "defis", hasScore: true },
   { table: "resultats_english_maths", module: "english", hasScore: true },
+  { table: "resultats_dictee", module: "dictee", hasScore: true },
   { table: "resultats_tutor", module: "coach", hasScore: false },
 ];
 
@@ -249,7 +250,7 @@ export async function GET(req: Request) {
   let activitesTotal = 0;
   let activitesAujourdhui = 0;
   let activites7j = 0;
-  const MODULE_KEYS = ["parcours", "calcul", "defis", "english", "coach"];
+  const MODULE_KEYS = ["parcours", "calcul", "defis", "english", "dictee", "coach"];
   const parModule: Record<string, number> = Object.fromEntries(
     MODULE_KEYS.map((k) => [k, 0])
   );

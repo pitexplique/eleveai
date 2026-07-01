@@ -65,6 +65,7 @@ const MODULES: { key: string; label: string; color: string }[] = [
   { key: "defis", label: "🎯 Défis du jour", color: "bg-orange-500" },
   { key: "coach", label: "🧠 Coach IA", color: "bg-indigo-500" },
   { key: "english", label: "🇬🇧 English-Maths", color: "bg-sky-500" },
+  { key: "dictee", label: "✍️ Dictée du jour", color: "bg-cyan-500" },
 ];
 
 // Libellés lisibles des sections (1er segment d'URL) — « où vont les élèves ».

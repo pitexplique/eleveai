@@ -52,6 +52,10 @@ const ACTIVITES: Record<string, { table: string; colonnes: string[] }> = {
     table: "resultats_english_maths",
     colonnes: ["niveau", "jour", "theme", "score", "total", "details"],
   },
+  dictee: {
+    table: "resultats_dictee",
+    colonnes: ["classe", "score", "total", "details"],
+  },
   tutor: {
     table: "resultats_tutor",
     colonnes: [

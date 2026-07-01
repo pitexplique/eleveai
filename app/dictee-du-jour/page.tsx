@@ -13,6 +13,7 @@ import {
   type DicteeMot,
 } from "@/lib/dictee-du-jour/words";
 import { speakText } from "@/app/tutor-v4/ListenButton";
+import { useEleve } from "@/context/EleveContext";
 
 const STREAK_KEY = "dictee-du-jour-streak";
 
@@ -49,6 +50,8 @@ export default function DicteeDuJourPage() {
   const [streak, setStreak] = useState(0);
   const [dejaFait, setDejaFait] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const { eleve } = useEleve();
+  const savedRef = useRef(false);
 
   useEffect(() => {
     // Précharge les voix (souvent vides au 1er appel) pour que la voix
@@ -87,6 +90,32 @@ export default function DicteeDuJourPage() {
   const total = mots?.length ?? 0;
   const current = mots && idx < total ? mots[idx] : null;
   const score = resultats.filter(Boolean).length;
+
+  // Enregistre le résultat pour un élève connecté (une seule fois, à la fin).
+  // L'identité est forcée côté serveur depuis le jeton (sécurisé).
+  useEffect(() => {
+    if (!fini || savedRef.current || !mots) return;
+    savedRef.current = true;
+    if (!eleve?.token) return; // non connecté : rien à enregistrer
+    const details = {
+      date: jourStr(new Date()),
+      mots: mots.map((m, i) => ({
+        mot: m.mot,
+        matiere: m.matiere,
+        ok: !!resultats[i],
+      })),
+    };
+    fetch("/api/resultats", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: eleve.token,
+        type: "dictee",
+        resultat: { classe: eleve.classe ?? null, score, total, details },
+      }),
+    }).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fini]);
 
   function ecouter() {
     if (current) speakText(current.mot, current.lang);
