@@ -506,8 +506,15 @@ export default function AccueilPage({
           <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
             Maintenant, place au repos : profitez de vos proches, du soleil et du temps
             qui ralentit. Et si l&apos;envie vous prend, l&apos;appli reste ouverte
-            pendant les vacances — quelques minutes par-ci par-là, à votre rythme, juste
-            pour le plaisir. 😉
+            pendant les vacances. Le plus simple pour garder le rythme, c&apos;est la{" "}
+            <Link
+              href="/dictee-du-jour"
+              className="font-black text-cyan-200 underline decoration-cyan-300/60 underline-offset-2 transition hover:text-cyan-100"
+            >
+              📜 dictée du jour
+            </Link>{" "}
+            : un mot à écouter et à écrire chaque matin, à votre rythme, juste pour le
+            plaisir. 😉
           </p>
           <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
             Et bonne nouvelle : <span className="font-black text-amber-200">chaque semaine,
