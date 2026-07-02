@@ -9,6 +9,8 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   getDicteeDuJour,
+  getDicteeMatiere,
+  MATIERES,
   reponseCorrecte,
   type DicteeMot,
 } from "@/lib/dictee-du-jour/words";
@@ -83,6 +85,25 @@ export default function DicteeDuJourPage() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [saveMsg, setSaveMsg] = useState<string | null>(null);
+  // null = « mélange du jour » (5 matières) ; sinon une matière choisie.
+  const [matiereChoisie, setMatiereChoisie] = useState<string | null>(null);
+
+  // (Re)charge une dictée et remet la séquence à zéro : soit le mélange du jour,
+  // soit 5 mots d'une matière choisie par l'élève.
+  function chargerDictee(matiere: string | null) {
+    const now = new Date();
+    setMatiereChoisie(matiere);
+    setMots(matiere ? getDicteeMatiere(matiere, now, 5) : getDicteeDuJour(now, 5));
+    setIdx(0);
+    setSaisie("");
+    setReveal(null);
+    setResultats([]);
+    setReponses([]);
+    setFini(false);
+    setShowIndice(false);
+    setSaved(false);
+    setSaveMsg(null);
+  }
 
   useEffect(() => {
     // Précharge les voix (souvent vides au 1er appel) pour que la voix
@@ -130,6 +151,7 @@ export default function DicteeDuJourPage() {
     setSaveMsg(null);
     const details = {
       date: jourStr(new Date()),
+      matiere: matiereChoisie ?? "mélange",
       mots: mots.map((m, i) => ({
         mot: m.mot,
         matiere: m.matiere,
@@ -234,8 +256,38 @@ export default function DicteeDuJourPage() {
             {dateLabel || "…"}
           </p>
           <p className="mt-1 text-xs font-semibold text-slate-500">
-            5 mots, 5 matières. Reviens demain pour une nouvelle dictée ! ☀️
+            {matiereChoisie ? `5 mots de ${matiereChoisie}.` : "5 mots, 5 matières."}{" "}
+            Reviens demain pour une nouvelle dictée ! ☀️
           </p>
+        </div>
+
+        {/* Choix de la matière : mélange du jour (défaut) ou une matière précise. */}
+        <div className="mb-5 flex flex-wrap justify-center gap-2">
+          <button
+            type="button"
+            onClick={() => chargerDictee(null)}
+            className={`rounded-full px-3 py-1.5 text-xs font-black transition ${
+              matiereChoisie === null
+                ? "bg-sky-600 text-white shadow-sm"
+                : "bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50"
+            }`}
+          >
+            🎲 Mélange du jour
+          </button>
+          {MATIERES.map((m) => (
+            <button
+              key={m}
+              type="button"
+              onClick={() => chargerDictee(m)}
+              className={`rounded-full px-3 py-1.5 text-xs font-bold transition ${
+                matiereChoisie === m
+                  ? "bg-sky-600 text-white shadow-sm"
+                  : "bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50"
+              }`}
+            >
+              {m}
+            </button>
+          ))}
         </div>
 
         {!mots ? (

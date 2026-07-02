@@ -214,6 +214,30 @@ export function getDicteeDuJour(date: Date, n = 5): DicteeMot[] {
   return out;
 }
 
+/** Liste des matières disponibles (dans l'ordre du tirage). */
+export const MATIERES: string[] = GROUPES.map((g) => g[0]?.matiere ?? "").filter(
+  Boolean
+);
+
+/**
+ * Dictée d'UNE matière choisie : n mots de cette matière, déterministe par date.
+ * Permet à l'élève de s'entraîner sur une matière précise (au lieu du mélange).
+ */
+export function getDicteeMatiere(
+  matiere: string,
+  date: Date,
+  n = 5
+): DicteeMot[] {
+  const group = GROUPES.find((g) => g[0]?.matiere === matiere);
+  if (!group || group.length === 0) return getDicteeDuJour(date, n);
+  const s = daySerial(date);
+  const out: DicteeMot[] = [];
+  for (let i = 0; i < n; i++) {
+    out.push(group[(((s + i) % group.length) + group.length) % group.length]);
+  }
+  return out;
+}
+
 /** Comparaison « dictée » : casse et espaces ignorés, mais ACCENTS conservés. */
 export function reponseCorrecte(saisie: string, mot: string): boolean {
   const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ");
