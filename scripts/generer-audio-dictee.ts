@@ -14,8 +14,12 @@
 
 import { mkdirSync, existsSync, writeFileSync } from "fs";
 import { dirname, join } from "path";
-import { getAudioBase64 } from "google-tts-api";
+// google-tts-api s'exporte en default (objet avec getAudioUrl…). On gère les
+// deux formes (default ou namespace) pour être robuste selon le loader.
+import * as gttsImport from "google-tts-api";
 import { TOUS_LES_MOTS, slugMot } from "../lib/dictee-du-jour/words";
+
+const gtts: any = (gttsImport as any).default ?? gttsImport;
 
 const OUT = join(process.cwd(), "public", "audio", "dictee");
 
@@ -33,9 +37,16 @@ async function main() {
       continue;
     }
     try {
-      const b64 = await getAudioBase64(w.mot, { lang: w.lang, slow: false });
+      const url: string = gtts.getAudioUrl(w.mot, {
+        lang: w.lang,
+        slow: false,
+        host: "https://translate.google.com",
+      });
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const buf = Buffer.from(await res.arrayBuffer());
       mkdirSync(dirname(dest), { recursive: true });
-      writeFileSync(dest, Buffer.from(b64, "base64"));
+      writeFileSync(dest, buf);
       crees++;
       console.log(`✅ ${w.lang}/${slugMot(w.mot)}.mp3   « ${w.mot} »`);
     } catch (e) {
