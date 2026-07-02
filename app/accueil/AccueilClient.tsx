@@ -475,7 +475,7 @@ export default function AccueilPage({
               🧭 Tout au même endroit
             </p>
             <h2 className="mt-1 text-2xl font-black text-white sm:text-3xl">
-              Explore tout ce que tu peux faire
+              🔍 Explore tout ce que tu peux faire
             </h2>
             <p className="mt-1 text-sm font-semibold text-white/75">
               Coachs, parcours, défis, dictée, concours, cahiers de vacances… Progresse
