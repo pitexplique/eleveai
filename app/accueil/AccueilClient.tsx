@@ -421,12 +421,12 @@ export default function AccueilPage({
             du CP à la Terminale. À toi de jouer&nbsp;: explore et trouve ta voie. ✨
           </p>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href="#explorer"
+            <Link
+              href="/explorer"
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400 px-6 py-2.5 text-sm font-black text-[#041B33] shadow-lg transition hover:scale-105 hover:brightness-110"
             >
-              🧭 Explorer
-            </a>
+              🧭 Explorer tout
+            </Link>
             {!eleve && (
               <Link
                 href="/auth/signin?mode=eleve"
@@ -460,6 +460,30 @@ export default function AccueilPage({
           </div>
           <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-cyan-400 px-6 py-3 text-sm font-black text-[#041B33] shadow-lg">
             Faire la dictée →
+          </span>
+        </Link>
+      </section>
+
+      {/* ── EXPLORER — le catalogue de toutes les actions possibles ──────────── */}
+      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
+        <Link
+          href="/explorer"
+          className="mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-violet-300/30 bg-gradient-to-br from-violet-400/[0.14] via-fuchsia-400/[0.07] to-white/[0.04] p-6 text-center transition hover:border-violet-300/60 sm:flex-row sm:justify-between sm:text-left sm:p-7"
+        >
+          <div>
+            <p className="text-xs font-black uppercase tracking-wide text-violet-200">
+              🧭 Tout au même endroit
+            </p>
+            <h2 className="mt-1 text-2xl font-black text-white sm:text-3xl">
+              Explore tout ce que tu peux faire
+            </h2>
+            <p className="mt-1 text-sm font-semibold text-white/75">
+              Coachs, parcours, défis, dictée, concours, cahiers de vacances… Progresse
+              dans ta matière forte, ou tente une voie que tu n&apos;as pas encore explorée.
+            </p>
+          </div>
+          <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-violet-400 px-6 py-3 text-sm font-black text-[#041B33] shadow-lg">
+            Voir le catalogue →
           </span>
         </Link>
       </section>
