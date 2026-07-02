@@ -451,7 +451,7 @@ export default function AccueilPage({
               ✍️ Nouveau chaque jour
             </p>
             <h2 className="mt-1 text-2xl font-black text-white sm:text-3xl">
-              La dictée du jour
+              📜 La dictée du jour
             </h2>
             <p className="mt-1 text-sm font-semibold text-white/75">
               Un mot à écouter et à écrire — français, maths, langues, histoire,
