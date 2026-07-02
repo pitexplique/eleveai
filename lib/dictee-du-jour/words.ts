@@ -238,6 +238,24 @@ export function getDicteeMatiere(
   return out;
 }
 
+/** Tous les mots de la banque (pour la génération audio one-shot). */
+export const TOUS_LES_MOTS: DicteeMot[] = GROUPES.flat();
+
+/** Nom de fichier stable pour un mot : sans accent, minuscules, tirets. */
+export function slugMot(mot: string): string {
+  return mot
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "") // enlève les accents (diacritiques)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/** Chemin de l'audio pré-généré d'un mot (dans /public). */
+export function audioDictee(mot: DicteeMot): string {
+  return `/audio/dictee/${mot.lang}/${slugMot(mot.mot)}.mp3`;
+}
+
 /** Comparaison « dictée » : casse et espaces ignorés, mais ACCENTS conservés. */
 export function reponseCorrecte(saisie: string, mot: string): boolean {
   const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ");
