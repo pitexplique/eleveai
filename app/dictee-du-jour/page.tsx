@@ -15,6 +15,7 @@ import {
   type DicteeMot,
 } from "@/lib/dictee-du-jour/words";
 import { speakText } from "@/app/tutor-v4/ListenButton";
+import { playMotDictee } from "@/lib/dictee-du-jour/playAudio";
 import { useEleve } from "@/context/EleveContext";
 
 const STREAK_KEY = "dictee-du-jour-streak";
@@ -194,7 +195,9 @@ export default function DicteeDuJourPage() {
   }, [fini]);
 
   function ecouter() {
-    if (current) speakText(current.mot, current.lang);
+    if (!current) return;
+    // mp3 pré-généré (fort + correct partout) ; repli TTS si le fichier manque.
+    playMotDictee(current, () => speakText(current.mot, current.lang));
   }
 
   function valider() {

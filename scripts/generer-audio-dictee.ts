@@ -7,19 +7,30 @@
  * IDEMPOTENT : saute les mots qui ont déjà leur fichier → relancer ne génère
  * que les NOUVEAUX mots. Pas de corvée hebdomadaire : la banque est figée.
  *
- * Lancer :
- *   npm install -D google-tts-api tsx
+ * Lancer (⚠️ --legacy-peer-deps : sans lui, npm peut « résoudre » un conflit
+ * en DOWNGRADANT tes deps existantes, ex. next 15 → 9 !) :
+ *   npm install -D google-tts-api tsx --legacy-peer-deps
  *   npx tsx scripts/generer-audio-dictee.ts
+ * Puis, une fois généré, tu peux désinstaller les deux (les mp3 suffisent) :
+ *   npm remove google-tts-api tsx
  */
 
 import { mkdirSync, existsSync, writeFileSync } from "fs";
 import { dirname, join } from "path";
-// google-tts-api s'exporte en default (objet avec getAudioUrl…). On gère les
-// deux formes (default ou namespace) pour être robuste selon le loader.
-import * as gttsImport from "google-tts-api";
+import { createRequire } from "module";
 import { TOUS_LES_MOTS, slugMot } from "../lib/dictee-du-jour/words";
 
-const gtts: any = (gttsImport as any).default ?? gttsImport;
+// google-tts-api v0.0.6 exporte DIRECTEMENT une fonction (text, lang, speed)
+// qui renvoie l'URL de l'audio. On la charge en CommonJS (fiable).
+const require = createRequire(import.meta.url);
+const _m: any = require("google-tts-api");
+const ttsUrl: (text: string, lang: string, speed?: number) => Promise<string> =
+  typeof _m === "function" ? _m : _m?.default;
+
+if (typeof ttsUrl !== "function") {
+  console.error("⚠️  google-tts-api : fonction introuvable (type =", typeof _m, ")");
+  process.exit(1);
+}
 
 const OUT = join(process.cwd(), "public", "audio", "dictee");
 
@@ -37,11 +48,7 @@ async function main() {
       continue;
     }
     try {
-      const url: string = gtts.getAudioUrl(w.mot, {
-        lang: w.lang,
-        slow: false,
-        host: "https://translate.google.com",
-      });
+      const url = await ttsUrl(w.mot, w.lang, 1);
       const res = await fetch(url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const buf = Buffer.from(await res.arrayBuffer());
