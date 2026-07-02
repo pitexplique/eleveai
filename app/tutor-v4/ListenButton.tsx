@@ -66,20 +66,26 @@ function pickVoice(lang: SpeechLang): SpeechSynthesisVoice | null {
   const pool = cachedVoices.length
     ? cachedVoices
     : window.speechSynthesis.getVoices();
+  // On PRÉFÈRE une voix LOCALE (localService) parmi les correspondances : les
+  // voix « en ligne » (réseau) — typiques des voix anglaises d'Edge/Chrome —
+  // peuvent rester muettes ou lentes. C'est ce qui donnait « anglais muet,
+  // espagnol OK » (l'espagnol avait une voix locale, l'anglais une voix réseau).
+  const best = (matches: SpeechSynthesisVoice[]) =>
+    matches.find((v) => v.localService) ?? matches[0];
   for (const pref of VOICE_PREFS[lang]) {
-    const exact = pool.find((v) => v.lang && v.lang.toLowerCase() === pref);
-    if (exact) return exact;
-    const starts = pool.find(
+    const exact = pool.filter((v) => v.lang && v.lang.toLowerCase() === pref);
+    if (exact.length) return best(exact);
+    const starts = pool.filter(
       (v) => v.lang && v.lang.toLowerCase().startsWith(pref)
     );
-    if (starts) return starts;
+    if (starts.length) return best(starts);
   }
-  // Pas de voix cible installée : pour le français, on prend n'importe quelle
-  // voix fr. Pour l'anglais/espagnol, on NE force PAS une voix française (sinon
-  // le mot est prononcé « à la française ») → on renvoie null et `utter.lang`
-  // (en-GB / es-ES) guidera le moteur vers la bonne langue.
+  // Pas de voix cible : pour le français on prend n'importe quelle voix fr
+  // (locale de préférence). Pour l'anglais/espagnol on NE force PAS le français
+  // → null, et `utter.lang` (en-GB / es-ES) guidera le moteur.
   if (lang === "fr") {
-    return pool.find((v) => v.lang && v.lang.toLowerCase().startsWith("fr")) ?? null;
+    const fr = pool.filter((v) => v.lang && v.lang.toLowerCase().startsWith("fr"));
+    if (fr.length) return best(fr);
   }
   return null;
 }
