@@ -8,6 +8,7 @@ const BASE_URL = "https://eleveai.fr";
 const u = (path: string) => `${BASE_URL}${path}`;
 
 const LASTMOD_HOME    = new Date("2026-07-01");
+const LASTMOD_EXPLORER = new Date("2026-07-02");
 const LASTMOD_CORE    = new Date("2026-06-25");
 const LASTMOD_CAHIERS = new Date("2026-06-29");
 const LASTMOD_DICTEE  = new Date("2026-07-01");
@@ -38,6 +39,9 @@ type RouteConfig = {
 const ROUTES: RouteConfig[] = [
   // ── ACCUEIL ────────────────────────────────────────────────────────────────
   { path: "/", priority: 1.0, changeFrequency: "daily", lastMod: LASTMOD_HOME },
+
+  // ── EXPLORER (catalogue de toutes les actions) ─────────────────────────────
+  { path: "/explorer",        priority: 0.9,  changeFrequency: "weekly", lastMod: LASTMOD_EXPLORER },
 
   // ── OUTILS ÉLÈVES ──────────────────────────────────────────────────────────
   { path: "/coach-brevet",    priority: 1.0,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
