@@ -483,7 +483,7 @@ export default function AccueilPage({
             </p>
           </div>
           <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-violet-400 px-6 py-3 text-sm font-black text-[#041B33] shadow-lg">
-            Voir le catalogue →
+            🔍 Voir le catalogue →
           </span>
         </Link>
       </section>
