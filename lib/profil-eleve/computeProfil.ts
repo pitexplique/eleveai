@@ -51,14 +51,17 @@ const SERIE_MINI = 2;
 // rentrée — cf. checklist maintenance « fraîcheur des contenus saisonniers »).
 const EN_VACANCES = true;
 
-// En vacances, le CAHIER (📥 hors-ligne) apparaît dans le 🧭 — PAS tous les jours :
-//   (a) un jour fixe par semaine pour tous = rappel léger ;
-//   (b) plus souvent pour l'élève dont la régularité s'effrite (bouée hors-ligne :
-//       il décroche, sa connexion est peut-être fragile — sert la mission).
-// Le reste du temps, le 🧭 explore une voie neuve (on garde l'anti-bulle).
-const CAHIER_JOUR_HEBDO = 3; // 0=dim … 3=mer : le jour du rappel hebdo
-const CAHIER_ENGAGEMENT_MIN = 10; // en dessous = trop nouveau → on le laisse explorer
-const CAHIER_ENGAGEMENT_MAX = 40; // 10–40 = il s'éloigne → bouée cahier
+// En vacances, le CAHIER (📥 hors-ligne) apparaît dans le 🧭 — PAS tous les jours,
+// et JAMAIS pour tout le monde le même jour : chaque élève a SON jour de la semaine
+// (réparti par hachage de son code), et ne le voit donc qu'~1 jour sur 7. Le reste
+// du temps, le 🧭 explore une voie neuve (anti-bulle préservé).
+// (⚠️ ancienne « bouée par engagement » RETIRÉE : en vacances l'engagement chute
+//  pour presque tous → elle sortait le cahier à quasi tout le monde.)
+function jourCahierEleve(code: string): number {
+  let h = 0;
+  for (let i = 0; i < code.length; i++) h = (h * 31 + code.charCodeAt(i)) % 7;
+  return h; // 0–6, jour de la semaine propre à cet élève
+}
 
 // Tables scannées pour l'ENGAGEMENT (created_at seulement). resultats_tutor y est
 // aussi mais on le charge à part (pour la maîtrise), on ne le redouble donc pas.
@@ -373,12 +376,11 @@ function construireRecoDuJour(args: {
   matieresTouchees: Set<string>;
   typesTouches: Set<string>;
   niveau: string | null;
-  engagement: number;
-  now: number;
+  montrerCahier: boolean;
 }): RecoDuJour {
   const {
     catalogue, notions, faibles, joursDepuis, serie, faitAujourdhui,
-    matieresTouchees, typesTouches, niveau, engagement, now,
+    matieresTouchees, typesTouches, niveau, montrerCahier,
   } = args;
 
   let principale: CarteReco;
@@ -459,16 +461,9 @@ function construireRecoDuJour(args: {
     };
   }
 
-  // ── 🧭 P4 — Explorer une voie neuve / (en vacances) ton cahier ──────────────
-  // Le cahier ne sort PAS tous les jours : rappel hebdo pour tous + bouée pour
-  // l'élève qui s'éloigne (cf. constantes). Sinon, on explore une voie neuve.
-  const rappelHebdoCahier = new Date(now).getUTCDay() === CAHIER_JOUR_HEBDO;
-  const eleveSEloigne =
-    engagement >= CAHIER_ENGAGEMENT_MIN && engagement < CAHIER_ENGAGEMENT_MAX;
-  const cahier =
-    EN_VACANCES && (rappelHebdoCahier || eleveSEloigne)
-      ? actionParId(catalogue, "cahier-vacances")
-      : null;
+  // ── 🧭 P4 — Explorer une voie neuve / (le jour cahier de l'élève) ───────────
+  // `montrerCahier` est vrai ~1 jour/semaine, propre à chaque élève. Sinon explore.
+  const cahier = montrerCahier ? actionParId(catalogue, "cahier-vacances") : null;
 
   let alternative: CarteReco;
   const exp = cahier
@@ -609,8 +604,11 @@ export async function computeProfil(args: {
     matieresTouchees,
     typesTouches,
     niveau: niveauNorm,
-    engagement,
-    now,
+    // Cahier dans le 🧭 : seulement les vacances, et seulement LE jour de la
+    // semaine propre à cet élève → ~1×/sem, jamais tout le monde en même temps.
+    montrerCahier:
+      EN_VACANCES &&
+      new Date(now).getUTCDay() === jourCahierEleve(args.codeUtilisateur),
   });
 
   return {
