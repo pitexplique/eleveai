@@ -61,7 +61,7 @@ values
   ('parcours-ia',       'parcours', 'parcours', 'ia',       'Parcours IA',       'Bilan de culture et de réflexes IA.', '/parcours-ia',           'A1 → C1',         'long', 'ponctuel', array['explorer'], 0.70, 0.45, 'actif', true, 24),
 
   -- ☀️ Rituels quotidiens — le carburant du rendez-vous du matin
-  ('defis-du-jour',  'rituel', 'defi',         'maths',       'Défis du jour',    'Un défi maths chaque jour (Grand Raid 2026).', '/defis-du-jour', 'Tous', 'court', 'quotidien', array['rituel','competition'], 0.70, 0.90, 'actif', true, 30),
+  ('defis-du-jour',  'rituel', 'defi',         'maths',       'Défis du jour',    'Un défi maths chaque jour, inspiré de l''actu et de La Réunion.', '/defis-du-jour', 'Tous', 'court', 'quotidien', array['rituel','competition'], 0.70, 0.90, 'actif', true, 30),
   ('calcul-rapide',  'rituel', 'calcul-rapide','maths',       'Calcul rapide',    '5 min d''automatismes.',                        '/calcul-rapide', 'Tous', 'court', 'quotidien', array['rituel','progresser'], 0.75, 0.80, 'actif', true, 31),
   ('dictee-du-jour', 'rituel', 'dictee',       'transversal', 'Dictée du jour',   'Un mot à écouter et écrire, 5 matières mélangées.', '/dictee-du-jour', 'Tous', 'court', 'quotidien', array['rituel','explorer'], 0.75, 0.70, 'actif', true, 32),
   ('semaine-verbes', 'rituel', 'autre',        'anglais',     'Semaine des verbes','Le vocabulaire anglais de la semaine.',        '/english-maths', 'Collège', 'court', 'hebdo', array['rituel'], 0.60, 0.50, 'actif', true, 33),

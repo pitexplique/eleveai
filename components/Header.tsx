@@ -20,7 +20,7 @@ const NAV_MATHS = [
   { href: "/fiches-cours/maths", icon: "PDF", label: "Fiches de cours",    desc: "Cours maths courts à télécharger" },
   { href: "/maths-974",        icon: "🌋", label: "Maths Réel · 974",       desc: "La Réunion en vidéo : à quoi servent les maths" },
   { href: "/concours-general", icon: "🏆", label: "Concours général",   desc: "Problèmes avancés" },
-  { href: "/defis-du-jour",    icon: "🎯", label: "Défis du jour",      desc: "Grand Raid 2026" },
+  { href: "/defis-du-jour",    icon: "🎯", label: "Défis du jour",      desc: "Un défi maths chaque jour" },
   { href: "/podcast-maths",    icon: "🎧", label: "Podcast maths",      desc: "Fractions, pourcentages, probas en audio" },
 ];
 
