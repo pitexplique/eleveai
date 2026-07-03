@@ -18,6 +18,7 @@ import "server-only";
 import { createClient } from "@supabase/supabase-js";
 import { prenomCourt } from "@/lib/prenom";
 import { niveauPublic } from "@/lib/classe";
+import { fetchCatalogue, type ActionCatalogue } from "@/lib/server/catalogue";
 import type {
   ProfilEleve,
   NotionMastery,
@@ -37,19 +38,29 @@ const DEMI_VIE_JOURS = 30;
 const SEUIL_FAIBLE = 55; // en dessous → à renforcer
 const SEUIL_FORT = 80; // au dessus → point fort
 
+// P0 « Ré-engager » : seuil d'absence (jours). Décision fondateur (03/07/2026) =
+// 7 j → s'aligne sur la sortie du statut « actif » (≤7 j) : un élève vu il y a
+// quelques jours reste en Progresser/Renforcer, on ne « ré-engage » qu'après une
+// vraie coupure d'une semaine (adapté aux vacances). Réglable ici, à la main du prof.
+const SEUIL_ABSENCE_JOURS = 7;
+
+// Série « vivante » à partir de ce nombre de jours d'affilée (sinon pas d'enjeu).
+const SERIE_MINI = 2;
+
 // Tables scannées pour l'ENGAGEMENT (created_at seulement). resultats_tutor y est
 // aussi mais on le charge à part (pour la maîtrise), on ne le redouble donc pas.
-const TABLES_ACTIVITE = [
-  "resultats_parcours_maths",
-  "resultats_parcours_english",
-  "resultats_parcours_espagnol",
-  "resultats_parcours_francais",
-  "resultats_parcours_ia",
-  "resultats_calcul_rapide",
-  "resultats_defis_jour",
-  "resultats_english_maths",
-  "resultats_dictee",
-];
+// La valeur = le `type` du catalogue correspondant (sert aux formats déjà touchés).
+const TABLES_ACTIVITE: Record<string, string> = {
+  resultats_parcours_maths: "parcours",
+  resultats_parcours_english: "parcours",
+  resultats_parcours_espagnol: "parcours",
+  resultats_parcours_francais: "parcours",
+  resultats_parcours_ia: "parcours",
+  resultats_calcul_rapide: "calcul-rapide",
+  resultats_defis_jour: "defi",
+  resultats_english_maths: "autre",
+  resultats_dictee: "dictee",
+};
 
 type TutorRow = {
   matiere: string;
@@ -104,15 +115,17 @@ async function fetchTutor(
 }
 
 // Récupère les timestamps d'activité (created_at) de toutes les autres tables
-// de résultats + les connexions → sert au calcul d'engagement (jours actifs).
+// de résultats + les connexions → engagement (jours actifs, série). Renvoie aussi
+// l'ensemble des `type` de catalogue déjà pratiqués (formats touchés → exploration).
 async function fetchActiviteTimestamps(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   supabase: any,
   codeEtablissement: string,
   codeUtilisateur: string
-): Promise<number[]> {
+): Promise<{ ts: number[]; typesTouches: Set<string> }> {
+  const tables = [...Object.keys(TABLES_ACTIVITE), "connexions"];
   const lots = await Promise.all(
-    [...TABLES_ACTIVITE, "connexions"].map(async (table) => {
+    tables.map(async (table) => {
       const { data, error } = await supabase
         .from(table)
         .select("created_at")
@@ -120,13 +133,19 @@ async function fetchActiviteTimestamps(
         .eq("code_utilisateur", codeUtilisateur)
         .order("created_at", { ascending: false })
         .limit(2000);
-      if (error || !data) return [] as number[];
-      return (data as Record<string, unknown>[])
+      if (error || !data) return { table, ts: [] as number[] };
+      const ts = (data as Record<string, unknown>[])
         .map((r) => new Date(r.created_at as string).getTime())
         .filter((t) => Number.isFinite(t));
+      return { table, ts };
     })
   );
-  return lots.flat();
+
+  const typesTouches = new Set<string>();
+  for (const { table, ts } of lots) {
+    if (ts.length > 0 && TABLES_ACTIVITE[table]) typesTouches.add(TABLES_ACTIVITE[table]);
+  }
+  return { ts: lots.flatMap((l) => l.ts), typesTouches };
 }
 
 // Maîtrise par notion = moyenne des score_sur_20 (ramenés /100) pondérée par la
@@ -191,6 +210,82 @@ function statutEngagement(joursDepuis: number | null): StatutEngagement {
   return "inactif";
 }
 
+// Série = jours d'affilée avec activité, finissant AUJOURD'HUI ou HIER (une série
+// dont le dernier jour est hier est encore « sauvable » aujourd'hui). Renvoie aussi
+// si l'élève a déjà agi aujourd'hui (→ inutile de lui proposer de sauver la série).
+function calculerSerie(
+  joursActifs: Set<string>,
+  now: number
+): { serie: number; faitAujourdhui: boolean } {
+  const cle = (t: number) => new Date(t).toISOString().slice(0, 10);
+  const faitAujourdhui = joursActifs.has(cle(now));
+  // Point de départ : aujourd'hui si actif, sinon hier si actif, sinon série nulle.
+  let curseur = now;
+  if (!faitAujourdhui) {
+    if (!joursActifs.has(cle(now - JOUR))) return { serie: 0, faitAujourdhui };
+    curseur = now - JOUR;
+  }
+  let serie = 0;
+  while (joursActifs.has(cle(curseur))) {
+    serie++;
+    curseur -= JOUR;
+  }
+  return { serie, faitAujourdhui };
+}
+
+// ── Sélection dans le catalogue (les règles filtrent par ÉTIQUETTES) ───────────
+const actifs = (cat: ActionCatalogue[]) => cat.filter((a) => a.actif);
+
+// Action courte + quotidienne la plus ATTRAYANTE → victoire facile/fun (P0, P1).
+function actionCourteFun(cat: ActionCatalogue[]): ActionCatalogue | null {
+  return (
+    actifs(cat)
+      .filter((a) => a.duree === "court" && a.rythme === "quotidien")
+      .sort((a, b) => b.attrait - a.attrait)[0] ?? null
+  );
+}
+
+// Meilleure action de démarrage (P5, cold-start) = valeur × intérêt max.
+function actionDefaut(cat: ActionCatalogue[]): ActionCatalogue | null {
+  return actifs(cat).sort((a, b) => b.valeur_interet - a.valeur_interet)[0] ?? null;
+}
+
+// Exploration (🧭 P4) : une voie NEUVE = matière cœur jamais travaillée (via coach)
+// OU format jamais essayé, hors matière de la carte principale. On priorise une
+// matière cœur neuve, puis on départage par valeur × intérêt (« amené par un
+// format aimé »).
+function actionExplore(
+  cat: ActionCatalogue[],
+  matieresTouchees: Set<string>,
+  typesTouches: Set<string>,
+  exclureMatiere: string | undefined
+): ActionCatalogue | null {
+  const coeur = new Set(MATIERES_COEUR);
+  const estMatiereNeuve = (a: ActionCatalogue) =>
+    coeur.has(a.matiere) && !matieresTouchees.has(a.matiere);
+  const candidats = actifs(cat).filter(
+    (a) =>
+      a.matiere !== exclureMatiere &&
+      (estMatiereNeuve(a) || !typesTouches.has(a.type))
+  );
+  return (
+    candidats.sort((a, b) => {
+      const an = estMatiereNeuve(a) ? 1 : 0;
+      const bn = estMatiereNeuve(b) ? 1 : 0;
+      if (an !== bn) return bn - an;
+      return b.valeur_interet - a.valeur_interet;
+    })[0] ?? null
+  );
+}
+
+// Lien d'une action ; ajoute ?classe= pour les coachs (atterrir au bon niveau).
+function lienAction(a: ActionCatalogue, niveau: string | null): string {
+  if (a.route.startsWith("/coach-ia/") && niveau) {
+    return `${a.route}?classe=${encodeURIComponent(niveau)}`;
+  }
+  return a.route;
+}
+
 // Matières « cœur » ayant un coach dédié, dans l'ordre où on les propose à
 // l'exploration. (economie existe mais reste secondaire → hors liste explo.)
 const MATIERES_COEUR = ["maths", "francais", "anglais", "espagnol", "ia"];
@@ -213,59 +308,87 @@ function lienCoach(matiere: string, niveau: string | null): string {
   return `/coach-ia/${encodeURIComponent(matiere)}${q}`;
 }
 
-// Construit le rendez-vous du matin : 2 cartes RULE-BASED.
+// Construit le rendez-vous du matin : 2 cartes RULE-BASED, échelle P0→P5.
 //
-// 🔥 PRINCIPALE — 1re règle qui matche (ébauche de l'échelle P0→P5 à venir) :
-//   a. Reprendre  — l'élève décroche (ralenti/inactif) → action courte, sans lacune.
-//   b. Renforcer  — une notion faible → coach ciblé.
-//   c. Progresser — sinon, sa notion la plus solide → « continue sur ta lancée ».
-//   d. Commencer  — cold-start (aucune donnée) → défi du jour.
-// 🧭 ALTERNATIVE — explorer une matière cœur JAMAIS travaillée (catalogue − vécu),
-//   sinon le catalogue complet.
+// 🔥 PRINCIPALE — 1re règle qui matche gagne le slot :
+//   P0 Ré-engager  — absent ≥ SEUIL_ABSENCE_JOURS → victoire facile/fun, PAS de lacune.
+//   P1 Sauver série— série vivante + rien fait aujourd'hui → action courte du jour.
+//   P2 Remédier    — une notion fragile → coach ciblé.
+//   P3 Progresser  — sa notion la plus solide → flow, on vise plus haut.
+//   P5 Défaut      — cold-start (aucune donnée) → meilleure action (valeur × intérêt).
+// 🧭 ALTERNATIVE (P4) — explorer une voie neuve (matière/format jamais touché) ;
+//   remplit TOUJOURS le second slot.
+//
+// Les cartes « fun » (P0/P1), « démarrer » (P5) et « explorer » (P4) piochent une
+// action réelle du CATALOGUE via ses étiquettes (durée/rythme/rôle/valeur/attrait) ;
+// repli sur des routes en dur si le catalogue est indisponible.
 function construireRecoDuJour(args: {
+  catalogue: ActionCatalogue[];
+  notions: NotionMastery[];
   faibles: NotionMastery[];
-  fortes: NotionMastery[];
-  statut: StatutEngagement;
+  joursDepuis: number | null;
+  serie: number;
+  faitAujourdhui: boolean;
   matieresTouchees: Set<string>;
+  typesTouches: Set<string>;
   niveau: string | null;
 }): RecoDuJour {
-  const { faibles, fortes, statut, matieresTouchees, niveau } = args;
+  const {
+    catalogue, notions, faibles, joursDepuis, serie, faitAujourdhui,
+    matieresTouchees, typesTouches, niveau,
+  } = args;
 
-  // ── 🔥 principale ──────────────────────────────────────────────────────────
   let principale: CarteReco;
 
-  if (statut === "ralenti" || statut === "inactif") {
+  // ── P0 — Ré-engager : absent depuis un moment. Fun, sans lacune. ────────────
+  if (joursDepuis !== null && joursDepuis >= SEUIL_ABSENCE_JOURS) {
+    const a = actionCourteFun(catalogue);
     principale = {
-      slot: "principale",
-      emoji: "🔥",
-      ton: "warn",
+      slot: "principale", emoji: "🔥", ton: "warn",
       categorie: "Reprendre le rythme",
-      titre: "Reprends en douceur",
-      message:
-        "Ça fait un moment — un mot à écouter et écrire, deux minutes, et c'est reparti.",
-      cta: "Faire la dictée →",
-      lien: "/dictee-du-jour",
+      titre: "On reprend en douceur ?",
+      message: a
+        ? `Ça fait ${joursDepuis} jours — un petit « ${a.label} », deux minutes, sans pression, et c'est reparti. 😊`
+        : `Ça fait ${joursDepuis} jours — un mot à écouter et écrire, deux minutes, et c'est reparti. 😊`,
+      cta: a ? `${a.label} →` : "Faire la dictée →",
+      lien: a ? lienAction(a, niveau) : "/dictee-du-jour",
+      matiere: a?.matiere,
     };
-  } else if (faibles.length > 0) {
+  }
+  // ── P1 — Sauver la série : série vivante, rien fait aujourd'hui. ────────────
+  else if (serie >= SERIE_MINI && !faitAujourdhui) {
+    const a = actionCourteFun(catalogue);
+    principale = {
+      slot: "principale", emoji: "🔥", ton: "fire",
+      categorie: "Garde ta série",
+      titre: `Ne casse pas ta série de ${serie} jours 🔥`,
+      message: a
+        ? `${serie} jours d'affilée, bravo ! Un petit « ${a.label} » aujourd'hui et la flamme continue.`
+        : `${serie} jours d'affilée, bravo ! Une action rapide aujourd'hui et la flamme continue.`,
+      cta: a ? `${a.label} →` : "Faire la dictée →",
+      lien: a ? lienAction(a, niveau) : "/dictee-du-jour",
+      matiere: a?.matiere,
+    };
+  }
+  // ── P2 — Remédier : une notion fragile. ─────────────────────────────────────
+  else if (faibles.length > 0) {
     const n = faibles[0];
     principale = {
-      slot: "principale",
-      emoji: "🔥",
-      ton: "warn",
+      slot: "principale", emoji: "🔥", ton: "warn",
       categorie: "À renforcer",
       titre: `Reprends « ${n.libelle} »`,
-      message: `Ta maîtrise en ${n.libelle} (${labelMatiere(n.matiere)}) est autour de ${n.mastery}/100. Un tour avec le coach et tu remontes vite.`,
+      message: `Ta maîtrise en ${labelMatiere(n.matiere)} sur ce point est autour de ${n.mastery}/100. Un tour avec le coach et tu remontes vite.`,
       cta: "Renforcer →",
       lien: lienCoach(n.matiere, niveau),
       matiere: n.matiere,
       notionId: n.notionId,
     };
-  } else if (fortes.length > 0) {
-    const n = fortes[0];
+  }
+  // ── P3 — Progresser : sa notion la plus solide → flow. ──────────────────────
+  else if (notions.length > 0) {
+    const n = [...notions].sort((a, b) => b.mastery - a.mastery)[0];
     principale = {
-      slot: "principale",
-      emoji: "🔥",
-      ton: "fire",
+      slot: "principale", emoji: "🔥", ton: "fire",
       categorie: "Progresser",
       titre: `Continue en ${labelMatiere(n.matiere)}`,
       message: `Tu es bien lancé en ${labelMatiere(n.matiere)} (${n.mastery}/100) — on enchaîne et on vise plus haut ?`,
@@ -274,46 +397,63 @@ function construireRecoDuJour(args: {
       matiere: n.matiere,
       notionId: n.notionId,
     };
-  } else {
+  }
+  // ── P5 — Défaut : cold-start, aucune donnée. ────────────────────────────────
+  else {
+    const a = actionDefaut(catalogue);
     principale = {
-      slot: "principale",
-      emoji: "🔥",
-      ton: "fire",
+      slot: "principale", emoji: "🔥", ton: "fire",
       categorie: "Commencer",
       titre: "Lance-toi aujourd'hui",
-      message: "Un premier pas facile et fun : le défi du jour t'attend.",
-      cta: "Voir le défi →",
-      lien: "/defis-du-jour",
+      message: a
+        ? `Un bon point de départ : « ${a.label} »${a.description ? ` — ${a.description}` : ""}`
+        : "Un premier pas facile et fun : le défi du jour t'attend.",
+      cta: a ? `${a.label} →` : "Voir le défi →",
+      lien: a ? lienAction(a, niveau) : "/defis-du-jour",
+      matiere: a?.matiere,
     };
   }
 
-  // ── 🧭 alternative (explorer une voie neuve) ────────────────────────────────
-  const matiereEvitee = MATIERES_COEUR.find(
-    (m) => !matieresTouchees.has(m) && m !== principale.matiere
-  );
-  const alternative: CarteReco = matiereEvitee
-    ? {
-        slot: "alternative",
-        emoji: "🧭",
-        ton: "compass",
-        categorie: "Explorer",
-        titre: `Découvre ${labelMatiere(matiereEvitee)}`,
-        message: `Tu n'as pas encore essayé le coach ${labelMatiere(matiereEvitee)} — et si tu tentais une nouvelle voie aujourd'hui ?`,
-        cta: "Découvrir →",
-        lien: lienCoach(matiereEvitee, niveau),
-        matiere: matiereEvitee,
-      }
-    : {
-        slot: "alternative",
-        emoji: "🧭",
-        ton: "compass",
-        categorie: "Découvrir",
-        titre: "Explore le catalogue",
-        message:
-          "Coachs, parcours, défis, concours, cahiers… trouve une activité que tu n'as pas encore faite.",
-        cta: "Explorer →",
-        lien: "/explorer",
-      };
+  // ── 🧭 P4 — Explorer une voie neuve (toujours présente) ─────────────────────
+  const exp = actionExplore(catalogue, matieresTouchees, typesTouches, principale.matiere);
+  let alternative: CarteReco;
+  if (exp) {
+    alternative = {
+      slot: "alternative", emoji: "🧭", ton: "compass",
+      categorie: "Explorer",
+      titre: `Découvre : ${exp.label}`,
+      message: exp.description
+        ? `Une voie que tu n'as pas encore explorée. ${exp.description}`
+        : `Tu n'as pas encore essayé « ${exp.label} » — et si tu tentais aujourd'hui ?`,
+      cta: "Découvrir →",
+      lien: lienAction(exp, niveau),
+      matiere: exp.matiere,
+    };
+  } else {
+    // Repli sans catalogue : matière cœur jamais faite, sinon le catalogue complet.
+    const matiereEvitee = MATIERES_COEUR.find(
+      (m) => !matieresTouchees.has(m) && m !== principale.matiere
+    );
+    alternative = matiereEvitee
+      ? {
+          slot: "alternative", emoji: "🧭", ton: "compass",
+          categorie: "Explorer",
+          titre: `Découvre ${labelMatiere(matiereEvitee)}`,
+          message: `Tu n'as pas encore essayé le coach ${labelMatiere(matiereEvitee)} — et si tu tentais une nouvelle voie aujourd'hui ?`,
+          cta: "Découvrir →",
+          lien: lienCoach(matiereEvitee, niveau),
+          matiere: matiereEvitee,
+        }
+      : {
+          slot: "alternative", emoji: "🧭", ton: "compass",
+          categorie: "Découvrir",
+          titre: "Explore le catalogue",
+          message:
+            "Coachs, parcours, défis, concours, cahiers… trouve une activité que tu n'as pas encore faite.",
+          cta: "Explorer →",
+          lien: "/explorer",
+        };
+  }
 
   return { principale, alternative };
 }
@@ -332,10 +472,14 @@ export async function computeProfil(args: {
   const supabase = createClient(url, key);
   const now = Date.now();
 
-  const [tutor, timestamps] = await Promise.all([
+  const [tutor, activite, catalogue] = await Promise.all([
     fetchTutor(supabase, args.codeEtablissement, args.codeUtilisateur),
     fetchActiviteTimestamps(supabase, args.codeEtablissement, args.codeUtilisateur),
+    // Catalogue tolérant : si la table est absente/vide, la reco retombe sur ses
+    // routes en dur (le profil reste calculable).
+    fetchCatalogue().catch(() => [] as ActionCatalogue[]),
   ]);
+  const timestamps = activite.ts;
 
   // --- Niveau ---
   const notions = calculerMaitrise(tutor, now);
@@ -365,25 +509,34 @@ export async function computeProfil(args: {
     derniereActivite === null
       ? null
       : Math.floor((now - derniereActivite) / JOUR);
+  const joursActifs = new Set(tousTs.map(jourCle));
   const joursActifs30 = new Set(
     tousTs.filter((t) => t >= now - 30 * JOUR).map(jourCle)
   ).size;
   const statut = statutEngagement(joursDepuis);
+  const { serie, faitAujourdhui } = calculerSerie(joursActifs, now);
 
   // --- Prénom (repli e-mail → « Élève », comme le bulletin) ---
   const prenomBrut = prenomCourt(args.nom);
   const prenom = prenomBrut.includes("@") ? "Élève" : prenomBrut;
 
-  // Matières déjà travaillées (au coach) → sert à l'exploration « voie neuve ».
+  // Matières déjà travaillées (au coach) → exploration « voie neuve ».
   const matieresTouchees = new Set(notions.map((n) => n.matiere));
+  // Formats (types catalogue) déjà pratiqués : autres tables + coach si tutor.
+  const typesTouches = new Set(activite.typesTouches);
+  if (tutor.length > 0) typesTouches.add("coach");
   // Niveau normalisé pour les liens coach (?classe=…), ex. « 6°C » → « 6e ».
   const niveauNorm = niveauPublic(args.classe)?.toLowerCase() ?? null;
 
   const reco_du_jour = construireRecoDuJour({
+    catalogue,
+    notions,
     faibles: pointsFaibles,
-    fortes: pointsForts,
-    statut,
+    joursDepuis,
+    serie,
+    faitAujourdhui,
     matieresTouchees,
+    typesTouches,
     niveau: niveauNorm,
   });
 
@@ -407,6 +560,8 @@ export async function computeProfil(args: {
         derniereActivite === null
           ? null
           : new Date(derniereActivite).toISOString(),
+      serie,
+      fait_aujourdhui: faitAujourdhui,
     },
     reco_du_jour,
   };

@@ -74,6 +74,10 @@ export type ProfilEleve = {
     jours_actifs_30: number;
     total_activites: number;
     derniere_activite: string | null;
+    /** Jours d'affilée avec activité, finissant aujourd'hui ou hier (série 🔥). */
+    serie: number;
+    /** L'élève a-t-il déjà fait quelque chose aujourd'hui ? */
+    fait_aujourdhui: boolean;
   };
 
   reco_du_jour: RecoDuJour;
