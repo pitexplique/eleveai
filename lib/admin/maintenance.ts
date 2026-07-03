@@ -54,7 +54,7 @@ export const MAINTENANCE_HEBDO: TacheMaintenance[] = [
     id: "contenu-saisonnier",
     label: "Fraîcheur des contenus saisonniers",
     detail:
-      "Thème des défis, bannières et messages d'accueil : aucun libellé périmé (ex. « Grand Raid » resté après le passage à un autre thème).",
+      "Thème des défis, bannières et messages d'accueil : aucun libellé périmé (ex. « Grand Raid » resté après un changement de thème). À la RENTRÉE : repasser le drapeau EN_VACANCES à false (lib/profil-eleve/computeProfil.ts) — sinon la reco propose encore le cahier de vacances.",
   },
   {
     id: "nouveaute",
