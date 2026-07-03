@@ -22,7 +22,8 @@ import type {
   ProfilEleve,
   NotionMastery,
   MatiereMastery,
-  Recommandation,
+  CarteReco,
+  RecoDuJour,
   StatutEngagement,
 } from "./types";
 
@@ -190,59 +191,131 @@ function statutEngagement(joursDepuis: number | null): StatutEngagement {
   return "inactif";
 }
 
-// Lien vers le coach pour retravailler une notion. Le coach IA (/coach-ia/<matiere>)
-// est l'entrée générique ; on lui passe la classe (niveau) comme ailleurs.
-function lienCoach(matiere: string, classe: string | null): string {
-  const q = classe ? `?classe=${encodeURIComponent(classe)}` : "";
+// Matières « cœur » ayant un coach dédié, dans l'ordre où on les propose à
+// l'exploration. (economie existe mais reste secondaire → hors liste explo.)
+const MATIERES_COEUR = ["maths", "francais", "anglais", "espagnol", "ia"];
+const LABEL_MATIERE: Record<string, string> = {
+  maths: "Maths",
+  francais: "Français",
+  anglais: "Anglais",
+  espagnol: "Espagnol",
+  ia: "IA",
+  economie: "Économie",
+};
+function labelMatiere(m: string): string {
+  return LABEL_MATIERE[m] ?? m.charAt(0).toUpperCase() + m.slice(1);
+}
+
+// Lien vers le coach d'une matière. `niveau` est DÉJÀ normalisé (ex. « 6e »,
+// « cm2 ») ; on le passe en ?classe= comme l'accueil, pour atterrir au bon niveau.
+function lienCoach(matiere: string, niveau: string | null): string {
+  const q = niveau ? `?classe=${encodeURIComponent(niveau)}` : "";
   return `/coach-ia/${encodeURIComponent(matiere)}${q}`;
 }
 
-// Recommandations RULE-BASED, par ordre de priorité :
-//   1. Assiduité si l'élève décroche (ralenti/inactif).
-//   2. Renforcer les 3 notions les plus faibles.
-//   3. Explorer le catalogue s'il n'y a pas (encore) de faiblesse nette.
-function recommander(args: {
+// Construit le rendez-vous du matin : 2 cartes RULE-BASED.
+//
+// 🔥 PRINCIPALE — 1re règle qui matche (ébauche de l'échelle P0→P5 à venir) :
+//   a. Reprendre  — l'élève décroche (ralenti/inactif) → action courte, sans lacune.
+//   b. Renforcer  — une notion faible → coach ciblé.
+//   c. Progresser — sinon, sa notion la plus solide → « continue sur ta lancée ».
+//   d. Commencer  — cold-start (aucune donnée) → défi du jour.
+// 🧭 ALTERNATIVE — explorer une matière cœur JAMAIS travaillée (catalogue − vécu),
+//   sinon le catalogue complet.
+function construireRecoDuJour(args: {
   faibles: NotionMastery[];
+  fortes: NotionMastery[];
   statut: StatutEngagement;
-  totalNotions: number;
-  classe: string | null;
-}): Recommandation[] {
-  const recos: Recommandation[] = [];
+  matieresTouchees: Set<string>;
+  niveau: string | null;
+}): RecoDuJour {
+  const { faibles, fortes, statut, matieresTouchees, niveau } = args;
 
-  if (args.statut === "ralenti" || args.statut === "inactif") {
-    recos.push({
-      type: "assiduite",
-      titre: "Reprends le rythme",
+  // ── 🔥 principale ──────────────────────────────────────────────────────────
+  let principale: CarteReco;
+
+  if (statut === "ralenti" || statut === "inactif") {
+    principale = {
+      slot: "principale",
+      emoji: "🔥",
+      ton: "warn",
+      categorie: "Reprendre le rythme",
+      titre: "Reprends en douceur",
       message:
-        "Ça fait un moment — même 5 minutes par jour font la différence. La dictée du jour est un bon point de départ.",
+        "Ça fait un moment — un mot à écouter et écrire, deux minutes, et c'est reparti.",
+      cta: "Faire la dictée →",
       lien: "/dictee-du-jour",
-    });
-  }
-
-  for (const n of args.faibles.slice(0, 3)) {
-    recos.push({
-      type: "renforcer",
-      titre: `À renforcer : ${n.libelle}`,
-      message: `Ta maîtrise en ${n.libelle} (${n.matiere}) est autour de ${n.mastery}/100. Un tour avec le coach et tu remontes vite.`,
+    };
+  } else if (faibles.length > 0) {
+    const n = faibles[0];
+    principale = {
+      slot: "principale",
+      emoji: "🔥",
+      ton: "warn",
+      categorie: "À renforcer",
+      titre: `Reprends « ${n.libelle} »`,
+      message: `Ta maîtrise en ${n.libelle} (${labelMatiere(n.matiere)}) est autour de ${n.mastery}/100. Un tour avec le coach et tu remontes vite.`,
+      cta: "Renforcer →",
+      lien: lienCoach(n.matiere, niveau),
       matiere: n.matiere,
       notionId: n.notionId,
-      lien: lienCoach(n.matiere, args.classe),
-    });
+    };
+  } else if (fortes.length > 0) {
+    const n = fortes[0];
+    principale = {
+      slot: "principale",
+      emoji: "🔥",
+      ton: "fire",
+      categorie: "Progresser",
+      titre: `Continue en ${labelMatiere(n.matiere)}`,
+      message: `Tu es bien lancé en ${labelMatiere(n.matiere)} (${n.mastery}/100) — on enchaîne et on vise plus haut ?`,
+      cta: "Continuer →",
+      lien: lienCoach(n.matiere, niveau),
+      matiere: n.matiere,
+      notionId: n.notionId,
+    };
+  } else {
+    principale = {
+      slot: "principale",
+      emoji: "🔥",
+      ton: "fire",
+      categorie: "Commencer",
+      titre: "Lance-toi aujourd'hui",
+      message: "Un premier pas facile et fun : le défi du jour t'attend.",
+      cta: "Voir le défi →",
+      lien: "/defis-du-jour",
+    };
   }
 
-  // Peu de faiblesses détectées (élève solide ou peu de données) → on l'oriente
-  // vers le catalogue pour élargir.
-  if (recos.length < 2 || args.totalNotions < 3) {
-    recos.push({
-      type: "explorer",
-      titre: "Explore de nouvelles activités",
-      message:
-        "Tu tournes bien ! Découvre tout ce que tu peux faire dans le catalogue.",
-      lien: "/explorer",
-    });
-  }
+  // ── 🧭 alternative (explorer une voie neuve) ────────────────────────────────
+  const matiereEvitee = MATIERES_COEUR.find(
+    (m) => !matieresTouchees.has(m) && m !== principale.matiere
+  );
+  const alternative: CarteReco = matiereEvitee
+    ? {
+        slot: "alternative",
+        emoji: "🧭",
+        ton: "compass",
+        categorie: "Explorer",
+        titre: `Découvre ${labelMatiere(matiereEvitee)}`,
+        message: `Tu n'as pas encore essayé le coach ${labelMatiere(matiereEvitee)} — et si tu tentais une nouvelle voie aujourd'hui ?`,
+        cta: "Découvrir →",
+        lien: lienCoach(matiereEvitee, niveau),
+        matiere: matiereEvitee,
+      }
+    : {
+        slot: "alternative",
+        emoji: "🧭",
+        ton: "compass",
+        categorie: "Découvrir",
+        titre: "Explore le catalogue",
+        message:
+          "Coachs, parcours, défis, concours, cahiers… trouve une activité que tu n'as pas encore faite.",
+        cta: "Explorer →",
+        lien: "/explorer",
+      };
 
-  return recos;
+  return { principale, alternative };
 }
 
 // Calcule le profil complet d'un élève.
@@ -301,11 +374,17 @@ export async function computeProfil(args: {
   const prenomBrut = prenomCourt(args.nom);
   const prenom = prenomBrut.includes("@") ? "Élève" : prenomBrut;
 
-  const recommandations = recommander({
+  // Matières déjà travaillées (au coach) → sert à l'exploration « voie neuve ».
+  const matieresTouchees = new Set(notions.map((n) => n.matiere));
+  // Niveau normalisé pour les liens coach (?classe=…), ex. « 6°C » → « 6e ».
+  const niveauNorm = niveauPublic(args.classe)?.toLowerCase() ?? null;
+
+  const reco_du_jour = construireRecoDuJour({
     faibles: pointsFaibles,
+    fortes: pointsForts,
     statut,
-    totalNotions: notions.length,
-    classe: args.classe ?? null,
+    matieresTouchees,
+    niveau: niveauNorm,
   });
 
   return {
@@ -329,7 +408,7 @@ export async function computeProfil(args: {
           ? null
           : new Date(derniereActivite).toISOString(),
     },
-    recommandations,
+    reco_du_jour,
   };
 }
 

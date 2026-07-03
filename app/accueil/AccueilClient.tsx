@@ -12,6 +12,7 @@ import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
 import PresentationAudio from "./PresentationAudio";
 import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
+import RecoDuJourAccueil from "@/components/accueil/RecoDuJourAccueil";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
@@ -439,6 +440,11 @@ export default function AccueilPage({
           <PresentationAudio />
         </div>
       </section>
+
+      {/* ── TA JOURNÉE — rendez-vous perso de l'élève connecté (🔥 + 🧭) ──────── */}
+      {/* Ne s'affiche que pour un élève connecté (sinon ne rend rien) : le bloc
+          contextualise l'accueil « pour lui-même ». Consomme /api/profil-eleve. */}
+      <RecoDuJourAccueil />
 
       {/* ── DICTÉE DU JOUR — le rituel quotidien, tout en haut ───────────────── */}
       <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">

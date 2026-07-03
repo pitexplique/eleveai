@@ -28,14 +28,30 @@ export type MatiereMastery = {
   nb: number;
 };
 
-/** Une recommandation rule-based, prête à afficher / lier. */
-export type Recommandation = {
-  type: "renforcer" | "assiduite" | "explorer";
+/** Emplacement d'une carte dans le rendez-vous du matin. */
+export type SlotReco = "principale" | "alternative";
+
+/** Une carte de recommandation, prête à afficher. CONTRAT FIGÉ : le bloc
+ *  « ta journée » de l'accueil ne dépend que de cette forme ; l'échelle P0→P5
+ *  (à venir) ne changera que la LOGIQUE qui remplit ces cartes, pas leur forme. */
+export type CarteReco = {
+  slot: SlotReco;
+  emoji: string; // 🔥 principale · 🧭 alternative
+  categorie: string; // « pourquoi » en 1 mot : Progresser, Renforcer, Reprendre, Explorer…
   titre: string;
   message: string;
+  cta: string; // libellé du bouton, ex. « Continuer → »
+  lien: string;
+  ton: "fire" | "compass" | "warn"; // clé de couleur pour l'UI
   matiere?: string;
   notionId?: string;
-  lien?: string;
+};
+
+/** Le rendez-vous du matin : 2 cartes. 🔥 principale (progresser / renforcer /
+ *  reprendre) + 🧭 alternative (explorer une voie neuve). */
+export type RecoDuJour = {
+  principale: CarteReco;
+  alternative: CarteReco | null;
 };
 
 /** Le profil complet d'un élève (snapshot). */
@@ -60,5 +76,5 @@ export type ProfilEleve = {
     derniere_activite: string | null;
   };
 
-  recommandations: Recommandation[];
+  reco_du_jour: RecoDuJour;
 };
