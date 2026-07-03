@@ -9,6 +9,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { verifySessionToken } from "@/lib/server/session";
 import { mettreAJourBulletin } from "@/lib/bulletin/computeBulletin";
+import { mettreAJourProfil } from "@/lib/profil-eleve/computeProfil";
 
 // Colonnes que le client a le droit de fournir, par activité.
 // Tout le reste est ignoré ; pourcentage est une colonne générée en base.
@@ -145,6 +146,16 @@ export async function POST(req: Request) {
     // mettreAJourBulletin n'échoue jamais → la sauvegarde du résultat est
     // garantie même si le bulletin ne se met pas à jour (ex. table absente).
     await mettreAJourBulletin({
+      codeEtablissement: session.code_etablissement,
+      codeUtilisateur: session.code_utilisateur,
+      nom: session.nom,
+      classe: session.classe,
+    });
+
+    // Recalcule le profil élève (Niveau + Comportement + recommandations
+    // rule-based, table profil_eleve). Tolérant, comme le bulletin : n'échoue
+    // jamais → la sauvegarde du résultat reste garantie.
+    await mettreAJourProfil({
       codeEtablissement: session.code_etablissement,
       codeUtilisateur: session.code_utilisateur,
       nom: session.nom,
