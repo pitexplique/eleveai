@@ -12,6 +12,7 @@ const LASTMOD_EXPLORER = new Date("2026-07-02");
 const LASTMOD_CORE    = new Date("2026-06-25");
 const LASTMOD_CAHIERS = new Date("2026-06-29");
 const LASTMOD_DICTEE  = new Date("2026-07-01");
+const LASTMOD_974     = new Date("2026-07-02");
 const LASTMOD_LEGAL   = new Date("2026-02-18");
 
 const MATHS_CLASSES    = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe"];
@@ -111,6 +112,12 @@ const ROUTES: RouteConfig[] = [
   { path: "/concours-logo",   priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/podcast-maths",   priority: 0.85, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/concours-general",priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/concours-ia",     priority: 0.65, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/grand-oral",      priority: 0.6,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+
+  // ── MATHS RÉEL · 974 + OUVERTURE (sens, IA) ────────────────────────────────
+  { path: "/maths-974",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_974 },
+  { path: "/le-bon-prompt",   priority: 0.75, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
 
   // ── ESPACES ────────────────────────────────────────────────────────────────
   { path: "/espace-ecoles",   priority: 0.95, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
