@@ -13,6 +13,48 @@ import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
 import type { RecoDuJour, CarteReco } from "@/lib/profil-eleve/types";
 
+// Micro-message adapté au score de régularité (encourageant, jamais culpabilisant).
+function messageRegularite(score: number): string {
+  if (score >= 70) return "Tu es très régulier, continue comme ça ! 🔥";
+  if (score >= 40) return "Tu tiens un bon rythme, garde le cap.";
+  return "Reviens un peu plus souvent — ça remonte vite. 🌱";
+}
+
+// Jauge « ta régularité » : montre le score d'engagement (0–100). Progrès rendu
+// visible = récompense saine (pas de points/compétition). Cachée si trop faible
+// (élève tout nouveau) pour ne pas démarrer sur un « 0 » décourageant.
+function JaugeRegularite({ score, serie }: { score: number; serie: number }) {
+  return (
+    <div className="mb-4 rounded-xl border border-white/10 bg-white/5 p-3">
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-xs font-black uppercase tracking-wide text-white/60">
+          🔥 Ta régularité
+        </p>
+        <div className="flex items-center gap-2">
+          {serie >= 2 && (
+            <span className="rounded-full bg-orange-500/20 px-2 py-0.5 text-[11px] font-black text-orange-300">
+              {serie} j d&apos;affilée
+            </span>
+          )}
+          <span className="text-sm font-black text-white">
+            {score}
+            <span className="text-white/40">/100</span>
+          </span>
+        </div>
+      </div>
+      <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-white/10">
+        <div
+          className="h-full rounded-full bg-gradient-to-r from-amber-400 to-orange-500 transition-all"
+          style={{ width: `${score}%` }}
+        />
+      </div>
+      <p className="mt-1.5 text-xs font-semibold text-white/60">
+        {messageRegularite(score)}
+      </p>
+    </div>
+  );
+}
+
 // Dégradés par « ton » de carte (cf. CarteReco.ton).
 const TONS: Record<CarteReco["ton"], string> = {
   fire: "from-orange-500 to-rose-600",
@@ -62,6 +104,8 @@ export default function RecoDuJourAccueil() {
   const [etat, setEtat] = useState<"idle" | "chargement" | "ok" | "erreur">(
     "idle"
   );
+  const [engagement, setEngagement] = useState<number | null>(null);
+  const [serie, setSerie] = useState<number>(0);
 
   useEffect(() => {
     if (!token) return;
@@ -78,6 +122,8 @@ export default function RecoDuJourAccueil() {
         if (data?.ok && rdj?.principale) {
           setReco(rdj);
           setPrenom(data.profil.prenom ?? null);
+          setEngagement(data.profil.comportement?.engagement ?? null);
+          setSerie(data.profil.comportement?.serie ?? 0);
           setEtat("ok");
         } else {
           setEtat("erreur");
@@ -111,6 +157,12 @@ export default function RecoDuJourAccueil() {
             </p>
           </div>
         </div>
+
+        {/* Jauge de régularité : seulement si le score est significatif (≥ 20),
+            pour ne pas afficher un « 0 » décourageant à un tout nouvel élève. */}
+        {etat === "ok" && engagement !== null && engagement >= 20 && (
+          <JaugeRegularite score={engagement} serie={serie} />
+        )}
 
         {etat === "chargement" || !reco ? (
           // Squelette discret le temps du calcul.

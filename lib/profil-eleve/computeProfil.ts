@@ -210,6 +210,29 @@ function statutEngagement(joursDepuis: number | null): StatutEngagement {
   return "inactif";
 }
 
+// Score d'engagement 0–100, modèle « attaque rapide / relâche lente » (enveloppe) :
+// chaque jour ACTIF fait bondir le score vers 100 (comble ATTAQUE % de l'écart) ;
+// chaque jour VIDE l'érode par décroissance exponentielle (demi-vie DEMI_VIE).
+// → la régularité paie vite, un oubli ne casse pas tout, une vraie coupure
+// redescend en pente douce. MESURE, pas récompense (non addictif, transparent).
+// Ex. 3 j d'affilée ≈ 88 ; 1 oubli ≈ −5 ; 2 sem d'arrêt ≈ 44 ; 1 mois ≈ 20.
+const ENGAGEMENT_ATTAQUE = 0.5; // part de l'écart au max comblée par jour actif
+const ENGAGEMENT_DEMI_VIE_JOURS = 14; // demi-vie de l'érosion quand on lâche
+const ENGAGEMENT_FENETRE_JOURS = 120; // au-delà, la contribution est négligeable
+
+function calculerEngagement(joursActifs: Set<string>, now: number): number {
+  if (joursActifs.size === 0) return 0;
+  const decroissance = Math.pow(0.5, 1 / ENGAGEMENT_DEMI_VIE_JOURS);
+  const cle = (t: number) => new Date(t).toISOString().slice(0, 10);
+  let e = 0;
+  // Du plus ancien jour de la fenêtre jusqu'à aujourd'hui.
+  for (let i = ENGAGEMENT_FENETRE_JOURS; i >= 0; i--) {
+    if (joursActifs.has(cle(now - i * JOUR))) e += (100 - e) * ENGAGEMENT_ATTAQUE;
+    else e *= decroissance;
+  }
+  return Math.round(e);
+}
+
 // Série = jours d'affilée avec activité, finissant AUJOURD'HUI ou HIER (une série
 // dont le dernier jour est hier est encore « sauvable » aujourd'hui). Renvoie aussi
 // si l'élève a déjà agi aujourd'hui (→ inutile de lui proposer de sauver la série).
@@ -515,6 +538,7 @@ export async function computeProfil(args: {
   ).size;
   const statut = statutEngagement(joursDepuis);
   const { serie, faitAujourdhui } = calculerSerie(joursActifs, now);
+  const engagement = calculerEngagement(joursActifs, now);
 
   // --- Prénom (repli e-mail → « Élève », comme le bulletin) ---
   const prenomBrut = prenomCourt(args.nom);
@@ -562,6 +586,7 @@ export async function computeProfil(args: {
           : new Date(derniereActivite).toISOString(),
       serie,
       fait_aujourdhui: faitAujourdhui,
+      engagement,
     },
     reco_du_jour,
   };

@@ -78,6 +78,9 @@ export type ProfilEleve = {
     serie: number;
     /** L'élève a-t-il déjà fait quelque chose aujourd'hui ? */
     fait_aujourdhui: boolean;
+    /** Score de régularité 0–100 : monte vite quand on revient, retombe
+     *  doucement quand on lâche (mesure, PAS récompense addictive). */
+    engagement: number;
   };
 
   reco_du_jour: RecoDuJour;
