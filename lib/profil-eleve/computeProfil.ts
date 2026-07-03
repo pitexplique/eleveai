@@ -47,6 +47,19 @@ const SEUIL_ABSENCE_JOURS = 7;
 // Série « vivante » à partir de ce nombre de jours d'affilée (sinon pas d'enjeu).
 const SERIE_MINI = 2;
 
+// ⚠️ Drapeau SAISONNIER : true pendant les vacances (repasser à false à la
+// rentrée — cf. checklist maintenance « fraîcheur des contenus saisonniers »).
+const EN_VACANCES = true;
+
+// En vacances, le CAHIER (📥 hors-ligne) apparaît dans le 🧭 — PAS tous les jours :
+//   (a) un jour fixe par semaine pour tous = rappel léger ;
+//   (b) plus souvent pour l'élève dont la régularité s'effrite (bouée hors-ligne :
+//       il décroche, sa connexion est peut-être fragile — sert la mission).
+// Le reste du temps, le 🧭 explore une voie neuve (on garde l'anti-bulle).
+const CAHIER_JOUR_HEBDO = 3; // 0=dim … 3=mer : le jour du rappel hebdo
+const CAHIER_ENGAGEMENT_MIN = 10; // en dessous = trop nouveau → on le laisse explorer
+const CAHIER_ENGAGEMENT_MAX = 40; // 10–40 = il s'éloigne → bouée cahier
+
 // Tables scannées pour l'ENGAGEMENT (created_at seulement). resultats_tutor y est
 // aussi mais on le charge à part (pour la maîtrise), on ne le redouble donc pas.
 // La valeur = le `type` du catalogue correspondant (sert aux formats déjà touchés).
@@ -259,6 +272,11 @@ function calculerSerie(
 // ── Sélection dans le catalogue (les règles filtrent par ÉTIQUETTES) ───────────
 const actifs = (cat: ActionCatalogue[]) => cat.filter((a) => a.actif);
 
+// Une action précise par son id (si active) — ex. dictée, cahier de vacances.
+function actionParId(cat: ActionCatalogue[], id: string): ActionCatalogue | null {
+  return actifs(cat).find((a) => a.id === id) ?? null;
+}
+
 // Action courte + quotidienne la plus ATTRAYANTE → victoire facile/fun (P0, P1).
 function actionCourteFun(cat: ActionCatalogue[]): ActionCatalogue | null {
   return (
@@ -355,17 +373,21 @@ function construireRecoDuJour(args: {
   matieresTouchees: Set<string>;
   typesTouches: Set<string>;
   niveau: string | null;
+  engagement: number;
+  now: number;
 }): RecoDuJour {
   const {
     catalogue, notions, faibles, joursDepuis, serie, faitAujourdhui,
-    matieresTouchees, typesTouches, niveau,
+    matieresTouchees, typesTouches, niveau, engagement, now,
   } = args;
 
   let principale: CarteReco;
 
   // ── P0 — Ré-engager : absent depuis un moment. Fun, sans lacune. ────────────
   if (joursDepuis !== null && joursDepuis >= SEUIL_ABSENCE_JOURS) {
-    const a = actionCourteFun(catalogue);
+    // Dictée d'abord : 2 min, transversale, sans enjeu = le geste le plus doux
+    // pour revenir. À défaut, la meilleure action courte + quotidienne.
+    const a = actionParId(catalogue, "dictee-du-jour") ?? actionCourteFun(catalogue);
     principale = {
       slot: "principale", emoji: "🔥", ton: "warn",
       categorie: "Reprendre le rythme",
@@ -437,10 +459,35 @@ function construireRecoDuJour(args: {
     };
   }
 
-  // ── 🧭 P4 — Explorer une voie neuve (toujours présente) ─────────────────────
-  const exp = actionExplore(catalogue, matieresTouchees, typesTouches, principale.matiere);
+  // ── 🧭 P4 — Explorer une voie neuve / (en vacances) ton cahier ──────────────
+  // Le cahier ne sort PAS tous les jours : rappel hebdo pour tous + bouée pour
+  // l'élève qui s'éloigne (cf. constantes). Sinon, on explore une voie neuve.
+  const rappelHebdoCahier = new Date(now).getUTCDay() === CAHIER_JOUR_HEBDO;
+  const eleveSEloigne =
+    engagement >= CAHIER_ENGAGEMENT_MIN && engagement < CAHIER_ENGAGEMENT_MAX;
+  const cahier =
+    EN_VACANCES && (rappelHebdoCahier || eleveSEloigne)
+      ? actionParId(catalogue, "cahier-vacances")
+      : null;
+
   let alternative: CarteReco;
-  if (exp) {
+  const exp = cahier
+    ? null
+    : actionExplore(catalogue, matieresTouchees, typesTouches, principale.matiere);
+
+  if (cahier) {
+    alternative = {
+      slot: "alternative", emoji: "🧭", ton: "compass",
+      categorie: "En vacances",
+      titre: `📥 ${cahier.label}`,
+      message: cahier.description
+        ? `${cahier.description} Idéal pour garder le rythme cet été, même hors connexion.`
+        : "Ton cahier de vacances : à faire sur écran ou à imprimer, même sans connexion.",
+      cta: "Ouvrir le cahier →",
+      lien: lienAction(cahier, niveau),
+      matiere: cahier.matiere,
+    };
+  } else if (exp) {
     alternative = {
       slot: "alternative", emoji: "🧭", ton: "compass",
       categorie: "Explorer",
@@ -562,6 +609,8 @@ export async function computeProfil(args: {
     matieresTouchees,
     typesTouches,
     niveau: niveauNorm,
+    engagement,
+    now,
   });
 
   return {

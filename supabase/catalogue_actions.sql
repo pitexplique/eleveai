@@ -85,6 +85,10 @@ values
   ('concours-general', 'evenement', 'concours','maths',       'Concours général',    'Problèmes avancés.',                         '/concours-general', 'Lycée',           'long',  'ponctuel', array['competition'], 0.35, 0.50, 'actif', true, 63),
   ('concours-logo',    'evenement', 'concours','transversal', 'Concours logo',       'Crée et partage ton logo.',                  '/concours-logo',    'Tous',            null,    'ponctuel', array['competition'], 0.20, 0.85, 'actif', true, 64),
 
+  -- 📥 Cahier de vacances (le vrai produit actuel, par niveau, multi-matière) : ACTIF.
+  --    Proposé par la reco du matin dans le slot 🧭 pendant les vacances (hors-ligne).
+  ('cahier-vacances', 'cahier', 'cahier', 'transversal', 'Cahier de vacances', 'À faire sur écran ou à imprimer, même sans connexion.', '/cahier-vacances', 'CP → Terminale', 'long', 'ponctuel', array['hors-ligne','reviser'], 0.65, 0.40, 'actif', true, 69),
+
   -- 📥 Cahiers de vacances par matière (à décliner : les cahiers actuels sont par niveau, multi-matière)
   ('cahier-maths',    'cahier', 'cahier', 'maths',    'Cahier de vacances · Maths',    'À faire sur papier, même sans connexion.', '/cahier-vacances', 'CP → Terminale', 'long', 'ponctuel', array['hors-ligne'], 0.65, 0.35, 'a-creer',   false, 70),
   ('cahier-francais', 'cahier', 'cahier', 'francais', 'Cahier de vacances · Français', 'À faire sur papier, même sans connexion.', '/cahier-vacances', 'CP → Terminale', 'long', 'ponctuel', array['hors-ligne'], 0.65, 0.35, 'a-creer',   false, 71),
