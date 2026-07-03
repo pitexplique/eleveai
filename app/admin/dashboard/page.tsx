@@ -9,6 +9,7 @@ import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
 import { AdminLogoutButton } from "@/components/AdminLogoutButton";
 import AdminStatsClient from "./AdminStatsClient";
 import AdminContactMessagesClient from "./AdminContactMessagesClient";
+import MaintenanceChecklist from "./MaintenanceChecklist";
 
 export default async function AdminDashboardPage() {
   const cookieStore = await cookies();
@@ -30,6 +31,9 @@ export default async function AdminDashboardPage() {
           </div>
           <AdminLogoutButton />
         </header>
+
+        {/* Checklist de maintenance : la routine quotidienne / hebdo à tenir. */}
+        <MaintenanceChecklist />
 
         {/* Statistiques agrégées + sélecteur de périmètre */}
         <AdminStatsClient />
