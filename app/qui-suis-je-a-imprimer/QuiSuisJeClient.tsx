@@ -37,8 +37,9 @@ function labelCourt(matiere: string): string {
   return matiere === "Arts plastiques" ? "Arts pla." : matiere;
 }
 
-/* Sélection des 32 cartes : round-robin sur les 11 matières → chaque page est
-   un arc-en-ciel de matières (effet « on pioche, ça tombe sur n'importe quoi »). */
+/* Sélection des cartes-questions : round-robin sur les 11 matières → chaque page
+   est un arc-en-ciel de matières (effet « on pioche, ça tombe sur n'importe quoi »).
+   30 questions + 1 carte de garde + 1 carte de fin = 32 cartes physiques. */
 function construireDeck(): DicteeMot[] {
   const parMatiere = MATIERES.map((mat) => TOUS_LES_MOTS.filter((w) => w.matiere === mat));
   const deck: DicteeMot[] = [];
@@ -47,7 +48,22 @@ function construireDeck(): DicteeMot[] {
       if (arr[tour]) deck.push(arr[tour]);
     }
   }
-  return deck.slice(0, 32);
+  return deck.slice(0, 30);
+}
+
+/* Un emplacement du paquet : carte de garde, question, ou carte de fin. */
+type Slot =
+  | { kind: "garde" }
+  | { kind: "fin" }
+  | { kind: "question"; mot: DicteeMot; n: number };
+
+/* Le paquet complet = 32 cartes : garde + 30 questions + fin. */
+function construireSlots(): Slot[] {
+  return [
+    { kind: "garde" },
+    ...construireDeck().map((mot, i): Slot => ({ kind: "question", mot, n: i + 1 })),
+    { kind: "fin" },
+  ];
 }
 
 /* -------------------------------------------------------------------------- */
@@ -107,20 +123,69 @@ function Carte({ mot, n }: { mot: DicteeMot; n: number }) {
         </p>
       </div>
 
-      {/* Réponse à l'envers + Ti Margo */}
-      <div className="relative mt-1 flex items-end justify-between border-t border-dashed border-slate-200 pt-1">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={TI_MARGO} alt="" className="h-5 w-5 shrink-0 rotate-180 object-contain opacity-70" />
-        <p className="rotate-180 text-center text-[11px] font-black text-slate-400">
-          réponse&nbsp;: {mot.mot}
+      {/* Réponse à l'envers + Ti Margo, puis la ligne de marque */}
+      <div className="relative mt-1 border-t border-dashed border-slate-200 pt-1">
+        <div className="flex items-end justify-between">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={TI_MARGO} alt="" className="h-4 w-4 shrink-0 rotate-180 object-contain opacity-70" />
+          <p className="rotate-180 text-center text-[11px] font-black text-slate-400">
+            réponse&nbsp;: {mot.mot}
+          </p>
+        </div>
+        <p className="mt-0.5 text-center text-[7px] font-black uppercase tracking-wide text-slate-300">
+          eleveai.fr · une autre façon d&apos;apprendre
         </p>
       </div>
     </article>
   );
 }
 
+/* Carte de garde : la carte-titre, à mettre sur le dessus du paquet. */
+function CarteGarde() {
+  return (
+    <article className="carte relative flex flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl border-2 border-violet-400 bg-gradient-to-br from-violet-50 to-fuchsia-50 p-3 text-center print:rounded-none">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={TI_MARGO} alt="Ti Margo" className="h-14 w-14 object-contain" />
+      <p className="text-[8px] font-black uppercase tracking-[0.2em] text-violet-500">
+        Jeu de 32 cartes · toutes matières
+      </p>
+      <h3 className="text-2xl font-black leading-none text-slate-900">Qui suis-je&nbsp;?</h3>
+      <p className="text-[10px] font-bold text-slate-500">On lit la définition, tu trouves le mot&nbsp;!</p>
+      <p className="mt-1 text-[8px] font-black uppercase tracking-wide text-slate-400">
+        eleveai.fr · une autre façon d&apos;apprendre
+      </p>
+    </article>
+  );
+}
+
+/* Carte de fin : la carte de clôture, avec le clin d'œil créole. */
+function CarteFin() {
+  return (
+    <article className="carte relative flex flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl border-2 border-teal-400 bg-gradient-to-br from-teal-50 to-emerald-50 p-3 text-center print:rounded-none">
+      <p className="text-3xl leading-none">🏆</p>
+      <h3 className="text-xl font-black text-slate-900">Bravo&nbsp;!</h3>
+      <p className="text-[10px] font-bold text-slate-600">
+        Tu as fait le tour du paquet. Mélange et rejoue&nbsp;!
+      </p>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={TI_MARGO} alt="Ti Margo" className="h-9 w-9 object-contain" />
+      <p className="text-[11px] font-black text-teal-700">eleveai.fr — Nou la fé 🇷🇪</p>
+      <p className="text-[8px] font-black uppercase tracking-wide text-slate-400">
+        une autre façon d&apos;apprendre
+      </p>
+    </article>
+  );
+}
+
+/* Aiguillage : chaque emplacement rend la bonne carte. */
+function SlotCard({ slot }: { slot: Slot }) {
+  if (slot.kind === "garde") return <CarteGarde />;
+  if (slot.kind === "fin") return <CarteFin />;
+  return <Carte mot={slot.mot} n={slot.n} />;
+}
+
 /* Une page A4 = 8 cartes (2 × 4), un arc-en-ciel de matières */
-function PageCartes({ cartes, depart, titre }: { cartes: DicteeMot[]; depart: number; titre: string }) {
+function PageCartes({ slots, titre }: { slots: Slot[]; titre: string }) {
   return (
     <section className="carte-page mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 print:mt-0 print:rounded-none print:border-0 print:p-3 print:shadow-none">
       <header className="flex items-center justify-between gap-3">
@@ -131,8 +196,8 @@ function PageCartes({ cartes, depart, titre }: { cartes: DicteeMot[]; depart: nu
         </span>
       </header>
       <div className="carte-grid mt-4 grid grid-cols-2 gap-3 print:mt-3 print:gap-2">
-        {cartes.map((mot, i) => (
-          <Carte key={`${mot.matiere}-${mot.mot}`} mot={mot} n={depart + i} />
+        {slots.map((slot, i) => (
+          <SlotCard key={slot.kind === "question" ? `${slot.mot.matiere}-${slot.mot.mot}` : `${slot.kind}-${i}`} slot={slot} />
         ))}
       </div>
     </section>
@@ -144,8 +209,8 @@ function PageCartes({ cartes, depart, titre }: { cartes: DicteeMot[]; depart: nu
 /* -------------------------------------------------------------------------- */
 
 export default function QuiSuisJeClient() {
-  const deck = construireDeck();
-  const pages = [0, 8, 16, 24]; // 4 pages de 8 cartes
+  const slots = construireSlots();
+  const pages = [0, 8, 16, 24]; // 4 pages de 8 cartes (garde + 30 questions + fin)
 
   return (
     <main className="relative isolate min-h-screen bg-[#f8f6ff] text-slate-800">
@@ -263,9 +328,8 @@ export default function QuiSuisJeClient() {
         {pages.map((depart, idx) => (
           <PageCartes
             key={depart}
-            cartes={deck.slice(depart, depart + 8)}
-            depart={depart + 1}
-            titre={`Cartes ${depart + 1} à ${depart + 8} · paquet ${idx + 1}/4`}
+            slots={slots.slice(depart, depart + 8)}
+            titre={`À découper · paquet ${idx + 1}/4`}
           />
         ))}
       </article>

@@ -8,6 +8,7 @@ import type { FamilleDico, MotDico } from "@/lib/dico/types";
 
 /* URL encodée dans le QR (traçe les inscriptions venues du jeu de cartes). */
 const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cartes";
+const TI_MARGO = "/cahier-vacances/ti-margo.png";
 
 /* Les 4 « couleurs » du jeu de 32 cartes : une famille du Dico = une couleur. */
 type FamilleJeu = {
@@ -108,7 +109,50 @@ function Carte({ mot, fam, index }: { mot: MotDico; fam: FamilleJeu; index: numb
         <p className="rotate-180 text-center text-[11px] font-black text-slate-400">
           réponse&nbsp;: {mot.mot}
         </p>
+        <p className="mt-0.5 text-center text-[7px] font-black uppercase tracking-wide text-slate-300">
+          eleveai.fr · une autre façon d&apos;apprendre
+        </p>
       </div>
+    </article>
+  );
+}
+
+/* Carte de garde : la carte-titre, à mettre sur le dessus du paquet. */
+function CarteGarde() {
+  return (
+    <article className="carte relative flex flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl border-2 border-violet-400 bg-gradient-to-br from-violet-50 to-fuchsia-50 p-3 text-center print:rounded-none">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={TI_MARGO} alt="Ti Margo" className="h-14 w-14 object-contain" />
+      <p className="text-[8px] font-black uppercase tracking-[0.2em] text-violet-500">
+        Cartes sur table · Maths 6ᵉ
+      </p>
+      <h3 className="text-2xl font-black leading-none text-slate-900">Qui suis-je&nbsp;?</h3>
+      <p className="text-2xl leading-none tracking-widest">
+        <span className="text-sky-500">♦</span> <span className="text-violet-600">♠</span>{" "}
+        <span className="text-emerald-600">♣</span> <span className="text-rose-500">♥</span>
+      </p>
+      <p className="mt-1 text-[8px] font-black uppercase tracking-wide text-slate-400">
+        eleveai.fr · une autre façon d&apos;apprendre
+      </p>
+    </article>
+  );
+}
+
+/* Carte de fin : la carte de clôture, avec le clin d'œil créole. */
+function CarteFin() {
+  return (
+    <article className="carte relative flex flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl border-2 border-teal-400 bg-gradient-to-br from-teal-50 to-emerald-50 p-3 text-center print:rounded-none">
+      <p className="text-3xl leading-none">🏆</p>
+      <h3 className="text-xl font-black text-slate-900">Bravo&nbsp;!</h3>
+      <p className="text-[10px] font-bold text-slate-600">
+        Tu as réuni les 4 familles&nbsp;? Mélange et rejoue&nbsp;!
+      </p>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={TI_MARGO} alt="Ti Margo" className="h-9 w-9 object-contain" />
+      <p className="text-[11px] font-black text-teal-700">eleveai.fr — Nou la fé 🇷🇪</p>
+      <p className="text-[8px] font-black uppercase tracking-wide text-slate-400">
+        une autre façon d&apos;apprendre
+      </p>
     </article>
   );
 }
@@ -251,6 +295,21 @@ export default function CartesSurTableClient() {
         {FAMILLES.map((fam) => (
           <PageFamille key={fam.key} fam={fam} />
         ))}
+
+        {/* ================= CARTES GARDE & FIN ================= */}
+        <section className="carte-page mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 print:mt-0 print:rounded-none print:border-0 print:p-3 print:shadow-none">
+          <header className="flex items-center justify-between gap-3">
+            <h2 className="text-lg font-black text-slate-900">🃏 Cartes garde &amp; fin</h2>
+            <span className="flex items-center gap-1.5 text-[11px] font-bold text-slate-400">
+              <Scissors className="h-3.5 w-3.5" />
+              Découpe le long des bords
+            </span>
+          </header>
+          <div className="carte-grid mt-4 grid grid-cols-2 gap-3 print:mt-3 print:gap-2">
+            <CarteGarde />
+            <CarteFin />
+          </div>
+        </section>
       </article>
 
       {/* Styles d'impression : chaque section = une page A4 */}
