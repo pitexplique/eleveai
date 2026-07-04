@@ -704,21 +704,35 @@ export default function CahierVacances({
 
           <div className="mt-8 rounded-2xl border border-teal-200 bg-teal-50 p-5 text-center">
             <p className="text-base font-black text-slate-900">
-              Ton cahier t&apos;a plu&nbsp;? Continue tout l&apos;été sur{" "}
+              Ce cahier vous a plu&nbsp;? La suite est en ligne sur{" "}
               <span className="text-teal-600">eleveai.fr</span>
             </p>
             <p className="mt-1 text-sm font-bold text-slate-600">
-              Un coach qui s&apos;adapte, en maths, français, anglais… Rien à
-              installer&nbsp;: ça s&apos;ouvre dans ton navigateur (et s&apos;ajoute
-              à l&apos;écran d&apos;accueil comme une appli).
+              <span className="font-black text-slate-800">Parents&nbsp;:</span>{" "}
+              créez un compte <span className="font-black">gratuit</span> pour
+              suivre votre enfant et être prévenu·e des nouveautés (nouveaux
+              cahiers, coach, dictée du jour…). Rien à installer&nbsp;: ça
+              s&apos;ouvre dans le navigateur, et s&apos;ajoute à l&apos;écran
+              d&apos;accueil comme une appli.
             </p>
-            <Link
-              href={`/coach-ia/maths?classe=${config.coachClasse}`}
-              className="screen-only mt-3 inline-flex items-center gap-2 rounded-full bg-teal-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-500/30 transition hover:bg-teal-400"
-            >
-              <Sparkles className="h-4 w-4" />
-              Découvrir le Coach IA
-            </Link>
+            <p className="mt-2 text-sm font-black text-teal-700 print:block hidden">
+              👉 Rendez-vous sur eleveai.fr et cliquez sur « Connexion »
+            </p>
+            <div className="screen-only mt-3 flex flex-wrap items-center justify-center gap-2">
+              <Link
+                href="/auth/signin?from=cahier"
+                className="inline-flex items-center gap-2 rounded-full bg-teal-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-500/30 transition hover:bg-teal-400"
+              >
+                <Sparkles className="h-4 w-4" />
+                Créer un compte gratuit
+              </Link>
+              <Link
+                href={`/coach-ia/maths?classe=${config.coachClasse}`}
+                className="inline-flex items-center gap-2 rounded-full border border-teal-300 bg-white px-5 py-3 text-sm font-black text-teal-700 transition hover:bg-teal-50"
+              >
+                Découvrir le Coach IA
+              </Link>
+            </div>
           </div>
 
           <footer className="mt-8 flex items-center justify-between border-t border-slate-200 pt-5 text-xs text-slate-500">
