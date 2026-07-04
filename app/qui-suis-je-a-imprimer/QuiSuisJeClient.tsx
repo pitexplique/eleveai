@@ -91,7 +91,7 @@ function Carte({ mot, n }: { mot: DicteeMot; n: number }) {
         {m.emoji}
       </span>
 
-      {/* Haut : matière + n°, et badge rare */}
+      {/* Haut : matière à gauche ; badge rare + référence (pour échanger) à droite */}
       <div className="relative flex items-start justify-between gap-2">
         <span
           className={`inline-flex items-center gap-1 rounded-full ${m.soft} px-2 py-0.5 text-[11px] font-black ${m.text}`}
@@ -99,14 +99,17 @@ function Carte({ mot, n }: { mot: DicteeMot; n: number }) {
           <span className="text-sm leading-none">{m.emoji}</span>
           {labelCourt(mot.matiere)}
         </span>
-        {rare ? (
-          <span className="inline-flex items-center gap-0.5 rounded-full bg-amber-400 px-1.5 py-0.5 text-[9px] font-black text-amber-900">
-            <Star className="h-3 w-3 fill-amber-900" />
-            RARE
+        <span className="flex items-center gap-1">
+          {rare && (
+            <span className="inline-flex items-center gap-0.5 rounded-full bg-amber-400 px-1.5 py-0.5 text-[9px] font-black text-amber-900">
+              <Star className="h-3 w-3 fill-amber-900" />
+              RARE
+            </span>
+          )}
+          <span className="rounded border border-slate-400 px-1.5 py-0.5 text-[10px] font-black tabular-nums text-slate-500">
+            N°{String(n).padStart(2, "0")}
           </span>
-        ) : (
-          <span className="text-[11px] font-black text-slate-300">#{n}</span>
-        )}
+        </span>
       </div>
 
       {/* Cœur : la consigne + l'indice */}
@@ -169,7 +172,7 @@ function CarteFin() {
         Inscris-toi sur eleveai.fr pour suivre tes progrès et relever des défis&nbsp;🎯
       </p>
       <QRCodeSVG value={SIGNUP_URL} size={54} />
-      <p className="text-[11px] font-black text-teal-700">eleveai.fr — Nou la fé 🇷🇪</p>
+      <p className="text-[11px] font-black text-teal-700">eleveai.fr</p>
     </article>
   );
 }
@@ -226,7 +229,7 @@ function Couverture() {
       </div>
       <div className="mt-5 flex flex-col items-center gap-2">
         <QRCodeSVG value={SIGNUP_URL} size={84} />
-        <p className="text-sm font-black text-teal-700">eleveai.fr — Nou la fé 🇷🇪</p>
+        <p className="text-sm font-black text-teal-700">eleveai.fr</p>
         <p className="text-[10px] font-black uppercase tracking-wide text-slate-400">
           une autre façon d&apos;apprendre
         </p>
@@ -235,34 +238,58 @@ function Couverture() {
   );
 }
 
-/* Dos de carte : identique pour toutes, à imprimer au verso (recto-verso). */
-function DosCarte() {
+/* Aligne les dos derrière leur recto pour un retournement « bord long » :
+   dans chaque rangée de 2, on échange les colonnes gauche/droite. */
+function alignerVerso(slots: Slot[]): Slot[] {
+  const out = [...slots];
+  for (let i = 0; i + 1 < out.length; i += 2) {
+    [out[i], out[i + 1]] = [out[i + 1], out[i]];
+  }
+  return out;
+}
+
+/* Référence d'une carte (pour l'échange entre élèves). Vide pour garde/fin. */
+function refDe(slot: Slot): string | null {
+  return slot.kind === "question" ? String(slot.n).padStart(2, "0") : null;
+}
+
+/* Dos de carte : SOBRE, sans aplat de couleur (imprimante N&B / salle des profs).
+   Porte la RÉFÉRENCE de sa carte → les élèves peuvent les échanger. */
+function DosCarte({ slot }: { slot: Slot }) {
+  const ref = refDe(slot);
   return (
-    <article className="carte flex flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl border-2 border-violet-500 bg-gradient-to-br from-violet-600 via-violet-600 to-fuchsia-600 p-3 text-center text-white print:rounded-none">
-      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 p-1">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={TI_MARGO} alt="" className="h-10 w-10 object-contain" />
-      </span>
-      <p className="text-lg font-black leading-none">Qui suis-je&nbsp;?</p>
-      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">eleveai.fr</p>
-      <p className="text-base font-black">Nou la fé 🇷🇪</p>
+    <article className="carte flex flex-col items-center justify-center gap-1.5 rounded-2xl border-2 border-slate-800 bg-white p-3 text-center print:rounded-none">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={TI_MARGO} alt="" className="h-10 w-10 object-contain grayscale" />
+      <p className="text-lg font-black leading-none text-slate-900">Qui suis-je&nbsp;?</p>
+      {ref ? (
+        <p className="rounded border-2 border-slate-800 px-2 py-0.5 text-sm font-black tabular-nums text-slate-900">
+          N° {ref} / 30
+        </p>
+      ) : (
+        <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+          {slot.kind === "garde" ? "Carte de garde" : "Carte de fin"}
+        </p>
+      )}
+      <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-500">eleveai.fr</p>
     </article>
   );
 }
 
-/* Une page de dos (8 dos identiques), à imprimer au verso d'une page de cartes. */
-function PageVerso() {
+/* Page de dos : reprend les 8 cartes du recto, colonnes échangées pour tomber
+   pile derrière chaque carte en recto-verso (retournement bord long). */
+function PageVerso({ slots }: { slots: Slot[] }) {
   return (
     <section className="carte-page mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 print:mt-0 print:rounded-none print:border-0 print:p-3 print:shadow-none">
       <header className="flex items-center justify-between gap-3">
         <h2 className="text-lg font-black text-slate-900">🔁 Dos des cartes</h2>
         <span className="text-[11px] font-bold text-slate-400">
-          Recto-verso&nbsp;: s&apos;imprime au dos des cartes (retourner sur le bord long)
+          Recto-verso&nbsp;: au dos des cartes (retourner sur le bord long)
         </span>
       </header>
       <div className="carte-grid mt-4 grid grid-cols-2 gap-3 print:mt-3 print:gap-2">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <DosCarte key={i} />
+        {alignerVerso(slots).map((slot, i) => (
+          <DosCarte key={i} slot={slot} />
         ))}
       </div>
     </section>
@@ -393,12 +420,15 @@ export default function QuiSuisJeClient() {
         </section>
 
         {/* ================= 4 PAGES DE CARTES ================= */}
-        {pages.map((depart, idx) => (
-          <Fragment key={depart}>
-            <PageCartes slots={slots.slice(depart, depart + 8)} titre={`À découper · paquet ${idx + 1}/4`} />
-            <PageVerso />
-          </Fragment>
-        ))}
+        {pages.map((depart, idx) => {
+          const front = slots.slice(depart, depart + 8);
+          return (
+            <Fragment key={depart}>
+              <PageCartes slots={front} titre={`À découper · paquet ${idx + 1}/4`} />
+              <PageVerso slots={front} />
+            </Fragment>
+          );
+        })}
       </article>
 
       {/* Styles d'impression : chaque section = une page A4 */}

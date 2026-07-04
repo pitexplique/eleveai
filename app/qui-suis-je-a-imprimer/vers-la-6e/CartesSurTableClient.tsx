@@ -148,7 +148,7 @@ function CarteFin() {
         Inscris-toi sur eleveai.fr pour suivre tes progrès et relever des défis&nbsp;🎯
       </p>
       <QRCodeSVG value={SIGNUP_URL} size={54} />
-      <p className="text-[11px] font-black text-teal-700">eleveai.fr — Nou la fé 🇷🇪</p>
+      <p className="text-[11px] font-black text-teal-700">eleveai.fr</p>
     </article>
   );
 }
