@@ -49,6 +49,17 @@ export default async function AdminDashboardPage() {
           </p>
         </Link>
 
+        <Link
+          href="/admin/newsletter"
+          className="block rounded-xl border border-teal-700 bg-teal-900/30 p-4 transition hover:bg-teal-900/50"
+        >
+          <p className="font-bold text-teal-300">📣 Newsletter</p>
+          <p className="mt-1 text-sm text-slate-400">
+            Composer et envoyer les nouveautés aux comptes qui ont consenti —
+            test, envoi de masse (Resend) et export CSV.
+          </p>
+        </Link>
+
         <AdminContactMessagesClient />
       </div>
     </main>
