@@ -112,12 +112,9 @@ const ROUTES: RouteConfig[] = [
   { path: "/concours-logo",   priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/podcast-maths",   priority: 0.85, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/concours-general",priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/concours-ia",     priority: 0.65, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/grand-oral",      priority: 0.6,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
 
-  // ── MATHS RÉEL · 974 + OUVERTURE (sens, IA) ────────────────────────────────
+  // ── MATHS RÉEL · 974 ───────────────────────────────────────────────────────
   { path: "/maths-974",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_974 },
-  { path: "/le-bon-prompt",   priority: 0.75, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
 
   // ── ESPACES ────────────────────────────────────────────────────────────────
   { path: "/espace-ecoles",   priority: 0.95, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
