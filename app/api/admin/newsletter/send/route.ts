@@ -84,13 +84,10 @@ export async function POST(req: Request) {
     );
   }
 
-  const from = process.env.NEWSLETTER_FROM || process.env.CONTACT_FROM;
-  if (!from) {
-    return NextResponse.json(
-      { ok: false, error: "Adresse d'expéditeur (CONTACT_FROM) manquante." },
-      { status: 500 }
-    );
-  }
+  // Expéditeur : domaine vérifié eleveai.fr, avec un nom d'affichage lisible.
+  // On NE retombe PAS sur CONTACT_FROM (qui peut valoir le onboarding@resend.dev
+  // de test en production). Surchargeable via NEWSLETTER_FROM.
+  const from = process.env.NEWSLETTER_FROM || "EleveAI <contact@eleveai.fr>";
   const replyTo = process.env.CONTACT_TO || undefined;
   const resend = new Resend(process.env.RESEND_API_KEY);
   const bodyHtml = textToHtml(message);
