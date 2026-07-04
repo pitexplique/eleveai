@@ -49,6 +49,9 @@ export default function SignInPage() {
   const [otpCode, setOtpCode] = useState("");
   const [emailSent, setEmailSent] = useState(false);
 
+  // Contexte : l'utilisateur arrive depuis un cahier de vacances (?from=cahier)
+  const [fromCahier, setFromCahier] = useState(false);
+
   // ---------------------------
   // Complément de profil (nouveaux comptes uniquement)
   // ---------------------------
@@ -94,6 +97,11 @@ export default function SignInPage() {
     const t = params.get("type");
     if (t === "prof" || t === "parent" || t === "eleve" || t === "perso") {
       setTypeUtilisateur(t);
+    }
+    if (params.get("from") === "cahier") {
+      setFromCahier(true);
+      // Le cahier s'adresse aux parents : on pré-sélectionne ce profil.
+      if (!t) setTypeUtilisateur("parent");
     }
   }, []);
 
@@ -501,6 +509,20 @@ export default function SignInPage() {
             </div>
 
             <div className="rounded-2xl bg-white p-6 shadow-lg shadow-slate-200/80 border border-slate-200">
+              {/* 🌺 Contexte cahier de vacances */}
+              {fromCahier && (
+                <div className="mb-5 rounded-xl border-2 border-teal-200 bg-teal-50 p-4">
+                  <p className="text-sm font-bold text-slate-900">
+                    🌺 Vous venez du cahier de vacances&nbsp;?
+                  </p>
+                  <p className="mt-0.5 text-xs text-slate-600">
+                    Créez un compte <span className="font-semibold">gratuit</span>{" "}
+                    pour suivre votre enfant et être prévenu·e des nouveautés
+                    (nouveaux cahiers, coach, dictée du jour…).
+                  </p>
+                </div>
+              )}
+
               {/* ✅ Flux unifié : inscription ET connexion par le même email */}
               <div className="mb-5 rounded-xl border-2 border-emerald-200 bg-emerald-50 p-4">
                 <p className="text-sm font-bold text-slate-900">

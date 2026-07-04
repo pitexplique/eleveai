@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { QRCodeSVG } from "qrcode.react";
 import {
   ArrowLeft,
   Award,
@@ -20,6 +21,10 @@ import {
   TrendingUp,
 } from "lucide-react";
 import type { CahierConfig, CahierData } from "./types";
+
+/* URL d'inscription encodée dans le QR de fin de cahier. Le ?from=cahier
+   permet de tracer les inscriptions venues du cahier de vacances. */
+const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cahier";
 
 /* Habillage de la rubrique « Comprendre le monde » selon son thème du jour. */
 const themesMonde = {
@@ -702,36 +707,52 @@ export default function CahierVacances({
             ))}
           </div>
 
-          <div className="mt-8 rounded-2xl border border-teal-200 bg-teal-50 p-5 text-center">
-            <p className="text-base font-black text-slate-900">
-              Ce cahier vous a plu&nbsp;? La suite est en ligne sur{" "}
-              <span className="text-teal-600">eleveai.fr</span>
-            </p>
-            <p className="mt-1 text-sm font-bold text-slate-600">
-              <span className="font-black text-slate-800">Parents&nbsp;:</span>{" "}
-              créez un compte <span className="font-black">gratuit</span> pour
-              suivre votre enfant et être prévenu·e des nouveautés (nouveaux
-              cahiers, coach, dictée du jour…). Rien à installer&nbsp;: ça
-              s&apos;ouvre dans le navigateur, et s&apos;ajoute à l&apos;écran
-              d&apos;accueil comme une appli.
-            </p>
-            <p className="mt-2 text-sm font-black text-teal-700 print:block hidden">
-              👉 Rendez-vous sur eleveai.fr et cliquez sur « Connexion »
-            </p>
-            <div className="screen-only mt-3 flex flex-wrap items-center justify-center gap-2">
-              <Link
-                href="/auth/signin?from=cahier"
-                className="inline-flex items-center gap-2 rounded-full bg-teal-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-500/30 transition hover:bg-teal-400"
-              >
-                <Sparkles className="h-4 w-4" />
-                Créer un compte gratuit
-              </Link>
-              <Link
-                href={`/coach-ia/maths?classe=${config.coachClasse}`}
-                className="inline-flex items-center gap-2 rounded-full border border-teal-300 bg-white px-5 py-3 text-sm font-black text-teal-700 transition hover:bg-teal-50"
-              >
-                Découvrir le Coach IA
-              </Link>
+          <div className="mt-8 rounded-2xl border border-teal-200 bg-teal-50 p-5">
+            <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+              <div>
+                <p className="text-base font-black text-slate-900">
+                  Ce cahier vous a plu&nbsp;? La suite est en ligne sur{" "}
+                  <span className="text-teal-600">eleveai.fr</span>
+                </p>
+                <p className="mt-1 text-sm font-bold text-slate-600">
+                  <span className="font-black text-slate-800">Parents&nbsp;:</span>{" "}
+                  créez un compte <span className="font-black">gratuit</span> pour
+                  suivre votre enfant et être prévenu·e des nouveautés (nouveaux
+                  cahiers, coach, dictée du jour…). Rien à installer&nbsp;: ça
+                  s&apos;ouvre dans le navigateur, et s&apos;ajoute à l&apos;écran
+                  d&apos;accueil comme une appli.
+                </p>
+                <div className="screen-only mt-3 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
+                  <Link
+                    href="/auth/signin?from=cahier"
+                    className="inline-flex items-center gap-2 rounded-full bg-teal-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-500/30 transition hover:bg-teal-400"
+                  >
+                    <Sparkles className="h-4 w-4" />
+                    Créer un compte gratuit
+                  </Link>
+                  <Link
+                    href={`/coach-ia/maths?classe=${config.coachClasse}`}
+                    className="inline-flex items-center gap-2 rounded-full border border-teal-300 bg-white px-5 py-3 text-sm font-black text-teal-700 transition hover:bg-teal-50"
+                  >
+                    Découvrir le Coach IA
+                  </Link>
+                </div>
+              </div>
+
+              {/* QR code vers l'inscription parent (visible écran ET impression) */}
+              <div className="shrink-0 text-center">
+                <div className="inline-block rounded-xl border border-slate-200 bg-white p-2">
+                  <QRCodeSVG value={SIGNUP_URL} size={112} level="M" marginSize={2} />
+                </div>
+                <p className="mt-1 text-xs font-black leading-tight text-slate-700">
+                  Scannez pour créer
+                  <br />
+                  votre compte gratuit
+                </p>
+                <p className="text-[10px] font-bold text-slate-400">
+                  eleveai.fr
+                </p>
+              </div>
             </div>
           </div>
 
