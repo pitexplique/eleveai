@@ -97,11 +97,13 @@ function PageEntete({ slug }: { slug: string }) {
   return (
     <div className="flex items-center justify-between gap-3 text-[11px] font-bold text-slate-400">
       <span className="flex items-center gap-1.5">
-        <span className="font-black text-teal-600">EleveAI</span>
+        <span className="text-sm font-black text-teal-600">eleveai.fr</span>
         <span className="text-slate-300">—</span>
         Plusieurs portes pour apprendre
       </span>
-      <span className="hidden sm:inline">eleveai.fr/cahier-vacances/{slug}</span>
+      <span className="hidden font-bold text-teal-600 sm:inline">
+        eleveai.fr/cahier-vacances/{slug}
+      </span>
     </div>
   );
 }
@@ -180,8 +182,10 @@ export default function CahierVacances({
         <section className="cahier-page garde-page overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-300/40 print:rounded-none print:border-0 print:shadow-none">
           <PageEntete slug={config.slug} />
 
-          <div className="mt-4 text-center text-base font-black tracking-tight text-teal-600">
-            <span className="text-lg">eleveai.fr</span>
+          <div className="mt-4 text-center tracking-tight">
+            <span className="text-2xl font-black text-teal-600 sm:text-3xl">
+              eleveai.fr
+            </span>
             <span className="ml-2 text-sm font-bold italic text-slate-500">
               · La liberté d&apos;apprendre
             </span>
@@ -638,6 +642,10 @@ export default function CahierVacances({
                     <p className="mt-3 text-center text-sm font-bold text-teal-600">
                       Un petit pas chaque jour, un grand pas pour tes connaissances !
                     </p>
+                    <p className="mt-1.5 text-center text-base font-black text-slate-800">
+                      Continue en ligne sur{" "}
+                      <span className="text-teal-600">eleveai.fr</span>
+                    </p>
                   </footer>
                 </section>
               );
@@ -694,13 +702,19 @@ export default function CahierVacances({
             ))}
           </div>
 
-          <div className="screen-only mt-8 rounded-2xl border border-teal-200 bg-teal-50 p-5 text-center">
-            <p className="text-sm font-bold text-slate-700">
-              Envie de continuer en ligne, avec un coach qui s&apos;adapte ?
+          <div className="mt-8 rounded-2xl border border-teal-200 bg-teal-50 p-5 text-center">
+            <p className="text-base font-black text-slate-900">
+              Ton cahier t&apos;a plu&nbsp;? Continue tout l&apos;été sur{" "}
+              <span className="text-teal-600">eleveai.fr</span>
+            </p>
+            <p className="mt-1 text-sm font-bold text-slate-600">
+              Un coach qui s&apos;adapte, en maths, français, anglais… Rien à
+              installer&nbsp;: ça s&apos;ouvre dans ton navigateur (et s&apos;ajoute
+              à l&apos;écran d&apos;accueil comme une appli).
             </p>
             <Link
               href={`/coach-ia/maths?classe=${config.coachClasse}`}
-              className="mt-3 inline-flex items-center gap-2 rounded-full bg-teal-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-500/30 transition hover:bg-teal-400"
+              className="screen-only mt-3 inline-flex items-center gap-2 rounded-full bg-teal-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-500/30 transition hover:bg-teal-400"
             >
               <Sparkles className="h-4 w-4" />
               Découvrir le Coach IA
