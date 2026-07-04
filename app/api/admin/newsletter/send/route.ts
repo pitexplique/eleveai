@@ -95,13 +95,20 @@ export async function POST(req: Request) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   const bodyHtml = textToHtml(message);
 
-  // ---------- Mode TEST : un seul email, à l'admin ----------
+  // ---------- Mode TEST : un seul email, à l'adresse fournie (ou CONTACT_TO) ----------
   if (mode === "test") {
-    const to = process.env.CONTACT_TO;
+    const testEmail = String(body.testEmail ?? "").trim().toLowerCase();
+    if (testEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(testEmail)) {
+      return NextResponse.json(
+        { ok: false, error: "Adresse de test invalide." },
+        { status: 400 }
+      );
+    }
+    const to = testEmail || process.env.CONTACT_TO;
     if (!to) {
       return NextResponse.json(
-        { ok: false, error: "CONTACT_TO manquante pour l'envoi de test." },
-        { status: 500 }
+        { ok: false, error: "Aucune adresse de test (renseigne-en une)." },
+        { status: 400 }
       );
     }
     const unsub = unsubUrl(to);

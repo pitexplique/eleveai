@@ -28,6 +28,7 @@ export default function NewsletterClient() {
   const [loading, setLoading] = useState(true);
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [testEmail, setTestEmail] = useState("");
   const [busy, setBusy] = useState<null | "test" | "all">(null);
   const [feedback, setFeedback] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -80,7 +81,7 @@ export default function NewsletterClient() {
       const res = await fetch("/api/admin/newsletter/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ subject, message, mode }),
+        body: JSON.stringify({ subject, message, mode, testEmail }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok || !data?.ok) throw new Error(data?.error || "Échec de l'envoi");
@@ -186,6 +187,19 @@ export default function NewsletterClient() {
           </p>
         </div>
 
+        <div>
+          <label className="text-xs font-bold uppercase tracking-wide text-slate-500">
+            Adresse de test
+          </label>
+          <input
+            type="email"
+            value={testEmail}
+            onChange={(e) => setTestEmail(e.target.value)}
+            placeholder="eleveai974@gmail.com (défaut : adresse admin)"
+            className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-950/60 px-3 py-2 text-sm text-slate-100 placeholder-slate-500"
+          />
+        </div>
+
         <div className="flex flex-wrap items-center gap-2 pt-1">
           <button
             type="button"
@@ -193,7 +207,7 @@ export default function NewsletterClient() {
             disabled={busy !== null}
             className="rounded-lg border border-sky-700 bg-sky-900/40 px-4 py-2 text-sm font-bold text-sky-200 hover:bg-sky-900/70 disabled:opacity-50"
           >
-            {busy === "test" ? "Envoi…" : "✉️ Test à moi-même"}
+            {busy === "test" ? "Envoi…" : "✉️ Envoyer un test"}
           </button>
           <button
             type="button"
