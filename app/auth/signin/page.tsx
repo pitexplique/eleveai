@@ -380,19 +380,21 @@ export default function SignInPage() {
 
     setLoading(true);
     try {
+      // Canal d'acquisition : renseigné seulement s'il est connu (ne pas
+      // écraser une éventuelle valeur existante par null).
+      const payload: Record<string, unknown> = {
+        auth_user_id: pendingAuth.authUserId,
+        email: pendingAuth.email,
+        nom: nomToUse,
+        type_utilisateur: typeUtilisateur,
+        accepte_cgv: accepteCgv,
+        accepte_newsletter: accepteNewsletter,
+      };
+      if (fromCahier) payload.source = "cahier-vacances";
+
       const { data: profile, error: upsertError } = await supabase
         .from("users_email")
-        .upsert(
-          {
-            auth_user_id: pendingAuth.authUserId,
-            email: pendingAuth.email,
-            nom: nomToUse,
-            type_utilisateur: typeUtilisateur,
-            accepte_cgv: accepteCgv,
-            accepte_newsletter: accepteNewsletter,
-          },
-          { onConflict: "email" }
-        )
+        .upsert(payload, { onConflict: "email" })
         .select("id, auth_user_id, email, nom, type_utilisateur")
         .single();
 
