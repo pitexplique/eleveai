@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from "react";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import { ArrowLeft, Download, Scissors, Sparkles, Star } from "lucide-react";
@@ -158,21 +159,17 @@ function CarteGarde() {
   );
 }
 
-/* Carte de fin : la carte de clôture, avec le clin d'œil créole. */
+/* Carte de fin : clôture + appel à l'inscription (suivi des progrès, défis). */
 function CarteFin() {
   return (
     <article className="carte relative flex flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl border-2 border-teal-400 bg-gradient-to-br from-teal-50 to-emerald-50 p-3 text-center print:rounded-none">
-      <p className="text-3xl leading-none">🏆</p>
-      <h3 className="text-xl font-black text-slate-900">Bravo&nbsp;!</h3>
-      <p className="text-[10px] font-bold text-slate-600">
-        Tu as fait le tour du paquet. Mélange et rejoue&nbsp;!
+      <p className="text-2xl leading-none">🏆</p>
+      <h3 className="text-lg font-black text-slate-900">Bravo&nbsp;!</h3>
+      <p className="text-[9px] font-bold leading-snug text-slate-600">
+        Inscris-toi sur eleveai.fr pour suivre tes progrès et relever des défis&nbsp;🎯
       </p>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={TI_MARGO} alt="Ti Margo" className="h-9 w-9 object-contain" />
+      <QRCodeSVG value={SIGNUP_URL} size={54} />
       <p className="text-[11px] font-black text-teal-700">eleveai.fr — Nou la fé 🇷🇪</p>
-      <p className="text-[8px] font-black uppercase tracking-wide text-slate-400">
-        une autre façon d&apos;apprendre
-      </p>
     </article>
   );
 }
@@ -204,8 +201,76 @@ function PageCartes({ slots, titre }: { slots: Slot[]; titre: string }) {
   );
 }
 
+/* Couverture (page de garde) : le devant du paquet, pleine page A4. */
+function Couverture() {
+  return (
+    <section className="carte-page couverture-page flex flex-col items-center justify-center overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-violet-50 via-white to-fuchsia-50 p-8 text-center shadow-xl shadow-slate-300/40 print:rounded-none print:border-0 print:shadow-none">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={TI_MARGO} alt="Ti Margo, la mascotte d'EleveAI" className="h-28 w-28 object-contain" />
+      <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-violet-100 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-violet-700">
+        <Sparkles className="h-4 w-4" />
+        Jeu de 32 cartes · 11 matières
+      </p>
+      <h1 className="mt-3 text-6xl font-black tracking-tight text-slate-900 print:text-5xl">
+        Qui suis-je&nbsp;?
+      </h1>
+      <p className="mt-2 max-w-md text-base font-bold text-slate-500">
+        On lit la définition, tu retrouves le mot. À imprimer, découper et jouer en famille.
+      </p>
+      <div className="mt-4 flex flex-wrap justify-center gap-1.5">
+        {MATIERES.map((mat) => (
+          <span key={mat} className="text-2xl" title={mat}>
+            {(MAT[mat] ?? MAT_DEFAUT).emoji}
+          </span>
+        ))}
+      </div>
+      <div className="mt-5 flex flex-col items-center gap-2">
+        <QRCodeSVG value={SIGNUP_URL} size={84} />
+        <p className="text-sm font-black text-teal-700">eleveai.fr — Nou la fé 🇷🇪</p>
+        <p className="text-[10px] font-black uppercase tracking-wide text-slate-400">
+          une autre façon d&apos;apprendre
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* Dos de carte : identique pour toutes, à imprimer au verso (recto-verso). */
+function DosCarte() {
+  return (
+    <article className="carte flex flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl border-2 border-violet-500 bg-gradient-to-br from-violet-600 via-violet-600 to-fuchsia-600 p-3 text-center text-white print:rounded-none">
+      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 p-1">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={TI_MARGO} alt="" className="h-10 w-10 object-contain" />
+      </span>
+      <p className="text-lg font-black leading-none">Qui suis-je&nbsp;?</p>
+      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">eleveai.fr</p>
+      <p className="text-base font-black">Nou la fé 🇷🇪</p>
+    </article>
+  );
+}
+
+/* Une page de dos (8 dos identiques), à imprimer au verso d'une page de cartes. */
+function PageVerso() {
+  return (
+    <section className="carte-page mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 print:mt-0 print:rounded-none print:border-0 print:p-3 print:shadow-none">
+      <header className="flex items-center justify-between gap-3">
+        <h2 className="text-lg font-black text-slate-900">🔁 Dos des cartes</h2>
+        <span className="text-[11px] font-bold text-slate-400">
+          Recto-verso&nbsp;: s&apos;imprime au dos des cartes (retourner sur le bord long)
+        </span>
+      </header>
+      <div className="carte-grid mt-4 grid grid-cols-2 gap-3 print:mt-3 print:gap-2">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <DosCarte key={i} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 /* -------------------------------------------------------------------------- */
-/*  Page complète (garde + règles + 4 pages de cartes)                        */
+/*  Page complète (couverture + règles + [cartes + verso] × 4)                */
 /* -------------------------------------------------------------------------- */
 
 export default function QuiSuisJeClient() {
@@ -236,7 +301,10 @@ export default function QuiSuisJeClient() {
       </div>
 
       <article className="mx-auto max-w-4xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0">
-        {/* ================= PAGE DE GARDE + RÈGLES (imprimée) ================= */}
+        {/* ================= COUVERTURE (page de garde) ================= */}
+        <Couverture />
+
+        {/* ================= RÈGLES (imprimée) ================= */}
         <section className="carte-page garde-page overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-300/40 print:rounded-none print:border-0 print:shadow-none">
           <div className="flex items-center justify-between gap-3 text-[11px] font-bold text-slate-400">
             <span className="flex items-center gap-1.5">
@@ -326,11 +394,10 @@ export default function QuiSuisJeClient() {
 
         {/* ================= 4 PAGES DE CARTES ================= */}
         {pages.map((depart, idx) => (
-          <PageCartes
-            key={depart}
-            slots={slots.slice(depart, depart + 8)}
-            titre={`À découper · paquet ${idx + 1}/4`}
-          />
+          <Fragment key={depart}>
+            <PageCartes slots={slots.slice(depart, depart + 8)} titre={`À découper · paquet ${idx + 1}/4`} />
+            <PageVerso />
+          </Fragment>
         ))}
       </article>
 
@@ -373,6 +440,10 @@ export default function QuiSuisJeClient() {
 
           .garde-page {
             padding: 6mm !important;
+          }
+          .couverture-page {
+            min-height: 262mm;
+            padding: 12mm !important;
           }
 
           .carte-grid {

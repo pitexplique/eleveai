@@ -138,21 +138,17 @@ function CarteGarde() {
   );
 }
 
-/* Carte de fin : la carte de clôture, avec le clin d'œil créole. */
+/* Carte de fin : clôture + appel à l'inscription (suivi des progrès, défis). */
 function CarteFin() {
   return (
     <article className="carte relative flex flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl border-2 border-teal-400 bg-gradient-to-br from-teal-50 to-emerald-50 p-3 text-center print:rounded-none">
-      <p className="text-3xl leading-none">🏆</p>
-      <h3 className="text-xl font-black text-slate-900">Bravo&nbsp;!</h3>
-      <p className="text-[10px] font-bold text-slate-600">
-        Tu as réuni les 4 familles&nbsp;? Mélange et rejoue&nbsp;!
+      <p className="text-2xl leading-none">🏆</p>
+      <h3 className="text-lg font-black text-slate-900">Bravo&nbsp;!</h3>
+      <p className="text-[9px] font-bold leading-snug text-slate-600">
+        Inscris-toi sur eleveai.fr pour suivre tes progrès et relever des défis&nbsp;🎯
       </p>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={TI_MARGO} alt="Ti Margo" className="h-9 w-9 object-contain" />
+      <QRCodeSVG value={SIGNUP_URL} size={54} />
       <p className="text-[11px] font-black text-teal-700">eleveai.fr — Nou la fé 🇷🇪</p>
-      <p className="text-[8px] font-black uppercase tracking-wide text-slate-400">
-        une autre façon d&apos;apprendre
-      </p>
     </article>
   );
 }
