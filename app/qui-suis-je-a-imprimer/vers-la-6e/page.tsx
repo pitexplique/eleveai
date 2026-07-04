@@ -14,12 +14,12 @@ export const metadata: Metadata = {
     "vocabulaire maths 6e",
     "EleveAI",
   ],
-  alternates: { canonical: "/cartes-sur-table/vers-la-6e" },
+  alternates: { canonical: "/qui-suis-je-a-imprimer/vers-la-6e" },
   openGraph: {
     title: "Cartes sur table — Qui suis-je ? Maths 6e (jeu à imprimer) — EleveAI",
     description:
       "Un jeu de 32 cartes à imprimer pour réviser les maths de 6e en jouant : on lit la définition, l'élève retrouve le mot. 4 familles à collectionner.",
-    url: "/cartes-sur-table/vers-la-6e",
+    url: "/qui-suis-je-a-imprimer/vers-la-6e",
     type: "article",
     siteName: "EleveAI",
     locale: "fr_FR",

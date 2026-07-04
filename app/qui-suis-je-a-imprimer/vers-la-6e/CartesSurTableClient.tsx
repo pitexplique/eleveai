@@ -181,7 +181,7 @@ export default function CartesSurTableClient() {
               Plusieurs portes pour apprendre
             </span>
             <span className="hidden font-bold text-violet-600 sm:inline">
-              eleveai.fr/cartes-sur-table/vers-la-6e
+              eleveai.fr/qui-suis-je-a-imprimer/vers-la-6e
             </span>
           </div>
 

@@ -350,6 +350,18 @@ export default function Header() {
             🌋 Maths Réel · 974
           </Link>
 
+          {/* Jeu de 32 cartes « Qui suis-je ? » à imprimer — toutes matières */}
+          <Link
+            href="/qui-suis-je-a-imprimer"
+            className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition ${
+              isActive(pathname, "/qui-suis-je-a-imprimer")
+                ? "bg-fuchsia-300 text-[#041B33] shadow-lg"
+                : "bg-fuchsia-300/15 text-fuchsia-200 hover:bg-fuchsia-300/25 hover:text-fuchsia-100"
+            }`}
+          >
+            🃏 Jeu de 32 cartes
+          </Link>
+
           {/* Explorer — le catalogue de toutes les actions possibles */}
           <Link
             href="/explorer"
@@ -467,6 +479,14 @@ export default function Header() {
               className="flex items-center justify-center gap-2 rounded-2xl bg-rose-400/15 border border-rose-300/30 px-4 py-3 text-sm font-black text-rose-200"
             >
               🌋 Maths Réel · 974 — La Réunion en vidéo
+            </Link>
+
+            <Link
+              href="/qui-suis-je-a-imprimer"
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center justify-center gap-2 rounded-2xl bg-fuchsia-300/15 border border-fuchsia-300/30 px-4 py-3 text-sm font-black text-fuchsia-200"
+            >
+              🃏 Jeu de 32 cartes · Qui suis-je ? à imprimer
             </Link>
 
             <Link
