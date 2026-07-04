@@ -446,6 +446,30 @@ export default function AccueilPage({
           contextualise l'accueil « pour lui-même ». Consomme /api/profil-eleve. */}
       <RecoDuJourAccueil />
 
+      {/* ── JEU DE 32 CARTES « QUI SUIS-JE ? » — à imprimer, avant la dictée ──── */}
+      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
+        <Link
+          href="/qui-suis-je-a-imprimer"
+          className="mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-fuchsia-300/30 bg-gradient-to-br from-fuchsia-400/[0.12] via-violet-400/[0.07] to-white/[0.04] p-6 text-center transition hover:border-fuchsia-300/60 sm:flex-row sm:justify-between sm:text-left sm:p-7"
+        >
+          <div>
+            <p className="text-xs font-black uppercase tracking-wide text-fuchsia-200">
+              🃏 À imprimer · gratuit
+            </p>
+            <h2 className="mt-1 text-2xl font-black text-white sm:text-3xl">
+              🃏 Le jeu de 32 cartes
+            </h2>
+            <p className="mt-1 text-sm font-semibold text-white/75">
+              «&nbsp;Qui suis-je&nbsp;?&nbsp;» On lit la définition, tu retrouves le mot —
+              11 matières. À imprimer, découper et jouer en famille. 🎉
+            </p>
+          </div>
+          <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-fuchsia-400 px-6 py-3 text-sm font-black text-[#041B33] shadow-lg">
+            Jouer / imprimer →
+          </span>
+        </Link>
+      </section>
+
       {/* ── DICTÉE DU JOUR — le rituel quotidien, tout en haut ───────────────── */}
       <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
         <Link
