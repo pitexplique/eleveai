@@ -122,7 +122,7 @@ export async function GET(req: Request) {
   const usersEmail = await fetchAll(
     supabase,
     "users_email",
-    "type_utilisateur, plan"
+    "type_utilisateur, plan, source, accepte_newsletter"
   );
 
   // 3) Résultats (8 tables), filtrés par établissement selon le périmètre.
@@ -234,6 +234,14 @@ export async function GET(req: Request) {
       : 0,
     eleves: inclureEmail
       ? usersEmail.filter((u) => u.type_utilisateur === "eleve").length
+      : 0,
+    // Inscriptions venues du cahier de vacances (?from=cahier → source).
+    cahier: inclureEmail
+      ? usersEmail.filter((u) => u.source === "cahier-vacances").length
+      : 0,
+    // Consentements newsletter (utile pour l'envoi des nouveautés).
+    newsletter: inclureEmail
+      ? usersEmail.filter((u) => u.accepte_newsletter === true).length
       : 0,
   };
 

@@ -12,7 +12,13 @@ type Stats = {
   etablissements: EtabItem[];
   kpis: {
     comptesEtab: { eleves: number; profs: number; principaux: number };
-    comptesEmail: { total: number; paid: number; eleves: number };
+    comptesEmail: {
+      total: number;
+      paid: number;
+      eleves: number;
+      cahier: number;
+      newsletter: number;
+    };
     nbEtablissements: number;
     activitesTotal: number;
     activitesAujourdhui: number;
@@ -232,6 +238,12 @@ export default function AdminStatsClient() {
               value={stats.kpis.comptesEmail.total}
               sub={`${stats.kpis.comptesEmail.paid} payants`}
               color="text-amber-400"
+            />
+            <Kpi
+              label="Inscrits via le cahier"
+              value={stats.kpis.comptesEmail.cahier}
+              sub={`${stats.kpis.comptesEmail.newsletter} consentent à la newsletter`}
+              color="text-teal-400"
             />
             <Kpi
               label="Établissements"
