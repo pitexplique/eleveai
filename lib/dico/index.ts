@@ -12,6 +12,14 @@ import { motsHistGeoCM1 } from "./histoire-geo/cm1";
 import { motsAnimauxCP } from "./animaux/cp";
 import { motsCouleursCP } from "./couleurs/cp";
 import { motsNombresCP } from "./nombres/cp";
+import { motsMathsCE1 } from "./maths/ce1";
+import { motsFrancaisCE1 } from "./francais/ce1";
+import { motsSciencesCE1 } from "./sciences/ce1";
+import { motsHistGeoCE1 } from "./histoire-geo/ce1";
+import { motsMathsCE2 } from "./maths/ce2";
+import { motsFrancaisCE2 } from "./francais/ce2";
+import { motsSciencesCE2 } from "./sciences/ce2";
+import { motsHistGeoCE2 } from "./histoire-geo/ce2";
 
 export type { Dico, MotDico, MotDicoClasse, FamilleDico, GesteDico, DefiDico } from "./types";
 export { NIVEAUX, CYCLES, getNiveau } from "./niveaux";
@@ -181,6 +189,16 @@ const DICOS: Record<string, Dico> = {
     sousTitre: "Mes premières cartes en images",
     mots: motsNombresCP,
   },
+  // ── CE1 ──────────────────────────────────────────────────────
+  "maths/ce1": { matiere: "maths", matiereLabel: "Maths", niveau: "ce1", titre: "Dico Maths CE1", sousTitre: "Le vocabulaire du CE1", mots: motsMathsCE1 },
+  "francais/ce1": { matiere: "francais", matiereLabel: "Français", niveau: "ce1", titre: "Dico Français CE1", sousTitre: "Le vocabulaire du CE1", mots: motsFrancaisCE1 },
+  "sciences/ce1": { matiere: "sciences", matiereLabel: "Sciences", niveau: "ce1", titre: "Dico Sciences CE1", sousTitre: "Le vocabulaire du CE1", mots: motsSciencesCE1 },
+  "histoire-geo/ce1": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "ce1", titre: "Dico Histoire-Géo CE1", sousTitre: "Le vocabulaire du CE1", mots: motsHistGeoCE1 },
+  // ── CE2 ──────────────────────────────────────────────────────
+  "maths/ce2": { matiere: "maths", matiereLabel: "Maths", niveau: "ce2", titre: "Dico Maths CE2", sousTitre: "Le vocabulaire du CE2", mots: motsMathsCE2 },
+  "francais/ce2": { matiere: "francais", matiereLabel: "Français", niveau: "ce2", titre: "Dico Français CE2", sousTitre: "Le vocabulaire du CE2", mots: motsFrancaisCE2 },
+  "sciences/ce2": { matiere: "sciences", matiereLabel: "Sciences", niveau: "ce2", titre: "Dico Sciences CE2", sousTitre: "Le vocabulaire du CE2", mots: motsSciencesCE2 },
+  "histoire-geo/ce2": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "ce2", titre: "Dico Histoire-Géo CE2", sousTitre: "Le vocabulaire du CE2", mots: motsHistGeoCE2 },
 };
 
 export function getDico(matiere: string, niveau: string): Dico | null {
