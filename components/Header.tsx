@@ -7,6 +7,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Menu, X, GraduationCap, LogOut, ChevronDown } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
 import { createClient } from "@/lib/supabase/client";
+import { useAudience, type Audience } from "@/lib/useAudience";
 
 // ─── Nav structure ────────────────────────────────────────────────────────────
 
@@ -245,12 +246,79 @@ function MobileSection({
   );
 }
 
+// ─── Espaces adultes : nav simple (nav = espace), CTA orienté décision ─────────
+// Chaque espace a une nav courte ; l'entrée `eleve` reste vide (l'élève garde son
+// mega-menu Matières, rendu à part).
+const SPACE_NAV: Record<Audience, NavItem[]> = {
+  eleve: [],
+  parent: [
+    { href: "/parents", icon: "💡", label: "Comment ça marche", desc: "" },
+    { href: "/politique-confidentialite", icon: "🔒", label: "Sécurité & RGPD", desc: "" },
+    { href: "/tarifs", icon: "💶", label: "Tarifs", desc: "" },
+  ],
+  enseignant: [
+    { href: "/enseignants", icon: "📊", label: "Tableau de bord", desc: "" },
+    { href: "/calcul-rapide", icon: "⚡", label: "En classe", desc: "" },
+    { href: "/espace-ecoles", icon: "🏫", label: "Déployer", desc: "" },
+  ],
+  etablissement: [
+    { href: "/espace-ecoles", icon: "🏫", label: "Déploiement", desc: "" },
+    { href: "/politique-confidentialite", icon: "🔒", label: "Sécurité & RGPD", desc: "" },
+    { href: "/tarifs", icon: "💶", label: "Tarifs", desc: "" },
+  ],
+};
+
+// CTA principal quand NON connecté, par espace (l'espace élève a son propre CTA).
+const SPACE_CTA: Record<Audience, { label: string; href: string }> = {
+  eleve: { label: "Connexion / inscription", href: "/auth/signin?mode=eleve" },
+  parent: { label: "J'ai un code établissement", href: "/auth/signin?mode=eleve" },
+  enseignant: { label: "Mon tableau de bord", href: "/auth/signin?mode=eleve" },
+  etablissement: { label: "Parler à un responsable", href: "/contact" },
+};
+
+// Les 4 portes — sélecteur « Vous êtes ? » présent dans tous les headers.
+const AUDIENCE_DOORS: { space: Audience; emoji: string; label: string; href: string }[] = [
+  { space: "eleve", emoji: "🎓", label: "Élève", href: "/accueil" },
+  { space: "parent", emoji: "👪", label: "Parent", href: "/parents" },
+  { space: "enseignant", emoji: "🍎", label: "Enseignant", href: "/enseignants" },
+  { space: "etablissement", emoji: "🏫", label: "Établissement", href: "/espace-ecoles" },
+];
+
+function AudienceSwitcher({ current }: { current: Audience }) {
+  return (
+    <details className="group relative ml-1">
+      <summary className="flex cursor-pointer list-none items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold text-white/80 transition hover:bg-white/15 hover:text-white [&::-webkit-details-marker]:hidden">
+        Vous êtes&nbsp;?
+        <ChevronDown className="h-3.5 w-3.5 transition-transform group-open:rotate-180" />
+      </summary>
+      <div className="absolute right-0 top-full z-[80] mt-1 w-56 rounded-2xl border border-white/10 bg-[#041B33] p-2 shadow-2xl">
+        {AUDIENCE_DOORS.map((d) => (
+          <Link
+            key={d.space}
+            href={d.href}
+            className={[
+              "flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-bold transition",
+              d.space === current
+                ? "bg-white/15 text-white"
+                : "text-white/75 hover:bg-white/10 hover:text-white",
+            ].join(" ")}
+          >
+            <span className="text-base">{d.emoji}</span>
+            {d.label}
+          </Link>
+        ))}
+      </div>
+    </details>
+  );
+}
+
 // ─── Main Header ──────────────────────────────────────────────────────────────
 
 export default function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const { eleve, logout } = useEleve();
+  const { space } = useAudience();
   const supabase = createClient();
 
   useEffect(() => {
@@ -314,6 +382,8 @@ export default function Header() {
         {/* Desktop nav */}
         <div className="hidden items-center gap-1 lg:flex">
 
+          {space === "eleve" ? (
+          <>
           {/* Dictée du jour — le rituel quotidien, tout en tête de barre */}
           <Link
             href="/dictee-du-jour"
@@ -375,10 +445,30 @@ export default function Header() {
           </Link>
 
           <MatieresMenu pathname={pathname} />
+          </>
+          ) : (
+          <>
+          {SPACE_NAV[space].map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition ${
+                isActive(pathname, item.href)
+                  ? "bg-white text-[#041B33] shadow-lg"
+                  : "text-white/90 hover:bg-white/15 hover:text-white"
+              }`}
+            >
+              <span>{item.icon}</span> {item.label}
+            </Link>
+          ))}
+          </>
+          )}
+
+          <AudienceSwitcher current={space} />
 
           {/* Auth */}
           {eleve ? (
-            <div className="ml-3 flex items-center gap-2">
+            <div className="ml-2 flex items-center gap-2">
               <Link
                 href={dashboardHref}
                 className={`inline-flex items-center gap-2 rounded-full ${dashboardColor} px-4 py-2 text-sm font-black text-[#041B33] shadow-lg hover:brightness-110`}
@@ -394,7 +484,7 @@ export default function Header() {
                 <LogOut className="h-4 w-4" />
               </button>
             </div>
-          ) : (
+          ) : space === "eleve" ? (
             <Link
               href="/auth/signin?mode=eleve"
               className="ml-3 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 px-4 py-2 text-sm font-black text-[#041B33] shadow-lg hover:brightness-110 transition"
@@ -402,6 +492,21 @@ export default function Header() {
               <GraduationCap className="h-4 w-4" />
               Connexion / inscription
             </Link>
+          ) : (
+            <div className="ml-2 flex items-center gap-2">
+              <Link
+                href={SPACE_CTA[space].href}
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-300 to-indigo-300 px-4 py-2 text-sm font-black text-[#041B33] shadow-lg hover:brightness-110 transition"
+              >
+                {SPACE_CTA[space].label}
+              </Link>
+              <Link
+                href="/auth/signin?mode=eleve"
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-3 py-2 text-sm font-bold text-white/90 hover:bg-white/20 transition"
+              >
+                Connexion
+              </Link>
+            </div>
           )}
         </div>
 
@@ -457,6 +562,23 @@ export default function Header() {
               </Link>
             )}
 
+            {space !== "eleve" && (
+              <div className="grid grid-cols-1 gap-2">
+                {SPACE_NAV[space].map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-black text-white"
+                  >
+                    <span className="text-base">{item.icon}</span> {item.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+
+            {space === "eleve" && (
+            <>
             <Link
               href="/dictee-du-jour"
               onClick={() => setMobileOpen(false)}
@@ -503,6 +625,27 @@ export default function Header() {
             <MobileSection title="Espagnol" accent="text-red-300"    items={NAV_ESPAGNOL}  pathname={pathname} />
             <MobileSection title="IA"       accent="text-cyan-300"   items={NAV_IA}       pathname={pathname} />
             <MobileSection title="Économie" accent="text-amber-300"  items={NAV_ECONOMIE}  pathname={pathname} />
+            </>
+            )}
+
+            {/* Sélecteur « Vous êtes ? » — présent dans tous les espaces */}
+            <div className="grid grid-cols-2 gap-2 border-t border-white/10 pt-4">
+              {AUDIENCE_DOORS.map((d) => (
+                <Link
+                  key={d.space}
+                  href={d.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={[
+                    "flex items-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-bold transition",
+                    d.space === space
+                      ? "border-white/40 bg-white/15 text-white"
+                      : "border-white/10 bg-white/5 text-white/80",
+                  ].join(" ")}
+                >
+                  <span className="text-base">{d.emoji}</span> {d.label}
+                </Link>
+              ))}
+            </div>
 
           </div>
         </div>
