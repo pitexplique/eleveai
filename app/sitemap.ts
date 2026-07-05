@@ -15,6 +15,7 @@ const LASTMOD_CAHIERS = new Date("2026-06-29");
 const LASTMOD_DICTEE  = new Date("2026-07-01");
 const LASTMOD_974     = new Date("2026-07-02");
 const LASTMOD_JEUX    = new Date("2026-07-05");
+const LASTMOD_AUDIENCES = new Date("2026-07-05");
 const LASTMOD_LEGAL   = new Date("2026-02-18");
 
 const MATHS_CLASSES    = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe"];
@@ -123,8 +124,11 @@ const ROUTES: RouteConfig[] = [
   // jeuxCartesRoutes) → chaque nouvelle classe apparaît toute seule ici.
   { path: "/qui-suis-je-a-imprimer",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
 
-  // ── ESPACES ────────────────────────────────────────────────────────────────
-  { path: "/espace-ecoles",   priority: 0.95, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  // ── ESPACES / AUDIENCES ────────────────────────────────────────────────────
+  // Pages d'audience = portes du header et de l'accueil (destinations principales).
+  { path: "/parents",         priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
+  { path: "/enseignants",     priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
+  { path: "/espace-ecoles",   priority: 0.95, changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
   { path: "/espace-eleves",   priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/espace-parents",  priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/espace-profs",    priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
