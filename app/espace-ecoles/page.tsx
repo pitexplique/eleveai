@@ -4,80 +4,87 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "EleveAI pour les établissements — Collèges et lycées à La Réunion",
   description:
-    "Déployez EleveAI dans votre collège ou lycée : codes élèves, suivi de progression, Coach Maths IA, Brevet, Calcul rapide. Offre pilote sur devis.",
+    "Un coach IA multi-matières et un suivi élève par élève, déployé en quelques heures. Financé par l'établissement, gratuit pour les familles. RGPD maîtrisé, conçu par un enseignant.",
   alternates: { canonical: "https://eleveai.fr/espace-ecoles" },
   openGraph: {
     title: "EleveAI pour les établissements scolaires",
     description:
-      "Plusieurs portes pour apprendre les maths, suivi de progression élève par élève. Demandez votre accès pilote.",
+      "Coach IA multi-matières + suivi élève par élève. Financé par l'établissement, gratuit pour les familles. Offre pilote sur devis.",
     url: "https://eleveai.fr/espace-ecoles",
     siteName: "EleveAI",
     type: "website",
   },
 };
 
-const etapes = [
+// Le modèle économique = l'argument CEO n°1 pour un établissement.
+const modele = [
   {
-    num: "1",
-    title: "Vous nous contactez",
-    text: "Un échange de 20 minutes pour comprendre votre contexte, vos classes, vos objectifs.",
-    color: "bg-emerald-100 text-emerald-800",
+    emoji: "🏫",
+    titre: "Vous financez, à prix viable par élève",
+    texte:
+      "Un tarif par élève, négocié sur devis selon vos effectifs. Un seul interlocuteur, une seule facture — pas de gestion de paiements familles.",
   },
   {
-    num: "2",
-    title: "Nous créons les comptes",
-    text: "Un code établissement + un code par élève et par professeur. Aucune installation, aucune adresse email.",
-    color: "bg-sky-100 text-sky-800",
+    emoji: "🤝",
+    titre: "Gratuit pour toutes les familles",
+    texte:
+      "Aucun élève exclu pour raisons financières. C'est le cœur de notre mission : l'égalité d'accès, financée par l'institution, pas par les foyers.",
   },
   {
-    num: "3",
-    title: "Les élèves se connectent",
-    text: "En 10 secondes sur eleveai.fr. Tous les outils sont disponibles immédiatement.",
-    color: "bg-violet-100 text-violet-800",
-  },
-  {
-    num: "4",
-    title: "Vous suivez la progression",
-    text: "Dashboard professeur et principal : scores, notions travaillées, élèves actifs — en temps réel.",
-    color: "bg-amber-100 text-amber-800",
+    emoji: "🔒",
+    titre: "Données de mineurs maîtrisées",
+    texte:
+      "Pas d'adresse e-mail élève, prénom jamais relié à une classe identifiable, DPD consultée. Souveraineté et RGPD au cœur de la conception.",
   },
 ];
 
-const outils = [
-  { emoji: "🧠", title: "Coach Maths IA", text: "Entraînement notion par notion, du CM1 à la Terminale. Missions progressives, score, badges.", href: "/coach-ia/maths" },
-  { emoji: "🛤️", title: "Parcours de notions", text: "Bilan 🟢🟡🔴 des notions maîtrisées, à revoir ou fragiles. Idéal avant un contrôle.", href: "/parcours" },
-  { emoji: "📚", title: "Coach Brevet", text: "Sprint 30 jours pour le brevet des collèges. Automatismes, problèmes guidés, sujets express.", href: "/coach-brevet" },
-  { emoji: "⚡", title: "Calcul rapide", text: "7 questions en 5 minutes. Sessions chronométrées pour muscler les automatismes.", href: "/calcul-rapide" },
-  { emoji: "🇬🇧", title: "English Maths", text: "Vocabulaire mathématique bilingue. Utile pour les sections européennes et DNL.", href: "/english-maths" },
-  { emoji: "🎯", title: "Défis du jour", text: "Défis maths inspirés de La Réunion : Piton de la Fournaise, Grand Raid, océan.", href: "/defis-du-jour" },
+// La couverture — montre que ce n'est plus « maths only ».
+const couverture = [
+  { emoji: "🧠", titre: "6 coachs par matière", texte: "Maths, Français, Anglais, Espagnol, IA, Économie — du CP à la Terminale, notion par notion." },
+  { emoji: "🛤️", titre: "Parcours & diagnostics", texte: "Bilan par notion 🟢🟡🔴 : maîtrisé, à revoir, fragile. Idéal avant un contrôle ou une évaluation nationale." },
+  { emoji: "☀️", titre: "Rituels quotidiens", texte: "Dictée du jour, calcul rapide, défis — de courts rendez-vous pour installer l'habitude de travail." },
+  { emoji: "🎓", titre: "Prépa examens", texte: "Sprint Brevet, Bac spé maths, éval blanche Pix IA — l'entraînement ciblé jusqu'au jour J." },
+  { emoji: "📊", titre: "Suivi & remédiation", texte: "Progression élève par élève ; à l'échec, l'élève est rerouté vers le prérequis fragile, automatiquement." },
+  { emoji: "🔊", titre: "Accessibilité", texte: "Lecture vocale et compatibilité lecteurs d'écran (NVDA, VoiceOver) : un élève déficient visuel travaille en autonomie." },
 ];
 
 const dashboards = [
-  { role: "Élève", desc: "Voit ses résultats, son historique et ses notions fragiles.", color: "from-emerald-400 to-teal-500" },
-  { role: "Professeur", desc: "Voit tous les élèves de son établissement, leurs scores et leur activité récente.", color: "from-blue-400 to-indigo-500" },
-  { role: "Principal", desc: "Vue complète de l'établissement : tous les élèves, tous les modules, moyenne générale.", color: "from-indigo-500 to-violet-600" },
+  { role: "Élève", desc: "Ses résultats, son historique, ses notions fragiles et sa reco du jour.", color: "from-emerald-400 to-teal-500" },
+  { role: "Professeur", desc: "Tous ses élèves : scores, notions travaillées, activité récente, points à renforcer.", color: "from-blue-400 to-indigo-500" },
+  { role: "Principal", desc: "Vue complète de l'établissement : tous les élèves, tous les modules, engagement global.", color: "from-indigo-500 to-violet-600" },
+];
+
+const etapes = [
+  { num: "1", title: "Un échange de 20 min", text: "On comprend votre contexte, vos classes, vos objectifs — et on cadre le pilote.", color: "bg-emerald-100 text-emerald-800" },
+  { num: "2", title: "On crée les comptes", text: "Un code établissement, un code par élève et par professeur. Sans installation, sans e-mail.", color: "bg-sky-100 text-sky-800" },
+  { num: "3", title: "Les élèves se connectent", text: "En 10 secondes sur eleveai.fr. Tous les outils disponibles immédiatement.", color: "bg-violet-100 text-violet-800" },
+  { num: "4", title: "Vous pilotez", text: "Dashboards professeur et principal : progression et engagement, en temps réel.", color: "bg-amber-100 text-amber-800" },
 ];
 
 const faq = [
   {
+    q: "Combien ça coûte pour l'établissement ?",
+    a: "Un tarif par élève, sur devis selon vos effectifs, pensé pour rester viable. En contrepartie, c'est gratuit pour toutes les familles et il n'y a aucun paiement à gérer côté foyers.",
+  },
+  {
+    q: "Et pour les familles ?",
+    a: "Rien. Quand l'établissement finance, l'accès est entièrement gratuit pour les élèves et leurs parents. C'est le principe : l'égalité d'accès portée par l'institution.",
+  },
+  {
+    q: "Comment sont protégées les données des élèves ?",
+    a: "Connexion par code (pas d'e-mail élève), prénom jamais relié à une classe identifiable, droit d'accès et de suppression. La déléguée à la protection des données a été consultée ; la démarche est menée en lien avec le rectorat.",
+  },
+  {
     q: "Faut-il installer quelque chose ?",
-    a: "Non. EleveAI est une application web. Les élèves y accèdent depuis n'importe quel ordinateur, tablette ou téléphone, sans installation.",
-  },
-  {
-    q: "Les élèves ont-ils besoin d'une adresse email ?",
-    a: "Non. La connexion se fait uniquement avec un code établissement et un code élève. Aucune donnée personnelle sensible n'est collectée.",
-  },
-  {
-    q: "Combien ça coûte ?",
-    a: "EleveAI est en phase pilote. L'accès est négocié sur devis selon le nombre de classes et d'élèves. Contactez-nous pour une proposition.",
-  },
-  {
-    q: "On peut tester avant de s'engager ?",
-    a: "Oui. Nous proposons un accès pilote gratuit pour une classe pendant 4 semaines, avec accompagnement.",
+    a: "Non. EleveAI est une application web : n'importe quel ordinateur, tablette ou téléphone, sans installation ni configuration.",
   },
   {
     q: "EleveAI remplace-t-il le professeur ?",
-    a: "Non. EleveAI est un outil d'entraînement et de suivi. Le professeur reste la référence pédagogique — EleveAI l'aide à voir où en sont ses élèves.",
+    a: "Non. C'est un outil d'entraînement et de suivi. Le professeur reste la référence pédagogique — EleveAI l'aide à voir où en sont ses élèves et à cibler la remédiation.",
+  },
+  {
+    q: "On peut tester avant de s'engager ?",
+    a: "Oui : un pilote gratuit de 4 semaines pour une classe, avec accompagnement. Sans engagement.",
   },
 ];
 
@@ -120,7 +127,7 @@ export default function EspaceEcolesPage() {
         </svg>
       </div>
 
-      <div className="mx-auto max-w-5xl px-4 py-10 space-y-12">
+      <div className="mx-auto max-w-5xl px-4 py-10 space-y-14">
 
         {/* ── HERO ── */}
         <section className="rounded-[2rem] border border-white/80 bg-white/80 p-8 shadow-2xl backdrop-blur-xl text-center">
@@ -128,34 +135,53 @@ export default function EspaceEcolesPage() {
             🏫 EleveAI · Établissements scolaires
           </div>
           <h1 className="text-3xl font-black leading-tight text-slate-950 sm:text-5xl">
-            EleveAI dans votre collège ou lycée
+            Un coach IA multi-matières, un suivi élève par élève
           </h1>
           <p className="mt-4 mx-auto max-w-2xl text-base font-semibold leading-relaxed text-slate-600 sm:text-lg">
-            Plusieurs portes pour apprendre les maths, un suivi de progression élève par élève.
-            Déployé en quelques heures, sans installation, sans email.
+            Déployé dans votre collège ou lycée en quelques heures, sans installation.
+            <span className="font-black text-slate-800"> Financé par l'établissement, gratuit pour les familles.</span>
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link
-              href="/contact"
-              className="rounded-2xl bg-blue-600 px-8 py-4 text-base font-black text-white shadow-lg hover:bg-blue-500 transition"
+              href="/contact?sujet=pilote-etablissement"
+              className="rounded-2xl bg-blue-600 px-8 py-4 text-base font-black text-white shadow-lg hover:bg-blue-500 hover:scale-105 transition"
             >
-              📩 Demander un accès pilote gratuit
+              📩 Demander un pilote gratuit
             </Link>
             <Link
-              href="/auth/signin-eleve"
+              href="/contact?sujet=etablissement"
               className="rounded-2xl bg-white px-8 py-4 text-base font-black text-slate-800 ring-1 ring-slate-200 hover:bg-slate-50 transition"
             >
-              Voir la connexion élève
+              Parler à un responsable
             </Link>
+          </div>
+        </section>
+
+        {/* ── LE MODÈLE (argument CEO n°1) ── */}
+        <section>
+          <h2 className="mb-2 text-center text-2xl font-black text-slate-950 sm:text-3xl">
+            Le modèle : vous financez, tout le monde y accède
+          </h2>
+          <p className="mx-auto mb-6 max-w-2xl text-center text-sm font-semibold text-slate-500">
+            L'établissement paie une fois, à prix viable — et aucune famille n'est laissée de côté.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {modele.map((m) => (
+              <div key={m.titre} className="rounded-[1.5rem] border border-white/80 bg-white/80 p-6 shadow-md backdrop-blur">
+                <div className="text-3xl">{m.emoji}</div>
+                <h3 className="mt-3 font-black text-slate-950">{m.titre}</h3>
+                <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-600">{m.texte}</p>
+              </div>
+            ))}
           </div>
         </section>
 
         {/* ── CHIFFRES CLÉS ── */}
         <section className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {[
-            { val: "GS → Bac", label: "Niveaux couverts" },
-            { val: "8+", label: "Outils disponibles" },
-            { val: "5", label: "Modules avec suivi" },
+            { val: "6", label: "Matières coachées" },
+            { val: "CP → Bac", label: "Niveaux couverts" },
+            { val: "Temps réel", label: "Suivi de progression" },
             { val: "100 %", label: "Web, sans install" },
           ].map((s) => (
             <div key={s.label} className="rounded-[1.5rem] border border-white/80 bg-white/80 p-5 text-center shadow-md backdrop-blur">
@@ -165,7 +191,72 @@ export default function EspaceEcolesPage() {
           ))}
         </section>
 
-        {/* ── COMMENT ÇA MARCHE ── */}
+        {/* ── CE QUE ÇA COUVRE (multi-matières) ── */}
+        <section>
+          <h2 className="mb-6 text-center text-2xl font-black text-slate-950 sm:text-3xl">
+            Bien plus que les maths
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {couverture.map((o) => (
+              <div key={o.titre} className="rounded-[1.5rem] border border-white/70 bg-white/80 p-5 shadow-md backdrop-blur">
+                <div className="mb-2 text-3xl">{o.emoji}</div>
+                <h3 className="font-black text-slate-950">{o.titre}</h3>
+                <p className="mt-1 text-sm font-semibold leading-relaxed text-slate-500">{o.texte}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── PILOTAGE / DASHBOARDS ── */}
+        <section className="rounded-[2rem] border border-white/80 bg-white/80 p-8 shadow-xl backdrop-blur-xl">
+          <h2 className="mb-2 text-2xl font-black text-slate-950">
+            📊 Un tableau de bord pour chaque rôle
+          </h2>
+          <p className="mb-6 text-sm font-semibold text-slate-500">
+            Élève, professeur, principal — chacun voit ce dont il a besoin, en temps réel.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {dashboards.map((d) => (
+              <div key={d.role} className="overflow-hidden rounded-[1.5rem] border border-white/70 shadow-md">
+                <div className={`bg-gradient-to-br ${d.color} px-5 py-4`}>
+                  <p className="font-black text-white text-lg">{d.role}</p>
+                </div>
+                <div className="bg-white p-4">
+                  <p className="text-sm font-semibold text-slate-600">{d.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── RGPD & SOUVERAINETÉ ── */}
+        <section className="rounded-[2rem] border border-sky-200 bg-white/80 p-8 shadow-xl backdrop-blur">
+          <div className="flex flex-wrap items-start gap-4">
+            <div className="text-4xl">🔒</div>
+            <div className="flex-1">
+              <h2 className="text-2xl font-black text-slate-950">
+                Données de mineurs : notre priorité
+              </h2>
+              <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+                {[
+                  "Connexion par code — aucune adresse e-mail élève",
+                  "Prénom jamais relié à une classe identifiable",
+                  "Droit d'accès et de suppression sur simple demande",
+                  "DPD consultée · démarche menée avec le rectorat",
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-2 text-sm font-semibold text-slate-600">
+                    <span className="mt-0.5 text-emerald-600">✓</span> {t}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/politique-confidentialite" className="mt-4 inline-flex text-sm font-black text-sky-700 underline">
+                Lire la politique de confidentialité →
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── DÉPLOIEMENT ── */}
         <section>
           <h2 className="mb-6 text-2xl font-black text-slate-950 text-center">
             Déployé en 4 étapes
@@ -183,51 +274,6 @@ export default function EspaceEcolesPage() {
           </div>
         </section>
 
-        {/* ── DASHBOARDS ── */}
-        <section className="rounded-[2rem] border border-white/80 bg-white/80 p-8 shadow-xl backdrop-blur-xl">
-          <h2 className="mb-2 text-2xl font-black text-slate-950">
-            📊 Un tableau de bord pour chaque rôle
-          </h2>
-          <p className="mb-6 text-sm font-semibold text-slate-500">
-            Élève, professeur, principal — chacun voit ce dont il a besoin.
-          </p>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {dashboards.map((d) => (
-              <div key={d.role} className="overflow-hidden rounded-[1.5rem] border border-white/70 shadow-md">
-                <div className={`bg-gradient-to-br ${d.color} px-5 py-4`}>
-                  <p className="font-black text-white text-lg">{d.role}</p>
-                </div>
-                <div className="bg-white p-4">
-                  <p className="text-sm font-semibold text-slate-600">{d.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── OUTILS ── */}
-        <section>
-          <h2 className="mb-6 text-2xl font-black text-slate-950 text-center">
-            Les outils disponibles
-          </h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {outils.map((o) => (
-              <Link
-                key={o.href}
-                href={o.href}
-                className="group rounded-[1.5rem] border border-white/70 bg-white/80 p-5 shadow-md backdrop-blur transition hover:-translate-y-1 hover:shadow-xl"
-              >
-                <div className="mb-2 text-3xl">{o.emoji}</div>
-                <h3 className="font-black text-slate-950">{o.title}</h3>
-                <p className="mt-1 text-sm font-semibold leading-relaxed text-slate-500">{o.text}</p>
-                <p className="mt-3 text-xs font-black text-blue-600 transition group-hover:translate-x-1">
-                  Découvrir →
-                </p>
-              </Link>
-            ))}
-          </div>
-        </section>
-
         {/* ── ANCRÉ RÉUNION ── */}
         <section className="rounded-[2rem] border border-amber-200 bg-white/80 p-8 shadow-xl backdrop-blur text-center">
           <p className="text-4xl">🏝️</p>
@@ -235,10 +281,10 @@ export default function EspaceEcolesPage() {
             Conçu à La Réunion, pour La Réunion
           </h2>
           <p className="mt-3 font-semibold text-slate-600 max-w-2xl mx-auto">
-            EleveAI est créé par un enseignant de maths en activité à La Réunion.
-            Les contenus suivent les programmes officiels français. Les défis s&apos;inspirent
-            du Piton de la Fournaise, du Grand Raid, de l&apos;océan Indien.
-            Nous connaissons les contraintes du terrain réunionnais.
+            EleveAI est créé et utilisé au quotidien par un enseignant de maths en
+            activité à La Réunion. Les contenus suivent les programmes officiels ;
+            les défis s&apos;inspirent du Piton de la Fournaise, du Grand Raid, de
+            l&apos;océan Indien. Un outil du terrain, qui connaît vos contraintes.
           </p>
         </section>
 
@@ -270,20 +316,20 @@ export default function EspaceEcolesPage() {
             Prêt à tester EleveAI dans votre établissement ?
           </h2>
           <p className="mt-3 font-semibold text-blue-100 max-w-xl mx-auto">
-            Accès pilote gratuit 4 semaines · Accompagnement inclus · Sans engagement
+            Pilote gratuit 4 semaines · Accompagnement inclus · Sans engagement
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-4">
             <Link
-              href="/contact"
-              className="rounded-2xl bg-white px-8 py-4 text-base font-black text-blue-700 shadow-lg hover:bg-blue-50 transition"
+              href="/contact?sujet=pilote-etablissement"
+              className="rounded-2xl bg-white px-8 py-4 text-base font-black text-blue-700 shadow-lg hover:bg-blue-50 hover:scale-105 transition"
             >
               📩 Demander le pilote gratuit
             </Link>
             <Link
-              href="/pourquoi-eleveai"
+              href="/enseignants"
               className="rounded-2xl border border-white/40 bg-white/10 px-8 py-4 text-base font-black text-white hover:bg-white/20 transition"
             >
-              En savoir plus
+              Voir l'espace enseignant
             </Link>
           </div>
         </section>
