@@ -182,6 +182,26 @@ export default function CahierVacances({
         </div>
       </div>
 
+      {/* CTA « aimant » en HAUT (écran) : capte le parent venu de Google AVANT
+         qu'il ne reparte (le CTA existant est en bas, jamais atteint par ceux qui
+         rebondissent). Mène au coach au niveau du cahier. ?from=cahier = tracking. */}
+      <div className="screen-only mx-auto max-w-4xl px-5 pt-5 sm:px-8">
+        <div className="flex flex-col items-center gap-3 rounded-2xl border border-teal-300 bg-gradient-to-r from-teal-50 to-emerald-50 p-4 text-center shadow-sm sm:flex-row sm:justify-between sm:text-left">
+          <p className="text-sm font-black text-slate-900 sm:text-base">
+            🦎 Ton enfant aime ce cahier&nbsp;? Son{" "}
+            <span className="text-teal-700">coach IA</span> continue tout l&apos;été —{" "}
+            <span className="text-teal-700">gratuit</span>, à son rythme et sans jugement.
+          </p>
+          <Link
+            href={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier`}
+            className="inline-flex shrink-0 items-center gap-2 rounded-full bg-teal-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-500/30 transition hover:bg-teal-400 hover:scale-105"
+          >
+            <Sparkles className="h-4 w-4" />
+            Commencer gratuitement →
+          </Link>
+        </div>
+      </div>
+
       <article className="mx-auto max-w-4xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0">
         {/* ================= PAGE DE GARDE ================= */}
         <section className="cahier-page garde-page overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-300/40 print:rounded-none print:border-0 print:shadow-none">
