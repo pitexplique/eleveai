@@ -359,7 +359,7 @@ export default function Header() {
                 : "bg-fuchsia-300/15 text-fuchsia-200 hover:bg-fuchsia-300/25 hover:text-fuchsia-100"
             }`}
           >
-            🃏 Jeu de 32 cartes
+            🃏 Jeux de cartes
           </Link>
 
           {/* Explorer — le catalogue de toutes les actions possibles */}
@@ -486,7 +486,7 @@ export default function Header() {
               onClick={() => setMobileOpen(false)}
               className="flex items-center justify-center gap-2 rounded-2xl bg-fuchsia-300/15 border border-fuchsia-300/30 px-4 py-3 text-sm font-black text-fuchsia-200"
             >
-              🃏 Jeu de 32 cartes · Qui suis-je ? à imprimer
+              🃏 Jeux de cartes · Qui suis-je ? à imprimer
             </Link>
 
             <Link
