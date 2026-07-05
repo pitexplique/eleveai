@@ -29,7 +29,7 @@ const AUDIENCES: {
 }[] = [
   // Toutes les pastilles vont DIRECT (plus de double-pas par l'aperçu) : les
   // adultes sur leur page dédiée, l'Élève sur son contenu (l'accueil est son espace).
-  { emoji: "🎓", label: "Élève", sub: "Coach, dictée, défis", href: "#espace-eleve" },
+  { emoji: "🎓", label: "Élève", sub: "Coach, dictée, défis", href: "/explorer" },
   { emoji: "👪", label: "Parent", sub: "Une IA encadrée", href: "/parents" },
   { emoji: "🍎", label: "Enseignant", sub: "Le tableau de bord classe", href: "/enseignants" },
   { emoji: "🏫", label: "Établissement", sub: "Déploiement & suivi", href: "/espace-ecoles" },

@@ -278,7 +278,7 @@ const SPACE_CTA: Record<Audience, { label: string; href: string }> = {
 
 // Les 4 portes — sélecteur « Vous êtes ? » présent dans tous les headers.
 const AUDIENCE_DOORS: { space: Audience; emoji: string; label: string; href: string }[] = [
-  { space: "eleve", emoji: "🎓", label: "Élève", href: "/accueil" },
+  { space: "eleve", emoji: "🎓", label: "Élève", href: "/explorer" },
   { space: "parent", emoji: "👪", label: "Parent", href: "/parents" },
   { space: "enseignant", emoji: "🍎", label: "Enseignant", href: "/enseignants" },
   { space: "etablissement", emoji: "🏫", label: "Établissement", href: "/espace-ecoles" },
