@@ -111,6 +111,65 @@ export default function ParentsPage() {
           </div>
         </section>
 
+        {/* ── MAQUETTE « screenshot » : l'IA encadrée en action ── */}
+        <section>
+          <div className="text-center">
+            <h2 className="text-2xl font-black sm:text-3xl">
+              L&apos;IA explique. Votre enfant réfléchit.
+            </h2>
+            <p className="mx-auto mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-slate-600">
+              Voilà à quoi ressemble une aide EleveAI : jamais la réponse toute
+              faite — un coup de pouce, puis votre enfant garde le contrôle.
+            </p>
+          </div>
+
+          <div className="mx-auto mt-8 max-w-2xl overflow-hidden rounded-3xl border border-slate-800 bg-[#041B33] p-5 text-white shadow-2xl sm:p-7">
+            <div className="mb-4 flex items-center gap-1.5">
+              <span className="h-3 w-3 rounded-full bg-red-400/70" />
+              <span className="h-3 w-3 rounded-full bg-amber-400/70" />
+              <span className="h-3 w-3 rounded-full bg-emerald-400/70" />
+              <span className="ml-3 text-xs font-bold text-white/40">Coach IA · Maths</span>
+            </div>
+
+            <div className="rounded-2xl bg-white/5 p-3 text-sm font-semibold text-white/85">
+              Combien font 3/4 + 1/8 ?
+            </div>
+
+            <div className="mt-3 flex gap-2">
+              <span className="text-lg" aria-hidden="true">🤖</span>
+              <div className="rounded-2xl border border-cyan-300/20 bg-cyan-400/10 p-3 text-sm font-semibold text-white/80">
+                Astuce : mets d&apos;abord les deux fractions sur le même
+                dénominateur. Lequel choisir&nbsp;? À toi de trouver la suite.
+              </div>
+            </div>
+
+            <div className="mt-3 rounded-2xl border border-emerald-300/30 bg-emerald-400/[0.08] p-4">
+              <p className="text-xs font-black uppercase tracking-wide text-emerald-200">
+                ✍️ À toi de juger cette aide
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {["✅ correct", "⚠️ à revoir", "❌ faux"].map((t) => (
+                  <span key={t} className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-white/80">
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <p className="mt-2 text-xs font-semibold text-white/60">
+                Puis «&nbsp;ce que je garde, ce que je change&nbsp;». On apprend à
+                réfléchir, pas à copier.
+              </p>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-4 flex max-w-2xl flex-wrap justify-center gap-2">
+            {["🔒 Données protégées", "🚫 Zéro publicité", "🌱 On encourage, on ne juge pas"].map((t) => (
+              <span key={t} className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-black text-slate-600 shadow-sm">
+                {t}
+              </span>
+            ))}
+          </div>
+        </section>
+
         {/* ── LE PRIX = LE FORK (décision CEO : établissement > famille > jamais l'élève) ── */}
         <section>
           <h2 className="text-center text-2xl font-black sm:text-3xl">
