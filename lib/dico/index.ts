@@ -16,6 +16,11 @@ import { motsFrancais4e } from "./francais/4e";
 import { motsAnglais4e } from "./anglais/4e";
 import { motsSciences4e } from "./sciences/4e";
 import { motsHistGeo4e } from "./histoire-geo/4e";
+import { motsMaths3e } from "./maths/3e";
+import { motsFrancais3e } from "./francais/3e";
+import { motsAnglais3e } from "./anglais/3e";
+import { motsSciences3e } from "./sciences/3e";
+import { motsHistGeo3e } from "./histoire-geo/3e";
 import { motsMathsCM2 } from "./maths/cm2";
 import { motsFrancaisCM2 } from "./francais/cm2";
 import { motsSciencesCM2 } from "./sciences/cm2";
@@ -143,6 +148,12 @@ const DICOS_CARTES: Record<string, Dico> = {
   "anglais/4e": { matiere: "anglais", matiereLabel: "Anglais", niveau: "4e", titre: "Dico Anglais 4e", sousTitre: "L'anglais en 4e", mots: motsAnglais4e },
   "sciences/4e": { matiere: "sciences", matiereLabel: "Sciences", niveau: "4e", titre: "Dico Sciences 4e", sousTitre: "SVT et physique-chimie", mots: motsSciences4e },
   "histoire-geo/4e": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "4e", titre: "Dico Histoire-Géo 4e", sousTitre: "XVIIIᵉ-XIXᵉ siècles et le monde", mots: motsHistGeo4e },
+  // ── 3e (collège) — notions NEUVES, distinctes de la 4e ────────
+  "maths/3e": { matiere: "maths", matiereLabel: "Maths", niveau: "3e", titre: "Dico Maths 3e", sousTitre: "Les notions neuves de 3e", mots: motsMaths3e },
+  "francais/3e": { matiere: "francais", matiereLabel: "Français", niveau: "3e", titre: "Dico Français 3e", sousTitre: "Les notions neuves de 3e", mots: motsFrancais3e },
+  "anglais/3e": { matiere: "anglais", matiereLabel: "Anglais", niveau: "3e", titre: "Dico Anglais 3e", sousTitre: "L'anglais en 3e (brevet)", mots: motsAnglais3e },
+  "sciences/3e": { matiere: "sciences", matiereLabel: "Sciences", niveau: "3e", titre: "Dico Sciences 3e", sousTitre: "Génétique, gravitation, chimie", mots: motsSciences3e },
+  "histoire-geo/3e": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "3e", titre: "Dico Histoire-Géo 3e", sousTitre: "Le XXᵉ siècle et le monde", mots: motsHistGeo3e },
   "maths/cm2": {
     matiere: "maths",
     matiereLabel: "Maths",
