@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
 import { problemesFixed } from "@/lib/defis-du-jour/problemes.fixed";
 import { problemeDuJourWeekly } from "@/lib/defis-du-jour/weekly";
-import BulletinPreviewHome from "@/components/bulletin/BulletinPreviewHome";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
 import PresentationAudio from "./PresentationAudio";
@@ -840,53 +839,6 @@ export default function AccueilPage({
         </div>
       </section>
 
-      {/* ── CHEMINS CONSEILLÉS — suggestions personnalisées ───────────────────── */}
-      <section className="bg-[#041B33] px-4 pb-7 pt-5 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-5 text-center">
-            <h2 className="text-2xl font-black leading-tight text-white sm:text-3xl">
-              {prenomAffiche
-                ? `Que veux-tu travailler aujourd'hui, ${prenomAffiche} ?`
-                : "Que veux-tu travailler aujourd'hui ?"}
-            </h2>
-            {classeLabel ? (
-              <p className="mt-1 text-xs font-bold text-white/50">
-                Chemins conseillés pour la {classeLabel}
-              </p>
-            ) : (
-              <p className="mt-1 text-xs font-bold text-white/50">
-                Connecte-toi pour des suggestions adaptées à ta classe
-              </p>
-            )}
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {suggestions.map((s, i) => (
-              <Link
-                key={s.href}
-                href={s.href}
-                className={[
-                  "group relative flex min-h-[132px] flex-col justify-between overflow-hidden rounded-2xl p-4 text-left transition-transform hover:-translate-y-1 hover:scale-[1.03]",
-                  // Premier chemin (matière principale) mis en avant par le halo néon.
-                  i === 0 ? "animate-neon-pulse" : "",
-                ].join(" ")}
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${s.tone} opacity-90 transition-opacity group-hover:opacity-100`} />
-                <span className="relative z-10 text-2xl">{s.icon}</span>
-                <div className="relative z-10">
-                  <p className="text-base font-black leading-tight text-white">
-                    {s.title}
-                  </p>
-                  <p className="mt-1 text-[11px] font-semibold leading-tight text-white/80">
-                    {s.desc}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── SUBJECT CARDS cliquables ────────────────────────────────────────── */}
       <section className="bg-[#061f39] px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
@@ -969,36 +921,6 @@ export default function AccueilPage({
         </div>
       </section>
 
-      {/* ── FEATURES BAR ─────────────────────────────────────────────────────── */}
-      <section className="bg-[#071f3a] border-y border-white/10 px-4 py-7 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-4">
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-200/70">
-              Diagnostic par matière
-            </p>
-            <h2 className="mt-1 text-xl font-black text-white">
-              Parcours d&apos;évaluation
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {FEATURES.map((f) => (
-              <Link
-                key={f.label}
-                href={f.href}
-                className="group flex min-h-[104px] flex-col items-center justify-center gap-1.5 rounded-2xl border border-white/10 bg-white/5 px-3 py-4 text-center transition-all hover:bg-white/10 hover:border-white/25 hover:-translate-y-1"
-              >
-                <span className="text-2xl group-hover:scale-110 transition-transform">{f.icon}</span>
-                <p className="text-xs font-black text-white">{f.label}</p>
-                <p className="text-[10px] text-white/50 leading-tight hidden sm:block">{f.desc}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── APERÇU BULLETIN (visiteurs non connectés) ───────────────────────── */}
-      <BulletinPreviewHome />
-
       {/* ── NOUVEAUTÉS ───────────────────────────────────────────────────────── */}
       <section className="px-4 py-10 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
@@ -1053,111 +975,6 @@ export default function AccueilPage({
       {/* ── ÉLÈVES À L'HONNEUR ───────────────────────────────────────────────── */}
       <ElevesALHonneur eleves={honneur} />
 
-      {/* ── CITATION ─────────────────────────────────────────────────────────── */}
-      <section className="px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <blockquote className="border-y border-amber-300/30 py-6">
-            <p className="text-lg font-semibold italic leading-8 text-white/90 sm:text-xl sm:leading-9">
-              «&nbsp;Le plus beau qu&apos;il nous soit donné de vivre, c&apos;est
-              le mystère&nbsp;: il est la source de tout art et de toute science
-              véritables.&nbsp;»
-            </p>
-            <footer className="mt-3 text-sm font-black uppercase tracking-[0.18em] text-amber-300">
-              — Albert Einstein
-            </footer>
-          </blockquote>
-        </div>
-      </section>
-
-      {/* ── DERNIERS AVIS ────────────────────────────────────────────────────── */}
-      <section className="px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-            <h2 className="text-lg font-black text-white">💬 Derniers avis</h2>
-            <Link
-              href="/votre-avis"
-              className="text-xs font-black text-emerald-300 transition hover:translate-x-1"
-            >
-              Donner mon avis →
-            </Link>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-3">
-            {derniersAvis.map((avis, i) => (
-              <figure
-                key={i}
-                className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-5"
-              >
-                <div className="text-sm tracking-widest" aria-label={`Note ${avis.note} sur 5`}>
-                  <span className="text-amber-300">{"★".repeat(avis.note)}</span>
-                  <span className="text-white/20">{"★".repeat(5 - avis.note)}</span>
-                </div>
-                <blockquote className="mt-2 grow text-sm font-medium leading-relaxed text-white/80">
-                  « {avis.quote} »
-                </blockquote>
-                <figcaption className="mt-3 text-xs font-black text-white">
-                  {avis.prenom}{" "}
-                  <span className="font-bold text-white/50">· {avis.detail}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CONFIANCE ────────────────────────────────────────────────────────── */}
-      <section className="px-4 pb-10 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="text-lg font-black text-white mb-4">🤝 Une plateforme de confiance</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <Link
-              href="/qui-sommes-nous"
-              className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition-all hover:-translate-y-1 hover:border-emerald-400/40 hover:bg-white/10"
-            >
-              <span className="text-2xl">🧑‍🏫</span>
-              <p className="mt-2 text-sm font-black text-white">Conçu par un enseignant</p>
-              <p className="mt-1 text-xs leading-relaxed text-white/60">
-                EleveAI est créé par un enseignant en activité à La Réunion, en lien avec les programmes officiels.
-              </p>
-              <p className="mt-2 text-xs font-black text-emerald-300 transition group-hover:translate-x-1">Notre démarche →</p>
-            </Link>
-            <Link
-              href="/remerciements"
-              className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition-all hover:-translate-y-1 hover:border-yellow-400/40 hover:bg-white/10"
-            >
-              <span className="text-2xl">🙏</span>
-              <p className="mt-2 text-sm font-black text-white">Amélioré avec les élèves</p>
-              <p className="mt-1 text-xs leading-relaxed text-white/60">
-                Des élèves testeurs donnent leur avis, signalent les problèmes et font progresser la plateforme.
-              </p>
-              <p className="mt-2 text-xs font-black text-yellow-300 transition group-hover:translate-x-1">Nos élèves testeurs →</p>
-            </Link>
-            <Link
-              href="/politique-confidentialite"
-              className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition-all hover:-translate-y-1 hover:border-sky-400/40 hover:bg-white/10"
-            >
-              <span className="text-2xl">🔒</span>
-              <p className="mt-2 text-sm font-black text-white">Données protégées</p>
-              <p className="mt-1 text-xs leading-relaxed text-white/60">
-                Droit d&apos;accès et de suppression sur simple demande. Aucun nom de famille d&apos;élève n&apos;est publié.
-              </p>
-              <p className="mt-2 text-xs font-black text-sky-300 transition group-hover:translate-x-1">Notre politique →</p>
-            </Link>
-            <Link
-              href="/coach-ia/maths"
-              className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition-all hover:-translate-y-1 hover:border-fuchsia-400/40 hover:bg-white/10"
-            >
-              <span className="text-2xl">🔊</span>
-              <p className="mt-2 text-sm font-black text-white">Pensé pour les élèves déficients visuels</p>
-              <p className="mt-1 text-xs leading-relaxed text-white/60">
-                Lecture des questions à voix haute et compatibilité avec les lecteurs d&apos;écran (NVDA, VoiceOver) : un élève déficient visuel fait l&apos;exercice en autonomie.
-              </p>
-              <p className="mt-2 text-xs font-black text-fuchsia-300 transition group-hover:translate-x-1">Essayer la lecture →</p>
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* ── REMERCIEMENTS ────────────────────────────────────────────────────── */}
       <section className="px-4 pb-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl overflow-hidden rounded-2xl border border-yellow-300/25 bg-gradient-to-br from-white/[0.07] to-yellow-300/[0.04] p-6 sm:p-8">
@@ -1193,32 +1010,6 @@ export default function AccueilPage({
                 <span className="font-black text-yellow-300">{e.prenom}</span>
               </span>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── TARIFS ───────────────────────────────────────────────────────────── */}
-      <section className="px-4 pb-12 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 p-6 sm:flex-row">
-          <div>
-            <p className="text-base font-black text-white">💶 Des tarifs simples et justes</p>
-            <p className="mt-1 text-sm leading-relaxed text-white/70">
-              Gratuit pour les élèves dans le cadre scolaire · 4,99 €/mois pour une famille (prix de lancement, bloqué à vie) · Classes et établissements : sur devis.
-            </p>
-          </div>
-          <div className="flex shrink-0 flex-wrap justify-center gap-3">
-            <Link
-              href="/tarifs"
-              className="rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white transition hover:bg-emerald-400 hover:scale-105"
-            >
-              Voir les tarifs
-            </Link>
-            <Link
-              href="/contact"
-              className="rounded-full border border-emerald-400/50 bg-white/5 px-5 py-2.5 text-sm font-black text-emerald-200 transition hover:bg-white/10 hover:scale-105"
-            >
-              Pilote gratuit · 4 semaines
-            </Link>
           </div>
         </div>
       </section>
