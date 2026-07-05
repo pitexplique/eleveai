@@ -16,6 +16,7 @@ export type CarteQ = {
   answer: string; // le mot à retrouver
   rare: boolean;
   ref: string; // ex "6E·07"
+  image?: string; // indice-emoji pour les tout-petits (GS-CP)
 };
 
 /* Habillage par matière : couleur vive + gros emoji (classes Tailwind en entier). */
@@ -29,6 +30,10 @@ const MAT: Record<string, MatMeta> = {
   geographie: { emoji: "🗺️", ring: "border-teal-300", text: "text-teal-700", soft: "bg-teal-50" },
   "histoire-geo": { emoji: "🗺️", ring: "border-amber-300", text: "text-amber-800", soft: "bg-amber-50" },
   sciences: { emoji: "🔬", ring: "border-emerald-300", text: "text-emerald-700", soft: "bg-emerald-50" },
+  // Tout-petits (GS-CP) : thèmes en images
+  animaux: { emoji: "🐾", ring: "border-amber-300", text: "text-amber-800", soft: "bg-amber-50" },
+  couleurs: { emoji: "🎨", ring: "border-fuchsia-300", text: "text-fuchsia-700", soft: "bg-fuchsia-50" },
+  nombres: { emoji: "🔢", ring: "border-sky-300", text: "text-sky-700", soft: "bg-sky-50" },
 };
 const MAT_DEFAUT: MatMeta = { emoji: "⭐", ring: "border-slate-300", text: "text-slate-700", soft: "bg-slate-50" };
 
@@ -91,9 +96,15 @@ function Carte({ carte }: { carte: CarteQ }) {
 
       <div className="relative my-2 flex flex-1 flex-col items-center justify-center text-center">
         <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">Qui suis-je&nbsp;?</p>
-        <p className="mt-1.5 text-[14px] font-bold leading-snug text-slate-800 print:text-[12px]">
-          {carte.question}
-        </p>
+        {carte.image ? (
+          <span className="mt-1 text-[68px] leading-none" aria-hidden>
+            {carte.image}
+          </span>
+        ) : (
+          <p className="mt-1.5 text-[14px] font-bold leading-snug text-slate-800 print:text-[12px]">
+            {carte.question}
+          </p>
+        )}
       </div>
 
       <div className="relative mt-1 border-t border-dashed border-slate-200 pt-1">

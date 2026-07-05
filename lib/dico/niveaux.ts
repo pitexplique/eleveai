@@ -15,7 +15,7 @@ export type NiveauDico = {
 
 export const NIVEAUX: NiveauDico[] = [
   // 🧒 Primaire
-  { slug: "cp", label: "CP", code: "CP", cycle: "primaire" },
+  { slug: "cp", label: "GS-CP", code: "CP", cycle: "primaire" },
   { slug: "ce1", label: "CE1", code: "CE1", cycle: "primaire" },
   { slug: "ce2", label: "CE2", code: "CE2", cycle: "primaire" },
   { slug: "cm1", label: "CM1", code: "CM1", cycle: "primaire" },

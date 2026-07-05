@@ -20,6 +20,8 @@ export type FamilleDico =
   // Histoire-Géographie
   | "histoire"
   | "geographie"
+  // Tout-petits (GS-CP) : vocabulaire en images
+  | "images-mots"
   // Partagé
   | "consignes";
 
@@ -38,6 +40,9 @@ export type MotDico = {
   mot: string;
   famille: FamilleDico;
   definition: string; // courte, niveau élève
+  // Indice-image (emoji) pour les tout-petits (GS-CP) qui ne lisent pas encore :
+  // la carte montre la grande image, le mot reste écrit au dos.
+  image?: string;
   exemple?: string;
   // Le mini-jeu interactif (page /dico) est OPTIONNEL : une entrée « carte »
   // n'a besoin que de mot + définition ; on enrichit le `defi` progressivement.

@@ -9,6 +9,9 @@ import { motsMathsCM1 } from "./maths/cm1";
 import { motsFrancaisCM1 } from "./francais/cm1";
 import { motsSciencesCM1 } from "./sciences/cm1";
 import { motsHistGeoCM1 } from "./histoire-geo/cm1";
+import { motsAnimauxCP } from "./animaux/cp";
+import { motsCouleursCP } from "./couleurs/cp";
+import { motsNombresCP } from "./nombres/cp";
 
 export type { Dico, MotDico, MotDicoClasse, FamilleDico, GesteDico, DefiDico } from "./types";
 export { NIVEAUX, CYCLES, getNiveau } from "./niveaux";
@@ -33,6 +36,8 @@ export const FAMILLES_DICO: Record<FamilleDico, { label: string; emoji: string }
   // Histoire-Géographie
   histoire: { label: "Histoire", emoji: "📜" },
   geographie: { label: "Géographie", emoji: "🗺️" },
+  // Tout-petits (GS-CP)
+  "images-mots": { label: "Images & mots", emoji: "🖼️" },
   // Partagé
   consignes: { label: "Mots-consignes", emoji: "🧭" },
 };
@@ -55,6 +60,8 @@ export const ORDRE_FAMILLES: FamilleDico[] = [
   // Histoire-Géographie
   "histoire",
   "geographie",
+  // Tout-petits (GS-CP)
+  "images-mots",
   // Partagé
   "consignes",
 ];
@@ -148,6 +155,31 @@ const DICOS: Record<string, Dico> = {
     titre: "Dico Histoire-Géo CM1",
     sousTitre: "Les fondations du CM1",
     mots: motsHistGeoCM1,
+  },
+  // 🐾 Mes premières cartes (GS-CP) — en images (thèmes = matières)
+  "animaux/cp": {
+    matiere: "animaux",
+    matiereLabel: "Animaux",
+    niveau: "cp",
+    titre: "Dico Animaux GS-CP",
+    sousTitre: "Mes premières cartes en images",
+    mots: motsAnimauxCP,
+  },
+  "couleurs/cp": {
+    matiere: "couleurs",
+    matiereLabel: "Couleurs",
+    niveau: "cp",
+    titre: "Dico Couleurs GS-CP",
+    sousTitre: "Mes premières cartes en images",
+    mots: motsCouleursCP,
+  },
+  "nombres/cp": {
+    matiere: "nombres",
+    matiereLabel: "Nombres",
+    niveau: "cp",
+    titre: "Dico Nombres GS-CP",
+    sousTitre: "Mes premières cartes en images",
+    mots: motsNombresCP,
   },
 };
 

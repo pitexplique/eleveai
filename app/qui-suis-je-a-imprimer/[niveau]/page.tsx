@@ -30,6 +30,7 @@ function construireCartes(niveau: string, code: string): CarteQ[] {
     answer: m.mot,
     rare: estRare(m.mot),
     ref: `${code}·${String(i + 1).padStart(2, "0")}`,
+    ...(m.image ? { image: m.image } : {}),
   }));
 }
 
