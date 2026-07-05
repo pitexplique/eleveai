@@ -637,21 +637,6 @@ export default function AccueilPage({
         </Link>
       </section>
 
-      {/* ── MESSAGE DE VACANCES — mot de remerciement du professeur ──────────── */}
-      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-amber-300/30 bg-gradient-to-br from-amber-300/[0.10] via-emerald-300/[0.06] to-white/[0.04] p-6 text-center sm:p-8">
-          <p className="text-3xl sm:text-4xl" aria-hidden="true">🌴☀️</p>
-          <h2 className="mt-2 text-2xl font-black leading-tight text-white sm:text-3xl">
-            {prenomAffiche
-              ? `Bonnes vacances, ${prenomAffiche} !`
-              : "Bonnes vacances à toutes et à tous !"}
-          </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-sm font-black text-emerald-200">
-            Reposez-vous bien et revenez en pleine forme. À très vite ! ☀️
-          </p>
-        </div>
-      </section>
-
       {/* ── MOT AUX ÉLÈVES ET AUX PARENTS ────────────────────────────────────── */}
       <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-sky-300/30 bg-gradient-to-br from-sky-300/[0.10] via-cyan-300/[0.06] to-white/[0.04] p-6 text-center sm:p-8">

@@ -38,11 +38,12 @@ const DEMI_VIE_JOURS = 30;
 const SEUIL_FAIBLE = 55; // en dessous → à renforcer
 const SEUIL_FORT = 80; // au dessus → point fort
 
-// P0 « Ré-engager » : seuil d'absence (jours). Décision fondateur (03/07/2026) =
-// 7 j → s'aligne sur la sortie du statut « actif » (≤7 j) : un élève vu il y a
-// quelques jours reste en Progresser/Renforcer, on ne « ré-engage » qu'après une
-// vraie coupure d'une semaine (adapté aux vacances). Réglable ici, à la main du prof.
-const SEUIL_ABSENCE_JOURS = 7;
+// P0 « Ré-engager » : seuil d'absence (jours). Monté à 14 j (fondateur, 05/07/2026)
+// car 7 j faisait basculer presque tous les élèves sur « reprendre le rythme »
+// pendant les vacances (un test live sur Marina l'a confirmé) : on laisse deux
+// semaines avant de « ré-engager », le temps reste en Progresser/Renforcer.
+// Réglable ici, à la main du prof.
+const SEUIL_ABSENCE_JOURS = 14;
 
 // Série « vivante » à partir de ce nombre de jours d'affilée (sinon pas d'enjeu).
 const SERIE_MINI = 2;
