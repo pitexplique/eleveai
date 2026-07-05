@@ -258,6 +258,18 @@ export default function CoachIA() {
               ))}
             </div>
 
+            {/* Mot d'accueil chaleureux (arrivée depuis un cahier / une carte). */}
+            <div className="mb-5 rounded-2xl border border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50 p-4">
+              <p className="flex items-center gap-2 text-base font-black text-slate-900">
+                🦎 Bienvenue — ici, tu es chez toi&nbsp;!
+              </p>
+              <p className="mt-1 text-sm font-semibold leading-6 text-slate-600">
+                Choisis une matière puis une compétence, et entraîne-toi à ton
+                rythme, <strong>sans jugement</strong>. C&apos;est gratuit — et chaque
+                erreur t&apos;aide à progresser. 🌱
+              </p>
+            </div>
+
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
