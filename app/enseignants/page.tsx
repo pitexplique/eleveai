@@ -109,6 +109,112 @@ export default function EnseignantsPage() {
           </div>
         </section>
 
+        {/* ── LE BULLETIN + VOTRE AVIS (maquette « screenshot ») ── */}
+        <section>
+          <div className="text-center">
+            <h2 className="text-2xl font-black sm:text-3xl">
+              Vous conseillez. EleveAI corrige et suit.
+            </h2>
+            <p className="mx-auto mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-slate-600">
+              Chaque élève a un bulletin vivant, mis à jour tout seul. Vous n&apos;avez
+              plus à corriger — vous ajoutez ce qui compte vraiment&nbsp;: votre
+              recommandation, d&apos;humain à élève.
+            </p>
+          </div>
+
+          {/* Maquette façon capture d'écran de l'app */}
+          <div className="mx-auto mt-8 max-w-2xl overflow-hidden rounded-3xl border border-slate-800 bg-[#041B33] p-5 text-white shadow-2xl sm:p-7">
+            <div className="mb-4 flex items-center gap-1.5">
+              <span className="h-3 w-3 rounded-full bg-red-400/70" />
+              <span className="h-3 w-3 rounded-full bg-amber-400/70" />
+              <span className="h-3 w-3 rounded-full bg-emerald-400/70" />
+              <span className="ml-3 text-xs font-bold text-white/40">
+                Tableau de bord · Bulletin élève
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-lg font-black">Marina · 5e</p>
+                <p className="text-xs font-semibold text-white/50">
+                  Dernière activité : il y a 2 jours
+                </p>
+              </div>
+              <span className="rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-black text-emerald-300">
+                🟢 Actif
+              </span>
+            </div>
+
+            <div className="mt-4 space-y-2">
+              {[
+                { m: "Espagnol", v: 83, c: "from-emerald-400 to-teal-500" },
+                { m: "Maths", v: 41, c: "from-amber-400 to-orange-500" },
+                { m: "Français", v: 67, c: "from-sky-400 to-blue-500" },
+              ].map((r) => (
+                <div key={r.m} className="flex items-center gap-3">
+                  <span className="w-20 text-xs font-bold text-white/70">{r.m}</span>
+                  <div className="h-2 flex-1 overflow-hidden rounded-full bg-white/10">
+                    <div
+                      className={`h-full rounded-full bg-gradient-to-r ${r.c}`}
+                      style={{ width: `${r.v}%` }}
+                    />
+                  </div>
+                  <span className="w-10 text-right text-xs font-black">{r.v}</span>
+                </div>
+              ))}
+            </div>
+
+            <p className="mt-3 inline-flex items-center gap-1 rounded-full bg-amber-400/15 px-3 py-1 text-xs font-black text-amber-200">
+              📌 À renforcer : Maths — la proportionnalité
+            </p>
+
+            {/* Contributions & avis — les soft skills, revalorisées (pas des notes) */}
+            <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+              <p className="text-xs font-black uppercase tracking-wide text-sky-200">
+                🌱 Contributions &amp; avis
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {[
+                  "💬 4 avis donnés pour améliorer EleveAI",
+                  "🔎 Esprit critique",
+                  "🤝 Aide ses camarades",
+                ].map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-white/80"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <p className="mt-2 text-xs font-semibold text-white/50">
+                Ce qui ne se note pas mais qui compte : implication, regard critique, entraide.
+              </p>
+            </div>
+
+            <div className="mt-4 rounded-2xl border border-emerald-300/30 bg-emerald-400/[0.08] p-4">
+              <p className="text-xs font-black uppercase tracking-wide text-emerald-200">
+                ✍️ Votre recommandation
+              </p>
+              <p className="mt-1.5 text-sm font-semibold leading-snug text-white/90">
+                «&nbsp;Bravo Marina, tu maîtrises l&apos;espagnol&nbsp;! Cette semaine,
+                lance-toi sur une nouvelle notion — et tente un défi de maths, tu peux
+                le faire 💪&nbsp;»
+              </p>
+              <div className="mt-3 flex justify-end">
+                <span className="rounded-full bg-emerald-400 px-4 py-1.5 text-xs font-black text-[#041B33]">
+                  Envoyer à Marina
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <p className="mx-auto mt-4 max-w-2xl text-center text-xs font-semibold text-slate-500">
+            Un mot personnel vaut dix recommandations d&apos;un algorithme. EleveAI
+            fait le suivi&nbsp;; vous restez l&apos;humain qui enseigne.
+          </p>
+        </section>
+
         {/* ── LE DÉROULÉ ── */}
         <section className="rounded-[2rem] border border-white bg-white/70 p-8 shadow-xl backdrop-blur">
           <h2 className="text-center text-2xl font-black sm:text-3xl">
