@@ -11,6 +11,11 @@ import { motsFrancais5e } from "./francais/5e";
 import { motsAnglais5e } from "./anglais/5e";
 import { motsSciences5e } from "./sciences/5e";
 import { motsHistGeo5e } from "./histoire-geo/5e";
+import { motsMaths4e } from "./maths/4e";
+import { motsFrancais4e } from "./francais/4e";
+import { motsAnglais4e } from "./anglais/4e";
+import { motsSciences4e } from "./sciences/4e";
+import { motsHistGeo4e } from "./histoire-geo/4e";
 import { motsMathsCM2 } from "./maths/cm2";
 import { motsFrancaisCM2 } from "./francais/cm2";
 import { motsSciencesCM2 } from "./sciences/cm2";
@@ -132,6 +137,12 @@ const DICOS_CARTES: Record<string, Dico> = {
   "anglais/5e": { matiere: "anglais", matiereLabel: "Anglais", niveau: "5e", titre: "Dico Anglais 5e", sousTitre: "L'anglais en 5e", mots: motsAnglais5e },
   "sciences/5e": { matiere: "sciences", matiereLabel: "Sciences", niveau: "5e", titre: "Dico Sciences 5e", sousTitre: "SVT et physique-chimie", mots: motsSciences5e },
   "histoire-geo/5e": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "5e", titre: "Dico Histoire-Géo 5e", sousTitre: "Moyen Âge, Renaissance, monde", mots: motsHistGeo5e },
+  // ── 4e (collège) — notions NEUVES, distinctes de la 5e ────────
+  "maths/4e": { matiere: "maths", matiereLabel: "Maths", niveau: "4e", titre: "Dico Maths 4e", sousTitre: "Les notions neuves de 4e", mots: motsMaths4e },
+  "francais/4e": { matiere: "francais", matiereLabel: "Français", niveau: "4e", titre: "Dico Français 4e", sousTitre: "Les notions neuves de 4e", mots: motsFrancais4e },
+  "anglais/4e": { matiere: "anglais", matiereLabel: "Anglais", niveau: "4e", titre: "Dico Anglais 4e", sousTitre: "L'anglais en 4e", mots: motsAnglais4e },
+  "sciences/4e": { matiere: "sciences", matiereLabel: "Sciences", niveau: "4e", titre: "Dico Sciences 4e", sousTitre: "SVT et physique-chimie", mots: motsSciences4e },
+  "histoire-geo/4e": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "4e", titre: "Dico Histoire-Géo 4e", sousTitre: "XVIIIᵉ-XIXᵉ siècles et le monde", mots: motsHistGeo4e },
   "maths/cm2": {
     matiere: "maths",
     matiereLabel: "Maths",
