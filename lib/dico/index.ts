@@ -5,6 +5,10 @@ import { motsMathsCM2 } from "./maths/cm2";
 import { motsFrancaisCM2 } from "./francais/cm2";
 import { motsSciencesCM2 } from "./sciences/cm2";
 import { motsHistGeoCM2 } from "./histoire-geo/cm2";
+import { motsMathsCM1 } from "./maths/cm1";
+import { motsFrancaisCM1 } from "./francais/cm1";
+import { motsSciencesCM1 } from "./sciences/cm1";
+import { motsHistGeoCM1 } from "./histoire-geo/cm1";
 
 export type { Dico, MotDico, MotDicoClasse, FamilleDico, GesteDico, DefiDico } from "./types";
 export { NIVEAUX, CYCLES, getNiveau } from "./niveaux";
@@ -112,6 +116,38 @@ const DICOS: Record<string, Dico> = {
     titre: "Dico Histoire-Géo CM2",
     sousTitre: "Le vocabulaire de fin de primaire (vers la 6e)",
     mots: motsHistGeoCM2,
+  },
+  "maths/cm1": {
+    matiere: "maths",
+    matiereLabel: "Maths",
+    niveau: "cm1",
+    titre: "Dico Maths CM1",
+    sousTitre: "Les fondations du CM1",
+    mots: motsMathsCM1,
+  },
+  "francais/cm1": {
+    matiere: "francais",
+    matiereLabel: "Français",
+    niveau: "cm1",
+    titre: "Dico Français CM1",
+    sousTitre: "Les fondations du CM1",
+    mots: motsFrancaisCM1,
+  },
+  "sciences/cm1": {
+    matiere: "sciences",
+    matiereLabel: "Sciences",
+    niveau: "cm1",
+    titre: "Dico Sciences CM1",
+    sousTitre: "Les fondations du CM1",
+    mots: motsSciencesCM1,
+  },
+  "histoire-geo/cm1": {
+    matiere: "histoire-geo",
+    matiereLabel: "Histoire-Géo",
+    niveau: "cm1",
+    titre: "Dico Histoire-Géo CM1",
+    sousTitre: "Les fondations du CM1",
+    mots: motsHistGeoCM1,
   },
 };
 

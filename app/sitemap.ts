@@ -119,6 +119,7 @@ const ROUTES: RouteConfig[] = [
 
   // ── JEU « QUI SUIS-JE ? » (32 cartes à imprimer, toutes matières) ──────────
   { path: "/qui-suis-je-a-imprimer",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
+  { path: "/qui-suis-je-a-imprimer/cm1",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
   { path: "/qui-suis-je-a-imprimer/cm2",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
   { path: "/qui-suis-je-a-imprimer/6e",         priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
   { path: "/qui-suis-je-a-imprimer/vers-la-6e", priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
