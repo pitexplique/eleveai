@@ -17,6 +17,30 @@ import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
 
+// ─── Sélecteur d'audience du hero (façon « Netflix ») ──────────────────────────
+// Chaque public a SA porte : on ne répond plus aux quatre en même temps (d'où
+// l'accueil « illisible »). L'Élève reste sur l'accueil (qui EST sa page) via une
+// ancre ; les trois publics adultes vont vers leur page dédiée.
+const AUDIENCES: {
+  emoji: string;
+  label: string;
+  sub: string;
+  href: string;
+}[] = [
+  // Chaque pastille scrolle vers son APERÇU (section plus bas), qui porte le
+  // bouton « En savoir plus » vers l'espace dédié. (Netflix : profil → aperçu → espace.)
+  { emoji: "🎓", label: "Élève", sub: "Coach, dictée, défis", href: "#a-eleve" },
+  { emoji: "👪", label: "Parent", sub: "Une IA encadrée", href: "#a-parent" },
+  { emoji: "🍎", label: "Enseignant", sub: "Le tableau de bord classe", href: "#a-enseignant" },
+  { emoji: "🏫", label: "Établissement", sub: "Déploiement & suivi", href: "#a-etablissement" },
+];
+
+// Maths·974 PARKÉ hors vitrine pour le moment (déc. Frédéric, 05/07/2026) : la
+// rubrique reste accessible via le menu Maths / la page /maths-974, mais on la
+// retire du haut de l'accueil (trop de place, pas encore de contenu régulier).
+// Repasser à true pour la remettre en avant.
+const MONTRER_974 = false;
+
 // ─── Drag-to-scroll (glisser à la souris sur desktop) ──────────────────────────
 // Sur mobile le scroll horizontal au doigt est natif. Sur desktop il n'y a pas de
 // « glisser à la souris » : on le simule ici (retour Lazslo).
@@ -378,7 +402,7 @@ export default function AccueilPage({
             les élèves essayaient de cliquer sur les cartes dessinées (retours du
             11-12/06/2026). Les vraies actions sont sous l'image. */}
         {/* L'image hero d'abord. Le compte à rebours reste posé dessus. */}
-        <div className="relative mx-auto max-w-5xl md:w-[72%] xl:w-[56rem]">
+        <div className="relative mx-auto max-w-5xl md:w-[62%] xl:w-[46rem]">
           <Image
             src="/images/accueil-eleveai-reunion.webp"
             alt="EleveAI – Comprendre, S'entraîner, Réussir – CP à Terminale"
@@ -404,40 +428,134 @@ export default function AccueilPage({
           )}
         </div>
 
-        {/* Message aux élèves + actions, SOUS l'image */}
-        <div className="relative z-10 mx-auto max-w-5xl px-4 pb-2 pt-6 text-center md:w-[72%] xl:w-[56rem]">
+        {/* Message + SÉLECTEUR D'AUDIENCE (4 portes), SOUS l'image */}
+        <div className="relative z-10 mx-auto max-w-4xl px-4 pb-4 pt-6 text-center">
           {/* Prénom uniquement : aucun nom de famille n'est affiché. */}
           {prenomAffiche && (
             <p className="mx-auto mb-3 inline-block rounded-full border border-white/20 bg-black/40 px-4 py-1.5 text-xs font-black text-white backdrop-blur-sm sm:text-sm">
               Bonjour, {prenomAffiche} 👋
             </p>
           )}
-          <p className="text-3xl font-black tracking-tight text-white sm:text-5xl">
-            Explore EleveAI <span className="text-amber-300">🧭</span>
+          {/* Une seule promesse : le coach est le cœur. */}
+          <h1 className="text-3xl font-black tracking-tight text-white sm:text-5xl">
+            Ton <span className="text-amber-300">coach IA</span> pour progresser
+          </h1>
+          <p className="mx-auto mt-3 max-w-xl text-sm font-semibold leading-6 text-white/80 sm:text-base">
+            Maths, français, anglais, espagnol — du CP au Bac. Comprends,
+            entraîne-toi et avance à ton rythme. ✨
           </p>
-          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-6 text-white/80 sm:text-base">
-            Des coachs IA, des parcours, des défis, des cahiers de vacances et
-            <span className="font-black text-rose-200"> Maths Réel · 974</span> — La
-            Réunion en vidéo. Tout pour comprendre, t&apos;entraîner et progresser,
-            du CP à la Terminale. À toi de jouer&nbsp;: explore et trouve ta voie. ✨
+
+          {/* Chacun sa porte : Élève reste ici, les adultes vont sur leur page. */}
+          <p className="mt-7 text-xs font-black uppercase tracking-[0.2em] text-white/45">
+            Je suis…
           </p>
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+          <div className="mx-auto mt-3 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+            {AUDIENCES.map((a) => (
+              <Link
+                key={a.label}
+                href={a.href}
+                className="group flex flex-col items-center gap-1 rounded-2xl border border-white/15 bg-white/[0.06] px-3 py-4 text-center backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/[0.12]"
+              >
+                <span className="text-3xl" aria-hidden="true">
+                  {a.emoji}
+                </span>
+                <span className="text-sm font-black text-white">{a.label}</span>
+                <span className="text-[11px] font-semibold leading-tight text-white/55">
+                  {a.sub}
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          {/* Voie élève par défaut : accès direct au coach + connexion. */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <Link
-              href="/explorer"
+              href="/coach-ia/maths"
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400 px-6 py-2.5 text-sm font-black text-[#041B33] shadow-lg transition hover:scale-105 hover:brightness-110"
             >
-              🧭 Explorer tout
+              🚀 Ouvrir mon coach
             </Link>
             {!eleve && (
               <Link
                 href="/auth/signin?mode=eleve"
                 className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-2.5 text-sm font-black text-white shadow-lg transition hover:scale-105 hover:bg-white/20"
               >
-                ✏️ M&apos;inscrire — gratuit
+                Se connecter — gratuit
               </Link>
             )}
           </div>
           <PresentationAudio />
+        </div>
+      </section>
+
+      {/* ── APERÇUS PAR AUDIENCE — cible des pastilles du hero ────────────────── */}
+      {/* Chaque pastille scrolle ici ; l'aperçu explique, puis « En savoir plus »
+          mène à l'espace dédié (page). L'Élève reste sur l'accueil (son espace). */}
+      <section className="bg-[#041B33] px-4 pt-8 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2">
+          {/* Élève */}
+          <div id="a-eleve" className="scroll-mt-24 flex flex-col rounded-2xl border border-emerald-300/25 bg-gradient-to-br from-emerald-400/[0.10] to-white/[0.03] p-5 sm:p-6">
+            <p className="text-xs font-black uppercase tracking-wide text-emerald-200">🎓 Élève</p>
+            <h2 className="mt-1 text-xl font-black text-white">Entraîne-toi dans ta matière forte</h2>
+            <p className="mt-2 flex-1 text-sm font-semibold leading-snug text-white/75">
+              Coach IA, parcours guidés, dictée du jour, défis… tout pour comprendre
+              et progresser à ton rythme, du CP au Bac.
+            </p>
+            <Link
+              href="#espace-eleve"
+              className="mt-3 inline-flex w-fit items-center gap-2 rounded-full bg-emerald-400 px-4 py-2 text-sm font-black text-[#041B33] transition hover:brightness-110"
+            >
+              Voir mon espace →
+            </Link>
+          </div>
+
+          {/* Parent */}
+          <div id="a-parent" className="scroll-mt-24 flex flex-col rounded-2xl border border-sky-300/25 bg-gradient-to-br from-sky-400/[0.10] to-white/[0.03] p-5 sm:p-6">
+            <p className="text-xs font-black uppercase tracking-wide text-sky-200">👪 Parent</p>
+            <h2 className="mt-1 text-xl font-black text-white">Une IA encadrée, rassurante</h2>
+            <p className="mt-2 flex-1 text-sm font-semibold leading-snug text-white/75">
+              On explique, on ne fait pas à la place. Gratuit pour l&apos;élève, sans
+              publicité, vos enfants sont en sécurité.
+            </p>
+            <Link
+              href="/parents"
+              className="mt-3 inline-flex w-fit items-center gap-2 rounded-full bg-sky-400 px-4 py-2 text-sm font-black text-[#041B33] transition hover:brightness-110"
+            >
+              En savoir plus →
+            </Link>
+          </div>
+
+          {/* Enseignant */}
+          <div id="a-enseignant" className="scroll-mt-24 flex flex-col rounded-2xl border border-amber-300/25 bg-gradient-to-br from-amber-400/[0.10] to-white/[0.03] p-5 sm:p-6">
+            <p className="text-xs font-black uppercase tracking-wide text-amber-200">🍎 Enseignant</p>
+            <h2 className="mt-1 text-xl font-black text-white">Le tableau de bord de vos élèves</h2>
+            <p className="mt-2 flex-1 text-sm font-semibold leading-snug text-white/75">
+              Suivez la progression, notion par notion. Et utilisez EleveAI en cours :
+              calcul rapide en direct, résultats validés automatiquement.
+            </p>
+            <Link
+              href="/enseignants"
+              className="mt-3 inline-flex w-fit items-center gap-2 rounded-full bg-amber-400 px-4 py-2 text-sm font-black text-[#041B33] transition hover:brightness-110"
+            >
+              En savoir plus →
+            </Link>
+          </div>
+
+          {/* Établissement */}
+          <div id="a-etablissement" className="scroll-mt-24 flex flex-col rounded-2xl border border-violet-300/25 bg-gradient-to-br from-violet-400/[0.10] to-white/[0.03] p-5 sm:p-6">
+            <p className="text-xs font-black uppercase tracking-wide text-violet-200">🏫 Établissement</p>
+            <h2 className="mt-1 text-xl font-black text-white">Déployez EleveAI dans votre collège</h2>
+            <p className="mt-2 flex-1 text-sm font-semibold leading-snug text-white/75">
+              Codes élèves et professeurs, sans e-mail ni installation. Suivi de
+              progression classe par classe. Offre pilote sur devis.
+            </p>
+            <Link
+              href="/espace-ecoles"
+              className="mt-3 inline-flex w-fit items-center gap-2 rounded-full bg-violet-400 px-4 py-2 text-sm font-black text-white transition hover:brightness-110"
+            >
+              En savoir plus →
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -446,8 +564,9 @@ export default function AccueilPage({
           contextualise l'accueil « pour lui-même ». Consomme /api/profil-eleve. */}
       <RecoDuJourAccueil />
 
+      {/* ── ESPACE ÉLÈVE (ancre du sélecteur d'audience) : jeu, dictée, coach… ── */}
       {/* ── JEU DE 32 CARTES « QUI SUIS-JE ? » — à imprimer, avant la dictée ──── */}
-      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
+      <section id="espace-eleve" className="scroll-mt-24 bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
         <Link
           href="/qui-suis-je-a-imprimer"
           className="mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-fuchsia-300/30 bg-gradient-to-br from-fuchsia-400/[0.12] via-violet-400/[0.07] to-white/[0.04] p-6 text-center transition hover:border-fuchsia-300/60 sm:flex-row sm:justify-between sm:text-left sm:p-7"
@@ -527,66 +646,8 @@ export default function AccueilPage({
               ? `Bonnes vacances, ${prenomAffiche} !`
               : "Bonnes vacances à toutes et à tous !"}
           </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
-            Avant de refermer les cahiers, je tenais à vous dire un grand
-            <span className="font-black text-amber-200"> merci</span>. Merci pour votre
-            énergie, votre curiosité et vos efforts tout au long de l&apos;année. Vous
-            avez travaillé dur, et je suis fier du chemin parcouru ensemble.
-          </p>
-          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
-            Maintenant, place au repos : profitez de vos proches, du soleil et du temps
-            qui ralentit. Et si l&apos;envie vous prend, l&apos;appli reste ouverte
-            pendant les vacances. Le plus simple pour garder le rythme, c&apos;est la{" "}
-            <Link
-              href="/dictee-du-jour"
-              className="font-black text-cyan-200 underline decoration-cyan-300/60 underline-offset-2 transition hover:text-cyan-100"
-            >
-              📜 dictée du jour
-            </Link>{" "}
-            : un mot à écouter et à écrire chaque matin, à votre rythme, juste pour le
-            plaisir. 😉
-          </p>
-          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
-            Et bonne nouvelle : <span className="font-black text-amber-200">chaque semaine,
-            une nouveauté</span> à découvrir sur EleveAI ! Cette semaine, je suis fier de
-            vous présenter{" "}
-            <Link
-              href="/maths-974"
-              className="font-black text-rose-200 underline decoration-rose-300/60 underline-offset-2 transition hover:text-rose-100"
-            >
-              Maths Réel · 974
-            </Link>{" "}
-            🌋 — une nouvelle rubrique où, en vrai, sur le terrain de La Réunion (le
-            volcan, le marché, le lagon, les sentiers de Mafate…), on découvre à quoi
-            servent les maths, en vidéo. Tu te demandais « ça sert à quoi&nbsp;?» : la
-            réponse est dehors, sous le soleil. ☀️
-          </p>
-          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
-            Et il y a aussi l&apos;
-            <Link
-              href="/fiches-cours/ia/livre"
-              className="font-black text-amber-200 underline decoration-amber-300/60 underline-offset-2 transition hover:text-amber-100"
-            >
-              ebook IA
-            </Link>{" "}
-            📘 pour apprendre à utiliser l&apos;intelligence artificielle intelligemment,
-            et te préparer à l&apos;
-            <Link
-              href="/eval-pix-ia"
-              className="font-black text-amber-200 underline decoration-amber-300/60 underline-offset-2 transition hover:text-amber-100"
-            >
-              évaluation nationale Pix IA
-            </Link>
-            .
-          </p>
-          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
-            Et une nouveauté qui me tient particulièrement à cœur : EleveAI est désormais
-            <span className="font-black text-amber-200"> adapté aux garçons et aux filles qui ont des difficultés de vue</span> 🔊
-            — les questions se lisent à voix haute et l&apos;appli fonctionne avec les lecteurs
-            d&apos;écran. Parce qu&apos;ici, chacun a sa place et personne ne reste sur le bord du chemin.
-          </p>
-          <p className="mt-4 text-sm font-black text-emerald-200">
-            Reposez-vous bien et revenez en pleine forme. À très vite !
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-black text-emerald-200">
+            Reposez-vous bien et revenez en pleine forme. À très vite ! ☀️
           </p>
         </div>
       </section>
@@ -686,7 +747,8 @@ export default function AccueilPage({
         </div>
       </section>
 
-      {/* ── MATHS RÉEL · 974 — nouvelle rubrique, vidéos terrain de La Réunion ── */}
+      {/* ── MATHS RÉEL · 974 — PARKÉ hors vitrine (cf. MONTRER_974) ──────────── */}
+      {MONTRER_974 && (
       <section className="relative overflow-hidden bg-gradient-to-b from-[#041B33] to-[#07231f] px-4 pb-2 pt-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="overflow-hidden rounded-3xl border border-rose-400/30 bg-gradient-to-br from-rose-500/15 via-orange-500/[0.08] to-emerald-500/[0.08] p-6 text-center sm:p-10">
@@ -767,6 +829,7 @@ export default function AccueilPage({
           </div>
         </div>
       </section>
+      )}
 
       {/* ── AVIS EN UNE LIGNE (sous l'image) — retour d'une élève ────────────── */}
       <section className="border-b border-white/10 bg-[#041B33] px-4 py-2.5 sm:px-6 lg:px-8">
