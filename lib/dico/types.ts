@@ -20,6 +20,8 @@ export type FamilleDico =
   // Histoire-Géographie
   | "histoire"
   | "geographie"
+  // Anglais (collège)
+  | "anglais"
   // Tout-petits (GS-CP) : vocabulaire en images
   | "images-mots"
   // Partagé

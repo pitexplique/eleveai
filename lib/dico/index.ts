@@ -1,6 +1,11 @@
 import type { Dico, FamilleDico, GesteDico, MotDicoClasse } from "./types";
 import { motsMaths6e } from "./maths/6e";
 import { motsFrancais6e } from "./francais/6e";
+import { motsMaths6eCollege } from "./maths/6e-college";
+import { motsFrancais6eCollege } from "./francais/6e-college";
+import { motsAnglais6e } from "./anglais/6e";
+import { motsSciences6e } from "./sciences/6e";
+import { motsHistGeo6e } from "./histoire-geo/6e";
 import { motsMathsCM2 } from "./maths/cm2";
 import { motsFrancaisCM2 } from "./francais/cm2";
 import { motsSciencesCM2 } from "./sciences/cm2";
@@ -44,6 +49,8 @@ export const FAMILLES_DICO: Record<FamilleDico, { label: string; emoji: string }
   // Histoire-Géographie
   histoire: { label: "Histoire", emoji: "📜" },
   geographie: { label: "Géographie", emoji: "🗺️" },
+  // Anglais (collège)
+  anglais: { label: "Anglais", emoji: "🇬🇧" },
   // Tout-petits (GS-CP)
   "images-mots": { label: "Images & mots", emoji: "🖼️" },
   // Partagé
@@ -68,6 +75,8 @@ export const ORDRE_FAMILLES: FamilleDico[] = [
   // Histoire-Géographie
   "histoire",
   "geographie",
+  // Anglais
+  "anglais",
   // Tout-petits (GS-CP)
   "images-mots",
   // Partagé
@@ -82,8 +91,9 @@ export const GESTES_DICO: Record<GesteDico, { label: string; emoji: string; cons
   association: { label: "Associer", emoji: "🔗", consigne: "Relie le mot à sa définition" },
 };
 
-// 🔹 Registre des dicos disponibles, indexé par "matiere/niveau"
-const DICOS: Record<string, Dico> = {
+// 🔹 Dicos « ÉVAL nationale » (page /dico interactive, liée dans le header).
+// Usage RÉVISION (recouvre volontairement le programme testé à l'examen).
+const DICOS_EVAL: Record<string, Dico> = {
   "maths/6e": {
     matiere: "maths",
     matiereLabel: "Maths",
@@ -100,6 +110,17 @@ const DICOS: Record<string, Dico> = {
     sousTitre: "50 mots & gestes pour l'éval nationale",
     mots: motsFrancais6e,
   },
+};
+
+// 🔹 Dicos « CARTES » (jeu « Qui suis-je ? » par classe, en ESCALIER : chaque
+// notion écrite une seule fois, à l'année où elle arrive → zéro doublon).
+const DICOS_CARTES: Record<string, Dico> = {
+  // ── 6e (collège) — notions NEUVES, distinctes du CM2 ──────────
+  "maths/6e": { matiere: "maths", matiereLabel: "Maths", niveau: "6e", titre: "Dico Maths 6e", sousTitre: "Les notions neuves de 6e", mots: motsMaths6eCollege },
+  "francais/6e": { matiere: "francais", matiereLabel: "Français", niveau: "6e", titre: "Dico Français 6e", sousTitre: "Les notions neuves de 6e", mots: motsFrancais6eCollege },
+  "anglais/6e": { matiere: "anglais", matiereLabel: "Anglais", niveau: "6e", titre: "Dico Anglais 6e", sousTitre: "L'anglais au collège", mots: motsAnglais6e },
+  "sciences/6e": { matiere: "sciences", matiereLabel: "Sciences", niveau: "6e", titre: "Dico Sciences 6e", sousTitre: "SVT : le vivant et son milieu", mots: motsSciences6e },
+  "histoire-geo/6e": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "6e", titre: "Dico Histoire-Géo 6e", sousTitre: "L'Antiquité et le monde", mots: motsHistGeo6e },
   "maths/cm2": {
     matiere: "maths",
     matiereLabel: "Maths",
@@ -201,18 +222,22 @@ const DICOS: Record<string, Dico> = {
   "histoire-geo/ce2": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "ce2", titre: "Dico Histoire-Géo CE2", sousTitre: "Le vocabulaire du CE2", mots: motsHistGeoCE2 },
 };
 
+// La page /dico interactive sert d'abord le Dico ÉVAL ; sinon, on retombe sur le
+// Dico CARTES (une classe/matière peut ainsi être jouée aussi en saisie).
 export function getDico(matiere: string, niveau: string): Dico | null {
-  return DICOS[`${matiere}/${niveau}`] ?? null;
+  const key = `${matiere}/${niveau}`;
+  return DICOS_EVAL[key] ?? DICOS_CARTES[key] ?? null;
 }
 
+// Le hub /dico ne liste que les dicos ÉVAL (prépa éval nationale).
 export function listDicos(): Dico[] {
-  return Object.values(DICOS);
+  return Object.values(DICOS_EVAL);
 }
 
-// 🔹 Tous les mots d'une CLASSE, toutes matières confondues (matière rattachée).
-// Base du jeu de cartes « Qui suis-je ? » par classe.
+// 🔹 Tous les mots-CARTES d'une CLASSE, toutes matières confondues (le jeu
+// « Qui suis-je ? » par classe puise UNIQUEMENT dans le Dico CARTES = escalier).
 export function motsDeLaClasse(niveau: string): MotDicoClasse[] {
-  return Object.values(DICOS)
+  return Object.values(DICOS_CARTES)
     .filter((d) => d.niveau === niveau)
     .flatMap((d) =>
       d.mots.map((m) => ({ ...m, matiere: d.matiere, matiereLabel: d.matiereLabel }))
