@@ -21,6 +21,11 @@ import { motsFrancais3e } from "./francais/3e";
 import { motsAnglais3e } from "./anglais/3e";
 import { motsSciences3e } from "./sciences/3e";
 import { motsHistGeo3e } from "./histoire-geo/3e";
+import { motsMaths2nde } from "./maths/2nde";
+import { motsFrancais2nde } from "./francais/2nde";
+import { motsAnglais2nde } from "./anglais/2nde";
+import { motsSciences2nde } from "./sciences/2nde";
+import { motsHistGeo2nde } from "./histoire-geo/2nde";
 import { motsMathsCM2 } from "./maths/cm2";
 import { motsFrancaisCM2 } from "./francais/cm2";
 import { motsSciencesCM2 } from "./sciences/cm2";
@@ -154,6 +159,12 @@ const DICOS_CARTES: Record<string, Dico> = {
   "anglais/3e": { matiere: "anglais", matiereLabel: "Anglais", niveau: "3e", titre: "Dico Anglais 3e", sousTitre: "L'anglais en 3e (brevet)", mots: motsAnglais3e },
   "sciences/3e": { matiere: "sciences", matiereLabel: "Sciences", niveau: "3e", titre: "Dico Sciences 3e", sousTitre: "Génétique, gravitation, chimie", mots: motsSciences3e },
   "histoire-geo/3e": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "3e", titre: "Dico Histoire-Géo 3e", sousTitre: "Le XXᵉ siècle et le monde", mots: motsHistGeo3e },
+  // ── 2nde (lycée, tronc commun) — notions NEUVES, distinctes de la 3e ──
+  "maths/2nde": { matiere: "maths", matiereLabel: "Maths", niveau: "2nde", titre: "Dico Maths 2nde", sousTitre: "Les notions neuves de Seconde", mots: motsMaths2nde },
+  "francais/2nde": { matiere: "francais", matiereLabel: "Français", niveau: "2nde", titre: "Dico Français 2nde", sousTitre: "Les notions neuves de Seconde", mots: motsFrancais2nde },
+  "anglais/2nde": { matiere: "anglais", matiereLabel: "Anglais", niveau: "2nde", titre: "Dico Anglais 2nde", sousTitre: "L'anglais en Seconde", mots: motsAnglais2nde },
+  "sciences/2nde": { matiere: "sciences", matiereLabel: "Sciences", niveau: "2nde", titre: "Dico Sciences 2nde", sousTitre: "Chimie, physique, SVT", mots: motsSciences2nde },
+  "histoire-geo/2nde": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "2nde", titre: "Dico Histoire-Géo 2nde", sousTitre: "Renaissance à Révolution, environnement", mots: motsHistGeo2nde },
   "maths/cm2": {
     matiere: "maths",
     matiereLabel: "Maths",
