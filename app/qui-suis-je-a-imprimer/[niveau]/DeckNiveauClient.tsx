@@ -27,6 +27,7 @@ const MAT: Record<string, MatMeta> = {
   espagnol: { emoji: "🇪🇸", ring: "border-red-300", text: "text-red-700", soft: "bg-red-50" },
   histoire: { emoji: "📜", ring: "border-amber-300", text: "text-amber-800", soft: "bg-amber-50" },
   geographie: { emoji: "🗺️", ring: "border-teal-300", text: "text-teal-700", soft: "bg-teal-50" },
+  "histoire-geo": { emoji: "🗺️", ring: "border-amber-300", text: "text-amber-800", soft: "bg-amber-50" },
   sciences: { emoji: "🔬", ring: "border-emerald-300", text: "text-emerald-700", soft: "bg-emerald-50" },
 };
 const MAT_DEFAUT: MatMeta = { emoji: "⭐", ring: "border-slate-300", text: "text-slate-700", soft: "bg-slate-50" };

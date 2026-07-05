@@ -1,6 +1,10 @@
 import type { Dico, FamilleDico, GesteDico, MotDicoClasse } from "./types";
 import { motsMaths6e } from "./maths/6e";
 import { motsFrancais6e } from "./francais/6e";
+import { motsMathsCM2 } from "./maths/cm2";
+import { motsFrancaisCM2 } from "./francais/cm2";
+import { motsSciencesCM2 } from "./sciences/cm2";
+import { motsHistGeoCM2 } from "./histoire-geo/cm2";
 
 export type { Dico, MotDico, MotDicoClasse, FamilleDico, GesteDico, DefiDico } from "./types";
 export { NIVEAUX, CYCLES, getNiveau } from "./niveaux";
@@ -19,6 +23,12 @@ export const FAMILLES_DICO: Record<FamilleDico, { label: string; emoji: string }
   conjugaison: { label: "Conjugaison", emoji: "⏳" },
   "ortho-lexique": { label: "Orthographe & lexique", emoji: "✍️" },
   texte: { label: "Texte & compréhension", emoji: "📖" },
+  // Sciences
+  "sciences-vivant": { label: "Le vivant", emoji: "🌱" },
+  "sciences-matiere": { label: "Matière & énergie", emoji: "⚡" },
+  // Histoire-Géographie
+  histoire: { label: "Histoire", emoji: "📜" },
+  geographie: { label: "Géographie", emoji: "🗺️" },
   // Partagé
   consignes: { label: "Mots-consignes", emoji: "🧭" },
 };
@@ -35,6 +45,12 @@ export const ORDRE_FAMILLES: FamilleDico[] = [
   "conjugaison",
   "ortho-lexique",
   "texte",
+  // Sciences
+  "sciences-vivant",
+  "sciences-matiere",
+  // Histoire-Géographie
+  "histoire",
+  "geographie",
   // Partagé
   "consignes",
 ];
@@ -64,6 +80,38 @@ const DICOS: Record<string, Dico> = {
     titre: "Dico Français 6e",
     sousTitre: "50 mots & gestes pour l'éval nationale",
     mots: motsFrancais6e,
+  },
+  "maths/cm2": {
+    matiere: "maths",
+    matiereLabel: "Maths",
+    niveau: "cm2",
+    titre: "Dico Maths CM2",
+    sousTitre: "Le vocabulaire de fin de primaire (vers la 6e)",
+    mots: motsMathsCM2,
+  },
+  "francais/cm2": {
+    matiere: "francais",
+    matiereLabel: "Français",
+    niveau: "cm2",
+    titre: "Dico Français CM2",
+    sousTitre: "Le vocabulaire de fin de primaire (vers la 6e)",
+    mots: motsFrancaisCM2,
+  },
+  "sciences/cm2": {
+    matiere: "sciences",
+    matiereLabel: "Sciences",
+    niveau: "cm2",
+    titre: "Dico Sciences CM2",
+    sousTitre: "Le vocabulaire de fin de primaire (vers la 6e)",
+    mots: motsSciencesCM2,
+  },
+  "histoire-geo/cm2": {
+    matiere: "histoire-geo",
+    matiereLabel: "Histoire-Géo",
+    niveau: "cm2",
+    titre: "Dico Histoire-Géo CM2",
+    sousTitre: "Le vocabulaire de fin de primaire (vers la 6e)",
+    mots: motsHistGeoCM2,
   },
 };
 

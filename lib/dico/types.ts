@@ -14,6 +14,12 @@ export type FamilleDico =
   | "conjugaison"
   | "ortho-lexique"
   | "texte"
+  // Sciences
+  | "sciences-vivant"
+  | "sciences-matiere"
+  // Histoire-Géographie
+  | "histoire"
+  | "geographie"
   // Partagé
   | "consignes";
 
