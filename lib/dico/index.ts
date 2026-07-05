@@ -26,6 +26,11 @@ import { motsFrancais2nde } from "./francais/2nde";
 import { motsAnglais2nde } from "./anglais/2nde";
 import { motsSciences2nde } from "./sciences/2nde";
 import { motsHistGeo2nde } from "./histoire-geo/2nde";
+import { motsMaths1ere } from "./maths/1ere";
+import { motsFrancais1ere } from "./francais/1ere";
+import { motsAnglais1ere } from "./anglais/1ere";
+import { motsSciences1ere } from "./sciences/1ere";
+import { motsHistGeo1ere } from "./histoire-geo/1ere";
 import { motsMathsCM2 } from "./maths/cm2";
 import { motsFrancaisCM2 } from "./francais/cm2";
 import { motsSciencesCM2 } from "./sciences/cm2";
@@ -165,6 +170,12 @@ const DICOS_CARTES: Record<string, Dico> = {
   "anglais/2nde": { matiere: "anglais", matiereLabel: "Anglais", niveau: "2nde", titre: "Dico Anglais 2nde", sousTitre: "L'anglais en Seconde", mots: motsAnglais2nde },
   "sciences/2nde": { matiere: "sciences", matiereLabel: "Sciences", niveau: "2nde", titre: "Dico Sciences 2nde", sousTitre: "Chimie, physique, SVT", mots: motsSciences2nde },
   "histoire-geo/2nde": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "2nde", titre: "Dico Histoire-Géo 2nde", sousTitre: "Renaissance à Révolution, environnement", mots: motsHistGeo2nde },
+  // ── 1re (lycée) — notions NEUVES, distinctes de la 2nde ──────
+  "maths/1ere": { matiere: "maths", matiereLabel: "Maths", niveau: "1ere", titre: "Dico Maths 1re", sousTitre: "Les notions neuves de Première", mots: motsMaths1ere },
+  "francais/1ere": { matiere: "francais", matiereLabel: "Français", niveau: "1ere", titre: "Dico Français 1re", sousTitre: "Le bac de français", mots: motsFrancais1ere },
+  "anglais/1ere": { matiere: "anglais", matiereLabel: "Anglais", niveau: "1ere", titre: "Dico Anglais 1re", sousTitre: "L'anglais en Première", mots: motsAnglais1ere },
+  "sciences/1ere": { matiere: "sciences", matiereLabel: "Sciences", niveau: "1ere", titre: "Dico Sciences 1re", sousTitre: "Enseignement scientifique", mots: motsSciences1ere },
+  "histoire-geo/1ere": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "1ere", titre: "Dico Histoire-Géo 1re", sousTitre: "Nations, industrie, territoires", mots: motsHistGeo1ere },
   "maths/cm2": {
     matiere: "maths",
     matiereLabel: "Maths",
