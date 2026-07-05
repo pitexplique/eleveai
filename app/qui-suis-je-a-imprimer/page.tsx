@@ -94,6 +94,24 @@ export default function QuiSuisJeHubPage() {
         </div>
       </section>
 
+      {/* CTA coach : les cartes plaisent → le coach continue en ligne, gratuit */}
+      <section className="mx-auto max-w-6xl px-5 pt-8 sm:px-8">
+        <div className="flex flex-col items-center gap-3 rounded-2xl border border-violet-300 bg-gradient-to-r from-violet-50 to-fuchsia-50 p-4 text-center shadow-sm sm:flex-row sm:justify-between sm:text-left">
+          <p className="text-sm font-black text-slate-900 sm:text-base">
+            🦎 Ces jeux plaisent à ton enfant&nbsp;? Son{" "}
+            <span className="text-violet-700">coach IA</span> continue en ligne —{" "}
+            <span className="text-violet-700">gratuit</span>, à son rythme et sans jugement.
+          </p>
+          <Link
+            href="/explorer?from=cartes"
+            className="inline-flex shrink-0 items-center gap-2 rounded-full bg-violet-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-violet-500/30 transition hover:bg-violet-400 hover:scale-105"
+          >
+            <Sparkles className="h-4 w-4" />
+            Commencer gratuitement →
+          </Link>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
         {CYCLES.filter((c) => decks.some((d) => d.cycle === c.key)).map((cycle) => (
           <div key={cycle.key} className="mb-10">
