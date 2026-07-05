@@ -12,6 +12,7 @@ import FloatingCoach from "@/components/FloatingCoach";
 import PresentationAudio from "./PresentationAudio";
 import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
 import RecoDuJourAccueil from "@/components/accueil/RecoDuJourAccueil";
+import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
@@ -367,6 +368,12 @@ export default function AccueilPage({
 
   const visibleSubjects = isCmPrimary ? SUBJECTS.filter(s => s.cm) : SUBJECTS;
 
+  // Staff (prof/principal) connecté : on remplace le hero élève par leur bandeau.
+  const isStaff =
+    eleve?.type_utilisateur === "prof" ||
+    eleve?.type_utilisateur === "principal" ||
+    eleve?.type_utilisateur === "boss";
+
   async function toggleAudio() {
     const audio = audioRef.current;
     if (!audio) return;
@@ -389,7 +396,11 @@ export default function AccueilPage({
         onPlay={() => setIsPlaying(true)}
       />
 
-      {/* ── HERO — Image plein écran ────────────────────────────────────────── */}
+      {/* Staff connecté → son bandeau « tableau de bord » remplace le hero élève. */}
+      <StaffAccueilBanner />
+
+      {/* ── HERO — Image plein écran (masqué pour le staff) ─────────────────── */}
+      {!isStaff && (
       <section
         className="relative w-full animate-gradient-shift px-3 pt-2 sm:px-6"
         style={{
@@ -486,6 +497,7 @@ export default function AccueilPage({
           <PresentationAudio />
         </div>
       </section>
+      )}
 
       {/* ── APERÇUS PAR AUDIENCE — cible des pastilles du hero ────────────────── */}
       {/* Chaque pastille scrolle ici ; l'aperçu explique, puis « En savoir plus »

@@ -12,6 +12,7 @@
 //   4. Défaut : espace élève (= « tout le monde »).
 
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
 
 export type Audience = "eleve" | "parent" | "enseignant" | "etablissement";
@@ -25,27 +26,47 @@ export type AudienceState = {
   role: string | null;
 };
 
+const STORAGE_KEY = "eleveai-audience";
+const ADULT: Audience[] = ["parent", "enseignant", "etablissement"];
+
 export function useAudience(): AudienceState {
   const pathname = usePathname() || "/";
   const { eleve } = useEleve();
   const role = eleve?.type_utilisateur ?? null;
   const connected = !!eleve;
 
-  // 1. Rôle connecté (staff) : prof/principal gardent leur espace partout.
-  if (role === "prof") return { space: "enseignant", connected, role };
-  if (role === "principal" || role === "boss") {
-    return { space: "etablissement", connected, role };
-  }
+  // Choix mémorisé (localStorage) : lu APRÈS le montage pour ne pas casser
+  // l'hydratation (SSR = null → défaut élève, puis on applique le souvenir).
+  const [remembered, setRemembered] = useState<Audience | null>(null);
+  useEffect(() => {
+    try {
+      const v = localStorage.getItem(STORAGE_KEY) as Audience | null;
+      if (v && ADULT.includes(v)) setRemembered(v);
+    } catch {
+      /* localStorage indisponible */
+    }
+  }, []);
 
-  // 2. Route : l'espace où l'on se trouve.
-  if (pathname.startsWith("/parents")) return { space: "parent", connected, role };
-  if (pathname.startsWith("/enseignants")) {
-    return { space: "enseignant", connected, role };
-  }
-  if (pathname.startsWith("/espace-ecoles")) {
-    return { space: "etablissement", connected, role };
-  }
+  // Résolution : rôle connecté (staff) > route > choix mémorisé > défaut élève.
+  let space: Audience;
+  let fromRoute = false;
+  if (role === "prof") space = "enseignant";
+  else if (role === "principal" || role === "boss") space = "etablissement";
+  else if (pathname.startsWith("/parents")) { space = "parent"; fromRoute = true; }
+  else if (pathname.startsWith("/enseignants")) { space = "enseignant"; fromRoute = true; }
+  else if (pathname.startsWith("/espace-ecoles")) { space = "etablissement"; fromRoute = true; }
+  else space = remembered ?? "eleve";
 
-  // 3+4. Élève connecté ou visiteur → espace élève (défaut).
-  return { space: "eleve", connected, role };
+  // Visiter une page d'espace « mémorise » le choix → reconnu au retour.
+  useEffect(() => {
+    if (fromRoute) {
+      try {
+        localStorage.setItem(STORAGE_KEY, space);
+      } catch {
+        /* ignore */
+      }
+    }
+  }, [fromRoute, space]);
+
+  return { space, connected, role };
 }
