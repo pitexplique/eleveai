@@ -170,6 +170,85 @@ export default function ParentsPage() {
           </div>
         </section>
 
+        {/* ── MAQUETTE 2 : le tableau de bord de votre enfant (progression + badges) ── */}
+        <section>
+          <div className="text-center">
+            <h2 className="text-2xl font-black sm:text-3xl">
+              Suivez votre enfant, en un coup d&apos;œil
+            </h2>
+            <p className="mx-auto mt-2 max-w-2xl text-sm font-semibold leading-relaxed text-slate-600">
+              Sa progression, ce qu&apos;il peut améliorer — et surtout ce
+              qu&apos;il a déjà réussi.
+            </p>
+          </div>
+
+          <div className="mx-auto mt-8 max-w-2xl overflow-hidden rounded-3xl border border-slate-800 bg-[#041B33] p-5 text-white shadow-2xl sm:p-7">
+            <div className="mb-4 flex items-center gap-1.5">
+              <span className="h-3 w-3 rounded-full bg-red-400/70" />
+              <span className="h-3 w-3 rounded-full bg-amber-400/70" />
+              <span className="h-3 w-3 rounded-full bg-emerald-400/70" />
+              <span className="ml-3 text-xs font-bold text-white/40">Espace famille · Votre enfant</span>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <p className="text-lg font-black">Marina · 5e</p>
+              <span className="rounded-full bg-orange-500/20 px-3 py-1 text-xs font-black text-orange-300">
+                🔥 7 jours d&apos;affilée
+              </span>
+            </div>
+
+            {/* Progression */}
+            <p className="mt-4 text-xs font-black uppercase tracking-wide text-emerald-200">
+              📈 Progression ce mois
+            </p>
+            <div className="mt-2 space-y-2">
+              {[
+                { m: "Espagnol", v: 83, d: "+8", c: "from-emerald-400 to-teal-500" },
+                { m: "Maths", v: 41, d: "+5", c: "from-amber-400 to-orange-500" },
+                { m: "Français", v: 67, d: "+3", c: "from-sky-400 to-blue-500" },
+              ].map((r) => (
+                <div key={r.m} className="flex items-center gap-3">
+                  <span className="w-20 text-xs font-bold text-white/70">{r.m}</span>
+                  <div className="h-2 flex-1 overflow-hidden rounded-full bg-white/10">
+                    <div className={`h-full rounded-full bg-gradient-to-r ${r.c}`} style={{ width: `${r.v}%` }} />
+                  </div>
+                  <span className="w-16 text-right text-xs font-black text-emerald-300">▲ {r.d}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* À améliorer */}
+            <p className="mt-3 inline-flex items-center gap-1 rounded-full bg-amber-400/15 px-3 py-1 text-xs font-black text-amber-200">
+              📌 À améliorer : Maths — la proportionnalité (le coach l&apos;aide dessus)
+            </p>
+
+            {/* Badges gagnés — en vedette (les parents adorent) */}
+            <div className="mt-4 rounded-2xl border border-amber-300/30 bg-amber-400/[0.08] p-4">
+              <p className="text-xs font-black uppercase tracking-wide text-amber-200">
+                🏅 Badges gagnés
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {[
+                  "🎯 Espagnol A1 maîtrisé",
+                  "⚡ Championne du calcul rapide",
+                  "📜 30 dictées réussies",
+                  "✍️ 4 avis donnés",
+                  "🔥 Série de 7 jours",
+                ].map((b) => (
+                  <span key={b} className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-white/85">
+                    {b}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <p className="mx-auto mt-4 max-w-2xl text-center text-xs font-semibold text-slate-500">
+            Ici, votre enfant est chez lui : on célèbre ce qu&apos;il réussit avant
+            de pointer ce qu&apos;il reste à faire.
+          </p>
+        </section>
+
         {/* ── LE PRIX = LE FORK (décision CEO : établissement > famille > jamais l'élève) ── */}
         <section>
           <h2 className="text-center text-2xl font-black sm:text-3xl">
