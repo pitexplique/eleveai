@@ -27,12 +27,12 @@ const AUDIENCES: {
   sub: string;
   href: string;
 }[] = [
-  // Chaque pastille scrolle vers son APERÇU (section plus bas), qui porte le
-  // bouton « En savoir plus » vers l'espace dédié. (Netflix : profil → aperçu → espace.)
+  // Élève reste sur l'accueil (son espace) via l'ancre ; les adultes vont DIRECT
+  // sur leur page dédiée (pas de double-pas aperçu → « En savoir plus »).
   { emoji: "🎓", label: "Élève", sub: "Coach, dictée, défis", href: "#a-eleve" },
-  { emoji: "👪", label: "Parent", sub: "Une IA encadrée", href: "#a-parent" },
-  { emoji: "🍎", label: "Enseignant", sub: "Le tableau de bord classe", href: "#a-enseignant" },
-  { emoji: "🏫", label: "Établissement", sub: "Déploiement & suivi", href: "#a-etablissement" },
+  { emoji: "👪", label: "Parent", sub: "Une IA encadrée", href: "/parents" },
+  { emoji: "🍎", label: "Enseignant", sub: "Le tableau de bord classe", href: "/enseignants" },
+  { emoji: "🏫", label: "Établissement", sub: "Déploiement & suivi", href: "/espace-ecoles" },
 ];
 
 // Maths·974 PARKÉ hors vitrine pour le moment (déc. Frédéric, 05/07/2026) : la
