@@ -13,7 +13,7 @@ const LASTMOD_CORE    = new Date("2026-06-25");
 const LASTMOD_CAHIERS = new Date("2026-06-29");
 const LASTMOD_DICTEE  = new Date("2026-07-01");
 const LASTMOD_974     = new Date("2026-07-02");
-const LASTMOD_JEUX    = new Date("2026-07-04");
+const LASTMOD_JEUX    = new Date("2026-07-05");
 const LASTMOD_LEGAL   = new Date("2026-02-18");
 
 const MATHS_CLASSES    = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe"];
@@ -119,6 +119,7 @@ const ROUTES: RouteConfig[] = [
 
   // ── JEU « QUI SUIS-JE ? » (32 cartes à imprimer, toutes matières) ──────────
   { path: "/qui-suis-je-a-imprimer",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
+  { path: "/qui-suis-je-a-imprimer/6e",         priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
   { path: "/qui-suis-je-a-imprimer/vers-la-6e", priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
 
   // ── ESPACES ────────────────────────────────────────────────────────────────

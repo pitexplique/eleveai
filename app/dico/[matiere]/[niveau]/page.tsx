@@ -11,9 +11,14 @@ import {
   ORDRE_FAMILLES,
   type FamilleDico,
   type MotDico,
+  type DefiDico,
 } from "@/lib/dico";
 
 type Phase = "question" | "feedback";
+
+// Le lecteur interactif ne joue que les mots munis d'un mini-jeu (`defi`).
+// Les mots « carte seule » (sans defi) existent pour le jeu imprimable.
+type MotJouable = MotDico & { defi: DefiDico };
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -38,9 +43,10 @@ export default function DicoPlayerPage() {
   const [monte, setMonte] = useState(false);
   useEffect(() => setMonte(true), []);
 
-  const deck = useMemo(() => {
+  const deck = useMemo<MotJouable[]>(() => {
     if (!dico) return [];
-    const mots = famille === "toutes" ? dico.mots : dico.mots.filter((m) => m.famille === famille);
+    const jouables = dico.mots.filter((m): m is MotJouable => Boolean(m.defi));
+    const mots = famille === "toutes" ? jouables : jouables.filter((m) => m.famille === famille);
     return monte ? shuffle(mots) : mots;
     // on re-mélange quand on change de famille (côté client uniquement)
   }, [dico, famille, monte]);
@@ -53,7 +59,7 @@ export default function DicoPlayerPage() {
   const [score, setScore] = useState(0);
   const [fait, setFait] = useState(0);
 
-  const mot: MotDico | undefined = deck[index];
+  const mot: MotJouable | undefined = deck[index];
 
   // Mélange des propositions, recalculé à chaque mot
   const propositions = useMemo(() => {

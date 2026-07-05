@@ -33,7 +33,17 @@ export type MotDico = {
   famille: FamilleDico;
   definition: string; // courte, niveau élève
   exemple?: string;
-  defi: DefiDico;
+  // Le mini-jeu interactif (page /dico) est OPTIONNEL : une entrée « carte »
+  // n'a besoin que de mot + définition ; on enrichit le `defi` progressivement.
+  defi?: DefiDico;
+};
+
+// Un mot agrégé au niveau d'une CLASSE : on rattache sa matière d'origine
+// (utile pour le jeu de cartes « Qui suis-je ? » par classe, où la matière
+// donne la couleur de la carte).
+export type MotDicoClasse = MotDico & {
+  matiere: string; // slug, ex "maths"
+  matiereLabel: string; // affichage, ex "Maths"
 };
 
 export type Dico = {

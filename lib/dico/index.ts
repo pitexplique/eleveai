@@ -1,8 +1,10 @@
-import type { Dico, FamilleDico, GesteDico } from "./types";
+import type { Dico, FamilleDico, GesteDico, MotDicoClasse } from "./types";
 import { motsMaths6e } from "./maths/6e";
 import { motsFrancais6e } from "./francais/6e";
 
-export type { Dico, MotDico, FamilleDico, GesteDico, DefiDico } from "./types";
+export type { Dico, MotDico, MotDicoClasse, FamilleDico, GesteDico, DefiDico } from "./types";
+export { NIVEAUX, CYCLES, getNiveau } from "./niveaux";
+export type { NiveauDico, CycleDico } from "./niveaux";
 
 // 🔹 Métadonnées d'affichage des familles de mots
 export const FAMILLES_DICO: Record<FamilleDico, { label: string; emoji: string }> = {
@@ -71,6 +73,16 @@ export function getDico(matiere: string, niveau: string): Dico | null {
 
 export function listDicos(): Dico[] {
   return Object.values(DICOS);
+}
+
+// 🔹 Tous les mots d'une CLASSE, toutes matières confondues (matière rattachée).
+// Base du jeu de cartes « Qui suis-je ? » par classe.
+export function motsDeLaClasse(niveau: string): MotDicoClasse[] {
+  return Object.values(DICOS)
+    .filter((d) => d.niveau === niveau)
+    .flatMap((d) =>
+      d.mots.map((m) => ({ ...m, matiere: d.matiere, matiereLabel: d.matiereLabel }))
+    );
 }
 
 // 🔹 Comparaison souple des réponses tapées (insensible à la casse et aux accents)
