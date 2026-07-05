@@ -322,10 +322,22 @@ function actionExplore(
   );
 }
 
+// Coachs de LANGUES : niveau CECRL (a1…c1). Les autres coachs : niveau scolaire
+// (6e, cm2…). On n'attache un ?classe= au lien QUE s'il correspond au système du
+// coach — sinon on l'omet (le coach demandera/reprendra le niveau lui-même).
+// Évite le piège « espagnol?classe=5e » ou « maths?classe=a1 ».
+const LANGUES_CECRL = new Set(["anglais", "espagnol", "ia"]);
+function niveauPourCoach(matiere: string, niveau: string | null): string | null {
+  if (!niveau) return null;
+  const estCECRL = /^[abc][12]$/.test(niveau);
+  return LANGUES_CECRL.has(matiere) === estCECRL ? niveau : null;
+}
+
 // Lien d'une action ; ajoute ?classe= pour les coachs (atterrir au bon niveau).
 function lienAction(a: ActionCatalogue, niveau: string | null): string {
-  if (a.route.startsWith("/coach-ia/") && niveau) {
-    return `${a.route}?classe=${encodeURIComponent(niveau)}`;
+  const n = niveauPourCoach(a.matiere, niveau);
+  if (a.route.startsWith("/coach-ia/") && n) {
+    return `${a.route}?classe=${encodeURIComponent(n)}`;
   }
   return a.route;
 }
@@ -348,7 +360,8 @@ function labelMatiere(m: string): string {
 // Lien vers le coach d'une matière. `niveau` est DÉJÀ normalisé (ex. « 6e »,
 // « cm2 ») ; on le passe en ?classe= comme l'accueil, pour atterrir au bon niveau.
 function lienCoach(matiere: string, niveau: string | null): string {
-  const q = niveau ? `?classe=${encodeURIComponent(niveau)}` : "";
+  const n = niveauPourCoach(matiere, niveau);
+  const q = n ? `?classe=${encodeURIComponent(n)}` : "";
   return `/coach-ia/${encodeURIComponent(matiere)}${q}`;
 }
 
@@ -434,12 +447,20 @@ function construireRecoDuJour(args: {
   // ── P3 — Progresser : sa notion la plus solide → flow. ──────────────────────
   else if (notions.length > 0) {
     const n = [...notions].sort((a, b) => b.mastery - a.mastery)[0];
+    // Déjà solide (≥ SEUIL_FORT) : « vise plus haut » sonnerait faux sur un 99.
+    // On félicite et on oriente vers une nouvelle notion (le coach en sert une
+    // autre). On n'affiche PAS le libellé brut de la notion (souvent technique).
+    const maitrisee = n.mastery >= SEUIL_FORT;
     principale = {
       slot: "principale", emoji: "🔥", ton: "fire",
       categorie: "Progresser",
-      titre: `Continue en ${labelMatiere(n.matiere)}`,
-      message: `Tu es bien lancé en ${labelMatiere(n.matiere)} (${n.mastery}/100) — on enchaîne et on vise plus haut ?`,
-      cta: "Continuer →",
+      titre: maitrisee
+        ? `Tu maîtrises ${labelMatiere(n.matiere)}`
+        : `Continue en ${labelMatiere(n.matiere)}`,
+      message: maitrisee
+        ? `Déjà ${n.mastery}/100 en ${labelMatiere(n.matiere)} — bravo ! On passe à une nouvelle notion ?`
+        : `Tu es bien lancé en ${labelMatiere(n.matiere)} (${n.mastery}/100) — on enchaîne et on vise plus haut ?`,
+      cta: maitrisee ? "Nouvelle notion →" : "Continuer →",
       lien: lienCoach(n.matiere, niveau),
       matiere: n.matiere,
       notionId: n.notionId,
@@ -592,7 +613,15 @@ export async function computeProfil(args: {
   const typesTouches = new Set(activite.typesTouches);
   if (tutor.length > 0) typesTouches.add("coach");
   // Niveau normalisé pour les liens coach (?classe=…), ex. « 6°C » → « 6e ».
-  const niveauNorm = niveauPublic(args.classe)?.toLowerCase() ?? null;
+  // ⚠️ Les coachs de LANGUES (anglais/espagnol/ia) travaillent par niveau CECRL
+  // (a1, a2, b1…), pas par niveau scolaire. La classe stockée dans le profil peut
+  // donc être « a1 » (dernière activité = espagnol) : niveauPublic() ne la
+  // reconnaît pas → renverrait null → lien coach sans niveau. On garde donc le
+  // niveau CECRL tel quel, sinon on réduit au niveau scolaire public.
+  const classeBrute = (args.classe ?? "").trim();
+  const niveauNorm = /^[abc][12]$/i.test(classeBrute)
+    ? classeBrute.toLowerCase()
+    : niveauPublic(args.classe)?.toLowerCase() ?? null;
 
   const reco_du_jour = construireRecoDuJour({
     catalogue,
