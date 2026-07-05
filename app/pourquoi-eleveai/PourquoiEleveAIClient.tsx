@@ -248,7 +248,7 @@ export default function PourquoiEleveAIClient() {
         <section className="rounded-[2rem] border border-amber-200 bg-white/80 p-6 shadow-xl backdrop-blur text-center">
           <p className="text-3xl">🏝️</p>
           <h2 className="mt-2 text-xl font-black text-slate-950">
-            Conçu à La Réunion, pour La Réunion
+            Conçu à La Réunion, pour les enfants du monde entier
           </h2>
           <p className="mt-2 font-semibold text-slate-600 max-w-xl mx-auto">
             EleveAI est créé par un enseignant de maths en activité à La Réunion.

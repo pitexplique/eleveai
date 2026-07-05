@@ -343,7 +343,7 @@ export default function EspaceEcolesPage() {
         <section className="rounded-[2rem] border border-amber-200 bg-white/80 p-8 shadow-xl backdrop-blur text-center">
           <p className="text-4xl">🏝️</p>
           <h2 className="mt-3 text-2xl font-black text-slate-950">
-            Conçu à La Réunion, pour La Réunion
+            Conçu à La Réunion, pour les enfants du monde entier
           </h2>
           <p className="mt-3 font-semibold text-slate-600 max-w-2xl mx-auto">
             EleveAI est créé et utilisé au quotidien par un enseignant de maths en

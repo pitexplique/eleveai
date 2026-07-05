@@ -446,13 +446,17 @@ export default function AccueilPage({
               Bonjour, {prenomAffiche} 👋
             </p>
           )}
+          {/* Accueil chaleureux — « chez toi », sans jugement (esprit north star). */}
+          <p className="mx-auto mb-2 inline-block rounded-full bg-amber-300/15 px-4 py-1 text-xs font-black text-amber-200 sm:text-sm">
+            🏡 Ici, tu es chez toi
+          </p>
           {/* Une seule promesse : le coach est le cœur. */}
           <h1 className="text-3xl font-black tracking-tight text-white sm:text-5xl">
             Ton <span className="text-amber-300">coach IA</span> pour progresser
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-sm font-semibold leading-6 text-white/80 sm:text-base">
-            Maths, français, anglais, espagnol — du CP au Bac. Comprends,
-            entraîne-toi et avance à ton rythme. ✨
+            Maths, français, anglais, espagnol — du CP au Bac. À ton rythme,
+            sans jugement&nbsp;: on t&apos;explique, on t&apos;encourage. ✨
           </p>
 
           {/* Chacun sa porte : Élève reste ici, les adultes vont sur leur page. */}
@@ -509,8 +513,8 @@ export default function AccueilPage({
             <p className="text-xs font-black uppercase tracking-wide text-emerald-200">🎓 Élève</p>
             <h2 className="mt-1 text-xl font-black text-white">Entraîne-toi dans ta matière forte</h2>
             <p className="mt-2 flex-1 text-sm font-semibold leading-snug text-white/75">
-              Coach IA, parcours guidés, dictée du jour, défis… tout pour comprendre
-              et progresser à ton rythme, du CP au Bac.
+              Coach IA, parcours, dictée, défis — à ton rythme, sans jugement.
+              On t&apos;explique et on t&apos;encourage, du CP au Bac.
             </p>
             <Link
               href="#espace-eleve"
@@ -523,10 +527,10 @@ export default function AccueilPage({
           {/* Parent */}
           <div id="a-parent" className="scroll-mt-24 flex flex-col rounded-2xl border border-sky-300/25 bg-gradient-to-br from-sky-400/[0.10] to-white/[0.03] p-5 sm:p-6">
             <p className="text-xs font-black uppercase tracking-wide text-sky-200">👪 Parent</p>
-            <h2 className="mt-1 text-xl font-black text-white">Une IA encadrée, rassurante</h2>
+            <h2 className="mt-1 text-xl font-black text-white">L&apos;IA explique, elle ne triche pas</h2>
             <p className="mt-2 flex-1 text-sm font-semibold leading-snug text-white/75">
-              On explique, on ne fait pas à la place. Gratuit pour l&apos;élève, sans
-              publicité, vos enfants sont en sécurité.
+              Encadrée, sans publicité, données protégées. Et <strong>gratuit si le
+              collège de votre enfant l&apos;utilise</strong>.
             </p>
             <Link
               href="/parents"
@@ -539,10 +543,10 @@ export default function AccueilPage({
           {/* Enseignant */}
           <div id="a-enseignant" className="scroll-mt-24 flex flex-col rounded-2xl border border-amber-300/25 bg-gradient-to-br from-amber-400/[0.10] to-white/[0.03] p-5 sm:p-6">
             <p className="text-xs font-black uppercase tracking-wide text-amber-200">🍎 Enseignant</p>
-            <h2 className="mt-1 text-xl font-black text-white">Le tableau de bord de vos élèves</h2>
+            <h2 className="mt-1 text-xl font-black text-white">Conseillez, ne corrigez pas</h2>
             <p className="mt-2 flex-1 text-sm font-semibold leading-snug text-white/75">
-              Suivez la progression, notion par notion. Et utilisez EleveAI en cours :
-              calcul rapide en direct, résultats validés automatiquement.
+              Un bulletin vivant par élève, le suivi en temps réel, vos outils pour
+              la classe. EleveAI corrige&nbsp;; vous, vous enseignez.
             </p>
             <Link
               href="/enseignants"
@@ -555,10 +559,10 @@ export default function AccueilPage({
           {/* Établissement */}
           <div id="a-etablissement" className="scroll-mt-24 flex flex-col rounded-2xl border border-violet-300/25 bg-gradient-to-br from-violet-400/[0.10] to-white/[0.03] p-5 sm:p-6">
             <p className="text-xs font-black uppercase tracking-wide text-violet-200">🏫 Établissement</p>
-            <h2 className="mt-1 text-xl font-black text-white">Déployez EleveAI dans votre collège</h2>
+            <h2 className="mt-1 text-xl font-black text-white">Financé par l&apos;établissement, gratuit pour les familles</h2>
             <p className="mt-2 flex-1 text-sm font-semibold leading-snug text-white/75">
-              Codes élèves et professeurs, sans e-mail ni installation. Suivi de
-              progression classe par classe. Offre pilote sur devis.
+              Multi-matières, suivi classe par classe, RGPD maîtrisé. Déployé en
+              quelques heures, sans installation.
             </p>
             <Link
               href="/espace-ecoles"
