@@ -6,6 +6,11 @@ import { motsFrancais6eCollege } from "./francais/6e-college";
 import { motsAnglais6e } from "./anglais/6e";
 import { motsSciences6e } from "./sciences/6e";
 import { motsHistGeo6e } from "./histoire-geo/6e";
+import { motsMaths5e } from "./maths/5e";
+import { motsFrancais5e } from "./francais/5e";
+import { motsAnglais5e } from "./anglais/5e";
+import { motsSciences5e } from "./sciences/5e";
+import { motsHistGeo5e } from "./histoire-geo/5e";
 import { motsMathsCM2 } from "./maths/cm2";
 import { motsFrancaisCM2 } from "./francais/cm2";
 import { motsSciencesCM2 } from "./sciences/cm2";
@@ -121,6 +126,12 @@ const DICOS_CARTES: Record<string, Dico> = {
   "anglais/6e": { matiere: "anglais", matiereLabel: "Anglais", niveau: "6e", titre: "Dico Anglais 6e", sousTitre: "L'anglais au collège", mots: motsAnglais6e },
   "sciences/6e": { matiere: "sciences", matiereLabel: "Sciences", niveau: "6e", titre: "Dico Sciences 6e", sousTitre: "SVT : le vivant et son milieu", mots: motsSciences6e },
   "histoire-geo/6e": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "6e", titre: "Dico Histoire-Géo 6e", sousTitre: "L'Antiquité et le monde", mots: motsHistGeo6e },
+  // ── 5e (collège) — notions NEUVES, distinctes de la 6e ────────
+  "maths/5e": { matiere: "maths", matiereLabel: "Maths", niveau: "5e", titre: "Dico Maths 5e", sousTitre: "Les notions neuves de 5e", mots: motsMaths5e },
+  "francais/5e": { matiere: "francais", matiereLabel: "Français", niveau: "5e", titre: "Dico Français 5e", sousTitre: "Les notions neuves de 5e", mots: motsFrancais5e },
+  "anglais/5e": { matiere: "anglais", matiereLabel: "Anglais", niveau: "5e", titre: "Dico Anglais 5e", sousTitre: "L'anglais en 5e", mots: motsAnglais5e },
+  "sciences/5e": { matiere: "sciences", matiereLabel: "Sciences", niveau: "5e", titre: "Dico Sciences 5e", sousTitre: "SVT et physique-chimie", mots: motsSciences5e },
+  "histoire-geo/5e": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "5e", titre: "Dico Histoire-Géo 5e", sousTitre: "Moyen Âge, Renaissance, monde", mots: motsHistGeo5e },
   "maths/cm2": {
     matiere: "maths",
     matiereLabel: "Maths",
