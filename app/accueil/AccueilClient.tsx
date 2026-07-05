@@ -27,9 +27,9 @@ const AUDIENCES: {
   sub: string;
   href: string;
 }[] = [
-  // Élève reste sur l'accueil (son espace) via l'ancre ; les adultes vont DIRECT
-  // sur leur page dédiée (pas de double-pas aperçu → « En savoir plus »).
-  { emoji: "🎓", label: "Élève", sub: "Coach, dictée, défis", href: "#a-eleve" },
+  // Toutes les pastilles vont DIRECT (plus de double-pas par l'aperçu) : les
+  // adultes sur leur page dédiée, l'Élève sur son contenu (l'accueil est son espace).
+  { emoji: "🎓", label: "Élève", sub: "Coach, dictée, défis", href: "#espace-eleve" },
   { emoji: "👪", label: "Parent", sub: "Une IA encadrée", href: "/parents" },
   { emoji: "🍎", label: "Enseignant", sub: "Le tableau de bord classe", href: "/enseignants" },
   { emoji: "🏫", label: "Établissement", sub: "Déploiement & suivi", href: "/espace-ecoles" },
