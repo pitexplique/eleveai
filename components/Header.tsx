@@ -379,96 +379,26 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* Desktop nav */}
-        <div className="hidden items-center gap-1 lg:flex">
-
-          {space === "eleve" ? (
-          <>
-          {/* Dictée du jour — le rituel quotidien, tout en tête de barre */}
-          <Link
-            href="/dictee-du-jour"
-            className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition ${
-              isActive(pathname, "/dictee-du-jour")
-                ? "bg-cyan-300 text-[#041B33] shadow-lg"
-                : "bg-cyan-300/15 text-cyan-100 hover:bg-cyan-300/25 hover:text-white"
-            }`}
-          >
-            ✍️ Dictée du jour
-          </Link>
-
-          {/* Cahiers de vacances — produit saisonnier, en tête de barre */}
-          <Link
-            href="/cahier-vacances"
-            className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition ${
-              isActive(pathname, "/cahier-vacances")
-                ? "bg-amber-300 text-[#041B33] shadow-lg"
-                : "bg-amber-300/15 text-amber-200 hover:bg-amber-300/25 hover:text-amber-100"
-            }`}
-          >
-            ☀️ Cahiers de vacances
-          </Link>
-
-          {/* Maths Réel · 974 — les vidéos terrain de La Réunion, en tête de barre */}
-          <Link
-            href="/maths-974"
-            className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition ${
-              isActive(pathname, "/maths-974")
-                ? "bg-rose-400 text-[#041B33] shadow-lg"
-                : "bg-rose-400/15 text-rose-200 hover:bg-rose-400/25 hover:text-rose-100"
-            }`}
-          >
-            🌋 Maths Réel · 974
-          </Link>
-
-          {/* Jeu de 32 cartes « Qui suis-je ? » à imprimer — toutes matières */}
-          <Link
-            href="/qui-suis-je-a-imprimer"
-            className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition ${
-              isActive(pathname, "/qui-suis-je-a-imprimer")
-                ? "bg-fuchsia-300 text-[#041B33] shadow-lg"
-                : "bg-fuchsia-300/15 text-fuchsia-200 hover:bg-fuchsia-300/25 hover:text-fuchsia-100"
-            }`}
-          >
-            🃏 Jeux de cartes
-          </Link>
-
-          {/* Explorer — le catalogue de toutes les actions possibles */}
-          <Link
-            href="/explorer"
-            className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition ${
-              isActive(pathname, "/explorer")
-                ? "bg-violet-300 text-[#041B33] shadow-lg"
-                : "bg-violet-300/15 text-violet-200 hover:bg-violet-300/25 hover:text-violet-100"
-            }`}
-          >
-            🧭 Explorer
-          </Link>
-
-          <MatieresMenu pathname={pathname} />
-          </>
-          ) : (
-          <>
-          {SPACE_NAV[space].map((item) => (
+        {/* Desktop nav — les 4 audiences EXPLICITES (= la navigation) + auth.
+            Cliquer « Élève » ramène à l'accueil (coach, dictée, tout le contenu). */}
+        <div className="hidden items-center gap-1.5 lg:flex">
+          {AUDIENCE_DOORS.map((d) => (
             <Link
-              key={item.href}
-              href={item.href}
-              className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition ${
-                isActive(pathname, item.href)
+              key={d.space}
+              href={d.href}
+              className={[
+                "inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition",
+                d.space === space
                   ? "bg-white text-[#041B33] shadow-lg"
-                  : "text-white/90 hover:bg-white/15 hover:text-white"
-              }`}
+                  : "text-white/85 hover:bg-white/15 hover:text-white",
+              ].join(" ")}
             >
-              <span>{item.icon}</span> {item.label}
+              <span>{d.emoji}</span> {d.label}
             </Link>
           ))}
-          </>
-          )}
 
-          <AudienceSwitcher current={space} />
-
-          {/* Auth */}
           {eleve ? (
-            <div className="ml-2 flex items-center gap-2">
+            <div className="ml-1 flex items-center gap-2">
               <Link
                 href={dashboardHref}
                 className={`inline-flex items-center gap-2 rounded-full ${dashboardColor} px-4 py-2 text-sm font-black text-[#041B33] shadow-lg hover:brightness-110`}
@@ -484,29 +414,14 @@ export default function Header() {
                 <LogOut className="h-4 w-4" />
               </button>
             </div>
-          ) : space === "eleve" ? (
+          ) : (
             <Link
               href="/auth/signin?mode=eleve"
-              className="ml-3 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 px-4 py-2 text-sm font-black text-[#041B33] shadow-lg hover:brightness-110 transition"
+              className="ml-1 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 px-4 py-2 text-sm font-black text-[#041B33] shadow-lg hover:brightness-110 transition"
             >
               <GraduationCap className="h-4 w-4" />
               Connexion / inscription
             </Link>
-          ) : (
-            <div className="ml-2 flex items-center gap-2">
-              <Link
-                href={SPACE_CTA[space].href}
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-300 to-indigo-300 px-4 py-2 text-sm font-black text-[#041B33] shadow-lg hover:brightness-110 transition"
-              >
-                {SPACE_CTA[space].label}
-              </Link>
-              <Link
-                href="/auth/signin?mode=eleve"
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-3 py-2 text-sm font-bold text-white/90 hover:bg-white/20 transition"
-              >
-                Connexion
-              </Link>
-            </div>
           )}
         </div>
 
@@ -562,73 +477,7 @@ export default function Header() {
               </Link>
             )}
 
-            {space !== "eleve" && (
-              <div className="grid grid-cols-1 gap-2">
-                {SPACE_NAV[space].map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-black text-white"
-                  >
-                    <span className="text-base">{item.icon}</span> {item.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-
-            {space === "eleve" && (
-            <>
-            <Link
-              href="/dictee-du-jour"
-              onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center gap-2 rounded-2xl bg-cyan-300/15 border border-cyan-300/30 px-4 py-3 text-sm font-black text-cyan-100"
-            >
-              ✍️ Dictée du jour · un mot chaque matin
-            </Link>
-
-            <Link
-              href="/cahier-vacances"
-              onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center gap-2 rounded-2xl bg-amber-300/15 border border-amber-300/30 px-4 py-3 text-sm font-black text-amber-200"
-            >
-              ☀️ Cahiers de vacances · CE2 → Bac +1
-            </Link>
-
-            <Link
-              href="/maths-974"
-              onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center gap-2 rounded-2xl bg-rose-400/15 border border-rose-300/30 px-4 py-3 text-sm font-black text-rose-200"
-            >
-              🌋 Maths Réel · 974 — La Réunion en vidéo
-            </Link>
-
-            <Link
-              href="/qui-suis-je-a-imprimer"
-              onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center gap-2 rounded-2xl bg-fuchsia-300/15 border border-fuchsia-300/30 px-4 py-3 text-sm font-black text-fuchsia-200"
-            >
-              🃏 Jeux de cartes · Qui suis-je ? à imprimer
-            </Link>
-
-            <Link
-              href="/explorer"
-              onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center gap-2 rounded-2xl bg-violet-300/15 border border-violet-300/30 px-4 py-3 text-sm font-black text-violet-200"
-            >
-              🧭 Explorer — tout ce que tu peux faire
-            </Link>
-
-            <MobileSection title="Maths"    accent="text-orange-300" items={NAV_MATHS}    pathname={pathname} />
-            <MobileSection title="Français" accent="text-sky-300"    items={NAV_FRANCAIS} pathname={pathname} />
-            <MobileSection title="Anglais"   accent="text-blue-300"   items={NAV_ANGLAIS}   pathname={pathname} />
-            <MobileSection title="Espagnol" accent="text-red-300"    items={NAV_ESPAGNOL}  pathname={pathname} />
-            <MobileSection title="IA"       accent="text-cyan-300"   items={NAV_IA}       pathname={pathname} />
-            <MobileSection title="Économie" accent="text-amber-300"  items={NAV_ECONOMIE}  pathname={pathname} />
-            </>
-            )}
-
-            {/* Sélecteur « Vous êtes ? » — présent dans tous les espaces */}
+            {/* Sélecteur « Vous êtes ? » — le seul contenu du menu (header épuré) */}
             <div className="grid grid-cols-2 gap-2 border-t border-white/10 pt-4">
               {AUDIENCE_DOORS.map((d) => (
                 <Link
