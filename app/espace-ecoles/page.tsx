@@ -229,6 +229,71 @@ export default function EspaceEcolesPage() {
           </div>
         </section>
 
+        {/* ── MAQUETTE « screenshot » : le tableau de bord principal ── */}
+        <section>
+          <h2 className="text-center text-2xl font-black text-slate-950 sm:text-3xl">
+            Le pilotage, en temps réel
+          </h2>
+          <p className="mx-auto mt-2 max-w-2xl text-center text-sm font-semibold text-slate-500">
+            Ce que voit le principal : l&apos;engagement de tout l&apos;établissement,
+            classe par classe.
+          </p>
+
+          <div className="mx-auto mt-8 max-w-2xl overflow-hidden rounded-3xl border border-slate-800 bg-[#041B33] p-5 text-white shadow-2xl sm:p-7">
+            <div className="mb-4 flex items-center gap-1.5">
+              <span className="h-3 w-3 rounded-full bg-red-400/70" />
+              <span className="h-3 w-3 rounded-full bg-amber-400/70" />
+              <span className="h-3 w-3 rounded-full bg-emerald-400/70" />
+              <span className="ml-3 text-xs font-bold text-white/40">Tableau de bord · Principal</span>
+            </div>
+
+            {/* KPIs établissement */}
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {[
+                { v: "412", l: "élèves" },
+                { v: "78 %", l: "actifs / semaine" },
+                { v: "1 240", l: "exercices / semaine" },
+                { v: "6", l: "matières" },
+              ].map((k) => (
+                <div key={k.l} className="rounded-2xl bg-white/5 p-3 text-center">
+                  <p className="text-xl font-black text-white">{k.v}</p>
+                  <p className="mt-0.5 text-[11px] font-semibold text-white/50">{k.l}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Engagement par niveau */}
+            <p className="mt-4 text-xs font-black uppercase tracking-wide text-blue-200">
+              Engagement par niveau
+            </p>
+            <div className="mt-2 space-y-2">
+              {[
+                { n: "6e", v: 82, c: "from-emerald-400 to-teal-500", s: "🟢" },
+                { n: "5e", v: 74, c: "from-emerald-400 to-teal-500", s: "🟢" },
+                { n: "4e", v: 61, c: "from-amber-400 to-orange-500", s: "🟠" },
+                { n: "3e", v: 88, c: "from-emerald-400 to-teal-500", s: "🟢" },
+              ].map((r) => (
+                <div key={r.n} className="flex items-center gap-3">
+                  <span className="w-8 text-xs font-black text-white/70">{r.n}</span>
+                  <div className="h-2 flex-1 overflow-hidden rounded-full bg-white/10">
+                    <div className={`h-full rounded-full bg-gradient-to-r ${r.c}`} style={{ width: `${r.v}%` }} />
+                  </div>
+                  <span className="w-14 text-right text-xs font-black">{r.s} {r.v}%</span>
+                </div>
+              ))}
+            </div>
+
+            <p className="mt-3 inline-flex items-center gap-1 rounded-full bg-amber-400/15 px-3 py-1 text-xs font-black text-amber-200">
+              👀 À suivre : 4e B — engagement en baisse cette semaine
+            </p>
+          </div>
+
+          <p className="mx-auto mt-4 max-w-2xl text-center text-xs font-semibold text-slate-500">
+            Une vue d&apos;ensemble claire, en temps réel — et respectueuse du RGPD :
+            aucune donnée nominative exposée au-delà du nécessaire.
+          </p>
+        </section>
+
         {/* ── RGPD & SOUVERAINETÉ ── */}
         <section className="rounded-[2rem] border border-sky-200 bg-white/80 p-8 shadow-xl backdrop-blur">
           <div className="flex flex-wrap items-start gap-4">
