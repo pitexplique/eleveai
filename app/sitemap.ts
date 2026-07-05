@@ -2,6 +2,7 @@
 
 import type { MetadataRoute } from "next";
 import { getAllBlogPosts } from "@/data/blogPosts";
+import { NIVEAUX, motsDeLaClasse } from "@/lib/dico";
 
 const BASE_URL = "https://eleveai.fr";
 
@@ -118,14 +119,9 @@ const ROUTES: RouteConfig[] = [
   { path: "/maths-974",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_974 },
 
   // ── JEU « QUI SUIS-JE ? » (32 cartes à imprimer, toutes matières) ──────────
+  // Le hub ; les paquets par classe sont générés automatiquement (voir
+  // jeuxCartesRoutes) → chaque nouvelle classe apparaît toute seule ici.
   { path: "/qui-suis-je-a-imprimer",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
-  { path: "/qui-suis-je-a-imprimer/cp",         priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
-  { path: "/qui-suis-je-a-imprimer/ce1",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
-  { path: "/qui-suis-je-a-imprimer/ce2",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
-  { path: "/qui-suis-je-a-imprimer/cm1",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
-  { path: "/qui-suis-je-a-imprimer/cm2",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
-  { path: "/qui-suis-je-a-imprimer/6e",         priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
-  { path: "/qui-suis-je-a-imprimer/vers-la-6e", priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
 
   // ── ESPACES ────────────────────────────────────────────────────────────────
   { path: "/espace-ecoles",   priority: 0.95, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
@@ -226,9 +222,21 @@ const coachRoutes: RouteConfig[] = [
   })),
 ];
 
+// Jeu « Qui suis-je ? » — un paquet par classe, généré depuis les classes qui ont
+// du contenu (GS-CP → Terminale au fur et à mesure). Toute nouvelle classe s'ajoute
+// ici automatiquement, sans toucher ce fichier.
+const jeuxCartesRoutes: RouteConfig[] = NIVEAUX.filter(
+  (n) => motsDeLaClasse(n.slug).length > 0
+).map((n) => ({
+  path: `/qui-suis-je-a-imprimer/${n.slug}`,
+  priority: 0.85,
+  changeFrequency: "weekly" as const,
+  lastMod: LASTMOD_JEUX,
+}));
+
 export default function sitemap(): MetadataRoute.Sitemap {
   // Routes statiques
-  const staticRoutes = [...ROUTES, ...coachRoutes].map((route) => ({
+  const staticRoutes = [...ROUTES, ...coachRoutes, ...jeuxCartesRoutes].map((route) => ({
     url: u(route.path),
     lastModified: route.lastMod ?? LASTMOD_CORE,
     changeFrequency: route.changeFrequency,
