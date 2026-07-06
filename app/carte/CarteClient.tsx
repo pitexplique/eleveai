@@ -137,7 +137,7 @@ export default function CarteClient() {
             La Réunion, point par point
           </p>
           <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">
-            La carte des savoirs 🗺️
+            Carte de l&apos;île de La Réunion 🗺️
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-base font-semibold text-slate-600">
             Clique sur un point de l&apos;île : quelles <span className="text-cyan-700">maths</span>, quelle{" "}
