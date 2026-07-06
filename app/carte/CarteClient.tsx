@@ -34,7 +34,7 @@ const POINTS: Point[] = [
   {
     id: "saint-denis",
     lieu: "Saint-Denis",
-    x: 216, y: 74, emoji: "🏛️", matiere: "histoire",
+    x: 161, y: 52, emoji: "🏛️", matiere: "histoire",
     notion: "Dates & repères",
     question: "En quelle année La Réunion devient-elle un département français ?",
     reponse: "En 1946. L'île passe de colonie à département d'outre-mer.",
@@ -42,7 +42,7 @@ const POINTS: Point[] = [
   {
     id: "saint-pierre",
     lieu: "Marché de Saint-Pierre",
-    x: 196, y: 256, emoji: "🍒", matiere: "maths",
+    x: 210, y: 293, emoji: "🍒", matiere: "maths",
     notion: "Proportionnalité",
     question: "3 kg de letchis coûtent 5 €. Combien pour 9 kg ?",
     reponse: "9 kg = 3 × 3 kg, donc 3 × 5 = 15 €.",
@@ -51,7 +51,7 @@ const POINTS: Point[] = [
   {
     id: "ermitage",
     lieu: "Lagon de l'Ermitage",
-    x: 70, y: 162, emoji: "🐠", matiere: "ecologie",
+    x: 60, y: 166, emoji: "🐠", matiere: "ecologie",
     notion: "Croissance & vitesse",
     question: "Le corail grandit d'environ 1 cm par an. En combien de temps fait-il 15 cm ?",
     reponse: "15 cm à 1 cm/an → 15 ans. Un récif, c'est lent et fragile : on le protège.",
@@ -59,7 +59,7 @@ const POINTS: Point[] = [
   {
     id: "mafate",
     lieu: "Cirque de Mafate",
-    x: 150, y: 134, emoji: "🥾", matiere: "maths",
+    x: 150, y: 128, emoji: "🥾", matiere: "maths",
     notion: "Fractions",
     question: "En rando, j'ai bu le tiers de mes 3 bouteilles d'eau. Ça fait combien ?",
     reponse: "Le tiers de 3 bouteilles = 3 × 1/3 = 1 bouteille.",
@@ -68,7 +68,7 @@ const POINTS: Point[] = [
   {
     id: "cilaos",
     lieu: "Montée de Cilaos",
-    x: 182, y: 206, emoji: "🚴", matiere: "maths",
+    x: 166, y: 186, emoji: "🚴", matiere: "maths",
     notion: "Proportionnalité inverse",
     question: "À vélo, 1 tour de pédales (30 dents) fait tourner la roue (10 dents) combien de fois ?",
     reponse: "30 ÷ 10 = 3 tours de roue pour 1 tour de pédales.",
@@ -77,7 +77,7 @@ const POINTS: Point[] = [
   {
     id: "piton-des-neiges",
     lieu: "Piton des Neiges",
-    x: 220, y: 150, emoji: "🏔️", matiere: "maths",
+    x: 186, y: 150, emoji: "🏔️", matiere: "maths",
     notion: "Nombres relatifs",
     question: "Au sommet, il gèle : on repère −4 °C et 2 °C. Où placer le 0 ?",
     reponse: "De −4 à 2 il y a 6 degrés ; le 0 est 4 graduations après −4.",
@@ -86,7 +86,7 @@ const POINTS: Point[] = [
   {
     id: "fournaise",
     lieu: "Piton de la Fournaise",
-    x: 300, y: 194, emoji: "🌋", matiere: "maths",
+    x: 306, y: 224, emoji: "🌋", matiere: "maths",
     notion: "Vitesse · durée",
     question: "La lave avance de 300 m en 2 h. Quand atteint-elle la route, à 1,5 km ?",
     reponse: "Vitesse 150 m/h ; 1 500 ÷ 150 = 10 h.",
@@ -95,16 +95,17 @@ const POINTS: Point[] = [
   {
     id: "canne-est",
     lieu: "Champs de canne (Est)",
-    x: 332, y: 122, emoji: "🌾", matiere: "ecologie",
+    x: 262, y: 88, emoji: "🌾", matiere: "ecologie",
     notion: "Pourcentage",
     question: "Un planteur récolte 60 t de cannes, à 11 % de sucre. Combien de sucre ?",
     reponse: "60 × 11 ÷ 100 = 6,6 t de sucre.",
   },
 ];
 
-/* Silhouette stylisée de La Réunion (oval irrégulier + pointe SE du Grand Brûlé). */
+/* Silhouette de La Réunion, calquée sur la carte réelle (côtes + pointe SE du
+   Grand Brûlé / Pointe de la Table). Sens horaire depuis Saint-Denis (Nord). */
 const ILE =
-  "M 210 45 C 285 42 355 80 372 135 C 380 165 372 190 350 205 C 372 220 360 250 320 258 C 300 275 250 280 205 276 C 130 272 60 235 45 175 C 35 135 60 85 120 60 C 150 47 180 46 210 45 Z";
+  "M 161 35 C 200 30 235 42 262 60 C 295 82 315 100 321 123 C 340 140 352 150 354 164 C 362 185 372 210 367 239 C 360 262 348 282 328 290 C 305 300 288 302 269 302 C 250 306 235 310 216 309 C 188 308 158 300 138 277 C 110 250 88 235 79 214 C 62 188 48 160 46 132 C 44 108 50 88 62 76 C 74 64 84 60 98 57 C 120 52 140 40 161 35 Z";
 
 const FILTRES: { key: Matiere | "tout"; label: string }[] = [
   { key: "tout", label: "Tout" },
@@ -165,9 +166,9 @@ export default function CarteClient() {
 
         {/* La carte */}
         <div className="mt-6 overflow-hidden rounded-3xl border border-white bg-white/60 p-3 shadow-xl shadow-cyan-900/10">
-          <svg viewBox="0 0 420 320" className="w-full" role="img" aria-label="Carte de La Réunion avec des points de savoir">
+          <svg viewBox="0 0 420 340" className="w-full" role="img" aria-label="Carte de La Réunion avec des points de savoir">
             {/* océan */}
-            <rect x={0} y={0} width={420} height={320} className="fill-sky-100" />
+            <rect x={0} y={0} width={420} height={340} className="fill-sky-100" />
             {[40, 70, 100].map((cy) => (
               <path key={cy} d={`M 20 ${cy} q 15 -8 30 0 t 30 0 t 30 0`} className="fill-none stroke-sky-200" strokeWidth={2} />
             ))}
