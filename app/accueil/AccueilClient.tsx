@@ -697,43 +697,62 @@ export default function AccueilPage({
             </Link>
           </div>
 
-          {/* Parcours par matière — grille jumelle des coachs (faire le point) */}
-          <div className="mb-4 mt-8">
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-violet-200/70">
-              🛤️ Faire le point (🟢 🟡 🔴)
-            </p>
-            <h2 className="mt-1 text-xl font-black text-white">
-              Les parcours par matière
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-            {visibleParcours.map((subject) => (
-              <Link
-                key={subject.label}
-                href={getHref(subject.href)}
-                className={[
-                  "group relative flex min-h-[122px] flex-col items-center justify-center gap-2 rounded-2xl border p-4 sm:p-5 text-center",
-                  "bg-white/5 backdrop-blur-md transition-all duration-300",
-                  "hover:-translate-y-2 hover:scale-105",
-                  `hover:shadow-2xl ${subject.glow}`,
-                  subject.border,
-                ].join(" ")}
-              >
-                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${subject.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-
-                <span className="relative z-10 text-3xl sm:text-4xl drop-shadow-lg">
-                  {subject.icon}
-                </span>
-                <div className="relative z-10">
-                  <p className="text-sm sm:text-base font-black text-white leading-tight">
+          {/* Parcours par matière — même modèle que le coach : chips + aperçu */}
+          <div className="mt-8 flex flex-col items-center gap-6 lg:flex-row lg:justify-between">
+            <div className="w-full text-center lg:flex-1 lg:text-left">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-violet-200/80">
+                🛤️ Parcours
+              </p>
+              <h2 className="mt-1 text-2xl font-black text-white">
+                Fais le point, matière par matière
+              </h2>
+              <p className="mt-1.5 text-sm font-semibold leading-snug text-white/75">
+                Un bilan de tes forces (🟢) et de ce qui coince (🔴) — puis on s&apos;entraîne pile là où il faut.
+              </p>
+              <div className="mt-4 flex flex-wrap justify-center gap-2 lg:justify-start">
+                {visibleParcours.map((subject) => (
+                  <Link
+                    key={subject.label}
+                    href={getHref(subject.href)}
+                    className={`inline-flex items-center gap-1.5 rounded-full border bg-white/5 px-3.5 py-2 text-sm font-black text-white backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white/10 ${subject.border}`}
+                  >
+                    <span className="text-base leading-none">{subject.icon}</span>
                     {subject.label}
-                  </p>
-                  <p className="mt-0.5 text-[10px] sm:text-xs text-white/60 leading-tight hidden sm:block">
-                    {subject.desc}
-                  </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Aperçu façon capture d'un parcours (bilan 🟢🟡🔴) */}
+            <Link
+              href="/parcours"
+              className="group w-full max-w-[300px] shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl transition hover:-translate-y-0.5 hover:shadow-2xl"
+            >
+              <div className="flex items-center justify-between bg-gradient-to-r from-violet-600 to-fuchsia-600 px-3 py-2 text-white">
+                <span className="text-[11px] font-black">🛤️ Parcours Maths</span>
+                <span className="text-[9px] font-black opacity-80">ton bilan</span>
+              </div>
+              <div className="space-y-1.5 p-3">
+                <span className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-black text-slate-700">
+                  <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />Fractions</span>
+                  <span className="text-[10px] font-black text-emerald-600">Acquis</span>
+                </span>
+                <span className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-black text-slate-700">
+                  <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-amber-400" />Proportionnalité</span>
+                  <span className="text-[10px] font-black text-amber-600">En cours</span>
+                </span>
+                <span className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-black text-slate-700">
+                  <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-rose-400" />Géométrie</span>
+                  <span className="text-[10px] font-black text-rose-500">À revoir</span>
+                </span>
+                <div className="rounded-lg bg-violet-50 px-3 py-1.5 text-[11px] font-bold leading-snug text-violet-800">
+                  🎯 On repart pile de ce qui coince.
                 </div>
-              </Link>
-            ))}
+                <p className="text-right text-[8px] font-black uppercase tracking-[0.15em] text-slate-300">
+                  eleveai.fr
+                </p>
+              </div>
+            </Link>
           </div>
 
           {/* Picto Maths · 974 — après les parcours : aperçu « capture » d'un défi */}
