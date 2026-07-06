@@ -100,6 +100,54 @@ function DiagrammeCarres() {
   );
 }
 
+/* Le chat & la tortue : deux tables identiques, animaux échangés, avec les
+   crochets de mesure 130 cm / 50 cm (façon schéma « hauteur de la table »). */
+function DiagrammeTable() {
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <svg viewBox="0 0 350 210" className="w-full max-w-md" role="img" aria-label="Deux tables identiques : à gauche le chat sur la table et la tortue au sol (130 cm), à droite la tortue sur la table et le chat au sol (50 cm)">
+        {/* ── Table de gauche : chat en haut, tortue en bas ── */}
+        <g className="fill-slate-800">
+          <rect x={25} y={118} width={110} height={6} rx={2} />
+          <rect x={74} y={124} width={6} height={54} />
+          <rect x={45} y={178} width={64} height={6} rx={2} />
+        </g>
+        <text x={80} y={114} fontSize={26} textAnchor="middle">🐱</text>
+        <text x={92} y={177} fontSize={20} textAnchor="middle">🐢</text>
+        {/* crochet 130 cm */}
+        <g className="stroke-cyan-600" strokeWidth={2} fill="none">
+          <path d="M150 90 h-8 M150 90 V180 M150 180 h-8" />
+        </g>
+        <text x={150} y={84} fontSize={13} fontWeight={800} textAnchor="middle" className="fill-cyan-700">
+          130 cm
+        </text>
+
+        {/* ── Table de droite : tortue en haut, chat au sol (dressé) ── */}
+        <g className="fill-slate-800">
+          <rect x={200} y={118} width={110} height={6} rx={2} />
+          <rect x={249} y={124} width={6} height={54} />
+          <rect x={220} y={178} width={64} height={6} rx={2} />
+        </g>
+        <text x={255} y={114} fontSize={22} textAnchor="middle">🐢</text>
+        <text x={272} y={206} fontSize={26} textAnchor="middle">🐱</text>
+        {/* crochet 50 cm */}
+        <g className="stroke-cyan-600" strokeWidth={2} fill="none">
+          <path d="M322 100 h-8 M322 100 V152 M322 152 h-8" />
+        </g>
+        <text x={322} y={94} fontSize={13} fontWeight={800} textAnchor="middle" className="fill-cyan-700">
+          50 cm
+        </text>
+
+        {/* sol */}
+        <line x1={10} y1={186} x2={340} y2={186} className="stroke-slate-300" strokeWidth={1.5} strokeDasharray="3 3" />
+      </svg>
+      <span className="text-center text-xs font-black text-slate-600">
+        La table est la même des deux côtés.
+      </span>
+    </div>
+  );
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Une page-défi (une par picto)                                             */
 /* -------------------------------------------------------------------------- */
@@ -134,7 +182,13 @@ function PagePicto({ p, index, total }: { p: Picto; index: number; total: number
           {p.enonce && (
             <p className="mb-5 text-center text-sm font-bold text-slate-600 print:text-xs">{p.enonce}</p>
           )}
-          {p.diagram === "carres" ? <DiagrammeCarres /> : <Illustration scene={p.scene} />}
+          {p.diagram === "carres" ? (
+            <DiagrammeCarres />
+          ) : p.diagram === "table" ? (
+            <DiagrammeTable />
+          ) : (
+            <Illustration scene={p.scene} />
+          )}
         </div>
 
         {/* Pistes + place pour chercher */}

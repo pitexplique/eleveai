@@ -22,7 +22,7 @@ export type Picto = {
   question: string; // LA question (grande)
   enonce?: string; // données / contexte
   scene: Cell[][]; // l'illustration, ligne par ligne
-  diagram?: "carres"; // schéma dessiné (au lieu de la scène d'icônes)
+  diagram?: "carres" | "table"; // schéma dessiné (au lieu de la scène d'icônes)
   piste: string; // coup de pouce (reste sur la page)
   reponse: string; // corrigé (page séparée)
 };
@@ -324,19 +324,9 @@ export const PICTOS: Picto[] = [
     notion: "Raisonnement · longueurs",
     question: "Quelle est la hauteur de la table ?",
     enonce:
-      "Chaque mesure va du haut de l'animal posé sur la table jusqu'au haut de l'animal resté au sol. Le chat et la tortue n'ont pas la même taille.",
-    scene: [
-      [
-        { t: "ic", e: "🐱", cap: "sur la table" },
-        { t: "val", v: "130 cm" },
-        { t: "ic", e: "🐢", cap: "au sol" },
-      ],
-      [
-        { t: "ic", e: "🐢", cap: "sur la table" },
-        { t: "val", v: "50 cm" },
-        { t: "ic", e: "🐱", cap: "au sol" },
-      ],
-    ],
+      "La table est la même des deux côtés. Chaque mesure va du haut de l'animal posé sur la table jusqu'au haut de l'animal resté au sol.",
+    scene: [],
+    diagram: "table",
     piste: "Additionne les deux mesures. Que deviennent la taille du chat et celle de la tortue ?",
     reponse:
       "Chaque mesure = hauteur de la table + (taille de l'animal du haut) − (taille de l'animal du bas). En additionnant les deux, les tailles du chat et de la tortue s'annulent : 130 + 50 = 2 × hauteur de la table. La table mesure (130 + 50) ÷ 2 = 90 cm.",
