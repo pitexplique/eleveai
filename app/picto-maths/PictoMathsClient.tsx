@@ -227,12 +227,13 @@ function DiagrammeCarreMagique() {
   );
 }
 
-/* Une roue dentée : corps + dents réparties + moyeu. */
-function Gear({ cx, cy, r, teeth, cls, hub }: { cx: number; cy: number; r: number; teeth: number; cls: string; hub: string }) {
+/* Une roue dentée : corps + dents réparties + moyeu. `rot` décale l'angle des
+   dents pour les imbriquer avec la roue voisine (engrènement). */
+function Gear({ cx, cy, r, teeth, cls, hub, rot = 0 }: { cx: number; cy: number; r: number; teeth: number; cls: string; hub: string; rot?: number }) {
   const th = Math.max(6, Math.round(r * 0.2)); // hauteur de dent
   const tw = Math.max(4, ((2 * Math.PI * r) / teeth) * 0.55); // largeur de dent
   return (
-    <g className={cls} strokeWidth={1.5} strokeLinejoin="round">
+    <g className={cls} strokeWidth={1.5} strokeLinejoin="round" transform={rot ? `rotate(${rot} ${cx} ${cy})` : undefined}>
       {Array.from({ length: teeth }).map((_, i) => (
         <rect
           key={i}
@@ -257,7 +258,7 @@ function DiagrammeEngrenages() {
     <div className="flex flex-col items-center gap-2">
       <svg viewBox="0 0 225 200" className="w-full max-w-sm" role="img" aria-label="Deux roues dentées qui engrènent : la grande B a 30 dents, la petite A a 10 dents">
         <Gear cx={82} cy={105} r={50} teeth={30} cls="fill-amber-300 stroke-amber-600" hub="fill-white stroke-amber-600" />
-        <Gear cx={164} cy={105} r={18} teeth={10} cls="fill-rose-300 stroke-rose-600" hub="fill-white stroke-rose-600" />
+        <Gear cx={164} cy={105} r={18} teeth={10} rot={18} cls="fill-rose-300 stroke-rose-600" hub="fill-white stroke-rose-600" />
 
         {/* lettres dans les moyeux */}
         <text x={82} y={111} fontSize={17} fontWeight={800} textAnchor="middle" className="fill-amber-800">B</text>
