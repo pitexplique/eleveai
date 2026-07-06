@@ -227,6 +227,61 @@ function DiagrammeCarreMagique() {
   );
 }
 
+/* Une roue dentée : corps + dents réparties + moyeu. */
+function Gear({ cx, cy, r, teeth, cls, hub }: { cx: number; cy: number; r: number; teeth: number; cls: string; hub: string }) {
+  const th = Math.max(6, Math.round(r * 0.2)); // hauteur de dent
+  const tw = Math.max(4, ((2 * Math.PI * r) / teeth) * 0.55); // largeur de dent
+  return (
+    <g className={cls} strokeWidth={1.5} strokeLinejoin="round">
+      {Array.from({ length: teeth }).map((_, i) => (
+        <rect
+          key={i}
+          x={cx - tw / 2}
+          y={cy - r - th}
+          width={tw}
+          height={th + 3}
+          rx={1}
+          transform={`rotate(${(360 / teeth) * i} ${cx} ${cy})`}
+        />
+      ))}
+      <circle cx={cx} cy={cy} r={r} />
+      <circle cx={cx} cy={cy} r={r * 0.3} className={hub} strokeWidth={1.5} />
+    </g>
+  );
+}
+
+/* Deux roues qui engrènent (proportionnalité inverse) : la grande B (30 dents)
+   entraîne la petite A (10 dents). Façon slide « engrenages ». */
+function DiagrammeEngrenages() {
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <svg viewBox="0 0 215 200" className="w-full max-w-sm" role="img" aria-label="Deux roues dentées qui engrènent : la grande B a 30 dents, la petite A a 10 dents">
+        <Gear cx={82} cy={105} r={50} teeth={30} cls="fill-amber-300 stroke-amber-600" hub="fill-white stroke-amber-600" />
+        <Gear cx={150} cy={105} r={18} teeth={10} cls="fill-rose-300 stroke-rose-600" hub="fill-white stroke-rose-600" />
+
+        {/* lettres dans les moyeux */}
+        <text x={82} y={111} fontSize={17} fontWeight={800} textAnchor="middle" className="fill-amber-800">B</text>
+        <text x={150} y={110} fontSize={12} fontWeight={800} textAnchor="middle" className="fill-rose-800">A</text>
+
+        {/* nombres de dents */}
+        <text x={82} y={180} fontSize={13} fontWeight={800} textAnchor="middle" className="fill-slate-700">30 dents</text>
+        <text x={150} y={150} fontSize={12} fontWeight={800} textAnchor="middle" className="fill-slate-700">10 dents</text>
+
+        {/* tours */}
+        <text x={82} y={38} fontSize={13} fontWeight={800} textAnchor="middle" className="fill-amber-700">↻ 1 tour</text>
+        <text x={150} y={72} fontSize={12} fontWeight={800} textAnchor="middle" className="fill-rose-700">↻ ? tours</text>
+
+        <text x={210} y={196} fontSize={9} textAnchor="end" className="fill-slate-400" style={{ letterSpacing: "0.5px", fontWeight: 700 }}>
+          eleveai.fr
+        </text>
+      </svg>
+      <span className="text-center text-xs font-black text-slate-600">
+        Les deux roues engrènent.
+      </span>
+    </div>
+  );
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Une page-défi (une par picto)                                             */
 /* -------------------------------------------------------------------------- */
@@ -269,6 +324,8 @@ function PagePicto({ p, index, total }: { p: Picto; index: number; total: number
             <DiagrammeBoite />
           ) : p.diagram === "carremagique" ? (
             <DiagrammeCarreMagique />
+          ) : p.diagram === "engrenages" ? (
+            <DiagrammeEngrenages />
           ) : (
             <Illustration scene={p.scene} />
           )}

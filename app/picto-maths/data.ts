@@ -22,7 +22,7 @@ export type Picto = {
   question: string; // LA question (grande)
   enonce?: string; // données / contexte
   scene: Cell[][]; // l'illustration, ligne par ligne
-  diagram?: "carres" | "table" | "boite" | "carremagique"; // schéma dessiné (au lieu de la scène d'icônes)
+  diagram?: "carres" | "table" | "boite" | "carremagique" | "engrenages"; // schéma dessiné (au lieu de la scène d'icônes)
   piste: string; // coup de pouce (reste sur la page)
   reponse: string; // corrigé (page séparée)
 };
@@ -423,5 +423,20 @@ export const PICTOS: Picto[] = [
     piste: "Cherche les nombres < 50 qui laissent un reste de 5 en paquets de 7, puis regarde les paquets de 5.",
     reponse:
       "Reste 5 avec des paquets de 7 : 5, 12, 19, 26, 33, 40, 47. Parmi eux, reste 3 avec des paquets de 5 : 33 (33 = 6×5 + 3 et 33 = 4×7 + 5). Il y a 33 crayons.",
+  },
+  {
+    ref: "PM·21",
+    theme: "Le moulin à cannes",
+    emoji: "⚙️",
+    lieu: "L'usine sucrière",
+    niveau: "4ᵉ · 3ᵉ",
+    notion: "Proportionnalité inverse",
+    question: "Quand la grande roue fait 1 tour, combien de tours fait la petite ?",
+    enonce: "Deux roues dentées engrènent : la grande a 30 dents, la petite en a 10.",
+    scene: [],
+    diagram: "engrenages",
+    piste: "Deux roues qui engrènent font défiler le même nombre de dents. La petite en a-t-elle plus ou moins ?",
+    reponse:
+      "Quand deux roues engrènent, elles font défiler le même nombre de dents. La grande (30 dents) qui fait 1 tour fait défiler 30 dents ; la petite (10 dents) doit donc tourner 30 ÷ 10 = 3 fois. La petite roue fait 3 tours. (Moins de dents = tourne plus vite : c'est de la proportionnalité inverse.)",
   },
 ];
