@@ -643,43 +643,58 @@ export default function AccueilPage({
       {/* ── COACHS + PARCOURS — les essentiels élève, remontés en tête ─────────── */}
       <section className="bg-[#061f39] px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
-          <div className="mb-4">
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-200/70">
-              Choisir une matière
-            </p>
-            <h2 className="mt-1 text-xl font-black text-white">
-              Les coachs principaux
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-            {visibleSubjects.map((subject) => (
-              <Link
-                key={subject.label}
-                href={getHref(subject.href)}
-                className={[
-                  "group relative flex min-h-[122px] flex-col items-center justify-center gap-2 rounded-2xl border p-4 sm:p-5 text-center",
-                  "bg-white/5 backdrop-blur-md transition-all duration-300",
-                  "hover:-translate-y-2 hover:scale-105",
-                  `hover:shadow-2xl ${subject.glow}`,
-                  subject.border,
-                ].join(" ")}
-              >
-                {/* Gradient bg on hover */}
-                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${subject.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-
-                <span className="relative z-10 text-3xl sm:text-4xl drop-shadow-lg">
-                  {subject.icon}
-                </span>
-                <div className="relative z-10">
-                  <p className="text-sm sm:text-base font-black text-white leading-tight">
+          {/* Coach IA — texte + chips des matières à gauche, aperçu à droite */}
+          <div className="flex flex-col items-center gap-6 lg:flex-row lg:justify-between">
+            <div className="w-full text-center lg:flex-1 lg:text-left">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-cyan-200/80">
+                🧠 Coach IA
+              </p>
+              <h2 className="mt-1 text-2xl font-black text-white">
+                Ton coach, dans chaque matière
+              </h2>
+              <p className="mt-1.5 text-sm font-semibold leading-snug text-white/75">
+                On t&apos;explique, on t&apos;encourage — à ton rythme, sans jugement. Du CP au Bac.
+              </p>
+              <div className="mt-4 flex flex-wrap justify-center gap-2 lg:justify-start">
+                {visibleSubjects.map((subject) => (
+                  <Link
+                    key={subject.label}
+                    href={getHref(subject.href)}
+                    className={`inline-flex items-center gap-1.5 rounded-full border bg-white/5 px-3.5 py-2 text-sm font-black text-white backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white/10 ${subject.border}`}
+                  >
+                    <span className="text-base leading-none">{subject.icon}</span>
                     {subject.label}
-                  </p>
-                  <p className="mt-0.5 text-[10px] sm:text-xs text-white/60 leading-tight hidden sm:block">
-                    {subject.desc}
-                  </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Aperçu façon capture du coach */}
+            <Link
+              href={getHref("/coach-ia/maths")}
+              className="group w-full max-w-[300px] shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl transition hover:-translate-y-0.5 hover:shadow-2xl"
+            >
+              <div className="flex items-center justify-between bg-gradient-to-r from-cyan-600 to-blue-600 px-3 py-2 text-white">
+                <span className="text-[11px] font-black">🧠 Coach IA · Maths</span>
+                <span className="text-[9px] font-black opacity-80">CP → Bac</span>
+              </div>
+              <div className="p-3">
+                <p className="text-sm font-black text-slate-900">Quelle est la moitié de 3/4&nbsp;?</p>
+                <div className="mt-2 grid gap-1.5">
+                  <span className="flex items-center justify-between rounded-lg border-2 border-emerald-300 bg-emerald-50 px-3 py-1.5 text-xs font-black text-emerald-800">
+                    3/8 <span aria-hidden>✓</span>
+                  </span>
+                  <span className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-500">3/2</span>
+                  <span className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-500">6/4</span>
                 </div>
-              </Link>
-            ))}
+                <div className="mt-2 rounded-lg bg-cyan-50 px-3 py-1.5 text-[11px] font-bold leading-snug text-cyan-800">
+                  ✅ Bravo&nbsp;! La moitié, c&apos;est diviser par 2 : 3/4 ÷ 2 = 3/8. On continue&nbsp;?
+                </div>
+                <p className="mt-1.5 text-right text-[8px] font-black uppercase tracking-[0.15em] text-slate-300">
+                  eleveai.fr
+                </p>
+              </div>
+            </Link>
           </div>
 
           {/* Parcours par matière — grille jumelle des coachs (faire le point) */}
