@@ -382,6 +382,46 @@ function DiagrammeChocolat() {
   );
 }
 
+/* « Place l'origine de l'axe gradué » : A à −4 et B à 2, où est le 0 ?
+   Le 0 n'est PAS marqué (à trouver) — l'axe porte des graduations régulières. */
+function DiagrammeAxe() {
+  const y = 56;
+  const x0 = 40; // position de la valeur −5
+  const u = 16; // pixels par graduation
+  const xOf = (v: number) => x0 + (v + 5) * u; // v de −5 à +5
+  const ticks = Array.from({ length: 11 }, (_, i) => i - 5); // −5 … 5
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <svg viewBox="0 0 240 100" className="w-full max-w-md" role="img" aria-label="Axe gradué horizontal : le point A est à −4, le point B est à 2 ; il faut placer le 0.">
+        {/* graduations régulières */}
+        {ticks.map((v) => (
+          <line key={v} x1={xOf(v)} y1={y - 5} x2={xOf(v)} y2={y + 5} className="stroke-slate-300" strokeWidth={1.5} />
+        ))}
+        {/* axe + flèche */}
+        <line x1={20} y1={y} x2={224} y2={y} className="stroke-slate-800" strokeWidth={2} />
+        <path d={`M224,${y} l-8,-4 v8 Z`} className="fill-slate-800" />
+
+        {/* point A = −4 (ambre) */}
+        <line x1={xOf(-4)} y1={y - 12} x2={xOf(-4)} y2={y + 12} className="stroke-amber-600" strokeWidth={2.5} />
+        <text x={xOf(-4)} y={y - 18} fontSize={13} fontWeight={800} textAnchor="middle" className="fill-amber-700">A</text>
+        <text x={xOf(-4)} y={y + 28} fontSize={12} fontWeight={800} textAnchor="middle" className="fill-slate-700">−4 °C</text>
+
+        {/* point B = 2 (cyan) */}
+        <line x1={xOf(2)} y1={y - 12} x2={xOf(2)} y2={y + 12} className="stroke-cyan-600" strokeWidth={2.5} />
+        <text x={xOf(2)} y={y - 18} fontSize={13} fontWeight={800} textAnchor="middle" className="fill-cyan-700">B</text>
+        <text x={xOf(2)} y={y + 28} fontSize={12} fontWeight={800} textAnchor="middle" className="fill-slate-700">2 °C</text>
+
+        <text x={236} y={96} fontSize={9} textAnchor="end" className="fill-slate-400" style={{ letterSpacing: "0.5px", fontWeight: 700 }}>
+          eleveai.fr
+        </text>
+      </svg>
+      <span className="text-center text-xs font-black text-slate-600">
+        Où placer le 0&nbsp;?
+      </span>
+    </div>
+  );
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Une page-défi (une par picto)                                             */
 /* -------------------------------------------------------------------------- */
@@ -430,6 +470,8 @@ function PagePicto({ p, index, total }: { p: Picto; index: number; total: number
             <DiagrammeBouteilles />
           ) : p.diagram === "chocolat" ? (
             <DiagrammeChocolat />
+          ) : p.diagram === "axe" ? (
+            <DiagrammeAxe />
           ) : (
             <Illustration scene={p.scene} />
           )}

@@ -22,7 +22,7 @@ export type Picto = {
   question: string; // LA question (grande)
   enonce?: string; // données / contexte
   scene: Cell[][]; // l'illustration, ligne par ligne
-  diagram?: "carres" | "table" | "boite" | "carremagique" | "engrenages" | "bouteilles" | "chocolat"; // schéma dessiné (au lieu de la scène d'icônes)
+  diagram?: "carres" | "table" | "boite" | "carremagique" | "engrenages" | "bouteilles" | "chocolat" | "axe"; // schéma dessiné (au lieu de la scène d'icônes)
   piste: string; // coup de pouce (reste sur la page)
   reponse: string; // corrigé (page séparée)
 };
@@ -498,5 +498,21 @@ export const PICTOS: Picto[] = [
     piste: "Regarde la part de chocolat dans chaque mélange : combien de doses de chocolat sur le total ?",
     reponse:
       "Mélange A : 3 doses de chocolat sur 5 = 3/5 = 60 %. Mélange B : 2 sur 3 = 2/3 ≈ 67 %. Comme 2/3 > 3/5 (soit 10/15 > 9/15), c'est le mélange B qui a le plus le goût de chocolat.",
+  },
+  {
+    ref: "PM·25",
+    theme: "Le thermomètre des hauts",
+    emoji: "🌡️",
+    lieu: "Au Piton des Neiges, quand ça gèle",
+    niveau: "5ᵉ",
+    notion: "Nombres relatifs · axe gradué",
+    question: "Où placer le 0 °C (là où l'eau gèle) ?",
+    enonce:
+      "Sur ce thermomètre gradué, on a repéré −4 °C (point A) et 2 °C (point B). Place le 0 °C.",
+    scene: [],
+    diagram: "axe",
+    piste: "Compte les graduations entre A (−4) et B (2). Puis avance de 4 graduations depuis A.",
+    reponse:
+      "De A (−4 °C) à B (2 °C) il y a 6 degrés, une graduation par degré. Le 0 est 4 graduations à droite de A (ou 2 graduations à gauche de B). C'est là que l'eau gèle — et ça arrive vraiment au sommet du Piton des Neiges !",
   },
 ];
