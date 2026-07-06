@@ -332,6 +332,56 @@ function DiagrammeBouteilles() {
   );
 }
 
+/* Un verre (trapèze) rempli de chocolat (marron) ou de lait (crème). */
+function Verre({ x, kind }: { x: number; kind: "choc" | "lait" }) {
+  const topY = 30;
+  const w = 20;
+  const h = 32;
+  const inset = 3;
+  const cls =
+    kind === "choc" ? "fill-amber-800 stroke-amber-900" : "fill-amber-50 stroke-slate-400";
+  return (
+    <path
+      d={`M${x},${topY} L${x + w},${topY} L${x + w - inset},${topY + h} L${x + inset},${topY + h} Z`}
+      className={cls}
+      strokeWidth={1.5}
+      strokeLinejoin="round"
+    />
+  );
+}
+
+/* « Quel mélange a le plus le goût de chocolat ? » : comparer deux proportions.
+   A = 3 chocolat / 2 lait (3/5) ; B = 2 chocolat / 1 lait (2/3). */
+function DiagrammeChocolat() {
+  // suites de verres, marron (choc) puis crème (lait)
+  const A: ("choc" | "lait")[] = ["choc", "choc", "choc", "lait", "lait"];
+  const B: ("choc" | "lait")[] = ["choc", "choc", "lait"];
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <svg viewBox="0 0 232 96" className="w-full max-w-md" role="img" aria-label="Mélange A : 3 verres de chocolat et 2 de lait. Mélange B : 2 verres de chocolat et 1 de lait.">
+        {A.map((k, i) => (
+          <Verre key={`a${i}`} x={8 + i * 22} kind={k} />
+        ))}
+        <text x={55} y={80} fontSize={12} fontWeight={800} textAnchor="middle" className="fill-slate-700">Mélange A</text>
+
+        <line x1={128} y1={22} x2={128} y2={68} className="stroke-slate-300" strokeWidth={1.5} strokeDasharray="3 3" />
+
+        {B.map((k, i) => (
+          <Verre key={`b${i}`} x={140 + i * 22} kind={k} />
+        ))}
+        <text x={173} y={80} fontSize={12} fontWeight={800} textAnchor="middle" className="fill-slate-700">Mélange B</text>
+
+        <text x={228} y={92} fontSize={9} textAnchor="end" className="fill-slate-400" style={{ letterSpacing: "0.5px", fontWeight: 700 }}>
+          eleveai.fr
+        </text>
+      </svg>
+      <span className="text-center text-xs font-black text-slate-600">
+        Marron = chocolat · blanc = lait
+      </span>
+    </div>
+  );
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Une page-défi (une par picto)                                             */
 /* -------------------------------------------------------------------------- */
@@ -378,6 +428,8 @@ function PagePicto({ p, index, total }: { p: Picto; index: number; total: number
             <DiagrammeEngrenages />
           ) : p.diagram === "bouteilles" ? (
             <DiagrammeBouteilles />
+          ) : p.diagram === "chocolat" ? (
+            <DiagrammeChocolat />
           ) : (
             <Illustration scene={p.scene} />
           )}

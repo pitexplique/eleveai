@@ -22,7 +22,7 @@ export type Picto = {
   question: string; // LA question (grande)
   enonce?: string; // données / contexte
   scene: Cell[][]; // l'illustration, ligne par ligne
-  diagram?: "carres" | "table" | "boite" | "carremagique" | "engrenages" | "bouteilles"; // schéma dessiné (au lieu de la scène d'icônes)
+  diagram?: "carres" | "table" | "boite" | "carremagique" | "engrenages" | "bouteilles" | "chocolat"; // schéma dessiné (au lieu de la scène d'icônes)
   piste: string; // coup de pouce (reste sur la page)
   reponse: string; // corrigé (page séparée)
 };
@@ -482,5 +482,21 @@ export const PICTOS: Picto[] = [
     piste: "Calcule d'abord ton maximum (220 − 14), puis prends-en 70 %.",
     reponse:
       "FC max ≈ 220 − 14 = 206 battements par minute. Zone d'endurance = 70 % → 0,70 × 206 ≈ 144 bpm. En dessous c'est trop facile, très au-dessus tu t'épuises — chacun son rythme, on écoute son corps sans se juger.",
+  },
+  {
+    ref: "PM·24",
+    theme: "Le chocolat chaud",
+    emoji: "🍫",
+    lieu: "Un chocolat chaud sur les hauts",
+    niveau: "5ᵉ · 4ᵉ",
+    notion: "Proportions · fractions",
+    question: "Quel mélange a le plus le goût de chocolat ?",
+    enonce:
+      "On mélange des doses de chocolat (marron) et de lait (blanc). Attention : les deux mélanges n'ont pas le même nombre de doses !",
+    scene: [],
+    diagram: "chocolat",
+    piste: "Regarde la part de chocolat dans chaque mélange : combien de doses de chocolat sur le total ?",
+    reponse:
+      "Mélange A : 3 doses de chocolat sur 5 = 3/5 = 60 %. Mélange B : 2 sur 3 = 2/3 ≈ 67 %. Comme 2/3 > 3/5 (soit 10/15 > 9/15), c'est le mélange B qui a le plus le goût de chocolat.",
   },
 ];
