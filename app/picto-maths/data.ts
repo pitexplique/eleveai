@@ -315,4 +315,71 @@ export const PICTOS: Picto[] = [
     reponse:
       "C'est possible pour 1, 4, 6, 7, 8, 9… en fait pour tout nombre SAUF 2, 3 et 5. Astuce clé : dès qu'on sait faire n parcelles, on en découpe une en 4 pour en obtenir n + 3. En partant de 4, 6 et 7, on atteint ainsi tous les nombres à partir de 6.",
   },
+  {
+    ref: "PM·15",
+    theme: "Le chat et la tortue",
+    emoji: "🐱",
+    lieu: "Sur la varangue",
+    niveau: "4ᵉ · 3ᵉ",
+    notion: "Raisonnement · longueurs",
+    question: "Quelle est la hauteur de la table ?",
+    enonce:
+      "Chaque mesure va du haut de l'animal posé sur la table jusqu'au haut de l'animal resté au sol. Le chat et la tortue n'ont pas la même taille.",
+    scene: [
+      [
+        { t: "ic", e: "🐱", cap: "sur la table" },
+        { t: "val", v: "130 cm" },
+        { t: "ic", e: "🐢", cap: "au sol" },
+      ],
+      [
+        { t: "ic", e: "🐢", cap: "sur la table" },
+        { t: "val", v: "50 cm" },
+        { t: "ic", e: "🐱", cap: "au sol" },
+      ],
+    ],
+    piste: "Additionne les deux mesures. Que deviennent la taille du chat et celle de la tortue ?",
+    reponse:
+      "Chaque mesure = hauteur de la table + (taille de l'animal du haut) − (taille de l'animal du bas). En additionnant les deux, les tailles du chat et de la tortue s'annulent : 130 + 50 = 2 × hauteur de la table. La table mesure (130 + 50) ÷ 2 = 90 cm.",
+  },
+  {
+    ref: "PM·16",
+    theme: "La tenue de séga",
+    emoji: "👕",
+    lieu: "Se préparer pour le kabar",
+    niveau: "4ᵉ · 3ᵉ",
+    notion: "Dénombrement",
+    question: "Combien de tenues différentes peut-elle composer ?",
+    enonce: "Pour la fête, Maya choisit 1 haut, 1 bas et 1 fleur.",
+    scene: [
+      [
+        { t: "ic", e: "👕", n: 3, cap: "3 hauts" },
+        { t: "op", v: "×" },
+        { t: "ic", e: "👖", n: 2, cap: "2 bas" },
+        { t: "op", v: "×" },
+        { t: "ic", e: "🌺", n: 3, cap: "3 fleurs" },
+      ],
+    ],
+    piste: "Pour chaque haut, combien de bas possibles ? Et pour chacun, combien de fleurs ?",
+    reponse: "3 × 2 × 3 = 18 tenues différentes.",
+  },
+  {
+    ref: "PM·17",
+    theme: "Le potager carré",
+    emoji: "🥬",
+    lieu: "Un potager créole carré",
+    niveau: "6ᵉ · 5ᵉ",
+    notion: "Aire · périmètre",
+    question: "Quelle est son aire ?",
+    enonce: "Un potager carré est entouré de 40 m de grillage.",
+    scene: [
+      [
+        { t: "ic", e: "🟩", cap: "carré · grillage 40 m" },
+        { t: "op", v: "→" },
+        { t: "qm", cap: "aire ?" },
+      ],
+    ],
+    piste: "Les 40 m de grillage font tout le tour du carré. Combien mesure un côté ?",
+    reponse:
+      "Le tour du carré (périmètre) = 40 m, donc un côté = 40 ÷ 4 = 10 m. Aire = 10 × 10 = 100 m².",
+  },
 ];
