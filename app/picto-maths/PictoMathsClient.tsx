@@ -388,6 +388,10 @@ export default function PictoMathsClient() {
               <span aria-hidden>{LIVRET.creditEmoji}</span>
               {LIVRET.credit}
             </p>
+            <p className="inline-flex items-center gap-1 text-[11px] font-bold text-slate-500">
+              <span aria-hidden>🏫</span>
+              pour les collèges en progrès
+            </p>
           </div>
         </section>
 
