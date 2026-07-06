@@ -7,7 +7,7 @@ const config: CahierConfig = {
   slug: "vers-la-terminale",
   titre: "Vers la Terminale",
   sousTitre: "Pour réviser tout l'été après la 1ʳᵉ",
-  mission: "Mission cap sur la Terminale",
+  mission: "En route vers la Terminale",
   parcoursTitre: "L'été de Ti Margo — les maths et l'IA pour changer le monde",
   chipFin: "🎓 La Terminale !",
   coachClasse: "terminale-spe",

@@ -7,7 +7,7 @@ const config: CahierConfig = {
   slug: "vers-le-ce1",
   titre: "Vers le CE1",
   sousTitre: "Pour réviser tout l'été après le CP, en s'amusant",
-  mission: "Mission cap sur le CE1",
+  mission: "En route vers le CE1",
   parcoursTitre: "Le tour de l'île de Ti Margo — 3 mondes à explorer",
   chipFin: "🎓 Le CE1 !",
   coachClasse: "ce1",

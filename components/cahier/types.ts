@@ -59,7 +59,7 @@ export type CahierConfig = {
   titre: string;
   /** Sous-titre, ex. "Pour réviser tout l'été après le CM2". */
   sousTitre: string;
-  /** Badge mission, ex. "Mission cap sur la 6ᵉ". */
+  /** Badge mission, ex. "En route vers la 6ᵉ". */
   mission: string;
   /** Titre du parcours (page de garde). */
   parcoursTitre: string;

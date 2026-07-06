@@ -7,7 +7,7 @@ const config: CahierConfig = {
   slug: "vers-le-ce2",
   titre: "Vers le CE2",
   sousTitre: "Pour réviser tout l'été après le CE1, en jouant",
-  mission: "Mission cap sur le CE2",
+  mission: "En route vers le CE2",
   parcoursTitre: "L'été des jeux de Ti Margo — 6 jeux à découvrir",
   chipFin: "🎓 Le CE2 !",
   coachClasse: "ce2",

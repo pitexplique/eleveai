@@ -7,7 +7,7 @@ const config: CahierConfig = {
   slug: "vers-la-6e",
   titre: "Vers la 6ᵉ",
   sousTitre: "Pour réviser tout l'été après le CM2",
-  mission: "Mission cap sur la 6ᵉ",
+  mission: "En route vers la 6ᵉ",
   parcoursTitre: "Le grand voyage de Ti Margo vers la 6ᵉ — 6 étapes à La Réunion",
   chipFin: "🎓 La 6ᵉ !",
   coachClasse: "6e",

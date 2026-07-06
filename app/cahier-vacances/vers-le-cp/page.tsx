@@ -7,7 +7,7 @@ const config: CahierConfig = {
   slug: "vers-le-cp",
   titre: "Vers le CP",
   sousTitre: "Pour bien se préparer au CP, en jouant",
-  mission: "Mission cap sur le CP",
+  mission: "En route vers le CP",
   parcoursTitre: "Le tour de chez Ti Margo — 3 lieux à explorer",
   chipFin: "🎓 Le CP !",
   coachClasse: "cp",

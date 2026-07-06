@@ -7,7 +7,7 @@ const config: CahierConfig = {
   slug: "vers-la-3e",
   titre: "Vers la 3ᵉ",
   sousTitre: "Pour réviser tout l'été après la 4ᵉ",
-  mission: "Mission cap sur la 3ᵉ",
+  mission: "En route vers la 3ᵉ",
   parcoursTitre: "Le grand voyage spatial de Ti Margo — 6 escales dans le système solaire",
   chipFin: "🎓 La 3ᵉ !",
   coachClasse: "3e",

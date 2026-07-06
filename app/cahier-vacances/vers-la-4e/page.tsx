@@ -7,7 +7,7 @@ const config: CahierConfig = {
   slug: "vers-la-4e",
   titre: "Vers la 4ᵉ",
   sousTitre: "Pour réviser tout l'été après la 5ᵉ",
-  mission: "Mission cap sur la 4ᵉ",
+  mission: "En route vers la 4ᵉ",
   parcoursTitre: "Le tour du monde de Ti Margo — sur les traces de Jules Verne",
   chipFin: "🎓 La 4ᵉ !",
   coachClasse: "4e",

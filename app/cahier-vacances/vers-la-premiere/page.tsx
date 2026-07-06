@@ -7,7 +7,7 @@ const config: CahierConfig = {
   slug: "vers-la-premiere",
   titre: "Vers la 1ʳᵉ",
   sousTitre: "Pour réviser tout l'été après la 2ⁿᵈᵉ",
-  mission: "Mission cap sur la 1ʳᵉ",
+  mission: "En route vers la 1ʳᵉ",
   parcoursTitre: "L'été créatif de Ti Margo — la créativité pour changer le monde",
   chipFin: "🎓 La 1ʳᵉ !",
   coachClasse: "premiere-spe",

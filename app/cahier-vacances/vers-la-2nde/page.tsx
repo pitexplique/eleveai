@@ -7,7 +7,7 @@ const config: CahierConfig = {
   slug: "vers-la-2nde",
   titre: "Vers la 2ⁿᵈᵉ",
   sousTitre: "Pour réviser tout l'été après la 3ᵉ",
-  mission: "Mission cap sur la 2ⁿᵈᵉ",
+  mission: "En route vers la 2ⁿᵈᵉ",
   parcoursTitre: "Le grand zoom de Ti Margo — du quark à l'univers",
   chipFin: "🎓 La 2ⁿᵈᵉ !",
   coachClasse: "seconde",
