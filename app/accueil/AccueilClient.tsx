@@ -721,22 +721,52 @@ export default function AccueilPage({
             ))}
           </div>
 
-          {/* Picto Maths · 974 — après les parcours : défis « 1 image, 1 question » */}
+          {/* Picto Maths · 974 — après les parcours : aperçu « capture » d'un défi */}
           <Link
             href="/picto-maths"
-            className="mt-4 flex flex-col items-center justify-between gap-3 rounded-2xl border border-cyan-300/30 bg-gradient-to-r from-cyan-500/[0.12] to-amber-500/[0.08] p-4 text-center transition hover:border-cyan-300/60 sm:flex-row sm:text-left"
+            className="group mt-4 flex flex-col items-center gap-4 rounded-2xl border border-cyan-300/30 bg-gradient-to-r from-cyan-500/[0.12] to-amber-500/[0.08] p-4 transition hover:border-cyan-300/60 sm:flex-row sm:justify-between sm:gap-6"
           >
-            <div>
+            <div className="text-center sm:text-left">
               <p className="text-xs font-black uppercase tracking-wide text-cyan-200">
                 🃏 Picto Maths · 974
               </p>
+              <h3 className="mt-1 text-lg font-black text-white">Un dessin, une question</h3>
               <p className="mt-0.5 text-sm font-semibold text-white/80">
-                Une image, une question : les maths de La Réunion à imprimer et à chercher.
+                Les maths de La Réunion à imprimer et à chercher sur l&apos;ardoise.
               </p>
+              <span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-cyan-400 px-5 py-2 text-sm font-black text-[#041B33]">
+                Voir les défis →
+              </span>
             </div>
-            <span className="shrink-0 rounded-full bg-cyan-400 px-5 py-2 text-sm font-black text-[#041B33]">
-              Voir les défis →
-            </span>
+
+            {/* Aperçu façon capture d'un vrai défi */}
+            <div className="w-full max-w-[264px] shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl transition group-hover:-translate-y-0.5 group-hover:shadow-2xl">
+              <div className="flex items-center justify-between bg-gradient-to-r from-cyan-600 to-teal-600 px-3 py-1.5 text-white">
+                <span className="text-[11px] font-black">🍒 Le marché</span>
+                <span className="rounded-full border border-white/40 px-1.5 py-0.5 text-[9px] font-black">PM·01</span>
+              </div>
+              <div className="p-3">
+                <p className="text-center text-sm font-black leading-tight text-slate-900">
+                  Combien coûtent 9 kg de letchis&nbsp;?
+                </p>
+                <div className="mt-2 space-y-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2 py-2.5">
+                  <div className="flex items-center justify-center gap-1.5">
+                    <span className="text-base leading-none">🍒🍒🍒</span>
+                    <span className="text-slate-400">→</span>
+                    <span className="rounded border border-cyan-300 bg-cyan-50 px-1.5 py-0.5 text-[11px] font-black text-cyan-800">5 €</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-1.5">
+                    <span className="text-base leading-none">🍒🍒🍒</span>
+                    <span className="text-xs font-black text-slate-400">…</span>
+                    <span className="text-slate-400">→</span>
+                    <span className="rounded border border-dashed border-amber-400 bg-amber-50 px-2 py-0.5 text-[11px] font-black text-amber-600">?</span>
+                  </div>
+                </div>
+                <p className="mt-1.5 text-right text-[8px] font-black uppercase tracking-[0.15em] text-slate-300">
+                  eleveai.fr
+                </p>
+              </div>
+            </div>
           </Link>
         </div>
       </section>
