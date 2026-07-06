@@ -509,7 +509,7 @@ export default function AccueilPage({
             Ton <span className="text-amber-300">coach IA</span> pour progresser
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-sm font-semibold leading-6 text-white/80 sm:text-base">
-            Maths, français, anglais, espagnol — du CP au Bac. À ton rythme,
+            Maths, français, anglais, espagnol, IA — du CP au Bac. À ton rythme,
             sans jugement&nbsp;: on t&apos;explique, on t&apos;encourage. ✨
           </p>
 
