@@ -317,7 +317,7 @@ export default function Header() {
               Eleve<span className="text-cyan-200">AI</span>
             </span>
             <span className="hidden text-xs text-cyan-100/75 sm:block">
-              Un détail peut tout changer
+              La liberté d&apos;apprendre
             </span>
           </div>
         </Link>
