@@ -826,9 +826,9 @@ export default function AccueilPage({
       <section id="espace-eleve" className="scroll-mt-24 bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
         <Link
           href="/qui-suis-je-a-imprimer"
-          className="mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-fuchsia-300/30 bg-gradient-to-br from-fuchsia-400/[0.12] via-violet-400/[0.07] to-white/[0.04] p-6 text-center transition hover:border-fuchsia-300/60 sm:flex-row sm:justify-between sm:text-left sm:p-7"
+          className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-fuchsia-300/30 bg-gradient-to-br from-fuchsia-400/[0.12] via-violet-400/[0.07] to-white/[0.04] p-6 transition hover:border-fuchsia-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
         >
-          <div>
+          <div className="text-center sm:text-left">
             <p className="text-xs font-black uppercase tracking-wide text-fuchsia-200">
               🃏 À imprimer · gratuit
             </p>
@@ -839,10 +839,25 @@ export default function AccueilPage({
               «&nbsp;Qui suis-je&nbsp;?&nbsp;» On lit la définition, tu retrouves le mot —
               11 matières. À imprimer, découper et jouer en famille. 🎉
             </p>
+            <span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-fuchsia-400 px-5 py-2 text-sm font-black text-[#041B33]">
+              Jouer / imprimer →
+            </span>
           </div>
-          <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-fuchsia-400 px-6 py-3 text-sm font-black text-[#041B33] shadow-lg">
-            Jouer / imprimer →
-          </span>
+          {/* Aperçu d'une carte */}
+          <div className="w-full max-w-[260px] shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl transition group-hover:-translate-y-0.5 group-hover:shadow-2xl">
+            <div className="flex items-center justify-between bg-gradient-to-r from-fuchsia-600 to-violet-600 px-3 py-1.5 text-white">
+              <span className="text-[11px] font-black">🃏 Qui suis-je&nbsp;?</span>
+              <span className="rounded-full border border-white/40 px-1.5 py-0.5 text-[9px] font-black">6ᵉ</span>
+            </div>
+            <div className="p-3 text-center">
+              <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">Qui suis-je&nbsp;?</p>
+              <p className="mt-2 text-sm font-black text-slate-900">Je suis le résultat d&apos;une addition.</p>
+              <p className="mt-3 border-t border-dashed border-slate-200 pt-1.5 text-[11px] font-black text-slate-400">
+                réponse&nbsp;: la somme
+              </p>
+              <p className="mt-1 text-[8px] font-black uppercase tracking-[0.15em] text-slate-300">eleveai.fr</p>
+            </div>
+          </div>
         </Link>
       </section>
 
@@ -850,9 +865,9 @@ export default function AccueilPage({
       <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
         <Link
           href="/dictee-du-jour"
-          className="mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-cyan-300/30 bg-gradient-to-br from-cyan-400/[0.12] via-sky-400/[0.07] to-white/[0.04] p-6 text-center transition hover:border-cyan-300/60 sm:flex-row sm:justify-between sm:text-left sm:p-7"
+          className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-cyan-300/30 bg-gradient-to-br from-cyan-400/[0.12] via-sky-400/[0.07] to-white/[0.04] p-6 transition hover:border-cyan-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
         >
-          <div>
+          <div className="text-center sm:text-left">
             <p className="text-xs font-black uppercase tracking-wide text-cyan-200">
               ✍️ Nouveau chaque jour
             </p>
@@ -863,10 +878,26 @@ export default function AccueilPage({
               Un mot à écouter et à écrire — français, maths, langues, histoire,
               géo, écologie… 2 minutes, chaque matin. ☀️
             </p>
+            <span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-cyan-400 px-5 py-2 text-sm font-black text-[#041B33]">
+              Faire la dictée →
+            </span>
           </div>
-          <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-cyan-400 px-6 py-3 text-sm font-black text-[#041B33] shadow-lg">
-            Faire la dictée →
-          </span>
+          {/* Aperçu de la dictée */}
+          <div className="w-full max-w-[260px] shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl transition group-hover:-translate-y-0.5 group-hover:shadow-2xl">
+            <div className="flex items-center justify-between bg-gradient-to-r from-cyan-600 to-sky-600 px-3 py-1.5 text-white">
+              <span className="text-[11px] font-black">📜 Dictée du jour</span>
+              <span className="text-[9px] font-black">🔥 4</span>
+            </div>
+            <div className="p-3">
+              <p className="text-sm font-black text-slate-900">🔊 Écoute et écris le mot :</p>
+              <div className="mt-2 flex items-center justify-between rounded-lg border-2 border-slate-200 bg-slate-50 px-3 py-2 text-sm font-black text-slate-700">
+                <span>margouilla<span className="text-slate-300">__</span></span>
+                <span className="text-[10px] text-cyan-600">Mot 3/5</span>
+              </div>
+              <p className="mt-2 text-[10px] font-bold text-slate-500">Français · Maths · Anglais · Histoire · Écologie</p>
+              <p className="mt-1 text-right text-[8px] font-black uppercase tracking-[0.15em] text-slate-300">eleveai.fr</p>
+            </div>
+          </div>
         </Link>
       </section>
 
@@ -874,9 +905,9 @@ export default function AccueilPage({
       <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
         <Link
           href="/explorer"
-          className="mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-violet-300/30 bg-gradient-to-br from-violet-400/[0.14] via-fuchsia-400/[0.07] to-white/[0.04] p-6 text-center transition hover:border-violet-300/60 sm:flex-row sm:justify-between sm:text-left sm:p-7"
+          className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-violet-300/30 bg-gradient-to-br from-violet-400/[0.14] via-fuchsia-400/[0.07] to-white/[0.04] p-6 transition hover:border-violet-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
         >
-          <div>
+          <div className="text-center sm:text-left">
             <p className="text-xs font-black uppercase tracking-wide text-violet-200">
               🧭 Tout au même endroit
             </p>
@@ -887,10 +918,25 @@ export default function AccueilPage({
               Coachs, parcours, défis, dictée, concours, cahiers de vacances… Progresse
               dans ta matière forte, ou tente une voie que tu n&apos;as pas encore explorée.
             </p>
+            <span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-violet-400 px-5 py-2 text-sm font-black text-[#041B33]">
+              🔍 Voir le catalogue →
+            </span>
           </div>
-          <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-violet-400 px-6 py-3 text-sm font-black text-[#041B33] shadow-lg">
-            🔍 Voir le catalogue →
-          </span>
+          {/* Aperçu du catalogue */}
+          <div className="w-full max-w-[260px] shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl transition group-hover:-translate-y-0.5 group-hover:shadow-2xl">
+            <div className="flex items-center justify-between bg-gradient-to-r from-violet-600 to-fuchsia-600 px-3 py-1.5 text-white">
+              <span className="text-[11px] font-black">🔍 Explorer</span>
+              <span className="text-[9px] font-black opacity-80">tout au même endroit</span>
+            </div>
+            <div className="grid grid-cols-2 gap-1.5 p-3">
+              {([["🧠", "Coach IA"], ["🛤️", "Parcours"], ["🎯", "Défis"], ["📜", "Dictée"], ["🃏", "Picto Maths"], ["🗺️", "Carte 974"]] as const).map(([e, l]) => (
+                <span key={l} className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2 py-1.5 text-[11px] font-black text-slate-700">
+                  <span className="leading-none">{e}</span>
+                  {l}
+                </span>
+              ))}
+            </div>
+          </div>
         </Link>
       </section>
 
