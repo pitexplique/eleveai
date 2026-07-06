@@ -382,20 +382,67 @@ export default function Header() {
         {/* Desktop nav — les 4 audiences EXPLICITES (= la navigation) + auth.
             Cliquer « Élève » ramène à l'accueil (coach, dictée, tout le contenu). */}
         <div className="hidden items-center gap-1.5 lg:flex">
-          {AUDIENCE_DOORS.map((d) => (
-            <Link
-              key={d.space}
-              href={d.href}
-              className={[
-                "inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition",
-                d.space === space
-                  ? "bg-white text-[#041B33] shadow-lg"
-                  : "text-white/85 hover:bg-white/15 hover:text-white",
-              ].join(" ")}
-            >
-              <span>{d.emoji}</span> {d.label}
-            </Link>
-          ))}
+          {eleve && !isStaff ? (
+            /* Élève CONNECTÉ → ses matières + rituels (pas les portes d'audience) */
+            <>
+              <Link
+                href="/dictee-du-jour"
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition ${
+                  isActive(pathname, "/dictee-du-jour")
+                    ? "bg-cyan-300 text-[#041B33] shadow-lg"
+                    : "bg-cyan-300/15 text-cyan-100 hover:bg-cyan-300/25 hover:text-white"
+                }`}
+              >
+                ✍️ Dictée
+              </Link>
+              <Link
+                href="/cahier-vacances"
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition ${
+                  isActive(pathname, "/cahier-vacances")
+                    ? "bg-amber-300 text-[#041B33] shadow-lg"
+                    : "bg-amber-300/15 text-amber-200 hover:bg-amber-300/25 hover:text-amber-100"
+                }`}
+              >
+                ☀️ Cahiers
+              </Link>
+              <Link
+                href="/qui-suis-je-a-imprimer"
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition ${
+                  isActive(pathname, "/qui-suis-je-a-imprimer")
+                    ? "bg-fuchsia-300 text-[#041B33] shadow-lg"
+                    : "bg-fuchsia-300/15 text-fuchsia-200 hover:bg-fuchsia-300/25 hover:text-fuchsia-100"
+                }`}
+              >
+                🃏 Jeux
+              </Link>
+              <Link
+                href="/explorer"
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition ${
+                  isActive(pathname, "/explorer")
+                    ? "bg-violet-300 text-[#041B33] shadow-lg"
+                    : "bg-violet-300/15 text-violet-200 hover:bg-violet-300/25 hover:text-violet-100"
+                }`}
+              >
+                🧭 Explorer
+              </Link>
+              <MatieresMenu pathname={pathname} />
+            </>
+          ) : (
+            AUDIENCE_DOORS.map((d) => (
+              <Link
+                key={d.space}
+                href={d.href}
+                className={[
+                  "inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition",
+                  d.space === space
+                    ? "bg-white text-[#041B33] shadow-lg"
+                    : "text-white/85 hover:bg-white/15 hover:text-white",
+                ].join(" ")}
+              >
+                <span>{d.emoji}</span> {d.label}
+              </Link>
+            ))
+          )}
 
           {eleve ? (
             <div className="ml-1 flex items-center gap-2">
@@ -477,24 +524,36 @@ export default function Header() {
               </Link>
             )}
 
-            {/* Sélecteur « Vous êtes ? » — le seul contenu du menu (header épuré) */}
-            <div className="grid grid-cols-2 gap-2 border-t border-white/10 pt-4">
-              {AUDIENCE_DOORS.map((d) => (
-                <Link
-                  key={d.space}
-                  href={d.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={[
-                    "flex items-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-bold transition",
-                    d.space === space
-                      ? "border-white/40 bg-white/15 text-white"
-                      : "border-white/10 bg-white/5 text-white/80",
-                  ].join(" ")}
-                >
-                  <span className="text-base">{d.emoji}</span> {d.label}
-                </Link>
-              ))}
-            </div>
+            {eleve && !isStaff ? (
+              /* Élève connecté → toutes ses matières */
+              <div className="space-y-5">
+                <MobileSection title="Maths"    accent="text-orange-300" items={NAV_MATHS}    pathname={pathname} />
+                <MobileSection title="Français" accent="text-sky-300"    items={NAV_FRANCAIS} pathname={pathname} />
+                <MobileSection title="Anglais"  accent="text-blue-300"   items={NAV_ANGLAIS}  pathname={pathname} />
+                <MobileSection title="Espagnol" accent="text-red-300"    items={NAV_ESPAGNOL} pathname={pathname} />
+                <MobileSection title="IA"       accent="text-cyan-300"   items={NAV_IA}       pathname={pathname} />
+                <MobileSection title="Économie" accent="text-amber-300"  items={NAV_ECONOMIE} pathname={pathname} />
+              </div>
+            ) : (
+              /* Sinon → les 4 portes d'audience */
+              <div className="grid grid-cols-2 gap-2 border-t border-white/10 pt-4">
+                {AUDIENCE_DOORS.map((d) => (
+                  <Link
+                    key={d.space}
+                    href={d.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={[
+                      "flex items-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-bold transition",
+                      d.space === space
+                        ? "border-white/40 bg-white/15 text-white"
+                        : "border-white/10 bg-white/5 text-white/80",
+                    ].join(" ")}
+                  >
+                    <span className="text-base">{d.emoji}</span> {d.label}
+                  </Link>
+                ))}
+              </div>
+            )}
 
           </div>
         </div>
