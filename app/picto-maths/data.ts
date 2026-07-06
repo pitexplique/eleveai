@@ -22,7 +22,7 @@ export type Picto = {
   question: string; // LA question (grande)
   enonce?: string; // données / contexte
   scene: Cell[][]; // l'illustration, ligne par ligne
-  diagram?: "carres" | "table"; // schéma dessiné (au lieu de la scène d'icônes)
+  diagram?: "carres" | "table" | "boite"; // schéma dessiné (au lieu de la scène d'icônes)
   piste: string; // coup de pouce (reste sur la page)
   reponse: string; // corrigé (page séparée)
 };
@@ -374,5 +374,21 @@ export const PICTOS: Picto[] = [
     piste: "Les 40 m de grillage font tout le tour du carré. Combien mesure un côté ?",
     reponse:
       "Le tour du carré (périmètre) = 40 m, donc un côté = 40 ÷ 4 = 10 m. Aire = 10 × 10 = 100 m².",
+  },
+  {
+    ref: "PM·18",
+    theme: "Le carton de mangues",
+    emoji: "🥭",
+    lieu: "Expédier des mangues péi",
+    niveau: "3ᵉ",
+    notion: "Volume · aires",
+    question: "Quel est le volume du carton ?",
+    enonce:
+      "Le carton est un pavé droit. On connaît l'aire de ses trois faces : 135 cm², 60 cm² et 36 cm².",
+    scene: [],
+    diagram: "boite",
+    piste: "Multiplie les aires des trois faces entre elles. Que reconnais-tu par rapport au volume ?",
+    reponse:
+      "Avec les arêtes a, b, c : a×b = 135, a×c = 60, b×c = 36. Le produit des trois aires vaut (a×b×c)² = 135 × 60 × 36 = 291 600. Donc le volume a×b×c = √291 600 = 540 cm³ (le carton mesure 15 × 9 × 4 cm).",
   },
 ];

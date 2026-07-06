@@ -154,6 +154,35 @@ function DiagrammeTable() {
   );
 }
 
+/* Le carton (pavé droit) en perspective : l'aire de ses trois faces visibles.
+   Façon schéma « quel est le volume de la boîte ? ». */
+function DiagrammeBoite() {
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <svg viewBox="0 0 300 220" className="w-full max-w-sm" role="img" aria-label="Un carton (pavé droit) avec l'aire de ses trois faces : 135 cm² de face, 60 cm² sur le dessus, 36 cm² sur le côté">
+        {/* dessus */}
+        <polygon points="40,110 200,110 245,78 85,78" className="fill-slate-600 stroke-slate-900" strokeWidth={2} strokeLinejoin="round" />
+        {/* côté droit */}
+        <polygon points="200,110 245,78 245,168 200,200" className="fill-slate-700 stroke-slate-900" strokeWidth={2} strokeLinejoin="round" />
+        {/* face avant */}
+        <rect x={40} y={110} width={160} height={90} className="fill-slate-900 stroke-slate-900" strokeWidth={2} />
+
+        {/* aires */}
+        <text x={120} y={160} fontSize={22} fontWeight={800} textAnchor="middle" className="fill-white">135 cm²</text>
+        <text x={143} y={99} fontSize={13} fontWeight={800} textAnchor="middle" className="fill-white">60 cm²</text>
+        <text x={222} y={140} fontSize={13} fontWeight={800} textAnchor="middle" className="fill-white">36 cm²</text>
+
+        <text x={245} y={214} fontSize={9} textAnchor="end" className="fill-slate-400" style={{ letterSpacing: "0.5px", fontWeight: 700 }}>
+          eleveai.fr
+        </text>
+      </svg>
+      <span className="text-center text-xs font-black text-slate-600">
+        L&apos;aire des trois faces du carton
+      </span>
+    </div>
+  );
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Une page-défi (une par picto)                                             */
 /* -------------------------------------------------------------------------- */
@@ -192,6 +221,8 @@ function PagePicto({ p, index, total }: { p: Picto; index: number; total: number
             <DiagrammeCarres />
           ) : p.diagram === "table" ? (
             <DiagrammeTable />
+          ) : p.diagram === "boite" ? (
+            <DiagrammeBoite />
           ) : (
             <Illustration scene={p.scene} />
           )}
