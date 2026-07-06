@@ -94,6 +94,9 @@ function DiagrammeCarres() {
         ))}
         {/* contour du jardin */}
         <rect x={1} y={1} width={100} height={100} className="fill-none stroke-slate-800" strokeWidth={2.5} />
+        <text x={100} y={99} fontSize={5} textAnchor="end" className="fill-slate-400" style={{ letterSpacing: "0.5px", fontWeight: 700 }}>
+          eleveai.fr
+        </text>
       </svg>
       <span className="text-xs font-black text-slate-600">Exemple : 6 parcelles carrées</span>
     </div>
@@ -140,6 +143,9 @@ function DiagrammeTable() {
 
         {/* sol */}
         <line x1={10} y1={186} x2={340} y2={186} className="stroke-slate-300" strokeWidth={1.5} strokeDasharray="3 3" />
+        <text x={340} y={205} fontSize={9} textAnchor="end" className="fill-slate-400" style={{ letterSpacing: "0.5px", fontWeight: 700 }}>
+          eleveai.fr
+        </text>
       </svg>
       <span className="text-center text-xs font-black text-slate-600">
         La table est la même des deux côtés.
@@ -178,7 +184,7 @@ function PagePicto({ p, index, total }: { p: Picto; index: number; total: number
         </h2>
 
         {/* Ardoise : l'illustration */}
-        <div className="rounded-2xl border-2 border-slate-200 bg-slate-50/60 px-4 py-7 print:py-6">
+        <div className="relative rounded-2xl border-2 border-slate-200 bg-slate-50/60 px-4 py-7 print:py-6">
           {p.enonce && (
             <p className="mb-5 text-center text-sm font-bold text-slate-600 print:text-xs">{p.enonce}</p>
           )}
@@ -189,6 +195,10 @@ function PagePicto({ p, index, total }: { p: Picto; index: number; total: number
           ) : (
             <Illustration scene={p.scene} />
           )}
+          {/* Marque gravée dans le visuel : voyage avec le défi si on le partage seul */}
+          <span className="pointer-events-none absolute bottom-2 right-3 select-none text-[9px] font-black uppercase tracking-[0.15em] text-slate-300">
+            eleveai.fr
+          </span>
         </div>
 
         {/* Pistes + place pour chercher */}
