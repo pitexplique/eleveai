@@ -183,6 +183,50 @@ function DiagrammeBoite() {
   );
 }
 
+/* Fraction dessinée (numérateur / barre / dénominateur) centrée en (cx, cy). */
+function Frac({ cx, cy, n, d }: { cx: number; cy: number; n: number; d: number }) {
+  return (
+    <g className="fill-slate-800">
+      <text x={cx} y={cy - 3} fontSize={13} fontWeight={800} textAnchor="middle">{n}</text>
+      <line x1={cx - 9} y1={cy + 1} x2={cx + 9} y2={cy + 1} className="stroke-slate-800" strokeWidth={1.5} />
+      <text x={cx} y={cy + 15} fontSize={13} fontWeight={800} textAnchor="middle">{d}</text>
+    </g>
+  );
+}
+
+/* Carré magique 3×3 de fractions : 3 cases connues, à compléter.
+   Façon slide « découvre la somme totale et complète le carré ». */
+function DiagrammeCarreMagique() {
+  const O = 8; // origine
+  const C = 44; // taille d'une case
+  const centres = [O + C / 2, O + C + C / 2, O + 2 * C + C / 2]; // centres des 3 lignes/colonnes
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <svg viewBox="0 0 160 172" className="h-52 w-52" role="img" aria-label="Carré magique 3 sur 3 de fractions : centre 1/3, milieu-droite 1/3, bas-gauche 4/9, les autres cases sont à compléter">
+        {/* grille */}
+        <g className="fill-none stroke-slate-800" strokeWidth={2}>
+          <rect x={O} y={O} width={3 * C} height={3 * C} />
+          <line x1={O + C} y1={O} x2={O + C} y2={O + 3 * C} />
+          <line x1={O + 2 * C} y1={O} x2={O + 2 * C} y2={O + 3 * C} />
+          <line x1={O} y1={O + C} x2={O + 3 * C} y2={O + C} />
+          <line x1={O} y1={O + 2 * C} x2={O + 3 * C} y2={O + 2 * C} />
+        </g>
+        {/* cases connues */}
+        <Frac cx={centres[1]} cy={centres[1]} n={1} d={3} />
+        <Frac cx={centres[2]} cy={centres[1]} n={1} d={3} />
+        <Frac cx={centres[0]} cy={centres[2]} n={4} d={9} />
+
+        <text x={O + 3 * C} y={168} fontSize={9} textAnchor="end" className="fill-slate-400" style={{ letterSpacing: "0.5px", fontWeight: 700 }}>
+          eleveai.fr
+        </text>
+      </svg>
+      <span className="text-center text-xs font-black text-slate-600">
+        Complète les cases vides.
+      </span>
+    </div>
+  );
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Une page-défi (une par picto)                                             */
 /* -------------------------------------------------------------------------- */
@@ -223,6 +267,8 @@ function PagePicto({ p, index, total }: { p: Picto; index: number; total: number
             <DiagrammeTable />
           ) : p.diagram === "boite" ? (
             <DiagrammeBoite />
+          ) : p.diagram === "carremagique" ? (
+            <DiagrammeCarreMagique />
           ) : (
             <Illustration scene={p.scene} />
           )}

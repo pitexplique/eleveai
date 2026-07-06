@@ -22,7 +22,7 @@ export type Picto = {
   question: string; // LA question (grande)
   enonce?: string; // données / contexte
   scene: Cell[][]; // l'illustration, ligne par ligne
-  diagram?: "carres" | "table" | "boite"; // schéma dessiné (au lieu de la scène d'icônes)
+  diagram?: "carres" | "table" | "boite" | "carremagique"; // schéma dessiné (au lieu de la scène d'icônes)
   piste: string; // coup de pouce (reste sur la page)
   reponse: string; // corrigé (page séparée)
 };
@@ -390,5 +390,21 @@ export const PICTOS: Picto[] = [
     piste: "Multiplie les aires des trois faces entre elles. Que reconnais-tu par rapport au volume ?",
     reponse:
       "Avec les arêtes a, b, c : a×b = 135, a×c = 60, b×c = 36. Le produit des trois aires vaut (a×b×c)² = 135 × 60 × 36 = 291 600. Donc le volume a×b×c = √291 600 = 540 cm³ (le carton mesure 15 × 9 × 4 cm).",
+  },
+  {
+    ref: "PM·19",
+    theme: "Le carré magique",
+    emoji: "✨",
+    lieu: "Casse-tête créole",
+    niveau: "5ᵉ · 4ᵉ",
+    notion: "Fractions · logique",
+    question: "Quelle est la somme d'une ligne ? Complète le carré.",
+    enonce:
+      "Carré magique : chaque ligne, chaque colonne et chaque diagonale ont la même somme. Astuce : la case du centre vaut le tiers de cette somme.",
+    scene: [],
+    diagram: "carremagique",
+    piste: "La case du centre vaut 1/3, soit le tiers de la somme d'une ligne. Quelle est donc cette somme ?",
+    reponse:
+      "La case centrale (1/3) vaut le tiers de la somme d'une ligne, donc chaque ligne fait 3 × 1/3 = 1. On complète : ligne du haut 2/9 · 5/9 · 2/9 ; ligne du milieu 1/3 · 1/3 · 1/3 ; ligne du bas 4/9 · 1/9 · 4/9. Chaque ligne, colonne et diagonale fait bien 1.",
   },
 ];
