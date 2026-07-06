@@ -255,23 +255,23 @@ function Gear({ cx, cy, r, teeth, cls, hub }: { cx: number; cy: number; r: numbe
 function DiagrammeEngrenages() {
   return (
     <div className="flex flex-col items-center gap-2">
-      <svg viewBox="0 0 215 200" className="w-full max-w-sm" role="img" aria-label="Deux roues dentées qui engrènent : la grande B a 30 dents, la petite A a 10 dents">
+      <svg viewBox="0 0 225 200" className="w-full max-w-sm" role="img" aria-label="Deux roues dentées qui engrènent : la grande B a 30 dents, la petite A a 10 dents">
         <Gear cx={82} cy={105} r={50} teeth={30} cls="fill-amber-300 stroke-amber-600" hub="fill-white stroke-amber-600" />
-        <Gear cx={150} cy={105} r={18} teeth={10} cls="fill-rose-300 stroke-rose-600" hub="fill-white stroke-rose-600" />
+        <Gear cx={164} cy={105} r={18} teeth={10} cls="fill-rose-300 stroke-rose-600" hub="fill-white stroke-rose-600" />
 
         {/* lettres dans les moyeux */}
         <text x={82} y={111} fontSize={17} fontWeight={800} textAnchor="middle" className="fill-amber-800">B</text>
-        <text x={150} y={110} fontSize={12} fontWeight={800} textAnchor="middle" className="fill-rose-800">A</text>
+        <text x={164} y={110} fontSize={12} fontWeight={800} textAnchor="middle" className="fill-rose-800">A</text>
 
         {/* nombres de dents */}
         <text x={82} y={180} fontSize={13} fontWeight={800} textAnchor="middle" className="fill-slate-700">30 dents</text>
-        <text x={150} y={150} fontSize={12} fontWeight={800} textAnchor="middle" className="fill-slate-700">10 dents</text>
+        <text x={164} y={150} fontSize={12} fontWeight={800} textAnchor="middle" className="fill-slate-700">10 dents</text>
 
         {/* tours */}
         <text x={82} y={38} fontSize={13} fontWeight={800} textAnchor="middle" className="fill-amber-700">↻ 1 tour</text>
-        <text x={150} y={72} fontSize={12} fontWeight={800} textAnchor="middle" className="fill-rose-700">↻ ? tours</text>
+        <text x={164} y={72} fontSize={12} fontWeight={800} textAnchor="middle" className="fill-rose-700">↻ ? tours</text>
 
-        <text x={210} y={196} fontSize={9} textAnchor="end" className="fill-slate-400" style={{ letterSpacing: "0.5px", fontWeight: 700 }}>
+        <text x={220} y={196} fontSize={9} textAnchor="end" className="fill-slate-400" style={{ letterSpacing: "0.5px", fontWeight: 700 }}>
           eleveai.fr
         </text>
       </svg>
