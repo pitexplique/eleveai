@@ -559,18 +559,30 @@ function PageCorriges() {
 /*  Livret complet                                                            */
 /* -------------------------------------------------------------------------- */
 
-export default function PictoMathsClient() {
+export default function PictoMathsClient({
+  titre = LIVRET.titre,
+  domaine = LIVRET.domaine,
+  baseline = LIVRET.baseline,
+  retourHref = "/maths-974",
+  retourLabel = "Maths Réel · 974",
+}: {
+  titre?: string;
+  domaine?: string;
+  baseline?: string;
+  retourHref?: string;
+  retourLabel?: string;
+} = {}) {
   return (
     <main className="relative isolate min-h-screen bg-[#f2fbfd] text-slate-800">
       {/* Barre écran */}
       <div className="screen-only border-b border-slate-200 bg-white/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
           <Link
-            href="/maths-974"
+            href={retourHref}
             className="inline-flex w-fit items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3.5 py-1.5 text-sm font-bold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-50"
           >
             <ArrowLeft className="h-4 w-4" />
-            Maths Réel · 974
+            {retourLabel}
           </Link>
           <button
             type="button"
@@ -608,11 +620,11 @@ export default function PictoMathsClient() {
             <Sparkles className="h-4 w-4" />
             Défis à imprimer · gratuit
           </p>
-          <h1 className="mt-3 text-6xl font-black tracking-tight text-slate-900 print:text-5xl">
-            {LIVRET.titre}
-            <span className="ml-2 rounded-2xl bg-amber-300 px-3 text-slate-900">{LIVRET.domaine}</span>
+          <h1 className="mt-3 text-5xl font-black tracking-tight text-slate-900 sm:text-6xl print:text-5xl">
+            {titre}
+            <span className="ml-2 rounded-2xl bg-amber-300 px-3 text-slate-900">{domaine}</span>
           </h1>
-          <p className="mt-3 max-w-lg text-lg font-black text-slate-700">{LIVRET.baseline}</p>
+          <p className="mt-3 max-w-lg text-lg font-black text-slate-700">{baseline}</p>
           <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-cyan-100 px-4 py-1.5 text-sm font-black text-cyan-800">
             👀 Regarde le dessin… et cherche&nbsp;!
           </p>

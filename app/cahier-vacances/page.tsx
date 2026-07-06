@@ -31,6 +31,7 @@ export const metadata: Metadata = {
 /* Catalogue des cahiers de vacances. Un niveau = une carte colorée.
    Les classes de dégradé sont en clair (literals) pour que Tailwind les génère. */
 const cahiers = [
+  { slug: "maths",             niveau: "Maths · CM2 → 3ᵉ",  titre: "Cahier de maths",   theme: "Picto Maths 974 : un dessin, une question, à chercher sur l'ardoise", emoji: "🃏", grad: "from-cyan-400 to-blue-600", duree: "25 défis" },
   { slug: "vers-le-cp",        niveau: "GS → CP",         titre: "Vers le CP",        theme: "Le tour de chez Ti Margo (sans savoir lire)", emoji: "🧸", grad: "from-pink-400 to-rose-500", duree: "15 jours · 3 semaines" },
   { slug: "vers-le-ce1",       niveau: "CP → CE1",        titre: "Vers le CE1",       theme: "Le tour de l'île avec Ti Margo",        emoji: "🐠", grad: "from-rose-400 to-orange-500", duree: "15 jours · 3 semaines" },
   { slug: "vers-le-ce2",       niveau: "CE1 → CE2",       titre: "Vers le CE2",       theme: "On apprend en jouant",                  emoji: "🎲", grad: "from-orange-400 to-amber-500" },

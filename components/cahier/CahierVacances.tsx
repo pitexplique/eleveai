@@ -202,6 +202,30 @@ export default function CahierVacances({
         </div>
       </div>
 
+      {/* Aussi à imprimer : le Cahier de maths (Picto Maths) + la carte des savoirs */}
+      <div className="screen-only mx-auto max-w-4xl px-5 pt-3 sm:px-8">
+        <div className="flex flex-col gap-3 rounded-2xl border border-cyan-200 bg-cyan-50/60 p-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+          <p className="text-sm font-black text-slate-900">
+            🃏 Aussi, à imprimer&nbsp;: le <span className="text-cyan-700">Cahier de maths</span>{" "}
+            (Picto Maths 974) et la <span className="text-cyan-700">carte des savoirs</span> de La Réunion.
+          </p>
+          <div className="flex shrink-0 flex-wrap justify-center gap-2">
+            <Link
+              href="/cahier-vacances/maths"
+              className="inline-flex items-center gap-1.5 rounded-full bg-cyan-600 px-4 py-2 text-sm font-black text-white transition hover:bg-cyan-500"
+            >
+              🃏 Cahier de maths →
+            </Link>
+            <Link
+              href="/carte"
+              className="inline-flex items-center gap-1.5 rounded-full border border-cyan-300 bg-white px-4 py-2 text-sm font-black text-cyan-700 transition hover:bg-cyan-50"
+            >
+              🗺️ La carte →
+            </Link>
+          </div>
+        </div>
+      </div>
+
       <article className="mx-auto max-w-4xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0">
         {/* ================= PAGE DE GARDE ================= */}
         <section className="cahier-page garde-page overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-300/40 print:rounded-none print:border-0 print:shadow-none">
