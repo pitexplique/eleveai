@@ -246,71 +246,14 @@ function MobileSection({
   );
 }
 
-// ─── Espaces adultes : nav simple (nav = espace), CTA orienté décision ─────────
-// Chaque espace a une nav courte ; l'entrée `eleve` reste vide (l'élève garde son
-// mega-menu Matières, rendu à part).
-const SPACE_NAV: Record<Audience, NavItem[]> = {
-  eleve: [],
-  parent: [
-    { href: "/parents", icon: "💡", label: "Comment ça marche", desc: "" },
-    { href: "/politique-confidentialite", icon: "🔒", label: "Sécurité & RGPD", desc: "" },
-    { href: "/tarifs", icon: "💶", label: "Tarifs", desc: "" },
-  ],
-  enseignant: [
-    { href: "/enseignants", icon: "📊", label: "Tableau de bord", desc: "" },
-    { href: "/calcul-rapide", icon: "⚡", label: "En classe", desc: "" },
-    { href: "/espace-ecoles", icon: "🏫", label: "Déployer", desc: "" },
-  ],
-  etablissement: [
-    { href: "/espace-ecoles", icon: "🏫", label: "Déploiement", desc: "" },
-    { href: "/politique-confidentialite", icon: "🔒", label: "Sécurité & RGPD", desc: "" },
-    { href: "/tarifs", icon: "💶", label: "Tarifs", desc: "" },
-  ],
-};
-
-// CTA principal quand NON connecté, par espace (l'espace élève a son propre CTA).
-const SPACE_CTA: Record<Audience, { label: string; href: string }> = {
-  eleve: { label: "Connexion / inscription", href: "/auth/signin?mode=eleve" },
-  parent: { label: "J'ai un code établissement", href: "/auth/signin?mode=eleve" },
-  enseignant: { label: "Mon tableau de bord", href: "/auth/signin?mode=eleve" },
-  etablissement: { label: "Parler à un responsable", href: "/contact" },
-};
-
-// Les 4 portes — sélecteur « Vous êtes ? » présent dans tous les headers.
+// Les 4 portes d'audience — affichées quand l'élève n'est pas connecté (barre
+// déconnectée) ; un élève connecté voit ses matières à la place.
 const AUDIENCE_DOORS: { space: Audience; emoji: string; label: string; href: string }[] = [
   { space: "eleve", emoji: "🎓", label: "Élève", href: "/explorer" },
   { space: "parent", emoji: "👪", label: "Parent", href: "/parents" },
   { space: "enseignant", emoji: "🍎", label: "Enseignant", href: "/enseignants" },
   { space: "etablissement", emoji: "🏫", label: "Établissement", href: "/espace-ecoles" },
 ];
-
-function AudienceSwitcher({ current }: { current: Audience }) {
-  return (
-    <details className="group relative ml-1">
-      <summary className="flex cursor-pointer list-none items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold text-white/80 transition hover:bg-white/15 hover:text-white [&::-webkit-details-marker]:hidden">
-        Vous êtes&nbsp;?
-        <ChevronDown className="h-3.5 w-3.5 transition-transform group-open:rotate-180" />
-      </summary>
-      <div className="absolute right-0 top-full z-[80] mt-1 w-56 rounded-2xl border border-white/10 bg-[#041B33] p-2 shadow-2xl">
-        {AUDIENCE_DOORS.map((d) => (
-          <Link
-            key={d.space}
-            href={d.href}
-            className={[
-              "flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-bold transition",
-              d.space === current
-                ? "bg-white/15 text-white"
-                : "text-white/75 hover:bg-white/10 hover:text-white",
-            ].join(" ")}
-          >
-            <span className="text-base">{d.emoji}</span>
-            {d.label}
-          </Link>
-        ))}
-      </div>
-    </details>
-  );
-}
 
 // ─── Main Header ──────────────────────────────────────────────────────────────
 
