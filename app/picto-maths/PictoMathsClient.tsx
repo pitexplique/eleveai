@@ -283,6 +283,55 @@ function DiagrammeEngrenages() {
   );
 }
 
+/* Une bouteille remplie d'eau à la fraction `fill` (0 → 1), depuis le bas. */
+function Bouteille({ x, fill }: { x: number; fill: number }) {
+  const bodyY = 32;
+  const bodyH = 46;
+  const waterH = bodyH * fill;
+  return (
+    <g>
+      <rect x={x + 6} y={22} width={6} height={12} className="fill-white stroke-slate-500" strokeWidth={1.5} />
+      <rect x={x} y={bodyY} width={18} height={bodyH} rx={4} className="fill-white stroke-slate-500" strokeWidth={1.5} />
+      {fill > 0 && (
+        <rect x={x + 1.5} y={bodyY + bodyH - waterH} width={15} height={waterH} rx={2} className="fill-sky-400" />
+      )}
+    </g>
+  );
+}
+
+/* « Y a-t-il une réponse fausse ? » : le tiers de 3 bouteilles, montré de deux
+   façons (Maya : 1 pleine ; Noé : 1/3 de chacune). Même quantité. */
+function DiagrammeBouteilles() {
+  const t = 1 / 3;
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <svg viewBox="0 0 236 120" className="w-full max-w-md" role="img" aria-label="Deux réponses : Maya colorie 1 bouteille entière sur 3 ; Noé colorie le tiers de chacune des 3 bouteilles">
+        {/* Réponse de Maya : 1 pleine + 2 vides */}
+        <Bouteille x={16} fill={1} />
+        <Bouteille x={42} fill={0} />
+        <Bouteille x={68} fill={0} />
+        <text x={53} y={104} fontSize={12} fontWeight={800} textAnchor="middle" className="fill-slate-700">Maya</text>
+
+        {/* séparateur */}
+        <line x1={120} y1={20} x2={120} y2={88} className="stroke-slate-300" strokeWidth={1.5} strokeDasharray="3 3" />
+
+        {/* Réponse de Noé : 1/3 de chacune */}
+        <Bouteille x={150} fill={t} />
+        <Bouteille x={176} fill={t} />
+        <Bouteille x={202} fill={t} />
+        <text x={185} y={104} fontSize={12} fontWeight={800} textAnchor="middle" className="fill-slate-700">Noé</text>
+
+        <text x={232} y={116} fontSize={9} textAnchor="end" className="fill-slate-400" style={{ letterSpacing: "0.5px", fontWeight: 700 }}>
+          eleveai.fr
+        </text>
+      </svg>
+      <span className="text-center text-xs font-black text-slate-600">
+        Le bleu = l&apos;eau déjà bue.
+      </span>
+    </div>
+  );
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Une page-défi (une par picto)                                             */
 /* -------------------------------------------------------------------------- */
@@ -327,6 +376,8 @@ function PagePicto({ p, index, total }: { p: Picto; index: number; total: number
             <DiagrammeCarreMagique />
           ) : p.diagram === "engrenages" ? (
             <DiagrammeEngrenages />
+          ) : p.diagram === "bouteilles" ? (
+            <DiagrammeBouteilles />
           ) : (
             <Illustration scene={p.scene} />
           )}

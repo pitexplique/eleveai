@@ -22,7 +22,7 @@ export type Picto = {
   question: string; // LA question (grande)
   enonce?: string; // données / contexte
   scene: Cell[][]; // l'illustration, ligne par ligne
-  diagram?: "carres" | "table" | "boite" | "carremagique" | "engrenages"; // schéma dessiné (au lieu de la scène d'icônes)
+  diagram?: "carres" | "table" | "boite" | "carremagique" | "engrenages" | "bouteilles"; // schéma dessiné (au lieu de la scène d'icônes)
   piste: string; // coup de pouce (reste sur la page)
   reponse: string; // corrigé (page séparée)
 };
@@ -438,5 +438,49 @@ export const PICTOS: Picto[] = [
     piste: "Les mêmes dents défilent des deux côtés. Le pignon en a-t-il plus ou moins que le plateau ?",
     reponse:
       "Les mêmes dents défilent des deux côtés. Un tour de plateau (30 dents) fait défiler 30 dents ; le pignon (10 dents) tourne donc 30 ÷ 10 = 3 fois. La roue fait 3 tours — c'est pour ça qu'un tour de pédales fait bien avancer. (Moins de dents = tourne plus vite : proportionnalité inverse. On garde un grand pignon pour monter à Cilaos.)",
+  },
+  {
+    ref: "PM·22",
+    theme: "L'eau en rando",
+    emoji: "🥾",
+    lieu: "En rando à Mafate",
+    niveau: "6ᵉ · 5ᵉ",
+    notion: "Fractions · esprit critique",
+    question: "Y a-t-il une réponse fausse ?",
+    enonce:
+      "En rando à Mafate, j'emporte 3 bouteilles d'eau. J'en ai bu le tiers. Maya et Noé colorient ce qui est bu — mais pas de la même façon.",
+    scene: [],
+    diagram: "bouteilles",
+    piste: "Compte la quantité d'eau coloriée dans chaque cas : cela fait combien de bouteilles en tout ?",
+    reponse:
+      "Le tiers de 3 bouteilles = 3 × 1/3 = 1 bouteille. Maya a regroupé le tout dans 1 bouteille pleine ; Noé l'a réparti (1/3 dans chacune des 3). Les deux montrent la même quantité : il n'y a pas de réponse fausse !",
+  },
+  {
+    ref: "PM·23",
+    theme: "Le cœur à l'effort",
+    emoji: "❤️",
+    lieu: "À l'entraînement de foot",
+    niveau: "4ᵉ · 3ᵉ",
+    notion: "Pourcentage",
+    question: "À combien doit battre ton cœur pour progresser en endurance ?",
+    enonce:
+      "Ta fréquence cardiaque maximale ≈ 220 − ton âge. Pour l'endurance, on vise 70 % de ce maximum. Tu as 14 ans.",
+    scene: [
+      [
+        { t: "ic", e: "❤️", cap: "FC max = 220 − 14" },
+        { t: "op", v: "→" },
+        { t: "val", v: "206 bpm" },
+      ],
+      [
+        { t: "val", v: "70 %" },
+        { t: "op", v: "×" },
+        { t: "val", v: "206" },
+        { t: "op", v: "→" },
+        { t: "qm", cap: "cible ?" },
+      ],
+    ],
+    piste: "Calcule d'abord ton maximum (220 − 14), puis prends-en 70 %.",
+    reponse:
+      "FC max ≈ 220 − 14 = 206 battements par minute. Zone d'endurance = 70 % → 0,70 × 206 ≈ 144 bpm. En dessous c'est trop facile, très au-dessus tu t'épuises — chacun son rythme, on écoute son corps sans se juger.",
   },
 ];
