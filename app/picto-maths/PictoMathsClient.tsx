@@ -230,8 +230,12 @@ function PagePicto({ p, index, total }: { p: Picto; index: number; total: number
             <img src={TI_MARGO} alt="" className="h-4 w-4 object-contain opacity-70" />
             {LIVRET.titre} · {LIVRET.domaine}
           </span>
-          <span className="text-[11px] font-black tabular-nums text-slate-400">
-            Défi {index + 1} / {total} · eleveai.fr
+          <span className="flex flex-col items-end gap-0.5 text-[11px] font-black text-slate-400">
+            <span className="tabular-nums">Défi {index + 1} / {total} · eleveai.fr</span>
+            <span className="inline-flex items-center gap-1 text-[10px] font-bold normal-case text-slate-400">
+              <span aria-hidden>{LIVRET.creditEmoji}</span>
+              {LIVRET.credit}
+            </span>
           </span>
         </div>
       </div>
@@ -348,6 +352,10 @@ export default function PictoMathsClient() {
             <p className="text-sm font-black text-cyan-700">eleveai.fr</p>
             <p className="text-[10px] font-black uppercase tracking-wide text-slate-400">
               une autre façon d&apos;apprendre
+            </p>
+            <p className="mt-1 inline-flex items-center gap-1 text-[11px] font-bold text-slate-500">
+              <span aria-hidden>{LIVRET.creditEmoji}</span>
+              {LIVRET.credit}
             </p>
           </div>
         </section>

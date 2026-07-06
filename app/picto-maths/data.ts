@@ -33,6 +33,9 @@ export const LIVRET = {
   baseline: "Un dessin, une question — les maths de La Réunion",
   intro:
     "Une image, une seule question. On observe, on cherche, on écrit sur l'ardoise. Pas de piège : juste les maths, en vrai, à La Réunion. Les corrigés sont à la fin — on ne les regarde qu'après avoir essayé !",
+  // Clin d'œil discret : prénom seul (n'engage personne publiquement).
+  creditEmoji: "👩‍🏫",
+  credit: "sur une idée de Valérie",
 };
 
 export const PICTOS: Picto[] = [
@@ -43,23 +46,23 @@ export const PICTOS: Picto[] = [
     lieu: "Marché couvert de Saint-Pierre",
     niveau: "6ᵉ",
     notion: "Proportionnalité",
-    question: "Combien coûtent 5 kg de letchis ?",
+    question: "Combien coûtent 9 kg de letchis ?",
     enonce: "Sur l'étal, le prix des letchis est le même au kilo.",
     scene: [
       [
         { t: "ic", e: "🍒", n: 3, cap: "3 kg" },
         { t: "op", v: "→" },
-        { t: "val", v: "6 €" },
+        { t: "val", v: "5 €" },
       ],
       [
-        { t: "ic", e: "🍒", n: 5, cap: "5 kg" },
+        { t: "ic", e: "🍒", n: 9, cap: "9 kg" },
         { t: "op", v: "→" },
         { t: "qm" },
       ],
     ],
-    piste: "Combien coûte 1 seul kilo ?",
+    piste: "Combien de fois 3 kg y a-t-il dans 9 kg ?",
     reponse:
-      "6 € pour 3 kg, donc 1 kg = 6 ÷ 3 = 2 €. Pour 5 kg : 5 × 2 = 10 €.",
+      "5 € pour 3 kg. Or 9 kg = 3 × 3 kg, donc 9 kg coûtent 3 × 5 = 15 €.",
   },
   {
     ref: "PM·02",
