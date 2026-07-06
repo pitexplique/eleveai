@@ -160,6 +160,61 @@ const SUBJECTS = [
   },
 ];
 
+// Les parcours par matière — même modèle visuel que les coachs (grille jumelle).
+// « Faire le point » : un bilan de niveau par matière avant de s'entraîner.
+const PARCOURS_SUBJECTS = [
+  {
+    icon: "🧮",
+    label: "Maths",
+    desc: "Teste ton niveau",
+    href: "/parcours",
+    bg: "from-cyan-500 to-blue-600",
+    border: "border-cyan-400/50",
+    glow: "group-hover:shadow-cyan-500/40",
+    cm: true,
+  },
+  {
+    icon: "📖",
+    label: "Français",
+    desc: "Teste ton niveau",
+    href: "/parcours-francais",
+    bg: "from-emerald-500 to-green-700",
+    border: "border-emerald-400/50",
+    glow: "group-hover:shadow-emerald-500/40",
+    cm: true,
+  },
+  {
+    icon: "🇬🇧",
+    label: "Anglais",
+    desc: "Bilan CECRL",
+    href: "/parcours-english-maths",
+    bg: "from-blue-500 to-indigo-700",
+    border: "border-blue-400/50",
+    glow: "group-hover:shadow-blue-500/40",
+    cm: true,
+  },
+  {
+    icon: "🇪🇸",
+    label: "Espagnol",
+    desc: "Bilan A1 → B2",
+    href: "/parcours-espagnol",
+    bg: "from-red-500 to-rose-700",
+    border: "border-red-400/50",
+    glow: "group-hover:shadow-red-500/40",
+    cm: false,
+  },
+  {
+    icon: "🤖",
+    label: "IA",
+    desc: "Bilan A1 → C1",
+    href: "/parcours-ia",
+    bg: "from-indigo-500 to-violet-700",
+    border: "border-indigo-400/50",
+    glow: "group-hover:shadow-indigo-500/40",
+    cm: false,
+  },
+];
+
 // Niveaux pour lesquels le coach sait pré-sélectionner la classe via ?classe=.
 // (À la connexion on connaît la classe → proposer directement le bon niveau.
 //  À terme : suggestions plus fines par niveau.)
@@ -366,6 +421,7 @@ export default function AccueilPage({
   ];
 
   const visibleSubjects = isCmPrimary ? SUBJECTS.filter(s => s.cm) : SUBJECTS;
+  const visibleParcours = isCmPrimary ? PARCOURS_SUBJECTS.filter(s => s.cm) : PARCOURS_SUBJECTS;
 
   // Staff (prof/principal) connecté : on remplace le hero élève par leur bandeau.
   const isStaff =
@@ -626,21 +682,60 @@ export default function AccueilPage({
             ))}
           </div>
 
-          {/* Parcours — faire le point par matière (essentiel élève) */}
+          {/* Parcours par matière — grille jumelle des coachs (faire le point) */}
+          <div className="mb-4 mt-8">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-violet-200/70">
+              🛤️ Faire le point (🟢 🟡 🔴)
+            </p>
+            <h2 className="mt-1 text-xl font-black text-white">
+              Les parcours par matière
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+            {visibleParcours.map((subject) => (
+              <Link
+                key={subject.label}
+                href={getHref(subject.href)}
+                className={[
+                  "group relative flex min-h-[122px] flex-col items-center justify-center gap-2 rounded-2xl border p-4 sm:p-5 text-center",
+                  "bg-white/5 backdrop-blur-md transition-all duration-300",
+                  "hover:-translate-y-2 hover:scale-105",
+                  `hover:shadow-2xl ${subject.glow}`,
+                  subject.border,
+                ].join(" ")}
+              >
+                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${subject.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+
+                <span className="relative z-10 text-3xl sm:text-4xl drop-shadow-lg">
+                  {subject.icon}
+                </span>
+                <div className="relative z-10">
+                  <p className="text-sm sm:text-base font-black text-white leading-tight">
+                    {subject.label}
+                  </p>
+                  <p className="mt-0.5 text-[10px] sm:text-xs text-white/60 leading-tight hidden sm:block">
+                    {subject.desc}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Picto Maths · 974 — après les parcours : défis « 1 image, 1 question » */}
           <Link
-            href="/parcours"
-            className="mt-4 flex flex-col items-center justify-between gap-3 rounded-2xl border border-violet-300/30 bg-gradient-to-r from-violet-500/[0.12] to-fuchsia-500/[0.08] p-4 text-center transition hover:border-violet-300/60 sm:flex-row sm:text-left"
+            href="/picto-maths"
+            className="mt-4 flex flex-col items-center justify-between gap-3 rounded-2xl border border-cyan-300/30 bg-gradient-to-r from-cyan-500/[0.12] to-amber-500/[0.08] p-4 text-center transition hover:border-cyan-300/60 sm:flex-row sm:text-left"
           >
             <div>
-              <p className="text-xs font-black uppercase tracking-wide text-violet-200">
-                🛤️ Parcours
+              <p className="text-xs font-black uppercase tracking-wide text-cyan-200">
+                🃏 Picto Maths · 974
               </p>
               <p className="mt-0.5 text-sm font-semibold text-white/80">
-                Fais le point : teste ton niveau par matière (🟢 🟡 🔴).
+                Une image, une question : les maths de La Réunion à imprimer et à chercher.
               </p>
             </div>
-            <span className="shrink-0 rounded-full bg-violet-400 px-5 py-2 text-sm font-black text-[#041B33]">
-              Faire le point →
+            <span className="shrink-0 rounded-full bg-cyan-400 px-5 py-2 text-sm font-black text-[#041B33]">
+              Voir les défis →
             </span>
           </Link>
         </div>

@@ -20,6 +20,7 @@ const NAV_MATHS = [
   { href: "/dico/maths/6e",    icon: "📒", label: "Dico Maths 6e",      desc: "50 mots & gestes pour l'éval nationale" },
   { href: "/fiches-cours/maths", icon: "PDF", label: "Fiches de cours",    desc: "Cours maths courts à télécharger" },
   { href: "/maths-974",        icon: "🌋", label: "Maths Réel · 974",       desc: "La Réunion en vidéo : à quoi servent les maths" },
+  { href: "/picto-maths",      icon: "🃏", label: "Picto Maths · 974",      desc: "Défis « 1 image, 1 question » à imprimer" },
   { href: "/concours-general", icon: "🏆", label: "Concours général",   desc: "Problèmes avancés" },
   { href: "/defis-du-jour",    icon: "🎯", label: "Défis du jour",      desc: "Un défi maths chaque jour" },
   { href: "/podcast-maths",    icon: "🎧", label: "Podcast maths",      desc: "Fractions, pourcentages, probas en audio" },

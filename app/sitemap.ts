@@ -118,6 +118,7 @@ const ROUTES: RouteConfig[] = [
 
   // ── MATHS RÉEL · 974 ───────────────────────────────────────────────────────
   { path: "/maths-974",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_974 },
+  { path: "/picto-maths",     priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
 
   // ── JEU « QUI SUIS-JE ? » (32 cartes à imprimer, toutes matières) ──────────
   // Le hub ; les paquets par classe sont générés automatiquement (voir
