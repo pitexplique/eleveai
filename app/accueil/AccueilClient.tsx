@@ -9,7 +9,6 @@ import { problemesFixed } from "@/lib/defis-du-jour/problemes.fixed";
 import { problemeDuJourWeekly } from "@/lib/defis-du-jour/weekly";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
-import PresentationAudio from "./PresentationAudio";
 import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
 import RecoDuJourAccueil from "@/components/accueil/RecoDuJourAccueil";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
@@ -541,24 +540,17 @@ export default function AccueilPage({
           </>
           )}
 
-          {/* Voie élève par défaut : accès direct au coach + connexion. */}
+          {/* Voie élève par défaut : connexion (le coach est accessible plus bas). */}
+          {!eleve && (
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <Link
-              href="/coach-ia/maths"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400 px-6 py-2.5 text-sm font-black text-[#041B33] shadow-lg transition hover:scale-105 hover:brightness-110"
+              href="/auth/signin?mode=eleve"
+              className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-2.5 text-sm font-black text-white shadow-lg transition hover:scale-105 hover:bg-white/20"
             >
-              🚀 Ouvrir mon coach
+              Se connecter — gratuit
             </Link>
-            {!eleve && (
-              <Link
-                href="/auth/signin?mode=eleve"
-                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-2.5 text-sm font-black text-white shadow-lg transition hover:scale-105 hover:bg-white/20"
-              >
-                Se connecter — gratuit
-              </Link>
-            )}
           </div>
-          <PresentationAudio />
+          )}
         </div>
       </section>
       )}
