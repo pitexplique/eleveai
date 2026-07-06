@@ -943,63 +943,70 @@ export default function AccueilPage({
       {/* ── CAHIERS DE VACANCES — produit saisonnier, cartes colorées & fun ──── */}
       <section id="explorer" className="relative scroll-mt-20 overflow-hidden bg-gradient-to-b from-[#08294a] to-[#041B33] px-4 pb-2 pt-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
-          <div className="mb-6 text-center">
-            <p className="inline-flex items-center gap-2 rounded-full bg-amber-300/20 px-4 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-amber-200">
-              ☀️ Spécial été · à imprimer · 100% gratuit
-            </p>
-            <h2 className="mt-3 text-3xl font-black text-white sm:text-4xl">
-              Les cahiers de vacances{" "}
-              <span className="bg-gradient-to-r from-amber-300 via-orange-300 to-pink-300 bg-clip-text text-transparent">
-                EleveAI
-              </span>{" "}
-              🦎
-            </h2>
-            <p className="mx-auto mt-2 max-w-2xl text-sm font-semibold leading-6 text-white/75">
-              Une page par jour, 6 semaines d&apos;aventure avec Ti Margo — du CE2
-              à la Terminale. Maths, français, un défi… et le voyage continue !
-            </p>
-            <Link
-              href="/cahier-vacances"
-              className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-2 text-xs font-black text-amber-200 transition hover:bg-white/20 hover:text-amber-100"
-            >
-              Voir les 11 cahiers →
-            </Link>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {CAHIERS_VACANCES.map((c) => (
-              <Link
-                key={c.slug}
-                href={`/cahier-vacances/${c.slug}`}
-                className={`group relative flex flex-col overflow-hidden rounded-3xl bg-gradient-to-br ${c.grad} p-5 shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-2 hover:rotate-[-1.5deg] hover:scale-[1.03] hover:shadow-2xl`}
-              >
-                <div className="pointer-events-none absolute -right-6 -top-8 h-28 w-28 rounded-full bg-white/25 blur-2xl" />
-                <div className="relative z-10 flex items-start justify-between gap-3">
-                  <span className="inline-block rounded-full bg-white/25 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-white backdrop-blur-sm">
-                    {c.niveau}
-                  </span>
-                  <span
-                    className="text-5xl drop-shadow-md transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-125"
-                    aria-hidden="true"
+          <div className="flex flex-col items-center gap-6 lg:flex-row lg:justify-between">
+            <div className="w-full text-center lg:flex-1 lg:text-left">
+              <p className="inline-flex items-center gap-2 rounded-full bg-amber-300/20 px-4 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-amber-200">
+                ☀️ Spécial été · à imprimer · gratuit
+              </p>
+              <h2 className="mt-3 text-3xl font-black text-white sm:text-4xl">
+                Les cahiers de vacances{" "}
+                <span className="bg-gradient-to-r from-amber-300 via-orange-300 to-pink-300 bg-clip-text text-transparent">
+                  EleveAI
+                </span>{" "}
+                🦎
+              </h2>
+              <p className="mt-2 text-sm font-semibold leading-6 text-white/75">
+                Une page par jour, 6 semaines d&apos;aventure avec Ti Margo — du CE2 à
+                la Terminale. Choisis ta classe&nbsp;:
+              </p>
+              <div className="mt-4 flex flex-wrap justify-center gap-2 lg:justify-start">
+                {CAHIERS_VACANCES.map((c) => (
+                  <Link
+                    key={c.slug}
+                    href={`/cahier-vacances/${c.slug}`}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-amber-300/30 bg-white/5 px-3 py-1.5 text-sm font-black text-white backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white/10"
                   >
-                    {c.emoji}
-                  </span>
-                </div>
-                <h3 className="relative z-10 mt-3 text-2xl font-black text-white drop-shadow-sm">
-                  {c.titre}
-                </h3>
-                <p className="relative z-10 mt-1 flex-1 text-sm font-semibold leading-snug text-white/90">
-                  {c.theme}
-                </p>
-                <p className="relative z-10 mt-2 text-[11px] font-black uppercase tracking-wider text-white/80">
-                  30 jours · corrigés inclus
-                </p>
-                <span className="relative z-10 mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-black text-slate-900 shadow-md transition-all group-hover:gap-3">
-                  Télécharger en PDF
-                  <span className="transition-transform group-hover:translate-x-1">→</span>
-                </span>
+                    <span className="text-base leading-none">{c.emoji}</span>
+                    {c.titre}
+                  </Link>
+                ))}
+              </div>
+              <Link
+                href="/cahier-vacances"
+                className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-2 text-xs font-black text-amber-200 transition hover:bg-white/20 hover:text-amber-100"
+              >
+                Voir tous les cahiers →
               </Link>
-            ))}
+            </div>
+
+            {/* Aperçu d'un cahier */}
+            <Link
+              href="/cahier-vacances/vers-la-6e"
+              className="group w-full max-w-[300px] shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl transition hover:-translate-y-0.5 hover:shadow-2xl"
+            >
+              <div className="flex items-center justify-between bg-gradient-to-r from-amber-500 to-orange-500 px-3 py-2 text-white">
+                <span className="text-[11px] font-black">☀️ Cahier · Vers la 6ᵉ</span>
+                <span className="text-[9px] font-black opacity-90">Jour 1</span>
+              </div>
+              <div className="space-y-1.5 p-3">
+                <span className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-black text-slate-700">
+                  <span>🧮 Maths — calcul mental</span>
+                  <span className="h-3.5 w-3.5 rounded-full border-2 border-slate-300" />
+                </span>
+                <span className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-black text-slate-700">
+                  <span>✍️ Français — le pluriel</span>
+                  <span className="h-3.5 w-3.5 rounded-full border-2 border-slate-300" />
+                </span>
+                <span className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-black text-slate-700">
+                  <span>🎯 Défi du jour</span>
+                  <span className="h-3.5 w-3.5 rounded-full border-2 border-slate-300" />
+                </span>
+                <div className="flex items-center justify-between pt-1">
+                  <span className="text-[10px] font-bold text-slate-500">🦎 Corrigés inclus</span>
+                  <span className="text-[8px] font-black uppercase tracking-[0.15em] text-slate-300">eleveai.fr</span>
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
       </section>
