@@ -612,7 +612,10 @@ export default function PictoMathsClient() {
             {LIVRET.titre}
             <span className="ml-2 rounded-2xl bg-amber-300 px-3 text-slate-900">{LIVRET.domaine}</span>
           </h1>
-          <p className="mt-3 max-w-md text-base font-bold text-slate-500">{LIVRET.baseline}</p>
+          <p className="mt-3 max-w-lg text-lg font-black text-slate-700">{LIVRET.baseline}</p>
+          <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-cyan-100 px-4 py-1.5 text-sm font-black text-cyan-800">
+            👀 Regarde le dessin… et cherche&nbsp;!
+          </p>
           <p className="mt-4 max-w-lg text-sm font-semibold leading-6 text-slate-600">{LIVRET.intro}</p>
           <div className="mt-5 flex flex-wrap justify-center gap-2">
             <span className="rounded-full bg-cyan-50 px-2.5 py-1 text-xs font-black text-cyan-700">
