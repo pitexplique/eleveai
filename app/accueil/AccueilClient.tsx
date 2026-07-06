@@ -502,9 +502,9 @@ export default function AccueilPage({
       </section>
       )}
 
-      {/* ── APERÇUS PAR AUDIENCE — cible des pastilles du hero ────────────────── */}
-      {/* Chaque pastille scrolle ici ; l'aperçu explique, puis « En savoir plus »
-          mène à l'espace dédié (page). L'Élève reste sur l'accueil (son espace). */}
+      {/* ── APERÇUS PAR AUDIENCE — pour les VISITEURS ; masqués si connecté (un
+          élève/prof connecté n'a plus à choisir « Je suis… »). ──────────────── */}
+      {!eleve && (
       <section className="bg-[#041B33] px-4 pt-8 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2">
           {/* Élève */}
@@ -572,11 +572,74 @@ export default function AccueilPage({
           </div>
         </div>
       </section>
+      )}
 
       {/* ── TA JOURNÉE — rendez-vous perso de l'élève connecté (🔥 + 🧭) ──────── */}
       {/* Ne s'affiche que pour un élève connecté (sinon ne rend rien) : le bloc
           contextualise l'accueil « pour lui-même ». Consomme /api/profil-eleve. */}
       <RecoDuJourAccueil />
+
+      {/* ── COACHS + PARCOURS — les essentiels élève, remontés en tête ─────────── */}
+      <section className="bg-[#061f39] px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-4">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-200/70">
+              Choisir une matière
+            </p>
+            <h2 className="mt-1 text-xl font-black text-white">
+              Les coachs principaux
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+            {visibleSubjects.map((subject) => (
+              <Link
+                key={subject.label}
+                href={getHref(subject.href)}
+                className={[
+                  "group relative flex min-h-[122px] flex-col items-center justify-center gap-2 rounded-2xl border p-4 sm:p-5 text-center",
+                  "bg-white/5 backdrop-blur-md transition-all duration-300",
+                  "hover:-translate-y-2 hover:scale-105",
+                  `hover:shadow-2xl ${subject.glow}`,
+                  subject.border,
+                ].join(" ")}
+              >
+                {/* Gradient bg on hover */}
+                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${subject.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+
+                <span className="relative z-10 text-3xl sm:text-4xl drop-shadow-lg">
+                  {subject.icon}
+                </span>
+                <div className="relative z-10">
+                  <p className="text-sm sm:text-base font-black text-white leading-tight">
+                    {subject.label}
+                  </p>
+                  <p className="mt-0.5 text-[10px] sm:text-xs text-white/60 leading-tight hidden sm:block">
+                    {subject.desc}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Parcours — faire le point par matière (essentiel élève) */}
+          <Link
+            href="/parcours"
+            className="mt-4 flex flex-col items-center justify-between gap-3 rounded-2xl border border-violet-300/30 bg-gradient-to-r from-violet-500/[0.12] to-fuchsia-500/[0.08] p-4 text-center transition hover:border-violet-300/60 sm:flex-row sm:text-left"
+          >
+            <div>
+              <p className="text-xs font-black uppercase tracking-wide text-violet-200">
+                🛤️ Parcours
+              </p>
+              <p className="mt-0.5 text-sm font-semibold text-white/80">
+                Fais le point : teste ton niveau par matière (🟢 🟡 🔴).
+              </p>
+            </div>
+            <span className="shrink-0 rounded-full bg-violet-400 px-5 py-2 text-sm font-black text-[#041B33]">
+              Faire le point →
+            </span>
+          </Link>
+        </div>
+      </section>
 
       {/* ── ESPACE ÉLÈVE (ancre du sélecteur d'audience) : jeu, dictée, coach… ── */}
       {/* ── JEU DE 32 CARTES « QUI SUIS-JE ? » — à imprimer, avant la dictée ──── */}
@@ -851,50 +914,6 @@ export default function AccueilPage({
           >
             Donner mon avis →
           </Link>
-        </div>
-      </section>
-
-      {/* ── SUBJECT CARDS cliquables ────────────────────────────────────────── */}
-      <section className="bg-[#061f39] px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-4">
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-200/70">
-              Choisir une matière
-            </p>
-            <h2 className="mt-1 text-xl font-black text-white">
-              Les coachs principaux
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-            {visibleSubjects.map((subject) => (
-              <Link
-                key={subject.label}
-                href={getHref(subject.href)}
-                className={[
-                  "group relative flex min-h-[122px] flex-col items-center justify-center gap-2 rounded-2xl border p-4 sm:p-5 text-center",
-                  "bg-white/5 backdrop-blur-md transition-all duration-300",
-                  "hover:-translate-y-2 hover:scale-105",
-                  `hover:shadow-2xl ${subject.glow}`,
-                  subject.border,
-                ].join(" ")}
-              >
-                {/* Gradient bg on hover */}
-                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${subject.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-
-                <span className="relative z-10 text-3xl sm:text-4xl drop-shadow-lg">
-                  {subject.icon}
-                </span>
-                <div className="relative z-10">
-                  <p className="text-sm sm:text-base font-black text-white leading-tight">
-                    {subject.label}
-                  </p>
-                  <p className="mt-0.5 text-[10px] sm:text-xs text-white/60 leading-tight hidden sm:block">
-                    {subject.desc}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
         </div>
       </section>
 
