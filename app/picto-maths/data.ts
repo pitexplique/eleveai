@@ -407,4 +407,21 @@ export const PICTOS: Picto[] = [
     reponse:
       "La case centrale (1/3) vaut le tiers de la somme d'une ligne, donc chaque ligne fait 3 × 1/3 = 1. On complète : ligne du haut 2/9 · 5/9 · 2/9 ; ligne du milieu 1/3 · 1/3 · 1/3 ; ligne du bas 4/9 · 1/9 · 4/9. Chaque ligne, colonne et diagonale fait bien 1.",
   },
+  {
+    ref: "PM·20",
+    theme: "Les crayons de couleur",
+    emoji: "🖍️",
+    lieu: "Trier sa trousse à la récré",
+    niveau: "3ᵉ",
+    notion: "Division · restes",
+    question: "Combien ai-je de crayons ?",
+    enonce: "J'ai moins de 50 crayons.",
+    scene: [
+      [{ t: "ic", e: "🖍️", n: 5, cap: "paquets de 5" }, { t: "op", v: "→" }, { t: "val", v: "reste 3" }],
+      [{ t: "ic", e: "🖍️", n: 7, cap: "paquets de 7" }, { t: "op", v: "→" }, { t: "val", v: "reste 5" }],
+    ],
+    piste: "Cherche les nombres < 50 qui laissent un reste de 5 en paquets de 7, puis regarde les paquets de 5.",
+    reponse:
+      "Reste 5 avec des paquets de 7 : 5, 12, 19, 26, 33, 40, 47. Parmi eux, reste 3 avec des paquets de 5 : 33 (33 = 6×5 + 3 et 33 = 4×7 + 5). Il y a 33 crayons.",
+  },
 ];
