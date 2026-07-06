@@ -458,7 +458,10 @@ export default function AccueilPage({
             sans jugement&nbsp;: on t&apos;explique, on t&apos;encourage. ✨
           </p>
 
-          {/* Chacun sa porte : Élève reste ici, les adultes vont sur leur page. */}
+          {/* Sélecteur « Je suis… » — pour les VISITEURS ; masqué si connecté
+              (l'élève connecté a déjà ses recos « Ta journée » juste dessous). */}
+          {!eleve && (
+          <>
           <p className="mt-7 text-xs font-black uppercase tracking-[0.2em] text-white/45">
             Je suis…
           </p>
@@ -479,6 +482,8 @@ export default function AccueilPage({
               </Link>
             ))}
           </div>
+          </>
+          )}
 
           {/* Voie élève par défaut : accès direct au coach + connexion. */}
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
@@ -712,37 +717,6 @@ export default function AccueilPage({
             🔍 Voir le catalogue →
           </span>
         </Link>
-      </section>
-
-      {/* ── MOT AUX ÉLÈVES ET AUX PARENTS ────────────────────────────────────── */}
-      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-sky-300/30 bg-gradient-to-br from-sky-300/[0.10] via-cyan-300/[0.06] to-white/[0.04] p-6 text-center sm:p-8">
-          <p className="text-3xl sm:text-4xl" aria-hidden="true">💛</p>
-          <h2 className="mt-2 text-2xl font-black leading-tight text-white sm:text-3xl">
-            Aux parents et à leurs enfants
-          </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
-            Merci pour cette année. EleveAI est né dans ma classe, pour mes
-            élèves — et il reste{" "}
-            <span className="font-black text-sky-200">
-              gratuit et ouvert tout l&apos;été
-            </span>
-            .
-          </p>
-          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
-            <span className="font-black text-sky-200">Aux parents :</span>{" "}
-            quelques minutes par jour suffisent — la dictée du jour, un défi, une
-            fiche. Aucune pression, juste le plaisir d&apos;apprendre à son
-            rythme, en confiance (et sans publicité — vos enfants sont en
-            sécurité).
-          </p>
-          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
-            <span className="font-black text-sky-200">Aux élèves :</span> je suis
-            fier de vous. Reposez-vous, profitez des vôtres et du soleil… et
-            revenez quand l&apos;envie vous prend. 🌴
-          </p>
-          <p className="mt-4 text-sm font-black text-emerald-200">— M. Lacoste</p>
-        </div>
       </section>
 
       {/* ── CAHIERS DE VACANCES — produit saisonnier, cartes colorées & fun ──── */}
@@ -1003,6 +977,37 @@ export default function AccueilPage({
           </div>
           <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#041B33] to-transparent" />
           </div>
+        </div>
+      </section>
+
+      {/* ── MOT DE M. LACOSTE — aux élèves et aux parents (contenu humain, en bas) ── */}
+      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-sky-300/30 bg-gradient-to-br from-sky-300/[0.10] via-cyan-300/[0.06] to-white/[0.04] p-6 text-center sm:p-8">
+          <p className="text-3xl sm:text-4xl" aria-hidden="true">💛</p>
+          <h2 className="mt-2 text-2xl font-black leading-tight text-white sm:text-3xl">
+            Aux parents et à leurs enfants
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+            Merci pour cette année. EleveAI est né dans ma classe, pour mes
+            élèves — et il reste{" "}
+            <span className="font-black text-sky-200">
+              gratuit et ouvert tout l&apos;été
+            </span>
+            .
+          </p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+            <span className="font-black text-sky-200">Aux parents :</span>{" "}
+            quelques minutes par jour suffisent — la dictée du jour, un défi, une
+            fiche. Aucune pression, juste le plaisir d&apos;apprendre à son
+            rythme, en confiance (et sans publicité — vos enfants sont en
+            sécurité).
+          </p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+            <span className="font-black text-sky-200">Aux élèves :</span> je suis
+            fier de vous. Reposez-vous, profitez des vôtres et du soleil… et
+            revenez quand l&apos;envie vous prend. 🌴
+          </p>
+          <p className="mt-4 text-sm font-black text-emerald-200">— M. Lacoste</p>
         </div>
       </section>
 
