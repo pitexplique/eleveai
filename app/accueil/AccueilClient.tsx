@@ -35,11 +35,10 @@ const AUDIENCES: {
   { emoji: "🏫", label: "Établissement", sub: "Déploiement & suivi", href: "/espace-ecoles" },
 ];
 
-// Maths·974 PARKÉ hors vitrine pour le moment (déc. Frédéric, 05/07/2026) : la
-// rubrique reste accessible via le menu Maths / la page /maths-974, mais on la
-// retire du haut de l'accueil (trop de place, pas encore de contenu régulier).
-// Repasser à true pour la remettre en avant.
-const MONTRER_974 = false;
+// Maths·974 REMISE EN VITRINE (05/07/2026) : l'IA-IPR de maths (V. Bernard) adore
+// « Maths Réel » (maths vivantes) → c'est le cheval institutionnel, on le montre
+// à tout le monde (connectés et non connectés). Repasser à false pour la parker.
+const MONTRER_974 = true;
 
 // ─── Drag-to-scroll (glisser à la souris sur desktop) ──────────────────────────
 // Sur mobile le scroll horizontal au doigt est natif. Sur desktop il n'y a pas de
