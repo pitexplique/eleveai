@@ -73,6 +73,13 @@ export const MAINTENANCE_HEBDO: TacheMaintenance[] = [
     detail: "Statut 🟠 ralenti / 🔴 inactif sur le dashboard prof — ré-engager.",
   },
   {
+    id: "funnel-cahier",
+    label: "Suivre le funnel cahier de vacances",
+    detail:
+      "KPI « Inscrits via le cahier » (source=cahier-vacances) + consentements newsletter, ci-dessus sur ce dashboard. Doit décoller depuis que le QR est en couverture des cahiers. Si ça reste à 0 malgré des scans / du trafic cahier, le tracking ?from=cahier est peut-être cassé — à vérifier.",
+    href: "/admin/dashboard",
+  },
+  {
     id: "sql-en-attente",
     label: "SQL en attente ?",
     detail:
