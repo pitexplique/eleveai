@@ -665,13 +665,13 @@ export default function AccueilPage({
 
         <style jsx global>{`
             .ea-car {
-              animation: ea-drive 15s linear infinite;
+              animation: ea-drive 7.5s linear infinite;
             }
             .ea-bob {
               animation: ea-bob 1.1s ease-in-out infinite;
             }
             .ea-wheel {
-              animation: ea-spin 0.9s linear infinite;
+              animation: ea-spin 0.45s linear infinite;
             }
             @keyframes ea-drive {
               0% {
