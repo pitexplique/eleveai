@@ -573,6 +573,142 @@ export default function AccueilPage({
       </section>
       )}
 
+      {/* ── PETIT TOUR DE L'ÎLE — animation SVG sous le hero : une voiture jaune
+          (clin d'œil aux cars péi) avec 2 passagers roule de gauche à droite et
+          passe devant les panneaux produits. Décoratif ; respecte
+          prefers-reduced-motion (s'arrête pour qui coupe les animations). ───── */}
+      {!isStaff && (
+      <section aria-hidden className="relative overflow-hidden px-3 pt-3 sm:px-6">
+        <svg
+          viewBox="0 0 1200 220"
+          className="mx-auto block w-full max-w-6xl"
+          preserveAspectRatio="xMidYMax meet"
+        >
+          {/* Décor 974 : volcan + palmier (silhouettes) */}
+          <polygon points="20,168 110,66 200,168" fill="#0b2c4a" />
+          <circle cx="110" cy="70" r="9" fill="#f97316" opacity="0.55" />
+          <path d="M110 68 q7 -16 -2 -32 q14 12 8 32 Z" fill="#fb923c" opacity="0.3" />
+          <g fill="#0b2c4a">
+            <rect x="915" y="96" width="7" height="72" rx="3" transform="rotate(4 918 130)" />
+            <ellipse cx="918" cy="92" rx="30" ry="8" transform="rotate(-20 918 92)" />
+            <ellipse cx="918" cy="92" rx="30" ry="8" transform="rotate(20 918 92)" />
+            <ellipse cx="918" cy="92" rx="30" ry="8" />
+          </g>
+
+          {/* Route + pointillés centraux */}
+          <rect x="0" y="165" width="1200" height="55" fill="#0e2a44" />
+          <rect x="0" y="165" width="1200" height="3" fill="#1e3a5f" />
+          {[40, 180, 320, 460, 600, 740, 880, 1020, 1160].map((x) => (
+            <rect key={x} x={x} y="193" width="34" height="5" rx="2.5" fill="#fbbf24" opacity="0.45" />
+          ))}
+
+          {/* Panneaux produits au bord de la route */}
+          {[
+            { x: 170, w: 120, label: "Coach IA", emoji: "🧠", color: "#22d3ee" },
+            { x: 430, w: 120, label: "Parcours", emoji: "🛤️", color: "#a78bfa" },
+            { x: 720, w: 190, label: "Cahier de vacances", emoji: "📐", color: "#38bdf8" },
+            { x: 1015, w: 150, label: "Picto Maths", emoji: "🃏", color: "#2dd4bf" },
+          ].map((s) => (
+            <g key={s.label}>
+              <rect x={s.x - 2.5} y="86" width="5" height="82" fill="#4b5b6b" />
+              <rect x={s.x - s.w / 2} y="70" width={s.w} height="38" rx="9" fill={s.color} />
+              <text
+                x={s.x}
+                y="94"
+                textAnchor="middle"
+                fontSize="15"
+                fontWeight="800"
+                fill="#0b1f33"
+                fontFamily="system-ui, sans-serif"
+              >
+                {s.emoji} {s.label}
+              </text>
+            </g>
+          ))}
+
+          {/* La voiture + 2 passagers */}
+          <g className="ea-car">
+            <ellipse cx="90" cy="190" rx="82" ry="7" fill="#000000" opacity="0.22" />
+            <g className="ea-bob">
+              <polygon points="168,150 212,139 212,163 168,158" fill="#fde68a" opacity="0.35" />
+              <rect x="45" y="112" width="86" height="30" rx="9" fill="#fbbf24" />
+              <rect x="15" y="138" width="152" height="30" rx="11" fill="#f59e0b" />
+              <rect x="52" y="117" width="34" height="20" rx="4" fill="#dbeafe" />
+              <rect x="91" y="117" width="34" height="20" rx="4" fill="#dbeafe" />
+              {/* passager adulte */}
+              <circle cx="69" cy="128" r="8" fill="#f7c59f" />
+              <circle cx="66" cy="127" r="1.1" fill="#0b1f33" />
+              <circle cx="72" cy="127" r="1.1" fill="#0b1f33" />
+              <path d="M65 131 q4 3 8 0" stroke="#0b1f33" strokeWidth="1" fill="none" strokeLinecap="round" />
+              {/* passager enfant */}
+              <circle cx="108" cy="130" r="6" fill="#f7c59f" />
+              <circle cx="106" cy="129" r="0.9" fill="#0b1f33" />
+              <circle cx="110" cy="129" r="0.9" fill="#0b1f33" />
+              <path d="M105 132 q3 2.5 6 0" stroke="#0b1f33" strokeWidth="0.9" fill="none" strokeLinecap="round" />
+              {/* phare */}
+              <circle cx="164" cy="152" r="4" fill="#fef08a" />
+            </g>
+            <g className="ea-wheel" style={{ transformBox: "fill-box", transformOrigin: "center" }}>
+              <circle cx="50" cy="170" r="15" fill="#111827" />
+              <circle cx="50" cy="170" r="6" fill="#9ca3af" />
+              <rect x="49" y="156" width="2" height="28" fill="#4b5563" />
+              <rect x="36" y="169" width="28" height="2" fill="#4b5563" />
+            </g>
+            <g className="ea-wheel" style={{ transformBox: "fill-box", transformOrigin: "center" }}>
+              <circle cx="130" cy="170" r="15" fill="#111827" />
+              <circle cx="130" cy="170" r="6" fill="#9ca3af" />
+              <rect x="129" y="156" width="2" height="28" fill="#4b5563" />
+              <rect x="116" y="169" width="28" height="2" fill="#4b5563" />
+            </g>
+          </g>
+        </svg>
+
+        <style jsx global>{`
+            .ea-car {
+              animation: ea-drive 15s linear infinite;
+            }
+            .ea-bob {
+              animation: ea-bob 1.1s ease-in-out infinite;
+            }
+            .ea-wheel {
+              animation: ea-spin 0.9s linear infinite;
+            }
+            @keyframes ea-drive {
+              0% {
+                transform: translateX(-210px);
+              }
+              100% {
+                transform: translateX(1240px);
+              }
+            }
+            @keyframes ea-bob {
+              0%,
+              100% {
+                transform: translateY(0);
+              }
+              50% {
+                transform: translateY(-2.5px);
+              }
+            }
+            @keyframes ea-spin {
+              to {
+                transform: rotate(360deg);
+              }
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .ea-car {
+                animation: none;
+                transform: translateX(520px);
+              }
+              .ea-bob,
+              .ea-wheel {
+                animation: none;
+              }
+            }
+          `}</style>
+        </section>
+      )}
+
       {/* ── APERÇUS PAR AUDIENCE — pour les VISITEURS ; masqués si connecté (un
           élève/prof connecté n'a plus à choisir « Je suis… »). ──────────────── */}
       {!eleve && (
