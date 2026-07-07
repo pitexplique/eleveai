@@ -647,6 +647,9 @@ export default function AccueilPage({
               <p className="mt-1.5 text-sm font-semibold leading-snug text-white/75">
                 On t&apos;explique, on t&apos;encourage — à ton rythme, sans jugement. Du CP au Bac.
               </p>
+              <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-black text-cyan-100">
+                🎯 Près de 2&nbsp;000 compétences à travailler, du CP au Bac
+              </p>
               <div className="mt-4 flex flex-wrap justify-center gap-2 lg:justify-start">
                 {visibleSubjects.map((subject) => (
                   <Link
@@ -661,28 +664,56 @@ export default function AccueilPage({
               </div>
             </div>
 
-            {/* Aperçu façon capture du coach */}
+            {/* Aperçu façon capture du coach : l'arbre de compétences (comme la vraie
+               page /coach-ia) — notions + micro-compétences numérotées + le compte. */}
             <Link
               href={getHref("/coach-ia/maths")}
               className="group w-full max-w-[300px] shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl transition hover:-translate-y-0.5 hover:shadow-2xl"
             >
               <div className="flex items-center justify-between bg-gradient-to-r from-cyan-600 to-blue-600 px-3 py-2 text-white">
-                <span className="text-[11px] font-black">🧠 Coach IA · Maths</span>
-                <span className="text-[9px] font-black opacity-80">CP → Bac</span>
+                <span className="text-[11px] font-black">🧠 Coach IA · Maths 6e</span>
+                <span className="rounded-full bg-white/20 px-2 py-0.5 text-[9px] font-black">116 compétences</span>
               </div>
-              <div className="p-3">
-                <p className="text-sm font-black text-slate-900">Quelle est la moitié de 3/4&nbsp;?</p>
-                <div className="mt-2 grid gap-1.5">
-                  <span className="flex items-center justify-between rounded-lg border-2 border-emerald-300 bg-emerald-50 px-3 py-1.5 text-xs font-black text-emerald-800">
-                    3/8 <span aria-hidden>✓</span>
-                  </span>
-                  <span className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-500">3/2</span>
-                  <span className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-500">6/4</span>
-                </div>
-                <div className="mt-2 rounded-lg bg-cyan-50 px-3 py-1.5 text-[11px] font-bold leading-snug text-cyan-800">
-                  ✅ Bravo&nbsp;! La moitié, c&apos;est diviser par 2 : 3/4 ÷ 2 = 3/8. On continue&nbsp;?
-                </div>
-                <p className="mt-1.5 text-right text-[8px] font-black uppercase tracking-[0.15em] text-slate-300">
+              <div className="space-y-2.5 p-3">
+                {[
+                  {
+                    groupe: "Utiliser et comparer des nombres",
+                    micros: [
+                      "Lire et écrire un nombre entier",
+                      "Comparer des nombres entiers",
+                      "Encadrer un nombre entier",
+                    ],
+                  },
+                  {
+                    groupe: "Pratiquer le calcul mental et posé",
+                    micros: [
+                      "Poser une addition",
+                      "Poser une division",
+                      "Addition mentale",
+                    ],
+                  },
+                ].map((g) => (
+                  <div key={g.groupe}>
+                    <p className="text-[11px] font-black text-green-700">{g.groupe}</p>
+                    <ul className="mt-1 space-y-1">
+                      {g.micros.map((m, i) => (
+                        <li
+                          key={m}
+                          className="flex items-center gap-2 text-[11px] font-bold text-slate-700"
+                        >
+                          <span className="grid h-4 w-4 shrink-0 place-items-center rounded bg-green-100 text-[9px] font-black text-green-700">
+                            {i + 1}
+                          </span>
+                          {m}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+                <p className="text-center text-[10px] font-black text-cyan-700">
+                  + 110 micro-compétences · choisis, on t&apos;entraîne →
+                </p>
+                <p className="text-right text-[8px] font-black uppercase tracking-[0.15em] text-slate-300">
                   eleveai.fr
                 </p>
               </div>
