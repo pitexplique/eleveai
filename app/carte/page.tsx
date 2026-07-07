@@ -2,21 +2,21 @@ import type { Metadata } from "next";
 import CarteClient from "./CarteClient";
 
 export const metadata: Metadata = {
-  title: "La carte des savoirs · 974 — La Réunion point par point | EleveAI",
+  title: "La chasse aux trésors des savoirs · 974 — La Réunion | EleveAI",
   description:
-    "Une carte interactive de La Réunion : clique sur un lieu (volcan, marché, lagon, cirques…) et découvre les maths, l'écologie ou l'histoire qui se cachent derrière. Le tour de l'île, discipline par discipline.",
+    "Une chasse au trésor sur la carte de La Réunion : clique sur un lieu (volcan, marché, lagon, cirques…), résous l'énigme et déniche les trésors — maths, écologie, histoire. Explore l'île, discipline par discipline.",
   keywords: [
-    "carte La Réunion maths",
-    "maths La Réunion interactive",
-    "carte des savoirs 974",
+    "chasse au trésor La Réunion",
+    "jeu maths La Réunion",
     "maths écologie histoire Réunion",
+    "carte interactive La Réunion",
     "EleveAI",
   ],
   alternates: { canonical: "/carte" },
   openGraph: {
-    title: "La carte des savoirs · 974 — La Réunion point par point",
+    title: "La chasse aux trésors des savoirs · 974 — La Réunion",
     description:
-      "Clique sur un lieu de La Réunion et découvre les maths, l'écologie ou l'histoire qui s'y cachent.",
+      "Clique sur un lieu de La Réunion, résous l'énigme et déniche les trésors : maths, écologie, histoire.",
     url: "/carte",
     type: "website",
     siteName: "EleveAI",

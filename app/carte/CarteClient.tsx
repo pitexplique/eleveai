@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, MapPin, Sparkles } from "lucide-react";
 
@@ -114,12 +114,49 @@ const FILTRES: { key: Matiere | "tout"; label: string }[] = [
   { key: "histoire", label: "📜 Histoire" },
 ];
 
+const STORAGE_KEY = "carte-tresors-974";
+
 export default function CarteClient() {
   const [selId, setSelId] = useState<string | null>(null);
   const [filtre, setFiltre] = useState<Matiere | "tout">("tout");
+  const [found, setFound] = useState<Set<string>>(new Set());
+
+  // Trésors trouvés persistés en local (aucune mise à jour côté serveur).
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) setFound(new Set(JSON.parse(raw) as string[]));
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  function marquerTrouve(id: string) {
+    setFound((prev) => {
+      const next = new Set(prev);
+      next.add(id);
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify([...next]));
+      } catch {
+        /* ignore */
+      }
+      return next;
+    });
+  }
+
+  function reinitialiser() {
+    setFound(new Set());
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      /* ignore */
+    }
+  }
 
   const sel = POINTS.find((p) => p.id === selId) ?? null;
   const visible = (p: Point) => filtre === "tout" || p.matiere === filtre;
+  const nbTrouves = found.size;
+  const tousTrouves = nbTrouves === POINTS.length;
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#eaf7fb] to-[#d6eef6] text-slate-800">
@@ -133,17 +170,34 @@ export default function CarteClient() {
         </Link>
 
         <header className="mt-5 text-center">
-          <p className="inline-flex items-center gap-2 rounded-full bg-cyan-100 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-cyan-700">
+          <p className="inline-flex items-center gap-2 rounded-full bg-amber-100 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-amber-700">
             <MapPin className="h-4 w-4" />
-            La Réunion, point par point
+            Chasse au trésor · La Réunion
           </p>
           <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">
-            Carte de l&apos;île de La Réunion 🗺️
+            La chasse aux trésors des savoirs 🗺️
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-base font-semibold text-slate-600">
-            Clique sur un point de l&apos;île : quelles <span className="text-cyan-700">maths</span>, quelle{" "}
-            <span className="text-emerald-700">écologie</span>, quelle <span className="text-amber-700">histoire</span> se cachent là&nbsp;?
+            Clique sur un lieu de l&apos;île, résous l&apos;énigme, et déniche les {POINTS.length} trésors —{" "}
+            <span className="text-cyan-700">maths</span>, <span className="text-emerald-700">écologie</span>,{" "}
+            <span className="text-amber-700">histoire</span>.
           </p>
+
+          {/* Progression de la chasse */}
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-400 px-4 py-1.5 text-sm font-black text-amber-950 shadow-sm">
+              💎 {nbTrouves} / {POINTS.length} trésors trouvés
+            </span>
+            {nbTrouves > 0 && (
+              <button
+                type="button"
+                onClick={reinitialiser}
+                className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-black text-slate-500 transition hover:border-slate-400 hover:text-slate-700"
+              >
+                ↻ Recommencer la chasse
+              </button>
+            )}
+          </div>
         </header>
 
         {/* Filtres par matière */}
@@ -207,6 +261,12 @@ export default function CarteClient() {
                   <text x={p.x} y={p.y + 5} fontSize={14} textAnchor="middle" style={{ pointerEvents: "none" }}>
                     {p.emoji}
                   </text>
+                  {found.has(p.id) && (
+                    <g style={{ pointerEvents: "none" }}>
+                      <circle cx={p.x + 10} cy={p.y - 10} r={6.5} className="fill-emerald-500 stroke-white" strokeWidth={1.5} />
+                      <path d={`M${p.x + 7} ${p.y - 10} l2 2 l4 -4`} className="fill-none stroke-white" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" />
+                    </g>
+                  )}
                 </g>
               );
             })}
@@ -232,29 +292,53 @@ export default function CarteClient() {
                 <summary className="cursor-pointer text-sm font-black text-slate-700">Voir la réponse</summary>
                 <p className="mt-2 text-sm leading-6 text-slate-700">{sel.reponse}</p>
               </details>
-              {sel.href && (
-                <Link
-                  href={sel.href}
-                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-cyan-600 px-5 py-2.5 text-sm font-black text-white shadow transition hover:bg-cyan-500"
-                >
-                  <Sparkles className="h-4 w-4" />
-                  Voir le défi Picto Maths →
-                </Link>
-              )}
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                {found.has(sel.id) ? (
+                  <span className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-5 py-2.5 text-sm font-black text-emerald-700">
+                    ✓ Trésor trouvé&nbsp;!
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => marquerTrouve(sel.id)}
+                    className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-5 py-2.5 text-sm font-black text-amber-950 shadow transition hover:bg-amber-300"
+                  >
+                    💎 J&apos;ai trouvé le trésor&nbsp;!
+                  </button>
+                )}
+                {sel.href && (
+                  <Link
+                    href={sel.href}
+                    className="inline-flex items-center gap-2 rounded-full bg-cyan-600 px-5 py-2.5 text-sm font-black text-white shadow transition hover:bg-cyan-500"
+                  >
+                    <Sparkles className="h-4 w-4" />
+                    Voir le défi →
+                  </Link>
+                )}
+              </div>
             </article>
           ) : (
-            <div className="rounded-3xl border-2 border-dashed border-cyan-200 bg-white/70 p-8 text-center">
-              <p className="text-lg font-black text-slate-700">👆 Clique sur un point de la carte</p>
+            <div className="rounded-3xl border-2 border-dashed border-amber-200 bg-white/70 p-8 text-center">
+              <p className="text-lg font-black text-slate-700">👆 Clique sur un trésor de la carte</p>
               <p className="mt-1 text-sm font-semibold text-slate-500">
-                Chaque lieu cache une question — et la matière qui va avec.
+                Chaque lieu cache une énigme — résous-la, empoche le trésor.
               </p>
             </div>
           )}
         </div>
 
-        <p className="mt-6 rounded-2xl border border-dashed border-cyan-200 bg-white/60 p-4 text-center text-sm font-semibold text-slate-600">
-          🚐 Cette carte grandit à chaque étape du tour de l&apos;île. Bientôt&nbsp;: tes vraies rencontres, en photo et en vidéo.
-        </p>
+        {tousTrouves ? (
+          <div className="mt-6 rounded-2xl border-2 border-amber-300 bg-gradient-to-r from-amber-100 to-yellow-100 p-5 text-center">
+            <p className="text-2xl font-black text-amber-800">🏴‍☠️ Bravo, chasseur de trésors&nbsp;!</p>
+            <p className="mt-1 text-sm font-bold text-amber-700">
+              Tu as déniché les {POINTS.length} trésors de l&apos;île. Reviens&nbsp;: d&apos;autres apparaîtront au fil du tour&nbsp;! 🚐
+            </p>
+          </div>
+        ) : (
+          <p className="mt-6 rounded-2xl border border-dashed border-cyan-200 bg-white/60 p-4 text-center text-sm font-semibold text-slate-600">
+            🚐 Cette carte grandit à chaque étape du tour de l&apos;île. Bientôt&nbsp;: tes vraies rencontres, en photo et en vidéo.
+          </p>
+        )}
       </div>
     </main>
   );
