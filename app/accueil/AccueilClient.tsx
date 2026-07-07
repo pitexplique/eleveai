@@ -437,7 +437,25 @@ export default function AccueilPage({
   }
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#041B33] text-white">
+    <main className="relative isolate min-h-screen overflow-x-hidden text-white" style={{ backgroundColor: "#041B33" }}>
+
+      {/* Fond décoratif partagé : quadrillage « cahier de maths » + halos de couleur.
+         -z-10 + isolate = derrière le contenu ; les sections plates sont transparentes
+         pour le laisser transparaître, les cartes gardent leur propre fond. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.9) 1px, transparent 1px)",
+            backgroundSize: "34px 34px",
+          }}
+        />
+        <div className="absolute -left-40 top-[-8%] h-[36rem] w-[36rem] rounded-full bg-cyan-500/15 blur-[120px]" />
+        <div className="absolute right-[-12%] top-[26%] h-[32rem] w-[32rem] rounded-full bg-violet-500/12 blur-[120px]" />
+        <div className="absolute left-[8%] top-[58%] h-[32rem] w-[32rem] rounded-full bg-teal-500/12 blur-[120px]" />
+        <div className="absolute right-[4%] top-[86%] h-[30rem] w-[30rem] rounded-full bg-fuchsia-500/10 blur-[120px]" />
+      </div>
 
       <h1 className="sr-only">EleveAI – Coach IA maths, français, anglais et espagnol. Du CP au Bac.</h1>
 
@@ -558,7 +576,7 @@ export default function AccueilPage({
       {/* ── APERÇUS PAR AUDIENCE — pour les VISITEURS ; masqués si connecté (un
           élève/prof connecté n'a plus à choisir « Je suis… »). ──────────────── */}
       {!eleve && (
-      <section className="bg-[#041B33] px-4 pt-8 sm:px-6 lg:px-8">
+      <section className="px-4 pt-8 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2">
           {/* Élève */}
           <div id="a-eleve" className="scroll-mt-24 flex flex-col rounded-2xl border border-emerald-300/25 bg-gradient-to-br from-emerald-400/[0.10] to-white/[0.03] p-5 sm:p-6">
@@ -633,10 +651,10 @@ export default function AccueilPage({
       <RecoDuJourAccueil />
 
       {/* ── COACHS + PARCOURS — les essentiels élève, remontés en tête ─────────── */}
-      <section className="bg-[#061f39] px-4 py-8 sm:px-6 lg:px-8">
+      <section className="px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           {/* Coach IA — texte + chips des matières à gauche, aperçu à droite */}
-          <div className="flex flex-col items-center gap-6 lg:flex-row lg:justify-between">
+          <div className="flex flex-col items-center gap-6 rounded-2xl border border-cyan-300/20 bg-gradient-to-r from-cyan-500/[0.10] to-blue-500/[0.05] p-5 sm:p-6 lg:flex-row lg:justify-between">
             <div className="w-full text-center lg:flex-1 lg:text-left">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-cyan-200/80">
                 🧠 Coach IA
@@ -721,7 +739,7 @@ export default function AccueilPage({
           </div>
 
           {/* Parcours par matière — même modèle que le coach : chips + aperçu */}
-          <div className="mt-8 flex flex-col items-center gap-6 lg:flex-row lg:justify-between">
+          <div className="mt-8 flex flex-col items-center gap-6 rounded-2xl border border-violet-300/20 bg-gradient-to-r from-violet-500/[0.10] to-fuchsia-500/[0.05] p-5 sm:p-6 lg:flex-row lg:justify-between">
             <div className="w-full text-center lg:flex-1 lg:text-left">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-violet-200/80">
                 🛤️ Parcours
@@ -837,7 +855,7 @@ export default function AccueilPage({
       </section>
 
       {/* ── CAHIER DE VACANCES DE MATHS · 974 — à imprimer (cible SEO) ───────── */}
-      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
+      <section className="px-4 pt-6 sm:px-6 lg:px-8">
         <Link
           href="/cahier-vacances/maths"
           className="group mx-auto flex max-w-4xl flex-col items-center gap-5 overflow-hidden rounded-2xl border border-cyan-300/30 bg-gradient-to-br from-cyan-400/[0.12] via-blue-400/[0.07] to-amber-400/[0.05] p-6 text-center transition hover:border-cyan-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:text-left sm:p-7"
@@ -889,7 +907,7 @@ export default function AccueilPage({
 
       {/* ── ESPACE ÉLÈVE (ancre du sélecteur d'audience) : jeu, dictée, coach… ── */}
       {/* ── JEU DE 32 CARTES « QUI SUIS-JE ? » — à imprimer, avant la dictée ──── */}
-      <section id="espace-eleve" className="scroll-mt-24 bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
+      <section id="espace-eleve" className="scroll-mt-24 px-4 pt-6 sm:px-6 lg:px-8">
         <Link
           href="/qui-suis-je-a-imprimer"
           className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-fuchsia-300/30 bg-gradient-to-br from-fuchsia-400/[0.12] via-violet-400/[0.07] to-white/[0.04] p-6 transition hover:border-fuchsia-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
@@ -928,7 +946,7 @@ export default function AccueilPage({
       </section>
 
       {/* ── DICTÉE DU JOUR — le rituel quotidien, tout en haut ───────────────── */}
-      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
+      <section className="px-4 pt-6 sm:px-6 lg:px-8">
         <Link
           href="/dictee-du-jour"
           className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-cyan-300/30 bg-gradient-to-br from-cyan-400/[0.12] via-sky-400/[0.07] to-white/[0.04] p-6 transition hover:border-cyan-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
@@ -968,7 +986,7 @@ export default function AccueilPage({
       </section>
 
       {/* ── EXPLORER — le catalogue de toutes les actions possibles ──────────── */}
-      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
+      <section className="px-4 pt-6 sm:px-6 lg:px-8">
         <Link
           href="/explorer"
           className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-violet-300/30 bg-gradient-to-br from-violet-400/[0.14] via-fuchsia-400/[0.07] to-white/[0.04] p-6 transition hover:border-violet-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
@@ -1162,7 +1180,7 @@ export default function AccueilPage({
       )}
 
       {/* ── AVIS EN UNE LIGNE (sous l'image) — retour d'une élève ────────────── */}
-      <section className="border-b border-white/10 bg-[#041B33] px-4 py-2.5 sm:px-6 lg:px-8">
+      <section className="border-b border-white/10 px-4 py-2.5 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-6xl items-center justify-center gap-2 sm:gap-3">
           <span
             className="shrink-0 text-sm tracking-widest text-amber-300"
@@ -1186,7 +1204,7 @@ export default function AccueilPage({
       </section>
 
       {/* ── FEATURED BANNER — Défi du jour (sous le cahier de vacances et les coachs) ── */}
-      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
+      <section className="px-4 pt-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           {eleveClasse === "3e" || eleveClasse === "4e" ? (
             <Link href="/coach-brevet" className="group relative block h-[220px] overflow-hidden rounded-2xl shadow-2xl sm:h-[280px]">
@@ -1275,7 +1293,7 @@ export default function AccueilPage({
       </section>
 
       {/* ── MOT DE M. LACOSTE — aux élèves et aux parents (contenu humain, en bas) ── */}
-      <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
+      <section className="px-4 pt-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-sky-300/30 bg-gradient-to-br from-sky-300/[0.10] via-cyan-300/[0.06] to-white/[0.04] p-6 text-center sm:p-8">
           <p className="text-3xl sm:text-4xl" aria-hidden="true">💛</p>
           <h2 className="mt-2 text-2xl font-black leading-tight text-white sm:text-3xl">
