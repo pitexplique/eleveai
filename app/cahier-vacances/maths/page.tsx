@@ -35,6 +35,7 @@ export default function CahierVacancesMathsPage() {
       baseline="Un dessin, une question — réviser les maths tout l'été, à La Réunion"
       retourHref="/cahier-vacances"
       retourLabel="Les cahiers de vacances"
+      signupFrom="cahier"
     />
   );
 }

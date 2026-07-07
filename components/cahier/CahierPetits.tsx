@@ -15,8 +15,12 @@ import {
   Star,
   Target,
 } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
 import type { CahierConfig } from "./types";
 import type { Activite, CahierDataPetit, JourPetit } from "./petits-types";
+
+/* URL d'inscription encodée dans le QR de la couverture. ?from=cahier = tracking. */
+const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cahier";
 
 /* Barème de points — un cahier « petits » reste simple (sur 10). */
 const baremePoints = [
@@ -380,15 +384,25 @@ export default function CahierPetits({
             </div>
           </div>
 
-          {/* À qui appartient ce cahier */}
-          <div className="mx-auto mt-7 flex max-w-lg items-center gap-4 rounded-2xl border-2 border-dashed border-orange-200 bg-orange-50/40 p-6">
+          {/* À qui appartient ce cahier — + QR « continuer gratuitement » (parents).
+             Placé sur la couverture = la page la plus vue/partagée. Légende à gauche
+             du QR pour ne pas rallonger la garde. Impression libre, aucun mur. */}
+          <div className="mx-auto mt-7 flex max-w-lg items-center gap-4 rounded-2xl border-2 border-dashed border-orange-200 bg-orange-50/40 p-4">
             <div className="flex-1">
               <p className="text-sm font-black uppercase tracking-wide text-orange-600">
                 Ce cahier est à
               </p>
               <div className="mt-5 border-b-2 border-dotted border-slate-300" />
             </div>
-            <Illu emoji="🖍️" label="crayon" className="h-10 w-10 text-2xl" />
+            <div className="flex shrink-0 items-center gap-2">
+              <p className="max-w-[84px] text-right text-[10px] font-black leading-tight text-slate-600">
+                Parents, scannez pour continuer{" "}
+                <span className="text-teal-600">gratuitement</span>
+              </p>
+              <div className="inline-block rounded-lg border border-slate-200 bg-white p-1">
+                <QRCodeSVG value={SIGNUP_URL} size={52} level="M" marginSize={1} />
+              </div>
+            </div>
           </div>
 
           {/* Mode d'emploi parent + solidaire */}

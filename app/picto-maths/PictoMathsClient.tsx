@@ -5,7 +5,6 @@ import { QRCodeSVG } from "qrcode.react";
 import { ArrowLeft, Download, Sparkles, MapPin } from "lucide-react";
 import { LIVRET, PICTOS, type Cell, type Picto } from "./data";
 
-const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=picto";
 const TI_MARGO = "/cahier-vacances/ti-margo.png";
 
 /* -------------------------------------------------------------------------- */
@@ -565,13 +564,17 @@ export default function PictoMathsClient({
   baseline = LIVRET.baseline,
   retourHref = "/maths-974",
   retourLabel = "Maths Réel · 974",
+  signupFrom = "picto",
 }: {
   titre?: string;
   domaine?: string;
   baseline?: string;
   retourHref?: string;
   retourLabel?: string;
+  signupFrom?: string;
 } = {}) {
+  // Tag de tracking du QR : "picto" sur /picto-maths, "cahier" sur /cahier-vacances/maths.
+  const signupUrl = `https://eleveai.fr/auth/signin?from=${signupFrom}`;
   return (
     <main className="relative isolate min-h-screen bg-[#f2fbfd] text-slate-800">
       {/* Barre écran */}
@@ -643,10 +646,12 @@ export default function PictoMathsClient({
           <div className="mt-6 flex flex-col items-center gap-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={TI_MARGO} alt="Ti Margo" className="h-16 w-16 object-contain" />
-            <QRCodeSVG value={SIGNUP_URL} size={84} />
-            <p className="text-sm font-black text-cyan-700">eleveai.fr</p>
+            <QRCodeSVG value={signupUrl} size={84} />
+            <p className="text-sm font-black text-cyan-700">
+              Scanne pour continuer gratuitement
+            </p>
             <p className="text-[10px] font-black uppercase tracking-wide text-slate-400">
-              une autre façon d&apos;apprendre
+              eleveai.fr · une autre façon d&apos;apprendre
             </p>
             <p className="mt-1 inline-flex items-center gap-1 text-[11px] font-bold text-slate-500">
               <span aria-hidden>{LIVRET.creditEmoji}</span>

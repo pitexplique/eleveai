@@ -319,14 +319,25 @@ export default function CahierVacances({
             </div>
           </div>
 
-          <div className="mx-auto mt-7 flex max-w-lg items-center gap-4 rounded-2xl border-2 border-dashed border-teal-200 bg-teal-50/40 p-6">
+          <div className="mx-auto mt-7 flex max-w-lg items-center gap-4 rounded-2xl border-2 border-dashed border-teal-200 bg-teal-50/40 p-4">
             <div className="flex-1">
               <p className="text-sm font-black uppercase tracking-wide text-teal-600">
                 Ce cahier appartient à
               </p>
               <div className="mt-5 border-b-2 border-dotted border-slate-300" />
             </div>
-            <Illu emoji="🖊️" label="stylo" className="h-10 w-10 text-2xl" />
+            {/* QR « continuer gratuitement » : la couverture est la page la plus vue
+               et la plus partagée → le meilleur point de fuite vers l'inscription.
+               ?from=cahier = tracking. Impression 100 % libre, aucun mur.
+               Légende à gauche du QR (pas dessous) pour ne pas rallonger la garde. */}
+            <div className="flex shrink-0 items-center gap-2">
+              <p className="max-w-[84px] text-right text-[10px] font-black leading-tight text-slate-600">
+                Scanne pour continuer <span className="text-teal-600">gratuitement</span>
+              </p>
+              <div className="inline-block rounded-lg border border-slate-200 bg-white p-1">
+                <QRCodeSVG value={SIGNUP_URL} size={52} level="M" marginSize={1} />
+              </div>
+            </div>
           </div>
 
           <div className="mt-7 grid gap-3 sm:grid-cols-2">

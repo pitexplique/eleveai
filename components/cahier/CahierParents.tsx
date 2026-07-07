@@ -17,7 +17,11 @@ import {
   Sparkles,
   TriangleAlert,
 } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
 import type { CahierParentsConfig, CahierParentsData, JourParent } from "./parents-types";
+
+/* URL d'inscription encodée dans le QR de la couverture. ?from=cahier = tracking. */
+const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cahier";
 
 /* Couleurs + libellé par domaine. */
 const DOMAINES: Record<
@@ -129,9 +133,22 @@ export default function CahierParents({
               « Nou la fé&nbsp;! » 🌺
             </p>
 
-            <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-teal-600 px-6 py-3 text-lg font-black text-white shadow-lg shadow-teal-600/30">
-              <Sparkles className="h-5 w-5" />
-              {config.mission}
+            {/* Mission + QR « créez votre compte » : la couverture est la page la
+               plus vue → point de fuite vers l'inscription. ?from=cahier = tracking. */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+              <div className="inline-flex items-center gap-2 rounded-full bg-teal-600 px-6 py-3 text-lg font-black text-white shadow-lg shadow-teal-600/30">
+                <Sparkles className="h-5 w-5" />
+                {config.mission}
+              </div>
+              <div className="flex items-center gap-2">
+                <p className="max-w-[96px] text-right text-[10px] font-black leading-tight text-slate-600">
+                  Scannez pour créer votre compte{" "}
+                  <span className="text-teal-600">gratuit</span>
+                </p>
+                <div className="inline-block rounded-lg border border-slate-200 bg-white p-1">
+                  <QRCodeSVG value={SIGNUP_URL} size={52} level="M" marginSize={1} />
+                </div>
+              </div>
             </div>
           </div>
 
@@ -488,8 +505,24 @@ export default function CahierParents({
             break-after: auto;
             page-break-after: auto;
           }
+          /* Garde resserrée pour absorber le QR de couverture sans déborder l'A4. */
           .garde-page {
-            padding: 7mm !important;
+            padding: 6mm !important;
+          }
+          .garde-page .mt-8 {
+            margin-top: 12px !important;
+          }
+          .garde-page .mt-7 {
+            margin-top: 10px !important;
+          }
+          .garde-page .mt-6 {
+            margin-top: 8px !important;
+          }
+          .garde-page .mt-5 {
+            margin-top: 8px !important;
+          }
+          .garde-page .mt-4 {
+            margin-top: 8px !important;
           }
           .corriges-page {
             break-before: page;
