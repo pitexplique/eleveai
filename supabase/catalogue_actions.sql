@@ -41,7 +41,7 @@ create index if not exists catalogue_actions_ordre_idx
 -- 2) RLS activé sans policy : navigateur (anon) bloqué ; l'app lit via service role.
 alter table public.catalogue_actions enable row level security;
 
--- 3) Remplissage (34 actions). Upsert : ré-exécuter met à jour les valeurs.
+-- 3) Remplissage (36 actions). Upsert : ré-exécuter met à jour les valeurs.
 insert into public.catalogue_actions
   (id, famille, type, matiere, label, description, route, niveaux, duree, rythme, roles, valeur, attrait, etat, actif, ordre)
 values
@@ -75,8 +75,10 @@ values
   ('livre-ia',      'reviser', 'fiche',   'ia',       'Le livre IA / Ebook','Les 16 fiches en un livre (PDF / EPUB).',    '/fiches-cours/ia/livre','Tous',    'long',     'ponctuel', array['hors-ligne','reviser'], 0.50, 0.35, 'actif', true, 45),
 
   -- 🧭 Ouverture — le sens, la motivation
-  ('maths-974',     'ouverture', 'autre', 'maths', 'Maths Réel · 974', 'La Réunion en vidéo : à quoi servent les maths.', '/maths-974',     'Tous', 'court', 'ponctuel', array['explorer'], 0.40, 0.75, 'actif', true, 50),
-  ('le-bon-prompt', 'ouverture', 'autre', 'ia',    'Le bon prompt',    'Apprendre à bien parler à une IA.',               '/le-bon-prompt', 'Tous', 'court', 'ponctuel', array['explorer'], 0.45, 0.70, 'actif', true, 51),
+  ('maths-974',     'ouverture', 'autre', 'maths',       'Maths Réel · 974',         'La Réunion en vidéo : à quoi servent les maths.', '/maths-974',     'Tous',    'court', 'ponctuel', array['explorer'], 0.40, 0.75, 'actif', true, 50),
+  ('le-bon-prompt', 'ouverture', 'autre', 'ia',          'Le bon prompt',            'Apprendre à bien parler à une IA.',               '/le-bon-prompt', 'Tous',    'court', 'ponctuel', array['explorer'], 0.45, 0.70, 'actif', true, 51),
+  ('picto-maths',   'ouverture', 'autre', 'maths',       'Picto Maths · 974',        'Défis « une image, une question » à imprimer, ancrés La Réunion.', '/picto-maths', 'CM2 → 3e', 'court', 'ponctuel', array['explorer','hors-ligne'], 0.45, 0.70, 'actif', true, 52),
+  ('carte-tresor',  'ouverture', 'autre', 'transversal', 'Chasse aux trésors · 974', 'Explore la carte de La Réunion : trouve les trésors — maths, écologie, histoire.', '/carte', 'Collège', 'court', 'ponctuel', array['explorer','competition'], 0.40, 0.80, 'actif', true, 53),
 
   -- 🏆 Évaluations & concours
   ('eval-pix-ia',      'evenement', 'eval',    'ia',          'Éval blanche Pix IA', 'Prépa éval nationale : 3 domaines, profil.', '/eval-pix-ia',      'Collège / Lycée', 'moyen', 'ponctuel', array['competition'], 0.70, 0.50, 'actif', true, 60),
@@ -90,7 +92,7 @@ values
   ('cahier-vacances', 'cahier', 'cahier', 'transversal', 'Cahier de vacances', 'À faire sur écran ou à imprimer, même sans connexion.', '/cahier-vacances', 'CP → Terminale', 'long', 'ponctuel', array['hors-ligne','reviser'], 0.65, 0.40, 'actif', true, 69),
 
   -- 📥 Cahiers de vacances par matière (à décliner : les cahiers actuels sont par niveau, multi-matière)
-  ('cahier-maths',    'cahier', 'cahier', 'maths',    'Cahier de vacances · Maths',    'À faire sur papier, même sans connexion.', '/cahier-vacances', 'CP → Terminale', 'long', 'ponctuel', array['hors-ligne'], 0.65, 0.35, 'a-creer',   false, 70),
+  ('cahier-maths',    'cahier', 'cahier', 'maths',    'Cahier de vacances · Maths',    '25 défis « une image, une question » à imprimer, ancrés La Réunion.', '/cahier-vacances/maths', 'CM2 → 3e', 'long', 'ponctuel', array['hors-ligne','reviser'], 0.65, 0.45, 'actif',   true, 70),
   ('cahier-francais', 'cahier', 'cahier', 'francais', 'Cahier de vacances · Français', 'À faire sur papier, même sans connexion.', '/cahier-vacances', 'CP → Terminale', 'long', 'ponctuel', array['hors-ligne'], 0.65, 0.35, 'a-creer',   false, 71),
   ('cahier-anglais',  'cahier', 'cahier', 'anglais',  'Cahier de vacances · Anglais',  'À faire sur papier, même sans connexion.', '/cahier-vacances', 'Collège',        'long', 'ponctuel', array['hors-ligne'], 0.65, 0.35, 'a-creer',   false, 72),
   ('cahier-espagnol', 'cahier', 'cahier', 'espagnol', 'Cahier de vacances · Espagnol', 'À faire sur papier, même sans connexion.', '/cahier-vacances', 'Collège',        'long', 'ponctuel', array['hors-ligne'], 0.60, 0.35, 'a-creer',   false, 73),
