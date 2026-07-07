@@ -715,30 +715,38 @@ export default function AccueilPage({
               </div>
             </div>
 
-            {/* Aperçu façon capture d'un parcours (bilan 🟢🟡🔴) */}
+            {/* Aperçu façon capture de l'évaluation (niveau · nb questions · difficulté) */}
             <Link
               href="/parcours"
               className="group w-full max-w-[300px] shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl transition hover:-translate-y-0.5 hover:shadow-2xl"
             >
               <div className="flex items-center justify-between bg-gradient-to-r from-violet-600 to-fuchsia-600 px-3 py-2 text-white">
                 <span className="text-[11px] font-black">🛤️ Parcours Maths</span>
-                <span className="text-[9px] font-black opacity-80">ton bilan</span>
+                <span className="text-[9px] font-black opacity-80">évaluation</span>
               </div>
-              <div className="space-y-1.5 p-3">
-                <span className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-black text-slate-700">
-                  <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />Fractions</span>
-                  <span className="text-[10px] font-black text-emerald-600">Acquis</span>
-                </span>
-                <span className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-black text-slate-700">
-                  <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-amber-400" />Proportionnalité</span>
-                  <span className="text-[10px] font-black text-amber-600">En cours</span>
-                </span>
-                <span className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-black text-slate-700">
-                  <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-rose-400" />Géométrie</span>
-                  <span className="text-[10px] font-black text-rose-500">À revoir</span>
-                </span>
-                <div className="rounded-lg bg-violet-50 px-3 py-1.5 text-[11px] font-bold leading-snug text-violet-800">
-                  🎯 On repart pile de ce qui coince.
+              <div className="space-y-2 p-3">
+                <div>
+                  <p className="text-[8px] font-black uppercase tracking-[0.15em] text-slate-400">1 · Ton niveau</p>
+                  <div className="mt-1 flex flex-wrap gap-1">
+                    <span className="rounded-md border border-slate-200 px-2 py-0.5 text-[10px] font-black text-slate-500">CM2</span>
+                    <span className="rounded-md bg-slate-900 px-2 py-0.5 text-[10px] font-black text-amber-300 ring-1 ring-amber-300">6e</span>
+                    <span className="rounded-md border border-slate-200 px-2 py-0.5 text-[10px] font-black text-slate-500">5e</span>
+                    <span className="rounded-md border border-slate-200 px-2 py-0.5 text-[10px] font-black text-slate-500">4e</span>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-[8px] font-black uppercase tracking-[0.15em] text-slate-400">2 · Combien de questions</p>
+                  <div className="mt-1 grid grid-cols-2 gap-1">
+                    <span className="rounded-md border border-slate-200 px-2 py-1 text-[9px] font-black text-slate-500">⚡ Sprint · 5</span>
+                    <span className="rounded-md bg-slate-900 px-2 py-1 text-[9px] font-black text-white ring-1 ring-amber-300">🏃 Course · 10</span>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-[8px] font-black uppercase tracking-[0.15em] text-slate-400">3 · Difficulté</p>
+                  <div className="mt-1 grid grid-cols-2 gap-1">
+                    <span className="rounded-md bg-slate-900 px-2 py-1 text-[9px] font-black text-white ring-1 ring-amber-300">Révision ⭐⭐⭐</span>
+                    <span className="rounded-md border border-slate-200 px-2 py-1 text-[9px] font-black text-slate-500">Défi ⭐⭐⭐⭐⭐</span>
+                  </div>
                 </div>
                 <p className="text-right text-[8px] font-black uppercase tracking-[0.15em] text-slate-300">
                   eleveai.fr
@@ -801,7 +809,7 @@ export default function AccueilPage({
       <section className="bg-[#041B33] px-4 pt-6 sm:px-6 lg:px-8">
         <Link
           href="/cahier-vacances/maths"
-          className="mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-cyan-300/30 bg-gradient-to-br from-cyan-400/[0.12] via-blue-400/[0.07] to-amber-400/[0.05] p-6 text-center transition hover:border-cyan-300/60 sm:flex-row sm:justify-between sm:text-left sm:p-7"
+          className="group mx-auto flex max-w-4xl flex-col items-center gap-5 overflow-hidden rounded-2xl border border-cyan-300/30 bg-gradient-to-br from-cyan-400/[0.12] via-blue-400/[0.07] to-amber-400/[0.05] p-6 text-center transition hover:border-cyan-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:text-left sm:p-7"
         >
           <div>
             <p className="text-xs font-black uppercase tracking-wide text-cyan-200">
@@ -814,10 +822,37 @@ export default function AccueilPage({
               25 défis «&nbsp;un dessin, une question&nbsp;» ancrés à La Réunion — du CM2 à
               la 3ᵉ, corrigés inclus. À imprimer et à chercher sur l&apos;ardoise. 🌋
             </p>
+            <span className="mt-3 inline-flex items-center gap-2 rounded-full bg-cyan-400 px-6 py-3 text-sm font-black text-[#041B33] shadow-lg">
+              Ouvrir le cahier →
+            </span>
           </div>
-          <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-cyan-400 px-6 py-3 text-sm font-black text-[#041B33] shadow-lg">
-            Ouvrir le cahier →
-          </span>
+
+          {/* Aperçu façon capture d'un vrai défi du cahier */}
+          <div className="w-full max-w-[264px] shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white text-left shadow-xl transition group-hover:-translate-y-0.5 group-hover:shadow-2xl">
+            <div className="flex items-center justify-between bg-gradient-to-r from-cyan-600 to-blue-600 px-3 py-1.5 text-white">
+              <span className="text-[11px] font-black">🌋 Le volcan</span>
+              <span className="rounded-full border border-white/40 px-1.5 py-0.5 text-[9px] font-black">N°3 · 4ᵉ</span>
+            </div>
+            <div className="p-3">
+              <p className="text-center text-sm font-black leading-tight text-slate-900">
+                Quand la lave atteint-elle la route&nbsp;?
+              </p>
+              <div className="mt-2 space-y-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2 py-2.5">
+                <div className="flex items-center justify-center gap-1.5">
+                  <span className="rounded border border-cyan-300 bg-cyan-50 px-1.5 py-0.5 text-[10px] font-black text-cyan-800">🌋 300 m / 2 h</span>
+                  <span className="text-slate-400">→</span>
+                  <span className="text-base leading-none">🛣️</span>
+                </div>
+                <div className="flex items-center justify-center gap-1.5">
+                  <span className="text-[11px] font-black text-slate-500">à parcourir</span>
+                  <span className="rounded border border-dashed border-amber-400 bg-amber-50 px-2 py-0.5 text-[11px] font-black text-amber-600">1,5 km → ?</span>
+                </div>
+              </div>
+              <p className="mt-1.5 text-right text-[8px] font-black uppercase tracking-[0.15em] text-slate-300">
+                eleveai.fr
+              </p>
+            </div>
+          </div>
         </Link>
       </section>
 
