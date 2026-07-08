@@ -83,7 +83,7 @@ export default function CaptureApresTelechargement({
             moment. Ça ne peut être que bénéfique sur le long terme. »
           </blockquote>
           <figcaption className="mt-1 text-[11px] font-black text-slate-500">
-            — Pierre, spécialité maths à Valence
+            — Pierre, élève
           </figcaption>
         </figure>
 
