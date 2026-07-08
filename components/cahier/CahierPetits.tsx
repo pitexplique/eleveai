@@ -292,7 +292,7 @@ export default function CahierPetits({
             className="inline-flex w-fit items-center gap-2 rounded-full bg-orange-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-orange-500/30 transition hover:bg-orange-400"
           >
             <Download className="h-4 w-4" />
-            Télécharger en PDF
+            Imprimer / PDF
           </button>
         </div>
       </div>
@@ -790,7 +790,7 @@ export default function CahierPetits({
           className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-3 text-sm font-black text-slate-700 shadow-xl shadow-slate-300/50 transition hover:bg-slate-100"
         >
           <Printer className="h-4 w-4" />
-          Imprimer
+          Imprimer / PDF
         </button>
       </div>
 

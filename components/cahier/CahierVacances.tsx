@@ -182,7 +182,7 @@ export default function CahierVacances({
             className="inline-flex w-fit items-center gap-2 rounded-full bg-teal-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-500/30 transition hover:bg-teal-400"
           >
             <Download className="h-4 w-4" />
-            Télécharger en PDF
+            Imprimer / PDF
           </button>
         </div>
       </div>
@@ -193,9 +193,11 @@ export default function CahierVacances({
       <div className="screen-only mx-auto max-w-4xl px-5 pt-5 sm:px-8">
         <div className="flex flex-col items-center gap-3 rounded-2xl border border-teal-300 bg-gradient-to-r from-teal-50 to-emerald-50 p-4 text-center shadow-sm sm:flex-row sm:justify-between sm:text-left">
           <p className="text-sm font-black text-slate-900 sm:text-base">
-            🦎 Ton enfant aime ce cahier&nbsp;? Son{" "}
-            <span className="text-teal-700">coach IA</span> continue tout l&apos;été —{" "}
-            <span className="text-teal-700">gratuit</span>, à son rythme et sans jugement.
+            🦎 Ce cahier fait partie d&apos;<span className="text-teal-700">EleveAI</span>,
+            la plateforme d&apos;apprentissage{" "}
+            <span className="text-teal-700">gratuite</span> : coach IA, parcours,
+            dictée… du CP au Bac. Ton enfant continue tout l&apos;été, à son rythme
+            et sans jugement.
           </p>
           <Link
             href={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier`}
@@ -831,7 +833,7 @@ export default function CahierVacances({
           className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-3 text-sm font-black text-slate-700 shadow-xl shadow-slate-300/50 transition hover:bg-slate-100"
         >
           <Printer className="h-4 w-4" />
-          Imprimer
+          Imprimer / PDF
         </button>
       </div>
 
