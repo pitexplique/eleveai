@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import type { CahierParentsConfig, CahierParentsData, JourParent } from "./parents-types";
+import CaptureApresTelechargement from "./CaptureApresTelechargement";
 
 /* URL d'inscription encodée dans le QR de la couverture. ?from=cahier = tracking. */
 const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cahier";
@@ -80,6 +81,7 @@ export default function CahierParents({
 
   return (
     <main className="relative isolate min-h-screen bg-[#f8fafc] text-slate-800">
+      <CaptureApresTelechargement coachHref="/accueil#coach" />
       {/* Barre d'actions (écran) */}
       <div className="screen-only border-b border-slate-200 bg-white/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">

@@ -18,6 +18,7 @@ import {
 import { QRCodeSVG } from "qrcode.react";
 import type { CahierConfig } from "./types";
 import type { Activite, CahierDataPetit, JourPetit } from "./petits-types";
+import CaptureApresTelechargement from "./CaptureApresTelechargement";
 
 /* URL d'inscription encodée dans le QR de la couverture. ?from=cahier = tracking. */
 const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cahier";
@@ -272,6 +273,9 @@ export default function CahierPetits({
 
   return (
     <main className="relative isolate min-h-screen bg-[#fff7ed] text-slate-800">
+      <CaptureApresTelechargement
+        coachHref={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier`}
+      />
       {/* Barre d'actions (écran) */}
       <div className="screen-only border-b border-slate-200 bg-white/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">

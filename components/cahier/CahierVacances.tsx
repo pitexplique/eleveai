@@ -21,6 +21,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import type { CahierConfig, CahierData } from "./types";
+import CaptureApresTelechargement from "./CaptureApresTelechargement";
 
 /* URL d'inscription encodée dans le QR de fin de cahier. Le ?from=cahier
    permet de tracer les inscriptions venues du cahier de vacances. */
@@ -161,6 +162,10 @@ export default function CahierVacances({
 
   return (
     <main className="relative isolate min-h-screen bg-[#f8f6ff] text-slate-800">
+      {/* Capter après le téléchargement/impression (jamais avant, aucun mur). */}
+      <CaptureApresTelechargement
+        coachHref={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier`}
+      />
       {/* Barre d'actions (écran) */}
       <div className="screen-only border-b border-slate-200 bg-white/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
