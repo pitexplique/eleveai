@@ -35,6 +35,7 @@ export const metadata: Metadata = {
 const decks = [
   { slug: "vers-le-cm2", niveau: "CM1 → CM2", titre: "Vers le CM2", theme: "Maths, français, anglais + du sport et de la nutrition fun (bien manger, ça s'apprend tôt !)", emoji: "🐠", grad: "from-teal-400 to-cyan-600" },
   { slug: "vers-la-6e", niveau: "CM2 → 6ᵉ", titre: "Vers la 6ᵉ", theme: "Maths, français, anglais, sport… + un défi sport à chaque carte", emoji: "🎒", grad: "from-yellow-400 to-amber-600" },
+  { slug: "vers-la-5e", niveau: "6ᵉ → 5ᵉ", titre: "Vers la 5ᵉ", theme: "Maths, français, anglais + sport et nutrition pour bouger et bien manger", emoji: "🐋", grad: "from-sky-400 to-blue-600" },
   { slug: "vers-la-premiere", niveau: "2ⁿᵈᵉ → 1ʳᵉ", titre: "Vers la 1ʳᵉ", theme: "Révise + bouge : maths, français, sport, nutrition (l'apparence, ça motive !)", emoji: "🎓", grad: "from-orange-400 to-violet-600" },
 ];
 
