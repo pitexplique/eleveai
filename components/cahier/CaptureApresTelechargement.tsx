@@ -74,6 +74,19 @@ export default function CaptureApresTelechargement({
           bloque. Rien à installer, sans publicité.
         </p>
 
+        {/* Preuve sociale : un vrai avis d'élève (retours_eleves). Prénom seul
+           (RGPD : jamais relié à une classe/établissement). */}
+        <figure className="mt-3 rounded-xl border border-amber-200 bg-amber-50/60 p-3">
+          <div className="text-xs tracking-wide text-amber-500">★★★★★</div>
+          <blockquote className="mt-1 text-xs font-semibold italic leading-5 text-slate-700">
+            « Franchement, j&apos;ai adoré faire ça le soir, quand j&apos;avais un
+            moment. Ça ne peut être que bénéfique sur le long terme. »
+          </blockquote>
+          <figcaption className="mt-1 text-[11px] font-black text-slate-500">
+            — Pierre, spécialité maths à Valence
+          </figcaption>
+        </figure>
+
         <div className="mt-4 flex items-center gap-4">
           <div className="flex-1 space-y-2">
             <Link
