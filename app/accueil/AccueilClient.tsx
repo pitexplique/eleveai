@@ -531,6 +531,24 @@ export default function AccueilPage({
             sans jugement&nbsp;: on t&apos;explique, on t&apos;encourage. ✨
           </p>
 
+          {/* Bandeau de confiance remonté en haut : ce qui rassure le parent
+             (prof réunionnais, gratuit, sans pub, RGPD) était enterré tout en bas. */}
+          <div className="mx-auto mt-4 flex max-w-2xl flex-wrap items-center justify-center gap-2">
+            {[
+              "🧑‍🏫 Conçu par un prof à La Réunion",
+              "🆓 Gratuit, sans publicité",
+              "🔒 Données protégées (RGPD)",
+              "❤️ Né dans une vraie classe",
+            ].map((t) => (
+              <span
+                key={t}
+                className="rounded-full border border-white/15 bg-white/[0.06] px-3 py-1 text-[11px] font-bold text-white/80 backdrop-blur-sm sm:text-xs"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+
           {/* Sélecteur « Je suis… » — pour les VISITEURS ; masqué si connecté
               (l'élève connecté a déjà ses recos « Ta journée » juste dessous). */}
           {!eleve && (
@@ -562,10 +580,16 @@ export default function AccueilPage({
           {!eleve && (
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <Link
+              href="#coach"
+              className="inline-flex items-center gap-2 rounded-full bg-amber-300 px-6 py-2.5 text-sm font-black text-[#0b2c4a] shadow-lg transition hover:scale-105 hover:bg-amber-200"
+            >
+              Essayer le coach →
+            </Link>
+            <Link
               href="/auth/signin?mode=eleve"
               className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-2.5 text-sm font-black text-white shadow-lg transition hover:scale-105 hover:bg-white/20"
             >
-              Se connecter — gratuit
+              Se connecter
             </Link>
           </div>
           )}
@@ -787,7 +811,7 @@ export default function AccueilPage({
       <RecoDuJourAccueil />
 
       {/* ── COACHS + PARCOURS — les essentiels élève, remontés en tête ─────────── */}
-      <section className="px-4 py-8 sm:px-6 lg:px-8">
+      <section id="coach" className="scroll-mt-20 px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           {/* Coach IA — texte + chips des matières à gauche, aperçu à droite */}
           <div className="flex flex-col items-center gap-6 rounded-2xl border border-cyan-300/20 bg-gradient-to-r from-cyan-500/[0.10] to-blue-500/[0.05] p-5 sm:p-6 lg:flex-row lg:justify-between">
