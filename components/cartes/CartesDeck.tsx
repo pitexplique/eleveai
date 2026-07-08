@@ -23,6 +23,7 @@ const MAT: Record<string, MatMeta> = {
   sciences: { emoji: "🔬", label: "Sciences", ring: "border-emerald-300", text: "text-emerald-700", soft: "bg-emerald-50" },
   sport: { emoji: "💪", label: "Sport", ring: "border-orange-300", text: "text-orange-700", soft: "bg-orange-50" },
   nutrition: { emoji: "🥗", label: "Nutrition", ring: "border-lime-300", text: "text-lime-700", soft: "bg-lime-50" },
+  numerique: { emoji: "📱", label: "Numérique", ring: "border-indigo-300", text: "text-indigo-700", soft: "bg-indigo-50" },
 };
 const MAT_DEFAUT: MatMeta = { emoji: "⭐", label: "", ring: "border-slate-300", text: "text-slate-700", soft: "bg-slate-50" };
 

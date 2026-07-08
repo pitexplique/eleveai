@@ -133,6 +133,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/cartes-vacances/vers-la-6e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
   { path: "/cartes-vacances/vers-le-cm2",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
   { path: "/cartes-vacances/vers-la-5e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
+  { path: "/cartes-vacances/vers-la-4e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
 
   // ── ESPACES / AUDIENCES ────────────────────────────────────────────────────
   // Pages d'audience = portes du header et de l'accueil (destinations principales).
