@@ -427,7 +427,7 @@ function DiagrammeAxe() {
 
 function PagePicto({ p, index, total }: { p: Picto; index: number; total: number }) {
   return (
-    <section className="picto-page mt-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-300/40 print:mt-0 print:rounded-none print:border-0 print:shadow-none">
+    <section className="picto-page picto-defi mt-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-300/40 print:mt-0 print:rounded-none print:border-0 print:shadow-none">
       {/* Bandeau thème */}
       <header className="flex items-center justify-between gap-3 bg-gradient-to-r from-cyan-600 to-teal-600 px-6 py-3 text-white">
         <span className="inline-flex items-center gap-2 text-sm font-black">
@@ -439,7 +439,7 @@ function PagePicto({ p, index, total }: { p: Picto; index: number; total: number
         </span>
       </header>
 
-      <div className="flex flex-col gap-5 px-6 py-6 print:py-5">
+      <div className="picto-body flex flex-col gap-5 px-6 py-6 print:py-5">
         <p className="inline-flex items-center gap-1.5 text-xs font-black text-cyan-700">
           <MapPin className="h-3.5 w-3.5" />
           {p.lieu}
@@ -496,8 +496,8 @@ function PagePicto({ p, index, total }: { p: Picto; index: number; total: number
           </div>
         </div>
 
-        {/* Zone de recherche (ardoise effaçable / brouillon) */}
-        <div className="rounded-2xl border-2 border-dashed border-slate-200 px-4 py-6 text-center print:py-10">
+        {/* Zone de recherche (ardoise effaçable / brouillon) — s'étire pour remplir la page à l'impression */}
+        <div className="picto-cherche flex items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 px-4 py-6 text-center print:py-10">
           <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-300">
             Mon ardoise — je cherche ici
           </p>
@@ -705,6 +705,20 @@ export default function PictoMathsClient({
           .couverture-page {
             min-height: 262mm;
             padding: 12mm !important;
+          }
+          /* Chaque défi remplit la page A4 : plus de grand vide en bas,
+             la zone ardoise « je cherche ici » s'étire pour occuper la place.
+             (Ciblé sur les pages-défis : la couverture et les corrigés sont exclus.) */
+          .picto-defi {
+            display: flex;
+            flex-direction: column;
+            min-height: 275mm;
+          }
+          .picto-body {
+            flex: 1 1 auto;
+          }
+          .picto-cherche {
+            flex: 1 1 auto;
           }
         }
       `}</style>
