@@ -24,6 +24,8 @@ const MAT: Record<string, MatMeta> = {
   sport: { emoji: "💪", label: "Sport", ring: "border-orange-300", text: "text-orange-700", soft: "bg-orange-50" },
   nutrition: { emoji: "🥗", label: "Nutrition", ring: "border-lime-300", text: "text-lime-700", soft: "bg-lime-50" },
   numerique: { emoji: "📱", label: "Numérique", ring: "border-indigo-300", text: "text-indigo-700", soft: "bg-indigo-50" },
+  reunion: { emoji: "🌋", label: "La Réunion", ring: "border-red-300", text: "text-red-700", soft: "bg-red-50" },
+  emc: { emoji: "🤝", label: "Respect", ring: "border-rose-300", text: "text-rose-700", soft: "bg-rose-50" },
 };
 const MAT_DEFAUT: MatMeta = { emoji: "⭐", label: "", ring: "border-slate-300", text: "text-slate-700", soft: "bg-slate-50" };
 
@@ -194,6 +196,9 @@ export default function CartesDeck({
           <h1 className="mt-3 text-5xl font-black tracking-tight text-slate-900 sm:text-6xl">
             Le corps <span className="text-orange-500">&amp;</span> l&apos;esprit
           </h1>
+          <p className="mt-1 text-sm font-black italic text-orange-600">
+            «&nbsp;Un esprit sain dans un corps sain&nbsp;»
+          </p>
           <p className="mt-2 max-w-md text-base font-bold text-slate-500">
             {cartes.length} cartes à imprimer, découper et défier : 4 questions par carte
             + un défi sport 🤸. Réponses au dos.

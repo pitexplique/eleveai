@@ -1,308 +1,38 @@
-// « Cartes défis · Vers la 6e » — révision CM2 → entrée en 6e (SANS Keep Cool).
-// 4 questions encadrées avec picto (mix scolaire + SPORT/SANTÉ, ludique et adapté
-// à l'âge : règles du jeu, corps, bonnes habitudes) + un « Sport du jour ».
+// « Cartes défis · Vers la 6e » — révision CM2 → entrée en 6e (~10-11 ans).
+// Rééquilibré (conseil à 7 rôles, l'élève tranche) : moins de nutrition/sport,
+// plus de disciplinaire + fierté péi 🌋. « Sport du jour ».
 
 import type { CarteDefi } from "@/components/cartes/types";
 
 export const CARTES: CarteDefi[] = [
-  {
-    ref: "6E·01",
-    questions: [
-      { matiere: "maths", q: "Combien font 7 × 8 ?", r: "56" },
-      { matiere: "francais", q: "Le pluriel de « cheval » ?", r: "chevaux" },
-      { matiere: "sport", q: "Combien de joueurs dans une équipe de foot ?", r: "11" },
-      { matiere: "anglais", q: "« chien » en anglais ?", r: "dog" },
-    ],
-    bouge: "10 sauts de grenouille 🐸",
-  },
-  {
-    ref: "6E·02",
-    questions: [
-      { matiere: "maths", q: "La moitié de 50 ?", r: "25" },
-      { matiere: "francais", q: "« beau » : nom, verbe ou adjectif ?", r: "adjectif" },
-      { matiere: "sport", q: "Combien de minutes dure un match de foot ?", r: "90 min" },
-      { matiere: "sciences", q: "Combien de pattes a une araignée ?", r: "8" },
-    ],
-    bouge: "20 sauts sur place",
-  },
-  {
-    ref: "6E·03",
-    questions: [
-      { matiere: "maths", q: "1/2 + 1/2 = ?", r: "1" },
-      { matiere: "francais", q: "Conjugue « être » avec « je » (présent)", r: "je suis" },
-      { matiere: "sport", q: "Quel sport se joue avec un panier ?", r: "le basket" },
-      { matiere: "anglais", q: "« rouge » en anglais ?", r: "red" },
-    ],
-    bouge: "Cours sur place 30 secondes",
-  },
-  {
-    ref: "6E·04",
-    questions: [
-      { matiere: "maths", q: "Combien de côtés a un triangle ?", r: "3" },
-      { matiere: "francais", q: "Le contraire de « grand » ?", r: "petit" },
-      { matiere: "sport", q: "Combien de minutes de sport par jour conseillé ?", r: "au moins 60 min" },
-      { matiere: "sciences", q: "L'eau bout à combien de degrés ?", r: "100 °C" },
-    ],
-    bouge: "Équilibre sur un pied 20 secondes",
-  },
-  {
-    ref: "6E·05",
-    questions: [
-      { matiere: "maths", q: "Combien font 100 − 37 ?", r: "63" },
-      { matiere: "francais", q: "Combien de syllabes dans « ordinateur » ?", r: "4 (or-di-na-teur)" },
-      { matiere: "sport", q: "Le tennis se joue avec quoi ?", r: "une raquette" },
-      { matiere: "anglais", q: "« un » (le chiffre) en anglais ?", r: "one" },
-    ],
-    bouge: "15 sauts en étoile 🌟",
-  },
-  {
-    ref: "6E·06",
-    questions: [
-      { matiere: "maths", q: "Le double de 12 ?", r: "24" },
-      { matiere: "francais", q: "« manger » : quel groupe ?", r: "1er groupe (-er)" },
-      { matiere: "sport", q: "Pourquoi s'échauffer avant le sport ?", r: "pour éviter les blessures" },
-      { matiere: "sciences", q: "Combien de planètes dans le système solaire ?", r: "8" },
-    ],
-    bouge: "Marche comme un crabe, 10 pas 🦀",
-  },
-  {
-    ref: "6E·07",
-    questions: [
-      { matiere: "maths", q: "1 kg = combien de grammes ?", r: "1000 g" },
-      { matiere: "francais", q: "Le féminin de « acteur » ?", r: "actrice" },
-      { matiere: "sport", q: "Combien d'anneaux sur le drapeau olympique ?", r: "5" },
-      { matiere: "anglais", q: "« chat » en anglais ?", r: "cat" },
-    ],
-    bouge: "Saute à cloche-pied 10 fois",
-  },
-  {
-    ref: "6E·08",
-    questions: [
-      { matiere: "maths", q: "Combien font 9 × 6 ?", r: "54" },
-      { matiere: "francais", q: "Un synonyme de « content » ?", r: "heureux (joyeux)" },
-      { matiere: "sport", q: "Après le sport, il faut bien… ?", r: "boire (s'hydrater)" },
-      { matiere: "sciences", q: "Quel organe sert à respirer ?", r: "les poumons" },
-    ],
-    bouge: "Fais 3 grands sauts en avant",
-  },
-  {
-    ref: "6E·09",
-    questions: [
-      { matiere: "maths", q: "Le quart de 20 ?", r: "5" },
-      { matiere: "francais", q: "Le pluriel de « journal » ?", r: "journaux" },
-      { matiere: "sport", q: "Le ballon de rugby a quelle forme ?", r: "ovale" },
-      { matiere: "anglais", q: "« bleu » en anglais ?", r: "blue" },
-    ],
-    bouge: "Danse sur ta chanson préférée 💃",
-  },
-  {
-    ref: "6E·10",
-    questions: [
-      { matiere: "maths", q: "Combien de minutes dans 1 heure ?", r: "60" },
-      { matiere: "francais", q: "Le contraire de « ouvrir » ?", r: "fermer" },
-      { matiere: "nutrition", q: "Manger équilibré = beaucoup de… ?", r: "fruits et légumes 🍎🥦" },
-      { matiere: "sciences", q: "Le Soleil est une… ?", r: "étoile" },
-    ],
-    bouge: "Étire-toi doucement 20 secondes",
-  },
-  {
-    ref: "6E·11",
-    questions: [
-      { matiere: "nutrition", q: "Environ combien de morceaux de sucre dans une canette de soda (33 cl) ?", r: "Environ 7 morceaux 😮" },
-      { matiere: "sport", q: "Avant de courir, que faut-il faire pour éviter les blessures ?", r: "S'échauffer" },
-      { matiere: "maths", q: "Combien font 6 × 7 ?", r: "42" },
-      { matiere: "francais", q: "Le pluriel de « bijou » ?", r: "bijoux (avec un x)" },
-    ],
-    bouge: "10 sauts de grenouille 🐸",
-  },
-  {
-    ref: "6E·12",
-    questions: [
-      { matiere: "nutrition", q: "Quel fruit rouge et sucré de La Réunion mange-t-on à Noël ?", r: "le letchi 🍒" },
-      { matiere: "sport", q: "Pourquoi boit-on de l'eau en faisant du sport ?", r: "pour s'hydrater" },
-      { matiere: "geo", q: "Dans quel océan se trouve La Réunion ?", r: "l'océan Indien" },
-      { matiere: "sport", q: "Combien de joueurs de basket sur le terrain par équipe ?", r: "5" },
-    ],
-    bouge: "15 sauts sur place",
-  },
-  {
-    ref: "6E·13",
-    questions: [
-      { matiere: "nutrition", q: "Boisson idéale quand on a soif : eau ou soda ?", r: "l'eau 💧" },
-      { matiere: "nutrition", q: "Combien de fruits et légumes conseillés par jour ?", r: "5 par jour" },
-      { matiere: "sport", q: "Quel sport se joue avec un volant et une raquette ?", r: "le badminton" },
-      { matiere: "maths", q: "Combien font 100 − 25 ?", r: "75" },
-    ],
-    bouge: "équilibre sur un pied 20 s",
-  },
-  {
-    ref: "6E·14",
-    questions: [
-      { matiere: "nutrition", q: "Vrai ou faux : le petit-déjeuner donne de l'énergie pour la matinée.", r: "vrai !" },
-      { matiere: "sport", q: "Après un effort, la pause sert à quoi ?", r: "à récupérer" },
-      { matiere: "anglais", q: "« pomme » en anglais ?", r: "apple" },
-      { matiere: "francais", q: "Le contraire de « rapide » ?", r: "lent" },
-    ],
-    bouge: "20 pas de géant 🦕",
-  },
-  {
-    ref: "6E·15",
-    questions: [
-      { matiere: "nutrition", q: "La mangue péi est-elle un fruit ou un légume ?", r: "un fruit 🥭" },
-      { matiere: "sport", q: "Quel sport pratique-t-on dans une piscine ?", r: "la natation" },
-      { matiere: "maths", q: "Combien font 8 × 4 ?", r: "32" },
-      { matiere: "nutrition", q: "Trop de sucre chaque jour peut donner quelle maladie ?", r: "le diabète" },
-    ],
-    bouge: "10 jumping jacks",
-  },
-  {
-    ref: "6E·16",
-    questions: [
-      { matiere: "nutrition", q: "Un goûter sain : un fruit ou des bonbons ?", r: "un fruit 🍎" },
-      { matiere: "sport", q: "Combien de joueurs de volley sur le terrain par équipe ?", r: "6" },
-      { matiere: "histoire", q: "Avec quoi écrivait-on avant le stylo ?", r: "une plume" },
-      { matiere: "nutrition", q: "Où se cache beaucoup de sucre : dans l'eau ou dans le soda ?", r: "dans le soda" },
-    ],
-    bouge: "course sur place 15 s 🏃",
-  },
-  {
-    ref: "6E·17",
-    questions: [
-      { matiere: "nutrition", q: "Cite un fruit péi qui commence par « a ».", r: "l'ananas Victoria 🍍" },
-      { matiere: "sport", q: "Que fait-on à la fin d'une séance pour se calmer ?", r: "des étirements" },
-      { matiere: "maths", q: "Combien font 9 × 3 ?", r: "27" },
-      { matiere: "francais", q: "Le féminin de « chanteur » ?", r: "chanteuse" },
-    ],
-    bouge: "5 flexions de jambes",
-  },
-  {
-    ref: "6E·18",
-    questions: [
-      { matiere: "nutrition", q: "Vrai ou faux : les légumes verts sont bons pour la santé.", r: "vrai 🥦" },
-      { matiere: "sport", q: "Dans quel sport marque-t-on un « essai » ?", r: "le rugby" },
-      { matiere: "sciences", q: "Combien de dents de lait a un enfant en tout ?", r: "20" },
-      { matiere: "nutrition", q: "Au réveil : un verre d'eau ou un jus très sucré ?", r: "un verre d'eau 💧" },
-    ],
-    bouge: "saute comme un kangourou 8 fois 🦘",
-  },
-  {
-    ref: "6E·19",
-    questions: [
-      { matiere: "nutrition", q: "Environ combien de morceaux de sucre dans un grand verre de jus industriel ?", r: "environ 5 😮" },
-      { matiere: "sport", q: "Quel organe bat plus vite quand on court ?", r: "le cœur ❤️" },
-      { matiere: "anglais", q: "« eau » en anglais ?", r: "water" },
-      { matiere: "maths", q: "Combien font 50 + 45 ?", r: "95" },
-    ],
-    bouge: "10 montées de genoux",
-  },
-  {
-    ref: "6E·20",
-    questions: [
-      { matiere: "nutrition", q: "Le letchi pousse-t-il sur un arbre ou sous terre ?", r: "sur un arbre 🌳" },
-      { matiere: "sport", q: "Sommeil pour bien récupérer à 10 ans : 4 h ou 10 h ?", r: "environ 10 h 😴" },
-      { matiere: "geo", q: "Quelle est la capitale de la France ?", r: "Paris" },
-      { matiere: "nutrition", q: "Au goûter : un fruit ou un paquet de chips ?", r: "un fruit 🍌" },
-    ],
-    bouge: "équilibre yeux fermés 10 s",
-  },
-  {
-    ref: "6E·21",
-    questions: [
-      { matiere: "nutrition", q: "Meilleure boisson pour les dents : l'eau ou le soda ?", r: "l'eau 💧" },
-      { matiere: "sport", q: "Quel sport se joue sur un tatami ?", r: "le judo" },
-      { matiere: "maths", q: "Quelle est la moitié de 30 ?", r: "15" },
-      { matiere: "francais", q: "Combien de syllabes dans « ba-nane » ?", r: "2 syllabes" },
-    ],
-    bouge: "12 sauts en étoile ⭐",
-  },
-  {
-    ref: "6E·22",
-    questions: [
-      { matiere: "nutrition", q: "Vrai ou faux : il y a du sucre caché même dans les céréales du matin.", r: "vrai !" },
-      { matiere: "sport", q: "Comment appelle-t-on le bassin où l'on nage en compétition ?", r: "une piscine (un bassin)" },
-      { matiere: "sciences", q: "L'eau gèle à combien de degrés ?", r: "0 °C" },
-      { matiere: "nutrition", q: "Cite un légume vert qui commence par « h ».", r: "le haricot vert" },
-    ],
-    bouge: "marche sur les talons 10 pas",
-  },
-  {
-    ref: "6E·23",
-    questions: [
-      { matiere: "nutrition", q: "Un bon petit-déj : un fruit, du pain… et quoi pour boire ?", r: "de l'eau ou du lait 🥛" },
-      { matiere: "sport", q: "Combien de joueurs de handball sur le terrain par équipe ?", r: "7" },
-      { matiere: "maths", q: "Combien font 7 × 5 ?", r: "35" },
-      { matiere: "anglais", q: "« vert » en anglais ?", r: "green" },
-    ],
-    bouge: "saute et fais un demi-tour, 6 fois",
-  },
-  {
-    ref: "6E·24",
-    questions: [
-      { matiere: "nutrition", q: "Environ combien de morceaux de sucre dans une bouteille de soda de 1,5 L ?", r: "environ 30 😱" },
-      { matiere: "sport", q: "Pourquoi s'étire-t-on après le sport ?", r: "pour détendre les muscles" },
-      { matiere: "geo", q: "La Réunion est-elle une île ou un continent ?", r: "une île" },
-      { matiere: "nutrition", q: "Un fruit frais ou un bonbon au fruit : lequel est meilleur ?", r: "le fruit frais 🍓" },
-    ],
-    bouge: "10 sauts groupés (genoux à la poitrine)",
-  },
-  {
-    ref: "6E·25",
-    questions: [
-      { matiere: "nutrition", q: "Cite un fruit jaune et courbé plein d'énergie.", r: "la banane 🍌" },
-      { matiere: "sport", q: "Quel sport se pratique avec des skis sur la neige ?", r: "le ski ⛷️" },
-      { matiere: "maths", q: "Combien font 12 × 2 ?", r: "24" },
-      { matiere: "francais", q: "Le pluriel de « genou » ?", r: "genoux (avec un x)" },
-    ],
-    bouge: "gainage : tiens la planche 15 s 💪",
-  },
-  {
-    ref: "6E·26",
-    questions: [
-      { matiere: "nutrition", q: "Vrai ou faux : boire de l'eau aide le cerveau à mieux fonctionner.", r: "vrai 🧠" },
-      { matiere: "sport", q: "Dans quel sport marque-t-on un panier à 3 points ?", r: "le basket" },
-      { matiere: "histoire", q: "Comment appelle-t-on les dessins des hommes préhistoriques sur les murs ?", r: "des peintures rupestres" },
-      { matiere: "nutrition", q: "Le miel est-il naturel ou fabriqué en usine ?", r: "naturel (fait par les abeilles) 🐝" },
-    ],
-    bouge: "20 pas de crabe 🦀",
-  },
-  {
-    ref: "6E·27",
-    questions: [
-      { matiere: "nutrition", q: "Un goûter équilibré : un fruit + quoi pour tenir longtemps ?", r: "du pain / une tartine 🍞" },
-      { matiere: "sport", q: "Combien de temps de sport par jour conseillé aux enfants ?", r: "environ 1 heure" },
-      { matiere: "sciences", q: "Le corps humain est surtout fait de… ?", r: "d'eau 💧" },
-      { matiere: "nutrition", q: "Cite un fruit péi qui pique un peu à l'extérieur.", r: "l'ananas 🍍" },
-    ],
-    bouge: "saute à cloche-pied 10 fois",
-  },
-  {
-    ref: "6E·28",
-    questions: [
-      { matiere: "nutrition", q: "Environ combien de morceaux de sucre dans une glace industrielle ?", r: "environ 4 😮" },
-      { matiere: "sport", q: "Quel sport se joue avec une raquette et une petite balle jaune ?", r: "le tennis" },
-      { matiere: "maths", q: "Combien font 6 × 6 ?", r: "36" },
-      { matiere: "anglais", q: "« jaune » en anglais ?", r: "yellow" },
-    ],
-    bouge: "15 talons-fesses",
-  },
-  {
-    ref: "6E·29",
-    questions: [
-      { matiere: "nutrition", q: "Vrai ou faux : manger des couleurs variées (rouge, vert, jaune) c'est bon.", r: "vrai 🌈" },
-      { matiere: "sport", q: "Que faut-il remettre dans le corps en buvant après l'effort ?", r: "de l'eau 💧" },
-      { matiere: "geo", q: "Quel volcan célèbre se trouve à La Réunion ?", r: "le Piton de la Fournaise 🌋" },
-      { matiere: "nutrition", q: "Un jus pressé maison ou un soda : lequel a le moins de sucre ajouté ?", r: "le jus pressé maison" },
-    ],
-    bouge: "10 fentes avant (une jambe puis l'autre)",
-  },
-  {
-    ref: "6E·30",
-    questions: [
-      { matiere: "nutrition", q: "Cite un légume orange bon pour les yeux.", r: "la carotte 🥕" },
-      { matiere: "sport", q: "Quel sport se joue sur un ring avec des gants ?", r: "la boxe 🥊" },
-      { matiere: "maths", q: "Combien font 40 ÷ 2 ?", r: "20" },
-      { matiere: "nutrition", q: "Après le sport : un grand verre d'eau ou un grand soda ?", r: "un grand verre d'eau 💧" },
-    ],
-    bouge: "saute et attrape le ciel 10 fois ✋",
-  },
+  { ref: "6E·01", questions: [ {matiere:"maths",q:"7 × 8 = ?",r:"56"}, {matiere:"francais",q:"Pluriel de « cheval » ?",r:"chevaux"}, {matiere:"sciences",q:"Quel organe sert à respirer ?",r:"les poumons"}, {matiere:"reunion",q:"Le volcan actif de La Réunion ?",r:"le Piton de la Fournaise 🌋"} ], bouge: "10 sauts de grenouille 🐸" },
+  { ref: "6E·02", questions: [ {matiere:"maths",q:"Le double de 25 ?",r:"50"}, {matiere:"anglais",q:"« chien » en anglais ?",r:"dog"}, {matiere:"sport",q:"Avant l'effort, on fait quoi ?",r:"on s'échauffe"}, {matiere:"nutrition",q:"Pour la journée : l'eau ou le soda ?",r:"l'eau 💧"} ], bouge: "20 sauts sur place" },
+  { ref: "6E·03", questions: [ {matiere:"maths",q:"45 − 18 = ?",r:"27"}, {matiere:"francais",q:"Présent : « je (finir) » ?",r:"je finis"}, {matiere:"geo",q:"Capitale de la France ?",r:"Paris"}, {matiere:"histoire",q:"Qui étaient les Gaulois ?",r:"un peuple de l'Antiquité"} ], bouge: "cours sur place 15 s 🏃" },
+  { ref: "6E·04", questions: [ {matiere:"maths",q:"Périmètre d'un carré de 5 cm de côté ?",r:"20 cm"}, {matiere:"sciences",q:"Un animal qui pond des œufs, exemple ?",r:"la poule"}, {matiere:"sport",q:"Boire de l'eau pendant le sport, oui ou non ?",r:"oui"}, {matiere:"reunion",q:"Dans quel océan se trouve La Réunion ?",r:"l'océan Indien"} ], bouge: "équilibre 15 s sur un pied 🦩" },
+  { ref: "6E·05", questions: [ {matiere:"maths",q:"La moitié de 30 ?",r:"15"}, {matiere:"francais",q:"Contraire de « grand » ?",r:"petit"}, {matiere:"anglais",q:"« chat » en anglais ?",r:"cat"}, {matiere:"nutrition",q:"Un fruit péi plein de vitamines ?",r:"le letchi 🍒"} ], bouge: "10 sauts de grenouille 🐸" },
+  { ref: "6E·06", questions: [ {matiere:"maths",q:"6 × 9 = ?",r:"54"}, {matiere:"sciences",q:"Combien de planètes dans le système solaire ?",r:"8"}, {matiere:"histoire",q:"Les pyramides, par quel peuple ?",r:"les Égyptiens"}, {matiere:"sport",q:"Combien d'heures de sommeil pour un enfant ?",r:"environ 10 heures 😴"} ], bouge: "20 sauts sur place" },
+  { ref: "6E·07", questions: [ {matiere:"maths",q:"100 − 45 = ?",r:"55"}, {matiere:"francais",q:"Féminin de « acteur » ?",r:"actrice"}, {matiere:"geo",q:"Combien de continents sur Terre ?",r:"6 (ou 7)"}, {matiere:"reunion",q:"« Nou la fé » veut dire quoi ?",r:"on l'a fait / on a réussi"} ], bouge: "cours sur place 15 s 🏃" },
+  { ref: "6E·08", questions: [ {matiere:"maths",q:"9 × 4 = ?",r:"36"}, {matiere:"anglais",q:"« rouge » en anglais ?",r:"red"}, {matiere:"nutrition",q:"Le sucre à volonté, bonne idée ?",r:"non, avec modération"}, {matiere:"sport",q:"S'étirer, c'est utile quand ?",r:"avant et après l'effort"} ], bouge: "10 sauts de grenouille 🐸" },
+  { ref: "6E·09", questions: [ {matiere:"maths",q:"Combien de cm dans 1 mètre ?",r:"100 cm"}, {matiere:"francais",q:"Nature du mot « rapidement » ?",r:"un adverbe"}, {matiere:"sciences",q:"L'eau gelée devient quoi ?",r:"de la glace"}, {matiere:"reunion",q:"Comment appelle-t-on un habitant de l'île ?",r:"un Réunionnais"} ], bouge: "équilibre 15 s sur un pied 🦩" },
+  { ref: "6E·10", questions: [ {matiere:"maths",q:"3 × 100 = ?",r:"300"}, {matiere:"geo",q:"Le plus grand océan du monde ?",r:"l'océan Pacifique"}, {matiere:"sport",q:"Pourquoi s'échauffer ?",r:"pour éviter les blessures"}, {matiere:"nutrition",q:"Combien de repas par jour environ ?",r:"3 à 4"} ], bouge: "20 sauts sur place" },
+  { ref: "6E·11", questions: [ {matiere:"maths",q:"12 × 5 = ?",r:"60"}, {matiere:"francais",q:"« a » ou « à » : « Il ___ un vélo » ?",r:"a"}, {matiere:"anglais",q:"« I ___ happy » (être) ?",r:"am"}, {matiere:"reunion",q:"Les 3 grands cirques de l'île ?",r:"Mafate, Salazie, Cilaos"} ], bouge: "10 sauts de grenouille 🐸" },
+  { ref: "6E·12", questions: [ {matiere:"maths",q:"Aire d'un rectangle 4 cm × 3 cm ?",r:"12 cm²"}, {matiere:"sciences",q:"Le cœur sert à quoi ?",r:"à faire circuler le sang"}, {matiere:"sport",q:"Un sport collectif avec un ballon rond ?",r:"le football"}, {matiere:"histoire",q:"Vercingétorix a combattu quel chef romain ?",r:"Jules César"} ], bouge: "cours sur place 15 s 🏃" },
+  { ref: "6E·13", questions: [ {matiere:"maths",q:"7 + 8 + 5 = ?",r:"20"}, {matiere:"francais",q:"Synonyme de « content » ?",r:"heureux"}, {matiere:"nutrition",q:"Les légumes, à quels repas ?",r:"à chaque repas si possible 🥦"}, {matiere:"geo",q:"Sur quel continent est la France ?",r:"l'Europe"} ], bouge: "20 sauts sur place" },
+  { ref: "6E·14", questions: [ {matiere:"maths",q:"63 ÷ 9 = ?",r:"7"}, {matiere:"anglais",q:"« bonjour » en anglais ?",r:"hello"}, {matiere:"sport",q:"Après le sport, on pense à… ?",r:"boire et s'étirer"}, {matiere:"sciences",q:"Combien de dents de lait environ ?",r:"20"} ], bouge: "équilibre 15 s sur un pied 🦩" },
+  { ref: "6E·15", questions: [ {matiere:"maths",q:"2,5 + 2,5 = ?",r:"5"}, {matiere:"francais",q:"Pluriel de « journal » ?",r:"journaux"}, {matiere:"reunion",q:"Le letchi se mange à quelle saison ici ?",r:"l'été (décembre)"}, {matiere:"nutrition",q:"Un fruit plutôt qu'un bonbon au goûter ?",r:"oui, bonne idée 🍎"} ], bouge: "10 sauts de grenouille 🐸" },
+  { ref: "6E·16", questions: [ {matiere:"maths",q:"9 × 9 = ?",r:"81"}, {matiere:"sciences",q:"Les 3 états de l'eau ?",r:"solide, liquide, gazeux"}, {matiere:"sport",q:"Nager, c'est bon pour quoi ?",r:"le corps entier et le souffle"}, {matiere:"anglais",q:"« merci » en anglais ?",r:"thank you"} ], bouge: "20 sauts sur place" },
+  { ref: "6E·17", questions: [ {matiere:"maths",q:"1 kg = combien de grammes ?",r:"1000 g"}, {matiere:"francais",q:"« ses » ou « ces » : « ___ chaussures sont à moi » ?",r:"ses"}, {matiere:"histoire",q:"Les Romains construisaient des routes et des… ?",r:"aqueducs"}, {matiere:"nutrition",q:"Le petit-déjeuner, important ou pas ?",r:"important, il donne de l'énergie"} ], bouge: "cours sur place 15 s 🏃" },
+  { ref: "6E·18", questions: [ {matiere:"maths",q:"1/4 de 100 ?",r:"25"}, {matiere:"geo",q:"Le plus grand désert chaud du monde ?",r:"le Sahara"}, {matiere:"sport",q:"Combien de minutes bouger par jour au moins ?",r:"environ 60 min"}, {matiere:"reunion",q:"Quelle langue parle-t-on en plus du français ici ?",r:"le créole"} ], bouge: "équilibre 15 s sur un pied 🦩" },
+  { ref: "6E·19", questions: [ {matiere:"maths",q:"Combien de côtés a un triangle ?",r:"3"}, {matiere:"francais",q:"« on » ou « ont » : « Ils ___ mangé » ?",r:"ont"}, {matiere:"anglais",q:"« I ___ a brother » (avoir) ?",r:"have"}, {matiere:"sciences",q:"Quel astre nous éclaire le jour ?",r:"le Soleil ☀️"} ], bouge: "10 sauts de grenouille 🐸" },
+  { ref: "6E·20", questions: [ {matiere:"maths",q:"250 + 250 = ?",r:"500"}, {matiere:"nutrition",q:"Trop de sucre favorise quelle maladie ?",r:"le diabète"}, {matiere:"sport",q:"Bien dormir aide à quoi ?",r:"à récupérer et grandir"}, {matiere:"histoire",q:"Sur quoi écrivaient les Égyptiens ?",r:"sur du papyrus"} ], bouge: "20 sauts sur place" },
+  { ref: "6E·21", questions: [ {matiere:"maths",q:"Combien de mm dans 1 cm ?",r:"10 mm"}, {matiere:"francais",q:"Nature du mot « et » ?",r:"une conjonction"}, {matiere:"geo",q:"Quel océan borde l'ouest de la France ?",r:"l'océan Atlantique"}, {matiere:"sciences",q:"De quoi une plante a-t-elle besoin pour pousser ?",r:"d'eau et de lumière"} ], bouge: "cours sur place 15 s 🏃" },
+  { ref: "6E·22", questions: [ {matiere:"maths",q:"8 × 8 = ?",r:"64"}, {matiere:"anglais",q:"« bleu » en anglais ?",r:"blue"}, {matiere:"nutrition",q:"L'eau est meilleure que le jus sucré : vrai ?",r:"vrai 💧"}, {matiere:"reunion",q:"Quel plat est célèbre à La Réunion ?",r:"le cari / le rougail"} ], bouge: "équilibre 15 s sur un pied 🦩" },
+  { ref: "6E·23", questions: [ {matiere:"maths",q:"36 ÷ 6 = ?",r:"6"}, {matiere:"francais",q:"Présent de « aller » : « nous ___ » ?",r:"nous allons"}, {matiere:"sport",q:"Pourquoi boire avant d'avoir soif ?",r:"pour rester bien hydraté"}, {matiere:"histoire",q:"Les Grecs ont inventé quelle grande compétition ?",r:"les Jeux olympiques"} ], bouge: "10 sauts de grenouille 🐸" },
+  { ref: "6E·24", questions: [ {matiere:"maths",q:"Le triple de 6 ?",r:"18"}, {matiere:"sciences",q:"L'air qu'on rejette contient quel gaz ?",r:"du dioxyde de carbone"}, {matiere:"nutrition",q:"Manger très vite, bonne idée ?",r:"non, on prend son temps"}, {matiere:"anglais",q:"« au revoir » en anglais ?",r:"goodbye"} ], bouge: "20 sauts sur place" },
+  { ref: "6E·25", questions: [ {matiere:"maths",q:"3/4 + 1/4 = ?",r:"1 (un entier)"}, {matiere:"francais",q:"Contraire de « ouvrir » ?",r:"fermer"}, {matiere:"sport",q:"Un bon échauffement dure environ… ?",r:"5 à 10 minutes"}, {matiere:"reunion",q:"La plage/le récit se déroule dans quel lagon connu ?",r:"le lagon de l'Ermitage"} ], bouge: "cours sur place 15 s 🏃" },
+  { ref: "6E·26", questions: [ {matiere:"francais",q:"Pluriel de « bijou » ?",r:"bijoux"}, {matiere:"anglais",q:"« a » ou « an » devant « apple » ?",r:"an"}, {matiere:"nutrition",q:"Le gras et le sucré : souvent ou de temps en temps ?",r:"de temps en temps"}, {matiere:"sport",q:"Faire du sport avec des amis, c'est… ?",r:"plus motivant et fun"} ], bouge: "équilibre 15 s sur un pied 🦩" },
+  { ref: "6E·27", questions: [ {matiere:"francais",q:"Féminin de « le lion » ?",r:"la lionne"}, {matiere:"sciences",q:"Quel organe pense et commande le corps ?",r:"le cerveau"}, {matiere:"geo",q:"Combien d'océans sur Terre ?",r:"5"}, {matiere:"nutrition",q:"Fruits et légumes : combien par jour ?",r:"au moins 5"} ], bouge: "10 sauts de grenouille 🐸" },
+  { ref: "6E·28", questions: [ {matiere:"anglais",q:"« sept » en anglais ?",r:"seven"}, {matiere:"histoire",q:"Quel objet mesurait le temps chez les Romains ?",r:"le cadran solaire"}, {matiere:"francais",q:"« son » ou « sont » : « Ils ___ là » ?",r:"sont"}, {matiere:"nutrition",q:"Grignoter toute la journée, conseillé ?",r:"non, mieux vaut de vrais repas"} ], bouge: "20 sauts sur place" },
+  { ref: "6E·29", questions: [ {matiere:"francais",q:"Pluriel de « un œil » ?",r:"des yeux"}, {matiere:"sciences",q:"Combien de pattes a un insecte ?",r:"6"}, {matiere:"anglais",q:"« vert » en anglais ?",r:"green"}, {matiere:"reunion",q:"Un oiseau endémique de La Réunion ?",r:"le tec-tec (ou le paille-en-queue)"} ], bouge: "cours sur place 15 s 🏃" },
+  { ref: "6E·30", questions: [ {matiere:"maths",q:"Combien de minutes dans 1 heure ?",r:"60"}, {matiere:"francais",q:"Nature de « rouge » dans « un pull rouge » ?",r:"un adjectif"}, {matiere:"geo",q:"Le plus long fleuve de France ?",r:"la Loire"}, {matiere:"sport",q:"S'hydrater, ça veut dire… ?",r:"boire de l'eau"} ], bouge: "10 sauts de grenouille 🐸" },
 ];

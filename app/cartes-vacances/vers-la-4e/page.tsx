@@ -4,9 +4,9 @@ import { CARTES } from "./data";
 
 export const metadata: Metadata = {
   title:
-    "La tête et les jambes — Cartes de révision « Vers la 4e » à imprimer (gratuit)",
+    "Le corps & l’esprit — Cartes de révision « Vers la 4e » à imprimer (gratuit)",
   description:
-    "Cartes de révision gratuites à imprimer pour entrer en 4e : 4 questions par carte (maths avec démonstration, français, sport, nutrition, numérique/réseaux sociaux) + un défi sport. Réviser en bougeant, réponses au dos. « La tête et les jambes ».",
+    "Cartes de révision gratuites à imprimer pour entrer en 4e : 4 questions par carte (maths avec démonstration, français, sport, nutrition, numérique/réseaux sociaux) + un défi sport. Réviser en bougeant, réponses au dos. « Le corps & l’esprit ».",
   keywords: [
     "cartes de révision 4e",
     "réviser avant la 4e",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "entrée en 4e",
     "Pythagore Thalès 4e",
     "citoyenneté numérique collège",
-    "la tête et les jambes",
+    "le corps et l’esprit",
     "cahier de vacances 4e",
     "EleveAI",
   ],

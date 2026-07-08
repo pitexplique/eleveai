@@ -4,9 +4,9 @@ import { ArrowLeft, Printer, Dumbbell, Sparkles, Scissors } from "lucide-react";
 
 export const metadata: Metadata = {
   title:
-    "La tête et les jambes — Cartes de révision à imprimer (gratuit) · 6e, 1re",
+    "Le corps & l’esprit — Cartes de révision à imprimer (gratuit) · 6e, 1re",
   description:
-    "Les cartes de révision gratuites d'EleveAI, à imprimer et découper : 4 questions par carte (maths, français, anglais, sport, nutrition) + un défi sport. On révise en bougeant, réponses au dos. « La tête et les jambes ».",
+    "Les cartes de révision gratuites d'EleveAI, à imprimer et découper : 4 questions par carte (maths, français, anglais, sport, nutrition) + un défi sport. On révise en bougeant, réponses au dos. « Le corps & l’esprit ».",
   keywords: [
     "cartes de révision à imprimer",
     "cartes de révision gratuites",
@@ -15,12 +15,12 @@ export const metadata: Metadata = {
     "cartes de révision première",
     "réviser avant la 6e",
     "réviser avant la première",
-    "la tête et les jambes",
+    "le corps et l’esprit",
     "EleveAI",
   ],
   alternates: { canonical: "/cartes-vacances" },
   openGraph: {
-    title: "La tête et les jambes — Cartes de révision à imprimer (gratuit)",
+    title: "Le corps & l’esprit — Cartes de révision à imprimer (gratuit)",
     description:
       "4 questions par carte + un défi sport. À imprimer, découper et défier. On révise en bougeant.",
     url: "/cartes-vacances",
@@ -59,8 +59,11 @@ export default function CartesVacancesIndexPage() {
             À imprimer · découper · gratuit
           </p>
           <h1 className="mt-4 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">
-            🧠 La tête et les jambes 🦵
+            🧠 Le corps &amp; l’esprit 💪
           </h1>
+          <p className="mt-2 text-sm font-black italic text-orange-600">
+            «&nbsp;Un esprit sain dans un corps sain&nbsp;»
+          </p>
           <p className="mx-auto mt-4 max-w-2xl text-base font-semibold leading-7 text-slate-600">
             Des cartes de révision à imprimer et découper : <strong>4 questions</strong>{" "}
             par carte (maths, français, anglais, <span className="text-orange-600">sport, nutrition</span>){" "}
@@ -115,10 +118,11 @@ export default function CartesVacancesIndexPage() {
           <div className="flex items-start gap-3 rounded-2xl border border-orange-200 bg-orange-50 p-5">
             <Dumbbell className="mt-0.5 h-6 w-6 shrink-0 text-orange-500" />
             <div>
-              <h3 className="text-base font-black text-slate-900">La tête ET les jambes</h3>
+              <h3 className="text-base font-black text-slate-900">Le corps ET l’esprit</h3>
               <p className="mt-1 text-sm leading-6 text-slate-600">
-                Un clin d&apos;œil au célèbre jeu&nbsp;: on répond aux questions
-                (la tête) <em>et</em> on relève le défi sport (les jambes).
+                «&nbsp;Un esprit sain dans un corps sain&nbsp;»&nbsp;: on nourrit
+                l&apos;<em>esprit</em> avec les questions <em>et</em> le{" "}
+                <em>corps</em> avec le défi sport. 💪
               </p>
             </div>
           </div>

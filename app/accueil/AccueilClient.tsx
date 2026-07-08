@@ -1077,10 +1077,13 @@ export default function AccueilPage({
               🃏 À imprimer · gratuit
             </p>
             <h2 className="mt-1 text-2xl font-black text-white sm:text-3xl">
-              🧠 La tête et les jambes 🦵
+              🧠 Le corps &amp; l’esprit 💪
             </h2>
+            <p className="mt-0.5 text-xs font-black italic text-orange-200">
+              «&nbsp;Un esprit sain dans un corps sain&nbsp;»
+            </p>
             <p className="mt-1 text-sm font-semibold text-white/75">
-              Cartes de révision à imprimer (6e &amp; 1re) : 4 questions
+              Cartes de révision à imprimer (CM2 → 1re) : 4 questions
               (maths, français, <span className="text-orange-200">sport, nutrition</span>) +
               un défi sport. On révise <span className="text-orange-200">en bougeant</span>. 💪
             </p>

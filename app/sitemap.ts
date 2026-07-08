@@ -127,7 +127,7 @@ const ROUTES: RouteConfig[] = [
   // jeuxCartesRoutes) → chaque nouvelle classe apparaît toute seule ici.
   { path: "/qui-suis-je-a-imprimer",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
 
-  // ── CARTES DÉFIS « La tête et les jambes » (révision + sport, à imprimer) ───
+  // ── CARTES DÉFIS « Le corps & l’esprit » (révision + sport, à imprimer) ───
   { path: "/cartes-vacances",                   priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
   { path: "/cartes-vacances/vers-la-premiere",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
   { path: "/cartes-vacances/vers-la-6e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },

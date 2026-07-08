@@ -4,16 +4,16 @@ import { CARTES } from "./data";
 
 export const metadata: Metadata = {
   title:
-    "La tête et les jambes — Cartes de révision « Vers la 1re » à imprimer (gratuit)",
+    "Le corps & l’esprit — Cartes de révision « Vers la 1re » à imprimer (gratuit)",
   description:
-    "Cartes de révision gratuites à imprimer pour entrer en première : 4 questions par carte (maths, français, anglais, sport, nutrition) + un défi sport. Réviser en bougeant, réponses au dos. « La tête et les jambes ».",
+    "Cartes de révision gratuites à imprimer pour entrer en première : 4 questions par carte (maths, français, anglais, sport, nutrition) + un défi sport. Réviser en bougeant, réponses au dos. « Le corps & l’esprit ».",
   keywords: [
     "cartes de révision première",
     "réviser avant la première",
     "cartes de révision à imprimer",
     "entrée en 1re",
     "réviser en s'amusant lycée",
-    "la tête et les jambes",
+    "le corps et l’esprit",
     "cahier de vacances première",
     "EleveAI",
   ],
