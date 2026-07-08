@@ -11,13 +11,16 @@ import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import { Sparkles, X } from "lucide-react";
 
-const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cahier";
-
 export default function CaptureApresTelechargement({
   coachHref,
+  signupFrom = "cahier",
+  produitDe = "du cahier",
 }: {
   coachHref: string;
+  signupFrom?: string; // tag de tracking (ex "cartes", "keepcool")
+  produitDe?: string; // ex "du cahier", "des cartes" → « Profite bien {produitDe} »
 }) {
+  const SIGNUP_URL = `https://eleveai.fr/auth/signin?from=${signupFrom}`;
   const [open, setOpen] = useState(false);
   const [dejaVu, setDejaVu] = useState(false);
 
@@ -65,11 +68,11 @@ export default function CaptureApresTelechargement({
           <X className="h-5 w-5" />
         </button>
 
-        <p className="text-2xl font-black text-slate-900">Profite bien du cahier&nbsp;! 🎉</p>
+        <p className="text-2xl font-black text-slate-900">Profite bien {produitDe}&nbsp;! 🎉</p>
         <p className="mt-2 text-sm font-semibold leading-6 text-slate-600">
           <span className="font-black text-slate-800">Parents&nbsp;:</span> créez un
           espace <span className="font-black">gratuit</span> pour recevoir les
-          prochains cahiers, et débloquer le coach IA qui{" "}
+          prochaines nouveautés, et débloquer le coach IA qui{" "}
           <span className="font-black">explique</span> à votre enfant quand il
           bloque. Rien à installer, sans publicité.
         </p>
@@ -90,7 +93,7 @@ export default function CaptureApresTelechargement({
         <div className="mt-4 flex items-center gap-4">
           <div className="flex-1 space-y-2">
             <Link
-              href="/auth/signin?from=cahier"
+              href={`/auth/signin?from=${signupFrom}`}
               className="flex items-center justify-center gap-2 rounded-full bg-teal-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-500/30 transition hover:bg-teal-400"
             >
               <Sparkles className="h-4 w-4" />

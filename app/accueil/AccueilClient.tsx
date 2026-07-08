@@ -1069,7 +1069,7 @@ export default function AccueilPage({
           « le trou de Nathan » : réviser avant la 1re) ──────────────────────── */}
       <section className="px-4 pt-6 sm:px-6 lg:px-8">
         <Link
-          href="/cartes-vacances/vers-la-premiere"
+          href="/cartes-vacances"
           className="group mx-auto flex max-w-4xl flex-col items-center gap-5 overflow-hidden rounded-2xl border border-orange-300/30 bg-gradient-to-br from-orange-400/[0.12] via-violet-400/[0.07] to-lime-400/[0.05] p-6 text-center transition hover:border-orange-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:text-left sm:p-7"
         >
           <div>
@@ -1080,7 +1080,7 @@ export default function AccueilPage({
               🧠 La tête et les jambes 🦵
             </h2>
             <p className="mt-1 text-sm font-semibold text-white/75">
-              Cartes de révision «&nbsp;Vers la 1re&nbsp;» à imprimer : 4 questions
+              Cartes de révision à imprimer (6e &amp; 1re) : 4 questions
               (maths, français, <span className="text-orange-200">sport, nutrition</span>) +
               un défi sport. On révise <span className="text-orange-200">en bougeant</span>. 💪
             </p>

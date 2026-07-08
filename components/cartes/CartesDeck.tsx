@@ -10,7 +10,8 @@ import { Fragment } from "react";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import { ArrowLeft, Download, Scissors, Sparkles, Dumbbell } from "lucide-react";
-import type { CarteDefi } from "@/app/cartes-vacances/vers-la-premiere/data";
+import type { CarteDefi } from "./types";
+import CaptureApresTelechargement from "@/components/cahier/CaptureApresTelechargement";
 
 type MatMeta = { emoji: string; label: string; ring: string; text: string; soft: string };
 const MAT: Record<string, MatMeta> = {
@@ -141,7 +142,7 @@ export default function CartesDeck({
   cartes,
   signupFrom = "cartes",
   partenaire,
-  retourHref = "/cahier-vacances",
+  retourHref = "/cartes-vacances",
 }: {
   niveau: string; // ex "Vers la 1re"
   cartes: CarteDefi[];
@@ -156,6 +157,12 @@ export default function CartesDeck({
 
   return (
     <main className="relative isolate min-h-screen bg-[#f8f6ff] text-slate-800">
+      {/* Capter après l'impression (comme les cahiers), sans mur. */}
+      <CaptureApresTelechargement
+        signupFrom={signupFrom}
+        produitDe="des cartes"
+        coachHref="/accueil#coach"
+      />
       <div className="screen-only border-b border-slate-200 bg-white/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
           <Link

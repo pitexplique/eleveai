@@ -127,6 +127,11 @@ const ROUTES: RouteConfig[] = [
   // jeuxCartesRoutes) → chaque nouvelle classe apparaît toute seule ici.
   { path: "/qui-suis-je-a-imprimer",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
 
+  // ── CARTES DÉFIS « La tête et les jambes » (révision + sport, à imprimer) ───
+  { path: "/cartes-vacances",                   priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
+  { path: "/cartes-vacances/vers-la-premiere",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
+  { path: "/cartes-vacances/vers-la-6e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
+
   // ── ESPACES / AUDIENCES ────────────────────────────────────────────────────
   // Pages d'audience = portes du header et de l'accueil (destinations principales).
   { path: "/parents",         priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
