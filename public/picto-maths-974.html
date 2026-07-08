@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Picto Maths 974 — défis « 1 image, 1 question » à imprimer</title>
+<style>
+  :root {
+    --cyan-600:#0891b2; --cyan-700:#0e7490; --cyan-800:#155e75;
+    --teal-600:#0d9488; --teal-700:#0f766e;
+    --slate-900:#0f172a; --slate-800:#1e293b; --slate-700:#334155;
+    --slate-600:#475569; --slate-500:#64748b; --slate-400:#94a3b8;
+    --slate-300:#cbd5e1; --slate-200:#e2e8f0; --slate-100:#f1f5f9;
+    --amber-700:#b45309;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #f2fbfd;
+    color: var(--slate-700);
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 24px 20px 48px; }
+
+  /* Barre d'outils (écran seulement) */
+  .toolbar {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; justify-content: flex-end;
+    background: rgba(255,255,255,.85); backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--slate-200);
+    padding: 12px 20px;
+  }
+  .print-btn {
+    cursor: pointer; border: 0;
+    background: var(--cyan-600); color: #fff;
+    font-weight: 800; font-size: 14px;
+    padding: 12px 20px; border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(8,145,178,.3);
+  }
+  .print-btn:hover { background: #06b6d4; }
+
+  .page {
+    background: #fff;
+    border: 1px solid var(--slate-200);
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(148,163,184,.28);
+    overflow: hidden;
+    margin-top: 28px;
+  }
+
+  /* Couverture */
+  .cover {
+    text-align: center;
+    padding: 40px 32px;
+    background: linear-gradient(135deg, #ecfeff 0%, #ffffff 50%, #fffbeb 100%);
+    border-radius: 24px;
+  }
+  .cover .volcan { font-size: 64px; line-height: 1; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    border-radius: 999px; font-weight: 800; font-size: 12px;
+    padding: 4px 12px;
+  }
+  .chip-badge { background:#cffafe; color:var(--cyan-700); text-transform:uppercase; letter-spacing:.16em; }
+  .cover h1 {
+    margin: 14px 0 0; font-size: 52px; line-height: 1.05;
+    letter-spacing: -.02em; color: var(--slate-900); font-weight: 900;
+  }
+  .cover h1 .dom {
+    display:inline-block; margin-left:10px; padding:0 12px;
+    background:#fcd34d; color:var(--slate-900); border-radius:16px;
+  }
+  .cover .baseline { margin: 12px 0 0; font-size: 18px; font-weight: 800; color: var(--slate-700); }
+  .cover .look {
+    margin-top: 12px; background:#cffafe; color:var(--cyan-800);
+  }
+  .cover .intro { margin: 16px auto 0; max-width: 560px; font-size: 14px; line-height: 1.6; color: var(--slate-600); font-weight: 600; }
+  .cover .chips { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .cover .chips .chip { font-size: 12px; }
+  .c-cyan { background:#ecfeff; color:var(--cyan-700); }
+  .c-teal { background:#f0fdfa; color:var(--teal-700); }
+  .c-amber{ background:#fffbeb; color:var(--amber-700); }
+
+  /* En-tête d'un défi */
+  .band {
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:12px 24px; color:#fff;
+    background: linear-gradient(90deg, var(--cyan-600), var(--teal-600));
+  }
+  .band .theme { display:inline-flex; align-items:center; gap:8px; font-weight:900; font-size:14px; }
+  .band .theme .emo { font-size:20px; line-height:1; }
+  .band .ref { border:1px solid rgba(255,255,255,.4); border-radius:999px; padding:2px 8px; font-size:11px; font-weight:900; font-variant-numeric: tabular-nums; }
+
+  .body { padding: 24px; display:flex; flex-direction:column; gap:20px; }
+  .lieu { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:900; color:var(--cyan-700); margin:0; }
+  .lieu svg { width:14px; height:14px; }
+  .question { text-align:center; font-size:30px; line-height:1.15; font-weight:900; color:var(--slate-900); margin:0; }
+
+  .ardoise {
+    position:relative; border:2px solid var(--slate-200); background:rgba(248,250,252,.6);
+    border-radius:16px; padding:28px 16px;
+  }
+  .enonce { text-align:center; font-size:14px; font-weight:700; color:var(--slate-600); margin:0 0 20px; }
+
+  /* Scène d'icônes */
+  .scene { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; }
+  .scene-row { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px 12px; }
+  .cell { display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .icons { display:flex; align-items:flex-end; gap:2px; }
+  .icons .emo { font-size:30px; line-height:1; }
+  .icons .more { font-size:24px; font-weight:900; color:var(--slate-400); }
+  .cap { text-align:center; font-size:12px; font-weight:900; color:var(--slate-600); }
+  .val { border:2px solid #67e8f9; background:#ecfeff; color:var(--cyan-800); border-radius:12px; padding:6px 12px; font-size:16px; font-weight:900; }
+  .qm { display:flex; width:44px; height:44px; align-items:center; justify-content:center; border:2px dashed #fbbf24; background:#fffbeb; color:#d97706; border-radius:12px; font-size:24px; font-weight:900; }
+  .op { padding:0 2px; font-size:24px; font-weight:900; color:var(--slate-400); }
+
+  .diagram-cap { text-align:center; font-size:12px; font-weight:900; color:var(--slate-600); margin-top:8px; }
+  .diagram-wrap { display:flex; flex-direction:column; align-items:center; gap:8px; }
+
+  .pistes { display:grid; grid-template-columns: 1fr auto; gap:12px; }
+  .piste { border:1px dashed #fcd34d; background:rgba(255,251,235,.6); border-radius:12px; padding:12px 16px; }
+  .piste .label { margin:0; font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:.03em; color:var(--amber-700); }
+  .piste .txt { margin:4px 0 0; font-size:14px; font-weight:600; line-height:1.35; color:var(--slate-700); }
+  .tags { display:flex; flex-wrap:wrap; gap:8px; align-self:flex-start; }
+  .tag { border-radius:999px; padding:4px 10px; font-size:12px; font-weight:900; }
+  .tag-niv { background:#cffafe; color:var(--cyan-700); }
+  .tag-not { background:#ccfbf1; color:var(--teal-700); }
+
+  .cherche { border:2px dashed var(--slate-200); border-radius:16px; padding:24px 16px; text-align:center; }
+  .cherche p { margin:0; font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:.2em; color:var(--slate-300); }
+
+  .foot { display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--slate-100); padding-top:12px; }
+  .foot .titre { font-size:11px; font-weight:900; text-transform:uppercase; letter-spacing:.03em; color:var(--slate-400); }
+  .foot .num { font-size:11px; font-weight:900; color:var(--slate-400); font-variant-numeric: tabular-nums; }
+
+  /* Corrigés */
+  .corr-head { display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--slate-100); padding:24px 24px 16px; }
+  .corr-head .emo { font-size:24px; }
+  .corr-head h2 { margin:0; font-size:24px; font-weight:900; color:var(--slate-900); }
+  .corr-head p { margin:0; font-size:14px; font-weight:700; color:var(--slate-500); }
+  .corr-list { list-style:none; margin:0; padding:20px 24px 28px; display:flex; flex-direction:column; gap:12px; }
+  .corr-item { border:1px solid var(--slate-100); background:rgba(248,250,252,.6); border-radius:12px; padding:12px 16px; }
+  .corr-q { margin:0; display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:14px; font-weight:900; color:var(--slate-800); }
+  .corr-q .ref { border:1px solid var(--slate-300); border-radius:4px; padding:2px 6px; font-size:11px; color:var(--slate-500); font-variant-numeric: tabular-nums; }
+  .corr-r { margin:6px 0 0; font-size:14px; line-height:1.5; color:var(--slate-700); }
+
+  @media (max-width: 640px) {
+    .pistes { grid-template-columns: 1fr; }
+    .cover h1 { font-size: 40px; }
+    .question { font-size: 24px; }
+  }
+
+  @media print {
+    @page { size: A4; margin: 8mm; }
+    html, body { background:#fff !important; color:#0f172a !important; }
+    .screen-only { display:none !important; }
+    .wrap { max-width:none; padding:0; }
+    .page { break-after: page; page-break-after: always; break-inside: avoid;
+            margin-top:0; border:0; border-radius:0; box-shadow:none; }
+    .page:last-child { break-after:auto; page-break-after:auto; }
+    .cover { min-height: 262mm; border-radius:0; }
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar screen-only">
+    <button class="print-btn" onclick="window.print()">🖨️ Imprimer / PDF</button>
+  </div>
+  <main class="wrap" id="app"></main>
+
+<script>
+/* ------------------------------------------------------------------ */
+/*  Données du livret                                                  */
+/* ------------------------------------------------------------------ */
+const LIVRET = {
+  titre: "Picto Maths",
+  domaine: "974",
+  baseline: "Un dessin, une question — les maths de La Réunion",
+  intro:
+    "Une image, une seule question. On observe, on cherche, on écrit sur l'ardoise. Pas de piège : juste les maths, en vrai, à La Réunion. Les corrigés sont à la fin — on ne les regarde qu'après avoir essayé !",
+};
+
+const PICTOS = [
+  { ref:"PM·01", theme:"Le marché", emoji:"🍒", lieu:"Marché couvert de Saint-Pierre", niveau:"6ᵉ", notion:"Proportionnalité",
+    question:"Combien coûtent 9 kg de letchis ?", enonce:"Sur l'étal, le prix des letchis est le même au kilo.",
+    scene:[[{t:"ic",e:"🍒",n:3,cap:"3 kg"},{t:"op",v:"→"},{t:"val",v:"5 €"}],[{t:"ic",e:"🍒",n:9,cap:"9 kg"},{t:"op",v:"→"},{t:"qm"}]],
+    piste:"Combien de fois 3 kg y a-t-il dans 9 kg ?",
+    reponse:"5 € pour 3 kg. Or 9 kg = 3 × 3 kg, donc 9 kg coûtent 3 × 5 = 15 €." },
+  { ref:"PM·02", theme:"Le cari péi", emoji:"🍗", lieu:"Un kari poulet en famille", niveau:"CM2 → 5ᵉ", notion:"Proportionnalité (recette)",
+    question:"Et pour 10 personnes ?", enonce:"Recette du kari poulet pour 4 personnes :",
+    scene:[[{t:"ic",e:"🍚",cap:"500 g de riz"},{t:"ic",e:"🍗",n:4,cap:"8 cuisses"},{t:"ic",e:"🍅",n:3,cap:"3 tomates"}],[{t:"val",v:"pour 4 pers."},{t:"op",v:"→"},{t:"qm",cap:"pour 10 pers."}]],
+    piste:"Par combien passe-t-on de 4 à 10 personnes ?",
+    reponse:"On multiplie tout par 10 ÷ 4 = 2,5. Riz : 500 × 2,5 = 1 250 g. Cuisses : 8 × 2,5 = 20. Tomates : 3 × 2,5 = 7,5 → on arrondit à 8 tomates." },
+  { ref:"PM·03", theme:"Le volcan", emoji:"🌋", lieu:"Coulée du Piton de la Fournaise", niveau:"4ᵉ · 3ᵉ", notion:"Vitesse · durée",
+    question:"Quand la lave atteint-elle la route ?", enonce:"La coulée avance à vitesse régulière et se dirige vers la route.",
+    scene:[[{t:"ic",e:"🌋",cap:"300 m en 2 h"},{t:"op",v:"→"},{t:"ic",e:"🛣️",cap:"route"}],[{t:"val",v:"distance à parcourir : 1,5 km"}]],
+    piste:"Combien de mètres la lave avance-t-elle en 1 heure ?",
+    reponse:"Vitesse : 300 m en 2 h = 150 m/h. 1,5 km = 1 500 m. Temps : 1 500 ÷ 150 = 10 h." },
+  { ref:"PM·04", theme:"Les cars jaunes", emoji:"🚌", lieu:"Saint-Pierre ↔ Saint-Denis", niveau:"3ᵉ", notion:"Vitesse · rencontre",
+    question:"Au bout de combien de temps se croisent-ils ?", enonce:"Deux cars partent en même temps, l'un vers l'autre.",
+    scene:[[{t:"ic",e:"🚌",cap:"40 km/h"},{t:"op",v:"→"},{t:"val",v:"60 km"},{t:"op",v:"←"},{t:"ic",e:"🚌",cap:"50 km/h"}]],
+    piste:"De combien de km l'écart entre les deux cars diminue-t-il chaque heure ?",
+    reponse:"Ils se rapprochent de 40 + 50 = 90 km chaque heure. Temps : 60 ÷ 90 = 2/3 h = 40 minutes." },
+  { ref:"PM·05", theme:"Les baleines", emoji:"🐋", lieu:"Baleines à bosse au large de l'Ouest", niveau:"5ᵉ", notion:"Fraction d'une grandeur",
+    question:"Combien mesure le baleineau ?", enonce:"Le baleineau mesure les 2/7 de la taille de sa mère.",
+    scene:[[{t:"ic",e:"🐋",cap:"maman : 14 m"}],[{t:"ic",e:"🐳",cap:"baleineau : 2/7"},{t:"op",v:"→"},{t:"qm"}]],
+    piste:"Combien mesure 1/7 de 14 m ?",
+    reponse:"1/7 de 14 m = 2 m. Donc 2/7 de 14 m = 2 × 2 = 4 m." },
+  { ref:"PM·06", theme:"Le Grand Raid", emoji:"🏃", lieu:"La Diagonale des Fous", niveau:"3ᵉ", notion:"Vitesse moyenne",
+    question:"Quelle est sa vitesse moyenne ?", enonce:"Un coureur boucle la Diagonale des Fous sans s'arrêter.",
+    scene:[[{t:"ic",e:"🏃",cap:"165 km"},{t:"op",v:"→"},{t:"ic",e:"⛰️",cap:"en 55 h"}]],
+    piste:"Vitesse moyenne = distance ÷ durée.",
+    reponse:"165 ÷ 55 = 3 km/h de moyenne (marche + course en montagne)." },
+  { ref:"PM·07", theme:"Le snack", emoji:"🥟", lieu:"Un snack de bord de route", niveau:"4ᵉ · 3ᵉ", notion:"Dénombrement",
+    question:"Combien de samoussas différents peut-on composer ?", enonce:"On choisit 1 garniture, 1 pâte et 1 sauce.",
+    scene:[[{t:"ic",e:"🥟",n:3,cap:"3 garnitures"},{t:"op",v:"×"},{t:"ic",e:"📄",n:2,cap:"2 pâtes"},{t:"op",v:"×"},{t:"ic",e:"🌶️",n:2,cap:"2 sauces"}]],
+    piste:"Pour chaque garniture, combien de pâtes possibles ? puis de sauces ?",
+    reponse:"3 × 2 × 2 = 12 samoussas différents." },
+  { ref:"PM·08", theme:"La balance", emoji:"⚖️", lieu:"Peser les fruits péi", niveau:"6ᵉ · 5ᵉ", notion:"Masses · équilibre",
+    question:"Quelle masse d'ananas équilibre la balance ?", enonce:"La balance doit être en équilibre : les deux plateaux pèsent pareil.",
+    scene:[[{t:"ic",e:"🍌",cap:"1,2 kg"},{t:"ic",e:"🫙",cap:"720 g"},{t:"ic",e:"🪨",cap:"80 g"}],[{t:"op",v:"="}],[{t:"ic",e:"🥭",cap:"0,9 kg"},{t:"ic",e:"📦",cap:"650 g"},{t:"ic",e:"🍯",cap:"270 g"},{t:"ic",e:"🍍",cap:"?"}]],
+    piste:"Convertis tout en grammes, puis compare les deux plateaux.",
+    reponse:"Plateau gauche : 1 200 + 720 + 80 = 2 000 g. Plateau droit connu : 900 + 650 + 270 = 1 820 g. L'ananas : 2 000 − 1 820 = 180 g." },
+  { ref:"PM·09", theme:"La canne à sucre", emoji:"🌾", lieu:"Un champ de cannes de l'Est", niveau:"4ᵉ · 3ᵉ", notion:"Pourcentage",
+    question:"Combien de tonnes de sucre récolte le planteur ?", enonce:"Le rendement en sucre des cannes est de 11 %.",
+    scene:[[{t:"ic",e:"🌾",cap:"60 t de cannes"},{t:"op",v:"→"},{t:"val",v:"11 %"},{t:"op",v:"→"},{t:"ic",e:"🍬",cap:"?"}]],
+    piste:"11 %, c'est 11 pour 100 : combien pour 60 tonnes ?",
+    reponse:"60 × 11 ÷ 100 = 6,6 t de sucre." },
+  { ref:"PM·10", theme:"Le bassin bleu", emoji:"💧", lieu:"Un bassin sous la cascade", niveau:"4ᵉ · 3ᵉ", notion:"Volume · débit",
+    question:"En combien de temps le bassin est-il plein ?", enonce:"Un tuyau remplit le bassin à débit constant.",
+    scene:[[{t:"ic",e:"🟦",cap:"3 m × 2 m × 1,5 m"}],[{t:"ic",e:"💧",cap:"900 L/h"},{t:"op",v:"→"},{t:"qm"}]],
+    piste:"1 m³ = 1 000 L. Quel est le volume du bassin en litres ?",
+    reponse:"Volume : 3 × 2 × 1,5 = 9 m³ = 9 000 L. Temps : 9 000 ÷ 900 = 10 h." },
+  { ref:"PM·11", theme:"La cour créole", emoji:"🐐", lieu:"Une basse-cour péi", niveau:"4ᵉ · 3ᵉ", notion:"Systèmes · logique",
+    question:"Combien de cabris ? Combien de poules ?", enonce:"Dans la cour, il n'y a que des cabris (4 pattes) et des poules (2 pattes).",
+    scene:[[{t:"ic",e:"🐐",cap:"cabris"},{t:"ic",e:"🐔",cap:"poules"}],[{t:"val",v:"12 têtes"},{t:"op",v:"·"},{t:"val",v:"34 pattes"}]],
+    piste:"Si c'étaient 12 poules, il y aurait 24 pattes. D'où viennent les pattes en trop ?",
+    reponse:"12 têtes → 12 animaux. Si tous étaient des poules : 24 pattes. Il manque 34 − 24 = 10 pattes, soit 5 pattes en plus × 2 = 5 cabris (chaque cabri ajoute 2 pattes). Donc 5 cabris et 7 poules." },
+  { ref:"PM·12", theme:"Le tapis vacoa", emoji:"🧺", lieu:"Un tapis tressé en feuilles de vacoa", niveau:"6ᵉ · 5ᵉ", notion:"Aire · périmètre",
+    question:"Quelle est son aire ? Quel est son périmètre ?", enonce:"Le tapis est un rectangle.",
+    scene:[[{t:"ic",e:"🧺",cap:"1,2 m × 0,8 m"}]],
+    piste:"Aire = longueur × largeur. Périmètre = on fait le tour.",
+    reponse:"Aire : 1,2 × 0,8 = 0,96 m². Périmètre : 2 × (1,2 + 0,8) = 4 m." },
+  { ref:"PM·13", theme:"Les letchis en paquets", emoji:"🍒", lieu:"Trier la récolte de letchis", niveau:"3ᵉ", notion:"Division · restes",
+    question:"Combien ai-je de letchis ?", enonce:"J'ai moins de 50 letchis.",
+    scene:[[{t:"ic",e:"🍒",n:5,cap:"paquets de 5"},{t:"op",v:"→"},{t:"val",v:"reste 2"}],[{t:"ic",e:"🍒",n:7,cap:"paquets de 7"},{t:"op",v:"→"},{t:"val",v:"reste 3"}]],
+    piste:"Cherche les nombres < 50 qui donnent un reste de 3 dans les paquets de 7, puis teste les paquets de 5.",
+    reponse:"Reste 3 avec des paquets de 7 : 3, 10, 17, 24, 31, 38, 45. Parmi eux, reste 2 avec des paquets de 5 : 17 (17 = 3×5 + 2 et 17 = 2×7 + 3). Il y a 17 letchis." },
+  { ref:"PM·14", theme:"Le jardin créole", emoji:"🌺", lieu:"Un jardin créole carré", niveau:"5ᵉ · 4ᵉ", notion:"Raisonnement · aires",
+    question:"En combien de parcelles carrées peut-on le partager ?",
+    enonce:"On partage un jardin carré en parcelles carrées (pas forcément de la même taille). Exemple ci-dessous : 6 parcelles. Pour quels nombres de parcelles est-ce possible ?",
+    scene:[], diagram:"carres",
+    piste:"Essaie 4, puis 6, 7, 8, 9… Y a-t-il des petits nombres impossibles ? Astuce : découper une parcelle en 4 en ajoute 3.",
+    reponse:"C'est possible pour 1, 4, 6, 7, 8, 9… en fait pour tout nombre SAUF 2, 3 et 5. Astuce clé : dès qu'on sait faire n parcelles, on en découpe une en 4 pour en obtenir n + 3. En partant de 4, 6 et 7, on atteint ainsi tous les nombres à partir de 6." },
+  { ref:"PM·15", theme:"Le chat et la tortue", emoji:"🐱", lieu:"Sur la varangue", niveau:"4ᵉ · 3ᵉ", notion:"Raisonnement · longueurs",
+    question:"Quelle est la hauteur de la table ?",
+    enonce:"La table est la même des deux côtés. Chaque mesure va du haut de l'animal posé sur la table jusqu'au haut de l'animal resté au sol.",
+    scene:[], diagram:"table",
+    piste:"Additionne les deux mesures. Que deviennent la taille du chat et celle de la tortue ?",
+    reponse:"Chaque mesure = hauteur de la table + (taille de l'animal du haut) − (taille de l'animal du bas). En additionnant les deux, les tailles du chat et de la tortue s'annulent : 130 + 50 = 2 × hauteur de la table. La table mesure (130 + 50) ÷ 2 = 90 cm." },
+  { ref:"PM·16", theme:"La tenue de séga", emoji:"👕", lieu:"Se préparer pour le kabar", niveau:"4ᵉ · 3ᵉ", notion:"Dénombrement",
+    question:"Combien de tenues différentes peut-elle composer ?", enonce:"Pour la fête, Maya choisit 1 haut, 1 bas et 1 fleur.",
+    scene:[[{t:"ic",e:"👕",n:3,cap:"3 hauts"},{t:"op",v:"×"},{t:"ic",e:"👖",n:2,cap:"2 bas"},{t:"op",v:"×"},{t:"ic",e:"🌺",n:3,cap:"3 fleurs"}]],
+    piste:"Pour chaque haut, combien de bas possibles ? Et pour chacun, combien de fleurs ?",
+    reponse:"3 × 2 × 3 = 18 tenues différentes." },
+  { ref:"PM·17", theme:"Le potager carré", emoji:"🥬", lieu:"Un potager créole carré", niveau:"6ᵉ · 5ᵉ", notion:"Aire · périmètre",
+    question:"Quelle est son aire ?", enonce:"Un potager carré est entouré de 40 m de grillage.",
+    scene:[[{t:"ic",e:"🟩",cap:"carré · grillage 40 m"},{t:"op",v:"→"},{t:"qm",cap:"aire ?"}]],
+    piste:"Les 40 m de grillage font tout le tour du carré. Combien mesure un côté ?",
+    reponse:"Le tour du carré (périmètre) = 40 m, donc un côté = 40 ÷ 4 = 10 m. Aire = 10 × 10 = 100 m²." },
+  { ref:"PM·18", theme:"Le carton de mangues", emoji:"🥭", lieu:"Expédier des mangues péi", niveau:"3ᵉ", notion:"Volume · aires",
+    question:"Quel est le volume du carton ?",
+    enonce:"Le carton est un pavé droit. On connaît l'aire de ses trois faces : 135 cm², 60 cm² et 36 cm².",
+    scene:[], diagram:"boite",
+    piste:"Multiplie les aires des trois faces entre elles. Que reconnais-tu par rapport au volume ?",
+    reponse:"Avec les arêtes a, b, c : a×b = 135, a×c = 60, b×c = 36. Le produit des trois aires vaut (a×b×c)² = 135 × 60 × 36 = 291 600. Donc le volume a×b×c = √291 600 = 540 cm³ (le carton mesure 15 × 9 × 4 cm)." },
+  { ref:"PM·19", theme:"Le carré magique", emoji:"✨", lieu:"Casse-tête créole", niveau:"5ᵉ · 4ᵉ", notion:"Fractions · logique",
+    question:"Quelle est la somme d'une ligne ? Complète le carré.",
+    enonce:"Carré magique : chaque ligne, chaque colonne et chaque diagonale ont la même somme. Astuce : la case du centre vaut le tiers de cette somme.",
+    scene:[], diagram:"carremagique",
+    piste:"La case du centre vaut 1/3, soit le tiers de la somme d'une ligne. Quelle est donc cette somme ?",
+    reponse:"La case centrale (1/3) vaut le tiers de la somme d'une ligne, donc chaque ligne fait 3 × 1/3 = 1. On complète : ligne du haut 2/9 · 5/9 · 2/9 ; ligne du milieu 1/3 · 1/3 · 1/3 ; ligne du bas 4/9 · 1/9 · 4/9. Chaque ligne, colonne et diagonale fait bien 1." },
+  { ref:"PM·20", theme:"Les crayons de couleur", emoji:"🖍️", lieu:"Trier sa trousse à la récré", niveau:"3ᵉ", notion:"Division · restes",
+    question:"Combien ai-je de crayons ?", enonce:"J'ai moins de 50 crayons.",
+    scene:[[{t:"ic",e:"🖍️",n:5,cap:"paquets de 5"},{t:"op",v:"→"},{t:"val",v:"reste 3"}],[{t:"ic",e:"🖍️",n:7,cap:"paquets de 7"},{t:"op",v:"→"},{t:"val",v:"reste 5"}]],
+    piste:"Cherche les nombres < 50 qui laissent un reste de 5 en paquets de 7, puis regarde les paquets de 5.",
+    reponse:"Reste 5 avec des paquets de 7 : 5, 12, 19, 26, 33, 40, 47. Parmi eux, reste 3 avec des paquets de 5 : 33 (33 = 6×5 + 3 et 33 = 4×7 + 5). Il y a 33 crayons." },
+  { ref:"PM·21", theme:"Le vélo", emoji:"🚴", lieu:"Dans la montée de Cilaos", niveau:"4ᵉ · 3ᵉ", notion:"Proportionnalité inverse",
+    question:"Quand tu fais 1 tour de pédales, combien de tours fait la roue ?",
+    enonce:"Le plateau (aux pédales) a 30 dents, le pignon (sur la roue arrière) en a 10.",
+    scene:[], diagram:"engrenages",
+    piste:"Les mêmes dents défilent des deux côtés. Le pignon en a-t-il plus ou moins que le plateau ?",
+    reponse:"Les mêmes dents défilent des deux côtés. Un tour de plateau (30 dents) fait défiler 30 dents ; le pignon (10 dents) tourne donc 30 ÷ 10 = 3 fois. La roue fait 3 tours — c'est pour ça qu'un tour de pédales fait bien avancer. (Moins de dents = tourne plus vite : proportionnalité inverse. On garde un grand pignon pour monter à Cilaos.)" },
+  { ref:"PM·22", theme:"L'eau en rando", emoji:"🥾", lieu:"En rando à Mafate", niveau:"6ᵉ · 5ᵉ", notion:"Fractions · esprit critique",
+    question:"Y a-t-il une réponse fausse ?",
+    enonce:"En rando à Mafate, j'emporte 3 bouteilles d'eau. J'en ai bu le tiers. Maya et Noé colorient ce qui est bu — mais pas de la même façon.",
+    scene:[], diagram:"bouteilles",
+    piste:"Compte la quantité d'eau coloriée dans chaque cas : cela fait combien de bouteilles en tout ?",
+    reponse:"Le tiers de 3 bouteilles = 3 × 1/3 = 1 bouteille. Maya a regroupé le tout dans 1 bouteille pleine ; Noé l'a réparti (1/3 dans chacune des 3). Les deux montrent la même quantité : il n'y a pas de réponse fausse !" },
+  { ref:"PM·23", theme:"Le cœur à l'effort", emoji:"❤️", lieu:"À l'entraînement de foot", niveau:"4ᵉ · 3ᵉ", notion:"Pourcentage",
+    question:"À combien doit battre ton cœur pour progresser en endurance ?",
+    enonce:"Ta fréquence cardiaque maximale ≈ 220 − ton âge. Pour l'endurance, on vise 70 % de ce maximum. Tu as 14 ans.",
+    scene:[[{t:"ic",e:"❤️",cap:"FC max = 220 − 14"},{t:"op",v:"→"},{t:"val",v:"206 bpm"}],[{t:"val",v:"70 %"},{t:"op",v:"×"},{t:"val",v:"206"},{t:"op",v:"→"},{t:"qm",cap:"cible ?"}]],
+    piste:"Calcule d'abord ton maximum (220 − 14), puis prends-en 70 %.",
+    reponse:"FC max ≈ 220 − 14 = 206 battements par minute. Zone d'endurance = 70 % → 0,70 × 206 ≈ 144 bpm. En dessous c'est trop facile, très au-dessus tu t'épuises — chacun son rythme, on écoute son corps sans se juger." },
+  { ref:"PM·24", theme:"Le chocolat chaud", emoji:"🍫", lieu:"Un chocolat chaud sur les hauts", niveau:"5ᵉ · 4ᵉ", notion:"Proportions · fractions",
+    question:"Quel mélange a le plus le goût de chocolat ?",
+    enonce:"On mélange des doses de chocolat (marron) et de lait (blanc). Attention : les deux mélanges n'ont pas le même nombre de doses !",
+    scene:[], diagram:"chocolat",
+    piste:"Regarde la part de chocolat dans chaque mélange : combien de doses de chocolat sur le total ?",
+    reponse:"Mélange A : 3 doses de chocolat sur 5 = 3/5 = 60 %. Mélange B : 2 sur 3 = 2/3 ≈ 67 %. Comme 2/3 > 3/5 (soit 10/15 > 9/15), c'est le mélange B qui a le plus le goût de chocolat." },
+  { ref:"PM·25", theme:"Le thermomètre des hauts", emoji:"🌡️", lieu:"Au Piton des Neiges, quand ça gèle", niveau:"5ᵉ", notion:"Nombres relatifs · axe gradué",
+    question:"Où placer le 0 °C (là où l'eau gèle) ?",
+    enonce:"Sur ce thermomètre gradué, on a repéré −4 °C (point A) et 2 °C (point B). Place le 0 °C.",
+    scene:[], diagram:"axe",
+    piste:"Compte les graduations entre A (−4) et B (2). Puis avance de 4 graduations depuis A.",
+    reponse:"De A (−4 °C) à B (2 °C) il y a 6 degrés, une graduation par degré. Le 0 est 4 graduations à droite de A (ou 2 graduations à gauche de B). C'est là que l'eau gèle — et ça arrive vraiment au sommet du Piton des Neiges !" },
+];
+
+/* ------------------------------------------------------------------ */
+/*  Petits utilitaires                                                 */
+/* ------------------------------------------------------------------ */
+const el = (html) => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstElementChild; };
+const cap = (c) => c.cap ? `<span class="cap">${c.cap}</span>` : "";
+
+/* ------------------------------------------------------------------ */
+/*  Rendu d'une cellule / scène d'icônes                               */
+/* ------------------------------------------------------------------ */
+function cellule(c) {
+  if (c.t === "ic") {
+    const shown = Math.min(c.n || 1, 6);
+    let emos = "";
+    for (let i = 0; i < shown; i++) emos += `<span class="emo">${c.e}</span>`;
+    if ((c.n || 1) > shown) emos += `<span class="more">…</span>`;
+    return `<div class="cell"><div class="icons">${emos}</div>${cap(c)}</div>`;
+  }
+  if (c.t === "val") return `<div class="cell"><span class="val">${c.v}</span>${cap(c)}</div>`;
+  if (c.t === "qm")  return `<div class="cell"><span class="qm">?</span>${cap(c)}</div>`;
+  return `<span class="op">${c.v}</span>`; // op
+}
+function scene(rows) {
+  return `<div class="scene">${rows.map(r => `<div class="scene-row">${r.map(cellule).join("")}</div>`).join("")}</div>`;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Schémas dessinés (SVG)                                             */
+/* ------------------------------------------------------------------ */
+function diaCarres() {
+  const U = 34;
+  const units = [[2,0],[2,1],[2,2],[0,2],[1,2]];
+  const rects = units.map(([x,y]) => `<rect x="${x*U}" y="${y*U}" width="${U}" height="${U}" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>`).join("");
+  return `<div class="diagram-wrap">
+    <svg viewBox="0 0 102 102" style="height:176px;width:176px" role="img" aria-label="Un jardin carré partagé en 6 parcelles carrées">
+      <rect x="0" y="0" width="${2*U}" height="${2*U}" fill="#d1fae5" stroke="#047857" stroke-width="2"/>
+      ${rects}
+      <rect x="1" y="1" width="100" height="100" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+    </svg>
+    <span class="diagram-cap">Exemple : 6 parcelles carrées</span>
+  </div>`;
+}
+function diaTable() {
+  return `<div class="diagram-wrap">
+    <svg viewBox="0 0 350 210" style="width:100%;max-width:420px" role="img" aria-label="Deux tables identiques : à gauche le chat sur la table et la tortue au sol (130 cm), à droite la tortue sur la table et le chat au sol (50 cm)">
+      <g fill="#1e293b">
+        <rect x="25" y="118" width="110" height="6" rx="2"/>
+        <rect x="74" y="124" width="6" height="54"/>
+        <rect x="45" y="178" width="64" height="6" rx="2"/>
+      </g>
+      <text x="80" y="114" font-size="26" text-anchor="middle">🐱</text>
+      <text x="92" y="177" font-size="20" text-anchor="middle">🐢</text>
+      <g stroke="#0891b2" stroke-width="2" fill="none"><path d="M150 90 h-8 M150 90 V180 M150 180 h-8"/></g>
+      <text x="150" y="84" font-size="13" font-weight="800" text-anchor="middle" fill="#0e7490">130 cm</text>
+      <g fill="#1e293b">
+        <rect x="200" y="118" width="110" height="6" rx="2"/>
+        <rect x="249" y="124" width="6" height="54"/>
+        <rect x="220" y="178" width="64" height="6" rx="2"/>
+      </g>
+      <text x="255" y="114" font-size="22" text-anchor="middle">🐢</text>
+      <text x="272" y="206" font-size="26" text-anchor="middle">🐱</text>
+      <g stroke="#0891b2" stroke-width="2" fill="none"><path d="M322 100 h-8 M322 100 V152 M322 152 h-8"/></g>
+      <text x="322" y="94" font-size="13" font-weight="800" text-anchor="middle" fill="#0e7490">50 cm</text>
+      <line x1="10" y1="186" x2="340" y2="186" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+    </svg>
+    <span class="diagram-cap">La table est la même des deux côtés.</span>
+  </div>`;
+}
+function diaBoite() {
+  return `<div class="diagram-wrap">
+    <svg viewBox="0 0 300 220" style="width:100%;max-width:360px" role="img" aria-label="Un carton (pavé droit) avec l'aire de ses trois faces : 135 cm² de face, 60 cm² sur le dessus, 36 cm² sur le côté">
+      <polygon points="40,110 200,110 245,78 85,78" fill="#475569" stroke="#0f172a" stroke-width="2" stroke-linejoin="round"/>
+      <polygon points="200,110 245,78 245,168 200,200" fill="#334155" stroke="#0f172a" stroke-width="2" stroke-linejoin="round"/>
+      <rect x="40" y="110" width="160" height="90" fill="#0f172a" stroke="#0f172a" stroke-width="2"/>
+      <text x="120" y="160" font-size="22" font-weight="800" text-anchor="middle" fill="#fff">135 cm²</text>
+      <text x="143" y="99" font-size="13" font-weight="800" text-anchor="middle" fill="#fff">60 cm²</text>
+      <text x="222" y="140" font-size="13" font-weight="800" text-anchor="middle" fill="#fff">36 cm²</text>
+    </svg>
+    <span class="diagram-cap">L'aire des trois faces du carton</span>
+  </div>`;
+}
+function frac(cx, cy, n, d) {
+  return `<g fill="#1e293b">
+    <text x="${cx}" y="${cy-3}" font-size="13" font-weight="800" text-anchor="middle">${n}</text>
+    <line x1="${cx-9}" y1="${cy+1}" x2="${cx+9}" y2="${cy+1}" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="${cx}" y="${cy+15}" font-size="13" font-weight="800" text-anchor="middle">${d}</text>
+  </g>`;
+}
+function diaCarreMagique() {
+  const O = 8, C = 44;
+  const ctr = [O+C/2, O+C+C/2, O+2*C+C/2];
+  return `<div class="diagram-wrap">
+    <svg viewBox="0 0 160 172" style="height:208px;width:208px" role="img" aria-label="Carré magique 3 sur 3 de fractions : centre 1/3, milieu-droite 1/3, bas-gauche 4/9, les autres cases sont à compléter">
+      <g fill="none" stroke="#1e293b" stroke-width="2">
+        <rect x="${O}" y="${O}" width="${3*C}" height="${3*C}"/>
+        <line x1="${O+C}" y1="${O}" x2="${O+C}" y2="${O+3*C}"/>
+        <line x1="${O+2*C}" y1="${O}" x2="${O+2*C}" y2="${O+3*C}"/>
+        <line x1="${O}" y1="${O+C}" x2="${O+3*C}" y2="${O+C}"/>
+        <line x1="${O}" y1="${O+2*C}" x2="${O+3*C}" y2="${O+2*C}"/>
+      </g>
+      ${frac(ctr[1],ctr[1],1,3)}
+      ${frac(ctr[2],ctr[1],1,3)}
+      ${frac(ctr[0],ctr[2],4,9)}
+    </svg>
+    <span class="diagram-cap">Complète les cases vides.</span>
+  </div>`;
+}
+function gear(cx, cy, r, teeth, fill, stroke, hubFill, rot) {
+  const th = Math.max(6, Math.round(r*0.2));
+  const tw = Math.max(4, ((2*Math.PI*r)/teeth)*0.55);
+  let dents = "";
+  for (let i = 0; i < teeth; i++) {
+    dents += `<rect x="${cx-tw/2}" y="${cy-r-th}" width="${tw}" height="${th+3}" rx="1" transform="rotate(${(360/teeth)*i} ${cx} ${cy})"/>`;
+  }
+  return `<g fill="${fill}" stroke="${stroke}" stroke-width="1.5" stroke-linejoin="round"${rot?` transform="rotate(${rot} ${cx} ${cy})"`:""}>
+    ${dents}
+    <circle cx="${cx}" cy="${cy}" r="${r}"/>
+    <circle cx="${cx}" cy="${cy}" r="${r*0.3}" fill="${hubFill}" stroke="${stroke}" stroke-width="1.5"/>
+  </g>`;
+}
+function diaEngrenages() {
+  return `<div class="diagram-wrap">
+    <svg viewBox="0 0 225 200" style="width:100%;max-width:360px" role="img" aria-label="Deux roues dentées qui engrènent : la grande B a 30 dents, la petite A a 10 dents">
+      ${gear(82,105,50,30,"#fcd34d","#d97706","#fff",0)}
+      ${gear(164,105,18,10,"#fda4af","#e11d48","#fff",18)}
+      <text x="82" y="111" font-size="17" font-weight="800" text-anchor="middle" fill="#92400e">B</text>
+      <text x="164" y="110" font-size="12" font-weight="800" text-anchor="middle" fill="#9f1239">A</text>
+      <text x="82" y="180" font-size="13" font-weight="800" text-anchor="middle" fill="#334155">30 dents</text>
+      <text x="164" y="150" font-size="12" font-weight="800" text-anchor="middle" fill="#334155">10 dents</text>
+      <text x="82" y="38" font-size="13" font-weight="800" text-anchor="middle" fill="#b45309">↻ 1 tour</text>
+      <text x="164" y="72" font-size="12" font-weight="800" text-anchor="middle" fill="#be123c">↻ ? tours</text>
+    </svg>
+    <span class="diagram-cap">Les deux roues engrènent.</span>
+  </div>`;
+}
+function bouteille(x, fill) {
+  const bodyY = 32, bodyH = 46, waterH = bodyH*fill;
+  return `<g>
+    <rect x="${x+6}" y="22" width="6" height="12" fill="#fff" stroke="#64748b" stroke-width="1.5"/>
+    <rect x="${x}" y="${bodyY}" width="18" height="${bodyH}" rx="4" fill="#fff" stroke="#64748b" stroke-width="1.5"/>
+    ${fill>0?`<rect x="${x+1.5}" y="${bodyY+bodyH-waterH}" width="15" height="${waterH}" rx="2" fill="#38bdf8"/>`:""}
+  </g>`;
+}
+function diaBouteilles() {
+  const t = 1/3;
+  return `<div class="diagram-wrap">
+    <svg viewBox="0 0 236 120" style="width:100%;max-width:420px" role="img" aria-label="Deux réponses : Maya colorie 1 bouteille entière sur 3 ; Noé colorie le tiers de chacune des 3 bouteilles">
+      ${bouteille(16,1)}${bouteille(42,0)}${bouteille(68,0)}
+      <text x="53" y="104" font-size="12" font-weight="800" text-anchor="middle" fill="#334155">Maya</text>
+      <line x1="120" y1="20" x2="120" y2="88" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+      ${bouteille(150,t)}${bouteille(176,t)}${bouteille(202,t)}
+      <text x="185" y="104" font-size="12" font-weight="800" text-anchor="middle" fill="#334155">Noé</text>
+    </svg>
+    <span class="diagram-cap">Le bleu = l'eau déjà bue.</span>
+  </div>`;
+}
+function verre(x, kind) {
+  const topY = 30, w = 20, h = 32, inset = 3;
+  const f = kind === "choc" ? "#92400e" : "#fffbeb";
+  const s = kind === "choc" ? "#78350f" : "#94a3b8";
+  return `<path d="M${x},${topY} L${x+w},${topY} L${x+w-inset},${topY+h} L${x+inset},${topY+h} Z" fill="${f}" stroke="${s}" stroke-width="1.5" stroke-linejoin="round"/>`;
+}
+function diaChocolat() {
+  const A = ["choc","choc","choc","lait","lait"];
+  const B = ["choc","choc","lait"];
+  return `<div class="diagram-wrap">
+    <svg viewBox="0 0 232 96" style="width:100%;max-width:420px" role="img" aria-label="Mélange A : 3 verres de chocolat et 2 de lait. Mélange B : 2 verres de chocolat et 1 de lait.">
+      ${A.map((k,i)=>verre(8+i*22,k)).join("")}
+      <text x="55" y="80" font-size="12" font-weight="800" text-anchor="middle" fill="#334155">Mélange A</text>
+      <line x1="128" y1="22" x2="128" y2="68" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/>
+      ${B.map((k,i)=>verre(140+i*22,k)).join("")}
+      <text x="173" y="80" font-size="12" font-weight="800" text-anchor="middle" fill="#334155">Mélange B</text>
+    </svg>
+    <span class="diagram-cap">Marron = chocolat · blanc = lait</span>
+  </div>`;
+}
+function diaAxe() {
+  const y = 56, x0 = 40, u = 16;
+  const xOf = (v) => x0 + (v+5)*u;
+  let ticks = "";
+  for (let v = -5; v <= 5; v++) ticks += `<line x1="${xOf(v)}" y1="${y-5}" x2="${xOf(v)}" y2="${y+5}" stroke="#cbd5e1" stroke-width="1.5"/>`;
+  return `<div class="diagram-wrap">
+    <svg viewBox="0 0 240 100" style="width:100%;max-width:420px" role="img" aria-label="Axe gradué horizontal : le point A est à −4, le point B est à 2 ; il faut placer le 0.">
+      ${ticks}
+      <line x1="20" y1="${y}" x2="224" y2="${y}" stroke="#1e293b" stroke-width="2"/>
+      <path d="M224,${y} l-8,-4 v8 Z" fill="#1e293b"/>
+      <line x1="${xOf(-4)}" y1="${y-12}" x2="${xOf(-4)}" y2="${y+12}" stroke="#d97706" stroke-width="2.5"/>
+      <text x="${xOf(-4)}" y="${y-18}" font-size="13" font-weight="800" text-anchor="middle" fill="#b45309">A</text>
+      <text x="${xOf(-4)}" y="${y+28}" font-size="12" font-weight="800" text-anchor="middle" fill="#334155">−4 °C</text>
+      <line x1="${xOf(2)}" y1="${y-12}" x2="${xOf(2)}" y2="${y+12}" stroke="#0891b2" stroke-width="2.5"/>
+      <text x="${xOf(2)}" y="${y-18}" font-size="13" font-weight="800" text-anchor="middle" fill="#0e7490">B</text>
+      <text x="${xOf(2)}" y="${y+28}" font-size="12" font-weight="800" text-anchor="middle" fill="#334155">2 °C</text>
+    </svg>
+    <span class="diagram-cap">Où placer le 0 ?</span>
+  </div>`;
+}
+const DIAGRAMS = { carres:diaCarres, table:diaTable, boite:diaBoite, carremagique:diaCarreMagique, engrenages:diaEngrenages, bouteilles:diaBouteilles, chocolat:diaChocolat, axe:diaAxe };
+
+/* ------------------------------------------------------------------ */
+/*  Rendu d'une page-défi                                              */
+/* ------------------------------------------------------------------ */
+function pagePicto(p, index, total) {
+  const illustration = p.diagram ? DIAGRAMS[p.diagram]() : scene(p.scene);
+  return `<section class="page">
+    <header class="band">
+      <span class="theme"><span class="emo">${p.emoji}</span>${p.theme}</span>
+      <span class="ref">${p.ref}</span>
+    </header>
+    <div class="body">
+      <p class="lieu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>${p.lieu}</p>
+      <h2 class="question">${p.question}</h2>
+      <div class="ardoise">
+        ${p.enonce ? `<p class="enonce">${p.enonce}</p>` : ""}
+        ${illustration}
+      </div>
+      <div class="pistes">
+        <div class="piste">
+          <p class="label">💡 Un coup de pouce</p>
+          <p class="txt">${p.piste}</p>
+        </div>
+        <div class="tags">
+          <span class="tag tag-niv">${p.niveau}</span>
+          <span class="tag tag-not">${p.notion}</span>
+        </div>
+      </div>
+      <div class="cherche"><p>Mon ardoise — je cherche ici</p></div>
+      <div class="foot">
+        <span class="titre">${LIVRET.titre} · ${LIVRET.domaine}</span>
+        <span class="num">Défi ${index+1} / ${total}</span>
+      </div>
+    </div>
+  </section>`;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Couverture + corrigés                                              */
+/* ------------------------------------------------------------------ */
+function cover() {
+  return `<section class="page cover">
+    <span class="volcan">🌋</span>
+    <p class="chip chip-badge">✦ Défis à imprimer</p>
+    <h1>${LIVRET.titre}<span class="dom">${LIVRET.domaine}</span></h1>
+    <p class="baseline">${LIVRET.baseline}</p>
+    <p class="chip look">👀 Regarde le dessin… et cherche !</p>
+    <p class="intro">${LIVRET.intro}</p>
+    <div class="chips">
+      <span class="chip c-cyan">${PICTOS.length} défis</span>
+      <span class="chip c-teal">CM2 → 3ᵉ</span>
+      <span class="chip c-amber">1 image · 1 question</span>
+    </div>
+  </section>`;
+}
+function corriges() {
+  const items = PICTOS.map(p => `<li class="corr-item">
+    <p class="corr-q"><span class="ref">${p.ref}</span><span>${p.emoji}</span>${p.question}</p>
+    <p class="corr-r">${p.reponse}</p>
+  </li>`).join("");
+  return `<section class="page">
+    <header class="corr-head">
+      <span class="emo">✅</span>
+      <div>
+        <h2>Les corrigés</h2>
+        <p>À regarder après avoir cherché !</p>
+      </div>
+    </header>
+    <ol class="corr-list">${items}</ol>
+  </section>`;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Montage                                                            */
+/* ------------------------------------------------------------------ */
+const app = document.getElementById("app");
+let html = cover();
+PICTOS.forEach((p, i) => { html += pagePicto(p, i, PICTOS.length); });
+html += corriges();
+app.innerHTML = html;
+</script>
+</body>
+</html>
