@@ -19,6 +19,7 @@ import { QRCodeSVG } from "qrcode.react";
 import type { CahierConfig } from "./types";
 import type { Activite, CahierDataPetit, JourPetit } from "./petits-types";
 import CaptureApresTelechargement from "./CaptureApresTelechargement";
+import { bougeDuJour } from "@/lib/cahier/bougeDuJour";
 
 /* URL d'inscription encodée dans le QR de la couverture. ?from=cahier = tracking. */
 const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cahier";
@@ -27,9 +28,10 @@ const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cahier";
 const baremePoints = [
   { label: "Maths", pts: "3 pts", color: "text-sky-600" },
   { label: "Français", pts: "3 pts", color: "text-violet-600" },
-  { label: "Mot du jour", pts: "1 pt", color: "text-teal-600" },
-  { label: "Geste du jour", pts: "1 pt", color: "text-emerald-600" },
-  { label: "Défi du jour", pts: "2 pts", color: "text-orange-500" },
+  { label: "Mot", pts: "1 pt", color: "text-teal-600" },
+  { label: "Geste", pts: "1 pt", color: "text-emerald-600" },
+  { label: "Bouge", pts: "1 pt", color: "text-orange-500" },
+  { label: "Défi", pts: "2 pts", color: "text-orange-500" },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -513,6 +515,13 @@ export default function CahierPetits({
                     </p>
                   )}
 
+                  {/* Bouge du jour — défi-corps (banque partagée). Le parent lit,
+                     l'enfant bouge : anti-écran, esprit « nager, coder, bâtir ». */}
+                  <p className="mt-2 rounded-lg bg-orange-50 px-3 py-1.5 text-xs leading-5 text-orange-900 print:mt-1.5 print:py-1 print:text-[11px] print:leading-4">
+                    <span className="font-black">🤸 Bouge du jour — </span>
+                    {bougeDuJour(jour.numero)}
+                  </p>
+
                   <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_14rem] print:grid-cols-[1fr_13rem]">
                     {/* ---------- Colonne principale ---------- */}
                     <div className="grid gap-4">
@@ -609,11 +618,11 @@ export default function CahierPetits({
                         <p className="bg-orange-600 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-white">
                           Mes étoiles
                         </p>
-                        <ul className="divide-y divide-slate-100 bg-white">
+                        <ul className="grid grid-cols-2 gap-x-3 gap-y-1 bg-white px-3 py-2.5">
                           {baremePoints.map((p) => (
                             <li
                               key={p.label}
-                              className="flex items-center justify-between px-4 py-2 text-sm"
+                              className="flex items-center justify-between gap-1.5 text-[11px] leading-tight"
                             >
                               <span className={`font-bold ${p.color}`}>
                                 {p.label}
@@ -629,7 +638,7 @@ export default function CahierPetits({
                             TOTAL
                           </span>
                           <span className="text-lg font-black text-orange-700">
-                            /10
+                            /11
                           </span>
                         </div>
                       </div>

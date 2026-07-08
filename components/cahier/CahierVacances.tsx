@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import type { CahierConfig, CahierData } from "./types";
 import CaptureApresTelechargement from "./CaptureApresTelechargement";
+import { bougeDuJour } from "@/lib/cahier/bougeDuJour";
 
 /* URL d'inscription encodée dans le QR de fin de cahier. Le ?from=cahier
    permet de tracer les inscriptions venues du cahier de vacances. */
@@ -38,9 +39,10 @@ const themesMonde = {
 const baremePoints = [
   { label: "Maths", pts: "2 pts", icon: Calculator, color: "text-sky-600" },
   { label: "Français", pts: "2 pts", icon: Pencil, color: "text-violet-600" },
-  { label: "Mot du jour", pts: "1 pt", icon: BookOpen, color: "text-teal-600" },
-  { label: "Geste du jour", pts: "1 pt", icon: Mouse, color: "text-emerald-600" },
-  { label: "Défi du jour", pts: "2 pts", icon: Target, color: "text-orange-500" },
+  { label: "Mot", pts: "1 pt", icon: BookOpen, color: "text-teal-600" },
+  { label: "Geste", pts: "1 pt", icon: Mouse, color: "text-emerald-600" },
+  { label: "Bouge", pts: "1 pt", icon: Dumbbell, color: "text-orange-500" },
+  { label: "Défi", pts: "2 pts", icon: Target, color: "text-orange-500" },
   { label: "Défi ★★★★★", pts: "+ 2 pts", icon: Star, color: "text-amber-500" },
 ];
 
@@ -457,6 +459,14 @@ export default function CahierVacances({
                     </p>
                   )}
 
+                  {/* Bouge du jour — défi-corps (banque partagée). Le cahier n'est
+                     plus 100 % cérébral : anti-écran, esprit « nager, coder, bâtir ».
+                     Compacté au print pour préserver le « 1 jour = 1 A4 ». */}
+                  <p className="mt-2 rounded-lg bg-orange-50 px-3 py-1.5 text-xs leading-5 text-orange-900 print:mt-1.5 print:py-1 print:text-[11px] print:leading-4">
+                    <span className="font-black">🤸 Bouge du jour — </span>
+                    {bougeDuJour(jour.numero)}
+                  </p>
+
                   <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_15rem] print:grid-cols-[1fr_14rem]">
                     {/* ---------- Colonne principale ---------- */}
                     <div className="grid gap-4">
@@ -605,14 +615,14 @@ export default function CahierVacances({
                         <p className="bg-teal-600 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-white">
                           Points du jour
                         </p>
-                        <ul className="divide-y divide-slate-100 bg-white">
+                        <ul className="grid grid-cols-2 gap-x-3 gap-y-1 bg-white px-3 py-2.5">
                           {baremePoints.map((p) => (
                             <li
                               key={p.label}
-                              className="flex items-center justify-between px-4 py-2 text-sm"
+                              className="flex items-center justify-between gap-1.5 text-[11px] leading-tight"
                             >
-                              <span className="flex items-center gap-2 font-bold text-slate-700">
-                                <p.icon className={`h-4 w-4 ${p.color}`} />
+                              <span className="flex items-center gap-1 font-bold text-slate-700">
+                                <p.icon className={`h-3.5 w-3.5 shrink-0 ${p.color}`} />
                                 {p.label}
                               </span>
                               <span className="font-black text-slate-900">{p.pts}</span>
@@ -621,7 +631,7 @@ export default function CahierVacances({
                         </ul>
                         <div className="flex items-center justify-between bg-teal-50 px-4 py-2">
                           <span className="text-sm font-black text-teal-700">TOTAL</span>
-                          <span className="text-lg font-black text-teal-700">/10</span>
+                          <span className="text-lg font-black text-teal-700">/11</span>
                         </div>
                       </div>
 
