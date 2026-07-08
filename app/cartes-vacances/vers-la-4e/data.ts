@@ -1,311 +1,41 @@
 // « Cartes défis · Vers la 4e » — révision 5e → entrée en 4e (~13-14 ans).
-// Spécificités 4e (demandées par le fondateur, prof) : rubrique 📱 NUMÉRIQUE
-// (réseaux sociaux, écrans, esprit critique, image de soi = photos retouchées),
-// SPORT + NUTRITION positifs sur le corps qui change (début de puberté, croissance,
-// jamais de régime), et maths avec la DÉMONSTRATION (Pythagore, Thalès, calcul littéral).
-// NOTE : les 30 cartes sont en cours de rédaction (rédacteur), à intégrer ici.
+// Conseil à 7 rôles, l'élève tranche : ton défi, jamais moralisateur ni infantilisant.
+// 3 piliers 4e : 📱 NUMÉRIQUE (réseaux, esprit critique, image de soi = photos
+// retouchées), CORPS QUI CHANGE (puberté/croissance, sport positif — jamais de régime),
+// maths de la DÉMONSTRATION (Pythagore + réciproque, Thalès, calcul littéral, puissances).
+// Rééquilibré : nutrition proportionnée, plus de variété disciplinaire.
 
 import type { CarteDefi } from "@/components/cartes/types";
 
 export const CARTES: CarteDefi[] = [
-  {
-    ref: "4E·01",
-    questions: [
-      { matiere: "maths", q: "Pythagore : dans un triangle rectangle, l'hypoténuse² = ?", r: "la somme des carrés des deux autres côtés" },
-      { matiere: "nutrition", q: "Ton corps grandit : cite un aliment riche en protéines.", r: "œuf, poulet, poisson, lentilles…" },
-      { matiere: "numerique", q: "Vrai ou faux : les photos d'influenceurs sont souvent retouchées.", r: "vrai" },
-      { matiere: "francais", q: "« Il pleut des cordes » : quelle figure ?", r: "une hyperbole" },
-    ],
-    bouge: "20 squats",
-  },
-  {
-    ref: "4E·02",
-    questions: [
-      { matiere: "maths", q: "Hypoténuse d'un triangle rectangle de côtés 3 et 4 ?", r: "5" },
-      { matiere: "nutrition", q: "Eau ou soda pour bien grandir ?", r: "l'eau (le soda est plein de sucre)" },
-      { matiere: "sport", q: "Pourquoi bouger à ton âge ?", r: "se sentir bien, un corps qui grandit" },
-      { matiere: "anglais", q: "Past simple de « go » ?", r: "went" },
-    ],
-    bouge: "gainage 30 s",
-  },
-  {
-    ref: "4E·03",
-    questions: [
-      { matiere: "maths", q: "Développe 3(x + 2).", r: "3x + 6" },
-      { matiere: "nutrition", q: "Le letchi péi apporte surtout quoi ?", r: "de la vitamine C 🍒" },
-      { matiere: "numerique", q: "Faut-il comparer son corps à celui des influenceurs ?", r: "non, leurs images sont filtrées" },
-      { matiere: "histoire", q: "Année du début de la Révolution française ?", r: "1789" },
-    ],
-    bouge: "20 fentes",
-  },
-  {
-    ref: "4E·04",
-    questions: [
-      { matiere: "maths", q: "Combien vaut 2³ ?", r: "8" },
-      { matiere: "nutrition", q: "Le fer sert à quoi pendant la croissance ?", r: "transporter l'oxygène dans le sang" },
-      { matiere: "sport", q: "Le sommeil aide-t-il à grandir ?", r: "oui, on grandit surtout la nuit" },
-      { matiere: "numerique", q: "Écrans le soir : bon ou mauvais pour le sommeil ?", r: "mauvais (la lumière retarde l'endormissement)" },
-    ],
-    bouge: "cours sur place 30 s 🏃",
-  },
-  {
-    ref: "4E·05",
-    questions: [
-      { matiere: "maths", q: "La réciproque de Pythagore sert à démontrer quoi ?", r: "qu'un triangle est rectangle" },
-      { matiere: "nutrition", q: "Le calcium est important pour quoi ?", r: "des os solides" },
-      { matiere: "numerique", q: "Avant de partager une info sur les réseaux, que faire ?", r: "la vérifier (recouper les sources)" },
-      { matiere: "francais", q: "« Le vent murmure » : quelle figure ?", r: "une personnification" },
-    ],
-    bouge: "15 burpees légers",
-  },
-  {
-    ref: "4E·06",
-    questions: [
-      { matiere: "maths", q: "Calcule (−3) + (−5).", r: "−8" },
-      { matiere: "nutrition", q: "Fruit péi plein de vitamines et de fibres ?", r: "la mangue 🥭" },
-      { matiere: "sport", q: "Cite un bienfait du sport sur l'humeur.", r: "il libère des endorphines (bien-être)" },
-      { matiere: "sciences", q: "La puberté, c'est quoi en un mot ?", r: "le passage du corps d'enfant à adulte" },
-    ],
-    bouge: "20 squats",
-  },
-  {
-    ref: "4E·07",
-    questions: [
-      { matiere: "maths", q: "Factorise 5x + 5.", r: "5(x + 1)" },
-      { matiere: "nutrition", q: "À La Réunion, quelle maladie liée au sucre surveille-t-on ?", r: "le diabète" },
-      { matiere: "numerique", q: "Cyberharcèlement : quelle attitude en ligne ?", r: "la bienveillance, soutenir la victime" },
-      { matiere: "anglais", q: "Traduis « I have never seen this »", r: "je n'ai jamais vu ça" },
-    ],
-    bouge: "gainage 30 s",
-  },
-  {
-    ref: "4E·08",
-    questions: [
-      { matiere: "maths", q: "25 % de 80 ?", r: "20" },
-      { matiere: "nutrition", q: "Ton corps change à la puberté : est-ce normal ?", r: "oui, chacun à son rythme" },
-      { matiere: "sport", q: "L'équilibre sur un pied travaille quoi ?", r: "les muscles stabilisateurs" },
-      { matiere: "geo", q: "Combien de continents sur Terre ?", r: "6 (ou 7)" },
-    ],
-    bouge: "20 fentes",
-  },
-  {
-    ref: "4E·09",
-    questions: [
-      { matiere: "maths", q: "Combien vaut 10² ?", r: "100" },
-      { matiere: "nutrition", q: "Un petit-déj complet aide à quoi le matin ?", r: "se concentrer, avoir de l'énergie" },
-      { matiere: "numerique", q: "Tes données personnelles : à qui ne pas les donner ?", r: "à des inconnus / sites non sûrs" },
-      { matiere: "francais", q: "« Rapide comme l'éclair » : quelle figure ?", r: "une comparaison" },
-    ],
-    bouge: "cours sur place 30 s 🏃",
-  },
-  {
-    ref: "4E·10",
-    questions: [
-      { matiere: "maths", q: "Thalès concerne des droites… ?", r: "parallèles (coupées par 2 sécantes)" },
-      { matiere: "nutrition", q: "Un snack sain péi plutôt qu'un paquet de chips ?", r: "un fruit (mangue, banane…)" },
-      { matiere: "sport", q: "Pourquoi s'échauffer avant l'effort ?", r: "éviter les blessures" },
-      { matiere: "histoire", q: "Révolution industrielle : quelle machine phare ?", r: "la machine à vapeur" },
-    ],
-    bouge: "15 burpees légers",
-  },
-  {
-    ref: "4E·11",
-    questions: [
-      { matiere: "maths", q: "Calcule (−4) × 3.", r: "−12" },
-      { matiere: "nutrition", q: "Combien de repas par jour environ pour bien grandir ?", r: "3 repas + une collation" },
-      { matiere: "numerique", q: "Un filtre embellit une photo : la réalité est-elle pareille ?", r: "non, c'est modifié" },
-      { matiere: "sciences", q: "Que respire-t-on pour vivre ?", r: "du dioxygène (O₂)" },
-    ],
-    bouge: "20 squats",
-  },
-  {
-    ref: "4E·12",
-    questions: [
-      { matiere: "maths", q: "Développe 2(a + 3).", r: "2a + 6" },
-      { matiere: "nutrition", q: "Trop de soda apporte quoi de caché ?", r: "beaucoup de sucre" },
-      { matiere: "sport", q: "Bouger 60 min/jour, recommandé aux jeunes ?", r: "oui" },
-      { matiere: "anglais", q: "Present perfect de « eat » (I …) ?", r: "I have eaten" },
-    ],
-    bouge: "gainage 30 s",
-  },
-  {
-    ref: "4E·13",
-    questions: [
-      { matiere: "maths", q: "Dans un triangle rectangle, l'hypoténuse est le côté… ?", r: "le plus long (face à l'angle droit)" },
-      { matiere: "nutrition", q: "Pourquoi manger assez à ton âge ?", r: "le corps grandit et a besoin d'énergie" },
-      { matiere: "numerique", q: "Temps d'écran énorme : une idée pour souffler ?", r: "une pause, sortir, bouger" },
-      { matiere: "francais", q: "COD ou COI : « Je parle à Léa » ?", r: "COI (à Léa)" },
-    ],
-    bouge: "20 fentes",
-  },
-  {
-    ref: "4E·14",
-    questions: [
-      { matiere: "maths", q: "Calcule 3² + 4².", r: "25" },
-      { matiere: "nutrition", q: "Combien de verres d'eau viser par jour ?", r: "6 à 8 💧" },
-      { matiere: "sport", q: "Après le sport, pourquoi s'étirer ?", r: "récupérer, rester souple" },
-      { matiere: "geo", q: "La Réunion est dans quel océan ?", r: "l'océan Indien" },
-    ],
-    bouge: "cours sur place 30 s 🏃",
-  },
-  {
-    ref: "4E·15",
-    questions: [
-      { matiere: "maths", q: "Factorise 3x + 6.", r: "3(x + 2)" },
-      { matiere: "nutrition", q: "Protéines pour grandir : une source végétale ?", r: "lentilles, pois chiches, haricots" },
-      { matiere: "numerique", q: "Une « fake news », c'est quoi ?", r: "une fausse information" },
-      { matiere: "sciences", q: "De quoi est faite la matière (unité de base) ?", r: "d'atomes" },
-    ],
-    bouge: "15 burpees légers",
-  },
-  {
-    ref: "4E·16",
-    questions: [
-      { matiere: "maths", q: "60 % de 50 ?", r: "30" },
-      { matiere: "nutrition", q: "Ton corps change et il est unique : bonne nouvelle ?", r: "oui, chaque corps est normal 🙂" },
-      { matiere: "sport", q: "Le gainage muscle surtout quoi ?", r: "la sangle abdominale" },
-      { matiere: "histoire", q: "En 1789, prise de quel lieu à Paris ?", r: "la Bastille" },
-    ],
-    bouge: "20 squats",
-  },
-  {
-    ref: "4E·17",
-    questions: [
-      { matiere: "maths", q: "Combien vaut 5² ?", r: "25" },
-      { matiere: "nutrition", q: "Le sucre caché se trouve souvent dans quoi à boire ?", r: "les sodas et jus industriels" },
-      { matiere: "numerique", q: "Se comparer aux images filtrées, bon pour l'estime ?", r: "non, chacun est différent" },
-      { matiere: "anglais", q: "Past simple de « see » ?", r: "saw" },
-    ],
-    bouge: "gainage 30 s",
-  },
-  {
-    ref: "4E·18",
-    questions: [
-      { matiere: "maths", q: "Pour démontrer qu'un triangle est rectangle, on utilise… ?", r: "la réciproque de Pythagore" },
-      { matiere: "nutrition", q: "Fruit péi riche en eau et rafraîchissant ?", r: "la pastèque (ou le letchi)" },
-      { matiere: "sport", q: "Bien dormir améliore quoi pour le sport ?", r: "la récupération et l'énergie" },
-      { matiere: "francais", q: "Passé simple de « prendre » (il …) ?", r: "il prit" },
-    ],
-    bouge: "20 fentes",
-  },
-  {
-    ref: "4E·19",
-    questions: [
-      { matiere: "maths", q: "Calcule (−6) + 10.", r: "4" },
-      { matiere: "nutrition", q: "Manger équilibré aide à mieux se concentrer ?", r: "oui" },
-      { matiere: "numerique", q: "Vie privée : donnes-tu ton adresse à un inconnu en ligne ?", r: "non, jamais" },
-      { matiere: "sciences", q: "Formule chimique de l'eau ?", r: "H₂O" },
-    ],
-    bouge: "cours sur place 30 s 🏃",
-  },
-  {
-    ref: "4E·20",
-    questions: [
-      { matiere: "maths", q: "Développe 4(x − 1).", r: "4x − 4" },
-      { matiere: "nutrition", q: "Diabète 974 : un réflexe simple au quotidien ?", r: "boire de l'eau plutôt que du soda" },
-      { matiere: "numerique", q: "La « belle vie » des réseaux = la vraie vie ?", r: "non, on ne montre que le meilleur" },
-      { matiere: "geo", q: "La mondialisation, en un mot ?", r: "les échanges à l'échelle du monde" },
-    ],
-    bouge: "15 burpees légers",
-  },
-  {
-    ref: "4E·21",
-    questions: [
-      { matiere: "maths", q: "Calcule 6² − 5².", r: "11" },
-      { matiere: "nutrition", q: "Cite un légume péi.", r: "brèdes, chouchou, songe…" },
-      { matiere: "numerique", q: "Un ami est harcelé en ligne : que fais-tu ?", r: "je le soutiens, j'en parle à un adulte" },
-      { matiere: "francais", q: "« Une faim de loup » : quelle figure ?", r: "une hyperbole" },
-    ],
-    bouge: "20 squats",
-  },
-  {
-    ref: "4E·22",
-    questions: [
-      { matiere: "maths", q: "Thalès calcule des longueurs quand les droites sont… ?", r: "parallèles" },
-      { matiere: "nutrition", q: "Petit-déj sans sucre ajouté, une idée péi ?", r: "fruit frais + pain complet" },
-      { matiere: "sport", q: "Toucher ses pieds étire quoi ?", r: "l'arrière des jambes (ischios)" },
-      { matiere: "anglais", q: "Traduis « She has finished »", r: "elle a fini" },
-    ],
-    bouge: "gainage 30 s",
-  },
-  {
-    ref: "4E·23",
-    questions: [
-      { matiere: "maths", q: "Calcule (−2) × (−4).", r: "8" },
-      { matiere: "nutrition", q: "Le fer est dans la viande ou les lentilles ?", r: "les deux" },
-      { matiere: "numerique", q: "Une vie « parfaite » en ligne = la réalité ?", r: "non, on ne montre que le meilleur" },
-      { matiere: "sciences", q: "La lumière voyage-t-elle vite ?", r: "oui (≈ 300 000 km/s)" },
-    ],
-    bouge: "20 fentes",
-  },
-  {
-    ref: "4E·24",
-    questions: [
-      { matiere: "maths", q: "Un triangle a des côtés 6, 8, 10 : rectangle ?", r: "oui (6² + 8² = 10²)" },
-      { matiere: "nutrition", q: "Grignoter devant l'écran, bon réflexe ?", r: "non, on mange sans faim" },
-      { matiere: "sport", q: "Marcher chaque jour, déjà bon pour la santé ?", r: "oui" },
-      { matiere: "histoire", q: "Révolution industrielle : énergie du XIXe ?", r: "le charbon (la vapeur)" },
-    ],
-    bouge: "cours sur place 30 s 🏃",
-  },
-  {
-    ref: "4E·25",
-    questions: [
-      { matiere: "maths", q: "Combien vaut 3³ ?", r: "27" },
-      { matiere: "nutrition", q: "Boire de l'eau pendant l'effort, utile ?", r: "oui, pour s'hydrater" },
-      { matiere: "numerique", q: "Trop d'écran fatigue quoi ?", r: "les yeux et le sommeil" },
-      { matiere: "francais", q: "Imparfait de « être » (il …) ?", r: "il était" },
-    ],
-    bouge: "15 burpees légers",
-  },
-  {
-    ref: "4E·26",
-    questions: [
-      { matiere: "maths", q: "10 % de 250 ?", r: "25" },
-      { matiere: "nutrition", q: "Cite un aliment riche en calcium.", r: "lait, yaourt, fromage 🥛" },
-      { matiere: "sport", q: "Le sport en groupe apporte quoi en plus ?", r: "du plaisir et du lien" },
-      { matiere: "geo", q: "Cite un des grands océans.", r: "Pacifique, Atlantique, Indien…" },
-    ],
-    bouge: "20 squats",
-  },
-  {
-    ref: "4E·27",
-    questions: [
-      { matiere: "maths", q: "Développe 5(2x + 1).", r: "10x + 5" },
-      { matiere: "nutrition", q: "Quel nutriment donne de l'énergie rapidement ?", r: "les glucides (féculents)" },
-      { matiere: "numerique", q: "Une photo « parfaite » en ligne : à imiter à tout prix ?", r: "non, ton corps réel est très bien" },
-      { matiere: "sciences", q: "À la puberté, la voix peut-elle changer ?", r: "oui, surtout chez les garçons" },
-    ],
-    bouge: "gainage 30 s",
-  },
-  {
-    ref: "4E·28",
-    questions: [
-      { matiere: "maths", q: "Combien vaut 8² ?", r: "64" },
-      { matiere: "nutrition", q: "Sucre caché : que lire sur l'emballage ?", r: "la liste des ingrédients / valeurs nutritionnelles" },
-      { matiere: "sport", q: "Bouger 20 min après l'école, bonne habitude ?", r: "oui" },
-      { matiere: "anglais", q: "Past simple de « eat » ?", r: "ate" },
-    ],
-    bouge: "20 fentes",
-  },
-  {
-    ref: "4E·29",
-    questions: [
-      { matiere: "maths", q: "Factorise 7x − 14.", r: "7(x − 2)" },
-      { matiere: "nutrition", q: "Un corps qui grandit a besoin de… ?", r: "manger assez et bien dormir" },
-      { matiere: "numerique", q: "Bienveillance en ligne : on envoie un commentaire méchant ?", r: "non" },
-      { matiere: "francais", q: "« Fort comme un lion » : quelle figure ?", r: "une comparaison" },
-    ],
-    bouge: "cours sur place 30 s 🏃",
-  },
-  {
-    ref: "4E·30",
-    questions: [
-      { matiere: "maths", q: "Hypoténuse d'un triangle rectangle de côtés 5 et 12 ?", r: "13" },
-      { matiere: "nutrition", q: "Défi santé péi : eau ou soda aujourd'hui ?", r: "l'eau ! 💧" },
-      { matiere: "sport", q: "Bouger, c'est prendre soin de soi ?", r: "oui, bravo !" },
-      { matiere: "numerique", q: "Message clé : ton corps réel vaut mieux qu'une photo filtrée ?", r: "oui, totalement 💙" },
-    ],
-    bouge: "15 burpees légers",
-  },
+  { ref: "4E·01", questions: [ {matiere:"maths",q:"Théorème de Pythagore : dans quel triangle s'applique-t-il ?",r:"Un triangle rectangle"}, {matiere:"francais",q:"Nature du mot souligné : « Elle court VITE ».",r:"Un adverbe"}, {matiere:"numerique",q:"Une photo d'influenceur peut-elle être retouchée ?",r:"Oui, souvent (filtres, retouches)"}, {matiere:"histoire",q:"En quelle année commence la Révolution française ?",r:"1789"} ], bouge: "20 sauts avec écart (jumping jacks)" },
+  { ref: "4E·02", questions: [ {matiere:"maths",q:"Comment s'appelle le côté opposé à l'angle droit ?",r:"L'hypoténuse"}, {matiere:"sciences",q:"À la puberté, tout le monde grandit-il au même rythme ?",r:"Non, chacun son rythme (c'est normal)"}, {matiere:"anglais",q:"Passé de « to go » ?",r:"Went"}, {matiere:"sport",q:"Pourquoi s'échauffer avant l'effort ?",r:"Préparer les muscles, éviter les blessures"} ], bouge: "Gainage (planche) 20 secondes" },
+  { ref: "4E·03", questions: [ {matiere:"maths",q:"Développe : 3(x + 2).",r:"3x + 6"}, {matiere:"francais",q:"COD ou COI : « Je pense À toi » ?",r:"COI"}, {matiere:"geo",q:"Quel océan borde la côte est de La Réunion ?",r:"L'océan Indien"}, {matiere:"numerique",q:"Faut-il tout croire de ce qu'on voit sur les réseaux ?",r:"Non, on vérifie l'info"} ], bouge: "10 fentes (5 par jambe)" },
+  { ref: "4E·04", questions: [ {matiere:"maths",q:"Combien vaut 2³ ?",r:"8"}, {matiere:"sciences",q:"Quel gaz respire-t-on pour vivre ?",r:"Le dioxygène (O₂)"}, {matiere:"nutrition",q:"Cite un fruit péi riche en vitamine C.",r:"La goyave (ou l'orange)"}, {matiere:"anglais",q:"Traduis « I have finished ».",r:"J'ai fini"} ], bouge: "15 squats" },
+  { ref: "4E·05", questions: [ {matiere:"maths",q:"Résultat de (-5) + (-3) ?",r:"-8"}, {matiere:"francais",q:"Passé simple de « finir » (il) ?",r:"Il finit"}, {matiere:"numerique",q:"Les écrans le soir aident-ils à dormir ?",r:"Non, ils retardent le sommeil"}, {matiere:"histoire",q:"Qui est renversé pendant la Révolution française ?",r:"La monarchie (le roi)"} ], bouge: "Course sur place 30 secondes" },
+  { ref: "4E·06", questions: [ {matiere:"maths",q:"Factorise : 4x + 4.",r:"4(x + 1)"}, {matiere:"sport",q:"Bouger régulièrement, ça sert à quoi ?",r:"Se sentir bien, garder la forme"}, {matiere:"sciences",q:"La lumière voyage-t-elle en ligne droite ?",r:"Oui (propagation rectiligne)"}, {matiere:"anglais",q:"Past simple de « to see » ?",r:"Saw"} ], bouge: "20 talons-fesses" },
+  { ref: "4E·07", questions: [ {matiere:"maths",q:"Combien vaut 10² ?",r:"100"}, {matiere:"francais",q:"Homophones : « ces » ou « ses » dans « Il aime ___ frères » ?",r:"Ses (les siens)"}, {matiere:"numerique",q:"Dois-tu comparer ton corps aux photos filtrées ?",r:"Non, elles ne sont pas réelles"}, {matiere:"geo",q:"Qu'est-ce que la mondialisation ?",r:"L'échange à l'échelle du monde"} ], bouge: "Étirements des bras 20 secondes" },
+  { ref: "4E·08", questions: [ {matiere:"maths",q:"Pythagore : côtés 3 et 4, hypoténuse ?",r:"5 (√(9+16))"}, {matiere:"sciences",q:"Quel organe permet la respiration ?",r:"Les poumons"}, {matiere:"histoire",q:"Le XIXe siècle voit quelle grande révolution technique ?",r:"La révolution industrielle"}, {matiere:"sport",q:"L'eau, on en boit avant ou seulement après le sport ?",r:"Avant, pendant et après"} ], bouge: "10 pompes (genoux au sol OK)" },
+  { ref: "4E·09", questions: [ {matiere:"maths",q:"Calcule 25 % de 80.",r:"20"}, {matiere:"francais",q:"Figure de style : « fort comme un lion » ?",r:"Une comparaison"}, {matiere:"anglais",q:"Traduis « yesterday ».",r:"Hier"}, {matiere:"numerique",q:"Un inconnu te demande ton adresse en ligne. Tu fais quoi ?",r:"Je ne la donne pas"} ], bouge: "Sauts groupés x8" },
+  { ref: "4E·10", questions: [ {matiere:"maths",q:"Développe (x + 1)(x + 2) : le terme en x² vaut ?",r:"x²"}, {matiere:"sciences",q:"Vrai/faux : la puberté arrive au même âge pour tous.",r:"Faux, ça varie selon chacun"}, {matiere:"geo",q:"Les océans couvrent quelle part de la Terre environ ?",r:"Environ 70 %"}, {matiere:"nutrition",q:"À La Réunion, un féculent local (base des repas) ?",r:"Le riz"} ], bouge: "Gainage latéral 15 s par côté" },
+  { ref: "4E·11", questions: [ {matiere:"maths",q:"Résultat de (-7) - (-2) ?",r:"-5"}, {matiere:"francais",q:"Imparfait ou passé simple pour une action longue de fond ?",r:"L'imparfait"}, {matiere:"numerique",q:"Le cyberharcèlement, on le signale ou on se tait ?",r:"On le signale (à un adulte)"}, {matiere:"anglais",q:"Past simple de « to have » ?",r:"Had"} ], bouge: "15 squats sautés" },
+  { ref: "4E·12", questions: [ {matiere:"maths",q:"Combien vaut 5² ?",r:"25"}, {matiere:"sport",q:"Le sommeil sert-il à récupérer après le sport ?",r:"Oui, il aide à récupérer"}, {matiere:"histoire",q:"Quel symbole de 1789 est pris à Paris le 14 juillet ?",r:"La Bastille"}, {matiere:"sciences",q:"Un atome est-il visible à l'œil nu ?",r:"Non, il est minuscule"} ], bouge: "Course sur place genoux hauts 30 s" },
+  { ref: "4E·13", questions: [ {matiere:"maths",q:"Théorème de Thalès : il parle de droites... ?",r:"Parallèles (et proportions)"}, {matiere:"francais",q:"Nature de « rapidement » ?",r:"Un adverbe"}, {matiere:"numerique",q:"« Vérifier une source », ça veut dire quoi ?",r:"Croiser plusieurs infos fiables"}, {matiere:"anglais",q:"Traduis « I went to school ».",r:"Je suis allé à l'école"} ], bouge: "20 jumping jacks" },
+  { ref: "4E·14", questions: [ {matiere:"maths",q:"Développe : 2(3x - 4).",r:"6x - 8"}, {matiere:"sciences",q:"Pendant la croissance, les os font quoi ?",r:"Ils s'allongent (on grandit)"}, {matiere:"geo",q:"Un port très connecté au monde, on dit qu'il est... ?",r:"Une plateforme (hub) mondiale"}, {matiere:"sport",q:"Nommer une activité pour se dépenser sans matériel.",r:"La course (ou la marche)"} ], bouge: "Fentes marchées x12" },
+  { ref: "4E·15", questions: [ {matiere:"maths",q:"Réciproque de Pythagore : elle sert à prouver quoi ?",r:"Qu'un triangle est rectangle"}, {matiere:"francais",q:"Homophones : « a » ou « à » dans « Il ___ faim » ?",r:"a (verbe avoir)"}, {matiere:"numerique",q:"Trop d'écran le soir, effet sur toi le lendemain ?",r:"Fatigue, moins concentré"}, {matiere:"histoire",q:"La Déclaration des droits de l'homme date de quelle année ?",r:"1789"} ], bouge: "Planche 25 secondes" },
+  { ref: "4E·16", questions: [ {matiere:"maths",q:"Calcule 10 % de 250.",r:"25"}, {matiere:"anglais",q:"Present perfect : « I ___ eaten » (auxiliaire) ?",r:"have"}, {matiere:"sciences",q:"La lumière blanche du soleil contient-elle des couleurs ?",r:"Oui (spectre / arc-en-ciel)"}, {matiere:"sport",q:"Étirer ses muscles, plutôt avant ou après l'effort ?",r:"Surtout après (en douceur)"} ], bouge: "10 burpees légers" },
+  { ref: "4E·17", questions: [ {matiere:"maths",q:"Résultat de (-4) × 3 ?",r:"-12"}, {matiere:"francais",q:"COD dans « Je mange une pomme » ?",r:"une pomme"}, {matiere:"numerique",q:"Publier une photo d'un ami sans son accord, ok ?",r:"Non, on demande son accord"}, {matiere:"geo",q:"Cite une menace pour les océans.",r:"La pollution (plastique)"} ], bouge: "20 mountain climbers" },
+  { ref: "4E·18", questions: [ {matiere:"maths",q:"Combien vaut 3³ ?",r:"27"}, {matiere:"sciences",q:"Ce qui change à la puberté est-il un signe de problème ?",r:"Non, c'est normal et sain"}, {matiere:"histoire",q:"Le XIXe siècle : machine à vapeur, énergie principale ?",r:"Le charbon"}, {matiere:"nutrition",q:"Le diabète, très présent à La Réunion, est lié à quoi ?",r:"L'excès de sucre (et hérédité)"} ], bouge: "Squats maintenus 20 s" },
+  { ref: "4E·19", questions: [ {matiere:"maths",q:"Factorise : 6x + 9.",r:"3(2x + 3)"}, {matiere:"francais",q:"Passé simple de « prendre » (il) ?",r:"Il prit"}, {matiere:"anglais",q:"Past simple de « to make » ?",r:"Made"}, {matiere:"numerique",q:"Un mot de passe fort, c'est plutôt... ?",r:"Long et unique"} ], bouge: "Corde à sauter imaginaire 30 s" },
+  { ref: "4E·20", questions: [ {matiere:"maths",q:"Pythagore : côtés 6 et 8, hypoténuse ?",r:"10"}, {matiere:"sciences",q:"Quel organe pompe le sang dans le corps ?",r:"Le cœur"}, {matiere:"sport",q:"Se comparer aux corps parfaits des réseaux, utile ?",r:"Non, chaque corps est différent"}, {matiere:"geo",q:"La mondialisation rapproche-t-elle les pays ?",r:"Oui (échanges, transports)"} ], bouge: "15 fentes sautées" },
+  { ref: "4E·21", questions: [ {matiere:"maths",q:"Calcule 50 % de 46.",r:"23"}, {matiere:"francais",q:"Figure : « la ville dort » (donner vie) ?",r:"Une personnification"}, {matiere:"numerique",q:"Une fake news se partage-t-elle avant ou après vérif ?",r:"Après vérification"}, {matiere:"anglais",q:"Traduis « last week ».",r:"La semaine dernière"} ], bouge: "Gainage planche 30 secondes" },
+  { ref: "4E·22", questions: [ {matiere:"maths",q:"Résultat de (-6) ÷ (-2) ?",r:"3"}, {matiere:"sciences",q:"Respirer sert à apporter quoi au corps ?",r:"Du dioxygène (O₂)"}, {matiere:"histoire",q:"Qui devient empereur après la Révolution ?",r:"Napoléon Bonaparte"}, {matiere:"sport",q:"Bien dormir, combien d'heures pour un ado (environ) ?",r:"Environ 9 heures"} ], bouge: "Course sur place 45 secondes" },
+  { ref: "4E·23", questions: [ {matiere:"maths",q:"Développe : x(x + 5).",r:"x² + 5x"}, {matiere:"francais",q:"Homophones : « on » ou « ont » dans « Ils ___ gagné » ?",r:"ont (verbe avoir)"}, {matiere:"numerique",q:"Bien traiter les autres en ligne, on appelle ça... ?",r:"La bienveillance (netiquette)"}, {matiere:"anglais",q:"Past simple de « to take » ?",r:"Took"} ], bouge: "10 pompes" },
+  { ref: "4E·24", questions: [ {matiere:"maths",q:"Combien vaut 4² ?",r:"16"}, {matiere:"sciences",q:"À la puberté, la voix des garçons fait quoi ?",r:"Elle mue (devient plus grave)"}, {matiere:"geo",q:"Un conteneur sert à quoi dans le commerce mondial ?",r:"Transporter des marchandises"}, {matiere:"nutrition",q:"Boire de l'eau plutôt que du soda, pourquoi ?",r:"Moins de sucre, mieux hydraté"} ], bouge: "20 squats" },
+  { ref: "4E·25", questions: [ {matiere:"maths",q:"Le mot « démontrer » en maths veut dire ?",r:"Prouver avec un raisonnement"}, {matiere:"francais",q:"Imparfait de « être » (nous) ?",r:"Nous étions"}, {matiere:"numerique",q:"Tes données perso, tu les partages avec tout le monde ?",r:"Non, je les protège"}, {matiere:"histoire",q:"La Révolution industrielle a fait naître quoi en ville ?",r:"Les usines (ouvriers)"} ], bouge: "Talons-fesses 30 secondes" },
+  { ref: "4E·26", questions: [ {matiere:"maths",q:"Résultat de 7 + (-10) ?",r:"-3"}, {matiere:"sport",q:"Après un effort, s'étirer aide à quoi ?",r:"Récupérer, éviter les courbatures"}, {matiere:"anglais",q:"Present perfect de « to do » : « I ___ done » ?",r:"have"}, {matiere:"sciences",q:"Un atome est composé d'un noyau et de... ?",r:"D'électrons"} ], bouge: "15 jumping jacks" },
+  { ref: "4E·27", questions: [ {matiere:"maths",q:"Calcule 20 % de 150.",r:"30"}, {matiere:"francais",q:"COD ou COI : « Il parle À son ami » ?",r:"COI"}, {matiere:"numerique",q:"Photos d'influenceurs : reflètent-elles la réalité ?",r:"Pas toujours (mise en scène)"}, {matiere:"geo",q:"Nomme une grande zone d'échanges maritimes.",r:"Le canal de Suez (ou Panama)"} ], bouge: "Fentes x10 (5 par jambe)" },
+  { ref: "4E·28", questions: [ {matiere:"maths",q:"Thalès sert à calculer quoi grâce aux parallèles ?",r:"Des longueurs (proportions)"}, {matiere:"sciences",q:"Grandir vite ou lentement à ton âge, c'est... ?",r:"Normal, chacun son rythme"}, {matiere:"histoire",q:"La Révolution française proclame la République en quelle année ?",r:"1792"}, {matiere:"sport",q:"Le sport peut aider à se sentir mieux dans sa tête ?",r:"Oui, il libère du stress"} ], bouge: "Planche 30 secondes" },
+  { ref: "4E·29", questions: [ {matiere:"maths",q:"Factorise : x² + x.",r:"x(x + 1)"}, {matiere:"francais",q:"Homophones : « et » ou « est » dans « Il ___ grand » ?",r:"est (verbe être)"}, {matiere:"anglais",q:"Traduis « I have never seen ».",r:"Je n'ai jamais vu"}, {matiere:"numerique",q:"Passer trop de temps à te comparer en ligne : bon plan ?",r:"Non, mieux vaut se déconnecter"} ], bouge: "20 mountain climbers" },
+  { ref: "4E·30", questions: [ {matiere:"maths",q:"Pythagore : côtés 5 et 12, hypoténuse ?",r:"13"}, {matiere:"sciences",q:"Quel élément le sang transporte-t-il aux muscles ?",r:"Le dioxygène (et les nutriments)"}, {matiere:"nutrition",q:"Un repas équilibré péi : riz, grains (lentilles) et... ?",r:"Des légumes (rougail)"}, {matiere:"geo",q:"Internet aussi participe à la mondialisation, vrai ?",r:"Vrai (échanges d'infos mondiaux)"} ], bouge: "10 burpees" },
 ];

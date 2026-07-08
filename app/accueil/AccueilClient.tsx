@@ -1014,58 +1014,7 @@ export default function AccueilPage({
         </div>
       </section>
 
-      {/* ── CAHIER DE VACANCES DE MATHS · 974 — à imprimer (cible SEO) ───────── */}
-      <section className="px-4 pt-6 sm:px-6 lg:px-8">
-        <Link
-          href="/cahier-vacances/maths"
-          className="group mx-auto flex max-w-4xl flex-col items-center gap-5 overflow-hidden rounded-2xl border border-cyan-300/30 bg-gradient-to-br from-cyan-400/[0.12] via-blue-400/[0.07] to-amber-400/[0.05] p-6 text-center transition hover:border-cyan-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:text-left sm:p-7"
-        >
-          <div>
-            <p className="text-xs font-black uppercase tracking-wide text-cyan-200">
-              🃏 À imprimer · gratuit
-            </p>
-            <h2 className="mt-1 text-2xl font-black text-white sm:text-3xl">
-              📐 Cahier de vacances de maths · La Réunion
-            </h2>
-            <p className="mt-1 text-sm font-semibold text-white/75">
-              25 défis «&nbsp;un dessin, une question&nbsp;» ancrés à La Réunion — du CM2 à
-              la 3ᵉ, corrigés inclus. À imprimer et à chercher sur l&apos;ardoise. 🌋
-            </p>
-            <span className="mt-3 inline-flex items-center gap-2 rounded-full bg-cyan-400 px-6 py-3 text-sm font-black text-[#041B33] shadow-lg">
-              Ouvrir le cahier →
-            </span>
-          </div>
-
-          {/* Aperçu façon capture d'un vrai défi du cahier */}
-          <div className="w-full max-w-[264px] shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white text-left shadow-xl transition group-hover:-translate-y-0.5 group-hover:shadow-2xl">
-            <div className="flex items-center justify-between bg-gradient-to-r from-cyan-600 to-blue-600 px-3 py-1.5 text-white">
-              <span className="text-[11px] font-black">🌋 Le volcan</span>
-              <span className="rounded-full border border-white/40 px-1.5 py-0.5 text-[9px] font-black">N°3 · 4ᵉ</span>
-            </div>
-            <div className="p-3">
-              <p className="text-center text-sm font-black leading-tight text-slate-900">
-                Quand la lave atteint-elle la route&nbsp;?
-              </p>
-              <div className="mt-2 space-y-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2 py-2.5">
-                <div className="flex items-center justify-center gap-1.5">
-                  <span className="rounded border border-cyan-300 bg-cyan-50 px-1.5 py-0.5 text-[10px] font-black text-cyan-800">🌋 300 m / 2 h</span>
-                  <span className="text-slate-400">→</span>
-                  <span className="text-base leading-none">🛣️</span>
-                </div>
-                <div className="flex items-center justify-center gap-1.5">
-                  <span className="text-[11px] font-black text-slate-500">à parcourir</span>
-                  <span className="rounded border border-dashed border-amber-400 bg-amber-50 px-2 py-0.5 text-[11px] font-black text-amber-600">1,5 km → ?</span>
-                </div>
-              </div>
-              <p className="mt-1.5 text-right text-[8px] font-black uppercase tracking-[0.15em] text-slate-300">
-                eleveai.fr
-              </p>
-            </div>
-          </div>
-        </Link>
-      </section>
-
-      {/* ── LA TÊTE ET LES JAMBES — cartes de révision lycée + sport (cible SEO
+      {/* ── LE CORPS & L'ESPRIT — cartes de révision + sport (cible SEO
           « le trou de Nathan » : réviser avant la 1re) ──────────────────────── */}
       <section className="px-4 pt-6 sm:px-6 lg:px-8">
         <Link

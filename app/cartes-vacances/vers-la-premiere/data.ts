@@ -1,309 +1,41 @@
-// Prototype « Cartes défis · Vers la 1re » (à montrer à Keep Cool).
-// Carte 20×5 cm : 4 questions ENCADRÉES avec picto (scolaire + SPORT + NUTRITION,
-// car les jeunes se soucient de leur apparence) + un « Sport du jour » (défi-corps).
-// Réponses au verso. Niveau : révision fin de 2nde / entrée en 1re (le trou de Nathan).
+// « Cartes défis · Vers la 1re » (prototype co-brandé Keep Cool).
+// Conseil à 7 rôles, l'élève tranche : ton adulte, jamais moralisateur.
+// Révision fin de 2nde → entrée en 1re (le trou de Nathan lycée). Rééquilibré :
+// le disciplinaire domine (maths second degré/fonctions/proba, français bac, sciences),
+// on garde le hook fitness/apparence (sport + nutrition) mais PROPORTIONNÉ,
+// + 📱 numérique (image de soi, esprit critique) et 🤝 emc (respect, émotions, consentement).
 
 import type { CarteDefi } from "@/components/cartes/types";
 
 export const CARTES: CarteDefi[] = [
-  {
-    ref: "1RE·01",
-    questions: [
-      { matiere: "sport", q: "Combien de séances/semaine pour progresser en muscu ?", r: "3 à 4, avec du repos" },
-      { matiere: "nutrition", q: "Quel nutriment construit le muscle ?", r: "Les protéines" },
-      { matiere: "maths", q: "Résous : 2x + 6 = 0", r: "x = −3" },
-      { matiere: "anglais", q: "Traduis « I work out »", r: "Je m'entraîne" },
-    ],
-    bouge: "20 squats, dos droit",
-  },
-  {
-    ref: "1RE·02",
-    questions: [
-      { matiere: "sport", q: "Le muscle grossit à l'effort ou au repos ?", r: "Au repos (récupération)" },
-      { matiere: "nutrition", q: "Protéines/kg pour prendre du muscle ?", r: "≈ 1,6 à 2 g/kg/jour" },
-      { matiere: "maths", q: "Développe (x + 3)²", r: "x² + 6x + 9" },
-      { matiere: "francais", q: "Qui a écrit « Les Misérables » ?", r: "Victor Hugo" },
-    ],
-    bouge: "Gainage : planche 30 secondes",
-  },
-  {
-    ref: "1RE·03",
-    questions: [
-      { matiere: "sport", q: "À quoi sert l'échauffement ?", r: "À éviter les blessures" },
-      { matiere: "nutrition", q: "Le plus protéiné : riz, poulet ou pomme ?", r: "Le poulet" },
-      { matiere: "sciences", q: "Quel organe pompe le sang ?", r: "Le cœur" },
-      { matiere: "anglais", q: "« ___ house is big » : their / there / they're ?", r: "Their" },
-    ],
-    bouge: "15 pompes (ou contre un mur)",
-  },
-  {
-    ref: "1RE·04",
-    questions: [
-      { matiere: "sport", q: "Courbatures = le muscle grossit ?", r: "Non, une réaction à l'effort" },
-      { matiere: "nutrition", q: "Eau par jour, environ ?", r: "1,5 à 2 litres" },
-      { matiere: "maths", q: "Résous x² = 49", r: "x = 7 ou x = −7" },
-      { matiere: "francais", q: "« Il pleut des cordes » : quelle figure ?", r: "Une hyperbole" },
-    ],
-    bouge: "30 sauts en étoile (jumping jacks)",
-  },
-  {
-    ref: "1RE·05",
-    questions: [
-      { matiere: "sport", q: "Heures de sommeil pour bien récupérer (ado) ?", r: "8 à 10 h" },
-      { matiere: "nutrition", q: "Calories dans 100 g de poulet ?", r: "≈ 110 kcal" },
-      { matiere: "histoire", q: "En quelle année débute la Révolution française ?", r: "1789" },
-      { matiere: "anglais", q: "Prétérit de « to run » ?", r: "ran" },
-    ],
-    bouge: "Course sur place 1 min, genoux hauts",
-  },
-  {
-    ref: "1RE·06",
-    questions: [
-      { matiere: "sport", q: "Pour le cœur : cardio ou muscu ?", r: "Le cardio (endurance)" },
-      { matiere: "nutrition", q: "Féculent (énergie) : pâtes, huile ou steak ?", r: "Les pâtes" },
-      { matiere: "maths", q: "PGCD de 12 et 18 ?", r: "6" },
-      { matiere: "sciences", q: "Unité de la force ?", r: "Le newton (N)" },
-    ],
-    bouge: "Fentes : 10 pas, le genou qui plie",
-  },
-  {
-    ref: "1RE·07",
-    questions: [
-      { matiere: "sport", q: "Faut-il s'étirer après le sport ?", r: "Oui, en douceur" },
-      { matiere: "nutrition", q: "Protéine végétale : lentilles ou beurre ?", r: "Les lentilles" },
-      { matiere: "francais", q: "Nature du mot « rapidement » ?", r: "Un adverbe" },
-      { matiere: "anglais", q: "Comparatif de « strong » ?", r: "stronger" },
-    ],
-    bouge: "Équilibre sur un pied 30 s, puis change",
-  },
-  {
-    ref: "1RE·08",
-    questions: [
-      { matiere: "sport", q: "Combien de séries pour travailler un muscle ?", r: "3 à 4 séries" },
-      { matiere: "nutrition", q: "Trop de sel, mauvais pour… ?", r: "Le cœur (la tension)" },
-      { matiere: "maths", q: "Probabilité d'obtenir « pile » ?", r: "1/2 (0,5)" },
-      { matiere: "sciences", q: "Combien de chromosomes chez l'humain ?", r: "46 (23 paires)" },
-    ],
-    bouge: "Escalier : 3 montées (ou 30 sauts)",
-  },
-  {
-    ref: "1RE·09",
-    questions: [
-      { matiere: "sport", q: "Repos entre 2 séances d'un même muscle ?", r: "≈ 48 h" },
-      { matiere: "nutrition", q: "Hydratation : eau ou soda ?", r: "L'eau" },
-      { matiere: "histoire", q: "Premier empereur des Français ?", r: "Napoléon Ier" },
-      { matiere: "anglais", q: "Traduis « healthy »", r: "Sain / en bonne santé" },
-    ],
-    bouge: "Danse sur une chanson entière 💃",
-  },
-  {
-    ref: "1RE·10",
-    questions: [
-      { matiere: "sport", q: "10 000 pas/jour, bon pour la santé ?", r: "Oui" },
-      { matiere: "nutrition", q: "Le sucre rapide donne de l'énergie sur… ?", r: "Le court terme" },
-      { matiere: "maths", q: "f(x) = x² : combien vaut f(−3) ?", r: "9" },
-      { matiere: "francais", q: "Genre de « Roméo et Juliette » ?", r: "Une tragédie" },
-    ],
-    bouge: "Étire-toi 30 s, respire à fond",
-  },
-  {
-    ref: "1RE·11",
-    questions: [
-      { matiere: "sport", q: "~Combien de kcal brûle 1 h de vélo modéré ?", r: "environ 400-500 kcal" },
-      { matiere: "nutrition", q: "Rôle des glucides pour le sport ?", r: "le carburant des muscles (énergie)" },
-      { matiere: "maths", q: "Résous x² − 5x + 6 = 0", r: "x = 2 ou x = 3" },
-      { matiere: "anglais", q: "Traduis « je m'entraîne depuis 2 ans »", r: "I have been training for 2 years" },
-    ],
-    bouge: "25 squats sautés",
-  },
-  {
-    ref: "1RE·12",
-    questions: [
-      { matiere: "nutrition", q: "Que sont les « macros » ?", r: "protéines, glucides et lipides" },
-      { matiere: "sport", q: "À quoi sert un jour de repos actif ?", r: "récupérer en bougeant doucement" },
-      { matiere: "francais", q: "Quelle figure : « un silence assourdissant » ?", r: "un oxymore" },
-      { matiere: "geo", q: "Le plus grand océan du monde ?", r: "l'océan Pacifique" },
-    ],
-    bouge: "gainage latéral 30 s par côté",
-  },
-  {
-    ref: "1RE·13",
-    questions: [
-      { matiere: "sport", q: "Le HIIT, c'est quoi ?", r: "un entraînement fractionné à haute intensité" },
-      { matiere: "nutrition", q: "Combien de kcal dans 1 g de lipides ?", r: "9 kcal" },
-      { matiere: "maths", q: "Développe (2x − 1)²", r: "4x² − 4x + 1" },
-      { matiere: "histoire", q: "En quelle année débute la 1re Guerre mondiale ?", r: "1914" },
-    ],
-    bouge: "40 mountain climbers",
-  },
-  {
-    ref: "1RE·14",
-    questions: [
-      { matiere: "nutrition", q: "Combien de kcal dans 1 g de glucides ?", r: "4 kcal" },
-      { matiere: "sport", q: "À quoi sert le gainage ?", r: "renforcer les abdos profonds et le dos" },
-      { matiere: "francais", q: "Auteur de « Madame Bovary » ?", r: "Gustave Flaubert" },
-      { matiere: "anglais", q: "Prétérit de « to eat » ?", r: "ate" },
-    ],
-    bouge: "gainage planche 45 s",
-  },
-  {
-    ref: "1RE·15",
-    questions: [
-      { matiere: "sport", q: "Pourquoi bien s'hydrater à l'effort ?", r: "compenser la sueur, garder la perf" },
-      { matiere: "nutrition", q: "Un aliment riche en glucides lents ?", r: "le riz complet (ou l'avoine)" },
-      { matiere: "maths", q: "Calcule 15 % de 240", r: "36" },
-      { matiere: "sciences", q: "Formule chimique de l'eau ?", r: "H₂O" },
-    ],
-    bouge: "30 fentes alternées",
-  },
-  {
-    ref: "1RE·16",
-    questions: [
-      { matiere: "nutrition", q: "Que manger en collation avant le sport ?", r: "un fruit (banane), glucides faciles à digérer" },
-      { matiere: "sport", q: "Le cardio améliore surtout… ?", r: "l'endurance et le souffle" },
-      { matiere: "francais", q: "Mouvement littéraire de Victor Hugo ?", r: "le romantisme" },
-      { matiere: "geo", q: "Capitale de l'Espagne ?", r: "Madrid" },
-    ],
-    bouge: "20 burpees",
-  },
-  {
-    ref: "1RE·17",
-    questions: [
-      { matiere: "sport", q: "Un exercice au poids du corps pour les jambes ?", r: "le squat (ou la fente)" },
-      { matiere: "nutrition", q: "Après le sport, quoi privilégier ?", r: "protéines + glucides pour récupérer" },
-      { matiere: "maths", q: "Image de 4 par f(x) = 2x + 1 ?", r: "9" },
-      { matiere: "anglais", q: "Traduis « stronger every day »", r: "plus fort chaque jour" },
-    ],
-    bouge: "25 pompes",
-  },
-  {
-    ref: "1RE·18",
-    questions: [
-      { matiere: "nutrition", q: "L'index glycémique mesure quoi ?", r: "la vitesse de montée du sucre dans le sang" },
-      { matiere: "sport", q: "Pourquoi varier ses exercices ?", r: "éviter la stagnation, solliciter tous les muscles" },
-      { matiere: "histoire", q: "Qui domine la France sous la Terreur ?", r: "Robespierre" },
-      { matiere: "sciences", q: "Unité de l'intensité électrique ?", r: "l'ampère (A)" },
-    ],
-    bouge: "50 jumping jacks",
-  },
-  {
-    ref: "1RE·19",
-    questions: [
-      { matiere: "sport", q: "La souplesse s'améliore avec quoi ?", r: "des étirements réguliers" },
-      { matiere: "nutrition", q: "Un aliment très riche en protéines ?", r: "les œufs (ou le thon)" },
-      { matiere: "maths", q: "Résous 3x + 7 = 22", r: "x = 5" },
-      { matiere: "francais", q: "Une pièce qui fait rire, c'est quel genre ?", r: "la comédie" },
-    ],
-    bouge: "chaise contre le mur 45 s",
-  },
-  {
-    ref: "1RE·20",
-    questions: [
-      { matiere: "nutrition", q: "Trop de sucre rapide entraîne quoi ?", r: "un pic puis une chute d'énergie (coup de barre)" },
-      { matiere: "sport", q: "À quoi sert le retour au calme ?", r: "faire baisser le rythme cardiaque doucement" },
-      { matiere: "anglais", q: "Traduis « I need to gain muscle »", r: "j'ai besoin de prendre du muscle" },
-      { matiere: "maths", q: "Coefficient directeur de y = −2x + 4 ?", r: "−2" },
-    ],
-    bouge: "30 crunchs",
-  },
-  {
-    ref: "1RE·21",
-    questions: [
-      { matiere: "sport", q: "Comment échauffer avant du lourd ?", r: "des séries légères, montantes" },
-      { matiere: "nutrition", q: "Rôle des lipides dans le corps ?", r: "réserve d'énergie, hormones" },
-      { matiere: "maths", q: "Aire d'un triangle base 6, hauteur 4 ?", r: "12" },
-      { matiere: "geo", q: "Un des plus longs fleuves du monde ?", r: "le Nil (ou l'Amazone)" },
-    ],
-    bouge: "20 relevés de bassin (hip thrust)",
-  },
-  {
-    ref: "1RE·22",
-    questions: [
-      { matiere: "nutrition", q: "Pourquoi les fibres sont utiles ?", r: "digestion et satiété" },
-      { matiere: "sport", q: "Pour perdre du gras, l'essentiel c'est… ?", r: "le déficit calorique (+ du sport)" },
-      { matiere: "francais", q: "Une strophe de 4 vers s'appelle… ?", r: "un quatrain" },
-      { matiere: "anglais", q: "Comparatif de « fast » ?", r: "faster" },
-    ],
-    bouge: "40 s de corde à sauter",
-  },
-  {
-    ref: "1RE·23",
-    questions: [
-      { matiere: "sport", q: "Que muscle principalement le tirage (rowing) ?", r: "le dos" },
-      { matiere: "nutrition", q: "Combien de kcal dans 1 g de protéines ?", r: "4 kcal" },
-      { matiere: "maths", q: "Résous x² = 36", r: "x = 6 ou x = −6" },
-      { matiere: "sciences", q: "Le gaz qu'on respire pour vivre ?", r: "le dioxygène (O₂)" },
-    ],
-    bouge: "15 pompes diamant",
-  },
-  {
-    ref: "1RE·24",
-    questions: [
-      { matiere: "nutrition", q: "Le petit-déjeuner avant le sport sert à quoi ?", r: "faire le plein d'énergie (glucides)" },
-      { matiere: "sport", q: "Pourquoi augmenter la charge peu à peu ?", r: "la surcharge progressive fait progresser" },
-      { matiere: "histoire", q: "Quelle bataille de 1815 met fin à Napoléon ?", r: "Waterloo" },
-      { matiere: "francais", q: "Auteur des « Fleurs du mal » ?", r: "Charles Baudelaire" },
-    ],
-    bouge: "30 squats tempo lent",
-  },
-  {
-    ref: "1RE·25",
-    questions: [
-      { matiere: "sport", q: "Repos entre séries pour la force ?", r: "2 à 3 minutes" },
-      { matiere: "nutrition", q: "Une source de protéines végétales ?", r: "les pois chiches (ou le tofu)" },
-      { matiere: "maths", q: "Probabilité de tirer un roi (jeu de 52) ?", r: "4/52 = 1/13" },
-      { matiere: "anglais", q: "Traduis « I feel tired after training »", r: "je me sens fatigué après l'entraînement" },
-    ],
-    bouge: "gainage planche 50 s",
-  },
-  {
-    ref: "1RE·26",
-    questions: [
-      { matiere: "nutrition", q: "Un déficit calorique, c'est quoi ?", r: "manger moins de calories qu'on n'en dépense" },
-      { matiere: "sport", q: "Le développé couché travaille quoi ?", r: "les pectoraux" },
-      { matiere: "maths", q: "Hypoténuse d'un triangle rectangle de côtés 3 et 4 ?", r: "5" },
-      { matiere: "geo", q: "Sur quel continent est l'Égypte ?", r: "l'Afrique" },
-    ],
-    bouge: "20 dips sur chaise",
-  },
-  {
-    ref: "1RE·27",
-    questions: [
-      { matiere: "sport", q: "Combien de répétitions pour l'hypertrophie ?", r: "environ 8 à 12" },
-      { matiere: "nutrition", q: "Un léger surplus calorique sert à quoi ?", r: "prendre de la masse (muscle)" },
-      { matiere: "francais", q: "Quel registre suscite la pitié ?", r: "le registre pathétique" },
-      { matiere: "sciences", q: "L'organe qui filtre le sang ?", r: "le rein" },
-    ],
-    bouge: "35 fentes marchées",
-  },
-  {
-    ref: "1RE·28",
-    questions: [
-      { matiere: "nutrition", q: "Pourquoi ne pas sauter de repas avant le sport ?", r: "manque d'énergie, baisse de perf" },
-      { matiere: "sport", q: "Le squat travaille quels muscles ?", r: "cuisses et fessiers" },
-      { matiere: "maths", q: "Développe (x + 5)(x − 5)", r: "x² − 25" },
-      { matiere: "anglais", q: "Prétérit de « to swim » ?", r: "swam" },
-    ],
-    bouge: "45 s de gainage planche",
-  },
-  {
-    ref: "1RE·29",
-    questions: [
-      { matiere: "sport", q: "Pourquoi bien respirer pendant l'effort ?", r: "oxygéner les muscles, retarder la fatigue" },
-      { matiere: "nutrition", q: "Rôle du fer dans le sang ?", r: "transporter l'oxygène" },
-      { matiere: "maths", q: "f(x) = x² : image de −2 ?", r: "4" },
-      { matiere: "francais", q: "Auteur du « Rouge et le Noir » ?", r: "Stendhal" },
-    ],
-    bouge: "22 burpees",
-  },
-  {
-    ref: "1RE·30",
-    questions: [
-      { matiere: "nutrition", q: "Que boire pendant un effort long ?", r: "de l'eau, par petites gorgées" },
-      { matiere: "sport", q: "À quoi sert la mobilité articulaire ?", r: "préparer les articulations, limiter les blessures" },
-      { matiere: "maths", q: "Résous 2x² = 18", r: "x = 3 ou x = −3" },
-      { matiere: "histoire", q: "Quel roi lors de la prise de la Bastille (1789) ?", r: "Louis XVI" },
-    ],
-    bouge: "30 squats + 15 pompes",
-  },
+  { ref: "1RE·01", questions: [ {matiere:"maths",q:"Résous x² = 49",r:"x = 7 ou x = −7"}, {matiere:"francais",q:"Quelle figure : « cette valise pèse une tonne » ?",r:"Une hyperbole"}, {matiere:"anglais",q:"Traduis « I have lived here for 10 years »",r:"J'habite ici depuis 10 ans"}, {matiere:"sciences",q:"Formule chimique de l'eau ?",r:"H₂O"} ], bouge: "20 squats" },
+  { ref: "1RE·02", questions: [ {matiere:"maths",q:"Développe (x + 3)²",r:"x² + 6x + 9"}, {matiere:"histoire",q:"En quelle année débute la Révolution française ?",r:"1789"}, {matiere:"numerique",q:"Vrai/faux : une photo Insta reflète toujours la réalité.",r:"Faux, souvent retouchée/filtrée"}, {matiere:"sport",q:"Temps de récup minimum pour un même muscle ?",r:"Environ 48 h"} ], bouge: "30 s de gainage (planche)" },
+  { ref: "1RE·03", questions: [ {matiere:"maths",q:"Factorise x² − 9",r:"(x − 3)(x + 3)"}, {matiere:"francais",q:"Le romantisme, c'est quel siècle ?",r:"Le XIXe siècle"}, {matiere:"geo",q:"Qu'est-ce que la mondialisation ?",r:"La mise en relation des territoires du monde"}, {matiere:"nutrition",q:"Combien de kcal dans 1 g de protéines ?",r:"4 kcal"} ], bouge: "15 pompes" },
+  { ref: "1RE·04", questions: [ {matiere:"maths",q:"Résous 2x + 6 = 0",r:"x = −3"}, {matiere:"anglais",q:"Prétérit de « to go » ?",r:"went"}, {matiere:"sciences",q:"Un ion Na⁺ a gagné ou perdu un électron ?",r:"Perdu un électron"}, {matiere:"emc",q:"Consentement, vrai/faux : un « oui » forcé est un vrai oui.",r:"Faux"} ], bouge: "25 mountain climbers" },
+  { ref: "1RE·05", questions: [ {matiere:"maths",q:"Image de 3 par f(x) = 2x − 1 ?",r:"5"}, {matiere:"francais",q:"Registre d'un texte qui fait rire ?",r:"Le registre comique"}, {matiere:"numerique",q:"C'est quoi une fake news ?",r:"Une fausse information diffusée comme vraie"}, {matiere:"sport",q:"À quoi sert l'échauffement ?",r:"Préparer le corps, éviter les blessures"} ], bouge: "40 s de saut sur place" },
+  { ref: "1RE·06", questions: [ {matiere:"maths",q:"2⁵ = ?",r:"32"}, {matiere:"histoire",q:"Qui prend le pouvoir par un coup d'État en 1799 ?",r:"Napoléon Bonaparte"}, {matiere:"nutrition",q:"Combien de litres d'eau par jour environ ?",r:"Environ 1,5 à 2 L"}, {matiere:"anglais",q:"Traduis « She has already eaten »",r:"Elle a déjà mangé"} ], bouge: "20 fentes (10 par jambe)" },
+  { ref: "1RE·07", questions: [ {matiere:"maths",q:"Coeff directeur de la droite y = 3x + 2 ?",r:"3"}, {matiere:"anglais",q:"Present perfect de « to see » (I …) ?",r:"I have seen"}, {matiere:"geo",q:"Cite un pôle majeur de la mondialisation.",r:"New York, Londres, Shanghai…"}, {matiere:"sciences",q:"Symbole chimique du carbone ?",r:"C"} ], bouge: "30 jumping jacks" },
+  { ref: "1RE·08", questions: [ {matiere:"maths",q:"Résous x² − 5x = 0",r:"x = 0 ou x = 5"}, {matiere:"francais",q:"Comparaison ou métaphore : « fort comme un lion » ?",r:"Une comparaison (avec « comme »)"}, {matiere:"sport",q:"Que sont les macros ?",r:"Protéines, glucides, lipides"}, {matiere:"numerique",q:"Pourquoi protéger ses données perso ?",r:"Éviter piratage, usurpation, pistage"} ], bouge: "45 s de gainage" },
+  { ref: "1RE·09", questions: [ {matiere:"maths",q:"Notation scientifique de 3400 ?",r:"3,4 × 10³"}, {matiere:"sciences",q:"Unité de base du vivant ?",r:"La cellule"}, {matiere:"histoire",q:"1848 en France : quel régime naît ?",r:"La IIe République"}, {matiere:"nutrition",q:"Rôle des protéines pour le muscle ?",r:"Réparer et construire les fibres"} ], bouge: "15 burpees" },
+  { ref: "1RE·10", questions: [ {matiere:"maths",q:"Résous 3(x − 2) = 9",r:"x = 5"}, {matiere:"anglais",q:"Traduis « I've never been to London »",r:"Je ne suis jamais allé à Londres"}, {matiere:"emc",q:"On te coupe la parole sans cesse : que fais-tu ?",r:"Je le dis calmement et je repose mon point"}, {matiere:"geo",q:"Une inégalité de la mondialisation ?",r:"L'écart de richesse Nord/Sud"} ], bouge: "20 relevés de genoux rapides" },
+  { ref: "1RE·11", questions: [ {matiere:"maths",q:"Développe (x − 4)(x + 4)",r:"x² − 16"}, {matiere:"francais",q:"Auteur des « Misérables » ?",r:"Victor Hugo"}, {matiere:"numerique",q:"Un effet possible d'un temps d'écran excessif ?",r:"Fatigue, mauvais sommeil, moins de concentration"}, {matiere:"sport",q:"Pourquoi bien dormir pour progresser ?",r:"Le muscle récupère et se construit la nuit"} ], bouge: "50 s de planche" },
+  { ref: "1RE·12", questions: [ {matiere:"maths",q:"10⁻³ = ?",r:"0,001"}, {matiere:"sciences",q:"Que mesure-t-on en joules ?",r:"L'énergie"}, {matiere:"nutrition",q:"Combien de kcal dans 1 g de lipides ?",r:"9 kcal"}, {matiere:"histoire",q:"Napoléon est sacré empereur en… ?",r:"1804"} ], bouge: "20 squats sautés" },
+  { ref: "1RE·13", questions: [ {matiere:"maths",q:"Résous x² = 2x + 3",r:"x = 3 ou x = −1"}, {matiere:"anglais",q:"« since » ou « for » : « I've known her ___ 2010 » ?",r:"since"}, {matiere:"francais",q:"Le réalisme cherche à… ?",r:"Représenter la réalité fidèlement"}, {matiere:"emc",q:"Vrai/faux : respecter, c'est être d'accord avec tout.",r:"Faux, on respecte sans forcément approuver"} ], bouge: "30 s de chaise contre le mur" },
+  { ref: "1RE·14", questions: [ {matiere:"maths",q:"Coordonnées du vecteur de A(1;2) à B(4;6) ?",r:"(3;4)"}, {matiere:"numerique",q:"Vrai/faux : un like définit ta valeur.",r:"Faux, ta valeur n'en dépend pas"}, {matiere:"sport",q:"Après l'effort, à quoi sert l'étirement ?",r:"Aider la récupération, garder la souplesse"}, {matiere:"geo",q:"Un flux de la mondialisation ?",r:"Marchandises, capitaux, informations ou humains"} ], bouge: "25 talons-fesses" },
+  { ref: "1RE·15", questions: [ {matiere:"maths",q:"Résous 5x − 7 = 3x + 1",r:"x = 4"}, {matiere:"sciences",q:"Atome neutre : autant de protons que de… ?",r:"d'électrons"}, {matiere:"histoire",q:"La Déclaration des droits de l'homme date de… ?",r:"1789"}, {matiere:"nutrition",q:"Un aliment riche en protéines ?",r:"Œuf, poulet, poisson, légumineuses…"} ], bouge: "15 pompes serrées" },
+  { ref: "1RE·16", questions: [ {matiere:"maths",q:"Factorise x² + 6x + 9",r:"(x + 3)²"}, {matiere:"francais",q:"« Ô temps, suspends ton vol ! » : quelle figure ?",r:"Une apostrophe"}, {matiere:"anglais",q:"Prétérit de « to buy » ?",r:"bought"}, {matiere:"emc",q:"Gérer sa colère : une bonne 1re étape ?",r:"Respirer, prendre du recul avant de réagir"} ], bouge: "40 mountain climbers" },
+  { ref: "1RE·17", questions: [ {matiere:"maths",q:"20 % de 150 ?",r:"30"}, {matiere:"numerique",q:"Une donnée perso publiée peut-elle disparaître ?",r:"Difficilement, elle peut rester en ligne"}, {matiere:"sport",q:"Fréquence d'entraînement raisonnable par semaine ?",r:"3 à 4 séances pour bien récupérer"}, {matiere:"sciences",q:"Formule du dioxyde de carbone ?",r:"CO₂"} ], bouge: "50 s de gainage latéral (25 s/côté)" },
+  { ref: "1RE·18", questions: [ {matiere:"maths",q:"Résous x² − 4 = 0",r:"x = 2 ou x = −2"}, {matiere:"francais",q:"Le siècle des Lumières, c'est le… ?",r:"XVIIIe siècle"}, {matiere:"nutrition",q:"À La Réunion (974), quelle maladie liée à l'alimentation est fréquente ?",r:"Le diabète"}, {matiere:"histoire",q:"Défaite finale de Napoléon à Waterloo en… ?",r:"1815"} ], bouge: "20 fentes sautées" },
+  { ref: "1RE·19", questions: [ {matiere:"maths",q:"Résous 4x = 2x + 10",r:"x = 5"}, {matiere:"anglais",q:"Traduis « They have finished their homework »",r:"Ils ont fini leurs devoirs"}, {matiere:"emc",q:"Un pote se fait humilier : que fais-tu ?",r:"Je le soutiens, je n'en rajoute pas"}, {matiere:"francais",q:"Genre d'une pièce jouée sur scène ?",r:"Le théâtre"} ], bouge: "30 s de sprint sur place" },
+  { ref: "1RE·20", questions: [ {matiere:"maths",q:"Hypoténuse d'un triangle rectangle de côtés 3 et 4 ?",r:"5 (Pythagore)"}, {matiere:"sciences",q:"Quel gaz la photosynthèse rejette-t-elle ?",r:"Du dioxygène (O₂)"}, {matiere:"sport",q:"Signe d'une bonne hydratation à l'effort ?",r:"Urines claires, pas de soif intense"}, {matiere:"geo",q:"Une firme transnationale, c'est… ?",r:"Une entreprise implantée dans plusieurs pays"} ], bouge: "15 burpees" },
+  { ref: "1RE·21", questions: [ {matiere:"maths",q:"cos(60°) = ?",r:"0,5"}, {matiere:"francais",q:"Une antithèse, c'est… ?",r:"Opposer deux idées contraires"}, {matiere:"nutrition",q:"Trop de sel : quel risque ?",r:"L'hypertension"}, {matiere:"numerique",q:"Face à une info, 1er réflexe critique ?",r:"Vérifier la source"} ], bouge: "45 s de planche + 10 pompes" },
+  { ref: "1RE·22", questions: [ {matiere:"maths",q:"Résous 2x² = 8",r:"x = 2 ou x = −2"}, {matiere:"anglais",q:"« for » exprime une durée : « ___ three hours » ?",r:"for"}, {matiere:"histoire",q:"Abolition définitive de l'esclavage en France en… ?",r:"1848"}, {matiere:"emc",q:"Consentement : peut-on changer d'avis après un oui ?",r:"Oui, toujours"} ], bouge: "25 squats + 15 s gainage" },
+  { ref: "1RE·23", questions: [ {matiere:"maths",q:"Aire d'un disque de rayon 5 (π ≈ 3,14) ?",r:"Environ 78,5"}, {matiere:"sciences",q:"Charge électrique d'un proton ?",r:"Positive (+)"}, {matiere:"sport",q:"Vrai/faux : une courbature = muscle qui grossit.",r:"Faux, ce sont des micro-lésions en réparation"}, {matiere:"francais",q:"Le naturalisme est associé à quel auteur ?",r:"Émile Zola"} ], bouge: "30 talons-fesses rapides" },
+  { ref: "1RE·24", questions: [ {matiere:"maths",q:"Résous (x − 1)(x + 2) = 0",r:"x = 1 ou x = −2"}, {matiere:"francais",q:"Une périphrase pour « le Soleil » ?",r:"« L'astre du jour »"}, {matiere:"numerique",q:"Photos retouchées : effet sur l'image de soi ?",r:"Complexes, comparaison irréaliste"}, {matiere:"emc",q:"Dire les choses avec respect, ça s'appelle… ?",r:"Être assertif"} ], bouge: "20 pompes" },
+  { ref: "1RE·25", questions: [ {matiere:"maths",q:"Résous 3x² − 12 = 0",r:"x = 2 ou x = −2"}, {matiere:"anglais",q:"Complète : « I ___ just finished » (present perfect)",r:"I have just finished"}, {matiere:"francais",q:"Une allitération répète des… ?",r:"Consonnes (sons proches)"}, {matiere:"sport",q:"Combien d'heures de sommeil conseillées à 16 ans ?",r:"Environ 8 à 9 h"} ], bouge: "50 s de corde à sauter" },
+  { ref: "1RE·26", questions: [ {matiere:"maths",q:"Proba d'obtenir un 6 avec un dé équilibré ?",r:"1/6"}, {matiere:"sciences",q:"Quelle énergie stocke une batterie ?",r:"De l'énergie chimique"}, {matiere:"nutrition",q:"Protéines/kg/jour visées pour la muscu (ordre) ?",r:"Environ 1,5 à 2 g/kg"}, {matiere:"geo",q:"Un territoire à l'écart de la mondialisation, on dit… ?",r:"Une périphérie délaissée"} ], bouge: "15 squats sautés" },
+  { ref: "1RE·27", questions: [ {matiere:"histoire",q:"Prise de la Bastille : quel jour ?",r:"14 juillet 1789"}, {matiere:"anglais",q:"Traduis « Have you ever tried sushi? »",r:"As-tu déjà essayé les sushis ?"}, {matiere:"francais",q:"Une strophe de 4 vers s'appelle… ?",r:"Un quatrain"}, {matiere:"emc",q:"Face à un désaccord, que fais-tu ?",r:"J'écoute et j'expose mes idées sans insulter"} ], bouge: "30 mountain climbers" },
+  { ref: "1RE·28", questions: [ {matiere:"francais",q:"Un exemple d'oxymore ?",r:"« Un silence assourdissant »"}, {matiere:"numerique",q:"Cyberharcèlement : le bon réflexe ?",r:"Ne pas répondre, capturer, signaler, en parler"}, {matiere:"nutrition",q:"Un petit-déj équilibré, quel combo ?",r:"Protéine + sucre lent + fruit"}, {matiere:"sciences",q:"À 0 °C, quel changement d'état de l'eau ?",r:"Fusion/solidification (liquide ↔ solide)"} ], bouge: "40 s de gainage" },
+  { ref: "1RE·29", questions: [ {matiere:"anglais",q:"Prétérit de « to eat » ?",r:"ate"}, {matiere:"sport",q:"Gagner en force : augmenter quoi progressivement ?",r:"La charge (surcharge progressive)"}, {matiere:"emc",q:"Gérer le stress avant un oral : une technique ?",r:"Respiration lente ou visualisation"}, {matiere:"nutrition",q:"Boisson à limiter pour dents et poids ?",r:"Les sodas sucrés"} ], bouge: "20 burpees" },
+  { ref: "1RE·30", questions: [ {matiere:"francais",q:"Quel registre suscite la pitié ?",r:"Le registre pathétique"}, {matiere:"numerique",q:"Un mot de passe solide, c'est… ?",r:"Long, varié (lettres/chiffres/symboles) et unique"}, {matiere:"emc",q:"Avant de poster, je me demande… ?",r:"Est-ce vrai, utile, respectueux ?"}, {matiere:"sciences",q:"Combien de chromosomes chez l'humain ?",r:"46 (23 paires)"} ], bouge: "45 s de planche" },
 ];

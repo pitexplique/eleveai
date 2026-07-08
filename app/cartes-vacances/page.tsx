@@ -37,6 +37,7 @@ const decks = [
   { slug: "vers-la-6e", niveau: "CM2 → 6ᵉ", titre: "Vers la 6ᵉ", theme: "Maths, français, anglais, sport… + un défi sport à chaque carte", emoji: "🎒", grad: "from-yellow-400 to-amber-600" },
   { slug: "vers-la-5e", niveau: "6ᵉ → 5ᵉ", titre: "Vers la 5ᵉ", theme: "Maths, français, anglais + sport et nutrition pour bouger et bien manger", emoji: "🐋", grad: "from-sky-400 to-blue-600" },
   { slug: "vers-la-4e", niveau: "5ᵉ → 4ᵉ", titre: "Vers la 4ᵉ", theme: "Maths (démonstration, Pythagore), sport, nutrition + 📱 numérique et réseaux sociaux", emoji: "🌍", grad: "from-indigo-400 to-blue-700" },
+  { slug: "vers-la-3e", niveau: "4ᵉ → 3ᵉ", titre: "Vers la 3ᵉ", theme: "Brevet : maths (démonstration), 🌋 La Réunion, 🤝 respect et émotions, 📱 jeux vidéo", emoji: "🚀", grad: "from-fuchsia-500 to-purple-700" },
   { slug: "vers-la-premiere", niveau: "2ⁿᵈᵉ → 1ʳᵉ", titre: "Vers la 1ʳᵉ", theme: "Révise + bouge : maths, français, sport, nutrition (l'apparence, ça motive !)", emoji: "🎓", grad: "from-orange-400 to-violet-600" },
 ];
 
