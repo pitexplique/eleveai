@@ -1065,6 +1065,61 @@ export default function AccueilPage({
         </Link>
       </section>
 
+      {/* ── LA TÊTE ET LES JAMBES — cartes de révision lycée + sport (cible SEO
+          « le trou de Nathan » : réviser avant la 1re) ──────────────────────── */}
+      <section className="px-4 pt-6 sm:px-6 lg:px-8">
+        <Link
+          href="/cartes-vacances/vers-la-premiere"
+          className="group mx-auto flex max-w-4xl flex-col items-center gap-5 overflow-hidden rounded-2xl border border-orange-300/30 bg-gradient-to-br from-orange-400/[0.12] via-violet-400/[0.07] to-lime-400/[0.05] p-6 text-center transition hover:border-orange-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:text-left sm:p-7"
+        >
+          <div>
+            <p className="text-xs font-black uppercase tracking-wide text-orange-200">
+              🃏 À imprimer · gratuit
+            </p>
+            <h2 className="mt-1 text-2xl font-black text-white sm:text-3xl">
+              🧠 La tête et les jambes 🦵
+            </h2>
+            <p className="mt-1 text-sm font-semibold text-white/75">
+              Cartes de révision «&nbsp;Vers la 1re&nbsp;» à imprimer : 4 questions
+              (maths, français, <span className="text-orange-200">sport, nutrition</span>) +
+              un défi sport. On révise <span className="text-orange-200">en bougeant</span>. 💪
+            </p>
+            <span className="mt-3 inline-flex items-center gap-2 rounded-full bg-orange-400 px-6 py-3 text-sm font-black text-[#041B33] shadow-lg">
+              Voir les cartes →
+            </span>
+          </div>
+
+          {/* Aperçu d'une carte défi (recto) */}
+          <div className="w-full max-w-[300px] shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white text-left shadow-xl transition group-hover:-translate-y-0.5 group-hover:shadow-2xl">
+            <div className="flex items-center justify-between bg-gradient-to-r from-orange-500 to-violet-600 px-3 py-1.5 text-white">
+              <span className="text-[11px] font-black">🃏 Cartes défis · Vers la 1re</span>
+              <span className="rounded-full border border-white/40 px-1.5 py-0.5 text-[9px] font-black">1RE·01</span>
+            </div>
+            <div className="p-2.5">
+              <div className="grid grid-cols-2 gap-1.5">
+                {[
+                  { e: "💪", l: "Sport", q: "Séances/sem. pour progresser ?", c: "border-orange-300 bg-orange-50 text-orange-700" },
+                  { e: "🥗", l: "Nutrition", q: "Nutriment qui construit le muscle ?", c: "border-lime-300 bg-lime-50 text-lime-700" },
+                  { e: "📐", l: "Maths", q: "Résous : 2x + 6 = 0", c: "border-violet-300 bg-violet-50 text-violet-700" },
+                  { e: "🇬🇧", l: "Anglais", q: "Traduis « I work out »", c: "border-blue-300 bg-blue-50 text-blue-700" },
+                ].map((b) => (
+                  <div key={b.l} className={`rounded-md border p-1.5 ${b.c}`}>
+                    <p className="text-[8px] font-black uppercase tracking-wide">{b.e} {b.l}</p>
+                    <p className="mt-0.5 text-[9px] font-bold leading-tight text-slate-800">{b.q}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-1.5 flex items-center gap-1.5 rounded-md bg-orange-100 px-2 py-1 text-[9px] font-black text-orange-800">
+                🤸 <span className="uppercase tracking-wide">Sport du jour :</span> 20 squats
+              </div>
+              <p className="mt-1 text-right text-[8px] font-black uppercase tracking-[0.15em] text-slate-300">
+                eleveai.fr · réponses au dos
+              </p>
+            </div>
+          </div>
+        </Link>
+      </section>
+
       {/* ── ESPACE ÉLÈVE (ancre du sélecteur d'audience) : jeu, dictée, coach… ── */}
       {/* ── JEU DE 32 CARTES « QUI SUIS-JE ? » — à imprimer, avant la dictée ──── */}
       <section id="espace-eleve" className="scroll-mt-24 px-4 pt-6 sm:px-6 lg:px-8">

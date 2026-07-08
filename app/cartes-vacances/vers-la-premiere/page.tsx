@@ -3,9 +3,20 @@ import CartesDeck from "@/components/cartes/CartesDeck";
 import { CARTES } from "./data";
 
 export const metadata: Metadata = {
-  title: "Cartes de révision Vers la 1re à imprimer (gratuit) — EleveAI",
+  title:
+    "La tête et les jambes — Cartes de révision « Vers la 1re » à imprimer (gratuit)",
   description:
-    "Un jeu de cartes de révision gratuit à imprimer pour entrer en 1re : 4 questions multi-matières par carte (maths, français, anglais, histoire…) + un défi sport. Réponses au dos.",
+    "Cartes de révision gratuites à imprimer pour entrer en première : 4 questions par carte (maths, français, anglais, sport, nutrition) + un défi sport. Réviser en bougeant, réponses au dos. « La tête et les jambes ».",
+  keywords: [
+    "cartes de révision première",
+    "réviser avant la première",
+    "cartes de révision à imprimer",
+    "entrée en 1re",
+    "réviser en s'amusant lycée",
+    "la tête et les jambes",
+    "cahier de vacances première",
+    "EleveAI",
+  ],
   alternates: { canonical: "/cartes-vacances/vers-la-premiere" },
 };
 
