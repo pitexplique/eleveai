@@ -41,8 +41,14 @@ export async function POST(req: Request) {
         : "";
     const code_etablissement = etabRaw || null;
 
+    // Pays du visiteur : en-tête géo injecté GRATUITEMENT par Vercel (même en
+    // Hobby) — code ISO à 2 lettres, ex. 'FR', 'RE', 'US'. Pas d'IP, pas
+    // d'identité : donnée 100 % agrégée, RGPD clean. Null hors Vercel (dev).
+    const paysRaw = req.headers.get("x-vercel-ip-country") || "";
+    const pays = paysRaw.trim().slice(0, 2).toUpperCase() || null;
+
     const supabase = serviceClient();
-    await supabase.from("pages_vues").insert({ page, code_etablissement });
+    await supabase.from("pages_vues").insert({ page, code_etablissement, pays });
   } catch {
     // Silencieux : le tracking ne doit JAMAIS casser la navigation de l'élève.
   }

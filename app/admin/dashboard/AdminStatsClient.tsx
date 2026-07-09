@@ -44,6 +44,11 @@ type Stats = {
     total30: number;
     topPages: { page: string; count: number; count7: number }[];
   };
+  geo: {
+    total30: number;
+    parPays: { pays: string; count: number; count7: number }[];
+    topPagesParPays: Record<string, { page: string; count: number }[]>;
+  };
   avis: {
     total: number;
     nonTraites: number;
@@ -93,6 +98,28 @@ function sectionLabel(page: string) {
   return SECTION_LABELS[page] ?? page;
 }
 
+// Code ISO 2 lettres -> drapeau emoji (indicateurs régionaux Unicode).
+function drapeau(code: string) {
+  if (!/^[A-Z]{2}$/.test(code)) return "🏳️";
+  return String.fromCodePoint(
+    ...[...code].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65)
+  );
+}
+const PAYS_NOMS: Record<string, string> = {
+  FR: "France", RE: "La Réunion", US: "États-Unis", GP: "Guadeloupe",
+  MQ: "Martinique", GF: "Guyane", YT: "Mayotte", NC: "Nouvelle-Calédonie",
+  PF: "Polynésie fr.", TN: "Tunisie", MG: "Madagascar", MU: "Maurice",
+  KM: "Comores", SC: "Seychelles", BE: "Belgique", CH: "Suisse", CA: "Canada",
+  MA: "Maroc", DZ: "Algérie", SN: "Sénégal", CI: "Côte d'Ivoire", CM: "Cameroun",
+  DE: "Allemagne", GB: "Royaume-Uni", ES: "Espagne", IT: "Italie",
+  PT: "Portugal", NL: "Pays-Bas", LU: "Luxembourg", CN: "Chine", IN: "Inde",
+  RU: "Russie", BR: "Brésil",
+};
+function paysLabel(code: string) {
+  if (!code || code === "??") return "🏳️ Inconnu";
+  return `${drapeau(code)} ${PAYS_NOMS[code] ?? code}`;
+}
+
 function dateAvis(iso: string) {
   return new Intl.DateTimeFormat("fr-FR", {
     day: "2-digit",
@@ -127,6 +154,7 @@ function Kpi({
 export default function AdminStatsClient() {
   const [scope, setScope] = useState("all");
   const [openAvis, setOpenAvis] = useState<Set<string | number>>(new Set());
+  const [openPays, setOpenPays] = useState<string | null>(null);
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -383,6 +411,93 @@ export default function AdminStatsClient() {
                       </div>
                     </div>
                   ));
+                })()}
+              </div>
+            )}
+          </div>
+
+          {/* D'où viennent les visiteurs (pays via Vercel, anonymes inclus) */}
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-5">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h3 className="text-sm font-bold text-slate-200">🌍 D&apos;où viennent les visiteurs</h3>
+              <span className="rounded-full bg-slate-800 px-2.5 py-1 text-xs font-bold text-slate-300">
+                {stats.geo.total30} vues · 30j
+              </span>
+            </div>
+            <p className="mt-0.5 text-[11px] font-semibold text-slate-500">
+              Pays de tous les visiteurs (anonymes inclus), via Vercel — agrégé, sans IP.
+              Clique un pays pour voir ses pages.
+            </p>
+
+            {stats.geo.parPays.length === 0 ? (
+              <p className="mt-4 text-sm text-slate-400">
+                Aucune donnée pays pour l&apos;instant. (Colonne{" "}
+                <code className="rounded bg-slate-800 px-1 text-slate-300">pays</code>{" "}
+                ajoutée en base ? Non rétroactif : compte à partir du déploiement.)
+              </p>
+            ) : (
+              <div className="mt-4 space-y-2.5">
+                {(() => {
+                  const max = Math.max(
+                    ...stats.geo.parPays.map((p) => p.count),
+                    1
+                  );
+                  return stats.geo.parPays.map((p) => {
+                    const pct = Math.round((p.count / stats.geo.total30) * 100);
+                    const isOpen = openPays === p.pays;
+                    const pages = stats.geo.topPagesParPays[p.pays] ?? [];
+                    return (
+                      <div key={p.pays}>
+                        <button
+                          type="button"
+                          onClick={() => setOpenPays(isOpen ? null : p.pays)}
+                          className="w-full text-left"
+                        >
+                          <div className="flex items-center justify-between text-xs">
+                            <span className="font-semibold text-slate-300">
+                              {paysLabel(p.pays)}
+                            </span>
+                            <span className="font-bold text-slate-400">
+                              {p.count}
+                              <span className="ml-1 font-medium text-slate-600">
+                                ({pct}% · 7j : {p.count7})
+                              </span>
+                            </span>
+                          </div>
+                          <div className="mt-1 h-2 overflow-hidden rounded-full bg-slate-800">
+                            <div
+                              className="h-full rounded-full bg-emerald-500"
+                              style={{ width: `${(p.count / max) * 100}%` }}
+                            />
+                          </div>
+                        </button>
+                        {isOpen && (
+                          <div className="mt-2 rounded-lg border border-slate-800 bg-slate-950/50 p-3">
+                            <p className="mb-1.5 text-[11px] font-bold text-slate-400">
+                              Pages visitées depuis {paysLabel(p.pays)}
+                            </p>
+                            {pages.length === 0 ? (
+                              <p className="text-xs text-slate-500">Aucune page détaillée.</p>
+                            ) : (
+                              <ul className="space-y-1">
+                                {pages.map((pg) => (
+                                  <li
+                                    key={pg.page}
+                                    className="flex items-center justify-between text-xs"
+                                  >
+                                    <span className="text-slate-300">
+                                      {sectionLabel(pg.page)}
+                                    </span>
+                                    <span className="font-bold text-slate-500">{pg.count}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  });
                 })()}
               </div>
             )}

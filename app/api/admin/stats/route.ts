@@ -189,12 +189,10 @@ export async function GET(req: Request) {
   // Navigation AGRÉGÉE (« où vont les élèves ») depuis pages_vues. Sans identité :
   // on n'a que la section + le code établissement. Table optionnelle → si absente,
   // fetchAll renvoie [] et l'encart s'affiche vide (pas d'erreur).
-  const pagesVues = await fetchAll(
-    supabase,
-    "pages_vues",
-    "page, created_at",
-    etabFilter
-  );
+  // select '*' (et pas 'page, pays, created_at') pour rester robuste AVANT la
+  // migration : si la colonne `pays` n'existe pas encore, '*' l'ignore au lieu
+  // de renvoyer une erreur qui viderait aussi l'encart navigation.
+  const pagesVues = await fetchAll(supabase, "pages_vues", "*", etabFilter);
 
   // ---- Sélecteur d'établissements (depuis acces_etablissement) ----
   const etabMap = new Map<string, { eleves: number; profs: number }>();
@@ -360,6 +358,48 @@ export async function GET(req: Request) {
       .slice(0, 12),
   };
 
+  // Répartition par PAYS (code ISO x-vercel-ip-country), 30 j + sous-total 7 j,
+  // ET top des pages PAR pays : on peut lire, ex., sur quoi atterrissent les US
+  // — la vue que Vercel réserve au plan Pro. '??' = pays inconnu (dev, avant
+  // migration, ou en-tête absent).
+  const pays30 = new Map<string, number>();
+  const pays7 = new Map<string, number>();
+  const pagesParPaysMap = new Map<string, Map<string, number>>();
+  for (const p of pagesVues) {
+    const pays = ((p.pays as string) || "??").toUpperCase();
+    const page = p.page as string;
+    const t = new Date(p.created_at as string).getTime();
+    if (!Number.isFinite(t)) continue;
+    if (t >= since30) {
+      pays30.set(pays, (pays30.get(pays) ?? 0) + 1);
+      if (page) {
+        let m = pagesParPaysMap.get(pays);
+        if (!m) {
+          m = new Map<string, number>();
+          pagesParPaysMap.set(pays, m);
+        }
+        m.set(page, (m.get(page) ?? 0) + 1);
+      }
+    }
+    if (t >= since7) pays7.set(pays, (pays7.get(pays) ?? 0) + 1);
+  }
+  const geo = {
+    total30: Array.from(pays30.values()).reduce((s, n) => s + n, 0),
+    parPays: Array.from(pays30.entries())
+      .map(([pays, count]) => ({ pays, count, count7: pays7.get(pays) ?? 0 }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 15),
+    topPagesParPays: Object.fromEntries(
+      Array.from(pagesParPaysMap.entries()).map(([pays, m]) => [
+        pays,
+        Array.from(m.entries())
+          .map(([page, count]) => ({ page, count }))
+          .sort((a, b) => b.count - a.count)
+          .slice(0, 8),
+      ])
+    ) as Record<string, { page: string; count: number }[]>,
+  };
+
   const moyenneGenerale =
     pctList.length > 0
       ? Math.round(pctList.reduce((s, p) => s + p, 0) / pctList.length)
@@ -417,6 +457,7 @@ export async function GET(req: Request) {
     engagement,
     derniersConnectes,
     navigation,
+    geo,
     avis,
   });
 }
