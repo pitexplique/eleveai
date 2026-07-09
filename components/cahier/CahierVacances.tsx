@@ -207,6 +207,19 @@ export default function CahierVacances({
             Maths, français, anglais… du CP au Bac, au rythme de ton enfant, sans jugement.
           </span>
         </Link>
+        {/* Preuve sociale : un vrai avis d'élève (retours_eleves), sous le CTA
+           pour rassurer avant le clic. Prénom seul (RGPD : jamais relié à une
+           classe/établissement). */}
+        <figure className="mx-auto mt-2 max-w-xl text-center">
+          <div className="text-xs tracking-wide text-amber-500">★★★★★</div>
+          <blockquote className="mt-0.5 text-xs font-semibold italic leading-5 text-slate-600">
+            « Franchement, j&apos;ai adoré faire ça le soir, quand j&apos;avais un
+            moment. Ça ne peut être que bénéfique sur le long terme. »
+          </blockquote>
+          <figcaption className="mt-0.5 text-[11px] font-black text-slate-500">
+            — Pierre, élève
+          </figcaption>
+        </figure>
       </div>
 
       <article className="mx-auto max-w-4xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0">
