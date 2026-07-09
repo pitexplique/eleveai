@@ -43,6 +43,21 @@ export const metadata: Metadata = {
   },
 };
 
+// Curation de la vitrine : un élève peut mettre 5★ tout en écrivant une
+// remarque de design ou un bug (« pas les bonnes couleurs… un dégradé »). Ces
+// messages ne sont pas des témoignages : on les écarte de la page d'accueil
+// (ils restent visibles dans l'admin des retours). Filtre de contenu simple :
+//   - trop court pour un vrai témoignage
+//   - vocabulaire de signalement UI/bug plutôt que d'avis
+const AVIS_EXCLURE_VITRINE =
+  /couleur|d[ée]grad|bouton|\bbug\b|marche pas|fonctionne pas|probl[eè]me|erreur|plante|s'affiche|affiche pas|dysfonction|lag/i;
+
+function estAvisVitrine(message: string): boolean {
+  const m = message.trim();
+  if (m.length < 30) return false;
+  return !AVIS_EXCLURE_VITRINE.test(m);
+}
+
 // La table retours_eleves est sous RLS sans policy : lecture via service-role
 // uniquement, côté serveur. On n'expose JAMAIS le nom de famille ni les codes.
 async function getDerniersAvis(): Promise<AvisPublic[]> {
@@ -54,17 +69,19 @@ async function getDerniersAvis(): Promise<AvisPublic[]> {
     const supabase = createClient(url, key);
     const { data, error } = await supabase
       .from("retours_eleves")
-      // Seulement les notes positives (≥ 4) pour la vitrine publique.
+      // Notes positives (≥ 4) uniquement. On en récupère plus que 3 pour pouvoir
+      // écarter les remarques bug/design (estAvisVitrine) et garder 3 vrais avis.
       .select("message, note, prenom, classe, page, created_at")
       .eq("type", "avis")
       .gte("note", 4)
       .order("created_at", { ascending: false })
-      .limit(3);
+      .limit(20);
 
     if (error || !data) return [];
 
     return data
-      .filter((r) => String(r.message ?? "").trim().length > 0)
+      .filter((r) => estAvisVitrine(String(r.message ?? "")))
+      .slice(0, 3)
       .map((r) => ({
         prenom: prenomCourt(r.prenom),
         detail: niveauPublic(r.classe) || r.page?.trim() || "Élève",

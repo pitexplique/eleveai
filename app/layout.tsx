@@ -46,12 +46,12 @@ export const metadata: Metadata = {
   },
 
   title: {
-    default: "EleveAI — Plusieurs portes pour apprendre les maths",
+    default: "EleveAI — Plusieurs portes pour apprendre",
     template: "%s — EleveAI",
   },
 
   description:
-    "EleveAI : un espace avec plusieurs portes d'entrée pour apprendre les maths et suivre la progression des élèves. Coach Maths IA, Parcours, Brevet, Calcul rapide, English Maths — du CM1 au Bac, à La Réunion.",
+    "EleveAI : un espace avec plusieurs portes d'entrée pour apprendre et suivre la progression des élèves — maths, français, anglais, espagnol et IA. Coach IA, Parcours, Brevet, Calcul rapide, dictée du jour — du CM1 au Bac, à La Réunion.",
 
   keywords: [
     "EleveAI",
@@ -68,6 +68,11 @@ export const metadata: Metadata = {
     "brevet 2026",
     "La Réunion",
     "english maths",
+    "coach IA",
+    "coach français IA",
+    "espagnol",
+    "français collège",
+    "dictée du jour",
   ],
 
   alternates: {
@@ -75,9 +80,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "EleveAI — Plusieurs portes pour apprendre les maths",
+    title: "EleveAI — Plusieurs portes pour apprendre",
     description:
-      "Coach Maths IA, Parcours, Brevet, Calcul rapide, English Maths : EleveAI accompagne les élèves du CM1 au Bac avec un suivi de progression.",
+      "Maths, français, anglais, espagnol et IA : EleveAI accompagne les élèves du CM1 au Bac avec un coach IA, des parcours et un suivi de progression.",
     url: CANONICAL,
     type: "website",
     siteName: "EleveAI",
@@ -87,16 +92,16 @@ export const metadata: Metadata = {
         url: "/preview.jpg",
         width: 1200,
         height: 630,
-        alt: "EleveAI — plateforme pédagogique de mathématiques",
+        alt: "EleveAI — plateforme pédagogique, conçue à La Réunion",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "EleveAI — Mathématiques et progression",
+    title: "EleveAI — Comprendre, s'entraîner, progresser",
     description:
-      "Une plateforme pédagogique pour progresser en maths avec des entraînements courts, réguliers et guidés.",
+      "Maths, français, anglais, espagnol et IA : progresser avec un coach IA, des entraînements courts, réguliers et guidés.",
     images: ["/preview.jpg"],
   },
 };
