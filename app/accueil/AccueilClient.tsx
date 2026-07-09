@@ -784,7 +784,7 @@ export default function AccueilPage({
           {/* Enseignant */}
           <div id="a-enseignant" className="scroll-mt-24 flex flex-col rounded-2xl border border-amber-300/25 bg-gradient-to-br from-amber-400/[0.10] to-white/[0.03] p-5 sm:p-6">
             <p className="text-xs font-black uppercase tracking-wide text-amber-200">🍎 Enseignant</p>
-            <h2 className="mt-1 text-xl font-black text-white">Suivez vos élèves en direct</h2>
+            <h2 className="mt-1 text-xl font-black text-white">Suivez leur progression</h2>
             <p className="mt-2 flex-1 text-sm font-semibold leading-snug text-white/75">
               Un bulletin vivant par élève, le suivi en temps réel, vos outils pour
               la classe. EleveAI corrige&nbsp;; vous, vous enseignez.
