@@ -471,6 +471,12 @@ export default function AccueilPage({
       {/* Staff connecté → son bandeau « tableau de bord » remplace le hero élève. */}
       <StaffAccueilBanner />
 
+      {/* ── TA JOURNÉE — le plan du jour de l'élève connecté, EN PREMIER (🔥 + 🧭).
+          L'IA guide : l'élève arrive et voit SON chemin avant la vitrine (qui
+          glisse dessous pour les visiteurs). Ne rend rien sans token : l'accueil
+          visiteur est inchangé. Consomme /api/profil-eleve. */}
+      <RecoDuJourAccueil />
+
       {/* ── HERO — Image plein écran (masqué pour le staff) ─────────────────── */}
       {!isStaff && (
       <section
@@ -811,11 +817,6 @@ export default function AccueilPage({
       </section>
       )}
 
-      {/* ── TA JOURNÉE — rendez-vous perso de l'élève connecté (🔥 + 🧭) ──────── */}
-      {/* Ne s'affiche que pour un élève connecté (sinon ne rend rien) : le bloc
-          contextualise l'accueil « pour lui-même ». Consomme /api/profil-eleve. */}
-      <RecoDuJourAccueil />
-
       {/* ── COACHS + PARCOURS — les essentiels élève, remontés en tête ─────────── */}
       <section id="coach" className="scroll-mt-20 px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
@@ -1024,7 +1025,7 @@ export default function AccueilPage({
           « le trou de Nathan » : réviser avant la 1re) ──────────────────────── */}
       <section className="px-4 pt-6 sm:px-6 lg:px-8">
         <Link
-          href="/cartes-vacances"
+          href="/cahier-vacances-cartes"
           className="group mx-auto flex max-w-4xl flex-col items-center gap-5 overflow-hidden rounded-2xl border border-orange-300/30 bg-gradient-to-br from-orange-400/[0.12] via-violet-400/[0.07] to-lime-400/[0.05] p-6 text-center transition hover:border-orange-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:text-left sm:p-7"
         >
           <div>
