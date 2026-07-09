@@ -786,8 +786,8 @@ export default function AccueilPage({
             <p className="text-xs font-black uppercase tracking-wide text-amber-200">🍎 Enseignant</p>
             <h2 className="mt-1 text-xl font-black text-white">Suivez leur progression</h2>
             <p className="mt-2 flex-1 text-sm font-semibold leading-snug text-white/75">
-              Un bulletin vivant par élève, le suivi en temps réel, vos outils pour
-              la classe. EleveAI corrige&nbsp;; vous, vous enseignez.
+              Le travail de chaque élève en temps réel, et une note finale prête
+              pour le bulletin. EleveAI corrige&nbsp;; vous, vous enseignez.
             </p>
             <Link
               href="/enseignants"
