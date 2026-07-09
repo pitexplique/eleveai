@@ -737,23 +737,28 @@ export default function AccueilPage({
           élève/prof connecté n'a plus à choisir « Je suis… »). ──────────────── */}
       {!eleve && (
       <section className="px-4 pt-8 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2">
-          {/* Élève */}
-          <div id="a-eleve" className="scroll-mt-24 flex flex-col rounded-2xl border border-emerald-300/25 bg-gradient-to-br from-emerald-400/[0.10] to-white/[0.03] p-5 sm:p-6">
-            <p className="text-xs font-black uppercase tracking-wide text-emerald-200">🎓 Élève</p>
-            <h2 className="mt-1 text-xl font-black text-white">Entraîne-toi dans ta matière forte</h2>
-            <p className="mt-2 flex-1 text-sm font-semibold leading-snug text-white/75">
-              Coach IA, parcours, dictée, défis — à ton rythme, sans jugement.
-              On t&apos;explique et on t&apos;encourage, du CP au Bac.
-            </p>
+        <div className="mx-auto max-w-5xl">
+          {/* Élève — l'utilisateur PRINCIPAL : mis en avant (pleine largeur,
+              un peu plus grand), les trois publics adultes viennent ensuite. */}
+          <div id="a-eleve" className="scroll-mt-24 flex flex-col gap-4 rounded-2xl border border-emerald-300/40 bg-gradient-to-br from-emerald-400/[0.14] to-white/[0.03] p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+            <div className="flex-1">
+              <p className="text-xs font-black uppercase tracking-wide text-emerald-200">🎓 Élève</p>
+              <h2 className="mt-1 text-2xl font-black text-white">Entraîne-toi dans ta matière forte</h2>
+              <p className="mt-2 text-sm font-semibold leading-snug text-white/75">
+                Coach IA, parcours, dictée, défis — à ton rythme, sans jugement.
+                On t&apos;explique et on t&apos;encourage, du CP au Bac.
+              </p>
+            </div>
             <Link
               href="#espace-eleve"
-              className="mt-3 inline-flex w-fit items-center gap-2 rounded-full bg-emerald-400 px-4 py-2 text-sm font-black text-[#041B33] transition hover:brightness-110"
+              className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full bg-emerald-400 px-5 py-2.5 text-sm font-black text-[#041B33] transition hover:brightness-110"
             >
               Voir mon espace →
             </Link>
           </div>
 
+          {/* Les trois publics adultes, sous l'élève */}
+          <div className="mt-4 grid gap-4 sm:grid-cols-3">
           {/* Parent */}
           <div id="a-parent" className="scroll-mt-24 flex flex-col rounded-2xl border border-sky-300/25 bg-gradient-to-br from-sky-400/[0.10] to-white/[0.03] p-5 sm:p-6">
             <p className="text-xs font-black uppercase tracking-wide text-sky-200">👪 Parent</p>
@@ -800,6 +805,7 @@ export default function AccueilPage({
             >
               En savoir plus →
             </Link>
+          </div>
           </div>
         </div>
       </section>
