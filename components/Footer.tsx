@@ -4,25 +4,25 @@ import Link from "next/link";
 const outils = [
   { label: "Coach English IA", href: "/coach-ia/english-maths" },
   { label: "Coach Maths IA", href: "/coach-ia/maths" },
-  { label: "Coach Francais IA", href: "/coach-ia/francais" },
+  { label: "Coach Français IA", href: "/coach-ia/francais" },
   { label: "Parcours English", href: "/parcours-english-maths" },
   { label: "Parcours Espagnol", href: "/parcours-espagnol" },
-  { label: "Parcours Francais", href: "/parcours-francais" },
+  { label: "Parcours Français", href: "/parcours-francais" },
   { label: "Parcours", href: "/parcours" },
   { label: "Coach Brevet", href: "/coach-brevet" },
-  { label: "Coach Bac Spe", href: "/coach-bac-spe" },
+  { label: "Coach Bac Spé", href: "/coach-bac-spe" },
   { label: "Calcul rapide", href: "/calcul-rapide" },
   { label: "English Maths", href: "/english-maths" },
-  { label: "Defis du jour", href: "/defis-du-jour" },
-  { label: "Concours general", href: "/concours-general" },
+  { label: "Défis du jour", href: "/defis-du-jour" },
+  { label: "Concours général", href: "/concours-general" },
 ];
 
 const espaces = [
-  { label: "Etablissements scolaires", href: "/espace-ecoles" },
-  { label: "Espace eleves", href: "/espace-eleves" },
+  { label: "Établissements scolaires", href: "/espace-ecoles" },
+  { label: "Espace élèves", href: "/espace-eleves" },
   { label: "Espace parents", href: "/espace-parents" },
   { label: "Espace profs", href: "/espace-profs" },
-  { label: "Connexion eleve / prof", href: "/auth/signin-eleve" },
+  { label: "Connexion élève / prof", href: "/auth/signin-eleve" },
 ];
 
 const infos = [
@@ -35,8 +35,8 @@ const infos = [
 ];
 
 const legal = [
-  { label: "Mentions legales", href: "/mentions-legales" },
-  { label: "Politique de confidentialite", href: "/politique-confidentialite" },
+  { label: "Mentions légales", href: "/mentions-legales" },
+  { label: "Politique de confidentialité", href: "/politique-confidentialite" },
   { label: "CGU", href: "/cgu" },
 ];
 
@@ -57,7 +57,7 @@ const mathsClasses = [
   { label: "5e", slug: "5e" },
   { label: "4e", slug: "4e" },
   { label: "3e", slug: "3e" },
-  { label: "Terminale Spe", slug: "terminale-spe" },
+  { label: "Terminale Spé", slug: "terminale-spe" },
 ];
 
 const francaisClasses = [
@@ -87,14 +87,14 @@ export default function Footer() {
                   Eleve<span className="text-emerald-300">AI</span>
                 </span>
                 <span className="text-xs text-slate-400">
-                  Comprendre · S&apos;entrainer · Reussir
+                  Comprendre · S&apos;entraîner · Réussir
                 </span>
               </div>
             </div>
 
             <p className="text-xs leading-relaxed text-slate-400">
-              Maths, francais et anglais pour s&apos;entrainer avec un coach IA.
-              De l&apos;ecole au lycee, concu a La Reunion.
+              Maths, français, anglais, espagnol et IA, avec un coach qui
+              s&apos;adapte. De l&apos;école au lycée, conçu à La Réunion.
             </p>
 
             <Link
@@ -181,7 +181,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-3 text-sm font-black text-slate-100">Francais</h3>
+            <h3 className="mb-3 text-sm font-black text-slate-100">Français</h3>
             <ul className="grid grid-cols-2 gap-x-3 gap-y-2 sm:grid-cols-1">
               {francaisClasses.map((c) => (
                 <li key={c.slug}>
@@ -189,7 +189,7 @@ export default function Footer() {
                     href={`/coach-ia/francais?classe=${c.slug}`}
                     className="text-sm text-slate-400 transition hover:text-sky-300"
                   >
-                    Francais {c.label}
+                    Français {c.label}
                   </Link>
                 </li>
               ))}
@@ -209,16 +209,16 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col gap-2 border-t border-slate-800 pt-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} EleveAI - Tous droits reserves.</p>
+          <p>© {new Date().getFullYear()} EleveAI - Tous droits réservés.</p>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px]">
-            <span>Concu a La Reunion</span>
+            <span>Conçu à La Réunion</span>
             <span className="hidden text-slate-700 sm:inline">•</span>
             <Link href="/mentions-legales" className="transition hover:text-slate-300">
-              Mentions legales
+              Mentions légales
             </Link>
             <span className="hidden text-slate-700 sm:inline">•</span>
             <Link href="/politique-confidentialite" className="transition hover:text-slate-300">
-              Confidentialite
+              Confidentialité
             </Link>
           </div>
         </div>
