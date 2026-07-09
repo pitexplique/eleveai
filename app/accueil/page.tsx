@@ -49,8 +49,12 @@ export const metadata: Metadata = {
 // (ils restent visibles dans l'admin des retours). Filtre de contenu simple :
 //   - trop court pour un vrai témoignage
 //   - vocabulaire de signalement UI/bug plutôt que d'avis
+// On garde EXPRÈS les fautes d'orthographe (authenticité, « sans jugement ») :
+// ce filtre ne juge PAS l'orthographe. Et on n'y met QUE des termes techniques
+// (pas « problème »/« erreur », qui sont des mots de vrais avis scolaires :
+// « j'avais des problèmes en maths et maintenant ça va »).
 const AVIS_EXCLURE_VITRINE =
-  /couleur|d[ée]grad|bouton|\bbug\b|marche pas|fonctionne pas|probl[eè]me|erreur|plante|s'affiche|affiche pas|dysfonction|lag/i;
+  /couleur|d[ée]grad|\bbouton\b|\bbug\b|marche pas|fonctionne pas|plante|s'affiche|affiche pas|dysfonction|\blag\b/i;
 
 function estAvisVitrine(message: string): boolean {
   const m = message.trim();
