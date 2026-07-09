@@ -145,7 +145,7 @@ export default function CartesDeck({
   cartes,
   signupFrom = "cartes",
   partenaire,
-  retourHref = "/cartes-vacances",
+  retourHref = "/cahier-vacances-cartes",
 }: {
   niveau: string; // ex "Vers la 1re"
   cartes: CarteDefi[];

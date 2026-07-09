@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     "cahier de vacances CM2",
     "EleveAI",
   ],
-  alternates: { canonical: "/cartes-vacances/vers-le-cm2" },
+  alternates: { canonical: "/cahier-vacances-cartes/vers-le-cm2" },
 };
 
 export default function CartesVersLeCm2Page() {

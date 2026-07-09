@@ -128,13 +128,13 @@ const ROUTES: RouteConfig[] = [
   { path: "/qui-suis-je-a-imprimer",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
 
   // ── CARTES DÉFIS « Le corps & l’esprit » (révision + sport, à imprimer) ───
-  { path: "/cartes-vacances",                   priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
-  { path: "/cartes-vacances/vers-la-premiere",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
-  { path: "/cartes-vacances/vers-la-6e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
-  { path: "/cartes-vacances/vers-le-cm2",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
-  { path: "/cartes-vacances/vers-la-5e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
-  { path: "/cartes-vacances/vers-la-4e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
-  { path: "/cartes-vacances/vers-la-3e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
+  { path: "/cahier-vacances-cartes",                   priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
+  { path: "/cahier-vacances-cartes/vers-la-premiere",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
+  { path: "/cahier-vacances-cartes/vers-la-6e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
+  { path: "/cahier-vacances-cartes/vers-le-cm2",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
+  { path: "/cahier-vacances-cartes/vers-la-5e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
+  { path: "/cahier-vacances-cartes/vers-la-4e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
+  { path: "/cahier-vacances-cartes/vers-la-3e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JEUX },
 
   // ── ESPACES / AUDIENCES ────────────────────────────────────────────────────
   // Pages d'audience = portes du header et de l'accueil (destinations principales).

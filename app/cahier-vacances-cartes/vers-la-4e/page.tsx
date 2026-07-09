@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "cahier de vacances 4e",
     "EleveAI",
   ],
-  alternates: { canonical: "/cartes-vacances/vers-la-4e" },
+  alternates: { canonical: "/cahier-vacances-cartes/vers-la-4e" },
 };
 
 export default function CartesVersLa4ePage() {

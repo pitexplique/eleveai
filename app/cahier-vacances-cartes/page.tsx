@@ -18,12 +18,12 @@ export const metadata: Metadata = {
     "le corps et l’esprit",
     "EleveAI",
   ],
-  alternates: { canonical: "/cartes-vacances" },
+  alternates: { canonical: "/cahier-vacances-cartes" },
   openGraph: {
     title: "Le corps & l’esprit — Cartes de révision à imprimer (gratuit)",
     description:
       "4 questions par carte + un défi sport. À imprimer, découper et défier. On révise en bougeant.",
-    url: "/cartes-vacances",
+    url: "/cahier-vacances-cartes",
     type: "website",
     siteName: "EleveAI",
     locale: "fr_FR",
@@ -78,7 +78,7 @@ export default function CartesVacancesIndexPage() {
           {decks.map((d) => (
             <Link
               key={d.slug}
-              href={`/cartes-vacances/${d.slug}`}
+              href={`/cahier-vacances-cartes/${d.slug}`}
               className={`group relative flex flex-col overflow-hidden rounded-3xl bg-gradient-to-br ${d.grad} p-6 text-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:rotate-[-1.5deg] hover:scale-[1.03] hover:shadow-2xl`}
             >
               <div className="pointer-events-none absolute -right-6 -top-8 h-28 w-28 rounded-full bg-white/25 blur-2xl" />
