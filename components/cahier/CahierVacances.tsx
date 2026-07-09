@@ -195,31 +195,35 @@ export default function CahierVacances({
          en secondaire, les autres liens descendent sous le cahier. ?from=cahier =
          tracking. */}
       <div className="screen-only mx-auto max-w-4xl px-5 pt-5 sm:px-8">
-        <Link
-          href={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier`}
-          className="flex w-full flex-col items-center gap-1 rounded-2xl bg-amber-400 px-6 py-4 text-center shadow-lg shadow-amber-500/30 transition hover:bg-amber-300"
-        >
-          <span className="inline-flex items-center gap-2 text-base font-black text-slate-900 sm:text-lg">
+        <div className="rounded-2xl bg-amber-400 p-4 text-center shadow-lg shadow-amber-500/30 sm:p-5">
+          <p className="inline-flex items-center gap-2 text-base font-black text-slate-900 sm:text-lg">
             <Sparkles className="h-5 w-5" />
-            Continuer avec un coach IA — gratuit →
-          </span>
-          <span className="text-xs font-bold text-amber-950/80">
+            Continuer avec un coach IA — gratuit
+          </p>
+          <p className="mt-0.5 text-xs font-bold text-amber-950/80">
             Maths, français, anglais… du CP au Bac, au rythme de ton enfant, sans jugement.
-          </span>
-        </Link>
-        {/* Preuve sociale : un vrai avis d'élève (retours_eleves), sous le CTA
-           pour rassurer avant le clic. Prénom seul (RGPD : jamais relié à une
-           classe/établissement). */}
-        <figure className="mx-auto mt-2 max-w-xl text-center">
-          <div className="text-xs tracking-wide text-amber-500">★★★★★</div>
-          <blockquote className="mt-0.5 text-xs font-semibold italic leading-5 text-slate-600">
-            « Franchement, j&apos;ai adoré faire ça le soir, quand j&apos;avais un
-            moment. Ça ne peut être que bénéfique sur le long terme. »
-          </blockquote>
-          <figcaption className="mt-0.5 text-[11px] font-black text-slate-500">
-            — Pierre, élève
-          </figcaption>
-        </figure>
+          </p>
+          <Link
+            href={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier`}
+            className="mt-3 inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-black text-white shadow-md transition hover:bg-slate-800"
+          >
+            <Sparkles className="h-4 w-4" />
+            Commencer gratuitement →
+          </Link>
+          {/* Preuve sociale : un vrai avis d'élève (retours_eleves) DANS l'encart
+             coach — sinon on croit que Pierre parle du cahier de vacances. Prénom
+             seul (RGPD : jamais relié à une classe/établissement). */}
+          <figure className="mx-auto mt-3 max-w-xl border-t border-amber-500/50 pt-3">
+            <div className="text-xs tracking-wide text-amber-700">★★★★★</div>
+            <blockquote className="mt-0.5 text-xs font-semibold italic leading-5 text-amber-950">
+              « Franchement, j&apos;ai adoré faire ça le soir, quand j&apos;avais un
+              moment. Ça ne peut être que bénéfique sur le long terme. »
+            </blockquote>
+            <figcaption className="mt-0.5 text-[11px] font-black text-amber-900">
+              — Pierre, élève
+            </figcaption>
+          </figure>
+        </div>
       </div>
 
       <article className="mx-auto max-w-4xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0">
