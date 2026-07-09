@@ -181,7 +181,7 @@ export default function CahierVacances({
           <button
             type="button"
             onClick={() => window.print()}
-            className="inline-flex w-fit items-center gap-2 rounded-full bg-teal-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-500/30 transition hover:bg-teal-400"
+            className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-black text-slate-600 shadow-sm transition hover:border-slate-400 hover:bg-slate-50"
           >
             <Download className="h-4 w-4" />
             Imprimer / PDF
@@ -189,50 +189,24 @@ export default function CahierVacances({
         </div>
       </div>
 
-      {/* CTA « aimant » en HAUT (écran) : capte le parent venu de Google AVANT
-         qu'il ne reparte (le CTA existant est en bas, jamais atteint par ceux qui
-         rebondissent). Mène au coach au niveau du cahier. ?from=cahier = tracking. */}
+      {/* CTA « aimant » en HAUT (écran) : UN seul geste évident — continuer avec
+         le coach IA. Capte le parent venu de Google AVANT qu'il ne reparte (le
+         cahier gratuit se suffit sinon). Bouton primaire seul, « Imprimer » passe
+         en secondaire, les autres liens descendent sous le cahier. ?from=cahier =
+         tracking. */}
       <div className="screen-only mx-auto max-w-4xl px-5 pt-5 sm:px-8">
-        <div className="flex flex-col items-center gap-3 rounded-2xl border border-teal-300 bg-gradient-to-r from-teal-50 to-emerald-50 p-4 text-center shadow-sm sm:flex-row sm:justify-between sm:text-left">
-          <p className="text-sm font-black text-slate-900 sm:text-base">
-            🦎 Ce cahier fait partie d&apos;<span className="text-teal-700">EleveAI</span>,
-            la plateforme d&apos;apprentissage{" "}
-            <span className="text-teal-700">gratuite</span> : coach IA, parcours,
-            dictée… du CP au Bac. Ton enfant continue tout l&apos;été, à son rythme
-            et sans jugement.
-          </p>
-          <Link
-            href={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier`}
-            className="inline-flex shrink-0 items-center gap-2 rounded-full bg-teal-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-500/30 transition hover:bg-teal-400 hover:scale-105"
-          >
-            <Sparkles className="h-4 w-4" />
-            Commencer gratuitement →
-          </Link>
-        </div>
-      </div>
-
-      {/* Aussi à imprimer : le Cahier de maths (Picto Maths) + la carte des savoirs */}
-      <div className="screen-only mx-auto max-w-4xl px-5 pt-3 sm:px-8">
-        <div className="flex flex-col gap-3 rounded-2xl border border-cyan-200 bg-cyan-50/60 p-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
-          <p className="text-sm font-black text-slate-900">
-            🃏 Aussi, à imprimer&nbsp;: le <span className="text-cyan-700">Cahier de maths</span>{" "}
-            (Picto Maths 974) et la <span className="text-cyan-700">carte des savoirs</span> de La Réunion.
-          </p>
-          <div className="flex shrink-0 flex-wrap justify-center gap-2">
-            <Link
-              href="/cahier-vacances/maths"
-              className="inline-flex items-center gap-1.5 rounded-full bg-cyan-600 px-4 py-2 text-sm font-black text-white transition hover:bg-cyan-500"
-            >
-              🃏 Cahier de maths →
-            </Link>
-            <Link
-              href="/carte"
-              className="inline-flex items-center gap-1.5 rounded-full border border-cyan-300 bg-white px-4 py-2 text-sm font-black text-cyan-700 transition hover:bg-cyan-50"
-            >
-              🗺️ La carte →
-            </Link>
-          </div>
-        </div>
+        <Link
+          href={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier`}
+          className="flex w-full flex-col items-center gap-1 rounded-2xl bg-amber-400 px-6 py-4 text-center shadow-lg shadow-amber-500/30 transition hover:bg-amber-300"
+        >
+          <span className="inline-flex items-center gap-2 text-base font-black text-slate-900 sm:text-lg">
+            <Sparkles className="h-5 w-5" />
+            Continuer avec un coach IA — gratuit →
+          </span>
+          <span className="text-xs font-bold text-amber-950/80">
+            Maths, français, anglais… du CP au Bac, au rythme de ton enfant, sans jugement.
+          </span>
+        </Link>
       </div>
 
       <article className="mx-auto max-w-4xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0">
@@ -803,7 +777,7 @@ export default function CahierVacances({
                     Créer un compte gratuit
                   </Link>
                   <Link
-                    href={`/coach-ia/maths?classe=${config.coachClasse}`}
+                    href={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier`}
                     className="inline-flex items-center gap-2 rounded-full border border-teal-300 bg-white px-5 py-3 text-sm font-black text-teal-700 transition hover:bg-teal-50"
                   >
                     Découvrir le Coach IA
@@ -834,6 +808,31 @@ export default function CahierVacances({
           </footer>
         </section>
       </article>
+
+      {/* Aussi à imprimer : le Cahier de maths (Picto Maths) + la carte des savoirs.
+         Placé APRÈS le cahier pour ne pas diluer le CTA coach en haut de page. */}
+      <div className="screen-only mx-auto max-w-4xl px-5 pb-8 sm:px-8">
+        <div className="flex flex-col gap-3 rounded-2xl border border-cyan-200 bg-cyan-50/60 p-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+          <p className="text-sm font-black text-slate-900">
+            🃏 Aussi, à imprimer&nbsp;: le <span className="text-cyan-700">Cahier de maths</span>{" "}
+            (Picto Maths 974) et la <span className="text-cyan-700">carte des savoirs</span> de La Réunion.
+          </p>
+          <div className="flex shrink-0 flex-wrap justify-center gap-2">
+            <Link
+              href="/cahier-vacances/maths"
+              className="inline-flex items-center gap-1.5 rounded-full bg-cyan-600 px-4 py-2 text-sm font-black text-white transition hover:bg-cyan-500"
+            >
+              🃏 Cahier de maths →
+            </Link>
+            <Link
+              href="/carte"
+              className="inline-flex items-center gap-1.5 rounded-full border border-cyan-300 bg-white px-4 py-2 text-sm font-black text-cyan-700 transition hover:bg-cyan-50"
+            >
+              🗺️ La carte →
+            </Link>
+          </div>
+        </div>
+      </div>
 
       {/* Bouton imprimer flottant (écran) */}
       <div className="screen-only fixed bottom-5 right-5 hidden sm:block">
