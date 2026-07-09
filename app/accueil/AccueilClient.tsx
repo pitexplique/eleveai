@@ -750,7 +750,7 @@ export default function AccueilPage({
               </p>
             </div>
             <Link
-              href="#espace-eleve"
+              href="#coach"
               className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full bg-emerald-400 px-5 py-2.5 text-sm font-black text-[#041B33] transition hover:brightness-110"
             >
               Voir mon espace →
