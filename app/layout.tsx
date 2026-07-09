@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "katex/dist/katex.min.css";
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/next";
 import DevBanner from "@/components/DevBanner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
