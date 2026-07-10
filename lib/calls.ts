@@ -47,7 +47,7 @@ export const CALLS: CallEnDirect[] = [
     publicVise: "eleve",
     date: "2026-08-12T18:00:00+04:00",
     duree: "1 h",
-    lienVisio: "",
+    lienVisio: "https://meet.google.com/ari-jdic-mev",
     actif: true,
   },
 ];
