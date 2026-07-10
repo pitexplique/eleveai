@@ -6,7 +6,12 @@
 // Le lien visio n'apparaît jamais ici : il est envoyé par email aux inscrits.
 
 import { useMemo, useState } from "react";
-import { callsAVenir, formatDateCall, type CallRole } from "@/lib/calls";
+import {
+  callsAVenir,
+  formatDateCall,
+  formatHeuresMonde,
+  type CallRole,
+} from "@/lib/calls";
 
 const ROLE_LABELS: Record<CallRole, string> = {
   eleve: "Élève",
@@ -109,6 +114,9 @@ export default function EncartCallEnDirect() {
         </p>
         <p className="mt-2 text-sm font-black text-rose-200">
           📅 {formatDateCall(call.date)} · {call.duree} · en visio
+        </p>
+        <p className="mt-0.5 text-xs font-semibold text-white/50">
+          🌍 Soit {formatHeuresMonde(call.date)}
         </p>
 
         {etat === "ok" || etat === "deja" ? (

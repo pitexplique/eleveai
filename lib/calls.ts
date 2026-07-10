@@ -75,3 +75,12 @@ export function formatDateCall(iso: string): string {
   }).format(d);
   return `${jour} · ${heure} (heure Réunion)`;
 }
+
+/** « 16 h en métropole · 10 h à New York » — équivalences pour la famille en
+ *  métropole et la diaspora. Intl gère l'heure d'été des deux fuseaux tout seul. */
+export function formatHeuresMonde(iso: string): string {
+  const d = new Date(iso);
+  const h = (timeZone: string) =>
+    new Intl.DateTimeFormat("fr-FR", { hour: "numeric", timeZone }).format(d);
+  return `${h("Europe/Paris")} en métropole · ${h("America/New_York")} à New York`;
+}
