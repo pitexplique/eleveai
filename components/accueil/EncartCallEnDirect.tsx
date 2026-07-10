@@ -6,6 +6,7 @@
 // Le lien visio n'apparaît jamais ici : il est envoyé par email aux inscrits.
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import {
   callsAVenir,
   formatDateCall,
@@ -106,12 +107,25 @@ export default function EncartCallEnDirect() {
           </div>
         )}
 
-        <h2 className="mt-3 text-xl font-black text-white sm:text-2xl">
-          {call.titre}
-        </h2>
-        <p className="mt-1 text-sm font-semibold leading-snug text-white/75">
-          {call.description}
-        </p>
+        <div className="mt-3 flex items-start gap-3">
+          {/* Le visage derrière le call : on ne s'inscrit pas à un webinaire,
+             on rencontre quelqu'un (photo plage 974 — « ici, tu es chez toi »). */}
+          <Image
+            src="/images/avatar-frederic-Lacoste.jpg"
+            alt="Frédéric Lacoste, professeur de maths et fondateur d'EleveAI"
+            width={64}
+            height={64}
+            className="h-14 w-14 shrink-0 rounded-full border-2 border-rose-300/60 object-cover sm:h-16 sm:w-16"
+          />
+          <div>
+            <h2 className="text-xl font-black text-white sm:text-2xl">
+              {call.titre}
+            </h2>
+            <p className="mt-1 text-sm font-semibold leading-snug text-white/75">
+              {call.description}
+            </p>
+          </div>
+        </div>
         <p className="mt-2 text-sm font-black text-rose-200">
           📅 {formatDateCall(call.date)} · {call.duree} · en visio
         </p>
