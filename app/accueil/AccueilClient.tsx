@@ -821,6 +821,21 @@ export default function AccueilPage({
             </Link>
           </div>
           </div>
+
+          {/* Français de l'étranger — UNE ligne fine (pattern bandeau) : segment
+             B2C qui paie volontiers (insight d'Arthur), il mérite sa ligne sans
+             alourdir l'accueil. */}
+          <Link
+            href="/francais-de-l-etranger"
+            className="mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-xl border border-sky-300/30 bg-sky-500/10 px-4 py-2.5 text-center text-xs font-bold text-sky-100 transition hover:bg-sky-500/20 sm:text-sm"
+          >
+            <span aria-hidden>🌍</span>
+            <span className="font-black">Vous vivez à l&apos;étranger&nbsp;?</span>
+            <span>Le programme français et la dictée quotidienne, à votre fuseau horaire</span>
+            <span className="font-black underline decoration-sky-300/60 underline-offset-2">
+              Découvrir →
+            </span>
+          </Link>
         </div>
       </section>
       )}
