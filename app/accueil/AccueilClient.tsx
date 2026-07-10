@@ -11,6 +11,7 @@ import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
 import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
 import RecoDuJourAccueil from "@/components/accueil/RecoDuJourAccueil";
+import EncartCallEnDirect from "@/components/accueil/EncartCallEnDirect";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
@@ -740,6 +741,11 @@ export default function AccueilPage({
           `}</style>
         </section>
       )}
+
+      {/* ── EN DIRECT — inscription aux prochains calls (visible par tous :
+          il y a un call par public). Lit lib/calls.ts ; ne rend rien si aucun
+          call actif à venir. */}
+      <EncartCallEnDirect />
 
       {/* ── APERÇUS PAR AUDIENCE — pour les VISITEURS ; masqués si connecté (un
           élève/prof connecté n'a plus à choisir « Je suis… »). ──────────────── */}
