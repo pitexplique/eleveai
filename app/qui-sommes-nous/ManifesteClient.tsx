@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 const EMAIL = "contact@eleveai.fr";
@@ -8,7 +9,7 @@ const EMAIL = "contact@eleveai.fr";
 const principes = [
   {
     title: "Plusieurs portes d'entrée",
-    text: "Coach Maths, Parcours, Brevet, Calcul rapide, English Maths, Défis… Chaque élève choisit ce qui lui convient le mieux.",
+    text: "Coach IA (maths, français, anglais, espagnol, IA), Parcours, Brevet, Calcul rapide, Dictée, Défis… Chaque élève choisit ce qui lui convient le mieux.",
   },
   {
     title: "Suivi réel de la progression",
@@ -28,7 +29,7 @@ const principes = [
   },
   {
     title: "Simple et efficace",
-    text: "Pas de gadget inutile. Des outils lisibles, progressifs et adaptés aux niveaux du CM1 au Bac.",
+    text: "Pas de gadget inutile. Des outils lisibles, progressifs et adaptés aux niveaux du CP au Bac.",
   },
 ];
 
@@ -36,7 +37,7 @@ const faqItems = [
   {
     question: "À qui s'adresse EleveAI ?",
     answer:
-      "EleveAI s'adresse aux élèves du CM1 au Bac, à leurs enseignants et à leurs familles. La plateforme est pensée pour les collèges et lycées qui veulent un outil de suivi simple et efficace.",
+      "EleveAI s'adresse aux élèves du CP au Bac, à leurs enseignants et à leurs familles. La plateforme est pensée pour les écoles, collèges et lycées qui veulent un outil de suivi simple et efficace.",
   },
   {
     question: "Comment un élève accède-t-il à EleveAI ?",
@@ -91,16 +92,48 @@ export default function ManifesteClient() {
             </p>
 
             <h1 className="text-3xl font-black tracking-tight text-slate-50 sm:text-5xl">
-              Plusieurs portes pour apprendre les maths
+              Plusieurs portes pour apprendre
             </h1>
 
-            <p className="max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-              EleveAI est un espace pédagogique conçu par un enseignant de La Réunion.{" "}
-              <span className="font-semibold text-slate-50">
-                Chaque élève entre par la porte qui lui correspond
-              </span>{" "}
-              — et progresse à son rythme, avec un suivi réel de ses résultats.
-            </p>
+            {/* Le fondateur, incarné dès le hero : on sait tout de suite QUI
+               est derrière — un vrai prof, en poste, sur l'île. */}
+            <div className="flex items-start gap-4">
+              <Image
+                src="/images/avatar-frederic-Lacoste.jpg"
+                alt="Frédéric Lacoste, professeur de mathématiques à La Réunion, fondateur d'EleveAI"
+                width={72}
+                height={72}
+                className="h-16 w-16 shrink-0 rounded-full border-2 border-emerald-400/60 object-cover sm:h-[72px] sm:w-[72px]"
+              />
+              <p className="max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
+                EleveAI est conçu et développé par{" "}
+                <span className="font-semibold text-slate-50">
+                  Frédéric Lacoste
+                </span>
+                , professeur de mathématiques en collège à La Réunion.{" "}
+                <span className="font-semibold text-slate-50">
+                  Chaque élève entre par la porte qui lui correspond
+                </span>{" "}
+                — et progresse à son rythme, avec un suivi réel de ses résultats.
+              </p>
+            </div>
+
+            {/* Preuves de confiance — que du vérifiable. */}
+            <div className="flex flex-wrap gap-2">
+              {[
+                "🏫 Utilisé en collège, à La Réunion",
+                "🧪 Construit en classe, avec les élèves",
+                "🔒 RGPD · sans publicité",
+                "🤝 Gratuit pour les familles — financé par l'établissement",
+              ].map((badge) => (
+                <span
+                  key={badge}
+                  className="rounded-full border border-slate-700 bg-slate-900/70 px-3 py-1 text-xs font-semibold text-slate-300"
+                >
+                  {badge}
+                </span>
+              ))}
+            </div>
 
             {/* À retenir */}
             <div className="rounded-2xl border border-emerald-500/40 bg-slate-900/70 p-4 sm:p-5">
@@ -108,10 +141,11 @@ export default function ManifesteClient() {
                 En résumé
               </p>
               <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-200">
-                <li>• Plusieurs outils : Coach Maths, Parcours, Brevet, Calcul rapide, English Maths…</li>
+                <li>• Un coach IA par matière : maths, français, anglais, espagnol, IA — du CP au Bac.</li>
+                <li>• Plusieurs portes : parcours, brevet, calcul rapide, dictée du jour, défis…</li>
                 <li>• Résultats enregistrés et visibles dans le tableau de bord élève.</li>
                 <li>• Ancré à La Réunion — contexte local, exemples du territoire.</li>
-                <li>• Pensé pour les collèges et lycées qui veulent un suivi simple.</li>
+                <li>• Pensé pour les écoles, collèges et lycées qui veulent un suivi simple.</li>
               </ul>
             </div>
           </header>
@@ -198,15 +232,28 @@ export default function ManifesteClient() {
             Qui sommes-nous ?
           </h2>
 
+          {/* Le visage + la fonction, comme une carte de visite. */}
+          <div className="mt-4 flex items-center gap-4">
+            <Image
+              src="/images/avatar-frederic-Lacoste.jpg"
+              alt="Frédéric Lacoste"
+              width={80}
+              height={80}
+              className="h-20 w-20 shrink-0 rounded-full border-2 border-emerald-400/60 object-cover"
+            />
+            <div>
+              <p className="text-lg font-black text-slate-50">Frédéric Lacoste</p>
+              <p className="text-sm text-slate-400">
+                Professeur de mathématiques au Collège du Dimitile, à La Réunion
+                · fondateur d&apos;EleveAI
+              </p>
+            </div>
+          </div>
+
           <div className="mt-4 space-y-4 text-sm leading-7 text-slate-200">
             <p>
-              Je m&apos;appelle{" "}
-              <span className="font-semibold text-slate-50">
-                Frédéric Lacoste
-              </span>
-              , enseignant de mathématiques au{" "}
-              <span className="font-semibold text-slate-50">Collège du Dimitile</span>{" "}
-              à La Réunion.
+              J&apos;ai construit EleveAI depuis ma salle de classe, pour mes
+              élèves — pas dans un bureau, loin d&apos;eux.
             </p>
 
             <p>
@@ -230,8 +277,19 @@ export default function ManifesteClient() {
             </p>
 
             <p>
-              EleveAI avance progressivement avec les retours des élèves de
-              DIMITILE, des professeurs et des familles.
+              EleveAI avance chaque semaine avec les retours des élèves, des
+              professeurs et des familles — leurs mots sont sur la{" "}
+              <Link
+                href="/remerciements"
+                className="font-semibold text-emerald-300 hover:text-emerald-200"
+              >
+                page des remerciements
+              </Link>
+              .
+            </p>
+
+            <p className="pt-1 text-right font-semibold italic text-slate-400">
+              — Frédéric Lacoste, fondateur d&apos;EleveAI
             </p>
           </div>
         </div>
