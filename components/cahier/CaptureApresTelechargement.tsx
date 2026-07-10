@@ -10,15 +10,18 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import { Sparkles, X } from "lucide-react";
+import BandeauCallCahier from "./BandeauCallCahier";
 
 export default function CaptureApresTelechargement({
   coachHref,
   signupFrom = "cahier",
   produitDe = "du cahier",
+  slug = "",
 }: {
   coachHref: string;
   signupFrom?: string; // tag de tracking (ex "cartes", "keepcool")
   produitDe?: string; // ex "du cahier", "des cartes" → « Profite bien {produitDe} »
+  slug?: string; // slug du cahier → cible le bon call en direct (lycée vs parents)
 }) {
   const SIGNUP_URL = `https://eleveai.fr/auth/signin?from=${signupFrom}`;
   const [open, setOpen] = useState(false);
@@ -89,6 +92,10 @@ export default function CaptureApresTelechargement({
             — Pierre, élève
           </figcaption>
         </figure>
+
+        {/* Le call en direct : timing parfait — il vient de télécharger le
+           cahier, on lui propose de le faire ENSEMBLE (s'efface après le call). */}
+        <BandeauCallCahier slug={slug} />
 
         <div className="mt-4 flex items-center gap-4">
           <div className="flex-1 space-y-2">

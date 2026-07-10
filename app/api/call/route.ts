@@ -9,7 +9,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { CALLS, type CallRole } from "@/lib/calls";
 
-const ROLES = new Set<CallRole>(["eleve", "parent", "enseignant"]);
+const ROLES = new Set<CallRole>(["eleve", "parent", "enseignant", "etablissement"]);
 
 function asString(v: unknown) {
   return String(v ?? "").trim();

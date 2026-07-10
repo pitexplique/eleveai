@@ -14,7 +14,7 @@ create table if not exists public.call_messages (
   email text not null,                 -- pour envoyer le lien + le rappel
   prenom text null,                    -- optionnel, pour personnaliser l'email
   role text not null default 'parent'
-    check (role in ('eleve', 'parent', 'enseignant')),
+    check (role in ('eleve', 'parent', 'enseignant', 'etablissement')),
   consentement_newsletter boolean not null default false, -- opt-in nouveautés (séparé du lien du call)
   present boolean null,                -- coché APRÈS le call -> mesure le taux de présence réel
   constraint call_messages_pkey primary key (id)
@@ -30,3 +30,11 @@ create index if not exists call_messages_call_idx
 
 -- RLS activé sans policy : seule la clé service role (API) lit et écrit.
 alter table public.call_messages enable row level security;
+
+-- ---------------------------------------------------------------------------
+-- MIGRATION (table déjà créée avant l'ajout du rôle « etablissement ») :
+-- exécuter ces deux lignes une fois.
+-- ---------------------------------------------------------------------------
+alter table public.call_messages drop constraint if exists call_messages_role_check;
+alter table public.call_messages add constraint call_messages_role_check
+  check (role in ('eleve', 'parent', 'enseignant', 'etablissement'));

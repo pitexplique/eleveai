@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import type { CahierConfig, CahierData } from "./types";
 import CaptureApresTelechargement from "./CaptureApresTelechargement";
+import BandeauCallCahier from "./BandeauCallCahier";
 import { bougeDuJour } from "@/lib/cahier/bougeDuJour";
 
 /* URL d'inscription encodée dans le QR de fin de cahier. Le ?from=cahier
@@ -167,6 +168,7 @@ export default function CahierVacances({
       {/* Capter après le téléchargement/impression (jamais avant, aucun mur). */}
       <CaptureApresTelechargement
         coachHref={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier`}
+        slug={config.slug}
       />
       {/* Barre d'actions (écran) */}
       <div className="screen-only border-b border-slate-200 bg-white/80 backdrop-blur-md">
@@ -224,6 +226,11 @@ export default function CahierVacances({
             </figcaption>
           </figure>
         </div>
+
+        {/* Une seule LIGNE fine pour le call en direct (pas un 2e pavé : le haut
+           de page reste à UN geste principal). Ciblé par niveau, s'efface tout
+           seul une fois le call passé (lib/calls.ts). */}
+        <BandeauCallCahier slug={config.slug} />
       </div>
 
       <article className="mx-auto max-w-4xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0">

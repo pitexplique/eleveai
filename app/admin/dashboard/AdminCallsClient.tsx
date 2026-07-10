@@ -30,6 +30,7 @@ const ROLE_EMOJI: Record<string, string> = {
   eleve: "🎓",
   parent: "👪",
   enseignant: "🍎",
+  etablissement: "🏫",
 };
 
 function dateInscription(iso: string) {

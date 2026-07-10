@@ -7,7 +7,7 @@
 // inscrits avant le call (anti-intrusion). Le laisser vide tant que le lien
 // Meet n'est pas créé — ça n'empêche pas les inscriptions.
 
-export type CallRole = "eleve" | "parent" | "enseignant";
+export type CallRole = "eleve" | "parent" | "enseignant" | "etablissement";
 
 export type CallEnDirect = {
   /** Identifiant stable, stocké dans call_messages.call_id. Ne pas renommer après ouverture des inscriptions. */

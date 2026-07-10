@@ -18,6 +18,7 @@ const ROLE_LABELS: Record<CallRole, string> = {
   eleve: "Élève",
   parent: "Parent",
   enseignant: "Enseignant",
+  etablissement: "Responsable d'établissement",
 };
 
 export default function EncartCallEnDirect() {
@@ -77,7 +78,7 @@ export default function EncartCallEnDirect() {
   }
 
   return (
-    <section className="px-4 pt-6 sm:px-6 lg:px-8">
+    <section id="en-direct" className="scroll-mt-24 px-4 pt-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl rounded-2xl border border-rose-300/30 bg-gradient-to-br from-rose-500/[0.12] to-white/[0.03] p-5 sm:p-6">
         <p className="inline-flex items-center gap-2 rounded-full bg-rose-500/20 px-3 py-1 text-xs font-black uppercase tracking-wide text-rose-200">
           <span className="relative flex h-2 w-2">
