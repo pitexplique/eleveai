@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
 import { AdminLogoutButton } from "@/components/AdminLogoutButton";
 import AdminStatsClient from "./AdminStatsClient";
+import AdminCallsClient from "./AdminCallsClient";
 import AdminContactMessagesClient from "./AdminContactMessagesClient";
 import MaintenanceChecklist from "./MaintenanceChecklist";
 
@@ -37,6 +38,9 @@ export default async function AdminDashboardPage() {
 
         {/* Statistiques agrégées + sélecteur de périmètre */}
         <AdminStatsClient />
+
+        {/* Inscriptions aux calls « En direct » (lib/calls.ts + call_messages) */}
+        <AdminCallsClient />
 
         <Link
           href="/admin/retours"

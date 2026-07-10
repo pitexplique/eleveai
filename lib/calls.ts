@@ -30,7 +30,7 @@ export type CallEnDirect = {
 export const CALLS: CallEnDirect[] = [
   {
     id: "decouverte-2026-07",
-    titre: "Découvrir EleveAI — rencontre avec le fondateur",
+    titre: "Découvrir EleveAI — rencontre avec le fondateur, Frédéric Lacoste",
     description:
       "Qui je suis, pourquoi j'ai créé EleveAI à La Réunion, une démo en direct, et vos questions. Parents bienvenus — enseignants curieux aussi.",
     publicVise: "parent",
