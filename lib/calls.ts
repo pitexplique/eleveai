@@ -36,7 +36,7 @@ export const CALLS: CallEnDirect[] = [
     publicVise: "parent",
     date: "2026-07-22T18:00:00+04:00",
     duree: "45 min",
-    lienVisio: "",
+    lienVisio: "https://meet.google.com/wwb-fyhk-yns",
     actif: true,
   },
   {
