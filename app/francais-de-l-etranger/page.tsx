@@ -81,7 +81,33 @@ const REPONSES = [
 
 export default function FrancaisDeLEtrangerPage() {
   return (
-    <main className="min-h-screen bg-[#041B33] px-4 py-10 text-white sm:px-6 lg:px-8">
+    <main className="relative isolate min-h-screen overflow-x-hidden bg-[#041B33] px-4 py-10 text-white sm:px-6 lg:px-8">
+      {/* Fond joyeux, même esprit que l'accueil : quadrillage « cahier » +
+         halos de couleur + icônes voyage qui flottent (décoratif, aria-hidden).
+         On garde le bleu nuit — loin, mais sous le même ciel. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.9) 1px, transparent 1px)",
+            backgroundSize: "34px 34px",
+          }}
+        />
+        <div className="absolute -left-40 top-[-8%] h-[34rem] w-[34rem] rounded-full bg-sky-500/15 blur-[120px]" />
+        <div className="absolute right-[-12%] top-[22%] h-[30rem] w-[30rem] rounded-full bg-amber-400/10 blur-[120px]" />
+        <div className="absolute left-[6%] top-[60%] h-[30rem] w-[30rem] rounded-full bg-emerald-500/12 blur-[120px]" />
+        <div className="absolute right-[2%] top-[85%] h-[28rem] w-[28rem] rounded-full bg-rose-500/10 blur-[120px]" />
+
+        {/* Icônes voyage — grosses, très transparentes, légèrement penchées. */}
+        <span className="absolute right-[6%] top-[3%] rotate-12 text-7xl opacity-15 sm:text-8xl">✈️</span>
+        <span className="absolute left-[3%] top-[26%] -rotate-12 text-6xl opacity-15 sm:text-7xl">🗼</span>
+        <span className="absolute right-[4%] top-[46%] rotate-6 text-6xl opacity-15 sm:text-7xl">📮</span>
+        <span className="absolute left-[5%] top-[68%] rotate-[-8deg] text-6xl opacity-15 sm:text-7xl">🌴</span>
+        <span className="absolute right-[8%] top-[92%] -rotate-6 text-6xl opacity-15 sm:text-7xl">🧳</span>
+        <span className="absolute left-[40%] top-[9%] rotate-3 text-5xl opacity-10 sm:text-6xl">🌍</span>
+      </div>
+
       <div className="mx-auto max-w-4xl">
         {/* ── HERO ─────────────────────────────────────────────────────────── */}
         <p className="inline-flex items-center rounded-full border border-sky-400/40 bg-sky-500/10 px-3 py-1 text-xs font-black uppercase tracking-wide text-sky-300">
@@ -121,7 +147,7 @@ export default function FrancaisDeLEtrangerPage() {
 
         {/* Preuve (vraie donnée analytics : cahiers tirés depuis les USA). */}
         <p className="mt-4 text-sm font-bold text-white/60">
-          🇺🇸 Nos cahiers de vacances sont déjà téléchargés depuis les
+          ✈️ Nos cahiers de vacances sont déjà téléchargés depuis les
           États-Unis — rejoignez les familles qui gardent le lien avec
           l&apos;école française.
         </p>
@@ -153,7 +179,7 @@ export default function FrancaisDeLEtrangerPage() {
         {/* ── PRÉPARER UN RETOUR EN FRANCE ─────────────────────────────────── */}
         <div className="mt-8 rounded-2xl border border-violet-300/25 bg-gradient-to-br from-violet-400/[0.10] to-white/[0.03] p-5 sm:p-6">
           <h2 className="text-lg font-black text-white">
-            🇫🇷 Vous préparez un retour en France&nbsp;?
+            🧭 Vous préparez un retour en France&nbsp;?
           </h2>
           <p className="mt-2 text-sm font-semibold leading-6 text-white/75">
             Les parcours d&apos;EleveAI font le point notion par notion, classe
