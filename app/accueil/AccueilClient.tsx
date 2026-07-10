@@ -474,8 +474,10 @@ export default function AccueilPage({
       {/* ── TA JOURNÉE — le plan du jour de l'élève connecté, EN PREMIER (🔥 + 🧭).
           L'IA guide : l'élève arrive et voit SON chemin avant la vitrine (qui
           glisse dessous pour les visiteurs). Ne rend rien sans token : l'accueil
-          visiteur est inchangé. Consomme /api/profil-eleve. */}
-      <RecoDuJourAccueil />
+          visiteur est inchangé. Consomme /api/profil-eleve.
+          !isStaff : un prof/principal connecté a son bandeau tableau de bord,
+          pas des recos d'élève (retour de Frédéric, 10/07). */}
+      {!isStaff && <RecoDuJourAccueil />}
 
       {/* ── HERO — Image plein écran (masqué pour le staff) ─────────────────── */}
       {!isStaff && (
