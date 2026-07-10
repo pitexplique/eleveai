@@ -1547,6 +1547,36 @@ export default function AccueilPage({
         </div>
       </section>
 
+      {/* ── LE PRIX, ASSUMÉ — philosophie VueSchool (« $25/month » en clair en
+          bas de page) : apprendre est gratuit, l'accompagnement se paie. ────── */}
+      <section className="px-4 pb-10 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl rounded-2xl border border-emerald-300/25 bg-gradient-to-br from-emerald-400/[0.10] to-white/[0.03] p-6 text-center sm:p-8">
+          <h2 className="text-xl font-black text-white sm:text-2xl">
+            Apprendre est <span className="text-emerald-300">gratuit</span>.
+            L&apos;accompagnement, c&apos;est notre métier.
+          </h2>
+          <p className="mx-auto mt-2 max-w-2xl text-sm font-semibold leading-6 text-white/75">
+            Dictée, défis, cahiers, coach en accès libre : gratuit, et ça le
+            restera. Ce qui se paie, c&apos;est le suivi dans la durée — un coach
+            qui se souvient de votre enfant et une progression visible.
+          </p>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-sm font-black">
+            <span className="rounded-full bg-white/10 px-4 py-2 text-white">
+              👨‍👩‍👧 Famille · 5,90 €/mois
+            </span>
+            <span className="rounded-full bg-white/10 px-4 py-2 text-white">
+              🏫 Établissement · 4 €/élève/an — gratuit pour les familles
+            </span>
+          </div>
+          <Link
+            href="/tarifs"
+            className="mt-4 inline-flex items-center gap-2 rounded-full bg-emerald-400 px-6 py-3 text-sm font-black text-[#041B33] transition hover:brightness-110"
+          >
+            Voir les offres →
+          </Link>
+        </div>
+      </section>
+
       {/* ── GOOGLE FOLLOW ────────────────────────────────────────────────────── */}
       <div className="flex justify-center py-8">
         <GoogleFollowChip />

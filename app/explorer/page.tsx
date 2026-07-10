@@ -87,6 +87,13 @@ function Carte({ a }: { a: ActionCatalogue }) {
       }`}
     >
       <div className="flex flex-wrap items-center gap-2">
+        {/* Philosophie VueSchool : apprendre est GRATUIT — le badge le dit sur
+           chaque carte. Ce qui se paie = l'accompagnement (cf. bandeau du haut). */}
+        {!aVenir && (
+          <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-black uppercase tracking-wide text-emerald-700">
+            Gratuit
+          </span>
+        )}
         <span className={`rounded-full px-2.5 py-1 text-xs font-black capitalize ${matiereCls}`}>
           {a.matiere}
         </span>
@@ -171,6 +178,24 @@ export default async function ExplorerPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
+        {/* Le modèle, dit en une phrase (philosophie VueSchool) : apprendre est
+           gratuit ; ce qui se paie, c'est l'accompagnement dans la durée. */}
+        <div className="mb-8 flex flex-col items-start gap-3 rounded-3xl border border-emerald-200 bg-emerald-50 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <p className="text-sm font-bold leading-6 text-emerald-900">
+            <span className="font-black">Tout ce qui sert à apprendre est gratuit</span> —
+            et le restera. Ce qui se paie, c&apos;est l&apos;accompagnement dans la
+            durée : un coach qui se souvient, un suivi de progression pour la
+            famille ou l&apos;établissement.
+          </p>
+          <Link
+            href="/tarifs"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-emerald-600 px-4 py-2 text-sm font-black text-white transition hover:bg-emerald-500"
+          >
+            Voir l&apos;accompagnement
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
         {actions.length === 0 ? (
           <div className="rounded-3xl border border-dashed border-slate-300 bg-white p-10 text-center">
             <p className="text-5xl">🧭</p>
