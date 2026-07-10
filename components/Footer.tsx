@@ -22,6 +22,7 @@ const espaces = [
   { label: "Espace élèves", href: "/espace-eleves" },
   { label: "Espace parents", href: "/espace-parents" },
   { label: "Espace profs", href: "/espace-profs" },
+  { label: "Français de l'étranger", href: "/francais-de-l-etranger" },
   { label: "Connexion élève / prof", href: "/auth/signin-eleve" },
 ];
 

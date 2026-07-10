@@ -140,6 +140,7 @@ const ROUTES: RouteConfig[] = [
   // Pages d'audience = portes du header et de l'accueil (destinations principales).
   { path: "/parents",         priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
   { path: "/enseignants",     priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
+  { path: "/francais-de-l-etranger", priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-07-10") },
   { path: "/espace-ecoles",   priority: 0.95, changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
   { path: "/espace-eleves",   priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/espace-parents",  priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
