@@ -67,15 +67,16 @@ const ROUTES: RouteConfig[] = [
   // ── FICHES DE COURS ────────────────────────────────────────────────────────
   { path: "/fiches-cours",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/fiches-cours/maths", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  // Fiches maths — Pythagore refaite « en blocs » le 11/07 (fiche + flashcards)
-  { path: "/fiches-cours/maths/6e/proportionnalite",    priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/maths/5e/pourcentages",        priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/maths/5e/fractions-addition",  priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  // Fiches maths — toutes refaites « en blocs » le 11/07 (fiche + flashcards
+  // + composeur) : lastMod du jour pour inviter Google à repasser.
+  { path: "/fiches-cours/maths/6e/proportionnalite",    priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
+  { path: "/fiches-cours/maths/5e/pourcentages",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
+  { path: "/fiches-cours/maths/5e/fractions-addition",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/4e/pythagore",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/cosinus",             priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/maths/4e/statistiques",        priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/maths/4e/probabilites",        priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/maths/3e/thales",              priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/maths/4e/cosinus",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
+  { path: "/fiches-cours/maths/4e/statistiques",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
+  { path: "/fiches-cours/maths/4e/probabilites",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
+  { path: "/fiches-cours/maths/3e/thales",              priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/ia",   priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/fiches-cours/ia/livre", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/fiches-cours/ia/fondements/definir-l-ia", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },

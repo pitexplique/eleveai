@@ -74,6 +74,9 @@ export default function FicheCoursClient({
   const role = eleve?.type_utilisateur ?? null;
   const estStaff = role === "prof" || role === "principal" || role === "boss";
   const estEleveConnecte = !!eleve && !estStaff;
+  // Primitives stables pour les dépendances d'effets (jamais l'objet entier).
+  const connecte = !!eleve;
+  const token = eleve?.token ?? null;
 
   // ── Toggle élève : fiche ou flashcards ──
   const [mode, setMode] = useState<"fiche" | "cartes">("fiche");
@@ -112,11 +115,11 @@ export default function FicheCoursClient({
     // 2. Prof connecté : la composition enregistrée en base gagne
     //    (elle le suit d'un appareil à l'autre).
     async function chargerDepuisBase() {
-      if (!eleve?.token) return;
+      if (!token) return;
       try {
         const res = await fetch(
           `/api/fiches/composition?matiere=${fiche.matiere}&classe=${fiche.classe}&notion=${fiche.notion}`,
-          { headers: { Authorization: `Bearer ${eleve.token}` } }
+          { headers: { Authorization: `Bearer ${token}` } }
         );
         const data = await res.json().catch(() => null);
         if (!annule && res.ok && data?.composition?.data) {
@@ -134,10 +137,10 @@ export default function FicheCoursClient({
     return () => {
       annule = true;
     };
-  }, [cleCompo, eleve?.token, fiche.matiere, fiche.classe, fiche.notion]);
+  }, [cleCompo, token, fiche.matiere, fiche.classe, fiche.notion]);
 
   useEffect(() => {
-    if (!compoChargee || !eleve) return;
+    if (!compoChargee || !connecte) return;
     try {
       localStorage.setItem(cleCompo, JSON.stringify(compo));
     } catch {
@@ -145,13 +148,13 @@ export default function FicheCoursClient({
     }
 
     // Enregistrement en base, débouncé, seulement après une vraie action.
-    if (!modifieeRef.current || !eleve?.token) return;
+    if (!modifieeRef.current || !token) return;
     const t = setTimeout(() => {
       fetch("/api/fiches/composition", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${eleve.token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           matiere: fiche.matiere,
@@ -165,7 +168,7 @@ export default function FicheCoursClient({
       });
     }, 800);
     return () => clearTimeout(t);
-  }, [compo, compoChargee, cleCompo, eleve, fiche.matiere, fiche.classe, fiche.notion]);
+  }, [compo, compoChargee, cleCompo, connecte, token, fiche.matiere, fiche.classe, fiche.notion]);
 
   function reinitialiser() {
     modifieeRef.current = false;
@@ -175,12 +178,12 @@ export default function FicheCoursClient({
     } catch {
       /* ignore */
     }
-    if (eleve?.token) {
+    if (token) {
       fetch("/api/fiches/composition", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${eleve.token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           matiere: fiche.matiere,
