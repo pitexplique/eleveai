@@ -324,7 +324,6 @@ export default function AccueilPage({
   const { eleve } = useEleve();
   const [isPlaying, setIsPlaying] = useState(false);
   const [showSignatureMeaning, setShowSignatureMeaning] = useState(true);
-  const nouveautes = useDragScroll();
 
   // Bandeau d'avis sur une ligne sous l'image (retour d'une élève) : on fait
   // défiler un avis à la fois, toutes les 5 s.
@@ -950,83 +949,85 @@ export default function AccueilPage({
         </div>
       </section>
 
-      {/* ── DICTÉE DU JOUR — le rituel quotidien, tout en haut ───────────────── */}
-      <section className="px-4 pt-10 sm:px-6 lg:px-8">
-        <Link
-          href="/dictee-du-jour"
-          className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition hover:border-white/30 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
-        >
-          <div className="text-center sm:text-left">
-            <p className="text-xs font-black uppercase tracking-wide text-cyan-200">
-              ✍️ Nouveau chaque jour
+      {/* ── CATALOGUE — 6 cartes façon VueSchool : la générosité affichée (badges
+          GRATUIT) + l'accompagnement (FAMILLE). Absorbe Dictée + teaser Explorer +
+          Nouveautés. Routine du lundi : déplacer `nouveau: true` sur la carte à
+          mettre en avant. Le bandeau Défi reste « à la une » ; les cahiers gardent
+          leur grande section saisonnière jusqu'à la rentrée. ──────────────────── */}
+      <section className="px-4 pt-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="text-center">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-200/80">
+              🧭 Le catalogue
             </p>
             <h2 className="mt-1 text-2xl font-black text-white sm:text-3xl">
-              📜 La dictée du jour
+              Tout pour apprendre — <span className="text-emerald-300">gratuit</span>
             </h2>
-            <p className="mt-1 text-sm font-semibold text-white/75">
-              Un mot à écouter et à écrire — français, maths, langues, histoire,
-              géo, écologie… 2 minutes, chaque matin. ☀️
+            <p className="mx-auto mt-1.5 max-w-xl text-sm font-semibold text-white/70">
+              Et pour s&apos;engager dans la durée&nbsp;: l&apos;accompagnement
+              famille ou établissement. ✨ Du nouveau chaque semaine.
             </p>
-            <span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-cyan-400 px-5 py-2 text-sm font-black text-[#041B33]">
-              Faire la dictée →
-            </span>
           </div>
-          {/* Aperçu de la dictée */}
-          <div className="w-full max-w-[260px] shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl transition group-hover:-translate-y-0.5 group-hover:shadow-2xl">
-            <div className="flex items-center justify-between bg-gradient-to-r from-cyan-600 to-sky-600 px-3 py-1.5 text-white">
-              <span className="text-[11px] font-black">📜 Dictée du jour</span>
-              <span className="text-[9px] font-black">🔥 4</span>
-            </div>
-            <div className="p-3">
-              <p className="text-sm font-black text-slate-900">🔊 Écoute et écris le mot :</p>
-              <div className="mt-2 flex items-center justify-between rounded-lg border-2 border-slate-200 bg-slate-50 px-3 py-2 text-sm font-black text-slate-700">
-                <span>margouilla<span className="text-slate-300">__</span></span>
-                <span className="text-[10px] text-cyan-600">Mot 3/5</span>
-              </div>
-              <p className="mt-2 text-[10px] font-bold text-slate-500">Français · Maths · Anglais · Histoire · Écologie</p>
-              <p className="mt-1 text-right text-[8px] font-black uppercase tracking-[0.15em] text-slate-300">eleveai.fr</p>
-            </div>
-          </div>
-        </Link>
-      </section>
 
-      {/* ── EXPLORER — le catalogue de toutes les actions possibles ──────────── */}
-      <section className="px-4 pt-10 sm:px-6 lg:px-8">
-        <Link
-          href="/explorer"
-          className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition hover:border-white/30 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
-        >
-          <div className="text-center sm:text-left">
-            <p className="text-xs font-black uppercase tracking-wide text-violet-200">
-              🧭 Tout au même endroit
-            </p>
-            <h2 className="mt-1 text-2xl font-black text-white sm:text-3xl">
-              🔍 Explore tout ce que tu peux faire
-            </h2>
-            <p className="mt-1 text-sm font-semibold text-white/75">
-              Coachs, parcours, défis, dictée, concours, cahiers de vacances… Progresse
-              dans ta matière forte, ou tente une voie que tu n&apos;as pas encore explorée.
-            </p>
-            <span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-violet-400 px-5 py-2 text-sm font-black text-[#041B33]">
-              🔍 Voir le catalogue →
-            </span>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Ordre voulu par Frédéric : le cœur d'abord — coach, parcours,
+               cahiers — puis les rituels et le premium. */}
+            {[
+              { emoji: "🧠", titre: "Le coach IA", desc: "On t'explique, on t'encourage — près de 2 000 compétences.", meta: "6 matières · CP → Bac", href: "/coach-ia/maths", badge: "gratuit", coach: true, nouveau: false },
+              { emoji: "🛤️", titre: "Les parcours", desc: "Fais le point notion par notion, à ton rythme.", meta: "Bilan · toutes matières", href: "/parcours", badge: "gratuit", coach: false, nouveau: false },
+              { emoji: "☀️", titre: "Les cahiers de vacances", desc: "Une page par jour, à imprimer — corrigés inclus.", meta: "L'été · CE2 → Bac +1", href: "/cahier-vacances", badge: "gratuit", coach: false, nouveau: false },
+              { emoji: "📜", titre: "La dictée du jour", desc: "5 mots à écouter et écrire — 2 minutes, chaque matin.", meta: "Chaque jour · CP → 3e", href: "/dictee-du-jour", badge: "gratuit", coach: false, nouveau: false },
+              { emoji: "🎓", titre: "L'éval blanche Pix IA", desc: "Prépare l'évaluation nationale, collège et lycée.", meta: "16 questions · collège & lycée", href: "/eval-pix-ia", badge: "gratuit", coach: false, nouveau: true },
+              { emoji: "👨‍👩‍👧", titre: "Le suivi famille", desc: "La progression, les moyennes — un coach qui se souvient.", meta: "5,90 €/mois · ou offert via l'établissement", href: "/tarifs", badge: "famille", coach: false, nouveau: false },
+            ].map((c) => (
+              <Link
+                key={c.href}
+                href={c.coach ? getHref(c.href) : c.href}
+                className="group flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-1 hover:border-white/30 hover:shadow-lg"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <span className="text-3xl leading-none" aria-hidden>
+                    {c.emoji}
+                  </span>
+                  <span className="flex gap-1.5">
+                    {c.nouveau && (
+                      <span className="rounded-full bg-amber-300/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wide text-amber-300">
+                        ✨ Nouveau
+                      </span>
+                    )}
+                    {c.badge === "gratuit" ? (
+                      <span className="rounded-full bg-emerald-400/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wide text-emerald-300">
+                        Gratuit
+                      </span>
+                    ) : (
+                      <span className="rounded-full bg-rose-400/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wide text-rose-300">
+                        Famille
+                      </span>
+                    )}
+                  </span>
+                </div>
+                <h3 className="mt-3 text-lg font-black leading-tight text-white">
+                  {c.titre}
+                </h3>
+                <p className="mt-1 flex-1 text-sm font-semibold leading-snug text-white/70">
+                  {c.desc}
+                </p>
+                <p className="mt-3 text-[11px] font-bold uppercase tracking-wide text-white/40">
+                  {c.meta}
+                </p>
+              </Link>
+            ))}
           </div>
-          {/* Aperçu du catalogue */}
-          <div className="w-full max-w-[260px] shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl transition group-hover:-translate-y-0.5 group-hover:shadow-2xl">
-            <div className="flex items-center justify-between bg-gradient-to-r from-violet-600 to-fuchsia-600 px-3 py-1.5 text-white">
-              <span className="text-[11px] font-black">🔍 Explorer</span>
-              <span className="text-[9px] font-black opacity-80">tout au même endroit</span>
-            </div>
-            <div className="grid grid-cols-2 gap-1.5 p-3">
-              {([["🧠", "Coach IA"], ["🛤️", "Parcours"], ["🎯", "Défis"], ["📜", "Dictée"], ["🃏", "Picto Maths"], ["🗺️", "Carte 974"]] as const).map(([e, l]) => (
-                <span key={l} className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2 py-1.5 text-[11px] font-black text-slate-700">
-                  <span className="leading-none">{e}</span>
-                  {l}
-                </span>
-              ))}
-            </div>
+
+          <div className="mt-5 text-center">
+            <Link
+              href="/explorer"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-2.5 text-sm font-black text-white transition hover:bg-white/10"
+            >
+              🔍 Voir tout le catalogue →
+            </Link>
           </div>
-        </Link>
+        </div>
       </section>
 
       {/* ── CAHIERS DE VACANCES — produit saisonnier, cartes colorées & fun ──── */}
@@ -1219,57 +1220,6 @@ export default function AccueilPage({
               </div>
             </Link>
           )}
-        </div>
-      </section>
-
-      {/* ── NOUVEAUTÉS ───────────────────────────────────────────────────────── */}
-      <section className="px-4 py-10 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-lg font-black text-white">✨ Nouveautés</h2>
-            <span className="text-xs font-bold text-white/40">Fais glisser →</span>
-          </div>
-          {/* Fondu à droite : montre qu'il y a d'autres cartes à faire défiler
-              (retour élève du 11/06/2026 : « on voit pas la droite de nouveautés ») */}
-          <div className="relative">
-          <div
-            ref={nouveautes.ref}
-            {...nouveautes.handlers}
-            className="flex gap-3 overflow-x-auto pb-3 pr-12 cursor-grab active:cursor-grabbing select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
-            {[
-              { icon: "☀️", label: "Cahiers de vacances",  desc: "CE2 → Bac +1 · à imprimer",                href: "/cahier-vacances",              color: "from-teal-600 to-emerald-800" },
-              { icon: "🎓", label: "Éval blanche Pix IA",  desc: "Prépa éval nationale, collège & lycée",  href: "/eval-pix-ia",                  color: "from-indigo-600 to-violet-800" },
-              { icon: "📄", label: "Fiches de cours IA",   desc: "16 fiches par domaine du référentiel Pix", href: "/fiches-cours/ia",            color: "from-violet-600 to-fuchsia-800" },
-              { icon: "📕", label: "Ebook IA",             desc: "Le livre « Comprendre l'IA » (PDF/EPUB)", href: "/fiches-cours/ia/livre",        color: "from-blue-600 to-indigo-800"  },
-              { icon: "🇪🇸", label: "Parcours Espagnol",  desc: "Bilan de niveau A1 → B2 avec audio",    href: "/parcours-espagnol",           color: "from-rose-600 to-red-800"     },
-              { icon: "🇪🇸", label: "Coach Espagnol",     desc: "A1 → B2, vocabulaire & audio",          href: "/coach-ia/espagnol",           color: "from-red-600 to-rose-800"     },
-              { icon: "🇬🇧", label: "Coach English",       desc: "A1 → B2, vocabulaire maths en anglais",  href: "/coach-ia/english-maths",       color: "from-sky-600 to-blue-800"     },
-              { icon: "🎧", label: "Parcours English",     desc: "Bilan de niveau CECRL avec audio",        href: "/parcours-english-maths",       color: "from-orange-600 to-amber-700" },
-              { icon: "🤖", label: "Parcours IA",          desc: "Culture & bons réflexes IA, A1 → C1",     href: "/parcours-ia",                  color: "from-violet-600 to-purple-800" },
-              { icon: "💰", label: "Coach Économie",       desc: "Entreprise, marché, élections…",          href: "/coach-ia/economie",            color: "from-amber-600 to-yellow-700" },
-              { icon: "⚽", label: "Défis du jour",        desc: "Coupe du monde · Maths",                  href: "/defis-du-jour",                color: "from-emerald-600 to-teal-700" },
-              { icon: "🌿", label: "Environnement B1",     desc: "Biodiversité, climat, écosystèmes",       href: "/coach-ia/english-maths?niveau=b1", color: "from-lime-600 to-green-700" },
-            ].map((n) => (
-              <Link
-                key={n.href}
-                href={n.href}
-                className="group relative flex h-[110px] w-[190px] shrink-0 flex-col justify-between overflow-hidden rounded-xl border border-white/10 p-4 transition-all hover:-translate-y-1 hover:border-white/30 hover:shadow-lg"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${n.color} opacity-80 transition-opacity group-hover:opacity-100`} />
-                <div className="relative z-10 flex items-start justify-between">
-                  <span className="text-2xl">{n.icon}</span>
-                  <span className="rounded-full bg-white/20 px-2 py-0.5 text-[9px] font-black tracking-wider text-white">NEW</span>
-                </div>
-                <div className="relative z-10">
-                  <p className="text-sm font-black text-white leading-tight">{n.label}</p>
-                  <p className="mt-0.5 text-[11px] leading-tight text-white/70">{n.desc}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#041B33] to-transparent" />
-          </div>
         </div>
       </section>
 
