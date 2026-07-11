@@ -15,6 +15,7 @@ const LASTMOD_CAHIERS = new Date("2026-06-29");
 const LASTMOD_DICTEE  = new Date("2026-07-01");
 const LASTMOD_974     = new Date("2026-07-02");
 const LASTMOD_JEUX    = new Date("2026-07-05");
+const LASTMOD_FICHES  = new Date("2026-07-11");
 const LASTMOD_AUDIENCES = new Date("2026-07-05");
 const LASTMOD_LEGAL   = new Date("2026-02-18");
 
@@ -65,7 +66,16 @@ const ROUTES: RouteConfig[] = [
 
   // ── FICHES DE COURS ────────────────────────────────────────────────────────
   { path: "/fiches-cours",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/maths", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/maths", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
+  // Fiches maths — Pythagore refaite « en blocs » le 11/07 (fiche + flashcards)
+  { path: "/fiches-cours/maths/6e/proportionnalite",    priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/maths/5e/pourcentages",        priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/maths/5e/fractions-addition",  priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/maths/4e/pythagore",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
+  { path: "/fiches-cours/maths/4e/cosinus",             priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/maths/4e/statistiques",        priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/maths/4e/probabilites",        priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/maths/3e/thales",              priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/fiches-cours/ia",   priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/fiches-cours/ia/livre", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/fiches-cours/ia/fondements/definir-l-ia", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
