@@ -12,7 +12,9 @@
 
 "use client";
 
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import { useEleve } from "@/context/EleveContext";
 import {
   DEFAULT_MAX_ITERS,
   DEFAULT_TARGET_SCORE,
@@ -206,6 +208,18 @@ function makeClientRunId() {
 }
 
 export default function OptimiseurClient() {
+  // 🔒 Réservé aux connectés : chaque appel API porte le jeton de session.
+  const { eleve } = useEleve();
+  // La session est relue depuis localStorage après montage : on attend
+  // avant d'afficher le mur pour ne pas le faire clignoter aux connectés.
+  const [sessionPrete, setSessionPrete] = useState(false);
+  useEffect(() => setSessionPrete(true), []);
+
+  const enteteAuth = (): HeadersInit => ({
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${eleve?.token || ""}`,
+  });
+
   const [prompt, setPrompt] = useState("");
 
   // ✅ always-latest refs (FIX timing)
@@ -279,7 +293,7 @@ export default function OptimiseurClient() {
   const scoreOnce = async (p: string, signal?: AbortSignal) => {
     const res = await fetch("/api/optimiseur/score", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: enteteAuth(),
       signal,
       body: JSON.stringify({
         prompt: p,
@@ -313,7 +327,7 @@ export default function OptimiseurClient() {
   ) => {
     const res = await fetch("/api/optimiseur/improve", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: enteteAuth(),
       signal,
       body: JSON.stringify({
         prompt: p,
@@ -550,7 +564,7 @@ const startPremium = async () => {
   try {
     const res = await fetch("/api/optimiseur/premium/start", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: enteteAuth(),
       body: JSON.stringify({
         prompt: latestPrompt, // ✅ always latest
         scoreReport: latestReport, // ✅ always latest
@@ -605,7 +619,7 @@ const startPremium = async () => {
 
       const res = await fetch("/api/optimiseur/premium/answer", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: enteteAuth(),
         body: JSON.stringify({
           sessionId: premiumSessionId,
           questionId: premiumQuestion.id,
@@ -625,7 +639,7 @@ const startPremium = async () => {
 
         const res2 = await fetch("/api/optimiseur/premium/complete", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: enteteAuth(),
           body: JSON.stringify({ sessionId: premiumSessionId }),
         });
 
@@ -750,6 +764,35 @@ const startPremium = async () => {
     if (currentScore === null) return 3;
     return clamp(Math.ceil(20 - currentScore), 1, 3);
   }, [currentScore]);
+
+  // 🔒 Mur de connexion : l'optimiseur est réservé aux utilisateurs connectés.
+  if (!eleve) {
+    return (
+      <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-slate-900">
+        {sessionPrete && (
+          <div className="mx-auto w-full max-w-xl px-4 py-24 text-center space-y-5">
+            <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-sky-900">
+              ✨ Valeria — Optimiseur de prompts pédagogique
+            </p>
+            <h1 className="text-3xl font-extrabold text-[#0047B6]">
+              Réservé aux utilisateurs connectés
+            </h1>
+            <p className="text-slate-600">
+              L&apos;optimiseur analyse et améliore tes prompts avec l&apos;IA.
+              Connecte-toi avec tes codes établissement ou ton email pour
+              l&apos;utiliser — c&apos;est gratuit.
+            </p>
+            <Link
+              href="/auth/signin"
+              className="inline-flex items-center justify-center px-5 py-3 rounded-full bg-[#0047B6] text-white font-semibold hover:bg-[#003a94] transition"
+            >
+              Se connecter
+            </Link>
+          </div>
+        )}
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-slate-900">

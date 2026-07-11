@@ -1,5 +1,6 @@
 // app/api/optimiseur/score/route.ts
 import { NextResponse } from "next/server";
+import { reponseNonConnecte, sessionFromRequest } from "@/lib/server/requireSession";
 import { openai } from "@/lib/openai";
 import {
   RUBRIC_VERSION,
@@ -174,6 +175,8 @@ function computeDeterministicCaps(prompt: string, type: PromptType, audience: Au
 
 export async function POST(req: Request) {
   try {
+    if (!sessionFromRequest(req)) return reponseNonConnecte();
+
     const body = await req.json().catch(() => ({}));
     const prompt = String(body?.prompt || "").trim();
 

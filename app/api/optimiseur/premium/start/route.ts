@@ -3,6 +3,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
+import { reponseNonConnecte, sessionFromRequest } from "@/lib/server/requireSession";
 import { normalizePromptType, normalizeAudience } from "@/lib/promptRubric";
 import {
   cleanupOldSessions,
@@ -347,6 +348,8 @@ async function llmGenerateQuestionsJSON(args: {
 
 export async function POST(req: Request) {
   try {
+    if (!sessionFromRequest(req)) return reponseNonConnecte();
+
     cleanupOldSessions();
 
     const body = (await req.json().catch(() => ({}))) as {

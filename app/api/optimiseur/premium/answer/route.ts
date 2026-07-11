@@ -3,6 +3,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
+import { reponseNonConnecte, sessionFromRequest } from "@/lib/server/requireSession";
 import {
   cleanupOldSessions,
   getSession,
@@ -23,6 +24,8 @@ const MAX_ANSWER_CHARS = 800; // évite les copier-coller énormes par erreur
 
 export async function POST(req: Request) {
   try {
+    if (!sessionFromRequest(req)) return reponseNonConnecte();
+
     cleanupOldSessions();
     const body = await req.json().catch(() => ({}));
 

@@ -3,6 +3,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
+import { reponseNonConnecte, sessionFromRequest } from "@/lib/server/requireSession";
 import { openai } from "@/lib/openai";
 import { getSession, deleteSession } from "@/lib/premiumSessionStore";
 
@@ -53,6 +54,8 @@ function premiumFields(session: any) {
 
 export async function POST(req: Request) {
   try {
+    if (!sessionFromRequest(req)) return reponseNonConnecte();
+
     const body = await req.json().catch(() => ({}));
     const sessionId = String(body?.sessionId || "").trim();
 

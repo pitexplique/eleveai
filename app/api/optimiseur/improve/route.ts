@@ -1,6 +1,7 @@
 // app/api/optimiseur/improve/route.ts
 
 import { NextResponse } from "next/server";
+import { reponseNonConnecte, sessionFromRequest } from "@/lib/server/requireSession";
 import { openai } from "@/lib/openai";
 import {
   RUBRIC_VERSION,
@@ -197,6 +198,8 @@ Output JSON only:
 
 export async function POST(req: Request) {
   try {
+    if (!sessionFromRequest(req)) return reponseNonConnecte();
+
     const body = await req.json().catch(() => ({}));
 
     const prompt = String(body?.prompt || "").trim();
