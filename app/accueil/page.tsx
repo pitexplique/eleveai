@@ -62,6 +62,18 @@ function estAvisVitrine(message: string): boolean {
   return !AVIS_EXCLURE_VITRINE.test(m);
 }
 
+// Avis ÉPINGLÉ (demande de Frédéric, 11/07) : Arthur, l'élève-testeur HPI dont
+// les idées ont façonné le site (accessibilité, « rester connecté », la vision
+// internationale → la page /francais-de-l-etranger). Verbatim exact de son
+// retour du 16/06 (retours_eleves) — on ne réécrit jamais un avis
+// (authenticité). Prénom + niveau seul (RGPD).
+const AVIS_EPINGLE: AvisPublic = {
+  prenom: "Arthur",
+  detail: "6e",
+  note: 4,
+  quote: "C'est un site internet qui permet d'apprendre gratuitement et c'est top.",
+};
+
 // La table retours_eleves est sous RLS sans policy : lecture via service-role
 // uniquement, côté serveur. On n'expose JAMAIS le nom de famille ni les codes.
 async function getDerniersAvis(): Promise<AvisPublic[]> {
@@ -83,16 +95,22 @@ async function getDerniersAvis(): Promise<AvisPublic[]> {
 
     if (error || !data) return [];
 
-    return data
+    const recents = data
+      // Pas de doublon avec l'avis épinglé s'il remonte aussi de la base.
+      .filter((r) => String(r.message ?? "").trim() !== AVIS_EPINGLE.quote)
       .filter((r) => estAvisVitrine(String(r.message ?? "")))
-      .slice(0, 3)
+      .slice(0, 2)
       .map((r) => ({
         prenom: prenomCourt(r.prenom),
         detail: niveauPublic(r.classe) || r.page?.trim() || "Élève",
         note: Number(r.note) || 5,
         quote: String(r.message ?? "").trim(),
       }));
+
+    // Arthur d'abord, puis les 2 avis récents : la rotation le montre en premier.
+    return [AVIS_EPINGLE, ...recents];
   } catch {
+    // Échec base : on laisse le fallback client (Pierre/Tamara/Guilianne) jouer.
     return [];
   }
 }

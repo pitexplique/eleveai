@@ -29,6 +29,6 @@ export const elevesRemercies: EleveRemercie[] = [
   { prenom: "Saroja",  action: "Test du coach français",                    meta: null                   },
   { prenom: "Simon",   action: "Rajouter du game",                          meta: "Participation active" },
   { prenom: "Gabrielle", action: "Idée des fiches de révision",             meta: "Participation active" },
-  { prenom: "Arthur",  action: "Idées d'accessibilité & d'ergonomie",       meta: "Participation active" },
+  { prenom: "Arthur",  action: "Idées d'accessibilité, d'ergonomie & vision internationale", meta: "Participation active" },
   { prenom: "Victor",  action: "Idée du score de classe",                   meta: "Participation active" },
 ];
