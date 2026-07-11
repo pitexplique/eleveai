@@ -243,3 +243,13 @@ export function getDomaineMap(classe: Classe, matiere: Matiere = "maths") {
 
   return domaines.filter((domaine) => domaine.notions.length > 0);
 }
+
+// =========================
+// ACCÈS PUBLIC AU PACK COMPLET
+// =========================
+// Pour les pages « programme » (/programme/<classe>) : exposer le pack
+// (bo + notions + micros) côté SERVEUR uniquement — ne jamais importer
+// depuis un composant client (les banques pèsent lourd dans un bundle).
+export function getKnowledgePack(classe: Classe, matiere: Matiere = "maths") {
+  return getKnowledge(classe, matiere);
+}

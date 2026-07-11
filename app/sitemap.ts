@@ -141,6 +141,12 @@ const ROUTES: RouteConfig[] = [
   { path: "/parents",         priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
   { path: "/enseignants",     priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
   { path: "/francais-de-l-etranger", priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-07-10") },
+
+  // ── PROGRAMME PAR CLASSE (moteur SEO n°2 : les compétences des banques
+  //    exposées en texte, façon pages « skills » d'IXL) ──────────────────────
+  ...["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe"].map((c) => (
+    { path: `/programme/${c}`, priority: 0.9, changeFrequency: "monthly" as const, lastMod: new Date("2026-07-11") }
+  )),
   { path: "/espace-ecoles",   priority: 0.95, changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
   { path: "/espace-eleves",   priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/espace-parents",  priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
