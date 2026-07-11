@@ -844,7 +844,7 @@ export default function AccueilPage({
       <section id="coach" className="scroll-mt-20 px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           {/* Coach IA — texte + chips des matières à gauche, aperçu à droite */}
-          <div className="flex flex-col items-center gap-6 rounded-2xl border border-cyan-300/20 bg-gradient-to-r from-cyan-500/[0.10] to-blue-500/[0.05] p-5 sm:p-6 lg:flex-row lg:justify-between">
+          <div className="flex flex-col items-center gap-6 rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-6 lg:flex-row lg:justify-between">
             <div className="w-full text-center lg:flex-1 lg:text-left">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-cyan-200/80">
                 🧠 Coach IA
@@ -929,7 +929,7 @@ export default function AccueilPage({
           </div>
 
           {/* Parcours par matière — même modèle que le coach : chips + aperçu */}
-          <div className="mt-8 flex flex-col items-center gap-6 rounded-2xl border border-violet-300/20 bg-gradient-to-r from-violet-500/[0.10] to-fuchsia-500/[0.05] p-5 sm:p-6 lg:flex-row lg:justify-between">
+          <div className="mt-8 flex flex-col items-center gap-6 rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-6 lg:flex-row lg:justify-between">
             <div className="w-full text-center lg:flex-1 lg:text-left">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-violet-200/80">
                 🛤️ Parcours
@@ -997,7 +997,7 @@ export default function AccueilPage({
           {/* Picto Maths · 974 — après les parcours : aperçu « capture » d'un défi */}
           <Link
             href="/picto-maths"
-            className="group mt-4 flex flex-col items-center gap-4 rounded-2xl border border-cyan-300/30 bg-gradient-to-r from-cyan-500/[0.12] to-amber-500/[0.08] p-4 transition hover:border-cyan-300/60 sm:flex-row sm:justify-between sm:gap-6"
+            className="group mt-4 flex flex-col items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition hover:border-white/30 sm:flex-row sm:justify-between sm:gap-6"
           >
             <div className="text-center sm:text-left">
               <p className="text-xs font-black uppercase tracking-wide text-cyan-200">
@@ -1049,7 +1049,7 @@ export default function AccueilPage({
       <section className="px-4 pt-6 sm:px-6 lg:px-8">
         <Link
           href="/cahier-vacances-cartes"
-          className="group mx-auto flex max-w-4xl flex-col items-center gap-5 overflow-hidden rounded-2xl border border-orange-300/30 bg-gradient-to-br from-orange-400/[0.12] via-violet-400/[0.07] to-lime-400/[0.05] p-6 text-center transition hover:border-orange-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:text-left sm:p-7"
+          className="group mx-auto flex max-w-4xl flex-col items-center gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center transition hover:border-white/30 sm:flex-row sm:justify-between sm:gap-6 sm:text-left sm:p-7"
         >
           <div>
             <p className="text-xs font-black uppercase tracking-wide text-orange-200">
@@ -1107,7 +1107,7 @@ export default function AccueilPage({
       <section id="espace-eleve" className="scroll-mt-24 px-4 pt-6 sm:px-6 lg:px-8">
         <Link
           href="/qui-suis-je-a-imprimer"
-          className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-fuchsia-300/30 bg-gradient-to-br from-fuchsia-400/[0.12] via-violet-400/[0.07] to-white/[0.04] p-6 transition hover:border-fuchsia-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
+          className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition hover:border-white/30 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
         >
           <div className="text-center sm:text-left">
             <p className="text-xs font-black uppercase tracking-wide text-fuchsia-200">
@@ -1146,7 +1146,7 @@ export default function AccueilPage({
       <section className="px-4 pt-6 sm:px-6 lg:px-8">
         <Link
           href="/dictee-du-jour"
-          className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-cyan-300/30 bg-gradient-to-br from-cyan-400/[0.12] via-sky-400/[0.07] to-white/[0.04] p-6 transition hover:border-cyan-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
+          className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition hover:border-white/30 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
         >
           <div className="text-center sm:text-left">
             <p className="text-xs font-black uppercase tracking-wide text-cyan-200">
@@ -1186,7 +1186,7 @@ export default function AccueilPage({
       <section className="px-4 pt-6 sm:px-6 lg:px-8">
         <Link
           href="/explorer"
-          className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-violet-300/30 bg-gradient-to-br from-violet-400/[0.14] via-fuchsia-400/[0.07] to-white/[0.04] p-6 transition hover:border-violet-300/60 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
+          className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition hover:border-white/30 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
         >
           <div className="text-center sm:text-left">
             <p className="text-xs font-black uppercase tracking-wide text-violet-200">
@@ -1491,7 +1491,7 @@ export default function AccueilPage({
 
       {/* ── MOT DE M. LACOSTE — aux élèves et aux parents (contenu humain, en bas) ── */}
       <section className="px-4 pt-6 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-sky-300/30 bg-gradient-to-br from-sky-300/[0.10] via-cyan-300/[0.06] to-white/[0.04] p-6 text-center sm:p-8">
+        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center sm:p-8">
           <p className="text-3xl sm:text-4xl" aria-hidden="true">💛</p>
           <h2 className="mt-2 text-2xl font-black leading-tight text-white sm:text-3xl">
             Aux parents et à leurs enfants
@@ -1525,7 +1525,7 @@ export default function AccueilPage({
 
       {/* ── REMERCIEMENTS ────────────────────────────────────────────────────── */}
       <section className="px-4 pb-12 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl overflow-hidden rounded-2xl border border-yellow-300/25 bg-gradient-to-br from-white/[0.07] to-yellow-300/[0.04] p-6 sm:p-8">
+        <div className="mx-auto max-w-6xl overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="flex flex-wrap items-center gap-2 text-lg font-black text-white">
               🙏 Merci à nos élèves testeurs
