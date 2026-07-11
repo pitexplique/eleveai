@@ -488,38 +488,11 @@ export default function AccueilPage({
             "linear-gradient(115deg, #041B33 0%, #0a2a55 35%, #251355 65%, #041B33 100%)",
         }}
       >
-        {/* L'image ne doit pas contenir d'éléments qui ressemblent à des boutons :
-            les élèves essayaient de cliquer sur les cartes dessinées (retours du
-            11-12/06/2026). Les vraies actions sont sous l'image. */}
-        {/* L'image hero d'abord. Le compte à rebours reste posé dessus. */}
-        <div className="relative mx-auto max-w-5xl md:w-[62%] xl:w-[46rem]">
-          <Image
-            src="/images/accueil-eleveai-reunion.webp"
-            alt="EleveAI – Comprendre, S'entraîner, Réussir – CP à Terminale"
-            width={1920}
-            height={1080}
-            priority
-            sizes="100vw"
-            className="block h-auto w-full border-x border-b border-white/10 shadow-2xl"
-          />
-          {/* Fondu bas vers le fond de page */}
-          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[#041B33]" />
-
-          {/* Brevet countdown si 3e/4e */}
-          {(eleveClasse === "3e" || eleveClasse === "4e") && (
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
-              <Link
-                href="/coach-brevet"
-                className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-black text-white shadow-lg transition hover:bg-emerald-400 hover:scale-105 whitespace-nowrap"
-              >
-                🎯 Sprint Brevet · J−{jours} → Commencer
-              </Link>
-            </div>
-          )}
-        </div>
-
-        {/* Message + SÉLECTEUR D'AUDIENCE (4 portes), SOUS l'image */}
-        <div className="relative z-10 mx-auto max-w-4xl px-4 pb-4 pt-6 text-center">
+        {/* HERO SANS IMAGE (11/07, inspiration IXL) : la grande illustration a
+           cédé la place à l'entrée par CLASSE (le modèle mental du parent) —
+           chaque pastille mène à /programme/<classe>, le moteur SEO n°2. Le
+           Sprint Brevet 3e/4e vit déjà dans le bandeau défi plus bas. */}
+        <div className="relative z-10 mx-auto max-w-4xl px-4 pb-6 pt-10 text-center">
           {/* Prénom uniquement : aucun nom de famille n'est affiché. */}
           {prenomAffiche && (
             <p className="mx-auto mb-3 inline-block rounded-full border border-white/20 bg-black/40 px-4 py-1.5 text-xs font-black text-white backdrop-blur-sm sm:text-sm">
@@ -601,6 +574,29 @@ export default function AccueilPage({
             </Link>
           </div>
           )}
+
+          {/* Entrée par CLASSE, façon IXL : « mon enfant est en CM1 » → clic.
+             Chaque pastille = /programme/<classe> (tout le programme,
+             compétence par compétence — le moteur SEO n°2). */}
+          <p className="mt-7 text-xs font-black uppercase tracking-[0.2em] text-white/45">
+            📚 Le programme de ta classe, compétence par compétence
+          </p>
+          <div className="mx-auto mt-3 flex max-w-3xl flex-wrap items-center justify-center gap-2">
+            {[
+              ["cp", "CP"], ["ce1", "CE1"], ["ce2", "CE2"], ["cm1", "CM1"],
+              ["cm2", "CM2"], ["6e", "6e"], ["5e", "5e"], ["4e", "4e"],
+              ["3e", "3e"], ["seconde", "2nde"], ["premiere-spe", "1re"],
+              ["terminale-spe", "Tle"],
+            ].map(([slug, label]) => (
+              <Link
+                key={slug}
+                href={`/programme/${slug}`}
+                className="rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-1.5 text-sm font-black text-white/85 backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-amber-300/60 hover:bg-amber-300/10 hover:text-amber-200"
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
       )}
