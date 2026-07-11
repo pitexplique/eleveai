@@ -718,6 +718,11 @@ export default function AccueilPage({
               Multi-matières, suivi classe par classe, RGPD maîtrisé. Déployé en
               quelques heures, sans installation.
             </p>
+            {/* La preuve qui compte pour un principal : qui l'utilise déjà.
+               Formulation déjà validée sur /qui-sommes-nous. */}
+            <p className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-full bg-violet-400/15 px-3 py-1 text-[11px] font-black text-violet-200">
+              ✓ Déjà utilisé en collège, à La Réunion
+            </p>
             <Link
               href="/espace-ecoles"
               className="mt-3 inline-flex w-fit items-center gap-2 rounded-full bg-violet-400 px-4 py-2 text-sm font-black text-white transition hover:brightness-110"
