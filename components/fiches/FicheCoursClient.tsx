@@ -112,7 +112,7 @@ export default function FicheCoursClient({
     // 2. Prof connecté : la composition enregistrée en base gagne
     //    (elle le suit d'un appareil à l'autre).
     async function chargerDepuisBase() {
-      if (!estStaff || !eleve?.token) return;
+      if (!eleve?.token) return;
       try {
         const res = await fetch(
           `/api/fiches/composition?matiere=${fiche.matiere}&classe=${fiche.classe}&notion=${fiche.notion}`,
@@ -134,10 +134,10 @@ export default function FicheCoursClient({
     return () => {
       annule = true;
     };
-  }, [cleCompo, estStaff, eleve?.token, fiche.matiere, fiche.classe, fiche.notion]);
+  }, [cleCompo, eleve?.token, fiche.matiere, fiche.classe, fiche.notion]);
 
   useEffect(() => {
-    if (!compoChargee || !estStaff) return;
+    if (!compoChargee || !eleve) return;
     try {
       localStorage.setItem(cleCompo, JSON.stringify(compo));
     } catch {
@@ -165,7 +165,7 @@ export default function FicheCoursClient({
       });
     }, 800);
     return () => clearTimeout(t);
-  }, [compo, compoChargee, estStaff, cleCompo, eleve?.token, fiche.matiere, fiche.classe, fiche.notion]);
+  }, [compo, compoChargee, cleCompo, eleve, fiche.matiere, fiche.classe, fiche.notion]);
 
   function reinitialiser() {
     modifieeRef.current = false;
@@ -213,11 +213,12 @@ export default function FicheCoursClient({
     }));
   }
 
-  // Le visiteur et l'élève voient l'ordre canonique ; le prof voit SA fiche.
+  // Le visiteur voit l'ordre canonique ; tout connecté (prof COMME élève —
+  // effet IKEA des deux côtés) voit SA composition.
   const rubriquesVisibles = useMemo(() => {
-    const source = estStaff ? compo : compositionParDefaut();
+    const source = eleve ? compo : compositionParDefaut();
     return source.ordre.filter((id) => source.actives[id]);
-  }, [estStaff, compo]);
+  }, [eleve, compo]);
 
   // ── Les blocs de la fiche, rendus rubrique par rubrique ──
   function rendreRubrique(id: FicheRubriqueId) {
@@ -523,7 +524,7 @@ export default function FicheCoursClient({
             <span className="text-slate-900">{fiche.titre}</span>
           </nav>
           <div className="flex flex-wrap gap-2">
-            {estStaff && (
+            {eleve && (
               <button
                 type="button"
                 onClick={() => setComposeurOuvert((o) => !o)}
@@ -550,13 +551,15 @@ export default function FicheCoursClient({
         </div>
       </div>
 
-      {/* ── Composeur prof : cocher + ordonner ses rubriques ── */}
-      {estStaff && composeurOuvert && (
+      {/* ── Composeur (prof ET élève) : cocher + ordonner ses rubriques ── */}
+      {eleve && composeurOuvert && (
         <div className="screen-only border-b border-slate-200 bg-white">
           <div className="mx-auto max-w-5xl px-5 py-5 sm:px-8">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <p className="text-sm font-black text-slate-900">
-                🎛️ Ta fiche, tes rubriques, ton ordre — comme tu fais cours.
+                {estStaff
+                  ? "🎛️ Ta fiche, tes rubriques, ton ordre — comme tu fais cours."
+                  : "🎛️ Ta fiche, tes rubriques, ton ordre — celles qui t'aident à réviser."}
               </p>
               <button
                 type="button"
@@ -610,10 +613,9 @@ export default function FicheCoursClient({
               ))}
             </ul>
             <p className="mt-3 text-xs font-bold text-slate-500">
-              Ta composition est enregistrée automatiquement et te suit
-              d&apos;un appareil à l&apos;autre — retrouve-la dans ton dashboard
-              (« Mes fiches de cours »). Elle s&apos;applique à
-              l&apos;impression. Bientôt : la partager à tes classes.
+              {estStaff
+                ? "Ta composition est enregistrée automatiquement et te suit d'un appareil à l'autre — retrouve-la dans ton dashboard (« Mes fiches de cours »). Elle s'applique à l'impression. Bientôt : la partager à tes classes."
+                : "Ta composition est enregistrée automatiquement et te suit d'un appareil à l'autre. Elle s'applique aussi à l'impression."}
             </p>
           </div>
         </div>

@@ -1,6 +1,8 @@
-// API des compositions de fiches (réservée au staff : prof/principal/boss).
-// GET  ?matiere=&classe=&notion=  → la composition du prof pour cette fiche
-// GET  (sans paramètres)          → toutes ses compositions (dashboard-prof)
+// API des compositions de fiches — ouverte à TOUT utilisateur connecté
+// (effet IKEA des deux côtés : le prof compose son cours, l'élève compose sa
+// révision). Chacun ne lit et n'écrit que SES lignes (clés du jeton).
+// GET  ?matiere=&classe=&notion=  → sa composition pour cette fiche
+// GET  (sans paramètres)          → toutes ses compositions (dashboards)
 // PUT  { matiere, classe, notion, ordre, actives } → upsert
 // DELETE { matiere, classe, notion } → retour à la fiche canonique
 
@@ -11,19 +13,11 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { sessionFromRequest } from "@/lib/server/requireSession";
 
-const ROLES_STAFF = new Set(["prof", "principal", "boss"]);
-
 function supabaseAdmin() {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
-}
-
-function sessionStaff(req: Request) {
-  const session = sessionFromRequest(req);
-  if (!session || !ROLES_STAFF.has(session.type_utilisateur)) return null;
-  return session;
 }
 
 const SLUG_RE = /^[a-z0-9-]{1,60}$/;
@@ -56,10 +50,10 @@ function dataValide(ordre: unknown, actives: unknown) {
 }
 
 export async function GET(req: Request) {
-  const session = sessionStaff(req);
+  const session = sessionFromRequest(req);
   if (!session) {
     return NextResponse.json(
-      { ok: false, error: "Réservé aux profs connectés." },
+      { ok: false, error: "Réservé aux utilisateurs connectés." },
       { status: 401 }
     );
   }
@@ -96,10 +90,10 @@ export async function GET(req: Request) {
 }
 
 export async function PUT(req: Request) {
-  const session = sessionStaff(req);
+  const session = sessionFromRequest(req);
   if (!session) {
     return NextResponse.json(
-      { ok: false, error: "Réservé aux profs connectés." },
+      { ok: false, error: "Réservé aux utilisateurs connectés." },
       { status: 401 }
     );
   }
@@ -143,10 +137,10 @@ export async function PUT(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  const session = sessionStaff(req);
+  const session = sessionFromRequest(req);
   if (!session) {
     return NextResponse.json(
-      { ok: false, error: "Réservé aux profs connectés." },
+      { ok: false, error: "Réservé aux utilisateurs connectés." },
       { status: 401 }
     );
   }
