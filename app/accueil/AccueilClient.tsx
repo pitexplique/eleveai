@@ -611,6 +611,48 @@ export default function AccueilPage({
           call actif à venir. */}
       <EncartCallEnDirect />
 
+      {/* ── MOT DE M. LACOSTE — collé au call : le MOMENT HUMAIN (photo + lettre repliée) ── */}
+      <section className="px-4 pt-10 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center sm:p-8">
+          <Image
+            src="/images/avatar-frederic-Lacoste.jpg"
+            alt="Frédéric Lacoste"
+            width={64}
+            height={64}
+            className="mx-auto h-16 w-16 rounded-full border-2 border-emerald-300/50 object-cover"
+          />
+          <h2 className="mt-2 text-2xl font-black leading-tight text-white sm:text-3xl">
+            Aux parents et à leurs enfants
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+            Merci pour cette année. EleveAI est né dans ma classe, pour mes
+            élèves — et il reste{" "}
+            <span className="font-black text-sky-200">
+              gratuit et ouvert tout l&apos;été
+            </span>
+            .
+          </p>
+          <details className="mt-1">
+            <summary className="mt-2 cursor-pointer list-none text-xs font-black text-sky-300 transition hover:text-sky-200">
+              Lire la suite ▾
+            </summary>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+            <span className="font-black text-sky-200">Aux parents :</span>{" "}
+            quelques minutes par jour suffisent — la dictée du jour, un défi, une
+            fiche. Aucune pression, juste le plaisir d&apos;apprendre à son
+            rythme, en confiance (et sans publicité — vos enfants sont en
+            sécurité).
+          </p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+            <span className="font-black text-sky-200">Aux élèves :</span> je suis
+            fier de vous. Reposez-vous, profitez des vôtres et du soleil… et
+            revenez quand l&apos;envie vous prend. 🌴
+          </p>
+          </details>
+          <p className="mt-4 text-sm font-black text-emerald-200">— M. Lacoste</p>
+        </div>
+      </section>
+
       {/* ── APERÇUS PAR AUDIENCE — pour les VISITEURS ; masqués si connecté (un
           élève/prof connecté n'a plus à choisir « Je suis… »). ──────────────── */}
       {!eleve && (
@@ -1142,30 +1184,6 @@ export default function AccueilPage({
       </section>
       )}
 
-      {/* ── AVIS EN UNE LIGNE (sous l'image) — retour d'une élève ────────────── */}
-      <section className="border-b border-white/10 px-4 py-2.5 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-6xl items-center justify-center gap-2 sm:gap-3">
-          <span
-            className="shrink-0 text-sm tracking-widest text-amber-300"
-            aria-label={`Note ${avisLigne.note} sur 5`}
-          >
-            {"★".repeat(avisLigne.note)}
-          </span>
-          <p className="min-w-0 truncate text-xs font-medium text-white/85 sm:text-sm">
-            «&nbsp;{avisLigne.quote}&nbsp;»
-            <span className="ml-1.5 font-black text-white/55">
-              — {avisLigne.prenom} · {avisLigne.detail}
-            </span>
-          </p>
-          <Link
-            href="/votre-avis"
-            className="shrink-0 text-[11px] font-black text-emerald-300 transition hover:translate-x-0.5 sm:text-xs"
-          >
-            Donner mon avis →
-          </Link>
-        </div>
-      </section>
-
       {/* ── FEATURED BANNER — Défi du jour (sous le cahier de vacances et les coachs) ── */}
       <section className="px-4 pt-10 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
@@ -1255,34 +1273,27 @@ export default function AccueilPage({
         </div>
       </section>
 
-      {/* ── MOT DE M. LACOSTE — aux élèves et aux parents (contenu humain, en bas) ── */}
-      <section className="px-4 pt-10 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center sm:p-8">
-          <p className="text-3xl sm:text-4xl" aria-hidden="true">💛</p>
-          <h2 className="mt-2 text-2xl font-black leading-tight text-white sm:text-3xl">
-            Aux parents et à leurs enfants
-          </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
-            Merci pour cette année. EleveAI est né dans ma classe, pour mes
-            élèves — et il reste{" "}
-            <span className="font-black text-sky-200">
-              gratuit et ouvert tout l&apos;été
+      {/* ── AVIS EN UNE LIGNE (sous l'image) — retour d'une élève ────────────── */}
+      <section className="border-b border-white/10 px-4 py-2.5 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-6xl items-center justify-center gap-2 sm:gap-3">
+          <span
+            className="shrink-0 text-sm tracking-widest text-amber-300"
+            aria-label={`Note ${avisLigne.note} sur 5`}
+          >
+            {"★".repeat(avisLigne.note)}
+          </span>
+          <p className="min-w-0 truncate text-xs font-medium text-white/85 sm:text-sm">
+            «&nbsp;{avisLigne.quote}&nbsp;»
+            <span className="ml-1.5 font-black text-white/55">
+              — {avisLigne.prenom} · {avisLigne.detail}
             </span>
-            .
           </p>
-          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
-            <span className="font-black text-sky-200">Aux parents :</span>{" "}
-            quelques minutes par jour suffisent — la dictée du jour, un défi, une
-            fiche. Aucune pression, juste le plaisir d&apos;apprendre à son
-            rythme, en confiance (et sans publicité — vos enfants sont en
-            sécurité).
-          </p>
-          <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
-            <span className="font-black text-sky-200">Aux élèves :</span> je suis
-            fier de vous. Reposez-vous, profitez des vôtres et du soleil… et
-            revenez quand l&apos;envie vous prend. 🌴
-          </p>
-          <p className="mt-4 text-sm font-black text-emerald-200">— M. Lacoste</p>
+          <Link
+            href="/votre-avis"
+            className="shrink-0 text-[11px] font-black text-emerald-300 transition hover:translate-x-0.5 sm:text-xs"
+          >
+            Donner mon avis →
+          </Link>
         </div>
       </section>
 
