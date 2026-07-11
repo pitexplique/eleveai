@@ -750,7 +750,7 @@ export default function AccueilPage({
       {/* ── APERÇUS PAR AUDIENCE — pour les VISITEURS ; masqués si connecté (un
           élève/prof connecté n'a plus à choisir « Je suis… »). ──────────────── */}
       {!eleve && (
-      <section className="px-4 pt-8 sm:px-6 lg:px-8">
+      <section className="px-4 pt-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           {/* Élève — l'utilisateur PRINCIPAL : mis en avant (pleine largeur,
               un peu plus grand), les trois publics adultes viennent ensuite. */}
@@ -841,7 +841,7 @@ export default function AccueilPage({
       )}
 
       {/* ── COACHS + PARCOURS — les essentiels élève, remontés en tête ─────────── */}
-      <section id="coach" className="scroll-mt-20 px-4 py-8 sm:px-6 lg:px-8">
+      <section id="coach" className="scroll-mt-20 px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           {/* Coach IA — texte + chips des matières à gauche, aperçu à droite */}
           <div className="flex flex-col items-center gap-6 rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-6 lg:flex-row lg:justify-between">
@@ -1046,7 +1046,7 @@ export default function AccueilPage({
 
       {/* ── LE CORPS & L'ESPRIT — cartes de révision + sport (cible SEO
           « le trou de Nathan » : réviser avant la 1re) ──────────────────────── */}
-      <section className="px-4 pt-6 sm:px-6 lg:px-8">
+      <section className="px-4 pt-10 sm:px-6 lg:px-8">
         <Link
           href="/cahier-vacances-cartes"
           className="group mx-auto flex max-w-4xl flex-col items-center gap-5 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center transition hover:border-white/30 sm:flex-row sm:justify-between sm:gap-6 sm:text-left sm:p-7"
@@ -1104,7 +1104,7 @@ export default function AccueilPage({
 
       {/* ── ESPACE ÉLÈVE (ancre du sélecteur d'audience) : jeu, dictée, coach… ── */}
       {/* ── JEU DE 32 CARTES « QUI SUIS-JE ? » — à imprimer, avant la dictée ──── */}
-      <section id="espace-eleve" className="scroll-mt-24 px-4 pt-6 sm:px-6 lg:px-8">
+      <section id="espace-eleve" className="scroll-mt-24 px-4 pt-10 sm:px-6 lg:px-8">
         <Link
           href="/qui-suis-je-a-imprimer"
           className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition hover:border-white/30 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
@@ -1143,7 +1143,7 @@ export default function AccueilPage({
       </section>
 
       {/* ── DICTÉE DU JOUR — le rituel quotidien, tout en haut ───────────────── */}
-      <section className="px-4 pt-6 sm:px-6 lg:px-8">
+      <section className="px-4 pt-10 sm:px-6 lg:px-8">
         <Link
           href="/dictee-du-jour"
           className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition hover:border-white/30 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
@@ -1183,7 +1183,7 @@ export default function AccueilPage({
       </section>
 
       {/* ── EXPLORER — le catalogue de toutes les actions possibles ──────────── */}
-      <section className="px-4 pt-6 sm:px-6 lg:px-8">
+      <section className="px-4 pt-10 sm:px-6 lg:px-8">
         <Link
           href="/explorer"
           className="group mx-auto flex max-w-4xl flex-col items-center gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition hover:border-white/30 sm:flex-row sm:justify-between sm:gap-6 sm:p-7"
@@ -1222,7 +1222,7 @@ export default function AccueilPage({
       </section>
 
       {/* ── CAHIERS DE VACANCES — produit saisonnier, cartes colorées & fun ──── */}
-      <section id="explorer" className="relative scroll-mt-20 overflow-hidden bg-gradient-to-b from-[#08294a] to-[#041B33] px-4 pb-2 pt-8 sm:px-6 lg:px-8">
+      <section id="explorer" className="relative scroll-mt-20 overflow-hidden bg-gradient-to-b from-[#08294a] to-[#041B33] px-4 pb-2 pt-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col items-center gap-6 lg:flex-row lg:justify-between">
             <div className="w-full text-center lg:flex-1 lg:text-left">
@@ -1294,7 +1294,7 @@ export default function AccueilPage({
 
       {/* ── MATHS RÉEL · 974 — PARKÉ hors vitrine (cf. MONTRER_974) ──────────── */}
       {MONTRER_974 && (
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#041B33] to-[#07231f] px-4 pb-2 pt-8 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#041B33] to-[#07231f] px-4 pb-2 pt-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="overflow-hidden rounded-3xl border border-rose-400/30 bg-gradient-to-br from-rose-500/15 via-orange-500/[0.08] to-emerald-500/[0.08] p-6 text-center sm:p-10">
             <p className="inline-flex items-center gap-2 rounded-full bg-rose-400/20 px-4 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-rose-200">
@@ -1401,7 +1401,7 @@ export default function AccueilPage({
       </section>
 
       {/* ── FEATURED BANNER — Défi du jour (sous le cahier de vacances et les coachs) ── */}
-      <section className="px-4 pt-6 sm:px-6 lg:px-8">
+      <section className="px-4 pt-10 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           {eleveClasse === "3e" || eleveClasse === "4e" ? (
             <Link href="/coach-brevet" className="group relative block h-[220px] overflow-hidden rounded-2xl shadow-2xl sm:h-[280px]">
@@ -1490,7 +1490,7 @@ export default function AccueilPage({
       </section>
 
       {/* ── MOT DE M. LACOSTE — aux élèves et aux parents (contenu humain, en bas) ── */}
-      <section className="px-4 pt-6 sm:px-6 lg:px-8">
+      <section className="px-4 pt-10 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center sm:p-8">
           <p className="text-3xl sm:text-4xl" aria-hidden="true">💛</p>
           <h2 className="mt-2 text-2xl font-black leading-tight text-white sm:text-3xl">
