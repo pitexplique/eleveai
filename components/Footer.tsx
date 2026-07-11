@@ -14,6 +14,8 @@ const outils = [
   { label: "Calcul rapide", href: "/calcul-rapide" },
   { label: "English Maths", href: "/english-maths" },
   { label: "Défis du jour", href: "/defis-du-jour" },
+  { label: "Cartes de révision", href: "/cahier-vacances-cartes" },
+  { label: "Qui suis-je ? à imprimer", href: "/qui-suis-je-a-imprimer" },
   { label: "Concours général", href: "/concours-general" },
 ];
 
