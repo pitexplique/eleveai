@@ -8,7 +8,7 @@
 //     (composition enregistrée sur l'appareil — partage aux classes plus tard,
 //     via l'import Pronote).
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import {
   AlertTriangle,
@@ -84,27 +84,57 @@ export default function FicheCoursClient({
   const [compoChargee, setCompoChargee] = useState(false);
   const [composeurOuvert, setComposeurOuvert] = useState(false);
 
+  // Ne pousse en base que ce que le prof a réellement modifié (jamais le
+  // simple chargement d'une fiche).
+  const modifieeRef = useRef(false);
+
   useEffect(() => {
+    let annule = false;
+
+    // On repart du canon pour absorber les rubriques ajoutées depuis.
+    function normaliser(lue: Composition): Composition {
+      const base = compositionParDefaut();
+      const ordre = [
+        ...lue.ordre.filter((id) => ORDRE_CANONIQUE.includes(id)),
+        ...ORDRE_CANONIQUE.filter((id) => !lue.ordre.includes(id)),
+      ];
+      return { ordre, actives: { ...base.actives, ...lue.actives } };
+    }
+
+    // 1. Le localStorage d'abord (instantané, hors-ligne).
     try {
       const brut = localStorage.getItem(cleCompo);
-      if (brut) {
-        const lue = JSON.parse(brut) as Composition;
-        // On repart du canon pour absorber les rubriques ajoutées depuis.
-        const base = compositionParDefaut();
-        const ordre = [
-          ...lue.ordre.filter((id) => ORDRE_CANONIQUE.includes(id)),
-          ...ORDRE_CANONIQUE.filter((id) => !lue.ordre.includes(id)),
-        ];
-        setCompo({
-          ordre,
-          actives: { ...base.actives, ...lue.actives },
-        });
-      }
+      if (brut) setCompo(normaliser(JSON.parse(brut) as Composition));
     } catch {
       /* composition illisible : on garde le canon */
     }
-    setCompoChargee(true);
-  }, [cleCompo]);
+
+    // 2. Prof connecté : la composition enregistrée en base gagne
+    //    (elle le suit d'un appareil à l'autre).
+    async function chargerDepuisBase() {
+      if (!estStaff || !eleve?.token) return;
+      try {
+        const res = await fetch(
+          `/api/fiches/composition?matiere=${fiche.matiere}&classe=${fiche.classe}&notion=${fiche.notion}`,
+          { headers: { Authorization: `Bearer ${eleve.token}` } }
+        );
+        const data = await res.json().catch(() => null);
+        if (!annule && res.ok && data?.composition?.data) {
+          setCompo(normaliser(data.composition.data as Composition));
+        }
+      } catch {
+        /* hors-ligne : le localStorage suffit */
+      }
+    }
+
+    chargerDepuisBase().finally(() => {
+      if (!annule) setCompoChargee(true);
+    });
+
+    return () => {
+      annule = true;
+    };
+  }, [cleCompo, estStaff, eleve?.token, fiche.matiere, fiche.classe, fiche.notion]);
 
   useEffect(() => {
     if (!compoChargee || !estStaff) return;
@@ -113,9 +143,58 @@ export default function FicheCoursClient({
     } catch {
       /* stockage indisponible */
     }
-  }, [compo, compoChargee, estStaff, cleCompo]);
+
+    // Enregistrement en base, débouncé, seulement après une vraie action.
+    if (!modifieeRef.current || !eleve?.token) return;
+    const t = setTimeout(() => {
+      fetch("/api/fiches/composition", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${eleve.token}`,
+        },
+        body: JSON.stringify({
+          matiere: fiche.matiere,
+          classe: fiche.classe,
+          notion: fiche.notion,
+          ordre: compo.ordre,
+          actives: compo.actives,
+        }),
+      }).catch(() => {
+        /* hors-ligne : le localStorage garde la composition */
+      });
+    }, 800);
+    return () => clearTimeout(t);
+  }, [compo, compoChargee, estStaff, cleCompo, eleve?.token, fiche.matiere, fiche.classe, fiche.notion]);
+
+  function reinitialiser() {
+    modifieeRef.current = false;
+    setCompo(compositionParDefaut());
+    try {
+      localStorage.removeItem(cleCompo);
+    } catch {
+      /* ignore */
+    }
+    if (eleve?.token) {
+      fetch("/api/fiches/composition", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${eleve.token}`,
+        },
+        body: JSON.stringify({
+          matiere: fiche.matiere,
+          classe: fiche.classe,
+          notion: fiche.notion,
+        }),
+      }).catch(() => {
+        /* ignore */
+      });
+    }
+  }
 
   function deplacer(id: FicheRubriqueId, sens: -1 | 1) {
+    modifieeRef.current = true;
     setCompo((c) => {
       const ordre = [...c.ordre];
       const i = ordre.indexOf(id);
@@ -127,6 +206,7 @@ export default function FicheCoursClient({
   }
 
   function basculer(id: FicheRubriqueId) {
+    modifieeRef.current = true;
     setCompo((c) => ({
       ...c,
       actives: { ...c.actives, [id]: !c.actives[id] },
@@ -480,7 +560,7 @@ export default function FicheCoursClient({
               </p>
               <button
                 type="button"
-                onClick={() => setCompo(compositionParDefaut())}
+                onClick={reinitialiser}
                 className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3.5 py-1.5 text-xs font-black text-slate-600 transition hover:bg-slate-50"
               >
                 <RotateCcw className="h-3.5 w-3.5" />
@@ -530,8 +610,10 @@ export default function FicheCoursClient({
               ))}
             </ul>
             <p className="mt-3 text-xs font-bold text-slate-500">
-              Ta composition est enregistrée sur cet appareil et s&apos;applique
-              à l&apos;impression. Bientôt : la partager à tes classes.
+              Ta composition est enregistrée automatiquement et te suit
+              d&apos;un appareil à l&apos;autre — retrouve-la dans ton dashboard
+              (« Mes fiches de cours »). Elle s&apos;applique à
+              l&apos;impression. Bientôt : la partager à tes classes.
             </p>
           </div>
         </div>

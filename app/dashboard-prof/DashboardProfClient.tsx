@@ -4,7 +4,15 @@ import Link from "next/link";
 import { Fragment, useEffect, useMemo, useState } from "react";
 
 import { useEleve } from "@/context/EleveContext";
+import { hrefFiche, titreFiche } from "@/lib/fiches/registre";
 import { prenomFromNom } from "@/lib/prenom";
+
+type CompositionFiche = {
+  matiere: string;
+  classe: string;
+  notion: string;
+  updated_at: string;
+};
 
 type UserSession = {
   acces_id?: string | null;
@@ -203,6 +211,26 @@ export default function DashboardProfClient() {
     new Date(Date.now() - 14 * 86_400_000).toISOString().slice(0, 10)
   );
   const [triInactifs, setTriInactifs] = useState(true);
+  // « Mes fiches de cours » : les compositions enregistrées par ce prof.
+  const [mesFiches, setMesFiches] = useState<CompositionFiche[]>([]);
+
+  useEffect(() => {
+    if (!user?.token || !isProfAllowed(user)) return;
+    let annule = false;
+    fetch("/api/fiches/composition", {
+      headers: { Authorization: `Bearer ${user.token}` },
+    })
+      .then((r) => r.json())
+      .then((d) => {
+        if (!annule && d?.ok) setMesFiches(d.compositions ?? []);
+      })
+      .catch(() => {
+        /* table absente ou hors-ligne : l'encart reste vide */
+      });
+    return () => {
+      annule = true;
+    };
+  }, [user]);
 
   useEffect(() => {
     async function load() {
@@ -412,6 +440,48 @@ export default function DashboardProfClient() {
                   <p className="mt-1 text-xs font-bold text-slate-400">{s.sub}</p>
                 </div>
               ))}
+            </div>
+
+            {/* MES FICHES DE COURS (compositions enregistrées) */}
+            <div className="rounded-[2rem] bg-white p-6 text-slate-950 shadow-xl">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h2 className="text-xl font-black">📚 Mes fiches de cours</h2>
+                <Link
+                  href="/fiches-cours"
+                  className="rounded-2xl bg-sky-100 px-4 py-2 text-sm font-black text-sky-900 ring-1 ring-sky-200 transition hover:brightness-95"
+                >
+                  Toutes les fiches
+                </Link>
+              </div>
+              {mesFiches.length === 0 ? (
+                <p className="mt-3 text-sm font-semibold text-slate-500">
+                  Compose ta première fiche : ouvre une fiche de cours et
+                  clique sur « Composer ma fiche » — tes rubriques, ton ordre,
+                  comme tu fais cours. Elle apparaîtra ici.
+                </p>
+              ) : (
+                <ul className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                  {mesFiches.map((f) => (
+                    <li key={`${f.matiere}/${f.classe}/${f.notion}`}>
+                      <Link
+                        href={hrefFiche(f.matiere, f.classe, f.notion)}
+                        className="block rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-sky-300 hover:bg-sky-50"
+                      >
+                        <p className="font-black capitalize text-slate-900">
+                          {titreFiche(f.matiere, f.classe, f.notion)}
+                        </p>
+                        <p className="mt-1 text-xs font-bold uppercase text-slate-500">
+                          {f.matiere} · {f.classe}
+                        </p>
+                        <p className="mt-2 text-xs font-bold text-slate-400">
+                          Composée le{" "}
+                          {new Date(f.updated_at).toLocaleDateString("fr-FR")}
+                        </p>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
 
             {/* TABLEAU ÉLÈVES */}
