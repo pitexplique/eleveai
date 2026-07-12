@@ -21,11 +21,13 @@ export function deriverCartes(fiche: FicheCoursData): Carte[] {
     verso: fiche.definition.texte,
   });
 
-  cartes.push({
-    categorie: "Formule",
-    recto: `${fiche.formule.contexte} : quelle est la formule à connaître par cœur ?`,
-    verso: `${fiche.formule.expression} — ${fiche.formule.legende}`,
-  });
+  if (fiche.formule) {
+    cartes.push({
+      categorie: "Formule",
+      recto: `${fiche.formule.contexte} : quelle est la formule à connaître par cœur ?`,
+      verso: `${fiche.formule.expression} — ${fiche.formule.legende}`,
+    });
+  }
 
   fiche.proprietes.forEach((p) => {
     cartes.push({

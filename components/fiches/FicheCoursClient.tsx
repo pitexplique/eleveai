@@ -227,6 +227,7 @@ export default function FicheCoursClient({
   function rendreRubrique(id: FicheRubriqueId) {
     switch (id) {
       case "identite":
+        if (!fiche.identite.length) return null;
         return (
           <div className="mt-5 grid gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm sm:grid-cols-3 print:grid-cols-3 print:p-3">
             {fiche.identite.map((item) => (
@@ -288,6 +289,7 @@ export default function FicheCoursClient({
         );
 
       case "proprietes":
+        if (!fiche.proprietes.length) return null;
         return (
           <section className="pt-6 print:pt-4">
             <h2 className="flex items-center gap-2 text-2xl font-black text-slate-900 print:text-xl">
@@ -311,6 +313,7 @@ export default function FicheCoursClient({
         );
 
       case "formule":
+        if (!fiche.formule) return null;
         return (
           <section className="border-t border-slate-200 py-6 print:py-4">
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
@@ -338,6 +341,7 @@ export default function FicheCoursClient({
         );
 
       case "methode":
+        if (!fiche.methode.length) return null;
         return (
           <div className="grid gap-5 py-6 md:grid-cols-3 print:grid-cols-3 print:gap-3 print:py-4">
             {fiche.methode.map((etape, i) => {
@@ -362,6 +366,7 @@ export default function FicheCoursClient({
         );
 
       case "usages":
+        if (!fiche.usages.length) return null;
         return (
           <section className="border-t border-slate-200 py-6 print:py-4">
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
@@ -384,6 +389,7 @@ export default function FicheCoursClient({
         );
 
       case "exemples":
+        if (!fiche.exemples.length) return null;
         return (
           <section className="border-t border-slate-200 py-6 print:py-4">
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
@@ -412,6 +418,7 @@ export default function FicheCoursClient({
         );
 
       case "pieges":
+        if (!fiche.pieges.length) return null;
         return (
           <section className="pt-6 print:pt-4">
             <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
@@ -429,6 +436,7 @@ export default function FicheCoursClient({
         );
 
       case "aRetenir":
+        if (!fiche.aRetenir.length) return null;
         return (
           <section className="pt-4 print:pt-3">
             <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
@@ -446,6 +454,7 @@ export default function FicheCoursClient({
         );
 
       case "entrainement":
+        if (!fiche.entrainement.length) return null;
         return (
           <section className="border-t border-slate-200 pt-6 print:pt-4">
             <h2 className="flex items-center gap-2 text-2xl font-black text-slate-900 print:text-xl">
@@ -541,7 +550,9 @@ export default function FicheCoursClient({
                 Composer ma fiche
               </button>
             )}
-            <ModeClasse sousTitre={`${fiche.titre} - ${fiche.classe}`} slides={slides} />
+            {slides.length > 0 && (
+              <ModeClasse sousTitre={`${fiche.titre} - ${fiche.classe}`} slides={slides} />
+            )}
             <button
               type="button"
               onClick={() => window.print()}

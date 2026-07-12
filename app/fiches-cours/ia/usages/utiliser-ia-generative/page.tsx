@@ -1,13 +1,24 @@
+// Fiche « en blocs » : la donnée vit dans lib/fiches, cette page
+// n'est qu'un point d'entrée (métadonnées SEO + rendu unifié).
+
 import type { Metadata } from "next";
-import FicheCoursIa from "@/components/fiches/FicheCoursIa";
-import { ficheGenerative } from "@/lib/fiches-ia";
+import FicheCoursClient from "@/components/fiches/FicheCoursClient";
+import {
+  ficheUtiliserIaGenerative,
+  slidesUtiliserIaGenerative,
+} from "@/lib/fiches/ia-usages-utiliser-ia-generative";
 
 export const metadata: Metadata = {
-  title: "Fiche IA — Utiliser une IA générative",
+  title: "Utiliser l'IA générative — fiche de cours | EleveAI",
   description:
-    "Écrire un bon prompt, itérer, vérifier les réponses et rester responsable. Fiche de cours IA (référentiel Pix, domaine Usages).",
+    "Écrire un bon prompt (contexte, tâche, contraintes, format), itérer, vérifier les réponses et rester responsable : la fiche de cours complète pour utiliser une IA générative, avec exemples corrigés et exercices (référentiel Pix, domaine Usages).",
 };
 
-export default function Page() {
-  return <FicheCoursIa fiche={ficheGenerative} />;
+export default function UtiliserIaGenerativePage() {
+  return (
+    <FicheCoursClient
+      fiche={ficheUtiliserIaGenerative}
+      slides={slidesUtiliserIaGenerative}
+    />
+  );
 }

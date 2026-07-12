@@ -1,13 +1,24 @@
+// Fiche « en blocs » : la donnée vit dans lib/fiches, cette page
+// n'est qu'un point d'entrée (métadonnées SEO + rendu unifié).
+
 import type { Metadata } from "next";
-import FicheCoursIa from "@/components/fiches/FicheCoursIa";
-import { ficheFamilles } from "@/lib/fiches-ia";
+import FicheCoursClient from "@/components/fiches/FicheCoursClient";
+import {
+  ficheFamillesDeTaches,
+  slidesFamillesDeTaches,
+} from "@/lib/fiches/ia-usages-familles-de-taches";
 
 export const metadata: Metadata = {
-  title: "Fiche IA — Ce que l'IA sait faire",
+  title: "Les familles de tâches de l'IA — fiche de cours | EleveAI",
   description:
-    "Reconnaissance, prédiction, recommandation, génération : les familles de tâches de l'IA. Fiche de cours IA (référentiel Pix, Usages).",
+    "Reconnaissance, prédiction, recommandation, génération : ce que l'IA sait faire, avec exemples corrigés, pièges à éviter et exercices. Fiche de cours IA (référentiel Pix, Usages).",
 };
 
-export default function Page() {
-  return <FicheCoursIa fiche={ficheFamilles} />;
+export default function FamillesDeTachesPage() {
+  return (
+    <FicheCoursClient
+      fiche={ficheFamillesDeTaches}
+      slides={slidesFamillesDeTaches}
+    />
+  );
 }

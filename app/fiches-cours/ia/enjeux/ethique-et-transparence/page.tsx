@@ -1,13 +1,24 @@
+// Fiche « en blocs » : la donnée vit dans lib/fiches, cette page
+// n'est qu'un point d'entrée (métadonnées SEO + rendu unifié).
+
 import type { Metadata } from "next";
-import FicheCoursIa from "@/components/fiches/FicheCoursIa";
-import { ficheEthique } from "@/lib/fiches-ia";
+import FicheCoursClient from "@/components/fiches/FicheCoursClient";
+import {
+  ficheEthiqueEtTransparence,
+  slidesEthiqueEtTransparence,
+} from "@/lib/fiches/ia-enjeux-ethique-et-transparence";
 
 export const metadata: Metadata = {
-  title: "Fiche IA — Éthique et transparence de l'IA",
+  title: "Éthique et transparence de l'IA — fiche de cours | EleveAI",
   description:
-    "Transparence, non-discrimination, responsabilité, RGPD et IA Act. Fiche de cours IA (référentiel Pix, Enjeux).",
+    "Transparence, explicabilité, non-discrimination, responsabilité, RGPD et IA Act : la fiche de cours complète sur l'éthique de l'IA, avec exemples corrigés et exercices (référentiel Pix, domaine Enjeux).",
 };
 
-export default function Page() {
-  return <FicheCoursIa fiche={ficheEthique} />;
+export default function EthiqueEtTransparencePage() {
+  return (
+    <FicheCoursClient
+      fiche={ficheEthiqueEtTransparence}
+      slides={slidesEthiqueEtTransparence}
+    />
+  );
 }

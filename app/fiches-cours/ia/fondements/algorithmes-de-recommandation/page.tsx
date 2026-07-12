@@ -1,13 +1,24 @@
+// Fiche « en blocs » : la donnée vit dans lib/fiches, cette page
+// n'est qu'un point d'entrée (métadonnées SEO + rendu unifié).
+
 import type { Metadata } from "next";
-import FicheCoursIa from "@/components/fiches/FicheCoursIa";
-import { ficheReco } from "@/lib/fiches-ia";
+import FicheCoursClient from "@/components/fiches/FicheCoursClient";
+import {
+  ficheAlgorithmesDeRecommandation,
+  slidesAlgorithmesDeRecommandation,
+} from "@/lib/fiches/ia-fondements-algorithmes-de-recommandation";
 
 export const metadata: Metadata = {
-  title: "Fiche IA — Les algorithmes de recommandation",
+  title: "Les algorithmes de recommandation — fiche de cours | EleveAI",
   description:
-    "Comment YouTube, TikTok ou Netflix te recommandent des contenus, et la bulle de filtre. Fiche de cours IA (référentiel Pix, Fondements).",
+    "Comment YouTube, TikTok ou Netflix te recommandent des contenus, la bulle de filtre et comment reprendre la main : fiche de cours IA (référentiel Pix, Fondements) avec exemples et exercices.",
 };
 
-export default function Page() {
-  return <FicheCoursIa fiche={ficheReco} />;
+export default function AlgorithmesDeRecommandationPage() {
+  return (
+    <FicheCoursClient
+      fiche={ficheAlgorithmesDeRecommandation}
+      slides={slidesAlgorithmesDeRecommandation}
+    />
+  );
 }

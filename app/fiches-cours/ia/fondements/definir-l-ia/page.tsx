@@ -1,13 +1,19 @@
+// Fiche « en blocs » : la donnée vit dans lib/fiches, cette page
+// n'est qu'un point d'entrée (métadonnées SEO + rendu unifié).
+
 import type { Metadata } from "next";
-import FicheCoursIa from "@/components/fiches/FicheCoursIa";
-import { ficheDefinirIa } from "@/lib/fiches-ia";
+import FicheCoursClient from "@/components/fiches/FicheCoursClient";
+import {
+  ficheDefinirLIa,
+  slidesDefinirLIa,
+} from "@/lib/fiches/ia-fondements-definir-l-ia";
 
 export const metadata: Metadata = {
-  title: "Fiche IA — Qu'est-ce que l'intelligence artificielle ?",
+  title: "Définir l'IA — fiche de cours | EleveAI",
   description:
-    "Définir l'IA, son histoire et ses approches. Fiche de cours IA (référentiel Pix, domaine Fondements).",
+    "Définition, deux grandes approches, exemples corrigés et exercices : la fiche de cours complète pour comprendre ce qu'est l'intelligence artificielle (référentiel Pix, domaine Fondements).",
 };
 
-export default function Page() {
-  return <FicheCoursIa fiche={ficheDefinirIa} />;
+export default function DefinirLIaPage() {
+  return <FicheCoursClient fiche={ficheDefinirLIa} slides={slidesDefinirLIa} />;
 }

@@ -1,13 +1,24 @@
+// Fiche IA « en blocs » : la donnée vit dans lib/fiches, cette page
+// n'est qu'un point d'entrée (métadonnées SEO + rendu unifié).
+
 import type { Metadata } from "next";
-import FicheCoursIa from "@/components/fiches/FicheCoursIa";
-import { ficheModeles } from "@/lib/fiches-ia";
+import FicheCoursClient from "@/components/fiches/FicheCoursClient";
+import {
+  ficheModelesApprentissage,
+  slidesModelesApprentissage,
+} from "@/lib/fiches/ia-fondements-modeles-apprentissage";
 
 export const metadata: Metadata = {
-  title: "Fiche IA — Les modèles d'apprentissage",
+  title: "Les modèles d'apprentissage — fiche de cours | EleveAI",
   description:
-    "Arbre de décision, régression, réseau de neurones : les familles de modèles d'IA. Fiche de cours IA (référentiel Pix, Fondements).",
+    "Arbre de décision, régression, réseau de neurones : les familles de modèles d'IA, leurs forces, leurs limites et l'explicabilité. Fiche de cours IA (référentiel Pix, Fondements) avec exemples et exercices corrigés.",
 };
 
-export default function Page() {
-  return <FicheCoursIa fiche={ficheModeles} />;
+export default function ModelesApprentissagePage() {
+  return (
+    <FicheCoursClient
+      fiche={ficheModelesApprentissage}
+      slides={slidesModelesApprentissage}
+    />
+  );
 }

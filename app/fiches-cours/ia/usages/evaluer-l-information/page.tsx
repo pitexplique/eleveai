@@ -1,13 +1,24 @@
+// Fiche « en blocs » : la donnée vit dans lib/fiches, cette page
+// n'est qu'un point d'entrée (métadonnées SEO + rendu unifié).
+
 import type { Metadata } from "next";
-import FicheCoursIa from "@/components/fiches/FicheCoursIa";
-import { ficheEvaluer } from "@/lib/fiches-ia";
+import FicheCoursClient from "@/components/fiches/FicheCoursClient";
+import {
+  ficheEvaluerLInformation,
+  slidesEvaluerLInformation,
+} from "@/lib/fiches/ia-usages-evaluer-l-information";
 
 export const metadata: Metadata = {
-  title: "Fiche IA — Évaluer l'information à l'ère de l'IA",
+  title: "Évaluer l'information à l'ère de l'IA — fiche de cours | EleveAI",
   description:
-    "Hypertrucages, bots, vérification des sources. Fiche de cours IA (référentiel Pix, Usages).",
+    "Hypertrucages (deepfakes), bots, vérification des sources : la fiche de cours complète pour apprendre à évaluer l'information à l'ère de l'IA, avec réflexes, exemples corrigés et exercices (référentiel Pix, domaine Usages).",
 };
 
-export default function Page() {
-  return <FicheCoursIa fiche={ficheEvaluer} />;
+export default function EvaluerLInformationPage() {
+  return (
+    <FicheCoursClient
+      fiche={ficheEvaluerLInformation}
+      slides={slidesEvaluerLInformation}
+    />
+  );
 }

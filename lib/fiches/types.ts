@@ -77,7 +77,8 @@ export type FicheCoursData = {
   proprietes: FichePropriete[];
   reel: { texte: string };
   historique: { texte: string };
-  formule: {
+  /** Optionnelle : toutes les notions n'ont pas de formule (fiches IA). */
+  formule?: {
     contexte: string;
     expression: string;
     legende: string;

@@ -1,13 +1,24 @@
+// Fiche « en blocs » : la donnée vit dans lib/fiches, cette page
+// n'est qu'un point d'entrée (métadonnées SEO + rendu unifié).
+
 import type { Metadata } from "next";
-import FicheCoursIa from "@/components/fiches/FicheCoursIa";
-import { ficheOrga } from "@/lib/fiches-ia";
+import FicheCoursClient from "@/components/fiches/FicheCoursClient";
+import {
+  ficheIaDansUneOrganisation,
+  slidesIaDansUneOrganisation,
+} from "@/lib/fiches/ia-usages-ia-dans-une-organisation";
 
 export const metadata: Metadata = {
-  title: "Fiche IA — Utiliser l'IA dans une organisation",
+  title: "L'IA dans une organisation — fiche de cours | EleveAI",
   description:
-    "Identifier le besoin, choisir l'outil, protéger les données, charte d'usage et RAG. Fiche de cours IA (référentiel Pix, Usages).",
+    "Identifier le besoin, choisir l'outil, protéger les données, charte d'usage et RAG : la fiche de cours complète pour utiliser l'IA dans une organisation (référentiel Pix, domaine Usages).",
 };
 
-export default function Page() {
-  return <FicheCoursIa fiche={ficheOrga} />;
+export default function IaDansUneOrganisationPage() {
+  return (
+    <FicheCoursClient
+      fiche={ficheIaDansUneOrganisation}
+      slides={slidesIaDansUneOrganisation}
+    />
+  );
 }

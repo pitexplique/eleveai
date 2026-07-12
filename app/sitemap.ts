@@ -16,6 +16,8 @@ const LASTMOD_DICTEE  = new Date("2026-07-01");
 const LASTMOD_974     = new Date("2026-07-02");
 const LASTMOD_JEUX    = new Date("2026-07-05");
 const LASTMOD_FICHES  = new Date("2026-07-11");
+// 12/07 : les 16 fiches IA refaites « en blocs » (fiche + flashcards + composeur)
+const LASTMOD_FICHES_IA = new Date("2026-07-12");
 const LASTMOD_AUDIENCES = new Date("2026-07-05");
 const LASTMOD_LEGAL   = new Date("2026-02-18");
 
@@ -77,24 +79,24 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/maths/4e/statistiques",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/4e/probabilites",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/3e/thales",              priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/ia",   priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/ia",   priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
   { path: "/fiches-cours/ia/livre", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/fondements/definir-l-ia", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/fondements/apprentissage-automatique", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/fondements/modeles-apprentissage", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/fondements/grands-modeles-de-langage", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/fondements/algorithmes-de-recommandation", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/fondements/ia-incarnee-robotique", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/usages/familles-de-taches", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/usages/utiliser-ia-generative", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/usages/evaluer-l-information", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/usages/services-de-recommandation", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/usages/ia-dans-une-organisation", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/enjeux/empreinte-environnementale", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/enjeux/gouvernance", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/enjeux/ethique-et-transparence", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/enjeux/emploi-et-formation", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/enjeux/enjeux-culturels-societaux", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/fiches-cours/ia/fondements/definir-l-ia", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/ia/fondements/apprentissage-automatique", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/ia/fondements/modeles-apprentissage", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/ia/fondements/grands-modeles-de-langage", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/ia/fondements/algorithmes-de-recommandation", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/ia/fondements/ia-incarnee-robotique", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/ia/usages/familles-de-taches", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/ia/usages/utiliser-ia-generative", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/ia/usages/evaluer-l-information", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/ia/usages/services-de-recommandation", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/ia/usages/ia-dans-une-organisation", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/ia/enjeux/empreinte-environnementale", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/ia/enjeux/gouvernance", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/ia/enjeux/ethique-et-transparence", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/ia/enjeux/emploi-et-formation", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/ia/enjeux/enjeux-culturels-societaux", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
 
   { path: "/dictee-du-jour",  priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_DICTEE },
   { path: "/calcul-rapide",   priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
