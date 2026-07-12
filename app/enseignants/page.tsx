@@ -82,6 +82,45 @@ export default function EnseignantsPage() {
           </div>
         </section>
 
+        {/* ── NOUVEAU : LE COMPOSEUR DE FICHES (différenciateur n°1) ── */}
+        <section className="overflow-hidden rounded-3xl border border-amber-200 bg-white/90 p-6 shadow-lg sm:p-8">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-black uppercase tracking-wide text-amber-800 ring-1 ring-amber-200">
+              🆕 Nouveau
+            </span>
+            <h2 className="text-xl font-black sm:text-2xl">
+              Composez vos fiches de cours — vos rubriques, votre ordre
+            </h2>
+          </div>
+          <p className="mt-3 max-w-3xl text-sm font-semibold leading-relaxed text-slate-600 sm:text-base">
+            Chaque fiche est en blocs : Définition, Propriétés, « À quoi ça
+            sert dans le réel », un peu d&apos;histoire, exemples corrigés,
+            pièges, entraînement. Vous cochez, vous ordonnez — comme vous
+            faites cours. Votre composition s&apos;applique au mode classe et à
+            l&apos;impression PDF, elle est enregistrée et vous la retrouvez
+            dans votre tableau de bord. Vos élèves, eux, révisent la même
+            fiche en flashcards.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Link
+              href="/fiches-cours/maths"
+              className="rounded-2xl bg-amber-500 px-6 py-3 text-sm font-black text-white shadow-md transition hover:bg-amber-400"
+            >
+              🎛️ Composer ma première fiche
+            </Link>
+            <Link
+              href="/fiches-cours/maths/4e/pythagore"
+              className="rounded-2xl bg-white px-6 py-3 text-sm font-black text-slate-800 ring-1 ring-slate-200 transition hover:bg-slate-50"
+            >
+              Voir l&apos;exemple : Pythagore 4e
+            </Link>
+          </div>
+          <p className="mt-4 text-xs font-bold text-slate-500">
+            8 fiches de maths disponibles (6e → 3e) — les autres matières
+            arrivent. Bientôt : partager votre fiche à vos classes.
+          </p>
+        </section>
+
         {/* ── CE QUE VOUS POUVEZ FAIRE ── */}
         <section>
           <h2 className="text-center text-2xl font-black sm:text-3xl">

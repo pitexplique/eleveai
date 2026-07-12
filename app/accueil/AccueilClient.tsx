@@ -12,6 +12,7 @@ import FloatingCoach from "@/components/FloatingCoach";
 import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
 import RecoDuJourAccueil from "@/components/accueil/RecoDuJourAccueil";
 import EncartCallEnDirect from "@/components/accueil/EncartCallEnDirect";
+import EncartFichesComposees from "@/components/accueil/EncartFichesComposees";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
@@ -605,6 +606,10 @@ export default function AccueilPage({
           il y a un call par public). Lit lib/calls.ts ; ne rend rien si aucun
           call actif à venir. */}
       <EncartCallEnDirect />
+
+      {/* ── FICHES À COMPOSER — le composeur mis en avant pour les deux
+          bâtisseurs (élève + prof), sans détrôner le coach (héros validé). */}
+      <EncartFichesComposees />
 
       {/* ── MOT DE M. LACOSTE — collé au call : le MOMENT HUMAIN (photo + lettre repliée) ── */}
       <section className="px-4 pt-10 sm:px-6 lg:px-8">
