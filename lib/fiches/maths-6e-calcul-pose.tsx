@@ -29,7 +29,7 @@ export const ficheCalculPose6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "calcul-pose",
+  notion: "entier-calcul-pose",
   titre: "Le calcul posé",
   accroche:
     "Poser un calcul, c'est l'écrire en colonnes pour ne rien oublier. Addition, soustraction, multiplication, division : avec un bon alignement et les retenues, on calcule de grands nombres sans calculatrice.",

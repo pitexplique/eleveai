@@ -34,7 +34,7 @@ export const ficheEntiers6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "entiers",
+  notion: "entier-nombre",
   titre: "Les nombres entiers",
   accroche:
     "Les nombres entiers servent à compter et à ranger : des élèves, des points, des visiteurs. En 6e, on apprend à bien les lire, les écrire, les comparer, les décomposer et les encadrer.",

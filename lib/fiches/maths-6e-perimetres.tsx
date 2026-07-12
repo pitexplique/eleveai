@@ -65,7 +65,7 @@ export const fichePerimetres6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "perimetres",
+  notion: "aire-perimetre",
   titre: "Les périmètres",
   accroche:
     "Le périmètre d'une figure, c'est la longueur de son tour. On en a besoin dès qu'on veut entourer quelque chose : un jardin, un cadre, un terrain. En 6e, on apprend à le calculer pour le carré, le rectangle et n'importe quelle figure.",

@@ -75,7 +75,7 @@ export const fichePourcentages6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "pourcentages",
+  notion: "pourcentage-nombre",
   titre: "Les pourcentages",
   accroche:
     "Le symbole % veut dire « sur 100 ». Dire 25 %, c'est dire 25 sur 100. En 6e, on découvre ce que ça signifie, comment l'écrire en fraction et en décimal, et comment calculer des pourcentages simples.",

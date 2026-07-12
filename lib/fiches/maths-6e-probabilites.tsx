@@ -37,7 +37,7 @@ export const ficheProbabilites6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "probabilites",
+  notion: "proba-experience",
   titre: "Premiers pas en probabilités",
   accroche:
     "Lancer un dé, tirer une bille, jouer à pile ou face : on ne sait pas à l'avance ce qui va sortir, c'est le hasard. En 6e, on apprend à en parler avec les bons mots (possible, certain, impossible), à repérer les résultats possibles et à dire quel événement a le plus de chances.",

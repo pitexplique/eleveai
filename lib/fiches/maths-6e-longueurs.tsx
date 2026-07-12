@@ -60,7 +60,7 @@ export const ficheLongueurs6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "longueurs",
+  notion: "aire-longueur",
   titre: "Les longueurs",
   accroche:
     "Une longueur mesure la taille d'un objet ou une distance. En 6e, on apprend à choisir la bonne unité, à convertir d'une unité à l'autre et à comparer des longueurs.",

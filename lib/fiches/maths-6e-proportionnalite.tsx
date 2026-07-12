@@ -23,7 +23,7 @@ export const ficheProportionnalite6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "proportionnalite",
+  notion: "prop-proportionnalite",
   titre: "La proportionnalité",
   accroche:
     "Une situation est proportionnelle quand on passe d'une grandeur à l'autre en multipliant toujours par le même nombre.",

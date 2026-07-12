@@ -38,7 +38,7 @@ export const ficheDecimaux6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "decimaux",
+  notion: "decimal-nombre",
   titre: "Les nombres décimaux",
   accroche:
     "Un nombre décimal, c'est un nombre avec une virgule, comme 2,5 ou 0,75. On s'en sert tous les jours pour les prix, les tailles et toutes les mesures précises.",

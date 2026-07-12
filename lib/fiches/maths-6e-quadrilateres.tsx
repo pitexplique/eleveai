@@ -66,7 +66,7 @@ export const ficheQuadrilateres6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "quadrilateres",
+  notion: "quadrilatere-figure",
   titre: "Les quadrilatères",
   accroche:
     "Un quadrilatère, c'est une figure à 4 côtés. En 6e, on apprend à le nommer, à lire ses propriétés (angles droits, côtés égaux) et à reconnaître sa nature : rectangle, losange ou carré.",

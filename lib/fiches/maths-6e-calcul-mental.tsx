@@ -30,7 +30,7 @@ export const ficheCalculMental6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "calcul-mental",
+  notion: "entier-calcul-mental",
   titre: "Le calcul mental",
   accroche:
     "Le calcul mental, c'est trouver un résultat de tête, sans poser l'opération ni sortir la calculatrice. Le secret n'est pas d'avoir une mémoire d'éléphant : c'est de connaître quelques astuces pour rendre les calculs plus simples.",

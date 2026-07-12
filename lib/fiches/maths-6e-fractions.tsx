@@ -63,7 +63,7 @@ export const ficheFractions6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "fractions",
+  notion: "fraction-nombre",
   titre: "Les fractions",
   accroche:
     "Une fraction sert à dire « une partie d'un tout » : 3/4 d'une pizza, la moitié d'un gâteau. En 6e, on apprend à lire une fraction, à la représenter par un dessin, à la comparer et à calculer la fraction d'une quantité.",

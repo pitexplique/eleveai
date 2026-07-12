@@ -37,7 +37,7 @@ export const ficheAlgorithmique6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "algorithmique",
+  notion: "algo-programmation",
   titre: "Algorithmique et programmation",
   accroche:
     "Programmer, c'est donner à une machine une suite d'ordres clairs qu'elle exécute sans deviner. En 6e, on apprend à lire un programme, à faire déplacer un personnage, à utiliser une répétition et à prévoir ce qui va se passer.",

@@ -56,7 +56,7 @@ export const ficheTriangles6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "triangles",
+  notion: "triangle-figure",
   titre: "Les triangles",
   accroche:
     "Le triangle est la figure la plus simple : trois points, trois côtés, trois angles. En 6e, on apprend à le nommer, à reconnaître sa nature selon ses côtés et selon ses angles, et à retrouver un angle manquant grâce à une règle qui ne change jamais : la somme des angles vaut 180°.",

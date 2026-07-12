@@ -80,7 +80,7 @@ export const ficheAngles6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "angles",
+  notion: "angle-mesure",
   titre: "Les angles",
   accroche:
     "Un angle, c'est une ouverture entre deux demi-droites qui partent du même point. En 6e, on apprend à reconnaître un angle, à le comparer, à le mesurer au rapporteur et à le tracer.",

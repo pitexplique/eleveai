@@ -6,75 +6,75 @@
 type FicheEntry = { titre: string; resume?: string };
 
 export const FICHES_REGISTRE: Record<string, FicheEntry> = {
-  "maths/6e/entiers": {
+  "maths/6e/entier-nombre": {
     titre: "Les nombres entiers",
     resume: "Lire, écrire, comparer, décomposer et encadrer les nombres entiers.",
   },
-  "maths/6e/decimaux": {
+  "maths/6e/decimal-nombre": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer et calculer avec les nombres à virgule.",
   },
-  "maths/6e/fractions": {
+  "maths/6e/fraction-nombre": {
     titre: "Les fractions",
     resume: "Lire, écrire et représenter une fraction comme un partage.",
   },
-  "maths/6e/pourcentages": {
+  "maths/6e/pourcentage-nombre": {
     titre: "Les pourcentages",
     resume: "Comprendre un pourcentage et le relier à une fraction et un décimal.",
   },
-  "maths/6e/proportionnalite": {
+  "maths/6e/prop-proportionnalite": {
     titre: "La proportionnalité",
     resume: "Reconnaître une situation proportionnelle, compléter un tableau, revenir à l'unité.",
   },
-  "maths/6e/calcul-mental": {
+  "maths/6e/entier-calcul-mental": {
     titre: "Le calcul mental",
     resume: "Des stratégies pour calculer de tête, vite et juste.",
   },
-  "maths/6e/calcul-pose": {
+  "maths/6e/entier-calcul-pose": {
     titre: "Le calcul posé",
     resume: "Poser une addition, une soustraction, une multiplication et une division.",
   },
-  "maths/6e/longueurs": {
+  "maths/6e/aire-longueur": {
     titre: "Les longueurs",
     resume: "Mesurer, convertir et comparer des longueurs du mm au km.",
   },
-  "maths/6e/perimetres": {
+  "maths/6e/aire-perimetre": {
     titre: "Les périmètres",
     resume: "Calculer le tour d'un carré, d'un rectangle et d'une figure.",
   },
-  "maths/6e/aires": {
+  "maths/6e/aire-surface": {
     titre: "Les aires",
     resume: "Mesurer une surface : comptage, rectangle et carré.",
   },
-  "maths/6e/volumes": {
+  "maths/6e/volume-solide": {
     titre: "Les volumes",
     resume: "Compter, comparer et assembler des volumes en unités cubes.",
   },
-  "maths/6e/angles": {
+  "maths/6e/angle-mesure": {
     titre: "Les angles",
     resume: "Reconnaître, comparer, mesurer au rapporteur et tracer un angle.",
   },
-  "maths/6e/triangles": {
+  "maths/6e/triangle-figure": {
     titre: "Les triangles",
     resume: "Nommer, reconnaître la nature et calculer un angle (somme = 180°).",
   },
-  "maths/6e/quadrilateres": {
+  "maths/6e/quadrilatere-figure": {
     titre: "Les quadrilatères",
     resume: "Reconnaître carré, rectangle et losange par leurs propriétés.",
   },
-  "maths/6e/symetrie": {
+  "maths/6e/sym-axiale": {
     titre: "La symétrie axiale",
     resume: "Reconnaître, construire l'image et trouver les axes de symétrie.",
   },
-  "maths/6e/donnees": {
+  "maths/6e/stat-donnee": {
     titre: "Lire et interpréter des données",
     resume: "Lire un tableau, un graphique et un diagramme circulaire.",
   },
-  "maths/6e/probabilites": {
+  "maths/6e/proba-experience": {
     titre: "Premiers pas en probabilités",
     resume: "Le vocabulaire du hasard : certain, possible, impossible, plus ou moins probable.",
   },
-  "maths/6e/algorithmique": {
+  "maths/6e/algo-programmation": {
     titre: "Algorithmique et programmation",
     resume: "Lire et écrire une suite d'instructions, utiliser une répétition.",
   },
@@ -184,42 +184,14 @@ export function ficheHrefSiExiste(
   return FICHES_REGISTRE[cle] ? `/fiches-cours/${cle}` : null;
 }
 
-// ─── Pont coach → fiche ────────────────────────────────────────────────────────
-// Le coach identifie une notion par un `notionId` (ex. "aire_surface") qui
-// DIFFÈRE du slug de la fiche (ex. "aires"). Cette table fait le lien pour
-// afficher « fiche dispo » sur la bonne notion du coach. Clé : "classe/notionId".
-// À compléter au fur et à mesure des vagues (ici : 6e maths).
-const COACH_NOTION_VERS_FICHE: Record<string, string> = {
-  "6e/aire_surface": "maths/6e/aires",
-  "6e/algo_programmation": "maths/6e/algorithmique",
-  "6e/angle_mesure": "maths/6e/angles",
-  "6e/entier_calcul_mental": "maths/6e/calcul-mental",
-  "6e/entier_calcul_pose": "maths/6e/calcul-pose",
-  "6e/decimal_nombre": "maths/6e/decimaux",
-  "6e/stat_donnee": "maths/6e/donnees",
-  "6e/entier_nombre": "maths/6e/entiers",
-  "6e/fraction_nombre": "maths/6e/fractions",
-  "6e/aire_longueur": "maths/6e/longueurs",
-  "6e/aire_perimetre": "maths/6e/perimetres",
-  "6e/pourcentage_nombre": "maths/6e/pourcentages",
-  "6e/proba_experience": "maths/6e/probabilites",
-  "6e/prop_proportionnalite": "maths/6e/proportionnalite",
-  "6e/quadrilatere_figure": "maths/6e/quadrilateres",
-  "6e/sym_axiale": "maths/6e/symetrie",
-  "6e/triangle_figure": "maths/6e/triangles",
-  "6e/volume_solide": "maths/6e/volumes",
-};
-
 /** Le lien de la fiche correspondant à une notion DU COACH, ou null.
- *  1) essaie le pont coach→fiche, 2) tente une correspondance directe du slug. */
+ *  PLUS DE TABLE DE CORRESPONDANCE : le slug de la fiche EST le `notionId` du
+ *  coach (ex. notionId "aire_surface" → fiche /maths/6e/aire-surface). Le coach
+ *  est la source de vérité ; on se contente de normaliser les underscores. */
 export function ficheHrefPourCoach(
   matiere: string,
   classe: string,
   coachNotionId: string
 ): string | null {
-  if (matiere !== "maths") return null; // pour l'instant, seules les maths ont des fiches par notion
-  const cle = `${classe.toLowerCase()}/${coachNotionId}`;
-  const mappee = COACH_NOTION_VERS_FICHE[cle];
-  if (mappee) return `/fiches-cours/${mappee}`;
   return ficheHrefSiExiste(matiere, classe, coachNotionId);
 }

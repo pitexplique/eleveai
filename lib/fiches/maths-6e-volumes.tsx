@@ -75,7 +75,7 @@ export const ficheVolumes6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "volumes",
+  notion: "volume-solide",
   titre: "Les volumes",
   accroche:
     "Le volume, c'est la place qu'un objet occupe dans l'espace. En 6e, on le mesure en comptant des petits cubes : compter, comparer, assembler, tout part de là.",

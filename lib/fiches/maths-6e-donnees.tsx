@@ -39,7 +39,7 @@ export const ficheDonnees6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "donnees",
+  notion: "stat-donnee",
   titre: "Lire et interpréter des données",
   accroche:
     "Un sondage, un score de match, la météo de la semaine : les données sont partout. En 6e, on apprend à les lire dans un tableau, un graphique ou un diagramme circulaire, puis à les comparer pour en tirer une vraie conclusion.",

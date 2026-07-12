@@ -64,7 +64,7 @@ export const ficheAires6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "aires",
+  notion: "aire-surface",
   titre: "Les aires",
   accroche:
     "L'aire, c'est la place qu'une figure occupe à l'intérieur de son contour. On la mesure en unités carrées : compter des carreaux, multiplier pour un rectangle ou un carré, découper les figures compliquées.",

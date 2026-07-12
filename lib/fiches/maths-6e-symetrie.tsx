@@ -61,7 +61,7 @@ export const ficheSymetrie6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "6e",
-  notion: "symetrie",
+  notion: "sym-axiale",
   titre: "La symétrie axiale",
   accroche:
     "La symétrie axiale, c'est le miroir des mathématiques : une droite, l'axe, sépare une figure de son reflet. En 6e, on apprend à la reconnaître, à construire l'image d'un point ou d'une figure, à utiliser ses propriétés et à trouver les axes des figures usuelles.",
