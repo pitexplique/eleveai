@@ -1,33 +1,111 @@
-// Registre des fiches « en blocs » : sert au dashboard-prof pour afficher un
-// vrai titre à côté d'une composition enregistrée. Chaque fiche migrée vers le
-// schéma s'ajoute ici (une ligne).
+// Registre des fiches « en blocs » : LA source de vérité de la liste des
+// fiches. Sert au dashboard-prof (titre d'une composition), au hub
+// /fiches-cours/maths (liste générée d'ici) et au coach (icône « fiche
+// dispo »). Chaque fiche s'ajoute ici, une ligne — rien d'autre à maintenir.
 
-export const FICHES_REGISTRE: Record<string, { titre: string }> = {
-  "maths/6e/entiers": { titre: "Les nombres entiers" },
-  "maths/6e/decimaux": { titre: "Les nombres décimaux" },
-  "maths/6e/fractions": { titre: "Les fractions" },
-  "maths/6e/pourcentages": { titre: "Les pourcentages" },
-  "maths/6e/proportionnalite": { titre: "La proportionnalité" },
-  "maths/6e/calcul-mental": { titre: "Le calcul mental" },
-  "maths/6e/calcul-pose": { titre: "Le calcul posé" },
-  "maths/6e/longueurs": { titre: "Les longueurs" },
-  "maths/6e/perimetres": { titre: "Les périmètres" },
-  "maths/6e/aires": { titre: "Les aires" },
-  "maths/6e/volumes": { titre: "Les volumes" },
-  "maths/6e/angles": { titre: "Les angles" },
-  "maths/6e/triangles": { titre: "Les triangles" },
-  "maths/6e/quadrilateres": { titre: "Les quadrilatères" },
-  "maths/6e/symetrie": { titre: "La symétrie axiale" },
-  "maths/6e/donnees": { titre: "Lire et interpréter des données" },
-  "maths/6e/probabilites": { titre: "Premiers pas en probabilités" },
-  "maths/6e/algorithmique": { titre: "Algorithmique et programmation" },
-  "maths/5e/pourcentages": { titre: "Les pourcentages" },
-  "maths/5e/fractions-addition": { titre: "Additionner des fractions" },
-  "maths/4e/pythagore": { titre: "Le théorème de Pythagore" },
-  "maths/4e/cosinus": { titre: "Le cosinus" },
-  "maths/4e/statistiques": { titre: "Les statistiques" },
-  "maths/4e/probabilites": { titre: "Les probabilités" },
-  "maths/3e/thales": { titre: "Le théorème de Thalès" },
+type FicheEntry = { titre: string; resume?: string };
+
+export const FICHES_REGISTRE: Record<string, FicheEntry> = {
+  "maths/6e/entiers": {
+    titre: "Les nombres entiers",
+    resume: "Lire, écrire, comparer, décomposer et encadrer les nombres entiers.",
+  },
+  "maths/6e/decimaux": {
+    titre: "Les nombres décimaux",
+    resume: "Lire, comparer et calculer avec les nombres à virgule.",
+  },
+  "maths/6e/fractions": {
+    titre: "Les fractions",
+    resume: "Lire, écrire et représenter une fraction comme un partage.",
+  },
+  "maths/6e/pourcentages": {
+    titre: "Les pourcentages",
+    resume: "Comprendre un pourcentage et le relier à une fraction et un décimal.",
+  },
+  "maths/6e/proportionnalite": {
+    titre: "La proportionnalité",
+    resume: "Reconnaître une situation proportionnelle, compléter un tableau, revenir à l'unité.",
+  },
+  "maths/6e/calcul-mental": {
+    titre: "Le calcul mental",
+    resume: "Des stratégies pour calculer de tête, vite et juste.",
+  },
+  "maths/6e/calcul-pose": {
+    titre: "Le calcul posé",
+    resume: "Poser une addition, une soustraction, une multiplication et une division.",
+  },
+  "maths/6e/longueurs": {
+    titre: "Les longueurs",
+    resume: "Mesurer, convertir et comparer des longueurs du mm au km.",
+  },
+  "maths/6e/perimetres": {
+    titre: "Les périmètres",
+    resume: "Calculer le tour d'un carré, d'un rectangle et d'une figure.",
+  },
+  "maths/6e/aires": {
+    titre: "Les aires",
+    resume: "Mesurer une surface : comptage, rectangle et carré.",
+  },
+  "maths/6e/volumes": {
+    titre: "Les volumes",
+    resume: "Compter, comparer et assembler des volumes en unités cubes.",
+  },
+  "maths/6e/angles": {
+    titre: "Les angles",
+    resume: "Reconnaître, comparer, mesurer au rapporteur et tracer un angle.",
+  },
+  "maths/6e/triangles": {
+    titre: "Les triangles",
+    resume: "Nommer, reconnaître la nature et calculer un angle (somme = 180°).",
+  },
+  "maths/6e/quadrilateres": {
+    titre: "Les quadrilatères",
+    resume: "Reconnaître carré, rectangle et losange par leurs propriétés.",
+  },
+  "maths/6e/symetrie": {
+    titre: "La symétrie axiale",
+    resume: "Reconnaître, construire l'image et trouver les axes de symétrie.",
+  },
+  "maths/6e/donnees": {
+    titre: "Lire et interpréter des données",
+    resume: "Lire un tableau, un graphique et un diagramme circulaire.",
+  },
+  "maths/6e/probabilites": {
+    titre: "Premiers pas en probabilités",
+    resume: "Le vocabulaire du hasard : certain, possible, impossible, plus ou moins probable.",
+  },
+  "maths/6e/algorithmique": {
+    titre: "Algorithmique et programmation",
+    resume: "Lire et écrire une suite d'instructions, utiliser une répétition.",
+  },
+  "maths/5e/pourcentages": {
+    titre: "Les pourcentages",
+    resume: "Calculer un pourcentage d'un nombre, une réduction ou une augmentation.",
+  },
+  "maths/5e/fractions-addition": {
+    titre: "Additionner des fractions",
+    resume: "Mettre au même dénominateur, puis additionner les numérateurs.",
+  },
+  "maths/4e/pythagore": {
+    titre: "Le théorème de Pythagore",
+    resume: "Calculer une longueur dans un triangle rectangle et prouver l'angle droit.",
+  },
+  "maths/4e/cosinus": {
+    titre: "Le cosinus",
+    resume: "Utiliser le cosinus dans un triangle rectangle pour calculer une longueur.",
+  },
+  "maths/4e/statistiques": {
+    titre: "Les statistiques",
+    resume: "Calculer une moyenne, une médiane et l'étendue d'une série.",
+  },
+  "maths/4e/probabilites": {
+    titre: "Les probabilités",
+    resume: "Calculer la probabilité d'un événement (cas favorables sur cas possibles).",
+  },
+  "maths/3e/thales": {
+    titre: "Le théorème de Thalès",
+    resume: "Calculer une longueur avec les rapports égaux et prouver un parallélisme.",
+  },
   "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
   "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
   "ia/fondements/modeles-apprentissage": { titre: "Les modèles d'apprentissage" },
@@ -56,4 +134,53 @@ export function titreFiche(matiere: string, classe: string, notion: string) {
     // Repli lisible pour une fiche pas encore au registre.
     notion.replace(/-/g, " ")
   );
+}
+
+export type FicheListItem = {
+  matiere: string;
+  classe: string;
+  notion: string;
+  titre: string;
+  resume?: string;
+  href: string;
+};
+
+// Ordre d'affichage des niveaux (du plus jeune au plus âgé).
+const ORDRE_CLASSES = [
+  "cp", "ce1", "ce2", "cm1", "cm2",
+  "6e", "5e", "4e", "3e",
+  "seconde", "premiere-spe", "terminale-spe",
+  // IA : par thème
+  "fondements", "usages", "enjeux",
+];
+
+/** Toutes les fiches d'une matière, triées par niveau puis titre. */
+export function listerFiches(matiere: string): FicheListItem[] {
+  return Object.entries(FICHES_REGISTRE)
+    .map(([cle, v]) => {
+      const [m, classe, notion] = cle.split("/");
+      return { matiere: m, classe, notion, titre: v.titre, resume: v.resume, href: `/fiches-cours/${cle}` };
+    })
+    .filter((f) => f.matiere === matiere)
+    .sort((a, b) => {
+      const oa = ORDRE_CLASSES.indexOf(a.classe);
+      const ob = ORDRE_CLASSES.indexOf(b.classe);
+      if (oa !== ob) return oa - ob;
+      return a.titre.localeCompare(b.titre, "fr");
+    });
+}
+
+/** Le lien de la fiche si elle existe pour cette notion, sinon null.
+ *  Sert au coach/tutor pour afficher « fiche dispo » sur la bonne notion.
+ *  Tolère les variantes de slug (underscores ↔ tirets). */
+export function ficheHrefSiExiste(
+  matiere: string,
+  classe: string,
+  notion: string
+): string | null {
+  if (!matiere || !classe || !notion) return null;
+  const n = notion.toLowerCase().replace(/_/g, "-");
+  const c = classe.toLowerCase();
+  const cle = `${matiere}/${c}/${n}`;
+  return FICHES_REGISTRE[cle] ? `/fiches-cours/${cle}` : null;
 }

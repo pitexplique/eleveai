@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowLeft, BookOpen, ChevronRight, Download, FileText, MessageCircle } from "lucide-react";
+import { listerFiches } from "@/lib/fiches/registre";
 
 export const metadata: Metadata = {
   title: "Fiches de cours Maths",
@@ -8,63 +9,20 @@ export const metadata: Metadata = {
     "Fiches de cours de mathématiques eleveai.fr à lire en ligne ou à télécharger en PDF.",
 };
 
-const fiches = [
-  {
-    href: "/fiches-cours/maths/6e/proportionnalite",
-    niveau: "6e",
-    titre: "Proportionnalité",
-    resume:
-      "Reconnaître une situation proportionnelle, compléter un tableau et revenir à l'unité.",
-  },
-  {
-    href: "/fiches-cours/maths/4e/cosinus",
-    niveau: "4e",
-    titre: "Cosinus",
-    resume:
-      "Utiliser le cosinus dans un triangle rectangle pour calculer une longueur.",
-  },
-  {
-    href: "/fiches-cours/maths/4e/pythagore",
-    niveau: "4e",
-    titre: "Théorème de Pythagore",
-    resume:
-      "Calculer une longueur dans un triangle rectangle et vérifier qu'un triangle est rectangle.",
-  },
-  {
-    href: "/fiches-cours/maths/5e/pourcentages",
-    niveau: "5e",
-    titre: "Les pourcentages",
-    resume:
-      "Calculer un pourcentage d'un nombre, une réduction ou une augmentation.",
-  },
-  {
-    href: "/fiches-cours/maths/3e/thales",
-    niveau: "3e",
-    titre: "Théorème de Thalès",
-    resume:
-      "Calculer une longueur avec les rapports égaux et prouver un parallélisme.",
-  },
-  {
-    href: "/fiches-cours/maths/5e/fractions-addition",
-    niveau: "5e",
-    titre: "Additionner des fractions",
-    resume: "Mettre au même dénominateur, puis additionner les numérateurs.",
-  },
-  {
-    href: "/fiches-cours/maths/4e/statistiques",
-    niveau: "4e",
-    titre: "Les statistiques",
-    resume:
-      "Calculer une moyenne, une médiane et l'étendue d'une série de données.",
-  },
-  {
-    href: "/fiches-cours/maths/4e/probabilites",
-    niveau: "4e",
-    titre: "Les probabilités",
-    resume:
-      "Calculer la probabilité d'un événement (cas favorables sur cas possibles).",
-  },
-];
+// Généré depuis le registre : toute fiche ajoutée à FICHES_REGISTRE apparaît
+// ici automatiquement, triée par niveau. Zéro liste à maintenir en double.
+const fiches = listerFiches("maths");
+
+// Regroupement par niveau pour un affichage en sections (6e, 5e, 4e, 3e…).
+const parNiveau = fiches.reduce<Record<string, typeof fiches>>((acc, f) => {
+  (acc[f.classe] ??= []).push(f);
+  return acc;
+}, {});
+const niveauxOrdonnes = Object.keys(parNiveau);
+const LABEL_NIVEAU: Record<string, string> = {
+  "6e": "6e", "5e": "5e", "4e": "4e", "3e": "3e",
+  seconde: "2nde", "premiere-spe": "1re spé", "terminale-spe": "Tale spé",
+};
 
 export default function FichesCoursMathsPage() {
   return (
@@ -124,39 +82,50 @@ export default function FichesCoursMathsPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
-        <div className="grid gap-4 md:grid-cols-2">
-          {fiches.map((fiche) => (
-            <Link
-              key={fiche.href}
-              href={fiche.href}
-              className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-200/40"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <div className="flex flex-wrap gap-2 text-xs font-black uppercase">
-                    <span className="rounded-full bg-cyan-100 px-2.5 py-1 text-cyan-700">
-                      {fiche.niveau}
-                    </span>
-                    <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-emerald-700">
-                      Maths
-                    </span>
+        <p className="mb-6 text-sm font-bold text-slate-500">
+          {fiches.length} fiches de maths — chacune se lit, se révise en
+          flashcards et se compose.
+        </p>
+        {niveauxOrdonnes.map((niveau) => (
+          <div key={niveau} className="mb-10">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-black text-slate-900">
+              <span className="rounded-full bg-cyan-100 px-3 py-1 text-sm text-cyan-700">
+                {LABEL_NIVEAU[niveau] ?? niveau}
+              </span>
+              <span className="text-slate-400">
+                {parNiveau[niveau].length} fiche
+                {parNiveau[niveau].length > 1 ? "s" : ""}
+              </span>
+            </h2>
+            <div className="grid gap-4 md:grid-cols-2">
+              {parNiveau[niveau].map((fiche) => (
+                <Link
+                  key={fiche.href}
+                  href={fiche.href}
+                  className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-200/40"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h3 className="text-xl font-black text-slate-900">
+                        {fiche.titre}
+                      </h3>
+                      {fiche.resume ? (
+                        <p className="mt-2 text-sm leading-6 text-slate-600">
+                          {fiche.resume}
+                        </p>
+                      ) : null}
+                    </div>
+                    <FileText className="mt-1 h-6 w-6 shrink-0 text-emerald-500" />
                   </div>
-                  <h2 className="mt-4 text-xl font-black text-slate-900">
-                    {fiche.titre}
-                  </h2>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">
-                    {fiche.resume}
-                  </p>
-                </div>
-                <FileText className="mt-1 h-6 w-6 shrink-0 text-emerald-500" />
-              </div>
-              <div className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-emerald-600">
-                <Download className="h-4 w-4" />
-                Ouvrir la fiche PDF
-              </div>
-            </Link>
-          ))}
-        </div>
+                  <div className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-emerald-600">
+                    <Download className="h-4 w-4" />
+                    Ouvrir la fiche
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
       </section>
     </main>
   );
