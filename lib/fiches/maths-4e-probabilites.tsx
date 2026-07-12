@@ -44,7 +44,7 @@ export const ficheProbabilites4e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "4e",
-  notion: "probabilites",
+  notion: "proba-experience",
   titre: "Les probabilités",
   accroche:
     "Une probabilité mesure la chance qu'un événement se produise. Elle est comprise entre 0 (impossible) et 1 (certain).",

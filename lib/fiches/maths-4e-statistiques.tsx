@@ -71,7 +71,7 @@ export const ficheStatistiques4e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "4e",
-  notion: "statistiques",
+  notion: "stat-statistique",
   titre: "Les statistiques",
   accroche:
     "Les statistiques servent à résumer une série de données avec des indicateurs : la moyenne, la médiane et l'étendue.",

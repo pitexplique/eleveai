@@ -82,27 +82,27 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les pourcentages",
     resume: "Calculer un pourcentage d'un nombre, une réduction ou une augmentation.",
   },
-  "maths/5e/fractions-addition": {
+  "maths/5e/fraction-nombre": {
     titre: "Additionner des fractions",
     resume: "Mettre au même dénominateur, puis additionner les numérateurs.",
   },
-  "maths/4e/pythagore": {
+  "maths/4e/pythagore-theoreme": {
     titre: "Le théorème de Pythagore",
     resume: "Calculer une longueur dans un triangle rectangle et prouver l'angle droit.",
   },
-  "maths/4e/cosinus": {
+  "maths/4e/trigo-cosinus": {
     titre: "Le cosinus",
     resume: "Utiliser le cosinus dans un triangle rectangle pour calculer une longueur.",
   },
-  "maths/4e/statistiques": {
+  "maths/4e/stat-statistique": {
     titre: "Les statistiques",
     resume: "Calculer une moyenne, une médiane et l'étendue d'une série.",
   },
-  "maths/4e/probabilites": {
+  "maths/4e/proba-experience": {
     titre: "Les probabilités",
     resume: "Calculer la probabilité d'un événement (cas favorables sur cas possibles).",
   },
-  "maths/3e/thales": {
+  "maths/3e/thales-theoreme": {
     titre: "Le théorème de Thalès",
     resume: "Calculer une longueur avec les rapports égaux et prouver un parallélisme.",
   },

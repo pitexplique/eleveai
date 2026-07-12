@@ -44,7 +44,7 @@ export const ficheThales3e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "3e",
-  notion: "thales",
+  notion: "thales-theoreme",
   titre: "Le théorème de Thalès",
   accroche:
     "Quand deux droites parallèles coupent deux droites sécantes, le théorème de Thalès donne des rapports de longueurs égaux. Il sert à calculer une longueur ou à prouver un parallélisme.",

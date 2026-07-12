@@ -61,7 +61,7 @@ export const ficheCosinus4e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "4e",
-  notion: "cosinus",
+  notion: "trigo-cosinus",
   titre: "Le cosinus",
   accroche:
     "Dans un triangle rectangle, le cosinus d'un angle aigu relie le côté adjacent à cet angle et l'hypoténuse. Il sert à calculer une longueur ou un angle.",

@@ -59,7 +59,7 @@ export const fichePythagore4e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "4e",
-  notion: "pythagore",
+  notion: "pythagore-theoreme",
   titre: "Le théorème de Pythagore",
   accroche:
     "Dans un triangle rectangle, le théorème de Pythagore relie les longueurs des trois côtés. Il sert à calculer une longueur manquante ou à vérifier qu'un triangle est rectangle.",

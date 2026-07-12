@@ -32,10 +32,10 @@ export default function EncartFichesComposees() {
               tester — ta composition te suit partout.
             </p>
             <Link
-              href="/fiches-cours/maths/4e/pythagore"
+              href="/fiches-cours/maths"
               className="mt-3 inline-flex rounded-xl bg-emerald-500 px-4 py-2 text-sm font-black text-white transition hover:bg-emerald-400"
             >
-              Essayer avec Pythagore
+              Voir les fiches de maths
             </Link>
           </div>
           <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
@@ -48,7 +48,7 @@ export default function EncartFichesComposees() {
               href="/fiches-cours/maths"
               className="mt-3 inline-flex rounded-xl bg-sky-500 px-4 py-2 text-sm font-black text-white transition hover:bg-sky-400"
             >
-              Voir les 8 fiches de maths
+              Voir toutes les fiches de maths
             </Link>
           </div>
         </div>

@@ -65,7 +65,7 @@ export const ficheFractionsAddition5e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "5e",
-  notion: "fractions-addition",
+  notion: "fraction-nombre",
   titre: "Additionner des fractions",
   accroche:
     "Pour additionner deux fractions, il faut d'abord les mettre au même dénominateur, puis additionner les numérateurs.",

@@ -109,15 +109,16 @@ export default function EnseignantsPage() {
               🎛️ Composer ma première fiche
             </Link>
             <Link
-              href="/fiches-cours/maths/4e/pythagore"
+              href="/fiches-cours"
               className="rounded-2xl bg-white px-6 py-3 text-sm font-black text-slate-800 ring-1 ring-slate-200 transition hover:bg-slate-50"
             >
-              Voir l&apos;exemple : Pythagore 4e
+              Parcourir les fiches de cours
             </Link>
           </div>
           <p className="mt-4 text-xs font-bold text-slate-500">
-            8 fiches de maths disponibles (6e → 3e) — les autres matières
-            arrivent. Bientôt : partager votre fiche à vos classes.
+            Toute la 6e et les grandes notions du collège en maths, plus les
+            fiches IA — les autres niveaux arrivent. Bientôt : partager votre
+            fiche à vos classes.
           </p>
         </section>
 
