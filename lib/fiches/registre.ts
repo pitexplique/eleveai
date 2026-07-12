@@ -171,7 +171,6 @@ export function listerFiches(matiere: string): FicheListItem[] {
 }
 
 /** Le lien de la fiche si elle existe pour cette notion, sinon null.
- *  Sert au coach/tutor pour afficher « fiche dispo » sur la bonne notion.
  *  Tolère les variantes de slug (underscores ↔ tirets). */
 export function ficheHrefSiExiste(
   matiere: string,
@@ -183,4 +182,44 @@ export function ficheHrefSiExiste(
   const c = classe.toLowerCase();
   const cle = `${matiere}/${c}/${n}`;
   return FICHES_REGISTRE[cle] ? `/fiches-cours/${cle}` : null;
+}
+
+// ─── Pont coach → fiche ────────────────────────────────────────────────────────
+// Le coach identifie une notion par un `notionId` (ex. "aire_surface") qui
+// DIFFÈRE du slug de la fiche (ex. "aires"). Cette table fait le lien pour
+// afficher « fiche dispo » sur la bonne notion du coach. Clé : "classe/notionId".
+// À compléter au fur et à mesure des vagues (ici : 6e maths).
+const COACH_NOTION_VERS_FICHE: Record<string, string> = {
+  "6e/aire_surface": "maths/6e/aires",
+  "6e/algo_programmation": "maths/6e/algorithmique",
+  "6e/angle_mesure": "maths/6e/angles",
+  "6e/entier_calcul_mental": "maths/6e/calcul-mental",
+  "6e/entier_calcul_pose": "maths/6e/calcul-pose",
+  "6e/decimal_nombre": "maths/6e/decimaux",
+  "6e/stat_donnee": "maths/6e/donnees",
+  "6e/entier_nombre": "maths/6e/entiers",
+  "6e/fraction_nombre": "maths/6e/fractions",
+  "6e/aire_longueur": "maths/6e/longueurs",
+  "6e/aire_perimetre": "maths/6e/perimetres",
+  "6e/pourcentage_nombre": "maths/6e/pourcentages",
+  "6e/proba_experience": "maths/6e/probabilites",
+  "6e/prop_proportionnalite": "maths/6e/proportionnalite",
+  "6e/quadrilatere_figure": "maths/6e/quadrilateres",
+  "6e/sym_axiale": "maths/6e/symetrie",
+  "6e/triangle_figure": "maths/6e/triangles",
+  "6e/volume_solide": "maths/6e/volumes",
+};
+
+/** Le lien de la fiche correspondant à une notion DU COACH, ou null.
+ *  1) essaie le pont coach→fiche, 2) tente une correspondance directe du slug. */
+export function ficheHrefPourCoach(
+  matiere: string,
+  classe: string,
+  coachNotionId: string
+): string | null {
+  if (matiere !== "maths") return null; // pour l'instant, seules les maths ont des fiches par notion
+  const cle = `${classe.toLowerCase()}/${coachNotionId}`;
+  const mappee = COACH_NOTION_VERS_FICHE[cle];
+  if (mappee) return `/fiches-cours/${mappee}`;
+  return ficheHrefSiExiste(matiere, classe, coachNotionId);
 }

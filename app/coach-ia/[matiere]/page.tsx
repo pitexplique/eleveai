@@ -13,6 +13,9 @@ import {
 } from "@/lib/tutor-v4/catalog";
 import FloatingCoach from "@/components/FloatingCoach";
 import BoiteAOutils from "@/components/BoiteAOutils";
+import Link from "next/link";
+import { BookOpen } from "lucide-react";
+import { ficheHrefPourCoach } from "@/lib/fiches/registre";
 
 const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe", "adulte"];
 const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
@@ -355,11 +358,25 @@ export default function CoachIA() {
                   </div>
 
                   <div className="space-y-5">
-                    {notionsAvecMicros.map(({ notionId, micros }) => (
+                    {notionsAvecMicros.map(({ notionId, micros }) => {
+                      const ficheHref = ficheHrefPourCoach(matiere, classe, notionId);
+                      return (
                       <article key={notionId}>
-                        <h3 className="mb-2 text-base font-bold text-slate-800">
-                          {notionLabel(notionId, classe, matiere)}
-                        </h3>
+                        <div className="mb-2 flex flex-wrap items-center gap-2">
+                          <h3 className="text-base font-bold text-slate-800">
+                            {notionLabel(notionId, classe, matiere)}
+                          </h3>
+                          {ficheHref ? (
+                            <Link
+                              href={ficheHref}
+                              className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-xs font-bold text-emerald-700 transition hover:bg-emerald-100"
+                              title="Lire la fiche de cours de cette notion"
+                            >
+                              <BookOpen className="h-3.5 w-3.5" />
+                              Fiche
+                            </Link>
+                          ) : null}
+                        </div>
                         <ol className="space-y-1">
                           {micros.map((microId, index) => (
                             <li key={microId}>
@@ -387,7 +404,8 @@ export default function CoachIA() {
                           ))}
                         </ol>
                       </article>
-                    ))}
+                      );
+                    })}
                   </div>
                 </section>
               );
