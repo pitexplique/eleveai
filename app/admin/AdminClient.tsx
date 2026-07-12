@@ -27,7 +27,7 @@ export default function AdminClient() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-slate-950 text-white">
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-900 to-slate-950 text-slate-200">
       <div className="w-full max-w-sm bg-slate-900 p-6 rounded-xl border border-slate-700 space-y-4">
         <h1 className="text-xl font-bold text-center">🔐 Accès Direction</h1>
 

@@ -21,7 +21,7 @@ export default async function AdminDashboardPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white p-6">
+    <main className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 text-slate-200 p-6">
       <div className="max-w-5xl mx-auto space-y-6">
         <header className="flex items-center justify-between">
           <div>

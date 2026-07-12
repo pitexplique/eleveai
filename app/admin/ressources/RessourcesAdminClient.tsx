@@ -100,7 +100,7 @@ export default function RessourcesAdminClient() {
   const nbVideos = notions.filter((n) => videosDe(n.id).length).length;
 
   return (
-    <main className="min-h-screen bg-slate-950 px-4 py-8 text-slate-100">
+    <main className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 px-4 py-8 text-slate-200">
       <div className="mx-auto max-w-4xl space-y-6">
         <div>
           <Link href="/admin/dashboard" className="text-sm font-bold text-slate-400 hover:text-slate-200">
@@ -144,7 +144,7 @@ export default function RessourcesAdminClient() {
               const videos = videosDe(n.id);
               const draft = drafts[n.id] ?? { url: "", titre: "" };
               return (
-                <li key={n.id} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
+                <li key={n.id} className="rounded-2xl border border-slate-700 bg-slate-800/40 p-4">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <div>
                       <p className="font-black text-slate-100">{n.label}</p>
