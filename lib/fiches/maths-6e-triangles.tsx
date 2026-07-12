@@ -23,6 +23,22 @@
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+// La figure du cours : un triangle quelconque ABC, ses trois sommets et ses
+// trois angles marqués — le même moteur de dessin que le coach (lib/canvas),
+// pour que l'élève retrouve exactement la figure de ses exercices.
+const schemaTriangle = (
+  <CanvasRenderer
+    figure={{
+      kind: "triangle",
+      size: { width: 280, height: 220 },
+      points: { A: { x: 40, y: 175 }, B: { x: 245, y: 175 }, C: { x: 150, y: 35 } },
+      display: { showPoints: true, showLabels: true, showSides: true, showAngles: true },
+      labels: { A: "A", B: "B", C: "C" },
+    }}
+  />
+);
 
 const pieges = [
   "Confondre un sommet et un côté : dans le triangle ABC, A, B et C sont les sommets (des points), tandis que AB, BC et CA sont les côtés (des segments).",
@@ -167,6 +183,7 @@ export const ficheTriangles6e: FicheCoursData = {
     expression: "angle A + angle B + angle C = 180°",
     legende:
       "La somme des trois angles d'un triangle vaut toujours 180°. Pour un angle manquant : angle = 180 − les deux autres angles.",
+    schema: schemaTriangle,
   },
   coachHref: "/coach-ia/maths?classe=6e",
 };
