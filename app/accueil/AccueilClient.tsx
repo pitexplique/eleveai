@@ -513,6 +513,21 @@ export default function AccueilPage({
             sans jugement&nbsp;: on t&apos;explique, on t&apos;encourage. ✨
           </p>
 
+          {/* Le visage d'EleveAI : l'image « née dans une vraie classe à La
+             Réunion » remise dans le hero — elle donne l'humanité qui manquait
+             à l'entrée par classe (retour du 12/07). */}
+          <div className="mx-auto mt-6 max-w-2xl overflow-hidden rounded-3xl border border-white/15 shadow-2xl shadow-black/40">
+            <Image
+              src="/images/accueil-eleveai-reunion.webp"
+              alt="EleveAI, né dans une vraie classe à La Réunion"
+              width={1661}
+              height={947}
+              priority
+              sizes="(max-width: 640px) 100vw, 42rem"
+              className="h-auto w-full object-cover"
+            />
+          </div>
+
           {/* Bandeau de confiance remonté en haut : ce qui rassure le parent
              (prof réunionnais, gratuit, sans pub, RGPD) était enterré tout en bas. */}
           <div className="mx-auto mt-4 flex max-w-2xl flex-wrap items-center justify-center gap-2">

@@ -64,6 +64,17 @@ export default async function AdminDashboardPage() {
           </p>
         </Link>
 
+        <Link
+          href="/admin/ressources"
+          className="block rounded-xl border border-rose-700 bg-rose-900/30 p-4 transition hover:bg-rose-900/50"
+        >
+          <p className="font-bold text-rose-300">🎬 Vidéos par notion</p>
+          <p className="mt-1 text-sm text-slate-400">
+            Attacher des vidéos YouTube aux notions du coach — elles s&apos;affichent
+            en badge « ▶ Vidéo » à côté de la fiche.
+          </p>
+        </Link>
+
         <AdminContactMessagesClient />
       </div>
     </main>

@@ -14,7 +14,7 @@ import {
 import FloatingCoach from "@/components/FloatingCoach";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import Link from "next/link";
-import { BookOpen } from "lucide-react";
+import { BookOpen, Play } from "lucide-react";
 import { ficheHrefPourCoach } from "@/lib/fiches/registre";
 
 const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe", "adulte"];
@@ -201,6 +201,26 @@ export default function CoachIA() {
   const notionMicroMap = getNotionMicroMap(classe, matiere);
   const microLabels = getMicroLabelMap(classe, matiere);
 
+  // Vidéos attachées aux notions (table notion_ressources, gérée depuis
+  // /admin/ressources). Clé = notionId du coach → aucune correspondance.
+  const [videosParNotion, setVideosParNotion] = useState<
+    Record<string, { url: string; titre: string | null }[]>
+  >({});
+  useEffect(() => {
+    let annule = false;
+    fetch(`/api/notion-videos?matiere=${matiere}&classe=${classe}`)
+      .then((r) => r.json())
+      .then((d) => {
+        if (!annule && d?.ok) setVideosParNotion(d.videos ?? {});
+      })
+      .catch(() => {
+        /* pas de vidéos : aucun badge */
+      });
+    return () => {
+      annule = true;
+    };
+  }, [matiere, classe]);
+
   const domaines = useMemo(() => getDomaineMap(classe, matiere), [classe, matiere]);
 
   const [search, setSearch] = useState("");
@@ -360,6 +380,7 @@ export default function CoachIA() {
                   <div className="space-y-5">
                     {notionsAvecMicros.map(({ notionId, micros }) => {
                       const ficheHref = ficheHrefPourCoach(matiere, classe, notionId);
+                      const videos = videosParNotion[notionId] ?? [];
                       return (
                       <article key={notionId}>
                         <div className="mb-2 flex flex-wrap items-center gap-2">
@@ -375,6 +396,18 @@ export default function CoachIA() {
                               <BookOpen className="h-3.5 w-3.5" />
                               Fiche
                             </Link>
+                          ) : null}
+                          {videos.length ? (
+                            <a
+                              href={videos[0].url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 rounded-full border border-rose-200 bg-rose-50 px-2 py-0.5 text-xs font-bold text-rose-700 transition hover:bg-rose-100"
+                              title={videos[0].titre ?? "Voir la vidéo de cette notion"}
+                            >
+                              <Play className="h-3.5 w-3.5" />
+                              Vidéo
+                            </a>
                           ) : null}
                         </div>
                         <ol className="space-y-1">
