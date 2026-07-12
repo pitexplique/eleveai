@@ -10,6 +10,22 @@
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+// L'angle droit dessiné par le moteur du coach (le petit carré au sommet).
+const schemaAngleDroit = (
+  <CanvasRenderer
+    figure={{
+      kind: "angle",
+      size: { width: 220, height: 180 },
+      angle: {
+        angleDeg: 90,
+        labels: { angle: "90°" },
+        display: { showArc: true, showRightAngle: true, showMeasure: true, showLabels: true },
+      },
+    }}
+  />
+);
 
 const pieges = [
   "Lire la mauvaise graduation du rapporteur : il y a deux échelles, on suit celle qui commence à 0 sur un côté de l'angle.",
@@ -77,6 +93,10 @@ export const ficheAngles6e: FicheCoursData = {
     texte:
       "Un angle est formé par deux demi-droites qui ont la même origine. Ce point commun s'appelle le sommet de l'angle, et les deux demi-droites sont ses côtés. La mesure de l'angle, c'est la taille de l'ouverture entre les deux côtés.",
   },
+  figure: {
+    schema: schemaAngle,
+    legende: "Un angle : un sommet et deux côtés.",
+  },
   proprietes: [
     {
       titre: "L'angle droit",
@@ -111,7 +131,7 @@ export const ficheAngles6e: FicheCoursData = {
     contexte: "Les deux angles de référence",
     expression: "angle droit = 90° et angle plat = 180°",
     legende: "Tous les autres angles se comparent à eux : aigu si moins de 90°, obtus entre 90° et 180°.",
-    schema: schemaAngle,
+    schema: schemaAngleDroit,
   },
   methode: [
     {

@@ -276,14 +276,30 @@ export default function FicheCoursClient({
       case "definition":
         return (
           <section className="pt-6 print:pt-4">
-            <div className="rounded-2xl border-2 border-sky-300 bg-white p-5">
-              <h2 className="flex items-center gap-2 text-lg font-black text-sky-700 print:text-base">
-                <BookMarked className="h-5 w-5 print:hidden" />
-                Définition
-              </h2>
-              <p className="mt-3 text-base font-bold leading-7 text-slate-900 print:text-sm">
-                {fiche.definition.texte}
-              </p>
+            <div
+              className={`grid gap-4 ${
+                fiche.figure ? "md:grid-cols-[1.3fr_1fr] print:grid-cols-[1.3fr_1fr]" : ""
+              }`}
+            >
+              <div className="rounded-2xl border-2 border-sky-300 bg-white p-5">
+                <h2 className="flex items-center gap-2 text-lg font-black text-sky-700 print:text-base">
+                  <BookMarked className="h-5 w-5 print:hidden" />
+                  Définition
+                </h2>
+                <p className="mt-3 text-base font-bold leading-7 text-slate-900 print:text-sm">
+                  {fiche.definition.texte}
+                </p>
+              </div>
+              {fiche.figure ? (
+                <figure className="flex flex-col items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                  {fiche.figure.schema}
+                  {fiche.figure.legende ? (
+                    <figcaption className="mt-2 text-center text-xs font-bold text-slate-500">
+                      {fiche.figure.legende}
+                    </figcaption>
+                  ) : null}
+                </figure>
+              ) : null}
             </div>
           </section>
         );

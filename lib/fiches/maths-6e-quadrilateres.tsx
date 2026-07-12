@@ -24,6 +24,31 @@
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+// Un quadrilatère ABCD dessiné par le moteur du coach : sommets nommés,
+// côtés et diagonales visibles — la figure de référence de la définition.
+const schemaQuadrilatere = (
+  <CanvasRenderer
+    figure={{
+      kind: "quadrilatere",
+      size: { width: 260, height: 200 },
+      points: {
+        A: { x: 40, y: 45 },
+        B: { x: 225, y: 40 },
+        C: { x: 205, y: 165 },
+        D: { x: 55, y: 155 },
+      },
+      display: {
+        showPoints: true,
+        showLabels: true,
+        showSides: true,
+        showDiagonals: true,
+      },
+      labels: { A: "A", B: "B", C: "C", D: "D" },
+    }}
+  />
+);
 
 const pieges = [
   "Confondre nature et dessin : un carré reste un carré même s'il est penché sur la feuille. Ce sont les codages (angles droits, côtés égaux) qui comptent, pas l'orientation.",
@@ -53,6 +78,10 @@ export const ficheQuadrilateres6e: FicheCoursData = {
   definition: {
     texte:
       "Un quadrilatère est un polygone qui possède 4 côtés. Il a donc aussi 4 sommets et 4 angles. On le nomme en donnant ses sommets dans l'ordre autour de la figure : le quadrilatère ABCD. Il possède 2 diagonales, qui relient chacune deux sommets opposés (par exemple AC et BD).",
+  },
+  figure: {
+    schema: schemaQuadrilatere,
+    legende: "Le quadrilatère ABCD : 4 côtés, 4 sommets, 2 diagonales.",
   },
   proprietes: [
     {

@@ -74,6 +74,10 @@ export type FicheCoursData = {
   accroche: string;
   identite: FicheIdentite[];
   definition: { texte: string };
+  /** Figure de référence de la notion (surtout géométrie) : dessinée par les
+   *  canvas du coach (lib/canvas) pour que l'élève retrouve la même figure
+   *  dans sa fiche et dans ses exercices. Affichée avec la définition. */
+  figure?: { schema: ReactNode; legende?: string };
   proprietes: FichePropriete[];
   reel: { texte: string };
   historique: { texte: string };

@@ -20,6 +20,29 @@
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+// Une figure et son image par rapport à un axe vertical, dessinées par le
+// moteur du coach : l'élève voit le « miroir » et peut compter les carreaux.
+const schemaSymetrie = (
+  <CanvasRenderer
+    figure={{
+      kind: "transformation",
+      transformation: "symetrie_axiale",
+      grid: { rows: 6, cols: 8 },
+      size: { cellSize: 30, padding: 18 },
+      axis: { type: "vertical", x: 4, label: "axe" },
+      source: { points: [{ x: 1, y: 1 }, { x: 1, y: 4 }, { x: 3, y: 1 }], label: "figure" },
+      image: { points: [{ x: 7, y: 1 }, { x: 7, y: 4 }, { x: 5, y: 1 }], label: "image" },
+      display: {
+        showGrid: true,
+        showLabels: true,
+        showPoints: true,
+        showDashedLinks: true,
+      },
+    }}
+  />
+);
 
 const pieges = [
   "Placer l'image du bon côté de l'axe mais pas à la bonne distance : le point et son image doivent être exactement à la même distance de l'axe.",
@@ -50,6 +73,10 @@ export const ficheSymetrie6e: FicheCoursData = {
   definition: {
     texte:
       "La symétrie axiale transforme une figure comme dans un miroir, par rapport à une droite appelée l'axe de symétrie. Si l'on plie la feuille le long de cet axe, la figure et son image se superposent exactement. Le mot « axiale » vient d'« axe » : c'est cette droite qui sert de miroir.",
+  },
+  figure: {
+    schema: schemaSymetrie,
+    legende: "La figure et son image se replient l'une sur l'autre le long de l'axe.",
   },
   proprietes: [
     {
