@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import VotreAvisClient from "./VotreAvisClient";
-import { getElevesALHonneur } from "@/lib/ameliorations/honneurServer";
+import {
+  getElevesALHonneur,
+  getAmeliorationsALHonneur,
+} from "@/lib/ameliorations/honneurServer";
 
 // Le palmarès « élèves à l'honneur » est rechargé au plus toutes les 5 minutes.
 export const revalidate = 300;
@@ -12,6 +15,9 @@ export const metadata: Metadata = {
 };
 
 export default async function VotreAvisPage() {
-  const honneur = await getElevesALHonneur();
-  return <VotreAvisClient honneur={honneur} />;
+  const [honneur, ameliorations] = await Promise.all([
+    getElevesALHonneur(),
+    getAmeliorationsALHonneur(),
+  ]);
+  return <VotreAvisClient honneur={honneur} ameliorations={ameliorations} />;
 }

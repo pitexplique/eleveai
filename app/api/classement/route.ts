@@ -30,7 +30,7 @@ export async function GET(req: Request) {
 
   const { data, error } = await supabase
     .from("retours_eleves")
-    .select("code_eleve, prenom, message, traite")
+    .select("code_eleve, prenom, message, traite, a_lhonneur")
     .eq("code_etablissement", session.code_etablissement)
     .not("code_eleve", "is", null)
     .limit(20000);
@@ -45,7 +45,7 @@ export async function GET(req: Request) {
   // Agrégation par élève (code_eleve unique).
   const parEleve = new Map<
     string,
-    { code_eleve: string; prenom: string | null; nb: number; nbT: number }
+    { code_eleve: string; prenom: string | null; nb: number; nbT: number; nbH: number }
   >();
   for (const r of data ?? []) {
     const key = r.code_eleve as string;
@@ -53,9 +53,10 @@ export async function GET(req: Request) {
     // Un retour « IA probable » ne rapporte aucun point dans le classement.
     if (estProbablementIA(r.message)) continue;
     const e =
-      parEleve.get(key) ?? { code_eleve: key, prenom: r.prenom, nb: 0, nbT: 0 };
+      parEleve.get(key) ?? { code_eleve: key, prenom: r.prenom, nb: 0, nbT: 0, nbH: 0 };
     e.nb += 1;
     if (r.traite) e.nbT += 1;
+    if (r.a_lhonneur) e.nbH += 1;
     if (!e.prenom && r.prenom) e.prenom = r.prenom;
     parEleve.set(key, e);
   }
@@ -64,7 +65,7 @@ export async function GET(req: Request) {
     .map((e) => ({
       code_eleve: e.code_eleve,
       prenom: prenomCourt(e.prenom),
-      points: calculerPointsAvis(e.nb, e.nbT),
+      points: calculerPointsAvis(e.nb, e.nbT, e.nbH),
     }))
     .filter((e) => e.points > 0)
     .sort((a, b) => b.points - a.points);

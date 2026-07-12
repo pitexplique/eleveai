@@ -182,7 +182,7 @@ export async function POST(req: Request) {
     if (codeEtablissement && codeEleve) {
       const { data: retours } = await supabase
         .from("retours_eleves")
-        .select("message, traite")
+        .select("message, traite, a_lhonneur")
         .eq("code_etablissement", codeEtablissement)
         .eq("code_eleve", codeEleve);
 
@@ -190,7 +190,8 @@ export async function POST(req: Request) {
       // on les exclut du total, et l'envoi en cours ne gagne 0 s'il est détecté.
       const valides = (retours ?? []).filter((r) => !estProbablementIA(r.message));
       const nbTraites = valides.filter((r) => r.traite).length;
-      pointsTotal = calculerPointsAvis(valides.length, nbTraites);
+      const nbALHonneur = valides.filter((r) => r.a_lhonneur).length;
+      pointsTotal = calculerPointsAvis(valides.length, nbTraites, nbALHonneur);
       pointsGagnes = estProbablementIA(message) ? 0 : POINTS_PAR_RETOUR;
     }
 

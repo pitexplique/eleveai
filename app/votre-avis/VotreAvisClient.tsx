@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
 import { createClient } from "@/lib/supabase/client";
-import { ameliorationsRealisees } from "@/lib/ameliorations/realisees";
+import {
+  ameliorationsRealisees,
+  type AmeliorationRealisee,
+} from "@/lib/ameliorations/realisees";
 import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 
@@ -68,10 +71,21 @@ const PAGES = [
 
 export default function VotreAvisClient({
   honneur,
+  ameliorations,
 }: {
   honneur?: EleveALHonneur[];
+  ameliorations?: AmeliorationRealisee[];
 }) {
   const { eleve } = useEleve();
+
+  // Le mur « Vous l'avez demandé → c'est fait » : d'abord les améliorations
+  // mises à l'honneur depuis l'admin (data-driven, les plus récentes), puis la
+  // liste éditoriale historique en dur. Les deux se complètent le temps de la
+  // migration.
+  const murAmeliorations: AmeliorationRealisee[] = [
+    ...(ameliorations ?? []),
+    ...ameliorationsRealisees,
+  ];
   const [emailUser, setEmailUser] = useState<EmailUser | null>(null);
 
   useEffect(() => {
@@ -234,7 +248,7 @@ export default function VotreAvisClient({
               💬 Vous l&apos;avez demandé&nbsp;→&nbsp;✅ C&apos;est fait
             </h2>
             <span className="inline-flex items-center rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-black text-emerald-200">
-              {ameliorationsRealisees.length} idées réalisées
+              {murAmeliorations.length} idées réalisées
             </span>
           </div>
           <p className="mt-2 text-sm font-semibold text-slate-300">
@@ -242,7 +256,7 @@ export default function VotreAvisClient({
           </p>
 
           <ul className="mt-5 space-y-3">
-            {ameliorationsRealisees.map((a, i) => (
+            {murAmeliorations.map((a, i) => (
               <li
                 key={i}
                 className="rounded-2xl border border-slate-700/60 bg-slate-900/60 p-4 sm:p-5"
@@ -287,7 +301,8 @@ export default function VotreAvisClient({
                 </p>
                 <p className="mt-1 text-sm font-semibold text-slate-200">
                   Tu as maintenant <span className="font-black text-white">{pointsTotal} points</span>.
-                  Bonus de 20 points quand ton idée est retenue par l&apos;équipe EleveAI !
+                  +20 quand ton retour est traité, et jusqu&apos;à <span className="font-black text-white">+50</span> si
+                  ton idée est mise à l&apos;honneur sur le mur des améliorations&nbsp;!
                 </p>
               </div>
             ) : null}

@@ -132,14 +132,15 @@ export async function GET(req: Request) {
   if (!etabScope) {
     const { data: retours } = await supabaseAdmin
       .from("retours_eleves")
-      .select("message, traite")
+      .select("message, traite, a_lhonneur")
       .eq("code_etablissement", session.code_etablissement)
       .eq("code_eleve", session.code_utilisateur);
     // Les retours « IA probable » ne comptent pas dans les points (anti-farming).
     const valides = (retours ?? []).filter((r) => !estProbablementIA(r.message));
     pointsAvis = calculerPointsAvis(
       valides.length,
-      valides.filter((r) => r.traite).length
+      valides.filter((r) => r.traite).length,
+      valides.filter((r) => r.a_lhonneur).length
     );
   }
 

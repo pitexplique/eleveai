@@ -13,7 +13,7 @@ import { createClient } from "@supabase/supabase-js";
 import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
 
 const COLONNES =
-  "id, type, page, message, note, code_etablissement, code_eleve, prenom, classe, email, traite, created_at";
+  "id, type, page, message, note, code_etablissement, code_eleve, prenom, classe, email, traite, a_lhonneur, amelioration, reponse, reponse_at, created_at";
 
 const PAGE_SIZE = 200;
 
@@ -124,9 +124,11 @@ export async function PATCH(request: Request) {
   const body = await request.json().catch(() => null);
   const id = typeof body?.id === "string" ? body.id : null;
   const traite = typeof body?.traite === "boolean" ? body.traite : null;
+  const aLHonneur = typeof body?.a_lhonneur === "boolean" ? body.a_lhonneur : null;
   const aReponse = body?.reponse !== undefined;
+  const aAmelioration = body?.amelioration !== undefined;
 
-  if (!id || (traite === null && !aReponse)) {
+  if (!id || (traite === null && aLHonneur === null && !aReponse && !aAmelioration)) {
     return NextResponse.json(
       { ok: false, error: "Requête invalide." },
       { status: 400 }
@@ -139,6 +141,17 @@ export async function PATCH(request: Request) {
     const reponse = String(body.reponse).trim();
     update.reponse = reponse || null;
     update.reponse_at = reponse ? new Date().toISOString() : null;
+  }
+  // L'amélioration (« ce que ça a produit ») : le texte publié sur le mur.
+  if (aAmelioration) {
+    const amelioration = String(body.amelioration).trim().slice(0, 500);
+    update.amelioration = amelioration || null;
+  }
+  // « À l'honneur » : le cran au-dessus. Une contribution retenue est par
+  // définition traitée → on coche aussi `traite` pour rester cohérent.
+  if (aLHonneur !== null) {
+    update.a_lhonneur = aLHonneur;
+    if (aLHonneur) update.traite = true;
   }
 
   const { error } = await serviceClient()

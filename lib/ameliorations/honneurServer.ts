@@ -9,6 +9,7 @@
 import "server-only";
 import { createClient } from "@supabase/supabase-js";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
+import { type AmeliorationRealisee } from "@/lib/ameliorations/realisees";
 import { estProbablementIA } from "@/lib/detection-ia";
 
 // Extraction du prénom (« NOM Prénom » → prénom seul, jamais le nom de famille).
@@ -56,6 +57,44 @@ export async function getElevesALHonneur(): Promise<EleveALHonneur[]> {
     }
     // Recalcul vide (probablement transitoire) : on garde le dernier snapshot.
     return (snap?.data as EleveALHonneur[]) ?? [];
+  } catch {
+    return [];
+  }
+}
+
+// « Vous l'avez demandé → c'est fait », version DATA-DRIVEN : les contributions
+// que Frédéric a mises À L'HONNEUR depuis l'admin (a_lhonneur = true + un texte
+// d'amélioration rédigé). Chaque ligne devient une production publique et signée
+// (prénom seul, RGPD). Remplace peu à peu la liste éditoriale en dur
+// (lib/ameliorations/realisees.ts), qui reste servie en complément.
+export async function getAmeliorationsALHonneur(
+  limite = 60
+): Promise<AmeliorationRealisee[]> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return [];
+
+  try {
+    const supabase = createClient(url, key);
+    const { data, error } = await supabase
+      .from("retours_eleves")
+      .select("prenom, message, amelioration, created_at")
+      .eq("a_lhonneur", true)
+      .not("amelioration", "is", null)
+      .order("created_at", { ascending: false })
+      .limit(limite);
+
+    if (error || !data) return [];
+
+    return data
+      .map((r): AmeliorationRealisee | null => {
+        const eleve = prenomCourt(r.prenom);
+        const fait = (r.amelioration ?? "").trim();
+        // Sans prénom exploitable ou sans texte d'amélioration, on n'affiche pas.
+        if (!eleve || eleve === "Élève" || !fait) return null;
+        return { eleve, demande: (r.message ?? "").trim(), fait };
+      })
+      .filter((a): a is AmeliorationRealisee => a !== null);
   } catch {
     return [];
   }

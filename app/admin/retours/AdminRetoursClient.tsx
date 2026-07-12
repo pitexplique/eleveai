@@ -15,6 +15,8 @@ type Retour = {
   classe: string | null;
   email: string | null;
   traite: boolean;
+  a_lhonneur: boolean;
+  amelioration: string | null;
   created_at: string;
   reponse: string | null;
   reponse_at: string | null;
@@ -59,6 +61,45 @@ export default function AdminRetoursClient() {
   const [patching, setPatching] = useState<string | null>(null);
   const [drafts, setDrafts] = useState<Record<string, string>>({});
   const [savingReply, setSavingReply] = useState<string | null>(null);
+  // Brouillons du texte d'amélioration (« ce que ça a produit »), par retour.
+  const [ameliorationDrafts, setAmeliorationDrafts] = useState<Record<string, string>>({});
+  const [savingHonneur, setSavingHonneur] = useState<string | null>(null);
+
+  // Met (ou retire) un retour « à l'honneur », en enregistrant le texte de
+  // l'amélioration. Mettre à l'honneur coche aussi « traité » côté serveur.
+  async function saveHonneur(retour: Retour, aLHonneur: boolean) {
+    const amelioration = (ameliorationDrafts[retour.id] ?? retour.amelioration ?? "").trim();
+    if (aLHonneur && !amelioration) {
+      alert("Écris d'abord ce que cette contribution a produit (l'amélioration).");
+      return;
+    }
+    setSavingHonneur(retour.id);
+    try {
+      const res = await fetch("/api/admin/retours", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: retour.id, a_lhonneur: aLHonneur, amelioration }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data?.ok) {
+        setRetours((prev) =>
+          prev.map((r) =>
+            r.id === retour.id
+              ? {
+                  ...r,
+                  a_lhonneur: aLHonneur,
+                  amelioration: amelioration || null,
+                  traite: aLHonneur ? true : r.traite,
+                }
+              : r
+          )
+        );
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    setSavingHonneur(null);
+  }
 
   async function saveReply(retour: Retour, reponse: string) {
     setSavingReply(retour.id);
@@ -359,6 +400,11 @@ export default function AdminRetoursClient() {
                               ✅ Traité
                             </span>
                           ) : null}
+                          {r.a_lhonneur ? (
+                            <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-black text-amber-800 ring-1 ring-amber-300">
+                              🌟 À l&apos;honneur
+                            </span>
+                          ) : null}
                           <span className="ml-auto text-xs font-bold text-slate-400">
                             {formatDate(r.created_at)}
                           </span>
@@ -420,6 +466,57 @@ export default function AdminRetoursClient() {
                               className="rounded-xl bg-emerald-500 px-3 py-1.5 text-xs font-black text-white shadow transition hover:brightness-95 disabled:opacity-50"
                             >
                               {savingReply === r.id ? "Enregistrement…" : "💬 Enregistrer la réponse"}
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* À L'HONNEUR : ce que la contribution a produit → mur public signé */}
+                        <div className="mt-3 rounded-xl border border-amber-300 bg-amber-50 p-3">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[11px] font-black uppercase tracking-wide text-amber-700">
+                              🌟 Mettre à l&apos;honneur (+50 pts pour l&apos;élève)
+                            </span>
+                            {r.a_lhonneur ? (
+                              <span className="text-[10px] font-bold text-amber-700">
+                                publié sur le mur des améliorations
+                              </span>
+                            ) : null}
+                          </div>
+                          <p className="mt-1 text-[11px] font-semibold text-amber-800/80">
+                            Qu&apos;est-ce que cette contribution a produit sur EleveAI&nbsp;? (le « c&apos;est fait », signé du prénom)
+                          </p>
+                          <textarea
+                            value={ameliorationDrafts[r.id] ?? r.amelioration ?? ""}
+                            onChange={(e) =>
+                              setAmeliorationDrafts((d) => ({ ...d, [r.id]: e.target.value }))
+                            }
+                            placeholder="Ex. : Les réponses avec l'unité (« 5 cm ») sont désormais acceptées."
+                            rows={2}
+                            maxLength={500}
+                            className="mt-1.5 w-full resize-y rounded-lg border border-amber-300 bg-white px-3 py-2 text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                          />
+                          <div className="mt-1.5 flex justify-end gap-2">
+                            {r.a_lhonneur ? (
+                              <button
+                                type="button"
+                                onClick={() => saveHonneur(r, false)}
+                                disabled={savingHonneur === r.id}
+                                className="rounded-xl bg-white px-3 py-1.5 text-xs font-black text-amber-700 ring-1 ring-amber-300 transition hover:brightness-95 disabled:opacity-50"
+                              >
+                                Retirer du mur
+                              </button>
+                            ) : null}
+                            <button
+                              type="button"
+                              onClick={() => saveHonneur(r, true)}
+                              disabled={savingHonneur === r.id}
+                              className="rounded-xl bg-amber-500 px-3 py-1.5 text-xs font-black text-white shadow transition hover:brightness-95 disabled:opacity-50"
+                            >
+                              {savingHonneur === r.id
+                                ? "Enregistrement…"
+                                : r.a_lhonneur
+                                ? "🌟 Mettre à jour"
+                                : "🌟 Mettre à l'honneur"}
                             </button>
                           </div>
                         </div>
