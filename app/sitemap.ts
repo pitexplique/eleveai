@@ -69,9 +69,20 @@ const ROUTES: RouteConfig[] = [
   // ── FICHES DE COURS ────────────────────────────────────────────────────────
   { path: "/fiches-cours",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/fiches-cours/maths", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  // Fiches maths — toutes refaites « en blocs » le 11/07 (fiche + flashcards
-  // + composeur) : lastMod du jour pour inviter Google à repasser.
+  // Fiches maths — refaites « en blocs » le 11/07, + les fiches 6e créées
+  // le 12/07 (une par banque du coach) : fiche + flashcards + composeur.
+  { path: "/fiches-cours/maths/6e/entiers",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/maths/6e/decimaux",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/maths/6e/fractions",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/maths/6e/pourcentages",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
   { path: "/fiches-cours/maths/6e/proportionnalite",    priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
+  { path: "/fiches-cours/maths/6e/calcul-mental",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/maths/6e/calcul-pose",         priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/maths/6e/longueurs",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/maths/6e/perimetres",          priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/maths/6e/aires",               priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/maths/6e/volumes",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/maths/6e/angles",              priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
   { path: "/fiches-cours/maths/5e/pourcentages",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/5e/fractions-addition",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/4e/pythagore",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },

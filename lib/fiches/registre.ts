@@ -3,7 +3,18 @@
 // schéma s'ajoute ici (une ligne).
 
 export const FICHES_REGISTRE: Record<string, { titre: string }> = {
+  "maths/6e/entiers": { titre: "Les nombres entiers" },
+  "maths/6e/decimaux": { titre: "Les nombres décimaux" },
+  "maths/6e/fractions": { titre: "Les fractions" },
+  "maths/6e/pourcentages": { titre: "Les pourcentages" },
   "maths/6e/proportionnalite": { titre: "La proportionnalité" },
+  "maths/6e/calcul-mental": { titre: "Le calcul mental" },
+  "maths/6e/calcul-pose": { titre: "Le calcul posé" },
+  "maths/6e/longueurs": { titre: "Les longueurs" },
+  "maths/6e/perimetres": { titre: "Les périmètres" },
+  "maths/6e/aires": { titre: "Les aires" },
+  "maths/6e/volumes": { titre: "Les volumes" },
+  "maths/6e/angles": { titre: "Les angles" },
   "maths/5e/pourcentages": { titre: "Les pourcentages" },
   "maths/5e/fractions-addition": { titre: "Additionner des fractions" },
   "maths/4e/pythagore": { titre: "Le théorème de Pythagore" },
