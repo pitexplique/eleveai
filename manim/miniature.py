@@ -113,6 +113,15 @@ def acc_perimetre(d):
     d.text((322, 430), "P = 2 × (L + l)", font=police("arialbd.ttf", 42), fill=VERT)
 
 
+def acc_aire(d):
+    gx, gy, cs = 384, 316, 36
+    for r in range(3):
+        for c in range(4):
+            x, y = gx + c * cs, gy + r * cs
+            d.rectangle([x, y, x + cs, y + cs], fill=BLEU, outline=NAVY, width=2)
+    d.text((330, 452), "Aire = L × l", font=police("arialbd.ttf", 42), fill=VERT)
+
+
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
     "eleveai-maths-6e-entier-calcul-pose": {
@@ -150,6 +159,10 @@ NOTIONS = {
     "eleveai-maths-6e-aire-perimetre": {
         "badge": "MATHS · 6e", "titre": ["LES", "PÉRIMÈTRES"], "taille": 78,
         "sous": "la longueur du tour", "accroche": acc_perimetre,
+    },
+    "eleveai-maths-6e-aire-surface": {
+        "badge": "MATHS · 6e", "titre": ["LES", "AIRES"], "taille": 84,
+        "sous": "compter · multiplier · découper", "accroche": acc_aire,
     },
 }
 

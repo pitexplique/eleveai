@@ -14,6 +14,15 @@
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+// Toutes les cases pleines d'un bloc rectangulaire (row, col), pour dessiner une
+// aire « carreau par carreau » avec le canvas figure_libre du coach.
+function rectCells(rows: number, cols: number, r0 = 0, c0 = 0): Array<[number, number]> {
+  const cells: Array<[number, number]> = [];
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) cells.push([r0 + r, c0 + c]);
+  return cells;
+}
 
 const pieges = [
   "Confondre l'aire (la surface à l'intérieur) et le périmètre (le tour de la figure).",
@@ -27,37 +36,59 @@ const aRetenir = [
   "Une figure compliquée se découpe en rectangles et en carrés : on additionne les aires.",
 ];
 
-const schemaRectangle = (
-  <svg
-    viewBox="0 0 320 190"
-    className="h-auto w-full"
-    role="img"
-    aria-label="Rectangle avec sa longueur L, sa largeur l et sa surface coloriée"
-  >
-    <rect
-      x="55"
-      y="45"
-      width="210"
-      height="105"
-      fill="rgba(14,165,233,0.12)"
-      stroke="#0ea5e9"
-      strokeWidth="5"
-      strokeLinejoin="round"
-    />
-    <line x1="55" y1="80" x2="265" y2="80" stroke="#0ea5e9" strokeWidth="1.5" opacity="0.35" />
-    <line x1="55" y1="115" x2="265" y2="115" stroke="#0ea5e9" strokeWidth="1.5" opacity="0.35" />
-    <line x1="125" y1="45" x2="125" y2="150" stroke="#0ea5e9" strokeWidth="1.5" opacity="0.35" />
-    <line x1="195" y1="45" x2="195" y2="150" stroke="#0ea5e9" strokeWidth="1.5" opacity="0.35" />
-    <text x="160" y="32" fill="#334155" fontSize="16" fontWeight="800" textAnchor="middle">
-      longueur L
-    </text>
-    <text x="290" y="103" fill="#334155" fontSize="16" fontWeight="800" textAnchor="middle">
-      l
-    </text>
-    <text x="160" y="176" fill="#0f172a" fontSize="15" fontWeight="700" textAnchor="middle">
-      Aire = L × l
-    </text>
-  </svg>
+// L'aire = compter les carreaux : un bloc 3 × 4 = 12 carreaux sur quadrillage.
+const aireCarreaux = (
+  <CanvasRenderer
+    figure={{
+      kind: "figure_libre",
+      grid: { rows: 4, cols: 5, filledCells: rectCells(3, 4) },
+      display: { showGrid: true, showFilled: true, showPerimeter: false },
+    }}
+  />
+);
+
+// La formule du rectangle : ses dimensions L et l (canvas quadrilatère du coach).
+const rectangleLxl = (
+  <CanvasRenderer
+    figure={{
+      kind: "quadrilatere",
+      points: {
+        A: { x: 50, y: 55 },
+        B: { x: 250, y: 55 },
+        C: { x: 250, y: 180 },
+        D: { x: 50, y: 180 },
+      },
+      sideLabels: { AB: "L = 8 cm", BC: "l = 5 cm" },
+      display: { showPoints: true, showLabels: true, showSides: true, showAngles: false },
+      marks: { rightAnglesAt: ["A", "B", "C", "D"] },
+    }}
+  />
+);
+
+// L'aire d'un rectangle 8 × 5, montrée carreau par carreau : 40 carreaux.
+const aireRect8x5 = (
+  <CanvasRenderer
+    figure={{
+      kind: "figure_libre",
+      grid: { rows: 5, cols: 8, filledCells: rectCells(5, 8) },
+      display: { showGrid: true, showFilled: true, showPerimeter: false },
+    }}
+  />
+);
+
+// La figure en L décomposée : rectangle 4 × 3 (12) + carré 2 × 2 (4) = 16 carreaux.
+const aireFigureL = (
+  <CanvasRenderer
+    figure={{
+      kind: "figure_libre",
+      grid: {
+        rows: 5,
+        cols: 4,
+        filledCells: [...rectCells(3, 4, 0, 0), ...rectCells(2, 2, 3, 0)],
+      },
+      display: { showGrid: true, showFilled: true, showPerimeter: true },
+    }}
+  />
 );
 
 export const ficheAires6e: FicheCoursData = {
@@ -76,6 +107,10 @@ export const ficheAires6e: FicheCoursData = {
   definition: {
     texte:
       "L'aire d'une figure est la mesure de la surface qu'elle occupe, c'est-à-dire tout l'intérieur de la figure. Elle se mesure en unités carrées : le cm² pour une petite surface, le m² pour un jardin ou une pièce.",
+  },
+  figure: {
+    schema: aireCarreaux,
+    legende: "L'aire = le nombre de carreaux recouverts : ici 3 rangées de 4, soit 12 unités d'aire.",
   },
   proprietes: [
     {
@@ -111,7 +146,7 @@ export const ficheAires6e: FicheCoursData = {
     contexte: "Rectangle de longueur L et de largeur l",
     expression: "A(rectangle) = L × l ; A(carré) = c × c",
     legende: "Le résultat s'exprime toujours en unités carrées (cm², m²).",
-    schema: schemaRectangle,
+    schema: rectangleLxl,
   },
   methode: [
     {
@@ -152,6 +187,7 @@ export const ficheAires6e: FicheCoursData = {
       titre: "L'aire d'un rectangle",
       donnees: "Un rectangle mesure 8 cm de longueur et 5 cm de largeur.",
       question: "Calculer son aire.",
+      schema: aireRect8x5,
       solution:
         "C'est un rectangle, donc aire = longueur × largeur = 8 × 5 = 40. Son aire est 40 cm². Attention : 8 + 5 + 8 + 5 = 26 cm, c'est son périmètre, pas son aire.",
     },
@@ -160,6 +196,7 @@ export const ficheAires6e: FicheCoursData = {
       donnees:
         "Une figure en L est formée d'un rectangle de 4 cm sur 3 cm et d'un carré de côté 2 cm, sans chevauchement.",
       question: "Calculer son aire totale.",
+      schema: aireFigureL,
       solution:
         "Aire du rectangle : 4 × 3 = 12 cm². Aire du carré : 2 × 2 = 4 cm². Aire totale : 12 + 4 = 16 cm².",
     },
