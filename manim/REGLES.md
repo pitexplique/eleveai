@@ -71,6 +71,11 @@ eleveai-<matiere>-<classe>-<notionId en tirets>.mp4
 - **Coller au notionId** (le nom de la banque), pas à une version raccourcie : c'est la colonne vertébrale banque → fiche → vidéo → coach. Ex. notion `entier_calcul_pose` → `eleveai-maths-6e-entier-calcul-pose.mp4`.
 - Obtenu directement au rendu via `-o` (voir étape 4).
 
+## Miniature YouTube (style de la série)
+
+`python manim/miniature.py` génère un **1280×720** au style figé de la série (choisi le 13/07) : **« tableau d'école »** — fond vert ardoise + liseré clair, badge jaune `MATHS · <classe>`, titre blanc (Arial Black, 2 lignes), une accroche visuelle propre à la notion, Ti-Margo à droite, `eleveai.fr` en jaune. Sortie nommée comme la vidéo (même convention). Pour une nouvelle notion : changer le bloc `CONTENU` (nom, badge, titre) et la fonction `accroche()`.
+⚠️ Miniature perso = **compte YouTube vérifié** (numéro de téléphone). Elle se change à tout moment, même après publication (Studio → Contenu → la vidéo → Miniature → Enregistrer).
+
 ## Conventions YouTube
 
 - **Titre** : `Maths <classe> · <Titre de la notion> — EleveAI` (ex. `Maths 6e · Le calcul posé — EleveAI`)
