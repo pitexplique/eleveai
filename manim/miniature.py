@@ -102,6 +102,11 @@ def acc_calcul_mental(d):
     d.text((300, 424), "= 50 + 5 = 55", font=police("arialbd.ttf", 40), fill=VERT)
 
 
+def acc_longueur(d):
+    d.text((360, 300), "2 m", font=police("ariblk.ttf", 96), fill=BLEU)
+    d.text((320, 424), "= 200 cm", font=police("arialbd.ttf", 44), fill=VERT)
+
+
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
     "eleveai-maths-6e-entier-calcul-pose": {
@@ -131,6 +136,10 @@ NOTIONS = {
     "eleveai-maths-6e-entier-calcul-mental": {
         "badge": "MATHS · 6e", "titre": ["LE CALCUL", "MENTAL"], "taille": 84,
         "sous": "calculer vite, sans calculatrice", "accroche": acc_calcul_mental,
+    },
+    "eleveai-maths-6e-aire-longueur": {
+        "badge": "MATHS · 6e", "titre": ["LES", "LONGUEURS"], "taille": 84,
+        "sous": "mesurer · convertir · comparer", "accroche": acc_longueur,
     },
 }
 

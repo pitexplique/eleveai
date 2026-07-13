@@ -12,6 +12,7 @@
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 
 const pieges = [
   "Comparer deux longueurs sans les mettre dans la même unité (2 m et 150 cm).",
@@ -25,35 +26,65 @@ const aRetenir = [
   "D'une unité à sa voisine, on multiplie ou on divise par 10.",
 ];
 
-const schemaUnites = (
-  <svg
-    viewBox="0 0 320 190"
-    className="h-auto w-full"
-    role="img"
-    aria-label="Échelle des unités de longueur, du kilomètre au millimètre"
-  >
-    <rect x="18" y="20" width="88" height="40" rx="10" fill="rgba(14,165,233,0.12)" stroke="#0ea5e9" strokeWidth="3" />
-    <text x="62" y="46" fill="#0f172a" fontSize="18" fontWeight="800" textAnchor="middle">
-      km
-    </text>
-    <rect x="116" y="75" width="88" height="40" rx="10" fill="rgba(14,165,233,0.12)" stroke="#0ea5e9" strokeWidth="3" />
-    <text x="160" y="101" fill="#0f172a" fontSize="18" fontWeight="800" textAnchor="middle">
-      m
-    </text>
-    <rect x="214" y="130" width="88" height="40" rx="10" fill="rgba(14,165,233,0.12)" stroke="#0ea5e9" strokeWidth="3" />
-    <text x="258" y="156" fill="#0f172a" fontSize="18" fontWeight="800" textAnchor="middle">
-      cm
-    </text>
-    <text x="118" y="52" fill="#f59e0b" fontSize="15" fontWeight="800">
-      × 1 000
-    </text>
-    <text x="216" y="107" fill="#f59e0b" fontSize="15" fontWeight="800">
-      × 100
-    </text>
-    <text x="24" y="150" fill="#334155" fontSize="14" fontWeight="700">
-      et 1 cm = 10 mm
-    </text>
-  </svg>
+// Une règle graduée (canvas du coach) : le trait mesuré se lit sur les graduations.
+const regleMesure = (
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 0,
+      max: 12,
+      step: 1,
+      points: [
+        { value: 0, label: "0", color: "#64748b" },
+        { value: 8, label: "8 cm", color: "#0ea5e9" },
+      ],
+      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true, showZero: true },
+    }}
+  />
+);
+
+// Le tableau de conversion du coach : chaque colonne vaut 10 fois sa voisine de droite.
+const tableUnites = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      headers: ["km", "hm", "dam", "m", "dm", "cm", "mm"],
+      rows: [
+        { label: "1 m", values: ["", "", "", "1", "0", "0", ""] },
+        { label: "1 km", values: ["1", "0", "0", "0", "", "", ""] },
+      ],
+      questionLabel: "1 m = 100 cm et 1 km = 1 000 m : on complète de zéros jusqu'à la colonne voulue.",
+    }}
+  />
+);
+
+// Conversion 2,5 m → cm posée dans le tableau (m, dm, cm = 2, 5, 0 → 250).
+const tableDeuxCinq = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      headers: ["km", "hm", "dam", "m", "dm", "cm", "mm"],
+      rows: [{ label: "2,5 m", values: ["", "", "", "2", "5", "0", ""] }],
+      highlight: { cell: { row: 0, col: 5 } },
+      questionLabel: "On lit jusqu'à la colonne cm : 2,5 m = 250 cm.",
+    }}
+  />
+);
+
+// Le ruban coupé, en barre : 200 cm = 50 cm coupés + le reste cherché.
+const barreRuban = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      total: "200 cm",
+      parts: [
+        { label: "coupé", value: "50 cm", color: "#f59e0b" },
+        { label: "reste", unknown: true, color: "#0ea5e9" },
+      ],
+      questionLabel: "Le ruban fait 200 cm ; on en coupe 50 cm.",
+      display: { showTotal: true, showPartLabels: true, showValues: true, showQuestion: true },
+    }}
+  />
 );
 
 export const ficheLongueurs6e: FicheCoursData = {
@@ -72,6 +103,10 @@ export const ficheLongueurs6e: FicheCoursData = {
   definition: {
     texte:
       "Une longueur mesure une distance ou la taille d'un segment. On l'exprime toujours avec une unité : le mètre (m) est l'unité principale, avec ses multiples (km) et ses sous-multiples (dm, cm, mm).",
+  },
+  figure: {
+    schema: regleMesure,
+    legende: "On mesure avec une règle graduée : ce trait s'arrête sur 8, il mesure donc 8 cm.",
   },
   proprietes: [
     {
@@ -102,7 +137,7 @@ export const ficheLongueurs6e: FicheCoursData = {
     contexte: "Les conversions à connaître par cœur",
     expression: "1 km = 1 000 m ; 1 m = 100 cm ; 1 cm = 10 mm",
     legende: "D'une unité à sa voisine, on multiplie ou on divise par 10.",
-    schema: schemaUnites,
+    schema: tableUnites,
   },
   methode: [
     {
@@ -143,6 +178,7 @@ export const ficheLongueurs6e: FicheCoursData = {
       titre: "Convertir des mètres en centimètres",
       donnees: "Une corde mesure 2,5 m.",
       question: "Quelle est sa longueur en cm ?",
+      schema: tableDeuxCinq,
       solution:
         "1 m = 100 cm, donc on multiplie par 100 : 2,5 × 100 = 250. La corde mesure 250 cm.",
     },
@@ -150,6 +186,7 @@ export const ficheLongueurs6e: FicheCoursData = {
       titre: "Un problème avec deux unités",
       donnees: "Un ruban mesure 2 m. On en coupe 50 cm.",
       question: "Quelle longueur reste-t-il, en cm ?",
+      schema: barreRuban,
       solution:
         "On met tout en cm : 2 m = 200 cm. Puis on soustrait : 200 − 50 = 150. Il reste 150 cm de ruban.",
     },
