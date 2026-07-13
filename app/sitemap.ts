@@ -318,6 +318,14 @@ const VIDEOS_FICHES: Record<
         "Lire, comparer et calculer avec les nombres décimaux : le tableau de numération prolongé après la virgule et l'addition posée virgule sous virgule (6e).",
     },
   ],
+  "/fiches-cours/maths/6e/fraction-nombre": [
+    {
+      id: "KT6rurM3Q3E",
+      title: "Les fractions — Maths 6e — EleveAI",
+      description:
+        "Lire, représenter, comparer une fraction et calculer la fraction d'une quantité : disque, barres et comparaison dessinés pas à pas (6e).",
+    },
+  ],
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
