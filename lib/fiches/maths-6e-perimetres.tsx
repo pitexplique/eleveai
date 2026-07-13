@@ -18,6 +18,7 @@
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 
 const pieges = [
   "Confondre aire et périmètre : 5 × 4 = 20 donne l'aire du rectangle de 5 cm sur 4 cm, pas son périmètre. Le périmètre, c'est le tour : 2 × (5 + 4) = 18 cm.",
@@ -31,34 +32,65 @@ const aRetenir = [
   "Pour une figure quelconque, on additionne les longueurs de tous les côtés du contour.",
 ];
 
-const schemaRectangle = (
-  <svg
-    viewBox="0 0 320 190"
-    className="h-auto w-full"
-    role="img"
-    aria-label="Rectangle avec sa longueur L, sa largeur l et son contour en couleur"
-  >
-    <rect
-      x="55"
-      y="45"
-      width="210"
-      height="105"
-      fill="rgba(14,165,233,0.12)"
-      stroke="#0ea5e9"
-      strokeWidth="5"
-      strokeLinejoin="round"
-    />
-    <path d="M55 68 L78 68 L78 45" fill="none" stroke="#f59e0b" strokeWidth="4" />
-    <text x="160" y="175" fill="#334155" fontSize="16" fontWeight="800" textAnchor="middle">
-      longueur L
-    </text>
-    <text x="48" y="102" fill="#334155" fontSize="16" fontWeight="800" textAnchor="end">
-      l
-    </text>
-    <text x="160" y="32" fill="#0f172a" fontSize="14" fontWeight="700" textAnchor="middle">
-      le périmètre = tout le tour
-    </text>
-  </svg>
+// Le contour d'une figure quelconque (figure en L sur quadrillage), périmètre
+// tracé en rouge : le même dessin que dans les exercices du coach.
+const figureContour = (
+  <CanvasRenderer
+    figure={{
+      kind: "figure_libre",
+      grid: {
+        rows: 6,
+        cols: 6,
+        filledCells: [
+          [1, 1],
+          [1, 2],
+          [2, 1],
+          [2, 2],
+          [3, 1],
+        ],
+      },
+      display: { showGrid: true, showFilled: true, showPerimeter: true },
+    }}
+  />
+);
+
+// Le rectangle avec sa longueur L et sa largeur l (canvas quadrilatère du coach).
+const rectangleLL = (
+  <CanvasRenderer
+    figure={{
+      kind: "quadrilatere",
+      points: {
+        A: { x: 50, y: 60 },
+        B: { x: 250, y: 60 },
+        C: { x: 250, y: 135 },
+        D: { x: 50, y: 135 },
+      },
+      sideLabels: { AB: "L = 8 cm", BC: "l = 3 cm" },
+      display: { showPoints: true, showLabels: true, showSides: true, showAngles: false },
+      marks: { rightAnglesAt: ["A", "B", "C", "D"] },
+    }}
+  />
+);
+
+// Le carré de côté 9 cm (4 côtés égaux marqués).
+const carreNeuf = (
+  <CanvasRenderer
+    figure={{
+      kind: "quadrilatere",
+      points: {
+        A: { x: 70, y: 70 },
+        B: { x: 190, y: 70 },
+        C: { x: 190, y: 190 },
+        D: { x: 70, y: 190 },
+      },
+      sideLabels: { AB: "9 cm" },
+      display: { showPoints: true, showLabels: true, showSides: true, showAngles: false },
+      marks: {
+        rightAnglesAt: ["A", "B", "C", "D"],
+        equalSides: [["AB", "BC"], ["BC", "CD"], ["CD", "DA"]],
+      },
+    }}
+  />
 );
 
 export const fichePerimetres6e: FicheCoursData = {
@@ -77,6 +109,10 @@ export const fichePerimetres6e: FicheCoursData = {
   definition: {
     texte:
       "Le périmètre d'une figure est la longueur de son contour, c'est-à-dire de tout son tour. C'est une longueur : on l'exprime avec une unité de longueur, comme le centimètre (cm) ou le mètre (m), jamais en cm².",
+  },
+  figure: {
+    schema: figureContour,
+    legende: "Le périmètre, c'est tout le contour (en rouge) : on suit le tour de la figure, jamais l'intérieur.",
   },
   proprietes: [
     {
@@ -107,7 +143,7 @@ export const fichePerimetres6e: FicheCoursData = {
     contexte: "Carré de côté c, rectangle de longueur L et de largeur l",
     expression: "P(carré) = 4 × c ; P(rectangle) = 2 × (L + l)",
     legende: "Pour une figure quelconque : on additionne tous les côtés du contour.",
-    schema: schemaRectangle,
+    schema: rectangleLL,
   },
   methode: [
     {
@@ -148,6 +184,7 @@ export const fichePerimetres6e: FicheCoursData = {
       titre: "Le périmètre d'un carré",
       donnees: "Un carré a un côté de 9 cm.",
       question: "Calculer son périmètre.",
+      schema: carreNeuf,
       solution:
         "Un carré a 4 côtés égaux. P = 4 × 9 = 36 cm. Attention : 9 × 9 = 81 donnerait l'aire, pas le périmètre.",
     },

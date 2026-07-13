@@ -107,6 +107,12 @@ def acc_longueur(d):
     d.text((320, 424), "= 200 cm", font=police("arialbd.ttf", 44), fill=VERT)
 
 
+def acc_perimetre(d):
+    d.rounded_rectangle([372, 296, 636, 404], radius=10, outline=BLEU, width=8)
+    d.text((404, 330), "le tour", font=police("arialbd.ttf", 40), fill=NAVY)
+    d.text((322, 430), "P = 2 × (L + l)", font=police("arialbd.ttf", 42), fill=VERT)
+
+
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
     "eleveai-maths-6e-entier-calcul-pose": {
@@ -140,6 +146,10 @@ NOTIONS = {
     "eleveai-maths-6e-aire-longueur": {
         "badge": "MATHS · 6e", "titre": ["LES", "LONGUEURS"], "taille": 84,
         "sous": "mesurer · convertir · comparer", "accroche": acc_longueur,
+    },
+    "eleveai-maths-6e-aire-perimetre": {
+        "badge": "MATHS · 6e", "titre": ["LES", "PÉRIMÈTRES"], "taille": 78,
+        "sous": "la longueur du tour", "accroche": acc_perimetre,
     },
 }
 
