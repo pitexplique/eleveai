@@ -122,6 +122,14 @@ def acc_aire(d):
     d.text((330, 452), "Aire = L × l", font=police("arialbd.ttf", 42), fill=VERT)
 
 
+def acc_angle(d):
+    ox, oy = 420, 452
+    d.line([(ox, oy), (ox + 214, oy)], fill=BLEU, width=9)
+    d.line([(ox, oy), (ox, oy - 196)], fill=BLEU, width=9)
+    d.rectangle([ox, oy - 36, ox + 36, oy], outline=NAVY, width=4)
+    d.text((ox + 64, oy - 150), "90°", font=police("ariblk.ttf", 58), fill=VERT)
+
+
 def acc_volume(d):
     ox, oy, s, dp = 420, 420, 80, 40
     A, B, C, D = (ox, oy - s), (ox + s, oy - s), (ox + s, oy), (ox, oy)
@@ -177,6 +185,10 @@ NOTIONS = {
     "eleveai-maths-6e-volume-solide": {
         "badge": "MATHS · 6e", "titre": ["LES", "VOLUMES"], "taille": 84,
         "sous": "compter les cubes", "accroche": acc_volume,
+    },
+    "eleveai-maths-6e-angle-mesure": {
+        "badge": "MATHS · 6e", "titre": ["LES", "ANGLES"], "taille": 84,
+        "sous": "reconnaître · mesurer · tracer", "accroche": acc_angle,
     },
 }
 

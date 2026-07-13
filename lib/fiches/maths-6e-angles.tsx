@@ -39,41 +39,34 @@ const aRetenir = [
   "Un angle aigu mesure moins de 90°, un angle obtus mesure entre 90° et 180°.",
 ];
 
+// Un angle « générique » dessiné par le moteur du coach : sommet + deux côtés.
 const schemaAngle = (
-  <svg
-    viewBox="0 0 320 190"
-    className="h-auto w-full"
-    role="img"
-    aria-label="Un angle : deux demi-droites qui partent du même sommet"
-  >
-    <path
-      d="M60 150 L105 150 A 45 45 0 0 0 98 126 Z"
-      fill="rgba(14,165,233,0.12)"
-      stroke="none"
-    />
-    <path d="M105 150 A 45 45 0 0 0 98 126" fill="none" stroke="#f59e0b" strokeWidth="4" />
-    <path
-      d="M290 150 L60 150 L230 40"
-      fill="none"
-      stroke="#0ea5e9"
-      strokeWidth="5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <circle cx="60" cy="150" r="6" fill="#0f172a" />
-    <text x="52" y="176" fill="#0f172a" fontSize="16" fontWeight="800" textAnchor="middle">
-      sommet
-    </text>
-    <text x="200" y="172" fill="#334155" fontSize="16" fontWeight="800" textAnchor="middle">
-      côté
-    </text>
-    <text x="120" y="72" fill="#334155" fontSize="16" fontWeight="800" textAnchor="middle">
-      côté
-    </text>
-    <text x="140" y="132" fill="#b45309" fontSize="15" fontWeight="800">
-      l'angle
-    </text>
-  </svg>
+  <CanvasRenderer
+    figure={{
+      kind: "angle",
+      size: { width: 260, height: 190 },
+      angle: {
+        angleDeg: 55,
+        labels: { vertex: "sommet", left: "côté", right: "côté" },
+        display: { showArc: true, showMeasure: false, showLabels: true, showRightAngle: false },
+      },
+    }}
+  />
+);
+
+// Un angle obtus (118°) mesuré, pour l'exemple de comparaison à l'angle droit.
+const schemaAngleObtus = (
+  <CanvasRenderer
+    figure={{
+      kind: "angle",
+      size: { width: 240, height: 180 },
+      angle: {
+        angleDeg: 118,
+        labels: { angle: "118°" },
+        display: { showArc: true, showMeasure: true, showLabels: true, showRightAngle: false },
+      },
+    }}
+  />
 );
 
 export const ficheAngles6e: FicheCoursData = {
@@ -179,6 +172,7 @@ export const ficheAngles6e: FicheCoursData = {
       titre: "Comparer à l'angle droit",
       donnees: "Un angle mesure 118°.",
       question: "Est-il aigu, droit ou obtus ?",
+      schema: schemaAngleObtus,
       solution:
         "Un angle droit mesure 90°. Comme 118 est plus grand que 90 et plus petit que 180, l'angle de 118° est plus grand qu'un angle droit : il est obtus.",
     },
