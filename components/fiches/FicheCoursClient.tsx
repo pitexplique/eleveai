@@ -35,6 +35,7 @@ import {
 import { useEleve } from "@/context/EleveContext";
 import ModeClasse, { type ClasseSlide } from "@/components/fiches/ModeClasse";
 import Flashcards from "@/components/fiches/Flashcards";
+import VideoNotion from "@/components/fiches/VideoNotion";
 import {
   ORDRE_CANONIQUE,
   RUBRIQUES_LABELS,
@@ -720,6 +721,11 @@ export default function FicheCoursClient({
               <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 print:text-sm">
                 {fiche.accroche}
               </p>
+              <VideoNotion
+                matiere={fiche.matiere}
+                classe={fiche.classe}
+                notion={fiche.notion}
+              />
             </header>
 
             {rubriquesVisibles.map((id) => (
