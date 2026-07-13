@@ -122,6 +122,14 @@ def acc_aire(d):
     d.text((330, 452), "Aire = L × l", font=police("arialbd.ttf", 42), fill=VERT)
 
 
+def acc_algo(d):
+    x0, y, bw, bh, gap = 402, 300, 190, 46, 14
+    cols = [(176, 84, 20), BLEU, VERT]
+    for i, col in enumerate(cols):
+        yy = y + i * (bh + gap)
+        d.rounded_rectangle([x0 + (18 if i else 0), yy, x0 + bw, yy + bh], radius=9, fill=col, outline=NAVY, width=2)
+
+
 def acc_probabilites(d):
     x0, y0, s = 424, 302, 150
     d.rounded_rectangle([x0, y0, x0 + s, y0 + s], radius=18, outline=NAVY, width=6, fill=(235, 243, 255))
@@ -253,6 +261,10 @@ NOTIONS = {
     "eleveai-maths-6e-proba-experience": {
         "badge": "MATHS · 6e", "titre": ["LES", "PROBABILITÉS"], "taille": 60,
         "sous": "hasard · issue · certain", "accroche": acc_probabilites,
+    },
+    "eleveai-maths-6e-algo-programmation": {
+        "badge": "MATHS · 6e", "titre": ["ALGO &", "SCRATCH"], "taille": 78,
+        "sous": "programmer pas à pas", "accroche": acc_algo,
     },
 }
 

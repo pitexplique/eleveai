@@ -20,6 +20,54 @@
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+// Un programme Scratch dessiné par le moteur du coach : les mêmes blocs colorés
+// que l'élève assemble dans ses exercices.
+const progSequence = (
+  <CanvasRenderer
+    figure={{
+      kind: "scratch",
+      title: "Un programme = une suite d'instructions",
+      blocks: [
+        { type: "event" },
+        { type: "move", value: 10 },
+        { type: "turn", value: 90 },
+        { type: "say", text: "Bonjour !" },
+      ],
+    }}
+  />
+);
+
+// Exemple 1 : un déplacement (avancer 3, tourner, avancer 2).
+const progDeplacement = (
+  <CanvasRenderer
+    figure={{
+      kind: "scratch",
+      title: "Un déplacement",
+      blocks: [
+        { type: "event" },
+        { type: "move", value: 3 },
+        { type: "turn", value: 90 },
+        { type: "move", value: 2 },
+      ],
+    }}
+  />
+);
+
+// Exemple 2 : une répétition (répéter 4 fois : avancer de 10).
+const progRepetition = (
+  <CanvasRenderer
+    figure={{
+      kind: "scratch",
+      title: "Une répétition",
+      blocks: [
+        { type: "event" },
+        { type: "repeat", times: 4, children: [{ type: "move", value: 10 }] },
+      ],
+    }}
+  />
+);
 
 const pieges = [
   "Changer l'ordre des instructions sans y penser : si on tourne avant d'avancer, le lutin ne va pas au même endroit. L'ordre fait partie du programme.",
@@ -49,6 +97,10 @@ export const ficheAlgorithmique6e: FicheCoursData = {
   definition: {
     texte:
       "Un algorithme est une suite d'instructions précises et ordonnées qui permet d'obtenir un résultat. Un programme, c'est un algorithme écrit pour une machine. Les instructions s'exécutent une par une, de haut en bas, dans l'ordre où elles sont écrites.",
+  },
+  figure: {
+    schema: progSequence,
+    legende: "Un programme Scratch : les blocs s'exécutent dans l'ordre, de haut en bas.",
   },
   proprietes: [
     {
@@ -115,6 +167,7 @@ export const ficheAlgorithmique6e: FicheCoursData = {
       donnees:
         "Un lutin part d'une case et suit ce programme : avance de 3 cases, tourne à droite (quart de tour), avance de 2 cases.",
       question: "Combien de cases le lutin a-t-il parcourues en tout, et a-t-il changé de direction ?",
+      schema: progDeplacement,
       solution:
         "On exécute pas à pas. Le lutin avance d'abord de 3 cases, puis il tourne à droite : il regarde maintenant dans une nouvelle direction, mais il n'avance pas pendant qu'il tourne. Ensuite il avance de 2 cases. Pour la distance, on additionne seulement les blocs « avancer » : 3 + 2 = 5 cases. Le lutin a bien changé de direction une fois, au moment du quart de tour.",
     },
@@ -123,6 +176,7 @@ export const ficheAlgorithmique6e: FicheCoursData = {
       donnees:
         "Un lutin suit le programme : répéter 4 fois « avancer de 10 pas ».",
       question: "Quelle distance totale le lutin parcourt-il ?",
+      schema: progRepetition,
       solution:
         "Le bloc « avancer de 10 » est placé à l'intérieur de la boucle : il est donc exécuté à chaque tour. La boucle fait 4 tours, et à chaque tour le lutin avance de 10 pas. On multiplie : 4 × 10 = 40. Le lutin parcourt 40 pas au total. C'est le piège classique : la boucle ne fait pas avancer une seule fois, mais 4 fois.",
     },
