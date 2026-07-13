@@ -22,6 +22,58 @@
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+// Le diagramme circulaire du coach : les parts d'un total (20 élèves).
+const camembertAnimaux = (
+  <CanvasRenderer
+    figure={{
+      kind: "stat_graph",
+      graphType: "camembert",
+      title: "Animal préféré (20 élèves)",
+      data: [
+        { label: "Chien", value: 10 },
+        { label: "Chat", value: 6 },
+        { label: "Oiseau", value: 4 },
+      ],
+      display: { showValues: true, showLabels: true },
+    }}
+  />
+);
+
+// Le tableau à double entrée : la valeur se lit au croisement ligne × colonne.
+const tableauActivites = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      headers: ["Filles", "Garçons"],
+      rows: [
+        { label: "Football", values: [5, 9] },
+        { label: "Natation", values: [6, 7] },
+        { label: "Danse", values: [8, 3] },
+      ],
+      highlight: { cell: { row: 1, col: 0 } },
+      questionLabel: "Ligne « Natation » × colonne « Filles » = 6.",
+    }}
+  />
+);
+
+// Le graphique en barres : la hauteur donne la valeur, le sport est le plus haut.
+const graphLoisirs = (
+  <CanvasRenderer
+    figure={{
+      kind: "stat_graph",
+      graphType: "barres",
+      title: "Loisirs préférés de la classe",
+      data: [
+        { label: "Sport", value: 16 },
+        { label: "Lecture", value: 9 },
+        { label: "Jeux", value: 12 },
+      ],
+      display: { showValues: true, showLabels: true, highlightIndex: 0 },
+    }}
+  />
+);
 
 const pieges = [
   "Se tromper de ligne ou de colonne dans un tableau à double entrée : on doit lire la valeur au croisement de la bonne ligne ET de la bonne colonne.",
@@ -51,6 +103,10 @@ export const ficheDonnees6e: FicheCoursData = {
   definition: {
     texte:
       "Une donnée est une information chiffrée : un nombre d'élèves, une quantité vendue, une durée. Une série de données, c'est un ensemble de ces informations rangées par catégories. Pour les présenter clairement, on utilise trois représentations : le tableau (des lignes et des colonnes), le graphique en barres (des bâtons de hauteurs différentes) et le diagramme circulaire (un disque partagé en secteurs).",
+  },
+  figure: {
+    schema: camembertAnimaux,
+    legende: "Un diagramme circulaire : chaque secteur est une part du total. Le plus grand secteur est la catégorie la plus fréquente.",
   },
   proprietes: [
     {
@@ -122,6 +178,7 @@ export const ficheDonnees6e: FicheCoursData = {
       donnees:
         "Un tableau donne le nombre d'élèves par activité et par groupe. Football : 5 filles et 9 garçons. Natation : 6 filles et 7 garçons. Danse : 8 filles et 3 garçons.",
       question: "Combien de filles ont choisi la natation ?",
+      schema: tableauActivites,
       solution:
         "On cherche la ligne « Natation », puis la colonne « Filles ». La valeur au croisement de cette ligne et de cette colonne est 6. Donc 6 filles ont choisi la natation. On ne lit pas la colonne « Garçons », sinon on trouverait 7 par erreur.",
     },
@@ -130,6 +187,7 @@ export const ficheDonnees6e: FicheCoursData = {
       donnees:
         "Un graphique en barres montre les loisirs préférés d'une classe. Sport : 16. Lecture : 9. Jeux : 12.",
       question: "Quelle est l'activité préférée, et combien d'élèves de plus la choisissent par rapport à la lecture ?",
+      schema: graphLoisirs,
       solution:
         "On compare les trois hauteurs : 16, 9 et 12. La plus grande valeur est 16, donc l'activité préférée est le sport. Pour l'écart avec la lecture, on soustrait : 16 - 9 = 7. Il y a donc 7 élèves de plus qui préfèrent le sport.",
     },

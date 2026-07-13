@@ -122,6 +122,17 @@ def acc_aire(d):
     d.text((330, 452), "Aire = L × l", font=police("arialbd.ttf", 42), fill=VERT)
 
 
+def acc_donnees(d):
+    base = 466
+    x0 = 402
+    bw, gap = 52, 70
+    bars = [(132, VERT), (74, BLEU), (100, (176, 84, 20))]
+    for i, (h, col) in enumerate(bars):
+        x = x0 + i * gap
+        d.rectangle([x, base - h, x + bw, base], fill=col, outline=NAVY, width=3)
+    d.line([(x0 - 14, base), (x0 + 3 * gap, base)], fill=NAVY, width=4)
+
+
 def acc_symetrie(d):
     ax = 512
     for yy in range(292, 476, 16):
@@ -225,6 +236,10 @@ NOTIONS = {
     "eleveai-maths-6e-sym-axiale": {
         "badge": "MATHS · 6e", "titre": ["LA", "SYMÉTRIE"], "taille": 80,
         "sous": "le miroir des maths", "accroche": acc_symetrie,
+    },
+    "eleveai-maths-6e-stat-donnee": {
+        "badge": "MATHS · 6e", "titre": ["LIRE DES", "DONNÉES"], "taille": 68,
+        "sous": "tableau · graphique · camembert", "accroche": acc_donnees,
     },
 }
 
