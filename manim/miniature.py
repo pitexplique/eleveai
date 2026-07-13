@@ -122,6 +122,15 @@ def acc_aire(d):
     d.text((330, 452), "Aire = L × l", font=police("arialbd.ttf", 42), fill=VERT)
 
 
+def acc_probabilites(d):
+    x0, y0, s = 424, 302, 150
+    d.rounded_rectangle([x0, y0, x0 + s, y0 + s], radius=18, outline=NAVY, width=6, fill=(235, 243, 255))
+    cx, cy = x0 + s / 2, y0 + s / 2
+    off, r = s * 0.26, 12
+    for px, py in [(-1, -1), (1, -1), (0, 0), (-1, 1), (1, 1)]:
+        d.ellipse([cx + px * off - r, cy + py * off - r, cx + px * off + r, cy + py * off + r], fill=BLEU)
+
+
 def acc_donnees(d):
     base = 466
     x0 = 402
@@ -240,6 +249,10 @@ NOTIONS = {
     "eleveai-maths-6e-stat-donnee": {
         "badge": "MATHS · 6e", "titre": ["LIRE DES", "DONNÉES"], "taille": 68,
         "sous": "tableau · graphique · camembert", "accroche": acc_donnees,
+    },
+    "eleveai-maths-6e-proba-experience": {
+        "badge": "MATHS · 6e", "titre": ["LES", "PROBABILITÉS"], "taille": 60,
+        "sous": "hasard · issue · certain", "accroche": acc_probabilites,
     },
 }
 

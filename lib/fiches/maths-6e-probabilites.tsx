@@ -20,6 +20,52 @@
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+type Face = 1 | 2 | 3 | 4 | 5 | 6;
+
+// Un dé à 6 faces (canvas du coach) : la définition « 6 issues » se voit.
+const deSixFaces = (
+  <CanvasRenderer
+    figure={{
+      kind: "probabilites",
+      variant: "de",
+      de: { faces: [1, 2, 3, 4, 5, 6] as Face[] },
+    }}
+  />
+);
+
+// Le même dé, les nombres pairs surlignés (3 issues favorables).
+const dePairs = (
+  <CanvasRenderer
+    figure={{
+      kind: "probabilites",
+      variant: "de",
+      de: { faces: [1, 2, 3, 4, 5, 6] as Face[], surligne: [2, 4, 6] as Face[] },
+    }}
+  />
+);
+
+// Le sac de billes : 4 rouges, 2 bleues, 1 verte — on compte pour comparer.
+const sacBilles = (
+  <CanvasRenderer
+    figure={{
+      kind: "probabilites",
+      variant: "billes",
+      billes: {
+        elements: [
+          { couleur: "#dc2626" },
+          { couleur: "#dc2626" },
+          { couleur: "#dc2626" },
+          { couleur: "#dc2626" },
+          { couleur: "#2563eb" },
+          { couleur: "#2563eb" },
+          { couleur: "#16a34a" },
+        ],
+      },
+    }}
+  />
+);
 
 const pieges = [
   "Confondre « possible » et « certain » : obtenir 6 avec un dé est possible, mais pas certain, car les autres faces peuvent sortir.",
@@ -49,6 +95,10 @@ export const ficheProbabilites6e: FicheCoursData = {
   definition: {
     texte:
       "Une expérience aléatoire est une expérience dont on ne connaît pas le résultat à l'avance : il dépend du hasard, comme lancer un dé ou tirer une bille. Chaque résultat possible s'appelle une issue. Lancer un dé à 6 faces a 6 issues : 1, 2, 3, 4, 5 ou 6.",
+  },
+  figure: {
+    schema: deSixFaces,
+    legende: "Lancer ce dé est une expérience aléatoire : il a 6 issues possibles (1, 2, 3, 4, 5 ou 6).",
   },
   proprietes: [
     {
@@ -119,6 +169,7 @@ export const ficheProbabilites6e: FicheCoursData = {
       titre: "Compter les issues d'un dé",
       donnees: "On lance un dé classique à 6 faces.",
       question: "Combien y a-t-il d'issues possibles ? Combien réalisent l'événement « obtenir un nombre pair » ?",
+      schema: dePairs,
       solution:
         "Les issues possibles sont les faces du dé : 1, 2, 3, 4, 5 et 6, soit 6 issues. Parmi elles, les nombres pairs sont 2, 4 et 6 : 3 issues réalisent l'événement « obtenir un nombre pair ». Il y a donc 6 issues au total et 3 issues favorables.",
     },
@@ -126,6 +177,7 @@ export const ficheProbabilites6e: FicheCoursData = {
       titre: "Comparer dans un sac de billes",
       donnees: "Un sac contient 4 billes rouges, 2 billes bleues et 1 bille verte. On tire une bille au hasard.",
       question: "Quelle couleur a le plus de chances d'être tirée ? Laquelle en a le moins ?",
+      schema: sacBilles,
       solution:
         "On compte les billes de chaque couleur : 4 rouges, 2 bleues, 1 verte. La couleur qui a le plus de billes est la plus probable : c'est le rouge, avec 4 billes. Celle qui en a le moins est la moins probable : c'est le vert, avec 1 seule bille. Tirer une bille rouge est donc plus probable que tirer une bille verte.",
     },
