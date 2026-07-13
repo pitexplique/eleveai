@@ -19,10 +19,11 @@ AVATAR = RACINE / "public" / "images" / "avatar-frederic-Lacoste.jpg"
 SORTIE = RACINE / "manim" / "miniatures"
 
 # ── CONTENU (à changer d'une notion à l'autre) ─────────────────────────────────
-NOM = "eleveai-maths-6e-entier-calcul-pose"
+NOM = "eleveai-maths-6e-entier-nombre"
 BADGE = "MATHS · 6e"
-TITRE = ["LE CALCUL", "POSÉ"]
-SOUS_TITRE = "les 4 opérations, pas à pas"
+TITRE = ["LES NOMBRES", "ENTIERS"]
+TITRE_TAILLE = 84
+SOUS_TITRE = "lire · comparer · encadrer"
 
 # ── Charte cahier ──────────────────────────────────────────────────────────────
 W, H = 1280, 720
@@ -65,14 +66,9 @@ def badge(d, x, y, txt):
 
 
 def accroche(d):
-    """Addition posée sur les carreaux (spécifique calcul posé)."""
-    f = police("arialbd.ttf", 62)
-    xg, xd, yh = 476, 700, 322
-    d.text((xg, yh + 74), "+", font=f, fill=BLEU)
-    a_droite(d, xd, yh, "475", f, BLEU)
-    a_droite(d, xd, yh + 74, "286", f, BLEU)
-    d.rounded_rectangle([xg, yh + 156, xd, yh + 168], radius=6, fill=JAUNE)
-    a_droite(d, xd, yh + 178, "761", f, VERT)
+    """4 273 décomposé selon les rangs (spécifique nombres entiers)."""
+    d.text((360, 300), "4 273", font=police("ariblk.ttf", 96), fill=BLEU)
+    d.text((300, 424), "4 000 + 200 + 70 + 3", font=police("arialbd.ttf", 40), fill=VERT)
 
 
 def signature(img, d):
@@ -103,7 +99,7 @@ def construire():
     img.paste(m, (W - w - 4, H - h - 6), m)
 
     badge(d, 58, 48, BADGE)
-    ft = police("ariblk.ttf", 90)
+    ft = police("ariblk.ttf", TITRE_TAILLE)
     d.text((56, 116), TITRE[0], font=ft, fill=NAVY)
     d.text((56, 208), TITRE[1], font=ft, fill=NAVY)
     d.text((58, 300), SOUS_TITRE, font=police("arialbd.ttf", 32), fill=BLEU)
