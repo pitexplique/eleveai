@@ -19,11 +19,11 @@ AVATAR = RACINE / "public" / "images" / "avatar-frederic-Lacoste.jpg"
 SORTIE = RACINE / "manim" / "miniatures"
 
 # ── CONTENU (à changer d'une notion à l'autre) ─────────────────────────────────
-NOM = "eleveai-maths-6e-decimal-nombre"
+NOM = "eleveai-maths-6e-fraction-nombre"
 BADGE = "MATHS · 6e"
-TITRE = ["LES NOMBRES", "DÉCIMAUX"]
+TITRE = ["LES", "FRACTIONS"]
 TITRE_TAILLE = 84
-SOUS_TITRE = "lire · comparer · calculer"
+SOUS_TITRE = "lire · représenter · comparer"
 
 # ── Charte cahier ──────────────────────────────────────────────────────────────
 W, H = 1280, 720
@@ -66,9 +66,14 @@ def badge(d, x, y, txt):
 
 
 def accroche(d):
-    """3,45 décomposé, la virgule prolonge les rangs (spécifique décimaux)."""
-    d.text((360, 300), "3,45", font=police("ariblk.ttf", 96), fill=BLEU)
-    d.text((320, 424), "= 3 + 0,4 + 0,05", font=police("arialbd.ttf", 40), fill=VERT)
+    """3/4 dessiné : disque partagé en 4, 3 parts coloriées (spécifique fractions)."""
+    d.text((300, 296), "3/4", font=police("ariblk.ttf", 104), fill=BLEU)
+    cx, cy, r = 570, 384, 76
+    box = [cx - r, cy - r, cx + r, cy + r]
+    d.pieslice(box, start=-90, end=180, fill=BLEU)
+    d.ellipse(box, outline=NAVY, width=4)
+    d.line([cx - r, cy, cx + r, cy], fill=NAVY, width=3)
+    d.line([cx, cy - r, cx, cy + r], fill=NAVY, width=3)
 
 
 def signature(img, d):
