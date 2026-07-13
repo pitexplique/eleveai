@@ -73,7 +73,7 @@ eleveai-<matiere>-<classe>-<notionId en tirets>.mp4
 
 ## Miniature YouTube (style de la série)
 
-`python manim/miniature.py` génère un **1280×720** au style figé de la série (choisi le 13/07) : **« tableau d'école »** — fond vert ardoise + liseré clair, badge jaune `MATHS · <classe>`, titre blanc (Arial Black, 2 lignes), une accroche visuelle propre à la notion, Ti-Margo à droite, `eleveai.fr` en jaune. Sortie nommée comme la vidéo (même convention). Pour une nouvelle notion : changer le bloc `CONTENU` (nom, badge, titre) et la fonction `accroche()`.
+`python manim/miniature.py` génère un **1280×720** au style figé de la série (choisi le 13/07) : **« cahier »** — fond papier à carreaux clair, badge bleu nuit `MATHS · <classe>`, titre bleu nuit (Arial Black, 2 lignes) + sous-titre, une accroche visuelle propre à la notion (posée sur les carreaux), Ti-Margo à droite, et la **signature humaine** en bas à gauche : photo ronde de Frédéric (`public/images/avatar-frederic-Lacoste.jpg`) + « Frédéric, ton prof » + `eleveai.fr` (l'arme « humain vrai »). Sortie nommée comme la vidéo (même convention). Pour une nouvelle notion : changer le bloc `CONTENU` (nom, badge, titre, sous-titre) et la fonction `accroche()`.
 ⚠️ Miniature perso = **compte YouTube vérifié** (numéro de téléphone). Elle se change à tout moment, même après publication (Studio → Contenu → la vidéo → Miniature → Enregistrer).
 
 ## Conventions YouTube
