@@ -122,6 +122,14 @@ def acc_aire(d):
     d.text((330, 452), "Aire = L × l", font=police("arialbd.ttf", 42), fill=VERT)
 
 
+def acc_quadrilatere(d):
+    x0, y0, s = 400, 304, 150
+    d.rectangle([x0, y0, x0 + s, y0 + s], outline=BLEU, width=9)
+    d.line([(x0, y0 + 28), (x0 + 28, y0 + 28)], fill=NAVY, width=4)
+    d.line([(x0 + 28, y0), (x0 + 28, y0 + 28)], fill=NAVY, width=4)
+    d.text((x0 + s + 28, y0 + 48), "carré", font=police("ariblk.ttf", 44), fill=VERT)
+
+
 def acc_triangle(d):
     A, B, C = (392, 452), (632, 452), (508, 300)
     d.polygon([A, B, C], fill=BLEU)
@@ -201,6 +209,10 @@ NOTIONS = {
     "eleveai-maths-6e-triangle-figure": {
         "badge": "MATHS · 6e", "titre": ["LES", "TRIANGLES"], "taille": 82,
         "sous": "nommer · reconnaître · calculer", "accroche": acc_triangle,
+    },
+    "eleveai-maths-6e-quadrilatere-figure": {
+        "badge": "MATHS · 6e", "titre": ["LES", "QUADRILATÈRES"], "taille": 54,
+        "sous": "rectangle · losange · carré", "accroche": acc_quadrilatere,
     },
 }
 

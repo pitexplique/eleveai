@@ -50,6 +50,33 @@ const schemaQuadrilatere = (
   />
 );
 
+// Exemple 1 : le quadrilatère ABCD, ses côtés (pour repérer les côtés opposés).
+const schemaABCDcotes = (
+  <CanvasRenderer
+    figure={{
+      kind: "quadrilatere",
+      size: { width: 260, height: 200 },
+      points: { A: { x: 40, y: 50 }, B: { x: 225, y: 45 }, C: { x: 205, y: 165 }, D: { x: 55, y: 155 } },
+      display: { showPoints: true, showLabels: true, showSides: true, showDiagonals: false },
+      labels: { A: "A", B: "B", C: "C", D: "D" },
+    }}
+  />
+);
+
+// Exemple 2 : un losange (4 côtés codés égaux, aucun angle droit).
+const schemaLosange = (
+  <CanvasRenderer
+    figure={{
+      kind: "quadrilatere",
+      size: { width: 240, height: 210 },
+      points: { A: { x: 120, y: 25 }, B: { x: 220, y: 115 }, C: { x: 120, y: 205 }, D: { x: 20, y: 115 } },
+      display: { showPoints: true, showLabels: true, showSides: true, showDiagonals: false },
+      labels: { A: "A", B: "B", C: "C", D: "D" },
+      marks: { equalSides: [["AB", "BC"], ["BC", "CD"], ["CD", "DA"]] },
+    }}
+  />
+);
+
 const pieges = [
   "Confondre nature et dessin : un carré reste un carré même s'il est penché sur la feuille. Ce sont les codages (angles droits, côtés égaux) qui comptent, pas l'orientation.",
   "Croire qu'un carré et un rectangle sont deux figures qui n'ont rien à voir : un carré est aussi un rectangle, car il a 4 angles droits. C'est un rectangle particulier dont tous les côtés sont égaux.",
@@ -152,6 +179,7 @@ export const ficheQuadrilateres6e: FicheCoursData = {
       titre: "Nommer et repérer le vocabulaire",
       donnees: "On donne un quadrilatère dont les sommets sont A, B, C et D.",
       question: "Comment se nomme cette figure ? Quel côté est opposé au côté AB ?",
+      schema: schemaABCDcotes,
       solution:
         "On nomme la figure en donnant ses sommets dans l'ordre : c'est le quadrilatère ABCD. Le côté opposé à AB est celui qui ne le touche pas : c'est CD. Les côtés AB et BC, eux, se touchent au sommet B : ils sont consécutifs.",
     },
@@ -159,6 +187,7 @@ export const ficheQuadrilateres6e: FicheCoursData = {
       titre: "Quelle est la nature de cette figure ?",
       donnees: "Une figure a ses 4 côtés codés égaux, mais aucun angle droit n'est marqué.",
       question: "Quelle est la nature de cette figure ? Est-ce un carré ?",
+      schema: schemaLosange,
       solution:
         "Les 4 côtés sont égaux : la figure est donc un losange. Ce n'est pas forcément un carré, car aucun angle droit n'est codé. Pour affirmer « carré », il faudrait à la fois 4 côtés égaux ET 4 angles droits. Ici, il manque l'information sur les angles : on conclut « losange ».",
     },
