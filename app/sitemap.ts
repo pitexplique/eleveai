@@ -310,6 +310,14 @@ const VIDEOS_FICHES: Record<
         "Lire, écrire, comparer, décomposer et encadrer les nombres entiers, avec le tableau de numération et la droite graduée (6e).",
     },
   ],
+  "/fiches-cours/maths/6e/decimal-nombre": [
+    {
+      id: "hiFUDrIMZrU",
+      title: "Les nombres décimaux — Maths 6e — EleveAI",
+      description:
+        "Lire, comparer et calculer avec les nombres décimaux : le tableau de numération prolongé après la virgule et l'addition posée virgule sous virgule (6e).",
+    },
+  ],
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
