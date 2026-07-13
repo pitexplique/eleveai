@@ -287,7 +287,8 @@ export default function CoachIA() {
                 🦎 Bienvenue — ici, tu es chez toi&nbsp;!
               </p>
               <p className="mt-1 text-sm font-semibold leading-6 text-slate-600">
-                Choisis une matière puis une compétence, et entraîne-toi à ton
+                Chaque ligne ci-dessous lance une <strong>série d&apos;exercices
+                corrigés</strong>. Choisis une notion, clique, et entraîne-toi à ton
                 rythme, <strong>sans jugement</strong>. C&apos;est gratuit — et chaque
                 erreur t&apos;aide à progresser. 🌱
               </p>
@@ -296,13 +297,14 @@ export default function CoachIA() {
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
-                  Coach IA
+                  Coach IA · série d&apos;exercices
                 </p>
                 <h1 className={["mt-1 text-4xl font-bold tracking-tight sm:text-5xl", getMatiereColor(matiere)].join(" ")}>
                   {getMatiereTitle(matiere, classe)}
                 </h1>
                 <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
-                  Choisis une compétence, puis une micro-compétence pour t&apos;entraîner.
+                  Des exercices corrigés pour t&apos;entraîner : choisis une
+                  compétence, puis clique sur une ligne pour démarrer ta série.
                 </p>
               </div>
 
@@ -311,7 +313,7 @@ export default function CoachIA() {
                   {totalNotions} notions
                 </span>
                 <span className="rounded-full border border-green-300 bg-white px-4 py-2 text-sm font-semibold text-green-700">
-                  {totalMicros} micro-compétences
+                  {totalMicros} séries d&apos;exercices
                 </span>
                 {matiere === "francais" ? (
                   <span className="rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700">

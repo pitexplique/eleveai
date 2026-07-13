@@ -773,16 +773,17 @@ export default function AccueilPage({
           <div className="flex flex-col items-center gap-6 rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-6 lg:flex-row lg:justify-between">
             <div className="w-full text-center lg:flex-1 lg:text-left">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-cyan-200/80">
-                🧠 Coach IA
+                🧠 Coach IA · séries d&apos;exercices
               </p>
               <h2 className="mt-1 text-2xl font-black text-white">
-                Ton coach, dans chaque matière
+                Des exercices corrigés, dans chaque matière
               </h2>
               <p className="mt-1.5 text-sm font-semibold leading-snug text-white/75">
-                On t&apos;explique, on t&apos;encourage — à ton rythme, sans jugement. Du CP au Bac.
+                Choisis une notion et enchaîne les exercices, corrigés pas à pas —
+                à ton rythme, sans jugement. Du CP au Bac.
               </p>
               <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-black text-cyan-100">
-                🎯 Près de 2&nbsp;000 compétences à travailler, du CP au Bac
+                🎯 Près de 2&nbsp;000 séries d&apos;exercices, du CP au Bac
               </p>
               <div className="mt-4 flex flex-wrap justify-center gap-2 lg:justify-start">
                 {visibleSubjects.map((subject) => (
@@ -806,7 +807,7 @@ export default function AccueilPage({
             >
               <div className="flex items-center justify-between bg-gradient-to-r from-cyan-600 to-blue-600 px-3 py-2 text-white">
                 <span className="text-[11px] font-black">🧠 Coach IA · Maths 6e</span>
-                <span className="rounded-full bg-white/20 px-2 py-0.5 text-[9px] font-black">116 compétences</span>
+                <span className="rounded-full bg-white/20 px-2 py-0.5 text-[9px] font-black">116 séries d&apos;exos</span>
               </div>
               <div className="space-y-2.5 p-3">
                 {[
@@ -845,7 +846,7 @@ export default function AccueilPage({
                   </div>
                 ))}
                 <p className="text-center text-[10px] font-black text-cyan-700">
-                  + 110 micro-compétences · choisis, on t&apos;entraîne →
+                  + 110 séries d&apos;exercices · choisis, on t&apos;entraîne →
                 </p>
                 <p className="text-right text-[8px] font-black uppercase tracking-[0.15em] text-slate-300">
                   eleveai.fr
@@ -994,7 +995,7 @@ export default function AccueilPage({
             {/* Ordre voulu par Frédéric : le cœur d'abord — coach, parcours,
                cahiers — puis les rituels et le premium. */}
             {[
-              { emoji: "🧠", titre: "Le coach IA", desc: "On t'explique, on t'encourage — près de 2 000 compétences.", meta: "6 matières · CP → Bac", href: "/coach-ia/maths", badge: "gratuit", coach: true, nouveau: false },
+              { emoji: "🧠", titre: "Le coach IA", desc: "Des exercices corrigés pas à pas — près de 2 000 séries.", meta: "6 matières · CP → Bac", href: "/coach-ia/maths", badge: "gratuit", coach: true, nouveau: false },
               { emoji: "🛤️", titre: "Les parcours", desc: "Fais le point notion par notion, à ton rythme.", meta: "Bilan · toutes matières", href: "/parcours", badge: "gratuit", coach: false, nouveau: false },
               { emoji: "☀️", titre: "Les cahiers de vacances", desc: "Une page par jour, à imprimer — corrigés inclus.", meta: "L'été · CE2 → Bac +1", href: "/cahier-vacances", badge: "gratuit", coach: false, nouveau: false },
               { emoji: "📜", titre: "La dictée du jour", desc: "5 mots à écouter et écrire — 2 minutes, chaque matin.", meta: "Chaque jour · CP → 3e", href: "/dictee-du-jour", badge: "gratuit", coach: false, nouveau: false },

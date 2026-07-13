@@ -12,7 +12,7 @@ import { useAudience, type Audience } from "@/lib/useAudience";
 // ─── Nav structure ────────────────────────────────────────────────────────────
 
 const NAV_MATHS = [
-  { href: "/coach-ia/maths",   icon: "🧠", label: "Coach Maths IA",    desc: "Toutes notions, CP → Terminale" },
+  { href: "/coach-ia/maths",   icon: "🧠", label: "Coach Maths IA",    desc: "Séries d'exercices corrigés, CP → Terminale" },
   { href: "/parcours",         icon: "🛤️", label: "Parcours Maths",    desc: "Bilan de compétences personnalisé" },
   { href: "/coach-brevet",     icon: "📚", label: "Coach Brevet",       desc: "Sprint J−30, toutes les notions" },
   { href: "/coach-bac-spe",    icon: "🎓", label: "Coach Bac Spé",      desc: "Suites, fonctions, proba" },
@@ -28,19 +28,19 @@ const NAV_MATHS = [
 ];
 
 const NAV_FRANCAIS = [
-  { href: "/coach-ia/francais",  icon: "📖", label: "Coach Français IA", desc: "Grammaire, conjugaison, vocabulaire" },
+  { href: "/coach-ia/francais",  icon: "📖", label: "Coach Français IA", desc: "Séries d'exercices : grammaire, conjugaison, vocabulaire" },
   { href: "/parcours-francais",  icon: "🛤️", label: "Parcours Français", desc: "Bilan de compétences français" },
   { href: "/dico/francais/6e",   icon: "📒", label: "Dico Français 6e",  desc: "50 mots & gestes pour l'éval nationale" },
 ];
 
 const NAV_ANGLAIS = [
-  { href: "/coach-ia/english-maths", icon: "🇬🇧", label: "Coach English Maths", desc: "A1 → B2, vocabulaire maths en anglais" },
+  { href: "/coach-ia/english-maths", icon: "🇬🇧", label: "Coach English Maths", desc: "Séries d'exercices A1 → B2, maths en anglais" },
   { href: "/parcours-english-maths", icon: "🛤️", label: "Parcours English",     desc: "Bilan de niveau CECRL avec audio" },
   { href: "/english-maths",          icon: "📅", label: "Semaine des verbes",     desc: "Vocabulaire anglais de la semaine" },
 ];
 
 const NAV_ESPAGNOL = [
-  { href: "/coach-ia/espagnol",          icon: "🇪🇸", label: "Coach Espagnol IA",  desc: "A1 → B2, vocabulaire & expressions" },
+  { href: "/coach-ia/espagnol",          icon: "🇪🇸", label: "Coach Espagnol IA",  desc: "Séries d'exercices A1 → B2, vocabulaire & expressions" },
   { href: "/parcours-espagnol",          icon: "🛤️", label: "Parcours Espagnol",  desc: "Bilan de niveau CECRL avec audio"    },
   { href: "/coach-ia/espagnol?classe=a1",icon: "🌱",  label: "Niveau A1",          desc: "Chiffres, couleurs, famille, école"  },
   { href: "/coach-ia/espagnol?classe=a2",icon: "🏙️", label: "Niveau A2",          desc: "Vie quotidienne, voyage, métiers"    },
@@ -49,7 +49,7 @@ const NAV_ESPAGNOL = [
 ];
 
 const NAV_IA = [
-  { href: "/coach-ia/ia",          icon: "IA", label: "Coach IA", desc: "A1 -> C1, comprendre, utiliser, verifier, creer" },
+  { href: "/coach-ia/ia",          icon: "IA", label: "Coach IA", desc: "Séries d'exercices A1 -> C1, comprendre, utiliser, verifier, creer" },
   { href: "/parcours-ia",          icon: "🛤️", label: "Parcours IA", desc: "Bilan de culture et de reflexes IA, A1 -> C1" },
   { href: "/eval-pix-ia",          icon: "🎓", label: "Éval blanche Pix IA", desc: "Prépa éval nationale : 3 domaines, profil de compétences" },
   { href: "/fiches-cours/ia",      icon: "PDF", label: "Fiches de cours IA", desc: "Cours IA par domaine, à lire ou télécharger en PDF" },
@@ -63,7 +63,7 @@ const NAV_IA = [
 ];
 
 const NAV_ECONOMIE = [
-  { href: "/coach-ia/economie",                          icon: "💰", label: "Coach Économie IA",    desc: "Entreprise, marché, travail, fiscalité"  },
+  { href: "/coach-ia/economie",                          icon: "💰", label: "Coach Économie IA",    desc: "Séries d'exercices : entreprise, marché, travail, fiscalité"  },
   { href: "/coach-ia/economie?classe=eco-decouverte",    icon: "🌱", label: "Découverte",            desc: "Budget famille, argent, épargne"         },
   { href: "/coach-ia/economie?classe=eco-college",       icon: "🏫", label: "Collège",               desc: "Entreprise, marché, fiscalité, élections" },
   { href: "/coach-ia/economie?classe=eco-lycee",         icon: "🎓", label: "Lycée",                 desc: "Macro-économie, politiques publiques"    },

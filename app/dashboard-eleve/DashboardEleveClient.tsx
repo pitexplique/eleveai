@@ -422,6 +422,18 @@ export default function DashboardEleveClient() {
 
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <Link
+              href="/coach-ia/maths"
+              className="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-5 py-3 text-sm font-black text-white shadow-lg transition hover:bg-indigo-500"
+            >
+              🎯 Faire des exercices
+            </Link>
+            <p className="text-sm font-semibold text-slate-600">
+              Le Coach IA, ce sont des milliers d&apos;exercices corrigés, notion par notion.
+            </p>
+          </div>
+
+          <div className="mt-3 flex flex-wrap items-center gap-3">
+            <Link
               href="/votre-avis"
               className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-3 text-sm font-black text-white shadow-lg transition hover:bg-emerald-500"
             >
@@ -533,6 +545,40 @@ export default function DashboardEleveClient() {
           </div>
         ) : (
           <>
+            {totalActivites === 0 && (
+              <div className="mt-6 rounded-[2rem] border border-indigo-200 bg-white p-6 shadow-xl">
+                <h2 className="text-2xl font-black text-slate-900">
+                  🎯 Tu veux des exercices pour travailler ? C&apos;est ici !
+                </h2>
+                <p className="mt-2 max-w-3xl text-sm font-semibold leading-relaxed text-slate-600">
+                  Le Coach IA te propose des milliers d&apos;exercices corrigés,
+                  du CP à la Terminale. Choisis ta classe, une notion, et
+                  entraîne-toi à ton rythme — chaque exercice est corrigé pas à
+                  pas. Tes scores s&apos;afficheront ensuite sur cette page.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <Link
+                    href="/coach-ia/maths"
+                    className="rounded-2xl bg-indigo-600 px-5 py-3 text-sm font-black text-white shadow-lg transition hover:bg-indigo-500"
+                  >
+                    🔢 Exercices de maths
+                  </Link>
+                  <Link
+                    href="/coach-ia/francais"
+                    className="rounded-2xl bg-sky-600 px-5 py-3 text-sm font-black text-white shadow-lg transition hover:bg-sky-500"
+                  >
+                    📚 Exercices de français
+                  </Link>
+                  <Link
+                    href="/parcours"
+                    className="rounded-2xl bg-white px-5 py-3 text-sm font-black text-slate-800 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50"
+                  >
+                    🛤️ Faire mon bilan
+                  </Link>
+                </div>
+              </div>
+            )}
+
             {aReviser.length > 0 && (
               <div className="mt-6 rounded-[2rem] border border-amber-200 bg-white p-6 shadow-xl">
                 <h2 className="text-2xl font-black text-slate-900">
@@ -1003,9 +1049,9 @@ export default function DashboardEleveClient() {
               <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100 xl:col-span-2">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h2 className="text-2xl font-black">Coach Maths IA</h2>
+                    <h2 className="text-2xl font-black">Coach Maths IA — séries d&apos;exercices</h2>
                     <p className="mt-1 text-sm font-semibold text-slate-600">
-                      Historique des séances d&apos;entraînement.
+                      Historique de tes séries d&apos;exercices.
                     </p>
                   </div>
                   <Link

@@ -14,7 +14,7 @@ const outils = [
   {
     emoji: "🧠",
     title: "Coach Maths IA",
-    description: "Travaille une notion précise, notion par notion, avec des missions adaptées à ton niveau.",
+    description: "Une série d'exercices corrigés par notion, adaptés à ton niveau.",
     href: "/coach-ia/maths",
     color: "from-orange-400 to-red-500",
     badge: null,
