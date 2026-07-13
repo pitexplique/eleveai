@@ -13,6 +13,58 @@
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+// « Passer par la dizaine » MONTRÉ sur la droite graduée du coach : 47 + 8 en
+// deux sauts, 47 → 50 (bleu → orange) → 55 (vert). Même dessin que les exos.
+const droiteDizaine = (
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 45,
+      max: 57,
+      step: 1,
+      points: [
+        { value: 47, label: "47", color: "#38BDF8" },
+        { value: 50, label: "50", color: "#F97316" },
+        { value: 55, label: "55", color: "#00FF7F" },
+      ],
+      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
+    }}
+  />
+);
+
+// Multiplier par 5 = la moitié de × 10, montré en barre : 180 coupé en deux 90.
+const barreFois5 = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      total: "180",
+      parts: [
+        { label: "18 × 5", value: "90", color: "#00FF7F" },
+        { label: "18 × 5", value: "90", color: "#38BDF8" },
+      ],
+      questionLabel: "18 × 10 = 180, et 18 × 5 en est la moitié : 90.",
+      display: { showTotal: true, showPartLabels: true, showValues: true, showQuestion: true },
+    }}
+  />
+);
+
+// Rendre la monnaie = un complément, montré en barre : de 9 € à 10 €, il manque ?
+const barreMonnaie = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      total: "10 €",
+      parts: [
+        { label: "les achats", value: "9 €", color: "#38BDF8" },
+        { label: "rendu", unknown: true, color: "#F97316" },
+      ],
+      questionLabel: "On paie 9 €, on cherche ce qui manque pour aller à 10 €.",
+      display: { showTotal: true, showPartLabels: true, showValues: true, showQuestion: true },
+    }}
+  />
+);
 
 const pieges = [
   "Multiplier par 10 un nombre à virgule en ajoutant un zéro : 4,23 × 10 = 42,3 et pas 4,230. C'est la virgule qui se déplace.",
@@ -42,6 +94,11 @@ export const ficheCalculMental6e: FicheCoursData = {
   definition: {
     texte:
       "Calculer mentalement, c'est calculer de tête, sans poser l'opération sur le papier. On transforme le calcul en une suite d'étapes simples : on décompose les nombres, on passe par des nombres ronds, on s'appuie sur les tables que l'on connaît par cœur.",
+  },
+  figure: {
+    schema: droiteDizaine,
+    legende:
+      "47 + 8, en deux sauts : d'abord + 3 pour atteindre 50 (un nombre rond), puis + 5. On arrive à 55.",
   },
   proprietes: [
     {
@@ -112,6 +169,7 @@ export const ficheCalculMental6e: FicheCoursData = {
       titre: "Une addition en passant par la dizaine",
       donnees: "On veut calculer 47 + 8 de tête.",
       question: "Combien font 47 + 8 ?",
+      schema: droiteDizaine,
       solution:
         "Stratégie : on complète d'abord jusqu'à la dizaine. 47 + 3 = 50. Il restait 8 à ajouter et on en a déjà mis 3, il reste donc 5. 50 + 5 = 55. Donc 47 + 8 = 55.",
     },
@@ -119,8 +177,17 @@ export const ficheCalculMental6e: FicheCoursData = {
       titre: "Une multiplication par 5 sans souffrir",
       donnees: "On veut calculer 18 × 5 de tête.",
       question: "Combien font 18 × 5 ?",
+      schema: barreFois5,
       solution:
         "Stratégie : multiplier par 5, c'est multiplier par 10 puis prendre la moitié. 18 × 10 = 180. La moitié de 180 est 90. Donc 18 × 5 = 90.",
+    },
+    {
+      titre: "Rendre la monnaie",
+      donnees: "Tu achètes pour 9 € et tu paies avec un billet de 10 €.",
+      question: "Combien te rend-on ?",
+      schema: barreMonnaie,
+      solution:
+        "Stratégie : rendre la monnaie, c'est chercher le complément. De 9 à 10, il manque 1. On te rend donc 1 €.",
     },
   ],
   pieges,

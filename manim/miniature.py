@@ -97,6 +97,11 @@ def acc_pourcentage(d):
         d.rectangle([x, y, x + cs, y + cs], fill=(BLEU if i < 25 else PAPIER), outline=CARREAU_FORT, width=1)
 
 
+def acc_calcul_mental(d):
+    d.text((330, 300), "47 + 8", font=police("ariblk.ttf", 92), fill=BLEU)
+    d.text((300, 424), "= 50 + 5 = 55", font=police("arialbd.ttf", 40), fill=VERT)
+
+
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
     "eleveai-maths-6e-entier-calcul-pose": {
@@ -122,6 +127,10 @@ NOTIONS = {
     "eleveai-maths-6e-pourcentage-nombre": {
         "badge": "MATHS · 6e", "titre": ["LES", "POURCENTAGES"], "taille": 78,
         "sous": "comprendre · calculer", "accroche": acc_pourcentage,
+    },
+    "eleveai-maths-6e-entier-calcul-mental": {
+        "badge": "MATHS · 6e", "titre": ["LE CALCUL", "MENTAL"], "taille": 84,
+        "sous": "calculer vite, sans calculatrice", "accroche": acc_calcul_mental,
     },
 }
 
