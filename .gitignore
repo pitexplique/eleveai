@@ -43,3 +43,7 @@ docs/
 *.tsbuildinfo
 next-env.d.ts
 node_modules
+
+# manim : les rendus et caches restent en local (les videos vivent sur YouTube)
+manim/**/media/
+__pycache__/
