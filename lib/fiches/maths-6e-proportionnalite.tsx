@@ -1,11 +1,48 @@
 // ─── Fiche de cours : la proportionnalité (6e) ─────────────────────────────────
-// Fiche « en blocs » : toute la matière de la page vit ici, la page et les
-// flashcards ne font que la rendre. Contenu repris de l'ancienne page écrite
-// à la main, enrichi des blocs Définition et Propriétés (format canonique
-// réclamé par les profs).
+// Fiche « en blocs » alignée sur la banque du coach
+// lib/tutor-v4/questionBank/6e/maths/proportionnalite.bank.ts
+// (notionId prop_proportionnalite).
+// Refaite au standard « montrer, pas raconter » (retour Frédéric 13/07) : la
+// proportionnalité MONTRÉE dans le tableau du coach (coefficient, cellule « ? »,
+// passage par l'unité) plutôt que racontée. Propriétés = une ligne chacune.
+//
+// Micro-compétences couvertes :
+// - prop_reconnaitre → propriété « Reconnaître », exemple « Reconnaître » (table ×2),
+//                      piège 1, entraînement 1
+// - prop_coeff       → definition, figure (table cahiers, coefficient), propriété
+//                      « Le coefficient », formule
+// - prop_direct      → exemple « Compléter » (4e proportionnelle), entraînement 2
+// - prop_table       → exemple « Compléter » (tableau), usages 3, entraînement 3
+// - prop_unite       → propriété « Passer par l'unité », methode, exemple « Recette »,
+//                      usages 2, entraînement 3
+// - prop_defi        → entraînement 4 (vitesse) + slide « exercice flash »
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+// Le tableau de proportionnalité du coach (le même que dans les exercices) :
+// l'élève VOIT les deux lignes et le « ? » à trouver.
+function tableauProp(
+  rowLabels: string[],
+  values: string[][],
+  highlight?: { row: number; col: number }[]
+) {
+  return (
+    <CanvasRenderer
+      figure={{
+        kind: "tableau_proportionnalite",
+        rows: values.length,
+        cols: values[0].length,
+        rowLabels,
+        values,
+        missing: [],
+        highlightedCells: highlight,
+        display: { showRowLabels: true, showColLabels: false, showGrid: true },
+      }}
+    />
+  );
+}
 
 const pieges = [
   "Croire qu'ajouter le même nombre suffit : c'est multiplier, pas additionner.",
@@ -14,8 +51,8 @@ const pieges = [
 ];
 
 const aRetenir = [
-  "Proportionnel signifie : on multiplie toujours par le même nombre.",
-  "Le passage à l'unité est la méthode la plus simple en 6e.",
+  "Proportionnel = on multiplie toujours par le même nombre (le coefficient).",
+  "Le passage par l'unité est la méthode la plus simple en 6e.",
   "Une addition identique ne prouve pas une proportionnalité.",
 ];
 
@@ -26,118 +63,135 @@ export const ficheProportionnalite6e: FicheCoursData = {
   notion: "prop-proportionnalite",
   titre: "La proportionnalité",
   accroche:
-    "Une situation est proportionnelle quand on passe d'une grandeur à l'autre en multipliant toujours par le même nombre.",
+    "Une situation est proportionnelle quand on passe d'une grandeur à l'autre en multipliant toujours par le même nombre : le coefficient.",
   identite: [
-    { label: "Prérequis", valeur: "Multiplication, division" },
-    { label: "Méthode clé", valeur: "Passage par l'unité" },
-    { label: "Astuce", valeur: "Toujours x le même nombre" },
+    { label: "Mots clés", valeur: "Coefficient, tableau, unité" },
+    { label: "Le secret", valeur: "Toujours × le même nombre" },
+    { label: "Méthode reine", valeur: "Le passage par l'unité" },
   ],
   definition: {
     texte:
-      "Deux grandeurs sont proportionnelles quand on passe des valeurs de l'une aux valeurs de l'autre en multipliant toujours par le même nombre. Ce nombre s'appelle le coefficient de proportionnalité.",
+      "Deux grandeurs sont proportionnelles quand on passe des valeurs de l'une à celles de l'autre en multipliant toujours par le même nombre. Ce nombre s'appelle le coefficient de proportionnalité.",
+  },
+  figure: {
+    schema: tableauProp(
+      ["Cahiers", "Prix (€)"],
+      [
+        ["1", "3", "5"],
+        ["2", "6", "10"],
+      ],
+      [
+        { row: 0, col: 0 },
+        { row: 1, col: 0 },
+      ]
+    ),
+    legende: "D'une ligne à l'autre, on multiplie toujours par 2 : le coefficient.",
   },
   proprietes: [
     {
-      titre: "Le coefficient de proportionnalité",
-      texte:
-        "Dans un tableau de proportionnalité, on passe de la première ligne à la deuxième en multipliant toujours par le même nombre : le coefficient. Exemple : 1 cahier coûte 2 euros, le coefficient est 2.",
+      titre: "Le coefficient",
+      texte: "On passe d'une ligne à l'autre en multipliant par le même nombre (ici × 2).",
     },
     {
-      titre: "L'additivité (linéarité)",
-      texte:
-        "On peut ajouter deux colonnes d'un tableau de proportionnalité : si 2 stylos coûtent 4 euros et 3 stylos coûtent 6 euros, alors 5 stylos coûtent 4 + 6 = 10 euros.",
+      titre: "Reconnaître",
+      texte: "Si une grandeur double, l'autre double ; si elle triple, l'autre triple.",
     },
     {
-      titre: "Le passage par l'unité",
-      texte:
-        "En cherchant d'abord la valeur pour 1 unité, on peut calculer la valeur pour n'importe quelle quantité : il suffit de multiplier.",
+      titre: "Passer par l'unité",
+      texte: "On cherche la valeur pour 1, puis on multiplie par la quantité voulue.",
     },
   ],
   reel: {
     texte:
-      "La proportionnalité est partout : recettes de cuisine, échelles des cartes et des plans, conversions, prix au kilo, vitesse, ou encore les mélanges (sirop, peinture).",
+      "La proportionnalité est partout : recettes, échelles de cartes, prix au kilo, vitesse, mélanges (sirop, peinture), conversions.",
   },
   historique: {
     texte:
-      "On utilise les proportions depuis l'Antiquité. Les Égyptiens et les Grecs s'en servaient pour leurs plans de construction et pour le commerce. La fameuse « règle de trois » est enseignée depuis des siècles.",
+      "On utilise les proportions depuis l'Antiquité : Égyptiens et Grecs s'en servaient pour construire et commercer. La fameuse « règle de trois » est enseignée depuis des siècles.",
   },
   formule: {
     contexte: "Tableau de proportionnalité",
-    expression: "valeur d'arrivée = coefficient x valeur de départ",
-    legende:
-      "Exemple : 1 cahier coûte 2 euros, le coefficient est 2 — donc 3 cahiers coûtent 6 euros et 5 cahiers coûtent 10 euros.",
+    expression: "valeur d'arrivée = coefficient × valeur de départ",
+    legende: "1 cahier = 2 € (coefficient 2), donc 3 cahiers = 6 € et 5 cahiers = 10 €.",
+    schema: tableauProp(
+      ["Cahiers", "Prix (€)"],
+      [
+        ["3", "5"],
+        ["6", "10"],
+      ]
+    ),
   },
   methode: [
-    {
-      titre: "Étape 1",
-      texte:
-        "Lire les deux grandeurs : nombre d'objets, prix, masse, distance, durée...",
-    },
-    {
-      titre: "Étape 2",
-      texte: "Trouver le prix, la masse ou la distance pour 1 unité.",
-    },
-    {
-      titre: "Étape 3",
-      texte: "Multiplier cette valeur par la quantité demandée.",
-    },
+    { titre: "Je lis", texte: "Les deux grandeurs : objets et prix, personnes et masse, temps et distance…" },
+    { titre: "Je reviens à 1", texte: "Je cherche la valeur pour 1 unité (une division)." },
+    { titre: "Je multiplie", texte: "Je multiplie cette valeur par la quantité demandée." },
   ],
   usages: [
-    {
-      titre: "Reconnaître",
-      detail:
-        "Si on double une quantité, l'autre double aussi. Si on triple, l'autre triple aussi.",
-    },
-    {
-      titre: "Revenir à l'unité",
-      detail:
-        "On cherche la valeur pour 1, puis on multiplie par la quantité demandée.",
-    },
-    {
-      titre: "Vérifier",
-      detail:
-        "On vérifie que le même multiplicateur fonctionne dans tout le tableau.",
-    },
+    { titre: "Reconnaître", detail: "On double une quantité → l'autre double aussi." },
+    { titre: "Revenir à l'unité", detail: "Valeur pour 1, puis × la quantité : 1 cahier = 2 €, 5 cahiers = 10 €." },
+    { titre: "Compléter un tableau", detail: "On trouve la case « ? » avec le coefficient ou l'unité." },
   ],
   exemples: [
     {
-      titre: "Prix de cahiers",
-      donnees: "3 cahiers coûtent 6 euros.",
-      question: "Combien coûtent 5 cahiers ?",
-      solution:
-        "1 cahier coûte 2 euros, donc 5 cahiers coûtent 5 x 2 = 10 euros.",
+      titre: "Reconnaître",
+      donnees: "1 cahier → 2 €, 2 cahiers → 4 €, 3 cahiers → 6 €.",
+      question: "Est-ce proportionnel ?",
+      schema: tableauProp(
+        ["Cahiers", "Prix (€)"],
+        [
+          ["1", "2", "3"],
+          ["2", "4", "6"],
+        ]
+      ),
+      solution: "On multiplie toujours par 2 d'une ligne à l'autre : oui, c'est proportionnel.",
     },
     {
-      titre: "Recette",
+      titre: "Compléter un tableau",
+      donnees: "3 cahiers coûtent 6 €.",
+      question: "Combien coûtent 5 cahiers ?",
+      schema: tableauProp(
+        ["Cahiers", "Prix (€)"],
+        [
+          ["3", "5"],
+          ["6", "?"],
+        ],
+        [{ row: 1, col: 1 }]
+      ),
+      solution: "1 cahier = 6 ÷ 3 = 2 €. Donc 5 cahiers = 5 × 2 = 10 €.",
+    },
+    {
+      titre: "Recette (passage par l'unité)",
       donnees: "Pour 4 personnes, il faut 200 g de riz.",
-      question: "Combien faut-il de riz pour 6 personnes ?",
-      solution:
-        "1 personne correspond à 50 g, donc 6 personnes correspondent à 6 x 50 = 300 g.",
+      question: "Combien pour 6 personnes ?",
+      schema: tableauProp(
+        ["Personnes", "Riz (g)"],
+        [
+          ["4", "6"],
+          ["200", "?"],
+        ],
+        [{ row: 1, col: 1 }]
+      ),
+      solution: "1 personne = 200 ÷ 4 = 50 g. Donc 6 personnes = 6 × 50 = 300 g.",
     },
   ],
   pieges,
   aRetenir,
   entrainement: [
     {
-      question: "2 stylos coûtent 4 euros. Combien coûtent 7 stylos ?",
-      correction:
-        "1 stylo coûte 4 / 2 = 2 euros, donc 7 stylos coûtent 7 x 2 = 14 euros.",
+      question: "2 stylos coûtent 4 €. Combien coûtent 7 stylos ?",
+      correction: "1 stylo = 4 ÷ 2 = 2 €, donc 7 stylos = 7 × 2 = 14 €.",
     },
     {
-      question: "5 tickets coûtent 15 euros. Combien coûtent 3 tickets ?",
-      correction:
-        "1 ticket coûte 15 / 5 = 3 euros, donc 3 tickets coûtent 3 x 3 = 9 euros.",
+      question: "5 tickets coûtent 15 €. Combien coûtent 3 tickets ?",
+      correction: "1 ticket = 15 ÷ 5 = 3 €, donc 3 tickets = 3 × 3 = 9 €.",
     },
     {
-      question:
-        "Pour 10 crêpes, il faut 250 g de farine. Combien faut-il pour 20 crêpes ?",
-      correction:
-        "20 crêpes, c'est 2 x 10 crêpes, donc il faut 2 x 250 = 500 g de farine.",
+      question: "Pour 10 crêpes, il faut 250 g de farine. Combien pour 20 crêpes ?",
+      correction: "20 crêpes, c'est 2 × 10 crêpes, donc 2 × 250 = 500 g de farine.",
     },
     {
-      question:
-        "Un cycliste parcourt 12 km en 30 min à vitesse régulière. Quelle distance parcourt-il en 1 h ?",
-      correction: "1 h = 2 x 30 min, donc il parcourt 2 x 12 = 24 km.",
+      question: "Un cycliste parcourt 12 km en 30 min à vitesse régulière. Quelle distance en 1 h ?",
+      correction: "1 h = 2 × 30 min, donc il parcourt 2 × 12 = 24 km.",
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",
@@ -150,10 +204,9 @@ export const slidesProportionnalite6e: ClasseSlide[] = [
     section: {
       type: "objectif",
       phrase: "Reconnaître une situation proportionnelle",
-      sousPhrase:
-        "On vérifie si les deux grandeurs changent toujours avec le même multiplicateur.",
+      sousPhrase: "On vérifie si les deux grandeurs changent toujours avec le même multiplicateur.",
       encadre: {
-        titre: "Question à poser",
+        titre: "La question",
         texte: "Si je multiplie une ligne, est-ce que l'autre est multipliée pareil ?",
       },
     },
@@ -166,14 +219,12 @@ export const slidesProportionnalite6e: ClasseSlide[] = [
       gauche: {
         variante: "info",
         titre: "Au quotidien",
-        contenu:
-          "Recettes de cuisine, échelles des cartes et des plans, conversions, prix au kilo, vitesse, mélanges (sirop, peinture).",
+        contenu: "Recettes, échelles de cartes, prix au kilo, vitesse, mélanges (sirop, peinture).",
       },
       droite: {
         variante: "histoire",
         titre: "Le savais-tu ?",
-        contenu:
-          "On utilise les proportions depuis l'Antiquité. La fameuse « règle de trois » est enseignée depuis des siècles.",
+        contenu: "On utilise les proportions depuis l'Antiquité. La « règle de trois » est enseignée depuis des siècles.",
       },
     },
   },
@@ -182,10 +233,7 @@ export const slidesProportionnalite6e: ClasseSlide[] = [
     badge: "Méthode",
     section: {
       type: "cartes",
-      cartes: ficheProportionnalite6e.usages.map((u) => ({
-        titre: u.titre,
-        texte: u.detail,
-      })),
+      cartes: ficheProportionnalite6e.usages.map((u) => ({ titre: u.titre, texte: u.detail })),
     },
   },
   {
@@ -201,9 +249,9 @@ export const slidesProportionnalite6e: ClasseSlide[] = [
     badge: "Prix de cahiers",
     section: {
       type: "exemple",
-      enonce: "3 cahiers coûtent 6 euros.",
+      enonce: "3 cahiers coûtent 6 €.",
       question: "Combien coûtent 5 cahiers ?",
-      correction: "1 cahier = 2 euros, donc 5 cahiers = 10 euros.",
+      correction: "1 cahier = 2 €, donc 5 cahiers = 5 × 2 = 10 €.",
     },
   },
   {
@@ -212,8 +260,8 @@ export const slidesProportionnalite6e: ClasseSlide[] = [
     section: {
       type: "exemple",
       enonce: "Pour 4 personnes, il faut 200 g de riz.",
-      question: "Combien faut-il de riz pour 6 personnes ?",
-      correction: "1 personne = 50 g, donc 6 personnes = 6 x 50 = 300 g.",
+      question: "Combien pour 6 personnes ?",
+      correction: "1 personne = 50 g, donc 6 personnes = 6 × 50 = 300 g.",
     },
   },
   {
@@ -250,10 +298,10 @@ export const slidesProportionnalite6e: ClasseSlide[] = [
     badge: "Exercice flash",
     section: {
       type: "exercice",
-      enonce: "2 stylos coûtent 4 euros.",
+      enonce: "2 stylos coûtent 4 €.",
       question: "Combien coûtent 7 stylos ?",
       indice: "Cherche d'abord le prix d'un stylo.",
-      correction: "1 stylo = 2 euros, donc 7 stylos = 14 euros.",
+      correction: "1 stylo = 2 €, donc 7 stylos = 14 €.",
     },
   },
 ];
