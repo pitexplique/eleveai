@@ -15,6 +15,50 @@
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+// Un assemblage de petits cubes unités (canvas solide_3d du coach) : le volume
+// se MONTRE en comptant les cubes, exactement comme dans les exercices.
+function cubesPave(longueur: number, largeur: number, hauteur: number) {
+  const cubes: Array<{ x: number; y: number; z: number }> = [];
+  for (let z = 0; z < hauteur; z++)
+    for (let y = 0; y < largeur; y++)
+      for (let x = 0; x < longueur; x++) cubes.push({ x, y, z });
+  return cubes;
+}
+
+function assemblage(longueur: number, largeur: number, hauteur: number) {
+  return (
+    <CanvasRenderer
+      figure={{
+        kind: "solide_3d",
+        solide: "assemblage_cubes",
+        cubes: cubesPave(longueur, largeur, hauteur),
+        display: { showLabels: true },
+      }}
+    />
+  );
+}
+
+// Le pavé droit avec ses trois dimensions nommées (pour la formule L × l × h).
+function paveLabelle(
+  longueur: number,
+  largeur: number,
+  hauteur: number,
+  labels: { longueur?: string; largeur?: string; hauteur?: string },
+) {
+  return (
+    <CanvasRenderer
+      figure={{
+        kind: "solide_3d",
+        solide: "pave_droit",
+        dimensions: { longueur, largeur, hauteur },
+        labels,
+        display: { showLabels: true, showDimensions: true },
+      }}
+    />
+  );
+}
 
 const pieges = [
   "Confondre cm² (une aire, une surface plate) et cm³ (un volume, de la place en 3 dimensions).",
@@ -28,48 +72,14 @@ const aRetenir = [
   "Quand on assemble deux solides, on additionne leurs volumes ; quand on coupe puis recolle, le volume ne change pas.",
 ];
 
-const schemaPave = (
-  <svg
-    viewBox="0 0 320 190"
-    className="h-auto w-full"
-    role="img"
-    aria-label="Pavé droit formé de petits cubes : 4 en longueur, 2 en largeur, 3 en hauteur"
-  >
-    {/* Face avant : 4 colonnes × 3 rangées de cubes */}
-    <g stroke="#0ea5e9" strokeWidth="2.5" fill="rgba(14,165,233,0.12)">
-      <rect x="40" y="60" width="160" height="90" />
-      <line x1="80" y1="60" x2="80" y2="150" />
-      <line x1="120" y1="60" x2="120" y2="150" />
-      <line x1="160" y1="60" x2="160" y2="150" />
-      <line x1="40" y1="90" x2="200" y2="90" />
-      <line x1="40" y1="120" x2="200" y2="120" />
-    </g>
-    {/* Face du dessus */}
-    <g stroke="#0ea5e9" strokeWidth="2.5" fill="rgba(14,165,233,0.2)">
-      <path d="M40 60 L70 34 L230 34 L200 60 Z" />
-      <line x1="110" y1="34" x2="80" y2="60" />
-      <line x1="150" y1="34" x2="120" y2="60" />
-      <line x1="190" y1="34" x2="160" y2="60" />
-      <line x1="55" y1="47" x2="215" y2="47" />
-    </g>
-    {/* Face de droite */}
-    <g stroke="#0ea5e9" strokeWidth="2.5" fill="rgba(14,165,233,0.28)">
-      <path d="M200 60 L230 34 L230 124 L200 150 Z" />
-      <line x1="215" y1="47" x2="215" y2="137" />
-      <line x1="200" y1="90" x2="230" y2="64" />
-      <line x1="200" y1="120" x2="230" y2="94" />
-    </g>
-    <text x="120" y="172" fill="#334155" fontSize="15" fontWeight="800" textAnchor="middle">
-      longueur
-    </text>
-    <text x="32" y="108" fill="#334155" fontSize="15" fontWeight="800" textAnchor="end">
-      hauteur
-    </text>
-    <text x="252" y="44" fill="#334155" fontSize="15" fontWeight="800">
-      largeur
-    </text>
-  </svg>
-);
+const paveDefinition = assemblage(4, 2, 2);
+const paveFormule = paveLabelle(4, 2, 3, {
+  longueur: "longueur",
+  largeur: "largeur",
+  hauteur: "hauteur",
+});
+const paveTroisCouches = assemblage(5, 1, 3);
+const paveBoite = assemblage(2, 3, 2);
 
 export const ficheVolumes6e: FicheCoursData = {
   matiere: "maths",
@@ -87,6 +97,10 @@ export const ficheVolumes6e: FicheCoursData = {
   definition: {
     texte:
       "Le volume d'un solide est la place qu'il occupe dans l'espace. On le mesure en unités cubes : on compte combien de petits cubes identiques remplissent le solide. Un cube de 1 cm de côté est le cube unité : son volume est 1 cm³.",
+  },
+  figure: {
+    schema: paveDefinition,
+    legende: "Le volume = le nombre de petits cubes qui remplissent le solide : on les compte, couche par couche.",
   },
   proprietes: [
     {
@@ -117,7 +131,7 @@ export const ficheVolumes6e: FicheCoursData = {
     contexte: "Pavé droit rempli de cubes unités (les défis de la fiche)",
     expression: "Volume = longueur × largeur × hauteur",
     legende: "On compte les cubes d'une couche, puis on multiplie par le nombre de couches.",
-    schema: schemaPave,
+    schema: paveFormule,
   },
   methode: [
     {
@@ -158,6 +172,7 @@ export const ficheVolumes6e: FicheCoursData = {
       titre: "Compter les cubes d'un pavé",
       donnees: "Un pavé est formé de 3 couches de 5 cubes unités chacune.",
       question: "Quel est son volume en cubes unités ?",
+      schema: paveTroisCouches,
       solution:
         "Chaque couche contient 5 cubes et il y a 3 couches identiques. On calcule 3 × 5 = 15. Le volume du pavé est 15 cubes unités, soit 15 cm³ si chaque cube vaut 1 cm³.",
     },
@@ -165,6 +180,7 @@ export const ficheVolumes6e: FicheCoursData = {
       titre: "Remplir une boîte (défi)",
       donnees: "Une boîte a pour dimensions 2 cm, 3 cm et 2 cm.",
       question: "Combien de cubes de 1 cm³ faut-il pour la remplir entièrement ?",
+      schema: paveBoite,
       solution:
         "On calcule le volume de la boîte : longueur × largeur × hauteur = 2 × 3 × 2 = 12. La boîte a un volume de 12 cm³, il faut donc 12 cubes de 1 cm³ pour la remplir.",
     },

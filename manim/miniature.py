@@ -122,6 +122,16 @@ def acc_aire(d):
     d.text((330, 452), "Aire = L × l", font=police("arialbd.ttf", 42), fill=VERT)
 
 
+def acc_volume(d):
+    ox, oy, s, dp = 420, 420, 80, 40
+    A, B, C, D = (ox, oy - s), (ox + s, oy - s), (ox + s, oy), (ox, oy)
+    Ab, Bb, Cb = (ox + dp, oy - s - dp), (ox + s + dp, oy - s - dp), (ox + s + dp, oy - dp)
+    d.polygon([A, B, Bb, Ab], fill=(120, 175, 235), outline=NAVY)   # dessus
+    d.polygon([B, C, Cb, Bb], fill=(24, 70, 130), outline=NAVY)     # droite
+    d.polygon([A, B, C, D], fill=BLEU, outline=NAVY)                # face
+    d.text((300, 452), "V = L × l × h", font=police("arialbd.ttf", 40), fill=VERT)
+
+
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
     "eleveai-maths-6e-entier-calcul-pose": {
@@ -163,6 +173,10 @@ NOTIONS = {
     "eleveai-maths-6e-aire-surface": {
         "badge": "MATHS · 6e", "titre": ["LES", "AIRES"], "taille": 84,
         "sous": "compter · multiplier · découper", "accroche": acc_aire,
+    },
+    "eleveai-maths-6e-volume-solide": {
+        "badge": "MATHS · 6e", "titre": ["LES", "VOLUMES"], "taille": 84,
+        "sous": "compter les cubes", "accroche": acc_volume,
     },
 }
 
