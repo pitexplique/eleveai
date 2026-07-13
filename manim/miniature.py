@@ -19,11 +19,11 @@ AVATAR = RACINE / "public" / "images" / "avatar-frederic-Lacoste.jpg"
 SORTIE = RACINE / "manim" / "miniatures"
 
 # ── CONTENU (à changer d'une notion à l'autre) ─────────────────────────────────
-NOM = "eleveai-maths-6e-entier-nombre"
+NOM = "eleveai-maths-6e-decimal-nombre"
 BADGE = "MATHS · 6e"
-TITRE = ["LES NOMBRES", "ENTIERS"]
+TITRE = ["LES NOMBRES", "DÉCIMAUX"]
 TITRE_TAILLE = 84
-SOUS_TITRE = "lire · comparer · encadrer"
+SOUS_TITRE = "lire · comparer · calculer"
 
 # ── Charte cahier ──────────────────────────────────────────────────────────────
 W, H = 1280, 720
@@ -66,9 +66,9 @@ def badge(d, x, y, txt):
 
 
 def accroche(d):
-    """4 273 décomposé selon les rangs (spécifique nombres entiers)."""
-    d.text((360, 300), "4 273", font=police("ariblk.ttf", 96), fill=BLEU)
-    d.text((300, 424), "4 000 + 200 + 70 + 3", font=police("arialbd.ttf", 40), fill=VERT)
+    """3,45 décomposé, la virgule prolonge les rangs (spécifique décimaux)."""
+    d.text((360, 300), "3,45", font=police("ariblk.ttf", 96), fill=BLEU)
+    d.text((320, 424), "= 3 + 0,4 + 0,05", font=police("arialbd.ttf", 40), fill=VERT)
 
 
 def signature(img, d):
