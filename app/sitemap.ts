@@ -326,6 +326,14 @@ const VIDEOS_FICHES: Record<
         "Lire, représenter, comparer une fraction et calculer la fraction d'une quantité : disque, barres et comparaison dessinés pas à pas (6e).",
     },
   ],
+  "/fiches-cours/maths/6e/prop-proportionnalite": [
+    {
+      id: "a2zNZzxuo4M",
+      title: "La proportionnalité — Maths 6e — EleveAI",
+      description:
+        "Reconnaître une situation proportionnelle, le coefficient et le passage par l'unité, avec le tableau de proportionnalité dessiné pas à pas (6e).",
+    },
+  ],
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
