@@ -19,11 +19,11 @@ AVATAR = RACINE / "public" / "images" / "avatar-frederic-Lacoste.jpg"
 SORTIE = RACINE / "manim" / "miniatures"
 
 # ── CONTENU (à changer d'une notion à l'autre) ─────────────────────────────────
-NOM = "eleveai-maths-6e-fraction-nombre"
+NOM = "eleveai-maths-6e-prop-proportionnalite"
 BADGE = "MATHS · 6e"
-TITRE = ["LES", "FRACTIONS"]
-TITRE_TAILLE = 84
-SOUS_TITRE = "lire · représenter · comparer"
+TITRE = ["LA", "PROPORTIONNALITÉ"]
+TITRE_TAILLE = 60
+SOUS_TITRE = "reconnaître · le coefficient"
 
 # ── Charte cahier ──────────────────────────────────────────────────────────────
 W, H = 1280, 720
@@ -66,14 +66,16 @@ def badge(d, x, y, txt):
 
 
 def accroche(d):
-    """3/4 dessiné : disque partagé en 4, 3 parts coloriées (spécifique fractions)."""
-    d.text((300, 296), "3/4", font=police("ariblk.ttf", 104), fill=BLEU)
-    cx, cy, r = 570, 384, 76
-    box = [cx - r, cy - r, cx + r, cy + r]
-    d.pieslice(box, start=-90, end=180, fill=BLEU)
-    d.ellipse(box, outline=NAVY, width=4)
-    d.line([cx - r, cy, cx + r, cy], fill=NAVY, width=3)
-    d.line([cx, cy - r, cx, cy + r], fill=NAVY, width=3)
+    """Mini tableau de proportionnalité, coefficient × 2 (spécifique prop)."""
+    x0, y0, cw, ch = 300, 336, 70, 58
+    f = police("ariblk.ttf", 34)
+    for r, (vals, col) in enumerate([(["1", "3", "5"], BLEU), (["2", "6", "10"], NAVY)]):
+        for c, v in enumerate(vals):
+            x, y = x0 + c * cw, y0 + r * ch
+            d.rectangle([x, y, x + cw, y + ch], outline=NAVY, width=3)
+            w = d.textlength(v, font=f)
+            d.text((x + (cw - w) / 2, y + 10), v, font=f, fill=col)
+    d.text((x0 + 3 * cw + 20, y0 + 22), "× 2", font=police("ariblk.ttf", 40), fill=VERT)
 
 
 def signature(img, d):
