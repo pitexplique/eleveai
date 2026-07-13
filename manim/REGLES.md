@@ -18,9 +18,13 @@ Cette procédure est la jumelle de la procédure fiches : même point de départ
    from mascotte import MascotteMargouillat
    ```
 4. **Rendre en brouillon** pour vérifier : `-ql` (480p). Puis **rendu final** : `-qh` (1080p60).
+   Le `-o` impose le **nom de fichier de sortie** (convention `eleveai-<matiere>-<classe>-<notionId en tirets>`, sans accent ni espace — voir « Conventions » plus bas) :
    ```
-   python -m manim render -qh manim/scripts/<classe>/<notionId>.py <ClasseScene> --media_dir manim/scripts/<classe>/media
+   python -m manim render -qh manim/scripts/<classe>/<notionId>.py <ClasseScene> \
+     -o eleveai-<matiere>-<classe>-<notionId-en-tirets> \
+     --media_dir manim/scripts/<classe>/media
    ```
+   Ex. 6e calcul posé → `-o eleveai-maths-6e-entier-calcul-pose` → `eleveai-maths-6e-entier-calcul-pose.mp4`.
 5. **Enregistrer la voix** (voir « Workflow voix » ci-dessous).
 6. **Monter** dans Clipchamp (inclus dans Windows 11) : vidéo + audio, calage sur le « top », export 1080p.
 7. **Publier sur YouTube** (chaîne eleveai) — voir conventions ci-dessous.
@@ -56,6 +60,16 @@ C'est un enfant qui regarde. La règle des fiches (retour Frédéric du 13/07) s
 2. Enregistrer au **téléphone** (app Dictaphone) en la regardant : mode avion, pièce calme, téléphone à ~20 cm. Dire **« top »** pile quand le titre d'accueil apparaît → point de synchro.
 3. Transférer (câble ou Drive) → **Clipchamp** : glisser vidéo + audio, caler sur le « top », couper le « top », exporter.
 4. Si la voix déborde sur un écran : **on ne recoupe pas l'audio** — on allonge le `wait()` dans le script et on re-rend. La vidéo s'adapte à la voix, jamais l'inverse.
+
+## Convention de nommage du fichier vidéo
+
+```
+eleveai-<matiere>-<classe>-<notionId en tirets>.mp4
+```
+- **Toujours** ce format, même si le fichier vit déjà dans un dossier `6e/` : le nom doit rester auto-explicatif hors du repo (Téléchargements, Clipchamp, téléphone, YouTube).
+- **Aucun accent, aucun espace, aucune majuscule** (`posé`→`pose`) : ça casse sur YouTube/URL/Windows.
+- **Coller au notionId** (le nom de la banque), pas à une version raccourcie : c'est la colonne vertébrale banque → fiche → vidéo → coach. Ex. notion `entier_calcul_pose` → `eleveai-maths-6e-entier-calcul-pose.mp4`.
+- Obtenu directement au rendu via `-o` (voir étape 4).
 
 ## Conventions YouTube
 
