@@ -1,13 +1,18 @@
-# Générateur de miniatures YouTube EleveAI (1280x720).
-# STYLE DE LA SÉRIE (choisi le 13/07) : « cahier » — fond papier à carreaux clair,
-# badge bleu nuit, titre bleu nuit (Arial Black), addition posée sur les carreaux,
-# Ti-Margo à droite, et la SIGNATURE HUMAINE en bas à gauche : photo ronde de
-# Frédéric + eleveai.fr (le « prof vrai », pas une marque anonyme).
-# Pour une nouvelle notion : changer le bloc « CONTENU » et la fonction accroche().
+# Générateur de miniatures YouTube EleveAI (1280x720) — EN LOT.
+# STYLE FIGÉ « cahier » : fond papier à carreaux clair, badge bleu nuit, titre
+# bleu nuit (Arial Black), accroche visuelle propre à la notion, Ti-Margo à
+# droite, SIGNATURE HUMAINE bas-gauche (photo ronde de Frédéric + eleveai.fr).
 #
-# Usage : python manim/miniature.py  → manim/miniatures/<nom>.png
+# REGISTRE : chaque notion = une entrée dans NOTIONS (badge, titre, taille,
+# sous-titre, fonction accroche). Ajouter une notion = ajouter une entrée + sa
+# fonction accroche.
+#
+# Usage :
+#   python manim/miniature.py            → génère TOUTES les miniatures
+#   python manim/miniature.py <nom>      → génère seulement celle-là (préfixe suffit)
 
 import os
+import sys
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -17,13 +22,6 @@ FONTS = Path("C:/Windows/Fonts")
 TI_MARGO = RACINE / "public" / "cahier-vacances" / "ti-margo.png"
 AVATAR = RACINE / "public" / "images" / "avatar-frederic-Lacoste.jpg"
 SORTIE = RACINE / "manim" / "miniatures"
-
-# ── CONTENU (à changer d'une notion à l'autre) ─────────────────────────────────
-NOM = "eleveai-maths-6e-pourcentage-nombre"
-BADGE = "MATHS · 6e"
-TITRE = ["LES", "POURCENTAGES"]
-TITRE_TAILLE = 78
-SOUS_TITRE = "comprendre · calculer"
 
 # ── Charte cahier ──────────────────────────────────────────────────────────────
 W, H = 1280, 720
@@ -44,6 +42,91 @@ def a_droite(d, xr, y, txt, f, fill):
     d.text((xr - d.textlength(txt, font=f), y), txt, font=f, fill=fill)
 
 
+def centre(d, cx, y, txt, f, fill):
+    d.text((cx - d.textlength(txt, font=f) / 2, y), txt, font=f, fill=fill)
+
+
+# ── Accroches par notion (le dessin propre à chaque cours) ─────────────────────
+def acc_calcul_pose(d):
+    f = police("arialbd.ttf", 62)
+    xg, xd, yh = 476, 700, 322
+    d.text((xg, yh + 74), "+", font=f, fill=BLEU)
+    a_droite(d, xd, yh, "475", f, BLEU)
+    a_droite(d, xd, yh + 74, "286", f, BLEU)
+    d.rounded_rectangle([xg, yh + 156, xd, yh + 168], radius=6, fill=JAUNE)
+    a_droite(d, xd, yh + 178, "761", f, VERT)
+
+
+def acc_entier(d):
+    d.text((360, 300), "4 273", font=police("ariblk.ttf", 96), fill=BLEU)
+    d.text((300, 424), "= 4 000 + 200 + 70 + 3", font=police("arialbd.ttf", 38), fill=VERT)
+
+
+def acc_decimal(d):
+    d.text((360, 300), "3,45", font=police("ariblk.ttf", 96), fill=BLEU)
+    d.text((320, 424), "= 3 + 0,4 + 0,05", font=police("arialbd.ttf", 40), fill=VERT)
+
+
+def acc_fraction(d):
+    d.text((300, 296), "3/4", font=police("ariblk.ttf", 104), fill=BLEU)
+    cx, cy, r = 570, 384, 76
+    box = [cx - r, cy - r, cx + r, cy + r]
+    d.pieslice(box, start=-90, end=180, fill=BLEU)
+    d.ellipse(box, outline=NAVY, width=4)
+    d.line([cx - r, cy, cx + r, cy], fill=NAVY, width=3)
+    d.line([cx, cy - r, cx, cy + r], fill=NAVY, width=3)
+
+
+def acc_proportionnalite(d):
+    x0, y0, cw, ch = 300, 336, 70, 58
+    f = police("ariblk.ttf", 34)
+    for r, (vals, col) in enumerate([(["1", "3", "5"], BLEU), (["2", "6", "10"], NAVY)]):
+        for c, v in enumerate(vals):
+            x, y = x0 + c * cw, y0 + r * ch
+            d.rectangle([x, y, x + cw, y + ch], outline=NAVY, width=3)
+            centre(d, x + cw / 2, y + 10, v, f, col)
+    d.text((x0 + 3 * cw + 20, y0 + 22), "× 2", font=police("ariblk.ttf", 40), fill=VERT)
+
+
+def acc_pourcentage(d):
+    d.text((296, 320), "25 %", font=police("ariblk.ttf", 92), fill=BLEU)
+    gx, gy, cs = 566, 336, 15
+    for i in range(100):
+        r, c = i // 10, i % 10
+        x, y = gx + c * cs, gy + r * cs
+        d.rectangle([x, y, x + cs, y + cs], fill=(BLEU if i < 25 else PAPIER), outline=CARREAU_FORT, width=1)
+
+
+# ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
+NOTIONS = {
+    "eleveai-maths-6e-entier-calcul-pose": {
+        "badge": "MATHS · 6e", "titre": ["LE CALCUL", "POSÉ"], "taille": 84,
+        "sous": "les 4 opérations, pas à pas", "accroche": acc_calcul_pose,
+    },
+    "eleveai-maths-6e-entier-nombre": {
+        "badge": "MATHS · 6e", "titre": ["LES NOMBRES", "ENTIERS"], "taille": 84,
+        "sous": "lire · comparer · encadrer", "accroche": acc_entier,
+    },
+    "eleveai-maths-6e-decimal-nombre": {
+        "badge": "MATHS · 6e", "titre": ["LES NOMBRES", "DÉCIMAUX"], "taille": 84,
+        "sous": "lire · comparer · calculer", "accroche": acc_decimal,
+    },
+    "eleveai-maths-6e-fraction-nombre": {
+        "badge": "MATHS · 6e", "titre": ["LES", "FRACTIONS"], "taille": 84,
+        "sous": "lire · représenter · comparer", "accroche": acc_fraction,
+    },
+    "eleveai-maths-6e-prop-proportionnalite": {
+        "badge": "MATHS · 6e", "titre": ["LA", "PROPORTIONNALITÉ"], "taille": 60,
+        "sous": "reconnaître · le coefficient", "accroche": acc_proportionnalite,
+    },
+    "eleveai-maths-6e-pourcentage-nombre": {
+        "badge": "MATHS · 6e", "titre": ["LES", "POURCENTAGES"], "taille": 78,
+        "sous": "comprendre · calculer", "accroche": acc_pourcentage,
+    },
+}
+
+
+# ── Rendu ──────────────────────────────────────────────────────────────────────
 def fond():
     img = Image.new("RGB", (W, H), PAPIER)
     d = ImageDraw.Draw(img)
@@ -65,18 +148,7 @@ def badge(d, x, y, txt):
     d.text((x + 26, y + 11), txt, font=f, fill=(255, 255, 255))
 
 
-def accroche(d):
-    """« 25 % » + une grille de 100 carreaux, 25 coloriés (spécifique pourcentages)."""
-    d.text((296, 320), "25 %", font=police("ariblk.ttf", 92), fill=BLEU)
-    gx, gy, cs = 566, 336, 15
-    for i in range(100):
-        r, c = i // 10, i % 10
-        x, y = gx + c * cs, gy + r * cs
-        d.rectangle([x, y, x + cs, y + cs], fill=(BLEU if i < 25 else PAPIER), outline=CARREAU_FORT, width=1)
-
-
 def signature(img, d):
-    """Photo ronde de Frédéric + eleveai.fr, en bas à gauche."""
     diam, x, y = 128, 60, 556
     av = Image.open(AVATAR).convert("RGBA")
     s = min(av.size)
@@ -86,13 +158,12 @@ def signature(img, d):
     ImageDraw.Draw(masque).ellipse([0, 0, diam, diam], fill=255)
     img.paste(av, (x, y), masque)
     d.ellipse([x - 4, y - 4, x + diam + 4, y + diam + 4], outline=NAVY, width=6)
-
     tx = x + diam + 24
     d.text((tx, y + 16), "Frédéric, ton prof", font=police("arialbd.ttf", 34), fill=NAVY)
     d.text((tx, y + 62), "eleveai.fr", font=police("ariblk.ttf", 40), fill=BLEU)
 
 
-def construire():
+def construire(nom, spec):
     img = fond()
     d = ImageDraw.Draw(img)
 
@@ -102,20 +173,28 @@ def construire():
     m = m.resize((w, h), Image.LANCZOS)
     img.paste(m, (W - w - 4, H - h - 6), m)
 
-    badge(d, 58, 48, BADGE)
-    ft = police("ariblk.ttf", TITRE_TAILLE)
-    d.text((56, 116), TITRE[0], font=ft, fill=NAVY)
-    d.text((56, 208), TITRE[1], font=ft, fill=NAVY)
-    d.text((58, 300), SOUS_TITRE, font=police("arialbd.ttf", 32), fill=BLEU)
+    badge(d, 58, 48, spec["badge"])
+    ft = police("ariblk.ttf", spec["taille"])
+    d.text((56, 116), spec["titre"][0], font=ft, fill=NAVY)
+    d.text((56, 208), spec["titre"][1], font=ft, fill=NAVY)
+    d.text((58, 300), spec["sous"], font=police("arialbd.ttf", 32), fill=BLEU)
 
-    accroche(d)
+    spec["accroche"](d)
     signature(img, d)
 
     os.makedirs(SORTIE, exist_ok=True)
-    chemin = SORTIE / f"{NOM}.png"
+    chemin = SORTIE / f"{nom}.png"
     img.save(chemin, "PNG")
     print(chemin)
 
 
+def main():
+    filtre = sys.argv[1] if len(sys.argv) > 1 else None
+    for nom, spec in NOTIONS.items():
+        if filtre and filtre not in nom:
+            continue
+        construire(nom, spec)
+
+
 if __name__ == "__main__":
-    construire()
+    main()

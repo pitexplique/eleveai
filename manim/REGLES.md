@@ -25,22 +25,29 @@ Cette procédure est la jumelle de la procédure fiches : même point de départ
      --media_dir manim/scripts/<classe>/media
    ```
    Ex. 6e calcul posé → `-o eleveai-maths-6e-entier-calcul-pose` → `eleveai-maths-6e-entier-calcul-pose.mp4`.
-5. **Enregistrer la voix** (voir « Workflow voix » ci-dessous).
-6. **Monter** dans Clipchamp (inclus dans Windows 11) : vidéo + audio, calage sur le « top », export 1080p.
-7. **Publier sur YouTube** (chaîne eleveai) — voir conventions ci-dessous.
-8. **Coller l'URL dans `/admin/ressources`** (clé = notionId) → vérifier que le badge « ▶ Vidéo » s'allume dans le coach sur cette notion.
+5. **Générer la miniature** : `python manim/miniature.py <nom>` (registre, voir plus bas).
+6. **Publier sur YouTube** (chaîne eleveai) — le mp4 est **muet + texte**, publiable tel quel (voir « Muet + texte » ci-dessous). Voir conventions YouTube.
+7. **Coller l'URL dans `/admin/ressources`** (clé = notionId) → badge « ▶ Vidéo » dans le coach. Ajouter l'entrée `VIDEOS_FICHES` du sitemap (`app/sitemap.ts`).
+8. **Voix (OPTIONNELLE, plus tard)** : uniquement sur les notions phares, ou par les élèves. Voir « Workflow voix ». On n'attend PAS la voix pour publier.
 
 ---
 
-## Standard qualité : MONTRER, pas raconter
+## Standard qualité : MONTRER, pas raconter — et « PLUS C'EST VISUEL, MIEUX C'EST »
 
-C'est un enfant qui regarde. La règle des fiches (retour Frédéric du 13/07) s'applique encore plus fort en vidéo :
+C'est un enfant qui regarde. Principe directeur de Frédéric (13/07) : **par défaut, ON DESSINE**, même là où une phrase suffirait.
 
-- **Les objets bougent, le texte se tait.** Les chiffres s'alignent, la retenue monte, la fraction se construit. Jamais un paragraphe à l'écran.
-- **Texte à l'écran ≤ 6 mots par ligne** (hors calculs). Les explications complètes, c'est la VOIX qui les porte.
-- **Un seul concept par écran.** Si un écran veut dire deux choses, c'est deux écrans.
-- **Les `wait()` sont généreux** (1 à 2,5 s) : ils laissent la place à la voix et au regard de l'élève.
-- **Durée cible : 1 à 2 minutes** (muet). Au-delà, découper en deux vidéos.
+- **Les objets bougent, ils portent le sens.** Les chiffres s'alignent, la retenue monte, la grille se colorie, les barres se comparent. Jamais un paragraphe figé.
+- **Un visuel par écran, et un visuel pour CHAQUE micro-compétence** quand elle se dessine (ne pas regrouper 2 micros dans un seul dessin). **Le défi a SON dessin**, pas seulement du texte.
+- **Un seul concept par écran.** Deux idées = deux écrans.
+- **Les `wait()` sont généreux** (1 à 2,5 s) : le temps de lire et de regarder.
+- **Durée cible : 1 à 2 minutes.** Au-delà, découper en deux vidéos.
+
+### Muet + texte (le mode par défaut) — ⚠️ RÈGLE INSISTÉE PAR FRÉDÉRIC
+Les vidéos sont **muettes** (choix du 13/07 pour produire en volume sans goulot voix). **Comme il n'y a AUCUN son, le texte à l'écran doit tout expliquer, en détail et simplement. On n'est PAS pressé** — mieux vaut une vidéo un peu plus longue mais limpide qu'une vidéo rapide et sèche.
+- **Le texte porte TOUTE l'explication.** À chaque étape : ce qu'on fait ET pourquoi, en mots simples d'enfant (ex. non pas « 4 + 7 = 11 » seul, mais « 4 + 7 = 11, j'écris 1 et je retiens 1 »).
+- **Détaillé mais simple** : phrases courtes, une idée par ligne, vocabulaire d'un élève de la classe visée. Chaque écran doit se comprendre **seul, sans le son**.
+- **Prendre son temps** : `wait()` généreux (2 à 3 s, plus sur les écrans denses) pour laisser lire. La durée n'est pas un problème ; la clarté prime. Si la notion est riche, faire 2 vidéos plutôt qu'une trop dense.
+- La voix reste possible **par-dessus, plus tard** (notions phares ou voix d'élèves) sans rien refaire.
 
 ## Charte visuelle (constante, jamais renégociée par vidéo)
 
@@ -54,7 +61,9 @@ C'est un enfant qui regarde. La règle des fiches (retour Frédéric du 13/07) s
   5. À retenir (3 lignes max) + signature `SIGNATURE`
 - **Fond noir** (défaut Manim), textes blancs, français partout.
 
-## Workflow voix (téléphone)
+## Workflow voix (téléphone) — OPTIONNEL, seulement notions phares / voix d'élèves
+
+⚠️ Par défaut on publie **muet + texte** (voir plus haut). Ce workflow ne sert que si on veut ajouter une voix a posteriori.
 
 1. Rendre la vidéo **muette** et la regarder une fois en entier.
 2. Enregistrer au **téléphone** (app Dictaphone) en la regardant : mode avion, pièce calme, téléphone à ~20 cm. Dire **« top »** pile quand le titre d'accueil apparaît → point de synchro.
@@ -71,10 +80,25 @@ eleveai-<matiere>-<classe>-<notionId en tirets>.mp4
 - **Coller au notionId** (le nom de la banque), pas à une version raccourcie : c'est la colonne vertébrale banque → fiche → vidéo → coach. Ex. notion `entier_calcul_pose` → `eleveai-maths-6e-entier-calcul-pose.mp4`.
 - Obtenu directement au rendu via `-o` (voir étape 4).
 
-## Miniature YouTube (style de la série)
+## Miniature YouTube (style « cahier », REGISTRE)
 
-`python manim/miniature.py` génère un **1280×720** au style figé de la série (choisi le 13/07) : **« cahier »** — fond papier à carreaux clair, badge bleu nuit `MATHS · <classe>`, titre bleu nuit (Arial Black, 2 lignes) + sous-titre, une accroche visuelle propre à la notion (posée sur les carreaux), Ti-Margo à droite, et la **signature humaine** en bas à gauche : photo ronde de Frédéric (`public/images/avatar-frederic-Lacoste.jpg`) + « Frédéric, ton prof » + `eleveai.fr` (l'arme « humain vrai »). Sortie nommée comme la vidéo (même convention). Pour une nouvelle notion : changer le bloc `CONTENU` (nom, badge, titre, sous-titre) et la fonction `accroche()`.
+`manim/miniature.py` = un **registre** : chaque notion est une entrée `NOTIONS[<nom>]` (badge, titre, taille du titre, sous-titre, fonction `accroche`). Style figé « cahier » : fond papier à carreaux clair, badge bleu nuit `MATHS · <classe>`, titre bleu nuit (Arial Black), sous-titre, **accroche visuelle propre à la notion**, Ti-Margo à droite, **signature humaine** bas-gauche (photo ronde de Frédéric `public/images/avatar-frederic-Lacoste.jpg` + « Frédéric, ton prof » + `eleveai.fr`).
+- `python manim/miniature.py` → génère **toutes** les miniatures du registre.
+- `python manim/miniature.py <préfixe>` → seulement celles dont le nom contient `<préfixe>`.
+- **Ajouter une notion** = ajouter une fonction `acc_xxx(d)` + une entrée dans `NOTIONS`.
 ⚠️ Miniature perso = **compte YouTube vérifié** (numéro de téléphone). Elle se change à tout moment, même après publication (Studio → Contenu → la vidéo → Miniature → Enregistrer).
+
+## Production EN LOT (l'échelle — décidé le 13/07)
+
+Une seule personne (Frédéric) doit couvrir toutes les classes. On sépare **la machine** (auto) de **l'humain** (upload). L'IA génère et rend des **classes entières** ; Frédéric ne garde que l'upload YouTube + un SQL.
+
+1. **Générer une classe** (IA, en une passe) : lire toutes les banques `lib/tutor-v4/questionBank/<classe>/maths/*.bank.ts` → écrire toutes les fiches `lib/fiches/maths-<classe>-<notion>.tsx` + tous les scripts `manim/scripts/<classe>/<notionId>.py` + les entrées miniature (`NOTIONS`).
+2. **Rendre en lot** (la nuit) : `python manim/render_all.py <classe>` rend TOUTES les vidéos de la classe en 1080p60 au bon nom. `--draft` pour vérifier vite, `<filtre>` pour une sous-partie.
+3. **Miniatures en lot** : `python manim/miniature.py`.
+4. **Upload** (Frédéric, depuis le téléphone possible) : publier les mp4 muets sur YouTube (playlist par classe).
+5. **Brancher** : une entrée `VIDEOS_FICHES` par vidéo dans `app/sitemap.ts`, + une ligne `notion_ressources` par vidéo (`/admin/ressources` ou un INSERT SQL groupé).
+
+**Prioriser par la data** : ne pas pré-produire 180 vidéos. Faire les notions les plus cherchées/utilisées, laisser le SEO + les stats du coach guider l'ordre.
 
 ## Conventions YouTube
 
@@ -87,7 +111,9 @@ eleveai-<matiere>-<classe>-<notionId en tirets>.mp4
 
 - [ ] Tous les `microId` de la banque couverts (mapping en tête du script)
 - [ ] Mêmes exemples que la fiche
+- [ ] **Un visuel par écran + le défi dessiné** (« plus c'est visuel, mieux c'est »)
+- [ ] **Muet + texte** : le texte à l'écran porte l'explication (étapes + pourquoi)
 - [ ] Margouillat sur chaque écran, couleurs de `charte.py`
-- [ ] Rendu 1080p60 (`-qh`), voix calée, pas de coupure audio
-- [ ] Titre/description/playlist YouTube conformes
-- [ ] URL collée dans `/admin/ressources` + badge ▶ vérifié dans le coach
+- [ ] Rendu 1080p60 (`-qh` via `render_all.py`) + miniature générée
+- [ ] Titre/description YouTube conformes (sans chevrons `< >`), playlist par classe
+- [ ] URL dans `/admin/ressources` (badge ▶) + entrée `VIDEOS_FICHES` du sitemap
