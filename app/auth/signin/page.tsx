@@ -22,12 +22,31 @@ const PROFILE_OPTIONS: { value: Exclude<UserEmailType, "admin">; label: string }
   { value: "perso", label: "Adulte / personnel" },
 ];
 
+// Classes proposées à l'inscription d'un élève indépendant (users_email.classe).
+// Mêmes valeurs que la whitelist SQL users_email_classe.sql et que les niveaux
+// gérés par le coach / l'accueil adaptatif.
+const CLASSE_OPTIONS: { value: string; label: string }[] = [
+  { value: "cp", label: "CP" },
+  { value: "ce1", label: "CE1" },
+  { value: "ce2", label: "CE2" },
+  { value: "cm1", label: "CM1" },
+  { value: "cm2", label: "CM2" },
+  { value: "6e", label: "6e" },
+  { value: "5e", label: "5e" },
+  { value: "4e", label: "4e" },
+  { value: "3e", label: "3e" },
+  { value: "seconde", label: "Seconde" },
+  { value: "premiere-spe", label: "Première spé" },
+  { value: "terminale-spe", label: "Terminale spé" },
+];
+
 type UserEmailProfile = {
   id: string;
   auth_user_id: string;
   email: string;
   nom: string | null;
   type_utilisateur: string | null;
+  classe: string | null;
 };
 
 type PendingAuth = {
@@ -59,6 +78,7 @@ export default function SignInPage() {
   const [pendingAuth, setPendingAuth] = useState<PendingAuth | null>(null);
   const [nom, setNom] = useState("");
   const [typeUtilisateur, setTypeUtilisateur] = useState<UserEmailType>("perso");
+  const [classe, setClasse] = useState("");
   const [accepteCgv, setAccepteCgv] = useState(false);
   const [accepteNewsletter, setAccepteNewsletter] = useState(false);
 
@@ -128,6 +148,7 @@ export default function SignInPage() {
       code_eleve: getEmailUserCode(profile),
       nom: profile.nom ?? profile.email,
       type_utilisateur: type,
+      classe: profile.classe ?? null,
       token: token ?? null,
     });
 
@@ -314,7 +335,7 @@ export default function SignInPage() {
       const authUser = data.session.user;
       const { data: profile, error: profileError } = await supabase
         .from("users_email")
-        .select("id, auth_user_id, email, nom, type_utilisateur")
+        .select("id, auth_user_id, email, nom, type_utilisateur, classe")
         .eq("auth_user_id", authUser.id)
         .maybeSingle();
 
@@ -373,6 +394,10 @@ export default function SignInPage() {
       setErrorMsg("Merci de renseigner votre nom.");
       return;
     }
+    if (typeUtilisateur === "eleve" && !classe) {
+      setErrorMsg("Merci de choisir ta classe (pour te recommander les bons exercices).");
+      return;
+    }
     if (!accepteCgv) {
       setErrorMsg("Vous devez accepter les CGV pour créer votre compte.");
       return;
@@ -389,13 +414,15 @@ export default function SignInPage() {
         type_utilisateur: typeUtilisateur,
         accepte_cgv: accepteCgv,
         accepte_newsletter: accepteNewsletter,
+        // Classe uniquement pour un profil élève : les autres profils n'en ont pas.
+        classe: typeUtilisateur === "eleve" && classe ? classe : null,
       };
       if (fromCahier) payload.source = "cahier-vacances";
 
       const { data: profile, error: upsertError } = await supabase
         .from("users_email")
         .upsert(payload, { onConflict: "email" })
-        .select("id, auth_user_id, email, nom, type_utilisateur")
+        .select("id, auth_user_id, email, nom, type_utilisateur, classe")
         .single();
 
       if (upsertError || !profile) {
@@ -703,6 +730,40 @@ export default function SignInPage() {
                           );
                         })}
                       </div>
+                    </div>
+                  )}
+
+                  {/* Classe : demandée seulement aux élèves, pour que l'accueil
+                      et le coach recommandent directement le bon niveau
+                      (comme les comptes établissement). */}
+                  {typeUtilisateur === "eleve" && (
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-slate-800">
+                        Ta classe
+                      </label>
+                      <div className="grid grid-cols-4 gap-1.5">
+                        {CLASSE_OPTIONS.map((option) => {
+                          const active = classe === option.value;
+                          return (
+                            <button
+                              key={option.value}
+                              type="button"
+                              onClick={() => setClasse(option.value)}
+                              disabled={loading}
+                              className={`rounded-lg border px-2 py-1.5 text-center text-xs font-semibold transition disabled:cursor-not-allowed disabled:opacity-60 ${
+                                active
+                                  ? "border-emerald-500 bg-white text-emerald-800"
+                                  : "border-emerald-200 bg-white/60 text-slate-700 hover:border-emerald-400"
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                      <p className="text-[11px] text-slate-500">
+                        Pour te proposer directement les exercices de ton niveau.
+                      </p>
                     </div>
                   )}
 

@@ -4,6 +4,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { useEleve } from "@/context/EleveContext";
 
 type Profil = {
   id: number;
@@ -11,6 +12,7 @@ type Profil = {
   email: string;
   nom: string | null;
   type_utilisateur: string | null;
+  classe: string | null;
   accepte_cgv: boolean | null;
   accepte_newsletter: boolean | null;
   created_at: string;
@@ -20,9 +22,27 @@ type Profil = {
 const ADMIN_EMAIL = "eleveai974@gmail.com";
 const PUBLIC_TYPES = ["prof", "eleve", "parent", "perso"] as const;
 
+// Mêmes valeurs que la whitelist SQL users_email_classe.sql et le formulaire
+// d'inscription (app/auth/signin).
+const CLASSE_OPTIONS: { value: string; label: string }[] = [
+  { value: "cp", label: "CP" },
+  { value: "ce1", label: "CE1" },
+  { value: "ce2", label: "CE2" },
+  { value: "cm1", label: "CM1" },
+  { value: "cm2", label: "CM2" },
+  { value: "6e", label: "6e" },
+  { value: "5e", label: "5e" },
+  { value: "4e", label: "4e" },
+  { value: "3e", label: "3e" },
+  { value: "seconde", label: "Seconde" },
+  { value: "premiere-spe", label: "Première spé" },
+  { value: "terminale-spe", label: "Terminale spé" },
+];
+
 export default function ComptePage() {
   const supabase = useMemo(() => createClient(), []);
   const router = useRouter();
+  const { eleve, login } = useEleve();
 
   const [loading, setLoading] = useState(true);
   const [profil, setProfil] = useState<Profil | null>(null);
@@ -47,7 +67,7 @@ export default function ComptePage() {
       const { data, error } = await supabase
         .from("users_email")
         .select(
-          "id, auth_user_id, email, nom, type_utilisateur, accepte_cgv, accepte_newsletter, created_at, updated_at"
+          "id, auth_user_id, email, nom, type_utilisateur, classe, accepte_cgv, accepte_newsletter, created_at, updated_at"
         )
         .eq("auth_user_id", user.id)
         .maybeSingle();
@@ -96,6 +116,29 @@ export default function ComptePage() {
     }
 
     setProfil({ ...profil, type_utilisateur: type, updated_at: new Date().toISOString() });
+    setSaving(false);
+  }
+
+  async function saveClasse(nextClasse: string) {
+    if (!profil) return;
+    setSaving(true);
+    setErrorMsg(null);
+
+    const { error } = await supabase
+      .from("users_email")
+      .update({ classe: nextClasse, updated_at: new Date().toISOString() })
+      .eq("id", profil.id);
+
+    if (error) {
+      setErrorMsg(error.message || "Impossible d’enregistrer.");
+      setSaving(false);
+      return;
+    }
+
+    setProfil({ ...profil, classe: nextClasse, updated_at: new Date().toISOString() });
+    // Répercute tout de suite sur la session locale : l'accueil et le coach
+    // recommandent le bon niveau sans attendre une reconnexion.
+    if (eleve) login({ ...eleve, classe: nextClasse });
     setSaving(false);
   }
 
@@ -157,6 +200,34 @@ export default function ComptePage() {
                     (Tu pourras raffiner plus tard : élève invité / établissement / admin, etc.)
                   </p>
                 </div>
+
+                {profil.type_utilisateur === "eleve" && (
+                  <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4">
+                    <p className="text-xs text-slate-400">Ma classe</p>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {CLASSE_OPTIONS.map((option) => {
+                        const active = profil.classe === option.value;
+                        return (
+                          <button
+                            key={option.value}
+                            onClick={() => saveClasse(option.value)}
+                            disabled={saving}
+                            className={`rounded-full px-3 py-1 text-xs font-semibold border transition ${
+                              active
+                                ? "border-emerald-400/60 bg-emerald-500/10 text-emerald-200"
+                                : "border-slate-700 text-slate-200 hover:bg-slate-900"
+                            } disabled:opacity-60 disabled:cursor-not-allowed`}
+                          >
+                            {option.label}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <p className="mt-2 text-[11px] text-slate-400">
+                      Sert à te recommander directement les exercices de ton niveau.
+                    </p>
+                  </div>
+                )}
 
                 <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4">
                   <p className="text-xs text-slate-400">Consentements</p>
