@@ -15,6 +15,9 @@ export type FicheExemple = {
   donnees: string;
   question: string;
   solution: string;
+  /** Figure optionnelle (ex. opération posée dessinée) — pour MONTRER plutôt
+   *  que faire lire. Rendue au-dessus de la solution. */
+  schema?: ReactNode;
 };
 export type FicheExercice = { question: string; correction: string };
 

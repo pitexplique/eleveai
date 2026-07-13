@@ -1,28 +1,63 @@
 // ─── Fiche de cours : le calcul posé (6e) ──────────────────────────────────────
 // Fiche « en blocs » alignée sur la banque du coach
 // lib/tutor-v4/questionBank/6e/maths/calcul-pose.bank.ts (notionId entier_calcul_pose).
+// Refaite pour un élève de 6e (retour Frédéric) : PEU de lecture, les 4
+// opérations MONTRÉES en colonnes (canvas du coach) plutôt que racontées.
 //
 // Micro-compétences couvertes :
-// - entier_addition_posee        → usages (poser une addition), exemple 1, entraînement 1
-// - entier_soustraction_posee    → usages (poser une soustraction), entraînement 2
-// - entier_multiplication_posee  → usages (poser une multiplication), entraînement 3
-// - entier_division_posee        → usages (poser une division), exemple 2, entraînement 4
-// - entier_calcul_verifier       → propriété « vérifier », méthode réflexe 3, pièges
-// - entier_calcul_pose_defi      → bloc réel (choisir la bonne opération), entraînement 4
+// - entier_addition_posee        → exemple « addition » (dessiné), entraînement 1, figure
+// - entier_soustraction_posee    → exemple « soustraction » (dessiné), entraînement 2
+// - entier_multiplication_posee  → exemple « multiplication » (dessiné), entraînement 3
+// - entier_division_posee        → exemple « division » (dessiné), entraînement 4
+// - entier_calcul_verifier       → propriété « Je vérifie », méthode, pièges
+// - entier_calcul_pose_defi      → usages (choisir l'opération), entraînement 4
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+// Une opération posée dessinée par le moteur du coach : l'élève VOIT les
+// colonnes alignées (le même dessin que dans ses exercices).
+function pose(
+  operation: "addition" | "soustraction" | "multiplication",
+  numbers: string[],
+  result: string
+) {
+  return (
+    <CanvasRenderer
+      figure={{
+        kind: "calcul_pose",
+        operation,
+        numbers,
+        result,
+        display: { showResult: true },
+      }}
+    />
+  );
+}
+
+const poseDivision = (
+  <CanvasRenderer
+    figure={{
+      kind: "calcul_pose",
+      operation: "division",
+      numbers: ["58", "7"],
+      division: { dividende: "58", diviseur: "7", quotient: "8", reste: "2" },
+      display: { showResult: true },
+    }}
+  />
+);
 
 const pieges = [
   "Oublier une retenue : tout le reste du calcul devient faux.",
-  "Mal aligner les chiffres : on additionne des unités avec des dizaines.",
-  "Dans une division, garder un reste plus grand que le diviseur.",
+  "Mal aligner les chiffres : on additionne alors une unité avec une dizaine.",
+  "Garder un reste plus grand que le diviseur dans une division.",
 ];
 
 const aRetenir = [
-  "On aligne toujours les chiffres de même rang : unités sous unités.",
-  "On calcule colonne par colonne, en reportant les retenues.",
-  "On vérifie : opération inverse, ou dividende = diviseur × quotient + reste.",
+  "On aligne les chiffres de même rang : unités sous unités.",
+  "On calcule colonne par colonne, de droite à gauche, en reportant les retenues.",
+  "On vérifie avec l'opération inverse.",
 ];
 
 export const ficheCalculPose6e: FicheCoursData = {
@@ -32,99 +67,84 @@ export const ficheCalculPose6e: FicheCoursData = {
   notion: "entier-calcul-pose",
   titre: "Le calcul posé",
   accroche:
-    "Poser un calcul, c'est l'écrire en colonnes pour ne rien oublier. Addition, soustraction, multiplication, division : avec un bon alignement et les retenues, on calcule de grands nombres sans calculatrice.",
+    "Poser un calcul, c'est l'écrire en colonnes pour calculer de grands nombres sans se tromper — même sans calculatrice.",
   identite: [
-    { label: "Prérequis", valeur: "Tables d'addition et de multiplication, rangs des chiffres" },
     { label: "Mots clés", valeur: "Colonne, rang, retenue, quotient, reste" },
-    { label: "Outil", valeur: "Papier à carreaux et crayon (un chiffre par carreau)" },
+    { label: "Le secret", valeur: "Aligner les chiffres de même rang" },
+    { label: "Outil", valeur: "Papier à carreaux (un chiffre par carreau)" },
   ],
   definition: {
     texte:
-      "Poser une opération, c'est écrire les nombres l'un sous l'autre, en colonnes, en alignant les chiffres de même rang : les unités sous les unités, les dizaines sous les dizaines, les centaines sous les centaines. On calcule ensuite colonne par colonne, en commençant par les unités.",
+      "Poser une opération, c'est écrire les nombres l'un sous l'autre en alignant les chiffres de même rang (unités sous unités, dizaines sous dizaines). On calcule ensuite colonne par colonne, en commençant par les unités.",
+  },
+  figure: {
+    schema: pose("addition", ["475", "286"], "761"),
+    legende: "Chaque chiffre sous celui de même rang, puis on calcule colonne par colonne.",
   },
   proprietes: [
     {
-      titre: "L'alignement des rangs",
-      texte:
-        "Chaque chiffre a une valeur selon sa position : unités, dizaines, centaines. On ne peut additionner ou soustraire que des chiffres de même rang. Un mauvais alignement fausse tout le calcul.",
+      titre: "J'aligne les rangs",
+      texte: "Unités sous unités, dizaines sous dizaines. Sinon le calcul est faux.",
     },
     {
-      titre: "Les retenues",
-      texte:
-        "Quand une colonne dépasse 9, on écrit le chiffre des unités et on reporte une retenue dans la colonne suivante. En soustraction, si le chiffre du haut est trop petit, on emprunte une dizaine.",
+      titre: "Je gère la retenue",
+      texte: "Si une colonne dépasse 9, j'écris le chiffre des unités et je reporte 1 à gauche.",
     },
     {
-      titre: "La division euclidienne",
-      texte:
-        "Diviser, c'est chercher combien de fois le diviseur entre dans le dividende. On obtient un quotient et un reste, avec toujours : dividende = diviseur × quotient + reste, et le reste plus petit que le diviseur.",
-    },
-    {
-      titre: "La vérification",
-      texte:
-        "Un calcul se contrôle toujours : on estime un ordre de grandeur avant, puis on utilise l'opération inverse après. L'addition vérifie la soustraction, la multiplication vérifie la division.",
+      titre: "Je vérifie",
+      texte: "Avec l'opération inverse : dividende = diviseur × quotient + reste.",
     },
   ],
   reel: {
     texte:
-      "Le calcul posé sert dès qu'il n'y a pas de calculatrice : additionner des prix au marché, rendre la monnaie, partager des cartes entre amis, prévoir le nombre de stylos pour des sacs identiques. Et devant un problème, la première question est toujours la même : regrouper, enlever, répéter ou partager ? C'est elle qui choisit l'opération.",
+      "On pose un calcul dès qu'il n'y a pas de calculatrice : additionner des prix, rendre la monnaie, partager des cartes entre amis.",
   },
   historique: {
     texte:
-      "Vers 820, à Bagdad, le savant Al-Khwarizmi écrit un livre qui explique comment calculer pas à pas avec les chiffres indo-arabes. Son nom a donné le mot « algorithme » : une suite d'étapes à suivre dans l'ordre. Les techniques en colonnes que tu utilises sont arrivées en Europe au Moyen Âge grâce à ses écrits.",
+      "Vers 820, à Bagdad, le savant Al-Khwarizmi explique comment calculer pas à pas. Son nom a donné le mot « algorithme » : une suite d'étapes dans l'ordre.",
   },
   methode: [
-    {
-      titre: "Aligner",
-      texte:
-        "On écrit les nombres l'un sous l'autre en alignant les chiffres de même rang : unités sous unités, dizaines sous dizaines.",
-    },
-    {
-      titre: "Calculer rang par rang",
-      texte:
-        "On commence par la colonne des unités, puis les dizaines, puis les centaines, sans oublier de reporter les retenues.",
-    },
-    {
-      titre: "Vérifier",
-      texte:
-        "On compare avec un ordre de grandeur, ou on refait le calcul avec l'opération inverse. On ne valide jamais un résultat sans contrôle.",
-    },
+    { titre: "J'aligne", texte: "Les chiffres de même rang, l'un sous l'autre." },
+    { titre: "Je calcule", texte: "Colonne par colonne, de droite à gauche, avec les retenues." },
+    { titre: "Je vérifie", texte: "Avec l'opération inverse, ou un ordre de grandeur." },
   ],
   usages: [
-    {
-      titre: "Poser une addition",
-      detail:
-        "On aligne les rangs, on additionne colonne par colonne. Si une colonne dépasse 9, on reporte une retenue dans la colonne suivante.",
-    },
-    {
-      titre: "Poser une soustraction",
-      detail:
-        "On met le plus grand nombre en haut. Si le chiffre du haut est trop petit, on emprunte une dizaine. On vérifie avec une addition.",
-    },
-    {
-      titre: "Poser une multiplication",
-      detail:
-        "On multiplie chaque chiffre du nombre du haut par le chiffre du bas, de droite à gauche, en reportant les retenues.",
-    },
-    {
-      titre: "Poser une division",
-      detail:
-        "On cherche combien de fois le diviseur entre dans le dividende. Le reste doit rester plus petit que le diviseur.",
-    },
+    { titre: "Regrouper → addition", detail: "On met ensemble : on pose une addition." },
+    { titre: "Enlever → soustraction", detail: "On retire une quantité : on pose une soustraction." },
+    { titre: "Répéter / partager", detail: "On répète : multiplication. On partage en parts égales : division." },
   ],
   exemples: [
     {
-      titre: "Une addition avec retenue",
-      donnees: "On pose 475 + 286 en colonnes, unités sous unités.",
-      question: "Calculer 475 + 286.",
+      titre: "Addition (avec retenue)",
+      donnees: "475 + 286.",
+      question: "Combien font 475 + 286 ?",
+      schema: pose("addition", ["475", "286"], "761"),
       solution:
-        "Unités : 5 + 6 = 11, j'écris 1 et je retiens 1. Dizaines : 7 + 8 + 1 = 16, j'écris 6 et je retiens 1. Centaines : 4 + 2 + 1 = 7. Résultat : 761. Vérification : c'est proche de 480 + 290 = 770, c'est cohérent.",
+        "5 + 6 = 11 → j'écris 1, je retiens 1. 7 + 8 + 1 = 16 → j'écris 6, je retiens 1. 4 + 2 + 1 = 7. Résultat : 761.",
     },
     {
-      titre: "Une division euclidienne",
-      donnees: "On veut diviser 37 par 5.",
-      question: "Trouver le quotient et le reste de 37 ÷ 5.",
+      titre: "Soustraction (avec emprunt)",
+      donnees: "632 − 458 (le plus grand en haut).",
+      question: "Combien font 632 − 458 ?",
+      schema: pose("soustraction", ["632", "458"], "174"),
       solution:
-        "Je cherche le multiple de 5 le plus proche de 37 sans le dépasser : 5 × 7 = 35. Le quotient est 7 et le reste est 37 − 35 = 2. Le reste 2 est bien plus petit que 5. Vérification : 5 × 7 + 2 = 37.",
+        "2 − 8 impossible : 12 − 8 = 4. 3 devient 2, 2 − 5 impossible : 12 − 5 = 7. 6 devient 5, 5 − 4 = 1. Résultat : 174.",
+    },
+    {
+      titre: "Multiplication",
+      donnees: "267 × 4.",
+      question: "Combien font 267 × 4 ?",
+      schema: pose("multiplication", ["267", "4"], "1068"),
+      solution:
+        "7 × 4 = 28 → j'écris 8, je retiens 2. 6 × 4 = 24, + 2 = 26 → j'écris 6, je retiens 2. 2 × 4 = 8, + 2 = 10. Résultat : 1 068.",
+    },
+    {
+      titre: "Division",
+      donnees: "On partage 58 en parts de 7.",
+      question: "Quel est le quotient et le reste de 58 ÷ 7 ?",
+      schema: poseDivision,
+      solution:
+        "7 × 8 = 56, c'est le plus proche de 58 sans dépasser. Quotient 8, reste 58 − 56 = 2. Le reste 2 est plus petit que 7. Vérif : 7 × 8 + 2 = 58.",
     },
   ],
   pieges,
@@ -133,23 +153,22 @@ export const ficheCalculPose6e: FicheCoursData = {
     {
       question: "Pose et calcule : 348 + 275.",
       correction:
-        "Unités : 8 + 5 = 13, j'écris 3, retenue 1. Dizaines : 4 + 7 + 1 = 12, j'écris 2, retenue 1. Centaines : 3 + 2 + 1 = 6. Résultat : 623.",
+        "8 + 5 = 13 (j'écris 3, retenue 1). 4 + 7 + 1 = 12 (j'écris 2, retenue 1). 3 + 2 + 1 = 6. Résultat : 623.",
     },
     {
       question: "Pose et calcule : 632 − 458.",
       correction:
-        "Unités : 2 − 8 impossible, j'emprunte : 12 − 8 = 4. Dizaines : 3 − (5 + 1) impossible, j'emprunte : 13 − 6 = 7. Centaines : 6 − (4 + 1) = 1. Résultat : 174. Vérification : 174 + 458 = 632.",
+        "2 − 8 → 12 − 8 = 4. 3 → 2, 2 − 5 → 12 − 5 = 7. 6 → 5, 5 − 4 = 1. Résultat : 174. Vérif : 174 + 458 = 632.",
     },
     {
       question: "Pose et calcule : 267 × 4.",
       correction:
-        "7 × 4 = 28, j'écris 8, retenue 2. 6 × 4 = 24, plus 2 = 26, j'écris 6, retenue 2. 2 × 4 = 8, plus 2 = 10. Résultat : 1 068.",
+        "7 × 4 = 28 (8, retenue 2). 6 × 4 = 24 + 2 = 26 (6, retenue 2). 2 × 4 = 8 + 2 = 10. Résultat : 1 068.",
     },
     {
-      question:
-        "On partage 58 billes entre 7 enfants. Combien de billes reçoit chaque enfant, et combien en reste-t-il ?",
+      question: "On partage 58 billes entre 7 enfants. Combien chacun, et combien reste-t-il ?",
       correction:
-        "Partager, c'est diviser : je pose 58 ÷ 7. Le multiple de 7 le plus proche de 58 sans le dépasser est 7 × 8 = 56. Chaque enfant reçoit 8 billes et il reste 58 − 56 = 2 billes. Vérification : 7 × 8 + 2 = 58, et le reste 2 est plus petit que 7.",
+        "Partager, c'est diviser : 58 ÷ 7. 7 × 8 = 56, donc 8 billes chacun et il reste 2. Vérif : 7 × 8 + 2 = 58.",
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",
@@ -179,7 +198,7 @@ export const slidesCalculPose6e: ClasseSlide[] = [
         variante: "info",
         titre: "Au quotidien",
         contenu:
-          "Additionner des prix, rendre la monnaie, partager des cartes, prévoir des quantités : dès qu'il n'y a pas de calculatrice.",
+          "Additionner des prix, rendre la monnaie, partager des cartes : dès qu'il n'y a pas de calculatrice.",
       },
       droite: {
         variante: "histoire",
@@ -201,8 +220,8 @@ export const slidesCalculPose6e: ClasseSlide[] = [
     },
   },
   {
-    titre: "Les 4 opérations",
-    badge: "Poser en colonnes",
+    titre: "Quelle opération ?",
+    badge: "Choisir",
     section: {
       type: "cartes",
       cartes: ficheCalculPose6e.usages.map((u) => ({
@@ -227,10 +246,10 @@ export const slidesCalculPose6e: ClasseSlide[] = [
     badge: "Division euclidienne",
     section: {
       type: "exemple",
-      enonce: "On veut diviser 37 par 5.",
-      question: "Trouver le quotient et le reste.",
+      enonce: "On partage 58 en parts de 7.",
+      question: "Quotient et reste de 58 ÷ 7 ?",
       correction:
-        "5 × 7 = 35, donc quotient 7 et reste 2. Vérification : 5 × 7 + 2 = 37, et 2 est plus petit que 5.",
+        "7 × 8 = 56, donc quotient 8 et reste 2. Vérification : 7 × 8 + 2 = 58, et 2 est plus petit que 7.",
     },
   },
   {

@@ -424,6 +424,11 @@ export default function FicheCoursClient({
                   <p className="mt-1 text-sm font-bold text-slate-900 print:text-xs">
                     {exemple.question}
                   </p>
+                  {exemple.schema ? (
+                    <div className="mt-3 flex justify-center rounded-xl border border-slate-200 bg-white p-3">
+                      {exemple.schema}
+                    </div>
+                  ) : null}
                   <p className="mt-3 rounded-xl border border-sky-100 bg-sky-50 p-3 text-sm leading-6 text-sky-800 print:text-xs">
                     {exemple.solution}
                   </p>
