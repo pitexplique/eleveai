@@ -122,6 +122,14 @@ def acc_aire(d):
     d.text((330, 452), "Aire = L × l", font=police("arialbd.ttf", 42), fill=VERT)
 
 
+def acc_triangle(d):
+    A, B, C = (392, 452), (632, 452), (508, 300)
+    d.polygon([A, B, C], fill=BLEU)
+    for u, v in [(A, B), (B, C), (C, A)]:
+        d.line([u, v], fill=NAVY, width=5)
+    d.text((452, 398), "180°", font=police("ariblk.ttf", 44), fill=(255, 255, 255))
+
+
 def acc_angle(d):
     ox, oy = 420, 452
     d.line([(ox, oy), (ox + 214, oy)], fill=BLEU, width=9)
@@ -189,6 +197,10 @@ NOTIONS = {
     "eleveai-maths-6e-angle-mesure": {
         "badge": "MATHS · 6e", "titre": ["LES", "ANGLES"], "taille": 84,
         "sous": "reconnaître · mesurer · tracer", "accroche": acc_angle,
+    },
+    "eleveai-maths-6e-triangle-figure": {
+        "badge": "MATHS · 6e", "titre": ["LES", "TRIANGLES"], "taille": 82,
+        "sous": "nommer · reconnaître · calculer", "accroche": acc_triangle,
     },
 }
 

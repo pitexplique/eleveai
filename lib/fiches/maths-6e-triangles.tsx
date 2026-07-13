@@ -40,6 +40,46 @@ const schemaTriangle = (
   />
 );
 
+// La figure de la définition : le triangle ABC, ses 3 sommets et ses 3 côtés.
+const schemaTriangleABC = (
+  <CanvasRenderer
+    figure={{
+      kind: "triangle",
+      size: { width: 280, height: 220 },
+      points: { A: { x: 40, y: 180 }, B: { x: 245, y: 180 }, C: { x: 150, y: 40 } },
+      display: { showPoints: true, showLabels: true, showSides: true, showAngles: false },
+      labels: { A: "A", B: "B", C: "C" },
+    }}
+  />
+);
+
+// Exemple 1 : le triangle isocèle KLM (deux côtés KL et LM marqués égaux).
+const triangleIsocele = (
+  <CanvasRenderer
+    figure={{
+      kind: "triangle",
+      size: { width: 280, height: 220 },
+      points: { A: { x: 40, y: 180 }, B: { x: 150, y: 40 }, C: { x: 260, y: 180 } },
+      display: { showPoints: true, showLabels: true, showSides: true, showAngles: false },
+      labels: { A: "K", B: "L", C: "M" },
+      marks: { equalSides: [["AB", "BC"]] },
+    }}
+  />
+);
+
+// Exemple 2 : deux angles connus (60° et 70°), le troisième cherché.
+const triangleAngles = (
+  <CanvasRenderer
+    figure={{
+      kind: "triangle",
+      size: { width: 280, height: 220 },
+      points: { A: { x: 40, y: 180 }, B: { x: 245, y: 180 }, C: { x: 150, y: 45 } },
+      display: { showPoints: true, showLabels: false, showSides: true, showAngles: true },
+      angleLabels: { A: "60°", B: "70°", C: "?" },
+    }}
+  />
+);
+
 const pieges = [
   "Confondre un sommet et un côté : dans le triangle ABC, A, B et C sont les sommets (des points), tandis que AB, BC et CA sont les côtés (des segments).",
   "Croire qu'un triangle avec deux angles droits existe : deux angles droits font déjà 90° + 90° = 180°, il ne resterait plus rien pour le troisième angle.",
@@ -68,6 +108,10 @@ export const ficheTriangles6e: FicheCoursData = {
   definition: {
     texte:
       "Un triangle est un polygone qui possède trois côtés. Il est défini par ses trois sommets, que l'on note avec des lettres majuscules : un triangle de sommets A, B et C se nomme « triangle ABC ». Ses trois côtés sont les segments AB, BC et CA, et il possède trois angles, un à chaque sommet.",
+  },
+  figure: {
+    schema: schemaTriangleABC,
+    legende: "Le triangle ABC : trois sommets (A, B, C), trois côtés (AB, BC, CA) et trois angles.",
   },
   proprietes: [
     {
@@ -139,6 +183,7 @@ export const ficheTriangles6e: FicheCoursData = {
       donnees:
         "Un triangle a pour sommets K, L et M. Ses côtés KL et LM sont marqués du même codage : ils ont la même longueur.",
       question: "Comment se nomme ce triangle, et quelle est sa nature selon ses côtés ?",
+      schema: triangleIsocele,
       solution:
         "On nomme le triangle avec ses trois sommets : c'est le triangle KLM. Deux de ses côtés (KL et LM) ont la même longueur : il possède donc deux côtés égaux. Un triangle qui a deux côtés de même longueur est un triangle isocèle. Le triangle KLM est isocèle.",
     },
@@ -146,6 +191,7 @@ export const ficheTriangles6e: FicheCoursData = {
       titre: "Calculer un angle manquant",
       donnees: "Dans un triangle, deux angles mesurent 60° et 70°.",
       question: "Combien mesure le troisième angle ?",
+      schema: triangleAngles,
       solution:
         "La somme des trois angles d'un triangle vaut toujours 180°. On enlève donc les deux angles connus : 180 − 60 − 70. On calcule d'abord 60 + 70 = 130, puis 180 − 130 = 50. Le troisième angle mesure 50°. On vérifie : 60 + 70 + 50 = 180°.",
     },
