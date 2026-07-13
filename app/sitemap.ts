@@ -287,14 +287,52 @@ const jeuxCartesRoutes: RouteConfig[] = NIVEAUX.filter(
   lastMod: LASTMOD_JEUX,
 }));
 
+// Vidéos YouTube publiées (chaîne EleveAI), rattachées à la fiche de leur notion
+// pour un sitemap vidéo Google (SEO). Miroir léger de notion_ressources : on
+// ajoute une ligne par vidéo publiée (clé = chemin de la fiche).
+const VIDEOS_FICHES: Record<
+  string,
+  { id: string; title: string; description: string }[]
+> = {
+  "/fiches-cours/maths/6e/entier-calcul-pose": [
+    {
+      id: "Y3gFecuyBTQ",
+      title: "Le calcul posé — Maths 6e — EleveAI",
+      description:
+        "Poser et calculer une addition, une soustraction, une multiplication et une division, pas à pas et sans calculatrice (6e).",
+    },
+  ],
+  "/fiches-cours/maths/6e/entier-nombre": [
+    {
+      id: "8DFgt3TCoH8",
+      title: "Les nombres entiers — Maths 6e — EleveAI",
+      description:
+        "Lire, écrire, comparer, décomposer et encadrer les nombres entiers, avec le tableau de numération et la droite graduée (6e).",
+    },
+  ],
+};
+
 export default function sitemap(): MetadataRoute.Sitemap {
   // Routes statiques
-  const staticRoutes = [...ROUTES, ...coachRoutes, ...jeuxCartesRoutes].map((route) => ({
-    url: u(route.path),
-    lastModified: route.lastMod ?? LASTMOD_CORE,
-    changeFrequency: route.changeFrequency,
-    priority: route.priority,
-  }));
+  const staticRoutes = [...ROUTES, ...coachRoutes, ...jeuxCartesRoutes].map((route) => {
+    const videos = VIDEOS_FICHES[route.path];
+    return {
+      url: u(route.path),
+      lastModified: route.lastMod ?? LASTMOD_CORE,
+      changeFrequency: route.changeFrequency,
+      priority: route.priority,
+      ...(videos
+        ? {
+            videos: videos.map((v) => ({
+              title: v.title,
+              thumbnail_loc: `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`,
+              description: v.description,
+              player_loc: `https://www.youtube.com/embed/${v.id}`,
+            })),
+          }
+        : {}),
+    };
+  });
 
   // Articles de blog (générés dynamiquement depuis blogPosts.ts)
   const blogRoutes = getAllBlogPosts().map((post) => ({
