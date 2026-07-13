@@ -37,6 +37,7 @@ Cette procédure est la jumelle de la procédure fiches : même point de départ
 C'est un enfant qui regarde. Principe directeur de Frédéric (13/07) : **par défaut, ON DESSINE**, même là où une phrase suffirait.
 
 - **Les objets bougent, ils portent le sens.** Les chiffres s'alignent, la retenue monte, la grille se colorie, les barres se comparent. Jamais un paragraphe figé.
+- **Varier les animations** (retour Frédéric 13/07) — pas seulement `Write` (caractère par caractère). Utiliser la palette Manim : `FadeIn`/`GrowFromCenter`/`scale` (apparition), `.animate.scale()` (zoom sur l'élément clé), `Indicate`/`Flash`/`Circumscribe` (attirer l'œil), `Transform`/`TransformMatchingShapes` (une forme devient une autre), `.animate.shift()` (glisser), `Create` (tracer). Un zoom ou un surlignage sur le chiffre/la part qui compte vaut mille mots. Garder ça au service de la compréhension, jamais gratuit.
 - **Un visuel par écran, et un visuel pour CHAQUE micro-compétence** quand elle se dessine (ne pas regrouper 2 micros dans un seul dessin). **Le défi a SON dessin**, pas seulement du texte.
 - **Un seul concept par écran.** Deux idées = deux écrans.
 - **Les `wait()` sont généreux** (1 à 2,5 s) : le temps de lire et de regarder.
