@@ -19,11 +19,11 @@ AVATAR = RACINE / "public" / "images" / "avatar-frederic-Lacoste.jpg"
 SORTIE = RACINE / "manim" / "miniatures"
 
 # ── CONTENU (à changer d'une notion à l'autre) ─────────────────────────────────
-NOM = "eleveai-maths-6e-prop-proportionnalite"
+NOM = "eleveai-maths-6e-pourcentage-nombre"
 BADGE = "MATHS · 6e"
-TITRE = ["LA", "PROPORTIONNALITÉ"]
-TITRE_TAILLE = 60
-SOUS_TITRE = "reconnaître · le coefficient"
+TITRE = ["LES", "POURCENTAGES"]
+TITRE_TAILLE = 78
+SOUS_TITRE = "comprendre · calculer"
 
 # ── Charte cahier ──────────────────────────────────────────────────────────────
 W, H = 1280, 720
@@ -66,16 +66,13 @@ def badge(d, x, y, txt):
 
 
 def accroche(d):
-    """Mini tableau de proportionnalité, coefficient × 2 (spécifique prop)."""
-    x0, y0, cw, ch = 300, 336, 70, 58
-    f = police("ariblk.ttf", 34)
-    for r, (vals, col) in enumerate([(["1", "3", "5"], BLEU), (["2", "6", "10"], NAVY)]):
-        for c, v in enumerate(vals):
-            x, y = x0 + c * cw, y0 + r * ch
-            d.rectangle([x, y, x + cw, y + ch], outline=NAVY, width=3)
-            w = d.textlength(v, font=f)
-            d.text((x + (cw - w) / 2, y + 10), v, font=f, fill=col)
-    d.text((x0 + 3 * cw + 20, y0 + 22), "× 2", font=police("ariblk.ttf", 40), fill=VERT)
+    """« 25 % » + une grille de 100 carreaux, 25 coloriés (spécifique pourcentages)."""
+    d.text((296, 320), "25 %", font=police("ariblk.ttf", 92), fill=BLEU)
+    gx, gy, cs = 566, 336, 15
+    for i in range(100):
+        r, c = i // 10, i % 10
+        x, y = gx + c * cs, gy + r * cs
+        d.rectangle([x, y, x + cs, y + cs], fill=(BLEU if i < 25 else PAPIER), outline=CARREAU_FORT, width=1)
 
 
 def signature(img, d):
