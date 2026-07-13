@@ -44,6 +44,38 @@ const schemaSymetrie = (
   />
 );
 
+// Exemple 1 : une figure bleue et son reflet de l'autre côté de l'axe vertical.
+const symReflet = (
+  <CanvasRenderer
+    figure={{
+      kind: "transformation",
+      transformation: "symetrie_axiale",
+      grid: { rows: 6, cols: 8 },
+      size: { cellSize: 30, padding: 18 },
+      axis: { type: "vertical", x: 4, label: "axe" },
+      source: { points: [{ x: 1, y: 1 }, { x: 3, y: 2 }, { x: 1, y: 4 }], label: "figure" },
+      image: { points: [{ x: 7, y: 1 }, { x: 5, y: 2 }, { x: 7, y: 4 }], label: "image" },
+      display: { showGrid: true, showLabels: true, showPoints: true, showDashedLinks: true },
+    }}
+  />
+);
+
+// Exemple 2 : l'image A' d'un point A situé à 3 carreaux de l'axe.
+const symPoint = (
+  <CanvasRenderer
+    figure={{
+      kind: "transformation",
+      transformation: "symetrie_axiale",
+      grid: { rows: 6, cols: 8 },
+      size: { cellSize: 30, padding: 18 },
+      axis: { type: "vertical", x: 4, label: "axe" },
+      source: { points: [{ x: 1, y: 3 }], label: "A" },
+      image: { points: [{ x: 7, y: 3 }], label: "A'" },
+      display: { showGrid: true, showLabels: true, showPoints: true, showDashedLinks: true },
+    }}
+  />
+);
+
 const pieges = [
   "Placer l'image du bon côté de l'axe mais pas à la bonne distance : le point et son image doivent être exactement à la même distance de l'axe.",
   "Oublier que le segment qui relie un point à son image est perpendiculaire à l'axe : l'axe doit couper ce segment en son milieu.",
@@ -148,6 +180,7 @@ export const ficheSymetrie6e: FicheCoursData = {
       donnees:
         "Sur un quadrillage, une figure bleue est reflétée de l'autre côté d'une droite verticale, comme dans un miroir.",
       question: "Quelle transformation relie la figure bleue à son reflet ?",
+      schema: symReflet,
       solution:
         "On repère l'axe vertical qui sépare les deux figures. Chaque point du reflet est de l'autre côté de l'axe, à la même distance que le point d'origine : l'axe joue le rôle d'un miroir. La transformation utilisée est donc une symétrie axiale (et non une translation, qui ferait glisser la figure sans la retourner).",
     },
@@ -155,6 +188,7 @@ export const ficheSymetrie6e: FicheCoursData = {
       titre: "Construire l'image d'un point",
       donnees: "Le point A est à 3 carreaux à gauche d'un axe vertical.",
       question: "Où placer son image A' par symétrie axiale ?",
+      schema: symPoint,
       solution:
         "On trace la perpendiculaire à l'axe passant par A : c'est une ligne horizontale. On reporte la même distance de l'autre côté de l'axe : A étant à 3 carreaux à gauche, A' se place à 3 carreaux à droite de l'axe, sur cette même ligne. L'axe est alors le milieu du segment [AA'].",
     },

@@ -122,6 +122,14 @@ def acc_aire(d):
     d.text((330, 452), "Aire = L × l", font=police("arialbd.ttf", 42), fill=VERT)
 
 
+def acc_symetrie(d):
+    ax = 512
+    for yy in range(292, 476, 16):
+        d.line([(ax, yy), (ax, yy + 9)], fill=JAUNE, width=3)
+    d.polygon([(404, 300), (404, 464), (498, 464)], fill=BLEU, outline=NAVY)
+    d.polygon([(620, 300), (620, 464), (526, 464)], fill=VERT, outline=NAVY)
+
+
 def acc_quadrilatere(d):
     x0, y0, s = 400, 304, 150
     d.rectangle([x0, y0, x0 + s, y0 + s], outline=BLEU, width=9)
@@ -213,6 +221,10 @@ NOTIONS = {
     "eleveai-maths-6e-quadrilatere-figure": {
         "badge": "MATHS · 6e", "titre": ["LES", "QUADRILATÈRES"], "taille": 54,
         "sous": "rectangle · losange · carré", "accroche": acc_quadrilatere,
+    },
+    "eleveai-maths-6e-sym-axiale": {
+        "badge": "MATHS · 6e", "titre": ["LA", "SYMÉTRIE"], "taille": 80,
+        "sous": "le miroir des maths", "accroche": acc_symetrie,
     },
 }
 
