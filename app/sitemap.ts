@@ -334,6 +334,62 @@ const VIDEOS_FICHES: Record<
         "Reconnaître une situation proportionnelle, le coefficient et le passage par l'unité, avec le tableau de proportionnalité dessiné pas à pas (6e).",
     },
   ],
+  "/fiches-cours/maths/6e/entier-calcul-mental": [
+    {
+      id: "fi-Xs0v2FoY",
+      title: "Le calcul mental — Maths 6e — EleveAI",
+      description:
+        "Calculer de tête sans calculatrice : passer par la dizaine, arrondir puis corriger, multiplier par 5, la table à l'envers — montré pas à pas sur la droite graduée (6e).",
+    },
+  ],
+  "/fiches-cours/maths/6e/aire-longueur": [
+    {
+      id: "rRCG7MQtq3I",
+      title: "Les longueurs — Maths 6e — EleveAI",
+      description:
+        "Mesurer avec une règle graduée, convertir avec le tableau des unités (km au mm) et comparer deux longueurs dans la même unité, pas à pas (6e).",
+    },
+  ],
+  "/fiches-cours/maths/6e/aire-perimetre": [
+    {
+      id: "1CYtvWeV3RM",
+      title: "Les périmètres — Maths 6e — EleveAI",
+      description:
+        "Le périmètre = la longueur du tour : carré (4 × c), rectangle (2 × (L + l)) et figure quelconque, tracés et calculés pas à pas (6e).",
+    },
+  ],
+  "/fiches-cours/maths/6e/aire-surface": [
+    {
+      id: "8ouss9DNzN0",
+      title: "Les aires — Maths 6e — EleveAI",
+      description:
+        "L'aire = la surface : compter les carreaux, rectangle L × l, carré c × c et figure en L découpée, remplis carreau par carreau (6e).",
+    },
+  ],
+  "/fiches-cours/maths/6e/volume-solide": [
+    {
+      id: "owc59Ln0k8s",
+      title: "Les volumes — Maths 6e — EleveAI",
+      description:
+        "Le volume = la place dans l'espace : le cube unité (1 cm³), compter les cubes couche par couche et remplir une boîte (L × l × h), en vraies images 3D (6e).",
+    },
+  ],
+  "/fiches-cours/maths/6e/angle-mesure": [
+    {
+      id: "46FnrLZLWZo",
+      title: "Les angles — Maths 6e — EleveAI",
+      description:
+        "Un angle = un sommet et deux côtés : la famille aigu, droit, obtus, plat, et la mesure au rapporteur montrée pas à pas (6e).",
+    },
+  ],
+  "/fiches-cours/maths/6e/triangle-figure": [
+    {
+      id: "MLrzaU8B0Og",
+      title: "Les triangles — Maths 6e — EleveAI",
+      description:
+        "Nommer le triangle ABC, reconnaître sa nature (côtés et angles), la règle des 180° et l'inégalité triangulaire, dessinés pas à pas (6e).",
+    },
+  ],
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
