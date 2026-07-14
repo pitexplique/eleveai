@@ -255,6 +255,23 @@ def acc_volume_5e(d):
     centre(d, 512, 500, "aire de base × h", police("arialbd.ttf", 34), VERT)
 
 
+def acc_algo_5e(d):
+    # blocs Scratch empilés (répéter + avancer + tourner) + un petit carré tracé.
+    orange = (217, 119, 20)
+    x0, y0, bw, bh, gap = 360, 320, 210, 46, 14
+    cols = [orange, BLEU, VERT]
+    labels = ["répéter 4 fois", "avancer", "tourner 90°"]
+    f = police("arialbd.ttf", 24)
+    for i, (col, lab) in enumerate(zip(cols, labels)):
+        yy = y0 + i * (bh + gap)
+        xx = x0 + (18 if i else 0)
+        d.rounded_rectangle([xx, yy, xx + bw - (18 if i else 0), yy + bh], radius=9, fill=col, outline=NAVY, width=2)
+        d.text((xx + 14, yy + 10), lab, font=f, fill=(255, 255, 255))
+    # petit carré « tracé »
+    sx, sy, s = 616, 400, 66
+    d.line([(sx, sy), (sx + s, sy), (sx + s, sy - s), (sx, sy - s), (sx, sy)], fill=BLEU, width=6, joint="curve")
+
+
 def acc_longueur(d):
     d.text((360, 300), "2 m", font=police("ariblk.ttf", 96), fill=BLEU)
     d.text((320, 424), "= 200 cm", font=police("arialbd.ttf", 44), fill=VERT)
@@ -390,6 +407,10 @@ NOTIONS = {
     "eleveai-maths-5e-volume-solide": {
         "badge": "MATHS · 5e", "titre": ["LES", "VOLUMES"], "taille": 84,
         "sous": "pavé · prisme · cylindre", "accroche": acc_volume_5e,
+    },
+    "eleveai-maths-5e-algo-programmation": {
+        "badge": "MATHS · 5e", "titre": ["ALGO &", "SCRATCH"], "taille": 78,
+        "sous": "variables · tests · boucles", "accroche": acc_algo_5e,
     },
     "eleveai-maths-6e-entier-calcul-pose": {
         "badge": "MATHS · 6e", "titre": ["LE CALCUL", "POSÉ"], "taille": 84,
