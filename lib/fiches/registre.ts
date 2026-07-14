@@ -90,6 +90,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "La proportionnalité",
     resume: "Coefficient, tableau, retour à l'unité, ratio, pourcentage, hausse et baisse.",
   },
+  "maths/5e/stat-statistique": {
+    titre: "Les statistiques",
+    resume: "Effectif, total, fréquence et moyenne ; lire un tableau et un diagramme.",
+  },
   "maths/5e/pourcentages": {
     titre: "Les pourcentages",
     resume: "Calculer un pourcentage d'un nombre, une réduction ou une augmentation.",
