@@ -6,12 +6,12 @@ import { MapPin, Sparkles, ArrowRight } from "lucide-react";
 import { fetchUsages974, type Usage974 } from "@/lib/server/maths974";
 
 export const metadata: Metadata = {
-  title: "Les maths en vrai — 974 | EleveAI",
+  title: "Maths Réel · 974 | EleveAI",
   description:
     "Un carnet de bord réel de La Réunion : sur le terrain, une vraie photo, une vraie situation, et la notion de maths qui se cache derrière. À chaque étape, un mini-défi à résoudre.",
   alternates: { canonical: "/maths-974" },
   openGraph: {
-    title: "Les maths en vrai — 974",
+    title: "Maths Réel · 974",
     description:
       "À quoi servent les maths ? La preuve par La Réunion : volcan, marché, randonnée, lagon… de vraies photos et les vraies maths derrière.",
     url: "/maths-974",
@@ -114,7 +114,7 @@ export default async function Maths974Page() {
             Carnet de bord · La Réunion
           </p>
           <h1 className="mt-4 max-w-3xl text-4xl font-black tracking-tight sm:text-6xl">
-            Les maths en vrai <span className="text-amber-300">— 974</span>
+            Maths Réel <span className="text-amber-300">· 974</span>
           </h1>
           <p className="mt-4 max-w-2xl text-base font-semibold leading-7 text-white/90 sm:text-lg">
             «&nbsp;À quoi ça sert, les maths&nbsp;?» À regarder le monde et à

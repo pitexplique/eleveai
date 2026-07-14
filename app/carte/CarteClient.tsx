@@ -166,7 +166,7 @@ export default function CarteClient() {
           className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3.5 py-1.5 text-sm font-bold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-50"
         >
           <ArrowLeft className="h-4 w-4" />
-          Les maths en vrai · 974
+          Maths Réel · 974
         </Link>
 
         <header className="mt-5 text-center">

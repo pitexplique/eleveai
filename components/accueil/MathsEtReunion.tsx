@@ -47,8 +47,7 @@ export default function MathsEtReunion() {
               <span aria-hidden>🌋</span> La Réunion, en vrai
             </p>
             <h2 className="mt-3 text-2xl font-black text-white sm:text-3xl">
-              Les maths <span className="text-emerald-300">en vrai</span>{" "}
-              <span className="text-white/50">· La Réunion</span>
+              Les maths <span className="text-emerald-300">en vrai</span>
             </h2>
             <p className="mt-1.5 max-w-2xl text-sm font-semibold leading-6 text-white/75">
               L&apos;île comme salle de classe : des vidéos animées qui expliquent
@@ -140,7 +139,7 @@ export default function MathsEtReunion() {
             href="/maths-974"
             className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-black text-white transition hover:bg-white/20"
           >
-            🌋 Les maths en vrai à La Réunion
+            🌋 Voir aussi : Maths Réel · 974
           </a>
         </div>
       </div>

@@ -1144,9 +1144,9 @@ export default function AccueilPage({
               🌋 Nouveau · La Réunion en vidéo
             </p>
             <h2 className="mt-3 text-3xl font-black text-white sm:text-4xl">
-              Les maths en vrai{" "}
+              Maths Réel{" "}
               <span className="bg-gradient-to-r from-rose-300 via-orange-300 to-amber-300 bg-clip-text text-transparent">
-                · le terrain
+                · 974
               </span>
             </h2>
             <p className="mx-auto mt-3 max-w-2xl text-sm font-semibold leading-6 text-white/80 sm:text-base">
@@ -1211,7 +1211,7 @@ export default function AccueilPage({
               href="/maths-974"
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-rose-500 to-orange-500 px-6 py-3 text-sm font-black text-white shadow-lg transition hover:scale-105 hover:brightness-110"
             >
-              🎬 Voir tout le carnet de terrain · 974
+              🎬 Voir toutes les vidéos · Maths Réel 974
               <span className="transition-transform">→</span>
             </Link>
           </div>
