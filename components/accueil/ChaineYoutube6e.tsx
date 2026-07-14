@@ -16,6 +16,7 @@ import Link from "next/link";
 
 const COACH_6E = "/coach-ia/maths?classe=6e";
 const CHAINE_URL = "https://www.youtube.com/@eleveai-e1h";
+const CHAINE_SABONNER = "https://www.youtube.com/@eleveai-e1h?sub_confirmation=1";
 
 // Libellé + emoji propres par notion (les `titre` en base sont irréguliers :
 // certains null, d'autres « Maths - -6 - Pourcentages »). On les remplace ici
@@ -104,12 +105,22 @@ export default function ChaineYoutube6e() {
               pas. Faites main, sans pub. 🦎
             </p>
           </div>
-          <Link
-            href={COACH_6E}
-            className="inline-flex shrink-0 items-center gap-2 rounded-full bg-amber-300 px-5 py-2.5 text-sm font-black text-[#0b2c4a] shadow-lg transition hover:scale-105 hover:bg-amber-200"
-          >
-            Ouvrir le coach 6ᵉ →
-          </Link>
+          <div className="flex shrink-0 flex-wrap items-center gap-2">
+            <Link
+              href={COACH_6E}
+              className="inline-flex items-center gap-2 rounded-full bg-amber-300 px-5 py-2.5 text-sm font-black text-[#0b2c4a] shadow-lg transition hover:scale-105 hover:bg-amber-200"
+            >
+              Ouvrir le coach 6ᵉ →
+            </Link>
+            <a
+              href={CHAINE_SABONNER}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-red-600 px-5 py-2.5 text-sm font-black text-white shadow-lg transition hover:scale-105 hover:bg-red-500"
+            >
+              <span aria-hidden>▶</span> S&apos;abonner
+            </a>
+          </div>
         </div>
 
         {/* Ce qui est intégré, en clair : 3 pastilles fiche · vidéo · exos */}
