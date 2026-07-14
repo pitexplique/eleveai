@@ -121,6 +121,22 @@ def acc_relatif(d):
     centre(d, xd, y - 84, "+5", f, VERT)
 
 
+def acc_fraction_5e(d):
+    # deux barres : 6/8 (haut) = 3/4 (bas) — la 5e, c'est simplifier.
+    def barre(y, n, den, col):
+        x0, w, h = 420, 300, 54
+        cw = w / den
+        for i in range(den):
+            x = x0 + i * cw
+            d.rectangle([x, y, x + cw, y + h], fill=(col if i < n else PAPIER), outline=NAVY, width=3)
+    barre(360, 6, 8, BLEU)
+    barre(436, 3, 4, VERT)
+    f = police("ariblk.ttf", 40)
+    a_droite(d, 406, 366, "6/8", f, BLEU)
+    a_droite(d, 406, 442, "3/4", f, VERT)
+    d.text((732, 396), "=", font=police("ariblk.ttf", 52), fill=NAVY)
+
+
 def acc_longueur(d):
     d.text((360, 300), "2 m", font=police("ariblk.ttf", 96), fill=BLEU)
     d.text((320, 424), "= 200 cm", font=police("arialbd.ttf", 44), fill=VERT)
@@ -216,6 +232,10 @@ NOTIONS = {
     "eleveai-maths-5e-relatif-nombre": {
         "badge": "MATHS · 5e", "titre": ["LES NOMBRES", "RELATIFS"], "taille": 74,
         "sous": "signe · opposé · comparer", "accroche": acc_relatif,
+    },
+    "eleveai-maths-5e-fraction-nombre": {
+        "badge": "MATHS · 5e", "titre": ["LES", "FRACTIONS"], "taille": 84,
+        "sous": "simplifier · comparer", "accroche": acc_fraction_5e,
     },
     "eleveai-maths-6e-entier-calcul-pose": {
         "badge": "MATHS · 6e", "titre": ["LE CALCUL", "POSÉ"], "taille": 84,
