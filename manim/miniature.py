@@ -206,6 +206,18 @@ def acc_angle_5e(d):
     d.ellipse([ox - 8, oy - 8, ox + 8, oy + 8], fill=NAVY)
 
 
+def acc_triangle_5e(d):
+    # triangle outline + « 180° » + marques d'angle aux 3 sommets.
+    A, B, C = (392, 470), (648, 470), (520, 300)
+    for u, v in [(A, B), (B, C), (C, A)]:
+        d.line([u, v], fill=BLEU, width=8)
+    orange = (217, 119, 20)
+    d.arc([A[0] - 4, A[1] - 34, A[0] + 56, A[1] + 26], start=270, end=328, fill=orange, width=5)
+    d.arc([B[0] - 56, B[1] - 34, B[0] + 4, B[1] + 26], start=212, end=270, fill=orange, width=5)
+    d.arc([C[0] - 30, C[1] - 8, C[0] + 30, C[1] + 52], start=40, end=140, fill=orange, width=5)
+    centre(d, 520, 392, "180°", police("ariblk.ttf", 40), VERT)
+
+
 def acc_longueur(d):
     d.text((360, 300), "2 m", font=police("ariblk.ttf", 96), fill=BLEU)
     d.text((320, 424), "= 200 cm", font=police("arialbd.ttf", 44), fill=VERT)
@@ -325,6 +337,10 @@ NOTIONS = {
     "eleveai-maths-5e-angle-mesure": {
         "badge": "MATHS · 5e", "titre": ["LES", "ANGLES"], "taille": 84,
         "sous": "aigu · droit · obtus", "accroche": acc_angle_5e,
+    },
+    "eleveai-maths-5e-triangle-figure": {
+        "badge": "MATHS · 5e", "titre": ["LES", "TRIANGLES"], "taille": 78,
+        "sous": "nature · construire · 180°", "accroche": acc_triangle_5e,
     },
     "eleveai-maths-6e-entier-calcul-pose": {
         "badge": "MATHS · 6e", "titre": ["LE CALCUL", "POSÉ"], "taille": 84,
