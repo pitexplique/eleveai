@@ -390,8 +390,42 @@ def acc_eau_974(d):
     d.text((430, 536), "20 × plus de pluie à l'Est !", font=police("arialbd.ttf", 30), fill=orange)
 
 
+def acc_lait_974(d):
+    # une vache + une flèche vers un fromage : le lait qui se transforme.
+    import math
+    orange = (217, 119, 20)
+    rose = (232, 120, 160)
+    # le pré
+    d.rectangle([310, 486, 500, 530], fill=(90, 170, 100))
+    # la vache (blanche à taches, tête à droite)
+    bx, by = 340, 400  # coin haut-gauche du corps
+    d.rounded_rectangle([bx, by, bx + 150, by + 80], radius=22, fill=(255, 255, 255), outline=NAVY, width=3)
+    for sx, sy, sr in [(bx + 40, by + 30, 16), (bx + 95, by + 45, 13), (bx + 70, by + 18, 10)]:
+        d.ellipse([sx - sr, sy - sr, sx + sr, sy + sr], fill=NAVY)
+    for lx in (bx + 25, bx + 60, bx + 95, bx + 128):
+        d.rectangle([lx, by + 80, lx + 10, by + 108], fill=(255, 255, 255), outline=NAVY, width=2)
+    d.ellipse([bx + 140, by + 8, bx + 190, by + 68], fill=(255, 255, 255), outline=NAVY, width=3)  # tête
+    d.ellipse([bx + 168, by + 34, bx + 196, by + 58], fill=rose, outline=NAVY, width=2)  # museau
+    d.ellipse([bx + 60, by + 66, bx + 84, by + 84], fill=rose)  # pis
+    # flèche
+    d.line([(bx + 205, by + 40), (bx + 265, by + 40)], fill=orange, width=8)
+    d.polygon([(bx + 265, by + 28), (bx + 285, by + 40), (bx + 265, by + 52)], fill=orange)
+    # le fromage (meule jaune à trous)
+    fx, fy = bx + 300, by + 6
+    d.ellipse([fx, fy, fx + 130, fy + 40], fill=JAUNE, outline=orange, width=3)
+    d.rectangle([fx, fy + 20, fx + 130, fy + 66], fill=JAUNE, outline=orange, width=3)
+    d.ellipse([fx, fy + 46, fx + 130, fy + 86], fill=JAUNE, outline=orange, width=3)
+    for hx, hy, hr in [(fx + 40, fy + 46, 7), (fx + 85, fy + 56, 9), (fx + 62, fy + 34, 6)]:
+        d.ellipse([hx - hr, hy - hr, hx + hr, hy + hr], fill=orange)
+    d.text((360, 540), "10 litres de lait → 1 kg de fromage", font=police("arialbd.ttf", 28), fill=BLEU)
+
+
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
+    "eleveai-maths-974-lait-reunion": {
+        "badge": "LA RÉUNION · EN VRAI", "titre": ["LE LAIT DE", "LA RÉUNION"], "taille": 74,
+        "sous": "du pré des hauts à ton yaourt", "accroche": acc_lait_974,
+    },
     "eleveai-maths-974-circulation-eau": {
         "badge": "LA RÉUNION · EN VRAI", "titre": ["L'EAU DE", "LA RÉUNION"], "taille": 74,
         "sous": "de l'océan à ton robinet", "accroche": acc_eau_974,
