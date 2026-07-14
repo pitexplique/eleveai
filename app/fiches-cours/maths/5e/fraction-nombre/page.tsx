@@ -4,21 +4,21 @@
 import type { Metadata } from "next";
 import FicheCoursClient from "@/components/fiches/FicheCoursClient";
 import {
-  ficheFractionsAddition5e,
-  slidesFractionsAddition5e,
-} from "@/lib/fiches/maths-5e-fractions-addition";
+  ficheFractions5e,
+  slidesFractions5e,
+} from "@/lib/fiches/maths-5e-fractions";
 
 export const metadata: Metadata = {
-  title: "Additionner des fractions — fiche de cours 5e | EleveAI",
+  title: "Les fractions — fiche de cours 5e | EleveAI",
   description:
-    "Définition, propriétés, formule, exemples corrigés et exercices : la fiche de cours complète de l'addition de fractions en 5e, à lire, imprimer ou réviser en flashcards.",
+    "Définition, propriétés, exemples corrigés et exercices : la fiche de cours complète des fractions en 5e (simplifier, comparer, additionner, multiplier, diviser, inverse, opposé), à lire, imprimer ou réviser en flashcards.",
 };
 
-export default function FractionsAdditionCinquiemePage() {
+export default function FractionsCinquiemePage() {
   return (
     <FicheCoursClient
-      fiche={ficheFractionsAddition5e}
-      slides={slidesFractionsAddition5e}
+      fiche={ficheFractions5e}
+      slides={slidesFractions5e}
     />
   );
 }

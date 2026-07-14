@@ -87,8 +87,8 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume: "Calculer un pourcentage d'un nombre, une réduction ou une augmentation.",
   },
   "maths/5e/fraction-nombre": {
-    titre: "Additionner des fractions",
-    resume: "Mettre au même dénominateur, puis additionner les numérateurs.",
+    titre: "Les fractions",
+    resume: "Simplifier, comparer et calculer (addition, produit, division, inverse, opposé).",
   },
   "maths/4e/pythagore-theoreme": {
     titre: "Le théorème de Pythagore",
