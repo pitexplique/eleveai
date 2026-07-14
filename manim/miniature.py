@@ -137,6 +137,20 @@ def acc_fraction_5e(d):
     d.text((732, 396), "=", font=police("ariblk.ttf", 52), fill=NAVY)
 
 
+def acc_litteral(d):
+    # 3 boîtes « x » bleues + 2 vertes = 5x (les termes semblables).
+    def boite(x, y, col, s=54):
+        d.rounded_rectangle([x, y, x + s, y + s], radius=8, fill=col, outline=NAVY, width=3)
+        centre(d, x + s / 2, y + 8, "x", police("ariblk.ttf", 34), (255, 255, 255))
+    y = 344
+    for i in range(3):
+        boite(352 + i * 62, y, BLEU)
+    d.text((352 + 3 * 62 + 4, y + 6), "+", font=police("ariblk.ttf", 40), fill=NAVY)
+    for i in range(2):
+        boite(352 + 3 * 62 + 46 + i * 62, y, VERT)
+    d.text((352 + 5 * 62 + 52, y + 4), "= 5x", font=police("ariblk.ttf", 44), fill=VERT)
+
+
 def acc_longueur(d):
     d.text((360, 300), "2 m", font=police("ariblk.ttf", 96), fill=BLEU)
     d.text((320, 424), "= 200 cm", font=police("arialbd.ttf", 44), fill=VERT)
@@ -236,6 +250,10 @@ NOTIONS = {
     "eleveai-maths-5e-fraction-nombre": {
         "badge": "MATHS · 5e", "titre": ["LES", "FRACTIONS"], "taille": 84,
         "sous": "simplifier · comparer", "accroche": acc_fraction_5e,
+    },
+    "eleveai-maths-5e-litteral-calcul": {
+        "badge": "MATHS · 5e", "titre": ["LE CALCUL", "LITTÉRAL"], "taille": 82,
+        "sous": "des lettres pour les nombres", "accroche": acc_litteral,
     },
     "eleveai-maths-6e-entier-calcul-pose": {
         "badge": "MATHS · 6e", "titre": ["LE CALCUL", "POSÉ"], "taille": 84,
