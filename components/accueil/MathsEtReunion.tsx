@@ -1,4 +1,4 @@
-// Encart accueil « Maths et Réunion » — la série « en vrai 974 » : des vidéos
+// Encart accueil « Les maths en vrai » — la série « en vrai 974 » : des vidéos
 // simulation (façon reel) qui expliquent l'île avec des maths dedans (l'eau, le
 // lait...). L'ancrage hyper-local, c'est le moat : personne d'autre ne fait ça.
 //
@@ -47,7 +47,8 @@ export default function MathsEtReunion() {
               <span aria-hidden>🌋</span> La Réunion, en vrai
             </p>
             <h2 className="mt-3 text-2xl font-black text-white sm:text-3xl">
-              Maths et <span className="text-emerald-300">Réunion</span>
+              Les maths <span className="text-emerald-300">en vrai</span>{" "}
+              <span className="text-white/50">· La Réunion</span>
             </h2>
             <p className="mt-1.5 max-w-2xl text-sm font-semibold leading-6 text-white/75">
               L&apos;île comme salle de classe : des vidéos animées qui expliquent
