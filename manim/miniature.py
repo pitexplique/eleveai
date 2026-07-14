@@ -165,6 +165,17 @@ def acc_prop_5e(d):
     d.text((x0 + 2 * cw + 24, y0 + 18), "× 2", font=police("ariblk.ttf", 40), fill=(176, 84, 20))
 
 
+def acc_stat_5e(d):
+    # petit diagramme en barres : la plus haute surlignée (orange).
+    base, x0, bw, gap = 468, 372, 46, 26
+    orange = (217, 119, 20)
+    bars = [(120, orange), (78, BLEU), (48, BLEU), (66, BLEU)]
+    for i, (h, col) in enumerate(bars):
+        x = x0 + i * (bw + gap)
+        d.rectangle([x, base - h, x + bw, base], fill=col, outline=NAVY, width=3)
+    d.line([(x0 - 12, base), (x0 + 4 * (bw + gap), base)], fill=NAVY, width=4)
+
+
 def acc_longueur(d):
     d.text((360, 300), "2 m", font=police("ariblk.ttf", 96), fill=BLEU)
     d.text((320, 424), "= 200 cm", font=police("arialbd.ttf", 44), fill=VERT)
@@ -272,6 +283,10 @@ NOTIONS = {
     "eleveai-maths-5e-prop-proportionnalite": {
         "badge": "MATHS · 5e", "titre": ["LA", "PROPORTIONNALITÉ"], "taille": 56,
         "sous": "le coefficient", "accroche": acc_prop_5e,
+    },
+    "eleveai-maths-5e-stat-statistique": {
+        "badge": "MATHS · 5e", "titre": ["LES", "STATISTIQUES"], "taille": 66,
+        "sous": "effectif · fréquence · moyenne", "accroche": acc_stat_5e,
     },
     "eleveai-maths-6e-entier-calcul-pose": {
         "badge": "MATHS · 6e", "titre": ["LE CALCUL", "POSÉ"], "taille": 84,
