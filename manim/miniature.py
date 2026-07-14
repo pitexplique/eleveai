@@ -176,6 +176,20 @@ def acc_stat_5e(d):
     d.line([(x0 - 12, base), (x0 + 4 * (bw + gap), base)], fill=NAVY, width=4)
 
 
+def acc_proba_5e(d):
+    # un dé (face 3, points bleu nuit) + P = 1/6.
+    x0, y0, s = 372, 320, 150
+    d.rounded_rectangle([x0, y0, x0 + s, y0 + s], radius=18, outline=NAVY, width=6, fill=(235, 243, 255))
+    cx, cy = x0 + s / 2, y0 + s / 2
+    off, r = s * 0.26, 13
+    for px, py in [(-1, -1), (0, 0), (1, 1)]:
+        d.ellipse([cx + px * off - r, cy + py * off - r, cx + px * off + r, cy + py * off + r], fill=BLEU)
+    d.text((x0 + s + 30, cy - 44), "P =", font=police("arialbd.ttf", 40), fill=NAVY)
+    d.text((x0 + s + 132, cy - 60), "1", font=police("ariblk.ttf", 44), fill=VERT)
+    d.line([(x0 + s + 128, cy - 6), (x0 + s + 168, cy - 6)], fill=NAVY, width=4)
+    d.text((x0 + s + 132, cy + 2), "6", font=police("ariblk.ttf", 44), fill=VERT)
+
+
 def acc_longueur(d):
     d.text((360, 300), "2 m", font=police("ariblk.ttf", 96), fill=BLEU)
     d.text((320, 424), "= 200 cm", font=police("arialbd.ttf", 44), fill=VERT)
@@ -287,6 +301,10 @@ NOTIONS = {
     "eleveai-maths-5e-stat-statistique": {
         "badge": "MATHS · 5e", "titre": ["LES", "STATISTIQUES"], "taille": 66,
         "sous": "effectif · fréquence · moyenne", "accroche": acc_stat_5e,
+    },
+    "eleveai-maths-5e-proba-experience": {
+        "badge": "MATHS · 5e", "titre": ["LES", "PROBABILITÉS"], "taille": 60,
+        "sous": "favorables ÷ possibles", "accroche": acc_proba_5e,
     },
     "eleveai-maths-6e-entier-calcul-pose": {
         "badge": "MATHS · 6e", "titre": ["LE CALCUL", "POSÉ"], "taille": 84,
