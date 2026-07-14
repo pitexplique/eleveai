@@ -86,6 +86,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le calcul littéral",
     resume: "Comprendre, traduire, substituer et réduire une expression avec des lettres.",
   },
+  "maths/5e/prop-proportionnalite": {
+    titre: "La proportionnalité",
+    resume: "Coefficient, tableau, retour à l'unité, ratio, pourcentage, hausse et baisse.",
+  },
   "maths/5e/pourcentages": {
     titre: "Les pourcentages",
     resume: "Calculer un pourcentage d'un nombre, une réduction ou une augmentation.",
