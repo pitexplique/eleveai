@@ -114,6 +114,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les aires",
     resume: "Aire du triangle (base × hauteur ÷ 2), du parallélogramme et des figures composées.",
   },
+  "maths/5e/volume-solide": {
+    titre: "Les volumes",
+    resume: "Pavé droit (L × l × h), prisme et cylindre (aire de base × hauteur), unités.",
+  },
   "maths/5e/pourcentages": {
     titre: "Les pourcentages",
     resume: "Calculer un pourcentage d'un nombre, une réduction ou une augmentation.",
