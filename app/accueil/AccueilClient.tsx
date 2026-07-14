@@ -14,7 +14,7 @@ import RecoDuJourAccueil from "@/components/accueil/RecoDuJourAccueil";
 import EncartCallEnDirect from "@/components/accueil/EncartCallEnDirect";
 import EncartFichesComposees from "@/components/accueil/EncartFichesComposees";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
-import ChaineYoutube6e from "@/components/accueil/ChaineYoutube6e";
+import { SerieVideos6e, SerieVideos5e } from "@/components/accueil/SerieVideosClasse";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
@@ -975,7 +975,8 @@ export default function AccueilPage({
       {/* ── NOUVEAU DANS LE COACH — la 6ᵉ complète (fiche + vidéo par notion),
           extension aux autres classes à venir. Collé sous le coach : les vidéos
           sont la PREUVE que le coach est complet, pas une sortie vers YouTube. */}
-      <ChaineYoutube6e />
+      <SerieVideos6e />
+      <SerieVideos5e />
 
       {/* ── CATALOGUE — 6 cartes façon VueSchool : la générosité affichée (badges
           GRATUIT) + l'accompagnement (FAMILLE). Absorbe Dictée + teaser Explorer +
