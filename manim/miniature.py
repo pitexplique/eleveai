@@ -243,6 +243,18 @@ def acc_aire_5e(d):
     centre(d, 512, 508, "b × h ÷ 2", police("ariblk.ttf", 40), VERT)
 
 
+def acc_volume_5e(d):
+    # un pavé 3D (3 faces) + « aire de base × h ».
+    ox, oy, s, dp = 440, 476, 104, 48
+    A, B, C, D = (ox, oy - s), (ox + s, oy - s), (ox + s, oy), (ox, oy)
+    Ab, Bb, Cb = (ox + dp, oy - s - dp), (ox + s + dp, oy - s - dp), (ox + s + dp, oy - dp)
+    d.polygon([A, B, Bb, Ab], fill=(120, 175, 235), outline=NAVY)   # dessus
+    d.polygon([B, C, Cb, Bb], fill=(24, 70, 130), outline=NAVY)     # droite
+    d.polygon([A, B, C, D], fill=BLEU, outline=NAVY)                # face
+    d.polygon([D, C, (C[0] + dp, C[1] - dp), (D[0] + dp, D[1] - dp)], fill=VERT, outline=NAVY)  # base surlignée
+    centre(d, 512, 500, "aire de base × h", police("arialbd.ttf", 34), VERT)
+
+
 def acc_longueur(d):
     d.text((360, 300), "2 m", font=police("ariblk.ttf", 96), fill=BLEU)
     d.text((320, 424), "= 200 cm", font=police("arialbd.ttf", 44), fill=VERT)
@@ -374,6 +386,10 @@ NOTIONS = {
     "eleveai-maths-5e-aire-surface": {
         "badge": "MATHS · 5e", "titre": ["LES", "AIRES"], "taille": 84,
         "sous": "triangle · parallélogramme", "accroche": acc_aire_5e,
+    },
+    "eleveai-maths-5e-volume-solide": {
+        "badge": "MATHS · 5e", "titre": ["LES", "VOLUMES"], "taille": 84,
+        "sous": "pavé · prisme · cylindre", "accroche": acc_volume_5e,
     },
     "eleveai-maths-6e-entier-calcul-pose": {
         "badge": "MATHS · 6e", "titre": ["LE CALCUL", "POSÉ"], "taille": 84,
