@@ -362,8 +362,40 @@ def acc_volume(d):
     d.text((300, 452), "V = L × l × h", font=police("arialbd.ttf", 40), fill=VERT)
 
 
+def acc_eau_974(d):
+    # l'effet de foehn en un dessin : montagne, nuage + pluie à l'Est, soleil à l'Ouest.
+    import math
+    orange = (217, 119, 20)
+    # la montagne (coupe de l'île)
+    d.polygon([(330, 508), (430, 468), (520, 346), (610, 468), (710, 508)], fill=(90, 106, 128), outline=NAVY)
+    # la mer
+    d.rectangle([310, 508, 730, 530], fill=BLEU)
+    # le soleil à l'Ouest (gauche)
+    sx, sy, sr = 366, 372, 26
+    d.ellipse([sx - sr, sy - sr, sx + sr, sy + sr], fill=JAUNE)
+    for a in range(0, 360, 45):
+        x1 = sx + int((sr + 6) * math.cos(math.radians(a)))
+        y1 = sy + int((sr + 6) * math.sin(math.radians(a)))
+        x2 = sx + int((sr + 18) * math.cos(math.radians(a)))
+        y2 = sy + int((sr + 18) * math.sin(math.radians(a)))
+        d.line([(x1, y1), (x2, y2)], fill=JAUNE, width=4)
+    # le nuage à l'Est (droite) + la pluie
+    cx, cy = 628, 372
+    for dx, dy, r in [(-26, 6, 20), (0, -6, 26), (26, 6, 20)]:
+        d.ellipse([cx + dx - r, cy + dy - r, cx + dx + r, cy + dy + r], fill=(120, 132, 150), outline=NAVY)
+    for i in range(5):
+        x = cx - 34 + i * 17
+        d.line([(x, cy + 34), (x - 6, cy + 58)], fill=BLEU, width=5)
+    # « 20 × plus » : le chiffre qui accroche
+    d.text((430, 536), "20 × plus de pluie à l'Est !", font=police("arialbd.ttf", 30), fill=orange)
+
+
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
+    "eleveai-maths-974-circulation-eau": {
+        "badge": "LA RÉUNION · EN VRAI", "titre": ["L'EAU DE", "LA RÉUNION"], "taille": 74,
+        "sous": "de l'océan à ton robinet", "accroche": acc_eau_974,
+    },
     "eleveai-maths-5e-relatif-nombre": {
         "badge": "MATHS · 5e", "titre": ["LES NOMBRES", "RELATIFS"], "taille": 74,
         "sous": "signe · opposé · comparer", "accroche": acc_relatif,
