@@ -118,6 +118,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les volumes",
     resume: "Pavé droit (L × l × h), prisme et cylindre (aire de base × hauteur), unités.",
   },
+  "maths/5e/algo-programmation": {
+    titre: "Algorithmique et programmation",
+    resume: "Scratch : suite d'instructions, variables, tests (si…) et boucles (répéter…).",
+  },
   "maths/5e/pourcentages": {
     titre: "Les pourcentages",
     resume: "Calculer un pourcentage d'un nombre, une réduction ou une augmentation.",
