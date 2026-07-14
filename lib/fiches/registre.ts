@@ -98,6 +98,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les probabilités",
     resume: "Issue, événement, équiprobabilité et calcul (favorables ÷ possibles).",
   },
+  "maths/5e/angle-mesure": {
+    titre: "Les angles",
+    resume: "Sommet, degré, rapporteur ; angle aigu, droit, obtus et plat.",
+  },
   "maths/5e/pourcentages": {
     titre: "Les pourcentages",
     resume: "Calculer un pourcentage d'un nombre, une réduction ou une augmentation.",
