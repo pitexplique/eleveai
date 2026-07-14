@@ -89,6 +89,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/maths/6e/stat-donnee",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
   { path: "/fiches-cours/maths/6e/proba-experience",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
   { path: "/fiches-cours/maths/6e/algo-programmation",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/maths/5e/relatif-nombre",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/5e/pourcentages",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/5e/fraction-nombre",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/4e/pythagore-theoreme",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
