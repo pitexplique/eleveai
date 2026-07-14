@@ -102,6 +102,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les angles",
     resume: "Sommet, degré, rapporteur ; angle aigu, droit, obtus et plat.",
   },
+  "maths/5e/triangle-figure": {
+    titre: "Les triangles",
+    resume: "Nature, inégalité triangulaire, construction et somme des angles (180°).",
+  },
   "maths/5e/pourcentages": {
     titre: "Les pourcentages",
     resume: "Calculer un pourcentage d'un nombre, une réduction ou une augmentation.",
