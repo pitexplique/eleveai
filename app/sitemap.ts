@@ -345,6 +345,14 @@ const VIDEOS_FICHES: Record<
         "Reconnaître une situation proportionnelle, le coefficient et le passage par l'unité, avec le tableau de proportionnalité dessiné pas à pas (6e).",
     },
   ],
+  "/fiches-cours/maths/6e/pourcentage-nombre": [
+    {
+      id: "pAPkXW4EDsU",
+      title: "Les pourcentages — Maths 6e — EleveAI",
+      description:
+        "Comprendre un pourcentage comme une fraction sur 100, calculer le pourcentage d'une quantité et passer de fraction à décimal à pourcentage, montré pas à pas (6e).",
+    },
+  ],
   "/fiches-cours/maths/6e/entier-calcul-mental": [
     {
       id: "fi-Xs0v2FoY",

@@ -35,6 +35,13 @@ function normalizeClasse(value: string | null, classes: Classe[], fallback: Clas
   return classes.includes(value as Classe) ? (value as Classe) : fallback;
 }
 
+// youtu.be/ID, youtube.com/watch?v=ID, /embed/ID… → l'identifiant seul, pour
+// afficher la miniature YouTube (i.ytimg.com) à la place d'une icône générique.
+function youtubeId(url: string): string | null {
+  const m = url.match(/(?:youtu\.be\/|v=|embed\/)([A-Za-z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+
 function getMatiereTitle(matiere: string, classe: Classe) {
   const classeLabel: Record<Classe, string> = {
     cp: "CP",
@@ -399,18 +406,42 @@ export default function CoachIA() {
                               Fiche
                             </Link>
                           ) : null}
-                          {videos.length ? (
+                          {videos.length ? (() => {
+                            // Miniature YouTube réelle (mini 16:9) à la place de
+                            // l'icône générique : plus vivant, cohérent avec
+                            // l'accueil, mais volontairement PETIT pour garder la
+                            // densité de la liste de notions.
+                            const vid = youtubeId(videos[0].url);
+                            return (
                             <a
                               href={videos[0].url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 rounded-full border border-rose-200 bg-rose-50 px-2 py-0.5 text-xs font-bold text-rose-700 transition hover:bg-rose-100"
+                              className="group/vid inline-flex items-center gap-1.5 rounded-lg border border-rose-200 bg-rose-50 p-0.5 pr-2 text-xs font-bold text-rose-700 transition hover:bg-rose-100"
                               title={videos[0].titre ?? "Voir la vidéo de cette notion"}
                             >
-                              <Play className="h-3.5 w-3.5" />
+                              {vid ? (
+                                <span className="relative block aspect-video w-12 shrink-0 overflow-hidden rounded bg-black/10">
+                                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                                  <img
+                                    src={`https://i.ytimg.com/vi/${vid}/mqdefault.jpg`}
+                                    alt=""
+                                    loading="lazy"
+                                    className="h-full w-full object-cover transition group-hover/vid:scale-105"
+                                  />
+                                  <span className="absolute inset-0 flex items-center justify-center">
+                                    <span className="flex h-4 w-4 items-center justify-center rounded-full bg-rose-600/90 shadow">
+                                      <Play className="h-2.5 w-2.5 fill-white text-white" />
+                                    </span>
+                                  </span>
+                                </span>
+                              ) : (
+                                <Play className="ml-1 h-3.5 w-3.5" />
+                              )}
                               Vidéo
                             </a>
-                          ) : null}
+                            );
+                          })() : null}
                         </div>
                         <ol className="space-y-1">
                           {micros.map((microId, index) => (
