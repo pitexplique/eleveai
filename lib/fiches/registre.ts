@@ -110,6 +110,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "La symétrie centrale",
     resume: "Le demi-tour autour d'un centre : image d'un point, d'une figure, propriétés.",
   },
+  "maths/5e/aire-surface": {
+    titre: "Les aires",
+    resume: "Aire du triangle (base × hauteur ÷ 2), du parallélogramme et des figures composées.",
+  },
   "maths/5e/pourcentages": {
     titre: "Les pourcentages",
     resume: "Calculer un pourcentage d'un nombre, une réduction ou une augmentation.",
