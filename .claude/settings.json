@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Bash(git *)",
+      "Bash(grep *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(echo *)",
+      "Bash(ls *)",
+      "Bash(sed *)",
+      "Bash(find *)",
+      "Bash(cat *)",
+      "Bash(cut *)",
+      "Bash(awk *)",
+      "Bash(tr *)",
+      "Bash(wc *)",
+      "Bash(sort *)",
+      "Bash(uniq *)",
+      "Bash(xargs *)",
+      "Bash(cygpath *)",
+      "Bash(for *)",
+      "Bash(while *)",
+      "Bash(test *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(mv *)",
+      "Bash(python *)",
+      "Bash(python3 *)",
+      "Bash(npx tsc *)",
+      "Bash(npx tsx *)",
+      "Bash(ffmpeg *)",
+      "Bash(ffprobe *)",
+      "Bash(rm -rf .next)",
+      "PowerShell(git *)",
+      "PowerShell(python *)",
+      "PowerShell(npx tsc *)",
+      "PowerShell(ffmpeg *)",
+      "PowerShell(ffprobe *)"
+    ]
+  }
+}
