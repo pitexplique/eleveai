@@ -151,6 +151,20 @@ def acc_litteral(d):
     d.text((352 + 5 * 62 + 52, y + 4), "= 5x", font=police("ariblk.ttf", 44), fill=VERT)
 
 
+def acc_prop_5e(d):
+    # petit tableau de proportionnalité : 3 6 / 9 18 avec ×2.
+    x0, y0, cw, ch = 360, 336, 90, 62
+    f = police("ariblk.ttf", 34)
+    vals = [["3", "6"], ["9", "18"]]
+    cols = [BLEU, VERT]
+    for r in range(2):
+        for c in range(2):
+            x, y = x0 + c * cw, y0 + r * ch
+            d.rectangle([x, y, x + cw, y + ch], outline=NAVY, width=3)
+            centre(d, x + cw / 2, y + 12, vals[r][c], f, cols[r])
+    d.text((x0 + 2 * cw + 24, y0 + 18), "× 2", font=police("ariblk.ttf", 40), fill=(176, 84, 20))
+
+
 def acc_longueur(d):
     d.text((360, 300), "2 m", font=police("ariblk.ttf", 96), fill=BLEU)
     d.text((320, 424), "= 200 cm", font=police("arialbd.ttf", 44), fill=VERT)
@@ -254,6 +268,10 @@ NOTIONS = {
     "eleveai-maths-5e-litteral-calcul": {
         "badge": "MATHS · 5e", "titre": ["LE CALCUL", "LITTÉRAL"], "taille": 82,
         "sous": "des lettres pour les nombres", "accroche": acc_litteral,
+    },
+    "eleveai-maths-5e-prop-proportionnalite": {
+        "badge": "MATHS · 5e", "titre": ["LA", "PROPORTIONNALITÉ"], "taille": 56,
+        "sous": "le coefficient", "accroche": acc_prop_5e,
     },
     "eleveai-maths-6e-entier-calcul-pose": {
         "badge": "MATHS · 6e", "titre": ["LE CALCUL", "POSÉ"], "taille": 84,
