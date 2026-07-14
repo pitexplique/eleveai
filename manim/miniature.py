@@ -32,6 +32,7 @@ NAVY = (7, 42, 74)
 BLEU = (37, 99, 175)
 VERT = (22, 163, 90)
 JAUNE = (255, 200, 0)
+ROUGE = (211, 47, 47)
 
 
 def police(nom, taille):
@@ -100,6 +101,24 @@ def acc_pourcentage(d):
 def acc_calcul_mental(d):
     d.text((330, 300), "47 + 8", font=police("ariblk.ttf", 92), fill=BLEU)
     d.text((300, 424), "= 50 + 5 = 55", font=police("arialbd.ttf", 40), fill=VERT)
+
+
+def acc_relatif(d):
+    # droite graduée : 0 au centre, un négatif (rouge) à gauche, un positif (vert) à droite.
+    y = 400
+    x0, x1 = 320, 704
+    cx = (x0 + x1) / 2
+    d.line([(x0 - 8, y), (x1 + 8, y)], fill=NAVY, width=6)
+    d.polygon([(x1 + 8, y), (x1 - 12, y - 12), (x1 - 12, y + 12)], fill=NAVY)
+    xg, xd = x0 + 40, x1 - 40
+    for x in (xg, cx, xd):
+        d.line([(x, y - 13), (x, y + 13)], fill=NAVY, width=5)
+    d.ellipse([xg - 15, y - 15, xg + 15, y + 15], fill=ROUGE)
+    d.ellipse([xd - 15, y - 15, xd + 15, y + 15], fill=VERT)
+    f = police("ariblk.ttf", 54)
+    centre(d, xg, y - 84, "-3", f, ROUGE)
+    centre(d, cx, y - 80, "0", f, NAVY)
+    centre(d, xd, y - 84, "+5", f, VERT)
 
 
 def acc_longueur(d):
@@ -194,6 +213,10 @@ def acc_volume(d):
 
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
+    "eleveai-maths-5e-relatif-nombre": {
+        "badge": "MATHS · 5e", "titre": ["LES NOMBRES", "RELATIFS"], "taille": 74,
+        "sous": "signe · opposé · comparer", "accroche": acc_relatif,
+    },
     "eleveai-maths-6e-entier-calcul-pose": {
         "badge": "MATHS · 6e", "titre": ["LE CALCUL", "POSÉ"], "taille": 84,
         "sous": "les 4 opérations, pas à pas", "accroche": acc_calcul_pose,
