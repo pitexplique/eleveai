@@ -106,6 +106,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les triangles",
     resume: "Nature, inégalité triangulaire, construction et somme des angles (180°).",
   },
+  "maths/5e/sym-centrale": {
+    titre: "La symétrie centrale",
+    resume: "Le demi-tour autour d'un centre : image d'un point, d'une figure, propriétés.",
+  },
   "maths/5e/pourcentages": {
     titre: "Les pourcentages",
     resume: "Calculer un pourcentage d'un nombre, une réduction ou une augmentation.",
