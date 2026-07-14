@@ -190,6 +190,22 @@ def acc_proba_5e(d):
     d.text((x0 + s + 132, cy + 2), "6", font=police("ariblk.ttf", 44), fill=VERT)
 
 
+def acc_angle_5e(d):
+    # un angle obtus (~120°) avec arc + mesure.
+    import math
+    orange = (217, 119, 20)
+    ox, oy = 430, 462
+    L = 230
+    d.line([(ox, oy), (ox + L, oy)], fill=BLEU, width=9)  # côté 0°
+    L2 = 150
+    ex = ox + int(L2 * math.cos(math.radians(120)))
+    ey = oy - int(L2 * math.sin(math.radians(120)))
+    d.line([(ox, oy), (ex, ey)], fill=BLEU, width=9)      # côté 120°
+    d.arc([ox - 66, oy - 66, ox + 66, oy + 66], start=240, end=360, fill=orange, width=8)
+    d.text((ox + 30, oy - 118), "120°", font=police("ariblk.ttf", 44), fill=orange)
+    d.ellipse([ox - 8, oy - 8, ox + 8, oy + 8], fill=NAVY)
+
+
 def acc_longueur(d):
     d.text((360, 300), "2 m", font=police("ariblk.ttf", 96), fill=BLEU)
     d.text((320, 424), "= 200 cm", font=police("arialbd.ttf", 44), fill=VERT)
@@ -305,6 +321,10 @@ NOTIONS = {
     "eleveai-maths-5e-proba-experience": {
         "badge": "MATHS · 5e", "titre": ["LES", "PROBABILITÉS"], "taille": 60,
         "sous": "favorables ÷ possibles", "accroche": acc_proba_5e,
+    },
+    "eleveai-maths-5e-angle-mesure": {
+        "badge": "MATHS · 5e", "titre": ["LES", "ANGLES"], "taille": 84,
+        "sous": "aigu · droit · obtus", "accroche": acc_angle_5e,
     },
     "eleveai-maths-6e-entier-calcul-pose": {
         "badge": "MATHS · 6e", "titre": ["LE CALCUL", "POSÉ"], "taille": 84,
