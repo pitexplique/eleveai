@@ -563,7 +563,7 @@ export default function PictoMathsClient({
   domaine = LIVRET.domaine,
   baseline = LIVRET.baseline,
   retourHref = "/maths-974",
-  retourLabel = "Maths Réel · 974",
+  retourLabel = "Les maths en vrai · 974",
   signupFrom = "picto",
 }: {
   titre?: string;
