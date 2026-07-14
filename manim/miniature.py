@@ -218,6 +218,18 @@ def acc_triangle_5e(d):
     centre(d, 520, 392, "180°", police("ariblk.ttf", 40), VERT)
 
 
+def acc_sym_centrale(d):
+    # une figure F (bleu) et son image F' (rouge) par demi-tour autour de O.
+    ox, oy = 560, 420  # centre O
+    F = [(430, 350), (508, 350), (430, 430)]
+    Fp = [(2 * ox - x, 2 * oy - y) for (x, y) in F]  # symétrique par rapport à O
+    d.polygon(F, fill=BLEU, outline=NAVY)
+    d.polygon(Fp, fill=(211, 47, 47), outline=NAVY)
+    d.line([(430, 350), Fp[0]], fill=CARREAU_FORT, width=2)
+    d.ellipse([ox - 9, oy - 9, ox + 9, oy + 9], fill=JAUNE, outline=NAVY, width=2)
+    d.text((ox + 14, oy - 6), "O", font=police("arialbd.ttf", 30), fill=NAVY)
+
+
 def acc_longueur(d):
     d.text((360, 300), "2 m", font=police("ariblk.ttf", 96), fill=BLEU)
     d.text((320, 424), "= 200 cm", font=police("arialbd.ttf", 44), fill=VERT)
@@ -341,6 +353,10 @@ NOTIONS = {
     "eleveai-maths-5e-triangle-figure": {
         "badge": "MATHS · 5e", "titre": ["LES", "TRIANGLES"], "taille": 78,
         "sous": "nature · construire · 180°", "accroche": acc_triangle_5e,
+    },
+    "eleveai-maths-5e-sym-centrale": {
+        "badge": "MATHS · 5e", "titre": ["LA SYMÉTRIE", "CENTRALE"], "taille": 60,
+        "sous": "le demi-tour autour de O", "accroche": acc_sym_centrale,
     },
     "eleveai-maths-6e-entier-calcul-pose": {
         "badge": "MATHS · 6e", "titre": ["LE CALCUL", "POSÉ"], "taille": 84,
