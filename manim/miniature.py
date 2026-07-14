@@ -230,6 +230,19 @@ def acc_sym_centrale(d):
     d.text((ox + 14, oy - 6), "O", font=police("arialbd.ttf", 30), fill=NAVY)
 
 
+def acc_aire_5e(d):
+    # un triangle avec base + hauteur (pointillés) + la formule b×h/2.
+    orange = (217, 119, 20)
+    A, B, C = (392, 460), (620, 460), (470, 320)
+    d.polygon([A, B, C], fill=BLEU, outline=NAVY)
+    # hauteur en pointillés depuis C
+    for y in range(322, 460, 14):
+        d.line([(C[0], y), (C[0], min(y + 8, 460))], fill=orange, width=3)
+    d.text((378, 468), "base", font=police("arialbd.ttf", 26), fill=NAVY)
+    d.text((C[0] + 10, 380), "h", font=police("arialbd.ttf", 26), fill=orange)
+    centre(d, 512, 508, "b × h ÷ 2", police("ariblk.ttf", 40), VERT)
+
+
 def acc_longueur(d):
     d.text((360, 300), "2 m", font=police("ariblk.ttf", 96), fill=BLEU)
     d.text((320, 424), "= 200 cm", font=police("arialbd.ttf", 44), fill=VERT)
@@ -357,6 +370,10 @@ NOTIONS = {
     "eleveai-maths-5e-sym-centrale": {
         "badge": "MATHS · 5e", "titre": ["LA SYMÉTRIE", "CENTRALE"], "taille": 60,
         "sous": "le demi-tour autour de O", "accroche": acc_sym_centrale,
+    },
+    "eleveai-maths-5e-aire-surface": {
+        "badge": "MATHS · 5e", "titre": ["LES", "AIRES"], "taille": 84,
+        "sous": "triangle · parallélogramme", "accroche": acc_aire_5e,
     },
     "eleveai-maths-6e-entier-calcul-pose": {
         "badge": "MATHS · 6e", "titre": ["LE CALCUL", "POSÉ"], "taille": 84,
