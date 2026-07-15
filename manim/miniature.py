@@ -78,6 +78,16 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_aire_cm2(d):
+    # une grille 4 × 3 remplie (la surface) + A = 4 × 3 = 12 cm².
+    gx, gy, cs = 388, 322, 42
+    for r in range(3):
+        for c in range(4):
+            x, y = gx + c * cs, gy + r * cs
+            d.rectangle([x, y, x + cs, y + cs], fill=BLEU, outline=PAPIER, width=2)
+    d.text((gx - 24, gy + 3 * cs + 20), "A = 4 × 3 = 12 cm²", font=police("arialbd.ttf", 38), fill=VERT)
+
+
 def acc_perimetre_cm2(d):
     # un rectangle dont le TOUR est surligné (vert) + P = 2 × (L + l).
     x0, y0, w, h = 372, 318, 272, 150
@@ -562,6 +572,10 @@ NOTIONS = {
     "eleveai-maths-cm2-perimetre": {
         "badge": "MATHS · CM2", "titre": ["LES", "PÉRIMÈTRES"], "taille": 78,
         "sous": "la longueur du tour", "accroche": acc_perimetre_cm2,
+    },
+    "eleveai-maths-cm2-aire": {
+        "badge": "MATHS · CM2", "titre": ["LES", "AIRES"], "taille": 84,
+        "sous": "la surface · en cm²", "accroche": acc_aire_cm2,
     },
     "eleveai-maths-5e-relatif-nombre": {
         "badge": "MATHS · 5e", "titre": ["LES NOMBRES", "RELATIFS"], "taille": 74,
