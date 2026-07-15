@@ -707,24 +707,43 @@ export default function AccueilPage({
             </a>
           ))}
 
-          {/* Vu sur l'île : le carnet de terrain (3 dernières cartes maths_974). */}
-          {apercu974 && apercu974.length > 0 && (
-            <div className="border-t border-[#1d1c16]/25 pt-3">
-              <h3 className="font-serif text-lg font-black leading-snug">
-                📸 Vu sur l&apos;île
-              </h3>
-              <ul className="mt-1 space-y-1">
-                {apercu974.map((c) => (
-                  <li key={c.id} className="text-sm font-medium text-[#1d1c16]/75">
-                    <span className="font-black">{c.lieu}</span> — {c.titre}
-                  </li>
-                ))}
-              </ul>
-              <Link href="/maths-974" className="mt-1.5 block text-sm font-black text-emerald-900">
-                Ouvrir le carnet de terrain →
+          {/* Vu sur l'île : les posts du carnet de terrain (maths_974), en
+              cartes visuelles mêlées aux vidéos — le « fil de l'île ». */}
+          {(apercu974 ?? []).map((c) => {
+            const img =
+              c.image_url ??
+              (c.youtube_id ? `https://i.ytimg.com/vi/${c.youtube_id}/hqdefault.jpg` : null);
+            return (
+              <Link key={c.id} href="/maths-974" className="group border-t border-[#1d1c16]/25 pt-3">
+                <div className="relative aspect-video w-full overflow-hidden border border-[#1d1c16]/20 bg-[#1d1c16]/5">
+                  {img ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={img}
+                      alt={c.titre}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <span className="flex h-full w-full items-center justify-center text-4xl" aria-hidden>
+                      📸
+                    </span>
+                  )}
+                  <span className="absolute left-2 top-2 rounded-sm bg-[#1d1c16]/80 px-2 py-0.5 text-[10px] font-black uppercase tracking-wide text-[#f6f1e4]">
+                    📍 {c.lieu}
+                  </span>
+                </div>
+                <h3 className="mt-2 font-serif text-lg font-black leading-snug group-hover:underline">
+                  {c.titre}
+                </h3>
+                {c.notion && (
+                  <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
+                    🧮 {c.notion}
+                  </p>
+                )}
               </Link>
-            </div>
-          )}
+            );
+          })}
         </div>
 
         <div className="mt-5 flex flex-wrap items-center gap-3 border-t border-[#1d1c16]/25 pt-4">
