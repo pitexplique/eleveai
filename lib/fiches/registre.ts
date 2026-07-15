@@ -82,6 +82,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",
   },
+  "maths/cm2/fraction": {
+    titre: "Les fractions",
+    resume: "Lire, dessiner (barre, disque, grille) et placer une fraction sur la droite graduée.",
+  },
   "maths/5e/relatif-nombre": {
     titre: "Les nombres relatifs",
     resume: "Lire, placer et comparer les relatifs ; signe, opposé et valeur absolue.",
