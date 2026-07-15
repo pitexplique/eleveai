@@ -431,7 +431,7 @@ class LaitReunion974(LaitBase):
         q1 = self.T("Combien de fromages la fromagerie", size=30, color=WHITE).move_to([0, -1.75, 0])
         q2 = self.T("fait-elle en une journée ?", size=30, color=WHITE).next_to(q1, DOWN, buff=0.18)
         self.play(self.anim_entree(q1, mode="slide_l"), self.anim_entree(q2, mode="slide_r"))
-        pause = self.T("⏸ Mets pause : il y a DEUX étapes...", size=28, color=ORANGE_RETENUE).to_edge(DOWN, buff=0.35)
+        pause = self.T("Mets pause : il y a DEUX étapes !", size=28, color=ORANGE_RETENUE).to_edge(DOWN, buff=0.35)
         self.play(GrowFromCenter(pause))
         self.wait(4.5)
 

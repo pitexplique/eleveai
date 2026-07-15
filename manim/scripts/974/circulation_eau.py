@@ -97,9 +97,58 @@ class EauBase(Scene):
         return t
 
     def titre_ecran(self, texte):
+        # les titres alternent leur entrée (Write / glisse / grossit).
         t = self.T(texte, size=38, color=JAUNE_TITRE).to_edge(UP)
-        self.play(Write(t))
+        if not hasattr(self, "_tt"):
+            self._tt = 0
+        anim = [Write(t), FadeIn(t, shift=0.3 * DOWN), GrowFromCenter(t)][self._tt % 3]
+        self._tt += 1
+        self.play(anim)
         return t
+
+    def anim_entree(self, m, mode=None, run_time=0.8):
+        """Apparition qui CHANGE à chaque appel (anti-monotonie). Sans mode imposé,
+        on tourne dans une palette variée (fini le tout-Write)."""
+        palette = ["fade_up", "pop", "slide_r", "grow", "fade_down", "slide_l", "write"]
+        if mode is None:
+            if not hasattr(self, "_ai"):
+                self._ai = 0
+            mode = palette[self._ai % len(palette)]
+            self._ai += 1
+        table = {
+            "write": lambda: Write(m, run_time=run_time),
+            "fade_up": lambda: FadeIn(m, shift=0.45 * UP, run_time=run_time),
+            "fade_down": lambda: FadeIn(m, shift=0.45 * DOWN, run_time=run_time),
+            "slide_r": lambda: FadeIn(m, shift=0.7 * RIGHT, run_time=run_time),
+            "slide_l": lambda: FadeIn(m, shift=0.7 * LEFT, run_time=run_time),
+            "pop": lambda: FadeIn(m, scale=0.5, run_time=run_time),
+            "grow": lambda: GrowFromCenter(m, run_time=run_time),
+        }
+        return table[mode]()
+
+    def legende_mobile(self, places=None):
+        """dire() : une légende à la fois, qui CHANGE de place ET d'animation à
+        chaque étape (fini la 2e ligne qui se réécrit au même endroit). `pos=`
+        force une position, `mode=` force l'animation."""
+        state = {"m": None, "k": 0}
+        if places is None:
+            places = [(-3.4, 2.6), (3.2, 1.9), (0, 2.9), (-3.3, 0.9), (3.3, -1.4), (0, -2.9)]
+
+        def dire(texte, size=26, couleur=BLEU_CALCUL, mode=None, pos=None):
+            x, y = pos if pos is not None else places[state["k"] % len(places)]
+            t = self.T(texte, size=size, color=couleur).move_to([x, y, 0])
+            if t.width > self.LARGEUR_SURE - 1.0:
+                t.scale_to_fit_width(self.LARGEUR_SURE - 1.0).move_to([0, y, 0])
+            entree = self.anim_entree(t, mode=mode)
+            if state["m"] is None:
+                self.play(entree)
+            else:
+                self.play(FadeOut(state["m"], shift=0.2 * DOWN), entree)
+            state["m"] = t
+            state["k"] += 1
+            return t
+
+        return dire, state
 
 
 # ════════════════════════════════════════════════════════════════════════════════
@@ -136,9 +185,9 @@ class CirculationEau974(EauBase):
         accroche = self.T("Suivons une goutte d'eau : de l'océan... jusqu'à la lumière !",
                           size=30, color=BLEU_CALCUL).next_to(sous, DOWN, buff=0.55)
 
-        self.play(Write(titre), FadeIn(sous, shift=0.3 * DOWN))
-        self.play(FadeIn(mer), FadeIn(ile, shift=0.2 * UP), GrowFromCenter(sol))
-        self.play(Write(accroche))
+        self.play(GrowFromCenter(titre), FadeIn(sous, shift=0.3 * DOWN))
+        self.play(FadeIn(mer), FadeIn(ile, shift=0.3 * UP), GrowFromCenter(sol))
+        self.play(Rotate(sol[1], PI / 6, run_time=0.9), FadeIn(accroche, scale=0.5))
         self.wait(2.4)
 
     # ── écran 1 : évaporation ───────────────────────────────────────────────
@@ -152,11 +201,11 @@ class CirculationEau974(EauBase):
                           fill_opacity=0.55, stroke_width=0).move_to([0, -2.7, 0])
         nom = self.T("OCÉAN INDIEN", size=24, color=WHITE).move_to(ocean.get_center())
         sol = soleil(0.5).move_to([-5.2, 2.4, 0])
-        self.play(FadeIn(ocean), Write(nom), GrowFromCenter(sol))
+        self.play(GrowFromEdge(ocean, DOWN), FadeIn(nom), GrowFromCenter(sol))
         self.play(Rotate(sol[1], PI / 8), run_time=0.8)
 
         l1 = self.T("Le soleil chauffe l'océan : l'eau s'évapore.", size=28).move_to([1.2, 2.6, 0])
-        self.play(Write(l1))
+        self.play(self.anim_entree(l1, mode="slide_r"))
 
         # les gouttes invisibles qui montent
         gouttes = VGroup(*[
@@ -171,13 +220,12 @@ class CirculationEau974(EauBase):
         ], lag_ratio=0.18), run_time=3.0)
 
         nu = nuage(1.8).move_to([1.6, 1.2, 0])
-        l2 = self.T("En montant, la vapeur refroidit : elle redevient", size=26, color=BLEU_CALCUL)
-        l3 = self.T("des gouttes → un nuage est né !", size=26, color=BLEU_CALCUL)
-        l2.move_to([1.2, -0.4, 0])
-        l3.next_to(l2, DOWN, buff=0.25)
-        self.play(FadeOut(gouttes), FadeIn(nu, scale=0.6))
-        self.play(Write(l2), Write(l3))
-        self.wait(2.6)
+        l2 = self.T("En montant, la vapeur refroidit :", size=26, color=BLEU_CALCUL).move_to([-0.2, -0.3, 0])
+        l3 = self.T("elle redevient des gouttes → un nuage est né !", size=26, color=BLEU_CALCUL).move_to([0, -1.1, 0])
+        self.play(FadeIn(nu, scale=0.6))
+        self.play(self.anim_entree(l2, mode="fade_up"))
+        self.play(self.anim_entree(l3, mode="grow"), Flash(nu, color=GREY_A))
+        self.wait(2.4)
 
     # ── écran 2 : l'effet de foehn ──────────────────────────────────────────
 
@@ -186,17 +234,9 @@ class CirculationEau974(EauBase):
         self.add_mascotte()
         self.titre_ecran("2. Pourquoi il pleut surtout à l'Est ?")
 
-        # une seule légende à la fois, dans la bande dégagée sous le titre (y ~ 2.5)
-        legende = {"m": None}
-
-        def dire(texte, couleur=BLEU_CALCUL):
-            t = self.T(texte, size=26, color=couleur).move_to([0, 2.55, 0])
-            if legende["m"] is None:
-                self.play(Write(t))
-            else:
-                self.play(FadeOut(legende["m"]), Write(t))
-            legende["m"] = t
-            return t
+        # légendes distribuées : places calées sur le CIEL dégagé (haut-gauche,
+        # haut-droite) pour ne pas tomber sur le relief central.
+        dire, legende = self.legende_mobile(places=[(-3.4, 2.5), (3.3, 2.5), (-3.4, 1.4), (3.3, 1.4)])
 
         ile = self.profil_ile()
         mer_e = self.mer(6.3, 1.4)
@@ -204,23 +244,23 @@ class CirculationEau974(EauBase):
         sommet = self.T("Piton des Neiges · 3 071 m", size=20).move_to([0, 1.75, 0])
         ouest = self.T("OUEST", size=24, color=ORANGE_RETENUE).move_to([-5.4, -3.05, 0])
         est = self.T("EST", size=24, color=BLEU_CALCUL).move_to([5.4, -3.05, 0])
-        self.play(FadeIn(ile), FadeIn(mer_e), FadeIn(mer_o))
-        self.play(Write(sommet), Write(ouest), Write(est))
+        self.play(FadeIn(ile, shift=0.3 * UP), FadeIn(mer_e), FadeIn(mer_o))
+        self.play(FadeIn(sommet, shift=0.2 * DOWN), FadeIn(ouest, shift=0.3 * LEFT), FadeIn(est, shift=0.3 * RIGHT))
 
         vent = Arrow([6.6, -0.9, 0], [4.4, -0.9, 0], color=WHITE, stroke_width=4, buff=0)
         vlab = self.T("les alizés", size=22).next_to(vent, UP, buff=0.12)
-        self.play(GrowArrow(vent), Write(vlab))
+        self.play(GrowArrow(vent), FadeIn(vlab, shift=0.3 * LEFT))
 
         nu = nuage(1.5).move_to([5.6, -1.3, 0])
         self.play(FadeIn(nu, scale=0.6))
-        dire("Le vent pousse le nuage sur la montagne.")
+        dire("Le vent pousse le nuage sur la montagne.", mode="slide_r")
         self.play(nu.animate.move_to([3.2, -0.6, 0]), run_time=1.2)
         self.play(nu.animate.move_to([1.6, 1.1, 0]).scale(1.25), run_time=1.4)
 
         # il pleut sur le versant Est
         pluie1 = gouttes_pluie([2.6, 0.4, 0], n=9, largeur=2.2)
         pluie2 = gouttes_pluie([3.4, -0.6, 0], n=9, largeur=2.2)
-        dire("En haut il fait froid : il pleut à l'EST.")
+        dire("En haut il fait froid : il pleut à l'EST.", mode="pop")
         for pl in (pluie1, pluie2):
             self.play(LaggedStart(*[
                 Succession(FadeIn(d, shift=0.25 * DOWN), FadeOut(d, shift=0.35 * DOWN))
@@ -232,13 +272,13 @@ class CirculationEau974(EauBase):
         descente = Arrow([-1.8, 0.6, 0], [-4.0, -1.5, 0], color=ORANGE_RETENUE, stroke_width=4, buff=0)
         sol = soleil(0.4).move_to([-5.3, 1.9, 0])
         self.play(GrowArrow(descente), GrowFromCenter(sol))
-        dire("L'air redescend déjà sec : l'OUEST reste sec.", couleur=ORANGE_RETENUE)
+        dire("L'air redescend sec : l'OUEST reste sec.", couleur=ORANGE_RETENUE, mode="slide_l")
         self.wait(1.0)
 
         self.play(FadeOut(legende["m"]))
         foehn = self.T("C'est l'effet de foehn !", size=34, color=VERT_OK).move_to([0, 2.55, 0])
-        self.play(Write(foehn), Circumscribe(VGroup(vent, nu), color=VERT_OK))
-        self.wait(2.4)
+        self.play(GrowFromCenter(foehn), Circumscribe(VGroup(vent, nu), color=VERT_OK))
+        self.wait(2.2)
 
     # ── écran 3 : l'eau descend ─────────────────────────────────────────────
 
@@ -250,12 +290,16 @@ class CirculationEau974(EauBase):
         ile = self.profil_ile()
         mer_e = self.mer(6.3, 1.4)
         nu = nuage(1.4).move_to([0.6, 2.0, 0])
-        self.play(FadeIn(ile), FadeIn(mer_e), FadeIn(nu))
+        self.play(FadeIn(ile, shift=0.3 * UP), FadeIn(mer_e), FadeIn(nu, scale=0.7))
 
         pl = gouttes_pluie([0.6, 1.3, 0], n=7, largeur=1.6)
         self.play(LaggedStart(*[
             Succession(FadeIn(d, shift=0.25 * DOWN), FadeOut(d, shift=0.35 * DOWN)) for d in pl
         ], lag_ratio=0.06), run_time=1.4)
+
+        l1 = self.T("L'eau dévale : cascades, puis rivières, jusqu'à la mer.",
+                    size=25, color=BLEU_CALCUL).move_to([-1.4, 2.9, 0])
+        self.play(self.anim_entree(l1, mode="slide_l"))
 
         # le chemin de l'eau : sommet → versant Est → mer
         chemin = VMobject(color=BLEU_CALCUL, stroke_width=5)
@@ -264,10 +308,6 @@ class CirculationEau974(EauBase):
             [3.2, -1.4, 0], [4.2, -2.0, 0], [5.8, -2.62, 0],
         ])
         self.play(Create(chemin), run_time=1.6)
-
-        l1 = self.T("L'eau dévale : cascades, puis rivières, jusqu'à la mer.",
-                    size=25, color=BLEU_CALCUL).move_to([0, 2.9, 0])
-        self.play(Write(l1))
 
         gouttes = VGroup(*[Circle(radius=0.075, color=BLEU_CALCUL, fill_color=BLEU_CALCUL,
                                   fill_opacity=1, stroke_width=0) for _ in range(4)])
@@ -280,18 +320,18 @@ class CirculationEau974(EauBase):
         infiltre = DashedLine([3.0, -1.35, 0], [3.4, -2.9, 0], color=VIOLET_ACCENT, stroke_width=4)
         l2 = self.T("Une partie s'infiltre sous terre : les nappes.", size=24, color=VIOLET_ACCENT)
         l2.move_to([-3.3, 0.9, 0])
-        self.play(Create(infiltre), Write(l2))
-        self.wait(0.8)
+        self.play(Create(infiltre), self.anim_entree(l2, mode="fade_up"))
+        self.wait(0.6)
 
         # une partie est captée
         captage = RoundedRectangle(width=1.0, height=0.55, corner_radius=0.1, color=VERT_OK,
                                    stroke_width=3).move_to([2.1, -0.45, 0])
         clab = self.T("réservoir", size=18, color=VERT_OK).next_to(captage, RIGHT, buff=0.15)
         l3 = self.T("Une partie est captée : réservoirs → ton robinet !", size=24, color=VERT_OK)
-        l3.move_to([-3.3, 0.1, 0])
-        self.play(Create(captage), Write(clab))
-        self.play(Write(l3))
-        self.wait(2.6)
+        l3.move_to([-3.1, 0.1, 0])
+        self.play(GrowFromCenter(captage), FadeIn(clab, shift=0.2 * RIGHT))
+        self.play(self.anim_entree(l3, mode="grow"))
+        self.wait(2.4)
 
     # ── écran 4 : la centrale hydroélectrique ───────────────────────────────
 
@@ -305,8 +345,8 @@ class CirculationEau974(EauBase):
         rlab = self.T("retenue d'eau, en altitude", size=20).next_to(retenue, UP, buff=0.15)
         conduite = Line([-3.9, 1.35, 0], [-0.7, -1.55, 0], color=GREY_B, stroke_width=12)
         klab = self.T("conduite forcée", size=20).move_to([-3.4, -0.6, 0])
-        self.play(FadeIn(retenue), Write(rlab))
-        self.play(Create(conduite), Write(klab))
+        self.play(FadeIn(retenue, shift=0.3 * DOWN), FadeIn(rlab, shift=0.2 * DOWN))
+        self.play(Create(conduite), FadeIn(klab, shift=0.3 * LEFT))
 
         # la turbine
         turbine = VGroup(
@@ -316,13 +356,14 @@ class CirculationEau974(EauBase):
             Circle(radius=0.08, color=WHITE, fill_color=WHITE, fill_opacity=1, stroke_width=0),
         ).move_to([-0.35, -1.85, 0])
         tlab = self.T("turbine", size=20).next_to(turbine, DOWN, buff=0.15)
-        self.play(Create(turbine), Write(tlab))
+        self.play(Create(turbine), FadeIn(tlab, shift=0.2 * DOWN))
 
         l1 = self.T("À la Rivière de l'Est, l'eau tombe de très haut", size=26, color=BLEU_CALCUL)
         l2 = self.T("dans un grand tuyau : elle fait tourner une turbine.", size=26, color=BLEU_CALCUL)
         l1.move_to([1.8, 2.6, 0])
         l2.next_to(l1, DOWN, buff=0.22)
-        self.play(Write(l1), Write(l2))
+        self.play(self.anim_entree(l1, mode="slide_r"))
+        self.play(self.anim_entree(l2, mode="fade_up"))
 
         # l'eau coule, la turbine tourne
         chemin = Line(conduite.get_start(), conduite.get_end())
@@ -348,80 +389,73 @@ class CirculationEau974(EauBase):
 
         l3 = self.T("La pluie de l'Est éclaire les maisons de toute l'île !", size=27, color=VERT_OK)
         l3.to_edge(DOWN, buff=0.5).shift(LEFT * 1.0)
-        self.play(Write(l3))
-        self.wait(2.6)
+        self.play(GrowFromCenter(l3))
+        self.wait(2.4)
 
     # ── écran 5 : défi ──────────────────────────────────────────────────────
 
     def ecran_defi(self):
         self.clear()
         self.add_mascotte(scale=0.6)
-        titre = self.T("Défi", size=46, color=JAUNE_TITRE).to_edge(UP)
-        self.play(Write(titre))
+        titre = self.T("Défi", size=48, color=JAUNE_TITRE).to_edge(UP)
+        self.play(GrowFromCenter(titre))
 
-        # deux pluviomètres : Commerson vs Saint-Gilles
-        def pluviometre(x, hauteur, couleur):
-            tube = Rectangle(width=0.9, height=3.2, color=WHITE, stroke_width=3).move_to([x, -0.4, 0])
-            eau = Rectangle(width=0.84, height=hauteur, color=couleur, fill_color=couleur,
-                            fill_opacity=0.85, stroke_width=0)
-            eau.move_to([x, -0.4 - 1.6 + hauteur / 2 + 0.03, 0])
-            return VGroup(tube, eau)
+        # rappel encadré, EN HAUT, centré
+        rappel = self.T("Rappel : 1 mm de pluie sur 1 m² = 1 litre", size=26, color=VERT_OK).move_to([0, 2.2, 0])
+        cadre = SurroundingRectangle(rappel, color=VERT_OK, buff=0.2, corner_radius=0.1)
+        self.play(self.anim_entree(rappel, mode="fade_down"), Create(cadre))
 
-        p1 = pluviometre(-4.6, 3.1, BLEU_CALCUL)
-        t1a = self.T("Commerson (Est)", size=22, color=BLEU_CALCUL).next_to(p1, UP, buff=0.2)
-        t1b = self.T("10 000 mm/an", size=22).next_to(p1, DOWN, buff=0.2)
+        # à gauche : la maison + son toit (100 m²) sous la pluie
+        m = maison().scale(1.5).move_to([-4.2, -0.4, 0])
+        pluie = gouttes_pluie([-4.2, 1.2, 0], n=7, largeur=1.9)
+        toit_lab = self.T("toit : 100 m²", size=24, color=WHITE).next_to(m, DOWN, buff=0.25)
+        pluie_lab = self.T("2 000 mm / an", size=24, color=BLEU_CALCUL).move_to([-4.2, 1.7, 0])
+        self.play(FadeIn(m, shift=0.4 * UP))
+        self.play(self.anim_entree(pluie_lab, mode="fade_down"),
+                  LaggedStart(*[Succession(FadeIn(d, shift=0.2 * DOWN), FadeOut(d, shift=0.3 * DOWN)) for d in pluie],
+                              lag_ratio=0.06), run_time=1.4)
+        self.play(self.anim_entree(toit_lab, mode="fade_up"))
 
-        p2 = pluviometre(-1.4, 0.16, ORANGE_RETENUE)
-        t2a = self.T("Saint-Gilles (Ouest)", size=22, color=ORANGE_RETENUE).next_to(p2, UP, buff=0.2)
-        t2b = self.T("500 mm/an", size=22).next_to(p2, DOWN, buff=0.2)
+        # à droite : une citerne de 5 000 L
+        cuve = RoundedRectangle(width=1.7, height=2.0, corner_radius=0.2, color=GREY_B,
+                                fill_color=GREY_D, fill_opacity=0.4, stroke_width=3).move_to([2.6, -0.3, 0])
+        eau = RoundedRectangle(width=1.5, height=1.2, corner_radius=0.12, color=BLEU_CALCUL,
+                               fill_color=BLEU_CALCUL, fill_opacity=0.55, stroke_width=0).move_to([2.6, -0.75, 0])
+        cit_lab = self.T("une citerne = 5 000 L", size=24, color=JAUNE_TITRE).next_to(cuve, DOWN, buff=0.25)
+        self.play(FadeIn(cuve, shift=0.4 * UP), GrowFromEdge(eau, DOWN))
+        self.play(self.anim_entree(cit_lab, mode="pop"))
 
-        self.play(FadeIn(p1[0]), Write(t1a))
-        self.play(p1[1].animate.set_opacity(0.85), FadeIn(p1[1]), Write(t1b), run_time=1.0)
-        self.play(FadeIn(p2[0]), Write(t2a))
-        self.play(FadeIn(p2[1]), Write(t2b), run_time=0.8)
+        q = self.T("Combien de citernes remplit-on en un an ?", size=30, color=WHITE).move_to([0, -2.5, 0])
+        self.play(self.anim_entree(q, mode="grow"))
+        pause = self.T("Mets pause : il y a DEUX étapes !", size=28, color=ORANGE_RETENUE).to_edge(DOWN, buff=0.3)
+        self.play(GrowFromCenter(pause))
+        self.wait(4.5)
 
-        q = self.T("Combien de fois plus de pluie à Commerson ?", size=30, color=BLEU_CALCUL)
-        q.move_to([3.2, 0.4, 0])
-        if q.get_right()[0] > 6.9:
-            q.scale_to_fit_width(6.4).move_to([3.2, 0.4, 0])
-        self.play(Write(q))
-
-        pause = self.T("Mets pause et cherche !", size=30, color=ORANGE_RETENUE).to_edge(DOWN)
-        self.play(Write(pause))
-        self.wait(4.0)
-
-    # ── écran 6 : correction ────────────────────────────────────────────────
+    # ── écran 6 : correction (2 étapes) ─────────────────────────────────────
 
     def ecran_correction(self):
         self.clear()
         self.add_mascotte()
         self.titre_ecran("Correction")
 
-        calc = self.T("10 000 ÷ 500 = 20", size=44, color=VERT_OK).move_to([0, 2.0, 0])
-        self.play(Write(calc))
+        # ── Étape 1 : la pluie tombée sur le toit (mm × m² → litres)
+        e1 = self.T("Étape 1 — l'eau tombée sur le toit", size=28, color=BLEU_CALCUL).move_to([0, 2.3, 0])
+        self.play(self.anim_entree(e1, mode="slide_l"))
+        c1a = self.T("2 000 mm × 100 m²", size=34, color=WHITE).move_to([0, 1.4, 0])
+        self.play(self.anim_entree(c1a, mode="pop"))
+        c1b = self.T("= 200 000 litres", size=38, color=VERT_OK).move_to([0, 0.6, 0])
+        self.play(self.anim_entree(c1b, mode="grow"))
+        self.play(Circumscribe(c1b, color=VERT_OK))
 
-        # visuel : la barre de Saint-Gilles, répétée 20 fois = Commerson
-        unite = Rectangle(width=0.3, height=0.5, color=ORANGE_RETENUE, fill_color=ORANGE_RETENUE,
-                          fill_opacity=0.9, stroke_width=1)
-        sg = unite.copy().move_to([-5.2, 0.6, 0])
-        sglab = self.T("Saint-Gilles", size=20, color=ORANGE_RETENUE).next_to(sg, DOWN, buff=0.15)
-        self.play(FadeIn(sg), Write(sglab))
+        # ── Étape 2 : combien de citernes de 5 000 L
+        e2 = self.T("Étape 2 — combien de citernes de 5 000 L ?", size=28, color=ORANGE_RETENUE).move_to([0, -0.4, 0])
+        self.play(self.anim_entree(e2, mode="slide_r"))
+        c2 = self.T("200 000 ÷ 5 000 = 40 citernes", size=38, color=VERT_OK).move_to([0, -1.3, 0])
+        self.play(self.anim_entree(c2, mode="fade_up"))
+        self.play(Flash(c2, color=VERT_OK))
 
-        rangee = VGroup(*[unite.copy().set_color(BLEU_CALCUL).set_fill(BLEU_CALCUL)
-                          for _ in range(20)]).arrange(RIGHT, buff=0.02)
-        rangee.move_to([0.6, -0.6, 0])
-        clab = self.T("Commerson = 20 fois Saint-Gilles", size=22, color=BLEU_CALCUL)
-        clab.next_to(rangee, DOWN, buff=0.2)
-        self.play(LaggedStart(*[FadeIn(u, shift=0.15 * DOWN) for u in rangee], lag_ratio=0.06),
-                  run_time=2.2)
-        self.play(Write(clab))
-
-        l1 = self.T("Il pleut 20 fois plus à Commerson qu'à Saint-Gilles.", size=28, color=VERT_OK)
-        l2 = self.T("Et les deux sont sur la même île, à 40 km l'un de l'autre !", size=26)
-        l1.move_to([0, -2.4, 0])
-        l2.next_to(l1, DOWN, buff=0.25)
-        self.play(Write(l1))
-        self.play(Write(l2))
+        concl = self.T("→ 40 citernes d'eau de pluie en un an !", size=30, color=JAUNE_TITRE).to_edge(DOWN, buff=0.5)
+        self.play(GrowFromCenter(concl))
         self.wait(2.8)
 
     # ── écran 7 : à retenir ─────────────────────────────────────────────────
@@ -440,9 +474,9 @@ class CirculationEau974(EauBase):
 
         signature = self.T(SIGNATURE, size=26, color=VERT_OK).to_edge(DOWN)
 
-        self.play(Write(titre))
-        self.play(LaggedStart(*[Write(p) for p in points], lag_ratio=0.3))
-        self.play(Write(signature))
+        self.play(GrowFromCenter(titre))
+        self.play(LaggedStart(*[FadeIn(p, shift=0.4 * RIGHT) for p in points], lag_ratio=0.35))
+        self.play(FadeIn(signature, shift=0.3 * UP), Flash(signature, color=VERT_OK))
         self.wait(2.5)
 
     def construct(self):
