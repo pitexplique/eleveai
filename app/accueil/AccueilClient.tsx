@@ -67,6 +67,8 @@ type Episode = {
   titre: string;
   accroche: string;
   youtubeId: string;
+  /** Le défi maths de l'épisode, affiché sous l'article (optionnel). */
+  defi?: string;
 };
 
 const UNE: Episode = {
@@ -75,6 +77,7 @@ const UNE: Episode = {
   accroche:
     "Suis un planteur : sa canne devient du jus, du sirop, des cristaux au Gol. Et la bagasse fait de l'électricité — la canne donne du sucre ET de la lumière. Derrière, une filière de 18 000 personnes qu'on n'oublie jamais.",
   youtubeId: "hH2N0Cvx-AI",
+  defi: "la proportionnalité — 3 000 m² de canne, combien de sucre ?",
 };
 
 const BREVES: Episode[] = [
@@ -83,6 +86,7 @@ const BREVES: Episode[] = [
     titre: "Les requins : la peur et le risque réel",
     accroche: "~10 morts/an dans le monde ; la route : ~1 300 000. Et le requin garde le récif qui fait le lagon.",
     youtubeId: "3bPBjYsRciA",
+    defi: "les probabilités — morsure : 1 chance sur 4 000 000 ; la route : 1 sur 4 000.",
   },
   {
     emoji: "🌋",
@@ -255,6 +259,115 @@ function TitreRubrique({ children }: { children: React.ReactNode }) {
       <h2 className="font-serif text-3xl font-black leading-tight sm:text-4xl">
         {children}
       </h2>
+    </div>
+  );
+}
+
+// ─── Le carrousel de la Une — façon MSN : les 6 épisodes défilent ──────────────
+// Une grande carte qui tourne toute seule (8 s), flèches ‹ › et points, pause
+// au survol. L'article à la Une n'est plus figé : toute la série passe en Une.
+function UneCarousel() {
+  const episodes = useMemo(() => [UNE, ...BREVES], []);
+  const [index, setIndex] = useState(0);
+  const [pause, setPause] = useState(false);
+
+  useEffect(() => {
+    if (pause) return;
+    const id = setInterval(
+      () => setIndex((i) => (i + 1) % episodes.length),
+      8000,
+    );
+    return () => clearInterval(id);
+  }, [pause, episodes.length]);
+
+  const ep = episodes[index];
+
+  return (
+    <div onMouseEnter={() => setPause(true)} onMouseLeave={() => setPause(false)}>
+      <h2 className="mt-2 font-serif text-3xl font-black leading-tight sm:text-4xl lg:text-[2.6rem]">
+        {ep.titre}
+      </h2>
+      <p className="mt-3 font-serif text-base font-medium leading-7 text-[#1d1c16]/85 sm:text-lg">
+        {ep.accroche}
+      </p>
+      <p className="mt-2 text-xs font-bold uppercase tracking-[0.14em] text-[#1d1c16]/55">
+        Par la rédaction — avec les élèves de La Réunion
+      </p>
+
+      <div className="relative mt-4">
+        <a
+          href={`https://youtu.be/${ep.youtubeId}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block border border-[#1d1c16]/25"
+        >
+          <div className="relative aspect-video w-full overflow-hidden bg-[#1d1c16]/5">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`https://i.ytimg.com/vi/${ep.youtubeId}/hqdefault.jpg`}
+              alt={ep.titre}
+              loading="lazy"
+              className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+            />
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-red-700/90 text-xl text-white shadow-xl transition group-hover:scale-110">
+                ▶
+              </span>
+            </span>
+          </div>
+          <p className="border-t border-[#1d1c16]/25 px-3 py-2 text-xs font-medium italic text-[#1d1c16]/65">
+            {ep.emoji} Regarder l&apos;épisode →
+          </p>
+        </a>
+
+        {/* Les flèches ‹ › (façon MSN), posées sur l'image. */}
+        <button
+          type="button"
+          aria-label="Épisode précédent"
+          onClick={() => setIndex((i) => (i - 1 + episodes.length) % episodes.length)}
+          className="absolute left-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#1d1c16]/30 bg-[#f6f1e4]/90 text-xl font-black text-[#1d1c16] shadow transition hover:bg-[#f6f1e4]"
+        >
+          ‹
+        </button>
+        <button
+          type="button"
+          aria-label="Épisode suivant"
+          onClick={() => setIndex((i) => (i + 1) % episodes.length)}
+          className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#1d1c16]/30 bg-[#f6f1e4]/90 text-xl font-black text-[#1d1c16] shadow transition hover:bg-[#f6f1e4]"
+        >
+          ›
+        </button>
+      </div>
+
+      {/* Les points : un par épisode. */}
+      <div className="mt-3 flex items-center justify-center gap-2">
+        {episodes.map((e, i) => (
+          <button
+            key={e.youtubeId}
+            type="button"
+            aria-label={`Aller à l'épisode : ${e.titre}`}
+            onClick={() => setIndex(i)}
+            className={`h-2.5 rounded-full transition-all ${
+              i === index ? "w-6 bg-[#1d1c16]" : "w-2.5 bg-[#1d1c16]/25 hover:bg-[#1d1c16]/50"
+            }`}
+          />
+        ))}
+      </div>
+
+      {ep.defi ? (
+        <p className="mt-3 text-sm font-bold">
+          🎯 Le défi de l&apos;épisode : {ep.defi}{" "}
+          <a href="#en-vrai" className="font-black text-emerald-900 underline underline-offset-2">
+            Tous les épisodes ↓
+          </a>
+        </p>
+      ) : (
+        <p className="mt-3 text-sm font-bold">
+          <a href="#en-vrai" className="font-black text-emerald-900 underline underline-offset-2">
+            Tous les épisodes ↓
+          </a>
+        </p>
+      )}
     </div>
   );
 }
@@ -534,46 +647,8 @@ export default function AccueilPage({
           {/* L'article à la Une (RÉFLÉCHIR : ce qui se passe autour de toi). */}
           <article className="lg:col-span-7">
             <Kicker>Réfléchir · En vrai, à La Réunion</Kicker>
-            <h2 className="mt-2 font-serif text-3xl font-black leading-tight sm:text-4xl lg:text-[2.6rem]">
-              {UNE.titre}
-            </h2>
-            <p className="mt-3 font-serif text-base font-medium leading-7 text-[#1d1c16]/85 sm:text-lg">
-              {UNE.accroche}
-            </p>
-            <p className="mt-2 text-xs font-bold uppercase tracking-[0.14em] text-[#1d1c16]/55">
-              Par la rédaction — avec les élèves de La Réunion
-            </p>
-            <a
-              href={`https://youtu.be/${UNE.youtubeId}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group mt-4 block border border-[#1d1c16]/25"
-            >
-              <div className="relative aspect-video w-full overflow-hidden bg-[#1d1c16]/5">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`https://i.ytimg.com/vi/${UNE.youtubeId}/hqdefault.jpg`}
-                  alt={UNE.titre}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
-                />
-                <span className="absolute inset-0 flex items-center justify-center">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-red-700/90 text-xl text-white shadow-xl transition group-hover:scale-110">
-                    ▶
-                  </span>
-                </span>
-              </div>
-              <p className="border-t border-[#1d1c16]/25 px-3 py-2 text-xs font-medium italic text-[#1d1c16]/65">
-                Au Gol, la canne devient sucre — et lumière. Regarder l&apos;épisode (4 min) →
-              </p>
-            </a>
-            <p className="mt-3 text-sm font-bold">
-              🎯 Le défi de l&apos;épisode : la proportionnalité — 3 000 m² de
-              canne, combien de sucre ?{" "}
-              <a href="#en-vrai" className="font-black text-emerald-900 underline underline-offset-2">
-                Tous les épisodes ↓
-              </a>
-            </p>
+            {/* Le carrousel façon MSN : les 6 épisodes défilent en Une. */}
+            <UneCarousel />
 
             {/* À lire aussi — la rivière de titres (façon portail MSN) : des
                 manchettes cliquables qui irriguent le reste du site. */}
