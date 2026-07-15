@@ -171,15 +171,16 @@ class CycloneReunion974(CycloneBase):
 
         ocean = Rectangle(width=12.6, height=1.6, color=BLEU_CALCUL, fill_color=BLEU_CALCUL,
                           fill_opacity=0.55, stroke_width=0).move_to([0, -2.6, 0])
-        thermo = thermometre(0.85).move_to([-4.6, 0.3, 0])
-        tlab = self.T("plus de 26 °C", size=26, color=ROUGE_ERREUR).next_to(thermo, RIGHT, buff=0.35)
+        # thermomètre à gauche + label SOUS lui (sinon « plus de 26°C » percute la légende bleue).
+        thermo = thermometre(0.85).move_to([-4.9, 0.5, 0])
+        tlab = self.T("plus de 26 °C", size=26, color=ROUGE_ERREUR).next_to(thermo, DOWN, buff=0.3)
         self.play(GrowFromEdge(ocean, DOWN), FadeIn(thermo, shift=0.3 * UP))
-        self.play(self.anim_entree(tlab, mode="slide_r"))
+        self.play(self.anim_entree(tlab, mode="fade_up"))
 
         # la vapeur qui monte de l'océan chaud
         vap = VGroup(*[Circle(radius=0.06, color=WHITE, fill_color=WHITE, fill_opacity=0.8, stroke_width=0)
-                       .move_to([-1 + i * 1.0, -1.8, 0]) for i in range(6)])
-        l1 = self.T("En été (novembre → avril), l'océan dépasse 26 °C.", size=27).move_to([1.2, 1.4, 0])
+                       .move_to([0 + i * 1.0, -1.8, 0]) for i in range(6)])
+        l1 = self.T("En été (novembre → avril), l'océan dépasse 26 °C.", size=27).move_to([1.0, 1.5, 0])
         l2 = self.T("Cette chaleur donne toute son énergie au cyclone.", size=27, color=BLEU_CALCUL).move_to([1.0, 0.4, 0])
         self.play(self.anim_entree(l1, mode="fade_down"))
         self.play(LaggedStart(*[Succession(FadeIn(g, scale=0.4), g.animate.shift(UP * 2.2).set_opacity(0.1))
