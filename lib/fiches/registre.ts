@@ -94,6 +94,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "La division",
     resume: "Partager en parts égales, poser une division, lire le quotient et le reste.",
   },
+  "maths/cm2/proportionnalite": {
+    titre: "La proportionnalité",
+    resume: "Reconnaître, remplir un tableau, trouver le coefficient et revenir à l'unité.",
+  },
   "maths/5e/relatif-nombre": {
     titre: "Les nombres relatifs",
     resume: "Lire, placer et comparer les relatifs ; signe, opposé et valeur absolue.",
