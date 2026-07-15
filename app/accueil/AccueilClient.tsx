@@ -446,17 +446,54 @@ export default function AccueilPage({
           )}
         </div>
 
-        {/* Le titre du journal + la devise (le manifeste, en Une). */}
-        <div className="border-b-4 border-double border-[#1d1c16] py-5 text-center">
-          <h1 className="font-serif text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl">
-            Le Journal d&apos;EleveAI
-          </h1>
-          <p className="mt-2 font-serif text-base font-black italic tracking-wide text-[#1d1c16]/75 sm:text-lg">
-            — Île de La Réunion —
-          </p>
-          <p className="mt-1.5 text-xs font-bold uppercase tracking-[0.3em] text-[#1d1c16]/65 sm:text-sm">
-            Fait par les élèves et les profs — pas l&apos;un sans l&apos;autre 🦎
-          </p>
+        {/* Le titre du journal + la devise (le manifeste, en Une) — encadré par
+            les OREILLES de manchette : dans un vrai quotidien, les deux pavés
+            de part et d'autre du titre sont les emplacements les plus vus du
+            journal. Ici : le coach et la dictée du jour (demande de Frédéric). */}
+        <div className="grid items-center gap-3 border-b-4 border-double border-[#1d1c16] py-5 lg:grid-cols-[1fr_auto_1fr] lg:gap-6">
+          {/* Oreille gauche : le coach (avec la classe si on la connaît). */}
+          <Link
+            href={getHref("/coach-ia/maths")}
+            className="group order-2 border-2 border-[#1d1c16] p-3 text-center transition hover:bg-[#1d1c16] hover:text-[#f6f1e4] lg:order-1"
+          >
+            <p className="text-[10px] font-black uppercase tracking-[0.18em]">
+              🤖 Le coach
+            </p>
+            <p className="mt-1 font-serif text-lg font-black leading-tight">
+              Il t&apos;explique, il ne fait pas à ta place
+            </p>
+            <p className="mt-1 text-xs font-black text-emerald-900 group-hover:text-emerald-300">
+              {classeLabel ? `Ouvrir en ${classeLabel} →` : "Ouvrir le coach →"}
+            </p>
+          </Link>
+
+          <div className="order-1 text-center lg:order-2">
+            <h1 className="font-serif text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl">
+              Le Journal d&apos;EleveAI
+            </h1>
+            <p className="mt-2 font-serif text-base font-black italic tracking-wide text-[#1d1c16]/75 sm:text-lg">
+              — Île de La Réunion —
+            </p>
+            <p className="mt-1.5 text-xs font-bold uppercase tracking-[0.3em] text-[#1d1c16]/65 sm:text-sm">
+              Fait par les élèves et les profs — pas l&apos;un sans l&apos;autre 🦎
+            </p>
+          </div>
+
+          {/* Oreille droite : la dictée du jour (le rituel quotidien). */}
+          <Link
+            href="/dictee-du-jour"
+            className="group order-3 border-2 border-[#1d1c16] p-3 text-center transition hover:bg-[#1d1c16] hover:text-[#f6f1e4]"
+          >
+            <p className="text-[10px] font-black uppercase tracking-[0.18em]">
+              ✍️ La dictée du jour
+            </p>
+            <p className="mt-1 font-serif text-lg font-black leading-tight">
+              5 mots sans faute, chaque matin
+            </p>
+            <p className="mt-1 text-xs font-black text-emerald-900 group-hover:text-emerald-300">
+              Écrire la dictée →
+            </p>
+          </Link>
         </div>
 
         {/* Le chemin de fer : les rubriques (ancres internes). */}
