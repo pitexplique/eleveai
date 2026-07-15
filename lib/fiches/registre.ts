@@ -110,6 +110,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "La symétrie axiale",
     resume: "L'axe miroir : reconnaître, compléter et construire l'image d'une figure.",
   },
+  "maths/cm2/angle": {
+    titre: "Les angles",
+    resume: "Sommet, côtés, angle droit ; aigu, droit, obtus et mesure au rapporteur.",
+  },
   "maths/5e/relatif-nombre": {
     titre: "Les nombres relatifs",
     resume: "Lire, placer et comparer les relatifs ; signe, opposé et valeur absolue.",
