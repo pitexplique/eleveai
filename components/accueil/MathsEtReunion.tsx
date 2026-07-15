@@ -40,6 +40,12 @@ const EPISODES: Episode[] = [
     accroche: "Un des volcans les plus actifs du monde ! La lave à 1 100 °C, et un volcan qui fabrique de la terre neuve.",
     url: "https://youtu.be/4f2U1RAgk_A",
   },
+  {
+    emoji: "🦈",
+    titre: "Les requins",
+    accroche: "Faut-il vraiment avoir peur ? Requins : ~10 morts/an ; la route : ~1 300 000. Et le requin garde le récif qui fait le lagon qui te protège.",
+    url: null,
+  },
 ];
 
 // youtu.be/ID, youtube.com/watch?v=ID, /embed/ID… → l'identifiant seul.

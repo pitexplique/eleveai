@@ -542,8 +542,31 @@ def acc_volcan_974(d):
     d.text((330, 520), "1 100 °C · le volcan fabrique l'île", font=police("arialbd.ttf", 27), fill=orange)
 
 
+def acc_requin_974(d):
+    # un requin GENTIL (souriant) + le renversement « 100 M vs 10 ».
+    bleu = (110, 144, 176)
+    ventre = (201, 220, 235)
+    cx, cy = 470, 400
+    # corps
+    d.ellipse([cx - 130, cy - 52, cx + 130, cy + 52], fill=bleu)
+    d.ellipse([cx - 108, cy + 6, cx + 108, cy + 40], fill=ventre)
+    # queue
+    d.polygon([(cx - 120, cy), (cx - 190, cy - 46), (cx - 158, cy), (cx - 190, cy + 46)], fill=bleu)
+    # dorsale
+    d.polygon([(cx - 10, cy - 46), (cx + 26, cy - 104), (cx + 52, cy - 46)], fill=bleu)
+    # oeil + sourire
+    d.ellipse([cx + 78, cy - 22, cx + 104, cy + 4, ], fill=(255, 255, 255))
+    d.ellipse([cx + 88, cy - 16, cx + 102, cy - 2], fill=(0, 0, 0))
+    d.arc([cx + 74, cy - 6, cx + 118, cy + 30], start=200, end=340, fill=(0, 0, 0), width=3)
+    d.text((300, 512), "requins : 10  ·  humains : 100 000 000", font=police("arialbd.ttf", 26), fill=ROUGE)
+
+
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
+    "eleveai-maths-974-requin-reunion": {
+        "badge": "L'ÎLE DE LA RÉUNION · EN VRAI", "titre": ["LES", "REQUINS"], "taille": 84,
+        "sous": "la peur, le vrai risque, l'océan", "accroche": acc_requin_974,
+    },
     "eleveai-maths-974-volcan-reunion": {
         "badge": "L'ÎLE DE LA RÉUNION · EN VRAI", "titre": ["LE PITON DE", "LA FOURNAISE"], "taille": 62,
         "sous": "un volcan qui fabrique l'île", "accroche": acc_volcan_974,
