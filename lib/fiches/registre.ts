@@ -78,6 +78,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Algorithmique et programmation",
     resume: "Lire et écrire une suite d'instructions, utiliser une répétition.",
   },
+  "maths/cm2/nombre-decimal": {
+    titre: "Les nombres décimaux",
+    resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",
+  },
   "maths/5e/relatif-nombre": {
     titre: "Les nombres relatifs",
     resume: "Lire, placer et comparer les relatifs ; signe, opposé et valeur absolue.",
