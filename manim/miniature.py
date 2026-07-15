@@ -78,6 +78,14 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_perimetre_cm2(d):
+    # un rectangle dont le TOUR est surligné (vert) + P = 2 × (L + l).
+    x0, y0, w, h = 372, 318, 272, 150
+    d.rectangle([x0, y0, x0 + w, y0 + h], outline=VERT, width=10)
+    d.text((x0 + 44, y0 + 48), "le tour", font=police("ariblk.ttf", 40), fill=NAVY)
+    d.text((x0 - 20, y0 + h + 22), "P = 2 × (L + l)", font=police("ariblk.ttf", 40), fill=BLEU)
+
+
 def acc_proportionnalite_cm2(d):
     # un petit tableau de proportionnalité : 2 6 / 4 12 avec × 3.
     x0, y0, cw, ch = 352, 330, 96, 66
@@ -550,6 +558,10 @@ NOTIONS = {
     "eleveai-maths-cm2-proportionnalite": {
         "badge": "MATHS · CM2", "titre": ["LA", "PROPORTIONNALITÉ"], "taille": 56,
         "sous": "le coefficient · le retour à l'unité", "accroche": acc_proportionnalite_cm2,
+    },
+    "eleveai-maths-cm2-perimetre": {
+        "badge": "MATHS · CM2", "titre": ["LES", "PÉRIMÈTRES"], "taille": 78,
+        "sous": "la longueur du tour", "accroche": acc_perimetre_cm2,
     },
     "eleveai-maths-5e-relatif-nombre": {
         "badge": "MATHS · 5e", "titre": ["LES NOMBRES", "RELATIFS"], "taille": 74,
