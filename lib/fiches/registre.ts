@@ -106,6 +106,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les aires",
     resume: "La surface d'une figure : compter les carreaux, rectangle, carré, triangle.",
   },
+  "maths/cm2/symetrie": {
+    titre: "La symétrie axiale",
+    resume: "L'axe miroir : reconnaître, compléter et construire l'image d'une figure.",
+  },
   "maths/5e/relatif-nombre": {
     titre: "Les nombres relatifs",
     resume: "Lire, placer et comparer les relatifs ; signe, opposé et valeur absolue.",
