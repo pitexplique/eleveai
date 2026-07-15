@@ -30,6 +30,7 @@ import { problemeDuJourWeekly } from "@/lib/defis-du-jour/weekly";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
+import AgendaJournal from "@/components/accueil/AgendaJournal";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
@@ -450,7 +451,10 @@ export default function AccueilPage({
           <h1 className="font-serif text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl">
             Le Journal d&apos;EleveAI
           </h1>
-          <p className="mt-2 text-xs font-bold uppercase tracking-[0.3em] text-[#1d1c16]/65 sm:text-sm">
+          <p className="mt-2 font-serif text-base font-black italic tracking-wide text-[#1d1c16]/75 sm:text-lg">
+            — Île de La Réunion —
+          </p>
+          <p className="mt-1.5 text-xs font-bold uppercase tracking-[0.3em] text-[#1d1c16]/65 sm:text-sm">
             Fait par les élèves et les profs — pas l&apos;un sans l&apos;autre 🦎
           </p>
         </div>
@@ -667,6 +671,95 @@ export default function AccueilPage({
         </div>
       </section>
 
+      {/* ══ LA MOSAÏQUE — l'actualité en images, façon portail MSN : de grandes
+          tuiles cliquables (image + titre posé dessus). Chaque tuile mène à un
+          rendez-vous du site. ═════════════════════════════════════════════ */}
+      <section className="mx-auto mt-10 max-w-6xl">
+        <Kicker>En un clic · L&apos;actualité en images</Kicker>
+        <div className="mt-2 border-t-2 border-[#1d1c16]" />
+        <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
+          {/* Le défi du jour — la vraie image du défi programmé aujourd'hui. */}
+          <Link
+            href="/defis-du-jour"
+            className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/20 lg:aspect-[16/9]"
+          >
+            <Image
+              src={defiDuJour.defi.image ?? "/images/defis-du-jour/coupe-monde-foot.webp"}
+              alt={defiDuJour.defi.title}
+              fill
+              sizes="(max-width: 1024px) 50vw, 400px"
+              className="object-cover transition duration-300 group-hover:scale-[1.04]"
+            />
+            <span className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+            <span className="absolute bottom-0 left-0 p-3">
+              <span className="text-[10px] font-black uppercase tracking-[0.16em] text-emerald-300">
+                🎯 Le défi du jour
+              </span>
+              <span className="mt-0.5 block font-serif text-base font-black leading-snug text-white sm:text-lg">
+                {defiDuJour.defi.title}
+              </span>
+            </span>
+          </Link>
+
+          {/* L'épisode à la Une — vignette YouTube. */}
+          <a
+            href={`https://youtu.be/${UNE.youtubeId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/20 lg:aspect-[16/9]"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`https://i.ytimg.com/vi/${UNE.youtubeId}/hqdefault.jpg`}
+              alt={UNE.titre}
+              loading="lazy"
+              className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.04]"
+            />
+            <span className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+            <span className="absolute bottom-0 left-0 p-3">
+              <span className="text-[10px] font-black uppercase tracking-[0.16em] text-red-300">
+                ▶ La vidéo de la semaine
+              </span>
+              <span className="mt-0.5 block font-serif text-base font-black leading-snug text-white sm:text-lg">
+                {UNE.emoji} {UNE.titre}
+              </span>
+            </span>
+          </a>
+
+          {/* Les rendez-vous sans photo : tuiles à dégradé (style cahiers). */}
+          {(
+            [
+              { emoji: "✍️", kicker: "Tous les jours", titre: "La dictée du jour : 5 mots sans faute", href: "/dictee-du-jour", grad: "from-sky-500 to-indigo-700" },
+              { emoji: "🏖️", kicker: "Le supplément", titre: "Les cahiers de vacances à imprimer", href: "/cahier-vacances", grad: "from-amber-400 to-orange-600" },
+              { emoji: "🖼️", kicker: "L'île en images", titre: "Picto Maths : 25 défis « 1 image, 1 question »", href: "/picto-maths", grad: "from-emerald-500 to-teal-700" },
+              { emoji: "🗺️", kicker: "L'exploration", titre: "La chasse aux trésors sur la carte de l'île", href: "/carte", grad: "from-violet-500 to-fuchsia-700" },
+            ] as const
+          ).map((t) => (
+            <Link
+              key={t.href}
+              href={t.href}
+              className={`group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/20 bg-gradient-to-br ${t.grad} lg:aspect-[16/9]`}
+            >
+              <span
+                aria-hidden
+                className="absolute right-2 top-2 text-5xl opacity-30 transition duration-300 group-hover:scale-110 group-hover:opacity-50 sm:text-6xl"
+              >
+                {t.emoji}
+              </span>
+              <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+              <span className="absolute bottom-0 left-0 p-3">
+                <span className="text-[10px] font-black uppercase tracking-[0.16em] text-white/80">
+                  {t.emoji} {t.kicker}
+                </span>
+                <span className="mt-0.5 block font-serif text-base font-black leading-snug text-white sm:text-lg">
+                  {t.titre}
+                </span>
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* ══ EN VRAI — les brèves de la série + le terrain ═════════════════════ */}
       <section id="en-vrai" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
         <Kicker>Réfléchir · La série « en vrai »</Kicker>
@@ -840,6 +933,10 @@ export default function AccueilPage({
           </Link>
         </p>
       </section>
+
+      {/* ══ L'AGENDA — les calls en direct, version papier (coupon détachable).
+          Lit lib/calls.ts ; ne rend rien si aucun call actif à venir. ════════ */}
+      <AgendaJournal />
 
       {/* ══ LE CATALOGUE — les petites annonces : TOUT est listé ═════════════ */}
       <section id="catalogue" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
