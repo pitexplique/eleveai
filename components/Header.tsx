@@ -101,7 +101,7 @@ const MATIERES: { label: string; accent: string; items: NavItem[] }[] = [
   { label: "Économie", accent: "text-amber-300",  items: NAV_ECONOMIE },
 ];
 
-function MatieresMenu({ pathname }: { pathname: string }) {
+function MatieresMenu({ pathname, paper }: { pathname: string; paper: boolean }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -144,9 +144,13 @@ function MatieresMenu({ pathname }: { pathname: string }) {
         onClick={() => setOpen((v) => !v)}
         className={[
           "inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition",
-          active
-            ? "bg-white text-[#041B33] shadow-lg"
-            : "text-white/90 hover:bg-white/15 hover:text-white",
+          paper
+            ? active
+              ? "bg-[#1d1c16] text-[#f6f1e4] shadow"
+              : "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10 hover:text-[#1d1c16]"
+            : active
+              ? "bg-white text-[#041B33] shadow-lg"
+              : "text-white/90 hover:bg-white/15 hover:text-white",
         ].join(" ")}
       >
         Matières
@@ -157,20 +161,23 @@ function MatieresMenu({ pathname }: { pathname: string }) {
 
       {open && (
         <div
-          className="absolute right-0 top-full z-[80] mt-1 max-h-[78vh] w-[min(92vw,720px)] overflow-y-auto overscroll-contain rounded-2xl border border-white/10 bg-[#041B33] p-4 shadow-2xl"
+          className={`absolute right-0 top-full z-[80] mt-1 max-h-[78vh] w-[min(92vw,720px)] overflow-y-auto overscroll-contain rounded-2xl border p-4 shadow-2xl ${
+            paper ? "border-[#1d1c16]/25 bg-[#f6f1e4]" : "border-white/10 bg-[#041B33]"
+          }`}
           onMouseEnter={cancelClose}
           onMouseLeave={scheduleClose}
         >
           <div className="grid grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-3">
             {MATIERES.map((m) => (
               <div key={m.label}>
-                <p className={`mb-1.5 text-[11px] font-black uppercase tracking-[0.18em] ${m.accent}`}>
+                <p className={`mb-1.5 text-[11px] font-black uppercase tracking-[0.18em] ${paper ? "text-emerald-900" : m.accent}`}>
                   {m.label}
                 </p>
                 <ul className="space-y-0.5">
                   {m.items.map((item) => {
-                    const cls =
-                      "flex items-center gap-2 rounded-lg px-2 py-1 text-sm text-white/80 transition hover:bg-white/10 hover:text-white";
+                    const cls = paper
+                      ? "flex items-center gap-2 rounded-lg px-2 py-1 text-sm text-[#1d1c16]/80 transition hover:bg-[#1d1c16]/10 hover:text-[#1d1c16]"
+                      : "flex items-center gap-2 rounded-lg px-2 py-1 text-sm text-white/80 transition hover:bg-white/10 hover:text-white";
                     const inner = (
                       <>
                         <span className="text-base leading-none">{item.icon}</span>
@@ -208,24 +215,30 @@ function MobileSection({
   accent,
   items,
   pathname,
+  paper,
 }: {
   title: string;
   accent: string;
   items: NavItem[];
   pathname: string;
+  paper: boolean;
 }) {
   return (
     <div>
-      <p className={`mb-2 text-[10px] font-black uppercase tracking-[0.2em] ${accent}`}>
+      <p className={`mb-2 text-[10px] font-black uppercase tracking-[0.2em] ${paper ? "text-emerald-900" : accent}`}>
         {title}
       </p>
       <div className="grid grid-cols-2 gap-2">
         {items.map((item) => {
           const cls = [
-            "flex items-center gap-2 rounded-xl border px-3 py-3 text-sm font-bold text-white transition hover:bg-white/15",
-            isActive(pathname, item.href)
-              ? "border-white/40 bg-white/15"
-              : "border-white/10 bg-white/5",
+            "flex items-center gap-2 rounded-xl border px-3 py-3 text-sm font-bold transition",
+            paper
+              ? isActive(pathname, item.href)
+                ? "border-[#1d1c16]/40 bg-[#1d1c16]/10 text-[#1d1c16]"
+                : "border-[#1d1c16]/15 bg-[#1d1c16]/5 text-[#1d1c16] hover:bg-[#1d1c16]/10"
+              : isActive(pathname, item.href)
+                ? "border-white/40 bg-white/15 text-white hover:bg-white/15"
+                : "border-white/10 bg-white/5 text-white hover:bg-white/15",
           ].join(" ");
           const inner = (
             <>
@@ -266,6 +279,10 @@ export default function Header() {
   const { space } = useAudience();
   const supabase = createClient();
 
+  // Variante « papier » : sur l'accueil-journal, le header devient la tranche
+  // haute du quotidien (crème + encre) ; partout ailleurs il reste bleu nuit.
+  const paper = pathname === "/" || pathname === "/accueil";
+
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
@@ -299,7 +316,13 @@ export default function Header() {
     : "bg-gradient-to-r from-emerald-300 to-cyan-300";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-cyan-300/20 bg-gradient-to-r from-[#041B33]/95 via-[#062A4F]/95 to-[#073B63]/95 shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-xl">
+    <header
+      className={
+        paper
+          ? "sticky top-0 z-50 border-b border-[#1d1c16]/25 bg-[#f6f1e4]/95 backdrop-blur-xl"
+          : "sticky top-0 z-50 border-b border-cyan-300/20 bg-gradient-to-r from-[#041B33]/95 via-[#062A4F]/95 to-[#073B63]/95 shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-xl"
+      }
+    >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
 
         {/* Logo */}
@@ -315,10 +338,10 @@ export default function Header() {
             />
           </div>
           <div className="flex flex-col leading-tight">
-            <span className="text-[1.05rem] font-black tracking-tight text-white">
-              Eleve<span className="text-cyan-200">AI</span>
+            <span className={`text-[1.05rem] font-black tracking-tight ${paper ? "text-[#1d1c16]" : "text-white"}`}>
+              Eleve<span className={paper ? "text-emerald-900" : "text-cyan-200"}>AI</span>
             </span>
-            <span className="hidden text-xs text-cyan-100/75 sm:block">
+            <span className={`hidden text-xs sm:block ${paper ? "font-serif italic text-[#1d1c16]/60" : "text-cyan-100/75"}`}>
               La liberté d&apos;apprendre
             </span>
           </div>
@@ -330,47 +353,31 @@ export default function Header() {
           {eleve && !isStaff ? (
             /* Élève CONNECTÉ → ses matières + rituels (pas les portes d'audience) */
             <>
-              <Link
-                href="/dictee-du-jour"
-                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition ${
-                  isActive(pathname, "/dictee-du-jour")
-                    ? "bg-cyan-300 text-[#041B33] shadow-lg"
-                    : "bg-cyan-300/15 text-cyan-100 hover:bg-cyan-300/25 hover:text-white"
-                }`}
-              >
-                ✍️ Dictée
-              </Link>
-              <Link
-                href="/cahier-vacances"
-                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition ${
-                  isActive(pathname, "/cahier-vacances")
-                    ? "bg-amber-300 text-[#041B33] shadow-lg"
-                    : "bg-amber-300/15 text-amber-200 hover:bg-amber-300/25 hover:text-amber-100"
-                }`}
-              >
-                ☀️ Cahiers
-              </Link>
-              <Link
-                href="/qui-suis-je-a-imprimer"
-                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition ${
-                  isActive(pathname, "/qui-suis-je-a-imprimer")
-                    ? "bg-fuchsia-300 text-[#041B33] shadow-lg"
-                    : "bg-fuchsia-300/15 text-fuchsia-200 hover:bg-fuchsia-300/25 hover:text-fuchsia-100"
-                }`}
-              >
-                🃏 Jeux
-              </Link>
-              <Link
-                href="/explorer"
-                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition ${
-                  isActive(pathname, "/explorer")
-                    ? "bg-violet-300 text-[#041B33] shadow-lg"
-                    : "bg-violet-300/15 text-violet-200 hover:bg-violet-300/25 hover:text-violet-100"
-                }`}
-              >
-                🧭 Explorer
-              </Link>
-              <MatieresMenu pathname={pathname} />
+              {(
+                [
+                  { href: "/dictee-du-jour", label: "✍️ Dictée", active: "bg-cyan-300 text-[#041B33] shadow-lg", idle: "bg-cyan-300/15 text-cyan-100 hover:bg-cyan-300/25 hover:text-white" },
+                  { href: "/cahier-vacances", label: "☀️ Cahiers", active: "bg-amber-300 text-[#041B33] shadow-lg", idle: "bg-amber-300/15 text-amber-200 hover:bg-amber-300/25 hover:text-amber-100" },
+                  { href: "/qui-suis-je-a-imprimer", label: "🃏 Jeux", active: "bg-fuchsia-300 text-[#041B33] shadow-lg", idle: "bg-fuchsia-300/15 text-fuchsia-200 hover:bg-fuchsia-300/25 hover:text-fuchsia-100" },
+                  { href: "/explorer", label: "🧭 Explorer", active: "bg-violet-300 text-[#041B33] shadow-lg", idle: "bg-violet-300/15 text-violet-200 hover:bg-violet-300/25 hover:text-violet-100" },
+                ] as const
+              ).map((c) => (
+                <Link
+                  key={c.href}
+                  href={c.href}
+                  className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition ${
+                    paper
+                      ? isActive(pathname, c.href)
+                        ? "bg-[#1d1c16] text-[#f6f1e4] shadow"
+                        : "bg-[#1d1c16]/10 text-[#1d1c16] hover:bg-[#1d1c16]/20"
+                      : isActive(pathname, c.href)
+                        ? c.active
+                        : c.idle
+                  }`}
+                >
+                  {c.label}
+                </Link>
+              ))}
+              <MatieresMenu pathname={pathname} paper={paper} />
             </>
           ) : (
             AUDIENCE_DOORS.map((d) => (
@@ -379,9 +386,13 @@ export default function Header() {
                 href={d.href}
                 className={[
                   "inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition",
-                  d.space === space
-                    ? "bg-white text-[#041B33] shadow-lg"
-                    : "text-white/85 hover:bg-white/15 hover:text-white",
+                  paper
+                    ? d.space === space
+                      ? "bg-[#1d1c16] text-[#f6f1e4] shadow"
+                      : "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10 hover:text-[#1d1c16]"
+                    : d.space === space
+                      ? "bg-white text-[#041B33] shadow-lg"
+                      : "text-white/85 hover:bg-white/15 hover:text-white",
                 ].join(" ")}
               >
                 <span>{d.emoji}</span> {d.label}
@@ -393,7 +404,9 @@ export default function Header() {
             <div className="ml-1 flex items-center gap-2">
               <Link
                 href={dashboardHref}
-                className={`inline-flex items-center gap-2 rounded-full ${dashboardColor} px-4 py-2 text-sm font-black text-[#041B33] shadow-lg hover:brightness-110`}
+                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-black shadow-lg hover:brightness-110 ${
+                  paper ? "bg-[#1d1c16] text-[#f6f1e4]" : `${dashboardColor} text-[#041B33]`
+                }`}
               >
                 <GraduationCap className="h-4 w-4" />
                 {dashboardLabel}
@@ -401,7 +414,11 @@ export default function Header() {
               <button
                 type="button"
                 onClick={logoutEleve}
-                className="inline-flex items-center gap-1.5 rounded-full bg-red-500/20 border border-red-400/30 px-3 py-2 text-sm font-bold text-red-300 hover:bg-red-500/30 transition"
+                className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-sm font-bold transition ${
+                  paper
+                    ? "border-red-800/30 bg-red-800/10 text-red-800 hover:bg-red-800/20"
+                    : "border-red-400/30 bg-red-500/20 text-red-300 hover:bg-red-500/30"
+                }`}
               >
                 <LogOut className="h-4 w-4" />
               </button>
@@ -409,7 +426,11 @@ export default function Header() {
           ) : (
             <Link
               href="/auth/signin?mode=eleve"
-              className="ml-1 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 px-4 py-2 text-sm font-black text-[#041B33] shadow-lg hover:brightness-110 transition"
+              className={`ml-1 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-black shadow-lg transition hover:brightness-110 ${
+                paper
+                  ? "bg-[#1d1c16] text-[#f6f1e4] hover:bg-emerald-900"
+                  : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
+              }`}
             >
               <GraduationCap className="h-4 w-4" />
               Connexion / inscription
@@ -422,7 +443,11 @@ export default function Header() {
           {!eleve && (
             <Link
               href="/auth/signin?mode=eleve"
-              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 px-3 py-2 text-xs font-black text-[#041B33] shadow-lg"
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-black shadow-lg ${
+                paper
+                  ? "bg-[#1d1c16] text-[#f6f1e4]"
+                  : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
+              }`}
             >
               <GraduationCap className="h-4 w-4" />
               Connexion
@@ -431,7 +456,11 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
-            className="rounded-full border border-cyan-200/20 bg-white/10 p-2 text-white shadow-lg"
+            className={`rounded-full border p-2 shadow-lg ${
+              paper
+                ? "border-[#1d1c16]/25 bg-[#1d1c16]/5 text-[#1d1c16]"
+                : "border-cyan-200/20 bg-white/10 text-white"
+            }`}
             aria-label="Ouvrir le menu"
           >
             {mobileOpen ? <X /> : <Menu />}
@@ -441,20 +470,37 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="max-h-[calc(100dvh-3.75rem)] overflow-y-auto overscroll-contain border-t border-cyan-300/20 bg-gradient-to-b from-[#062A4F] to-[#041B33] px-4 pb-10 pt-4 lg:hidden">
+        <div
+          className={`max-h-[calc(100dvh-3.75rem)] overflow-y-auto overscroll-contain border-t px-4 pb-10 pt-4 lg:hidden ${
+            paper
+              ? "border-[#1d1c16]/25 bg-[#f6f1e4]"
+              : "border-cyan-300/20 bg-gradient-to-b from-[#062A4F] to-[#041B33]"
+          }`}
+        >
           <div className="space-y-5">
 
             {/* Auth mobile */}
             {eleve ? (
-              <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-                <Link href={dashboardHref} className="flex items-center gap-2 text-sm font-black text-white">
-                  <GraduationCap className="h-4 w-4 text-emerald-300" />
+              <div
+                className={`flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 ${
+                  paper ? "border-[#1d1c16]/15 bg-[#1d1c16]/5" : "border-white/10 bg-white/5"
+                }`}
+              >
+                <Link
+                  href={dashboardHref}
+                  className={`flex items-center gap-2 text-sm font-black ${paper ? "text-[#1d1c16]" : "text-white"}`}
+                >
+                  <GraduationCap className={`h-4 w-4 ${paper ? "text-emerald-900" : "text-emerald-300"}`} />
                   {dashboardLabel}
                 </Link>
                 <button
                   type="button"
                   onClick={logoutEleve}
-                  className="rounded-full bg-red-500/20 p-2 text-red-300 hover:bg-red-500/30"
+                  className={`rounded-full p-2 ${
+                    paper
+                      ? "bg-red-800/10 text-red-800 hover:bg-red-800/20"
+                      : "bg-red-500/20 text-red-300 hover:bg-red-500/30"
+                  }`}
                 >
                   <LogOut className="h-4 w-4" />
                 </button>
@@ -462,7 +508,11 @@ export default function Header() {
             ) : (
               <Link
                 href="/auth/signin?mode=eleve"
-                className="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-300 to-cyan-300 px-4 py-3 text-sm font-black text-[#041B33] shadow"
+                className={`flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-black shadow ${
+                  paper
+                    ? "bg-[#1d1c16] text-[#f6f1e4]"
+                    : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
+                }`}
               >
                 <GraduationCap className="h-4 w-4" />
                 Connexion / inscription
@@ -472,16 +522,16 @@ export default function Header() {
             {eleve && !isStaff ? (
               /* Élève connecté → toutes ses matières */
               <div className="space-y-5">
-                <MobileSection title="Maths"    accent="text-orange-300" items={NAV_MATHS}    pathname={pathname} />
-                <MobileSection title="Français" accent="text-sky-300"    items={NAV_FRANCAIS} pathname={pathname} />
-                <MobileSection title="Anglais"  accent="text-blue-300"   items={NAV_ANGLAIS}  pathname={pathname} />
-                <MobileSection title="Espagnol" accent="text-red-300"    items={NAV_ESPAGNOL} pathname={pathname} />
-                <MobileSection title="IA"       accent="text-cyan-300"   items={NAV_IA}       pathname={pathname} />
-                <MobileSection title="Économie" accent="text-amber-300"  items={NAV_ECONOMIE} pathname={pathname} />
+                <MobileSection title="Maths"    accent="text-orange-300" items={NAV_MATHS}    pathname={pathname} paper={paper} />
+                <MobileSection title="Français" accent="text-sky-300"    items={NAV_FRANCAIS} pathname={pathname} paper={paper} />
+                <MobileSection title="Anglais"  accent="text-blue-300"   items={NAV_ANGLAIS}  pathname={pathname} paper={paper} />
+                <MobileSection title="Espagnol" accent="text-red-300"    items={NAV_ESPAGNOL} pathname={pathname} paper={paper} />
+                <MobileSection title="IA"       accent="text-cyan-300"   items={NAV_IA}       pathname={pathname} paper={paper} />
+                <MobileSection title="Économie" accent="text-amber-300"  items={NAV_ECONOMIE} pathname={pathname} paper={paper} />
               </div>
             ) : (
               /* Sinon → les 4 portes d'audience */
-              <div className="grid grid-cols-2 gap-2 border-t border-white/10 pt-4">
+              <div className={`grid grid-cols-2 gap-2 border-t pt-4 ${paper ? "border-[#1d1c16]/15" : "border-white/10"}`}>
                 {AUDIENCE_DOORS.map((d) => (
                   <Link
                     key={d.space}
@@ -489,9 +539,13 @@ export default function Header() {
                     onClick={() => setMobileOpen(false)}
                     className={[
                       "flex items-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-bold transition",
-                      d.space === space
-                        ? "border-white/40 bg-white/15 text-white"
-                        : "border-white/10 bg-white/5 text-white/80",
+                      paper
+                        ? d.space === space
+                          ? "border-[#1d1c16]/40 bg-[#1d1c16]/10 text-[#1d1c16]"
+                          : "border-[#1d1c16]/15 bg-[#1d1c16]/5 text-[#1d1c16]/80"
+                        : d.space === space
+                          ? "border-white/40 bg-white/15 text-white"
+                          : "border-white/10 bg-white/5 text-white/80",
                     ].join(" ")}
                   >
                     <span className="text-base">{d.emoji}</span> {d.label}

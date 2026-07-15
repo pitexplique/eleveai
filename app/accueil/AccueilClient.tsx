@@ -434,17 +434,14 @@ export default function AccueilPage({
             {dateEdition ? dateEdition.numero : "—"}
           </p>
           <p className="hidden sm:block">Gratuit — sans publicité</p>
+          {/* Pas de bouton « Se connecter » ici : le header papier au-dessus
+              s'en charge (sinon deux boutons identiques à 60 px d'écart). */}
           {eleve ? (
             <p className="normal-case tracking-normal">
               ☀️ Bonjour{prenomAffiche ? ` ${prenomAffiche}` : ""}
             </p>
           ) : (
-            <Link
-              href="/auth"
-              className="rounded-sm bg-[#1d1c16] px-3 py-1 font-black normal-case tracking-normal text-[#f6f1e4] transition hover:bg-emerald-900"
-            >
-              Se connecter
-            </Link>
+            <p className="hidden sm:block">Édition du kiosque</p>
           )}
         </div>
 
