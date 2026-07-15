@@ -38,7 +38,7 @@ const EPISODES: Episode[] = [
     emoji: "🌋",
     titre: "Le Piton de la Fournaise",
     accroche: "Un des volcans les plus actifs du monde ! La lave à 1 100 °C, et un volcan qui fabrique de la terre neuve.",
-    url: null,
+    url: "https://youtu.be/4f2U1RAgk_A",
   },
 ];
 
