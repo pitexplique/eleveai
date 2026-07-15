@@ -545,19 +545,19 @@ def acc_volcan_974(d):
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
     "eleveai-maths-974-volcan-reunion": {
-        "badge": "LA RÉUNION · EN VRAI", "titre": ["LE PITON DE", "LA FOURNAISE"], "taille": 62,
+        "badge": "L'ÎLE DE LA RÉUNION · EN VRAI", "titre": ["LE PITON DE", "LA FOURNAISE"], "taille": 62,
         "sous": "un volcan qui fabrique l'île", "accroche": acc_volcan_974,
     },
     "eleveai-maths-974-cyclone-reunion": {
-        "badge": "LA RÉUNION · EN VRAI", "titre": ["LES", "CYCLONES"], "taille": 82,
+        "badge": "L'ÎLE DE LA RÉUNION · EN VRAI", "titre": ["LES", "CYCLONES"], "taille": 82,
         "sous": "l'œil, les vents, le record du monde", "accroche": acc_cyclone_974,
     },
     "eleveai-maths-974-lait-reunion": {
-        "badge": "LA RÉUNION · EN VRAI", "titre": ["LE LAIT DE", "LA RÉUNION"], "taille": 74,
+        "badge": "L'ÎLE DE LA RÉUNION · EN VRAI", "titre": ["LE LAIT DE", "L'ÎLE DE LA RÉUNION"], "taille": 52,
         "sous": "du pré des hauts à ton yaourt", "accroche": acc_lait_974,
     },
     "eleveai-maths-974-circulation-eau": {
-        "badge": "LA RÉUNION · EN VRAI", "titre": ["L'EAU DE", "LA RÉUNION"], "taille": 74,
+        "badge": "L'ÎLE DE LA RÉUNION · EN VRAI", "titre": ["L'EAU DE", "L'ÎLE DE LA RÉUNION"], "taille": 52,
         "sous": "de l'océan à ton robinet", "accroche": acc_eau_974,
     },
     "eleveai-maths-cm2-nombre-decimal": {
