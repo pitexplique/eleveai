@@ -187,8 +187,8 @@ class LaitBase(Scene):
         # (x, y) variés — jamais deux étapes de suite au même endroit.
         places = [(-3.4, 1.9), (3.1, -1.4), (0, 2.5), (-3.2, -0.2), (0, -2.7), (3.2, 1.5)]
 
-        def dire(texte, size=26, couleur=BLEU_CALCUL, mode=None):
-            x, y = places[state["k"] % len(places)]
+        def dire(texte, size=26, couleur=BLEU_CALCUL, mode=None, pos=None):
+            x, y = pos if pos is not None else places[state["k"] % len(places)]
             t = self.T(texte, size=size, color=couleur).move_to([x, y, 0])
             if t.width > self.LARGEUR_SURE - 1.0:
                 t.scale_to_fit_width(self.LARGEUR_SURE - 1.0).move_to([0, y, 0])
@@ -390,7 +390,8 @@ class LaitReunion974(LaitBase):
         self.play(FadeIn(f1, shift=0.2 * UP), FadeIn(f2, shift=0.2 * UP))
 
         # on presse le caillé → une meule de fromage (la flèche se trace, le caillé devient meule)
-        dire("On presse, on sale, on affine → le FROMAGE !", couleur=VERT_OK, mode="grow")
+        # légende SOUS LE TITRE (centrée) : sinon elle tombe sur la cuve et se fait couper à gauche.
+        dire("On presse, on sale, on affine → le FROMAGE !", couleur=VERT_OK, mode="fade_down", pos=(0, 2.4))
         meule = fromage(1.6).move_to([3.4, -0.4, 0])
         fleche = Arrow([-1.1, -0.4, 0], [2.4, -0.4, 0], color=WHITE, stroke_width=4, buff=0.2)
         self.play(GrowArrow(fleche))
