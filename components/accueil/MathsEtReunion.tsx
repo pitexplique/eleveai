@@ -46,6 +46,12 @@ const EPISODES: Episode[] = [
     accroche: "Faut-il vraiment avoir peur ? Requins : ~10 morts/an ; la route : ~1 300 000. Et le requin garde le récif qui fait le lagon qui te protège.",
     url: "https://youtu.be/3bPBjYsRciA",
   },
+  {
+    emoji: "🌾",
+    titre: "La canne à sucre",
+    accroche: "Suis un planteur : sa canne devient du sucre... ET de la lumière (la bagasse fait de l'électricité). Et derrière, il y a des hommes.",
+    url: null,
+  },
 ];
 
 // youtu.be/ID, youtube.com/watch?v=ID, /embed/ID… → l'identifiant seul.

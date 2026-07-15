@@ -561,8 +561,37 @@ def acc_requin_974(d):
     d.text((300, 512), "requins : 10  ·  humains : 100 000 000", font=police("arialbd.ttf", 26), fill=ROUGE)
 
 
+def acc_canne_974(d):
+    # de la canne (tiges vertes) + une flèche vers un morceau de sucre + une ampoule.
+    vert = (139, 195, 74)
+    vertf = (85, 139, 47)
+    orange = (255, 160, 0)
+    # 3 tiges de canne
+    for i, x in enumerate((360, 392, 424)):
+        d.rounded_rectangle([x, 330, x + 14, 470], radius=6, fill=vert)
+        for yy in range(350, 460, 26):
+            d.line([(x, yy), (x + 14, yy)], fill=vertf, width=3)
+        d.polygon([(x + 7, 330), (x - 18, 292), (x + 5, 322)], fill=vertf)
+        d.polygon([(x + 7, 330), (x + 32, 296), (x + 9, 322)], fill=vertf)
+    # flèche
+    d.line([(470, 400), (528, 400)], fill=orange, width=8)
+    d.polygon([(528, 388), (548, 400), (528, 412)], fill=orange)
+    # morceau de sucre (cube)
+    d.polygon([(566, 396), (606, 372), (646, 396), (606, 420)], fill=(242, 228, 196), outline=(180, 160, 120))
+    d.rectangle([566, 396, 646, 440], fill=(242, 228, 196), outline=(180, 160, 120))
+    d.polygon([(566, 440), (606, 464), (646, 440), (606, 416)], fill=(224, 208, 172), outline=(180, 160, 120))
+    # petite ampoule (le "et de la lumière")
+    d.ellipse([672, 372, 712, 412], fill=JAUNE, outline=orange, width=3)
+    d.rectangle([684, 408, 700, 424], fill=(150, 150, 150))
+    d.text((300, 512), "du sucre... ET de la lumière", font=police("arialbd.ttf", 28), fill=vertf)
+
+
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
+    "eleveai-maths-974-canne-sucre-reunion": {
+        "badge": "L'ÎLE DE LA RÉUNION · EN VRAI", "titre": ["LA CANNE", "À SUCRE"], "taille": 78,
+        "sous": "du champ au sucre, par des hommes", "accroche": acc_canne_974,
+    },
     "eleveai-maths-974-requin-reunion": {
         "badge": "L'ÎLE DE LA RÉUNION · EN VRAI", "titre": ["LES", "REQUINS"], "taille": 84,
         "sous": "la peur, le vrai risque, l'océan", "accroche": acc_requin_974,
