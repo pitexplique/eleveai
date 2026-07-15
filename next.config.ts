@@ -22,6 +22,33 @@ const nextConfig = {
         destination: "/cahier-vacances-cartes/:slug*",
         permanent: true,
       },
+      // ── Adresses courtes « dites à voix haute » (15/07/2026) ──────────────
+      // Le public YouTube TAPE l'adresse (les Shorts n'ont plus de liens
+      // cliquables) → une adresse courte par épisode/destination, avec UTM
+      // pour ENFIN mesurer ce que les vidéos amènent (sinon tout finit en
+      // trafic « Direct » invisible). 302 (pas 301) : on peut repointer une
+      // campagne sans se battre avec le cache des navigateurs.
+      // Épisodes « en vrai » → la Une du journal (l'article les attend).
+      ...["eau", "lait", "cyclones", "volcan", "requins", "canne"].map(
+        (ep) => ({
+          source: `/${ep}`,
+          destination: `/?utm_source=youtube&utm_medium=video&utm_campaign=${ep}`,
+          permanent: false,
+        }),
+      ),
+      // Les deux destinations phares à dire dans TOUTES les vidéos.
+      {
+        source: "/cahier",
+        destination:
+          "/cahier-vacances?utm_source=youtube&utm_medium=video&utm_campaign=cahier",
+        permanent: false,
+      },
+      {
+        source: "/coach",
+        destination:
+          "/coach-ia/maths?utm_source=youtube&utm_medium=video&utm_campaign=coach",
+        permanent: false,
+      },
     ];
   },
 };
