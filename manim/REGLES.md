@@ -118,3 +118,45 @@ Une seule personne (Frédéric) doit couvrir toutes les classes. On sépare **la
 - [ ] Rendu 1080p60 (`-qh` via `render_all.py`) + miniature générée
 - [ ] Titre/description YouTube conformes (sans chevrons `< >`), playlist par classe
 - [ ] URL dans `/admin/ressources` (badge ▶) + entrée `VIDEOS_FICHES` du sitemap
+
+---
+
+# Série « Les maths en vrai » (format terrain 974, HORS banques)
+
+Deuxième format, distinct des vidéos de notions ci-dessus : des **simulations animées** d'un phénomène de La Réunion, avec les maths cachées derrière (l'eau → foehn + proportionnalité ; le lait → % + proportionnalité). **Pas de notionId, pas de banque, pas de fiche.** C'est la série marketing/culture, branchée sur l'accueil (`components/accueil/MathsEtReunion.tsx`), playlist YouTube **« Les maths en vrai »**.
+⚠️ Ne PAS confondre avec « Maths Réel · 974 » (`/maths-974`) qui est le carnet de TERRAIN réel (vraies vidéos tournées sur place) — deux marques séparées.
+
+## Le processus (idée → YouTube)
+
+1. **L'idée** : un phénomène 974 + les maths derrière.
+2. **Le script** : `manim/scripts/974/<sujet>.py`, DEUX scènes dans le même fichier — `Xxx974` (16:9 YouTube ~1 min 30) + `Xxx974Short` (9:16 Shorts/Insta). Le Short impose son cadre dans `__init__` : `config.frame_height = 8.0 ; config.frame_width = 4.5` AVANT `super().__init__()` (sinon `-r` ne change que les pixels, pas le cadre logique → texte qui déborde).
+3. **Brouillon** `-ql` (480p) → **vérif visuelle** en extrayant des images (ffmpeg) à chaque écran → corriger chevauchements/débordements.
+4. **Rendu final** `-qh` (1080p60), nom `eleveai-maths-974-<sujet>`.
+5. **Miniature** : entrée dans le registre `manim/miniature.py` (badge « LA RÉUNION · EN VRAI »).
+6. **Upload** (Frédéric) : playlist « Les maths en vrai ».
+7. **Accueil** : coller l'URL dans `EPISODES` de `MathsEtReunion.tsx` (`url: null` = carte « bientôt »).
+
+## Standard d'effets (validé par Frédéric le 15/07/2026)
+
+Trois règles nées de ses retours — **la barre de qualité de la série** :
+
+1. **Animations VARIÉES** — jamais tout en `Write` (lettre par lettre, ça lasse). Une palette qui **tourne** à chaque texte : glisse (gauche/droite), grossit (`GrowFromCenter`), pop (fade+scale), fondu (haut/bas). + emphase sur l'élément clé : `Indicate` / `Flash` / `Circumscribe` / `.animate.scale()` / `Transform`.
+2. **Légendes DISTRIBUÉES** — jamais 3 phrases qui se réécrivent sur la même « 2ᵉ ligne » sous le titre. Chaque légende **change de place** (coins, bas…) ET d'animation, posée **près de l'action** qu'elle décrit. Exception : sous le titre (centré) si sa place auto tombe sur un dessin.
+3. **VRAIS défis** — pas de calcul évident (×3, une division). Un problème **à 2 étapes** ancré 974 (lait : 250 L/jour + fromage 500 g → 50 fromages ; eau : toit 100 m² × 2 000 mm → 200 000 L → 40 citernes).
+
+## Les helpers (dans la classe de base de chaque script)
+
+Réutiliser tels quels d'un épisode à l'autre (présents dans `lait_reunion.py` et `circulation_eau.py`) :
+- **`anim_entree(m, mode=None)`** → une animation d'apparition qui **change à chaque appel** (palette tournante). `mode="grow"` pour forcer.
+- **`legende_mobile()`** → renvoie `dire(texte, size, couleur, mode=None, pos=None)` : une légende à la fois, **place qui tourne + anim qui varie**. `pos=(x,y)` force la position, `mode=` force l'anim.
+- **`titre_ecran(texte)`** : les titres alternent aussi leur entrée (Write / glisse / grossit).
+
+⚠️ **Pas d'emoji dans les `Text` Manim** (ex. ⏸) : la police ne les rend pas → petits carrés. Texte simple uniquement.
+
+## Checklist « en vrai »
+
+- [ ] 16:9 ET 9:16 rendus (Short = cadre imposé dans `__init__`)
+- [ ] Animations variées (helpers `anim_entree` / `legende_mobile`), aucune légende qui chevauche titre/dessin
+- [ ] Défi à 2 étapes, ancré 974, réponse dans la correction
+- [ ] Miniature registre + margouillat sur chaque écran + couleurs `charte.py`
+- [ ] URL collée dans `MathsEtReunion.tsx` (PAS dans `maths_974` — marque séparée)
