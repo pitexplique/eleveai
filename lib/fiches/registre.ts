@@ -90,6 +90,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "La multiplication",
     resume: "Tables, calcul mental, multiplication posée, × 10/100/1000 et problèmes.",
   },
+  "maths/cm2/division": {
+    titre: "La division",
+    resume: "Partager en parts égales, poser une division, lire le quotient et le reste.",
+  },
   "maths/5e/relatif-nombre": {
     titre: "Les nombres relatifs",
     resume: "Lire, placer et comparer les relatifs ; signe, opposé et valeur absolue.",
