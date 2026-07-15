@@ -29,8 +29,6 @@ import { problemesFixed } from "@/lib/defis-du-jour/problemes.fixed";
 import { problemeDuJourWeekly } from "@/lib/defis-du-jour/weekly";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
-import EncartCallEnDirect from "@/components/accueil/EncartCallEnDirect";
-import EncartFichesComposees from "@/components/accueil/EncartFichesComposees";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
@@ -538,6 +536,33 @@ export default function AccueilPage({
                 Tous les épisodes ↓
               </a>
             </p>
+
+            {/* À lire aussi — la rivière de titres (façon portail MSN) : des
+                manchettes cliquables qui irriguent le reste du site. */}
+            <div className="mt-5 border-t-2 border-[#1d1c16] pt-3">
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                À lire aussi
+              </p>
+              <ul className="mt-2 grid gap-x-6 gap-y-2 sm:grid-cols-2">
+                {[
+                  { emoji: "🖼️", titre: "Picto Maths : 25 défis en images de l'île", href: "/picto-maths" },
+                  { emoji: "🗺️", titre: "La carte de La Réunion, lieu par lieu, avec les maths dedans", href: "/carte" },
+                  { emoji: "🃏", titre: "« Qui suis-je ? » — le jeu de cartes à imprimer en famille", href: "/qui-suis-je-a-imprimer" },
+                  { emoji: "🗣️", titre: "Le dico : les 50 mots de l'évaluation nationale 6ᵉ", href: "/dico" },
+                  { emoji: "📚", titre: "Les fiches de cours, notion par notion, avec corrections", href: "/fiches-cours" },
+                  { emoji: "🎓", titre: "Pix IA : l'éval blanche pour arriver prêt le jour J", href: "/eval-pix-ia" },
+                ].map((l) => (
+                  <li key={l.href} className="border-b border-dotted border-[#1d1c16]/30 pb-2">
+                    <Link href={l.href} className="group flex items-baseline gap-2">
+                      <span aria-hidden className="text-sm">{l.emoji}</span>
+                      <span className="font-serif text-[15px] font-black leading-snug group-hover:underline">
+                        {l.titre}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </article>
 
           {/* Le fil du jour (APPRENDRE : les rendez-vous quotidiens). */}
@@ -601,15 +626,6 @@ export default function AccueilPage({
                 </Link>
               )}
 
-              <a href="#agenda" className="group block py-3">
-                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
-                  🔴 En direct
-                </p>
-                <h3 className="mt-1 font-serif text-lg font-black leading-snug group-hover:underline">
-                  Les prochains rendez-vous en visio
-                </h3>
-                <p className="mt-1.5 text-sm font-black text-emerald-900">Voir l&apos;agenda ↓</p>
-              </a>
             </div>
           </aside>
 
@@ -808,17 +824,6 @@ export default function AccueilPage({
           </Link>
         </p>
       </section>
-
-      {/* ══ L'AGENDA + L'ATELIER — les deux encarts vivants (composants
-          existants, autonomes : ils ne rendent rien s'il n'y a rien à montrer).
-          Dans un journal, un encart sombre = un supplément glissé dans les
-          pages ; assumé. ══════════════════════════════════════════════════ */}
-      <div id="agenda" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
-        <Kicker>🔴 L&apos;agenda · En direct</Kicker>
-        <div className="mt-2 border-t-2 border-[#1d1c16]" />
-        <EncartCallEnDirect />
-        <EncartFichesComposees />
-      </div>
 
       {/* ══ LE CATALOGUE — les petites annonces : TOUT est listé ═════════════ */}
       <section id="catalogue" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
