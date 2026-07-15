@@ -289,16 +289,17 @@ class CirculationEau974(EauBase):
 
         ile = self.profil_ile()
         mer_e = self.mer(6.3, 1.4)
-        nu = nuage(1.4).move_to([0.6, 2.0, 0])
+        nu = nuage(1.4).move_to([0.6, 1.4, 0])
         self.play(FadeIn(ile, shift=0.3 * UP), FadeIn(mer_e), FadeIn(nu, scale=0.7))
 
-        pl = gouttes_pluie([0.6, 1.3, 0], n=7, largeur=1.6)
+        pl = gouttes_pluie([0.6, 0.95, 0], n=7, largeur=1.6)
         self.play(LaggedStart(*[
             Succession(FadeIn(d, shift=0.25 * DOWN), FadeOut(d, shift=0.35 * DOWN)) for d in pl
         ], lag_ratio=0.06), run_time=1.4)
 
+        # légende baissée à y=2.3 : sinon elle chevauche le titre (y ~ 3.4).
         l1 = self.T("L'eau dévale : cascades, puis rivières, jusqu'à la mer.",
-                    size=25, color=BLEU_CALCUL).move_to([-1.4, 2.9, 0])
+                    size=25, color=BLEU_CALCUL).move_to([-1.4, 2.3, 0])
         self.play(self.anim_entree(l1, mode="slide_l"))
 
         # le chemin de l'eau : sommet → versant Est → mer
@@ -405,11 +406,12 @@ class CirculationEau974(EauBase):
         cadre = SurroundingRectangle(rappel, color=VERT_OK, buff=0.2, corner_radius=0.1)
         self.play(self.anim_entree(rappel, mode="fade_down"), Create(cadre))
 
-        # à gauche : la maison + son toit (100 m²) sous la pluie
-        m = maison().scale(1.5).move_to([-4.2, -0.4, 0])
-        pluie = gouttes_pluie([-4.2, 1.2, 0], n=7, largeur=1.9)
+        # à gauche : la maison + son toit (100 m²) sous la pluie.
+        # Le label « 2 000 mm/an » HUGGE le toit (next_to) pour ne pas flotter.
+        m = maison().scale(1.5).move_to([-4.2, -0.5, 0])
+        pluie_lab = self.T("2 000 mm / an", size=24, color=BLEU_CALCUL).next_to(m, UP, buff=0.35)
+        pluie = gouttes_pluie([-4.2, 1.55, 0], n=7, largeur=1.9)
         toit_lab = self.T("toit : 100 m²", size=24, color=WHITE).next_to(m, DOWN, buff=0.25)
-        pluie_lab = self.T("2 000 mm / an", size=24, color=BLEU_CALCUL).move_to([-4.2, 1.7, 0])
         self.play(FadeIn(m, shift=0.4 * UP))
         self.play(self.anim_entree(pluie_lab, mode="fade_down"),
                   LaggedStart(*[Succession(FadeIn(d, shift=0.2 * DOWN), FadeOut(d, shift=0.3 * DOWN)) for d in pluie],
