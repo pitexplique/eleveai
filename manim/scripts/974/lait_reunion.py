@@ -150,21 +150,55 @@ class LaitBase(Scene):
         return t
 
     def titre_ecran(self, texte):
+        # les titres alternent aussi leur entrée (Write / glisse / grossit).
         t = self.T(texte, size=38, color=JAUNE_TITRE).to_edge(UP)
-        self.play(Write(t))
+        if not hasattr(self, "_tt"):
+            self._tt = 0
+        anim = [Write(t), FadeIn(t, shift=0.3 * DOWN), GrowFromCenter(t)][self._tt % 3]
+        self._tt += 1
+        self.play(anim)
         return t
 
-    def bande_legende(self, y=2.55):
-        """Retourne dire() : affiche une seule légende à la fois sous le titre."""
-        state = {"m": None}
+    def anim_entree(self, m, mode=None, run_time=0.8):
+        """Une animation d'apparition qui CHANGE à chaque appel (anti-monotonie).
+        Sans mode imposé, on tourne dans une palette variée."""
+        palette = ["fade_up", "pop", "slide_r", "grow", "fade_down", "slide_l", "write"]
+        if mode is None:
+            if not hasattr(self, "_ai"):
+                self._ai = 0
+            mode = palette[self._ai % len(palette)]
+            self._ai += 1
+        table = {
+            "write": lambda: Write(m, run_time=run_time),
+            "fade_up": lambda: FadeIn(m, shift=0.45 * UP, run_time=run_time),
+            "fade_down": lambda: FadeIn(m, shift=0.45 * DOWN, run_time=run_time),
+            "slide_r": lambda: FadeIn(m, shift=0.7 * RIGHT, run_time=run_time),
+            "slide_l": lambda: FadeIn(m, shift=0.7 * LEFT, run_time=run_time),
+            "pop": lambda: FadeIn(m, scale=0.5, run_time=run_time),
+            "grow": lambda: GrowFromCenter(m, run_time=run_time),
+        }
+        return table[mode]()
 
-        def dire(texte, size=26, couleur=BLEU_CALCUL):
-            t = self.T(texte, size=size, color=couleur).move_to([0, y, 0])
+    def legende_mobile(self):
+        """Retourne dire() : une légende à la fois, mais qui CHANGE de place ET
+        d'animation à chaque étape (fini la 2ᵉ ligne qui se réécrit au même endroit).
+        Les positions tournent : coin haut-gauche, droite, haut, gauche, bas."""
+        state = {"m": None, "k": 0}
+        # (x, y) variés — jamais deux étapes de suite au même endroit.
+        places = [(-3.4, 1.9), (3.1, -1.4), (0, 2.5), (-3.2, -0.2), (0, -2.7), (3.2, 1.5)]
+
+        def dire(texte, size=26, couleur=BLEU_CALCUL, mode=None):
+            x, y = places[state["k"] % len(places)]
+            t = self.T(texte, size=size, color=couleur).move_to([x, y, 0])
+            if t.width > self.LARGEUR_SURE - 1.0:
+                t.scale_to_fit_width(self.LARGEUR_SURE - 1.0).move_to([0, y, 0])
+            entree = self.anim_entree(t, mode=mode)
             if state["m"] is None:
-                self.play(Write(t))
+                self.play(entree)
             else:
-                self.play(FadeOut(state["m"]), Write(t))
+                self.play(FadeOut(state["m"], shift=0.2 * DOWN), entree)
             state["m"] = t
+            state["k"] += 1
             return t
 
         return dire, state
@@ -190,10 +224,11 @@ class LaitReunion974(LaitBase):
         accroche = self.T("Du pré de la Plaine des Cafres... jusqu'à ton frigo !",
                           size=30, color=BLEU_CALCUL).move_to([0, 0.6, 0])
 
-        self.play(Write(titre), FadeIn(sous, shift=0.3 * DOWN))
-        self.play(FadeIn(p, shift=0.2 * UP), GrowFromCenter(sol))
-        self.play(FadeIn(v, shift=0.3 * RIGHT))
-        self.play(Write(accroche))
+        # entrée : le titre grossit, le décor se pose, le soleil tourne, la vache glisse.
+        self.play(GrowFromCenter(titre), FadeIn(sous, shift=0.3 * DOWN))
+        self.play(FadeIn(p, shift=0.3 * UP), GrowFromCenter(sol))
+        self.play(Rotate(sol, PI / 6, run_time=1.0), FadeIn(v, shift=0.6 * RIGHT))
+        self.play(FadeIn(accroche, scale=0.5))
         self.wait(2.4)
 
     # ── écran 1 : la Plaine des Cafres ──────────────────────────────────────
@@ -208,21 +243,22 @@ class LaitReunion974(LaitBase):
         sol = soleil(0.42).move_to([-5.0, 2.2, 0])
         v = vache(0.7).move_to([1.2, -1.55, 0])
         self.play(FadeIn(p), GrowFromCenter(sol), FadeIn(herbe, lag_ratio=0.05))
-        self.play(FadeIn(v, shift=0.3 * RIGHT))
+        self.play(FadeIn(v, shift=0.5 * RIGHT))
 
-        alt = self.T("À 1 500 m d'altitude, il fait frais : l'herbe pousse bien.",
-                     size=27, color=WHITE).move_to([0, 1.6, 0])
-        self.play(Write(alt))
-        self.wait(0.6)
+        # légende n°1 : glisse depuis la gauche, en haut
+        alt = self.T("À 1 500 m d'altitude, il fait frais :", size=27, color=WHITE).move_to([-1.4, 1.7, 0])
+        alt2 = self.T("l'herbe pousse bien.", size=27, color=WHITE).next_to(alt, RIGHT, buff=0.25)
+        self.play(self.anim_entree(alt, mode="slide_l"), self.anim_entree(alt2, mode="slide_r"))
+        self.wait(0.5)
 
-        # la vache broute : elle baisse la tête, une goutte de lait apparaît
-        l2 = self.T("Les vaches broutent cette herbe... et donnent du bon lait.",
-                    size=27, color=BLEU_CALCUL).move_to([0, 0.7, 0])
-        self.play(Write(l2))
+        # la vache broute : petit hochement de tête + une goutte de lait tombe
+        l2 = self.T("Elles broutent cette herbe... et donnent du bon lait.",
+                    size=27, color=BLEU_CALCUL).move_to([-0.3, 0.7, 0])
+        self.play(self.anim_entree(l2, mode="fade_up"), Wiggle(v, scale_value=1.06))
         goutte = Circle(radius=0.09, color=WHITE, fill_color=WHITE, fill_opacity=1, stroke_width=0).move_to([1.35, -2.1, 0])
         self.play(FadeIn(goutte, scale=0.4))
         self.play(goutte.animate.shift(DOWN * 0.3).set_opacity(0.2), run_time=0.8)
-        self.wait(2.2)
+        self.wait(2.0)
 
     # ── écran 2 : ce qu'il y a dans le lait (pourcentages) ──────────────────
 
@@ -265,13 +301,14 @@ class LaitReunion974(LaitBase):
         for seg, ligne in zip(barre, lignes):
             self.play(GrowFromEdge(seg, DOWN), FadeIn(ligne, shift=0.2 * RIGHT), run_time=0.55)
 
-        note = self.T("Le lait, c'est SURTOUT de l'eau ! Le fromage et le yaourt,",
-                      size=25, color=BLEU_CALCUL).move_to([0.4, -1.7, 0])
-        note2 = self.T("c'est le reste, qu'on concentre en enlevant de l'eau.",
-                       size=25, color=BLEU_CALCUL).next_to(note, DOWN, buff=0.2)
-        self.play(Indicate(barre[0], color=BLEU_CALCUL), Write(note))
-        self.play(Write(note2))
-        self.wait(2.4)
+        # on zoome sur le gros segment « eau » pour marquer les 87 %.
+        self.play(Indicate(barre[0], color=BLEU_CALCUL, scale_factor=1.15),
+                  Flash(lignes[0], color=BLEU_CALCUL))
+        note = self.T("Le lait, c'est SURTOUT de l'eau !", size=27, color=BLEU_CALCUL).move_to([0.4, -1.4, 0])
+        note2 = self.T("Fromage et yaourt = le reste, qu'on concentre.", size=25).move_to([0.4, -2.1, 0])
+        self.play(self.anim_entree(note, mode="grow"))
+        self.play(self.anim_entree(note2, mode="fade_up"))
+        self.wait(2.2)
 
     # ── écran 3 : le yaourt ─────────────────────────────────────────────────
 
@@ -279,47 +316,43 @@ class LaitReunion974(LaitBase):
         self.clear()
         self.add_mascotte()
         self.titre_ecran("3. Le lait devient YAOURT")
-        dire, _ = self.bande_legende()
+        dire, _ = self.legende_mobile()
 
-        pot = pot_yaourt(1.4).move_to([0, -0.6, 0])
-        lait = RoundedRectangle(width=0.9, height=0.7, corner_radius=0.12, color=WHITE,
-                                fill_color=WHITE, fill_opacity=0.9, stroke_width=0).move_to([0, -0.7, 0])
-        self.play(FadeIn(pot[0]), FadeIn(lait))
-        dire("On part du lait, tout simple.")
+        # pot au centre-gauche pour laisser la place aux légendes qui tournent
+        pot = pot_yaourt(1.5).move_to([-2.4, -0.5, 0])
+        lait = RoundedRectangle(width=0.95, height=0.75, corner_radius=0.12, color=WHITE,
+                                fill_color=WHITE, fill_opacity=0.9, stroke_width=0).move_to([-2.4, -0.6, 0])
+        self.play(FadeIn(pot[0], shift=0.3 * UP), GrowFromEdge(lait, DOWN))
+        dire("On part du lait, tout simple.", mode="slide_l")
 
-        # on chauffe : vagues de chaleur orange sous le pot
+        # on chauffe : vagues de chaleur orange sous le pot (elles pulsent)
         chaleur = VGroup(*[
             Arc(radius=0.2 + 0.12 * i, start_angle=PI * 0.15, angle=PI * 0.7, color=ORANGE_RETENUE, stroke_width=3)
-            .move_to([0, -1.9, 0]) for i in range(3)
+            .move_to([-2.4, -1.75, 0]) for i in range(3)
         ])
-        dire("On le chauffe un peu (autour de 40°C).", couleur=ORANGE_RETENUE)
-        self.play(LaggedStart(*[FadeIn(c, shift=0.2 * UP) for c in chaleur], lag_ratio=0.2), run_time=1.2)
+        self.play(LaggedStart(*[GrowFromCenter(c) for c in chaleur], lag_ratio=0.2), run_time=1.0)
+        dire("On le chauffe un peu (≈ 40 °C).", couleur=ORANGE_RETENUE, mode="fade_down")
+        self.play(Indicate(chaleur, color=ORANGE_RETENUE, scale_factor=1.2))
 
-        # on ajoute les ferments : petits points qui se multiplient
-        ferments = VGroup(*[Dot(radius=0.05, color=VERT_OK).move_to([np.random.uniform(-0.3, 0.3), np.random.uniform(-0.9, -0.5), 0])
-                            for _ in range(6)])
-        # (positions fixes pour reproductibilité)
+        # on ajoute les ferments : petits points (positions fixes, reproductibles)
         pos = [(-0.25, -0.85), (0.2, -0.6), (0.05, -0.9), (-0.1, -0.55), (0.25, -0.8), (-0.2, -0.65)]
-        for dot, (px, py) in zip(ferments, pos):
-            dot.move_to([px, py, 0])
-        dire("On ajoute des ferments : de minuscules bactéries.", couleur=VERT_OK)
+        ferments = VGroup(*[Dot(radius=0.05, color=VERT_OK).move_to([-2.4 + px, py, 0]) for px, py in pos])
+        dire("On ajoute des ferments : de minuscules bactéries.", couleur=VERT_OK, mode="pop")
         self.play(LaggedStart(*[FadeIn(d, scale=0.3) for d in ferments], lag_ratio=0.15), run_time=1.4)
 
-        plus = VGroup(*[Dot(radius=0.05, color=VERT_OK).move_to([np.random.uniform(-0.35, 0.35), np.random.uniform(-0.95, -0.5), 0]) for _ in range(10)])
         pos2 = [(-0.3, -0.9), (0.3, -0.9), (-0.15, -0.6), (0.15, -0.6), (0.0, -0.75), (-0.32, -0.65),
                 (0.32, -0.7), (-0.05, -0.95), (0.1, -0.9), (0.22, -0.55)]
-        for dot, (px, py) in zip(plus, pos2):
-            dot.move_to([px, py, 0])
-        dire("Elles mangent le sucre du lait et se multiplient...", couleur=VERT_OK)
+        plus = VGroup(*[Dot(radius=0.05, color=VERT_OK).move_to([-2.4 + px, py, 0]) for px, py in pos2])
+        dire("Elles mangent le sucre et se multiplient...", couleur=VERT_OK, mode="grow")
         self.play(LaggedStart(*[GrowFromCenter(d) for d in plus], lag_ratio=0.08), run_time=1.6)
 
-        # le lait épaissit → yaourt (le pot se remplit d'un blanc plus dense)
-        yaourt = RoundedRectangle(width=0.95, height=0.78, corner_radius=0.12, color=WHITE,
-                                  fill_color=WHITE, fill_opacity=1, stroke_color=VIOLET_ACCENT, stroke_width=2).move_to([0, -0.65, 0])
-        dire("...le lait épaissit : c'est le YAOURT !", couleur=VERT_OK)
-        self.play(FadeOut(ferments), FadeOut(plus), Transform(lait, yaourt), FadeIn(pot[1]))
-        self.play(Circumscribe(pot, color=VERT_OK))
-        self.wait(2.2)
+        # le lait épaissit → yaourt (transformation + halo)
+        yaourt = RoundedRectangle(width=1.0, height=0.82, corner_radius=0.12, color=WHITE,
+                                  fill_color=WHITE, fill_opacity=1, stroke_color=VIOLET_ACCENT, stroke_width=2).move_to([-2.4, -0.55, 0])
+        dire("...le lait épaissit : c'est le YAOURT !", couleur=VERT_OK, mode="fade_up")
+        self.play(FadeOut(ferments), FadeOut(plus), Transform(lait, yaourt), FadeIn(pot[1], shift=0.2 * DOWN))
+        self.play(pot.animate.scale(1.12), Circumscribe(pot, color=VERT_OK))
+        self.wait(2.0)
 
     # ── écran 4 : le fromage ────────────────────────────────────────────────
 
@@ -327,7 +360,7 @@ class LaitReunion974(LaitBase):
         self.clear()
         self.add_mascotte()
         self.titre_ecran("4. Le lait devient FROMAGE")
-        dire, _ = self.bande_legende()
+        dire, _ = self.legende_mobile()
 
         cuve = VGroup(
             Line([-1.2, 0.4, 0], [-1.2, -1.0, 0], color=GREY_B, stroke_width=3),
@@ -335,11 +368,11 @@ class LaitReunion974(LaitBase):
             Line([1.2, -1.0, 0], [1.2, 0.4, 0], color=GREY_B, stroke_width=3),
         ).move_to([-2.6, -0.3, 0])
         lait = Rectangle(width=2.3, height=1.2, fill_color=WHITE, fill_opacity=0.9, stroke_width=0).move_to([-2.6, -0.4, 0])
-        self.play(FadeIn(cuve), FadeIn(lait))
-        dire("On chauffe le lait dans une grande cuve.")
+        self.play(Create(cuve), GrowFromEdge(lait, DOWN))
+        dire("On chauffe le lait dans une grande cuve.", mode="slide_l")
 
-        dire("On ajoute la présure : le lait se met à cailler.", couleur=ORANGE_RETENUE)
-        # le lait se sépare : caillé (cubes blancs) qui tombent + petit-lait (liquide jaune clair)
+        dire("On ajoute la présure : le lait se met à cailler.", couleur=ORANGE_RETENUE, mode="fade_down")
+        # le lait se sépare : caillé (cubes blancs) + petit-lait (liquide jaune clair)
         petit_lait = Rectangle(width=2.3, height=0.5, fill_color=JAUNE_TITRE, fill_opacity=0.35, stroke_width=0).move_to([-2.6, 0.05, 0])
         cubes = VGroup()
         for i in range(12):
@@ -348,71 +381,85 @@ class LaitReunion974(LaitBase):
             cy = -0.75 + (i // 4) * 0.24
             c.move_to([cx, cy, 0])
             cubes.add(c)
-        dire("Ça se sépare : le CAILLÉ (solide) et le PETIT-LAIT (liquide).", couleur=BLEU_CALCUL)
+        dire("Ça se sépare : le CAILLÉ (solide) et le PETIT-LAIT (liquide).", couleur=BLEU_CALCUL, mode="pop")
         self.play(Transform(lait, petit_lait), LaggedStart(*[FadeIn(c, scale=0.4) for c in cubes], lag_ratio=0.06), run_time=1.8)
 
-        # légendes des deux parts
+        # étiquettes des deux parts, qui glissent en place
         f1 = self.T("caillé", size=22, color=WHITE).move_to([-2.6, -1.35, 0])
         f2 = self.T("petit-lait", size=22, color=JAUNE_TITRE).next_to(f1, RIGHT, buff=0.5)
-        self.play(Write(f1), Write(f2))
+        self.play(FadeIn(f1, shift=0.2 * UP), FadeIn(f2, shift=0.2 * UP))
 
-        # on presse le caillé → une meule de fromage
-        dire("On presse le caillé, on le sale, on l'affine → le FROMAGE !", couleur=VERT_OK)
+        # on presse le caillé → une meule de fromage (la flèche se trace, le caillé devient meule)
+        dire("On presse, on sale, on affine → le FROMAGE !", couleur=VERT_OK, mode="grow")
         meule = fromage(1.6).move_to([3.4, -0.4, 0])
         fleche = Arrow([-1.1, -0.4, 0], [2.4, -0.4, 0], color=WHITE, stroke_width=4, buff=0.2)
         self.play(GrowArrow(fleche))
-        self.play(Transform(cubes, meule), FadeOut(f1), FadeOut(f2))
-        self.play(Circumscribe(meule, color=VERT_OK))
-        self.wait(2.2)
+        self.play(ReplacementTransform(cubes, meule), FadeOut(f1), FadeOut(f2))
+        self.play(meule.animate.scale(1.12), Flash(meule, color=VERT_OK))
+        self.wait(2.0)
 
     # ── écran 5 : défi ──────────────────────────────────────────────────────
 
     def ecran_defi(self):
         self.clear()
         self.add_mascotte(scale=0.6)
-        titre = self.T("Défi", size=46, color=JAUNE_TITRE).to_edge(UP)
-        self.play(Write(titre))
+        titre = self.T("Défi", size=48, color=JAUNE_TITRE).to_edge(UP)
+        self.play(GrowFromCenter(titre))
 
-        # 10 bouteilles → 1 fromage
-        bouteilles = VGroup(*[bouteille_lait(0.7) for _ in range(10)]).arrange(RIGHT, buff=0.12).move_to([-2.2, 1.2, 0])
-        eq = self.T("=", size=44).next_to(bouteilles, RIGHT, buff=0.3)
-        f = fromage(1.1).next_to(eq, RIGHT, buff=0.3)
-        rappel = self.T("10 litres de lait → 1 kg de fromage", size=28, color=BLEU_CALCUL).move_to([0, -0.2, 0])
-        self.play(LaggedStart(*[FadeIn(b, shift=0.2 * UP) for b in bouteilles], lag_ratio=0.08), run_time=1.6)
-        self.play(Write(eq), FadeIn(f, scale=0.6))
-        self.play(Write(rappel))
+        # le rappel encadré, EN HAUT (sous le titre), centré — n'empiète sur rien
+        rappel = self.T("Rappel : 10 L de lait → 1 kg de fromage", size=26, color=VERT_OK).move_to([0, 2.1, 0])
+        cadre = SurroundingRectangle(rappel, color=VERT_OK, buff=0.2, corner_radius=0.1)
+        self.play(self.anim_entree(rappel, mode="fade_down"), Create(cadre))
 
-        q = self.T("Combien de litres de lait pour 3 kg de fromage ?", size=32, color=JAUNE_TITRE).move_to([0, -1.4, 0])
-        self.play(Write(q))
-        pause = self.T("Mets pause et cherche !", size=30, color=ORANGE_RETENUE).to_edge(DOWN)
-        self.play(Write(pause))
-        self.wait(4.0)
+        # ligne du milieu : le bidon (250 L) à gauche, le fromage (500 g) à droite
+        bidon = RoundedRectangle(width=1.5, height=1.9, corner_radius=0.18, color=GREY_B,
+                                 fill_color=GREY_D, fill_opacity=0.5, stroke_width=3).move_to([-3.9, 0.2, 0])
+        bidon_lait = RoundedRectangle(width=1.32, height=1.4, corner_radius=0.12, color=WHITE,
+                                      fill_color=WHITE, fill_opacity=0.9, stroke_width=0).move_to([-3.9, 0.05, 0])
+        anse = Arc(radius=0.45, start_angle=0, angle=PI, color=GREY_B, stroke_width=4).move_to([-3.9, 1.2, 0])
+        lab_bidon = self.T("250 L / jour", size=26, color=BLEU_CALCUL).next_to(bidon, DOWN, buff=0.2)
+        self.play(FadeIn(VGroup(bidon, bidon_lait, anse), shift=0.6 * RIGHT))
+        self.play(self.anim_entree(lab_bidon, mode="fade_up"))
 
-    # ── écran 6 : correction ────────────────────────────────────────────────
+        petit = fromage(0.9).move_to([1.4, 0.3, 0])
+        lab_petit = self.T("un fromage = 500 g", size=26, color=JAUNE_TITRE).next_to(petit, DOWN, buff=0.3)
+        self.play(FadeIn(petit, scale=0.4))
+        self.play(self.anim_entree(lab_petit, mode="pop"))
+
+        # la question, en bas — deux lignes centrées
+        q1 = self.T("Combien de fromages la fromagerie", size=30, color=WHITE).move_to([0, -1.75, 0])
+        q2 = self.T("fait-elle en une journée ?", size=30, color=WHITE).next_to(q1, DOWN, buff=0.18)
+        self.play(self.anim_entree(q1, mode="slide_l"), self.anim_entree(q2, mode="slide_r"))
+        pause = self.T("⏸ Mets pause : il y a DEUX étapes...", size=28, color=ORANGE_RETENUE).to_edge(DOWN, buff=0.35)
+        self.play(GrowFromCenter(pause))
+        self.wait(4.5)
+
+    # ── écran 6 : correction (2 étapes) ─────────────────────────────────────
 
     def ecran_correction(self):
         self.clear()
         self.add_mascotte()
         self.titre_ecran("Correction")
 
-        calc = self.T("10 × 3 = 30", size=46, color=VERT_OK).move_to([0, 2.1, 0])
-        self.play(Write(calc))
+        # ── Étape 1 : les litres → les kilos de fromage
+        e1 = self.T("Étape 1 — le lait donne le fromage", size=28, color=BLEU_CALCUL).move_to([0, 2.3, 0])
+        self.play(self.anim_entree(e1, mode="slide_l"))
+        c1 = self.T("250 L ÷ 10 = 25 kg de fromage", size=38, color=VERT_OK).move_to([0, 1.4, 0])
+        self.play(self.anim_entree(c1, mode="grow"))
+        self.play(Circumscribe(c1, color=VERT_OK))
 
-        # 3 fromages, chacun « coûte » 10 litres
-        blocs = VGroup()
-        for k in range(3):
-            f = fromage(0.8)
-            dix = self.T("10 L", size=22, color=BLEU_CALCUL).next_to(f, DOWN, buff=0.2)
-            blocs.add(VGroup(f, dix))
-        blocs.arrange(RIGHT, buff=1.2).move_to([0, 0.3, 0])
-        for b in blocs:
-            self.play(FadeIn(b[0], scale=0.6), Write(b[1]), run_time=0.6)
+        # ── Étape 2 : les kilos → le nombre de fromages (avec conversion)
+        e2 = self.T("Étape 2 — combien de fromages de 500 g ?", size=28, color=ORANGE_RETENUE).move_to([0, 0.4, 0])
+        self.play(self.anim_entree(e2, mode="slide_r"))
+        conv = self.T("500 g = 0,5 kg", size=30, color=WHITE).move_to([0, -0.4, 0])
+        self.play(self.anim_entree(conv, mode="pop"))
+        c2 = self.T("25 ÷ 0,5 = 50 fromages", size=38, color=VERT_OK).move_to([0, -1.3, 0])
+        self.play(self.anim_entree(c2, mode="fade_up"))
+        self.play(Flash(c2, color=VERT_OK))
 
-        somme = self.T("10 + 10 + 10 = 30 litres", size=30, color=VERT_OK).move_to([0, -1.4, 0])
-        self.play(Write(somme))
-        concl = self.T("Il faut 30 litres de lait pour 3 kg de fromage.", size=28).to_edge(DOWN, buff=0.6)
-        self.play(Write(concl))
-        self.wait(2.6)
+        concl = self.T("→ 50 fromages par jour !", size=32, color=JAUNE_TITRE).to_edge(DOWN, buff=0.5)
+        self.play(GrowFromCenter(concl))
+        self.wait(2.8)
 
     # ── écran 7 : à retenir ─────────────────────────────────────────────────
 
@@ -429,9 +476,9 @@ class LaitReunion974(LaitBase):
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.42).move_to([-0.2, 0.2, 0])
 
         signature = self.T(SIGNATURE, size=26, color=VERT_OK).to_edge(DOWN)
-        self.play(Write(titre))
-        self.play(LaggedStart(*[Write(p) for p in points], lag_ratio=0.3))
-        self.play(Write(signature))
+        self.play(GrowFromCenter(titre))
+        self.play(LaggedStart(*[FadeIn(p, shift=0.4 * RIGHT) for p in points], lag_ratio=0.35))
+        self.play(FadeIn(signature, shift=0.3 * UP), Flash(signature, color=VERT_OK))
         self.wait(2.5)
 
     def construct(self):
