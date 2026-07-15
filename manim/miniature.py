@@ -78,6 +78,20 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_proportionnalite_cm2(d):
+    # un petit tableau de proportionnalité : 2 6 / 4 12 avec × 3.
+    x0, y0, cw, ch = 352, 330, 96, 66
+    f = police("ariblk.ttf", 34)
+    vals = [["2", "6"], ["4", "12"]]
+    cols = [BLEU, VERT]
+    for r in range(2):
+        for c in range(2):
+            x, y = x0 + c * cw, y0 + r * ch
+            d.rectangle([x, y, x + cw, y + ch], outline=NAVY, width=3)
+            centre(d, x + cw / 2, y + 14, vals[r][c], f, cols[r])
+    d.text((x0 + 2 * cw + 24, y0 + 24), "× 3", font=police("ariblk.ttf", 42), fill=(176, 84, 20))
+
+
 def acc_division_cm2(d):
     # une potence : 37 | 5, quotient 7, reste 2 (le cœur du cours CM2).
     f = police("arialbd.ttf", 60)
@@ -532,6 +546,10 @@ NOTIONS = {
     "eleveai-maths-cm2-division": {
         "badge": "MATHS · CM2", "titre": ["LA", "DIVISION"], "taille": 84,
         "sous": "partager · quotient · reste", "accroche": acc_division_cm2,
+    },
+    "eleveai-maths-cm2-proportionnalite": {
+        "badge": "MATHS · CM2", "titre": ["LA", "PROPORTIONNALITÉ"], "taille": 56,
+        "sous": "le coefficient · le retour à l'unité", "accroche": acc_proportionnalite_cm2,
     },
     "eleveai-maths-5e-relatif-nombre": {
         "badge": "MATHS · 5e", "titre": ["LES NOMBRES", "RELATIFS"], "taille": 74,
