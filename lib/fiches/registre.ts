@@ -98,6 +98,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "La proportionnalité",
     resume: "Reconnaître, remplir un tableau, trouver le coefficient et revenir à l'unité.",
   },
+  "maths/cm2/perimetre": {
+    titre: "Les périmètres",
+    resume: "Le tour d'une figure : triangle, rectangle, carré et figure quelconque.",
+  },
   "maths/5e/relatif-nombre": {
     titre: "Les nombres relatifs",
     resume: "Lire, placer et comparer les relatifs ; signe, opposé et valeur absolue.",
