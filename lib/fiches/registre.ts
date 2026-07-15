@@ -102,6 +102,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les périmètres",
     resume: "Le tour d'une figure : triangle, rectangle, carré et figure quelconque.",
   },
+  "maths/cm2/aire": {
+    titre: "Les aires",
+    resume: "La surface d'une figure : compter les carreaux, rectangle, carré, triangle.",
+  },
   "maths/5e/relatif-nombre": {
     titre: "Les nombres relatifs",
     resume: "Lire, placer et comparer les relatifs ; signe, opposé et valeur absolue.",
