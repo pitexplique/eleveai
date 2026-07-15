@@ -78,6 +78,17 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_multiplication_cm2(d):
+    # la multiplication posée 247 × 4 = 988 (le cœur du cours CM2).
+    f = police("arialbd.ttf", 62)
+    xd, yh = 664, 322
+    a_droite(d, xd, yh, "247", f, BLEU)
+    d.text((452, yh + 74), "×", font=f, fill=BLEU)
+    a_droite(d, xd, yh + 74, "4", f, BLEU)
+    d.rounded_rectangle([452, yh + 156, xd, yh + 168], radius=6, fill=JAUNE)
+    a_droite(d, xd, yh + 178, "988", f, VERT)
+
+
 def acc_fraction_cm2(d):
     # une barre de 4 parts, 3 coloriées → 3/4 (le sens de la fraction en CM2).
     x0, y0, w, h = 340, 336, 376, 78
@@ -501,6 +512,10 @@ NOTIONS = {
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,
         "sous": "lire · dessiner · placer", "accroche": acc_fraction_cm2,
+    },
+    "eleveai-maths-cm2-multiplication": {
+        "badge": "MATHS · CM2", "titre": ["LA", "MULTIPLICATION"], "taille": 60,
+        "sous": "tables · de tête · en colonnes", "accroche": acc_multiplication_cm2,
     },
     "eleveai-maths-5e-relatif-nombre": {
         "badge": "MATHS · 5e", "titre": ["LES NOMBRES", "RELATIFS"], "taille": 74,
