@@ -86,6 +86,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les fractions",
     resume: "Lire, dessiner (barre, disque, grille) et placer une fraction sur la droite graduée.",
   },
+  "maths/cm2/multiplication": {
+    titre: "La multiplication",
+    resume: "Tables, calcul mental, multiplication posée, × 10/100/1000 et problèmes.",
+  },
   "maths/5e/relatif-nombre": {
     titre: "Les nombres relatifs",
     resume: "Lire, placer et comparer les relatifs ; signe, opposé et valeur absolue.",
