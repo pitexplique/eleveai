@@ -78,6 +78,17 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_symetrie_cm2(d):
+    # un axe vertical (miroir) + une figure en L bleue et son image verte.
+    ax = 512
+    for yy in range(300, 476, 15):
+        d.line([(ax, yy), (ax, yy + 8)], fill=JAUNE, width=3)
+    gauche = [(404, 312), (404, 462), (474, 462), (474, 386), (450, 386), (450, 312)]
+    d.polygon(gauche, fill=BLEU, outline=NAVY)
+    droite = [(2 * ax - x, y) for (x, y) in gauche]
+    d.polygon(droite, fill=VERT, outline=NAVY)
+
+
 def acc_aire_cm2(d):
     # une grille 4 × 3 remplie (la surface) + A = 4 × 3 = 12 cm².
     gx, gy, cs = 388, 322, 42
@@ -576,6 +587,10 @@ NOTIONS = {
     "eleveai-maths-cm2-aire": {
         "badge": "MATHS · CM2", "titre": ["LES", "AIRES"], "taille": 84,
         "sous": "la surface · en cm²", "accroche": acc_aire_cm2,
+    },
+    "eleveai-maths-cm2-symetrie": {
+        "badge": "MATHS · CM2", "titre": ["LA SYMÉTRIE", "AXIALE"], "taille": 64,
+        "sous": "le miroir · l'axe", "accroche": acc_symetrie_cm2,
     },
     "eleveai-maths-5e-relatif-nombre": {
         "badge": "MATHS · 5e", "titre": ["LES NOMBRES", "RELATIFS"], "taille": 74,
