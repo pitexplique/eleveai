@@ -50,7 +50,7 @@ const EPISODES: Episode[] = [
     emoji: "🌾",
     titre: "La canne à sucre",
     accroche: "Suis un planteur : sa canne devient du sucre... ET de la lumière (la bagasse fait de l'électricité). Et derrière, il y a des hommes.",
-    url: null,
+    url: "https://youtu.be/hH2N0Cvx-AI",
   },
 ];
 
