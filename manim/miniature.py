@@ -437,8 +437,31 @@ def acc_cyclone_974(d):
     d.text((300, 512), "record du monde : 1 692 mm / 24 h", font=police("arialbd.ttf", 28), fill=VERT)
 
 
+def acc_volcan_974(d):
+    # un cône de volcan + gerbe de lave (rouge/orange) + coulée.
+    orange = (255, 106, 0)
+    rouge = (211, 47, 47)
+    # cône
+    d.polygon([(360, 500), (455, 330), (545, 330), (640, 500)], fill=(61, 43, 36), outline=(150, 150, 150))
+    # gerbe de lave
+    for i, dx in enumerate(range(-36, 37, 12)):
+        x = 500 + dx
+        h = 70 - abs(dx) // 2
+        col = rouge if i % 2 else orange
+        d.line([(x, 330), (x + dx // 3, 330 - h)], fill=col, width=6)
+    for gx, gy in [(482, 258), (516, 250), (500, 240)]:
+        d.ellipse([gx - 6, gy - 6, gx + 6, gy + 6], fill=JAUNE)
+    # coulée qui descend
+    d.line([(540, 350), (600, 430), (640, 495)], fill=orange, width=12, joint="curve")
+    d.text((330, 520), "1 100 °C · le volcan fabrique l'île", font=police("arialbd.ttf", 27), fill=orange)
+
+
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
+    "eleveai-maths-974-volcan-reunion": {
+        "badge": "LA RÉUNION · EN VRAI", "titre": ["LE PITON DE", "LA FOURNAISE"], "taille": 62,
+        "sous": "un volcan qui fabrique l'île", "accroche": acc_volcan_974,
+    },
     "eleveai-maths-974-cyclone-reunion": {
         "badge": "LA RÉUNION · EN VRAI", "titre": ["LES", "CYCLONES"], "taille": 82,
         "sous": "l'œil, les vents, le record du monde", "accroche": acc_cyclone_974,

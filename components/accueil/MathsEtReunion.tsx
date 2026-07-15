@@ -34,6 +34,12 @@ const EPISODES: Episode[] = [
     accroche: "L'œil, les vents, et le record du monde de pluie... à La Réunion ! Un cyclone à 900 km : quand touche-t-il l'île ?",
     url: "https://youtu.be/0WUIzfICz4o",
   },
+  {
+    emoji: "🌋",
+    titre: "Le Piton de la Fournaise",
+    accroche: "Un des volcans les plus actifs du monde ! La lave à 1 100 °C, et un volcan qui fabrique de la terre neuve.",
+    url: null,
+  },
 ];
 
 // youtu.be/ID, youtube.com/watch?v=ID, /embed/ID… → l'identifiant seul.
