@@ -752,6 +752,17 @@ def signature(img, d):
     d.text((tx, y + 62), "eleveai.fr", font=police("ariblk.ttf", 40), fill=BLEU)
 
 
+def macaron_nou_la_fe(img, d):
+    # Macaron « à notre sauce » — PAS le logo officiel Nou la Fé (marque déposée).
+    # On garde le slogan créole (libre) dans NOTRE charte : rond bleu nuit + jaune.
+    cx, cy, r = 1198, 76, 58
+    d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=NAVY, outline=(255, 255, 255), width=4)
+    d.ellipse([cx - r + 9, cy - r + 9, cx + r - 9, cy + r - 9], outline=JAUNE, width=2)
+    centre(d, cx, cy - 33, "NOU", police("ariblk.ttf", 24), (255, 255, 255))
+    centre(d, cx, cy - 8, "LA FÉ", police("ariblk.ttf", 28), JAUNE)
+    centre(d, cx, cy + 24, "fait péi", police("arialbd.ttf", 17), (255, 255, 255))
+
+
 def construire(nom, spec):
     img = fond()
     d = ImageDraw.Draw(img)
@@ -770,6 +781,8 @@ def construire(nom, spec):
 
     spec["accroche"](d)
     signature(img, d)
+    if "EN VRAI" in spec.get("badge", ""):
+        macaron_nou_la_fe(img, d)
 
     os.makedirs(SORTIE, exist_ok=True)
     chemin = SORTIE / f"{nom}.png"
