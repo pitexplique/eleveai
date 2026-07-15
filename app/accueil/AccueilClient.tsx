@@ -164,6 +164,23 @@ const CATALOGUE: { emoji: string; nom: string; ligne: string; href: string }[] =
   { emoji: "🔭", nom: "Tout explorer", ligne: "La table des matières complète d'EleveAI.", href: "/explorer" },
 ];
 
+// ─── Le supplément de l'été : les cahiers de vacances ─────────────────────────
+// Porte d'entrée SEO n°1 (stats) → vitrine visuelle. Les classes de dégradé
+// sont en clair (literals) pour que Tailwind les génère.
+const CAHIERS_VACANCES = [
+  { slug: "vers-le-ce2",        niveau: "CE1 → CE2",       titre: "Vers le CE2",       theme: "On apprend en jouant",                    emoji: "🎲", grad: "from-orange-400 to-amber-500" },
+  { slug: "vers-le-cm1",        niveau: "CE2 → CM1",       titre: "Vers le CM1",       theme: "Ti Margo explore son jardin",             emoji: "🌳", grad: "from-lime-400 to-green-600" },
+  { slug: "vers-le-cm2",        niveau: "CM1 → CM2",       titre: "Vers le CM2",       theme: "Ti Margo découvre son île",               emoji: "🏖️", grad: "from-teal-400 to-emerald-600" },
+  { slug: "vers-la-6e",         niveau: "CM2 → 6ᵉ",        titre: "Vers la 6ᵉ",        theme: "Le grand voyage vers la 6ᵉ",              emoji: "🎓", grad: "from-yellow-400 to-amber-600" },
+  { slug: "vers-la-5e",         niveau: "6ᵉ → 5ᵉ",         titre: "Vers la 5ᵉ",        theme: "Le tour de l'océan Indien",               emoji: "🐋", grad: "from-sky-400 to-blue-600" },
+  { slug: "vers-la-4e",         niveau: "5ᵉ → 4ᵉ",         titre: "Vers la 4ᵉ",        theme: "Le tour du monde en 80 jours",            emoji: "🌍", grad: "from-indigo-400 to-blue-700" },
+  { slug: "vers-la-3e",         niveau: "4ᵉ → 3ᵉ",         titre: "Vers la 3ᵉ",        theme: "Le grand voyage spatial",                 emoji: "🚀", grad: "from-fuchsia-500 to-purple-700" },
+  { slug: "vers-la-2nde",       niveau: "3ᵉ → 2ⁿᵈᵉ",       titre: "Vers la 2ⁿᵈᵉ",      theme: "Le grand zoom, de l'atome à l'univers",   emoji: "🔭", grad: "from-rose-400 to-pink-600" },
+  { slug: "vers-la-premiere",   niveau: "2ⁿᵈᵉ → 1ʳᵉ",      titre: "Vers la 1ʳᵉ",       theme: "La créativité pour changer le monde",     emoji: "💡", grad: "from-violet-500 to-fuchsia-600" },
+  { slug: "vers-la-terminale",  niveau: "1ʳᵉ → Terminale", titre: "Vers la Terminale", theme: "Les maths et l'IA pour changer le monde", emoji: "🤖", grad: "from-emerald-400 to-teal-700" },
+  { slug: "vers-le-bac-plus-1", niveau: "Terminale → Bac +1", titre: "Vers le Bac +1", theme: "Inventer les solutions de demain",        emoji: "🛠️", grad: "from-cyan-400 to-indigo-600" },
+];
+
 // ─── Types partagés avec page.tsx (serveur) ────────────────────────────────────
 
 export type AvisPublic = {
@@ -531,6 +548,15 @@ export default function AccueilPage({
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                   🎯 Le défi du jour · {defiDuJour.defi.theme}
                 </p>
+                <div className="relative mt-2 aspect-[16/7] w-full overflow-hidden border border-[#1d1c16]/20">
+                  <Image
+                    src={defiDuJour.defi.image ?? "/images/defis-du-jour/coupe-monde-foot.webp"}
+                    alt={defiDuJour.defi.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 300px"
+                    className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                  />
+                </div>
                 <h3 className="mt-1 font-serif text-lg font-black leading-snug group-hover:underline">
                   {defiDuJour.defi.title}
                 </h3>
@@ -632,7 +658,8 @@ export default function AccueilPage({
       <section id="en-vrai" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
         <Kicker>Réfléchir · La série « en vrai »</Kicker>
         <TitreRubrique>L&apos;île comme salle de classe</TitreRubrique>
-        <div className="mt-4 grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Façon portail : l'image d'abord (vignette YouTube), le titre dessous. */}
+        <div className="mt-4 grid gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
           {BREVES.map((ep) => (
             <a
               key={ep.youtubeId}
@@ -641,13 +668,26 @@ export default function AccueilPage({
               rel="noopener noreferrer"
               className="group border-t border-[#1d1c16]/25 pt-3"
             >
-              <h3 className="font-serif text-lg font-black leading-snug group-hover:underline">
+              <div className="relative aspect-video w-full overflow-hidden border border-[#1d1c16]/20 bg-[#1d1c16]/5">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`https://i.ytimg.com/vi/${ep.youtubeId}/hqdefault.jpg`}
+                  alt={ep.titre}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+                />
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-red-700/90 text-sm text-white shadow-lg transition group-hover:scale-110">
+                    ▶
+                  </span>
+                </span>
+              </div>
+              <h3 className="mt-2 font-serif text-lg font-black leading-snug group-hover:underline">
                 {ep.emoji} {ep.titre}
               </h3>
               <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
                 {ep.accroche}
               </p>
-              <p className="mt-1.5 text-sm font-black text-emerald-900">Regarder →</p>
             </a>
           ))}
 
@@ -735,6 +775,40 @@ export default function AccueilPage({
         </p>
       </section>
 
+      {/* ══ LE SUPPLÉMENT DE L'ÉTÉ — les cahiers de vacances ═════════════════
+          Porte d'entrée n°1 du site (stats 15/07 : /cahier-vacances truste le
+          top des pages vues) → une vraie vitrine visuelle, pas une ligne. */}
+      <section id="cahiers" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
+        <Kicker>Le supplément de l&apos;été · À imprimer</Kicker>
+        <TitreRubrique>Les cahiers de vacances — du CE1 au Bac +1</TitreRubrique>
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          {CAHIERS_VACANCES.map((c) => (
+            <Link
+              key={c.slug}
+              href={`/cahier-vacances/${c.slug}`}
+              className={`group flex flex-col justify-between rounded-sm bg-gradient-to-br ${c.grad} p-3 text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg`}
+            >
+              <p className="text-2xl" aria-hidden>{c.emoji}</p>
+              <div className="mt-3">
+                <p className="text-[10px] font-black uppercase tracking-wide text-white/80">
+                  {c.niveau}
+                </p>
+                <p className="font-serif text-base font-black leading-tight">{c.titre}</p>
+                <p className="mt-0.5 text-[11px] font-semibold leading-4 text-white/85">
+                  {c.theme}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <p className="mt-2 text-xs font-medium italic text-[#1d1c16]/60">
+          Gratuits, imprimables, avec Ti Margo 🦎 —{" "}
+          <Link href="/cahier-vacances" className="font-black text-emerald-900 underline underline-offset-2">
+            tous les cahiers →
+          </Link>
+        </p>
+      </section>
+
       {/* ══ L'AGENDA + L'ATELIER — les deux encarts vivants (composants
           existants, autonomes : ils ne rendent rien s'il n'y a rien à montrer).
           Dans un journal, un encart sombre = un supplément glissé dans les
@@ -760,8 +834,9 @@ export default function AccueilPage({
               className="group p-4 transition hover:bg-white/60"
               style={{ backgroundColor: PAPER }}
             >
-              <h3 className="font-serif text-base font-black leading-snug group-hover:underline">
-                {c.emoji} {c.nom}
+              <p className="text-3xl" aria-hidden>{c.emoji}</p>
+              <h3 className="mt-2 font-serif text-base font-black leading-snug group-hover:underline">
+                {c.nom}
               </h3>
               <p className="mt-1 text-xs font-medium leading-5 text-[#1d1c16]/70">
                 {c.ligne}
