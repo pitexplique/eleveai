@@ -68,6 +68,16 @@ def acc_decimal(d):
     d.text((320, 424), "= 3 + 0,4 + 0,05", font=police("arialbd.ttf", 40), fill=VERT)
 
 
+def acc_decimal_cm2(d):
+    # une barre de 10 parts, 7 coloriées → le sens du décimal en CM2 (0,7).
+    x0, y0, w, h = 336, 330, 384, 70
+    cw = w / 10
+    for i in range(10):
+        x = x0 + i * cw
+        d.rectangle([x, y0, x + cw, y0 + h], fill=(BLEU if i < 7 else PAPIER), outline=NAVY, width=3)
+    d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
+
+
 def acc_fraction(d):
     d.text((300, 296), "3/4", font=police("ariblk.ttf", 104), fill=BLEU)
     cx, cy, r = 570, 384, 76
@@ -473,6 +483,10 @@ NOTIONS = {
     "eleveai-maths-974-circulation-eau": {
         "badge": "LA RÉUNION · EN VRAI", "titre": ["L'EAU DE", "LA RÉUNION"], "taille": 74,
         "sous": "de l'océan à ton robinet", "accroche": acc_eau_974,
+    },
+    "eleveai-maths-cm2-nombre-decimal": {
+        "badge": "MATHS · CM2", "titre": ["LES NOMBRES", "DÉCIMAUX"], "taille": 84,
+        "sous": "dixièmes · comparer · arrondir", "accroche": acc_decimal_cm2,
     },
     "eleveai-maths-5e-relatif-nombre": {
         "badge": "MATHS · 5e", "titre": ["LES NOMBRES", "RELATIFS"], "taille": 74,
