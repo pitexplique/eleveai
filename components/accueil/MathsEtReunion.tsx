@@ -20,7 +20,7 @@ const EPISODES: Episode[] = [
     emoji: "💧",
     titre: "L'eau de La Réunion",
     accroche: "Il pleut 20 fois plus à l'Est qu'à l'Ouest. Pourquoi ? De l'océan jusqu'à ton robinet... et ta lampe.",
-    url: "https://youtu.be/bxbqIllTbYQ",
+    url: "https://youtu.be/zLpqiueEIEc",
   },
   {
     emoji: "🥛",
