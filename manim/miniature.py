@@ -78,6 +78,18 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_division_cm2(d):
+    # une potence : 37 | 5, quotient 7, reste 2 (le cœur du cours CM2).
+    f = police("arialbd.ttf", 60)
+    cx, cy = 452, 344
+    a_droite(d, cx - 6, cy, "37", f, BLEU)
+    d.line([(cx + 18, cy - 8), (cx + 18, cy + 130)], fill=NAVY, width=5)
+    d.text((cx + 40, cy), "5", font=f, fill=BLEU)
+    d.line([(cx + 18, cy + 74), (cx + 120, cy + 74)], fill=NAVY, width=5)
+    d.text((cx + 40, cy + 82), "7", font=f, fill=VERT)
+    d.text((cx - 6, cy + 150), "reste 2", font=police("arialbd.ttf", 40), fill=(217, 119, 20))
+
+
 def acc_multiplication_cm2(d):
     # la multiplication posée 247 × 4 = 988 (le cœur du cours CM2).
     f = police("arialbd.ttf", 62)
@@ -516,6 +528,10 @@ NOTIONS = {
     "eleveai-maths-cm2-multiplication": {
         "badge": "MATHS · CM2", "titre": ["LA", "MULTIPLICATION"], "taille": 60,
         "sous": "tables · de tête · en colonnes", "accroche": acc_multiplication_cm2,
+    },
+    "eleveai-maths-cm2-division": {
+        "badge": "MATHS · CM2", "titre": ["LA", "DIVISION"], "taille": 84,
+        "sous": "partager · quotient · reste", "accroche": acc_division_cm2,
     },
     "eleveai-maths-5e-relatif-nombre": {
         "badge": "MATHS · 5e", "titre": ["LES NOMBRES", "RELATIFS"], "taille": 74,
