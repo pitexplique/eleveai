@@ -26,7 +26,7 @@ const EPISODES: Episode[] = [
     emoji: "🥛",
     titre: "Le lait de la Plaine des Cafres",
     accroche: "10 litres de lait pour 1 seul kg de fromage. Du pré des hauts jusqu'à ton yaourt.",
-    url: null,
+    url: "https://youtu.be/UjblKadInPw",
   },
 ];
 
