@@ -44,7 +44,7 @@ const EPISODES: Episode[] = [
     emoji: "🦈",
     titre: "Les requins",
     accroche: "Faut-il vraiment avoir peur ? Requins : ~10 morts/an ; la route : ~1 300 000. Et le requin garde le récif qui fait le lagon qui te protège.",
-    url: null,
+    url: "https://youtu.be/3bPBjYsRciA",
   },
 ];
 
