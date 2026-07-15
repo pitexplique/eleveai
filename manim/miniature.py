@@ -420,8 +420,29 @@ def acc_lait_974(d):
     d.text((360, 540), "10 litres de lait → 1 kg de fromage", font=police("arialbd.ttf", 28), fill=BLEU)
 
 
+def acc_cyclone_974(d):
+    # une spirale de cyclone (bras + œil) + le record « 1 692 mm ».
+    import math
+    cx, cy = 470, 400
+    for k in range(3):
+        offset = k * 2 * math.pi / 3
+        pts = []
+        for i in range(46):
+            t = 0.35 + (3.05 - 0.35) * i / 45
+            r = 30 * math.exp(0.30 * t)
+            a = 1.5 * t + offset
+            pts.append((cx + r * math.cos(a), cy + r * math.sin(a)))
+        d.line(pts, fill=BLEU, width=9, joint="curve")
+    d.ellipse([cx - 26, cy - 26, cx + 26, cy + 26], fill=NAVY, outline=(255, 255, 255), width=4)
+    d.text((300, 512), "record du monde : 1 692 mm / 24 h", font=police("arialbd.ttf", 28), fill=VERT)
+
+
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
+    "eleveai-maths-974-cyclone-reunion": {
+        "badge": "LA RÉUNION · EN VRAI", "titre": ["LES", "CYCLONES"], "taille": 82,
+        "sous": "l'œil, les vents, le record du monde", "accroche": acc_cyclone_974,
+    },
     "eleveai-maths-974-lait-reunion": {
         "badge": "LA RÉUNION · EN VRAI", "titre": ["LE LAIT DE", "LA RÉUNION"], "taille": 74,
         "sous": "du pré des hauts à ton yaourt", "accroche": acc_lait_974,

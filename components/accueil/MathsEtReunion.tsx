@@ -28,6 +28,12 @@ const EPISODES: Episode[] = [
     accroche: "10 litres de lait pour 1 seul kg de fromage. Du pré des hauts jusqu'à ton yaourt.",
     url: "https://youtu.be/UjblKadInPw",
   },
+  {
+    emoji: "🌀",
+    titre: "Les cyclones",
+    accroche: "L'œil, les vents, et le record du monde de pluie... à La Réunion ! Un cyclone à 900 km : quand touche-t-il l'île ?",
+    url: null,
+  },
 ];
 
 // youtu.be/ID, youtube.com/watch?v=ID, /embed/ID… → l'identifiant seul.
@@ -133,7 +139,7 @@ export default function MathsEtReunion() {
         <div className="mt-6 flex flex-col gap-3 border-t border-white/10 pt-5 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm font-bold text-white/80">
             🗺️ Épisodes suivants :{" "}
-            <span className="text-white">le volcan, les cyclones, le lagon...</span>
+            <span className="text-white">le volcan, le lagon, le requin...</span>
           </p>
           <a
             href="/maths-974"
