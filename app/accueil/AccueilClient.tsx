@@ -929,12 +929,15 @@ export default function AccueilPage({
           {/* L'édito — le moment humain, signé (photo + lettre repliée). */}
           <aside className="border-[#1d1c16]/25 lg:col-span-2 lg:border-l lg:pl-6">
             <Kicker>L&apos;édito</Kicker>
+            {/* En couleur : c'est le moment humain de la page (le noir et blanc
+                « encre de journal » lui donnait un air de nécrologie — retiré
+                sur retour de Frédéric). Photo un peu plus grande. */}
             <Image
               src="/images/avatar-frederic-Lacoste.jpg"
               alt="Frédéric Lacoste"
-              width={56}
-              height={56}
-              className="mt-3 h-14 w-14 rounded-full border border-[#1d1c16]/30 object-cover grayscale"
+              width={72}
+              height={72}
+              className="mt-3 h-[72px] w-[72px] rounded-full border-2 border-[#1d1c16]/25 object-cover"
             />
             <h3 className="mt-2 font-serif text-lg font-black leading-snug">
               Aux parents et à leurs enfants
