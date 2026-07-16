@@ -135,15 +135,35 @@ const PARCOURS = [
 
 // Niveaux pour lesquels le coach sait pré-sélectionner la classe via ?classe=.
 const MATHS_LEVELS = new Set([
-  "cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "terminale-spe",
+  "cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e",
+  "seconde", "premiere-spe", "terminale-spe",
 ]);
 const FRANCAIS_LEVELS = new Set([
   "cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e",
 ]);
 const CLASSE_LABELS: Record<string, string> = {
   cp: "CP", ce1: "CE1", ce2: "CE2", cm1: "CM1", cm2: "CM2",
-  "6e": "6e", "5e": "5e", "4e": "4e", "3e": "3e", "terminale-spe": "Terminale",
+  "6e": "6e", "5e": "5e", "4e": "4e", "3e": "3e",
+  seconde: "2nde", "premiere-spe": "1re", "terminale-spe": "Terminale",
 };
+
+// La rampe d'entrée par classe (CP → Terminale) : le journal est joli, mais
+// l'élève vient S'ENTRAÎNER — chaque classe mène direct au coach de son
+// niveau. Slugs = la whitelist réelle de /coach-ia/[matiere] (normalizeClasse).
+const CLASSES_ENTREE: { slug: string; label: string }[] = [
+  { slug: "cp", label: "CP" },
+  { slug: "ce1", label: "CE1" },
+  { slug: "ce2", label: "CE2" },
+  { slug: "cm1", label: "CM1" },
+  { slug: "cm2", label: "CM2" },
+  { slug: "6e", label: "6ᵉ" },
+  { slug: "5e", label: "5ᵉ" },
+  { slug: "4e", label: "4ᵉ" },
+  { slug: "3e", label: "3ᵉ" },
+  { slug: "seconde", label: "2ⁿᵈᵉ" },
+  { slug: "premiere-spe", label: "1ʳᵉ" },
+  { slug: "terminale-spe", label: "Term." },
+];
 
 // ─── Le catalogue COMPLET — « les pages du journal » ──────────────────────────
 // Tout ce que le site offre, rangé et listé (demande de Frédéric : rien ne
@@ -634,6 +654,27 @@ export default function AccueilPage({
         <p className="border-b border-[#1d1c16]/30 py-1.5 text-center text-[11px] font-bold italic text-[#1d1c16]/60">
           Chaque matin : réfléchir · apprendre · se diriger.
         </p>
+
+        {/* La rampe d'entrée par classe : du CP à la Terminale, un clic = le
+            coach de ton niveau. Ta classe est mise en avant si on la connaît. */}
+        <div className="flex flex-wrap items-center justify-center gap-1.5 border-b border-[#1d1c16]/30 py-2.5">
+          <span className="mr-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/60">
+            🎓 Entraîne-toi — ta classe :
+          </span>
+          {CLASSES_ENTREE.map((c) => (
+            <Link
+              key={c.slug}
+              href={`/coach-ia/maths?classe=${c.slug}`}
+              className={`rounded-sm border px-2.5 py-1 text-xs font-black transition ${
+                eleveClasse === c.slug
+                  ? "border-[#1d1c16] bg-[#1d1c16] text-[#f6f1e4]"
+                  : "border-[#1d1c16]/30 text-[#1d1c16]/80 hover:border-[#1d1c16] hover:bg-[#1d1c16] hover:text-[#f6f1e4]"
+              }`}
+            >
+              {c.label}
+            </Link>
+          ))}
+        </div>
       </header>
 
       {/* ══ L'ÉDITION PERSONNALISÉE (connecté) ═══════════════════════════════ */}
