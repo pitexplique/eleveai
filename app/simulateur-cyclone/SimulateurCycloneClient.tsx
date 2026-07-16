@@ -536,15 +536,44 @@ export default function SimulateurCycloneClient({ embed = false }: { embed?: boo
 
     majEtapes();
 
+    // Sur desktop, le simulateur remplit EXACTEMENT la hauteur restante de
+    // l'écran (mesurée, pas devinée : header du site + bannières varient) —
+    // le pupitre ne fait jamais défiler la page (retour Frédéric).
+    const fitHauteur = () => {
+      if (window.innerWidth >= 1024) {
+        racine.style.height = window.innerHeight - racine.getBoundingClientRect().top + "px";
+      } else {
+        racine.style.height = "";
+      }
+    };
+    fitHauteur();
+    // Les bannières (PWA, dev) se montent APRÈS nous et décalent la page :
+    // on re-mesure quand tout ce qui est au-dessus change de taille.
+    const t1 = window.setTimeout(fitHauteur, 300);
+    const t2 = window.setTimeout(fitHauteur, 1200);
+    window.addEventListener("resize", fitHauteur);
+    const ro = new ResizeObserver(fitHauteur);
+    ro.observe(document.body);
+
     return () => {
       if (anim) cancelAnimationFrame(anim);
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+      ro.disconnect();
+      window.removeEventListener("resize", fitHauteur);
       svg.removeEventListener("pointerdown", onPointer);
       svg.innerHTML = "";
     };
   }, []);
 
   return (
-    <div ref={rootRef} className="min-h-screen bg-[#071825] text-[#e8f1f6]">
+    // Sur desktop : tout le simulateur tient dans la hauteur de l'écran (moins
+    // le header du site ~66px) — le pupitre ne doit jamais faire défiler la
+    // page (retour Frédéric). Sur mobile : empilement naturel.
+    <div
+      ref={rootRef}
+      className="min-h-screen bg-[#071825] text-[#e8f1f6] lg:flex lg:min-h-0 lg:flex-col lg:overflow-hidden"
+    >
       {/* L'animation du cyclone : SENS HORAIRE (hémisphère sud). */}
       <style>{`
         @keyframes simcy-spin { to { transform: rotate(360deg); } }
@@ -574,7 +603,7 @@ export default function SimulateurCycloneClient({ embed = false }: { embed?: boo
         </span>
       </header>
 
-      <main className="grid min-h-0 grid-cols-1 lg:grid-cols-[1fr_320px]">
+      <main className="grid min-h-0 grid-cols-1 lg:min-h-0 lg:flex-1 lg:grid-cols-[1fr_320px] lg:overflow-hidden">
         {/* La carte */}
         <div className="relative min-h-[380px] bg-[#0c2438]">
           <svg id="simcy-carte" viewBox="0 0 1000 660" className="block h-full min-h-[380px] w-full cursor-crosshair" aria-label="Carte du bassin sud-ouest de l'océan Indien" />
@@ -583,17 +612,18 @@ export default function SimulateurCycloneClient({ embed = false }: { embed?: boo
           </div>
         </div>
 
-        {/* Le pupitre */}
-        <aside className="flex flex-col gap-3.5 border-t border-[#123049] bg-[#0e2233] p-4 lg:border-l lg:border-t-0">
-          <div className="flex flex-col gap-1.5">
+        {/* Le pupitre — COMPACT : il tient dans une hauteur d'écran (retour
+            Frédéric) ; overflow-y-auto en filet de sécurité sur petits écrans. */}
+        <aside className="flex flex-col gap-2 overflow-y-auto border-t border-[#123049] bg-[#0e2233] p-3 lg:min-h-0 lg:border-l lg:border-t-0">
+          <div className="flex flex-col gap-1">
             {[
               [1, "Pose le cyclone — clique sur l'océan"],
-              [2, "Trace sa route — clique encore (jusqu'à 8 points)"],
+              [2, "Trace sa route (jusqu'à 8 points)"],
               [3, "Règle sa force et sa vitesse"],
               [4, "Lance la course"],
             ].map(([n, txt]) => (
-              <div key={n} data-etape={n} className="simcy-etape flex items-baseline gap-2.5 rounded border border-transparent px-2.5 py-1.5 text-[13px] text-[#9db4c2]">
-                <span className="simcy-num grid h-[18px] w-[18px] flex-none place-items-center rounded-full border border-[#9db4c2] font-mono text-[11px] font-bold">
+              <div key={n} data-etape={n} className="simcy-etape flex items-baseline gap-2 rounded border border-transparent px-2 py-0.5 text-[12px] text-[#9db4c2]">
+                <span className="simcy-num grid h-4 w-4 flex-none place-items-center rounded-full border border-[#9db4c2] font-mono text-[10px] font-bold">
                   {n}
                 </span>
                 <span>{txt}</span>
@@ -601,125 +631,112 @@ export default function SimulateurCycloneClient({ embed = false }: { embed?: boo
             ))}
           </div>
 
-          <div className="flex flex-col gap-2">
-            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#9db4c2]">
+          <div className="flex flex-col gap-1">
+            <span className="font-mono text-[9.5px] font-bold uppercase tracking-[0.16em] text-[#9db4c2]">
               Force — échelle du bassin
             </span>
-            <div className="flex flex-col gap-1">
+            <div className="grid grid-cols-2 gap-1">
               {[
-                [0, "Dépression tropicale", "< 63 km/h", false],
-                [1, "Tempête tropicale", "63–117 km/h", false],
-                [2, "Cyclone tropical", "118–165 km/h", true],
-                [3, "Cyclone intense", "166–212 km/h", false],
+                [0, "Dépression", "< 63", false],
+                [1, "Tempête", "63–117", false],
+                [2, "Cyclone", "118–165", true],
+                [3, "Cycl. intense", "166–212", false],
               ].map(([v, nom, vent, def]) => (
-                <label key={String(v)} className="flex cursor-pointer items-center gap-2 rounded border border-[#123049] px-2 py-1.5 text-[12.5px] hover:bg-[#123049]">
+                <label key={String(v)} className="flex cursor-pointer items-center gap-1.5 rounded border border-[#123049] px-1.5 py-1 text-[11.5px] hover:bg-[#123049]">
                   <input type="radio" name="simcy-cat" value={String(v)} defaultChecked={Boolean(def)} className="m-0 accent-[#62d6e8]" />
                   <span>{nom}</span>
-                  <span className="ml-auto font-mono text-[11px] text-[#9db4c2]">{vent}</span>
+                  <span className="ml-auto font-mono text-[9.5px] text-[#9db4c2]">{vent}</span>
                 </label>
               ))}
             </div>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#9db4c2]">
-              Vitesse de déplacement
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-[9.5px] font-bold uppercase tracking-[0.16em] text-[#9db4c2]">
+              Vitesse
             </span>
-            <div className="flex items-center gap-2.5">
-              <input type="range" id="simcy-vitesse" min={5} max={40} defaultValue={20} step={1} className="flex-1 accent-[#62d6e8]" aria-label="Vitesse de déplacement en kilomètres par heure" />
-              <span id="simcy-vitesse-val" className="min-w-[72px] text-right font-mono text-sm font-bold text-[#62d6e8]">
-                20 km/h
-              </span>
-            </div>
+            <input type="range" id="simcy-vitesse" min={5} max={40} defaultValue={20} step={1} className="flex-1 accent-[#62d6e8]" aria-label="Vitesse de déplacement en kilomètres par heure" />
+            <span id="simcy-vitesse-val" className="min-w-[64px] text-right font-mono text-[13px] font-bold text-[#62d6e8]">
+              20 km/h
+            </span>
           </div>
 
-          {/* Le nom : MON cyclone (effet IKEA en une case texte). */}
           <input
             id="simcy-nom"
             type="text"
             maxLength={16}
             placeholder="Nomme ton cyclone (optionnel)"
             aria-label="Nom de ton cyclone"
-            className="rounded border border-[#123049] bg-[#071825] px-3 py-2 text-[13px] font-bold uppercase tracking-wider text-[#e8f1f6] placeholder-[#9db4c2]/60 outline-none focus:border-[#62d6e8]"
+            className="rounded border border-[#123049] bg-[#071825] px-2.5 py-1.5 text-[12px] font-bold uppercase tracking-wider text-[#e8f1f6] placeholder-[#9db4c2]/60 outline-none focus:border-[#62d6e8]"
           />
 
-          <div className="flex gap-2">
-            <button id="simcy-lancer" disabled className="flex-1 rounded border border-[#62d6e8] bg-[#62d6e8] px-3 py-2.5 text-[13px] font-bold text-[#071825] hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-35">
+          <div className="flex gap-1.5">
+            <button id="simcy-lancer" disabled className="flex-1 rounded border border-[#62d6e8] bg-[#62d6e8] px-3 py-1.5 text-[12.5px] font-bold text-[#071825] hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-35">
               ▶ Lancer
             </button>
-            <button id="simcy-annuler" disabled title="Annuler le dernier point" className="rounded border border-[#123049] bg-[#123049] px-3 py-2.5 text-[13px] font-bold text-[#e8f1f6] hover:brightness-125 disabled:cursor-not-allowed disabled:opacity-35">
+            <button id="simcy-annuler" disabled title="Annuler le dernier point" className="rounded border border-[#123049] bg-[#123049] px-2.5 py-1.5 text-[12.5px] font-bold text-[#e8f1f6] hover:brightness-125 disabled:cursor-not-allowed disabled:opacity-35">
               ↩ Point
             </button>
-            <button id="simcy-reset" className="rounded border border-[#123049] bg-[#123049] px-3 py-2.5 text-[13px] font-bold text-[#e8f1f6] hover:brightness-125">
+            <button id="simcy-reset" className="rounded border border-[#123049] bg-[#123049] px-2.5 py-1.5 text-[12.5px] font-bold text-[#e8f1f6] hover:brightness-125">
               ↺
             </button>
-          </div>
-
-          {/* Contrôles de course : pause + accéléré (actifs pendant la course). */}
-          <div className="grid grid-cols-2 gap-2">
-            <button id="simcy-pause" disabled className="rounded border border-[#123049] bg-[#0c2438] px-3 py-1.5 text-[12px] font-bold text-[#e8f1f6] hover:brightness-125 disabled:cursor-not-allowed disabled:opacity-35">
-              ⏸ Pause
+            <button id="simcy-pause" disabled className="rounded border border-[#123049] bg-[#0c2438] px-2 py-1.5 text-[12px] font-bold text-[#e8f1f6] hover:brightness-125 disabled:cursor-not-allowed disabled:opacity-35">
+              ⏸
             </button>
-            <button id="simcy-mult" disabled className="rounded border border-[#123049] bg-[#0c2438] px-3 py-1.5 text-[12px] font-bold text-[#e8f1f6] hover:brightness-125 disabled:cursor-not-allowed disabled:opacity-35">
+            <button id="simcy-mult" disabled className="rounded border border-[#123049] bg-[#0c2438] px-2 py-1.5 text-[12px] font-bold text-[#e8f1f6] hover:brightness-125 disabled:cursor-not-allowed disabled:opacity-35">
               ⏩ ×1
             </button>
           </div>
 
           {/* Rejouer l'histoire — en mémoire, jamais en jeu. */}
-          <div className="flex flex-col gap-2">
-            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#9db4c2]">
+          <div className="flex flex-col gap-1">
+            <span className="font-mono text-[9.5px] font-bold uppercase tracking-[0.16em] text-[#9db4c2]">
               Rejouer l&apos;histoire · en mémoire
+              <span className="ml-1 normal-case tracking-normal text-[#9db4c2]/60">(trajectoires simplifiées)</span>
             </span>
-            <div className="grid grid-cols-2 gap-1.5">
+            <div className="grid grid-cols-4 gap-1">
               {[
-                ["belal", "BELAL · 2024"],
-                ["dina", "DINA · 2002"],
-                ["firinga", "FIRINGA · 1989"],
-                ["gamede", "GAMÈDE · 2007"],
-              ].map(([id, label]) => (
+                ["belal", "BELAL", "2024"],
+                ["dina", "DINA", "2002"],
+                ["firinga", "FIRINGA", "1989"],
+                ["gamede", "GAMÈDE", "2007"],
+              ].map(([id, nom, annee]) => (
                 <button
                   key={id}
                   data-hist={id}
-                  className="rounded border border-[#123049] bg-[#0c2438] px-2 py-1.5 font-mono text-[11px] font-bold text-[#e8f1f6] hover:border-[#62d6e8]/50 hover:brightness-125"
+                  className="rounded border border-[#123049] bg-[#0c2438] px-1 py-1 font-mono text-[10px] font-bold leading-tight text-[#e8f1f6] hover:border-[#62d6e8]/50 hover:brightness-125"
                 >
-                  {label}
+                  {nom}
+                  <span className="block text-[9px] font-normal text-[#9db4c2]">{annee}</span>
                 </button>
               ))}
             </div>
-            <p id="simcy-memoire" className="hidden rounded border border-[#9db4c2]/25 bg-[#071825] px-3 py-2 text-[12px] italic leading-relaxed text-[#9db4c2]" />
-            <p className="text-[10px] leading-snug text-[#9db4c2]/70">
-              Trajectoires simplifiées d&apos;après les relevés officiels, à but pédagogique.
-            </p>
+            <p id="simcy-memoire" className="hidden rounded border border-[#9db4c2]/25 bg-[#071825] px-2.5 py-1.5 text-[11px] italic leading-snug text-[#9db4c2]" />
           </div>
 
-          <div className="grid grid-cols-2 gap-2">
-            <div className="rounded border border-[#123049] bg-[#071825] px-2.5 py-2">
-              <div className="font-mono text-[9.5px] uppercase tracking-[0.14em] text-[#9db4c2]">Distance → Réunion</div>
-              <div id="simcy-dist" className="mt-0.5 font-mono text-[19px] font-bold tabular-nums">—</div>
+          <div className="grid grid-cols-2 gap-1.5">
+            <div className="rounded border border-[#123049] bg-[#071825] px-2 py-1">
+              <div className="font-mono text-[9px] uppercase tracking-[0.12em] text-[#9db4c2]">Distance → Réunion</div>
+              <div id="simcy-dist" className="font-mono text-[16px] font-bold tabular-nums">—</div>
             </div>
-            <div className="rounded border border-[#123049] bg-[#071825] px-2.5 py-2">
-              <div className="font-mono text-[9.5px] uppercase tracking-[0.14em] text-[#9db4c2]">Horloge de course</div>
-              <div id="simcy-heure" className="mt-0.5 font-mono text-[19px] font-bold tabular-nums">H+0</div>
+            <div className="rounded border border-[#123049] bg-[#071825] px-2 py-1">
+              <div className="font-mono text-[9px] uppercase tracking-[0.12em] text-[#9db4c2]">Horloge de course</div>
+              <div id="simcy-heure" className="font-mono text-[16px] font-bold tabular-nums">H+0</div>
             </div>
           </div>
 
           {/* La force ACTUELLE (elle peut chuter sur les terres). */}
-          <div id="simcy-force" className="hidden rounded border border-[#123049] bg-[#071825] px-2.5 py-1.5 font-mono text-[11px] text-[#9db4c2]" />
+          <div id="simcy-force" className="hidden rounded border border-[#123049] bg-[#071825] px-2 py-1 font-mono text-[10.5px] text-[#9db4c2]" />
 
-          <div id="simcy-alerte" className="rounded bg-[#123049] px-3 py-2.5 text-center text-sm font-extrabold tracking-wide text-[#9db4c2]">
+          <div id="simcy-alerte" className="rounded bg-[#123049] px-2.5 py-1.5 text-center text-[13px] font-extrabold tracking-wide text-[#9db4c2]">
             EN ATTENTE — pose un cyclone
           </div>
 
-          <div className="flex flex-col gap-2">
-            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#9db4c2]">
-              Les maths de la vigie
-            </span>
-            <div id="simcy-formule" className="min-h-[40px] rounded border border-dashed border-[#62d6e8]/40 bg-[#071825] px-3 py-2 font-mono text-[12.5px] leading-relaxed text-[#62d6e8]">
-              <span className="muet">temps = distance ÷ vitesse — pose ton cyclone et trace sa route pour voir le calcul.</span>
-            </div>
+          <div id="simcy-formule" className="rounded border border-dashed border-[#62d6e8]/40 bg-[#071825] px-2.5 py-1.5 font-mono text-[11.5px] leading-relaxed text-[#62d6e8]">
+            <span className="muet">temps = distance ÷ vitesse — pose ton cyclone et trace sa route pour voir le calcul.</span>
           </div>
 
-          <div id="simcy-bilan" className="rounded bg-[#123049] p-3 text-[13px] leading-relaxed" />
+          <div id="simcy-bilan" className="rounded bg-[#123049] p-2.5 text-[12px] leading-relaxed" />
         </aside>
       </main>
 
