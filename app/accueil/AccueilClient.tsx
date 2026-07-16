@@ -973,8 +973,11 @@ export default function AccueilPage({
                 Bienvenue. Ici, tu es chez toi.
               </p>
             </details>
+            {/* Le nom ne se coupe jamais ; « professeur d'élèves » peut
+                passer à la ligne dessous. */}
             <p className="mt-3 font-serif text-sm font-black italic">
-              — Frédéric Lacoste, professeur d&apos;élèves
+              <span className="whitespace-nowrap">— Frédéric Lacoste,</span>{" "}
+              <span className="whitespace-nowrap">professeur d&apos;élèves</span>
             </p>
           </aside>
         </div>
