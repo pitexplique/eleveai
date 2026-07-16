@@ -353,9 +353,11 @@ function UneCarousel({ slides }: { slides?: SlideUne[] }) {
 
   useEffect(() => {
     if (pause || items.length < 2) return;
+    // 6 s : assez vivant pour montrer la richesse, assez lent pour lire le
+    // chapô (2 s testé et rejeté — illisible). Pause au survol.
     const id = setInterval(
       () => setIndex((i) => (i + 1) % items.length),
-      8000,
+      6000,
     );
     return () => clearInterval(id);
   }, [pause, items.length]);
