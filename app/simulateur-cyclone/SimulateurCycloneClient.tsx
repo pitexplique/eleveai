@@ -96,18 +96,40 @@ export default function SimulateurCycloneClient() {
 
     const $ = (id: string) => root.querySelector<HTMLElement>("#" + id)!;
     const hint = $("simcy-hint"), alerte = $("simcy-alerte"), formule = $("simcy-formule"),
-      cadDist = $("simcy-dist"), cadHeure = $("simcy-heure"), bilan = $("simcy-bilan");
+      cadDist = $("simcy-dist"), cadHeure = $("simcy-heure"), bilan = $("simcy-bilan"),
+      force = $("simcy-force");
     const btnLancer = $("simcy-lancer") as HTMLButtonElement;
+    const btnAnnuler = $("simcy-annuler") as HTMLButtonElement;
     const btnReset = $("simcy-reset") as HTMLButtonElement;
+    const btnPause = $("simcy-pause") as HTMLButtonElement;
+    const btnMult = $("simcy-mult") as HTMLButtonElement;
+    const inputNom = $("simcy-nom") as HTMLInputElement;
     const rangeVitesse = $("simcy-vitesse") as HTMLInputElement;
     const vitesseVal = $("simcy-vitesse-val");
+
+    // Le nom du cyclone, nettoyé (il part dans du innerHTML → on échappe).
+    const nomCyclone = () =>
+      inputNom.value.trim().toUpperCase().replace(/[<>&"]/g, "").slice(0, 16);
+
+    // Le cyclone est-il au-dessus de Madagascar ? (ray casting sur le polygone)
+    function surMadagascar(p: P) {
+      let dedans = false;
+      for (let i = 0, j = MADA.length - 1; i < MADA.length; j = i++) {
+        const [xi, yi] = MADA[i], [xj, yj] = MADA[j];
+        if (yi > p.lat !== yj > p.lat && p.lon < ((xj - xi) * (p.lat - yi)) / (yj - yi) + xi) {
+          dedans = !dedans;
+        }
+      }
+      return dedans;
+    }
 
     const catCourante = () => +(root.querySelector<HTMLInputElement>('input[name="simcy-cat"]:checked')?.value ?? 2);
     const vitesse = () => +rangeVitesse.value;
 
-    function dessineCyclone(rayon: number) {
+    function dessineCyclone(catIdx: number) {
+      const rayon = CATS[catIdx].rayon;
       spinG.innerHTML = "";
-      spinG.style.setProperty("--simcy-rot", CATS[catCourante()].rot);
+      spinG.style.setProperty("--simcy-rot", CATS[catIdx].rot);
       for (let bras = 0; bras < 4; bras++) {
         let d = "";
         for (let i = 0; i <= 22; i++) {
@@ -214,12 +236,13 @@ export default function SimulateurCycloneClient() {
         points = [p];
         phase = "trace";
         (coucheCyclone as SVGGElement).style.display = "";
-        dessineCyclone(CATS[catCourante()].rayon);
+        dessineCyclone(catCourante());
         placeCyclone(p);
         hint.textContent = "Trace sa route : clique jusqu'à 8 points, puis ▶ Lancer";
       } else if (phase === "trace" && points.length < 9) {
         points.push(p);
         btnLancer.disabled = false;
+        btnAnnuler.disabled = false;
         if (points.length === 9) hint.textContent = "Route complète (8 étapes) — ▶ Lance la course !";
       }
       dessineRoute();
@@ -235,18 +258,51 @@ export default function SimulateurCycloneClient() {
     rangeVitesse.addEventListener("input", onVitesse);
 
     const onCat = () => {
-      if ((coucheCyclone as SVGGElement).style.display !== "none") dessineCyclone(CATS[catCourante()].rayon);
+      if ((coucheCyclone as SVGGElement).style.display !== "none") dessineCyclone(catCourante());
     };
     root.querySelectorAll('input[name="simcy-cat"]').forEach((r) => r.addEventListener("change", onCat));
 
-    // ── La course : 1 s réelle = 2,5 h simulées ────────────────────────────
+    // ↩ Annuler le dernier point de la route (jamais le cyclone lui-même).
+    const onAnnuler = () => {
+      if (phase !== "trace" || points.length < 2) return;
+      points.pop();
+      if (points.length < 2) {
+        btnLancer.disabled = true;
+        btnAnnuler.disabled = true;
+        hint.textContent = "Trace sa route : clique jusqu'à 8 points, puis ▶ Lancer";
+      }
+      dessineRoute();
+      majPrevision();
+    };
+    btnAnnuler.addEventListener("click", onAnnuler);
+
+    // ── La course : 1 s réelle = 2,5 h simulées (×2 possible, pause) ───────
     const H_PAR_SECONDE = 2.5;
+    let pauseCourse = false;
+    let multCourse = 1;
+
+    const onPause = () => {
+      pauseCourse = !pauseCourse;
+      btnPause.textContent = pauseCourse ? "▶ Reprendre" : "⏸ Pause";
+      spinG.style.animationPlayState = pauseCourse ? "paused" : "running";
+    };
+    btnPause.addEventListener("click", onPause);
+
+    const onMult = () => {
+      multCourse = multCourse === 1 ? 2 : 1;
+      btnMult.textContent = "⏩ ×" + multCourse;
+    };
+    btnMult.addEventListener("click", onMult);
 
     const onLancer = () => {
       if (points.length < 2 || phase === "course") return;
       phase = "course";
       majEtapes();
       btnLancer.disabled = true;
+      btnAnnuler.disabled = true;
+      inputNom.disabled = true;
+      btnPause.disabled = false;
+      btnMult.disabled = false;
       hint.style.display = "none";
       bilan.classList.remove("visible");
 
@@ -259,10 +315,41 @@ export default function SimulateurCycloneClient() {
       }
       const a = approche()!;
       let minD = Infinity;
-      const t0 = performance.now();
+
+      // La force peut CHUTER sur les terres (le relief malgache déchire les
+      // cyclones — c'est la leçon) : −1 catégorie toutes les 6 h sur terre.
+      const catInit = catCourante();
+      let catEff = catInit;
+      let hSurTerre = 0;
+      let oeilPasse = false;
+
+      // La trace : la trajectoire réellement parcourue, en trait plein
+      // (le dessin des vraies cartes cycloniques).
+      const trace = el("polyline", {
+        points: toX(points[0].lon) + "," + toY(points[0].lat),
+        fill: "none", stroke: "rgba(232,244,250,0.55)", "stroke-width": 2.5,
+      }, coucheRoute);
+      let tracePts = trace.getAttribute("points")!;
+      let dernierTraceX = toX(points[0].lon), dernierTraceY = toY(points[0].lat);
+
+      force.classList.remove("hidden");
+      const majForce = () => {
+        force.textContent =
+          "FORCE ACTUELLE : " + CATS[catEff].nom + " (vents ~" + CATS[catEff].vent + " km/h)" +
+          (catEff < catInit ? " — affaibli par les terres" : "");
+      };
+      majForce();
+
+      let hSim = 0;
+      let last = performance.now();
 
       function tick(now: number) {
-        const hSim = ((now - t0) / 1000) * H_PAR_SECONDE;
+        const dt = (now - last) / 1000;
+        last = now;
+        if (pauseCourse) { anim = requestAnimationFrame(tick); return; }
+
+        const dh = dt * H_PAR_SECONDE * multCourse;
+        hSim += dh;
         const dist = Math.min(hSim * vitesse(), total);
 
         let seg = segs[segs.length - 1], t = 1;
@@ -270,13 +357,39 @@ export default function SimulateurCycloneClient() {
         const Pp = { lon: seg.A.lon + (seg.B.lon - seg.A.lon) * t, lat: seg.A.lat + (seg.B.lat - seg.A.lat) * t };
         placeCyclone(Pp);
 
+        // La trace (un point ajouté tous les ~5 px, pas à chaque frame).
+        const px = toX(Pp.lon), py = toY(Pp.lat);
+        if (Math.hypot(px - dernierTraceX, py - dernierTraceY) > 5) {
+          tracePts += " " + px.toFixed(1) + "," + py.toFixed(1);
+          trace.setAttribute("points", tracePts);
+          dernierTraceX = px; dernierTraceY = py;
+        }
+
+        // Sur Madagascar : le cyclone s'use.
+        if (surMadagascar(Pp) && catEff > 0) {
+          hSurTerre += dh;
+          if (hSurTerre >= 6) {
+            hSurTerre = 0;
+            catEff -= 1;
+            dessineCyclone(catEff);
+            majForce();
+          }
+        }
+
         const d = km(Pp, REUNION);
         minD = Math.min(minD, d);
         cadDist.innerHTML = Math.round(d) + " <small>km</small>";
         cadHeure.textContent = "H+" + Math.round(hSim);
 
         const hRest = Math.max(0, a.parcours - dist) / vitesse();
-        if (dist < a.parcours + 60 && a.d < 900) {
+        if (d < 30) {
+          // LA leçon de sécurité : le calme de l'œil est un piège mortel.
+          oeilPasse = true;
+          alerte.textContent = "🌀 L'ŒIL PASSE — calme trompeur : le vent va revenir en sens inverse. NE SORTEZ PAS.";
+          alerte.style.background = "#b14aed";
+          alerte.style.color = "#fff";
+          halo.setAttribute("stroke", "#b14aed");
+        } else if (dist < a.parcours + 60 && a.d < 900) {
           const n = niveauAlerte(d, hRest);
           alerte.textContent = n.nom;
           alerte.style.background = n.c;
@@ -287,28 +400,37 @@ export default function SimulateurCycloneClient() {
           alerteNeutre();
         }
 
-        if (dist >= total) { fin(hSim, minD); return; }
+        if (dist >= total) { fin(hSim, minD, catInit, catEff, oeilPasse); return; }
         anim = requestAnimationFrame(tick);
       }
       anim = requestAnimationFrame(tick);
     };
     btnLancer.addEventListener("click", onLancer);
 
-    function fin(hSim: number, minD: number) {
+    function fin(hSim: number, minD: number, catInit: number, catEff: number, oeilPasse: boolean) {
       phase = "fini";
       majEtapes();
-      const cat = CATS[catCourante()];
+      btnPause.disabled = true;
+      btnMult.disabled = true;
+      const nom = nomCyclone();
+      const sujet = nom ? `le cyclone <strong>${nom}</strong>` : `ton ${CATS[catInit].nom}`;
       const touche = minD < 90;
       alerte.textContent = touche ? "PHASE DE SAUVEGARDE" : "FIN D'ALERTE";
       alerte.style.background = "#45d18a";
       alerte.style.color = "#00301a";
       halo.setAttribute("stroke", "#45d18a");
       bilan.innerHTML =
-        `<strong>Bilan de course</strong> — ton ${cat.nom} (vents ${cat.vent} km/h) est passé ` +
-        `au plus près à <strong>${Math.round(minD)} km</strong> de La Réunion, après ` +
+        `<strong>Bilan de course</strong> — ${sujet} (vents ${CATS[catInit].vent} km/h au départ) ` +
+        `est passé au plus près à <strong>${Math.round(minD)} km</strong> de La Réunion, après ` +
         `<strong>${Math.round(hSim)} h</strong> de route à ${vitesse()} km/h.` +
+        (catEff < catInit
+          ? ` En traversant Madagascar, il a perdu de sa force : à l'arrivée, ce n'était plus qu'une ${CATS[catEff].nom}. Le relief protège !`
+          : "") +
+        (oeilPasse
+          ? " <strong>L'œil est passé sur l'île</strong> — retiens la leçon : pendant le calme de l'œil, on ne sort JAMAIS."
+          : "") +
         (touche
-          ? " Passage direct : recommence en décalant la route de 100 km — que devient l'alerte ?"
+          ? " Recommence en décalant la route de 100 km — que devient l'alerte ?"
           : " L'île est épargnée cette fois. Rejoue la même route à une autre vitesse : l'heure du plus près change, pas la distance !");
       bilan.classList.add("visible");
     }
@@ -320,6 +442,16 @@ export default function SimulateurCycloneClient() {
       coucheRoute.innerHTML = "";
       (coucheCyclone as SVGGElement).style.display = "none";
       btnLancer.disabled = true;
+      btnAnnuler.disabled = true;
+      btnPause.disabled = true;
+      btnMult.disabled = true;
+      inputNom.disabled = false;
+      pauseCourse = false;
+      multCourse = 1;
+      btnPause.textContent = "⏸ Pause";
+      btnMult.textContent = "⏩ ×1";
+      spinG.style.animationPlayState = "running";
+      force.classList.add("hidden");
       hint.style.display = "";
       hint.textContent = "Clique sur l'océan pour poser ton cyclone 🌀";
       cadDist.textContent = "—";
@@ -431,12 +563,35 @@ export default function SimulateurCycloneClient() {
             </div>
           </div>
 
+          {/* Le nom : MON cyclone (effet IKEA en une case texte). */}
+          <input
+            id="simcy-nom"
+            type="text"
+            maxLength={16}
+            placeholder="Nomme ton cyclone (optionnel)"
+            aria-label="Nom de ton cyclone"
+            className="rounded border border-[#123049] bg-[#071825] px-3 py-2 text-[13px] font-bold uppercase tracking-wider text-[#e8f1f6] placeholder-[#9db4c2]/60 outline-none focus:border-[#62d6e8]"
+          />
+
           <div className="flex gap-2">
             <button id="simcy-lancer" disabled className="flex-1 rounded border border-[#62d6e8] bg-[#62d6e8] px-3 py-2.5 text-[13px] font-bold text-[#071825] hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-35">
               ▶ Lancer
             </button>
-            <button id="simcy-reset" className="flex-1 rounded border border-[#123049] bg-[#123049] px-3 py-2.5 text-[13px] font-bold text-[#e8f1f6] hover:brightness-125">
-              ↺ Recommencer
+            <button id="simcy-annuler" disabled title="Annuler le dernier point" className="rounded border border-[#123049] bg-[#123049] px-3 py-2.5 text-[13px] font-bold text-[#e8f1f6] hover:brightness-125 disabled:cursor-not-allowed disabled:opacity-35">
+              ↩ Point
+            </button>
+            <button id="simcy-reset" className="rounded border border-[#123049] bg-[#123049] px-3 py-2.5 text-[13px] font-bold text-[#e8f1f6] hover:brightness-125">
+              ↺
+            </button>
+          </div>
+
+          {/* Contrôles de course : pause + accéléré (actifs pendant la course). */}
+          <div className="grid grid-cols-2 gap-2">
+            <button id="simcy-pause" disabled className="rounded border border-[#123049] bg-[#0c2438] px-3 py-1.5 text-[12px] font-bold text-[#e8f1f6] hover:brightness-125 disabled:cursor-not-allowed disabled:opacity-35">
+              ⏸ Pause
+            </button>
+            <button id="simcy-mult" disabled className="rounded border border-[#123049] bg-[#0c2438] px-3 py-1.5 text-[12px] font-bold text-[#e8f1f6] hover:brightness-125 disabled:cursor-not-allowed disabled:opacity-35">
+              ⏩ ×1
             </button>
           </div>
 
@@ -450,6 +605,9 @@ export default function SimulateurCycloneClient() {
               <div id="simcy-heure" className="mt-0.5 font-mono text-[19px] font-bold tabular-nums">H+0</div>
             </div>
           </div>
+
+          {/* La force ACTUELLE (elle peut chuter sur les terres). */}
+          <div id="simcy-force" className="hidden rounded border border-[#123049] bg-[#071825] px-2.5 py-1.5 font-mono text-[11px] text-[#9db4c2]" />
 
           <div id="simcy-alerte" className="rounded bg-[#123049] px-3 py-2.5 text-center text-sm font-extrabold tracking-wide text-[#9db4c2]">
             EN ATTENTE — pose un cyclone
