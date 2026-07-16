@@ -744,9 +744,11 @@ export default function AccueilPage({
           <a href="#les-grands" className="hover:text-emerald-900">Parents & profs</a>
         </nav>
 
-        {/* Les trois gestes du matin — la promesse du journal, en une ligne. */}
-        <p className="border-b border-[#1d1c16]/30 py-1.5 text-center text-[11px] font-bold italic text-[#1d1c16]/60">
-          Chaque matin : réfléchir · apprendre · se diriger.
+        {/* La devise publique (choisie 16/07). La doctrine interne reste
+            « réfléchir · apprendre · se diriger » — même triptyque, dit pour
+            un enfant. */}
+        <p className="border-b border-[#1d1c16]/30 py-1.5 text-center font-serif text-sm font-black italic tracking-wide text-[#1d1c16]/75">
+          Comprendre. Apprendre. S&apos;amuser.
         </p>
 
         {/* La rampe d'entrée par classe : du CP à la Terminale, un clic = le
