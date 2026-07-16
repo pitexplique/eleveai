@@ -45,6 +45,36 @@ export default function SimulateurCycloneClient() {
       { nom: "cyclone intense", vent: 190, rayon: 54, rot: "1.8s" },
     ];
 
+    // ── Rejouer l'histoire — les cyclones que l'île n'a pas oubliés ────────
+    // Trajectoires SIMPLIFIÉES d'après les relevés officiels (but pédagogique).
+    // Tact : de vrais cyclones ont fait de vraies victimes — on rejoue pour
+    // comprendre et se souvenir, jamais pour jouer avec.
+    const HISTORIQUES: Record<string, {
+      nom: string; annee: number; cat: number; vitesse: number;
+      route: [number, number][]; memoire: string;
+    }> = {
+      belal: {
+        nom: "BELAL", annee: 2024, cat: 3, vitesse: 12,
+        route: [[52.5, -14.5], [53.5, -16.5], [54.5, -18.5], [55.4, -20.9], [56.5, -23.0], [58.0, -25.5]],
+        memoire: "Janvier 2024 — alerte violette, l'île à l'arrêt complet. Rafales mesurées à 217 km/h au Maïdo. Des vies ont été perdues : on s'en souvient.",
+      },
+      dina: {
+        nom: "DINA", annee: 2002, cat: 3, vitesse: 15,
+        route: [[62.0, -17.0], [59.5, -18.2], [57.3, -19.4], [55.6, -20.5], [53.8, -21.8], [52.5, -23.5]],
+        memoire: "Janvier 2002 — l'œil est passé au nord sans toucher terre, et pourtant : rafales au-delà de 200 km/h dans les hauts, des toits arrachés dans toute l'île. Pas besoin d'un passage direct pour frapper fort.",
+      },
+      firinga: {
+        nom: "FIRINGA", annee: 1989, cat: 2, vitesse: 18,
+        route: [[59.5, -17.5], [58.0, -18.8], [56.8, -19.9], [55.6, -21.2], [54.3, -22.8], [53.0, -24.5]],
+        memoire: "Janvier 1989 — passage direct sur le Sud. Saint-Pierre et la Rivière durement touchés. Ceux qui l'ont vécu racontent encore le bruit du vent.",
+      },
+      gamede: {
+        nom: "GAMÈDE", annee: 2007, cat: 2, vitesse: 8,
+        route: [[57.0, -15.5], [55.0, -16.8], [53.5, -18.0], [52.8, -19.2], [52.3, -20.5], [51.5, -22.5]],
+        memoire: "Février 2007 — il n'a JAMAIS touché l'île… et il a pourtant battu des records du monde de pluie : près de 5 mètres d'eau à Cilaos en 9 jours. Regarde sa vitesse : 8 km/h. Un cyclone lent qui reste à côté, c'est des jours de pluie.",
+      },
+    };
+
     const svg = root.querySelector<SVGSVGElement>("#simcy-carte")!;
     const NS = "http://www.w3.org/2000/svg";
     const el = (tag: string, attrs: Record<string, string | number>, parent?: Element) => {
@@ -262,6 +292,38 @@ export default function SimulateurCycloneClient() {
     };
     root.querySelectorAll('input[name="simcy-cat"]').forEach((r) => r.addEventListener("change", onCat));
 
+    // ── Rejouer l'histoire : un clic charge tout (route, force, vitesse, nom).
+    let histoireCourante: (typeof HISTORIQUES)[string] | null = null;
+
+    const chargerHistoire = (id: string) => {
+      const h = HISTORIQUES[id];
+      if (!h || phase === "course") return;
+      onReset();
+      histoireCourante = h;
+      points = h.route.map(([lon, lat]) => ({ lon, lat }));
+      phase = "trace";
+      const radio = root.querySelector<HTMLInputElement>(`input[name="simcy-cat"][value="${h.cat}"]`);
+      if (radio) radio.checked = true;
+      rangeVitesse.value = String(h.vitesse);
+      vitesseVal.textContent = h.vitesse + " km/h";
+      inputNom.value = h.nom;
+      (coucheCyclone as SVGGElement).style.display = "";
+      dessineCyclone(h.cat);
+      placeCyclone(points[0]);
+      dessineRoute();
+      majPrevision();
+      majEtapes();
+      btnLancer.disabled = false;
+      btnAnnuler.disabled = true; // on ne retouche pas l'histoire
+      hint.textContent = `La route de ${h.nom} (${h.annee}) est tracée — ▶ Lance pour revivre sa course`;
+      const memoire = $("simcy-memoire");
+      memoire.textContent = h.memoire;
+      memoire.classList.remove("hidden");
+    };
+    root.querySelectorAll<HTMLButtonElement>("[data-hist]").forEach((b) =>
+      b.addEventListener("click", () => chargerHistoire(b.dataset.hist!))
+    );
+
     // ↩ Annuler le dernier point de la route (jamais le cyclone lui-même).
     const onAnnuler = () => {
       if (phase !== "trace" || points.length < 2) return;
@@ -431,7 +493,10 @@ export default function SimulateurCycloneClient() {
           : "") +
         (touche
           ? " Recommence en décalant la route de 100 km — que devient l'alerte ?"
-          : " L'île est épargnée cette fois. Rejoue la même route à une autre vitesse : l'heure du plus près change, pas la distance !");
+          : " L'île est épargnée cette fois. Rejoue la même route à une autre vitesse : l'heure du plus près change, pas la distance !") +
+        (histoireCourante
+          ? `<br><br><em>🕯️ ${histoireCourante.nom} ${histoireCourante.annee}, en vrai : ${histoireCourante.memoire}</em>`
+          : "");
       bilan.classList.add("visible");
     }
 
@@ -439,6 +504,9 @@ export default function SimulateurCycloneClient() {
       if (anim) cancelAnimationFrame(anim);
       points = [];
       phase = "pose";
+      histoireCourante = null;
+      $("simcy-memoire").classList.add("hidden");
+      inputNom.value = "";
       coucheRoute.innerHTML = "";
       (coucheCyclone as SVGGElement).style.display = "none";
       btnLancer.disabled = true;
@@ -593,6 +661,33 @@ export default function SimulateurCycloneClient() {
             <button id="simcy-mult" disabled className="rounded border border-[#123049] bg-[#0c2438] px-3 py-1.5 text-[12px] font-bold text-[#e8f1f6] hover:brightness-125 disabled:cursor-not-allowed disabled:opacity-35">
               ⏩ ×1
             </button>
+          </div>
+
+          {/* Rejouer l'histoire — en mémoire, jamais en jeu. */}
+          <div className="flex flex-col gap-2">
+            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#9db4c2]">
+              Rejouer l&apos;histoire · en mémoire
+            </span>
+            <div className="grid grid-cols-2 gap-1.5">
+              {[
+                ["belal", "BELAL · 2024"],
+                ["dina", "DINA · 2002"],
+                ["firinga", "FIRINGA · 1989"],
+                ["gamede", "GAMÈDE · 2007"],
+              ].map(([id, label]) => (
+                <button
+                  key={id}
+                  data-hist={id}
+                  className="rounded border border-[#123049] bg-[#0c2438] px-2 py-1.5 font-mono text-[11px] font-bold text-[#e8f1f6] hover:border-[#62d6e8]/50 hover:brightness-125"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <p id="simcy-memoire" className="hidden rounded border border-[#9db4c2]/25 bg-[#071825] px-3 py-2 text-[12px] italic leading-relaxed text-[#9db4c2]" />
+            <p className="text-[10px] leading-snug text-[#9db4c2]/70">
+              Trajectoires simplifiées d&apos;après les relevés officiels, à but pédagogique.
+            </p>
           </div>
 
           <div className="grid grid-cols-2 gap-2">
