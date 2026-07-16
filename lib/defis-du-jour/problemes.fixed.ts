@@ -10,7 +10,7 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "baleines_voyage_001",
     title: "Les baleines sont là : le grand voyage",
     theme: "Proportionnalité & vitesses",
-    image: "/images/lagon.webp",
+    image: "/images/defis-du-jour/baleine-saut.webp",
     level: 2,
     statement:
       "Chaque hiver austral, les baleines à bosse quittent l'Antarctique pour venir mettre bas dans les eaux chaudes de La Réunion. Le voyage fait environ 8 000 km, et une baleine parcourt environ 160 km par jour.",
@@ -55,7 +55,7 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "baleines_geant_002",
     title: "Les baleines sont là : un géant dans le bleu",
     theme: "Mesures & comparaison",
-    image: "/images/lagon.webp",
+    image: "/images/defis-du-jour/baleine-saut.webp",
     level: 2,
     statement:
       "Une baleine à bosse adulte mesure environ 15 m et pèse environ 30 tonnes, c'est-à-dire 30 000 kg. Un élève de CM2 pèse environ 40 kg, et une salle de classe mesure environ 7,5 m de long.",
@@ -100,7 +100,7 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "baleines_souffle_003",
     title: "Les baleines sont là : le souffle et la plongée",
     theme: "Durées & calculs de temps",
-    image: "/images/lagon.webp",
+    image: "/images/defis-du-jour/baleine-saut.webp",
     level: 3,
     statement:
       "Depuis le cap, tu observes une baleine. Elle plonge pendant 15 minutes, puis reste 5 minutes en surface pour respirer (c'est là qu'on voit son souffle !). Puis elle recommence : plongée, surface, plongée...",
@@ -145,7 +145,7 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "baleines_proba_004",
     title: "Les baleines sont là : les verra-t-on aujourd'hui ?",
     theme: "Probabilités",
-    image: "/images/lagon.webp",
+    image: "/images/defis-du-jour/baleine-saut.webp",
     level: 3,
     statement:
       "Un club de Saint-Gilles note ses 20 dernières sorties en mer de juillet : 14 sorties avec des baleines observées, 4 sorties avec seulement des dauphins, et 2 sorties sans observation. On choisit une sortie au hasard dans le carnet : chacune a la même chance d'être choisie.",
@@ -197,7 +197,7 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "baleines_baleineau_005",
     title: "Les baleines sont là : le baleineau",
     theme: "Proportionnalité",
-    image: "/images/lagon.webp",
+    image: "/images/defis-du-jour/baleine-saut.webp",
     level: 3,
     statement:
       "Les baleines viennent à La Réunion pour mettre bas dans une eau calme et chaude. Un baleineau boit environ 200 litres de lait par jour, et grossit d'environ 45 kg par jour. Oui, PAR JOUR.",
@@ -249,7 +249,7 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "baleines_saison_006",
     title: "Les baleines sont là : la saison en chiffres",
     theme: "Lecture de données & fractions",
-    image: "/images/lagon.webp",
+    image: "/images/defis-du-jour/baleine-saut.webp",
     level: 4,
     statement:
       "Voici le nombre d'observations de baleines relevées au large de La Réunion, mois par mois, pendant une saison : juin : 30, juillet : 90, août : 150, septembre : 120, octobre : 60.",
@@ -301,7 +301,7 @@ export const problemesFixed: ProblemeDuJour[] = [
     id: "baleines_synthese_007",
     title: "Les baleines sont là : le voyage complet",
     theme: "Problème multi-étapes",
-    image: "/images/lagon.webp",
+    image: "/images/defis-du-jour/baleine-saut.webp",
     level: 5,
     statement:
       "Suivons une baleine sur toute sa saison. L'aller : 8 000 km depuis l'Antarctique, à 160 km par jour. Le séjour à La Réunion : 90 jours, pendant lesquels son baleineau boit 200 litres de lait par jour. Le retour : 8 000 km aussi, mais à 100 km par jour seulement, car le baleineau nage moins vite.",
