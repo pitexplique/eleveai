@@ -64,6 +64,17 @@ export async function GET(req: Request) {
     );
   }
 
+  // L'email peut aussi être un abonné sans compte (coupon du journal) :
+  // on coupe les DEUX sources. Tolérant si la table n'existe pas encore.
+  try {
+    await supabase
+      .from("newsletter_abonnes")
+      .update({ actif: false, updated_at: new Date().toISOString() })
+      .eq("email", email);
+  } catch {
+    /* table absente : rien à couper */
+  }
+
   return page(
     "Vous êtes désinscrit·e",
     "Vous ne recevrez plus les emails de nouveautés d'EleveAI. Vous gardez bien sûr l'accès à votre compte.",

@@ -38,7 +38,7 @@ function wrapHtml(bodyHtml: string, unsub: string): string {
 ${bodyHtml}
 <hr style="margin:24px 0;border:none;border-top:1px solid #e2e8f0"/>
 <p style="font-size:12px;color:#64748b;line-height:1.5">
-Vous recevez cet email car vous avez créé un compte sur <a href="https://eleveai.fr" style="color:#0d9488">eleveai.fr</a> et accepté de recevoir les nouveautés.<br/>
+Vous recevez cet email car vous êtes abonné·e aux nouveautés d'<a href="https://eleveai.fr" style="color:#0d9488">eleveai.fr</a> (compte ou abonnement au journal).<br/>
 EleveAI — La Réunion · <a href="${unsub}" style="color:#0d9488">Se désinscrire</a>
 </p>
 </div>`;
@@ -148,11 +148,25 @@ export async function POST(req: Request) {
     );
   }
 
-  // Dédoublonne les adresses (au cas où).
+  // + les abonnés SANS compte (coupon du journal, table newsletter_abonnes).
+  // Tolérant si la table n'existe pas encore (SQL pas exécuté) : on envoie
+  // au moins aux comptes consentants.
+  let abonnesJournal: string[] = [];
+  try {
+    const { data: abonnes } = await supabase
+      .from("newsletter_abonnes")
+      .select("email")
+      .eq("actif", true);
+    abonnesJournal = (abonnes ?? []).map((r) => String(r.email ?? ""));
+  } catch {
+    abonnesJournal = [];
+  }
+
+  // Dédoublonne les adresses (compte + abonnement journal = 1 seul envoi).
   const recipients = Array.from(
     new Set(
-      (data ?? [])
-        .map((r) => String(r.email ?? "").trim().toLowerCase())
+      [...(data ?? []).map((r) => String(r.email ?? "")), ...abonnesJournal]
+        .map((e) => e.trim().toLowerCase())
         .filter(Boolean)
     )
   );

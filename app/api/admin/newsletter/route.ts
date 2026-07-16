@@ -47,9 +47,30 @@ export async function GET() {
     bySource[s] = (bySource[s] ?? 0) + 1;
   }
 
+  // + les abonnés sans compte (coupon « Recevez le journal » de l'accueil).
+  // Dédoublonnés contre les comptes ; tolérant si la table n'existe pas encore.
+  let abonnesJournal = 0;
+  try {
+    const emailsComptes = new Set(
+      rows.map((r) => String(r.email ?? "").trim().toLowerCase())
+    );
+    const { data: abonnes } = await supabase
+      .from("newsletter_abonnes")
+      .select("email")
+      .eq("actif", true);
+    abonnesJournal = (abonnes ?? []).filter(
+      (a) => !emailsComptes.has(String(a.email ?? "").trim().toLowerCase())
+    ).length;
+    if (abonnesJournal > 0) {
+      bySource["journal (sans compte)"] = abonnesJournal;
+    }
+  } catch {
+    /* table absente : aperçu comptes seulement */
+  }
+
   return NextResponse.json({
     ok: true,
-    total: rows.length,
+    total: rows.length + abonnesJournal,
     bySource,
     sample: rows.slice(0, 20).map((r) => ({
       email: r.email,

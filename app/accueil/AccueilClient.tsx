@@ -31,6 +31,7 @@ import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import AgendaJournal from "@/components/accueil/AgendaJournal";
+import AbonnementJournal from "@/components/accueil/AbonnementJournal";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
@@ -713,6 +714,37 @@ export default function AccueilPage({
       {isStaff ? (
         <div className="mx-auto mt-6 max-w-6xl">
           <StaffAccueilBanner />
+
+          {/* L'ATELIER DU PROF — les fiches à composer, mises en avant pour
+              l'enseignant connecté (effet IKEA côté prof, manifeste
+              prof-élève). Demande de Frédéric du 16/07. */}
+          <div className="mt-4 border-2 border-[#1d1c16] p-4 sm:p-5">
+            <p className="text-[11px] font-black uppercase tracking-[0.22em] text-emerald-900">
+              🍎 L&apos;atelier du prof · Fiches à composer
+            </p>
+            <h2 className="mt-1 font-serif text-2xl font-black leading-tight">
+              Composez votre fiche comme vous faites cours
+            </h2>
+            <p className="mt-2 max-w-3xl text-sm font-medium leading-6 text-[#1d1c16]/80">
+              Chaque fiche de maths est en blocs — Définition, Propriétés,
+              « À quoi ça sert dans le réel », un peu d&apos;histoire, exemples
+              corrigés, entraînement. Cochez vos rubriques, choisissez votre
+              ordre : mode classe, impression PDF, et votre composition vous
+              attend dans votre tableau de bord.
+            </p>
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <Link
+                href="/fiches-cours/maths"
+                className="inline-flex items-center gap-2 rounded-sm bg-[#1d1c16] px-4 py-2 text-sm font-black text-[#f6f1e4] transition hover:bg-emerald-900"
+              >
+                Ouvrir l&apos;atelier →
+              </Link>
+              <p className="text-xs font-medium italic text-[#1d1c16]/60">
+                « Le cours est fait par les élèves et les profs — pas l&apos;un
+                sans l&apos;autre. »
+              </p>
+            </div>
+          </div>
         </div>
       ) : (
         <EditionPerso />
@@ -1336,6 +1368,9 @@ export default function AccueilPage({
           </Link>
         </div>
       </section>
+
+      {/* ══ L'ABONNEMENT — recevez le journal (gratuit, newsletter Resend) ═══ */}
+      <AbonnementJournal />
 
       {/* ══ L'OURS — qui fait ce journal (le pied de page du quotidien) ══════ */}
       <footer className="mx-auto mt-10 max-w-6xl border-t-4 border-double border-[#1d1c16] pt-4 text-center">
