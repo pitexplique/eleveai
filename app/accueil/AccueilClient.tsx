@@ -939,32 +939,42 @@ export default function AccueilPage({
               height={72}
               className="mt-3 h-[72px] w-[72px] rounded-full border-2 border-[#1d1c16]/25 object-cover"
             />
+            {/* Le VRAI édito du fondateur (validé par Frédéric, 17/07) :
+                s'ouvre « professeur de mathématiques », se referme
+                « professeur d'élèves » — le manifeste tient dans la distance
+                entre les deux. */}
             <h3 className="mt-2 font-serif text-lg font-black leading-snug">
-              Aux parents et à leurs enfants
+              Pourquoi ce journal
             </h3>
             <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
-              Merci pour cette année. EleveAI est né dans ma classe, pour mes
-              élèves — et il reste{" "}
-              <strong className="font-black">gratuit et ouvert tout l&apos;été</strong>.
+              Je suis professeur de mathématiques à La Réunion. Ce journal est
+              né dans ma classe, d&apos;un constat simple : on apprend mieux
+              quand on nous parle de ce qu&apos;on a{" "}
+              <strong className="font-black">sous les yeux</strong> — la pluie,
+              la canne, les baleines, le volcan.
+            </p>
+            <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
+              Alors chaque matin, ce journal raconte l&apos;île avec de vraies
+              maths dedans. Un défi par jour, une dictée, un coach qui explique
+              sans jamais faire à ta place.{" "}
+              <strong className="font-black">Gratuit, sans publicité, sans jugement.</strong>
             </p>
             <details className="mt-1">
               <summary className="cursor-pointer list-none text-xs font-black text-emerald-900 underline underline-offset-2">
                 Lire la suite ▾
               </summary>
               <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
-                <strong className="font-black">Aux parents :</strong> quelques
-                minutes par jour suffisent — la dictée, un défi, une fiche.
-                Aucune pression, juste le plaisir d&apos;apprendre à son rythme,
-                en confiance (et sans publicité).
+                Et il est écrit <strong className="font-black">avec mes élèves</strong>{" "}
+                — leurs idées, leurs avis, même leurs fautes d&apos;orthographe,
+                qu&apos;on garde parce qu&apos;elles sont vraies. Le cours est
+                fait par les élèves et les profs. Pas l&apos;un sans l&apos;autre.
               </p>
               <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
-                <strong className="font-black">Aux élèves :</strong> je suis
-                fier de vous. Reposez-vous, profitez des vôtres et du soleil…
-                et revenez quand l&apos;envie vous prend. 🌴
+                Bienvenue. Ici, tu es chez toi.
               </p>
             </details>
             <p className="mt-3 font-serif text-sm font-black italic">
-              — M. Lacoste, professeur de mathématiques
+              — Frédéric Lacoste, professeur d&apos;élèves
             </p>
           </aside>
         </div>
