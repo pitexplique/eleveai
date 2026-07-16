@@ -29,10 +29,12 @@ const nextConfig = {
       // trafic « Direct » invisible). 302 (pas 301) : on peut repointer une
       // campagne sans se battre avec le cache des navigateurs.
       // Épisodes « en vrai » → la Une du journal (l'article les attend).
+      // ⚠️ Destination /accueil DIRECT (pas /) : la redirection / → /accueil de
+      // app/page.tsx perdait les UTM en route (constaté en prod le 16/07).
       ...["eau", "lait", "cyclones", "volcan", "requins", "canne"].map(
         (ep) => ({
           source: `/${ep}`,
-          destination: `/?utm_source=youtube&utm_medium=video&utm_campaign=${ep}`,
+          destination: `/accueil?utm_source=youtube&utm_medium=video&utm_campaign=${ep}`,
           permanent: false,
         }),
       ),
