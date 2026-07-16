@@ -5,6 +5,7 @@ import AccueilClient, {
   type AvisPublic,
   type Apercu974,
   type ActionJournal,
+  type SlideUne,
 } from "./AccueilClient";
 import { getElevesALHonneur, prenomCourt } from "@/lib/ameliorations/honneurServer";
 import { fetchCatalogue } from "@/lib/server/catalogue";
@@ -162,12 +163,46 @@ async function getCatalogueJournal(): Promise<ActionJournal[]> {
   }
 }
 
+// La Une (carrousel) vient de la RÉGIE DU RÉDACTEUR EN CHEF : table journal_une
+// (éditée via /admin/journal). Table vide/absente → repli sur les 6 épisodes
+// en dur du client.
+async function getSlidesUne(): Promise<SlideUne[]> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return [];
+
+  try {
+    const supabase = createClient(url, key);
+    const { data, error } = await supabase
+      .from("journal_une")
+      .select("id, kicker, titre, accroche, youtube_id, image_url, lien, cta, defi")
+      .eq("actif", true)
+      .order("ordre", { ascending: true });
+
+    if (error || !data) return [];
+    return data.map((s) => ({
+      id: String(s.id),
+      kicker: s.kicker ?? "Réfléchir · En vrai, à La Réunion",
+      titre: s.titre,
+      accroche: s.accroche,
+      youtubeId: s.youtube_id,
+      imageUrl: s.image_url,
+      lien: s.lien,
+      cta: s.cta ?? "Lire →",
+      defi: s.defi,
+    }));
+  } catch {
+    return [];
+  }
+}
+
 export default async function Page() {
-  const [avis, honneur, apercu974, catalogue] = await Promise.all([
+  const [avis, honneur, apercu974, catalogue, slides] = await Promise.all([
     getDerniersAvis(),
     getElevesALHonneur(),
     getApercuMaths974(),
     getCatalogueJournal(),
+    getSlidesUne(),
   ]);
   return (
     <AccueilClient
@@ -175,6 +210,7 @@ export default async function Page() {
       honneur={honneur}
       apercu974={apercu974}
       catalogue={catalogue}
+      slides={slides}
     />
   );
 }

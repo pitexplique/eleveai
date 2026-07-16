@@ -213,6 +213,19 @@ export type AvisPublic = {
   quote: string;
 };
 
+/** Un slide de la Une (régie du rédacteur en chef, table journal_une). */
+export type SlideUne = {
+  id: string;
+  kicker: string;
+  titre: string;
+  accroche: string | null;
+  youtubeId: string | null;
+  imageUrl: string | null;
+  lien: string;
+  cta: string;
+  defi: string | null;
+};
+
 /** Une action du catalogue (projection minimale de catalogue_actions). */
 export type ActionJournal = {
   id: string;
@@ -314,68 +327,114 @@ function TitreRubrique({ children }: { children: React.ReactNode }) {
   );
 }
 
-// ─── Le carrousel de la Une — façon MSN : les 6 épisodes défilent ──────────────
-// Une grande carte qui tourne toute seule (8 s), flèches ‹ › et points, pause
-// au survol. L'article à la Une n'est plus figé : toute la série passe en Une.
-function UneCarousel() {
-  const episodes = useMemo(() => [UNE, ...BREVES], []);
+// ─── Le carrousel de la Une — façon MSN, piloté par la RÉGIE ───────────────────
+// Les slides viennent de la table journal_une (éditée dans /admin/journal par
+// le rédacteur en chef) ; repli sur les 6 épisodes en dur si la base est vide.
+// Auto 8 s, flèches ‹ › et points, pause au survol.
+function UneCarousel({ slides }: { slides?: SlideUne[] }) {
+  const items = useMemo<SlideUne[]>(() => {
+    if (slides && slides.length > 0) return slides;
+    // Repli : les épisodes historiques, projetés au format SlideUne.
+    return [UNE, ...BREVES].map((e) => ({
+      id: e.youtubeId,
+      kicker: "Réfléchir · En vrai, à La Réunion",
+      titre: e.titre,
+      accroche: e.accroche,
+      youtubeId: e.youtubeId,
+      imageUrl: null,
+      lien: `https://youtu.be/${e.youtubeId}`,
+      cta: `${e.emoji} Regarder l'épisode →`,
+      defi: e.defi ?? null,
+    }));
+  }, [slides]);
+
   const [index, setIndex] = useState(0);
   const [pause, setPause] = useState(false);
 
   useEffect(() => {
-    if (pause) return;
+    if (pause || items.length < 2) return;
     const id = setInterval(
-      () => setIndex((i) => (i + 1) % episodes.length),
+      () => setIndex((i) => (i + 1) % items.length),
       8000,
     );
     return () => clearInterval(id);
-  }, [pause, episodes.length]);
+  }, [pause, items.length]);
 
-  const ep = episodes[index];
+  const ep = items[index % items.length];
+  const externe = /^https?:\/\//.test(ep.lien);
+  const image =
+    ep.youtubeId
+      ? `https://i.ytimg.com/vi/${ep.youtubeId}/hqdefault.jpg`
+      : ep.imageUrl;
+
+  const carte = (
+    <>
+      <div className="relative aspect-video w-full overflow-hidden bg-[#1d1c16]/5">
+        {image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={image}
+            alt={ep.titre}
+            loading="lazy"
+            className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+          />
+        ) : (
+          <span className="flex h-full w-full items-center justify-center text-6xl" aria-hidden>
+            🗞️
+          </span>
+        )}
+        {ep.youtubeId && (
+          <span className="absolute inset-0 flex items-center justify-center">
+            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-red-700/90 text-xl text-white shadow-xl transition group-hover:scale-110">
+              ▶
+            </span>
+          </span>
+        )}
+      </div>
+      <p className="border-t border-[#1d1c16]/25 px-3 py-2 text-xs font-medium italic text-[#1d1c16]/65">
+        {ep.cta}
+      </p>
+    </>
+  );
 
   return (
     <div onMouseEnter={() => setPause(true)} onMouseLeave={() => setPause(false)}>
+      <p className="scroll-mt-24 text-[11px] font-black uppercase tracking-[0.22em] text-emerald-900">
+        {ep.kicker}
+      </p>
       <h2 className="mt-2 font-serif text-3xl font-black leading-tight sm:text-4xl lg:text-[2.6rem]">
         {ep.titre}
       </h2>
-      <p className="mt-3 font-serif text-base font-medium leading-7 text-[#1d1c16]/85 sm:text-lg">
-        {ep.accroche}
-      </p>
+      {ep.accroche && (
+        <p className="mt-3 font-serif text-base font-medium leading-7 text-[#1d1c16]/85 sm:text-lg">
+          {ep.accroche}
+        </p>
+      )}
       <p className="mt-2 text-xs font-bold uppercase tracking-[0.14em] text-[#1d1c16]/55">
         Par la rédaction — avec les élèves de La Réunion
       </p>
 
       <div className="relative mt-4">
-        <a
-          href={`https://youtu.be/${ep.youtubeId}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group block border border-[#1d1c16]/25"
-        >
-          <div className="relative aspect-video w-full overflow-hidden bg-[#1d1c16]/5">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={`https://i.ytimg.com/vi/${ep.youtubeId}/hqdefault.jpg`}
-              alt={ep.titre}
-              loading="lazy"
-              className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
-            />
-            <span className="absolute inset-0 flex items-center justify-center">
-              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-red-700/90 text-xl text-white shadow-xl transition group-hover:scale-110">
-                ▶
-              </span>
-            </span>
-          </div>
-          <p className="border-t border-[#1d1c16]/25 px-3 py-2 text-xs font-medium italic text-[#1d1c16]/65">
-            {ep.emoji} Regarder l&apos;épisode →
-          </p>
-        </a>
+        {externe ? (
+          <a
+            href={ep.lien}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block border border-[#1d1c16]/25"
+          >
+            {carte}
+          </a>
+        ) : (
+          <Link href={ep.lien} className="group block border border-[#1d1c16]/25">
+            {carte}
+          </Link>
+        )}
 
         {/* Les flèches ‹ › (façon MSN), posées sur l'image. */}
         <button
           type="button"
           aria-label="Épisode précédent"
-          onClick={() => setIndex((i) => (i - 1 + episodes.length) % episodes.length)}
+          onClick={() => setIndex((i) => (i - 1 + items.length) % items.length)}
           className="absolute left-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#1d1c16]/30 bg-[#f6f1e4]/90 text-xl font-black text-[#1d1c16] shadow transition hover:bg-[#f6f1e4]"
         >
           ‹
@@ -383,23 +442,23 @@ function UneCarousel() {
         <button
           type="button"
           aria-label="Épisode suivant"
-          onClick={() => setIndex((i) => (i + 1) % episodes.length)}
+          onClick={() => setIndex((i) => (i + 1) % items.length)}
           className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#1d1c16]/30 bg-[#f6f1e4]/90 text-xl font-black text-[#1d1c16] shadow transition hover:bg-[#f6f1e4]"
         >
           ›
         </button>
       </div>
 
-      {/* Les points : un par épisode. */}
+      {/* Les points : un par slide. */}
       <div className="mt-3 flex items-center justify-center gap-2">
-        {episodes.map((e, i) => (
+        {items.map((e, i) => (
           <button
-            key={e.youtubeId}
+            key={e.id}
             type="button"
-            aria-label={`Aller à l'épisode : ${e.titre}`}
+            aria-label={`Aller au slide : ${e.titre}`}
             onClick={() => setIndex(i)}
             className={`h-2.5 rounded-full transition-all ${
-              i === index ? "w-6 bg-[#1d1c16]" : "w-2.5 bg-[#1d1c16]/25 hover:bg-[#1d1c16]/50"
+              i === index % items.length ? "w-6 bg-[#1d1c16]" : "w-2.5 bg-[#1d1c16]/25 hover:bg-[#1d1c16]/50"
             }`}
           />
         ))}
@@ -525,11 +584,13 @@ export default function AccueilPage({
   honneur,
   apercu974,
   catalogue,
+  slides,
 }: {
   avis?: AvisPublic[];
   honneur?: EleveALHonneur[];
   apercu974?: Apercu974[];
   catalogue?: ActionJournal[];
+  slides?: SlideUne[];
 }) {
   const { eleve } = useEleve();
   const derniersAvis = avis && avis.length > 0 ? avis : AVIS_FALLBACK;
@@ -755,9 +816,9 @@ export default function AccueilPage({
         <div className="grid gap-8 lg:grid-cols-12">
           {/* L'article à la Une (RÉFLÉCHIR : ce qui se passe autour de toi). */}
           <article className="lg:col-span-7">
-            <Kicker>Réfléchir · En vrai, à La Réunion</Kicker>
-            {/* Le carrousel façon MSN : les 6 épisodes défilent en Une. */}
-            <UneCarousel />
+            {/* Le carrousel façon MSN, piloté par la régie (/admin/journal) :
+                chaque slide porte son propre surtitre. */}
+            <UneCarousel slides={slides} />
 
             {/* À lire aussi — la rivière de titres (façon portail MSN) : des
                 manchettes cliquables qui irriguent le reste du site. */}

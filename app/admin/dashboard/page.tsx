@@ -43,6 +43,17 @@ export default async function AdminDashboardPage() {
         <AdminCallsClient />
 
         <Link
+          href="/admin/journal"
+          className="block rounded-xl border border-amber-700 bg-amber-900/30 p-4 transition hover:bg-amber-900/50"
+        >
+          <p className="font-bold text-amber-300">🗞️ La régie du rédacteur en chef</p>
+          <p className="mt-1 text-sm text-slate-400">
+            La Une du journal (le carrousel de l&apos;accueil) : ajouter, masquer,
+            réordonner les slides — publié immédiatement.
+          </p>
+        </Link>
+
+        <Link
           href="/admin/retours"
           className="block rounded-xl border border-emerald-700 bg-emerald-900/30 p-4 transition hover:bg-emerald-900/50"
         >
