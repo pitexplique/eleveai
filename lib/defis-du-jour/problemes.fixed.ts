@@ -2,7 +2,354 @@
 import type { ProblemeDuJour } from "./types";
 
 export const problemesFixed: ProblemeDuJour[] = [
-  // === Semaine en cours : Coupe du monde de foot 2026 (48 équipes, USA/Canada/Mexique) ===
+  // === Semaine en cours : Les baleines sont là ! (hiver austral — les baleines
+  // à bosse arrivent de l'Antarctique à La Réunion de juin à octobre ; on les
+  // voit depuis la côte). Remplace la semaine foot (la France a perdu le 14/07,
+  // l'actu était périmée — décision du rédacteur en chef, 16/07). ===
+  {
+    id: "baleines_voyage_001",
+    title: "Les baleines sont là : le grand voyage",
+    theme: "Proportionnalité & vitesses",
+    image: "/images/lagon.webp",
+    level: 2,
+    statement:
+      "Chaque hiver austral, les baleines à bosse quittent l'Antarctique pour venir mettre bas dans les eaux chaudes de La Réunion. Le voyage fait environ 8 000 km, et une baleine parcourt environ 160 km par jour.",
+    question:
+      "Combien de jours dure le voyage ? Et si une baleine pressée nageait 200 km par jour, combien de jours mettrait-elle ?",
+    expectedAnswer: "50 40",
+    explanation:
+      "À 160 km par jour : 8 000 ÷ 160 = 50 jours de voyage. À 200 km par jour : 8 000 ÷ 200 = 40 jours. C'est presque deux mois de nage sans s'arrêter — et elles font le chemin du retour quelques mois plus tard !",
+    directions: [
+      {
+        id: "duree",
+        label: "Calculer la durée du voyage",
+        type: "guided",
+        content:
+          "Durée = distance ÷ vitesse par jour.\nCalcule 8 000 ÷ 160. (Astuce : 8 000 ÷ 160, c'est comme 800 ÷ 16.)",
+      },
+      {
+        id: "pressee",
+        label: "La baleine pressée",
+        type: "guided",
+        content:
+          "Même méthode avec la nouvelle vitesse :\n8 000 ÷ 200 = ? (Astuce : 8 000 ÷ 200, c'est comme 80 ÷ 2.)",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Plus la vitesse est grande, moins il faut de jours. Tes deux réponses doivent donc être : la deuxième plus petite que la première.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Pourquoi les baleines font-elles un si long voyage pour venir à La Réunion ? Cherche (ou devine) au moins une raison, et utilise les nombres du défi.",
+      },
+    ],
+  },
+
+  {
+    id: "baleines_geant_002",
+    title: "Les baleines sont là : un géant dans le bleu",
+    theme: "Mesures & comparaison",
+    image: "/images/lagon.webp",
+    level: 2,
+    statement:
+      "Une baleine à bosse adulte mesure environ 15 m et pèse environ 30 tonnes, c'est-à-dire 30 000 kg. Un élève de CM2 pèse environ 40 kg, et une salle de classe mesure environ 7,5 m de long.",
+    question:
+      "Combien faut-il d'élèves de 40 kg pour égaler le poids d'une baleine ? Et combien de salles de classe mises bout à bout pour égaler sa longueur ?",
+    expectedAnswer: "750 2",
+    explanation:
+      "Poids : 30 000 ÷ 40 = 750 élèves — presque deux collèges entiers ! Longueur : 15 ÷ 7,5 = 2 salles de classe bout à bout. La prochaine fois que tu es en classe, imagine : la baleine dépasse des deux murs.",
+    directions: [
+      {
+        id: "poids",
+        label: "Comparer les poids",
+        type: "guided",
+        content:
+          "Combien de fois 40 kg rentre dans 30 000 kg ?\nCalcule 30 000 ÷ 40. (Astuce : 3 000 ÷ 4 = 750.)",
+      },
+      {
+        id: "longueur",
+        label: "Comparer les longueurs",
+        type: "guided",
+        content:
+          "Combien de fois 7,5 m rentre dans 15 m ?\nCherche le nombre qui multiplié par 7,5 donne 15.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "7,5 × 2 = 15 : la baleine est aussi longue que 2 salles de classe. Pour le poids, pense à diviser 30 000 par 40.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "Trouve ta propre comparaison : la baleine pèse comme combien de voitures (environ 1 500 kg chacune) ? Explique ton calcul.",
+      },
+    ],
+  },
+
+  {
+    id: "baleines_souffle_003",
+    title: "Les baleines sont là : le souffle et la plongée",
+    theme: "Durées & calculs de temps",
+    image: "/images/lagon.webp",
+    level: 3,
+    statement:
+      "Depuis le cap, tu observes une baleine. Elle plonge pendant 15 minutes, puis reste 5 minutes en surface pour respirer (c'est là qu'on voit son souffle !). Puis elle recommence : plongée, surface, plongée...",
+    question:
+      "Combien de minutes dure un cycle complet (une plongée + un passage en surface) ? Combien de plongées complètes peux-tu observer en 2 heures ?",
+    expectedAnswer: "20 6",
+    explanation:
+      "Un cycle : 15 + 5 = 20 minutes. Deux heures = 120 minutes. 120 ÷ 20 = 6 cycles, donc 6 plongées complètes. Les observateurs patients sont récompensés : le souffle, la nageoire, et parfois... le saut !",
+    directions: [
+      {
+        id: "cycle",
+        label: "Calculer un cycle",
+        type: "guided",
+        content:
+          "Un cycle = le temps sous l'eau + le temps en surface.\nAdditionne 15 min + 5 min.",
+      },
+      {
+        id: "deux_heures",
+        label: "Convertir 2 heures",
+        type: "guided",
+        content:
+          "Convertis d'abord : 1 heure = 60 minutes.\nDonc 2 heures = ? minutes. Puis divise par la durée d'un cycle.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "120 minutes ÷ 20 minutes par cycle = le nombre de cycles. Chaque cycle contient exactement une plongée.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "La baleine est un mammifère : elle respire de l'air, comme toi. Explique pourquoi elle est obligée de remonter à la surface, avec les durées du défi.",
+      },
+    ],
+  },
+
+  {
+    id: "baleines_proba_004",
+    title: "Les baleines sont là : les verra-t-on aujourd'hui ?",
+    theme: "Probabilités",
+    image: "/images/lagon.webp",
+    level: 3,
+    statement:
+      "Un club de Saint-Gilles note ses 20 dernières sorties en mer de juillet : 14 sorties avec des baleines observées, 4 sorties avec seulement des dauphins, et 2 sorties sans observation. On choisit une sortie au hasard dans le carnet : chacune a la même chance d'être choisie.",
+    question:
+      "Quelle est la probabilité que la sortie choisie soit une sortie avec baleines ? Et une sortie sans observation ? Donne tes réponses sous forme de fractions simplifiées.",
+    expectedAnswer: "7/10 1/10",
+    explanation:
+      "Le total des cas possibles est 20 sorties. Avec baleines : 14 cas favorables sur 20, soit 14/20 = 7/10. Sans observation : 2/20 = 1/10. Une probabilité est toujours comprise entre 0 et 1 : ici 7/10 = 0,7 — c'est probable, mais jamais garanti. La mer ne promet rien : c'est ça qui rend chaque observation magique.",
+    directions: [
+      {
+        id: "cas_possibles",
+        label: "Compter les cas possibles",
+        type: "guided",
+        content:
+          "Une probabilité, c'est : nombre de cas favorables ÷ nombre de cas possibles.\nIci, le nombre de cas possibles est le nombre total de sorties : 20.",
+      },
+      {
+        id: "proba_baleines",
+        label: "Probabilité « baleines »",
+        type: "guided",
+        content:
+          "14 sorties sur 20 ont croisé des baleines.\nÉcris la fraction 14/20, puis simplifie-la (divise le haut et le bas par 2).",
+      },
+      {
+        id: "proba_rien",
+        label: "Probabilité « rien vu »",
+        type: "guided",
+        content:
+          "2 sorties sur 20 n'ont rien observé.\nÉcris la fraction 2/20, puis simplifie-la (divise le haut et le bas par 2).",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "14/20 : divise par 2 en haut et en bas → 7/10. 2/20 : divise par 2 → 1/10. (Et les dauphins seuls : 4/20 = 1/5.)",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "7/10, c'est une probabilité élevée... et pourtant certains repartent sans rien voir. Explique pourquoi une probabilité n'est pas une promesse — tu peux aussi penser à un match de foot pronostiqué gagnant et pourtant perdu.",
+      },
+    ],
+  },
+
+  {
+    id: "baleines_baleineau_005",
+    title: "Les baleines sont là : le baleineau",
+    theme: "Proportionnalité",
+    image: "/images/lagon.webp",
+    level: 3,
+    statement:
+      "Les baleines viennent à La Réunion pour mettre bas dans une eau calme et chaude. Un baleineau boit environ 200 litres de lait par jour, et grossit d'environ 45 kg par jour. Oui, PAR JOUR.",
+    question:
+      "En 3 semaines, combien de litres de lait le baleineau a-t-il bus ? Et combien de kilos a-t-il pris ?",
+    expectedAnswer: "4200 945",
+    explanation:
+      "3 semaines = 3 × 7 = 21 jours. Lait : 21 × 200 = 4 200 litres — l'équivalent d'environ 28 baignoires ! Poids : 21 × 45 = 945 kg pris en trois semaines, soit presque une tonne. C'est le bébé qui grandit le plus vite du monde animal.",
+    directions: [
+      {
+        id: "jours",
+        label: "Convertir les semaines",
+        type: "guided",
+        content:
+          "Commence par convertir : 1 semaine = 7 jours.\nDonc 3 semaines = ? jours.",
+      },
+      {
+        id: "lait",
+        label: "Calculer le lait",
+        type: "guided",
+        content:
+          "200 litres par jour, pendant 21 jours :\ncalcule 21 × 200. (Astuce : 21 × 2 = 42, puis ajoute les deux zéros.)",
+      },
+      {
+        id: "poids",
+        label: "Calculer les kilos",
+        type: "guided",
+        content:
+          "45 kg par jour, pendant 21 jours :\ncalcule 21 × 45. (Astuce : 20 × 45 = 900, puis ajoute 1 × 45.)",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Tout se joue sur les 21 jours : 21 × 200 pour le lait, 21 × 45 pour le poids.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "La maman baleine, elle, ne mange presque rien pendant tout son séjour à La Réunion. Explique pourquoi elle doit faire des réserves en Antarctique avant de partir.",
+      },
+    ],
+  },
+
+  {
+    id: "baleines_saison_006",
+    title: "Les baleines sont là : la saison en chiffres",
+    theme: "Lecture de données & fractions",
+    image: "/images/lagon.webp",
+    level: 4,
+    statement:
+      "Voici le nombre d'observations de baleines relevées au large de La Réunion, mois par mois, pendant une saison : juin : 30, juillet : 90, août : 150, septembre : 120, octobre : 60.",
+    question:
+      "Combien d'observations en tout sur la saison ? Entre juin et juillet, le nombre d'observations est multiplié par combien ? Quelle fraction de la saison représente le mois d'août (fraction simplifiée) ?",
+    expectedAnswer: "450 3 1/3",
+    explanation:
+      "Total : 30 + 90 + 150 + 120 + 60 = 450 observations. De juin à juillet : 90 ÷ 30 = 3, le nombre est multiplié par 3 (la saison démarre fort !). Août : 150/450 = 1/3 — un tiers de toutes les observations de l'année se font en août, le pic de la saison.",
+    directions: [
+      {
+        id: "total",
+        label: "Calculer le total",
+        type: "guided",
+        content:
+          "Additionne les 5 mois : 30 + 90 + 150 + 120 + 60.\n(Astuce : regroupe 30 + 120 = 150, et 90 + 60 = 150.)",
+      },
+      {
+        id: "multiplication",
+        label: "De juin à juillet",
+        type: "guided",
+        content:
+          "On cherche le nombre qui multiplié par 30 donne 90.\nCalcule 90 ÷ 30.",
+      },
+      {
+        id: "fraction_aout",
+        label: "La part du mois d'août",
+        type: "guided",
+        content:
+          "Écris la fraction : observations d'août ÷ total, soit 150/450.\nSimplifie-la (divise le haut et le bas par 150).",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Le total fait 450. 150/450 se simplifie en divisant par 150 : → 1/3.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "D'après ces chiffres, quel est le meilleur mois pour aller guetter les baleines ? Et pourquoi les observations baissent-elles en octobre, à ton avis ?",
+      },
+    ],
+  },
+
+  {
+    id: "baleines_synthese_007",
+    title: "Les baleines sont là : le voyage complet",
+    theme: "Problème multi-étapes",
+    image: "/images/lagon.webp",
+    level: 5,
+    statement:
+      "Suivons une baleine sur toute sa saison. L'aller : 8 000 km depuis l'Antarctique, à 160 km par jour. Le séjour à La Réunion : 90 jours, pendant lesquels son baleineau boit 200 litres de lait par jour. Le retour : 8 000 km aussi, mais à 100 km par jour seulement, car le baleineau nage moins vite.",
+    question:
+      "Combien de jours dure le retour ? Combien de jours dure la saison complète (aller + séjour + retour) ? Combien de litres de lait le baleineau a-t-il bus pendant le séjour ?",
+    expectedAnswer: "80 220 18000",
+    explanation:
+      "Retour : 8 000 ÷ 100 = 80 jours (plus lent que l'aller, qui durait 50 jours : le petit donne le rythme). Saison complète : 50 + 90 + 80 = 220 jours — plus de 7 mois de voyage ! Lait : 90 × 200 = 18 000 litres. Et l'année suivante, tout recommence.",
+    directions: [
+      {
+        id: "retour",
+        label: "Calculer le retour",
+        type: "guided",
+        content:
+          "Durée = distance ÷ vitesse par jour.\nCalcule 8 000 ÷ 100.",
+      },
+      {
+        id: "aller",
+        label: "Retrouver l'aller",
+        type: "guided",
+        content:
+          "L'aller : 8 000 ÷ 160 = 50 jours (c'était le défi de lundi !).\nPuis additionne : aller + séjour + retour.",
+      },
+      {
+        id: "lait",
+        label: "Calculer le lait du séjour",
+        type: "guided",
+        content:
+          "200 litres par jour pendant les 90 jours du séjour :\ncalcule 90 × 200.",
+      },
+      {
+        id: "indice",
+        label: "Demander un indice",
+        type: "hint",
+        content:
+          "Trois réponses : 80 jours de retour, puis 50 + 90 + 80 = 220 jours en tout, et 90 × 200 = 18 000 litres.",
+      },
+      {
+        id: "open",
+        label: "Expliquer avec mes mots",
+        type: "open",
+        content:
+          "220 jours de saison, 16 000 km nagés : raconte le voyage de la baleine avec tes mots, comme un article de journal — avec au moins deux nombres du défi dedans.",
+      },
+    ],
+  },
+
+  // === Semaine passée : Coupe du monde de foot 2026 (48 équipes, USA/Canada/Mexique) ===
   {
     id: "coupe_monde_effectif_001",
     title: "Coupe du monde : le tournoi de quartier",

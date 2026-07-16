@@ -1,44 +1,46 @@
-// lib/defis-du-jour/weekly.ts — défis Coupe du monde de foot 2026
+// lib/defis-du-jour/weekly.ts — défis « Les baleines sont là ! »
+// (hiver austral 2026 : les baleines à bosse sont arrivées à La Réunion —
+// remplace la semaine Coupe du monde, périmée depuis la défaite du 14/07).
 
 export const problemeDuJourWeekly = {
-  id: "coupe-monde-foot-2026-semaine-1",
+  id: "baleines-reunion-2026-semaine-1",
 
-  title: "Défis du jour — Coupe du monde de foot",
+  title: "Défis du jour — Les baleines sont là !",
 
   days: [
     {
       day: 1,
-      problemId: "coupe_monde_effectif_001",
+      problemId: "baleines_voyage_001",
     },
 
     {
       day: 2,
-      problemId: "coupe_monde_pelouse_002",
+      problemId: "baleines_geant_002",
     },
 
     {
       day: 3,
-      problemId: "coupe_monde_proba_003",
+      problemId: "baleines_souffle_003",
     },
 
     {
       day: 4,
-      problemId: "coupe_monde_tirs_004",
+      problemId: "baleines_proba_004",
     },
 
     {
       day: 5,
-      problemId: "coupe_monde_eau_005",
+      problemId: "baleines_baleineau_005",
     },
 
     {
       day: 6,
-      problemId: "coupe_monde_chaleur_006",
+      problemId: "baleines_saison_006",
     },
 
     {
       day: 7,
-      problemId: "coupe_monde_synthese_007",
+      problemId: "baleines_synthese_007",
     },
   ],
 };
