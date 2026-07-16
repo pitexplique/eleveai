@@ -1,8 +1,13 @@
 // app/accueil/page.tsx
 import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
-import AccueilClient, { type AvisPublic, type Apercu974 } from "./AccueilClient";
+import AccueilClient, {
+  type AvisPublic,
+  type Apercu974,
+  type ActionJournal,
+} from "./AccueilClient";
 import { getElevesALHonneur, prenomCourt } from "@/lib/ameliorations/honneurServer";
+import { fetchCatalogue } from "@/lib/server/catalogue";
 import { niveauPublic } from "@/lib/classe";
 
 // Les avis affichés sont rechargés au plus toutes les 5 minutes.
@@ -137,11 +142,39 @@ async function getApercuMaths974(): Promise<Apercu974[]> {
   }
 }
 
+// Le catalogue du journal vient de la table catalogue_actions (source de
+// vérité, la même que /explorer et la reco) : activer/désactiver/réordonner
+// en base suffit, le journal suit. Échec base → le fallback en dur du client.
+async function getCatalogueJournal(): Promise<ActionJournal[]> {
+  try {
+    const actions = await fetchCatalogue();
+    return actions
+      .filter((a) => a.actif)
+      .map((a) => ({
+        id: a.id,
+        famille: a.famille,
+        label: a.label,
+        description: a.description,
+        route: a.route,
+      }));
+  } catch {
+    return [];
+  }
+}
+
 export default async function Page() {
-  const [avis, honneur, apercu974] = await Promise.all([
+  const [avis, honneur, apercu974, catalogue] = await Promise.all([
     getDerniersAvis(),
     getElevesALHonneur(),
     getApercuMaths974(),
+    getCatalogueJournal(),
   ]);
-  return <AccueilClient avis={avis} honneur={honneur} apercu974={apercu974} />;
+  return (
+    <AccueilClient
+      avis={avis}
+      honneur={honneur}
+      apercu974={apercu974}
+      catalogue={catalogue}
+    />
+  );
 }

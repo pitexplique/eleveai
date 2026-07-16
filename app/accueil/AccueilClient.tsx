@@ -184,7 +184,6 @@ const CATALOGUE: { emoji: string; nom: string; ligne: string; href: string }[] =
   { emoji: "🎓", nom: "Éval blanche Pix IA", ligne: "Prépare l'évaluation nationale Pix IA (16 questions).", href: "/eval-pix-ia" },
   { emoji: "🏃", nom: "Le coach Brevet", ligne: "Notion par notion jusqu'au jour J.", href: "/coach-brevet" },
   { emoji: "📋", nom: "Le programme par classe", ligne: "Ce qu'on apprend cette année, noir sur blanc.", href: "/programme/6e" },
-  { emoji: "🔭", nom: "Tout explorer", ligne: "La table des matières complète d'EleveAI.", href: "/explorer" },
 ];
 
 // ─── Le supplément de l'été : les cahiers de vacances ─────────────────────────
@@ -211,6 +210,37 @@ export type AvisPublic = {
   detail: string;
   note: number;
   quote: string;
+};
+
+/** Une action du catalogue (projection minimale de catalogue_actions). */
+export type ActionJournal = {
+  id: string;
+  famille: string;
+  label: string;
+  description: string | null;
+  route: string;
+};
+
+// La table n'a pas de colonne emoji : mapping par id, repli par famille.
+const CATALOGUE_EMOJIS: Record<string, string> = {
+  "coach-maths": "🧮", "coach-francais": "📖", "coach-anglais": "🇬🇧",
+  "coach-espagnol": "🇪🇸", "coach-ia": "🤖", "coach-economie": "📊",
+  "defis-du-jour": "🎯", "calcul-rapide": "⚡", "dictee-du-jour": "✍️",
+  "semaine-verbes": "📅", "dico-maths": "🗣️", "dico-francais": "🗣️",
+  "podcast-maths": "🎧", "fiches-maths": "📚", "fiches-ia": "📚",
+  "livre-ia": "📕", "maths-974": "🌋", "le-bon-prompt": "💬",
+  "picto-maths": "🖼️", "carte-tresor": "🗺️", "eval-pix-ia": "🎓",
+  "grand-oral": "🎤", "concours-ia": "🏆", "concours-general": "🏆",
+  "concours-logo": "🎨", "cahier-vacances": "🏖️", "cahier-maths": "🏖️",
+};
+const FAMILLE_EMOJIS: Record<string, string> = {
+  coach: "🤖", parcours: "🧭", rituel: "📅", reviser: "📚",
+  ouverture: "🌋", evenement: "🏆", cahier: "🏖️",
+};
+const FAMILLE_LABELS: Record<string, string> = {
+  coach: "Le coach", parcours: "Faire le point", rituel: "Chaque jour",
+  reviser: "Réviser", ouverture: "L'île & l'ouverture",
+  evenement: "Événements & concours", cahier: "À imprimer",
 };
 
 export type Apercu974 = {
@@ -493,10 +523,12 @@ export default function AccueilPage({
   avis,
   honneur,
   apercu974,
+  catalogue,
 }: {
   avis?: AvisPublic[];
   honneur?: EleveALHonneur[];
   apercu974?: Apercu974[];
+  catalogue?: ActionJournal[];
 }) {
   const { eleve } = useEleve();
   const derniersAvis = avis && avis.length > 0 ? avis : AVIS_FALLBACK;
@@ -1102,22 +1134,49 @@ export default function AccueilPage({
           Tout pour apprendre — <em className="not-italic underline decoration-emerald-800 decoration-4 underline-offset-4">gratuit</em>
         </TitreRubrique>
         <div className="mt-4 grid gap-px overflow-hidden border border-[#1d1c16]/25 bg-[#1d1c16]/25 sm:grid-cols-2 lg:grid-cols-4">
-          {CATALOGUE.map((c) => (
-            <Link
-              key={c.href}
-              href={c.href}
-              className="group p-4 transition hover:bg-white/60"
-              style={{ backgroundColor: PAPER }}
-            >
-              <p className="text-3xl" aria-hidden>{c.emoji}</p>
-              <h3 className="mt-2 font-serif text-base font-black leading-snug group-hover:underline">
-                {c.nom}
-              </h3>
-              <p className="mt-1 text-xs font-medium leading-5 text-[#1d1c16]/70">
-                {c.ligne}
-              </p>
-            </Link>
-          ))}
+          {(catalogue && catalogue.length > 0
+            ? // La base d'abord : catalogue_actions (actif, trié par ordre).
+              catalogue.map((a) => ({
+                key: a.id,
+                emoji: CATALOGUE_EMOJIS[a.id] ?? FAMILLE_EMOJIS[a.famille] ?? "📌",
+                famille: FAMILLE_LABELS[a.famille] ?? a.famille,
+                nom: a.label,
+                ligne: a.description ?? "",
+                href: getHref(a.route),
+              }))
+            : // Repli si la base ne répond pas : la liste en dur.
+              CATALOGUE.map((c) => ({
+                key: c.href,
+                emoji: c.emoji,
+                famille: null as string | null,
+                nom: c.nom,
+                ligne: c.ligne,
+                href: getHref(c.href),
+              }))
+          )
+            // « Tout explorer » ferme toujours la marche.
+            .concat([{ key: "explorer", emoji: "🔭", famille: null, nom: "Tout explorer", ligne: "La table des matières complète d'EleveAI.", href: "/explorer" }])
+            .map((c) => (
+              <Link
+                key={c.key}
+                href={c.href}
+                className="group p-4 transition hover:bg-white/60"
+                style={{ backgroundColor: PAPER }}
+              >
+                <p className="text-3xl" aria-hidden>{c.emoji}</p>
+                {c.famille && (
+                  <p className="mt-1.5 text-[9px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/50">
+                    {c.famille}
+                  </p>
+                )}
+                <h3 className="mt-1 font-serif text-base font-black leading-snug group-hover:underline">
+                  {c.nom}
+                </h3>
+                <p className="mt-1 text-xs font-medium leading-5 text-[#1d1c16]/70">
+                  {c.ligne}
+                </p>
+              </Link>
+            ))}
         </div>
         <p className="mt-2 text-xs font-medium italic text-[#1d1c16]/60">
           Apprendre est gratuit, et ça le restera. Ce qui se paie : le suivi dans
