@@ -580,15 +580,19 @@ export default function AccueilPage({
             </p>
           </Link>
 
+          {/* La manchette = L'ADRESSE. Le public YouTube tape eleveai.fr à la
+              main : le titre du journal EST l'adresse (elle se grave à chaque
+              visite). « Le Journal » passe en surtitre, la devise du manifeste
+              cède la place à la phrase choc du coach. */}
           <div className="order-1 text-center lg:order-2">
-            <h1 className="font-serif text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl">
-              Le Journal d&apos;EleveAI
-            </h1>
-            <p className="mt-2 font-serif text-base font-black italic tracking-wide text-[#1d1c16]/75 sm:text-lg">
-              — Île de La Réunion —
+            <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[#1d1c16]/65 sm:text-xs">
+              Le Journal · Île de La Réunion
             </p>
-            <p className="mt-1.5 text-xs font-bold uppercase tracking-[0.3em] text-[#1d1c16]/65 sm:text-sm">
-              Fait par les élèves et les profs — pas l&apos;un sans l&apos;autre 🦎
+            <h1 className="mt-1 font-serif text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl">
+              eleveai<span className="text-emerald-900">.fr</span>
+            </h1>
+            <p className="mt-2 font-serif text-base font-black italic tracking-wide text-[#1d1c16]/80 sm:text-lg">
+              « Ici, personne n&apos;apprend à ta place. »
             </p>
           </div>
 
