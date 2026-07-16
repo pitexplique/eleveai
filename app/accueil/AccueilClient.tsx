@@ -32,7 +32,7 @@ import FloatingCoach from "@/components/FloatingCoach";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import AgendaJournal from "@/components/accueil/AgendaJournal";
 import AbonnementJournal from "@/components/accueil/AbonnementJournal";
-import MeteoJour from "@/components/accueil/MeteoJour";
+import ReclameCyclone from "@/components/accueil/ReclameCyclone";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
@@ -884,9 +884,10 @@ export default function AccueilPage({
                 <p className="mt-1.5 text-sm font-black text-emerald-900">Relever le défi →</p>
               </Link>
 
-              {/* La météo de l'île, juste sous le défi (place choisie par
-                  Frédéric) : l'ancre quotidienne en 2e position du fil. */}
-              <MeteoJour />
+              {/* La réclame du simulateur cyclone (les relevés de température
+                  n'intéressaient personne — Frédéric, 17/07). MeteoJour reste
+                  disponible pour la vraie rubrique météo de la rentrée. */}
+              <ReclameCyclone />
 
               <Link href="/dictee-du-jour" className="group block py-3">
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
