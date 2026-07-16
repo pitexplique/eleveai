@@ -4,6 +4,7 @@
 // Mentionne le widget intégrable : chaque lecteur-journaliste est un relais.
 // Pas de "use client" : purement statique, l'animation est en CSS.
 
+import Image from "next/image";
 import Link from "next/link";
 
 export default function ReclameCyclone() {
@@ -16,26 +17,16 @@ export default function ReclameCyclone() {
         href="/simulateur-cyclone"
         className="group mt-1.5 block border-4 border-double border-[#1d1c16] p-3 text-center transition hover:bg-[#1d1c16] hover:text-[#f6f1e4]"
       >
-        {/* La spirale qui tourne (sens horaire — hémisphère sud). */}
-        <svg
-          viewBox="-30 -30 60 60"
-          aria-hidden
-          className="mx-auto h-10 w-10 motion-safe:animate-[spin_2.8s_linear_infinite]"
-        >
-          {[0, 1, 2, 3].map((bras) => {
-            let d = "";
-            for (let i = 0; i <= 14; i++) {
-              const t = i / 14;
-              const ang = (bras * Math.PI) / 2 + t * 2.2;
-              const r = 3 + t * 24;
-              d += (i ? "L" : "M") + (Math.cos(ang) * r).toFixed(1) + "," + (Math.sin(ang) * r).toFixed(1);
-            }
-            return (
-              <path key={bras} d={d} fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" opacity={0.85} />
-            );
-          })}
-          <circle r={2.5} fill="currentColor" />
-        </svg>
+        {/* La carte du simulateur (montrer le produit, pas un décor — la règle
+            éditoriale de Frédéric) : Madagascar, la route, le cyclone en
+            course, l'alerte sur l'île — et les nuages. */}
+        <Image
+          src="/images/cyclone-simulateur-carte.webp"
+          alt="La carte du simulateur : un cyclone en route vers La Réunion"
+          width={1000}
+          height={660}
+          className="w-full border border-[#1d1c16]/25"
+        />
         <p className="mt-1.5 font-serif text-lg font-black leading-tight">
           Dans l&apos;œil du cyclone
         </p>
