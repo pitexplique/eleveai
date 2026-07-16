@@ -391,7 +391,10 @@ function UneCarousel({ slides }: { slides?: SlideUne[] }) {
           </span>
         )}
       </div>
-      <p className="border-t border-[#1d1c16]/25 px-3 py-2 text-xs font-medium italic text-[#1d1c16]/65">
+      {/* La barre sous l'image = le CTA du slide : bien visible (encre pleine),
+          pas une légende grisée (retour Frédéric : « on ne voit pas le titre
+          sous l'image »). */}
+      <p className="bg-[#1d1c16] px-3 py-2.5 text-sm font-black text-[#f6f1e4] transition group-hover:bg-emerald-900">
         {ep.cta}
       </p>
     </>
