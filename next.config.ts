@@ -38,6 +38,14 @@ const nextConfig = {
           permanent: false,
         }),
       ),
+      // Instagram ne donne qu'un lien (la bio) et le public tape l'adresse :
+      // /insta = la porte Instagram, mesurable (lancement du journal, 16/07).
+      {
+        source: "/insta",
+        destination:
+          "/accueil?utm_source=instagram&utm_medium=social&utm_campaign=journal",
+        permanent: false,
+      },
       // Les deux destinations phares à dire dans TOUTES les vidéos.
       {
         source: "/cahier",

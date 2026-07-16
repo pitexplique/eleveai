@@ -8,7 +8,11 @@ const BASE_URL = "https://eleveai.fr";
 
 const u = (path: string) => `${BASE_URL}${path}`;
 
-const LASTMOD_HOME    = new Date("2026-07-01");
+// 15-16/07 : l'accueil devient « Le Journal d'EleveAI » (manchette eleveai.fr,
+// carrousel piloté par la régie, catalogue Supabase, abonnement) — et les
+// défis du jour passent à la semaine « Les baleines sont là ! ».
+const LASTMOD_HOME    = new Date("2026-07-16");
+const LASTMOD_JOURNAL = new Date("2026-07-16");
 const LASTMOD_EXPLORER = new Date("2026-07-02");
 const LASTMOD_CORE    = new Date("2026-06-25");
 const LASTMOD_CAHIERS = new Date("2026-06-29");
@@ -138,7 +142,8 @@ const ROUTES: RouteConfig[] = [
   { path: "/dictee-du-jour",  priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_DICTEE },
   { path: "/calcul-rapide",   priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/english-maths",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
-  { path: "/defis-du-jour",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
+  // Semaine « Les baleines sont là ! » depuis le 16/07 (remplace le foot).
+  { path: "/defis-du-jour",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_JOURNAL },
 
   // ── DICO (vocabulaire & gestes — prépa éval nationale) ─────────────────────
   { path: "/dico",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
@@ -165,6 +170,15 @@ const ROUTES: RouteConfig[] = [
   { path: "/concours-logo",   priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/podcast-maths",   priority: 0.85, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/concours-general",priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/concours-ia",     priority: 0.7,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/le-bon-prompt",   priority: 0.7,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/grand-oral",      priority: 0.7,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+
+  // ── LA COMMUNAUTÉ DU JOURNAL (courrier des lecteurs, honneurs, contributions)
+  // Pages publiques mises en avant par la Une depuis la refonte journal.
+  { path: "/votre-avis",      priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_JOURNAL },
+  { path: "/remerciements",   priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_JOURNAL },
+  { path: "/besoin-de-vous",  priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_JOURNAL },
 
   // ── MATHS RÉEL · 974 ───────────────────────────────────────────────────────
   { path: "/maths-974",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_974 },
