@@ -32,6 +32,7 @@ import FloatingCoach from "@/components/FloatingCoach";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import AgendaJournal from "@/components/accueil/AgendaJournal";
 import AbonnementJournal from "@/components/accueil/AbonnementJournal";
+import MeteoJour from "@/components/accueil/MeteoJour";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
@@ -180,6 +181,7 @@ const CATALOGUE: { emoji: string; nom: string; ligne: string; href: string }[] =
   { emoji: "🖼️", nom: "Picto Maths · 974", ligne: "1 image, 1 question : 25 défis visuels de l'île.", href: "/picto-maths" },
   { emoji: "🗺️", nom: "La carte de l'île", ligne: "Les maths posées sur la carte de La Réunion.", href: "/carte" },
   { emoji: "🌋", nom: "Maths Réel · 974", ligne: "Le carnet de terrain : photos et vidéos, en vrai.", href: "/maths-974" },
+  { emoji: "🌀", nom: "Dans l'œil du cyclone", ligne: "Le simulateur : trace la trajectoire, tiens le vent dans ta main.", href: "/simulateur-cyclone" },
   { emoji: "🗣️", nom: "Le dico mots & gestes", ligne: "Le vocabulaire de l'évaluation nationale 6e.", href: "/dico" },
   { emoji: "🃏", nom: "Qui suis-je ? à imprimer", ligne: "Des jeux de cartes pour réviser en famille.", href: "/qui-suis-je-a-imprimer" },
   { emoji: "🎓", nom: "Éval blanche Pix IA", ligne: "Prépare l'évaluation nationale Pix IA (16 questions).", href: "/eval-pix-ia" },
@@ -244,6 +246,7 @@ const CATALOGUE_EMOJIS: Record<string, string> = {
   "podcast-maths": "🎧", "fiches-maths": "📚", "fiches-ia": "📚",
   "livre-ia": "📕", "maths-974": "🌋", "le-bon-prompt": "💬",
   "picto-maths": "🖼️", "carte-tresor": "🗺️", "eval-pix-ia": "🎓",
+  "simulateur-cyclone": "🌀",
   "grand-oral": "🎤", "concours-ia": "🏆", "concours-general": "🏆",
   "concours-logo": "🎨", "cahier-vacances": "🏖️", "cahier-maths": "🏖️",
 };
@@ -903,6 +906,10 @@ export default function AccueilPage({
                 </h3>
                 <p className="mt-1.5 text-sm font-black text-emerald-900">Chronomètre →</p>
               </Link>
+
+              {/* La météo de l'île (Open-Meteo) + la vigie cyclone — l'ancre
+                  quotidienne d'un vrai journal. Ne rend rien si l'API échoue. */}
+              <MeteoJour />
 
               {jours > 0 && (
                 <Link href="/coach-brevet" className="group block py-3">

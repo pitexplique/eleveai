@@ -38,6 +38,13 @@ const nextConfig = {
           permanent: false,
         }),
       ),
+      // Le simulateur : l'adresse qui se dit à voix haute (radio, vidéos,
+      // quotidiens). Sans UTM : c'est un raccourci d'usage, pas une campagne.
+      {
+        source: "/cyclone",
+        destination: "/simulateur-cyclone",
+        permanent: false,
+      },
       // Instagram ne donne qu'un lien (la bio) et le public tape l'adresse :
       // /insta = la porte Instagram, mesurable (lancement du journal, 16/07).
       {
