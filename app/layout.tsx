@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/next";
 import DevBanner from "@/components/DevBanner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import MasqueSurEmbed from "@/components/MasqueSurEmbed";
 import { EleveProvider } from "@/context/EleveContext";
 import RemerciementsBar from "@/components/remerciements/RemerciementsBar";
 import EcrireAuProf from "@/components/EcrireAuProf";
@@ -170,14 +171,20 @@ export default function RootLayout({
       >
         <EleveProvider>
           <PageViewTracker />
-          <DevBanner />
-          <Header />
+          {/* Les pages /embed/* (widgets pour les médias) vivent sans
+              l'habillage du site — seul le contenu embarqué s'affiche. */}
+          <MasqueSurEmbed>
+            <DevBanner />
+            <Header />
+          </MasqueSurEmbed>
 
           {children}
 
-          <Footer />
-          <RemerciementsBar />
-          <EcrireAuProf />
+          <MasqueSurEmbed>
+            <Footer />
+            <RemerciementsBar />
+            <EcrireAuProf />
+          </MasqueSurEmbed>
         </EleveProvider>
 
         <script

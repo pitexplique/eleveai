@@ -14,7 +14,9 @@
 
 import { useEffect, useRef } from "react";
 
-export default function SimulateurCycloneClient() {
+// embed : version widget (iframe chez les médias de l'île) — même simulateur,
+// mais la marque devient un lien traçé vers eleveai.fr (utm_source=widget).
+export default function SimulateurCycloneClient({ embed = false }: { embed?: boolean }) {
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -727,9 +729,20 @@ export default function SimulateurCycloneClient() {
           <span className="h-2 w-2 flex-none rounded-full bg-[#ffd23f]" />
           Outil pédagogique — en cas d&apos;alerte réelle, suivez Météo-France et la préfecture de La Réunion.
         </span>
-        <span className="ml-auto font-mono">
-          Un jeu du <b className="font-bold text-[#62d6e8]">Journal d&apos;EleveAI</b> 🦎
-        </span>
+        {embed ? (
+          <a
+            href="https://www.eleveai.fr/simulateur-cyclone?utm_source=widget&utm_medium=embed&utm_campaign=cyclone"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-auto font-mono underline decoration-[#62d6e8]/50 underline-offset-2 hover:text-[#e8f1f6]"
+          >
+            Un jeu du <b className="font-bold text-[#62d6e8]">Journal d&apos;EleveAI</b> 🦎 — eleveai.fr
+          </a>
+        ) : (
+          <span className="ml-auto font-mono">
+            Un jeu du <b className="font-bold text-[#62d6e8]">Journal d&apos;EleveAI</b> 🦎
+          </span>
+        )}
       </footer>
     </div>
   );
