@@ -933,7 +933,7 @@ export default function AccueilPage({
                 « encre de journal » lui donnait un air de nécrologie — retiré
                 sur retour de Frédéric). Photo un peu plus grande. */}
             <Image
-              src="/images/avatar-frederic-Lacoste.jpg"
+              src="/images/avatar-frederic-visage.webp"
               alt="Frédéric Lacoste"
               width={72}
               height={72}

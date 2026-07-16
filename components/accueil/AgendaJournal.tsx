@@ -124,7 +124,7 @@ export default function AgendaJournal() {
 
           <div className="flex items-start gap-3">
             <Image
-              src="/images/avatar-frederic-Lacoste.jpg"
+              src="/images/avatar-frederic-visage.webp"
               alt="Frédéric Lacoste, professeur de maths et fondateur d'EleveAI"
               width={64}
               height={64}
