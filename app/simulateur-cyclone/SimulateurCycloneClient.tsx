@@ -117,6 +117,21 @@ export default function SimulateurCycloneClient({ embed = false }: { embed?: boo
     ile(57.55, -20.3, 5, "Maurice", -12);
     ile(63.42, -19.7, 4, "Rodrigues", -10);
 
+    // La baleine de saison (hiver austral) : sur la route de migration, au
+    // sud de l'île — clin d'œil à la semaine des défis (demande de Frédéric).
+    const bx = toX(54.6), by = toY(-23.2);
+    const baleine = el("g", { transform: `translate(${bx},${by})`, opacity: 0.75 }, fond);
+    el("path", {
+      d: "M-16,0 C-10,-7 4,-8 10,-3 C13,-1 12,2 9,3 C2,6 -8,6 -16,0 Z",
+      fill: "rgba(232,244,250,0.85)",
+    }, baleine);
+    el("path", { d: "M-16,0 C-20,-3 -23,-8 -21,-12 C-18,-8 -16,-4 -14,-2 Z", fill: "rgba(232,244,250,0.85)" }, baleine);
+    el("path", { d: "M-21,-12 C-25,-15 -26,-18 -24,-20 L-19,-14 Z", fill: "rgba(232,244,250,0.85)" }, baleine);
+    // Le souffle
+    el("circle", { cx: 9, cy: -8, r: 1.4, fill: "rgba(232,244,250,0.7)" }, baleine);
+    el("circle", { cx: 11, cy: -11, r: 1.1, fill: "rgba(232,244,250,0.6)" }, baleine);
+    el("text", { x: 0, y: 16, fill: "#9db4c2", "font-size": 8.5, "text-anchor": "middle", opacity: 0.8 }, baleine).textContent = "saison des baleines";
+
     const halo = el("circle", {
       cx: toX(REUNION.lon), cy: toY(REUNION.lat), r: 16,
       fill: "none", stroke: "transparent", "stroke-width": 3, opacity: 0.9,
