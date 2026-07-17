@@ -148,7 +148,7 @@ export const problemesFixed: ProblemeDuJour[] = [
     image: "/images/defis-du-jour/baleine-saut.webp",
     level: 3,
     statement:
-      "Un club de Saint-Gilles note ses 20 dernières sorties en mer de juillet : 14 sorties avec des baleines observées, 4 sorties avec seulement des dauphins, et 2 sorties sans observation. On choisit une sortie au hasard dans le carnet : chacune a la même chance d'être choisie.",
+      "Fin juillet, le port de Saint-Gilles accueille les Rendez-vous des Baleines : stands, sensibilisation et balades en mer. Pour préparer l'événement, un club note ses 20 dernières sorties : 14 sorties avec des baleines observées, 4 sorties avec seulement des dauphins, et 2 sorties sans observation. On choisit une sortie au hasard dans le carnet : chacune a la même chance d'être choisie.",
     question:
       "Quelle est la probabilité que la sortie choisie soit une sortie avec baleines ? Et une sortie sans observation ? Donne tes réponses sous forme de fractions simplifiées.",
     expectedAnswer: "7/10 1/10",
@@ -292,7 +292,7 @@ export const problemesFixed: ProblemeDuJour[] = [
         label: "Expliquer avec mes mots",
         type: "open",
         content:
-          "D'après ces chiffres, quel est le meilleur mois pour aller guetter les baleines ? Et pourquoi les observations baissent-elles en octobre, à ton avis ?",
+          "Les Rendez-vous des Baleines ont lieu fin juillet au port de Saint-Gilles : d'après ces chiffres, est-ce une bonne date ? Et pourquoi les observations baissent-elles en octobre, à ton avis ?",
       },
     ],
   },
