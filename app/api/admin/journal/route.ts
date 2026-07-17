@@ -8,8 +8,16 @@
 
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 import { createClient } from "@supabase/supabase-js";
 import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
+
+// Chaque mutation de la régie régénère la Une IMMÉDIATEMENT (sinon le cache
+// de 5 min fait croire que rien n'a changé — vécu trois fois le 17/07).
+function republierLaUne() {
+  revalidatePath("/accueil");
+  revalidatePath("/");
+}
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -91,6 +99,7 @@ export async function POST(req: Request) {
   if (error) {
     return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
   }
+  republierLaUne();
   return NextResponse.json({ ok: true, item: data });
 }
 
@@ -137,6 +146,7 @@ export async function PATCH(req: Request) {
   if (error) {
     return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
   }
+  republierLaUne();
   return NextResponse.json({ ok: true, item: data });
 }
 
@@ -153,5 +163,6 @@ export async function DELETE(req: Request) {
   if (error) {
     return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
   }
+  republierLaUne();
   return NextResponse.json({ ok: true });
 }
