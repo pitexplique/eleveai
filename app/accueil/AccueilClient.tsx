@@ -26,6 +26,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
 import { problemesFixed } from "@/lib/defis-du-jour/problemes.fixed";
+import { chiffreDuJour } from "@/lib/chiffre-du-jour";
 import { problemeDuJourWeekly } from "@/lib/defis-du-jour/weekly";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
@@ -980,6 +981,22 @@ export default function AccueilPage({
               <span className="whitespace-nowrap">— Frédéric Lacoste,</span>{" "}
               <span className="whitespace-nowrap">professeur d&apos;élèves</span>
             </p>
+
+            {/* LE CHIFFRE DU JOUR — la chose à LIRE chaque matin (30 secondes,
+                un chiffre vrai, trois lignes). Rotation quotidienne sur la
+                banque lib/chiffre-du-jour.ts. Place choisie par Frédéric :
+                sous l'édito, ça rééquilibre la colonne. */}
+            <div className="mt-4 border-2 border-[#1d1c16] p-3">
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                🔢 Le chiffre du jour
+              </p>
+              <p className="mt-1 font-serif text-2xl font-black leading-none">
+                {chiffreDuJour().chiffre}
+              </p>
+              <p className="mt-1.5 text-sm font-medium leading-6 text-[#1d1c16]/80">
+                {chiffreDuJour().texte}
+              </p>
+            </div>
           </aside>
         </div>
       </section>
