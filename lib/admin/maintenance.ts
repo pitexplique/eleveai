@@ -37,8 +37,9 @@ export const MAINTENANCE_QUOTIDIEN: TacheMaintenance[] = [
   },
   {
     id: "accueil",
-    label: "Jeter un œil à l'accueil",
-    detail: "Rien de cassé, bannières et « ta journée » OK.",
+    label: "La Une du matin (le rituel du rédac' chef)",
+    detail:
+      "Avec le café : le chiffre du jour, le carrousel, la réclame — rien de périmé, rien de cassé. 5 minutes.",
     href: "/accueil",
   },
   {
@@ -50,6 +51,41 @@ export const MAINTENANCE_QUOTIDIEN: TacheMaintenance[] = [
 
 // ── À vérifier CHAQUE SEMAINE (se recoche à zéro le lundi) ─────────────────────
 export const MAINTENANCE_HEBDO: TacheMaintenance[] = [
+  // — Le bouclage du rédacteur en chef (le journal) —
+  {
+    id: "regie-bouclage",
+    label: "Le bouclage de la régie (la Une de la semaine)",
+    detail:
+      "Réordonner les slides, masquer le périmé : un événement passé (ex. Rendez-vous des Baleines après le 26/07), un « merci » qui a fait son temps. Publication immédiate.",
+    href: "/admin/journal",
+  },
+  {
+    id: "honneur-rotation",
+    label: "Faire tourner les prénoms à l'honneur",
+    detail:
+      "Les 3 mis à l'honneur de la semaine (idée, bug, détail) — la liste est en code (lib/ameliorations/aLHonneur.ts) : donner les nouveaux prénoms à l'assistant.",
+  },
+  {
+    id: "newsletter-dossier",
+    label: "Envoyer le dossier de la semaine",
+    detail:
+      "La newsletter aux abonnés du coupon : l'épisode + le défi + une nouveauté. Test à soi-même d'abord, puis envoi.",
+    href: "/admin/newsletter",
+  },
+  {
+    id: "instagram-posts",
+    label: "Programmer 2-3 posts Instagram",
+    detail:
+      "Le chiffre du jour, le défi, la Une en visuel — lien de bio : eleveai.fr/insta (mesurable dans l'onglet UTM de Vercel).",
+  },
+  {
+    id: "edito-fraicheur",
+    label: "L'édito est-il encore juste ?",
+    detail:
+      "Relire « Pourquoi ce journal » : toujours vrai, toujours à jour ? Le rafraîchir quand il vieillit.",
+    href: "/accueil",
+  },
+  // — La maintenance générale —
   {
     id: "contenu-saisonnier",
     label: "Fraîcheur des contenus saisonniers",
