@@ -12,12 +12,30 @@
 // Météo-France et la préfecture » — jamais confondable avec la prévision
 // officielle (c'est aussi la protection d'EleveAI).
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // embed : version widget (iframe chez les médias de l'île) — même simulateur,
 // mais la marque devient un lien traçé vers eleveai.fr (utm_source=widget).
 export default function SimulateurCycloneClient({ embed = false }: { embed?: boolean }) {
   const rootRef = useRef<HTMLDivElement>(null);
+
+  // MODE CLASSE (vidéoprojecteur) : tout le pupitre grossit — demande de
+  // Frédéric pour montrer le simulateur en classe. Mémorisé (localStorage),
+  // partagé avec l'usine à sucre. Lu après montage (pas au SSR).
+  const [modeClasse, setModeClasse] = useState(false);
+  useEffect(() => {
+    try {
+      setModeClasse(localStorage.getItem("eleveai-mode-classe") === "1");
+    } catch {}
+  }, []);
+  const basculerModeClasse = () => {
+    setModeClasse((v) => {
+      try {
+        localStorage.setItem("eleveai-mode-classe", v ? "0" : "1");
+      } catch {}
+      return !v;
+    });
+  };
 
   useEffect(() => {
     const root = rootRef.current;
@@ -613,7 +631,19 @@ export default function SimulateurCycloneClient({ embed = false }: { embed?: boo
         <span className="font-serif text-sm italic text-[#9db4c2]">
           Tiens le vent dans ta main — le simulateur d&apos;eleveai.fr
         </span>
-        <span className="ml-auto rounded-sm bg-[#62d6e8] px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-[#071825]">
+        <button
+          type="button"
+          onClick={basculerModeClasse}
+          aria-pressed={modeClasse}
+          className={`ml-auto rounded-sm border px-2.5 py-1 font-mono text-[11px] font-bold tracking-wider transition ${
+            modeClasse
+              ? "border-[#62d6e8] bg-[#62d6e8] text-[#071825]"
+              : "border-[#62d6e8]/40 bg-transparent text-[#62d6e8] hover:bg-[#62d6e8]/15"
+          }`}
+        >
+          🖥️ MODE CLASSE {modeClasse ? "✓" : ""}
+        </button>
+        <span className="rounded-sm bg-[#62d6e8] px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-[#071825]">
           BÊTA
         </span>
       </header>
@@ -622,14 +652,19 @@ export default function SimulateurCycloneClient({ embed = false }: { embed?: boo
         {/* La carte */}
         <div className="relative min-h-[380px] bg-[#0c2438]">
           <svg id="simcy-carte" viewBox="0 0 1000 660" className="block h-full min-h-[380px] w-full cursor-crosshair" aria-label="Carte du bassin sud-ouest de l'océan Indien" />
-          <div id="simcy-hint" className="pointer-events-none absolute left-1/2 top-3.5 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#62d6e8]/35 bg-[#071825]/90 px-3.5 py-1.5 text-[13px]">
+          <div id="simcy-hint" className={`pointer-events-none absolute left-1/2 top-3.5 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#62d6e8]/35 bg-[#071825]/90 px-3.5 py-1.5 ${modeClasse ? "text-lg" : "text-[13px]"}`}>
             Clique sur l&apos;océan pour poser ton cyclone 🌀
           </div>
         </div>
 
         {/* Le pupitre — COMPACT : il tient dans une hauteur d'écran (retour
             Frédéric) ; overflow-y-auto en filet de sécurité sur petits écrans. */}
-        <aside className="flex flex-col gap-2 overflow-y-auto border-t border-[#123049] bg-[#0e2233] p-3 lg:min-h-0 lg:border-l lg:border-t-0">
+        <aside
+          className="flex flex-col gap-2 overflow-y-auto border-t border-[#123049] bg-[#0e2233] p-3 lg:min-h-0 lg:border-l lg:border-t-0"
+          // Mode classe : zoom du pupitre pour le vidéoprojecteur (le
+          // défilement interne prend le relais si ça dépasse).
+          style={modeClasse ? ({ zoom: 1.35 } as React.CSSProperties) : undefined}
+        >
           <div className="flex flex-col gap-1">
             {[
               [1, "Pose le cyclone — clique sur l'océan"],

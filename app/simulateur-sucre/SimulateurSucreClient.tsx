@@ -13,7 +13,7 @@
 //   une famille ~10 kWh/jour · un morceau de sucre ~6 g
 //   terrain de foot : 7 140 m² (105 × 68 — le même que le défi du jour)
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const RENDEMENT_CHAMP = 10; // kg de canne par m²
@@ -174,6 +174,23 @@ export default function SimulateurSucreClient() {
   // d'usine (8 000 t).
   const [tonnes, setTonnes] = useState(300);
 
+  // MODE CLASSE (vidéoprojecteur) : tout grossit — mémorisé, partagé avec le
+  // simulateur cyclone (même clé localStorage).
+  const [modeClasse, setModeClasse] = useState(false);
+  useEffect(() => {
+    try {
+      setModeClasse(localStorage.getItem("eleveai-mode-classe") === "1");
+    } catch {}
+  }, []);
+  const basculerModeClasse = () => {
+    setModeClasse((v) => {
+      try {
+        localStorage.setItem("eleveai-mode-classe", v ? "0" : "1");
+      } catch {}
+      return !v;
+    });
+  };
+
   const jus = tonnes * PART_JUS;
   const bagasse = tonnes * PART_BAGASSE;
   const sucre = tonnes * PART_SUCRE;
@@ -195,12 +212,27 @@ export default function SimulateurSucreClient() {
         <span className="font-serif text-sm italic text-[#c9a86c]">
           Du champ au sucre — et à la lumière
         </span>
-        <span className="ml-auto rounded-sm bg-[#f2a93b] px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-[#160d04]">
+        <button
+          type="button"
+          onClick={basculerModeClasse}
+          aria-pressed={modeClasse}
+          className={`ml-auto rounded-sm border px-2.5 py-1 font-mono text-[11px] font-bold tracking-wider transition ${
+            modeClasse
+              ? "border-[#f2a93b] bg-[#f2a93b] text-[#160d04]"
+              : "border-[#f2a93b]/40 bg-transparent text-[#f2a93b] hover:bg-[#f2a93b]/15"
+          }`}
+        >
+          🖥️ MODE CLASSE {modeClasse ? "✓" : ""}
+        </button>
+        <span className="rounded-sm bg-[#f2a93b] px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-[#160d04]">
           CAMPAGNE SUCRIÈRE
         </span>
       </header>
 
-      <main className="mx-auto max-w-5xl px-4 py-5 sm:px-6">
+      <main
+        className="mx-auto max-w-5xl px-4 py-5 sm:px-6"
+        style={modeClasse ? ({ zoom: 1.35 } as React.CSSProperties) : undefined}
+      >
         {/* La commande : le tonnage du jour */}
         <div className="rounded border border-[#3a2a14] bg-[#241708] p-4">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
