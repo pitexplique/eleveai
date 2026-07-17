@@ -418,9 +418,9 @@ function UneCarousel({ slides }: { slides?: SlideUne[] }) {
           {ep.accroche}
         </p>
       )}
-      <p className="mt-2 text-xs font-bold uppercase tracking-[0.14em] text-[#1d1c16]/55">
-        Par la rédaction — avec les élèves de La Réunion
-      </p>
+      {/* Pas de signature « avec les élèves » tant que ce n'est pas VRAI
+          (retour Frédéric 17/07) : l'authenticité d'abord — la mention
+          reviendra le jour où des élèves signeront réellement la Une. */}
 
       <div className="relative mt-4">
         {externe ? (
