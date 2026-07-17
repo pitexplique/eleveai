@@ -34,6 +34,7 @@ import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import AgendaJournal from "@/components/accueil/AgendaJournal";
 import AbonnementJournal from "@/components/accueil/AbonnementJournal";
 import ReclameCyclone from "@/components/accueil/ReclameCyclone";
+import ReclameUsine from "@/components/accueil/ReclameUsine";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
@@ -892,6 +893,10 @@ export default function AccueilPage({
                   disponible pour la vraie rubrique météo de la rentrée. */}
               <ReclameCyclone />
 
+              {/* L'usine, juste sous le cyclone : les deux machines
+                  « dans ta main » l'une sous l'autre (demande de Frédéric). */}
+              <ReclameUsine />
+
               <Link href="/dictee-du-jour" className="group block py-3">
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                   ✍️ La dictée du jour
@@ -952,26 +957,20 @@ export default function AccueilPage({
             </h3>
             <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
               Je suis professeur de mathématiques à La Réunion. Ce journal est
-              né dans ma classe, d&apos;un constat simple : on apprend mieux
-              quand on nous parle de ce qu&apos;on a{" "}
+              né dans ma classe : on apprend mieux avec ce qu&apos;on a{" "}
               <strong className="font-black">sous les yeux</strong> — la pluie,
               la canne, les baleines, le volcan.
-            </p>
-            <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
-              Alors chaque matin, ce journal raconte l&apos;île avec de vraies
-              maths dedans. Un défi par jour, une dictée, un coach qui explique
-              sans jamais faire à ta place.{" "}
-              <strong className="font-black">Gratuit, sans publicité, sans jugement.</strong>
             </p>
             <details className="mt-1">
               <summary className="cursor-pointer list-none text-xs font-black text-emerald-900 underline underline-offset-2">
                 Lire la suite ▾
               </summary>
               <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
-                Et il est écrit <strong className="font-black">avec mes élèves</strong>{" "}
-                — leurs idées, leurs avis, même leurs fautes d&apos;orthographe,
-                qu&apos;on garde parce qu&apos;elles sont vraies. Le cours est
-                fait par les élèves et les profs. Pas l&apos;un sans l&apos;autre.
+                Chaque matin : un défi, une dictée, un coach qui explique sans
+                faire à ta place.{" "}
+                <strong className="font-black">Gratuit, sans publicité, sans jugement.</strong>{" "}
+                Et écrit avec mes élèves — leurs idées, leurs avis, même leurs
+                fautes, qu&apos;on garde parce qu&apos;elles sont vraies.
               </p>
               <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
                 Bienvenue. Ici, tu es chez toi.
