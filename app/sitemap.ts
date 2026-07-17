@@ -184,6 +184,8 @@ const ROUTES: RouteConfig[] = [
   { path: "/maths-974",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_974 },
   // Le simulateur cyclone (16/07) — montera en priorité à la saison cyclonique.
   { path: "/simulateur-cyclone", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_JOURNAL },
+  // L'usine à sucre (17/07) — lancé pendant la campagne sucrière.
+  { path: "/simulateur-sucre", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JOURNAL },
   { path: "/picto-maths",     priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/carte",           priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/cahier-vacances/maths", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_974 },

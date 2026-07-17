@@ -45,6 +45,11 @@ const nextConfig = {
         destination: "/simulateur-cyclone",
         permanent: false,
       },
+      {
+        source: "/sucre",
+        destination: "/simulateur-sucre",
+        permanent: false,
+      },
       // Instagram ne donne qu'un lien (la bio) et le public tape l'adresse :
       // /insta = la porte Instagram, mesurable (lancement du journal, 16/07).
       {

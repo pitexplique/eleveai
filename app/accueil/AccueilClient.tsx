@@ -183,6 +183,7 @@ const CATALOGUE: { emoji: string; nom: string; ligne: string; href: string }[] =
   { emoji: "🗺️", nom: "La carte de l'île", ligne: "Les maths posées sur la carte de La Réunion.", href: "/carte" },
   { emoji: "🌋", nom: "Maths Réel · 974", ligne: "Le carnet de terrain : photos et vidéos, en vrai.", href: "/maths-974" },
   { emoji: "🌀", nom: "Dans l'œil du cyclone", ligne: "Le simulateur : trace la trajectoire, tiens le vent dans ta main.", href: "/simulateur-cyclone" },
+  { emoji: "🏭", nom: "L'usine dans ta main", ligne: "La sucrerie simulée : règle la canne, récolte le sucre et la lumière.", href: "/simulateur-sucre" },
   { emoji: "🗣️", nom: "Le dico mots & gestes", ligne: "Le vocabulaire de l'évaluation nationale 6e.", href: "/dico" },
   { emoji: "🃏", nom: "Qui suis-je ? à imprimer", ligne: "Des jeux de cartes pour réviser en famille.", href: "/qui-suis-je-a-imprimer" },
   { emoji: "🎓", nom: "Éval blanche Pix IA", ligne: "Prépare l'évaluation nationale Pix IA (16 questions).", href: "/eval-pix-ia" },
@@ -248,6 +249,7 @@ const CATALOGUE_EMOJIS: Record<string, string> = {
   "livre-ia": "📕", "maths-974": "🌋", "le-bon-prompt": "💬",
   "picto-maths": "🖼️", "carte-tresor": "🗺️", "eval-pix-ia": "🎓",
   "simulateur-cyclone": "🌀",
+  "simulateur-sucre": "🏭",
   "grand-oral": "🎤", "concours-ia": "🏆", "concours-general": "🏆",
   "concours-logo": "🎨", "cahier-vacances": "🏖️", "cahier-maths": "🏖️",
 };
