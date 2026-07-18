@@ -175,11 +175,16 @@ async function getSlidesUne(): Promise<SlideUne[]> {
     const supabase = createClient(url, key);
     const { data, error } = await supabase
       .from("journal_une")
-      .select("id, kicker, titre, accroche, youtube_id, image_url, lien, cta, defi")
+      .select("id, kicker, titre, accroche, youtube_id, image_url, lien, cta, defi, created_at")
       .eq("actif", true)
       .order("ordre", { ascending: true });
 
     if (error || !data) return [];
+    // « Paru aujourd'hui » = créé aujourd'hui À LA RÉUNION (UTC+4), pas en UTC
+    // serveur : à 22 h heure de l'île, un slide du matin est encore « du jour ».
+    const jourReunion = (d: string | Date) =>
+      new Date(d).toLocaleDateString("fr-FR", { timeZone: "Indian/Reunion" });
+    const aujourdhui = jourReunion(new Date());
     return data.map((s) => ({
       id: String(s.id),
       kicker: s.kicker ?? "Réfléchir · En vrai, à La Réunion",
@@ -190,6 +195,7 @@ async function getSlidesUne(): Promise<SlideUne[]> {
       lien: s.lien,
       cta: s.cta ?? "Lire →",
       defi: s.defi,
+      nouveau: s.created_at ? jourReunion(s.created_at) === aujourdhui : false,
     }));
   } catch {
     return [];

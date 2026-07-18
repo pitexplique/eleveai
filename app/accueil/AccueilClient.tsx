@@ -229,6 +229,8 @@ export type SlideUne = {
   lien: string;
   cta: string;
   defi: string | null;
+  /** Créé aujourd'hui (heure Réunion) → pastille « paru aujourd'hui ». */
+  nouveau?: boolean;
 };
 
 /** Une action du catalogue (projection minimale de catalogue_actions). */
@@ -339,6 +341,22 @@ function TitreRubrique({ children }: { children: React.ReactNode }) {
 // Les slides viennent de la table journal_une (éditée dans /admin/journal par
 // le rédacteur en chef) ; repli sur les 6 épisodes en dur si la base est vide.
 // Auto 8 s, flèches ‹ › et points, pause au survol.
+// La pastille « aujourd'hui » : un point qui bat + le mot. C'est LE signal
+// que la page a changé depuis hier (objectif de Frédéric, 18/07 : le lecteur
+// doit VOIR que ça bouge chaque jour) — posée sur ce qui est vraiment frais :
+// le slide paru le jour même, le défi, la dictée.
+function PastilleJour({ label = "aujourd'hui" }: { label?: string }) {
+  return (
+    <span className="inline-flex translate-y-[-1px] items-center gap-1.5 rounded-sm bg-red-700 px-1.5 py-0.5 align-middle text-[9px] font-black uppercase tracking-[0.14em] text-white">
+      <span aria-hidden className="relative flex h-1.5 w-1.5">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/70" />
+        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />
+      </span>
+      {label}
+    </span>
+  );
+}
+
 function UneCarousel({ slides }: { slides?: SlideUne[] }) {
   const items = useMemo<SlideUne[]>(() => {
     if (slides && slides.length > 0) return slides;
@@ -414,6 +432,12 @@ function UneCarousel({ slides }: { slides?: SlideUne[] }) {
     <div onMouseEnter={() => setPause(true)} onMouseLeave={() => setPause(false)}>
       <p className="scroll-mt-24 text-[11px] font-black uppercase tracking-[0.22em] text-emerald-900">
         {ep.kicker}
+        {ep.nouveau && (
+          <>
+            {" "}
+            <PastilleJour label="paru aujourd'hui" />
+          </>
+        )}
       </p>
       <h2 className="mt-2 font-serif text-3xl font-black leading-tight sm:text-4xl lg:text-[2.6rem]">
         {ep.titre}
@@ -732,7 +756,7 @@ export default function AccueilPage({
             className="group order-3 border-2 border-[#1d1c16] p-3 text-center transition hover:bg-[#1d1c16] hover:text-[#f6f1e4]"
           >
             <p className="text-[10px] font-black uppercase tracking-[0.18em]">
-              ✍️ La dictée du jour
+              ✍️ La dictée du jour <PastilleJour label="5 nouveaux mots" />
             </p>
             <p className="mt-1 font-serif text-lg font-black leading-tight">
               5 mots sans faute, chaque matin
@@ -926,7 +950,8 @@ export default function AccueilPage({
             <div className="mt-2 divide-y divide-[#1d1c16]/20">
               <Link href="/defis-du-jour" className="group block py-3">
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-                  🎯 Le défi du jour · {defiDuJour.defi.theme}
+                  🎯 Le défi du jour · {defiDuJour.defi.theme}{" "}
+                  <PastilleJour />
                 </p>
                 <div className="relative mt-2 aspect-[16/7] w-full overflow-hidden border border-[#1d1c16]/20">
                   <Image
@@ -1048,7 +1073,7 @@ export default function AccueilPage({
                 sous l'édito, ça rééquilibre la colonne. */}
             <div className="mt-4 border-2 border-[#1d1c16] p-3">
               <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-                🔢 Le chiffre du jour
+                🔢 Le chiffre du jour <PastilleJour />
               </p>
               <p className="mt-1 font-serif text-2xl font-black leading-none">
                 {chiffreDuJour().chiffre}
