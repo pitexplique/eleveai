@@ -792,30 +792,51 @@ export default function AccueilPage({
             ))}
           </div>
           {classeDepliee && (
-            <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-sm font-black">
-              <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
-                {CLASSES_ENTREE.find((c) => c.slug === classeDepliee)?.label} :
-              </span>
-              <Link href={`/coach-ia/maths?classe=${classeDepliee}`} className="text-emerald-900 underline underline-offset-2 hover:no-underline">
-                🧮 Maths
-              </Link>
-              {FRANCAIS_LEVELS.has(classeDepliee) && (
-                <Link href={`/coach-ia/francais?classe=${classeDepliee}`} className="text-emerald-900 underline underline-offset-2 hover:no-underline">
-                  📖 Français
+            <div className="mx-auto mt-2 max-w-2xl space-y-1.5 text-sm font-black">
+              {/* S'entraîner : les coachs de la classe. */}
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+                <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
+                  ✏️ S&apos;entraîner :
+                </span>
+                <Link href={`/coach-ia/maths?classe=${classeDepliee}`} className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                  🧮 Maths
                 </Link>
-              )}
-              <Link href="/coach-ia/english-maths" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
-                🇬🇧 Anglais
-              </Link>
-              <Link href="/coach-ia/espagnol" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
-                🇪🇸 Espagnol
-              </Link>
-              <Link href="/parcours" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
-                🧭 Teste ton niveau
-              </Link>
-              <Link href={`/programme/${classeDepliee}`} className="text-[#1d1c16]/70 underline underline-offset-2 hover:no-underline">
-                📋 Le programme
-              </Link>
+                {FRANCAIS_LEVELS.has(classeDepliee) && (
+                  <Link href={`/coach-ia/francais?classe=${classeDepliee}`} className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                    📖 Français
+                  </Link>
+                )}
+                <Link href="/coach-ia/english-maths" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                  🇬🇧 Anglais
+                </Link>
+                <Link href="/coach-ia/espagnol" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                  🇪🇸 Espagnol
+                </Link>
+              </div>
+              {/* Faire le point : LE parcours de chaque matière (rappel de
+                  Frédéric : il y en a un par matière, pas un seul). */}
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+                <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
+                  🧭 Faire le point :
+                </span>
+                <Link href="/parcours" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                  🧮 Maths
+                </Link>
+                {FRANCAIS_LEVELS.has(classeDepliee) && (
+                  <Link href="/parcours-francais" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                    📖 Français
+                  </Link>
+                )}
+                <Link href="/parcours-english-maths" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                  🇬🇧 Anglais
+                </Link>
+                <Link href="/parcours-espagnol" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                  🇪🇸 Espagnol
+                </Link>
+                <Link href={`/programme/${classeDepliee}`} className="text-[#1d1c16]/70 underline underline-offset-2 hover:no-underline">
+                  📋 Le programme
+                </Link>
+              </div>
             </div>
           )}
         </div>
