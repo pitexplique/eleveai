@@ -14,26 +14,30 @@ import { niveauPublic } from "@/lib/classe";
 // Les avis affichés sont rechargés au plus toutes les 5 minutes.
 export const revalidate = 300;
 
+// 18/07 : « il faut mettre en avant qu'on est différent » (Frédéric) — le
+// titre disait encore « plateforme d'apprentissage avec coach IA », le
+// langage de tout le monde. On dit désormais ce qu'on est vraiment : le
+// journal pédagogique de La Réunion, où personne n'apprend à ta place.
 export const metadata: Metadata = {
-  title: "EleveAI - Plateforme d'apprentissage avec coach IA",
+  title: "EleveAI — Le journal pour apprendre · La Réunion",
   description:
-    "EleveAI aide les élèves à comprendre, s'entraîner et progresser avec un coach IA encadré, des parcours, des défis, des leçons et des corrections qui ne font pas à leur place.",
+    "Pas une plateforme de plus : un journal pédagogique gratuit, né dans une classe de La Réunion. Un coach IA qui explique sans jamais faire à ta place, un défi et une dictée chaque matin, les machines de l'île dans ta main (cyclone, sucrerie, fromagerie) — maths, français, anglais, espagnol et IA, du CP à la Terminale.",
   keywords: [
+    "journal pédagogique",
+    "la réunion",
     "maths collège",
-    "français cycle 2",
-    "english maths",
-    "verbes anglais maths",
-    "leçon du jour",
+    "coach IA élève",
+    "défi du jour",
+    "dictée du jour",
+    "simulateur pédagogique",
     "révision maths",
     "révision français",
-    "application éducative",
     "eleveai",
-    "entraînement quotidien",
   ],
   openGraph: {
-    title: "EleveAI - Plateforme d'apprentissage avec coach IA",
+    title: "EleveAI — Le journal pour apprendre · La Réunion",
     description:
-      "Comprends, entraîne-toi et progresse avec EleveAI : coach IA encadré, parcours guidés, défis, leçons et corrections sans faire à ta place.",
+      "Le journal pédagogique gratuit né dans une classe de La Réunion : un coach qui explique sans faire à ta place, un défi chaque matin, les machines de l'île dans ta main. Ici, personne n'apprend à ta place.",
     url: "https://eleveai.fr",
     siteName: "EleveAI",
     images: [
@@ -41,7 +45,7 @@ export const metadata: Metadata = {
         url: "/images/accueil-eleveai-reunion.webp",
         width: 1680,
         height: 945,
-        alt: "EleveAI - Plateforme d'apprentissage avec coach IA",
+        alt: "EleveAI — Le journal pour apprendre, né à La Réunion",
       },
     ],
     locale: "fr_FR",

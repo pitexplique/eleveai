@@ -34,7 +34,7 @@ import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import AgendaJournal from "@/components/accueil/AgendaJournal";
 import AbonnementJournal from "@/components/accueil/AbonnementJournal";
 import ReclameFromagerie from "@/components/accueil/ReclameFromagerie";
-import { callsAVenir, formatDateCall } from "@/lib/calls";
+import { motsDeLaClasse } from "@/lib/dico";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
@@ -1006,28 +1006,33 @@ export default function AccueilPage({
                   dans le catalogue — doublons retirés du fil, demande de
                   Frédéric du 18/07 : la colonne respire.) */}
 
-              {/* Le prochain direct — petit encart daté qui renvoie au coupon
-                  complet (#agenda). S'efface tout seul quand rien n'est
-                  programmé. Demande de Frédéric (18/07) : combler le pied de
-                  la colonne avec quelque chose qui vit. */}
+              {/* LE MOT DU JOUR — un mot du dico de l'éval 6e, qui tourne
+                  chaque matin (heure Réunion). Remplace l'encart « En direct »
+                  (« personne ne m'écrit » — Frédéric, 18/07) : ici, du contenu
+                  qui vit tout seul, et une porte de plus vers le dico. */}
               {(() => {
-                const prochainCall = callsAVenir()[0];
-                return prochainCall ? (
-                  <a href="#agenda" className="group block py-3">
-                    <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
-                      📡 En direct · Gratuit
+                const mots = motsDeLaClasse("6e");
+                if (mots.length === 0) return null;
+                const jourReunion = Math.floor(
+                  (Date.now() + 4 * 3600 * 1000) / 86400000,
+                );
+                const mot = mots[jourReunion % mots.length];
+                return (
+                  <Link href="/dico" className="group block py-3">
+                    <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                      🗣️ Le mot du jour · {mot.matiereLabel}
                     </p>
-                    <h3 className="mt-1 line-clamp-2 font-serif text-lg font-black leading-snug group-hover:underline">
-                      {prochainCall.titre}
+                    <h3 className="mt-1 font-serif text-lg font-black leading-snug group-hover:underline">
+                      « {mot.mot} »
                     </h3>
-                    <p className="mt-1 text-sm font-medium text-[#1d1c16]/70">
-                      📅 {formatDateCall(prochainCall.date)} · {prochainCall.duree} · en visio
+                    <p className="mt-1 line-clamp-3 text-sm font-medium text-[#1d1c16]/70">
+                      {mot.definition}
                     </p>
                     <p className="mt-1.5 text-sm font-black text-emerald-900">
-                      Réserver sa place ↓
+                      Ouvrir le dico →
                     </p>
-                  </a>
-                ) : null;
+                  </Link>
+                );
               })()}
               {jours > 0 && (
                 <Link href="/coach-brevet" className="group block py-3">
@@ -1108,6 +1113,49 @@ export default function AccueilPage({
               </p>
             </div>
           </aside>
+        </div>
+      </section>
+
+      {/* ══ LE PARTI PRIS — « il faut mettre en avant qu'on est différent »
+          (Frédéric, 18/07). Quatre engagements FACTUELS, jamais de superlatif
+          (la règle : le site célèbre les élèves, pas la plateforme) : chacun
+          est vérifiable sur la page même. ════════════════════════════════ */}
+      <section className="mx-auto mt-10 max-w-6xl">
+        <Kicker>Le parti pris · Ce qu&apos;on fait autrement</Kicker>
+        <div className="mt-2 border-t-2 border-[#1d1c16]" />
+        <div className="mt-4 grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              emoji: "🤖",
+              titre: "Le coach explique. Il ne fait jamais à ta place.",
+              ligne: "Pas de réponse toute faite : des questions, des indices, et toi qui trouves.",
+            },
+            {
+              emoji: "🌋",
+              titre: "Né dans une classe, à La Réunion.",
+              ligne: "On apprend avec ce qu'on a sous les yeux : la pluie, la canne, les baleines, le volcan.",
+            },
+            {
+              emoji: "✍️",
+              titre: "Écrit avec les élèves.",
+              ligne: "Leurs idées, leurs avis — même leurs fautes, gardées parce qu'elles sont vraies.",
+            },
+            {
+              emoji: "🕊️",
+              titre: "Gratuit, sans publicité, sans jugement.",
+              ligne: "Ici tu peux te tromper tranquille : c'est comme ça qu'on apprend.",
+            },
+          ].map((p) => (
+            <div key={p.titre} className="border-l-2 border-[#1d1c16]/20 pl-3">
+              <p className="font-serif text-[15px] font-black leading-snug">
+                <span aria-hidden className="mr-1">{p.emoji}</span>
+                {p.titre}
+              </p>
+              <p className="mt-1 text-[12.5px] font-medium leading-5 text-[#1d1c16]/70">
+                {p.ligne}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
