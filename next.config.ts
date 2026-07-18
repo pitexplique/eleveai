@@ -50,6 +50,13 @@ const nextConfig = {
         destination: "/simulateur-sucre",
         permanent: false,
       },
+      // ⚠️ /lait est déjà pris (adresse YouTube de l'épisode, avec UTM) →
+      // la fromagerie se dit « eleveai.fr/fromage ».
+      {
+        source: "/fromage",
+        destination: "/simulateur-fromage",
+        permanent: false,
+      },
       // Instagram ne donne qu'un lien (la bio) et le public tape l'adresse :
       // /insta = la porte Instagram, mesurable (lancement du journal, 16/07).
       {

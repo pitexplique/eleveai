@@ -35,6 +35,7 @@ import AgendaJournal from "@/components/accueil/AgendaJournal";
 import AbonnementJournal from "@/components/accueil/AbonnementJournal";
 import ReclameCyclone from "@/components/accueil/ReclameCyclone";
 import ReclameUsine from "@/components/accueil/ReclameUsine";
+import ReclameFromagerie from "@/components/accueil/ReclameFromagerie";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
@@ -185,6 +186,7 @@ const CATALOGUE: { emoji: string; nom: string; ligne: string; href: string }[] =
   { emoji: "🌋", nom: "Maths Réel · 974", ligne: "Le carnet de terrain : photos et vidéos, en vrai.", href: "/maths-974" },
   { emoji: "🌀", nom: "Dans l'œil du cyclone", ligne: "Le simulateur : trace la trajectoire, tiens le vent dans ta main.", href: "/simulateur-cyclone" },
   { emoji: "🏭", nom: "L'usine dans ta main", ligne: "La sucrerie simulée : règle la canne, récolte le sucre et la lumière.", href: "/simulateur-sucre" },
+  { emoji: "🧀", nom: "La fromagerie dans ta main", ligne: "Le lait des Hauts simulé : du pré au pot de fromage frais.", href: "/simulateur-fromage" },
   { emoji: "🗣️", nom: "Le dico mots & gestes", ligne: "Le vocabulaire de l'évaluation nationale 6e.", href: "/dico" },
   { emoji: "🃏", nom: "Qui suis-je ? à imprimer", ligne: "Des jeux de cartes pour réviser en famille.", href: "/qui-suis-je-a-imprimer" },
   { emoji: "🎓", nom: "Éval blanche Pix IA", ligne: "Prépare l'évaluation nationale Pix IA (16 questions).", href: "/eval-pix-ia" },
@@ -251,6 +253,7 @@ const CATALOGUE_EMOJIS: Record<string, string> = {
   "picto-maths": "🖼️", "carte-tresor": "🗺️", "eval-pix-ia": "🎓",
   "simulateur-cyclone": "🌀",
   "simulateur-sucre": "🏭",
+  "simulateur-fromage": "🧀",
   "grand-oral": "🎤", "concours-ia": "🏆", "concours-general": "🏆",
   "concours-logo": "🎨", "cahier-vacances": "🏖️", "cahier-maths": "🏖️",
 };
@@ -953,6 +956,10 @@ export default function AccueilPage({
               {/* L'usine, juste sous le cyclone : les deux machines
                   « dans ta main » l'une sous l'autre (demande de Frédéric). */}
               <ReclameUsine />
+
+              {/* La fromagerie, troisième machine de la pile (image de
+                  Frédéric : le pot dans le pré de la Plaine des Cafres). */}
+              <ReclameFromagerie />
 
               <Link href="/dictee-du-jour" className="group block py-3">
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
