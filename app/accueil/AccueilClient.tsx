@@ -34,6 +34,7 @@ import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import AgendaJournal from "@/components/accueil/AgendaJournal";
 import AbonnementJournal from "@/components/accueil/AbonnementJournal";
 import ReclameFromagerie from "@/components/accueil/ReclameFromagerie";
+import { callsAVenir, formatDateCall } from "@/lib/calls";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
@@ -1004,6 +1005,30 @@ export default function AccueilPage({
               {/* (La dictée a son oreille en manchette et le calcul rapide vit
                   dans le catalogue — doublons retirés du fil, demande de
                   Frédéric du 18/07 : la colonne respire.) */}
+
+              {/* Le prochain direct — petit encart daté qui renvoie au coupon
+                  complet (#agenda). S'efface tout seul quand rien n'est
+                  programmé. Demande de Frédéric (18/07) : combler le pied de
+                  la colonne avec quelque chose qui vit. */}
+              {(() => {
+                const prochainCall = callsAVenir()[0];
+                return prochainCall ? (
+                  <a href="#agenda" className="group block py-3">
+                    <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
+                      📡 En direct · Gratuit
+                    </p>
+                    <h3 className="mt-1 line-clamp-2 font-serif text-lg font-black leading-snug group-hover:underline">
+                      {prochainCall.titre}
+                    </h3>
+                    <p className="mt-1 text-sm font-medium text-[#1d1c16]/70">
+                      📅 {formatDateCall(prochainCall.date)} · {prochainCall.duree} · en visio
+                    </p>
+                    <p className="mt-1.5 text-sm font-black text-emerald-900">
+                      Réserver sa place ↓
+                    </p>
+                  </a>
+                ) : null;
+              })()}
               {jours > 0 && (
                 <Link href="/coach-brevet" className="group block py-3">
                   <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">

@@ -1,12 +1,12 @@
 {
-  "name": "EleveAI",
+  "name": "EleveAI — Le journal pour apprendre · La Réunion",
   "short_name": "EleveAI",
-  "description": "Les maths : un jeu, un enjeu, un avenir",
+  "description": "Le journal pédagogique gratuit de La Réunion : un coach IA qui explique sans faire à ta place, le défi et la dictée du jour, les machines de l'île dans ta main (cyclone, sucrerie, fromagerie) — maths, français, anglais, espagnol et IA, du CP à la Terminale. Ici, personne n'apprend à ta place.",
   "start_url": "/accueil",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#020617",
-  "theme_color": "#2563eb",
+  "background_color": "#f6f1e4",
+  "theme_color": "#1d1c16",
   "orientation": "portrait",
   "icons": [
     {
@@ -22,7 +22,45 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["education"],
+  "shortcuts": [
+    {
+      "name": "Le coach IA",
+      "url": "/coach-ia/maths",
+      "description": "Il explique, il ne fait jamais à ta place"
+    },
+    {
+      "name": "Le défi du jour",
+      "url": "/defis-du-jour",
+      "description": "Un vrai problème chaque matin"
+    },
+    {
+      "name": "La dictée du jour",
+      "url": "/dictee-du-jour",
+      "description": "5 mots sans faute, avec l'audio"
+    },
+    {
+      "name": "Les machines dans ta main",
+      "url": "/simulateur-fromage",
+      "description": "Cyclone, sucrerie, fromagerie : règle, regarde, calcule"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/fromagerie.webp",
+      "sizes": "1200x675",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "La fromagerie dans ta main — du pré au pot"
+    },
+    {
+      "src": "/images/usine-sucre.webp",
+      "sizes": "1200x675",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "L'usine dans ta main — du champ au sucre et à la lumière"
+    }
+  ],
+  "categories": ["education", "news", "kids"],
   "lang": "fr-FR",
   "dir": "ltr"
 }

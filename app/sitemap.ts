@@ -11,8 +11,12 @@ const u = (path: string) => `${BASE_URL}${path}`;
 // 15-16/07 : l'accueil devient « Le Journal d'EleveAI » (manchette eleveai.fr,
 // carrousel piloté par la régie, catalogue Supabase, abonnement) — et les
 // défis du jour passent à la semaine « Les baleines sont là ! ».
-const LASTMOD_HOME    = new Date("2026-07-16");
+// 18/07 : la Une respire (pastilles « aujourd'hui », fil recentré, agenda) et
+// la famille des MACHINES « dans ta main » est au complet : cyclone, usine à
+// sucre, fromagerie — chacune avec ses défis intégrés.
+const LASTMOD_HOME    = new Date("2026-07-18");
 const LASTMOD_JOURNAL = new Date("2026-07-16");
+const LASTMOD_MACHINES = new Date("2026-07-18");
 const LASTMOD_EXPLORER = new Date("2026-07-02");
 const LASTMOD_CORE    = new Date("2026-06-25");
 const LASTMOD_CAHIERS = new Date("2026-06-29");
@@ -182,12 +186,12 @@ const ROUTES: RouteConfig[] = [
 
   // ── MATHS RÉEL · 974 ───────────────────────────────────────────────────────
   { path: "/maths-974",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_974 },
-  // Le simulateur cyclone (16/07) — montera en priorité à la saison cyclonique.
-  { path: "/simulateur-cyclone", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_JOURNAL },
-  // L'usine à sucre (17/07) — lancé pendant la campagne sucrière.
-  { path: "/simulateur-sucre", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JOURNAL },
-  // La fromagerie (18/07) — le lait des Hauts, du pré au pot.
-  { path: "/simulateur-fromage", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_JOURNAL },
+  // LES MACHINES « DANS TA MAIN » — la famille de simulateurs de l'île, avec
+  // leurs défis intégrés (18/07). Le cyclone montera encore en priorité à la
+  // saison cyclonique (novembre).
+  { path: "/simulateur-cyclone", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
+  { path: "/simulateur-sucre", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
+  { path: "/simulateur-fromage", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
   { path: "/picto-maths",     priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/carte",           priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/cahier-vacances/maths", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_974 },
