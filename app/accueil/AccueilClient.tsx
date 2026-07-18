@@ -33,8 +33,6 @@ import FloatingCoach from "@/components/FloatingCoach";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import AgendaJournal from "@/components/accueil/AgendaJournal";
 import AbonnementJournal from "@/components/accueil/AbonnementJournal";
-import ReclameCyclone from "@/components/accueil/ReclameCyclone";
-import ReclameUsine from "@/components/accueil/ReclameUsine";
 import ReclameFromagerie from "@/components/accueil/ReclameFromagerie";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
@@ -948,18 +946,35 @@ export default function AccueilPage({
                 <p className="mt-1.5 text-sm font-black text-emerald-900">Relever le défi →</p>
               </Link>
 
-              {/* La réclame du simulateur cyclone (les relevés de température
-                  n'intéressaient personne — Frédéric, 17/07). MeteoJour reste
-                  disponible pour la vraie rubrique météo de la rentrée. */}
-              <ReclameCyclone />
-
-              {/* L'usine, juste sous le cyclone : les deux machines
-                  « dans ta main » l'une sous l'autre (demande de Frédéric). */}
-              <ReclameUsine />
-
-              {/* La fromagerie, troisième machine de la pile (image de
-                  Frédéric : le pot dans le pré de la Plaine des Cafres). */}
+              {/* LA machine du moment garde la grande réclame (image) ; les
+                  précédentes passent en rangée compacte — trois réclames à
+                  image empilées creusaient un grand blanc sous l'article
+                  (constat de Frédéric, 18/07). */}
               <ReclameFromagerie />
+
+              <div className="py-3">
+                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                  🎛️ Les autres machines dans ta main
+                </p>
+                {[
+                  { emoji: "🌀", nom: "Dans l'œil du cyclone", href: "/simulateur-cyclone", cta: "Lancer ton cyclone" },
+                  { emoji: "🏭", nom: "L'usine à sucre", href: "/simulateur-sucre", cta: "Faire tourner l'usine" },
+                ].map((m) => (
+                  <Link
+                    key={m.href}
+                    href={m.href}
+                    className="group flex items-baseline gap-2 border-b border-dotted border-[#1d1c16]/30 py-2 last:border-0"
+                  >
+                    <span aria-hidden className="text-sm">{m.emoji}</span>
+                    <span className="font-serif text-[15px] font-black leading-snug group-hover:underline">
+                      {m.nom}
+                    </span>
+                    <span className="ml-auto whitespace-nowrap text-xs font-black text-emerald-900">
+                      {m.cta} →
+                    </span>
+                  </Link>
+                ))}
+              </div>
 
               <Link href="/dictee-du-jour" className="group block py-3">
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
@@ -1121,27 +1136,30 @@ export default function AccueilPage({
             </span>
           </a>
 
-          {/* Les rendez-vous sans photo : tuiles à dégradé (style cahiers). */}
+          {/* Les autres rendez-vous : de vraies images partout où on en a —
+              les tuiles à dégradé + émoji pâle rendaient comme des cases
+              vides sur Windows (constat de Frédéric, 18/07). La dictée, sans
+              photo, garde son dégradé avec un filigrane typographique. */}
           {(
             [
-              { emoji: "✍️", kicker: "Tous les jours", titre: "La dictée du jour : 5 mots sans faute", href: "/dictee-du-jour", grad: "from-sky-500 to-indigo-700" },
-              { emoji: "🏖️", kicker: "Le supplément", titre: "Les cahiers de vacances à imprimer", href: "/cahier-vacances", grad: "from-amber-400 to-orange-600" },
-              { emoji: "🖼️", kicker: "L'île en images", titre: "Picto Maths : 25 défis « 1 image, 1 question »", href: "/picto-maths", grad: "from-emerald-500 to-teal-700" },
-              { emoji: "🗺️", kicker: "L'exploration", titre: "La chasse aux trésors sur la carte de l'île", href: "/carte", grad: "from-violet-500 to-fuchsia-700" },
+              { emoji: "🏖️", kicker: "Le supplément", titre: "Les cahiers de vacances à imprimer", href: "/cahier-vacances", image: "/images/accueil-eleveai-reunion.webp" },
+              { emoji: "🖼️", kicker: "L'île en images", titre: "Picto Maths : 25 défis « 1 image, 1 question »", href: "/picto-maths", image: "/images/defis-du-jour/piton-fournaise.webp" },
+              { emoji: "🗺️", kicker: "L'exploration", titre: "La chasse aux trésors sur la carte de l'île", href: "/carte", image: "/images/lagon.webp" },
             ] as const
           ).map((t) => (
             <Link
               key={t.href}
               href={t.href}
-              className={`group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/20 bg-gradient-to-br ${t.grad} lg:aspect-[16/9]`}
+              className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/20 lg:aspect-[16/9]"
             >
-              <span
-                aria-hidden
-                className="absolute right-2 top-2 text-5xl opacity-30 transition duration-300 group-hover:scale-110 group-hover:opacity-50 sm:text-6xl"
-              >
-                {t.emoji}
-              </span>
-              <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+              <Image
+                src={t.image}
+                alt={t.titre}
+                fill
+                sizes="(max-width: 1024px) 50vw, 400px"
+                className="object-cover transition duration-300 group-hover:scale-[1.04]"
+              />
+              <span className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
               <span className="absolute bottom-0 left-0 p-3">
                 <span className="text-[10px] font-black uppercase tracking-[0.16em] text-white/80">
                   {t.emoji} {t.kicker}
@@ -1152,6 +1170,29 @@ export default function AccueilPage({
               </span>
             </Link>
           ))}
+
+          {/* La dictée : pas de photo — dégradé + filigrane « Aa » (le glyphe
+              émoji géant rendait mal, façon picto cassé). */}
+          <Link
+            href="/dictee-du-jour"
+            className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/20 bg-gradient-to-br from-sky-500 to-indigo-700 lg:aspect-[16/9]"
+          >
+            <span
+              aria-hidden
+              className="absolute right-3 top-1 font-serif text-6xl font-black text-white/25 transition duration-300 group-hover:scale-110 group-hover:text-white/40 sm:text-7xl"
+            >
+              Aa
+            </span>
+            <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            <span className="absolute bottom-0 left-0 p-3">
+              <span className="text-[10px] font-black uppercase tracking-[0.16em] text-white/80">
+                ✍️ Tous les jours
+              </span>
+              <span className="mt-0.5 block font-serif text-base font-black leading-snug text-white sm:text-lg">
+                La dictée du jour : 5 mots sans faute
+              </span>
+            </span>
+          </Link>
         </div>
       </section>
 
