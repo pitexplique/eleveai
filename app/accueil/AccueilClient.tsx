@@ -607,6 +607,9 @@ export default function AccueilPage({
   const { eleve } = useEleve();
   const derniersAvis = avis && avis.length > 0 ? avis : AVIS_FALLBACK;
 
+  // La rampe des classes : la classe cliquée déplie son choix de matières.
+  const [classeDepliee, setClasseDepliee] = useState<string | null>(null);
+
   const eleveClasse = eleve?.classe?.toLowerCase() ?? null;
   const prenomAffiche = getPrenomAffiche(eleve?.nom);
   const isCmPrimary = eleveClasse === "cm1" || eleveClasse === "cm2";
@@ -763,25 +766,58 @@ export default function AccueilPage({
           Comprendre. Apprendre. S&apos;amuser.
         </p>
 
-        {/* La rampe d'entrée par classe : du CP à la Terminale, un clic = le
-            coach de ton niveau. Ta classe est mise en avant si on la connaît. */}
-        <div className="flex flex-wrap items-center justify-center gap-1.5 border-b border-[#1d1c16]/30 py-2.5">
-          <span className="mr-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/60">
-            🎓 Entraîne-toi — ta classe :
-          </span>
-          {CLASSES_ENTREE.map((c) => (
-            <Link
-              key={c.slug}
-              href={`/coach-ia/maths?classe=${c.slug}`}
-              className={`rounded-sm border px-2.5 py-1 text-xs font-black transition ${
-                eleveClasse === c.slug
-                  ? "border-[#1d1c16] bg-[#1d1c16] text-[#f6f1e4]"
-                  : "border-[#1d1c16]/30 text-[#1d1c16]/80 hover:border-[#1d1c16] hover:bg-[#1d1c16] hover:text-[#f6f1e4]"
-              }`}
-            >
-              {c.label}
-            </Link>
-          ))}
+        {/* La rampe d'entrée par classe : un clic sur sa classe DÉPLIE le
+            choix des matières (demande de Frédéric : pas que le coach maths).
+            Anglais/espagnol fonctionnent par niveaux CECRL → leurs liens
+            mènent au choix de niveau. */}
+        <div className="border-b border-[#1d1c16]/30 py-2.5">
+          <div className="flex flex-wrap items-center justify-center gap-1.5">
+            <span className="mr-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/60">
+              🎓 Entraîne-toi — ta classe :
+            </span>
+            {CLASSES_ENTREE.map((c) => (
+              <button
+                key={c.slug}
+                type="button"
+                onClick={() => setClasseDepliee(classeDepliee === c.slug ? null : c.slug)}
+                aria-expanded={classeDepliee === c.slug}
+                className={`rounded-sm border px-2.5 py-1 text-xs font-black transition ${
+                  classeDepliee === c.slug || (classeDepliee === null && eleveClasse === c.slug)
+                    ? "border-[#1d1c16] bg-[#1d1c16] text-[#f6f1e4]"
+                    : "border-[#1d1c16]/30 text-[#1d1c16]/80 hover:border-[#1d1c16] hover:bg-[#1d1c16] hover:text-[#f6f1e4]"
+                }`}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
+          {classeDepliee && (
+            <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-sm font-black">
+              <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
+                {CLASSES_ENTREE.find((c) => c.slug === classeDepliee)?.label} :
+              </span>
+              <Link href={`/coach-ia/maths?classe=${classeDepliee}`} className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                🧮 Maths
+              </Link>
+              {FRANCAIS_LEVELS.has(classeDepliee) && (
+                <Link href={`/coach-ia/francais?classe=${classeDepliee}`} className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                  📖 Français
+                </Link>
+              )}
+              <Link href="/coach-ia/english-maths" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                🇬🇧 Anglais
+              </Link>
+              <Link href="/coach-ia/espagnol" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                🇪🇸 Espagnol
+              </Link>
+              <Link href="/parcours" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                🧭 Teste ton niveau
+              </Link>
+              <Link href={`/programme/${classeDepliee}`} className="text-[#1d1c16]/70 underline underline-offset-2 hover:no-underline">
+                📋 Le programme
+              </Link>
+            </div>
+          )}
         </div>
       </header>
 
@@ -1207,28 +1243,47 @@ export default function AccueilPage({
           ))}
         </div>
 
-        {/* Faire le point : les parcours, en une ligne de journal. */}
-        <p className="mt-5 border-t border-[#1d1c16]/25 pt-3 text-sm font-medium text-[#1d1c16]/80">
-          <span className="font-black">🧭 Faire le point d&apos;abord ?</span>{" "}
-          Teste ton niveau :{" "}
-          {parcours.map((p, i) => (
-            <span key={p.href}>
-              {i > 0 && <span className="text-[#1d1c16]/40"> · </span>}
-              <Link href={p.href} className="font-black text-emerald-900 underline underline-offset-2">
-                {p.label}
+        {/* FAIRE LE POINT — les parcours montés en vraie sous-section
+            (demande de Frédéric : s'évaluer n'était pas assez mis en avant).
+            C'est le premier geste d'un nouvel élève — et la question des
+            parents : « où en est mon enfant ? » */}
+        <div className="mt-6 border-t-2 border-[#1d1c16] pt-3">
+          <p className="text-[11px] font-black uppercase tracking-[0.22em] text-emerald-900">
+            S&apos;évaluer · Faire le point
+          </p>
+          <h3 className="mt-1 font-serif text-2xl font-black leading-tight">
+            Teste ton niveau — vois tes forces, et par où commencer
+          </h3>
+          <div className="mt-3 grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+            {parcours.map((p) => (
+              <Link key={p.href} href={p.href} className="group border-t border-[#1d1c16]/25 pt-2.5">
+                <h4 className="font-serif text-lg font-black leading-snug group-hover:underline">
+                  🧭 Parcours {p.label}
+                </h4>
+                <p className="mt-0.5 text-sm font-medium text-[#1d1c16]/70">
+                  Un bilan guidé — tes points forts, tes manques, la suite.
+                </p>
+                <p className="mt-1 text-sm font-black text-emerald-900">Passer le bilan →</p>
               </Link>
-            </span>
-          ))}
-          <span className="text-[#1d1c16]/40"> · </span>
-          <Link href="/eval-pix-ia" className="font-black text-emerald-900 underline underline-offset-2">
-            Éval blanche Pix IA
-          </Link>
-          <span className="text-[#1d1c16]/40"> — et les leçons sont dans les </span>
-          <Link href="/fiches-cours" className="font-black text-emerald-900 underline underline-offset-2">
-            fiches de cours
-          </Link>
-          .
-        </p>
+            ))}
+            <Link href="/eval-pix-ia" className="group border-t border-[#1d1c16]/25 pt-2.5">
+              <h4 className="font-serif text-lg font-black leading-snug group-hover:underline">
+                🎓 Éval blanche Pix IA
+              </h4>
+              <p className="mt-0.5 text-sm font-medium text-[#1d1c16]/70">
+                Prépare l&apos;évaluation nationale : 16 questions, ton profil.
+              </p>
+              <p className="mt-1 text-sm font-black text-emerald-900">Passer le bilan →</p>
+            </Link>
+          </div>
+          <p className="mt-3 text-sm font-medium text-[#1d1c16]/70">
+            Et les leçons sont dans les{" "}
+            <Link href="/fiches-cours" className="font-black text-emerald-900 underline underline-offset-2">
+              fiches de cours
+            </Link>
+            .
+          </p>
+        </div>
       </section>
 
       {/* ══ LE SUPPLÉMENT DE L'ÉTÉ — les cahiers de vacances ═════════════════
