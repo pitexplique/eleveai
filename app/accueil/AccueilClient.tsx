@@ -34,7 +34,7 @@ import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import AgendaJournal from "@/components/accueil/AgendaJournal";
 import AbonnementJournal from "@/components/accueil/AbonnementJournal";
 import ReclameFromagerie from "@/components/accueil/ReclameFromagerie";
-import { motsDeLaClasse } from "@/lib/dico";
+import { PICTOS, type Picto } from "@/app/picto-maths/data";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
@@ -1025,37 +1025,86 @@ export default function AccueilPage({
                   dans le catalogue — doublons retirés du fil, demande de
                   Frédéric du 18/07 : la colonne respire.) */}
 
-              {/* LE MOT DU JOUR — un mot du dico de l'éval 6e, qui tourne
-                  chaque matin (heure Réunion). Remplace l'encart « En direct »
-                  (« personne ne m'écrit » — Frédéric, 18/07) : ici, du contenu
-                  qui vit tout seul, et une porte de plus vers le dico. */}
+              {/* LE PICTO DU JOUR — un des 25 défis visuels Picto Maths · 974
+                  (l'idée de l'inspectrice — crédit « sur une idée de Valérie »,
+                  prénom seul), en rotation quotidienne heure Réunion. Remplace
+                  le mot du jour (choix de Frédéric, 18/07). Règle du journal :
+                  la question porte sa réponse, repliée dessous. */}
               {(() => {
-                // Maths + français seulement (le terrain de l'éval nationale
-                // 6e) : le tirage complet sortait « School » en anglais —
-                // pas le bon mot pour ouvrir le journal (Frédéric, 18/07).
-                const mots = motsDeLaClasse("6e").filter((m) =>
-                  m.matiere === "maths" || m.matiere === "francais",
-                );
-                if (mots.length === 0) return null;
                 const jourReunion = Math.floor(
                   (Date.now() + 4 * 3600 * 1000) / 86400000,
                 );
-                const mot = mots[jourReunion % mots.length];
+                const p: Picto = PICTOS[jourReunion % PICTOS.length];
                 return (
-                  <Link href="/dico" className="group block py-3">
-                    <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-                      🗣️ Le mot du jour · {mot.matiereLabel}
+                  <div className="py-3">
+                    <Link href="/picto-maths" className="group block">
+                      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                        🖼️ Le picto du jour · {p.notion}
+                      </p>
+                      <h3 className="mt-1 font-serif text-lg font-black leading-snug group-hover:underline">
+                        {p.question}
+                      </h3>
+                    </Link>
+                    <p className="mt-0.5 text-xs font-semibold text-[#1d1c16]/55">
+                      {p.emoji} {p.lieu} · {p.niveau}
                     </p>
-                    <h3 className="mt-1 font-serif text-lg font-black leading-snug group-hover:underline">
-                      « {mot.mot} »
-                    </h3>
-                    <p className="mt-1 line-clamp-3 text-sm font-medium text-[#1d1c16]/70">
-                      {mot.definition}
+                    {/* L'image : la scène en miniature (icônes + badges). Les
+                        pictos à schéma dessiné montrent leur énoncé à la place. */}
+                    {!p.diagram && p.scene.length > 0 && (
+                      <div className="mt-2 space-y-1 rounded-sm border border-[#1d1c16]/20 bg-white/40 px-2.5 py-2">
+                        {p.scene.map((ligne, i) => (
+                          <div key={i} className="flex flex-wrap items-center gap-1.5">
+                            {ligne.map((c, j) =>
+                              c.t === "ic" ? (
+                                <span key={j} className="text-sm">
+                                  {c.e.repeat(Math.min(c.n ?? 1, 10))}
+                                  {c.cap && (
+                                    <span className="ml-1 text-[10px] font-bold text-[#1d1c16]/60">{c.cap}</span>
+                                  )}
+                                </span>
+                              ) : c.t === "val" ? (
+                                <span key={j} className="rounded-sm border border-[#1d1c16]/30 bg-white/60 px-1.5 py-0.5 text-[11px] font-black">
+                                  {c.v}
+                                  {c.cap && <span className="ml-1 font-bold text-[#1d1c16]/60">{c.cap}</span>}
+                                </span>
+                              ) : c.t === "qm" ? (
+                                <span key={j} className="rounded-sm bg-[#1d1c16] px-1.5 py-0.5 text-[11px] font-black text-[#f6f1e4]">
+                                  ?{c.cap && <span className="ml-1 font-bold opacity-70">{c.cap}</span>}
+                                </span>
+                              ) : (
+                                <span key={j} className="text-[12px] font-black text-[#1d1c16]/70">{c.v}</span>
+                              ),
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {/* L'énoncé seulement quand il n'y a pas de scène qui le
+                        montre déjà (les pictos à schéma) — la colonne reste
+                        courte. */}
+                    {(p.diagram || p.scene.length === 0) && p.enonce && (
+                      <p className="mt-1.5 text-[12.5px] font-medium leading-5 text-[#1d1c16]/70">
+                        {p.enonce}
+                      </p>
+                    )}
+                    <details className="mt-1.5">
+                      <summary className="cursor-pointer text-xs font-black text-[#1d1c16]/55 underline underline-offset-2 hover:text-[#1d1c16]">
+                        Coup de pouce, puis la réponse ▾
+                      </summary>
+                      <p className="mt-1 border-l-2 border-[#1d1c16]/25 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/75">
+                        {p.piste}
+                      </p>
+                      <p className="mt-1 border-l-2 border-emerald-900/40 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/80">
+                        {p.reponse}
+                      </p>
+                    </details>
+                    <p className="mt-1.5 text-xs font-medium italic text-[#1d1c16]/50">
+                      <Link href="/picto-maths" className="font-black not-italic text-emerald-900 hover:underline">
+                        Les 25 pictos →
+                      </Link>{" "}
+                      · 👩‍🏫 sur une idée de Valérie
                     </p>
-                    <p className="mt-1.5 text-sm font-black text-emerald-900">
-                      Ouvrir le dico →
-                    </p>
-                  </Link>
+                  </div>
                 );
               })()}
               {jours > 0 && (
