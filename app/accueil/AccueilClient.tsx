@@ -1030,7 +1030,12 @@ export default function AccueilPage({
                   (« personne ne m'écrit » — Frédéric, 18/07) : ici, du contenu
                   qui vit tout seul, et une porte de plus vers le dico. */}
               {(() => {
-                const mots = motsDeLaClasse("6e");
+                // Maths + français seulement (le terrain de l'éval nationale
+                // 6e) : le tirage complet sortait « School » en anglais —
+                // pas le bon mot pour ouvrir le journal (Frédéric, 18/07).
+                const mots = motsDeLaClasse("6e").filter((m) =>
+                  m.matiere === "maths" || m.matiere === "francais",
+                );
                 if (mots.length === 0) return null;
                 const jourReunion = Math.floor(
                   (Date.now() + 4 * 3600 * 1000) / 86400000,
