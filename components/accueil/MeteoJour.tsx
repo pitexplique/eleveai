@@ -75,7 +75,7 @@ export default function MeteoJour() {
       </ul>
       <Link
         href="/simulateur-cyclone"
-        className="mt-2 block text-sm font-black text-emerald-900 transition hover:translate-x-0.5"
+        className="mt-2 block text-sm font-black text-cyan-800 transition hover:translate-x-0.5"
       >
         🌀 La vigie : simule ton cyclone →
       </Link>

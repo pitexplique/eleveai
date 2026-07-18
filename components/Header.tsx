@@ -170,7 +170,7 @@ function MatieresMenu({ pathname, paper }: { pathname: string; paper: boolean })
           <div className="grid grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-3">
             {MATIERES.map((m) => (
               <div key={m.label}>
-                <p className={`mb-1.5 text-[11px] font-black uppercase tracking-[0.18em] ${paper ? "text-emerald-900" : m.accent}`}>
+                <p className={`mb-1.5 text-[11px] font-black uppercase tracking-[0.18em] ${paper ? "text-cyan-800" : m.accent}`}>
                   {m.label}
                 </p>
                 <ul className="space-y-0.5">
@@ -225,7 +225,7 @@ function MobileSection({
 }) {
   return (
     <div>
-      <p className={`mb-2 text-[10px] font-black uppercase tracking-[0.2em] ${paper ? "text-emerald-900" : accent}`}>
+      <p className={`mb-2 text-[10px] font-black uppercase tracking-[0.2em] ${paper ? "text-cyan-800" : accent}`}>
         {title}
       </p>
       <div className="grid grid-cols-2 gap-2">
@@ -339,7 +339,7 @@ export default function Header() {
           </div>
           <div className="flex flex-col leading-tight">
             <span className={`text-[1.05rem] font-black tracking-tight ${paper ? "text-[#1d1c16]" : "text-white"}`}>
-              Eleve<span className={paper ? "text-emerald-900" : "text-cyan-200"}>AI</span>
+              Eleve<span className={paper ? "text-cyan-800" : "text-cyan-200"}>AI</span>
             </span>
             <span className={`hidden text-xs sm:block ${paper ? "font-serif italic text-[#1d1c16]/60" : "text-cyan-100/75"}`}>
               La liberté d&apos;apprendre
@@ -428,7 +428,7 @@ export default function Header() {
               href="/auth/signin?mode=eleve"
               className={`ml-1 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-black shadow-lg transition hover:brightness-110 ${
                 paper
-                  ? "bg-[#1d1c16] text-[#f6f1e4] hover:bg-emerald-900"
+                  ? "bg-[#1d1c16] text-[#f6f1e4] hover:bg-cyan-800"
                   : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
               }`}
             >
@@ -490,7 +490,7 @@ export default function Header() {
                   href={dashboardHref}
                   className={`flex items-center gap-2 text-sm font-black ${paper ? "text-[#1d1c16]" : "text-white"}`}
                 >
-                  <GraduationCap className={`h-4 w-4 ${paper ? "text-emerald-900" : "text-emerald-300"}`} />
+                  <GraduationCap className={`h-4 w-4 ${paper ? "text-cyan-800" : "text-emerald-300"}`} />
                   {dashboardLabel}
                 </Link>
                 <button

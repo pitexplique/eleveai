@@ -153,7 +153,7 @@ export default function AgendaJournal() {
             ✂️ Le coupon d&apos;inscription
           </p>
           {etat === "ok" || etat === "deja" ? (
-            <p className="mt-3 border border-[#1d1c16]/30 bg-white/50 p-3 text-sm font-black text-emerald-900">
+            <p className="mt-3 border border-[#1d1c16]/30 bg-white/50 p-3 text-sm font-black text-cyan-800">
               {etat === "deja"
                 ? "Tu es déjà inscrit·e ✓ Le lien arrivera par email avant le call."
                 : "Inscription enregistrée ✓ Tu recevras le lien par email avant le call."}
@@ -193,7 +193,7 @@ export default function AgendaJournal() {
                 <button
                   type="submit"
                   disabled={etat === "envoi"}
-                  className="rounded-sm bg-[#1d1c16] px-5 py-2 text-sm font-black text-[#f6f1e4] transition hover:bg-emerald-900 disabled:opacity-60"
+                  className="rounded-sm bg-[#1d1c16] px-5 py-2 text-sm font-black text-[#f6f1e4] transition hover:bg-cyan-800 disabled:opacity-60"
                 >
                   {etat === "envoi" ? "…" : "Je m'inscris →"}
                 </button>

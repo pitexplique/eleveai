@@ -29,7 +29,7 @@ export default function ReclameFromagerie() {
         <p className="mt-1 text-xs font-semibold leading-5 opacity-75">
           Règle le lait des Hauts, remplis les pots — du pré au pot de 150 g.
         </p>
-        <p className="mt-1.5 text-sm font-black text-emerald-900 group-hover:text-emerald-300">
+        <p className="mt-1.5 text-sm font-black text-cyan-800 group-hover:text-cyan-300">
           Faire tourner la fromagerie →
         </p>
       </Link>

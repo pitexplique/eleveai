@@ -26,7 +26,7 @@ export default function EncartFichesComposees() {
 
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
           <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
-            <p className="font-black text-emerald-300">🎓 Élève</p>
+            <p className="font-black text-cyan-300">🎓 Élève</p>
             <p className="mt-1 text-sm font-semibold leading-relaxed text-slate-300">
               Compose ta fiche de révision et retourne-la en flashcards pour te
               tester — ta composition te suit partout.

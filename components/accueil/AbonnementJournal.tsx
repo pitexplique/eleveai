@@ -44,7 +44,7 @@ export default function AbonnementJournal() {
       id="abonnement"
       className="mx-auto mt-10 max-w-6xl scroll-mt-24 border-y-4 border-double border-[#1d1c16] py-5 text-center text-[#1d1c16]"
     >
-      <p className="text-[11px] font-black uppercase tracking-[0.22em] text-emerald-900">
+      <p className="text-[11px] font-black uppercase tracking-[0.22em] text-cyan-800">
         ✉️ L&apos;abonnement · Gratuit, comme le reste
       </p>
       <h2 className="mt-1 font-serif text-2xl font-black leading-tight sm:text-3xl">
@@ -56,7 +56,7 @@ export default function AbonnementJournal() {
       </p>
 
       {etat === "ok" || etat === "deja" ? (
-        <p className="mx-auto mt-4 max-w-md border border-[#1d1c16]/30 bg-white/50 p-3 text-sm font-black text-emerald-900">
+        <p className="mx-auto mt-4 max-w-md border border-[#1d1c16]/30 bg-white/50 p-3 text-sm font-black text-cyan-800">
           {etat === "deja"
             ? "Vous êtes déjà abonné·e ✓ La prochaine édition arrive."
             : "Abonnement enregistré ✓ À bientôt dans votre boîte."}
@@ -77,7 +77,7 @@ export default function AbonnementJournal() {
           <button
             type="submit"
             disabled={etat === "envoi"}
-            className="rounded-sm bg-[#1d1c16] px-5 py-2 text-sm font-black text-[#f6f1e4] transition hover:bg-emerald-900 disabled:opacity-60"
+            className="rounded-sm bg-[#1d1c16] px-5 py-2 text-sm font-black text-[#f6f1e4] transition hover:bg-cyan-800 disabled:opacity-60"
           >
             {etat === "envoi" ? "…" : "Je m'abonne →"}
           </button>

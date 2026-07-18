@@ -63,15 +63,15 @@ function youtubeId(url: string): string | null {
 export default function MathsEtReunion() {
   return (
     <section className="px-4 pt-8 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl overflow-hidden rounded-3xl border border-emerald-300/25 bg-gradient-to-br from-emerald-400/[0.12] via-white/[0.03] to-sky-400/[0.06] p-6 sm:p-8">
+      <div className="mx-auto max-w-6xl overflow-hidden rounded-3xl border border-cyan-300/25 bg-gradient-to-br from-emerald-400/[0.12] via-white/[0.03] to-sky-400/[0.06] p-6 sm:p-8">
         {/* En-tête */}
         <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="inline-flex flex-wrap items-center gap-2 rounded-full bg-emerald-300/20 px-3 py-1.5 text-xs font-black uppercase tracking-[0.15em] text-emerald-200">
+            <p className="inline-flex flex-wrap items-center gap-2 rounded-full bg-cyan-300/20 px-3 py-1.5 text-xs font-black uppercase tracking-[0.15em] text-emerald-200">
               <span aria-hidden>🌋</span> La Réunion, en vrai
             </p>
             <h2 className="mt-3 text-2xl font-black text-white sm:text-3xl">
-              Les maths <span className="text-emerald-300">en vrai</span>
+              Les maths <span className="text-cyan-300">en vrai</span>
             </h2>
             <p className="mt-1.5 max-w-2xl text-sm font-semibold leading-6 text-white/75">
               L&apos;île comme salle de classe : des vidéos animées qui expliquent
@@ -100,7 +100,7 @@ export default function MathsEtReunion() {
                 href={`https://youtu.be/${id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group overflow-hidden rounded-2xl border border-white/10 bg-black/40 transition hover:-translate-y-0.5 hover:border-emerald-300/40"
+                className="group overflow-hidden rounded-2xl border border-white/10 bg-black/40 transition hover:-translate-y-0.5 hover:border-cyan-300/40"
               >
                 <div className="relative aspect-video w-full overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -320,7 +320,7 @@ function Kicker({ children, id }: { children: React.ReactNode; id?: string }) {
   return (
     <p
       id={id}
-      className="scroll-mt-24 text-[11px] font-black uppercase tracking-[0.22em] text-emerald-900"
+      className="scroll-mt-24 text-[11px] font-black uppercase tracking-[0.22em] text-cyan-800"
     >
       {children}
     </p>
@@ -423,7 +423,7 @@ function UneCarousel({ slides }: { slides?: SlideUne[] }) {
       {/* La barre sous l'image = le CTA du slide : bien visible (encre pleine),
           pas une légende grisée (retour Frédéric : « on ne voit pas le titre
           sous l'image »). */}
-      <p className="bg-[#1d1c16] px-3 py-2.5 text-sm font-black text-[#f6f1e4] transition group-hover:bg-emerald-900">
+      <p className="bg-[#1d1c16] px-3 py-2.5 text-sm font-black text-[#f6f1e4] transition group-hover:bg-cyan-800">
         {ep.cta}
       </p>
     </>
@@ -431,7 +431,7 @@ function UneCarousel({ slides }: { slides?: SlideUne[] }) {
 
   return (
     <div onMouseEnter={() => setPause(true)} onMouseLeave={() => setPause(false)}>
-      <p className="scroll-mt-24 text-[11px] font-black uppercase tracking-[0.22em] text-emerald-900">
+      <p className="scroll-mt-24 text-[11px] font-black uppercase tracking-[0.22em] text-cyan-800">
         {ep.kicker}
         {ep.nouveau && (
           <>
@@ -505,13 +505,13 @@ function UneCarousel({ slides }: { slides?: SlideUne[] }) {
       {ep.defi ? (
         <p className="mt-3 text-sm font-bold">
           🎯 Le défi de l&apos;épisode : {ep.defi}{" "}
-          <a href="#en-vrai" className="font-black text-emerald-900 underline underline-offset-2">
+          <a href="#en-vrai" className="font-black text-cyan-800 underline underline-offset-2">
             Tous les épisodes ↓
           </a>
         </p>
       ) : (
         <p className="mt-3 text-sm font-bold">
-          <a href="#en-vrai" className="font-black text-emerald-900 underline underline-offset-2">
+          <a href="#en-vrai" className="font-black text-cyan-800 underline underline-offset-2">
             Tous les épisodes ↓
           </a>
         </p>
@@ -603,7 +603,7 @@ function EditionPerso() {
                 <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/75">
                   {carte.message}
                 </p>
-                <p className="mt-2 text-sm font-black text-emerald-900 transition group-hover:translate-x-0.5">
+                <p className="mt-2 text-sm font-black text-cyan-800 transition group-hover:translate-x-0.5">
                   {carte.cta} →
                 </p>
               </Link>
@@ -730,7 +730,7 @@ export default function AccueilPage({
             <p className="mt-1 font-serif text-lg font-black leading-tight">
               Il t&apos;explique, il ne fait pas à ta place
             </p>
-            <p className="mt-1 text-xs font-black text-emerald-900 group-hover:text-emerald-300">
+            <p className="mt-1 text-xs font-black text-cyan-800 group-hover:text-cyan-300">
               {classeLabel ? `Ouvrir en ${classeLabel} →` : "Ouvrir le coach →"}
             </p>
           </Link>
@@ -744,7 +744,7 @@ export default function AccueilPage({
               Le Journal · Île de La Réunion
             </p>
             <h1 className="mt-1 font-serif text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl">
-              eleveai<span className="text-emerald-900">.fr</span>
+              eleveai<span className="text-cyan-800">.fr</span>
             </h1>
             <p className="mt-2 font-serif text-base font-black italic tracking-wide text-[#1d1c16]/80 sm:text-lg">
               « Ici, personne n&apos;apprend à ta place. »
@@ -762,7 +762,7 @@ export default function AccueilPage({
             <p className="mt-1 font-serif text-lg font-black leading-tight">
               5 mots sans faute, chaque matin
             </p>
-            <p className="mt-1 text-xs font-black text-emerald-900 group-hover:text-emerald-300">
+            <p className="mt-1 text-xs font-black text-cyan-800 group-hover:text-cyan-300">
               Écrire la dictée →
             </p>
           </Link>
@@ -770,19 +770,19 @@ export default function AccueilPage({
 
         {/* Le chemin de fer : les rubriques (ancres internes). */}
         <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 border-b border-[#1d1c16]/30 py-2 text-[11px] font-black uppercase tracking-[0.16em]">
-          <a href="#la-une" className="hover:text-emerald-900">La Une</a>
+          <a href="#la-une" className="hover:text-cyan-800">La Une</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#en-vrai" className="hover:text-emerald-900">En vrai</a>
+          <a href="#en-vrai" className="hover:text-cyan-800">En vrai</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#apprendre" className="hover:text-emerald-900">Apprendre</a>
+          <a href="#apprendre" className="hover:text-cyan-800">Apprendre</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#catalogue" className="hover:text-emerald-900">Le catalogue</a>
+          <a href="#catalogue" className="hover:text-cyan-800">Le catalogue</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#courrier" className="hover:text-emerald-900">Le courrier</a>
+          <a href="#courrier" className="hover:text-cyan-800">Le courrier</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#honneur" className="hover:text-emerald-900">À l&apos;honneur</a>
+          <a href="#honneur" className="hover:text-cyan-800">À l&apos;honneur</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#les-grands" className="hover:text-emerald-900">Parents & profs</a>
+          <a href="#les-grands" className="hover:text-cyan-800">Parents & profs</a>
         </nav>
 
         {/* La devise publique (choisie 16/07). La doctrine interne reste
@@ -824,18 +824,18 @@ export default function AccueilPage({
                 <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
                   ✏️ S&apos;entraîner :
                 </span>
-                <Link href={`/coach-ia/maths?classe=${classeDepliee}`} className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                <Link href={`/coach-ia/maths?classe=${classeDepliee}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                   🧮 Maths
                 </Link>
                 {FRANCAIS_LEVELS.has(classeDepliee) && (
-                  <Link href={`/coach-ia/francais?classe=${classeDepliee}`} className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                  <Link href={`/coach-ia/francais?classe=${classeDepliee}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                     📖 Français
                   </Link>
                 )}
-                <Link href="/coach-ia/english-maths" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                <Link href="/coach-ia/english-maths" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                   🇬🇧 Anglais
                 </Link>
-                <Link href="/coach-ia/espagnol" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                <Link href="/coach-ia/espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                   🇪🇸 Espagnol
                 </Link>
               </div>
@@ -845,18 +845,18 @@ export default function AccueilPage({
                 <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
                   🧭 Faire le point :
                 </span>
-                <Link href="/parcours" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                <Link href="/parcours" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                   🧮 Maths
                 </Link>
                 {FRANCAIS_LEVELS.has(classeDepliee) && (
-                  <Link href="/parcours-francais" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                  <Link href="/parcours-francais" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                     📖 Français
                   </Link>
                 )}
-                <Link href="/parcours-english-maths" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                <Link href="/parcours-english-maths" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                   🇬🇧 Anglais
                 </Link>
-                <Link href="/parcours-espagnol" className="text-emerald-900 underline underline-offset-2 hover:no-underline">
+                <Link href="/parcours-espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                   🇪🇸 Espagnol
                 </Link>
                 <Link href={`/programme/${classeDepliee}`} className="text-[#1d1c16]/70 underline underline-offset-2 hover:no-underline">
@@ -877,7 +877,7 @@ export default function AccueilPage({
               l'enseignant connecté (effet IKEA côté prof, manifeste
               prof-élève). Demande de Frédéric du 16/07. */}
           <div className="mt-4 border-2 border-[#1d1c16] p-4 sm:p-5">
-            <p className="text-[11px] font-black uppercase tracking-[0.22em] text-emerald-900">
+            <p className="text-[11px] font-black uppercase tracking-[0.22em] text-cyan-800">
               🍎 L&apos;atelier du prof · Fiches à composer
             </p>
             <h2 className="mt-1 font-serif text-2xl font-black leading-tight">
@@ -893,7 +893,7 @@ export default function AccueilPage({
             <div className="mt-3 flex flex-wrap items-center gap-3">
               <Link
                 href="/fiches-cours/maths"
-                className="inline-flex items-center gap-2 rounded-sm bg-[#1d1c16] px-4 py-2 text-sm font-black text-[#f6f1e4] transition hover:bg-emerald-900"
+                className="inline-flex items-center gap-2 rounded-sm bg-[#1d1c16] px-4 py-2 text-sm font-black text-[#f6f1e4] transition hover:bg-cyan-800"
               >
                 Ouvrir l&apos;atelier →
               </Link>
@@ -982,13 +982,13 @@ export default function AccueilPage({
                   <summary className="cursor-pointer text-xs font-black text-[#1d1c16]/55 underline underline-offset-2 hover:text-[#1d1c16]">
                     Voir la réponse ▾
                   </summary>
-                  <p className="mt-1.5 border-l-2 border-emerald-900/40 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/80">
+                  <p className="mt-1.5 border-l-2 border-cyan-800/40 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/80">
                     {defiDuJour.defi.explanation}
                   </p>
                 </details>
                 <Link
                   href="/defis-du-jour"
-                  className="mt-1.5 block text-sm font-black text-emerald-900 hover:underline"
+                  className="mt-1.5 block text-sm font-black text-cyan-800 hover:underline"
                 >
                   Le défi guidé, pas à pas →
                 </Link>
@@ -1017,7 +1017,7 @@ export default function AccueilPage({
                     <span className="font-serif text-[15px] font-black leading-snug group-hover:underline">
                       {m.nom}
                     </span>
-                    <span className="ml-auto whitespace-nowrap text-xs font-black text-emerald-900">
+                    <span className="ml-auto whitespace-nowrap text-xs font-black text-cyan-800">
                       {m.cta} →
                     </span>
                   </Link>
@@ -1036,7 +1036,7 @@ export default function AccueilPage({
                   <h3 className="mt-1 font-serif text-lg font-black leading-snug group-hover:underline">
                     J−{jours} avant le brevet
                   </h3>
-                  <p className="mt-1.5 text-sm font-black text-emerald-900">Commencer le sprint →</p>
+                  <p className="mt-1.5 text-sm font-black text-cyan-800">Commencer le sprint →</p>
                 </Link>
               )}
 
@@ -1070,7 +1070,7 @@ export default function AccueilPage({
               la canne, les baleines, le volcan.
             </p>
             <details className="mt-1">
-              <summary className="cursor-pointer list-none text-xs font-black text-emerald-900 underline underline-offset-2">
+              <summary className="cursor-pointer list-none text-xs font-black text-cyan-800 underline underline-offset-2">
                 Lire la suite ▾
               </summary>
               <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
@@ -1174,12 +1174,12 @@ export default function AccueilPage({
                     <p className="mt-1 border-l-2 border-[#1d1c16]/25 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/75">
                       {p.piste}
                     </p>
-                    <p className="mt-1 border-l-2 border-emerald-900/40 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/80">
+                    <p className="mt-1 border-l-2 border-cyan-800/40 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/80">
                       {p.reponse}
                     </p>
                   </details>
                   <p className="mt-1.5 text-xs font-medium italic text-[#1d1c16]/50">
-                    <Link href="/picto-maths" className="font-black not-italic text-emerald-900 hover:underline">
+                    <Link href="/picto-maths" className="font-black not-italic text-cyan-800 hover:underline">
                       Les 25 pictos →
                     </Link>{" "}
                     · 👩‍🏫 sur une idée de Valérie
@@ -1255,7 +1255,7 @@ export default function AccueilPage({
             />
             <span className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
             <span className="absolute bottom-0 left-0 p-3">
-              <span className="text-[10px] font-black uppercase tracking-[0.16em] text-emerald-300">
+              <span className="text-[10px] font-black uppercase tracking-[0.16em] text-cyan-300">
                 🎯 Le défi du jour
               </span>
               <span className="mt-0.5 block font-serif text-base font-black leading-snug text-white sm:text-lg">
@@ -1436,7 +1436,7 @@ export default function AccueilPage({
           </a>
           <Link
             href="/carte"
-            className="text-sm font-black text-emerald-900 underline underline-offset-2"
+            className="text-sm font-black text-cyan-800 underline underline-offset-2"
           >
             🗺️ Les maths sur la carte de l&apos;île →
           </Link>
@@ -1460,7 +1460,7 @@ export default function AccueilPage({
                 {m.icon} {m.label}
               </h3>
               <p className="mt-1 text-sm font-medium text-[#1d1c16]/70">{m.desc}</p>
-              <p className="mt-1.5 text-sm font-black text-emerald-900">Ouvrir le coach →</p>
+              <p className="mt-1.5 text-sm font-black text-cyan-800">Ouvrir le coach →</p>
             </Link>
           ))}
         </div>
@@ -1470,7 +1470,7 @@ export default function AccueilPage({
             C'est le premier geste d'un nouvel élève — et la question des
             parents : « où en est mon enfant ? » */}
         <div className="mt-6 border-t-2 border-[#1d1c16] pt-3">
-          <p className="text-[11px] font-black uppercase tracking-[0.22em] text-emerald-900">
+          <p className="text-[11px] font-black uppercase tracking-[0.22em] text-cyan-800">
             S&apos;évaluer · Faire le point
           </p>
           <h3 className="mt-1 font-serif text-2xl font-black leading-tight">
@@ -1485,7 +1485,7 @@ export default function AccueilPage({
                 <p className="mt-0.5 text-sm font-medium text-[#1d1c16]/70">
                   Un bilan guidé — tes points forts, tes manques, la suite.
                 </p>
-                <p className="mt-1 text-sm font-black text-emerald-900">Passer le bilan →</p>
+                <p className="mt-1 text-sm font-black text-cyan-800">Passer le bilan →</p>
               </Link>
             ))}
             <Link href="/eval-pix-ia" className="group border-t border-[#1d1c16]/25 pt-2.5">
@@ -1495,12 +1495,12 @@ export default function AccueilPage({
               <p className="mt-0.5 text-sm font-medium text-[#1d1c16]/70">
                 Prépare l&apos;évaluation nationale : 16 questions, ton profil.
               </p>
-              <p className="mt-1 text-sm font-black text-emerald-900">Passer le bilan →</p>
+              <p className="mt-1 text-sm font-black text-cyan-800">Passer le bilan →</p>
             </Link>
           </div>
           <p className="mt-3 text-sm font-medium text-[#1d1c16]/70">
             Et les leçons sont dans les{" "}
-            <Link href="/fiches-cours" className="font-black text-emerald-900 underline underline-offset-2">
+            <Link href="/fiches-cours" className="font-black text-cyan-800 underline underline-offset-2">
               fiches de cours
             </Link>
             .
@@ -1536,7 +1536,7 @@ export default function AccueilPage({
         </div>
         <p className="mt-2 text-xs font-medium italic text-[#1d1c16]/60">
           Gratuits, imprimables, avec Ti Margo 🦎 —{" "}
-          <Link href="/cahier-vacances" className="font-black text-emerald-900 underline underline-offset-2">
+          <Link href="/cahier-vacances" className="font-black text-cyan-800 underline underline-offset-2">
             tous les cahiers →
           </Link>
         </p>
@@ -1600,7 +1600,7 @@ export default function AccueilPage({
         <p className="mt-2 text-xs font-medium italic text-[#1d1c16]/60">
           Apprendre est gratuit, et ça le restera. Ce qui se paie : le suivi dans
           la durée —{" "}
-          <Link href="/tarifs" className="font-black text-emerald-900 underline underline-offset-2">
+          <Link href="/tarifs" className="font-black text-cyan-800 underline underline-offset-2">
             voir les offres
           </Link>
           .
@@ -1629,7 +1629,7 @@ export default function AccueilPage({
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-[#1d1c16]/25 pt-3">
           <Link
             href="/votre-avis"
-            className="inline-flex items-center gap-2 rounded-sm bg-[#1d1c16] px-4 py-2 text-sm font-black text-[#f6f1e4] transition hover:bg-emerald-900"
+            className="inline-flex items-center gap-2 rounded-sm bg-[#1d1c16] px-4 py-2 text-sm font-black text-[#f6f1e4] transition hover:bg-cyan-800"
           >
             ✉️ Écrire au journal
           </Link>
@@ -1670,11 +1670,11 @@ export default function AccueilPage({
           <p className="mt-2 text-sm font-medium text-[#1d1c16]/70">
             Leurs idées, les bugs qu&apos;ils repèrent et leurs avis font avancer
             la plateforme.{" "}
-            <Link href="/remerciements" className="font-black text-emerald-900 underline underline-offset-2">
+            <Link href="/remerciements" className="font-black text-cyan-800 underline underline-offset-2">
               La page des remerciements →
             </Link>{" "}
             <span className="text-[#1d1c16]/40">·</span>{" "}
-            <Link href="/besoin-de-vous" className="font-black text-emerald-900 underline underline-offset-2">
+            <Link href="/besoin-de-vous" className="font-black text-cyan-800 underline underline-offset-2">
               EleveAI a besoin de vous →
             </Link>
           </p>
@@ -1695,7 +1695,7 @@ export default function AccueilPage({
               Encadrée, sans publicité, données protégées. Et gratuit si le
               collège de votre enfant l&apos;utilise.
             </p>
-            <p className="mt-1.5 text-sm font-black text-emerald-900">En savoir plus →</p>
+            <p className="mt-1.5 text-sm font-black text-cyan-800">En savoir plus →</p>
           </Link>
           <Link href="/enseignants" className="group border-t border-[#1d1c16]/25 pt-3">
             <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">🍎 Enseignants</p>
@@ -1706,7 +1706,7 @@ export default function AccueilPage({
               Le travail de chaque élève en temps réel, ses moyennes par
               matière. EleveAI corrige&nbsp;; vous, vous enseignez.
             </p>
-            <p className="mt-1.5 text-sm font-black text-emerald-900">En savoir plus →</p>
+            <p className="mt-1.5 text-sm font-black text-cyan-800">En savoir plus →</p>
           </Link>
           <Link href="/espace-ecoles" className="group border-t border-[#1d1c16]/25 pt-3">
             <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">🏫 Établissements</p>
@@ -1717,7 +1717,7 @@ export default function AccueilPage({
               Multi-matières, suivi classe par classe, RGPD maîtrisé.
               ✓ Déjà utilisé en collège, à La Réunion.
             </p>
-            <p className="mt-1.5 text-sm font-black text-emerald-900">En savoir plus →</p>
+            <p className="mt-1.5 text-sm font-black text-cyan-800">En savoir plus →</p>
           </Link>
         </div>
 
@@ -1729,7 +1729,7 @@ export default function AccueilPage({
           <span className="font-black">🌍 Vous vivez à l&apos;étranger ?</span>{" "}
           Le programme français et la dictée quotidienne, à votre fuseau
           horaire.{" "}
-          <span className="font-black text-emerald-900 underline underline-offset-2">Découvrir →</span>
+          <span className="font-black text-cyan-800 underline underline-offset-2">Découvrir →</span>
         </Link>
 
         {/* Le prix, assumé — en clair, comme un encart tarifs de journal. */}
@@ -1749,7 +1749,7 @@ export default function AccueilPage({
           </p>
           <Link
             href="/tarifs"
-            className="mt-3 inline-flex items-center gap-2 rounded-sm bg-[#1d1c16] px-5 py-2.5 text-sm font-black text-[#f6f1e4] transition hover:bg-emerald-900"
+            className="mt-3 inline-flex items-center gap-2 rounded-sm bg-[#1d1c16] px-5 py-2.5 text-sm font-black text-[#f6f1e4] transition hover:bg-cyan-800"
           >
             Voir les offres →
           </Link>

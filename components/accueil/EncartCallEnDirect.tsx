@@ -135,7 +135,7 @@ export default function EncartCallEnDirect() {
         </p>
 
         {etat === "ok" || etat === "deja" ? (
-          <p className="mt-4 rounded-xl border border-emerald-300/30 bg-emerald-400/10 p-3 text-sm font-black text-emerald-200">
+          <p className="mt-4 rounded-xl border border-cyan-300/30 bg-emerald-400/10 p-3 text-sm font-black text-emerald-200">
             {etat === "deja"
               ? "Tu es déjà inscrit·e ✓ Le lien arrivera par email avant le call."
               : "Inscription enregistrée ✓ Tu recevras le lien par email avant le call."}
