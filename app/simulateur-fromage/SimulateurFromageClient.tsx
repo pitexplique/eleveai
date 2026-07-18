@@ -16,6 +16,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import DefisSimulateur, { type DefiSimulateur } from "@/components/simulateurs/DefisSimulateur";
 
 const VACHE_L_JOUR = 20;
 const PART_CAILLE = 0.25;
@@ -159,14 +160,7 @@ function FromagerieAnimee({ litres }: { litres: number }) {
 // Les nombres des questions sont DIFFÉRENTS du curseur : la réponse n'est pas
 // affichée à l'écran... mais l'élève peut la vérifier en réglant la machine —
 // la machine devient l'outil de correction (l'effet « c'est moi qui vérifie »).
-const DEFIS: {
-  id: string;
-  question: string;
-  reponse: number;
-  unite: string;
-  indice: string;
-  calcul: string;
-}[] = [
+const DEFIS: DefiSimulateur[] = [
   {
     id: "caille",
     question:
@@ -206,82 +200,17 @@ const DEFIS: {
   },
 ];
 
-// « 1 200 », « 1200 », « 2 000,0 »... → nombre. Tolérance ±0,5 (arrondis).
-function lireReponse(brut: string): number | null {
-  const n = parseFloat(brut.replace(/[\s  ]/g, "").replace(",", "."));
-  return Number.isFinite(n) ? n : null;
-}
-
-function DefiCard({
-  numero,
-  defi,
-}: {
-  numero: number;
-  defi: (typeof DEFIS)[number];
-}) {
-  const [saisie, setSaisie] = useState("");
-  const [statut, setStatut] = useState<"attente" | "bon" | "rate">("attente");
-
-  const verifier = () => {
-    const n = lireReponse(saisie);
-    if (n === null) return;
-    setStatut(Math.abs(n - defi.reponse) <= 0.5 ? "bon" : "rate");
-  };
-
-  return (
-    <div className="rounded border border-[#1f3a47] bg-[#0f2028] px-3 py-2.5">
-      <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[#e8c94f]">
-        Défi {numero}
-      </p>
-      <p className="mt-1 text-[13px] leading-5 text-[#f0f7f4]">{defi.question}</p>
-      <form
-        className="mt-2 flex flex-wrap items-center gap-2"
-        onSubmit={(e) => {
-          e.preventDefault();
-          verifier();
-        }}
-      >
-        <input
-          type="text"
-          inputMode="decimal"
-          value={saisie}
-          onChange={(e) => {
-            setSaisie(e.target.value);
-            setStatut("attente");
-          }}
-          placeholder="Ta réponse"
-          aria-label={`Réponse au défi ${numero}, en ${defi.unite}`}
-          className="w-32 rounded border border-[#1f3a47] bg-[#07131a] px-2.5 py-1.5 font-mono text-sm text-[#f0f7f4] outline-none placeholder:text-[#8fb8c9]/50 focus:border-[#e8c94f]"
-        />
-        <span className="font-mono text-[11px] text-[#8fb8c9]">{defi.unite}</span>
-        <button
-          type="submit"
-          className="rounded bg-[#e8c94f] px-3 py-1.5 text-[12px] font-bold text-[#07131a] hover:brightness-110"
-        >
-          Vérifier
-        </button>
-      </form>
-      {statut === "bon" && (
-        <p className="mt-2 text-[12.5px] font-semibold leading-5 text-[#7fb069]">
-          ✅ C&apos;est ça. {defi.calcul}
-        </p>
-      )}
-      {statut === "rate" && (
-        <p className="mt-2 text-[12.5px] leading-5 text-[#e07a5f]">
-          Pas encore — indice : {defi.indice}
-        </p>
-      )}
-      <details className="mt-1.5">
-        <summary className="cursor-pointer text-[11.5px] font-semibold text-[#8fb8c9] hover:text-[#f0f7f4]">
-          Voir le calcul
-        </summary>
-        <p className="mt-1 rounded border border-dashed border-[#e8c94f]/40 px-2.5 py-1.5 font-mono text-[12px] leading-relaxed text-[#e8c94f]">
-          {defi.calcul}
-        </p>
-      </details>
-    </div>
-  );
-}
+// La palette des défis suit celle de la fromagerie.
+const COULEURS_DEFIS = {
+  fond: "#0f2028",
+  fondProfond: "#07131a",
+  bord: "#1f3a47",
+  accent: "#e8c94f",
+  texte: "#f0f7f4",
+  sousTexte: "#8fb8c9",
+  ok: "#7fb069",
+  rate: "#e07a5f",
+};
 
 function Etape({
   nom,
@@ -589,22 +518,12 @@ export default function SimulateurFromageClient() {
         </div>
 
         {/* LES DÉFIS — à toi de calculer, la machine vérifie */}
-        <div className="mt-4 rounded border border-[#1f3a47] bg-[#0f2028] p-4">
-          <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#e8c94f]">
-              🎯 Les défis de la fromagerie
-            </p>
-            <p className="text-[11.5px] text-[#8fb8c9]">
-              Coup de pouce : règle le curseur sur les litres du défi — la
-              machine vérifie pour toi.
-            </p>
-          </div>
-          <div className="mt-3 grid gap-3 md:grid-cols-2">
-            {DEFIS.map((d, i) => (
-              <DefiCard key={d.id} numero={i + 1} defi={d} />
-            ))}
-          </div>
-        </div>
+        <DefisSimulateur
+          titre="Les défis de la fromagerie"
+          coupDePouce="Coup de pouce : règle le curseur sur les litres du défi — la machine vérifie pour toi."
+          defis={DEFIS}
+          couleurs={COULEURS_DEFIS}
+        />
 
         {/* Le pont vers l'épisode et le défi */}
         <div className="mt-4 flex flex-wrap items-center gap-3">

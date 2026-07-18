@@ -13,6 +13,63 @@
 // officielle (c'est aussi la protection d'EleveAI).
 
 import { useEffect, useRef, useState } from "react";
+import DefisSimulateur, { type DefiSimulateur } from "@/components/simulateurs/DefisSimulateur";
+
+// ── Les défis de la vigie (règle du 18/07 : chaque simulateur a les siens) ───
+// Les nombres viennent des VRAIS cyclones de la carte (Belal, Gamède) : la
+// réponse n'est pas à l'écran, mais l'élève peut tracer la même course sur
+// la carte pour vérifier — la vigie corrige elle-même.
+const DEFIS: DefiSimulateur[] = [
+  {
+    id: "temps",
+    question:
+      "La vigie repère un cyclone à 540 km de l'île. Il avance à 15 km/h. Dans combien d'heures serait-il sur nous ?",
+    reponse: 36,
+    unite: "h",
+    indice: "La formule de la vigie : t = d ÷ v.",
+    calcul: "t = d ÷ v = 540 ÷ 15 = 36 h — un jour et demi pour se préparer",
+  },
+  {
+    id: "distance",
+    question:
+      "BELAL (2024) avançait à ~12 km/h. Quelle distance parcourue en 24 h ?",
+    reponse: 288,
+    unite: "km",
+    indice: "À l'envers : d = v × t.",
+    calcul: "d = v × t = 12 × 24 = 288 km",
+  },
+  {
+    id: "rafale",
+    question:
+      "Au Maïdo, pendant Belal, la rafale a été mesurée à 217 km/h. Ça fait combien de mètres par seconde ? (arrondis)",
+    reponse: 60,
+    unite: "m/s",
+    tolerance: 1,
+    indice: "1 km = 1 000 m et 1 h = 3 600 s : divise par 3,6.",
+    calcul: "217 ÷ 3,6 ≈ 60 m/s — soixante mètres chaque seconde",
+  },
+  {
+    id: "pluie",
+    question:
+      "GAMÈDE (2007) a versé près de 5 000 mm de pluie à Cilaos en 9 jours (record du monde). Combien de mm par jour, en moyenne ? (arrondis)",
+    reponse: 556,
+    unite: "mm/jour",
+    tolerance: 5,
+    indice: "Une moyenne, c'est le total divisé par le nombre de jours.",
+    calcul: "5 000 ÷ 9 ≈ 556 mm par jour — plus d'un demi-mètre d'eau chaque jour",
+  },
+];
+
+const COULEURS_DEFIS = {
+  fond: "#0e2233",
+  fondProfond: "#071825",
+  bord: "#123049",
+  accent: "#62d6e8",
+  texte: "#e8f1f6",
+  sousTexte: "#9db4c2",
+  ok: "#45d18a",
+  rate: "#ff9d6b",
+};
 
 // embed : version widget (iframe chez les médias de l'île) — même simulateur,
 // mais la marque devient un lien traçé vers eleveai.fr (utm_source=widget).
@@ -600,9 +657,10 @@ export default function SimulateurCycloneClient({ embed = false }: { embed?: boo
   }, []);
 
   return (
-    // Sur desktop : tout le simulateur tient dans la hauteur de l'écran (moins
-    // le header du site ~66px) — le pupitre ne doit jamais faire défiler la
-    // page (retour Frédéric). Sur mobile : empilement naturel.
+    <>
+    {/* Sur desktop : tout le simulateur tient dans la hauteur de l'écran (moins
+        le header du site ~66px) — le pupitre ne doit jamais faire défiler la
+        page (retour Frédéric). Sur mobile : empilement naturel. */}
     <div
       ref={rootRef}
       className="min-h-screen bg-[#071825] text-[#e8f1f6] lg:flex lg:min-h-0 lg:flex-col lg:overflow-hidden"
@@ -812,5 +870,23 @@ export default function SimulateurCycloneClient({ embed = false }: { embed?: boo
         )}
       </footer>
     </div>
+
+    {/* LES DÉFIS DE LA VIGIE — HORS du bloc plein-écran (dont l'overflow
+        hidden les avalait) : le pupitre garde son écran entier, les défis
+        attendent en dessous, au défilement. Pas dans le widget embarqué des
+        médias : chez eux, la machine seule. */}
+    {!embed && (
+      <section className="border-t border-[#123049] bg-[#071825] px-4 pb-6 pt-1 sm:px-6">
+        <div className="mx-auto max-w-5xl">
+          <DefisSimulateur
+            titre="Les défis de la vigie"
+            coupDePouce="Coup de pouce : trace la même course sur la carte — la vigie vérifie pour toi."
+            defis={DEFIS}
+            couleurs={COULEURS_DEFIS}
+          />
+        </div>
+      </section>
+    )}
+    </>
   );
 }

@@ -15,6 +15,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import DefisSimulateur, { type DefiSimulateur } from "@/components/simulateurs/DefisSimulateur";
 
 const RENDEMENT_CHAMP = 10; // kg de canne par m²
 const PART_JUS = 0.7;
@@ -25,6 +26,59 @@ const KWH_PAR_TONNE = 100;
 const KWH_FAMILLE_JOUR = 10;
 const MORCEAU_G = 6;
 const TERRAIN_FOOT_M2 = 7140;
+
+// ── Les défis de l'usine (règle du 18/07 : chaque simulateur a les siens) ────
+// Les nombres diffèrent du curseur : la réponse n'est pas à l'écran, mais
+// l'élève peut régler le tonnage pour vérifier — l'usine corrige elle-même.
+const DEFIS: DefiSimulateur[] = [
+  {
+    id: "sucre",
+    question:
+      "1 000 tonnes de canne entrent à l'usine aujourd'hui. Combien de tonnes de sucre roux vont en sortir ?",
+    reponse: 100,
+    unite: "t",
+    indice: "Le sucre, c'est environ 10 % du poids de la canne.",
+    calcul: "sucre = 1 000 t × 10 % = 100 t",
+  },
+  {
+    id: "familles",
+    question:
+      "Ces mêmes 1 000 t donnent de l'électricité : 100 kWh par tonne. Une famille utilise ~10 kWh par jour. Combien de familles ont leur journée de courant ?",
+    reponse: 10000,
+    unite: "familles",
+    indice: "D'abord les kWh (1 000 × 100), puis divise par 10.",
+    calcul: "1 000 × 100 = 100 000 kWh · 100 000 ÷ 10 = 10 000 familles",
+  },
+  {
+    id: "inverse",
+    question:
+      "La coopérative commande 3 t de sucre pour ses confitures. Combien de tonnes de canne faut-il broyer ?",
+    reponse: 30,
+    unite: "t de canne",
+    indice: "Remonte l'usine à l'envers : le sucre n'est que 10 % de la canne.",
+    calcul: "canne = 3 ÷ 10 % = 3 ÷ 0,10 = 30 t — un cachalot pile",
+  },
+  {
+    id: "champ",
+    question:
+      "Un planteur a un champ de 5 000 m², à ~10 kg de canne par m². Combien de TONNES de canne à la coupe ?",
+    reponse: 50,
+    unite: "t",
+    indice: "5 000 × 10 te donne des kilos — pense à passer en tonnes.",
+    calcul: "5 000 × 10 = 50 000 kg = 50 t",
+  },
+];
+
+const COULEURS_DEFIS = {
+  fond: "#241708",
+  fondProfond: "#160d04",
+  bord: "#3a2a14",
+  accent: "#f2a93b",
+  texte: "#f6ead6",
+  sousTexte: "#c9a86c",
+  ok: "#7fb069",
+  rate: "#e07a3f",
+};
 
 // Formatage français des grands nombres, sans décimales inutiles.
 function fr(n: number, decimales = 0): string {
@@ -378,6 +432,14 @@ export default function SimulateurSucreClient() {
           <span className="text-[#c9a86c]"> · </span>
           familles = {fr(kwh)} ÷ 10 = <b>{fr(familles)}</b>
         </div>
+
+        {/* LES DÉFIS — à toi de calculer, l'usine vérifie */}
+        <DefisSimulateur
+          titre="Les défis de l'usine"
+          coupDePouce="Coup de pouce : règle le tonnage du défi — l'usine vérifie pour toi."
+          defis={DEFIS}
+          couleurs={COULEURS_DEFIS}
+        />
 
         {/* Le pont vers l'épisode et le défi */}
         <div className="mt-4 flex flex-wrap items-center gap-3">
