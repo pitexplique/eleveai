@@ -931,6 +931,9 @@ export default function AccueilPage({
                   { emoji: "🗣️", titre: "Le dico : les 50 mots de l'évaluation nationale 6ᵉ", href: "/dico" },
                   { emoji: "📚", titre: "Les fiches de cours, notion par notion, avec corrections", href: "/fiches-cours" },
                   { emoji: "🎓", titre: "Pix IA : l'éval blanche pour arriver prêt le jour J", href: "/eval-pix-ia" },
+                  { emoji: "✍️", titre: "La dictée du jour : 5 mots sans faute, avec l'audio", href: "/dictee-du-jour" },
+                  { emoji: "⚡", titre: "Calcul rapide : 3 minutes d'automatismes chrono", href: "/calcul-rapide" },
+                  { emoji: "🌋", titre: "Maths Réel · 974 : le carnet de terrain, photos et vidéos", href: "/maths-974" },
                 ].map((l) => (
                   <li key={l.href} className="border-b border-dotted border-[#1d1c16]/30 pb-2">
                     <Link href={l.href} className="group flex items-baseline gap-2">
