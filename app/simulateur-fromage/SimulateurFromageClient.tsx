@@ -155,6 +155,134 @@ function FromagerieAnimee({ litres }: { litres: number }) {
   );
 }
 
+// ── Les défis de la fromagerie (rappel actif) ─────────────────────────────────
+// Les nombres des questions sont DIFFÉRENTS du curseur : la réponse n'est pas
+// affichée à l'écran... mais l'élève peut la vérifier en réglant la machine —
+// la machine devient l'outil de correction (l'effet « c'est moi qui vérifie »).
+const DEFIS: {
+  id: string;
+  question: string;
+  reponse: number;
+  unite: string;
+  indice: string;
+  calcul: string;
+}[] = [
+  {
+    id: "caille",
+    question:
+      "Un éleveur descend 1 200 L de lait. Combien de kilos de caillé la fromagerie va-t-elle en tirer ?",
+    reponse: 300,
+    unite: "kg",
+    indice: "25 %, c'est le quart. Le quart de 1 200...",
+    calcul: "caillé = 1 200 L × 25 % = 1 200 × 0,25 = 300 kg",
+  },
+  {
+    id: "pots",
+    question: "Avec ces 300 kg de caillé, combien de pots de 150 g ?",
+    reponse: 2000,
+    unite: "pots",
+    indice: "Passe tout en grammes : 300 kg = 300 000 g.",
+    calcul: "300 kg = 300 000 g · 300 000 ÷ 150 = 2 000 pots",
+  },
+  {
+    id: "inverse",
+    question:
+      "Les collèges commandent 1 000 pots pour la semaine. Combien de litres de lait faut-il traire ?",
+    reponse: 600,
+    unite: "L",
+    indice:
+      "Remonte la machine à l'envers : d'abord le caillé nécessaire, puis le lait (le caillé n'est que 25 % du lait).",
+    calcul:
+      "1 000 pots × 150 g = 150 kg de caillé · lait = 150 ÷ 0,25 = 600 L",
+  },
+  {
+    id: "etiquette",
+    question:
+      "La cantine rêve d'un mini-pot de 50 g. D'après l'étiquette, combien de kcal dedans ?",
+    reponse: 92,
+    unite: "kcal",
+    indice: "50 g, c'est la moitié de 100 g.",
+    calcul: "l'étiquette dit 184 kcal pour 100 g · 184 ÷ 2 = 92 kcal",
+  },
+];
+
+// « 1 200 », « 1200 », « 2 000,0 »... → nombre. Tolérance ±0,5 (arrondis).
+function lireReponse(brut: string): number | null {
+  const n = parseFloat(brut.replace(/[\s  ]/g, "").replace(",", "."));
+  return Number.isFinite(n) ? n : null;
+}
+
+function DefiCard({
+  numero,
+  defi,
+}: {
+  numero: number;
+  defi: (typeof DEFIS)[number];
+}) {
+  const [saisie, setSaisie] = useState("");
+  const [statut, setStatut] = useState<"attente" | "bon" | "rate">("attente");
+
+  const verifier = () => {
+    const n = lireReponse(saisie);
+    if (n === null) return;
+    setStatut(Math.abs(n - defi.reponse) <= 0.5 ? "bon" : "rate");
+  };
+
+  return (
+    <div className="rounded border border-[#1f3a47] bg-[#0f2028] px-3 py-2.5">
+      <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[#e8c94f]">
+        Défi {numero}
+      </p>
+      <p className="mt-1 text-[13px] leading-5 text-[#f0f7f4]">{defi.question}</p>
+      <form
+        className="mt-2 flex flex-wrap items-center gap-2"
+        onSubmit={(e) => {
+          e.preventDefault();
+          verifier();
+        }}
+      >
+        <input
+          type="text"
+          inputMode="decimal"
+          value={saisie}
+          onChange={(e) => {
+            setSaisie(e.target.value);
+            setStatut("attente");
+          }}
+          placeholder="Ta réponse"
+          aria-label={`Réponse au défi ${numero}, en ${defi.unite}`}
+          className="w-32 rounded border border-[#1f3a47] bg-[#07131a] px-2.5 py-1.5 font-mono text-sm text-[#f0f7f4] outline-none placeholder:text-[#8fb8c9]/50 focus:border-[#e8c94f]"
+        />
+        <span className="font-mono text-[11px] text-[#8fb8c9]">{defi.unite}</span>
+        <button
+          type="submit"
+          className="rounded bg-[#e8c94f] px-3 py-1.5 text-[12px] font-bold text-[#07131a] hover:brightness-110"
+        >
+          Vérifier
+        </button>
+      </form>
+      {statut === "bon" && (
+        <p className="mt-2 text-[12.5px] font-semibold leading-5 text-[#7fb069]">
+          ✅ C&apos;est ça. {defi.calcul}
+        </p>
+      )}
+      {statut === "rate" && (
+        <p className="mt-2 text-[12.5px] leading-5 text-[#e07a5f]">
+          Pas encore — indice : {defi.indice}
+        </p>
+      )}
+      <details className="mt-1.5">
+        <summary className="cursor-pointer text-[11.5px] font-semibold text-[#8fb8c9] hover:text-[#f0f7f4]">
+          Voir le calcul
+        </summary>
+        <p className="mt-1 rounded border border-dashed border-[#e8c94f]/40 px-2.5 py-1.5 font-mono text-[12px] leading-relaxed text-[#e8c94f]">
+          {defi.calcul}
+        </p>
+      </details>
+    </div>
+  );
+}
+
 function Etape({
   nom,
   explication,
@@ -457,6 +585,24 @@ export default function SimulateurFromageClient() {
                 de la fromagerie — juste en plus petit.
               </p>
             </div>
+          </div>
+        </div>
+
+        {/* LES DÉFIS — à toi de calculer, la machine vérifie */}
+        <div className="mt-4 rounded border border-[#1f3a47] bg-[#0f2028] p-4">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#e8c94f]">
+              🎯 Les défis de la fromagerie
+            </p>
+            <p className="text-[11.5px] text-[#8fb8c9]">
+              Coup de pouce : règle le curseur sur les litres du défi — la
+              machine vérifie pour toi.
+            </p>
+          </div>
+          <div className="mt-3 grid gap-3 md:grid-cols-2">
+            {DEFIS.map((d, i) => (
+              <DefiCard key={d.id} numero={i + 1} defi={d} />
+            ))}
           </div>
         </div>
 
