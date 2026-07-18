@@ -949,28 +949,47 @@ export default function AccueilPage({
           <aside className="border-[#1d1c16]/25 lg:col-span-3 lg:border-l lg:pl-6">
             <Kicker>Apprendre · Aujourd&apos;hui</Kicker>
             <div className="mt-2 divide-y divide-[#1d1c16]/20">
-              <Link href="/defis-du-jour" className="group block py-3">
-                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-                  🎯 Le défi du jour · {defiDuJour.defi.theme}{" "}
-                  <PastilleJour />
-                </p>
-                <div className="relative mt-2 aspect-[16/7] w-full overflow-hidden border border-[#1d1c16]/20">
-                  <Image
-                    src={defiDuJour.defi.image ?? "/images/defis-du-jour/coupe-monde-foot.webp"}
-                    alt={defiDuJour.defi.title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 300px"
-                    className="object-cover transition duration-300 group-hover:scale-[1.03]"
-                  />
-                </div>
-                <h3 className="mt-1 font-serif text-lg font-black leading-snug group-hover:underline">
-                  {defiDuJour.defi.title}
-                </h3>
-                <p className="mt-1 line-clamp-2 text-sm font-medium text-[#1d1c16]/70">
+              {/* RÈGLE DU JOURNAL (Frédéric, 18/07) : une question posée en
+                  Une porte sa réponse SOUS elle (repliée) — on ne renvoie
+                  jamais le lecteur chercher la réponse sur une autre page.
+                  Le lien vers le défi guidé reste, mais il devient un plus. */}
+              <div className="py-3">
+                <Link href="/defis-du-jour" className="group block">
+                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                    🎯 Le défi du jour · {defiDuJour.defi.theme}{" "}
+                    <PastilleJour />
+                  </p>
+                  <div className="relative mt-2 aspect-[16/7] w-full overflow-hidden border border-[#1d1c16]/20">
+                    <Image
+                      src={defiDuJour.defi.image ?? "/images/defis-du-jour/coupe-monde-foot.webp"}
+                      alt={defiDuJour.defi.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 300px"
+                      className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <h3 className="mt-1 font-serif text-lg font-black leading-snug group-hover:underline">
+                    {defiDuJour.defi.title}
+                  </h3>
+                </Link>
+                <p className="mt-1 text-sm font-medium text-[#1d1c16]/70">
                   {defiDuJour.defi.question}
                 </p>
-                <p className="mt-1.5 text-sm font-black text-emerald-900">Relever le défi →</p>
-              </Link>
+                <details className="mt-1.5">
+                  <summary className="cursor-pointer text-xs font-black text-[#1d1c16]/55 underline underline-offset-2 hover:text-[#1d1c16]">
+                    Voir la réponse ▾
+                  </summary>
+                  <p className="mt-1.5 border-l-2 border-emerald-900/40 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/80">
+                    {defiDuJour.defi.explanation}
+                  </p>
+                </details>
+                <Link
+                  href="/defis-du-jour"
+                  className="mt-1.5 block text-sm font-black text-emerald-900 hover:underline"
+                >
+                  Le défi guidé, pas à pas →
+                </Link>
+              </div>
 
               {/* LA machine du moment garde la grande réclame (image) ; les
                   précédentes passent en rangée compacte — trois réclames à
