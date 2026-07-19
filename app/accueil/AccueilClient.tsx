@@ -723,9 +723,12 @@ export default function AccueilPage({
             Style : fond clair, écriture bleu boucan canot. La dictée garde sa
             place dans « À lire aussi ». */}
         <div className="grid items-center gap-3 border-b-4 border-double border-[#1d1c16] py-5 lg:grid-cols-[1fr_auto_1fr] lg:gap-6">
-          {/* Oreille gauche — l'élève : le coach + les séries d'exercices. */}
+          {/* Oreille gauche — l'élève : le coach + les séries d'exercices.
+              Destination /explorer (demande de Frédéric, 19/07) : l'oreille
+              promet le coach ET les séries — /explorer montre tout et laisse
+              choisir sa classe, le coach maths seul était réducteur. */}
           <Link
-            href={getHref("/coach-ia/maths")}
+            href="/explorer"
             className="group order-2 border-2 border-cyan-800 bg-cyan-800 p-3 text-center text-[#f0fafc] transition hover:bg-[#f0fafc] hover:text-cyan-800 lg:order-1"
           >
             <p className="text-[10px] font-black uppercase tracking-[0.18em]">
@@ -735,7 +738,7 @@ export default function AccueilPage({
               Il t&apos;explique, tu t&apos;entraînes — tout est corrigé
             </p>
             <p className="mt-1 text-xs font-black underline underline-offset-2">
-              {classeLabel ? `Ouvrir en ${classeLabel} →` : "Ouvrir le coach →"}
+              Explorer tout le catalogue →
             </p>
           </Link>
 
