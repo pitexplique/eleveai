@@ -726,7 +726,7 @@ export default function AccueilPage({
           {/* Oreille gauche — l'élève : le coach + les séries d'exercices. */}
           <Link
             href={getHref("/coach-ia/maths")}
-            className="group order-2 border-2 border-cyan-800 bg-[#f0fafc] p-3 text-center text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc] lg:order-1"
+            className="group order-2 border-2 border-cyan-800 bg-cyan-800 p-3 text-center text-[#f0fafc] transition hover:bg-[#f0fafc] hover:text-cyan-800 lg:order-1"
           >
             <p className="text-[10px] font-black uppercase tracking-[0.18em]">
               🤖 Le coach + les séries d&apos;exercices
@@ -761,7 +761,7 @@ export default function AccueilPage({
               le chantier d'août n'a pas livré. */}
           <Link
             href="/enseignants"
-            className="group order-3 border-2 border-cyan-800 bg-[#f0fafc] p-3 text-center text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
+            className="group order-3 border-2 border-cyan-800 bg-cyan-800 p-3 text-center text-[#f0fafc] transition hover:bg-[#f0fafc] hover:text-cyan-800"
           >
             <p className="text-[10px] font-black uppercase tracking-[0.18em]">
               🧑‍🏫 Professeurs
