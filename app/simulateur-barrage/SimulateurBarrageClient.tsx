@@ -127,6 +127,8 @@ function BarrageAnime({ debit }: { debit: number }) {
         {/* La falaise + la conduite forcée qui plonge (~500 m) */}
         <path d="M276,96 C360,120 420,190 470,250" fill="none" stroke="#0e2a20" strokeWidth="14" />
         <path d="M276,96 C360,120 420,190 470,250" fill="none" stroke="#5bc8dd" strokeWidth="6" className="b-flux" />
+        {/* La vanne (le robinet géant), posée à l'entrée de la conduite */}
+        <rect x="295" y="99" width="10" height="20" rx="2" fill="#f2d43b" transform="rotate(38 300 109)" />
         <text x="310" y="180" fill="#5bc8dd" fontSize="11" fontWeight="700" fontFamily="monospace" transform="rotate(38 310 180)">LA CONDUITE FORCÉE · ~500 m</text>
         {/* La centrale */}
         <rect x="452" y="238" width="150" height="70" rx="8" fill="#0f241a" stroke="#93bfa9" strokeWidth="3" />
@@ -155,7 +157,50 @@ function BarrageAnime({ debit }: { debit: number }) {
         ))}
         <text x="250" y="292" fill="#5bc8dd" fontSize="10" fontWeight="700" textAnchor="end" fontFamily="monospace">L&apos;EAU REND À LA RIVIÈRE →</text>
         <text x="250" y="316" fill="#93bfa9" fontSize="9.5" fontWeight="700" textAnchor="end" fontFamily="monospace">(intacte — rien ne se perd)</text>
+        {/* Les pastilles A → H — la grammaire des schémas de manuel (idée de
+            Frédéric, 19/07, d'après une coupe légendée) : on apprend aussi à
+            LIRE un schéma. La légende complète est sous le dessin. */}
+        {([
+          ["A", 166, 85],
+          ["B", 440, 226],
+          ["C", 470, 300],
+          ["D", 590, 298],
+          ["E", 322, 96],
+          ["F", 400, 165],
+          ["G", 672, 168],
+          ["H", 300, 282],
+        ] as const).map(([lettre, x, y]) => (
+          <g key={lettre}>
+            <circle cx={x} cy={y} r="9" fill="#f2d43b" />
+            <text x={x} y={y + 3.5} fill="#081510" fontSize="11" fontWeight="800" textAnchor="middle" fontFamily="monospace">{lettre}</text>
+          </g>
+        ))}
       </svg>
+      {/* Le vocabulaire du schéma, de A à H — replié pour garder la page courte. */}
+      <details className="border-t border-[#1e3f2f] px-3 py-2">
+        <summary className="cursor-pointer text-[11.5px] font-bold text-[#93bfa9] hover:text-[#eef7f2]">
+          🔤 Les mots du barrage, de A à H ▾
+        </summary>
+        <div className="mt-2 grid gap-x-5 gap-y-1.5 pb-1 text-[12px] leading-5 text-[#c9dfd2] sm:grid-cols-2">
+          {[
+            ["A", "Le réservoir (la retenue) : l'eau captée attend là."],
+            ["B", "La centrale : le bâtiment des machines."],
+            ["C", "La turbine : la roue que l'eau fait tourner."],
+            ["D", "Le générateur (ici, l'alternateur) : la rotation devient du courant."],
+            ["E", "La vanne : le robinet géant — ouvert, l'eau descend."],
+            ["F", "La conduite forcée : le tuyau de la chute (~500 m)."],
+            ["G", "Les lignes à haute tension : le courant part vers les villes."],
+            ["H", "La rivière : l'eau rendue, intacte."],
+          ].map(([lettre, texte]) => (
+            <p key={lettre}>
+              <span className="mr-1.5 inline-block w-5 rounded-sm bg-[#f2d43b] text-center font-mono text-[11px] font-black text-[#081510]">
+                {lettre}
+              </span>
+              {texte}
+            </p>
+          ))}
+        </div>
+      </details>
     </div>
   );
 }

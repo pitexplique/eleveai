@@ -251,8 +251,9 @@ class BarrageTakamaka974(BarrageBase):
         tuyau = Line([1.7, -0.75, 0], [4.6, -1.5, 0], color=GREY_C, stroke_width=10)
         self.play(GrowFromEdge(barrage, DOWN))
         self.play(Create(tuyau))
+        # décalée à gauche : à (0, -2.6) elle frôlait le margouillat (vu au brouillon).
         dire("Une prise d'eau capte UNE PARTIE de la rivière — le reste continue.",
-             couleur=VERT_OK, mode="fade_up", pos=(0, -2.6))
+             size=25, couleur=VERT_OK, mode="fade_up", pos=(-0.7, -2.6))
         self.wait(2.2)
 
     # ── écran 2 : la chute (~500 m) ─────────────────────────────────────────
@@ -305,8 +306,10 @@ class BarrageTakamaka974(BarrageBase):
         self.play(GrowArrow(jet))
         self.play(Rotate(turb, -2 * PI, run_time=1.6), Rotate(alt, -2 * PI, run_time=1.6))
 
+        # sous le titre (centrée) : la place tournante tombait au bord droit
+        # et coupait la phrase (vu au brouillon).
         dire("La turbine entraîne l'alternateur : la rotation devient du courant.",
-             couleur=JAUNE_TITRE, mode="fade_down")
+             couleur=JAUNE_TITRE, mode="fade_down", pos=(0, 2.4))
         fil = VMobject(color=JAUNE_TITRE, stroke_width=4).set_points_smoothly(
             [[-0.3, -0.4, 0], [1.4, 0.6, 0], [3.0, 1.2, 0], [4.6, 1.6, 0]])
         p1 = pylone().move_to([2.2, 0.4, 0])
@@ -375,19 +378,21 @@ class BarrageTakamaka974(BarrageBase):
         cadre = SurroundingRectangle(rappel, color=VERT_OK, buff=0.2, corner_radius=0.1)
         self.play(self.anim_entree(rappel, mode="fade_down"), Create(cadre))
 
-        # le dessin du défi : la conduite, le débit, la chute
-        cond = conduite([-4.8, 1.0, 0], [-1.6, -1.4, 0])
-        deb = self.T("5 m³/s", size=30, color=BLEU_CALCUL).move_to([-5.0, -0.2, 0])
-        cote = DoubleArrow([-0.9, 1.0, 0], [-0.9, -1.4, 0], color=JAUNE_TITRE,
+        # le dessin du défi, COMPACT à gauche (conduite + cote serrées) pour
+        # laisser un vrai couloir aux questions — les brouillons ont montré
+        # tour à tour la cote sur les questions puis les questions au bord.
+        cond = conduite([-5.6, 1.0, 0], [-2.8, -1.4, 0])
+        deb = self.T("5 m³/s", size=28, color=BLEU_CALCUL).move_to([-5.6, -0.6, 0])
+        cote = DoubleArrow([-2.1, 1.0, 0], [-2.1, -1.4, 0], color=JAUNE_TITRE,
                            stroke_width=4, buff=0, tip_length=0.2)
-        chute_lab = self.T("500 m", size=28, color=JAUNE_TITRE).next_to(cote, RIGHT, buff=0.2)
+        chute_lab = self.T("500 m", size=26, color=JAUNE_TITRE).next_to(cote, DOWN, buff=0.15)
         self.play(Create(cond), self.anim_entree(deb, mode="slide_r"))
         self.play(GrowFromEdge(cote, UP), self.anim_entree(chute_lab, mode="pop"))
-        self.gouttes_le_long([-4.8, 1.0, 0], [-1.6, -1.4, 0], n=3, run_time=1.0)
+        self.gouttes_le_long([-5.6, 1.0, 0], [-2.8, -1.4, 0], n=3, run_time=1.0)
 
-        q1 = self.T("1) Quelle puissance sort de la centrale ?", size=29, color=WHITE).move_to([2.6, 0.6, 0])
-        q2 = self.T("2) Combien de familles ont leur journée", size=29, color=WHITE).move_to([2.6, -0.2, 0])
-        q3 = self.T("de courant, si la rivière tient 24 h ?", size=29, color=WHITE).move_to([2.7, -0.8, 0])
+        q1 = self.T("1) Quelle puissance sort de la centrale ?", size=27, color=WHITE).move_to([2.4, 0.6, 0])
+        q2 = self.T("2) Combien de familles ont leur journée", size=27, color=WHITE).move_to([2.4, -0.2, 0])
+        q3 = self.T("de courant, si la rivière tient 24 h ?", size=27, color=WHITE).move_to([2.5, -0.8, 0])
         self.play(self.anim_entree(q1, mode="slide_l"))
         self.play(self.anim_entree(q2, mode="fade_up"), self.anim_entree(q3, mode="fade_up"))
 
