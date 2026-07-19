@@ -760,7 +760,7 @@ export default function AccueilPage({
               On ne promet QUE ce qui existe : pas de « vue classe » tant que
               le chantier d'août n'a pas livré. */}
           <Link
-            href="/dashboard-prof"
+            href="/enseignants"
             className="group order-3 border-2 border-cyan-800 bg-[#f0fafc] p-3 text-center text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
           >
             <p className="text-[10px] font-black uppercase tracking-[0.18em]">
