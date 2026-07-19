@@ -1,36 +1,37 @@
-// La réclame de la fromagerie — la troisième machine « dans ta main », sous
-// le cyclone et l'usine à sucre dans le fil du jour. Image de Frédéric
-// (18/07) : le pot dans le pré de la Plaine des Cafres. Même grammaire de
-// réclame de presse, version compacte.
+// La réclame du barrage — la machine du moment dans le fil du jour (la
+// fromagerie descend dans la rangée compacte). Image de Frédéric (19/07) :
+// le barrage de Takamaka dans les gorges. Même grammaire de réclame de
+// presse, version compacte.
 
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ReclameFromagerie() {
+export default function ReclameBarrage() {
   return (
     <div className="py-3">
       <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-        🧀 Nouveau · Le lait des Hauts
+        💧 Nouveau · La rivière des Marsouins
       </p>
       <Link
-        href="/simulateur-fromage"
+        href="/simulateur-barrage"
         className="group mt-1.5 block border-4 border-double border-[#1d1c16] p-3 text-center transition hover:bg-[#1d1c16] hover:text-[#f6f1e4]"
       >
         <Image
-          src="/images/tifrais-plaine-des-cafres.webp"
-          alt="Un pot de fromage frais péi posé devant les vaches de la Plaine des Cafres"
+          src="/images/barrage-takamaka.webp"
+          alt="Le barrage de Takamaka dans les gorges de la rivière des Marsouins"
           width={1200}
-          height={980}
+          height={900}
           className="w-full border border-[#1d1c16]/25"
         />
         <p className="mt-1.5 font-serif text-lg font-black leading-tight">
-          La fromagerie dans ta main
+          Le barrage dans ta main
         </p>
         <p className="mt-1 text-xs font-semibold leading-5 opacity-75">
-          Règle le lait des Hauts, remplis les pots — du pré au pot de 150 g.
+          Ouvre la vanne : l&apos;eau tombe de 500 m, l&apos;île s&apos;allume — et la
+          rivière reprend son eau.
         </p>
         <p className="mt-1.5 text-sm font-black text-cyan-800 group-hover:text-cyan-300">
-          Faire tourner la fromagerie →
+          Ouvrir les vannes →
         </p>
       </Link>
     </div>

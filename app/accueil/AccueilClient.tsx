@@ -33,7 +33,7 @@ import FloatingCoach from "@/components/FloatingCoach";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import AgendaJournal from "@/components/accueil/AgendaJournal";
 import AbonnementJournal from "@/components/accueil/AbonnementJournal";
-import ReclameFromagerie from "@/components/accueil/ReclameFromagerie";
+import ReclameBarrage from "@/components/accueil/ReclameBarrage";
 import { PICTOS, type Picto } from "@/app/picto-maths/data";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
@@ -1043,14 +1043,14 @@ export default function AccueilPage({
                   précédentes passent en rangée compacte — trois réclames à
                   image empilées creusaient un grand blanc sous l'article
                   (constat de Frédéric, 18/07). */}
-              <ReclameFromagerie />
+              <ReclameBarrage />
 
               <div className="py-3">
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                   🎛️ Les autres machines dans ta main
                 </p>
                 {[
-                  { emoji: "💧", nom: "Le barrage de Takamaka", href: "/simulateur-barrage", cta: "Ouvrir les vannes" },
+                  { emoji: "🧀", nom: "La fromagerie", href: "/simulateur-fromage", cta: "Remplir les pots" },
                   { emoji: "🌀", nom: "Dans l'œil du cyclone", href: "/simulateur-cyclone", cta: "Lancer ton cyclone" },
                   { emoji: "🏭", nom: "L'usine à sucre", href: "/simulateur-sucre", cta: "Faire tourner l'usine" },
                 ].map((m) => (

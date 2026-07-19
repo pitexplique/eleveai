@@ -31,10 +31,11 @@ export const metadata: Metadata = {
     siteName: "EleveAI",
     images: [
       {
+        // L'illustration de Frédéric (19/07) : le barrage dans son écrin vert.
         url: "/images/barrage-takamaka.webp",
         width: 1200,
-        height: 675,
-        alt: "Le barrage dans ta main — le simulateur d'EleveAI",
+        height: 900,
+        alt: "Le barrage de Takamaka dans les gorges de la rivière des Marsouins",
       },
     ],
     locale: "fr_FR",
