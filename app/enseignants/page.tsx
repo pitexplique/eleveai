@@ -41,6 +41,35 @@ const capacites = [
   },
 ];
 
+// Les bénéfices chiffrés — chaque chiffre est structurel (le produit le garantit),
+// jamais une statistique inventée.
+const benefices = [
+  {
+    valeur: "0",
+    unite: "copie",
+    label: "à corriger",
+    detail: "Les réponses des élèves sont validées automatiquement, exercice par exercice.",
+  },
+  {
+    valeur: "0",
+    unite: "note",
+    label: "à saisir",
+    detail: "Les scores remontent tout seuls dans votre tableau de bord, en temps réel.",
+  },
+  {
+    valeur: "1",
+    unite: "coup d'œil",
+    label: "pour repérer qui décroche",
+    detail: "Le statut d'engagement 🟢🟠🔴 de chaque élève, sans ouvrir un seul cahier.",
+  },
+  {
+    valeur: "2",
+    unite: "min",
+    label: "pour lancer une activité",
+    detail: "Un calcul rapide ou un défi en classe, sans préparation ni photocopie.",
+  },
+];
+
 // Le déroulé concret : comment ça s'insère dans la semaine du prof.
 const deroule = [
   { moment: "En classe", texte: "Vous lancez un calcul rapide ou un défi. Les élèves jouent, les scores remontent." },
@@ -79,6 +108,27 @@ export default function EnseignantsPage() {
             >
               Déployer dans mon collège
             </Link>
+          </div>
+        </section>
+
+        {/* ── CE QUE VOUS Y GAGNEZ (les bénéfices, en chiffres) ── */}
+        <section aria-label="Ce que vous y gagnez">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {benefices.map((b) => (
+              <div
+                key={b.label}
+                className="rounded-3xl border border-white bg-white/80 p-6 text-center shadow-md backdrop-blur"
+              >
+                <p className="text-slate-900">
+                  <span className="text-5xl font-black">{b.valeur}</span>{" "}
+                  <span className="text-lg font-black">{b.unite}</span>
+                </p>
+                <p className="mt-1 text-sm font-black text-emerald-700">{b.label}</p>
+                <p className="mt-2 text-xs font-semibold leading-relaxed text-slate-500">
+                  {b.detail}
+                </p>
+              </div>
+            ))}
           </div>
         </section>
 
