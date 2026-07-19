@@ -186,6 +186,7 @@ const CATALOGUE: { emoji: string; nom: string; ligne: string; href: string }[] =
   { emoji: "🌀", nom: "Dans l'œil du cyclone", ligne: "Le simulateur : trace la trajectoire, tiens le vent dans ta main.", href: "/simulateur-cyclone" },
   { emoji: "🏭", nom: "L'usine dans ta main", ligne: "La sucrerie simulée : règle la canne, récolte le sucre et la lumière.", href: "/simulateur-sucre" },
   { emoji: "🧀", nom: "La fromagerie dans ta main", ligne: "Le lait des Hauts simulé : du pré au pot de fromage frais.", href: "/simulateur-fromage" },
+  { emoji: "💧", nom: "Le barrage dans ta main", ligne: "Takamaka simulé : l'eau tombe de 500 m, l'île s'allume.", href: "/simulateur-barrage" },
   { emoji: "🗣️", nom: "Le dico mots & gestes", ligne: "Le vocabulaire de l'évaluation nationale 6e.", href: "/dico" },
   { emoji: "🃏", nom: "Qui suis-je ? à imprimer", ligne: "Des jeux de cartes pour réviser en famille.", href: "/qui-suis-je-a-imprimer" },
   { emoji: "🎓", nom: "Éval blanche Pix IA", ligne: "Prépare l'évaluation nationale Pix IA (16 questions).", href: "/eval-pix-ia" },
@@ -255,6 +256,7 @@ const CATALOGUE_EMOJIS: Record<string, string> = {
   "simulateur-cyclone": "🌀",
   "simulateur-sucre": "🏭",
   "simulateur-fromage": "🧀",
+  "simulateur-barrage": "💧",
   "grand-oral": "🎤", "concours-ia": "🏆", "concours-general": "🏆",
   "concours-logo": "🎨", "cahier-vacances": "🏖️", "cahier-maths": "🏖️",
 };
@@ -1015,6 +1017,7 @@ export default function AccueilPage({
                   🎛️ Les autres machines dans ta main
                 </p>
                 {[
+                  { emoji: "💧", nom: "Le barrage de Takamaka", href: "/simulateur-barrage", cta: "Ouvrir les vannes" },
                   { emoji: "🌀", nom: "Dans l'œil du cyclone", href: "/simulateur-cyclone", cta: "Lancer ton cyclone" },
                   { emoji: "🏭", nom: "L'usine à sucre", href: "/simulateur-sucre", cta: "Faire tourner l'usine" },
                 ].map((m) => (

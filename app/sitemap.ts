@@ -192,6 +192,8 @@ const ROUTES: RouteConfig[] = [
   { path: "/simulateur-cyclone", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
   { path: "/simulateur-sucre", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
   { path: "/simulateur-fromage", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
+  // Le barrage de Takamaka (19/07) — l'eau de l'île fait la lumière.
+  { path: "/simulateur-barrage", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-19") },
   { path: "/picto-maths",     priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/carte",           priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/cahier-vacances/maths", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_974 },

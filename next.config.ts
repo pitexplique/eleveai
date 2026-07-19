@@ -57,6 +57,13 @@ const nextConfig = {
         destination: "/simulateur-fromage",
         permanent: false,
       },
+      // ⚠️ /eau est déjà pris (adresse YouTube de l'épisode) → le barrage se
+      // dit « eleveai.fr/barrage ».
+      {
+        source: "/barrage",
+        destination: "/simulateur-barrage",
+        permanent: false,
+      },
       // Instagram ne donne qu'un lien (la bio) et le public tape l'adresse :
       // /insta = la porte Instagram, mesurable (lancement du journal, 16/07).
       {
