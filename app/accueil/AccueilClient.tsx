@@ -717,20 +717,24 @@ export default function AccueilPage({
         {/* Le titre du journal + la devise (le manifeste, en Une) — encadré par
             les OREILLES de manchette : dans un vrai quotidien, les deux pavés
             de part et d'autre du titre sont les emplacements les plus vus du
-            journal. Ici : le coach et la dictée du jour (demande de Frédéric). */}
+            journal. Refonte 19/07 (demande de Frédéric) : une oreille par
+            AUDIENCE — l'élève (coach + séries d'exercices) et le professeur
+            (la connexion ouvre le tableau de suivi, la correction est faite).
+            Style : fond clair, écriture bleu boucan canot. La dictée garde sa
+            place dans « À lire aussi ». */}
         <div className="grid items-center gap-3 border-b-4 border-double border-[#1d1c16] py-5 lg:grid-cols-[1fr_auto_1fr] lg:gap-6">
-          {/* Oreille gauche : le coach (avec la classe si on la connaît). */}
+          {/* Oreille gauche — l'élève : le coach + les séries d'exercices. */}
           <Link
             href={getHref("/coach-ia/maths")}
-            className="group order-2 border-2 border-[#1d1c16] p-3 text-center transition hover:bg-[#1d1c16] hover:text-[#f6f1e4] lg:order-1"
+            className="group order-2 border-2 border-cyan-800 bg-[#f0fafc] p-3 text-center text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc] lg:order-1"
           >
             <p className="text-[10px] font-black uppercase tracking-[0.18em]">
-              🤖 Le coach
+              🤖 Le coach + les séries d&apos;exercices
             </p>
             <p className="mt-1 font-serif text-lg font-black leading-tight">
-              Il t&apos;explique, il ne fait pas à ta place
+              Il t&apos;explique, tu t&apos;entraînes — tout est corrigé
             </p>
-            <p className="mt-1 text-xs font-black text-cyan-800 group-hover:text-cyan-300">
+            <p className="mt-1 text-xs font-black underline underline-offset-2">
               {classeLabel ? `Ouvrir en ${classeLabel} →` : "Ouvrir le coach →"}
             </p>
           </Link>
@@ -751,19 +755,22 @@ export default function AccueilPage({
             </p>
           </div>
 
-          {/* Oreille droite : la dictée du jour (le rituel quotidien). */}
+          {/* Oreille droite — le professeur : la connexion ouvre le tableau
+              de suivi (résultats élève par élève, correction automatique).
+              On ne promet QUE ce qui existe : pas de « vue classe » tant que
+              le chantier d'août n'a pas livré. */}
           <Link
-            href="/dictee-du-jour"
-            className="group order-3 border-2 border-[#1d1c16] p-3 text-center transition hover:bg-[#1d1c16] hover:text-[#f6f1e4]"
+            href="/dashboard-prof"
+            className="group order-3 border-2 border-cyan-800 bg-[#f0fafc] p-3 text-center text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
           >
             <p className="text-[10px] font-black uppercase tracking-[0.18em]">
-              ✍️ La dictée du jour <PastilleJour label="5 nouveaux mots" />
+              🧑‍🏫 Professeurs
             </p>
             <p className="mt-1 font-serif text-lg font-black leading-tight">
-              5 mots sans faute, chaque matin
+              Vos élèves s&apos;entraînent, la correction est déjà faite
             </p>
-            <p className="mt-1 text-xs font-black text-cyan-800 group-hover:text-cyan-300">
-              Écrire la dictée →
+            <p className="mt-1 text-xs font-black underline underline-offset-2">
+              Ouvrir le tableau de suivi →
             </p>
           </Link>
         </div>
