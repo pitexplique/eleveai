@@ -638,6 +638,16 @@ export default function AccueilPage({
   // La rampe des classes : la classe cliquée déplie son choix de matières.
   const [classeDepliee, setClasseDepliee] = useState<string | null>(null);
 
+  // L'avis d'élève en manchette (demande de Frédéric, 19/07) : rotation
+  // douce sur les mêmes avis que le courrier des lecteurs (verbatim).
+  const [avisIdx, setAvisIdx] = useState(0);
+  useEffect(() => {
+    if (derniersAvis.length < 2) return;
+    const t = setInterval(() => setAvisIdx((i) => i + 1), 8000);
+    return () => clearInterval(t);
+  }, [derniersAvis.length]);
+  const avisManchette = derniersAvis[avisIdx % derniersAvis.length];
+
   const eleveClasse = eleve?.classe?.toLowerCase() ?? null;
   const prenomAffiche = getPrenomAffiche(eleve?.nom);
   const isCmPrimary = eleveClasse === "cm1" || eleveClasse === "cm2";
@@ -878,6 +888,29 @@ export default function AccueilPage({
             </div>
           )}
         </div>
+
+        {/* Le courrier en manchette (demande de Frédéric, 19/07) : un avis
+            d'élève sous la rampe des classes — verbatim, fautes comprises
+            (authenticité), prénom + niveau seul (RGPD). Rotation douce
+            toutes les 8 s sur les mêmes avis que le courrier des lecteurs ;
+            le clic descend au courrier complet. */}
+        <a
+          href="#courrier"
+          className="block border-b border-[#1d1c16]/30 py-2 text-center transition hover:bg-[#1d1c16]/5"
+        >
+          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+            💬 Les avis des élèves
+          </p>
+          <p className="mx-auto mt-0.5 max-w-3xl px-2 font-serif text-sm font-medium italic leading-6 text-[#1d1c16]/85">
+            <span className="not-italic tracking-widest text-amber-600" aria-label={`Note ${avisManchette.note} sur 5`}>
+              {"★".repeat(avisManchette.note)}
+            </span>{" "}
+            « {avisManchette.quote} »{" "}
+            <span className="text-xs font-black not-italic uppercase tracking-[0.14em] text-[#1d1c16]/55">
+              — {avisManchette.prenom} · {avisManchette.detail}
+            </span>
+          </p>
+        </a>
       </header>
 
       {/* ══ L'ÉDITION PERSONNALISÉE (connecté) ═══════════════════════════════ */}
