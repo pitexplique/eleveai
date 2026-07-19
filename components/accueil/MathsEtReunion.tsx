@@ -52,6 +52,12 @@ const EPISODES: Episode[] = [
     accroche: "Suis un planteur : sa canne devient du sucre... ET de la lumière (la bagasse fait de l'électricité). Et derrière, il y a des hommes.",
     url: "https://youtu.be/hH2N0Cvx-AI",
   },
+  {
+    emoji: "⚡",
+    titre: "Le barrage de Takamaka",
+    accroche: "L'eau tombe de 500 m et éclaire 48 000 familles — puis ressort intacte vers la rivière. Joue avec sur eleveai.fr/barrage !",
+    url: null,
+  },
 ];
 
 // youtu.be/ID, youtube.com/watch?v=ID, /embed/ID… → l'identifiant seul.
