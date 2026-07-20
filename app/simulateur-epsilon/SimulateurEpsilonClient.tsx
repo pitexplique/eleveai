@@ -197,57 +197,128 @@ export default function SimulateurEpsilonClient() {
               ⚡ Activer l&apos;epsilon
             </button>
           </div>
-          <svg key={`${run}-${k}`} viewBox="0 0 900 780" className="mt-3 w-full" role="img"
-            aria-label={`Cascade d'étincelles : une étincelle au centre, puis ${k.toFixed(1)} fois plus à chaque génération`}>
+          <svg key={`${run}-${k}`} viewBox="0 0 1000 620" className="mt-3 w-full" role="img"
+            aria-label={`La cascade du dessin : des epsilons s'allument, le réseau de neurones s'allume, puis les infinis — coefficient ${k.toFixed(1)}`}>
             <style>{`
-              .gpop{opacity:0;transform-origin:center;animation:gpop .5s ease forwards}
-              .ganneau{opacity:0;animation:ganneau .7s ease forwards}
-              .gcentre{animation:gcentre 1.6s ease-in-out infinite}
-              @keyframes gpop{0%{opacity:0}60%{opacity:1}100%{opacity:.92}}
-              @keyframes ganneau{to{opacity:.85}}
-              @keyframes gcentre{0%,100%{opacity:.75}50%{opacity:1}}
+              .spop{opacity:0;animation:spop .5s ease forwards}
+              .scentre{animation:scentre 1.6s ease-in-out infinite}
+              .nflash{animation:nflash .8s ease forwards}
+              .eflash{opacity:0;animation:eflash .6s ease forwards}
+              @keyframes spop{to{opacity:1}}
+              @keyframes scentre{0%,100%{opacity:.75}50%{opacity:1}}
+              @keyframes nflash{40%{fill:#e8a013;r:11}100%{fill:#b97e12;r:9}}
+              @keyframes eflash{40%{opacity:1;stroke:#e8a013}100%{opacity:.9;stroke:#b97e12}}
             `}</style>
-            {generations.map((n, g) => {
-              if (g === 0) return null;
-              const compte = Math.round(n);
-              const rayon = 40 + g * 34;
-              const delai = `${(g * 0.45).toFixed(2)}s`;
-              if (compte < 1)
-                return (
-                  <g key={g} className="ganneau" style={{ animationDelay: delai }}>
-                    <circle cx="450" cy="390" r={rayon} fill="none" stroke="#c9cfdd" strokeWidth="1.5" strokeDasharray="3 7" />
-                    <text x={450} y={390 - rayon - 5} textAnchor="middle" fontSize="13" fontWeight="700" fill="#8a93ab">
-                      G{g} : éteint
-                    </text>
-                  </g>
-                );
-              const visibles = Math.min(compte, 96);
-              const points = Array.from({ length: visibles }, (_, i) => {
-                const a = (i / visibles) * 2 * Math.PI + g * 0.35;
-                return { x: 450 + rayon * Math.cos(a), y: 390 + rayon * 0.82 * Math.sin(a) };
-              });
+
+            {/* 1 — DES EPSILONS S'ALLUMENT (générations 0 → 4, comptes réels) */}
+            <circle className="scentre" cx="95" cy="86" r="17" fill="#e8a013" />
+            <text x="95" y="93" textAnchor="middle" fontSize="19" fontWeight="900" fill="#fff">ε</text>
+            <text x="132" y="92" fontSize="14" fontWeight="700" fill={ENCRE}>toi — G0 : 1</text>
+            {[1, 2, 3, 4].map((g) => {
+              const compte = Math.round(Math.pow(k, g));
+              const visibles = Math.min(compte, 12);
+              const y = 178 + (g - 1) * 100;
+              const delai = `${(0.45 * g).toFixed(2)}s`;
               return (
-                <g key={g} className="gpop" style={{ animationDelay: delai }}>
-                  {compte > visibles && (
-                    <ellipse cx="450" cy="390" rx={rayon} ry={rayon * 0.82} fill="none" stroke="#e8a013" strokeWidth="10" opacity="0.22" />
-                  )}
-                  {points.map((p, i) => (
-                    <circle key={i} cx={p.x} cy={p.y} r={Math.max(2.6, 7 - g * 0.45)} fill="#e8a013" />
-                  ))}
-                  <text x={450} y={390 - rayon * 0.82 - 6} textAnchor="middle" fontSize="14" fontWeight="900" fill={OR}>
-                    G{g} : {fmt(n)}
+                <g key={g} className="spop" style={{ animationDelay: delai }}>
+                  <text x="55" y={y - 32} fontSize="12" fontWeight="700" fill="#8a93ab">
+                    G{g} : {compte < 1 ? "éteint" : fmt(Math.pow(k, g))}
                   </text>
+                  {compte < 1 ? (
+                    <text x="55" y={y} fontSize="26" fontWeight="900" fill="#c9cfdd">ε</text>
+                  ) : (
+                    Array.from({ length: visibles }, (_, i) => (
+                      <text key={i} x={55 + i * 23} y={y} fontSize="26" fontWeight="900" fill="#e8a013">ε</text>
+                    ))
+                  )}
+                  {compte > visibles && (
+                    <text x={55 + visibles * 23 + 4} y={y} fontSize="15" fontWeight="900" fill={OR}>
+                      …
+                    </text>
+                  )}
                 </g>
               );
             })}
-            {/* ton epsilon, au centre */}
-            <circle className="gcentre" cx="450" cy="390" r="13" fill="#e8a013" />
-            <text x="450" y="396" textAnchor="middle" fontSize="15" fontWeight="900" fill="#fff">ε</text>
-            <text x="450" y="425" textAnchor="middle" fontSize="13" fontWeight="700" fill={ENCRE}>toi</text>
+
+            {/* l'étincelle entre dans le réseau */}
+            <circle r="6" fill="#e8a013" opacity="0">
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" begin="2.1s" dur="0.9s" fill="freeze" />
+              <animateMotion begin="2.1s" dur="0.8s" fill="freeze" path="M330 260 C360 250 385 245 412 252" />
+            </circle>
+
+            {/* 2 — LE RÉSEAU DE NEURONES S'ALLUME (2 entrées, 3 cachés, 2 sorties) */}
+            {(() => {
+              const E = [[420, 190], [420, 320]];
+              const C = [[520, 150], [520, 255], [520, 360]];
+              const S = [[620, 190], [620, 320]];
+              const aretes: number[][][] = [];
+              E.forEach((a) => C.forEach((b) => aretes.push([a, b])));
+              C.forEach((a) => S.forEach((b) => aretes.push([a, b])));
+              return (
+                <g>
+                  {aretes.map(([a, b], i) => (
+                    <line key={`g${i}`} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke="#c9cfdd" strokeWidth="1.5" />
+                  ))}
+                  {aretes.map(([a, b], i) => (
+                    <line key={`o${i}`} className="eflash" style={{ animationDelay: `${(2.7 + i * 0.05).toFixed(2)}s` }}
+                      x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke="#e8a013" strokeWidth="2.5" />
+                  ))}
+                  {[...E, ...C, ...S].map(([x, y], i) => (
+                    <circle key={`n${i}`} className="nflash" style={{ animationDelay: `${(2.6 + i * 0.13).toFixed(2)}s` }}
+                      cx={x} cy={y} r="8" fill={ENCRE} />
+                  ))}
+                </g>
+              );
+            })()}
+
+            {/* l'étincelle ressort, multipliée */}
+            <circle r="6" fill="#e8a013" opacity="0">
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" begin="3.8s" dur="0.9s" fill="freeze" />
+              <animateMotion begin="3.8s" dur="0.8s" fill="freeze" path="M628 255 C650 250 665 245 688 240" />
+            </circle>
+
+            {/* 3 — PUIS LES INFINIS (1 ∞ = 1 000 étincelles à la génération 10) */}
+            {(() => {
+              const nInf = Math.floor(g10 / 1000);
+              if (nInf < 1)
+                return (
+                  <g className="spop" style={{ animationDelay: "4.2s" }}>
+                    <text x="835" y="250" textAnchor="middle" fontSize="42" fontWeight="900" fill="#c9cfdd">∞</text>
+                    <text x="835" y="292" textAnchor="middle" fontSize="14" fontWeight="700" fill="#8a93ab">
+                      G10 : {fmt(g10)} étincelle{g10 >= 2 ? "s" : ""}
+                    </text>
+                    <text x="835" y="314" textAnchor="middle" fontSize="13" fontWeight="700" fill={OR}>
+                      pas encore un infini — pousse k !
+                    </text>
+                  </g>
+                );
+              const visibles = Math.min(nInf, 63);
+              return (
+                <g>
+                  {Array.from({ length: visibles }, (_, i) => (
+                    <text key={i} className="spop" style={{ animationDelay: `${(4.2 + i * 0.05).toFixed(2)}s` }}
+                      x={700 + (i % 7) * 42} y={150 + Math.floor(i / 7) * 42} fontSize="28" fontWeight="900" fill="#e8a013">
+                      ∞
+                    </text>
+                  ))}
+                  <text className="spop" style={{ animationDelay: `${(4.2 + visibles * 0.05 + 0.2).toFixed(2)}s` }}
+                    x="835" y={150 + Math.ceil(visibles / 7) * 42 + 22} textAnchor="middle" fontSize="15" fontWeight="900" fill={OR}>
+                    {nInf > visibles ? `… ${fmt(nInf)} infinis !` : `${nInf} infini${nInf >= 2 ? "s" : ""} allumé${nInf >= 2 ? "s" : ""}`}
+                  </text>
+                </g>
+              );
+            })()}
+
+            {/* les légendes des trois actes */}
+            <text x="170" y="600" textAnchor="middle" fontSize="13" fontWeight="900" fill={ENCRE}>1 · des epsilons s&apos;allument</text>
+            <text x="520" y="600" textAnchor="middle" fontSize="13" fontWeight="900" fill={ENCRE}>2 · le réseau s&apos;allume</text>
+            <text x="835" y="600" textAnchor="middle" fontSize="13" fontWeight="900" fill={ENCRE}>3 · puis les infinis</text>
           </svg>
           <p className="mt-1 text-[11.5px]" style={{ color: "#8a93ab" }}>
-            Chaque anneau = une génération. Au-delà de 96 étincelles affichées, l&apos;anneau
-            s&apos;embrase et porte le vrai compte — à k = 4, la génération 10 dépasse le million.
+            Comme sur le dessin d&apos;origine : les epsilons s&apos;allument génération par
+            génération, l&apos;étincelle traverse le réseau de neurones — et les infinis
+            s&apos;embrasent. 1 ∞ = 1 000 étincelles à la génération 10 : ton premier
+            infini s&apos;allume à k = 2.
           </p>
         </div>
 
