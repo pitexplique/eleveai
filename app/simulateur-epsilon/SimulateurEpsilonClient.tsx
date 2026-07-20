@@ -84,6 +84,7 @@ const fmt = (n: number) =>
 
 export default function SimulateurEpsilonClient() {
   const [k, setK] = useState(1.2);
+  const [run, setRun] = useState(0);
   const [modeClasse, setModeClasse] = useState(false);
 
   useEffect(() => {
@@ -172,6 +173,78 @@ export default function SimulateurEpsilonClient() {
           </p>
           <p className="mt-1 text-[14px] font-semibold" style={{ color: "#4a5570" }}>
             {lecture}
+          </p>
+        </div>
+
+        {/* LA SIMULATION — le champ d'étincelles : l'epsilon au centre, chaque
+            génération s'embrase en anneau (points dorés qui apparaissent en
+            cadence). Au-delà de 96 points par anneau, l'anneau lumineux porte
+            le vrai nombre. key={run} relance la cascade à chaque activation. */}
+        <div className="mt-5 rounded border p-4" style={{ borderColor: "#d5ddf0", backgroundColor: "#ffffffcc" }}>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-[11px] font-black uppercase tracking-[0.18em]" style={{ color: OR }}>
+              La simulation — regarde ta cascade s&apos;allumer
+            </p>
+            <button
+              type="button"
+              onClick={() => setRun((r) => r + 1)}
+              className="rounded px-3 py-1.5 text-sm font-black text-white hover:brightness-110"
+              style={{ backgroundColor: OR }}
+            >
+              ⚡ Activer l&apos;epsilon
+            </button>
+          </div>
+          <svg key={`${run}-${k}`} viewBox="0 0 900 780" className="mt-3 w-full" role="img"
+            aria-label={`Cascade d'étincelles : une étincelle au centre, puis ${k.toFixed(1)} fois plus à chaque génération`}>
+            <style>{`
+              .gpop{opacity:0;transform-origin:center;animation:gpop .5s ease forwards}
+              .ganneau{opacity:0;animation:ganneau .7s ease forwards}
+              .gcentre{animation:gcentre 1.6s ease-in-out infinite}
+              @keyframes gpop{0%{opacity:0}60%{opacity:1}100%{opacity:.92}}
+              @keyframes ganneau{to{opacity:.85}}
+              @keyframes gcentre{0%,100%{opacity:.75}50%{opacity:1}}
+            `}</style>
+            {generations.map((n, g) => {
+              if (g === 0) return null;
+              const compte = Math.round(n);
+              const rayon = 40 + g * 34;
+              const delai = `${(g * 0.45).toFixed(2)}s`;
+              if (compte < 1)
+                return (
+                  <g key={g} className="ganneau" style={{ animationDelay: delai }}>
+                    <circle cx="450" cy="390" r={rayon} fill="none" stroke="#c9cfdd" strokeWidth="1.5" strokeDasharray="3 7" />
+                    <text x={450} y={390 - rayon - 5} textAnchor="middle" fontSize="13" fontWeight="700" fill="#8a93ab">
+                      G{g} : éteint
+                    </text>
+                  </g>
+                );
+              const visibles = Math.min(compte, 96);
+              const points = Array.from({ length: visibles }, (_, i) => {
+                const a = (i / visibles) * 2 * Math.PI + g * 0.35;
+                return { x: 450 + rayon * Math.cos(a), y: 390 + rayon * 0.82 * Math.sin(a) };
+              });
+              return (
+                <g key={g} className="gpop" style={{ animationDelay: delai }}>
+                  {compte > visibles && (
+                    <ellipse cx="450" cy="390" rx={rayon} ry={rayon * 0.82} fill="none" stroke="#e8a013" strokeWidth="10" opacity="0.22" />
+                  )}
+                  {points.map((p, i) => (
+                    <circle key={i} cx={p.x} cy={p.y} r={Math.max(2.6, 7 - g * 0.45)} fill="#e8a013" />
+                  ))}
+                  <text x={450} y={390 - rayon * 0.82 - 6} textAnchor="middle" fontSize="14" fontWeight="900" fill={OR}>
+                    G{g} : {fmt(n)}
+                  </text>
+                </g>
+              );
+            })}
+            {/* ton epsilon, au centre */}
+            <circle className="gcentre" cx="450" cy="390" r="13" fill="#e8a013" />
+            <text x="450" y="396" textAnchor="middle" fontSize="15" fontWeight="900" fill="#fff">ε</text>
+            <text x="450" y="425" textAnchor="middle" fontSize="13" fontWeight="700" fill={ENCRE}>toi</text>
+          </svg>
+          <p className="mt-1 text-[11.5px]" style={{ color: "#8a93ab" }}>
+            Chaque anneau = une génération. Au-delà de 96 étincelles affichées, l&apos;anneau
+            s&apos;embrase et porte le vrai compte — à k = 4, la génération 10 dépasse le million.
           </p>
         </div>
 
