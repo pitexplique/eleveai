@@ -21,7 +21,7 @@ type Point = {
   notion: string;
   question: string;
   reponse: string;
-  href?: string; // vers le défi Picto Maths, si dispo
+  href?: string; // vers le défi Picto Maths ou la machine « dans ta main » du lieu
 };
 
 const MAT: Record<Matiere, { label: string; dot: string; text: string; soft: string; border: string; stroke: string }> = {
@@ -89,8 +89,26 @@ const POINTS: Point[] = [
     x: 306, y: 224, emoji: "🌋", matiere: "maths",
     notion: "Vitesse · durée",
     question: "La lave avance de 300 m en 2 h. Quand atteint-elle la route, à 1,5 km ?",
-    reponse: "Vitesse 150 m/h ; 1 500 ÷ 150 = 10 h.",
-    href: "/picto-maths",
+    reponse: "Vitesse 150 m/h ; 1 500 ÷ 150 = 10 h. Règle la lave toi-même sur le simulateur !",
+    href: "/simulateur-volcan",
+  },
+  {
+    id: "takamaka",
+    lieu: "Gorges de Takamaka",
+    x: 288, y: 132, emoji: "⚡", matiere: "maths",
+    notion: "La formule du barrage",
+    question: "L'eau tombe de 500 m, à 5 m³/s. Puissance = 8 × débit × chute : combien de kW ?",
+    reponse: "8 × 5 × 500 = 20 000 kW — de quoi éclairer 48 000 familles. Ouvre les vannes toi-même !",
+    href: "/simulateur-barrage",
+  },
+  {
+    id: "plaine-des-cafres",
+    lieu: "Plaine des Cafres",
+    x: 224, y: 232, emoji: "🧀", matiere: "maths",
+    notion: "Proportionnalité",
+    question: "4 L de lait donnent 1 kg de fromage frais. Combien de litres pour 1 000 pots de 150 g ?",
+    reponse: "1 000 × 150 g = 150 kg ; 150 × 4 = 600 L de lait. Vérifie sur la fromagerie !",
+    href: "/simulateur-fromage",
   },
   {
     id: "canne-est",
@@ -98,7 +116,8 @@ const POINTS: Point[] = [
     x: 262, y: 88, emoji: "🌾", matiere: "ecologie",
     notion: "Pourcentage",
     question: "Un planteur récolte 60 t de cannes, à 11 % de sucre. Combien de sucre ?",
-    reponse: "60 × 11 ÷ 100 = 6,6 t de sucre.",
+    reponse: "60 × 11 ÷ 100 = 6,6 t de sucre. Fais tourner l'usine toi-même !",
+    href: "/simulateur-sucre",
   },
 ];
 

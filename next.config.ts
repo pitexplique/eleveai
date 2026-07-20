@@ -64,6 +64,13 @@ const nextConfig = {
         destination: "/simulateur-barrage",
         permanent: false,
       },
+      // ⚠️ /volcan est déjà pris (adresse YouTube de l'épisode) → la machine
+      // se dit « eleveai.fr/fournaise ».
+      {
+        source: "/fournaise",
+        destination: "/simulateur-volcan",
+        permanent: false,
+      },
       // Instagram ne donne qu'un lien (la bio) et le public tape l'adresse :
       // /insta = la porte Instagram, mesurable (lancement du journal, 16/07).
       {

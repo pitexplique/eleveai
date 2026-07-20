@@ -33,7 +33,7 @@ import FloatingCoach from "@/components/FloatingCoach";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import AgendaJournal from "@/components/accueil/AgendaJournal";
 import AbonnementJournal from "@/components/accueil/AbonnementJournal";
-import ReclameBarrage from "@/components/accueil/ReclameBarrage";
+import ReclameVolcan from "@/components/accueil/ReclameVolcan";
 import { PICTOS, type Picto } from "@/app/picto-maths/data";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
@@ -187,6 +187,7 @@ const CATALOGUE: { emoji: string; nom: string; ligne: string; href: string }[] =
   { emoji: "🏭", nom: "L'usine dans ta main", ligne: "La sucrerie simulée : règle la canne, récolte le sucre et la lumière.", href: "/simulateur-sucre" },
   { emoji: "🧀", nom: "La fromagerie dans ta main", ligne: "Le lait des Hauts simulé : du pré au pot de fromage frais.", href: "/simulateur-fromage" },
   { emoji: "💧", nom: "Le barrage dans ta main", ligne: "Takamaka simulé : l'eau tombe de 500 m, l'île s'allume.", href: "/simulateur-barrage" },
+  { emoji: "🌋", nom: "Le volcan dans ta main", ligne: "La Fournaise simulée : règle la lave, l'île grandit sur l'océan.", href: "/simulateur-volcan" },
   { emoji: "🗣️", nom: "Le dico mots & gestes", ligne: "Le vocabulaire de l'évaluation nationale 6e.", href: "/dico" },
   { emoji: "🃏", nom: "Qui suis-je ? à imprimer", ligne: "Des jeux de cartes pour réviser en famille.", href: "/qui-suis-je-a-imprimer" },
   { emoji: "🎓", nom: "Éval blanche Pix IA", ligne: "Prépare l'évaluation nationale Pix IA (16 questions).", href: "/eval-pix-ia" },
@@ -257,6 +258,7 @@ const CATALOGUE_EMOJIS: Record<string, string> = {
   "simulateur-sucre": "🏭",
   "simulateur-fromage": "🧀",
   "simulateur-barrage": "💧",
+  "simulateur-volcan": "🌋",
   "grand-oral": "🎤", "concours-ia": "🏆", "concours-general": "🏆",
   "concours-logo": "🎨", "cahier-vacances": "🏖️", "cahier-maths": "🏖️",
 };
@@ -1043,13 +1045,14 @@ export default function AccueilPage({
                   précédentes passent en rangée compacte — trois réclames à
                   image empilées creusaient un grand blanc sous l'article
                   (constat de Frédéric, 18/07). */}
-              <ReclameBarrage />
+              <ReclameVolcan />
 
               <div className="py-3">
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                   🎛️ Les autres machines dans ta main
                 </p>
                 {[
+                  { emoji: "💧", nom: "Le barrage de Takamaka", href: "/simulateur-barrage", cta: "Ouvrir les vannes" },
                   { emoji: "🧀", nom: "La fromagerie", href: "/simulateur-fromage", cta: "Remplir les pots" },
                   { emoji: "🌀", nom: "Dans l'œil du cyclone", href: "/simulateur-cyclone", cta: "Lancer ton cyclone" },
                   { emoji: "🏭", nom: "L'usine à sucre", href: "/simulateur-sucre", cta: "Faire tourner l'usine" },
