@@ -56,7 +56,7 @@ const EPISODES: Episode[] = [
     emoji: "⚡",
     titre: "Le barrage de Takamaka",
     accroche: "L'eau tombe de 500 m et éclaire 48 000 familles — puis ressort intacte vers la rivière. Joue avec sur eleveai.fr/barrage !",
-    url: null,
+    url: "https://youtu.be/oyjfPzC4sKY",
   },
 ];
 
