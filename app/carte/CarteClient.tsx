@@ -54,7 +54,8 @@ const POINTS: Point[] = [
     x: 60, y: 166, emoji: "🐠", matiere: "ecologie",
     notion: "Croissance & vitesse",
     question: "Le corail grandit d'environ 1 cm par an. En combien de temps fait-il 15 cm ?",
-    reponse: "15 cm à 1 cm/an → 15 ans. Un récif, c'est lent et fragile : on le protège.",
+    reponse: "15 cm à 1 cm/an → 15 ans. Un récif, c'est lent et fragile : on le protège. Règle la houle toi-même sur le simulateur !",
+    href: "/simulateur-lagon",
   },
   {
     id: "mafate",

@@ -71,6 +71,13 @@ const nextConfig = {
         destination: "/simulateur-volcan",
         permanent: false,
       },
+      // Le lagon de l'Ermitage : l'adresse libre (aucun épisode YouTube ne
+      // l'occupe) → la machine se dit « eleveai.fr/lagon ».
+      {
+        source: "/lagon",
+        destination: "/simulateur-lagon",
+        permanent: false,
+      },
       // Instagram ne donne qu'un lien (la bio) et le public tape l'adresse :
       // /insta = la porte Instagram, mesurable (lancement du journal, 16/07).
       {

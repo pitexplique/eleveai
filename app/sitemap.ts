@@ -196,6 +196,8 @@ const ROUTES: RouteConfig[] = [
   { path: "/simulateur-barrage", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-19") },
   // Le volcan (19/07) — la Fournaise qui fabrique l'île.
   { path: "/simulateur-volcan", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-19") },
+  // Le lagon de l'Ermitage (20/07) — la muraille vivante qui fait la plage.
+  { path: "/simulateur-lagon", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-20") },
   { path: "/picto-maths",     priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/carte",           priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/cahier-vacances/maths", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_974 },
