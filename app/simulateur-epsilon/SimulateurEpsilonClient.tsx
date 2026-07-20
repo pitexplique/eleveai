@@ -79,8 +79,11 @@ const REPERES: { seuil: number; texte: string }[] = [
   { seuil: 860_000, texte: "toute l'île de La Réunion (860 000)" },
 ];
 
-const fmt = (n: number) =>
-  n >= 100 ? Math.round(n).toLocaleString("fr-FR") : n.toFixed(n >= 10 ? 0 : 2).replace(".", ",");
+const fmt = (n: number) => {
+  if (n >= 100 || Math.abs(n - Math.round(n)) < 0.005)
+    return Math.round(n).toLocaleString("fr-FR");
+  return n.toFixed(n >= 10 ? 1 : 2).replace(".", ",");
+};
 
 export default function SimulateurEpsilonClient() {
   const [k, setK] = useState(1.2);
