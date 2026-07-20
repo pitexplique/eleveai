@@ -240,6 +240,15 @@ const ROUTES: RouteConfig[] = [
   { path: "/qui-sommes-nous",   priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/tarifs",            priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/contact",           priority: 0.65, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  // 20/07 : les pages de la PHILOSOPHIE qui manquaient au sitemap (audit
+  // Frédéric « qu'il n'oublie pas notre philosophie ») — la charte d'usage de
+  // l'IA (la confiance), les tarifs justes (gratuit pour l'élève, jamais la
+  // famille), le pilote gratuit, la presse et les partenaires (l'institution).
+  { path: "/charte",            priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/pourquoi-nos-tarifs-sont-justes", priority: 0.65, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/offre-pilote",      priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/presse",            priority: 0.6,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/partenaires",       priority: 0.6,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
 
   // ── BLOG INDEX ─────────────────────────────────────────────────────────────
   { path: "/blog", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
@@ -344,6 +353,23 @@ const VIDEOS_FICHES: Record<
   string,
   { id: string; title: string; description: string }[]
 > = {
+  // La machine du barrage porte ses DEUX vidéos : l'épisode « en vrai » et le
+  // film d'animation du principe (20/07) — le schéma animé, sans son, à lire.
+  "/simulateur-barrage": [
+    {
+      id: "oyjfPzC4sKY",
+      title: "Le barrage de Takamaka : l'eau qui allume l'île — EleveAI",
+      description:
+        "L'eau tombe de 500 m dans les gorges de Takamaka et éclaire 48 000 familles — puis ressort intacte vers la rivière. Les maths du barrage, en vrai, à La Réunion.",
+    },
+    {
+      id: "yHCtKaj8TPw",
+      title:
+        "Film d'animation - Le barrage de Takamaka : l'eau tombe, l'île s'allume (schéma animé)",
+      description:
+        "Le principe du barrage animé étape par étape : la vanne, la conduite forcée, la turbine, le générateur, les lignes à haute tension — et le défi : 8 × 5 × 500 = 20 000 kW.",
+    },
+  ],
   "/fiches-cours/maths/6e/entier-calcul-pose": [
     {
       id: "Y3gFecuyBTQ",
