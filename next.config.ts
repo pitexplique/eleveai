@@ -78,6 +78,13 @@ const nextConfig = {
         destination: "/simulateur-lagon",
         permanent: false,
       },
+      // La machine des epsilons (7e) — née du dessin du fondateur (20/07) :
+      // « activer des epsilons peut engendrer des infinis ».
+      {
+        source: "/epsilon",
+        destination: "/simulateur-epsilon",
+        permanent: false,
+      },
       // Instagram ne donne qu'un lien (la bio) et le public tape l'adresse :
       // /insta = la porte Instagram, mesurable (lancement du journal, 16/07).
       {

@@ -198,6 +198,9 @@ const ROUTES: RouteConfig[] = [
   { path: "/simulateur-volcan", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-19") },
   // Le lagon de l'Ermitage (20/07) — la muraille vivante qui fait la plage.
   { path: "/simulateur-lagon", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-20") },
+  // La machine des epsilons (20/07) — le coefficient k, la suite géométrique :
+  // « activer des epsilons peut engendrer des infinis ».
+  { path: "/simulateur-epsilon", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-20") },
   { path: "/picto-maths",     priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/carte",           priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/cahier-vacances/maths", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_974 },

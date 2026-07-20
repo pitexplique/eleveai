@@ -139,6 +139,62 @@ export default function PourquoiEleveAIClient() {
 
       <div className="mx-auto max-w-5xl px-4 py-10">
 
+        {/* ε → ∞ — LE DESSIN DU FONDATEUR (20/07/2026, adresse courte /epsilon).
+            Le SVG s'anime tout seul : le cœur se trace, l'étincelle active le
+            epsilon, traverse le réseau de neurones, allume les infinis. */}
+        <section className="mb-10 rounded-[2rem] border border-white/80 bg-white/75 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-blue-800 ring-1 ring-blue-200">
+            ε → ∞ · Le dessin du fondateur
+          </div>
+
+          <h1 className="text-3xl font-black leading-tight text-slate-950 sm:text-5xl">
+            Activer des epsilons peut engendrer des infinis
+          </h1>
+
+          <div className="mt-6 grid items-center gap-6 lg:grid-cols-2">
+            <div className="overflow-hidden rounded-2xl border border-slate-200" style={{ backgroundColor: "#fcfcf7" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/coeur-epsilon-infini.svg"
+                alt="Un cœur dessiné au stylo bleu : un epsilon, les indices i j k n, un réseau de neurones, les nombres 1 2 3 4, l'infini — et une flèche qui s'échappe"
+                className="h-auto w-full"
+              />
+            </div>
+            <div className="space-y-4 text-base font-semibold leading-relaxed text-slate-700">
+              <p>
+                Un soir de juillet, un prof de maths a dessiné un cœur sur une feuille à
+                carreaux. Dedans&nbsp;: un <strong>ε</strong> — l&apos;infiniment petit. Le grand
+                mathématicien Erdős appelait les enfants «&nbsp;des epsilons&nbsp;».
+              </p>
+              <p>
+                L&apos;epsilon avance pas à pas — <em>i, j, k, n</em>, un exercice après
+                l&apos;autre — et traverse un <strong>réseau de neurones</strong>&nbsp;:
+                l&apos;IA est <em>dans</em> le cœur, jamais au-dessus. Il en ressort en
+                comptant 1, 2, 3, 4… jusqu&apos;à <strong>l&apos;infini</strong>.
+              </p>
+              <p>
+                Les petites actions du quotidien font pareil&nbsp;: aider, expliquer,
+                réessayer. En créole&nbsp;: <strong>«&nbsp;In min i lav lot&nbsp;»</strong> —
+                une main lave l&apos;autre.
+              </p>
+              <div className="flex flex-wrap gap-3 pt-2">
+                <Link
+                  href="/simulateur-epsilon"
+                  className="rounded-full bg-blue-600 px-5 py-2.5 text-sm font-black text-white transition hover:bg-blue-700"
+                >
+                  ⚡ Active un epsilon toi-même →
+                </Link>
+                <Link
+                  href="/besoin-de-vous"
+                  className="rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-black text-slate-800 transition hover:bg-slate-50"
+                >
+                  🤝 EleveAI a besoin de vous →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* HERO */}
         <section className="mb-10 rounded-[2rem] border border-white/80 bg-white/75 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-800 ring-1 ring-emerald-200">
