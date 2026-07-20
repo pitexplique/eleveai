@@ -586,8 +586,44 @@ def acc_canne_974(d):
     d.text((300, 512), "du sucre... ET de la lumière", font=police("arialbd.ttf", 28), fill=vertf)
 
 
+def acc_barrage_974(d):
+    # la falaise + la conduite forcée qui plonge + la turbine + l'ampoule :
+    # l'eau qui tombe devient la lumière (l'épisode Takamaka).
+    import math
+    gris = (108, 117, 125)
+    grisf = (73, 80, 87)
+    orange = (255, 160, 0)
+    # (décalé à droite : le dessin recouvrait le sous-titre, vu au 1er rendu)
+    # la falaise (versant sombre)
+    d.polygon([(400, 300), (500, 300), (630, 470), (400, 470)], fill=grisf, outline=gris)
+    # la forêt au sommet (3 sapins)
+    for x in (418, 450, 482):
+        d.polygon([(x - 14, 302), (x, 268), (x + 14, 302)], fill=(85, 139, 47))
+    # la conduite forcée : tube gris + âme bleue
+    d.line([(470, 310), (610, 452)], fill=gris, width=18)
+    d.line([(470, 310), (610, 452)], fill=BLEU, width=9)
+    # la turbine : roue à rayons
+    cx, cy, r = 650, 452, 34
+    d.ellipse([cx - r, cy - r, cx + r, cy + r], outline=BLEU, width=6)
+    for k in range(4):
+        a = k * math.pi / 4
+        d.line([(cx - r * math.cos(a), cy - r * math.sin(a)),
+                (cx + r * math.cos(a), cy + r * math.sin(a))], fill=BLEU, width=5)
+    # la flèche vers l'ampoule
+    d.line([(690, 430), (734, 402)], fill=orange, width=7)
+    d.polygon([(728, 390), (750, 392), (738, 410)], fill=orange)
+    # l'ampoule
+    d.ellipse([742, 358, 786, 402], fill=JAUNE, outline=orange, width=3)
+    d.rectangle([756, 398, 772, 414], fill=(150, 150, 150))
+    d.text((386, 512), "l'eau tombe de 500 m → l'île s'allume", font=police("arialbd.ttf", 27), fill=BLEU)
+
+
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
+    "eleveai-maths-974-barrage-takamaka": {
+        "badge": "L'ÎLE DE LA RÉUNION · EN VRAI", "titre": ["LE BARRAGE", "DE TAKAMAKA"], "taille": 62,
+        "sous": "l'eau qui allume l'île", "accroche": acc_barrage_974,
+    },
     "eleveai-maths-974-canne-sucre-reunion": {
         "badge": "L'ÎLE DE LA RÉUNION · EN VRAI", "titre": ["LA CANNE", "À SUCRE"], "taille": 78,
         "sous": "du champ au sucre, par des hommes", "accroche": acc_canne_974,
