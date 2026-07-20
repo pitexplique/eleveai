@@ -5,6 +5,7 @@ import AccueilClient, {
   type AvisPublic,
   type Apercu974,
   type ActionJournal,
+  type ArticleRubrique,
   type SlideUne,
 } from "./AccueilClient";
 import { getElevesALHonneur, prenomCourt } from "@/lib/ameliorations/honneurServer";
@@ -206,13 +207,44 @@ async function getSlidesUne(): Promise<SlideUne[]> {
   }
 }
 
+// Les articles d'une rubrique du journal (table journal_articles, patron de la
+// régie généralisé — colonne `rubrique`). Table vide/absente → repli sur les
+// articles en dur du client.
+async function getArticlesRubrique(rubrique: string): Promise<ArticleRubrique[]> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return [];
+
+  try {
+    const supabase = createClient(url, key);
+    const { data, error } = await supabase
+      .from("journal_articles")
+      .select("id, titre, accroche, image_url, lien, cta")
+      .eq("rubrique", rubrique)
+      .eq("actif", true)
+      .order("ordre", { ascending: true });
+    if (error || !data) return [];
+    return data.map((a) => ({
+      id: a.id,
+      titre: a.titre,
+      accroche: a.accroche,
+      imageUrl: a.image_url,
+      lien: a.lien,
+      cta: a.cta,
+    }));
+  } catch {
+    return [];
+  }
+}
+
 export default async function Page() {
-  const [avis, honneur, apercu974, catalogue, slides] = await Promise.all([
+  const [avis, honneur, apercu974, catalogue, slides, articlesMaths] = await Promise.all([
     getDerniersAvis(),
     getElevesALHonneur(),
     getApercuMaths974(),
     getCatalogueJournal(),
     getSlidesUne(),
+    getArticlesRubrique("un-peu-de-maths"),
   ]);
   return (
     <AccueilClient
@@ -221,6 +253,7 @@ export default async function Page() {
       apercu974={apercu974}
       catalogue={catalogue}
       slides={slides}
+      articlesMaths={articlesMaths}
     />
   );
 }

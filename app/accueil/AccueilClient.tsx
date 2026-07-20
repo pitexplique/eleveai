@@ -237,6 +237,31 @@ export type SlideUne = {
   nouveau?: boolean;
 };
 
+/** Un article d'une rubrique du journal (table journal_articles, patron régie). */
+export type ArticleRubrique = {
+  id: string;
+  titre: string;
+  accroche: string | null;
+  imageUrl: string | null;
+  lien: string;
+  cta: string | null;
+};
+
+// « Un peu de maths » — repli en dur tant que la table journal_articles
+// n'existe pas (même principe que la Une). Premier article : la machine
+// des epsilons (la devise du site, à faire découvrir).
+const ARTICLES_MATHS_FALLBACK: ArticleRubrique[] = [
+  {
+    id: "epsilon",
+    titre: "Activer des epsilons peut engendrer des infinis",
+    accroche:
+      "Chaque étincelle en allume k autres. Pousse le coefficient : à k = 2, ton premier infini s'allume — la suite géométrique, le R₀ des épidémies et l'entraide dans un seul curseur. En créole : « In min i lav lot ».",
+    imageUrl: "/images/coeur-epsilon-infini.svg",
+    lien: "/simulateur-epsilon",
+    cta: "⚡ Active un epsilon →",
+  },
+];
+
 /** Une action du catalogue (projection minimale de catalogue_actions). */
 export type ActionJournal = {
   id: string;
@@ -629,15 +654,19 @@ export default function AccueilPage({
   apercu974,
   catalogue,
   slides,
+  articlesMaths,
 }: {
   avis?: AvisPublic[];
   honneur?: EleveALHonneur[];
   apercu974?: Apercu974[];
   catalogue?: ActionJournal[];
   slides?: SlideUne[];
+  articlesMaths?: ArticleRubrique[];
 }) {
   const { eleve } = useEleve();
   const derniersAvis = avis && avis.length > 0 ? avis : AVIS_FALLBACK;
+  const unPeuDeMaths =
+    articlesMaths && articlesMaths.length > 0 ? articlesMaths : ARTICLES_MATHS_FALLBACK;
 
   // La rampe des classes : la classe cliquée déplie son choix de matières.
   const [classeDepliee, setClasseDepliee] = useState<string | null>(null);
@@ -801,6 +830,8 @@ export default function AccueilPage({
           <a href="#en-vrai" className="hover:text-cyan-800">En vrai</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
           <a href="#comprendre" className="hover:text-cyan-800">Comprendre</a>
+          <span aria-hidden className="text-[#1d1c16]/30">·</span>
+          <a href="#un-peu-de-maths" className="hover:text-cyan-800">Un peu de maths</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
           <a href="#apprendre" className="hover:text-cyan-800">Apprendre</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
@@ -1558,6 +1589,63 @@ export default function AccueilPage({
               une main lave l&apos;autre.
             </p>
           </Link>
+        </div>
+      </section>
+
+      {/* ══ UN PEU DE MATHS — les pépites du prof (table journal_articles,
+          rubrique 'un-peu-de-maths', repli en dur). Premier article : la
+          machine des epsilons — la devise du site, à faire découvrir. ════════ */}
+      <section id="un-peu-de-maths" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
+        <Kicker>Réfléchir · La rubrique du prof</Kicker>
+        <TitreRubrique>Un peu de maths</TitreRubrique>
+        <div className="mt-4 grid gap-x-6 gap-y-6 sm:grid-cols-2">
+          {unPeuDeMaths.map((a) => {
+            const externe = /^https?:\/\//.test(a.lien);
+            const carte = (
+              <>
+                {a.imageUrl && (
+                  <div
+                    className="relative aspect-video w-full overflow-hidden border border-[#1d1c16]/20"
+                    style={{ backgroundColor: "#fcfcf7" }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={a.imageUrl}
+                      alt={a.titre}
+                      loading="lazy"
+                      className="h-full w-full object-contain transition duration-300 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                )}
+                <h3 className="mt-2 font-serif text-lg font-black leading-snug group-hover:underline">
+                  {a.titre}
+                </h3>
+                {a.accroche && (
+                  <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
+                    {a.accroche}
+                  </p>
+                )}
+                {a.cta && (
+                  <p className="mt-1.5 text-sm font-black text-cyan-800">{a.cta}</p>
+                )}
+              </>
+            );
+            return externe ? (
+              <a
+                key={a.id}
+                href={a.lien}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group border-t border-[#1d1c16]/25 pt-3"
+              >
+                {carte}
+              </a>
+            ) : (
+              <Link key={a.id} href={a.lien} className="group border-t border-[#1d1c16]/25 pt-3">
+                {carte}
+              </Link>
+            );
+          })}
         </div>
       </section>
 
