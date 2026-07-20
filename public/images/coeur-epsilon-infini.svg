@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="950" viewBox="0 0 800 950">
+<defs>
+  <pattern id="carreaux" width="25" height="25" patternUnits="userSpaceOnUse">
+    <rect width="25" height="25" fill="#fcfcf7"/>
+    <path d="M25 0H0V25" fill="none" stroke="#cfe0f2" stroke-width="1"/>
+  </pattern>
+  <path id="lemniscate" pathLength="100" d="M527 408 C527 376 567 376 577 408 C587 440 627 440 627 408 C627 376 587 376 577 408 C567 440 527 440 527 408"/>
+  <style><![CDATA[
+    .encre{stroke:#2b4a9b;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .trace{stroke-dasharray:100;stroke-dashoffset:100;animation:trace ease forwards}
+    .pop{opacity:0;animation:pop .7s ease forwards}
+    .main{font-family:'Segoe Print','Bradley Hand',cursive;fill:#2b4a9b}
+    .neurone{fill:#2b4a9b}
+    .allume{animation:allume .9s ease forwards}
+    .ind1{animation:pulseor .8s ease 10.9s forwards}.ind2{animation:pulseor .8s ease 11.1s forwards}
+    .ind3{animation:pulseor .8s ease 11.3s forwards}.ind4{animation:pulseor .8s ease 11.5s forwards}
+    .ch1{animation:pulseor 1s ease 13.6s forwards}.ch2{animation:pulseor 1s ease 13.75s forwards}
+    .ch3{animation:pulseor 1s ease 13.9s forwards}.ch4{animation:pulseor 1s ease 14.05s forwards}
+    .n-e2{animation-delay:10.7s}.n-e1{animation-delay:10.85s}
+    .n-c1{animation-delay:11.3s}.n-c2{animation-delay:11.45s}.n-c3{animation-delay:11.6s}
+    .n-s1{animation-delay:12.1s}.n-s2{animation-delay:12.25s}
+    @keyframes trace{to{stroke-dashoffset:0}}
+    @keyframes pop{to{opacity:1}}
+    @keyframes allume{40%{fill:#e8a013;r:8}100%{fill:#b97e12;r:6}}
+    @keyframes pulseor{0%{fill:#2b4a9b}40%{fill:#e8a013}100%{fill:#8a6a1f}}
+  ]]></style>
+</defs>
+
+<rect width="800" height="950" fill="url(#carreaux)"/>
+<line x1="70" y1="0" x2="70" y2="950" stroke="#f3b6b6" stroke-width="2" opacity=".7"/>
+
+<!-- ACTE 1 : le dessin se trace -->
+<path class="encre trace" pathLength="100" style="animation-duration:2.6s;stroke-width:3"
+  d="M400 225 C345 118 186 128 143 258 C112 356 208 486 398 702 C596 488 688 358 658 258 C617 126 456 120 400 225"/>
+<path class="encre trace" pathLength="100" style="animation-duration:1.2s;animation-delay:2.8s;stroke-width:4"
+  d="M287 350 C216 335 187 387 243 407 C189 424 210 481 282 463"/>
+<g class="pop main" style="animation-delay:3.8s;font-size:28px">
+  <text class="ind1" x="322" y="370">i</text><text class="ind2" x="320" y="408">j</text>
+  <text class="ind3" x="318" y="448">k</text><text class="ind4" x="318" y="488">n</text>
+</g>
+
+<!-- le reseau de neurones : 2 entrees, 3 caches, 2 sorties -->
+<g class="encre" stroke-width="1.6" opacity=".85">
+  <line class="trace" pathLength="100" style="animation-duration:.3s;animation-delay:4.5s" x1="375" y1="375" x2="435" y2="355"/>
+  <line class="trace" pathLength="100" style="animation-duration:.3s;animation-delay:4.58s" x1="375" y1="375" x2="435" y2="405"/>
+  <line class="trace" pathLength="100" style="animation-duration:.3s;animation-delay:4.66s" x1="375" y1="375" x2="435" y2="455"/>
+  <line class="trace" pathLength="100" style="animation-duration:.3s;animation-delay:4.74s" x1="375" y1="440" x2="435" y2="355"/>
+  <line class="trace" pathLength="100" style="animation-duration:.3s;animation-delay:4.82s" x1="375" y1="440" x2="435" y2="405"/>
+  <line class="trace" pathLength="100" style="animation-duration:.3s;animation-delay:4.9s"  x1="375" y1="440" x2="435" y2="455"/>
+  <line class="trace" pathLength="100" style="animation-duration:.3s;animation-delay:4.98s" x1="435" y1="355" x2="495" y2="375"/>
+  <line class="trace" pathLength="100" style="animation-duration:.3s;animation-delay:5.06s" x1="435" y1="355" x2="495" y2="440"/>
+  <line class="trace" pathLength="100" style="animation-duration:.3s;animation-delay:5.14s" x1="435" y1="405" x2="495" y2="375"/>
+  <line class="trace" pathLength="100" style="animation-duration:.3s;animation-delay:5.22s" x1="435" y1="405" x2="495" y2="440"/>
+  <line class="trace" pathLength="100" style="animation-duration:.3s;animation-delay:5.3s"  x1="435" y1="455" x2="495" y2="375"/>
+  <line class="trace" pathLength="100" style="animation-duration:.3s;animation-delay:5.38s" x1="435" y1="455" x2="495" y2="440"/>
+</g>
+<g class="pop" style="animation-delay:4.4s">
+  <circle class="neurone n-e1 allume" cx="375" cy="375" r="5"/><circle class="neurone n-e2 allume" cx="375" cy="440" r="5"/>
+  <circle class="neurone n-c1 allume" cx="435" cy="355" r="5"/><circle class="neurone n-c2 allume" cx="435" cy="405" r="5"/>
+  <circle class="neurone n-c3 allume" cx="435" cy="455" r="5"/>
+  <circle class="neurone n-s1 allume" cx="495" cy="375" r="5"/><circle class="neurone n-s2 allume" cx="495" cy="440" r="5"/>
+</g>
+
+<text class="pop main" style="animation-delay:5.6s;font-size:26px" x="516" y="335">&#945; &#946; &#947; &#960;</text>
+<use href="#lemniscate" class="encre trace" style="animation-duration:1.3s;animation-delay:6.0s;stroke-width:4"/>
+<use href="#lemniscate" class="trace" style="stroke:#d99a15;fill:none;stroke-linecap:round;animation-duration:1.2s;animation-delay:15.2s;stroke-width:4"/>
+<g class="pop main" style="animation-delay:7.0s;font-size:25px">
+  <text class="ch1" x="518" y="482">1,</text><text class="ch2" x="546" y="482">2,</text>
+  <text class="ch3" x="574" y="482">3,</text><text class="ch4" x="602" y="482">4</text>
+</g>
+<path class="encre trace" pathLength="100" style="animation-duration:1.0s;animation-delay:7.6s;stroke-width:3"
+  d="M472 560 C566 622 646 622 706 586"/>
+<path class="pop" style="animation-delay:8.4s" d="M706 586 L688 578 L695 597 Z" fill="#2b4a9b"/>
+
+<!-- ACTE 2 : ACTIVER UN EPSILON... l'etincelle nait sur le epsilon et rejoint le reseau -->
+<circle r="6" fill="#e8a013" opacity="0" transform="translate(250,430)">
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" begin="9.2s" dur="1.6s" fill="freeze"/>
+</circle>
+<circle r="5" fill="#e8a013" opacity="0">
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.9;1" begin="9.7s" dur="1.2s" fill="freeze"/>
+  <animateMotion begin="9.7s" dur="1.1s" fill="freeze" path="M250 430 C290 468 330 478 373 442"/>
+</circle>
+
+<!-- ...ENGENDRE : 4 etincelles sortent du reseau (la multiplication) -->
+<circle r="4.5" fill="#e8a013" opacity="0">
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" begin="12.6s" dur="1.1s" fill="freeze"/>
+  <animateMotion begin="12.6s" dur="1.0s" fill="freeze" path="M495 375 C510 420 515 455 524 470"/>
+</circle>
+<circle r="4.5" fill="#e8a013" opacity="0">
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" begin="12.75s" dur="1.1s" fill="freeze"/>
+  <animateMotion begin="12.75s" dur="1.0s" fill="freeze" path="M495 375 C520 425 535 455 552 470"/>
+</circle>
+<circle r="4.5" fill="#e8a013" opacity="0">
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" begin="12.9s" dur="1.1s" fill="freeze"/>
+  <animateMotion begin="12.9s" dur="1.0s" fill="freeze" path="M495 440 C525 460 550 465 580 470"/>
+</circle>
+<circle r="4.5" fill="#e8a013" opacity="0">
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.85;1" begin="13.05s" dur="1.1s" fill="freeze"/>
+  <animateMotion begin="13.05s" dur="1.0s" fill="freeze" path="M495 440 C530 462 570 466 606 470"/>
+</circle>
+
+<!-- ...DES INFINIS : le seul mouvement qui ne s'arrete JAMAIS -->
+<circle r="5.5" fill="#e8a013" opacity="0">
+  <animate attributeName="opacity" to=".95" begin="15.2s" dur=".5s" fill="freeze"/>
+  <animateMotion begin="15.2s" dur="2.2s" repeatCount="indefinite"><mpath href="#lemniscate"/></animateMotion>
+</circle>
+<circle r="4.2" fill="#e8a013" opacity="0">
+  <animate attributeName="opacity" to=".8" begin="15.93s" dur=".5s" fill="freeze"/>
+  <animateMotion begin="15.93s" dur="2.2s" repeatCount="indefinite"><mpath href="#lemniscate"/></animateMotion>
+</circle>
+<circle r="3.5" fill="#e8a013" opacity="0">
+  <animate attributeName="opacity" to=".65" begin="16.66s" dur=".5s" fill="freeze"/>
+  <animateMotion begin="16.66s" dur="2.2s" repeatCount="indefinite"><mpath href="#lemniscate"/></animateMotion>
+</circle>
+
+<!-- signature -->
+<text class="pop main" style="animation-delay:14.8s;font-size:50px;font-weight:bold" x="330" y="800">&#949; &#8594; &#8734;</text>
+<text class="pop main" style="animation-delay:15.4s;font-size:25px" text-anchor="middle" x="400" y="862">Activer des epsilons</text>
+<text class="pop main" style="animation-delay:15.8s;font-size:25px" text-anchor="middle" x="400" y="898">peut engendrer des infinis.</text>
+</svg>

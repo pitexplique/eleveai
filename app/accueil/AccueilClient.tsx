@@ -800,6 +800,8 @@ export default function AccueilPage({
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
           <a href="#en-vrai" className="hover:text-cyan-800">En vrai</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
+          <a href="#comprendre" className="hover:text-cyan-800">Comprendre</a>
+          <span aria-hidden className="text-[#1d1c16]/30">·</span>
           <a href="#apprendre" className="hover:text-cyan-800">Apprendre</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
           <a href="#catalogue" className="hover:text-cyan-800">Le catalogue</a>
@@ -1491,6 +1493,70 @@ export default function AccueilPage({
             className="text-sm font-black text-cyan-800 underline underline-offset-2"
           >
             🗺️ Les maths sur la carte de l&apos;île →
+          </Link>
+        </div>
+      </section>
+
+      {/* ══ COMPRENDRE — les schémas animés : les films et les dessins qui
+          bougent (nés du barrage, 20/07). Le SVG animé joue directement dans
+          la carte (img) ; chaque nouveau film = une carte de plus ici. ═══════ */}
+      <section id="comprendre" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
+        <Kicker>Comprendre · Les schémas animés</Kicker>
+        <TitreRubrique>Le dessin s&apos;anime, et tu comprends</TitreRubrique>
+        <div className="mt-4 grid gap-x-6 gap-y-6 sm:grid-cols-2">
+          {/* Le film du principe du barrage */}
+          <a
+            href="https://youtu.be/yHCtKaj8TPw"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group border-t border-[#1d1c16]/25 pt-3"
+          >
+            <div className="relative aspect-video w-full overflow-hidden border border-[#1d1c16]/20 bg-white">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/barrage-coupe-anime.svg"
+                alt="Le principe du barrage de Takamaka, schéma animé"
+                loading="lazy"
+                className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+              />
+              <span className="absolute inset-0 flex items-center justify-center">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-red-700/90 text-sm text-white shadow-lg transition group-hover:scale-110">
+                  ▶
+                </span>
+              </span>
+            </div>
+            <h3 className="mt-2 font-serif text-lg font-black leading-snug group-hover:underline">
+              🎬 Le principe du barrage de Takamaka
+            </h3>
+            <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
+              La vanne s&apos;ouvre, l&apos;eau tombe de 500 m, la turbine tourne, le courant
+              grimpe les pylônes. Un film de 40 secondes, sans son — fait pour être lu.
+            </p>
+          </a>
+
+          {/* Le cœur ε → ∞ du fondateur */}
+          <Link href="/pourquoi-eleveai" className="group border-t border-[#1d1c16]/25 pt-3">
+            <div
+              className="relative aspect-video w-full overflow-hidden border border-[#1d1c16]/20"
+              style={{ backgroundColor: "#fcfcf7" }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/coeur-epsilon-infini.svg"
+                alt="Un cœur dessiné au stylo : epsilon, un réseau de neurones, l'infini"
+                loading="lazy"
+                className="h-full w-full object-contain transition duration-300 group-hover:scale-[1.03]"
+              />
+            </div>
+            <h3 className="mt-2 font-serif text-lg font-black leading-snug group-hover:underline">
+              ε → ∞, le cœur d&apos;un prof de maths
+            </h3>
+            <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
+              Le dessin du fondateur se trace tout seul : une étincelle active un epsilon,
+              traverse un réseau de neurones — et allume des infinis. Les petites actions
+              du quotidien font pareil. En créole&nbsp;: «&nbsp;In min i lav lot&nbsp;» —
+              une main lave l&apos;autre.
+            </p>
           </Link>
         </div>
       </section>
