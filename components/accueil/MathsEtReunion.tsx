@@ -58,6 +58,12 @@ const EPISODES: Episode[] = [
     accroche: "L'eau tombe de 500 m et éclaire 48 000 familles — puis ressort intacte vers la rivière. Joue avec sur eleveai.fr/barrage !",
     url: "https://youtu.be/oyjfPzC4sKY",
   },
+  {
+    emoji: "🎬",
+    titre: "Le principe du barrage (film d'animation)",
+    accroche: "Le schéma s'anime dans l'ordre : la vanne, la chute de 500 m, la turbine, le générateur, les lignes — et 8 × 5 × 500 = 20 000 kW.",
+    url: "https://youtu.be/yHCtKaj8TPw",
+  },
 ];
 
 // youtu.be/ID, youtube.com/watch?v=ID, /embed/ID… → l'identifiant seul.
