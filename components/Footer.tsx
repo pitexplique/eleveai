@@ -31,7 +31,11 @@ const espaces = [
 const infos = [
   { label: "Pourquoi EleveAI", href: "/pourquoi-eleveai" },
   { label: "Qui sommes-nous", href: "/qui-sommes-nous" },
+  { label: "Charte d'usage de l'IA", href: "/charte" },
   { label: "Tarifs", href: "/tarifs" },
+  { label: "Pourquoi nos tarifs sont justes", href: "/pourquoi-nos-tarifs-sont-justes" },
+  { label: "Presse", href: "/presse" },
+  { label: "Partenaires", href: "/partenaires" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
