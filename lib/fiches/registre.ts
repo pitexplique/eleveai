@@ -130,6 +130,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "L'algorithmique",
     resume: "Suivre et écrire un programme : instructions, boucles (répéter), déplacements dans Scratch.",
   },
+  "maths/cm2/algebre": {
+    titre: "Les débuts de l'algèbre",
+    resume: "Comprendre une égalité, donner un nom (x) à un nombre inconnu, modéliser, faire l'opération inverse.",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",

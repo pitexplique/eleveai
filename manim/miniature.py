@@ -153,6 +153,27 @@ def acc_algorithmique_cm2(d):
     centre(d, x0 + w / 2, y + 3 * (h + gap) + 8, "des blocs dans l'ordre", police("arialbd.ttf", 28), VERT)
 
 
+def acc_algebre_cm2(d):
+    # 3 feuilles (chacune « x ») + 2 pastilles visibles → l'expression 3x + 2.
+    orange = (217, 119, 20)
+    vert_f = (74, 222, 128)
+    cx, cy = 336, 330
+    # 3 feuilles cachées (ellipses vertes avec x)
+    for i in range(3):
+        fx = cx + i * 96
+        d.ellipse([fx, cy, fx + 74, cy + 56], fill=vert_f, outline=(22, 101, 52), width=3)
+        centre(d, fx + 37, cy + 13, "x", police("ariblk.ttf", 30), NAVY)
+    # + 2 pastilles visibles
+    px = cx + 3 * 96 + 6
+    centre(d, px + 6, cy + 12, "+", police("ariblk.ttf", 34), NAVY)
+    for j in range(2):
+        vx = px + 40 + j * 42
+        d.ellipse([vx, cy + 8, vx + 30, cy + 38], fill=(249, 115, 22), outline=NAVY, width=2)
+    # l'expression
+    centre(d, cx + 190, cy + 96, "3x + 2", police("ariblk.ttf", 48), (109, 40, 217))
+    centre(d, cx + 190, cy + 150, "on écrit avec x", police("arialbd.ttf", 28), orange)
+
+
 def acc_graphique_cm2(d):
     # un diagramme en barres (4 barres de hauteurs différentes) + axes.
     orange = (217, 119, 20)
@@ -953,6 +974,10 @@ NOTIONS = {
     "eleveai-maths-cm2-algorithmique": {
         "badge": "MATHS · CM2", "titre": ["L'ALGO-", "RITHMIQUE"], "taille": 64,
         "sous": "programmer avec Scratch", "accroche": acc_algorithmique_cm2,
+    },
+    "eleveai-maths-cm2-algebre": {
+        "badge": "MATHS · CM2", "titre": ["LES DÉBUTS", "DE L'ALGÈBRE"], "taille": 62,
+        "sous": "le nombre inconnu x", "accroche": acc_algebre_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,
