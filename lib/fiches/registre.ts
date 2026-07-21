@@ -142,6 +142,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les figures planes",
     resume: "Reconnaître et décrire triangle, carré, rectangle, losange et cercle par leurs côtés et angles.",
   },
+  "maths/cm2/echelle": {
+    titre: "Les échelles",
+    resume: "Lire une échelle sur un plan ou une carte, passer de la distance du plan à la distance réelle.",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",

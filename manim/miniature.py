@@ -214,6 +214,25 @@ def acc_figure_plane_cm2(d):
     centre(d, 555, y + 150, "compte les côtés", police("arialbd.ttf", 30), VERT)
 
 
+def acc_echelle_cm2(d):
+    # deux segments (plan court bleu · réalité long vert) + le ratio 1 cm → 10 m.
+    orange = (217, 119, 20)
+    x0 = 372
+    # plan
+    a_droite(d, x0 - 14, 348, "plan", police("arialbd.ttf", 24), (100, 116, 139))
+    d.line([(x0, 360), (x0 + 70, 360)], fill=BLEU, width=7)
+    d.ellipse([x0 - 5, 355, x0 + 5, 365], fill=NAVY)
+    d.ellipse([x0 + 65, 355, x0 + 75, 365], fill=NAVY)
+    centre(d, x0 + 35, 372, "1 cm", police("arialbd.ttf", 22), BLEU)
+    # réalité
+    a_droite(d, x0 - 14, 420, "réel", police("arialbd.ttf", 24), (100, 116, 139))
+    d.line([(x0, 432), (x0 + 290, 432)], fill=VERT, width=7)
+    d.ellipse([x0 - 5, 427, x0 + 5, 437], fill=NAVY)
+    d.ellipse([x0 + 285, 427, x0 + 295, 437], fill=NAVY)
+    centre(d, x0 + 145, 444, "10 m", police("arialbd.ttf", 22), VERT)
+    centre(d, x0 + 145, 490, "1 cm → 10 m", police("ariblk.ttf", 38), orange)
+
+
 def acc_graphique_cm2(d):
     # un diagramme en barres (4 barres de hauteurs différentes) + axes.
     orange = (217, 119, 20)
@@ -1026,6 +1045,10 @@ NOTIONS = {
     "eleveai-maths-cm2-figure-plane": {
         "badge": "MATHS · CM2", "titre": ["LES FIGURES", "PLANES"], "taille": 64,
         "sous": "triangle · carré · cercle", "accroche": acc_figure_plane_cm2,
+    },
+    "eleveai-maths-cm2-echelle": {
+        "badge": "MATHS · CM2", "titre": ["LES", "ÉCHELLES"], "taille": 84,
+        "sous": "du plan à la réalité", "accroche": acc_echelle_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,
