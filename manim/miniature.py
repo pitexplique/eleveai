@@ -174,6 +174,28 @@ def acc_algebre_cm2(d):
     centre(d, cx + 190, cy + 150, "on écrit avec x", police("arialbd.ttf", 28), orange)
 
 
+def acc_droite_cm2(d):
+    # deux droites perpendiculaires (flèches aux bouts) + l'équerre rouge (angle droit).
+    orange = (217, 119, 20)
+    cx, cy = 520, 360
+    lh, lv = 200, 150
+    # droite horizontale (verte) avec flèches
+    d.line([(cx - lh, cy), (cx + lh, cy)], fill=VERT, width=6)
+    for sx in (cx - lh, cx + lh):
+        dirx = -1 if sx < cx else 1
+        d.polygon([(sx, cy), (sx - dirx * 16, cy - 9), (sx - dirx * 16, cy + 9)], fill=VERT)
+    # droite verticale (bleue) avec flèches
+    d.line([(cx, cy - lv), (cx, cy + lv)], fill=BLEU, width=6)
+    for sy in (cy - lv, cy + lv):
+        diry = -1 if sy < cy else 1
+        d.polygon([(cx, sy), (cx - 9, sy - diry * 16), (cx + 9, sy - diry * 16)], fill=BLEU)
+    # équerre rouge (petit carré au coin haut-droit)
+    s = 30
+    d.line([(cx + s, cy), (cx + s, cy - s)], fill=(211, 47, 47), width=5)
+    d.line([(cx + s, cy - s), (cx, cy - s)], fill=(211, 47, 47), width=5)
+    centre(d, cx, cy + lv + 40, "un angle droit", police("arialbd.ttf", 30), orange)
+
+
 def acc_graphique_cm2(d):
     # un diagramme en barres (4 barres de hauteurs différentes) + axes.
     orange = (217, 119, 20)
@@ -978,6 +1000,10 @@ NOTIONS = {
     "eleveai-maths-cm2-algebre": {
         "badge": "MATHS · CM2", "titre": ["LES DÉBUTS", "DE L'ALGÈBRE"], "taille": 62,
         "sous": "le nombre inconnu x", "accroche": acc_algebre_cm2,
+    },
+    "eleveai-maths-cm2-droite": {
+        "badge": "MATHS · CM2", "titre": ["LES", "DROITES"], "taille": 84,
+        "sous": "parallèles · perpendiculaires", "accroche": acc_droite_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,

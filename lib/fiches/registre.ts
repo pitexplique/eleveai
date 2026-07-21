@@ -134,6 +134,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les débuts de l'algèbre",
     resume: "Comprendre une égalité, donner un nom (x) à un nombre inconnu, modéliser, faire l'opération inverse.",
   },
+  "maths/cm2/droite": {
+    titre: "Droites, segments et demi-droites",
+    resume: "Reconnaître droite, segment et demi-droite ; droites parallèles et perpendiculaires (angle droit).",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",
