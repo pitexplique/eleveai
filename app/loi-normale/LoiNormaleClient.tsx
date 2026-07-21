@@ -477,8 +477,9 @@ export default function LoiNormaleClient() {
             De l&apos;échantillon à la population — le sondage
           </p>
           <p className="mt-2 text-[14px] leading-7">
-            Le vrai pouvoir de la cloche est là. Tu ne peux pas interroger les{" "}
-            <b>860 000</b> Réunionnais. Tu en interroges <b>n au hasard</b> — et la cloche
+            Le vrai pouvoir de la cloche est là : <b>de l&apos;individu vers
+            l&apos;humanité, de l&apos;échantillon vers la population</b>. Tu ne peux pas
+            interroger les <b>860 000</b> Réunionnais. Tu en interroges <b>n au hasard</b> — et la cloche
             te dit à quel point ton estimation vaut pour l&apos;île <b>entière</b>. Une cuillère
             de rougail bien touillée goûte toute la marmite&nbsp;: c&apos;est le même principe.
           </p>
@@ -558,7 +559,7 @@ export default function LoiNormaleClient() {
             de l'échantillon à la population (le sondage), et… pour soi-même. */}
         <div className="mt-5 rounded border p-4 text-[13.5px] leading-6" style={{ borderColor: "#d5ddf0", backgroundColor: "#ffffffcc" }}>
           <p className="text-[11px] font-black uppercase tracking-[0.18em]" style={{ color: OR }}>
-            À quoi ça sert ? — connaître le tout… et se connaître soi
+            À quoi ça sert ? — de l&apos;individu vers l&apos;humanité
           </p>
           <ul className="mt-2 space-y-2">
             <li>

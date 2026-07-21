@@ -992,8 +992,43 @@ def acc_derivation_premiere(d):
            police("arialbd.ttf", 30), rouge)
 
 
+def acc_loi_normale_journal(d):
+    # Le dessin d'origine de l'article : l'escalier de la binomiale (ligne 8 de
+    # Pascal, barres or) → « n → ∞ » → la cloche lisse. Zone sûre : sous le
+    # sous-titre, à gauche du margouillat.
+    import math
+    orange = (217, 119, 20)
+    or_barres = (232, 160, 19)
+    # l'escalier (binomiale n = 8 : 1, 8, 28, 56, 70, 56, 28, 8, 1)
+    coeffs = [1, 8, 28, 56, 70, 56, 28, 8, 1]
+    x0, base, bw, hmax = 316, 470, 22, 130
+    for k, c in enumerate(coeffs):
+        h = max(8, int(hmax * c / 70))
+        x = x0 + k * bw
+        d.rectangle([x, base - h, x + bw - 3, base], fill=or_barres, outline=NAVY, width=2)
+    # la flèche « n → ∞ »
+    fx = x0 + 9 * bw + 18
+    d.line([(fx, 408), (fx + 58, 408)], fill=orange, width=7)
+    d.polygon([(fx + 58, 396), (fx + 78, 408), (fx + 58, 420)], fill=orange)
+    centre(d, fx + 39, 358, "n → ∞", police("ariblk.ttf", 30), orange)
+    # la cloche lisse (polyligne gaussienne)
+    cx, cw = fx + 96 + 105, 210
+    pts = []
+    for i in range(41):
+        t = -1 + 2 * i / 40
+        pts.append((cx + t * cw / 2, base - int(hmax * math.exp(-4.5 * t * t))))
+    d.line(pts, fill=BLEU, width=7, joint="curve")
+    d.line([(x0 - 8, base), (cx + cw / 2 + 8, base)], fill=NAVY, width=4)
+    centre(d, (x0 + cx + cw / 2) / 2, base + 22, "l'escalier devient la cloche",
+           police("arialbd.ttf", 28), VERT)
+
+
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
+    "eleveai-maths-journal-loi-normale": {
+        "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["LA COURBE", "EN CLOCHE"], "taille": 76,
+        "sous": "de pile ou face à la loi normale", "accroche": acc_loi_normale_journal,
+    },
     "eleveai-maths-974-barrage-takamaka": {
         "badge": "L'ÎLE DE LA RÉUNION · EN VRAI", "titre": ["LE BARRAGE", "DE TAKAMAKA"], "taille": 62,
         "sous": "l'eau qui allume l'île", "accroche": acc_barrage_974,
