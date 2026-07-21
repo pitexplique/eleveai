@@ -82,6 +82,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les nombres entiers",
     resume: "Tableau de numération : lire, comparer, décomposer, arrondir et reconnaître les multiples.",
   },
+  "maths/cm2/calcul": {
+    titre: "Le calcul",
+    resume: "Calcul mental, additions et soustractions posées, décimaux et priorités opératoires.",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",

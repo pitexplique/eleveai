@@ -78,6 +78,23 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_calcul_cm2(d):
+    # une addition posée avec retenue : 487 + 268 = 755.
+    orange = (217, 119, 20)
+    xr = [452, 512, 572]  # colonnes centaines / dizaines / unités
+    # retenues (petit, en haut)
+    for x in (xr[0], xr[1]):
+        centre(d, x, 300, "1", police("arialbd.ttf", 26), orange)
+    for i, c in enumerate("487"):
+        centre(d, xr[i], 336, c, police("ariblk.ttf", 48), NAVY)
+    centre(d, xr[0] - 58, 388, "+", police("ariblk.ttf", 44), orange)
+    for i, c in enumerate("268"):
+        centre(d, xr[i], 388, c, police("ariblk.ttf", 48), NAVY)
+    d.line([(xr[0] - 44, 424), (xr[2] + 30, 424)], fill=NAVY, width=4)
+    for i, c in enumerate("755"):
+        centre(d, xr[i], 456, c, police("ariblk.ttf", 48), VERT)
+
+
 def acc_entier_cm2(d):
     # le tableau de numération : 4 colonnes (M · C · D · U) avec 4 273 dedans.
     cols = ["M", "C", "D", "U"]
@@ -703,6 +720,10 @@ NOTIONS = {
     "eleveai-maths-cm2-nombre-decimal": {
         "badge": "MATHS · CM2", "titre": ["LES NOMBRES", "DÉCIMAUX"], "taille": 84,
         "sous": "dixièmes · comparer · arrondir", "accroche": acc_decimal_cm2,
+    },
+    "eleveai-maths-cm2-calcul": {
+        "badge": "MATHS · CM2", "titre": ["LE", "CALCUL"], "taille": 84,
+        "sous": "posé · décimaux · priorités", "accroche": acc_calcul_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,
