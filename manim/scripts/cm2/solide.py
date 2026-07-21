@@ -153,13 +153,17 @@ class SolideCM2(Scene):
         cub = cube([-4.4, 1.0, 0], s=1.0, dp=0.4)
         pave = cube([-1.5, 1.0, 0], s=1.0, dp=0.4)
         pave.stretch(1.5, 0)  # étiré en largeur = un pavé droit
-        # pyramide (base + sommet)
-        py_c = np.array([1.6, 0.55, 0])
+        # pyramide à base carrée vue en perspective : base losange + 2 faces
+        # triangulaires visibles depuis le sommet (gauche claire, droite foncée).
+        front = np.array([0, -0.30, 0])
+        right = np.array([0.75, 0.02, 0])
+        back = np.array([0, 0.34, 0])
+        left = np.array([-0.75, 0.02, 0])
+        apex = np.array([0, 1.25, 0])
         pyramide = VGroup(
-            Polygon(py_c + [-0.7, 0, 0], py_c + [0.7, 0, 0], py_c + [0.2, 0.25, 0], py_c + [-1.2, 0.25, 0],
-                    color=NAVY_STROKE, fill_color=SIDE, fill_opacity=1, stroke_width=3),
-            Polygon(py_c + [-0.7, 0, 0], py_c + [0.7, 0, 0], py_c + [-0.1, 1.3, 0],
-                    color=NAVY_STROKE, fill_color=BLEU_CALCUL, fill_opacity=1, stroke_width=3),
+            Polygon(front, right, back, left, color=NAVY_STROKE, fill_color="#3A5A7A", fill_opacity=1, stroke_width=3),  # base
+            Polygon(front, right, apex, color=NAVY_STROKE, fill_color=SIDE, fill_opacity=1, stroke_width=3),            # face droite (ombre)
+            Polygon(left, front, apex, color=NAVY_STROKE, fill_color=BLEU_CALCUL, fill_opacity=1, stroke_width=3),      # face gauche (lumière)
         )
 
         g1 = self.petit_solide(cub, "cube", VERT_OK, [-4.4, 1.0, 0])
