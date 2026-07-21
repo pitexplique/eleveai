@@ -78,6 +78,26 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_duree_cm2(d):
+    # une horloge qui montre 7 h 15 + le rappel 1 h = 60 min.
+    import math
+    orange = (217, 119, 20)
+    cx, cy, r = 512, 372, 92
+    d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(11, 27, 43), outline=NAVY, width=5)
+    for k in range(12):
+        ang = math.radians(90 - k * 30)
+        x1, y1 = cx + (r - 12) * math.cos(ang), cy - (r - 12) * math.sin(ang)
+        x2, y2 = cx + r * math.cos(ang), cy - r * math.sin(ang)
+        d.line([(x1, y1), (x2, y2)], fill=(255, 255, 255), width=3)
+    # aiguille des heures (vers ~7) et des minutes (vers 3 = 15 min)
+    ah = math.radians(90 - (7 + 15 / 60) * 30)
+    am = math.radians(90 - 15 * 6)
+    d.line([(cx, cy), (cx + 0.5 * r * math.cos(ah), cy - 0.5 * r * math.sin(ah))], fill=BLEU, width=7)
+    d.line([(cx, cy), (cx + 0.82 * r * math.cos(am), cy - 0.82 * r * math.sin(am))], fill=(239, 68, 68), width=5)
+    d.ellipse([cx - 6, cy - 6, cx + 6, cy + 6], fill=JAUNE)
+    centre(d, cx, cy + r + 34, "7 h 15   ·   1 h = 60 min", police("arialbd.ttf", 30), VERT)
+
+
 def acc_calcul_cm2(d):
     # une addition posée avec retenue : 487 + 268 = 755.
     orange = (217, 119, 20)
@@ -724,6 +744,10 @@ NOTIONS = {
     "eleveai-maths-cm2-calcul": {
         "badge": "MATHS · CM2", "titre": ["LE", "CALCUL"], "taille": 84,
         "sous": "posé · décimaux · priorités", "accroche": acc_calcul_cm2,
+    },
+    "eleveai-maths-cm2-duree": {
+        "badge": "MATHS · CM2", "titre": ["LES", "DURÉES"], "taille": 84,
+        "sous": "l'heure · convertir · calculer", "accroche": acc_duree_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,

@@ -86,6 +86,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le calcul",
     resume: "Calcul mental, additions et soustractions posées, décimaux et priorités opératoires.",
   },
+  "maths/cm2/duree": {
+    titre: "Les durées",
+    resume: "Lire l'heure, convertir heures/minutes/secondes, calculer une durée et une heure de fin.",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",
