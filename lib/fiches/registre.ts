@@ -90,6 +90,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les durées",
     resume: "Lire l'heure, convertir heures/minutes/secondes, calculer une durée et une heure de fin.",
   },
+  "maths/cm2/pourcentage": {
+    titre: "Les pourcentages",
+    resume: "« Sur 100 » : fractions simples, 50/25/10 %, calculer un pourcentage et une réduction.",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",

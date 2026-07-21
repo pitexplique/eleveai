@@ -78,6 +78,17 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_pourcentage_cm2(d):
+    # une grille de 100 cases, 50 coloriées → 50 % = la moitié.
+    gx, gy, cs = 388, 300, 25
+    for r in range(10):
+        for c in range(10):
+            x, y = gx + c * cs, gy + r * cs
+            fill = BLEU if r < 5 else PAPIER
+            d.rectangle([x, y, x + cs, y + cs], fill=fill, outline=NAVY, width=1)
+    centre(d, gx + 5 * cs, gy + 10 * cs + 32, "50 % = 50/100 = la moitié", police("arialbd.ttf", 30), VERT)
+
+
 def acc_duree_cm2(d):
     # une horloge qui montre 7 h 15 + le rappel 1 h = 60 min.
     import math
@@ -748,6 +759,10 @@ NOTIONS = {
     "eleveai-maths-cm2-duree": {
         "badge": "MATHS · CM2", "titre": ["LES", "DURÉES"], "taille": 84,
         "sous": "l'heure · convertir · calculer", "accroche": acc_duree_cm2,
+    },
+    "eleveai-maths-cm2-pourcentage": {
+        "badge": "MATHS · CM2", "titre": ["LES", "POURCENTAGES"], "taille": 66,
+        "sous": "sur 100 · fractions · réductions", "accroche": acc_pourcentage_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,
