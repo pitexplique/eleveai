@@ -89,6 +89,28 @@ def acc_symetrie_cm2(d):
     d.polygon(droite, fill=VERT, outline=NAVY)
 
 
+def acc_angle_cm2(d):
+    # les trois familles côte à côte : aigu (vert), droit (bleu + équerre), obtus (orange).
+    import math
+    L = 76
+    orange = (217, 119, 20)
+
+    def un_angle(ox, oy, deg, col, lab, equerre=False):
+        d.line([(ox, oy), (ox + L, oy)], fill=col, width=7)
+        ex = ox + L * math.cos(math.radians(deg))
+        ey = oy - L * math.sin(math.radians(deg))
+        d.line([(ox, oy), (ex, ey)], fill=col, width=7)
+        d.arc([ox - 30, oy - 30, ox + 30, oy + 30], start=360 - deg, end=360, fill=col, width=5)
+        if equerre:
+            d.rectangle([ox, oy - 22, ox + 22, oy], outline=col, width=3)
+        d.ellipse([ox - 6, oy - 6, ox + 6, oy + 6], fill=NAVY)
+        centre(d, ox, oy + 20, lab, police("ariblk.ttf", 30), col)
+
+    un_angle(376, 402, 40, VERT, "aigu")
+    un_angle(524, 402, 90, BLEU, "droit", equerre=True)
+    un_angle(672, 402, 130, orange, "obtus")
+
+
 def acc_aire_cm2(d):
     # une grille 4 × 3 remplie (la surface) + A = 4 × 3 = 12 cm².
     gx, gy, cs = 388, 322, 42
@@ -679,6 +701,10 @@ NOTIONS = {
     "eleveai-maths-cm2-symetrie": {
         "badge": "MATHS · CM2", "titre": ["LA SYMÉTRIE", "AXIALE"], "taille": 64,
         "sous": "le miroir · l'axe", "accroche": acc_symetrie_cm2,
+    },
+    "eleveai-maths-cm2-angle": {
+        "badge": "MATHS · CM2", "titre": ["LES", "ANGLES"], "taille": 84,
+        "sous": "aigu · droit · obtus", "accroche": acc_angle_cm2,
     },
     "eleveai-maths-5e-relatif-nombre": {
         "badge": "MATHS · 5e", "titre": ["LES NOMBRES", "RELATIFS"], "taille": 74,
