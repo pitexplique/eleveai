@@ -1583,9 +1583,9 @@ export default function AccueilPage({
               ε → ∞, le cœur d&apos;un prof de maths
             </h3>
             <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
-              Le dessin du fondateur se trace tout seul : une étincelle active un epsilon,
-              traverse un réseau de neurones — et allume des infinis. Les petites actions
-              du quotidien font pareil. En créole&nbsp;: «&nbsp;In min i lav lot&nbsp;» —
+              Une petite étincelle&nbsp;: un epsilon traverse un réseau de neurones et fait
+              naître l&apos;infini. L&apos;apprentissage marche pareil — un progrès minuscule
+              en déclenche d&apos;autres. En créole&nbsp;: «&nbsp;In min i lav lot&nbsp;» —
               une main lave l&apos;autre.
             </p>
           </Link>
