@@ -23,6 +23,12 @@ create table if not exists public.journal_articles (
 create index if not exists journal_articles_rubrique_idx
   on public.journal_articles using btree (rubrique, actif, ordre);
 
+-- Un article = un lien unique par rubrique : c'est CETTE contrainte qui rend
+-- les graines réexécutables. (Sans elle, « on conflict do nothing » ne protège
+-- rien — le fichier rejoué le 21/07 avait dupliqué l'epsilon.)
+create unique index if not exists journal_articles_rubrique_lien_uniq
+  on public.journal_articles using btree (rubrique, lien);
+
 -- RLS activé SANS policy : lecture/écriture uniquement via la clé service-role
 -- (page serveur de l'accueil). Aucun accès direct navigateur.
 alter table public.journal_articles enable row level security;
@@ -35,7 +41,7 @@ insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url
    '/images/coeur-epsilon-infini.svg',
    '/simulateur-epsilon',
    '⚡ Active un epsilon →')
-on conflict do nothing;
+on conflict (rubrique, lien) do nothing;
 
 -- ── Article 2 (21/07) : la courbe en cloche née des coefficients ─────────────
 -- L'intuition de Frédéric, dessinée au stylo sur une feuille à carreaux :
@@ -49,4 +55,4 @@ insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url
    '/images/binomiale-vers-normale.svg',
    '/loi-normale',
    '🔔 Fais grandir n →')
-on conflict do nothing;
+on conflict (rubrique, lien) do nothing;
