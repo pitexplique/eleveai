@@ -262,6 +262,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le théorème de Thalès",
     resume: "Calculer une longueur avec les rapports égaux et prouver un parallélisme.",
   },
+  "maths/premiere-spe/derivation": {
+    titre: "La dérivation",
+    resume: "Taux de variation, nombre dérivé, dérivées usuelles et équation de la tangente.",
+  },
   "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
   "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
   "ia/fondements/modeles-apprentissage": { titre: "Les modèles d'apprentissage" },

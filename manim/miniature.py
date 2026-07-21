@@ -967,6 +967,31 @@ def acc_barrage_974(d):
     d.text((386, 512), "l'eau tombe de 500 m → l'île s'allume", font=police("arialbd.ttf", 27), fill=BLEU)
 
 
+def acc_derivation_premiere(d):
+    # Une parabole y = x² + sa TANGENTE rouge au point A : le nombre dérivé, c'est
+    # la pente de cette tangente. Zone sûre : sous le sous-titre, à gauche du margouillat.
+    rouge = (211, 47, 47)
+    ox, oyv = 486, 478          # centre horizontal + sommet (vertex) de la parabole
+    sx, sy = 66, 32             # échelle px par unité (x et y)
+    # la parabole (polyligne)
+    pts = []
+    t = -2.2
+    while t <= 2.2001:
+        pts.append((ox + t * sx, oyv - (t * t) * sy))
+        t += 0.2
+    d.line(pts, fill=BLEU, width=6, joint="curve")
+    # le point A (abscisse a = 1) et sa tangente y = 2x − 1 (pente 2)
+    ax, ay = ox + 1 * sx, oyv - 1 * sy          # A = (552, 446)
+    pente_px = -(2 * 1 * sy) / sx               # pente en pixels
+    x1, x2 = ax - 92, ax + 92
+    d.line([(x1, ay + pente_px * (x1 - ax)), (x2, ay + pente_px * (x2 - ax))],
+           fill=rouge, width=6)
+    d.ellipse([ax - 9, ay - 9, ax + 9, ay + 9], fill=VERT, outline=NAVY, width=3)
+    centre(d, ax + 34, ay - 30, "A", police("ariblk.ttf", 30), VERT)
+    centre(d, ox, oyv + 66, "f '(a) = la pente de la tangente",
+           police("arialbd.ttf", 30), rouge)
+
+
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
     "eleveai-maths-974-barrage-takamaka": {
@@ -1044,6 +1069,10 @@ NOTIONS = {
     "eleveai-maths-cm2-suite": {
         "badge": "MATHS · CM2", "titre": ["LES", "SUITES"], "taille": 84,
         "sous": "trouver la règle · continuer", "accroche": acc_suite_cm2,
+    },
+    "eleveai-maths-premiere-derivation": {
+        "badge": "MATHS · PREMIÈRE", "titre": ["LA", "DÉRIVATION"], "taille": 76,
+        "sous": "nombre dérivé · tangente", "accroche": acc_derivation_premiere,
     },
     "eleveai-maths-cm2-probleme": {
         "badge": "MATHS · CM2", "titre": ["RÉSOUDRE UN", "PROBLÈME"], "taille": 60,
