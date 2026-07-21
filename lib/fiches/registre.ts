@@ -114,6 +114,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les angles",
     resume: "Sommet, côtés, angle droit ; aigu, droit, obtus et mesure au rapporteur.",
   },
+  "maths/cm2/solide": {
+    titre: "Les solides",
+    resume: "Cube, pavé, cylindre, cône, boule ; faces, arêtes, sommets, polyèdre et patron.",
+  },
   "maths/5e/relatif-nombre": {
     titre: "Les nombres relatifs",
     resume: "Lire, placer et comparer les relatifs ; signe, opposé et valeur absolue.",

@@ -111,6 +111,19 @@ def acc_angle_cm2(d):
     un_angle(672, 402, 130, orange, "obtus")
 
 
+def acc_solide_cm2(d):
+    # un cube en perspective, ses sommets marqués + la légende 6 · 8 · 12.
+    ox, oy, s, dp = 512, 476, 132, 54
+    A, B, C, D = (ox, oy - s), (ox + s, oy - s), (ox + s, oy), (ox, oy)
+    Ab, Bb, Cb = (ox + dp, oy - s - dp), (ox + s + dp, oy - s - dp), (ox + s + dp, oy - dp)
+    d.polygon([A, B, Bb, Ab], fill=(120, 175, 235), outline=NAVY)   # dessus
+    d.polygon([B, C, Cb, Bb], fill=(24, 70, 130), outline=NAVY)     # côté droit
+    d.polygon([A, B, C, D], fill=BLEU, outline=NAVY)                # face avant
+    for sx, sy in (A, B, C, D, Ab, Bb, Cb):
+        d.ellipse([sx - 7, sy - 7, sx + 7, sy + 7], fill=NAVY, outline=(255, 255, 255), width=2)
+    centre(d, ox + (s + dp) / 2, oy + 16, "6 faces · 8 sommets · 12 arêtes", police("arialbd.ttf", 30), VERT)
+
+
 def acc_aire_cm2(d):
     # une grille 4 × 3 remplie (la surface) + A = 4 × 3 = 12 cm².
     gx, gy, cs = 388, 322, 42
@@ -705,6 +718,10 @@ NOTIONS = {
     "eleveai-maths-cm2-angle": {
         "badge": "MATHS · CM2", "titre": ["LES", "ANGLES"], "taille": 84,
         "sous": "aigu · droit · obtus", "accroche": acc_angle_cm2,
+    },
+    "eleveai-maths-cm2-solide": {
+        "badge": "MATHS · CM2", "titre": ["LES", "SOLIDES"], "taille": 84,
+        "sous": "cube · pavé · cylindre · boule", "accroche": acc_solide_cm2,
     },
     "eleveai-maths-5e-relatif-nombre": {
         "badge": "MATHS · 5e", "titre": ["LES NOMBRES", "RELATIFS"], "taille": 74,
