@@ -126,6 +126,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Résoudre un problème",
     resume: "Comprendre l'énoncé, choisir la bonne opération, résoudre en une ou plusieurs étapes, rédiger.",
   },
+  "maths/cm2/algorithmique": {
+    titre: "L'algorithmique",
+    resume: "Suivre et écrire un programme : instructions, boucles (répéter), déplacements dans Scratch.",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",

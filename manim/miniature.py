@@ -137,6 +137,22 @@ def acc_probleme_cm2(d):
     centre(d, x0 + w / 2, yb + 96, "quelle opération ?", police("arialbd.ttf", 30), orange)
 
 
+def acc_algorithmique_cm2(d):
+    # une pile de blocs Scratch (départ jaune · avancer bleu · répéter orange).
+    orange = (217, 119, 20)
+    blocs = [
+        ("quand je clique", (250, 204, 21), NAVY),
+        ("avancer de 10", (59, 130, 246), (255, 255, 255)),
+        ("répéter 4 fois", (249, 115, 22), (255, 255, 255)),
+    ]
+    x0, y, w, h, gap = 348, 344, 300, 48, 12
+    for i, (txt, fill, col) in enumerate(blocs):
+        yy = y + i * (h + gap)
+        d.rounded_rectangle([x0, yy, x0 + w, yy + h], radius=12, fill=fill)
+        centre(d, x0 + w / 2, yy + h / 2 - 16, txt, police("arialbd.ttf", 26), col)
+    centre(d, x0 + w / 2, y + 3 * (h + gap) + 8, "des blocs dans l'ordre", police("arialbd.ttf", 28), VERT)
+
+
 def acc_graphique_cm2(d):
     # un diagramme en barres (4 barres de hauteurs différentes) + axes.
     orange = (217, 119, 20)
@@ -933,6 +949,10 @@ NOTIONS = {
     "eleveai-maths-cm2-probleme": {
         "badge": "MATHS · CM2", "titre": ["RÉSOUDRE UN", "PROBLÈME"], "taille": 60,
         "sous": "comprendre · calculer · rédiger", "accroche": acc_probleme_cm2,
+    },
+    "eleveai-maths-cm2-algorithmique": {
+        "badge": "MATHS · CM2", "titre": ["L'ALGO-", "RITHMIQUE"], "taille": 64,
+        "sous": "programmer avec Scratch", "accroche": acc_algorithmique_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,
