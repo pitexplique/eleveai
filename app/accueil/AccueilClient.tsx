@@ -252,6 +252,15 @@ export type ArticleRubrique = {
 // des epsilons (la devise du site, à faire découvrir).
 const ARTICLES_MATHS_FALLBACK: ArticleRubrique[] = [
   {
+    id: "loi-normale",
+    titre: "La courbe en cloche n'est pas tombée du ciel",
+    accroche:
+      "L'intuition du prof, au stylo sur une feuille à carreaux : la loi normale est la limite d'une loi à coefficients. Pousse n — l'escalier de la binomiale, dessiné par les coefficients du triangle de Pascal, se lisse en courbe de Gauss. De Moivre l'a prouvé en 1733.",
+    imageUrl: "/images/binomiale-vers-normale.svg",
+    lien: "/loi-normale",
+    cta: "🔔 Fais grandir n →",
+  },
+  {
     id: "epsilon",
     titre: "Activer des epsilons peut engendrer des infinis",
     accroche:

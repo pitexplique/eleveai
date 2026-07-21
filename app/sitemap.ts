@@ -221,6 +221,9 @@ const ROUTES: RouteConfig[] = [
   // La machine des epsilons (20/07) — le coefficient k, la suite géométrique :
   // « activer des epsilons peut engendrer des infinis ».
   { path: "/simulateur-epsilon", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-20") },
+  // La courbe en cloche (21/07) — de la binomiale (les coefficients de Pascal)
+  // à la loi normale : le théorème de De Moivre-Laplace dans un curseur.
+  { path: "/loi-normale", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-21") },
   { path: "/picto-maths",     priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/carte",           priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/cahier-vacances/maths", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_974 },

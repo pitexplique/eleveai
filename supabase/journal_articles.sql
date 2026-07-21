@@ -36,3 +36,17 @@ insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url
    '/simulateur-epsilon',
    '⚡ Active un epsilon →')
 on conflict do nothing;
+
+-- ── Article 2 (21/07) : la courbe en cloche née des coefficients ─────────────
+-- L'intuition de Frédéric, dessinée au stylo sur une feuille à carreaux :
+-- la loi normale est la LIMITE d'une loi à coefficients (la binomiale, les
+-- coefficients du triangle de Pascal) — le théorème de De Moivre-Laplace
+-- (1733). ordre 5 : l'article le plus récent passe en tête de rubrique.
+insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url, lien, cta) values
+  ('un-peu-de-maths', 5,
+   'La courbe en cloche n''est pas tombée du ciel',
+   'L''intuition du prof, au stylo sur une feuille à carreaux : la loi normale est la limite d''une loi à coefficients. Pousse n — l''escalier de la binomiale, dessiné par les coefficients du triangle de Pascal, se lisse en courbe de Gauss. De Moivre l''a prouvé en 1733.',
+   '/images/binomiale-vers-normale.svg',
+   '/loi-normale',
+   '🔔 Fais grandir n →')
+on conflict do nothing;

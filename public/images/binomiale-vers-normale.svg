@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- La carte de l'article « La courbe en cloche n'est pas tombée du ciel » :
+     le dessin de Frédéric (21/07) retracé au stylo — une courbe dentelée
+     (l'escalier de la binomiale, ligne 8 du triangle de Pascal), la flèche
+     « n → ∞ », puis la courbe lisse (la loi normale). -->
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+<defs>
+  <pattern id="carreaux" width="25" height="25" patternUnits="userSpaceOnUse">
+    <rect width="25" height="25" fill="#fcfcf7"/>
+    <path d="M25 0H0V25" fill="none" stroke="#cfe0f2" stroke-width="1"/>
+  </pattern>
+  <style><![CDATA[
+    .encre{stroke:#2b4a9b;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .trace{stroke-dasharray:100;stroke-dashoffset:100;animation:trace ease forwards}
+    .pop{opacity:0;animation:pop .7s ease forwards}
+    .main{font-family:'Segoe Print','Bradley Hand',cursive;fill:#2b4a9b}
+    @keyframes trace{to{stroke-dashoffset:0}}
+    @keyframes pop{to{opacity:1}}
+  ]]></style>
+</defs>
+
+<rect width="800" height="480" fill="url(#carreaux)"/>
+<line x1="26" y1="0" x2="26" y2="480" stroke="#f3b6b6" stroke-width="2" opacity=".7"/>
+
+<!-- ACTE 1 : la courbe dentelée — l'escalier de la binomiale (ligne 8 : 1, 8, 28, 56, 70, 56, 28, 8, 1) -->
+<path class="encre trace" pathLength="100" style="animation-duration:2.2s;stroke-width:3"
+  d="M38 350 V335 H74 V314 H110 V254 H146 V170 H182 V128 H218 V170 H254 V254 H290 V314 H326 V335 H362 V350"/>
+<line class="encre trace" pathLength="100" style="animation-duration:.5s;animation-delay:2.1s;stroke-width:2"
+  x1="34" y1="350" x2="366" y2="350"/>
+<text class="pop main" style="animation-delay:2.6s;font-size:17px" text-anchor="middle" x="200" y="382">1&#8202;&#183;&#8202;8&#8202;&#183;&#8202;28&#8202;&#183;&#8202;56&#8202;&#183;&#8202;70&#8202;&#183;&#8202;56&#8202;&#183;&#8202;28&#8202;&#183;&#8202;8&#8202;&#183;&#8202;1</text>
+
+<!-- ACTE 2 : la fleche « n → ∞ » -->
+<text class="pop main" style="animation-delay:3.4s;font-size:34px;font-weight:bold" text-anchor="middle" x="415" y="228">n &#8594; &#8734;</text>
+<line class="encre trace" pathLength="100" style="animation-duration:.6s;animation-delay:3.8s;stroke-width:3"
+  x1="372" y1="252" x2="446" y2="252"/>
+<path class="pop" style="animation-delay:4.3s" d="M456 252 L438 244 L440 260 Z" fill="#2b4a9b"/>
+
+<!-- ACTE 3 : la courbe lisse — la loi normale -->
+<path class="encre trace" pathLength="100" style="animation-duration:1.8s;animation-delay:4.5s;stroke-width:3.5"
+  d="M470 350 C555 344 566 128 610 128 C654 128 665 344 750 350"/>
+<line class="encre trace" pathLength="100" style="animation-duration:.5s;animation-delay:6.1s;stroke-width:2"
+  x1="466" y1="350" x2="756" y2="350"/>
+<text class="pop main" style="animation-delay:6.5s;font-size:17px" text-anchor="middle" x="610" y="382">e^(&#8722;x&#178;/2)&#8202;/&#8202;&#8730;(2&#960;)</text>
+
+<!-- signature -->
+<text class="pop main" style="animation-delay:7.2s;font-size:24px" text-anchor="middle" x="400" y="446">La courbe en cloche est n&#233;e des coefficients.</text>
+</svg>
