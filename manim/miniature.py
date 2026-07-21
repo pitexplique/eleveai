@@ -78,6 +78,19 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_contenance_cm2(d):
+    # un bocal rempli aux 3/4 + le rappel 1 L = 1000 mL.
+    orange = (217, 119, 20)
+    x0, y0, w, h = 452, 272, 120, 180
+    niveau = y0 + h * 0.28  # rempli à ~72 %
+    d.rectangle([x0, niveau, x0 + w, y0 + h], fill=BLEU, outline=NAVY, width=2)
+    # contour du bocal (3 côtés, ouvert en haut)
+    d.line([(x0, y0), (x0, y0 + h)], fill=(255, 255, 255), width=5)
+    d.line([(x0, y0 + h), (x0 + w, y0 + h)], fill=(255, 255, 255), width=5)
+    d.line([(x0 + w, y0), (x0 + w, y0 + h)], fill=(255, 255, 255), width=5)
+    centre(d, x0 + w / 2, y0 + h + 40, "1 L = 1000 mL", police("ariblk.ttf", 40), orange)
+
+
 def acc_masse_cm2(d):
     # une balance à fléau qui penche + le rappel 1 kg = 1000 g.
     orange = (217, 119, 20)
@@ -784,6 +797,10 @@ NOTIONS = {
     "eleveai-maths-cm2-masse": {
         "badge": "MATHS · CM2", "titre": ["LES", "MASSES"], "taille": 84,
         "sous": "estimer · comparer · convertir", "accroche": acc_masse_cm2,
+    },
+    "eleveai-maths-cm2-contenance": {
+        "badge": "MATHS · CM2", "titre": ["LES", "CONTENANCES"], "taille": 68,
+        "sous": "litre · millilitre · convertir", "accroche": acc_contenance_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,
