@@ -78,6 +78,19 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_entier_cm2(d):
+    # le tableau de numération : 4 colonnes (M · C · D · U) avec 4 273 dedans.
+    cols = ["M", "C", "D", "U"]
+    chiffres = ["4", "2", "7", "3"]
+    cw, x0, y0, h = 96, 320, 322, 84
+    for i in range(4):
+        x = x0 + i * cw
+        centre(d, x + cw / 2, y0 - 30, cols[i], police("arialbd.ttf", 30), VERT)
+        d.rectangle([x, y0, x + cw, y0 + h], fill=PAPIER, outline=NAVY, width=3)
+        centre(d, x + cw / 2, y0 + h / 2 - 4, chiffres[i], police("ariblk.ttf", 56), BLEU)
+    centre(d, x0 + 2 * cw, y0 + h + 34, "4 273 = 4 000 + 200 + 70 + 3", police("arialbd.ttf", 30), VERT)
+
+
 def acc_symetrie_cm2(d):
     # un axe vertical (miroir) + une figure en L bleue et son image verte.
     ax = 512
@@ -682,6 +695,10 @@ NOTIONS = {
     "eleveai-maths-974-circulation-eau": {
         "badge": "L'ÎLE DE LA RÉUNION · EN VRAI", "titre": ["L'EAU DE", "L'ÎLE DE LA RÉUNION"], "taille": 52,
         "sous": "de l'océan à ton robinet", "accroche": acc_eau_974,
+    },
+    "eleveai-maths-cm2-nombre-entier": {
+        "badge": "MATHS · CM2", "titre": ["LES NOMBRES", "ENTIERS"], "taille": 84,
+        "sous": "numération · comparer · arrondir", "accroche": acc_entier_cm2,
     },
     "eleveai-maths-cm2-nombre-decimal": {
         "badge": "MATHS · CM2", "titre": ["LES NOMBRES", "DÉCIMAUX"], "taille": 84,

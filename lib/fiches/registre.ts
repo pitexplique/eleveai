@@ -78,6 +78,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Algorithmique et programmation",
     resume: "Lire et écrire une suite d'instructions, utiliser une répétition.",
   },
+  "maths/cm2/nombre-entier": {
+    titre: "Les nombres entiers",
+    resume: "Tableau de numération : lire, comparer, décomposer, arrondir et reconnaître les multiples.",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",

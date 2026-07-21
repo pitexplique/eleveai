@@ -97,6 +97,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/maths/6e/stat-donnee",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
   { path: "/fiches-cours/maths/6e/proba-experience",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
   { path: "/fiches-cours/maths/6e/algo-programmation",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
+  { path: "/fiches-cours/maths/cm2/nombre-entier",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/cm2/nombre-decimal",     priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/cm2/fraction",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/cm2/multiplication",     priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
