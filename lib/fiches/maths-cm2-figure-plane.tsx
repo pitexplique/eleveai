@@ -80,13 +80,22 @@ function losangeF() {
   );
 }
 
+type CercleSegment = {
+  id: string;
+  kind: "rayon" | "diametre" | "corde";
+  from: string;
+  to: string;
+  label: string;
+  highlight: boolean;
+};
+
 function cercleF(opts?: { radius?: boolean; diameter?: boolean }) {
   const points = [
     { id: "O", x: 170, y: 130, label: "O", color: "#ef4444", highlight: true },
     { id: "A", x: 255, y: 130, label: "A", color: "#0f172a" },
     { id: "B", x: 85, y: 130, label: "B", color: "#0f172a" },
   ];
-  const segments = [];
+  const segments: CercleSegment[] = [];
   if (opts?.radius) segments.push({ id: "OA", kind: "rayon", from: "O", to: "A", label: "rayon", highlight: true });
   if (opts?.diameter) segments.push({ id: "BA", kind: "diametre", from: "B", to: "A", label: "diamètre", highlight: true });
   return (

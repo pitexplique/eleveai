@@ -14,13 +14,16 @@ import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 
-function deF(surligne: number[]) {
+type DiceFace = 1 | 2 | 3 | 4 | 5 | 6;
+
+function deF(surligne: DiceFace[]) {
+  const faces: DiceFace[] = [1, 2, 3, 4, 5, 6];
   return (
     <CanvasRenderer
       figure={{
         kind: "probabilites",
         variant: "de",
-        de: { faces: [1, 2, 3, 4, 5, 6], surligne },
+        de: { faces, surligne },
       }}
     />
   );
