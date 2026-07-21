@@ -118,6 +118,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le repérage",
     resume: "Se repérer sur un quadrillage : coordonnées (x ; y), lire, placer un point, se déplacer.",
   },
+  "maths/cm2/suite": {
+    titre: "Les suites de nombres",
+    resume: "Trouver la règle d'une suite, la continuer, compléter un terme manquant, croissante ou décroissante.",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",

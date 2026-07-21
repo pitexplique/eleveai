@@ -95,6 +95,29 @@ def acc_reperage_cm2(d):
     centre(d, ox + n * u / 2, oy + 34, "on lit x puis y", police("arialbd.ttf", 28), orange)
 
 
+def acc_suite_cm2(d):
+    # une suite de nombres en cases + flèches « +2 » entre elles.
+    # Zone sûre : sous le sous-titre, à gauche du margouillat.
+    orange = (217, 119, 20)
+    valeurs = ["2", "4", "6", "8", "?"]
+    cw, gap = 58, 22
+    total = len(valeurs) * cw + (len(valeurs) - 1) * gap
+    x0, y = 336, 372
+    for i, v in enumerate(valeurs):
+        x = x0 + i * (cw + gap)
+        manquant = v == "?"
+        fill = (237, 233, 254) if manquant else PAPIER
+        outline = (139, 92, 246) if manquant else BLEU
+        col = (109, 40, 217) if manquant else NAVY
+        d.rounded_rectangle([x, y, x + cw, y + cw], radius=12, fill=fill, outline=outline, width=4)
+        centre(d, x + cw / 2, y + cw / 2 - 20, v, police("ariblk.ttf", 36), col)
+        if i > 0:
+            fx = x - gap
+            d.line([(fx - 2, y + cw / 2), (fx + gap + 2, y + cw / 2)], fill=orange, width=4)
+            centre(d, fx + gap / 2, y - 30, "+2", police("arialbd.ttf", 22), orange)
+    centre(d, x0 + total / 2, y + cw + 26, "on cherche la règle", police("arialbd.ttf", 28), VERT)
+
+
 def acc_graphique_cm2(d):
     # un diagramme en barres (4 barres de hauteurs différentes) + axes.
     orange = (217, 119, 20)
@@ -883,6 +906,10 @@ NOTIONS = {
     "eleveai-maths-cm2-reperage": {
         "badge": "MATHS · CM2", "titre": ["LE", "REPÉRAGE"], "taille": 84,
         "sous": "quadrillage · coordonnées (x ; y)", "accroche": acc_reperage_cm2,
+    },
+    "eleveai-maths-cm2-suite": {
+        "badge": "MATHS · CM2", "titre": ["LES", "SUITES"], "taille": 84,
+        "sous": "trouver la règle · continuer", "accroche": acc_suite_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,
