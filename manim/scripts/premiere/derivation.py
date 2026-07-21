@@ -20,6 +20,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
+import math
+
+import numpy as np
+
 from manim import *
 
 from charte import *
@@ -71,6 +75,79 @@ class DerivationPremiere(Scene):
         self.play(Create(tang), run_time=1.1)
         self.play(FadeIn(accroche, shift=UP * 0.2))
         self.wait(2.4)
+
+    # ── écran « à quoi ça sert ? » (ancrage 974, comme la fiche) ─────────────
+    def compteur(self):
+        """Un petit compteur de vitesse : l'image du nombre dérivé (la vitesse
+        à l'instant précis)."""
+        g = VGroup()
+        arc = Arc(radius=1.1, start_angle=PI, angle=-PI, color=WHITE, stroke_width=6)
+        g.add(arc)
+        for k in range(7):
+            ang = PI - k * PI / 6
+            p1 = 1.1 * np.array([math.cos(ang), math.sin(ang), 0])
+            p2 = 0.92 * np.array([math.cos(ang), math.sin(ang), 0])
+            g.add(Line(p1, p2, color=WHITE, stroke_width=3))
+        ang_aig = PI / 3.2  # aiguille vers la droite (vitesse élevée)
+        aiguille = Line(ORIGIN, 0.95 * np.array([math.cos(ang_aig), math.sin(ang_aig), 0]),
+                        color=VERT_OK, stroke_width=7)
+        g.add(aiguille, Dot(ORIGIN, color=VERT_OK, radius=0.06))
+        return g
+
+    def ecran_reel(self):
+        self.clear()
+        self.add_mascotte()
+        titre = self.titre_ecran("À quoi ça sert ?")
+
+        cle = Text("La dérivée, c'est la vitesse à l'instant précis — pas la moyenne.",
+                   font_size=28, color=BLEU_CALCUL).next_to(titre, DOWN, buff=0.4)
+        self.play(FadeIn(cle, shift=UP * 0.2))
+
+        comp = self.compteur().scale(0.68).move_to([0, 1.15, 0])
+        self.play(Create(comp[0]), run_time=0.8)
+        self.play(*[FadeIn(m) for m in comp[1:-2]], run_time=0.5)
+        self.play(GrowFromCenter(comp[-1]), Rotate(comp[-2], angle=-PI / 2.2,
+                  about_point=comp[-1].get_center(), rate_func=there_and_back_with_pause), run_time=1.6)
+
+        usages = VGroup(
+            Text("Ta vitesse au compteur en montant la Route du Littoral", font_size=26),
+            Text("Le débit de la Rivière des Galets qui grimpe pendant un cyclone", font_size=26),
+            Text("Le coût du tout dernier objet fabriqué (le coût marginal)", font_size=26),
+        ).arrange(DOWN, aligned_edge=LEFT, buff=0.5).move_to([0, -1.15, 0])
+        for u in usages:
+            u.set_color(WHITE)
+        puces = VGroup(*[Dot(u.get_left() + LEFT * 0.28, color=VERT_OK, radius=0.06) for u in usages])
+
+        self.play(LaggedStart(*[FadeIn(u, shift=RIGHT * 0.3) for u in usages], lag_ratio=0.35))
+        self.play(LaggedStart(*[GrowFromCenter(p) for p in puces], lag_ratio=0.35))
+        self.wait(2.6)
+
+    # ── écran « un peu d'histoire » (le savais-tu, comme la fiche) ───────────
+    def ecran_histoire(self):
+        self.clear()
+        self.add_mascotte()
+        self.titre_ecran("Un peu d'histoire")
+
+        newton = Text("Isaac Newton", font_size=30, color=BLEU_CALCUL)
+        leibniz = Text("Gottfried Leibniz", font_size=30, color=ORANGE)
+        noms = VGroup(newton, leibniz).arrange(RIGHT, buff=1.6).move_to([0, 1.6, 0])
+        vs = Text("chacun de son côté", font_size=24, color=WHITE).next_to(noms, DOWN, buff=0.25)
+        self.play(FadeIn(newton, shift=RIGHT * 0.3), FadeIn(leibniz, shift=LEFT * 0.3))
+        self.play(FadeIn(vs))
+
+        eclair = Text("→  une célèbre querelle sur la paternité !", font_size=28,
+                      color=ROUGE).move_to([0, 0.4, 0])
+        self.play(Write(eclair))
+
+        lignes = VGroup(
+            Text("Fin du XVIIᵉ siècle : ils inventent le calcul différentiel.", font_size=26),
+            Text("Fermat avait déjà cherché les tangentes un peu avant.", font_size=26),
+            Text("La notation f ' arrive plus tard, avec Lagrange.", font_size=26),
+        ).arrange(DOWN, aligned_edge=LEFT, buff=0.4).move_to([0, -1.4, 0])
+        for l in lignes:
+            l.set_color(WHITE)
+        self.play(LaggedStart(*[FadeIn(l, shift=UP * 0.2) for l in lignes], lag_ratio=0.35))
+        self.wait(2.6)
 
     # ── écran 1 : taux de variation → nombre dérivé ─────────────────────────
     def ecran_taux(self):
@@ -230,6 +307,8 @@ class DerivationPremiere(Scene):
 
     def construct(self):
         self.ecran_accueil()
+        self.ecran_reel()
+        self.ecran_histoire()
         self.ecran_taux()
         self.ecran_usuelles()
         self.ecran_operations()
@@ -249,6 +328,18 @@ class DerivationPremiere(Scene):
 #  ~0:00      │ « pente, ici, exactement ? »   │   je pose une droite qui l'épouse : la
 #             │                                │   tangente. Toute la dérivation tient dans
 #             │                                │   une question : quelle est sa pente ? »
+# ───────────┼───────────────────────────────┼──────────────────────────────────────
+#  À quoi ça  │ compteur + 3 usages 974         │ « Avant les formules : à quoi ça sert. La vitesse
+#  sert ~0:14 │ (Route du Littoral, cyclone…)  │   qu'affiche ton compteur, ce n'est pas ta moyenne
+#             │                                │   du trajet, c'est ta vitesse À CET INSTANT. Le débit
+#             │                                │   d'une rivière en crue, le coût du dernier objet…
+#             │                                │   partout où ça varie, la dérivée dit à quelle vitesse. »
+# ───────────┼───────────────────────────────┼──────────────────────────────────────
+#  Histoire   │ Newton · Leibniz · Fermat       │ « Petite histoire : à la fin du dix-septième siècle,
+#  ~0:34      │ « querelle sur la paternité »  │   Newton en Angleterre et Leibniz en Allemagne
+#             │                                │   inventent tout ça chacun de son côté — et se
+#             │                                │   disputent la paternité. Le petit prime, lui,
+#             │                                │   vient plus tard, de Lagrange. »
 # ───────────┼───────────────────────────────┼──────────────────────────────────────
 #  Écran 1    │ taux = (f(b)−f(a))/(b−a)        │ « D'abord la pente MOYENNE entre deux points :
 #  ~0:18      │ = 4 sur x² entre 1 et 3        │   la corde. Ici, entre un et trois, la courbe
