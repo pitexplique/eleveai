@@ -233,6 +233,25 @@ def acc_echelle_cm2(d):
     centre(d, x0 + 145, 490, "1 cm → 10 m", police("ariblk.ttf", 38), orange)
 
 
+def acc_probabilite_cm2(d):
+    # un dé (face 5) + un sac de billes (3 rouges · 2 bleues · 1 verte).
+    orange = (217, 119, 20)
+    # dé
+    dx, dy, ds = 356, 352, 116
+    d.rounded_rectangle([dx, dy, dx + ds, dy + ds], radius=16, fill=PAPIER, outline=NAVY, width=4)
+    for (px, py) in [(0.28, 0.28), (0.72, 0.28), (0.5, 0.5), (0.28, 0.72), (0.72, 0.72)]:
+        cxp, cyp = dx + px * ds, dy + py * ds
+        d.ellipse([cxp - 10, cyp - 10, cxp + 10, cyp + 10], fill=NAVY)
+    # billes (2 rangées de 3)
+    couleurs = [(239, 68, 68), (239, 68, 68), (239, 68, 68), (59, 130, 246), (59, 130, 246), (34, 197, 94)]
+    bx, by, r = 540, 356, 26
+    for i, col in enumerate(couleurs):
+        cxb = bx + (i % 3) * (2 * r + 16)
+        cyb = by + (i // 3) * (2 * r + 16)
+        d.ellipse([cxb, cyb, cxb + 2 * r, cyb + 2 * r], fill=col, outline=NAVY, width=3)
+    centre(d, 512, dy + ds + 44, "certain · possible · impossible", police("arialbd.ttf", 30), orange)
+
+
 def acc_graphique_cm2(d):
     # un diagramme en barres (4 barres de hauteurs différentes) + axes.
     orange = (217, 119, 20)
@@ -1049,6 +1068,10 @@ NOTIONS = {
     "eleveai-maths-cm2-echelle": {
         "badge": "MATHS · CM2", "titre": ["LES", "ÉCHELLES"], "taille": 84,
         "sous": "du plan à la réalité", "accroche": acc_echelle_cm2,
+    },
+    "eleveai-maths-cm2-probabilite": {
+        "badge": "MATHS · CM2", "titre": ["LES", "PROBABILITÉS"], "taille": 62,
+        "sous": "le hasard · les chances", "accroche": acc_probabilite_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,

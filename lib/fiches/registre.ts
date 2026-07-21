@@ -146,6 +146,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les échelles",
     resume: "Lire une échelle sur un plan ou une carte, passer de la distance du plan à la distance réelle.",
   },
+  "maths/cm2/probabilite": {
+    titre: "Les probabilités",
+    resume: "Le vocabulaire du hasard : certain, possible, impossible ; comparer les chances (dé, roue, sac).",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",
