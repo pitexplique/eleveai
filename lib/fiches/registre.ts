@@ -114,6 +114,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Lire un graphique",
     resume: "Barres, bâtons, camembert : lire une hauteur, comparer et interpréter des données.",
   },
+  "maths/cm2/reperage": {
+    titre: "Le repérage",
+    resume: "Se repérer sur un quadrillage : coordonnées (x ; y), lire, placer un point, se déplacer.",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",

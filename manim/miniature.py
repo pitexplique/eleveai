@@ -78,6 +78,23 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_reperage_cm2(d):
+    # un quadrillage 5×5 + le point A(2 ; 3) repéré par ses flèches x/y.
+    orange = (217, 119, 20)
+    n, u, ox, oy = 5, 52, 384, 452  # oy = ligne du bas (origine)
+    for i in range(n + 1):
+        d.line([(ox + i * u, oy), (ox + i * u, oy - n * u)], fill=(120, 140, 160), width=1)
+        d.line([(ox, oy - i * u), (ox + n * u, oy - i * u)], fill=(120, 140, 160), width=1)
+    # axes
+    d.line([(ox, oy), (ox + n * u + 8, oy)], fill=BLEU, width=4)
+    d.line([(ox, oy), (ox, oy - n * u - 8)], fill=VERT, width=4)
+    # point A(2 ; 3)
+    ax, ay = ox + 2 * u, oy - 3 * u
+    d.ellipse([ax - 9, ay - 9, ax + 9, ay + 9], fill=(239, 68, 68), outline=NAVY, width=2)
+    centre(d, ax + 44, ay - 6, "A(2 ; 3)", police("arialbd.ttf", 26), (239, 68, 68))
+    centre(d, ox + n * u / 2, oy + 34, "on lit x puis y", police("arialbd.ttf", 28), orange)
+
+
 def acc_graphique_cm2(d):
     # un diagramme en barres (4 barres de hauteurs différentes) + axes.
     orange = (217, 119, 20)
@@ -862,6 +879,10 @@ NOTIONS = {
     "eleveai-maths-cm2-graphique": {
         "badge": "MATHS · CM2", "titre": ["LIRE UN", "GRAPHIQUE"], "taille": 74,
         "sous": "barres · bâtons · camembert", "accroche": acc_graphique_cm2,
+    },
+    "eleveai-maths-cm2-reperage": {
+        "badge": "MATHS · CM2", "titre": ["LE", "REPÉRAGE"], "taille": 84,
+        "sous": "quadrillage · coordonnées (x ; y)", "accroche": acc_reperage_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,
