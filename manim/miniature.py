@@ -118,6 +118,25 @@ def acc_suite_cm2(d):
     centre(d, x0 + total / 2, y + cw + 26, "on cherche la règle", police("arialbd.ttf", 28), VERT)
 
 
+def acc_probleme_cm2(d):
+    # un schéma en barres (méthode de Singapour) : total « ? » = 24 + 13.
+    orange = (217, 119, 20)
+    x0, y0, w = 336, 326, 380
+    # accolade du total
+    d.line([(x0, y0), (x0 + w, y0)], fill=NAVY, width=4)
+    d.line([(x0, y0 - 8), (x0, y0 + 8)], fill=NAVY, width=4)
+    d.line([(x0 + w, y0 - 8), (x0 + w, y0 + 8)], fill=NAVY, width=4)
+    centre(d, x0 + w / 2, y0 - 44, "?", police("ariblk.ttf", 44), (211, 47, 47))
+    # deux segments
+    yb = y0 + 30
+    seg1 = int(w * 24 / 37)
+    d.rectangle([x0, yb, x0 + seg1, yb + 76], fill=(219, 234, 254), outline=NAVY, width=3)
+    d.rectangle([x0 + seg1, yb, x0 + w, yb + 76], fill=(220, 252, 231), outline=NAVY, width=3)
+    centre(d, x0 + seg1 / 2, yb + 22, "24", police("ariblk.ttf", 34), NAVY)
+    centre(d, x0 + seg1 + (w - seg1) / 2, yb + 22, "13", police("ariblk.ttf", 34), NAVY)
+    centre(d, x0 + w / 2, yb + 96, "quelle opération ?", police("arialbd.ttf", 30), orange)
+
+
 def acc_graphique_cm2(d):
     # un diagramme en barres (4 barres de hauteurs différentes) + axes.
     orange = (217, 119, 20)
@@ -910,6 +929,10 @@ NOTIONS = {
     "eleveai-maths-cm2-suite": {
         "badge": "MATHS · CM2", "titre": ["LES", "SUITES"], "taille": 84,
         "sous": "trouver la règle · continuer", "accroche": acc_suite_cm2,
+    },
+    "eleveai-maths-cm2-probleme": {
+        "badge": "MATHS · CM2", "titre": ["RÉSOUDRE UN", "PROBLÈME"], "taille": 60,
+        "sous": "comprendre · calculer · rédiger", "accroche": acc_probleme_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,

@@ -118,6 +118,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/maths/cm2/angle",              priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/cm2/solide",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/cm2/suite",              priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
+  { path: "/fiches-cours/maths/cm2/probleme",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/5e/relatif-nombre",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/5e/litteral-calcul",     priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/5e/prop-proportionnalite", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },

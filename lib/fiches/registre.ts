@@ -122,6 +122,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les suites de nombres",
     resume: "Trouver la règle d'une suite, la continuer, compléter un terme manquant, croissante ou décroissante.",
   },
+  "maths/cm2/probleme": {
+    titre: "Résoudre un problème",
+    resume: "Comprendre l'énoncé, choisir la bonne opération, résoudre en une ou plusieurs étapes, rédiger.",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",
