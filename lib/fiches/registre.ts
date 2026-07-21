@@ -106,6 +106,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les longueurs",
     resume: "Millimètre, centimètre, mètre, kilomètre : estimer, comparer et convertir.",
   },
+  "maths/cm2/tableau": {
+    titre: "Lire un tableau",
+    resume: "Lignes et colonnes : lire une case au croisement, calculer un total, interpréter des données.",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",

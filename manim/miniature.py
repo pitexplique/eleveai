@@ -78,6 +78,26 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_tableau_cm2(d):
+    # un petit tableau 4×4 avec la case du croisement (bananes × mercredi) surlignée.
+    orange = (217, 119, 20)
+    data = [["", "L", "M", "M"],
+            ["An", "18", "24", "20"],
+            ["Ba", "30", "28", "35"],
+            ["Ma", "12", "15", "18"]]
+    cw, ch, x0, y0 = 88, 58, 336, 256
+    for r in range(4):
+        for c in range(4):
+            x, y = x0 + c * cw, y0 + r * ch
+            head = (r == 0 or c == 0)
+            hit = (r == 2 and c == 3)  # bananes × mercredi
+            fill = VERT if hit else ((28, 51, 71) if head else PAPIER)
+            d.rectangle([x, y, x + cw, y + ch], fill=fill, outline=NAVY, width=2)
+            col = (255, 255, 255) if (head or hit) else NAVY
+            centre(d, x + cw / 2, y + ch / 2 - 2, data[r][c], police("arialbd.ttf", 26), col)
+    centre(d, x0 + 2 * cw, y0 + 4 * ch + 30, "une case = ligne × colonne", police("arialbd.ttf", 28), orange)
+
+
 def acc_longueur_cm2(d):
     # une règle graduée + le rappel 1 m = 100 cm.
     orange = (217, 119, 20)
@@ -817,6 +837,10 @@ NOTIONS = {
     "eleveai-maths-cm2-longueur": {
         "badge": "MATHS · CM2", "titre": ["LES", "LONGUEURS"], "taille": 78,
         "sous": "mm · cm · m · km", "accroche": acc_longueur_cm2,
+    },
+    "eleveai-maths-cm2-tableau": {
+        "badge": "MATHS · CM2", "titre": ["LIRE UN", "TABLEAU"], "taille": 78,
+        "sous": "ligne · colonne · total", "accroche": acc_tableau_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,
