@@ -138,6 +138,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Droites, segments et demi-droites",
     resume: "Reconnaître droite, segment et demi-droite ; droites parallèles et perpendiculaires (angle droit).",
   },
+  "maths/cm2/figure-plane": {
+    titre: "Les figures planes",
+    resume: "Reconnaître et décrire triangle, carré, rectangle, losange et cercle par leurs côtés et angles.",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",

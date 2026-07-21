@@ -196,6 +196,24 @@ def acc_droite_cm2(d):
     centre(d, cx, cy + lv + 40, "un angle droit", police("arialbd.ttf", 30), orange)
 
 
+def acc_figure_plane_cm2(d):
+    # un trio de figures : triangle (vert) · carré (bleu) · cercle (orange).
+    orange = (217, 119, 20)
+    y = 300
+    # triangle
+    d.polygon([(360, y + 110), (470, y + 110), (415, y)], outline=VERT, width=6)
+    # carré
+    d.rectangle([500, y, 610, y + 110], outline=BLEU, width=6)
+    # petits angles droits (coin haut-gauche du carré)
+    d.line([(500, y + 22), (522, y + 22)], fill=(211, 47, 47), width=4)
+    d.line([(522, y + 22), (522, y)], fill=(211, 47, 47), width=4)
+    # cercle
+    d.ellipse([640, y, 750, y + 110], outline=orange, width=6)
+    d.line([(695, y + 55), (750, y + 55)], fill=NAVY, width=4)  # rayon
+    d.ellipse([691, y + 51, 699, y + 59], fill=(211, 47, 47))   # centre
+    centre(d, 555, y + 150, "compte les côtés", police("arialbd.ttf", 30), VERT)
+
+
 def acc_graphique_cm2(d):
     # un diagramme en barres (4 barres de hauteurs différentes) + axes.
     orange = (217, 119, 20)
@@ -1004,6 +1022,10 @@ NOTIONS = {
     "eleveai-maths-cm2-droite": {
         "badge": "MATHS · CM2", "titre": ["LES", "DROITES"], "taille": 84,
         "sous": "parallèles · perpendiculaires", "accroche": acc_droite_cm2,
+    },
+    "eleveai-maths-cm2-figure-plane": {
+        "badge": "MATHS · CM2", "titre": ["LES FIGURES", "PLANES"], "taille": 64,
+        "sous": "triangle · carré · cercle", "accroche": acc_figure_plane_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,
