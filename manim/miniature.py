@@ -78,6 +78,23 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_graphique_cm2(d):
+    # un diagramme en barres (4 barres de hauteurs différentes) + axes.
+    orange = (217, 119, 20)
+    bx, by = 360, 452  # origine (bas-gauche)
+    haut = 150
+    d.line([(bx, by), (bx + 320, by)], fill=(255, 255, 255), width=4)  # axe x
+    d.line([(bx, by), (bx, by - haut - 20)], fill=(255, 255, 255), width=4)  # axe y
+    valeurs = [12, 9, 7, 10]
+    cols = [(191, 219, 254), (254, 205, 211), (187, 247, 208), (253, 230, 138)]
+    bw = 60
+    for i, (v, col) in enumerate(zip(valeurs, cols)):
+        x = bx + 18 + i * (bw + 16)
+        h = v * (haut / 12)
+        d.rectangle([x, by - h, x + bw, by], fill=col, outline=NAVY, width=2)
+    centre(d, bx + 160, by + 40, "la plus haute = le plus", police("arialbd.ttf", 28), orange)
+
+
 def acc_tableau_cm2(d):
     # un petit tableau 4×4 avec la case du croisement (bananes × mercredi) surlignée.
     orange = (217, 119, 20)
@@ -841,6 +858,10 @@ NOTIONS = {
     "eleveai-maths-cm2-tableau": {
         "badge": "MATHS · CM2", "titre": ["LIRE UN", "TABLEAU"], "taille": 78,
         "sous": "ligne · colonne · total", "accroche": acc_tableau_cm2,
+    },
+    "eleveai-maths-cm2-graphique": {
+        "badge": "MATHS · CM2", "titre": ["LIRE UN", "GRAPHIQUE"], "taille": 74,
+        "sous": "barres · bâtons · camembert", "accroche": acc_graphique_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,

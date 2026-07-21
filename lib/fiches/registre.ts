@@ -110,6 +110,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Lire un tableau",
     resume: "Lignes et colonnes : lire une case au croisement, calculer un total, interpréter des données.",
   },
+  "maths/cm2/graphique": {
+    titre: "Lire un graphique",
+    resume: "Barres, bâtons, camembert : lire une hauteur, comparer et interpréter des données.",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",
