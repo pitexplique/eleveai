@@ -94,6 +94,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les pourcentages",
     resume: "« Sur 100 » : fractions simples, 50/25/10 %, calculer un pourcentage et une réduction.",
   },
+  "maths/cm2/masse": {
+    titre: "Les masses",
+    resume: "Gramme, kilogramme, tonne : estimer, comparer et convertir (1 kg = 1000 g).",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",

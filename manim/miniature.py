@@ -78,6 +78,23 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_masse_cm2(d):
+    # une balance à fléau qui penche + le rappel 1 kg = 1000 g.
+    orange = (217, 119, 20)
+    cx, cy = 512, 360
+    d.line([(cx - 70, cy + 90), (cx + 70, cy + 90)], fill=(255, 255, 255), width=6)  # socle
+    d.line([(cx, cy + 90), (cx, cy - 30)], fill=(255, 255, 255), width=6)            # colonne
+    dy = 26
+    left = (cx - 120, cy - 30 + dy)
+    right = (cx + 120, cy - 30 - dy)
+    d.line([left, right], fill=BLEU, width=6)  # fléau penché vers la droite
+    for (px, py), col in ((left, (148, 163, 184)), (right, VERT)):
+        d.line([(px, py), (px - 34, py + 44)], fill=(255, 255, 255), width=2)
+        d.line([(px, py), (px + 34, py + 44)], fill=(255, 255, 255), width=2)
+        d.arc([px - 40, py + 20, px + 40, py + 70], start=0, end=180, fill=col, width=5)
+    centre(d, cx, cy + 130, "1 kg = 1000 g", police("ariblk.ttf", 40), orange)
+
+
 def acc_pourcentage_cm2(d):
     # une grille de 100 cases, 50 coloriées → 50 % = la moitié.
     gx, gy, cs = 388, 300, 25
@@ -763,6 +780,10 @@ NOTIONS = {
     "eleveai-maths-cm2-pourcentage": {
         "badge": "MATHS · CM2", "titre": ["LES", "POURCENTAGES"], "taille": 66,
         "sous": "sur 100 · fractions · réductions", "accroche": acc_pourcentage_cm2,
+    },
+    "eleveai-maths-cm2-masse": {
+        "badge": "MATHS · CM2", "titre": ["LES", "MASSES"], "taille": 84,
+        "sous": "estimer · comparer · convertir", "accroche": acc_masse_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,
