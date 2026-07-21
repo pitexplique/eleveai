@@ -78,6 +78,18 @@ def acc_decimal_cm2(d):
     d.text((x0 + 60, y0 + h + 22), "7/10 = 0,7", font=police("ariblk.ttf", 52), fill=VERT)
 
 
+def acc_longueur_cm2(d):
+    # une règle graduée + le rappel 1 m = 100 cm.
+    orange = (217, 119, 20)
+    x0, x1, y = 300, 724, 340
+    d.rectangle([x0, y, x1, y + 54], fill=(18, 51, 51), outline=NAVY, width=3)
+    for i in range(21):
+        gx = x0 + (x1 - x0) * i / 20
+        h = 24 if i % 5 == 0 else 13
+        d.line([(gx, y), (gx, y + h)], fill=(255, 255, 255), width=2)
+    centre(d, (x0 + x1) / 2, y + 104, "1 m = 100 cm  ·  1 km = 1000 m", police("arialbd.ttf", 30), orange)
+
+
 def acc_contenance_cm2(d):
     # un bocal rempli aux 3/4 + le rappel 1 L = 1000 mL.
     orange = (217, 119, 20)
@@ -801,6 +813,10 @@ NOTIONS = {
     "eleveai-maths-cm2-contenance": {
         "badge": "MATHS · CM2", "titre": ["LES", "CONTENANCES"], "taille": 68,
         "sous": "litre · millilitre · convertir", "accroche": acc_contenance_cm2,
+    },
+    "eleveai-maths-cm2-longueur": {
+        "badge": "MATHS · CM2", "titre": ["LES", "LONGUEURS"], "taille": 78,
+        "sous": "mm · cm · m · km", "accroche": acc_longueur_cm2,
     },
     "eleveai-maths-cm2-fraction": {
         "badge": "MATHS · CM2", "titre": ["LES", "FRACTIONS"], "taille": 84,

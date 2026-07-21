@@ -103,6 +103,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/maths/cm2/pourcentage",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/cm2/masse",              priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/cm2/contenance",         priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
+  { path: "/fiches-cours/maths/cm2/longueur",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/cm2/nombre-decimal",     priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/cm2/fraction",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/cm2/multiplication",     priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },

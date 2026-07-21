@@ -102,6 +102,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les contenances",
     resume: "Litre, centilitre, millilitre : estimer, comparer et convertir (1 L = 1000 mL).",
   },
+  "maths/cm2/longueur": {
+    titre: "Les longueurs",
+    resume: "Millimètre, centimètre, mètre, kilomètre : estimer, comparer et convertir.",
+  },
   "maths/cm2/nombre-decimal": {
     titre: "Les nombres décimaux",
     resume: "Lire, comparer, ranger et arrondir les nombres à virgule ; dixièmes et centièmes.",
