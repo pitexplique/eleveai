@@ -275,6 +275,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/offre-pilote",      priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/presse",            priority: 0.6,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/partenaires",       priority: 0.6,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/entreprises",       priority: 0.6,  changeFrequency: "monthly", lastMod: new Date("2026-07-22") },
 
   // ── BLOG INDEX ─────────────────────────────────────────────────────────────
   { path: "/blog", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_CORE },

@@ -1264,76 +1264,96 @@ export default function AccueilPage({
               const p: Picto = PICTOS[jourReunion % PICTOS.length];
               return (
                 <div className="py-3">
+                  {/* COMPACTÉ (demande de Frédéric, 22/07) : question +
+                      dépliant unique. L'image, le coup de pouce et la réponse
+                      s'ouvrent à la demande — la réponse reste SUR PLACE
+                      (règle de l'accueil), mais la colonne respire. */}
                   <Link href="/picto-maths" className="group block">
                     <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                       🖼️ Le picto du jour · {p.notion}
                     </p>
-                    <h3 className="mt-1 font-serif text-lg font-black leading-snug group-hover:underline">
+                    <h3 className="mt-1 font-serif text-[15px] font-black leading-snug group-hover:underline">
                       {p.question}
                     </h3>
                   </Link>
                   <p className="mt-0.5 text-xs font-semibold text-[#1d1c16]/55">
-                    {p.emoji} {p.lieu} · {p.niveau}
+                    {p.emoji} {p.lieu} · {p.niveau} ·{" "}
+                    <Link href="/picto-maths" className="font-black text-cyan-800 hover:underline">
+                      Les 25 pictos →
+                    </Link>
                   </p>
-                  {/* L'image : la scène en miniature (icônes + badges). Les
-                      pictos à schéma dessiné montrent leur énoncé à la place. */}
-                  {!p.diagram && p.scene.length > 0 && (
-                    <div className="mt-2 space-y-1 rounded-sm border border-[#1d1c16]/20 bg-white/40 px-2.5 py-2">
-                      {p.scene.map((ligne, i) => (
-                        <div key={i} className="flex flex-wrap items-center gap-1.5">
-                          {ligne.map((c, j) =>
-                            c.t === "ic" ? (
-                              <span key={j} className="text-sm">
-                                {c.e.repeat(Math.min(c.n ?? 1, 10))}
-                                {c.cap && (
-                                  <span className="ml-1 text-[10px] font-bold text-[#1d1c16]/60">{c.cap}</span>
-                                )}
-                              </span>
-                            ) : c.t === "val" ? (
-                              <span key={j} className="rounded-sm border border-[#1d1c16]/30 bg-white/60 px-1.5 py-0.5 text-[11px] font-black">
-                                {c.v}
-                                {c.cap && <span className="ml-1 font-bold text-[#1d1c16]/60">{c.cap}</span>}
-                              </span>
-                            ) : c.t === "qm" ? (
-                              <span key={j} className="rounded-sm bg-[#1d1c16] px-1.5 py-0.5 text-[11px] font-black text-[#f6f1e4]">
-                                ?{c.cap && <span className="ml-1 font-bold opacity-70">{c.cap}</span>}
-                              </span>
-                            ) : (
-                              <span key={j} className="text-[12px] font-black text-[#1d1c16]/70">{c.v}</span>
-                            ),
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  {/* L'énoncé seulement quand il n'y a pas de scène qui le
-                      montre déjà (les pictos à schéma) — la colonne reste
-                      courte. */}
-                  {(p.diagram || p.scene.length === 0) && p.enonce && (
-                    <p className="mt-1.5 text-[12.5px] font-medium leading-5 text-[#1d1c16]/70">
-                      {p.enonce}
-                    </p>
-                  )}
                   <details className="mt-1.5">
                     <summary className="cursor-pointer text-xs font-black text-[#1d1c16]/55 underline underline-offset-2 hover:text-[#1d1c16]">
-                      Coup de pouce, puis la réponse ▾
+                      Voir l&apos;image, le coup de pouce et la réponse ▾
                     </summary>
-                    <p className="mt-1 border-l-2 border-[#1d1c16]/25 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/75">
+                    {/* L'image : la scène en miniature (icônes + badges). Les
+                        pictos à schéma dessiné montrent leur énoncé à la place. */}
+                    {!p.diagram && p.scene.length > 0 && (
+                      <div className="mt-2 space-y-1 rounded-sm border border-[#1d1c16]/20 bg-white/40 px-2.5 py-2">
+                        {p.scene.map((ligne, i) => (
+                          <div key={i} className="flex flex-wrap items-center gap-1.5">
+                            {ligne.map((c, j) =>
+                              c.t === "ic" ? (
+                                <span key={j} className="text-sm">
+                                  {c.e.repeat(Math.min(c.n ?? 1, 10))}
+                                  {c.cap && (
+                                    <span className="ml-1 text-[10px] font-bold text-[#1d1c16]/60">{c.cap}</span>
+                                  )}
+                                </span>
+                              ) : c.t === "val" ? (
+                                <span key={j} className="rounded-sm border border-[#1d1c16]/30 bg-white/60 px-1.5 py-0.5 text-[11px] font-black">
+                                  {c.v}
+                                  {c.cap && <span className="ml-1 font-bold text-[#1d1c16]/60">{c.cap}</span>}
+                                </span>
+                              ) : c.t === "qm" ? (
+                                <span key={j} className="rounded-sm bg-[#1d1c16] px-1.5 py-0.5 text-[11px] font-black text-[#f6f1e4]">
+                                  ?{c.cap && <span className="ml-1 font-bold opacity-70">{c.cap}</span>}
+                                </span>
+                              ) : (
+                                <span key={j} className="text-[12px] font-black text-[#1d1c16]/70">{c.v}</span>
+                              ),
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {(p.diagram || p.scene.length === 0) && p.enonce && (
+                      <p className="mt-1.5 text-[12.5px] font-medium leading-5 text-[#1d1c16]/70">
+                        {p.enonce}
+                      </p>
+                    )}
+                    <p className="mt-1.5 border-l-2 border-[#1d1c16]/25 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/75">
                       {p.piste}
                     </p>
                     <p className="mt-1 border-l-2 border-cyan-800/40 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/80">
                       {p.reponse}
                     </p>
+                    <p className="mt-1.5 text-xs font-medium italic text-[#1d1c16]/50">
+                      👩‍🏫 sur une idée de Valérie
+                    </p>
                   </details>
-                  <p className="mt-1.5 text-xs font-medium italic text-[#1d1c16]/50">
-                    <Link href="/picto-maths" className="font-black not-italic text-cyan-800 hover:underline">
-                      Les 25 pictos →
-                    </Link>{" "}
-                    · 👩‍🏫 sur une idée de Valérie
-                  </p>
                 </div>
               );
             })()}
+
+            {/* L'APPEL AUX ENTREPRISES — en pied de colonne (demande de
+                Frédéric, 22/07) : le journal invite le réel de l'île à
+                entrer dans ses pages. */}
+            <div className="mt-1 border-t border-[#1d1c16]/25 pt-3">
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                🚀 Aux entreprises de l&apos;île
+              </p>
+              <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/80">
+                Votre métier peut devenir un article, une simulation, un défi —
+                comme la canne, le lait ou le barrage avant vous.
+              </p>
+              <Link
+                href="/entreprises"
+                className="mt-1 inline-block text-xs font-black text-cyan-800 underline underline-offset-2 hover:text-[#1d1c16]"
+              >
+                Participez à l&apos;aventure →
+              </Link>
+            </div>
           </aside>
         </div>
       </section>

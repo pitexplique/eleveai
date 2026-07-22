@@ -37,6 +37,7 @@ const infos = [
   { label: "Pourquoi nos tarifs sont justes", href: "/pourquoi-nos-tarifs-sont-justes" },
   { label: "Presse", href: "/presse" },
   { label: "Partenaires", href: "/partenaires" },
+  { label: "Entreprises : participez à l'aventure", href: "/entreprises" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
