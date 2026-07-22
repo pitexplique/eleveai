@@ -35,6 +35,7 @@ import AgendaJournal from "@/components/accueil/AgendaJournal";
 import AbonnementJournal from "@/components/accueil/AbonnementJournal";
 import ReclameLagon from "@/components/accueil/ReclameLagon";
 import { PICTOS, type Picto } from "@/app/picto-maths/data";
+import { getDicteeDuJour, type DicteeMot } from "@/lib/dictee-du-jour/words";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
@@ -404,6 +405,43 @@ function PastilleJour({ label = "aujourd'hui" }: { label?: string }) {
       </span>
       {label}
     </span>
+  );
+}
+
+// LE MOT DU JOUR — l'appât de la dictée : on lit l'indice ici, on écoute et
+// on écrit le mot sur /dictee-du-jour. La réponse reste disponible SUR PLACE
+// (règle de l'accueil : jamais de question sans sa réponse dessous) via le
+// dépliant « Voir le mot ». Calculé APRÈS montage (comme la page dictée) pour
+// éviter le décalage d'hydratation sur la date.
+function MotDuJourEncart() {
+  const [mot, setMot] = useState<DicteeMot | null>(null);
+  useEffect(() => {
+    setMot(getDicteeDuJour(new Date(), 5)[0]);
+  }, []);
+  if (!mot) return null;
+  return (
+    <div className="mt-3 border-2 border-[#1d1c16] p-3">
+      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+        ✍️ Le mot du jour · {mot.matiere} <PastilleJour />
+      </p>
+      <p className="mt-1.5 text-sm font-medium leading-6 text-[#1d1c16]/80">
+        💡 {mot.indice}
+      </p>
+      <Link
+        href="/dictee-du-jour"
+        className="mt-1.5 inline-block text-xs font-black text-cyan-800 underline underline-offset-2 hover:text-[#1d1c16]"
+      >
+        Écoute-le et écris-le — la dictée du jour →
+      </Link>
+      <details className="mt-1">
+        <summary className="cursor-pointer text-xs font-black text-[#1d1c16]/55 underline underline-offset-2 hover:text-[#1d1c16]">
+          Voir le mot ▾
+        </summary>
+        <p className="mt-1 border-l-2 border-cyan-800/40 pl-2.5 font-serif text-lg font-black">
+          {mot.mot}
+        </p>
+      </details>
+    </div>
   );
 }
 
@@ -1209,6 +1247,11 @@ export default function AccueilPage({
                 {chiffreDuJour().texte}
               </p>
             </div>
+
+            {/* LE MOT DU JOUR — entre le chiffre et le picto (demande de
+                Frédéric, 22/07) : l'indice se lit ici, le mot s'écoute et
+                s'écrit sur la dictée du jour. */}
+            <MotDuJourEncart />
 
             {/* LE PICTO DU JOUR — déplacé sous le chiffre (demande de
                 Frédéric, 18/07) : la colonne de l'édito était la plus

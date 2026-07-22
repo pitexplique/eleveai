@@ -1,5 +1,6 @@
 // components/Footer.tsx
 import Link from "next/link";
+import Image from "next/image";
 
 const outils = [
   { label: "Coach English IA", href: "/coach-ia/english-maths" },
@@ -103,6 +104,25 @@ export default function Footer() {
               Maths, français, anglais, espagnol et IA, avec un coach qui
               s&apos;adapte. De l&apos;école au lycée, conçu à La Réunion.
             </p>
+
+            {/* Le visage derrière le site — même photo que l'édito de
+                l'accueil : on sait qui parle. */}
+            <Link href="/qui-sommes-nous" className="group flex items-center gap-3">
+              <Image
+                src="/images/avatar-frederic-Lacoste.jpg"
+                alt="Frédéric Lacoste"
+                width={48}
+                height={48}
+                className="h-12 w-12 rounded-full border-2 border-emerald-300/40 object-cover"
+              />
+              <span className="text-xs leading-snug text-slate-400">
+                <span className="font-bold text-slate-200 group-hover:text-emerald-300">
+                  Frédéric Lacoste
+                </span>
+                <br />
+                professeur de maths à La Réunion
+              </span>
+            </Link>
 
             <Link
               href="/contact"
