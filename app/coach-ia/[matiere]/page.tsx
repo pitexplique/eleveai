@@ -14,7 +14,7 @@ import {
 import FloatingCoach from "@/components/FloatingCoach";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import Link from "next/link";
-import { BookOpen, Play, Search } from "lucide-react";
+import { BookOpen, CirclePlay, Play } from "lucide-react";
 import { ficheHrefPourCoach } from "@/lib/fiches/registre";
 import {
   youtubeSearchUrl,
@@ -503,11 +503,11 @@ export default function CoachIA() {
                                   Vidéo
                                 </a>
                               ) : !estDefi ? (
-                                // Pas encore de vidéo curatée : loupe grise très
-                                // discrète → recherche YouTube « matière classe
-                                // notion micro » (libellés naturels, jamais les
-                                // slugs). Disparaît dès qu'une vidéo est choisie
-                                // dans /admin/ressources.
+                                // Pas encore de vidéo curatée : petite icône
+                                // vidéo discrète (façon IXL) → recherche YouTube
+                                // « matière classe notion micro » (libellés
+                                // naturels, jamais les slugs). Disparaît dès
+                                // qu'une vidéo est choisie dans /admin/ressources.
                                 <a
                                   href={youtubeSearchUrl([
                                     MATIERE_YOUTUBE_LABEL[matiere] ?? matiere,
@@ -522,7 +522,7 @@ export default function CoachIA() {
                                   title="Chercher une vidéo sur YouTube"
                                   aria-label={`Chercher une vidéo YouTube : ${microLabels[microId] || microId}`}
                                 >
-                                  <Search className="h-3.5 w-3.5" />
+                                  <CirclePlay className="h-4 w-4" />
                                 </a>
                               ) : null}
                             </li>
