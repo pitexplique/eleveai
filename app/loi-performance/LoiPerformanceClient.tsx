@@ -131,7 +131,7 @@ const DEFIS: DefiSimulateur[] = [
 ];
 
 export default function LoiPerformanceClient() {
-  const [coeffs, setCoeffs] = useState<number[]>([2, 2, 2, 2, 2]);
+  const [coeffs, setCoeffs] = useState<number[]>([0, 0, 0, 0, 0]);
   const [modeClasse, setModeClasse] = useState(false);
 
   useEffect(() => {
@@ -155,6 +155,18 @@ export default function LoiPerformanceClient() {
       if (v < 0) return cs;
       if (delta > 0 && reste <= 0) return cs;
       next[i] = v;
+      return next;
+    });
+  };
+
+  // Le curseur : on peut viser n'importe quelle valeur, mais on ne peut pas
+  // dépasser le budget — le curseur se bloque à ce qu'il reste d'énergie.
+  const reglerSlider = (i: number, valeur: number) => {
+    setCoeffs((cs) => {
+      const autres = cs.reduce((s, c, j) => (j === i ? s : s + c), 0);
+      const capee = Math.max(0, Math.min(valeur, BUDGET - autres));
+      const next = [...cs];
+      next[i] = capee;
       return next;
     });
   };
@@ -251,37 +263,45 @@ export default function LoiPerformanceClient() {
 
           <div className="mt-3 space-y-2">
             {TRAITS.map((t, i) => (
-              <div key={t.id} className="flex items-center gap-3 rounded border p-2.5" style={{ borderColor: "#e2efe6" }}>
-                <div className="min-w-0 flex-1">
+              <div key={t.id} className="rounded border p-2.5" style={{ borderColor: "#e2efe6" }}>
+                <div className="flex items-baseline justify-between gap-2">
                   <p className="text-sm font-black" style={{ color: VERT }}>
                     {t.nom}{" "}
                     <span className="text-[12px] font-semibold" style={{ color: t.defaut ? "#b3261e" : OR }}>
                       · {t.note} (rend {t.x}/pt)
                     </span>
                   </p>
-                  <div className="mt-1 h-2 w-full overflow-hidden rounded-full" style={{ backgroundColor: "#e7f3ea" }}>
-                    <div className="h-full rounded-full" style={{ width: `${(coeffs[i] / BUDGET) * 100}%`, backgroundColor: t.defaut ? "#b3261e" : OR }} />
-                  </div>
+                  <span className={`shrink-0 font-black ${modeClasse ? "text-2xl" : "text-lg"}`} style={{ color: VERT }}>
+                    {coeffs[i]}
+                  </span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="mt-1.5 flex items-center gap-2">
                   <button
                     type="button"
                     onClick={() => regler(i, -1)}
                     aria-label={`Enlever un point à ${t.nom}`}
-                    className="flex h-8 w-8 items-center justify-center rounded-full border text-lg font-black"
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border text-lg font-black"
                     style={{ borderColor: "#cfe6d5", color: VERT }}
                   >
                     −
                   </button>
-                  <span className={`w-6 text-center font-black ${modeClasse ? "text-2xl" : "text-lg"}`} style={{ color: VERT }}>
-                    {coeffs[i]}
-                  </span>
+                  <input
+                    type="range"
+                    min={0}
+                    max={BUDGET}
+                    step={1}
+                    value={coeffs[i]}
+                    onChange={(e) => reglerSlider(i, parseInt(e.target.value, 10))}
+                    aria-label={`Énergie sur ${t.nom}`}
+                    className="h-2 w-full cursor-pointer"
+                    style={{ accentColor: t.defaut ? "#b3261e" : OR }}
+                  />
                   <button
                     type="button"
                     onClick={() => regler(i, +1)}
                     aria-label={`Ajouter un point à ${t.nom}`}
                     disabled={reste <= 0}
-                    className="flex h-8 w-8 items-center justify-center rounded-full text-lg font-black text-white disabled:opacity-30"
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-lg font-black text-white disabled:opacity-30"
                     style={{ backgroundColor: OR }}
                   >
                     +
