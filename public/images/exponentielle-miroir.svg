@@ -37,8 +37,8 @@
 <!-- e^x : je progresse (monte vers la droite) — la ROUTE de la voiture -->
 <path id="courbeVerte" class="vert trace" pathLength="100" style="animation-duration:2s;animation-delay:1s;stroke-width:3.5"
   d="M160 374 C 320 362, 360 302, 400 250 S 560 104, 648 76"/>
-<!-- e^(-x) : je m'efface (mirror, monte vers la gauche) -->
-<path class="ambre trace" pathLength="100" style="animation-duration:2s;animation-delay:1.6s;stroke-width:3.5"
+<!-- e^(-x) : je m'efface (mirror, monte vers la gauche) — la route de l'ampoule -->
+<path id="courbeAmbre" class="ambre trace" pathLength="100" style="animation-duration:2s;animation-delay:1.6s;stroke-width:3.5"
   d="M640 374 C 480 362, 440 302, 400 250 S 240 104, 152 76"/>
 
 <!-- noms des courbes, x EN EXPOSANT -->
@@ -72,6 +72,27 @@
       <mpath xlink:href="#courbeVerte"/>
     </animateMotion>
   </g>
+</g>
+
+<!-- L'AMPOULE : le souvenir. Elle part fraîche en haut à gauche et descend la
+     courbe jaune en S'ÉTEIGNANT (vite au début, puis lentement) → « ce que je ne
+     recharge pas s'efface ». Le miroir de la voiture. -->
+<g opacity="0">
+  <g>
+    <circle r="17" fill="#ffd766">
+      <animate attributeName="opacity" values="0.7;0.04" dur="5s" begin="3.6s" repeatCount="indefinite"
+        calcMode="spline" keyTimes="0;1" keySplines="0.1 0.6 0.3 1"/>
+    </circle>
+    <circle r="10" fill="#ffe08a" stroke="#b97e12" stroke-width="2"/>
+    <path d="M-4 -1 Q0 -6 4 -1" fill="none" stroke="#b97e12" stroke-width="1.5"/>
+    <path d="M-4 8 H4 M-3 11 H3" stroke="#8a7a55" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <animate attributeName="opacity" values="1;0.95;0.32" dur="5s" begin="3.6s" repeatCount="indefinite"
+    calcMode="spline" keyTimes="0;0.35;1" keySplines="0.3 0 0.6 1;0.2 0.5 0.4 1"/>
+  <animateMotion dur="5s" begin="3.6s" repeatCount="indefinite"
+    keyPoints="1;0" keyTimes="0;1" calcMode="spline" keySplines="0.1 0.6 0.3 1">
+    <mpath xlink:href="#courbeAmbre"/>
+  </animateMotion>
 </g>
 
 <!-- la loi qui unifie les deux : f' = k·f -->

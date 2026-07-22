@@ -500,7 +500,14 @@ export default function ExponentielleClient() {
             <path d={descente.sciePath} fill="none" stroke={OR} strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
             {/* le curseur du jour courant */}
             <line x1={descente.xs(tB)} y1="20" x2={descente.xs(tB)} y2="210" stroke={ENCRE} strokeWidth="1.5" />
-            <circle cx={descente.xs(tB)} cy={descente.ys(descente.retNow)} r="6" fill={ENCRE} />
+            {/* L'AMPOULE = le souvenir : son éclat SUIT ce qu'il te reste.
+                « je révise » remet la rétention à 100 % → elle se rallume à fond. */}
+            <g transform={`translate(${descente.xs(tB)} ${descente.ys(descente.retNow)})`}>
+              <circle r="24" fill="#ffd766" opacity={0.06 + 0.5 * descente.retNow} />
+              <circle r="12" fill="#ffe08a" fillOpacity={0.28 + 0.72 * descente.retNow} stroke="#b97e12" strokeWidth="2" />
+              <path d="M-5 -1 Q0 -8 5 -1" fill="none" stroke="#b97e12" strokeWidth="1.6" />
+              <path d="M-5 9 H5 M-3 13 H3" stroke="#8a7a55" strokeWidth="2.2" strokeLinecap="round" />
+            </g>
             {[0, 3, 6, 9, 12].map((j) => (
               <g key={j}>
                 <line x1={descente.xs(j)} y1="210" x2={descente.xs(j)} y2="217" stroke="#8a93ab" strokeWidth="1.5" />
