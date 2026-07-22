@@ -14,6 +14,12 @@ import {
   reponseCorrecte,
   type DicteeMot,
 } from "@/lib/dictee-du-jour/words";
+import {
+  getDicteeNiveau,
+  getDicteeEval6e,
+  classeVersNiveau,
+  NIVEAUX_DICTEE,
+} from "@/lib/dictee-du-jour/parNiveau";
 import { speakText } from "@/app/tutor-v4/ListenButton";
 import { playMotDictee } from "@/lib/dictee-du-jour/playAudio";
 import { useEleve } from "@/context/EleveContext";
@@ -67,7 +73,51 @@ const matiereColor: Record<string, string> = {
   SVT: "bg-teal-100 text-teal-700",
   Musique: "bg-fuchsia-100 text-fuchsia-700",
   "Arts plastiques": "bg-pink-100 text-pink-700",
+  // Matières venues du Dico (dictée « de ta classe »)
+  "Histoire-Géo": "bg-orange-100 text-orange-700",
+  Sciences: "bg-teal-100 text-teal-700",
+  Philosophie: "bg-stone-200 text-stone-700",
+  Animaux: "bg-amber-100 text-amber-700",
+  Couleurs: "bg-pink-100 text-pink-700",
+  Nombres: "bg-violet-100 text-violet-700",
 };
+
+// D'où viennent les 5 mots : le mélange du jour (défaut), une matière du
+// mélange, la classe de l'élève (mots du Dico), ou la prépa éval nationale 6e.
+type SourceDictee =
+  | { type: "melange" }
+  | { type: "matiere"; matiere: string }
+  | { type: "niveau"; niveau: string }
+  | { type: "eval6e" };
+
+function motsPourSource(source: SourceDictee, date: Date): DicteeMot[] {
+  switch (source.type) {
+    case "matiere":
+      return getDicteeMatiere(source.matiere, date, 5);
+    case "niveau":
+      return getDicteeNiveau(source.niveau, date, 5);
+    case "eval6e":
+      return getDicteeEval6e(date, 5);
+    default:
+      return getDicteeDuJour(date, 5);
+  }
+}
+
+// Libellé court de la source (sous-titre + trace du score enregistré).
+function labelSource(source: SourceDictee): string {
+  switch (source.type) {
+    case "matiere":
+      return source.matiere;
+    case "niveau":
+      return `classe ${
+        NIVEAUX_DICTEE.find((n) => n.slug === source.niveau)?.label ?? source.niveau
+      }`;
+    case "eval6e":
+      return "éval nationale 6e";
+    default:
+      return "mélange";
+  }
+}
 
 export default function DicteeDuJourPage() {
   const [mots, setMots] = useState<DicteeMot[] | null>(null);
@@ -86,15 +136,14 @@ export default function DicteeDuJourPage() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [saveMsg, setSaveMsg] = useState<string | null>(null);
-  // null = « mélange du jour » (5 matières) ; sinon une matière choisie.
-  const [matiereChoisie, setMatiereChoisie] = useState<string | null>(null);
+  // La source de la dictée en cours : mélange (défaut), matière, classe, éval 6e.
+  const [source, setSource] = useState<SourceDictee>({ type: "melange" });
 
-  // (Re)charge une dictée et remet la séquence à zéro : soit le mélange du jour,
-  // soit 5 mots d'une matière choisie par l'élève.
-  function chargerDictee(matiere: string | null) {
+  // (Re)charge une dictée et remet la séquence à zéro.
+  function chargerDictee(nouvelle: SourceDictee) {
     const now = new Date();
-    setMatiereChoisie(matiere);
-    setMots(matiere ? getDicteeMatiere(matiere, now, 5) : getDicteeDuJour(now, 5));
+    setSource(nouvelle);
+    setMots(motsPourSource(nouvelle, now));
     setIdx(0);
     setSaisie("");
     setReveal(null);
@@ -144,6 +193,10 @@ export default function DicteeDuJourPage() {
   const current = mots && idx < total ? mots[idx] : null;
   const score = resultats.filter(Boolean).length;
 
+  // Classe pré-sélectionnée dans le sélecteur : celle de l'élève connecté si
+  // on la connaît, sinon 6e (l'année de l'éval nationale).
+  const niveauParDefaut = classeVersNiveau(eleve?.classe) ?? "6e";
+
   // Enregistrement du score sur clic (élève connecté). L'identité est forcée
   // côté serveur depuis le jeton (sécurisé) ; l'élève voit une confirmation.
   async function enregistrerScore() {
@@ -152,7 +205,7 @@ export default function DicteeDuJourPage() {
     setSaveMsg(null);
     const details = {
       date: jourStr(new Date()),
-      matiere: matiereChoisie ?? "mélange",
+      matiere: labelSource(source),
       mots: mots.map((m, i) => ({
         mot: m.mot,
         matiere: m.matiere,
@@ -259,18 +312,22 @@ export default function DicteeDuJourPage() {
             {dateLabel || "…"}
           </p>
           <p className="mt-1 text-xs font-semibold text-slate-500">
-            {matiereChoisie ? `5 mots de ${matiereChoisie}.` : "5 mots, 5 matières."}{" "}
+            {source.type === "melange"
+              ? "5 mots, 5 matières."
+              : source.type === "eval6e"
+                ? "5 mots pour préparer l'éval nationale 6e."
+                : `5 mots (${labelSource(source)}).`}{" "}
             Reviens demain pour une nouvelle dictée ! ☀️
           </p>
         </div>
 
         {/* Choix de la matière : mélange du jour (défaut) ou une matière précise. */}
-        <div className="mb-5 flex flex-wrap justify-center gap-2">
+        <div className="mb-3 flex flex-wrap justify-center gap-2">
           <button
             type="button"
-            onClick={() => chargerDictee(null)}
+            onClick={() => chargerDictee({ type: "melange" })}
             className={`rounded-full px-3 py-1.5 text-xs font-black transition ${
-              matiereChoisie === null
+              source.type === "melange"
                 ? "bg-sky-600 text-white shadow-sm"
                 : "bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50"
             }`}
@@ -281,9 +338,9 @@ export default function DicteeDuJourPage() {
             <button
               key={m}
               type="button"
-              onClick={() => chargerDictee(m)}
+              onClick={() => chargerDictee({ type: "matiere", matiere: m })}
               className={`rounded-full px-3 py-1.5 text-xs font-bold transition ${
-                matiereChoisie === m
+                source.type === "matiere" && source.matiere === m
                   ? "bg-sky-600 text-white shadow-sm"
                   : "bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50"
               }`}
@@ -291,6 +348,50 @@ export default function DicteeDuJourPage() {
               {m}
             </button>
           ))}
+        </div>
+
+        {/* Les mots de TA classe (Dico CP → Terminale, sans trou) + la prépa
+            éval nationale 6e. Le select est prépositionné sur la classe de
+            l'élève connecté, mais rien ne se charge sans son choix. */}
+        <div className="mb-5 flex flex-wrap items-center justify-center gap-2">
+          <button
+            type="button"
+            onClick={() => chargerDictee({ type: "eval6e" })}
+            className={`rounded-full px-3 py-1.5 text-xs font-black transition ${
+              source.type === "eval6e"
+                ? "bg-emerald-600 text-white shadow-sm"
+                : "bg-white text-emerald-700 ring-1 ring-emerald-300 hover:bg-emerald-50"
+            }`}
+          >
+            📝 Prépa éval nationale 6e
+          </button>
+          <label className="flex items-center gap-1.5 text-xs font-bold text-slate-600">
+            🎓 Ta classe
+            <select
+              value={source.type === "niveau" ? source.niveau : niveauParDefaut}
+              onChange={(e) => chargerDictee({ type: "niveau", niveau: e.target.value })}
+              className={`rounded-full px-2.5 py-1.5 text-xs font-bold outline-none transition ${
+                source.type === "niveau"
+                  ? "bg-sky-600 text-white shadow-sm"
+                  : "bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50"
+              }`}
+            >
+              {NIVEAUX_DICTEE.map((n) => (
+                <option key={n.slug} value={n.slug}>
+                  {n.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          {source.type !== "niveau" && (
+            <button
+              type="button"
+              onClick={() => chargerDictee({ type: "niveau", niveau: niveauParDefaut })}
+              className="rounded-full bg-white px-3 py-1.5 text-xs font-bold text-sky-700 ring-1 ring-sky-300 transition hover:bg-sky-50"
+            >
+              C&apos;est parti →
+            </button>
+          )}
         </div>
 
         {!mots ? (

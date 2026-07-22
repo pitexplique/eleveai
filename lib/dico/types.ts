@@ -22,6 +22,8 @@ export type FamilleDico =
   | "geographie"
   // Anglais (collège)
   | "anglais"
+  // Philosophie (terminale)
+  | "philo"
   // Tout-petits (GS-CP) : vocabulaire en images
   | "images-mots"
   // Partagé

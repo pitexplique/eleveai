@@ -31,6 +31,11 @@ import { motsFrancais1ere } from "./francais/1ere";
 import { motsAnglais1ere } from "./anglais/1ere";
 import { motsSciences1ere } from "./sciences/1ere";
 import { motsHistGeo1ere } from "./histoire-geo/1ere";
+import { motsMathsTerminale } from "./maths/terminale";
+import { motsPhiloTerminale } from "./philo/terminale";
+import { motsAnglaisTerminale } from "./anglais/terminale";
+import { motsSciencesTerminale } from "./sciences/terminale";
+import { motsHistGeoTerminale } from "./histoire-geo/terminale";
 import { motsMathsCM2 } from "./maths/cm2";
 import { motsFrancaisCM2 } from "./francais/cm2";
 import { motsSciencesCM2 } from "./sciences/cm2";
@@ -76,6 +81,8 @@ export const FAMILLES_DICO: Record<FamilleDico, { label: string; emoji: string }
   geographie: { label: "Géographie", emoji: "🗺️" },
   // Anglais (collège)
   anglais: { label: "Anglais", emoji: "🇬🇧" },
+  // Philosophie (terminale)
+  philo: { label: "Philosophie", emoji: "🦉" },
   // Tout-petits (GS-CP)
   "images-mots": { label: "Images & mots", emoji: "🖼️" },
   // Partagé
@@ -102,6 +109,8 @@ export const ORDRE_FAMILLES: FamilleDico[] = [
   "geographie",
   // Anglais
   "anglais",
+  // Philosophie
+  "philo",
   // Tout-petits (GS-CP)
   "images-mots",
   // Partagé
@@ -176,6 +185,12 @@ const DICOS_CARTES: Record<string, Dico> = {
   "anglais/1ere": { matiere: "anglais", matiereLabel: "Anglais", niveau: "1ere", titre: "Dico Anglais 1re", sousTitre: "L'anglais en Première", mots: motsAnglais1ere },
   "sciences/1ere": { matiere: "sciences", matiereLabel: "Sciences", niveau: "1ere", titre: "Dico Sciences 1re", sousTitre: "Enseignement scientifique", mots: motsSciences1ere },
   "histoire-geo/1ere": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "1ere", titre: "Dico Histoire-Géo 1re", sousTitre: "Nations, industrie, territoires", mots: motsHistGeo1ere },
+  // ── Terminale (lycée) — notions NEUVES, distinctes de la 1re ──
+  "maths/terminale": { matiere: "maths", matiereLabel: "Maths", niveau: "terminale", titre: "Dico Maths Terminale", sousTitre: "Les notions neuves de Terminale", mots: motsMathsTerminale },
+  "philo/terminale": { matiere: "philo", matiereLabel: "Philosophie", niveau: "terminale", titre: "Dico Philo Terminale", sousTitre: "La matière nouvelle du bac", mots: motsPhiloTerminale },
+  "anglais/terminale": { matiere: "anglais", matiereLabel: "Anglais", niveau: "terminale", titre: "Dico Anglais Terminale", sousTitre: "L'anglais du bac", mots: motsAnglaisTerminale },
+  "sciences/terminale": { matiere: "sciences", matiereLabel: "Sciences", niveau: "terminale", titre: "Dico Sciences Terminale", sousTitre: "Enseignement scientifique et spés", mots: motsSciencesTerminale },
+  "histoire-geo/terminale": { matiere: "histoire-geo", matiereLabel: "Histoire-Géo", niveau: "terminale", titre: "Dico Histoire-Géo Terminale", sousTitre: "Le monde de 1945 à nos jours", mots: motsHistGeoTerminale },
   "maths/cm2": {
     matiere: "maths",
     matiereLabel: "Maths",
