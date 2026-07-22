@@ -1203,7 +1203,7 @@ export default function AccueilPage({
 
           {/* L'édito — le moment humain, signé (photo + lettre repliée). */}
           <aside className="border-[#1d1c16]/25 lg:col-span-2 lg:border-l lg:pl-6">
-            <Kicker>L&apos;édito</Kicker>
+            <Kicker>L&apos;édito du jour</Kicker>
             {/* En couleur : c'est le moment humain de la page (le noir et blanc
                 « encre de journal » lui donnait un air de nécrologie — retiré
                 sur retour de Frédéric). Photo un peu plus grande. */}
@@ -1300,20 +1300,21 @@ export default function AccueilPage({
                 s'écrit sur la dictée du jour. */}
             <MotDuJourEncart />
 
-            {/* L'APPEL AUX ENTREPRISES — en pied de colonne (demande de
-                Frédéric, 22/07) : le journal invite le réel de l'île à
-                entrer dans ses pages. */}
-            <div className="mt-1 border-t border-[#1d1c16]/25 pt-3">
-              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+            {/* L'APPEL AUX ENTREPRISES — encadré (demande de Frédéric, 22/07 :
+                « c'est super important ») : bordure pleine + fond ambré pour le
+                sortir du flux de la colonne. Le journal invite le réel de l'île
+                à entrer dans ses pages. */}
+            <div className="mt-4 border-2 border-[#1d1c16] bg-amber-50 p-3.5 shadow-[3px_3px_0_0_#1d1c16]">
+              <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1d1c16]">
                 🚀 Aux entreprises de l&apos;île
               </p>
-              <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/80">
+              <p className="mt-1.5 text-sm font-semibold leading-6 text-[#1d1c16]/85">
                 Votre métier peut devenir un article, une simulation, un défi —
                 comme la canne, le lait ou le barrage avant vous.
               </p>
               <Link
                 href="/entreprises"
-                className="mt-1 inline-block text-xs font-black text-cyan-800 underline underline-offset-2 hover:text-[#1d1c16]"
+                className="mt-2 inline-block border-2 border-[#1d1c16] bg-[#1d1c16] px-3 py-1.5 text-xs font-black text-amber-50 hover:bg-transparent hover:text-[#1d1c16]"
               >
                 Participez à l&apos;aventure →
               </Link>
