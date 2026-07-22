@@ -1160,6 +1160,8 @@ export default function AccueilPage({
                   🎛️ Les autres machines dans ta main
                 </p>
                 {[
+                  { emoji: "🧠", nom: "La loi de la performance", href: "/loi-performance", cta: "Régler tes coefficients" },
+                  { emoji: "⚽", nom: "Le but qui sort de la moyenne", href: "/loi-pareto", cta: "Faire surgir les records" },
                   { emoji: "🌋", nom: "Le volcan de la Fournaise", href: "/simulateur-volcan", cta: "Régler la lave" },
                   { emoji: "💧", nom: "Le barrage de Takamaka", href: "/simulateur-barrage", cta: "Ouvrir les vannes" },
                   { emoji: "🧀", nom: "La fromagerie", href: "/simulateur-fromage", cta: "Remplir les pots" },
