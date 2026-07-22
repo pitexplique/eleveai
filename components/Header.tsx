@@ -347,9 +347,21 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* Desktop nav — les 4 audiences EXPLICITES (= la navigation) + auth.
-            Cliquer « Élève » ramène à l'accueil (coach, dictée, tout le contenu). */}
+        {/* Desktop nav — Accueil (la Une) + les 4 audiences / rituels + auth.
+            Avant, seul le logo ramenait à la Une : peu évident pour les élèves
+            et les parents → un lien « Accueil » explicite (demande de Frédéric). */}
         <div className="hidden items-center gap-1.5 lg:flex">
+          <Link
+            href="/accueil"
+            className={[
+              "inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition",
+              paper
+                ? "bg-[#1d1c16] text-[#f6f1e4] shadow"
+                : "text-white/85 hover:bg-white/15 hover:text-white",
+            ].join(" ")}
+          >
+            <span>🗞️</span> Accueil
+          </Link>
           {eleve && !isStaff ? (
             /* Élève CONNECTÉ → ses matières + rituels (pas les portes d'audience) */
             <>
@@ -478,6 +490,21 @@ export default function Header() {
           }`}
         >
           <div className="space-y-5">
+
+            {/* Accueil (la Une) — même raison qu'en desktop : le logo ne suffit pas */}
+            <Link
+              href="/accueil"
+              onClick={() => setMobileOpen(false)}
+              className={`flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-black transition ${
+                paper
+                  ? isActive(pathname, "/accueil")
+                    ? "border-[#1d1c16]/40 bg-[#1d1c16]/10 text-[#1d1c16]"
+                    : "border-[#1d1c16]/15 bg-[#1d1c16]/5 text-[#1d1c16] hover:bg-[#1d1c16]/10"
+                  : "border-white/10 bg-white/5 text-white hover:bg-white/15"
+              }`}
+            >
+              <span>🗞️</span> Accueil
+            </Link>
 
             {/* Auth mobile */}
             {eleve ? (
