@@ -213,12 +213,20 @@ export default function CoachIA() {
   const [videosParNotion, setVideosParNotion] = useState<
     Record<string, { url: string; titre: string | null }[]>
   >({});
+  // Vidéos attachées à une MICRO-COMPÉTENCE précise (clé = microId) : un petit
+  // lien YouTube « pile sur la compétence », en plus de la vidéo de notion.
+  const [videosParMicro, setVideosParMicro] = useState<
+    Record<string, { url: string; titre: string | null }[]>
+  >({});
   useEffect(() => {
     let annule = false;
     fetch(`/api/notion-videos?matiere=${matiere}&classe=${classe}`)
       .then((r) => r.json())
       .then((d) => {
-        if (!annule && d?.ok) setVideosParNotion(d.videos ?? {});
+        if (!annule && d?.ok) {
+          setVideosParNotion(d.videos ?? {});
+          setVideosParMicro(d.videosMicro ?? {});
+        }
       })
       .catch(() => {
         /* pas de vidéos : aucun badge */
@@ -444,13 +452,15 @@ export default function CoachIA() {
                           })() : null}
                         </div>
                         <ol className="space-y-1">
-                          {micros.map((microId, index) => (
-                            <li key={microId}>
+                          {micros.map((microId, index) => {
+                            const microVideos = videosParMicro[microId] ?? [];
+                            return (
+                            <li key={microId} className="flex items-stretch gap-1">
                               <button
                                 type="button"
                                 onClick={() => handleClick(notionId, microId)}
                                 className={[
-                                  "group flex w-full items-start gap-2 rounded-lg px-2 py-1.5 text-left text-sm leading-5 transition",
+                                  "group flex flex-1 items-start gap-2 rounded-lg px-2 py-1.5 text-left text-sm leading-5 transition",
                                   getMicroButtonStyle(microId),
                                 ].join(" ")}
                               >
@@ -466,8 +476,25 @@ export default function CoachIA() {
                                   </span>
                                 )}
                               </button>
+                              {microVideos.length ? (
+                                // Lien YouTube « pile sur la compétence » : petit,
+                                // pour ne pas alourdir la liste. La vidéo EleveAI
+                                // de la notion reste dans l'en-tête, au-dessus.
+                                <a
+                                  href={microVideos[0].url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="flex shrink-0 items-center gap-1 self-center rounded-lg border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-bold text-rose-700 transition hover:bg-rose-100"
+                                  title={microVideos[0].titre ?? "Vidéo sur cette compétence"}
+                                >
+                                  <Play className="h-3 w-3 fill-current" />
+                                  Vidéo
+                                </a>
+                              ) : null}
                             </li>
-                          ))}
+                            );
+                          })}
                         </ol>
                       </article>
                       );

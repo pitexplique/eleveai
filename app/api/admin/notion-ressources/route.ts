@@ -53,6 +53,9 @@ export async function POST(req: Request) {
   const matiere = clean(body?.matiere, 20)?.toLowerCase();
   const classe = clean(body?.classe, 20)?.toLowerCase();
   const notion_id = clean(body?.notion_id, 60);
+  // micro_id optionnel : vide = ressource de la notion (vidéo EleveAI), rempli
+  // = ressource attachée à une micro-compétence précise.
+  const micro_id = clean(body?.micro_id, 60) ?? "";
   const type = clean(body?.type, 20)?.toLowerCase() ?? "video";
   const url = clean(body?.url, 500);
   const titre = clean(body?.titre, 160);
@@ -66,6 +69,9 @@ export async function POST(req: Request) {
   if (!SLUG.test(matiere) || !SLUG.test(classe) || !SLUG.test(notion_id)) {
     return NextResponse.json({ ok: false, error: "Identifiants invalides." }, { status: 400 });
   }
+  if (micro_id && !SLUG.test(micro_id)) {
+    return NextResponse.json({ ok: false, error: "Micro-compétence invalide." }, { status: 400 });
+  }
   if (!/^https?:\/\//i.test(url)) {
     return NextResponse.json({ ok: false, error: "L'URL doit commencer par http(s)." }, { status: 400 });
   }
@@ -73,8 +79,8 @@ export async function POST(req: Request) {
   const { error } = await admin()
     .from("notion_ressources")
     .upsert(
-      { matiere, classe, notion_id, type, url, titre },
-      { onConflict: "matiere,classe,notion_id,url" }
+      { matiere, classe, notion_id, micro_id, type, url, titre },
+      { onConflict: "matiere,classe,notion_id,micro_id,url" }
     );
   if (error) {
     return NextResponse.json(

@@ -1,5 +1,9 @@
 // Lecture publique des VIDÉOS d'une classe, pour le coach.
-//   GET ?matiere=maths&classe=6e → { ok, videos: { [notion_id]: [{url, titre}] } }
+//   GET ?matiere=maths&classe=6e → {
+//     ok,
+//     videos:      { [notion_id]: [{url, titre}] },  // vidéos de la notion (micro_id vide)
+//     videosMicro: { [micro_id]:  [{url, titre}] },  // vidéos attachées à une micro-compétence
+//   }
 // Ne renvoie que les ressources de type "video". Aucune donnée sensible.
 
 export const runtime = "nodejs";
@@ -24,19 +28,26 @@ export async function GET(req: Request) {
   );
   const { data, error } = await supabase
     .from("notion_ressources")
-    .select("notion_id, url, titre")
+    .select("*")
     .eq("matiere", matiere)
     .eq("classe", classe)
     .eq("type", "video");
 
   if (error) {
-    // Table absente : pas de vidéos, le coach n'affiche aucun badge.
-    return NextResponse.json({ ok: true, videos: {} });
+    // Table absente (ou colonne micro_id pas encore ajoutée) : pas de vidéos,
+    // le coach n'affiche aucun badge.
+    return NextResponse.json({ ok: true, videos: {}, videosMicro: {} });
   }
 
   const videos: Record<string, { url: string; titre: string | null }[]> = {};
+  const videosMicro: Record<string, { url: string; titre: string | null }[]> = {};
   for (const row of data ?? []) {
-    (videos[row.notion_id] ??= []).push({ url: row.url, titre: row.titre });
+    const micro = (row.micro_id ?? "").trim();
+    if (micro) {
+      (videosMicro[micro] ??= []).push({ url: row.url, titre: row.titre });
+    } else {
+      (videos[row.notion_id] ??= []).push({ url: row.url, titre: row.titre });
+    }
   }
-  return NextResponse.json({ ok: true, videos });
+  return NextResponse.json({ ok: true, videos, videosMicro });
 }

@@ -9,7 +9,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { getNotionOptions, notionLabel, type Classe } from "@/lib/tutor-v4/catalog";
+import {
+  getNotionOptions,
+  getNotionMicroMap,
+  getMicroLabelMap,
+  notionLabel,
+  type Classe,
+} from "@/lib/tutor-v4/catalog";
 import { ficheHrefSiExiste } from "@/lib/fiches/registre";
 
 const CLASSES_MATHS: Classe[] = [
@@ -22,6 +28,7 @@ type Ressource = {
   matiere: string;
   classe: string;
   notion_id: string;
+  micro_id?: string | null;
   type: string;
   url: string;
   titre: string | null;
@@ -32,7 +39,11 @@ export default function RessourcesAdminClient() {
   const [items, setItems] = useState<Ressource[]>([]);
   const [loading, setLoading] = useState(true);
   const [drafts, setDrafts] = useState<Record<string, { url: string; titre: string }>>({});
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [msg, setMsg] = useState<string>("");
+
+  const microMap = useMemo(() => getNotionMicroMap(classe, "maths"), [classe]);
+  const microLabels = useMemo(() => getMicroLabelMap(classe, "maths"), [classe]);
 
   const notions = useMemo(
     () =>
@@ -59,13 +70,22 @@ export default function RessourcesAdminClient() {
     charger();
   }, []);
 
-  const videosDe = (notionId: string) =>
+  // micro_id vide = vidéo de la notion ; sinon vidéo d'une micro-compétence.
+  const videosDe = (notionId: string, microId = "") =>
     items.filter(
-      (r) => r.classe === classe && r.notion_id === notionId && r.type === "video"
+      (r) =>
+        r.classe === classe &&
+        r.notion_id === notionId &&
+        (r.micro_id ?? "") === microId &&
+        r.type === "video"
     );
 
-  async function ajouter(notionId: string) {
-    const d = drafts[notionId];
+  const draftKey = (notionId: string, microId = "") =>
+    microId ? `${notionId}::${microId}` : notionId;
+
+  async function ajouter(notionId: string, microId = "") {
+    const key = draftKey(notionId, microId);
+    const d = drafts[key];
     if (!d?.url?.trim()) return;
     setMsg("");
     const res = await fetch("/api/admin/notion-ressources", {
@@ -75,6 +95,7 @@ export default function RessourcesAdminClient() {
         matiere: "maths",
         classe,
         notion_id: notionId,
+        micro_id: microId,
         type: "video",
         url: d.url.trim(),
         titre: d.titre?.trim() || null,
@@ -82,7 +103,7 @@ export default function RessourcesAdminClient() {
     });
     const data = await res.json();
     if (res.ok && data?.ok) {
-      setDrafts((s) => ({ ...s, [notionId]: { url: "", titre: "" } }));
+      setDrafts((s) => ({ ...s, [key]: { url: "", titre: "" } }));
       charger();
     } else {
       setMsg(`⚠️ ${data?.error ?? "Erreur."}`);
@@ -143,6 +164,9 @@ export default function RessourcesAdminClient() {
             {notions.map((n) => {
               const videos = videosDe(n.id);
               const draft = drafts[n.id] ?? { url: "", titre: "" };
+              const micros = microMap[n.id] ?? [];
+              const open = expanded[n.id] ?? false;
+              const nbMicroVideos = micros.filter((m) => videosDe(n.id, m).length).length;
               return (
                 <li key={n.id} className="rounded-2xl border border-slate-700 bg-slate-800/40 p-4">
                   <div className="flex flex-wrap items-center justify-between gap-2">
@@ -199,7 +223,10 @@ export default function RessourcesAdminClient() {
                     </ul>
                   )}
 
-                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                  <p className="mt-3 text-[11px] font-bold uppercase tracking-wide text-slate-500">
+                    Vidéo de la notion (EleveAI)
+                  </p>
+                  <div className="mt-1 flex flex-wrap items-center gap-2">
                     <input
                       type="url"
                       value={draft.url}
@@ -227,6 +254,101 @@ export default function RessourcesAdminClient() {
                       + Vidéo
                     </button>
                   </div>
+
+                  {/* Vidéos « pile sur la compétence » : un lien YouTube par
+                      micro-compétence, en plus de la vidéo de notion. */}
+                  {micros.length > 0 && (
+                    <div className="mt-3 border-t border-slate-700/60 pt-3">
+                      <button
+                        type="button"
+                        onClick={() => setExpanded((s) => ({ ...s, [n.id]: !open }))}
+                        className="flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-slate-100"
+                      >
+                        <span>{open ? "▾" : "▸"}</span>
+                        <span>🎯 Vidéos par compétence</span>
+                        <span className="rounded-full bg-rose-900/40 px-2 py-0.5 text-[11px] font-bold text-rose-300">
+                          {nbMicroVideos}/{micros.length}
+                        </span>
+                      </button>
+
+                      {open && (
+                        <ul className="mt-3 space-y-3">
+                          {micros.map((microId) => {
+                            const mVideos = videosDe(n.id, microId);
+                            const key = draftKey(n.id, microId);
+                            const mDraft = drafts[key] ?? { url: "", titre: "" };
+                            return (
+                              <li key={microId} className="rounded-xl bg-slate-900/40 p-3">
+                                <p className="text-sm font-bold text-slate-200">
+                                  {microLabels[microId] || microId}
+                                </p>
+                                {mVideos.length > 0 && (
+                                  <ul className="mt-2 space-y-1.5">
+                                    {mVideos.map((v) => (
+                                      <li
+                                        key={v.id}
+                                        className="flex items-center justify-between gap-3 rounded-lg bg-slate-800/50 px-3 py-1.5"
+                                      >
+                                        <a
+                                          href={v.url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="truncate text-xs text-sky-400 hover:underline"
+                                        >
+                                          {v.titre || v.url}
+                                        </a>
+                                        <button
+                                          type="button"
+                                          onClick={() => supprimer(v.id)}
+                                          className="shrink-0 text-xs font-black text-red-400 hover:text-red-300"
+                                        >
+                                          Supprimer
+                                        </button>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                )}
+                                <div className="mt-2 flex flex-wrap items-center gap-2">
+                                  <input
+                                    type="url"
+                                    value={mDraft.url}
+                                    onChange={(e) =>
+                                      setDrafts((s) => ({
+                                        ...s,
+                                        [key]: { ...mDraft, url: e.target.value },
+                                      }))
+                                    }
+                                    placeholder="https://www.youtube.com/watch?v=…"
+                                    className="min-w-0 flex-1 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-sm text-slate-100"
+                                  />
+                                  <input
+                                    type="text"
+                                    value={mDraft.titre}
+                                    onChange={(e) =>
+                                      setDrafts((s) => ({
+                                        ...s,
+                                        [key]: { ...mDraft, titre: e.target.value },
+                                      }))
+                                    }
+                                    placeholder="titre (optionnel)"
+                                    className="w-32 rounded-lg border border-slate-700 bg-slate-800 px-3 py-1.5 text-sm text-slate-100"
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() => ajouter(n.id, microId)}
+                                    disabled={!mDraft.url.trim()}
+                                    className="rounded-full bg-rose-500 px-3 py-1.5 text-sm font-black text-white transition hover:bg-rose-400 disabled:opacity-40"
+                                  >
+                                    + Vidéo
+                                  </button>
+                                </div>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      )}
+                    </div>
+                  )}
                 </li>
               );
             })}
