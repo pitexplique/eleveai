@@ -12,6 +12,9 @@
     <rect width="25" height="25" fill="#fbfdf9"/>
     <path d="M25 0H0V25" fill="none" stroke="#cfe8d4" stroke-width="1"/>
   </pattern>
+  <marker id="fl" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+    <path d="M1 1 L9 5 L1 9 Z" fill="#1f6b3a"/>
+  </marker>
   <style><![CDATA[
     .encre{stroke:#1f6b3a;fill:none;stroke-linecap:round;stroke-linejoin:round}
     .trace{stroke-dasharray:100;stroke-dashoffset:100;animation:trace ease forwards}
@@ -45,10 +48,10 @@
 <text class="pop main" style="animation-delay:2.3s;font-size:16px;font-weight:bold" x="165" y="342">qualit&#233;s&#160;: x&#8323; (rare)</text>
 
 <!-- ACTE 2 : les coefficients — c'est TOI qui les règles -->
-<line class="encre trace" pathLength="100" style="animation-duration:.5s;animation-delay:2.6s;stroke-width:1.6" x1="300" y1="170" x2="420" y2="205"/>
-<line class="encre trace" pathLength="100" style="animation-duration:.5s;animation-delay:2.75s;stroke-width:1.6" x1="300" y1="170" x2="420" y2="258"/>
-<line class="encre trace" pathLength="100" style="animation-duration:.5s;animation-delay:2.9s;stroke-width:4" x1="300" y1="336" x2="420" y2="258"/>
-<line class="encre trace" pathLength="100" style="animation-duration:.5s;animation-delay:3.05s;stroke-width:4" x1="300" y1="336" x2="420" y2="311"/>
+<line class="encre trace" pathLength="100" marker-end="url(#fl)" style="animation-duration:.5s;animation-delay:2.6s;stroke-width:1.6" x1="300" y1="170" x2="416" y2="201"/>
+<line class="encre trace" pathLength="100" marker-end="url(#fl)" style="animation-duration:.5s;animation-delay:2.75s;stroke-width:1.6" x1="300" y1="170" x2="418" y2="250"/>
+<line class="encre trace" pathLength="100" marker-end="url(#fl)" style="animation-duration:.5s;animation-delay:2.9s;stroke-width:4" x1="300" y1="336" x2="418" y2="266"/>
+<line class="encre trace" pathLength="100" marker-end="url(#fl)" style="animation-duration:.5s;animation-delay:3.05s;stroke-width:4" x1="300" y1="336" x2="416" y2="314"/>
 <text class="pop main" style="animation-delay:3.1s;font-size:14px" x="330" y="158">coeff a&#8321;</text>
 <text class="pop main" style="animation-delay:3.2s;font-size:15px;font-weight:bold;fill:#c8962a" x="330" y="320">coeff a&#8323; &#8593;</text>
 
@@ -59,11 +62,11 @@
 <circle class="pop encre" style="animation-delay:3.5s;stroke-width:2.5" cx="430" cy="311" r="11"/>
 <circle class="pop encre" style="animation-delay:3.6s;stroke-width:2.5" cx="505" cy="232" r="11"/>
 <circle class="pop encre" style="animation-delay:3.7s;stroke-width:2.5" cx="505" cy="285" r="11"/>
-<line class="encre trace" pathLength="100" style="animation-duration:.35s;animation-delay:3.7s;stroke-width:1.6" x1="441" y1="205" x2="494" y2="232"/>
-<line class="encre trace" pathLength="100" style="animation-duration:.35s;animation-delay:3.8s;stroke-width:1.6" x1="441" y1="258" x2="494" y2="232"/>
-<line class="encre trace" pathLength="100" style="animation-duration:.35s;animation-delay:3.85s;stroke-width:1.6" x1="441" y1="258" x2="494" y2="285"/>
-<line class="encre trace" pathLength="100" style="animation-duration:.35s;animation-delay:3.9s;stroke-width:2.5" x1="441" y1="311" x2="494" y2="285"/>
-<line class="encre trace" pathLength="100" style="animation-duration:.35s;animation-delay:3.95s;stroke-width:1.6" x1="441" y1="205" x2="494" y2="285"/>
+<line class="encre trace" pathLength="100" marker-end="url(#fl)" style="animation-duration:.35s;animation-delay:3.7s;stroke-width:1.6" x1="441" y1="205" x2="489" y2="234"/>
+<line class="encre trace" pathLength="100" marker-end="url(#fl)" style="animation-duration:.35s;animation-delay:3.8s;stroke-width:1.6" x1="441" y1="258" x2="490" y2="233"/>
+<line class="encre trace" pathLength="100" marker-end="url(#fl)" style="animation-duration:.35s;animation-delay:3.85s;stroke-width:1.6" x1="441" y1="258" x2="490" y2="284"/>
+<line class="encre trace" pathLength="100" marker-end="url(#fl)" style="animation-duration:.35s;animation-delay:3.9s;stroke-width:2.5" x1="441" y1="311" x2="489" y2="287"/>
+<line class="encre trace" pathLength="100" marker-end="url(#fl)" style="animation-duration:.35s;animation-delay:3.95s;stroke-width:1.6" x1="441" y1="205" x2="487" y2="281"/>
 <!-- la flèche de sortie -->
 <line class="encre trace" pathLength="100" style="animation-duration:.5s;animation-delay:4.1s;stroke-width:3" x1="520" y1="258" x2="580" y2="258"/>
 <path class="pop" style="animation-delay:4.5s" d="M592 258 L574 250 L576 266 Z" fill="#1f6b3a"/>
