@@ -17,6 +17,7 @@ import {
   type Classe,
 } from "@/lib/tutor-v4/catalog";
 import { ficheHrefSiExiste } from "@/lib/fiches/registre";
+import { youtubeSearchUrl, CLASSE_YOUTUBE_LABEL } from "@/lib/videos/youtubeSearch";
 
 const CLASSES_MATHS: Classe[] = [
   "cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e",
@@ -279,9 +280,27 @@ export default function RessourcesAdminClient() {
                             const mDraft = drafts[key] ?? { url: "", titre: "" };
                             return (
                               <li key={microId} className="rounded-xl bg-slate-900/40 p-3">
-                                <p className="text-sm font-bold text-slate-200">
-                                  {microLabels[microId] || microId}
-                                </p>
+                                <div className="flex flex-wrap items-center justify-between gap-2">
+                                  <p className="text-sm font-bold text-slate-200">
+                                    {microLabels[microId] || microId}
+                                  </p>
+                                  {/* Recherche pré-remplie « maths 4ème notion
+                                      micro » : cliquer, choisir LA vidéo,
+                                      coller l'URL ci-dessous. */}
+                                  <a
+                                    href={youtubeSearchUrl([
+                                      "maths",
+                                      CLASSE_YOUTUBE_LABEL[classe] ?? classe,
+                                      n.label,
+                                      microLabels[microId] || "",
+                                    ])}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="shrink-0 rounded-full border border-slate-700 bg-slate-800/60 px-2.5 py-1 text-[11px] font-bold text-slate-400 transition hover:border-rose-700 hover:text-rose-300"
+                                  >
+                                    🔎 Chercher sur YouTube
+                                  </a>
+                                </div>
                                 {mVideos.length > 0 && (
                                   <ul className="mt-2 space-y-1.5">
                                     {mVideos.map((v) => (

@@ -14,8 +14,13 @@ import {
 import FloatingCoach from "@/components/FloatingCoach";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import Link from "next/link";
-import { BookOpen, Play } from "lucide-react";
+import { BookOpen, Play, Search } from "lucide-react";
 import { ficheHrefPourCoach } from "@/lib/fiches/registre";
+import {
+  youtubeSearchUrl,
+  CLASSE_YOUTUBE_LABEL,
+  MATIERE_YOUTUBE_LABEL,
+} from "@/lib/videos/youtubeSearch";
 
 const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe", "adulte"];
 const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
@@ -454,6 +459,12 @@ export default function CoachIA() {
                         <ol className="space-y-1">
                           {micros.map((microId, index) => {
                             const microVideos = videosParMicro[microId] ?? [];
+                            // « defi » au singulier selon les classes ; le
+                            // libellé sert de filet. Pas de loupe YouTube sur
+                            // les défis : une vidéo « défis sur… » n'existe pas.
+                            const estDefi =
+                              microId.includes("defi") ||
+                              (microLabels[microId] || "").toLowerCase().includes("défi");
                             return (
                             <li key={microId} className="flex items-stretch gap-1">
                               <button
@@ -490,6 +501,28 @@ export default function CoachIA() {
                                 >
                                   <Play className="h-3 w-3 fill-current" />
                                   Vidéo
+                                </a>
+                              ) : !estDefi ? (
+                                // Pas encore de vidéo curatée : loupe grise très
+                                // discrète → recherche YouTube « matière classe
+                                // notion micro » (libellés naturels, jamais les
+                                // slugs). Disparaît dès qu'une vidéo est choisie
+                                // dans /admin/ressources.
+                                <a
+                                  href={youtubeSearchUrl([
+                                    MATIERE_YOUTUBE_LABEL[matiere] ?? matiere,
+                                    CLASSE_YOUTUBE_LABEL[classe] ?? classe,
+                                    notionLabel(notionId, classe, matiere),
+                                    microLabels[microId] || "",
+                                  ])}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="flex shrink-0 items-center self-center rounded-lg px-1.5 py-1 text-slate-300 transition hover:bg-slate-100 hover:text-slate-500"
+                                  title="Chercher une vidéo sur YouTube"
+                                  aria-label={`Chercher une vidéo YouTube : ${microLabels[microId] || microId}`}
+                                >
+                                  <Search className="h-3.5 w-3.5" />
                                 </a>
                               ) : null}
                             </li>
