@@ -1203,18 +1203,24 @@ export default function AccueilPage({
             <h3 className="mt-2 font-serif text-lg font-black leading-snug">
               Un journal éducatif, né un soir de juillet
             </h3>
+            {/* Teaser court : la phrase s'arrête sur « né dans ma tête, » —
+                le « Lire la suite » vient juste après (demande de Frédéric,
+                22/07), la suite de la phrase s'ouvre dans le dépliant. */}
             <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
               Je suis Frédéric Lacoste, professeur de mathématiques à La
-              Réunion. Ce journal est né dans ma tête, un soir de juillet — en
-              repensant aux avis de mes élèves, à leurs mots, et à ce qui me
-              ressemble. Une évidence : on apprend mieux avec ce qu&apos;on a{" "}
-              <strong className="font-black">sous les yeux</strong> — la pluie,
-              la canne, les baleines, le volcan.
+              Réunion. Ce journal est né dans ma tête,
             </p>
             <details className="mt-1">
               <summary className="cursor-pointer list-none text-xs font-black text-cyan-800 underline underline-offset-2">
                 Lire la suite ▾
               </summary>
+              <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
+                un soir de juillet — en repensant aux avis de mes élèves, à
+                leurs mots, et à ce qui me ressemble. Une évidence : on apprend
+                mieux avec ce qu&apos;on a{" "}
+                <strong className="font-black">sous les yeux</strong> — la pluie,
+                la canne, les baleines, le volcan.
+              </p>
               <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
                 Chaque matin : un défi, une dictée, un coach qui explique sans
                 faire à ta place.{" "}
