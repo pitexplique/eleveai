@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Le dessin d'origine de « Le but qui sort de la moyenne », retracé au
+     propre : un soir de juillet (plage, famille, sport), Frédéric tombe sur
+     une interview de Mbappé — « on a des défauts et des qualités ; il faut
+     améliorer ses défauts, mais surtout ses qualités, c'est ce qui nous
+     différencie ». Sur la feuille à carreaux : l'ADN à gauche (tes traits),
+     des coefficients, un réseau de neurones au milieu, et à droite… un cœur —
+     le bonheur. Frère du dessin coeur-epsilon-infini. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+<defs>
+  <pattern id="carreaux-adn" width="25" height="25" patternUnits="userSpaceOnUse">
+    <rect width="25" height="25" fill="#fbfdf9"/>
+    <path d="M25 0H0V25" fill="none" stroke="#cfe8d4" stroke-width="1"/>
+  </pattern>
+  <style><![CDATA[
+    .encre{stroke:#1f6b3a;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .trace{stroke-dasharray:100;stroke-dashoffset:100;animation:trace ease forwards}
+    .pop{opacity:0;animation:pop .7s ease forwards}
+    .main{font-family:'Segoe Print','Bradley Hand',cursive;fill:#1f6b3a}
+    .coeur{transform-origin:640px 258px;opacity:0;animation:pop .7s ease 4.6s forwards, pulse 1.6s ease-in-out 5.4s infinite}
+    @keyframes trace{to{stroke-dashoffset:0}}
+    @keyframes pop{to{opacity:1}}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+  ]]></style>
+</defs>
+
+<rect width="800" height="480" fill="url(#carreaux-adn)"/>
+<line x1="26" y1="0" x2="26" y2="480" stroke="#f3b6b6" stroke-width="2" opacity=".7"/>
+
+<!-- La phrase d'origine -->
+<text class="pop main" style="animation-delay:.1s;font-size:19px" text-anchor="middle" x="400" y="52">« Il faut am&#233;liorer ses d&#233;fauts&#8230; mais surtout ses qualit&#233;s. » &#8212; K.&#160;Mbapp&#233;</text>
+
+<!-- ACTE 1 : l'ADN — la double hélice (tes traits, reçus à la naissance) -->
+<text class="pop main" style="animation-delay:.6s;font-size:22px;font-weight:bold" text-anchor="middle" x="105" y="130">ADN</text>
+<path class="encre trace" pathLength="100" style="animation-duration:1.4s;animation-delay:.7s;stroke-width:2.5"
+  d="M80 150 C130 185 80 220 130 255 C80 290 130 325 80 360"/>
+<path class="encre trace" pathLength="100" style="animation-duration:1.4s;animation-delay:.7s;stroke-width:2.5"
+  d="M130 150 C80 185 130 220 80 255 C130 290 80 325 130 360"/>
+<line class="encre trace" pathLength="100" style="animation-duration:.3s;animation-delay:1.6s;stroke-width:1.8" x1="88" y1="185" x2="122" y2="185"/>
+<line class="encre trace" pathLength="100" style="animation-duration:.3s;animation-delay:1.75s;stroke-width:1.8" x1="86" y1="255" x2="124" y2="255"/>
+<line class="encre trace" pathLength="100" style="animation-duration:.3s;animation-delay:1.9s;stroke-width:1.8" x1="88" y1="325" x2="122" y2="325"/>
+
+<!-- les traits qui en sortent : défauts et qualités -->
+<text class="pop main" style="animation-delay:2.1s;font-size:16px" x="165" y="176">d&#233;fauts&#160;: x&#8321;, x&#8322;</text>
+<text class="pop main" style="animation-delay:2.3s;font-size:16px;font-weight:bold" x="165" y="342">qualit&#233;s&#160;: x&#8323; (rare)</text>
+
+<!-- ACTE 2 : les coefficients — c'est TOI qui les règles -->
+<line class="encre trace" pathLength="100" style="animation-duration:.5s;animation-delay:2.6s;stroke-width:1.6" x1="300" y1="170" x2="420" y2="205"/>
+<line class="encre trace" pathLength="100" style="animation-duration:.5s;animation-delay:2.75s;stroke-width:1.6" x1="300" y1="170" x2="420" y2="258"/>
+<line class="encre trace" pathLength="100" style="animation-duration:.5s;animation-delay:2.9s;stroke-width:4" x1="300" y1="336" x2="420" y2="258"/>
+<line class="encre trace" pathLength="100" style="animation-duration:.5s;animation-delay:3.05s;stroke-width:4" x1="300" y1="336" x2="420" y2="311"/>
+<text class="pop main" style="animation-delay:3.1s;font-size:14px" x="330" y="158">coeff a&#8321;</text>
+<text class="pop main" style="animation-delay:3.2s;font-size:15px;font-weight:bold;fill:#c8962a" x="330" y="320">coeff a&#8323; &#8593;</text>
+
+<!-- ACTE 3 : le réseau de neurones -->
+<text class="pop main" style="animation-delay:3.3s;font-size:15px" text-anchor="middle" x="470" y="130">le r&#233;seau</text>
+<circle class="pop encre" style="animation-delay:3.3s;stroke-width:2.5" cx="430" cy="205" r="11"/>
+<circle class="pop encre" style="animation-delay:3.4s;stroke-width:2.5" cx="430" cy="258" r="11"/>
+<circle class="pop encre" style="animation-delay:3.5s;stroke-width:2.5" cx="430" cy="311" r="11"/>
+<circle class="pop encre" style="animation-delay:3.6s;stroke-width:2.5" cx="505" cy="232" r="11"/>
+<circle class="pop encre" style="animation-delay:3.7s;stroke-width:2.5" cx="505" cy="285" r="11"/>
+<line class="encre trace" pathLength="100" style="animation-duration:.35s;animation-delay:3.7s;stroke-width:1.6" x1="441" y1="205" x2="494" y2="232"/>
+<line class="encre trace" pathLength="100" style="animation-duration:.35s;animation-delay:3.8s;stroke-width:1.6" x1="441" y1="258" x2="494" y2="232"/>
+<line class="encre trace" pathLength="100" style="animation-duration:.35s;animation-delay:3.85s;stroke-width:1.6" x1="441" y1="258" x2="494" y2="285"/>
+<line class="encre trace" pathLength="100" style="animation-duration:.35s;animation-delay:3.9s;stroke-width:2.5" x1="441" y1="311" x2="494" y2="285"/>
+<line class="encre trace" pathLength="100" style="animation-duration:.35s;animation-delay:3.95s;stroke-width:1.6" x1="441" y1="205" x2="494" y2="285"/>
+<!-- la flèche de sortie -->
+<line class="encre trace" pathLength="100" style="animation-duration:.5s;animation-delay:4.1s;stroke-width:3" x1="520" y1="258" x2="580" y2="258"/>
+<path class="pop" style="animation-delay:4.5s" d="M592 258 L574 250 L576 266 Z" fill="#1f6b3a"/>
+
+<!-- ACTE 4 : la sortie — le cœur, le bonheur -->
+<g class="coeur">
+  <path d="M640 292 C607 268 598 244 612 230 C626 216 640 226 640 240 C640 226 654 216 668 230 C682 244 673 268 640 292 Z"
+    fill="#c8962a" opacity=".9" stroke="#8a6410" stroke-width="2"/>
+</g>
+<text class="pop main" style="animation-delay:5s;font-size:17px;fill:#c8962a;font-weight:bold" text-anchor="middle" x="640" y="330">la performance</text>
+
+<!-- signature -->
+<text class="pop main" style="animation-delay:5.6s;font-size:23px" text-anchor="middle" x="400" y="442">Tes traits, tu les re&#231;ois. Tes coefficients, tu les r&#232;gles.</text>
+</svg>

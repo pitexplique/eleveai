@@ -270,6 +270,15 @@ const ARTICLES_MATHS_FALLBACK: ArticleRubrique[] = [
     cta: "🔔 Fais grandir n →",
   },
   {
+    id: "loi-performance",
+    titre: "Faut-il améliorer ses défauts ou ses qualités ?",
+    accroche:
+      "Un soir de juillet, une interview de Mbappé : « améliore tes défauts, mais SURTOUT tes qualités ». J'ai dessiné ça sur une feuille à carreaux — ton ADN te donne des traits, tu poses des coefficients, un réseau de neurones les combine, et il en sort ta performance. C'est un neurone : une somme pondérée Σ aᵢxᵢ. Règle tes coefficients et vois.",
+    imageUrl: "/images/adn-reseau-coeur.svg",
+    lien: "/loi-performance",
+    cta: "🧠 Règle tes coefficients →",
+  },
+  {
     id: "loi-pareto",
     titre: "Le but qui sort de la moyenne",
     accroche:

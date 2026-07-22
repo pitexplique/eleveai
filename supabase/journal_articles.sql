@@ -77,6 +77,22 @@ on conflict (rubrique, lien) do nothing;
 -- (on converge vers la moyenne) ; cultiver sa qualité rare, c'est la queue
 -- lourde de la loi de Pareto — là où vivent les records. Le contrepoint direct
 -- de /loi-normale. ordre 2 : passe en tête de rubrique.
+-- ── Article 5 (22/07) : la loi de la performance — le neurone de Mbappé ───────
+-- Le dessin d'origine de Frédéric, un soir de juillet après une interview de
+-- Kylian Mbappé (« améliorer ses défauts, mais surtout ses qualités »). ADN →
+-- variables x → coefficients → réseau de neurones → performance : un neurone,
+-- Σ aᵢxᵢ, dont l'élève règle les coefficients. Pendant individuel de la loi de
+-- Pareto (l'un règle SES coefficients, l'autre regarde TOUS les joueurs).
+-- ordre 1 : passe en tête de rubrique.
+insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url, lien, cta) values
+  ('un-peu-de-maths', 1,
+   'Faut-il améliorer ses défauts ou ses qualités ?',
+   'Un soir de juillet, une interview de Mbappé : « améliore tes défauts, mais SURTOUT tes qualités ». J''ai dessiné ça sur une feuille à carreaux — ton ADN te donne des traits, tu poses des coefficients, un réseau de neurones les combine, et il en sort ta performance. C''est un neurone : une somme pondérée Σ aᵢxᵢ. Règle tes coefficients et vois.',
+   '/images/adn-reseau-coeur.svg',
+   '/loi-performance',
+   '🧠 Règle tes coefficients →')
+on conflict (rubrique, lien) do nothing;
+
 insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url, lien, cta) values
   ('un-peu-de-maths', 2,
    'Le but qui sort de la moyenne',
