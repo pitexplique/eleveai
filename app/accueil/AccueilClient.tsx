@@ -34,7 +34,6 @@ import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import AgendaJournal from "@/components/accueil/AgendaJournal";
 import AbonnementJournal from "@/components/accueil/AbonnementJournal";
 import ReclameLagon from "@/components/accueil/ReclameLagon";
-import { PICTOS, type Picto } from "@/app/picto-maths/data";
 import { getDicteeDuJour, type DicteeMot } from "@/lib/dictee-du-jour/words";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
@@ -269,6 +268,15 @@ const ARTICLES_MATHS_FALLBACK: ArticleRubrique[] = [
     imageUrl: "/images/binomiale-vers-normale.svg",
     lien: "/loi-normale",
     cta: "🔔 Fais grandir n →",
+  },
+  {
+    id: "loi-pareto",
+    titre: "Le but qui sort de la moyenne",
+    accroche:
+      "« On renforce ses défauts, mais ce sont nos qualités qui nous différencient » (Mbappé). En maths : combler ses défauts, c'est la loi normale — on converge vers la moyenne. Mais un record, « meilleur buteur de la Coupe du monde », n'est jamais une moyenne : c'est une valeur extrême, née dans la queue lourde de la loi de Pareto. Pousse le curseur, joue une saison, et regarde les buteurs d'exception surgir.",
+    imageUrl: "/images/pareto-mbappe.svg",
+    lien: "/loi-pareto",
+    cta: "⚽ Fais surgir les records →",
   },
   {
     id: "epsilon",
@@ -1247,100 +1255,41 @@ export default function AccueilPage({
               <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                 🔢 Le chiffre du jour <PastilleJour />
               </p>
-              <p className="mt-1 font-serif text-2xl font-black leading-none">
-                {chiffreDuJour().chiffre}
-              </p>
-              <p className="mt-1.5 text-sm font-medium leading-6 text-[#1d1c16]/80">
-                {chiffreDuJour().texte}
-              </p>
+              {/* Teaser court + « Lire la suite » (demande de Frédéric, 22/07,
+                  comme l'édito) : la 1re phrase (le fait) se lit tout de suite,
+                  la chute s'ouvre dans le dépliant. */}
+              {(() => {
+                const c = chiffreDuJour();
+                const i = c.texte.indexOf(". ");
+                const teaser = i === -1 ? c.texte : c.texte.slice(0, i + 1);
+                const suite = i === -1 ? "" : c.texte.slice(i + 2);
+                return (
+                  <>
+                    <p className="mt-1 font-serif text-2xl font-black leading-none">
+                      {c.chiffre}
+                    </p>
+                    <p className="mt-1.5 text-sm font-medium leading-6 text-[#1d1c16]/80">
+                      {teaser}
+                    </p>
+                    {suite && (
+                      <details className="mt-1">
+                        <summary className="cursor-pointer list-none text-xs font-black text-cyan-800 underline underline-offset-2">
+                          Lire la suite ▾
+                        </summary>
+                        <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
+                          {suite}
+                        </p>
+                      </details>
+                    )}
+                  </>
+                );
+              })()}
             </div>
 
             {/* LE MOT DU JOUR — entre le chiffre et le picto (demande de
                 Frédéric, 22/07) : l'indice se lit ici, le mot s'écoute et
                 s'écrit sur la dictée du jour. */}
             <MotDuJourEncart />
-
-            {/* LE PICTO DU JOUR — déplacé sous le chiffre (demande de
-                Frédéric, 18/07) : la colonne de l'édito était la plus
-                courte, le picto la termine. */}
-            {(() => {
-              const jourReunion = Math.floor(
-                (Date.now() + 4 * 3600 * 1000) / 86400000,
-              );
-              const p: Picto = PICTOS[jourReunion % PICTOS.length];
-              return (
-                <div className="py-3">
-                  {/* COMPACTÉ (demande de Frédéric, 22/07) : question +
-                      dépliant unique. L'image, le coup de pouce et la réponse
-                      s'ouvrent à la demande — la réponse reste SUR PLACE
-                      (règle de l'accueil), mais la colonne respire. */}
-                  <Link href="/picto-maths" className="group block">
-                    <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-                      🖼️ Le picto du jour · {p.notion}
-                    </p>
-                    <h3 className="mt-1 font-serif text-[15px] font-black leading-snug group-hover:underline">
-                      {p.question}
-                    </h3>
-                  </Link>
-                  <p className="mt-0.5 text-xs font-semibold text-[#1d1c16]/55">
-                    {p.emoji} {p.lieu} · {p.niveau} ·{" "}
-                    <Link href="/picto-maths" className="font-black text-cyan-800 hover:underline">
-                      Les 25 pictos →
-                    </Link>
-                  </p>
-                  <details className="mt-1.5">
-                    <summary className="cursor-pointer text-xs font-black text-[#1d1c16]/55 underline underline-offset-2 hover:text-[#1d1c16]">
-                      Voir l&apos;image, le coup de pouce et la réponse ▾
-                    </summary>
-                    {/* L'image : la scène en miniature (icônes + badges). Les
-                        pictos à schéma dessiné montrent leur énoncé à la place. */}
-                    {!p.diagram && p.scene.length > 0 && (
-                      <div className="mt-2 space-y-1 rounded-sm border border-[#1d1c16]/20 bg-white/40 px-2.5 py-2">
-                        {p.scene.map((ligne, i) => (
-                          <div key={i} className="flex flex-wrap items-center gap-1.5">
-                            {ligne.map((c, j) =>
-                              c.t === "ic" ? (
-                                <span key={j} className="text-sm">
-                                  {c.e.repeat(Math.min(c.n ?? 1, 10))}
-                                  {c.cap && (
-                                    <span className="ml-1 text-[10px] font-bold text-[#1d1c16]/60">{c.cap}</span>
-                                  )}
-                                </span>
-                              ) : c.t === "val" ? (
-                                <span key={j} className="rounded-sm border border-[#1d1c16]/30 bg-white/60 px-1.5 py-0.5 text-[11px] font-black">
-                                  {c.v}
-                                  {c.cap && <span className="ml-1 font-bold text-[#1d1c16]/60">{c.cap}</span>}
-                                </span>
-                              ) : c.t === "qm" ? (
-                                <span key={j} className="rounded-sm bg-[#1d1c16] px-1.5 py-0.5 text-[11px] font-black text-[#f6f1e4]">
-                                  ?{c.cap && <span className="ml-1 font-bold opacity-70">{c.cap}</span>}
-                                </span>
-                              ) : (
-                                <span key={j} className="text-[12px] font-black text-[#1d1c16]/70">{c.v}</span>
-                              ),
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {(p.diagram || p.scene.length === 0) && p.enonce && (
-                      <p className="mt-1.5 text-[12.5px] font-medium leading-5 text-[#1d1c16]/70">
-                        {p.enonce}
-                      </p>
-                    )}
-                    <p className="mt-1.5 border-l-2 border-[#1d1c16]/25 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/75">
-                      {p.piste}
-                    </p>
-                    <p className="mt-1 border-l-2 border-cyan-800/40 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/80">
-                      {p.reponse}
-                    </p>
-                    <p className="mt-1.5 text-xs font-medium italic text-[#1d1c16]/50">
-                      👩‍🏫 sur une idée de Valérie
-                    </p>
-                  </details>
-                </div>
-              );
-            })()}
 
             {/* L'APPEL AUX ENTREPRISES — en pied de colonne (demande de
                 Frédéric, 22/07) : le journal invite le réel de l'île à

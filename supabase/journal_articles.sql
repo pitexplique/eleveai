@@ -70,3 +70,18 @@ insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url
    '/exponentielle',
    '🌱 Fais grandir ta vitesse →')
 on conflict (rubrique, lien) do nothing;
+
+-- ── Article 4 (22/07) : le but qui sort de la moyenne — la loi de Pareto ──────
+-- Né d'une phrase de Mbappé (on renforce ses défauts, mais ce sont nos qualités
+-- qui nous différencient). En maths : combler ses défauts, c'est la loi normale
+-- (on converge vers la moyenne) ; cultiver sa qualité rare, c'est la queue
+-- lourde de la loi de Pareto — là où vivent les records. Le contrepoint direct
+-- de /loi-normale. ordre 2 : passe en tête de rubrique.
+insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url, lien, cta) values
+  ('un-peu-de-maths', 2,
+   'Le but qui sort de la moyenne',
+   '« On renforce ses défauts, mais ce sont nos qualités qui nous différencient » (Mbappé). En maths : combler ses défauts, c''est la loi normale — on converge vers la moyenne. Mais un record, « meilleur buteur de la Coupe du monde », n''est jamais une moyenne : c''est une valeur extrême, née dans la queue lourde de la loi de Pareto. Pousse le curseur, joue une saison, et regarde les buteurs d''exception surgir.',
+   '/images/pareto-mbappe.svg',
+   '/loi-pareto',
+   '⚽ Fais surgir les records →')
+on conflict (rubrique, lien) do nothing;
