@@ -20,10 +20,15 @@ export const revalidate = 300;
 // langage de tout le monde. On dit désormais ce qu'on est vraiment : le
 // journal pédagogique de La Réunion, où personne n'apprend à ta place.
 export const metadata: Metadata = {
-  title: "EleveAI — Le journal pour apprendre · La Réunion",
+  title: "Le journal scientifique de La Réunion où les enfants apprennent",
   description:
-    "Pas une plateforme de plus : un journal pédagogique gratuit, né dans une classe de La Réunion. Un coach IA qui explique sans jamais faire à ta place, un défi et une dictée chaque matin, les machines de l'île dans ta main (cyclone, sucrerie, fromagerie) — maths, français, anglais, espagnol et IA, du CP à la Terminale.",
+    "Le journal scientifique gratuit de La Réunion où les enfants apprennent : la science et les maths racontées avec l'île — le volcan, les cyclones, les baleines, le lagon. Un coach IA qui explique sans jamais faire à ta place, un défi et une dictée chaque matin, les machines de l'île dans ta main — du CP à la Terminale. Vulgarisation rigoureuse, chiffres vérifiés.",
   keywords: [
+    "journal scientifique",
+    "journal scientifique La Réunion",
+    "science pour enfants",
+    "vulgarisation scientifique enfants",
+    "sciences La Réunion",
     "journal pédagogique",
     "la réunion",
     "maths collège",
@@ -31,14 +36,12 @@ export const metadata: Metadata = {
     "défi du jour",
     "dictée du jour",
     "simulateur pédagogique",
-    "révision maths",
-    "révision français",
     "eleveai",
   ],
   openGraph: {
-    title: "EleveAI — Le journal pour apprendre · La Réunion",
+    title: "EleveAI — Le journal scientifique de La Réunion où les enfants apprennent",
     description:
-      "Le journal pédagogique gratuit né dans une classe de La Réunion : un coach qui explique sans faire à ta place, un défi chaque matin, les machines de l'île dans ta main. Ici, personne n'apprend à ta place.",
+      "Le journal scientifique gratuit de La Réunion où les enfants apprennent : la science et les maths racontées avec l'île — volcan, cyclones, baleines, lagon. Un coach qui explique sans faire à ta place, un défi chaque matin. Ici, personne n'apprend à ta place.",
     url: "https://eleveai.fr",
     siteName: "EleveAI",
     images: [

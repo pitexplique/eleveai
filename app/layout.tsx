@@ -47,12 +47,12 @@ export const metadata: Metadata = {
   },
 
   title: {
-    default: "EleveAI — Plusieurs portes pour apprendre",
+    default: "EleveAI — Le journal scientifique de La Réunion où les enfants apprennent",
     template: "%s — EleveAI",
   },
 
   description:
-    "EleveAI : un espace avec plusieurs portes d'entrée pour apprendre et suivre la progression des élèves — maths, français, anglais, espagnol et IA. Coach IA, Parcours, Brevet, Calcul rapide, dictée du jour — du CM1 au Bac, à La Réunion.",
+    "Le journal scientifique gratuit de La Réunion où les enfants apprennent : la science et les maths racontées avec l'île — volcan, cyclones, baleines, lagon. Coach IA, défi et dictée du jour, les machines de l'île dans ta main, du CP au Bac. Vulgarisation rigoureuse, chiffres vérifiés.",
 
   keywords: [
     "EleveAI",
@@ -117,9 +117,29 @@ export default function RootLayout({
       "@context": "https://schema.org",
       "@type": "Organization",
       name: "EleveAI",
+      alternateName: "Le journal scientifique de La Réunion",
       url: SITE_URL,
       logo: `${SITE_URL}/preview.jpg`,
-      sameAs: [],
+      description:
+        "Le journal scientifique de La Réunion où les enfants apprennent : vulgarisation rigoureuse des sciences et des mathématiques, ancrée dans le réel de l'île (volcan, cyclones, océan, énergie).",
+      areaServed: { "@type": "Place", name: "La Réunion" },
+      foundingLocation: { "@type": "Place", name: "La Réunion, France" },
+      sameAs: ["https://www.youtube.com/@eleveai-e1h"],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Periodical",
+      name: "Le journal scientifique de La Réunion — EleveAI",
+      url: SITE_URL,
+      inLanguage: "fr-FR",
+      about: [
+        "Science",
+        "Mathématiques",
+        "Vulgarisation scientifique",
+        "La Réunion",
+      ],
+      audience: { "@type": "EducationalAudience", educationalRole: "student" },
+      publisher: { "@type": "Organization", name: "EleveAI" },
     },
     {
       "@context": "https://schema.org",
