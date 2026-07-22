@@ -1197,16 +1197,17 @@ export default function AccueilPage({
               height={72}
               className="mt-3 h-[72px] w-[72px] rounded-full border-2 border-[#1d1c16]/25 object-cover"
             />
-            {/* Le VRAI édito du fondateur (validé par Frédéric, 17/07) :
-                s'ouvre « professeur de mathématiques », se referme
-                « professeur d'élèves » — le manifeste tient dans la distance
-                entre les deux. */}
+            {/* Le VRAI édito du fondateur (réécrit avec Frédéric, 22/07) :
+                l'origine vraie — un soir de juillet, les avis des élèves —
+                s'ouvre sur son nom, se referme « professeur d'élèves ». */}
             <h3 className="mt-2 font-serif text-lg font-black leading-snug">
-              Pourquoi ce journal
+              Un journal éducatif, né un soir de juillet
             </h3>
             <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
-              Je suis professeur de mathématiques à La Réunion. Ce journal est
-              né dans ma classe : on apprend mieux avec ce qu&apos;on a{" "}
+              Je suis Frédéric Lacoste, professeur de mathématiques à La
+              Réunion. Ce journal est né dans ma tête, un soir de juillet — en
+              repensant aux avis de mes élèves, à leurs mots, et à ce qui me
+              ressemble. Une évidence : on apprend mieux avec ce qu&apos;on a{" "}
               <strong className="font-black">sous les yeux</strong> — la pluie,
               la canne, les baleines, le volcan.
             </p>
