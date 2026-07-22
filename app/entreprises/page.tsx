@@ -218,6 +218,30 @@ export default function EntreprisesPage() {
             Racontez votre métier en quelques lignes — Frédéric vous répond
             personnellement.
           </p>
+
+          {/* Contact direct : l'avatar de Frédéric + son numéro (cliquable sur
+              mobile). Certains partenaires préfèrent décrocher plutôt qu'écrire. */}
+          <div className="mt-4 flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.06] p-3 sm:p-4">
+            <Image
+              src="/images/avatar-frederic-Lacoste.jpg"
+              alt="Frédéric Lacoste, fondateur d'EleveAI"
+              width={56}
+              height={56}
+              className="h-12 w-12 shrink-0 rounded-full border-2 border-amber-300/60 object-cover sm:h-14 sm:w-14"
+            />
+            <div>
+              <p className="text-xs font-black uppercase tracking-wide text-white/50">
+                Ou appelez Frédéric directement
+              </p>
+              <a
+                href="tel:+262692742958"
+                className="text-xl font-black tracking-wide text-amber-300 hover:underline sm:text-2xl"
+              >
+                06 92 74 29 58
+              </a>
+            </div>
+          </div>
+
           <div className="mt-4">
             <FormulaireAventure />
           </div>
