@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- La carte de l'article « Plus j'avance, plus ma vitesse augmente » : deux
+     courbes en MIROIR autour de l'axe vertical — e^x qui s'envole (je progresse,
+     ma vitesse grandit avec ma hauteur) et e^(-x) qui s'efface (j'oublie ce que
+     je ne recharge pas). La même loi, dans les deux sens. Tracé au stylo sur une
+     feuille à carreaux, comme la machine des epsilons et la courbe en cloche. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+<defs>
+  <pattern id="carreaux" width="25" height="25" patternUnits="userSpaceOnUse">
+    <rect width="25" height="25" fill="#fcfcf7"/>
+    <path d="M25 0H0V25" fill="none" stroke="#cfe0f2" stroke-width="1"/>
+  </pattern>
+  <style><![CDATA[
+    .encre{stroke:#2b4a9b;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .vert{stroke:#1a7f37;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .ambre{stroke:#b97e12;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .trace{stroke-dasharray:100;stroke-dashoffset:100;animation:trace ease forwards}
+    .pop{opacity:0;animation:pop .7s ease forwards}
+    .main{font-family:'Segoe Print','Bradley Hand',cursive}
+    @keyframes trace{to{stroke-dashoffset:0}}
+    @keyframes pop{to{opacity:1}}
+  ]]></style>
+</defs>
+
+<rect width="800" height="480" fill="url(#carreaux)"/>
+<line x1="26" y1="0" x2="26" y2="480" stroke="#f3b6b6" stroke-width="2" opacity=".7"/>
+
+<!-- l'axe vertical : le miroir -->
+<line class="encre trace" pathLength="100" style="animation-duration:.7s;stroke-width:2;stroke-dasharray:6 7"
+  x1="400" y1="70" x2="400" y2="392"/>
+<!-- la ligne du sol -->
+<line class="encre trace" pathLength="100" style="animation-duration:.9s;animation-delay:.4s;stroke-width:2"
+  x1="120" y1="380" x2="690" y2="380"/>
+
+<!-- e^x : je progresse — ma vitesse grandit avec ma hauteur (monte vers la droite) -->
+<path class="vert trace" pathLength="100" style="animation-duration:2s;animation-delay:1s;stroke-width:3.5"
+  d="M160 374 C 320 362, 360 302, 400 250 S 560 104, 648 74"/>
+<text class="pop main" style="animation-delay:3s;font-size:26px;font-weight:bold;fill:#1a7f37" x="648" y="66">e&#8339;</text>
+<text class="pop main" style="animation-delay:3.2s;font-size:15px;fill:#1a7f37" text-anchor="end" x="384" y="150">je progresse&#8202;:<tspan x="384" dy="19">ma vitesse grandit</tspan><tspan x="384" dy="19">avec ma hauteur</tspan></text>
+
+<!-- e^(-x) : j'oublie ce que je ne recharge pas (mirror, monte vers la gauche) -->
+<path class="ambre trace" pathLength="100" style="animation-duration:2s;animation-delay:1.6s;stroke-width:3.5"
+  d="M640 374 C 480 362, 440 302, 400 250 S 240 104, 152 74"/>
+<text class="pop main" style="animation-delay:3.6s;font-size:26px;font-weight:bold;fill:#b97e12" text-anchor="end" x="152" y="66">e&#8315;&#8339;</text>
+<text class="pop main" style="animation-delay:3.8s;font-size:15px;fill:#b97e12" x="418" y="150">j&#8217;oublie&#8202;:<tspan x="418" dy="19">ce que je ne</tspan><tspan x="418" dy="19">recharge pas s&#8217;efface</tspan></text>
+
+<!-- le point de croisement : (0 ; 1) — le départ commun -->
+<circle class="pop" style="animation-delay:2.6s" cx="400" cy="250" r="6" fill="#2b4a9b"/>
+
+<!-- la devise de la machine : f ' = f -->
+<text class="pop main" style="animation-delay:4.2s;font-size:30px;font-weight:bold;fill:#2b4a9b" text-anchor="middle" x="400" y="416">f &#8242; = f</text>
+<text class="pop main" style="animation-delay:4.8s;font-size:19px;fill:#2b4a9b" text-anchor="middle" x="400" y="446">La m&#234;me loi monte et descend.</text>
+</svg>

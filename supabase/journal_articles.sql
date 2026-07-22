@@ -51,8 +51,22 @@ on conflict (rubrique, lien) do nothing;
 insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url, lien, cta) values
   ('un-peu-de-maths', 5,
    'La courbe en cloche n''est pas tombée du ciel',
-   'L''intuition du prof, au stylo sur une feuille à carreaux : la loi normale est la limite d''une loi à coefficients. Pousse n — l''escalier de la binomiale, dessiné par les coefficients du triangle de Pascal, se lisse en courbe de Gauss. De Moivre l''a prouvé en 1733.',
+   'Tout est parti d''un dessin au stylo sur une feuille à carreaux : une courbe dentelée, une flèche « n → ∞ », une courbe lisse. La loi normale n''est pas un décret — c''est la limite d''une loi à coefficients. Fais grandir n, regarde l''escalier devenir cloche (De Moivre l''a prouvé en 1733), et apprends à ne jamais te juger sur une seule note.',
    '/images/binomiale-vers-normale.svg',
    '/loi-normale',
    '🔔 Fais grandir n →')
+on conflict (rubrique, lien) do nothing;
+
+-- ── Article 3 (22/07) : l'exponentielle en miroir ────────────────────────────
+-- Le pendant de la cloche : deux courbes nées d'un dessin au stylo. La MONTÉE
+-- (e^x — la vitesse proportionnelle à la hauteur, « le plat n'est pas
+-- l'échec ») et la DESCENTE (e^(-x) — la courbe de l'oubli d'Ebbinghaus,
+-- relancée par la révision espacée). ordre 3 : passe en tête de rubrique.
+insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url, lien, cta) values
+  ('un-peu-de-maths', 3,
+   'Plus j''avance, plus ma vitesse augmente',
+   'Tout est parti d''un dessin au stylo : deux courbes en miroir. La montée — ta vitesse grandit avec ta hauteur, le plat du début n''est pas l''échec, c''est l''élan qui se charge. La descente — la courbe de l''oubli, qu''on relance en révisant. Oublier n''est pas un échec, c''est une loi.',
+   '/images/exponentielle-miroir.svg',
+   '/exponentielle',
+   '🌱 Fais grandir ta vitesse →')
 on conflict (rubrique, lien) do nothing;

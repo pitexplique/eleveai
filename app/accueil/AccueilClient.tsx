@@ -252,10 +252,19 @@ export type ArticleRubrique = {
 // des epsilons (la devise du site, à faire découvrir).
 const ARTICLES_MATHS_FALLBACK: ArticleRubrique[] = [
   {
+    id: "exponentielle",
+    titre: "Plus j'avance, plus ma vitesse augmente",
+    accroche:
+      "Tout est parti d'un dessin au stylo : deux courbes en miroir. La montée — ta vitesse grandit avec ta hauteur, le plat du début n'est pas l'échec, c'est l'élan qui se charge. La descente — la courbe de l'oubli, qu'on relance en révisant. Oublier n'est pas un échec, c'est une loi.",
+    imageUrl: "/images/exponentielle-miroir.svg",
+    lien: "/exponentielle",
+    cta: "🌱 Fais grandir ta vitesse →",
+  },
+  {
     id: "loi-normale",
     titre: "La courbe en cloche n'est pas tombée du ciel",
     accroche:
-      "L'intuition du prof, au stylo sur une feuille à carreaux : la loi normale est la limite d'une loi à coefficients. Pousse n — l'escalier de la binomiale, dessiné par les coefficients du triangle de Pascal, se lisse en courbe de Gauss. De Moivre l'a prouvé en 1733.",
+      "Tout est parti d'un dessin au stylo sur une feuille à carreaux : une courbe dentelée, une flèche « n → ∞ », une courbe lisse. La loi normale n'est pas un décret — c'est la limite d'une loi à coefficients. Fais grandir n, regarde l'escalier devenir cloche (De Moivre l'a prouvé en 1733), et apprends à ne jamais te juger sur une seule note.",
     imageUrl: "/images/binomiale-vers-normale.svg",
     lien: "/loi-normale",
     cta: "🔔 Fais grandir n →",
