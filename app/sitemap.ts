@@ -224,6 +224,16 @@ const ROUTES: RouteConfig[] = [
   // La courbe en cloche (21/07) — de la binomiale (les coefficients de Pascal)
   // à la loi normale : le théorème de De Moivre-Laplace dans un curseur.
   { path: "/loi-normale", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-21") },
+  // L'exponentielle en miroir (22/07) — la montée (e^x) et la descente (courbe
+  // de l'oubli d'Ebbinghaus) : deux courbes nées d'un dessin au stylo.
+  { path: "/exponentielle", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-22") },
+  // La loi de la performance (22/07) — le neurone du dessin de Mbappé : ADN →
+  // variables x → coefficients → réseau → performance. « Faut-il améliorer ses
+  // défauts ou ses qualités ? »
+  { path: "/loi-performance", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-22") },
+  // Le but qui sort de la moyenne (22/07) — la loi de Pareto : la queue lourde
+  // où naissent les records, opposée à la cloche de la loi normale.
+  { path: "/loi-pareto", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-22") },
   { path: "/picto-maths",     priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/carte",           priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/cahier-vacances/maths", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_974 },
