@@ -153,16 +153,23 @@ export default function ExponentielleClient() {
     const tan = (t: number) => hA + g * hA * (t - tA);
     const tL = Math.max(0, tA - 0.55);
     const tR = Math.min(TA, tA + 0.55);
+    const tanX1 = xs(tL);
+    const tanY1 = ys(tan(tL));
+    const tanX2 = xs(tR);
+    const tanY2 = ys(tan(tR));
+    // l'angle de la pente : la voiture se cabre à mesure que ça grimpe
+    const angle = (Math.atan2(tanY2 - tanY1, tanX2 - tanX1) * 180) / Math.PI;
     return {
       xs,
       ys,
       courbe,
       px,
       py,
-      tanX1: xs(tL),
-      tanY1: ys(tan(tL)),
-      tanX2: xs(tR),
-      tanY2: ys(tan(tR)),
+      tanX1,
+      tanY1,
+      tanX2,
+      tanY2,
+      angle,
       ratio: hA, // vitesse ici ÷ vitesse au départ = h(tA)/h(0) = hA
     };
   }, [g, tA]);
@@ -350,11 +357,19 @@ export default function ExponentielleClient() {
               strokeWidth="3.5"
               strokeLinecap="round"
             />
-            {/* le point « où j'en suis » */}
-            <circle cx={montee.px} cy={montee.py} r="8" fill={ENCRE} />
+            {/* LA VOITURE « où j'en suis » : elle se cabre à mesure que ça grimpe */}
+            <g transform={`translate(${montee.px} ${montee.py}) rotate(${montee.angle})`}>
+              <rect x="-26" y="-26" width="52" height="15" rx="4" fill={VERT} stroke="#0f5a26" strokeWidth="2" />
+              <path d="M-13 -26 L-5 -37 L13 -37 L21 -26 Z" fill={VERT} stroke="#0f5a26" strokeWidth="2" strokeLinejoin="round" />
+              <rect x="-7" y="-36" width="15" height="9" rx="2" fill="#fcfcf7" opacity="0.9" />
+              <circle cx="-14" cy="-8" r="6.5" fill="#26324a" />
+              <circle cx="14" cy="-8" r="6.5" fill="#26324a" />
+              <circle cx="-14" cy="-8" r="2" fill="#cfe0f2" />
+              <circle cx="14" cy="-8" r="2" fill="#cfe0f2" />
+            </g>
             <text
-              x={Math.min(montee.px + 14, 900)}
-              y={Math.max(montee.py - 12, 26)}
+              x={Math.min(montee.px + 30, 850)}
+              y={Math.max(montee.py - 48, 26)}
               fontSize={modeClasse ? 22 : 17}
               fontWeight={800}
               fill={OR}
