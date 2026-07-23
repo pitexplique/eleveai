@@ -28,6 +28,8 @@ const COLONNES = {
       "id, code_etablissement, code_utilisateur, nom, classe, niveau, matiere, defi_id, titre_defi, theme, direction_id, direction_label, direction_type, score, total, pourcentage, reponse_eleve, reponse_attendue, details, created_at",
     english_maths:
       "id, code_etablissement, code_utilisateur, nom, niveau, jour, theme, score, total, pourcentage, created_at",
+    dictee:
+      "id, code_etablissement, code_utilisateur, nom, classe, score, total, pourcentage, details, created_at",
     tutor:
       "id, code_etablissement, code_utilisateur, nom, classe, matiere, notion_id, mode, score_sur_20, earned_points, possible_points, bonnes_reponses, nb_tentatives, temps_sec, details, created_at",
   },
@@ -40,6 +42,8 @@ const COLONNES = {
       "id, code_etablissement, code_utilisateur, nom, titre_defi, theme, score, total, pourcentage, created_at",
     english_maths:
       "id, code_etablissement, code_utilisateur, nom, jour, theme, score, total, pourcentage, created_at",
+    dictee:
+      "id, code_etablissement, code_utilisateur, nom, classe, score, total, pourcentage, created_at",
     tutor:
       "id, code_etablissement, code_utilisateur, nom, classe, notion_id, mode, score_sur_20, bonnes_reponses, nb_tentatives, details, created_at",
   },
@@ -88,6 +92,7 @@ export async function GET(req: Request) {
     calculRes,
     defisRes,
     englishRes,
+    dicteeRes,
     tutorRes,
   ] = await Promise.all([
     etabScope
@@ -107,6 +112,7 @@ export async function GET(req: Request) {
     query("resultats_calcul_rapide", cols.calcul_rapide),
     query("resultats_defis_jour", cols.defis_jour),
     query("resultats_english_maths", cols.english_maths),
+    query("resultats_dictee", cols.dictee),
     query("resultats_tutor", cols.tutor),
   ]);
 
@@ -163,6 +169,7 @@ export async function GET(req: Request) {
       calcul_rapide: calculRes.data ?? [],
       defis_jour: defisRes.data ?? [],
       english_maths: englishRes.data ?? [],
+      dictee: dicteeRes.error ? [] : dicteeRes.data ?? [],
       tutor: tutorRes.data ?? [],
     },
   });

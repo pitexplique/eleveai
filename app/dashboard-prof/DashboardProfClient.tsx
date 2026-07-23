@@ -50,6 +50,7 @@ type ResultatParcours = ResultatBase & { classe: string | null; niveau: string |
 type ResultatCalculRapide = ResultatBase & { classe: string | null; niveau: string | null; matiere: string; titre_session: string | null; theme: string | null };
 type ResultatDefiJour = ResultatBase & { titre_defi: string; theme: string | null };
 type ResultatEnglish = ResultatBase & { jour: number | null; theme: string | null };
+type ResultatDictee = ResultatBase & { classe: string | null };
 type ResultatTutor = ResultatBase & { classe: string; notion_id: string; mode: string | null; score_sur_20: number | null; bonnes_reponses: number; nb_tentatives: number; details?: unknown };
 
 type RevisionFocusRow = {
@@ -68,12 +69,14 @@ type EleveSynthese = {
   calculs: ResultatCalculRapide[];
   defis: ResultatDefiJour[];
   english: ResultatEnglish[];
+  dictees: ResultatDictee[];
   tutor: ResultatTutor[];
   totalActivites: number;
   dernierParcours: ResultatParcours | null;
   dernierCalcul: ResultatCalculRapide | null;
   dernierDefi: ResultatDefiJour | null;
   dernierEnglish: ResultatEnglish | null;
+  dernierDictee: ResultatDictee | null;
   dernierTutor: ResultatTutor | null;
   aReviser: RevisionFocusRow[];
   moyenneGlobale: number | null;
@@ -203,6 +206,7 @@ export default function DashboardProfClient() {
   const [resultatsCalculRapide, setResultatsCalculRapide] = useState<ResultatCalculRapide[]>([]);
   const [resultatsDefisJour, setResultatsDefisJour] = useState<ResultatDefiJour[]>([]);
   const [resultatsEnglish, setResultatsEnglish] = useState<ResultatEnglish[]>([]);
+  const [resultatsDictee, setResultatsDictee] = useState<ResultatDictee[]>([]);
   const [resultatsTutor, setResultatsTutor] = useState<ResultatTutor[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [selectedEleve, setSelectedEleve] = useState<string | null>(null);
@@ -285,6 +289,7 @@ export default function DashboardProfClient() {
         setResultatsCalculRapide((r.calcul_rapide ?? []) as ResultatCalculRapide[]);
         setResultatsDefisJour((r.defis_jour ?? []) as ResultatDefiJour[]);
         setResultatsEnglish((r.english_maths ?? []) as ResultatEnglish[]);
+        setResultatsDictee((r.dictee ?? []) as ResultatDictee[]);
         setResultatsTutor((r.tutor ?? []) as ResultatTutor[]);
       } catch (err) {
         console.error(err);
@@ -303,26 +308,28 @@ export default function DashboardProfClient() {
       const calculs = resultatsCalculRapide.filter((r) => r.code_utilisateur === eleve.code_utilisateur);
       const defis = resultatsDefisJour.filter((r) => r.code_utilisateur === eleve.code_utilisateur);
       const english = resultatsEnglish.filter((r) => r.code_utilisateur === eleve.code_utilisateur);
+      const dictees = resultatsDictee.filter((r) => r.code_utilisateur === eleve.code_utilisateur);
       const tutor = resultatsTutor.filter((r) => r.code_utilisateur === eleve.code_utilisateur);
 
-      const allResults = [...parcours, ...calculs, ...defis, ...english];
+      const allResults = [...parcours, ...calculs, ...defis, ...english, ...dictees];
 
       return {
         code_utilisateur: eleve.code_utilisateur,
         nom: eleve.nom ?? "Élève sans nom",
         actif: eleve.actif,
-        parcours, calculs, defis, english, tutor,
+        parcours, calculs, defis, english, dictees, tutor,
         totalActivites: allResults.length + tutor.length,
         dernierParcours: getLast(parcours),
         dernierCalcul: getLast(calculs),
         dernierDefi: getLast(defis),
         dernierEnglish: getLast(english),
+        dernierDictee: getLast(dictees),
         dernierTutor: getLast(tutor),
         aReviser: aggregateAReviser(tutor),
         moyenneGlobale: getAveragePct(allResults),
       };
     });
-  }, [eleves, resultatsParcours, resultatsCalculRapide, resultatsDefisJour, resultatsEnglish, resultatsTutor]);
+  }, [eleves, resultatsParcours, resultatsCalculRapide, resultatsDefisJour, resultatsEnglish, resultatsDictee, resultatsTutor]);
 
   // Élèves enrichis du statut d'engagement, triés (moins actifs d'abord).
   const debutMs = useMemo(() => {
@@ -355,8 +362,8 @@ export default function DashboardProfClient() {
 
   const totalEleves = eleves.length;
   const totalActifs = syntheses.filter((s) => s.totalActivites > 0).length;
-  const totalActivites = resultatsParcours.length + resultatsCalculRapide.length + resultatsDefisJour.length + resultatsEnglish.length + resultatsTutor.length;
-  const moyenneEtab = getAveragePct([...resultatsParcours, ...resultatsCalculRapide, ...resultatsDefisJour, ...resultatsEnglish]);
+  const totalActivites = resultatsParcours.length + resultatsCalculRapide.length + resultatsDefisJour.length + resultatsEnglish.length + resultatsDictee.length + resultatsTutor.length;
+  const moyenneEtab = getAveragePct([...resultatsParcours, ...resultatsCalculRapide, ...resultatsDefisJour, ...resultatsEnglish, ...resultatsDictee]);
 
   const eleveDetail = selectedEleve ? syntheses.find((s) => s.code_utilisateur === selectedEleve) ?? null : null;
 
@@ -609,6 +616,7 @@ export default function DashboardProfClient() {
                                     { label: "Dernier calcul", value: s.dernierCalcul ? `${s.dernierCalcul.score}/${s.dernierCalcul.total} · ${formatDate(s.dernierCalcul.created_at)}` : "—" },
                                     { label: "Dernier défi", value: s.dernierDefi ? `${s.dernierDefi.score}/${s.dernierDefi.total} · ${formatDate(s.dernierDefi.created_at)}` : "—" },
                                     { label: "Dernier English", value: s.dernierEnglish ? `${s.dernierEnglish.score}/${s.dernierEnglish.total} · ${s.dernierEnglish.theme ?? ""}` : "—" },
+                                    { label: "Dernière dictée", value: s.dernierDictee ? `${s.dernierDictee.score}/${s.dernierDictee.total} · ${formatDate(s.dernierDictee.created_at)}` : "—" },
                                     { label: "Dernier Coach", value: s.dernierTutor ? `${s.dernierTutor.score_sur_20 ?? "??"}/20 · ${s.dernierTutor.notion_id}` : "—" },
                                   ].map((d) => (
                                     <div key={d.label} className="rounded-2xl bg-white p-3 shadow-sm">
@@ -724,6 +732,27 @@ export default function DashboardProfClient() {
                         <span className="rounded-full bg-indigo-100 px-3 py-1 text-xs font-black text-indigo-800">
                           {r.score_sur_20 ?? "—"}/20
                         </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="rounded-[2rem] bg-white p-6 text-slate-950 shadow-xl">
+                <h2 className="mb-4 text-xl font-black">✍️ Dernières dictées du jour</h2>
+                {resultatsDictee.length === 0 ? (
+                  <p className="text-sm font-bold text-slate-400">Aucune dictée enregistrée.</p>
+                ) : (
+                  <div className="space-y-2">
+                    {resultatsDictee.slice(0, 6).map((r) => (
+                      <div key={r.id} className="flex items-center justify-between rounded-2xl bg-slate-50 px-4 py-3">
+                        <div>
+                          <p className="text-sm font-black">{r.nom ?? r.code_utilisateur}</p>
+                          <p className="text-xs font-bold text-slate-500">
+                            {r.classe ? `${r.classe} · ` : ""}{formatDate(r.created_at)}
+                          </p>
+                        </div>
+                        <PctBadge pct={getPct(r.score, r.total)} />
                       </div>
                     ))}
                   </div>

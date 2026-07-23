@@ -96,6 +96,19 @@ type ResultatEnglishMaths = {
   created_at: string;
 };
 
+type ResultatDictee = {
+  id: string;
+  code_etablissement: string;
+  code_utilisateur: string;
+  nom: string | null;
+  classe: string | null;
+  score: number;
+  total: number;
+  pourcentage: number | null;
+  details: unknown;
+  created_at: string;
+};
+
 type ResultatDefiJour = {
   id: string;
   code_etablissement: string;
@@ -211,6 +224,7 @@ export default function DashboardEleveClient() {
   >([]);
 
   const [resultatsEnglish, setResultatsEnglish] = useState<ResultatEnglishMaths[]>([]);
+  const [resultatsDictee, setResultatsDictee] = useState<ResultatDictee[]>([]);
   const [resultatsTutor, setResultatsTutor] = useState<ResultatTutor[]>([]);
   const [pointsAvis, setPointsAvis] = useState(0);
   const [messagesProf, setMessagesProf] = useState<MessageProf[]>([]);
@@ -282,6 +296,8 @@ export default function DashboardEleveClient() {
 
         setResultatsEnglish((r.english_maths ?? []) as ResultatEnglishMaths[]);
 
+        setResultatsDictee((r.dictee ?? []) as ResultatDictee[]);
+
         setResultatsTutor((r.tutor ?? []) as ResultatTutor[]);
 
         setPointsAvis(typeof data.pointsAvis === "number" ? data.pointsAvis : 0);
@@ -346,6 +362,9 @@ export default function DashboardEleveClient() {
   const dernierEnglish = resultatsEnglish[0] ?? null;
   const meilleurEnglish = useMemo(() => getBest(resultatsEnglish), [resultatsEnglish]);
 
+  const dernierDictee = resultatsDictee[0] ?? null;
+  const meilleurDictee = useMemo(() => getBest(resultatsDictee), [resultatsDictee]);
+
   const dernierTutor = resultatsTutor[0] ?? null;
   const meilleurTutor = useMemo(
     () => resultatsTutor.length === 0 ? null : [...resultatsTutor].sort((a, b) => (b.score_sur_20 ?? 0) - (a.score_sur_20 ?? 0))[0],
@@ -375,6 +394,7 @@ export default function DashboardEleveClient() {
     resultatsCalculRapide.length +
     resultatsDefisJour.length +
     resultatsEnglish.length +
+    resultatsDictee.length +
     resultatsTutor.length;
 
   if (!eleve) {
@@ -765,6 +785,29 @@ export default function DashboardEleveClient() {
                 ) : null}
               </div>
 
+              <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-rose-100">
+                <p className="text-sm font-black uppercase text-rose-700">
+                  Dernière dictée
+                </p>
+                <p className="mt-3 text-3xl font-black">
+                  {dernierDictee ? `${dernierDictee.score} / ${dernierDictee.total}` : "—"}
+                </p>
+                {dernierDictee ? (
+                  <p className="mt-2 text-sm font-bold text-slate-500">
+                    {formatDate(dernierDictee.created_at)}
+                    {meilleurDictee
+                      ? ` · record ${meilleurDictee.score}/${meilleurDictee.total}`
+                      : ""}
+                  </p>
+                ) : (
+                  <p className="mt-2 text-sm font-bold text-slate-500">
+                    <Link href="/dictee-du-jour" className="text-rose-700 underline underline-offset-2">
+                      Faire la dictée du jour →
+                    </Link>
+                  </p>
+                )}
+              </div>
+
               <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-purple-100">
                 <p className="text-sm font-black uppercase text-purple-700">
                   Activités
@@ -773,7 +816,7 @@ export default function DashboardEleveClient() {
                 <p className="mt-3 text-3xl font-black">{totalActivites}</p>
 
                 <p className="mt-2 text-sm font-bold text-slate-500">
-                  Parcours + calcul + défis + English
+                  Parcours + calcul + défis + English + dictée
                 </p>
               </div>
             </div>
@@ -1222,6 +1265,13 @@ export default function DashboardEleveClient() {
                 className="rounded-2xl bg-sky-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-sky-500"
               >
                 English Maths
+              </Link>
+
+              <Link
+                href="/dictee-du-jour"
+                className="rounded-2xl bg-rose-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-rose-500"
+              >
+                Dictée du jour
               </Link>
             </div>
           </>
