@@ -126,7 +126,7 @@ const MATIERES = [
   { icon: "🇬🇧", label: "Anglais", desc: "Comprendre, parler, progresser", href: "/coach-ia/english-maths", cm: true },
   { icon: "🇪🇸", label: "Espagnol", desc: "Comprendre, parler, découvrir", href: "/coach-ia/espagnol", cm: false },
   { icon: "🤖", label: "IA", desc: "Comprendre et maîtriser l'IA", href: "/coach-ia/ia", cm: false },
-  { icon: "📊", label: "Économie", desc: "Comprendre le monde économique", href: "/coach-ia/economie", cm: false },
+  // Économie masquée de la grille le 23/07 (pas assez fournie) ; route gardée.
 ];
 
 const PARCOURS = [

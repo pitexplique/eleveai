@@ -62,12 +62,10 @@ const NAV_IA = [
   { href: "/coach-ia/ia?classe=c1", icon: "C1", label: "C1 Projet", desc: "Concevoir un projet utile" },
 ];
 
-const NAV_ECONOMIE = [
-  { href: "/coach-ia/economie",                          icon: "💰", label: "Coach Économie IA",    desc: "Séries d'exercices : entreprise, marché, travail, fiscalité"  },
-  { href: "/coach-ia/economie?classe=eco-decouverte",    icon: "🌱", label: "Découverte",            desc: "Budget famille, argent, épargne"         },
-  { href: "/coach-ia/economie?classe=eco-college",       icon: "🏫", label: "Collège",               desc: "Entreprise, marché, fiscalité, élections" },
-  { href: "/coach-ia/economie?classe=eco-lycee",         icon: "🎓", label: "Lycée",                 desc: "Macro-économie, politiques publiques"    },
-];
+// Économie MASQUÉE du menu le 23/07 (coach pas assez fourni — décision de
+// Frédéric). La route /coach-ia/economie reste accessible (lien direct +
+// sitemap). Pour la re-sortir : rétablir ce NAV_ECONOMIE + son entrée dans
+// MATIERES (desktop) et sa MobileSection, et la carte de la grille accueil.
 
 const NAV_PARCOURS = [
   { href: "/parcours",               icon: "🛤️", label: "Parcours Maths",    desc: "Bilan de compétences personnalisé" },
@@ -98,7 +96,6 @@ const MATIERES: { label: string; accent: string; items: NavItem[] }[] = [
   { label: "Anglais",  accent: "text-blue-300",   items: NAV_ANGLAIS },
   { label: "Espagnol", accent: "text-red-300",    items: NAV_ESPAGNOL },
   { label: "IA",       accent: "text-cyan-300",   items: NAV_IA },
-  { label: "Économie", accent: "text-amber-300",  items: NAV_ECONOMIE },
 ];
 
 function MatieresMenu({ pathname, paper }: { pathname: string; paper: boolean }) {
@@ -554,7 +551,6 @@ export default function Header() {
                 <MobileSection title="Anglais"  accent="text-blue-300"   items={NAV_ANGLAIS}  pathname={pathname} paper={paper} />
                 <MobileSection title="Espagnol" accent="text-red-300"    items={NAV_ESPAGNOL} pathname={pathname} paper={paper} />
                 <MobileSection title="IA"       accent="text-cyan-300"   items={NAV_IA}       pathname={pathname} paper={paper} />
-                <MobileSection title="Économie" accent="text-amber-300"  items={NAV_ECONOMIE} pathname={pathname} paper={paper} />
               </div>
             ) : (
               /* Sinon → les 4 portes d'audience */
