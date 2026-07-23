@@ -252,6 +252,15 @@ export type ArticleRubrique = {
 // des epsilons (la devise du site, à faire découvrir).
 const ARTICLES_MATHS_FALLBACK: ArticleRubrique[] = [
   {
+    id: "diagonale-des-fous",
+    titre: "La Diagonale des Fous : doser, ou taper le mur",
+    accroche:
+      "165 km à travers l'île, barrière à 66 h. Ta réserve se vide au carré de l'effort et avec la pente — c'est une équation différentielle. Pars trop fort, tu tapes le mur avant l'arrivée ; trop doucement, la barrière te rattrape. Règle l'allure, lance la course, et cherche le dosage qui vide la réserve pile à Saint-Denis.",
+    imageUrl: "/images/diagonale-des-fous.svg",
+    lien: "/diagonale-des-fous",
+    cta: "🏃 Lance la course →",
+  },
+  {
     id: "exponentielle",
     titre: "Plus j'avance, plus ma vitesse augmente",
     accroche:
@@ -1160,6 +1169,7 @@ export default function AccueilPage({
                   🎛️ Les autres machines dans ta main
                 </p>
                 {[
+                  { emoji: "🏃", nom: "La Diagonale des Fous", href: "/diagonale-des-fous", cta: "Doser ta course" },
                   { emoji: "🧠", nom: "La loi de la performance", href: "/loi-performance", cta: "Régler tes coefficients" },
                   { emoji: "⚽", nom: "Le but qui sort de la moyenne", href: "/loi-pareto", cta: "Faire surgir les records" },
                   { emoji: "🌋", nom: "Le volcan de la Fournaise", href: "/simulateur-volcan", cta: "Régler la lave" },

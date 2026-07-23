@@ -101,3 +101,18 @@ insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url
    '/loi-pareto',
    '⚽ Fais surgir les records →')
 on conflict (rubrique, lien) do nothing;
+
+-- ── Article 6 (23/07) : la Diagonale des Fous — une équation différentielle ────
+-- Le Grand Raid de La Réunion en maths : la réserve du coureur se vide au CARRÉ
+-- de l'effort et avec la pente (dR/dt = −c·effort²·(1+pente)), intégrée pas à
+-- pas (méthode d'Euler). Trop vite = le mur avant l'arrivée ; trop lent = la
+-- barrière des 66 h ; le bon dosage vide la réserve pile à Saint-Denis. Image +
+-- réglage + résultat sur un seul écran. ordre 0 : passe en tête de rubrique.
+insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url, lien, cta) values
+  ('un-peu-de-maths', 0,
+   'La Diagonale des Fous : doser, ou taper le mur',
+   '165 km à travers l''île, barrière à 66 h. Ta réserve se vide au carré de l''effort et avec la pente — c''est une équation différentielle. Pars trop fort, tu tapes le mur avant l''arrivée ; trop doucement, la barrière te rattrape. Règle l''allure, lance la course, et cherche le dosage qui vide la réserve pile à Saint-Denis.',
+   '/images/diagonale-des-fous.svg',
+   '/diagonale-des-fous',
+   '🏃 Lance la course →')
+on conflict (rubrique, lien) do nothing;

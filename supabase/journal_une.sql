@@ -65,3 +65,16 @@ insert into public.journal_une (ordre, kicker, titre, accroche, youtube_id, imag
       'Gratuits, imprimables, avec Ti Margo : chaque cahier est un voyage — l''île, l''océan Indien, l''espace... et les maths du niveau suivant.',
       null, '/images/accueil-eleveai-reunion.webp', '/cahier-vacances', '🏖️ Imprimer son cahier →', null)
 on conflict do nothing;
+
+-- ── Slide ajouté le 23/07 : la Diagonale des Fous (une machine « Un peu de
+-- maths ») ─────────────────────────────────────────────────────────────────────
+-- ⚠️ La table n'a pas de contrainte d'unicité : NE PAS rejouer tout le fichier
+-- (les 6 slides du haut se dupliqueraient). Sur une base déjà semée, exécuter
+-- UNIQUEMENT l'INSERT ci-dessous. ordre 5 : passe en tête du carrousel.
+insert into public.journal_une (ordre, kicker, titre, accroche, youtube_id, image_url, lien, cta, defi) values
+  (5, 'Réfléchir · Un peu de maths',
+      'La Diagonale des Fous : l''équation du dosage',
+      'Le Grand Raid en équation différentielle : ta réserve se vide au carré de l''effort et avec la pente. Pars trop fort, tu tapes le mur avant l''arrivée ; le bon dosage la vide pile à Saint-Denis. Règle l''allure, lance la course.',
+      null, '/images/diagonale-des-fous.svg', '/diagonale-des-fous', '🏃 Lance la course →',
+      'la vitesse moyenne — 132 km en 44 h, combien de km/h ?')
+on conflict do nothing;

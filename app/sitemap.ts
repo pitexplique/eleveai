@@ -234,6 +234,9 @@ const ROUTES: RouteConfig[] = [
   // Le but qui sort de la moyenne (22/07) — la loi de Pareto : la queue lourde
   // où naissent les records, opposée à la cloche de la loi normale.
   { path: "/loi-pareto", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-22") },
+  // La Diagonale des Fous (23/07) — l'équation différentielle du coureur : la
+  // réserve se vide au carré de l'effort et avec la pente (méthode d'Euler).
+  { path: "/diagonale-des-fous", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-23") },
   { path: "/picto-maths",     priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/carte",           priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/cahier-vacances/maths", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_974 },
