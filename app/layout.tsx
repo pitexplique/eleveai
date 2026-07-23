@@ -81,9 +81,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "EleveAI — Plusieurs portes pour apprendre",
+    title: "EleveAI — Le journal scientifique de La Réunion où les enfants comprennent et s'entraînent",
     description:
-      "Maths, français, anglais, espagnol et IA : EleveAI accompagne les élèves du CM1 au Bac avec un coach IA, des parcours et un suivi de progression.",
+      "Le journal scientifique gratuit de La Réunion : comprendre l'île (volcan, cyclones, baleines) et s'entraîner avec un coach qui explique sans faire à ta place, des exercices corrigés, du CP au Bac.",
     url: CANONICAL,
     type: "website",
     siteName: "EleveAI",
@@ -93,16 +93,16 @@ export const metadata: Metadata = {
         url: "/preview.jpg",
         width: 1200,
         height: 630,
-        alt: "EleveAI — plateforme pédagogique, conçue à La Réunion",
+        alt: "EleveAI — le journal scientifique de La Réunion où les enfants comprennent et s'entraînent",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "EleveAI — Comprendre, s'entraîner, progresser",
+    title: "EleveAI — Comprendre l'île, s'entraîner avec un coach",
     description:
-      "Maths, français, anglais, espagnol et IA : progresser avec un coach IA, des entraînements courts, réguliers et guidés.",
+      "Le journal scientifique de La Réunion : comprendre les sciences avec le volcan, les cyclones, l'océan — et s'entraîner avec un coach qui explique sans faire à ta place, tout corrigé.",
     images: ["/preview.jpg"],
   },
 };
