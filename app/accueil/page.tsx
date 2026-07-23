@@ -20,9 +20,9 @@ export const revalidate = 300;
 // langage de tout le monde. On dit désormais ce qu'on est vraiment : le
 // journal pédagogique de La Réunion, où personne n'apprend à ta place.
 export const metadata: Metadata = {
-  title: "Le journal scientifique de La Réunion où les enfants apprennent",
+  title: "Le journal scientifique de La Réunion où les enfants comprennent et s'entraînent",
   description:
-    "Le journal scientifique gratuit de La Réunion où les enfants apprennent : la science et les maths racontées avec l'île — le volcan, les cyclones, les baleines, le lagon. Un coach IA qui explique sans jamais faire à ta place, un défi et une dictée chaque matin, les machines de l'île dans ta main — du CP à la Terminale. Vulgarisation rigoureuse, chiffres vérifiés.",
+    "Le journal scientifique gratuit de La Réunion où les enfants comprennent l'île et s'entraînent : la science et les maths racontées avec le volcan, les cyclones, les baleines — et un coach IA qui explique sans jamais faire à ta place, des séries d'exercices corrigées, un défi et une dictée chaque matin. Du CP à la Terminale. Vulgarisation rigoureuse, chiffres vérifiés.",
   keywords: [
     "journal scientifique",
     "journal scientifique La Réunion",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
     "eleveai",
   ],
   openGraph: {
-    title: "EleveAI — Le journal scientifique de La Réunion où les enfants apprennent",
+    title: "Le journal scientifique de La Réunion où les enfants comprennent et s'entraînent",
     description:
-      "Le journal scientifique gratuit de La Réunion où les enfants apprennent : la science et les maths racontées avec l'île — volcan, cyclones, baleines, lagon. Un coach qui explique sans faire à ta place, un défi chaque matin. Ici, personne n'apprend à ta place.",
+      "Le journal scientifique gratuit de La Réunion : comprendre l'île (volcan, cyclones, baleines) et s'entraîner avec un coach qui explique sans faire à ta place, tout corrigé. Ici, personne n'apprend à ta place.",
     url: "https://eleveai.fr",
     siteName: "EleveAI",
     images: [
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
         url: "/images/accueil-eleveai-reunion.webp",
         width: 1680,
         height: 945,
-        alt: "EleveAI — Le journal pour apprendre, né à La Réunion",
+        alt: "EleveAI — le journal scientifique de La Réunion où les enfants comprennent et s'entraînent",
       },
     ],
     locale: "fr_FR",

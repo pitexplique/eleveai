@@ -47,12 +47,12 @@ export const metadata: Metadata = {
   },
 
   title: {
-    default: "EleveAI — Le journal scientifique de La Réunion où les enfants apprennent",
+    default: "EleveAI — Le journal scientifique de La Réunion où les enfants comprennent et s'entraînent",
     template: "%s — EleveAI",
   },
 
   description:
-    "Le journal scientifique gratuit de La Réunion où les enfants apprennent : la science et les maths racontées avec l'île — volcan, cyclones, baleines, lagon. Coach IA, défi et dictée du jour, les machines de l'île dans ta main, du CP au Bac. Vulgarisation rigoureuse, chiffres vérifiés.",
+    "Le journal scientifique gratuit de La Réunion où les enfants comprennent l'île et s'entraînent : la science et les maths racontées avec le volcan, les cyclones, les baleines — et un coach IA qui explique sans faire à ta place, des séries d'exercices corrigées, un défi et une dictée du jour. Du CP au Bac. Vulgarisation rigoureuse, chiffres vérifiés.",
 
   keywords: [
     "EleveAI",
@@ -121,7 +121,7 @@ export default function RootLayout({
       url: SITE_URL,
       logo: `${SITE_URL}/preview.jpg`,
       description:
-        "Le journal scientifique de La Réunion où les enfants apprennent : vulgarisation rigoureuse des sciences et des mathématiques, ancrée dans le réel de l'île (volcan, cyclones, océan, énergie).",
+        "Le journal scientifique de La Réunion où les enfants comprennent et s'entraînent : vulgarisation rigoureuse des sciences et des mathématiques ancrée dans le réel de l'île (volcan, cyclones, océan, énergie), et un coach qui explique sans faire à ta place avec des exercices corrigés.",
       areaServed: { "@type": "Place", name: "La Réunion" },
       foundingLocation: { "@type": "Place", name: "La Réunion, France" },
       sameAs: ["https://www.youtube.com/@eleveai-e1h"],
