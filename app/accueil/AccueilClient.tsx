@@ -1647,6 +1647,12 @@ export default function AccueilPage({
       <section id="un-peu-de-maths" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
         <Kicker>Réfléchir · La rubrique du prof</Kicker>
         <TitreRubrique>Un peu de maths</TitreRubrique>
+        {/* Sous-titre qui POSE L'ATTENTE (demande de Frédéric, 23/07) : le hook
+            est tous âges, mais le fond va loin — personne ne se sent exclu, et
+            les grands savent que c'est pour eux. */}
+        <p className="mt-2 text-sm font-semibold text-[#1d1c16]/60">
+          Des histoires pour tous, des maths qui vont loin — collège → supérieur.
+        </p>
         <div className="mt-4 grid gap-x-6 gap-y-6 sm:grid-cols-2">
           {unPeuDeMaths.map((a) => {
             const externe = /^https?:\/\//.test(a.lien);
