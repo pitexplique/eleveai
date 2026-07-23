@@ -12,7 +12,7 @@ Bonjour à toutes et à tous,
 
 Je travaille depuis quelque temps sur une plateforme d'accompagnement pour nos élèves (révisions, entraînement, devoirs maison) et j'aimerais la partager avec vous. C'est un projet auquel j'ai déjà consacré **plus de 350 heures de développement**, tant il me tient à cœur.
 
-Elle couvre déjà plusieurs matières : **mathématiques, français, anglais, espagnol et économie**. Et si vous enseignez une autre discipline, **je peux ajouter votre matière** : il suffit de me le demander.
+Elle couvre déjà plusieurs matières : **mathématiques, français, anglais, espagnol et IA**. Et si vous enseignez une autre discipline, **je peux ajouter votre matière** : il suffit de me le demander.
 
 Elle s'organise autour de plusieurs rubriques :
 - un **Coach** qui accompagne l'élève pas à pas et l'aide quand il bloque ;
@@ -64,7 +64,7 @@ Bonjour à toutes et à tous,
 
 Je travaille depuis quelque temps sur une plateforme d'accompagnement pour nos élèves (révisions, entraînement, devoirs maison) et j'aimerais la partager avec vous. C'est un projet auquel j'ai déjà consacré **plus de 350 heures de développement**, tant il me tient à cœur.
 
-Elle couvre déjà plusieurs matières : **mathématiques, français, anglais, espagnol et économie**. Et si vous enseignez une autre discipline, **je peux ajouter votre matière** : il suffit de me le demander.
+Elle couvre déjà plusieurs matières : **mathématiques, français, anglais, espagnol et IA**. Et si vous enseignez une autre discipline, **je peux ajouter votre matière** : il suffit de me le demander.
 
 Elle s'organise autour de plusieurs rubriques :
 - un **Coach** qui accompagne l'élève pas à pas et l'aide quand il bloque ;

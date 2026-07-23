@@ -12,7 +12,7 @@ const offres = [
     description: "Pour un enseignant qui veut équiper sa ou ses classes. Pris en charge par la coopérative, le FSE ou l'établissement — jamais par les familles.",
     inclus: [
       "5 € / élève — ex. 30 élèves = 150 €",
-      "Toutes les matières : maths, français, anglais, espagnol, éco",
+      "Toutes les matières : maths, français, anglais, espagnol, IA",
       "Gratuit pour chaque élève",
       "Évaluation automatique, sans correction",
       "Devoirs maison faits et suivis en ligne",
@@ -33,7 +33,7 @@ const offres = [
     description: "Tout un collège ou lycée, toutes les matières, tous les profs. Facturé globalement à l'établissement — gratuit pour chaque élève, sans aucun paiement demandé aux familles.",
     inclus: [
       "Tous les élèves, toutes les classes",
-      "Toutes les matières : maths, français, anglais, espagnol, éco",
+      "Toutes les matières : maths, français, anglais, espagnol, IA",
       "Évaluation automatique, sans correction",
       "Devoirs maison faits et suivis en ligne",
       "Accès 100 % gratuit pour chaque élève",
@@ -173,7 +173,7 @@ export default function TarifsClient() {
           </div>
           <div className="mt-3 inline-flex items-center gap-3 rounded-2xl bg-blue-100 px-6 py-3 text-sm font-black text-blue-800 ring-1 ring-blue-200">
             <span className="text-lg">📚</span>
-            Toutes les matières incluses : maths, français, anglais, espagnol, éco
+            Toutes les matières incluses : maths, français, anglais, espagnol, IA
           </div>
           <div className="mt-3 inline-flex items-center gap-3 rounded-2xl bg-slate-100 px-6 py-3 text-sm font-bold text-slate-700">
             <span className="text-lg">🧑‍🏫</span>
@@ -243,7 +243,7 @@ export default function TarifsClient() {
               { icon: "📖", label: "Français" },
               { icon: "🇬🇧", label: "Anglais" },
               { icon: "🇪🇸", label: "Espagnol" },
-              { icon: "💶", label: "Économie" },
+              { icon: "🤖", label: "IA" },
             ].map((m) => (
               <span
                 key={m.label}

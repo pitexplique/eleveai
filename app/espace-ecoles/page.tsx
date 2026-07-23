@@ -40,7 +40,7 @@ const modele = [
 
 // La couverture — montre que ce n'est plus « maths only ».
 const couverture = [
-  { emoji: "🧠", titre: "6 coachs par matière", texte: "Maths, Français, Anglais, Espagnol, IA, Économie — du CP à la Terminale, notion par notion." },
+  { emoji: "🧠", titre: "5 coachs par matière", texte: "Maths, Français, Anglais, Espagnol, IA — du CP à la Terminale, notion par notion." },
   { emoji: "🛤️", titre: "Parcours & diagnostics", texte: "Bilan par notion 🟢🟡🔴 : maîtrisé, à revoir, fragile. Idéal avant un contrôle ou une évaluation nationale." },
   { emoji: "☀️", titre: "Rituels quotidiens", texte: "Dictée du jour, calcul rapide, défis — de courts rendez-vous pour installer l'habitude de travail." },
   { emoji: "🎓", titre: "Prépa examens", texte: "Sprint Brevet, Bac spé maths, éval blanche Pix IA — l'entraînement ciblé jusqu'au jour J." },
