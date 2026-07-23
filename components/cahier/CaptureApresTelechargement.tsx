@@ -23,7 +23,7 @@ export default function CaptureApresTelechargement({
   produitDe?: string; // ex "du cahier", "des cartes" → « Profite bien {produitDe} »
   slug?: string; // slug du cahier → cible le bon call en direct (lycée vs parents)
 }) {
-  const SIGNUP_URL = `https://eleveai.fr/auth/signin?from=${signupFrom}`;
+  const SIGNUP_URL = `https://eleveai.fr/auth/signin?from=${signupFrom}&utm_source=${signupFrom}&utm_medium=modale`;
   const [open, setOpen] = useState(false);
   const [dejaVu, setDejaVu] = useState(false);
 
@@ -100,7 +100,7 @@ export default function CaptureApresTelechargement({
         <div className="mt-4 flex items-center gap-4">
           <div className="flex-1 space-y-2">
             <Link
-              href={`/auth/signin?from=${signupFrom}`}
+              href={`/auth/signin?from=${signupFrom}&utm_source=${signupFrom}&utm_medium=modale`}
               className="flex items-center justify-center gap-2 rounded-full bg-teal-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-500/30 transition hover:bg-teal-400"
             >
               <Sparkles className="h-4 w-4" />

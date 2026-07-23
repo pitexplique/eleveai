@@ -27,7 +27,7 @@ import { bougeDuJour } from "@/lib/cahier/bougeDuJour";
 
 /* URL d'inscription encodée dans le QR de fin de cahier. Le ?from=cahier
    permet de tracer les inscriptions venues du cahier de vacances. */
-const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cahier";
+const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cahier&utm_source=cahier&utm_medium=cta-fin";
 
 /* Habillage de la rubrique « Comprendre le monde » selon son thème du jour. */
 const themesMonde = {
@@ -167,7 +167,7 @@ export default function CahierVacances({
     <main className="relative isolate min-h-screen bg-[#f8f6ff] text-slate-800">
       {/* Capter après le téléchargement/impression (jamais avant, aucun mur). */}
       <CaptureApresTelechargement
-        coachHref={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier`}
+        coachHref={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier&utm_source=cahier&utm_medium=modale`}
         slug={config.slug}
       />
       {/* Barre d'actions (écran) */}
@@ -206,7 +206,7 @@ export default function CahierVacances({
             Maths, français, anglais… du CP au Bac, au rythme de ton enfant, sans jugement.
           </p>
           <Link
-            href={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier`}
+            href={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier&utm_source=cahier&utm_medium=cta-haut`}
             className="mt-3 inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-black text-white shadow-md transition hover:bg-slate-800"
           >
             <Sparkles className="h-4 w-4" />
@@ -794,14 +794,14 @@ export default function CahierVacances({
                 </p>
                 <div className="screen-only mt-3 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
                   <Link
-                    href="/auth/signin?from=cahier"
+                    href="/auth/signin?from=cahier&utm_source=cahier&utm_medium=cta-fin"
                     className="inline-flex items-center gap-2 rounded-full bg-teal-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-500/30 transition hover:bg-teal-400"
                   >
                     <Sparkles className="h-4 w-4" />
                     Créer un compte gratuit
                   </Link>
                   <Link
-                    href={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier`}
+                    href={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier&utm_source=cahier&utm_medium=cta-fin`}
                     className="inline-flex items-center gap-2 rounded-full border border-teal-300 bg-white px-5 py-3 text-sm font-black text-teal-700 transition hover:bg-teal-50"
                   >
                     Découvrir le Coach IA
