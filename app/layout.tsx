@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Le journal scientifique gratuit de La Réunion où les enfants comprennent l'île et s'entraînent : la science et les maths racontées avec le volcan, les cyclones, les baleines — et un coach IA qui explique sans faire à ta place, des séries d'exercices corrigées, un défi et une dictée du jour. Du CP au Bac. Vulgarisation rigoureuse, chiffres vérifiés.",
+    "Le journal scientifique gratuit de La Réunion où les enfants comprennent l'île et s'entraînent : un coach IA qui explique sans faire à ta place, des séries d'exercices corrigées, un défi et une dictée du jour — et un tableau de suivi où les profs voient la progression de chaque élève. Du CP au Bac. Vulgarisation rigoureuse, chiffres vérifiés.",
 
   keywords: [
     "EleveAI",

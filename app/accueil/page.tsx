@@ -22,7 +22,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: "Le journal scientifique de La Réunion où les enfants comprennent et s'entraînent",
   description:
-    "Le journal scientifique gratuit de La Réunion où les enfants comprennent l'île et s'entraînent : la science et les maths racontées avec le volcan, les cyclones, les baleines — et un coach IA qui explique sans jamais faire à ta place, des séries d'exercices corrigées, un défi et une dictée chaque matin. Du CP à la Terminale. Vulgarisation rigoureuse, chiffres vérifiés.",
+    "Le journal scientifique gratuit de La Réunion où les enfants comprennent l'île et s'entraînent : un coach IA qui explique sans jamais faire à ta place, des séries d'exercices corrigées, un défi et une dictée chaque matin — et un tableau de suivi où les profs voient la progression de chaque élève. Du CP à la Terminale. Vulgarisation rigoureuse, chiffres vérifiés.",
   keywords: [
     "journal scientifique",
     "journal scientifique La Réunion",
