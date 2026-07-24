@@ -406,6 +406,16 @@ const VIDEOS_FICHES: Record<
 > = {
   // La machine du barrage porte ses DEUX vidéos : l'épisode « en vrai » et le
   // film d'animation du principe (20/07) — le schéma animé, sans son, à lire.
+  // La salle de sport porte son Short (24/07) : l'effort et les protéines.
+  "/simulateur-energie": [
+    {
+      id: "XdBT05f9_F0",
+      title:
+        "1 minute à fond = même pas un carré de chocolat ?! — l'effort et les protéines, La Réunion",
+      description:
+        "250 watts pendant une minute sur le rameur : 15 000 joules, soit 3,6 kcal — même pas un sixième de carré de chocolat. Le rendement musculaire de 25 % explique pourquoi le corps brûle 4 fois plus, et pourquoi tu as chaud. Puis la récup : les protéines de l'assiette.",
+    },
+  ],
   "/simulateur-barrage": [
     {
       id: "oyjfPzC4sKY",

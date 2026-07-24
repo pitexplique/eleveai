@@ -89,6 +89,14 @@ const UNE: Episode = {
 
 const BREVES: Episode[] = [
   {
+    emoji: "💪",
+    titre: "1 minute à fond = même pas un carré de chocolat",
+    accroche:
+      "250 W pendant une minute : 15 000 joules, 3,6 kcal. Le rendement musculaire de 25 % explique tout — et pourquoi tu as chaud.",
+    youtubeId: "XdBT05f9_F0",
+    defi: "les conversions — 250 × 60 = 15 000 J, puis ÷ 4 184 pour les kcal.",
+  },
+  {
     emoji: "🏃",
     titre: "La Diagonale des Fous : comment doser sa course ?",
     accroche: "165 km, barrière 66 h : trop vite tu tapes le mur, trop lent la barrière te rattrape. L'équation du coureur, en images.",

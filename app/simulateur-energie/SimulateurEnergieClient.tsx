@@ -603,6 +603,42 @@ export default function SimulateurEnergieClient() {
           </p>
         </div>
 
+        {/* LE FILM — la même histoire en 69 s, muette (publiée le 24/07). La
+            vignette vient de YouTube : aucune image à héberger. */}
+        <a
+          href="https://youtube.com/shorts/XdBT05f9_F0"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group mt-5 flex items-center gap-4 rounded border-2 border-[#ffd23f] bg-[#1c1930] p-3 transition hover:brightness-125"
+        >
+          <span className="relative block w-[112px] shrink-0 overflow-hidden rounded">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://i.ytimg.com/vi/XdBT05f9_F0/hqdefault.jpg"
+              alt="Le film : 1 minute à fond = même pas un carré de chocolat"
+              loading="lazy"
+              className="block h-full w-full object-cover"
+            />
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-red-600/90 text-xs text-white transition group-hover:scale-110">
+                ▶
+              </span>
+            </span>
+          </span>
+          <span className="block">
+            <span className="block text-[11px] font-black uppercase tracking-[0.18em] text-[#ffd23f]">
+              🎬 Le film — 69 secondes, sans son
+            </span>
+            <span className="mt-1 block font-bold leading-snug text-[#f1effa]">
+              1 minute à fond = même pas un carré de chocolat
+            </span>
+            <span className="mt-1 block text-[13px] leading-5 text-[#a49fc9]">
+              Le même calcul, animé de bout en bout : les watts, les joules, le
+              carré coupé, et l&apos;assiette qui répare.
+            </span>
+          </span>
+        </a>
+
         {/* LES DÉFIS — à toi de calculer, la salle vérifie */}
         <DefisSimulateur
           titre="Les défis de la salle"
