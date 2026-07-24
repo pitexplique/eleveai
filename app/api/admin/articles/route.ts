@@ -25,6 +25,10 @@ export const runtime = "nodejs";
 
 const RUBRIQUE_DEFAUT = "un-peu-de-maths";
 
+// L'accroche porte AUSSI le corps de l'édito (rubrique 'edito', plusieurs
+// paragraphes) : 600 caractères le tronquaient en plein texte.
+const ACCROCHE_MAX = 4000;
+
 async function isAdmin() {
   const cookieStore = await cookies();
   return verifyAdminCookieValue(cookieStore.get("admin-auth")?.value);
@@ -77,7 +81,7 @@ export async function POST(req: Request) {
     rubrique: clean(body.rubrique, 60) ?? RUBRIQUE_DEFAUT,
     titre,
     lien,
-    accroche: clean(body.accroche, 600),
+    accroche: clean(body.accroche, ACCROCHE_MAX),
     image_url: clean(body.image_url, 500),
     cta: clean(body.cta, 80),
     ordre: Number.isFinite(ordreNum) ? ordreNum : 100,
@@ -119,7 +123,7 @@ export async function PATCH(req: Request) {
     update.lien = l;
   }
   if ("rubrique" in body) update.rubrique = clean(body.rubrique, 60) ?? RUBRIQUE_DEFAUT;
-  if ("accroche" in body) update.accroche = clean(body.accroche, 600);
+  if ("accroche" in body) update.accroche = clean(body.accroche, ACCROCHE_MAX);
   if ("image_url" in body) update.image_url = clean(body.image_url, 500);
   if ("cta" in body) update.cta = clean(body.cta, 80);
   if ("actif" in body) update.actif = body.actif === true;

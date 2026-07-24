@@ -6,6 +6,7 @@ import AccueilClient, {
   type Apercu974,
   type ActionJournal,
   type ArticleRubrique,
+  type Edito,
   type SlideUne,
 } from "./AccueilClient";
 import { getElevesALHonneur, prenomCourt } from "@/lib/ameliorations/honneurServer";
@@ -240,14 +241,64 @@ async function getArticlesRubrique(rubrique: string): Promise<ArticleRubrique[]>
   }
 }
 
+// L'ÉDITO DU JOUR — même table, rubrique 'edito' (Frédéric, 24/07 : « l'édito
+// n'est pas du jour et ne change pas »). Le plus récent gagne : ordre croissant
+// puis date décroissante, on prend le premier. Le corps vit dans `accroche`,
+// paragraphes séparés par une ligne vide ; `lien`/`cta` = le renvoi de fin.
+// Table vide/absente → repli sur l'édito en dur du client.
+async function getEdito(): Promise<Edito | null> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return null;
+
+  try {
+    const supabase = createClient(url, key);
+    const { data, error } = await supabase
+      .from("journal_articles")
+      .select("id, titre, accroche, lien, cta, created_at")
+      .eq("rubrique", "edito")
+      .eq("actif", true)
+      .order("ordre", { ascending: true })
+      .order("created_at", { ascending: false })
+      .limit(1);
+    if (error || !data || data.length === 0) return null;
+
+    const e = data[0];
+    // La date est calculée SERVEUR à l'heure de l'île — sinon le rendu client
+    // diverge du HTML (hydratation) selon le fuseau du lecteur.
+    const jourReunion = (d: string | Date) =>
+      new Date(d).toLocaleDateString("fr-FR", { timeZone: "Indian/Reunion" });
+    const dateLabel = e.created_at
+      ? new Date(e.created_at).toLocaleDateString("fr-FR", {
+          timeZone: "Indian/Reunion",
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+        })
+      : null;
+    return {
+      id: String(e.id),
+      titre: e.titre,
+      corps: e.accroche ?? "",
+      lien: e.lien && e.lien !== "#" ? e.lien : null,
+      cta: e.cta,
+      dateLabel,
+      nouveau: e.created_at ? jourReunion(e.created_at) === jourReunion(new Date()) : false,
+    };
+  } catch {
+    return null;
+  }
+}
+
 export default async function Page() {
-  const [avis, honneur, apercu974, catalogue, slides, articlesMaths] = await Promise.all([
+  const [avis, honneur, apercu974, catalogue, slides, articlesMaths, edito] = await Promise.all([
     getDerniersAvis(),
     getElevesALHonneur(),
     getApercuMaths974(),
     getCatalogueJournal(),
     getSlidesUne(),
     getArticlesRubrique("un-peu-de-maths"),
+    getEdito(),
   ]);
   return (
     <AccueilClient
@@ -257,6 +308,7 @@ export default async function Page() {
       catalogue={catalogue}
       slides={slides}
       articlesMaths={articlesMaths}
+      edito={edito}
     />
   );
 }

@@ -31,6 +31,25 @@ const VIDE = {
   ordre: 100,
 };
 
+// L'ÉDITO DU JOUR (24/07) — même table, rubrique 'edito'. Un clic prépare le
+// formulaire : ordre 0 (le plus récent passe devant), lien « # » (l'édito n'a
+// pas besoin de renvoi, la colonne est obligatoire), pas d'image.
+const PRESETS: Record<string, { aide: string; valeurs: Partial<typeof VIDE> }> = {
+  "un-peu-de-maths": {
+    aide: "Une carte de la rubrique « Un peu de maths » (ordre croissant : 0 = en tête ; l'accueil en montre 3).",
+    valeurs: { rubrique: "un-peu-de-maths", ordre: 0, cta: "Lire →" },
+  },
+  edito: {
+    aide:
+      "L'édito du jour, en haut à droite de la Une. Titre = le titre de l'édito ; " +
+      "le CORPS va dans l'accroche, un paragraphe par bloc séparé d'une LIGNE VIDE " +
+      "(le 1er se lit tout de suite, les suivants sous « Lire la suite »). Lien + bouton = " +
+      "le renvoi de fin (laisse « # » et un bouton vide s'il n'y en a pas). Le plus récent " +
+      "s'affiche, et sa date de création s'affiche à côté du mot « L'édito ».",
+    valeurs: { rubrique: "edito", ordre: 0, lien: "#", cta: "", image_url: "" },
+  },
+};
+
 const champ =
   "w-full rounded border border-slate-300 bg-white px-2 py-1.5 text-sm text-slate-900";
 const libelle = "mt-2 block text-[11px] font-black uppercase tracking-wide text-slate-500";
@@ -147,7 +166,8 @@ export default function ArticlesAdminClient() {
           </Link>
         </div>
         <p className="mt-1 text-sm text-slate-600">
-          Rubrique <b>un-peu-de-maths</b> = la rubrique « Un peu de maths » de l&apos;accueil.
+          Rubrique <b>un-peu-de-maths</b> = les cartes « Un peu de maths » de l&apos;accueil ·
+          rubrique <b>edito</b> = <b>l&apos;édito du jour</b> (colonne de droite de la Une).
           💡 Pour une <b>animation</b> : mets un SVG animé dans le champ image
           (<code>/images/….svg</code> ou une URL) — il joue tout seul dans la carte.
           Chaque enregistrement régénère l&apos;accueil immédiatement.
@@ -159,10 +179,40 @@ export default function ArticlesAdminClient() {
         {/* NOUVEL ARTICLE */}
         <div className="mt-5 rounded-xl border border-blue-200 bg-blue-50 p-4">
           <h2 className="text-sm font-black uppercase tracking-wide text-blue-800">➕ Nouvel article</h2>
+          {/* Deux gestes, pas un champ libre à deviner : « une carte » ou
+              « l'édito du jour » — le formulaire se prépare tout seul. */}
+          <div className="mt-2 flex flex-wrap gap-2">
+            {Object.entries(PRESETS).map(([cle, p]) => (
+              <button
+                key={cle}
+                type="button"
+                onClick={() => setNouveau({ ...VIDE, ...p.valeurs })}
+                className={`rounded px-3 py-1 text-xs font-black ${
+                  nouveau.rubrique === cle
+                    ? "bg-blue-700 text-white"
+                    : "border border-blue-300 bg-white text-blue-800"
+                }`}
+              >
+                {cle === "edito" ? "✍️ Écrire l'édito du jour" : "🧮 Une carte « Un peu de maths »"}
+              </button>
+            ))}
+          </div>
+          {PRESETS[nouveau.rubrique] && (
+            <p className="mt-2 rounded bg-white/70 px-2 py-1.5 text-xs leading-5 text-slate-600">
+              {PRESETS[nouveau.rubrique]?.aide}
+            </p>
+          )}
           <label className={libelle}>Titre *</label>
           <input className={champ} value={nouveau.titre} onChange={(e) => setNouveau({ ...nouveau, titre: e.target.value })} />
-          <label className={libelle}>Accroche</label>
-          <textarea className={champ} rows={2} value={nouveau.accroche} onChange={(e) => setNouveau({ ...nouveau, accroche: e.target.value })} />
+          <label className={libelle}>
+            {nouveau.rubrique === "edito" ? "Le corps de l'édito (1 ligne vide entre les paragraphes)" : "Accroche"}
+          </label>
+          <textarea
+            className={champ}
+            rows={nouveau.rubrique === "edito" ? 8 : 2}
+            value={nouveau.accroche}
+            onChange={(e) => setNouveau({ ...nouveau, accroche: e.target.value })}
+          />
           <div className="grid gap-2 sm:grid-cols-2">
             <div>
               <label className={libelle}>Image / animation (URL ou /images/…)</label>
@@ -208,7 +258,8 @@ export default function ArticlesAdminClient() {
             <div key={a.id} className={`mt-4 rounded-xl border p-4 ${a.actif ? "border-slate-300 bg-white" : "border-slate-200 bg-slate-50 opacity-70"}`}>
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <p className="text-[11px] font-black uppercase tracking-wide text-slate-500">
-                  {a.rubrique} · ordre {a.ordre} {a.actif ? "" : "· MASQUÉ"}
+                  {a.rubrique === "edito" ? "✍️ ÉDITO" : a.rubrique} · ordre {a.ordre}{" "}
+                  {a.actif ? "" : "· MASQUÉ"}
                 </p>
                 <div className="flex gap-2">
                   <button type="button" onClick={() => sauver(a)} disabled={enCours === a.id}
@@ -227,8 +278,15 @@ export default function ArticlesAdminClient() {
               </div>
               <label className={libelle}>Titre</label>
               <input className={champ} value={a.titre} onChange={(e) => majLocal(a.id, { titre: e.target.value })} />
-              <label className={libelle}>Accroche</label>
-              <textarea className={champ} rows={2} value={a.accroche ?? ""} onChange={(e) => majLocal(a.id, { accroche: e.target.value })} />
+              <label className={libelle}>
+                {a.rubrique === "edito" ? "Le corps de l'édito (1 ligne vide entre les paragraphes)" : "Accroche"}
+              </label>
+              <textarea
+                className={champ}
+                rows={a.rubrique === "edito" ? 10 : 2}
+                value={a.accroche ?? ""}
+                onChange={(e) => majLocal(a.id, { accroche: e.target.value })}
+              />
               <div className="grid gap-2 sm:grid-cols-2">
                 <div>
                   <label className={libelle}>Image / animation</label>

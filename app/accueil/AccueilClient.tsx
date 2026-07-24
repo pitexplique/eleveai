@@ -256,6 +256,35 @@ export type ArticleRubrique = {
   cta: string | null;
 };
 
+/** L'édito du jour (journal_articles, rubrique 'edito' — le plus récent). */
+export type Edito = {
+  id: string;
+  titre: string;
+  /** Le corps ; les paragraphes sont séparés par une ligne vide. */
+  corps: string;
+  lien: string | null;
+  cta: string | null;
+  /** « jeudi 24 juillet », calculé serveur à l'heure de l'île. */
+  dateLabel: string | null;
+  nouveau: boolean;
+};
+
+// L'édito de repli : celui écrit avec Frédéric le 22/07 (l'origine du journal).
+// Il ne s'affiche que si la rubrique 'edito' est vide en base.
+const EDITO_FALLBACK: Edito = {
+  id: "fallback",
+  titre: "Un journal éducatif, né un soir de juillet",
+  corps: [
+    "Je suis Frédéric Lacoste, professeur de mathématiques à La Réunion. Ce journal est né dans ma tête, un soir de juillet — en repensant aux avis de mes élèves, à leurs mots, et à ce qui me ressemble. Une évidence : on apprend mieux avec ce qu'on a sous les yeux — la pluie, la canne, les baleines, le volcan.",
+    "Chaque matin : un défi, une dictée, un coach qui explique sans faire à ta place. Gratuit, sans publicité, sans jugement. Et écrit avec mes élèves — leurs idées, leurs avis, même leurs fautes, qu'on garde parce qu'elles sont vraies.",
+    "Bienvenue. Ici, tu es chez toi.",
+  ].join("\n\n"),
+  lien: null,
+  cta: null,
+  dateLabel: null,
+  nouveau: false,
+};
+
 // « Un peu de maths » — repli en dur tant que la table journal_articles
 // n'existe pas (même principe que la Une). Premier article : la machine
 // des epsilons (la devise du site, à faire découvrir).
@@ -746,6 +775,7 @@ export default function AccueilPage({
   catalogue,
   slides,
   articlesMaths,
+  edito,
 }: {
   avis?: AvisPublic[];
   honneur?: EleveALHonneur[];
@@ -753,11 +783,19 @@ export default function AccueilPage({
   catalogue?: ActionJournal[];
   slides?: SlideUne[];
   articlesMaths?: ArticleRubrique[];
+  edito?: Edito | null;
 }) {
   const { eleve } = useEleve();
   const derniersAvis = avis && avis.length > 0 ? avis : AVIS_FALLBACK;
   const unPeuDeMaths =
     articlesMaths && articlesMaths.length > 0 ? articlesMaths : ARTICLES_MATHS_FALLBACK;
+  // L'édito vient de la base (régie /admin/articles, rubrique 'edito') ; le
+  // repli n'est là que si personne n'en a encore publié un.
+  const editoDuJour = edito ?? EDITO_FALLBACK;
+  const editoParagraphes = editoDuJour.corps
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean);
 
   // La rampe des classes : la classe cliquée déplie son choix de matières.
   const [classeDepliee, setClasseDepliee] = useState<string | null>(null);
@@ -1284,7 +1322,15 @@ export default function AccueilPage({
 
           {/* L'édito — le moment humain, signé (photo + lettre repliée). */}
           <aside className="border-[#1d1c16]/25 lg:col-span-2 lg:border-l lg:pl-6">
-            <Kicker>L&apos;édito du jour</Kicker>
+            {/* L'ÉDITO VIENT DE LA BASE (24/07) : il s'appelait « du jour »
+                mais ne changeait jamais. Rubrique 'edito' de journal_articles,
+                éditable dans /admin/articles — le plus récent gagne, et sa
+                date s'affiche : le lecteur voit de QUAND il date. */}
+            <Kicker>
+              L&apos;édito
+              {editoDuJour.dateLabel ? ` · ${editoDuJour.dateLabel}` : " du jour"}{" "}
+              {editoDuJour.nouveau && <PastilleJour />}
+            </Kicker>
             {/* En couleur : c'est le moment humain de la page (le noir et blanc
                 « encre de journal » lui donnait un air de nécrologie — retiré
                 sur retour de Frédéric). Photo un peu plus grande. */}
@@ -1295,41 +1341,37 @@ export default function AccueilPage({
               height={72}
               className="mt-3 h-[72px] w-[72px] rounded-full border-2 border-[#1d1c16]/25 object-cover"
             />
-            {/* Le VRAI édito du fondateur (réécrit avec Frédéric, 22/07) :
-                l'origine vraie — un soir de juillet, les avis des élèves —
-                s'ouvre sur son nom, se referme « professeur d'élèves ». */}
             <h3 className="mt-2 font-serif text-lg font-black leading-snug">
-              Un journal éducatif, né un soir de juillet
+              {editoDuJour.titre}
             </h3>
-            {/* Teaser court : la phrase s'arrête sur « né dans ma tête, » —
-                le « Lire la suite » vient juste après (demande de Frédéric,
-                22/07), la suite de la phrase s'ouvre dans le dépliant. */}
+            {/* Le 1er paragraphe se lit tout de suite, la suite s'ouvre dans le
+                dépliant (demande de Frédéric, 22/07). */}
             <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
-              Je suis Frédéric Lacoste, professeur de mathématiques à La
-              Réunion. Ce journal est né dans ma tête,
+              {editoParagraphes[0]}
             </p>
-            <details className="mt-1">
-              <summary className="cursor-pointer list-none text-xs font-black text-cyan-800 underline underline-offset-2">
-                Lire la suite ▾
-              </summary>
-              <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
-                un soir de juillet — en repensant aux avis de mes élèves, à
-                leurs mots, et à ce qui me ressemble. Une évidence : on apprend
-                mieux avec ce qu&apos;on a{" "}
-                <strong className="font-black">sous les yeux</strong> — la pluie,
-                la canne, les baleines, le volcan.
-              </p>
-              <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
-                Chaque matin : un défi, une dictée, un coach qui explique sans
-                faire à ta place.{" "}
-                <strong className="font-black">Gratuit, sans publicité, sans jugement.</strong>{" "}
-                Et écrit avec mes élèves — leurs idées, leurs avis, même leurs
-                fautes, qu&apos;on garde parce qu&apos;elles sont vraies.
-              </p>
-              <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
-                Bienvenue. Ici, tu es chez toi.
-              </p>
-            </details>
+            {editoParagraphes.length > 1 && (
+              <details className="mt-1">
+                <summary className="cursor-pointer list-none text-xs font-black text-cyan-800 underline underline-offset-2">
+                  Lire la suite ▾
+                </summary>
+                {editoParagraphes.slice(1).map((p, i) => (
+                  <p
+                    key={i}
+                    className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80"
+                  >
+                    {p}
+                  </p>
+                ))}
+              </details>
+            )}
+            {editoDuJour.lien && editoDuJour.cta && (
+              <Link
+                href={editoDuJour.lien}
+                className="mt-2 inline-block text-sm font-black text-cyan-800 hover:underline"
+              >
+                {editoDuJour.cta}
+              </Link>
+            )}
             {/* Le nom ne se coupe jamais ; « professeur d'élèves » peut
                 passer à la ligne dessous. */}
             <p className="mt-3 font-serif text-sm font-black italic">
