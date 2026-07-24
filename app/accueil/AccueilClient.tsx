@@ -958,7 +958,7 @@ export default function AccueilPage({
                 s'entraîner (coach) · se tester (parcours) · se défier (défis). */}
             <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2">
               <Link
-                href="/explorer"
+                href="/explorer#coach"
                 className="inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-5 py-2.5 text-sm font-black text-[#f0fafc] shadow-sm transition hover:bg-[#1d1c16]"
               >
                 ✏️ Entraîne-toi <span className="font-semibold opacity-80">· le Coach</span>
