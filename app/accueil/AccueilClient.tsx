@@ -958,7 +958,7 @@ export default function AccueilPage({
                 s'entraîner (coach) · se tester (parcours) · se défier (défis). */}
             <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2">
               <Link
-                href={getHref("/coach-ia/maths")}
+                href="/explorer"
                 className="inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-5 py-2.5 text-sm font-black text-[#f0fafc] shadow-sm transition hover:bg-[#1d1c16]"
               >
                 ✏️ Entraîne-toi <span className="font-semibold opacity-80">· le Coach</span>
@@ -976,11 +976,6 @@ export default function AccueilPage({
                 🎯 Défi du jour
               </Link>
             </div>
-            <p className="mt-2 text-center text-[11px] font-bold text-[#1d1c16]/55">
-              <Link href="/explorer" className="underline underline-offset-2 hover:text-cyan-800">
-                Toutes les matières &amp; tout le catalogue →
-              </Link>
-            </p>
 
             {/* La classe affine la destination du coach (accordéon conservé). */}
             <div className="mt-4 border-t border-[#1d1c16]/15 pt-3.5">

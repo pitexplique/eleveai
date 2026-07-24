@@ -11,6 +11,7 @@
 // À terme (vision « Comprendre son île ») : ces défis compteront dans
 // l'évaluation de l'élève — garder les ids stables.
 
+import Link from "next/link";
 import { useState } from "react";
 
 export type DefiSimulateur = {
@@ -125,11 +126,18 @@ export default function DefisSimulateur({
   coupDePouce,
   defis,
   couleurs,
+  coachHref = "/coach-ia/maths",
+  coachLabel = "Entraîne-toi avec le Coach Maths",
 }: {
   titre: string;
   coupDePouce: string;
   defis: DefiSimulateur[];
   couleurs: CouleursDefis;
+  /** Le pont vers l'entraînement. Défaut : le coach maths (règle 24/07 —
+   *  le simulateur est une porte, pas la destination). Une machine peut viser
+   *  une classe précise, ex. coachHref="/coach-ia/maths?classe=terminale-spe". */
+  coachHref?: string;
+  coachLabel?: string;
 }) {
   return (
     <div className="mt-4 rounded border p-4" style={{ borderColor: couleurs.bord, backgroundColor: couleurs.fond }}>
@@ -143,6 +151,25 @@ export default function DefisSimulateur({
         {defis.map((d, i) => (
           <DefiCard key={d.id} numero={i + 1} defi={d} c={couleurs} />
         ))}
+      </div>
+
+      {/* LE PONT VERS LE COACH — règle produit (Frédéric, 24/07) : la machine
+          est une PORTE d'entrée, jamais la destination. Une fois l'histoire
+          comprise, elle ramène l'élève à l'ENTRAÎNEMENT (le coach maths). */}
+      <div
+        className="mt-3 flex flex-wrap items-center gap-3 border-t pt-3"
+        style={{ borderColor: couleurs.bord }}
+      >
+        <p className="text-[12px] font-semibold" style={{ color: couleurs.sousTexte }}>
+          Tu as compris ? À toi de t&apos;entraîner :
+        </p>
+        <Link
+          href={coachHref}
+          className="inline-flex items-center gap-2 rounded px-4 py-2 text-sm font-bold hover:brightness-110"
+          style={{ backgroundColor: couleurs.accent, color: couleurs.fondProfond }}
+        >
+          🧮 {coachLabel} →
+        </Link>
       </div>
     </div>
   );

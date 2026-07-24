@@ -639,13 +639,8 @@ export default function LoiNormaleClient() {
           >
             ⚡ L&apos;autre machine née d&apos;un dessin — active un epsilon
           </Link>
-          <Link
-            href="/coach-ia/maths"
-            className="inline-flex items-center gap-2 rounded border px-4 py-2 text-sm font-bold hover:brightness-95"
-            style={{ borderColor: "#e3d3a8", backgroundColor: "#fdf9ef", color: "#3a3325" }}
-          >
-            🧮 Réviser la loi binomiale avec le coach
-          </Link>
+          {/* Le pont vers le coach est désormais porté par DefisSimulateur
+              (bloc des défis, au-dessus) — commun à toutes les machines. */}
         </div>
 
         {/* L'HONNÊTETÉ */}
