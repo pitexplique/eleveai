@@ -1048,17 +1048,9 @@ NOTIONS = {
         "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["LA COURBE", "EN CLOCHE"], "taille": 76,
         "sous": "de pile ou face à la loi normale", "accroche": acc_loi_normale_journal,
     },
-    "eleveai-maths-journal-diagonale-trop-lent": {
-        "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["TROP LENT ?", "LA BARRIÈRE"], "taille": 70,
-        "sous": "la Diagonale des Fous en équation", "accroche": acc_diagonale_journal,
-    },
-    "eleveai-maths-journal-diagonale-bon-dosage": {
-        "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["LE BON", "DOSAGE"], "taille": 84,
-        "sous": "la Diagonale des Fous en équation", "accroche": acc_diagonale_journal,
-    },
-    "eleveai-maths-journal-diagonale-le-mur": {
-        "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["TROP FORT ?", "LE MUR"], "taille": 78,
-        "sous": "la Diagonale des Fous en équation", "accroche": acc_diagonale_journal,
+    "eleveai-maths-journal-diagonale-des-fous": {
+        "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["LA DIAGONALE", "DES FOUS"], "taille": 60,
+        "sous": "trop vite ? trop lent ? l'équation du dosage", "accroche": acc_diagonale_journal,
     },
     "eleveai-maths-974-barrage-takamaka": {
         "badge": "L'ÎLE DE LA RÉUNION · EN VRAI", "titre": ["LE BARRAGE", "DE TAKAMAKA"], "taille": 62,

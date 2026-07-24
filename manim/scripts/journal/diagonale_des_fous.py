@@ -1,24 +1,23 @@
 # diagonale_des_fous.py
 # EleveAI — Le Journal · « Un peu de maths » — La Diagonale des Fous
-# (l'article /diagonale-des-fous : le Grand Raid de La Réunion en équation
-# différentielle). TRIPTYQUE — trois courses, trois destins, une même équation :
 #
-#   DiagonaleTropLent  — allure 2  : jamais le mur, mais la barrière des 66 h.
-#   DiagonaleBonDosage — allure 6  : la réserve se vide PILE à l'arrivée.
-#   DiagonaleLeMur     — allure 10 : le mur avant la mi-course, puis hors délai.
+# UNE seule vidéo (muet + texte). On POSE d'abord la question du DOSAGE, la
+# formule dR/dt = −k·effort²·(1+pente) reste AFFICHÉE EN HAUT tout du long, puis
+# on déroule les TROIS cas sur le même profil de l'île :
+#   1) allure 2  — trop lent → la barrière des 66 h
+#   2) allure 6  — le bon dosage → arrivée, réserve vidée pile
+#   3) allure 10 — trop fort → le mur, puis hors délai
+# et enfin la leçon + l'appel.
 #
-# La physique est CELLE DU SITE : dR/dt = −C·effort²·(1+pente), intégrée pas à
-# pas (méthode d'Euler), barrière 66 h, 165 km. Le margouillat EST le coureur.
+# La physique est CELLE DU SITE : dR/dt = −C·effort²·(1+pente), Euler pas à pas,
+# barrière 66 h, 165 km. Le margouillat EST le coureur.
 #
-# ⚠️ MUET + TEXTE (Frédéric) : le texte porte toute l'explication, waits généreux.
-# Format article du journal (jumeau de loi_normale.py) : 16:9, hors banques.
+# ⚠️ MUET + TEXTE (Frédéric) : le texte porte tout, waits généreux. 16:9.
 #
 # Rendu brouillon :
-#   python -m manim render -ql manim/scripts/journal/diagonale_des_fous.py DiagonaleBonDosage --media_dir manim/scripts/journal/media
-# Rendu final (les trois) :
-#   python -m manim render -qh manim/scripts/journal/diagonale_des_fous.py DiagonaleTropLent  -o eleveai-maths-journal-diagonale-trop-lent  --media_dir manim/scripts/journal/media
-#   python -m manim render -qh manim/scripts/journal/diagonale_des_fous.py DiagonaleBonDosage -o eleveai-maths-journal-diagonale-bon-dosage --media_dir manim/scripts/journal/media
-#   python -m manim render -qh manim/scripts/journal/diagonale_des_fous.py DiagonaleLeMur     -o eleveai-maths-journal-diagonale-le-mur     --media_dir manim/scripts/journal/media
+#   python -m manim render -ql manim/scripts/journal/diagonale_des_fous.py DiagonaleDesFous --media_dir manim/scripts/journal/media
+# Rendu final :
+#   python -m manim render -qh manim/scripts/journal/diagonale_des_fous.py DiagonaleDesFous -o eleveai-maths-journal-diagonale-des-fous --media_dir manim/scripts/journal/media
 
 import sys
 from pathlib import Path
@@ -32,7 +31,6 @@ from manim import *
 from charte import *
 from mascotte import MascotteMargouillat
 
-# Couleurs propres à la scène (comme loi_normale définit ROUGE/OR_ESCALIER) :
 ROUGE = "#ef4444"
 FEU = "#e0561a"        # le coureur, le chemin parcouru
 VERT_ILE = "#2f8f57"   # le relief de l'île
@@ -105,14 +103,23 @@ def simuler(e):
     }
 
 
-# ── mapping île → cadre Manim (16:9) ──────────────────────────────────────────
+# ── mapping île → cadre Manim (16:9). La formule vit en HAUT (bannière), donc le
+#    profil est un peu plus bas pour lui laisser la place. ───────────────────────
 XMIN, XMAX = -6.3, 6.3
-YBASE, YTOP = -2.35, 2.0
-GX, GY_BOT, GH, GW = 6.05, -0.4, 3.0, 0.5  # la jauge de réserve (à droite)
+YBASE, YTOP = -2.35, 1.55
+GX, GY_BOT, GH, GW = 6.05, -0.5, 2.5, 0.5  # la jauge de réserve (à droite)
+
+# Les trois courses (précalculées une fois).
+CAS = [
+    {"e": 2, "cas": "Allure 2 · trop lent", "coul": ROUGE_ERREUR},
+    {"e": 6, "cas": "Allure 6 · le bon dosage", "coul": VERT_OK},
+    {"e": 10, "cas": "Allure 10 · trop fort", "coul": ROUGE_ERREUR},
+]
+SIMS = {2: simuler(2), 6: simuler(6), 10: simuler(10)}
 
 
-class DiagonaleBase(Scene):
-    """Helpers communs (mêmes que loi_normale.py) + les dessins de la Diagonale."""
+class DiagonaleDesFous(Scene):
+    """Une vidéo : la question du dosage, la formule en permanence, les 3 cas."""
 
     LARGEUR_SURE = 12.8
 
@@ -186,47 +193,60 @@ class DiagonaleBase(Scene):
         r.move_to([GX, GY_BOT + h / 2, 0])
         return r
 
-    # — ÉCRAN 1 : la course (profil + équation + jauge + le margouillat court) —
-    def ecran_course(self, cfg, seconds=7.5):
-        self.clear()
-        titre = self.T(cfg["titre"], size=40, color=JAUNE_TITRE).to_edge(UP, buff=0.35)
-        self.play(GrowFromCenter(titre))
+    # ── ÉCRAN D'OUVERTURE : la question + la formule (qui reste) ───────────────
+    def ecran_intro(self):
+        titre = self.T("La Diagonale des Fous", size=46, color=JAUNE_TITRE).to_edge(UP, buff=0.4)
+        self.play(Write(titre))
 
-        fill = self.profil_fill()
-        ligne = self.profil_ligne()
-        self.play(FadeIn(fill), Create(ligne), run_time=1.6)
+        self.fill = self.profil_fill()
+        self.ligne = self.profil_ligne()
+        self.play(FadeIn(self.fill), Create(self.ligne), run_time=1.6)
 
-        sp = self.T("Saint-Pierre", size=20).next_to(self.pt(0), UP, buff=0.12).shift(RIGHT * 0.55)
-        sd = self.T("Saint-Denis", size=20).next_to(self.pt(L), UP, buff=0.12).shift(LEFT * 0.55)
-        info = self.T("165 km  —  barrière 66 h", size=24).to_edge(DOWN, buff=0.28)
-        self.play(FadeIn(sp), FadeIn(sd), FadeIn(info))
+        sp = self.T("Saint-Pierre", size=20).next_to(self.pt(0), UP, buff=0.1).shift(RIGHT * 0.55)
+        sd = self.T("Saint-Denis", size=20).next_to(self.pt(L), UP, buff=0.1).shift(LEFT * 0.55)
+        self.villes = VGroup(sp, sd)
+        self.info = self.T("165 km  —  barrière 66 h", size=24).to_edge(DOWN, buff=0.28)
+        self.play(FadeIn(self.villes), FadeIn(self.info))
 
-        # l'équation, montrée puis effacée (on déclutte pour la course)
-        eq = self.T("dR/dt = −k × effort² × (1 + pente)", size=28, color=BLEU_CALCUL) \
-            .move_to([0, 2.55, 0])
-        self.play(self.anim_entree(eq, mode="grow"))
-        self.play(Indicate(eq, color=FEU, scale_factor=1.12))
-        gloss = self.T("la réserve se vide : vite si l'effort est grand, plus vite si ça monte",
-                       size=22, color=WHITE).move_to([0, 1.95, 0])
-        self.play(FadeIn(gloss, shift=0.3 * UP))
+        self.gfond = self.jauge_fond()
+        self.glab = self.T("réserve", size=20).next_to(self.gfond, UP, buff=0.15)
+        self.play(Create(self.gfond), FadeIn(self.glab))
+
+        # LA QUESTION du dosage
+        q1 = self.T("Trop vite, ou trop lent ?", size=36, color=WHITE).move_to([0, 0.5, 0])
+        self.play(self.anim_entree(q1, mode="grow"))
+        self.wait(0.8)
+        q2 = self.T("Comment doser sa course ?", size=36, color=FEU).move_to([0, -0.4, 0])
+        self.play(self.anim_entree(q2, mode="fade_up"))
         self.wait(1.6)
-        self.play(FadeOut(eq), FadeOut(gloss))
 
-        # la jauge de réserve + son étiquette
-        fond = self.jauge_fond()
-        lab = self.T("réserve", size=20).next_to(fond, UP, buff=0.15)
-        allure = self.T(cfg["allure"], size=24, color=FEU).move_to([-4.2, 2.5, 0])
-        self.play(Create(fond), FadeIn(lab), self.anim_entree(allure, mode="slide_l"))
+        # LA FORMULE — elle prend la place du titre, en haut, et RESTE. On DÉCODE
+        # dR/dt (« la variation de ta réserve ») pour ne perdre personne.
+        self.play(FadeOut(titre))
+        f_txt = self.T("dR/dt = −k × effort² × (1 + pente)", size=30, color=BLEU_CALCUL)
+        f_sub = self.T("dR/dt = la variation de ta réserve, à chaque instant",
+                       size=18, color=WHITE).next_to(f_txt, DOWN, buff=0.1)
+        f_inner = VGroup(f_txt, f_sub)
+        f_box = SurroundingRectangle(f_inner, color=BLEU_CALCUL, buff=0.14, corner_radius=0.1)
+        self.formule = VGroup(f_box, f_inner).to_edge(UP, buff=0.16)
+        self.play(self.anim_entree(self.formule, mode="fade_down"))
+        self.play(Indicate(f_sub, color=FEU, scale_factor=1.08))
+        gloss = self.T("à effort ×2, la réserve se vide ×4 — et les montées comptent double",
+                       size=22, color=WHITE).next_to(self.formule, DOWN, buff=0.2)
+        self.play(FadeIn(gloss, shift=0.2 * UP))
+        self.wait(2.6)
+        self.play(FadeOut(q1), FadeOut(q2), FadeOut(gloss))
 
-        # le coureur (le margouillat) au départ
+    # ── UN CAS : le margouillat court, la jauge se vide, le destin s'affiche ────
+    def jouer_cas(self, cfg):
+        sim = SIMS[cfg["e"]]
+        label = self.T(cfg["cas"], size=30, color=cfg["coul"]).move_to([-3.7, 2.05, 0])
+        self.play(self.anim_entree(label, mode="slide_l"))
+
         coureur = MascotteMargouillat().scale(0.4)
         coureur.move_to(self.pt(0) + UP * 0.30).set_z_index(10)
-        self.add(coureur)
-        self.play(FadeIn(coureur, scale=0.5))
+        self.play(FadeIn(coureur, scale=0.5), run_time=0.5)
 
-        # LA COURSE : un ValueTracker balaie le TEMPS de la simulation ; le
-        # margouillat suit le profil, la jauge se vide, le tracé se dessine.
-        sim = cfg["sim"]
         u_norm = sim["ts"] / sim["ts"][-1]
         u = ValueTracker(0.0)
         km_now = lambda: float(np.interp(u.get_value(), u_norm, sim["xs"]))
@@ -237,111 +257,58 @@ class DiagonaleBase(Scene):
         self.add(trace, remp)
         coureur.add_updater(lambda m: m.move_to(self.pt(km_now()) + UP * 0.30))
 
-        self.play(u.animate.set_value(1.0), run_time=seconds, rate_func=linear)
+        self.play(u.animate.set_value(1.0), run_time=6.0, rate_func=linear)
         coureur.clear_updaters()
-        self.wait(0.6)
 
-        # le marqueur du destin (le mur, ou l'arrivée)
         if sim["wall"] is not None:
-            mur = self.T("le mur !", size=26, color=ROUGE_ERREUR) \
-                .move_to(self.pt(sim["wall"]) + UP * 0.85)
-            self.play(FadeIn(mur, scale=0.4),
+            marker = self.T("le mur !", size=26, color=ROUGE_ERREUR) \
+                .move_to(self.pt(sim["wall"]) + UP * 0.9)
+            self.play(FadeIn(marker, scale=0.4),
                       Flash(self.pt(sim["wall"]), color=ROUGE_ERREUR, flash_radius=0.7))
-        if sim["status"] == "fini":
-            drap = self.T("arrivée !", size=26, color=VERT_OK) \
+        elif sim["status"] == "fini":
+            marker = self.T("arrivée !", size=26, color=VERT_OK) \
                 .move_to(self.pt(L) + UP * 1.35 + LEFT * 0.95)
-            self.play(FadeIn(drap, scale=0.4), Flash(self.pt(L), color=VERT_OK))
+            self.play(FadeIn(marker, scale=0.4), Flash(self.pt(L), color=VERT_OK))
         else:
-            barr = self.T("barrière 66 h", size=24, color=ROUGE_ERREUR) \
+            marker = self.T("barrière 66 h", size=24, color=ROUGE_ERREUR) \
                 .move_to(self.pt(sim["x_fin"]) + UP * 1.2 + LEFT * 1.3)
-            self.play(FadeIn(barr, shift=0.3 * DOWN),
+            self.play(FadeIn(marker, shift=0.3 * DOWN),
                       Flash(self.pt(sim["x_fin"]), color=ROUGE_ERREUR))
-        self.wait(2.2)
+        self.wait(2.1)
 
-    # — ÉCRAN 2 : le verdict + la leçon + l'appel —
-    def ecran_verdict(self, cfg):
-        self.clear()
+        # on efface le transitoire, on GARDE le profil, la formule, la jauge vide
+        trace.clear_updaters()
+        remp.clear_updaters()
+        self.play(FadeOut(coureur), FadeOut(trace), FadeOut(remp),
+                  FadeOut(label), FadeOut(marker), run_time=0.6)
+
+    # ── LA LEÇON + L'APPEL (la formule reste en haut) ──────────────────────────
+    def ecran_conclusion(self):
+        self.play(FadeOut(self.fill), FadeOut(self.ligne), FadeOut(self.gfond),
+                  FadeOut(self.glab), FadeOut(self.villes), FadeOut(self.info))
         self.add_mascotte(scale=0.6)
-        titre = self.T(cfg["verdict_titre"], size=44, color=cfg["verdict_color"]).to_edge(UP)
-        self.play(GrowFromCenter(titre))
 
-        lignes = VGroup(*[self.T(t, size=28) for t in cfg["verdict_lines"]]) \
-            .arrange(DOWN, aligned_edge=LEFT, buff=0.45).move_to([0, 1.05, 0])
-        for i, l in enumerate(lignes):
-            self.play(self.anim_entree(l, mode=["fade_up", "slide_r", "slide_l"][i % 3]))
-
-        lecon = self.T(cfg["lesson"], size=32, color=JAUNE_TITRE).move_to([0, -0.75, 0])
-        self.play(self.anim_entree(lecon, mode="grow"))
-        self.play(Circumscribe(lecon, color=FEU, run_time=1.3))
+        lecon1 = self.T("On tient en dosant, pas en fonçant.", size=36, color=JAUNE_TITRE) \
+            .move_to([0, 1.35, 0])
+        self.play(self.anim_entree(lecon1, mode="grow"))
+        self.play(Indicate(self.formule, color=FEU, scale_factor=1.06))
+        lecon2 = self.T("Le bon dosage vide la réserve pile à l'arrivée.", size=28, color=WHITE) \
+            .move_to([0, 0.4, 0])
+        self.play(self.anim_entree(lecon2, mode="fade_up"))
         self.wait(1.6)
 
         appel = self.T("Lance-toi dans la Diagonale des Fous", size=32, color=FEU) \
-            .move_to([0, -1.95, 0])
+            .move_to([0, -1.05, 0])
         lien = self.T("eleveai.fr/diagonale-des-fous", size=24, color=BLEU_CALCUL) \
             .next_to(appel, DOWN, buff=0.25)
         self.play(self.anim_entree(appel, mode="pop"))
         self.play(FadeIn(lien, shift=0.2 * UP))
-        signature = self.T(SIGNATURE, size=22, color=VERT_OK).to_edge(DOWN, buff=0.2)
+        signature = self.T(SIGNATURE, size=22, color=VERT_OK).to_edge(DOWN, buff=0.25)
         self.play(Write(signature))
         self.wait(3.0)
 
-    def jouer(self, cfg):
-        self.ecran_course(cfg)
-        self.ecran_verdict(cfg)
-
-
-# ── LES TROIS COURSES ─────────────────────────────────────────────────────────
-_SIM2 = simuler(2)
-_SIM6 = simuler(6)
-_SIM10 = simuler(10)
-
-
-class DiagonaleTropLent(DiagonaleBase):
     def construct(self):
-        s = _SIM2
-        self.jouer({
-            "titre": "Partir trop doucement",
-            "allure": "allure 2 / 10",
-            "sim": s,
-            "verdict_titre": "La barrière te rattrape",
-            "verdict_color": ROUGE_ERREUR,
-            "verdict_lines": [
-                f"Réserve encore à {round(s['R_fin'])} % : jamais le mur.",
-                f"Mais trop lent : à 66 h, arrêté au km {round(s['x_fin'])} sur 165.",
-            ],
-            "lesson": "Trop prudent, c'est perdre aussi.",
-        })
-
-
-class DiagonaleBonDosage(DiagonaleBase):
-    def construct(self):
-        s = _SIM6
-        self.jouer({
-            "titre": "Le bon dosage",
-            "allure": "allure 6 / 10",
-            "sim": s,
-            "verdict_titre": "Arrivée à Saint-Denis",
-            "verdict_color": VERT_OK,
-            "verdict_lines": [
-                f"165 km en {round(s['t_fin'])} h, dans les temps.",
-                f"La réserve se vide pile à l'arrivée : il reste {round(s['R_fin'])} %.",
-            ],
-            "lesson": "On tient en dosant, pas en fonçant.",
-        })
-
-
-class DiagonaleLeMur(DiagonaleBase):
-    def construct(self):
-        s = _SIM10
-        self.jouer({
-            "titre": "Partir trop fort",
-            "allure": "allure 10 / 10",
-            "sim": s,
-            "verdict_titre": "Le mur",
-            "verdict_color": ROUGE_ERREUR,
-            "verdict_lines": [
-                f"La réserve s'effondre vers le km {round(s['wall'])}.",
-                f"Ensuite on ne fait que marcher : hors délai au km {round(s['x_fin'])}.",
-            ],
-            "lesson": "Doubler l'allure quadruple la dépense (effort au carré).",
-        })
+        self.ecran_intro()
+        for cfg in CAS:
+            self.jouer_cas(cfg)
+        self.ecran_conclusion()
