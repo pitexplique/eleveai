@@ -212,7 +212,10 @@ export default async function ExplorerPage() {
               const group = actions.filter((a) => a.famille === f.key);
               if (group.length === 0) return null;
               return (
-                <div key={f.key}>
+                // id = ancre de la famille : l'accueil peut viser une rubrique
+                // directement, ex. « Teste-toi » → /explorer#parcours. scroll-mt
+                // compense le header collant.
+                <div key={f.key} id={f.key} className="scroll-mt-24">
                   <div className="flex items-baseline gap-3">
                     <h2 className="text-2xl font-black text-slate-900">
                       <span className="mr-2">{f.emoji}</span>

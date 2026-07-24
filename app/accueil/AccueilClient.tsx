@@ -964,7 +964,7 @@ export default function AccueilPage({
                 ✏️ Entraîne-toi <span className="font-semibold opacity-80">· le Coach</span>
               </Link>
               <Link
-                href="/parcours"
+                href="/explorer#parcours"
                 className="inline-flex items-center gap-2 rounded-sm border-2 border-cyan-800 px-5 py-2.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
               >
                 🧭 Teste-toi <span className="font-semibold opacity-80">· Parcours</span>
