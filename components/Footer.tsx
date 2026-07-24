@@ -32,6 +32,7 @@ const journalQuotidien = [
 ];
 
 const unPeuDeMaths = [
+  { label: "Toutes les machines", href: "/simulateurs" },
   { label: "Cyclone", href: "/simulateur-cyclone" },
   { label: "Volcan", href: "/simulateur-volcan" },
   { label: "Barrage", href: "/simulateur-barrage" },

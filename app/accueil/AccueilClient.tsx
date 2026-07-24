@@ -33,7 +33,9 @@ import FloatingCoach from "@/components/FloatingCoach";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import AgendaJournal from "@/components/accueil/AgendaJournal";
 import AbonnementJournal from "@/components/accueil/AbonnementJournal";
-import ReclameLagon from "@/components/accueil/ReclameLagon";
+import ReclameMachine from "@/components/accueil/ReclameMachine";
+import MachinesPanel from "@/components/simulateurs/MachinesPanel";
+import { MACHINES_RECENTES } from "@/lib/simulateurs";
 import { getDicteeDuJour, type DicteeMot } from "@/lib/dictee-du-jour/words";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
@@ -1205,26 +1207,20 @@ export default function AccueilPage({
                   précédentes passent en rangée compacte — trois réclames à
                   image empilées creusaient un grand blanc sous l'article
                   (constat de Frédéric, 18/07). */}
-              <ReclameLagon />
+              <ReclameMachine />
 
               <div className="py-3">
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                   🎛️ Les autres machines dans ta main
                 </p>
-                {[
-                  { emoji: "🏃", nom: "La Diagonale des Fous", href: "/diagonale-des-fous", cta: "Doser ta course" },
-                  { emoji: "🧠", nom: "La loi de la performance", href: "/loi-performance", cta: "Régler tes coefficients" },
-                  { emoji: "⚽", nom: "Le but qui sort de la moyenne", href: "/loi-pareto", cta: "Faire surgir les records" },
-                  { emoji: "🌋", nom: "Le volcan de la Fournaise", href: "/simulateur-volcan", cta: "Régler la lave" },
-                  { emoji: "💧", nom: "Le barrage de Takamaka", href: "/simulateur-barrage", cta: "Ouvrir les vannes" },
-                  { emoji: "🧀", nom: "La fromagerie", href: "/simulateur-fromage", cta: "Remplir les pots" },
-                  { emoji: "🌀", nom: "Dans l'œil du cyclone", href: "/simulateur-cyclone", cta: "Lancer ton cyclone" },
-                  { emoji: "🏭", nom: "L'usine à sucre", href: "/simulateur-sucre", cta: "Faire tourner l'usine" },
-                ].map((m) => (
+                {/* TOUJOURS les plus récentes (Frédéric, 24/07) : la réclame
+                    montre la n°1, ces 3 sont les suivantes — dynamiques via
+                    MACHINES_RECENTES, plus de liste figée. */}
+                {MACHINES_RECENTES.slice(1, 4).map((m) => (
                   <Link
                     key={m.href}
                     href={m.href}
-                    className="group flex items-baseline gap-2 border-b border-dotted border-[#1d1c16]/30 py-2 last:border-0"
+                    className="group flex items-baseline gap-2 border-b border-dotted border-[#1d1c16]/30 py-2"
                   >
                     <span aria-hidden className="text-sm">{m.emoji}</span>
                     <span className="font-serif text-[15px] font-black leading-snug group-hover:underline">
@@ -1235,6 +1231,23 @@ export default function AccueilPage({
                     </span>
                   </Link>
                 ))}
+
+                {/* L'ENCART ANIMÉ → le hub de TOUTES les machines (/simulateurs).
+                    On ne déroule plus les 12 dans la colonne (mur + trou à
+                    gauche, constat Frédéric 24/07) : réclame de la plus récente,
+                    3 en avant-goût, puis cette porte animée vers tout. */}
+                <Link
+                  href="/simulateurs"
+                  className="group mt-2.5 block border-2 border-cyan-800 bg-cyan-800/[0.05] p-2.5 transition hover:bg-cyan-800/[0.1]"
+                >
+                  <MachinesPanel className="w-full" />
+                  <p className="mt-1.5 font-serif text-[15px] font-black leading-snug text-[#1d1c16]">
+                    Les 12 machines dans ta main
+                  </p>
+                  <p className="text-xs font-black text-cyan-800 group-hover:underline">
+                    Toutes les machines →
+                  </p>
+                </Link>
               </div>
 
               {/* (La dictée a son oreille en manchette et le calcul rapide vit

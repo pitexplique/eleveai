@@ -213,6 +213,9 @@ const ROUTES: RouteConfig[] = [
   // restent au-dessus. Les simulateurs/histoires « un peu de maths » sont donc
   // volontairement à 0.8 : ils amènent le lecteur, qui doit ensuite aller au
   // coach. (Le cyclone remontera à la saison cyclonique — novembre.)
+  // Le hub de TOUTES les machines (24/07) — la porte principale de la famille,
+  // au-dessus des machines individuelles (0.8).
+  { path: "/simulateurs",     priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-24") },
   { path: "/maths-974",       priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_974 },
   { path: "/simulateur-cyclone", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
   { path: "/simulateur-sucre", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
