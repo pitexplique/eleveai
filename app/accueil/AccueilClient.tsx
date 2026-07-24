@@ -1165,20 +1165,28 @@ export default function AccueilPage({
 
       {/* ══ LA UNE — 3 colonnes : l'article · le fil du jour · l'édito ═══════ */}
       <section id="la-une" className="mx-auto mt-6 max-w-6xl scroll-mt-24">
+        {/* CONTRE LES TROUS (Frédéric, 24/07 : « qu'il n'y ait pas de trou ») :
+            le contenu des 3 colonnes vient de la base et change chaque jour —
+            un calage à la main se décalerait à la prochaine édition. Solution
+            de maquettiste : chaque colonne est une colonne flex dont le
+            dernier bloc s'ancre au pied (mt-auto) — les trois finissent
+            toujours sur la même ligne, le mou respire À L'INTÉRIEUR. */}
         <div className="grid gap-8 lg:grid-cols-12">
           {/* L'article à la Une (RÉFLÉCHIR : ce qui se passe autour de toi). */}
-          <article className="lg:col-span-7">
+          <article className="lg:col-span-7 lg:flex lg:flex-col">
             {/* Le carrousel façon MSN, piloté par la régie (/admin/journal) :
                 chaque slide porte son propre surtitre. */}
             <UneCarousel slides={slides} />
 
             {/* À lire aussi — la rivière de titres (façon portail MSN) : des
-                manchettes cliquables qui irriguent le reste du site. */}
-            <div className="mt-5 border-t-2 border-[#1d1c16] pt-3">
+                manchettes cliquables qui irriguent le reste du site. La liste
+                S'ÉTIRE jusqu'au pied de colonne (flex-1 + content-between) :
+                le mou devient de l'interligne, jamais un trou. */}
+            <div className="mt-5 border-t-2 border-[#1d1c16] pt-3 lg:flex lg:flex-1 lg:flex-col">
               <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                 À lire aussi
               </p>
-              <ul className="mt-2 grid gap-x-6 gap-y-2 sm:grid-cols-2">
+              <ul className="mt-2 grid gap-x-6 gap-y-2 sm:grid-cols-2 lg:flex-1 lg:content-between">
                 {[
                   { emoji: "🖼️", titre: "Picto Maths : 25 défis en images de l'île", href: "/picto-maths" },
                   { emoji: "🗺️", titre: "La carte de La Réunion, lieu par lieu, avec les maths dedans", href: "/carte" },
@@ -1189,6 +1197,12 @@ export default function AccueilPage({
                   { emoji: "✍️", titre: "La dictée du jour : 5 mots sans faute, avec l'audio", href: "/dictee-du-jour" },
                   { emoji: "⚡", titre: "Calcul rapide : 3 minutes d'automatismes chrono", href: "/calcul-rapide" },
                   { emoji: "🌋", titre: "Maths Réel · 974 : le carnet de terrain, photos et vidéos", href: "/maths-974" },
+                  // 4 titres de plus (24/07, contre le trou) — des pages que
+                  // l'accueil ne montrait plus nulle part ailleurs.
+                  { emoji: "🔔", titre: "La courbe en cloche : la planche de Galton dans ta main", href: "/loi-normale" },
+                  { emoji: "💫", titre: "La machine des epsilons : des étincelles aux infinis", href: "/simulateur-epsilon" },
+                  { emoji: "🎤", titre: "Le Grand oral : s'entraîner à parler, chrono en main", href: "/grand-oral" },
+                  { emoji: "💬", titre: "Le bon prompt : bien demander à une IA, ça s'apprend", href: "/le-bon-prompt" },
                 ].map((l) => (
                   <li key={l.href} className="border-b border-dotted border-[#1d1c16]/30 pb-2">
                     <Link href={l.href} className="group flex items-baseline gap-2">
@@ -1204,7 +1218,7 @@ export default function AccueilPage({
           </article>
 
           {/* Le fil du jour (APPRENDRE : les rendez-vous quotidiens). */}
-          <aside className="border-[#1d1c16]/25 lg:col-span-3 lg:border-l lg:pl-6">
+          <aside className="border-[#1d1c16]/25 lg:col-span-3 lg:flex lg:flex-col lg:border-l lg:pl-6">
             <Kicker>Apprendre · Aujourd&apos;hui</Kicker>
             <div className="mt-2 divide-y divide-[#1d1c16]/20">
               {/* RÈGLE DU JOURNAL (Frédéric, 18/07) : une question posée en
@@ -1318,10 +1332,31 @@ export default function AccueilPage({
               )}
 
             </div>
+
+            {/* L'APPEL AUX ENTREPRISES — déplacé de la colonne édito (24/07) :
+                la col. 3 débordait, celle-ci finissait trop tôt. Ancré au PIED
+                de la colonne (mt-auto) : c'est lui qui bouche le trou. */}
+            <div className="lg:mt-auto">
+              <div className="mt-4 border-2 border-[#1d1c16] bg-amber-50 p-3.5 shadow-[3px_3px_0_0_#1d1c16]">
+                <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1d1c16]">
+                  🚀 Aux entreprises de l&apos;île
+                </p>
+                <p className="mt-1.5 text-sm font-semibold leading-6 text-[#1d1c16]/85">
+                  Votre métier peut devenir un article, une simulation, un défi —
+                  comme la canne, le lait ou le barrage avant vous.
+                </p>
+                <Link
+                  href="/entreprises"
+                  className="mt-2 inline-block border-2 border-[#1d1c16] bg-[#1d1c16] px-3 py-1.5 text-xs font-black text-amber-50 hover:bg-transparent hover:text-[#1d1c16]"
+                >
+                  Participez à l&apos;aventure →
+                </Link>
+              </div>
+            </div>
           </aside>
 
           {/* L'édito — le moment humain, signé (photo + lettre repliée). */}
-          <aside className="border-[#1d1c16]/25 lg:col-span-2 lg:border-l lg:pl-6">
+          <aside className="border-[#1d1c16]/25 lg:col-span-2 lg:flex lg:flex-col lg:border-l lg:pl-6">
             {/* L'ÉDITO VIENT DE LA BASE (24/07) : il s'appelait « du jour »
                 mais ne changeait jamais. Rubrique 'edito' de journal_articles,
                 éditable dans /admin/articles — le plus récent gagne, et sa
@@ -1379,6 +1414,10 @@ export default function AccueilPage({
               <span className="whitespace-nowrap">professeur d&apos;élèves</span>
             </p>
 
+            {/* CHIFFRE + MOT DU JOUR, ancrés au PIED de la colonne (mt-auto) :
+                le mou éventuel respire entre la signature de l'édito et ces
+                encarts — jamais de trou en bas. */}
+            <div className="lg:mt-auto">
             {/* LE CHIFFRE DU JOUR — la chose à LIRE chaque matin (30 secondes,
                 un chiffre vrai, trois lignes). Rotation quotidienne sur la
                 banque lib/chiffre-du-jour.ts. Place choisie par Frédéric :
@@ -1420,27 +1459,9 @@ export default function AccueilPage({
 
             {/* LE MOT DU JOUR — entre le chiffre et le picto (demande de
                 Frédéric, 22/07) : l'indice se lit ici, le mot s'écoute et
-                s'écrit sur la dictée du jour. */}
+                s'écrit sur la dictée du jour. (L'appel aux entreprises est
+                parti au pied de la colonne 2 — celle-ci débordait.) */}
             <MotDuJourEncart />
-
-            {/* L'APPEL AUX ENTREPRISES — encadré (demande de Frédéric, 22/07 :
-                « c'est super important ») : bordure pleine + fond ambré pour le
-                sortir du flux de la colonne. Le journal invite le réel de l'île
-                à entrer dans ses pages. */}
-            <div className="mt-4 border-2 border-[#1d1c16] bg-amber-50 p-3.5 shadow-[3px_3px_0_0_#1d1c16]">
-              <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1d1c16]">
-                🚀 Aux entreprises de l&apos;île
-              </p>
-              <p className="mt-1.5 text-sm font-semibold leading-6 text-[#1d1c16]/85">
-                Votre métier peut devenir un article, une simulation, un défi —
-                comme la canne, le lait ou le barrage avant vous.
-              </p>
-              <Link
-                href="/entreprises"
-                className="mt-2 inline-block border-2 border-[#1d1c16] bg-[#1d1c16] px-3 py-1.5 text-xs font-black text-amber-50 hover:bg-transparent hover:text-[#1d1c16]"
-              >
-                Participez à l&apos;aventure →
-              </Link>
             </div>
           </aside>
         </div>

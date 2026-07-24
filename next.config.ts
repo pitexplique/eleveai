@@ -93,6 +93,15 @@ const nextConfig = {
           "/accueil?utm_source=instagram&utm_medium=social&utm_campaign=journal",
         permanent: false,
       },
+      // /effort = l'adresse du Reel « à deux » avec le coach sportif de
+      // Saint-Pierre (24/07) : l'effort au carré → la machine Diagonale.
+      // utm_source=instagram : c'est SON réseau, on mesure ce qu'il apporte.
+      {
+        source: "/effort",
+        destination:
+          "/diagonale-des-fous?utm_source=instagram&utm_medium=video&utm_campaign=effort",
+        permanent: false,
+      },
       // Les deux destinations phares à dire dans TOUTES les vidéos.
       {
         source: "/cahier",
