@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MACHINES, type Machine } from "@/lib/simulateurs";
 import MachinesPanel from "@/components/simulateurs/MachinesPanel";
+import CarteMachine from "@/components/simulateurs/CarteMachine";
 
 const PAPER = "#f6f1e4";
 const INK = "#1d1c16";
@@ -36,32 +37,18 @@ export const metadata: Metadata = {
   },
 };
 
+// Le rendu vit dans CarteMachine (partagé avec l'accueil) : ici, juste le
+// passage Machine → carte.
 function Carte({ m }: { m: Machine }) {
   return (
-    <Link
+    <CarteMachine
       href={m.href}
-      className="group flex flex-col border-2 border-[#1d1c16] bg-[#fcfcf7] transition hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#1d1c16]"
-    >
-      <div className="aspect-[16/10] w-full overflow-hidden border-b-2 border-[#1d1c16]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={m.image}
-          alt={`${m.nom} — ${m.notion}`}
-          loading="lazy"
-          className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
-          style={{ backgroundColor: "#fcfcf7" }}
-        />
-      </div>
-      <div className="flex flex-1 flex-col p-3.5">
-        <h3 className="font-serif text-lg font-black leading-tight">
-          <span aria-hidden>{m.emoji}</span> {m.nom}
-        </h3>
-        <p className="mt-1 flex-1 text-sm leading-6 text-[#1d1c16]/75">{m.notion}</p>
-        <p className="mt-2 text-sm font-black text-cyan-800 group-hover:underline">
-          🎛️ {m.cta} →
-        </p>
-      </div>
-    </Link>
+      image={m.image}
+      emoji={m.emoji}
+      titre={m.nom}
+      texte={m.notion}
+      cta={`🎛️ ${m.cta} →`}
+    />
   );
 }
 

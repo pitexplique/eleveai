@@ -35,6 +35,7 @@ import AgendaJournal from "@/components/accueil/AgendaJournal";
 import AbonnementJournal from "@/components/accueil/AbonnementJournal";
 import ReclameMachine from "@/components/accueil/ReclameMachine";
 import MachinesPanel from "@/components/simulateurs/MachinesPanel";
+import CarteMachine from "@/components/simulateurs/CarteMachine";
 import { MACHINES_RECENTES } from "@/lib/simulateurs";
 import { getDicteeDuJour, type DicteeMot } from "@/lib/dictee-du-jour/words";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
@@ -919,8 +920,9 @@ export default function AccueilPage({
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
           <a href="#en-vrai" className="hover:text-cyan-800">En vrai</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#comprendre" className="hover:text-cyan-800">Comprendre</a>
-          <span aria-hidden className="text-[#1d1c16]/30">·</span>
+          {/* « Comprendre » a fusionné avec « Un peu de maths » (24/07) : une
+              seule entrée, sinon deux liens du chemin de fer menaient au même
+              endroit. */}
           <a href="#un-peu-de-maths" className="hover:text-cyan-800">Un peu de maths</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
           <a href="#apprendre" className="hover:text-cyan-800">Apprendre</a>
@@ -1226,13 +1228,18 @@ export default function AccueilPage({
                   <Link
                     key={m.href}
                     href={m.href}
-                    className="group flex items-baseline gap-2 border-b border-dotted border-[#1d1c16]/30 py-2"
+                    className="group block border-b border-dotted border-[#1d1c16]/30 py-2"
                   >
-                    <span aria-hidden className="text-sm">{m.emoji}</span>
-                    <span className="font-serif text-[15px] font-black leading-snug group-hover:underline">
-                      {m.nom}
+                    <span className="flex items-baseline gap-2">
+                      <span aria-hidden className="text-sm">{m.emoji}</span>
+                      <span className="font-serif text-[15px] font-black leading-snug group-hover:underline">
+                        {m.nom}
+                      </span>
                     </span>
-                    <span className="ml-auto whitespace-nowrap text-xs font-black text-cyan-800">
+                    {/* Le libellé bleu passe DESSOUS (Frédéric, 24/07) : sur la
+                        même ligne il débordait de la colonne quand le titre
+                        tenait sur deux lignes. */}
+                    <span className="mt-0.5 block pl-[22px] text-xs font-black text-cyan-800">
                       {m.cta} →
                     </span>
                   </Link>
@@ -1649,75 +1656,16 @@ export default function AccueilPage({
         </div>
       </section>
 
-      {/* ══ COMPRENDRE — les schémas animés : les films et les dessins qui
-          bougent (nés du barrage, 20/07). Le SVG animé joue directement dans
-          la carte (img) ; chaque nouveau film = une carte de plus ici. ═══════ */}
-      <section id="comprendre" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
-        <Kicker>Comprendre · Les schémas animés</Kicker>
-        <TitreRubrique>Le dessin s&apos;anime, et tu comprends</TitreRubrique>
-        <div className="mt-4 grid gap-x-6 gap-y-6 sm:grid-cols-2">
-          {/* Le film du principe du barrage */}
-          <a
-            href="https://youtu.be/yHCtKaj8TPw"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group border-t border-[#1d1c16]/25 pt-3"
-          >
-            <div className="relative aspect-video w-full overflow-hidden border border-[#1d1c16]/20 bg-white">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/barrage-coupe-anime.svg"
-                alt="Le principe du barrage de Takamaka, schéma animé"
-                loading="lazy"
-                className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
-              />
-              <span className="absolute inset-0 flex items-center justify-center">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-red-700/90 text-sm text-white shadow-lg transition group-hover:scale-110">
-                  ▶
-                </span>
-              </span>
-            </div>
-            <h3 className="mt-2 font-serif text-lg font-black leading-snug group-hover:underline">
-              🎬 Le principe du barrage de Takamaka
-            </h3>
-            <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
-              La vanne s&apos;ouvre, l&apos;eau tombe de 500 m, la turbine tourne, le courant
-              grimpe les pylônes. Un film de 40 secondes, sans son — fait pour être lu.
-            </p>
-          </a>
-
-          {/* Le cœur ε → ∞ du fondateur */}
-          <Link href="/pourquoi-eleveai" className="group border-t border-[#1d1c16]/25 pt-3">
-            <div
-              className="relative aspect-video w-full overflow-hidden border border-[#1d1c16]/20"
-              style={{ backgroundColor: "#fcfcf7" }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/coeur-epsilon-infini.svg"
-                alt="Un cœur dessiné au stylo : epsilon, un réseau de neurones, l'infini"
-                loading="lazy"
-                className="h-full w-full object-contain transition duration-300 group-hover:scale-[1.03]"
-              />
-            </div>
-            <h3 className="mt-2 font-serif text-lg font-black leading-snug group-hover:underline">
-              ε → ∞, le cœur d&apos;un prof de maths
-            </h3>
-            <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
-              Une petite étincelle&nbsp;: un epsilon traverse un réseau de neurones et fait
-              naître l&apos;infini. L&apos;apprentissage marche pareil — un progrès minuscule
-              en déclenche d&apos;autres. En créole&nbsp;: «&nbsp;In min i lav lot&nbsp;» —
-              une main lave l&apos;autre.
-            </p>
-          </Link>
-        </div>
-      </section>
-
       {/* ══ UN PEU DE MATHS — les pépites du prof (table journal_articles,
-          rubrique 'un-peu-de-maths', repli en dur). Premier article : la
-          machine des epsilons — la devise du site, à faire découvrir. ════════ */}
+          rubrique 'un-peu-de-maths', repli en dur). Refonte du 24/07 :
+          « Les schémas animés » disait la même chose et fusionne ici, et on
+          n'affiche plus que LES TROIS derniers, au patron de /simulateurs
+          (CarteMachine : filet noir, image en bandeau, ombre au survol). Le
+          reste se lit dans le hub des machines, lien en bas. L'ancre
+          #comprendre est gardée sur le surtitre : les vieux liens tombent
+          toujours au bon endroit. ═══════════════════════════════════════════ */}
       <section id="un-peu-de-maths" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
-        <Kicker>Réfléchir · La rubrique du prof</Kicker>
+        <Kicker id="comprendre">Comprendre · La rubrique du prof</Kicker>
         <TitreRubrique>Un peu de maths</TitreRubrique>
         {/* Sous-titre qui POSE L'ATTENTE (demande de Frédéric, 23/07) : le hook
             est tous âges, mais le fond va loin — personne ne se sent exclu, et
@@ -1725,55 +1673,25 @@ export default function AccueilPage({
         <p className="mt-2 text-sm font-semibold text-[#1d1c16]/60">
           Des histoires pour tous, des maths qui vont loin — collège → supérieur.
         </p>
-        <div className="mt-4 grid gap-x-6 gap-y-6 sm:grid-cols-2">
-          {unPeuDeMaths.map((a) => {
-            const externe = /^https?:\/\//.test(a.lien);
-            const carte = (
-              <>
-                {a.imageUrl && (
-                  <div
-                    className="relative aspect-video w-full overflow-hidden border border-[#1d1c16]/20"
-                    style={{ backgroundColor: "#fcfcf7" }}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={a.imageUrl}
-                      alt={a.titre}
-                      loading="lazy"
-                      className="h-full w-full object-contain transition duration-300 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                )}
-                <h3 className="mt-2 font-serif text-lg font-black leading-snug group-hover:underline">
-                  {a.titre}
-                </h3>
-                {a.accroche && (
-                  <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
-                    {a.accroche}
-                  </p>
-                )}
-                {a.cta && (
-                  <p className="mt-1.5 text-sm font-black text-cyan-800">{a.cta}</p>
-                )}
-              </>
-            );
-            return externe ? (
-              <a
-                key={a.id}
-                href={a.lien}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group border-t border-[#1d1c16]/25 pt-3"
-              >
-                {carte}
-              </a>
-            ) : (
-              <Link key={a.id} href={a.lien} className="group border-t border-[#1d1c16]/25 pt-3">
-                {carte}
-              </Link>
-            );
-          })}
+        <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {unPeuDeMaths.slice(0, 3).map((a) => (
+            <CarteMachine
+              key={a.id}
+              href={a.lien}
+              image={a.imageUrl}
+              titre={a.titre}
+              texte={a.accroche}
+              cta={a.cta}
+              externe={/^https?:\/\//.test(a.lien)}
+            />
+          ))}
         </div>
+        <Link
+          href="/simulateurs"
+          className="mt-4 inline-block text-sm font-black text-cyan-800 underline underline-offset-2"
+        >
+          🎛️ Toutes les machines dans ta main →
+        </Link>
       </section>
 
       {/* ══ APPRENDRE — les pages matières (le coach) + les parcours ═════════ */}
