@@ -207,39 +207,41 @@ const ROUTES: RouteConfig[] = [
   { path: "/remerciements",   priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_JOURNAL },
   { path: "/besoin-de-vous",  priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_JOURNAL },
 
-  // ── MATHS RÉEL · 974 ───────────────────────────────────────────────────────
-  { path: "/maths-974",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_974 },
-  // LES MACHINES « DANS TA MAIN » — la famille de simulateurs de l'île, avec
-  // leurs défis intégrés (18/07). Le cyclone montera encore en priorité à la
-  // saison cyclonique (novembre).
-  { path: "/simulateur-cyclone", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
-  { path: "/simulateur-sucre", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
-  { path: "/simulateur-fromage", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
+  // ── MATHS RÉEL · 974 + LES MACHINES « DANS TA MAIN » ───────────────────────
+  // HIÉRARCHIE (décision 24/07) : ces pages sont des PORTES D'ENTRÉE, pas la
+  // destination. Le coach (0.95) entraîne, les parcours (0.95) testent — eux
+  // restent au-dessus. Les simulateurs/histoires « un peu de maths » sont donc
+  // volontairement à 0.8 : ils amènent le lecteur, qui doit ensuite aller au
+  // coach. (Le cyclone remontera à la saison cyclonique — novembre.)
+  { path: "/maths-974",       priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_974 },
+  { path: "/simulateur-cyclone", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
+  { path: "/simulateur-sucre", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
+  { path: "/simulateur-fromage", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
   // Le barrage de Takamaka (19/07) — l'eau de l'île fait la lumière.
-  { path: "/simulateur-barrage", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-19") },
+  { path: "/simulateur-barrage", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-19") },
   // Le volcan (19/07) — la Fournaise qui fabrique l'île.
-  { path: "/simulateur-volcan", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-19") },
+  { path: "/simulateur-volcan", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-19") },
   // Le lagon de l'Ermitage (20/07) — la muraille vivante qui fait la plage.
-  { path: "/simulateur-lagon", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-20") },
+  { path: "/simulateur-lagon", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-20") },
   // La machine des epsilons (20/07) — le coefficient k, la suite géométrique :
   // « activer des epsilons peut engendrer des infinis ».
-  { path: "/simulateur-epsilon", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-20") },
+  { path: "/simulateur-epsilon", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-20") },
   // La courbe en cloche (21/07) — de la binomiale (les coefficients de Pascal)
   // à la loi normale : le théorème de De Moivre-Laplace dans un curseur.
-  { path: "/loi-normale", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-21") },
+  { path: "/loi-normale", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-21") },
   // L'exponentielle en miroir (22/07) — la montée (e^x) et la descente (courbe
   // de l'oubli d'Ebbinghaus) : deux courbes nées d'un dessin au stylo.
-  { path: "/exponentielle", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-22") },
+  { path: "/exponentielle", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-22") },
   // La loi de la performance (22/07) — le neurone du dessin de Mbappé : ADN →
   // variables x → coefficients → réseau → performance. « Faut-il améliorer ses
   // défauts ou ses qualités ? »
-  { path: "/loi-performance", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-22") },
+  { path: "/loi-performance", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-22") },
   // Le but qui sort de la moyenne (22/07) — la loi de Pareto : la queue lourde
   // où naissent les records, opposée à la cloche de la loi normale.
-  { path: "/loi-pareto", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-22") },
+  { path: "/loi-pareto", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-22") },
   // La Diagonale des Fous (23/07) — l'équation différentielle du coureur : la
   // réserve se vide au carré de l'effort et avec la pente (méthode d'Euler).
-  { path: "/diagonale-des-fous", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-23") },
+  { path: "/diagonale-des-fous", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-23") },
   { path: "/picto-maths",     priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/carte",           priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/cahier-vacances/maths", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_974 },

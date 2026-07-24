@@ -933,16 +933,62 @@ export default function AccueilPage({
           Comprendre. Apprendre. S&apos;amuser.
         </p>
 
-        {/* La rampe d'entrée par classe : un clic sur sa classe DÉPLIE le
-            choix des matières (demande de Frédéric : pas que le coach maths).
-            Anglais/espagnol fonctionnent par niveaux CECRL → leurs liens
-            mènent au choix de niveau. */}
-        <div className="border-b border-[#1d1c16]/30 py-2.5">
-          <div className="flex flex-wrap items-center justify-center gap-1.5">
-            <span className="mr-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/60">
-              🎓 Entraîne-toi — ta classe :
-            </span>
-            {CLASSES_ENTREE.map((c) => (
+        {/* ══ LE COACH — LE PREMIER GESTE ═══════════════════════════════════
+            Décision produit (24/07, Frédéric) : le COACH est la destination
+            (il entraîne), PARCOURS + DÉFIS sont l'épreuve (ils testent), et le
+            journal / simulateurs ne sont que la PORTE D'ENTRÉE. On remet donc
+            l'entraînement en tête d'affiche — trois verbes TOUJOURS visibles,
+            la classe affine la destination — au lieu de la bande repliée qui
+            cachait le coach derrière un clic. */}
+        <div className="border-b border-[#1d1c16]/30 py-4">
+          <div className="mx-auto max-w-4xl border-2 border-cyan-800 bg-cyan-800/[0.05] p-4 sm:p-5">
+            <p className="text-center text-[11px] font-black uppercase tracking-[0.22em] text-cyan-800">
+              ✏️ Commence ici · Le coach t&apos;entraîne
+            </p>
+            <h2 className="mt-1 text-center font-serif text-2xl font-black leading-tight sm:text-[1.75rem]">
+              Entraîne-toi maintenant — tout est corrigé
+            </h2>
+            <p className="mx-auto mt-1.5 max-w-2xl text-center text-sm font-medium leading-6 text-[#1d1c16]/75">
+              Le coach t&apos;explique et tu t&apos;entraînes ; le parcours et le
+              défi te testent. Le journal, c&apos;est l&apos;histoire qui donne
+              envie — ici, c&apos;est l&apos;entraînement.
+            </p>
+
+            {/* Les 3 verbes de l'objectif — toujours visibles, un clic chacun :
+                s'entraîner (coach) · se tester (parcours) · se défier (défis). */}
+            <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2">
+              <Link
+                href={getHref("/coach-ia/maths")}
+                className="inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-5 py-2.5 text-sm font-black text-[#f0fafc] shadow-sm transition hover:bg-[#1d1c16]"
+              >
+                ✏️ Entraîne-toi <span className="font-semibold opacity-80">· le Coach</span>
+              </Link>
+              <Link
+                href="/parcours"
+                className="inline-flex items-center gap-2 rounded-sm border-2 border-cyan-800 px-5 py-2.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
+              >
+                🧭 Teste-toi <span className="font-semibold opacity-80">· Parcours</span>
+              </Link>
+              <Link
+                href="/defis-du-jour"
+                className="inline-flex items-center gap-2 rounded-sm border-2 border-cyan-800 px-5 py-2.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
+              >
+                🎯 Défi du jour
+              </Link>
+            </div>
+            <p className="mt-2 text-center text-[11px] font-bold text-[#1d1c16]/55">
+              <Link href="/explorer" className="underline underline-offset-2 hover:text-cyan-800">
+                Toutes les matières &amp; tout le catalogue →
+              </Link>
+            </p>
+
+            {/* La classe affine la destination du coach (accordéon conservé). */}
+            <div className="mt-4 border-t border-[#1d1c16]/15 pt-3.5">
+              <div className="flex flex-wrap items-center justify-center gap-1.5">
+                <span className="mr-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/60">
+                  🎓 Ta classe :
+                </span>
+                {CLASSES_ENTREE.map((c) => (
               <button
                 key={c.slug}
                 type="button"
@@ -1006,6 +1052,8 @@ export default function AccueilPage({
               </div>
             </div>
           )}
+            </div>
+          </div>
         </div>
 
         {/* Le courrier en manchette (demande de Frédéric, 19/07) : un avis
