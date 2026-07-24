@@ -226,6 +226,9 @@ const ROUTES: RouteConfig[] = [
   { path: "/simulateur-volcan", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-19") },
   // Le lagon de l'Ermitage (20/07) — la muraille vivante qui fait la plage.
   { path: "/simulateur-lagon", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-20") },
+  // La salle de sport dans ta main (24/07) — l'effort en watts → joules → kcal,
+  // le rendement musculaire de 25 %, puis l'assiette qui répare le muscle.
+  { path: "/simulateur-energie", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-24") },
   // La machine des epsilons (20/07) — le coefficient k, la suite géométrique :
   // « activer des epsilons peut engendrer des infinis ».
   { path: "/simulateur-epsilon", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-20") },

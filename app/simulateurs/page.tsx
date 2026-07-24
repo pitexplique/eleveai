@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MACHINES, type Machine } from "@/lib/simulateurs";
+import { MACHINES, NB_MACHINES, type Machine } from "@/lib/simulateurs";
 import MachinesPanel from "@/components/simulateurs/MachinesPanel";
 import CarteMachine from "@/components/simulateurs/CarteMachine";
 
@@ -10,7 +10,7 @@ const INK = "#1d1c16";
 export const metadata: Metadata = {
   title: "Les machines dans ta main — les simulateurs de La Réunion",
   description:
-    "Douze machines à régler du bout des doigts pour comprendre l'île et les maths : le cyclone, le volcan, le barrage, le lagon, la loi normale, l'exponentielle, la Diagonale des Fous… Chaque machine t'explique, puis t'envoie t'entraîner avec le coach.",
+    "Treize machines à régler du bout des doigts pour comprendre l'île et les maths : le cyclone, le volcan, le barrage, le lagon, la salle de sport, la loi normale, l'exponentielle, la Diagonale des Fous… Chaque machine t'explique, puis t'envoie t'entraîner avec le coach.",
   alternates: { canonical: "/simulateurs" },
   keywords: [
     "simulateur pédagogique",
@@ -92,7 +92,7 @@ export default function SimulateursPage() {
                 Les machines dans ta main
               </h1>
               <p className="mt-3 max-w-2xl text-base font-medium leading-7 text-[#1d1c16]/80">
-                Douze machines à régler du bout des doigts. Tu bouges un curseur,
+                {NB_MACHINES} machines à régler du bout des doigts. Tu bouges un curseur,
                 l&apos;île répond : le cyclone tourne, la lave coule, la cloche se
                 forme. Tu comprends d&apos;abord — puis tu{" "}
                 <b>t&apos;entraînes avec le coach</b>.

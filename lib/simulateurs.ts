@@ -30,6 +30,7 @@ export const MACHINES: Machine[] = [
   { href: "/simulateur-barrage", emoji: "💧", nom: "Le barrage de Takamaka", notion: "L'eau tombe de 500 m, l'île s'allume : l'énergie m·g·h.", cta: "Ouvrir les vannes", image: "/images/barrage-takamaka.webp", groupe: "reel", date: "2026-07-19" },
   { href: "/simulateur-volcan", emoji: "🌋", nom: "Le volcan de la Fournaise", notion: "La Fournaise fabrique l'île : débit, volume, vitesse.", cta: "Régler la lave", image: "/images/volcan-piton-de-la-fournaise.webp", groupe: "reel", date: "2026-07-19" },
   { href: "/simulateur-lagon", emoji: "🐠", nom: "Le lagon de l'Ermitage", notion: "La barrière casse 90 % de la houle : pourcentages et énergie.", cta: "Régler la houle", image: "/images/lagon.webp", groupe: "reel", date: "2026-07-20" },
+  { href: "/simulateur-energie", emoji: "💪", nom: "La centrale, c'est toi", notion: "Tes watts deviennent des joules, des kcal, des ampoules — puis l'assiette répare le muscle.", cta: "Régler ton effort", image: "/images/salle-energie.svg", groupe: "reel", date: "2026-07-24" },
   // ── Un peu de maths ─────────────────────────────────────────────────────────
   { href: "/simulateur-epsilon", emoji: "⚡", nom: "La machine des epsilons", notion: "Un petit coefficient k, une suite géométrique : des epsilons engendrent des infinis.", cta: "Activer un epsilon", image: "/images/coeur-epsilon-infini.svg", groupe: "maths", date: "2026-07-20" },
   { href: "/loi-normale", emoji: "🔔", nom: "La courbe en cloche", notion: "La planche de Galton et la loi normale : le théorème de De Moivre-Laplace.", cta: "Régler la cloche", image: "/images/binomiale-vers-normale.svg", groupe: "maths", date: "2026-07-21" },
@@ -38,6 +39,9 @@ export const MACHINES: Machine[] = [
   { href: "/loi-pareto", emoji: "⚽", nom: "Le but qui sort de la moyenne", notion: "La loi de Pareto : la queue lourde où naissent les records, face à la cloche.", cta: "Faire surgir les records", image: "/images/pareto-mbappe.svg", groupe: "maths", date: "2026-07-22" },
   { href: "/diagonale-des-fous", emoji: "🏃", nom: "La Diagonale des Fous", notion: "L'équation différentielle du coureur : la réserve se vide au carré de l'effort (Euler).", cta: "Doser ta course", image: "/images/diagonale-des-fous.svg", groupe: "maths", date: "2026-07-23" },
 ];
+
+/** Le compte, écrit une seule fois : les pages disent « les N machines ». */
+export const NB_MACHINES = MACHINES.length;
 
 /** Les machines, de la plus récente à la plus ancienne (réclame + avant-goût). */
 export const MACHINES_RECENTES: Machine[] = [...MACHINES].sort((a, b) =>

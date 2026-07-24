@@ -94,12 +94,19 @@ const nextConfig = {
         permanent: false,
       },
       // /effort = l'adresse du Reel « à deux » avec le coach sportif de
-      // Saint-Pierre (24/07) : l'effort au carré → la machine Diagonale.
+      // Saint-Pierre (24/07). Elle visait la Diagonale faute de mieux ; depuis
+      // que la salle de sport a SA machine, elle y va directement.
       // utm_source=instagram : c'est SON réseau, on mesure ce qu'il apporte.
       {
         source: "/effort",
         destination:
-          "/diagonale-des-fous?utm_source=instagram&utm_medium=video&utm_campaign=effort",
+          "/simulateur-energie?utm_source=instagram&utm_medium=video&utm_campaign=effort",
+        permanent: false,
+      },
+      // L'adresse qui se dit à voix haute dans la salle.
+      {
+        source: "/muscle",
+        destination: "/simulateur-energie",
         permanent: false,
       },
       // Les deux destinations phares à dire dans TOUTES les vidéos.

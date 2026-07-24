@@ -36,7 +36,7 @@ import AbonnementJournal from "@/components/accueil/AbonnementJournal";
 import ReclameMachine from "@/components/accueil/ReclameMachine";
 import MachinesPanel from "@/components/simulateurs/MachinesPanel";
 import CarteMachine from "@/components/simulateurs/CarteMachine";
-import { MACHINES_RECENTES } from "@/lib/simulateurs";
+import { MACHINES_RECENTES, NB_MACHINES } from "@/lib/simulateurs";
 import { getDicteeDuJour, type DicteeMot } from "@/lib/dictee-du-jour/words";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
@@ -369,6 +369,7 @@ const CATALOGUE_EMOJIS: Record<string, string> = {
   "simulateur-barrage": "💧",
   "simulateur-volcan": "🌋",
   "simulateur-lagon": "🐠",
+  "simulateur-energie": "💪",
   "grand-oral": "🎤", "concours-ia": "🏆", "concours-general": "🏆",
   "concours-logo": "🎨", "cahier-vacances": "🏖️", "cahier-maths": "🏖️",
 };
@@ -1307,7 +1308,7 @@ export default function AccueilPage({
                 >
                   <MachinesPanel className="w-full" />
                   <p className="mt-1.5 font-serif text-[15px] font-black leading-snug text-[#1d1c16]">
-                    Les 12 machines dans ta main
+                    Les {NB_MACHINES} machines dans ta main
                   </p>
                   <p className="text-xs font-black text-cyan-800 group-hover:underline">
                     Toutes les machines →

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- La carte de « La salle de sport dans ta main » : une silhouette au trait
+     rame sur sa machine, le volant vire, un éclair jaillit et des ampoules LED
+     s'allument — ton corps est une centrale électrique. E = P × t au stylo,
+     sur une feuille à carreaux. Né d'une rencontre avec le coach principal
+     d'une salle de sport de Saint-Pierre (pas de nom, pas de marque). -->
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+<defs>
+  <pattern id="carreaux" width="25" height="25" patternUnits="userSpaceOnUse">
+    <rect width="25" height="25" fill="#fcfcf7"/>
+    <path d="M25 0H0V25" fill="none" stroke="#cfe0f2" stroke-width="1"/>
+  </pattern>
+  <style><![CDATA[
+    .encre{stroke:#2b4a9b;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .rouge{stroke:#c0392b;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .trace{stroke-dasharray:100;stroke-dashoffset:100;animation:trace ease forwards}
+    .pop{opacity:0;animation:pop .7s ease forwards}
+    .main{font-family:'Segoe Print','Bradley Hand',cursive}
+    @keyframes trace{to{stroke-dashoffset:0}}
+    @keyframes pop{to{opacity:1}}
+  ]]></style>
+</defs>
+
+<rect width="800" height="480" fill="url(#carreaux)"/>
+<line x1="26" y1="0" x2="26" y2="480" stroke="#f3b6b6" stroke-width="2" opacity=".7"/>
+
+<!-- le titre, à la main -->
+<text class="pop main" style="animation-delay:.3s;font-size:26px;font-weight:bold;fill:#1a7f37" x="60" y="70">ton corps est une</text>
+<text class="pop main" style="animation-delay:.6s;font-size:26px;font-weight:bold;fill:#1a7f37" x="60" y="104">centrale &#233;lectrique</text>
+
+<!-- le rail du rameur -->
+<line class="encre trace" pathLength="100" style="animation-duration:.8s;animation-delay:.4s;stroke-width:4"
+  x1="140" y1="392" x2="440" y2="392"/>
+
+<!-- le volant d'inertie : la roue que l'effort fait virer -->
+<circle class="encre trace" pathLength="100" style="animation-duration:1s;animation-delay:.8s;stroke-width:4" cx="180" cy="346" r="40"/>
+<g style="transform-origin:180px 346px">
+  <path class="encre" style="stroke-width:3.5" d="M180 312 V380 M146 346 H214 M156 322 L204 370 M204 322 L156 370"/>
+  <animateTransform attributeName="transform" type="rotate" from="0 180 346" to="360 180 346" dur="2.2s" begin="1.4s" repeatCount="indefinite"/>
+</g>
+
+<!-- la corde : du volant à la poignée (elle suit le va-et-vient) -->
+<line class="encre trace" pathLength="100" style="animation-duration:.7s;animation-delay:1.4s;stroke-width:3" x1="222" y1="334" x2="318" y2="326">
+  <animate attributeName="x2" values="318;340;318" dur="1.6s" begin="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"/>
+</line>
+
+<!-- la silhouette : elle rame (va-et-vient sur le rail) -->
+<g class="pop" style="animation-delay:1.6s">
+  <g>
+    <rect x="330" y="378" width="36" height="9" rx="4" fill="#2b4a9b"/>
+    <path class="rouge" style="stroke-width:6" d="M348 378 L376 312"/>
+    <circle cx="382" cy="296" r="14" fill="#c0392b"/>
+    <path class="rouge" style="stroke-width:6" d="M372 320 L322 330"/>
+    <path class="rouge" style="stroke-width:6" d="M348 378 L306 344 L266 386"/>
+    <rect x="316" y="318" width="8" height="20" rx="3" fill="#2b4a9b"/>
+    <animateTransform attributeName="transform" type="translate" values="0 0;22 0;0 0" dur="1.6s" begin="2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"/>
+  </g>
+</g>
+
+<!-- l'éclair : l'effort devient de l'énergie -->
+<path class="pop" style="animation-delay:2.4s" d="M508 160 L556 160 L528 216 L562 216 L488 316 L514 238 L478 238 Z"
+  fill="#ffd766" stroke="#b97e12" stroke-width="3" stroke-linejoin="round"/>
+
+<!-- les ampoules LED : elles battent au rythme de l'effort -->
+<g class="pop" style="animation-delay:2.8s">
+  <circle cx="618" cy="150" r="20" fill="#ffd766" stroke="#b97e12" stroke-width="2.5">
+    <animate attributeName="opacity" values="0.35;1;0.35" dur="1.6s" begin="3s" repeatCount="indefinite"/>
+  </circle>
+  <path d="M611 174 h14 M613 181 h10" stroke="#8a7a55" stroke-width="2.5" stroke-linecap="round"/>
+</g>
+<g class="pop" style="animation-delay:3s">
+  <circle cx="684" cy="112" r="20" fill="#ffd766" stroke="#b97e12" stroke-width="2.5">
+    <animate attributeName="opacity" values="0.35;1;0.35" dur="1.6s" begin="3.4s" repeatCount="indefinite"/>
+  </circle>
+  <path d="M677 136 h14 M679 143 h10" stroke="#8a7a55" stroke-width="2.5" stroke-linecap="round"/>
+</g>
+<g class="pop" style="animation-delay:3.2s">
+  <circle cx="736" cy="176" r="20" fill="#ffd766" stroke="#b97e12" stroke-width="2.5">
+    <animate attributeName="opacity" values="0.35;1;0.35" dur="1.6s" begin="3.8s" repeatCount="indefinite"/>
+  </circle>
+  <path d="M729 200 h14 M731 207 h10" stroke="#8a7a55" stroke-width="2.5" stroke-linecap="round"/>
+</g>
+
+<!-- la formule, au stylo -->
+<text class="pop main" style="animation-delay:3.4s;font-size:34px;font-weight:bold;fill:#2b4a9b" x="516" y="392">E = P &#215; t</text>
+<text class="pop main" style="animation-delay:3.8s;font-size:17px;fill:#b97e12" x="516" y="424">10 W = une ampoule LED</text>
+</svg>
