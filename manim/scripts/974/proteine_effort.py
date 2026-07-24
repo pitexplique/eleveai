@@ -235,8 +235,8 @@ class ProteineEffort974Short(EffortBase):
                     for i in range(8)])
         self.wait(1.0)
 
-        appel = self.T("Alors on relève le défi :", size=22, color=BLEU_CALCUL).move_to([0, -2.15, 0])
-        minute = self.T("UNE minute, à fond !", size=28, color=ORANGE_RETENUE).move_to([-0.3, -2.8, 0])
+        appel = self.T("Alors on relève le défi :", size=22, color=BLEU_CALCUL).move_to([-0.15, -1.95, 0])
+        minute = self.T("UNE minute, à fond !", size=28, color=ORANGE_RETENUE).move_to([-0.35, -2.25, 0])
         self.play(self.anim_entree(appel, mode="fade_down"))
         self.play(GrowFromCenter(minute), Flash(minute, color=ORANGE_RETENUE, flash_radius=1.2))
         self.wait(0.9)
@@ -309,9 +309,11 @@ class ProteineEffort974Short(EffortBase):
                   LaggedStart(*[a[0].animate.set_fill(JAUNE_TITRE, opacity=1)
                                 .set_stroke(JAUNE_TITRE) for a in grille],
                               lag_ratio=0.05), run_time=1.2)
-        l2 = self.T("Pendant ta minute, TU éclaires tout ça.", size=21).move_to([0, -2.15, 0])
+        # Remontée à -1,95 et recentrée à gauche : à -2,15 la phrase passait
+        # DERRIÈRE le margouillat du coin bas-droit (vérif image par image).
+        l2 = self.T("Pendant ta minute, TU éclaires tout ça.", size=21).move_to([-0.15, -1.95, 0])
         self.play(self.anim_entree(l2, mode="fade_up"))
-        l3 = self.T("Ton corps est une centrale.", size=24, color=ORANGE_RETENUE).move_to([-0.3, -2.75, 0])
+        l3 = self.T("Ton corps est une centrale.", size=24, color=ORANGE_RETENUE).move_to([-0.35, -2.25, 0])
         self.play(self.anim_entree(l3, mode="pop"))
         self.wait(1.0)
 
@@ -378,7 +380,7 @@ class ProteineEffort974Short(EffortBase):
         self.play(GrowFromCenter(chute))
         self.play(self.anim_entree(chute2, mode="pop"))
         tease = self.T("Mais attends... ce n'est pas fini.", size=21, color=BLEU_CALCUL) \
-            .move_to([-0.3, -2.95, 0])
+            .move_to([-0.35, -1.95, 0])
         self.play(self.anim_entree(tease, mode="fade_up"))
         self.wait(1.0)
 
@@ -410,7 +412,7 @@ class ProteineEffort974Short(EffortBase):
         self.play(self.anim_entree(total, mode="grow"))
         self.play(Flash(total, color=VERT_OK, flash_radius=1.4))
         note = self.T("Voilà pourquoi tu as chaud.", size=21, color=BLEU_CALCUL) \
-            .move_to([-0.3, -2.4, 0])
+            .move_to([-0.35, -2.3, 0])
         self.play(self.anim_entree(note, mode="slide_r"))
         self.wait(1.0)
 
@@ -442,8 +444,8 @@ class ProteineEffort974Short(EffortBase):
         self.play(LaggedStart(*[FadeIn(l, shift=0.4 * RIGHT) for l in lignes], lag_ratio=0.3),
                   run_time=1.1)
 
-        b1 = self.T("Un sportif en mange 1,2 à 1,6 g", size=20).move_to([-0.2, -2.35, 0])
-        b2 = self.T("par kilo, chaque jour.", size=20).move_to([-0.2, -2.75, 0])
+        b1 = self.T("Un sportif en mange 1,2 à 1,6 g", size=20).move_to([-0.35, -2.3, 0])
+        b2 = self.T("par kilo, chaque jour.", size=20).move_to([-0.35, -2.25, 0])
         self.play(self.anim_entree(b1, mode="fade_up"), self.anim_entree(b2, mode="fade_up"))
         self.wait(1.2)
 
@@ -462,11 +464,13 @@ class ProteineEffort974Short(EffortBase):
         self.play(self.anim_entree(appel, mode="fade_down"))
         self.play(GrowFromCenter(url), Flash(url, color=VERT_OK, flash_radius=1.6))
 
+        # ⚠️ Le cadre s'arrête à y = -4 : la signature à -3,7 était ROGNÉE au
+        # rendu (vérif image par image, 24/07). Tout le pied remonte.
         credit1 = self.T("Né d'une rencontre avec le coach principal", size=15, color=GREY_B) \
-            .move_to([0, -3.0, 0])
+            .move_to([-0.35, -2.25, 0])
         credit2 = self.T("d'une salle de sport de Saint-Pierre.", size=15, color=GREY_B) \
-            .move_to([0, -3.3, 0])
-        sig = self.T(SIGNATURE, size=16, color=VERT_OK).move_to([0, -3.7, 0])
+            .move_to([-0.35, -1.95, 0])
+        sig = self.T(SIGNATURE, size=16, color=VERT_OK).move_to([-0.35, -1.95, 0])
         self.play(FadeIn(credit1), FadeIn(credit2))
         self.play(Write(sig))
         self.wait(1.3)
