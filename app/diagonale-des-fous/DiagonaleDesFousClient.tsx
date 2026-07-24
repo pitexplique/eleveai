@@ -322,7 +322,16 @@ export default function DiagonaleDesFousClient() {
           Doser sa réserve — une équation différentielle
         </p>
         <p className="mt-1 text-[13px]" style={{ color: "#5f8a6d" }}>
-          165 km, barrière à 66 h — règle l&apos;allure et lance la course.
+          165 km, barrière à 66 h — règle l&apos;allure et lance la course.{" "}
+          <a
+            href="https://youtu.be/MF7G9VhU07I"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-black hover:underline"
+            style={{ color: "#c81e1e" }}
+          >
+            ▶ voir la vidéo (1 min)
+          </a>
         </p>
 
         {/* ── LA MACHINE : image + réglage + résultat, sur un seul écran ── */}
@@ -458,7 +467,7 @@ export default function DiagonaleDesFousClient() {
 
           <p className="mt-2 rounded border px-3 py-2 text-[12.5px]" style={{ borderColor: "#e2efe6", backgroundColor: "#f7fbf8", color: "#3f6650" }}>
             <span className="font-mono font-bold" style={{ color: VERT }}>dR/dt = −c · effort² · (1 + pente)</span>{" "}
-            — doubler l&apos;allure, c&apos;est ×4 la dépense ; les montées vident la réserve plus vite. Dépense actuelle :{" "}
+            — <b>dR/dt</b>, c&apos;est la <b>variation de ta réserve</b> à chaque instant. Doubler l&apos;allure = ×4 la dépense ; les montées la vident plus vite. Dépense actuelle :{" "}
             <b className="font-mono">{depense.toFixed(1)}</b> /h.
           </p>
         </div>
@@ -471,7 +480,8 @@ export default function DiagonaleDesFousClient() {
           <p className="mt-2">
             Une équation « normale » demande <i>quel nombre&nbsp;?</i>. Une <b>équation différentielle</b>{" "}
             demande <i>quelle fonction&nbsp;?</i> — et son secret, c&apos;est qu&apos;on ne connaît jamais la
-            réserve à l&apos;avance, <b>seulement la vitesse à laquelle elle change</b>, ici et maintenant.
+            réserve à l&apos;avance, <b>seulement la vitesse à laquelle elle change</b>{" "}
+            <span style={{ color: VERT }}>(c&apos;est ça, <b>dR/dt</b>&nbsp;: la variation de ta réserve)</span>, ici et maintenant.
             On avance alors par petits pas&nbsp;:
           </p>
           <p className="mt-2 rounded border border-dashed px-3 py-2 font-mono text-[13px]" style={{ borderColor: OR + "66", color: VERT }}>
@@ -523,6 +533,15 @@ export default function DiagonaleDesFousClient() {
 
         {/* ── LES PONTS ── */}
         <div className="mt-4 flex flex-wrap items-center gap-3">
+          <a
+            href="https://youtu.be/MF7G9VhU07I"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded px-4 py-2 text-sm font-bold text-white hover:brightness-110"
+            style={{ backgroundColor: "#c81e1e" }}
+          >
+            ▶ La vidéo (1 min) — la course en 3 destins
+          </a>
           <Link
             href="/simulateur-volcan"
             className="inline-flex items-center gap-2 rounded px-4 py-2 text-sm font-bold text-white hover:brightness-110"

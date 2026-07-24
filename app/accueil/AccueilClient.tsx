@@ -88,6 +88,12 @@ const UNE: Episode = {
 
 const BREVES: Episode[] = [
   {
+    emoji: "🏃",
+    titre: "La Diagonale des Fous : comment doser sa course ?",
+    accroche: "165 km, barrière 66 h : trop vite tu tapes le mur, trop lent la barrière te rattrape. L'équation du coureur, en images.",
+    youtubeId: "MF7G9VhU07I",
+  },
+  {
     emoji: "🦈",
     titre: "Les requins : la peur et le risque réel",
     accroche: "~10 morts/an dans le monde ; la route : ~1 300 000. Et le requin garde le récif qui fait le lagon.",
