@@ -20,6 +20,28 @@ const outils = [
   { label: "Concours général", href: "/concours-general" },
 ];
 
+// Le Journal — la nouveauté du jour + les histoires « comprendre » (simulateurs,
+// « un peu de maths »). Mises en tête du footer en liens SERVEUR toujours
+// présents dans le HTML : c'est par là que Google découvre le cœur du journal,
+// que la nav (cachée derrière la connexion) ne lui montrait pas.
+const journalQuotidien = [
+  { label: "Le Journal du jour", href: "/accueil" },
+  { label: "Défis du jour", href: "/defis-du-jour" },
+  { label: "Dictée du jour", href: "/dictee-du-jour" },
+  { label: "Maths Réel · 974", href: "/maths-974" },
+];
+
+const unPeuDeMaths = [
+  { label: "Cyclone", href: "/simulateur-cyclone" },
+  { label: "Volcan", href: "/simulateur-volcan" },
+  { label: "Barrage", href: "/simulateur-barrage" },
+  { label: "Lagon", href: "/simulateur-lagon" },
+  { label: "Diagonale des Fous", href: "/diagonale-des-fous" },
+  { label: "Loi de Pareto", href: "/loi-pareto" },
+  { label: "Loi normale", href: "/loi-normale" },
+  { label: "Exponentielle", href: "/exponentielle" },
+];
+
 const espaces = [
   { label: "Établissements scolaires", href: "/espace-ecoles" },
   { label: "Espace élèves", href: "/espace-eleves" },
@@ -85,6 +107,49 @@ export default function Footer() {
   return (
     <footer className="border-t border-slate-800 bg-[#041B33]">
       <div className="mx-auto max-w-6xl px-4 py-10 sm:py-12">
+
+        {/* Bandeau « Le Journal » — en tête du footer. Rend visibles pour Google
+            (liens serveur, toujours dans le HTML) les destinations que la nav
+            cachait : le journal du jour, les rituels quotidiens et les histoires
+            « un peu de maths » (les simulateurs de l'île). */}
+        <section className="mb-10 border-b border-slate-800 pb-8">
+          <h2 className="text-sm font-black text-slate-100">
+            Le Journal{" "}
+            <span className="font-semibold text-emerald-300">· une nouveauté chaque jour</span>
+          </h2>
+          <p className="mt-1 text-xs text-slate-400">
+            Chaque matin à La Réunion : un défi, une dictée et une histoire de
+            sciences à comprendre.
+          </p>
+
+          <nav aria-label="Le Journal" className="mt-4 flex flex-wrap gap-2">
+            {journalQuotidien.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1.5 text-xs font-semibold text-emerald-100 transition hover:bg-emerald-400/20"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+
+          <h3 className="mb-2 mt-5 text-[11px] font-black uppercase tracking-[0.18em] text-slate-500">
+            Un peu de maths — les machines dans ta main
+          </h3>
+          <nav aria-label="Un peu de maths" className="flex flex-wrap gap-2">
+            {unPeuDeMaths.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="rounded-full border border-slate-700 bg-slate-800/40 px-3 py-1.5 text-xs text-slate-300 transition hover:border-amber-300/40 hover:text-amber-200"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+        </section>
+
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
           <div className="space-y-4 lg:col-span-1">
             <div className="flex items-center gap-3">

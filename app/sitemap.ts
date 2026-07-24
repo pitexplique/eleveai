@@ -14,13 +14,16 @@ const u = (path: string) => `${BASE_URL}${path}`;
 // 18/07 : la Une respire (pastilles « aujourd'hui », fil recentré, agenda) et
 // la famille des MACHINES « dans ta main » est au complet : cyclone, usine à
 // sucre, fromagerie — chacune avec ses défis intégrés.
-const LASTMOD_HOME    = new Date("2026-07-18");
-const LASTMOD_JOURNAL = new Date("2026-07-16");
+// Le Journal change TOUS LES JOURS (nouvelle Une, défi, dictée, article « un peu
+// de maths »). On ne fige donc plus la home à une date : elle prend la date de
+// (re)génération du sitemap — c'est-à-dire du dernier déploiement — pour porter
+// honnêtement le signal « quotidien » vers Google, au lieu d'un lastmod périmé.
+const LASTMOD_HOME    = new Date();
+const LASTMOD_JOURNAL = new Date("2026-07-23");
 const LASTMOD_MACHINES = new Date("2026-07-18");
 const LASTMOD_EXPLORER = new Date("2026-07-02");
 const LASTMOD_CORE    = new Date("2026-06-25");
 const LASTMOD_CAHIERS = new Date("2026-06-29");
-const LASTMOD_DICTEE  = new Date("2026-07-01");
 const LASTMOD_974     = new Date("2026-07-02");
 const LASTMOD_JEUX    = new Date("2026-07-05");
 const LASTMOD_FICHES  = new Date("2026-07-11");
@@ -163,11 +166,11 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/ia/enjeux/emploi-et-formation", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
   { path: "/fiches-cours/ia/enjeux/enjeux-culturels-societaux", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
 
-  { path: "/dictee-du-jour",  priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_DICTEE },
+  { path: "/dictee-du-jour",  priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_HOME },
   { path: "/calcul-rapide",   priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/english-maths",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   // Semaine « Les baleines sont là ! » depuis le 16/07 (remplace le foot).
-  { path: "/defis-du-jour",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_JOURNAL },
+  { path: "/defis-du-jour",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_HOME },
 
   // ── DICO (vocabulaire & gestes — prépa éval nationale) ─────────────────────
   { path: "/dico",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
