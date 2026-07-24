@@ -1023,11 +1023,42 @@ def acc_loi_normale_journal(d):
            police("arialbd.ttf", 28), VERT)
 
 
+def acc_diagonale_journal(d):
+    # Le profil de l'île (Saint-Pierre → Saint-Denis) + le coureur (point orange)
+    # et le tracé déjà couru. Zone sûre : sous le sous-titre, à gauche du margouillat.
+    feu = (224, 86, 26)
+    base = 470
+    pts = [(322, base), (390, 344), (452, 436), (528, 340), (604, 448), (690, 326), (784, base)]
+    d.polygon(pts + [(784, base + 12), (322, base + 12)], fill=(23, 60, 40))  # l'île
+    d.line(pts, fill=VERT, width=6, joint="curve")                            # la crête
+    d.line(pts[:4], fill=feu, width=9, joint="curve")                         # le tracé couru
+    rx, ry = pts[3]                                                           # le coureur
+    d.ellipse([rx - 15, ry - 15, rx + 15, ry + 15], fill=feu, outline=(255, 255, 255), width=4)
+    d.ellipse([316, base - 6, 328, base + 6], fill=VERT)                      # départ
+    fx, fy = 784, base                                                       # arrivée (drapeau)
+    d.line([(fx, fy), (fx, fy - 46)], fill=NAVY, width=5)
+    d.polygon([(fx, fy - 46), (fx + 30, fy - 37), (fx, fy - 28)], fill=NAVY)
+    d.line([(316, base + 12), (784, base + 12)], fill=NAVY, width=4)          # la mer
+    centre(d, 520, base + 26, "l'équation du coureur", police("ariblk.ttf", 36), BLEU)
+
+
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
 NOTIONS = {
     "eleveai-maths-journal-loi-normale": {
         "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["LA COURBE", "EN CLOCHE"], "taille": 76,
         "sous": "de pile ou face à la loi normale", "accroche": acc_loi_normale_journal,
+    },
+    "eleveai-maths-journal-diagonale-trop-lent": {
+        "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["TROP LENT ?", "LA BARRIÈRE"], "taille": 70,
+        "sous": "la Diagonale des Fous en équation", "accroche": acc_diagonale_journal,
+    },
+    "eleveai-maths-journal-diagonale-bon-dosage": {
+        "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["LE BON", "DOSAGE"], "taille": 84,
+        "sous": "la Diagonale des Fous en équation", "accroche": acc_diagonale_journal,
+    },
+    "eleveai-maths-journal-diagonale-le-mur": {
+        "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["TROP FORT ?", "LE MUR"], "taille": 78,
+        "sous": "la Diagonale des Fous en équation", "accroche": acc_diagonale_journal,
     },
     "eleveai-maths-974-barrage-takamaka": {
         "badge": "L'ÎLE DE LA RÉUNION · EN VRAI", "titre": ["LE BARRAGE", "DE TAKAMAKA"], "taille": 62,
