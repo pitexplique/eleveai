@@ -41,6 +41,14 @@ export async function POST(req: Request) {
         : "";
     const code_etablissement = etabRaw || null;
 
+    // PROVENANCE (?from=…) : une étiquette courte et bornée, ex. « cahier ».
+    // Aucune identité — c'est elle qui rend mesurable le tunnel cahier → coach.
+    const srcRaw =
+      typeof body?.source === "string"
+        ? body.source.trim().toLowerCase().slice(0, 24)
+        : "";
+    const source = /^[a-z0-9_-]{1,24}$/.test(srcRaw) ? srcRaw : null;
+
     // Pays du visiteur : en-tête géo injecté GRATUITEMENT par Vercel (même en
     // Hobby) — code ISO à 2 lettres, ex. 'FR', 'RE', 'US'. Pas d'IP, pas
     // d'identité : donnée 100 % agrégée, RGPD clean. Null hors Vercel (dev).
@@ -48,7 +56,14 @@ export async function POST(req: Request) {
     const pays = paysRaw.trim().slice(0, 2).toUpperCase() || null;
 
     const supabase = serviceClient();
-    await supabase.from("pages_vues").insert({ page, code_etablissement, pays });
+    const { error } = await supabase
+      .from("pages_vues")
+      .insert({ page, code_etablissement, pays, source });
+    // Repli si la colonne `source` n'existe pas encore en base (migration pas
+    // jouée) : on réécrit SANS elle, plutôt que de perdre la vue en silence.
+    if (error) {
+      await supabase.from("pages_vues").insert({ page, code_etablissement, pays });
+    }
   } catch {
     // Silencieux : le tracking ne doit JAMAIS casser la navigation de l'élève.
   }

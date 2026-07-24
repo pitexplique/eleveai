@@ -11,11 +11,20 @@ create table if not exists public.pages_vues (
   page text not null,                  -- section visitée, ex. '/dico', '/tutor-v4', '/'
   code_etablissement text null,        -- 'INDEPENDANT' pour les comptes email ; null si inconnu
   pays text null,                      -- code ISO 2 lettres (x-vercel-ip-country), ex. 'FR','RE','US' ; null en dev
+  source text null,                    -- provenance ?from=… (ex. 'cahier') ; null si arrivée directe
   constraint pages_vues_pkey primary key (id)
 ) TABLESPACE pg_default;
 
 -- Si la table existe déjà (créée avant l'ajout du pays), exécuter :
 alter table public.pages_vues add column if not exists pays text null;
+
+-- 24/07 : la PROVENANCE, pour enfin mesurer le tunnel (le cahier amène-t-il au
+-- coach ?). L'API sait tourner sans cette colonne (repli), mais tant qu'elle
+-- n'existe pas, la provenance est perdue. À exécuter :
+alter table public.pages_vues add column if not exists source text null;
+
+create index if not exists pages_vues_source_idx
+  on public.pages_vues using btree (source, created_at desc) TABLESPACE pg_default;
 
 create index if not exists pages_vues_created_idx
   on public.pages_vues using btree (created_at desc) TABLESPACE pg_default;

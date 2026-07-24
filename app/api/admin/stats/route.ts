@@ -383,8 +383,19 @@ export async function GET(req: Request) {
     }
     if (t >= since7) pays7.set(pays, (pays7.get(pays) ?? 0) + 1);
   }
+  // Les vues SANS pays ('??') sont des lignes HISTORIQUES (écrites avant l'ajout
+  // de la colonne `pays`) ou du dev local. Laissées dans le calcul, elles
+  // écrasaient le classement (63 % d'« Inconnu ») et faussaient CHAQUE
+  // pourcentage. On les sort du classement et on les expose à part, en note.
+  const inconnus30 = pays30.get("??") ?? 0;
+  const inconnus7 = pays7.get("??") ?? 0;
+  pays30.delete("??");
+  pays7.delete("??");
+
   const geo = {
     total30: Array.from(pays30.values()).reduce((s, n) => s + n, 0),
+    inconnus30,
+    inconnus7,
     parPays: Array.from(pays30.entries())
       .map(([pays, count]) => ({ pays, count, count7: pays7.get(pays) ?? 0 }))
       .sort((a, b) => b.count - a.count)

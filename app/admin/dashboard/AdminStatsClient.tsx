@@ -46,6 +46,9 @@ type Stats = {
   };
   geo: {
     total30: number;
+    /** Vues sans pays : lignes d'avant la colonne `pays`, ou dev local. Hors calcul. */
+    inconnus30: number;
+    inconnus7: number;
     parPays: { pays: string; count: number; count7: number }[];
     topPagesParPays: Record<string, { page: string; count: number }[]>;
   };
@@ -425,8 +428,12 @@ export default function AdminStatsClient() {
               </span>
             </div>
             <p className="mt-0.5 text-[11px] font-semibold text-slate-500">
-              Pays de tous les visiteurs (anonymes inclus), via Vercel — agrégé, sans IP.
-              Clique un pays pour voir ses pages.
+              Pays des visiteurs, via Vercel — agrégé, sans IP.{" "}
+              <span className="text-slate-400">
+                Anonymes inclus depuis le 24/07
+              </span>{" "}
+              (avant cette date : élèves connectés uniquement, soit ~2 % du trafic
+              réel). Clique un pays pour voir ses pages.
             </p>
 
             {stats.geo.parPays.length === 0 ? (
@@ -500,6 +507,18 @@ export default function AdminStatsClient() {
                   });
                 })()}
               </div>
+            )}
+
+            {stats.geo.inconnus30 > 0 && (
+              <p className="mt-3 border-t border-slate-800 pt-2 text-[11px] text-slate-500">
+                + {stats.geo.inconnus30} vue{stats.geo.inconnus30 > 1 ? "s" : ""} sans pays
+                {stats.geo.inconnus7 > 0
+                  ? ` (dont ${stats.geo.inconnus7} sur 7 j)`
+                  : " (aucune récente)"}{" "}
+                — lignes écrites avant l&apos;ajout de la colonne{" "}
+                <code className="rounded bg-slate-800 px-1 text-slate-300">pays</code>, ou dev
+                local. Exclues des pourcentages ci-dessus.
+              </p>
             )}
           </div>
 
