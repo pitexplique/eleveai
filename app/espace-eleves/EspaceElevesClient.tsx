@@ -99,7 +99,8 @@ const rituels = [
   },
 ];
 
-// Un clic = le coach maths réglé sur sa classe.
+// Un clic = le coach maths réglé sur sa classe — l'échelle COMPLÈTE, du CP à
+// la Terminale (les slugs sont ceux de la whitelist du coach).
 const classes = [
   { label: "CP",  href: "/coach-ia/maths?classe=cp" },
   { label: "CE1", href: "/coach-ia/maths?classe=ce1" },
@@ -110,6 +111,8 @@ const classes = [
   { label: "5e",  href: "/coach-ia/maths?classe=5e" },
   { label: "4e",  href: "/coach-ia/maths?classe=4e" },
   { label: "3e",  href: "/coach-ia/maths?classe=3e" },
+  { label: "2nde", href: "/coach-ia/maths?classe=seconde" },
+  { label: "1re spé", href: "/coach-ia/maths?classe=premiere-spe" },
   { label: "Term spé", href: "/coach-ia/maths?classe=terminale-spe" },
 ];
 
@@ -351,7 +354,7 @@ export default function EspaceElevesClient() {
           <p className="mb-4 text-xs font-black uppercase tracking-[0.25em] text-slate-500">
             Ou commence par ta classe
           </p>
-          <div className="grid grid-cols-3 gap-3 sm:grid-cols-5">
+          <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
             {classes.map((c) => (
               <Link
                 key={c.label}
