@@ -368,6 +368,7 @@ const CATALOGUE_EMOJIS: Record<string, string> = {
   "coach-espagnol": "🇪🇸", "coach-ia": "🤖", "coach-economie": "📊",
   "defis-du-jour": "🎯", "calcul-rapide": "⚡", "dictee-du-jour": "✍️",
   "semaine-verbes": "📅", "dico-maths": "🗣️", "dico-francais": "🗣️",
+  "anglais-du-jour": "🇬🇧",
   "podcast-maths": "🎧", "fiches-maths": "📚", "fiches-ia": "📚",
   "livre-ia": "📕", "maths-974": "🌋", "le-bon-prompt": "💬",
   "picto-maths": "🖼️", "carte-tresor": "🗺️", "eval-pix-ia": "🎓",
@@ -931,7 +932,7 @@ export default function AccueilPage({
               cède la place à la phrase choc du coach. */}
           <div className="order-1 text-center lg:order-2">
             <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[#1d1c16]/65 sm:text-xs">
-              Le journal pour apprendre · Île de La Réunion
+              Le journal pour apprendre et s&apos;évaluer · Île de La Réunion
             </p>
             <h1 className="mt-1 font-serif text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl">
               eleveai<span className="text-cyan-800">.fr</span>
@@ -1203,8 +1204,6 @@ export default function AccueilPage({
                   { emoji: "🗣️", titre: "Le dico : les 50 mots de l'évaluation nationale 6ᵉ", href: "/dico" },
                   { emoji: "📚", titre: "Les fiches de cours, notion par notion, avec corrections", href: "/fiches-cours" },
                   { emoji: "🎓", titre: "Pix IA : l'éval blanche pour arriver prêt le jour J", href: "/eval-pix-ia" },
-                  { emoji: "✍️", titre: "La dictée du jour : 5 mots sans faute, avec l'audio", href: "/dictee-du-jour" },
-                  { emoji: "⚡", titre: "Calcul rapide : 3 minutes d'automatismes chrono", href: "/calcul-rapide" },
                   { emoji: "🌋", titre: "Maths Réel · 974 : le carnet de terrain, photos et vidéos", href: "/maths-974" },
                   // 4 titres de plus (24/07, contre le trou) — des pages que
                   // l'accueil ne montrait plus nulle part ailleurs.
@@ -1270,6 +1269,38 @@ export default function AccueilPage({
                 >
                   Le défi guidé, pas à pas →
                 </Link>
+              </div>
+
+              {/* LES RITUELS DU JOUR — un emplacement COMMUN (Frédéric, 25/07) :
+                  les rendez-vous quotidiens groupés au même endroit. Le défi a
+                  sa grande carte au-dessus ; ici les rituels d'entraînement :
+                  la dictée (français) et l'anglais du jour — l'espagnol du jour
+                  les rejoindra. Routes à plat, regroupées visuellement. */}
+              <div className="py-3">
+                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                  ⏰ Chaque jour · tes rituels
+                </p>
+                {[
+                  { emoji: "✍️", nom: "La dictée du jour", quoi: "5 mots sans faute, avec l'audio", href: "/dictee-du-jour" },
+                  { emoji: "🇬🇧", nom: "L'anglais du jour", quoi: "5 mots par jour, du A1 au B2", href: "/anglais-du-jour" },
+                  { emoji: "⚡", nom: "Le calcul rapide", quoi: "3 minutes d'automatismes chrono", href: "/calcul-rapide" },
+                ].map((r) => (
+                  <Link
+                    key={r.href}
+                    href={r.href}
+                    className="group block border-b border-dotted border-[#1d1c16]/30 py-2"
+                  >
+                    <span className="flex items-baseline gap-2">
+                      <span aria-hidden className="text-sm">{r.emoji}</span>
+                      <span className="font-serif text-[15px] font-black leading-snug group-hover:underline">
+                        {r.nom}
+                      </span>
+                    </span>
+                    <span className="mt-0.5 block pl-[22px] text-xs font-medium text-[#1d1c16]/60">
+                      {r.quoi}
+                    </span>
+                  </Link>
+                ))}
               </div>
 
               {/* LA machine du moment garde la grande réclame (image) ; les

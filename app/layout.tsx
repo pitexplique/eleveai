@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
 
   title: {
-    default: "EleveAI — Le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent",
+    default: "EleveAI — Le journal pour apprendre et s'évaluer · La Réunion",
     template: "%s — EleveAI",
   },
 
@@ -84,9 +84,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "EleveAI — Le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent",
+    title: "EleveAI — Le journal pour apprendre et s'évaluer · La Réunion",
     description:
-      "Le journal pour apprendre, gratuit, de La Réunion : comprendre l'île (volcan, cyclones, baleines) et s'entraîner avec un coach qui explique sans faire à ta place, des exercices corrigés, du CP au Bac.",
+      "Le journal pour apprendre, gratuit, de La Réunion : comprendre l'île (volcan, cyclones, baleines), s'entraîner avec un coach qui explique sans faire à ta place, et s'évaluer avec les parcours et les défis — tout corrigé, du CP au Bac.",
     url: CANONICAL,
     type: "website",
     siteName: "EleveAI",
@@ -124,6 +124,7 @@ export default function RootLayout({
       // La Réunion » reste en alternateName pour ne pas perdre le classement
       // gagné sur cette requête (devant le CNRS, 24/07).
       alternateName: [
+        "Le journal pour apprendre et s'évaluer de La Réunion",
         "Le journal pour apprendre de La Réunion",
         "Le journal scientifique de La Réunion",
       ],
@@ -138,7 +139,7 @@ export default function RootLayout({
     {
       "@context": "https://schema.org",
       "@type": "Periodical",
-      name: "Le journal pour apprendre de La Réunion — EleveAI",
+      name: "Le journal pour apprendre et s'évaluer — La Réunion — EleveAI",
       url: SITE_URL,
       inLanguage: "fr-FR",
       about: [

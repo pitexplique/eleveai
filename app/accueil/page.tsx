@@ -21,7 +21,7 @@ export const revalidate = 300;
 // langage de tout le monde. On dit désormais ce qu'on est vraiment : le
 // journal pédagogique de La Réunion, où personne n'apprend à ta place.
 export const metadata: Metadata = {
-  title: "Le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent",
+  title: "Le journal pour apprendre et s'évaluer — La Réunion, du CP au Bac",
   description:
     "Le journal pour apprendre, gratuit, de La Réunion où les enfants comprennent l'île et s'entraînent : un coach IA qui explique sans jamais faire à ta place en maths, français, anglais, espagnol et IA, des séries d'exercices corrigées, un défi et une dictée chaque matin — et un tableau de suivi où les profs voient la progression de chaque élève. Du CP à la Terminale. Vulgarisation rigoureuse, chiffres vérifiés.",
   keywords: [
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     "eleveai",
   ],
   openGraph: {
-    title: "Le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent",
+    title: "Le journal pour apprendre et s'évaluer — La Réunion, du CP au Bac",
     description:
-      "Le journal pour apprendre, gratuit, de La Réunion : comprendre l'île (volcan, cyclones, baleines) et s'entraîner avec un coach qui explique sans faire à ta place, tout corrigé. Ici, personne n'apprend à ta place.",
+      "Le journal pour apprendre, gratuit, de La Réunion : comprendre l'île (volcan, cyclones, baleines), s'entraîner avec un coach qui explique sans faire à ta place, et s'évaluer avec les parcours et les défis. Tout corrigé. Ici, personne n'apprend à ta place.",
     url: "https://eleveai.fr",
     siteName: "EleveAI",
     images: [

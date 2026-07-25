@@ -109,6 +109,11 @@ const nextConfig = {
         destination: "/simulateur-energie",
         permanent: false,
       },
+      // L'anglais du jour (25/07) — « 5 mots par jour », niveaux A1→B2, puisé
+      // dans le coach. Adresses courtes pour le dire à voix haute.
+      { source: "/mots", destination: "/anglais-du-jour", permanent: false },
+      { source: "/anglais", destination: "/anglais-du-jour", permanent: false },
+      { source: "/repertoire-anglais", destination: "/anglais-du-jour", permanent: false },
       // Les deux destinations phares à dire dans TOUTES les vidéos.
       {
         source: "/cahier",
