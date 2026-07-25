@@ -30,6 +30,8 @@ const COLONNES = {
       "id, code_etablissement, code_utilisateur, nom, niveau, jour, theme, score, total, pourcentage, created_at",
     dictee:
       "id, code_etablissement, code_utilisateur, nom, classe, score, total, pourcentage, details, created_at",
+    langue_du_jour:
+      "id, code_etablissement, code_utilisateur, nom, langue, niveau, score, total, pourcentage, details, created_at",
     tutor:
       "id, code_etablissement, code_utilisateur, nom, classe, matiere, notion_id, mode, score_sur_20, earned_points, possible_points, bonnes_reponses, nb_tentatives, temps_sec, details, created_at",
   },
@@ -44,6 +46,8 @@ const COLONNES = {
       "id, code_etablissement, code_utilisateur, nom, jour, theme, score, total, pourcentage, created_at",
     dictee:
       "id, code_etablissement, code_utilisateur, nom, classe, score, total, pourcentage, created_at",
+    langue_du_jour:
+      "id, code_etablissement, code_utilisateur, nom, langue, niveau, score, total, pourcentage, created_at",
     tutor:
       "id, code_etablissement, code_utilisateur, nom, classe, notion_id, mode, score_sur_20, bonnes_reponses, nb_tentatives, details, created_at",
   },
@@ -93,6 +97,7 @@ export async function GET(req: Request) {
     defisRes,
     englishRes,
     dicteeRes,
+    langueRes,
     tutorRes,
   ] = await Promise.all([
     etabScope
@@ -113,6 +118,7 @@ export async function GET(req: Request) {
     query("resultats_defis_jour", cols.defis_jour),
     query("resultats_english_maths", cols.english_maths),
     query("resultats_dictee", cols.dictee),
+    query("resultats_langue_du_jour", cols.langue_du_jour),
     query("resultats_tutor", cols.tutor),
   ]);
 
@@ -170,6 +176,8 @@ export async function GET(req: Request) {
       defis_jour: defisRes.data ?? [],
       english_maths: englishRes.data ?? [],
       dictee: dicteeRes.error ? [] : dicteeRes.data ?? [],
+      // Table optionnelle (créée séparément) : une erreur ne bloque pas le dashboard.
+      langue_du_jour: langueRes.error ? [] : langueRes.data ?? [],
       tutor: tutorRes.data ?? [],
     },
   });

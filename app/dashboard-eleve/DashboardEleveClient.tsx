@@ -109,6 +109,21 @@ type ResultatDictee = {
   created_at: string;
 };
 
+// Un rituel de langue (anglais du jour, espagnol du jour…) — table partagée
+// resultats_langue_du_jour, la colonne `langue` distingue.
+type ResultatLangue = {
+  id: string;
+  code_etablissement: string;
+  code_utilisateur: string;
+  nom: string | null;
+  langue: string;
+  niveau: string | null;
+  score: number;
+  total: number;
+  pourcentage: number | null;
+  created_at: string;
+};
+
 type ResultatDefiJour = {
   id: string;
   code_etablissement: string;
@@ -225,6 +240,7 @@ export default function DashboardEleveClient() {
 
   const [resultatsEnglish, setResultatsEnglish] = useState<ResultatEnglishMaths[]>([]);
   const [resultatsDictee, setResultatsDictee] = useState<ResultatDictee[]>([]);
+  const [resultatsLangue, setResultatsLangue] = useState<ResultatLangue[]>([]);
   const [resultatsTutor, setResultatsTutor] = useState<ResultatTutor[]>([]);
   const [pointsAvis, setPointsAvis] = useState(0);
   const [messagesProf, setMessagesProf] = useState<MessageProf[]>([]);
@@ -298,6 +314,8 @@ export default function DashboardEleveClient() {
 
         setResultatsDictee((r.dictee ?? []) as ResultatDictee[]);
 
+        setResultatsLangue((r.langue_du_jour ?? []) as ResultatLangue[]);
+
         setResultatsTutor((r.tutor ?? []) as ResultatTutor[]);
 
         setPointsAvis(typeof data.pointsAvis === "number" ? data.pointsAvis : 0);
@@ -365,6 +383,33 @@ export default function DashboardEleveClient() {
   const dernierDictee = resultatsDictee[0] ?? null;
   const meilleurDictee = useMemo(() => getBest(resultatsDictee), [resultatsDictee]);
 
+  // Les rituels de langue, résumés PAR LANGUE : sessions, jours distincts
+  // (la « série »), mots pratiqués (somme des totaux), dernier score.
+  const rituelsLangue = useMemo(() => {
+    const CONFIG = [
+      { langue: "anglais", label: "L'anglais du jour", drapeau: "🇬🇧", href: "/anglais-du-jour" },
+      { langue: "espagnol", label: "L'espagnol du jour", drapeau: "🇪🇸", href: "/espagnol-du-jour" },
+    ];
+    return CONFIG.map((c) => {
+      const lignes = resultatsLangue
+        .filter((r) => r.langue === c.langue)
+        .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      const jours = new Set(lignes.map((r) => r.created_at.slice(0, 10)));
+      const motsPratiques = lignes.reduce((s, r) => s + (Number(r.total) || 0), 0);
+      const best = getBest(lignes);
+      return {
+        ...c,
+        sessions: lignes.length,
+        jours: jours.size,
+        motsPratiques,
+        dernier: lignes[0] ?? null,
+        meilleurPct: best ? getPct(best.score, best.total) : null,
+      };
+    });
+  }, [resultatsLangue]);
+
+  const aUnRituelLangue = resultatsLangue.length > 0;
+
   const dernierTutor = resultatsTutor[0] ?? null;
   const meilleurTutor = useMemo(
     () => resultatsTutor.length === 0 ? null : [...resultatsTutor].sort((a, b) => (b.score_sur_20 ?? 0) - (a.score_sur_20 ?? 0))[0],
@@ -395,6 +440,7 @@ export default function DashboardEleveClient() {
     resultatsDefisJour.length +
     resultatsEnglish.length +
     resultatsDictee.length +
+    resultatsLangue.length +
     resultatsTutor.length;
 
   if (!eleve) {
@@ -816,8 +862,85 @@ export default function DashboardEleveClient() {
                 <p className="mt-3 text-3xl font-black">{totalActivites}</p>
 
                 <p className="mt-2 text-sm font-bold text-slate-500">
-                  Parcours + calcul + défis + English + dictée
+                  Parcours + calcul + défis + English + dictée + langues
                 </p>
+              </div>
+            </div>
+
+            {/* ── RITUELS DE LANGUE — l'anglais du jour, l'espagnol du jour.
+                Table partagée resultats_langue_du_jour. Toujours affiché : si
+                l'élève n'a rien fait, il voit l'invitation à commencer. ────── */}
+            <div className="mt-6 rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-indigo-100">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h2 className="text-2xl font-black text-slate-900">
+                  🗓️ Tes rituels de langue
+                </h2>
+                <span className="text-sm font-bold text-slate-400">5 mots par jour</span>
+              </div>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                {rituelsLangue.map((r) => (
+                  <div
+                    key={r.langue}
+                    className="rounded-3xl border border-indigo-100 bg-indigo-50/40 p-4"
+                  >
+                    <div className="flex items-center justify-between">
+                      <p className="text-base font-black text-slate-900">
+                        <span aria-hidden>{r.drapeau}</span> {r.label}
+                      </p>
+                      {r.jours > 0 && (
+                        <span className="rounded-full bg-orange-100 px-2.5 py-1 text-xs font-black text-orange-700">
+                          🔥 {r.jours} jour{r.jours > 1 ? "s" : ""}
+                        </span>
+                      )}
+                    </div>
+
+                    {r.dernier ? (
+                      <>
+                        <div className="mt-3 grid grid-cols-3 gap-2 text-center">
+                          <div>
+                            <p className="text-2xl font-black text-indigo-700">
+                              {r.dernier.score}/{r.dernier.total}
+                            </p>
+                            <p className="text-[11px] font-bold uppercase tracking-wide text-slate-400">
+                              Dernier
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-2xl font-black text-slate-800">{r.motsPratiques}</p>
+                            <p className="text-[11px] font-bold uppercase tracking-wide text-slate-400">
+                              Mots vus
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-2xl font-black text-emerald-600">
+                              {r.meilleurPct ?? 0}%
+                            </p>
+                            <p className="text-[11px] font-bold uppercase tracking-wide text-slate-400">
+                              Record
+                            </p>
+                          </div>
+                        </div>
+                        <p className="mt-2 text-xs font-bold text-slate-400">
+                          {r.sessions} session{r.sessions > 1 ? "s" : ""} · dernier{" "}
+                          {formatDate(r.dernier.created_at)}
+                        </p>
+                        <Link
+                          href={r.href}
+                          className="mt-3 inline-block text-sm font-black text-indigo-700 underline underline-offset-2"
+                        >
+                          Continuer →
+                        </Link>
+                      </>
+                    ) : (
+                      <p className="mt-3 text-sm font-semibold text-slate-500">
+                        Pas encore commencé —{" "}
+                        <Link href={r.href} className="text-indigo-700 underline underline-offset-2">
+                          fais tes 5 premiers mots →
+                        </Link>
+                      </p>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
 
