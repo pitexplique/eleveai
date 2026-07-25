@@ -10,6 +10,14 @@ const nextConfig = {
         destination: "/coach-ia/maths",
         permanent: true,
       },
+      // Vieille page « Mode Coach » (janvier 2026), indexée par Bing/Google
+      // mais dépassée par le vrai coach : 301 vers la destination actuelle
+      // (constat du 25/07 en analysant la SERP de marque).
+      {
+        source: "/espace-eleves/coach",
+        destination: "/coach-ia/maths",
+        permanent: true,
+      },
       // Renommage cartes-vacances → cahier-vacances-cartes (09/07/2026) :
       // 301 pour préserver l'indexation et les liens déjà partagés/imprimés.
       {

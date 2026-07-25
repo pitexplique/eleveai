@@ -1,7 +1,18 @@
 "use client";
 
+// L'ESPACE ÉLÈVES — la vitrine « élève » vue des moteurs de recherche (elle
+// tient la 2e place de la SERP de marque). Refonte du 25/07/2026 : la page
+// datait du 13/07 et affichait encore « Bac le 16 juin », « Brevet J−30 »…
+//
+// Règles de cette page (pour qu'elle ne pourrisse plus) :
+// 1. AUCUNE date, aucun badge périssable — que des piliers durables.
+// 2. Le coach en tête d'affiche (règle 24/07 : le coach est LA destination).
+// 3. Tout le reste vit dans /explorer (catalogue piloté par la base) — ici on
+//    n'écrit à la main que les piliers : coachs, rituels, classes, machines.
+
 import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
+import { NB_MACHINES } from "@/lib/simulateurs";
 
 type EleveSession = {
   nom?: string | null;
@@ -10,81 +21,157 @@ type EleveSession = {
   code_utilisateur?: string | null;
 };
 
-const outils = [
+// Les 5 coachs visibles (économie masquée — pas assez fournie).
+const coachs = [
   {
-    emoji: "🧠",
-    title: "Coach Maths IA",
-    description: "Une série d'exercices corrigés par notion, adaptés à ton niveau.",
+    emoji: "🧮",
+    title: "Coach Maths",
+    description: "Des séries d'exercices corrigés par notion, du CP à la Terminale.",
     href: "/coach-ia/maths",
     color: "from-orange-400 to-red-500",
-    badge: null,
   },
   {
-    emoji: "🛤️",
-    title: "Parcours",
-    description: "Fais un bilan de tes notions et vois lesquelles sont maîtrisées, à revoir ou fragiles.",
-    href: "/parcours",
-    color: "from-violet-500 to-indigo-600",
-    badge: null,
+    emoji: "📖",
+    title: "Coach Français",
+    description: "Grammaire, conjugaison, vocabulaire — notion par notion.",
+    href: "/coach-ia/francais",
+    color: "from-sky-400 to-blue-500",
   },
   {
-    emoji: "📚",
-    title: "Coach Brevet",
-    description: "Sprint 30 jours pour préparer le brevet : fractions, Pythagore, probabilités, équations…",
-    href: "/coach-brevet",
-    color: "from-emerald-400 to-teal-600",
-    badge: "J−30",
+    emoji: "🇬🇧",
+    title: "Coach English",
+    description: "A1 → B2 : le vocabulaire, les phrases et les maths en anglais.",
+    href: "/coach-ia/english-maths",
+    color: "from-blue-500 to-indigo-600",
+  },
+  {
+    emoji: "🇪🇸",
+    title: "Coach Espagnol",
+    description: "A1 → B2 : le vocabulaire et les expressions du quotidien.",
+    href: "/coach-ia/espagnol",
+    color: "from-red-400 to-rose-600",
+  },
+  {
+    emoji: "🤖",
+    title: "Coach IA",
+    description: "Comprendre et maîtriser l'intelligence artificielle, A1 → C1.",
+    href: "/coach-ia/ia",
+    color: "from-cyan-400 to-teal-600",
+  },
+];
+
+// Les rituels : courts, à refaire chaque jour — le rendez-vous du matin.
+const rituels = [
+  {
+    emoji: "✍️",
+    title: "La dictée du jour",
+    description: "5 mots à écouter et écrire — mélange, ta classe ou prépa éval 6e.",
+    href: "/dictee-du-jour",
+    color: "from-sky-400 to-cyan-500",
+  },
+  {
+    emoji: "🇬🇧",
+    title: "L'anglais du jour",
+    description: "5 mots avec audio, qui reviennent au bon moment pour être retenus.",
+    href: "/anglais-du-jour",
+    color: "from-indigo-400 to-blue-600",
+  },
+  {
+    emoji: "🇪🇸",
+    title: "L'espagnol du jour",
+    description: "5 mots avec audio, du niveau débutant au niveau avancé.",
+    href: "/espagnol-du-jour",
+    color: "from-amber-400 to-red-500",
   },
   {
     emoji: "⚡",
     title: "Calcul rapide",
-    description: "7 questions en 5 minutes pour renforcer tes automatismes de calcul.",
+    description: "5 minutes pour renforcer tes automatismes de calcul.",
     href: "/calcul-rapide",
     color: "from-lime-400 to-green-600",
-    badge: null,
-  },
-  {
-    emoji: "🎓",
-    title: "Coach Bac Spé",
-    description: "Suites, fonctions, probabilités, logarithme — automatismes et problèmes guidés pour le 16 juin.",
-    href: "/coach-bac-spe",
-    color: "from-blue-600 to-violet-700",
-    badge: "16 juin",
-  },
-  {
-    emoji: "🇬🇧",
-    title: "English Maths",
-    description: "La semaine des verbes en anglais, avec audio et mini-défi.",
-    href: "/english-maths",
-    color: "from-sky-500 to-blue-600",
-    badge: null,
   },
   {
     emoji: "🎯",
-    title: "Défis du jour",
-    description: "Des défis maths inspirés de La Réunion — volcan, Grand Raid, océan…",
+    title: "Le défi du jour",
+    description: "Un problème inspiré de La Réunion — volcan, Grand Raid, océan…",
     href: "/defis-du-jour",
     color: "from-pink-500 to-rose-600",
-    badge: null,
-  },
-  {
-    emoji: "🏆",
-    title: "Concours général",
-    description: "Des questions de haut niveau pour les élèves qui veulent se dépasser.",
-    href: "/concours-general",
-    color: "from-amber-400 to-orange-500",
-    badge: null,
   },
 ];
 
+// Un clic = le coach maths réglé sur sa classe.
 const classes = [
+  { label: "CP",  href: "/coach-ia/maths?classe=cp" },
+  { label: "CE1", href: "/coach-ia/maths?classe=ce1" },
+  { label: "CE2", href: "/coach-ia/maths?classe=ce2" },
   { label: "CM1", href: "/coach-ia/maths?classe=cm1" },
   { label: "CM2", href: "/coach-ia/maths?classe=cm2" },
   { label: "6e",  href: "/coach-ia/maths?classe=6e" },
   { label: "5e",  href: "/coach-ia/maths?classe=5e" },
   { label: "4e",  href: "/coach-ia/maths?classe=4e" },
   { label: "3e",  href: "/coach-ia/maths?classe=3e" },
+  { label: "Term spé", href: "/coach-ia/maths?classe=terminale-spe" },
 ];
+
+// Faire le point & comprendre — les autres piliers durables.
+const decouvrir = [
+  {
+    emoji: "🛤️",
+    title: "Parcours",
+    description: "Fais un bilan de tes notions : maîtrisées, à revoir ou fragiles.",
+    href: "/parcours",
+    color: "from-violet-500 to-indigo-600",
+  },
+  {
+    emoji: "🌋",
+    title: `${NB_MACHINES} machines dans ta main`,
+    description: "Cyclone, volcan, barrage, lagon… tu règles un curseur, l'île réagit.",
+    href: "/simulateurs",
+    color: "from-emerald-400 to-teal-600",
+  },
+  {
+    emoji: "📚",
+    title: "Fiches de cours",
+    description: "L'essentiel d'une notion, avec exercices corrigés, à lire ou imprimer.",
+    href: "/fiches-cours",
+    color: "from-amber-400 to-orange-500",
+  },
+  {
+    emoji: "🔤",
+    title: "Le Dico",
+    description: "Les mots et les gestes numériques pour préparer l'éval nationale.",
+    href: "/dico",
+    color: "from-cyan-500 to-sky-600",
+  },
+];
+
+function CarteAction({
+  emoji,
+  title,
+  description,
+  href,
+  color,
+}: (typeof coachs)[number]) {
+  return (
+    <Link
+      href={href}
+      className="group relative overflow-hidden rounded-[1.5rem] border border-white/70 bg-white/80 shadow-lg backdrop-blur transition hover:-translate-y-1 hover:shadow-2xl"
+    >
+      <div className={`bg-gradient-to-br ${color} px-5 py-5`}>
+        <span className="text-4xl">{emoji}</span>
+      </div>
+      <div className="p-4">
+        <h3 className="text-base font-black text-slate-950">{title}</h3>
+        <p className="mt-1 text-xs font-semibold leading-relaxed text-slate-600">
+          {description}
+        </p>
+        <p className="mt-3 text-xs font-black text-emerald-700 transition group-hover:translate-x-1">
+          Commencer →
+        </p>
+      </div>
+    </Link>
+  );
+}
 
 export default function EspaceElevesClient() {
   const eleveContext = useEleve() as unknown as { eleve?: EleveSession | null };
@@ -182,12 +269,13 @@ export default function EspaceElevesClient() {
               </div>
 
               <h1 className="text-3xl font-black leading-tight text-slate-950 sm:text-5xl">
-                Ton espace pour progresser en maths 🎯
+                Ton espace pour apprendre, du CP au Bac 🎯
               </h1>
 
               <p className="mt-4 max-w-2xl text-base font-semibold leading-relaxed text-slate-700 sm:text-lg">
-                Coach personnalisé, parcours de révision, calcul rapide, English Maths…
-                Tous tes outils au même endroit, du CM1 au Bac.
+                Cinq coachs — maths, français, anglais, espagnol, IA — des rituels
+                chaque jour, des parcours pour faire le point et des machines pour
+                comprendre. Gratuit, à ton rythme et sans jugement.
               </p>
 
               <div className="mt-5 flex flex-wrap gap-3">
@@ -207,10 +295,16 @@ export default function EspaceElevesClient() {
                   </Link>
                 )}
                 <Link
-                  href="/parcours"
+                  href="/coach-ia/maths"
                   className="rounded-2xl bg-white px-6 py-3 text-sm font-black text-slate-800 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50"
                 >
-                  🛤️ Faire mon bilan
+                  🧮 M&apos;entraîner maintenant
+                </Link>
+                <Link
+                  href="/explorer"
+                  className="rounded-2xl bg-white px-6 py-3 text-sm font-black text-slate-800 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50"
+                >
+                  🧭 Tout explorer
                 </Link>
               </div>
             </div>
@@ -236,19 +330,35 @@ export default function EspaceElevesClient() {
           </div>
         </section>
 
-        {/* CHOISIR SA CLASSE */}
-        <section className="mb-8">
-          <p className="mb-4 text-xs font-black uppercase tracking-[0.25em] text-slate-500">
-            Commencer par ma classe
+        {/* LES COACHS — en tête d'affiche (le coach est LA destination) */}
+        <section className="mb-10">
+          <p className="mb-1 text-xs font-black uppercase tracking-[0.25em] text-slate-500">
+            Commence ici · un coach par matière
           </p>
-          <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+          <p className="mb-4 text-sm font-semibold text-slate-500">
+            Le cœur d&apos;EleveAI : des séries d&apos;exercices corrigés, notion
+            par notion, qui s&apos;adaptent à ton niveau.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {coachs.map((c) => (
+              <CarteAction key={c.href} {...c} />
+            ))}
+          </div>
+        </section>
+
+        {/* CHOISIR SA CLASSE */}
+        <section className="mb-10">
+          <p className="mb-4 text-xs font-black uppercase tracking-[0.25em] text-slate-500">
+            Ou commence par ta classe
+          </p>
+          <div className="grid grid-cols-3 gap-3 sm:grid-cols-5">
             {classes.map((c) => (
               <Link
                 key={c.label}
                 href={c.href}
                 className="group rounded-2xl border border-white/80 bg-white/80 p-4 text-center shadow-lg backdrop-blur transition hover:-translate-y-1 hover:border-emerald-300 hover:bg-white hover:shadow-xl"
               >
-                <span className="text-2xl font-black text-slate-950">{c.label}</span>
+                <span className="text-xl font-black text-slate-950 sm:text-2xl">{c.label}</span>
                 <div className="mt-2 rounded-full bg-emerald-400 px-2 py-0.5 text-[10px] font-black text-slate-950 transition group-hover:scale-110">
                   Go →
                 </div>
@@ -257,39 +367,42 @@ export default function EspaceElevesClient() {
           </div>
         </section>
 
-        {/* OUTILS */}
-        <section>
+        {/* LES RITUELS DU JOUR */}
+        <section className="mb-10">
+          <p className="mb-1 text-xs font-black uppercase tracking-[0.25em] text-slate-500">
+            ⏰ Chaque jour · tes rituels
+          </p>
+          <p className="mb-4 text-sm font-semibold text-slate-500">
+            Courts, à refaire chaque jour — et une série 🔥 à faire grandir.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {rituels.map((r) => (
+              <CarteAction key={r.href} {...r} />
+            ))}
+          </div>
+        </section>
+
+        {/* FAIRE LE POINT & COMPRENDRE */}
+        <section className="mb-10">
           <p className="mb-4 text-xs font-black uppercase tracking-[0.25em] text-slate-500">
-            Tous mes outils
+            Faire le point &amp; comprendre
           </p>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {outils.map((outil) => (
-              <Link
-                key={outil.href}
-                href={outil.href}
-                className="group relative overflow-hidden rounded-[1.5rem] border border-white/70 bg-white/80 shadow-lg backdrop-blur transition hover:-translate-y-1 hover:shadow-2xl"
-              >
-                {outil.badge && (
-                  <div className="absolute right-3 top-3 rounded-full bg-amber-400 px-2 py-0.5 text-[10px] font-black text-slate-950">
-                    {outil.badge}
-                  </div>
-                )}
-
-                <div className={`bg-gradient-to-br ${outil.color} px-5 py-5`}>
-                  <span className="text-4xl">{outil.emoji}</span>
-                </div>
-
-                <div className="p-4">
-                  <h2 className="text-base font-black text-slate-950">{outil.title}</h2>
-                  <p className="mt-1 text-xs font-semibold leading-relaxed text-slate-600">
-                    {outil.description}
-                  </p>
-                  <p className="mt-3 text-xs font-black text-emerald-700 transition group-hover:translate-x-1">
-                    Commencer →
-                  </p>
-                </div>
-              </Link>
+            {decouvrir.map((d) => (
+              <CarteAction key={d.href} {...d} />
             ))}
+          </div>
+          <div className="mt-6 rounded-[1.5rem] border border-white/80 bg-white/75 p-5 text-center shadow-lg backdrop-blur">
+            <p className="text-sm font-bold text-slate-700">
+              Et ce n&apos;est pas tout : défis, concours, cahiers de vacances,
+              podcast, cartes à imprimer…
+            </p>
+            <Link
+              href="/explorer"
+              className="mt-3 inline-flex rounded-2xl bg-indigo-600 px-6 py-3 text-sm font-black text-white shadow-lg transition hover:bg-indigo-500"
+            >
+              🧭 Explorer tout le catalogue →
+            </Link>
           </div>
         </section>
 
@@ -300,7 +413,8 @@ export default function EspaceElevesClient() {
               Tu veux suivre ta progression ?
             </p>
             <p className="mt-2 font-semibold text-slate-600">
-              Connecte-toi avec ton code élève pour enregistrer tes résultats et voir ton évolution.
+              Connecte-toi avec ton code élève pour enregistrer tes résultats et
+              voir ton évolution. Tout ce qui sert à apprendre reste gratuit.
             </p>
             <Link
               href="/auth/signin-eleve"

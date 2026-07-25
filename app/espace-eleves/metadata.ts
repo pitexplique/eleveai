@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 
+// La page tient la 2e place de la SERP de marque (constat Bing 25/07) : ce
+// texte est la vitrine « élève » vue des moteurs. Aucune promesse datée.
 export const metadata: Metadata = {
-  title: "Espace élèves | EleveAI — Coach maths, Brevet, Parcours",
+  title: "Espace élèves | EleveAI — Coachs, rituels du jour, parcours",
   description:
-    "Ton espace EleveAI : Coach Maths IA, Parcours, Calcul rapide, Brevet des collèges, Bac Spé, English Maths et Défis du jour. Connecte-toi et suis ta progression.",
+    "Ton espace EleveAI : cinq coachs (maths, français, anglais, espagnol, IA), la dictée et les mots du jour, des parcours pour faire le point et des machines pour comprendre. Gratuit, du CP au Bac.",
   alternates: {
     canonical: "https://eleveai.fr/espace-eleves",
   },
@@ -17,12 +19,12 @@ export const metadata: Metadata = {
     siteName: "EleveAI",
     title: "Espace élèves | EleveAI",
     description:
-      "Coach Maths IA, Parcours, Brevet, Calcul rapide, English Maths — tous tes outils au même endroit.",
+      "Cinq coachs, des rituels chaque jour, des parcours et des machines pour comprendre — tous tes outils au même endroit, du CP au Bac.",
   },
   twitter: {
     card: "summary",
     title: "Espace élèves | EleveAI",
     description:
-      "Ton coach maths personnel. Progresse notion par notion, du CM1 au Bac.",
+      "Ton coach personnel dans cinq matières. Progresse notion par notion, du CP au Bac.",
   },
 };
