@@ -89,6 +89,8 @@ const mathsClasses = [
   { label: "5e", slug: "5e" },
   { label: "4e", slug: "4e" },
   { label: "3e", slug: "3e" },
+  { label: "Seconde", slug: "seconde" },
+  { label: "Première Spé", slug: "premiere-spe" },
   { label: "Terminale Spé", slug: "terminale-spe" },
 ];
 
