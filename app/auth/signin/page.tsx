@@ -70,6 +70,8 @@ export default function SignInPage() {
 
   // Contexte : l'utilisateur arrive depuis un cahier de vacances (?from=cahier)
   const [fromCahier, setFromCahier] = useState(false);
+  // … ou depuis un kit de survie lycée (?from=kit)
+  const [fromKit, setFromKit] = useState(false);
 
   // ---------------------------
   // Complément de profil (nouveaux comptes uniquement)
@@ -117,6 +119,11 @@ export default function SignInPage() {
     const t = params.get("type");
     if (t === "prof" || t === "parent" || t === "eleve" || t === "perso") {
       setTypeUtilisateur(t);
+    }
+    if (params.get("from") === "kit") {
+      setFromKit(true);
+      // Le kit de survie s'adresse aux lycéens : profil élève pré-sélectionné.
+      if (!t) setTypeUtilisateur("eleve");
     }
     if (params.get("from") === "cahier") {
       setFromCahier(true);
@@ -418,6 +425,7 @@ export default function SignInPage() {
         classe: typeUtilisateur === "eleve" && classe ? classe : null,
       };
       if (fromCahier) payload.source = "cahier-vacances";
+      if (fromKit) payload.source = "kit-survie";
 
       const { data: profile, error: upsertError } = await supabase
         .from("users_email")
