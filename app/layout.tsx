@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Le journal pour apprendre, gratuit, de La Réunion où les enfants comprennent l'île et s'entraînent : un coach IA qui explique sans faire à ta place, des séries d'exercices corrigées, un défi et une dictée du jour — et un tableau de suivi où les profs voient la progression de chaque élève. Du CP au Bac. Vulgarisation rigoureuse, chiffres vérifiés.",
+    "Le journal pour apprendre, gratuit, de La Réunion où les enfants comprennent l'île et s'entraînent : un coach IA qui explique sans faire à ta place en maths, français, anglais, espagnol et IA, des séries d'exercices corrigées, un défi et une dictée du jour — et un tableau de suivi où les profs voient la progression de chaque élève. Du CP au Bac. Vulgarisation rigoureuse, chiffres vérifiés.",
 
   keywords: [
     "EleveAI",
@@ -70,8 +70,11 @@ export const metadata: Metadata = {
     "La Réunion",
     "english maths",
     "coach IA",
-    "coach français IA",
+    "coach français",
+    "coach anglais",
+    "coach espagnol",
     "espagnol",
+    "anglais collège",
     "français collège",
     "dictée du jour",
   ],
@@ -102,7 +105,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "EleveAI — Comprendre l'île, s'entraîner avec un coach",
     description:
-      "Le journal pour apprendre de La Réunion : comprendre les sciences avec le volcan, les cyclones, l'océan — et s'entraîner avec un coach qui explique sans faire à ta place, tout corrigé.",
+      "Le journal pour apprendre de La Réunion : comprendre l'île (volcan, cyclones, océan) et s'entraîner avec un coach en maths, français, anglais, espagnol et IA — il explique sans faire à ta place, tout corrigé.",
     images: ["/preview.jpg"],
   },
 };
@@ -127,7 +130,7 @@ export default function RootLayout({
       url: SITE_URL,
       logo: `${SITE_URL}/preview.jpg`,
       description:
-        "Le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent : vulgarisation rigoureuse des sciences et des mathématiques ancrée dans le réel de l'île (volcan, cyclones, océan, énergie), et un coach qui explique sans faire à ta place avec des exercices corrigés.",
+        "Le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent : vulgarisation rigoureuse ancrée dans le réel de l'île (volcan, cyclones, océan, énergie), et un coach qui explique sans faire à ta place en maths, français, anglais, espagnol et IA, avec des exercices corrigés.",
       areaServed: { "@type": "Place", name: "La Réunion" },
       foundingLocation: { "@type": "Place", name: "La Réunion, France" },
       sameAs: ["https://www.youtube.com/@eleveai-e1h"],
@@ -161,17 +164,20 @@ export default function RootLayout({
       url: SITE_URL,
       applicationCategory: "EducationalApplication",
       operatingSystem: "Web",
-      educationalLevel: ["Collège"],
+      educationalLevel: ["École élémentaire", "Collège", "Lycée"],
       learningResourceType: [
         "Calcul rapide",
         "Leçon du jour",
         "Parcours guidé",
-        "Entraînement mathématique",
+        "Dictée du jour",
+        "Entraînement corrigé",
       ],
       teaches: [
         "Mathématiques",
-        "Automatismes",
-        "Raisonnement scientifique",
+        "Français",
+        "Anglais",
+        "Espagnol",
+        "Intelligence artificielle",
         "Résolution de problèmes",
       ],
       inLanguage: "fr-FR",

@@ -23,7 +23,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: "Le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent",
   description:
-    "Le journal pour apprendre, gratuit, de La Réunion où les enfants comprennent l'île et s'entraînent : un coach IA qui explique sans jamais faire à ta place, des séries d'exercices corrigées, un défi et une dictée chaque matin — et un tableau de suivi où les profs voient la progression de chaque élève. Du CP à la Terminale. Vulgarisation rigoureuse, chiffres vérifiés.",
+    "Le journal pour apprendre, gratuit, de La Réunion où les enfants comprennent l'île et s'entraînent : un coach IA qui explique sans jamais faire à ta place en maths, français, anglais, espagnol et IA, des séries d'exercices corrigées, un défi et une dictée chaque matin — et un tableau de suivi où les profs voient la progression de chaque élève. Du CP à la Terminale. Vulgarisation rigoureuse, chiffres vérifiés.",
   keywords: [
     "journal pour apprendre",
     "journal pour apprendre La Réunion",
@@ -36,6 +36,10 @@ export const metadata: Metadata = {
     "journal pédagogique",
     "la réunion",
     "maths collège",
+    "coach maths",
+    "coach français",
+    "coach anglais",
+    "coach espagnol",
     "coach IA élève",
     "défi du jour",
     "dictée du jour",
