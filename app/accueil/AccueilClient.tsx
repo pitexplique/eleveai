@@ -1894,6 +1894,34 @@ export default function AccueilPage({
         </p>
       </section>
 
+      {/* ══ LE KIT DE SURVIE — le supplément du lycée. Placé juste sous les
+          cahiers : leur page n°1 est « vers la première » = le même public. ══ */}
+      <section id="kit-de-survie" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
+        <Link
+          href="/kit-de-survie/maths-premiere"
+          className="group block rounded-sm border-2 border-red-700 bg-red-50/70 p-4 transition hover:bg-red-50 sm:p-5"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="min-w-0">
+              <p className="text-[11px] font-black uppercase tracking-[0.22em] text-red-700">
+                🆘 Nouveau · Spécial lycée
+              </p>
+              <h3 className="mt-1 font-serif text-2xl font-black leading-tight group-hover:underline">
+                Le kit de survie · Spé maths Première
+              </h3>
+              <p className="mt-1 max-w-2xl text-sm font-medium leading-6 text-[#1d1c16]/75">
+                Les 11 chapitres du programme en 11 fiches : les formules qui
+                sauvent, les réflexes, les pièges qui coûtent des points — et un
+                test corrigé par chapitre. Gratuit, à imprimer.
+              </p>
+            </div>
+            <span className="shrink-0 rounded-sm bg-red-700 px-4 py-2 text-sm font-black text-white transition group-hover:bg-red-800">
+              Imprimer le kit →
+            </span>
+          </div>
+        </Link>
+      </section>
+
       {/* ══ L'AGENDA — les calls en direct, version papier (coupon détachable).
           Lit lib/calls.ts ; ne rend rien si aucun call actif à venir. ════════ */}
       <AgendaJournal />
