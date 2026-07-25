@@ -23,6 +23,7 @@ import {
 import { speakText } from "@/app/tutor-v4/ListenButton";
 import { playMotDictee } from "@/lib/dictee-du-jour/playAudio";
 import { useEleve } from "@/context/EleveContext";
+import PontCoach from "@/components/PontCoach";
 
 const STREAK_KEY = "dictee-du-jour-streak";
 
@@ -477,6 +478,15 @@ export default function DicteeDuJourPage() {
                 Connecte-toi pour enregistrer ton score et suivre ta progression.
               </p>
             )}
+
+            {/* Le pont vers le coach (règle 24/07) : la dictée est une porte,
+                l'entraînement continue chez le coach. */}
+            <PontCoach
+              className="mt-5"
+              accroche="5 mots, c'est l'échauffement. L'entraînement continue :"
+              href="/coach-ia/francais?from=dictee"
+              label="✍️ Le coach français t'entraîne →"
+            />
 
             <p className="mt-5 text-sm font-bold text-slate-600">
               Reviens demain pour la prochaine dictée ! ☀️

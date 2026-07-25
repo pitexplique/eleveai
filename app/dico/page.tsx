@@ -90,6 +90,28 @@ export default function DicoHubPage() {
             </Link>
           ))}
         </div>
+
+        {/* Le pont vers l'entraînement (règle 24/07) : le Dico est une porte —
+            la dictée du jour prolonge les mots, le coach entraîne pour de vrai. */}
+        <div className="mt-8 rounded-2xl border border-cyan-200 bg-white p-5 text-center shadow-sm">
+          <p className="text-sm font-bold text-slate-600">
+            Les mots appris, deux façons de continuer :
+          </p>
+          <div className="mt-3 flex flex-wrap justify-center gap-3">
+            <Link
+              href="/dictee-du-jour?from=dico"
+              className="rounded-xl bg-cyan-600 px-6 py-3 text-sm font-black text-white shadow-sm transition hover:bg-cyan-500"
+            >
+              ✍️ La dictée du jour
+            </Link>
+            <Link
+              href="/coach-ia/francais?from=dico"
+              className="rounded-xl bg-indigo-600 px-6 py-3 text-sm font-black text-white shadow-sm transition hover:bg-indigo-700"
+            >
+              📚 Le coach français t&apos;entraîne
+            </Link>
+          </div>
+        </div>
       </section>
     </main>
   );

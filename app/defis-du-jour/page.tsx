@@ -394,6 +394,15 @@ export default function DefisDuJourPage() {
                 >
                   Mon dashboard
                 </Link>
+
+                {/* Le pont vers le coach (règle 24/07) : le défi teste,
+                    le coach entraîne. */}
+                <Link
+                  href="/coach-ia/maths?from=defi-du-jour"
+                  className="rounded-2xl bg-white px-5 py-2.5 text-sm font-black text-slate-950 transition hover:bg-slate-100"
+                >
+                  🧮 M&apos;entraîner avec le coach
+                </Link>
               </div>
 
               {saveMessage ? (

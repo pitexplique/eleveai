@@ -675,6 +675,13 @@ export default function CalculRapideDefiClient() {
     const pct =
       questions.length > 0 ? Math.round((score / questions.length) * 100) : 0;
 
+    // Le pont vers le coach (règle 24/07) : le défi teste, le coach entraîne —
+    // sur la classe du niveau joué quand elle existe côté coach.
+    const coachHref =
+      niveau === "adulte"
+        ? "/coach-ia/maths?from=calcul-rapide"
+        : `/coach-ia/maths?classe=${String(niveau).toLowerCase()}&from=calcul-rapide`;
+
     return (
       <main className="min-h-screen bg-gradient-to-br from-slate-950 via-[#062A4F] to-slate-950 px-4 py-8 text-white">
         <section className="mx-auto max-w-5xl text-center">
@@ -751,6 +758,13 @@ export default function CalculRapideDefiClient() {
             </div>
 
             <div className="mt-7 flex flex-wrap justify-center gap-3">
+              <Link
+                href={coachHref}
+                className="rounded-full bg-emerald-400 px-7 py-4 text-base font-black text-slate-950 shadow-lg hover:bg-emerald-300"
+              >
+                🧮 M&apos;entraîner → Coach maths
+              </Link>
+
               <button
                 type="button"
                 onClick={restartDefi}

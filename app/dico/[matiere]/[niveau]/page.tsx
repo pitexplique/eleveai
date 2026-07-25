@@ -35,6 +35,25 @@ export default function DicoPlayerPage() {
   const niveau = (params?.niveau as string) ?? "6e";
   const dico = getDico(matiere, niveau);
 
+  // Le pont vers le coach (règle 24/07) : maths → coach maths, anglais → coach
+  // English, le reste (vocabulaire, gestes) → coach français. La classe n'est
+  // passée que si le coach la connaît (sinon il choisit sa classe par défaut).
+  const coachMatiere =
+    matiere === "maths"
+      ? "maths"
+      : matiere === "anglais"
+        ? "english-maths"
+        : "francais";
+  const classesCoach =
+    coachMatiere === "maths"
+      ? ["cm1", "cm2", "6e", "5e", "4e", "3e"]
+      : coachMatiere === "francais"
+        ? ["cm1", "cm2", "6e"]
+        : []; // english-maths : niveaux A1→B2, pas les classes du Dico
+  const coachHref = `/coach-ia/${coachMatiere}?${
+    classesCoach.includes(niveau) ? `classe=${niveau}&` : ""
+  }from=dico`;
+
   // Filtre par famille de mots ("toutes" = tout le dico)
   const [famille, setFamille] = useState<FamilleDico | "toutes">("toutes");
 
@@ -212,6 +231,14 @@ export default function DicoPlayerPage() {
               Tu as appris le vocabulaire <em>et</em> entraîné tes gestes d&apos;examen.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
+              {/* Le pont vers le coach (règle 24/07) : les mots sont sus,
+                  l'entraînement continue chez le coach de la matière. */}
+              <Link
+                href={coachHref}
+                className="rounded-full bg-indigo-600 px-6 py-3 text-sm font-black text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-500"
+              >
+                📚 M&apos;entraîner avec le coach
+              </Link>
               <button
                 type="button"
                 onClick={recommencer}

@@ -18,6 +18,7 @@ import {
   type Audience,
 } from "@/data/blogPosts";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
+import PontCoach from "@/components/PontCoach";
 
 const SITE_URL = "https://eleveai.fr";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/preview.jpg`;
@@ -244,6 +245,16 @@ export default async function BlogPostPage({ params }: PageProps) {
             </ReactMarkdown>
           </article>
         </div>
+
+        {/* Le pont vers le coach (règle 24/07) : l'article est une porte,
+            l'entraînement est la destination. */}
+        <PontCoach
+          className="mt-6"
+          accroche="Tu as lu — maintenant, entraîne-toi :"
+          href="/coach-ia/maths?from=blog"
+          label="🧮 Le coach t'entraîne, gratuit et sans jugement →"
+          teinte="emerald"
+        />
       </div>
     </main>
   );

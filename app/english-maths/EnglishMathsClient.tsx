@@ -549,6 +549,15 @@ export default function EnglishMathsClient() {
                   >
                     Refaire le mini-défi
                   </button>
+
+                  {/* Le pont vers le coach (règle 24/07) : le mini-défi teste,
+                      le coach entraîne. */}
+                  <Link
+                    href="/coach-ia/english-maths?from=english-maths"
+                    className="rounded-2xl bg-indigo-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-indigo-500"
+                  >
+                    🗣️ Continuer avec le coach English
+                  </Link>
                 </div>
 
                 {saveMessage && (
