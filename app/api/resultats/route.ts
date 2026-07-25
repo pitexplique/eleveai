@@ -57,6 +57,12 @@ const ACTIVITES: Record<string, { table: string; colonnes: string[] }> = {
     table: "resultats_dictee",
     colonnes: ["classe", "score", "total", "details"],
   },
+  // Les rituels de langue « X du jour » (anglais, espagnol, …) — UNE table
+  // partagée, la colonne `langue` distingue (supabase/resultats_langue_du_jour.sql).
+  langue_du_jour: {
+    table: "resultats_langue_du_jour",
+    colonnes: ["langue", "niveau", "score", "total", "details"],
+  },
   tutor: {
     table: "resultats_tutor",
     colonnes: [

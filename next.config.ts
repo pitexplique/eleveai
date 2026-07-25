@@ -114,6 +114,7 @@ const nextConfig = {
       { source: "/mots", destination: "/anglais-du-jour", permanent: false },
       { source: "/anglais", destination: "/anglais-du-jour", permanent: false },
       { source: "/repertoire-anglais", destination: "/anglais-du-jour", permanent: false },
+      { source: "/espagnol", destination: "/espagnol-du-jour", permanent: false },
       // Les deux destinations phares à dire dans TOUTES les vidéos.
       {
         source: "/cahier",

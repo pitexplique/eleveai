@@ -368,7 +368,7 @@ const CATALOGUE_EMOJIS: Record<string, string> = {
   "coach-espagnol": "🇪🇸", "coach-ia": "🤖", "coach-economie": "📊",
   "defis-du-jour": "🎯", "calcul-rapide": "⚡", "dictee-du-jour": "✍️",
   "semaine-verbes": "📅", "dico-maths": "🗣️", "dico-francais": "🗣️",
-  "anglais-du-jour": "🇬🇧",
+  "anglais-du-jour": "🇬🇧", "espagnol-du-jour": "🇪🇸",
   "podcast-maths": "🎧", "fiches-maths": "📚", "fiches-ia": "📚",
   "livre-ia": "📕", "maths-974": "🌋", "le-bon-prompt": "💬",
   "picto-maths": "🖼️", "carte-tresor": "🗺️", "eval-pix-ia": "🎓",
@@ -1283,6 +1283,7 @@ export default function AccueilPage({
                 {[
                   { emoji: "✍️", nom: "La dictée du jour", quoi: "5 mots sans faute, avec l'audio", href: "/dictee-du-jour" },
                   { emoji: "🇬🇧", nom: "L'anglais du jour", quoi: "5 mots par jour, du A1 au B2", href: "/anglais-du-jour" },
+                  { emoji: "🇪🇸", nom: "L'espagnol du jour", quoi: "5 mots par jour, du A1 au B2", href: "/espagnol-du-jour" },
                   { emoji: "⚡", nom: "Le calcul rapide", quoi: "3 minutes d'automatismes chrono", href: "/calcul-rapide" },
                 ].map((r) => (
                   <Link

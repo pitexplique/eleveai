@@ -167,8 +167,9 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/ia/enjeux/enjeux-culturels-societaux", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
 
   { path: "/dictee-du-jour",  priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_HOME },
-  // L'anglais du jour (25/07) — « 5 mots par jour » A1→B2, répétition espacée.
+  // Les rituels de langue (25/07) — « 5 mots par jour » A1→B2, répétition espacée.
   { path: "/anglais-du-jour",  priority: 0.9,  changeFrequency: "daily",  lastMod: new Date("2026-07-25") },
+  { path: "/espagnol-du-jour", priority: 0.9,  changeFrequency: "daily",  lastMod: new Date("2026-07-25") },
   { path: "/calcul-rapide",   priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/english-maths",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   // Semaine « Les baleines sont là ! » depuis le 16/07 (remplace le foot).
