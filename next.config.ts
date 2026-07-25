@@ -18,6 +18,21 @@ const nextConfig = {
         destination: "/coach-ia/maths",
         permanent: true,
       },
+      // Nettoyage SERP de marque (25/07) — Google servait en sitelinks deux
+      // pages d'un autre âge : /eleves (page « générateur » sans aucun lien
+      // interne entrant) et /concours-ia (pilote de décembre 2025, sans
+      // metadata — Google improvisait le libellé « Connexion » — et avec un
+      // lien mort vers /concours). Une seule vitrine élève : /espace-eleves.
+      {
+        source: "/eleves",
+        destination: "/espace-eleves",
+        permanent: true,
+      },
+      {
+        source: "/concours-ia",
+        destination: "/espace-eleves",
+        permanent: true,
+      },
       // Renommage cartes-vacances → cahier-vacances-cartes (09/07/2026) :
       // 301 pour préserver l'indexation et les liens déjà partagés/imprimés.
       {

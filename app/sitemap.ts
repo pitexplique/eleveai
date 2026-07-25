@@ -200,9 +200,8 @@ const ROUTES: RouteConfig[] = [
   { path: "/concours-logo",   priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/podcast-maths",   priority: 0.85, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/concours-general",priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/concours-ia",     priority: 0.7,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/le-bon-prompt",   priority: 0.7,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/grand-oral",      priority: 0.7,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  // /concours-ia, /le-bon-prompt et /grand-oral sont des REDIRECTIONS
+  // (nettoyage SERP du 25/07) : un sitemap ne liste que de vraies pages.
 
   // ── LA COMMUNAUTÉ DU JOURNAL (courrier des lecteurs, honneurs, contributions)
   // Pages publiques mises en avant par la Une depuis la refonte journal.
