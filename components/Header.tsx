@@ -19,6 +19,7 @@ const NAV_MATHS = [
   { href: "/calcul-rapide",    icon: "⚡", label: "Calcul rapide",      desc: "5 min d'automatismes" },
   { href: "/dico/maths/6e",    icon: "📒", label: "Dico Maths 6e",      desc: "50 mots & gestes pour l'éval nationale" },
   { href: "/fiches-cours/maths", icon: "PDF", label: "Fiches de cours",    desc: "Cours maths courts à télécharger" },
+  { href: "/kit-de-survie",    icon: "🆘", label: "Kit de survie 1re",  desc: "Spé maths : formules, pièges & réflexes à imprimer" },
   { href: "/maths-974",        icon: "🌋", label: "Maths Réel · 974",       desc: "La Réunion en vidéo : à quoi servent les maths" },
   { href: "/picto-maths",      icon: "🃏", label: "Picto Maths · 974",      desc: "Défis « 1 image, 1 question » à imprimer" },
   { href: "/carte",            icon: "🗺️", label: "Chasse aux trésors · 974", desc: "La Réunion : trouve les trésors — maths, écologie, histoire" },
@@ -260,8 +261,11 @@ function MobileSection({
 
 // Les 4 portes d'audience — affichées quand l'élève n'est pas connecté (barre
 // déconnectée) ; un élève connecté voit ses matières à la place.
+// « Élève » → /espace-eleves (25/07) : même destination que les sitelinks
+// Google/Bing — la vitrine curée. Le catalogue /explorer reste à un clic
+// (hero + fin de page d'espace-eleves, et menu de l'élève connecté).
 const AUDIENCE_DOORS: { space: Audience; emoji: string; label: string; href: string }[] = [
-  { space: "eleve", emoji: "🎓", label: "Élève", href: "/explorer" },
+  { space: "eleve", emoji: "🎓", label: "Élève", href: "/espace-eleves" },
   { space: "parent", emoji: "👪", label: "Parent", href: "/parents" },
   { space: "enseignant", emoji: "🍎", label: "Enseignant", href: "/enseignants" },
   { space: "etablissement", emoji: "🏫", label: "Établissement", href: "/espace-ecoles" },
