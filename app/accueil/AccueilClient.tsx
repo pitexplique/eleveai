@@ -34,6 +34,7 @@ import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import AgendaJournal from "@/components/accueil/AgendaJournal";
 import AbonnementJournal from "@/components/accueil/AbonnementJournal";
 import ReclameMachine from "@/components/accueil/ReclameMachine";
+import RituelDuJourChip from "@/components/accueil/RituelDuJourChip";
 import MachinesPanel from "@/components/simulateurs/MachinesPanel";
 import CarteMachine from "@/components/simulateurs/CarteMachine";
 import { MACHINES_RECENTES, NB_MACHINES } from "@/lib/simulateurs";
@@ -1013,7 +1014,8 @@ export default function AccueilPage({
             </p>
 
             {/* Les 3 verbes de l'objectif — toujours visibles, un clic chacun :
-                s'entraîner (coach) · se tester (parcours) · se défier (défis). */}
+                s'entraîner (coach) · se tester (parcours) · le rituel du jour
+                (mini-slide : défi, dictée, anglais, espagnol, calcul). */}
             <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2">
               <Link
                 href="/explorer#coach"
@@ -1027,12 +1029,7 @@ export default function AccueilPage({
               >
                 🧭 Teste-toi <span className="font-semibold opacity-80">· Parcours</span>
               </Link>
-              <Link
-                href="/defis-du-jour"
-                className="inline-flex items-center gap-2 rounded-sm border-2 border-cyan-800 px-5 py-2.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
-              >
-                🎯 Défi du jour
-              </Link>
+              <RituelDuJourChip />
             </div>
 
             {/* La classe affine la destination du coach (accordéon conservé). */}
