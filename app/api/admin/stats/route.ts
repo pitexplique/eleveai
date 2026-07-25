@@ -32,6 +32,7 @@ const TABLES_RESULTATS: { table: string; module: string; hasScore: boolean }[] =
   { table: "resultats_defis_jour", module: "defis", hasScore: true },
   { table: "resultats_english_maths", module: "english", hasScore: true },
   { table: "resultats_dictee", module: "dictee", hasScore: true },
+  { table: "resultats_langue_du_jour", module: "langue", hasScore: true },
   { table: "resultats_tutor", module: "coach", hasScore: false },
 ];
 
@@ -256,7 +257,7 @@ export async function GET(req: Request) {
   let activitesTotal = 0;
   let activitesAujourdhui = 0;
   let activites7j = 0;
-  const MODULE_KEYS = ["parcours", "calcul", "defis", "english", "dictee", "coach"];
+  const MODULE_KEYS = ["parcours", "calcul", "defis", "english", "dictee", "langue", "coach"];
   const parModule: Record<string, number> = Object.fromEntries(
     MODULE_KEYS.map((k) => [k, 0])
   );
@@ -356,6 +357,58 @@ export async function GET(req: Request) {
       .map(([page, count]) => ({ page, count, count7: nav7.get(page) ?? 0 }))
       .sort((a, b) => b.count - a.count)
       .slice(0, 12),
+  };
+
+  // ---- Rituels de langue : usage « connecté OU NON » (demande Frédéric 25/07) ----
+  // Non connecté = pas d'identité en base (le rituel vit en localStorage) → on
+  // compte les OUVERTURES des pages via pages_vues (tout le monde). Le connecté,
+  // lui, est un compte d'ÉLÈVES DISTINCTS ayant enregistré un résultat.
+  const PAGES_LANGUE: Record<string, string> = {
+    "/anglais-du-jour": "anglais",
+    "/espagnol-du-jour": "espagnol",
+  };
+  const vuesLangue: Record<string, { vues30: number; vues7: number }> = {
+    anglais: { vues30: 0, vues7: 0 },
+    espagnol: { vues30: 0, vues7: 0 },
+  };
+  for (const p of pagesVues) {
+    const langue = PAGES_LANGUE[p.page as string];
+    if (!langue) continue;
+    const t = new Date(p.created_at as string).getTime();
+    if (!Number.isFinite(t)) continue;
+    if (t >= since30) vuesLangue[langue].vues30 += 1;
+    if (t >= since7) vuesLangue[langue].vues7 += 1;
+  }
+  // Élèves connectés DISTINCTS par langue : il faut la colonne `langue`, absente
+  // des `rows` (select minimal) → petite requête dédiée sur les 30 j.
+  const langueRows = await fetchAll(
+    supabase,
+    "resultats_langue_du_jour",
+    "code_utilisateur, langue, created_at",
+    etabFilter
+  );
+  const connectesLangue: Record<string, Set<string>> = {
+    anglais: new Set(),
+    espagnol: new Set(),
+  };
+  for (const r of langueRows) {
+    const langue = r.langue as string;
+    const code = r.code_utilisateur as string | null;
+    if (!code || !connectesLangue[langue]) continue;
+    const t = new Date(r.created_at as string).getTime();
+    if (Number.isFinite(t) && t >= since30) connectesLangue[langue].add(code);
+  }
+  const rituelsLangue = {
+    vues30: vuesLangue.anglais.vues30 + vuesLangue.espagnol.vues30,
+    vues7: vuesLangue.anglais.vues7 + vuesLangue.espagnol.vues7,
+    connectes: new Set([
+      ...connectesLangue.anglais,
+      ...connectesLangue.espagnol,
+    ]).size,
+    parLangue: {
+      anglais: { ...vuesLangue.anglais, connectes: connectesLangue.anglais.size },
+      espagnol: { ...vuesLangue.espagnol, connectes: connectesLangue.espagnol.size },
+    },
   };
 
   // Répartition par PAYS (code ISO x-vercel-ip-country), 30 j + sous-total 7 j,
@@ -468,6 +521,7 @@ export async function GET(req: Request) {
     engagement,
     derniersConnectes,
     navigation,
+    rituelsLangue,
     geo,
     avis,
   });

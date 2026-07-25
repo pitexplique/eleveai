@@ -44,6 +44,15 @@ type Stats = {
     total30: number;
     topPages: { page: string; count: number; count7: number }[];
   };
+  rituelsLangue: {
+    vues30: number;
+    vues7: number;
+    connectes: number;
+    parLangue: Record<
+      string,
+      { vues30: number; vues7: number; connectes: number }
+    >;
+  };
   geo: {
     total30: number;
     /** Vues sans pays : lignes d'avant la colonne `pays`, ou dev local. Hors calcul. */
@@ -80,6 +89,7 @@ const MODULES: { key: string; label: string; color: string }[] = [
   { key: "coach", label: "🧠 Coach IA", color: "bg-indigo-500" },
   { key: "english", label: "🇬🇧 English-Maths", color: "bg-sky-500" },
   { key: "dictee", label: "✍️ Dictée du jour", color: "bg-cyan-500" },
+  { key: "langue", label: "🗣️ Langues du jour", color: "bg-fuchsia-500" },
 ];
 
 // Libellés lisibles des sections (1er segment d'URL) — « où vont les élèves ».
@@ -96,6 +106,9 @@ const SECTION_LABELS: Record<string, string> = {
   "/maths-974": "🌋 Maths 974",
   "/cahier-vacances": "☀️ Cahiers de vacances",
   "/eval-pix-ia": "🤖 Éval Pix IA",
+  "/dictee-du-jour": "✍️ Dictée du jour",
+  "/anglais-du-jour": "🇬🇧 Anglais du jour",
+  "/espagnol-du-jour": "🇪🇸 Espagnol du jour",
 };
 function sectionLabel(page: string) {
   return SECTION_LABELS[page] ?? page;
@@ -364,6 +377,68 @@ export default function AdminStatsClient() {
                 })}
               </div>
             </div>
+          </div>
+
+          {/* Rituels de langue : usage « connecté OU NON » (demande Frédéric 25/07).
+              Ouvertures = pages_vues (tout le monde) ; connectés = résultats. */}
+          <div className="rounded-2xl border border-indigo-800/50 bg-indigo-950/30 p-5">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h3 className="text-sm font-bold text-slate-200">
+                🗣️ Rituels de langue — qui les utilise
+              </h3>
+              <span className="rounded-full bg-indigo-900/60 px-2.5 py-1 text-xs font-bold text-indigo-200">
+                30 jours
+              </span>
+            </div>
+            <div className="mt-3 grid grid-cols-2 gap-3">
+              <div className="rounded-xl bg-slate-900/50 p-3">
+                <p className="text-2xl font-black text-indigo-300">
+                  {stats.rituelsLangue.vues30}
+                </p>
+                <p className="text-[11px] font-bold uppercase tracking-wide text-slate-400">
+                  Ouvertures · connecté ou non
+                </p>
+                <p className="mt-0.5 text-[11px] font-semibold text-slate-500">
+                  7j : {stats.rituelsLangue.vues7}
+                </p>
+              </div>
+              <div className="rounded-xl bg-slate-900/50 p-3">
+                <p className="text-2xl font-black text-emerald-300">
+                  {stats.rituelsLangue.connectes}
+                </p>
+                <p className="text-[11px] font-bold uppercase tracking-wide text-slate-400">
+                  Élèves connectés
+                </p>
+                <p className="mt-0.5 text-[11px] font-semibold text-slate-500">
+                  ont enregistré un résultat
+                </p>
+              </div>
+            </div>
+            <div className="mt-3 space-y-1.5 text-xs">
+              {[
+                { k: "anglais", label: "🇬🇧 Anglais du jour" },
+                { k: "espagnol", label: "🇪🇸 Espagnol du jour" },
+              ].map(({ k, label }) => {
+                const l = stats.rituelsLangue.parLangue[k];
+                if (!l) return null;
+                return (
+                  <div key={k} className="flex items-center justify-between">
+                    <span className="font-semibold text-slate-300">{label}</span>
+                    <span className="font-bold text-slate-400">
+                      {l.vues30} ouv.
+                      <span className="ml-1 font-medium text-slate-600">
+                        · {l.connectes} connectés
+                      </span>
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+            <p className="mt-3 text-[11px] font-semibold text-slate-500">
+              « Ouvertures » = visites des pages (localStorage, sans compte).
+              Les non-connectés n'ont pas d'identité — on compte les visites, pas
+              les personnes distinctes.
+            </p>
           </div>
 
           {/* Où vont les élèves (navigation agrégée, sans identité) */}
