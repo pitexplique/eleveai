@@ -21,10 +21,13 @@ export const revalidate = 300;
 // langage de tout le monde. On dit désormais ce qu'on est vraiment : le
 // journal pédagogique de La Réunion, où personne n'apprend à ta place.
 export const metadata: Metadata = {
-  title: "Le journal scientifique de La Réunion où les enfants comprennent et s'entraînent",
+  title: "Le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent",
   description:
-    "Le journal scientifique gratuit de La Réunion où les enfants comprennent l'île et s'entraînent : un coach IA qui explique sans jamais faire à ta place, des séries d'exercices corrigées, un défi et une dictée chaque matin — et un tableau de suivi où les profs voient la progression de chaque élève. Du CP à la Terminale. Vulgarisation rigoureuse, chiffres vérifiés.",
+    "Le journal pour apprendre, gratuit, de La Réunion où les enfants comprennent l'île et s'entraînent : un coach IA qui explique sans jamais faire à ta place, des séries d'exercices corrigées, un défi et une dictée chaque matin — et un tableau de suivi où les profs voient la progression de chaque élève. Du CP à la Terminale. Vulgarisation rigoureuse, chiffres vérifiés.",
   keywords: [
+    "journal pour apprendre",
+    "journal pour apprendre La Réunion",
+    // Gardés pour le classement déjà gagné sur cette requête (devant le CNRS).
     "journal scientifique",
     "journal scientifique La Réunion",
     "science pour enfants",
@@ -40,9 +43,9 @@ export const metadata: Metadata = {
     "eleveai",
   ],
   openGraph: {
-    title: "Le journal scientifique de La Réunion où les enfants comprennent et s'entraînent",
+    title: "Le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent",
     description:
-      "Le journal scientifique gratuit de La Réunion : comprendre l'île (volcan, cyclones, baleines) et s'entraîner avec un coach qui explique sans faire à ta place, tout corrigé. Ici, personne n'apprend à ta place.",
+      "Le journal pour apprendre, gratuit, de La Réunion : comprendre l'île (volcan, cyclones, baleines) et s'entraîner avec un coach qui explique sans faire à ta place, tout corrigé. Ici, personne n'apprend à ta place.",
     url: "https://eleveai.fr",
     siteName: "EleveAI",
     images: [
@@ -50,7 +53,7 @@ export const metadata: Metadata = {
         url: "/images/accueil-eleveai-reunion.webp",
         width: 1680,
         height: 945,
-        alt: "EleveAI — le journal scientifique de La Réunion où les enfants comprennent et s'entraînent",
+        alt: "EleveAI — le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent",
       },
     ],
     locale: "fr_FR",

@@ -931,7 +931,7 @@ export default function AccueilPage({
               cède la place à la phrase choc du coach. */}
           <div className="order-1 text-center lg:order-2">
             <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[#1d1c16]/65 sm:text-xs">
-              Le journal scientifique · Île de La Réunion
+              Le journal pour apprendre · Île de La Réunion
             </p>
             <h1 className="mt-1 font-serif text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl">
               eleveai<span className="text-cyan-800">.fr</span>

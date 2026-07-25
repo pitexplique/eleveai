@@ -47,12 +47,12 @@ export const metadata: Metadata = {
   },
 
   title: {
-    default: "EleveAI — Le journal scientifique de La Réunion où les enfants comprennent et s'entraînent",
+    default: "EleveAI — Le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent",
     template: "%s — EleveAI",
   },
 
   description:
-    "Le journal scientifique gratuit de La Réunion où les enfants comprennent l'île et s'entraînent : un coach IA qui explique sans faire à ta place, des séries d'exercices corrigées, un défi et une dictée du jour — et un tableau de suivi où les profs voient la progression de chaque élève. Du CP au Bac. Vulgarisation rigoureuse, chiffres vérifiés.",
+    "Le journal pour apprendre, gratuit, de La Réunion où les enfants comprennent l'île et s'entraînent : un coach IA qui explique sans faire à ta place, des séries d'exercices corrigées, un défi et une dictée du jour — et un tableau de suivi où les profs voient la progression de chaque élève. Du CP au Bac. Vulgarisation rigoureuse, chiffres vérifiés.",
 
   keywords: [
     "EleveAI",
@@ -81,9 +81,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "EleveAI — Le journal scientifique de La Réunion où les enfants comprennent et s'entraînent",
+    title: "EleveAI — Le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent",
     description:
-      "Le journal scientifique gratuit de La Réunion : comprendre l'île (volcan, cyclones, baleines) et s'entraîner avec un coach qui explique sans faire à ta place, des exercices corrigés, du CP au Bac.",
+      "Le journal pour apprendre, gratuit, de La Réunion : comprendre l'île (volcan, cyclones, baleines) et s'entraîner avec un coach qui explique sans faire à ta place, des exercices corrigés, du CP au Bac.",
     url: CANONICAL,
     type: "website",
     siteName: "EleveAI",
@@ -93,7 +93,7 @@ export const metadata: Metadata = {
         url: "/preview.jpg",
         width: 1200,
         height: 630,
-        alt: "EleveAI — le journal scientifique de La Réunion où les enfants comprennent et s'entraînent",
+        alt: "EleveAI — le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent",
       },
     ],
   },
@@ -102,7 +102,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "EleveAI — Comprendre l'île, s'entraîner avec un coach",
     description:
-      "Le journal scientifique de La Réunion : comprendre les sciences avec le volcan, les cyclones, l'océan — et s'entraîner avec un coach qui explique sans faire à ta place, tout corrigé.",
+      "Le journal pour apprendre de La Réunion : comprendre les sciences avec le volcan, les cyclones, l'océan — et s'entraîner avec un coach qui explique sans faire à ta place, tout corrigé.",
     images: ["/preview.jpg"],
   },
 };
@@ -117,11 +117,17 @@ export default function RootLayout({
       "@context": "https://schema.org",
       "@type": "Organization",
       name: "EleveAI",
-      alternateName: "Le journal scientifique de La Réunion",
+      // Le nom public devient « pour apprendre » ; « journal scientifique de
+      // La Réunion » reste en alternateName pour ne pas perdre le classement
+      // gagné sur cette requête (devant le CNRS, 24/07).
+      alternateName: [
+        "Le journal pour apprendre de La Réunion",
+        "Le journal scientifique de La Réunion",
+      ],
       url: SITE_URL,
       logo: `${SITE_URL}/preview.jpg`,
       description:
-        "Le journal scientifique de La Réunion où les enfants comprennent et s'entraînent : vulgarisation rigoureuse des sciences et des mathématiques ancrée dans le réel de l'île (volcan, cyclones, océan, énergie), et un coach qui explique sans faire à ta place avec des exercices corrigés.",
+        "Le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent : vulgarisation rigoureuse des sciences et des mathématiques ancrée dans le réel de l'île (volcan, cyclones, océan, énergie), et un coach qui explique sans faire à ta place avec des exercices corrigés.",
       areaServed: { "@type": "Place", name: "La Réunion" },
       foundingLocation: { "@type": "Place", name: "La Réunion, France" },
       sameAs: ["https://www.youtube.com/@eleveai-e1h"],
@@ -129,7 +135,7 @@ export default function RootLayout({
     {
       "@context": "https://schema.org",
       "@type": "Periodical",
-      name: "Le journal scientifique de La Réunion — EleveAI",
+      name: "Le journal pour apprendre de La Réunion — EleveAI",
       url: SITE_URL,
       inLanguage: "fr-FR",
       about: [
