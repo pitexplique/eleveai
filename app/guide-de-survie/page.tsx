@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { KIT_MATHS_PREMIERE } from "./maths-premiere/data";
 import { KIT_MATHS_SECONDE } from "./maths-seconde/data";
+import { KIT_MATHS_TERMINALE } from "./maths-terminale/data";
 
 export const metadata: Metadata = {
   title: "Guide de survie maths lycée — l'essentiel à imprimer (gratuit)",
@@ -30,6 +31,15 @@ const KITS = [
     pitch:
       "Les 11 chapitres de la spécialité en 11 fiches : formules, réflexes, pièges, test corrigé.",
     grad: "from-red-500 to-rose-600",
+  },
+  {
+    slug: "maths-terminale",
+    emoji: "🎓",
+    titre: KIT_MATHS_TERMINALE.titre,
+    niveau: "Terminale",
+    pitch:
+      "Les 18 chapitres de la spécialité en 18 fiches : formules, réflexes, pièges, test corrigé.",
+    grad: "from-rose-600 to-fuchsia-700",
   },
 ];
 
@@ -71,9 +81,9 @@ export default function KitDeSurvieHubPage() {
 
       {/* La réponse sur place : où sont les autres niveaux ? */}
       <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
-        <h2 className="mb-2 text-lg font-black text-slate-900">Terminale ? Une autre matière ?</h2>
+        <h2 className="mb-2 text-lg font-black text-slate-900">Une autre matière ? Un autre niveau ?</h2>
         <p className="mx-auto mb-4 max-w-xl text-sm leading-relaxed text-slate-600">
-          Les kits arrivent niveau par niveau. En attendant le tien, le{" "}
+          Les guides arrivent niveau par niveau. En attendant le tien, le{" "}
           <strong>coach en ligne</strong> couvre déjà tout le lycée, chapitre par chapitre — gratuit
           aussi.
         </p>
