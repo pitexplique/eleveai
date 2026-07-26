@@ -497,6 +497,45 @@ function PastilleJour({ label = "aujourd'hui" }: { label?: string }) {
 // (règle de l'accueil : jamais de question sans sa réponse dessous) via le
 // dépliant « Voir le mot ». Calculé APRÈS montage (comme la page dictée) pour
 // éviter le décalage d'hydratation sur la date.
+
+function GuideSurvieAnime({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 260 92"
+      className={className}
+      role="img"
+      aria-label="Livret anime du guide de survie maths Premiere"
+      style={{ display: "block" }}
+    >
+      <style>{`
+        @keyframes guide-page { 0%, 100% { transform: rotateY(0deg); } 45%, 55% { transform: rotateY(-68deg); } }
+        @keyframes guide-pencil { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(16px, -9px); } }
+        @keyframes guide-check { 0%, 45% { stroke-dashoffset: 38; } 70%, 100% { stroke-dashoffset: 0; } }
+        .guide-page { animation: guide-page 4.8s ease-in-out infinite; transform-origin: 132px 22px; transform-box: fill-box; }
+        .guide-pencil { animation: guide-pencil 3.8s ease-in-out infinite; }
+        .guide-check { stroke-dasharray: 38; animation: guide-check 4.8s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .guide-page, .guide-pencil, .guide-check { animation-duration: 18s; }
+        }
+      `}</style>
+      <rect x="6" y="8" width="248" height="76" rx="6" fill="#fbf6e7" stroke="#1d1c16" strokeWidth="2" />
+      <path d="M130 14v64" stroke="#1d1c16" strokeOpacity="0.28" strokeWidth="2" />
+      <g>
+        <path d="M24 24h76M24 36h62M24 48h72" stroke="#155e75" strokeWidth="4" strokeLinecap="round" />
+        <rect x="24" y="58" width="74" height="10" rx="2" fill="#ffd23f" stroke="#1d1c16" strokeWidth="1.5" />
+      </g>
+      <g className="guide-page">
+        <path d="M132 16h94c6 0 10 4 10 10v48h-104z" fill="#f6f1e4" stroke="#1d1c16" strokeWidth="2" />
+        <path d="M150 28h58M150 40h70M150 52h44" stroke="#1d1c16" strokeOpacity="0.32" strokeWidth="3" strokeLinecap="round" />
+      </g>
+      <path className="guide-check" d="M154 64l12 10 24-30" fill="none" stroke="#15803d" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+      <g className="guide-pencil">
+        <path d="M68 72l70-38 8 15-70 38-15 2z" fill="#ff6b6b" stroke="#1d1c16" strokeWidth="2" strokeLinejoin="round" />
+        <path d="M138 34l8 15 9-13-5-9z" fill="#ffd23f" stroke="#1d1c16" strokeWidth="2" strokeLinejoin="round" />
+      </g>
+    </svg>
+  );
+}
 function MotDuJourEncart() {
   const [mot, setMot] = useState<DicteeMot | null>(null);
   useEffect(() => {
@@ -1311,49 +1350,49 @@ export default function AccueilPage({
                 ))}
               </div>
 
-              {/* LE KIT DE SURVIE — le supplément lycée dans le fil (25/07) :
-                  même public que les cahiers « vers la première » (page n°1). */}
+              {/* GUIDE DE SURVIE - le livret lycee a imprimer. */}
               <Link
                 href="/kit-de-survie/maths-premiere"
-                className="group block py-3"
+                className="group block border-y border-dotted border-[#1d1c16]/25 py-3"
               >
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
-                  🆘 Nouveau · Spécial lycée
+                  Nouveau · Sp&eacute;cial lyc&eacute;e
                 </p>
-                <h3 className="mt-1 font-serif text-lg font-black leading-snug group-hover:underline">
-                  Kit de survie · Spé maths Première
-                </h3>
-                <p className="mt-0.5 text-xs font-medium text-[#1d1c16]/60">
-                  Les 11 chapitres en 11 fiches à imprimer : formules, réflexes,
-                  pièges + test corrigé.
-                </p>
-                <p className="mt-1.5 text-sm font-black text-cyan-800">Imprimer le kit →</p>
+                <div className="mt-1 grid grid-cols-[72px_1fr] items-center gap-2.5">
+                  <GuideSurvieAnime className="w-full" />
+                  <span className="block">
+                    <span className="block font-serif text-lg font-black leading-tight group-hover:underline">
+                      Guide de survie maths Premi&egrave;re
+                    </span>
+                    <span className="mt-0.5 block text-xs font-medium leading-4 text-[#1d1c16]/65">
+                      Livret &agrave; imprimer : formules, r&eacute;flexes, pi&egrave;ges et test corrig&eacute;.
+                    </span>
+                    <span className="mt-1 block text-sm font-black text-cyan-800 group-hover:underline">
+                      Voir le livret &agrave; imprimer →
+                    </span>
+                  </span>
+                </div>
               </Link>
 
-              {/* LA machine du moment garde la grande réclame (image) ; les
-                  précédentes passent en rangée compacte — trois réclames à
-                  image empilées creusaient un grand blanc sous l'article
-                  (constat de Frédéric, 18/07). */}
+              {/* La machine reste visible, mais en format plus court dans cette colonne. */}
               <ReclameMachine />
 
-              <div className="py-3">
-                {/* L'ENCART ANIMÉ → le hub de TOUTES les machines (/simulateurs).
-                    On ne déroule plus les 12 dans la colonne (mur + trou à
-                    gauche, constat Frederic 24/07) : un exemple, puis cette
-                    porte animee vers tout. */}
-                <Link
-                  href="/simulateurs"
-                  className="group mt-2.5 block border-2 border-cyan-800 bg-cyan-800/[0.05] p-2.5 transition hover:bg-cyan-800/[0.1]"
-                >
-                  <MachinesPanel className="w-full" />
-                  <p className="mt-1.5 font-serif text-[15px] font-black leading-snug text-[#1d1c16]">
-                    Les {NB_MACHINES} machines dans ta main
-                  </p>
-                  <p className="text-xs font-black text-cyan-800 group-hover:underline">
-                    Toutes les machines →
-                  </p>
-                </Link>
-              </div>
+              <Link
+                href="/simulateurs"
+                className="group mt-2 block border-2 border-cyan-800 bg-cyan-800/[0.05] p-2 transition hover:bg-cyan-800/[0.1]"
+              >
+                <div className="grid grid-cols-[78px_1fr] items-center gap-2.5">
+                  <MachinesPanel className="h-11 w-full" />
+                  <span className="block">
+                    <span className="block font-serif text-[14px] font-black leading-tight text-[#1d1c16]">
+                      Les {NB_MACHINES} machines dans ta main
+                    </span>
+                    <span className="text-xs font-black text-cyan-800 group-hover:underline">
+                      Toutes les machines →
+                    </span>
+                  </span>
+                </div>
+              </Link>
 
               {/* (La dictée a son oreille en manchette et le calcul rapide vit
                   dans le catalogue — doublons retirés du fil, demande de
