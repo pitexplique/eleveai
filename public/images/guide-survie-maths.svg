@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
-  <title id="title">Guide de survie maths Premi&#232;re</title>
+  <title id="title">Guide de survie maths Lyc&#233;e</title>
   <desc id="desc">Slide anime pour un livret a imprimer : formules, reflexes, pieges et test corrige.</desc>
   <style>
     @keyframes pageTurn { 0%, 20%, 100% { transform: rotateY(0deg); } 46%, 62% { transform: rotateY(-58deg); } }
@@ -31,7 +31,7 @@
   <g transform="translate(112 118)">
     <text class="small" x="0" y="0" fill="#155e75">NOUVEAU LIVRET À IMPRIMER</text>
     <text class="serif" x="0" y="98" fill="#1d1c16" font-size="86">Guide de survie</text>
-    <text class="serif" x="0" y="186" fill="#1d1c16" font-size="86">maths Premi&#232;re</text>
+    <text class="serif" x="0" y="186" fill="#1d1c16" font-size="86">maths Lyc&#233;e</text>
     <path d="M4 216h520" stroke="#1d1c16" stroke-width="6"/>
     <text class="sans" x="0" y="276" fill="#155e75" font-size="32">Formules  Réflexes  Pièges  Tests corrigés</text>
     <g transform="translate(0 324)">
@@ -72,5 +72,5 @@
 
   <text class="small" x="104" y="604" fill="#f6f1e4">ELEVEAI.FR</text>
   <text class="serif" x="104" y="646" fill="#f6f1e4" font-size="32">Ici, personne n'apprend à ta place.</text>
-  <text class="sans" x="725" y="638" fill="#ffd23f" font-size="25">11 fiches  1 test  sans panique</text>
+  <text class="sans" x="725" y="638" fill="#ffd23f" font-size="25">2de · 1re · Tle  ·  sans panique</text>
 </svg>
