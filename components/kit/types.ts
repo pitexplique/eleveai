@@ -1,4 +1,4 @@
-// Types du moteur « Kit de survie » : condensé imprimable d'un programme
+// Types du moteur « Guide de survie » : condensé imprimable d'un programme
 // (formules + réflexes + pièges + test), entièrement piloté par les données.
 // Un kit = 1 fichier data.ts + 1 page.tsx — même philosophie que les cahiers
 // de vacances (components/cahier). Le contenu est ALIGNÉ sur le coach :

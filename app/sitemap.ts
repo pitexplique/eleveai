@@ -80,8 +80,8 @@ const ROUTES: RouteConfig[] = [
   { path: "/eval-pix-ia",       priority: 0.9,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
 
   // ── KITS DE SURVIE (lycée) ─────────────────────────────────────────────────
-  { path: "/kit-de-survie",                priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
-  { path: "/kit-de-survie/maths-premiere", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
+  { path: "/guide-de-survie",                priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
+  { path: "/guide-de-survie/maths-premiere", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
 
   // ── FICHES DE COURS ────────────────────────────────────────────────────────
   { path: "/fiches-cours",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
@@ -256,6 +256,9 @@ const ROUTES: RouteConfig[] = [
   // La Diagonale des Fous (23/07) — l'équation différentielle du coureur : la
   // réserve se vide au carré de l'effort et avec la pente (méthode d'Euler).
   { path: "/diagonale-des-fous", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-23") },
+  // L'aiguille de Hong Wang (25/07) — médaille Fields 2026 : le problème de
+  // Kakeya (demi-tour économe, π/2 → π/4 → π/8 → 0) et son tableau décodé.
+  { path: "/aiguille-de-kakeya", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-25") },
   { path: "/picto-maths",     priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/carte",           priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/cahier-vacances/maths", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_974 },

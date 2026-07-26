@@ -1,4 +1,4 @@
-// ─── Kit de survie · Spé maths Première ─────────────────────────────────────
+// ─── Guide de survie · Spé maths Première ─────────────────────────────────────
 // Contenu ALIGNÉ sur le coach (source de vérité unique) :
 // - chapitres      = notions de lib/tutor-v4/knowledge/maths/premiere-spe/notions.ts
 // - checklists     = micro-compétences de microSkills.ts (libellés du BO 2019)
@@ -6,8 +6,9 @@
 // Ici on n'écrit QUE le condensé de survie : essentiel, formules, réflexes,
 // pièges, « en vrai ». Le reste est dérivé automatiquement.
 
-import type { TutorBankItemFixedV4, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { microSkills } from "@/lib/tutor-v4/knowledge/maths/premiere-spe/microSkills";
+import { kitHelpers } from "@/components/kit/fromCoach";
 import { suitesBank } from "@/lib/tutor-v4/questionBank/premiere-spe/maths/suites.bank";
 import { secondDegreBank } from "@/lib/tutor-v4/questionBank/premiere-spe/maths/second-degre.bank";
 import { derivationBank } from "@/lib/tutor-v4/questionBank/premiere-spe/maths/derivation.bank";
@@ -19,52 +20,12 @@ import { geometrieRepereeBank } from "@/lib/tutor-v4/questionBank/premiere-spe/m
 import { probabilitesConditionnellesBank } from "@/lib/tutor-v4/questionBank/premiere-spe/maths/probabilites-conditionnelles.bank";
 import { variablesAleatoiresBank } from "@/lib/tutor-v4/questionBank/premiere-spe/maths/variables-aleatoires.bank";
 import { algorithmiqueBank } from "@/lib/tutor-v4/questionBank/premiere-spe/maths/algorithmique.bank";
-import type { KitData, KitExo, KitNotion } from "@/components/kit/types";
+import type { KitData, KitNotion } from "@/components/kit/types";
 
 /* ───────────────────────── dérivations automatiques ───────────────────────── */
 
-const microLabel = new Map(microSkills.map((m) => [m.id, m.label]));
-
-/** Libellés des micro-compétences d'une notion (checklist « je sais… »). */
-function microsDe(notionId: string): string[] {
-  return microSkills.filter((m) => m.notionId === notionId).map((m) => m.label);
-}
-
-/**
- * « Test de survie » : items imprimables de la banque du coach.
- * On garde les items fixes SANS figure ni audio, on couvre des
- * micro-compétences différentes, par difficulté croissante. Déterministe.
- */
-function testDeSurvie(bank: TutorBankItemV4[], take = 3): KitExo[] {
-  const imprimables = bank.filter(
-    (i): i is TutorBankItemFixedV4 => i.kind === "fixed" && !i.canvas && !i.audioSrc
-  );
-  const parDifficulte = [...imprimables].sort((a, b) => a.difficulty - b.difficulty);
-
-  const choisis: TutorBankItemFixedV4[] = [];
-  const microsVus = new Set<string>();
-  for (const item of parDifficulte) {
-    if (choisis.length >= take) break;
-    if (microsVus.has(item.microId)) continue;
-    choisis.push(item);
-    microsVus.add(item.microId);
-  }
-  // Complément si la banque a moins de micros distincts que `take`.
-  for (const item of parDifficulte) {
-    if (choisis.length >= take) break;
-    if (!choisis.includes(item)) choisis.push(item);
-  }
-
-  return choisis.map((item) => ({
-    id: item.id,
-    micro: microLabel.get(item.microId) ?? item.microId,
-    enonce: item.text,
-    choices: item.format === "qcm" ? item.choices : undefined,
-    reponse: item.expected[0] ?? "",
-    corrige: item.explanation,
-    difficulty: item.difficulty,
-  }));
-}
+// Checklists + tests dérivés du coach (module partagé par tous les kits).
+const { microsDe, testDeSurvie } = kitHelpers(microSkills);
 
 /* ─────────────────────────── le condensé de survie ────────────────────────── */
 
@@ -390,7 +351,7 @@ const BANQUES: Record<string, TutorBankItemV4[]> = {
 
 export const KIT_MATHS_PREMIERE: KitData = {
   slug: "maths-premiere",
-  titre: "Kit de survie · Spé maths Première",
+  titre: "Guide de survie · Spé maths Première",
   baseline:
     "Les 11 chapitres du programme en 11 fiches : les formules qui sauvent, les réflexes, les pièges qui coûtent des points — et un test corrigé par chapitre. À imprimer, à glisser dans le classeur.",
   matiere: "maths",

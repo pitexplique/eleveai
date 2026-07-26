@@ -1352,7 +1352,7 @@ export default function AccueilPage({
 
               {/* GUIDE DE SURVIE - le livret lycee a imprimer. */}
               <Link
-                href="/kit-de-survie/maths-premiere"
+                href="/guide-de-survie/maths-premiere"
                 className="group block border-y border-dotted border-[#1d1c16]/25 py-3"
               >
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">

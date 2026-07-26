@@ -1,6 +1,6 @@
 "use client";
 
-// Moteur « Kit de survie » : rendu écran + impression A4 d'un condensé de
+// Moteur « Guide de survie » : rendu écran + impression A4 d'un condensé de
 // programme (1 notion = 1 page). Piloté par les données (voir types.ts).
 // Règle produit : le kit est une PORTE, le coach est la destination — chaque
 // page ramène vers /coach-ia. Capture APRÈS la valeur, jamais de mur
@@ -39,7 +39,7 @@ function PageNotion({
       {/* En-tête de page */}
       <header className="mb-3 flex items-center justify-between gap-2 border-b-2 border-red-600 pb-2">
         <p className="text-[11px] font-bold uppercase tracking-widest text-red-600">
-          Kit de survie · fiche {index + 1}/{total}
+          Guide de survie · fiche {index + 1}/{total}
         </p>
         <p className="rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600">
           {notion.domaine}
@@ -212,7 +212,7 @@ export default function KitSurvie({ data }: { data: KitData }) {
       {/* Barre d'actions (écran seulement) */}
       <div className="screen-only sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-2 px-4 py-2.5">
-          <Link href="/kit-de-survie" className="text-sm font-semibold text-slate-600 hover:text-slate-900">
+          <Link href="/guide-de-survie" className="text-sm font-semibold text-slate-600 hover:text-slate-900">
             ← Tous les kits
           </Link>
           <div className="flex flex-wrap items-center gap-2">
@@ -237,7 +237,7 @@ export default function KitSurvie({ data }: { data: KitData }) {
         {/* ─── Page de garde ─── */}
         <section className="kit-page kit-garde mx-auto mb-8 max-w-3xl rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm print:mb-0 print:rounded-none print:border-0 print:shadow-none">
           <p className="mx-auto mb-3 inline-block rounded-full bg-red-600 px-4 py-1 text-xs font-black uppercase tracking-widest text-white">
-            🆘 Kit de survie
+            🆘 Guide de survie
           </p>
           <h1 className="mb-2 text-4xl font-black leading-tight text-slate-900">{data.titre}</h1>
           <p className="mx-auto mb-4 max-w-xl text-[15px] leading-snug text-slate-600">{data.baseline}</p>
@@ -281,7 +281,7 @@ export default function KitSurvie({ data }: { data: KitData }) {
           </div>
 
           <p className="mt-4 text-[12px] text-slate-500">
-            <span className="font-bold text-slate-700">eleveai.fr/kit-de-survie</span> · gratuit, sans
+            <span className="font-bold text-slate-700">eleveai.fr/guide-de-survie</span> · gratuit, sans
             publicité · « Nou la fé ! » 🌺
           </p>
         </section>

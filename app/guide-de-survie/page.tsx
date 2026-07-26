@@ -3,10 +3,10 @@ import Link from "next/link";
 import { KIT_MATHS_PREMIERE } from "./maths-premiere/data";
 
 export const metadata: Metadata = {
-  title: "Kit de survie maths lycée — l'essentiel à imprimer (gratuit)",
+  title: "Guide de survie maths lycée — l'essentiel à imprimer (gratuit)",
   description:
     "Les kits de survie EleveAI : le programme de maths du lycée condensé en fiches à imprimer — formules essentielles, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
-  alternates: { canonical: "https://eleveai.fr/kit-de-survie" },
+  alternates: { canonical: "https://eleveai.fr/guide-de-survie" },
 };
 
 // La collection démarre par la Première (spé maths). Les kits suivants
@@ -34,7 +34,7 @@ export default function KitDeSurvieHubPage() {
           Le programme, condensé. Imprimé. Survécu.
         </h1>
         <p className="mx-auto max-w-2xl text-[15px] leading-relaxed text-slate-600">
-          Un kit de survie = tout un programme en quelques fiches A4 : les{" "}
+          Un guide de survie = tout un programme en quelques fiches A4 : les{" "}
           <strong>formules qui sauvent</strong>, les <strong>réflexes</strong> devant un énoncé, les{" "}
           <strong>pièges qui coûtent des points</strong> — et un test corrigé par chapitre.
           Gratuit, sans inscription, à glisser dans le classeur.
@@ -45,7 +45,7 @@ export default function KitDeSurvieHubPage() {
         {KITS.map((k) => (
           <Link
             key={k.slug}
-            href={`/kit-de-survie/${k.slug}`}
+            href={`/guide-de-survie/${k.slug}`}
             className={`group rounded-2xl bg-gradient-to-br ${k.grad} p-5 text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-xl`}
           >
             <p className="mb-1 text-3xl transition group-hover:scale-110">{k.emoji}</p>
