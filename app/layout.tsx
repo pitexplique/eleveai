@@ -9,6 +9,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MasqueSurEmbed from "@/components/MasqueSurEmbed";
 import { EleveProvider } from "@/context/EleveContext";
+import MasqueSurGuide from "@/components/MasqueSurGuide";
 import RemerciementsBar from "@/components/remerciements/RemerciementsBar";
 import EcrireAuProf from "@/components/EcrireAuProf";
 import PageViewTracker from "@/components/PageViewTracker";
@@ -214,8 +215,12 @@ export default function RootLayout({
           {children}
 
           <MasqueSurEmbed>
-            <Footer />
-            <RemerciementsBar />
+            {/* Les guides de survie (imprimables) finissent sur leur propre
+                CTA coach : pas de footer ni de remerciements élèves là-bas. */}
+            <MasqueSurGuide>
+              <Footer />
+              <RemerciementsBar />
+            </MasqueSurGuide>
             <EcrireAuProf />
           </MasqueSurEmbed>
         </EleveProvider>

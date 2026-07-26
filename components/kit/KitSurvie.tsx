@@ -213,7 +213,7 @@ export default function KitSurvie({ data }: { data: KitData }) {
       <div className="screen-only sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-2 px-4 py-2.5">
           <Link href="/guide-de-survie" className="text-sm font-semibold text-slate-600 hover:text-slate-900">
-            ← Tous les kits
+            ← Tous les guides
           </Link>
           <div className="flex flex-wrap items-center gap-2">
             <button
@@ -307,7 +307,7 @@ export default function KitSurvie({ data }: { data: KitData }) {
       </div>
 
       {/* Capture APRÈS la valeur (modale sur afterprint, aucun mur) */}
-      <CaptureApresTelechargement coachHref={coachHref} signupFrom="kit" produitDe="du kit" />
+      <CaptureApresTelechargement coachHref={coachHref} signupFrom="kit" produitDe="du guide" />
 
       {/* ─── Impression ─── */}
       <style jsx global>{`

@@ -5,6 +5,19 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Renommage kit-de-survie → guide-de-survie (26/07/2026) : l'ancienne
+      // URL a vécu ~1 jour dans le sitemap et l'accueil — 301 pour préserver
+      // l'indexation et les liens déjà partagés (même règle que cartes-vacances).
+      {
+        source: "/kit-de-survie",
+        destination: "/guide-de-survie",
+        permanent: true,
+      },
+      {
+        source: "/kit-de-survie/:slug*",
+        destination: "/guide-de-survie/:slug*",
+        permanent: true,
+      },
       {
         source: "/coach-maths-ia",
         destination: "/coach-ia/maths",

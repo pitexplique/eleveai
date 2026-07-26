@@ -1,17 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { KIT_MATHS_PREMIERE } from "./maths-premiere/data";
+import { KIT_MATHS_SECONDE } from "./maths-seconde/data";
 
 export const metadata: Metadata = {
   title: "Guide de survie maths lycée — l'essentiel à imprimer (gratuit)",
   description:
-    "Les kits de survie EleveAI : le programme de maths du lycée condensé en fiches à imprimer — formules essentielles, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
+    "Les guides de survie EleveAI : le programme de maths du lycée condensé en fiches à imprimer — formules essentielles, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
   alternates: { canonical: "https://eleveai.fr/guide-de-survie" },
 };
 
-// La collection démarre par la Première (spé maths). Les kits suivants
-// s'ajoutent ici — une carte = un kit livré, jamais de carte fantôme.
+// La collection grandit niveau par niveau — une carte = un guide livré,
+// jamais de carte fantôme.
 const KITS = [
+  {
+    slug: "maths-seconde",
+    emoji: "🛟",
+    titre: KIT_MATHS_SECONDE.titre,
+    niveau: "Seconde",
+    pitch:
+      "Les 22 chapitres du programme en 22 fiches : formules, réflexes, pièges, test corrigé.",
+    grad: "from-orange-500 to-red-600",
+  },
   {
     slug: "maths-premiere",
     emoji: "🆘",
@@ -28,7 +38,7 @@ export default function KitDeSurvieHubPage() {
     <main className="mx-auto max-w-4xl px-4 py-10">
       <header className="mb-8 text-center">
         <p className="mx-auto mb-3 inline-block rounded-full bg-red-600 px-4 py-1 text-xs font-black uppercase tracking-widest text-white">
-          🆘 Kits de survie
+          🆘 Guides de survie
         </p>
         <h1 className="mb-3 text-4xl font-black leading-tight text-slate-900">
           Le programme, condensé. Imprimé. Survécu.
@@ -53,7 +63,7 @@ export default function KitDeSurvieHubPage() {
             <h2 className="mb-1 text-xl font-black leading-tight">{k.titre}</h2>
             <p className="text-[13px] leading-snug text-white/90">{k.pitch}</p>
             <p className="mt-3 text-[13px] font-bold underline underline-offset-2">
-              Ouvrir le kit →
+              Ouvrir le guide →
             </p>
           </Link>
         ))}
@@ -61,7 +71,7 @@ export default function KitDeSurvieHubPage() {
 
       {/* La réponse sur place : où sont les autres niveaux ? */}
       <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
-        <h2 className="mb-2 text-lg font-black text-slate-900">Seconde ? Terminale ? Une autre matière ?</h2>
+        <h2 className="mb-2 text-lg font-black text-slate-900">Terminale ? Une autre matière ?</h2>
         <p className="mx-auto mb-4 max-w-xl text-sm leading-relaxed text-slate-600">
           Les kits arrivent niveau par niveau. En attendant le tien, le{" "}
           <strong>coach en ligne</strong> couvre déjà tout le lycée, chapitre par chapitre — gratuit
