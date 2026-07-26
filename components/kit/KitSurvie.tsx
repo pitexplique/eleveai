@@ -211,7 +211,11 @@ function PageNotion({
 
 export default function KitSurvie({ data }: { data: KitData }) {
   const coachHref = `/coach-ia/${data.matiere}?classe=${data.coachClasse}`;
-  const signupUrl = "https://eleveai.fr/auth/signin?from=kit";
+  // Le QR de garde mène AU COACH du niveau (la destination), pas à un mur de
+  // connexion : le guide est une porte, on tient la promesse « continue et
+  // entraîne-toi ». La capture d'email se fait sans mur via la modale
+  // post-impression. `from=kit` = tracking de la porte → coach.
+  const coachQrUrl = `https://eleveai.fr/coach-ia/${data.matiere}?classe=${data.coachClasse}&from=kit`;
 
   return (
     <div className="kit-root bg-slate-100 print:bg-white">
@@ -227,7 +231,7 @@ export default function KitSurvie({ data }: { data: KitData }) {
               onClick={() => window.print()}
               className="rounded-full bg-red-600 px-4 py-1.5 text-sm font-bold text-white transition hover:bg-red-700"
             >
-              🖨️ Imprimer le kit (gratuit)
+              🖨️ Imprimer le guide (gratuit)
             </button>
             <Link
               href={coachHref}
@@ -279,15 +283,15 @@ export default function KitSurvie({ data }: { data: KitData }) {
           {/* Appartenance + QR */}
           <div className="mx-auto flex max-w-md items-center justify-between gap-4 rounded-xl border-2 border-dashed border-slate-300 p-3 text-left">
             <div className="min-w-0 flex-1">
-              <p className="text-[12px] font-bold uppercase tracking-wide text-slate-500">Ce kit appartient à</p>
+              <p className="text-[12px] font-bold uppercase tracking-wide text-slate-500">Ce guide appartient à</p>
               <p className="mt-3 border-b border-slate-400 pb-0.5 text-sm text-slate-400">…</p>
               <p className="mt-2 text-[11px] leading-snug text-slate-500">
-                Scanne pour continuer <span className="font-bold">gratuitement</span> en ligne — exercices
-                corrigés, coach, suivi.
+                Scanne pour t&apos;entraîner <span className="font-bold">gratuitement</span> sur le coach —
+                exercices corrigés, pas à pas.
               </p>
             </div>
             <div className="shrink-0 rounded-lg bg-white p-1.5 ring-1 ring-slate-200">
-              <QRCodeSVG value={signupUrl} size={64} aria-label="QR code vers eleveai.fr" />
+              <QRCodeSVG value={coachQrUrl} size={64} aria-label="QR code vers le coach en ligne" />
             </div>
           </div>
 
@@ -304,7 +308,7 @@ export default function KitSurvie({ data }: { data: KitData }) {
 
         {/* Pied de parcours (écran) */}
         <div className="screen-only mx-auto max-w-3xl rounded-2xl border-2 border-teal-200 bg-teal-50 p-6 text-center">
-          <p className="mb-2 text-lg font-black text-slate-900">Le kit t&apos;a sauvé ? Le coach t&apos;entraîne.</p>
+          <p className="mb-2 text-lg font-black text-slate-900">Le guide t&apos;a sauvé ? Le coach t&apos;entraîne.</p>
           <p className="mb-4 text-sm text-slate-600">
             Des centaines d&apos;exercices corrigés pas à pas, chapitre par chapitre — gratuit.
           </p>
