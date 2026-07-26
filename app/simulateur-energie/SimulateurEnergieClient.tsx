@@ -132,7 +132,7 @@ function SalleAnimee({ puissance }: { puissance: number }) {
   const nbAllumees = Math.max(1, Math.min(8, Math.round(puissance / 50)));
 
   return (
-    <div className="mt-3 overflow-x-auto rounded border border-[#2f2a4d] bg-[#12101d]">
+    <div className="mt-2 overflow-x-auto rounded border border-[#2f2a4d] bg-[#12101d]">
       <style>{`
         @keyframes nrg-ramer { from { transform: translateX(0); } to { transform: translateX(38px); } }
         @keyframes nrg-tirer { from { transform: translate(121px, 224px) scaleX(1); } to { transform: translate(121px, 224px) scaleX(1.5); } }
@@ -152,7 +152,7 @@ function SalleAnimee({ puissance }: { puissance: number }) {
       <svg
         viewBox="0 0 820 340"
         style={{ ["--cadence" as string]: cadence }}
-        className="mx-auto block min-w-[640px] max-w-[900px]"
+        className="mx-auto block h-[235px] min-w-[620px] max-w-[820px]"
         aria-label="Schéma animé de la salle : la silhouette rame, le volant tourne, une partie de l'énergie part en chaleur — et la puissance de l'effort allume des ampoules LED"
       >
         {/* La salle : toi et la machine */}
@@ -246,7 +246,7 @@ function Etape({
   couleur: string;
 }) {
   return (
-    <div className="rounded border border-[#2f2a4d] bg-[#1c1930] px-3 py-2">
+    <div className="rounded border border-[#2f2a4d] bg-[#1c1930] px-3 py-1.5">
       <div className="flex items-baseline justify-between gap-2">
         <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[#a49fc9]">
           {nom}
@@ -261,7 +261,7 @@ function Etape({
           style={{ width: Math.max(2, Math.min(100, pct)) + "%", backgroundColor: couleur }}
         />
       </div>
-      <p className="mt-1.5 text-[12px] leading-5 text-[#d6d2ea]">{explication}</p>
+      <p className="mt-1 text-[11.5px] leading-4 text-[#d6d2ea]">{explication}</p>
     </div>
   );
 }
@@ -347,45 +347,45 @@ export default function SimulateurEnergieClient() {
       </header>
 
       <main
-        className="mx-auto max-w-5xl px-4 py-5 sm:px-6"
-        style={modeClasse ? ({ zoom: 1.35 } as React.CSSProperties) : undefined}
+        className="mx-auto max-w-6xl px-4 py-3 sm:px-5"
+        style={modeClasse ? ({ zoom: 1.12 } as React.CSSProperties) : undefined}
       >
         {/* Les commandes : ton effort, à toi */}
-        <div className="rounded border border-[#2f2a4d] bg-[#1c1930] p-4">
-          <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#a49fc9]">
-              🚣 Ta puissance — ce que tes muscles poussent
-            </p>
-            <p className="font-mono text-2xl font-bold tabular-nums text-[#ffd23f]">
-              {fr(puissance)} <span className="text-sm font-normal text-[#a49fc9]">W</span>
-            </p>
-          </div>
-          <input
-            type="range"
-            min={50}
-            max={400}
-            step={10}
-            value={puissance}
-            onChange={(e) => setPuissance(+e.target.value)}
-            className="mt-3 w-full accent-[#ffd23f]"
-            aria-label="Puissance de ton effort, en watts"
-          />
-          <div className="mt-1 flex justify-between font-mono text-[10px] text-[#a49fc9]/70">
-            <span>50 — débutant tranquille</span>
-            <span>400 — athlète en sprint</span>
-          </div>
-          <p className="mt-2 text-[12.5px] leading-5 text-[#d6d2ea]">
-            Repère : sur un rameur, tenir <b className="text-[#f1effa]">250 W</b>, c&apos;est
-            déjà un très bon effort. Et un watt, c&apos;est un joule donné{" "}
-            <b className="text-[#f1effa]">chaque seconde</b>.
-          </p>
-
-          <div className="mt-3 border-t border-[#2f2a4d] pt-3">
+        <div className="grid gap-3 rounded border border-[#2f2a4d] bg-[#1c1930] p-3 lg:grid-cols-3">
+          <div className="min-w-0">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#a49fc9]">
-                ⏱️ Ta durée d&apos;effort
+              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#a49fc9]">
+                Puissance
               </p>
-              <p className="font-mono text-2xl font-bold tabular-nums text-[#ff6b6b]">
+              <p className="font-mono text-xl font-bold tabular-nums text-[#ffd23f]">
+                {fr(puissance)} <span className="text-xs font-normal text-[#a49fc9]">W</span>
+              </p>
+            </div>
+            <input
+              type="range"
+              min={50}
+              max={400}
+              step={10}
+              value={puissance}
+              onChange={(e) => setPuissance(+e.target.value)}
+              className="mt-2 w-full accent-[#ffd23f]"
+              aria-label="Puissance de ton effort, en watts"
+            />
+            <div className="mt-1 flex justify-between font-mono text-[9.5px] text-[#a49fc9]/70">
+              <span>50 W</span>
+              <span>400 W</span>
+            </div>
+            <p className="mt-1.5 text-[11.5px] leading-4 text-[#d6d2ea]">
+              Rep&egrave;re : <b className="text-[#f1effa]">250 W</b> sur un rameur, c&apos;est déjà un très bon effort.
+            </p>
+          </div>
+
+          <div className="min-w-0 border-t border-[#2f2a4d] pt-3 lg:border-l lg:border-t-0 lg:pl-3 lg:pt-0">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#a49fc9]">
+                Durée
+              </p>
+              <p className="font-mono text-xl font-bold tabular-nums text-[#ff6b6b]">
                 {dureeTxt(duree)}
               </p>
             </div>
@@ -396,22 +396,25 @@ export default function SimulateurEnergieClient() {
               step={10}
               value={duree}
               onChange={(e) => setDuree(+e.target.value)}
-              className="mt-3 w-full accent-[#ff6b6b]"
+              className="mt-2 w-full accent-[#ff6b6b]"
               aria-label="Durée de ton effort, en secondes"
             />
-            <div className="mt-1 flex justify-between font-mono text-[10px] text-[#a49fc9]/70">
-              <span>10 s — un sprint éclair</span>
-              <span>10 min — une vraie séance</span>
+            <div className="mt-1 flex justify-between font-mono text-[9.5px] text-[#a49fc9]/70">
+              <span>10 s</span>
+              <span>10 min</span>
             </div>
+            <p className="mt-1.5 text-[11.5px] leading-4 text-[#d6d2ea]">
+              Énergie = puissance &times; temps : des watts tenus pendant des secondes.
+            </p>
           </div>
 
-          <div className="mt-3 border-t border-[#2f2a4d] pt-3">
+          <div className="min-w-0 border-t border-[#2f2a4d] pt-3 lg:border-l lg:border-t-0 lg:pl-3 lg:pt-0">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#a49fc9]">
-                🧍 Ton poids — juste pour la récup&apos;
+              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#a49fc9]">
+                Poids
               </p>
-              <p className="font-mono text-2xl font-bold tabular-nums text-[#7fb069]">
-                {fr(poids)} <span className="text-sm font-normal text-[#a49fc9]">kg</span>
+              <p className="font-mono text-xl font-bold tabular-nums text-[#7fb069]">
+                {fr(poids)} <span className="text-xs font-normal text-[#a49fc9]">kg</span>
               </p>
             </div>
             <input
@@ -421,17 +424,15 @@ export default function SimulateurEnergieClient() {
               step={1}
               value={poids}
               onChange={(e) => setPoids(+e.target.value)}
-              className="mt-3 w-full accent-[#7fb069]"
-              aria-label="Ton poids, en kilogrammes — il sert à calculer la récupération"
+              className="mt-2 w-full accent-[#7fb069]"
+              aria-label="Ton poids, en kilogrammes - il sert à calculer la récupération"
             />
-            <div className="mt-1 flex justify-between font-mono text-[10px] text-[#a49fc9]/70">
+            <div className="mt-1 flex justify-between font-mono text-[9.5px] text-[#a49fc9]/70">
               <span>30 kg</span>
               <span>100 kg</span>
             </div>
-            <p className="mt-2 text-[12.5px] leading-5 text-[#d6d2ea]">
-              Il ne change rien à ton énergie ici — il sert{" "}
-              <b className="text-[#f1effa]">uniquement</b> à calculer les protéines de la
-              récup&apos;, en bas de page.
+            <p className="mt-1.5 text-[11.5px] leading-4 text-[#d6d2ea]">
+              Sert uniquement à calculer la récup&apos; et les protéines.
             </p>
           </div>
         </div>
@@ -440,7 +441,7 @@ export default function SimulateurEnergieClient() {
         <SalleAnimee puissance={puissance} />
 
         {/* La chaîne de l'énergie */}
-        <div className="mt-3 space-y-3">
+        <div className="mt-2 grid gap-2 lg:grid-cols-2">
           <Etape
             nom="1 · L'effort — tes muscles poussent"
             explication={`Puissance = énergie ÷ temps. Tenir ${fr(puissance)} W pendant ${dureeTxt(duree)}, c'est donner ${fr(puissance)} joules à la machine chaque seconde — comme une centrale règle sa production.`}
@@ -476,15 +477,15 @@ export default function SimulateurEnergieClient() {
         </div>
 
         {/* Les sorties de ta séance */}
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          <div className="rounded border-2 border-[#ffd23f] bg-[#1c1930] p-3 text-center">
+        <div className="mt-3 grid gap-2 sm:grid-cols-2">
+          <div className="rounded border-2 border-[#ffd23f] bg-[#1c1930] p-2.5 text-center">
             <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#a49fc9]">⚡ Énergie mécanique</p>
             <p className="mt-1 font-mono text-2xl font-bold tabular-nums text-[#ffd23f]">{fr(energieJ)} J</p>
             <p className="mt-1 text-[11.5px] leading-4 text-[#d6d2ea]">
               soit {kcalMecaTxt} kcal mécaniques (1 kcal = 4 184 J)
             </p>
           </div>
-          <div className="rounded border-2 border-[#ff9d5c] bg-[#1c1930] p-3 text-center">
+          <div className="rounded border-2 border-[#ff9d5c] bg-[#1c1930] p-2.5 text-center">
             <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#a49fc9]">🔥 Réellement brûlées</p>
             <p className="mt-1 font-mono text-2xl font-bold tabular-nums text-[#ff9d5c]">{kcalBruleesTxt} kcal</p>
             <p className="mt-1 text-[11.5px] leading-4 text-[#d6d2ea]">
@@ -494,15 +495,15 @@ export default function SimulateurEnergieClient() {
         </div>
 
         {/* Les équivalents parlants */}
-        <div className="mt-3 grid gap-3 sm:grid-cols-3">
-          <div className="rounded border-2 border-[#ffd23f] bg-[#1c1930] p-3 text-center">
+        <div className="mt-2 grid gap-2 sm:grid-cols-3">
+          <div className="rounded border-2 border-[#ffd23f] bg-[#1c1930] p-2.5 text-center">
             <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#a49fc9]">💡 Pendant ton effort</p>
             <p className="mt-1 font-mono text-2xl font-bold tabular-nums text-[#ffd23f]">{fr(ampoules)} ampoules</p>
             <p className="mt-1 text-[11.5px] leading-4 text-[#d6d2ea]">
               des LED de 10 W, allumées en continu tant que tu tiens {fr(puissance)} W
             </p>
           </div>
-          <div className="rounded border-2 border-[#ff6b6b] bg-[#1c1930] p-3 text-center">
+          <div className="rounded border-2 border-[#ff6b6b] bg-[#1c1930] p-2.5 text-center">
             <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#a49fc9]">🍫 En chocolat</p>
             <p className="mt-1 font-mono text-2xl font-bold tabular-nums text-[#ff6b6b]">
               {fr(carres, carres < 10 ? 1 : 0)} {carres >= 2 ? "carrés" : "carré"}
@@ -511,7 +512,7 @@ export default function SimulateurEnergieClient() {
               {kcalBruleesTxt} kcal brûlées ÷ 23 kcal le carré (~4,2 g)
             </p>
           </div>
-          <div className="rounded border-2 border-[#7fb069] bg-[#1c1930] p-3 text-center">
+          <div className="rounded border-2 border-[#7fb069] bg-[#1c1930] p-2.5 text-center">
             <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#a49fc9]">💧 Comme à Takamaka</p>
             <p className="mt-1 font-mono text-2xl font-bold tabular-nums text-[#7fb069]">
               {fr(litresTakamaka, litresTakamaka < 10 ? 1 : 0)} L
@@ -523,7 +524,7 @@ export default function SimulateurEnergieClient() {
         </div>
 
         {/* Les maths de la salle, affichées */}
-        <div className="mt-4 rounded border border-dashed border-[#ffd23f]/40 bg-[#1c1930] px-3 py-2.5 font-mono text-[12.5px] leading-relaxed text-[#ffd23f]">
+        <div className="mt-3 rounded border border-dashed border-[#ffd23f]/40 bg-[#1c1930] px-3 py-2 font-mono text-[11.5px] leading-5 text-[#ffd23f]">
           E = {fr(puissance)} W × {fr(duree)} s = <b>{fr(energieJ)} J</b>
           <span className="text-[#a49fc9]"> · </span>
           (à l&apos;envers : P = E ÷ t = {fr(energieJ)} ÷ {fr(duree)} = {fr(puissance)} W)
@@ -536,11 +537,11 @@ export default function SimulateurEnergieClient() {
         </div>
 
         {/* L'encart des 11-17 ans : la centrale s'entretient en tournant */}
-        <div className="mt-4 rounded border-2 border-[#ff6b6b] bg-[#1c1930] p-4">
+        <div className="mt-3 rounded border-2 border-[#ff6b6b] bg-[#1c1930] p-3">
           <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#ff6b6b]">
             🫀 Le mot aux 11-17 ans — ta centrale aime tourner
           </p>
-          <p className="mt-2 text-[13px] leading-6 text-[#d6d2ea]">
+          <p className="mt-1.5 text-[12.5px] leading-5 text-[#d6d2ea]">
             L&apos;OMS recommande <b className="text-[#f1effa]">60 minutes d&apos;activité physique
             par jour</b> aux 11-17 ans — et dans le monde, <b className="text-[#f1effa]">plus de
             8 ados sur 10</b> n&apos;atteignent pas ce seuil. Pas par paresse : personne ne leur
@@ -552,7 +553,7 @@ export default function SimulateurEnergieClient() {
         </div>
 
         {/* LA RÉCUP' — l'assiette qui répare le muscle */}
-        <div className="mt-4 rounded border-2 border-[#7fb069] bg-[#1c1930] p-4">
+        <div className="mt-3 rounded border-2 border-[#7fb069] bg-[#1c1930] p-3">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#7fb069]">
               🍽️ La récup&apos; — l&apos;assiette répare le muscle
@@ -561,7 +562,7 @@ export default function SimulateurEnergieClient() {
               {fr(protBas)} à {fr(protHaut)} g <span className="text-[11px] font-normal text-[#a49fc9]">de protéines / jour</span>
             </p>
           </div>
-          <p className="mt-2 text-[13px] leading-6 text-[#d6d2ea]">
+          <p className="mt-1.5 text-[12.5px] leading-5 text-[#d6d2ea]">
             L&apos;effort abîme un peu le muscle — c&apos;est normal, c&apos;est comme ça
             qu&apos;il se renforce. Pour le réparer, il lui faut des{" "}
             <b className="text-[#f1effa]">protéines</b> : un sportif en vise environ{" "}
@@ -570,10 +571,10 @@ export default function SimulateurEnergieClient() {
             <b className="text-[#7fb069]">{fr(protHaut)} g</b> (une personne sédentaire :
             ~0,8 g/kg, soit {fr(protSedentaire)} g). Et tout est déjà dans l&apos;assiette.
           </p>
-          <p className="mt-3 text-[11px] font-black uppercase tracking-[0.14em] text-[#a49fc9]">
+          <p className="mt-2 text-[10.5px] font-black uppercase tracking-[0.14em] text-[#a49fc9]">
             Si tu ne comptais que sur UN aliment (personne ne fait ça — on additionne) :
           </p>
-          <div className="mt-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
             <div className="rounded border border-[#2f2a4d] bg-[#12101d] p-3 text-center">
               <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#a49fc9]">🥚 Œufs</p>
               <p className="mt-1 font-mono text-xl font-bold tabular-nums text-[#f1effa]">≈ {fr(oeufs)}</p>
@@ -609,9 +610,9 @@ export default function SimulateurEnergieClient() {
           href="https://youtube.com/shorts/XdBT05f9_F0"
           target="_blank"
           rel="noopener noreferrer"
-          className="group mt-5 flex items-center gap-4 rounded border-2 border-[#ffd23f] bg-[#1c1930] p-3 transition hover:brightness-125"
+          className="group mt-3 flex items-center gap-3 rounded border-2 border-[#ffd23f] bg-[#1c1930] p-2.5 transition hover:brightness-125"
         >
-          <span className="relative block w-[112px] shrink-0 overflow-hidden rounded">
+          <span className="relative block w-[92px] shrink-0 overflow-hidden rounded">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://i.ytimg.com/vi/XdBT05f9_F0/hqdefault.jpg"
@@ -648,7 +649,7 @@ export default function SimulateurEnergieClient() {
         />
 
         {/* Le pont vers la machine jumelle et le défi du jour */}
-        <div className="mt-4 flex flex-wrap items-center gap-3">
+        <div className="mt-3 flex flex-wrap items-center gap-2">
           <Link
             href="/simulateur-barrage"
             className="inline-flex items-center gap-2 rounded bg-[#ffd23f] px-4 py-2 text-sm font-bold text-[#12101d] hover:brightness-110"
