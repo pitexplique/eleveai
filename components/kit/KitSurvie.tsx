@@ -246,7 +246,12 @@ export default function KitSurvie({ data }: { data: KitData }) {
             🆘 Guide de survie
           </p>
           <h1 className="mb-2 text-4xl font-black leading-tight text-slate-900">{data.titre}</h1>
-          <p className="mx-auto mb-4 max-w-xl text-[15px] leading-snug text-slate-600">{data.baseline}</p>
+          <p className="mx-auto mb-2 max-w-xl text-[15px] leading-snug text-slate-600">{data.baseline}</p>
+          {/* Signature nominative (décision 26/07) : personnelle, jamais
+              institutionnelle — on ne nomme pas l'établissement ici. */}
+          <p className="mb-4 text-[13px] font-semibold text-slate-700">
+            Réalisé par Frédéric Lacoste, professeur de mathématiques à La Réunion.
+          </p>
 
           <div className="mb-5 flex flex-wrap items-center justify-center gap-2 text-[12px] font-semibold text-slate-700">
             <span className="rounded-full bg-emerald-50 px-3 py-1 ring-1 ring-emerald-200">✅ Conforme au programme (BO 2019)</span>
