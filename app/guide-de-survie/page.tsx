@@ -3,17 +3,27 @@ import Link from "next/link";
 import { KIT_MATHS_PREMIERE } from "./maths-premiere/data";
 import { KIT_MATHS_SECONDE } from "./maths-seconde/data";
 import { KIT_MATHS_TERMINALE } from "./maths-terminale/data";
+import { KIT_MATHS_TROISIEME } from "./maths-troisieme/data";
 
 export const metadata: Metadata = {
-  title: "Guide de survie maths lycée — l'essentiel à imprimer (gratuit)",
+  title: "Guides de survie maths collège & lycée — l'essentiel à imprimer (gratuit)",
   description:
-    "Les guides de survie EleveAI : le programme de maths du lycée condensé en fiches à imprimer — formules essentielles, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
+    "Les guides de survie EleveAI : le programme de maths du collège (3e) au lycée condensé en fiches à imprimer — formules essentielles, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
   alternates: { canonical: "https://eleveai.fr/guide-de-survie" },
 };
 
 // La collection grandit niveau par niveau — une carte = un guide livré,
 // jamais de carte fantôme.
 const KITS = [
+  {
+    slug: "maths-troisieme",
+    emoji: "🎒",
+    titre: KIT_MATHS_TROISIEME.titre,
+    niveau: "Troisième · brevet",
+    pitch:
+      "Les 22 chapitres du programme en 22 fiches, spécial brevet : formules, réflexes, pièges, test corrigé.",
+    grad: "from-amber-500 to-orange-600",
+  },
   {
     slug: "maths-seconde",
     emoji: "🛟",

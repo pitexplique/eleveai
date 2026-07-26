@@ -19,7 +19,7 @@ const NAV_MATHS = [
   { href: "/calcul-rapide",    icon: "⚡", label: "Calcul rapide",      desc: "5 min d'automatismes" },
   { href: "/dico/maths/6e",    icon: "📒", label: "Dico Maths 6e",      desc: "50 mots & gestes pour l'éval nationale" },
   { href: "/fiches-cours/maths", icon: "PDF", label: "Fiches de cours",    desc: "Cours maths courts à télécharger" },
-  { href: "/guide-de-survie",    icon: "🆘", label: "Guides de survie",  desc: "Maths 2de, 1re & Tle : formules, pièges & réflexes à imprimer" },
+  { href: "/guide-de-survie",    icon: "🆘", label: "Guides de survie",  desc: "Maths 3e → Tle : formules, pièges & réflexes à imprimer" },
   { href: "/maths-974",        icon: "🌋", label: "Maths Réel · 974",       desc: "La Réunion en vidéo : à quoi servent les maths" },
   { href: "/picto-maths",      icon: "🃏", label: "Picto Maths · 974",      desc: "Défis « 1 image, 1 question » à imprimer" },
   { href: "/carte",            icon: "🗺️", label: "Chasse aux trésors · 974", desc: "La Réunion : trouve les trésors — maths, écologie, histoire" },
