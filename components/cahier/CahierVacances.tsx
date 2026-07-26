@@ -23,6 +23,7 @@ import {
 import type { CahierConfig, CahierData } from "./types";
 import CaptureApresTelechargement from "./CaptureApresTelechargement";
 import BandeauCallCahier from "./BandeauCallCahier";
+import EncartDon from "@/components/EncartDon";
 import { bougeDuJour } from "@/lib/cahier/bougeDuJour";
 
 /* URL d'inscription encodée dans le QR de fin de cahier. Le ?from=cahier
@@ -856,6 +857,13 @@ export default function CahierVacances({
             </Link>
           </div>
         </div>
+      </div>
+
+      {/* Encart « Participez à l'aventure » — 3 QR (don · coach · journal) pour
+          laisser le choix, sans pression. S'imprime en fin de cahier (numéro
+          Wero + QR conservés ; les boutons d'action sont masqués au print). */}
+      <div className="mx-auto max-w-4xl px-5 pb-8 sm:px-8">
+        <EncartDon coachUrl={`https://eleveai.fr/coach-ia/maths?classe=${config.coachClasse}&from=cahier`} />
       </div>
 
       {/* Bouton imprimer flottant (écran) */}

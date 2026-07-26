@@ -1031,6 +1031,11 @@ export default function AccueilPage({
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
           <a href="#honneur" className="hover:text-cyan-800">À l&apos;honneur</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
+          {/* Mis « à l'honneur » dans le chemin de fer (demande de Frédéric,
+              26/07) : en ambre pour ressortir, accessible d'un clic depuis le
+              haut de page. */}
+          <a href="#faire-un-don" className="text-amber-700 hover:text-amber-600">💛 Faire un don</a>
+          <span aria-hidden className="text-[#1d1c16]/30">·</span>
           <a href="#les-grands" className="hover:text-cyan-800">Parents & profs</a>
         </nav>
 

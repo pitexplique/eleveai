@@ -19,6 +19,7 @@ import { QRCodeSVG } from "qrcode.react";
 import type { CahierConfig } from "./types";
 import type { Activite, CahierDataPetit, JourPetit } from "./petits-types";
 import CaptureApresTelechargement from "./CaptureApresTelechargement";
+import EncartDon from "@/components/EncartDon";
 import { bougeDuJour } from "@/lib/cahier/bougeDuJour";
 
 /* URL d'inscription encodée dans le QR de la couverture. ?from=cahier = tracking. */
@@ -790,6 +791,12 @@ export default function CahierPetits({
           </footer>
         </section>
       </article>
+
+      {/* Encart « Participez à l'aventure » — 3 QR (don · coach · journal) pour
+          laisser le choix, sans pression. */}
+      <div className="mx-auto max-w-4xl px-5 pb-8 sm:px-6">
+        <EncartDon coachUrl={`https://eleveai.fr/coach-ia/maths?classe=${config.coachClasse}&from=cahier`} />
+      </div>
 
       {/* Bouton imprimer flottant */}
       <div className="screen-only fixed bottom-5 right-5 hidden sm:block">
