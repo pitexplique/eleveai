@@ -1350,9 +1350,11 @@ export default function AccueilPage({
                 ))}
               </div>
 
-              {/* GUIDE DE SURVIE - le livret lycee a imprimer. */}
+              {/* GUIDES DE SURVIE — pointe le HUB (la page qui regroupe tous
+                  les guides) : chaque niveau livré y apparaît sans retoucher
+                  l'accueil. */}
               <Link
-                href="/guide-de-survie/maths-premiere"
+                href="/guide-de-survie"
                 className="group block border-y border-dotted border-[#1d1c16]/25 py-3"
               >
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
@@ -1362,13 +1364,13 @@ export default function AccueilPage({
                   <GuideSurvieAnime className="w-full" />
                   <span className="block">
                     <span className="block font-serif text-lg font-black leading-tight group-hover:underline">
-                      Guide de survie maths Premi&egrave;re
+                      Les guides de survie · maths lyc&eacute;e
                     </span>
                     <span className="mt-0.5 block text-xs font-medium leading-4 text-[#1d1c16]/65">
-                      Livret &agrave; imprimer : formules, r&eacute;flexes, pi&egrave;ges et test corrig&eacute;.
+                      Seconde et Premi&egrave;re : formules, r&eacute;flexes, pi&egrave;ges et test corrig&eacute;, &agrave; imprimer.
                     </span>
                     <span className="mt-1 block text-sm font-black text-cyan-800 group-hover:underline">
-                      Voir le livret &agrave; imprimer →
+                      Voir les livrets &agrave; imprimer →
                     </span>
                   </span>
                 </div>
