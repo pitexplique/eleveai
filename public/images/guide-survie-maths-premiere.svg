@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Guide de survie maths Premi&#232;re</title>
+  <desc id="desc">Slide anime pour un livret a imprimer : formules, reflexes, pieges et test corrige.</desc>
+  <style>
+    @keyframes pageTurn { 0%, 20%, 100% { transform: rotateY(0deg); } 46%, 62% { transform: rotateY(-58deg); } }
+    @keyframes pencilMove { 0%, 100% { transform: translate(0, 0) rotate(-18deg); } 50% { transform: translate(32px, -18px) rotate(-18deg); } }
+    @keyframes checkDraw { 0%, 44% { stroke-dashoffset: 76; opacity: .3; } 72%, 100% { stroke-dashoffset: 0; opacity: 1; } }
+    @keyframes pulse { 0%, 100% { opacity: .45; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    .page-turn { animation: pageTurn 5.4s ease-in-out infinite; transform-origin: 119px 34px; transform-box: fill-box; }
+    .pencil { animation: pencilMove 4.2s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+    .check { stroke-dasharray: 76; animation: checkDraw 5.4s ease-in-out infinite; }
+    .spark { animation: pulse 2.4s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+    .float { animation: float 4.8s ease-in-out infinite; }
+    .small { font: 800 24px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 5px; }
+    .serif { font-family: Georgia, "Times New Roman", serif; font-weight: 900; }
+    .sans { font-family: Inter, Arial, sans-serif; font-weight: 800; }
+    @media (prefers-reduced-motion: reduce) { .page-turn, .pencil, .check, .spark, .float { animation-duration: 24s; } }
+  </style>
+
+  <rect width="1200" height="675" fill="#f6f1e4"/>
+  <path d="M0 548h1200v127H0z" fill="#101820"/>
+  <path d="M70 76h1060v452H70z" fill="#fbf7ea" stroke="#1d1c16" stroke-width="4"/>
+  <path d="M94 100h1012v404H94z" fill="none" stroke="#1d1c16" stroke-opacity=".16" stroke-width="2"/>
+
+  <g opacity=".14" stroke="#155e75" stroke-width="2">
+    <path d="M128 154h946M128 222h946M128 290h946M128 358h946M128 426h946"/>
+    <path d="M190 120v370M294 120v370M398 120v370M502 120v370M606 120v370M710 120v370M814 120v370M918 120v370M1022 120v370"/>
+  </g>
+
+  <g transform="translate(112 118)">
+    <text class="small" x="0" y="0" fill="#155e75">NOUVEAU LIVRET À IMPRIMER</text>
+    <text class="serif" x="0" y="98" fill="#1d1c16" font-size="86">Guide de survie</text>
+    <text class="serif" x="0" y="186" fill="#1d1c16" font-size="86">maths Premi&#232;re</text>
+    <path d="M4 216h520" stroke="#1d1c16" stroke-width="6"/>
+    <text class="sans" x="0" y="276" fill="#155e75" font-size="32">Formules  Réflexes  Pièges  Tests corrigés</text>
+    <g transform="translate(0 324)">
+      <rect x="0" y="0" width="322" height="58" rx="0" fill="#155e75"/>
+      <text class="sans" x="24" y="39" fill="#f6f1e4" font-size="25">Livret prêt à imprimer</text>
+    </g>
+  </g>
+
+  <g transform="translate(846 326) scale(0.82)">
+    <g class="float">
+      <rect x="0" y="0" width="300" height="184" rx="10" fill="#1d1c16" opacity=".16"/>
+      <rect x="-12" y="-12" width="300" height="184" rx="10" fill="#fbf7ea" stroke="#1d1c16" stroke-width="4"/>
+      <path d="M140-4v160" stroke="#1d1c16" stroke-opacity=".24" stroke-width="3"/>
+      <g transform="translate(16 28)">
+        <text class="small" x="0" y="0" fill="#155e75" font-size="12" letter-spacing="2">CHAPITRE 01</text>
+        <path d="M0 28h86M0 52h108M0 76h76" stroke="#1d1c16" stroke-opacity=".38" stroke-width="6" stroke-linecap="round"/>
+        <rect x="0" y="102" width="112" height="24" rx="4" fill="#ffd23f" stroke="#1d1c16" stroke-width="2"/>
+        <text class="sans" x="12" y="119" fill="#1d1c16" font-size="13">exemple</text>
+      </g>
+      <g class="page-turn">
+        <path d="M142 0h124c9 0 16 7 16 16v132H142z" fill="#fffaf0" stroke="#1d1c16" stroke-width="4"/>
+        <path d="M166 36h70M166 62h86M166 88h54" stroke="#1d1c16" stroke-opacity=".34" stroke-width="6" stroke-linecap="round"/>
+        <path d="M166 120h78" stroke="#155e75" stroke-width="7" stroke-linecap="round"/>
+      </g>
+      <path class="check" d="M172 122l22 20 48-72" fill="none" stroke="#15803d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <g transform="translate(948 486) scale(0.64)">
+    <g class="pencil">
+      <path d="M0 12l128-48 12 30L12 42l-30 4z" fill="#ff6b6b" stroke="#1d1c16" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M128-36l12 30 24-30-8-18z" fill="#ffd23f" stroke="#1d1c16" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M-18 46L0 12l12 30z" fill="#1d1c16"/>
+    </g>
+  </g>
+
+  <g transform="translate(1094 314) scale(0.68)"><g class="spark"><path d="M18 0l8 22 24 2-19 14 7 24-20-13-20 13 7-24-19-14 24-2z" fill="#ffd23f" stroke="#1d1c16" stroke-width="3"/></g></g>
+
+  <text class="small" x="104" y="604" fill="#f6f1e4">ELEVEAI.FR</text>
+  <text class="serif" x="104" y="646" fill="#f6f1e4" font-size="32">Ici, personne n'apprend à ta place.</text>
+  <text class="sans" x="725" y="638" fill="#ffd23f" font-size="25">11 fiches  1 test  sans panique</text>
+</svg>
