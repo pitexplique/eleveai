@@ -37,7 +37,7 @@ import ReclameMachine from "@/components/accueil/ReclameMachine";
 import RituelDuJourChip from "@/components/accueil/RituelDuJourChip";
 import MachinesPanel from "@/components/simulateurs/MachinesPanel";
 import CarteMachine from "@/components/simulateurs/CarteMachine";
-import { MACHINES_RECENTES, NB_MACHINES } from "@/lib/simulateurs";
+import { NB_MACHINES } from "@/lib/simulateurs";
 import { getDicteeDuJour, type DicteeMot } from "@/lib/dictee-du-jour/words";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
@@ -298,6 +298,15 @@ const EDITO_FALLBACK: Edito = {
 // n'existe pas (même principe que la Une). Premier article : la machine
 // des epsilons (la devise du site, à faire découvrir).
 const ARTICLES_MATHS_FALLBACK: ArticleRubrique[] = [
+  {
+    id: "aiguille-de-kakeya",
+    titre: "L'aiguille de Hong Wang, médaille Fields 2026",
+    accroche:
+      "Fais faire demi-tour à une aiguille en balayant le moins de place possible : 1,57 → 0,79 → 0,39… et les mathématiciens savent approcher 0. Le 23 juillet à Philadelphie, Hong Wang a reçu la médaille Fields pour avoir fermé ce problème en 3D — en remerciant ses professeurs français. Troisième femme médaillée en 90 ans : pour elle, les maths ne font aucune différence entre les femmes et les hommes.",
+    imageUrl: "/images/aiguille-de-kakeya.svg",
+    lien: "/aiguille-de-kakeya",
+    cta: "🪡 Fais tourner l'aiguille →",
+  },
   {
     id: "diagonale-des-fous",
     titre: "La Diagonale des Fous : doser, ou taper le mur",
@@ -822,6 +831,7 @@ export default function AccueilPage({
   const avisManchette = derniersAvis[avisIdx % derniersAvis.length];
 
   const eleveClasse = eleve?.classe?.toLowerCase() ?? null;
+  const classeActive = classeDepliee ?? eleveClasse ?? "6e";
   const prenomAffiche = getPrenomAffiche(eleve?.nom);
   const isCmPrimary = eleveClasse === "cm1" || eleveClasse === "cm2";
   const isStaff =
@@ -1042,10 +1052,10 @@ export default function AccueilPage({
               <button
                 key={c.slug}
                 type="button"
-                onClick={() => setClasseDepliee(classeDepliee === c.slug ? null : c.slug)}
-                aria-expanded={classeDepliee === c.slug}
+                onClick={() => setClasseDepliee(c.slug)}
+                aria-pressed={classeActive === c.slug}
                 className={`rounded-sm border px-2.5 py-1 text-xs font-black transition ${
-                  classeDepliee === c.slug || (classeDepliee === null && eleveClasse === c.slug)
+                  classeActive === c.slug
                     ? "border-[#1d1c16] bg-[#1d1c16] text-[#f6f1e4]"
                     : "border-[#1d1c16]/30 text-[#1d1c16]/80 hover:border-[#1d1c16] hover:bg-[#1d1c16] hover:text-[#f6f1e4]"
                 }`}
@@ -1054,18 +1064,18 @@ export default function AccueilPage({
               </button>
             ))}
           </div>
-          {classeDepliee && (
+          {classeActive && (
             <div className="mx-auto mt-2 max-w-2xl space-y-1.5 text-sm font-black">
               {/* S'entraîner : les coachs de la classe. */}
               <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
                 <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
                   ✏️ S&apos;entraîner :
                 </span>
-                <Link href={`/coach-ia/maths?classe=${classeDepliee}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                <Link href={`/coach-ia/maths?classe=${classeActive}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                   🧮 Maths
                 </Link>
-                {FRANCAIS_LEVELS.has(classeDepliee) && (
-                  <Link href={`/coach-ia/francais?classe=${classeDepliee}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                {FRANCAIS_LEVELS.has(classeActive) && (
+                  <Link href={`/coach-ia/francais?classe=${classeActive}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                     📖 Français
                   </Link>
                 )}
@@ -1085,7 +1095,7 @@ export default function AccueilPage({
                 <Link href="/parcours" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                   🧮 Maths
                 </Link>
-                {FRANCAIS_LEVELS.has(classeDepliee) && (
+                {FRANCAIS_LEVELS.has(classeActive) && (
                   <Link href="/parcours-francais" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                     📖 Français
                   </Link>
@@ -1096,7 +1106,7 @@ export default function AccueilPage({
                 <Link href="/parcours-espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                   🇪🇸 Espagnol
                 </Link>
-                <Link href={`/programme/${classeDepliee}`} className="text-[#1d1c16]/70 underline underline-offset-2 hover:no-underline">
+                <Link href={`/programme/${classeActive}`} className="text-[#1d1c16]/70 underline underline-offset-2 hover:no-underline">
                   📋 Le programme
                 </Link>
               </div>
@@ -1301,6 +1311,25 @@ export default function AccueilPage({
                 ))}
               </div>
 
+              {/* LE KIT DE SURVIE — le supplément lycée dans le fil (25/07) :
+                  même public que les cahiers « vers la première » (page n°1). */}
+              <Link
+                href="/kit-de-survie/maths-premiere"
+                className="group block py-3"
+              >
+                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
+                  🆘 Nouveau · Spécial lycée
+                </p>
+                <h3 className="mt-1 font-serif text-lg font-black leading-snug group-hover:underline">
+                  Kit de survie · Spé maths Première
+                </h3>
+                <p className="mt-0.5 text-xs font-medium text-[#1d1c16]/60">
+                  Les 11 chapitres en 11 fiches à imprimer : formules, réflexes,
+                  pièges + test corrigé.
+                </p>
+                <p className="mt-1.5 text-sm font-black text-cyan-800">Imprimer le kit →</p>
+              </Link>
+
               {/* LA machine du moment garde la grande réclame (image) ; les
                   précédentes passent en rangée compacte — trois réclames à
                   image empilées creusaient un grand blanc sous l'article
@@ -1308,37 +1337,10 @@ export default function AccueilPage({
               <ReclameMachine />
 
               <div className="py-3">
-                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-                  🎛️ Les autres machines dans ta main
-                </p>
-                {/* TOUJOURS les plus récentes (Frédéric, 24/07) : la réclame
-                    montre la n°1, ces 3 sont les suivantes — dynamiques via
-                    MACHINES_RECENTES, plus de liste figée. */}
-                {MACHINES_RECENTES.slice(1, 4).map((m) => (
-                  <Link
-                    key={m.href}
-                    href={m.href}
-                    className="group block border-b border-dotted border-[#1d1c16]/30 py-2"
-                  >
-                    <span className="flex items-baseline gap-2">
-                      <span aria-hidden className="text-sm">{m.emoji}</span>
-                      <span className="font-serif text-[15px] font-black leading-snug group-hover:underline">
-                        {m.nom}
-                      </span>
-                    </span>
-                    {/* Le libellé bleu passe DESSOUS (Frédéric, 24/07) : sur la
-                        même ligne il débordait de la colonne quand le titre
-                        tenait sur deux lignes. */}
-                    <span className="mt-0.5 block pl-[22px] text-xs font-black text-cyan-800">
-                      {m.cta} →
-                    </span>
-                  </Link>
-                ))}
-
                 {/* L'ENCART ANIMÉ → le hub de TOUTES les machines (/simulateurs).
                     On ne déroule plus les 12 dans la colonne (mur + trou à
-                    gauche, constat Frédéric 24/07) : réclame de la plus récente,
-                    3 en avant-goût, puis cette porte animée vers tout. */}
+                    gauche, constat Frederic 24/07) : un exemple, puis cette
+                    porte animee vers tout. */}
                 <Link
                   href="/simulateurs"
                   className="group mt-2.5 block border-2 border-cyan-800 bg-cyan-800/[0.05] p-2.5 transition hover:bg-cyan-800/[0.1]"
@@ -1356,25 +1358,6 @@ export default function AccueilPage({
               {/* (La dictée a son oreille en manchette et le calcul rapide vit
                   dans le catalogue — doublons retirés du fil, demande de
                   Frédéric du 18/07 : la colonne respire.) */}
-
-              {/* LE KIT DE SURVIE — le supplément lycée dans le fil (25/07) :
-                  même public que les cahiers « vers la première » (page n°1). */}
-              <Link
-                href="/kit-de-survie/maths-premiere"
-                className="group block border-t border-dotted border-[#1d1c16]/30 py-3"
-              >
-                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
-                  🆘 Nouveau · Spécial lycée
-                </p>
-                <h3 className="mt-1 font-serif text-lg font-black leading-snug group-hover:underline">
-                  Le kit de survie · Spé maths Première
-                </h3>
-                <p className="mt-0.5 text-xs font-medium text-[#1d1c16]/60">
-                  Les 11 chapitres en 11 fiches à imprimer : formules, réflexes,
-                  pièges + test corrigé.
-                </p>
-                <p className="mt-1.5 text-sm font-black text-cyan-800">Imprimer le kit →</p>
-              </Link>
 
               {jours > 0 && (
                 <Link href="/coach-brevet" className="group block py-3">
@@ -1471,10 +1454,8 @@ export default function AccueilPage({
               <span className="whitespace-nowrap">professeur d&apos;élèves</span>
             </p>
 
-            {/* CHIFFRE + MOT DU JOUR, ancrés au PIED de la colonne (mt-auto) :
-                le mou éventuel respire entre la signature de l'édito et ces
-                encarts — jamais de trou en bas. */}
-            <div className="lg:mt-auto">
+            {/* CHIFFRE + MOT DU JOUR - directement sous l'edito. */}
+            <div>
             {/* LE CHIFFRE DU JOUR — la chose à LIRE chaque matin (30 secondes,
                 un chiffre vrai, trois lignes). Rotation quotidienne sur la
                 banque lib/chiffre-du-jour.ts. Place choisie par Frédéric :
