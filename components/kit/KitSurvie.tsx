@@ -68,7 +68,11 @@ function PageNotion({
         <ul className="formules space-y-1">
           {notion.formules.map((f) => (
             <li key={f.label} className="flex flex-wrap items-baseline gap-x-2 text-[14px]">
-              <span className="font-semibold text-slate-600">{f.label} :</span>
+              {/* Le libellé peut contenir du LaTeX (« Comparer $A$ et $B$ ») :
+                  il passe donc aussi par le rendu maths. */}
+              <span className="font-semibold text-slate-600">
+                <MarkdownMath inline>{f.label}</MarkdownMath> :
+              </span>
               <MarkdownMath inline className="font-medium text-slate-900">
                 {f.latex}
               </MarkdownMath>
@@ -111,7 +115,9 @@ function PageNotion({
       {/* 5. En vrai */}
       {notion.reel && (
         <p className="reel mb-3 rounded-lg bg-teal-50 px-3 py-1.5 text-[13px] italic text-teal-900">
-          🌺 <span className="font-semibold not-italic">En vrai :</span> {notion.reel}
+          {/* La ligne « en vrai » peut contenir du LaTeX ($10^9$, $\sqrt{2}$…) */}
+          🌺 <span className="font-semibold not-italic">En vrai :</span>{" "}
+          <MarkdownMath inline>{notion.reel}</MarkdownMath>
         </p>
       )}
 
