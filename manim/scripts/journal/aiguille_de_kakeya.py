@@ -6,7 +6,11 @@
 #   1) autour du bout    → π/2 ≈ 1,57 (demi-disque)
 #   2) autour du centre  → π/4 ≈ 0,79 (disque)
 #   3) le deltoïde       → π/8 ≈ 0,39 (la corde qui glisse en tournant)
-# puis Besicovitch (« aussi près de 0 qu'on veut », 1928), et l'HONNEUR :
+# puis Besicovitch (« aussi près de 0 qu'on veut », 1928) — l'aire peut MENTIR —,
+# le théorème (en 3D : dimension 3 forcément, avec Joshua Zahl), le VOLCAN
+# (box-counting sur le rempart de la Fournaise, LE MÊME générateur que la page
+# /dimension-du-volcan, graine 271828 : 15 → 35 → 87 → 197 carrés, d ≈ 1,25),
+# et l'HONNEUR :
 # Hong Wang (王虹, « arc-en-ciel »), 3ᵉ femme de l'histoire à recevoir la
 # médaille Fields (23/07/2026), conjecture de Kakeya fermée en 3D avec Joshua
 # Zahl — et son merci à ses professeurs.
@@ -54,6 +58,55 @@ def corde_deltoide(t, centre):
     return delt_point(-t / 2.0, centre), delt_point(-t / 2.0 + np.pi, centre)
 
 
+# ── Le rempart de la Fournaise : LE MÊME générateur que /dimension-du-volcan ──
+# (LCG graine 271828, amplitude 110·2^(−0,6k), 6 itérations, bornes [10, 290]
+# dans un cadre 1000×300 « pixels ») — la vidéo compte les MÊMES carrés que la
+# machine du site : 15 → 35 → 87 → 197, dimension ≈ 1,25.
+def _lcg(graine):
+    s = graine & 0xFFFFFFFF
+
+    def suivant():
+        nonlocal s
+        s = (s * 1664525 + 1013904223) % 4294967296
+        return s / 4294967296
+
+    return suivant
+
+
+def gen_rempart():
+    alea = _lcg(271828)
+    pts = [(20, 190), (240, 110), (420, 170), (610, 90), (800, 175), (980, 185)]
+    for k in range(6):
+        amp = 110 * 2 ** (-0.6 * k)
+        suiv = []
+        for i in range(len(pts) - 1):
+            x1, y1 = pts[i]
+            x2, y2 = pts[i + 1]
+            suiv.append((x1, y1))
+            ym = (y1 + y2) / 2 + (alea() * 2 - 1) * amp
+            suiv.append(((x1 + x2) / 2, min(290.0, max(10.0, ym))))
+        suiv.append(pts[-1])
+        pts = suiv
+    return pts
+
+
+TAILLES_VOLCAN = [120, 60, 30, 15]
+
+
+def compter_cases(pts, s):
+    """Box-counting : les cases de la grille de pas s traversées par la ligne."""
+    cases = set()
+    for i in range(len(pts) - 1):
+        x1, y1 = pts[i]
+        x2, y2 = pts[i + 1]
+        n = max(1, int(np.ceil(np.hypot(x2 - x1, y2 - y1) / (s / 5))))
+        for k in range(n + 1):
+            x = x1 + (x2 - x1) * k / n
+            y = y1 + (y2 - y1) * k / n
+            cases.add((int(np.floor(x / s)), int(np.floor(y / s))))
+    return cases
+
+
 TEXTES = {
     "fr": {
         "titre": "L'aiguille de Hong Wang",
@@ -70,8 +123,20 @@ TEXTES = {
         "ech_0": "1,57", "ech_1": "0,79", "ech_2": "0,39", "ech_fin": "… 0 ?",
         "besico": "On peut approcher 0 d'aussi près qu'on veut",
         "besico_sub": "(Besicovitch, 1928)",
-        "wang_3d": "Et en 3D ? La conjecture de Kakeya — ouverte un siècle —",
-        "wang_3d2": "fermée par Hong Wang et Joshua Zahl (2025)",
+        "mentir": "L'aire peut donc mentir…",
+        "mentir2": "Pour dire qu'un objet reste « épais », il faut mieux : la dimension.",
+        "thm0": "un objet qui contient une aiguille dans toutes les directions",
+        "thm": "Le théorème de Hong Wang, avec Joshua Zahl (2025) :",
+        "thm2": "en 3D, un tel objet est forcément de dimension 3.",
+        "volcan_titre": "Et le volcan ? La dimension se mesure",
+        "volcan_sous": "le rempart de la Fournaise — on compte les carrés que la crête traverse",
+        "carres_mot": "carrés",
+        "volcan_d": "dimension ≈ {d} — plus qu'une ligne lisse (d = 1)",
+        "volcan_meme": "C'est l'idée de dimension de son théorème — mesurée à La Réunion.",
+        "defi_titre": "DÉFI",
+        "defi_q": "À chaque affinement : ×2,4 environ. Après 197 carrés, la grille suivante en trouverait combien ?",
+        "defi_sub": "Vérifie ta réponse sur le site — défis du CP à la Terminale",
+        "appel2": "…puis mesure la dimension du volcan",
         "honneur_nom": "Hong Wang · 王虹",
         "honneur_1": "Médaille Fields 2026 — 3ᵉ femme de l'histoire",
         "honneur_2": "Son prénom, Hong, veut dire « arc-en-ciel »",
@@ -94,8 +159,20 @@ TEXTES = {
         "ech_0": "1.57", "ech_1": "0.79", "ech_2": "0.39", "ech_fin": "… 0 ?",
         "besico": "You can get as close to 0 as you like",
         "besico_sub": "(Besicovitch, 1928)",
-        "wang_3d": "And in 3D? The Kakeya conjecture — open for a century —",
-        "wang_3d2": "closed by Hong Wang and Joshua Zahl (2025)",
+        "mentir": "So area can lie…",
+        "mentir2": "To say an object stays “thick”, you need better: dimension.",
+        "thm0": "an object holding a needle in every direction",
+        "thm": "Hong Wang's theorem, with Joshua Zahl (2025):",
+        "thm2": "in 3D, such an object must have dimension 3.",
+        "volcan_titre": "And the volcano? Dimension can be measured",
+        "volcan_sous": "the Fournaise rampart — count the squares the ridge crosses",
+        "carres_mot": "squares",
+        "volcan_d": "dimension ≈ {d} — more than a smooth line (d = 1)",
+        "volcan_meme": "The very idea of dimension in her theorem — measured on Réunion island.",
+        "defi_titre": "CHALLENGE",
+        "defi_q": "Each refinement: about ×2.4. After 197 squares, how many would the next grid find?",
+        "defi_sub": "Check your answer on the site — challenges for all ages",
+        "appel2": "…then measure the volcano's dimension",
         "honneur_nom": "Hong Wang · 王虹",
         "honneur_1": "2026 Fields Medal — 3rd woman in its history",
         "honneur_2": "Her first name, Hong, means “rainbow”",
@@ -188,7 +265,7 @@ class AiguilleDeKakeya(Scene):
         pivot = np.array([0.0, -0.9, 0.0])
         a = ValueTracker(0.0)
         zone = always_redraw(lambda: Sector(
-            outer_radius=NL, start_angle=0.0, angle=a.get_value(),
+            radius=NL, start_angle=0.0, angle=a.get_value(),
             arc_center=pivot, fill_color=PEINT, fill_opacity=0.5, stroke_width=0))
         aig = always_redraw(lambda: Line(
             pivot, pivot + NL * np.array([np.cos(a.get_value()), np.sin(a.get_value()), 0.0]),
@@ -213,9 +290,9 @@ class AiguilleDeKakeya(Scene):
         a = ValueTracker(0.0)
         # les DEUX moitiés de l'aiguille balayent deux secteurs opposés
         zone = always_redraw(lambda: VGroup(
-            Sector(outer_radius=r, start_angle=0.0, angle=a.get_value(),
+            Sector(radius=r, start_angle=0.0, angle=a.get_value(),
                    arc_center=centre, fill_color=PEINT, fill_opacity=0.5, stroke_width=0),
-            Sector(outer_radius=r, start_angle=np.pi, angle=a.get_value(),
+            Sector(radius=r, start_angle=np.pi, angle=a.get_value(),
                    arc_center=centre, fill_color=PEINT, fill_opacity=0.5, stroke_width=0)))
         aig = always_redraw(lambda: Line(
             centre - r * np.array([np.cos(a.get_value()), np.sin(a.get_value()), 0.0]),
@@ -269,24 +346,140 @@ class AiguilleDeKakeya(Scene):
         self.play(FadeOut(cordes), FadeOut(aig), FadeOut(contour),
                   FadeOut(aire), FadeOut(lecon), FadeOut(label))
 
-    # ── BESICOVITCH puis L'HONNEUR ─────────────────────────────────────────────
-    def ecran_conclusion(self):
-        fin = self.poser_record(3, self.t_("ech_fin"), ENCRE)
+    # — décimales à la française (ou pas) —
+    def fmt1(self, v):
+        s = f"{v:.1f}"
+        return s.replace(".", ",") if self.LANG == "fr" else s
+
+    def fmt2(self, v):
+        s = f"{v:.2f}"
+        return s.replace(".", ",") if self.LANG == "fr" else s
+
+    # ── BESICOVITCH : l'aire fond… donc l'aire peut mentir ─────────────────────
+    def ecran_besicovitch(self):
+        self.poser_record(3, self.t_("ech_fin"), ENCRE)
         besico = self.T(self.t_("besico"), size=32, color=WHITE).move_to([0, 1.6, 0])
         sub = self.T(self.t_("besico_sub"), size=22, color=GREY_B).next_to(besico, DOWN, buff=0.15)
         self.play(self.anim_entree(besico, mode="grow"))
         self.play(FadeIn(sub))
-        self.wait(2.0)
+        self.wait(1.8)
 
-        w1 = self.T(self.t_("wang_3d"), size=26, color=WHITE).move_to([0, 0.2, 0])
-        w2 = self.T(self.t_("wang_3d2"), size=26, color=BLEU_CALCUL).next_to(w1, DOWN, buff=0.18)
+        m1 = self.T(self.t_("mentir"), size=28, color=AIGUILLE).move_to([0, 0.2, 0])
+        m2 = self.T(self.t_("mentir2"), size=28, color=WHITE).next_to(m1, DOWN, buff=0.22)
+        self.play(self.anim_entree(m1, mode="fade_up"))
+        self.play(self.anim_entree(m2, mode="fade_up"))
+        self.wait(2.2)
+        self.play(*[FadeOut(m) for m in self.mobjects], run_time=0.5)
+
+    # ── SA SOLUTION : le théorème de dimension — et son OBJET ──────────────────
+    def ecran_theoreme(self):
+        # Ce qu'elle a vraiment étudié : un objet qui contient une aiguille dans
+        # TOUTES les directions — dessiné en « oursin » de segments.
+        alea = _lcg(1917)
+        centre = np.array([0.0, 1.15, 0.0])
+        aiguilles = VGroup()
+        for i in range(40):
+            a = (i / 40) * np.pi + (alea() - 0.5) * 0.05
+            lg = 0.85 + 1.05 * alea()
+            v = np.array([np.cos(a), np.sin(a), 0.0]) * lg
+            aiguilles.add(Line(centre - v, centre + v, color=AIGUILLE,
+                               stroke_width=2.2, stroke_opacity=0.45 + 0.55 * alea()))
+        lab = self.T(self.t_("thm0"), size=24, color=GREY_B).move_to([0, -1.15, 0])
+        self.play(LaggedStart(*[Create(l) for l in aiguilles], lag_ratio=0.03, run_time=2.2),
+                  FadeIn(lab))
+        self.play(Rotate(aiguilles, angle=0.5, about_point=centre), run_time=1.6)
+
+        w1 = self.T(self.t_("thm"), size=28, color=WHITE).move_to([0, -2.0, 0])
+        w2 = self.T(self.t_("thm2"), size=32, color=BLEU_CALCUL).next_to(w1, DOWN, buff=0.22)
         self.play(self.anim_entree(w1, mode="fade_up"))
-        self.play(self.anim_entree(w2, mode="fade_up"))
-        self.wait(2.4)
-        self.play(FadeOut(besico), FadeOut(sub), FadeOut(w1), FadeOut(w2), FadeOut(fin),
-                  *[FadeOut(m) for m in self.mobjects if isinstance(m, (Arrow,))])
-        self.clear()
+        self.play(self.anim_entree(w2, mode="grow"))
+        self.wait(2.6)
+        self.play(*[FadeOut(m) for m in self.mobjects], run_time=0.5)
 
+    # ── LE VOLCAN : la dimension se mesure (box-counting) ──────────────────────
+    def ecran_volcan(self):
+        titre = self.T(self.t_("volcan_titre"), size=34, color=JAUNE_TITRE).to_edge(UP, buff=0.35)
+        sous = self.T(self.t_("volcan_sous"), size=21, color=GREY_B).next_to(titre, DOWN, buff=0.12)
+        self.play(Write(titre), FadeIn(sous))
+
+        pts_px = gen_rempart()
+
+        def pm(x, y):
+            return np.array([-6.0 + x * 0.012, 1.55 - y * 0.012, 0.0])
+
+        ligne = VMobject(color=WHITE, stroke_width=3.5).set_points_as_corners(
+            [pm(x, y) for x, y in pts_px])
+        fond = Polygon(*([pm(x, y) for x, y in pts_px] + [pm(980, 300), pm(20, 300)]),
+                       fill_color=WHITE, fill_opacity=0.08, stroke_width=0)
+        self.play(FadeIn(fond), Create(ligne), run_time=1.4)
+
+        comptes = []
+        prev_n = None
+        for idx, s_px in enumerate(TAILLES_VOLCAN):
+            cases = compter_cases(pts_px, s_px)
+            n = len(cases)
+            comptes.append(n)
+            cote = s_px * 0.012
+            grille = VGroup()
+            for gx in range(0, 1001, s_px):
+                grille.add(Line(pm(gx, 0), pm(gx, 300), stroke_width=1, color=GREY_D))
+            for gy in range(0, 301, s_px):
+                grille.add(Line(pm(0, gy), pm(1000, gy), stroke_width=1, color=GREY_D))
+            carres = VGroup(*[
+                Square(side_length=cote, fill_color=PEINT, fill_opacity=0.4, stroke_width=0)
+                .move_to(pm((i + 0.5) * s_px, (j + 0.5) * s_px))
+                for (i, j) in sorted(cases)])
+            self.play(FadeIn(grille), run_time=0.35)
+            self.play(LaggedStart(*[FadeIn(c) for c in carres],
+                                  lag_ratio=1.5 / max(n, 1), run_time=1.1))
+
+            mot = f" {self.t_('carres_mot')}" if idx == 0 else ""
+            chip_t = self.T(f"{n}{mot}", size=24, color=AIGUILLE)
+            boite = SurroundingRectangle(chip_t, color=AIGUILLE, buff=0.12, corner_radius=0.08)
+            chip = VGroup(boite, chip_t).move_to([-4.6 + idx * 2.7, -3.15, 0])
+            if prev_n is not None:
+                fl = Arrow([-4.6 + idx * 2.7 - 1.8, -3.15, 0],
+                           [-4.6 + idx * 2.7 - 1.0, -3.15, 0],
+                           buff=0, stroke_width=3, color=GREY_B,
+                           max_tip_length_to_length_ratio=0.35)
+                mult = self.T("×" + self.fmt1(n / prev_n), size=20, color=VERT_OK) \
+                    .next_to(fl, UP, buff=0.08)
+                self.play(FadeIn(fl), FadeIn(mult), run_time=0.3)
+            self.play(FadeIn(chip, scale=0.6), run_time=0.35)
+            prev_n = n
+            self.wait(0.5)
+            self.play(FadeOut(grille), FadeOut(carres), run_time=0.3)
+
+        # la dimension — la MÊME régression que la machine du site
+        xs = [np.log(1.0 / s) for s in TAILLES_VOLCAN]
+        ys = [np.log(n) for n in comptes]
+        mx, my = float(np.mean(xs)), float(np.mean(ys))
+        d = sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sum((x - mx) ** 2 for x in xs)
+
+        self.play(FadeOut(fond), FadeOut(ligne), FadeOut(sous))
+        dtxt = self.T(self.t_("volcan_d").format(d=self.fmt2(d)), size=32, color=JAUNE_TITRE) \
+            .move_to([0, 0.6, 0])
+        meme = self.T(self.t_("volcan_meme"), size=25, color=BLEU_CALCUL) \
+            .next_to(dtxt, DOWN, buff=0.3)
+        self.play(self.anim_entree(dtxt, mode="grow"))
+        self.play(self.anim_entree(meme, mode="fade_up"))
+        self.wait(2.6)
+        self.play(*[FadeOut(m) for m in self.mobjects], run_time=0.5)
+
+    # ── LE DÉFI (rappel actif : la réponse n'est JAMAIS à l'écran) ─────────────
+    def ecran_defi(self):
+        titre = self.T(self.t_("defi_titre"), size=44, color=AIGUILLE).move_to([0, 1.5, 0])
+        q = self.T(self.t_("defi_q"), size=28, color=WHITE).move_to([0, 0.2, 0])
+        sub = self.T(self.t_("defi_sub"), size=22, color=VERT_OK).move_to([0, -1.0, 0])
+        self.play(self.anim_entree(titre, mode="pop"))
+        self.play(self.anim_entree(q, mode="fade_up"))
+        self.wait(2.6)
+        self.play(FadeIn(sub, shift=0.2 * UP))
+        self.wait(2.2)
+        self.play(*[FadeOut(m) for m in self.mobjects], run_time=0.5)
+
+    # ── L'HONNEUR + L'APPEL ────────────────────────────────────────────────────
+    def ecran_honneur(self):
         # L'HONNEUR — le prénom, la 3ᵉ femme, le merci aux profs
         self.add_mascotte(scale=0.6)
         nom = self.T(self.t_("honneur_nom"), size=44, color=JAUNE_TITRE).move_to([0, 2.0, 0])
@@ -301,10 +494,12 @@ class AiguilleDeKakeya(Scene):
         self.play(self.anim_entree(h3, mode="fade_up"))
         self.wait(2.2)
 
-        appel = self.T(self.t_("appel"), size=30, color=AIGUILLE).move_to([0, -1.7, 0])
-        lien = self.T(self.t_("lien"), size=24, color=BLEU_CALCUL).next_to(appel, DOWN, buff=0.22)
+        appel = self.T(self.t_("appel"), size=30, color=AIGUILLE).move_to([0, -1.55, 0])
+        lien = self.T(self.t_("lien"), size=24, color=BLEU_CALCUL).next_to(appel, DOWN, buff=0.2)
+        appel2 = self.T(self.t_("appel2"), size=20, color=GREY_B).next_to(lien, DOWN, buff=0.16)
         self.play(self.anim_entree(appel, mode="pop"))
         self.play(FadeIn(lien, shift=0.2 * UP))
+        self.play(FadeIn(appel2, shift=0.2 * UP))
         signature = self.T(SIGNATURE, size=22, color=VERT_OK).to_edge(DOWN, buff=0.25)
         self.play(Write(signature))
         self.wait(3.0)
@@ -314,7 +509,11 @@ class AiguilleDeKakeya(Scene):
         self.methode_bout()
         self.methode_centre()
         self.methode_deltoide()
-        self.ecran_conclusion()
+        self.ecran_besicovitch()
+        self.ecran_theoreme()
+        self.ecran_volcan()
+        self.ecran_defi()
+        self.ecran_honneur()
 
 
 class AiguilleDeKakeyaEN(AiguilleDeKakeya):

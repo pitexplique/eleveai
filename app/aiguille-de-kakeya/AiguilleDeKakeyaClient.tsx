@@ -718,11 +718,11 @@ export default function AiguilleDeKakeyaClient() {
             ⚡ La machine des epsilons — des petits riens aux infinis
           </Link>
           <Link
-            href="/exponentielle"
+            href="/dimension-du-volcan"
             className="inline-flex items-center gap-2 rounded border px-4 py-2 text-sm font-bold hover:brightness-95"
             style={{ borderColor: "#c5d4ea", backgroundColor: "#f4f7fc", color: TEXTE }}
           >
-            📈 Plus j&apos;avance, plus ma vitesse augmente
+            📏 La dimension du volcan — l&apos;idée de sa médaille, mesurée sur la Fournaise
           </Link>
         </div>
 
