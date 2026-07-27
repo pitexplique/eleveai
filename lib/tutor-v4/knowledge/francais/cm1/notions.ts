@@ -1,13 +1,13 @@
-// Notions de francais pour la classe de CM1.
-// Reference : programme officiel du cycle 3,
-// BO n. 16 du 17 avril 2025, applicable au CM1 a la rentree 2025.
+// Notions de français pour la classe de CM1.
+// Référence : programme officiel du cycle 3,
+// BO n° 16 du 17 avril 2025, applicable au CM1 à la rentrée 2025.
 
 import type { NotionSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
 export const notions: NotionSource[] = [
   {
     id: "fluence_lecture",
-    label: "Lire avec fluidite et expressivite",
+    label: "Lire avec fluidité et expressivité",
     boId: "BOCM1FL1",
     prerequis: [],
     levels: [1, 2, 3],
@@ -21,21 +21,21 @@ export const notions: NotionSource[] = [
   },
   {
     id: "lecture_oeuvres",
-    label: "Lire une oeuvre et se l'approprier",
+    label: "Lire une œuvre et se l'approprier",
     boId: "BOCM1FL1",
     prerequis: ["comprehension_textes_documents"],
     levels: [1, 2, 3],
   },
   {
     id: "ecriture",
-    label: "Ecrire pour apprendre et produire",
+    label: "Écrire pour apprendre et produire",
     boId: "BOCM1FE1",
     prerequis: [],
     levels: [1, 2, 3],
   },
   {
     id: "oral",
-    label: "Ecouter, dire et participer aux echanges",
+    label: "Écouter, dire et participer aux échanges",
     boId: "BOCM1FO1",
     prerequis: [],
     levels: [1, 2, 3],
