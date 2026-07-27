@@ -8,17 +8,27 @@ import { KIT_MATHS_QUATRIEME } from "./maths-quatrieme/data";
 import { KIT_MATHS_CINQUIEME } from "./maths-cinquieme/data";
 import { KIT_MATHS_SIXIEME } from "./maths-sixieme/data";
 import { KIT_MATHS_CM2 } from "./maths-cm2/data";
+import { KIT_MATHS_CM1 } from "./maths-cm1/data";
 
 export const metadata: Metadata = {
-  title: "Guides de survie maths, du CM2 au lycée — l'essentiel à imprimer (gratuit)",
+  title: "Guides de survie maths, du CM1 au lycée — l'essentiel à imprimer (gratuit)",
   description:
-    "Les guides de survie EleveAI : le programme de maths du primaire (CM2) au lycée condensé en fiches à imprimer — l'essentiel, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
+    "Les guides de survie EleveAI : le programme de maths du primaire (CM1) au lycée condensé en fiches à imprimer — l'essentiel, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
   alternates: { canonical: "https://eleveai.fr/guide-de-survie" },
 };
 
 // La collection grandit niveau par niveau — une carte = un guide livré,
 // jamais de carte fantôme.
 const KITS = [
+  {
+    slug: "maths-cm1",
+    emoji: "🥚",
+    titre: KIT_MATHS_CM1.titre,
+    niveau: "CM1 · primaire",
+    pitch:
+      "Les 27 chapitres du programme en 27 fiches : l'essentiel, les réflexes, les pièges, test corrigé.",
+    grad: "from-indigo-500 to-sky-500",
+  },
   {
     slug: "maths-cm2",
     emoji: "🐣",
