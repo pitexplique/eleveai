@@ -105,6 +105,72 @@ function fromConjItem(item: ConjItem): Generated {
 
 const LECTURE: QcmItem[] = [
   {
+    text: "Lis : « Le soleil se couchait. Mara alluma la lampe et ouvrit son livre. » À quel moment de la journée est-on ?",
+    correct: "le soir",
+    wrongs: ["le matin très tôt","en plein midi","au petit-déjeuner"],
+    methode: "Le coucher du soleil indique le soir.",
+  },
+  {
+    text: "Lis : « Paul courait, essoufflé. Il ne voulait pas rater le bus. » Pourquoi Paul court-il ?",
+    correct: "pour ne pas rater le bus",
+    wrongs: ["pour faire du sport","parce qu'il a peur du noir","pour rattraper son chien"],
+    methode: "On relie la cause donnée dans le texte.",
+  },
+  {
+    text: "Lis : « — Bonjour, dit la marchande. Que désirez-vous ? » Où se passe surtout la scène ?",
+    correct: "dans un magasin ou au marché",
+    wrongs: ["à l'école","dans une piscine","dans un avion"],
+    methode: "La marchande et sa question situent la scène.",
+  },
+  {
+    text: "Lis : « La petite fille sourit en découvrant le cadeau. » Que ressent-elle ?",
+    correct: "de la joie",
+    wrongs: ["de la colère","de la peur","de l'ennui"],
+    methode: "Le sourire montre un sentiment de joie.",
+  },
+  {
+    text: "Lis : « D'abord, il mit ses chaussures. Ensuite, il attacha ses lacets. Enfin, il sortit. » Que fait-il en dernier ?",
+    correct: "il sort",
+    wrongs: ["il met ses chaussures","il attache ses lacets","il ouvre la fenêtre"],
+    methode: "Le mot « enfin » marque la dernière action.",
+  },
+  {
+    text: "Lis : « Le ciel devint gris et de grosses gouttes se mirent à tomber. » Quel temps fait-il ?",
+    correct: "il commence à pleuvoir",
+    wrongs: ["il fait grand soleil","il neige","il gèle"],
+    methode: "On s'appuie sur les détails du texte.",
+  },
+  {
+    text: "Lis : « — Range ta chambre ! » dit maman d'une voix ferme. Que fait la maman ?",
+    correct: "elle donne un ordre",
+    wrongs: ["elle pose une question","elle raconte une histoire","elle chante"],
+    methode: "Le sens et le point d'exclamation montrent un ordre.",
+  },
+  {
+    text: "Lis : « Léo n'avait rien mangé depuis le matin. Son ventre gargouillait. » Que ressent Léo ?",
+    correct: "il a faim",
+    wrongs: ["il a sommeil","il a froid","il a peur"],
+    methode: "« rien mangé » et « ventre qui gargouille » : c'est la faim (indice implicite).",
+  },
+  {
+    text: "Lis : « Le loup s'approcha lentement de la maison des trois petits cochons. » Ce passage vient sûrement...",
+    correct: "d'un conte",
+    wrongs: ["d'un documentaire","d'une lettre","d'une recette"],
+    methode: "Le loup et les trois petits cochons signalent un conte.",
+  },
+  {
+    text: "Lis : « Sur la plage, les enfants ramassaient des coquillages en riant. » Où se déroule la scène ?",
+    correct: "à la plage",
+    wrongs: ["à la montagne","dans une classe","dans une cave"],
+    methode: "On prend l'information donnée par le texte.",
+  },
+  {
+    text: "Lis : « Tom rangea son cartable, éteignit la lumière et alla se coucher. » Quelle est la dernière action de Tom ?",
+    correct: "aller se coucher",
+    wrongs: ["ranger son cartable","éteindre la lumière","ouvrir la porte"],
+    methode: "On repère l'ordre des actions.",
+  },
+  {
     text: 'Lis ce passage :\n"Le vent secouait les volets. Nina serra son manteau et traversa la cour sans courir."\n\nQuel indice montre qu\'il fait probablement froid ?',
     correct: "Nina serre son manteau",
     wrongs: ["Nina court vite", "les volets sont rouges", "la cour est vide"],
@@ -150,6 +216,72 @@ const LECTURE: QcmItem[] = [
 
 const DOCUMENT: QcmItem[] = [
   {
+    text: "Sur une affiche : « Piscine ouverte de 9h à 18h, sauf le lundi. » Peut-on y aller le lundi ?",
+    correct: "non, elle est fermée le lundi",
+    wrongs: ["oui, toute la journée","oui, seulement le matin","oui, à 18h"],
+    methode: "On lit l'information « sauf le lundi ».",
+  },
+  {
+    text: "À quoi sert surtout un dictionnaire ?",
+    correct: "à trouver le sens et l'orthographe d'un mot",
+    wrongs: ["à raconter une histoire","à donner l'heure","à dessiner une carte"],
+    methode: "Le dictionnaire donne le sens et l'écriture des mots.",
+  },
+  {
+    text: "Sur la boîte d'un jeu : « À partir de 6 ans. » Que signifie cette information ?",
+    correct: "l'âge conseillé pour jouer",
+    wrongs: ["le nombre de joueurs","le prix du jeu","la durée d'une partie"],
+    methode: "On lit l'information utile sur l'emballage.",
+  },
+  {
+    text: "Dans un sommaire : « Chapitre 3 ..... page 20 ». À quoi sert la page indiquée ?",
+    correct: "à trouver où commence le chapitre",
+    wrongs: ["à compter les images","à connaître l'auteur","à savoir le prix"],
+    methode: "Le sommaire aide à se repérer dans un livre.",
+  },
+  {
+    text: "Sur un plan de ville, à quoi sert la légende ?",
+    correct: "à expliquer ce que représentent les symboles",
+    wrongs: ["à raconter l'histoire de la ville","à donner la météo","à lister les habitants"],
+    methode: "La légende explique les symboles d'un plan.",
+  },
+  {
+    text: "Une recette indique : « Cuisson : 25 minutes. » Cette information donne...",
+    correct: "le temps de cuisson",
+    wrongs: ["la liste des ingrédients","le nombre de parts","la température de la pièce"],
+    methode: "Une recette sépare les étapes et les durées.",
+  },
+  {
+    text: "Un tableau a pour titre « Températures de la semaine ». Que lit-on dedans ?",
+    correct: "les températures de chaque jour",
+    wrongs: ["les prénoms des élèves","le prix des glaces","les horaires du bus"],
+    methode: "Le titre annonce ce que montre le tableau.",
+  },
+  {
+    text: "Sur un yaourt : « À consommer avant le 12/05 ». Cette date indique...",
+    correct: "jusqu'à quand on peut le manger",
+    wrongs: ["la date de construction du magasin","l'heure d'ouverture","le poids du produit"],
+    methode: "La date limite dit jusqu'à quand consommer.",
+  },
+  {
+    text: "Pour trouver le mot « volcan » dans un dictionnaire, à quelle lettre cherche-t-on ?",
+    correct: "V",
+    wrongs: ["A","O","C"],
+    methode: "Les mots sont classés par ordre alphabétique.",
+  },
+  {
+    text: "Un panneau indique : « Sortie → ». À quoi sert la flèche ?",
+    correct: "à montrer la direction à suivre",
+    wrongs: ["à interdire de sortir","à donner l'heure","à compter les portes"],
+    methode: "La flèche indique un sens.",
+  },
+  {
+    text: "Une carte d'invitation donne le lieu, le jour et l'heure. Que permet-elle de savoir ?",
+    correct: "où et quand se rendre",
+    wrongs: ["la recette du gâteau","la fin d'une histoire","la leçon du jour"],
+    methode: "On prélève les informations utiles du document.",
+  },
+  {
     text: "Un document indique : Titre : Les volcans. Source : magazine scientifique junior. Date : mars 2025.\n\nQuelle information donne la source ?",
     correct: "d'où vient le document",
     wrongs: ["le sujet principal", "le nom du lecteur", "la conclusion du texte"],
@@ -185,6 +317,72 @@ const DOCUMENT: QcmItem[] = [
 
 const OEUVRE: QcmItem[] = [
   {
+    text: "Dans un récit, la personne qui raconte l'histoire s'appelle...",
+    correct: "le narrateur",
+    wrongs: ["le lecteur","l'imprimeur","le libraire"],
+    methode: "Le narrateur est celui qui raconte.",
+  },
+  {
+    text: "Le personnage qui s'oppose au héros s'appelle souvent...",
+    correct: "l'adversaire (le méchant)",
+    wrongs: ["le narrateur","l'auteur","le lecteur"],
+    methode: "On repère les rôles des personnages.",
+  },
+  {
+    text: "Quelle phrase raconte un événement de l'histoire (et non un avis) ?",
+    correct: "Le dragon s'envola au-dessus du château.",
+    wrongs: ["J'ai adoré ce passage.","Ce livre est trop long.","C'est mon conte préféré."],
+    methode: "Un événement décrit une action de l'histoire.",
+  },
+  {
+    text: "Après avoir lu un poème, quelle trace est utile dans un carnet de lecteur ?",
+    correct: "recopier un vers qu'on a aimé et dire pourquoi",
+    wrongs: ["noter la couleur de la couverture","compter les pages","dessiner la maîtresse"],
+    methode: "Le carnet garde la mémoire de ce qu'on a compris et ressenti.",
+  },
+  {
+    text: "Pour ne pas perdre le fil d'une histoire longue, on peut...",
+    correct: "résumer chaque chapitre en une phrase",
+    wrongs: ["lire la fin en premier","sauter des chapitres","fermer le livre"],
+    methode: "Persévérer et garder le fil aident à lire une œuvre entière.",
+  },
+  {
+    text: "Dans un conte, la formule « Il était une fois » sert à...",
+    correct: "commencer l'histoire",
+    wrongs: ["la terminer","donner la morale","décrire l'auteur"],
+    methode: "C'est une formule d'ouverture du conte.",
+  },
+  {
+    text: "Le lieu et le moment où se passe une histoire, c'est...",
+    correct: "le cadre (où et quand)",
+    wrongs: ["le titre","la couverture","le prix"],
+    methode: "On situe l'histoire dans l'espace et le temps.",
+  },
+  {
+    text: "Quelle phrase exprime un sentiment du lecteur ?",
+    correct: "J'ai eu de la peine pour le petit héros.",
+    wrongs: ["Le livre a douze chapitres.","C'est un roman.","L'histoire se passe en hiver."],
+    methode: "Une réaction de lecteur dit ce qu'on ressent.",
+  },
+  {
+    text: "Pour comparer deux personnages, on peut noter...",
+    correct: "ce qu'ils font et ce qu'ils ressentent",
+    wrongs: ["le nombre de lettres de leur nom","la taille du livre","la date d'édition"],
+    methode: "On suit les personnages et leurs relations.",
+  },
+  {
+    text: "La leçon qu'une fable veut faire comprendre s'appelle...",
+    correct: "la morale",
+    wrongs: ["le titre","le décor","le résumé"],
+    methode: "La fable se termine souvent par une morale.",
+  },
+  {
+    text: "Pour partager un livre qu'on a aimé, une bonne idée est de...",
+    correct: "le conseiller à un camarade en disant pourquoi",
+    wrongs: ["cacher le livre","déchirer une page","oublier le titre"],
+    methode: "On donne un avis justifié pour partager une lecture.",
+  },
+  {
     text: "Après la lecture d'un conte, quelle trace est la plus utile dans un carnet de lecteur ?",
     correct: "un avis personnel avec un passage qui le justifie",
     wrongs: ["seulement le nombre de pages", "une liste de calculs", "la couleur de la couverture seulement"],
@@ -219,6 +417,72 @@ const OEUVRE: QcmItem[] = [
 // ── ECRITURE ────────────────────────────────────────────────────────────────
 
 const ECRITURE: QcmItem[] = [
+  {
+    text: "Quelle phrase est correctement ponctuée ?",
+    correct: "As-tu fini tes devoirs ?",
+    wrongs: ["As-tu fini tes devoirs.","as-tu fini tes devoirs","As tu fini tes devoirs"],
+    methode: "Une question se termine par un point d'interrogation.",
+  },
+  {
+    text: "Pour relier deux idées qui s'opposent, quel mot choisir ?",
+    correct: "mais",
+    wrongs: ["et","donc","puis"],
+    methode: "« mais » marque l'opposition.",
+  },
+  {
+    text: "Quelle phrase exprime la cause (le « pourquoi ») ?",
+    correct: "Il met son manteau parce qu'il fait froid.",
+    wrongs: ["Il met son manteau et il sort.","Il met son manteau, puis il court.","Il met son manteau ce matin."],
+    methode: "« parce que » introduit la cause.",
+  },
+  {
+    text: "Dans un récit, quel connecteur indique la fin ?",
+    correct: "enfin",
+    wrongs: ["d'abord","ensuite","pendant que"],
+    methode: "« enfin » marque la dernière étape.",
+  },
+  {
+    text: "Quelle phrase est la plus précise pour une description ?",
+    correct: "Un grand chien noir aboyait devant la porte.",
+    wrongs: ["Un chien.","Il y a un chien là.","Chien devant la porte."],
+    methode: "Des détails précis rendent la description claire.",
+  },
+  {
+    text: "En se relisant, que faut-il vérifier en priorité ?",
+    correct: "les accords, l'orthographe et la ponctuation",
+    wrongs: ["la couleur des pages","le poids du cahier","l'heure qu'il est"],
+    methode: "La relecture corrige la langue.",
+  },
+  {
+    text: "Quelle phrase commence par une majuscule et finit par un point ?",
+    correct: "La cloche sonne à midi.",
+    wrongs: ["la cloche sonne à midi.","La cloche sonne à midi","la cloche sonne à midi"],
+    methode: "Une phrase : majuscule au début, point à la fin.",
+  },
+  {
+    text: "Pour ne pas répéter « le chien » dans deux phrases, on peut le remplacer par...",
+    correct: "il",
+    wrongs: ["le chat","elle","nous"],
+    methode: "Un pronom évite les répétitions.",
+  },
+  {
+    text: "Quel groupe de mots forme une phrase complète ?",
+    correct: "Les enfants jouent dans la cour.",
+    wrongs: ["Dans la cour les enfants","Jouent les enfants dans","Les enfants dans la"],
+    methode: "Une phrase a un sens complet.",
+  },
+  {
+    text: "Pour séparer les éléments d'une liste dans une phrase, on utilise...",
+    correct: "des virgules",
+    wrongs: ["des points d'interrogation","des majuscules partout","aucun signe"],
+    methode: "La virgule sépare les éléments d'une énumération.",
+  },
+  {
+    text: "Après avoir écrit un texte, quelle est la meilleure dernière étape ?",
+    correct: "le relire pour corriger les erreurs",
+    wrongs: ["le recopier sans le lire","le colorier","compter les mots"],
+    methode: "La relecture est la dernière étape de l'écrit.",
+  },
   {
     text: "Quelle phrase est la plus claire et correctement ponctuée ?",
     correct: "Le cheval traverse la prairie, puis il rejoint l'étable.",
@@ -264,6 +528,72 @@ const ECRITURE: QcmItem[] = [
 // ── ORAL ────────────────────────────────────────────────────────────────────
 
 const ORAL: QcmItem[] = [
+  {
+    text: "Pour bien écouter une consigne, il faut...",
+    correct: "être attentif et ne pas parler en même temps",
+    wrongs: ["regarder par la fenêtre","parler à son voisin","se boucher les oreilles"],
+    methode: "Écouter, c'est se rendre disponible pour comprendre.",
+  },
+  {
+    text: "Reformuler ce qu'on a entendu, c'est le redire...",
+    correct: "avec ses propres mots",
+    wrongs: ["exactement pareil sans comprendre","beaucoup plus fort","en criant"],
+    methode: "Reformuler montre qu'on a compris.",
+  },
+  {
+    text: "Pour présenter un exposé, il vaut mieux...",
+    correct: "parler assez fort et regarder la classe",
+    wrongs: ["lire très vite, tête baissée","chuchoter","tourner le dos"],
+    methode: "Une présentation doit être audible et claire.",
+  },
+  {
+    text: "« Je pense que ce livre est bien parce qu'il fait rire. » Cette phrase donne...",
+    correct: "un avis avec une raison",
+    wrongs: ["une question","une consigne","une simple liste"],
+    methode: "Un avis justifié donne le « pourquoi ».",
+  },
+  {
+    text: "Dans un échange, quand un camarade parle, on...",
+    correct: "attend son tour et on l'écoute",
+    wrongs: ["parle plus fort que lui","se lève et sort","répète le même mot"],
+    methode: "On respecte la parole d'autrui.",
+  },
+  {
+    text: "Pour raconter un souvenir à l'oral, on parle...",
+    correct: "clairement, dans l'ordre des événements",
+    wrongs: ["en mélangeant tout","sans faire de phrases","sans jamais respirer"],
+    methode: "L'ordre aide à se faire comprendre.",
+  },
+  {
+    text: "Poser une question pour mieux comprendre, c'est...",
+    correct: "utile et permis dans un échange",
+    wrongs: ["interdit","une perte de temps","toujours impoli"],
+    methode: "Questionner aide à comprendre.",
+  },
+  {
+    text: "Quand on n'est pas d'accord avec un camarade, on peut...",
+    correct: "expliquer poliment pourquoi",
+    wrongs: ["se moquer de lui","crier plus fort","refuser de l'écouter"],
+    methode: "On donne un avis en respectant l'autre.",
+  },
+  {
+    text: "Pour être bien compris à l'oral, il faut surtout...",
+    correct: "articuler et parler à un bon rythme",
+    wrongs: ["marmonner","parler en même temps que les autres","dire n'importe quoi"],
+    methode: "Bien articuler rend le discours clair.",
+  },
+  {
+    text: "Écouter quelqu'un jusqu'au bout permet de...",
+    correct: "vraiment comprendre ce qu'il veut dire",
+    wrongs: ["l'empêcher de parler","gagner un concours","changer de sujet"],
+    methode: "L'écoute complète la compréhension.",
+  },
+  {
+    text: "Dans un débat, un bon argument est...",
+    correct: "une raison qui explique son idée",
+    wrongs: ["une moquerie","un cri","une phrase sans rapport"],
+    methode: "Un argument justifie ce qu'on pense.",
+  },
   {
     text: "Pendant un débat en classe, quelle attitude est attendue ?",
     correct: "écouter les autres et justifier son avis",
