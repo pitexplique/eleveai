@@ -859,7 +859,7 @@ export default function CahierVacances({
         </div>
       </div>
 
-      {/* Encart « Participez à l'aventure » — 3 QR (don · coach · journal) pour
+      {/* Encart « Participez à l'aventure » — 2 QR (coach · journal) + don Wero pour
           laisser le choix, sans pression. S'imprime en fin de cahier (numéro
           Wero + QR conservés ; les boutons d'action sont masqués au print). */}
       <div className="mx-auto max-w-4xl px-5 pb-8 sm:px-8">

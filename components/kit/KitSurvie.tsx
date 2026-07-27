@@ -321,7 +321,7 @@ export default function KitSurvie({ data }: { data: KitData }) {
           </Link>
         </div>
 
-        {/* L'encart « Participez à l'aventure » — 3 QR (don · coach · journal)
+        {/* L'encart « Participez à l'aventure » — 2 QR (coach · journal) + don Wero
             pour laisser le choix. S'imprime avec le guide (numéro Wero + QR
             conservés ; les boutons d'action sont masqués au print). */}
         <EncartDon coachUrl={coachQrUrl} className="mx-auto mt-8 max-w-3xl" />

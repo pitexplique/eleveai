@@ -4,12 +4,12 @@
 // gratuit (guides de survie, cahiers…). On demande le soutien APRÈS avoir rendu
 // le service (même principe que la capture post-téléchargement).
 //
-// TROIS PORTES, pour LAISSER LA LIBERTÉ (demande de Frédéric, 26/07) : le QR du
-// don est posé À CÔTÉ de celui du coach et de celui du journal — le lecteur
-// choisit sans pression (esprit « sans jugement »). Sur un guide IMPRIMÉ, ces
-// trois QR sont trois portes qu'on scanne hors ligne ; le numéro Wero est aussi
-// imprimé (les boutons d'action, eux, sont masqués au print). Transparence des
-// coûts sur la page /faire-un-don.
+// DEUX PORTES EN QR pour LAISSER LA LIBERTÉ (demande de Frédéric, 26/07) : le
+// coach et le journal, à scanner sans pression (esprit « sans jugement »). Le
+// DON, lui, n'a PAS de QR (choix de Frédéric) : on donne directement par le
+// numéro Wero affiché en clair — inutile de scanner un QR pour ça. Sur un guide
+// IMPRIMÉ, les deux QR + le numéro Wero restent (les boutons d'action, eux, sont
+// masqués au print). Transparence des coûts sur la page /faire-un-don.
 
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
@@ -17,7 +17,6 @@ import { useState } from "react";
 
 // Le numéro Wero — déjà public sur /entreprises et /faire-un-don.
 const NUMERO = "06 92 74 29 58";
-const URL_DON = "https://eleveai.fr/faire-un-don";
 const URL_ACCUEIL = "https://eleveai.fr";
 
 // Une porte = un QR + son libellé. Composant interne pour ne pas répéter.
@@ -82,9 +81,9 @@ export default function EncartDon({
         explore le journal. Scanne la porte qui te parle.
       </p>
 
-      {/* Les trois portes, côte à côte — le don n'est pas au-dessus des autres. */}
-      <div className="mt-4 grid grid-cols-3 gap-3">
-        <PorteQR href={URL_DON} emoji="💛" label="Faire un don" />
+      {/* Deux portes en QR — le coach et le journal. Pas de QR pour le don :
+          on donne par le numéro Wero ci-dessous. */}
+      <div className="mt-4 flex flex-wrap gap-5">
         <PorteQR href={coachUrl} emoji="🧠" label="M'entraîner" />
         <PorteQR href={URL_ACCUEIL} emoji="📰" label="Le journal" />
       </div>
