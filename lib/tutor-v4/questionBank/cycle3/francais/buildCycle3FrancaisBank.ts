@@ -630,6 +630,72 @@ const ORAL: QcmItem[] = [
 
 const VOC_CONTEXTE: QcmItem[] = [
   {
+    text: "Dans 'Le chemin était boueux après la pluie', que veut dire boueux ?",
+    correct: "plein de boue",
+    wrongs: ["très sec","très propre","gelé"],
+    methode: "Le contexte 'après la pluie' aide à deviner.",
+  },
+  {
+    text: "Dans 'Elle parlait à voix basse pour ne pas réveiller le bébé', 'à voix basse' veut dire...",
+    correct: "doucement",
+    wrongs: ["en criant","en chantant","en pleurant"],
+    methode: "Le but 'ne pas réveiller' oriente le sens.",
+  },
+  {
+    text: "Dans 'Le désert est aride, sans une goutte d'eau', aride veut dire...",
+    correct: "très sec",
+    wrongs: ["très humide","très froid","très vert"],
+    methode: "Le contexte 'sans eau' donne le sens.",
+  },
+  {
+    text: "Dans 'Il dévora son repas en deux minutes', dévora veut dire...",
+    correct: "mangea très vite",
+    wrongs: ["cuisina","refusa","partagea"],
+    methode: "Le contexte 'en deux minutes' précise le sens.",
+  },
+  {
+    text: "Dans 'Le vieux pont menaçait de s'effondrer', s'effondrer veut dire...",
+    correct: "tomber, s'écrouler",
+    wrongs: ["se construire","se peindre","se laver"],
+    methode: "On devine le sens grâce au contexte.",
+  },
+  {
+    text: "Dans 'Il resta immobile, sans bouger', immobile veut dire...",
+    correct: "qui ne bouge pas",
+    wrongs: ["qui court","qui saute","qui parle"],
+    methode: "Le contexte 'sans bouger' donne le sens.",
+  },
+  {
+    text: "Dans 'Le ciel était limpide, on voyait très loin', limpide veut dire...",
+    correct: "clair",
+    wrongs: ["sombre","nuageux","orageux"],
+    methode: "Le contexte 'on voyait loin' aide.",
+  },
+  {
+    text: "Dans 'Elle est habile de ses mains, elle bricole très bien', habile veut dire...",
+    correct: "adroite",
+    wrongs: ["maladroite","paresseuse","triste"],
+    methode: "Le contexte 'bricole bien' oriente le sens.",
+  },
+  {
+    text: "Dans 'Il chuchota un secret à mon oreille', chuchoter veut dire...",
+    correct: "parler tout bas",
+    wrongs: ["crier","chanter fort","siffler"],
+    methode: "Le contexte 'un secret à l'oreille' aide.",
+  },
+  {
+    text: "Dans 'Après la course, il était épuisé', épuisé veut dire...",
+    correct: "très fatigué",
+    wrongs: ["très reposé","très content","très rapide"],
+    methode: "Le contexte 'après la course' donne le sens.",
+  },
+  {
+    text: "Dans 'La foule nombreuse remplissait la place', nombreuse veut dire...",
+    correct: "en grand nombre",
+    wrongs: ["toute petite","silencieuse","vide"],
+    methode: "Le contexte 'remplissait la place' aide.",
+  },
+  {
     text: "Dans 'Le sentier était escarpé, difficile à grimper', que veut dire escarpé ?",
     correct: "très pentu",
     wrongs: ["très plat", "très large", "très court"],
@@ -723,6 +789,72 @@ const VOC_SYN_ANT: QcmItem[] = [
 
 const VOC_POLYSEMIE: QcmItem[] = [
   {
+    text: "Quelle phrase utilise 'glace' au sens du dessert ?",
+    correct: "Elle mange une glace à la vanille.",
+    wrongs: ["La glace du lac est solide.","Il se regarde dans la glace.","La route est couverte de glace."],
+    methode: "Le contexte donne le bon sens.",
+  },
+  {
+    text: "Quelle phrase utilise 'feuille' au sens du papier ?",
+    correct: "Il écrit sur une feuille blanche.",
+    wrongs: ["La feuille de l'arbre tombe.","Les feuilles jaunissent en automne.","Une feuille de salade."],
+    methode: "Le contexte précise le sens.",
+  },
+  {
+    text: "Dans 'la souris de l'ordinateur' et 'la souris grise', le mot souris...",
+    correct: "a deux sens différents",
+    wrongs: ["veut toujours dire l'animal","est un verbe","n'a aucun sens"],
+    methode: "Un mot polysémique a plusieurs sens.",
+  },
+  {
+    text: "Quelle phrase utilise 'bras' au sens du corps ?",
+    correct: "Il s'est cassé le bras.",
+    wrongs: ["Le bras du fauteuil est cassé.","Un bras de la rivière.","Le bras de la grue est long."],
+    methode: "Le contexte donne le sens.",
+  },
+  {
+    text: "Le mot 'carte' peut désigner...",
+    correct: "une carte de géographie ou une carte à jouer",
+    wrongs: ["seulement un fruit","seulement un animal","un verbe"],
+    methode: "Un mot peut avoir plusieurs sens.",
+  },
+  {
+    text: "Quelle phrase utilise 'orange' comme couleur ?",
+    correct: "Il porte un pull orange.",
+    wrongs: ["Il mange une orange.","Il presse une orange.","Une orange bien juteuse."],
+    methode: "Le contexte montre si c'est le fruit ou la couleur.",
+  },
+  {
+    text: "Dans 'la clé de la porte' et 'la clé du mystère', le mot clé...",
+    correct: "a plusieurs sens",
+    wrongs: ["veut toujours dire l'objet en métal","est un déterminant","est un pluriel"],
+    methode: "Le sens change avec le contexte.",
+  },
+  {
+    text: "Quelle phrase utilise 'tour' au sens du bâtiment ?",
+    correct: "La tour du château est très haute.",
+    wrongs: ["C'est à ton tour de jouer.","Il fait le tour du jardin.","Un tour de magie."],
+    methode: "Le contexte donne le bon sens.",
+  },
+  {
+    text: "Quelle phrase utilise 'note' au sens de l'école ?",
+    correct: "Elle a eu une bonne note en dictée.",
+    wrongs: ["Il joue une note de musique.","Le serveur apporte la note.","Il prend une note dans son carnet."],
+    methode: "Le contexte précise le sens de 'note'.",
+  },
+  {
+    text: "Dans 'le pied de la table' et 'le pied du coureur', pied...",
+    correct: "a deux sens différents",
+    wrongs: ["veut toujours dire la partie du corps","est un verbe","n'a aucun sens"],
+    methode: "Le contexte donne le sens.",
+  },
+  {
+    text: "Quelle phrase utilise 'canard' au sens de l'animal ?",
+    correct: "Le canard nage sur l'étang.",
+    wrongs: ["Il chante comme un canard (faux).","Ce journal est un vrai canard.","Il fait un canard au piano."],
+    methode: "Le contexte montre le vrai sens.",
+  },
+  {
     text: "Dans 'la glace du miroir' et 'manger une glace', le mot glace...",
     correct: "a plusieurs sens",
     wrongs: ["est toujours un dessert", "n'a aucun sens", "est un verbe"],
@@ -750,6 +882,72 @@ const VOC_POLYSEMIE: QcmItem[] = [
 
 const VOC_REEMPLOI: QcmItem[] = [
   {
+    text: "Quelle phrase emploie bien le mot 'timide' ?",
+    correct: "Le petit garçon timide n'osait pas parler.",
+    wrongs: ["Le timide roule sur la route.","Il boit un timide au petit-déjeuner.","Timide bleu la maison."],
+    methode: "Le mot doit avoir du sens dans la phrase.",
+  },
+  {
+    text: "Quelle phrase emploie bien le mot 'joyeux' ?",
+    correct: "Les enfants joyeux dansaient dans la cour.",
+    wrongs: ["Le joyeux est sur l'étagère.","Il mange un joyeux.","Joyeux vite la porte."],
+    methode: "On réemploie le mot correctement.",
+  },
+  {
+    text: "Quelle phrase emploie bien le mot 'immense' ?",
+    correct: "Le désert est immense.",
+    wrongs: ["Il court immense.","Un immense sur la table.","Immense le chat mange."],
+    methode: "L'adjectif accompagne un nom.",
+  },
+  {
+    text: "Quelle phrase emploie bien le mot 'prudemment' ?",
+    correct: "Elle traverse la rue prudemment.",
+    wrongs: ["Le prudemment est cassé.","Il mange un prudemment.","Prudemment rouge le mur."],
+    methode: "L'adverbe accompagne un verbe.",
+  },
+  {
+    text: "Quelle phrase emploie bien le mot 'délicieux' ?",
+    correct: "Ce gâteau est délicieux.",
+    wrongs: ["Il marche délicieux.","Un délicieux dans le tiroir.","Délicieux la voiture roule."],
+    methode: "L'adjectif qualifie un nom.",
+  },
+  {
+    text: "Quelle phrase emploie bien le mot 'silencieux' ?",
+    correct: "Le bébé dort dans un endroit silencieux.",
+    wrongs: ["Il boit un silencieux.","Le silencieux tombe de l'arbre.","Silencieux court le chien."],
+    methode: "Le mot doit être bien placé.",
+  },
+  {
+    text: "Quelle phrase emploie bien le mot 'courageusement' ?",
+    correct: "Le pompier est entré courageusement dans les flammes.",
+    wrongs: ["Le courageusement est bleu.","Il mange un courageusement.","Courageusement la table brille."],
+    methode: "L'adverbe accompagne le verbe.",
+  },
+  {
+    text: "Quelle phrase emploie bien le mot 'énorme' ?",
+    correct: "Un énorme camion bloque la route.",
+    wrongs: ["Il dort énorme.","Un énorme sur le banc.","Énorme mange la pomme."],
+    methode: "L'adjectif qualifie un nom.",
+  },
+  {
+    text: "Quelle phrase emploie bien le mot 'poli' ?",
+    correct: "Un enfant poli dit bonjour et merci.",
+    wrongs: ["Le poli roule vite.","Il boit un poli.","Poli la fenêtre est ouverte."],
+    methode: "Le mot doit avoir du sens.",
+  },
+  {
+    text: "Quelle phrase emploie bien le mot 'gourmand' ?",
+    correct: "Le chat gourmand a mangé tout le poisson.",
+    wrongs: ["Le gourmand est en bois.","Il écrit un gourmand.","Gourmand court la rivière."],
+    methode: "L'adjectif qualifie un nom.",
+  },
+  {
+    text: "Quelle phrase emploie bien le mot 'attentivement' ?",
+    correct: "Il écoute la maîtresse attentivement.",
+    wrongs: ["Le attentivement est cassé.","Il boit un attentivement.","Attentivement bleu le ciel."],
+    methode: "L'adverbe accompagne le verbe.",
+  },
+  {
     text: "Quelle phrase réemploie correctement le mot 'courageux' ?",
     correct: "Le pompier courageux a sauvé le chat.",
     wrongs: ["Le courageux de table est cassé.", "Il a mangé un courageux.", "Courageux vite à la maison."],
@@ -770,6 +968,73 @@ const VOC_REEMPLOI: QcmItem[] = [
 ];
 
 const VOC_ORTH: QcmItem[] = [
+  {
+    text: "Quelle est l'orthographe correcte ?",
+    correct: "femme",
+    wrongs: ["fame","famme","feme"],
+    methode: "On mémorise l'orthographe des mots fréquents.",
+  },
+  {
+    text: "Quelle est l'orthographe correcte ?",
+    correct: "pharmacie",
+    wrongs: ["farmacie","pharmassie","pharmacit"],
+    methode: "On mémorise l'orthographe des mots fréquents.",
+  },
+  {
+    text: "Quelle est l'orthographe correcte ?",
+    correct: "longtemps",
+    wrongs: ["longtan","lontemps","longtemp"],
+    methode: "On mémorise l'orthographe des mots fréquents.",
+  },
+  {
+    text: "Quelle est l'orthographe correcte ?",
+    correct: "maintenant",
+    wrongs: ["maintenent","mintenant","maintnant"],
+    methode: "On mémorise l'orthographe des mots fréquents.",
+  },
+  {
+    text: "Quelle est l'orthographe correcte ?",
+    correct: "monsieur",
+    wrongs: ["messieur","monssieur","monsieurt"],
+    methode: "On mémorise l'orthographe des mots fréquents.",
+  },
+  {
+    text: "Quelle est l'orthographe correcte ?",
+    correct: "automne",
+    wrongs: ["autonne","otomne","autaumne"],
+    methode: "On mémorise l'orthographe des mots fréquents.",
+  },
+  {
+    text: "Quelle est l'orthographe correcte ?",
+    correct: "difficile",
+    wrongs: ["dificile","difficille","dificille"],
+    methode: "On mémorise l'orthographe des mots fréquents.",
+  },
+  {
+    text: "Quelle est l'orthographe correcte ?",
+    correct: "aussi",
+    wrongs: ["ossi","aussit","auci"],
+    methode: "On mémorise l'orthographe des mots fréquents.",
+  },
+  {
+    text: "Quelle est l'orthographe correcte ?",
+    correct: "prochain",
+    wrongs: ["prochin","prochein","praucain"],
+    methode: "On mémorise l'orthographe des mots fréquents.",
+  },
+  {
+    text: "Quelle est l'orthographe correcte ?",
+    correct: "jamais",
+    wrongs: ["jamé","jammais","jamait"],
+    methode: "On mémorise l'orthographe des mots fréquents.",
+  },
+  {
+    text: "Quelle est l'orthographe correcte ?",
+    correct: "heureux",
+    wrongs: ["eureux","heureu","hureux"],
+    methode: "On mémorise l'orthographe des mots fréquents.",
+  },
+
   {
     text: "Quelle est l'orthographe correcte ?",
     correct: "aujourd'hui",
@@ -799,6 +1064,66 @@ const VOC_ORTH: QcmItem[] = [
 // ── GRAMMAIRE / ORTHOGRAPHE GRAMMATICALE ────────────────────────────────────
 
 const PHRASE_SIMPLE: QcmItem[] = [
+  {
+    text: "Quel est le type de la phrase 'Est-ce que tu viens ?' ?",
+    correct: "interrogative",
+    wrongs: ["déclarative","exclamative","impérative"],
+    methode: "Le point d'interrogation marque la question.",
+  },
+  {
+    text: "Combien de verbes conjugués dans 'Paul court et Léa saute' ?",
+    correct: "2",
+    wrongs: ["1","0","3"],
+    methode: "On compte les mots qui se conjuguent.",
+  },
+  {
+    text: "Quel signe termine une phrase qui pose une question ?",
+    correct: "le point d'interrogation",
+    wrongs: ["le point","la virgule","les deux points"],
+    methode: "Une question se termine par ?",
+  },
+  {
+    text: "Quel est le type de 'Ferme la porte, s'il te plaît.' ?",
+    correct: "impérative (un ordre)",
+    wrongs: ["interrogative","exclamative","déclarative"],
+    methode: "Une phrase qui donne un ordre est impérative.",
+  },
+  {
+    text: "À quoi sert une phrase déclarative ?",
+    correct: "à raconter ou donner une information",
+    wrongs: ["à poser une question","à donner un ordre","à montrer une forte émotion"],
+    methode: "La phrase déclarative informe.",
+  },
+  {
+    text: "Quelle phrase est correctement écrite ?",
+    correct: "Le train arrive à huit heures.",
+    wrongs: ["le train arrive à huit heures","Le train arrive à huit heures","le train arrive à huit heures."],
+    methode: "Majuscule au début, point à la fin.",
+  },
+  {
+    text: "Dans une phrase simple, il y a au minimum...",
+    correct: "un sujet et un verbe",
+    wrongs: ["deux verbes","trois adjectifs","aucun verbe"],
+    methode: "Le sujet et le verbe sont indispensables.",
+  },
+  {
+    text: "Quel est le type de 'Comme c'est beau !' ?",
+    correct: "exclamative",
+    wrongs: ["interrogative","déclarative","impérative"],
+    methode: "Le point d'exclamation marque l'émotion.",
+  },
+  {
+    text: "Quel groupe de mots n'est PAS une phrase (pas de sens complet) ?",
+    correct: "Dans la grande cour de",
+    wrongs: ["Le chat dort.","Il pleut.","Léa chante."],
+    methode: "Une phrase a un sens complet.",
+  },
+  {
+    text: "Une phrase commence toujours par...",
+    correct: "une majuscule",
+    wrongs: ["une virgule","un chiffre","un point"],
+    methode: "La majuscule ouvre la phrase.",
+  },
   {
     text: "Quelle phrase est une phrase simple (un seul verbe conjugué) ?",
     correct: "Le soleil brille.",
@@ -833,6 +1158,72 @@ const PHRASE_SIMPLE: QcmItem[] = [
 
 const SUJET_VERBE: QcmItem[] = [
   {
+    text: "Dans 'Le facteur apporte le courrier', quel est le sujet ?",
+    correct: "Le facteur",
+    wrongs: ["apporte","courrier","le"],
+    methode: "On pose la question 'qui apporte ?'.",
+  },
+  {
+    text: "Dans 'Les élèves écoutent la maîtresse', quel est le verbe conjugué ?",
+    correct: "écoutent",
+    wrongs: ["élèves","maîtresse","la"],
+    methode: "Le verbe exprime l'action.",
+  },
+  {
+    text: "Dans 'Chaque matin, le coq chante', quel est le sujet ?",
+    correct: "le coq",
+    wrongs: ["matin","chante","chaque"],
+    methode: "On pose 'qui chante ?'.",
+  },
+  {
+    text: "Dans 'Tu ranges ta chambre', quel est le sujet ?",
+    correct: "Tu",
+    wrongs: ["ranges","chambre","ta"],
+    methode: "Le sujet fait l'action.",
+  },
+  {
+    text: "Dans 'Dans le jardin poussent des tomates', quel est le sujet ?",
+    correct: "des tomates",
+    wrongs: ["le jardin","poussent","dans"],
+    methode: "Le sujet peut être après le verbe.",
+  },
+  {
+    text: "Dans 'Mes amis viennent ce soir', quel est le verbe conjugué ?",
+    correct: "viennent",
+    wrongs: ["amis","soir","mes"],
+    methode: "Le verbe change avec le temps.",
+  },
+  {
+    text: "Pour trouver le sujet, quelle question pose-t-on ?",
+    correct: "qui est-ce qui fait l'action ?",
+    wrongs: ["où ?","quand ?","combien ?"],
+    methode: "Le sujet répond à 'qui est-ce qui ?'.",
+  },
+  {
+    text: "Dans 'La pluie tombe sur la ville', quel est le sujet ?",
+    correct: "La pluie",
+    wrongs: ["tombe","ville","sur"],
+    methode: "On pose 'qu'est-ce qui tombe ?'.",
+  },
+  {
+    text: "Dans 'Vous chantez très bien', quel est le sujet ?",
+    correct: "Vous",
+    wrongs: ["chantez","bien","très"],
+    methode: "Le sujet commande le verbe.",
+  },
+  {
+    text: "Le verbe conjugué est le mot qui...",
+    correct: "change avec le temps et la personne",
+    wrongs: ["ne change jamais","donne une couleur","montre un lieu"],
+    methode: "Le verbe se conjugue.",
+  },
+  {
+    text: "Dans 'Le petit garçon et sa sœur jouent', quel est le sujet ?",
+    correct: "Le petit garçon et sa sœur",
+    wrongs: ["jouent","le garçon seulement","la sœur seulement"],
+    methode: "Deux personnes reliées par 'et' forment le sujet.",
+  },
+  {
     text: "Dans 'Les grands arbres bougent doucement', quel est le sujet ?",
     correct: "Les grands arbres",
     wrongs: ["bougent", "doucement", "grands"],
@@ -866,6 +1257,66 @@ const SUJET_VERBE: QcmItem[] = [
 
 const GN: QcmItem[] = [
   {
+    text: "Dans le groupe 'un grand bateau blanc', quel est le nom principal ?",
+    correct: "bateau",
+    wrongs: ["grand","blanc","un"],
+    methode: "Le nom est le mot central du groupe.",
+  },
+  {
+    text: "Quel est le déterminant dans 'mes nouvelles chaussures' ?",
+    correct: "mes",
+    wrongs: ["nouvelles","chaussures","neuves"],
+    methode: "Le déterminant précède et accompagne le nom.",
+  },
+  {
+    text: "Dans 'une voiture neuve', quel mot est un adjectif ?",
+    correct: "neuve",
+    wrongs: ["une","voiture","."],
+    methode: "L'adjectif donne une qualité du nom.",
+  },
+  {
+    text: "Dans 'le chien du voisin', quelle est l'expansion du nom ?",
+    correct: "du voisin",
+    wrongs: ["le","chien","."],
+    methode: "L'expansion précise le nom principal.",
+  },
+  {
+    text: "Quel mot commande l'accord dans le groupe nominal ?",
+    correct: "le nom",
+    wrongs: ["le verbe","l'adverbe","la préposition"],
+    methode: "Déterminant et adjectif s'accordent avec le nom.",
+  },
+  {
+    text: "Combien de mots dans le groupe 'des fleurs rouges' ?",
+    correct: "3",
+    wrongs: ["2","4","1"],
+    methode: "On compte : des / fleurs / rouges.",
+  },
+  {
+    text: "Quel est le nom noyau de 'ce vieux livre poussiéreux' ?",
+    correct: "livre",
+    wrongs: ["vieux","poussiéreux","ce"],
+    methode: "Le nom noyau est le mot central.",
+  },
+  {
+    text: "Un groupe nominal est organisé autour d'un...",
+    correct: "nom",
+    wrongs: ["verbe","adverbe","déterminant seul"],
+    methode: "Le nom est le coeur du groupe nominal.",
+  },
+  {
+    text: "Dans 'une jolie robe à fleurs', quelle est l'expansion du nom ?",
+    correct: "à fleurs",
+    wrongs: ["une","jolie","robe"],
+    methode: "L'expansion complète le nom 'robe'.",
+  },
+  {
+    text: "Quel mot est un déterminant ?",
+    correct: "cette",
+    wrongs: ["belle","maison","grande"],
+    methode: "Le déterminant accompagne le nom.",
+  },
+  {
     text: "Dans le groupe 'un petit chat noir', quel est le nom principal ?",
     correct: "chat",
     wrongs: ["petit", "noir", "un"],
@@ -898,6 +1349,72 @@ const GN: QcmItem[] = [
 ];
 
 const COMPLEMENTS: QcmItem[] = [
+  {
+    text: "Dans 'Hier, nous avons visité le musée', quel est le complément de temps ?",
+    correct: "Hier",
+    wrongs: ["le musée","nous","avons visité"],
+    methode: "Le complément de temps dit quand.",
+  },
+  {
+    text: "Dans 'Léo joue au ballon dans le parc', quel groupe dit où ?",
+    correct: "dans le parc",
+    wrongs: ["au ballon","Léo","joue"],
+    methode: "Le complément de lieu répond à 'où ?'.",
+  },
+  {
+    text: "Dans 'Elle mange une pomme', quel est le complément essentiel ?",
+    correct: "une pomme",
+    wrongs: ["Elle","mange","."],
+    methode: "Le complément essentiel ne se supprime pas.",
+  },
+  {
+    text: "Un complément circonstanciel de lieu répond à la question...",
+    correct: "où ?",
+    wrongs: ["quand ?","qui ?","pourquoi ?"],
+    methode: "Le lieu répond à 'où ?'.",
+  },
+  {
+    text: "Un complément circonstanciel de temps répond à la question...",
+    correct: "quand ?",
+    wrongs: ["où ?","comment ?","combien ?"],
+    methode: "Le temps répond à 'quand ?'.",
+  },
+  {
+    text: "Dans 'Le soir, le chat dort sur le canapé', quel est le complément de lieu ?",
+    correct: "sur le canapé",
+    wrongs: ["Le soir","le chat","dort"],
+    methode: "Le lieu répond à 'où ?'.",
+  },
+  {
+    text: "Quel complément peut être supprimé sans casser la phrase ?",
+    correct: "le complément circonstanciel",
+    wrongs: ["le sujet","le verbe","le complément essentiel"],
+    methode: "Les circonstanciels sont facultatifs.",
+  },
+  {
+    text: "Dans 'Il lit un livre à la bibliothèque', quel est le complément essentiel ?",
+    correct: "un livre",
+    wrongs: ["à la bibliothèque","Il","lit"],
+    methode: "Le complément essentiel complète le verbe.",
+  },
+  {
+    text: "Dans 'Elle a fini son dessin rapidement', quel mot dit comment ?",
+    correct: "rapidement",
+    wrongs: ["son dessin","elle","a fini"],
+    methode: "Le complément de manière répond à 'comment ?'.",
+  },
+  {
+    text: "Le complément essentiel complète surtout...",
+    correct: "le verbe",
+    wrongs: ["l'adjectif","le déterminant","la virgule"],
+    methode: "L'essentiel dépend du verbe.",
+  },
+  {
+    text: "Dans 'Nous partons demain en voyage', quel mot dit quand ?",
+    correct: "demain",
+    wrongs: ["en voyage","Nous","partons"],
+    methode: "Le complément de temps répond à 'quand ?'.",
+  },
   {
     text: "Dans 'Le matin, Tom lit un livre', quel est le complément circonstanciel de temps ?",
     correct: "Le matin",
@@ -1041,6 +1558,72 @@ const HOMOPHONES: QcmItem[] = [
 
 const CONJ_PASSE_COMPOSE: QcmItem[] = [
   {
+    text: "Quel auxiliaire complète : 'Nous ___ mangé une pomme.' ?",
+    correct: "avons",
+    wrongs: ["sommes","avez","ont"],
+    methode: "Le passé composé avec avoir : 'nous avons'.",
+  },
+  {
+    text: "Quel auxiliaire complète : 'Ils ___ partis en vacances.' ?",
+    correct: "sont",
+    wrongs: ["ont","est","avons"],
+    methode: "Le verbe 'partir' se conjugue avec être.",
+  },
+  {
+    text: "Quelle phrase est au passé composé ?",
+    correct: "J'ai fini mes devoirs.",
+    wrongs: ["Je finis mes devoirs.","Je finirai mes devoirs.","Je finissais mes devoirs."],
+    methode: "Passé composé = auxiliaire + participe passé.",
+  },
+  {
+    text: "Comment se forme le passé composé ?",
+    correct: "un auxiliaire (être ou avoir) + le participe passé",
+    wrongs: ["un seul verbe au présent","deux noms","un adjectif"],
+    methode: "Il faut un auxiliaire et un participe passé.",
+  },
+  {
+    text: "Quel auxiliaire complète : 'Il ___ arrivé en retard.' ?",
+    correct: "est",
+    wrongs: ["a","ont","avez"],
+    methode: "Le verbe 'arriver' se conjugue avec être.",
+  },
+  {
+    text: "Complète : 'Tu ___ regardé un film.'",
+    correct: "as",
+    wrongs: ["es","a","ont"],
+    methode: "Avec 'tu' et l'auxiliaire avoir : 'tu as'.",
+  },
+  {
+    text: "Quel est le participe passé du verbe 'manger' ?",
+    correct: "mangé",
+    wrongs: ["manger","mangeait","mange"],
+    methode: "Le participe passé des verbes en -er finit par -é.",
+  },
+  {
+    text: "Quel est le participe passé du verbe 'prendre' ?",
+    correct: "pris",
+    wrongs: ["prendre","prenait","prend"],
+    methode: "Certains participes passés sont irréguliers.",
+  },
+  {
+    text: "Avec l'auxiliaire être, le participe passé s'accorde avec...",
+    correct: "le sujet",
+    wrongs: ["le complément","l'adverbe","rien"],
+    methode: "Avec être, on accorde avec le sujet.",
+  },
+  {
+    text: "Quelle phrase est correcte au passé composé ?",
+    correct: "Elles sont arrivées à l'heure.",
+    wrongs: ["Elles sont arrivé à l'heure.","Elles ont arrivées à l'heure.","Elles est arrivées à l'heure."],
+    methode: "Avec être, le participe s'accorde avec le sujet.",
+  },
+  {
+    text: "Complète : 'Vous ___ chanté une chanson.'",
+    correct: "avez",
+    wrongs: ["êtes","avons","ont"],
+    methode: "Avec 'vous' et l'auxiliaire avoir : 'vous avez'.",
+  },
+  {
     text: "Quel auxiliaire complète : 'Elle ___ tombée dans l'escalier.' ?",
     correct: "est",
     wrongs: ["a", "ont", "avait"],
@@ -1073,6 +1656,72 @@ const CONJ_PASSE_COMPOSE: QcmItem[] = [
 ];
 
 const CONJ_VALEUR_TEMPS: QcmItem[] = [
+  {
+    text: "'Demain, je ___ à la piscine.' Quelle forme convient ?",
+    correct: "irai (futur)",
+    wrongs: ["suis allé","allais","vais hier"],
+    methode: "'Demain' annonce le futur.",
+  },
+  {
+    text: "'Hier, il ___ très beau.' Quelle forme convient ?",
+    correct: "faisait (passé)",
+    wrongs: ["fera","fait demain","fasse"],
+    methode: "'Hier' annonce le passé.",
+  },
+  {
+    text: "Quel mot indique le futur ?",
+    correct: "demain",
+    wrongs: ["hier","autrefois","la semaine dernière"],
+    methode: "'Demain' place l'action dans le futur.",
+  },
+  {
+    text: "Quel mot indique le passé ?",
+    correct: "autrefois",
+    wrongs: ["demain","bientôt","dans une heure"],
+    methode: "'Autrefois' place l'action dans le passé.",
+  },
+  {
+    text: "'En ce moment, elle ___ un livre.' Quelle forme convient ?",
+    correct: "lit (présent)",
+    wrongs: ["lira","lisait","a lu hier"],
+    methode: "'En ce moment' annonce le présent.",
+  },
+  {
+    text: "Pour raconter une action passée qui dure, on utilise souvent...",
+    correct: "l'imparfait",
+    wrongs: ["le futur","le présent","l'infinitif"],
+    methode: "L'imparfait décrit le passé qui dure.",
+  },
+  {
+    text: "'La semaine prochaine, nous ___ en voyage.' Quelle forme convient ?",
+    correct: "partirons (futur)",
+    wrongs: ["sommes partis","partions","partons hier"],
+    methode: "'La semaine prochaine' annonce le futur.",
+  },
+  {
+    text: "Quel temps utilise-t-on pour ce qui se passe maintenant ?",
+    correct: "le présent",
+    wrongs: ["le futur","l'imparfait","le passé composé"],
+    methode: "Le présent dit ce qui se passe maintenant.",
+  },
+  {
+    text: "'Quand j'étais petit, je ___ souvent au parc.' Quelle forme convient ?",
+    correct: "allais (imparfait)",
+    wrongs: ["irai","vais","suis allé une fois"],
+    methode: "L'imparfait raconte une habitude du passé.",
+  },
+  {
+    text: "'Tout à l'heure, elle ___ ses devoirs (c'est fini).' Quelle forme convient ?",
+    correct: "a fait (passé composé)",
+    wrongs: ["fera","fait","faisait toujours"],
+    methode: "Le passé composé dit une action finie.",
+  },
+  {
+    text: "Le mot 'bientôt' annonce une action...",
+    correct: "au futur",
+    wrongs: ["au passé","déjà finie","d'hier"],
+    methode: "'Bientôt' place l'action dans le futur.",
+  },
   {
     text: "Dans 'Demain, nous partirons', quel temps est utilisé ?",
     correct: "le futur",
