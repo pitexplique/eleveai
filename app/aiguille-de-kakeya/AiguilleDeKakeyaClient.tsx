@@ -611,6 +611,28 @@ export default function AiguilleDeKakeyaClient() {
           </p>
         </div>
 
+        {/* ── LA QUESTION CENTRALE (Frédéric, 27/07) ── */}
+        <div className="mt-5 rounded border p-4 text-[13.5px] leading-6" style={{ borderColor: BORD, backgroundColor: "#ffffffcc" }}>
+          <p className="text-[11px] font-black uppercase tracking-[0.18em]" style={{ color: OR }}>
+            La question centrale — peut-on tourner sans être vu ?
+          </p>
+          <p className="mt-2">
+            <b>Presque.</b> Ce qui fond vers 0, c&apos;est la <b>trace</b> — la surface repeinte par le
+            passage de l&apos;aiguille. Avec assez de ruses, le demi-tour repeint moins qu&apos;un timbre,
+            moins qu&apos;un grain de poussière&nbsp;: il devient presque invisible… à l&apos;aire.
+          </p>
+          <p className="mt-2">
+            <b>Mais jamais tout à fait.</b> L&apos;aire approche 0 sans jamais l&apos;atteindre — et plus la
+            trace est fine, plus le mouvement zigzague follement. La discrétion se paie en contorsions.
+          </p>
+          <p className="mt-2">
+            <b>Et c&apos;est là qu&apos;elle intervient.</b> Même «&nbsp;invisible à l&apos;aire&nbsp;»,
+            l&apos;objet ne disparaît pas&nbsp;: sa dimension reste pleine — c&apos;est le théorème de Hong
+            Wang. <b>On peut se cacher de l&apos;aire. Pas de la dimension.</b> Ce qu&apos;on ne voit pas
+            sous un angle se révèle quand on change de regard.
+          </p>
+        </div>
+
         {/* ── SON TABLEAU, DÉCODÉ ── */}
         <div className="mt-5 rounded border p-4 text-[13.5px] leading-6" style={{ borderColor: BORD, backgroundColor: "#ffffffcc" }}>
           <p className="text-[11px] font-black uppercase tracking-[0.18em]" style={{ color: OR }}>
