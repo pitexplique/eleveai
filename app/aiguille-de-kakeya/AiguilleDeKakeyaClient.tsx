@@ -662,11 +662,12 @@ export default function AiguilleDeKakeyaClient() {
               derrière chaque élève aussi.
             </li>
             <li>
-              ⚖️ <b>Femmes, hommes&nbsp;: aucune différence.</b> Elle est la <b>troisième femme</b> médaillée
+              ⚖️ <b>Femmes, hommes&nbsp;: un epsilon.</b> Elle est la <b>troisième femme</b> médaillée
               Fields en 90 ans (après Maryam Mirzakhani en 2014 et Maryna Viazovska en 2022), et la première
-              mathématicienne chinoise. Dans l&apos;interview, elle dit <b>ne faire aucune différence entre les
-              femmes et les hommes</b> en mathématiques&nbsp;: les problèmes sont difficiles pour tout le monde,
-              et le travail est le même pour tout le monde.
+              mathématicienne chinoise. Dans l&apos;interview, elle balaie la question&nbsp;: homme ou femme,
+              en mathématiques, <b>ce n&apos;est qu&apos;un epsilon</b> — une quantité négligeable. Les
+              variables qui font vraiment avancer une démonstration sont ailleurs&nbsp;: le travail, le temps,
+              et les professeurs qu&apos;on a eus.
             </li>
             <li>
               ⏳ <b>Le temps long.</b> Elle parle de «&nbsp;problèmes difficiles&nbsp;» qui l&apos;ont occupée{" "}

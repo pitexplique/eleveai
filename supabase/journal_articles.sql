@@ -146,7 +146,7 @@ where not exists (
 insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url, lien, cta)
 select 'un-peu-de-maths', -2,
    'La dimension du volcan : la rugosité se mesure',
-   'Pose une grille sur le rempart de la Fournaise et compte les carrés que la crête traverse. Affine : une ligne lisse fait ×2, le rempart fait ×2,4 — et ce multiplicateur cache un nombre, la dimension fractale d ≈ 1,25. La rugosité du volcan en un seul nombre, avec l''idée qui a valu à Hong Wang sa médaille Fields.',
+   'La médaille Fields de Hong Wang récompense une idée : la dimension — le nombre qui dit à quel point une forme remplit l''espace. Et la dimension, ça se mesure : pose une grille sur le rempart de la Fournaise, compte les carrés que la crête traverse, affine. Une ligne lisse fait ×2 (d = 1) ; le rempart fait ×2,4 → d ≈ 1,25. La rugosité du volcan, en un seul nombre.',
    '/images/dimension-volcan.svg',
    '/dimension-du-volcan',
    '📏 Mesure le rempart →'

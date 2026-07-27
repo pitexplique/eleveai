@@ -110,7 +110,8 @@ def compter_cases(pts, s):
 TEXTES = {
     "fr": {
         "titre": "L'aiguille de Hong Wang",
-        "question": "Combien de place pour faire demi-tour ?",
+        "question0": "Peut-on faire demi-tour sans être vu ?",
+        "question": "Combien de place, au minimum ?",
         "regle": "1 aiguille = 1 unité — on mesure l'aire balayée",
         "m1": "1 · Autour du bout",
         "m1_aire": "aire = π/2 ≈ 1,57",
@@ -123,11 +124,14 @@ TEXTES = {
         "ech_0": "1,57", "ech_1": "0,79", "ech_2": "0,39", "ech_fin": "… 0 ?",
         "besico": "On peut approcher 0 d'aussi près qu'on veut",
         "besico_sub": "(Besicovitch, 1928)",
-        "mentir": "L'aire peut donc mentir…",
+        "mentir": "La trace devient presque invisible : l'aire peut mentir…",
         "mentir2": "Pour dire qu'un objet reste « épais », il faut mieux : la dimension.",
         "thm0": "un objet qui contient une aiguille dans toutes les directions",
         "thm": "Le théorème de Hong Wang, avec Joshua Zahl (2025) :",
         "thm2": "en 3D, un tel objet est forcément de dimension 3.",
+        "banniere": "Piton de la Fournaise - Hong Wang - Médaille Fields 2026 (avec défis)",
+        "rugo1": "La dimension, c'est la rugosité d'une forme.",
+        "rugo2": "Et ici, la forme la plus déchiquetée… c'est le rempart de la Fournaise.",
         "volcan_titre": "Et le volcan ? La dimension se mesure",
         "volcan_sous": "le rempart de la Fournaise — on compte les carrés que la crête traverse",
         "carres_mot": "carrés",
@@ -136,17 +140,21 @@ TEXTES = {
         "defi_titre": "DÉFI",
         "defi_q": "À chaque affinement : ×2,4 environ. Après 197 carrés, la grille suivante en trouverait combien ?",
         "defi_sub": "Vérifie ta réponse sur le site — défis du CP à la Terminale",
+        "lecon1": "Ce qu'on ne voit pas sous un angle se révèle quand on change de regard.",
+        "lecon2": "On peut se cacher de l'aire. Pas de la dimension.",
         "appel2": "…puis mesure la dimension du volcan",
         "honneur_nom": "Hong Wang · 王虹",
         "honneur_1": "Médaille Fields 2026 — 3ᵉ femme de l'histoire",
         "honneur_2": "Son prénom, Hong, veut dire « arc-en-ciel »",
-        "honneur_3": "En recevant sa médaille, elle a remercié ses professeurs.",
+        "honneur_3": "Homme ou femme ? En maths, dit-elle, ce n'est qu'un epsilon.",
+        "honneur_4": "Les vraies variables : le travail, le temps… et les professeurs, qu'elle a remerciés.",
         "appel": "Fais tourner l'aiguille toi-même",
         "lien": "eleveai.fr/aiguille-de-kakeya",
     },
     "en": {
         "titre": "Hong Wang's needle",
-        "question": "How little room does a U-turn need?",
+        "question0": "Can you turn around without being seen?",
+        "question": "How little room does it need?",
         "regle": "1 needle = 1 unit — we measure the swept area",
         "m1": "1 · Around the tip",
         "m1_aire": "area = π/2 ≈ 1.57",
@@ -159,11 +167,14 @@ TEXTES = {
         "ech_0": "1.57", "ech_1": "0.79", "ech_2": "0.39", "ech_fin": "… 0 ?",
         "besico": "You can get as close to 0 as you like",
         "besico_sub": "(Besicovitch, 1928)",
-        "mentir": "So area can lie…",
+        "mentir": "The trace becomes almost invisible: area can lie…",
         "mentir2": "To say an object stays “thick”, you need better: dimension.",
         "thm0": "an object holding a needle in every direction",
         "thm": "Hong Wang's theorem, with Joshua Zahl (2025):",
         "thm2": "in 3D, such an object must have dimension 3.",
+        "banniere": "Piton de la Fournaise - Hong Wang - 2026 Fields Medal (with challenges)",
+        "rugo1": "Dimension measures how rough a shape is.",
+        "rugo2": "And here, the most jagged shape of all… is the Fournaise rampart.",
         "volcan_titre": "And the volcano? Dimension can be measured",
         "volcan_sous": "the Fournaise rampart — count the squares the ridge crosses",
         "carres_mot": "squares",
@@ -172,11 +183,14 @@ TEXTES = {
         "defi_titre": "CHALLENGE",
         "defi_q": "Each refinement: about ×2.4. After 197 squares, how many would the next grid find?",
         "defi_sub": "Check your answer on the site — challenges for all ages",
+        "lecon1": "What one angle cannot show, another way of looking reveals.",
+        "lecon2": "You can hide from area. Not from dimension.",
         "appel2": "…then measure the volcano's dimension",
         "honneur_nom": "Hong Wang · 王虹",
         "honneur_1": "2026 Fields Medal — 3rd woman in its history",
         "honneur_2": "Her first name, Hong, means “rainbow”",
-        "honneur_3": "Receiving her medal, she thanked her teachers.",
+        "honneur_3": "Man or woman? In maths, she says, it's just an epsilon.",
+        "honneur_4": "The real variables: work, time… and the teachers she thanked.",
         "appel": "Spin the needle yourself",
         "lien": "eleveai.fr/aiguille-de-kakeya",
     },
@@ -241,7 +255,13 @@ class AiguilleDeKakeya(Scene):
 
     # ── OUVERTURE : la question ────────────────────────────────────────────────
     def ecran_intro(self):
-        titre = self.T(self.t_("titre"), size=46, color=JAUNE_TITRE).to_edge(UP, buff=0.4)
+        # Le bandeau-titre PERMANENT (Frédéric, 27/07 : « toujours à l'honneur,
+        # la médaille Fields, Hong Wang ») : présent dès la PREMIÈRE image et
+        # jusqu'au bout — fondu_total() l'épargne.
+        self.banniere = self.T(self.t_("banniere"), size=18, color=GREY_B).to_edge(UP, buff=0.12)
+        self.play(FadeIn(self.banniere, shift=0.2 * DOWN), run_time=0.5)
+
+        titre = self.T(self.t_("titre"), size=46, color=JAUNE_TITRE).to_edge(UP, buff=0.75)
         self.play(Write(titre))
 
         aiguille = Line(LEFT * NL / 2, RIGHT * NL / 2, color=AIGUILLE,
@@ -250,16 +270,19 @@ class AiguilleDeKakeya(Scene):
         self.play(Rotate(aiguille, angle=0.35, run_time=0.5),
                   rate_func=there_and_back)
 
-        q = self.T(self.t_("question"), size=36, color=WHITE).move_to([0, -1.5, 0])
-        self.play(self.anim_entree(q, mode="grow"))
+        q0 = self.T(self.t_("question0"), size=36, color=WHITE).move_to([0, -1.3, 0])
+        self.play(self.anim_entree(q0, mode="grow"))
+        self.wait(1.2)
+        q = self.T(self.t_("question"), size=30, color=AIGUILLE).move_to([0, -2.15, 0])
+        self.play(self.anim_entree(q, mode="fade_up"))
         regle = self.T(self.t_("regle"), size=20, color=GREY_B).to_edge(DOWN, buff=0.28)
         self.play(FadeIn(regle))
         self.wait(2.0)
-        self.play(FadeOut(aiguille), FadeOut(q), FadeOut(regle), FadeOut(titre))
+        self.play(FadeOut(aiguille), FadeOut(q0), FadeOut(q), FadeOut(regle), FadeOut(titre))
 
     # ── MÉTHODE 1 : autour du bout (demi-disque, π/2) ──────────────────────────
     def methode_bout(self):
-        label = self.T(self.t_("m1"), size=32, color=WHITE).to_edge(UP, buff=0.5)
+        label = self.T(self.t_("m1"), size=32, color=WHITE).to_edge(UP, buff=0.62)
         self.play(self.anim_entree(label, mode="slide_l"))
 
         pivot = np.array([0.0, -0.9, 0.0])
@@ -282,7 +305,7 @@ class AiguilleDeKakeya(Scene):
 
     # ── MÉTHODE 2 : autour du centre (disque, π/4) ─────────────────────────────
     def methode_centre(self):
-        label = self.T(self.t_("m2"), size=32, color=WHITE).to_edge(UP, buff=0.5)
+        label = self.T(self.t_("m2"), size=32, color=WHITE).to_edge(UP, buff=0.62)
         self.play(self.anim_entree(label, mode="slide_l"))
 
         centre = np.array([0.0, 0.1, 0.0])
@@ -312,7 +335,7 @@ class AiguilleDeKakeya(Scene):
 
     # ── MÉTHODE 3 : le deltoïde (π/8) ──────────────────────────────────────────
     def methode_deltoide(self):
-        label = self.T(self.t_("m3"), size=32, color=WHITE).to_edge(UP, buff=0.5)
+        label = self.T(self.t_("m3"), size=32, color=WHITE).to_edge(UP, buff=0.62)
         self.play(self.anim_entree(label, mode="slide_l"))
 
         centre = np.array([0.0, 0.35, 0.0])
@@ -346,6 +369,11 @@ class AiguilleDeKakeya(Scene):
         self.play(FadeOut(cordes), FadeOut(aig), FadeOut(contour),
                   FadeOut(aire), FadeOut(lecon), FadeOut(label))
 
+    # — tout effacer SAUF le bandeau-titre permanent —
+    def fondu_total(self):
+        garder = getattr(self, "banniere", None)
+        self.play(*[FadeOut(m) for m in self.mobjects if m is not garder], run_time=0.5)
+
     # — décimales à la française (ou pas) —
     def fmt1(self, v):
         s = f"{v:.1f}"
@@ -369,7 +397,7 @@ class AiguilleDeKakeya(Scene):
         self.play(self.anim_entree(m1, mode="fade_up"))
         self.play(self.anim_entree(m2, mode="fade_up"))
         self.wait(2.2)
-        self.play(*[FadeOut(m) for m in self.mobjects], run_time=0.5)
+        self.fondu_total()
 
     # ── SA SOLUTION : le théorème de dimension — et son OBJET ──────────────────
     def ecran_theoreme(self):
@@ -394,11 +422,20 @@ class AiguilleDeKakeya(Scene):
         self.play(self.anim_entree(w1, mode="fade_up"))
         self.play(self.anim_entree(w2, mode="grow"))
         self.wait(2.6)
-        self.play(*[FadeOut(m) for m in self.mobjects], run_time=0.5)
+        self.fondu_total()
 
     # ── LE VOLCAN : la dimension se mesure (box-counting) ──────────────────────
     def ecran_volcan(self):
-        titre = self.T(self.t_("volcan_titre"), size=34, color=JAUNE_TITRE).to_edge(UP, buff=0.35)
+        # Le chaînon topographique : POURQUOI le volcan ? Parce que la dimension
+        # mesure la rugosité — et que le relief d'ici est le plus déchiqueté.
+        r1 = self.T(self.t_("rugo1"), size=30, color=WHITE).move_to([0, 0.75, 0])
+        r2 = self.T(self.t_("rugo2"), size=27, color=JAUNE_TITRE).next_to(r1, DOWN, buff=0.3)
+        self.play(self.anim_entree(r1, mode="fade_up"))
+        self.play(self.anim_entree(r2, mode="fade_up"))
+        self.wait(2.3)
+        self.play(FadeOut(r1), FadeOut(r2), run_time=0.4)
+
+        titre = self.T(self.t_("volcan_titre"), size=34, color=JAUNE_TITRE).to_edge(UP, buff=0.58)
         sous = self.T(self.t_("volcan_sous"), size=21, color=GREY_B).next_to(titre, DOWN, buff=0.12)
         self.play(Write(titre), FadeIn(sous))
 
@@ -464,7 +501,7 @@ class AiguilleDeKakeya(Scene):
         self.play(self.anim_entree(dtxt, mode="grow"))
         self.play(self.anim_entree(meme, mode="fade_up"))
         self.wait(2.6)
-        self.play(*[FadeOut(m) for m in self.mobjects], run_time=0.5)
+        self.fondu_total()
 
     # ── LE DÉFI (rappel actif : la réponse n'est JAMAIS à l'écran) ─────────────
     def ecran_defi(self):
@@ -476,27 +513,40 @@ class AiguilleDeKakeya(Scene):
         self.wait(2.6)
         self.play(FadeIn(sub, shift=0.2 * UP))
         self.wait(2.2)
-        self.play(*[FadeOut(m) for m in self.mobjects], run_time=0.5)
+        self.fondu_total()
+
+    # ── LA LEÇON (la question centrale, tranchée avec Frédéric le 27/07) ───────
+    def ecran_lecon(self):
+        l1 = self.T(self.t_("lecon1"), size=30, color=WHITE).move_to([0, 0.8, 0])
+        l2 = self.T(self.t_("lecon2"), size=34, color=JAUNE_TITRE).move_to([0, -0.5, 0])
+        self.play(self.anim_entree(l1, mode="fade_up"))
+        self.wait(1.4)
+        self.play(self.anim_entree(l2, mode="grow"))
+        self.wait(2.6)
+        self.fondu_total()
 
     # ── L'HONNEUR + L'APPEL ────────────────────────────────────────────────────
     def ecran_honneur(self):
         # L'HONNEUR — le prénom, la 3ᵉ femme, le merci aux profs
         self.add_mascotte(scale=0.6)
-        nom = self.T(self.t_("honneur_nom"), size=44, color=JAUNE_TITRE).move_to([0, 2.0, 0])
-        h1 = self.T(self.t_("honneur_1"), size=30, color=WHITE).move_to([0, 1.0, 0])
-        h2 = self.T(self.t_("honneur_2"), size=26, color=ENCRE).move_to([0, 0.25, 0])
-        h3 = self.T(self.t_("honneur_3"), size=26, color=VERT_OK).move_to([0, -0.5, 0])
+        nom = self.T(self.t_("honneur_nom"), size=44, color=JAUNE_TITRE).move_to([0, 2.15, 0])
+        h1 = self.T(self.t_("honneur_1"), size=28, color=WHITE).move_to([0, 1.3, 0])
+        h2 = self.T(self.t_("honneur_2"), size=24, color=ENCRE).move_to([0, 0.6, 0])
+        h3 = self.T(self.t_("honneur_3"), size=26, color=VERT_OK).move_to([0, -0.15, 0])
+        h4 = self.T(self.t_("honneur_4"), size=23, color=WHITE).move_to([0, -0.85, 0])
         self.play(self.anim_entree(nom, mode="grow"))
         self.play(self.anim_entree(h1, mode="fade_up"))
-        self.wait(1.2)
+        self.wait(1.1)
         self.play(self.anim_entree(h2, mode="fade_up"))
-        self.wait(1.2)
+        self.wait(1.1)
         self.play(self.anim_entree(h3, mode="fade_up"))
+        self.wait(1.6)
+        self.play(self.anim_entree(h4, mode="fade_up"))
         self.wait(2.2)
 
-        appel = self.T(self.t_("appel"), size=30, color=AIGUILLE).move_to([0, -1.55, 0])
-        lien = self.T(self.t_("lien"), size=24, color=BLEU_CALCUL).next_to(appel, DOWN, buff=0.2)
-        appel2 = self.T(self.t_("appel2"), size=20, color=GREY_B).next_to(lien, DOWN, buff=0.16)
+        appel = self.T(self.t_("appel"), size=27, color=AIGUILLE).move_to([0, -1.9, 0])
+        lien = self.T(self.t_("lien"), size=22, color=BLEU_CALCUL).next_to(appel, DOWN, buff=0.18)
+        appel2 = self.T(self.t_("appel2"), size=18, color=GREY_B).next_to(lien, DOWN, buff=0.14)
         self.play(self.anim_entree(appel, mode="pop"))
         self.play(FadeIn(lien, shift=0.2 * UP))
         self.play(FadeIn(appel2, shift=0.2 * UP))
@@ -513,6 +563,7 @@ class AiguilleDeKakeya(Scene):
         self.ecran_theoreme()
         self.ecran_volcan()
         self.ecran_defi()
+        self.ecran_lecon()
         self.ecran_honneur()
 
 
