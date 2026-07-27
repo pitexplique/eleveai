@@ -1760,6 +1760,20 @@ function conjugaisonQuestion(microId: string): Generated {
   // Present / imparfait / futur / infinitif : moteur parametrique (centaines de
   // variantes). Passe compose et valeur des temps : pools rediges (notions plus
   // conceptuelles, peu mecaniques).
+  // 6e (identifier / composer / employer) : la conjugaison n'est pas decoupee par
+  // temps -> on fait TOURNER les temps existants pour couvrir tout le programme.
+  if (
+    microId.includes("identifier") ||
+    microId.includes("composer") ||
+    microId.includes("employer")
+  ) {
+    const r = Math.random();
+    if (r < 0.2) return fromConjItem(generateConjugationItem("present"));
+    if (r < 0.4) return fromConjItem(generateConjugationItem("imparfait"));
+    if (r < 0.6) return fromConjItem(generateConjugationItem("futur"));
+    if (r < 0.8) return qcm(CONJ_PASSE_COMPOSE);
+    return qcm(CONJ_VALEUR_TEMPS);
+  }
   if (microId.includes("imparfait")) return fromConjItem(generateConjugationItem("imparfait"));
   if (microId.includes("futur")) return fromConjItem(generateConjugationItem("futur"));
   if (microId.includes("passe_compose")) return qcm(CONJ_PASSE_COMPOSE);
@@ -1770,6 +1784,23 @@ function conjugaisonQuestion(microId: string): Generated {
 }
 
 function grammaireQuestion(microId: string): Generated {
+  // 6e (constituants / fonctions / accords / oral_ecrit) : les micros college ne
+  // portent pas les memes libelles que cm1/cm2 -> on route vers les pools et
+  // moteurs EXISTANTS les plus proches (aucun nouveau pool).
+  if (microId.includes("constituants")) {
+    return Math.random() < 0.5 ? qcm(PHRASE_SIMPLE) : qcm(GN);
+  }
+  if (microId.includes("fonctions")) {
+    return Math.random() < 0.5 ? qcm(SUJET_VERBE) : qcm(COMPLEMENTS);
+  }
+  if (microId.includes("accords")) {
+    return Math.random() < 0.5
+      ? fromConjItem(generateAgreementItem())
+      : fromConjItem(generateSubjectVerbItem());
+  }
+  if (microId.includes("oral_ecrit")) {
+    return Math.random() < 0.5 ? fromConjItem(generateHomophoneItem()) : qcm(HOMOPHONES);
+  }
   // Homophones : moteur parametrique (familles a/à, est/et, ces/ses, la/là,
   // mes/mais) une fois sur deux, sinon pool redige (couvre aussi on/ont,
   // son/sont, ou/où). Accord du GN : moteur parametrique (des milliers de GN).
@@ -1788,6 +1819,16 @@ function grammaireQuestion(microId: string): Generated {
 }
 
 function vocabulaireQuestion(microId: string): Generated {
+  // 6e : "relations" (synonymie/antonymie/champ lexical/famille) et "formation"
+  // (prefixes/suffixes/familles) -> pools existants VOC_SYN_ANT / VOC_FAMILLE.
+  if (microId.includes("relations")) {
+    return Math.random() < 0.5
+      ? fromConjItem(generateVocabularyItem(Math.random() < 0.5 ? "syn" : "ant"))
+      : qcm(VOC_SYN_ANT);
+  }
+  if (microId.includes("formation")) {
+    return Math.random() < 0.5 ? fromConjItem(generateVocabularyItem("famille")) : qcm(VOC_FAMILLE);
+  }
   // Familles et synonymes/antonymes : moteur parametrique (listes de mots) une
   // fois sur deux, sinon pool redige. Contexte/polysemie/orthographe/reemploi
   // restent rediges (difficiles a parametrer correctement).
@@ -1814,6 +1855,11 @@ function questionForNotion(notionId: string, microId: string): Generated {
   if (notionId.includes("vocabulaire")) return vocabulaireQuestion(microId);
   if (notionId.includes("conjugaison")) return conjugaisonQuestion(microId);
   if (notionId.includes("grammaire")) return grammaireQuestion(microId);
+  // 6e : "culture_litteraire" (genres, personnages, morale, carnet) -> pool OEUVRE
+  // (deja on-topic). "lecture_voix_haute" tombe sur le defaut LECTURE : aucun pool
+  // existant ne couvre la mise en voix -> c'est la couche "fixed" (ecrite main,
+  // fusionnee au coach) qui la porte.
+  if (notionId.includes("culture")) return qcm(OEUVRE);
   return qcm(LECTURE);
 }
 
