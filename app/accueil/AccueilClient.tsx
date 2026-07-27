@@ -1031,11 +1031,6 @@ export default function AccueilPage({
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
           <a href="#honneur" className="hover:text-cyan-800">À l&apos;honneur</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          {/* Mis « à l'honneur » dans le chemin de fer (demande de Frédéric,
-              26/07) : en ambre pour ressortir, accessible d'un clic depuis le
-              haut de page. */}
-          <a href="#faire-un-don" className="text-amber-700 hover:text-amber-600">💛 Faire un don</a>
-          <span aria-hidden className="text-[#1d1c16]/30">·</span>
           <a href="#les-grands" className="hover:text-cyan-800">Parents & profs</a>
         </nav>
 
@@ -2076,34 +2071,6 @@ export default function AccueilPage({
               EleveAI a besoin de vous →
             </Link>
           </p>
-        </div>
-      </section>
-
-      {/* ══ FAIRE UN DON — soutien libre au projet, placé après « à l'honneur »
-          (le socle humain qui fait le journal) : on célèbre ceux qui le font,
-          puis on ouvre la porte à qui veut le soutenir. Style « encart » du
-          journal (pas le bleu de /faire-un-don) ; transparence des coûts sur la
-          page dédiée (demande de Frédéric, 26/07). ═════════════════════════ */}
-      <section id="faire-un-don" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
-        <div className="border-2 border-[#1d1c16] bg-amber-50 p-5 text-center shadow-[4px_4px_0_0_#1d1c16] sm:p-6">
-          <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1d1c16]">
-            💛 Participez à l&apos;aventure
-          </p>
-          <h3 className="mt-2 font-serif text-2xl font-black">
-            Faire un don pour une éducation libre et gratuite
-          </h3>
-          <p className="mx-auto mt-2 max-w-2xl text-sm font-medium leading-6 text-[#1d1c16]/75">
-            EleveAI est gratuit pour l&apos;élève, et le restera. Faire tourner
-            la machine coûte ≈&nbsp;128&nbsp;€/mois — on l&apos;affiche, sans rien
-            cacher. Chaque euro garde le coach allumé&nbsp;; demain, il fera
-            vivre du travail à La Réunion.
-          </p>
-          <Link
-            href="/faire-un-don"
-            className="mt-3 inline-flex items-center gap-2 rounded-sm bg-[#1d1c16] px-5 py-2.5 text-sm font-black text-[#f6f1e4] transition hover:bg-cyan-800"
-          >
-            Faire un don →
-          </Link>
         </div>
       </section>
 

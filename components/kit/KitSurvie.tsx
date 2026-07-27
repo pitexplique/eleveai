@@ -10,7 +10,6 @@ import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import MarkdownMath from "@/components/MarkdownMath";
 import CaptureApresTelechargement from "@/components/cahier/CaptureApresTelechargement";
-import EncartDon from "@/components/EncartDon";
 import type { KitData, KitNotion } from "./types";
 
 const LETTRES = ["A", "B", "C", "D", "E", "F"];
@@ -320,11 +319,6 @@ export default function KitSurvie({ data }: { data: KitData }) {
             🧠 S&apos;entraîner en {data.classeLabel}
           </Link>
         </div>
-
-        {/* L'encart « Participez à l'aventure » — 2 QR (coach · journal) + don Wero
-            pour laisser le choix. S'imprime avec le guide (numéro Wero + QR
-            conservés ; les boutons d'action sont masqués au print). */}
-        <EncartDon coachUrl={coachQrUrl} className="mx-auto mt-8 max-w-3xl" />
       </div>
 
       {/* Capture APRÈS la valeur (modale sur afterprint, aucun mur) */}

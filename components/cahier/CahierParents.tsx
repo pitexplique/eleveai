@@ -20,7 +20,6 @@ import {
 import { QRCodeSVG } from "qrcode.react";
 import type { CahierParentsConfig, CahierParentsData, JourParent } from "./parents-types";
 import CaptureApresTelechargement from "./CaptureApresTelechargement";
-import EncartDon from "@/components/EncartDon";
 
 /* URL d'inscription encodée dans le QR de la couverture. ?from=cahier = tracking. */
 const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cahier";
@@ -434,12 +433,6 @@ export default function CahierParents({
           </footer>
         </section>
       </article>
-
-      {/* Encart « Participez à l'aventure » — 2 QR (coach · journal) + don Wero pour
-          laisser le choix, sans pression. */}
-      <div className="mx-auto max-w-4xl px-5 pb-8 sm:px-6">
-        <EncartDon />
-      </div>
 
       {/* Bouton imprimer flottant */}
       <div className="screen-only fixed bottom-5 right-5 hidden sm:block">
