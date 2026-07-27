@@ -1,13 +1,13 @@
-// Notions de francais pour la classe de CM2.
-// Reference : programme officiel du cycle 3,
-// BO n. 16 du 17 avril 2025, application progressive au CM2.
+// Notions de français pour la classe de CM2.
+// Référence : programme officiel du cycle 3,
+// BO n° 16 du 17 avril 2025, application progressive au CM2.
 
 import type { NotionSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
 export const notions: NotionSource[] = [
   {
     id: "fluence_lecture",
-    label: "Lire avec fluidite et expressivite",
+    label: "Lire avec fluidité et expressivité",
     boId: "BOCM2FL1",
     prerequis: [],
     levels: [1, 2, 3],
@@ -21,21 +21,21 @@ export const notions: NotionSource[] = [
   },
   {
     id: "lecture_oeuvres",
-    label: "Lire une oeuvre et construire une culture litteraire",
+    label: "Lire une œuvre et construire une culture littéraire",
     boId: "BOCM2FL1",
     prerequis: ["comprehension_textes_documents"],
     levels: [1, 2, 3],
   },
   {
     id: "ecriture",
-    label: "Produire, organiser et reviser des ecrits",
+    label: "Produire, organiser et réviser des écrits",
     boId: "BOCM2FE1",
     prerequis: [],
     levels: [1, 2, 3],
   },
   {
     id: "oral",
-    label: "Ecouter, presenter et argumenter",
+    label: "Écouter, présenter et argumenter",
     boId: "BOCM2FO1",
     prerequis: [],
     levels: [1, 2, 3],
@@ -56,7 +56,7 @@ export const notions: NotionSource[] = [
   },
   {
     id: "phrase_complexe",
-    label: "Se reperer dans la phrase complexe",
+    label: "Se repérer dans la phrase complexe",
     boId: "BOCM2FG1",
     prerequis: ["grammaire_orthographe"],
     levels: [2, 3],

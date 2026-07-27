@@ -1,0 +1,605 @@
+// ─── Couche « fixed » imprimable · Français CM2 ──────────────────────────────
+// Le builder cycle 3 (buildCycle3FrancaisBank) ne produit QUE des items
+// kind:"template" (générés à la volée, QCM/short, sans figure) → testDeSurvie
+// (qui ne garde que les "fixed" sans canvas/audio) serait VIDE sur toutes les
+// notions. Cette couche ajoute donc des QCM FIXES imprimables, ≥5 par notion,
+// couvrant min(5, nb micros) micros distincts, difficulté 1→3.
+//
+// Items LEVÉS/ADAPTÉS des pools statiques du builder (LECTURE, DOCUMENT, OEUVRE,
+// ECRITURE, ORAL, VOC_*, PHRASE_SIMPLE, SUJET_VERBE, GN, ACCORD_GN,
+// ACCORD_SUJET_VERBE, HOMOPHONES, CONJ_*) puis VÉRIFIÉS À LA MAIN (orthographe,
+// accords, une seule bonne réponse). Les items de conjugaison
+// présent/imparfait/futur/infinitif sont écrits à la main (le builder les
+// produit en paramétrique, sans pool statique). ⚠️ La notion phrase_complexe
+// n'est PAS routée par le builder (questionForNotion tombe sur LECTURE par
+// défaut) → ses items sont écrits À LA MAIN (propositions, coordination,
+// pronoms relatifs qui/que/où, phrase simple vs complexe).
+//
+// Pitch un cran AU-DESSUS du CM1 (fin de primaire) et items DISTINCTS du CM1.
+//
+// Fusionnés dans francaisCm2QuestionBank (index.ts) → enrichissent AUSSI le
+// coach ; importés BRUTS dans le data.ts du guide de survie.
+
+import type { TutorBankItemFixedV4 } from "@/lib/tutor-v4/types";
+
+// Fabrique un QCM fixe (comparateur mcq_exact). `choices` est un ordre FIGÉ
+// (pas de shuffle à l'exécution) : la bonne réponse est placée à des positions
+// variées d'un item à l'autre pour éviter tout « toujours A ».
+function qcm(
+  id: string,
+  notionId: string,
+  microId: string,
+  difficulty: 1 | 2 | 3,
+  text: string,
+  choices: string[],
+  correct: string,
+  explanation: string
+): TutorBankItemFixedV4 {
+  return {
+    kind: "fixed",
+    id,
+    niveau: "cm2",
+    matiere: "francais",
+    notionId,
+    microId,
+    difficulty,
+    theme: "neutral",
+    text,
+    format: "qcm",
+    choices,
+    expected: [correct],
+    comparator: "mcq_exact",
+    explanation,
+    tags: ["cm2", notionId, microId, "francais", "fixed", "guide"],
+  };
+}
+
+export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
+  // ── 1. Fluence et lecture à voix haute ─────────────────────────────────────
+  qcm(
+    "cm2_fr_fixed_fluence_1",
+    "fluence_lecture",
+    "cm2_flue_unites_syntaxiques",
+    1,
+    "Pour lire à voix haute « Quand la nuit tomba, les villageois rentrèrent chez eux », où fais-tu une petite pause ?",
+    ["après « tomba », à la virgule", "entre « la » et « nuit »", "au milieu du mot « villageois »", "on ne fait jamais de pause"],
+    "après « tomba », à la virgule",
+    "La virgule marque la fin d'un groupe de sens : on y fait une petite pause, jamais à l'intérieur d'un mot."
+  ),
+  qcm(
+    "cm2_fr_fixed_fluence_2",
+    "fluence_lecture",
+    "cm2_flue_texte_long",
+    2,
+    "Lis : « Depuis le phare, Lucas voyait la tempête approcher. Les vagues grossissaient et le vent hurlait de plus en plus fort. » Que va-t-il probablement se passer ?",
+    ["la mer va se calmer aussitôt", "la tempête va arriver sur la côte", "le soleil va se lever", "Lucas va se baigner"],
+    "la tempête va arriver sur la côte",
+    "Les vagues qui grossissent et le vent qui hurle annoncent l'arrivée de la tempête."
+  ),
+  qcm(
+    "cm2_fr_fixed_fluence_3",
+    "fluence_lecture",
+    "cm2_flue_120_mots",
+    2,
+    "Lire « autour de 120 mots par minute », cela veut dire...",
+    ["lire le plus vite possible sans comprendre", "lire un seul mot chaque minute", "lire à un bon rythme, sans se presser ni traîner", "lire seulement 120 mots en tout"],
+    "lire à un bon rythme, sans se presser ni traîner",
+    "Un bon rythme de lecture reste fluide et permet de comprendre : ni trop vite, ni trop lentement."
+  ),
+  qcm(
+    "cm2_fr_fixed_fluence_4",
+    "fluence_lecture",
+    "cm2_flue_mise_en_voix",
+    3,
+    "Pour mettre en voix « — Au secours ! Le feu ! » cria le pompier, il faut lire cette phrase...",
+    ["d'une voix douce et lente", "en chuchotant", "sans aucune expression", "avec une voix forte et pressée"],
+    "avec une voix forte et pressée",
+    "Les points d'exclamation et le verbe « cria » demandent une voix forte et rapide, qui montre l'urgence."
+  ),
+  qcm(
+    "cm2_fr_fixed_fluence_5",
+    "fluence_lecture",
+    "cm2_flue_plaisir_lire",
+    3,
+    "Pour lire une histoire à des plus jeunes et leur donner envie d'écouter, le mieux est de...",
+    ["lire très vite pour finir vite", "mettre le ton et respecter les pauses", "lire tout bas", "sauter les passages difficiles"],
+    "mettre le ton et respecter les pauses",
+    "Lire avec expression et faire des pauses rend l'histoire vivante et agréable à écouter."
+  ),
+
+  // ── 2. Comprendre textes et documents complexes ────────────────────────────
+  qcm(
+    "cm2_fr_fixed_comp_1",
+    "comprehension_textes_documents",
+    "cm2_comp_autonomie",
+    1,
+    "Quand tu ne comprends pas un passage en lisant seul, le mieux est de...",
+    ["relire le passage lentement", "sauter tout le reste du texte", "fermer le livre", "changer d'histoire"],
+    "relire le passage lentement",
+    "Relire calmement un passage difficile aide à le comprendre sans abandonner la lecture."
+  ),
+  qcm(
+    "cm2_fr_fixed_comp_2",
+    "comprehension_textes_documents",
+    "cm2_comp_essentiel",
+    1,
+    "Restituer l'essentiel d'un texte, c'est...",
+    ["recopier tout le texte", "apprendre par cœur la première phrase", "inventer une autre histoire", "dire les idées principales en peu de mots"],
+    "dire les idées principales en peu de mots",
+    "L'essentiel, ce sont les idées les plus importantes, redites brièvement."
+  ),
+  qcm(
+    "cm2_fr_fixed_comp_3",
+    "comprehension_textes_documents",
+    "cm2_comp_implicite",
+    2,
+    "Lis : « Kévin sortit de l'eau, rangea ses lunettes dans son sac et remit son maillot trempé. » Que vient de faire Kévin ?",
+    ["il a fait du vélo", "il a nagé", "il a dormi", "il a mangé"],
+    "il a nagé",
+    "Les lunettes, le maillot trempé et l'eau sont des indices : Kévin a nagé (information implicite)."
+  ),
+  qcm(
+    "cm2_fr_fixed_comp_4",
+    "comprehension_textes_documents",
+    "cm2_comp_genres",
+    2,
+    "Un texte écrit en vers, avec des rimes et des strophes, est...",
+    ["un article de journal", "une recette", "un poème", "un mode d'emploi"],
+    "un poème",
+    "Les vers, les rimes et les strophes sont les marques du poème."
+  ),
+  qcm(
+    "cm2_fr_fixed_comp_5",
+    "comprehension_textes_documents",
+    "cm2_doc_composite",
+    2,
+    "Dans un documentaire, à quoi sert surtout un schéma légendé ?",
+    ["à raconter une histoire drôle", "à donner la fin d'un roman", "à montrer et expliquer par l'image", "à remplacer le titre"],
+    "à montrer et expliquer par l'image",
+    "Un schéma avec sa légende explique par le dessin ce que le texte dit avec des mots."
+  ),
+  qcm(
+    "cm2_fr_fixed_comp_6",
+    "comprehension_textes_documents",
+    "cm2_doc_croiser_infos",
+    3,
+    "Une affiche dit que le musée ouvre à 9 h ; une autre qu'il est fermé le mardi. Peux-tu le visiter mardi à 10 h ?",
+    ["oui, dès 9 h", "oui, mais seulement à 10 h", "oui, tous les jours", "non, il est fermé le mardi"],
+    "non, il est fermé le mardi",
+    "On croise les deux informations : même ouvert à 9 h, le musée est fermé le mardi."
+  ),
+
+  // ── 3. Lire une œuvre et construire une culture littéraire ─────────────────
+  qcm(
+    "cm2_fr_fixed_oeuvre_1",
+    "lecture_oeuvres",
+    "cm2_oeuvre_theme",
+    1,
+    "Le sujet principal dont parle une histoire (l'amitié, le courage, la peur...) s'appelle...",
+    ["le thème", "le titre", "la couverture", "l'éditeur"],
+    "le thème",
+    "Le thème est le grand sujet traité par l'œuvre."
+  ),
+  qcm(
+    "cm2_fr_fixed_oeuvre_2",
+    "lecture_oeuvres",
+    "cm2_oeuvre_experience",
+    2,
+    "Relier une lecture à son expérience, c'est...",
+    ["compter les pages du livre", "penser à un moment de sa vie qui ressemble à l'histoire", "copier le résumé au dos", "chercher l'âge de l'auteur"],
+    "penser à un moment de sa vie qui ressemble à l'histoire",
+    "On relie l'histoire à ce qu'on a soi-même vécu ou ressenti."
+  ),
+  qcm(
+    "cm2_fr_fixed_oeuvre_3",
+    "lecture_oeuvres",
+    "cm2_oeuvre_reference",
+    2,
+    "« Cette histoire de renard rusé me fait penser au Roman de Renart. » Que fait le lecteur ?",
+    ["il invente une suite", "il corrige des fautes", "il relie l'œuvre à une autre qu'il connaît", "il compte les personnages"],
+    "il relie l'œuvre à une autre qu'il connaît",
+    "Relier une œuvre à une autre référence culturelle enrichit la lecture."
+  ),
+  qcm(
+    "cm2_fr_fixed_oeuvre_4",
+    "lecture_oeuvres",
+    "cm2_oeuvre_choix",
+    2,
+    "Pour bien choisir un livre à lire, une bonne raison est de dire :",
+    ["« Je le choisis parce que le sujet m'intéresse. »", "« Je le prends au hasard. »", "« Je le choisis parce qu'il est lourd. »", "« Je ne sais pas pourquoi. »"],
+    "« Je le choisis parce que le sujet m'intéresse. »",
+    "Choisir une œuvre, c'est pouvoir justifier son choix par une vraie raison."
+  ),
+  qcm(
+    "cm2_fr_fixed_oeuvre_5",
+    "lecture_oeuvres",
+    "cm2_oeuvre_carnet",
+    3,
+    "Pour tenir un carnet de lecture bien organisé, on note pour chaque livre...",
+    ["seulement la couleur de la couverture", "le prix et le poids", "le titre, l'auteur et son avis", "rien du tout"],
+    "le titre, l'auteur et son avis",
+    "Un carnet organisé garde le titre, l'auteur et ce qu'on a pensé de chaque lecture."
+  ),
+
+  // ── 4. Produire, organiser et réviser des écrits ───────────────────────────
+  qcm(
+    "cm2_fr_fixed_ecrit_1",
+    "ecriture",
+    "cm2_ecrit_copie",
+    1,
+    "Pour copier vite et sans erreur un texte long, le mieux est de...",
+    ["mémoriser un groupe de mots puis l'écrire", "copier une lettre à la fois en relevant les yeux à chaque lettre", "copier sans jamais relire", "inventer les mots difficiles"],
+    "mémoriser un groupe de mots puis l'écrire",
+    "Copier par groupes de mots va plus vite et évite les erreurs."
+  ),
+  qcm(
+    "cm2_fr_fixed_ecrit_2",
+    "ecriture",
+    "cm2_ecrit_plan",
+    1,
+    "Avant d'écrire un texte, faire un plan, c'est...",
+    ["ranger ses idées dans l'ordre", "choisir la couleur du stylo", "compter les lignes", "dessiner la marge"],
+    "ranger ses idées dans l'ordre",
+    "Le plan sert à organiser ses idées avant de rédiger."
+  ),
+  qcm(
+    "cm2_fr_fixed_ecrit_3",
+    "ecriture",
+    "cm2_ecrit_notes",
+    2,
+    "Prendre des notes pour retenir une leçon, c'est écrire...",
+    ["chaque phrase entière deux fois", "les mots importants, en abrégé", "seulement la date", "rien, on retient tout de tête"],
+    "les mots importants, en abrégé",
+    "De bonnes notes gardent l'essentiel avec peu de mots."
+  ),
+  qcm(
+    "cm2_fr_fixed_ecrit_4",
+    "ecriture",
+    "cm2_ecrit_paragraphe",
+    2,
+    "Quand on change d'idée dans un texte, on...",
+    ["écrit tout d'un seul bloc", "va à la ligne pour commencer un nouveau paragraphe", "met plusieurs points d'affilée", "efface la phrase précédente"],
+    "va à la ligne pour commencer un nouveau paragraphe",
+    "Chaque nouvelle idée mérite un nouveau paragraphe, en allant à la ligne."
+  ),
+  qcm(
+    "cm2_fr_fixed_ecrit_5",
+    "ecriture",
+    "cm2_ecrit_varie",
+    2,
+    "Pour écrire un dialogue entre deux personnages, on utilise surtout...",
+    ["des chiffres", "des tirets et des guillemets", "des titres", "une seule très longue phrase"],
+    "des tirets et des guillemets",
+    "Le dialogue se marque par des tirets et des guillemets qui montrent qui parle."
+  ),
+  qcm(
+    "cm2_fr_fixed_ecrit_6",
+    "ecriture",
+    "cm2_ecrit_reviser",
+    3,
+    "Pour enrichir la phrase « Le chien court. », on peut écrire...",
+    ["Chien court.", "Le grand chien noir court dans le jardin.", "Le chien.", "Court le chien court."],
+    "Le grand chien noir court dans le jardin.",
+    "Enrichir un texte, c'est ajouter des précisions (adjectifs, compléments) tout en gardant une phrase correcte."
+  ),
+
+  // ── 5. Écouter, présenter et argumenter ────────────────────────────────────
+  qcm(
+    "cm2_fr_fixed_oral_1",
+    "oral",
+    "cm2_oral_ecouter",
+    1,
+    "Écouter un exposé pour en retenir l'idée principale, c'est...",
+    ["repérer ce dont on parle le plus", "compter les mots prononcés", "regarder ailleurs", "penser à autre chose"],
+    "repérer ce dont on parle le plus",
+    "Écouter pour comprendre, c'est retenir le sujet principal et quelques détails."
+  ),
+  qcm(
+    "cm2_fr_fixed_oral_2",
+    "oral",
+    "cm2_oral_reformuler",
+    2,
+    "Synthétiser ce qu'un camarade vient de dire, c'est...",
+    ["répéter chaque mot exactement", "le redire en plus court, avec l'essentiel", "ajouter une nouvelle histoire", "dire le contraire"],
+    "le redire en plus court, avec l'essentiel",
+    "Synthétiser, c'est reformuler brièvement en gardant l'idée importante."
+  ),
+  qcm(
+    "cm2_fr_fixed_oral_3",
+    "oral",
+    "cm2_oral_presenter",
+    2,
+    "Pour présenter un exposé sur les volcans, il vaut mieux employer...",
+    ["des mots vagues comme « le truc », « la chose »", "des mots précis comme « lave », « cratère », « éruption »", "aucun mot difficile", "seulement des gestes"],
+    "des mots précis comme « lave », « cratère », « éruption »",
+    "Un exposé clair emploie le vocabulaire précis du sujet."
+  ),
+  qcm(
+    "cm2_fr_fixed_oral_4",
+    "oral",
+    "cm2_oral_argumenter",
+    2,
+    "Pour appuyer ton avis « Ce livre est drôle », tu ajoutes...",
+    ["un exemple : « la scène du gâteau m'a fait rire »", "seulement « parce que »", "rien de plus", "« c'est comme ça »"],
+    "un exemple : « la scène du gâteau m'a fait rire »",
+    "Un bon argument s'appuie sur une preuve ou un exemple précis."
+  ),
+  qcm(
+    "cm2_fr_fixed_oral_5",
+    "oral",
+    "cm2_oral_debat",
+    3,
+    "Dans un débat réglé, quand on n'est pas d'accord, on...",
+    ["coupe la parole pour crier plus fort", "se moque de l'autre", "attend son tour et explique poliment son désaccord", "quitte la salle"],
+    "attend son tour et explique poliment son désaccord",
+    "Un débat réglé demande d'écouter, d'attendre son tour et de justifier son avis avec respect."
+  ),
+
+  // ── 6. Vocabulaire, nuances et orthographe lexicale ────────────────────────
+  qcm(
+    "cm2_fr_fixed_voc_1",
+    "vocabulaire",
+    "cm2_voc_orthographe",
+    1,
+    "Quelle est l'orthographe correcte ?",
+    ["exercisse", "exersice", "exercice", "exercicce"],
+    "exercice",
+    "On mémorise l'orthographe des mots fréquents : « exercice », avec un « c » puis un « c » qui se prononce [s]."
+  ),
+  qcm(
+    "cm2_fr_fixed_voc_2",
+    "vocabulaire",
+    "cm2_voc_contexte",
+    2,
+    "Dans « La vieille cabane était vétuste et menaçait de s'écrouler », vétuste veut dire...",
+    ["neuf et solide", "vieux et abîmé", "propre et rangé", "grand et clair"],
+    "vieux et abîmé",
+    "Le contexte « menaçait de s'écrouler » montre que vétuste veut dire vieux et abîmé."
+  ),
+  qcm(
+    "cm2_fr_fixed_voc_3",
+    "vocabulaire",
+    "cm2_voc_famille_prefixe_suffixe",
+    2,
+    "Avec le préfixe « in- », que veut dire « invisible » ?",
+    ["qu'on voit très bien", "qu'on ne peut pas voir", "qu'on voit deux fois", "qu'on voit la nuit"],
+    "qu'on ne peut pas voir",
+    "Le préfixe « in- » exprime le contraire : invisible = qu'on ne peut pas voir."
+  ),
+  qcm(
+    "cm2_fr_fixed_voc_4",
+    "vocabulaire",
+    "cm2_voc_polysemie",
+    2,
+    "Quelle phrase utilise « opération » au sens des mathématiques ?",
+    ["Le chirurgien a réussi l'opération.", "L'addition est une opération.", "L'opération de police a duré une heure.", "Le magasin lance une opération commerciale."],
+    "L'addition est une opération.",
+    "Le mot « opération » a plusieurs sens ; ici, « addition » montre le sens mathématique."
+  ),
+  qcm(
+    "cm2_fr_fixed_voc_5",
+    "vocabulaire",
+    "cm2_voc_reemploi",
+    2,
+    "Quelle phrase emploie correctement le mot « généreux » ?",
+    ["Un homme généreux partage ce qu'il a.", "Le généreux est posé sur la table.", "Il court généreux le matin.", "Généreux bleu la maison."],
+    "Un homme généreux partage ce qu'il a.",
+    "On réemploie un mot dans une phrase où il a du sens : « généreux » qualifie une personne qui donne."
+  ),
+  qcm(
+    "cm2_fr_fixed_voc_6",
+    "vocabulaire",
+    "cm2_voc_nuance",
+    3,
+    "Pour dire qu'on a très peur, quel mot est le plus fort ?",
+    ["inquiet", "surpris", "terrifié", "gêné"],
+    "terrifié",
+    "« Terrifié » marque une peur très intense, plus forte que « inquiet »."
+  ),
+
+  // ── 7. Phrase, groupes, accords et homophones ──────────────────────────────
+  qcm(
+    "cm2_fr_fixed_gram_1",
+    "grammaire_orthographe",
+    "cm2_gram_phrase_simple",
+    1,
+    "Combien de verbes conjugués contient une phrase simple ?",
+    ["un seul", "deux", "trois", "aucun"],
+    "un seul",
+    "Une phrase simple est construite autour d'un seul verbe conjugué."
+  ),
+  qcm(
+    "cm2_fr_fixed_gram_2",
+    "grammaire_orthographe",
+    "cm2_gram_sujet_verbe",
+    1,
+    "Dans « Chaque matin, les coqs du village chantent », quel est le verbe conjugué ?",
+    ["matin", "coqs", "chantent", "village"],
+    "chantent",
+    "Le verbe conjugué est le mot qui change avec le temps : « chantent »."
+  ),
+  qcm(
+    "cm2_fr_fixed_gram_3",
+    "grammaire_orthographe",
+    "cm2_gram_complements",
+    2,
+    "Dans « Le soir, Léa lit un roman », quel groupe peut être supprimé sans casser la phrase ?",
+    ["un roman", "Léa", "Le soir", "lit"],
+    "Le soir",
+    "« Le soir » est un complément circonstanciel : on peut le supprimer, la phrase reste correcte."
+  ),
+  qcm(
+    "cm2_fr_fixed_gram_4",
+    "grammaire_orthographe",
+    "cm2_gram_gn",
+    2,
+    "Dans « une tarte aux pommes toute chaude », quelles sont les expansions du nom « tarte » ?",
+    ["« une » seulement", "« aux pommes » et « toute chaude »", "« tarte » seulement", "il n'y en a pas"],
+    "« aux pommes » et « toute chaude »",
+    "Les expansions précisent le nom noyau « tarte » : « aux pommes » et « toute chaude »."
+  ),
+  qcm(
+    "cm2_fr_fixed_gram_5",
+    "grammaire_orthographe",
+    "cm2_orth_accord_gn",
+    2,
+    "Quel groupe nominal est correctement accordé ?",
+    ["de grande fenêtres ouvertes", "de grandes fenêtres ouvertes", "de grandes fenêtre ouverte", "de grandes fenêtres ouvert"],
+    "de grandes fenêtres ouvertes",
+    "Tout le groupe s'accorde au féminin pluriel : « grandes », « fenêtres » et « ouvertes »."
+  ),
+  qcm(
+    "cm2_fr_fixed_gram_6",
+    "grammaire_orthographe",
+    "cm2_orth_sujet_verbe",
+    3,
+    "Choisis la forme correcte : « Les élèves de la classe ___ à la cantine. »",
+    ["mange", "manges", "mangent", "mangeons"],
+    "mangent",
+    "Le sujet est « les élèves » (pluriel), même s'il est suivi de « de la classe » : le verbe prend « -ent »."
+  ),
+  qcm(
+    "cm2_fr_fixed_gram_7",
+    "grammaire_orthographe",
+    "cm2_orth_homophones",
+    3,
+    "Homophones « a » / « à » : choisis la phrase correcte.",
+    ["Papa à rangé la voiture a sa place.", "Papa a rangé la voiture à sa place.", "Papa à rangé la voiture à sa place.", "Papa a rangé la voiture a sa place."],
+    "Papa a rangé la voiture à sa place.",
+    "« a » est le verbe avoir (on peut dire « avait ») ; « à » est un petit mot invariable qui indique le lieu."
+  ),
+
+  // ── 8. Se repérer dans la phrase complexe (écrit à la main) ────────────────
+  qcm(
+    "cm2_fr_fixed_complexe_1",
+    "phrase_complexe",
+    "cm2_complexe_propositions",
+    1,
+    "Combien de verbes conjugués dans « Quand la cloche sonne, les élèves rentrent en classe » ?",
+    ["1", "2", "0", "3"],
+    "2",
+    "« sonne » et « rentrent » sont deux verbes conjugués : la phrase est complexe (deux propositions)."
+  ),
+  qcm(
+    "cm2_fr_fixed_complexe_2",
+    "phrase_complexe",
+    "cm2_complexe_coordination",
+    1,
+    "Quelle phrase est une phrase simple (un seul verbe conjugué) ?",
+    ["Le soleil brille et les enfants jouent.", "Le soleil brille sur la plage.", "Quand il pleut, je reste à la maison.", "Il lit un livre puis il dort."],
+    "Le soleil brille sur la plage.",
+    "« Le soleil brille sur la plage. » n'a qu'un verbe conjugué (« brille ») : c'est une phrase simple."
+  ),
+  qcm(
+    "cm2_fr_fixed_complexe_3",
+    "phrase_complexe",
+    "cm2_complexe_coordination",
+    2,
+    "Dans « Il pleut mais nous sortons quand même », quel petit mot relie les deux propositions ?",
+    ["il", "pleut", "mais", "quand même"],
+    "mais",
+    "« mais » est un mot de liaison (coordination) qui relie les deux propositions."
+  ),
+  qcm(
+    "cm2_fr_fixed_complexe_4",
+    "phrase_complexe",
+    "cm2_complexe_pronom_relatif",
+    2,
+    "Complète : « La fille ___ chante est ma cousine. »",
+    ["que", "qui", "où", "quand"],
+    "qui",
+    "« qui » relie la précision au nom « fille » et fait l'action de chanter : c'est le sujet du verbe."
+  ),
+  qcm(
+    "cm2_fr_fixed_complexe_5",
+    "phrase_complexe",
+    "cm2_complexe_pronom_relatif",
+    2,
+    "Dans « Voici le livre que j'ai adoré », le mot « que » sert à...",
+    ["poser une question", "relier une précision au mot « livre »", "donner un ordre", "compter les livres"],
+    "relier une précision au mot « livre »",
+    "« que » est un pronom relatif : il relie la proposition « j'ai adoré » au nom « livre »."
+  ),
+  qcm(
+    "cm2_fr_fixed_complexe_6",
+    "phrase_complexe",
+    "cm2_complexe_propositions",
+    3,
+    "Dans « Je mets un manteau parce qu'il fait froid », quelle partie donne la cause ?",
+    ["Je mets un manteau", "un manteau", "parce qu'il fait froid", "il"],
+    "parce qu'il fait froid",
+    "« parce qu'il fait froid » est la proposition qui explique la cause, introduite par « parce que »."
+  ),
+
+  // ── 9. Conjugaison et valeur des temps (écrit à la main) ───────────────────
+  qcm(
+    "cm2_fr_fixed_conj_1",
+    "conjugaison",
+    "cm2_conj_infinitif_groupe",
+    1,
+    "Quel est l'infinitif du verbe dans « Nous finissons notre travail » ?",
+    ["finissons", "finir", "fini", "finira"],
+    "finir",
+    "L'infinitif est la forme non conjuguée : « finir » (verbe du 2e groupe, en -ir)."
+  ),
+  qcm(
+    "cm2_fr_fixed_conj_2",
+    "conjugaison",
+    "cm2_conj_present",
+    2,
+    "Choisis la forme correcte au présent : « Nous ___ nos devoirs. »",
+    ["faisons", "faisez", "faison", "faires"],
+    "faisons",
+    "Le verbe faire est irrégulier : au présent avec « nous », on écrit « nous faisons »."
+  ),
+  qcm(
+    "cm2_fr_fixed_conj_3",
+    "conjugaison",
+    "cm2_conj_imparfait",
+    2,
+    "Choisis la forme correcte à l'imparfait : « Nous ___ dans le jardin. »",
+    ["jouons", "jouions", "joueons", "jouyons"],
+    "jouions",
+    "À l'imparfait, avec « nous », le verbe jouer se termine par « -ions » : nous jouions."
+  ),
+  qcm(
+    "cm2_fr_fixed_conj_4",
+    "conjugaison",
+    "cm2_conj_futur",
+    2,
+    "Choisis la forme correcte au futur : « Demain, tu ___ tes clés. »",
+    ["prendra", "prendras", "prends", "prendrras"],
+    "prendras",
+    "Au futur, avec « tu », le verbe prendre devient « prendras » : demain, tu prendras."
+  ),
+  qcm(
+    "cm2_fr_fixed_conj_5",
+    "conjugaison",
+    "cm2_conj_passe_compose",
+    2,
+    "Choisis la forme correcte au passé composé : « Elles ___ à la maison. » (verbe rentrer)",
+    ["sont rentré", "sont rentrées", "ont rentrées", "sont rentrer"],
+    "sont rentrées",
+    "Avec l'auxiliaire être, le participe passé s'accorde avec le sujet : « elles sont rentrées »."
+  ),
+  qcm(
+    "cm2_fr_fixed_conj_6",
+    "conjugaison",
+    "cm2_conj_passe_simple_intro",
+    3,
+    "Dans « Le loup entra dans la bergerie », à quel temps est le verbe « entra » ?",
+    ["au présent", "au futur", "au passé simple", "à l'imparfait"],
+    "au passé simple",
+    "« entra » est une forme du passé simple, le temps du récit pour une action passée et brève."
+  ),
+  qcm(
+    "cm2_fr_fixed_conj_7",
+    "conjugaison",
+    "cm2_conj_valeur_temps",
+    3,
+    "Dans « Il lisait tranquillement quand la porte claqua », quel verbe raconte l'action soudaine ?",
+    ["lisait", "claqua", "tranquillement", "porte"],
+    "claqua",
+    "L'imparfait « lisait » pose le décor ; le passé simple « claqua » marque l'action soudaine."
+  ),
+];
