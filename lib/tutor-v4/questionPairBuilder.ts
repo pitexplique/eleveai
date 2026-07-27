@@ -31,7 +31,29 @@ import type {
   TutorQuestionPair,
 } from "@/lib/tutor-v4/types";
 
-function materializeBankItem(item: TutorBankItemV4): {
+// Empreinte de CONTENU (texte + choix triés) : sert à ne pas reservir la même
+// question générée, même quand le gabarit varie à chaque tirage. On l'encode
+// dans l'id généré (`__fp<hash>__`) pour qu'elle voyage dans recentQuestionIds
+// sans toucher au moteur ni au type de session.
+function hashString(s: string): string {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+  return h.toString(36);
+}
+function contentFingerprint(text: string, choices?: string[]): string {
+  const c = choices ? [...choices].sort().join("~") : "";
+  return hashString(`${text}||${c}`);
+}
+const FP_MARKER = /__fp([0-9a-z]+)__/;
+function extractFingerprint(id: string): string | null {
+  const m = id.match(FP_MARKER);
+  return m ? m[1] : null;
+}
+
+function materializeBankItem(
+  item: TutorBankItemV4,
+  avoidFingerprints?: Set<string>
+): {
   id: string;
   notionId: string;
   microId: string;
@@ -66,8 +88,18 @@ function materializeBankItem(item: TutorBankItemV4): {
     };
   }
 
-  const generated = item.generate();
-  const generatedId = `${item.id}_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
+  // Anti-répétition de CONTENU : on retire jusqu'à 10 tirages pour éviter de
+  // reservir une question vue récemment (les gabarits n'ont pas de mémoire du
+  // contenu qu'ils génèrent). Petit pool → on garde le dernier tirage.
+  let generated = item.generate();
+  let fp = contentFingerprint(generated.text, generated.choices);
+  if (avoidFingerprints && avoidFingerprints.size > 0) {
+    for (let k = 0; k < 10 && avoidFingerprints.has(fp); k++) {
+      generated = item.generate();
+      fp = contentFingerprint(generated.text, generated.choices);
+    }
+  }
+  const generatedId = `${item.id}__fp${fp}__${Date.now()}_${Math.floor(Math.random() * 10000)}`;
 
   return {
     id: generatedId,
@@ -152,8 +184,11 @@ function inferFamilyId(item: TutorBankItemV4): string {
   return `${item.microId}_fixed`;
 }
 
-function toTutorQuestionOption(item: TutorBankItemV4): TutorQuestionOption {
-  const q = materializeBankItem(item);
+function toTutorQuestionOption(
+  item: TutorBankItemV4,
+  avoidFingerprints?: Set<string>
+): TutorQuestionOption {
+  const q = materializeBankItem(item, avoidFingerprints);
   const difficulty = normalizeDifficulty(q.difficulty);
   const starLevel = difficultyToStar(q.difficulty);
 
@@ -265,8 +300,17 @@ export function buildQuestionPair(args: {
       ? nearLevel
       : usable;
 
+  // Empreintes de contenu récemment servies (extraites des ids récents) : on
+  // évite de reposer la même question, et que les deux options d'une paire
+  // soient identiques.
+  const avoidFingerprints = new Set<string>();
+  for (const id of recentQuestionIds) {
+    const fp = extractFingerprint(id);
+    if (fp) avoidFingerprints.add(fp);
+  }
+
   const firstItem = pickRandom(source);
-  const optionA = toTutorQuestionOption(firstItem);
+  const optionA = toTutorQuestionOption(firstItem, avoidFingerprints);
 
   const remaining = source.filter((item) => item.id !== firstItem.id);
 
@@ -276,14 +320,18 @@ export function buildQuestionPair(args: {
     );
   }
 
+  // Option B : on évite aussi le contenu exact de l'option A.
+  const avoidForB = new Set(avoidFingerprints);
+  avoidForB.add(contentFingerprint(optionA.text, optionA.choices));
+
   const contrasted = remaining
-    .map(toTutorQuestionOption)
+    .map((item) => toTutorQuestionOption(item, avoidForB))
     .filter((candidate) => isGoodContrast(optionA, candidate));
 
   const optionB =
     contrasted.length > 0
       ? pickRandom(contrasted)
-      : toTutorQuestionOption(pickRandom(remaining));
+      : toTutorQuestionOption(pickRandom(remaining), avoidForB);
 
   const recommendedDifficulty: DifficultyLevel = recommendedStar;
 
