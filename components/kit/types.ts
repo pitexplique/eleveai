@@ -66,5 +66,12 @@ export type KitData = {
   classeLabel: string;
   /** Slug classe du coach (ex. "premiere-spe") pour les CTA. */
   coachClasse: string;
+  /**
+   * Ligne d'auteur de la page de garde. Optionnel : si absent, le moteur la
+   * dérive de `matiere` (maths → « professeur de mathématiques à La Réunion »,
+   * autres matières → « professeur à La Réunion »). À renseigner pour figer un
+   * autre libellé.
+   */
+  auteurLigne?: string;
   notions: KitNotion[];
 };

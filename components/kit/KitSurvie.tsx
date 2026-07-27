@@ -14,6 +14,23 @@ import type { KitData, KitNotion } from "./types";
 
 const LETTRES = ["A", "B", "C", "D", "E", "F"];
 
+/** Ligne d'auteur de la garde : subject-aware (la mention « de mathématiques »
+ *  n'a pas sa place sur un guide de français/anglais). Frédéric est bien prof de
+ *  maths, mais on ne l'affiche que sur les guides de maths. */
+function ligneAuteur(data: KitData): string {
+  if (data.auteurLigne) return data.auteurLigne;
+  const specialite =
+    data.matiere === "maths"
+      ? "professeur de mathématiques à La Réunion"
+      : "professeur à La Réunion";
+  return `Réalisé par Frédéric Lacoste, ${specialite}.`;
+}
+
+/** « Les formules qui sauvent » (maths) vs « Les règles qui sauvent » (langues). */
+function titreFormules(matiere: string): string {
+  return matiere === "maths" ? "Les formules qui sauvent" : "Les règles qui sauvent";
+}
+
 function Etoiles({ n }: { n: number }) {
   return (
     <span className="text-[10px] tracking-tight text-amber-500" aria-label={`difficulté ${n} sur 3`}>
@@ -28,11 +45,13 @@ function PageNotion({
   index,
   total,
   coachHref,
+  matiere,
 }: {
   notion: KitNotion;
   index: number;
   total: number;
   coachHref: string;
+  matiere: string;
 }) {
   return (
     <article className="kit-page mx-auto mb-8 max-w-3xl rounded-2xl border border-slate-200 bg-white p-6 shadow-sm print:mb-0 print:rounded-none print:border-0 print:shadow-none">
@@ -63,7 +82,7 @@ function PageNotion({
       {/* 2. Les formules qui sauvent */}
       <section className="mb-3 rounded-xl border-2 border-red-200 bg-red-50/60 p-3">
         <h3 className="mb-1.5 text-sm font-extrabold uppercase tracking-wide text-red-700">
-          🧰 Les formules qui sauvent
+          🧰 {titreFormules(matiere)}
         </h3>
         <ul className="formules space-y-1">
           {notion.formules.map((f) => (
@@ -202,7 +221,7 @@ function PageNotion({
           🧠 M&apos;entraîner sur « {notion.titre} »
         </Link>
         <span className="hidden print:inline text-[11px] font-semibold text-slate-600">
-          → eleveai.fr/coach-ia/maths
+          → eleveai.fr/coach-ia/{matiere}
         </span>
       </footer>
     </article>
@@ -254,7 +273,7 @@ export default function KitSurvie({ data }: { data: KitData }) {
           {/* Signature nominative (décision 26/07) : personnelle, jamais
               institutionnelle — on ne nomme pas l'établissement ici. */}
           <p className="mb-4 text-[13px] font-semibold text-slate-700">
-            Réalisé par Frédéric Lacoste, professeur de mathématiques à La Réunion.
+            {ligneAuteur(data)}
           </p>
 
           <div className="mb-5 flex flex-wrap items-center justify-center gap-2 text-[12px] font-semibold text-slate-700">
@@ -303,7 +322,14 @@ export default function KitSurvie({ data }: { data: KitData }) {
 
         {/* ─── Les fiches ─── */}
         {data.notions.map((n, i) => (
-          <PageNotion key={n.id} notion={n} index={i} total={data.notions.length} coachHref={coachHref} />
+          <PageNotion
+            key={n.id}
+            notion={n}
+            index={i}
+            total={data.notions.length}
+            coachHref={coachHref}
+            matiere={data.matiere}
+          />
         ))}
 
         {/* Pied de parcours (écran) */}

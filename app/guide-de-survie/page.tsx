@@ -9,17 +9,18 @@ import { KIT_MATHS_CINQUIEME } from "./maths-cinquieme/data";
 import { KIT_MATHS_SIXIEME } from "./maths-sixieme/data";
 import { KIT_MATHS_CM2 } from "./maths-cm2/data";
 import { KIT_MATHS_CM1 } from "./maths-cm1/data";
+import { KIT_FRANCAIS_CM1 } from "./francais-cm1/data";
 
 export const metadata: Metadata = {
-  title: "Guides de survie maths, du CM1 au lycée — l'essentiel à imprimer (gratuit)",
+  title: "Guides de survie EleveAI — maths et français, du CM1 au lycée (gratuit à imprimer)",
   description:
-    "Les guides de survie EleveAI : le programme de maths du primaire (CM1) au lycée condensé en fiches à imprimer — l'essentiel, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
+    "Les guides de survie EleveAI : le programme de maths (du CM1 au lycée) et de français (CM1) condensé en fiches à imprimer — l'essentiel, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
   alternates: { canonical: "https://eleveai.fr/guide-de-survie" },
 };
 
-// La collection grandit niveau par niveau — une carte = un guide livré,
-// jamais de carte fantôme.
-const KITS = [
+// La collection grandit niveau par niveau et matière par matière — une carte =
+// un guide livré, jamais de carte fantôme.
+const KITS_MATHS = [
   {
     slug: "maths-cm1",
     emoji: "🥚",
@@ -103,6 +104,42 @@ const KITS = [
   },
 ];
 
+const KITS_FRANCAIS = [
+  {
+    slug: "francais-cm1",
+    emoji: "📖",
+    titre: KIT_FRANCAIS_CM1.titre,
+    niveau: "CM1 · primaire",
+    pitch:
+      "Les 8 domaines du programme en 8 fiches : l'essentiel, les règles qui sauvent, les réflexes, les pièges, test corrigé.",
+    grad: "from-violet-500 to-fuchsia-600",
+  },
+];
+
+type Kit = (typeof KITS_MATHS)[number];
+
+function CartesKits({ kits }: { kits: Kit[] }) {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2">
+      {kits.map((k) => (
+        <Link
+          key={k.slug}
+          href={`/guide-de-survie/${k.slug}`}
+          className={`group rounded-2xl bg-gradient-to-br ${k.grad} p-5 text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-xl`}
+        >
+          <p className="mb-1 text-3xl transition group-hover:scale-110">{k.emoji}</p>
+          <p className="text-[11px] font-bold uppercase tracking-widest text-white/80">{k.niveau}</p>
+          <h2 className="mb-1 text-xl font-black leading-tight">{k.titre}</h2>
+          <p className="text-[13px] leading-snug text-white/90">{k.pitch}</p>
+          <p className="mt-3 text-[13px] font-bold underline underline-offset-2">
+            Ouvrir le guide →
+          </p>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
 export default function KitDeSurvieHubPage() {
   return (
     <main className="mx-auto max-w-4xl px-4 py-10">
@@ -115,28 +152,30 @@ export default function KitDeSurvieHubPage() {
         </h1>
         <p className="mx-auto max-w-2xl text-[15px] leading-relaxed text-slate-600">
           Un guide de survie = tout un programme en quelques fiches A4 : les{" "}
-          <strong>formules qui sauvent</strong>, les <strong>réflexes</strong> devant un énoncé, les{" "}
-          <strong>pièges qui coûtent des points</strong> — et un test corrigé par chapitre.
-          Gratuit, sans inscription, à glisser dans le classeur.
+          <strong>formules et règles qui sauvent</strong>, les <strong>réflexes</strong> devant un
+          énoncé, les <strong>pièges qui coûtent des points</strong> — et un test corrigé par
+          chapitre. Gratuit, sans inscription, à glisser dans le classeur.
         </p>
       </header>
 
-      <section className="mb-10 grid gap-4 sm:grid-cols-2">
-        {KITS.map((k) => (
-          <Link
-            key={k.slug}
-            href={`/guide-de-survie/${k.slug}`}
-            className={`group rounded-2xl bg-gradient-to-br ${k.grad} p-5 text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-xl`}
-          >
-            <p className="mb-1 text-3xl transition group-hover:scale-110">{k.emoji}</p>
-            <p className="text-[11px] font-bold uppercase tracking-widest text-white/80">{k.niveau}</p>
-            <h2 className="mb-1 text-xl font-black leading-tight">{k.titre}</h2>
-            <p className="text-[13px] leading-snug text-white/90">{k.pitch}</p>
-            <p className="mt-3 text-[13px] font-bold underline underline-offset-2">
-              Ouvrir le guide →
-            </p>
-          </Link>
-        ))}
+      {/* ─── Maths ─── */}
+      <section className="mb-10">
+        <h2 className="mb-3 flex items-center gap-2 text-2xl font-black text-slate-900">
+          <span aria-hidden="true">🔢</span> Maths
+          <span className="text-sm font-semibold text-slate-400">— du CM1 au lycée</span>
+        </h2>
+        <CartesKits kits={KITS_MATHS} />
+      </section>
+
+      {/* ─── Français ─── */}
+      <section className="mb-10">
+        <h2 className="mb-3 flex items-center gap-2 text-2xl font-black text-slate-900">
+          <span aria-hidden="true">📖</span> Français
+          <span className="rounded-full bg-violet-100 px-2 py-0.5 text-[11px] font-bold uppercase tracking-widest text-violet-700">
+            Nouveau
+          </span>
+        </h2>
+        <CartesKits kits={KITS_FRANCAIS} />
       </section>
 
       {/* La réponse sur place : où sont les autres niveaux ? */}
@@ -149,16 +188,16 @@ export default function KitDeSurvieHubPage() {
         </p>
         <div className="flex flex-wrap items-center justify-center gap-2">
           <Link
+            href="/coach-ia/francais?classe=cm1"
+            className="rounded-full border-2 border-violet-600 px-4 py-1.5 text-sm font-bold text-violet-700 transition hover:bg-violet-50"
+          >
+            Coach Français CM1
+          </Link>
+          <Link
             href="/coach-ia/maths?classe=seconde"
             className="rounded-full border-2 border-teal-600 px-4 py-1.5 text-sm font-bold text-teal-700 transition hover:bg-teal-50"
           >
             Coach Seconde
-          </Link>
-          <Link
-            href="/coach-ia/maths?classe=premiere-spe"
-            className="rounded-full border-2 border-teal-600 px-4 py-1.5 text-sm font-bold text-teal-700 transition hover:bg-teal-50"
-          >
-            Coach Première spé
           </Link>
           <Link
             href="/coach-ia/maths?classe=terminale-spe"
