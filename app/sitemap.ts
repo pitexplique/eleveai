@@ -88,6 +88,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/guide-de-survie/maths-quatrieme", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
   { path: "/guide-de-survie/maths-cinquieme", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
   { path: "/guide-de-survie/maths-sixieme",   priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
+  { path: "/guide-de-survie/maths-cm2",       priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
 
   // ── FICHES DE COURS ────────────────────────────────────────────────────────
   { path: "/fiches-cours",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
