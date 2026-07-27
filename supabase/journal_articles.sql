@@ -116,3 +116,41 @@ insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url
    '/diagonale-des-fous',
    '🏃 Lance la course →')
 on conflict (rubrique, lien) do nothing;
+
+-- ── Article 7 (25/07) : l'aiguille de Hong Wang — médaille Fields 2026 ────────
+-- Le problème de l'aiguille (Kakeya, 1917) : faire demi-tour en balayant le
+-- moins de surface possible — π/2, π/4, π/8… et Besicovitch prouve qu'on peut
+-- approcher 0. Hong Wang (avec Joshua Zahl, 2025) ferme la version 3D → médaille
+-- Fields le 23/07/2026 à Philadelphie (3e femme lauréate). Avec son tableau
+-- décodé (projection, ombre F, tiroirs F′ ⊆ F) et ses mots (hommage aux profs
+-- français ; « aucune différence entre les femmes et les hommes »).
+-- INSERT en `where not exists` : rejouable même si la contrainte d'unicité
+-- venait à manquer en prod. ordre -1 : passe en tête de rubrique.
+insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url, lien, cta)
+select 'un-peu-de-maths', -1,
+   'L''aiguille de Hong Wang, médaille Fields 2026',
+   'Fais faire demi-tour à une aiguille en balayant le moins de place possible : 1,57 → 0,79 → 0,39… et les mathématiciens savent approcher 0. Le 23 juillet à Philadelphie, Hong Wang a reçu la médaille Fields pour avoir fermé la conjecture de Kakeya en 3D — en remerciant ses professeurs français. Troisième femme médaillée en 90 ans : pour elle, les maths ne font aucune différence entre les femmes et les hommes.',
+   '/images/aiguille-de-kakeya.svg',
+   '/aiguille-de-kakeya',
+   '🪡 Fais tourner l''aiguille →'
+where not exists (
+  select 1 from public.journal_articles
+  where rubrique = 'un-peu-de-maths' and lien = '/aiguille-de-kakeya'
+);
+
+-- ── Article 8 (26/07) : la dimension du volcan — le pont Fields → Fournaise ───
+-- Le théorème de Hong Wang parle de DIMENSION, et la dimension se mesure :
+-- box-counting sur le profil du rempart (ligne lisse ×2 → d = 1 ; rempart
+-- ×2,4 → d ≈ 1,25, l'ordre de grandeur des côtes de Mandelbrot). ordre -2 :
+-- passe en tête de rubrique.
+insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url, lien, cta)
+select 'un-peu-de-maths', -2,
+   'La dimension du volcan : la rugosité se mesure',
+   'Pose une grille sur le rempart de la Fournaise et compte les carrés que la crête traverse. Affine : une ligne lisse fait ×2, le rempart fait ×2,4 — et ce multiplicateur cache un nombre, la dimension fractale d ≈ 1,25. La rugosité du volcan en un seul nombre, avec l''idée qui a valu à Hong Wang sa médaille Fields.',
+   '/images/dimension-volcan.svg',
+   '/dimension-du-volcan',
+   '📏 Mesure le rempart →'
+where not exists (
+  select 1 from public.journal_articles
+  where rubrique = 'un-peu-de-maths' and lien = '/dimension-du-volcan'
+);

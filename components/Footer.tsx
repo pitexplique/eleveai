@@ -38,6 +38,8 @@ const unPeuDeMaths = [
   { label: "Barrage", href: "/simulateur-barrage" },
   { label: "Lagon", href: "/simulateur-lagon" },
   { label: "Diagonale des Fous", href: "/diagonale-des-fous" },
+  { label: "L'aiguille de Kakeya", href: "/aiguille-de-kakeya" },
+  { label: "La dimension du volcan", href: "/dimension-du-volcan" },
   { label: "Loi de Pareto", href: "/loi-pareto" },
   { label: "Loi normale", href: "/loi-normale" },
   { label: "Exponentielle", href: "/exponentielle" },

@@ -9,8 +9,7 @@ const INK = "#1d1c16";
 
 export const metadata: Metadata = {
   title: "Les machines dans ta main — les simulateurs de La Réunion",
-  description:
-    "Treize machines à régler du bout des doigts pour comprendre l'île et les maths : le cyclone, le volcan, le barrage, le lagon, la salle de sport, la loi normale, l'exponentielle, la Diagonale des Fous… Chaque machine t'explique, puis t'envoie t'entraîner avec le coach.",
+  description: `${NB_MACHINES} machines à régler du bout des doigts pour comprendre l'île et les maths : le cyclone, le volcan, le barrage, le lagon, la salle de sport, la loi normale, l'aiguille de Hong Wang, la Diagonale des Fous… Chaque machine t'explique, puis t'envoie t'entraîner avec le coach.`,
   alternates: { canonical: "/simulateurs" },
   keywords: [
     "simulateur pédagogique",
@@ -28,8 +27,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Les machines dans ta main — les simulateurs d'EleveAI",
-    description:
-      "Règle la machine, comprends l'île et les maths, puis entraîne-toi avec le coach. Douze simulateurs de La Réunion.",
+    description: `Règle la machine, comprends l'île et les maths, puis entraîne-toi avec le coach. ${NB_MACHINES} simulateurs de La Réunion.`,
     url: "/simulateurs",
     type: "website",
     siteName: "EleveAI",

@@ -299,10 +299,19 @@ const EDITO_FALLBACK: Edito = {
 // des epsilons (la devise du site, à faire découvrir).
 const ARTICLES_MATHS_FALLBACK: ArticleRubrique[] = [
   {
+    id: "dimension-du-volcan",
+    titre: "La dimension du volcan : la rugosité se mesure",
+    accroche:
+      "Pose une grille sur le rempart de la Fournaise et compte les carrés que la crête traverse. Affine : une ligne lisse fait ×2, le rempart fait ×2,4 — et ce multiplicateur cache un nombre, la dimension fractale d ≈ 1,25. La rugosité du volcan en un seul nombre, avec l'idée qui a valu à Hong Wang sa médaille Fields.",
+    imageUrl: "/images/dimension-volcan.svg",
+    lien: "/dimension-du-volcan",
+    cta: "📏 Mesure le rempart →",
+  },
+  {
     id: "aiguille-de-kakeya",
     titre: "L'aiguille de Hong Wang, médaille Fields 2026",
     accroche:
-      "Fais faire demi-tour à une aiguille en balayant le moins de place possible : 1,57 → 0,79 → 0,39… et les mathématiciens savent approcher 0. Le 23 juillet à Philadelphie, Hong Wang a reçu la médaille Fields pour avoir fermé ce problème en 3D — en remerciant ses professeurs français. Troisième femme médaillée en 90 ans : pour elle, les maths ne font aucune différence entre les femmes et les hommes.",
+      "Fais faire demi-tour à une aiguille en balayant le moins de place possible : 1,57 → 0,79 → 0,39… et les mathématiciens savent approcher 0. Le 23 juillet à Philadelphie, Hong Wang a reçu la médaille Fields pour avoir fermé la conjecture de Kakeya en 3D — en remerciant ses professeurs français. Troisième femme médaillée en 90 ans : pour elle, les maths ne font aucune différence entre les femmes et les hommes.",
     imageUrl: "/images/aiguille-de-kakeya.svg",
     lien: "/aiguille-de-kakeya",
     cta: "🪡 Fais tourner l'aiguille →",

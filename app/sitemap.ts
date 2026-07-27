@@ -270,6 +270,9 @@ const ROUTES: RouteConfig[] = [
   // L'aiguille de Hong Wang (25/07) — médaille Fields 2026 : le problème de
   // Kakeya (demi-tour économe, π/2 → π/4 → π/8 → 0) et son tableau décodé.
   { path: "/aiguille-de-kakeya", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-25") },
+  // La dimension du volcan (26/07) — box-counting sur le rempart de la
+  // Fournaise : la rugosité en un nombre (d ≈ 1,25), l'idée de la médaille.
+  { path: "/dimension-du-volcan", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-26") },
   { path: "/picto-maths",     priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/carte",           priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_974 },
   { path: "/cahier-vacances/maths", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_974 },

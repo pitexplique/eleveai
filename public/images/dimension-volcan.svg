@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Le profil déchiqueté du Piton de la Fournaise sous une grille de comptage : les carrés que la crête traverse s'allument — la rugosité se mesure, dimension d'environ 1,26.">
+  <defs>
+    <pattern id="grille-dimvol" width="25" height="25" patternUnits="userSpaceOnUse">
+      <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#e2cfc0" stroke-width="1" stroke-opacity="0.45"/>
+    </pattern>
+  </defs>
+
+  <!-- le papier à carreaux -->
+  <rect width="800" height="450" fill="#fdfaf7"/>
+  <rect width="800" height="450" fill="url(#grille-dimvol)"/>
+
+  <!-- la grille de mesure (carreaux de 50) -->
+  <g stroke="#b9997f" stroke-width="1" stroke-opacity="0.55">
+    <line x1="50" y1="100" x2="50" y2="350"/>
+    <line x1="100" y1="100" x2="100" y2="350"/>
+    <line x1="150" y1="100" x2="150" y2="350"/>
+    <line x1="200" y1="100" x2="200" y2="350"/>
+    <line x1="250" y1="100" x2="250" y2="350"/>
+    <line x1="300" y1="100" x2="300" y2="350"/>
+    <line x1="350" y1="100" x2="350" y2="350"/>
+    <line x1="400" y1="100" x2="400" y2="350"/>
+    <line x1="450" y1="100" x2="450" y2="350"/>
+    <line x1="500" y1="100" x2="500" y2="350"/>
+    <line x1="550" y1="100" x2="550" y2="350"/>
+    <line x1="600" y1="100" x2="600" y2="350"/>
+    <line x1="650" y1="100" x2="650" y2="350"/>
+    <line x1="700" y1="100" x2="700" y2="350"/>
+    <line x1="750" y1="100" x2="750" y2="350"/>
+    <line x1="50" y1="100" x2="750" y2="100"/>
+    <line x1="50" y1="150" x2="750" y2="150"/>
+    <line x1="50" y1="200" x2="750" y2="200"/>
+    <line x1="50" y1="250" x2="750" y2="250"/>
+    <line x1="50" y1="300" x2="750" y2="300"/>
+    <line x1="50" y1="350" x2="750" y2="350"/>
+  </g>
+
+  <!-- les carrés que la crête traverse : ils s'allument doucement -->
+  <g fill="#d2431f">
+    <g fill-opacity="0.3">
+      <rect x="50" y="300" width="50" height="50"/>
+      <rect x="100" y="300" width="50" height="50"/>
+      <rect x="100" y="250" width="50" height="50"/>
+      <rect x="150" y="250" width="50" height="50"/>
+      <rect x="200" y="200" width="50" height="50"/>
+      <rect x="200" y="250" width="50" height="50"/>
+      <rect x="250" y="150" width="50" height="50"/>
+      <rect x="250" y="200" width="50" height="50"/>
+      <rect x="300" y="150" width="50" height="50"/>
+      <rect x="350" y="100" width="50" height="50"/>
+      <rect x="350" y="150" width="50" height="50"/>
+      <rect x="400" y="100" width="50" height="50"/>
+      <rect x="450" y="100" width="50" height="50"/>
+      <rect x="450" y="150" width="50" height="50"/>
+      <rect x="500" y="150" width="50" height="50"/>
+      <rect x="550" y="150" width="50" height="50"/>
+      <rect x="550" y="200" width="50" height="50"/>
+      <rect x="600" y="200" width="50" height="50"/>
+      <rect x="600" y="250" width="50" height="50"/>
+      <rect x="650" y="250" width="50" height="50"/>
+      <rect x="700" y="250" width="50" height="50"/>
+      <rect x="700" y="300" width="50" height="50"/>
+      <animate attributeName="fill-opacity" values="0.14;0.38;0.14" dur="4s" repeatCount="indefinite"/>
+    </g>
+  </g>
+
+  <!-- le profil du rempart : déchiqueté à toutes les échelles -->
+  <path d="M 60 330 L 95 300 L 120 312 L 150 262 L 175 280 L 205 225 L 230 245 L 260 190 L 285 212 L 315 160 L 340 178 L 370 135 L 395 158 L 420 118 L 450 142 L 480 165 L 505 150 L 535 195 L 560 180 L 590 225 L 615 210 L 645 258 L 670 245 L 700 292 L 740 330 L 740 350 L 60 350 Z"
+        fill="#3b2f2a" fill-opacity="0.12"/>
+  <path d="M 60 330 L 95 300 L 120 312 L 150 262 L 175 280 L 205 225 L 230 245 L 260 190 L 285 212 L 315 160 L 340 178 L 370 135 L 395 158 L 420 118 L 450 142 L 480 165 L 505 150 L 535 195 L 560 180 L 590 225 L 615 210 L 645 258 L 670 245 L 700 292 L 740 330"
+        fill="none" stroke="#3b2f2a" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- la mesure, en étiquette -->
+  <g transform="translate(96 58)">
+    <rect x="-26" y="-24" width="392" height="44" rx="8" fill="#ffffff" stroke="#e2d5c9" stroke-width="1.5"/>
+    <text x="-10" y="6" font-family="ui-monospace, SFMono-Regular, monospace" font-size="19" font-weight="700" fill="#3b2f2a">d ≈ 1,26 — la rugosité, en un seul nombre</text>
+  </g>
+
+  <!-- la manchette -->
+  <text x="60" y="398" font-family="ui-sans-serif, system-ui, sans-serif" font-size="21" font-weight="700" fill="#3b2f2a">La dimension du volcan</text>
+  <text x="60" y="422" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#8a7565">compte les carrés sur le rempart — l'idée de Hong Wang, à La Réunion</text>
+</svg>

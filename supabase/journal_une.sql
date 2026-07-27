@@ -78,3 +78,18 @@ insert into public.journal_une (ordre, kicker, titre, accroche, youtube_id, imag
       null, '/images/diagonale-des-fous.svg', '/diagonale-des-fous', '🏃 Lance la course →',
       'la vitesse moyenne — 132 km en 44 h, combien de km/h ?')
 on conflict do nothing;
+
+-- ── Slide ajouté le 25/07 : Hong Wang, médaille Fields 2026 (l'aiguille) ──────
+-- L'événement de la semaine : la médaille Fields remise le 23/07 à Philadelphie.
+-- INSERT en `where not exists` (la table n'a PAS de contrainte d'unicité —
+-- rejouable sans risque, contrairement aux `on conflict` ci-dessus).
+-- ordre 4 : passe en tête du carrousel.
+insert into public.journal_une (ordre, kicker, titre, accroche, youtube_id, image_url, lien, cta, defi)
+select 4, 'L''événement · Médaille Fields 2026',
+      'Hong Wang, l''aiguille et la médaille Fields',
+      'Fais faire demi-tour à une aiguille en balayant le moins de place possible — le problème né en 1917, dont elle vient de fermer la conjecture en 3D. Troisième femme médaillée en 90 ans, formée en France, elle a remercié ses professeurs : pour elle, les maths ne font aucune différence entre les femmes et les hommes.',
+      null, '/images/aiguille-de-kakeya.svg', '/aiguille-de-kakeya', '🪡 Fais tourner l''aiguille →',
+      'les tiroirs — 18 ombres dans 5 boîtes : la plus pleine en contient au moins combien ?'
+where not exists (
+  select 1 from public.journal_une where lien = '/aiguille-de-kakeya'
+);
