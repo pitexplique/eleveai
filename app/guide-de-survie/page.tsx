@@ -11,11 +11,12 @@ import { KIT_MATHS_CM2 } from "./maths-cm2/data";
 import { KIT_MATHS_CM1 } from "./maths-cm1/data";
 import { KIT_FRANCAIS_CM1 } from "./francais-cm1/data";
 import { KIT_FRANCAIS_CM2 } from "./francais-cm2/data";
+import { KIT_FRANCAIS_6E } from "./francais-6e/data";
 
 export const metadata: Metadata = {
   title: "Guides de survie EleveAI — maths et français, du CM1 au lycée (gratuit à imprimer)",
   description:
-    "Les guides de survie EleveAI : le programme de maths (du CM1 au lycée) et de français (CM1 et CM2) condensé en fiches à imprimer — l'essentiel, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
+    "Les guides de survie EleveAI : le programme de maths (du CM1 au lycée) et de français (du CM1 à la 6e) condensé en fiches à imprimer — l'essentiel, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
   alternates: { canonical: "https://eleveai.fr/guide-de-survie" },
 };
 
@@ -124,6 +125,15 @@ const KITS_FRANCAIS = [
       "Les 9 domaines du programme en 9 fiches (avec la phrase complexe) : l'essentiel, les règles qui sauvent, les réflexes, les pièges, test corrigé.",
     grad: "from-fuchsia-500 to-rose-600",
   },
+  {
+    slug: "francais-6e",
+    emoji: "🏫",
+    titre: KIT_FRANCAIS_6E.titre,
+    niveau: "6e · entrée au collège",
+    pitch:
+      "Les 8 domaines du programme en 8 fiches (mise en voix, culture littéraire) : l'essentiel, les règles qui sauvent, les réflexes, les pièges, test corrigé.",
+    grad: "from-rose-500 to-red-600",
+  },
 ];
 
 type Kit = (typeof KITS_MATHS)[number];
@@ -181,7 +191,7 @@ export default function KitDeSurvieHubPage() {
       <section className="mb-10">
         <h2 className="mb-3 flex items-center gap-2 text-2xl font-black text-slate-900">
           <span aria-hidden="true">📖</span> Français
-          <span className="text-sm font-semibold text-slate-400">— CM1 & CM2</span>
+          <span className="text-sm font-semibold text-slate-400">— du CM1 à la 6e</span>
           <span className="rounded-full bg-violet-100 px-2 py-0.5 text-[11px] font-bold uppercase tracking-widest text-violet-700">
             Nouveau
           </span>
