@@ -36,6 +36,25 @@ function exp(
 }
 
 export const perimetresBank: TutorBankItemV4[] = [
+  {
+    kind: "fixed",
+    id: "cm1_perimetre_quadrilatere_fixed_g1",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "perimetre_quadrilatere",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un rectangle mesure 8 cm de long et 5 cm de large. Quel est son périmètre ?",
+    format: "qcm",
+    choices: ["26 cm","13 cm","40 cm","18 cm"],
+    expected: ["26 cm"],
+    comparator: "mcq_exact",
+    hint: "Le périmètre, c'est le tour : on additionne les 4 côtés.",
+    explanation: "Périmètre = 2 × (8 + 5) = 2 × 13 = 26 cm.",
+    tags: ["cm1","perimetre","perimetre_quadrilatere","guide","qcm"],
+  },
+
   // ============================================================
   // PERIMETRE_COMPRENDRE
   // Comprendre ce qu’est un périmètre

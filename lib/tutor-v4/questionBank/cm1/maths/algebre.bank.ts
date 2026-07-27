@@ -51,6 +51,43 @@ function statGraphCanvas(
 }
 
 export const algebreBank: TutorBankItemV4[] = [
+  {
+    kind: "fixed",
+    id: "cm1_algebre_nombre_inconnu_fixed_g1",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "algebre",
+    microId: "algebre_nombre_inconnu",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quel nombre remplace l'étoile ? ★ × 4 = 36",
+    format: "qcm",
+    choices: ["9","8","32","40"],
+    expected: ["9"],
+    comparator: "mcq_exact",
+    hint: "Fais l'opération inverse de la multiplication.",
+    explanation: "On divise : 36 ÷ 4 = 9. On vérifie : 9 × 4 = 36.",
+    tags: ["cm1","algebre","algebre_nombre_inconnu","guide","qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "cm1_algebre_motif_fixed_g1",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "algebre",
+    microId: "algebre_motif",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Le motif 3 ; 6 ; 9 ; 12 suit une règle. Quel est le nombre suivant ?",
+    format: "qcm",
+    choices: ["15","13","18","14"],
+    expected: ["15"],
+    comparator: "mcq_exact",
+    hint: "Trouve la règle qui se répète, puis continue.",
+    explanation: "On ajoute 3 à chaque fois : 12 + 3 = 15.",
+    tags: ["cm1","algebre","algebre_motif","guide","qcm"],
+  },
+
   // ============================================================
   // ALGEBRE_EGALITE
   // Comprendre une égalité

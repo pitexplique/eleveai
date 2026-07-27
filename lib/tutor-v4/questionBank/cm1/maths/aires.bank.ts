@@ -38,6 +38,43 @@ function exp(
 }
 
 export const airesBank: TutorBankItemV4[] = [
+  {
+    kind: "fixed",
+    id: "cm1_aire_unite_fixed_g1",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "aire",
+    microId: "aire_unite",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Une figure recouvre 6 carreaux identiques. Quelle est son aire ?",
+    format: "qcm",
+    choices: ["6 carreaux unités","6 cm","3 carreaux unités","12 carreaux unités"],
+    expected: ["6 carreaux unités"],
+    comparator: "mcq_exact",
+    hint: "Chaque carreau rempli vaut 1 unité d'aire.",
+    explanation: "On compte les carreaux remplis : 6 carreaux, donc 6 carreaux unités.",
+    tags: ["cm1","aire","aire_unite","guide","qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "cm1_aire_composer_fixed_g1",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "aire",
+    microId: "aire_composer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Une figure est faite de deux parties : une de 5 carreaux et une de 3 carreaux. Quelle est son aire totale ?",
+    format: "qcm",
+    choices: ["8 carreaux unités","15 carreaux unités","2 carreaux unités","53 carreaux unités"],
+    expected: ["8 carreaux unités"],
+    comparator: "mcq_exact",
+    hint: "Additionne l'aire des deux parties.",
+    explanation: "5 + 3 = 8 carreaux unités.",
+    tags: ["cm1","aire","aire_composer","guide","qcm"],
+  },
+
   // ============================================================
   // AIRE_COMPRENDRE
   // Comprendre ce qu’est une aire

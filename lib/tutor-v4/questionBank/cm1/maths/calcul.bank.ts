@@ -37,6 +37,43 @@ function exp(
 }
 
 export const calculBank: TutorBankItemV4[] = [
+  {
+    kind: "fixed",
+    id: "cm1_calcul_addition_posee_fixed_g1",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "calcul",
+    microId: "calcul_addition_posee",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Combien font 248 + 136 ?",
+    format: "qcm",
+    choices: ["384","374","394","386"],
+    expected: ["384"],
+    comparator: "mcq_exact",
+    hint: "Pose l'addition et n'oublie pas la retenue.",
+    explanation: "8 + 6 = 14 (je pose 4, je retiens 1) ; 4 + 3 + 1 = 8 ; 2 + 1 = 3. Résultat : 384.",
+    tags: ["cm1","calcul","calcul_addition_posee","guide","qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "cm1_calcul_soustraction_posee_fixed_g1",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "calcul",
+    microId: "calcul_soustraction_posee",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Combien font 405 − 178 ?",
+    format: "qcm",
+    choices: ["227","237","217","327"],
+    expected: ["227"],
+    comparator: "mcq_exact",
+    hint: "Pose la soustraction en alignant les chiffres.",
+    explanation: "405 − 178 = 227. On vérifie : 178 + 227 = 405.",
+    tags: ["cm1","calcul","calcul_soustraction_posee","guide","qcm"],
+  },
+
     // ============================================================
   // CALCUL_MENTAL
   // Calculer mentalement

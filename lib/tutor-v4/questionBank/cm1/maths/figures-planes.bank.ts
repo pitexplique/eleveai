@@ -429,6 +429,43 @@ const CERCLE_ELEMENTS = [
 // ============================================================
 
 export const figuresPlanesBank: TutorBankItemV4[] = [
+  {
+    kind: "fixed",
+    id: "cm1_figure_cercle_fixed_g1",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "figure_plane",
+    microId: "figure_cercle",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans un cercle, le rayon mesure 4 cm. Combien mesure le diamètre ?",
+    format: "qcm",
+    choices: ["8 cm","4 cm","2 cm","16 cm"],
+    expected: ["8 cm"],
+    comparator: "mcq_exact",
+    hint: "Le diamètre est deux fois le rayon.",
+    explanation: "Diamètre = 2 × rayon = 2 × 4 = 8 cm.",
+    tags: ["cm1","figure_plane","figure_cercle","guide","qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "cm1_figure_propriete_fixed_g1",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "figure_plane",
+    microId: "figure_propriete",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Combien d'angles droits a un rectangle ?",
+    format: "qcm",
+    choices: ["4","2","0","3"],
+    expected: ["4"],
+    comparator: "mcq_exact",
+    hint: "Regarde tous les coins.",
+    explanation: "Un rectangle a 4 angles droits, un à chaque coin.",
+    tags: ["cm1","figure_plane","figure_propriete","guide","qcm"],
+  },
+
   // ============================================================
   // FIGURE_TRIANGLE
   // Reconnaître les triangles et quelques triangles particuliers

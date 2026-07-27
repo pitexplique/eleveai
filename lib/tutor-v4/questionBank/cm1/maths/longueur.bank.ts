@@ -40,6 +40,25 @@ function droiteGradueeCanvas(
 }
 
 export const longueurBank: TutorBankItemV4[] = [
+  {
+    kind: "fixed",
+    id: "cm1_longueur_mesurer_fixed_g1",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "longueur_mesurer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un crayon mesure 13 cm et 5 mm. Combien de millimètres cela fait-il en tout ?",
+    format: "qcm",
+    choices: ["135 mm","18 mm","130 mm","155 mm"],
+    expected: ["135 mm"],
+    comparator: "mcq_exact",
+    hint: "1 cm = 10 mm.",
+    explanation: "13 cm = 130 mm, plus 5 mm = 135 mm.",
+    tags: ["cm1","longueur","longueur_mesurer","guide","qcm"],
+  },
+
   // ============================================================
   // LONGUEUR_COMPARER
   // Comparer des longueurs

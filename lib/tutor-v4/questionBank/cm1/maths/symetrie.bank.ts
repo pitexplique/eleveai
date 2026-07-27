@@ -102,6 +102,25 @@ const IMAGE_STYLE = {
 };
 
 export const symetrieBank: TutorBankItemV4[] = [
+  {
+    kind: "fixed",
+    id: "cm1_symetrie_construire_fixed_g1",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "symetrie",
+    microId: "symetrie_construire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Pour construire le symétrique d'un point situé à 3 carreaux de l'axe, on place son image de l'autre côté à...",
+    format: "qcm",
+    choices: ["3 carreaux","6 carreaux","1 carreau","0 carreau"],
+    expected: ["3 carreaux"],
+    comparator: "mcq_exact",
+    hint: "Le symétrique garde la même distance à l'axe.",
+    explanation: "Le symétrique est de l'autre côté de l'axe, à la même distance : 3 carreaux.",
+    tags: ["cm1","symetrie","symetrie_construire","guide","qcm"],
+  },
+
   // ============================================================
   // SYMETRIE_AXE
   // Reconnaître un axe de symétrie

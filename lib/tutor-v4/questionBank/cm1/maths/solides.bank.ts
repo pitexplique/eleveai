@@ -1004,6 +1004,25 @@ const solideDefi: TutorBankItemV4[] = [
 // ── EXPORT ────────────────────────────────────────────────────────────────────
 
 export const solidesBank: TutorBankItemV4[] = [
+  {
+    kind: "fixed",
+    id: "cm1_solide_reconnaitre_fixed_g1",
+    niveau: "cm1",
+    matiere: "maths",
+    notionId: "solide",
+    microId: "solide_reconnaitre",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Un solide dont toutes les faces sont des carrés est un...",
+    format: "qcm",
+    choices: ["cube","pavé droit","cylindre","cône"],
+    expected: ["cube"],
+    comparator: "mcq_exact",
+    hint: "Pense au dé de jeu.",
+    explanation: "Un cube a 6 faces carrées (et 8 sommets, 12 arêtes).",
+    tags: ["cm1","solide","solide_reconnaitre","guide","qcm"],
+  },
+
   ...solideReconnaitre,
   ...solideSAF,
   ...solideFace,
