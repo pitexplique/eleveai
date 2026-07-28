@@ -309,7 +309,7 @@ const ARTICLES_MATHS_FALLBACK: ArticleRubrique[] = [
   },
   {
     id: "aiguille-de-kakeya",
-    titre: "L'aiguille de Hong Wang, médaille Fields 2026",
+    titre: "L'aiguille de Kakeya — Hong Wang, médaille Fields 2026",
     accroche:
       "Fais faire demi-tour à une aiguille en balayant le moins de place possible : 1,57 → 0,79 → 0,39… et les mathématiciens savent approcher 0. Le 23 juillet à Philadelphie, Hong Wang a reçu la médaille Fields pour avoir fermé la conjecture de Kakeya en 3D — en remerciant ses professeurs français. Troisième femme médaillée en 90 ans : pour elle, les maths ne font aucune différence entre les femmes et les hommes.",
     imageUrl: "/images/aiguille-de-kakeya.svg",

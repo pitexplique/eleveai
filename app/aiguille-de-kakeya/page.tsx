@@ -1,4 +1,4 @@
-// « L'aiguille de Hong Wang » — article-machine du journal (rubrique « Un peu
+// « L'aiguille de Kakeya » (Hong Wang, médaille Fields 2026) — article-machine du journal (rubrique « Un peu
 // de maths »), publié pour la médaille Fields 2026 (ICM Philadelphie, 23/07).
 // Le problème de l'aiguille de Kakeya : demi-tour en balayant le moins de
 // surface possible (π/2 → π/4 → π/8 → … vers 0), et le théorème 3D de Hong

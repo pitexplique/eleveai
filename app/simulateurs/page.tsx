@@ -9,7 +9,7 @@ const INK = "#1d1c16";
 
 export const metadata: Metadata = {
   title: "Les machines dans ta main — les simulateurs de La Réunion",
-  description: `${NB_MACHINES} machines à régler du bout des doigts pour comprendre l'île et les maths : le cyclone, le volcan, le barrage, le lagon, la salle de sport, la loi normale, l'aiguille de Hong Wang, la Diagonale des Fous… Chaque machine t'explique, puis t'envoie t'entraîner avec le coach.`,
+  description: `${NB_MACHINES} machines à régler du bout des doigts pour comprendre l'île et les maths : le cyclone, le volcan, le barrage, le lagon, la salle de sport, la loi normale, l'aiguille de Kakeya, la Diagonale des Fous… Chaque machine t'explique, puis t'envoie t'entraîner avec le coach.`,
   alternates: { canonical: "/simulateurs" },
   keywords: [
     "simulateur pédagogique",

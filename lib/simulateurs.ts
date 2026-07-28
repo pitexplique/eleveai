@@ -38,7 +38,7 @@ export const MACHINES: Machine[] = [
   { href: "/loi-performance", emoji: "🧠", nom: "La loi de la performance", notion: "Le neurone du dessin : Σ aᵢxᵢ — améliorer ses défauts ou ses qualités ?", cta: "Régler tes coefficients", image: "/images/adn-reseau-coeur.svg", groupe: "maths", date: "2026-07-22" },
   { href: "/loi-pareto", emoji: "⚽", nom: "Le but qui sort de la moyenne", notion: "La loi de Pareto : la queue lourde où naissent les records, face à la cloche.", cta: "Faire surgir les records", image: "/images/pareto-mbappe.svg", groupe: "maths", date: "2026-07-22" },
   { href: "/diagonale-des-fous", emoji: "🏃", nom: "La Diagonale des Fous", notion: "L'équation différentielle du coureur : la réserve se vide au carré de l'effort (Euler).", cta: "Doser ta course", image: "/images/diagonale-des-fous.svg", groupe: "maths", date: "2026-07-23" },
-  { href: "/aiguille-de-kakeya", emoji: "🪡", nom: "L'aiguille de Hong Wang", notion: "Médaille Fields 2026 : le demi-tour le plus économe — l'aire divisée par 2 à chaque ruse, vers 0.", cta: "Faire tourner l'aiguille", image: "/images/aiguille-de-kakeya.svg", groupe: "maths", date: "2026-07-25" },
+  { href: "/aiguille-de-kakeya", emoji: "🪡", nom: "L'aiguille de Kakeya", notion: "Hong Wang, médaille Fields 2026 : le demi-tour le plus économe — l'aire divisée par 2 à chaque ruse, vers 0.", cta: "Faire tourner l'aiguille", image: "/images/aiguille-de-kakeya.svg", groupe: "maths", date: "2026-07-25" },
   { href: "/dimension-du-volcan", emoji: "📏", nom: "La dimension du volcan", notion: "Compte les carrés sur le rempart de la Fournaise : la rugosité est un nombre — la dimension fractale, d ≈ 1,25.", cta: "Mesurer le rempart", image: "/images/dimension-volcan.svg", groupe: "maths", date: "2026-07-26" },
 ];
 

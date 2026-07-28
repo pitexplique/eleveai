@@ -1,6 +1,6 @@
 "use client";
 
-// « L'aiguille de Hong Wang » — l'article-machine du journal (rubrique « Un peu
+// « L'aiguille de Kakeya » (Hong Wang, médaille Fields 2026) — l'article-machine du journal (rubrique « Un peu
 // de maths »), publié pour la médaille Fields 2026. Le problème de l'aiguille
 // (Kakeya, 1917) : faire faire DEMI-TOUR à une aiguille en balayant le moins de
 // surface possible. Trois méthodes, et l'aire se divise par 2 à chaque ruse :
@@ -455,10 +455,13 @@ export default function AiguilleDeKakeyaClient() {
           Un peu de maths · La rubrique du prof
         </p>
         <h1 className="mt-1 font-serif text-3xl font-black leading-tight sm:text-4xl" style={{ color: ENCRE }}>
-          L&apos;aiguille de Hong Wang
+          L&apos;aiguille de Kakeya
         </h1>
         <p className="mt-1 text-lg font-black" style={{ color: OR }}>
-          Médaille Fields 2026 — le demi-tour le plus économe du monde
+          Hong Wang, médaille Fields 2026 — le demi-tour le plus économe du monde
+        </p>
+        <p className="text-[12.5px]" style={{ color: SOUS }}>
+          Un problème posé par Sōichi Kakeya en 1917 — dont Hong Wang vient de fermer la grande conjecture.
         </p>
         <p className="mt-2 flex flex-wrap items-center gap-2 text-[12px] font-bold">
           <span className="rounded-full border px-2.5 py-1" style={{ borderColor: OR + "66", backgroundColor: "#fdf6e8", color: "#8a6516" }}>

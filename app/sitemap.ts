@@ -267,7 +267,7 @@ const ROUTES: RouteConfig[] = [
   // La Diagonale des Fous (23/07) — l'équation différentielle du coureur : la
   // réserve se vide au carré de l'effort et avec la pente (méthode d'Euler).
   { path: "/diagonale-des-fous", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-23") },
-  // L'aiguille de Hong Wang (25/07) — médaille Fields 2026 : le problème de
+  // L'aiguille de Kakeya (25/07) — Hong Wang, médaille Fields 2026 : le problème de
   // Kakeya (demi-tour économe, π/2 → π/4 → π/8 → 0) et son tableau décodé.
   { path: "/aiguille-de-kakeya", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-25") },
   // La dimension du volcan (26/07) — box-counting sur le rempart de la

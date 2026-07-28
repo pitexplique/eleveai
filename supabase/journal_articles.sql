@@ -128,7 +128,7 @@ on conflict (rubrique, lien) do nothing;
 -- venait à manquer en prod. ordre -1 : passe en tête de rubrique.
 insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url, lien, cta)
 select 'un-peu-de-maths', -1,
-   'L''aiguille de Hong Wang, médaille Fields 2026',
+   'L''aiguille de Kakeya — Hong Wang, médaille Fields 2026',
    'Fais faire demi-tour à une aiguille en balayant le moins de place possible : 1,57 → 0,79 → 0,39… et les mathématiciens savent approcher 0. Le 23 juillet à Philadelphie, Hong Wang a reçu la médaille Fields pour avoir fermé la conjecture de Kakeya en 3D — en remerciant ses professeurs français. Troisième femme médaillée en 90 ans : pour elle, les maths ne font aucune différence entre les femmes et les hommes.',
    '/images/aiguille-de-kakeya.svg',
    '/aiguille-de-kakeya',

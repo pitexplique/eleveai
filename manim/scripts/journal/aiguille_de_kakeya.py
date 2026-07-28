@@ -1,5 +1,5 @@
 # aiguille_de_kakeya.py
-# EleveAI — Le Journal · « Un peu de maths » — L'aiguille de Hong Wang
+# EleveAI — Le Journal · « Un peu de maths » — L'aiguille de Kakeya (Hong Wang)
 #
 # UNE seule vidéo (muet + texte), la MÊME machine que le site : l'aiguille fait
 # demi-tour et l'aire balayée se divise par 2 à chaque ruse :
@@ -109,7 +109,8 @@ def compter_cases(pts, s):
 
 TEXTES = {
     "fr": {
-        "titre": "L'aiguille de Hong Wang",
+        "titre": "L'aiguille de Kakeya",
+        "sous_titre": "un problème de 1917, résolu par Hong Wang",
         "question0": "Peut-on faire demi-tour sans être vu ?",
         "question": "Combien de place, au minimum ?",
         "regle": "1 aiguille = 1 unité — on mesure l'aire balayée",
@@ -156,7 +157,8 @@ TEXTES = {
         "lien": "eleveai.fr/aiguille-de-kakeya",
     },
     "en": {
-        "titre": "Hong Wang's needle",
+        "titre": "The Kakeya needle",
+        "sous_titre": "a 1917 problem, solved by Hong Wang",
         "question0": "Can you turn around without being seen?",
         "question": "How little room does it need?",
         "regle": "1 needle = 1 unit — we measure the swept area",
@@ -269,11 +271,13 @@ class AiguilleDeKakeya(Scene):
         self.banniere = self.T(self.t_("banniere"), size=18, color=GREY_B).to_edge(UP, buff=0.12)
         self.play(FadeIn(self.banniere, shift=0.2 * DOWN), run_time=0.5)
 
-        titre = self.T(self.t_("titre"), size=46, color=JAUNE_TITRE).to_edge(UP, buff=0.75)
+        titre = self.T(self.t_("titre"), size=46, color=JAUNE_TITRE).to_edge(UP, buff=0.72)
+        soustitre = self.T(self.t_("sous_titre"), size=22, color=GREY_B).next_to(titre, DOWN, buff=0.14)
         self.play(Write(titre))
+        self.play(FadeIn(soustitre, shift=0.15 * DOWN), run_time=0.5)
 
         aiguille = Line(LEFT * NL / 2, RIGHT * NL / 2, color=AIGUILLE,
-                        stroke_width=10).move_to([0, 0.2, 0])
+                        stroke_width=10).move_to([0, 0.3, 0])
         self.play(GrowFromCenter(aiguille))
         self.play(Rotate(aiguille, angle=0.35, run_time=0.5),
                   rate_func=there_and_back)
@@ -286,7 +290,8 @@ class AiguilleDeKakeya(Scene):
         regle = self.T(self.t_("regle"), size=20, color=GREY_B).to_edge(DOWN, buff=0.28)
         self.play(FadeIn(regle))
         self.wait(2.0)
-        self.play(FadeOut(aiguille), FadeOut(q0), FadeOut(q), FadeOut(regle), FadeOut(titre))
+        self.play(FadeOut(aiguille), FadeOut(q0), FadeOut(q), FadeOut(regle),
+                  FadeOut(titre), FadeOut(soustitre))
 
     # ── MÉTHODE 1 : autour du bout (demi-disque, π/2) ──────────────────────────
     def methode_bout(self):

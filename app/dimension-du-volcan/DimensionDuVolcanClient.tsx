@@ -345,7 +345,7 @@ export default function DimensionDuVolcanClient() {
           La dimension du volcan
         </h1>
         <p className="mt-1 text-lg font-black" style={{ color: OR }}>
-          De l&apos;aiguille de Hong Wang aux remparts de la Fournaise
+          De l&apos;aiguille de Kakeya aux remparts de la Fournaise
         </p>
         <p className="mt-1 text-[13px]" style={{ color: SOUS }}>
           La rugosité d&apos;un rempart n&apos;est pas qu&apos;une impression : c&apos;est un nombre, et il se
@@ -550,9 +550,16 @@ export default function DimensionDuVolcanClient() {
 
           <p className="mt-2 rounded border px-3 py-2 text-[12.5px]" style={{ borderColor: "#efe4d8", backgroundColor: "#fbf7f2", color: "#5d4c40" }}>
             <span className="font-mono font-bold" style={{ color: BASALTE }}>d = ln(multiplicateur) ÷ ln(2)</span>{" "}
-            — la ligne lisse : ln 2 ÷ ln 2 = <b>1</b>. Le rempart : ln 2,4 ÷ ln 2 ≈ <b>1,26</b>. C&apos;est la
-            dimension «&nbsp;par comptage de boîtes&nbsp;» (Minkowski) — la même idée de dimension que dans le
-            théorème de Hong Wang.
+            — la ligne lisse : ln 2 ÷ ln 2 = <b>1</b>. Le rempart : ln 2,4 ÷ ln 2 ≈ <b>1,26</b> (et la machine,
+            qui mesure sur le vrai tracé, trouve <b>≈ 1,25</b>). Ce comptage de carrés porte un nom&nbsp;: la{" "}
+            <b>dimension de Minkowski</b>.
+          </p>
+          <p className="mt-2 rounded border px-3 py-2 text-[12.5px]" style={{ borderColor: BORD, backgroundColor: "#fff8ef", color: "#5d4c40" }}>
+            🪡 <b>Le vrai lien avec Hong Wang, ici.</b> Cette dimension de Minkowski — «&nbsp;compter des
+            boîtes de plus en plus petites&nbsp;» — n&apos;est pas une analogie&nbsp;: c&apos;est{" "}
+            <b>l&apos;outil même dans lequel s&apos;énonce la conjecture de Kakeya</b> qu&apos;elle a résolue.
+            En comptant tes carrés sur le rempart, tu fais <b>exactement le geste</b> qui mesure un ensemble de
+            Kakeya. Le volcan n&apos;est pas son sujet&nbsp;; l&apos;<b>instrument</b>, si.
           </p>
         </div>
 
@@ -622,7 +629,7 @@ export default function DimensionDuVolcanClient() {
             className="inline-flex items-center gap-2 rounded px-4 py-2 text-sm font-bold text-white hover:brightness-110"
             style={{ backgroundColor: LAVE }}
           >
-            🪡 L&apos;aiguille de Hong Wang — la machine de la médaille Fields
+            🪡 L&apos;aiguille de Kakeya — la machine de la médaille de Hong Wang
           </Link>
           <Link
             href="/simulateur-volcan"
