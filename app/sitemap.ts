@@ -30,7 +30,7 @@ const LASTMOD_FICHES  = new Date("2026-07-11");
 // 12/07 : les 16 fiches IA refaites « en blocs » (fiche + flashcards + composeur)
 const LASTMOD_FICHES_IA = new Date("2026-07-12");
 // 25/07 : lancement des kits de survie lycée (Première spé maths en premier)
-const LASTMOD_KIT = new Date("2026-07-27");
+const LASTMOD_KIT = new Date("2026-07-28");
 const LASTMOD_AUDIENCES = new Date("2026-07-05");
 const LASTMOD_LEGAL   = new Date("2026-02-18");
 
@@ -93,6 +93,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/guide-de-survie/francais-cm1",    priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
   { path: "/guide-de-survie/francais-cm2",    priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
   { path: "/guide-de-survie/francais-6e",     priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
+  { path: "/guide-de-survie/francais-5e",     priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
 
   // ── FICHES DE COURS ────────────────────────────────────────────────────────
   { path: "/fiches-cours",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
