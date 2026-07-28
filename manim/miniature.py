@@ -1043,7 +1043,32 @@ def acc_diagonale_journal(d):
 
 
 # ── LE REGISTRE : une entrée par notion ────────────────────────────────────────
+def acc_aiguille_kakeya(d):
+    # le deltoïde (la ruse de Kakeya) + l'aiguille rouge en corde + l'aire π/8.
+    import math
+    cx, cy, r = 566, 486, 50
+
+    def q(s):
+        return (cx + r * (2 * math.cos(s) + math.cos(2 * s)),
+                cy + r * (2 * math.sin(s) - math.sin(2 * s)))
+
+    pts = [q(2 * math.pi * i / 120) for i in range(121)]
+    d.polygon(pts, fill=(243, 201, 194))
+    d.line(pts, fill=BLEU, width=6, joint="curve")
+    # l'aiguille : la corde Q(0)–Q(π), de longueur 4r (elle glisse en tournant)
+    a, b = q(0.0), q(math.pi)
+    d.line([a, b], fill=ROUGE, width=9)
+    for p in (a, b):
+        d.ellipse([p[0] - 9, p[1] - 9, p[0] + 9, p[1] + 9], fill=ROUGE)
+    # l'aire, à l'intérieur du deltoïde (au-dessus de l'aiguille)
+    centre(d, cx - 6, cy - 66, "π/8", police("ariblk.ttf", 34), NAVY)
+
+
 NOTIONS = {
+    "eleveai-maths-journal-aiguille-de-kakeya": {
+        "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["L'AIGUILLE", "DE KAKEYA"], "taille": 68,
+        "sous": "Hong Wang · médaille Fields 2026", "accroche": acc_aiguille_kakeya,
+    },
     "eleveai-maths-journal-loi-normale": {
         "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["LA COURBE", "EN CLOCHE"], "taille": 76,
         "sous": "de pile ou face à la loi normale", "accroche": acc_loi_normale_journal,
