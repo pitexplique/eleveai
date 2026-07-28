@@ -14,11 +14,12 @@ import { KIT_FRANCAIS_CM2 } from "./francais-cm2/data";
 import { KIT_FRANCAIS_6E } from "./francais-6e/data";
 import { KIT_FRANCAIS_5E } from "./francais-5e/data";
 import { KIT_FRANCAIS_4E } from "./francais-4e/data";
+import { KIT_FRANCAIS_3E } from "./francais-3e/data";
 
 export const metadata: Metadata = {
   title: "Guides de survie EleveAI — maths et français, du CM1 au lycée (gratuit à imprimer)",
   description:
-    "Les guides de survie EleveAI : le programme de maths (du CM1 au lycée) et de français (du CM1 à la 4e) condensé en fiches à imprimer — l'essentiel, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
+    "Les guides de survie EleveAI : le programme de maths (du CM1 au lycée) et de français (du CM1 à la 3e) condensé en fiches à imprimer — l'essentiel, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
   alternates: { canonical: "https://eleveai.fr/guide-de-survie" },
 };
 
@@ -154,6 +155,15 @@ const KITS_FRANCAIS = [
       "Les 9 domaines du programme en 9 fiches (roman réaliste, jugement, argumentation) : l'essentiel, les règles qui sauvent, les réflexes, les pièges, test corrigé.",
     grad: "from-orange-500 to-amber-600",
   },
+  {
+    slug: "francais-3e",
+    emoji: "✊",
+    titre: KIT_FRANCAIS_3E.titre,
+    niveau: "3e · brevet (cycle 4)",
+    pitch:
+      "Les 9 domaines du programme en 9 fiches, spécial brevet (engagement, subordonnées, voix passive) : l'essentiel, les règles qui sauvent, les réflexes, les pièges, test corrigé.",
+    grad: "from-amber-500 to-yellow-600",
+  },
 ];
 
 type Kit = (typeof KITS_MATHS)[number];
@@ -211,7 +221,7 @@ export default function KitDeSurvieHubPage() {
       <section className="mb-10">
         <h2 className="mb-3 flex items-center gap-2 text-2xl font-black text-slate-900">
           <span aria-hidden="true">📖</span> Français
-          <span className="text-sm font-semibold text-slate-400">— du CM1 à la 4e</span>
+          <span className="text-sm font-semibold text-slate-400">— du CM1 à la 3e</span>
           <span className="rounded-full bg-violet-100 px-2 py-0.5 text-[11px] font-bold uppercase tracking-widest text-violet-700">
             Nouveau
           </span>
