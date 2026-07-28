@@ -90,6 +90,14 @@ const UNE: Episode = {
 
 const BREVES: Episode[] = [
   {
+    emoji: "🪡",
+    titre: "L'aiguille de Kakeya : Hong Wang, médaille Fields 2026",
+    accroche:
+      "Peut-on tourner sans être vu ? L'aire fond vers 0… mais pas la dimension. De l'aiguille au rempart du Piton de la Fournaise — l'idée d'une médaille Fields, avec un défi.",
+    youtubeId: "jhb0HjHO2sg",
+    defi: "les tiroirs — 18 ombres dans 5 boîtes : la plus pleine en contient au moins combien ?",
+  },
+  {
     emoji: "💪",
     titre: "1 minute à fond = même pas un carré de chocolat",
     accroche:

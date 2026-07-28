@@ -485,6 +485,16 @@ export default function AiguilleDeKakeyaClient() {
           </a>
         </p>
 
+        <a
+          href="https://youtu.be/jhb0HjHO2sg"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-black text-white hover:brightness-110"
+          style={{ backgroundColor: "#c81e1e" }}
+        >
+          ▶ Regarder la vidéo — l&apos;aiguille, le théorème et le volcan (2 min)
+        </a>
+
         {/* ── LA MACHINE : image + réglage + résultat, sur un seul écran ── */}
         <div className="mt-3 rounded border p-3 sm:p-4" style={{ borderColor: BORD, backgroundColor: "#ffffffcc" }}>
           <div className="flex flex-wrap items-baseline justify-between gap-2">
