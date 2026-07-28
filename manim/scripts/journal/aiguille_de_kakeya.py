@@ -115,9 +115,13 @@ TEXTES = {
         "regle": "1 aiguille = 1 unité — on mesure l'aire balayée",
         "m1": "1 · Autour du bout",
         "m1_aire": "aire = π/2 ≈ 1,57",
+        "m1_calc": "demi-disque, rayon = 1 :  ½ · π · 1² = π/2",
         "m2": "2 · Autour du centre",
         "m2_aire": "aire = π/4 ≈ 0,79",
+        "m2_calc": "disque, rayon = ½ :  π · (½)² = π/4",
         "m2_lecon": "deux fois moins !",
+        "r_un": "r = 1 (l'aiguille entière)",
+        "r_demi": "r = ½ (une demi-aiguille)",
         "m3": "3 · La ruse du deltoïde",
         "m3_aire": "aire = π/8 ≈ 0,39",
         "m3_lecon": "encore deux fois moins !",
@@ -158,9 +162,13 @@ TEXTES = {
         "regle": "1 needle = 1 unit — we measure the swept area",
         "m1": "1 · Around the tip",
         "m1_aire": "area = π/2 ≈ 1.57",
+        "m1_calc": "half-disk, radius = 1:  ½ · π · 1² = π/2",
         "m2": "2 · Around the centre",
         "m2_aire": "area = π/4 ≈ 0.79",
+        "m2_calc": "full disk, radius = ½:  π · (½)² = π/4",
         "m2_lecon": "half as much!",
+        "r_un": "r = 1 (the whole needle)",
+        "r_demi": "r = ½ (half a needle)",
         "m3": "3 · The deltoid trick",
         "m3_aire": "area = π/8 ≈ 0.39",
         "m3_lecon": "halved again!",
@@ -296,12 +304,23 @@ class AiguilleDeKakeya(Scene):
         self.add(zone, aig)
         self.play(a.animate.set_value(np.pi), run_time=3.0, rate_func=linear)
 
-        aire = self.T(self.t_("m1_aire"), size=30, color=JAUNE_TITRE).move_to([0, 1.9, 0])
+        # LE RAYON, montré : l'aiguille ENTIÈRE (dans le demi-disque, angle ~110°)
+        r_ang = np.pi * 0.60
+        bout = pivot + NL * np.array([np.cos(r_ang), np.sin(r_ang), 0.0])
+        r_line = DashedLine(pivot, bout, color=WHITE, stroke_width=3, dash_length=0.14)
+        r_lab = self.T(self.t_("r_un"), size=20, color=WHITE).move_to(
+            pivot + 0.52 * (bout - pivot) + np.array([-1.4, 0.05, 0.0]))
+        self.play(Create(r_line), FadeIn(r_lab))
+
+        aire = self.T(self.t_("m1_aire"), size=30, color=JAUNE_TITRE).move_to([3.1, 1.5, 0])
+        calc = self.T(self.t_("m1_calc"), size=21, color=GREY_B).move_to([0, -1.75, 0])
         self.play(self.anim_entree(aire, mode="pop"))
-        self.wait(1.4)
+        self.play(FadeIn(calc, shift=0.2 * UP))
+        self.wait(1.6)
         self.rec0 = self.poser_record(0, self.t_("ech_0"), AIGUILLE)
         self.wait(1.0)
-        self.play(FadeOut(zone), FadeOut(aig), FadeOut(aire), FadeOut(label))
+        self.play(FadeOut(zone), FadeOut(aig), FadeOut(aire), FadeOut(calc),
+                  FadeOut(r_line), FadeOut(r_lab), FadeOut(label))
 
     # ── MÉTHODE 2 : autour du centre (disque, π/4) ─────────────────────────────
     def methode_centre(self):
@@ -324,14 +343,24 @@ class AiguilleDeKakeya(Scene):
         self.add(zone, aig)
         self.play(a.animate.set_value(np.pi), run_time=3.0, rate_func=linear)
 
-        aire = self.T(self.t_("m2_aire"), size=30, color=JAUNE_TITRE).move_to([0, 2.2, 0])
+        # LE RAYON, montré : une DEMI-aiguille (du centre au bord, angle ~115°)
+        r_ang = np.pi * 0.64
+        bord = centre + r * np.array([np.cos(r_ang), np.sin(r_ang), 0.0])
+        r_line = DashedLine(centre, bord, color=WHITE, stroke_width=3, dash_length=0.12)
+        r_lab = self.T(self.t_("r_demi"), size=20, color=WHITE).move_to(bord + np.array([-1.5, 0.2, 0.0]))
+        self.play(Create(r_line), FadeIn(r_lab))
+
+        aire = self.T(self.t_("m2_aire"), size=30, color=JAUNE_TITRE).move_to([3.3, 1.9, 0])
         lecon = self.T(self.t_("m2_lecon"), size=26, color=VERT_OK).next_to(aire, DOWN, buff=0.15)
+        calc = self.T(self.t_("m2_calc"), size=21, color=GREY_B).move_to([0, -2.05, 0])
         self.play(self.anim_entree(aire, mode="pop"))
         self.play(FadeIn(lecon, shift=0.2 * UP))
-        self.wait(1.4)
+        self.play(FadeIn(calc, shift=0.2 * UP))
+        self.wait(1.6)
         self.poser_record(1, self.t_("ech_1"), AIGUILLE)
         self.wait(1.0)
-        self.play(FadeOut(zone), FadeOut(aig), FadeOut(aire), FadeOut(lecon), FadeOut(label))
+        self.play(FadeOut(zone), FadeOut(aig), FadeOut(aire), FadeOut(lecon), FadeOut(calc),
+                  FadeOut(r_line), FadeOut(r_lab), FadeOut(label))
 
     # ── MÉTHODE 3 : le deltoïde (π/8) ──────────────────────────────────────────
     def methode_deltoide(self):
