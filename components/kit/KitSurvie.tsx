@@ -26,9 +26,13 @@ function ligneAuteur(data: KitData): string {
   return `Réalisé par Frédéric Lacoste, ${specialite}.`;
 }
 
-/** « Les formules qui sauvent » (maths) vs « Les règles qui sauvent » (langues). */
+/** En-tête du bloc central, adapté à la matière :
+ *  maths → « Les formules qui sauvent » ; anglais (vocabulaire) → « Les mots &
+ *  phrases qui sauvent » ; autres langues → « Les règles qui sauvent ». */
 function titreFormules(matiere: string): string {
-  return matiere === "maths" ? "Les formules qui sauvent" : "Les règles qui sauvent";
+  if (matiere === "maths") return "Les formules qui sauvent";
+  if (matiere === "english-maths") return "Les mots & phrases qui sauvent";
+  return "Les règles qui sauvent";
 }
 
 function Etoiles({ n }: { n: number }) {
@@ -229,12 +233,16 @@ function PageNotion({
 }
 
 export default function KitSurvie({ data }: { data: KitData }) {
-  const coachHref = `/coach-ia/${data.matiere}?classe=${data.coachClasse}`;
+  // Le coach anglais a une route dédiée (/coach-ia/english-maths) qui lit le
+  // niveau CECR dans ?niveau= ; les autres matières passent par la route
+  // dynamique /coach-ia/[matiere] qui lit ?classe=. On adapte donc la clé.
+  const coachParam = data.matiere === "english-maths" ? "niveau" : "classe";
+  const coachHref = `/coach-ia/${data.matiere}?${coachParam}=${data.coachClasse}`;
   // Le QR de garde mène AU COACH du niveau (la destination), pas à un mur de
   // connexion : le guide est une porte, on tient la promesse « continue et
   // entraîne-toi ». La capture d'email se fait sans mur via la modale
   // post-impression. `from=kit` = tracking de la porte → coach.
-  const coachQrUrl = `https://eleveai.fr/coach-ia/${data.matiere}?classe=${data.coachClasse}&from=kit`;
+  const coachQrUrl = `https://eleveai.fr/coach-ia/${data.matiere}?${coachParam}=${data.coachClasse}&from=kit`;
 
   return (
     <div className="kit-root bg-slate-100 print:bg-white">
