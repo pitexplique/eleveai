@@ -33,7 +33,13 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     type: "website",
   },
-  alternates: { canonical: "/aiguille-de-kakeya" },
+  alternates: {
+    canonical: "/aiguille-de-kakeya",
+    languages: {
+      "fr-FR": "/aiguille-de-kakeya",
+      en: "/en/simulators/kakeya-needle",
+    },
+  },
 };
 
 export default function Page() {

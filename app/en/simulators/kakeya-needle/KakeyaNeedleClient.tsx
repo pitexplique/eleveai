@@ -1,30 +1,31 @@
 "use client";
 
-// « L'aiguille de Kakeya » (Hong Wang, médaille Fields 2026) — l'article-machine du journal (rubrique « Un peu
-// de maths »), publié pour la médaille Fields 2026. Le problème de l'aiguille
-// (Kakeya, 1917) : faire faire DEMI-TOUR à une aiguille en balayant le moins de
-// surface possible. Trois méthodes, et l'aire se divise par 2 à chaque ruse :
-// π/2 (autour du bout) → π/4 (autour du centre) → π/8 (le deltoïde)… et
-// Besicovitch a montré qu'on peut approcher 0. Hong Wang (avec Joshua Zahl,
-// 2025) a fermé la version 3D — d'où la médaille, remise le 23/07/2026.
+// "The Kakeya needle" (Hong Wang, 2026 Fields Medal) — English showcase page.
+// English twin of app/aiguille-de-kakeya/AiguilleDeKakeyaClient.tsx: the SAME
+// machine (geometry, canvas, maths untouched), with English text and English
+// decimals (period, not comma). The Kakeya problem (1917): turn a needle a full
+// HALF-TURN while sweeping the least area. Three methods, area halved each time:
+// π/2 (around the tip) → π/4 (around the center) → π/8 (the deltoid)… and
+// Besicovitch showed you can approach 0. Hong Wang (with Joshua Zahl, 2025)
+// closed the 3D version — hence the medal, awarded on 23 July 2026.
 //
-// Contrainte (Frédéric) : IMAGE (l'aiguille) + RÉGLAGE (la méthode) + RÉSULTAT
-// (l'aire balayée) tiennent sur UN SEUL écran. Le reste (le théorème, SON
-// tableau décodé — projection, ombre F, tiroirs F′ ⊆ F —, ses mots, les défis)
-// se déroule dessous.
+// Constraint (Frédéric): IMAGE (the needle) + SETTING (the method) + RESULT
+// (the swept area) fit on ONE screen. The rest (the theorem, her blackboard
+// decoded, her words, the challenges) unrolls below.
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import DefisSimulateur, {
   type DefiSimulateur,
   type CouleursDefis,
+  type LabelsDefis,
 } from "@/components/simulateurs/DefisSimulateur";
 
-const ENCRE = "#1f3a67"; // l'encre bleue — le papier de son tableau
-const OR = "#c8962a"; // les repères (convention du journal)
-const ROUGE = "#c2352b"; // l'aiguille
-const PEINT = "#f3c9c2"; // la surface déjà balayée
-const SOUS = "#5f7396"; // légendes
+const ENCRE = "#1f3a67"; // the blue ink — the paper of her blackboard
+const OR = "#c8962a"; // the markers (the journal's convention)
+const ROUGE = "#c2352b"; // the needle
+const PEINT = "#f3c9c2"; // the area already swept
+const SOUS = "#5f7396"; // captions
 const BORD = "#ccd9ec";
 const TEXTE = "#243a5e";
 
@@ -39,107 +40,120 @@ const COULEURS_DEFIS: CouleursDefis = {
   rate: "#b3261e",
 };
 
-// La rampe CP → Terminale : la MÊME question (« combien de place pour un
-// demi-tour ? »), un outil qui grandit — de l'addition à la limite d'une suite
-// géométrique. Réponse numérique unique par carte, id stable.
+// The English labels for the challenge cards (the French component defaults to FR).
+const LABELS_DEFIS: Partial<LabelsDefis> = {
+  defi: "Challenge",
+  placeholder: "Your answer",
+  ariaReponse: "Answer to challenge",
+  ariaEn: "in",
+  verifier: "Check",
+  bon: "That's it.",
+  rate: "Not yet — hint:",
+  voirCalcul: "See the working",
+};
+
+// The age 6 → 18 ramp: the SAME question ("how much room for a half-turn?"), a
+// tool that grows — from addition to the limit of a geometric sequence. One
+// numeric answer per card, stable id. (Ids kept identical to the French page so
+// results stay comparable across languages.)
 const DEFIS: DefiSimulateur[] = [
   {
     id: "kakeya-cp-diametre",
     question:
-      "CP · CE1 — L'aiguille mesure 1 mètre. Quand elle tourne autour de son bout, elle dessine un cercle large de DEUX aiguilles mises bout à bout. Ce cercle est large de combien de mètres ?",
+      "Ages 6–7 — The needle is 1 metre long. When it spins around its tip, it draws a circle as wide as TWO needles laid end to end. How many metres wide is that circle?",
     reponse: 2,
     unite: "m",
-    indice: "Une aiguille, puis encore une aiguille : 1 + 1.",
-    calcul: "1 + 1 = 2 m — c'est le diamètre du cercle.",
+    indice: "One needle, then one more needle: 1 + 1.",
+    calcul: "1 + 1 = 2 m — that's the diameter of the circle.",
   },
   {
     id: "kakeya-ce2-demitour",
     question:
-      "CE2 · CM1 — Un tour complet, c'est 360 degrés. Un DEMI-tour, comme celui de l'aiguille, c'est combien de degrés ?",
+      "Ages 8–9 — A full turn is 360 degrees. A HALF-turn, like the needle's, is how many degrees?",
     reponse: 180,
     unite: "°",
-    indice: "La moitié de 360 : calcule 360 ÷ 2.",
-    calcul: "360 ÷ 2 = 180° — le demi-tour que fait l'aiguille dans la machine.",
+    indice: "Half of 360: work out 360 ÷ 2.",
+    calcul: "360 ÷ 2 = 180° — the half-turn the needle makes in the machine.",
   },
   {
     id: "kakeya-cm2-moitie",
     question:
-      "CM2 — Autour du bout, l'aiguille balaye une aire de 1,57. Autour du centre, elle balaye MOITIÉ moins. Quelle aire ?",
+      "Age 10 — Around the tip, the needle sweeps an area of 1.57. Around the center, it sweeps HALF as much. What area?",
     reponse: 0.785,
     unite: "",
-    indice: "Calcule 1,57 ÷ 2.",
-    calcul: "1,57 ÷ 2 ≈ 0,79 — chaque ruse divise l'aire par 2.",
+    indice: "Work out 1.57 ÷ 2.",
+    calcul: "1.57 ÷ 2 ≈ 0.79 — each trick halves the area.",
     tolerance: 0.02,
   },
   {
     id: "kakeya-6e-pourcent",
     question:
-      "6ᵉ · 5ᵉ — Du disque (aire 0,79) au deltoïde (aire 0,39), l'aire balayée baisse d'environ quel POURCENTAGE ?",
+      "Ages 11–12 — From the disc (area 0.79) to the deltoid (area 0.39), the swept area drops by roughly what PERCENTAGE?",
     reponse: 50,
     unite: "%",
-    indice: "0,39, c'est à peu près la moitié de 0,79.",
-    calcul: "0,39 ÷ 0,79 ≈ 0,5 : il reste la moitié — une baisse d'environ 50 %.",
+    indice: "0.39 is about half of 0.79.",
+    calcul: "0.39 ÷ 0.79 ≈ 0.5: half is left — a drop of about 50%.",
     tolerance: 2,
   },
   {
     id: "kakeya-4e-aire",
     question:
-      "4ᵉ · 3ᵉ — L'aiguille de 1 m tourne autour de son centre : elle balaye un disque de rayon 0,5 m. Aire d'un disque : π × r². Calcule cette aire (arrondie au centième).",
+      "Ages 13–14 — The 1 m needle spins around its center: it sweeps a disc of radius 0.5 m. Area of a disc: π × r². Work out this area (rounded to two decimals).",
     reponse: 0.79,
     unite: "m²",
-    indice: "π × 0,5² = π × 0,25.",
-    calcul: "π × 0,25 ≈ 0,785 ≈ 0,79 m² — le π/4 affiché par la machine.",
+    indice: "π × 0.5² = π × 0.25.",
+    calcul: "π × 0.25 ≈ 0.785 ≈ 0.79 m² — the π/4 shown by the machine.",
     tolerance: 0.01,
   },
   {
     id: "kakeya-2nde-tiroirs",
     question:
-      "2ⁿᵈᵉ — Le principe des tiroirs de son tableau : 18 ombres tombent dans 5 boîtes. La boîte la plus pleine contient AU MOINS combien d'ombres ?",
+      "Age 15 — The pigeonhole principle from her blackboard: 18 shadows fall into 5 boxes. The fullest box holds AT LEAST how many shadows?",
     reponse: 4,
-    unite: "ombres",
-    indice: "18 ÷ 5 = 3,6 — et on arrondit vers le haut. Pourquoi ?",
+    unite: "shadows",
+    indice: "18 ÷ 5 = 3.6 — and round up. Why?",
     calcul:
-      "Si chaque boîte avait au plus 3 ombres, on en aurait au plus 5 × 3 = 15. Or il y en a 18 : une boîte en contient au moins 4. C'est le « pigeonhole » qui choisit F′ ⊆ F.",
+      "If every box held at most 3 shadows, there would be at most 5 × 3 = 15. But there are 18: one box holds at least 4. That's the pigeonhole that picks F′ ⊆ F.",
   },
   {
     id: "kakeya-1re-ruses",
     question:
-      "1ʳᵉ — À chaque ruse, l'aire est divisée par 2 en partant de 1,57. Combien de ruses pour passer SOUS 0,01 ?",
+      "Age 16 — With each trick, the area is halved starting from 1.57. How many tricks to drop BELOW 0.01?",
     reponse: 8,
-    unite: "ruses",
-    indice: "1,57 ; 0,785 ; 0,39… une suite géométrique de raison ½ — compte les étapes.",
-    calcul: "1,57 ÷ 2⁷ ≈ 0,012 (pas encore) ; 1,57 ÷ 2⁸ ≈ 0,006 < 0,01 → 8 ruses.",
+    unite: "tricks",
+    indice: "1.57; 0.785; 0.39… a geometric sequence with ratio ½ — count the steps.",
+    calcul: "1.57 ÷ 2⁷ ≈ 0.012 (not yet); 1.57 ÷ 2⁸ ≈ 0.006 < 0.01 → 8 tricks.",
   },
   {
     id: "kakeya-term-limite",
     question:
-      "Terminale — L'aire après n ruses vaut 1,57 × (½)ⁿ. Quelle est la limite de cette suite quand n tend vers +∞ ?",
+      "Ages 17–18 — After n tricks the area is 1.57 × (½)ⁿ. What is the limit of this sequence as n tends to +∞?",
     reponse: 0,
     unite: "",
-    indice: "Que devient (½)ⁿ quand n grandit sans fin ?",
+    indice: "What happens to (½)ⁿ as n grows without end?",
     calcul:
-      "(½)ⁿ → 0, donc l'aire → 0 : on peut faire demi-tour dans une surface aussi petite qu'on veut (Besicovitch, 1928). Et pourtant — Hong Wang et Joshua Zahl, 2025 — en 3D, l'ensemble reste forcément de dimension 3.",
+      "(½)ⁿ → 0, so the area → 0: you can turn around in an area as small as you like (Besicovitch, 1928). And yet — Hong Wang and Joshua Zahl, 2025 — in 3D the set must still have dimension 3.",
     tolerance: 0.1,
   },
 ];
 
-// ── La machine : géométrie ────────────────────────────────────────────────────
+// ── The machine: geometry ─────────────────────────────────────────────────────
 const VBW = 1000;
 const VBH = 300;
-const NL = 170; // longueur de l'aiguille (px) = 1 « aiguille »
-const STEPS = 160; // positions dessinées pour un demi-tour
+const NL = 170; // needle length (px) = 1 "needle"
+const STEPS = 160; // positions drawn for one half-turn
 
 type Mode = "bout" | "centre" | "deltoide";
 
 const MODES: { id: Mode; nom: string; formule: string; aire: string }[] = [
-  { id: "bout", nom: "1 · Autour du bout", formule: "π/2", aire: "1,57" },
-  { id: "centre", nom: "2 · Autour du centre", formule: "π/4", aire: "0,79" },
-  { id: "deltoide", nom: "3 · La ruse du deltoïde", formule: "π/8", aire: "0,39" },
+  { id: "bout", nom: "1 · Around the tip", formule: "π/2", aire: "1.57" },
+  { id: "centre", nom: "2 · Around the center", formule: "π/4", aire: "0.79" },
+  { id: "deltoide", nom: "3 · The deltoid trick", formule: "π/8", aire: "0.39" },
 ];
 
-// Le deltoïde : Q(s) = r·(2cos s + cos 2s, 2sin s − sin 2s). L'aiguille est la
-// corde tangente, de longueur constante 4r — ses bouts glissent sur la courbe
-// pendant qu'elle tourne de 180°. Ici 4r = NL, centré en (cx, cy).
+// The deltoid: Q(s) = r·(2cos s + cos 2s, 2sin s − sin 2s). The needle is the
+// tangent chord, of constant length 4r — its ends slide along the curve as it
+// turns 180°. Here 4r = NL, centered at (cx, cy).
 const DELT = { cx: 500, cy: 150, r: NL / 4 };
 function deltPoint(s: number): [number, number] {
   return [
@@ -147,12 +161,12 @@ function deltPoint(s: number): [number, number] {
     DELT.cy + DELT.r * (2 * Math.sin(s) - Math.sin(2 * s)),
   ];
 }
-// L'aiguille au « temps » t ∈ [0, 2π] : ses deux bouts sur la courbe.
+// The needle at "time" t ∈ [0, 2π]: its two ends on the curve.
 function aiguilleDeltoide(t: number): [[number, number], [number, number]] {
   return [deltPoint(-t / 2), deltPoint(-t / 2 + Math.PI)];
 }
 function aiguilleBout(a: number): [[number, number], [number, number]] {
-  // pivot : le bout gauche ; l'autre bout monte de 0 à 180°
+  // pivot: the left end; the other end rises from 0 to 180°
   const px = 415;
   const py = 235;
   return [
@@ -176,12 +190,12 @@ function aiguilleAt(mode: Mode, t: number): [[number, number], [number, number]]
   return aiguilleDeltoide(t);
 }
 const T_MAX: Record<Mode, number> = { bout: Math.PI, centre: Math.PI, deltoide: 2 * Math.PI };
-// Rotation nette de l'aiguille (0 → 180°), quel que soit le chemin.
+// Net rotation of the needle (0 → 180°), whatever the path.
 function degres(mode: Mode, t: number) {
   return Math.round((t / T_MAX[mode]) * 180);
 }
 
-// Les contours en pointillé : la zone que chaque méthode va peindre.
+// The dashed outlines: the zone each method is going to paint.
 const CONTOURS: Record<Mode, string> = {
   bout: `M 415 235 L ${415 + NL} 235 A ${NL} ${NL} 0 0 0 ${415 - NL} 235 L 415 235`,
   centre: (() => {
@@ -198,21 +212,21 @@ const CONTOURS: Record<Mode, string> = {
   })(),
 };
 
-// ── « L'ombre et les tiroirs » : le tableau de son interview, version jouable ─
-// E : les points. π̃ : on les projette (dans la direction que TU règles) sur la
-// droite L en bas. F : leurs ombres. F′ : la boîte la plus pleine — le tiroir
-// que le « pigeonhole » choisit. Deux alignements sont cachés dans E : cinq
-// points à +20°, quatre points à −25° — seule la bonne projection les démasque.
+// ── "The shadow and the boxes": her interview blackboard, made playable ───────
+// E: the points. π̃: we project them (in the direction YOU set) onto the line L
+// at the bottom. F: their shadows. F′: the fullest box — the drawer the
+// "pigeonhole" picks. Two alignments are hidden in E: five points at +20°, four
+// points at −25° — only the right projection reveals them.
 const AXE_Y = 290;
 const BOITE_X0 = 57;
 const BOITE_W = 63;
 const NB_BOITES = 14;
 const POINTS_E: [number, number][] = [
-  // cinq points alignés (ils se rassemblent à +20°)
+  // five aligned points (they gather at +20°)
   [476.3, 60], [492.7, 105], [509, 150], [525.4, 195], [541.8, 240],
-  // quatre points alignés (ils se rassemblent à −25°)
+  // four aligned points (they gather at −25°)
   [342.6, 70], [316.9, 125], [291.3, 180], [265.6, 235],
-  // le reste du nuage
+  // the rest of the cloud
   [100, 80], [160, 220], [700, 90], [760, 200], [840, 120],
   [640, 250], [120, 140], [880, 240], [390, 260],
 ];
@@ -247,9 +261,9 @@ function OmbresEtTiroirs() {
         viewBox="0 0 1000 345"
         className="w-full"
         role="img"
-        aria-label={`Un nuage de 18 points E est projeté sur la droite L selon un angle réglable (${angle}°). Les ombres F tombent dans des boîtes ; la boîte la plus pleine, F prime, contient ${max} ombres.`}
+        aria-label={`A cloud of 18 points E is projected onto the line L at an adjustable angle (${angle}°). The shadows F fall into boxes; the fullest box, F prime, holds ${max} shadows.`}
       >
-        {/* les boîtes (les tiroirs) et leur remplissage */}
+        {/* the boxes (the drawers) and how full they are */}
         {compte.map((n, i) => {
           const x = BOITE_X0 + i * BOITE_W;
           const pleine = i === meilleure && n > 0;
@@ -268,10 +282,10 @@ function OmbresEtTiroirs() {
             </g>
           );
         })}
-        {/* la droite L (l'écran qui reçoit les ombres) */}
+        {/* the line L (the screen that catches the shadows) */}
         <line x1={40} y1={AXE_Y} x2={955} y2={AXE_Y} stroke={ENCRE} strokeWidth="2" />
         <text x={962} y={AXE_Y + 5} fontSize="17" fontWeight={800} fill={ENCRE}>L</text>
-        {/* les rayons de projection, puis les points et leurs ombres */}
+        {/* the projection rays, then the points and their shadows */}
         {ombres.map((o, i) => {
           const [x, y] = POINTS_E[i];
           const fort = o.boite === meilleure;
@@ -288,9 +302,9 @@ function OmbresEtTiroirs() {
             </g>
           );
         })}
-        {/* les étiquettes de son tableau */}
-        <text x={40} y={30} fontSize="15" fontWeight={800} fill={ENCRE}>E — les points</text>
-        <text x={40} y={AXE_Y + 40} fontSize="13" fill={SOUS}>F = les ombres sur L, rangées en boîtes</text>
+        {/* the labels from her blackboard */}
+        <text x={40} y={30} fontSize="15" fontWeight={800} fill={ENCRE}>E — the points</text>
+        <text x={40} y={AXE_Y + 40} fontSize="13" fill={SOUS}>F = the shadows on L, sorted into boxes</text>
         <text
           x={BOITE_X0 + meilleure * BOITE_W + BOITE_W / 2}
           y={52}
@@ -305,7 +319,7 @@ function OmbresEtTiroirs() {
 
       <div className="mt-2 flex flex-wrap items-center gap-3 border-t pt-3" style={{ borderColor: "#e2e9f4" }}>
         <label htmlFor="angle-projection" className="flex flex-1 items-center gap-3 text-sm font-black" style={{ color: ENCRE }}>
-          Angle de projection
+          Projection angle
           <input
             id="angle-projection"
             type="range"
@@ -320,7 +334,7 @@ function OmbresEtTiroirs() {
           <span className="w-10 text-right font-mono">{angle}°</span>
         </label>
         <p className="text-[13px] font-bold" style={{ color: max >= 5 ? "#1a7f37" : TEXTE }}>
-          Boîte la plus pleine : {max} ombre{max > 1 ? "s" : ""}
+          Fullest box: {max} shadow{max > 1 ? "s" : ""}
         </p>
       </div>
       <div className="mt-2 flex flex-wrap gap-2 text-[12px] font-semibold">
@@ -332,7 +346,7 @@ function OmbresEtTiroirs() {
             backgroundColor: cinqTrouve ? "#eaf6ee" : "#f4f7fc",
           }}
         >
-          {cinqTrouve ? "✅ Trouvé : 5 ombres dans une boîte — 5 points étaient alignés !" : "🔎 Défi : mets 5 ombres dans la MÊME boîte"}
+          {cinqTrouve ? "✅ Found: 5 shadows in one box — 5 points were aligned!" : "🔎 Challenge: get 5 shadows into the SAME box"}
         </span>
         <span
           className="rounded border px-2.5 py-1"
@@ -342,15 +356,15 @@ function OmbresEtTiroirs() {
             backgroundColor: quatreTrouve ? "#eaf6ee" : "#f4f7fc",
           }}
         >
-          {quatreTrouve ? "✅ Trouvé : l'alignement caché des angles négatifs !" : "🔎 Défi bonus : un autre alignement se cache côté angles négatifs"}
+          {quatreTrouve ? "✅ Found: the hidden alignment on the negative angles!" : "🔎 Bonus challenge: another alignment hides on the negative-angle side"}
         </span>
       </div>
     </div>
   );
 }
 
-// ── La page ───────────────────────────────────────────────────────────────────
-export default function AiguilleDeKakeyaClient() {
+// ── The page ──────────────────────────────────────────────────────────────────
+export default function KakeyaNeedleClient() {
   const [mode, setMode] = useState<Mode>("bout");
   const [enCours, setEnCours] = useState(false);
   const [t, setT] = useState(0);
@@ -390,8 +404,8 @@ export default function AiguilleDeKakeyaClient() {
     setTrail("");
   };
 
-  // Le demi-tour, dessiné pas à pas : à chaque tick on ajoute quelques positions
-  // de l'aiguille à la traînée — l'union des positions EST la surface balayée.
+  // The half-turn, drawn step by step: on each tick we add a few needle
+  // positions to the trail — the union of the positions IS the swept area.
   const tourner = () => {
     stop();
     tRef.current = 0;
@@ -421,18 +435,18 @@ export default function AiguilleDeKakeyaClient() {
   const [[ax, ay], [bx, by]] = aiguilleAt(mode, t);
 
   const verdict = (() => {
-    if (enCours) return { texte: `L'aiguille tourne… ${deg}° / 180°`, couleur: SOUS };
+    if (enCours) return { texte: `The needle is turning… ${deg}° / 180°`, couleur: SOUS };
     if (!fini)
       return {
-        texte: "Choisis une méthode, puis « Tourner ! » — le but : faire demi-tour en balayant le MOINS de surface possible.",
+        texte: "Pick a method, then \"Turn!\" — the goal: make a half-turn while sweeping the LEAST area possible.",
         couleur: "#3d5074",
       };
     if (mode === "bout")
-      return { texte: `Demi-tour réussi — aire balayée : ${infoMode.aire} (${infoMode.formule}). Un demi-disque entier… on peut faire mieux.`, couleur: "#1a7f37" };
+      return { texte: `Half-turn done — swept area: ${infoMode.aire} (${infoMode.formule}). A whole half-disc… we can do better.`, couleur: "#1a7f37" };
     if (mode === "centre")
-      return { texte: `Demi-tour réussi — aire balayée : ${infoMode.aire} (${infoMode.formule}). Deux fois moins qu'autour du bout !`, couleur: "#1a7f37" };
+      return { texte: `Half-turn done — swept area: ${infoMode.aire} (${infoMode.formule}). Half as much as around the tip!`, couleur: "#1a7f37" };
     return {
-      texte: `Demi-tour réussi — aire balayée : ${infoMode.aire} (${infoMode.formule}). Encore divisée par 2. Et les mathématiciens savent continuer…`,
+      texte: `Half-turn done — swept area: ${infoMode.aire} (${infoMode.formule}). Halved again. And mathematicians know how to keep going…`,
       couleur: "#1a7f37",
     };
   })();
@@ -452,28 +466,28 @@ export default function AiguilleDeKakeyaClient() {
     >
       <div className="mx-auto max-w-3xl px-4 pt-6">
         <p className="text-[11px] font-black uppercase tracking-[0.22em]" style={{ color: OR }}>
-          Un peu de maths · La rubrique du prof
+          A little maths · The teacher's column
         </p>
         <h1 className="mt-1 font-serif text-3xl font-black leading-tight sm:text-4xl" style={{ color: ENCRE }}>
-          L&apos;aiguille de Kakeya
+          The Kakeya needle
         </h1>
         <p className="mt-1 text-lg font-black" style={{ color: OR }}>
-          Hong Wang, médaille Fields 2026 — le demi-tour le plus économe du monde
+          Hong Wang, 2026 Fields Medal — the world&apos;s most economical U-turn
         </p>
         <p className="text-[12.5px]" style={{ color: SOUS }}>
-          Un problème posé par Sōichi Kakeya en 1917 — dont Hong Wang vient de fermer la grande conjecture.
+          A problem posed by Sōichi Kakeya in 1917 — whose great conjecture Hong Wang has just closed.
         </p>
         <p className="mt-2 flex flex-wrap items-center gap-2 text-[12px] font-bold">
           <span className="rounded-full border px-2.5 py-1" style={{ borderColor: OR + "66", backgroundColor: "#fdf6e8", color: "#8a6516" }}>
-            🏅 3ᵉ femme de l&apos;histoire à recevoir la médaille Fields
+            🏅 3rd woman in history to receive the Fields Medal
           </span>
           <span className="rounded-full border px-2.5 py-1" style={{ borderColor: BORD, backgroundColor: "#f4f7fc", color: ENCRE }}>
-            虹 «&nbsp;Hong&nbsp;», son prénom, veut dire «&nbsp;arc-en-ciel&nbsp;»
+            虹 «&nbsp;Hong&nbsp;», her given name, means «&nbsp;rainbow&nbsp;»
           </span>
         </p>
         <p className="mt-1 text-[13px]" style={{ color: SOUS }}>
-          Fais faire demi-tour à une aiguille en balayant le moins de place possible — le problème né en
-          1917, dont elle vient de fermer la grande conjecture en 3D.{" "}
+          Turn a needle a full half-turn while sweeping the smallest possible area — the problem born in
+          1917, whose great conjecture she has just closed in 3D.{" "}
           <a
             href="https://www.youtube.com/watch?v=LYzeUAWwinQ"
             target="_blank"
@@ -481,43 +495,34 @@ export default function AiguilleDeKakeyaClient() {
             className="font-black hover:underline"
             style={{ color: "#c81e1e" }}
           >
-            ▶ voir l&apos;interview (1 min)
+            ▶ watch the interview (1 min)
           </a>
         </p>
 
         <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
           <a
-            href="https://youtu.be/jhb0HjHO2sg"
+            href="https://youtu.be/3Xb55Tl_S-Y"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-black text-white hover:brightness-110"
             style={{ backgroundColor: "#c81e1e" }}
           >
-            ▶ Regarder la vidéo — l&apos;aiguille, le théorème et le volcan (2 min)
-          </a>
-          <a
-            href="https://youtu.be/3Xb55Tl_S-Y"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[13px] font-bold hover:underline"
-            style={{ color: ENCRE }}
-          >
-            🌍 Watch in English →
+            ▶ Watch the video — the needle, the theorem and the volcano (2 min)
           </a>
           <Link
-            href="/en/simulators/kakeya-needle"
+            href="/aiguille-de-kakeya"
             className="text-[13px] font-bold hover:underline"
             style={{ color: ENCRE }}
           >
-            🌐 English version →
+            🌐 Lire en français →
           </Link>
         </div>
 
-        {/* ── LA MACHINE : image + réglage + résultat, sur un seul écran ── */}
+        {/* ── THE MACHINE: image + setting + result, on one screen ── */}
         <div className="mt-3 rounded border p-3 sm:p-4" style={{ borderColor: BORD, backgroundColor: "#ffffffcc" }}>
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <p className="text-[11px] font-black uppercase tracking-[0.18em]" style={{ color: OR }}>
-              Le problème de l&apos;aiguille — trois méthodes, l&apos;aire divisée par 2 à chaque ruse
+              The needle problem — three methods, the area halved with each trick
             </p>
             <button
               type="button"
@@ -525,16 +530,16 @@ export default function AiguilleDeKakeyaClient() {
               className="rounded border px-2 py-0.5 text-[11px] font-bold"
               style={{ borderColor: BORD, color: SOUS }}
             >
-              {modeClasse ? "🖥️ mode classe : ON" : "🖥️ mode classe"}
+              {modeClasse ? "🖥️ classroom mode: ON" : "🖥️ classroom mode"}
             </button>
           </div>
 
-          {/* L'IMAGE : la zone à peindre, la surface balayée, l'aiguille */}
+          {/* THE IMAGE: the zone to paint, the swept area, the needle */}
           <svg
             viewBox={`0 0 ${VBW} ${VBH}`}
             className="mt-2 w-full"
             role="img"
-            aria-label={`L'aiguille fait demi-tour (${deg}° sur 180°) selon la méthode « ${infoMode.nom} » ; la surface déjà balayée est peinte en rouge clair. Aire totale de cette méthode : ${infoMode.aire}, soit ${infoMode.formule}.`}
+            aria-label={`The needle makes a half-turn (${deg}° out of 180°) using the "${infoMode.nom}" method; the area already swept is painted light red. Total area for this method: ${infoMode.aire}, i.e. ${infoMode.formule}.`}
           >
             <path d={CONTOURS[mode]} fill="none" stroke={ENCRE} strokeWidth="1.5" strokeDasharray="6 5" opacity="0.45" />
             {trail !== "" && (
@@ -544,11 +549,11 @@ export default function AiguilleDeKakeyaClient() {
             <circle cx={ax} cy={ay} r="4" fill={ROUGE} />
             <circle cx={bx} cy={by} r="4" fill={ROUGE} />
             <text x={20} y={VBH - 14} fontSize={modeClasse ? 17 : 13} fill="#8ba0c4">
-              1 aiguille = 1 unité — les aires sont en « aiguilles² »
+              1 needle = 1 unit — areas are in «&nbsp;needles²&nbsp;»
             </text>
           </svg>
 
-          {/* LE RÉSULTAT : les compteurs */}
+          {/* THE RESULT: the counters */}
           <div className="mt-2 grid grid-cols-3 gap-2">
             <div className="rounded border p-2 text-center" style={{ borderColor: BORD }}>
               <p className="text-[10.5px] font-bold" style={{ color: SOUS }}>Rotation</p>
@@ -558,14 +563,14 @@ export default function AiguilleDeKakeyaClient() {
               </p>
             </div>
             <div className="rounded border p-2 text-center" style={{ borderColor: BORD }}>
-              <p className="text-[10.5px] font-bold" style={{ color: SOUS }}>Aire balayée</p>
+              <p className="text-[10.5px] font-bold" style={{ color: SOUS }}>Swept area</p>
               <p className={`font-black ${grand}`} style={{ color: fini ? ROUGE : "#8ba0c4" }}>
                 {fini ? infoMode.aire : "…"}
                 {fini && <span className="text-[11px] font-bold" style={{ color: "#8ba0c4" }}> ({infoMode.formule})</span>}
               </p>
             </div>
             <div className="rounded border p-2 text-center" style={{ borderColor: BORD }}>
-              <p className="text-[10.5px] font-bold" style={{ color: SOUS }}>Le record des maths</p>
+              <p className="text-[10.5px] font-bold" style={{ color: SOUS }}>The maths record</p>
               <p className={`font-black ${grand}`} style={{ color: ENCRE }}>
                 ≈ 0
                 <span className="text-[11px] font-bold" style={{ color: "#8ba0c4" }}> (Besicovitch)</span>
@@ -577,7 +582,7 @@ export default function AiguilleDeKakeyaClient() {
             {verdict.texte}
           </p>
 
-          {/* LE RÉGLAGE : la méthode + le départ */}
+          {/* THE SETTING: the method + the start */}
           <div className="mt-2 flex flex-wrap items-center gap-2 border-t pt-3" style={{ borderColor: "#e2e9f4" }}>
             {MODES.map((m) => {
               const actif = mode === m.id;
@@ -605,134 +610,130 @@ export default function AiguilleDeKakeyaClient() {
               className="ml-auto rounded px-5 py-2 text-sm font-black text-white hover:brightness-110 disabled:opacity-60"
               style={{ backgroundColor: ROUGE }}
             >
-              {enCours ? "Ça tourne…" : fini ? "Retourner !" : "Tourner !"}
+              {enCours ? "Turning…" : fini ? "Turn back!" : "Turn!"}
             </button>
           </div>
 
           <p className="mt-2 rounded border px-3 py-2 text-[12.5px]" style={{ borderColor: "#e2e9f4", backgroundColor: "#f7f9fd", color: "#3d5074" }}>
-            <span className="font-mono font-bold" style={{ color: ENCRE }}>aire du disque = π · r²</span>{" "}
-            — autour du centre, le rayon vaut ½ aiguille : π × 0,25 ≈ 0,79. Le deltoïde à trois pointes fait
-            encore moitié moins (π/8). Chaque ruse divise l&apos;aire par 2 : <b>jusqu&apos;où peut-on descendre&nbsp;?</b>
+            <span className="font-mono font-bold" style={{ color: ENCRE }}>area of a disc = π · r²</span>{" "}
+            — around the center, the radius is ½ a needle: π × 0.25 ≈ 0.79. The three-cusped deltoid halves
+            it again (π/8). Each trick divides the area by 2: <b>how far down can we go?</b>
           </p>
         </div>
 
-        {/* ── JUSQU'OÙ PEUT-ON DESCENDRE ? LE THÉORÈME ── */}
+        {/* ── HOW FAR DOWN CAN WE GO? THE THEOREM ── */}
         <div className="mt-5 rounded border p-4 text-[13.5px] leading-6" style={{ borderColor: "#c5d4ea", backgroundColor: "#f4f7fc", color: TEXTE }}>
           <p className="text-[11px] font-black uppercase tracking-[0.18em]" style={{ color: OR }}>
-            Jusqu&apos;où peut-on descendre ? — un siècle de suspense
+            How far down can we go? — a century of suspense
           </p>
           <p className="mt-2">
-            En 1917, le mathématicien japonais Sōichi Kakeya pose la question du demi-tour le plus économe.
-            En 1928, Abram Besicovitch stupéfie tout le monde&nbsp;: <b>il n&apos;y a pas de plancher</b>. Avec
-            assez de ruses (des allers-retours en zigzag de plus en plus fins), on peut faire demi-tour dans
-            une surface plus petite que n&apos;importe quel seuil — 0,01, 0,000&nbsp;001, aussi près de zéro
-            qu&apos;on veut.
+            In 1917, the Japanese mathematician Sōichi Kakeya asked the question of the most economical
+            half-turn. In 1928, Abram Besicovitch stunned everyone&nbsp;: <b>there is no floor</b>. With
+            enough tricks (finer and finer zigzag back-and-forths), you can turn around in an area smaller
+            than any threshold — 0.01, 0.000&nbsp;001, as close to zero as you like.
           </p>
           <p className="mt-2">
-            Restait la vraie énigme, en trois dimensions&nbsp;: un ensemble qui contient une aiguille{" "}
-            <b>dans toutes les directions</b> peut-il être une «&nbsp;poussière&nbsp;», un objet fantôme presque
-            sans épaisseur&nbsp;? La <b>dimension</b> mesure à quel point un objet remplit l&apos;espace&nbsp;:
-            une ligne vit en dimension 1, une feuille en dimension 2, et certains objets fractals se glissent
-            entre les deux. En 2025, <b>Hong Wang et Joshua Zahl</b> ferment la question, ouverte depuis un
-            siècle&nbsp;: non — un tel ensemble a beau pouvoir être de volume minuscule, il est{" "}
-            <b>forcément de dimension 3</b>. Une preuve de plus de cent pages, saluée comme l&apos;un des grands
-            résultats du siècle. Le 23 juillet 2026, à l&apos;ouverture du congrès international ICM de
-            Philadelphie, Hong Wang a reçu la <b>médaille Fields</b> — la plus haute distinction des
-            mathématiques, remise tous les quatre ans à des mathématiciens de moins de 40 ans.
+            The real riddle remained, in three dimensions&nbsp;: can a set that contains a needle{" "}
+            <b>in every direction</b> be a «&nbsp;dust&nbsp;», a ghostly object with almost no thickness&nbsp;?
+            The <b>dimension</b> measures how much an object fills space&nbsp;: a line lives in dimension 1,
+            a sheet in dimension 2, and some fractal objects slip in between. In 2025, <b>Hong Wang and
+            Joshua Zahl</b> closed the question, open for a century&nbsp;: no — such a set may well have tiny
+            volume, yet it is <b>necessarily of dimension 3</b>. A proof over a hundred pages long, hailed as
+            one of the great results of the century. On 23 July 2026, at the opening of the International
+            Congress of Mathematicians (ICM) in Philadelphia, Hong Wang received the <b>Fields Medal</b> —
+            mathematics&apos; highest honour, awarded every four years to mathematicians under 40.
           </p>
         </div>
 
-        {/* ── LA QUESTION CENTRALE (Frédéric, 27/07) ── */}
+        {/* ── THE CENTRAL QUESTION (Frédéric, 27/07) ── */}
         <div className="mt-5 rounded border p-4 text-[13.5px] leading-6" style={{ borderColor: BORD, backgroundColor: "#ffffffcc" }}>
           <p className="text-[11px] font-black uppercase tracking-[0.18em]" style={{ color: OR }}>
-            La question centrale — peut-on tourner sans être vu ?
+            The central question — can you turn around without being seen?
           </p>
           <p className="mt-2">
-            <b>Presque.</b> Ce qui fond vers 0, c&apos;est la <b>trace</b> — la surface repeinte par le
-            passage de l&apos;aiguille. Avec assez de ruses, le demi-tour repeint moins qu&apos;un timbre,
-            moins qu&apos;un grain de poussière&nbsp;: il devient presque invisible… à l&apos;aire.
+            <b>Almost.</b> What melts toward 0 is the <b>trace</b> — the surface repainted by the needle&apos;s
+            passage. With enough tricks, the half-turn repaints less than a stamp, less than a speck of
+            dust&nbsp;: it becomes almost invisible… to area.
           </p>
           <p className="mt-2">
-            <b>Mais jamais tout à fait.</b> L&apos;aire approche 0 sans jamais l&apos;atteindre — et plus la
-            trace est fine, plus le mouvement zigzague follement. La discrétion se paie en contorsions.
+            <b>But never entirely.</b> The area approaches 0 without ever reaching it — and the finer the
+            trace, the more wildly the motion zigzags. Discretion is paid for in contortions.
           </p>
           <p className="mt-2">
-            <b>Et c&apos;est là qu&apos;elle intervient.</b> Même «&nbsp;invisible à l&apos;aire&nbsp;»,
-            l&apos;objet ne disparaît pas&nbsp;: sa dimension reste pleine — c&apos;est le théorème de Hong
-            Wang. <b>On peut se cacher de l&apos;aire. Pas de la dimension.</b> Ce qu&apos;on ne voit pas
-            sous un angle se révèle quand on change de regard.
+            <b>And that&apos;s where she comes in.</b> Even «&nbsp;invisible to area&nbsp;», the object does
+            not disappear&nbsp;: its dimension stays full — that is Hong Wang&apos;s theorem. <b>You can hide
+            from area. Not from dimension.</b> What you don&apos;t see from one angle is revealed when you
+            change your point of view.
           </p>
         </div>
 
-        {/* ── SON TABLEAU, DÉCODÉ ── */}
+        {/* ── HER BLACKBOARD, DECODED ── */}
         <div className="mt-5 rounded border p-4 text-[13.5px] leading-6" style={{ borderColor: BORD, backgroundColor: "#ffffffcc" }}>
           <p className="text-[11px] font-black uppercase tracking-[0.18em]" style={{ color: OR }}>
-            Son tableau, décodé — projeter, puis ranger dans des tiroirs
+            Her blackboard, decoded — project, then sort into boxes
           </p>
           <p className="mt-2">
-            Dans l&apos;interview, on aperçoit une feuille de son travail&nbsp;: un nuage de points, une droite,
-            et trois lignes de notation. Voici ce qu&apos;elles disent — c&apos;est le geste favori de ses
-            preuves&nbsp;:
+            In the interview, you can glimpse a sheet of her work&nbsp;: a cloud of points, a line, and three
+            lines of notation. Here is what they say — it&apos;s the favourite move of her proofs&nbsp;:
           </p>
           <ul className="mt-2 space-y-1.5">
             <li>
-              <span className="font-mono font-bold" style={{ color: ENCRE }}>L = π̃(T)</span> — π̃, c&apos;est une{" "}
-              <b>projection</b>&nbsp;: on écrase la figure dans une direction, comme une ombre au sol. La droite
-              L est l&apos;ombre d&apos;un tube T (une aiguille épaissie).
+              <span className="font-mono font-bold" style={{ color: ENCRE }}>L = π̃(T)</span> — π̃ is a{" "}
+              <b>projection</b>&nbsp;: you flatten the figure in one direction, like a shadow on the ground.
+              The line L is the shadow of a tube T (a thickened needle).
             </li>
             <li>
-              <span className="font-mono font-bold" style={{ color: ENCRE }}>F = π̃(π̃⁻¹(L) ∩ E)</span> — on prend
-              tout ce qui se projette sur L, on garde les points de E qui y vivent, et on regarde leurs{" "}
-              <b>ombres</b>&nbsp;: c&apos;est F.
+              <span className="font-mono font-bold" style={{ color: ENCRE }}>F = π̃(π̃⁻¹(L) ∩ E)</span> — you take
+              everything that projects onto L, keep the points of E that live there, and look at their{" "}
+              <b>shadows</b>&nbsp;: that&apos;s F.
             </li>
             <li>
               <span className="font-mono font-bold" style={{ color: ENCRE }}>pigeonhole to choose F′ ⊆ F</span> —
-              le <b>principe des tiroirs</b>&nbsp;: si beaucoup d&apos;ombres se répartissent dans peu de boîtes,
-              une boîte en contient forcément beaucoup. On choisit ce tiroir bien rempli&nbsp;: F′, un{" "}
-              <b>morceau de F</b> (F′ ⊆ F, «&nbsp;F′ inclus dans F&nbsp;»), plus petit mais plus riche — et la
-              preuve continue avec lui.
+              the <b>pigeonhole principle</b>&nbsp;: if many shadows spread across few boxes, one box must hold
+              a lot. You pick that well-filled drawer&nbsp;: F′, a <b>piece of F</b> (F′ ⊆ F, «&nbsp;F′ included
+              in F&nbsp;»), smaller but richer — and the proof carries on with it.
             </li>
           </ul>
           <p className="mt-2">
-            Essaie toi-même&nbsp;: règle la direction de projection et regarde les ombres se ranger dans les
-            boîtes. Quand beaucoup d&apos;ombres tombent dans la même boîte, ce n&apos;est pas un hasard —{" "}
-            <b>la projection vient de démasquer une structure cachée</b> (des points alignés). C&apos;est
-            exactement pour ça que les mathématiciens projettent.
+            Try it yourself&nbsp;: set the projection direction and watch the shadows sort into the boxes.
+            When many shadows fall into the same box, it&apos;s no accident —{" "}
+            <b>the projection has just unmasked a hidden structure</b> (aligned points). That is exactly why
+            mathematicians project.
           </p>
           <OmbresEtTiroirs />
         </div>
 
-        {/* ── CE QU'ELLE A DIT ── */}
+        {/* ── WHAT SHE SAID ── */}
         <div className="mt-5 rounded border p-4 text-[13.5px] leading-6" style={{ borderColor: "#c5d4ea", backgroundColor: "#f4f7fc", color: TEXTE }}>
           <p className="text-[11px] font-black uppercase tracking-[0.18em]" style={{ color: OR }}>
-            Ce qu&apos;elle a dit — trois messages pour les élèves
+            What she said — three messages for students
           </p>
           <ul className="mt-2 space-y-2.5">
             <li>
-              🎓 <b>Merci aux profs.</b> Formée à l&apos;université de Pékin, puis en France — à l&apos;École
-              polytechnique et à Orsay —, elle a tenu, au moment de recevoir sa médaille, à rendre{" "}
-              <b>hommage à ses professeurs français</b>. Derrière chaque médaille, il y a des profs — et
-              derrière chaque élève aussi.
+              🎓 <b>Thank you to the teachers.</b> Trained at Peking University, then in France — at the École
+              polytechnique and Orsay —, she made a point, on receiving her medal, of paying{" "}
+              <b>tribute to her French teachers</b>. Behind every medal there are teachers — and behind every
+              student too.
             </li>
             <li>
-              ⚖️ <b>Femmes, hommes&nbsp;: aucune différence.</b> Elle est la <b>troisième femme</b> médaillée
-              Fields en 90 ans (après Maryam Mirzakhani en 2014 et Maryna Viazovska en 2022), et la première
-              mathématicienne chinoise. Dans l&apos;interview, elle est claire&nbsp;: pour elle,{" "}
-              <b>il n&apos;y a aucune différence entre les femmes et les hommes</b> en mathématiques. Les
-              variables qui font vraiment avancer une démonstration sont ailleurs&nbsp;: le travail, le temps,
-              et les professeurs qu&apos;on a eus — la différence de genre, elle, tient de l&apos;epsilon.
+              ⚖️ <b>Women, men: no difference.</b> She is the <b>third woman</b> to win the Fields Medal in
+              90 years (after Maryam Mirzakhani in 2014 and Maryna Viazovska in 2022), and the first Chinese
+              female mathematician. In the interview she is clear&nbsp;: for her, <b>there is no difference
+              between women and men</b> in mathematics. The variables that really move a proof forward are
+              elsewhere&nbsp;: the work, the time, and the teachers you had — the difference of gender is an
+              epsilon.
             </li>
             <li>
-              ⏳ <b>Le temps long.</b> Elle parle de «&nbsp;problèmes difficiles&nbsp;» qui l&apos;ont occupée{" "}
-              <b>pendant des années</b>. Personne ne «&nbsp;voit&nbsp;» la solution du premier coup — pas même
-              une médaille Fields. Chercher longtemps n&apos;est pas un signe de faiblesse&nbsp;: c&apos;est le
-            métier même des mathématiques.
+              ⏳ <b>The long game.</b> She speaks of «&nbsp;hard problems&nbsp;» that kept her busy{" "}
+              <b>for years</b>. Nobody «&nbsp;sees&nbsp;» the solution at first glance — not even a Fields
+              medallist. Searching for a long time is not a sign of weakness&nbsp;: it is the very craft of
+              mathematics.
             </li>
           </ul>
           <p className="mt-3 text-[12.5px]" style={{ color: SOUS }}>
-            Hong Wang (王虹), 35 ans, née à Guilin, entrée à l&apos;université de Pékin à 16 ans, est
-            professeure permanente à l&apos;IHÉS (Bures-sur-Yvette, près de Paris) et professeure à
-            l&apos;université de New York (institut Courant).{" "}
+            Hong Wang (王虹), 35, born in Guilin, entered Peking University at 16, is a permanent professor at
+            the IHÉS (Bures-sur-Yvette, near Paris) and a professor at New York University (Courant
+            Institute).{" "}
             <a
               href="https://www.youtube.com/watch?v=LYzeUAWwinQ"
               target="_blank"
@@ -740,55 +741,50 @@ export default function AiguilleDeKakeyaClient() {
               className="font-black hover:underline"
               style={{ color: "#c81e1e" }}
             >
-              ▶ l&apos;interview (CGTN Français, 1 min)
+              ▶ the interview (CGTN Français, 1 min, in French)
             </a>
           </p>
         </div>
 
-        {/* ── LES DÉFIS ── */}
+        {/* ── THE CHALLENGES ── */}
         <DefisSimulateur
-          titre="Les défis de l'aiguille — du CP à la Terminale"
-          coupDePouce="Coup de pouce : les trois aires de la machine (1,57 · 0,79 · 0,39) sont la clé de presque tous les défis."
+          titre="The needle challenges — from age 6 to 18"
+          coupDePouce="Hint: the machine's three areas (1.57 · 0.79 · 0.39) are the key to almost every challenge."
           defis={DEFIS}
           couleurs={COULEURS_DEFIS}
+          labels={LABELS_DEFIS}
+          masquerPont
         />
 
-        {/* ── LES PONTS ── */}
+        {/* ── THE BRIDGES ── */}
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <a
-            href="https://www.youtube.com/watch?v=LYzeUAWwinQ"
+            href="https://youtu.be/3Xb55Tl_S-Y"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded px-4 py-2 text-sm font-bold text-white hover:brightness-110"
             style={{ backgroundColor: "#c81e1e" }}
           >
-            ▶ L&apos;interview (1 min) — l&apos;hommage à ses profs
+            ▶ Watch in English (2 min) — the needle, the theorem and the volcano
           </a>
           <Link
-            href="/simulateur-epsilon"
-            className="inline-flex items-center gap-2 rounded px-4 py-2 text-sm font-bold text-white hover:brightness-110"
-            style={{ backgroundColor: ROUGE }}
-          >
-            ⚡ La machine des epsilons — des petits riens aux infinis
-          </Link>
-          <Link
-            href="/dimension-du-volcan"
+            href="/aiguille-de-kakeya"
             className="inline-flex items-center gap-2 rounded border px-4 py-2 text-sm font-bold hover:brightness-95"
             style={{ borderColor: "#c5d4ea", backgroundColor: "#f4f7fc", color: TEXTE }}
           >
-            📏 La dimension du volcan — l&apos;idée de sa médaille, mesurée sur la Fournaise
+            🌐 Lire cette page en français →
           </Link>
         </div>
 
-        {/* ── L'HONNÊTETÉ ── */}
+        {/* ── HONESTY ── */}
         <p className="mt-6 border-t pt-3 text-[11.5px] leading-5" style={{ borderColor: BORD, color: SOUS }}>
-          Machine pédagogique&nbsp;: la surface «&nbsp;peinte&nbsp;» est l&apos;union de 160 positions de
-          l&apos;aiguille — une approximation visuelle — mais les aires affichées (π/2, π/4, π/8) sont les
-          valeurs exactes des figures balayées. «&nbsp;On peut approcher 0&nbsp;» est le théorème de Besicovitch
-          (1928)&nbsp;; la résolution en 3D est de Hong Wang et Joshua Zahl (2025). Les propos rapportés
-          viennent de son interview à CGTN Français (juillet 2026)&nbsp;; le tableau décodé est celui qu&apos;on
-          aperçoit dans son interview, et la lecture pas à pas — projection, ombre, tiroirs —
-          est la nôtre&nbsp;: fidèle à l&apos;esprit de ses preuves, sans prétendre reconstituer la page exacte.
+          Teaching machine&nbsp;: the «&nbsp;painted&nbsp;» surface is the union of 160 needle positions — a
+          visual approximation — but the areas shown (π/2, π/4, π/8) are the exact values of the swept
+          figures. «&nbsp;You can approach 0&nbsp;» is Besicovitch&apos;s theorem (1928)&nbsp;; the 3D
+          resolution is due to Hong Wang and Joshua Zahl (2025). The quoted remarks come from her interview
+          with CGTN Français (July 2026)&nbsp;; the decoded blackboard is the one glimpsed in her interview,
+          and the step-by-step reading — projection, shadow, boxes — is ours&nbsp;: faithful to the spirit of
+          her proofs, without claiming to reconstruct the exact page.
         </p>
       </div>
     </main>

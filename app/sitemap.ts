@@ -277,6 +277,9 @@ const ROUTES: RouteConfig[] = [
   // L'aiguille de Kakeya (25/07) — Hong Wang, médaille Fields 2026 : le problème de
   // Kakeya (demi-tour économe, π/2 → π/4 → π/8 → 0) et son tableau décodé.
   { path: "/aiguille-de-kakeya", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-25") },
+  // La vitrine ANGLAISE de l'aiguille (28/07) — même machine, texte anglais :
+  // vise le trafic mondial « Kakeya needle », première d'une famille /en/simulators/*.
+  { path: "/en/simulators/kakeya-needle", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-28") },
   // La dimension du volcan (26/07) — box-counting sur le rempart de la
   // Fournaise : la rugosité en un nombre (d ≈ 1,25), l'idée de la médaille.
   { path: "/dimension-du-volcan", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-26") },
