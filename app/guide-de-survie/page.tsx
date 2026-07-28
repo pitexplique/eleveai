@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import HubFiltres from "./HubFiltres";
 import { KIT_MATHS_PREMIERE } from "./maths-premiere/data";
 import { KIT_MATHS_SECONDE } from "./maths-seconde/data";
 import { KIT_MATHS_TERMINALE } from "./maths-terminale/data";
@@ -211,30 +212,6 @@ const KITS_ANGLAIS = [
   },
 ];
 
-type Kit = (typeof KITS_MATHS)[number];
-
-function CartesKits({ kits }: { kits: Kit[] }) {
-  return (
-    <div className="grid gap-4 sm:grid-cols-2">
-      {kits.map((k) => (
-        <Link
-          key={k.slug}
-          href={`/guide-de-survie/${k.slug}`}
-          className={`group rounded-2xl bg-gradient-to-br ${k.grad} p-5 text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-xl`}
-        >
-          <p className="mb-1 text-3xl transition group-hover:scale-110">{k.emoji}</p>
-          <p className="text-[11px] font-bold uppercase tracking-widest text-white/80">{k.niveau}</p>
-          <h2 className="mb-1 text-xl font-black leading-tight">{k.titre}</h2>
-          <p className="text-[13px] leading-snug text-white/90">{k.pitch}</p>
-          <p className="mt-3 text-[13px] font-bold underline underline-offset-2">
-            Ouvrir le guide →
-          </p>
-        </Link>
-      ))}
-    </div>
-  );
-}
-
 export default function KitDeSurvieHubPage() {
   return (
     <main className="mx-auto max-w-4xl px-4 py-10">
@@ -253,35 +230,8 @@ export default function KitDeSurvieHubPage() {
         </p>
       </header>
 
-      {/* ─── Maths ─── */}
-      <section className="mb-10">
-        <h2 className="mb-3 flex items-center gap-2 text-2xl font-black text-slate-900">
-          <span aria-hidden="true">🔢</span> Maths
-          <span className="text-sm font-semibold text-slate-400">— du CM1 au lycée</span>
-        </h2>
-        <CartesKits kits={KITS_MATHS} />
-      </section>
-
-      {/* ─── Français ─── */}
-      <section className="mb-10">
-        <h2 className="mb-3 flex items-center gap-2 text-2xl font-black text-slate-900">
-          <span aria-hidden="true">📖</span> Français
-          <span className="text-sm font-semibold text-slate-400">— du CM1 à la 3e</span>
-        </h2>
-        <CartesKits kits={KITS_FRANCAIS} />
-      </section>
-
-      {/* ─── Anglais ─── */}
-      <section className="mb-10">
-        <h2 className="mb-3 flex items-center gap-2 text-2xl font-black text-slate-900">
-          <span aria-hidden="true">🔤</span> Anglais
-          <span className="text-sm font-semibold text-slate-400">— le vocabulaire, de A1 à B2</span>
-          <span className="rounded-full bg-sky-100 px-2 py-0.5 text-[11px] font-bold uppercase tracking-widest text-sky-700">
-            Nouveau
-          </span>
-        </h2>
-        <CartesKits kits={KITS_ANGLAIS} />
-      </section>
+      {/* Les chips de filtre + les trois sections (composant client) */}
+      <HubFiltres maths={KITS_MATHS} francais={KITS_FRANCAIS} anglais={KITS_ANGLAIS} />
 
       {/* La réponse sur place : où sont les autres niveaux ? */}
       <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
