@@ -611,3 +611,135 @@ class AiguilleDeKakeyaEN(AiguilleDeKakeya):
     """Same silent film, English captions — la VO ne coûte que les chaînes."""
 
     LANG = "en"
+
+
+# ── SHORT 9:16 (Instagram / YouTube Shorts, ~40 s) ───────────────────────────
+# Rendre avec : python -m manim render -qh -r 1080,1920
+#   manim/scripts/journal/aiguille_de_kakeya.py AiguilleShort
+#   -o eleveai-maths-journal-aiguille-de-kakeya-short --media_dir manim/scripts/journal/media
+# Le cadre vertical est IMPOSÉ dans __init__ (sinon -r ne change que les pixels).
+class AiguilleShort(Scene):
+    """La version verticale nerveuse : la question → l'aire fond → pas la
+    dimension → le volcan. Muet + texte, gros caractères pour mobile."""
+
+    LARGEUR_SURE = 4.0
+
+    def __init__(self, **kw):
+        config.frame_height = 8.0
+        config.frame_width = 4.5
+        super().__init__(**kw)
+
+    def T(self, texte, size=30, color=WHITE, **kw):
+        t = Text(texte, font_size=size, color=color, **kw)
+        if t.width > self.LARGEUR_SURE:
+            t.scale_to_fit_width(self.LARGEUR_SURE)
+        return t
+
+    def construct(self):
+        wm = self.T("eleveai.fr", size=22, color=GREY_B)
+        wm.set_opacity(0.6).to_edge(DOWN, buff=0.22)
+        self.add(wm)
+
+        # ── BEAT 1 · le hook ──────────────────────────────────────────────────
+        kicker = self.T("L'aiguille de Kakeya", size=26, color=GREY_B).to_edge(UP, buff=0.5)
+        q1 = self.T("Peut-on tourner", size=42, color=WHITE).move_to([0, 2.55, 0])
+        q2 = self.T("sans être vu ?", size=42, color=AIGUILLE).next_to(q1, DOWN, buff=0.14)
+        self.play(FadeIn(kicker), Write(q1), run_time=0.8)
+        self.play(FadeIn(q2, shift=0.2 * UP))
+        pivot = np.array([0.0, -0.6, 0.0])
+        needle = Line(pivot + LEFT * 1.2, pivot + RIGHT * 1.2, color=AIGUILLE, stroke_width=13)
+        self.play(GrowFromCenter(needle))
+        self.play(Rotate(needle, PI, about_point=pivot), run_time=1.6, rate_func=linear)
+        self.wait(0.4)
+        self.play(FadeOut(q1), FadeOut(q2), FadeOut(needle), FadeOut(kicker), run_time=0.5)
+
+        # ── BEAT 2 · le deltoïde : l'aire fond ────────────────────────────────
+        t2 = self.T("Fais-la tourner dans presque rien.", size=30, color=WHITE).to_edge(UP, buff=1.4)
+        self.play(FadeIn(t2, shift=0.2 * DOWN))
+        c = np.array([0.0, -0.2, 0.0])
+        r = 0.6
+
+        def qd(s):
+            return c + r * np.array([2 * np.cos(s) + np.cos(2 * s), 2 * np.sin(s) - np.sin(2 * s), 0.0])
+
+        contour = ParametricFunction(qd, t_range=[0, TAU, 0.02], color=ENCRE, stroke_width=4)
+        self.play(Create(contour), run_time=1.0)
+        cordes = VGroup(*[
+            Line(qd(-t / 2), qd(-t / 2 + np.pi), color=PEINT, stroke_width=3, stroke_opacity=0.5)
+            for t in np.linspace(0, TAU, 80)])
+        t_tr = ValueTracker(0.0)
+        aig = always_redraw(lambda: Line(qd(-t_tr.get_value() / 2), qd(-t_tr.get_value() / 2 + np.pi),
+                                         color=AIGUILLE, stroke_width=11))
+        self.add(aig)
+        self.play(LaggedStart(*[FadeIn(x) for x in cordes], lag_ratio=1.0 / 80, run_time=2.6),
+                  t_tr.animate.set_value(TAU), run_time=2.6, rate_func=linear)
+        pi8 = self.T("π/8", size=34, color=NAVY if False else JAUNE_TITRE).move_to(c + np.array([-0.05, 0.5, 0]))
+        self.play(FadeIn(pi8, scale=0.6))
+        chaine = self.T("1,57 → 0,79 → 0,39 → presque 0", size=28, color=VERT_OK).move_to([0, -2.5, 0])
+        self.play(FadeIn(chaine, shift=0.2 * UP))
+        self.wait(1.6)
+        self.play(*[FadeOut(m) for m in [t2, contour, aig, pi8, chaine, *cordes]], run_time=0.5)
+
+        # ── BEAT 3 · le retournement ──────────────────────────────────────────
+        # largeurs FORCÉES (l'auto-fit donnait des tailles incohérentes en 9:16)
+        l1 = Text("L'aire peut mentir.", font_size=44, color=AIGUILLE)
+        l1.scale_to_fit_width(4.0).move_to([0, 1.0, 0])
+        l2 = Text("Pas la dimension.", font_size=44, color=JAUNE_TITRE)
+        l2.scale_to_fit_width(4.0).move_to([0, -0.1, 0])
+        l3 = Text("Hong Wang l'a prouvé (2025)", font_size=26, color=BLEU_CALCUL)
+        l3.scale_to_fit_width(3.4).move_to([0, -1.3, 0])
+        self.play(GrowFromCenter(l1))
+        self.wait(0.6)
+        self.play(GrowFromCenter(l2))
+        self.play(FadeIn(l3, shift=0.2 * UP))
+        self.wait(1.8)
+        self.play(FadeOut(l1), FadeOut(l2), FadeOut(l3), run_time=0.5)
+
+        # ── BEAT 4 · le volcan (box-counting express) ─────────────────────────
+        t4 = self.T("Et notre volcan ?", size=34, color=JAUNE_TITRE).to_edge(UP, buff=1.0)
+        self.play(FadeIn(t4, shift=0.2 * DOWN))
+        pts_px = gen_rempart()
+
+        def pm(x, y):
+            return np.array([-1.85 + (x - 20) / 960.0 * 3.7, 1.7 - y / 300.0 * 1.6, 0.0])
+
+        ridge = VMobject(color=WHITE, stroke_width=3).set_points_as_corners([pm(x, y) for x, y in pts_px])
+        self.play(Create(ridge), run_time=1.2)
+        s_px = 60
+        cases = compter_cases(pts_px, s_px)
+        cote = pm(s_px, 0)[0] - pm(0, 0)[0]
+        grille = VGroup()
+        for gx in range(0, 1001, s_px):
+            grille.add(Line(pm(gx, 0), pm(gx, 300), stroke_width=1, color=GREY_D))
+        for gy in range(0, 301, s_px):
+            grille.add(Line(pm(0, gy), pm(1000, gy), stroke_width=1, color=GREY_D))
+        carres = VGroup(*[
+            Square(side_length=cote, fill_color=PEINT, fill_opacity=0.45, stroke_width=0)
+            .move_to(pm((i + 0.5) * s_px, (j + 0.5) * s_px)) for (i, j) in sorted(cases)])
+        self.play(FadeIn(grille), run_time=0.4)
+        self.play(LaggedStart(*[FadeIn(x) for x in carres], lag_ratio=0.04, run_time=1.4))
+        dim = self.T("dimension ≈ 1,25", size=40, color=JAUNE_TITRE).move_to([0, -1.7, 0])
+        sous = self.T("le Piton de la Fournaise —\nl'idée de sa médaille", size=24, color=GREY_B,
+                      line_spacing=0.8).move_to([0, -2.7, 0])
+        self.play(FadeIn(dim, scale=0.7))
+        self.play(FadeIn(sous, shift=0.2 * UP))
+        self.wait(1.8)
+        self.play(*[FadeOut(m) for m in [t4, ridge, grille, carres, dim, sous]], run_time=0.5)
+
+        # ── BEAT 5 · l'honneur + l'appel ──────────────────────────────────────
+        mob = MascotteMargouillat().scale(0.42).to_corner(DOWN + RIGHT, buff=0.3)
+        self.add(mob)
+        nom = self.T("Hong Wang · 王虹", size=40, color=JAUNE_TITRE).move_to([0, 2.0, 0])
+        h1 = self.T("Médaille Fields 2026", size=32, color=WHITE).move_to([0, 1.0, 0])
+        h2 = self.T("3ᵉ femme de l'histoire", size=28, color=BLEU_CALCUL).move_to([0, 0.3, 0])
+        h3 = self.T("« Hong » : arc-en-ciel", size=24, color=ENCRE).move_to([0, -0.4, 0])
+        self.play(GrowFromCenter(nom))
+        self.play(FadeIn(h1, shift=0.2 * UP))
+        self.play(FadeIn(h2, shift=0.2 * UP))
+        self.play(FadeIn(h3, shift=0.2 * UP))
+        self.wait(0.8)
+        appel = self.T("Fais tourner l'aiguille", size=30, color=AIGUILLE).move_to([0, -1.7, 0])
+        lien = self.T("eleveai.fr/aiguille-de-kakeya", size=24, color=BLEU_CALCUL).next_to(appel, DOWN, buff=0.2)
+        self.play(FadeIn(appel, scale=0.7))
+        self.play(FadeIn(lien, shift=0.2 * UP))
+        self.wait(2.4)
