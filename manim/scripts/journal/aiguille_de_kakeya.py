@@ -151,8 +151,8 @@ TEXTES = {
         "honneur_nom": "Hong Wang · 王虹",
         "honneur_1": "Médaille Fields 2026 — 3ᵉ femme de l'histoire",
         "honneur_2": "Son prénom, Hong, veut dire « arc-en-ciel »",
-        "honneur_3": "Homme ou femme ? En maths, dit-elle, ce n'est qu'un epsilon.",
-        "honneur_4": "Les vraies variables : le travail, le temps… et les professeurs, qu'elle a remerciés.",
+        "honneur_3": "Femmes, hommes : pour elle, aucune différence en mathématiques.",
+        "honneur_4": "L'essentiel : le travail, le temps, et les professeurs qu'elle a remerciés.",
         "appel": "Fais tourner l'aiguille toi-même",
         "lien": "eleveai.fr/aiguille-de-kakeya",
     },
@@ -199,8 +199,8 @@ TEXTES = {
         "honneur_nom": "Hong Wang · 王虹",
         "honneur_1": "2026 Fields Medal — 3rd woman in its history",
         "honneur_2": "Her first name, Hong, means “rainbow”",
-        "honneur_3": "Man or woman? In maths, she says, it's just an epsilon.",
-        "honneur_4": "The real variables: work, time… and the teachers she thanked.",
+        "honneur_3": "Women, men: for her, no difference in mathematics.",
+        "honneur_4": "What counts: work, time, and the teachers she thanked.",
         "appel": "Spin the needle yourself",
         "lien": "eleveai.fr/aiguille-de-kakeya",
     },
@@ -218,7 +218,8 @@ class AiguilleDeKakeya(Scene):
         return TEXTES[self.LANG][cle]
 
     def add_mascotte(self, scale=0.5):
-        m = MascotteMargouillat().scale(scale).to_corner(DOWN + RIGHT, buff=0.35)
+        # à GAUCHE : le coin bas-droit est réservé au filigrane eleveai.fr
+        m = MascotteMargouillat().scale(scale).to_corner(DOWN + LEFT, buff=0.35)
         self.add(m)
         return m
 
@@ -270,6 +271,11 @@ class AiguilleDeKakeya(Scene):
         # jusqu'au bout — fondu_total() l'épargne.
         self.banniere = self.T(self.t_("banniere"), size=18, color=GREY_B).to_edge(UP, buff=0.12)
         self.play(FadeIn(self.banniere, shift=0.2 * DOWN), run_time=0.5)
+
+        # Le FILIGRANE permanent, bas-droite (signature discrète tout du long).
+        self.watermark = Text("eleveai.fr", font_size=20, color=GREY_B) \
+            .set_opacity(0.55).to_corner(DOWN + RIGHT, buff=0.28)
+        self.add(self.watermark)
 
         titre = self.T(self.t_("titre"), size=46, color=JAUNE_TITRE).to_edge(UP, buff=0.72)
         soustitre = self.T(self.t_("sous_titre"), size=22, color=GREY_B).next_to(titre, DOWN, buff=0.14)
@@ -403,10 +409,10 @@ class AiguilleDeKakeya(Scene):
         self.play(FadeOut(cordes), FadeOut(aig), FadeOut(contour),
                   FadeOut(aire), FadeOut(lecon), FadeOut(label))
 
-    # — tout effacer SAUF le bandeau-titre permanent —
+    # — tout effacer SAUF les éléments PERMANENTS (bandeau + filigrane) —
     def fondu_total(self):
-        garder = getattr(self, "banniere", None)
-        self.play(*[FadeOut(m) for m in self.mobjects if m is not garder], run_time=0.5)
+        garder = {getattr(self, "banniere", None), getattr(self, "watermark", None)}
+        self.play(*[FadeOut(m) for m in self.mobjects if m not in garder], run_time=0.5)
 
     # — décimales à la française (ou pas) —
     def fmt1(self, v):
