@@ -7,11 +7,35 @@ import type {
 } from "@/lib/tutor-v4/types";
 import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
+// ─── Banque du coach · Français cycle 4 (5e · 4e · 3e) ───────────────────────
+// Générateur de questions du coach pour le collège cycle 4. Contrairement à
+// l'ancienne version (pools minuscules, aveugle au micro et au niveau, formats
+// « short » à risque d'accent), ce builder :
+//   1. route par MICRO-compétence (pas seulement par notion) ;
+//   2. DIFFÉRENCIE le contenu 5e ≠ 4e ≠ 3e (perspectives annuelles + exigence
+//      croissante : 5e récit/phrase complexe ; 4e roman du XIXe, registres,
+//      paroles rapportées ; 3e subordonnées, voix passive, argumentation) ;
+//   3. n'émet QUE des QCM (comparateur mcq_exact) — AUCUN « short »/exact_text,
+//      pour supprimer tout piège d'accent (le comparateur ne normalise pas les
+//      accents, cf tutor-francais-cycle3-accents) ;
+//   4. écrit tout le français avec des ACCENTS impeccables.
+// Chaque (micro, niveau) tire un pool DISTINCT = socle commun accentué + items
+// propres au niveau, pour une variété élevée (cible ≥ ~12-20 questions/micro).
+// ⚠️ Ce builder ne sert QUE 5e/4e/3e (type Cycle4Level) → aucun risque pour
+// cm1/cm2/6e (builder cycle 3, distinct).
+
 type Cycle4Level = Extract<SchoolLevel, "5e" | "4e" | "3e">;
 
 type Generated = TutorGeneratedQuestionV4 & {
   format: QuestionFormat;
   comparator: ComparatorName;
+};
+
+type QcmItem = {
+  text: string;
+  correct: string;
+  wrongs: string[];
+  methode?: string;
 };
 
 function shuffle<T>(items: readonly T[]): T[] {
@@ -23,190 +47,2587 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
 }
 
 function exp(methode: string, exemple: string, conclusion: string) {
-  return `Methode : ${methode}\n\nExemple : ${exemple}\n\nConclusion : ${conclusion}`;
+  return `Méthode : ${methode}\n\nExemple : ${exemple}\n\nConclusion : ${conclusion}`;
 }
 
 function pick<T>(items: readonly T[]): T {
   return items[Math.floor(Math.random() * items.length)];
 }
 
-function lectureQuestion(level: Cycle4Level): Generated {
-  const item = pick([
-    {
-      text: "Le narrateur avance dans une ville inconnue. Chaque rue semble lui rappeler un souvenir qu'il croyait perdu.",
-      question: "Quelle interpretation est la plus solide ?",
-      correct: "Le lieu fait remonter la memoire du personnage",
-      wrongs: ["Le narrateur est un guide touristique", "La ville est decrite comme un plan", "Le texte donne une recette"],
-    },
-    {
-      text: "Elle repond calmement, mais ses mains tremblent sous la table.",
-      question: "Que suggere l'implicite de cette phrase ?",
-      correct: "Le personnage cache une emotion forte",
-      wrongs: ["Le personnage dort", "La table est cassee", "La scene est comique uniquement"],
-    },
-  ]);
-
+function asQcm(item: QcmItem): Generated {
   return {
-    text: `Niveau ${level}. Lis :\n"${item.text}"\n\n${item.question}`,
+    text: item.text,
     format: "qcm",
     choices: makeChoices(item.correct, item.wrongs),
     expected: [item.correct],
     comparator: "mcq_exact",
     explanation: exp(
-      "On interprete en reliant le sens global et les indices du texte.",
-      `L'indice utile conduit a comprendre que : ${item.correct}.`,
-      "Une interpretation doit toujours etre justifiee par le texte."
+      item.methode ?? "On observe le texte et la phrase avec attention.",
+      `La bonne réponse est : ${item.correct}.`,
+      "On vérifie en relisant l'énoncé en entier."
     ),
   };
 }
 
-function cultureQuestion(level: Cycle4Level): Generated {
-  const themes: Record<Cycle4Level, string> = {
-    "5e": "heros, voyage, theatre et recits pour instruire",
-    "4e": "fiction, poesie, theatre, jugement et heritage des Lumieres",
-    "3e": "temoignage, engagement humaniste, poesie et theatre citoyen",
-  };
-
-  return {
-    text: `En ${level}, quel choix correspond le mieux a la perspective litteraire du niveau ?`,
-    format: "qcm",
-    choices: makeChoices(themes[level], [
-      "uniquement apprendre des listes de dates",
-      "remplacer toute lecture par des resumes",
-      "etudier seulement des textes techniques",
-    ]),
-    expected: [themes[level]],
-    comparator: "mcq_exact",
-    explanation: exp(
-      "Chaque niveau du cycle 4 organise les lectures autour d'une perspective annuelle.",
-      `Pour ${level}, on travaille notamment : ${themes[level]}.`,
-      "La culture litteraire relie textes, oeuvres, genres et enjeux humains."
-    ),
-  };
+// Fusionne un socle commun (valable à tous les niveaux) et des items propres au
+// niveau → chaque (micro, niveau) tire un pool DISTINCT et suffisamment large.
+function byLevel(
+  base: QcmItem[],
+  perLevel: Partial<Record<Cycle4Level, QcmItem[]>>,
+  level: Cycle4Level
+): QcmItem[] {
+  return [...base, ...(perLevel[level] ?? [])];
 }
 
-function ecritureQuestion(): Generated {
-  return {
-    text: "Quelle revision rend un ecrit plus solide au cycle 4 ?",
-    format: "qcm",
-    choices: makeChoices("verifier la coherence, enrichir le lexique et corriger les accords", [
-      "changer seulement la police d'ecriture",
-      "supprimer tous les connecteurs",
-      "ne garder que la premiere phrase",
-    ]),
-    expected: ["verifier la coherence, enrichir le lexique et corriger les accords"],
-    comparator: "mcq_exact",
-    explanation: exp(
-      "Reviser, c'est ameliorer le fond et la langue.",
-      "On controle l'organisation, le vocabulaire, la syntaxe et l'orthographe.",
-      "Un ecrit evolue par relecture active."
-    ),
-  };
-}
+const perspectives: Record<Cycle4Level, string> = {
+  "5e": "Découverte de soi, d'autrui et du monde",
+  "4e": "Jugement, valeurs et vérité",
+  "3e": "Engagement humaniste et émancipation",
+};
+void perspectives;
 
-function oralQuestion(): Generated {
-  return {
-    text: "Dans un debat interpretatif, quelle prise de parole est la plus attendue ?",
-    format: "qcm",
-    choices: makeChoices("Je pense que ce personnage hesite, car le texte dit que sa voix tremble.", [
-      "Je n'aime pas, c'est tout.",
-      "Tout le monde a tort sauf moi.",
-      "Je change de sujet.",
-    ]),
-    expected: ["Je pense que ce personnage hesite, car le texte dit que sa voix tremble."],
-    comparator: "mcq_exact",
-    explanation: exp(
-      "Une parole argumentee donne une idee et une justification.",
-      "La reponse correcte s'appuie sur un indice du texte.",
-      "Au cycle 4, on apprend a defendre son interpretation."
-    ),
-  };
-}
+// ─────────────────────────────────────────────────────────────────────────────
+// LECTURE — comprendre, interpréter, apprécier
+// ─────────────────────────────────────────────────────────────────────────────
 
-function vocabulaireQuestion(): Generated {
-  const item = pick([
-    { question: "Quel mot appartient au champ lexical du jugement ?", correct: "valeur", wrongs: ["fenetre", "cuillere", "triangle"] },
-    { question: "Quel prefixe marque souvent l'opposition ou la negation ?", correct: "in-", wrongs: ["re-", "pre-", "micro-"] },
-    { question: "Quel mot est le plus precis pour remplacer tres triste ?", correct: "accable", wrongs: ["content", "rapide", "visible"] },
-  ]);
-
-  return {
-    text: item.question,
-    format: "qcm",
-    choices: makeChoices(item.correct, item.wrongs),
-    expected: [item.correct],
-    comparator: "mcq_exact",
-    explanation: exp(
-      "On choisit le mot selon son sens, sa formation et son contexte.",
-      `La reponse correcte est : ${item.correct}.`,
-      "Le vocabulaire aide a comprendre et exprimer avec precision."
-    ),
-  };
-}
-
-function grammaireQuestion(): Generated {
-  const item = pick([
+function comp_sens_global(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Lis : « Malgré la fatigue et le froid, Yanis termina sa course, porté par les cris de la foule. » De quoi parle surtout ce passage ?",
+        correct: "de la persévérance de Yanis",
+        wrongs: ["de la météo du jour", "d'un match de tennis", "d'un repas de fête"],
+        methode: "Le sens global, c'est l'idée qui traverse tout le passage, pas un détail.",
+      },
+      {
+        text: "Lis : « Le vieux phare, abandonné depuis des années, veillait encore sur la baie déserte. » Quelle impression domine ?",
+        correct: "une impression de solitude et de calme",
+        wrongs: ["une ambiance de fête", "une scène de bataille", "un moment comique"],
+        methode: "On dégage l'atmosphère à partir des mots clés (« abandonné », « déserte »).",
+      },
+      {
+        text: "Résumer un texte en une phrase, c'est en donner...",
+        correct: "l'idée principale, sans s'arrêter à un détail",
+        wrongs: ["le premier mot", "le nombre de paragraphes", "la couleur de la couverture"],
+        methode: "Le résumé garde l'essentiel et laisse de côté les détails secondaires.",
+      },
+      {
+        text: "Lis : « La classe entière retint son souffle : personne n'osait répondre au directeur. » Quelle impression se dégage ?",
+        correct: "une impression de tension",
+        wrongs: ["une impression de joie", "une scène de repas", "une leçon de calcul"],
+        methode: "« retint son souffle » et « n'osait » traduisent la tension.",
+      },
+      {
+        text: "Lis : « Chaque matin, elle repeignait le même mur, sans jamais se lasser. » Ce passage met surtout en avant...",
+        correct: "la patience et la constance du personnage",
+        wrongs: ["le prix de la peinture", "la couleur du mur", "l'heure du réveil"],
+        methode: "On relie une action répétée à un trait de caractère.",
+      },
+      {
+        text: "Pour trouver le thème d'un texte, la meilleure question à se poser est...",
+        correct: "« de quoi parle surtout ce texte ? »",
+        wrongs: ["« combien de lignes a-t-il ? »", "« qui l'a imprimé ? »", "« quelle est sa couleur ? »"],
+        methode: "Le thème répond à « de quoi parle-t-on ? ».",
+      },
+      {
+        text: "Lis : « Le marché grouillait de cris, de couleurs et d'odeurs d'épices. » L'auteur cherche surtout à...",
+        correct: "faire ressentir l'animation du lieu",
+        wrongs: ["donner une liste de courses", "expliquer une règle de grammaire", "raconter une dispute"],
+        methode: "L'accumulation de sensations rend le lieu vivant.",
+      },
+    ],
     {
-      question: "Dans 'Les temoins racontent leur histoire avec emotion', quelle est la fonction de 'Les temoins' ?",
-      correct: "sujet du verbe racontent",
-      wrongs: ["complement de phrase", "adjectif", "verbe conjugue"],
+      "5e": [
+        {
+          text: "Lis : « Sindbad quitta son île natale pour explorer des terres inconnues, au-delà des mers. » Que met surtout en avant ce récit ?",
+          correct: "le goût du voyage et de la découverte du monde",
+          wrongs: ["la peur de sortir de chez soi", "une leçon de grammaire", "une recette de cuisine"],
+          methode: "En 5e, on lit des récits de voyage : on repère la découverte de l'ailleurs.",
+        },
+        {
+          text: "Lis : « Le jeune chevalier baissa les yeux : il avait promis, il ne pouvait plus reculer. » Quel thème apparaît ?",
+          correct: "l'honneur et la parole donnée",
+          wrongs: ["la gourmandise", "l'ennui à l'école", "la peur de l'eau"],
+          methode: "On relie l'attitude du personnage à une valeur (tenir sa promesse).",
+        },
+        {
+          text: "Lis : « Après trois jours de tempête, l'équipage aperçut enfin une côte verdoyante. » Ce passage exprime surtout...",
+          correct: "le soulagement après l'épreuve",
+          wrongs: ["la colère des marins", "une scène comique", "une dispute au port"],
+          methode: "L'opposition tempête / côte verdoyante crée le soulagement.",
+        },
+        {
+          text: "Lis : « Le héros partagea son pain avec l'inconnu affamé. » Ce geste illustre...",
+          correct: "la générosité",
+          wrongs: ["l'avarice", "la peur", "la paresse"],
+          methode: "On associe l'action à une qualité morale (la générosité).",
+        },
+      ],
+      "4e": [
+        {
+          text: "Lis : « Derrière ses habits élégants, l'homme cachait un cœur dur et calculateur. » Que cherche à montrer l'auteur ?",
+          correct: "le contraste entre l'apparence et la vraie nature",
+          wrongs: ["la mode du XIXe siècle", "une simple description de costume", "un problème d'argent réglé"],
+          methode: "En 4e, on interroge le jugement : apparence trompeuse contre réalité.",
+        },
+        {
+          text: "Lis : « La ville grondait de fumée et de bruit ; les ouvriers y entraient avant l'aube. » Ce passage d'un roman du XIXe siècle évoque surtout...",
+          correct: "la dureté du monde du travail à l'époque industrielle",
+          wrongs: ["une fête foraine", "un paysage de vacances", "un jour de neige tranquille"],
+          methode: "On situe la scène dans son contexte (le roman réaliste peint la société).",
+        },
+        {
+          text: "Lis : « On l'admirait pour sa fortune ; nul ne savait comment il l'avait gagnée. » L'auteur suggère...",
+          correct: "un doute sur l'honnêteté du personnage",
+          wrongs: ["une leçon d'histoire", "une scène de mariage heureux", "un simple inventaire"],
+          methode: "En 4e, on lit le jugement porté par l'auteur sur ses personnages.",
+        },
+        {
+          text: "Lis : « Elle rêvait d'une vie brillante, loin de son village gris. » Ce passage exprime surtout...",
+          correct: "l'insatisfaction et le désir d'ailleurs",
+          wrongs: ["le bonheur d'être chez soi", "une consigne de sécurité", "une recette de cuisine"],
+          methode: "Le contraste rêve / village gris dit l'insatisfaction.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Lis : « Tant qu'un seul enfant sera privé d'école, notre combat ne sera pas terminé. » Quel est le sens profond de cette phrase ?",
+          correct: "un appel à défendre le droit à l'éducation",
+          wrongs: ["une information sur les horaires de l'école", "une critique des enfants", "une description d'un bâtiment"],
+          methode: "En 3e, on lit des textes engagés : on dégage la thèse défendue.",
+        },
+        {
+          text: "Lis : « Je me souviens du silence, ce matin-là, quand nous avons compris que tout allait changer. » Dans un récit de témoignage, cette phrase...",
+          correct: "annonce un événement grave vécu par le narrateur",
+          wrongs: ["décrit une journée ordinaire", "donne une consigne de sécurité", "explique une règle de jeu"],
+          methode: "On perçoit l'implicite : le « silence » et « tout allait changer » pèsent lourd.",
+        },
+        {
+          text: "Lis : « Nul homme n'est une île ; chacun est lié au sort des autres. » Ce texte défend surtout...",
+          correct: "l'idée de solidarité entre les êtres humains",
+          wrongs: ["une leçon de géographie", "une consigne de randonnée", "une règle de politesse à table"],
+          methode: "On dégage la valeur humaniste défendue (la solidarité).",
+        },
+        {
+          text: "Lis : « Ils avaient tout perdu, sauf le courage de recommencer. » Ce passage met en avant...",
+          correct: "la force de l'espoir malgré l'épreuve",
+          wrongs: ["une simple liste de pertes", "un bulletin météo", "une recette"],
+          methode: "L'opposition « tout perdu / sauf le courage » porte l'espoir.",
+        },
+      ],
     },
-    {
-      question: "Quelle phrase utilise un registre plus soutenu ?",
-      correct: "Je vous prie de bien vouloir patienter.",
-      wrongs: ["Attends deux secondes.", "Bouge pas.", "C'est bon, patiente."],
-    },
-    {
-      question: "Quelle phrase contient des paroles rapportees directement ?",
-      correct: "Elle murmura : 'Je reviendrai demain.'",
-      wrongs: ["Elle dit qu'elle reviendrait.", "Elle reviendra demain.", "Demain, elle revient."],
-    },
-  ]);
-
-  return {
-    text: item.question,
-    format: "qcm",
-    choices: makeChoices(item.correct, item.wrongs),
-    expected: [item.correct],
-    comparator: "mcq_exact",
-    explanation: exp(
-      "On observe la phrase, les fonctions et la situation de communication.",
-      `La reponse correcte est : ${item.correct}.`,
-      "L'analyse grammaticale sert la lecture et l'ecriture."
-    ),
-  };
+    level
+  );
 }
 
-function conjugaisonQuestion(): Generated {
-  const item = pick([
-    { question: "Conjugue 'defendre' au present avec nous.", correct: "defendons", wrongs: ["defendent", "defendions", "defendrons"] },
-    { question: "Dans 'Il avait compris', quel temps est employe ?", correct: "plus-que-parfait", wrongs: ["present", "futur", "imperatif"] },
-    { question: "Quel mode exprime un ordre ou un conseil ?", correct: "imperatif", wrongs: ["indicatif", "infinitif", "participe"] },
-  ]);
-
-  return {
-    text: item.question,
-    format: item.correct.endsWith("ons") ? "short" : "qcm",
-    choices: item.correct.endsWith("ons") ? undefined : makeChoices(item.correct, item.wrongs),
-    expected: [item.correct],
-    comparator: item.correct.endsWith("ons") ? "exact_text" : "mcq_exact",
-    explanation: exp(
-      "On identifie le verbe, le sujet, le temps et le mode.",
-      `La reponse attendue est : ${item.correct}.`,
-      "Les formes verbales se construisent avec radical, marque de temps et terminaison."
-    ),
-  };
+function comp_indices(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Lis : « Elle répondit calmement, mais ses mains tremblaient sous la table. » Quel indice révèle son émotion ?",
+        correct: "ses mains qui tremblent",
+        wrongs: ["sa voix calme", "la table", "sa réponse polie"],
+        methode: "L'indice, c'est le détail précis qui trahit ce qui n'est pas dit.",
+      },
+      {
+        text: "Lis : « Les valises étaient prêtes près de la porte et les billets posés sur la table. » Quel indice montre qu'un départ se prépare ?",
+        correct: "les valises et les billets",
+        wrongs: ["la porte fermée", "la table en bois", "l'heure du dîner"],
+        methode: "On relève les éléments concrets qui prouvent l'interprétation.",
+      },
+      {
+        text: "Pour justifier une réponse de lecture, il faut...",
+        correct: "citer le mot ou le passage exact du texte",
+        wrongs: ["deviner au hasard", "donner son âge", "compter les lignes"],
+        methode: "Justifier = s'appuyer sur une preuve prise dans le texte.",
+      },
+      {
+        text: "Lis : « Le sol était jonché de feuilles mortes et l'air sentait la fumée. » Quels indices situent la saison ?",
+        correct: "les feuilles mortes et l'odeur de fumée",
+        wrongs: ["le nom du personnage", "la longueur de la phrase", "la couleur de l'encre"],
+        methode: "Plusieurs indices convergent vers l'automne.",
+      },
+      {
+        text: "Lis : « Sa chemise était trempée et il reprenait à peine son souffle. » Quel indice montre qu'il a couru ?",
+        correct: "la chemise trempée et le souffle court",
+        wrongs: ["la couleur de la chemise", "l'heure qu'il est", "le nom de la rue"],
+        methode: "On relie les indices physiques à l'effort fourni.",
+      },
+      {
+        text: "Un « indice » dans un texte, c'est...",
+        correct: "un détail précis qui aide à comprendre le sens",
+        wrongs: ["le titre du livre", "le nombre de pages", "le prix du livre"],
+        methode: "L'indice est un détail qui éclaire l'interprétation.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Lis : « Le sol tremblait, une odeur de soufre montait de la montagne fumante. » Quels indices annoncent un danger ?",
+          correct: "le sol qui tremble et l'odeur de soufre",
+          wrongs: ["la couleur du ciel", "le nom de la montagne", "l'heure de la journée"],
+          methode: "On regroupe plusieurs indices qui vont dans le même sens.",
+        },
+        {
+          text: "Lis : « L'armure rouillée et l'épée ébréchée témoignaient de mille combats. » Quels indices renseignent sur le passé du chevalier ?",
+          correct: "l'armure rouillée et l'épée ébréchée",
+          wrongs: ["le nom du château", "la date d'impression", "la couleur du parchemin"],
+          methode: "Les objets décrits sont des indices du vécu du personnage.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Lis : « Il parlait de générosité, mais comptait chaque pièce avant de la donner. » Quel indice révèle son hypocrisie ?",
+          correct: "il compte chaque pièce avant de donner",
+          wrongs: ["il parle de générosité", "il possède des pièces", "il est présent dans la scène"],
+          methode: "L'indice contredit les paroles : le geste dément le discours.",
+        },
+        {
+          text: "Lis : « Ses ongles rongés et son regard fuyant le trahissaient. » Quels indices révèlent son inquiétude ?",
+          correct: "les ongles rongés et le regard fuyant",
+          wrongs: ["la couleur de sa veste", "son âge exact", "le nom de la ville"],
+          methode: "On lit les indices du corps pour deviner l'émotion cachée.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Lis : « Les fenêtres restaient closes, mais derrière les rideaux, on devinait des regards. » Quel indice suggère une surveillance ?",
+          correct: "les regards devinés derrière les rideaux",
+          wrongs: ["les fenêtres closes seules", "la couleur des rideaux", "l'absence de bruit"],
+          methode: "On repère l'indice qui crée une atmosphère de menace.",
+        },
+        {
+          text: "Lis : « Le discours parlait de paix, mais les usines fabriquaient des armes. » Quel indice révèle la contradiction dénoncée ?",
+          correct: "les usines qui fabriquent des armes",
+          wrongs: ["le mot paix", "la longueur du discours", "la date du discours"],
+          methode: "L'indice contredit le discours officiel : c'est une dénonciation.",
+        },
+      ],
+    },
+    level
+  );
 }
 
-function questionForNotion(level: Cycle4Level, notionId: string): Generated {
-  if (notionId.includes("lecture_comprehension")) return lectureQuestion(level);
-  if (notionId.includes("lecture_voix")) return oralQuestion();
-  if (notionId.includes("culture")) return cultureQuestion(level);
-  if (notionId.includes("ecriture")) return ecritureQuestion();
-  if (notionId.includes("oral")) return oralQuestion();
-  if (notionId.includes("vocabulaire")) return vocabulaireQuestion();
-  if (notionId.includes("conjugaison")) return conjugaisonQuestion();
-  return grammaireQuestion();
+function comp_implicite(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Lis : « Quand le professeur rendit les copies, Malo glissa vite la sienne dans son sac, les joues rouges. » Qu'a probablement eu Malo ?",
+        correct: "une mauvaise note",
+        wrongs: ["la meilleure note", "un cadeau", "une bonne surprise"],
+        methode: "L'implicite se déduit des indices : cacher sa copie et rougir.",
+      },
+      {
+        text: "Comprendre l'implicite d'un texte, c'est comprendre...",
+        correct: "ce que l'auteur laisse deviner sans l'écrire",
+        wrongs: ["seulement les mots présents", "le nombre de phrases", "le titre uniquement"],
+        methode: "L'implicite est le sens sous-entendu, à reconstruire.",
+      },
+      {
+        text: "Lis : « — Bien sûr que je t'ai gardé une part, dit-il en évitant son regard. » Que comprend-on ?",
+        correct: "qu'il a probablement mangé la part",
+        wrongs: ["qu'il a vraiment gardé la part", "qu'il n'a pas faim", "qu'il déteste ce plat"],
+        methode: "Le regard évité contredit la parole : c'est l'implicite.",
+      },
+      {
+        text: "Lis : « La lumière de sa chambre resta allumée toute la nuit. » Qu'est-ce que cela laisse deviner ?",
+        correct: "qu'il n'a pas dormi, préoccupé",
+        wrongs: ["qu'il fait très beau dehors", "qu'il aime les lampes", "qu'il est en vacances"],
+        methode: "On déduit un état d'esprit à partir d'un détail concret.",
+      },
+      {
+        text: "Lis : « Elle rangea la photo dans un tiroir et n'en parla plus jamais. » Cela suggère...",
+        correct: "un souvenir douloureux qu'elle veut oublier",
+        wrongs: ["une envie de décorer", "un manque de place", "un simple ménage"],
+        methode: "Le geste et le silence disent la douleur sans l'écrire.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Lis : « — Encore toi ? soupira le marchand en croisant les bras. » Que ressent le marchand ?",
+          correct: "de l'agacement",
+          wrongs: ["de la joie", "de la peur", "de la surprise heureuse"],
+          methode: "Le soupir et les bras croisés disent l'agacement sans l'écrire.",
+        },
+        {
+          text: "Lis : « Le héros regarda une dernière fois son village, puis serra son baluchon. » Qu'est-ce que cela laisse deviner ?",
+          correct: "qu'il s'apprête à partir pour longtemps",
+          wrongs: ["qu'il va se coucher", "qu'il a faim", "qu'il déteste marcher"],
+          methode: "Le « dernier regard » et le baluchon annoncent un départ.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Lis : « — Quel beau travail, dit-il en repoussant la copie du bout des doigts. » Que comprend-on de son jugement réel ?",
+          correct: "il pense en fait le contraire (ironie)",
+          wrongs: ["il est sincèrement admiratif", "il n'a pas lu la copie", "il félicite chaleureusement"],
+          methode: "En 4e, on repère l'ironie : le ton et le geste contredisent les mots.",
+        },
+        {
+          text: "Lis : « Sa générosité ne s'exerçait jamais sans témoins. » Que sous-entend l'auteur ?",
+          correct: "qu'il aide surtout pour être vu et admiré",
+          wrongs: ["qu'il est très timide", "qu'il déteste être aidé", "qu'il vit seul"],
+          methode: "L'implicite critique un défaut caché derrière une belle apparence.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Lis : « On lui avait tout promis. On ne lui donna rien. » Que suggère cette opposition sèche ?",
+          correct: "une dénonciation d'une injustice ou d'une trahison",
+          wrongs: ["un simple oubli sans importance", "une scène joyeuse", "une liste de courses"],
+          methode: "Le contraste souligne l'injustice : c'est l'implicite d'un texte engagé.",
+        },
+        {
+          text: "Lis : « Les grands discours étaient finis ; restait à balayer les promesses par terre. » L'auteur sous-entend...",
+          correct: "que les belles promesses n'ont pas été tenues",
+          wrongs: ["qu'il faut nettoyer la salle", "qu'un discours a été applaudi", "qu'une fête commence"],
+          methode: "L'image (« balayer les promesses ») dénonce des paroles vaines.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function comp_apprecier(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Quelle phrase donne un avis de lecteur JUSTIFIÉ ?",
+        correct: "J'ai aimé ce roman car le héros affronte ses peurs jusqu'au bout.",
+        wrongs: ["Ce roman existe.", "Il a trois cents pages.", "C'est un roman."],
+        methode: "Une appréciation fondée donne un avis ET une raison tirée du texte.",
+      },
+      {
+        text: "Pour dire pourquoi un passage m'a ému, je dois...",
+        correct: "m'appuyer sur ce qui est écrit dans le texte",
+        wrongs: ["parler d'un autre livre", "donner la date du jour", "recopier la couverture"],
+        methode: "Un avis solide se justifie par des éléments précis du texte.",
+      },
+      {
+        text: "Quel avis montre le mieux que le lecteur a compris le texte ?",
+        correct: "La fin m'a surpris car rien ne laissait deviner la trahison.",
+        wrongs: ["C'est nul.", "J'ai lu vite.", "Il y a des images."],
+        methode: "Un avis justifié relie l'émotion à un élément du récit.",
+      },
+      {
+        text: "Apprécier un texte, en cours de français, cela veut dire...",
+        correct: "donner un avis argumenté, pas seulement « j'aime »",
+        wrongs: ["mettre une note sur vingt au hasard", "compter les mots", "recopier le résumé"],
+        methode: "Apprécier, c'est justifier son jugement de lecteur.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Quel avis de lecteur est le mieux justifié sur un récit d'aventure ?",
+          correct: "J'ai été tenu en haleine car les dangers s'enchaînent sans répit.",
+          wrongs: ["C'est bien.", "C'est un livre.", "Il y a des pages."],
+          methode: "On relie son plaisir de lecture à un procédé (le rythme, le suspense).",
+        },
+        {
+          text: "Comment donner un avis justifié sur un personnage de conte ?",
+          correct: "J'ai admiré la ruse du héros, qui triomphe sans jamais se battre.",
+          wrongs: ["Il est là.", "C'est vieux.", "Je ne sais pas."],
+          methode: "On justifie son admiration par un trait précis du personnage.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Dans un débat sur un roman réaliste, quelle appréciation est la plus argumentée ?",
+          correct: "Le personnage m'a semblé cruel, car il trahit son ami pour de l'argent.",
+          wrongs: ["Je n'aime pas, c'est tout.", "C'est vieux.", "Il y a beaucoup de mots."],
+          methode: "En 4e, on porte un jugement nuancé appuyé sur les actes du personnage.",
+        },
+        {
+          text: "Quelle appréciation d'un récit fantastique est la plus fine ?",
+          correct: "Le doute m'a plu : on ne sait jamais si le fantôme est réel.",
+          wrongs: ["C'est bizarre.", "Trop long.", "Bof."],
+          methode: "On apprécie le procédé propre au genre (l'hésitation fantastique).",
+        },
+      ],
+      "3e": [
+        {
+          text: "Quelle appréciation d'un poème engagé est la plus nuancée ?",
+          correct: "Le poème m'a touché : ses images fortes dénoncent la guerre sans crier.",
+          wrongs: ["C'est triste.", "Je n'ai pas compté les vers.", "C'est un poème ancien."],
+          methode: "On formule un jugement nuancé, appuyé sur les procédés du texte.",
+        },
+        {
+          text: "Comment apprécier finement un récit autobiographique ?",
+          correct: "J'ai été ému par la sincérité avec laquelle l'auteur avoue ses erreurs.",
+          wrongs: ["C'est sa vie.", "Il parle de lui.", "Il y a « je »."],
+          methode: "On relie l'émotion à une qualité du texte (la sincérité, l'aveu).",
+        },
+      ],
+    },
+    level
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LECTURE À VOIX HAUTE — mise en voix (vrai pool dédié, pas de l'oral)
+// ─────────────────────────────────────────────────────────────────────────────
+
+function voix_preparer(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Avant de lire un texte long à voix haute devant la classe, la meilleure préparation est de...",
+        correct: "le lire d'abord en silence pour repérer les mots difficiles et le sens",
+        wrongs: ["le lire une seule fois, très vite", "n'apprendre que le titre", "ne rien préparer"],
+        methode: "Préparer une lecture orale : comprendre le texte et anticiper les obstacles.",
+      },
+      {
+        text: "Pour préparer la mise en voix, il est utile de marquer sur son texte...",
+        correct: "les pauses, les liaisons et les mots à mettre en relief",
+        wrongs: ["la date de naissance de l'auteur", "le prix du livre", "le nombre de pages du livre"],
+        methode: "On annote son texte : respirations, groupes de sens, mots importants.",
+      },
+      {
+        text: "Pour bien prononcer un mot rare avant de lire tout haut, on peut...",
+        correct: "le découper en syllabes et s'entraîner à le dire",
+        wrongs: ["le sauter complètement", "le remplacer par un autre", "le lire les yeux fermés"],
+        methode: "On anticipe les mots difficiles en s'entraînant à les articuler.",
+      },
+      {
+        text: "Repérer les groupes de sens avant de lire sert à...",
+        correct: "savoir où respirer sans couper les phrases",
+        wrongs: ["colorier la marge", "compter les virgules pour rien", "changer le texte"],
+        methode: "Les groupes de sens guident les respirations de la lecture.",
+      },
+      {
+        text: "La meilleure façon de gagner en aisance avant une lecture publique est de...",
+        correct: "s'entraîner plusieurs fois à voix haute",
+        wrongs: ["ne lire qu'en silence", "apprendre le texte par cœur sans le dire", "improviser le jour même"],
+        methode: "L'entraînement oral prépare vraiment la mise en voix.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Pour préparer la lecture d'un récit d'aventure, quel repérage aide le plus la mise en voix ?",
+          correct: "repérer les passages de dialogue et les moments de tension",
+          wrongs: ["compter les virgules", "colorier la marge", "mesurer les lignes"],
+          methode: "On distingue narration et dialogues pour varier la voix.",
+        },
+        {
+          text: "Avant de lire une fable, il est utile de repérer d'abord...",
+          correct: "les paroles des animaux et la morale à souligner",
+          wrongs: ["le nombre exact de mots", "la couleur de la page", "le nom de l'imprimeur"],
+          methode: "On repère ce qu'il faudra mettre en valeur (dialogues, morale).",
+        },
+      ],
+      "4e": [
+        {
+          text: "Pour préparer la lecture d'une tirade de théâtre, il faut surtout...",
+          correct: "comprendre l'émotion du personnage et repérer les phrases fortes",
+          wrongs: ["apprendre le nom du décorateur", "compter les répliques des autres", "chercher la date d'impression"],
+          methode: "Au théâtre, la mise en voix sert l'émotion du personnage.",
+        },
+        {
+          text: "Avant de lire un passage ironique d'un roman du XIXe siècle, on repère...",
+          correct: "les endroits où le ton doit démentir les mots",
+          wrongs: ["la taille de la police", "le poids du livre", "le prix d'édition"],
+          methode: "On prépare le ton qui fera entendre l'ironie.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Pour préparer la lecture d'un poème engagé, le meilleur repérage est...",
+          correct: "les images fortes et le rythme des vers à faire entendre",
+          wrongs: ["le nombre de strophes seulement", "la taille de la police", "la couleur du papier"],
+          methode: "On met en voix ce qui porte le sens : images, répétitions, rythme.",
+        },
+        {
+          text: "Avant de lire un discours argumenté, il est utile de repérer...",
+          correct: "les mots clés et les phrases à marteler pour convaincre",
+          wrongs: ["la marge de gauche", "le nombre de pages", "la date d'achat"],
+          methode: "On prépare les accents d'insistance qui portent l'argumentation.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function voix_expressive(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Pour lire « — Attends-moi ! » cria-t-elle, comment mettre le ton ?",
+        correct: "en montant la voix, plus fort, comme un appel",
+        wrongs: ["en chuchotant lentement", "sans changer de voix", "en riant"],
+        methode: "Le point d'exclamation et « cria » demandent une voix forte.",
+      },
+      {
+        text: "Pendant une lecture à voix haute, pour garder l'attention du public, il faut aussi...",
+        correct: "lever les yeux vers l'auditoire de temps en temps",
+        wrongs: ["garder les yeux baissés tout le temps", "tourner le dos", "lire les yeux fermés"],
+        methode: "Le regard fait partie de la mise en voix : on relie le texte au public.",
+      },
+      {
+        text: "La ponctuation guide la voix : au point d'interrogation, on...",
+        correct: "fait monter la voix à la fin de la phrase",
+        wrongs: ["baisse la voix comme à un point", "s'arrête définitivement", "chuchote toujours"],
+        methode: "La question s'entend : l'intonation monte à la fin.",
+      },
+      {
+        text: "Pour lire « Chut… écoute », le mieux est de...",
+        correct: "baisser la voix, comme pour un secret",
+        wrongs: ["crier très fort", "rire aux éclats", "parler très vite"],
+        methode: "Le sens du texte commande le volume : ici, tout bas.",
+      },
+      {
+        text: "À la virgule, une bonne lecture expressive marque...",
+        correct: "une courte pause, sans s'arrêter comme à un point",
+        wrongs: ["un arrêt complet et long", "une accélération", "un cri"],
+        methode: "La virgule appelle une brève respiration.",
+      },
+      {
+        text: "Pour lire un passage plein de suspense, on peut...",
+        correct: "ralentir et ménager de courts silences",
+        wrongs: ["lire le plus vite possible", "rire à chaque phrase", "sauter des mots"],
+        methode: "Le rythme lent et les silences créent la tension.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Dans un dialogue signalé par un tiret, une bonne lecture expressive consiste à...",
+          correct: "changer de voix pour distinguer les personnages",
+          wrongs: ["lire tout d'une seule voix plate", "sauter les répliques", "lire de plus en plus vite"],
+          methode: "On donne une voix à chaque personnage pour la clarté.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Pour lire une réplique où un personnage feint la politesse tout en étant méprisant, il faut...",
+          correct: "faire entendre l'ironie par le ton",
+          wrongs: ["lire d'une voix neutre et rapide", "crier chaque mot", "murmurer sans expression"],
+          methode: "Le ton peut faire entendre le double sens (l'ironie) d'une réplique.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Pour rendre puissant un poème de révolte, la lecture doit surtout...",
+          correct: "marteler le rythme et mettre en relief les mots forts",
+          wrongs: ["lire vite et sans pause", "réciter d'une voix monotone", "murmurer du début à la fin"],
+          methode: "Le rythme et les accents d'intensité portent la force du texte engagé.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function voix_reciter(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Pour bien réciter un texte appris par cœur, il vaut mieux...",
+        correct: "respecter le rythme et bien articuler",
+        wrongs: ["réciter le plus vite possible", "sauter les passages difficiles", "parler tout bas, sans expression"],
+        methode: "Réciter, c'est dire le texte en le faisant vivre, pas le débiter.",
+      },
+      {
+        text: "Si tu oublies un passage en récitant, le mieux est de...",
+        correct: "rester calme, faire une courte pause et reprendre",
+        wrongs: ["t'arrêter et abandonner", "parler très vite pour cacher l'oubli", "quitter la scène"],
+        methode: "Un trou de mémoire se gère par une courte pause maîtrisée.",
+      },
+      {
+        text: "Réciter avec expression, c'est...",
+        correct: "mettre le ton, pas seulement dire les mots sans erreur",
+        wrongs: ["aller le plus vite possible", "réciter sans jamais respirer", "regarder toujours ses pieds"],
+        methode: "La récitation vise l'expression, pas la performance de vitesse.",
+      },
+      {
+        text: "Pour retenir un texte à réciter, une bonne méthode est de...",
+        correct: "le mémoriser peu à peu, en le disant à voix haute",
+        wrongs: ["le lire une seule fois en silence", "l'apprendre à l'envers", "le recopier sans le dire"],
+        methode: "On apprend un texte oral en le répétant à voix haute.",
+      },
+      {
+        text: "Pour réciter sans réciter « comme un robot », il faut...",
+        correct: "penser au sens des phrases et varier l'intonation",
+        wrongs: ["dire tout sur le même ton", "aller le plus vite possible", "supprimer les pauses"],
+        methode: "Réciter avec sens évite le débit monotone.",
+      },
+      {
+        text: "Quand on récite devant la classe, une bonne posture est de...",
+        correct: "se tenir droit et regarder l'auditoire",
+        wrongs: ["fixer le plafond", "tourner le dos", "cacher son visage"],
+        methode: "La posture et le regard font partie d'une bonne récitation.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Pour réciter une fable, quelle attention est la plus utile ?",
+          correct: "marquer une petite pause à la fin de chaque vers",
+          wrongs: ["s'arrêter longuement à chaque mot", "lire sans aucune pause", "chuchoter la morale"],
+          methode: "En poésie, la fin de vers demande une brève pause, sans casser le sens.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Pour réciter une tirade avec conviction, il faut...",
+          correct: "varier le rythme selon les émotions du personnage",
+          wrongs: ["dire tout sur le même ton", "réciter machinalement", "accélérer jusqu'à la fin"],
+          methode: "La récitation d'un texte de théâtre suit les émotions du rôle.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Pour réciter un poème en vers libres, le récitant doit surtout...",
+          correct: "suivre le sens et les images plutôt qu'une rime régulière",
+          wrongs: ["chercher une rime à chaque fin", "compter les syllabes à voix haute", "réciter sans respirer"],
+          methode: "En vers libres, c'est le sens et les images qui guident la voix.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CULTURE LITTÉRAIRE — genres, contexte, réseaux, trace
+// ─────────────────────────────────────────────────────────────────────────────
+
+function culture_genres(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Un texte écrit en vers, avec un jeu sur les sonorités et les images, est...",
+        correct: "un poème",
+        wrongs: ["un article de presse", "une recette", "une notice"],
+        methode: "On reconnaît le genre à sa forme et à son intention.",
+      },
+      {
+        text: "Un texte fait de répliques précédées du nom des personnages est...",
+        correct: "un texte de théâtre",
+        wrongs: ["un roman", "un poème", "un mode d'emploi"],
+        methode: "Le théâtre se reconnaît aux répliques et aux didascalies.",
+      },
+      {
+        text: "Une histoire des dieux et des héros de l'Antiquité, comme l'Odyssée, est...",
+        correct: "un mythe (ou une épopée)",
+        wrongs: ["un fait divers", "une notice de montage", "un bulletin météo"],
+        methode: "Les récits des dieux et héros antiques sont des mythes.",
+      },
+      {
+        text: "Un récit long en prose qui suit un ou plusieurs personnages sur la durée est...",
+        correct: "un roman",
+        wrongs: ["un poème", "une pièce de théâtre", "un dictionnaire"],
+        methode: "Le roman est un long récit en prose.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Un récit de chevaliers, de quêtes et d'exploits au Moyen Âge est...",
+          correct: "un roman de chevalerie",
+          wrongs: ["un roman policier", "un documentaire scientifique", "une bande dessinée humoristique"],
+          methode: "En 5e, on découvre les récits de chevalerie et d'aventure.",
+        },
+        {
+          text: "Une courte histoire avec des animaux qui parlent et une morale est...",
+          correct: "une fable",
+          wrongs: ["une tragédie", "un roman-fleuve", "un fait divers"],
+          methode: "La fable met en scène des animaux et se termine par une morale.",
+        },
+        {
+          text: "Une pièce comique où l'on se moque des défauts humains, à la manière de Molière, est...",
+          correct: "une comédie",
+          wrongs: ["une tragédie", "un poème lyrique", "un conte de fées"],
+          methode: "La comédie fait rire et corrige les défauts des hommes.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Un récit où d'étranges phénomènes font hésiter entre le réel et le surnaturel est...",
+          correct: "un récit fantastique",
+          wrongs: ["un récit de voyage", "une farce", "un article de journal"],
+          methode: "En 4e, on étudie le fantastique : le doute entre réel et surnaturel.",
+        },
+        {
+          text: "Un long récit en prose qui peint la société du XIXe siècle avec réalisme est...",
+          correct: "un roman réaliste",
+          wrongs: ["une épopée antique", "une fable", "un conte merveilleux"],
+          methode: "Le roman réaliste dépeint fidèlement la société de son temps.",
+        },
+        {
+          text: "Un poème qui chante les sentiments et les émotions du poète est...",
+          correct: "un poème lyrique",
+          wrongs: ["un mode d'emploi", "un compte rendu", "un règlement"],
+          methode: "La poésie lyrique exprime les sentiments personnels.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Un texte où l'auteur raconte sa propre vie à la première personne est...",
+          correct: "un récit autobiographique",
+          wrongs: ["un roman de science-fiction", "une comédie", "un manuel scolaire"],
+          methode: "En 3e, on lit l'autobiographie : l'auteur, le narrateur et le personnage ne font qu'un.",
+        },
+        {
+          text: "Un poème qui dénonce la guerre ou l'injustice est un poème...",
+          correct: "engagé",
+          wrongs: ["de circonstance joyeuse", "purement décoratif", "sans aucun sens"],
+          methode: "La poésie engagée met les mots au service d'une cause.",
+        },
+        {
+          text: "Un texte où un témoin raconte ce qu'il a réellement vécu, par exemple une guerre, est...",
+          correct: "un témoignage",
+          wrongs: ["un conte merveilleux", "une farce", "une devinette"],
+          methode: "Le témoignage rapporte une expérience réellement vécue.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function culture_contexte(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Situer une œuvre dans son contexte, c'est se demander...",
+        correct: "à quelle époque et dans quel pays elle a été écrite",
+        wrongs: ["combien elle coûte", "qui l'a empruntée", "sa couleur de couverture"],
+        methode: "Le contexte éclaire le sens d'une œuvre (époque, société).",
+      },
+      {
+        text: "Connaître le contexte d'un texte aide surtout à...",
+        correct: "mieux comprendre ce que l'auteur a voulu dire",
+        wrongs: ["deviner son prix", "compter ses pages", "choisir sa reliure"],
+        methode: "Le contexte donne les clés pour interpréter l'œuvre.",
+      },
+      {
+        text: "Le « contexte historique » d'une œuvre, c'est...",
+        correct: "l'époque et les événements au moment où elle a été écrite",
+        wrongs: ["le nombre de ses chapitres", "le nom de son imprimeur", "son prix en librairie"],
+        methode: "Le contexte historique situe l'œuvre dans son temps.",
+      },
+      {
+        text: "Pour situer une œuvre, il est utile de repérer...",
+        correct: "son auteur, son siècle et le genre auquel elle appartient",
+        wrongs: ["sa couleur de couverture", "son poids exact", "le magasin qui la vend"],
+        methode: "On situe une œuvre par son auteur, son époque et son genre.",
+      },
+      {
+        text: "Savoir qu'un texte a été écrit pendant une guerre aide à...",
+        correct: "comprendre pourquoi il parle de peur ou d'espoir",
+        wrongs: ["connaître son prix", "compter ses pages", "choisir sa police"],
+        methode: "Le contexte éclaire les thèmes du texte.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Les récits de chevalerie que l'on étudie en 5e se situent surtout...",
+          correct: "au Moyen Âge",
+          wrongs: ["à la préhistoire", "au XXIe siècle", "sur une autre planète"],
+          methode: "On rattache le genre à son époque (le Moyen Âge pour la chevalerie).",
+        },
+        {
+          text: "L'Odyssée, qui raconte le retour d'Ulysse, a été composée...",
+          correct: "dans l'Antiquité grecque",
+          wrongs: ["au Moyen Âge en France", "au XIXe siècle", "l'an dernier"],
+          methode: "On situe l'œuvre dans son temps (l'Antiquité pour les épopées grecques).",
+        },
+        {
+          text: "Les comédies de Molière ont été écrites...",
+          correct: "au XVIIe siècle",
+          wrongs: ["à la préhistoire", "au XXIe siècle", "au Moyen Âge"],
+          methode: "On relie l'auteur à son siècle (Molière au XVIIe siècle).",
+        },
+      ],
+      "4e": [
+        {
+          text: "Les romans réalistes de Balzac ou Maupassant peignent surtout la société...",
+          correct: "du XIXe siècle",
+          wrongs: ["de l'Antiquité", "du Moyen Âge", "de l'an 2100"],
+          methode: "En 4e, le roman réaliste éclaire la société du XIXe siècle.",
+        },
+        {
+          text: "Le mouvement des Lumières, au XVIIIe siècle, défend surtout...",
+          correct: "la raison, la tolérance et le savoir",
+          wrongs: ["l'ignorance et la peur", "la guerre pour la guerre", "le silence des savants"],
+          methode: "On relie une œuvre aux idées de son époque (les Lumières et la raison).",
+        },
+      ],
+      "3e": [
+        {
+          text: "Les récits de témoignage sur les guerres du XXe siècle servent surtout à...",
+          correct: "garder la mémoire et alerter les générations suivantes",
+          wrongs: ["donner des recettes de cuisine", "apprendre à nager", "vendre des billets"],
+          methode: "En 3e, on lit des témoignages pour comprendre l'Histoire et s'engager.",
+        },
+        {
+          text: "La poésie de la Résistance a surtout été écrite pendant...",
+          correct: "la Seconde Guerre mondiale",
+          wrongs: ["l'Antiquité", "le Moyen Âge", "la préhistoire"],
+          methode: "On situe la poésie engagée dans son contexte historique.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function culture_reseau(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Mettre deux œuvres « en réseau », c'est...",
+        correct: "les rapprocher parce qu'elles partagent un thème ou un procédé",
+        wrongs: ["les ranger par ordre de prix", "compter leurs pages", "les lire le même jour"],
+        methode: "Le réseau relie des œuvres autour d'une idée commune.",
+      },
+      {
+        text: "Relier un livre au film qui en est tiré, c'est...",
+        correct: "mettre les deux œuvres en réseau pour les comparer",
+        wrongs: ["choisir la moins chère", "abandonner la lecture", "ignorer les différences"],
+        methode: "Comparer des œuvres d'un même sujet, c'est les mettre en réseau.",
+      },
+      {
+        text: "Deux textes qui traitent du même thème peuvent être...",
+        correct: "mis en réseau pour comparer leurs points de vue",
+        wrongs: ["classés par taille", "notés sur vingt", "rangés par couleur"],
+        methode: "Le réseau relie des œuvres par le thème.",
+      },
+      {
+        text: "Comparer un tableau et un poème sur la mer, c'est...",
+        correct: "relier deux arts autour d'un même sujet",
+        wrongs: ["choisir le plus récent", "peindre le poème", "réciter le tableau"],
+        methode: "On met en réseau des œuvres de formes différentes.",
+      },
+      {
+        text: "Mettre en réseau aide surtout à...",
+        correct: "mieux comprendre une œuvre en la comparant à d'autres",
+        wrongs: ["gagner du temps de lecture", "éviter de lire", "compter les pages"],
+        methode: "La comparaison éclaire chaque œuvre.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "La ruse d'Ulysse face au cyclope peut être rapprochée...",
+          correct: "de la ruse du Petit Poucet face à l'ogre",
+          wrongs: ["d'une leçon de calcul", "d'une carte de géographie", "d'une liste de verbes"],
+          methode: "On relie deux héros rusés : c'est mettre les récits en réseau.",
+        },
+        {
+          text: "Un roman de chevalerie et une légende du roi Arthur se rejoignent par...",
+          correct: "le thème de la quête et de l'honneur",
+          wrongs: ["le nombre de pages", "la couleur des couvertures", "la date d'achat"],
+          methode: "On met en réseau des récits qui partagent des valeurs communes.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Un roman réaliste sur la misère ouvrière fait écho...",
+          correct: "à un tableau du XIXe siècle représentant des ouvriers",
+          wrongs: ["à une publicité moderne pour un jeu", "à une recette de dessert", "à un bulletin météo"],
+          methode: "On met en réseau un texte et une œuvre d'art de la même époque.",
+        },
+        {
+          text: "Deux récits fantastiques se rejoignent souvent par...",
+          correct: "le doute entre explication réelle et surnaturelle",
+          wrongs: ["leur nombre de chapitres", "leur prix", "leur reliure"],
+          methode: "On relie les œuvres par le procédé de genre qu'elles partagent.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Un poème dénonçant la guerre peut être mis en réseau avec...",
+          correct: "une affiche ou une chanson engagées sur le même thème",
+          wrongs: ["un catalogue de meubles", "un horaire de bus", "une notice de montage"],
+          methode: "On relie des œuvres engagées de formes différentes autour d'une même cause.",
+        },
+        {
+          text: "Deux témoignages sur un même événement historique se comparent surtout par...",
+          correct: "les points de vue et les émotions qu'ils transmettent",
+          wrongs: ["le poids des livres", "la taille des lettres", "le prix d'achat"],
+          methode: "On met en réseau des témoignages pour croiser les regards.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function culture_trace(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Pour garder une trace personnelle de tes lectures, tu peux tenir...",
+        correct: "un carnet de lecture avec titres, extraits et impressions",
+        wrongs: ["un cahier de mathématiques", "une liste de courses", "rien du tout"],
+        methode: "Le carnet de lecture garde la mémoire de ce qu'on a lu et ressenti.",
+      },
+      {
+        text: "Dans un carnet de lecture, la trace la plus utile est...",
+        correct: "un passage aimé accompagné de la raison qui l'a marqué",
+        wrongs: ["seulement le nombre de pages", "la couleur de la couverture", "le prix du livre"],
+        methode: "On garde ce qui nourrit la réflexion : un extrait et un avis justifié.",
+      },
+      {
+        text: "Recopier une citation qui t'a plu dans ton carnet permet de...",
+        correct: "te souvenir de ce qui t'a touché et pourquoi",
+        wrongs: ["remplir des pages sans but", "gagner un concours", "cacher le livre"],
+        methode: "La citation gardée fixe un moment fort de la lecture.",
+      },
+      {
+        text: "Dans un carnet de lecture, noter le genre de l'œuvre aide à...",
+        correct: "relier ses lectures et repérer ce qu'on aime",
+        wrongs: ["remplir la page", "oublier le livre", "compter les mots"],
+        methode: "Classer par genre organise sa mémoire de lecteur.",
+      },
+      {
+        text: "Une bonne fiche de lecture contient au moins...",
+        correct: "le titre, l'auteur, le genre et un avis personnel",
+        wrongs: ["seulement le prix", "la couleur de la couverture", "le poids du livre"],
+        methode: "La fiche garde les informations utiles et un avis.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Après un récit d'aventure, une bonne trace dans le carnet est...",
+          correct: "le passage le plus palpitant et ce qu'il m'a fait ressentir",
+          wrongs: ["le nombre de chapitres seulement", "la date d'impression", "le nom de l'imprimeur"],
+          methode: "On garde ce qui a marqué la lecture, avec son ressenti.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Pour comparer deux personnages de romans dans son carnet, on note surtout...",
+          correct: "leurs actes, leurs valeurs et ce qu'ils révèlent",
+          wrongs: ["la longueur de leur nom", "la date d'impression", "le poids du livre"],
+          methode: "On compare les personnages sur ce qui compte : leurs choix et leurs valeurs.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Après une lecture engagée, une trace pertinente dans le carnet est...",
+          correct: "la cause défendue et l'effet que le texte a produit sur moi",
+          wrongs: ["la marque du stylo utilisé", "le nombre de virgules", "l'heure de la lecture"],
+          methode: "On garde le sens du combat du texte et sa résonance personnelle.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ÉCRITURE — écrire pour apprendre, inventer, réfléchir, réviser
+// ─────────────────────────────────────────────────────────────────────────────
+
+function ecrit_notes(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Écrire pour mémoriser une leçon, c'est surtout...",
+        correct: "reformuler les idées importantes avec ses propres mots",
+        wrongs: ["recopier tout le manuel mot à mot", "n'écrire que la date", "dessiner la couverture"],
+        methode: "Écrire pour apprendre, c'est reformuler, pas recopier.",
+      },
+      {
+        text: "Pour garder une trace utile d'un cours, on écrit...",
+        correct: "les mots clés et l'essentiel, de façon organisée",
+        wrongs: ["chaque mot prononcé", "seulement des dessins", "rien, on retient tout"],
+        methode: "La prise de notes sélectionne et organise l'information.",
+      },
+      {
+        text: "Un brouillon sert surtout à...",
+        correct: "organiser ses idées avant de rédiger au propre",
+        wrongs: ["rendre le devoir tel quel", "faire de beaux dessins", "compter les lignes"],
+        methode: "Le brouillon prépare l'écrit : on y pose et on y trie les idées.",
+      },
+      {
+        text: "Pour retenir une idée compliquée, il est efficace de...",
+        correct: "la réécrire simplement, avec un exemple à soi",
+        wrongs: ["la recopier trois fois sans réfléchir", "l'ignorer", "la surligner en entier"],
+        methode: "Reformuler avec un exemple personnel ancre la compréhension.",
+      },
+      {
+        text: "Écrire un résumé de leçon, c'est surtout...",
+        correct: "garder les idées essentielles en peu de mots",
+        wrongs: ["tout recopier sans trier", "n'écrire que le titre", "ajouter des détails inutiles"],
+        methode: "Le résumé sélectionne l'essentiel.",
+      },
+      {
+        text: "Pour apprendre en écrivant, il vaut mieux...",
+        correct: "faire une carte mentale ou un schéma des idées",
+        wrongs: ["recopier passivement dix fois", "écrire les yeux fermés", "ne rien organiser"],
+        methode: "Organiser les idées (schéma, carte) aide à mémoriser.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Pour prendre des notes pendant la lecture d'un récit, on note surtout...",
+          correct: "les personnages, les lieux et les grandes étapes",
+          wrongs: ["chaque phrase entière", "la couleur des pages", "le prix du livre"],
+          methode: "On note ce qui aide à suivre l'histoire.",
+        },
+      ],
+      "4e": [
+        {
+          text: "En écoutant un cours sur un roman du XIXe siècle, une prise de notes efficace garde...",
+          correct: "les idées clés et un exemple pour chacune",
+          wrongs: ["tout le discours du professeur", "seulement la date", "les bavardages autour"],
+          methode: "On sélectionne l'essentiel et on l'illustre.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Pour préparer un écrit de réflexion au brevet, un brouillon efficace...",
+          correct: "liste les idées et les exemples avant de rédiger",
+          wrongs: ["est déjà le texte au propre", "n'existe pas", "se limite au titre"],
+          methode: "Le brouillon organise la pensée avant la rédaction.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function ecrit_invention(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Pour écrire un récit cohérent, il faut au moins...",
+        correct: "un personnage, un problème et un dénouement",
+        wrongs: ["seulement une liste de mots", "beaucoup de fautes", "aucun personnage"],
+        methode: "Un récit tient par sa structure : situation, péripéties, fin.",
+      },
+      {
+        text: "Pour montrer qu'une action se passe APRÈS une autre, on écrit...",
+        correct: "« ensuite » ou « plus tard »",
+        wrongs: ["« en même temps »", "« pendant ce temps »", "« au même moment »"],
+        methode: "Les connecteurs de temps marquent la succession des actions.",
+      },
+      {
+        text: "Pour rendre une description vivante, on choisit surtout...",
+        correct: "des détails précis qui font voir la scène",
+        wrongs: ["des mots au hasard", "seulement des chiffres", "aucun adjectif"],
+        methode: "Une description forte s'appuie sur des sensations précises.",
+      },
+      {
+        text: "Dans un dialogue de récit, chaque nouvelle réplique se marque par...",
+        correct: "un tiret et un retour à la ligne",
+        wrongs: ["un point d'exclamation obligatoire", "une majuscule au milieu du mot", "aucune ponctuation"],
+        methode: "Le dialogue s'écrit avec tirets et retours à la ligne.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Pour écrire la suite d'un récit d'aventure, il faut surtout...",
+          correct: "respecter le personnage et prolonger l'histoire sans se contredire",
+          wrongs: ["changer tous les noms", "oublier ce qui précède", "recommencer une autre histoire"],
+          methode: "Écrire une suite, c'est rester cohérent avec le texte de départ.",
+        },
+        {
+          text: "Pour écrire un récit de voyage imaginaire, on peut surtout...",
+          correct: "décrire des lieux inconnus et les émotions du voyageur",
+          wrongs: ["donner une liste de prix", "réciter une leçon de grammaire", "copier une recette"],
+          methode: "Le récit de voyage fait découvrir des lieux et des sensations.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Pour écrire un récit fantastique, le procédé le plus adapté est...",
+          correct: "installer le doute entre explication réelle et surnaturelle",
+          wrongs: ["tout expliquer dès la première ligne", "ne mettre aucun mystère", "donner la fin d'abord"],
+          methode: "Le fantastique repose sur l'hésitation entre réel et surnaturel.",
+        },
+        {
+          text: "Pour rendre un personnage inquiétant dans un récit, on peut...",
+          correct: "distiller des détails troublants au fil du texte",
+          wrongs: ["dire aussitôt qu'il est méchant", "l'oublier après une ligne", "ne rien décrire"],
+          methode: "On crée l'inquiétude par petites touches, pas d'un coup.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Pour écrire un texte à partir d'un souvenir, à la manière autobiographique, on emploie surtout...",
+          correct: "la première personne et le temps du passé",
+          wrongs: ["la troisième personne d'un inconnu", "seulement le futur", "aucun pronom"],
+          methode: "Le récit de soi se dit à la première personne, au passé.",
+        },
+        {
+          text: "Pour écrire un poème ou un texte engagé, un bon moyen de toucher le lecteur est...",
+          correct: "employer des images fortes au service d'une idée",
+          wrongs: ["aligner des chiffres", "recopier une notice", "éviter toute émotion"],
+          methode: "Le texte engagé met les images au service d'une cause.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function ecrit_reflexion(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Pour répondre à « As-tu aimé ce texte ? » dans un paragraphe construit, on écrit...",
+        correct: "son avis, puis une raison, puis un exemple du texte",
+        wrongs: ["seulement « oui »", "le résumé complet", "le prix du livre"],
+        methode: "Un paragraphe de réflexion : avis + argument + exemple.",
+      },
+      {
+        text: "Dans un paragraphe argumenté, l'exemple sert à...",
+        correct: "illustrer et rendre concret l'argument",
+        wrongs: ["remplacer l'idée", "allonger le texte pour rien", "changer de sujet"],
+        methode: "L'exemple appuie l'argument en le rendant concret.",
+      },
+      {
+        text: "Pour organiser un paragraphe de réflexion, l'ordre le plus clair est...",
+        correct: "une idée, un argument, un exemple, une petite conclusion",
+        wrongs: ["des idées mélangées sans lien", "seulement des exemples", "une seule phrase floue"],
+        methode: "Un paragraphe clair suit un ordre logique.",
+      },
+      {
+        text: "Pour introduire un exemple dans un paragraphe, on peut écrire...",
+        correct: "« par exemple » ou « ainsi »",
+        wrongs: ["« au revoir »", "« c'est tout »", "« point final »"],
+        methode: "Les mots « par exemple », « ainsi » annoncent un exemple.",
+      },
+      {
+        text: "Un paragraphe de réflexion réussi se termine par...",
+        correct: "une phrase qui résume ou nuance l'idée",
+        wrongs: ["un dessin", "une question sans lien", "le prix du livre"],
+        methode: "On conclut un paragraphe par une phrase de bilan.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Pour donner son avis sur un héros de récit, on écrit...",
+          correct: "ce qu'on pense de lui, avec une action qui le prouve",
+          wrongs: ["seulement « il est bien »", "le nombre de pages", "la couleur du livre"],
+          methode: "On appuie son avis sur un acte précis du personnage.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Pour défendre une opinion dans un paragraphe argumenté, l'ordre le plus clair est...",
+          correct: "thèse, puis argument, puis exemple qui l'illustre",
+          wrongs: ["exemple seul, sans idée", "opinion répétée trois fois", "questions sans réponse"],
+          methode: "On argumente en enchaînant thèse, argument et exemple.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Dans un texte d'opinion, pour répondre à une objection, on utilise...",
+          correct: "un connecteur d'opposition comme « cependant » ou « pourtant »",
+          wrongs: ["un connecteur d'addition comme « et »", "aucun connecteur", "seulement « donc »"],
+          methode: "On nuance en tenant compte de l'avis contraire.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function ecrit_reviser(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Réviser son texte, c'est...",
+        correct: "le relire pour corriger les fautes et améliorer les phrases",
+        wrongs: ["le recopier sans le lire", "compter les lignes", "changer de cahier"],
+        methode: "Réviser améliore le fond et la langue, ce n'est pas recopier.",
+      },
+      {
+        text: "Quelle révision rend un écrit plus solide au cycle 4 ?",
+        correct: "vérifier la cohérence, enrichir le lexique et corriger les accords",
+        wrongs: ["changer seulement la couleur du stylo", "supprimer tous les connecteurs", "ne garder que la première phrase"],
+        methode: "On contrôle l'organisation, le vocabulaire, la syntaxe et l'orthographe.",
+      },
+      {
+        text: "En te relisant, une bonne vérification de la ponctuation consiste à...",
+        correct: "contrôler majuscules, points et virgules",
+        wrongs: ["effacer toute la ponctuation", "ajouter des points au hasard", "n'écrire qu'en majuscules"],
+        methode: "La relecture vérifie aussi la ponctuation.",
+      },
+      {
+        text: "Pour éviter les répétitions en te relisant, tu peux...",
+        correct: "remplacer un mot répété par un synonyme ou un pronom",
+        wrongs: ["répéter le mot encore plus", "supprimer la phrase entière", "écrire en gras"],
+        methode: "On enrichit le texte en variant le vocabulaire.",
+      },
+      {
+        text: "La toute dernière étape avant de rendre un texte est de...",
+        correct: "le relire une dernière fois pour traquer les fautes",
+        wrongs: ["le plier soigneusement", "compter les mots", "changer de stylo"],
+        methode: "La relecture finale est indispensable.",
+      },
+      {
+        text: "Pour vérifier qu'un texte est clair, on peut...",
+        correct: "le relire à voix basse pour entendre ce qui coince",
+        wrongs: ["le lire à l'envers", "ne pas le relire", "le recopier sans le lire"],
+        methode: "La relecture à voix basse repère les phrases maladroites.",
+      },
+    ],
+    {
+      "4e": [
+        {
+          text: "Pour vérifier un accord dans le groupe nominal, on contrôle...",
+          correct: "le genre et le nombre du déterminant, du nom et de l'adjectif",
+          wrongs: ["la couleur de l'encre", "le nombre de lignes", "la marge de droite"],
+          methode: "L'accord dans le GN porte sur le genre et le nombre.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Pour vérifier l'accord d'un participe passé employé avec « avoir », on regarde...",
+          correct: "si un complément d'objet direct est placé avant le verbe",
+          wrongs: ["la couleur de l'encre", "le nombre de lignes", "la marge de droite"],
+          methode: "Avec « avoir », le participe s'accorde avec le COD antéposé.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ORAL — écouter, présenter, argumenter, jouer
+// ─────────────────────────────────────────────────────────────────────────────
+
+function oral_ecouter(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Pour bien comprendre un exposé oral, il faut...",
+        correct: "écouter attentivement et repérer les idées importantes",
+        wrongs: ["parler avec son voisin", "penser à autre chose", "regarder par la fenêtre"],
+        methode: "Écouter pour comprendre : se concentrer et retenir l'essentiel.",
+      },
+      {
+        text: "Reformuler ce qu'on vient d'entendre, c'est le redire...",
+        correct: "avec ses propres mots pour montrer qu'on a compris",
+        wrongs: ["exactement pareil sans comprendre", "beaucoup plus fort", "en changeant de sujet"],
+        methode: "La reformulation prouve la compréhension.",
+      },
+      {
+        text: "Quand on écoute un camarade, une bonne attitude est de...",
+        correct: "le laisser finir avant de réagir",
+        wrongs: ["l'interrompre sans cesse", "parler en même temps", "quitter la salle"],
+        methode: "Écouter, c'est respecter la parole de l'autre.",
+      },
+      {
+        text: "Poser une question après un exposé sert à...",
+        correct: "mieux comprendre ou approfondir un point",
+        wrongs: ["déranger celui qui a parlé", "montrer qu'on n'a rien écouté", "changer de sujet"],
+        methode: "Une bonne question prolonge l'écoute active.",
+      },
+      {
+        text: "Pour montrer qu'on écoute vraiment quelqu'un, on peut...",
+        correct: "le regarder et reformuler ensuite ses idées",
+        wrongs: ["regarder son téléphone", "penser à autre chose", "parler en même temps"],
+        methode: "L'écoute active se voit à l'attention et à la reformulation.",
+      },
+    ],
+    {
+      "4e": [
+        {
+          text: "En écoutant un débat, prendre des notes utiles, c'est noter...",
+          correct: "les arguments principaux de chaque intervenant",
+          wrongs: ["chaque mot dit", "la couleur des vêtements", "l'heure exacte"],
+          methode: "On garde la trace des arguments, pas de tout le discours.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Pour rendre compte d'un exposé écouté, on garde surtout...",
+          correct: "la thèse défendue et les arguments clés",
+          wrongs: ["le nombre de mots employés", "la taille de l'orateur", "l'heure de la fin"],
+          methode: "On retient l'essentiel du propos : thèse et arguments.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function oral_presenter(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Pour présenter clairement un exposé devant la classe, il vaut mieux...",
+        correct: "parler fort, articuler et suivre un plan",
+        wrongs: ["lire ses notes à toute vitesse, tête baissée", "chuchoter", "improviser sans idée"],
+        methode: "Une présentation claire est audible, articulée et organisée.",
+      },
+      {
+        text: "Pour bien commencer un exposé, on...",
+        correct: "annonce le sujet et le plan de la présentation",
+        wrongs: ["lit la conclusion d'abord", "reste silencieux", "parle d'un autre sujet"],
+        methode: "On oriente l'auditoire dès l'introduction.",
+      },
+      {
+        text: "Pendant un exposé, regarder son public sert à...",
+        correct: "garder son attention et vérifier qu'il suit",
+        wrongs: ["perdre le fil", "gagner du temps", "cacher ses notes"],
+        methode: "Le regard maintient le lien avec l'auditoire.",
+      },
+      {
+        text: "Un bon support d'exposé (affiche, diaporama) doit surtout...",
+        correct: "rester clair et lisible, avec peu de texte",
+        wrongs: ["contenir tout le discours écrit", "être illisible", "changer à chaque phrase"],
+        methode: "Le support appuie la parole sans la remplacer.",
+      },
+      {
+        text: "Pour bien conclure un exposé, on...",
+        correct: "résume l'essentiel et remercie l'auditoire",
+        wrongs: ["part sans rien dire", "commence un nouveau sujet", "lit une liste de mots"],
+        methode: "La conclusion récapitule et referme la présentation.",
+      },
+    ],
+    {
+      "3e": [
+        {
+          text: "Pour présenter un objet d'étude à l'oral du brevet, un bon appui est...",
+          correct: "un support clair et des exemples précis",
+          wrongs: ["un texte lu mot à mot sans lever les yeux", "aucune préparation", "une lecture très rapide"],
+          methode: "À l'oral, on s'appuie sur un support et des exemples pour convaincre.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function oral_argumenter(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Dans un débat interprétatif, quelle prise de parole est la plus attendue ?",
+        correct: "Je pense que ce personnage hésite, car le texte dit que sa voix tremble.",
+        wrongs: ["Je n'aime pas, c'est tout.", "Tout le monde a tort sauf moi.", "Je change de sujet."],
+        methode: "Une parole argumentée donne une idée ET une justification.",
+      },
+      {
+        text: "Pour justifier ton point de vue à l'oral, tu dois...",
+        correct: "donner ton avis ET une raison qui l'explique",
+        wrongs: ["répéter « parce que » sans expliquer", "parler plus fort que les autres", "changer d'avis à chaque phrase"],
+        methode: "Justifier, c'est appuyer son avis sur une raison claire.",
+      },
+      {
+        text: "Dans une discussion, un bon argument est...",
+        correct: "une raison qui soutient clairement l'idée défendue",
+        wrongs: ["une moquerie", "un cri plus fort", "une phrase sans rapport"],
+        methode: "L'argument justifie la thèse, il ne l'impose pas par la force.",
+      },
+      {
+        text: "Pour bien participer à un débat, avant de répondre, il faut...",
+        correct: "écouter l'argument de l'autre jusqu'au bout",
+        wrongs: ["l'interrompre aussitôt", "parler plus fort que lui", "répéter sa propre phrase"],
+        methode: "On argumente en écoutant vraiment l'autre d'abord.",
+      },
+      {
+        text: "Quelle formule ouvre le mieux un désaccord poli ?",
+        correct: "« Je ne suis pas d'accord, car... »",
+        wrongs: ["« Tu dis n'importe quoi. »", "« C'est faux, tais-toi. »", "« Tout le monde le sait. »"],
+        methode: "On exprime un désaccord en donnant une raison, poliment.",
+      },
+    ],
+    {
+      "4e": [
+        {
+          text: "Quand un camarade défend l'avis contraire, la meilleure réponse est de...",
+          correct: "reconnaître son point, puis répondre avec un argument",
+          wrongs: ["se moquer de lui", "hausser le ton", "refuser de l'écouter"],
+          methode: "On argumente en tenant compte de l'avis adverse, sans agressivité.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Pour rendre un argument plus fort à l'oral, on peut...",
+          correct: "l'appuyer sur un exemple précis et vérifiable",
+          wrongs: ["répéter la même phrase trois fois", "parler très vite", "affirmer sans preuve"],
+          methode: "Un exemple concret renforce l'argument.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function oral_jouer(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Pour bien JOUER une scène de théâtre, il faut...",
+        correct: "mettre le ton et les gestes selon le personnage",
+        wrongs: ["lire d'une voix plate, sans bouger", "parler très bas", "tourner le dos au public"],
+        methode: "Jouer un texte, c'est l'interpréter : voix, ton et gestes du rôle.",
+      },
+      {
+        text: "Pour dire un poème devant la classe, il vaut mieux...",
+        correct: "soigner le rythme, les pauses et l'expression",
+        wrongs: ["réciter le plus vite possible", "parler sans aucune émotion", "regarder ses pieds"],
+        methode: "Dire un texte, c'est le faire vivre par la voix.",
+      },
+      {
+        text: "Pour jouer un dialogue à deux personnages, il faut surtout...",
+        correct: "distinguer les deux voix et écouter la réplique de l'autre",
+        wrongs: ["parler en même temps que l'autre", "réciter sans écouter", "tourner le dos à son partenaire"],
+        methode: "Jouer une scène, c'est aussi réagir à son partenaire.",
+      },
+      {
+        text: "Pour mettre en scène une dispute au théâtre, on peut...",
+        correct: "hausser le ton et marquer les gestes de la colère",
+        wrongs: ["parler tout bas sans bouger", "sourire calmement", "lire d'une voix plate"],
+        methode: "Le jeu adapte voix et gestes à l'émotion de la scène.",
+      },
+      {
+        text: "Avant de jouer une scène, la meilleure préparation est de...",
+        correct: "comprendre l'intention du personnage et répéter à voix haute",
+        wrongs: ["apprendre seulement la dernière phrase", "improviser sans rien lire", "compter les répliques des autres"],
+        methode: "On prépare le jeu en comprenant le rôle et en répétant.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Pour jouer une farce (une scène comique), on doit surtout...",
+          correct: "exagérer les gestes et le ton pour faire rire",
+          wrongs: ["rester immobile et sérieux", "parler sans expression", "murmurer chaque mot"],
+          methode: "La farce joue sur l'exagération comique.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Pour interpréter une réplique ironique, le comédien doit...",
+          correct: "faire entendre le contraire de ce que disent les mots",
+          wrongs: ["dire la réplique sans nuance", "crier la phrase", "l'oublier"],
+          methode: "L'ironie se joue par un décalage entre les mots et le ton.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Pour jouer un monologue chargé d'émotion, l'acteur doit surtout...",
+          correct: "varier le rythme et les silences pour porter l'émotion",
+          wrongs: ["débiter tout à la même vitesse", "rire sans raison", "lire mécaniquement"],
+          methode: "Les silences et le rythme donnent sa force à un monologue.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// VOCABULAIRE — contexte, relations, formation, réemploi, orthographe
+// ─────────────────────────────────────────────────────────────────────────────
+
+function voc_contexte(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Dans « Le sentier serpentait entre les arbres », que veut dire « serpentait » ?",
+        correct: "faisait des courbes, des virages",
+        wrongs: ["montait tout droit", "descendait très vite", "s'arrêtait net"],
+        methode: "Le contexte (un sentier entre les arbres) éclaire le mot.",
+      },
+      {
+        text: "Dans « Il resta impassible malgré les cris », « impassible » veut dire...",
+        correct: "sans montrer d'émotion",
+        wrongs: ["très agité", "terrifié", "hilare"],
+        methode: "On infère le sens grâce au contraste avec « les cris ».",
+      },
+      {
+        text: "Dans « La foule était compacte, on ne pouvait plus avancer », « compacte » veut dire...",
+        correct: "très serrée",
+        wrongs: ["très clairsemée", "silencieuse", "joyeuse"],
+        methode: "Le contexte « on ne pouvait plus avancer » donne le sens.",
+      },
+      {
+        text: "Dans « Son récit était limpide, tout le monde comprit », « limpide » veut dire...",
+        correct: "très clair",
+        wrongs: ["confus", "ennuyeux", "trop long"],
+        methode: "Le contexte « tout le monde comprit » oriente le sens.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Dans « Le désert était aride, sans une goutte d'eau », « aride » veut dire...",
+          correct: "très sec",
+          wrongs: ["très humide", "très froid", "très vert"],
+          methode: "Le contexte « sans eau » donne le sens.",
+        },
+        {
+          text: "Dans « Le chevalier, intrépide, fonça sur le dragon », « intrépide » veut dire...",
+          correct: "qui n'a pas peur",
+          wrongs: ["très prudent", "endormi", "malade"],
+          methode: "On devine le sens grâce à l'action (foncer sur le dragon).",
+        },
+        {
+          text: "Dans « Le voyageur, harassé, s'endormit aussitôt », « harassé » veut dire...",
+          correct: "épuisé",
+          wrongs: ["reposé", "affamé", "furieux"],
+          methode: "Le contexte (s'endormir aussitôt) indique la fatigue.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Dans « Il affichait une mine hautaine et méprisante », « hautaine » veut dire...",
+          correct: "qui se croit supérieur aux autres",
+          wrongs: ["très joyeuse", "timide et effacée", "amicale"],
+          methode: "Le contexte « méprisante » oriente le sens.",
+        },
+        {
+          text: "Dans « Sa fortune était un mirage, elle s'évanouit en un jour », « mirage » désigne...",
+          correct: "une illusion trompeuse",
+          wrongs: ["une somme réelle", "un objet solide", "un lieu précis"],
+          methode: "Le contexte (elle « s'évanouit ») montre qu'il s'agit d'une illusion.",
+        },
+        {
+          text: "Dans « Il tenait des propos fallacieux pour tromper son monde », « fallacieux » veut dire...",
+          correct: "trompeurs",
+          wrongs: ["sincères", "amusants", "polis"],
+          methode: "Le contexte « pour tromper » donne le sens.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Dans « L'orateur dénonça avec véhémence l'injustice », « véhémence » veut dire...",
+          correct: "une force passionnée",
+          wrongs: ["une grande douceur", "une totale indifférence", "un profond silence"],
+          methode: "Le contexte (« dénonça ») indique une parole forte et passionnée.",
+        },
+        {
+          text: "Dans « Ce discours prône la tolérance entre les peuples », « prône » veut dire...",
+          correct: "recommande, défend avec force",
+          wrongs: ["interdit", "ignore", "moque"],
+          methode: "Le sens se déduit du thème défendu (la tolérance).",
+        },
+        {
+          text: "Dans « Sa lutte fut opiniâtre, il ne renonça jamais », « opiniâtre » veut dire...",
+          correct: "acharnée, tenace",
+          wrongs: ["molle", "brève", "joyeuse"],
+          methode: "Le contexte « il ne renonça jamais » donne le sens.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function voc_relations(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Quel est un synonyme de « rapide » ?",
+        correct: "vif",
+        wrongs: ["lent", "lourd", "calme"],
+        methode: "Un synonyme a un sens proche.",
+      },
+      {
+        text: "Quel est le contraire de « courage » ?",
+        correct: "lâcheté",
+        wrongs: ["bravoure", "vaillance", "audace"],
+        methode: "Un antonyme a le sens opposé.",
+      },
+      {
+        text: "Quels mots appartiennent au même champ lexical que « la mer » ?",
+        correct: "vague, marée, rivage",
+        wrongs: ["four, casserole, plat", "école, cahier, stylo", "moteur, roue, volant"],
+        methode: "Un champ lexical réunit les mots d'un même thème.",
+      },
+      {
+        text: "Quel est un synonyme de « peur » ?",
+        correct: "crainte",
+        wrongs: ["joie", "courage", "colère"],
+        methode: "On choisit un mot de sens proche.",
+      },
+      {
+        text: "Quel est le contraire de « clair » (pour un texte) ?",
+        correct: "obscur",
+        wrongs: ["net", "limpide", "précis"],
+        methode: "L'antonyme dit le sens opposé.",
+      },
+      {
+        text: "Quel est un synonyme de « riche » (pour un vocabulaire) ?",
+        correct: "varié",
+        wrongs: ["pauvre", "petit", "vide"],
+        methode: "On choisit un mot de sens proche.",
+      },
+      {
+        text: "Quels mots appartiennent au même champ lexical que « la peur » ?",
+        correct: "frayeur, terreur, angoisse",
+        wrongs: ["joie, sourire, fête", "table, chaise, lampe", "vitesse, moteur, route"],
+        methode: "Le champ lexical réunit les mots d'un même thème.",
+      },
+    ],
+    {
+      "4e": [
+        {
+          text: "Quels mots appartiennent au champ lexical du jugement ?",
+          correct: "valeur, mérite, faute",
+          wrongs: ["fenêtre, mur, toit", "vitesse, moteur, route", "sable, dune, oasis"],
+          methode: "En 4e, on travaille le lexique du jugement et des valeurs.",
+        },
+        {
+          text: "Quel mot est le plus précis pour remplacer « très triste » ?",
+          correct: "accablé",
+          wrongs: ["content", "rapide", "visible"],
+          methode: "On choisit un synonyme précis, plus expressif.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Quels mots appartiennent au champ lexical de l'engagement ?",
+          correct: "combat, cause, liberté",
+          wrongs: ["assiette, verre, nappe", "crayon, gomme, règle", "nuage, pluie, vent"],
+          methode: "En 3e, on repère le lexique de l'engagement et de la révolte.",
+        },
+        {
+          text: "Quel mot est le plus précis pour remplacer « défendre une cause » ?",
+          correct: "militer",
+          wrongs: ["dormir", "hésiter", "ignorer"],
+          methode: "On choisit le verbe exact pour l'idée d'engagement.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function voc_formation(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Dans le mot « refroidir », quel est le préfixe ?",
+        correct: "re-",
+        wrongs: ["-ir", "froid", "-dir"],
+        methode: "Le préfixe se place devant le radical.",
+      },
+      {
+        text: "Le suffixe « -eur » dans « nageur » sert à désigner...",
+        correct: "la personne qui fait l'action",
+        wrongs: ["le contraire du mot", "un lieu", "un petit objet"],
+        methode: "Le suffixe « -eur » forme un nom d'agent (celui qui agit).",
+      },
+      {
+        text: "Quel préfixe marque souvent l'opposition ou la négation ?",
+        correct: "in-",
+        wrongs: ["re-", "pré-", "trans-"],
+        methode: "« in- » nie ou inverse le sens (in-juste, in-connu).",
+      },
+      {
+        text: "Dans le mot « déplacer », le préfixe « dé- » marque...",
+        correct: "le contraire ou l'éloignement",
+        wrongs: ["la répétition", "la personne", "le lieu"],
+        methode: "« dé- » inverse ou éloigne (dé-faire, dé-placer).",
+      },
+      {
+        text: "Le préfixe « pré- » dans « prévenir » signifie...",
+        correct: "avant",
+        wrongs: ["après", "contre", "sans"],
+        methode: "« pré- » indique ce qui vient avant.",
+      },
+      {
+        text: "Le suffixe « -able » dans « lavable » signifie...",
+        correct: "qui peut être fait",
+        wrongs: ["le contraire", "un lieu", "une personne"],
+        methode: "« -able » veut dire « qui peut être » (lavable = qui peut être lavé).",
+      },
+      {
+        text: "Le suffixe « -iste » dans « journaliste » désigne...",
+        correct: "une personne qui exerce un métier",
+        wrongs: ["un lieu", "une action passée", "un petit objet"],
+        methode: "« -iste » forme des noms de métier ou de partisan.",
+      },
+    ],
+    {
+      "4e": [
+        {
+          text: "Le suffixe « -tion » dans « libération » sert à former...",
+          correct: "un nom qui désigne une action ou son résultat",
+          wrongs: ["un verbe à l'infinitif", "un adjectif de couleur", "un adverbe de lieu"],
+          methode: "Le suffixe « -tion » transforme un verbe en nom d'action.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Le préfixe « anti- » dans « antiesclavagiste » signifie...",
+          correct: "contre, opposé à",
+          wrongs: ["après", "avec", "petit"],
+          methode: "« anti- » marque l'opposition (contre quelque chose).",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function voc_reemploi(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Quelle phrase emploie correctement l'adverbe « fièrement » ?",
+        correct: "Le champion brandit fièrement sa médaille.",
+        wrongs: ["Le fièrement est posé sur la table.", "Il mange un fièrement.", "Fièrement bleu la maison."],
+        methode: "L'adverbe accompagne un verbe et garde du sens dans la phrase.",
+      },
+      {
+        text: "Quelle phrase emploie correctement l'adjectif « courageux » ?",
+        correct: "Le pompier courageux entra dans les flammes.",
+        wrongs: ["Le courageux roule vite.", "Il boit un courageux.", "Courageux la porte s'ouvre."],
+        methode: "L'adjectif qualifie un nom et convient au sens.",
+      },
+      {
+        text: "Quelle phrase emploie correctement le verbe « affronter » ?",
+        correct: "Le héros doit affronter mille dangers.",
+        wrongs: ["Il affronte sur la table.", "Un affronter dans le tiroir.", "Affronter bleu la maison."],
+        methode: "On réemploie le verbe dans une phrase qui a du sens.",
+      },
+      {
+        text: "Quelle phrase emploie correctement le nom « épreuve » ?",
+        correct: "Il a surmonté cette épreuve avec courage.",
+        wrongs: ["Il épreuve la porte.", "Une épreuve bleue mange.", "Épreuve vite le mur."],
+        methode: "Le nom s'emploie dans une phrase qui a du sens.",
+      },
+      {
+        text: "Quelle phrase emploie correctement l'adverbe « prudemment » ?",
+        correct: "Elle traversa la rue prudemment.",
+        wrongs: ["Le prudemment est cassé.", "Il boit un prudemment.", "Prudemment rouge la maison."],
+        methode: "L'adverbe accompagne un verbe.",
+      },
+    ],
+    {
+      "4e": [
+        {
+          text: "Quelle phrase emploie correctement l'adjectif « méprisant » ?",
+          correct: "Il lança un regard méprisant à son adversaire.",
+          wrongs: ["Le méprisant roule sur la route.", "Il boit un méprisant.", "Méprisant vite la porte."],
+          methode: "L'adjectif qualifie un nom et convient au sens de la phrase.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Quelle phrase emploie correctement le nom « injustice » ?",
+          correct: "Le texte dénonce l'injustice faite aux plus faibles.",
+          wrongs: ["Il court injustice le matin.", "L'injustice bleue mange une pomme.", "Injustice sur la table."],
+          methode: "On réemploie le mot dans une phrase qui a du sens.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function voc_orthographe(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      { text: "Quelle est l'orthographe correcte ?", correct: "rythme", wrongs: ["rytme", "rithme", "rhytme"], methode: "On mémorise l'orthographe des mots étudiés." },
+      { text: "Quelle est l'orthographe correcte ?", correct: "aujourd'hui", wrongs: ["aujourdhui", "aujour'dui", "aujourd'huit"], methode: "On retient l'orthographe des mots fréquents." },
+      { text: "Quelle est l'orthographe correcte ?", correct: "longtemps", wrongs: ["longtan", "lontemps", "longtemp"], methode: "On mémorise les lettres muettes." },
+      { text: "Quelle est l'orthographe correcte ?", correct: "aussitôt", wrongs: ["aussitot", "aussitôts", "aussi tôt"], methode: "On soigne l'accent circonflexe et la soudure." },
+      { text: "Quelle est l'orthographe correcte ?", correct: "parmi", wrongs: ["parmis", "parmit", "par mi"], methode: "« parmi » ne prend jamais de « s »." },
+      { text: "Quelle est l'orthographe correcte ?", correct: "quelquefois", wrongs: ["quelque fois", "quelquesfois", "quelquefoi"], methode: "« quelquefois » (parfois) s'écrit en un seul mot." },
+    ],
+    {
+      "4e": [
+        { text: "Quelle est l'orthographe correcte ?", correct: "vraisemblable", wrongs: ["vraissemblable", "vraisemblabe", "vraisamblable"], methode: "On mémorise l'orthographe des mots savants." },
+        { text: "Quelle est l'orthographe correcte ?", correct: "davantage", wrongs: ["d'avantage", "davantâge", "daventage"], methode: "« davantage » (plus) s'écrit en un mot, sans apostrophe." },
+      ],
+      "3e": [
+        { text: "Quelle est l'orthographe correcte ?", correct: "émancipation", wrongs: ["émencipation", "émancipasion", "emancipation"], methode: "On soigne accents et terminaisons des mots abstraits." },
+        { text: "Quelle est l'orthographe correcte ?", correct: "conscience", wrongs: ["consience", "conciense", "conscence"], methode: "On mémorise le « sc » de « conscience »." },
+      ],
+    },
+    level
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GRAMMAIRE — constituants, fonctions, accords, oral/écrit
+// ─────────────────────────────────────────────────────────────────────────────
+
+function gram_constituants(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Combien de verbes conjugués dans « Le vent se leva et les feuilles tombèrent » ?",
+        correct: "2",
+        wrongs: ["1", "0", "3"],
+        methode: "On compte les verbes conjugués pour distinguer simple et complexe.",
+      },
+      {
+        text: "Une phrase simple contient...",
+        correct: "un seul verbe conjugué",
+        wrongs: ["toujours deux verbes", "aucun verbe", "trois sujets"],
+        methode: "Phrase simple = une seule proposition (un verbe conjugué).",
+      },
+      {
+        text: "Une phrase complexe est une phrase qui...",
+        correct: "contient plusieurs verbes conjugués",
+        wrongs: ["n'a aucun verbe", "est très longue à écrire", "n'a pas de sujet"],
+        methode: "Ce sont les verbes conjugués, pas la longueur, qui comptent.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Dans « Il pleuvait, donc nous sommes rentrés », les deux propositions sont reliées par...",
+          correct: "la coordination (« donc »)",
+          wrongs: ["une subordination", "une juxtaposition sans mot", "une seule proposition"],
+          methode: "En 5e, on distingue juxtaposition et coordination.",
+        },
+        {
+          text: "Dans « Le soleil brillait ; les oiseaux chantaient », les propositions sont...",
+          correct: "juxtaposées (séparées par un point-virgule)",
+          wrongs: ["coordonnées par « et »", "subordonnées", "réduites à une seule"],
+          methode: "La juxtaposition relie les propositions par une ponctuation.",
+        },
+        {
+          text: "Dans « Range ta chambre et sors le chien », les propositions sont reliées par...",
+          correct: "la coordination (« et »)",
+          wrongs: ["une subordination", "un pronom relatif", "une seule proposition"],
+          methode: "« et » coordonne deux propositions.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Dans « Je sais que tu viendras », la proposition « que tu viendras » est...",
+          correct: "une subordonnée conjonctive",
+          wrongs: ["une proposition indépendante", "un groupe nominal sujet", "une proposition coordonnée"],
+          methode: "En 4e, on identifie les subordonnées introduites par « que ».",
+        },
+        {
+          text: "Dans « Le livre que je lis est passionnant », « que je lis » est...",
+          correct: "une proposition subordonnée relative",
+          wrongs: ["une proposition principale", "un complément circonstanciel", "un groupe adjectival"],
+          methode: "La relative, introduite par un pronom relatif, complète un nom.",
+        },
+        {
+          text: "Dans « La maison où j'ai grandi a été vendue », « où j'ai grandi » est...",
+          correct: "une proposition subordonnée relative",
+          wrongs: ["une proposition principale", "une subordonnée de temps", "un groupe nominal"],
+          methode: "« où » est ici un pronom relatif qui introduit une relative.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Dans « Bien qu'il soit tard, il continue de travailler », la subordonnée exprime...",
+          correct: "l'opposition ou la concession",
+          wrongs: ["la cause", "le but", "la comparaison"],
+          methode: "En 3e, on reconnaît les subordonnées circonstancielles et leur sens.",
+        },
+        {
+          text: "Dans « Il partit avant que la nuit tombe », la subordonnée exprime...",
+          correct: "le temps",
+          wrongs: ["la conséquence", "la condition", "le lieu"],
+          methode: "« avant que » introduit une subordonnée de temps.",
+        },
+        {
+          text: "Dans « Il travaille pour qu'on le respecte », la subordonnée exprime...",
+          correct: "le but",
+          wrongs: ["la cause", "le temps", "l'opposition"],
+          methode: "« pour que » introduit une subordonnée de but.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function gram_fonctions(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Dans « Sous le pont coule la rivière », quel est le sujet du verbe « coule » ?",
+        correct: "la rivière",
+        wrongs: ["le pont", "coule", "sous"],
+        methode: "On pose « qu'est-ce qui coule ? » : le sujet peut suivre le verbe.",
+      },
+      {
+        text: "Dans « Le jardinier plante des fleurs au printemps », quel groupe est complément d'objet ?",
+        correct: "des fleurs",
+        wrongs: ["au printemps", "le jardinier", "plante"],
+        methode: "Le COD répond à « plante quoi ? » : des fleurs.",
+      },
+      {
+        text: "Dans « Chaque soir, les enfants rentrent à la maison », quel est le complément circonstanciel de temps ?",
+        correct: "Chaque soir",
+        wrongs: ["les enfants", "rentrent", "à la maison"],
+        methode: "Le CC de temps répond à « quand ? ».",
+      },
+      {
+        text: "Dans « Les enfants jouent dans la cour », quel est le complément circonstanciel de lieu ?",
+        correct: "dans la cour",
+        wrongs: ["Les enfants", "jouent", "les"],
+        methode: "Le CC de lieu répond à « où ? ».",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Dans « Elle offre un cadeau à son frère », quelle est la fonction de « à son frère » ?",
+          correct: "complément d'objet indirect (COI)",
+          wrongs: ["complément d'objet direct", "sujet", "complément circonstanciel de lieu"],
+          methode: "Le COI répond à « à qui ? » et se construit avec une préposition.",
+        },
+        {
+          text: "Dans « Les témoins racontent leur histoire avec émotion », quelle est la fonction de « Les témoins » ?",
+          correct: "sujet du verbe « racontent »",
+          wrongs: ["complément d'objet", "complément de phrase", "adjectif"],
+          methode: "On identifie le sujet en posant « qui est-ce qui raconte ? ».",
+        },
+      ],
+      "4e": [
+        {
+          text: "Dans « la maison de mes grands-parents », quelle est la fonction de « de mes grands-parents » ?",
+          correct: "complément du nom « maison »",
+          wrongs: ["sujet", "complément d'objet direct", "attribut du sujet"],
+          methode: "En 4e, on étudie les expansions du nom (dont le complément du nom).",
+        },
+        {
+          text: "Dans « Ce voyageur semblait épuisé », quelle est la fonction de « épuisé » ?",
+          correct: "attribut du sujet",
+          wrongs: ["complément d'objet direct", "complément circonstanciel", "sujet"],
+          methode: "Après « semblait » (verbe d'état), l'adjectif est attribut du sujet.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Dans « Le coupable fut arrêté par la police », quel est le complément d'agent ?",
+          correct: "par la police",
+          wrongs: ["le coupable", "fut arrêté", "aucun"],
+          methode: "À la voix passive, le complément d'agent (introduit par « par ») fait l'action.",
+        },
+        {
+          text: "Dans « Il obtint ce poste parce qu'il travaillait dur », quelle est la fonction de « parce qu'il travaillait dur » ?",
+          correct: "complément circonstanciel de cause",
+          wrongs: ["complément d'objet direct", "sujet", "attribut"],
+          methode: "« parce que » introduit une subordonnée de cause.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function gram_accords(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Quel groupe nominal est correctement accordé ?",
+        correct: "des histoires merveilleuses",
+        wrongs: ["des histoire merveilleuses", "des histoires merveilleuse", "des histoires merveilleux"],
+        methode: "Au féminin pluriel, nom et adjectif prennent la marque du pluriel.",
+      },
+      {
+        text: "Choisis la forme correcte : « La bande de pirates ___ à l'abordage. »",
+        correct: "se lance",
+        wrongs: ["se lancent", "se lances", "se lancer"],
+        methode: "Le sujet est « la bande » (singulier), malgré « de pirates ».",
+      },
+      {
+        text: "Choisis la forme correcte : « Les enfants ___ dans le jardin. » (jouer, présent)",
+        correct: "jouent",
+        wrongs: ["joue", "joues", "jouer"],
+        methode: "Le verbe s'accorde avec le sujet pluriel « les enfants ».",
+      },
+      {
+        text: "Quel groupe nominal est correctement accordé ?",
+        correct: "les nouveaux élèves",
+        wrongs: ["les nouveau élèves", "les nouveaux élève", "le nouveaux élèves"],
+        methode: "Déterminant, adjectif et nom s'accordent au masculin pluriel.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Choisis la forme correcte : « Les élèves de la classe ___ en silence. »",
+          correct: "travaillent",
+          wrongs: ["travaille", "travailles", "travailler"],
+          methode: "Le sujet est « les élèves » : on accorde malgré le mot « classe ».",
+        },
+        {
+          text: "Quel groupe nominal est correctement accordé ?",
+          correct: "de vieux châteaux abandonnés",
+          wrongs: ["de vieux château abandonnés", "de vieux châteaux abandonné", "de vieil châteaux abandonnés"],
+          methode: "Le nom et l'adjectif s'accordent au masculin pluriel.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Choisis la forme correcte : « Les lettres qu'elle a ___ sont émouvantes. » (écrire)",
+          correct: "écrites",
+          wrongs: ["écrit", "écris", "écrient"],
+          methode: "Avec « avoir », le participe s'accorde avec le COD « qu' » (les lettres) placé avant.",
+        },
+        {
+          text: "Choisis la forme correcte : « Cette histoire, je l'ai ___ hier. » (finir)",
+          correct: "finie",
+          wrongs: ["fini", "finis", "finit"],
+          methode: "Le COD « l' » (l'histoire, féminin) est avant : le participe s'accorde.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Choisis la forme correcte : « Les décisions qui ont été ___ changeront tout. » (prendre)",
+          correct: "prises",
+          wrongs: ["pris", "prise", "prit"],
+          methode: "À la voix passive, le participe s'accorde avec le sujet (les décisions).",
+        },
+        {
+          text: "Choisis la forme correcte : « Les fleurs se sont ___ vers le soleil. » (tourner)",
+          correct: "tournées",
+          wrongs: ["tourné", "tourner", "tournés"],
+          methode: "Avec un verbe pronominal réfléchi, le participe s'accorde avec le sujet.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function gram_oral_ecrit(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "À l'écrit soigné, « Y'a pas de souci » s'écrit correctement...",
+        correct: "Il n'y a pas de souci.",
+        wrongs: ["Ya pas de souci.", "Il ya pas de souci.", "Y a pas d'souci."],
+        methode: "À l'écrit, on rétablit la négation complète « ne... pas ».",
+      },
+      {
+        text: "Quelle phrase relève d'un usage soigné de l'écrit ?",
+        correct: "Je ne comprends pas cette consigne.",
+        wrongs: ["Je comprends pas.", "J'comprends rien.", "Comprends pas là."],
+        methode: "À l'écrit, la négation « ne... pas » n'est pas supprimée.",
+      },
+      {
+        text: "À l'écrit, la forme correcte est...",
+        correct: "Nous n'avons rien vu.",
+        wrongs: ["On a rien vu.", "Nous avons rien vu.", "On n'a rien vu, nous."],
+        methode: "On rétablit « ne » de la négation à l'écrit soigné.",
+      },
+      {
+        text: "À l'écrit soigné, « J'sais pas » s'écrit...",
+        correct: "Je ne sais pas.",
+        wrongs: ["J'sais pas.", "Je sais pas.", "Chais pas."],
+        methode: "On rétablit « ne » et on n'élide pas « je » à l'écrit.",
+      },
+      {
+        text: "Quelle phrase relève de l'écrit soigné ?",
+        correct: "Cela ne me dérange pas du tout.",
+        wrongs: ["Ça me dérange pas.", "Ça m'dérange pas.", "Pas grave, ça va."],
+        methode: "L'écrit soigné évite « ça » relâché et rétablit la négation.",
+      },
+    ],
+    {
+      "4e": [
+        {
+          text: "Dans un écrit soutenu, « Qu'est-ce que tu veux ? » devient...",
+          correct: "Que veux-tu ?",
+          wrongs: ["Tu veux quoi ?", "C'est quoi que tu veux ?", "Tu veux ça comment ?"],
+          methode: "L'interrogation soutenue inverse le sujet et le verbe.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Dans un débat écrit argumenté, on préfère la formule...",
+          correct: "« Il me semble que cette idée est contestable. »",
+          wrongs: ["« C'est nul, ton truc. »", "« N'importe quoi. »", "« Bof, on verra. »"],
+          methode: "L'écrit argumenté choisit un registre courant à soutenu, poli et précis.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ANALYSE DU DISCOURS — registres, paroles rapportées, argumentation
+// ─────────────────────────────────────────────────────────────────────────────
+
+function discours_registres(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Quelle phrase relève du registre soutenu ?",
+        correct: "Je vous prie de bien vouloir patienter un instant.",
+        wrongs: ["Attends deux secondes.", "Bouge pas.", "Patiente, c'est bon."],
+        methode: "Le registre soutenu emploie un vocabulaire choisi et des tournures polies.",
+      },
+      {
+        text: "« Ce type est vachement sympa » relève du registre...",
+        correct: "familier",
+        wrongs: ["soutenu", "courant", "poétique"],
+        methode: "Le registre familier emploie un vocabulaire relâché (« type », « vachement »).",
+      },
+      {
+        text: "Le registre courant est celui que l'on emploie...",
+        correct: "dans la vie de tous les jours, poliment",
+        wrongs: ["seulement en poésie", "uniquement entre amis très proches", "dans les textes de loi"],
+        methode: "Le registre courant est neutre : ni relâché, ni très soutenu.",
+      },
+      {
+        text: "« Veuillez agréer mes salutations distinguées » appartient au registre...",
+        correct: "soutenu",
+        wrongs: ["familier", "argotique", "enfantin"],
+        methode: "Cette formule de politesse relève du registre soutenu.",
+      },
+      {
+        text: "« Salut, ça roule ? » appartient au registre...",
+        correct: "familier",
+        wrongs: ["soutenu", "courant", "littéraire"],
+        methode: "Cette salutation relâchée relève du registre familier.",
+      },
+      {
+        text: "Adapter son registre, c'est choisir son langage selon...",
+        correct: "la personne à qui l'on parle et la situation",
+        wrongs: ["la couleur de ses vêtements", "l'heure exacte", "le nombre de mots"],
+        methode: "On adapte le registre à l'interlocuteur et au contexte.",
+      },
+    ],
+    {
+      "4e": [
+        {
+          text: "Pour transformer « File-moi ça ! » en registre soutenu, on écrit...",
+          correct: "Pourriez-vous me donner cela ?",
+          wrongs: ["Donne ça vite.", "Passe-moi le truc.", "File, allez !"],
+          methode: "On passe du familier au soutenu en changeant vocabulaire et tournure.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Un discours qui veut convaincre un large public choisit le plus souvent un registre...",
+          correct: "courant à soutenu, clair et digne",
+          wrongs: ["familier et relâché", "argotique", "incompréhensible"],
+          methode: "Le registre s'adapte à la situation : un discours public reste soigné.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function discours_rapportees(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Quelle phrase contient des paroles rapportées DIRECTEMENT ?",
+        correct: "Elle murmura : « Je reviendrai demain. »",
+        wrongs: ["Elle dit qu'elle reviendrait.", "Elle reviendra demain.", "Demain, elle revient."],
+        methode: "Le discours direct cite les paroles entre guillemets, telles quelles.",
+      },
+      {
+        text: "« Il annonça qu'il partirait le lendemain. » Ces paroles sont rapportées...",
+        correct: "au discours indirect",
+        wrongs: ["au discours direct", "sans aucun rapport de paroles", "en vers"],
+        methode: "Le discours indirect intègre les paroles dans une subordonnée, sans guillemets.",
+      },
+      {
+        text: "Dans le discours direct, les paroles se signalent par...",
+        correct: "les deux points et les guillemets",
+        wrongs: ["aucune ponctuation", "un point d'exclamation obligatoire", "des parenthèses"],
+        methode: "Le discours direct utilise deux points, guillemets et parfois un tiret.",
+      },
+      {
+        text: "Quel verbe introduit des paroles rapportées ?",
+        correct: "déclarer",
+        wrongs: ["marcher", "dormir", "peindre"],
+        methode: "Les verbes de parole (dire, déclarer, murmurer) introduisent le discours rapporté.",
+      },
+      {
+        text: "« Elle demanda si nous venions. » Ces paroles sont...",
+        correct: "au discours indirect (une question rapportée)",
+        wrongs: ["au discours direct", "sans rapport de paroles", "un ordre à l'impératif"],
+        methode: "La question rapportée sans guillemets est du discours indirect.",
+      },
+    ],
+    {
+      "4e": [
+        {
+          text: "Transforme au discours indirect : Il dit : « Je suis fatigué. »",
+          correct: "Il dit qu'il était fatigué.",
+          wrongs: ["Il dit : je suis fatigué.", "Il dit que je suis fatigué.", "Il dit être « fatigué »."],
+          methode: "Au discours indirect, on change le pronom et le temps, sans guillemets.",
+        },
+        {
+          text: "Quel verbe introducteur convient pour rapporter une question ?",
+          correct: "demander",
+          wrongs: ["affirmer", "conclure", "nier"],
+          methode: "On choisit le verbe introducteur selon l'intention (demander pour une question).",
+        },
+      ],
+      "3e": [
+        {
+          text: "Dans « Elle hésitait : partirait-elle vraiment ? », les pensées sont rapportées...",
+          correct: "au discours indirect libre",
+          wrongs: ["au discours direct avec guillemets", "sans aucune parole", "sous forme de dialogue"],
+          methode: "Le discours indirect libre mêle la voix du personnage au récit, sans « qu' » ni guillemets.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function discours_argumentatif(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Dans un texte argumentatif, la « thèse » est...",
+        correct: "l'opinion principale que l'auteur défend",
+        wrongs: ["un exemple précis", "une simple description", "la date de rédaction"],
+        methode: "La thèse est le point de vue soutenu ; les arguments la justifient.",
+      },
+      {
+        text: "Dans « Il faut protéger la forêt, car elle abrite mille espèces », quel est l'argument ?",
+        correct: "elle abrite mille espèces",
+        wrongs: ["il faut protéger la forêt", "la forêt est belle", "on aime se promener"],
+        methode: "L'argument est la raison donnée pour soutenir la thèse.",
+      },
+      {
+        text: "Dans une argumentation, un exemple sert à...",
+        correct: "illustrer et rendre concret un argument",
+        wrongs: ["contredire la thèse", "remplacer la conclusion", "compter les lignes"],
+        methode: "L'exemple appuie l'argument en le rendant concret.",
+      },
+      {
+        text: "Le connecteur « donc » sert à introduire...",
+        correct: "une conséquence",
+        wrongs: ["un exemple", "une opposition", "une cause"],
+        methode: "« donc » relie une cause à sa conséquence.",
+      },
+      {
+        text: "Le connecteur « car » sert à introduire...",
+        correct: "une cause (une raison)",
+        wrongs: ["une conséquence", "un exemple", "une opposition"],
+        methode: "« car » donne la raison qui soutient l'argument.",
+      },
+    ],
+    {
+      "4e": [
+        {
+          text: "Quel connecteur logique introduit une opposition ?",
+          correct: "cependant",
+          wrongs: ["par exemple", "donc", "d'abord"],
+          methode: "« cependant » oppose deux idées dans l'argumentation.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Dans un discours engagé, la question rhétorique (« Qui oserait accepter cela ? ») sert à...",
+          correct: "faire réagir et emporter l'adhésion sans attendre de réponse",
+          wrongs: ["demander une vraie information", "changer de sujet", "donner une consigne"],
+          methode: "La question rhétorique est un procédé qui renforce l'argumentation.",
+        },
+        {
+          text: "Pour réfuter la thèse adverse, on peut employer...",
+          correct: "un argument opposé introduit par « pourtant » ou « au contraire »",
+          wrongs: ["un simple « et »", "aucun connecteur", "une répétition du même mot"],
+          methode: "On réfute en opposant un argument à celui de l'adversaire.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CONJUGAISON — identifier, composer, employer
+// ─────────────────────────────────────────────────────────────────────────────
+
+function conj_identifier(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Dans « Nous chanterons à la fête », à quel temps est le verbe ?",
+        correct: "au futur",
+        wrongs: ["au présent", "à l'imparfait", "au passé composé"],
+        methode: "La marque « -r- » (chante-r-ons) signale le futur.",
+      },
+      {
+        text: "Dans « vous finissiez », quel est le temps ?",
+        correct: "l'imparfait",
+        wrongs: ["le présent", "le futur", "le passé simple"],
+        methode: "Les terminaisons « -iez » ici marquent l'imparfait.",
+      },
+      {
+        text: "Dans « j'ai terminé mon travail », quel est le temps ?",
+        correct: "le passé composé",
+        wrongs: ["le présent", "l'imparfait", "le futur"],
+        methode: "« ai + participe passé » forme le passé composé.",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Dans « il courut vers la sortie », à quel temps est le verbe ?",
+          correct: "au passé simple",
+          wrongs: ["à l'imparfait", "au présent", "au futur"],
+          methode: "En 5e, on reconnaît le passé simple, temps du récit.",
+        },
+        {
+          text: "Dans « Range ta chambre ! », à quel mode est le verbe ?",
+          correct: "à l'impératif",
+          wrongs: ["à l'indicatif", "au subjonctif", "au conditionnel"],
+          methode: "L'impératif donne un ordre, sans sujet exprimé.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Dans « Il avait déjà compris avant qu'on parle », quel temps est « avait compris » ?",
+          correct: "le plus-que-parfait",
+          wrongs: ["le passé composé", "le présent", "le futur"],
+          methode: "Le plus-que-parfait exprime une action antérieure à une autre action passée.",
+        },
+        {
+          text: "Dans « Je voudrais te parler », quel est le mode et le temps de « voudrais » ?",
+          correct: "le conditionnel présent",
+          wrongs: ["l'indicatif futur", "l'impératif présent", "le subjonctif présent"],
+          methode: "Le conditionnel présent exprime ici une demande polie.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Dans « Il faut que tu viennes », quel est le mode de « viennes » ?",
+          correct: "le subjonctif",
+          wrongs: ["l'indicatif", "le conditionnel", "l'impératif"],
+          methode: "Après « il faut que », le verbe se met au subjonctif.",
+        },
+        {
+          text: "Dans « J'aurais aimé rester », quel est le temps de « aurais aimé » ?",
+          correct: "le conditionnel passé",
+          wrongs: ["le plus-que-parfait", "le futur antérieur", "le passé composé"],
+          methode: "Le conditionnel passé exprime un regret ou une action non réalisée.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function conj_composer(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Choisis la forme correcte : « Autrefois, les chevaliers ___ dans des châteaux. » (imparfait de vivre)",
+        correct: "vivaient",
+        wrongs: ["vivent", "vivront", "vécurent"],
+        methode: "À l'imparfait, « ils » donne « -aient » : vivaient.",
+      },
+      {
+        text: "Choisis la forme correcte : « Elles ___ dans la forêt. » (passé composé de partir)",
+        correct: "sont parties",
+        wrongs: ["sont parti", "ont parties", "sont partir"],
+        methode: "Avec « être », le participe s'accorde avec le sujet : parties.",
+      },
+      {
+        text: "Choisis la forme correcte : « Demain, nous ___ à la mer. » (futur de aller)",
+        correct: "irons",
+        wrongs: ["allons", "allions", "irions"],
+        methode: "Le futur de « aller » avec « nous » est « irons ».",
+      },
+      {
+        text: "Choisis la forme correcte : « Hier, tu ___ ton exercice. » (passé composé de finir)",
+        correct: "as fini",
+        wrongs: ["a fini", "as finis", "es fini"],
+        methode: "Passé composé avec « avoir » : « tu as fini ».",
+      },
+      {
+        text: "Choisis la forme correcte : « Chaque matin, il ___ à l'aube. » (présent de se lever)",
+        correct: "se lève",
+        wrongs: ["se leve", "se lèves", "se lever"],
+        methode: "Au présent, avec « il » : « il se lève » (accent grave).",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Choisis la forme correcte : « Soudain, il ___ la porte et sortit. » (passé simple d'ouvrir)",
+          correct: "ouvrit",
+          wrongs: ["ouvrait", "ouvre", "ouvrira"],
+          methode: "Le passé simple raconte l'action soudaine : « il ouvrit ».",
+        },
+      ],
+      "4e": [
+        {
+          text: "Choisis la forme correcte : « Quand il arriva, elle ___ déjà. » (plus-que-parfait de partir)",
+          correct: "était déjà partie",
+          wrongs: ["est déjà partie", "partait déjà", "partira déjà"],
+          methode: "Le plus-que-parfait (« était partie ») marque l'action antérieure.",
+        },
+        {
+          text: "Choisis la forme correcte : « Si j'avais le temps, je ___ ce livre. » (conditionnel présent de lire)",
+          correct: "lirais",
+          wrongs: ["lirai", "lisais", "lus"],
+          methode: "Après « si + imparfait », la principale se met au conditionnel présent.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Choisis la forme correcte : « Je souhaite que tu ___ heureux. » (subjonctif présent d'être)",
+          correct: "sois",
+          wrongs: ["es", "seras", "serais"],
+          methode: "Après « je souhaite que », on emploie le subjonctif : « que tu sois ».",
+        },
+        {
+          text: "Choisis la forme correcte à la voix passive : « Le coupable ___ par la police. » (arrêter, passé composé)",
+          correct: "a été arrêté",
+          wrongs: ["a arrêté", "arrêtait", "arrêtera"],
+          methode: "La voix passive se forme avec « être » conjugué + participe passé.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+function conj_employer(level: Cycle4Level): QcmItem[] {
+  return byLevel(
+    [
+      {
+        text: "Dans un récit au passé : « Il marchait tranquillement lorsqu'un cri ___. » Quelle forme convient ?",
+        correct: "retentit (passé simple)",
+        wrongs: ["retentira", "retentissait toujours", "retentit demain"],
+        methode: "L'imparfait pose le décor, le passé simple dit l'action soudaine.",
+      },
+      {
+        text: "Pour une vérité générale — « L'eau ___ à 100 degrés » — quel temps choisir ?",
+        correct: "bout (présent)",
+        wrongs: ["bouillait (imparfait)", "bouillira (futur)", "a bouilli (passé composé)"],
+        methode: "Une vérité générale s'exprime au présent.",
+      },
+      {
+        text: "Pour donner un ordre poli, on emploie souvent...",
+        correct: "l'impératif ou le conditionnel présent",
+        wrongs: ["le passé simple", "l'imparfait de description", "le futur antérieur"],
+        methode: "« Ferme la porte » (impératif) ou « Pourrais-tu... » (conditionnel).",
+      },
+      {
+        text: "Pour raconter une action passée soudaine dans un récit, on emploie...",
+        correct: "le passé simple",
+        wrongs: ["le présent de vérité générale", "le futur", "l'impératif"],
+        methode: "Le passé simple exprime l'action ponctuelle du récit.",
+      },
+      {
+        text: "Pour exprimer une action future certaine, on emploie...",
+        correct: "le futur de l'indicatif",
+        wrongs: ["l'imparfait", "le passé composé", "le passé simple"],
+        methode: "Le futur exprime ce qui va arriver (« Demain, il pleuvra »).",
+      },
+    ],
+    {
+      "5e": [
+        {
+          text: "Dans un récit, pour décrire un paysage qui dure, on emploie...",
+          correct: "l'imparfait",
+          wrongs: ["le passé simple", "le futur", "l'impératif"],
+          methode: "L'imparfait décrit et installe le décor du récit.",
+        },
+      ],
+      "4e": [
+        {
+          text: "Pour exprimer un fait imaginaire soumis à une condition (« Si j'étais riche... »), on emploie ensuite...",
+          correct: "le conditionnel présent",
+          wrongs: ["l'impératif", "le passé simple", "le subjonctif imparfait"],
+          methode: "« Si + imparfait » appelle le conditionnel présent dans la principale.",
+        },
+      ],
+      "3e": [
+        {
+          text: "Après « Il est essentiel que... », on emploie...",
+          correct: "le subjonctif",
+          wrongs: ["l'indicatif futur", "le conditionnel", "l'impératif"],
+          methode: "Une nécessité ou un souhait (« il est essentiel que ») commande le subjonctif.",
+        },
+        {
+          text: "Pour mettre en avant l'action subie plutôt que celui qui la fait, on emploie...",
+          correct: "la voix passive",
+          wrongs: ["la voix active seule", "l'impératif", "le gérondif"],
+          methode: "La voix passive met le sujet en position de subir l'action.",
+        },
+      ],
+    },
+    level
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Routage MICRO → pool, avec repli par notion
+// ─────────────────────────────────────────────────────────────────────────────
+
+const POOLS: Record<string, (level: Cycle4Level) => QcmItem[]> = {
+  comp_sens_global,
+  comp_indices,
+  comp_implicite,
+  comp_apprecier,
+  voix_preparer,
+  voix_expressive,
+  voix_reciter,
+  culture_genres,
+  culture_contexte,
+  culture_reseau,
+  culture_trace,
+  ecrit_notes,
+  ecrit_invention,
+  ecrit_reflexion,
+  ecrit_reviser,
+  oral_ecouter,
+  oral_presenter,
+  oral_argumenter,
+  oral_jouer,
+  voc_contexte,
+  voc_relations,
+  voc_formation,
+  voc_reemploi,
+  voc_orthographe,
+  gram_constituants,
+  gram_fonctions,
+  gram_accords,
+  gram_oral_ecrit,
+  discours_registres,
+  discours_rapportees,
+  discours_argumentatif,
+  conj_identifier,
+  conj_composer,
+  conj_employer,
+};
+
+// Repli par notion si un microId inattendu apparaît : on garde toujours un pool
+// on-topic pour la notion (jamais de contenu hors sujet).
+function poolForNotion(notionId: string, level: Cycle4Level): QcmItem[] {
+  if (notionId.includes("lecture_voix")) return voix_expressive(level);
+  if (notionId.includes("lecture_comprehension")) return comp_sens_global(level);
+  if (notionId.includes("culture")) return culture_genres(level);
+  if (notionId.includes("ecriture")) return ecrit_invention(level);
+  if (notionId.includes("oral")) return oral_argumenter(level);
+  if (notionId.includes("vocabulaire")) return voc_contexte(level);
+  if (notionId.includes("analyse_discours")) return discours_registres(level);
+  if (notionId.includes("conjugaison")) return conj_identifier(level);
+  return gram_fonctions(level);
+}
+
+function questionForMicro(
+  level: Cycle4Level,
+  notionId: string,
+  microId: string
+): Generated {
+  const key = microId.replace(/^(5e|4e|3e)_/, "");
+  const build = POOLS[key];
+  const pool = build ? build(level) : poolForNotion(notionId, level);
+  return asQcm(pick(pool));
 }
 
 function makeTemplate(
@@ -225,7 +2646,7 @@ function makeTemplate(
     theme: "neutral",
     hint: micro.label,
     tags: [level, micro.notionId, micro.id, "cycle4", "francais", "template"],
-    generate: () => questionForNotion(level, micro.notionId),
+    generate: () => questionForMicro(level, micro.notionId, micro.id),
   };
 }
 
