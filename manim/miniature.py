@@ -1069,6 +1069,11 @@ NOTIONS = {
         "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["L'AIGUILLE", "DE KAKEYA"], "taille": 68,
         "sous": "Hong Wang · médaille Fields 2026", "accroche": acc_aiguille_kakeya,
     },
+    "eleveai-maths-journal-kakeya-needle-en": {
+        "badge": "THE JOURNAL · A BIT OF MATHS", "titre": ["THE KAKEYA", "NEEDLE"], "taille": 72,
+        "sous": "Hong Wang · 2026 Fields Medal", "accroche": acc_aiguille_kakeya,
+        "sig": "Frédéric, your teacher",
+    },
     "eleveai-maths-journal-loi-normale": {
         "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["LA COURBE", "EN CLOCHE"], "taille": 76,
         "sous": "de pile ou face à la loi normale", "accroche": acc_loi_normale_journal,
@@ -1366,7 +1371,7 @@ def badge(d, x, y, txt):
     d.text((x + 26, y + 11), txt, font=f, fill=(255, 255, 255))
 
 
-def signature(img, d):
+def signature(img, d, sig="Frédéric, ton prof"):
     diam, x, y = 128, 60, 556
     av = Image.open(AVATAR).convert("RGBA")
     s = min(av.size)
@@ -1377,7 +1382,7 @@ def signature(img, d):
     img.paste(av, (x, y), masque)
     d.ellipse([x - 4, y - 4, x + diam + 4, y + diam + 4], outline=NAVY, width=6)
     tx = x + diam + 24
-    d.text((tx, y + 16), "Frédéric, ton prof", font=police("arialbd.ttf", 34), fill=NAVY)
+    d.text((tx, y + 16), sig, font=police("arialbd.ttf", 34), fill=NAVY)
     d.text((tx, y + 62), "eleveai.fr", font=police("ariblk.ttf", 40), fill=BLEU)
 
 
@@ -1410,7 +1415,7 @@ def construire(nom, spec):
     d.text((58, 300), spec["sous"], font=police("arialbd.ttf", 32), fill=BLEU)
 
     spec["accroche"](d)
-    signature(img, d)
+    signature(img, d, spec.get("sig", "Frédéric, ton prof"))
     if "EN VRAI" in spec.get("badge", ""):
         macaron_nou_la_fe(img, d)
 
