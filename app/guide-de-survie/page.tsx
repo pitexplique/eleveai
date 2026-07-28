@@ -18,11 +18,12 @@ import { KIT_FRANCAIS_3E } from "./francais-3e/data";
 import { KIT_ANGLAIS_A1 } from "./anglais-a1/data";
 import { KIT_ANGLAIS_A2 } from "./anglais-a2/data";
 import { KIT_ANGLAIS_B1 } from "./anglais-b1/data";
+import { KIT_ANGLAIS_B2 } from "./anglais-b2/data";
 
 export const metadata: Metadata = {
   title: "Guides de survie EleveAI — maths, français et anglais, du CM1 au lycée (gratuit à imprimer)",
   description:
-    "Les guides de survie EleveAI : le programme de maths (du CM1 au lycée), de français (du CM1 à la 3e) et le vocabulaire d'anglais (A1, A2, B1) condensés en fiches à imprimer — l'essentiel, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
+    "Les guides de survie EleveAI : le programme de maths (du CM1 au lycée), de français (du CM1 à la 3e) et le vocabulaire d'anglais (A1 à B2) condensés en fiches à imprimer — l'essentiel, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
   alternates: { canonical: "https://eleveai.fr/guide-de-survie" },
 };
 
@@ -199,6 +200,15 @@ const KITS_ANGLAIS = [
       "Le vocabulaire abstrait en 16 fiches (algèbre, raisonnement, sciences, économie, environnement) : les mots et phrases qui sauvent, les réflexes, les faux-amis, test corrigé.",
     grad: "from-teal-500 to-emerald-600",
   },
+  {
+    slug: "anglais-b2",
+    emoji: "🎓",
+    titre: KIT_ANGLAIS_B2.titre,
+    niveau: "B2 · avancé",
+    pitch:
+      "Le vocabulaire académique en 15 fiches (analyse, démonstration, sciences, macroéconomie, géopolitique) : les mots et phrases qui sauvent, les réflexes, les faux-amis, test corrigé.",
+    grad: "from-emerald-500 to-green-700",
+  },
 ];
 
 type Kit = (typeof KITS_MATHS)[number];
@@ -265,7 +275,7 @@ export default function KitDeSurvieHubPage() {
       <section className="mb-10">
         <h2 className="mb-3 flex items-center gap-2 text-2xl font-black text-slate-900">
           <span aria-hidden="true">🔤</span> Anglais
-          <span className="text-sm font-semibold text-slate-400">— le vocabulaire, de A1 à B1</span>
+          <span className="text-sm font-semibold text-slate-400">— le vocabulaire, de A1 à B2</span>
           <span className="rounded-full bg-sky-100 px-2 py-0.5 text-[11px] font-bold uppercase tracking-widest text-sky-700">
             Nouveau
           </span>

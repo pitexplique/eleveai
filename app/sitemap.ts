@@ -99,6 +99,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/guide-de-survie/anglais-a1",      priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
   { path: "/guide-de-survie/anglais-a2",      priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
   { path: "/guide-de-survie/anglais-b1",      priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
+  { path: "/guide-de-survie/anglais-b2",      priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
 
   // ── FICHES DE COURS ────────────────────────────────────────────────────────
   { path: "/fiches-cours",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
