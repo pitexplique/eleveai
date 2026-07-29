@@ -314,7 +314,16 @@ export default function CorailDuLagonClient() {
           <Link href="/aiguille-de-kakeya" className="font-black hover:underline" style={{ color: CORAIL }}>
             Hong Wang (conjecture de Kakeya)
           </Link>
-          .
+          .{" "}
+          <a
+            href="https://youtu.be/Ax6irc6WFh0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-black hover:underline"
+            style={{ color: "#c81e1e" }}
+          >
+            🌍 Watch the video (English, 2 min)
+          </a>
         </p>
 
         {/* ── LA MACHINE : image + réglage + résultat, sur un seul écran ── */}
@@ -556,6 +565,15 @@ export default function CorailDuLagonClient() {
 
         {/* ── LES PONTS ── */}
         <div className="mt-4 flex flex-wrap items-center gap-3">
+          <a
+            href="https://youtu.be/Ax6irc6WFh0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded px-4 py-2 text-sm font-bold text-white hover:brightness-110"
+            style={{ backgroundColor: "#c81e1e" }}
+          >
+            🌍 Watch the video (2 min, English)
+          </a>
           <Link
             href="/aiguille-de-kakeya"
             className="inline-flex items-center gap-2 rounded px-4 py-2 text-sm font-bold text-white hover:brightness-110"
