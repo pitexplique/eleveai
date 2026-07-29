@@ -316,13 +316,13 @@ export default function CorailDuLagonClient() {
           </Link>
           .{" "}
           <a
-            href="https://youtu.be/Ax6irc6WFh0"
+            href="https://youtu.be/1k6HvSr-Rdw"
             target="_blank"
             rel="noopener noreferrer"
             className="font-black hover:underline"
             style={{ color: "#c81e1e" }}
           >
-            🌍 Watch the video (English, 2 min)
+            ▶ voir la vidéo (2 min)
           </a>
         </p>
 
@@ -566,13 +566,22 @@ export default function CorailDuLagonClient() {
         {/* ── LES PONTS ── */}
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <a
-            href="https://youtu.be/Ax6irc6WFh0"
+            href="https://youtu.be/1k6HvSr-Rdw"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded px-4 py-2 text-sm font-bold text-white hover:brightness-110"
             style={{ backgroundColor: "#c81e1e" }}
           >
-            🌍 Watch the video (2 min, English)
+            ▶ Regarder la vidéo (2 min) — mesurer sans toucher
+          </a>
+          <a
+            href="https://youtu.be/Ax6irc6WFh0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[13px] font-bold hover:underline"
+            style={{ color: LAGON }}
+          >
+            🌍 Watch in English →
           </a>
           <Link
             href="/aiguille-de-kakeya"
