@@ -1141,12 +1141,15 @@ export default function AccueilPage({
                 <Link href="/coach-ia/espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                   🇪🇸 Espagnol
                 </Link>
+                <Link href="/coach-ia/ia" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  🤖 IA
+                </Link>
               </div>
-              {/* Faire le point : LE parcours de chaque matière (rappel de
+              {/* S evaluer : LE parcours de chaque matiere (rappel de
                   Frédéric : il y en a un par matière, pas un seul). */}
               <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
                 <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
-                  🧭 Faire le point :
+                  🧭 S&apos;&eacute;valuer :
                 </span>
                 <Link href="/parcours" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                   🧮 Maths
@@ -1161,6 +1164,9 @@ export default function AccueilPage({
                 </Link>
                 <Link href="/parcours-espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                   🇪🇸 Espagnol
+                </Link>
+                <Link href="/parcours-ia" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  🤖 IA
                 </Link>
                 <Link href={`/programme/${classeActive}`} className="text-[#1d1c16]/70 underline underline-offset-2 hover:no-underline">
                   📋 Le programme
