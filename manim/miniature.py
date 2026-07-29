@@ -1064,6 +1064,43 @@ def acc_aiguille_kakeya(d):
     centre(d, cx - 6, cy - 66, "π/8", police("ariblk.ttf", 34), NAVY)
 
 
+def acc_corail_lagon(d):
+    # un sous-marin filme un corail ; en tournant autour (l'orbite), on lit sa
+    # taille sans le toucher : 42 cm. Zone sûre : sous le sous-titre, à gauche du
+    # margouillat.
+    coral = (244, 105, 74)
+    bord = (194, 65, 12)
+    eau = (8, 145, 178)
+    sous = (51, 65, 85)
+    cx, cy = 545, 474
+
+    # l'orbite (on tourne autour) + une flèche de sens
+    d.ellipse([380, 374, 710, 574], outline=eau, width=3)
+    d.polygon([(710, 462), (696, 486), (722, 484)], fill=eau)
+
+    # le corail (ellipse orange + polypes blancs)
+    d.ellipse([cx - 118, cy - 36, cx + 118, cy + 36], fill=coral, outline=bord, width=5)
+    for f in (-0.55, -0.2, 0.2, 0.55):
+        px = cx + f * 118
+        d.ellipse([px - 6, cy - 6, px + 6, cy + 6], fill=(255, 255, 255))
+
+    # le sous-marin, au-dessus, qui filme (rayons de projection vers les bords)
+    smx, smy = cx, 384
+    d.rounded_rectangle([smx - 48, smy - 18, smx + 48, smy + 18], radius=18, fill=sous)
+    d.rounded_rectangle([smx - 11, smy - 34, smx + 11, smy - 18], radius=6, fill=sous)
+    d.ellipse([smx + 26, smy - 9, smx + 44, smy + 9], fill=JAUNE)          # hublot
+    d.polygon([(smx - 48, smy), (smx - 68, smy - 13), (smx - 68, smy + 13)], fill=sous)  # hélice
+    d.line([(smx - 24, smy + 18), (cx - 118, cy)], fill=coral, width=3)
+    d.line([(smx + 24, smy + 18), (cx + 118, cy)], fill=coral, width=3)
+
+    # la mesure : caliper « 42 cm » (vert) sous le corail
+    yb = cy + 54
+    d.line([(cx - 118, yb), (cx + 118, yb)], fill=VERT, width=4)
+    for ex in (cx - 118, cx + 118):
+        d.line([(ex, yb - 8), (ex, yb + 8)], fill=VERT, width=4)
+    centre(d, cx, yb + 12, "42 cm", police("ariblk.ttf", 34), VERT)
+
+
 NOTIONS = {
     "eleveai-maths-journal-aiguille-de-kakeya": {
         "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["L'AIGUILLE", "DE KAKEYA"], "taille": 68,
@@ -1081,6 +1118,15 @@ NOTIONS = {
     "eleveai-maths-journal-diagonale-des-fous": {
         "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["LA DIAGONALE", "DES FOUS"], "taille": 60,
         "sous": "trop vite ? trop lent ? l'équation du dosage", "accroche": acc_diagonale_journal,
+    },
+    "eleveai-maths-journal-corail-du-lagon": {
+        "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["LE CORAIL", "DU LAGON"], "taille": 68,
+        "sous": "mesurer sans le toucher · Hong Wang", "accroche": acc_corail_lagon,
+    },
+    "eleveai-maths-journal-coral-lagoon-en": {
+        "badge": "THE JOURNAL · A BIT OF MATHS", "titre": ["THE LAGOON", "CORAL"], "taille": 72,
+        "sous": "measuring without touching · Hong Wang", "accroche": acc_corail_lagon,
+        "sig": "Frédéric, your teacher",
     },
     "eleveai-maths-974-barrage-takamaka": {
         "badge": "L'ÎLE DE LA RÉUNION · EN VRAI", "titre": ["LE BARRAGE", "DE TAKAMAKA"], "taille": 62,
