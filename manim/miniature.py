@@ -1101,6 +1101,32 @@ def acc_corail_lagon(d):
     centre(d, cx, yb + 12, "42 cm", police("ariblk.ttf", 34), VERT)
 
 
+def acc_bulles_rondes(d):
+    # le cercle champion (pointillés dorés) + un hexagone bleu qui s'arrondit
+    # dedans + la note 1,00 ; un reflet pour l'effet « bulle ». Zone sûre : sous
+    # le sous-titre, à gauche du margouillat.
+    import math
+    ciel = (14, 165, 233)
+    cx, cy, R = 524, 442, 104
+    # le cercle champion, en pointillés dorés
+    for a in range(0, 360, 13):
+        d.arc([cx - R, cy - R, cx + R, cy + R], start=a, end=a + 7, fill=JAUNE, width=6)
+    # l'hexagone bleu inscrit (la ficelle qu'on arrondit), fond « bulle » clair
+    pts = [(cx + R * math.cos(math.radians(-90 + k * 60)),
+            cy + R * math.sin(math.radians(-90 + k * 60))) for k in range(6)]
+    d.polygon(pts, fill=(224, 242, 254))
+    d.line(pts + [pts[0]], fill=ciel, width=6, joint="curve")
+    # le reflet « bulle » (haut-gauche)
+    d.ellipse([cx - 60, cy - 66, cx - 20, cy - 34], fill=(255, 255, 255))
+    # la note au centre : le rond fait 1
+    centre(d, cx, cy - 32, "1,00", police("ariblk.ttf", 56), NAVY)
+    centre(d, cx, cy + 30, "4πA / P²", police("arialbd.ttf", 26), VERT)
+    # une petite bulle satellite
+    bx, by, br = cx + 128, cy - 84, 24
+    d.ellipse([bx - br, by - br, bx + br, by + br], fill=(224, 242, 254), outline=ciel, width=3)
+    d.ellipse([bx - 12, by - 12, bx - 2, by - 2], fill=(255, 255, 255))
+
+
 NOTIONS = {
     "eleveai-maths-journal-aiguille-de-kakeya": {
         "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["L'AIGUILLE", "DE KAKEYA"], "taille": 68,
@@ -1126,6 +1152,15 @@ NOTIONS = {
     "eleveai-maths-journal-coral-lagoon-en": {
         "badge": "THE JOURNAL · A BIT OF MATHS", "titre": ["THE LAGOON", "CORAL"], "taille": 72,
         "sous": "measuring without touching · Hong Wang", "accroche": acc_corail_lagon,
+        "sig": "Frédéric, your teacher",
+    },
+    "eleveai-maths-journal-bulles-rondes": {
+        "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["POURQUOI LES BULLES", "SONT RONDES ?"], "taille": 56,
+        "sous": "la question d'enfance de Yilin Wang", "accroche": acc_bulles_rondes,
+    },
+    "eleveai-maths-journal-round-bubbles-en": {
+        "badge": "THE JOURNAL · A BIT OF MATHS", "titre": ["WHY ARE", "BUBBLES ROUND?"], "taille": 66,
+        "sous": "Yilin Wang's childhood question", "accroche": acc_bulles_rondes,
         "sig": "Frédéric, your teacher",
     },
     "eleveai-maths-974-barrage-takamaka": {
