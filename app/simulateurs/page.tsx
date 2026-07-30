@@ -88,7 +88,10 @@ export default function SimulateursPage() {
             <p className="text-[11px] font-black uppercase tracking-[0.28em] text-[#1d1c16]/65">
               Le journal · Comprendre l&apos;île
             </p>
-            <Link href="/en/simulators" className="text-[12px] font-black text-cyan-800 hover:underline">
+            <Link
+              href="/en/simulators"
+              className="rounded-sm border-2 border-cyan-800 bg-cyan-800/[0.06] px-3.5 py-1.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
+            >
               🌐 In English →
             </Link>
           </div>
@@ -139,6 +142,14 @@ export default function SimulateursPage() {
               className="rounded-sm border-2 border-cyan-800 px-5 py-2.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
             >
               🧭 Teste-toi — Parcours →
+            </Link>
+          </div>
+          <div className="mt-5 border-t border-[#1d1c16]/15 pt-4">
+            <Link
+              href="/en/simulators"
+              className="inline-flex items-center gap-2 rounded-sm border-2 border-cyan-800 bg-cyan-800/[0.06] px-5 py-2.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
+            >
+              🌐 In English — the simulators in English →
             </Link>
           </div>
         </div>
