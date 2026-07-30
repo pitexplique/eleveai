@@ -34,7 +34,13 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     type: "website",
   },
-  alternates: { canonical: "/pourquoi-les-bulles-sont-rondes" },
+  alternates: {
+    canonical: "/pourquoi-les-bulles-sont-rondes",
+    languages: {
+      "fr-FR": "/pourquoi-les-bulles-sont-rondes",
+      en: "/en/simulators/round-bubbles",
+    },
+  },
 };
 
 export default function Page() {
