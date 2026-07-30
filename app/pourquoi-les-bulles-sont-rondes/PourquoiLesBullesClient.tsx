@@ -42,7 +42,7 @@ const COULEURS_DEFIS: CouleursDefis = {
 // La rampe CP → Terminale : la MÊME idée (« à ficelle égale, le rond enferme le
 // plus »), un outil qui grandit — du périmètre d'un carré au quotient
 // isopérimétrique. Réponse numérique unique, vérifiable en réglant la machine.
-const DEFIS: DefiSimulateur[] = [
+export const DEFIS: DefiSimulateur[] = [
   {
     id: "bulle-cp-cote",
     question:
@@ -541,6 +541,17 @@ export default function PourquoiLesBullesClient() {
           defis={DEFIS}
           couleurs={COULEURS_DEFIS}
         />
+
+        {/* ── FICHE PROF ── */}
+        <div className="mt-3 text-center">
+          <Link
+            href="/pourquoi-les-bulles-sont-rondes/fiche"
+            className="inline-flex items-center gap-1 text-[13px] font-bold hover:underline"
+            style={{ color: "#0369a1" }}
+          >
+            👩‍🏫 Enseignant ? La fiche prof imprimable (déroulé + défis + corrigé) →
+          </Link>
+        </div>
 
         {/* ── LES PONTS ── */}
         <div className="mt-4 flex flex-wrap items-center gap-3">
