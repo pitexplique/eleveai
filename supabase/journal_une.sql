@@ -102,7 +102,7 @@ where not exists (
 insert into public.journal_une (ordre, kicker, titre, accroche, youtube_id, image_url, lien, cta, defi)
 select 3, 'Réfléchir · Un peu de maths',
       'Pourquoi les bulles sont rondes ?',
-      'À ficelle égale, quelle forme enferme le plus de place ? Le cercle gagne toujours — c''est l''inégalité isopérimétrique. La bulle, elle, la résout sans calcul : sa peau se contracte pour avoir le moins de surface possible. La question d''enfance de Yilin Wang (prix Salem 2024). Souffle ta bulle et fais monter la note jusqu''à 1.',
+      'À ficelle égale, quelle forme enferme le plus de place ? Le cercle, toujours — et la bulle le « sait » sans calcul. La question d''enfance de Yilin Wang (prix Salem 2024). Souffle ta bulle, puis relève les défis du CP à la Terminale.',
       null, '/images/bulles-rondes.svg', '/pourquoi-les-bulles-sont-rondes', '🫧 Souffle la bulle →',
       'l''isopérimétrie — 12 cm de ficelle : le carré enferme 9 cm², et le cercle ?'
 where not exists (

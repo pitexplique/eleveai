@@ -310,7 +310,7 @@ const ARTICLES_MATHS_FALLBACK: ArticleRubrique[] = [
     id: "pourquoi-les-bulles-sont-rondes",
     titre: "Pourquoi les bulles sont rondes ?",
     accroche:
-      "À ficelle égale, quelle forme enferme le plus de place ? On arrondit une forme et l'aire grimpe, jusqu'au cercle : c'est l'inégalité isopérimétrique. La bulle, elle, la résout sans calcul — sa peau se contracte pour avoir le moins de surface possible, une sphère. Cette question, la mathématicienne Yilin Wang (prix Salem 2024) se la posait déjà, enfant. Souffle ta bulle et fais monter la note jusqu'à 1.",
+      "À ficelle égale, quelle forme enferme le plus de place ? Le cercle, toujours — et la bulle le « sait » sans calcul : sa peau se contracte pour prendre le moins de place. Cette question, la mathématicienne Yilin Wang (prix Salem 2024) se la posait déjà, enfant. Souffle ta bulle, puis relève les défis du CP à la Terminale.",
     imageUrl: "/images/bulles-rondes.svg",
     lien: "/pourquoi-les-bulles-sont-rondes",
     cta: "🫧 Souffle la bulle →",

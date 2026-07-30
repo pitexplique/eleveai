@@ -13,5 +13,5 @@
   <ellipse cx="166" cy="90" rx="19" ry="12" fill="#ffffff" opacity="0.7" transform="rotate(-25 166 90)"/>
   <!-- la note au centre -->
   <text x="200" y="132" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="46" fill="#0284c7">1,00</text>
-  <text x="200" y="156" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="15" fill="#0f766e">4&#960;A / P&#178;</text>
+  <text x="200" y="156" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="15" fill="#0f766e">le rond gagne</text>
 </svg>
