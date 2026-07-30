@@ -93,3 +93,18 @@ select 4, 'L''événement · Médaille Fields 2026',
 where not exists (
   select 1 from public.journal_une where lien = '/aiguille-de-kakeya'
 );
+
+-- ── Slide ajouté le 30/07 : pourquoi les bulles sont rondes (l'isopérimétrie) ──
+-- La question d'enfance de Yilin Wang (prix Salem 2024) : à ficelle égale, le
+-- cercle enferme le plus (4πA ≤ P²), et la bulle le « résout » sans calcul.
+-- INSERT en `where not exists` (la table n'a PAS de contrainte d'unicité —
+-- rejouable sans risque). ordre 3 : passe en tête du carrousel.
+insert into public.journal_une (ordre, kicker, titre, accroche, youtube_id, image_url, lien, cta, defi)
+select 3, 'Réfléchir · Un peu de maths',
+      'Pourquoi les bulles sont rondes ?',
+      'À ficelle égale, quelle forme enferme le plus de place ? Le cercle gagne toujours — c''est l''inégalité isopérimétrique. La bulle, elle, la résout sans calcul : sa peau se contracte pour avoir le moins de surface possible. La question d''enfance de Yilin Wang (prix Salem 2024). Souffle ta bulle et fais monter la note jusqu''à 1.',
+      null, '/images/bulles-rondes.svg', '/pourquoi-les-bulles-sont-rondes', '🫧 Souffle la bulle →',
+      'l''isopérimétrie — 12 cm de ficelle : le carré enferme 9 cm², et le cercle ?'
+where not exists (
+  select 1 from public.journal_une where lien = '/pourquoi-les-bulles-sont-rondes'
+);
