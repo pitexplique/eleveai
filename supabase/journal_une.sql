@@ -104,7 +104,7 @@ select 3, 'Réfléchir · Un peu de maths',
       'Pourquoi les bulles sont rondes ?',
       'À ficelle égale, quelle forme enferme le plus de place ? Le cercle, toujours — et la bulle le « sait » sans calcul. La question d''enfance de Yilin Wang (prix Salem 2024). Souffle ta bulle, puis relève les défis du CP à la Terminale.',
       null, '/images/bulles-rondes.svg', '/pourquoi-les-bulles-sont-rondes', '🫧 Souffle la bulle →',
-      'l''isopérimétrie — 12 cm de ficelle : le carré enferme 9 cm², et le cercle ?'
+      'avec 12 cm de ficelle : le carré enferme 9 cm², et le cercle ?'
 where not exists (
   select 1 from public.journal_une where lien = '/pourquoi-les-bulles-sont-rondes'
 );
