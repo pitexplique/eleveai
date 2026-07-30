@@ -154,3 +154,22 @@ where not exists (
   select 1 from public.journal_articles
   where rubrique = 'un-peu-de-maths' and lien = '/dimension-du-volcan'
 );
+
+-- ── Article 9 (30/07) : pourquoi les bulles sont rondes — l'isopérimétrie ─────
+-- À périmètre fixe (la même ficelle), le CERCLE enferme le plus : on arrondit un
+-- polygone et sa note 4πA/P² monte vers 1 (l'inégalité isopérimétrique). La bulle
+-- « résout » ce problème par la physique (tension de surface → surface minimale →
+-- sphère). Le hook : la question d'enfance de Yilin Wang (prix Salem 2024). Vidéos
+-- Manim FR (youtu.be/LglNQebtdGs) + EN (youtu.be/h2t4Ce0ucfI), vitrine EN
+-- /en/simulators/round-bubbles. ordre -3 : passe en tête de rubrique.
+insert into public.journal_articles (rubrique, ordre, titre, accroche, image_url, lien, cta)
+select 'un-peu-de-maths', -3,
+   'Pourquoi les bulles sont rondes ?',
+   'À ficelle égale, quelle forme enferme le plus de place ? On arrondit une forme et l''aire grimpe, jusqu''au cercle : c''est l''inégalité isopérimétrique. La bulle, elle, la résout sans calcul — sa peau se contracte pour avoir le moins de surface possible, une sphère. Cette question, la mathématicienne Yilin Wang (prix Salem 2024) se la posait déjà, enfant. Souffle ta bulle et fais monter la note jusqu''à 1.',
+   '/images/bulles-rondes.svg',
+   '/pourquoi-les-bulles-sont-rondes',
+   '🫧 Souffle la bulle →'
+where not exists (
+  select 1 from public.journal_articles
+  where rubrique = 'un-peu-de-maths' and lien = '/pourquoi-les-bulles-sont-rondes'
+);

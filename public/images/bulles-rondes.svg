@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" fill="none" role="img" aria-label="Pourquoi les bulles sont rondes : un hexagone qui s'arrondit vers le cercle champion, note 1,00">
+  <rect width="400" height="250" fill="#eff9ff"/>
+  <!-- bulles de décor -->
+  <circle cx="54" cy="48" r="16" fill="#38bdf8" opacity="0.12"/>
+  <circle cx="352" cy="66" r="22" fill="#38bdf8" opacity="0.12"/>
+  <circle cx="330" cy="206" r="13" fill="#38bdf8" opacity="0.12"/>
+  <circle cx="66" cy="200" r="9" fill="#38bdf8" opacity="0.12"/>
+  <!-- le cercle champion (pointillés dorés) -->
+  <circle cx="200" cy="125" r="82" fill="none" stroke="#f59e0b" stroke-width="3" stroke-dasharray="7 7"/>
+  <!-- l'hexagone bleu inscrit (la ficelle qu'on arrondit) -->
+  <polygon points="200,43 271,84 271,166 200,207 129,166 129,84" fill="#e0f2fe" stroke="#38bdf8" stroke-width="4" stroke-linejoin="round"/>
+  <!-- le reflet « bulle » -->
+  <ellipse cx="166" cy="90" rx="19" ry="12" fill="#ffffff" opacity="0.7" transform="rotate(-25 166 90)"/>
+  <!-- la note au centre -->
+  <text x="200" y="132" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="46" fill="#0284c7">1,00</text>
+  <text x="200" y="156" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="15" fill="#0f766e">4&#960;A / P&#178;</text>
+</svg>

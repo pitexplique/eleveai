@@ -40,6 +40,7 @@ export const MACHINES: Machine[] = [
   { href: "/diagonale-des-fous", emoji: "🏃", nom: "La Diagonale des Fous", notion: "L'équation différentielle du coureur : la réserve se vide au carré de l'effort (Euler).", cta: "Doser ta course", image: "/images/diagonale-des-fous.svg", groupe: "maths", date: "2026-07-23" },
   { href: "/aiguille-de-kakeya", emoji: "🪡", nom: "L'aiguille de Kakeya", notion: "Hong Wang, médaille Fields 2026 : le demi-tour le plus économe — l'aire divisée par 2 à chaque ruse, vers 0.", cta: "Faire tourner l'aiguille", image: "/images/aiguille-de-kakeya.svg", groupe: "maths", date: "2026-07-25" },
   { href: "/dimension-du-volcan", emoji: "📏", nom: "La dimension du volcan", notion: "Compte les carrés sur le rempart de la Fournaise : la rugosité est un nombre — la dimension fractale, d ≈ 1,25.", cta: "Mesurer le rempart", image: "/images/dimension-volcan.svg", groupe: "maths", date: "2026-07-26" },
+  { href: "/pourquoi-les-bulles-sont-rondes", emoji: "🫧", nom: "Pourquoi les bulles sont rondes", notion: "L'isopérimétrie : à ficelle égale, le cercle enferme le plus. La note 4πA/P² monte vers 1 — la question d'enfance de Yilin Wang.", cta: "Souffler la bulle", image: "/images/bulles-rondes.svg", groupe: "maths", date: "2026-07-30" },
 ];
 
 /** Le compte, écrit une seule fois : les pages disent « les N machines ». */

@@ -10,7 +10,10 @@ const INK = "#1d1c16";
 export const metadata: Metadata = {
   title: "Les machines dans ta main — les simulateurs de La Réunion",
   description: `${NB_MACHINES} machines à régler du bout des doigts pour comprendre l'île et les maths : le cyclone, le volcan, le barrage, le lagon, la salle de sport, la loi normale, l'aiguille de Kakeya, la Diagonale des Fous… Chaque machine t'explique, puis t'envoie t'entraîner avec le coach.`,
-  alternates: { canonical: "/simulateurs" },
+  alternates: {
+    canonical: "/simulateurs",
+    languages: { "fr-FR": "/simulateurs", en: "/en/simulators" },
+  },
   keywords: [
     "simulateur pédagogique",
     "simulateur maths",
@@ -81,9 +84,14 @@ export default function SimulateursPage() {
       <div className="mx-auto max-w-6xl">
         {/* Manchette */}
         <header className="border-b-4 border-double border-[#1d1c16] pb-6">
-          <p className="text-[11px] font-black uppercase tracking-[0.28em] text-[#1d1c16]/65">
-            Le journal · Comprendre l&apos;île
-          </p>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-[11px] font-black uppercase tracking-[0.28em] text-[#1d1c16]/65">
+              Le journal · Comprendre l&apos;île
+            </p>
+            <Link href="/en/simulators" className="text-[12px] font-black text-cyan-800 hover:underline">
+              🌐 In English →
+            </Link>
+          </div>
           <div className="mt-2 grid items-center gap-5 sm:grid-cols-[1fr_auto]">
             <div>
               <h1 className="font-serif text-4xl font-black leading-none tracking-tight sm:text-6xl">
