@@ -19,6 +19,12 @@ import { geometrieEspaceBank } from "./geometrie-espace.bank";
 import { produitScalaireEspaceBank } from "./produit-scalaire-espace.bank";
 import { algorithmiquePythonBank } from "./algorithmique-python.bank";
 import { equationsDifferentiellesBank } from "./equations-differentielles.bank";
+// Banques « concours » : items calibrés sur l'épreuve du Concours Avenir
+// (QCU strict à 4 propositions, difficulté >= 3, traitables en 2 minutes).
+// Elles enrichissent aussi le coach, qui y voit des items de difficulté 3 à 5.
+import { equationsDifferentiellesConcoursBank } from "./equations-differentielles-concours.bank";
+import { primitivesIntegralesConcoursBank } from "./primitives-integrales-concours.bank";
+import { suitesConcoursBank } from "./suites-concours.bank";
 import { concentrationBank } from "./concentration.bank";
 
 export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
@@ -40,6 +46,9 @@ export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...algorithmiquePythonBank,
   ...equationsDifferentiellesBank,
   ...concentrationBank,
+  ...equationsDifferentiellesConcoursBank,
+  ...primitivesIntegralesConcoursBank,
+  ...suitesConcoursBank,
 ];
 
 export function getMathTerminaleSpeQuestionBank(args?: {
