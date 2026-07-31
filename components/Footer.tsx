@@ -18,6 +18,7 @@ const outils = [
   { label: "Cartes de révision", href: "/cahier-vacances-cartes" },
   { label: "Qui suis-je ? à imprimer", href: "/qui-suis-je-a-imprimer" },
   { label: "Concours général", href: "/concours-general" },
+  { label: "Concours Avenir", href: "/concours-avenir" },
 ];
 
 // Le Journal — la nouveauté du jour + les histoires « comprendre » (simulateurs,

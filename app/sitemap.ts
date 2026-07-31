@@ -224,6 +224,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/concours-logo",   priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/podcast-maths",   priority: 0.85, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/concours-general",priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  { path: "/concours-avenir", priority: 0.9,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   // /concours-ia, /le-bon-prompt et /grand-oral sont des REDIRECTIONS
   // (nettoyage SERP du 25/07) : un sitemap ne liste que de vraies pages.
 
