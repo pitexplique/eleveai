@@ -286,15 +286,17 @@ export type Edito = {
   nouveau: boolean;
 };
 
-// L'édito de repli : celui écrit avec Frédéric le 22/07 (l'origine du journal).
+// L'édito de repli. Réécrit le 01/08 : plus court, et il dit désormais la règle
+// du projet (l'objectif + la politique de gratuité) sans perdre la philosophie
+// d'origine — écrit avec les élèves, ancré sur l'île, sans jugement.
 // Il ne s'affiche que si la rubrique 'edito' est vide en base.
 const EDITO_FALLBACK: Edito = {
   id: "fallback",
-  titre: "Un journal éducatif, né un soir de juillet",
+  titre: "Ce qui fait apprendre ne se paie pas",
   corps: [
-    "Je suis Frédéric Lacoste, professeur de mathématiques à La Réunion. Ce journal est né dans ma tête, un soir de juillet — en repensant aux avis de mes élèves, à leurs mots, et à ce qui me ressemble. Une évidence : on apprend mieux avec ce qu'on a sous les yeux — la pluie, la canne, les baleines, le volcan.",
-    "Chaque matin : un défi, une dictée, un coach qui explique sans faire à ta place. Gratuit, sans publicité, sans jugement. Et écrit avec mes élèves — leurs idées, leurs avis, même leurs fautes, qu'on garde parce qu'elles sont vraies.",
-    "Bienvenue. Ici, tu es chez toi.",
+    "Je suis Frédéric Lacoste, professeur de mathématiques à La Réunion. Ce journal est écrit avec mes élèves — leurs idées, leurs avis, même leurs fautes, qu'on garde parce qu'elles sont vraies.",
+    "Notre règle tient en une phrase : tout ce qui fait apprendre est gratuit, entier, et le même pour chacun. Fiches, vidéos, exercices, un coach qui explique sans faire à ta place — jamais derrière un mur. Ce qui se paiera un jour, ce sera le temps des adultes, jamais le savoir des enfants.",
+    "Chaque matin : un défi, une dictée, et l'île pour terrain — la pluie, la canne, les baleines, le volcan. Sans publicité, sans jugement. Ici, tu es chez toi.",
   ].join("\n\n"),
   lien: null,
   cta: null,
