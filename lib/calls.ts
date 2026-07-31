@@ -25,6 +25,13 @@ export type CallEnDirect = {
   lienVisio: string;
   /** false = brouillon : invisible sur le site. */
   actif: boolean;
+  /**
+   * Créneau qui revient chaque semaine. `date` ne sert alors que de gabarit
+   * (jour de la semaine + heure) : la date réellement affichée est la
+   * prochaine occurrence, recalculée à chaque affichage. Un rendez-vous
+   * hebdomadaire ne périme donc jamais tout seul.
+   */
+  recurrence?: "hebdomadaire";
 };
 
 export const CALLS: CallEnDirect[] = [
@@ -50,13 +57,47 @@ export const CALLS: CallEnDirect[] = [
     lienVisio: "https://meet.google.com/ari-jdic-mev",
     actif: true,
   },
+  {
+    // Créneau hebdomadaire de soutien — le seul rendez-vous payant du site
+    // (le contenu reste gratuit, c'est le temps de Frédéric qui est vendu).
+    // ⚠️ Le gabarit ci-dessous fixe le jour et l'heure : mercredi 18 h.
+    // Changer `date` change le créneau de TOUTES les semaines à venir.
+    id: "soutien-maths-visio-hebdo",
+    titre: "Soutien maths en visio — mini-groupe de 3 à 4",
+    description:
+      "Un créneau chaque semaine, en tout petit groupe. Tu viens avec tes questions ou ton dernier contrôle, et on déroule ensemble. Quatre élèves au maximum, pour que chacun puisse parler.",
+    publicVise: "eleve",
+    date: "2026-08-05T18:00:00+04:00",
+    duree: "1 h",
+    lienVisio: "",
+    actif: true,
+    recurrence: "hebdomadaire",
+  },
 ];
 
-/** Les calls actifs à venir, du plus proche au plus lointain. */
+/**
+ * Date de la prochaine séance : identique à `date` pour un call ponctuel,
+ * prochaine occurrence à venir pour un créneau hebdomadaire.
+ * (La Réunion n'a pas de changement d'heure : ajouter 7 jours conserve
+ * l'heure locale.)
+ */
+export function prochaineDate(call: CallEnDirect, maintenant: Date = new Date()): string {
+  if (call.recurrence !== "hebdomadaire") return call.date;
+  const d = new Date(call.date);
+  while (d.getTime() <= maintenant.getTime()) d.setDate(d.getDate() + 7);
+  return d.toISOString();
+}
+
+/**
+ * Les calls actifs à venir, du plus proche au plus lointain.
+ * La date renvoyée est déjà résolue : les composants d'affichage n'ont pas à
+ * savoir si le call est ponctuel ou hebdomadaire.
+ */
 export function callsAVenir(maintenant: Date = new Date()): CallEnDirect[] {
-  return CALLS.filter(
-    (c) => c.actif && new Date(c.date).getTime() > maintenant.getTime()
-  ).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  return CALLS.filter((c) => c.actif)
+    .map((c) => ({ ...c, date: prochaineDate(c, maintenant) }))
+    .filter((c) => new Date(c.date).getTime() > maintenant.getTime())
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 }
 
 /** « mercredi 22 juillet · 18 h (heure Réunion) » — affichage stable quel que

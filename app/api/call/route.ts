@@ -7,7 +7,7 @@
 
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import { CALLS, type CallRole } from "@/lib/calls";
+import { CALLS, prochaineDate, type CallRole } from "@/lib/calls";
 
 const ROLES = new Set<CallRole>(["eleve", "parent", "enseignant", "etablissement"]);
 
@@ -41,7 +41,9 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
-    if (new Date(call.date).getTime() <= Date.now()) {
+    // Pour un créneau hebdomadaire, on compare à la prochaine occurrence :
+    // un rendez-vous qui revient chaque semaine n'est jamais « passé ».
+    if (new Date(prochaineDate(call)).getTime() <= Date.now()) {
       return NextResponse.json(
         { ok: false, error: "Ce call est déjà passé." },
         { status: 400 }

@@ -7,8 +7,14 @@
 // +1/-1, chronomètre, 45 réponses comptées sur 60 questions).
 
 import type { Metadata } from "next";
+import { CALLS, formatDateCall, prochaineDate } from "@/lib/calls";
 import { capaciteEpreuves } from "@/lib/concours-avenir/tirage";
 import ConcoursAvenirClient from "./ConcoursAvenirClient";
+
+// La date du prochain créneau de soutien est recalculée régulièrement : elle
+// change une fois par semaine, et la page reste servie en statique le reste du
+// temps (elle a une vocation SEO).
+export const revalidate = 900;
 
 export const metadata: Metadata = {
   title:
@@ -44,5 +50,13 @@ export default function Page() {
   // dur : il suit automatiquement la production d'items et ne peut donc pas
   // devenir une promesse fausse.
   const capacite = capaciteEpreuves();
-  return <ConcoursAvenirClient capacite={capacite} />;
+
+  // Seul l'identifiant et la date lisible traversent vers le navigateur :
+  // le lien visio, lui, ne quitte jamais le serveur.
+  const call = CALLS.find((c) => c.id === "soutien-maths-visio-hebdo" && c.actif);
+  const soutien = call
+    ? { callId: call.id, quand: formatDateCall(prochaineDate(call)) }
+    : null;
+
+  return <ConcoursAvenirClient capacite={capacite} soutien={soutien} />;
 }

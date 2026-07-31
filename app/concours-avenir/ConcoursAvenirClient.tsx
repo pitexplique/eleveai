@@ -15,6 +15,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { MarkdownMath } from "@/components/MarkdownMath";
+import InscriptionSoutien from "./InscriptionSoutien";
 import {
   BAREME,
   DUREE_SECONDES,
@@ -61,7 +62,16 @@ function formaterDuree(secondes: number): string {
 /** Ce que le vivier permet, mesuré côté serveur au rendu de la page. */
 export type Capacite = { items: number; epreuves: number; questions: number };
 
-export default function ConcoursAvenirClient({ capacite }: { capacite: Capacite }) {
+/** Créneau de soutien hebdomadaire, résolu côté serveur (sans le lien visio). */
+export type Soutien = { callId: string; quand: string };
+
+export default function ConcoursAvenirClient({
+  capacite,
+  soutien,
+}: {
+  capacite: Capacite;
+  soutien: Soutien | null;
+}) {
   const [etape, setEtape] = useState<Etape>("briefing");
   const [epreuve, setEpreuve] = useState<EpreuveAvenir | null>(null);
   const [chargement, setChargement] = useState(false);
@@ -208,6 +218,7 @@ export default function ConcoursAvenirClient({ capacite }: { capacite: Capacite 
         reponses={reponses}
         onRecommencer={demarrer}
         chargement={chargement}
+        soutien={soutien}
       />
     );
   }
@@ -581,12 +592,14 @@ function Resultat({
   reponses,
   onRecommencer,
   chargement,
+  soutien,
 }: {
   bilan: Bilan;
   questions: QuestionAvenir[];
   reponses: Record<string, number>;
   onRecommencer: () => void;
   chargement: boolean;
+  soutien: Soutien | null;
 }) {
   const pourcentage = Math.round(bilan.taux * 100);
   // Le barème +1/-1 s'équilibre exactement à une chance sur deux.
@@ -679,6 +692,10 @@ function Resultat({
             </>
           )}
         </section>
+
+        {soutien && (
+          <InscriptionSoutien callId={soutien.callId} quand={soutien.quand} />
+        )}
 
         <div className="mt-8 flex flex-wrap gap-4">
           <button
