@@ -1307,48 +1307,6 @@ export default function AccueilPage({
           <aside className="border-[#1d1c16]/25 lg:col-span-3 lg:flex lg:flex-col lg:border-l lg:pl-6">
             <Kicker>Apprendre · Aujourd&apos;hui</Kicker>
             <div className="mt-2 divide-y divide-[#1d1c16]/20">
-              {/* RÈGLE DU JOURNAL (Frédéric, 18/07) : une question posée en
-                  Une porte sa réponse SOUS elle (repliée) — on ne renvoie
-                  jamais le lecteur chercher la réponse sur une autre page.
-                  Le lien vers le défi guidé reste, mais il devient un plus. */}
-              <div className="py-3">
-                <Link href="/defis-du-jour" className="group block">
-                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-                    🎯 Le défi du jour · {defiDuJour.defi.theme}{" "}
-                    <PastilleJour />
-                  </p>
-                  <div className="relative mt-2 aspect-[16/7] w-full overflow-hidden border border-[#1d1c16]/20">
-                    <Image
-                      src={defiDuJour.defi.image ?? "/images/defis-du-jour/coupe-monde-foot.webp"}
-                      alt={defiDuJour.defi.title}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 300px"
-                      className="object-cover transition duration-300 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <h3 className="mt-1 font-serif text-lg font-black leading-snug group-hover:underline">
-                    {defiDuJour.defi.title}
-                  </h3>
-                </Link>
-                <p className="mt-1 text-sm font-medium text-[#1d1c16]/70">
-                  {defiDuJour.defi.question}
-                </p>
-                <details className="mt-1.5">
-                  <summary className="cursor-pointer text-xs font-black text-[#1d1c16]/55 underline underline-offset-2 hover:text-[#1d1c16]">
-                    Voir la réponse ▾
-                  </summary>
-                  <p className="mt-1.5 border-l-2 border-cyan-800/40 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/80">
-                    {defiDuJour.defi.explanation}
-                  </p>
-                </details>
-                <Link
-                  href="/defis-du-jour"
-                  className="mt-1.5 block text-sm font-black text-cyan-800 hover:underline"
-                >
-                  Le défi guidé, pas à pas →
-                </Link>
-              </div>
-
               {/* LES RITUELS DU JOUR — un emplacement COMMUN (Frédéric, 25/07) :
                   les rendez-vous quotidiens groupés au même endroit. Le défi a
                   sa grande carte au-dessus ; ici les rituels d'entraînement :
@@ -1390,16 +1348,16 @@ export default function AccueilPage({
                 className="group block border-y border-dotted border-[#1d1c16]/25 py-3"
               >
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
-                  Nouveau · Sp&eacute;cial lyc&eacute;e
+                  Nouveau · Du CM1 &agrave; la Terminale
                 </p>
                 <div className="mt-1 grid grid-cols-[72px_1fr] items-center gap-2.5">
                   <GuideSurvieAnime className="w-full" />
                   <span className="block">
                     <span className="block font-serif text-lg font-black leading-tight group-hover:underline">
-                      Les guides de survie · maths lyc&eacute;e
+                      Les guides de survie · maths, fran&ccedil;ais, anglais
                     </span>
                     <span className="mt-0.5 block text-xs font-medium leading-4 text-[#1d1c16]/65">
-                      Seconde et Premi&egrave;re : formules, r&eacute;flexes, pi&egrave;ges et test corrig&eacute;, &agrave; imprimer.
+                      Du CM1 &agrave; la Terminale : formules, r&eacute;flexes, pi&egrave;ges et test corrig&eacute;, &agrave; imprimer.
                     </span>
                     <span className="mt-1 block text-sm font-black text-cyan-800 group-hover:underline">
                       Voir les livrets &agrave; imprimer →
@@ -1408,13 +1366,31 @@ export default function AccueilPage({
                 </div>
               </Link>
 
+              {/* LES CAHIERS DE VACANCES — pointe le HUB, comme les guides :
+                  chaque cahier livré y apparaît sans retoucher l'accueil. */}
+              <Link
+                href="/cahier-vacances"
+                className="group block border-b border-dotted border-[#1d1c16]/30 py-3"
+              >
+                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                  📘 &Agrave; imprimer
+                </p>
+                <span className="mt-1 block font-serif text-[15px] font-black leading-snug group-hover:underline">
+                  Les cahiers de vacances
+                </span>
+                <span className="mt-0.5 block text-xs font-medium text-[#1d1c16]/60">
+                  Du CP &agrave; l&apos;apr&egrave;s-bac, un cahier par passage de classe.
+                </span>
+              </Link>
+
               {/* PRÉPA CONCOURS — une RUBRIQUE, pas un lien (idée de Frédéric,
                   31/07) : le Concours Avenir aujourd'hui, les autres viendront
-                  s'y ranger sans retoucher l'accueil. Placée juste après les
-                  guides de survie, car les deux relèvent du même registre —
-                  l'échéance scolaire qu'on prépare — alors que les machines
-                  et l'appel aux entreprises, en dessous, relèvent de la
-                  découverte et du monde adulte. */}
+                  s'y ranger sans retoucher l'accueil.
+                  ORDRE DE LA COLONNE (Frédéric, 31/07) : on descend du
+                  quotidien vers l'outillage puis vers l'exploration —
+                  rituels, guides, cahiers, prépa concours, machines, et le
+                  défi du jour en dernier. Le défi occupait la première place
+                  alors qu'il n'est pas le plus important. */}
               <div className="py-3">
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                   🎯 Pr&eacute;pa concours
@@ -1471,6 +1447,50 @@ export default function AccueilPage({
                 </div>
               </Link>
 
+              {/* LE DÉFI DU JOUR — descendu sous les machines (Frédéric,
+                  31/07) : c'est un plaisir quotidien, pas la porte d'entrée.
+                  RÈGLE DU JOURNAL (18/07) : une question posée en Une porte sa
+                  réponse SOUS elle (repliée) — on ne renvoie jamais le lecteur
+                  chercher la réponse ailleurs. Le lien vers le défi guidé
+                  reste, mais il devient un plus. */}
+              <div className="py-3">
+                <Link href="/defis-du-jour" className="group block">
+                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                    🎯 Le défi du jour · {defiDuJour.defi.theme}{" "}
+                    <PastilleJour />
+                  </p>
+                  <div className="relative mt-2 aspect-[16/7] w-full overflow-hidden border border-[#1d1c16]/20">
+                    <Image
+                      src={defiDuJour.defi.image ?? "/images/defis-du-jour/coupe-monde-foot.webp"}
+                      alt={defiDuJour.defi.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 300px"
+                      className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <h3 className="mt-1 font-serif text-lg font-black leading-snug group-hover:underline">
+                    {defiDuJour.defi.title}
+                  </h3>
+                </Link>
+                <p className="mt-1 text-sm font-medium text-[#1d1c16]/70">
+                  {defiDuJour.defi.question}
+                </p>
+                <details className="mt-1.5">
+                  <summary className="cursor-pointer text-xs font-black text-[#1d1c16]/55 underline underline-offset-2 hover:text-[#1d1c16]">
+                    Voir la réponse ▾
+                  </summary>
+                  <p className="mt-1.5 border-l-2 border-cyan-800/40 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/80">
+                    {defiDuJour.defi.explanation}
+                  </p>
+                </details>
+                <Link
+                  href="/defis-du-jour"
+                  className="mt-1.5 block text-sm font-black text-cyan-800 hover:underline"
+                >
+                  Le défi guidé, pas à pas →
+                </Link>
+              </div>
+
               {/* (La dictée a son oreille en manchette et le calcul rapide vit
                   dans le catalogue — doublons retirés du fil, demande de
                   Frédéric du 18/07 : la colonne respire.) */}
@@ -1489,26 +1509,6 @@ export default function AccueilPage({
 
             </div>
 
-            {/* L'APPEL AUX ENTREPRISES — déplacé de la colonne édito (24/07) :
-                la col. 3 débordait, celle-ci finissait trop tôt. Ancré au PIED
-                de la colonne (mt-auto) : c'est lui qui bouche le trou. */}
-            <div className="lg:mt-auto">
-              <div className="mt-4 border-2 border-[#1d1c16] bg-amber-50 p-3.5 shadow-[3px_3px_0_0_#1d1c16]">
-                <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1d1c16]">
-                  🚀 Aux entreprises de l&apos;île
-                </p>
-                <p className="mt-1.5 text-sm font-semibold leading-6 text-[#1d1c16]/85">
-                  Votre métier peut devenir un article, une simulation, un défi —
-                  comme la canne, le lait ou le barrage avant vous.
-                </p>
-                <Link
-                  href="/entreprises"
-                  className="mt-2 inline-block border-2 border-[#1d1c16] bg-[#1d1c16] px-3 py-1.5 text-xs font-black text-amber-50 hover:bg-transparent hover:text-[#1d1c16]"
-                >
-                  Participez à l&apos;aventure →
-                </Link>
-              </div>
-            </div>
           </aside>
 
           {/* L'édito — le moment humain, signé (photo + lettre repliée). */}
@@ -1613,9 +1613,33 @@ export default function AccueilPage({
 
             {/* LE MOT DU JOUR — entre le chiffre et le picto (demande de
                 Frédéric, 22/07) : l'indice se lit ici, le mot s'écoute et
-                s'écrit sur la dictée du jour. (L'appel aux entreprises est
-                parti au pied de la colonne 2 — celle-ci débordait.) */}
+                s'écrit sur la dictée du jour. */}
             <MotDuJourEncart />
+            </div>
+
+            {/* L'APPEL AUX ENTREPRISES — revenu en colonne 3, sous l'édito
+                (Frédéric, 31/07). Il avait migré en colonne 2 le 24/07 pour
+                combler un trou ; la colonne 2 s'est depuis remplie (cahiers,
+                prépa concours), et c'est ici sa vraie place : il s'adresse aux
+                adultes, comme l'édito juste au-dessus, alors que la colonne 2
+                parle aux élèves.
+                Ancré au PIED (mt-auto) pour que la colonne finisse droit. */}
+            <div className="lg:mt-auto">
+              <div className="mt-4 border-2 border-[#1d1c16] bg-amber-50 p-3.5 shadow-[3px_3px_0_0_#1d1c16]">
+                <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1d1c16]">
+                  🚀 Aux entreprises de l&apos;île
+                </p>
+                <p className="mt-1.5 text-sm font-semibold leading-6 text-[#1d1c16]/85">
+                  Votre métier peut devenir un article, une simulation, un défi —
+                  comme la canne, le lait ou le barrage avant vous.
+                </p>
+                <Link
+                  href="/entreprises"
+                  className="mt-2 inline-block border-2 border-[#1d1c16] bg-[#1d1c16] px-3 py-1.5 text-xs font-black text-amber-50 hover:bg-transparent hover:text-[#1d1c16]"
+                >
+                  Participez à l&apos;aventure →
+                </Link>
+              </div>
             </div>
           </aside>
         </div>
