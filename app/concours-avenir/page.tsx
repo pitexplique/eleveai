@@ -7,12 +7,14 @@
 // +1/-1, chronomètre, 45 réponses comptées sur 60 questions).
 
 import type { Metadata } from "next";
+import { capaciteEpreuves } from "@/lib/concours-avenir/tirage";
 import ConcoursAvenirClient from "./ConcoursAvenirClient";
 
 export const metadata: Metadata = {
-  title: "Concours Avenir — épreuve blanche de maths chronométrée, gratuite | EleveAI",
+  title:
+    "Concours Avenir — 10 épreuves blanches de maths chronométrées, gratuites | EleveAI",
   description:
-    "Entraîne-toi à l'épreuve de mathématiques du Concours Avenir dans les conditions réelles : 60 questions, 45 réponses comptées, 1h30, barème +1 / −1. Avec le débriefing qui manque partout ailleurs : savoir quand répondre et quand passer.",
+    "Entraîne-toi à l'épreuve de mathématiques du Concours Avenir dans les conditions réelles : 60 questions, 45 réponses comptées, 1h30, barème +1 / −1. Dix épreuves complètes sans jamais revoir la même question, et le débriefing qui manque partout ailleurs : savoir quand répondre et quand passer.",
   keywords: [
     "concours Avenir",
     "concours Avenir maths",
@@ -38,5 +40,9 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <ConcoursAvenirClient />;
+  // Le nombre d'épreuves annoncé est calculé depuis les banques, pas écrit en
+  // dur : il suit automatiquement la production d'items et ne peut donc pas
+  // devenir une promesse fausse.
+  const capacite = capaciteEpreuves();
+  return <ConcoursAvenirClient capacite={capacite} />;
 }

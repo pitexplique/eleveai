@@ -58,7 +58,10 @@ function formaterDuree(secondes: number): string {
   return `${String(min).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
 }
 
-export default function ConcoursAvenirClient() {
+/** Ce que le vivier permet, mesuré côté serveur au rendu de la page. */
+export type Capacite = { items: number; epreuves: number; questions: number };
+
+export default function ConcoursAvenirClient({ capacite }: { capacite: Capacite }) {
   const [etape, setEtape] = useState<Etape>("briefing");
   const [epreuve, setEpreuve] = useState<EpreuveAvenir | null>(null);
   const [chargement, setChargement] = useState(false);
@@ -187,7 +190,14 @@ export default function ConcoursAvenirClient() {
   // ================================================================ RENDUS
 
   if (etape === "briefing") {
-    return <Briefing onDemarrer={demarrer} chargement={chargement} erreur={erreur} />;
+    return (
+      <Briefing
+        onDemarrer={demarrer}
+        chargement={chargement}
+        erreur={erreur}
+        capacite={capacite}
+      />
+    );
   }
 
   if (etape === "resultat") {
@@ -410,10 +420,12 @@ function Briefing({
   onDemarrer,
   chargement,
   erreur,
+  capacite,
 }: {
   onDemarrer: () => void;
   chargement: boolean;
   erreur: string | null;
+  capacite: Capacite;
 }) {
   return (
     <div className="min-h-screen bg-slate-100">
@@ -430,6 +442,34 @@ function Briefing({
           y ont le coefficient le plus lourd&nbsp;: <strong>6</strong> (sciences 4,
           anglais 2).
         </p>
+
+        {/* Chiffres mesurés sur les banques au moment du rendu : ils suivent la
+            production d'items et ne peuvent pas devenir faux. */}
+        <dl className="mt-8 grid grid-cols-3 gap-3 border-y border-slate-300 py-5">
+          <div>
+            <dt className="text-xs uppercase tracking-wide text-slate-500">
+              Épreuves
+            </dt>
+            <dd className="font-mono text-3xl font-bold tabular-nums text-slate-900">
+              {capacite.epreuves}
+            </dd>
+            <dd className="text-sm text-slate-600">sans jamais revoir une question</dd>
+          </div>
+          <div>
+            <dt className="text-xs uppercase tracking-wide text-slate-500">Questions</dt>
+            <dd className="font-mono text-3xl font-bold tabular-nums text-slate-900">
+              {capacite.questions}
+            </dd>
+            <dd className="text-sm text-slate-600">toutes différentes</dd>
+          </div>
+          <div>
+            <dt className="text-xs uppercase tracking-wide text-slate-500">Prix</dt>
+            <dd className="font-mono text-3xl font-bold tabular-nums text-slate-900">
+              0 €
+            </dd>
+            <dd className="text-sm text-slate-600">sans compte, sans inscription</dd>
+          </div>
+        </dl>
 
         <section className="mt-8 rounded border border-slate-300 bg-white p-6">
           <h2 className="font-serif text-xl font-bold text-slate-900">

@@ -14,6 +14,7 @@ import { getMathTerminaleSpeQuestionBank } from "@/lib/tutor-v4/questionBank/ter
 import type { TutorBankItemV4, TutorBankItemFixedV4 } from "@/lib/tutor-v4/types";
 import {
   DIFFICULTE_MIN,
+  NB_QUESTIONS,
   SECTIONS,
   type EpreuveAvenir,
   type QuestionAvenir,
@@ -124,4 +125,20 @@ export function tailleVivier(): { total: number; parSection: Record<string, numb
     total += n;
   }
   return { total, parSection };
+}
+
+/**
+ * Ce que le vivier permet réellement, annoncé à l'élève sur la page d'accueil.
+ *
+ * Le chiffre est calculé à partir des banques, jamais écrit en dur : il reste
+ * donc vrai quand on ajoute des items, et il ne peut pas devenir mensonger si
+ * l'on en retire. Le nombre d'épreuves est borné par la section la plus
+ * pauvre — c'est elle qui déclenche le recyclage.
+ */
+export function capaciteEpreuves(): { items: number; epreuves: number; questions: number } {
+  const { total, parSection } = tailleVivier();
+  const epreuves = Math.min(
+    ...SECTIONS.map((s) => Math.floor((parSection[s.id] ?? 0) / s.nbQuestions))
+  );
+  return { items: total, epreuves, questions: epreuves * NB_QUESTIONS };
 }
