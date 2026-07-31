@@ -286,17 +286,18 @@ export type Edito = {
   nouveau: boolean;
 };
 
-// L'édito de repli. Réécrit le 01/08 : plus court, et il dit désormais la règle
-// du projet (l'objectif + la politique de gratuité) sans perdre la philosophie
-// d'origine — écrit avec les élèves, ancré sur l'île, sans jugement.
-// Il ne s'affiche que si la rubrique 'edito' est vide en base.
+// L'édito de repli, resserré le 31/07. Il dit le POURQUOI ; les engagements,
+// eux, vivent désormais dans le bloc « Le parti pris » plus bas — donc on ne
+// les répète pas ici (sinon la page se redit deux fois). Ce qui reste : d'où
+// vient ce journal, ce qu'on y fait chaque matin, la règle qui ne bougera pas,
+// et l'accueil. Il ne s'affiche que si la rubrique 'edito' est vide en base.
 const EDITO_FALLBACK: Edito = {
   id: "fallback",
-  titre: "Ce qui fait apprendre ne se paie pas",
+  titre: "Pourquoi ce journal existe",
   corps: [
-    "Je suis Frédéric Lacoste, professeur de mathématiques à La Réunion. Ce journal est écrit avec mes élèves — leurs idées, leurs avis, même leurs fautes, qu'on garde parce qu'elles sont vraies.",
-    "Notre règle tient en une phrase : tout ce qui fait apprendre est gratuit, entier, et le même pour chacun. Fiches, vidéos, exercices, un coach qui explique sans faire à ta place — jamais derrière un mur. Ce qui se paiera un jour, ce sera le temps des adultes, jamais le savoir des enfants.",
-    "Chaque matin : un défi, une dictée, et l'île pour terrain — la pluie, la canne, les baleines, le volcan. Sans publicité, sans jugement. Ici, tu es chez toi.",
+    "Je suis Frédéric Lacoste, professeur de mathématiques à La Réunion. Ce journal est né dans une classe, et il s'écrit avec mes élèves — leurs idées, leurs avis, même leurs fautes, qu'on garde parce qu'elles sont vraies.",
+    "Chaque matin : un défi, une dictée, un coach qui explique sans faire à ta place. L'île sert de terrain — la pluie, la canne, les baleines, le volcan. Tout est gratuit, et le même pour chacun : c'est la seule règle qui ne bougera pas.",
+    "Bienvenue. Ici, tu es chez toi.",
   ].join("\n\n"),
   lien: null,
   cta: null,
