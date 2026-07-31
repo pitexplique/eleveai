@@ -25,6 +25,7 @@ import { equationsDifferentiellesBank } from "./equations-differentielles.bank";
 import { equationsDifferentiellesConcoursBank } from "./equations-differentielles-concours.bank";
 import { primitivesIntegralesConcoursBank } from "./primitives-integrales-concours.bank";
 import { suitesConcoursBank } from "./suites-concours.bank";
+import { geometrieEspaceConcoursBank } from "./geometrie-espace-concours.bank";
 import { concentrationBank } from "./concentration.bank";
 
 export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
@@ -49,6 +50,7 @@ export const mathsTerminaleSpeQuestionBank: TutorBankItemV4[] = [
   ...equationsDifferentiellesConcoursBank,
   ...primitivesIntegralesConcoursBank,
   ...suitesConcoursBank,
+  ...geometrieEspaceConcoursBank,
 ];
 
 export function getMathTerminaleSpeQuestionBank(args?: {
