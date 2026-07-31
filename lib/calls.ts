@@ -3,9 +3,11 @@
 // d'autre : l'encart d'accueil et /api/call lisent tous les deux cette liste.
 // Les inscriptions, elles, vivent en base (table call_messages).
 //
-// ⚠️ lienVisio est PRIVÉ : jamais affiché sur le site, envoyé par email aux
-// inscrits avant le call (anti-intrusion). Le laisser vide tant que le lien
-// Meet n'est pas créé — ça n'empêche pas les inscriptions.
+// ⚠️ Ce fichier est importé par des composants « use client » : TOUT ce qu'il
+// exporte se retrouve dans le JavaScript envoyé au navigateur. N'y mettre que
+// des informations publiques.
+// Les liens visio vivent donc dans `lib/calls.server.ts`, protégé par
+// `server-only` — ils y étaient autrefois et fuitaient dans le bundle.
 
 export type CallRole = "eleve" | "parent" | "enseignant" | "etablissement";
 
@@ -21,8 +23,6 @@ export type CallEnDirect = {
   date: string;
   /** Durée indicative affichée, ex. "45 min". */
   duree: string;
-  /** Lien Meet/Jitsi — PRIVÉ (envoyé par email), jamais rendu côté client. */
-  lienVisio: string;
   /** false = brouillon : invisible sur le site. */
   actif: boolean;
   /**
@@ -43,7 +43,6 @@ export const CALLS: CallEnDirect[] = [
     publicVise: "parent",
     date: "2026-07-22T18:00:00+04:00",
     duree: "45 min",
-    lienVisio: "https://meet.google.com/wwb-fyhk-yns",
     actif: true,
   },
   {
@@ -54,7 +53,6 @@ export const CALLS: CallEnDirect[] = [
     publicVise: "eleve",
     date: "2026-08-12T18:00:00+04:00",
     duree: "1 h",
-    lienVisio: "https://meet.google.com/ari-jdic-mev",
     actif: true,
   },
   {
@@ -69,7 +67,6 @@ export const CALLS: CallEnDirect[] = [
     publicVise: "eleve",
     date: "2026-08-05T18:00:00+04:00",
     duree: "1 h",
-    lienVisio: "",
     actif: true,
     recurrence: "hebdomadaire",
   },

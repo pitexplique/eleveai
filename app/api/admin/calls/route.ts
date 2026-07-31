@@ -11,6 +11,9 @@ import { cookies } from "next/headers";
 import { createClient } from "@supabase/supabase-js";
 import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
 import { CALLS } from "@/lib/calls";
+// Les liens visio sont hors de lib/calls.ts (qui part côté client) : on ne
+// remonte ici que « renseigné ou non », jamais le lien lui-même.
+import { aUnLienVisio } from "@/lib/calls.server";
 
 async function isAdmin() {
   const cookieStore = await cookies();
@@ -93,7 +96,7 @@ export async function GET(request: Request) {
     titre: c.titre,
     date: c.date,
     actif: c.actif,
-    lienVisioRenseigne: Boolean(c.lienVisio),
+    lienVisioRenseigne: aUnLienVisio(c.id),
     inscrits: lignes.filter((r) => r.call_id === c.id),
   }));
   // Inscriptions orphelines (call retiré de lib/calls.ts) : on les montre aussi.
