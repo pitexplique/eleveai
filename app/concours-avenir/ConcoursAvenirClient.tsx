@@ -313,14 +313,18 @@ export default function ConcoursAvenirClient({
                       type="button"
                       disabled={verrouille}
                       onClick={() => setSelection(i)}
+                      // Chaque état pose SA couleur de texte. Sans cela, le texte
+                      // hérite du blanc cassé (slate-50) posé sur <body> par le
+                      // site, et devient invisible sur fond blanc — le bug des
+                      // propositions « qui ne s'affichent pas ».
                       className={`flex w-full items-start gap-3 rounded border px-4 py-3 text-left transition ${
                         estValidee
                           ? "border-slate-900 bg-slate-900 text-white"
                           : estSelectionnee
-                            ? "border-slate-900 bg-slate-50 ring-2 ring-slate-900"
+                            ? "border-slate-900 bg-slate-50 text-slate-900 ring-2 ring-slate-900"
                             : verrouille
                               ? "cursor-not-allowed border-slate-200 bg-slate-50 text-slate-400"
-                              : "border-slate-300 bg-white hover:border-slate-500 hover:bg-slate-50"
+                              : "border-slate-300 bg-white text-slate-900 hover:border-slate-500 hover:bg-slate-50"
                       }`}
                     >
                       <span className="font-serif font-bold">{LETTRES[i]}.</span>
@@ -370,7 +374,7 @@ export default function ConcoursAvenirClient({
             type="button"
             onClick={() => allerA(index - 1)}
             disabled={index === 0}
-            className="rounded border border-slate-300 bg-white px-4 py-2 text-sm transition hover:bg-slate-50 disabled:opacity-40"
+            className="rounded border border-slate-300 bg-white px-4 py-2 text-sm text-slate-700 transition hover:bg-slate-50 disabled:opacity-40"
           >
             ← Précédente
           </button>
@@ -378,7 +382,7 @@ export default function ConcoursAvenirClient({
             type="button"
             onClick={() => allerA(index + 1)}
             disabled={index >= questions.length - 1}
-            className="rounded border border-slate-300 bg-white px-4 py-2 text-sm transition hover:bg-slate-50 disabled:opacity-40"
+            className="rounded border border-slate-300 bg-white px-4 py-2 text-sm text-slate-700 transition hover:bg-slate-50 disabled:opacity-40"
           >
             Suivante →
           </button>
