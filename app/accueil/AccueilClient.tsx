@@ -1671,10 +1671,29 @@ export default function AccueilPage({
               titre: "Écrit avec les élèves.",
               ligne: "Leurs idées, leurs avis — même leurs fautes, gardées parce qu'elles sont vraies.",
             },
+            // Les trois principes fondateurs ajoutés le 31/07 (Frédéric). Un
+            // quatrième était prévu sur le RGPD : ÉCARTÉ tant que la conformité
+            // n'est pas réglée — on n'affiche pas un engagement juridique qu'on
+            // ne peut pas encore tenir.
+            {
+              emoji: "📚",
+              titre: "Le savoir ne se paie pas.",
+              ligne: "Fiches, vidéos, exercices, coach : rien derrière un mur, et exactement le même pour chacun.",
+            },
+            {
+              emoji: "⚖️",
+              titre: "Les maths sont autant aux filles qu'aux garçons.",
+              ligne: "Hong Wang, Yilin Wang : on donne à voir les mathématiciennes qu'on ne montre jamais.",
+            },
+            {
+              emoji: "🚀",
+              titre: "Pousse tes qualités, ne t'acharne pas sur tes défauts.",
+              ligne: "La phrase de Kylian Mbappé, devenue une machine que tu règles toi-même.",
+            },
             {
               emoji: "🕊️",
-              titre: "Gratuit, sans publicité, sans jugement.",
-              ligne: "Ici tu peux te tromper tranquille : c'est comme ça qu'on apprend.",
+              titre: "Ici, tu peux te tromper tranquille.",
+              ligne: "Sans publicité, sans jugement : c'est comme ça qu'on apprend.",
             },
           ].map((p) => (
             <div key={p.titre} className="border-l-2 border-[#1d1c16]/20 pl-3">
