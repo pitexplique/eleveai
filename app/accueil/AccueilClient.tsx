@@ -1408,6 +1408,49 @@ export default function AccueilPage({
                 </div>
               </Link>
 
+              {/* PRÉPA CONCOURS — une RUBRIQUE, pas un lien (idée de Frédéric,
+                  31/07) : le Concours Avenir aujourd'hui, les autres viendront
+                  s'y ranger sans retoucher l'accueil. Placée juste après les
+                  guides de survie, car les deux relèvent du même registre —
+                  l'échéance scolaire qu'on prépare — alors que les machines
+                  et l'appel aux entreprises, en dessous, relèvent de la
+                  découverte et du monde adulte. */}
+              <div className="py-3">
+                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                  🎯 Pr&eacute;pa concours
+                </p>
+                {[
+                  {
+                    emoji: "📐",
+                    nom: "Concours Avenir",
+                    quoi: "Épreuve blanche chronométrée · 7 écoles d'ingénieurs",
+                    href: "/concours-avenir",
+                  },
+                  {
+                    emoji: "🏅",
+                    nom: "Concours général",
+                    quoi: "Les problèmes qui sortent du programme, au collège",
+                    href: "/concours-general",
+                  },
+                ].map((c) => (
+                  <Link
+                    key={c.href}
+                    href={c.href}
+                    className="group block border-b border-dotted border-[#1d1c16]/30 py-2"
+                  >
+                    <span className="flex items-baseline gap-2">
+                      <span aria-hidden className="text-sm">{c.emoji}</span>
+                      <span className="font-serif text-[15px] font-black leading-snug group-hover:underline">
+                        {c.nom}
+                      </span>
+                    </span>
+                    <span className="mt-0.5 block pl-[22px] text-xs font-medium text-[#1d1c16]/60">
+                      {c.quoi}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+
               {/* La machine reste visible, mais en format plus court dans cette colonne. */}
               <ReclameMachine />
 
