@@ -293,10 +293,11 @@ export type Edito = {
 // et l'accueil. Il ne s'affiche que si la rubrique 'edito' est vide en base.
 const EDITO_FALLBACK: Edito = {
   id: "fallback",
-  titre: "Pourquoi ce journal existe",
+  titre: "Ce qu'on a sous les yeux",
   corps: [
-    "Je suis Frédéric Lacoste, professeur de mathématiques à La Réunion. Ce journal est né dans une classe, et il s'écrit avec mes élèves — leurs idées, leurs avis, même leurs fautes, qu'on garde parce qu'elles sont vraies.",
-    "Chaque matin : un défi, une dictée, un coach qui explique sans faire à ta place. L'île sert de terrain — la pluie, la canne, les baleines, le volcan. Tout est gratuit, et le même pour chacun : c'est la seule règle qui ne bougera pas.",
+    "Je suis Frédéric Lacoste, professeur de mathématiques à La Réunion. Ce journal est né un soir de juillet, en relisant les mots de mes élèves. Je n'ai rien inventé : j'ai regardé par la fenêtre.",
+    "La pluie qui tombe droit, la canne qui monte, les baleines qui reviennent, le volcan qui recommence. Tout ça se mesure — et un enfant qui compte ce qu'il aime finit par aimer compter.",
+    "Alors chaque matin : un défi, une dictée, un coach qui explique sans jamais faire à ta place. Gratuit, et le même pour chacun — c'est la seule règle qui ne bougera pas.",
     "Bienvenue. Ici, tu es chez toi.",
   ].join("\n\n"),
   lien: null,
