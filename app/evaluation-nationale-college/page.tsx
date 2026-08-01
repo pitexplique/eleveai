@@ -169,25 +169,18 @@ export default function EvaluationNationaleCollegePage() {
           <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
             Pour arriver prêt
           </p>
-          <div className="mt-3 grid gap-x-8 gap-y-4 sm:grid-cols-2">
-            <Link href="/dico" className="group block">
-              <span className="block font-serif text-lg font-black leading-snug group-hover:underline">
-                Le dico de l&apos;évaluation de 6ᵉ
-              </span>
-              <span className="mt-1 block text-sm font-medium leading-6 text-[#1d1c16]/70">
-                Les 50 mots que la consigne emploie, expliqués un par un. On
-                perd plus de points sur un mot mal compris que sur un calcul
-                raté.
-              </span>
-              <span className="mt-1.5 block text-sm font-black text-cyan-800">
-                Ouvrir le dico →
-              </span>
-            </Link>
+          {/* LE DICO N'EST PAS UNE DESTINATION (Frédéric, 01/08 : « personne
+              n'y va », « c'est plutôt une source, je l'avais moi-même
+              oublié »). Il couvre pourtant CP → Bac+1 en sept matières — mais
+              on va y chercher un mot quand on bute dessus, on n'y va pas pour
+              s'entraîner. Il reste en ligne, il ne prend plus une case de
+              vitrine que les entraînements méritent davantage. */}
+          <div className="mt-3">
             <Link href="/eval-pix-ia" className="group block">
               <span className="block font-serif text-lg font-black leading-snug group-hover:underline">
                 Pix IA · l&apos;éval blanche
               </span>
-              <span className="mt-1 block text-sm font-medium leading-6 text-[#1d1c16]/70">
+              <span className="mt-1 block max-w-2xl text-sm font-medium leading-6 text-[#1d1c16]/70">
                 L&apos;autre évaluation du collège, celle du numérique : 16
                 questions corrigées, pour arriver prêt le jour J.
               </span>

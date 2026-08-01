@@ -1312,34 +1312,25 @@ export default function AccueilPage({
                 Voir ce qu&apos;on te demandera, épreuve par épreuve →
               </Link>
 
-              <div className="mt-4 grid gap-x-6 gap-y-3 border-t border-[#1d1c16]/25 pt-3 sm:grid-cols-2">
-                {[
-                  {
-                    nom: "Le dico de l'évaluation de 6ᵉ",
-                    quoi: "Les 50 mots qu'elle emploie, expliqués un par un — pour ne pas perdre de points sur la consigne.",
-                    cta: "Ouvrir le dico",
-                    href: "/dico",
-                  },
-                  {
-                    nom: "Pix IA",
-                    quoi: "L'éval blanche du numérique, 16 questions corrigées, pour arriver prêt le jour J.",
-                    cta: "Passer l'éval blanche",
-                    href: "/eval-pix-ia",
-                  },
-                ].map((e) => (
-                  <Link key={e.href} href={e.href} className="group block">
-                    <span className="block font-serif text-[15px] font-black leading-snug group-hover:underline">
-                      {e.nom}
-                    </span>
-                    <span className="mt-0.5 block text-xs font-medium leading-5 text-[#1d1c16]/70">
-                      {e.quoi}
-                    </span>
-                    <span className="mt-1 block text-sm font-black text-cyan-800">
-                      {e.cta} →
-                    </span>
-                  </Link>
-                ))}
-              </div>
+              {/* LE DICO EST RETIRÉ D'ICI (Frédéric, 01/08 : « personne n'y
+                  va »). La page reste en ligne, elle n'est simplement plus
+                  mise en avant : une vitrine qui montre ce qu'on ne consulte
+                  pas coûte de l'attention aux liens qui, eux, servent. */}
+              <Link
+                href="/eval-pix-ia"
+                className="group mt-4 block border-t border-[#1d1c16]/25 pt-3"
+              >
+                <span className="block font-serif text-[15px] font-black leading-snug group-hover:underline">
+                  Pix IA · l&apos;autre évaluation du collège
+                </span>
+                <span className="mt-0.5 block text-xs font-medium leading-5 text-[#1d1c16]/70">
+                  Celle du numérique : l&apos;éval blanche, 16 questions
+                  corrigées, pour arriver prêt le jour J.
+                </span>
+                <span className="mt-1 block text-sm font-black text-cyan-800">
+                  Passer l&apos;éval blanche →
+                </span>
+              </Link>
             </div>
 
             {/* PRÉPA CONCOURS — remontée du fil du jour (01/08). Rubrique et
