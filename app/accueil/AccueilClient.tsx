@@ -1273,20 +1273,56 @@ export default function AccueilPage({
               <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                 🎓 Les évaluations du collège
               </p>
-              <p className="mt-1 font-serif text-lg font-black leading-tight">
+              <p className="mt-1 font-serif text-xl font-black leading-tight">
                 Celles qu&apos;on te fera passer — prépare-les tranquillement
               </p>
-              <div className="mt-3 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+
+              {/* LES QUATRE ÉPREUVES — le hub est branché maintenant, les
+                  épreuves blanches viendront s'y ranger (Frédéric, 01/08).
+                  Chaque case mène au hub, qui envoie vers le coach et le
+                  guide du niveau : personne ne tombe dans le vide. */}
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                {[
+                  { niveau: "6ᵉ", quoi: "Français · Maths", quand: "à la rentrée" },
+                  { niveau: "4ᵉ", quoi: "Français · Maths", quand: "à la rentrée" },
+                ].map((n) => (
+                  <Link
+                    key={n.niveau}
+                    href="/evaluation-nationale-college"
+                    className="group flex items-baseline gap-2 border border-[#1d1c16]/25 px-3 py-2 transition hover:border-[#1d1c16] hover:bg-[#1d1c16]/5"
+                  >
+                    <span className="font-serif text-2xl font-black leading-none">
+                      {n.niveau}
+                    </span>
+                    <span className="block">
+                      <span className="block text-sm font-black group-hover:underline">
+                        {n.quoi}
+                      </span>
+                      <span className="block text-xs font-medium text-[#1d1c16]/70">
+                        {n.quand}
+                      </span>
+                    </span>
+                  </Link>
+                ))}
+              </div>
+              <Link
+                href="/evaluation-nationale-college"
+                className="mt-2 block text-sm font-black text-cyan-800 hover:underline"
+              >
+                Voir ce qu&apos;on te demandera, épreuve par épreuve →
+              </Link>
+
+              <div className="mt-4 grid gap-x-6 gap-y-3 border-t border-[#1d1c16]/25 pt-3 sm:grid-cols-2">
                 {[
                   {
-                    nom: "L'évaluation nationale de 6ᵉ",
+                    nom: "Le dico de l'évaluation de 6ᵉ",
                     quoi: "Les 50 mots qu'elle emploie, expliqués un par un — pour ne pas perdre de points sur la consigne.",
                     cta: "Ouvrir le dico",
                     href: "/dico",
                   },
                   {
                     nom: "Pix IA",
-                    quoi: "L'éval blanche, 16 questions corrigées, pour arriver prêt le jour J.",
+                    quoi: "L'éval blanche du numérique, 16 questions corrigées, pour arriver prêt le jour J.",
                     cta: "Passer l'éval blanche",
                     href: "/eval-pix-ia",
                   },
@@ -1300,6 +1336,49 @@ export default function AccueilPage({
                     </span>
                     <span className="mt-1 block text-sm font-black text-cyan-800">
                       {e.cta} →
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* PRÉPA CONCOURS — remontée du fil du jour (01/08). Rubrique et
+                pas lien (Frédéric, 31/07) : le Concours Avenir et le Concours
+                général aujourd'hui, les autres viendront s'y ranger sans
+                retoucher l'accueil. Sa place est ici, à côté des évaluations
+                nationales : ce sont les mêmes échéances, à deux âges. */}
+            <div className="mt-5 border-t-2 border-[#1d1c16] pt-3">
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                🎯 Pr&eacute;pa concours
+              </p>
+              <div className="mt-2 grid gap-x-6 sm:grid-cols-2">
+                {[
+                  {
+                    emoji: "📐",
+                    nom: "Concours Avenir",
+                    quoi: "Épreuve blanche chronométrée · 7 écoles d'ingénieurs",
+                    href: "/concours-avenir",
+                  },
+                  {
+                    emoji: "🏅",
+                    nom: "Concours général",
+                    quoi: "Les problèmes qui sortent du programme, au collège",
+                    href: "/concours-general",
+                  },
+                ].map((c) => (
+                  <Link
+                    key={c.href}
+                    href={c.href}
+                    className="group block border-b border-dotted border-[#1d1c16]/25 py-2"
+                  >
+                    <span className="flex items-baseline gap-2">
+                      <span aria-hidden className="text-sm">{c.emoji}</span>
+                      <span className="font-serif text-[15px] font-black leading-snug group-hover:underline">
+                        {c.nom}
+                      </span>
+                    </span>
+                    <span className="mt-0.5 block pl-[22px] text-xs font-medium text-[#1d1c16]/70">
+                      {c.quoi}
                     </span>
                   </Link>
                 ))}
@@ -1393,49 +1472,16 @@ export default function AccueilPage({
                 </span>
               </Link>
 
-              {/* PRÉPA CONCOURS — une RUBRIQUE, pas un lien (idée de Frédéric,
-                  31/07) : le Concours Avenir aujourd'hui, les autres viendront
-                  s'y ranger sans retoucher l'accueil.
-                  ORDRE DE LA COLONNE (Frédéric, 31/07) : on descend du
-                  quotidien vers l'outillage puis vers l'exploration —
-                  rituels, guides, cahiers, prépa concours, machines, et le
-                  défi du jour en dernier. Le défi occupait la première place
-                  alors qu'il n'est pas le plus important. */}
-              <div className="py-3">
-                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-                  🎯 Pr&eacute;pa concours
-                </p>
-                {[
-                  {
-                    emoji: "📐",
-                    nom: "Concours Avenir",
-                    quoi: "Épreuve blanche chronométrée · 7 écoles d'ingénieurs",
-                    href: "/concours-avenir",
-                  },
-                  {
-                    emoji: "🏅",
-                    nom: "Concours général",
-                    quoi: "Les problèmes qui sortent du programme, au collège",
-                    href: "/concours-general",
-                  },
-                ].map((c) => (
-                  <Link
-                    key={c.href}
-                    href={c.href}
-                    className="group block border-b border-dotted border-[#1d1c16]/25 py-2"
-                  >
-                    <span className="flex items-baseline gap-2">
-                      <span aria-hidden className="text-sm">{c.emoji}</span>
-                      <span className="font-serif text-[15px] font-black leading-snug group-hover:underline">
-                        {c.nom}
-                      </span>
-                    </span>
-                    <span className="mt-0.5 block pl-[22px] text-xs font-medium text-[#1d1c16]/70">
-                      {c.quoi}
-                    </span>
-                  </Link>
-                ))}
-              </div>
+              {/* PRÉPA CONCOURS A DÉMÉNAGÉ dans la colonne de gauche, sous les
+                  évaluations du collège (01/08). L'ORDRE DÉCIDÉ LE 31/07 est
+                  intact — rituels, guides, cahiers, puis machines, puis le
+                  défi en dernier : on descend toujours du quotidien vers
+                  l'exploration. Ce qui change, c'est que « ce qui se prépare »
+                  (les échéances : évaluations nationales, concours) tient
+                  désormais dans UNE colonne, et « aujourd'hui » dans l'autre.
+                  Sans « À lire aussi », la colonne de gauche finissait 490 px
+                  avant ses voisines — c'est ce trou-là que le déménagement
+                  ferme, par le sens et pas par du remplissage. */}
 
               {/* La machine reste visible, mais en format plus court dans cette colonne. */}
               <ReclameMachine />
