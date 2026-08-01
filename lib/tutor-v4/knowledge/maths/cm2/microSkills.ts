@@ -802,6 +802,15 @@ export const microSkills: MicroSkillSource[] = [
   // ============================================================
   // FIGURES PLANES
   // ============================================================
+  // Déclaré le 01/08 : 15 items de figures-planes.bank.ts portaient déjà ce
+  // microId, mais il manquait ici. Le coach travaillait donc une compétence
+  // qu'aucun bilan ne pouvait nommer (repéré par scripts/auditer-banque.mjs).
+  {
+    id: "figure_reconnaitre",
+    label: "Reconnaître une figure plane",
+    notionId: "figure_plane",
+    prerequis: [],
+  },
   {
     id: "figure_triangle",
     label: "Reconnaître les triangles",

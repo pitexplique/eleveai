@@ -29,6 +29,10 @@ import { algorithmiqueBank } from "./algorithmique.bank";
 import { massesBank} from "./masses.bank"
 
 import { contenancesBank} from "./contenance.bank"
+// Les 7 micro-compétences que l'audit avait trouvées vides (01/08) — quatre
+// sur les fractions, deux sur les figures planes, une sur les probabilités.
+// Voir scripts/auditer-banque.mjs.
+import { complementsEvalNationaleBank } from "./complements-eval-nationale.bank";
 
 // Zéro clavier en CM2 : short numériques -> QCM, et open « Explique… » retirées
 // (cf. applyMathsKeyboardFree). Appliqué à TOUTES les banques maths CM2.
@@ -62,6 +66,8 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
 
   ...applyMathsKeyboardFree(massesBank),
   ...applyMathsKeyboardFree(contenancesBank),
+
+  ...applyMathsKeyboardFree(complementsEvalNationaleBank),
 ];
 
 export function getMathCm2QuestionBank(args?: {
