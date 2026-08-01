@@ -12,6 +12,7 @@ export type ActiviteResultat =
   | "calcul_rapide"
   | "defis_jour"
   | "english_maths"
+  | "evaluation_nationale"
   | "tutor";
 
 export async function saveResultat(

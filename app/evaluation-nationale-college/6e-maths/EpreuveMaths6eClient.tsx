@@ -5,6 +5,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { CanvasRenderer } from "@/lib/canvas";
 import { MarkdownMath } from "@/components/MarkdownMath";
+import { saveResultat } from "@/lib/resultats";
+import { useEleve } from "@/context/EleveContext";
 
 import {
   DUREE_SECONDES,
@@ -53,6 +55,7 @@ function formatChrono(secondes: number) {
 }
 
 export default function EpreuveMaths6eClient() {
+  const { eleve } = useEleve();
   const [etape, setEtape] = useState<Etape>("accueil");
 
   // Prise en main
@@ -66,21 +69,33 @@ export default function EpreuveMaths6eClient() {
   const [reponses, setReponses] = useState<Record<number, string>>({});
   const [restant, setRestant] = useState(DUREE_SECONDES);
 
-  const hautRef = useRef<HTMLDivElement | null>(null);
+  const [chronoEcoule, setChronoEcoule] = useState(false);
+  const [enregistrement, setEnregistrement] = useState<string | null>(null);
 
-  const terminer = useCallback(() => {
-    setEtape("bilan");
-    // On mémorise les items vus pour que le prochain passage soit neuf.
-    try {
-      const vus: string[] = JSON.parse(
-        localStorage.getItem(CLE_DEJA_VUS) ?? "[]",
-      );
-      const maj = [...vus, ...questions.map((q) => q.itemId)].slice(-1500);
-      localStorage.setItem(CLE_DEJA_VUS, JSON.stringify(maj));
-    } catch {
-      // Navigation privée : tant pis, on ne mémorise pas.
-    }
-  }, [questions]);
+  const hautRef = useRef<HTMLDivElement | null>(null);
+  const dejaEnregistre = useRef(false);
+
+  /**
+   * Clôture l'épreuve — par le chrono ou par la dernière question. Les deux
+   * chemins passent ici : la mémorisation des items vus était écrite deux
+   * fois, et une seule des deux aurait fini par diverger.
+   */
+  const cloturer = useCallback(
+    (parChrono: boolean) => {
+      setChronoEcoule(parChrono);
+      setEtape("bilan");
+      try {
+        const vus: string[] = JSON.parse(
+          localStorage.getItem(CLE_DEJA_VUS) ?? "[]",
+        );
+        const maj = [...vus, ...questions.map((q) => q.itemId)].slice(-1500);
+        localStorage.setItem(CLE_DEJA_VUS, JSON.stringify(maj));
+      } catch {
+        // Navigation privée : tant pis, on ne mémorise pas.
+      }
+    },
+    [questions],
+  );
 
   // Le chrono : 50 minutes, et à zéro l'épreuve se ferme d'elle-même.
   useEffect(() => {
@@ -89,14 +104,14 @@ export default function EpreuveMaths6eClient() {
       setRestant((r) => {
         if (r <= 1) {
           clearInterval(t);
-          terminer();
+          cloturer(true);
           return 0;
         }
         return r - 1;
       });
     }, 1000);
     return () => clearInterval(t);
-  }, [etape, terminer]);
+  }, [etape, cloturer]);
 
   function commencerPriseEnMain() {
     setEtape("prise-en-main");
@@ -120,6 +135,10 @@ export default function EpreuveMaths6eClient() {
     setChoix(null);
     setReponses({});
     setRestant(epreuve.dureeSecondes);
+    setChronoEcoule(false);
+    setEnregistrement(null);
+    // Sans ce remise à zéro, un deuxième passage ne serait jamais enregistré.
+    dejaEnregistre.current = false;
     setEtape("epreuve");
   }
 
@@ -129,19 +148,11 @@ export default function EpreuveMaths6eClient() {
     setReponses(suivant);
     setChoix(null);
 
+    // `setReponses` juste au-dessus est appliqué avant le rendu du bilan
+    // (React groupe les mises à jour d'un même gestionnaire) : la dernière
+    // réponse est bien comptée.
     if (index + 1 >= questions.length) {
-      setEtape("bilan");
-      try {
-        const vus: string[] = JSON.parse(
-          localStorage.getItem(CLE_DEJA_VUS) ?? "[]",
-        );
-        localStorage.setItem(
-          CLE_DEJA_VUS,
-          JSON.stringify([...vus, ...questions.map((q) => q.itemId)].slice(-1500)),
-        );
-      } catch {
-        // rien
-      }
+      cloturer(false);
       return;
     }
 
@@ -156,6 +167,50 @@ export default function EpreuveMaths6eClient() {
 
   const totalJustes = bilan.reduce((n, t) => n + t.justes, 0);
   const totalPosees = bilan.reduce((n, t) => n + t.total, 0);
+
+  // ENREGISTREMENT AUTOMATIQUE, pas un bouton (contrairement au parcours) :
+  // une évaluation n'est pas quelque chose qu'on choisit de consigner après
+  // coup. Si l'élève est connecté, son profil part vers le tableau de suivi
+  // de son professeur — c'est tout l'intérêt à la rentrée. Le garde-fou
+  // `dejaEnregistre` évite le doublon si React rejoue l'effet.
+  useEffect(() => {
+    if (etape !== "bilan" || dejaEnregistre.current) return;
+    if (!bilan.length) return;
+    dejaEnregistre.current = true;
+
+    if (!eleve?.token) {
+      setEnregistrement("non-connecte");
+      return;
+    }
+
+    saveResultat(eleve, "evaluation_nationale", {
+      classe: "6e",
+      matiere: "maths",
+      score: totalJustes,
+      total: totalPosees,
+      duree_sec: DUREE_SECONDES - restant,
+      chrono_ecoule: chronoEcoule,
+      details: {
+        themes: bilan.map((t) => ({
+          id: t.themeId,
+          label: t.themeLabel,
+          justes: t.justes,
+          total: t.total,
+        })),
+        micros: bilan.flatMap((t) => t.micros),
+      },
+    }).then(({ error }) => {
+      setEnregistrement(error ? error.message : "ok");
+    });
+  }, [
+    etape,
+    bilan,
+    eleve,
+    totalJustes,
+    totalPosees,
+    restant,
+    chronoEcoule,
+  ]);
 
   const question = questions[index];
 
@@ -442,6 +497,44 @@ export default function EpreuveMaths6eClient() {
               une note — c&apos;est une carte. Ce qui compte, c&apos;est la
               colonne de droite.
             </p>
+
+            {chronoEcoule && (
+              <p className="mt-2 border-l-4 border-red-800 pl-3 text-sm font-medium leading-6 text-[#1d1c16]/70">
+                Le temps s&apos;est écoulé avant la fin. Ce n&apos;est pas
+                grave, mais regarde où tu en étais : le jour J, savoir se
+                déplacer vite compte autant que savoir répondre.
+              </p>
+            )}
+
+            {/* L'enregistrement : ce qui fait que le professeur verra la
+                classe à la rentrée. Dit sobrement, jamais comme une
+                récompense. */}
+            {enregistrement === "ok" && (
+              <p className="mt-2 text-xs font-black uppercase tracking-[0.14em] text-cyan-800">
+                ✅ Résultat enregistré
+              </p>
+            )}
+            {enregistrement === "non-connecte" && (
+              <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/70">
+                Tu n&apos;es pas connecté : ce bilan reste sur cette page et
+                disparaîtra en la quittant.{" "}
+                <Link
+                  href="/auth/signin-eleve"
+                  className="font-black text-cyan-800 underline underline-offset-2"
+                >
+                  Se connecter
+                </Link>{" "}
+                permet de le garder — et ton professeur voit alors où en est sa
+                classe.
+              </p>
+            )}
+            {enregistrement !== null &&
+              enregistrement !== "ok" &&
+              enregistrement !== "non-connecte" && (
+                <p className="mt-2 text-sm font-medium leading-6 text-red-800">
+                  {enregistrement}
+                </p>
+              )}
 
             <div className="mt-6 space-y-5">
               {bilan.map((t) => {

@@ -63,6 +63,16 @@ const ACTIVITES: Record<string, { table: string; colonnes: string[] }> = {
     table: "resultats_langue_du_jour",
     colonnes: ["langue", "niveau", "score", "total", "details"],
   },
+  // Les ÉPREUVES BLANCHES de l'évaluation nationale du collège — UNE table
+  // pour les quatre épreuves, `classe` et `matiere` distinguent
+  // (supabase/resultats_evaluation_nationale.sql).
+  evaluation_nationale: {
+    table: "resultats_evaluation_nationale",
+    colonnes: [
+      "classe", "matiere", "score", "total", "duree_sec", "chrono_ecoule",
+      "details",
+    ],
+  },
   tutor: {
     table: "resultats_tutor",
     colonnes: [
