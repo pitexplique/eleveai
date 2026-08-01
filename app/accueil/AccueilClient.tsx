@@ -1269,13 +1269,22 @@ export default function AccueilPage({
                 aurait creusé un trou de 400 px entre le carrousel et
                 l'encadré. Le bloc suit le carrousel, le mou va en fin de
                 colonne — là où il se lit comme « l'article est fini ». */}
-            <div className="mt-5 border-2 border-[#1d1c16] p-4">
-              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-                🎓 Les évaluations du collège
-              </p>
-              <p className="mt-1 font-serif text-xl font-black leading-tight">
-                Celles qu&apos;on te fera passer — prépare-les tranquillement
-              </p>
+            {/* C'EST L'ENCADRÉ QUI ABSORBE LE MOU (01/08). Avec le seul
+                `mt-auto` sur Prépa concours, les colonnes finissaient droit
+                mais 197 px de blanc s'ouvraient entre deux sections — ça se
+                lit comme un oubli. Ici la boîte s'étire (flex-1) et répartit
+                l'écart entre ses trois temps (le titre, les niveaux, Pix) :
+                du blanc À L'INTÉRIEUR d'un cadre se lit comme une intention.
+                Le surtitre et le titre sont groupés pour rester collés. */}
+            <div className="mt-5 flex flex-col border-2 border-[#1d1c16] p-4 lg:flex-1 lg:justify-between">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                  🎓 Les évaluations du collège
+                </p>
+                <p className="mt-1 font-serif text-xl font-black leading-tight">
+                  Celles qu&apos;on te fera passer — prépare-les tranquillement
+                </p>
+              </div>
 
               {/* LES QUATRE ÉPREUVES — le hub est branché maintenant, les
                   épreuves blanches viendront s'y ranger (Frédéric, 01/08).
@@ -1345,11 +1354,11 @@ export default function AccueilPage({
                 général aujourd'hui, les autres viendront s'y ranger sans
                 retoucher l'accueil. Sa place est ici, à côté des évaluations
                 nationales : ce sont les mêmes échéances, à deux âges.
-                ANCRÉ AU PIED (mt-auto) — doctrine du 24/07 appliquée enfin aux
-                trois colonnes et pas à la seule colonne de l'édito : le
-                contenu vient de la base et change chaque jour, un calage à la
-                main tiendrait un jour. */}
-            <div className="mt-5 border-t-2 border-[#1d1c16] pt-3 lg:mt-auto">
+                Plus de `mt-auto` ici : c'est l'encadré des évaluations, juste
+                au-dessus, qui s'étire et absorbe le mou (doctrine du 24/07 —
+                le contenu vient de la base et change chaque jour, un calage à
+                la main ne tiendrait qu'une édition). */}
+            <div className="mt-5 border-t-2 border-[#1d1c16] pt-3">
               <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                 🎯 Pr&eacute;pa concours
               </p>
