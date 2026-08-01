@@ -248,11 +248,13 @@ export type BilanMicro = {
 // satisfaisant. Soit 30 % et 60 %, qu'on applique en proportion puisque nos
 // épreuves n'ont pas 30 questions.
 //
-// ET LE TON, SURTOUT. Les descriptions officielles disent ce que l'élève SAIT
-// FAIRE, y compris dans le groupe « à besoins » — « ils possèdent des
-// connaissances élémentaires, ils sont éventuellement capables de… ». Jamais
-// une liste d'échecs. On s'y tient : un élève seul devant son écran lit ce
-// bilan sans personne pour l'adoucir.
+// LE TON : ON GARDE LEURS GROUPES, PAS LEUR COUSSIN (Frédéric, 01/08).
+// Les descriptions officielles enveloppent — jusqu'au groupe « à besoins »,
+// décrit par ce que l'élève « est éventuellement capable » de faire. Dit à un
+// enfant qui a 6 sur 20, ce n'est pas de la bienveillance : c'est du coussin,
+// ça ne lui apprend rien et il le sent. On dit donc l'état, puis le geste
+// suivant. Sans reproche, mais sans varnish : un élève qu'on informe peut
+// agir, un élève qu'on rassure reste où il est.
 
 export type GroupeMaitrise = "a_besoins" | "fragile" | "satisfaisant";
 
@@ -262,20 +264,19 @@ export const GROUPES: Record<
 > = {
   satisfaisant: {
     label: "Satisfaisant",
-    pourLeleve:
-      "Ce que tu sais là-dessus te permet de continuer sereinement. Passe à la suite.",
+    pourLeleve: "C'est acquis. Passe à la suite.",
     couleur: "text-cyan-800",
   },
   fragile: {
     label: "Fragile",
     pourLeleve:
-      "Tu connais ces choses, elles ne sont pas encore sûres. Quelques passages et elles le seront.",
+      "Tu sais faire, mais pas à tous les coups. Ce qui manque, ce sont des passages — pas des explications.",
     couleur: "text-amber-700",
   },
   a_besoins: {
     label: "À besoins",
     pourLeleve:
-      "Il y a des bases à reprendre ici, et ça se reprend très bien — mais pas tout seul en une fois. Commence par une compétence, celle du haut.",
+      "Ce n'est pas acquis. Reprends par la première compétence de la liste ci-dessous : il n'y a pas de raccourci, et c'est la seule mauvaise nouvelle.",
     couleur: "text-red-800",
   },
 };
