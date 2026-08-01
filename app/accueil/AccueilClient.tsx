@@ -1344,8 +1344,12 @@ export default function AccueilPage({
                 pas lien (Frédéric, 31/07) : le Concours Avenir et le Concours
                 général aujourd'hui, les autres viendront s'y ranger sans
                 retoucher l'accueil. Sa place est ici, à côté des évaluations
-                nationales : ce sont les mêmes échéances, à deux âges. */}
-            <div className="mt-5 border-t-2 border-[#1d1c16] pt-3">
+                nationales : ce sont les mêmes échéances, à deux âges.
+                ANCRÉ AU PIED (mt-auto) — doctrine du 24/07 appliquée enfin aux
+                trois colonnes et pas à la seule colonne de l'édito : le
+                contenu vient de la base et change chaque jour, un calage à la
+                main tiendrait un jour. */}
+            <div className="mt-5 border-t-2 border-[#1d1c16] pt-3 lg:mt-auto">
               <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                 🎯 Pr&eacute;pa concours
               </p>
@@ -1387,7 +1391,7 @@ export default function AccueilPage({
           {/* Le fil du jour (APPRENDRE : les rendez-vous quotidiens). */}
           <aside className="border-[#1d1c16]/25 lg:col-span-3 lg:flex lg:flex-col lg:border-l lg:pl-6">
             <Kicker>Apprendre · Aujourd&apos;hui</Kicker>
-            <div className="mt-2 divide-y divide-[#1d1c16]/25">
+            <div className="mt-2 divide-y divide-[#1d1c16]/25 lg:flex lg:flex-1 lg:flex-col">
               {/* LES RITUELS DU JOUR — un emplacement COMMUN (Frédéric, 25/07) :
                   les rendez-vous quotidiens groupés au même endroit. Le défi a
                   sa grande carte au-dessus ; ici les rituels d'entraînement :
@@ -1506,8 +1510,10 @@ export default function AccueilPage({
                   RÈGLE DU JOURNAL (18/07) : une question posée en Une porte sa
                   réponse SOUS elle (repliée) — on ne renvoie jamais le lecteur
                   chercher la réponse ailleurs. Le lien vers le défi guidé
-                  reste, mais il devient un plus. */}
-              <div className="py-3">
+                  reste, mais il devient un plus.
+                  ANCRÉ AU PIED (mt-auto, 01/08) : le fil du jour finit droit,
+                  comme les deux autres colonnes. */}
+              <div className="py-3 lg:mt-auto">
                 <Link href="/defis-du-jour" className="group block">
                   <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                     🎯 Le défi du jour · {defiDuJour.defi.theme}{" "}
@@ -1683,9 +1689,12 @@ export default function AccueilPage({
                 <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1d1c16]">
                   🚀 Aux entreprises de l&apos;île
                 </p>
+                {/* Resserré (Frédéric, 01/08) : dans une colonne de 165 px,
+                    chaque mot coûte une ligne. « le lait » part, la canne et
+                    le barrage suffisent à prouver que d'autres l'ont fait. */}
                 <p className="mt-1.5 text-sm font-semibold leading-6 text-[#1d1c16]/70">
-                  Votre métier peut devenir un article, une simulation, un défi —
-                  comme la canne, le lait ou le barrage avant vous.
+                  Votre métier peut devenir un article, une simulation, un
+                  défi — comme la canne ou le barrage.
                 </p>
                 <Link
                   href="/entreprises"
