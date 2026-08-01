@@ -528,44 +528,10 @@ function PastilleJour({ label = "aujourd'hui" }: { label?: string }) {
 // dépliant « Voir le mot ». Calculé APRÈS montage (comme la page dictée) pour
 // éviter le décalage d'hydratation sur la date.
 
-function GuideSurvieAnime({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 260 92"
-      className={className}
-      role="img"
-      aria-label="Livret anime du guide de survie maths Premiere"
-      style={{ display: "block" }}
-    >
-      <style>{`
-        @keyframes guide-page { 0%, 100% { transform: rotateY(0deg); } 45%, 55% { transform: rotateY(-68deg); } }
-        @keyframes guide-pencil { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(16px, -9px); } }
-        @keyframes guide-check { 0%, 45% { stroke-dashoffset: 38; } 70%, 100% { stroke-dashoffset: 0; } }
-        .guide-page { animation: guide-page 4.8s ease-in-out infinite; transform-origin: 132px 22px; transform-box: fill-box; }
-        .guide-pencil { animation: guide-pencil 3.8s ease-in-out infinite; }
-        .guide-check { stroke-dasharray: 38; animation: guide-check 4.8s ease-in-out infinite; }
-        @media (prefers-reduced-motion: reduce) {
-          .guide-page, .guide-pencil, .guide-check { animation-duration: 18s; }
-        }
-      `}</style>
-      <rect x="6" y="8" width="248" height="76" rx="6" fill="#fbf6e7" stroke="#1d1c16" strokeWidth="2" />
-      <path d="M130 14v64" stroke="#1d1c16" strokeOpacity="0.28" strokeWidth="2" />
-      <g>
-        <path d="M24 24h76M24 36h62M24 48h72" stroke="#155e75" strokeWidth="4" strokeLinecap="round" />
-        <rect x="24" y="58" width="74" height="10" rx="2" fill="#ffd23f" stroke="#1d1c16" strokeWidth="1.5" />
-      </g>
-      <g className="guide-page">
-        <path d="M132 16h94c6 0 10 4 10 10v48h-104z" fill="#f6f1e4" stroke="#1d1c16" strokeWidth="2" />
-        <path d="M150 28h58M150 40h70M150 52h44" stroke="#1d1c16" strokeOpacity="0.32" strokeWidth="3" strokeLinecap="round" />
-      </g>
-      <path className="guide-check" d="M154 64l12 10 24-30" fill="none" stroke="#15803d" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-      <g className="guide-pencil">
-        <path d="M68 72l70-38 8 15-70 38-15 2z" fill="#ff6b6b" stroke="#1d1c16" strokeWidth="2" strokeLinejoin="round" />
-        <path d="M138 34l8 15 9-13-5-9z" fill="#ffd23f" stroke="#1d1c16" strokeWidth="2" strokeLinejoin="round" />
-      </g>
-    </svg>
-  );
-}
+// (La vignette animée du guide de survie est partie avec la mise au même
+// format que les cahiers de vacances — 01/08. Elle est dans l'historique git
+// si un jour un livret mérite sa propre illustration.)
+
 function MotDuJourEncart() {
   const [mot, setMot] = useState<DicteeMot | null>(null);
   useEffect(() => {
@@ -1287,54 +1253,23 @@ export default function AccueilPage({
                 chaque slide porte son propre surtitre. */}
             <UneCarousel slides={slides} />
 
-            {/* À LIRE AUSSI — la rivière de titres. REFONTE DU 01/08 : elle
-                était passée à 11 liens, c'est-à-dire un deuxième catalogue.
-                Sont partis — les fiches de cours (pas complètes, demande de
-                Frédéric) ; Maths Réel · 974 (il a sa rubrique « En vrai »
-                plus bas, demande de Frédéric) ; la courbe en cloche et la
-                machine des epsilons (l'encart des machines, juste en face,
-                les contient toutes) ; le bon prompt (sa place est dans le
-                parcours IA). Le dico et Pix IA sont partis former la rubrique
-                « Les évaluations du collège », juste dessous.
-                CSS : plus de `flex-1 + content-between`. Il devait faire de
-                l'interligne avec le mou ; avec une colonne voisine plus haute
-                il montait l'interligne à 70-80 px et fabriquait exactement le
-                trou qu'il était censé boucher. Le mou va maintenant au pied,
-                où le bloc « évaluations » l'occupe (mt-auto).
-                Plus d'emoji-puce non plus : la colonne de droite en a, celle-ci
-                est une rivière de titres — pure typographie. On distingue
-                enfin les deux colonnes. */}
-            <div className="mt-5 border-t-2 border-[#1d1c16] pt-3">
-              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-                À lire aussi
-              </p>
-              <ul className="mt-2 grid gap-x-6 gap-y-2 sm:grid-cols-2">
-                {[
-                  { titre: "Picto Maths : 25 défis en images de l'île", href: "/picto-maths" },
-                  { titre: "La carte de La Réunion, lieu par lieu, avec les maths dedans", href: "/carte" },
-                  { titre: "« Qui suis-je ? » — le jeu de cartes à imprimer en famille", href: "/qui-suis-je-a-imprimer" },
-                  { titre: "Le Grand oral : s'entraîner à parler, chrono en main", href: "/grand-oral" },
-                ].map((l) => (
-                  <li key={l.href} className="border-b border-dotted border-[#1d1c16]/25 pb-2">
-                    <Link
-                      href={l.href}
-                      className="group block font-serif text-[15px] font-black leading-snug hover:underline"
-                    >
-                      {l.titre}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {/* « À LIRE AUSSI » EST PARTI (Frédéric, 01/08). Elle avait déjà
+                fondu de 11 titres à 4 ; sous le carrousel, elle restait une
+                rivière de liens qui répétait le catalogue et repoussait les
+                évaluations tout en bas de la colonne. Les quatre pages qu'elle
+                portait vivent ailleurs : Picto Maths et la carte dans « En
+                vrai », « Qui suis-je ? » et le Grand oral dans le catalogue. */}
 
             {/* LES ÉVALUATIONS DU COLLÈGE — idée de Frédéric (01/08). Le dico
                 et Pix IA traînaient au milieu de la rivière de titres, sans
                 dire à quoi ils servent. Regroupés, ils forment une rubrique
-                qui a un sens à la rentrée : les deux évaluations que le
-                collège fait passer, et de quoi les préparer tranquillement.
-                Le bloc s'ancre au pied de la colonne (mt-auto) — le mou reste
-                au milieu, jamais en bas. */}
-            <div className="mt-5 border-2 border-[#1d1c16] p-4 lg:mt-auto">
+                qui a un sens à la rentrée : les évaluations que le collège
+                fait passer, et de quoi les préparer tranquillement.
+                Plus de `mt-auto` : la rivière partie, l'ancrage au pied
+                aurait creusé un trou de 400 px entre le carrousel et
+                l'encadré. Le bloc suit le carrousel, le mou va en fin de
+                colonne — là où il se lit comme « l'article est fini ». */}
+            <div className="mt-5 border-2 border-[#1d1c16] p-4">
               <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                 🎓 Les évaluations du collège
               </p>
@@ -1412,32 +1347,29 @@ export default function AccueilPage({
               {/* GUIDES DE SURVIE — pointe le HUB (la page qui regroupe tous
                   les guides) : chaque niveau livré y apparaît sans retoucher
                   l'accueil. */}
+              {/* EXACTEMENT LE MÊME CSS QUE LES CAHIERS DE VACANCES
+                  (Frédéric, 01/08) : surtitre 10 px, titre serif 15 px,
+                  description 12 px — rien d'autre. La vignette animée et la
+                  ligne « Voir les livrets à imprimer → » lui donnaient trois
+                  fois la surface de son voisin alors que les deux sont la
+                  même chose : un livret. Le « Nouveau » reste, en rouge : il
+                  signale, il n'enfle pas.
+                  Au passage `border-y` devient `border-b` — le dernier rituel
+                  au-dessus porte déjà son filet, ça faisait un trait double. */}
               <Link
                 href="/guide-de-survie"
-                className="group block border-y border-dotted border-[#1d1c16]/25 py-3"
+                className="group block border-b border-dotted border-[#1d1c16]/25 py-3"
               >
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
-                  Nouveau · Du CM1 &agrave; la Terminale
+                  📗 Nouveau
                 </p>
-                <div className="mt-1 grid grid-cols-[72px_1fr] items-center gap-2.5">
-                  <GuideSurvieAnime className="w-full" />
-                  <span className="block">
-                    {/* MÊME TAILLE QUE LES CAHIERS DE VACANCES (Frédéric,
-                        01/08) : en text-lg le titre partait sur trois lignes
-                        à côté de la vignette et écrasait tout le reste de la
-                        colonne. Deux voisins de même nature — des livrets à
-                        imprimer — doivent avoir la même voix. */}
-                    <span className="block font-serif text-[15px] font-black leading-snug group-hover:underline">
-                      Les guides de survie
-                    </span>
-                    <span className="mt-0.5 block text-xs font-medium leading-4 text-[#1d1c16]/70">
-                      Maths, fran&ccedil;ais, anglais : formules, r&eacute;flexes, pi&egrave;ges et test corrig&eacute;.
-                    </span>
-                    <span className="mt-1 block text-sm font-black text-cyan-800 group-hover:underline">
-                      Voir les livrets &agrave; imprimer →
-                    </span>
-                  </span>
-                </div>
+                <span className="mt-1 block font-serif text-[15px] font-black leading-snug group-hover:underline">
+                  Les guides de survie
+                </span>
+                <span className="mt-0.5 block text-xs font-medium text-[#1d1c16]/70">
+                  Du CM1 &agrave; la Terminale : formules, r&eacute;flexes et
+                  pi&egrave;ges, en maths, fran&ccedil;ais et anglais.
+                </span>
               </Link>
 
               {/* LES CAHIERS DE VACANCES — pointe le HUB, comme les guides :
