@@ -1329,35 +1329,46 @@ export default function AccueilPage({
                 </div>
               )}
 
-              {/* LES QUATRE ÉPREUVES. Chacune envoie droit au coach de sa
-                  classe et de sa matière : le coach est la destination, le
-                  journal la porte. Le hub (« épreuve par épreuve ») garde le
-                  détail de ce qui est demandé. */}
+              {/* LES QUATRE ÉPREUVES MÈNENT AUX ÉPREUVES BLANCHES (01/08).
+                  Elles envoyaient au coach du niveau, faute de mieux : les
+                  épreuves blanches n'existaient pas encore. Maintenant qu'elles
+                  existent, c'est là qu'il faut arriver — un élève qui a le jour
+                  J en tête veut d'abord voir à quoi ça ressemble, et son bilan
+                  le renverra au coach avec le nom des compétences qui ont
+                  coincé. C'est un meilleur chemin vers le coach qu'un lien
+                  froid, et le hub garde « ou t'entraîner sans chrono ».
+                  ⚠️ `minutes` est recopié de `dureeSecondes` (voir le hub) :
+                  importer les configs ici embarquerait les quatre banques dans
+                  le bundle de l'accueil. */}
               <div className="mt-3 grid gap-x-6 gap-y-3 sm:grid-cols-2">
                 {[
                   {
                     niveau: "6ᵉ",
                     matiere: "Français",
                     teste: "Comprendre un texte qu'on lit et qu'on écoute, lire à voix haute.",
-                    href: "/coach-ia/francais?classe=6e",
+                    href: "/evaluation-nationale-college/6e-francais",
+                    minutes: 25,
                   },
                   {
                     niveau: "6ᵉ",
                     matiere: "Mathématiques",
                     teste: "Nombres et calcul, grandeurs, géométrie, résoudre un problème.",
-                    href: "/coach-ia/maths?classe=6e",
+                    href: "/evaluation-nationale-college/6e-maths",
+                    minutes: 20,
                   },
                   {
                     niveau: "4ᵉ",
                     matiere: "Français",
-                    teste: "Comprendre un texte long, le vocabulaire, la grammaire et l'orthographe.",
-                    href: "/coach-ia/francais?classe=4e",
+                    teste: "Comprendre un texte long et un texte qu'on écoute, la langue.",
+                    href: "/evaluation-nationale-college/4e-francais",
+                    minutes: 25,
                   },
                   {
                     niveau: "4ᵉ",
                     matiere: "Mathématiques",
                     teste: "Calculs, lire des données, grandeurs et mesures, géométrie.",
-                    href: "/coach-ia/maths?classe=4e",
+                    href: "/evaluation-nationale-college/4e-maths",
+                    minutes: 20,
                   },
                 ].map((e) => (
                   <Link
@@ -1385,7 +1396,7 @@ export default function AccueilPage({
                       {e.teste}
                     </span>
                     <span className="mt-1 block text-sm font-black text-cyan-800">
-                      S&apos;entraîner →
+                      Passer l&apos;épreuve blanche · {e.minutes} min →
                     </span>
                   </Link>
                 ))}
@@ -1394,7 +1405,8 @@ export default function AccueilPage({
                 href="/evaluation-nationale-college"
                 className="mt-3 block text-sm font-black text-cyan-800 hover:underline"
               >
-                Voir ce qu&apos;on te demandera, épreuve par épreuve →
+                Ou d&apos;abord voir ce qu&apos;on te demandera, épreuve par
+                épreuve →
               </Link>
 
               {/* LE DICO EST RETIRÉ D'ICI (Frédéric, 01/08 : « personne n'y
