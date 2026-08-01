@@ -11,7 +11,7 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { microSkills } from "@/lib/tutor-v4/knowledge/maths/5e/microSkills";
 import { kitHelpers } from "@/components/kit/fromCoach";
 import { nombresRelatifsBank } from "@/lib/tutor-v4/questionBank/5e/maths/nombres-relatifs.bank";
-import { operationsRelatifsBank } from "@/lib/tutor-v4/questionBank/5e/maths/operations-relatifs.bank.ts";
+import { operationsRelatifsBank } from "@/lib/tutor-v4/questionBank/5e/maths/operations-relatifs.bank";
 import { fractionsBank } from "@/lib/tutor-v4/questionBank/5e/maths/fractions.bank";
 import { proportionnaliteBank } from "@/lib/tutor-v4/questionBank/5e/maths/proportionnalite.bank";
 import { calculLitteralBank } from "@/lib/tutor-v4/questionBank/5e/maths/calcul-litteral.bank";
