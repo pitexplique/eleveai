@@ -66,10 +66,13 @@ function joursAvantBrevet() {
 }
 
 // LES ÉVALUATIONS NATIONALES DE RENTRÉE (6ᵉ et 4ᵉ, français + maths).
-// ⚠️ DATE À CONFIRMER PAR FRÉDÉRIC, ET À REMETTRE À JOUR CHAQUE ANNÉE :
-// La Réunion a son propre calendrier (rentrée en août, pas en septembre),
-// les évaluations tombent donc dans les semaines qui suivent. Une seule
-// ligne à changer ici — le compte à rebours et le plan en découlent.
+// LA RÉUNION PASSE AUX MÊMES DATES QUE LA MÉTROPOLE (Frédéric, 01/08) —
+// donc en SEPTEMBRE, même si l'île a fait sa rentrée en août. C'est le
+// piège de ce fichier : ne pas caler cette date sur le calendrier local.
+// ⚠️ À REMETTRE À JOUR CHAQUE ANNÉE, quand la note de service sort. Le
+// 7 septembre 2026 est le lundi qui suit la rentrée, dans la continuité
+// des années précédentes (2024 : 9 septembre ; 2025 : 8 septembre) —
+// une seule ligne à changer, le compte à rebours et le plan en découlent.
 const EVAL_NATIONALE_DATE = new Date("2026-09-07T08:00:00");
 // Le rituel qu'on propose en face du compte à rebours : court, tenable.
 const EVAL_MINUTES_PAR_JOUR = 15;
