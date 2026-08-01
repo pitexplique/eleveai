@@ -73,7 +73,16 @@ export function routeRemediation(
 }
 
 export type QuestionEval = {
-  /** Identifiant de l'item d'origine : sert à ne pas le retirer au tour suivant. */
+  /**
+   * CE QU'ON MÉMORISE POUR NE PAS LE REVOIR — et ce n'est pas l'identifiant de
+   * l'item (corrigé le 01/08). Un item `template` porte un seul id pour tout
+   * son pool : le marquer « vu » après un tirage brûlait ses sept à treize
+   * énoncés d'un coup. Mesuré : l'épreuve de français de 6ᵉ n'allait pas
+   * au-delà de quatre passages complets. La clé est donc l'id pour un item
+   * fixe, et l'id PLUS l'empreinte de l'énoncé pour un gabarit.
+   */
+  cle: string;
+  /** Identifiant de l'item d'origine (un gabarit en produit plusieurs énoncés). */
   itemId: string;
   themeId: string;
   themeLabel: string;
@@ -94,6 +103,15 @@ export type EpreuveEval = {
 };
 
 // ─── Tirage ───────────────────────────────────────────────────────────────────
+
+/** Empreinte courte d'un énoncé — on en stocke des centaines côté navigateur. */
+function empreinte(texte: string): string {
+  let h = 0;
+  for (let i = 0; i < texte.length; i += 1) {
+    h = (h * 31 + texte.charCodeAt(i)) | 0;
+  }
+  return (h >>> 0).toString(36);
+}
 
 function melanger<T>(liste: readonly T[]): T[] {
   const copie = [...liste];
@@ -129,6 +147,10 @@ function materialiser(
   if (!choices.includes(expected[0])) return null;
 
   return {
+    // L'empreinte de l'ÉNONCÉ, pas de l'item : deux gabarits différents
+    // peuvent produire la même question, et c'est la question que l'élève
+    // reconnaît — pas son origine.
+    cle: empreinte(text),
     itemId: item.id,
     themeId: "",
     themeLabel: "",
@@ -153,22 +175,26 @@ function tirerTheme(
   theme: ThemeEval,
   config: ConfigEpreuve,
   dejaVus: Set<string>,
+  textesDuTirage: Set<string>,
 ): QuestionEval[] {
+  // AUCUN PRÉ-FILTRE SUR L'ID : on ne peut juger qu'après génération, puisque
+  // « déjà vu » porte désormais sur l'énoncé et non sur l'item.
   const parNotion = melanger(theme.notions).map((notionId) =>
-    melanger(
-      config.banque.filter(
-        (item) => item.notionId === notionId && !dejaVus.has(item.id),
-      ),
-    ),
+    melanger(config.banque.filter((item) => item.notionId === notionId)),
   );
 
   const questions: QuestionEval[] = [];
   const microsPris = new Set<string>();
-  let tour = 0;
 
   // Deux passes : la première refuse deux fois la même micro-compétence
   // (le bilan doit couvrir large), la seconde accepte tout pour compléter.
   for (const strict of [true, false]) {
+    // ⚠️ COMPTEUR REMIS À ZÉRO À CHAQUE PASSE. Partagé, il était épuisé par la
+    // passe stricte — qui tourne à vide une fois toutes les micro-compétences
+    // prises, puisque les recalés lui reviennent — et la passe permissive
+    // n'était alors jamais exécutée. C'est ce qui laissait l'épreuve de
+    // français de 4ᵉ à 19 questions sur 20.
+    let tour = 0;
     while (questions.length < theme.nbQuestions && tour < 400) {
       tour += 1;
       let piocheFaite = false;
@@ -189,18 +215,39 @@ function tirerTheme(
         // items au lieu de suivre le programme.
         let retenue: QuestionEval | null = null;
         let microRetenu = "";
+        // LES RECALÉS SONT RENDUS À LA PILE (corrigé le 01/08). La passe
+        // stricte refuse un item dont la micro-compétence est déjà prise —
+        // mais elle le JETAIT, alors que la seconde passe, elle, l'aurait
+        // accepté. Un thème bâti sur une seule notion (« la phrase et les
+        // accords », 4 micro-compétences) ne pouvait donc pas atteindre ses
+        // 5 questions : mesuré, l'épreuve de français de 4ᵉ sortait 19/20 dès
+        // le premier passage.
+        const recales: typeof pile = [];
         while (pile.length) {
           const item = pile.pop()!;
-          if (strict && microsPris.has(item.microId)) continue;
-          const candidat = materialiser(item, config);
-          if (candidat) {
-            retenue = candidat;
-            microRetenu = item.microId;
-            break;
+          if (strict && microsPris.has(item.microId)) {
+            recales.push(item);
+            continue;
           }
+          const candidat = materialiser(item, config);
+          // Déjà tombé lors d'un passage précédent, ou déjà dans CETTE
+          // épreuve : deux gabarits différents peuvent produire le même
+          // énoncé.
+          if (
+            !candidat ||
+            dejaVus.has(candidat.cle) ||
+            textesDuTirage.has(candidat.text)
+          ) {
+            continue;
+          }
+          retenue = candidat;
+          microRetenu = item.microId;
+          break;
         }
+        pile.push(...recales);
         if (!retenue) continue;
 
+        textesDuTirage.add(retenue.text);
         microsPris.add(microRetenu);
         questions.push({
           ...retenue,
@@ -226,8 +273,11 @@ export function tirerEpreuve(
   dejaVus: string[] = [],
 ): EpreuveEval {
   const vus = new Set(dejaVus);
+  // Partagé entre les thèmes : un même énoncé ne doit pas tomber deux fois
+  // dans la même épreuve, fût-ce sous deux notions différentes.
+  const textesDuTirage = new Set<string>();
   const questions = config.themes.flatMap((theme) =>
-    tirerTheme(theme, config, vus),
+    tirerTheme(theme, config, vus, textesDuTirage),
   );
 
   return { questions, dureeSecondes: config.dureeSecondes };

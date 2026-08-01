@@ -100,7 +100,9 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
         const vus: string[] = JSON.parse(
           localStorage.getItem(CLE_DEJA_VUS) ?? "[]",
         );
-        const maj = [...vus, ...questions.map((q) => q.itemId)].slice(-1500);
+        // `cle` et non `itemId` : un gabarit produit plusieurs énoncés, on ne
+        // met de côté que celui qui est tombé (voir moteur.ts).
+        const maj = [...vus, ...questions.map((q) => q.cle)].slice(-1500);
         localStorage.setItem(CLE_DEJA_VUS, JSON.stringify(maj));
       } catch {
         // Navigation privée : tant pis, on ne mémorise pas.

@@ -70,6 +70,8 @@ const EPREUVES = [
       "Le vocabulaire",
       "La grammaire et l'orthographe",
     ],
+    // LIVRÉE (01/08) : l'épreuve pioche dans le programme de 5ᵉ.
+    epreuve: "/evaluation-nationale-college/4e-francais",
     coach: "/coach-ia/francais?classe=4e",
     guide: "/guide-de-survie/francais-4e",
   },
