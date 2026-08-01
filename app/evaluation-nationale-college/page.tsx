@@ -80,6 +80,8 @@ const EPREUVES = [
       "Les grandeurs et les mesures",
       "La géométrie",
     ],
+    // LIVRÉE (01/08) : l'épreuve pioche dans le programme de 5ᵉ.
+    epreuve: "/evaluation-nationale-college/4e-maths",
     coach: "/coach-ia/maths?classe=4e",
     guide: "/guide-de-survie/maths-quatrieme",
   },

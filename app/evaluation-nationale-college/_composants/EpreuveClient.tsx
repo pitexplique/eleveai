@@ -9,19 +9,16 @@ import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
 
 import {
-  DUREE_SECONDES,
-  NB_QUESTIONS,
-  THEMES,
   construireBilan,
+  nbQuestions as compterQuestions,
+  routeRemediation,
   tirerEpreuve,
+  type ConfigEpreuve,
   type QuestionEval,
-} from "@/lib/eval-nationale/6e-maths";
+} from "@/lib/eval-nationale/moteur";
 
 const PAPER = "#f6f1e4";
 const INK = "#1d1c16";
-
-/** Les items déjà vus, pour que le deuxième passage soit vraiment neuf. */
-const CLE_DEJA_VUS = "eleveai_eval_nationale_6e_maths_vus";
 
 type Etape = "accueil" | "prise-en-main" | "epreuve" | "bilan";
 
@@ -54,8 +51,21 @@ function formatChrono(secondes: number) {
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
-export default function EpreuveMaths6eClient() {
+/**
+ * Le lecteur d'épreuve, commun aux quatre épreuves blanches. Tout ce qui
+ * change d'une épreuve à l'autre arrive par `config` — banque, thèmes,
+ * durée, classe testée.
+ */
+export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
   const { eleve } = useEleve();
+
+  /** Les items déjà vus, pour que le deuxième passage soit vraiment neuf. */
+  const CLE_DEJA_VUS = `eleveai_eval_nationale_${config.slug}_vus`;
+  const NB_QUESTIONS = compterQuestions(config);
+  /** « 6e » s'écrit « 6ᵉ » quand on l'affiche. */
+  const classeLabel = config.classe.replace(/e$/, "ᵉ");
+  const dureeMinutes = Math.round(config.dureeSecondes / 60);
+
   const [etape, setEtape] = useState<Etape>("accueil");
 
   // Prise en main
@@ -67,7 +77,7 @@ export default function EpreuveMaths6eClient() {
   const [index, setIndex] = useState(0);
   const [choix, setChoix] = useState<string | null>(null);
   const [reponses, setReponses] = useState<Record<number, string>>({});
-  const [restant, setRestant] = useState(DUREE_SECONDES);
+  const [restant, setRestant] = useState(config.dureeSecondes);
 
   const [chronoEcoule, setChronoEcoule] = useState(false);
   const [enregistrement, setEnregistrement] = useState<string | null>(null);
@@ -94,10 +104,10 @@ export default function EpreuveMaths6eClient() {
         // Navigation privée : tant pis, on ne mémorise pas.
       }
     },
-    [questions],
+    [questions, CLE_DEJA_VUS],
   );
 
-  // Le chrono : 50 minutes, et à zéro l'épreuve se ferme d'elle-même.
+  // Le chrono : à zéro, l'épreuve se ferme d'elle-même.
   useEffect(() => {
     if (etape !== "epreuve") return;
     const t = setInterval(() => {
@@ -129,7 +139,7 @@ export default function EpreuveMaths6eClient() {
     } catch {
       vus = [];
     }
-    const epreuve = tirerEpreuve(vus);
+    const epreuve = tirerEpreuve(config, vus);
     setQuestions(epreuve.questions);
     setIndex(0);
     setChoix(null);
@@ -161,8 +171,9 @@ export default function EpreuveMaths6eClient() {
   }
 
   const bilan = useMemo(
-    () => (etape === "bilan" ? construireBilan(questions, reponses) : []),
-    [etape, questions, reponses],
+    () =>
+      etape === "bilan" ? construireBilan(config, questions, reponses) : [],
+    [etape, config, questions, reponses],
   );
 
   const totalJustes = bilan.reduce((n, t) => n + t.justes, 0);
@@ -184,11 +195,11 @@ export default function EpreuveMaths6eClient() {
     }
 
     saveResultat(eleve, "evaluation_nationale", {
-      classe: "6e",
-      matiere: "maths",
+      classe: config.classe,
+      matiere: config.matiere,
       score: totalJustes,
       total: totalPosees,
-      duree_sec: DUREE_SECONDES - restant,
+      duree_sec: config.dureeSecondes - restant,
       chrono_ecoule: chronoEcoule,
       details: {
         themes: bilan.map((t) => ({
@@ -210,6 +221,7 @@ export default function EpreuveMaths6eClient() {
     totalPosees,
     restant,
     chronoEcoule,
+    config,
   ]);
 
   const question = questions[index];
@@ -232,7 +244,7 @@ export default function EpreuveMaths6eClient() {
 
             <header className="mt-3 border-b-4 border-double border-[#1d1c16] pb-5">
               <p className="text-[11px] font-black uppercase tracking-[0.18em] text-cyan-800">
-                🎓 Épreuve blanche · 6ᵉ · Mathématiques
+                🎓 Épreuve blanche · {classeLabel} · {config.matiereLabel}
               </p>
               <h1 className="mt-1 font-serif text-4xl font-black leading-none tracking-tight sm:text-5xl">
                 L&apos;évaluation nationale, en vrai
@@ -245,8 +257,12 @@ export default function EpreuveMaths6eClient() {
 
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
               {[
-                { chiffre: "50", unite: "minutes", quoi: "comme la vraie" },
-                { chiffre: String(NB_QUESTIONS), unite: "questions", quoi: "en 4 thèmes" },
+                { chiffre: String(dureeMinutes), unite: "minutes", quoi: "comme la vraie" },
+                {
+                  chiffre: String(NB_QUESTIONS),
+                  unite: "questions",
+                  quoi: `en ${config.themes.length} thèmes`,
+                },
                 { chiffre: "0", unite: "note", quoi: "un profil, pas un chiffre" },
               ].map((c) => (
                 <div key={c.unite} className="border-2 border-[#1d1c16] p-3 text-center">
@@ -261,10 +277,10 @@ export default function EpreuveMaths6eClient() {
 
             <section className="mt-6 border-t-2 border-[#1d1c16] pt-4">
               <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-                Les quatre thèmes
+                Les thèmes de l&apos;épreuve
               </p>
               <div className="mt-2 grid gap-x-8 gap-y-3 sm:grid-cols-2">
-                {THEMES.map((t) => (
+                {config.themes.map((t) => (
                   <div key={t.id} className="border-t border-[#1d1c16]/25 pt-2">
                     <p className="font-serif text-[15px] font-black leading-snug">
                       {t.label}
@@ -291,10 +307,13 @@ export default function EpreuveMaths6eClient() {
               </p>
             </div>
 
+            {/* LA CLASSE TESTÉE N'EST PAS LA SIENNE — c'est le point que les
+                élèves comprennent mal, et qui change tout à leur préparation. */}
             <p className="mt-5 text-sm font-medium leading-6 text-[#1d1c16]/70">
-              Les questions portent sur le programme de CM2 : l&apos;évaluation
-              de rentrée mesure ce que tu emportes du primaire, pas ce que tu
-              n&apos;as pas encore appris en 6ᵉ.
+              Les questions portent sur le programme de{" "}
+              {config.labelSource} : l&apos;évaluation de rentrée mesure ce que
+              tu emportes de l&apos;an dernier, pas ce que tu n&apos;as pas
+              encore appris en {classeLabel}.
             </p>
 
             <button
@@ -373,7 +392,7 @@ export default function EpreuveMaths6eClient() {
                   >
                     {indexPrise + 1 < PRISE_EN_MAIN.length
                       ? "Continuer →"
-                      : "Je suis prêt · démarrer les 50 minutes →"}
+                      : `Je suis prêt · démarrer les ${dureeMinutes} minutes →`}
                   </button>
                 </div>
               )}
@@ -600,7 +619,11 @@ export default function EpreuveMaths6eClient() {
                                   {m.notionLabel}
                                 </p>
                                 <Link
-                                  href={`/tutor-v4?classe=cm2&matiere=maths&notion=${encodeURIComponent(m.notionId)}&microId=${encodeURIComponent(m.microId)}&display=simple`}
+                                  href={routeRemediation(
+                                    config,
+                                    m.notionId,
+                                    m.microId,
+                                  )}
                                   className="text-xs font-black text-cyan-800 hover:underline"
                                 >
                                   S&apos;entraîner là-dessus →
@@ -625,10 +648,10 @@ export default function EpreuveMaths6eClient() {
                 Refaire · avec d&apos;autres questions →
               </button>
               <Link
-                href="/coach-ia/maths?classe=cm2"
+                href={`/coach-ia/${config.matiere}?classe=${config.classeSource}`}
                 className="inline-flex items-center gap-2 rounded-sm border-2 border-cyan-800 px-5 py-2.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
               >
-                Ouvrir le coach de CM2 →
+                Ouvrir le coach de {config.labelSource} →
               </Link>
             </div>
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import EpreuveMaths6eClient from "./EpreuveMaths6eClient";
+import Epreuve6eMathsClient from "./Epreuve6eMathsClient";
 
 export const metadata: Metadata = {
   title:
@@ -20,5 +20,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <EpreuveMaths6eClient />;
+  return <Epreuve6eMathsClient />;
 }
