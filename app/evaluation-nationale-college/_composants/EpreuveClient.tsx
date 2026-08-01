@@ -9,7 +9,9 @@ import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
 
 import {
+  GROUPES,
   construireBilan,
+  groupeDeMaitrise,
   nbQuestions as compterQuestions,
   routeRemediation,
   tirerEpreuve,
@@ -202,11 +204,15 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
       duree_sec: config.dureeSecondes - restant,
       chrono_ecoule: chronoEcoule,
       details: {
+        // Le groupe de maîtrise part en base avec le reste : c'est dans ces
+        // termes que le professeur lira sa classe, pas en pourcentages.
+        groupe: groupeDeMaitrise(totalJustes, totalPosees),
         themes: bilan.map((t) => ({
           id: t.themeId,
           label: t.themeLabel,
           justes: t.justes,
           total: t.total,
+          groupe: groupeDeMaitrise(t.justes, t.total),
         })),
         micros: bilan.flatMap((t) => t.micros),
       },
@@ -508,14 +514,38 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
             <p className="text-[11px] font-black uppercase tracking-[0.18em] text-cyan-800">
               Épreuve terminée
             </p>
+            {/* Le titre suit le résultat : annoncer « ce qui a coincé » à un
+                élève qui a bien réussi, c'est lui dire quelque chose de faux. */}
             <h1 className="mt-1 font-serif text-4xl font-black leading-none tracking-tight">
-              Voilà ce qui a coincé
+              {groupeDeMaitrise(totalJustes, totalPosees) === "satisfaisant"
+                ? "Voilà où tu en es"
+                : "Voilà ce qui a coincé"}
             </h1>
-            <p className="mt-3 text-sm font-medium leading-6 text-[#1d1c16]/70">
-              {totalJustes} bonnes réponses sur {totalPosees}. Ce n&apos;est pas
-              une note — c&apos;est une carte. Ce qui compte, c&apos;est la
-              colonne de droite.
-            </p>
+            {/* LE GROUPE DE MAÎTRISE D'ABORD, le décompte ensuite. C'est ce
+                que rend l'évaluation officielle, et dans ces mots-là. */}
+            {(() => {
+              const g = GROUPES[groupeDeMaitrise(totalJustes, totalPosees)];
+              return (
+                <div className="mt-4 border-y-2 border-[#1d1c16] py-3">
+                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                    Sur l&apos;ensemble de l&apos;épreuve
+                  </p>
+                  <p
+                    className={`mt-1 font-serif text-3xl font-black leading-none ${g.couleur}`}
+                  >
+                    {g.label}
+                  </p>
+                  <p className="mt-2 max-w-2xl text-sm font-medium leading-6 text-[#1d1c16]/70">
+                    {g.pourLeleve}
+                  </p>
+                  <p className="mt-2 text-xs font-medium text-[#1d1c16]/70">
+                    {totalJustes} bonnes réponses sur {totalPosees} — c&apos;est
+                    le décompte, pas une note. Ce qui sert, c&apos;est le détail
+                    ci-dessous.
+                  </p>
+                </div>
+              );
+            })()}
 
             {chronoEcoule && (
               <p className="mt-2 border-l-4 border-red-800 pl-3 text-sm font-medium leading-6 text-[#1d1c16]/70">
@@ -565,8 +595,15 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                       <p className="font-serif text-xl font-black leading-tight">
                         {t.themeLabel}
                       </p>
-                      <p className="font-serif text-2xl font-black leading-none text-cyan-800">
-                        {t.justes}/{t.total}
+                      <p className="flex items-baseline gap-3">
+                        <span
+                          className={`text-[11px] font-black uppercase tracking-[0.14em] ${GROUPES[groupeDeMaitrise(t.justes, t.total)].couleur}`}
+                        >
+                          {GROUPES[groupeDeMaitrise(t.justes, t.total)].label}
+                        </span>
+                        <span className="font-serif text-2xl font-black leading-none text-cyan-800">
+                          {t.justes}/{t.total}
+                        </span>
                       </p>
                     </div>
                     <div className="mt-2 h-2 w-full bg-[#1d1c16]/10">

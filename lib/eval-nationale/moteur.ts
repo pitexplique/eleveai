@@ -236,6 +236,58 @@ export type BilanMicro = {
   reussi: boolean;
 };
 
+// ─── Les groupes de maîtrise ──────────────────────────────────────────────────
+// LE VOCABULAIRE DE L'INSTITUTION, PAS LE NÔTRE (Frédéric, 01/08, document
+// éduscol à l'appui). L'évaluation nationale ne rend pas une note : elle range
+// dans trois groupes — « à besoins », « fragile », « satisfaisant » — et le
+// professeur reçoit sa classe dans ces termes-là. Parler la même langue que le
+// bilan officiel, c'est ce qui rend le nôtre lisible pour lui.
+//
+// LES SEUILS viennent du test d'automatismes de 6ᵉ, sur 30 questions :
+// 9 réponses ou moins → à besoins ; 10 à 17 → fragile ; 18 ou plus →
+// satisfaisant. Soit 30 % et 60 %, qu'on applique en proportion puisque nos
+// épreuves n'ont pas 30 questions.
+//
+// ET LE TON, SURTOUT. Les descriptions officielles disent ce que l'élève SAIT
+// FAIRE, y compris dans le groupe « à besoins » — « ils possèdent des
+// connaissances élémentaires, ils sont éventuellement capables de… ». Jamais
+// une liste d'échecs. On s'y tient : un élève seul devant son écran lit ce
+// bilan sans personne pour l'adoucir.
+
+export type GroupeMaitrise = "a_besoins" | "fragile" | "satisfaisant";
+
+export const GROUPES: Record<
+  GroupeMaitrise,
+  { label: string; pourLeleve: string; couleur: string }
+> = {
+  satisfaisant: {
+    label: "Satisfaisant",
+    pourLeleve:
+      "Ce que tu sais là-dessus te permet de continuer sereinement. Passe à la suite.",
+    couleur: "text-cyan-800",
+  },
+  fragile: {
+    label: "Fragile",
+    pourLeleve:
+      "Tu connais ces choses, elles ne sont pas encore sûres. Quelques passages et elles le seront.",
+    couleur: "text-amber-700",
+  },
+  a_besoins: {
+    label: "À besoins",
+    pourLeleve:
+      "Il y a des bases à reprendre ici, et ça se reprend très bien — mais pas tout seul en une fois. Commence par une compétence, celle du haut.",
+    couleur: "text-red-800",
+  },
+};
+
+export function groupeDeMaitrise(justes: number, total: number): GroupeMaitrise {
+  if (total === 0) return "a_besoins";
+  const pct = (justes / total) * 100;
+  if (pct >= 60) return "satisfaisant";
+  if (pct > 30) return "fragile";
+  return "a_besoins";
+}
+
 export type BilanTheme = {
   themeId: string;
   themeLabel: string;
