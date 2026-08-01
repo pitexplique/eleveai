@@ -53,6 +53,8 @@ const EPREUVES = [
       "L'espace et la géométrie",
       "Résoudre un problème",
     ],
+    // LIVRÉE (01/08) : l'épreuve blanche existe pour ce couple niveau/matière.
+    epreuve: "/evaluation-nationale-college/6e-maths",
     coach: "/coach-ia/maths?classe=6e",
     guide: "/guide-de-survie/maths-sixieme",
   },
@@ -140,26 +142,58 @@ export default function EvaluationNationaleCollegePage() {
                 ))}
               </ul>
 
-              <p className="mt-3 text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
-                L&apos;épreuve blanche arrive
-              </p>
-              <p className="mt-1 text-xs font-medium leading-5 text-[#1d1c16]/70">
-                En attendant, ce sont exactement les mêmes compétences :
-              </p>
-              <div className="mt-2 flex flex-col gap-1">
-                <Link
-                  href={e.coach}
-                  className="text-sm font-black text-cyan-800 hover:underline"
-                >
-                  ✏️ T&apos;entraîner en {e.matiere.toLowerCase()} {e.niveau} →
-                </Link>
-                <Link
-                  href={e.guide}
-                  className="text-sm font-black text-cyan-800 hover:underline"
-                >
-                  📗 Le guide de survie du niveau →
-                </Link>
-              </div>
+              {/* L'épreuve blanche quand elle existe, l'entraînement sinon —
+                  jamais une carte morte, jamais une promesse en vitrine. */}
+              {e.epreuve ? (
+                <>
+                  <p className="mt-3 text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
+                    L&apos;épreuve blanche est prête
+                  </p>
+                  <Link
+                    href={e.epreuve}
+                    className="mt-1 inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-4 py-2.5 text-sm font-black text-[#f0fafc] transition hover:bg-[#1d1c16]"
+                  >
+                    Passer l&apos;épreuve · 50 min →
+                  </Link>
+                  <div className="mt-2 flex flex-col gap-1">
+                    <Link
+                      href={e.coach}
+                      className="text-sm font-black text-cyan-800 hover:underline"
+                    >
+                      ✏️ Ou t&apos;entraîner sans chrono →
+                    </Link>
+                    <Link
+                      href={e.guide}
+                      className="text-sm font-black text-cyan-800 hover:underline"
+                    >
+                      📗 Le guide de survie du niveau →
+                    </Link>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className="mt-3 text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
+                    L&apos;épreuve blanche arrive
+                  </p>
+                  <p className="mt-1 text-xs font-medium leading-5 text-[#1d1c16]/70">
+                    En attendant, ce sont exactement les mêmes compétences :
+                  </p>
+                  <div className="mt-2 flex flex-col gap-1">
+                    <Link
+                      href={e.coach}
+                      className="text-sm font-black text-cyan-800 hover:underline"
+                    >
+                      ✏️ T&apos;entraîner en {e.matiere.toLowerCase()} {e.niveau} →
+                    </Link>
+                    <Link
+                      href={e.guide}
+                      className="text-sm font-black text-cyan-800 hover:underline"
+                    >
+                      📗 Le guide de survie du niveau →
+                    </Link>
+                  </div>
+                </>
+              )}
             </section>
           ))}
         </div>

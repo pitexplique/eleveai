@@ -1,0 +1,551 @@
+"use client";
+
+import Link from "next/link";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
+import { CanvasRenderer } from "@/lib/canvas";
+import { MarkdownMath } from "@/components/MarkdownMath";
+
+import {
+  DUREE_SECONDES,
+  NB_QUESTIONS,
+  THEMES,
+  construireBilan,
+  tirerEpreuve,
+  type QuestionEval,
+} from "@/lib/eval-nationale/6e-maths";
+
+const PAPER = "#f6f1e4";
+const INK = "#1d1c16";
+
+/** Les items déjà vus, pour que le deuxième passage soit vraiment neuf. */
+const CLE_DEJA_VUS = "eleveai_eval_nationale_6e_maths_vus";
+
+type Etape = "accueil" | "prise-en-main" | "epreuve" | "bilan";
+
+// ─── LA PRISE EN MAIN ─────────────────────────────────────────────────────────
+// La vraie évaluation commence par là (Frédéric) : avant de mesurer les maths,
+// on vérifie que l'élève sait se servir de la souris et choisir une réponse.
+// Un enfant qui perd des points parce qu'il n'a pas compris l'interface, on ne
+// mesure pas ses maths — on mesure son habitude de l'ordinateur.
+const PRISE_EN_MAIN = [
+  {
+    consigne: "Clique sur la bonne réponse, puis sur « Continuer ».",
+    question: "Quelle est la couleur du ciel par temps clair ?",
+    choices: ["Bleu", "Vert", "Rouge", "Marron"],
+    expected: "Bleu",
+    apprend: "Une seule réponse à la fois : cliquer sur une autre change ton choix.",
+  },
+  {
+    consigne: "Même chose. Regarde bien : ta réponse s'entoure quand elle est prise en compte.",
+    question: "Combien font 2 + 3 ?",
+    choices: ["5", "4", "6", "23"],
+    expected: "5",
+    apprend:
+      "Tant que tu n'as pas cliqué sur « Continuer », tu peux changer d'avis.",
+  },
+];
+
+function formatChrono(secondes: number) {
+  const m = Math.floor(secondes / 60);
+  const s = secondes % 60;
+  return `${m}:${String(s).padStart(2, "0")}`;
+}
+
+export default function EpreuveMaths6eClient() {
+  const [etape, setEtape] = useState<Etape>("accueil");
+
+  // Prise en main
+  const [indexPrise, setIndexPrise] = useState(0);
+  const [choixPrise, setChoixPrise] = useState<string | null>(null);
+
+  // Épreuve
+  const [questions, setQuestions] = useState<QuestionEval[]>([]);
+  const [index, setIndex] = useState(0);
+  const [choix, setChoix] = useState<string | null>(null);
+  const [reponses, setReponses] = useState<Record<number, string>>({});
+  const [restant, setRestant] = useState(DUREE_SECONDES);
+
+  const hautRef = useRef<HTMLDivElement | null>(null);
+
+  const terminer = useCallback(() => {
+    setEtape("bilan");
+    // On mémorise les items vus pour que le prochain passage soit neuf.
+    try {
+      const vus: string[] = JSON.parse(
+        localStorage.getItem(CLE_DEJA_VUS) ?? "[]",
+      );
+      const maj = [...vus, ...questions.map((q) => q.itemId)].slice(-1500);
+      localStorage.setItem(CLE_DEJA_VUS, JSON.stringify(maj));
+    } catch {
+      // Navigation privée : tant pis, on ne mémorise pas.
+    }
+  }, [questions]);
+
+  // Le chrono : 50 minutes, et à zéro l'épreuve se ferme d'elle-même.
+  useEffect(() => {
+    if (etape !== "epreuve") return;
+    const t = setInterval(() => {
+      setRestant((r) => {
+        if (r <= 1) {
+          clearInterval(t);
+          terminer();
+          return 0;
+        }
+        return r - 1;
+      });
+    }, 1000);
+    return () => clearInterval(t);
+  }, [etape, terminer]);
+
+  function commencerPriseEnMain() {
+    setEtape("prise-en-main");
+    setIndexPrise(0);
+    setChoixPrise(null);
+  }
+
+  function commencerEpreuve() {
+    // ⚠️ Le tirage utilise Math.random : il DOIT tourner après le montage,
+    // jamais au rendu, sinon le serveur et le navigateur ne tirent pas la
+    // même épreuve (erreur d'hydratation).
+    let vus: string[] = [];
+    try {
+      vus = JSON.parse(localStorage.getItem(CLE_DEJA_VUS) ?? "[]");
+    } catch {
+      vus = [];
+    }
+    const epreuve = tirerEpreuve(vus);
+    setQuestions(epreuve.questions);
+    setIndex(0);
+    setChoix(null);
+    setReponses({});
+    setRestant(epreuve.dureeSecondes);
+    setEtape("epreuve");
+  }
+
+  function validerEtContinuer() {
+    if (choix === null) return;
+    const suivant = { ...reponses, [index]: choix };
+    setReponses(suivant);
+    setChoix(null);
+
+    if (index + 1 >= questions.length) {
+      setEtape("bilan");
+      try {
+        const vus: string[] = JSON.parse(
+          localStorage.getItem(CLE_DEJA_VUS) ?? "[]",
+        );
+        localStorage.setItem(
+          CLE_DEJA_VUS,
+          JSON.stringify([...vus, ...questions.map((q) => q.itemId)].slice(-1500)),
+        );
+      } catch {
+        // rien
+      }
+      return;
+    }
+
+    setIndex((i) => i + 1);
+    hautRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  const bilan = useMemo(
+    () => (etape === "bilan" ? construireBilan(questions, reponses) : []),
+    [etape, questions, reponses],
+  );
+
+  const totalJustes = bilan.reduce((n, t) => n + t.justes, 0);
+  const totalPosees = bilan.reduce((n, t) => n + t.total, 0);
+
+  const question = questions[index];
+
+  return (
+    <main
+      className="min-h-screen px-4 pb-16 pt-8 sm:px-6 lg:px-8"
+      style={{ backgroundColor: PAPER, color: INK }}
+    >
+      <div ref={hautRef} className="mx-auto max-w-3xl">
+        {/* ══ ACCUEIL ══════════════════════════════════════════════════════ */}
+        {etape === "accueil" && (
+          <>
+            <Link
+              href="/evaluation-nationale-college"
+              className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55 hover:text-cyan-800"
+            >
+              ← Les évaluations du collège
+            </Link>
+
+            <header className="mt-3 border-b-4 border-double border-[#1d1c16] pb-5">
+              <p className="text-[11px] font-black uppercase tracking-[0.18em] text-cyan-800">
+                🎓 Épreuve blanche · 6ᵉ · Mathématiques
+              </p>
+              <h1 className="mt-1 font-serif text-4xl font-black leading-none tracking-tight sm:text-5xl">
+                L&apos;évaluation nationale, en vrai
+              </h1>
+              <p className="mt-3 text-sm font-medium leading-6 text-[#1d1c16]/70">
+                Même forme que le jour J : les questions défilent une par une,
+                on ne revient pas en arrière, et le temps court.
+              </p>
+            </header>
+
+            <div className="mt-5 grid gap-3 sm:grid-cols-3">
+              {[
+                { chiffre: "50", unite: "minutes", quoi: "comme la vraie" },
+                { chiffre: String(NB_QUESTIONS), unite: "questions", quoi: "en 4 thèmes" },
+                { chiffre: "0", unite: "note", quoi: "un profil, pas un chiffre" },
+              ].map((c) => (
+                <div key={c.unite} className="border-2 border-[#1d1c16] p-3 text-center">
+                  <p className="font-serif text-4xl font-black leading-none text-cyan-800">
+                    {c.chiffre}
+                  </p>
+                  <p className="mt-1 text-sm font-black">{c.unite}</p>
+                  <p className="text-xs font-medium text-[#1d1c16]/70">{c.quoi}</p>
+                </div>
+              ))}
+            </div>
+
+            <section className="mt-6 border-t-2 border-[#1d1c16] pt-4">
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                Les quatre thèmes
+              </p>
+              <div className="mt-2 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                {THEMES.map((t) => (
+                  <div key={t.id} className="border-t border-[#1d1c16]/25 pt-2">
+                    <p className="font-serif text-[15px] font-black leading-snug">
+                      {t.label}
+                    </p>
+                    <p className="mt-0.5 text-xs font-medium leading-5 text-[#1d1c16]/70">
+                      {t.quoi}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Ce que la vraie ne dit pas, et qui est la raison d'être de
+                celle-ci. */}
+            <div className="mt-6 border-2 border-[#1d1c16] bg-cyan-800/[0.05] p-4">
+              <p className="font-serif text-lg font-black leading-tight">
+                À la fin, tu sauras exactement ce qui a coincé
+              </p>
+              <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
+                Pas une note. Le nom de chaque compétence testée, celles que tu
+                tiens et celles à retravailler — et le lien pour t&apos;y
+                mettre tout de suite. La vraie épreuve, elle, ne te le dira
+                jamais.
+              </p>
+            </div>
+
+            <p className="mt-5 text-sm font-medium leading-6 text-[#1d1c16]/70">
+              Les questions portent sur le programme de CM2 : l&apos;évaluation
+              de rentrée mesure ce que tu emportes du primaire, pas ce que tu
+              n&apos;as pas encore appris en 6ᵉ.
+            </p>
+
+            <button
+              type="button"
+              onClick={commencerPriseEnMain}
+              className="mt-5 inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-6 py-3 text-sm font-black text-[#f0fafc] transition hover:bg-[#1d1c16]"
+            >
+              Commencer par la prise en main →
+            </button>
+          </>
+        )}
+
+        {/* ══ PRISE EN MAIN ════════════════════════════════════════════════ */}
+        {etape === "prise-en-main" && (
+          <>
+            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-cyan-800">
+              Prise en main · {indexPrise + 1} / {PRISE_EN_MAIN.length}
+            </p>
+            <h1 className="mt-1 font-serif text-3xl font-black leading-tight">
+              D&apos;abord, on vérifie que tu es à l&apos;aise
+            </h1>
+            <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/70">
+              Ces questions ne comptent pas. Elles servent à te montrer comment
+              répondre — c&apos;est exactement ce que fait la vraie évaluation
+              avant de commencer.
+            </p>
+
+            <div className="mt-5 border-2 border-[#1d1c16] p-4 sm:p-5">
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                {PRISE_EN_MAIN[indexPrise].consigne}
+              </p>
+              <p className="mt-2 font-serif text-2xl font-black leading-tight">
+                {PRISE_EN_MAIN[indexPrise].question}
+              </p>
+
+              <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                {PRISE_EN_MAIN[indexPrise].choices.map((c) => (
+                  <button
+                    key={c}
+                    type="button"
+                    onClick={() => setChoixPrise(c)}
+                    className={[
+                      "border-2 px-4 py-3 text-left text-sm font-black transition",
+                      choixPrise === c
+                        ? "border-cyan-800 bg-cyan-800 text-[#f0fafc]"
+                        : "border-[#1d1c16]/25 hover:border-[#1d1c16] hover:bg-[#1d1c16]/5",
+                    ].join(" ")}
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
+
+              {choixPrise !== null && (
+                <div className="mt-4 border-t border-[#1d1c16]/25 pt-3">
+                  <p className="text-sm font-black">
+                    {choixPrise === PRISE_EN_MAIN[indexPrise].expected
+                      ? "✅ C'est ça. Tu sais répondre."
+                      : "Ce n'était pas la bonne, mais peu importe : ici on apprend juste à cliquer."}
+                  </p>
+                  <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
+                    {PRISE_EN_MAIN[indexPrise].apprend}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (indexPrise + 1 < PRISE_EN_MAIN.length) {
+                        setIndexPrise((i) => i + 1);
+                        setChoixPrise(null);
+                      } else {
+                        setEtape("accueil");
+                        setTimeout(commencerEpreuve, 0);
+                      }
+                    }}
+                    className="mt-3 inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-5 py-2.5 text-sm font-black text-[#f0fafc] transition hover:bg-[#1d1c16]"
+                  >
+                    {indexPrise + 1 < PRISE_EN_MAIN.length
+                      ? "Continuer →"
+                      : "Je suis prêt · démarrer les 50 minutes →"}
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <div className="mt-5 border-l-4 border-red-800 pl-3">
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
+                À savoir avant de commencer
+              </p>
+              <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
+                Une fois l&apos;épreuve lancée, chaque question s&apos;en va
+                quand tu passes à la suivante :{" "}
+                <span className="font-black text-[#1d1c16]">
+                  on ne revient jamais en arrière
+                </span>
+                . C&apos;est la règle du jour J. Réfléchis avant de valider.
+              </p>
+            </div>
+          </>
+        )}
+
+        {/* ══ L'ÉPREUVE ════════════════════════════════════════════════════ */}
+        {etape === "epreuve" && question && (
+          <>
+            {/* La barre de tête : où on en est, et combien de temps il reste. */}
+            <div className="flex flex-wrap items-baseline justify-between gap-2 border-b-2 border-[#1d1c16] pb-2">
+              <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                Question {index + 1} / {questions.length}
+              </p>
+              <p
+                className={[
+                  "font-serif text-2xl font-black leading-none tabular-nums",
+                  restant <= 300 ? "text-red-800" : "text-cyan-800",
+                ].join(" ")}
+              >
+                {formatChrono(restant)}
+              </p>
+            </div>
+            <div className="h-1 w-full bg-[#1d1c16]/10">
+              <div
+                className="h-1 bg-cyan-800 transition-all duration-500"
+                style={{ width: `${((index + 1) / questions.length) * 100}%` }}
+              />
+            </div>
+
+            {/* La diapositive. `key` sur l'index : React remonte le bloc à
+                chaque question, ce qui rejoue l'animation de glissement vers
+                la droite — le mouvement de la vraie épreuve. */}
+            <div key={index} className="animate-[glisse_0.35s_ease-out]">
+              <style>{`@keyframes glisse { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: translateX(0); } }`}</style>
+
+              {/* NOTION ET MICRO-COMPÉTENCE APPARENTES (demande de Frédéric) :
+                  la vraie épreuve ne dit jamais ce qu'elle teste. Ici si. */}
+              <p className="mt-4 text-[10px] font-black uppercase tracking-[0.18em] text-cyan-800">
+                {question.themeLabel} · {question.notionLabel}
+              </p>
+              <p className="text-[11px] font-bold text-[#1d1c16]/70">
+                Compétence testée : {question.microLabel}
+              </p>
+
+              <MarkdownMath className="mt-3 whitespace-pre-line font-serif text-2xl font-black leading-snug">
+                {question.text}
+              </MarkdownMath>
+
+              {question.canvas && (
+                <div className="mt-4 border border-[#1d1c16]/25 bg-white p-3">
+                  <CanvasRenderer figure={question.canvas} />
+                </div>
+              )}
+
+              <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                {question.choices.map((c) => (
+                  <button
+                    key={c}
+                    type="button"
+                    onClick={() => setChoix(c)}
+                    className={[
+                      "border-2 px-4 py-3 text-left text-sm font-black transition",
+                      choix === c
+                        ? "border-cyan-800 bg-cyan-800 text-[#f0fafc]"
+                        : "border-[#1d1c16]/25 hover:border-[#1d1c16] hover:bg-[#1d1c16]/5",
+                    ].join(" ")}
+                  >
+                    <MarkdownMath className="inline">{c}</MarkdownMath>
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-5 flex flex-wrap items-center gap-3 border-t border-[#1d1c16]/25 pt-4">
+                <button
+                  type="button"
+                  onClick={validerEtContinuer}
+                  disabled={choix === null}
+                  className="inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-6 py-3 text-sm font-black text-[#f0fafc] transition hover:bg-[#1d1c16] disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  {index + 1 >= questions.length
+                    ? "Terminer l'épreuve →"
+                    : "Valider et continuer →"}
+                </button>
+                <p className="text-xs font-medium text-[#1d1c16]/70">
+                  {choix === null
+                    ? "Choisis une réponse pour continuer."
+                    : "Attention : on ne revient pas en arrière."}
+                </p>
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* ══ LE BILAN ═════════════════════════════════════════════════════ */}
+        {etape === "bilan" && (
+          <>
+            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-cyan-800">
+              Épreuve terminée
+            </p>
+            <h1 className="mt-1 font-serif text-4xl font-black leading-none tracking-tight">
+              Voilà ce qui a coincé
+            </h1>
+            <p className="mt-3 text-sm font-medium leading-6 text-[#1d1c16]/70">
+              {totalJustes} bonnes réponses sur {totalPosees}. Ce n&apos;est pas
+              une note — c&apos;est une carte. Ce qui compte, c&apos;est la
+              colonne de droite.
+            </p>
+
+            <div className="mt-6 space-y-5">
+              {bilan.map((t) => {
+                const rates = t.micros.filter((m) => !m.reussi);
+                const tenus = t.micros.filter((m) => m.reussi);
+                return (
+                  <section key={t.themeId} className="border-2 border-[#1d1c16] p-4">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <p className="font-serif text-xl font-black leading-tight">
+                        {t.themeLabel}
+                      </p>
+                      <p className="font-serif text-2xl font-black leading-none text-cyan-800">
+                        {t.justes}/{t.total}
+                      </p>
+                    </div>
+                    <div className="mt-2 h-2 w-full bg-[#1d1c16]/10">
+                      <div
+                        className="h-2 bg-cyan-800"
+                        style={{ width: `${(t.justes / t.total) * 100}%` }}
+                      />
+                    </div>
+
+                    <div className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-2">
+                      <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                          ✅ Tu tiens
+                        </p>
+                        {tenus.length === 0 ? (
+                          <p className="mt-1 text-xs font-medium italic text-[#1d1c16]/70">
+                            Rien sur ce thème cette fois — c&apos;est justement
+                            par là qu&apos;il faut reprendre.
+                          </p>
+                        ) : (
+                          <ul className="mt-1 space-y-1">
+                            {tenus.map((m, i) => (
+                              <li
+                                key={`${m.microId}-${i}`}
+                                className="text-xs font-medium leading-5 text-[#1d1c16]/70"
+                              >
+                                {m.microLabel}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+
+                      <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
+                          À retravailler
+                        </p>
+                        {rates.length === 0 ? (
+                          <p className="mt-1 text-xs font-medium italic text-[#1d1c16]/70">
+                            Rien à signaler. Le thème est solide.
+                          </p>
+                        ) : (
+                          <ul className="mt-1 space-y-2">
+                            {rates.map((m, i) => (
+                              <li key={`${m.microId}-${i}`}>
+                                <p className="text-xs font-black leading-5">
+                                  {m.microLabel}
+                                </p>
+                                <p className="text-[11px] font-medium text-[#1d1c16]/70">
+                                  {m.notionLabel}
+                                </p>
+                                <Link
+                                  href={`/tutor-v4?classe=cm2&matiere=maths&notion=${encodeURIComponent(m.notionId)}&microId=${encodeURIComponent(m.microId)}&display=simple`}
+                                  className="text-xs font-black text-cyan-800 hover:underline"
+                                >
+                                  S&apos;entraîner là-dessus →
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </div>
+                  </section>
+                );
+              })}
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-3 border-t-2 border-[#1d1c16] pt-4">
+              <button
+                type="button"
+                onClick={commencerEpreuve}
+                className="inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-5 py-2.5 text-sm font-black text-[#f0fafc] transition hover:bg-[#1d1c16]"
+              >
+                Refaire · avec d&apos;autres questions →
+              </button>
+              <Link
+                href="/coach-ia/maths?classe=cm2"
+                className="inline-flex items-center gap-2 rounded-sm border-2 border-cyan-800 px-5 py-2.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
+              >
+                Ouvrir le coach de CM2 →
+              </Link>
+            </div>
+
+            <p className="mt-4 text-xs font-medium italic leading-5 text-[#1d1c16]/70">
+              Les questions déjà tombées sont mises de côté : en refaisant
+              l&apos;épreuve, tu en auras d&apos;autres.
+            </p>
+          </>
+        )}
+      </div>
+    </main>
+  );
+}
