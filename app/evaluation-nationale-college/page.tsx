@@ -40,6 +40,9 @@ const EPREUVES = [
       "Le vocabulaire et la grammaire",
       "Lire à voix haute, sans buter",
     ],
+    // LIVRÉE (01/08) : l'épreuve pioche dans le programme de CM2. La fluence
+    // et la compréhension de l'oral n'y sont pas — c'est dit sur la page.
+    epreuve: "/evaluation-nationale-college/6e-francais",
     coach: "/coach-ia/francais?classe=6e",
     guide: "/guide-de-survie/francais-6e",
   },

@@ -39,6 +39,13 @@ export type ConfigEpreuve = {
   labelSource: string;
   matiereLabel: string;
   dureeSecondes: number;
+  /**
+   * Ce que notre épreuve NE couvre pas de l'épreuve officielle, dit à l'élève
+   * sur la page d'accueil. En français, la fluence n'est pas numérique et la
+   * compréhension de l'oral demande un support audio : taire ces deux
+   * domaines laisserait croire qu'on reproduit toute l'épreuve.
+   */
+  reserve?: string;
   themes: ThemeEval[];
   /** La banque où piocher — déjà transformée (zéro-clavier au primaire). */
   banque: TutorBankItemV4[];
@@ -248,35 +255,48 @@ export type BilanMicro = {
 // satisfaisant. Soit 30 % et 60 %, qu'on applique en proportion puisque nos
 // épreuves n'ont pas 30 questions.
 //
-// LE TON : ON GARDE LEURS GROUPES, PAS LEUR COUSSIN (Frédéric, 01/08).
+// LE TON : UN MIX, ET IL EST DÉLIBÉRÉ (Frédéric, 01/08).
+//
 // Les descriptions officielles enveloppent — jusqu'au groupe « à besoins »,
 // décrit par ce que l'élève « est éventuellement capable » de faire. Dit à un
 // enfant qui a 6 sur 20, ce n'est pas de la bienveillance : c'est du coussin,
-// ça ne lui apprend rien et il le sent. On dit donc l'état, puis le geste
-// suivant. Sans reproche, mais sans varnish : un élève qu'on informe peut
-// agir, un élève qu'on rassure reste où il est.
+// et il le sent. Frédéric : « bienveillance à la con ».
+//
+// Mais tout dire à sec ne vaut pas mieux : un enfant à qui l'on annonce « ce
+// n'est pas acquis » et rien d'autre ferme la page.
+//
+// D'où DEUX TEMPS, et la structure du code les tient séparés pour qu'on ne
+// puisse pas les confondre en les réécrivant :
+//   `constat` — ce qui est là, dit sans flatterie. C'est leur apport : on
+//               commence par ce que l'élève tient, pas par ce qui manque.
+//   `geste`   — ce qu'il fait maintenant, dit sans détour. C'est le nôtre :
+//               un élève qu'on informe peut agir, un élève qu'on rassure
+//               reste où il est.
 
 export type GroupeMaitrise = "a_besoins" | "fragile" | "satisfaisant";
 
 export const GROUPES: Record<
   GroupeMaitrise,
-  { label: string; pourLeleve: string; couleur: string }
+  { label: string; constat: string; geste: string; couleur: string }
 > = {
   satisfaisant: {
     label: "Satisfaisant",
-    pourLeleve: "C'est acquis. Passe à la suite.",
+    constat: "Ce que tu sais là-dessus tient.",
+    geste: "Passe à la suite : tu n'as rien à reprendre ici.",
     couleur: "text-cyan-800",
   },
   fragile: {
     label: "Fragile",
-    pourLeleve:
-      "Tu sais faire, mais pas à tous les coups. Ce qui manque, ce sont des passages — pas des explications.",
+    constat: "Tu sais faire — pas encore à tous les coups.",
+    geste:
+      "Ce qui manque, ce sont des passages, pas des explications. Reprends les compétences de droite, elles y sont presque.",
     couleur: "text-amber-700",
   },
   a_besoins: {
     label: "À besoins",
-    pourLeleve:
-      "Ce n'est pas acquis. Reprends par la première compétence de la liste ci-dessous : il n'y a pas de raccourci, et c'est la seule mauvaise nouvelle.",
+    constat: "Il y a des bases, elles ne portent pas encore ici.",
+    geste:
+      "Reprends par la première compétence de la liste, une seule à la fois. Il n'y a pas de raccourci — et c'est la seule mauvaise nouvelle.",
     couleur: "text-red-800",
   },
 };

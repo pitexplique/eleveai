@@ -1,0 +1,80 @@
+// ÉPREUVE BLANCHE — évaluation nationale de 6ᵉ, français.
+//
+// LE CONTENU EST DU CM2, comme en maths et pour la même raison : l'évaluation
+// de rentrée mesure ce que l'élève emporte du primaire.
+//
+// LES THÈMES SUIVENT LES DOMAINES OFFICIELS (document éduscol de septembre
+// 2025, « Évaluation nationale — classe de sixième — Français ») :
+//   compréhension de l'écrit · étude de la langue (lexique, grammaire,
+//   orthographe) · compréhension de l'oral · fluence.
+// Le découpage réel de l'épreuve officielle : 10 items sur un texte
+// littéraire, 9 sur un document composite, 15 de lexique, 9 de grammaire,
+// 9 d'orthographe, 8 de compréhension de l'oral — 60 items en 50 minutes.
+//
+// CE QU'ON NE FAIT PAS, ET POURQUOI :
+//   - la FLUENCE est hors de portée : elle n'est pas numérique, c'est une
+//     minute de lecture à voix haute en tête-à-tête avec un professeur ;
+//   - la COMPRÉHENSION DE L'ORAL demande un support audio. C'est faisable —
+//     la dictée du jour a déjà sa synthèse vocale — mais ce sera un autre
+//     chantier, pas un thème qu'on bricole.
+// On ne promet donc que les deux domaines qu'on couvre vraiment, et on le
+// dit à l'élève sur la page.
+//
+// Vivier vérifié avant d'écrire ceci (npx tsx scripts/auditer-banque-runtime.ts
+// cm2 --epreuve --variete) : 50 micro-compétences couvertes à 100 %, 1613
+// énoncés distincts, et 100 % des items exploitables en questions fermées —
+// ce que l'épreuve exige, puisque l'évaluation nationale ne pose que des
+// questions fermées où « seule l'action de cliquer est autorisée ».
+
+import { francaisCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/francais";
+import { buildKnowledgeCm2Francais } from "@/lib/tutor-v4/knowledge/francais/cm2/buildKnowledgeCm2Francais";
+import type { ConfigEpreuve, ThemeEval } from "./moteur";
+
+const knowledge = buildKnowledgeCm2Francais();
+
+const THEMES: ThemeEval[] = [
+  {
+    id: "ecrit",
+    label: "Comprendre ce qu'on lit",
+    quoi: "Textes, documents, images — et les œuvres qu'on a lues.",
+    notions: ["comprehension_textes_documents", "lecture_oeuvres"],
+    nbQuestions: 5,
+  },
+  {
+    id: "lexique",
+    label: "Le lexique",
+    quoi: "Le sens des mots, leurs nuances, et comment ils s'écrivent.",
+    notions: ["vocabulaire"],
+    nbQuestions: 5,
+  },
+  {
+    id: "grammaire",
+    label: "La phrase et les accords",
+    quoi: "Constituants de la phrase simple, phrase complexe, accords et homophones.",
+    notions: ["grammaire_orthographe", "phrase_complexe"],
+    nbQuestions: 5,
+  },
+  {
+    id: "conjugaison",
+    label: "Les verbes : temps et valeurs",
+    quoi: "Conjuguer, mais surtout savoir ce qu'un temps veut dire.",
+    notions: ["conjugaison"],
+    nbQuestions: 5,
+  },
+];
+
+export const CONFIG_6E_FRANCAIS: ConfigEpreuve = {
+  slug: "6e-francais",
+  classe: "6e",
+  matiere: "francais",
+  classeSource: "cm2",
+  labelSource: "le CM2",
+  matiereLabel: "Français",
+  dureeSecondes: 50 * 60,
+  reserve:
+    "L'épreuve officielle comporte deux choses qu'on ne peut pas reproduire ici : la fluence, qui se passe à voix haute avec un professeur, et la compréhension de l'oral, qui demande d'écouter un enregistrement. Elles viendront.",
+  themes: THEMES,
+  banque: francaisCm2QuestionBank,
+  labelsNotion: new Map(knowledge.notions.map((n) => [n.id, n.label])),
+  labelsMicro: new Map(knowledge.microSkills.map((m) => [m.id, m.label])),
+};

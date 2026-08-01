@@ -322,6 +322,15 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
               encore appris en {classeLabel}.
             </p>
 
+            {/* CE QU'ON NE COUVRE PAS, dit avant de commencer. Taire les
+                domaines manquants laisserait croire qu'on reproduit toute
+                l'épreuve — on ne promet que ce qui existe. */}
+            {config.reserve && (
+              <p className="mt-3 border-l-4 border-[#1d1c16]/25 pl-3 text-sm font-medium leading-6 text-[#1d1c16]/70">
+                {config.reserve}
+              </p>
+            )}
+
             <button
               type="button"
               onClick={commencerPriseEnMain}
@@ -535,8 +544,12 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                   >
                     {g.label}
                   </p>
+                  {/* Deux temps : ce qui est là, puis ce qu'on fait. */}
                   <p className="mt-2 max-w-2xl text-sm font-medium leading-6 text-[#1d1c16]/70">
-                    {g.pourLeleve}
+                    {g.constat}
+                  </p>
+                  <p className="mt-1 max-w-2xl text-sm font-black leading-6">
+                    {g.geste}
                   </p>
                   <p className="mt-2 text-xs font-medium text-[#1d1c16]/70">
                     {totalJustes} bonnes réponses sur {totalPosees} — c&apos;est
