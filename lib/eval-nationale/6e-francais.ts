@@ -28,6 +28,7 @@
 
 import { francaisCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/francais";
 import { buildKnowledgeCm2Francais } from "@/lib/tutor-v4/knowledge/francais/cm2/buildKnowledgeCm2Francais";
+import { SUPPORTS_CM2 } from "./supports";
 import type { ConfigEpreuve, ThemeEval } from "./moteur";
 
 const knowledge = buildKnowledgeCm2Francais();
@@ -39,6 +40,9 @@ const THEMES: ThemeEval[] = [
     quoi: "Textes, documents, images — et les œuvres qu'on a lues.",
     notions: ["comprehension_textes_documents", "lecture_oeuvres"],
     nbQuestions: 5,
+    // Un texte entier et cinq questions dessus, comme la vraie épreuve. Les
+    // notions ci-dessus ne servent que si tous les supports ont déjà servi.
+    supports: SUPPORTS_CM2,
   },
   {
     id: "lexique",

@@ -15,6 +15,7 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import type { CanvasFigure } from "@/lib/tutor-v4/types_canvas";
+import type { SupportTexte } from "./supports";
 
 export type ThemeEval = {
   id: string;
@@ -24,6 +25,16 @@ export type ThemeEval = {
   /** Notions de la banque source qui l'alimentent. */
   notions: string[];
   nbQuestions: number;
+  /**
+   * TEXTES SUPPORTS — pour les thèmes de compréhension de l'écrit. Quand un
+   * thème en a, l'épreuve tire UN support et pose SES questions à la suite,
+   * le texte restant affiché. C'est ainsi que procède l'évaluation officielle
+   * (dix questions sur un même texte littéraire), et c'est la seule façon de
+   * tester la compréhension d'un texte plutôt que celle d'une phrase.
+   * Les notions ci-dessus servent alors de secours, si tous les supports ont
+   * déjà été vus.
+   */
+  supports?: SupportTexte[];
 };
 
 export type ConfigEpreuve = {
@@ -95,6 +106,14 @@ export type QuestionEval = {
   expected: string[];
   explanation?: string;
   canvas?: CanvasFigure;
+  /** Le texte à lire, affiché au-dessus de la question et gardé pendant toute
+   *  la série tirée sur ce support. */
+  support?: {
+    kicker: string;
+    titre: string;
+    source: string;
+    texte: string;
+  };
 };
 
 export type EpreuveEval = {
@@ -177,6 +196,50 @@ function tirerTheme(
   dejaVus: Set<string>,
   textesDuTirage: Set<string>,
 ): QuestionEval[] {
+  // ── LE THÈME EST PORTÉ PAR UN TEXTE ─────────────────────────────────────
+  // On choisit d'abord un support dont l'élève n'a pas déjà vu les questions.
+  // Si tous ont servi, on retombe sur le tirage ordinaire dans les notions :
+  // mieux vaut une question isolée qu'un texte relu par cœur.
+  if (theme.supports?.length) {
+    const dispos = melanger(theme.supports).sort((a, b) => {
+      const vus = (s: SupportTexte) =>
+        s.questions.filter((q) => dejaVus.has(empreinte(q.text))).length;
+      return vus(a) - vus(b);
+    });
+    const support = dispos[0];
+    const neuves = support.questions.filter(
+      (q) => !dejaVus.has(empreinte(q.text)),
+    );
+
+    if (neuves.length >= theme.nbQuestions) {
+      return melanger(neuves)
+        .slice(0, theme.nbQuestions)
+        .map((q) => {
+          textesDuTirage.add(q.text);
+          return {
+            cle: empreinte(q.text),
+            itemId: `${support.id}_${q.microId}`,
+            themeId: theme.id,
+            themeLabel: theme.label,
+            notionId: q.notionId,
+            notionLabel: config.labelsNotion.get(q.notionId) ?? q.notionId,
+            microId: q.microId,
+            microLabel: config.labelsMicro.get(q.microId) ?? q.microId,
+            text: q.text,
+            choices: melanger(q.choices),
+            expected: [q.expected],
+            explanation: q.explanation,
+            support: {
+              kicker: support.kicker,
+              titre: support.titre,
+              source: support.source,
+              texte: support.texte,
+            },
+          };
+        });
+    }
+  }
+
   // AUCUN PRÉ-FILTRE SUR L'ID : on ne peut juger qu'après génération, puisque
   // « déjà vu » porte désormais sur l'énoncé et non sur l'item.
   const parNotion = melanger(theme.notions).map((notionId) =>

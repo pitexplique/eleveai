@@ -24,6 +24,7 @@
 
 import { francais5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/francais";
 import { buildKnowledge5eFrancais } from "@/lib/tutor-v4/knowledge/francais/5e/buildKnowledge5eFrancais";
+import { SUPPORTS_5E } from "./supports";
 import type { ConfigEpreuve, ThemeEval } from "./moteur";
 
 const knowledge = buildKnowledge5eFrancais();
@@ -35,6 +36,7 @@ const THEMES: ThemeEval[] = [
     quoi: "Interpréter un texte, l'apprécier, et le relier à ce qu'on a lu.",
     notions: ["lecture_comprehension", "culture_litteraire"],
     nbQuestions: 5,
+    supports: SUPPORTS_5E,
   },
   {
     id: "lexique",

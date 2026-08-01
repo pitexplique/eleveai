@@ -470,6 +470,29 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                 Compétence testée : {question.microLabel}
               </p>
 
+              {/* LE TEXTE SUPPORT, quand la question en dépend. Il reste
+                  affiché pendant toute la série tirée dessus — l'épreuve
+                  officielle laisse le texte sous les yeux, on ne teste pas la
+                  mémoire mais la lecture. Hauteur bornée avec défilement
+                  propre : sur téléphone, un texte de 200 mots repousserait
+                  les propositions hors de l'écran. */}
+              {question.support && (
+                <figure className="mt-3 border-2 border-[#1d1c16] bg-[#1d1c16]/[0.03] p-4">
+                  <figcaption className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                    {question.support.kicker}
+                  </figcaption>
+                  <p className="mt-1 font-serif text-lg font-black leading-tight">
+                    {question.support.titre}
+                  </p>
+                  <div className="mt-2 max-h-[42vh] overflow-y-auto whitespace-pre-line font-serif text-[15px] leading-7">
+                    {question.support.texte}
+                  </div>
+                  <p className="mt-2 border-t border-[#1d1c16]/25 pt-1.5 text-[11px] font-medium italic text-[#1d1c16]/55">
+                    {question.support.source}
+                  </p>
+                </figure>
+              )}
+
               <MarkdownMath className="mt-3 whitespace-pre-line font-serif text-2xl font-black leading-snug">
                 {question.text}
               </MarkdownMath>
