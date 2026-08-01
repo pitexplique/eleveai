@@ -28,7 +28,7 @@
 
 import { francaisCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/francais";
 import { buildKnowledgeCm2Francais } from "@/lib/tutor-v4/knowledge/francais/cm2/buildKnowledgeCm2Francais";
-import { SUPPORTS_CM2 } from "./supports";
+import { SUPPORTS_CM2, SUPPORTS_ORAL_CM2 } from "./supports";
 import type { ConfigEpreuve, ThemeEval } from "./moteur";
 
 const knowledge = buildKnowledgeCm2Francais();
@@ -65,6 +65,16 @@ const THEMES: ThemeEval[] = [
     notions: ["conjugaison"],
     nbQuestions: 5,
   },
+  // Le quatrième domaine de l'épreuve officielle : on écoute, le texte ne
+  // s'affiche pas, on répond de mémoire.
+  {
+    id: "oral",
+    label: "Comprendre ce qu'on écoute",
+    quoi: "Un enregistrement, deux écoutes, et rien sous les yeux.",
+    notions: ["oral"],
+    nbQuestions: 5,
+    supports: SUPPORTS_ORAL_CM2,
+  },
 ];
 
 export const CONFIG_6E_FRANCAIS: ConfigEpreuve = {
@@ -76,7 +86,7 @@ export const CONFIG_6E_FRANCAIS: ConfigEpreuve = {
   matiereLabel: "Français",
   dureeSecondes: 50 * 60,
   reserve:
-    "L'épreuve officielle comporte deux choses qu'on ne peut pas reproduire ici : la fluence, qui se passe à voix haute avec un professeur, et la compréhension de l'oral, qui demande d'écouter un enregistrement. Elles viendront.",
+    "Une seule chose de l'épreuve officielle manque ici : la fluence, qui se passe à voix haute, en tête à tête avec un professeur — un ordinateur ne peut pas l'évaluer. La compréhension de l'oral, elle, y est : prévois des écouteurs ou une pièce calme.",
   themes: THEMES,
   banque: francaisCm2QuestionBank,
   labelsNotion: new Map(knowledge.notions.map((n) => [n.id, n.label])),

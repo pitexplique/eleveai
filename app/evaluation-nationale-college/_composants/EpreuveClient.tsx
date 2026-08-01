@@ -234,6 +234,41 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
 
   const question = questions[index];
 
+  // ─── L'ÉCOUTE DES SUPPORTS ORAUX ────────────────────────────────────────
+  // Le compteur suit le SUPPORT, pas la question : les cinq questions d'un
+  // même enregistrement partagent les mêmes écoutes. On repart à zéro quand
+  // l'épreuve change de support.
+  const supportOral = question?.support?.oral ? question.support : null;
+  const [ecoutesFaites, setEcoutesFaites] = useState(0);
+  const [supportEcoute, setSupportEcoute] = useState<string | null>(null);
+  const [sansVoix, setSansVoix] = useState(false);
+
+  useEffect(() => {
+    if (!supportOral) return;
+    if (supportEcoute !== supportOral.titre) {
+      setSupportEcoute(supportOral.titre);
+      setEcoutesFaites(0);
+    }
+  }, [supportOral, supportEcoute]);
+
+  const ecoutesRestantes = supportOral
+    ? Math.max(0, (supportOral.oral?.ecoutes ?? 0) - ecoutesFaites)
+    : 0;
+
+  function ecouter() {
+    if (!supportOral || ecoutesRestantes <= 0) return;
+    if (typeof window === "undefined" || !window.speechSynthesis) {
+      setSansVoix(true);
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(supportOral.texte);
+    u.lang = "fr-FR";
+    u.rate = 0.95; // débit d'une émission, pas d'une dictée
+    window.speechSynthesis.speak(u);
+    setEcoutesFaites((n) => n + 1);
+  }
+
   return (
     <main
       className="min-h-screen px-4 pb-16 pt-8 sm:px-6 lg:px-8"
@@ -476,7 +511,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                   mémoire mais la lecture. Hauteur bornée avec défilement
                   propre : sur téléphone, un texte de 200 mots repousserait
                   les propositions hors de l'écran. */}
-              {question.support && (
+              {question.support && !question.support.oral && (
                 <figure className="mt-3 border-2 border-[#1d1c16] bg-[#1d1c16]/[0.03] p-4">
                   <figcaption className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                     {question.support.kicker}
@@ -491,6 +526,48 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                     {question.support.source}
                   </p>
                 </figure>
+              )}
+
+              {/* LE SUPPORT ORAL — on N'AFFICHE PAS le texte : c'est tout
+                  l'objet du domaine. L'élève écoute, puis répond de mémoire,
+                  avec un nombre d'écoutes limité comme le jour J. Le compteur
+                  vaut pour les cinq questions du même enregistrement : il ne
+                  se remet à zéro qu'en changeant de support. */}
+              {question.support?.oral && (
+                <div className="mt-3 border-2 border-cyan-800 bg-cyan-800/[0.05] p-4">
+                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-800">
+                    {question.support.kicker}
+                  </p>
+                  <p className="mt-1 font-serif text-lg font-black leading-tight">
+                    🎧 {question.support.titre}
+                  </p>
+                  <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
+                    Écoute bien : le texte ne s&apos;affiche pas. Tu réponds
+                    ensuite de mémoire, comme le jour J.
+                  </p>
+                  <div className="mt-3 flex flex-wrap items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={ecouter}
+                      disabled={ecoutesRestantes <= 0}
+                      className="inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-5 py-2.5 text-sm font-black text-[#f0fafc] transition hover:bg-[#1d1c16] disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      🔊 Écouter l&apos;enregistrement
+                    </button>
+                    <p className="text-xs font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
+                      {ecoutesRestantes > 0
+                        ? `${ecoutesRestantes} écoute${ecoutesRestantes > 1 ? "s" : ""} restante${ecoutesRestantes > 1 ? "s" : ""}`
+                        : "Plus d'écoute disponible"}
+                    </p>
+                  </div>
+                  {sansVoix && (
+                    <p className="mt-2 border-l-4 border-red-800 pl-3 text-sm font-medium leading-6 text-[#1d1c16]/70">
+                      Ton navigateur ne sait pas lire à voix haute : ces
+                      questions ne peuvent pas être posées correctement chez
+                      toi. Réponds au mieux, elles compteront à part.
+                    </p>
+                  )}
+                </div>
               )}
 
               <MarkdownMath className="mt-3 whitespace-pre-line font-serif text-2xl font-black leading-snug">

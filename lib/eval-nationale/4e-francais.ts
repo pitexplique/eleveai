@@ -24,7 +24,7 @@
 
 import { francais5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/francais";
 import { buildKnowledge5eFrancais } from "@/lib/tutor-v4/knowledge/francais/5e/buildKnowledge5eFrancais";
-import { SUPPORTS_5E } from "./supports";
+import { SUPPORTS_5E, SUPPORTS_ORAL_5E } from "./supports";
 import type { ConfigEpreuve, ThemeEval } from "./moteur";
 
 const knowledge = buildKnowledge5eFrancais();
@@ -59,6 +59,14 @@ const THEMES: ThemeEval[] = [
     notions: ["analyse_discours", "conjugaison"],
     nbQuestions: 5,
   },
+  {
+    id: "oral",
+    label: "Comprendre ce qu'on écoute",
+    quoi: "Un enregistrement, deux écoutes, et rien sous les yeux.",
+    notions: ["oral"],
+    nbQuestions: 5,
+    supports: SUPPORTS_ORAL_5E,
+  },
 ];
 
 export const CONFIG_4E_FRANCAIS: ConfigEpreuve = {
@@ -70,7 +78,7 @@ export const CONFIG_4E_FRANCAIS: ConfigEpreuve = {
   matiereLabel: "Français",
   dureeSecondes: 50 * 60,
   reserve:
-    "L'épreuve officielle comporte deux choses qu'on ne peut pas reproduire ici : la fluence, qui se passe à voix haute avec un professeur, et la compréhension de l'oral, qui demande d'écouter un enregistrement. Elles viendront.",
+    "Une seule chose de l'épreuve officielle manque ici : la fluence, qui se passe à voix haute, en tête à tête avec un professeur — un ordinateur ne peut pas l'évaluer. La compréhension de l'oral, elle, y est : prévois des écouteurs ou une pièce calme.",
   themes: THEMES,
   banque: francais5eQuestionBank,
   labelsNotion: new Map(knowledge.notions.map((n) => [n.id, n.label])),

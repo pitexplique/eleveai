@@ -113,6 +113,8 @@ export type QuestionEval = {
     titre: string;
     source: string;
     texte: string;
+    /** Présent = support ORAL : le texte se joue, il ne s'affiche pas. */
+    oral?: { ecoutes: number };
   };
 };
 
@@ -234,10 +236,20 @@ function tirerTheme(
               titre: support.titre,
               source: support.source,
               texte: support.texte,
+              oral: support.oral,
             },
           };
         });
     }
+
+    // ⚠️ PAS DE REPLI POUR L'ORAL. Quand un thème visuel a épuisé ses textes,
+    // retomber sur la banque reste honnête : ce sont des questions de lecture.
+    // Pour l'oral, non — la banque contient des questions SUR la pratique de
+    // l'oral, qu'on lit à l'écran. Les servir sous un thème intitulé
+    // « Comprendre ce qu'on écoute », sans rien à écouter, serait un mensonge
+    // d'étiquette. Le thème disparaît alors de l'épreuve, et le bilan avec
+    // (il ne garde que les thèmes qui ont des questions).
+    if (theme.supports.some((s) => s.oral)) return [];
   }
 
   // AUCUN PRÉ-FILTRE SUR L'ID : on ne peut juger qu'après génération, puisque

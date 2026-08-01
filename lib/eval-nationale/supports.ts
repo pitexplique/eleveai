@@ -35,6 +35,14 @@ export type SupportTexte = {
   source: string;
   texte: string;
   questions: QuestionSupport[];
+  /**
+   * SUPPORT ORAL. Quand il est présent, le texte n'est PAS affiché : il est lu
+   * à voix haute par la synthèse vocale, et l'élève répond de mémoire. C'est
+   * le domaine « compréhension de l'oral » de l'épreuve officielle — 8 items
+   * en 6ᵉ sur une émission de France Inter, 9 en 4ᵉ sur France Info — avec
+   * une réécoute LIMITÉE, que `ecoutes` reproduit.
+   */
+  oral?: { ecoutes: number };
 };
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -445,9 +453,204 @@ DOCUMENT 3 — Témoignage
   ],
 };
 
-// Le récit d'abord, le document ensuite : c'est l'ordre de l'épreuve
-// officielle, et le tirage choisit celui dont l'élève a vu le moins de
-// questions.
+// ══════════════════════════════════════════════════════════════════════════
+// LES SUPPORTS ORAUX
+//
+// Le quatrième domaine de l'épreuve officielle, et le dernier qui nous
+// manquait : la COMPRÉHENSION DE L'ORAL. En 6ᵉ, huit items sur un extrait des
+// « Petits Bateaux » (France Inter) ; en 4ᵉ, neuf sur « Le vrai du faux »
+// (France Info). Dans les deux cas un enregistrement, une réécoute limitée,
+// et des questions auxquelles on répond DE MÉMOIRE.
+//
+// Chez nous, la voix est celle du navigateur — la même mécanique que la
+// dictée du jour, donc aucun mp3 à produire et aucune voix à payer. Les
+// textes sont écrits pour être ENTENDUS : phrases courtes, information
+// répétée autrement, aucun chiffre à retenir sans qu'il soit annoncé. Un
+// texte fait pour l'œil, lu à voix haute, perd son lecteur en dix secondes.
+//
+// Ce sont les seules questions de l'épreuve où l'élève n'a rien sous les
+// yeux. C'est exactement ce qu'on veut mesurer.
+
+const ORAL_LA_PEUR_CM2: SupportTexte = {
+  id: "cm2_oral_peur",
+  kicker: "Compréhension de l'oral",
+  titre: "Pourquoi on a peur ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Aujourd'hui, une question posée par Naïla, neuf ans : pourquoi est-ce qu'on a peur ?
+
+La peur, c'est d'abord une alarme. Quand ton cerveau repère un danger, il déclenche tout un signal : ton cœur bat plus vite, tes muscles se tendent, tu respires plus court. Tout ça sert à une chose — te préparer à fuir, ou à te défendre. C'est utile. Sans la peur, nos ancêtres n'auraient pas survécu longtemps.
+
+Le problème, c'est que cette alarme se déclenche parfois pour rien. Devant un exposé à faire en classe, il n'y a aucun danger réel. Et pourtant le corps réagit exactement pareil : le cœur s'emballe, les mains deviennent moites.
+
+Alors que faire ? Les spécialistes disent tous la même chose : ce qui calme la peur, ce n'est pas de l'éviter, c'est d'y aller petit à petit. Plus on affronte ce qui fait peur, moins l'alarme se déclenche fort la fois suivante.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Qui a posé la question au début de l'émission ?",
+      choices: [
+        "Naïla, une enfant de neuf ans",
+        "un médecin",
+        "le présentateur lui-même",
+        "un professeur de collège",
+      ],
+      expected: "Naïla, une enfant de neuf ans",
+      explanation:
+        "L'information est donnée dans la toute première phrase. À l'oral, le début porte souvent l'essentiel : c'est là qu'il faut être le plus attentif.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "D'après ce que tu as entendu, à quoi sert la peur ?",
+      choices: [
+        "à préparer le corps à fuir ou à se défendre",
+        "à rendre le cœur plus solide",
+        "à empêcher de dormir",
+        "à faire travailler la mémoire",
+      ],
+      expected: "à préparer le corps à fuir ou à se défendre",
+      explanation:
+        "Le texte le dit clairement : « Tout ça sert à une chose — te préparer à fuir, ou à te défendre. » Le tiret annonce l'explication.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_reformuler",
+      text: "Comment reformulerais-tu l'idée principale de ce passage ?",
+      choices: [
+        "La peur est une alarme utile, qui se déclenche parfois sans vrai danger.",
+        "La peur est une maladie qu'il faut soigner.",
+        "Il faut éviter tout ce qui fait peur.",
+        "Les enfants ont plus peur que les adultes.",
+      ],
+      expected:
+        "La peur est une alarme utile, qui se déclenche parfois sans vrai danger.",
+      explanation:
+        "Reformuler, c'est dire la même chose autrement et plus court. Les deux temps du texte — l'alarme utile, puis l'alarme qui se trompe — tiennent tous les deux dans cette phrase.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Quel exemple de peur sans danger réel a été donné ?",
+      choices: [
+        "faire un exposé devant la classe",
+        "traverser une rue",
+        "rencontrer un chien",
+        "dormir dans le noir",
+      ],
+      expected: "faire un exposé devant la classe",
+      explanation:
+        "C'était le seul exemple donné, et il vient juste après « cette alarme se déclenche parfois pour rien ». Repérer où tombe un exemple aide à le retenir.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_argumenter",
+      text: "Quel conseil donnent les spécialistes, d'après l'émission ?",
+      choices: [
+        "affronter petit à petit ce qui fait peur",
+        "éviter complètement ce qui fait peur",
+        "en parler à personne",
+        "attendre que la peur passe toute seule",
+      ],
+      expected: "affronter petit à petit ce qui fait peur",
+      explanation:
+        "Le texte oppose les deux : « ce n'est pas de l'éviter, c'est d'y aller petit à petit ». Quand on entend « ce n'est pas… c'est… », la bonne réponse est toujours dans la seconde partie.",
+    },
+  ],
+};
+
+const ORAL_VRAI_FAUX_5E: SupportTexte = {
+  id: "5e_oral_vrai_faux",
+  kicker: "Compréhension de l'oral",
+  titre: "Comment vérifier une information ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Une image circule depuis hier sur les réseaux : un requin qui nagerait dans une rue inondée, après le passage d'une tempête. Elle a été partagée des milliers de fois. Est-elle vraie ?
+
+Première chose à faire : regarder d'où elle vient. Ici, aucun compte sérieux ne la publie — que des partages de partages. C'est déjà un mauvais signe. Une information vérifiée remonte toujours à une source qu'on peut nommer.
+
+Deuxième réflexe : chercher l'image elle-même. En quelques secondes, on retrouve la même photo, publiée il y a douze ans, après une tout autre tempête, et déjà démentie à l'époque. Ce n'est donc pas un faux tout neuf : c'est un vieux faux qui ressort.
+
+Et c'est là le point important. Une image peut être authentique et raconter quand même quelque chose de faux, simplement parce qu'on l'a sortie de son époque et de son lieu. Ce n'est pas la photo qui ment. C'est la légende qu'on lui colle.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Que montre l'image dont il est question ?",
+      choices: [
+        "un requin dans une rue inondée",
+        "une tempête vue du ciel",
+        "une rue détruite par un cyclone",
+        "un bateau échoué sur une plage",
+      ],
+      expected: "un requin dans une rue inondée",
+      explanation:
+        "L'information est donnée dès la première phrase. À l'oral, l'annonce du sujet arrive presque toujours en ouverture.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Quel est le premier réflexe conseillé ?",
+      choices: [
+        "regarder d'où vient l'image",
+        "compter les partages",
+        "demander l'avis de ses amis",
+        "agrandir l'image pour voir les détails",
+      ],
+      expected: "regarder d'où vient l'image",
+      explanation:
+        "Le texte annonce ses étapes : « Première chose à faire… », puis « Deuxième réflexe… ». Ces mots servent de repères quand on écoute.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Qu'a-t-on découvert en cherchant l'image ?",
+      choices: [
+        "elle avait déjà été publiée douze ans plus tôt, après une autre tempête",
+        "elle avait été fabriquée par ordinateur",
+        "elle venait d'un film",
+        "elle avait été prise le matin même"
+      ],
+      expected:
+        "elle avait déjà été publiée douze ans plus tôt, après une autre tempête",
+      explanation:
+        "C'est le cœur de la démonstration : l'image est ancienne et concerne un autre événement. Le chiffre « douze ans » était annoncé clairement — à l'oral, on retient mieux ce qui est mis en avant.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "D'après l'émission, qu'est-ce qui ment dans ce cas précis ?",
+      choices: [
+        "la légende qu'on ajoute à la photo",
+        "la photo elle-même, qui est truquée",
+        "le nombre de partages",
+        "la date affichée par le réseau social",
+      ],
+      expected: "la légende qu'on ajoute à la photo",
+      explanation:
+        "La conclusion est explicite : « Ce n'est pas la photo qui ment, c'est la légende qu'on lui colle. » Une image authentique peut servir un propos faux.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Pourquoi l'absence de source sérieuse est-elle « un mauvais signe » ?",
+      choices: [
+        "parce qu'une information vérifiée remonte toujours à une source qu'on peut nommer",
+        "parce que les réseaux sociaux sont toujours faux",
+        "parce que l'image est de mauvaise qualité",
+        "parce qu'elle a été partagée trop de fois",
+      ],
+      expected:
+        "parce qu'une information vérifiée remonte toujours à une source qu'on peut nommer",
+      explanation:
+        "L'argument est donné juste après le constat. Ce n'est pas le partage qui pose problème en soi : c'est qu'on ne puisse remonter à personne.",
+    },
+  ],
+};
+
+// Le récit d'abord, le document ensuite, l'oral en dernier : c'est l'ordre de
+// l'épreuve officielle, et le tirage choisit celui dont l'élève a vu le moins
+// de questions.
 export const SUPPORTS_CM2: SupportTexte[] = [
   POISSON_DE_LUDOVIC,
   DOCUMENT_SOMMEIL_CM2,
@@ -456,3 +659,6 @@ export const SUPPORTS_5E: SupportTexte[] = [
   AVIS_DE_CYCLONE,
   DOCUMENT_ECRANS_5E,
 ];
+
+export const SUPPORTS_ORAL_CM2: SupportTexte[] = [ORAL_LA_PEUR_CM2];
+export const SUPPORTS_ORAL_5E: SupportTexte[] = [ORAL_VRAI_FAUX_5E];
