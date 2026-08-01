@@ -203,15 +203,22 @@ function tirerTheme(
   // Si tous ont servi, on retombe sur le tirage ordinaire dans les notions :
   // mieux vaut une question isolée qu'un texte relu par cœur.
   if (theme.supports?.length) {
-    const dispos = melanger(theme.supports).sort((a, b) => {
-      const vus = (s: SupportTexte) =>
-        s.questions.filter((q) => dejaVus.has(empreinte(q.text))).length;
-      return vus(a) - vus(b);
-    });
-    const support = dispos[0];
-    const neuves = support.questions.filter(
-      (q) => !dejaVus.has(empreinte(q.text)),
+    // ON CLASSE PAR QUESTIONS NEUVES, PAS PAR QUESTIONS VUES (corrigé le
+    // 01/08, en ajoutant les troisièmes supports). Les deux revenaient au même
+    // tant que tous les supports avaient cinq questions ; ils divergent dès
+    // qu'un support en porte huit et un autre cinq — le moins vu n'est alors
+    // pas le plus disponible. Et l'on prend le premier qui a DE QUOI TENIR le
+    // thème, pas le premier tout court : sinon un support à une seule question
+    // neuve faisait basculer tout le thème vers le repli, alors qu'un autre
+    // était intact.
+    const neuvesDe = (s: SupportTexte) =>
+      s.questions.filter((q) => !dejaVus.has(empreinte(q.text)));
+    const dispos = melanger(theme.supports).sort(
+      (a, b) => neuvesDe(b).length - neuvesDe(a).length,
     );
+    const support =
+      dispos.find((s) => neuvesDe(s).length >= theme.nbQuestions) ?? dispos[0];
+    const neuves = neuvesDe(support);
 
     if (neuves.length >= theme.nbQuestions) {
       return melanger(neuves)

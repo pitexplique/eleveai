@@ -29,11 +29,18 @@ const INK = "#1d1c16";
 // carte ne mène nulle part : chacune envoie vers le coach du niveau et vers le
 // guide de survie correspondant, qui existent tous les deux. Règle du journal :
 // on ne promet que ce qui existe, et on ne laisse jamais un lecteur dans le vide.
+//
+// ⚠️ `minutes` EST RECOPIÉ À LA MAIN de `dureeSecondes` (lib/eval-nationale/
+// <slug>.ts). Importer les configs ici embarquerait les quatre banques dans le
+// bundle de ce hub, alors que chaque épreuve n'emporte que la sienne. Une
+// minute par question depuis l'arbitrage du 01/08 : 20 en maths, 25 en
+// français.
 const EPREUVES = [
   {
     niveau: "6ᵉ",
     matiere: "Français",
     slug: "6e-francais",
+    minutes: 25,
     teste: [
       "Comprendre un texte qu'on lit",
       "Comprendre un texte qu'on écoute",
@@ -50,6 +57,7 @@ const EPREUVES = [
     niveau: "6ᵉ",
     matiere: "Mathématiques",
     slug: "6e-maths",
+    minutes: 20,
     teste: [
       "Les nombres et le calcul",
       "Les grandeurs et les mesures",
@@ -65,8 +73,10 @@ const EPREUVES = [
     niveau: "4ᵉ",
     matiere: "Français",
     slug: "4e-francais",
+    minutes: 25,
     teste: [
       "Comprendre un texte long",
+      "Comprendre un texte qu'on écoute",
       "Le vocabulaire",
       "La grammaire et l'orthographe",
     ],
@@ -79,6 +89,7 @@ const EPREUVES = [
     niveau: "4ᵉ",
     matiere: "Mathématiques",
     slug: "4e-maths",
+    minutes: 20,
     teste: [
       "Les nombres et les calculs",
       "Lire et organiser des données",
@@ -160,7 +171,7 @@ export default function EvaluationNationaleCollegePage() {
                     href={e.epreuve}
                     className="mt-1 inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-4 py-2.5 text-sm font-black text-[#f0fafc] transition hover:bg-[#1d1c16]"
                   >
-                    Passer l&apos;épreuve · 50 min →
+                    Passer l&apos;épreuve · {e.minutes} min →
                   </Link>
                   <div className="mt-2 flex flex-col gap-1">
                     <Link

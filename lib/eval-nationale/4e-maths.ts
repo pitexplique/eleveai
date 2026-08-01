@@ -68,7 +68,8 @@ export const CONFIG_4E_MATHS: ConfigEpreuve = {
   classeSource: "5e",
   labelSource: "la 5ᵉ",
   matiereLabel: "Mathématiques",
-  dureeSecondes: 50 * 60,
+  // Une minute par question, comme en 6ᵉ — voir 6e-maths.ts.
+  dureeSecondes: 20 * 60,
   themes: THEMES,
   banque: maths5eQuestionBank,
   labelsNotion: new Map(knowledge.notions.map((n) => [n.id, n.label])),

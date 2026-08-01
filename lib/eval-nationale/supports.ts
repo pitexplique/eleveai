@@ -142,6 +142,97 @@ Le soir, il y avait du poisson dans les assiettes. Ludovic a mangé lentement, s
   ],
 };
 
+const MANGUIER_DE_MADAME_LUCIE: SupportTexte = {
+  id: "cm2_manguier_lucie",
+  kicker: "Texte littéraire",
+  titre: "Le manguier de madame Lucie",
+  source: "Texte original — EleveAI",
+  texte: `Le manguier de madame Lucie débordait par-dessus le mur. En novembre, ses branches ployaient si bas qu'on pouvait cueillir sans même se hisser.
+
+Nous le faisions, bien sûr. À trois, en rentrant de l'école, en surveillant la fenêtre.
+
+Un jeudi, la fenêtre s'est ouverte. Madame Lucie nous a regardés, chacun une mangue à la main. Elle n'a pas crié. Elle a seulement dit : « Elles sont meilleures demain. Aujourd'hui, elles sont encore dures. »
+
+Le lendemain, en passant, nous avons trouvé un panier posé sur le muret, à l'ombre. Six mangues, bien mûres, et personne à la fenêtre.
+
+Nous n'en avons plus jamais cueilli nous-mêmes. Chaque samedi, pourtant, le panier était là.
+
+Ma mère dit que madame Lucie vivait seule depuis longtemps, et qu'elle ne recevait plus grand monde. Sur le moment, je n'ai pas compris le rapport.`,
+  questions: [
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_essentiel",
+      text: "Quelle phrase résume le mieux cette histoire ?",
+      choices: [
+        "Des enfants volent des mangues, et leur voisine finit par leur en préparer un panier.",
+        "Une voisine fait punir des enfants qui volaient ses mangues.",
+        "Des enfants apprennent à cueillir les fruits au bon moment.",
+        "Une vieille dame vend ses mangues aux enfants du quartier.",
+      ],
+      expected:
+        "Des enfants volent des mangues, et leur voisine finit par leur en préparer un panier.",
+      explanation:
+        "Résumer, c'est garder le mouvement du texte : on part d'un vol, on arrive à un cadeau. La punition attendue n'a jamais lieu — la laisser dans le résumé, c'est raconter une autre histoire.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_autonomie",
+      text: "Que trouvent les enfants le lendemain de la scène à la fenêtre ?",
+      choices: [
+        "un panier de six mangues mûres, posé à l'ombre sur le muret",
+        "la fenêtre fermée et le mur surélevé",
+        "un mot de madame Lucie accroché à une branche",
+        "le manguier taillé jusqu'en haut du mur",
+      ],
+      expected: "un panier de six mangues mûres, posé à l'ombre sur le muret",
+      explanation:
+        "L'information arrive au milieu du texte, sans être annoncée. Comprendre seul un texte plus long, c'est retenir ce genre de détail : c'est lui qui explique tout ce qui suit.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_implicite",
+      text: "« Ma mère dit que madame Lucie vivait seule depuis longtemps. Sur le moment, je n'ai pas compris le rapport. » Quel est ce rapport ?",
+      choices: [
+        "Le panier était sa façon à elle d'avoir encore de la visite.",
+        "Elle n'avait plus la force de cueillir ses mangues toute seule.",
+        "Elle voulait que les enfants gardent le secret.",
+        "Elle n'aimait pas les mangues et les donnait pour ne pas les jeter.",
+      ],
+      expected: "Le panier était sa façon à elle d'avoir encore de la visite.",
+      explanation:
+        "Le texte ne le dit jamais — il pose les deux informations côte à côte et laisse le lecteur les relier. « Sur le moment » signale d'ailleurs que le narrateur, lui, a fini par comprendre.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_genres",
+      text: "À quel genre ce texte appartient-il ?",
+      choices: [
+        "un récit de souvenir",
+        "une fable en vers",
+        "une fiche documentaire sur le manguier",
+        "une lettre adressée à madame Lucie",
+      ],
+      expected: "un récit de souvenir",
+      explanation:
+        "Quelqu'un raconte, longtemps après, quelque chose qu'il a vécu enfant : les verbes au passé et le « je » du narrateur le montrent. Une fiche documentaire expliquerait comment pousse un manguier.",
+    },
+    {
+      notionId: "lecture_oeuvres",
+      microId: "cm2_oeuvre_theme",
+      text: "Pourquoi la punition qu'on attend n'arrive-t-elle jamais ?",
+      choices: [
+        "Parce que madame Lucie choisit de donner ce qu'on lui prenait.",
+        "Parce qu'elle n'a pas reconnu les enfants derrière le mur.",
+        "Parce que les enfants se sont excusés le jeudi soir.",
+        "Parce que les mangues ne lui appartenaient pas vraiment.",
+      ],
+      expected: "Parce que madame Lucie choisit de donner ce qu'on lui prenait.",
+      explanation:
+        "C'est tout l'enjeu du récit : elle renverse la situation d'un seul geste. En transformant le vol en cadeau, elle enlève aux enfants l'envie de recommencer — et se donne une raison de les revoir.",
+    },
+  ],
+};
+
 // ══════════════════════════════════════════════════════════════════════════
 // 5ᵉ — pour l'épreuve de 4ᵉ
 // ══════════════════════════════════════════════════════════════════════════
@@ -235,6 +326,113 @@ Je n'ai pas dormi. Pas à cause du bruit — le bruit n'était pas encore venu.`
         "C'est un récit à la première personne : un narrateur raconte ce qu'il a vécu.",
       explanation:
         "Les « je » et les « mon père » situent le narrateur à l'intérieur de l'histoire. Un article prendrait de la distance et donnerait des faits vérifiables ; une pièce n'aurait que des répliques et des didascalies.",
+    },
+  ],
+};
+
+// LE TROISIÈME SUPPORT DE 5ᵉ N'EST PAS UN RÉCIT DE PLUS. « L'avis de cyclone »
+// est un texte intime, à la première personne ; celui-ci est un conte de
+// sagesse, avec des dialogues et une chute. La compréhension de l'écrit ne se
+// joue pas pareil dans les deux — et `5e_culture_genres` ne peut poser une
+// vraie question de genre que si les genres diffèrent réellement.
+const LA_BOURSE_DU_MARCHAND: SupportTexte = {
+  id: "5e_bourse_marchand",
+  kicker: "Texte littéraire",
+  titre: "La bourse du marchand",
+  source: "Texte original — EleveAI",
+  texte: `Un marchand perdit sa bourse un jour de marché. Un jeune porteur la ramassa, la garda fermée, et la rapporta le soir même.
+
+Le marchand avait promis dix pièces à qui la retrouverait. Devant tout le monde, il ouvrit la bourse, compta longuement, puis leva la tête.
+
+« Il manque une pièce d'or. »
+
+Le porteur devint tout rouge. Il jura qu'il n'avait jamais ouvert la bourse. Le marchand haussa les épaules : sa promesse ne valait plus rien, puisqu'on venait de le voler.
+
+On alla chercher le juge. Il écouta le marchand sans l'interrompre une seule fois.
+
+« Ta bourse contenait donc deux cents pièces ?
+— Deux cents. J'en suis certain.
+— Et celle-ci en contient cent quatre-vingt-dix-neuf.
+— C'est bien ce que je dis !
+— Alors ce n'est pas la tienne. »
+
+Le juge posa la bourse devant le porteur.
+
+« Nous attendrons celui qui a perdu cent quatre-vingt-dix-neuf pièces. S'il ne vient pas, elle sera à toi. Quant à toi, marchand, reviens le jour où l'on retrouvera une bourse de deux cents. »
+
+Le marchand ouvrit la bouche, la referma, et s'en alla les mains vides.`,
+  questions: [
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_sens_global",
+      text: "Sur quoi repose exactement le raisonnement du juge ?",
+      choices: [
+        "Il prend le marchand au mot : une bourse de 199 pièces ne peut pas être celle qu'il décrit.",
+        "Il croit le porteur parce qu'il est jeune et pauvre.",
+        "Il pense que la pièce manquante est tombée pendant le trajet.",
+        "Il partage la bourse entre les deux hommes pour les mettre d'accord.",
+      ],
+      expected:
+        "Il prend le marchand au mot : une bourse de 199 pièces ne peut pas être celle qu'il décrit.",
+      explanation:
+        "Le juge ne cherche pas de preuve et n'accuse personne : il applique à la lettre ce que le marchand vient d'affirmer. Le mensonge se retourne tout seul contre celui qui l'a dit.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "Quel détail montre le mieux que le marchand cherche surtout à ne pas payer ?",
+      choices: [
+        "Sa promesse « ne vaut plus rien » à la seconde où il crie au vol.",
+        "Il compte longuement les pièces devant tout le monde.",
+        "Il accepte d'aller chercher le juge.",
+        "Il hausse les épaules en écoutant le porteur.",
+      ],
+      expected: "Sa promesse « ne vaut plus rien » à la seconde où il crie au vol.",
+      explanation:
+        "Les autres détails peuvent s'expliquer autrement ; celui-là, non. L'accusation tombe pile au moment où il faudrait sortir les dix pièces, et elle l'en dispense.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_implicite",
+      text: "« Le marchand ouvrit la bouche, la referma, et s'en alla les mains vides. » Que comprend-on ?",
+      choices: [
+        "Il ne peut plus se défendre sans avouer qu'il a menti.",
+        "Il n'a pas compris la décision du juge.",
+        "Il part chercher des témoins pour prouver sa bonne foi.",
+        "Il est trop en colère pour parler.",
+      ],
+      expected: "Il ne peut plus se défendre sans avouer qu'il a menti.",
+      explanation:
+        "La bouche qui s'ouvre puis se referme dit tout : il a une réponse, et cette réponse le condamnerait. Réclamer la bourse reviendrait à reconnaître qu'elle contenait bien 199 pièces.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_apprecier",
+      text: "Pourquoi la dernière phrase est-elle une bonne fin ?",
+      choices: [
+        "Elle montre la défaite du marchand par trois gestes, sans jamais la nommer.",
+        "Elle explique enfin où était passée la pièce d'or.",
+        "Elle annonce que le marchand reviendra se venger.",
+        "Elle donne la morale de l'histoire en une formule.",
+      ],
+      expected:
+        "Elle montre la défaite du marchand par trois gestes, sans jamais la nommer.",
+      explanation:
+        "Aucun mot ne dit qu'il a perdu : une bouche qui s'ouvre, qui se referme, et des mains vides. Le texte fait confiance à son lecteur — c'est souvent ce qui rend une chute efficace.",
+    },
+    {
+      notionId: "culture_litteraire",
+      microId: "5e_culture_genres",
+      text: "À quel type de récit cette histoire ressemble-t-elle ?",
+      choices: [
+        "un conte de sagesse, où un juge rend justice par la ruse",
+        "un fait divers rapporté par un journal",
+        "une scène de théâtre avec ses didascalies",
+        "un récit d'aventures en pays lointain",
+      ],
+      expected: "un conte de sagesse, où un juge rend justice par la ruse",
+      explanation:
+        "Ni lieu, ni date, ni nom : des personnages réduits à leur rôle — un marchand, un porteur, un juge — et une leçon qui se dégage de l'action. C'est la manière du conte, pas celle du fait divers.",
     },
   ],
 };
@@ -559,6 +757,105 @@ Alors que faire ? Les spécialistes disent tous la même chose : ce qui calme la
   ],
 };
 
+// ⚠️ DEUX ENREGISTREMENTS PAR NIVEAU, ET C'EST LE MINIMUM. Le thème oral ne
+// se replie jamais sur la banque : quand ses supports sont épuisés, il
+// disparaît de l'épreuve. Avec un seul enregistrement, le deuxième passage
+// perdait déjà cinq questions sur vingt-cinq — mesuré en simulant dix
+// passages. Chaque enregistrement ajouté rend un passage complet de plus.
+const ORAL_MER_SALEE_CM2: SupportTexte = {
+  id: "cm2_oral_mer_salee",
+  kicker: "Compréhension de l'oral",
+  titre: "Pourquoi la mer est-elle salée ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Aujourd'hui, la question vient de Marius, dix ans : pourquoi la mer est-elle salée ?
+
+Commençons par le sel lui-même. Il ne tombe pas du ciel, et il ne pousse pas dans l'eau. Il était déjà là, dans les roches, sous nos pieds.
+
+Quand il pleut, l'eau ruisselle sur les rochers et leur arrache un peu de sel au passage. Une toute petite quantité. Mais elle le fait depuis des millions d'années. Cette eau descend dans les rivières, les rivières rejoignent les fleuves, et les fleuves finissent tous dans la mer. Le sel voyage avec eux.
+
+Alors une question se pose : si les rivières transportent du sel, pourquoi l'eau des rivières n'est-elle pas salée ? Parce qu'elle ne reste pas. Elle passe, elle continue, elle emporte son sel plus loin.
+
+La mer, elle, ne va nulle part. Le soleil chauffe sa surface, l'eau s'évapore et remonte en nuages. Mais le sel, lui, ne s'évapore pas. Il reste. Et chaque année, il y en a un peu plus.
+
+Voilà pourquoi la mer est salée. Ce n'est pas parce qu'on y a versé du sel. C'est parce que l'eau s'en va, et que le sel, lui, ne part jamais.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "D'où vient la question à laquelle l'émission répond ?",
+      choices: [
+        "d'un enfant de dix ans, Marius",
+        "d'un scientifique invité au studio",
+        "du présentateur lui-même",
+        "d'un livre cité au début",
+      ],
+      expected: "d'un enfant de dix ans, Marius",
+      explanation:
+        "C'est dit dans la toute première phrase, avec le prénom et l'âge. À l'oral, l'ouverture porte presque toujours l'information la plus facile à retenir — encore faut-il être déjà attentif.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "D'après l'émission, où se trouvait le sel avant d'arriver dans la mer ?",
+      choices: [
+        "dans les roches",
+        "dans les nuages",
+        "au fond de la mer",
+        "dans le corps des poissons",
+      ],
+      expected: "dans les roches",
+      explanation:
+        "L'émission le dit tôt : « Il était déjà là, dans les roches, sous nos pieds. » Toute l'explication qui suit part de là.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Pourquoi l'eau des rivières n'est-elle pas salée, d'après l'émission ?",
+      choices: [
+        "parce qu'elle ne reste pas en place : elle emporte son sel plus loin",
+        "parce que les rivières ne touchent jamais les roches",
+        "parce que le sel des rivières s'évapore avec le soleil",
+        "parce que les poissons d'eau douce mangent le sel",
+      ],
+      expected:
+        "parce qu'elle ne reste pas en place : elle emporte son sel plus loin",
+      explanation:
+        "La question est posée à voix haute dans l'émission, puis la réponse tombe juste après : « Parce qu'elle ne reste pas. » Une question posée par celui qui parle annonce toujours ce qu'il faut retenir.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_reformuler",
+      text: "Comment dirais-tu autrement, et plus court, l'explication de l'émission ?",
+      choices: [
+        "L'eau s'en va en s'évaporant, le sel reste — et il s'accumule depuis des millions d'années.",
+        "La mer est salée parce que les hommes y ont versé du sel.",
+        "Les rivières sont plus salées que la mer.",
+        "Le sel se forme tout seul au fond de l'océan.",
+      ],
+      expected:
+        "L'eau s'en va en s'évaporant, le sel reste — et il s'accumule depuis des millions d'années.",
+      explanation:
+        "Reformuler, c'est tenir les deux moitiés de l'explication dans une seule phrase : ce qui part, et ce qui reste. Les autres réponses gardent le sujet mais perdent le mécanisme.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_argumenter",
+      text: "L'émission dit que la mer contient chaque année un peu plus de sel. Qu'est-ce qui le justifie ?",
+      choices: [
+        "Le sel arrive sans arrêt par les fleuves, et rien ne le fait repartir.",
+        "La mer se réchauffe et fabrique du sel.",
+        "Les rochers tombent dans la mer et s'y dissolvent.",
+        "La pluie tombée sur la mer est elle-même salée.",
+      ],
+      expected:
+        "Le sel arrive sans arrêt par les fleuves, et rien ne le fait repartir.",
+      explanation:
+        "Justifier, c'est retrouver les deux raisons qui tiennent ensemble : une entrée permanente, aucune sortie. L'une sans l'autre n'expliquerait rien.",
+    },
+  ],
+};
+
 const ORAL_VRAI_FAUX_5E: SupportTexte = {
   id: "5e_oral_vrai_faux",
   kicker: "Compréhension de l'oral",
@@ -648,17 +945,115 @@ Et c'est là le point important. Une image peut être authentique et raconter qu
   ],
 };
 
+const ORAL_LANGAGE_ANIMAL_5E: SupportTexte = {
+  id: "5e_oral_langage_animal",
+  kicker: "Compréhension de l'oral",
+  titre: "Est-ce que les animaux se parlent ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Est-ce que les animaux se parlent ? La question revient souvent, et la réponse tient en deux temps.
+
+Premier temps : oui, ils communiquent, et parfois avec une précision qui surprend. Prenez la mésange. Quand elle repère un rapace dans le ciel, elle lance un cri fin et aigu. Quand le danger vient du sol, un chat par exemple, elle en lance un autre, plus large. Et les autres mésanges ne réagissent pas de la même façon : au premier signal elles se plaquent contre le tronc, au second elles s'envolent. Le cri ne dit donc pas seulement « attention ». Il dit d'où vient le danger.
+
+L'abeille va plus loin encore. De retour à la ruche, elle danse. La direction de sa danse indique où sont les fleurs, et sa durée indique à quelle distance. Ses compagnes repartent ensuite droit au bon endroit.
+
+Deuxième temps, et c'est là qu'il faut être prudent : communiquer, ce n'est pas parler. La mésange dispose de quelques signaux, toujours les mêmes. Elle ne peut pas en inventer un nouveau pour raconter sa journée d'hier. Nous, si : avec un petit nombre de mots, nous fabriquons des phrases que personne n'a jamais dites.
+
+Alors, se parlent-ils ? Ils se transmettent des informations, sans aucun doute. Mais une langue, c'est autre chose : c'est pouvoir dire ce qui n'a pas encore été dit.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Quels sont les deux animaux pris en exemple ?",
+      choices: [
+        "la mésange et l'abeille",
+        "le chat et le rapace",
+        "la fourmi et le dauphin",
+        "le chien et le perroquet",
+      ],
+      expected: "la mésange et l'abeille",
+      explanation:
+        "Le chat et le rapace sont cités, mais comme dangers, pas comme exemples de communication. Écouter, c'est aussi distinguer ce dont on parle de ce qui sert à en parler.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Que permet de savoir le cri de la mésange, en plus du danger ?",
+      choices: [
+        "d'où vient le danger",
+        "à quelle distance il se trouve",
+        "combien de temps il durera",
+        "quel oiseau a donné l'alerte",
+      ],
+      expected: "d'où vient le danger",
+      explanation:
+        "C'est la phrase qui clôt le passage : « Il dit d'où vient le danger. » La distance, elle, appartient à l'exemple suivant — celui de l'abeille. Les deux exemples se ressemblent assez pour qu'on les confonde.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Qu'indique la durée de la danse de l'abeille ?",
+      choices: [
+        "la distance à parcourir jusqu'aux fleurs",
+        "la quantité de fleurs trouvées",
+        "le temps qu'il fera dans la journée",
+        "le nombre d'abeilles qui doivent partir",
+      ],
+      expected: "la distance à parcourir jusqu'aux fleurs",
+      explanation:
+        "L'émission sépare nettement les deux informations : la direction de la danse dit où, sa durée dit à quelle distance. Retenir un exemple, c'est retenir ce découpage-là.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Comment la chronique organise-t-elle sa réponse ?",
+      choices: [
+        "en deux temps : oui, ils communiquent — non, ce n'est pas une langue",
+        "en énumérant les animaux du plus simple au plus intelligent",
+        "en opposant deux scientifiques qui ne sont pas d'accord",
+        "en racontant une expérience menée dans un laboratoire",
+      ],
+      expected:
+        "en deux temps : oui, ils communiquent — non, ce n'est pas une langue",
+      explanation:
+        "Les repères sont donnés à voix haute : « Premier temps… », « Deuxième temps… ». Suivre un propos oral, c'est d'abord entendre son plan — après quoi les exemples se rangent tout seuls.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Pour la chronique, qu'est-ce qui manque aux animaux pour qu'on parle d'une langue ?",
+      choices: [
+        "pouvoir inventer un message que personne n'a encore dit",
+        "avoir une voix assez souple pour articuler",
+        "être capables de se comprendre entre espèces différentes",
+        "disposer d'un grand nombre de cris différents",
+      ],
+      expected: "pouvoir inventer un message que personne n'a encore dit",
+      explanation:
+        "L'argument est repris deux fois, à la fin de chaque partie : la mésange ne peut pas raconter sa journée d'hier, et une langue c'est « pouvoir dire ce qui n'a pas encore été dit ». Ce n'est pas le nombre de signaux qui compte, c'est la possibilité d'en créer.",
+    },
+  ],
+};
+
 // Le récit d'abord, le document ensuite, l'oral en dernier : c'est l'ordre de
 // l'épreuve officielle, et le tirage choisit celui dont l'élève a vu le moins
 // de questions.
 export const SUPPORTS_CM2: SupportTexte[] = [
   POISSON_DE_LUDOVIC,
+  MANGUIER_DE_MADAME_LUCIE,
   DOCUMENT_SOMMEIL_CM2,
 ];
 export const SUPPORTS_5E: SupportTexte[] = [
   AVIS_DE_CYCLONE,
+  LA_BOURSE_DU_MARCHAND,
   DOCUMENT_ECRANS_5E,
 ];
 
-export const SUPPORTS_ORAL_CM2: SupportTexte[] = [ORAL_LA_PEUR_CM2];
-export const SUPPORTS_ORAL_5E: SupportTexte[] = [ORAL_VRAI_FAUX_5E];
+export const SUPPORTS_ORAL_CM2: SupportTexte[] = [
+  ORAL_LA_PEUR_CM2,
+  ORAL_MER_SALEE_CM2,
+];
+export const SUPPORTS_ORAL_5E: SupportTexte[] = [
+  ORAL_VRAI_FAUX_5E,
+  ORAL_LANGAGE_ANIMAL_5E,
+];

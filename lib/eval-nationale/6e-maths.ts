@@ -14,8 +14,7 @@ import type { ConfigEpreuve, ThemeEval } from "./moteur";
 const knowledge = buildKnowledgeCm2Maths();
 
 // Les quatre domaines de l'évaluation nationale de 6ᵉ en mathématiques.
-// 5 questions par thème = 20 questions pour 50 minutes, soit 2 min 30 par
-// question : le vrai rythme laisse le temps de poser un calcul.
+// 5 questions par thème = 20 questions.
 const THEMES: ThemeEval[] = [
   {
     id: "nombres",
@@ -80,7 +79,11 @@ export const CONFIG_6E_MATHS: ConfigEpreuve = {
   classeSource: "cm2",
   labelSource: "le CM2",
   matiereLabel: "Mathématiques",
-  dureeSecondes: 50 * 60, // 50 minutes, comme la vraie
+  // UNE MINUTE PAR QUESTION (arbitrage de Frédéric, 01/08). On donnait
+  // 50 minutes pour 20 questions — 2 min 30 chacune, quand la vraie épreuve
+  // en laisse moins d'une. Ce qu'on reproduit désormais, c'est la CADENCE,
+  // pas le volume : moins de questions que le jour J, mais au même tempo.
+  dureeSecondes: 20 * 60,
   themes: THEMES,
   banque: mathsCm2QuestionBank,
   labelsNotion: new Map(knowledge.notions.map((n) => [n.id, n.label])),

@@ -76,7 +76,11 @@ export const CONFIG_4E_FRANCAIS: ConfigEpreuve = {
   classeSource: "5e",
   labelSource: "la 5ᵉ",
   matiereLabel: "Français",
-  dureeSecondes: 50 * 60,
+  // Une minute par question — voir 6e-francais.ts. En 4ᵉ l'épreuve officielle
+  // pose 67 items en 50 minutes, soit 45 secondes : on reste au-dessus, et
+  // c'est volontaire, un élève qui découvre le format ne doit pas perdre sur
+  // la mécanique ce qu'il sait par ailleurs.
+  dureeSecondes: 25 * 60,
   reserve:
     "Une seule chose de l'épreuve officielle manque ici : la fluence, qui se passe à voix haute, en tête à tête avec un professeur — un ordinateur ne peut pas l'évaluer. La compréhension de l'oral, elle, y est : prévois des écouteurs ou une pièce calme.",
   themes: THEMES,

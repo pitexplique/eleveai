@@ -416,20 +416,24 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "grammaire_phrase",
     "5e_gram_accords",
     2,
-    "Choisis la forme correcte : « Les élèves de la classe ___ en silence. »",
-    ["travaille", "travaillent", "travailles", "travailler"],
-    "travaillent",
-    "Le sujet est « les élèves » (pluriel), malgré « classe » : le verbe prend « -nt »."
+    // ⚠️ ÉNONCÉ REFORMULÉ le 01/08 : il était identique, mot pour mot, à celui
+    // d'un gabarit du builder. Deux items, une seule question tirable — le
+    // tirage des épreuves blanches déduplique sur le texte.
+    "« Le troupeau de chèvres ___ vers la ravine. » Quelle forme convient ?",
+    ["descend", "descendent", "descends", "descendre"],
+    "descend",
+    "Le sujet est « le troupeau », singulier : « de chèvres » n'en est que le complément. C'est le nom noyau qui commande le verbe, jamais le mot le plus proche de lui."
   ),
   qcm(
     "5e_fr_fixed_gram_5",
     "grammaire_phrase",
     "5e_gram_accords",
     3,
-    "Quel groupe nominal est correctement accordé ?",
+    // Même correction : l'énoncé doublait celui d'un gabarit du builder.
+    "« Nous avons visité ___ . » Quel groupe nominal est correctement accordé ?",
     ["de vieux château abandonnés", "de vieux châteaux abandonnés", "de vieux châteaux abandonné", "de vieil châteaux abandonnés"],
     "de vieux châteaux abandonnés",
-    "Au masculin pluriel, le nom et les adjectifs s'accordent : « de vieux châteaux abandonnés »."
+    "Au masculin pluriel, le nom et ses deux adjectifs s'accordent tous les trois. Un seul oubli suffit à faire tomber le groupe entier."
   ),
   qcm(
     "5e_fr_fixed_gram_6",

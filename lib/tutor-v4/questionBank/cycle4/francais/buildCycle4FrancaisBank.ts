@@ -1857,24 +1857,32 @@ function voc_reemploi(level: Cycle4Level): QcmItem[] {
   );
 }
 
+// ⚠️ CHAQUE ÉNONCÉ PORTE SA PHRASE (corrigé le 01/08). Les huit items de ce
+// pool partageaient l'intitulé « Quelle est l'orthographe correcte ? ». Or le
+// tirage des épreuves blanches déduplique sur le TEXTE de la question :
+// mesuré, ces huit items ne rendaient qu'UNE question tirable, et la
+// micro-compétence plafonnait à 7 énoncés distincts là où les autres en
+// comptaient 12 à 15. Replacer le mot dans une phrase règle le tirage — et
+// teste au passage quelque chose de plus juste : un mot ne s'écrit pas dans
+// le vide, il s'écrit dans un texte.
 function voc_orthographe(level: Cycle4Level): QcmItem[] {
   return byLevel(
     [
-      { text: "Quelle est l'orthographe correcte ?", correct: "rythme", wrongs: ["rytme", "rithme", "rhytme"], methode: "On mémorise l'orthographe des mots étudiés." },
-      { text: "Quelle est l'orthographe correcte ?", correct: "aujourd'hui", wrongs: ["aujourdhui", "aujour'dui", "aujourd'huit"], methode: "On retient l'orthographe des mots fréquents." },
-      { text: "Quelle est l'orthographe correcte ?", correct: "longtemps", wrongs: ["longtan", "lontemps", "longtemp"], methode: "On mémorise les lettres muettes." },
-      { text: "Quelle est l'orthographe correcte ?", correct: "aussitôt", wrongs: ["aussitot", "aussitôts", "aussi tôt"], methode: "On soigne l'accent circonflexe et la soudure." },
-      { text: "Quelle est l'orthographe correcte ?", correct: "parmi", wrongs: ["parmis", "parmit", "par mi"], methode: "« parmi » ne prend jamais de « s »." },
-      { text: "Quelle est l'orthographe correcte ?", correct: "quelquefois", wrongs: ["quelque fois", "quelquesfois", "quelquefoi"], methode: "« quelquefois » (parfois) s'écrit en un seul mot." },
+      { text: "« La musique impose son … . » Quelle orthographe convient ?", correct: "rythme", wrongs: ["rytme", "rithme", "rhytme"], methode: "On mémorise l'orthographe des mots étudiés." },
+      { text: "« Nous partons … , comme prévu. » Comment s'écrit ce mot ?", correct: "aujourd'hui", wrongs: ["aujourdhui", "aujour'dui", "aujourd'huit"], methode: "On retient l'orthographe des mots fréquents." },
+      { text: "« Elle a attendu … devant la porte. » Quelle orthographe convient ?", correct: "longtemps", wrongs: ["longtan", "lontemps", "longtemp"], methode: "On mémorise les lettres muettes." },
+      { text: "« … arrivé, il repartit sans un mot. » Quelle orthographe convient ?", correct: "aussitôt", wrongs: ["aussitot", "aussitôts", "aussi tôt"], methode: "On soigne l'accent circonflexe et la soudure." },
+      { text: "« Il se glissa … les invités. » Comment s'écrit ce mot ?", correct: "parmi", wrongs: ["parmis", "parmit", "par mi"], methode: "« parmi » ne prend jamais de « s »." },
+      { text: "« Il lui arrive … de mentir. » Quelle orthographe convient ?", correct: "quelquefois", wrongs: ["quelque fois", "quelquesfois", "quelquefoi"], methode: "« quelquefois » (parfois) s'écrit en un seul mot." },
     ],
     {
       "4e": [
-        { text: "Quelle est l'orthographe correcte ?", correct: "vraisemblable", wrongs: ["vraissemblable", "vraisemblabe", "vraisamblable"], methode: "On mémorise l'orthographe des mots savants." },
-        { text: "Quelle est l'orthographe correcte ?", correct: "davantage", wrongs: ["d'avantage", "davantâge", "daventage"], methode: "« davantage » (plus) s'écrit en un mot, sans apostrophe." },
+        { text: "« Son explication n'a rien de … . » Quelle orthographe convient ?", correct: "vraisemblable", wrongs: ["vraissemblable", "vraisemblabe", "vraisamblable"], methode: "On mémorise l'orthographe des mots savants." },
+        { text: "« Il faudrait y réfléchir … . » Comment s'écrit ce mot ?", correct: "davantage", wrongs: ["d'avantage", "davantâge", "daventage"], methode: "« davantage » (plus) s'écrit en un mot, sans apostrophe." },
       ],
       "3e": [
-        { text: "Quelle est l'orthographe correcte ?", correct: "émancipation", wrongs: ["émencipation", "émancipasion", "emancipation"], methode: "On soigne accents et terminaisons des mots abstraits." },
-        { text: "Quelle est l'orthographe correcte ?", correct: "conscience", wrongs: ["consience", "conciense", "conscence"], methode: "On mémorise le « sc » de « conscience »." },
+        { text: "« Le texte défend l'… des peuples colonisés. » Quelle orthographe convient ?", correct: "émancipation", wrongs: ["émencipation", "émancipasion", "emancipation"], methode: "On soigne accents et terminaisons des mots abstraits." },
+        { text: "« Il a soudain pris … du danger. » Comment s'écrit ce mot ?", correct: "conscience", wrongs: ["consience", "conciense", "conscence"], methode: "On mémorise le « sc » de « conscience »." },
       ],
     },
     level

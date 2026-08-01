@@ -3,9 +3,9 @@ import Epreuve4eMathsClient from "./Epreuve4eMathsClient";
 
 export const metadata: Metadata = {
   title:
-    "Évaluation nationale de 4e en maths — l'épreuve blanche, 50 minutes, corrigée | EleveAI",
+    "Évaluation nationale de 4e en maths — l'épreuve blanche, 20 minutes, corrigée | EleveAI",
   description:
-    "L'épreuve blanche de l'évaluation nationale de 4e en mathématiques : même forme que le jour J — prise en main, puis 20 questions qui défilent une par une, sans retour en arrière, en 50 minutes. Sur le programme de 5e : relatifs, fractions, calcul littéral, aires et volumes, triangles, proportionnalité. À la fin, le nom de chaque compétence qui a coincé et de quoi la retravailler. Gratuit, sans publicité.",
+    "L'épreuve blanche de l'évaluation nationale de 4e en mathématiques : même forme que le jour J — prise en main, puis 20 questions qui défilent une par une, sans retour en arrière, à raison d'une minute chacune. Sur le programme de 5e : relatifs, fractions, calcul littéral, aires et volumes, triangles, proportionnalité. À la fin, le nom de chaque compétence qui a coincé et de quoi la retravailler. Gratuit, sans publicité.",
   keywords: [
     "évaluation nationale 4e maths",
     "évaluation nationale 4e s'entraîner",

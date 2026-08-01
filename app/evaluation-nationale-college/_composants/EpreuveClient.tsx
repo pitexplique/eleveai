@@ -66,6 +66,14 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
   const NB_QUESTIONS = compterQuestions(config);
   /** « 6e » s'écrit « 6ᵉ » quand on l'affiche. */
   const classeLabel = config.classe.replace(/e$/, "ᵉ");
+  /**
+   * « de » + « le CM2 » se contracte en « du CM2 » ; « la 5ᵉ » ne bouge pas.
+   * Sans ça, les deux épreuves de 6ᵉ affichaient « le programme de le CM2 » et
+   * « ouvrir le coach de le CM2 » — visible dès la page d'accueil de l'épreuve.
+   */
+  const duSource = config.labelSource.startsWith("le ")
+    ? `du ${config.labelSource.slice(3)}`
+    : `de ${config.labelSource}`;
   const dureeMinutes = Math.round(config.dureeSecondes / 60);
 
   const [etape, setEtape] = useState<Etape>("accueil");
@@ -296,11 +304,25 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                 Même forme que le jour J : les questions défilent une par une,
                 on ne revient pas en arrière, et le temps court.
               </p>
+              {/* LE TEMPS, DIT SANS L'ARRONDIR (arbitrage du 01/08). L'épreuve
+                  officielle enchaîne bien plus de questions dans ses 50
+                  minutes : environ une par minute. On ne prétend pas au même
+                  volume — on tient la même cadence, et on l'écrit. */}
+              <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/70">
+                Le jour J, tu auras à peu près une minute par question. Ici
+                aussi : {NB_QUESTIONS} questions, {dureeMinutes} minutes. La
+                vraie épreuve en pose simplement beaucoup plus — ce qu&apos;on
+                reproduit, c&apos;est le rythme, pas le nombre.
+              </p>
             </header>
 
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
               {[
-                { chiffre: String(dureeMinutes), unite: "minutes", quoi: "comme la vraie" },
+                {
+                  chiffre: String(dureeMinutes),
+                  unite: "minutes",
+                  quoi: "une par question",
+                },
                 {
                   chiffre: String(NB_QUESTIONS),
                   unite: "questions",
@@ -353,8 +375,8 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
             {/* LA CLASSE TESTÉE N'EST PAS LA SIENNE — c'est le point que les
                 élèves comprennent mal, et qui change tout à leur préparation. */}
             <p className="mt-5 text-sm font-medium leading-6 text-[#1d1c16]/70">
-              Les questions portent sur le programme de{" "}
-              {config.labelSource} : l&apos;évaluation de rentrée mesure ce que
+              Les questions portent sur le programme {duSource} :
+              l&apos;évaluation de rentrée mesure ce que
               tu emportes de l&apos;an dernier, pas ce que tu n&apos;as pas
               encore appris en {classeLabel}.
             </p>
@@ -803,7 +825,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                 href={`/coach-ia/${config.matiere}?classe=${config.classeSource}`}
                 className="inline-flex items-center gap-2 rounded-sm border-2 border-cyan-800 px-5 py-2.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
               >
-                Ouvrir le coach de {config.labelSource} →
+                Ouvrir le coach {duSource} →
               </Link>
             </div>
 

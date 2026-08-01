@@ -11,14 +11,12 @@
 // littéraire, 9 sur un document composite, 15 de lexique, 9 de grammaire,
 // 9 d'orthographe, 8 de compréhension de l'oral — 60 items en 50 minutes.
 //
-// CE QU'ON NE FAIT PAS, ET POURQUOI :
-//   - la FLUENCE est hors de portée : elle n'est pas numérique, c'est une
-//     minute de lecture à voix haute en tête-à-tête avec un professeur ;
-//   - la COMPRÉHENSION DE L'ORAL demande un support audio. C'est faisable —
-//     la dictée du jour a déjà sa synthèse vocale — mais ce sera un autre
-//     chantier, pas un thème qu'on bricole.
-// On ne promet donc que les deux domaines qu'on couvre vraiment, et on le
-// dit à l'élève sur la page.
+// CE QU'ON NE FAIT PAS, ET POURQUOI : la FLUENCE, et elle seule. Elle n'est
+// pas numérique — c'est une minute de lecture à voix haute en tête-à-tête avec
+// un professeur. La compréhension de l'oral, elle, est faite depuis le 01/08 :
+// la synthèse vocale de la dictée du jour lit un texte écrit pour l'oreille,
+// deux écoutes, rien à l'écran. On ne promet que ce qu'on couvre vraiment, et
+// on le dit à l'élève sur la page (champ `reserve`).
 //
 // Vivier vérifié avant d'écrire ceci (npx tsx scripts/auditer-banque-runtime.ts
 // cm2 --epreuve --variete) : 50 micro-compétences couvertes à 100 %, 1613
@@ -84,7 +82,13 @@ export const CONFIG_6E_FRANCAIS: ConfigEpreuve = {
   classeSource: "cm2",
   labelSource: "le CM2",
   matiereLabel: "Français",
-  dureeSecondes: 50 * 60,
+  // UNE MINUTE PAR QUESTION (arbitrage de Frédéric, 01/08). L'épreuve
+  // officielle pose 60 items en 50 minutes : 50 secondes chacun. Elle mesure
+  // donc aussi la vitesse. En laissant 50 minutes pour 25 questions, on
+  // mesurait tout sauf ça. 25 questions, 25 minutes — l'écoute des
+  // enregistrements comprise, comme le jour J, où elle tient elle aussi dans
+  // le temps de l'épreuve.
+  dureeSecondes: 25 * 60,
   reserve:
     "Une seule chose de l'épreuve officielle manque ici : la fluence, qui se passe à voix haute, en tête à tête avec un professeur — un ordinateur ne peut pas l'évaluer. La compréhension de l'oral, elle, y est : prévois des écouteurs ou une pièce calme.",
   themes: THEMES,
