@@ -1422,11 +1422,16 @@ export default function AccueilPage({
                 <div className="mt-1 grid grid-cols-[72px_1fr] items-center gap-2.5">
                   <GuideSurvieAnime className="w-full" />
                   <span className="block">
-                    <span className="block font-serif text-lg font-black leading-tight group-hover:underline">
-                      Les guides de survie · maths, fran&ccedil;ais, anglais
+                    {/* MÊME TAILLE QUE LES CAHIERS DE VACANCES (Frédéric,
+                        01/08) : en text-lg le titre partait sur trois lignes
+                        à côté de la vignette et écrasait tout le reste de la
+                        colonne. Deux voisins de même nature — des livrets à
+                        imprimer — doivent avoir la même voix. */}
+                    <span className="block font-serif text-[15px] font-black leading-snug group-hover:underline">
+                      Les guides de survie
                     </span>
                     <span className="mt-0.5 block text-xs font-medium leading-4 text-[#1d1c16]/70">
-                      Du CM1 &agrave; la Terminale : formules, r&eacute;flexes, pi&egrave;ges et test corrig&eacute;, &agrave; imprimer.
+                      Maths, fran&ccedil;ais, anglais : formules, r&eacute;flexes, pi&egrave;ges et test corrig&eacute;.
                     </span>
                     <span className="mt-1 block text-sm font-black text-cyan-800 group-hover:underline">
                       Voir les livrets &agrave; imprimer →
@@ -1441,8 +1446,12 @@ export default function AccueilPage({
                 href="/cahier-vacances"
                 className="group block border-b border-dotted border-[#1d1c16]/25 py-3"
               >
+                {/* « À consulter / imprimer » (Frédéric, 01/08) : « à
+                    imprimer » laissait croire qu'il fallait une imprimante
+                    pour s'en servir. Les cahiers se lisent aussi à l'écran —
+                    et tout le monde n'a pas d'imprimante à la maison. */}
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-                  📘 &Agrave; imprimer
+                  📘 &Agrave; consulter / imprimer
                 </p>
                 <span className="mt-1 block font-serif text-[15px] font-black leading-snug group-hover:underline">
                   Les cahiers de vacances
