@@ -162,20 +162,26 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "culture_litteraire",
     "5e_culture_genres",
     1,
-    "Un récit de chevaliers, de quêtes et de tournois au Moyen Âge est...",
+    // Définition réécrite en reconnaissance sur extrait (01/08) : donner la
+    // définition et demander le nom, c'était permettre de répondre sans avoir
+    // jamais ouvert un livre.
+    "« Le heaume lacé, il attendit le signal. Au premier choc, les deux lances volèrent en éclats. » De quel genre relève ce texte ?",
     ["un roman policier", "un roman de chevalerie", "un documentaire", "une recette"],
     "un roman de chevalerie",
-    "En 5e, on découvre les récits de chevalerie, pleins de quêtes et d'exploits."
+    "Le heaume, la lance, le signal du combat : c'est le décor du récit de chevalerie, celui qu'on découvre en 5e."
   ),
   qcm(
     "5e_fr_fixed_culture_2",
     "culture_litteraire",
     "5e_culture_genres",
     2,
-    "Une pièce qui fait rire en se moquant des défauts des hommes, comme chez Molière, est...",
+    // Vraie réplique de Molière (L'Avare, acte IV) — mort en 1673, domaine
+    // public. Quand on nomme un auteur, on le cite ; sinon on invente les
+    // personnages.
+    "« HARPAGON. — Au voleur ! au voleur ! à l'assassin ! au meurtrier ! Justice, juste ciel ! Je suis perdu, je suis assassiné, on m'a coupé la gorge, on m'a dérobé mon argent ! » (Molière, L'Avare) De quel genre relève ce texte ?",
     ["une tragédie", "une comédie", "un poème lyrique", "un conte de fées"],
     "une comédie",
-    "La comédie fait rire et corrige les défauts des personnages."
+    "Harpagon parle de meurtre et d'assassinat… pour de l'argent volé. C'est la disproportion qui fait rire, et elle dénonce son avarice : la comédie corrige un défaut en s'en moquant."
   ),
   qcm(
     "5e_fr_fixed_culture_3",

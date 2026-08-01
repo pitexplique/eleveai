@@ -411,11 +411,17 @@ function comp_apprecier(level: Cycle4Level): QcmItem[] {
         wrongs: ["C'est nul.", "J'ai lu vite.", "Il y a des images."],
         methode: "Un avis justifié relie l'émotion à un élément du récit.",
       },
+      // Définition de cours réécrite en reconnaissance (01/08).
       {
-        text: "Apprécier un texte, en cours de français, cela veut dire...",
-        correct: "donner un avis argumenté, pas seulement « j'aime »",
-        wrongs: ["mettre une note sur vingt au hasard", "compter les mots", "recopier le résumé"],
-        methode: "Apprécier, c'est justifier son jugement de lecteur.",
+        text: "« Ce passage m'a plu : l'auteur ne dit jamais que le personnage a peur, il le montre en décrivant ses mains qui tremblent. » Pourquoi est-ce un bon avis de lecteur ?",
+        correct: "il s'appuie sur un procédé précis du texte",
+        wrongs: [
+          "il dit clairement que le texte a plu",
+          "il est écrit à la première personne",
+          "il est court et facile à lire",
+        ],
+        methode:
+          "Un avis vaut par ce qu'il montre dans le texte, pas par son enthousiasme.",
       },
     ],
     {
@@ -699,50 +705,71 @@ function voix_reciter(level: Cycle4Level): QcmItem[] {
 function culture_genres(level: Cycle4Level): QcmItem[] {
   return byLevel(
     [
+      // ⚠️ RECONNAÎTRE UN GENRE, C'EST LE RECONNAÎTRE SUR UN EXTRAIT (01/08).
+      // Ces questions donnaient la définition et demandaient le nom — l'élève
+      // pouvait répondre sans avoir jamais ouvert un livre. On donne donc
+      // désormais quelques lignes, et c'est à lui de voir. Les extraits sont
+      // écrits pour EleveAI : aucun ayant droit, et on choisit les indices.
       {
-        text: "Un texte écrit en vers, avec un jeu sur les sonorités et les images, est...",
+        text: "« Le vent se couche au creux des cannes / et la nuit sent le sucre chaud. » De quel genre relève ce texte ?",
         correct: "un poème",
-        wrongs: ["un article de presse", "une recette", "une notice"],
-        methode: "On reconnaît le genre à sa forme et à son intention.",
+        wrongs: ["un article de presse", "une recette", "une notice de montage"],
+        methode:
+          "Deux vers, un rythme, une image : la forme et le travail des sonorités signent le poème.",
       },
       {
-        text: "Un texte fait de répliques précédées du nom des personnages est...",
+        text: "« LE PÈRE. — Tu rentres bien tard.\nCLARA, posant son sac. — Le bus n'est jamais passé. » De quel genre relève ce texte ?",
         correct: "un texte de théâtre",
         wrongs: ["un roman", "un poème", "un mode d'emploi"],
-        methode: "Le théâtre se reconnaît aux répliques et aux didascalies.",
+        methode:
+          "Les noms en tête de réplique et l'indication de jeu entre virgules — la didascalie — ne se trouvent qu'au théâtre.",
       },
       {
-        text: "Une histoire des dieux et des héros de l'Antiquité, comme l'Odyssée, est...",
+        text: "« Ulysse, que la déesse aux yeux clairs protégeait, aborda l'île au lever du jour. » De quel genre relève ce texte ?",
         correct: "un mythe (ou une épopée)",
         wrongs: ["un fait divers", "une notice de montage", "un bulletin météo"],
-        methode: "Les récits des dieux et héros antiques sont des mythes.",
+        methode:
+          "Un héros nommé, une divinité qui intervient dans l'action : c'est le monde du mythe.",
       },
       {
-        text: "Un récit long en prose qui suit un ou plusieurs personnages sur la durée est...",
+        text: "« Trois ans plus tard, Camille n'avait toujours pas revendu la maison. Elle y montait chaque dimanche, sans jamais y entrer. » De quel genre relève ce texte ?",
         correct: "un roman",
         wrongs: ["un poème", "une pièce de théâtre", "un dictionnaire"],
-        methode: "Le roman est un long récit en prose.",
+        methode:
+          "De la prose, un personnage suivi sur des années : le temps long est la marque du roman.",
       },
     ],
     {
       "5e": [
         {
-          text: "Un récit de chevaliers, de quêtes et d'exploits au Moyen Âge est...",
+          text: "« Le chevalier baissa sa lance et éperonna son cheval. Au bout du champ clos, son adversaire attendait sans bouger. » De quel genre relève ce texte ?",
           correct: "un roman de chevalerie",
-          wrongs: ["un roman policier", "un documentaire scientifique", "une bande dessinée humoristique"],
-          methode: "En 5e, on découvre les récits de chevalerie et d'aventure.",
+          wrongs: [
+            "un roman policier",
+            "un documentaire scientifique",
+            "une bande dessinée humoristique",
+          ],
+          methode:
+            "La lance, le champ clos, le duel réglé : c'est le décor du récit de chevalerie.",
         },
         {
-          text: "Une courte histoire avec des animaux qui parlent et une morale est...",
+          text: "« Le Rat des villes reçut son cousin des champs. Le repas fut interrompu : mieux vaut peu de pain en paix qu'un festin dans la crainte. » De quel genre relève ce texte ?",
           correct: "une fable",
           wrongs: ["une tragédie", "un roman-fleuve", "un fait divers"],
-          methode: "La fable met en scène des animaux et se termine par une morale.",
+          methode:
+            "Des animaux qui agissent comme des hommes, et une leçon donnée à la fin : c'est la fable.",
         },
         {
-          text: "Une pièce comique où l'on se moque des défauts humains, à la manière de Molière, est...",
+          // ⚠️ PERSONNAGES INVENTÉS, ET C'EST VOULU. La première version mettait
+          // ARGAN et TOINETTE sur des répliques que j'avais écrites : donner
+          // des noms de Molière à un texte qui n'est pas de lui, c'est
+          // apprendre une fausseté à l'élève. Quand on veut du Molière, on
+          // cite Molière (voir 5e/francais/fixed.bank.ts).
+          text: "« MADAME BRISSAC. — Je suis à l'agonie, je vous dis ! LÉONIE, sans lever les yeux de son ouvrage. — Alors mourez, madame, cela vous fera passer l'envie de vous plaindre. » De quel genre relève ce texte ?",
           correct: "une comédie",
           wrongs: ["une tragédie", "un poème lyrique", "un conte de fées"],
-          methode: "La comédie fait rire et corrige les défauts des hommes.",
+          methode:
+            "Une servante qui répond à son maître et le ridiculise : le rire y corrige un défaut, l'imaginaire malade.",
         },
       ],
       "4e": [
@@ -1867,17 +1894,32 @@ function gram_constituants(level: Cycle4Level): QcmItem[] {
         wrongs: ["1", "0", "3"],
         methode: "On compte les verbes conjugués pour distinguer simple et complexe.",
       },
+      // ⚠️ CES DEUX QUESTIONS ÉTAIENT DES DÉFINITIONS DE COURS (« Une phrase
+      // simple contient… »). Réécrites le 01/08 : l'évaluation nationale ne
+      // demande jamais de réciter une leçon, elle demande de RECONNAÎTRE sur
+      // un énoncé. Le cahier officiel de 5ᵉ ne pose que des questions de ce
+      // type-là.
       {
-        text: "Une phrase simple contient...",
-        correct: "un seul verbe conjugué",
-        wrongs: ["toujours deux verbes", "aucun verbe", "trois sujets"],
-        methode: "Phrase simple = une seule proposition (un verbe conjugué).",
+        text: "« Le chat dort sur le mur tiède. » Pourquoi est-ce une phrase simple ?",
+        correct: "elle ne contient qu'un seul verbe conjugué",
+        wrongs: [
+          "elle est courte",
+          "elle ne contient aucun complément",
+          "elle se termine par un point",
+        ],
+        methode:
+          "C'est le nombre de verbes conjugués qui décide, jamais la longueur.",
       },
       {
-        text: "Une phrase complexe est une phrase qui...",
-        correct: "contient plusieurs verbes conjugués",
-        wrongs: ["n'a aucun verbe", "est très longue à écrire", "n'a pas de sujet"],
-        methode: "Ce sont les verbes conjugués, pas la longueur, qui comptent.",
+        text: "« Quand la pluie s'arrêta, les enfants sortirent. » Pourquoi est-ce une phrase complexe ?",
+        correct: "elle contient deux verbes conjugués",
+        wrongs: [
+          "elle est longue",
+          "elle commence par « Quand »",
+          "elle contient une virgule",
+        ],
+        methode:
+          "« s'arrêta » et « sortirent » : deux verbes conjugués, donc deux propositions.",
       },
     ],
     {
@@ -2236,10 +2278,16 @@ function discours_rapportees(level: Cycle4Level): QcmItem[] {
         methode: "Le discours indirect intègre les paroles dans une subordonnée, sans guillemets.",
       },
       {
-        text: "Dans le discours direct, les paroles se signalent par...",
-        correct: "les deux points et les guillemets",
-        wrongs: ["aucune ponctuation", "un point d'exclamation obligatoire", "des parenthèses"],
-        methode: "Le discours direct utilise deux points, guillemets et parfois un tiret.",
+        // Définition réécrite en reconnaissance (01/08).
+        text: "« Elle murmura : “Je n'ai rien vu.” » À quoi reconnaît-on ici le discours direct ?",
+        correct: "aux deux points et aux guillemets qui encadrent les paroles",
+        wrongs: [
+          "au verbe conjugué au passé simple",
+          "à la brièveté de la phrase",
+          "à la présence d'une négation",
+        ],
+        methode:
+          "Le discours direct rapporte les mots tels qu'ils ont été dits : la ponctuation le montre.",
       },
       {
         text: "Quel verbe introduit des paroles rapportées ?",
@@ -2509,32 +2557,56 @@ function conj_employer(level: Cycle4Level): QcmItem[] {
         wrongs: ["bouillait (imparfait)", "bouillira (futur)", "a bouilli (passé composé)"],
         methode: "Une vérité générale s'exprime au présent.",
       },
+      // ⚠️ LA VALEUR DES TEMPS SE DEMANDE SUR UNE PHRASE, PAS DANS L'ABSTRAIT
+      // (01/08). Ces trois questions demandaient « pour exprimer X, on
+      // emploie… » — la leçon récitée à l'envers. Le cahier officiel de 5ᵉ
+      // procède toujours autrement : il donne l'énoncé et demande ce que la
+      // forme verbale VEUT DIRE.
       {
-        text: "Pour donner un ordre poli, on emploie souvent...",
-        correct: "l'impératif ou le conditionnel présent",
-        wrongs: ["le passé simple", "l'imparfait de description", "le futur antérieur"],
-        methode: "« Ferme la porte » (impératif) ou « Pourrais-tu... » (conditionnel).",
+        text: "« Pourriez-vous fermer la fenêtre ? » Ici, le conditionnel sert à...",
+        correct: "adoucir une demande",
+        wrongs: [
+          "situer l'action dans le passé",
+          "annoncer un fait certain",
+          "exprimer une impossibilité",
+        ],
+        methode:
+          "Comparez avec « Fermez la fenêtre » : c'est le même ordre, rendu poli.",
       },
       {
-        text: "Pour raconter une action passée soudaine dans un récit, on emploie...",
-        correct: "le passé simple",
-        wrongs: ["le présent de vérité générale", "le futur", "l'impératif"],
-        methode: "Le passé simple exprime l'action ponctuelle du récit.",
+        text: "« La nuit tombait doucement. Soudain, un cri déchira le silence. » Quel verbe marque l'action brusque ?",
+        correct: "« déchira », au passé simple",
+        wrongs: [
+          "« tombait », à l'imparfait",
+          "les deux à égalité",
+          "aucun des deux : rien n'est brusque",
+        ],
+        methode:
+          "L'imparfait installe le décor qui dure ; le passé simple fait surgir l'événement.",
       },
       {
-        text: "Pour exprimer une action future certaine, on emploie...",
-        correct: "le futur de l'indicatif",
-        wrongs: ["l'imparfait", "le passé composé", "le passé simple"],
-        methode: "Le futur exprime ce qui va arriver (« Demain, il pleuvra »).",
+        text: "« Demain, il pleuvra sur toute l'île. » Que dit ce temps du fait annoncé ?",
+        correct: "il est présenté comme certain",
+        wrongs: [
+          "il est présenté comme douteux",
+          "il a déjà eu lieu",
+          "il dépend d'une condition",
+        ],
+        methode:
+          "Le futur de l'indicatif affirme ; « il pleuvrait » laisserait planer un doute.",
       },
     ],
     {
       "5e": [
         {
-          text: "Dans un récit, pour décrire un paysage qui dure, on emploie...",
-          correct: "l'imparfait",
-          wrongs: ["le passé simple", "le futur", "l'impératif"],
-          methode: "L'imparfait décrit et installe le décor du récit.",
+          text: "« Le sentier montait entre les fougères. Les nuages s'accrochaient au sommet. » Pourquoi l'imparfait, ici ?",
+          correct: "il installe un décor qui dure",
+          wrongs: [
+            "il marque une action brusque",
+            "il annonce un fait à venir",
+            "il donne un ordre",
+          ],
+          methode: "L'imparfait étire ; le passé simple découpe.",
         },
       ],
       "4e": [
