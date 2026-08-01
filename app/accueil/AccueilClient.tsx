@@ -577,7 +577,7 @@ function MotDuJourEncart() {
       <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
         ✍️ Le mot du jour · {mot.matiere} <PastilleJour />
       </p>
-      <p className="mt-1.5 text-sm font-medium leading-6 text-[#1d1c16]/80">
+      <p className="mt-1.5 text-sm font-medium leading-6 text-[#1d1c16]/70">
         💡 {mot.indice}
       </p>
       <Link
@@ -684,7 +684,7 @@ function UneCarousel({ slides }: { slides?: SlideUne[] }) {
         {ep.titre}
       </h2>
       {ep.accroche && (
-        <p className="mt-3 font-serif text-base font-medium leading-7 text-[#1d1c16]/85 sm:text-lg">
+        <p className="mt-3 font-serif text-base font-medium leading-7 text-[#1d1c16]/70 sm:text-lg">
           {ep.accroche}
         </p>
       )}
@@ -713,7 +713,7 @@ function UneCarousel({ slides }: { slides?: SlideUne[] }) {
           type="button"
           aria-label="Épisode précédent"
           onClick={() => setIndex((i) => (i - 1 + items.length) % items.length)}
-          className="absolute left-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#1d1c16]/30 bg-[#f6f1e4]/90 text-xl font-black text-[#1d1c16] shadow transition hover:bg-[#f6f1e4]"
+          className="absolute left-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#1d1c16]/25 bg-[#f6f1e4]/90 text-xl font-black text-[#1d1c16] shadow transition hover:bg-[#f6f1e4]"
         >
           ‹
         </button>
@@ -721,7 +721,7 @@ function UneCarousel({ slides }: { slides?: SlideUne[] }) {
           type="button"
           aria-label="Épisode suivant"
           onClick={() => setIndex((i) => (i + 1) % items.length)}
-          className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#1d1c16]/30 bg-[#f6f1e4]/90 text-xl font-black text-[#1d1c16] shadow transition hover:bg-[#f6f1e4]"
+          className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#1d1c16]/25 bg-[#f6f1e4]/90 text-xl font-black text-[#1d1c16] shadow transition hover:bg-[#f6f1e4]"
         >
           ›
         </button>
@@ -811,7 +811,7 @@ function EditionPerso() {
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <Kicker>Se diriger · Pour toi aujourd&apos;hui</Kicker>
         {serie >= 2 && (
-          <p className="text-xs font-bold italic text-[#1d1c16]/60">
+          <p className="text-xs font-bold italic text-[#1d1c16]/70">
             Tu es venu {serie} jours d&apos;affilée — la rédaction te salue. 🔥
           </p>
         )}
@@ -840,7 +840,7 @@ function EditionPerso() {
                 <h3 className="mt-1 font-serif text-xl font-black leading-snug group-hover:underline">
                   {carte.titre}
                 </h3>
-                <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/75">
+                <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
                   {carte.message}
                 </p>
                 <p className="mt-2 text-sm font-black text-cyan-800 transition group-hover:translate-x-0.5">
@@ -961,12 +961,16 @@ export default function AccueilPage({
       {/* ══ LA MANCHETTE ═════════════════════════════════════════════════════ */}
       <header className="mx-auto max-w-6xl">
         {/* L'oreille : date · n° · lieu · prix — et la connexion à droite. */}
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#1d1c16]/30 pb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#1d1c16]/70">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#1d1c16]/25 pb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#1d1c16]/70">
           <p>
             La Réunion · {dateEdition ? dateEdition.date : "—"} · N°{" "}
             {dateEdition ? dateEdition.numero : "—"}
           </p>
-          <p className="hidden sm:block">Gratuit — sans publicité</p>
+          {/* « Gratuit — sans publicité » est l'argument le plus fort de la
+              page pour un professeur ou un parent, et il était en gris clair
+              au milieu d'une ligne de service. On lui donne l'encre du
+              journal (01/08). */}
+          <p className="font-black text-cyan-800">Gratuit — sans publicité</p>
           {/* Pas de bouton « Se connecter » ici : le header papier au-dessus
               s'en charge (sinon deux boutons identiques à 60 px d'écart). */}
           {eleve ? (
@@ -995,14 +999,21 @@ export default function AccueilPage({
             href="/explorer"
             className="group order-2 border-2 border-cyan-800 bg-cyan-800 p-3 text-center text-[#f0fafc] transition hover:bg-[#f0fafc] hover:text-cyan-800 lg:order-1"
           >
+            {/* NE PAS RÉPÉTER LE PAVÉ « COMMENCE ICI » (01/08) : l'oreille
+                disait « Il t'explique, tu t'entraînes — tout est corrigé »
+                et, 300 px plus bas, le pavé disait « Entraîne-toi maintenant
+                — tout est corrigé ». Les deux se voient en même temps : le
+                même argument dit deux fois ne s'entend plus. L'oreille prend
+                donc l'ÉTENDUE (toutes les classes, toutes les matières), le
+                pavé garde le GESTE (entraîne-toi maintenant). */}
             <p className="text-[10px] font-black uppercase tracking-[0.18em]">
-              🤖 Le coach + les séries d&apos;exercices
+              🗂️ Le catalogue · du CP à la Terminale
             </p>
             <p className="mt-1 font-serif text-lg font-black leading-tight">
-              Il t&apos;explique, tu t&apos;entraînes — tout est corrigé
+              Ta classe est dedans, et toutes tes matières
             </p>
             <p className="mt-1 text-xs font-black underline underline-offset-2">
-              Explorer tout le catalogue →
+              Explorer le catalogue →
             </p>
           </Link>
 
@@ -1011,13 +1022,13 @@ export default function AccueilPage({
               visite). « Le Journal » passe en surtitre, la devise du manifeste
               cède la place à la phrase choc du coach. */}
           <div className="order-1 text-center lg:order-2">
-            <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[#1d1c16]/65 sm:text-xs">
+            <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[#1d1c16]/70 sm:text-xs">
               Le journal pour apprendre et s&apos;évaluer · Île de La Réunion
             </p>
             <h1 className="mt-1 font-serif text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl">
               eleveai<span className="text-cyan-800">.fr</span>
             </h1>
-            <p className="mt-2 font-serif text-base font-black italic tracking-wide text-[#1d1c16]/80 sm:text-lg">
+            <p className="mt-2 font-serif text-base font-black italic tracking-wide text-[#1d1c16]/70 sm:text-lg">
               « Ici, personne n&apos;apprend à ta place. »
             </p>
           </div>
@@ -1042,8 +1053,13 @@ export default function AccueilPage({
           </Link>
         </div>
 
-        {/* Le chemin de fer : les rubriques (ancres internes). */}
-        <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 border-b border-[#1d1c16]/30 py-2 text-[11px] font-black uppercase tracking-[0.16em]">
+        {/* Le chemin de fer + la devise SUR LA MÊME BANDE (01/08). Ils avaient
+            chacun la leur : deux filets de plus sur le premier écran, et trois
+            accroches empilées sous le titre (le surtitre du journal, « Ici,
+            personne n'apprend à ta place », puis la devise). Les mots restent,
+            la bande de trop s'en va. */}
+        <div className="border-b border-[#1d1c16]/25 py-2">
+        <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-[11px] font-black uppercase tracking-[0.16em]">
           <a href="#la-une" className="hover:text-cyan-800">La Une</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
           <a href="#en-vrai" className="hover:text-cyan-800">En vrai</a>
@@ -1067,9 +1083,10 @@ export default function AccueilPage({
         {/* La devise publique (choisie 16/07). La doctrine interne reste
             « réfléchir · apprendre · se diriger » — même triptyque, dit pour
             un enfant. */}
-        <p className="border-b border-[#1d1c16]/30 py-1.5 text-center font-serif text-sm font-black italic tracking-wide text-[#1d1c16]/75">
+        <p className="mt-1 text-center font-serif text-sm font-black italic tracking-wide text-[#1d1c16]/70">
           Comprendre. Apprendre. S&apos;amuser.
         </p>
+        </div>
 
         {/* ══ LE COACH — LE PREMIER GESTE ═══════════════════════════════════
             Décision produit (24/07, Frédéric) : le COACH est la destination
@@ -1078,7 +1095,7 @@ export default function AccueilPage({
             l'entraînement en tête d'affiche — trois verbes TOUJOURS visibles,
             la classe affine la destination — au lieu de la bande repliée qui
             cachait le coach derrière un clic. */}
-        <div className="border-b border-[#1d1c16]/30 py-4">
+        <div className="border-b border-[#1d1c16]/25 py-4">
           <div className="mx-auto max-w-4xl border-2 border-cyan-800 bg-cyan-800/[0.05] p-4 sm:p-5">
             <p className="text-center text-[11px] font-black uppercase tracking-[0.22em] text-cyan-800">
               ✏️ Commence ici · Le coach t&apos;entraîne
@@ -1086,7 +1103,7 @@ export default function AccueilPage({
             <h2 className="mt-1 text-center font-serif text-2xl font-black leading-tight sm:text-[1.75rem]">
               Entraîne-toi maintenant — tout est corrigé
             </h2>
-            <p className="mx-auto mt-1.5 max-w-2xl text-center text-sm font-medium leading-6 text-[#1d1c16]/75">
+            <p className="mx-auto mt-1.5 max-w-2xl text-center text-sm font-medium leading-6 text-[#1d1c16]/70">
               Le coach t&apos;explique et tu t&apos;entraînes ; le parcours et le
               défi te testent. Le journal, c&apos;est l&apos;histoire qui donne
               envie — ici, c&apos;est l&apos;entraînement.
@@ -1112,9 +1129,9 @@ export default function AccueilPage({
             </div>
 
             {/* La classe affine la destination du coach (accordéon conservé). */}
-            <div className="mt-4 border-t border-[#1d1c16]/15 pt-3.5">
+            <div className="mt-4 border-t border-[#1d1c16]/25 pt-3.5">
               <div className="flex flex-wrap items-center justify-center gap-1.5">
-                <span className="mr-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/60">
+                <span className="mr-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/70">
                   🎓 Ta classe :
                 </span>
                 {CLASSES_ENTREE.map((c) => (
@@ -1126,7 +1143,7 @@ export default function AccueilPage({
                 className={`rounded-sm border px-2.5 py-1 text-xs font-black transition ${
                   classeActive === c.slug
                     ? "border-[#1d1c16] bg-[#1d1c16] text-[#f6f1e4]"
-                    : "border-[#1d1c16]/30 text-[#1d1c16]/80 hover:border-[#1d1c16] hover:bg-[#1d1c16] hover:text-[#f6f1e4]"
+                    : "border-[#1d1c16]/25 text-[#1d1c16]/70 hover:border-[#1d1c16] hover:bg-[#1d1c16] hover:text-[#f6f1e4]"
                 }`}
               >
                 {c.label}
@@ -1198,12 +1215,12 @@ export default function AccueilPage({
             le clic descend au courrier complet. */}
         <a
           href="#courrier"
-          className="block border-b border-[#1d1c16]/30 py-2 text-center transition hover:bg-[#1d1c16]/5"
+          className="block border-b border-[#1d1c16]/25 py-2 text-center transition hover:bg-[#1d1c16]/5"
         >
           <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
             💬 Les avis des élèves
           </p>
-          <p className="mx-auto mt-0.5 max-w-3xl px-2 font-serif text-sm font-medium italic leading-6 text-[#1d1c16]/85">
+          <p className="mx-auto mt-0.5 max-w-3xl px-2 font-serif text-sm font-medium italic leading-6 text-[#1d1c16]/70">
             <span className="not-italic tracking-widest text-amber-600" aria-label={`Note ${avisManchette.note} sur 5`}>
               {"★".repeat(avisManchette.note)}
             </span>{" "}
@@ -1230,7 +1247,7 @@ export default function AccueilPage({
             <h2 className="mt-1 font-serif text-2xl font-black leading-tight">
               Composez votre fiche comme vous faites cours
             </h2>
-            <p className="mt-2 max-w-3xl text-sm font-medium leading-6 text-[#1d1c16]/80">
+            <p className="mt-2 max-w-3xl text-sm font-medium leading-6 text-[#1d1c16]/70">
               Chaque fiche de maths est en blocs — Définition, Propriétés,
               « À quoi ça sert dans le réel », un peu d&apos;histoire, exemples
               corrigés, entraînement. Cochez vos rubriques, choisissez votre
@@ -1244,7 +1261,7 @@ export default function AccueilPage({
               >
                 Ouvrir l&apos;atelier →
               </Link>
-              <p className="text-xs font-medium italic text-[#1d1c16]/60">
+              <p className="text-xs font-medium italic text-[#1d1c16]/70">
                 « Le cours est fait par les élèves et les profs — pas l&apos;un
                 sans l&apos;autre. »
               </p>
@@ -1270,47 +1287,95 @@ export default function AccueilPage({
                 chaque slide porte son propre surtitre. */}
             <UneCarousel slides={slides} />
 
-            {/* À lire aussi — la rivière de titres (façon portail MSN) : des
-                manchettes cliquables qui irriguent le reste du site. La liste
-                S'ÉTIRE jusqu'au pied de colonne (flex-1 + content-between) :
-                le mou devient de l'interligne, jamais un trou. */}
-            <div className="mt-5 border-t-2 border-[#1d1c16] pt-3 lg:flex lg:flex-1 lg:flex-col">
+            {/* À LIRE AUSSI — la rivière de titres. REFONTE DU 01/08 : elle
+                était passée à 11 liens, c'est-à-dire un deuxième catalogue.
+                Sont partis — les fiches de cours (pas complètes, demande de
+                Frédéric) ; Maths Réel · 974 (il a sa rubrique « En vrai »
+                plus bas, demande de Frédéric) ; la courbe en cloche et la
+                machine des epsilons (l'encart des machines, juste en face,
+                les contient toutes) ; le bon prompt (sa place est dans le
+                parcours IA). Le dico et Pix IA sont partis former la rubrique
+                « Les évaluations du collège », juste dessous.
+                CSS : plus de `flex-1 + content-between`. Il devait faire de
+                l'interligne avec le mou ; avec une colonne voisine plus haute
+                il montait l'interligne à 70-80 px et fabriquait exactement le
+                trou qu'il était censé boucher. Le mou va maintenant au pied,
+                où le bloc « évaluations » l'occupe (mt-auto).
+                Plus d'emoji-puce non plus : la colonne de droite en a, celle-ci
+                est une rivière de titres — pure typographie. On distingue
+                enfin les deux colonnes. */}
+            <div className="mt-5 border-t-2 border-[#1d1c16] pt-3">
               <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                 À lire aussi
               </p>
-              <ul className="mt-2 grid gap-x-6 gap-y-2 sm:grid-cols-2 lg:flex-1 lg:content-between">
+              <ul className="mt-2 grid gap-x-6 gap-y-2 sm:grid-cols-2">
                 {[
-                  { emoji: "🖼️", titre: "Picto Maths : 25 défis en images de l'île", href: "/picto-maths" },
-                  { emoji: "🗺️", titre: "La carte de La Réunion, lieu par lieu, avec les maths dedans", href: "/carte" },
-                  { emoji: "🃏", titre: "« Qui suis-je ? » — le jeu de cartes à imprimer en famille", href: "/qui-suis-je-a-imprimer" },
-                  { emoji: "🗣️", titre: "Le dico : les 50 mots de l'évaluation nationale 6ᵉ", href: "/dico" },
-                  { emoji: "📚", titre: "Les fiches de cours, notion par notion, avec corrections", href: "/fiches-cours" },
-                  { emoji: "🎓", titre: "Pix IA : l'éval blanche pour arriver prêt le jour J", href: "/eval-pix-ia" },
-                  { emoji: "🌋", titre: "Maths Réel · 974 : le carnet de terrain, photos et vidéos", href: "/maths-974" },
-                  // 4 titres de plus (24/07, contre le trou) — des pages que
-                  // l'accueil ne montrait plus nulle part ailleurs.
-                  { emoji: "🔔", titre: "La courbe en cloche : la planche de Galton dans ta main", href: "/loi-normale" },
-                  { emoji: "💫", titre: "La machine des epsilons : des étincelles aux infinis", href: "/simulateur-epsilon" },
-                  { emoji: "🎤", titre: "Le Grand oral : s'entraîner à parler, chrono en main", href: "/grand-oral" },
-                  { emoji: "💬", titre: "Le bon prompt : bien demander à une IA, ça s'apprend", href: "/le-bon-prompt" },
+                  { titre: "Picto Maths : 25 défis en images de l'île", href: "/picto-maths" },
+                  { titre: "La carte de La Réunion, lieu par lieu, avec les maths dedans", href: "/carte" },
+                  { titre: "« Qui suis-je ? » — le jeu de cartes à imprimer en famille", href: "/qui-suis-je-a-imprimer" },
+                  { titre: "Le Grand oral : s'entraîner à parler, chrono en main", href: "/grand-oral" },
                 ].map((l) => (
-                  <li key={l.href} className="border-b border-dotted border-[#1d1c16]/30 pb-2">
-                    <Link href={l.href} className="group flex items-baseline gap-2">
-                      <span aria-hidden className="text-sm">{l.emoji}</span>
-                      <span className="font-serif text-[15px] font-black leading-snug group-hover:underline">
-                        {l.titre}
-                      </span>
+                  <li key={l.href} className="border-b border-dotted border-[#1d1c16]/25 pb-2">
+                    <Link
+                      href={l.href}
+                      className="group block font-serif text-[15px] font-black leading-snug hover:underline"
+                    >
+                      {l.titre}
                     </Link>
                   </li>
                 ))}
               </ul>
+            </div>
+
+            {/* LES ÉVALUATIONS DU COLLÈGE — idée de Frédéric (01/08). Le dico
+                et Pix IA traînaient au milieu de la rivière de titres, sans
+                dire à quoi ils servent. Regroupés, ils forment une rubrique
+                qui a un sens à la rentrée : les deux évaluations que le
+                collège fait passer, et de quoi les préparer tranquillement.
+                Le bloc s'ancre au pied de la colonne (mt-auto) — le mou reste
+                au milieu, jamais en bas. */}
+            <div className="mt-5 border-2 border-[#1d1c16] p-4 lg:mt-auto">
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                🎓 Les évaluations du collège
+              </p>
+              <p className="mt-1 font-serif text-lg font-black leading-tight">
+                Celles qu&apos;on te fera passer — prépare-les tranquillement
+              </p>
+              <div className="mt-3 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+                {[
+                  {
+                    nom: "L'évaluation nationale de 6ᵉ",
+                    quoi: "Les 50 mots qu'elle emploie, expliqués un par un — pour ne pas perdre de points sur la consigne.",
+                    cta: "Ouvrir le dico",
+                    href: "/dico",
+                  },
+                  {
+                    nom: "Pix IA",
+                    quoi: "L'éval blanche, 16 questions corrigées, pour arriver prêt le jour J.",
+                    cta: "Passer l'éval blanche",
+                    href: "/eval-pix-ia",
+                  },
+                ].map((e) => (
+                  <Link key={e.href} href={e.href} className="group block">
+                    <span className="block font-serif text-[15px] font-black leading-snug group-hover:underline">
+                      {e.nom}
+                    </span>
+                    <span className="mt-0.5 block text-xs font-medium leading-5 text-[#1d1c16]/70">
+                      {e.quoi}
+                    </span>
+                    <span className="mt-1 block text-sm font-black text-cyan-800">
+                      {e.cta} →
+                    </span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </article>
 
           {/* Le fil du jour (APPRENDRE : les rendez-vous quotidiens). */}
           <aside className="border-[#1d1c16]/25 lg:col-span-3 lg:flex lg:flex-col lg:border-l lg:pl-6">
             <Kicker>Apprendre · Aujourd&apos;hui</Kicker>
-            <div className="mt-2 divide-y divide-[#1d1c16]/20">
+            <div className="mt-2 divide-y divide-[#1d1c16]/25">
               {/* LES RITUELS DU JOUR — un emplacement COMMUN (Frédéric, 25/07) :
                   les rendez-vous quotidiens groupés au même endroit. Le défi a
                   sa grande carte au-dessus ; ici les rituels d'entraînement :
@@ -1329,7 +1394,7 @@ export default function AccueilPage({
                   <Link
                     key={r.href}
                     href={r.href}
-                    className="group block border-b border-dotted border-[#1d1c16]/30 py-2"
+                    className="group block border-b border-dotted border-[#1d1c16]/25 py-2"
                   >
                     <span className="flex items-baseline gap-2">
                       <span aria-hidden className="text-sm">{r.emoji}</span>
@@ -1337,7 +1402,7 @@ export default function AccueilPage({
                         {r.nom}
                       </span>
                     </span>
-                    <span className="mt-0.5 block pl-[22px] text-xs font-medium text-[#1d1c16]/60">
+                    <span className="mt-0.5 block pl-[22px] text-xs font-medium text-[#1d1c16]/70">
                       {r.quoi}
                     </span>
                   </Link>
@@ -1360,7 +1425,7 @@ export default function AccueilPage({
                     <span className="block font-serif text-lg font-black leading-tight group-hover:underline">
                       Les guides de survie · maths, fran&ccedil;ais, anglais
                     </span>
-                    <span className="mt-0.5 block text-xs font-medium leading-4 text-[#1d1c16]/65">
+                    <span className="mt-0.5 block text-xs font-medium leading-4 text-[#1d1c16]/70">
                       Du CM1 &agrave; la Terminale : formules, r&eacute;flexes, pi&egrave;ges et test corrig&eacute;, &agrave; imprimer.
                     </span>
                     <span className="mt-1 block text-sm font-black text-cyan-800 group-hover:underline">
@@ -1374,7 +1439,7 @@ export default function AccueilPage({
                   chaque cahier livré y apparaît sans retoucher l'accueil. */}
               <Link
                 href="/cahier-vacances"
-                className="group block border-b border-dotted border-[#1d1c16]/30 py-3"
+                className="group block border-b border-dotted border-[#1d1c16]/25 py-3"
               >
                 <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                   📘 &Agrave; imprimer
@@ -1382,7 +1447,7 @@ export default function AccueilPage({
                 <span className="mt-1 block font-serif text-[15px] font-black leading-snug group-hover:underline">
                   Les cahiers de vacances
                 </span>
-                <span className="mt-0.5 block text-xs font-medium text-[#1d1c16]/60">
+                <span className="mt-0.5 block text-xs font-medium text-[#1d1c16]/70">
                   Du CP &agrave; l&apos;apr&egrave;s-bac, un cahier par passage de classe.
                 </span>
               </Link>
@@ -1416,7 +1481,7 @@ export default function AccueilPage({
                   <Link
                     key={c.href}
                     href={c.href}
-                    className="group block border-b border-dotted border-[#1d1c16]/30 py-2"
+                    className="group block border-b border-dotted border-[#1d1c16]/25 py-2"
                   >
                     <span className="flex items-baseline gap-2">
                       <span aria-hidden className="text-sm">{c.emoji}</span>
@@ -1424,7 +1489,7 @@ export default function AccueilPage({
                         {c.nom}
                       </span>
                     </span>
-                    <span className="mt-0.5 block pl-[22px] text-xs font-medium text-[#1d1c16]/60">
+                    <span className="mt-0.5 block pl-[22px] text-xs font-medium text-[#1d1c16]/70">
                       {c.quoi}
                     </span>
                   </Link>
@@ -1463,7 +1528,7 @@ export default function AccueilPage({
                     🎯 Le défi du jour · {defiDuJour.defi.theme}{" "}
                     <PastilleJour />
                   </p>
-                  <div className="relative mt-2 aspect-[16/7] w-full overflow-hidden border border-[#1d1c16]/20">
+                  <div className="relative mt-2 aspect-[16/7] w-full overflow-hidden border border-[#1d1c16]/25">
                     <Image
                       src={defiDuJour.defi.image ?? "/images/defis-du-jour/coupe-monde-foot.webp"}
                       alt={defiDuJour.defi.title}
@@ -1483,7 +1548,7 @@ export default function AccueilPage({
                   <summary className="cursor-pointer text-xs font-black text-[#1d1c16]/55 underline underline-offset-2 hover:text-[#1d1c16]">
                     Voir la réponse ▾
                   </summary>
-                  <p className="mt-1.5 border-l-2 border-cyan-800/40 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/80">
+                  <p className="mt-1.5 border-l-2 border-cyan-800/40 pl-2.5 text-[13px] font-medium leading-5 text-[#1d1c16]/70">
                     {defiDuJour.defi.explanation}
                   </p>
                 </details>
@@ -1541,7 +1606,7 @@ export default function AccueilPage({
             </h3>
             {/* Le 1er paragraphe se lit tout de suite, la suite s'ouvre dans le
                 dépliant (demande de Frédéric, 22/07). */}
-            <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
+            <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/70">
               {editoParagraphes[0]}
             </p>
             {editoParagraphes.length > 1 && (
@@ -1552,7 +1617,7 @@ export default function AccueilPage({
                 {editoParagraphes.slice(1).map((p, i) => (
                   <p
                     key={i}
-                    className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80"
+                    className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/70"
                   >
                     {p}
                   </p>
@@ -1597,7 +1662,7 @@ export default function AccueilPage({
                     <p className="mt-1 font-serif text-2xl font-black leading-none">
                       {c.chiffre}
                     </p>
-                    <p className="mt-1.5 text-sm font-medium leading-6 text-[#1d1c16]/80">
+                    <p className="mt-1.5 text-sm font-medium leading-6 text-[#1d1c16]/70">
                       {teaser}
                     </p>
                     {suite && (
@@ -1605,7 +1670,7 @@ export default function AccueilPage({
                         <summary className="cursor-pointer list-none text-xs font-black text-cyan-800 underline underline-offset-2">
                           Lire la suite ▾
                         </summary>
-                        <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/80">
+                        <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/70">
                           {suite}
                         </p>
                       </details>
@@ -1633,7 +1698,7 @@ export default function AccueilPage({
                 <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1d1c16]">
                   🚀 Aux entreprises de l&apos;île
                 </p>
-                <p className="mt-1.5 text-sm font-semibold leading-6 text-[#1d1c16]/85">
+                <p className="mt-1.5 text-sm font-semibold leading-6 text-[#1d1c16]/70">
                   Votre métier peut devenir un article, une simulation, un défi —
                   comme la canne, le lait ou le barrage avant vous.
                 </p>
@@ -1698,7 +1763,7 @@ export default function AccueilPage({
               ligne: "Sans publicité, sans jugement : c'est comme ça qu'on apprend.",
             },
           ].map((p) => (
-            <div key={p.titre} className="border-l-2 border-[#1d1c16]/20 pl-3">
+            <div key={p.titre} className="border-l-2 border-[#1d1c16]/25 pl-3">
               <p className="font-serif text-[15px] font-black leading-snug">
                 <span aria-hidden className="mr-1">{p.emoji}</span>
                 {p.titre}
@@ -1721,7 +1786,7 @@ export default function AccueilPage({
           {/* Le défi du jour — la vraie image du défi programmé aujourd'hui. */}
           <Link
             href="/defis-du-jour"
-            className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/20 lg:aspect-[16/9]"
+            className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/25 lg:aspect-[16/9]"
           >
             <Image
               src={defiDuJour.defi.image ?? "/images/defis-du-jour/coupe-monde-foot.webp"}
@@ -1746,7 +1811,7 @@ export default function AccueilPage({
             href={`https://youtu.be/${UNE.youtubeId}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/20 lg:aspect-[16/9]"
+            className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/25 lg:aspect-[16/9]"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -1780,7 +1845,7 @@ export default function AccueilPage({
             <Link
               key={t.href}
               href={t.href}
-              className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/20 lg:aspect-[16/9]"
+              className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/25 lg:aspect-[16/9]"
             >
               <Image
                 src={t.image}
@@ -1805,7 +1870,7 @@ export default function AccueilPage({
               émoji géant rendait mal, façon picto cassé). */}
           <Link
             href="/dictee-du-jour"
-            className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/20 bg-gradient-to-br from-sky-500 to-indigo-700 lg:aspect-[16/9]"
+            className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/25 bg-gradient-to-br from-sky-500 to-indigo-700 lg:aspect-[16/9]"
           >
             <span
               aria-hidden
@@ -1840,7 +1905,7 @@ export default function AccueilPage({
               rel="noopener noreferrer"
               className="group border-t border-[#1d1c16]/25 pt-3"
             >
-              <div className="relative aspect-video w-full overflow-hidden border border-[#1d1c16]/20 bg-[#1d1c16]/5">
+              <div className="relative aspect-video w-full overflow-hidden border border-[#1d1c16]/25 bg-[#1d1c16]/5">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={`https://i.ytimg.com/vi/${ep.youtubeId}/hqdefault.jpg`}
@@ -1871,7 +1936,7 @@ export default function AccueilPage({
               (c.youtube_id ? `https://i.ytimg.com/vi/${c.youtube_id}/hqdefault.jpg` : null);
             return (
               <Link key={c.id} href="/maths-974" className="group border-t border-[#1d1c16]/25 pt-3">
-                <div className="relative aspect-video w-full overflow-hidden border border-[#1d1c16]/20 bg-[#1d1c16]/5">
+                <div className="relative aspect-video w-full overflow-hidden border border-[#1d1c16]/25 bg-[#1d1c16]/5">
                   {img ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -1934,7 +1999,7 @@ export default function AccueilPage({
         {/* Sous-titre qui POSE L'ATTENTE (demande de Frédéric, 23/07) : le hook
             est tous âges, mais le fond va loin — personne ne se sent exclu, et
             les grands savent que c'est pour eux. */}
-        <p className="mt-2 text-sm font-semibold text-[#1d1c16]/60">
+        <p className="mt-2 text-sm font-semibold text-[#1d1c16]/70">
           Des histoires pour tous, des maths qui vont loin — collège → supérieur.
         </p>
         <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -2049,7 +2114,7 @@ export default function AccueilPage({
             </Link>
           ))}
         </div>
-        <p className="mt-2 text-xs font-medium italic text-[#1d1c16]/60">
+        <p className="mt-2 text-xs font-medium italic text-[#1d1c16]/70">
           Gratuits, imprimables, avec Ti Margo 🦎 —{" "}
           <Link href="/cahier-vacances" className="font-black text-cyan-800 underline underline-offset-2">
             tous les cahiers →
@@ -2099,7 +2164,7 @@ export default function AccueilPage({
               >
                 <p className="text-3xl" aria-hidden>{c.emoji}</p>
                 {c.famille && (
-                  <p className="mt-1.5 text-[9px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/50">
+                  <p className="mt-1.5 text-[9px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
                     {c.famille}
                   </p>
                 )}
@@ -2112,7 +2177,7 @@ export default function AccueilPage({
               </Link>
             ))}
         </div>
-        <p className="mt-2 text-xs font-medium italic text-[#1d1c16]/60">
+        <p className="mt-2 text-xs font-medium italic text-[#1d1c16]/70">
           Apprendre est gratuit, et ça le restera. Ce qui se paie : le suivi dans
           la durée —{" "}
           <Link href="/tarifs" className="font-black text-cyan-800 underline underline-offset-2">
@@ -2132,7 +2197,7 @@ export default function AccueilPage({
               <p className="text-sm tracking-widest text-amber-600" aria-label={`Note ${a.note} sur 5`}>
                 {"★".repeat(a.note)}
               </p>
-              <blockquote className="mt-1 font-serif text-base font-medium italic leading-7 text-[#1d1c16]/85">
+              <blockquote className="mt-1 font-serif text-base font-medium italic leading-7 text-[#1d1c16]/70">
                 « {a.quote} »
               </blockquote>
               <figcaption className="mt-2 text-xs font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
@@ -2148,7 +2213,7 @@ export default function AccueilPage({
           >
             ✉️ Écrire au journal
           </Link>
-          <p className="text-xs font-medium italic text-[#1d1c16]/60">
+          <p className="text-xs font-medium italic text-[#1d1c16]/70">
             Les lettres sont publiées telles quelles, fautes comprises : ce sont
             de vrais élèves qui écrivent.
           </p>
@@ -2166,18 +2231,18 @@ export default function AccueilPage({
                 {h.emoji} {h.categorie}
               </p>
               <h3 className="mt-1 font-serif text-xl font-black">{h.eleve}</h3>
-              <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/75">{h.pour}</p>
+              <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">{h.pour}</p>
             </div>
           ))}
         </div>
 
         {/* L'ours des contributeurs : tous les prénoms des élèves testeurs. */}
         <div className="mt-5 border-t border-[#1d1c16]/25 pt-3">
-          <p className="text-sm font-medium leading-7 text-[#1d1c16]/80">
+          <p className="text-sm font-medium leading-7 text-[#1d1c16]/70">
             <span className="font-black">🙏 Merci à nos {elevesRemercies.length} élèves testeurs :</span>{" "}
             {elevesRemercies.map((e, i) => (
               <span key={`${e.prenom}-${e.action}`} title={e.action} className="font-serif font-black">
-                {i > 0 && <span className="font-sans font-medium text-[#1d1c16]/40"> · </span>}
+                {i > 0 && <span className="font-sans font-medium text-[#1d1c16]/30"> · </span>}
                 {e.prenom}
               </span>
             ))}
@@ -2188,7 +2253,7 @@ export default function AccueilPage({
             <Link href="/remerciements" className="font-black text-cyan-800 underline underline-offset-2">
               La page des remerciements →
             </Link>{" "}
-            <span className="text-[#1d1c16]/40">·</span>{" "}
+            <span className="text-[#1d1c16]/30">·</span>{" "}
             <Link href="/besoin-de-vous" className="font-black text-cyan-800 underline underline-offset-2">
               EleveAI a besoin de vous →
             </Link>
@@ -2206,7 +2271,7 @@ export default function AccueilPage({
             <h3 className="mt-1 font-serif text-xl font-black leading-snug group-hover:underline">
               L&apos;IA explique, elle ne triche pas
             </h3>
-            <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/75">
+            <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
               Encadrée, sans publicité, données protégées. Et gratuit si le
               collège de votre enfant l&apos;utilise.
             </p>
@@ -2217,7 +2282,7 @@ export default function AccueilPage({
             <h3 className="mt-1 font-serif text-xl font-black leading-snug group-hover:underline">
               Suivez leur progression
             </h3>
-            <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/75">
+            <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
               Le travail de chaque élève en temps réel, ses moyennes par
               matière. EleveAI corrige&nbsp;; vous, vous enseignez.
             </p>
@@ -2228,7 +2293,7 @@ export default function AccueilPage({
             <h3 className="mt-1 font-serif text-xl font-black leading-snug group-hover:underline">
               Financé par l&apos;établissement, gratuit pour les familles
             </h3>
-            <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/75">
+            <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
               Multi-matières, suivi classe par classe, RGPD maîtrisé.
               ✓ Déjà utilisé en collège, à La Réunion.
             </p>
@@ -2236,10 +2301,47 @@ export default function AccueilPage({
           </Link>
         </div>
 
+        {/* L'ATELIER DU PROF, MONTRÉ SANS COMPTE (01/08). Il n'existait que
+            dans la branche `isStaff`, tout en haut : l'argument le plus fort
+            pour un enseignant — composer sa fiche comme il fait cours —
+            n'était visible qu'une fois connecté, c'est-à-dire trop tard pour
+            l'avoir convaincu. On le montre ici en clair. Le prof déjà
+            connecté, lui, garde sa version personnalisée en haut de page :
+            pas de doublon. */}
+        {!isStaff && (
+          <div className="mt-6 border-2 border-[#1d1c16] p-4 sm:p-5">
+            <p className="text-[11px] font-black uppercase tracking-[0.22em] text-cyan-800">
+              🍎 L&apos;atelier du prof · Fiches à composer
+            </p>
+            <h3 className="mt-1 font-serif text-2xl font-black leading-tight">
+              Composez votre fiche comme vous faites cours
+            </h3>
+            <p className="mt-2 max-w-3xl text-sm font-medium leading-6 text-[#1d1c16]/70">
+              Chaque fiche de maths est en blocs — Définition, Propriétés,
+              « À quoi ça sert dans le réel », un peu d&apos;histoire, exemples
+              corrigés, entraînement. Cochez vos rubriques, choisissez votre
+              ordre : mode classe, impression PDF. Rien à installer, rien à
+              payer.
+            </p>
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <Link
+                href="/fiches-cours/maths"
+                className="inline-flex items-center gap-2 rounded-sm bg-[#1d1c16] px-4 py-2 text-sm font-black text-[#f6f1e4] transition hover:bg-cyan-800"
+              >
+                Voir l&apos;atelier →
+              </Link>
+              <p className="text-xs font-medium italic text-[#1d1c16]/70">
+                « Le cours est fait par les élèves et les profs — pas l&apos;un
+                sans l&apos;autre. »
+              </p>
+            </div>
+          </div>
+        )}
+
         {/* Français de l'étranger — la ligne fine (insight d'Arthur). */}
         <Link
           href="/francais-de-l-etranger"
-          className="mt-4 block border-t border-[#1d1c16]/25 pt-3 text-sm font-medium text-[#1d1c16]/80"
+          className="mt-4 block border-t border-[#1d1c16]/25 pt-3 text-sm font-medium text-[#1d1c16]/70"
         >
           <span className="font-black">🌍 Vous vivez à l&apos;étranger ?</span>{" "}
           Le programme français et la dictée quotidienne, à votre fuseau
@@ -2252,14 +2354,14 @@ export default function AccueilPage({
           <h3 className="font-serif text-2xl font-black">
             Apprendre est gratuit. L&apos;accompagnement, c&apos;est notre métier.
           </h3>
-          <p className="mx-auto mt-2 max-w-2xl text-sm font-medium leading-6 text-[#1d1c16]/75">
+          <p className="mx-auto mt-2 max-w-2xl text-sm font-medium leading-6 text-[#1d1c16]/70">
             Dictée, défis, cahiers, coach en accès libre — gratuit, et ça le
             restera. Ce qui se paie : le suivi dans la durée, un coach qui se
             souvient de votre enfant.
           </p>
           <p className="mt-3 text-sm font-black">
             👨‍👩‍👧 Famille · 5,90 €/mois
-            <span className="mx-3 text-[#1d1c16]/40">|</span>
+            <span className="mx-3 text-[#1d1c16]/30">|</span>
             🏫 Établissement · 4 €/élève/an — gratuit pour les familles
           </p>
           <Link

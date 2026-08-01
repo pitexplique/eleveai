@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { X, Sparkles, Smartphone } from "lucide-react";
 import InstallPwaModal from "./InstallPwaModal";
 
+// Compteur de pages vues DANS LA SESSION (pas de trace au-delà de l'onglet).
+const VUES_KEY = "eleveai_pages_vues_session";
+
 type DevBannerProps = {
   message?: string;
   storageKey?: string;
@@ -22,10 +25,17 @@ export default function DevBanner({
     try {
       const today = new Date().toDateString();
       const lastSeen = localStorage.getItem(storageKey);
+      if (lastSeen === today) return;
 
-      if (lastSeen !== today) {
-        setOpen(true);
-      }
+      // PAS SUR LA PREMIÈRE PAGE (01/08) : le bandeau occupait la toute
+      // première ligne du site — on demandait d'installer une app à
+      // quelqu'un qui n'avait encore rien vu. Il attend maintenant la
+      // deuxième page de la visite : à ce moment-là, la demande est méritée.
+      const vues = Number(sessionStorage.getItem(VUES_KEY) ?? "0") + 1;
+      sessionStorage.setItem(VUES_KEY, String(vues));
+      if (vues < 2) return;
+
+      setOpen(true);
     } catch {
       setOpen(true);
     }
