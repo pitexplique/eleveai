@@ -144,6 +144,29 @@ const par = (n) => (n > 1 ? "s" : "");
 
 console.log(`\nBANQUE ${CLASSE.toUpperCase()} · ${MATIERE.toUpperCase()}`);
 console.log("─".repeat(64));
+
+// ⚠️ LES BANQUES GÉNÉRÉES (ajouté le 01/08). CP, CE1 et CE2 n'ont pas de
+// fichiers .bank.ts : leur index appelle un constructeur (buildCycle2Bank)
+// qui fabrique les items À PARTIR des micro-compétences. L'audit lisait donc
+// zéro fichier et annonçait 0 % de couverture — un chiffre faux qui aurait
+// envoyé écrire des centaines d'items déjà existants.
+if (fichiers.length === 0) {
+  const index = path.join(BANQUES, "index.ts");
+  const via = fs.existsSync(index)
+    ? (fs.readFileSync(index, "utf8").match(/build\w+QuestionBank|build\w+Bank/) ?? [])[0]
+    : null;
+  console.log(
+    via
+      ? `BANQUE GÉNÉRÉE par ${via}() — pas de fichiers .bank.ts à auditer.\n` +
+          `Les items sont fabriqués à partir des micro-compétences elles-mêmes :\n` +
+          `la couverture est totale par construction. Rien à compter ici.`
+      : `Aucun fichier .bank.ts et aucun constructeur repéré — à vérifier à la main.`,
+  );
+  console.log(
+    `\n${notionsDeclarees.size} notions · ${microsDeclares.size} micro-compétences déclarées\n`,
+  );
+  process.exit(0);
+}
 console.log(`${fichiers.length} fichier${par(fichiers.length)} de banque`);
 console.log(
   `${notionsDeclarees.size} notions · ${microsDeclares.size} micro-compétences déclarées`,
