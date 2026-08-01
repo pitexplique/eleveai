@@ -65,6 +65,19 @@ function joursAvantBrevet() {
   return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
 }
 
+// LES ÉVALUATIONS NATIONALES DE RENTRÉE (6ᵉ et 4ᵉ, français + maths).
+// ⚠️ DATE À CONFIRMER PAR FRÉDÉRIC, ET À REMETTRE À JOUR CHAQUE ANNÉE :
+// La Réunion a son propre calendrier (rentrée en août, pas en septembre),
+// les évaluations tombent donc dans les semaines qui suivent. Une seule
+// ligne à changer ici — le compte à rebours et le plan en découlent.
+const EVAL_NATIONALE_DATE = new Date("2026-09-07T08:00:00");
+// Le rituel qu'on propose en face du compte à rebours : court, tenable.
+const EVAL_MINUTES_PAR_JOUR = 15;
+function joursAvantEvalNationale() {
+  const diff = EVAL_NATIONALE_DATE.getTime() - Date.now();
+  return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+}
+
 const CHAINE_SABONNER = "https://www.youtube.com/@eleveai-e1h?sub_confirmation=1";
 
 // ─── L'article à la Une + les brèves « en vrai » ──────────────────────────────
@@ -1269,54 +1282,114 @@ export default function AccueilPage({
                 aurait creusé un trou de 400 px entre le carrousel et
                 l'encadré. Le bloc suit le carrousel, le mou va en fin de
                 colonne — là où il se lit comme « l'article est fini ». */}
-            {/* C'EST L'ENCADRÉ QUI ABSORBE LE MOU (01/08). Avec le seul
-                `mt-auto` sur Prépa concours, les colonnes finissaient droit
-                mais 197 px de blanc s'ouvraient entre deux sections — ça se
-                lit comme un oubli. Ici la boîte s'étire (flex-1) et répartit
-                l'écart entre ses trois temps (le titre, les niveaux, Pix) :
-                du blanc À L'INTÉRIEUR d'un cadre se lit comme une intention.
-                Le surtitre et le titre sont groupés pour rester collés. */}
-            <div className="mt-5 flex flex-col border-2 border-[#1d1c16] p-4 lg:flex-1 lg:justify-between">
-              <div>
-                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-                  🎓 Les évaluations du collège
-                </p>
-                <p className="mt-1 font-serif text-xl font-black leading-tight">
-                  Celles qu&apos;on te fera passer — prépare-les tranquillement
-                </p>
-              </div>
+            {/* ON NE COMBLE PAS UN MANQUE DE CONTENU AVEC DE L'AIR (01/08).
+                Première tentative : la boîte s'étirait et répartissait le mou
+                entre ses trois temps. Frédéric a envoyé la capture — 70 px de
+                vide entre chaque ligne, dans un cadre, c'est encore plus
+                visible qu'un trou en fin de colonne. La vraie cause était
+                ailleurs : il n'y avait pas assez à dire. Les deux cases
+                « 6ᵉ Français · Maths » deviennent donc LES QUATRE ÉPREUVES,
+                chacune avec ce qu'elle teste et son entraînement. Le blanc
+                disparaît parce que du contenu utile a pris sa place. */}
+            <div className="mt-5 border-2 border-[#1d1c16] p-4">
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                🎓 Les évaluations nationales de la rentrée du collège
+              </p>
+              <p className="mt-1 font-serif text-xl font-black leading-tight">
+                Celles qu&apos;on te fera passer — prépare-les tranquillement
+              </p>
 
-              {/* LES QUATRE ÉPREUVES — le hub est branché maintenant, les
-                  épreuves blanches viendront s'y ranger (Frédéric, 01/08).
-                  Chaque case mène au hub, qui envoie vers le coach et le
-                  guide du niveau : personne ne tombe dans le vide. */}
-              <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                {[
-                  { niveau: "6ᵉ", quoi: "Français · Maths", quand: "à la rentrée" },
-                  { niveau: "4ᵉ", quoi: "Français · Maths", quand: "à la rentrée" },
-                ].map((n) => (
-                  <Link
-                    key={n.niveau}
-                    href="/evaluation-nationale-college"
-                    className="group flex items-baseline gap-2 border border-[#1d1c16]/25 px-3 py-2 transition hover:border-[#1d1c16] hover:bg-[#1d1c16]/5"
-                  >
-                    <span className="font-serif text-2xl font-black leading-none">
-                      {n.niveau}
+              {/* LE COMPTE À REBOURS, TOURNÉ EN PLAN (idée de Frédéric,
+                  01/08 : « par exemple en mettant un gros compte à rebours »).
+                  Un décompte sec dirait le contraire du titre juste au-dessus
+                  — « prépare-les tranquillement ». Celui-ci annonce le jour ET
+                  ce qu'il reste à faire d'ici là : quinze minutes par jour,
+                  et le total dépasse la durée de l'épreuve. Le chiffre fait
+                  peur ; le chiffre avec son plan rassure. */}
+              {joursAvantEvalNationale() > 0 && (
+                <div className="mt-3 flex items-center gap-4 border-y-2 border-[#1d1c16] py-3">
+                  <p className="font-serif text-5xl font-black leading-none tracking-tight text-cyan-800">
+                    J−{joursAvantEvalNationale()}
+                  </p>
+                  <p className="text-xs font-medium leading-5 text-[#1d1c16]/70">
+                    <span className="block text-sm font-black text-[#1d1c16]">
+                      avant les évaluations de rentrée
                     </span>
-                    <span className="block">
-                      <span className="block text-sm font-black group-hover:underline">
-                        {n.quoi}
+                    {EVAL_MINUTES_PAR_JOUR} minutes par jour d&apos;ici là, et
+                    ça fait{" "}
+                    {Math.round(
+                      (joursAvantEvalNationale() * EVAL_MINUTES_PAR_JOUR) / 60,
+                    )}{" "}
+                    heures d&apos;entraînement. Plus que ce que l&apos;épreuve
+                    durera.
+                  </p>
+                </div>
+              )}
+
+              {/* LES QUATRE ÉPREUVES. Chacune envoie droit au coach de sa
+                  classe et de sa matière : le coach est la destination, le
+                  journal la porte. Le hub (« épreuve par épreuve ») garde le
+                  détail de ce qui est demandé. */}
+              <div className="mt-3 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+                {[
+                  {
+                    niveau: "6ᵉ",
+                    matiere: "Français",
+                    teste: "Comprendre un texte qu'on lit et qu'on écoute, lire à voix haute.",
+                    href: "/coach-ia/francais?classe=6e",
+                  },
+                  {
+                    niveau: "6ᵉ",
+                    matiere: "Mathématiques",
+                    teste: "Nombres et calcul, grandeurs, géométrie, résoudre un problème.",
+                    href: "/coach-ia/maths?classe=6e",
+                  },
+                  {
+                    niveau: "4ᵉ",
+                    matiere: "Français",
+                    teste: "Comprendre un texte long, le vocabulaire, la grammaire et l'orthographe.",
+                    href: "/coach-ia/francais?classe=4e",
+                  },
+                  {
+                    niveau: "4ᵉ",
+                    matiere: "Mathématiques",
+                    teste: "Calculs, lire des données, grandeurs et mesures, géométrie.",
+                    href: "/coach-ia/maths?classe=4e",
+                  },
+                ].map((e) => (
+                  <Link
+                    key={e.href}
+                    href={e.href}
+                    className="group block border-t border-[#1d1c16]/25 pt-2"
+                  >
+                    <span className="flex items-baseline gap-2">
+                      <span className="font-serif text-xl font-black leading-none">
+                        {e.niveau}
                       </span>
-                      <span className="block text-xs font-medium text-[#1d1c16]/70">
-                        {n.quand}
+                      <span className="font-serif text-[15px] font-black leading-snug group-hover:underline">
+                        {e.matiere}
                       </span>
+                    </span>
+                    {/* Une seule ligne, coupée aux points de suspension
+                        (Frédéric, 01/08) : sur deux lignes, les quatre
+                        descriptions faisaient un pavé gris sous les titres.
+                        Le détail complet est sur le hub.
+                        ⚠️ `truncate` et pas `line-clamp-1` : line-clamp pose
+                        `display:-webkit-box` et se fait écraser par le `block`
+                        de la même classe — la description restait sur deux
+                        lignes. */}
+                    <span className="mt-0.5 block truncate text-xs font-medium leading-5 text-[#1d1c16]/70">
+                      {e.teste}
+                    </span>
+                    <span className="mt-1 block text-sm font-black text-cyan-800">
+                      S&apos;entraîner →
                     </span>
                   </Link>
                 ))}
               </div>
               <Link
                 href="/evaluation-nationale-college"
-                className="mt-2 block text-sm font-black text-cyan-800 hover:underline"
+                className="mt-3 block text-sm font-black text-cyan-800 hover:underline"
               >
                 Voir ce qu&apos;on te demandera, épreuve par épreuve →
               </Link>
@@ -1400,7 +1473,14 @@ export default function AccueilPage({
           {/* Le fil du jour (APPRENDRE : les rendez-vous quotidiens). */}
           <aside className="border-[#1d1c16]/25 lg:col-span-3 lg:flex lg:flex-col lg:border-l lg:pl-6">
             <Kicker>Apprendre · Aujourd&apos;hui</Kicker>
-            <div className="mt-2 divide-y divide-[#1d1c16]/25 lg:flex lg:flex-1 lg:flex-col">
+            {/* PLUS D'ANCRAGE FORCÉ ICI (01/08). L'encadré des évaluations
+                ayant grossi (compte à rebours + les quatre épreuves), c'est
+                la colonne de gauche qui donne désormais la hauteur : le
+                `mt-auto` du défi ouvrait alors 155 px au milieu du fil, entre
+                les machines et le défi. Un blanc au MILIEU se lit comme un
+                bug, un blanc au PIED se lit comme une fin de colonne. Le fil
+                coule donc naturellement. */}
+            <div className="mt-2 divide-y divide-[#1d1c16]/25">
               {/* LES RITUELS DU JOUR — un emplacement COMMUN (Frédéric, 25/07) :
                   les rendez-vous quotidiens groupés au même endroit. Le défi a
                   sa grande carte au-dessus ; ici les rituels d'entraînement :
