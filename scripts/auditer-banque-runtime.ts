@@ -158,10 +158,67 @@ function eligibilite(classe: string) {
   }
 }
 
+/**
+ * LA VRAIE VARIÉTÉ D'UNE BANQUE GÉNÉRÉE. Compter les items d'un builder n'a
+ * aucun sens : un seul item `template` peut tirer dans un pool de vingt
+ * questions. Le 01/08, j'ai d'abord annoncé « 1,4 item par micro-compétence,
+ * contre 11 en Terminale maths » — comparaison sans objet, l'une compte des
+ * items écrits à la main, l'autre des générateurs.
+ * Ici on génère pour de bon et on compte les énoncés DISTINCTS obtenus :
+ * c'est ce que l'élève rencontrera vraiment avant de revoir deux fois la même
+ * question.
+ */
+function variete(classe: string, tirages = 80) {
+  const banque = BANQUES[classe];
+  if (!banque) return;
+  const pack = getKnowledgePack(classe as Classe, "francais");
+  const labels = new Map(pack.microSkills.map((m) => [m.id, m.label]));
+
+  const distincts = new Map<string, Set<string>>();
+  for (const item of banque) {
+    const set = distincts.get(item.microId) ?? new Set<string>();
+    if (item.kind === "template") {
+      for (let i = 0; i < tirages; i += 1) {
+        try {
+          const g = item.generate() as { text?: string };
+          if (g?.text) set.add(g.text);
+        } catch {
+          // générateur en échec : on ne compte rien
+        }
+      }
+    } else {
+      const t = (item as unknown as { text?: string }).text;
+      if (t) set.add(t);
+    }
+    distincts.set(item.microId, set);
+  }
+
+  const lignes = [...distincts]
+    .map(([id, set]) => ({ id, n: set.size }))
+    .sort((a, b) => a.n - b.n);
+  const total = lignes.reduce((s, l) => s + l.n, 0);
+  const moyenne = (total / lignes.length).toFixed(1);
+  const pauvres = lignes.filter((l) => l.n < 10);
+
+  console.log(`\n${classe.toUpperCase()} — variété réelle (${tirages} tirages par générateur)`);
+  console.log(
+    `      ${total} énoncés distincts · ${moyenne} par micro-compétence`,
+  );
+  console.log(`      le plus pauvre : ${lignes[0].n} · le plus riche : ${lignes[lignes.length - 1].n}`);
+  if (pauvres.length) {
+    console.log(`      ⚠️ SOUS 10 ÉNONCÉS : ${pauvres.length} micro-compétences`);
+    for (const p of pauvres.slice(0, 12)) {
+      console.log(`            ${String(p.n).padStart(3)}  ${p.id} — ${labels.get(p.id) ?? ""}`);
+    }
+  }
+}
+
 const args = process.argv.slice(2);
 const avecEligibilite = args.includes("--epreuve");
+const avecVariete = args.includes("--variete");
 const classes = args.filter((a) => !a.startsWith("--"));
 const cibles = classes.length ? classes : Object.keys(BANQUES);
 for (const classe of cibles) auditer(classe);
 if (avecEligibilite) for (const classe of cibles) eligibilite(classe);
+if (avecVariete) for (const classe of cibles) variete(classe);
 console.log("");
