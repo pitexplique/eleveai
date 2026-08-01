@@ -81,10 +81,22 @@ function ajouter(microId, kind, fichier) {
   c.fichiers.add(fichier);
 }
 
-const fichiers = fs
-  .readdirSync(BANQUES)
-  .filter((f) => f.endsWith(".bank.ts"))
-  .sort();
+const tousLesFichiers = fs.readdirSync(BANQUES);
+
+const fichiers = tousLesFichiers.filter((f) => f.endsWith(".bank.ts")).sort();
+
+// ⚠️ LES FICHIERS QUE L'AUDIT SAUTERAIT EN SILENCE (ajouté le 01/08).
+// Un `operations-relatifs.bank.ts.ts` — double extension — traînait en 5ᵉ :
+// il contenait 50 items, il était bien importé (TypeScript résout
+// `./x.bank.ts` vers `x.bank.ts.ts`), mais l'audit ne le lisait pas et
+// annonçait 5 micro-compétences vides qui ne l'étaient pas. Un outil de
+// contrôle qui saute un fichier sans le dire est pire que pas d'outil.
+const suspects = tousLesFichiers.filter(
+  (f) =>
+    !f.endsWith(".bank.ts") &&
+    f !== "index.ts" &&
+    /\.bank\./.test(f) === true,
+);
 
 for (const fichier of fichiers) {
   const src = fs.readFileSync(path.join(BANQUES, fichier), "utf8");
@@ -139,6 +151,16 @@ console.log(
 console.log(
   `${totalFixes} items fixes + ${totalTemplates} générateurs (templates)`,
 );
+
+if (suspects.length) {
+  console.log(
+    `\n🚨 FICHIERS QUI RESSEMBLENT À DES BANQUES MAIS NE SONT PAS LUS : ${suspects.length}`,
+  );
+  for (const s of suspects) console.log(`      ${s}`);
+  console.log(
+    "      → renomme-les en *.bank.ts, sinon le rapport ci-dessous est faux.",
+  );
+}
 
 console.log(`\n⛔ MICRO-COMPÉTENCES SANS AUCUN ITEM : ${jamais.length}`);
 if (jamais.length) {

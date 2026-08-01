@@ -5,7 +5,7 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { nombresRelatifsBank } from "./nombres-relatifs.bank";
 import { proportionnaliteBank } from "./proportionnalite.bank";
 import { fractionsBank } from "./fractions.bank";
-import { operationsRelatifsBank } from "./operations-relatifs.bank.ts";
+import { operationsRelatifsBank } from "./operations-relatifs.bank";
 import { calculLitteralBank } from "./calcul-litteral.bank";
 import { statistiquesBank } from "./statistiques.bank";
 import { probabilitesBank } from "./probabilites.bank";
