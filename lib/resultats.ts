@@ -13,6 +13,11 @@ export type ActiviteResultat =
   | "defis_jour"
   | "english_maths"
   | "evaluation_nationale"
+  // `dictee` et `langue_du_jour` existaient dans /api/resultats mais pas ici :
+  // les pages concernées appelaient l'API sans passer par ce type, qui avait
+  // donc pris du retard sans que rien ne le signale (01/08).
+  | "dictee"
+  | "langue_du_jour"
   | "tutor";
 
 export async function saveResultat(
