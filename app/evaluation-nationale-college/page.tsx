@@ -164,31 +164,32 @@ export default function EvaluationNationaleCollegePage() {
           ))}
         </div>
 
-        {/* LES DEUX OUTILS QUI EXISTENT DÉJÀ */}
+        {/* PIX N'EST PAS LA MÊME ÉCHÉANCE (info de Frédéric, 01/08) : la
+            certification Pix au collège, c'est la 3ᵉ, au printemps — pas la
+            6ᵉ ni la 4ᵉ à la rentrée. La ranger avec les évaluations
+            nationales brouillait la page comme le dico la brouillait. Elle
+            garde sa ligne, mais à part et datée correctement.
+            ⚠️ PAS DE DATES EN DUR : le calendrier Pix est publié chaque
+            année (2025-2026 : 16 mars → 13 juin pour la 3ᵉ). Écrire ces
+            dates-là ici, c'est une page périmée dès la rentrée suivante. */}
         <section className="mt-8 border-t-2 border-[#1d1c16] pt-4">
           <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-            Pour arriver prêt
+            Et plus tard au collège
           </p>
-          {/* LE DICO N'EST PAS UNE DESTINATION (Frédéric, 01/08 : « personne
-              n'y va », « c'est plutôt une source, je l'avais moi-même
-              oublié »). Il couvre pourtant CP → Bac+1 en sept matières — mais
-              on va y chercher un mot quand on bute dessus, on n'y va pas pour
-              s'entraîner. Il reste en ligne, il ne prend plus une case de
-              vitrine que les entraînements méritent davantage. */}
-          <div className="mt-3">
-            <Link href="/eval-pix-ia" className="group block">
-              <span className="block font-serif text-lg font-black leading-snug group-hover:underline">
-                Pix IA · l&apos;éval blanche
-              </span>
-              <span className="mt-1 block max-w-2xl text-sm font-medium leading-6 text-[#1d1c16]/70">
-                L&apos;autre évaluation du collège, celle du numérique : 16
-                questions corrigées, pour arriver prêt le jour J.
-              </span>
-              <span className="mt-1.5 block text-sm font-black text-cyan-800">
-                Passer l&apos;éval blanche →
-              </span>
-            </Link>
-          </div>
+          <Link href="/eval-pix-ia" className="group mt-2 block">
+            <span className="block font-serif text-lg font-black leading-snug group-hover:underline">
+              En 3ᵉ, au printemps : la certification Pix
+            </span>
+            <span className="mt-1 block max-w-2xl text-sm font-medium leading-6 text-[#1d1c16]/70">
+              Celle-là compte : elle atteste les 16 compétences numériques du
+              CRCN, dure 1 h 45 en 32 questions qui s&apos;adaptent à tes
+              réponses, et son résultat va au livret scolaire. Notre éval
+              blanche te prépare au volet intelligence artificielle.
+            </span>
+            <span className="mt-1.5 block text-sm font-black text-cyan-800">
+              Passer l&apos;éval blanche IA →
+            </span>
+          </Link>
         </section>
 
         {/* CE QUI EST EN CHANTIER — dit en clair plutôt que promis en vitrine. */}

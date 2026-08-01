@@ -1313,22 +1313,29 @@ export default function AccueilPage({
               </Link>
 
               {/* LE DICO EST RETIRÉ D'ICI (Frédéric, 01/08 : « personne n'y
-                  va »). La page reste en ligne, elle n'est simplement plus
-                  mise en avant : une vitrine qui montre ce qu'on ne consulte
-                  pas coûte de l'attention aux liens qui, eux, servent. */}
+                  va », « c'est plutôt une source »). La page reste en ligne,
+                  elle n'est simplement plus mise en avant : une vitrine qui
+                  montre ce qu'on ne consulte pas coûte de l'attention aux
+                  liens qui, eux, servent.
+                  PIX EST À PART, ET DATÉ : la certification au collège, c'est
+                  la 3ᵉ au printemps — pas la rentrée de 6ᵉ/4ᵉ. Mise sur le
+                  même rang, elle brouillait l'encadré. */}
               <Link
                 href="/eval-pix-ia"
                 className="group mt-4 block border-t border-[#1d1c16]/25 pt-3"
               >
-                <span className="block font-serif text-[15px] font-black leading-snug group-hover:underline">
-                  Pix IA · l&apos;autre évaluation du collège
+                <span className="block text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                  Et plus tard · en 3ᵉ
+                </span>
+                <span className="mt-1 block font-serif text-[15px] font-black leading-snug group-hover:underline">
+                  La certification Pix, au printemps
                 </span>
                 <span className="mt-0.5 block text-xs font-medium leading-5 text-[#1d1c16]/70">
-                  Celle du numérique : l&apos;éval blanche, 16 questions
-                  corrigées, pour arriver prêt le jour J.
+                  Celle-là compte, et elle va au livret scolaire. Notre éval
+                  blanche te prépare au volet intelligence artificielle.
                 </span>
                 <span className="mt-1 block text-sm font-black text-cyan-800">
-                  Passer l&apos;éval blanche →
+                  Passer l&apos;éval blanche IA →
                 </span>
               </Link>
             </div>
