@@ -12,6 +12,7 @@ import { geometrieRepereeBank } from "./geometrie-reperee.bank";
 import { probabilitesConditionnellesBank } from "./probabilites-conditionnelles.bank";
 import { variablesAleatoiresBank } from "./variables-aleatoires.bank";
 import { algorithmiqueBank } from "./algorithmique.bank";
+import { logiqueEnsemblesBank } from "./logique-ensembles.bank";
 
 export const mathsPremiereSpeQuestionBank: TutorBankItemV4[] = [
   // === ALGÈBRE ===
@@ -30,6 +31,8 @@ export const mathsPremiereSpeQuestionBank: TutorBankItemV4[] = [
   ...variablesAleatoiresBank,
   // === ALGORITHMIQUE ===
   ...algorithmiqueBank,
+  // === VOCABULAIRE ENSEMBLISTE ET LOGIQUE ===
+  ...logiqueEnsemblesBank,
 ];
 
 export function getMathsPremiereSpeQuestionBank(args?: {
