@@ -144,8 +144,8 @@ function MatieresMenu({ pathname, paper }: { pathname: string; paper: boolean })
           "inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition",
           paper
             ? active
-              ? "bg-[#f0fafc] text-[#0e7490] shadow"
-              : "text-[#f0fafc]/85 hover:bg-[#f0fafc]/10 hover:text-[#f0fafc]"
+              ? "bg-[#1d1c16] text-[#d8e9ee] shadow"
+              : "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10 hover:text-[#1d1c16]"
             : active
               ? "bg-white text-[#041B33] shadow-lg"
               : "text-white/90 hover:bg-white/15 hover:text-white",
@@ -160,7 +160,7 @@ function MatieresMenu({ pathname, paper }: { pathname: string; paper: boolean })
       {open && (
         <div
           className={`absolute right-0 top-full z-[80] mt-1 max-h-[78vh] w-[min(92vw,720px)] overflow-y-auto overscroll-contain rounded-2xl border p-4 shadow-2xl ${
-            paper ? "border-[#f0fafc]/25 bg-[#0e7490]" : "border-white/10 bg-[#041B33]"
+            paper ? "border-[#1d1c16]/25 bg-[#d8e9ee]" : "border-white/10 bg-[#041B33]"
           }`}
           onMouseEnter={cancelClose}
           onMouseLeave={scheduleClose}
@@ -168,13 +168,13 @@ function MatieresMenu({ pathname, paper }: { pathname: string; paper: boolean })
           <div className="grid grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-3">
             {MATIERES.map((m) => (
               <div key={m.label}>
-                <p className={`mb-1.5 text-[11px] font-black uppercase tracking-[0.18em] ${paper ? "text-[#ffb08a]" : m.accent}`}>
+                <p className={`mb-1.5 text-[11px] font-black uppercase tracking-[0.18em] ${paper ? "text-cyan-800" : m.accent}`}>
                   {m.label}
                 </p>
                 <ul className="space-y-0.5">
                   {m.items.map((item) => {
                     const cls = paper
-                      ? "flex items-center gap-2 rounded-lg px-2 py-1 text-sm text-[#f0fafc]/80 transition hover:bg-[#f0fafc]/10 hover:text-[#f0fafc]"
+                      ? "flex items-center gap-2 rounded-lg px-2 py-1 text-sm text-[#1d1c16]/80 transition hover:bg-[#1d1c16]/10 hover:text-[#1d1c16]"
                       : "flex items-center gap-2 rounded-lg px-2 py-1 text-sm text-white/80 transition hover:bg-white/10 hover:text-white";
                     const inner = (
                       <>
@@ -223,7 +223,7 @@ function MobileSection({
 }) {
   return (
     <div>
-      <p className={`mb-2 text-[10px] font-black uppercase tracking-[0.2em] ${paper ? "text-[#ffb08a]" : accent}`}>
+      <p className={`mb-2 text-[10px] font-black uppercase tracking-[0.2em] ${paper ? "text-cyan-800" : accent}`}>
         {title}
       </p>
       <div className="grid grid-cols-2 gap-2">
@@ -232,8 +232,8 @@ function MobileSection({
             "flex items-center gap-2 rounded-xl border px-3 py-3 text-sm font-bold transition",
             paper
               ? isActive(pathname, item.href)
-                ? "border-[#f0fafc]/40 bg-[#f0fafc]/10 text-[#f0fafc]"
-                : "border-[#f0fafc]/15 bg-[#f0fafc]/5 text-[#f0fafc] hover:bg-[#f0fafc]/10"
+                ? "border-[#1d1c16]/40 bg-[#1d1c16]/10 text-[#1d1c16]"
+                : "border-[#1d1c16]/15 bg-[#1d1c16]/5 text-[#1d1c16] hover:bg-[#1d1c16]/10"
               : isActive(pathname, item.href)
                 ? "border-white/40 bg-white/15 text-white hover:bg-white/15"
                 : "border-white/10 bg-white/5 text-white hover:bg-white/15",
@@ -320,7 +320,7 @@ export default function Header() {
     <header
       className={
         paper
-          ? "sticky top-0 z-50 border-b border-[#f0fafc]/25 bg-[#0e7490]/95 backdrop-blur-xl"
+          ? "sticky top-0 z-50 border-b border-[#1d1c16]/25 bg-[#d8e9ee]/95 backdrop-blur-xl"
           : "sticky top-0 z-50 border-b border-cyan-300/20 bg-gradient-to-r from-[#041B33]/95 via-[#062A4F]/95 to-[#073B63]/95 shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-xl"
       }
     >
@@ -339,10 +339,10 @@ export default function Header() {
             />
           </div>
           <div className="flex flex-col leading-tight">
-            <span className={`text-[1.05rem] font-black tracking-tight ${paper ? "text-[#f0fafc]" : "text-white"}`}>
-              Eleve<span className={paper ? "text-[#ffb08a]" : "text-cyan-200"}>AI</span>
+            <span className={`text-[1.05rem] font-black tracking-tight ${paper ? "text-[#1d1c16]" : "text-white"}`}>
+              Eleve<span className={paper ? "text-cyan-800" : "text-cyan-200"}>AI</span>
             </span>
-            <span className={`hidden text-xs sm:block ${paper ? "font-serif italic text-[#f0fafc]/60" : "text-cyan-100/75"}`}>
+            <span className={`hidden text-xs sm:block ${paper ? "font-serif italic text-[#1d1c16]/60" : "text-cyan-100/75"}`}>
               La liberté d&apos;apprendre
             </span>
           </div>
@@ -357,7 +357,7 @@ export default function Header() {
             className={[
               "inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition",
               paper
-                ? "bg-[#f0fafc] text-[#0e7490] shadow"
+                ? "bg-[#1d1c16] text-[#d8e9ee] shadow"
                 : "text-white/85 hover:bg-white/15 hover:text-white",
             ].join(" ")}
           >
@@ -380,8 +380,8 @@ export default function Header() {
                   className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition ${
                     paper
                       ? isActive(pathname, c.href)
-                        ? "bg-[#f0fafc] text-[#0e7490] shadow"
-                        : "bg-[#f0fafc]/10 text-[#f0fafc] hover:bg-[#f0fafc]/20"
+                        ? "bg-[#1d1c16] text-[#d8e9ee] shadow"
+                        : "bg-[#1d1c16]/10 text-[#1d1c16] hover:bg-[#1d1c16]/20"
                       : isActive(pathname, c.href)
                         ? c.active
                         : c.idle
@@ -401,8 +401,8 @@ export default function Header() {
                   "inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition",
                   paper
                     ? d.space === space
-                      ? "bg-[#f0fafc] text-[#0e7490] shadow"
-                      : "text-[#f0fafc]/85 hover:bg-[#f0fafc]/10 hover:text-[#f0fafc]"
+                      ? "bg-[#1d1c16] text-[#d8e9ee] shadow"
+                      : "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10 hover:text-[#1d1c16]"
                     : d.space === space
                       ? "bg-white text-[#041B33] shadow-lg"
                       : "text-white/85 hover:bg-white/15 hover:text-white",
@@ -418,7 +418,7 @@ export default function Header() {
               <Link
                 href={dashboardHref}
                 className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-black shadow-lg hover:brightness-110 ${
-                  paper ? "bg-[#f0fafc] text-[#0e7490]" : `${dashboardColor} text-[#041B33]`
+                  paper ? "bg-[#1d1c16] text-[#d8e9ee]" : `${dashboardColor} text-[#041B33]`
                 }`}
               >
                 <GraduationCap className="h-4 w-4" />
@@ -441,7 +441,7 @@ export default function Header() {
               href="/auth/signin?mode=eleve"
               className={`ml-1 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-black shadow-lg transition hover:brightness-110 ${
                 paper
-                  ? "bg-[#f0fafc] text-[#0e7490] hover:bg-[#ffb08a]"
+                  ? "bg-[#1d1c16] text-[#d8e9ee] hover:bg-cyan-800"
                   : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
               }`}
             >
@@ -458,7 +458,7 @@ export default function Header() {
               href="/auth/signin?mode=eleve"
               className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-black shadow-lg ${
                 paper
-                  ? "bg-[#f0fafc] text-[#0e7490]"
+                  ? "bg-[#1d1c16] text-[#d8e9ee]"
                   : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
               }`}
             >
@@ -471,7 +471,7 @@ export default function Header() {
             onClick={() => setMobileOpen((v) => !v)}
             className={`rounded-full border p-2 shadow-lg ${
               paper
-                ? "border-[#f0fafc]/25 bg-[#f0fafc]/5 text-[#f0fafc]"
+                ? "border-[#1d1c16]/25 bg-[#1d1c16]/5 text-[#1d1c16]"
                 : "border-cyan-200/20 bg-white/10 text-white"
             }`}
             aria-label="Ouvrir le menu"
@@ -486,7 +486,7 @@ export default function Header() {
         <div
           className={`max-h-[calc(100dvh-3.75rem)] overflow-y-auto overscroll-contain border-t px-4 pb-10 pt-4 lg:hidden ${
             paper
-              ? "border-[#f0fafc]/25 bg-[#0e7490]"
+              ? "border-[#1d1c16]/25 bg-[#d8e9ee]"
               : "border-cyan-300/20 bg-gradient-to-b from-[#062A4F] to-[#041B33]"
           }`}
         >
@@ -499,8 +499,8 @@ export default function Header() {
               className={`flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-black transition ${
                 paper
                   ? isActive(pathname, "/accueil")
-                    ? "border-[#f0fafc]/40 bg-[#f0fafc]/10 text-[#f0fafc]"
-                    : "border-[#f0fafc]/15 bg-[#f0fafc]/5 text-[#f0fafc] hover:bg-[#f0fafc]/10"
+                    ? "border-[#1d1c16]/40 bg-[#1d1c16]/10 text-[#1d1c16]"
+                    : "border-[#1d1c16]/15 bg-[#1d1c16]/5 text-[#1d1c16] hover:bg-[#1d1c16]/10"
                   : "border-white/10 bg-white/5 text-white hover:bg-white/15"
               }`}
             >
@@ -511,14 +511,14 @@ export default function Header() {
             {eleve ? (
               <div
                 className={`flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 ${
-                  paper ? "border-[#f0fafc]/15 bg-[#f0fafc]/5" : "border-white/10 bg-white/5"
+                  paper ? "border-[#1d1c16]/15 bg-[#1d1c16]/5" : "border-white/10 bg-white/5"
                 }`}
               >
                 <Link
                   href={dashboardHref}
-                  className={`flex items-center gap-2 text-sm font-black ${paper ? "text-[#f0fafc]" : "text-white"}`}
+                  className={`flex items-center gap-2 text-sm font-black ${paper ? "text-[#1d1c16]" : "text-white"}`}
                 >
-                  <GraduationCap className={`h-4 w-4 ${paper ? "text-[#ffb08a]" : "text-emerald-300"}`} />
+                  <GraduationCap className={`h-4 w-4 ${paper ? "text-cyan-800" : "text-emerald-300"}`} />
                   {dashboardLabel}
                 </Link>
                 <button
@@ -538,7 +538,7 @@ export default function Header() {
                 href="/auth/signin?mode=eleve"
                 className={`flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-black shadow ${
                   paper
-                    ? "bg-[#f0fafc] text-[#0e7490]"
+                    ? "bg-[#1d1c16] text-[#d8e9ee]"
                     : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
                 }`}
               >
@@ -558,7 +558,7 @@ export default function Header() {
               </div>
             ) : (
               /* Sinon → les 4 portes d'audience */
-              <div className={`grid grid-cols-2 gap-2 border-t pt-4 ${paper ? "border-[#f0fafc]/15" : "border-white/10"}`}>
+              <div className={`grid grid-cols-2 gap-2 border-t pt-4 ${paper ? "border-[#1d1c16]/15" : "border-white/10"}`}>
                 {AUDIENCE_DOORS.map((d) => (
                   <Link
                     key={d.space}
@@ -568,8 +568,8 @@ export default function Header() {
                       "flex items-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-bold transition",
                       paper
                         ? d.space === space
-                          ? "border-[#f0fafc]/40 bg-[#f0fafc]/10 text-[#f0fafc]"
-                          : "border-[#f0fafc]/15 bg-[#f0fafc]/5 text-[#f0fafc]/80"
+                          ? "border-[#1d1c16]/40 bg-[#1d1c16]/10 text-[#1d1c16]"
+                          : "border-[#1d1c16]/15 bg-[#1d1c16]/5 text-[#1d1c16]/80"
                         : d.space === space
                           ? "border-white/40 bg-white/15 text-white"
                           : "border-white/10 bg-white/5 text-white/80",
