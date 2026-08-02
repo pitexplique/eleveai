@@ -399,16 +399,49 @@ export type SlideUne = {
 /** Les cycles, du plus jeune au plus grand — l'ordre EST le sens. */
 const ORDRE_CYCLES = ["cp-ce2", "cm1-cm2", "6e-3e", "lycee"];
 
+/** La colonne de la matrice → l'étiquette adulte correspondante. */
+const PROFIL_ADULTE: Partial<Record<Colonne, string>> = {
+  parent: "parent",
+  prof: "prof",
+  principal: "etablissement",
+  entreprise: "entreprise",
+};
+
 /**
- * Un slide est montré si son niveau minimum est atteint : un slide `6e-3e`
- * se voit en 6ᵉ–3ᵉ et au lycée, jamais en CP. Cycle inconnu → aucun filtre.
+ * Un slide s'adresse à l'une des HUIT options de « Qui est-ce ? » (Frédéric,
+ * 02/08 : « cale-les sur les options de qui est-ce »). Les deux familles ne se
+ * filtrent pas de la même façon, et c'est le cœur de la règle :
+ *
+ *   • un CYCLE est un SEUIL — `cm1-cm2` veut dire « à partir du CM1 », donc un
+ *     lycéen le voit aussi ;
+ *   • un PROFIL ADULTE est une CIBLE — `prof` veut dire « pour les
+ *     professeurs », pas « à partir des professeurs ».
+ *
+ * D'où :
+ *   – sans étiquette → tout le monde ;
+ *   – lecteur élève → les cycles ≤ au sien, jamais un slide adulte ;
+ *   – lecteur adulte → son propre profil, plus TOUS les slides d'élèves : il
+ *     n'a pas d'âge qui le limite, et un parent a de bonnes raisons de vouloir
+ *     voir ce que son enfant verrait.
  */
-function slidePourCycle(s: SlideUne, cycle: string | null): boolean {
-  if (!cycle || !s.niveauMini) return true;
-  const mini = ORDRE_CYCLES.indexOf(s.niveauMini);
-  const lecteur = ORDRE_CYCLES.indexOf(cycle);
-  if (mini < 0 || lecteur < 0) return true;
-  return lecteur >= mini;
+function slidePourProfil(
+  s: SlideUne,
+  cycle: string | null,
+  colonne: Colonne,
+): boolean {
+  const cible = s.niveauMini;
+  if (!cible) return true;
+  const estCycle = ORDRE_CYCLES.includes(cible);
+
+  if (cycle) {
+    // Lecteur élève : le seuil d'âge s'applique, les slides adultes sont hors sujet.
+    if (!estCycle) return false;
+    return ORDRE_CYCLES.indexOf(cycle) >= ORDRE_CYCLES.indexOf(cible);
+  }
+
+  // Lecteur adulte, ou visiteur dont on ignore l'âge.
+  if (estCycle) return true;
+  return cible === PROFIL_ADULTE[colonne];
 }
 
 /** Un article d'une rubrique du journal (table journal_articles, patron régie). */
@@ -738,9 +771,12 @@ function MotDuJourEncart() {
 function UneCarousel({
   slides,
   cycle,
+  colonne = "eleve",
 }: {
   slides?: SlideUne[];
   cycle?: string | null;
+  /** La colonne de la matrice — pour les slides ciblant un profil adulte. */
+  colonne?: Colonne;
 }) {
   const items = useMemo<SlideUne[]>(() => {
     const base =
@@ -762,12 +798,12 @@ function UneCarousel({
     // Le filtre par âge, branché sur « Qui est-ce ? ». Il ne fait rien tant
     // que la colonne `niveau_mini` n'existe pas en base : tous les slides
     // ont alors `niveauMini` à null, donc tous passent.
-    const gardes = base.filter((s) => slidePourCycle(s, cycle ?? null));
+    const gardes = base.filter((s) => slidePourProfil(s, cycle ?? null, colonne));
     // Filet de sécurité : jamais de Une vide. Si le filtre a tout coupé —
     // colonne mal remplie, cycle inattendu — on remontre tout plutôt que
     // d'afficher un carrousel blanc en haut de page.
     return gardes.length > 0 ? gardes : base;
-  }, [slides, cycle]);
+  }, [slides, cycle, colonne]);
 
   const [index, setIndex] = useState(0);
   const [pause, setPause] = useState(false);
@@ -1635,7 +1671,7 @@ export default function AccueilPage({
           <article className="lg:col-span-7 lg:flex lg:flex-col">
             {/* Le carrousel façon MSN, piloté par la régie (/admin/journal) :
                 chaque slide porte son propre surtitre. */}
-            <UneCarousel slides={slides} cycle={cycleChoisi} />
+            <UneCarousel slides={slides} cycle={cycleChoisi} colonne={colonne} />
 
             {/* « À LIRE AUSSI » EST PARTI (Frédéric, 01/08). Elle avait déjà
                 fondu de 11 titres à 4 ; sous le carrousel, elle restait une
