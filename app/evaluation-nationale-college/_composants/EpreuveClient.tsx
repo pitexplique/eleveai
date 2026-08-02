@@ -179,8 +179,21 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
     }
 
     setIndex((i) => i + 1);
-    hautRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+
+  // ─── LE RETOUR EN HAUT ────────────────────────────────────────────────────
+  // Il se faisait dans le clic sur « Valider », donc AVANT que React n'ait
+  // posé la question suivante : le défilement visait l'ancienne page. Et il
+  // visait le haut du bloc, que l'en-tête collant du site (69 px) recouvre —
+  // l'élève arrivait sur une question dont il ne voyait ni le numéro, ni le
+  // chrono, ni la barre d'avancement. Deux corrections : ici, après le rendu ;
+  // et `scroll-mt-24` sur l'ancre, pour passer sous l'en-tête.
+  // Pas de `smooth` : la question glisse déjà (animation « glisse »), et une
+  // page qui défile en même temps que la question entre, ça se brouille.
+  useEffect(() => {
+    if (etape === "accueil") return;
+    hautRef.current?.scrollIntoView({ block: "start" });
+  }, [etape, index]);
 
   const bilan = useMemo(
     () =>
@@ -282,7 +295,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
       className="min-h-screen px-4 pb-16 pt-8 sm:px-6 lg:px-8"
       style={{ backgroundColor: PAPER, color: INK }}
     >
-      <div ref={hautRef} className="mx-auto max-w-3xl">
+      <div ref={hautRef} className="mx-auto max-w-3xl scroll-mt-24">
         {/* ══ ACCUEIL ══════════════════════════════════════════════════════ */}
         {etape === "accueil" && (
           <>
