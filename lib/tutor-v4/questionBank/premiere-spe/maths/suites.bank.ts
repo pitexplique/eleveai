@@ -10,10 +10,37 @@
 //
 // PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM (bonne réponse en 1re position, mélangée par le moteur).
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
+
+// Les premiers termes affichés en ligne, avec les flèches de passage d'un
+// terme au suivant : c'est le canvas qui rend visible le MÉCANISME d'une
+// suite, là où l'écriture $u_{n+1} = f(u_n)$ reste abstraite.
+function suiteCanvas(
+  terms: Array<number | string>,
+  arrows?: string[],
+  rule?: string,
+  missingIndex?: number
+): CanvasFigure {
+  return {
+    kind: "suite",
+    terms,
+    arrows,
+    rule,
+    missingIndex,
+    display: {
+      showArrows: Boolean(arrows),
+      showRule: Boolean(rule),
+      showLabels: true,
+    },
+  };
+}
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function pickOne<T>(arr: readonly T[]): T {
+  return arr[randomInt(0, arr.length - 1)];
 }
 
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
@@ -77,7 +104,7 @@ export const suitesBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "suites",
-    microId: "suite_termes",
+    microId: "suite_recurrence",
     difficulty: 3,
     theme: "neutral",
     text: "La suite est définie par $u_0 = 5$ et $u_{n+1} = u_n + 4$. Combien vaut $u_2$ ?",
@@ -91,7 +118,8 @@ export const suitesBank: TutorBankItemV4[] = [
       "$u_2 = 9 + 4 = 13$.",
       "$u_2 = 13$."
     ),
-    tags: ["premiere", "maths", "suites", "termes", "recurrence", "short"],
+    canvas: suiteCanvas([5, "?", "?"], ["+4", "+4"], "u(n+1) = u(n) + 4", 1),
+    tags: ["premiere", "maths", "suites", "recurrence", "canvas", "short"],
   },
   {
     kind: "fixed",
@@ -99,7 +127,7 @@ export const suitesBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "suites",
-    microId: "suite_termes",
+    microId: "suite_recurrence",
     difficulty: 4,
     theme: "neutral",
     text: "La suite est définie par $u_0 = 2$ et $u_{n+1} = 3u_n - 1$. Combien vaut $u_2$ ?",
@@ -121,7 +149,7 @@ export const suitesBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "suites",
-    microId: "suite_termes",
+    microId: "suite_recurrence",
     difficulty: 3,
     theme: "neutral",
     text: "Pour la suite $u_{n+1} = f(u_n)$, que faut-il connaître pour calculer $u_5$ ?",
@@ -171,7 +199,7 @@ export const suitesBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "suites",
-    microId: "suite_termes",
+    microId: "suite_recurrence",
     difficulty: 4,
     theme: "neutral",
     text: "La suite est définie par $u_0 = 1$ et $u_{n+1} = u_n^2 + 1$. Combien vaut $u_2$ ?",
@@ -238,7 +266,7 @@ export const suitesBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "suites",
-    microId: "suite_termes",
+    microId: "suite_recurrence",
     difficulty: 5,
     theme: "neutral",
     text: "La suite est définie par $u_0 = 2$ et $u_{n+1} = 2u_n - 3$. Combien vaut $u_3$ ?",
@@ -260,7 +288,7 @@ export const suitesBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "suites",
-    microId: "suite_termes",
+    microId: "suite_recurrence",
     difficulty: 3,
     theme: "neutral",
     text: "Parmi ces définitions, laquelle définit la suite PAR RÉCURRENCE ?",
@@ -318,7 +346,7 @@ export const suitesBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "suites",
-    microId: "suite_termes",
+    microId: "suite_recurrence",
     difficulty: 4,
     theme: "neutral",
     hint: "Calcule de proche en proche depuis $u_0$.",
@@ -1322,7 +1350,7 @@ export const suitesBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "suites",
-    microId: "suite_sommes",
+    microId: "suite_somme_geo",
     difficulty: 4,
     theme: "neutral",
     text: "Quelle est la formule de $1 + q + q^2 + \\dots + q^n$ pour $q \\neq 1$ ?",
@@ -1394,7 +1422,7 @@ export const suitesBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "suites",
-    microId: "suite_sommes",
+    microId: "suite_somme_geo",
     difficulty: 5,
     theme: "neutral",
     text: "Combien vaut $1 + 2 + 4 + 8 + \\dots + 2^{10}$ ?",
@@ -1416,7 +1444,7 @@ export const suitesBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "suites",
-    microId: "suite_sommes",
+    microId: "suite_somme_geo",
     difficulty: 4,
     theme: "neutral",
     text: "Combien y a-t-il de termes dans la somme $1 + q + q^2 + \\dots + q^n$ ?",
@@ -1469,7 +1497,7 @@ export const suitesBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "suites",
-    microId: "suite_sommes",
+    microId: "suite_somme_geo",
     difficulty: 4,
     theme: "neutral",
     text: "Combien vaut $1 + 3 + 9 + 27 + 81$ ?",
@@ -1491,7 +1519,7 @@ export const suitesBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "suites",
-    microId: "suite_sommes",
+    microId: "suite_somme_geo",
     difficulty: 5,
     theme: "neutral",
     text: "Un élève place $1$ € le premier jour, $2$ € le deuxième, $4$ € le troisième, et double chaque jour. Combien a-t-il placé en tout au bout de $10$ jours ?",
@@ -1553,6 +1581,1870 @@ export const suitesBank: TutorBankItemV4[] = [
           `$\\dfrac{${n} \\times ${n + 1}}{2}$.`,
           `$= \\dfrac{${n * (n + 1)}}{2} = ${val}$.`,
           `La somme vaut $${val}$.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== SUITE_REGISTRES ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_suites_reg_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_registres",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Que désigne $u_5$ ?",
+    format: "qcm",
+    choices: [
+      "le terme de rang $5$ de la suite",
+      "le nombre $5$",
+      "la somme des cinq premiers termes",
+      "la raison de la suite",
+    ],
+    expected: ["le terme de rang $5$ de la suite"],
+    comparator: "mcq_exact",
+    hint: "Le petit $5$ est un rang, pas une valeur.",
+    explanation: exp(
+      "Dans l'écriture $u_n$, l'indice $n$ indique la POSITION du terme dans la suite.",
+      "$u_5$ désigne donc le terme situé au rang $5$.",
+      "Sa valeur, elle, dépend de la suite : pour $u_n = 2n$, on a $u_5 = 10$. Il ne faut pas confondre le rang et la valeur.",
+      "$u_5$ est le terme de rang $5$."
+    ),
+    tags: ["premiere", "maths", "suites", "registres", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_reg_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_registres",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Que signifie l'égalité $u_3 = 10$ ?",
+    format: "qcm",
+    choices: [
+      "le terme de rang $3$ vaut $10$",
+      "le terme de rang $10$ vaut $3$",
+      "la suite compte $3$ termes valant $10$",
+      "la raison vaut $10$",
+    ],
+    expected: ["le terme de rang $3$ vaut $10$"],
+    comparator: "mcq_exact",
+    hint: "L'indice est en bas, la valeur est après le signe égal.",
+    explanation: exp(
+      "L'indice indique la position, le membre de droite donne la valeur.",
+      "$u_3 = 10$ se lit : « le terme de rang $3$ vaut $10$ ».",
+      "Confondre les deux est l'erreur la plus courante en début de chapitre : le rang se compte, la valeur se calcule.",
+      "Le terme de rang $3$ vaut $10$."
+    ),
+    tags: ["premiere", "maths", "suites", "registres", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_reg_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_registres",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Les notations $u_n$ et $u(n)$ désignent-elles la même chose ?",
+    format: "qcm",
+    choices: [
+      "oui : ce sont deux écritures du terme de rang $n$",
+      "non : $u(n)$ n'existe pas pour les suites",
+      "non : $u(n)$ désigne la somme des termes",
+      "oui, mais seulement pour les suites arithmétiques",
+    ],
+    expected: ["oui : ce sont deux écritures du terme de rang $n$"],
+    comparator: "mcq_exact",
+    hint: "Une suite est une fonction définie sur les entiers.",
+    explanation: exp(
+      "Une suite peut se voir comme une fonction qui, à chaque entier $n$, associe un nombre.",
+      "On peut donc écrire $u(n)$ comme pour une fonction, ou $u_n$ avec un indice — c'est la notation habituelle des suites.",
+      "Le programme mentionne les deux, ainsi que $(u_n)$ pour désigner la suite entière, à distinguer de $u_n$, qui est UN terme.",
+      "Oui, $u_n$ et $u(n)$ désignent le même terme."
+    ),
+    tags: ["premiere", "maths", "suites", "registres", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_reg_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_registres",
+    difficulty: 4,
+    theme: "neutral",
+    text: "« Chaque année, la population double. » Comment traduire cette phrase ?",
+    format: "qcm",
+    choices: [
+      "$u_{n+1} = 2u_n$",
+      "$u_{n+1} = u_n + 2$",
+      "$u_n = 2n$",
+      "$u_{n+1} = u_n^2$",
+    ],
+    expected: ["$u_{n+1} = 2u_n$"],
+    comparator: "mcq_exact",
+    hint: "Doubler, c'est multiplier par $2$ le terme précédent.",
+    explanation: exp(
+      "On traduit le passage d'une année à la suivante, donc de $u_n$ à $u_{n+1}$.",
+      "« Doubler » signifie multiplier par $2$ la valeur précédente.",
+      "D'où $u_{n+1} = 2u_n$ : c'est une suite géométrique. Ajouter $2$ donnerait une suite arithmétique, ce qui décrirait une tout autre évolution.",
+      "La traduction est $u_{n+1} = 2u_n$."
+    ),
+    tags: ["premiere", "maths", "suites", "registres", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_reg_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_registres",
+    difficulty: 4,
+    theme: "reunion",
+    text: "Un planteur récolte $200$ kg de letchis la première année, puis $15$ kg de plus chaque année. Si $u_1 = 200$, comment traduire « $15$ kg de plus chaque année » ?",
+    format: "qcm",
+    choices: [
+      "$u_{n+1} = u_n + 15$",
+      "$u_{n+1} = 15u_n$",
+      "$u_n = 15n$",
+      "$u_{n+1} = u_n - 15$",
+    ],
+    expected: ["$u_{n+1} = u_n + 15$"],
+    comparator: "mcq_exact",
+    hint: "« De plus » : on ajoute au terme précédent.",
+    explanation: exp(
+      "On exprime la récolte d'une année en fonction de celle de l'année précédente.",
+      "« $15$ kg de plus » signifie qu'on ajoute $15$ à la valeur précédente.",
+      "D'où $u_{n+1} = u_n + 15$ : la suite est arithmétique de raison $15$.",
+      "La traduction est $u_{n+1} = u_n + 15$."
+    ),
+    canvas: suiteCanvas([200, 215, 230, "…"], ["+15", "+15", "+15"], "u(n+1) = u(n) + 15"),
+    tags: ["premiere", "maths", "suites", "registres", "canvas", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_reg_fixed_6",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_registres",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Quelle est la différence entre $(u_n)$ et $u_n$ ?",
+    format: "qcm",
+    choices: [
+      "$(u_n)$ désigne la suite entière, $u_n$ un seul terme",
+      "il n'y en a aucune",
+      "$(u_n)$ désigne le premier terme",
+      "$(u_n)$ désigne la somme des termes",
+    ],
+    expected: ["$(u_n)$ désigne la suite entière, $u_n$ un seul terme"],
+    comparator: "mcq_exact",
+    hint: "Les parenthèses englobent tous les termes à la fois.",
+    explanation: exp(
+      "Les parenthèses signalent qu'on parle de l'objet entier, et non d'une de ses valeurs.",
+      "$(u_n)$ désigne la suite tout entière : la liste infinie $u_0$, $u_1$, $u_2$…",
+      "$u_n$ désigne un seul terme, celui de rang $n$. On dit « la suite $(u_n)$ est croissante », mais « le terme $u_5$ vaut $12$ ».",
+      "$(u_n)$ est la suite, $u_n$ est un terme."
+    ),
+    tags: ["premiere", "maths", "suites", "registres", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_reg_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_registres",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique la différence entre $n$ et $u_n$ dans l'étude d'une suite.",
+    format: "open",
+    expected: ["rang", "valeur", "terme", "position"],
+    comparator: "contains_keyword",
+    hint: "L'un compte les étapes, l'autre donne un résultat.",
+    explanation: exp(
+      "Dans une suite, deux nombres coexistent à chaque étape : la position et la valeur.",
+      "$n$ est le RANG : il numérote les termes ($0$, $1$, $2$…), c'est en général un compteur d'étapes, d'années, de mois.",
+      "$u_n$ est la VALEUR du terme situé à ce rang. Par exemple, pour une population, $n$ compte les années et $u_n$ donne le nombre d'habitants.",
+      "$n$ dit où l'on est, $u_n$ dit combien on a."
+    ),
+    tags: ["premiere", "maths", "suites", "registres", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_reg_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_registres",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un capital de $1000$ € augmente de $2\\%$ par an. Traduis cette situation par une relation de récurrence, en précisant ce que représente $u_n$.",
+    format: "open",
+    expected: ["1,02", "capital", "année", "géométrique"],
+    comparator: "contains_keyword",
+    hint: "Augmenter de $2\\%$, c'est multiplier par combien ?",
+    explanation: exp(
+      "On commence toujours par dire ce que désigne $u_n$ : ici, le capital au bout de $n$ années.",
+      "Augmenter de $2\\%$ revient à multiplier par $1 + \\dfrac{2}{100} = 1{,}02$.",
+      "D'où $u_0 = 1000$ et $u_{n+1} = 1{,}02 \\times u_n$ : la suite est géométrique de raison $1{,}02$.",
+      "$u_n$ est le capital après $n$ années, avec $u_0 = 1000$ et $u_{n+1} = 1{,}02u_n$."
+    ),
+    tags: ["premiere", "maths", "suites", "registres", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_reg_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_registres",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "« De plus » ou « de moins » : on ajoute. « Double », « augmente de x % » : on multiplie.",
+    tags: ["premiere", "maths", "suites", "registres", "template"],
+    generate: () => {
+      const cas = [
+        {
+          phrase: "chaque mois, on ajoute $12$ abonnés",
+          bon: "$u_{n+1} = u_n + 12$",
+          faux: ["$u_{n+1} = 12u_n$", "$u_n = 12n$", "$u_{n+1} = u_n - 12$"],
+          type: "arithmétique de raison $12$",
+        },
+        {
+          phrase: "chaque année, la quantité triple",
+          bon: "$u_{n+1} = 3u_n$",
+          faux: ["$u_{n+1} = u_n + 3$", "$u_n = 3n$", "$u_{n+1} = u_n^3$"],
+          type: "géométrique de raison $3$",
+        },
+        {
+          phrase: "chaque semaine, on perd $5$ euros",
+          bon: "$u_{n+1} = u_n - 5$",
+          faux: ["$u_{n+1} = 5u_n$", "$u_{n+1} = u_n + 5$", "$u_n = -5n$"],
+          type: "arithmétique de raison $-5$",
+        },
+        {
+          phrase: "chaque année, la population diminue de $10\\%$",
+          bon: "$u_{n+1} = 0{,}9u_n$",
+          faux: ["$u_{n+1} = u_n - 10$", "$u_{n+1} = 1{,}1u_n$", "$u_{n+1} = -0{,}1u_n$"],
+          type: "géométrique de raison $0{,}9$",
+        },
+        {
+          phrase: "chaque jour, la somme augmente de $4\\%$",
+          bon: "$u_{n+1} = 1{,}04u_n$",
+          faux: ["$u_{n+1} = u_n + 4$", "$u_{n+1} = 0{,}96u_n$", "$u_{n+1} = 4u_n$"],
+          type: "géométrique de raison $1{,}04$",
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Comment traduire « ${c.phrase} » par une relation de récurrence ?`,
+        format: "qcm",
+        choices: [c.bon, ...c.faux],
+        expected: [c.bon],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On exprime un terme en fonction du précédent : « ajouter » donne une suite arithmétique, « multiplier » une suite géométrique.",
+          "Un pourcentage se traduit par un coefficient multiplicateur, jamais par une addition.",
+          `Ici la traduction est ${c.bon}.`,
+          `La suite est ${c.type}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_reg_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_registres",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Dis d'abord ce que représente $u_n$, puis décris ce que fait la relation.",
+    tags: ["premiere", "maths", "suites", "registres", "open", "template"],
+    generate: () => {
+      const cas = [
+        {
+          rel: "$u_0 = 50$ et $u_{n+1} = u_n + 7$",
+          mots: ["ajoute", "arithmétique", "départ", "raison"],
+          desc: "On part de $50$ et on ajoute $7$ à chaque étape : la suite est arithmétique de raison $7$.",
+        },
+        {
+          rel: "$u_0 = 800$ et $u_{n+1} = 0{,}75u_n$",
+          mots: ["diminue", "géométrique", "multiplie", "25"],
+          desc: "On part de $800$ et on multiplie par $0{,}75$ à chaque étape : la quantité diminue de $25\\%$, la suite est géométrique.",
+        },
+        {
+          rel: "$u_1 = 3$ et $u_{n+1} = 2u_n + 1$",
+          mots: ["double", "ajoute", "précédent", "ni"],
+          desc: "On double le terme précédent puis on ajoute $1$ : cette suite n'est ni arithmétique ni géométrique.",
+        },
+        {
+          rel: "$u_0 = 1200$ et $u_{n+1} = 1{,}05u_n$",
+          mots: ["augmente", "géométrique", "multiplie", "5"],
+          desc: "On part de $1200$ et on multiplie par $1{,}05$ : la quantité augmente de $5\\%$ à chaque étape.",
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Décris en français la situation modélisée par ${c.rel}. Que fait-on à chaque étape ?`,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Passer de l'écriture symbolique au langage courant fait partie des capacités attendues.",
+          "On lit le premier terme (le point de départ), puis l'opération qui fait passer d'un terme au suivant.",
+          c.desc,
+          "Ajouter donne une suite arithmétique, multiplier une suite géométrique ; combiner les deux ne donne ni l'une ni l'autre."
+        ),
+      };
+    },
+  },
+
+  /* ===================== SUITE_RECURRENCE ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_suites_rec_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_recurrence",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Pour une suite définie par $u_{n+1} = f(u_n)$, que faut-il connaître pour calculer $u_5$ ?",
+    format: "qcm",
+    choices: [
+      "le terme précédent $u_4$",
+      "seulement la valeur de $5$",
+      "tous les termes après $u_5$",
+      "rien : $u_5 = 5$",
+    ],
+    expected: ["le terme précédent $u_4$"],
+    comparator: "mcq_exact",
+    hint: "« Récurrence » : chaque terme dépend du précédent.",
+    explanation: exp(
+      "Dans une définition par récurrence, chaque terme se déduit du terme qui le précède.",
+      "Pour obtenir $u_5$, il faut donc disposer de $u_4$ — lui-même calculé à partir de $u_3$, et ainsi de suite.",
+      "On remonte ainsi jusqu'au premier terme, qui est donné : c'est le point de départ obligatoire.",
+      "Il faut connaître le terme précédent $u_4$."
+    ),
+    tags: ["premiere", "maths", "suites", "recurrence", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_rec_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_recurrence",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Avec $u_0 = 3$ et $u_{n+1} = 2u_n$, peut-on obtenir $u_{20}$ sans calculer tous les termes précédents ?",
+    format: "qcm",
+    choices: [
+      "oui, en trouvant la formule explicite $u_n = 3 \\times 2^n$",
+      "oui : il suffit de remplacer $n$ par $20$ dans la relation",
+      "non, c'est impossible",
+      "oui, car $u_{20} = 2 \\times 20$",
+    ],
+    expected: ["oui, en trouvant la formule explicite $u_n = 3 \\times 2^n$"],
+    comparator: "mcq_exact",
+    hint: "Une même suite peut avoir deux modes de génération.",
+    explanation: exp(
+      "Une définition par récurrence oblige à calculer tous les termes intermédiaires : c'est son principal inconvénient.",
+      "Mais une même suite peut souvent s'écrire autrement. Ici on reconnaît une suite géométrique de raison $2$ et de premier terme $3$.",
+      "Sa formule explicite est $u_n = 3 \\times 2^n$, qui donne $u_{20}$ en un seul calcul. Passer d'un mode de génération à l'autre est une capacité attendue du programme.",
+      "Oui, via la formule explicite $u_n = 3 \\times 2^n$."
+    ),
+    tags: ["premiere", "maths", "suites", "recurrence", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_rec_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_recurrence",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pourquoi une suite définie par récurrence a-t-elle toujours besoin qu'on donne son premier terme ?",
+    format: "open",
+    expected: ["départ", "précédent", "démarrer", "premier terme"],
+    comparator: "contains_keyword",
+    hint: "Essaie de calculer $u_1$ sans connaître $u_0$.",
+    explanation: exp(
+      "Une relation de récurrence explique comment passer d'un terme au suivant, mais pas par où commencer.",
+      "Sans premier terme, $u_1$ dépendrait de $u_0$, lui-même inconnu : le calcul ne peut pas démarrer.",
+      "Le premier terme fixe le point de départ. Avec la même relation $u_{n+1} = 2u_n$, partir de $3$ ou de $10$ donne deux suites complètement différentes.",
+      "Sans premier terme, aucun calcul ne peut commencer."
+    ),
+    tags: ["premiere", "maths", "suites", "recurrence", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_rec_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_recurrence",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique la différence entre une suite définie explicitement et une suite définie par récurrence, et donne un avantage de chacune.",
+    format: "open",
+    expected: ["directement", "précédent", "rang", "proche en proche"],
+    comparator: "contains_keyword",
+    hint: "Dans un cas on saute directement au rang voulu, dans l'autre on avance pas à pas.",
+    explanation: exp(
+      "Ce sont deux modes de génération d'une même sorte d'objet.",
+      "Explicite : $u_n = 3n + 2$ donne le terme directement à partir du rang. Avantage : on obtient $u_{100}$ en un calcul.",
+      "Par récurrence : $u_{n+1} = u_n + 3$ décrit le passage d'un terme au suivant. Avantage : elle colle souvent mieux à la situation réelle — ce qu'on ajoute ou multiplie chaque mois — et se programme facilement.",
+      "L'explicite va vite, la récurrence décrit le mécanisme."
+    ),
+    tags: ["premiere", "maths", "suites", "recurrence", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_rec_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_recurrence",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Calcule les termes un par un, sans sauter d'étape.",
+    tags: ["premiere", "maths", "suites", "recurrence", "template"],
+    generate: () => {
+      const u0 = randomInt(1, 5);
+      const a = randomInt(2, 4);
+      const b = randomInt(1, 5) * (randomInt(0, 1) === 1 ? 1 : -1);
+      const u1 = a * u0 + b;
+      const u2 = a * u1 + b;
+      const signe = b < 0 ? `- ${-b}` : `+ ${b}`;
+      return {
+        text: `La suite est définie par $u_0 = ${u0}$ et $u_{n+1} = ${a}u_n ${signe}$. Combien vaut $u_2$ ?`,
+        format: "short",
+        expected: [String(u2)],
+        comparator: "number_equal",
+        explanation: exp(
+          "On applique la relation de récurrence terme après terme.",
+          `$u_1 = ${a} \\times ${u0} ${signe} = ${u1}$.`,
+          `$u_2 = ${a} \\times ${u1} ${signe} = ${u2}$.`,
+          `$u_2 = ${u2}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_rec_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_recurrence",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Détaille chaque étape, puis dis si la suite est arithmétique, géométrique, ou ni l'un ni l'autre.",
+    tags: ["premiere", "maths", "suites", "recurrence", "open", "template"],
+    generate: () => {
+      const cas = [
+        {
+          rel: "$u_0 = 4$ et $u_{n+1} = u_n + 6$",
+          mots: ["10", "16", "arithmétique", "ajoute"],
+          calcul: "$u_1 = 4 + 6 = 10$, puis $u_2 = 10 + 6 = 16$.",
+          nature: "arithmétique de raison $6$",
+        },
+        {
+          rel: "$u_0 = 3$ et $u_{n+1} = 5u_n$",
+          mots: ["15", "75", "géométrique", "multiplie"],
+          calcul: "$u_1 = 5 \\times 3 = 15$, puis $u_2 = 5 \\times 15 = 75$.",
+          nature: "géométrique de raison $5$",
+        },
+        {
+          rel: "$u_0 = 1$ et $u_{n+1} = 3u_n + 2$",
+          mots: ["5", "17", "ni", "précédent"],
+          calcul: "$u_1 = 3 \\times 1 + 2 = 5$, puis $u_2 = 3 \\times 5 + 2 = 17$.",
+          nature: "ni arithmétique ni géométrique",
+        },
+        {
+          rel: "$u_0 = 10$ et $u_{n+1} = u_n - 4$",
+          mots: ["6", "2", "arithmétique", "retire"],
+          calcul: "$u_1 = 10 - 4 = 6$, puis $u_2 = 6 - 4 = 2$.",
+          nature: "arithmétique de raison $-4$",
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Pour la suite définie par ${c.rel}, calcule $u_1$ et $u_2$ en détaillant, puis dis si la suite est arithmétique, géométrique, ou ni l'un ni l'autre.`,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: exp(
+          "On calcule de proche en proche, puis on regarde l'opération qui fait passer d'un terme au suivant.",
+          "Ajouter toujours le même nombre donne une suite arithmétique ; multiplier toujours par le même nombre, une suite géométrique.",
+          c.calcul,
+          `La suite est ${c.nature}.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== SUITE_ALGORITHME ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_suites_algo_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_algorithme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Que vaut `u` après : `u = 5` puis `for i in range(3): u = u * 2` ?",
+    format: "short",
+    expected: ["40"],
+    comparator: "number_equal",
+    hint: "Trois tours de boucle : $10$, $20$, $40$.",
+    explanation: exp(
+      "La boucle applique la relation de récurrence autant de fois qu'il y a de tours.",
+      "`range(3)` fait $3$ tours : $5 \\to 10 \\to 20 \\to 40$.",
+      "$u = 5 \\times 2^3 = 40$.",
+      "`u` vaut $40$ : c'est le terme de rang $3$ de la suite géométrique."
+    ),
+    canvas: suiteCanvas([5, 10, 20, 40], ["×2", "×2", "×2"], "u = u * 2"),
+    tags: ["premiere", "maths", "suites", "algorithme", "canvas", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_algo_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_algorithme",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Que vaut `u` après : `u = 1` puis `for k in range(4): u = u + k` ?",
+    format: "short",
+    expected: ["7"],
+    comparator: "number_equal",
+    hint: "Attention : `k` vaut successivement $0$, $1$, $2$, $3$.",
+    explanation: exp(
+      "Ici ce n'est pas toujours le même nombre qu'on ajoute : la valeur ajoutée est `k`, qui change à chaque tour.",
+      "`k` parcourt $0$, $1$, $2$, $3$ : $u = 1 + 0 = 1$, puis $2$, puis $4$, puis $7$.",
+      "$u = 1 + (0 + 1 + 2 + 3) = 7$.",
+      "`u` vaut $7$. Le premier tour, avec $k = 0$, ne change rien : c'est le piège."
+    ),
+    tags: ["premiere", "maths", "suites", "algorithme", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_algo_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_algorithme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Dans un algorithme calculant les termes d'une suite, à quoi sert la variable `u` ?",
+    format: "qcm",
+    choices: [
+      "elle garde en mémoire le terme courant, écrasé à chaque tour",
+      "elle compte le nombre de tours",
+      "elle stocke tous les termes de la suite",
+      "elle donne la raison de la suite",
+    ],
+    expected: ["elle garde en mémoire le terme courant, écrasé à chaque tour"],
+    comparator: "mcq_exact",
+    hint: "Que devient l'ancienne valeur après `u = u * 2` ?",
+    explanation: exp(
+      "L'instruction `u = u * 2` calcule la nouvelle valeur à partir de l'ancienne, puis la remplace.",
+      "La variable ne conserve donc qu'un seul terme à la fois : celui qu'on vient de calculer.",
+      "C'est exactement le principe de la récurrence. Pour garder tous les termes, il faudrait une LISTE.",
+      "`u` garde le terme courant, écrasé à chaque tour."
+    ),
+    tags: ["premiere", "maths", "suites", "algorithme", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_algo_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_algorithme",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Combien de tours effectue la boucle `for i in range(6):` ?",
+    format: "short",
+    expected: ["6"],
+    comparator: "number_equal",
+    hint: "$i$ part de $0$ et s'arrête avant $6$.",
+    explanation: exp(
+      "`range(n)` parcourt les entiers de $0$ à $n - 1$.",
+      "Ici : $0$, $1$, $2$, $3$, $4$, $5$.",
+      "Cela fait bien $6$ tours, même si la valeur $6$ n'est jamais prise par $i$.",
+      "La boucle effectue $6$ tours."
+    ),
+    tags: ["premiere", "maths", "suites", "algorithme", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_algo_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_algorithme",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour calculer $u_{10}$ d'une suite définie par récurrence, quelle boucle utiliser ?",
+    format: "qcm",
+    choices: [
+      "une boucle `for`, car le nombre de tours est connu à l'avance",
+      "une boucle `while`, car on ne sait pas quand s'arrêter",
+      "aucune boucle n'est nécessaire",
+      "deux boucles imbriquées",
+    ],
+    expected: ["une boucle `for`, car le nombre de tours est connu à l'avance"],
+    comparator: "mcq_exact",
+    hint: "Sait-on d'avance combien d'étapes il faut faire ?",
+    explanation: exp(
+      "On choisit la boucle selon qu'on connaît ou non le nombre de répétitions.",
+      "Ici le rang visé est fixé : il faut exactement $10$ étapes depuis $u_0$.",
+      "La boucle `for` convient donc. La boucle `while` servirait pour une recherche de SEUIL, où l'on ignore combien d'étapes seront nécessaires.",
+      "Une boucle `for`, car le nombre de tours est connu."
+    ),
+    tags: ["premiere", "maths", "suites", "algorithme", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_algo_fixed_6",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_algorithme",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Dans `u = 3` puis `for i in range(4): u = u + 5`, quel terme obtient-on à la fin ?",
+    format: "qcm",
+    choices: ["$u_4$", "$u_5$", "$u_3$", "$u_0$"],
+    expected: ["$u_4$"],
+    comparator: "mcq_exact",
+    hint: "On part de $u_0 = 3$ et on avance de $4$ étapes.",
+    explanation: exp(
+      "La valeur initiale correspond au premier terme, ici $u_0 = 3$.",
+      "Chaque tour fait avancer d'un rang : $4$ tours mènent donc de $u_0$ à $u_4$.",
+      "La valeur finale est $3 + 4 \\times 5 = 23$, c'est-à-dire $u_4$. Confondre le nombre de tours et le rang atteint fait décaler tout le résultat.",
+      "On obtient $u_4$."
+    ),
+    tags: ["premiere", "maths", "suites", "algorithme", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_algo_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_algorithme",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique ce que calcule ce script : `u = 100` puis `for i in range(5): u = u * 0.9`. Que représente le résultat ?",
+    format: "open",
+    expected: ["diminue", "10", "cinq", "géométrique"],
+    comparator: "contains_keyword",
+    hint: "Multiplier par $0{,}9$, cela correspond à quelle évolution ?",
+    explanation: exp(
+      "On lit la valeur de départ, puis l'opération répétée et le nombre de tours.",
+      "On part de $100$ et on multiplie $5$ fois par $0{,}9$ : chaque étape correspond à une baisse de $10\\%$.",
+      "Le script calcule donc $100 \\times 0{,}9^5 \\approx 59$ : c'est le terme de rang $5$ d'une suite géométrique de raison $0{,}9$.",
+      "Il calcule la valeur après cinq baisses successives de $10\\%$."
+    ),
+    tags: ["premiere", "maths", "suites", "algorithme", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_algo_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_algorithme",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Écris en français les étapes d'un algorithme qui calcule $u_6$ pour la suite définie par $u_0 = 2$ et $u_{n+1} = 3u_n + 1$.",
+    format: "open",
+    expected: ["répète", "6", "u = 3", "départ"],
+    comparator: "contains_keyword",
+    hint: "Trois temps : une valeur de départ, une répétition, un affichage.",
+    explanation: exp(
+      "Un algorithme de calcul de termes comporte toujours trois temps.",
+      "Initialisation : on donne à $u$ la valeur de départ, ici $2$.",
+      "Répétition : on répète $6$ fois l'instruction $u$ prend la valeur $3u + 1$. Puis on affiche $u$.",
+      "En Python : `u = 2` ; `for i in range(6): u = 3*u + 1` ; `print(u)`."
+    ),
+    tags: ["premiere", "maths", "suites", "algorithme", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_algo_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_algorithme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Compte bien le nombre de tours, puis applique l'opération autant de fois.",
+    tags: ["premiere", "maths", "suites", "algorithme", "template"],
+    generate: () => {
+      const u0 = randomInt(2, 6);
+      const n = randomInt(2, 4);
+      const mult = randomInt(0, 1) === 1;
+      const k = mult ? randomInt(2, 3) : randomInt(3, 9);
+      let u = u0;
+      const termes: number[] = [u0];
+      for (let i = 0; i < n; i += 1) {
+        u = mult ? u * k : u + k;
+        termes.push(u);
+      }
+      const op = mult ? `u * ${k}` : `u + ${k}`;
+      return {
+        text: `Que vaut \`u\` après : \`u = ${u0}\` puis \`for i in range(${n}): u = ${op}\` ?`,
+        format: "short",
+        expected: [String(u)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La boucle répète l'instruction autant de fois qu'indiqué dans `range`.",
+          `Ici $${n}$ tours, en partant de $${u0}$ : ${termes.join(" → ")}.`,
+          `La valeur finale est $${u}$.`,
+          `\`u\` vaut $${u}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_algo_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_algorithme",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Dis d'où l'on part, ce qu'on répète, et combien de fois.",
+    tags: ["premiere", "maths", "suites", "algorithme", "open", "template"],
+    generate: () => {
+      const cas = [
+        {
+          script: "`u = 1000` puis `for i in range(3): u = u * 1.05`",
+          mots: ["augmente", "5", "trois", "géométrique"],
+          desc: "On part de $1000$ et on multiplie trois fois par $1{,}05$ : trois hausses successives de $5\\%$. Le script calcule $u_3 \\approx 1158$.",
+        },
+        {
+          script: "`u = 50` puis `for i in range(4): u = u - 7`",
+          mots: ["retire", "7", "quatre", "arithmétique"],
+          desc: "On part de $50$ et on retire $7$ quatre fois : le script calcule $u_4 = 50 - 28 = 22$, terme d'une suite arithmétique de raison $-7$.",
+        },
+        {
+          script: "`u = 2` puis `for i in range(5): u = u * 3`",
+          mots: ["multiplie", "3", "cinq", "géométrique"],
+          desc: "On part de $2$ et on multiplie cinq fois par $3$ : le script calcule $u_5 = 2 \\times 3^5 = 486$.",
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Explique ce que calcule ce script : ${c.script}. Quelle situation peut-il modéliser ?`,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Un script de calcul de termes se lit en trois temps : la valeur de départ, l'opération répétée, le nombre de tours.",
+          "L'opération indique la nature de la suite : ajouter donne une suite arithmétique, multiplier une suite géométrique.",
+          c.desc,
+          "Le résultat affiché est le terme dont le rang est égal au nombre de tours."
+        ),
+      };
+    },
+  },
+
+  /* ===================== SUITE_MODELISER ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_suites_mod_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_modeliser",
+    difficulty: 4,
+    theme: "neutral",
+    text: "On construit des figures avec des allumettes : la figure $n$ en utilise $3n + 1$. Combien d'allumettes pour la figure $4$ ?",
+    format: "short",
+    expected: ["13"],
+    comparator: "number_equal",
+    hint: "Remplace $n$ par $4$.",
+    explanation: exp(
+      "Un motif géométrique se traduit par une formule explicite : le rang de la figure donne directement le nombre d'éléments.",
+      "$u_4 = 3 \\times 4 + 1$.",
+      "$= 12 + 1 = 13$.",
+      "Il faut $13$ allumettes. La suite est arithmétique de raison $3$ : chaque figure ajoute $3$ allumettes."
+    ),
+    canvas: suiteCanvas([4, 7, 10, 13], ["+3", "+3", "+3"], "u(n) = 3n + 1"),
+    tags: ["premiere", "maths", "suites", "modeliser", "canvas", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_mod_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_modeliser",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Les nombres triangulaires sont $1$, $3$, $6$, $10$… (on ajoute un rang de plus à chaque fois). Quel est le cinquième ?",
+    format: "short",
+    expected: ["15"],
+    comparator: "number_equal",
+    hint: "Regarde ce qu'on ajoute : $+2$, $+3$, $+4$, puis ?",
+    explanation: exp(
+      "Un motif de dénombrement se lit en observant ce qu'on ajoute d'un terme au suivant.",
+      "Ici : $1 \\to 3$ ($+2$), $3 \\to 6$ ($+3$), $6 \\to 10$ ($+4$). L'ajout augmente d'un à chaque fois.",
+      "Le suivant s'obtient donc en ajoutant $5$ : $10 + 5 = 15$.",
+      "Le cinquième nombre triangulaire est $15$ — c'est aussi $1+2+3+4+5$."
+    ),
+    canvas: suiteCanvas([1, 3, 6, 10, "?"], ["+2", "+3", "+4", "+5"], undefined, 4),
+    tags: ["premiere", "maths", "suites", "modeliser", "canvas", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_mod_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_modeliser",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Une population augmente de $3\\%$ par an. Par quel type de suite la modélise-t-on ?",
+    format: "qcm",
+    choices: [
+      "une suite géométrique de raison $1{,}03$",
+      "une suite arithmétique de raison $3$",
+      "une suite arithmétique de raison $0{,}03$",
+      "une suite géométrique de raison $3$",
+    ],
+    expected: ["une suite géométrique de raison $1{,}03$"],
+    comparator: "mcq_exact",
+    hint: "Un pourcentage porte sur la valeur de l'année précédente, qui change chaque année.",
+    explanation: exp(
+      "Une évolution en POURCENTAGE se traduit par une multiplication, donc par une suite géométrique.",
+      "Augmenter de $3\\%$ revient à multiplier par $1 + \\dfrac{3}{100} = 1{,}03$.",
+      "Une suite arithmétique correspondrait à un ajout FIXE (par exemple $+3$ habitants par an), ce qui est une tout autre situation : le pourcentage, lui, porte chaque année sur une population plus grande.",
+      "C'est une suite géométrique de raison $1{,}03$."
+    ),
+    tags: ["premiere", "maths", "suites", "modeliser", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_mod_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_modeliser",
+    difficulty: 4,
+    theme: "reunion",
+    text: "Un randonneur monte $300$ m de dénivelé la première heure, puis $40$ m de moins à chaque heure suivante. Quelle suite modélise le dénivelé horaire ?",
+    format: "qcm",
+    choices: [
+      "arithmétique de raison $-40$",
+      "géométrique de raison $0{,}4$",
+      "arithmétique de raison $40$",
+      "géométrique de raison $-40$",
+    ],
+    expected: ["arithmétique de raison $-40$"],
+    comparator: "mcq_exact",
+    hint: "« $40$ m de moins » : on retranche toujours la même quantité.",
+    explanation: exp(
+      "On regarde ce qui se répète : un ajout constant donne une suite arithmétique, un facteur constant une suite géométrique.",
+      "Ici on retire $40$ m à chaque heure : c'est une quantité fixe.",
+      "La suite est donc arithmétique de raison $-40$ : $300$, $260$, $220$… (« $40$ m de moins » ne signifie pas « $40\\%$ de moins ».)",
+      "C'est une suite arithmétique de raison $-40$."
+    ),
+    canvas: suiteCanvas([300, 260, 220, 180], ["−40", "−40", "−40"], "u(n+1) = u(n) − 40"),
+    tags: ["premiere", "maths", "suites", "modeliser", "canvas", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_mod_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_modeliser",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Dans une salle, chaque personne serre la main de toutes les autres. Avec $n$ personnes, le nombre de poignées de main est $\\dfrac{n(n-1)}{2}$. Combien pour $5$ personnes ?",
+    format: "short",
+    expected: ["10"],
+    comparator: "number_equal",
+    hint: "$\\dfrac{5 \\times 4}{2}$.",
+    explanation: exp(
+      "Une question de dénombrement peut se modéliser par une suite dont le rang est le nombre de personnes.",
+      "$u_5 = \\dfrac{5 \\times 4}{2} = \\dfrac{20}{2}$.",
+      "$= 10$ poignées de main.",
+      "On divise par $2$ car chaque poignée serait sinon comptée deux fois — une fois par personne."
+    ),
+    tags: ["premiere", "maths", "suites", "modeliser", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_mod_fixed_6",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_modeliser",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Quelle situation se modélise par une suite ARITHMÉTIQUE ?",
+    format: "qcm",
+    choices: [
+      "un abonnement à $15$ € par mois qui s'ajoute au total payé",
+      "un capital placé à $2\\%$ par an",
+      "une population qui double tous les dix ans",
+      "une substance qui perd la moitié de sa masse chaque heure",
+    ],
+    expected: ["un abonnement à $15$ € par mois qui s'ajoute au total payé"],
+    comparator: "mcq_exact",
+    hint: "Cherche celle où l'on AJOUTE toujours la même quantité.",
+    explanation: exp(
+      "Une suite arithmétique modélise une évolution à accroissement CONSTANT ; une suite géométrique, une évolution à taux constant.",
+      "L'abonnement ajoute $15$ € chaque mois, quelle que soit la somme déjà payée : l'accroissement est constant.",
+      "Les trois autres situations font intervenir un pourcentage ou un facteur (doubler, diviser par deux) : elles sont géométriques.",
+      "L'abonnement mensuel se modélise par une suite arithmétique."
+    ),
+    tags: ["premiere", "maths", "suites", "modeliser", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_mod_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_modeliser",
+    difficulty: 5,
+    theme: "reunion",
+    text: "Une association compte $80$ adhérents et en gagne $12$ chaque année. Modélise la situation par une suite : précise ce que représente $u_n$, sa nature et sa raison.",
+    format: "open",
+    expected: ["arithmétique", "12", "adhérents", "80"],
+    comparator: "contains_keyword",
+    hint: "Commence toujours par dire ce que désigne $u_n$.",
+    explanation: exp(
+      "Modéliser, c'est nommer la quantité étudiée, puis décrire son évolution.",
+      "On pose : $u_n$ est le nombre d'adhérents après $n$ années, avec $u_0 = 80$.",
+      "Chaque année on ajoute $12$ adhérents : $u_{n+1} = u_n + 12$. La suite est arithmétique de raison $12$, donc $u_n = 80 + 12n$.",
+      "$u_n = 80 + 12n$, suite arithmétique de raison $12$."
+    ),
+    tags: ["premiere", "maths", "suites", "modeliser", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_mod_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_modeliser",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève modélise « une population qui augmente de $5\\%$ par an » par $u_{n+1} = u_n + 5$. Explique son erreur.",
+    format: "open",
+    expected: ["pourcentage", "1,05", "multiplie", "géométrique"],
+    comparator: "contains_keyword",
+    hint: "$5\\%$ de quoi ? Cette quantité change-t-elle chaque année ?",
+    explanation: exp(
+      "Un pourcentage ne s'ajoute pas : il porte sur la valeur de l'année précédente, qui change chaque année.",
+      "L'élève a traduit « $5\\%$ » par « $+5$ », ce qui ajouterait $5$ habitants par an, quelle que soit la taille de la population.",
+      "La bonne traduction est $u_{n+1} = 1{,}05 \\times u_n$ : la suite est géométrique. Pour $1000$ habitants, la hausse est de $50$ ; pour $10\\,000$, elle est de $500$.",
+      "Une évolution en pourcentage se traduit par une multiplication, pas par une addition."
+    ),
+    tags: ["premiere", "maths", "suites", "modeliser", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_mod_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_modeliser",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une quantité fixe ajoutée : arithmétique. Un pourcentage ou un facteur : géométrique.",
+    tags: ["premiere", "maths", "suites", "modeliser", "template"],
+    generate: () => {
+      const cas = [
+        {
+          situation: "un livret rapporte $2\\%$ d'intérêts chaque année",
+          bon: "géométrique de raison $1{,}02$",
+          faux: ["arithmétique de raison $2$", "arithmétique de raison $0{,}02$", "géométrique de raison $2$"],
+        },
+        {
+          situation: "un réservoir perd $30$ litres par jour",
+          bon: "arithmétique de raison $-30$",
+          faux: ["géométrique de raison $0{,}7$", "arithmétique de raison $30$", "géométrique de raison $-30$"],
+        },
+        {
+          situation: "une bactérie se divise en deux toutes les heures",
+          bon: "géométrique de raison $2$",
+          faux: ["arithmétique de raison $2$", "géométrique de raison $0{,}5$", "arithmétique de raison $1$"],
+        },
+        {
+          situation: "un coureur ajoute $2$ km à sa sortie hebdomadaire chaque semaine",
+          bon: "arithmétique de raison $2$",
+          faux: ["géométrique de raison $2$", "arithmétique de raison $-2$", "géométrique de raison $1{,}02$"],
+        },
+        {
+          situation: "une substance perd $20\\%$ de sa masse chaque heure",
+          bon: "géométrique de raison $0{,}8$",
+          faux: ["arithmétique de raison $-20$", "géométrique de raison $1{,}2$", "géométrique de raison $-0{,}2$"],
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Par quelle suite modélise-t-on la situation suivante : ${c.situation} ?`,
+        format: "qcm",
+        choices: [c.bon, ...c.faux],
+        expected: [c.bon],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une quantité fixe ajoutée à chaque étape donne une suite arithmétique ; un pourcentage ou un facteur donne une suite géométrique.",
+          "On repère donc si l'énoncé ajoute toujours la même quantité, ou s'il multiplie.",
+          `Ici, la modélisation correcte est : ${c.bon}.`,
+          "Un pourcentage se traduit toujours par un coefficient multiplicateur."
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_mod_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_modeliser",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Dis ce que représente $u_n$, donne $u_0$, puis la relation de récurrence.",
+    tags: ["premiere", "maths", "suites", "modeliser", "open", "template"],
+    generate: () => {
+      const cas = [
+        {
+          situation:
+            "une ville de $4000$ habitants gagne $150$ habitants par an",
+          mots: ["arithmétique", "150", "habitants", "4000"],
+          modele:
+            "$u_n$ est le nombre d'habitants après $n$ années, $u_0 = 4000$ et $u_{n+1} = u_n + 150$ : suite arithmétique de raison $150$, donc $u_n = 4000 + 150n$.",
+        },
+        {
+          situation:
+            "un capital de $5000$ € placé à $3\\%$ par an",
+          mots: ["géométrique", "1,03", "capital", "5000"],
+          modele:
+            "$u_n$ est le capital après $n$ années, $u_0 = 5000$ et $u_{n+1} = 1{,}03 \\times u_n$ : suite géométrique de raison $1{,}03$, donc $u_n = 5000 \\times 1{,}03^n$.",
+        },
+        {
+          situation:
+            "un stock de $600$ pièces dont on retire $45$ pièces par semaine",
+          mots: ["arithmétique", "45", "stock", "600"],
+          modele:
+            "$u_n$ est le stock après $n$ semaines, $u_0 = 600$ et $u_{n+1} = u_n - 45$ : suite arithmétique de raison $-45$, donc $u_n = 600 - 45n$.",
+        },
+        {
+          situation:
+            "une population de $2000$ insectes qui diminue de $15\\%$ par mois",
+          mots: ["géométrique", "0,85", "insectes", "2000"],
+          modele:
+            "$u_n$ est la population après $n$ mois, $u_0 = 2000$ et $u_{n+1} = 0{,}85 \\times u_n$ : suite géométrique de raison $0{,}85$, donc $u_n = 2000 \\times 0{,}85^n$.",
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Modélise par une suite : ${c.situation}. Précise ce que représente $u_n$, sa nature et sa raison.`,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Modéliser demande trois choses : dire ce que désigne $u_n$, donner le premier terme, écrire la relation de récurrence.",
+          "On repère ensuite la nature de la suite : ajout constant (arithmétique) ou facteur constant (géométrique).",
+          c.modele,
+          "Sans la phrase « $u_n$ est… », le modèle ne veut rien dire : c'est elle qui relie les maths à la situation."
+        ),
+      };
+    },
+  },
+
+  /* ===================== SUITE_EVOLUTION ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_suites_evo_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_evolution",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quel est le coefficient multiplicateur d'une hausse de $15\\%$ ?",
+    format: "qcm",
+    choices: ["$1{,}15$", "$0{,}15$", "$15$", "$1{,}015$"],
+    expected: ["$1{,}15$"],
+    comparator: "mcq_exact",
+    hint: "On garde le tout ($1$) et on ajoute la hausse.",
+    explanation: exp(
+      "Augmenter de $t\\%$ revient à multiplier par $1 + \\dfrac{t}{100}$.",
+      "Ici $t = 15$, donc le coefficient est $1 + 0{,}15$.",
+      "$= 1{,}15$. Le $1$ représente la quantité de départ qu'on conserve, le $0{,}15$ ce qu'on ajoute.",
+      "Le coefficient multiplicateur est $1{,}15$."
+    ),
+    tags: ["premiere", "maths", "suites", "evolution", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_evo_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_evolution",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quel est le coefficient multiplicateur d'une baisse de $20\\%$ ?",
+    format: "qcm",
+    choices: ["$0{,}8$", "$-0{,}2$", "$1{,}2$", "$-20$"],
+    expected: ["$0{,}8$"],
+    comparator: "mcq_exact",
+    hint: "Perdre $20\\%$, c'est garder $80\\%$.",
+    explanation: exp(
+      "Diminuer de $t\\%$ revient à multiplier par $1 - \\dfrac{t}{100}$.",
+      "Ici $t = 20$, donc le coefficient est $1 - 0{,}2 = 0{,}8$.",
+      "Autrement dit, on conserve $80\\%$ de la valeur. Un coefficient négatif n'aurait aucun sens : la quantité changerait de signe.",
+      "Le coefficient multiplicateur est $0{,}8$."
+    ),
+    tags: ["premiere", "maths", "suites", "evolution", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_evo_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_evolution",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un prix de $200$ € augmente de $10\\%$, puis encore de $10\\%$. Quel est le prix final, en euros ?",
+    format: "short",
+    expected: ["242"],
+    comparator: "number_equal",
+    hint: "La deuxième hausse porte sur $220$, pas sur $200$.",
+    explanation: exp(
+      "Des évolutions successives se traduisent par un PRODUIT de coefficients multiplicateurs.",
+      "$200 \\times 1{,}1 = 220$, puis $220 \\times 1{,}1$.",
+      "$= 242$. La deuxième hausse porte sur $220$ € : elle vaut $22$ €, et non $20$ €.",
+      "Le prix final est de $242$ €."
+    ),
+    canvas: suiteCanvas([200, 220, 242], ["×1,1", "×1,1"], "u(n+1) = 1,1 × u(n)"),
+    tags: ["premiere", "maths", "suites", "evolution", "canvas", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_evo_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_evolution",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un prix de $100$ € augmente de $10\\%$, puis baisse de $10\\%$. Quel est le prix final, en euros ?",
+    format: "short",
+    expected: ["99"],
+    comparator: "number_equal",
+    hint: "La baisse porte sur $110$ €, pas sur $100$ €.",
+    explanation: exp(
+      "On multiplie les coefficients : $1{,}1$ puis $0{,}9$.",
+      "$100 \\times 1{,}1 = 110$, puis $110 \\times 0{,}9 = 99$.",
+      "$1{,}1 \\times 0{,}9 = 0{,}99$ : la baisse de $11$ € l'emporte sur la hausse de $10$ €, car elle s'applique à un montant plus élevé.",
+      "Le prix final est de $99$ € : on ne revient PAS au prix de départ."
+    ),
+    canvas: suiteCanvas([100, 110, 99], ["×1,1", "×0,9"], "hausse puis baisse de 10 %"),
+    tags: ["premiere", "maths", "suites", "evolution", "canvas", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_evo_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_evolution",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Deux hausses successives de $5\\%$ correspondent à une hausse globale de :",
+    format: "qcm",
+    choices: ["$10{,}25\\%$", "$10\\%$", "$5\\%$", "$25\\%$"],
+    expected: ["$10{,}25\\%$"],
+    comparator: "mcq_exact",
+    hint: "Calcule $1{,}05 \\times 1{,}05$.",
+    explanation: exp(
+      "Les taux d'évolution ne s'additionnent pas : ce sont les coefficients multiplicateurs qui se multiplient.",
+      "$1{,}05 \\times 1{,}05 = 1{,}1025$.",
+      "Ce coefficient correspond à une hausse de $10{,}25\\%$, et non de $10\\%$ : la deuxième hausse porte sur un montant déjà augmenté.",
+      "La hausse globale est de $10{,}25\\%$."
+    ),
+    tags: ["premiere", "maths", "suites", "evolution", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_evo_fixed_6",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_evolution",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Une quantité baisse de $50\\%$, puis augmente de $50\\%$. Que devient-elle ?",
+    format: "qcm",
+    choices: [
+      "elle a perdu $25\\%$ par rapport au départ",
+      "elle revient à sa valeur de départ",
+      "elle a gagné $25\\%$",
+      "elle a perdu $50\\%$",
+    ],
+    expected: ["elle a perdu $25\\%$ par rapport au départ"],
+    comparator: "mcq_exact",
+    hint: "$0{,}5 \\times 1{,}5$ vaut combien ?",
+    explanation: exp(
+      "On multiplie les coefficients successifs.",
+      "$0{,}5 \\times 1{,}5 = 0{,}75$.",
+      "Le coefficient global vaut $0{,}75$ : il reste $75\\%$ de la valeur initiale, soit une perte de $25\\%$. Partant de $100$ : $50$, puis $75$.",
+      "Elle a perdu $25\\%$."
+    ),
+    tags: ["premiere", "maths", "suites", "evolution", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_evo_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_evolution",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi une hausse de $10\\%$ suivie d'une baisse de $10\\%$ ne ramène pas au prix de départ.",
+    format: "open",
+    expected: ["0,99", "porte sur", "plus grand", "multiplie"],
+    comparator: "contains_keyword",
+    hint: "Sur quelle somme porte chacune des deux évolutions ?",
+    explanation: exp(
+      "Un pourcentage porte toujours sur la valeur du moment, pas sur la valeur initiale.",
+      "La hausse s'applique au prix de départ, mais la baisse s'applique au prix DÉJÀ AUGMENTÉ, donc plus grand : elle retire davantage.",
+      "En coefficients : $1{,}1 \\times 0{,}9 = 0{,}99$, soit une perte finale de $1\\%$. Pour $100$ € : $+10$ €, puis $-11$ €.",
+      "Les deux pourcentages ne portent pas sur la même somme."
+    ),
+    tags: ["premiere", "maths", "suites", "evolution", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_evo_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_evolution",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un loyer de $700$ € augmente de $2\\%$ par an. Explique comment calculer le loyer au bout de $5$ ans, sans calculer chaque année.",
+    format: "open",
+    expected: ["1,02", "puissance", "5", "géométrique"],
+    comparator: "contains_keyword",
+    hint: "Multiplier $5$ fois par le même nombre, cela s'écrit comment ?",
+    explanation: exp(
+      "Une évolution à taux constant se modélise par une suite géométrique.",
+      "Chaque année, le loyer est multiplié par $1{,}02$ ; sur $5$ ans, on multiplie donc $5$ fois de suite par $1{,}02$.",
+      "Cela s'écrit $u_5 = 700 \\times 1{,}02^5 \\approx 773$ € : la formule explicite évite de calculer les années une par une.",
+      "$u_n = 700 \\times 1{,}02^n$, donc $u_5 = 700 \\times 1{,}02^5$."
+    ),
+    tags: ["premiere", "maths", "suites", "evolution", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_evo_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_evolution",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Hausse : $1 + \\dfrac{t}{100}$. Baisse : $1 - \\dfrac{t}{100}$.",
+    tags: ["premiere", "maths", "suites", "evolution", "template"],
+    generate: () => {
+      const t = pickOne([4, 5, 8, 12, 15, 20, 25, 30]);
+      const hausse = randomInt(0, 1) === 1;
+      const coef = hausse ? 1 + t / 100 : 1 - t / 100;
+      const fmt = (x: number) => String(Math.round(x * 100) / 100).replace(".", "{,}");
+      const faux = hausse
+        ? [`$${fmt(t / 100)}$`, `$${fmt(1 - t / 100)}$`, `$${t}$`]
+        : [`$${fmt(1 + t / 100)}$`, `$-${fmt(t / 100)}$`, `$${t}$`];
+      return {
+        text: `Quel est le coefficient multiplicateur d'une ${hausse ? "hausse" : "baisse"} de $${t}\\%$ ?`,
+        format: "qcm",
+        choices: [`$${fmt(coef)}$`, ...faux],
+        expected: [`$${fmt(coef)}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          hausse
+            ? "Augmenter de $t\\%$ revient à multiplier par $1 + \\dfrac{t}{100}$."
+            : "Diminuer de $t\\%$ revient à multiplier par $1 - \\dfrac{t}{100}$.",
+          `Ici $t = ${t}$.`,
+          `Le coefficient vaut $${fmt(coef)}$.`,
+          hausse
+            ? `On garde le tout et on ajoute la hausse : $${fmt(coef)}$.`
+            : `Il reste $${100 - t}\\%$ de la valeur : $${fmt(coef)}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_evo_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_evolution",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Multiplie les coefficients, puis interprète le résultat obtenu.",
+    tags: ["premiere", "maths", "suites", "evolution", "open", "template"],
+    generate: () => {
+      const cas = [
+        {
+          enonce: "une hausse de $20\\%$ suivie d'une baisse de $20\\%$",
+          mots: ["0,96", "4", "perte", "multiplie"],
+          calcul:
+            "$1{,}2 \\times 0{,}8 = 0{,}96$ : il reste $96\\%$ de la valeur, soit une PERTE de $4\\%$.",
+        },
+        {
+          enonce: "deux baisses successives de $10\\%$",
+          mots: ["0,81", "19", "perte", "multiplie"],
+          calcul:
+            "$0{,}9 \\times 0{,}9 = 0{,}81$ : il reste $81\\%$, soit une baisse globale de $19\\%$ — et non de $20\\%$.",
+        },
+        {
+          enonce: "trois hausses successives de $10\\%$",
+          mots: ["1,331", "33", "hausse", "multiplie"],
+          calcul:
+            "$1{,}1^3 = 1{,}331$ : la hausse globale est de $33{,}1\\%$, et non de $30\\%$.",
+        },
+        {
+          enonce: "une baisse de $30\\%$ suivie d'une hausse de $30\\%$",
+          mots: ["0,91", "9", "perte", "multiplie"],
+          calcul:
+            "$0{,}7 \\times 1{,}3 = 0{,}91$ : il reste $91\\%$, soit une perte de $9\\%$.",
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `À quelle évolution globale correspond ${c.enonce} ? Justifie par le calcul.`,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Des évolutions successives se combinent en MULTIPLIANT leurs coefficients : les pourcentages ne s'additionnent jamais.",
+          "On calcule donc le produit des coefficients, puis on le retraduit en pourcentage.",
+          c.calcul,
+          "Un coefficient global inférieur à $1$ signale une perte, supérieur à $1$ une hausse."
+        ),
+      };
+    },
+  },
+
+  /* ===================== SUITE_SOMME_GEO ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_suites_sgeo_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_somme_geo",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Peut-on utiliser la formule $\\dfrac{1 - q^{n+1}}{1 - q}$ lorsque $q = 1$ ?",
+    format: "qcm",
+    choices: [
+      "non : le dénominateur serait nul ; la somme vaut alors $n + 1$",
+      "oui, elle donne $0$",
+      "oui, elle donne $1$",
+      "non : la somme n'existe pas",
+    ],
+    expected: ["non : le dénominateur serait nul ; la somme vaut alors $n + 1$"],
+    comparator: "mcq_exact",
+    hint: "Que vaut $1 - q$ si $q = 1$ ?",
+    explanation: exp(
+      "La formule de la somme géométrique suppose $q \\neq 1$, ce qui est toujours précisé dans l'énoncé du cours.",
+      "Si $q = 1$, le dénominateur $1 - q$ vaut $0$ : la division est impossible.",
+      "Mais la somme existe bien : tous les termes valent $1$, et il y en a $n+1$. La somme vaut donc simplement $n + 1$.",
+      "Non : pour $q = 1$, la somme vaut $n + 1$."
+    ),
+    tags: ["premiere", "maths", "suites", "somme_geo", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_sgeo_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_somme_geo",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Une suite géométrique vérifie $u_0 = 3$ et $q = 2$. Combien vaut $u_0 + u_1 + \\dots + u_9$ ?",
+    format: "short",
+    expected: ["3069"],
+    comparator: "number_equal",
+    hint: "Mets $3$ en facteur : $3 \\times (1 + 2 + \\dots + 2^9)$.",
+    explanation: exp(
+      "Pour une somme géométrique, on met le premier terme en facteur : $S = u_0 \\times \\dfrac{1 - q^{n}}{1 - q}$ avec $n$ termes.",
+      "Il y a $10$ termes (de $u_0$ à $u_9$) : $S = 3 \\times \\dfrac{1 - 2^{10}}{1 - 2} = 3 \\times \\dfrac{-1023}{-1}$.",
+      "$= 3 \\times 1023 = 3069$.",
+      "La somme vaut $3069$."
+    ),
+    tags: ["premiere", "maths", "suites", "somme_geo", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_sgeo_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_somme_geo",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Combien vaut $1 + 0{,}5 + 0{,}25 + 0{,}125$ ?",
+    format: "short",
+    expected: ["1,875"],
+    comparator: "number_equal",
+    hint: "Somme géométrique de raison $0{,}5$, avec $4$ termes.",
+    explanation: exp(
+      "Chaque terme est la moitié du précédent : c'est une somme géométrique de raison $q = 0{,}5$.",
+      "Avec $4$ termes : $S = \\dfrac{1 - 0{,}5^4}{1 - 0{,}5} = \\dfrac{1 - 0{,}0625}{0{,}5}$.",
+      "$= \\dfrac{0{,}9375}{0{,}5} = 1{,}875$.",
+      "La somme vaut $1{,}875$ — et elle s'approchera de $2$ si l'on continue, sans jamais l'atteindre."
+    ),
+    tags: ["premiere", "maths", "suites", "somme_geo", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_sgeo_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_somme_geo",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un employeur propose : $1$ centime le premier jour, puis le double chaque jour, pendant $20$ jours. Explique comment calculer le total, et donne un ordre de grandeur.",
+    format: "open",
+    expected: ["géométrique", "2", "doubl", "10000"],
+    comparator: "contains_keyword",
+    hint: "Les sommes versées forment une suite géométrique de raison $2$.",
+    explanation: exp(
+      "Les versements forment une suite géométrique de premier terme $1$ centime et de raison $2$.",
+      "Le total est la somme des $20$ premiers termes : $S = \\dfrac{1 - 2^{20}}{1 - 2} = 2^{20} - 1$ centimes.",
+      "$2^{20} = 1\\,048\\,576$, donc environ $10\\,485$ € : plus de dix mille euros. Le doublement produit une croissance que l'intuition sous-estime toujours.",
+      "Le total dépasse $10\\,000$ € — c'est une somme géométrique de raison $2$."
+    ),
+    tags: ["premiere", "maths", "suites", "somme_geo", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_sgeo_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_somme_geo",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique la différence entre la somme $1 + 2 + \\dots + n$ et la somme $1 + q + \\dots + q^n$ : quand utilise-t-on chacune ?",
+    format: "open",
+    expected: ["arithmétique", "géométrique", "ajoute", "multiplie"],
+    comparator: "contains_keyword",
+    hint: "Dans un cas on ajoute toujours le même nombre, dans l'autre on multiplie.",
+    explanation: exp(
+      "Les deux formules ne s'appliquent pas au même type de suite.",
+      "$1 + 2 + \\dots + n = \\dfrac{n(n+1)}{2}$ additionne des termes qui augmentent d'un pas CONSTANT : c'est une somme arithmétique.",
+      "$1 + q + \\dots + q^n = \\dfrac{1 - q^{n+1}}{1 - q}$ additionne des termes obtenus en MULTIPLIANT par $q$ : c'est une somme géométrique.",
+      "On choisit selon la nature de la suite : ajout constant ou facteur constant."
+    ),
+    tags: ["premiere", "maths", "suites", "somme_geo", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_sgeo_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_somme_geo",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "$1 + q + \\dots + q^n = \\dfrac{1 - q^{n+1}}{1 - q}$ : attention, il y a $n+1$ termes.",
+    tags: ["premiere", "maths", "suites", "somme_geo", "template"],
+    generate: () => {
+      const q = pickOne([2, 3, 4, 5]);
+      const n = randomInt(3, 6);
+      const somme = (q ** (n + 1) - 1) / (q - 1);
+      const termes: number[] = [];
+      for (let i = 0; i <= n; i += 1) termes.push(q ** i);
+      return {
+        text: `Combien vaut $${termes.slice(0, 3).join(" + ")} + \\dots + ${q}^{${n}}$ ?`,
+        format: "short",
+        expected: [String(somme)],
+        comparator: "number_equal",
+        explanation: exp(
+          "C'est une somme géométrique : on applique $1 + q + \\dots + q^n = \\dfrac{1 - q^{n+1}}{1 - q}$.",
+          `Ici $q = ${q}$ et $n = ${n}$, donc il y a $${n + 1}$ termes.`,
+          `$S = \\dfrac{1 - ${q}^{${n + 1}}}{1 - ${q}} = \\dfrac{${1 - q ** (n + 1)}}{${1 - q}} = ${somme}$.`,
+          `La somme vaut $${somme}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_sgeo_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_somme_geo",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Identifie le premier terme, la raison, le nombre de termes — puis applique la formule.",
+    tags: ["premiere", "maths", "suites", "somme_geo", "open", "template"],
+    generate: () => {
+      const cas = [
+        {
+          enonce:
+            "un joueur mise $2$ € la première partie, puis double sa mise à chaque partie, sur $8$ parties",
+          mots: ["géométrique", "2", "510", "doubl"],
+          calcul:
+            "Les mises forment une suite géométrique de premier terme $2$ et de raison $2$. Total $= 2 \\times \\dfrac{1 - 2^8}{1 - 2} = 2 \\times 255 = 510$ €.",
+        },
+        {
+          enonce:
+            "une épargne de $100$ € par an placée de sorte que chaque versement soit multiplié par $1{,}5$",
+          mots: ["géométrique", "1,5", "somme", "facteur"],
+          calcul:
+            "Les termes forment une suite géométrique de raison $1{,}5$ : on applique $S = u_0 \\times \\dfrac{1 - q^n}{1 - q}$ avec $u_0 = 100$.",
+        },
+        {
+          enonce:
+            "une feuille pliée dont l'épaisseur double à chaque pliage, sur $10$ pliages",
+          mots: ["géométrique", "2", "1023", "doubl"],
+          calcul:
+            "Les épaisseurs ajoutées forment une suite géométrique de raison $2$ : la somme des $10$ premiers termes vaut $2^{10} - 1 = 1023$ fois l'épaisseur initiale.",
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Explique comment calculer le total dans cette situation : ${c.enonce}.`,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Quand chaque terme s'obtient en multipliant le précédent, le total est une somme géométrique.",
+          "On identifie le premier terme, la raison et le nombre de termes, puis on applique $S = u_0 \\times \\dfrac{1 - q^n}{1 - q}$.",
+          c.calcul,
+          "Compter les termes est le point délicat : de $u_0$ à $u_{n-1}$, il y en a $n$."
+        ),
+      };
+    },
+  },
+
+  /* ===================== SUITE_LIMITE ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_suites_lim_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_limite",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Vers quoi semble tendre la suite $u_n = \\dfrac{1}{n}$ quand $n$ devient très grand ?",
+    format: "qcm",
+    choices: ["vers $0$", "vers $1$", "vers $+\\infty$", "vers $-\\infty$"],
+    expected: ["vers $0$"],
+    comparator: "mcq_exact",
+    hint: "Calcule $\\dfrac{1}{10}$, $\\dfrac{1}{100}$, $\\dfrac{1}{1000}$…",
+    explanation: exp(
+      "Conjecturer une limite, c'est observer le comportement des termes pour de grandes valeurs de $n$.",
+      "$u_{10} = 0{,}1$, $u_{100} = 0{,}01$, $u_{1000} = 0{,}001$…",
+      "Les termes se rapprochent de $0$ autant qu'on veut, sans jamais l'atteindre : la suite tend vers $0$.",
+      "Elle tend vers $0$."
+    ),
+    canvas: suiteCanvas([1, "0,5", "0,33", "0,25", "0,2", "…"], undefined, "u(n) = 1/n"),
+    tags: ["premiere", "maths", "suites", "limite", "canvas", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_lim_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_limite",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Vers quoi semble tendre la suite $u_n = 2^n$ ?",
+    format: "qcm",
+    choices: ["vers $+\\infty$", "vers $2$", "vers $0$", "elle reste constante"],
+    expected: ["vers $+\\infty$"],
+    comparator: "mcq_exact",
+    hint: "$2^{10} = 1024$, $2^{20} \\approx 10^6$…",
+    explanation: exp(
+      "On observe les termes pour de grandes valeurs de $n$.",
+      "$2^{10} = 1024$, $2^{20}$ dépasse le million, $2^{30}$ le milliard.",
+      "Les termes dépassent n'importe quelle valeur fixée à l'avance : la suite tend vers $+\\infty$.",
+      "Elle tend vers $+\\infty$."
+    ),
+    canvas: suiteCanvas([1, 2, 4, 8, 16, 32, "…"], ["×2", "×2", "×2", "×2", "×2"], "u(n) = 2^n"),
+    tags: ["premiere", "maths", "suites", "limite", "canvas", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_lim_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_limite",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une suite géométrique de premier terme positif et de raison $q = 0{,}5$ tend vers :",
+    format: "qcm",
+    choices: ["$0$", "$0{,}5$", "$+\\infty$", "son premier terme"],
+    expected: ["$0$"],
+    comparator: "mcq_exact",
+    hint: "Chaque terme est la moitié du précédent : que devient-il au bout de vingt étapes ?",
+    explanation: exp(
+      "Quand $0 < q < 1$, chaque terme est une fraction du précédent : les termes diminuent sans cesse.",
+      "Avec $u_0 = 100$ : $50$, $25$, $12{,}5$, $6{,}25$… puis $0{,}0001$ au bout de vingt étapes.",
+      "Les termes s'approchent de $0$ autant qu'on veut : la suite tend vers $0$.",
+      "Elle tend vers $0$."
+    ),
+    tags: ["premiere", "maths", "suites", "limite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_lim_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_limite",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une suite géométrique de premier terme positif et de raison $q = 1{,}5$ tend vers :",
+    format: "qcm",
+    choices: ["$+\\infty$", "$1{,}5$", "$0$", "$1$"],
+    expected: ["$+\\infty$"],
+    comparator: "mcq_exact",
+    hint: "$q > 1$ : chaque terme est plus grand que le précédent, et l'écart grandit.",
+    explanation: exp(
+      "Quand $q > 1$ et que le premier terme est positif, chaque terme dépasse le précédent d'une quantité croissante.",
+      "Avec $u_0 = 100$ : $150$, $225$, $337{,}5$… et $u_{20}$ dépasse $300\\,000$.",
+      "La croissance est de plus en plus rapide : la suite tend vers $+\\infty$.",
+      "Elle tend vers $+\\infty$."
+    ),
+    tags: ["premiere", "maths", "suites", "limite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_lim_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_limite",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Une suite décroissante tend-elle forcément vers $-\\infty$ ?",
+    format: "qcm",
+    choices: [
+      "non : elle peut se stabiliser vers une valeur, comme $\\dfrac{1}{n}$ vers $0$",
+      "oui, toujours",
+      "oui, si elle est géométrique",
+      "non : elle ne tend jamais vers rien",
+    ],
+    expected: [
+      "non : elle peut se stabiliser vers une valeur, comme $\\dfrac{1}{n}$ vers $0$",
+    ],
+    comparator: "mcq_exact",
+    hint: "$\\dfrac{1}{n}$ décroît toujours. Descend-elle pour autant sans fin ?",
+    explanation: exp(
+      "Décroître signifie que chaque terme est plus petit que le précédent, mais pas que la descente soit sans limite.",
+      "$\\dfrac{1}{n}$ décroît à chaque étape, et pourtant elle reste toujours positive : elle s'approche de $0$ sans jamais descendre en dessous.",
+      "Elle est dite MINORÉE par $0$. Une suite décroissante peut donc converger vers une valeur, ou bien filer vers $-\\infty$ comme $u_n = -n$.",
+      "Non : une suite décroissante peut tendre vers une valeur finie."
+    ),
+    tags: ["premiere", "maths", "suites", "limite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_lim_fixed_6",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_limite",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Les premiers termes d'une suite sont $2$ ; $2{,}5$ ; $2{,}75$ ; $2{,}875$ ; $2{,}9375$. Que peut-on conjecturer ?",
+    format: "qcm",
+    choices: [
+      "elle semble tendre vers $3$",
+      "elle semble tendre vers $+\\infty$",
+      "elle semble tendre vers $2$",
+      "elle est constante",
+    ],
+    expected: ["elle semble tendre vers $3$"],
+    comparator: "mcq_exact",
+    hint: "Regarde l'écart avec $3$ : $1$ ; $0{,}5$ ; $0{,}25$…",
+    explanation: exp(
+      "Pour conjecturer une limite, on observe si les termes s'accumulent près d'une valeur.",
+      "Les écarts avec $3$ valent $1$ ; $0{,}5$ ; $0{,}25$ ; $0{,}125$ ; $0{,}0625$ : ils sont divisés par $2$ à chaque étape.",
+      "Les termes se rapprochent de $3$ autant qu'on veut, sans le dépasser : on conjecture une limite égale à $3$.",
+      "La suite semble tendre vers $3$."
+    ),
+    canvas: suiteCanvas([2, "2,5", "2,75", "2,875", "2,9375", "…"], undefined, "vers 3 ?"),
+    tags: ["premiere", "maths", "suites", "limite", "canvas", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_lim_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_limite",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Que veut dire, intuitivement, « la suite $(u_n)$ tend vers $0$ » ?",
+    format: "open",
+    expected: ["proche", "aussi petit", "grand", "jamais"],
+    comparator: "contains_keyword",
+    hint: "Peut-on rendre les termes aussi petits qu'on veut ?",
+    explanation: exp(
+      "En première, la limite s'aborde intuitivement, sans définition formelle.",
+      "Dire que la suite tend vers $0$ signifie que ses termes deviennent aussi proches de $0$ que l'on veut, dès que $n$ est assez grand.",
+      "Par exemple pour $\\dfrac{1}{n}$ : si l'on veut être à moins de $0{,}001$ de $0$, il suffit de prendre $n > 1000$. Et cela vaut pour n'importe quelle précision demandée.",
+      "Les termes s'approchent de $0$ autant qu'on veut, sans nécessairement l'atteindre."
+    ),
+    tags: ["premiere", "maths", "suites", "limite", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suites_lim_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_limite",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Une substance perd $20\\%$ de sa masse chaque heure. Conjecture ce que devient sa masse au bout d'un temps très long, et justifie.",
+    format: "open",
+    expected: ["0", "géométrique", "0,8", "jamais"],
+    comparator: "contains_keyword",
+    hint: "La masse suit une suite géométrique de raison $0{,}8$.",
+    explanation: exp(
+      "La masse suit une suite géométrique de raison $0{,}8$, car on garde $80\\%$ de la masse à chaque heure.",
+      "Comme $0 < 0{,}8 < 1$, les termes diminuent sans cesse : $100$, $80$, $64$, $51{,}2$…",
+      "Au bout de $30$ heures, il reste moins de $0{,}13\\%$ de la masse initiale. La suite tend vers $0$ — sans jamais l'atteindre exactement.",
+      "La masse tend vers $0$, sans jamais devenir nulle."
+    ),
+    tags: ["premiere", "maths", "suites", "limite", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_lim_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_limite",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Pour une suite géométrique de terme positif : $q > 1$ fait exploser, $0 < q < 1$ fait tendre vers $0$.",
+    tags: ["premiere", "maths", "suites", "limite", "template"],
+    generate: () => {
+      const cas = [
+        { q: "$1{,}2$", vers: "$+\\infty$", pourquoi: "$q > 1$ : les termes grandissent de plus en plus vite" },
+        { q: "$0{,}7$", vers: "$0$", pourquoi: "$0 < q < 1$ : chaque terme est plus petit que le précédent, et l'on s'approche de $0$" },
+        { q: "$3$", vers: "$+\\infty$", pourquoi: "$q > 1$ : la croissance est explosive" },
+        { q: "$0{,}25$", vers: "$0$", pourquoi: "$0 < q < 1$ : les termes sont divisés par $4$ à chaque étape" },
+        { q: "$1$", vers: "son premier terme", pourquoi: "$q = 1$ : tous les termes sont égaux, la suite est constante" },
+      ];
+      const c = pickOne(cas);
+      const autres = ["$+\\infty$", "$0$", "son premier terme", "$-\\infty$"].filter(
+        (x) => x !== c.vers
+      );
+      return {
+        text: `Une suite géométrique de premier terme positif a pour raison $q = ${c.q}$. Vers quoi tend-elle ?`,
+        format: "qcm",
+        choices: [c.vers, ...autres],
+        expected: [c.vers],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour une suite géométrique à termes positifs, tout se joue sur la position de $q$ par rapport à $1$.",
+          "On compare donc la raison à $1$.",
+          `Ici ${c.pourquoi}.`,
+          `La suite tend vers ${c.vers}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_lim_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_limite",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Observe l'écart entre les termes et la valeur soupçonnée : diminue-t-il ?",
+    tags: ["premiere", "maths", "suites", "limite", "open", "template"],
+    generate: () => {
+      const cas = [
+        {
+          termes: "$5$ ; $4$ ; $3{,}5$ ; $3{,}25$ ; $3{,}125$",
+          mots: ["3", "écart", "moitié", "tend"],
+          verdict:
+            "Les écarts avec $3$ valent $2$ ; $1$ ; $0{,}5$ ; $0{,}25$ ; $0{,}125$ : ils sont divisés par $2$. La suite semble tendre vers $3$.",
+        },
+        {
+          termes: "$0{,}9$ ; $0{,}99$ ; $0{,}999$ ; $0{,}9999$",
+          mots: ["1", "proche", "tend", "jamais"],
+          verdict:
+            "Les termes s'approchent de $1$ autant qu'on veut, sans l'atteindre : la suite semble tendre vers $1$.",
+        },
+        {
+          termes: "$3$ ; $9$ ; $27$ ; $81$ ; $243$",
+          mots: ["infini", "triple", "grand", "explose"],
+          verdict:
+            "Chaque terme est le triple du précédent : les valeurs dépassent n'importe quel seuil. La suite semble tendre vers $+\\infty$.",
+        },
+        {
+          termes: "$10$ ; $5$ ; $2{,}5$ ; $1{,}25$ ; $0{,}625$",
+          mots: ["0", "moitié", "tend", "positif"],
+          verdict:
+            "Chaque terme est la moitié du précédent, en restant positif : la suite semble tendre vers $0$.",
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Les premiers termes d'une suite sont ${c.termes}. Que peux-tu conjecturer sur sa limite ? Justifie ton observation.`,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Conjecturer une limite, c'est observer si les termes s'accumulent près d'une valeur ou s'ils dépassent tout seuil.",
+          "On regarde l'écart entre les termes et la valeur soupçonnée : s'il diminue vers $0$, la conjecture tient.",
+          c.verdict,
+          "En première, on conjecture seulement : la démonstration des limites viendra en terminale."
         ),
       };
     },
