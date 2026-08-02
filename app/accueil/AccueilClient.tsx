@@ -303,17 +303,13 @@ type Colonne = "eleve" | "prof" | "principal" | "parent" | "entreprise";
 // le cadre (manchette, sélecteur, édition personnalisée) reste à 0, et c'est
 // voulu — il ouvre la page.
 const RANGS: Record<Colonne, Record<string, number>> = {
-  // L'ÉLÈVE garde la décision produit du 24/07 : le coach est la destination,
-  // donc « Commence ici » ouvre la page et la Une vient après.
-  eleve: { commence: 1, avis: 2, une: 3, parti: 4, mosaique: 5, envrai: 6, maths: 7, apprendre: 8, cahiers: 9, agenda: 10, catalogue: 11, courrier: 12, honneur: 13, grands: 14, abonnement: 15, ours: 16 },
-  // LES ADULTES ne viennent pas s'entraîner : ils viennent lire. La Une et
-  // l'édito passent donc devant, « Commence ici » descend au milieu de page.
-  prof: { une: 1, apprendre: 2, parti: 3, maths: 4, envrai: 5, commence: 6, mosaique: 7, catalogue: 8, cahiers: 9, agenda: 10, avis: 11, courrier: 12, honneur: 13, grands: 14, abonnement: 15, ours: 16 },
-  principal: { une: 1, parti: 2, grands: 3, envrai: 4, avis: 5, catalogue: 6, apprendre: 7, maths: 8, mosaique: 9, commence: 10, cahiers: 11, agenda: 12, courrier: 13, honneur: 14, abonnement: 15, ours: 16 },
-  parent: { une: 1, parti: 2, avis: 3, courrier: 4, apprendre: 5, envrai: 6, commence: 7, mosaique: 8, maths: 9, cahiers: 10, catalogue: 11, agenda: 12, honneur: 13, grands: 14, abonnement: 15, ours: 16 },
+  eleve: { une: 1, parti: 2, mosaique: 3, envrai: 4, maths: 5, apprendre: 6, cahiers: 7, agenda: 8, catalogue: 9, courrier: 10, honneur: 11, grands: 12, abonnement: 13, ours: 14 },
+  prof: { apprendre: 1, parti: 2, une: 3, maths: 4, envrai: 5, mosaique: 6, catalogue: 7, cahiers: 8, agenda: 9, courrier: 10, honneur: 11, grands: 12, abonnement: 13, ours: 14 },
+  principal: { parti: 1, grands: 2, envrai: 3, une: 4, apprendre: 5, catalogue: 6, maths: 7, mosaique: 8, cahiers: 9, agenda: 10, courrier: 11, honneur: 12, abonnement: 13, ours: 14 },
+  parent: { parti: 1, courrier: 2, apprendre: 3, une: 4, envrai: 5, mosaique: 6, maths: 7, cahiers: 8, catalogue: 9, agenda: 10, honneur: 11, grands: 12, abonnement: 13, ours: 14 },
   // L'entreprise ne vient pas apprendre : elle vient comprendre pourquoi
   // soutenir, vérifier l'ancrage local, et savoir comment elle sera citée.
-  entreprise: { une: 1, parti: 2, grands: 3, envrai: 4, honneur: 5, avis: 6, courrier: 7, maths: 8, mosaique: 9, catalogue: 10, apprendre: 11, commence: 12, cahiers: 13, agenda: 14, abonnement: 15, ours: 16 },
+  entreprise: { parti: 1, grands: 2, envrai: 3, honneur: 4, courrier: 5, une: 6, maths: 7, mosaique: 8, apprendre: 9, catalogue: 10, cahiers: 11, agenda: 12, abonnement: 13, ours: 14 },
 };
 
 /** `"x"` = masqué. Le reste décale : négatif remonte, positif descend. */
@@ -1476,153 +1472,151 @@ export default function AccueilPage({
         </p>
         </div>
 
-      </header>
+        {/* ══ LE COACH — LE PREMIER GESTE ═══════════════════════════════════
+            Décision produit (24/07, Frédéric) : le COACH est la destination
+            (il entraîne), PARCOURS + DÉFIS sont l'épreuve (ils testent), et le
+            journal / simulateurs ne sont que la PORTE D'ENTRÉE. On remet donc
+            l'entraînement en tête d'affiche — trois verbes TOUJOURS visibles,
+            la classe affine la destination — au lieu de la bande repliée qui
+            cachait le coach derrière un clic. */}
+        <div className="border-b border-[#1d1c16]/25 py-4">
+          <div className="mx-auto max-w-4xl border-2 border-cyan-800 bg-cyan-800/[0.05] p-4 sm:p-5">
+            <p className="text-center text-[11px] font-black uppercase tracking-[0.22em] text-cyan-800">
+              ✏️ Commence ici · Le coach t&apos;entraîne
+            </p>
+            <h2 className="mt-1 text-center font-serif text-2xl font-black leading-tight sm:text-[1.75rem]">
+              Entraîne-toi maintenant — tout est corrigé
+            </h2>
+            {/* LE PARAGRAPHE DE DOCTRINE EST PARTI (02/08). Il expliquait en
+                48 px que « le coach t'explique et tu t'entraînes ; le parcours
+                et le défi te testent » — soit exactement ce que disent les
+                trois boutons juste en dessous, en plus long. Sur un premier
+                écran de 924 px avant le premier article, et avec le constat de
+                Frédéric que les gens ne lisent pas, c'était le morceau le plus
+                cher au mot. Les boutons restent, la leçon s'en va. */}
 
-      {/* ══ LE COACH — LE PREMIER GESTE ═══════════════════════════════════
-          Décision produit (24/07, Frédéric) : le COACH est la destination
-          (il entraîne), PARCOURS + DÉFIS sont l'épreuve (ils testent), et le
-          journal / simulateurs ne sont que la PORTE D'ENTRÉE. On remet donc
-          l'entraînement en tête d'affiche — trois verbes TOUJOURS visibles,
-          la classe affine la destination — au lieu de la bande repliée qui
-          cachait le coach derrière un clic. */}
-      <div className="border-b border-[#1d1c16]/25 py-4" style={ordre("commence")}>
-        <div className="mx-auto max-w-4xl border-2 border-cyan-800 bg-cyan-800/[0.05] p-4 sm:p-5">
-          <p className="text-center text-[11px] font-black uppercase tracking-[0.22em] text-cyan-800">
-            ✏️ Commence ici · Le coach t&apos;entraîne
+            {/* Les 3 verbes de l'objectif — toujours visibles, un clic chacun :
+                s'entraîner (coach) · se tester (parcours) · le rituel du jour
+                (mini-slide : défi, dictée, anglais, espagnol, calcul). */}
+            <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2">
+              <Link
+                href="/explorer#coach"
+                className="inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-5 py-2.5 text-sm font-black text-[#f0fafc] shadow-sm transition hover:bg-[#1d1c16]"
+              >
+                ✏️ Entraîne-toi <span className="font-semibold opacity-80">· le Coach</span>
+              </Link>
+              <Link
+                href="/explorer#parcours"
+                className="inline-flex items-center gap-2 rounded-sm border-2 border-cyan-800 px-5 py-2.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
+              >
+                🧭 Teste-toi <span className="font-semibold opacity-80">· Parcours</span>
+              </Link>
+              <RituelDuJourChip />
+            </div>
+
+            {/* La classe affine la destination du coach (accordéon conservé). */}
+            <div className="mt-4 border-t border-[#1d1c16]/25 pt-3.5">
+              <div className="flex flex-wrap items-center justify-center gap-1.5">
+                <span className="mr-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/70">
+                  🎓 Ta classe :
+                </span>
+                {classesAffichees.map((c) => (
+              <button
+                key={c.slug}
+                type="button"
+                onClick={() => setClasseDepliee(c.slug)}
+                aria-pressed={classeActive === c.slug}
+                className={`rounded-sm border px-2.5 py-1 text-xs font-black transition ${
+                  classeActive === c.slug
+                    ? "border-[#1d1c16] bg-[#1d1c16] text-[#d8e9ee]"
+                    : "border-[#1d1c16]/25 text-[#1d1c16]/70 hover:border-[#1d1c16] hover:bg-[#1d1c16] hover:text-[#d8e9ee]"
+                }`}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
+          {classeActive && (
+            <div className="mx-auto mt-2 max-w-2xl space-y-1.5 text-sm font-black">
+              {/* S'entraîner : les coachs de la classe. */}
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+                <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
+                  ✏️ S&apos;entraîner :
+                </span>
+                <Link href={`/coach-ia/maths?classe=${classeActive}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  🧮 Maths
+                </Link>
+                {FRANCAIS_LEVELS.has(classeActive) && (
+                  <Link href={`/coach-ia/francais?classe=${classeActive}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                    📖 Français
+                  </Link>
+                )}
+                <Link href="/coach-ia/english-maths" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  🇬🇧 Anglais
+                </Link>
+                <Link href="/coach-ia/espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  🇪🇸 Espagnol
+                </Link>
+                <Link href="/coach-ia/ia" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  🤖 IA
+                </Link>
+              </div>
+              {/* S evaluer : LE parcours de chaque matiere (rappel de
+                  Frédéric : il y en a un par matière, pas un seul). */}
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+                <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
+                  🧭 S&apos;&eacute;valuer :
+                </span>
+                <Link href="/parcours" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  🧮 Maths
+                </Link>
+                {FRANCAIS_LEVELS.has(classeActive) && (
+                  <Link href="/parcours-francais" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                    📖 Français
+                  </Link>
+                )}
+                <Link href="/parcours-english-maths" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  🇬🇧 Anglais
+                </Link>
+                <Link href="/parcours-espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  🇪🇸 Espagnol
+                </Link>
+                <Link href="/parcours-ia" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  🤖 IA
+                </Link>
+                <Link href={`/programme/${classeActive}`} className="text-[#1d1c16]/70 underline underline-offset-2 hover:no-underline">
+                  📋 Le programme
+                </Link>
+              </div>
+            </div>
+          )}
+            </div>
+          </div>
+        </div>
+
+        {/* Le courrier en manchette (demande de Frédéric, 19/07) : un avis
+            d'élève sous la rampe des classes — verbatim, fautes comprises
+            (authenticité), prénom + niveau seul (RGPD). Rotation douce
+            toutes les 8 s sur les mêmes avis que le courrier des lecteurs ;
+            le clic descend au courrier complet. */}
+        <a
+          href="#courrier"
+          className="block border-b border-[#1d1c16]/25 py-2 text-center transition hover:bg-[#1d1c16]/5"
+        >
+          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+            💬 Les avis des élèves
           </p>
-          <h2 className="mt-1 text-center font-serif text-2xl font-black leading-tight sm:text-[1.75rem]">
-            Entraîne-toi maintenant — tout est corrigé
-          </h2>
-          {/* LE PARAGRAPHE DE DOCTRINE EST PARTI (02/08). Il expliquait en
-              48 px que « le coach t'explique et tu t'entraînes ; le parcours
-              et le défi te testent » — soit exactement ce que disent les
-              trois boutons juste en dessous, en plus long. Sur un premier
-              écran de 924 px avant le premier article, et avec le constat de
-              Frédéric que les gens ne lisent pas, c'était le morceau le plus
-              cher au mot. Les boutons restent, la leçon s'en va. */}
-
-          {/* Les 3 verbes de l'objectif — toujours visibles, un clic chacun :
-              s'entraîner (coach) · se tester (parcours) · le rituel du jour
-              (mini-slide : défi, dictée, anglais, espagnol, calcul). */}
-          <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2">
-            <Link
-              href="/explorer#coach"
-              className="inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-5 py-2.5 text-sm font-black text-[#f0fafc] shadow-sm transition hover:bg-[#1d1c16]"
-            >
-              ✏️ Entraîne-toi <span className="font-semibold opacity-80">· le Coach</span>
-            </Link>
-            <Link
-              href="/explorer#parcours"
-              className="inline-flex items-center gap-2 rounded-sm border-2 border-cyan-800 px-5 py-2.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
-            >
-              🧭 Teste-toi <span className="font-semibold opacity-80">· Parcours</span>
-            </Link>
-            <RituelDuJourChip />
-          </div>
-
-          {/* La classe affine la destination du coach (accordéon conservé). */}
-          <div className="mt-4 border-t border-[#1d1c16]/25 pt-3.5">
-            <div className="flex flex-wrap items-center justify-center gap-1.5">
-              <span className="mr-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/70">
-                🎓 Ta classe :
-              </span>
-              {classesAffichees.map((c) => (
-            <button
-              key={c.slug}
-              type="button"
-              onClick={() => setClasseDepliee(c.slug)}
-              aria-pressed={classeActive === c.slug}
-              className={`rounded-sm border px-2.5 py-1 text-xs font-black transition ${
-                classeActive === c.slug
-                  ? "border-[#1d1c16] bg-[#1d1c16] text-[#d8e9ee]"
-                  : "border-[#1d1c16]/25 text-[#1d1c16]/70 hover:border-[#1d1c16] hover:bg-[#1d1c16] hover:text-[#d8e9ee]"
-              }`}
-            >
-              {c.label}
-            </button>
-          ))}
-        </div>
-        {classeActive && (
-          <div className="mx-auto mt-2 max-w-2xl space-y-1.5 text-sm font-black">
-            {/* S'entraîner : les coachs de la classe. */}
-            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-              <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
-                ✏️ S&apos;entraîner :
-              </span>
-              <Link href={`/coach-ia/maths?classe=${classeActive}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                🧮 Maths
-              </Link>
-              {FRANCAIS_LEVELS.has(classeActive) && (
-                <Link href={`/coach-ia/francais?classe=${classeActive}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                  📖 Français
-                </Link>
-              )}
-              <Link href="/coach-ia/english-maths" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                🇬🇧 Anglais
-              </Link>
-              <Link href="/coach-ia/espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                🇪🇸 Espagnol
-              </Link>
-              <Link href="/coach-ia/ia" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                🤖 IA
-              </Link>
-            </div>
-            {/* S evaluer : LE parcours de chaque matiere (rappel de
-                Frédéric : il y en a un par matière, pas un seul). */}
-            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-              <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
-                🧭 S&apos;&eacute;valuer :
-              </span>
-              <Link href="/parcours" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                🧮 Maths
-              </Link>
-              {FRANCAIS_LEVELS.has(classeActive) && (
-                <Link href="/parcours-francais" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                  📖 Français
-                </Link>
-              )}
-              <Link href="/parcours-english-maths" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                🇬🇧 Anglais
-              </Link>
-              <Link href="/parcours-espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                🇪🇸 Espagnol
-              </Link>
-              <Link href="/parcours-ia" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                🤖 IA
-              </Link>
-              <Link href={`/programme/${classeActive}`} className="text-[#1d1c16]/70 underline underline-offset-2 hover:no-underline">
-                📋 Le programme
-              </Link>
-            </div>
-          </div>
-        )}
-          </div>
-        </div>
-      </div>
-
-      {/* Le courrier en manchette (demande de Frédéric, 19/07) : un avis
-          d'élève sous la rampe des classes — verbatim, fautes comprises
-          (authenticité), prénom + niveau seul (RGPD). Rotation douce
-          toutes les 8 s sur les mêmes avis que le courrier des lecteurs ;
-          le clic descend au courrier complet. */}
-      <a
-      href="#courrier"
-      style={ordre("avis")}
-        className="block border-b border-[#1d1c16]/25 py-2 text-center transition hover:bg-[#1d1c16]/5"
-      >
-        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-          💬 Les avis des élèves
-        </p>
-        <p className="mx-auto mt-0.5 max-w-3xl px-2 font-serif text-sm font-medium italic leading-6 text-[#1d1c16]/70">
-          <span className="not-italic tracking-widest text-amber-600" aria-label={`Note ${avisManchette.note} sur 5`}>
-            {"★".repeat(avisManchette.note)}
-          </span>{" "}
-          « {avisManchette.quote} »{" "}
-          <span className="text-xs font-black not-italic uppercase tracking-[0.14em] text-[#1d1c16]/55">
-            — {avisManchette.prenom} · {avisManchette.detail}
-          </span>
-        </p>
-      </a>
+          <p className="mx-auto mt-0.5 max-w-3xl px-2 font-serif text-sm font-medium italic leading-6 text-[#1d1c16]/70">
+            <span className="not-italic tracking-widest text-amber-600" aria-label={`Note ${avisManchette.note} sur 5`}>
+              {"★".repeat(avisManchette.note)}
+            </span>{" "}
+            « {avisManchette.quote} »{" "}
+            <span className="text-xs font-black not-italic uppercase tracking-[0.14em] text-[#1d1c16]/55">
+              — {avisManchette.prenom} · {avisManchette.detail}
+            </span>
+          </p>
+        </a>
+      </header>
 
       {/* ══ L'ÉDITION PERSONNALISÉE (connecté) ═══════════════════════════════ */}
       {isStaff ? (
