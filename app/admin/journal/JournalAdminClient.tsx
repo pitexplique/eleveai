@@ -19,7 +19,26 @@ type Slide = {
   defi: string | null;
   actif: boolean;
   ordre: number;
+  /** À qui le slide s'adresse — l'une des 8 options de « Qui est-ce ? ». */
+  niveau_mini: string | null;
 };
+
+// Les huit options du sélecteur de l'accueil. Les quatre cycles sont des
+// SEUILS (« à partir de »), les quatre profils adultes sont des CIBLES.
+// ⚠️ À garder aligné sur la contrainte CHECK de journal_une ET sur ORDRE_CYCLES
+// / PROFIL_ADULTE dans AccueilClient : une valeur hors liste est rejetée en
+// base avec un 23514.
+const NIVEAUX: { v: string; label: string }[] = [
+  { v: "", label: "Tout le monde (aucun garde-fou)" },
+  { v: "cp-ce2", label: "À partir du CP–CE2" },
+  { v: "cm1-cm2", label: "À partir du CM1–CM2" },
+  { v: "6e-3e", label: "À partir de la 6ᵉ–3ᵉ" },
+  { v: "lycee", label: "Lycée seulement" },
+  { v: "parent", label: "Pour les parents" },
+  { v: "prof", label: "Pour les professeurs" },
+  { v: "etablissement", label: "Pour les établissements" },
+  { v: "entreprise", label: "Pour les entreprises" },
+];
 
 const VIDE: Omit<Slide, "id"> = {
   kicker: "Réfléchir · En vrai, à La Réunion",
@@ -32,6 +51,7 @@ const VIDE: Omit<Slide, "id"> = {
   defi: "",
   actif: true,
   ordre: 100,
+  niveau_mini: "",
 };
 
 function vignette(s: { youtube_id?: string | null; image_url?: string | null }) {
@@ -262,6 +282,26 @@ export default function JournalAdminClient() {
                 className={inputCls}
               />
             </div>
+            <div className="sm:col-span-2">
+              <p className={labelCls}>À qui ce slide s&apos;adresse</p>
+              <select
+                value={nouveau.niveau_mini ?? ""}
+                onChange={(e) => setNouveau({ ...nouveau, niveau_mini: e.target.value })}
+                className={inputCls}
+              >
+                {NIVEAUX.map((n) => (
+                  <option key={n.v} value={n.v}>
+                    {n.label}
+                  </option>
+                ))}
+              </select>
+              <p className="mt-1 text-xs text-slate-500">
+                Un cycle est un seuil : « à partir du CM1 » se voit aussi au
+                lycée. Un profil adulte est une cible : « pour les
+                professeurs » ne se voit que par eux. Laissé sur « tout le
+                monde », le slide passe partout.
+              </p>
+            </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <p className={labelCls}>Texte du CTA</p>
@@ -382,6 +422,18 @@ export default function JournalAdminClient() {
                           aria-label="Surtitre"
                           placeholder="Surtitre"
                         />
+                        <select
+                          value={s.niveau_mini ?? ""}
+                          onChange={(e) => majLocal(s.id, { niveau_mini: e.target.value })}
+                          className={inputCls}
+                          aria-label="À qui ce slide s'adresse"
+                        >
+                          {NIVEAUX.map((n) => (
+                            <option key={n.v} value={n.v}>
+                              {n.label}
+                            </option>
+                          ))}
+                        </select>
                         <div className="grid grid-cols-2 gap-2">
                           <input
                             value={s.cta}
