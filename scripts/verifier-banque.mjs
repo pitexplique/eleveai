@@ -33,8 +33,11 @@ import path from "node:path";
 
 const CLASSE = process.argv[2] || "premiere-spe";
 const MATIERE = process.argv[3] || "maths";
-/** Densité visée, en items FIXES par micro-compétence (Terminale = 11). */
-const CIBLE = Number(process.argv[4] || 11);
+/* Un troisième argument était autrefois une « densité visée » en items fixes.
+   Il n'a plus de sens (voir le bloc COUVERTURE plus bas) : on l'accepte pour ne
+   pas casser les commandes notées ailleurs, mais on le dit au lieu de faire
+   croire qu'il compte encore. */
+const CIBLE_OBSOLETE = process.argv[4];
 
 const BANQUES = path.resolve(`lib/tutor-v4/questionBank/${CLASSE}/${MATIERE}`);
 const MICRO_SRC = path.resolve(
@@ -97,6 +100,14 @@ const suspects = fs
 console.log(`\nVÉRIFICATION ${CLASSE.toUpperCase()} · ${MATIERE.toUpperCase()}`);
 console.log("─".repeat(64));
 
+if (CIBLE_OBSOLETE) {
+  console.log(
+    `ℹ️  L'argument « ${CIBLE_OBSOLETE} » est ignoré : il n'y a pas de nombre d'items\n` +
+      "      fixes à viser. Un item fixe existe pour une valeur exceptionnelle,\n" +
+      "      un piège, une propriété ou un contexte réel — pas pour faire du chiffre.",
+  );
+}
+
 if (fichiers.length === 0) {
   console.log(
     "Aucun fichier .bank.ts : banque probablement GÉNÉRÉE depuis les\n" +
@@ -114,6 +125,8 @@ const conventions = []; // écarts de style, sans effet pour l'élève
 const enonces = new Map(); // text -> [ids]
 const identifiants = new Map(); // id -> [fichiers]
 const densite = new Map(); // microId -> nb d'items fixes
+const generateurs = new Map(); // microId -> nb de templates
+const ouvertes = new Map(); // microId -> nb de questions ouvertes (fixes + templates)
 let nbFixes = 0;
 let nbQcm = 0;
 let nbQcmOpaques = 0;
@@ -139,9 +152,18 @@ for (const f of fichiers) {
     if (!identifiants.has(id)) identifiants.set(id, []);
     identifiants.get(id).push(f);
 
+    // Une question ouverte peut être un item fixe OU sortir du generate() d'un
+    // template : on la repère dans les deux cas sur `format: "open"`.
+    if (microId && /format:\s*"open"/.test(texte)) {
+      ouvertes.set(microId, (ouvertes.get(microId) ?? 0) + 1);
+    }
+
     // Les templates fabriquent leur énoncé dans generate() à partir de
     // variables : ni leur texte ni leurs choix ne sont lisibles dans le source.
-    if (kind === "template") continue;
+    if (kind === "template") {
+      if (microId) generateurs.set(microId, (generateurs.get(microId) ?? 0) + 1);
+      continue;
+    }
     nbFixes += 1;
     if (microId) densite.set(microId, (densite.get(microId) ?? 0) + 1);
 
@@ -230,26 +252,58 @@ if (conventions.length) {
   );
 }
 
-/* ─── Densité (indicatif) ───────────────────────────────────────────────────
-   Ce n'est pas une erreur de validité : on l'affiche à part, sans peser sur le
-   code de sortie. La référence est la Terminale, à 11 items fixes par micro. */
+/* ─── Couverture (indicatif) ────────────────────────────────────────────────
+   ⚠️ Ce n'est PLUS un compteur d'items fixes. Frédéric, 02/08/2026 : « les
+   fixed il n'y a pas de règle de compteur, mais plutôt une règle : les fixed
+   sont là pour des valeurs exceptionnelles, comme exp(0) ou exp(-1) ». Le
+   nombre d'items fixes d'un micro est donc décidé par le nombre de cas
+   remarquables, et par rien d'autre : viser un chiffre pousserait à fabriquer
+   des calculs figés, exactement ce qu'on veut éviter.
+
+   Ce qui se mesure vraiment, et qui décide qu'un élève ne se répète pas :
+     1. un micro SANS AUCUN item  → trou de couverture ;
+     2. un micro SANS GÉNÉRATEUR  → au bout de quelques passages, ça tourne ;
+     3. un micro SANS OUVERTE     → le BO demande de préparer l'oral dès la 1ʳᵉ.
+   Rien de tout cela n'est une erreur de validité : on l'affiche à part, sans
+   peser sur le code de sortie. */
 if (fs.existsSync(MICRO_SRC)) {
   const microSrc = fs.readFileSync(MICRO_SRC, "utf8");
-  const sous = [];
+  const vides = [];
+  const sansGenerateur = [];
+  const sansOuverte = [];
+  let total = 0;
+
   for (const bloc of microSrc.split(/\n\s*\{/).slice(1)) {
     const id = bloc.match(/id:\s*"([a-z0-9_]+)"/)?.[1];
     const label = bloc.match(/label:\s*"([^"]+)"/)?.[1] ?? id;
     if (!id || !bloc.includes("notionId")) continue;
-    const n = densite.get(id) ?? 0;
-    if (n < CIBLE) sous.push({ id, label, n });
+    total += 1;
+    const f = densite.get(id) ?? 0;
+    const g = generateurs.get(id) ?? 0;
+    const o = ouvertes.get(id) ?? 0;
+    if (f === 0 && g === 0) vides.push({ id, label });
+    else {
+      if (g === 0) sansGenerateur.push({ id, label, f });
+      if (o === 0) sansOuverte.push({ id, label, f });
+    }
   }
-  console.log(
-    `\nDENSITÉ : ${sous.length} micro-compétence(s) sous la cible de ${CIBLE} items fixes`,
-  );
-  for (const m of sous.sort((a, b) => a.n - b.n).slice(0, 40)) {
-    console.log(`      ${String(m.n).padStart(2)}/${CIBLE}  ${m.id.padEnd(26)} ${m.label}`);
+
+  const liste = (titre, tab, detail) => {
+    if (!tab.length) return;
+    console.log(`\n${titre} : ${tab.length} sur ${total}`);
+    for (const m of tab.slice(0, 25)) {
+      console.log(`      ${m.id.padEnd(28)} ${detail(m)}${m.label}`);
+    }
+    if (tab.length > 25) console.log(`      … et ${tab.length - 25} autres`);
+  };
+
+  console.log(`\nCOUVERTURE : ${total} micro-compétences déclarées`);
+  if (!vides.length && !sansGenerateur.length && !sansOuverte.length) {
+    console.log("      ✅ chacune a des items, un générateur et une question ouverte.");
   }
-  if (sous.length > 40) console.log(`      … et ${sous.length - 40} autres`);
+  liste("⬜ AUCUN ITEM", vides, () => "");
+  liste("♻️  SANS GÉNÉRATEUR (la question finira par se répéter)", sansGenerateur, (m) => `${m.f} fixes · `);
+  liste("🗣️  SANS QUESTION OUVERTE", sansOuverte, (m) => `${m.f} fixes · `);
 }
 
 if (problemes.length === 0) {
