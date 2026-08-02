@@ -251,11 +251,15 @@ const CLASSES_ENTREE: { slug: string; label: string }[] = [
 //   • les quatre PORTES ADULTES mènent à leur espace. Inutile de mémoriser quoi
 //     que ce soit : `useAudience` enregistre l'espace dès qu'on visite sa route,
 //     donc le header est déjà adapté au retour.
-const CYCLES: { id: string; emoji: string; label: string; classe: string; accent: Accent }[] = [
-  { id: "cp-ce2", emoji: "🧸", label: "CP–CE2", classe: "cp", accent: "safran" },
-  { id: "cm1-cm2", emoji: "🌳", label: "CM1–CM2", classe: "cm1", accent: "canne" },
-  { id: "6e-3e", emoji: "🎒", label: "6ᵉ–3ᵉ", classe: "6e", accent: "boucan" },
-  { id: "lycee", emoji: "🎓", label: "Lycée", classe: "seconde", accent: "flamboyant" },
+// `classes` = les classes du cycle. Une fois le cycle choisi, la rampe
+// « Ta classe » n'affiche plus les douze niveaux mais les deux à quatre du
+// cycle : on garde le réglage fin (un 4ᵉ reste un 4ᵉ, pas « collège ») en
+// divisant la hauteur du bloc. Cycle non choisi → les douze, comme avant.
+const CYCLES: { id: string; emoji: string; label: string; classe: string; classes: string[]; accent: Accent }[] = [
+  { id: "cp-ce2", emoji: "🧸", label: "CP–CE2", classe: "cp", classes: ["cp", "ce1", "ce2"], accent: "safran" },
+  { id: "cm1-cm2", emoji: "🌳", label: "CM1–CM2", classe: "cm1", classes: ["cm1", "cm2"], accent: "canne" },
+  { id: "6e-3e", emoji: "🎒", label: "6ᵉ–3ᵉ", classe: "6e", classes: ["6e", "5e", "4e", "3e"], accent: "boucan" },
+  { id: "lycee", emoji: "🎓", label: "Lycée", classe: "seconde", classes: ["seconde", "premiere-spe", "terminale-spe"], accent: "flamboyant" },
 ];
 
 const PORTES_ADULTES: { emoji: string; label: string; href: string; accent: Accent }[] = [
@@ -1121,6 +1125,13 @@ export default function AccueilPage({
   // sur la rampe, puis la classe réelle d'un élève connecté (elle bat toujours
   // un cycle deviné), puis le cycle choisi, puis la 6ᵉ par défaut.
   const classeDuCycle = CYCLES.find((c) => c.id === cycleChoisi)?.classe ?? null;
+  // La rampe se resserre sur le cycle choisi : 2 à 4 boutons au lieu de 12,
+  // sans rien perdre du réglage fin. Pas de cycle → les douze, comme avant.
+  const classesAffichees = cycleChoisi
+    ? CLASSES_ENTREE.filter((c) =>
+        (CYCLES.find((y) => y.id === cycleChoisi)?.classes ?? []).includes(c.slug),
+      )
+    : CLASSES_ENTREE;
   const classeActive = classeDepliee ?? eleveClasse ?? classeDuCycle ?? "6e";
   const prenomAffiche = getPrenomAffiche(eleve?.nom);
   const isCmPrimary =
@@ -1339,13 +1350,13 @@ export default function AccueilPage({
               </div>
             ) : (
               <>
-                <p className="text-center font-serif text-xl font-black leading-none sm:text-2xl">
+                {/* Le sous-titre « Une fois, et le journal se range pour
+                    vous » est parti : une phrase à lire au-dessus de huit
+                    images qui se comprennent sans elle. */}
+                <p className="text-center font-serif text-lg font-black leading-none sm:text-xl">
                   Qui est-ce&nbsp;?
                 </p>
-                <p className="mt-1 text-center font-serif text-xs font-medium italic text-[#1d1c16]/70">
-                  Une fois, et le journal se range pour vous.
-                </p>
-                <div className="mt-3 flex flex-nowrap gap-2 overflow-x-auto pb-1">
+                <div className="mt-2 flex flex-nowrap gap-2 overflow-x-auto pb-1">
                   {CYCLES.map((c) => (
                     <button
                       key={c.id}
@@ -1440,11 +1451,13 @@ export default function AccueilPage({
             <h2 className="mt-1 text-center font-serif text-2xl font-black leading-tight sm:text-[1.75rem]">
               Entraîne-toi maintenant — tout est corrigé
             </h2>
-            <p className="mx-auto mt-1.5 max-w-2xl text-center text-sm font-medium leading-6 text-[#1d1c16]/70">
-              Le coach t&apos;explique et tu t&apos;entraînes ; le parcours et le
-              défi te testent. Le journal, c&apos;est l&apos;histoire qui donne
-              envie — ici, c&apos;est l&apos;entraînement.
-            </p>
+            {/* LE PARAGRAPHE DE DOCTRINE EST PARTI (02/08). Il expliquait en
+                48 px que « le coach t'explique et tu t'entraînes ; le parcours
+                et le défi te testent » — soit exactement ce que disent les
+                trois boutons juste en dessous, en plus long. Sur un premier
+                écran de 924 px avant le premier article, et avec le constat de
+                Frédéric que les gens ne lisent pas, c'était le morceau le plus
+                cher au mot. Les boutons restent, la leçon s'en va. */}
 
             {/* Les 3 verbes de l'objectif — toujours visibles, un clic chacun :
                 s'entraîner (coach) · se tester (parcours) · le rituel du jour
@@ -1471,7 +1484,7 @@ export default function AccueilPage({
                 <span className="mr-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/70">
                   🎓 Ta classe :
                 </span>
-                {CLASSES_ENTREE.map((c) => (
+                {classesAffichees.map((c) => (
               <button
                 key={c.slug}
                 type="button"
