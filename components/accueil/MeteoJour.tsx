@@ -58,14 +58,14 @@ export default function MeteoJour() {
 
   return (
     <div className="py-3">
-      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#f0fafc]/55">
         🌦️ La météo de l&apos;île · en ce moment
       </p>
       <ul className="mt-1.5 space-y-1">
         {releves.map((r) => (
           <li key={r.nom} className="flex items-baseline justify-between gap-2 text-sm">
             <span className="font-black">{r.nom}</span>
-            <span className="font-medium tabular-nums text-[#1d1c16]/75">
+            <span className="font-medium tabular-nums text-[#f0fafc]/75">
               {r.temperature}° · vent {r.vent}
               {r.rafales > r.vent + 10 ? ` (raf. ${r.rafales})` : ""} km/h
               {r.pluie > 0 ? ` · ${r.pluie} mm` : ""}
@@ -75,7 +75,7 @@ export default function MeteoJour() {
       </ul>
       <Link
         href="/simulateur-cyclone"
-        className="mt-2 block text-sm font-black text-cyan-800 transition hover:translate-x-0.5"
+        className="mt-2 block text-sm font-black text-[#ffb08a] transition hover:translate-x-0.5"
       >
         🌀 La vigie : simule ton cyclone →
       </Link>

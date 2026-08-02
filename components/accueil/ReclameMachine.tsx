@@ -12,19 +12,19 @@ export default function ReclameMachine() {
   if (!m) return null;
   return (
     <div className="py-2.5">
-      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#f0fafc]/55">
         {m.emoji} Nouveau · {m.nom}
       </p>
       <Link
         href={m.href}
-        className="group mt-1.5 grid grid-cols-[78px_1fr] items-center gap-2.5 border-2 border-[#1d1c16] bg-[#fbf6e7] p-2 transition hover:bg-[#1d1c16] hover:text-[#f6f1e4]"
+        className="group mt-1.5 grid grid-cols-[78px_1fr] items-center gap-2.5 border-2 border-[#f0fafc] bg-[#fbf6e7] p-2 transition hover:bg-[#f0fafc] hover:text-[#0e7490]"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={m.image}
           alt={`${m.nom} - ${m.notion}`}
           loading="lazy"
-          className="aspect-[4/3] w-full border border-[#1d1c16]/25 object-contain"
+          className="aspect-[4/3] w-full border border-[#f0fafc]/25 object-contain"
           style={{ backgroundColor: "#fcfcf7" }}
         />
         <span className="block min-w-0">
@@ -34,7 +34,7 @@ export default function ReclameMachine() {
           <span className="mt-0.5 block text-xs font-semibold leading-4 opacity-75">
             {m.notion}
           </span>
-          <span className="mt-1 block text-xs font-black text-cyan-800 group-hover:text-cyan-300">
+          <span className="mt-1 block text-xs font-black text-[#ffb08a] group-hover:text-cyan-300">
             {m.cta} →
           </span>
         </span>

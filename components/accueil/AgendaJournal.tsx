@@ -23,7 +23,7 @@ const ROLE_LABELS: Record<CallRole, string> = {
   etablissement: "Responsable d'établissement",
 };
 
-const INK = "#1d1c16";
+const INK = "#f0fafc";
 
 export default function AgendaJournal() {
   // La liste est figée au premier rendu (pas de tic-tac pendant la visite).
@@ -82,7 +82,7 @@ export default function AgendaJournal() {
   }
 
   const inputCls =
-    "rounded-sm border border-[#1d1c16]/35 bg-white/50 px-3 py-2 text-sm font-semibold text-[#1d1c16] placeholder-[#1d1c16]/40 outline-none focus:border-[#1d1c16]";
+    "rounded-sm border border-[#f0fafc]/35 bg-white/50 px-3 py-2 text-sm font-semibold text-[#f0fafc] placeholder-[#f0fafc]/40 outline-none focus:border-[#f0fafc]";
 
   return (
     <section id="agenda" className="mx-auto mt-10 max-w-6xl scroll-mt-24" style={{ color: INK }}>
@@ -93,7 +93,7 @@ export default function AgendaJournal() {
         </span>{" "}
         L&apos;agenda · En direct · Gratuit
       </p>
-      <div className="mt-1 border-b-2 border-[#1d1c16] pb-2">
+      <div className="mt-1 border-b-2 border-[#f0fafc] pb-2">
         <h2 className="font-serif text-3xl font-black leading-tight sm:text-4xl">
           Rencontrez la rédaction, en visio
         </h2>
@@ -112,8 +112,8 @@ export default function AgendaJournal() {
                   onClick={() => choisirCall(c.id)}
                   className={`rounded-sm px-3.5 py-1.5 text-xs font-black transition ${
                     c.id === call.id
-                      ? "bg-[#1d1c16] text-[#f6f1e4]"
-                      : "border border-[#1d1c16]/30 text-[#1d1c16]/70 hover:bg-[#1d1c16]/10"
+                      ? "bg-[#f0fafc] text-[#0e7490]"
+                      : "border border-[#f0fafc]/30 text-[#f0fafc]/70 hover:bg-[#f0fafc]/10"
                   }`}
                 >
                   {formatDateCall(c.date).split(" · ")[0]}
@@ -128,13 +128,13 @@ export default function AgendaJournal() {
               alt="Frédéric Lacoste, professeur de maths et fondateur d'EleveAI"
               width={64}
               height={64}
-              className="h-14 w-14 shrink-0 rounded-full border border-[#1d1c16]/30 object-cover sm:h-16 sm:w-16"
+              className="h-14 w-14 shrink-0 rounded-full border border-[#f0fafc]/30 object-cover sm:h-16 sm:w-16"
             />
             <div>
               <h3 className="font-serif text-xl font-black leading-snug sm:text-2xl">
                 {call.titre}
               </h3>
-              <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/75">
+              <p className="mt-1 text-sm font-medium leading-6 text-[#f0fafc]/75">
                 {call.description}
               </p>
             </div>
@@ -142,18 +142,18 @@ export default function AgendaJournal() {
           <p className="mt-2 text-sm font-black text-red-800">
             📅 {formatDateCall(call.date)} · {call.duree} · en visio
           </p>
-          <p className="mt-0.5 text-xs font-semibold text-[#1d1c16]/55">
+          <p className="mt-0.5 text-xs font-semibold text-[#f0fafc]/55">
             🌍 Soit {formatHeuresMonde(call.date)}
           </p>
         </div>
 
         {/* Le coupon d'inscription — comme un coupon détachable de journal. */}
-        <div className="border-[#1d1c16]/25 lg:col-span-5 lg:border-l lg:pl-6">
-          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+        <div className="border-[#f0fafc]/25 lg:col-span-5 lg:border-l lg:pl-6">
+          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#f0fafc]/55">
             ✂️ Le coupon d&apos;inscription
           </p>
           {etat === "ok" || etat === "deja" ? (
-            <p className="mt-3 border border-[#1d1c16]/30 bg-white/50 p-3 text-sm font-black text-cyan-800">
+            <p className="mt-3 border border-[#f0fafc]/30 bg-white/50 p-3 text-sm font-black text-[#ffb08a]">
               {etat === "deja"
                 ? "Tu es déjà inscrit·e ✓ Le lien arrivera par email avant le call."
                 : "Inscription enregistrée ✓ Tu recevras le lien par email avant le call."}
@@ -193,17 +193,17 @@ export default function AgendaJournal() {
                 <button
                   type="submit"
                   disabled={etat === "envoi"}
-                  className="rounded-sm bg-[#1d1c16] px-5 py-2 text-sm font-black text-[#f6f1e4] transition hover:bg-cyan-800 disabled:opacity-60"
+                  className="rounded-sm bg-[#f0fafc] px-5 py-2 text-sm font-black text-[#0e7490] transition hover:bg-[#ffb08a] disabled:opacity-60"
                 >
                   {etat === "envoi" ? "…" : "Je m'inscris →"}
                 </button>
               </div>
-              <label className="flex items-center gap-2 pt-1 text-xs font-semibold text-[#1d1c16]/60">
+              <label className="flex items-center gap-2 pt-1 text-xs font-semibold text-[#f0fafc]/60">
                 <input
                   type="checkbox"
                   checked={consent}
                   onChange={(e) => setConsent(e.target.checked)}
-                  className="h-3.5 w-3.5 accent-[#1d1c16]"
+                  className="h-3.5 w-3.5 accent-[#f0fafc]"
                 />
                 Me prévenir aussi des prochaines nouveautés (optionnel)
               </label>
@@ -212,7 +212,7 @@ export default function AgendaJournal() {
               )}
             </form>
           )}
-          <p className="mt-2 text-[11px] font-medium italic text-[#1d1c16]/50">
+          <p className="mt-2 text-[11px] font-medium italic text-[#f0fafc]/50">
             Ton email sert uniquement à t&apos;envoyer le lien du call (et un
             rappel). Jamais de pub.
           </p>
