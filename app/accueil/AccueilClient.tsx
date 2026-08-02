@@ -41,6 +41,7 @@ import { NB_MACHINES } from "@/lib/simulateurs";
 import { getDicteeDuJour, type DicteeMot } from "@/lib/dictee-du-jour/words";
 import { type EleveALHonneur } from "@/lib/ameliorations/aLHonneur";
 import { prenomFromNom } from "@/lib/prenom";
+import { useAudience } from "@/lib/useAudience";
 import { elevesRemercies } from "@/lib/remerciements/eleves";
 import type { RecoDuJour } from "@/lib/profil-eleve/types";
 
@@ -266,6 +267,54 @@ const PORTES_ADULTES: { emoji: string; label: string; href: string; accent: Acce
 
 /** Le cycle choisi survit à la visite — même clé de nommage que useAudience. */
 const CLE_CYCLE = "eleveai-cycle";
+
+// ─── LA MATRICE D'ACCUEIL ─────────────────────────────────────────────────────
+// Idée de Frédéric (02/08), posée en mathématicien : un VECTEUR de sections, et
+// une MATRICE qui dit, pour chaque profil, laquelle vient en premier.
+//
+// Deux corrections apportées à la forme initiale (0/1), qu'il a validées :
+//
+//  1. ℕ plutôt que {0,1}. Avec 0/1 on décide SI on affiche, mais l'ordre reste
+//     le même pour tout le monde — or son propre travail du 31/07 sur la
+//     colonne 2 dit l'inverse : ce qui compte n'est pas ce qu'on retire, c'est
+//     ce qui vient en premier. Donc 0 = masqué, k = rang.
+//
+//  2. Chaque colonne est une PERMUTATION, pas un masque. Si les colonnes
+//     étaient des sous-ensembles on retomberait sur l'erreur du 01/08 —
+//     l'atelier du prof caché derrière `isStaff`, donc invisible pour le prof
+//     qu'il fallait convaincre. Les mêmes sections partout, seul l'ordre
+//     change ; les masquages restent l'exception qu'on assume une par une.
+//
+// Le rang final = RANGS[colonne][section] + CORRECTION[cycle][section].
+// Le rôle dit quoi montrer d'abord, l'âge corrige. 5 + 4 = 9 lignes à tenir au
+// lieu des 65 qu'aurait coûté une matrice (rôle × classe) à plat.
+//
+// La manchette, le sélecteur et l'édition personnalisée ne sont pas dans le
+// vecteur : ce sont le cadre, pas le contenu. Ils restent en tête.
+type Colonne = "eleve" | "prof" | "principal" | "parent" | "entreprise";
+
+// ⚠️ Les rangs sont des ENTIERS ≥ 1, et toute section du <main> doit en avoir
+// un. La propriété CSS `order` vaut 0 par défaut, et 0 passe AVANT 1 : une
+// section oubliée ne resterait pas à sa place, elle remonterait en tête. Seuls
+// le cadre (manchette, sélecteur, édition personnalisée) reste à 0, et c'est
+// voulu — il ouvre la page.
+const RANGS: Record<Colonne, Record<string, number>> = {
+  eleve: { une: 1, parti: 2, mosaique: 3, envrai: 4, maths: 5, apprendre: 6, cahiers: 7, agenda: 8, catalogue: 9, courrier: 10, honneur: 11, grands: 12, abonnement: 13, ours: 14 },
+  prof: { apprendre: 1, parti: 2, une: 3, maths: 4, envrai: 5, mosaique: 6, catalogue: 7, cahiers: 8, agenda: 9, courrier: 10, honneur: 11, grands: 12, abonnement: 13, ours: 14 },
+  principal: { parti: 1, grands: 2, envrai: 3, une: 4, apprendre: 5, catalogue: 6, maths: 7, mosaique: 8, cahiers: 9, agenda: 10, courrier: 11, honneur: 12, abonnement: 13, ours: 14 },
+  parent: { parti: 1, courrier: 2, apprendre: 3, une: 4, envrai: 5, mosaique: 6, maths: 7, cahiers: 8, catalogue: 9, agenda: 10, honneur: 11, grands: 12, abonnement: 13, ours: 14 },
+  // L'entreprise ne vient pas apprendre : elle vient comprendre pourquoi
+  // soutenir, vérifier l'ancrage local, et savoir comment elle sera citée.
+  entreprise: { parti: 1, grands: 2, envrai: 3, honneur: 4, courrier: 5, une: 6, maths: 7, mosaique: 8, apprendre: 9, catalogue: 10, cahiers: 11, agenda: 12, abonnement: 13, ours: 14 },
+};
+
+/** `"x"` = masqué. Le reste décale : négatif remonte, positif descend. */
+const CORRECTION: Record<string, Record<string, number | "x">> = {
+  "cp-ce2": { une: 2, maths: "x", cahiers: -4 },
+  "cm1-cm2": { maths: 3, apprendre: -1, cahiers: -2 },
+  "6e-3e": { apprendre: -2, cahiers: 1, catalogue: -1 },
+  lycee: { maths: -3, cahiers: 2, catalogue: -2 },
+};
 
 // ─── Le catalogue COMPLET — « les pages du journal » ──────────────────────────
 // Tout ce que le site offre, rangé et listé (demande de Frédéric : rien ne
@@ -976,6 +1025,46 @@ export default function AccueilPage({
     }
   }
 
+  // ── LA MATRICE, APPLIQUÉE ──────────────────────────────────────────────────
+  // La colonne vient de l'espace mémorisé par useAudience : un visiteur passé
+  // par /parents, /enseignants ou /espace-ecoles retrouve un accueil rangé pour
+  // lui, sans avoir eu à se connecter. Défaut : élève.
+  //
+  // L'ordonnancement se fait en CSS (`order` sur un conteneur flex) et non en
+  // réécrivant le JSX. Deux raisons : le DOM garde l'ordre du journal, donc ce
+  // que Google lit ne change pas d'un visiteur à l'autre ; et on ne touche pas
+  // aux 1 300 lignes de rendu, donc rien ne casse ailleurs.
+  // ⚠️ Contrepartie connue : un lecteur d'écran suit le DOM, pas le CSS — ordre
+  // lu et ordre vu divergent. Acceptable ici (les sections sont indépendantes
+  // et chacune porte son titre), à revoir si on masque plus d'une section.
+  const { space } = useAudience();
+  const colonne: Colonne =
+    space === "parent"
+      ? "parent"
+      : space === "enseignant"
+        ? "prof"
+        : space === "etablissement"
+          ? "principal"
+          : "eleve";
+
+  const correction = cycleChoisi ? (CORRECTION[cycleChoisi] ?? {}) : {};
+
+  /** Le rang d'une section pour le profil courant. `null` = masquée. */
+  function rang(id: string): number | null {
+    const c = correction[id];
+    if (c === "x") return null;
+    return RANGS[colonne][id] + (typeof c === "number" ? c : 0);
+  }
+
+  /**
+   * Le style à poser sur une section. Tout passe par `style` — ni classe à
+   * fusionner, ni JSX à remanier : une seule chose à écrire par section.
+   */
+  function ordre(id: string): React.CSSProperties {
+    const r = rang(id);
+    return r === null ? { display: "none" } : { order: r };
+  }
+
   // L'avis d'élève en manchette (demande de Frédéric, 19/07) : rotation
   // douce sur les mêmes avis que le courrier des lecteurs (verbatim).
   const [avisIdx, setAvisIdx] = useState(0);
@@ -1052,7 +1141,7 @@ export default function AccueilPage({
 
   return (
     <main
-      className="min-h-screen px-4 pb-16 pt-6 sm:px-6 lg:px-8"
+      className="flex min-h-screen flex-col px-4 pb-16 pt-6 sm:px-6 lg:px-8"
       style={{ backgroundColor: PAPER, color: INK }}
     >
       {/* ══ LA MANCHETTE ═════════════════════════════════════════════════════ */}
@@ -1482,7 +1571,7 @@ export default function AccueilPage({
       )}
 
       {/* ══ LA UNE — 3 colonnes : l'article · le fil du jour · l'édito ═══════ */}
-      <section id="la-une" className="mx-auto mt-6 max-w-6xl scroll-mt-24">
+      <section id="la-une" className="mx-auto mt-6 max-w-6xl scroll-mt-24" style={ordre("une")}>
         {/* CONTRE LES TROUS (Frédéric, 24/07 : « qu'il n'y ait pas de trou ») :
             le contenu des 3 colonnes vient de la base et change chaque jour —
             un calage à la main se décalerait à la prochaine édition. Solution
@@ -2043,7 +2132,7 @@ export default function AccueilPage({
           (Frédéric, 18/07). Quatre engagements FACTUELS, jamais de superlatif
           (la règle : le site célèbre les élèves, pas la plateforme) : chacun
           est vérifiable sur la page même. ════════════════════════════════ */}
-      <section className="mx-auto mt-10 max-w-6xl">
+      <section className="mx-auto mt-10 max-w-6xl" style={ordre("parti")}>
         <Kicker accent="flamboyant">Le parti pris · Ce qu&apos;on fait autrement</Kicker>
         <div className="mt-2 border-t-2 border-[#1d1c16]" />
         <div className="mt-4 grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -2104,7 +2193,7 @@ export default function AccueilPage({
       {/* ══ LA MOSAÏQUE — l'actualité en images, façon portail MSN : de grandes
           tuiles cliquables (image + titre posé dessus). Chaque tuile mène à un
           rendez-vous du site. ═════════════════════════════════════════════ */}
-      <section className="mx-auto mt-10 max-w-6xl">
+      <section className="mx-auto mt-10 max-w-6xl" style={ordre("mosaique")}>
         <Kicker accent="safran">En un clic · L&apos;actualité en images</Kicker>
         <div className="mt-2 border-t-2 border-[#1d1c16]" />
         <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
@@ -2217,7 +2306,7 @@ export default function AccueilPage({
       </section>
 
       {/* ══ EN VRAI — les brèves de la série + le terrain ═════════════════════ */}
-      <section id="en-vrai" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
+      <section id="en-vrai" className="mx-auto mt-10 max-w-6xl scroll-mt-24" style={ordre("envrai")}>
         <Kicker accent="canne">Réfléchir · La série « en vrai »</Kicker>
         <TitreRubrique accent="canne">L&apos;île comme salle de classe</TitreRubrique>
         {/* Façon portail : l'image d'abord (vignette YouTube), le titre dessous. */}
@@ -2318,7 +2407,7 @@ export default function AccueilPage({
           reste se lit dans le hub des machines, lien en bas. L'ancre
           #comprendre est gardée sur le surtitre : les vieux liens tombent
           toujours au bon endroit. ═══════════════════════════════════════════ */}
-      <section id="un-peu-de-maths" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
+      <section id="un-peu-de-maths" className="mx-auto mt-10 max-w-6xl scroll-mt-24" style={ordre("maths")}>
         <Kicker id="comprendre">Comprendre · La rubrique du prof</Kicker>
         <TitreRubrique accent="boucan">Un peu de maths</TitreRubrique>
         {/* Sous-titre qui POSE L'ATTENTE (demande de Frédéric, 23/07) : le hook
@@ -2349,7 +2438,7 @@ export default function AccueilPage({
       </section>
 
       {/* ══ APPRENDRE — les pages matières (le coach) + les parcours ═════════ */}
-      <section id="apprendre" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
+      <section id="apprendre" className="mx-auto mt-10 max-w-6xl scroll-mt-24" style={ordre("apprendre")}>
         <Kicker accent="flamboyant">Apprendre · Les pages matières</Kicker>
         <TitreRubrique accent="flamboyant">
           Le coach t&apos;explique{classeLabel ? ` — ta classe : ${classeLabel}` : ", du CP au Bac"}
@@ -2416,7 +2505,7 @@ export default function AccueilPage({
       {/* ══ LE SUPPLÉMENT DE L'ÉTÉ — les cahiers de vacances ═════════════════
           Porte d'entrée n°1 du site (stats 15/07 : /cahier-vacances truste le
           top des pages vues) → une vraie vitrine visuelle, pas une ligne. */}
-      <section id="cahiers" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
+      <section id="cahiers" className="mx-auto mt-10 max-w-6xl scroll-mt-24" style={ordre("cahiers")}>
         <Kicker accent="safran">Le supplément de l&apos;été · À imprimer</Kicker>
         <TitreRubrique accent="safran">Les cahiers de vacances — du CE1 au Bac +1</TitreRubrique>
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
@@ -2449,10 +2538,12 @@ export default function AccueilPage({
 
       {/* ══ L'AGENDA — les calls en direct, version papier (coupon détachable).
           Lit lib/calls.ts ; ne rend rien si aucun call actif à venir. ════════ */}
-      <AgendaJournal />
+      <div style={ordre("agenda")}>
+        <AgendaJournal />
+      </div>
 
       {/* ══ LE CATALOGUE — les petites annonces : TOUT est listé ═════════════ */}
-      <section id="catalogue" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
+      <section id="catalogue" className="mx-auto mt-10 max-w-6xl scroll-mt-24" style={ordre("catalogue")}>
         <Kicker accent="canne">Le catalogue · Tout ce que le journal contient</Kicker>
         <TitreRubrique accent="canne">
           Tout pour apprendre — <em className="not-italic underline decoration-emerald-800 decoration-4 underline-offset-4">gratuit</em>
@@ -2513,7 +2604,7 @@ export default function AccueilPage({
       </section>
 
       {/* ══ LE COURRIER DES LECTEURS — les avis, verbatim (fautes comprises) ══ */}
-      <section id="courrier" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
+      <section id="courrier" className="mx-auto mt-10 max-w-6xl scroll-mt-24" style={ordre("courrier")}>
         <Kicker>Se retrouver · Le courrier des lecteurs</Kicker>
         <TitreRubrique accent="boucan">Ce que les élèves nous écrivent</TitreRubrique>
         <div className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-3">
@@ -2546,7 +2637,7 @@ export default function AccueilPage({
       </section>
 
       {/* ══ ILS FONT LE JOURNAL — à l'honneur + les remerciements ════════════ */}
-      <section id="honneur" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
+      <section id="honneur" className="mx-auto mt-10 max-w-6xl scroll-mt-24" style={ordre("honneur")}>
         <Kicker accent="safran">Se retrouver · Ils font le journal</Kicker>
         <TitreRubrique accent="safran">À l&apos;honneur cette semaine</TitreRubrique>
         <div className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-3">
@@ -2587,7 +2678,7 @@ export default function AccueilPage({
       </section>
 
       {/* ══ LA PAGE DES GRANDS — parents, enseignants, établissements ════════ */}
-      <section id="les-grands" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
+      <section id="les-grands" className="mx-auto mt-10 max-w-6xl scroll-mt-24" style={ordre("grands")}>
         <Kicker>La page des grands</Kicker>
         <TitreRubrique>Parents, enseignants, établissements</TitreRubrique>
         <div className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-3">
@@ -2699,10 +2790,10 @@ export default function AccueilPage({
       </section>
 
       {/* ══ L'ABONNEMENT — recevez le journal (gratuit, newsletter Resend) ═══ */}
-      <AbonnementJournal />
+      <div style={ordre("abonnement")}><AbonnementJournal /></div>
 
       {/* ══ L'OURS — qui fait ce journal (le pied de page du quotidien) ══════ */}
-      <footer className="mx-auto mt-10 max-w-6xl border-t-4 border-double border-[#1d1c16] pt-4 text-center">
+      <footer className="mx-auto mt-10 max-w-6xl border-t-4 border-double border-[#1d1c16] pt-4 text-center" style={ordre("ours")}>
         <p className="font-serif text-sm font-black">Le Journal d&apos;EleveAI</p>
         <p className="mx-auto mt-1 max-w-3xl text-xs font-medium leading-6 text-[#1d1c16]/70">
           Écrit à La Réunion. Rédaction : les élèves et les profs. Mascotte :
