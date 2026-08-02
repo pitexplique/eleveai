@@ -15,6 +15,10 @@ function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function pickOne<T>(arr: readonly T[]): T {
+  return arr[randomInt(0, arr.length - 1)];
+}
+
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
   return (
     `Définition : ${definition}\n\n` +
@@ -103,7 +107,7 @@ export const derivationBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "derivation",
-    microId: "der_taux",
+    microId: "der_interpreter",
     difficulty: 3,
     theme: "neutral",
     text: "Le nombre dérivé $f'(a)$ s'interprète géométriquement comme :",
@@ -131,7 +135,7 @@ export const derivationBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "derivation",
-    microId: "der_taux",
+    microId: "der_interpreter",
     difficulty: 3,
     theme: "sport",
     text: "Un cycliste parcourt $f(t)$ km en $t$ heures. Que représente le nombre dérivé $f'(2)$ ?",
@@ -159,7 +163,7 @@ export const derivationBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "derivation",
-    microId: "der_taux",
+    microId: "der_nombre_derive",
     difficulty: 4,
     theme: "neutral",
     text: "Pour $f(x) = x^2$, le taux entre $1$ et $1 + h$ vaut $2 + h$. Vers quoi tend-il quand $h \\to 0$ ?",
@@ -253,7 +257,7 @@ export const derivationBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "derivation",
-    microId: "der_taux",
+    microId: "der_nombre_derive",
     difficulty: 4,
     theme: "neutral",
     text: "Pour $f(x) = x^2$, le taux entre $3$ et $3 + h$ vaut $6 + h$. Combien vaut $f'(3)$ ?",
@@ -297,7 +301,7 @@ export const derivationBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "derivation",
-    microId: "der_taux",
+    microId: "der_nombre_derive",
     difficulty: 5,
     theme: "neutral",
     text: "Le nombre dérivé $f'(a)$ est la limite, quand $h \\to 0$, de :",
@@ -1396,6 +1400,722 @@ export const derivationBank: TutorBankItemV4[] = [
           `$f(${a}) = ${fa}$ et $f'(${a}) = ${pente}$ : $y = ${pente}(x - ${a}) + ${fa}$.`,
           `$y = ${pente}x ${ord >= 0 ? "+ " + ord : "- " + -ord}$.`,
           `${correct}.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== DER_NOMBRE_DERIVE ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_der_nd_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_nombre_derive",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelle est la différence entre le taux de variation et le nombre dérivé ?",
+    format: "qcm",
+    choices: [
+      "le taux porte sur un intervalle, le nombre dérivé sur un seul point",
+      "ce sont deux noms pour la même chose",
+      "le taux porte sur un point, le nombre dérivé sur un intervalle",
+      "le nombre dérivé est toujours plus grand",
+    ],
+    expected: [
+      "le taux porte sur un intervalle, le nombre dérivé sur un seul point",
+    ],
+    comparator: "mcq_exact",
+    hint: "L'un est une moyenne, l'autre une valeur instantanée.",
+    explanation: exp(
+      "Le taux de variation $\\dfrac{f(b) - f(a)}{b - a}$ compare deux points : c'est une variation MOYENNE.",
+      "Le nombre dérivé $f'(a)$ est la limite de ce taux quand $b$ se rapproche de $a$ : c'est une variation INSTANTANÉE, en un seul point.",
+      "Image concrète : le taux est la vitesse moyenne sur un trajet, le nombre dérivé la vitesse affichée au compteur à un instant précis.",
+      "Le taux porte sur un intervalle, le nombre dérivé sur un point."
+    ),
+    tags: ["premiere", "maths", "derivation", "nombre_derive", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_nd_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_nombre_derive",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour $f(x) = x^2$, le taux entre $2$ et $2 + h$ vaut $4 + h$. Combien vaut $f'(2)$ ?",
+    format: "short",
+    expected: ["4"],
+    comparator: "number_equal",
+    hint: "Fais tendre $h$ vers $0$.",
+    explanation: exp(
+      "Le nombre dérivé est la limite du taux de variation quand $h$ tend vers $0$.",
+      "Le taux vaut $4 + h$.",
+      "Quand $h$ devient très petit, $4 + h$ se rapproche de $4$.",
+      "$f'(2) = 4$."
+    ),
+    tags: ["premiere", "maths", "derivation", "nombre_derive", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_nd_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_nombre_derive",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Que signifie « $f$ est dérivable en $a$ » ?",
+    format: "qcm",
+    choices: [
+      "le taux de variation en $a$ admet une limite finie quand $h \\to 0$",
+      "$f$ est définie en $a$",
+      "$f$ est croissante en $a$",
+      "$f(a) = 0$",
+    ],
+    expected: [
+      "le taux de variation en $a$ admet une limite finie quand $h \\to 0$",
+    ],
+    comparator: "mcq_exact",
+    hint: "La dérivabilité, c'est l'existence d'une limite.",
+    explanation: exp(
+      "Être dérivable en $a$, c'est que le taux $\\dfrac{f(a+h) - f(a)}{h}$ tende vers un nombre FINI quand $h \\to 0$.",
+      "Cette limite est alors le nombre dérivé $f'(a)$, et la courbe admet une tangente non verticale en ce point.",
+      "Être définie en $a$ ne suffit pas : $\\sqrt{x}$ est définie en $0$ sans y être dérivable, sa tangente y étant verticale.",
+      "Le taux admet une limite finie quand $h \\to 0$."
+    ),
+    tags: ["premiere", "maths", "derivation", "nombre_derive", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_nd_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_nombre_derive",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique le passage du taux de variation au nombre dérivé, en t'appuyant sur l'image des sécantes et de la tangente.",
+    format: "open",
+    expected: ["sécante", "tangente", "rapproche", "limite"],
+    comparator: "contains_keyword",
+    hint: "Que devient la droite qui joint deux points quand ils se rapprochent ?",
+    explanation: exp(
+      "Le taux de variation entre $a$ et $b$ est la pente de la SÉCANTE qui joint les deux points de la courbe.",
+      "Quand $b$ se rapproche de $a$, la sécante pivote et se rapproche d'une position limite.",
+      "Cette position limite est la TANGENTE en $a$, et sa pente est le nombre dérivé $f'(a)$. C'est pourquoi la tangente est décrite comme la « limite des sécantes ».",
+      "Le nombre dérivé est la pente limite des sécantes, c'est-à-dire celle de la tangente."
+    ),
+    tags: ["premiere", "maths", "derivation", "nombre_derive", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_nd_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_nombre_derive",
+    difficulty: 5,
+    theme: "sport",
+    text: "Une coureuse parcourt $d(t)$ mètres en $t$ secondes. Explique la différence entre $\\dfrac{d(10) - d(0)}{10}$ et $d'(10)$.",
+    format: "open",
+    expected: ["moyenne", "instantanée", "compteur", "intervalle"],
+    comparator: "contains_keyword",
+    hint: "L'un se mesure sur toute la course, l'autre à un instant précis.",
+    explanation: exp(
+      "Les deux quantités sont des vitesses, mais pas au même sens.",
+      "$\\dfrac{d(10) - d(0)}{10}$ est un taux de variation : la vitesse MOYENNE sur les dix premières secondes.",
+      "$d'(10)$ est le nombre dérivé : la vitesse INSTANTANÉE à la dixième seconde exactement. Une coureuse partie lentement puis lancée peut avoir une vitesse instantanée bien supérieure à sa moyenne.",
+      "L'un est une moyenne sur un intervalle, l'autre une valeur à un instant."
+    ),
+    tags: ["premiere", "maths", "derivation", "nombre_derive", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_der_nd_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_nombre_derive",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le nombre dérivé s'obtient en remplaçant $h$ par $0$ dans le taux simplifié.",
+    tags: ["premiere", "maths", "derivation", "nombre_derive", "template"],
+    generate: () => {
+      const a = randomInt(1, 6);
+      return {
+        text: `Pour $f(x) = x^2$, le taux de variation entre $${a}$ et $${a} + h$ vaut $${2 * a} + h$. Combien vaut $f'(${a})$ ?`,
+        format: "short",
+        expected: [String(2 * a)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le nombre dérivé est la limite du taux de variation quand $h$ tend vers $0$.",
+          `Le taux simplifié vaut $${2 * a} + h$.`,
+          `Quand $h \\to 0$, il tend vers $${2 * a}$.`,
+          `$f'(${a}) = ${2 * a}$ — on retrouve bien $2a$ pour la fonction carré.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_der_nd_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_nombre_derive",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Précise sur quoi porte chaque quantité : un intervalle, ou un instant.",
+    tags: ["premiere", "maths", "derivation", "nombre_derive", "open", "template"],
+    generate: () => {
+      const cas = [
+        {
+          contexte: "une distance $d(t)$ parcourue en $t$ heures",
+          moyenne: "la vitesse moyenne entre deux instants",
+          instant: "la vitesse instantanée, celle du compteur",
+        },
+        {
+          contexte: "un coût de production $C(q)$ pour $q$ objets",
+          moyenne: "l'augmentation moyenne du coût sur une plage de production",
+          instant: "le coût marginal : ce que coûte à peu près l'objet suivant",
+        },
+        {
+          contexte: "une population $P(t)$ après $t$ années",
+          moyenne: "la croissance moyenne sur une période",
+          instant: "la vitesse de croissance à l'instant considéré",
+        },
+        {
+          contexte: "la température $T(t)$ d'un liquide après $t$ minutes",
+          moyenne: "le refroidissement moyen sur un intervalle",
+          instant: "la vitesse de refroidissement à cette minute précise",
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `On étudie ${c.contexte}. Explique la différence entre le taux de variation entre deux valeurs et le nombre dérivé en un point.`,
+        format: "open",
+        expected: ["moyenne", "instantané", "intervalle", "limite"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Le taux de variation compare deux points ; le nombre dérivé est sa limite quand les deux points se confondent.",
+          "Le premier décrit donc une évolution moyenne, le second une évolution instantanée.",
+          `Ici : le taux donne ${c.moyenne} ; le nombre dérivé donne ${c.instant}.`,
+          "Le nombre dérivé est la limite du taux quand l'intervalle se réduit à un point."
+        ),
+      };
+    },
+  },
+
+  /* ===================== DER_DEFINITION ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_der_def_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_definition",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pour $f(x) = x^2$, on calcule $\\dfrac{f(3+h) - f(3)}{h}$. Que vaut cette expression après simplification ?",
+    format: "qcm",
+    choices: ["$6 + h$", "$6$", "$6h + h^2$", "$9 + h$"],
+    expected: ["$6 + h$"],
+    comparator: "mcq_exact",
+    hint: "Développe $(3+h)^2 = 9 + 6h + h^2$, puis divise par $h$.",
+    explanation: exp(
+      "Calculer un nombre dérivé par la définition demande de développer, simplifier, puis faire tendre $h$ vers $0$.",
+      "$f(3+h) - f(3) = (9 + 6h + h^2) - 9 = 6h + h^2$.",
+      "On divise par $h$ : $\\dfrac{6h + h^2}{h} = 6 + h$ (licite car $h \\neq 0$).",
+      "Le taux vaut $6 + h$, donc $f'(3) = 6$."
+    ),
+    tags: ["premiere", "maths", "derivation", "definition", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_def_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_definition",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi ne peut-on pas remplacer $h$ par $0$ AVANT de simplifier le taux $\\dfrac{f(a+h) - f(a)}{h}$ ?",
+    format: "qcm",
+    choices: [
+      "on obtiendrait $\\dfrac{0}{0}$, qui n'a pas de sens",
+      "parce que $h$ doit rester positif",
+      "parce que le résultat serait négatif",
+      "on peut le faire sans problème",
+    ],
+    expected: ["on obtiendrait $\\dfrac{0}{0}$, qui n'a pas de sens"],
+    comparator: "mcq_exact",
+    hint: "Que devient le numérateur si $h = 0$ ?",
+    explanation: exp(
+      "Le taux de variation est un quotient dont le dénominateur est $h$.",
+      "Si l'on pose $h = 0$ d'emblée, le numérateur $f(a+0) - f(a)$ vaut $0$, et le dénominateur aussi.",
+      "On obtient $\\dfrac{0}{0}$, qui ne détermine rien. Il faut d'abord SIMPLIFIER par $h$ — ce qui est permis tant que $h \\neq 0$ — et seulement ensuite faire tendre $h$ vers $0$.",
+      "On tomberait sur $\\dfrac{0}{0}$."
+    ),
+    tags: ["premiere", "maths", "derivation", "definition", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_def_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_definition",
+    difficulty: 5,
+    theme: "neutral",
+    text: "En utilisant la définition, calcule $f'(5)$ pour $f(x) = x^2$.",
+    format: "short",
+    expected: ["10"],
+    comparator: "number_equal",
+    hint: "$(5+h)^2 - 25 = 10h + h^2$.",
+    explanation: exp(
+      "On applique la définition : on forme le taux, on simplifie, puis on fait tendre $h$ vers $0$.",
+      "$f(5+h) - f(5) = (25 + 10h + h^2) - 25 = 10h + h^2$.",
+      "Le taux vaut $\\dfrac{10h + h^2}{h} = 10 + h$, qui tend vers $10$.",
+      "$f'(5) = 10$."
+    ),
+    tags: ["premiere", "maths", "derivation", "definition", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_def_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_definition",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pour $f(x) = \\dfrac{1}{x}$, le taux entre $1$ et $1+h$ se simplifie en $\\dfrac{-1}{1+h}$. Combien vaut $f'(1)$ ?",
+    format: "short",
+    expected: ["-1"],
+    comparator: "number_equal",
+    hint: "Remplace $h$ par $0$ dans l'expression simplifiée.",
+    explanation: exp(
+      "Une fois le taux simplifié, on fait tendre $h$ vers $0$.",
+      "$\\dfrac{-1}{1+h}$ tend vers $\\dfrac{-1}{1}$.",
+      "$= -1$. Le résultat est négatif, ce qui est cohérent : la fonction inverse est décroissante.",
+      "$f'(1) = -1$."
+    ),
+    tags: ["premiere", "maths", "derivation", "definition", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_def_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_definition",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pour $f(x) = x^2 + 1$, que vaut $f(2+h) - f(2)$ ?",
+    format: "qcm",
+    choices: ["$4h + h^2$", "$4h + h^2 + 1$", "$h^2$", "$4 + h$"],
+    expected: ["$4h + h^2$"],
+    comparator: "mcq_exact",
+    hint: "Le $+1$ apparaît dans les deux termes : il disparaît par soustraction.",
+    explanation: exp(
+      "On développe les deux images, puis on soustrait.",
+      "$f(2+h) = (2+h)^2 + 1 = 4 + 4h + h^2 + 1$, et $f(2) = 5$.",
+      "La différence vaut $4h + h^2$ : la constante $+1$ s'élimine, comme le $4$. C'est pourquoi ajouter une constante ne change pas la dérivée.",
+      "$f(2+h) - f(2) = 4h + h^2$, donc $f'(2) = 4$."
+    ),
+    tags: ["premiere", "maths", "derivation", "definition", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_def_fixed_6",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_definition",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Dans le calcul d'un nombre dérivé par la définition, quelle étape autorise à simplifier par $h$ ?",
+    format: "qcm",
+    choices: [
+      "le fait que $h$ est non nul tant qu'on n'a pas pris la limite",
+      "le fait que $h$ est positif",
+      "aucune : la simplification est interdite",
+      "le fait que $f$ est croissante",
+    ],
+    expected: ["le fait que $h$ est non nul tant qu'on n'a pas pris la limite"],
+    comparator: "mcq_exact",
+    hint: "On ne divise jamais par zéro — mais $h$ vaut-il zéro à ce moment-là ?",
+    explanation: exp(
+      "Simplifier une fraction par $h$ suppose $h \\neq 0$.",
+      "Or $h$ représente un écart NON NUL entre $a$ et $a + h$ : la simplification est donc licite.",
+      "Ce n'est qu'après avoir simplifié qu'on fait tendre $h$ vers $0$ — sans jamais lui donner la valeur $0$.",
+      "C'est le fait que $h$ reste non nul jusqu'au passage à la limite."
+    ),
+    tags: ["premiere", "maths", "derivation", "definition", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_def_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_definition",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Détaille les étapes du calcul de $f'(4)$ par la définition, pour $f(x) = x^2$.",
+    format: "open",
+    expected: ["8", "développ", "simplifi", "limite"],
+    comparator: "contains_keyword",
+    hint: "Former le taux, développer, simplifier par $h$, faire tendre $h$ vers $0$.",
+    explanation: exp(
+      "La méthode comporte quatre étapes, toujours les mêmes.",
+      "Former le taux : $\\dfrac{f(4+h) - f(4)}{h}$. Développer : $(4+h)^2 - 16 = 8h + h^2$.",
+      "Simplifier par $h$ (licite car $h \\neq 0$) : le taux vaut $8 + h$. Faire tendre $h$ vers $0$ : on obtient $8$.",
+      "$f'(4) = 8$."
+    ),
+    tags: ["premiere", "maths", "derivation", "definition", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_def_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_definition",
+    difficulty: 5,
+    theme: "neutral",
+    text: "À quoi sert de savoir calculer un nombre dérivé par la définition, puisqu'on dispose des formules de dérivation ?",
+    format: "open",
+    expected: ["comprendre", "démontrer", "formules", "limite"],
+    comparator: "contains_keyword",
+    hint: "D'où viennent les formules du cours ?",
+    explanation: exp(
+      "Les formules de dérivation ne tombent pas du ciel : elles se démontrent toutes par la définition.",
+      "C'est ainsi qu'on établit que la dérivée de $x^2$ est $2x$, ou celle de $\\dfrac{1}{x}$ est $-\\dfrac{1}{x^2}$ — deux démonstrations exigibles au programme.",
+      "Cela permet aussi de traiter les cas où aucune formule ne s'applique, et de comprendre ce qu'est vraiment la dérivée : une limite de taux, pas une recette.",
+      "Elle démontre les formules et donne le sens de la dérivée."
+    ),
+    tags: ["premiere", "maths", "derivation", "definition", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_der_def_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_definition",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Développe $(a+h)^2$, retranche $a^2$, puis divise par $h$.",
+    tags: ["premiere", "maths", "derivation", "definition", "template"],
+    generate: () => {
+      const a = randomInt(2, 8);
+      return {
+        text: `Pour $f(x) = x^2$, que vaut $f(${a}+h) - f(${a})$ ?`,
+        format: "qcm",
+        choices: [
+          `$${2 * a}h + h^2$`,
+          `$${2 * a}h$`,
+          `$${a * a} + h^2$`,
+          `$${2 * a} + h$`,
+        ],
+        expected: [`$${2 * a}h + h^2$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On développe l'image en $a + h$, puis on retranche l'image en $a$.",
+          `$(${a}+h)^2 = ${a * a} + ${2 * a}h + h^2$, et $f(${a}) = ${a * a}$.`,
+          `La différence vaut $${2 * a}h + h^2$ : le terme constant $${a * a}$ s'élimine.`,
+          `En divisant par $h$, le taux vaut $${2 * a} + h$, donc $f'(${a}) = ${2 * a}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_der_def_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_definition",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Quatre étapes : former le taux, développer, simplifier par $h$, passer à la limite.",
+    tags: ["premiere", "maths", "derivation", "definition", "open", "template"],
+    generate: () => {
+      const a = randomInt(2, 7);
+      return {
+        text: `Calcule $f'(${a})$ par la DÉFINITION pour $f(x) = x^2$, en détaillant chaque étape.`,
+        format: "open",
+        expected: [String(2 * a), "simplifi", "limite", "h"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Le nombre dérivé est la limite du taux de variation quand $h \\to 0$.",
+          `Taux : $\\dfrac{f(${a}+h) - f(${a})}{h} = \\dfrac{${2 * a}h + h^2}{h}$.`,
+          `Simplification par $h$ (licite car $h \\neq 0$) : le taux vaut $${2 * a} + h$, qui tend vers $${2 * a}$.`,
+          `$f'(${a}) = ${2 * a}$.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== DER_INTERPRETER ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_der_int_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_interpreter",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Le coût de production de $q$ objets est $C(q)$. Que représente $C'(50)$ ?",
+    format: "qcm",
+    choices: [
+      "le coût marginal : approximativement ce que coûte le 51ᵉ objet",
+      "le coût total de $50$ objets",
+      "le coût moyen d'un objet",
+      "le bénéfice réalisé sur $50$ objets",
+    ],
+    expected: [
+      "le coût marginal : approximativement ce que coûte le 51ᵉ objet",
+    ],
+    comparator: "mcq_exact",
+    hint: "Une dérivée mesure ce que produit UNE unité de plus.",
+    explanation: exp(
+      "Le nombre dérivé mesure la variation de la grandeur pour une variation d'une unité de la variable.",
+      "$C'(50)$ indique de combien le coût augmente quand on produit un objet de plus, à partir de $50$.",
+      "C'est ce que les économistes appellent le coût marginal. Le coût MOYEN, lui, serait $\\dfrac{C(50)}{50}$ : une tout autre quantité.",
+      "$C'(50)$ est le coût marginal, soit environ le prix du 51ᵉ objet."
+    ),
+    tags: ["premiere", "maths", "derivation", "interpreter", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_int_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_interpreter",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une fonction vérifie $f'(3) = -2$. Que peut-on en déduire au voisinage de $3$ ?",
+    format: "qcm",
+    choices: [
+      "la fonction décroît, et sa tangente en $3$ descend",
+      "la fonction vaut $-2$ en $3$",
+      "la fonction croît",
+      "la courbe coupe l'axe des abscisses en $3$",
+    ],
+    expected: ["la fonction décroît, et sa tangente en $3$ descend"],
+    comparator: "mcq_exact",
+    hint: "Ne pas confondre $f(3)$ et $f'(3)$.",
+    explanation: exp(
+      "Le SIGNE du nombre dérivé donne le sens de variation local ; sa VALEUR donne la pente de la tangente.",
+      "$f'(3) = -2 < 0$ : la fonction décroît au voisinage de $3$, et la tangente y a pour coefficient directeur $-2$, donc elle descend.",
+      "Cela ne dit rien de $f(3)$, qui pourrait valoir $100$ : la fonction peut être très haute et pourtant décroissante.",
+      "La fonction décroît, avec une tangente de pente $-2$."
+    ),
+    tags: ["premiere", "maths", "derivation", "interpreter", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_int_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_interpreter",
+    difficulty: 5,
+    theme: "reunion",
+    text: "Le nombre de visiteurs d'un site touristique est $V(t)$ milliers après $t$ mois. On sait que $V'(6) = 1{,}5$. Comment l'interpréter ?",
+    format: "qcm",
+    choices: [
+      "au 6ᵉ mois, la fréquentation augmente d'environ $1500$ visiteurs par mois",
+      "il y a $1500$ visiteurs au 6ᵉ mois",
+      "la fréquentation a augmenté de $1{,}5$ visiteur depuis le début",
+      "il faudra $1{,}5$ mois pour doubler la fréquentation",
+    ],
+    expected: [
+      "au 6ᵉ mois, la fréquentation augmente d'environ $1500$ visiteurs par mois",
+    ],
+    comparator: "mcq_exact",
+    hint: "La dérivée est une vitesse : une quantité PAR unité de temps.",
+    explanation: exp(
+      "Un nombre dérivé s'exprime dans l'unité de la grandeur divisée par celle de la variable.",
+      "Ici : des milliers de visiteurs par mois. $V'(6) = 1{,}5$ signifie donc $1{,}5$ millier de visiteurs supplémentaires par mois.",
+      "Soit environ $1500$ visiteurs de plus le mois suivant. Ce n'est pas le NOMBRE de visiteurs — ce serait $V(6)$ — mais sa vitesse d'augmentation.",
+      "La fréquentation croît d'environ $1500$ visiteurs par mois."
+    ),
+    tags: ["premiere", "maths", "derivation", "interpreter", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_int_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_interpreter",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Une fonction vérifie $f(2) = 10$ et $f'(2) = 0$. Que peut-on dire ?",
+    format: "qcm",
+    choices: [
+      "la tangente en $2$ est horizontale : il peut y avoir un extremum",
+      "la fonction est nulle en $2$",
+      "la fonction est constante",
+      "la courbe coupe l'axe des abscisses en $2$",
+    ],
+    expected: [
+      "la tangente en $2$ est horizontale : il peut y avoir un extremum",
+    ],
+    comparator: "mcq_exact",
+    hint: "Une pente nulle, c'est une droite horizontale.",
+    explanation: exp(
+      "Le nombre dérivé est le coefficient directeur de la tangente.",
+      "$f'(2) = 0$ signifie que cette pente est nulle : la tangente au point $(2 ; 10)$ est horizontale.",
+      "C'est le signe possible d'un extremum — mais seulement si $f'$ CHANGE de signe en $2$, comme le montre le contre-exemple de $x^3$ en $0$. La fonction n'est certainement pas constante : on sait seulement qu'elle marque une pause.",
+      "La tangente est horizontale, ce qui suggère un extremum."
+    ),
+    tags: ["premiere", "maths", "derivation", "interpreter", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_int_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_interpreter",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique la différence entre $f(a)$ et $f'(a)$ à quelqu'un qui les confond.",
+    format: "open",
+    expected: ["valeur", "pente", "hauteur", "variation"],
+    comparator: "contains_keyword",
+    hint: "L'un dit où l'on est, l'autre comment ça évolue.",
+    explanation: exp(
+      "Ce sont deux informations de nature différente sur le même point.",
+      "$f(a)$ est la VALEUR de la fonction en $a$ : la hauteur du point sur la courbe.",
+      "$f'(a)$ est la PENTE de la tangente en ce point : la vitesse à laquelle la fonction évolue. Une voiture peut être à $200$ km du départ ($f(a)$ grand) tout en étant à l'arrêt ($f'(a) = 0$).",
+      "$f(a)$ dit où l'on est, $f'(a)$ dit comment ça change."
+    ),
+    tags: ["premiere", "maths", "derivation", "interpreter", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_int_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_interpreter",
+    difficulty: 5,
+    theme: "neutral",
+    text: "La température d'un four est $T(t)$ degrés après $t$ minutes. Interprète $T'(5) = -3$ en précisant l'unité.",
+    format: "open",
+    expected: ["degrés par minute", "refroidit", "diminue", "3"],
+    comparator: "contains_keyword",
+    hint: "L'unité de la dérivée est celle de $T$ divisée par celle de $t$.",
+    explanation: exp(
+      "L'unité d'un nombre dérivé est celle de la grandeur divisée par celle de la variable.",
+      "Ici : des degrés par minute. Le signe négatif indique une diminution.",
+      "$T'(5) = -3$ signifie donc qu'à la 5ᵉ minute, la température BAISSE d'environ $3$ degrés par minute : le four refroidit.",
+      "La température diminue de $3$ degrés par minute à cet instant."
+    ),
+    tags: ["premiere", "maths", "derivation", "interpreter", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_der_int_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_interpreter",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "La dérivée est une vitesse : unité de la grandeur PAR unité de variable.",
+    tags: ["premiere", "maths", "derivation", "interpreter", "open", "template"],
+    generate: () => {
+      const cas = [
+        {
+          contexte: "la masse $m(t)$ d'une substance en grammes après $t$ heures",
+          valeur: "$m'(3) = -0{,}4$",
+          mots: ["grammes par heure", "diminue", "perd", "0,4"],
+          sens: "à la 3ᵉ heure, la substance perd environ $0{,}4$ gramme par heure : elle se dégrade.",
+        },
+        {
+          contexte: "le bénéfice $B(x)$ en euros pour $x$ articles vendus",
+          valeur: "$B'(100) = 12$",
+          mots: ["euros par article", "augmente", "12", "marginal"],
+          sens: "au niveau de $100$ articles, chaque article supplémentaire rapporte environ $12$ € de plus.",
+        },
+        {
+          contexte: "la hauteur $h(t)$ d'une plante en cm après $t$ semaines",
+          valeur: "$h'(4) = 2{,}5$",
+          mots: ["cm par semaine", "pousse", "2,5", "croît"],
+          sens: "à la 4ᵉ semaine, la plante pousse d'environ $2{,}5$ cm par semaine.",
+        },
+        {
+          contexte: "le volume $V(t)$ d'eau en litres dans un réservoir après $t$ minutes",
+          valeur: "$V'(10) = -8$",
+          mots: ["litres par minute", "vide", "diminue", "8"],
+          sens: "à la 10ᵉ minute, le réservoir se vide d'environ $8$ litres par minute.",
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `On étudie ${c.contexte}. Interprète ${c.valeur} en précisant l'unité.`,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Un nombre dérivé se lit comme une vitesse : unité de la grandeur divisée par unité de la variable.",
+          "Le signe indique le sens : positif pour une augmentation, négatif pour une diminution.",
+          `Ici : ${c.sens}`,
+          "C'est une variation instantanée, à ne pas confondre avec la valeur de la grandeur elle-même."
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_der_int_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_interpreter",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le signe donne le sens de variation, la valeur donne la pente.",
+    tags: ["premiere", "maths", "derivation", "interpreter", "template"],
+    generate: () => {
+      const a = randomInt(1, 6);
+      const d = pickOne([-5, -3, -1, 2, 4, 7]);
+      const croit = d > 0;
+      return {
+        text: `Une fonction vérifie $f'(${a}) = ${d}$. Que peut-on en déduire au voisinage de $${a}$ ?`,
+        format: "qcm",
+        choices: [
+          croit
+            ? `la fonction croît, et la tangente en $${a}$ a pour pente $${d}$`
+            : `la fonction décroît, et la tangente en $${a}$ a pour pente $${d}$`,
+          `la fonction vaut $${d}$ en $${a}$`,
+          croit
+            ? `la fonction décroît au voisinage de $${a}$`
+            : `la fonction croît au voisinage de $${a}$`,
+          `la courbe coupe l'axe des abscisses en $${a}$`,
+        ],
+        expected: [
+          croit
+            ? `la fonction croît, et la tangente en $${a}$ a pour pente $${d}$`
+            : `la fonction décroît, et la tangente en $${a}$ a pour pente $${d}$`,
+        ],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le nombre dérivé donne deux informations : son signe indique le sens de variation, sa valeur la pente de la tangente.",
+          `Ici $f'(${a}) = ${d}$, qui est ${croit ? "positif" : "négatif"}.`,
+          `La fonction ${croit ? "croît" : "décroît"} donc au voisinage de $${a}$, avec une tangente de coefficient directeur $${d}$.`,
+          `Attention à ne pas confondre avec $f(${a})$, qui serait la valeur de la fonction.`
         ),
       };
     },
