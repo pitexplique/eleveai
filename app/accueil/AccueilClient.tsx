@@ -1437,41 +1437,6 @@ export default function AccueilPage({
             )}
           </section>
         )}
-        {/* Le chemin de fer + la devise SUR LA MÊME BANDE (01/08). Ils avaient
-            chacun la leur : deux filets de plus sur le premier écran, et trois
-            accroches empilées sous le titre (le surtitre du journal, « Ici,
-            personne n'apprend à ta place », puis la devise). Les mots restent,
-            la bande de trop s'en va. */}
-        <div className="border-b border-[#1d1c16]/25 py-2">
-        <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-[11px] font-black uppercase tracking-[0.16em]">
-          <a href="#la-une" className="hover:text-cyan-800">La Une</a>
-          <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#en-vrai" className="hover:text-[#3f6b0c]">En vrai</a>
-          <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          {/* « Comprendre » a fusionné avec « Un peu de maths » (24/07) : une
-              seule entrée, sinon deux liens du chemin de fer menaient au même
-              endroit. */}
-          <a href="#un-peu-de-maths" className="hover:text-[#0e7490]">Un peu de maths</a>
-          <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#apprendre" className="hover:text-[#bf3b1e]">Apprendre</a>
-          <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#catalogue" className="hover:text-[#3f6b0c]">Le catalogue</a>
-          <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#courrier" className="hover:text-[#0e7490]">Le courrier</a>
-          <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#honneur" className="hover:text-[#a34c07]">À l&apos;honneur</a>
-          <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#les-grands" className="hover:text-cyan-800">Parents & profs</a>
-        </nav>
-
-        {/* La devise publique (choisie 16/07). La doctrine interne reste
-            « réfléchir · apprendre · se diriger » — même triptyque, dit pour
-            un enfant. */}
-        <p className="mt-1 text-center font-serif text-sm font-black italic tracking-wide text-[#1d1c16]/70">
-          Comprendre. Apprendre. S&apos;amuser.
-        </p>
-        </div>
-
         {/* ══ LE COACH — LE PREMIER GESTE ═══════════════════════════════════
             Décision produit (24/07, Frédéric) : le COACH est la destination
             (il entraîne), PARCOURS + DÉFIS sont l'épreuve (ils testent), et le
@@ -1592,6 +1557,41 @@ export default function AccueilPage({
           )}
             </div>
           </div>
+        </div>
+
+        {/* Le chemin de fer + la devise SUR LA MÊME BANDE (01/08). Ils avaient
+            chacun la leur : deux filets de plus sur le premier écran, et trois
+            accroches empilées sous le titre (le surtitre du journal, « Ici,
+            personne n'apprend à ta place », puis la devise). Les mots restent,
+            la bande de trop s'en va. */}
+        <div className="border-b border-[#1d1c16]/25 py-2">
+        <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-[11px] font-black uppercase tracking-[0.16em]">
+          <a href="#la-une" className="hover:text-cyan-800">La Une</a>
+          <span aria-hidden className="text-[#1d1c16]/30">·</span>
+          <a href="#en-vrai" className="hover:text-[#3f6b0c]">En vrai</a>
+          <span aria-hidden className="text-[#1d1c16]/30">·</span>
+          {/* « Comprendre » a fusionné avec « Un peu de maths » (24/07) : une
+              seule entrée, sinon deux liens du chemin de fer menaient au même
+              endroit. */}
+          <a href="#un-peu-de-maths" className="hover:text-[#0e7490]">Un peu de maths</a>
+          <span aria-hidden className="text-[#1d1c16]/30">·</span>
+          <a href="#apprendre" className="hover:text-[#bf3b1e]">Apprendre</a>
+          <span aria-hidden className="text-[#1d1c16]/30">·</span>
+          <a href="#catalogue" className="hover:text-[#3f6b0c]">Le catalogue</a>
+          <span aria-hidden className="text-[#1d1c16]/30">·</span>
+          <a href="#courrier" className="hover:text-[#0e7490]">Le courrier</a>
+          <span aria-hidden className="text-[#1d1c16]/30">·</span>
+          <a href="#honneur" className="hover:text-[#a34c07]">À l&apos;honneur</a>
+          <span aria-hidden className="text-[#1d1c16]/30">·</span>
+          <a href="#les-grands" className="hover:text-cyan-800">Parents & profs</a>
+        </nav>
+
+        {/* La devise publique (choisie 16/07). La doctrine interne reste
+            « réfléchir · apprendre · se diriger » — même triptyque, dit pour
+            un enfant. */}
+        <p className="mt-1 text-center font-serif text-sm font-black italic tracking-wide text-[#1d1c16]/70">
+          Comprendre. Apprendre. S&apos;amuser.
+        </p>
         </div>
 
         {/* Le courrier en manchette (demande de Frédéric, 19/07) : un avis
