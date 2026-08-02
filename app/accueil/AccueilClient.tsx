@@ -2192,6 +2192,16 @@ export default function AccueilPage({
       <section id="cahiers" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
         <Kicker>Le supplément de l&apos;été · À imprimer</Kicker>
         <TitreRubrique>Les cahiers de vacances — du CE1 au Bac +1</TitreRubrique>
+        {/* TI MARGO SUR L'ACCUEIL (Frédéric, 02/08). Chaque page de cahier le
+            nomme — « un voyage à La Réunion avec Ti Margo le margouillat » —
+            mais l'accueil vendait ses propres cahiers sans jamais dire qui les
+            guide. Même emoji, même nom, même registre que /cahier-vacances :
+            c'est le personnage qui existe déjà, pas un nouveau. */}
+        <p className="mt-1.5 text-sm font-medium leading-6 text-[#1d1c16]/70">
+          Une page par jour, les corrigés au dos, et{" "}
+          <span className="font-black">Ti Margo le margouillat</span> 🦎 qui
+          t&apos;accompagne du premier jour au dernier.
+        </p>
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           {CAHIERS_VACANCES.map((c) => (
             <Link
