@@ -1007,8 +1007,21 @@ export default function AccueilPage({
             <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[#1d1c16]/70 sm:text-xs">
               Le journal pour apprendre et s&apos;évaluer · Île de La Réunion
             </p>
+            {/* TI MARGO PERCHÉ SUR LA MANCHETTE (Frédéric, 02/08). Dimensionné
+                en `em` : il grandit avec le titre, donc il reste à la même
+                place sur téléphone comme sur grand écran. `align-top` le pose
+                à hauteur de capitale — il grimpe sur le « r », il ne flotte
+                pas à côté. Le 🦎 regarde vers la gauche dans la plupart des
+                polices : posé à droite, il regarde donc le mot. */}
             <h1 className="mt-1 font-serif text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl">
               eleveai<span className="text-cyan-800">.fr</span>
+              <span
+                className="ml-1 align-top text-[0.34em] leading-none"
+                role="img"
+                aria-label="Ti Margo, le margouillat du journal"
+              >
+                🦎
+              </span>
             </h1>
             <p className="mt-2 font-serif text-base font-black italic tracking-wide text-[#1d1c16]/70 sm:text-lg">
               « Ici, personne n&apos;apprend à ta place. »
@@ -2192,16 +2205,6 @@ export default function AccueilPage({
       <section id="cahiers" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
         <Kicker>Le supplément de l&apos;été · À imprimer</Kicker>
         <TitreRubrique>Les cahiers de vacances — du CE1 au Bac +1</TitreRubrique>
-        {/* TI MARGO SUR L'ACCUEIL (Frédéric, 02/08). Chaque page de cahier le
-            nomme — « un voyage à La Réunion avec Ti Margo le margouillat » —
-            mais l'accueil vendait ses propres cahiers sans jamais dire qui les
-            guide. Même emoji, même nom, même registre que /cahier-vacances :
-            c'est le personnage qui existe déjà, pas un nouveau. */}
-        <p className="mt-1.5 text-sm font-medium leading-6 text-[#1d1c16]/70">
-          Une page par jour, les corrigés au dos, et{" "}
-          <span className="font-black">Ti Margo le margouillat</span> 🦎 qui
-          t&apos;accompagne du premier jour au dernier.
-        </p>
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           {CAHIERS_VACANCES.map((c) => (
             <Link
@@ -2488,8 +2491,9 @@ export default function AccueilPage({
       <footer className="mx-auto mt-10 max-w-6xl border-t-4 border-double border-[#1d1c16] pt-4 text-center">
         <p className="font-serif text-sm font-black">Le Journal d&apos;EleveAI</p>
         <p className="mx-auto mt-1 max-w-3xl text-xs font-medium leading-6 text-[#1d1c16]/70">
-          Écrit à La Réunion. Rédaction : les élèves et les profs. Fondé par
-          Frédéric Lacoste, professeur de mathématiques. Sans publicité —{" "}
+          Écrit à La Réunion. Rédaction : les élèves et les profs. Mascotte :
+          Ti Margo, margouillat 🦎. Fondé par Frédéric Lacoste, professeur de
+          mathématiques. Sans publicité —{" "}
           <Link href="/politique-confidentialite" className="font-black underline underline-offset-2">
             données protégées
           </Link>
