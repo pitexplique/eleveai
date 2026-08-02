@@ -233,6 +233,40 @@ const CLASSES_ENTREE: { slug: string; label: string }[] = [
   { slug: "terminale-spe", label: "Term." },
 ];
 
+// ─── « QUI EST-CE ? » — LE SÉLECTEUR DE PROFIL ────────────────────────────────
+// Idée de Frédéric (02/08), d'après le sélecteur de profils Netflix. Le journal
+// ne savait à qui il parlait qu'une fois l'élève connecté ; ici on demande, en
+// une ligne, sans rien à lire.
+//
+// DANS la page et pas en modale bloquante : la première porte d'entrée du site
+// est Google (les cahiers de vacances trustent les pages vues), et un
+// interstitiel plein écran fait repartir un visiteur venu d'une recherche —
+// Google le compte d'ailleurs comme un signal négatif au classement sur mobile.
+//
+// Deux familles, deux comportements — et aucune tuile qui ne fasse rien :
+//   • les quatre CYCLES restent sur la page et préréglent la rampe des classes,
+//     donc les liens du coach partent avec le bon niveau. C'est ce dont seul un
+//     élève CONNECTÉ bénéficiait jusqu'ici.
+//   • les quatre PORTES ADULTES mènent à leur espace. Inutile de mémoriser quoi
+//     que ce soit : `useAudience` enregistre l'espace dès qu'on visite sa route,
+//     donc le header est déjà adapté au retour.
+const CYCLES: { id: string; emoji: string; label: string; classe: string; accent: Accent }[] = [
+  { id: "cp-ce2", emoji: "🧸", label: "CP–CE2", classe: "cp", accent: "safran" },
+  { id: "cm1-cm2", emoji: "🌳", label: "CM1–CM2", classe: "cm1", accent: "canne" },
+  { id: "6e-3e", emoji: "🎒", label: "6ᵉ–3ᵉ", classe: "6e", accent: "boucan" },
+  { id: "lycee", emoji: "🎓", label: "Lycée", classe: "seconde", accent: "flamboyant" },
+];
+
+const PORTES_ADULTES: { emoji: string; label: string; href: string; accent: Accent }[] = [
+  { emoji: "👪", label: "Parent", href: "/parents", accent: "canne" },
+  { emoji: "🍎", label: "Professeur", href: "/enseignants", accent: "flamboyant" },
+  { emoji: "🏫", label: "Établissement", href: "/espace-ecoles", accent: "boucan" },
+  { emoji: "🏭", label: "Entreprise", href: "/entreprises", accent: "safran" },
+];
+
+/** Le cycle choisi survit à la visite — même clé de nommage que useAudience. */
+const CLE_CYCLE = "eleveai-cycle";
+
 // ─── Le catalogue COMPLET — « les pages du journal » ──────────────────────────
 // Tout ce que le site offre, rangé et listé (demande de Frédéric : rien ne
 // manque). Chaque entrée = une petite annonce du journal.
@@ -916,6 +950,32 @@ export default function AccueilPage({
   // La rampe des classes : la classe cliquée déplie son choix de matières.
   const [classeDepliee, setClasseDepliee] = useState<string | null>(null);
 
+  // « Qui est-ce ? » — le cycle choisi. Lu APRÈS le montage : au premier rendu
+  // il vaut null des deux côtés, donc l'hydratation ne casse pas (même
+  // précaution que useAudience).
+  const [cycleChoisi, setCycleChoisi] = useState<string | null>(null);
+  useEffect(() => {
+    try {
+      const v = localStorage.getItem(CLE_CYCLE);
+      if (v && CYCLES.some((c) => c.id === v)) setCycleChoisi(v);
+    } catch {
+      /* localStorage indisponible (navigation privée, cookies bloqués) */
+    }
+  }, []);
+
+  function choisirCycle(id: string) {
+    const c = CYCLES.find((x) => x.id === id);
+    if (!c) return;
+    setCycleChoisi(id);
+    // La rampe se prérègle : les liens du coach partent avec le bon niveau.
+    setClasseDepliee(c.classe);
+    try {
+      localStorage.setItem(CLE_CYCLE, id);
+    } catch {
+      /* ignore */
+    }
+  }
+
   // L'avis d'élève en manchette (demande de Frédéric, 19/07) : rotation
   // douce sur les mêmes avis que le courrier des lecteurs (verbatim).
   const [avisIdx, setAvisIdx] = useState(0);
@@ -927,9 +987,15 @@ export default function AccueilPage({
   const avisManchette = derniersAvis[avisIdx % derniersAvis.length];
 
   const eleveClasse = eleve?.classe?.toLowerCase() ?? null;
-  const classeActive = classeDepliee ?? eleveClasse ?? "6e";
+  // Le cycle choisi retrouve sa classe au rechargement : `classeDepliee` est
+  // remis à null par le montage, pas le souvenir. Priorité : le clic explicite
+  // sur la rampe, puis la classe réelle d'un élève connecté (elle bat toujours
+  // un cycle deviné), puis le cycle choisi, puis la 6ᵉ par défaut.
+  const classeDuCycle = CYCLES.find((c) => c.id === cycleChoisi)?.classe ?? null;
+  const classeActive = classeDepliee ?? eleveClasse ?? classeDuCycle ?? "6e";
   const prenomAffiche = getPrenomAffiche(eleve?.nom);
-  const isCmPrimary = eleveClasse === "cm1" || eleveClasse === "cm2";
+  const isCmPrimary =
+    eleveClasse === "cm1" || eleveClasse === "cm2" || cycleChoisi === "cm1-cm2";
   const isStaff =
     eleve?.type_utilisateur === "prof" ||
     eleve?.type_utilisateur === "principal" ||
@@ -966,12 +1032,16 @@ export default function AccueilPage({
 
   // Passe la classe de l'élève au coach quand le niveau est géré.
   function getHref(href: string) {
-    if (!eleveClasse) return href;
-    if (href === "/coach-ia/maths" && MATHS_LEVELS.has(eleveClasse)) {
-      return `/coach-ia/maths?classe=${eleveClasse}`;
+    // La classe d'un élève connecté d'abord ; à défaut celle du cycle choisi
+    // dans « Qui est-ce ? » — c'est ce qui donne à un visiteur non connecté le
+    // même confort qu'à un élève inscrit.
+    const classe = eleveClasse ?? classeDuCycle;
+    if (!classe) return href;
+    if (href === "/coach-ia/maths" && MATHS_LEVELS.has(classe)) {
+      return `/coach-ia/maths?classe=${classe}`;
     }
-    if (href === "/coach-ia/francais" && FRANCAIS_LEVELS.has(eleveClasse)) {
-      return `/coach-ia/francais?classe=${eleveClasse}`;
+    if (href === "/coach-ia/francais" && FRANCAIS_LEVELS.has(classe)) {
+      return `/coach-ia/francais?classe=${classe}`;
     }
     return href;
   }
@@ -1285,6 +1355,91 @@ export default function AccueilPage({
           </p>
         </a>
       </header>
+
+      {/* ══ « QUI EST-CE ? » — LE SÉLECTEUR DE PROFIL ════════════════════════
+          Huit tuiles sur UNE SEULE LIGNE (demande de Frédéric) : sur un
+          téléphone la bande glisse horizontalement au lieu de passer à la
+          ligne — c'est le geste des rangées, et les quatre tuiles d'élève
+          restent les premières vues. Masqué pour un staff connecté : il a son
+          bandeau de tableau de bord, on ne lui demande pas qui il est. */}
+      {!isStaff && (
+        <section className="mx-auto mt-5 max-w-6xl border-b border-[#1d1c16]/25 pb-4">
+          {cycleChoisi ? (
+            // Choix fait : la bande se replie en pastille et ne revient plus.
+            <div className="flex flex-wrap items-center justify-center gap-2 text-sm">
+              <span className="font-serif font-black">
+                {CYCLES.find((c) => c.id === cycleChoisi)?.emoji}{" "}
+                {CYCLES.find((c) => c.id === cycleChoisi)?.label}
+              </span>
+              <span className="text-[#1d1c16]/50">·</span>
+              <button
+                type="button"
+                onClick={() => {
+                  setCycleChoisi(null);
+                  try {
+                    localStorage.removeItem(CLE_CYCLE);
+                  } catch {
+                    /* ignore */
+                  }
+                }}
+                className="font-black text-cyan-800 underline underline-offset-2 hover:no-underline"
+              >
+                changer
+              </button>
+            </div>
+          ) : (
+            <>
+              <p className="text-center font-serif text-xl font-black leading-none sm:text-2xl">
+                Qui est-ce&nbsp;?
+              </p>
+              <p className="mt-1 text-center font-serif text-xs font-medium italic text-[#1d1c16]/70">
+                Une fois, et le journal se range pour vous.
+              </p>
+              <div className="mt-3 flex flex-nowrap gap-2 overflow-x-auto pb-1">
+                {CYCLES.map((c) => (
+                  <button
+                    key={c.id}
+                    type="button"
+                    onClick={() => choisirCycle(c.id)}
+                    className="min-w-[82px] flex-1 border-2 border-[#1d1c16] bg-[#1d1c16]/[0.04] px-1 py-2.5 text-center transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
+                  >
+                    <span className="block text-2xl leading-none" aria-hidden>
+                      {c.emoji}
+                    </span>
+                    <span className="mt-1.5 block whitespace-nowrap font-serif text-[10px] font-black">
+                      {c.label}
+                    </span>
+                    <span
+                      className="mx-auto mt-1.5 block h-[3px] w-6 rounded-sm"
+                      style={{ backgroundColor: ACCENTS[c.accent] }}
+                      aria-hidden
+                    />
+                  </button>
+                ))}
+                {PORTES_ADULTES.map((p) => (
+                  <Link
+                    key={p.href}
+                    href={p.href}
+                    className="min-w-[82px] flex-1 border-2 border-[#1d1c16] bg-[#1d1c16]/[0.04] px-1 py-2.5 text-center transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
+                  >
+                    <span className="block text-2xl leading-none" aria-hidden>
+                      {p.emoji}
+                    </span>
+                    <span className="mt-1.5 block whitespace-nowrap font-serif text-[10px] font-black">
+                      {p.label}
+                    </span>
+                    <span
+                      className="mx-auto mt-1.5 block h-[3px] w-6 rounded-sm"
+                      style={{ backgroundColor: ACCENTS[p.accent] }}
+                      aria-hidden
+                    />
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
+        </section>
+      )}
 
       {/* ══ L'ÉDITION PERSONNALISÉE (connecté) ═══════════════════════════════ */}
       {isStaff ? (
