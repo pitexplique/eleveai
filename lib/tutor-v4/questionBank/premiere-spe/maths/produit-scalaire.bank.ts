@@ -2,17 +2,53 @@
 //
 // Chapitre : Calcul vectoriel et produit scalaire (notion "produit_scalaire")
 // microSkills :
-//   ps_coordonnees   — produit scalaire à partir des coordonnées
-//   ps_norme_angle   — produit scalaire avec normes et angle (cosinus)
-//   ps_orthogonalite — caractériser l'orthogonalité
-//   ps_alkashi       — calculer une longueur ou un angle (Al-Kashi)
+//   ps_projection      — produit scalaire par projection orthogonale
+//   ps_norme_angle     — produit scalaire avec normes et angle (cosinus)
+//   ps_coordonnees     — produit scalaire à partir des coordonnées
+//   ps_norme           — calculer la norme d'un vecteur
+//   ps_proprietes      — symétrie et bilinéarité
+//   ps_norme_somme     — développer ‖u + v‖²
+//   ps_orthogonalite   — caractériser l'orthogonalité
+//   ps_alkashi         — formule d'Al-Kashi
+//   ps_angle_longueur  — calculer un angle ou une longueur
+//   ps_ma_mb           — transformer MA·MB, décrire un ensemble de points
+//   ps_methode         — choisir la méthode adaptée
 //
-// PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM. Canvas : fonctionGraphique (vecteurs comme points).
+// ⚠️ Les items de `ps_norme` sont restés physiquement dans la section
+// PS_COORDONNEES, et deux items d'Al-Kashi dans la section PS_ALKASHI : on a
+// changé leur `microId` sans toucher à leur `id` (ils ont un historique de
+// réponses d'élèves). Se fier au `microId`, pas au commentaire de section.
+//
+// PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM.
+// Canvas : fonctionGraphique (vecteurs comme points), triangle (Al-Kashi).
+//
+// Règle d'écriture : un `fixed` pour une valeur exceptionnelle, un piège, une
+// propriété ou un contexte 974 ; un `template` pour tout calcul dont on peut
+// changer les nombres ; plusieurs ouvertes dont un template ouvert. Aucun
+// nombre d'items fixes à viser.
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function pickOne<T>(arr: readonly T[]): T {
+  return arr[randomInt(0, arr.length - 1)];
+}
+
+/** Un triangle coté, pour Al-Kashi et les calculs d'angle.
+ *  Convention du chapitre : $a = BC$, $b = CA$, $c = AB$, l'angle est en $A$. */
+function triangleCote(c: string, b: string, a: string, angleA?: string): CanvasFigure {
+  return {
+    kind: "triangle",
+    size: { width: 320, height: 250 },
+    points: { A: { x: 60, y: 200 }, B: { x: 270, y: 200 }, C: { x: 140, y: 45 } },
+    labels: { A: "A", B: "B", C: "C" },
+    sideLabels: { AB: c, CA: b, BC: a },
+    angleLabels: angleA ? { A: angleA } : undefined,
+    display: { showLabels: true, showSides: true, showAngles: Boolean(angleA) },
+  };
 }
 
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
@@ -46,7 +82,236 @@ function vecteurs(x1: number, y1: number, x2: number, y2: number): CanvasFigure 
 }
 
 export const produitScalaireBank: TutorBankItemV4[] = [
-  /* ===================== PS_COORDONNEES ===================== */
+  /* ===================== PS_PROJECTION ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_ps_proj_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_projection",
+    difficulty: 3,
+    theme: "neutral",
+    text: "$H$ est le projeté orthogonal de $C$ sur la droite $(AB)$. Le produit scalaire $\\vec{AB} \\cdot \\vec{AC}$ est égal à :",
+    format: "qcm",
+    choices: [
+      "$\\vec{AB} \\cdot \\vec{AH}$",
+      "$AB \\times AC$",
+      "$\\vec{AB} \\cdot \\vec{HC}$",
+      "$AH \\times HC$",
+    ],
+    expected: ["$\\vec{AB} \\cdot \\vec{AH}$"],
+    comparator: "mcq_exact",
+    hint: "Seule la part de $\\vec{AC}$ qui va dans la direction de $\\vec{AB}$ compte.",
+    explanation: exp(
+      "Le produit scalaire ne retient d'un vecteur que sa part dans la direction de l'autre : cette part est son projeté orthogonal.",
+      "On projette $C$ en $H$ sur la droite $(AB)$, et on remplace $\\vec{AC}$ par $\\vec{AH}$.",
+      "La partie perdue, $\\vec{HC}$, est orthogonale à $\\vec{AB}$ : son produit scalaire avec $\\vec{AB}$ est nul, elle n'apporte rien.",
+      "$\\vec{AB} \\cdot \\vec{AC} = \\vec{AB} \\cdot \\vec{AH}$ : c'est la définition par projection."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "projection", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_proj_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_projection",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Le projeté $H$ de $C$ tombe du côté OPPOSÉ à $B$ par rapport à $A$. Que peut-on dire de $\\vec{AB} \\cdot \\vec{AC}$ ?",
+    format: "qcm",
+    choices: [
+      "il est négatif",
+      "il est positif",
+      "il est nul",
+      "on ne peut pas le savoir",
+    ],
+    expected: ["il est négatif"],
+    comparator: "mcq_exact",
+    hint: "Les vecteurs $\\vec{AH}$ et $\\vec{AB}$ pointent-ils dans le même sens ?",
+    explanation: exp(
+      "Après projection, tout se joue sur le SENS de $\\vec{AH}$ par rapport à $\\vec{AB}$.",
+      "Si $H$ est du côté opposé à $B$, les vecteurs $\\vec{AH}$ et $\\vec{AB}$ sont colinéaires de sens contraire.",
+      "Le produit de deux vecteurs colinéaires de sens contraire vaut $-AH \\times AB$ : il est négatif. C'est le cas où l'angle $\\widehat{BAC}$ est obtus.",
+      "Le produit scalaire est négatif."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "projection", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_proj_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_projection",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Le projeté orthogonal de $C$ sur $(AB)$ est le point $A$ lui-même. Que vaut $\\vec{AB} \\cdot \\vec{AC}$ ?",
+    format: "short",
+    expected: ["0"],
+    comparator: "number_equal",
+    hint: "Que vaut le vecteur $\\vec{AH}$ quand $H = A$ ?",
+    explanation: exp(
+      "Le produit scalaire par projection vaut $\\vec{AB} \\cdot \\vec{AH}$, où $H$ est le projeté de $C$.",
+      "Si $H = A$, alors $\\vec{AH} = \\vec{0}$.",
+      "Le produit scalaire est donc nul. Géométriquement, cela veut dire que $(AC)$ est perpendiculaire à $(AB)$ : le cas de projection nulle est exactement le cas orthogonal.",
+      "$\\vec{AB} \\cdot \\vec{AC} = 0$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "projection", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_proj_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_projection",
+    difficulty: 5,
+    theme: "reunion",
+    text: "Sur la plage de l'Ermitage, on tire une pirogue avec une corde qui fait un angle de $60°$ avec la direction du déplacement. La force exercée vaut $200$ N. Quelle part de cette force fait vraiment avancer la pirogue (avec $\\cos 60° = 0{,}5$) ?",
+    format: "qcm",
+    choices: ["$100$ N", "$200$ N", "$173$ N", "$60$ N"],
+    expected: ["$100$ N"],
+    comparator: "mcq_exact",
+    hint: "C'est la longueur du projeté de la force sur la direction du déplacement.",
+    explanation: exp(
+      "Seule la part de la force dirigée dans le sens du déplacement fait avancer : c'est son projeté orthogonal sur cette direction.",
+      "Cette part vaut $\\|\\vec{F}\\| \\times \\cos(\\theta)$, où $\\theta$ est l'angle entre la corde et le déplacement.",
+      "$200 \\times \\cos 60° = 200 \\times 0{,}5 = 100$ N. Le reste, $173$ N, tire vers le haut et ne sert qu'à soulever la pirogue.",
+      "$100$ N seulement font avancer — c'est pour cela qu'on tire une pirogue le plus à plat possible."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "projection", "reunion", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_proj_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_projection",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi on peut remplacer un vecteur par son projeté orthogonal sans changer le produit scalaire.",
+    format: "open",
+    expected: ["orthogonal", "nul", "perpendiculaire", "n'apporte rien", "partie perdue"],
+    comparator: "contains_keyword",
+    hint: "Décompose $\\vec{AC}$ en $\\vec{AH} + \\vec{HC}$ : que vaut $\\vec{AB} \\cdot \\vec{HC}$ ?",
+    explanation: exp(
+      "Le produit scalaire est distributif : on peut découper un vecteur en une somme et calculer terme à terme.",
+      "On écrit $\\vec{AC} = \\vec{AH} + \\vec{HC}$, où $H$ est le projeté de $C$ sur $(AB)$.",
+      "Alors $\\vec{AB} \\cdot \\vec{AC} = \\vec{AB} \\cdot \\vec{AH} + \\vec{AB} \\cdot \\vec{HC}$. Or $\\vec{HC}$ est perpendiculaire à $\\vec{AB}$ par construction : ce second terme est nul.",
+      "La partie perpendiculaire n'apporte rien au produit scalaire : seul le projeté compte."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "projection", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_proj_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_projection",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Que signifie un produit scalaire négatif, si on le lit sur la projection ?",
+    format: "open",
+    expected: ["sens contraire", "sens oppose", "sens opposé", "obtus", "cote oppose", "côté opposé"],
+    comparator: "contains_keyword",
+    hint: "De quel côté tombe le projeté ?",
+    explanation: exp(
+      "Après projection, le produit scalaire est le produit de deux longueurs affecté d'un signe : celui du sens relatif des deux vecteurs.",
+      "Le projeté $\\vec{AH}$ est colinéaire à $\\vec{AB}$ : soit de même sens, soit de sens contraire.",
+      "S'il est de sens contraire — c'est-à-dire si $H$ tombe du côté opposé à $B$ — le produit est négatif. C'est exactement le cas où l'angle entre les deux vecteurs est obtus.",
+      "Un produit scalaire négatif veut dire que les deux vecteurs « vont dans des directions opposées » : l'angle est obtus."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "projection", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_proj_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_projection",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Angle aigu → positif ; angle droit → nul ; angle obtus → négatif.",
+    tags: ["premiere", "maths", "produit_scalaire", "projection", "template"],
+    generate: () => {
+      const cas = [
+        { deg: 30, signe: "positif", nature: "aigu" },
+        { deg: 45, signe: "positif", nature: "aigu" },
+        { deg: 80, signe: "positif", nature: "aigu" },
+        { deg: 90, signe: "nul", nature: "droit" },
+        { deg: 110, signe: "négatif", nature: "obtus" },
+        { deg: 150, signe: "négatif", nature: "obtus" },
+        { deg: 180, signe: "négatif", nature: "plat" },
+      ];
+      const c = pickOne(cas);
+      const correct = c.signe;
+      const autres = ["positif", "nul", "négatif"].filter((s) => s !== correct);
+      return {
+        text: `Deux vecteurs non nuls forment un angle de $${c.deg}°$. Leur produit scalaire est :`,
+        format: "qcm",
+        choices: [correct, ...autres, "impossible à déterminer"],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le signe du produit scalaire est celui du cosinus de l'angle : il se lit sur la position du projeté.",
+          `Ici l'angle vaut $${c.deg}°$, il est donc ${c.nature}.`,
+          c.signe === "nul"
+            ? "Le projeté se réduit à un point : le produit scalaire s'annule."
+            : c.signe === "positif"
+              ? "Le projeté tombe du même côté que l'autre vecteur : les deux vont dans le même sens."
+              : "Le projeté tombe du côté opposé : les deux vecteurs vont dans des sens contraires.",
+          `Le produit scalaire est ${correct}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_proj_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_projection",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Projette le second vecteur sur la direction du premier, puis regarde le sens obtenu.",
+    tags: ["premiere", "maths", "produit_scalaire", "projection", "open", "template"],
+    generate: () => {
+      const cas = [
+        { nu: 4, nv: 5, deg: 60, cos: "0{,}5", res: "10", signe: "positif" },
+        { nu: 3, nv: 6, deg: 120, cos: "-0{,}5", res: "-9", signe: "négatif" },
+        { nu: 5, nv: 2, deg: 90, cos: "0", res: "0", signe: "nul" },
+        { nu: 6, nv: 4, deg: 180, cos: "-1", res: "-24", signe: "négatif" },
+        { nu: 7, nv: 3, deg: 0, cos: "1", res: "21", signe: "positif" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Deux vecteurs de normes $${c.nu}$ et $${c.nv}$ forment un angle de $${c.deg}°$. Calcule leur produit scalaire, puis explique ce que ce signe dit de la projection.`,
+        format: "open",
+        expected: [c.res, c.signe === "négatif" ? "sens contraire" : c.signe === "nul" ? "orthogonaux" : "meme sens", "projete", "projeté", "meme sens", "même sens"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Le produit scalaire vaut $\\|\\vec{u}\\| \\times \\|\\vec{v}\\| \\times \\cos\\theta$, et son signe est celui du cosinus.",
+          `Ici $${c.nu} \\times ${c.nv} \\times \\cos ${c.deg}° = ${c.nu} \\times ${c.nv} \\times ${c.cos}$.`,
+          `On obtient $${c.res}$. ` +
+            (c.signe === "nul"
+              ? "Le projeté du second vecteur sur le premier se réduit à l'origine : les vecteurs sont orthogonaux."
+              : c.signe === "positif"
+                ? "Le projeté tombe dans le même sens que le premier vecteur."
+                : "Le projeté tombe dans le sens contraire du premier vecteur."),
+          `$\\vec{u} \\cdot \\vec{v} = ${c.res}$, un produit ${c.signe}.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== PS_COORDONNEES (et les items de PS_NORME) ===================== */
   {
     kind: "fixed",
     id: "premiere_ps_coord_fixed_1",
@@ -122,7 +387,7 @@ export const produitScalaireBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "produit_scalaire",
-    microId: "ps_coordonnees",
+    microId: "ps_norme",
     difficulty: 2,
     theme: "neutral",
     text: "La norme d'un vecteur $\\vec{u}(x ; y)$ vaut :",
@@ -145,7 +410,7 @@ export const produitScalaireBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "produit_scalaire",
-    microId: "ps_coordonnees",
+    microId: "ps_norme",
     difficulty: 3,
     theme: "neutral",
     text: "Calcule la norme de $\\vec{u}(3 ; 4)$.",
@@ -211,7 +476,7 @@ export const produitScalaireBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "produit_scalaire",
-    microId: "ps_coordonnees",
+    microId: "ps_norme",
     difficulty: 4,
     theme: "neutral",
     text: "Calcule la norme de $\\vec{u}(-5 ; 12)$.",
@@ -233,7 +498,7 @@ export const produitScalaireBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "produit_scalaire",
-    microId: "ps_coordonnees",
+    microId: "ps_norme",
     difficulty: 4,
     theme: "neutral",
     text: "Quelle est la norme de $\\vec{u}(1 ; 1)$ ?",
@@ -256,7 +521,7 @@ export const produitScalaireBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "produit_scalaire",
-    microId: "ps_coordonnees",
+    microId: "ps_proprietes",
     difficulty: 5,
     theme: "neutral",
     text: "À quoi est égal $\\vec{u} \\cdot \\vec{u}$ ?",
@@ -337,7 +602,7 @@ export const produitScalaireBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "produit_scalaire",
-    microId: "ps_coordonnees",
+    microId: "ps_norme",
     difficulty: 3,
     theme: "neutral",
     hint: "$\\sqrt{x^2 + y^2}$ (pense aux triplets pythagoriciens).",
@@ -649,6 +914,616 @@ export const produitScalaireBank: TutorBankItemV4[] = [
           `$${nu} \\times ${nv} \\times \\cos(${data.deg}) = ${nu * nv} \\times ${data.cosTxt}$.`,
           `$= ${ps}$.`,
           `$\\vec{u} \\cdot \\vec{v} = ${String(ps).replace(".", "{,}")}$.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== PS_NORME (compléments) ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_ps_norme_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "La norme d'un vecteur peut-elle être négative ?",
+    format: "qcm",
+    choices: [
+      "non : c'est une longueur, elle est toujours positive ou nulle",
+      "oui, si les deux coordonnées sont négatives",
+      "oui, si une seule coordonnée est négative",
+      "oui, si le vecteur pointe vers la gauche",
+    ],
+    expected: ["non : c'est une longueur, elle est toujours positive ou nulle"],
+    comparator: "mcq_exact",
+    hint: "Regarde la formule : que fait le carré aux signes ?",
+    explanation: exp(
+      "La norme d'un vecteur est la longueur du segment qui le représente.",
+      "La formule $\\|\\vec{u}\\| = \\sqrt{x^2 + y^2}$ élève d'abord au carré : les signes disparaissent.",
+      "Une racine carrée est de plus toujours positive. Par exemple $\\vec{u}(-3 ; -4)$ a pour norme $\\sqrt{9 + 16} = 5$, et non $-5$.",
+      "Non : une norme est toujours positive ou nulle."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "norme", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_norme_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Dans quel cas a-t-on $\\|\\vec{u}\\| = 0$ ?",
+    format: "qcm",
+    choices: [
+      "seulement si $\\vec{u} = \\vec{0}$",
+      "dès qu'une coordonnée est nulle",
+      "si les deux coordonnées sont opposées",
+      "jamais",
+    ],
+    expected: ["seulement si $\\vec{u} = \\vec{0}$"],
+    comparator: "mcq_exact",
+    hint: "Une somme de deux carrés peut-elle être nulle sans que les deux soient nuls ?",
+    explanation: exp(
+      "La norme est nulle quand la longueur du vecteur est nulle, c'est-à-dire quand ses deux extrémités sont confondues.",
+      "$\\sqrt{x^2 + y^2} = 0$ équivaut à $x^2 + y^2 = 0$.",
+      "Une somme de deux carrés est nulle seulement si les deux carrés le sont : $x = 0$ ET $y = 0$. Une seule coordonnée nulle ne suffit pas — $\\vec{u}(0 ; 3)$ a pour norme $3$.",
+      "Seulement pour le vecteur nul."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "norme", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_norme_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi la formule de la norme est, au fond, le théorème de Pythagore.",
+    format: "open",
+    expected: ["pythagore", "triangle rectangle", "hypotenuse", "hypoténuse", "cotes", "côtés"],
+    comparator: "contains_keyword",
+    hint: "Trace le vecteur dans le repère, puis le rectangle qui l'entoure.",
+    explanation: exp(
+      "Un vecteur $\\vec{u}(x ; y)$ se lit comme un déplacement de $x$ horizontalement puis de $y$ verticalement.",
+      "Ces deux déplacements forment les côtés de l'angle droit d'un triangle rectangle, dont le vecteur lui-même est l'hypoténuse.",
+      "Pythagore donne alors $\\|\\vec{u}\\|^2 = x^2 + y^2$, d'où $\\|\\vec{u}\\| = \\sqrt{x^2 + y^2}$.",
+      "La formule n'est rien d'autre que Pythagore, écrit avec les coordonnées."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "norme", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_norme_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève calcule la norme de $\\vec{u}(3 ; 4)$ et trouve $7$. Explique son erreur.",
+    format: "open",
+    expected: ["additionne", "ajoute", "carre", "carré", "pythagore", "racine"],
+    comparator: "contains_keyword",
+    hint: "Qu'a-t-il fait des coordonnées, et qu'aurait-il fallu en faire ?",
+    explanation: exp(
+      "La norme n'est pas la somme des coordonnées : c'est la longueur d'un chemin en diagonale, pas d'un chemin en deux temps.",
+      "L'élève a calculé $3 + 4 = 7$, c'est-à-dire la distance parcourue en allant d'abord horizontalement puis verticalement.",
+      "La vraie norme est $\\sqrt{3^2 + 4^2} = 5$ : la diagonale est toujours PLUS COURTE que le détour par l'angle. Un contrôle rapide : la norme est toujours inférieure à la somme des valeurs absolues des coordonnées.",
+      "Il a additionné au lieu d'appliquer Pythagore : $\\|\\vec{u}\\| = 5$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "norme", "piege", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_norme_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule la norme, puis compare-la à la somme des valeurs absolues des coordonnées.",
+    tags: ["premiere", "maths", "produit_scalaire", "norme", "open", "template"],
+    generate: () => {
+      const cas = [
+        { x: 3, y: 4, n: "5", somme: "7" },
+        { x: -6, y: 8, n: "10", somme: "14" },
+        { x: 5, y: -12, n: "13", somme: "17" },
+        { x: 8, y: 15, n: "17", somme: "23" },
+        { x: -9, y: -12, n: "15", somme: "21" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Calcule la norme de $\\vec{u}(${c.x} ; ${c.y})$, puis explique pourquoi elle est plus petite que $|${c.x}| + |${c.y}|$.`,
+        format: "open",
+        expected: [c.n, "diagonale", "pythagore", "plus court", "detour", "détour"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "La norme est la longueur du trajet direct ; la somme des valeurs absolues est celle du trajet en deux temps, horizontal puis vertical.",
+          `On applique $\\|\\vec{u}\\| = \\sqrt{x^2 + y^2}$ avec $x = ${c.x}$ et $y = ${c.y}$.`,
+          `$\\sqrt{${c.x * c.x} + ${c.y * c.y}} = ${c.n}$, alors que le trajet en deux temps mesurerait $${c.somme}$.`,
+          `$\\|\\vec{u}\\| = ${c.n}$ : la diagonale coupe, elle est toujours plus courte que le détour.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== PS_PROPRIETES ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_ps_prop_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_proprietes",
+    difficulty: 2,
+    theme: "neutral",
+    text: "A-t-on toujours $\\vec{u} \\cdot \\vec{v} = \\vec{v} \\cdot \\vec{u}$ ?",
+    format: "qcm",
+    choices: [
+      "oui : le produit scalaire est symétrique",
+      "non, l'ordre compte",
+      "oui, seulement si les vecteurs ont la même norme",
+      "oui, seulement s'ils sont orthogonaux",
+    ],
+    expected: ["oui : le produit scalaire est symétrique"],
+    comparator: "mcq_exact",
+    hint: "Regarde la formule avec les coordonnées : $xx' + yy'$.",
+    explanation: exp(
+      "Le produit scalaire est symétrique : échanger les deux vecteurs ne change pas le résultat.",
+      "Avec les coordonnées : $\\vec{u} \\cdot \\vec{v} = xx' + yy'$ et $\\vec{v} \\cdot \\vec{u} = x'x + y'y$.",
+      "C'est la même chose, puisque la multiplication des nombres est commutative. Avec l'angle, c'est encore plus visible : l'angle entre $\\vec{u}$ et $\\vec{v}$ est le même que celui entre $\\vec{v}$ et $\\vec{u}$.",
+      "Oui, toujours : $\\vec{u} \\cdot \\vec{v} = \\vec{v} \\cdot \\vec{u}$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "proprietes", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_prop_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_proprietes",
+    difficulty: 3,
+    theme: "neutral",
+    text: "À quoi est égal $(3\\vec{u}) \\cdot \\vec{v}$ ?",
+    format: "qcm",
+    choices: [
+      "$3(\\vec{u} \\cdot \\vec{v})$",
+      "$9(\\vec{u} \\cdot \\vec{v})$",
+      "$\\vec{u} \\cdot \\vec{v} + 3$",
+      "$3\\vec{u} \\cdot 3\\vec{v}$",
+    ],
+    expected: ["$3(\\vec{u} \\cdot \\vec{v})$"],
+    comparator: "mcq_exact",
+    hint: "Le facteur sort une seule fois, pas deux.",
+    explanation: exp(
+      "Le produit scalaire est bilinéaire : un facteur devant l'un des vecteurs sort du produit.",
+      "$(k\\vec{u}) \\cdot \\vec{v} = k(\\vec{u} \\cdot \\vec{v})$, ici avec $k = 3$.",
+      "Attention à ne pas le compter deux fois : le $9$ apparaîtrait si on multipliait LES DEUX vecteurs par $3$, car $(3\\vec{u}) \\cdot (3\\vec{v}) = 9(\\vec{u} \\cdot \\vec{v})$.",
+      "$(3\\vec{u}) \\cdot \\vec{v} = 3(\\vec{u} \\cdot \\vec{v})$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "proprietes", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_prop_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_proprietes",
+    difficulty: 3,
+    theme: "neutral",
+    text: "À quoi est égal $\\vec{u} \\cdot (\\vec{v} + \\vec{w})$ ?",
+    format: "qcm",
+    choices: [
+      "$\\vec{u} \\cdot \\vec{v} + \\vec{u} \\cdot \\vec{w}$",
+      "$\\vec{u} \\cdot \\vec{v} \\times \\vec{u} \\cdot \\vec{w}$",
+      "$(\\vec{u} + \\vec{v}) \\cdot \\vec{w}$",
+      "$\\vec{u} \\cdot \\vec{v} + \\vec{w}$",
+    ],
+    expected: ["$\\vec{u} \\cdot \\vec{v} + \\vec{u} \\cdot \\vec{w}$"],
+    comparator: "mcq_exact",
+    hint: "Comme la distributivité de la multiplication sur l'addition.",
+    explanation: exp(
+      "Le produit scalaire se distribue sur l'addition de vecteurs, exactement comme la multiplication sur l'addition de nombres.",
+      "$\\vec{u} \\cdot (\\vec{v} + \\vec{w}) = \\vec{u} \\cdot \\vec{v} + \\vec{u} \\cdot \\vec{w}$.",
+      "C'est cette propriété qui permet de développer $\\|\\vec{u} + \\vec{v}\\|^2$ et de projeter un vecteur en le découpant en deux morceaux.",
+      "$\\vec{u} \\cdot (\\vec{v} + \\vec{w}) = \\vec{u} \\cdot \\vec{v} + \\vec{u} \\cdot \\vec{w}$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "proprietes", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_prop_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_proprietes",
+    difficulty: 5,
+    theme: "neutral",
+    text: "On sait que $\\vec{u} \\cdot \\vec{v} = 0$. Peut-on en conclure que $\\vec{u} = \\vec{0}$ ou $\\vec{v} = \\vec{0}$ ?",
+    format: "qcm",
+    choices: [
+      "non : ils peuvent être non nuls et orthogonaux",
+      "oui, comme pour un produit de nombres",
+      "oui, mais seulement dans le plan",
+      "non : $\\vec{u} \\cdot \\vec{v}$ ne peut jamais être nul",
+    ],
+    expected: ["non : ils peuvent être non nuls et orthogonaux"],
+    comparator: "mcq_exact",
+    hint: "Essaie $\\vec{u}(1 ; 0)$ et $\\vec{v}(0 ; 1)$.",
+    explanation: exp(
+      "Pour les NOMBRES, un produit nul entraîne qu'un des facteurs est nul. Le produit scalaire ne suit pas cette règle.",
+      "Contre-exemple : $\\vec{u}(1 ; 0)$ et $\\vec{v}(0 ; 1)$ donnent $1 \\times 0 + 0 \\times 1 = 0$.",
+      "Aucun des deux n'est nul : ils sont simplement orthogonaux. C'est justement ce qui rend le produit scalaire utile — l'annulation caractérise la perpendicularité, pas la nullité.",
+      "Non : deux vecteurs non nuls orthogonaux ont un produit scalaire nul."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "proprietes", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_prop_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_proprietes",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi l'écriture $(\\vec{u} \\cdot \\vec{v}) \\cdot \\vec{w}$ n'a pas de sens.",
+    format: "open",
+    expected: ["nombre", "scalaire", "pas un vecteur", "reel", "réel"],
+    comparator: "contains_keyword",
+    hint: "Quelle est la nature du résultat d'un produit scalaire ?",
+    explanation: exp(
+      "Le produit scalaire prend deux VECTEURS et rend un NOMBRE — c'est de là que vient son nom : le résultat est un scalaire.",
+      "Dans $(\\vec{u} \\cdot \\vec{v}) \\cdot \\vec{w}$, la première parenthèse vaut donc un nombre.",
+      "On voudrait ensuite faire le produit scalaire d'un nombre et d'un vecteur : l'opération n'est pas définie, elle attend deux vecteurs.",
+      "L'écriture n'a pas de sens : le produit scalaire n'est pas associatif, parce que son résultat n'est pas un vecteur."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "proprietes", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_prop_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_proprietes",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève « simplifie » $\\vec{u} \\cdot \\vec{v} = \\vec{u} \\cdot \\vec{w}$ en $\\vec{v} = \\vec{w}$. Donne un contre-exemple.",
+    format: "open",
+    expected: ["contre-exemple", "contre exemple", "orthogonal", "projete", "projeté", "meme projete", "même projeté"],
+    comparator: "contains_keyword",
+    hint: "Deux vecteurs différents peuvent-ils avoir le même projeté sur $\\vec{u}$ ?",
+    explanation: exp(
+      "On ne peut pas « simplifier par $\\vec{u}$ » : le produit scalaire ne retient d'un vecteur que son projeté sur l'autre.",
+      "Il suffit donc de trouver deux vecteurs différents ayant le même projeté sur $\\vec{u}$.",
+      "Avec $\\vec{u}(1 ; 0)$ : $\\vec{v}(2 ; 5)$ et $\\vec{w}(2 ; -3)$ donnent tous deux $\\vec{u} \\cdot \\vec{v} = \\vec{u} \\cdot \\vec{w} = 2$, alors que $\\vec{v} \\neq \\vec{w}$.",
+      "C'est faux : l'égalité signifie seulement que $\\vec{v} - \\vec{w}$ est orthogonal à $\\vec{u}$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "proprietes", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_prop_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_proprietes",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Sors les coefficients devant, puis remplace $\\vec{u} \\cdot \\vec{v}$ par sa valeur.",
+    tags: ["premiere", "maths", "produit_scalaire", "proprietes", "template"],
+    generate: () => {
+      const p = pickOne([2, 3, 4, 5, -2, -3]);
+      const k = randomInt(2, 5);
+      const m = randomInt(2, 5);
+      const res = k * m * p;
+      const correct = `$${res}$`;
+      return {
+        text: `On sait que $\\vec{u} \\cdot \\vec{v} = ${p}$. Combien vaut $(${k}\\vec{u}) \\cdot (${m}\\vec{v})$ ?`,
+        format: "qcm",
+        choices: [correct, `$${k * p}$`, `$${k + m + p}$`, `$${p}$`],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La bilinéarité permet de sortir un coefficient de chaque côté du produit scalaire.",
+          `$(${k}\\vec{u}) \\cdot (${m}\\vec{v}) = ${k} \\times ${m} \\times (\\vec{u} \\cdot \\vec{v})$.`,
+          `$= ${k * m} \\times ${p} = ${res}$. Les deux coefficients se multiplient : ils ne s'additionnent pas et l'un ne disparaît pas.`,
+          `${correct}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_prop_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_proprietes",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Nomme la propriété utilisée à chaque étape : symétrie, bilinéarité, ou distributivité.",
+    tags: ["premiere", "maths", "produit_scalaire", "proprietes", "open", "template"],
+    generate: () => {
+      const cas = [
+        {
+          e: "\\vec{u} \\cdot (\\vec{v} + \\vec{u})",
+          r: "\\vec{u} \\cdot \\vec{v} + \\|\\vec{u}\\|^2",
+          mots: ["distributiv", "carre scalaire", "carré scalaire", "norme au carre", "norme au carré"],
+        },
+        {
+          e: "(2\\vec{u}) \\cdot (\\vec{v} + \\vec{w})",
+          r: "2\\,\\vec{u} \\cdot \\vec{v} + 2\\,\\vec{u} \\cdot \\vec{w}",
+          mots: ["distributiv", "bilinear", "bilinéar", "coefficient"],
+        },
+        {
+          e: "(\\vec{u} + \\vec{v}) \\cdot (\\vec{u} - \\vec{v})",
+          r: "\\|\\vec{u}\\|^2 - \\|\\vec{v}\\|^2",
+          mots: ["identite remarquable", "identité remarquable", "symetrie", "symétrie", "norme au carre", "norme au carré"],
+        },
+        {
+          e: "\\vec{v} \\cdot (3\\vec{u})",
+          r: "3\\,\\vec{u} \\cdot \\vec{v}",
+          mots: ["symetrie", "symétrie", "coefficient", "bilinear", "bilinéar"],
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Développe $${c.e}$ le plus loin possible, en nommant les propriétés que tu utilises.`,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Trois propriétés servent à développer : la symétrie ($\\vec{u} \\cdot \\vec{v} = \\vec{v} \\cdot \\vec{u}$), la bilinéarité (les coefficients sortent) et la distributivité sur l'addition.",
+          "On développe comme avec des nombres, en gardant en tête que $\\vec{u} \\cdot \\vec{u} = \\|\\vec{u}\\|^2$.",
+          "Les identités remarquables du collège restent valables : le produit scalaire se comporte comme une multiplication, à ceci près que son résultat est un nombre.",
+          `$${c.e} = ${c.r}$.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== PS_NORME_SOMME ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_ps_ns_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme_somme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "À quoi est égal $\\|\\vec{u} + \\vec{v}\\|^2$ ?",
+    format: "qcm",
+    choices: [
+      "$\\|\\vec{u}\\|^2 + 2\\,\\vec{u} \\cdot \\vec{v} + \\|\\vec{v}\\|^2$",
+      "$\\|\\vec{u}\\|^2 + \\|\\vec{v}\\|^2$",
+      "$\\|\\vec{u}\\|^2 + \\|\\vec{v}\\|^2 - 2\\,\\vec{u} \\cdot \\vec{v}$",
+      "$(\\|\\vec{u}\\| + \\|\\vec{v}\\|)^2$",
+    ],
+    expected: ["$\\|\\vec{u}\\|^2 + 2\\,\\vec{u} \\cdot \\vec{v} + \\|\\vec{v}\\|^2$"],
+    comparator: "mcq_exact",
+    hint: "C'est l'identité $(a + b)^2 = a^2 + 2ab + b^2$, transposée aux vecteurs.",
+    explanation: exp(
+      "On développe le carré scalaire : $\\|\\vec{u} + \\vec{v}\\|^2 = (\\vec{u} + \\vec{v}) \\cdot (\\vec{u} + \\vec{v})$.",
+      "La distributivité donne $\\vec{u} \\cdot \\vec{u} + \\vec{u} \\cdot \\vec{v} + \\vec{v} \\cdot \\vec{u} + \\vec{v} \\cdot \\vec{v}$.",
+      "Les deux termes du milieu sont égaux par symétrie, et $\\vec{u} \\cdot \\vec{u} = \\|\\vec{u}\\|^2$.",
+      "$\\|\\vec{u} + \\vec{v}\\|^2 = \\|\\vec{u}\\|^2 + 2\\,\\vec{u} \\cdot \\vec{v} + \\|\\vec{v}\\|^2$ — l'identité remarquable du collège, mot pour mot."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "norme_somme", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_ns_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme_somme",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Si $\\vec{u}$ et $\\vec{v}$ sont ORTHOGONAUX, que devient $\\|\\vec{u} + \\vec{v}\\|^2$ ?",
+    format: "qcm",
+    choices: [
+      "$\\|\\vec{u}\\|^2 + \\|\\vec{v}\\|^2$ : c'est le théorème de Pythagore",
+      "$0$",
+      "$2\\,\\vec{u} \\cdot \\vec{v}$",
+      "$(\\|\\vec{u}\\| + \\|\\vec{v}\\|)^2$",
+    ],
+    expected: ["$\\|\\vec{u}\\|^2 + \\|\\vec{v}\\|^2$ : c'est le théorème de Pythagore"],
+    comparator: "mcq_exact",
+    hint: "Que vaut le double produit quand les vecteurs sont orthogonaux ?",
+    explanation: exp(
+      "Le développement fait apparaître un double produit $2\\,\\vec{u} \\cdot \\vec{v}$.",
+      "Deux vecteurs orthogonaux ont un produit scalaire nul : ce terme disparaît.",
+      "Il reste $\\|\\vec{u} + \\vec{v}\\|^2 = \\|\\vec{u}\\|^2 + \\|\\vec{v}\\|^2$ — c'est exactement Pythagore, écrit avec des vecteurs.",
+      "On retrouve le théorème de Pythagore : le double produit s'annule."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "norme_somme", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_ns_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme_somme",
+    difficulty: 4,
+    theme: "neutral",
+    text: "A-t-on toujours $\\|\\vec{u} + \\vec{v}\\| = \\|\\vec{u}\\| + \\|\\vec{v}\\|$ ?",
+    format: "qcm",
+    choices: [
+      "non : il y a égalité seulement si les vecteurs sont de même sens",
+      "oui, toujours",
+      "non : c'est toujours strictement plus petit",
+      "oui, si les vecteurs sont orthogonaux",
+    ],
+    expected: ["non : il y a égalité seulement si les vecteurs sont de même sens"],
+    comparator: "mcq_exact",
+    hint: "Prends $\\vec{u}(1 ; 0)$ et $\\vec{v}(0 ; 1)$ : compare $\\sqrt{2}$ et $2$.",
+    explanation: exp(
+      "La norme d'une somme n'est pas la somme des normes : additionner deux vecteurs, c'est les mettre bout à bout, et le chemin direct est plus court que le détour.",
+      "Contre-exemple : $\\vec{u}(1 ; 0)$ et $\\vec{v}(0 ; 1)$ donnent $\\|\\vec{u} + \\vec{v}\\| = \\sqrt{2} \\approx 1{,}41$, alors que $\\|\\vec{u}\\| + \\|\\vec{v}\\| = 2$.",
+      "On a toujours $\\|\\vec{u} + \\vec{v}\\| \\leqslant \\|\\vec{u}\\| + \\|\\vec{v}\\|$ (l'inégalité triangulaire), avec égalité seulement quand les deux vecteurs pointent dans le même sens.",
+      "Non : l'égalité n'a lieu que pour deux vecteurs de même sens."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "norme_somme", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_ns_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme_somme",
+    difficulty: 5,
+    theme: "neutral",
+    text: "En partant du développement de $\\|\\vec{u} + \\vec{v}\\|^2$, à quoi est égal $\\vec{u} \\cdot \\vec{v}$ ?",
+    format: "qcm",
+    choices: [
+      "$\\dfrac{1}{2}\\left(\\|\\vec{u} + \\vec{v}\\|^2 - \\|\\vec{u}\\|^2 - \\|\\vec{v}\\|^2\\right)$",
+      "$\\|\\vec{u} + \\vec{v}\\|^2 - \\|\\vec{u}\\|^2 - \\|\\vec{v}\\|^2$",
+      "$\\dfrac{1}{2}\\left(\\|\\vec{u}\\|^2 + \\|\\vec{v}\\|^2\\right)$",
+      "$\\|\\vec{u} + \\vec{v}\\|^2$",
+    ],
+    expected: [
+      "$\\dfrac{1}{2}\\left(\\|\\vec{u} + \\vec{v}\\|^2 - \\|\\vec{u}\\|^2 - \\|\\vec{v}\\|^2\\right)$",
+    ],
+    comparator: "mcq_exact",
+    hint: "Isole le double produit, puis divise par $2$.",
+    explanation: exp(
+      "Le développement donne $\\|\\vec{u} + \\vec{v}\\|^2 = \\|\\vec{u}\\|^2 + 2\\,\\vec{u} \\cdot \\vec{v} + \\|\\vec{v}\\|^2$.",
+      "On isole le double produit en passant les deux normes de l'autre côté.",
+      "$2\\,\\vec{u} \\cdot \\vec{v} = \\|\\vec{u} + \\vec{v}\\|^2 - \\|\\vec{u}\\|^2 - \\|\\vec{v}\\|^2$, puis on divise par $2$.",
+      "C'est très utile : le produit scalaire se calcule alors avec TROIS longueurs, sans aucun angle ni coordonnée."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "norme_somme", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_ns_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme_somme",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Démontre que $\\|\\vec{u} + \\vec{v}\\|^2 = \\|\\vec{u}\\|^2 + 2\\,\\vec{u} \\cdot \\vec{v} + \\|\\vec{v}\\|^2$.",
+    format: "open",
+    expected: ["carre scalaire", "carré scalaire", "distributiv", "symetrie", "symétrie", "developpe", "développe"],
+    comparator: "contains_keyword",
+    hint: "Écris la norme au carré comme un produit scalaire du vecteur par lui-même.",
+    explanation: exp(
+      "Une norme au carré est un produit scalaire : $\\|\\vec{w}\\|^2 = \\vec{w} \\cdot \\vec{w}$. C'est le point de départ.",
+      "On pose $\\vec{w} = \\vec{u} + \\vec{v}$, donc $\\|\\vec{u} + \\vec{v}\\|^2 = (\\vec{u} + \\vec{v}) \\cdot (\\vec{u} + \\vec{v})$.",
+      "On développe par distributivité : $\\vec{u} \\cdot \\vec{u} + \\vec{u} \\cdot \\vec{v} + \\vec{v} \\cdot \\vec{u} + \\vec{v} \\cdot \\vec{v}$. Les deux termes du milieu sont égaux par symétrie, ce qui donne le double produit.",
+      "D'où $\\|\\vec{u} + \\vec{v}\\|^2 = \\|\\vec{u}\\|^2 + 2\\,\\vec{u} \\cdot \\vec{v} + \\|\\vec{v}\\|^2$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "norme_somme", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_ns_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme_somme",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi le théorème de Pythagore n'est qu'un cas particulier du développement de $\\|\\vec{u} + \\vec{v}\\|^2$.",
+    format: "open",
+    expected: ["double produit", "orthogonaux", "nul", "s'annule", "perpendiculaire"],
+    comparator: "contains_keyword",
+    hint: "Que devient le terme du milieu quand l'angle est droit ?",
+    explanation: exp(
+      "Le développement est valable pour deux vecteurs QUELCONQUES : $\\|\\vec{u} + \\vec{v}\\|^2 = \\|\\vec{u}\\|^2 + 2\\,\\vec{u} \\cdot \\vec{v} + \\|\\vec{v}\\|^2$.",
+      "Le seul terme qui dépend de l'angle entre les deux vecteurs est le double produit $2\\,\\vec{u} \\cdot \\vec{v}$.",
+      "Si l'angle est droit, ce produit scalaire est nul et le terme disparaît : il reste $\\|\\vec{u} + \\vec{v}\\|^2 = \\|\\vec{u}\\|^2 + \\|\\vec{v}\\|^2$, c'est-à-dire Pythagore.",
+      "Pythagore est le cas particulier où le double produit s'annule ; la formule générale vaut pour tous les triangles — c'est d'ailleurs Al-Kashi."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "norme_somme", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_ns_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme_somme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "$\\|\\vec{u} + \\vec{v}\\|^2 = \\|\\vec{u}\\|^2 + 2\\,\\vec{u} \\cdot \\vec{v} + \\|\\vec{v}\\|^2$.",
+    tags: ["premiere", "maths", "produit_scalaire", "norme_somme", "template"],
+    generate: () => {
+      const nu = randomInt(2, 7);
+      const nv = randomInt(2, 7);
+      const ps = pickOne([-6, -3, -2, 0, 2, 3, 5]);
+      const res = nu * nu + 2 * ps + nv * nv;
+      const correct = `$${res}$`;
+      return {
+        text: `On donne $\\|\\vec{u}\\| = ${nu}$, $\\|\\vec{v}\\| = ${nv}$ et $\\vec{u} \\cdot \\vec{v} = ${ps}$. Combien vaut $\\|\\vec{u} + \\vec{v}\\|^2$ ?`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$${nu * nu + nv * nv}$`,
+          `$${nu * nu - 2 * ps + nv * nv}$`,
+          `$${(nu + nv) * (nu + nv)}$`,
+        ],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On développe le carré scalaire : $\\|\\vec{u} + \\vec{v}\\|^2 = \\|\\vec{u}\\|^2 + 2\\,\\vec{u} \\cdot \\vec{v} + \\|\\vec{v}\\|^2$.",
+          `On remplace : $${nu}^2 + 2 \\times ${ps} + ${nv}^2$.`,
+          `$= ${nu * nu} + ${2 * ps} + ${nv * nv} = ${res}$. Oublier le double produit donnerait $${nu * nu + nv * nv}$ — ce n'est juste que si les vecteurs sont orthogonaux.`,
+          `$\\|\\vec{u} + \\vec{v}\\|^2 = ${res}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_ns_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme_somme",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Développe, puis compare le double produit à $0$ : c'est lui qui décide.",
+    tags: ["premiere", "maths", "produit_scalaire", "norme_somme", "open", "template"],
+    generate: () => {
+      const cas = [
+        { ps: 0, cmp: "égale", mots: ["orthogonaux", "pythagore", "nul", "s'annule"] },
+        { ps: 4, cmp: "supérieure", mots: ["positif", "aigu", "double produit", "plus grand"] },
+        { ps: -5, cmp: "inférieure", mots: ["negatif", "négatif", "obtus", "double produit", "plus petit"] },
+        { ps: 7, cmp: "supérieure", mots: ["positif", "aigu", "double produit", "plus grand"] },
+        { ps: -2, cmp: "inférieure", mots: ["negatif", "négatif", "obtus", "double produit", "plus petit"] },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `On sait que $\\vec{u} \\cdot \\vec{v} = ${c.ps}$. La quantité $\\|\\vec{u} + \\vec{v}\\|^2$ est-elle inférieure, égale ou supérieure à $\\|\\vec{u}\\|^2 + \\|\\vec{v}\\|^2$ ? Justifie.`,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Le développement donne $\\|\\vec{u} + \\vec{v}\\|^2 = \\|\\vec{u}\\|^2 + \\|\\vec{v}\\|^2 + 2\\,\\vec{u} \\cdot \\vec{v}$ : l'écart entre les deux quantités est exactement le double produit.",
+          `Ici $\\vec{u} \\cdot \\vec{v} = ${c.ps}$, donc le double produit vaut $${2 * c.ps}$.`,
+          c.ps === 0
+            ? "Il est nul : les deux vecteurs sont orthogonaux, et les deux quantités sont égales. C'est le cas de Pythagore."
+            : c.ps > 0
+              ? "Il est positif : l'angle entre les vecteurs est aigu, la somme est « plus longue » que ne le voudrait Pythagore."
+              : "Il est négatif : l'angle est obtus, la somme est « plus courte » que ne le voudrait Pythagore.",
+          `$\\|\\vec{u} + \\vec{v}\\|^2$ est ${c.cmp} à $\\|\\vec{u}\\|^2 + \\|\\vec{v}\\|^2$.`
         ),
       };
     },
@@ -1120,7 +1995,7 @@ export const produitScalaireBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "produit_scalaire",
-    microId: "ps_alkashi",
+    microId: "ps_angle_longueur",
     difficulty: 5,
     theme: "neutral",
     text: "Dans un triangle, $a = 7$, $b = 5$ et $c = 8$. Combien vaut $\\cos \\widehat{A}$ ?",
@@ -1143,7 +2018,7 @@ export const produitScalaireBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "produit_scalaire",
-    microId: "ps_alkashi",
+    microId: "ps_methode",
     difficulty: 3,
     theme: "neutral",
     text: "Dans quel cas la formule d'Al-Kashi est-elle utile ?",
@@ -1264,6 +2139,701 @@ export const produitScalaireBank: TutorBankItemV4[] = [
           `$a^2 = ${b}^2 + ${c}^2 - 2 \\times ${b} \\times ${c} \\times 0{,}5 = ${b * b} + ${c * c} - ${b * c}$.`,
           `$= ${a2}$.`,
           `$a^2 = ${a2}$.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== PS_ANGLE_LONGUEUR ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_ps_al_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_angle_longueur",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Comment calcule-t-on le cosinus de l'angle $\\theta$ entre deux vecteurs non nuls ?",
+    format: "qcm",
+    choices: [
+      "$\\cos\\theta = \\dfrac{\\vec{u} \\cdot \\vec{v}}{\\|\\vec{u}\\| \\times \\|\\vec{v}\\|}$",
+      "$\\cos\\theta = \\vec{u} \\cdot \\vec{v}$",
+      "$\\cos\\theta = \\dfrac{\\|\\vec{u}\\| \\times \\|\\vec{v}\\|}{\\vec{u} \\cdot \\vec{v}}$",
+      "$\\cos\\theta = \\|\\vec{u}\\| \\times \\|\\vec{v}\\| - \\vec{u} \\cdot \\vec{v}$",
+    ],
+    expected: ["$\\cos\\theta = \\dfrac{\\vec{u} \\cdot \\vec{v}}{\\|\\vec{u}\\| \\times \\|\\vec{v}\\|}$"],
+    comparator: "mcq_exact",
+    hint: "Pars de $\\vec{u} \\cdot \\vec{v} = \\|\\vec{u}\\|\\|\\vec{v}\\|\\cos\\theta$ et isole le cosinus.",
+    explanation: exp(
+      "La formule avec l'angle s'écrit $\\vec{u} \\cdot \\vec{v} = \\|\\vec{u}\\| \\times \\|\\vec{v}\\| \\times \\cos\\theta$.",
+      "Pour trouver l'angle, on isole le cosinus en divisant par le produit des normes.",
+      "$\\cos\\theta = \\dfrac{\\vec{u} \\cdot \\vec{v}}{\\|\\vec{u}\\| \\times \\|\\vec{v}\\|}$. On calcule le numérateur avec les coordonnées, puis on lit l'angle à la calculatrice.",
+      "C'est la formule qui permet de trouver un angle à partir de coordonnées, sans rapporteur."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "angle_longueur", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_al_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_angle_longueur",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un élève calcule l'angle entre deux vecteurs et trouve $\\cos\\theta = 1{,}4$. Que doit-il en conclure ?",
+    format: "qcm",
+    choices: [
+      "qu'il s'est trompé : un cosinus est toujours entre $-1$ et $1$",
+      "que l'angle est obtus",
+      "que les vecteurs sont orthogonaux",
+      "que l'angle vaut $140°$",
+    ],
+    expected: ["qu'il s'est trompé : un cosinus est toujours entre $-1$ et $1$"],
+    comparator: "mcq_exact",
+    hint: "Le cosinus est l'abscisse d'un point du cercle de rayon $1$.",
+    explanation: exp(
+      "Le cosinus d'un angle est toujours compris entre $-1$ et $1$ : c'est l'abscisse d'un point du cercle trigonométrique.",
+      "Une valeur de $1{,}4$ est donc impossible : le calcul contient une erreur.",
+      "L'erreur la plus fréquente est d'avoir oublié une racine carrée dans une norme, ou d'avoir divisé par la SOMME des normes au lieu de leur produit. C'est un bon réflexe de contrôle : dès que le cosinus sort de $[-1 ; 1]$, on reprend le calcul.",
+      "Il s'est trompé : aucun angle n'a un cosinus supérieur à $1$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "angle_longueur", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_al_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_angle_longueur",
+    difficulty: 5,
+    theme: "reunion",
+    text: "Deux rues partent du même carrefour à Saint-Denis, dirigées par $\\vec{u}(4 ; 0)$ et $\\vec{v}(3 ; 3)$. Quel angle forment-elles ?",
+    format: "qcm",
+    choices: ["$45°$", "$30°$", "$60°$", "$90°$"],
+    expected: ["$45°$"],
+    comparator: "mcq_exact",
+    hint: "Calcule $\\cos\\theta$, puis reconnais une valeur remarquable.",
+    explanation: exp(
+      "L'angle entre deux directions se calcule par $\\cos\\theta = \\dfrac{\\vec{u} \\cdot \\vec{v}}{\\|\\vec{u}\\| \\times \\|\\vec{v}\\|}$.",
+      "$\\vec{u} \\cdot \\vec{v} = 4 \\times 3 + 0 \\times 3 = 12$. Les normes valent $\\|\\vec{u}\\| = 4$ et $\\|\\vec{v}\\| = \\sqrt{9 + 9} = 3\\sqrt{2}$.",
+      "$\\cos\\theta = \\dfrac{12}{4 \\times 3\\sqrt{2}} = \\dfrac{1}{\\sqrt{2}} = \\dfrac{\\sqrt{2}}{2}$, une valeur remarquable.",
+      "Les deux rues forment un angle de $45°$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "angle_longueur", "reunion", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_al_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_angle_longueur",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Dans un triangle, on calcule $\\cos\\widehat{A}$ et on trouve une valeur NÉGATIVE. Que peut-on dire de l'angle $\\widehat{A}$ ?",
+    format: "qcm",
+    choices: [
+      "il est obtus",
+      "il est aigu",
+      "il est droit",
+      "le triangle n'existe pas",
+    ],
+    expected: ["il est obtus"],
+    comparator: "mcq_exact",
+    hint: "Sur le cercle trigonométrique, où le cosinus devient-il négatif ?",
+    explanation: exp(
+      "Dans un triangle, un angle est compris entre $0°$ et $180°$ : son cosinus décroît de $1$ à $-1$.",
+      "Le cosinus s'annule en $90°$ : il est positif pour un angle aigu, négatif pour un angle obtus.",
+      "Une valeur négative signale donc un angle strictement supérieur à $90°$. C'est un contrôle utile : si la figure semble montrer un angle aigu et que le calcul donne un cosinus négatif, il y a une erreur quelque part.",
+      "L'angle $\\widehat{A}$ est obtus."
+    ),
+    canvas: triangleCote("c", "b", "a", "?"),
+    tags: ["premiere", "maths", "produit_scalaire", "angle_longueur", "canvas", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_al_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_angle_longueur",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique comment le produit scalaire permet de trouver un angle sans rapporteur.",
+    format: "open",
+    expected: ["cos", "coordonnees", "coordonnées", "normes", "divise", "calculatrice"],
+    comparator: "contains_keyword",
+    hint: "Quelles quantités sait-on calculer à partir des coordonnées ?",
+    explanation: exp(
+      "Le produit scalaire relie une information de FORME (l'angle) à des informations de CALCUL (coordonnées et longueurs) : $\\vec{u} \\cdot \\vec{v} = \\|\\vec{u}\\|\\|\\vec{v}\\|\\cos\\theta$.",
+      "À partir des seules coordonnées, on sait calculer le produit scalaire ($xx' + yy'$) et les deux normes ($\\sqrt{x^2 + y^2}$).",
+      "On en déduit $\\cos\\theta$ en divisant, puis l'angle lui-même avec la touche $\\arccos$ de la calculatrice.",
+      "On passe des nombres à l'angle sans jamais mesurer : c'est exactement ce que fait un logiciel de géométrie."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "angle_longueur", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_al_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_angle_longueur",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Deux vecteurs ont un produit scalaire nul. Que peux-tu dire de l'angle qu'ils forment, et pourquoi ?",
+    format: "open",
+    expected: ["90", "droit", "orthogonaux", "perpendiculaire", "cos"],
+    comparator: "contains_keyword",
+    hint: "Dans $\\|\\vec{u}\\|\\|\\vec{v}\\|\\cos\\theta = 0$, quel facteur peut être nul ?",
+    explanation: exp(
+      "Le produit scalaire s'écrit $\\|\\vec{u}\\| \\times \\|\\vec{v}\\| \\times \\cos\\theta$ : c'est un produit de trois facteurs.",
+      "Si les vecteurs sont non nuls, les deux normes sont strictement positives.",
+      "Le seul facteur qui peut annuler le produit est donc $\\cos\\theta$. Or, entre $0°$ et $180°$, le cosinus ne s'annule qu'en $90°$.",
+      "L'angle est droit : les deux vecteurs sont orthogonaux."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "angle_longueur", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_al_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_angle_longueur",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule le produit scalaire et les deux normes, puis divise.",
+    tags: ["premiere", "maths", "produit_scalaire", "angle_longueur", "template"],
+    generate: () => {
+      const cas = [
+        { x1: 1, y1: 0, x2: 1, y2: 1, cos: "\\dfrac{\\sqrt{2}}{2}", deg: "45°" },
+        { x1: 1, y1: 0, x2: 0, y2: 3, cos: "0", deg: "90°" },
+        { x1: 2, y1: 0, x2: -1, y2: 1, cos: "-\\dfrac{\\sqrt{2}}{2}", deg: "135°" },
+        { x1: 3, y1: 0, x2: -2, y2: 0, cos: "-1", deg: "180°" },
+        { x1: 0, y1: 4, x2: 0, y2: 2, cos: "1", deg: "0°" },
+        { x1: 1, y1: 0, x2: -3, y2: -3, cos: "-\\dfrac{\\sqrt{2}}{2}", deg: "135°" },
+      ];
+      const c = pickOne(cas);
+      const faux = ["45°", "90°", "135°", "180°", "0°"].filter((d) => d !== c.deg).slice(0, 3);
+      return {
+        text: `Quel angle forment $\\vec{u}(${c.x1} ; ${c.y1})$ et $\\vec{v}(${c.x2} ; ${c.y2})$ ?`,
+        format: "qcm",
+        choices: [`$${c.deg.replace("°", "")}°$`, ...faux.map((d) => `$${d.replace("°", "")}°$`)],
+        expected: [`$${c.deg.replace("°", "")}°$`],
+        comparator: "mcq_exact",
+        canvas: vecteurs(c.x1, c.y1, c.x2, c.y2),
+        explanation: exp(
+          "L'angle se déduit de $\\cos\\theta = \\dfrac{\\vec{u} \\cdot \\vec{v}}{\\|\\vec{u}\\| \\times \\|\\vec{v}\\|}$.",
+          `On calcule d'abord $\\vec{u} \\cdot \\vec{v} = ${c.x1} \\times ${c.x2} + ${c.y1} \\times ${c.y2} = ${c.x1 * c.x2 + c.y1 * c.y2}$, puis les deux normes.`,
+          `On obtient $\\cos\\theta = ${c.cos}$, une valeur remarquable.`,
+          `L'angle mesure $${c.deg.replace("°", "")}°$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_al_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_angle_longueur",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Le signe du produit scalaire suffit à trancher, sans calculer l'angle.",
+    tags: ["premiere", "maths", "produit_scalaire", "angle_longueur", "open", "template"],
+    generate: () => {
+      const cas = [
+        { x1: 3, y1: 1, x2: 2, y2: 4, ps: 10, nature: "aigu" },
+        { x1: 2, y1: 5, x2: -3, y2: 1, ps: -1, nature: "obtus" },
+        { x1: 4, y1: -2, x2: 1, y2: 2, ps: 0, nature: "droit" },
+        { x1: -1, y1: 3, x2: 2, y2: -5, ps: -17, nature: "obtus" },
+        { x1: 6, y1: 2, x2: 1, y2: 1, ps: 8, nature: "aigu" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Les vecteurs $\\vec{u}(${c.x1} ; ${c.y1})$ et $\\vec{v}(${c.x2} ; ${c.y2})$ forment-ils un angle aigu, droit ou obtus ? Justifie sans calculer l'angle.`,
+        format: "open",
+        expected: [c.nature, "signe", "produit scalaire", c.ps === 0 ? "nul" : c.ps > 0 ? "positif" : "negatif"],
+        comparator: "contains_keyword",
+        canvas: vecteurs(c.x1, c.y1, c.x2, c.y2),
+        explanation: exp(
+          "Le signe du produit scalaire est celui du cosinus de l'angle : positif pour un angle aigu, nul pour un angle droit, négatif pour un angle obtus.",
+          `On calcule $\\vec{u} \\cdot \\vec{v} = ${c.x1} \\times ${c.x2} + ${c.y1} \\times ${c.y2}$.`,
+          `$= ${c.ps}$, un nombre ${c.ps === 0 ? "nul" : c.ps > 0 ? "positif" : "négatif"} : pas besoin des normes, ni de la calculatrice.`,
+          `L'angle est ${c.nature}.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== PS_MA_MB ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_ps_mamb_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_ma_mb",
+    difficulty: 4,
+    theme: "neutral",
+    text: "$A$ et $B$ sont deux points distincts. Quel est l'ensemble des points $M$ tels que $\\vec{MA} \\cdot \\vec{MB} = 0$ ?",
+    format: "qcm",
+    choices: [
+      "le cercle de diamètre $[AB]$",
+      "la médiatrice de $[AB]$",
+      "la droite $(AB)$",
+      "le cercle de centre $A$ passant par $B$",
+    ],
+    expected: ["le cercle de diamètre $[AB]$"],
+    comparator: "mcq_exact",
+    hint: "Que dit-on d'un triangle inscrit dans un demi-cercle ?",
+    explanation: exp(
+      "Un produit scalaire nul signifie que les vecteurs $\\vec{MA}$ et $\\vec{MB}$ sont orthogonaux, c'est-à-dire que l'angle $\\widehat{AMB}$ est droit.",
+      "On cherche donc tous les points d'où l'on « voit » le segment $[AB]$ sous un angle droit.",
+      "C'est une propriété du collège : ces points forment le cercle de diamètre $[AB]$. Les points $A$ et $B$ en font partie, car l'un des deux vecteurs y est nul.",
+      "C'est le cercle de diamètre $[AB]$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "ma_mb", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_mamb_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_ma_mb",
+    difficulty: 5,
+    theme: "neutral",
+    text: "$I$ est le milieu de $[AB]$. À quoi est égal $\\vec{MA} \\cdot \\vec{MB}$ ?",
+    format: "qcm",
+    choices: [
+      "$MI^2 - \\dfrac{AB^2}{4}$",
+      "$MI^2 + \\dfrac{AB^2}{4}$",
+      "$MI^2 - AB^2$",
+      "$MA \\times MB$",
+    ],
+    expected: ["$MI^2 - \\dfrac{AB^2}{4}$"],
+    comparator: "mcq_exact",
+    hint: "Écris $\\vec{MA} = \\vec{MI} + \\vec{IA}$ et $\\vec{MB} = \\vec{MI} + \\vec{IB}$, en remarquant que $\\vec{IB} = -\\vec{IA}$.",
+    explanation: exp(
+      "Faire apparaître le milieu transforme un produit de deux vecteurs quelconques en une différence de deux carrés.",
+      "On écrit $\\vec{MA} = \\vec{MI} + \\vec{IA}$ et $\\vec{MB} = \\vec{MI} + \\vec{IB} = \\vec{MI} - \\vec{IA}$, puisque $I$ est le milieu.",
+      "Le produit devient $(\\vec{MI} + \\vec{IA}) \\cdot (\\vec{MI} - \\vec{IA}) = MI^2 - IA^2$, par l'identité remarquable. Or $IA = \\dfrac{AB}{2}$.",
+      "$\\vec{MA} \\cdot \\vec{MB} = MI^2 - \\dfrac{AB^2}{4}$ : tout dépend alors de la seule distance $MI$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "ma_mb", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_mamb_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_ma_mb",
+    difficulty: 5,
+    theme: "neutral",
+    text: "$M$ est à l'INTÉRIEUR du cercle de diamètre $[AB]$. Quel est le signe de $\\vec{MA} \\cdot \\vec{MB}$ ?",
+    format: "qcm",
+    choices: [
+      "négatif",
+      "positif",
+      "nul",
+      "on ne peut pas savoir",
+    ],
+    expected: ["négatif"],
+    comparator: "mcq_exact",
+    hint: "Compare $MI$ au rayon $\\dfrac{AB}{2}$.",
+    explanation: exp(
+      "On part de $\\vec{MA} \\cdot \\vec{MB} = MI^2 - \\dfrac{AB^2}{4}$, où $I$ est le milieu de $[AB]$ — c'est-à-dire le centre du cercle.",
+      "Le rayon de ce cercle vaut $\\dfrac{AB}{2}$. Dire que $M$ est à l'intérieur, c'est dire que $MI$ est plus petit que le rayon.",
+      "Alors $MI^2 < \\dfrac{AB^2}{4}$ et la différence est négative. Autrement dit, depuis l'intérieur du cercle, on voit $[AB]$ sous un angle OBTUS.",
+      "Le produit scalaire est négatif."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "ma_mb", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_mamb_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_ma_mb",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Le point $A$ appartient-il à l'ensemble des points $M$ tels que $\\vec{MA} \\cdot \\vec{MB} = 0$ ?",
+    format: "qcm",
+    choices: [
+      "oui : le vecteur $\\vec{AA}$ est nul, donc le produit l'est aussi",
+      "non : l'angle $\\widehat{AMB}$ n'existe pas en $A$",
+      "non : $A$ est le centre du cercle",
+      "oui : $A$ est le milieu de $[AB]$",
+    ],
+    expected: ["oui : le vecteur $\\vec{AA}$ est nul, donc le produit l'est aussi"],
+    comparator: "mcq_exact",
+    hint: "Remplace $M$ par $A$ dans l'écriture $\\vec{MA} \\cdot \\vec{MB}$.",
+    explanation: exp(
+      "Pour tester si un point appartient à un ensemble défini par une égalité, on le remplace dans l'égalité.",
+      "Avec $M = A$ : $\\vec{AA} \\cdot \\vec{AB}$, et $\\vec{AA}$ est le vecteur nul.",
+      "Un produit scalaire dont l'un des vecteurs est nul vaut $0$ : l'égalité est vérifiée, $A$ appartient bien à l'ensemble. De même pour $B$ — ce qui est cohérent, puisque ce sont les extrémités du diamètre.",
+      "Oui, $A$ et $B$ appartiennent au cercle de diamètre $[AB]$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "ma_mb", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_mamb_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_ma_mb",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Démontre que l'ensemble des points $M$ tels que $\\vec{MA} \\cdot \\vec{MB} = 0$ est le cercle de diamètre $[AB]$.",
+    format: "open",
+    expected: ["milieu", "MI", "rayon", "orthogonaux", "angle droit"],
+    comparator: "contains_keyword",
+    hint: "Fais apparaître le milieu $I$ de $[AB]$, puis lis l'égalité obtenue.",
+    explanation: exp(
+      "Un ensemble de points défini par une égalité se reconnaît en ramenant cette égalité à une distance constante depuis un point fixe.",
+      "On introduit $I$, milieu de $[AB]$, et on obtient $\\vec{MA} \\cdot \\vec{MB} = MI^2 - \\dfrac{AB^2}{4}$.",
+      "L'égalité $\\vec{MA} \\cdot \\vec{MB} = 0$ devient alors $MI^2 = \\dfrac{AB^2}{4}$, c'est-à-dire $MI = \\dfrac{AB}{2}$.",
+      "$M$ est donc à distance constante $\\dfrac{AB}{2}$ du point fixe $I$ : c'est le cercle de centre $I$ et de rayon $\\dfrac{AB}{2}$, autrement dit le cercle de diamètre $[AB]$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "ma_mb", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_mamb_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_ma_mb",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique l'intérêt de faire apparaître le milieu $I$ de $[AB]$ dans le calcul de $\\vec{MA} \\cdot \\vec{MB}$.",
+    format: "open",
+    expected: ["opposes", "opposés", "identite remarquable", "identité remarquable", "une seule distance", "MI"],
+    comparator: "contains_keyword",
+    hint: "Que deviennent $\\vec{IA}$ et $\\vec{IB}$ quand $I$ est le milieu ?",
+    explanation: exp(
+      "Le produit $\\vec{MA} \\cdot \\vec{MB}$ fait intervenir deux points mobiles à la fois : difficile d'y reconnaître un ensemble.",
+      "En passant par $I$, on écrit $\\vec{MA} = \\vec{MI} + \\vec{IA}$ et $\\vec{MB} = \\vec{MI} + \\vec{IB}$. Or $I$ est le milieu : $\\vec{IA}$ et $\\vec{IB}$ sont OPPOSÉS.",
+      "Le produit prend la forme $(\\vec{MI} + \\vec{IA}) \\cdot (\\vec{MI} - \\vec{IA})$, une identité remarquable qui donne $MI^2 - IA^2$.",
+      "Tout se ramène à UNE SEULE distance variable, $MI$ : l'ensemble cherché se lit alors immédiatement comme un cercle de centre $I$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "ma_mb", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_mamb_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_ma_mb",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "$\\vec{MA} \\cdot \\vec{MB} = MI^2 - \\dfrac{AB^2}{4}$, avec $I$ milieu de $[AB]$.",
+    tags: ["premiere", "maths", "produit_scalaire", "ma_mb", "template"],
+    generate: () => {
+      const ab = pickOne([4, 6, 8, 10]);
+      const mi = pickOne([1, 2, 3, 5, 7]);
+      const res = mi * mi - (ab * ab) / 4;
+      const correct = `$${res}$`;
+      return {
+        text: `$AB = ${ab}$ et $I$ est le milieu de $[AB]$. Un point $M$ vérifie $MI = ${mi}$. Combien vaut $\\vec{MA} \\cdot \\vec{MB}$ ?`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$${mi * mi + (ab * ab) / 4}$`,
+          `$${mi * mi - ab * ab}$`,
+          `$${mi * mi}$`,
+        ],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "En passant par le milieu $I$, le produit se ramène à une différence de deux carrés : $\\vec{MA} \\cdot \\vec{MB} = MI^2 - \\dfrac{AB^2}{4}$.",
+          `Ici $MI = ${mi}$ et $AB = ${ab}$, donc $\\dfrac{AB^2}{4} = \\dfrac{${ab * ab}}{4} = ${(ab * ab) / 4}$.`,
+          `$${mi * mi} - ${(ab * ab) / 4} = ${res}$. ` +
+            (res < 0
+              ? "Le résultat est négatif : $M$ est à l'intérieur du cercle de diamètre $[AB]$."
+              : res === 0
+                ? "Le résultat est nul : $M$ est sur le cercle de diamètre $[AB]$."
+                : "Le résultat est positif : $M$ est à l'extérieur du cercle de diamètre $[AB]$."),
+          `$\\vec{MA} \\cdot \\vec{MB} = ${res}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_mamb_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_ma_mb",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Ramène l'égalité à une distance $MI$ constante : le centre est le milieu de $[AB]$.",
+    tags: ["premiere", "maths", "produit_scalaire", "ma_mb", "open", "template"],
+    generate: () => {
+      const ab = pickOne([4, 6, 8]);
+      const k = pickOne([0, 5, -3, 9, -4]);
+      const r2 = k + (ab * ab) / 4;
+      return {
+        text: `$AB = ${ab}$. Décris l'ensemble des points $M$ tels que $\\vec{MA} \\cdot \\vec{MB} = ${k}$, et justifie.`,
+        format: "open",
+        expected: ["cercle", "milieu", "MI", "rayon", r2 <= 0 ? "vide" : "centre"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Pour reconnaître un ensemble de points, on ramène l'égalité à « une distance à un point fixe vaut telle valeur ».",
+          `On introduit $I$, milieu de $[AB]$ : l'égalité devient $MI^2 - \\dfrac{${ab * ab}}{4} = ${k}$, soit $MI^2 = ${r2}$.`,
+          r2 > 0
+            ? `Comme $${r2} > 0$, cela donne $MI = \\sqrt{${r2}}$ : une distance constante au point fixe $I$.`
+            : r2 === 0
+              ? "Le carré de la distance vaut $0$ : le seul point possible est $I$ lui-même."
+              : `Comme $${r2} < 0$, aucun point ne convient : un carré ne peut pas être négatif.`,
+          r2 > 0
+            ? `L'ensemble est le cercle de centre $I$ (milieu de $[AB]$) et de rayon $\\sqrt{${r2}}$.`
+            : r2 === 0
+              ? "L'ensemble est réduit au point $I$, milieu de $[AB]$."
+              : "L'ensemble est vide."
+        ),
+      };
+    },
+  },
+
+  /* ===================== PS_METHODE ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_ps_meth_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_methode",
+    difficulty: 3,
+    theme: "neutral",
+    text: "On connaît les coordonnées des deux vecteurs dans un repère orthonormé. Quelle méthode est la plus rapide pour leur produit scalaire ?",
+    format: "qcm",
+    choices: [
+      "la formule $xx' + yy'$",
+      "la formule avec les normes et le cosinus de l'angle",
+      "la projection orthogonale",
+      "la formule d'Al-Kashi",
+    ],
+    expected: ["la formule $xx' + yy'$"],
+    comparator: "mcq_exact",
+    hint: "Quelle formule n'exige aucun calcul intermédiaire ?",
+    explanation: exp(
+      "Il y a quatre façons de calculer un produit scalaire ; la bonne est celle qui utilise directement ce qu'on possède.",
+      "Avec des coordonnées en repère orthonormé, la formule $xx' + yy'$ donne le résultat en deux multiplications et une addition.",
+      "Les autres méthodes demanderaient d'abord de calculer les normes, ou de mesurer un angle : c'est du travail en plus pour le même résultat.",
+      "On utilise $\\vec{u} \\cdot \\vec{v} = xx' + yy'$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "methode", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_meth_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_methode",
+    difficulty: 4,
+    theme: "neutral",
+    text: "On connaît les deux normes et l'angle entre les vecteurs, mais aucune coordonnée. Quelle formule utiliser ?",
+    format: "qcm",
+    choices: [
+      "$\\vec{u} \\cdot \\vec{v} = \\|\\vec{u}\\| \\times \\|\\vec{v}\\| \\times \\cos\\theta$",
+      "$\\vec{u} \\cdot \\vec{v} = xx' + yy'$",
+      "$\\vec{u} \\cdot \\vec{v} = \\|\\vec{u}\\| \\times \\|\\vec{v}\\|$",
+      "$\\vec{u} \\cdot \\vec{v} = \\dfrac{\\|\\vec{u}\\|}{\\|\\vec{v}\\|}$",
+    ],
+    expected: ["$\\vec{u} \\cdot \\vec{v} = \\|\\vec{u}\\| \\times \\|\\vec{v}\\| \\times \\cos\\theta$"],
+    comparator: "mcq_exact",
+    hint: "Utilise exactement les trois données dont tu disposes.",
+    explanation: exp(
+      "On choisit la formule dont toutes les données sont connues, sans en fabriquer d'autres.",
+      "Ici on possède $\\|\\vec{u}\\|$, $\\|\\vec{v}\\|$ et l'angle $\\theta$ : c'est exactement ce qu'attend la formule avec le cosinus.",
+      "Sans repère, la formule $xx' + yy'$ est inutilisable : il n'y a pas de coordonnées. Et oublier le cosinus reviendrait à supposer les vecteurs de même sens.",
+      "$\\vec{u} \\cdot \\vec{v} = \\|\\vec{u}\\| \\times \\|\\vec{v}\\| \\times \\cos\\theta$."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "methode", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_meth_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_methode",
+    difficulty: 5,
+    theme: "neutral",
+    text: "On connaît les trois longueurs d'un triangle $ABC$, et rien d'autre. Comment calculer $\\vec{AB} \\cdot \\vec{AC}$ ?",
+    format: "qcm",
+    choices: [
+      "avec $\\vec{AB} \\cdot \\vec{AC} = \\dfrac{1}{2}\\left(AB^2 + AC^2 - BC^2\\right)$",
+      "avec $xx' + yy'$",
+      "avec $AB \\times AC$",
+      "c'est impossible sans l'angle",
+    ],
+    expected: ["avec $\\vec{AB} \\cdot \\vec{AC} = \\dfrac{1}{2}\\left(AB^2 + AC^2 - BC^2\\right)$"],
+    comparator: "mcq_exact",
+    hint: "Développe $\\|\\vec{AC} - \\vec{AB}\\|^2$, qui vaut $BC^2$.",
+    explanation: exp(
+      "Quand on ne dispose que de longueurs, on passe par le développement d'une norme au carré.",
+      "$\\vec{BC} = \\vec{AC} - \\vec{AB}$, donc $BC^2 = AC^2 - 2\\,\\vec{AB} \\cdot \\vec{AC} + AB^2$.",
+      "On isole le produit scalaire : $\\vec{AB} \\cdot \\vec{AC} = \\dfrac{1}{2}\\left(AB^2 + AC^2 - BC^2\\right)$. C'est la même égalité qu'Al-Kashi, écrite autrement.",
+      "Trois longueurs suffisent : ni angle ni repère ne sont nécessaires."
+    ),
+    canvas: triangleCote("AB", "AC", "BC"),
+    tags: ["premiere", "maths", "produit_scalaire", "methode", "canvas", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_meth_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_methode",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Il existe quatre façons de calculer un produit scalaire. Explique comment tu choisis, avant de te lancer dans les calculs.",
+    format: "open",
+    expected: ["donnees", "données", "coordonnees", "coordonnées", "normes", "angle", "longueurs", "projete", "projeté"],
+    comparator: "contains_keyword",
+    hint: "Pars de ce que l'énoncé DONNE, pas de la formule que tu préfères.",
+    explanation: exp(
+      "Les quatre formules calculent la même chose : $xx' + yy'$, $\\|\\vec{u}\\|\\|\\vec{v}\\|\\cos\\theta$, la projection orthogonale, et le développement avec les trois longueurs.",
+      "On ne choisit pas par habitude, mais en regardant les DONNÉES de l'énoncé.",
+      "Des coordonnées et un repère orthonormé → $xx' + yy'$. Des normes et un angle → le cosinus. Un projeté visible sur la figure → la projection. Trois longueurs → le développement, ou Al-Kashi.",
+      "On lit d'abord ce qu'on possède ; la formule est celle qui n'exige aucun calcul intermédiaire."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "methode", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_meth_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_methode",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève dispose des coordonnées de trois points et calcule les trois longueurs du triangle avant d'appliquer Al-Kashi pour trouver un angle. Que lui conseilles-tu ?",
+    format: "open",
+    expected: ["coordonnees", "coordonnées", "directement", "plus court", "xx'", "racine"],
+    comparator: "contains_keyword",
+    hint: "Que peut-on calculer directement à partir des coordonnées ?",
+    explanation: exp(
+      "Sa méthode donne le bon résultat : elle n'est pas fausse, elle est simplement plus longue que nécessaire.",
+      "Avec les coordonnées, le produit scalaire s'obtient directement par $xx' + yy'$, sans passer par les longueurs des côtés.",
+      "Il lui suffit ensuite des deux normes pour écrire $\\cos\\theta = \\dfrac{\\vec{u} \\cdot \\vec{v}}{\\|\\vec{u}\\|\\|\\vec{v}\\|}$. Il économise trois racines carrées et un carré, et surtout autant d'occasions de se tromper.",
+      "Al-Kashi sert quand on n'a QUE des longueurs ; avec des coordonnées, on va droit au produit scalaire."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "methode", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_meth_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_methode",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Regarde ce que l'énoncé donne, et choisis la formule qui l'utilise sans calcul intermédiaire.",
+    tags: ["premiere", "maths", "produit_scalaire", "methode", "template"],
+    generate: () => {
+      const cas = [
+        {
+          donnees: "les coordonnées des deux vecteurs dans un repère orthonormé",
+          bonne: "$xx' + yy'$",
+        },
+        {
+          donnees: "les deux normes et l'angle entre les vecteurs",
+          bonne: "$\\|\\vec{u}\\| \\times \\|\\vec{v}\\| \\times \\cos\\theta$",
+        },
+        {
+          donnees: "les trois longueurs du triangle, sans repère ni angle",
+          bonne: "$\\dfrac{1}{2}\\left(AB^2 + AC^2 - BC^2\\right)$",
+        },
+        {
+          donnees: "une figure où le projeté orthogonal d'un point est déjà tracé",
+          bonne: "la projection orthogonale",
+        },
+      ];
+      const c = pickOne(cas);
+      const toutes = [
+        "$xx' + yy'$",
+        "$\\|\\vec{u}\\| \\times \\|\\vec{v}\\| \\times \\cos\\theta$",
+        "$\\dfrac{1}{2}\\left(AB^2 + AC^2 - BC^2\\right)$",
+        "la projection orthogonale",
+      ];
+      return {
+        text: `Un exercice donne ${c.donnees}. Quelle méthode choisis-tu pour le produit scalaire ?`,
+        format: "qcm",
+        choices: [c.bonne, ...toutes.filter((m) => m !== c.bonne)],
+        expected: [c.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Les quatre formules donnent le même nombre : on choisit celle qui utilise directement les données de l'énoncé.",
+          `Ici, l'énoncé fournit ${c.donnees}.`,
+          "Les autres méthodes exigeraient de fabriquer d'abord des données manquantes — normes, angle ou coordonnées — donc du calcul en plus, et autant d'occasions d'erreur.",
+          `On utilise ${c.bonne}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_meth_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_methode",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Nomme la méthode, dis quelles données elle utilise, et pourquoi les autres seraient plus longues.",
+    tags: ["premiere", "maths", "produit_scalaire", "methode", "open", "template"],
+    generate: () => {
+      const cas = [
+        {
+          enonce: "$A(1 ; 2)$, $B(4 ; 3)$ et $C(2 ; 6)$ dans un repère orthonormé ; calculer $\\vec{AB} \\cdot \\vec{AC}$",
+          mots: ["coordonnees", "coordonnées", "xx'", "soustrai"],
+          methode: "les coordonnées : on calcule celles de $\\vec{AB}$ et $\\vec{AC}$ par différence, puis $xx' + yy'$",
+        },
+        {
+          enonce: "un parallélogramme dont on connaît les côtés $5$ et $8$ et l'angle de $60°$ ; calculer le produit scalaire des deux côtés",
+          mots: ["normes", "angle", "cos"],
+          methode: "les normes et l'angle : $\\|\\vec{u}\\| \\times \\|\\vec{v}\\| \\times \\cos 60°$",
+        },
+        {
+          enonce: "un triangle $ABC$ avec $AB = 7$, $AC = 5$ et $BC = 6$ ; calculer $\\vec{AB} \\cdot \\vec{AC}$",
+          mots: ["longueurs", "al-kashi", "alkashi", "carres", "carrés"],
+          methode: "les trois longueurs : $\\dfrac{1}{2}(AB^2 + AC^2 - BC^2)$",
+        },
+        {
+          enonce: "un rectangle $ABCD$ où $H$ est le projeté de $C$ sur $(AB)$ ; calculer $\\vec{AB} \\cdot \\vec{AC}$",
+          mots: ["projection", "projete", "projeté"],
+          methode: "la projection : $\\vec{AB} \\cdot \\vec{AC} = \\vec{AB} \\cdot \\vec{AH}$",
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Voici un énoncé : ${c.enonce}. Quelle méthode choisis-tu, et pourquoi celle-là plutôt qu'une autre ?`,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Choisir une méthode, c'est regarder les données avant de regarder les formules.",
+          "On liste ce que l'énoncé fournit, puis on repère la formule qui n'attend rien d'autre.",
+          `Ici, la méthode adaptée est ${c.methode}.`,
+          "Les autres formules demanderaient de fabriquer des données absentes : c'est plus long, et chaque étape en plus est une erreur possible."
         ),
       };
     },
