@@ -1171,7 +1171,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   tags: ["algo_programmation", "generaliser", "motif", "suite", "qcm", "template"],
   generate: () => {
     const r = randomChoice([2, 3, 4]);
-    const b = randomChoice([1, 2, 3]);
+    // Le piège « on a échangé la pente et la valeur de départ » ne veut plus
+    // rien dire quand les deux sont égales : il s'écrit comme la réponse.
+    const b = randomChoice([1, 2, 3].filter((v) => v !== r));
     const correct = `$${r}n + ${b}$`;
 
     return {

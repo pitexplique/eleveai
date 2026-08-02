@@ -295,7 +295,10 @@ export const derivationBank: TutorBankItemV4[] = [
     tags: ["terminale-spe", "derivation", "formules", "puissance", "template"],
     generate: () => {
       const c = randomInt(2, 6);
-      const n = randomInt(2, 5);
+      // Les pièges « on garde le coefficient » et « on ne garde que l'exposant »
+      // sont le même monôme quand le coefficient vaut l'exposant.
+      let n = randomInt(2, 5);
+      while (n === c) n = randomInt(2, 5);
       const correct = `$${monome(c * n, n - 1)}$`;
       const distracteurs = [
         `$${monome(c, n - 1)}$`,
@@ -871,7 +874,9 @@ export const derivationBank: TutorBankItemV4[] = [
     hint: "Avec $u = ax+b$, $(u^3)' = 3u'u^2 = 3a(ax+b)^2$.",
     tags: ["terminale-spe", "derivation", "composee", "template"],
     generate: () => {
-      const a = randomInt(2, 5);
+      // a ne vaut pas 3 : les deux pièges « on oublie $u'$ » et « on oublie le
+      // 3 » s'écriraient alors de la même façon.
+      const a = [2, 4, 5][randomInt(0, 2)];
       const b = randomInt(1, 5);
       const correct = `$${3 * a}(${a}x + ${b})^2$`;
       const distracteurs = [

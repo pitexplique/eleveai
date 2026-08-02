@@ -1283,7 +1283,11 @@ export const vecteursPlanBank: TutorBankItemV4[] = [
     generate: () => {
       const k = randomInt(2, 4);
       const x = randomInt(-4, 4);
-      const y = randomInt(-4, 4);
+      // Deux pièges : « on n'a multiplié que la première coordonnée » et « on a
+      // échangé les deux ». Avec y = 0 le premier tombe sur la réponse, avec
+      // y = x le second.
+      let y = randomInt(-4, 4);
+      while (y === 0 || y === x) y = randomInt(-4, 4);
       const correct = `$(${k * x}\\,;${k * y})$`;
       const choices = [correct, `$(${x + k}\\,;${y + k})$`, `$(${k * x}\\,;${y})$`, `$(${k * y}\\,;${k * x})$`];
       return {

@@ -372,7 +372,10 @@ export const geometrieRepereeBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "geometrie_reperee", "vecteur_normal", "template"],
     generate: () => {
       const a = randomInt(1, 4);
-      const b = randomInt(1, 4);
+      // Un des pièges échange les deux coordonnées du vecteur normal : quand
+      // elles sont égales, il s'écrit comme la bonne équation.
+      let b = randomInt(1, 4);
+      while (b === a) b = randomInt(1, 4);
       const xA = randomInt(1, 4);
       const c = -(a * xA); // point (xA ; 0)
       const correct = `$${a}x ${b >= 0 ? "+ " + b : "- " + -b}y ${c >= 0 ? "+ " + c : "- " + -c} = 0$`;
@@ -681,8 +684,13 @@ export const geometrieRepereeBank: TutorBankItemV4[] = [
     hint: "Centre $(a ; b)$ avec les signes opposés ; $r = \\sqrt{\\text{2nd membre}}$.",
     tags: ["premiere", "maths", "geometrie_reperee", "cercle", "template"],
     generate: () => {
-      const a = randomInt(-4, 4);
-      const b = randomInt(-4, 4);
+      // Les trois pièges sont « on garde les signes de l'équation », « on
+      // échange les coordonnées » et « on change le signe de b ». Il faut donc
+      // que a et b soient non nuls, différents et non opposés — sinon deux des
+      // quatre propositions s'écrivent pareil.
+      const a = randomInt(-4, 4) || 3;
+      let b = randomInt(-4, 4);
+      while (b === 0 || b === a || b === -a) b = randomInt(-4, 4);
       const r = randomInt(2, 6);
       const correct = `$(${a} ; ${b})$`;
       const choices = [correct, `$(${-a} ; ${-b})$`, `$(${b} ; ${a})$`, `$(${a} ; ${-b})$`];

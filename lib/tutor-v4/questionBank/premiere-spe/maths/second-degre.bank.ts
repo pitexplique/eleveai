@@ -658,8 +658,10 @@ export const secondDegreBank: TutorBankItemV4[] = [
     hint: "Cherche deux nombres de somme $-b$ et de produit $c$.",
     tags: ["premiere", "maths", "second_degre", "racines", "template"],
     generate: () => {
-      const p = randomInt(1, 6);
-      const q = randomInt(1, 6);
+      // Les racines partent de 2 : dès que l'une vaut 1, la réponse s'écrit
+      // « $1$ et $pq$ », c'est-à-dire mot pour mot le piège juste en dessous.
+      const p = randomInt(2, 6);
+      const q = randomInt(2, 6);
       const b = -(p + q);
       const c = p * q;
       const correct = `$${Math.min(p, q)}$ et $${Math.max(p, q)}$`;

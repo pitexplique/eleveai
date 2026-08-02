@@ -428,8 +428,13 @@ export const droitesPlanBank: TutorBankItemV4[] = [
     hint: "Pour $y = ax + b$, un vecteur directeur est $(1\\,;a)$.",
     tags: ["seconde", "maths", "droites", "vecteur_directeur", "template"],
     generate: () => {
-      const a = randomInt(-4, 4) || 2;
-      const b = randomInt(-4, 4);
+      // Les pièges sont « on échange les deux coordonnées », « on prend
+      // l'ordonnée à l'origine » et « on met 0 en abscisse ». Avec a = 1 le
+      // premier s'écrit comme la réponse, avec b = a le deuxième.
+      let a = randomInt(-4, 4);
+      while (a === 0 || a === 1) a = randomInt(-4, 4);
+      let b = randomInt(-4, 4);
+      while (b === a) b = randomInt(-4, 4);
       const signe = b >= 0 ? `+ ${b}` : `- ${-b}`;
       const correct = `$\\vec{u}(1\\,;${a})$`;
       const choices = [correct, `$\\vec{u}(${a}\\,;1)$`, `$\\vec{u}(1\\,;${b})$`, `$\\vec{u}(0\\,;${a})$`];
@@ -620,7 +625,12 @@ export const droitesPlanBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "droites", "equation_reduite", "template"],
     generate: () => {
       const a = randomInt(-4, 4) || 2;
-      const b = randomInt(-4, 4);
+      // Les pièges sont « on échange a et b », « on change le signe de b » et
+      // « on change le signe de a ». Avec b = 0 le deuxième piège s'écrit comme
+      // la réponse (+ 0 et - 0 se lisent pareil), avec b = a le premier, avec
+      // b = -a le premier tombe sur le troisième.
+      let b = randomInt(-4, 4);
+      while (b === 0 || b === a || b === -a) b = randomInt(-4, 4);
       const sb = b >= 0 ? `+ ${b}` : `- ${-b}`;
       const correct = `$y = ${a}x ${sb}$`;
       const sb2 = -b >= 0 ? `+ ${-b}` : `- ${b}`;
@@ -655,7 +665,11 @@ export const droitesPlanBank: TutorBankItemV4[] = [
     generate: () => {
       const a = randomInt(1, 4);
       const b = randomInt(-3, 3);
-      const xb = randomInt(2, 4);
+      // Deux pièges portent sur la pente : « on prend l'abscisse de B » et
+      // « on se trompe d'un ». Si xb vaut a, le premier s'écrit comme la
+      // réponse ; s'il vaut a + 1, les deux pièges sont le même.
+      let xb = randomInt(2, 4);
+      while (xb === a || xb === a + 1) xb = randomInt(2, 4);
       const yb = a * xb + b;
       const sb = b >= 0 ? `+ ${b}` : `- ${-b}`;
       const correct = `$y = ${a}x ${sb}$`;

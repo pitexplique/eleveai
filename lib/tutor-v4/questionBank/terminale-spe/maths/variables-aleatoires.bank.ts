@@ -563,8 +563,20 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     hint: "La somme des probabilités vaut $1$.",
     tags: ["terminale-spe", "variable_aleatoire", "loi", "template"],
     generate: () => {
-      const a = randomInt(1, 4);
-      const b = randomInt(1, 4);
+      // Les trois pièges sont $0{,}a$, $0{,}b$ et $0{,}(a+b)$. Tirés au hasard,
+      // l'un d'eux tombait souvent sur la réponse $0{,}(10-a-b)$ ou sur un
+      // autre piège — a = b suffisait. On énumère donc les couples qui donnent
+      // bien quatre nombres différents, et on tire là-dedans.
+      const couples: [number, number][] = [];
+      for (let x = 1; x <= 8; x += 1) {
+        for (let y = 1; y <= 8; y += 1) {
+          const r = 10 - x - y;
+          if (r < 1 || x === y) continue;
+          if (r === x || r === y || r === x + y) continue;
+          couples.push([x, y]);
+        }
+      }
+      const [a, b] = couples[randomInt(0, couples.length - 1)];
       const reste = 10 - a - b; // P(X=2) = 0,reste
       const rep = `$0{,}${reste}$`;
       const distracteurs = [

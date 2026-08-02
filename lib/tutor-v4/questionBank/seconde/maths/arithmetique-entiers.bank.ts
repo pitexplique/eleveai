@@ -802,9 +802,15 @@ export const arithmetiqueEntiersBank: TutorBankItemV4[] = [
     hint: "Divise le numérateur et le dénominateur par un diviseur commun.",
     tags: ["seconde", "maths", "arithmetique", "irreductible", "template"],
     generate: () => {
-      const d = randomInt(2, 6);
+      // Deux garde-fous. `d` ne vaut plus 2 : le piège « on n'a simplifié que
+      // par deux » s'écrivait alors comme la fraction de départ. Et num/den
+      // doit être VRAIMENT irréductible — le tirage libre produisait des
+      // « formes irréductibles » comme 2/4, ce qui est faux.
+      const d = randomInt(3, 6);
       const num = randomInt(2, 5);
-      const den = num + randomInt(1, 4);
+      const pgcd = (p: number, q: number): number => (q === 0 ? p : pgcd(q, p % q));
+      let den = num + randomInt(1, 4);
+      while (pgcd(num, den) !== 1) den = num + randomInt(1, 4);
       const grosNum = num * d;
       const grosDen = den * d;
       const bonne = `$\\dfrac{${num}}{${den}}$`;

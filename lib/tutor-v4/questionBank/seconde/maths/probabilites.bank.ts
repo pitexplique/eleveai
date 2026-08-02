@@ -617,7 +617,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "probabilites", "calculer", "template"],
     generate: () => {
       const r = randomInt(2, 5);
-      const b = randomInt(2, 5);
+      // Le premier piège est la probabilité du bleu : à nombre égal de billes,
+      // c'est la bonne réponse recopiée.
+      let b = randomInt(2, 5);
+      while (b === r) b = randomInt(2, 5);
       const total = r + b;
       const correct = `$\\dfrac{${r}}{${total}}$`;
       const choices = [correct, `$\\dfrac{${b}}{${total}}$`, `$\\dfrac{${r}}{${b}}$`, `$\\dfrac{${total}}{${r}}$`];

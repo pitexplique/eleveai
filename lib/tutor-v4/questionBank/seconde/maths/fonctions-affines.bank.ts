@@ -592,7 +592,11 @@ export const fonctionsAffinesBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "fonctions", "affine_determiner", "template"],
     generate: () => {
       const a = randomInt(-4, 4) || 2;
-      const b = randomInt(-4, 4);
+      // Mêmes collisions que pour l'équation réduite d'une droite : avec b = 0
+      // le piège « on change le signe de b » s'écrit comme la réponse, avec
+      // b = a celui qui échange a et b, avec b = -a deux pièges se confondent.
+      let b = randomInt(-4, 4);
+      while (b === 0 || b === a || b === -a) b = randomInt(-4, 4);
       const sb = b >= 0 ? `+ ${b}` : `- ${-b}`;
       const correct = `$f(x) = ${a}x ${sb}$`;
       const sb2 = -b >= 0 ? `+ ${-b}` : `- ${b}`;

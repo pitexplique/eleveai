@@ -806,7 +806,11 @@ export const volumesBank: TutorBankItemV4[] = [
     tags: ["volume_solide", "compter", "qcm", "template"],
     generate: () => {
       const a = randomInt(2, 4);
-      const b = randomInt(2, 5);
+      // Le dernier piège est « on additionne au lieu de multiplier ». Pour de
+      // petits nombres (2×2, 2×3, 3×2) la somme tombe sur le produit ou juste à
+      // côté : le piège s'écrivait alors comme une autre proposition.
+      let b = randomInt(2, 5);
+      while (Math.abs(a + b - a * b) <= 1) b = randomInt(2, 5);
       const good = a * b;
       return {
         text: `Un pavé a ${a} rangées de ${b} cubes. Quel est son volume ?`,

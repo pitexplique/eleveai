@@ -2809,12 +2809,17 @@ export const trigonometrieBank: TutorBankItemV4[] = [
       const cosinus = pickOne([true, false]);
       const correct = cosinus ? `$${v.cos}$` : `$-${v.sin}$`;
       const piege = cosinus ? `$-${v.cos}$` : `$${v.sin}$`;
+      // Les deux dernières propositions sont le piège « on a confondu cosinus
+      // et sinus ». À $\pi/4$ les deux valent $\sqrt{2}/2$ : les quatre lignes
+      // se réduisaient à deux, chacune écrite deux fois. Dans ce cas seulement,
+      // on croise avec un autre angle remarquable.
+      const croise = v.cos === v.sin
+        ? (cosinus ? valeurs[0].sin : valeurs[0].cos)
+        : (cosinus ? v.sin : v.cos);
       return {
         text: `Combien vaut $\\${cosinus ? "cos" : "sin"}\\left(-${v.x}\\right)$ ?`,
         format: "qcm",
-        choices: cosinus
-          ? [correct, piege, `$${v.sin}$`, `$-${v.sin}$`]
-          : [correct, piege, `$${v.cos}$`, `$-${v.cos}$`],
+        choices: [correct, piege, `$${croise}$`, `$-${croise}$`],
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(

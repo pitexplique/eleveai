@@ -30,8 +30,13 @@ function rawFraction(n: number, d: number) {
   return `${n}/${d}`;
 }
 
-function makeChoices(correct: string, wrongs: string[]) {
-  return shuffle([correct, ...wrongs]).slice(0, 4);
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  // Jamais deux fois la même ligne. Un gabarit dont le piège coïncide avec la
+  // bonne réponse (les coordonnées inversées quand x = y, un arrondi égal à la
+  // valeur de départ…) affichait la même proposition deux fois, et l'élève
+  // voyait deux réponses justes. Dédupliquer AVANT de couper à quatre laisse
+  // aussi une chance aux distracteurs surnuméraires de prendre la place.
+  return shuffle(Array.from(new Set([correct, ...wrongs]))).slice(0, 4);
 }
 
 const couleurs = {

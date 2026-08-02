@@ -1261,13 +1261,20 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     generate: () => {
       const den = randomChoice([5, 7, 8, 9]);
       const a = randomInt(1, den - 2);
-      const b = randomInt(1, den - a);
+      // a × b = a + b uniquement pour 2 et 2 : le piège « on multiplie les
+      // numérateurs » tomberait alors sur la bonne réponse.
+      let b = randomInt(1, den - a);
+      while (a === 2 && b === 2) b = randomInt(1, den - a);
       const s = a + b;
       const correct = `$\\dfrac{${s}}{${den}}$`;
       return {
         text: `Calcule $\\dfrac{${a}}{${den}} + \\dfrac{${b}}{${den}}$.`,
         format: "qcm",
-        choices: shuffle([correct, `$\\dfrac{${a + b}}{${den + den}}$`, `$\\dfrac{${a * b}}{${den}}$`, `$\\dfrac{${s}}{${den * 2}}$`]),
+        // Le troisième piège était « on additionne aussi les dénominateurs »
+        // écrit une deuxième fois (den + den et den × 2 sont le même nombre) :
+        // la question montrait deux lignes identiques à TOUS les tirages. Il
+        // devient « on multiplie les dénominateurs ».
+        choices: shuffle([correct, `$\\dfrac{${s}}{${den + den}}$`, `$\\dfrac{${a * b}}{${den}}$`, `$\\dfrac{${s}}{${den * den}}$`]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:

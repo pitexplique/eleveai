@@ -901,7 +901,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     generate: () => {
       const qty = randomChoice([2, 3, 4]);
       const coef = randomChoice([2, 3]);
-      const unit = randomChoice([2, 3, 4]);
+      // Les deux pièges sont « on ajoute le prix d'un objet » et « on ajoute le
+      // coefficient ». Quand le prix unitaire vaut le coefficient, c'est la
+      // même proposition écrite deux fois.
+      const unit = randomChoice([2, 3, 4].filter((u) => u !== coef));
       const total = qty * unit;
       const targetQty = qty * coef;
       const good = total * coef;
@@ -972,8 +975,13 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     hint: "Le coefficient est le prix d’un seul objet.",
     tags: ["prop_proportionnalite", "coefficient", "qcm", "template"],
     generate: () => {
-      const qty = randomChoice([2, 3, 4, 5]);
       const unit = randomChoice([2, 3, 4]);
+      // Les pièges sont la quantité, le total et « un de plus ». Si la quantité
+      // vaut le prix unitaire ou ce prix plus un, deux propositions se
+      // confondent.
+      const qty = randomChoice(
+        [2, 3, 4, 5].filter((q) => q !== unit && q !== unit + 1),
+      );
       const total = qty * unit;
 
       return {
@@ -1069,8 +1077,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     hint: "Il faut partager le prix total par la quantité.",
     tags: ["prop_proportionnalite", "unite", "qcm", "template"],
     generate: () => {
-      const qty = randomChoice([2, 3, 4, 5]);
       const unit = randomChoice([2, 3, 4]);
+      // Mêmes collisions que pour le coefficient : la quantité ne doit valoir
+      // ni le prix d'un objet, ni ce prix plus un.
+      const qty = randomChoice(
+        [2, 3, 4, 5].filter((q) => q !== unit && q !== unit + 1),
+      );
       const total = qty * unit;
 
       const choices = shuffle([

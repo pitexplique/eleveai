@@ -1387,7 +1387,9 @@ export const puissancesBank: TutorBankItemV4[] = [
     tags: ["entier_puissance", "calcul", "quotient", "qcm", "template"],
     generate: () => {
       const n = randomChoice([1, 2, 3]);
-      const m = n + randomChoice([2, 3, 4]);
+      // L'écart entre les deux exposants ne doit pas valoir le plus petit : la
+      // réponse $a^{m-n}$ s'écrirait alors comme le piège $a^{n}$.
+      const m = n + randomChoice([2, 3, 4].filter((e) => e !== n));
       const correct = `$a^{${m - n}}$`;
       return {
         text: `Simplifie $\\dfrac{a^${m}}{a^${n}}$ (avec $a \\neq 0$).`,

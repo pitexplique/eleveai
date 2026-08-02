@@ -1032,7 +1032,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     tags: ["fraction_nombre", "representation", "qcm", "template"],
     generate: () => {
       const den = [4, 5, 6, 8][Math.floor(Math.random() * 4)];
-      const num = 1 + Math.floor(Math.random() * Math.min(den - 1, 4));
+      // Le numérateur part de 2 : avec 1, le piège « numérateur + dénominateur »
+      // valait « dénominateur + 1 », l'autre piège — la même ligne deux fois.
+      const num = 2 + Math.floor(Math.random() * (Math.min(den - 1, 4) - 1));
 
       return {
         text: `Pour représenter ${num}/${den}, combien de parts égales faut-il au total ?`,

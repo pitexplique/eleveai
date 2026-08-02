@@ -144,6 +144,26 @@ function melanger<T>(liste: readonly T[]): T[] {
 }
 
 /**
+ * Les propositions d'un QCM, sans doublon — filet posé le 02/08/2026.
+ * Certains gabarits produisent un piège qui coïncide avec la bonne réponse
+ * pour certains tirages : l'élève voyait alors deux lignes identiques, toutes
+ * les deux justes. Le jour d'une épreuve, ça se paie cher. Ici on n'affiche la
+ * ligne qu'une fois ; le vrai correctif est dans la banque, et
+ * `scripts/verifier-doublons-choix.ts` liste ce qui reste à réécrire.
+ * On compare les chaînes rognées : une espace de plus ne fait pas une autre
+ * proposition pour celui qui lit.
+ */
+function sansDoublon(choices: readonly string[]): string[] {
+  const vus = new Set<string>();
+  return choices.filter((c) => {
+    const k = c.trim();
+    if (vus.has(k)) return false;
+    vus.add(k);
+    return true;
+  });
+}
+
+/**
  * Rend l'item jouable : un `template` se génère à la volée, un `fixed` se
  * prend tel quel. On ne garde que ce qui a des propositions — l'épreuve se
  * corrige toute seule. Les propositions sont remélangées : dans nos banques
@@ -158,9 +178,13 @@ function materialiser(
       ? ({ ...item, ...item.generate() } as Record<string, unknown>)
       : (item as unknown as Record<string, unknown>);
 
-  const choices = genere.choices as string[] | undefined;
+  const brutes = genere.choices as string[] | undefined;
   const expected = genere.expected as string[] | undefined;
   const text = genere.text as string | undefined;
+
+  // On déduplique AVANT de contrôler : sans ça, une question réduite à une
+  // seule proposition par le filet passerait le test « au moins deux ».
+  const choices = brutes ? sansDoublon(brutes) : undefined;
 
   if (!text) return null;
   if (!choices || choices.length < 2) return null;
@@ -235,7 +259,7 @@ function tirerTheme(
             microId: q.microId,
             microLabel: config.labelsMicro.get(q.microId) ?? q.microId,
             text: q.text,
-            choices: melanger(q.choices),
+            choices: melanger(sansDoublon(q.choices)),
             expected: [q.expected],
             explanation: q.explanation,
             support: {

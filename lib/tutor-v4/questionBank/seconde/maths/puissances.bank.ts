@@ -665,7 +665,11 @@ export const puissancesBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "puissances", "puissance_puissance", "template"],
     generate: () => {
       const m = randomInt(2, 4);
-      const n = randomInt(2, 4);
+      // Le piège classique est « on additionne les exposants ». Pour 2 et 2 la
+      // somme vaut le produit, pour 2 et 3 elle vaut le produit moins un : le
+      // piège s'écrivait alors comme la réponse ou comme un autre piège.
+      let n = randomInt(2, 4);
+      while (Math.abs(m + n - m * n) <= 1) n = randomInt(2, 4);
       const correct = `$a^{${m * n}}$`;
       const choices = [correct, `$a^{${m + n}}$`, `$a^{${m * n + 1}}$`, `$a^{${m * n - 1}}$`];
       return {

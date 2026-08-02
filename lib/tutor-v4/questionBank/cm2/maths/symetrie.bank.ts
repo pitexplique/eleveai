@@ -948,6 +948,8 @@ export const symetrieBank: TutorBankItemV4[] = [
     tags: ["cm2", "symetrie", "completer", "distance", "template", "qcm"],
     generate: () => {
       const d = randomChoice([1, 2, 3, 4]);
+      // À un carreau, « un de moins » s'écrivait comme la bonne réponse.
+      const autre = d > 1 ? d - 1 : d + 2;
 
       return {
         text: `Un point est à ${d} carreau(x) de l’axe. À quelle distance de l’axe se trouve son symétrique ?`,
@@ -955,7 +957,7 @@ export const symetrieBank: TutorBankItemV4[] = [
         choices: shuffle([
           `${d} carreau(x)`,
           `${d + 1} carreau(x)`,
-          `${Math.max(1, d - 1)} carreau(x)`,
+          `${autre} carreau(x)`,
           "sur l’axe",
         ]),
         expected: [`${d} carreau(x)`],
@@ -1825,6 +1827,10 @@ export const symetrieBank: TutorBankItemV4[] = [
     tags: ["cm2", "symetrie", "propriete", "distance", "template", "qcm", "canvas"],
     generate: () => {
       const d = randomChoice([1, 2, 3]);
+      // « Un carreau de moins » n'existe pas quand A est déjà à un carreau : le
+      // piège s'écrivait alors comme la bonne réponse. Dans ce cas seulement,
+      // on éloigne le piège au lieu de le rapprocher.
+      const autre = d > 1 ? d - 1 : d + 2;
 
       return {
         text: `A est à ${d} carreau(x) de l’axe. À quelle distance de l’axe se trouve A' ?`,
@@ -1833,7 +1839,7 @@ export const symetrieBank: TutorBankItemV4[] = [
           `${d} carreau(x)`,
           `${d + 1} carreau(x)`,
           "sur l’axe",
-          `${Math.max(1, d - 1)} carreau(x)`,
+          `${autre} carreau(x)`,
         ]),
         expected: [`${d} carreau(x)`],
         comparator: "mcq_exact",

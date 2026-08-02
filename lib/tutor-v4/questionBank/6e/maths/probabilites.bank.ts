@@ -850,7 +850,9 @@ export const probabilitesBank: TutorBankItemV4[] = [
     tags: ["proba_experience", "defi", "billes", "fraction", "template", "canvas"],
     generate: () => {
       const rouges = randomChoice([2, 3, 4]);
-      const bleues = randomChoice([3, 4, 5]);
+      // Le premier piège est la probabilité du bleu : à nombre égal, c'est la
+      // bonne réponse recopiée.
+      const bleues = randomChoice([3, 4, 5].filter((n) => n !== rouges));
       const total = rouges + bleues;
 
       const elements = [

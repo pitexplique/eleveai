@@ -299,7 +299,10 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
       const ox = 4;
       const oy = 4;
       const x = randomChoice([1, 2, 3]);
-      const y = randomChoice([1, 2, 3]);
+      // Deux pièges sont « on échange x et y » et « on soustrait au centre ».
+      // Quand x + y = 4, ils s'écrivent pareil : (y ; x) et (4-x ; 4-y) sont le
+      // même couple.
+      const y = randomChoice([1, 2, 3].filter((v) => v + x !== 4));
       const xp = 2 * ox - x;
       const yp = 2 * oy - y;
 

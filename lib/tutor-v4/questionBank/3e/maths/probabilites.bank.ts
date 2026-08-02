@@ -30,8 +30,13 @@ function fraction(n: number, d: number) {
   return `${n / g}/${d / g}`;
 }
 
-function makeChoices(correct: string, wrongs: string[]) {
-  return shuffle([correct, ...wrongs]).slice(0, 4);
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  // Jamais deux fois la même ligne. Un gabarit dont le piège coïncide avec la
+  // bonne réponse (les coordonnées inversées quand x = y, un arrondi égal à la
+  // valeur de départ…) affichait la même proposition deux fois, et l'élève
+  // voyait deux réponses justes. Dédupliquer AVANT de couper à quatre laisse
+  // aussi une chance aux distracteurs surnuméraires de prendre la place.
+  return shuffle(Array.from(new Set([correct, ...wrongs]))).slice(0, 4);
 }
 
 const couleurs = {
@@ -2253,7 +2258,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     tags: ["proba_experience", "calculer", "roue", "canvas", "template"],
     generate: () => {
       const pr = randomChoice([1, 2]);
-      const pb = randomChoice([1, 2]);
+      // Le premier piège est la probabilité du Bleu : à poids égal, c'est la
+      // bonne réponse recopiée. Une fois sur deux, l'élève voyait deux lignes
+      // identiques toutes les deux justes.
+      const pb = pr === 1 ? 2 : 1;
       const pv = randomChoice([1, 2]);
       const total = pr + pb + pv;
       const correct = `$\\dfrac{${pr}}{${total}}$`;

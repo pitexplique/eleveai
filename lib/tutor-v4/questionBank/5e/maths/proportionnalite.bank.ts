@@ -890,7 +890,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
         choices: shuffle([
           `${good} €`,
           `${good + unit} €`,
-          `${good + 2} €`,
+          // « + 1 » et non « + 2 » : avec un prix unitaire de 2 €, le piège
+          // « on ajoute le prix d'un objet » et celui-ci étaient la même ligne.
+          `${good + 1} €`,
           `${total} €`,
         ]),
         expected: [`${good} €`],

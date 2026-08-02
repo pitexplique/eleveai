@@ -3,15 +3,37 @@ import { randomUUID } from "crypto";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 /**
+ * Les propositions d'un QCM, sans doublon. On compare les chaînes rognées :
+ * deux lignes qui ne diffèrent que par une espace sont la même pour l'élève.
+ */
+function uniques(choices: string[]): string[] {
+  const vus = new Set<string>();
+  return choices.filter((c) => {
+    const k = c.trim();
+    if (vus.has(k)) return false;
+    vus.add(k);
+    return true;
+  });
+}
+
+/**
  * Mélange les choix QCM de façon déterministe (seed basé sur l'id de la question)
  * afin que la bonne réponse ne soit jamais systématiquement en première position.
+ *
+ * FILET, PAS CORRECTIF (02/08/2026) : on retire au passage les propositions en
+ * double. Un gabarit dont le piège coïncide avec la bonne réponse pour certains
+ * tirages — les coordonnées inversées quand x = y, $a^{m+n}$ quand m = n = 2 —
+ * affichait deux lignes identiques, toutes les deux justes. Trois propositions
+ * distinctes valent mieux que quatre dont deux se répètent, mais ça reste un
+ * pis-aller : le vrai correctif est dans la banque, et
+ * `scripts/verifier-doublons-choix.ts` dit lesquelles restent à écrire.
  */
 function shuffleChoices(choices: string[], id: string): string[] {
   // Seed numérique simple depuis les charCodes de l'id
   let seed = 0;
   for (let i = 0; i < id.length; i++) seed = (seed * 31 + id.charCodeAt(i)) >>> 0;
 
-  const arr = [...choices];
+  const arr = uniques(choices);
   for (let i = arr.length - 1; i > 0; i--) {
     seed = (seed * 1664525 + 1013904223) >>> 0;
     const j = seed % (i + 1);
