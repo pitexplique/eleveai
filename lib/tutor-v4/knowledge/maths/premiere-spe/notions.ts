@@ -9,6 +9,12 @@
 // - Géométrie      : produit scalaire ; géométrie repérée
 // - Probabilités   : probabilités conditionnelles ; variables aléatoires
 // - Algorithmique  : listes, boucles, fonctions, seuils (Python)
+// - Logique        : vocabulaire ensembliste, implication, quantificateurs
+//
+// La partie logique est transversale dans le BO (« il importe d'y travailler
+// d'abord dans des contextes où ils se présentent naturellement »). On en fait
+// tout de même une notion : sans elle, aucune capacité attendue de cette
+// section n'est travaillée ni suivie.
 
 import type { NotionSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
@@ -102,6 +108,16 @@ export const notions: NotionSource[] = [
     label: "Algorithmique et programmation",
     boId: "BOPSAP",
     prerequis: ["suites"],
+    levels: [1, 2, 3],
+  },
+
+  /* ================= VOCABULAIRE ENSEMBLISTE ET LOGIQUE ================= */
+
+  {
+    id: "logique_ensembles",
+    label: "Vocabulaire ensembliste et logique",
+    boId: "BOPSVL",
+    prerequis: [],
     levels: [1, 2, 3],
   },
 ];
