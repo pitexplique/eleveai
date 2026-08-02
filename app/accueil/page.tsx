@@ -189,9 +189,15 @@ async function getSlidesUne(): Promise<SlideUne[]> {
 
   try {
     const supabase = createClient(url, key);
+    // `*` et non une liste de colonnes : `niveau_mini` (le cycle à partir
+    // duquel un slide a du sens) n'existe pas encore en base. Nommée
+    // explicitement, elle ferait échouer toute la requête et le carrousel
+    // retomberait sur son repli en dur. Avec `*`, le code marche avant ET
+    // après l'`alter table` — la colonne se met à filtrer le jour où elle
+    // apparaît, sans redéploiement.
     const { data, error } = await supabase
       .from("journal_une")
-      .select("id, kicker, titre, accroche, youtube_id, image_url, lien, cta, defi, created_at")
+      .select("*")
       .eq("actif", true)
       .order("ordre", { ascending: true });
 
@@ -212,6 +218,8 @@ async function getSlidesUne(): Promise<SlideUne[]> {
       cta: s.cta ?? "Lire →",
       defi: s.defi,
       nouveau: s.created_at ? jourReunion(s.created_at) === aujourdhui : false,
+      // Absente tant que l'`alter table` n'est pas passé → aucun filtrage.
+      niveauMini: s.niveau_mini ?? null,
     }));
   } catch {
     return [];

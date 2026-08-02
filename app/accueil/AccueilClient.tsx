@@ -382,7 +382,30 @@ export type SlideUne = {
   defi: string | null;
   /** Créé aujourd'hui (heure Réunion) → pastille « paru aujourd'hui ». */
   nouveau?: boolean;
+  /**
+   * Le cycle à partir duquel ce slide a du sens (`cp-ce2`, `cm1-cm2`,
+   * `6e-3e`, `lycee`). Constat de Frédéric : « les élèves de CP ne peuvent
+   * pas regarder Pourquoi les bulles sont rondes ». `null` = pas de garde,
+   * le slide est montré à tout le monde — c'est l'état tant que la colonne
+   * `niveau_mini` n'existe pas en base.
+   */
+  niveauMini?: string | null;
 };
+
+/** Les cycles, du plus jeune au plus grand — l'ordre EST le sens. */
+const ORDRE_CYCLES = ["cp-ce2", "cm1-cm2", "6e-3e", "lycee"];
+
+/**
+ * Un slide est montré si son niveau minimum est atteint : un slide `6e-3e`
+ * se voit en 6ᵉ–3ᵉ et au lycée, jamais en CP. Cycle inconnu → aucun filtre.
+ */
+function slidePourCycle(s: SlideUne, cycle: string | null): boolean {
+  if (!cycle || !s.niveauMini) return true;
+  const mini = ORDRE_CYCLES.indexOf(s.niveauMini);
+  const lecteur = ORDRE_CYCLES.indexOf(cycle);
+  if (mini < 0 || lecteur < 0) return true;
+  return lecteur >= mini;
+}
 
 /** Un article d'une rubrique du journal (table journal_articles, patron régie). */
 export type ArticleRubrique = {
@@ -708,22 +731,39 @@ function MotDuJourEncart() {
   );
 }
 
-function UneCarousel({ slides }: { slides?: SlideUne[] }) {
+function UneCarousel({
+  slides,
+  cycle,
+}: {
+  slides?: SlideUne[];
+  cycle?: string | null;
+}) {
   const items = useMemo<SlideUne[]>(() => {
-    if (slides && slides.length > 0) return slides;
-    // Repli : les épisodes historiques, projetés au format SlideUne.
-    return [UNE, ...BREVES].map((e) => ({
-      id: e.youtubeId,
-      kicker: "Réfléchir · En vrai, à La Réunion",
-      titre: e.titre,
-      accroche: e.accroche,
-      youtubeId: e.youtubeId,
-      imageUrl: null,
-      lien: `https://youtu.be/${e.youtubeId}`,
-      cta: `${e.emoji} Regarder l'épisode →`,
-      defi: e.defi ?? null,
-    }));
-  }, [slides]);
+    const base =
+      slides && slides.length > 0
+        ? slides
+        : // Repli : les épisodes historiques, projetés au format SlideUne.
+          [UNE, ...BREVES].map((e) => ({
+            id: e.youtubeId,
+            kicker: "Réfléchir · En vrai, à La Réunion",
+            titre: e.titre,
+            accroche: e.accroche,
+            youtubeId: e.youtubeId,
+            imageUrl: null,
+            lien: `https://youtu.be/${e.youtubeId}`,
+            cta: `${e.emoji} Regarder l'épisode →`,
+            defi: e.defi ?? null,
+          }));
+
+    // Le filtre par âge, branché sur « Qui est-ce ? ». Il ne fait rien tant
+    // que la colonne `niveau_mini` n'existe pas en base : tous les slides
+    // ont alors `niveauMini` à null, donc tous passent.
+    const gardes = base.filter((s) => slidePourCycle(s, cycle ?? null));
+    // Filet de sécurité : jamais de Une vide. Si le filtre a tout coupé —
+    // colonne mal remplie, cycle inattendu — on remontre tout plutôt que
+    // d'afficher un carrousel blanc en haut de page.
+    return gardes.length > 0 ? gardes : base;
+  }, [slides, cycle]);
 
   const [index, setIndex] = useState(0);
   const [pause, setPause] = useState(false);
@@ -1266,6 +1306,90 @@ export default function AccueilPage({
           </Link>
         </div>
 
+        {/* ══ « QUI EST-CE ? » — LE SÉLECTEUR DE PROFIL ════════════════════════
+            Huit tuiles sur UNE SEULE LIGNE (demande de Frédéric) : sur un
+            téléphone la bande glisse horizontalement au lieu de passer à la
+            ligne — c'est le geste des rangées, et les quatre tuiles d'élève
+            restent les premières vues. Masqué pour un staff connecté : il a son
+            bandeau de tableau de bord, on ne lui demande pas qui il est. */}
+        {!isStaff && (
+          <section className="border-b border-[#1d1c16]/25 py-4">
+            {cycleChoisi ? (
+              // Choix fait : la bande se replie en pastille et ne revient plus.
+              <div className="flex flex-wrap items-center justify-center gap-2 text-sm">
+                <span className="font-serif font-black">
+                  {CYCLES.find((c) => c.id === cycleChoisi)?.emoji}{" "}
+                  {CYCLES.find((c) => c.id === cycleChoisi)?.label}
+                </span>
+                <span className="text-[#1d1c16]/50">·</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCycleChoisi(null);
+                    try {
+                      localStorage.removeItem(CLE_CYCLE);
+                    } catch {
+                      /* ignore */
+                    }
+                  }}
+                  className="font-black text-cyan-800 underline underline-offset-2 hover:no-underline"
+                >
+                  changer
+                </button>
+              </div>
+            ) : (
+              <>
+                <p className="text-center font-serif text-xl font-black leading-none sm:text-2xl">
+                  Qui est-ce&nbsp;?
+                </p>
+                <p className="mt-1 text-center font-serif text-xs font-medium italic text-[#1d1c16]/70">
+                  Une fois, et le journal se range pour vous.
+                </p>
+                <div className="mt-3 flex flex-nowrap gap-2 overflow-x-auto pb-1">
+                  {CYCLES.map((c) => (
+                    <button
+                      key={c.id}
+                      type="button"
+                      onClick={() => choisirCycle(c.id)}
+                      className="min-w-[82px] flex-1 border-2 border-[#1d1c16] bg-[#1d1c16]/[0.04] px-1 py-2.5 text-center transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
+                    >
+                      <span className="block text-2xl leading-none" aria-hidden>
+                        {c.emoji}
+                      </span>
+                      <span className="mt-1.5 block whitespace-nowrap font-serif text-[10px] font-black">
+                        {c.label}
+                      </span>
+                      <span
+                        className="mx-auto mt-1.5 block h-[3px] w-6 rounded-sm"
+                        style={{ backgroundColor: ACCENTS[c.accent] }}
+                        aria-hidden
+                      />
+                    </button>
+                  ))}
+                  {PORTES_ADULTES.map((p) => (
+                    <Link
+                      key={p.href}
+                      href={p.href}
+                      className="min-w-[82px] flex-1 border-2 border-[#1d1c16] bg-[#1d1c16]/[0.04] px-1 py-2.5 text-center transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
+                    >
+                      <span className="block text-2xl leading-none" aria-hidden>
+                        {p.emoji}
+                      </span>
+                      <span className="mt-1.5 block whitespace-nowrap font-serif text-[10px] font-black">
+                        {p.label}
+                      </span>
+                      <span
+                        className="mx-auto mt-1.5 block h-[3px] w-6 rounded-sm"
+                        style={{ backgroundColor: ACCENTS[p.accent] }}
+                        aria-hidden
+                      />
+                    </Link>
+                  ))}
+                </div>
+              </>
+            )}
+          </section>
+        )}
         {/* Le chemin de fer + la devise SUR LA MÊME BANDE (01/08). Ils avaient
             chacun la leur : deux filets de plus sur le premier écran, et trois
             accroches empilées sous le titre (le surtitre du journal, « Ici,
@@ -1445,91 +1569,6 @@ export default function AccueilPage({
         </a>
       </header>
 
-      {/* ══ « QUI EST-CE ? » — LE SÉLECTEUR DE PROFIL ════════════════════════
-          Huit tuiles sur UNE SEULE LIGNE (demande de Frédéric) : sur un
-          téléphone la bande glisse horizontalement au lieu de passer à la
-          ligne — c'est le geste des rangées, et les quatre tuiles d'élève
-          restent les premières vues. Masqué pour un staff connecté : il a son
-          bandeau de tableau de bord, on ne lui demande pas qui il est. */}
-      {!isStaff && (
-        <section className="mx-auto mt-5 max-w-6xl border-b border-[#1d1c16]/25 pb-4">
-          {cycleChoisi ? (
-            // Choix fait : la bande se replie en pastille et ne revient plus.
-            <div className="flex flex-wrap items-center justify-center gap-2 text-sm">
-              <span className="font-serif font-black">
-                {CYCLES.find((c) => c.id === cycleChoisi)?.emoji}{" "}
-                {CYCLES.find((c) => c.id === cycleChoisi)?.label}
-              </span>
-              <span className="text-[#1d1c16]/50">·</span>
-              <button
-                type="button"
-                onClick={() => {
-                  setCycleChoisi(null);
-                  try {
-                    localStorage.removeItem(CLE_CYCLE);
-                  } catch {
-                    /* ignore */
-                  }
-                }}
-                className="font-black text-cyan-800 underline underline-offset-2 hover:no-underline"
-              >
-                changer
-              </button>
-            </div>
-          ) : (
-            <>
-              <p className="text-center font-serif text-xl font-black leading-none sm:text-2xl">
-                Qui est-ce&nbsp;?
-              </p>
-              <p className="mt-1 text-center font-serif text-xs font-medium italic text-[#1d1c16]/70">
-                Une fois, et le journal se range pour vous.
-              </p>
-              <div className="mt-3 flex flex-nowrap gap-2 overflow-x-auto pb-1">
-                {CYCLES.map((c) => (
-                  <button
-                    key={c.id}
-                    type="button"
-                    onClick={() => choisirCycle(c.id)}
-                    className="min-w-[82px] flex-1 border-2 border-[#1d1c16] bg-[#1d1c16]/[0.04] px-1 py-2.5 text-center transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
-                  >
-                    <span className="block text-2xl leading-none" aria-hidden>
-                      {c.emoji}
-                    </span>
-                    <span className="mt-1.5 block whitespace-nowrap font-serif text-[10px] font-black">
-                      {c.label}
-                    </span>
-                    <span
-                      className="mx-auto mt-1.5 block h-[3px] w-6 rounded-sm"
-                      style={{ backgroundColor: ACCENTS[c.accent] }}
-                      aria-hidden
-                    />
-                  </button>
-                ))}
-                {PORTES_ADULTES.map((p) => (
-                  <Link
-                    key={p.href}
-                    href={p.href}
-                    className="min-w-[82px] flex-1 border-2 border-[#1d1c16] bg-[#1d1c16]/[0.04] px-1 py-2.5 text-center transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
-                  >
-                    <span className="block text-2xl leading-none" aria-hidden>
-                      {p.emoji}
-                    </span>
-                    <span className="mt-1.5 block whitespace-nowrap font-serif text-[10px] font-black">
-                      {p.label}
-                    </span>
-                    <span
-                      className="mx-auto mt-1.5 block h-[3px] w-6 rounded-sm"
-                      style={{ backgroundColor: ACCENTS[p.accent] }}
-                      aria-hidden
-                    />
-                  </Link>
-                ))}
-              </div>
-            </>
-          )}
-        </section>
-      )}
-
       {/* ══ L'ÉDITION PERSONNALISÉE (connecté) ═══════════════════════════════ */}
       {isStaff ? (
         <div className="mx-auto mt-6 max-w-6xl">
@@ -1583,7 +1622,7 @@ export default function AccueilPage({
           <article className="lg:col-span-7 lg:flex lg:flex-col">
             {/* Le carrousel façon MSN, piloté par la régie (/admin/journal) :
                 chaque slide porte son propre surtitre. */}
-            <UneCarousel slides={slides} />
+            <UneCarousel slides={slides} cycle={cycleChoisi} />
 
             {/* « À LIRE AUSSI » EST PARTI (Frédéric, 01/08). Elle avait déjà
                 fondu de 11 titres à 4 ; sous le carrousel, elle restait une
