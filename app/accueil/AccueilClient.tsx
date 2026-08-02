@@ -50,6 +50,28 @@ import type { RecoDuJour } from "@/lib/profil-eleve/types";
 const PAPER = "#d8e9ee";
 const INK = "#1d1c16";
 
+// ─── LES ACCENTS DU JOURNAL ────────────────────────────────────────────────────
+// Quatre couleurs de l'île, une par famille de rubrique (Frédéric, 02/08 :
+// « choisis des couleurs de mon île »). Le principe est celui d'un vrai
+// quotidien sectionné : la couleur PORTE la rubrique, elle ne décore pas — on
+// reconnaît une section à sa teinte avant d'en avoir lu le titre.
+//
+// Le papier reste le papier, l'encre reste l'encre : la couleur ne touche que
+// le surtitre et le filet sous le titre. C'est ce qui permet d'en mettre sans
+// que la page devienne un sapin.
+const ACCENTS = {
+  /** Le bleu de Boucan Canot, choisi le 18/07 — il ne bouge pas. */
+  boucan: "#0e7490",
+  /** L'arbre qui fleurit en été austral. */
+  flamboyant: "#bf3b1e",
+  /** Le vert des champs. */
+  canne: "#3f6b0c",
+  /** Le curcuma de Saint-Joseph, pas un « jaune soleil » de kit. */
+  safran: "#a34c07",
+} as const;
+
+type Accent = keyof typeof ACCENTS;
+
 // ─── Constantes éditoriales ────────────────────────────────────────────────────
 
 // Numéro d'édition : le n° 1 est daté du 15/07/2026 (naissance du journal).
@@ -496,21 +518,44 @@ function getPrenomAffiche(nom?: string | null) {
 // ─── Petites briques typographiques du journal ────────────────────────────────
 
 // Le surtitre de rubrique (petites capitales espacées, comme dans un quotidien).
-function Kicker({ children, id }: { children: React.ReactNode; id?: string }) {
+// Le surtitre porte la couleur de sa rubrique. `boucan` par défaut : les blocs
+// de la Une gardent le bleu du journal, seules les rubriques du dessous se
+// colorent (sinon le premier écran vire au sapin).
+function Kicker({
+  children,
+  id,
+  accent = "boucan",
+}: {
+  children: React.ReactNode;
+  id?: string;
+  accent?: Accent;
+}) {
   return (
     <p
       id={id}
-      className="scroll-mt-24 text-[11px] font-black uppercase tracking-[0.22em] text-cyan-800"
+      className="scroll-mt-24 text-[11px] font-black uppercase tracking-[0.22em]"
+      style={{ color: ACCENTS[accent] }}
     >
       {children}
     </p>
   );
 }
 
-// Le titre de rubrique : serif + double filet dessous (la grammaire broadsheet).
-function TitreRubrique({ children }: { children: React.ReactNode }) {
+// Le titre de rubrique : serif + filet dessous (la grammaire broadsheet). Le
+// filet prend l'accent de la rubrique — deux pixels suffisent à signer une
+// section, là où colorer le titre lui-même casserait la page.
+function TitreRubrique({
+  children,
+  accent,
+}: {
+  children: React.ReactNode;
+  accent?: Accent;
+}) {
   return (
-    <div className="mt-1 border-b-2 border-[#1d1c16] pb-2">
+    <div
+      className="mt-1 border-b-2 pb-2"
+      style={{ borderColor: accent ? ACCENTS[accent] : INK }}
+    >
       <h2 className="font-serif text-3xl font-black leading-tight sm:text-4xl">
         {children}
       </h2>
@@ -1071,20 +1116,20 @@ export default function AccueilPage({
         <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-[11px] font-black uppercase tracking-[0.16em]">
           <a href="#la-une" className="hover:text-cyan-800">La Une</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#en-vrai" className="hover:text-cyan-800">En vrai</a>
+          <a href="#en-vrai" className="hover:text-[#3f6b0c]">En vrai</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
           {/* « Comprendre » a fusionné avec « Un peu de maths » (24/07) : une
               seule entrée, sinon deux liens du chemin de fer menaient au même
               endroit. */}
-          <a href="#un-peu-de-maths" className="hover:text-cyan-800">Un peu de maths</a>
+          <a href="#un-peu-de-maths" className="hover:text-[#0e7490]">Un peu de maths</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#apprendre" className="hover:text-cyan-800">Apprendre</a>
+          <a href="#apprendre" className="hover:text-[#bf3b1e]">Apprendre</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#catalogue" className="hover:text-cyan-800">Le catalogue</a>
+          <a href="#catalogue" className="hover:text-[#3f6b0c]">Le catalogue</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#courrier" className="hover:text-cyan-800">Le courrier</a>
+          <a href="#courrier" className="hover:text-[#0e7490]">Le courrier</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
-          <a href="#honneur" className="hover:text-cyan-800">À l&apos;honneur</a>
+          <a href="#honneur" className="hover:text-[#a34c07]">À l&apos;honneur</a>
           <span aria-hidden className="text-[#1d1c16]/30">·</span>
           <a href="#les-grands" className="hover:text-cyan-800">Parents & profs</a>
         </nav>
@@ -1844,7 +1889,7 @@ export default function AccueilPage({
           (la règle : le site célèbre les élèves, pas la plateforme) : chacun
           est vérifiable sur la page même. ════════════════════════════════ */}
       <section className="mx-auto mt-10 max-w-6xl">
-        <Kicker>Le parti pris · Ce qu&apos;on fait autrement</Kicker>
+        <Kicker accent="flamboyant">Le parti pris · Ce qu&apos;on fait autrement</Kicker>
         <div className="mt-2 border-t-2 border-[#1d1c16]" />
         <div className="mt-4 grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
@@ -1905,7 +1950,7 @@ export default function AccueilPage({
           tuiles cliquables (image + titre posé dessus). Chaque tuile mène à un
           rendez-vous du site. ═════════════════════════════════════════════ */}
       <section className="mx-auto mt-10 max-w-6xl">
-        <Kicker>En un clic · L&apos;actualité en images</Kicker>
+        <Kicker accent="safran">En un clic · L&apos;actualité en images</Kicker>
         <div className="mt-2 border-t-2 border-[#1d1c16]" />
         <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
           {/* Le défi du jour — la vraie image du défi programmé aujourd'hui. */}
@@ -2018,8 +2063,8 @@ export default function AccueilPage({
 
       {/* ══ EN VRAI — les brèves de la série + le terrain ═════════════════════ */}
       <section id="en-vrai" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
-        <Kicker>Réfléchir · La série « en vrai »</Kicker>
-        <TitreRubrique>L&apos;île comme salle de classe</TitreRubrique>
+        <Kicker accent="canne">Réfléchir · La série « en vrai »</Kicker>
+        <TitreRubrique accent="canne">L&apos;île comme salle de classe</TitreRubrique>
         {/* Façon portail : l'image d'abord (vignette YouTube), le titre dessous. */}
         <div className="mt-4 grid gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
           {BREVES.map((ep) => (
@@ -2120,7 +2165,7 @@ export default function AccueilPage({
           toujours au bon endroit. ═══════════════════════════════════════════ */}
       <section id="un-peu-de-maths" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
         <Kicker id="comprendre">Comprendre · La rubrique du prof</Kicker>
-        <TitreRubrique>Un peu de maths</TitreRubrique>
+        <TitreRubrique accent="boucan">Un peu de maths</TitreRubrique>
         {/* Sous-titre qui POSE L'ATTENTE (demande de Frédéric, 23/07) : le hook
             est tous âges, mais le fond va loin — personne ne se sent exclu, et
             les grands savent que c'est pour eux. */}
@@ -2150,8 +2195,8 @@ export default function AccueilPage({
 
       {/* ══ APPRENDRE — les pages matières (le coach) + les parcours ═════════ */}
       <section id="apprendre" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
-        <Kicker>Apprendre · Les pages matières</Kicker>
-        <TitreRubrique>
+        <Kicker accent="flamboyant">Apprendre · Les pages matières</Kicker>
+        <TitreRubrique accent="flamboyant">
           Le coach t&apos;explique{classeLabel ? ` — ta classe : ${classeLabel}` : ", du CP au Bac"}
         </TitreRubrique>
         <div className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -2217,8 +2262,8 @@ export default function AccueilPage({
           Porte d'entrée n°1 du site (stats 15/07 : /cahier-vacances truste le
           top des pages vues) → une vraie vitrine visuelle, pas une ligne. */}
       <section id="cahiers" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
-        <Kicker>Le supplément de l&apos;été · À imprimer</Kicker>
-        <TitreRubrique>Les cahiers de vacances — du CE1 au Bac +1</TitreRubrique>
+        <Kicker accent="safran">Le supplément de l&apos;été · À imprimer</Kicker>
+        <TitreRubrique accent="safran">Les cahiers de vacances — du CE1 au Bac +1</TitreRubrique>
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           {CAHIERS_VACANCES.map((c) => (
             <Link
@@ -2253,8 +2298,8 @@ export default function AccueilPage({
 
       {/* ══ LE CATALOGUE — les petites annonces : TOUT est listé ═════════════ */}
       <section id="catalogue" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
-        <Kicker>Le catalogue · Tout ce que le journal contient</Kicker>
-        <TitreRubrique>
+        <Kicker accent="canne">Le catalogue · Tout ce que le journal contient</Kicker>
+        <TitreRubrique accent="canne">
           Tout pour apprendre — <em className="not-italic underline decoration-emerald-800 decoration-4 underline-offset-4">gratuit</em>
         </TitreRubrique>
         <div className="mt-4 grid gap-px overflow-hidden border border-[#1d1c16]/25 bg-[#1d1c16]/25 sm:grid-cols-2 lg:grid-cols-4">
@@ -2315,7 +2360,7 @@ export default function AccueilPage({
       {/* ══ LE COURRIER DES LECTEURS — les avis, verbatim (fautes comprises) ══ */}
       <section id="courrier" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
         <Kicker>Se retrouver · Le courrier des lecteurs</Kicker>
-        <TitreRubrique>Ce que les élèves nous écrivent</TitreRubrique>
+        <TitreRubrique accent="boucan">Ce que les élèves nous écrivent</TitreRubrique>
         <div className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-3">
           {derniersAvis.slice(0, 3).map((a) => (
             <figure key={`${a.prenom}-${a.quote.slice(0, 12)}`} className="border-t border-[#1d1c16]/25 pt-3">
@@ -2347,8 +2392,8 @@ export default function AccueilPage({
 
       {/* ══ ILS FONT LE JOURNAL — à l'honneur + les remerciements ════════════ */}
       <section id="honneur" className="mx-auto mt-10 max-w-6xl scroll-mt-24">
-        <Kicker>Se retrouver · Ils font le journal</Kicker>
-        <TitreRubrique>À l&apos;honneur cette semaine</TitreRubrique>
+        <Kicker accent="safran">Se retrouver · Ils font le journal</Kicker>
+        <TitreRubrique accent="safran">À l&apos;honneur cette semaine</TitreRubrique>
         <div className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-3">
           {(honneur ?? []).map((h) => (
             <div key={`${h.categorie}-${h.eleve}`} className="border-t border-[#1d1c16]/25 pt-3">
