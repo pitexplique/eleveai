@@ -15,6 +15,10 @@ function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function pickOne<T>(arr: readonly T[]): T {
+  return arr[randomInt(0, arr.length - 1)];
+}
+
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
   return (
     `Définition : ${definition}\n\n` +
@@ -1272,6 +1276,1726 @@ export const variationsFonctionsBank: TutorBankItemV4[] = [
           `$A'(x) = 0 \\Leftrightarrow x = ${demi}$.`,
           "C'est un maximum (carré de côté optimal).",
           `L'aire est maximale pour $x = ${demi}$.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== VAR_CONSTANTE ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_var_cst_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_constante",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Si $f'(x) = 0$ pour TOUT $x$ d'un intervalle $I$, que peut-on dire de $f$ sur $I$ ?",
+    format: "qcm",
+    choices: [
+      "$f$ est constante sur $I$",
+      "$f$ est nulle sur $I$",
+      "$f$ est croissante sur $I$",
+      "on ne peut rien dire",
+    ],
+    expected: ["$f$ est constante sur $I$"],
+    comparator: "mcq_exact",
+    hint: "Constante ne veut pas dire nulle.",
+    explanation: exp(
+      "Une dérivée identiquement nulle sur un intervalle signifie que la fonction n'y varie pas.",
+      "$f$ ne monte ni ne descend : elle garde la même valeur sur tout $I$.",
+      "Attention : constante ne signifie pas nulle. La fonction $f(x) = 7$ a une dérivée nulle et vaut $7$ partout.",
+      "$f$ est constante sur $I$."
+    ),
+    tags: ["premiere", "maths", "variations", "constante", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_cst_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_constante",
+    difficulty: 5,
+    theme: "neutral",
+    text: "On sait seulement que $f'(2) = 0$. Peut-on en conclure que $f$ est constante ?",
+    format: "qcm",
+    choices: [
+      "non : la dérivée s'annule en un seul point, pas sur tout un intervalle",
+      "oui, $f$ est constante",
+      "oui, mais seulement autour de $2$",
+      "non : il faudrait $f(2) = 0$",
+    ],
+    expected: [
+      "non : la dérivée s'annule en un seul point, pas sur tout un intervalle",
+    ],
+    comparator: "mcq_exact",
+    hint: "Pense au sommet d'une parabole : la tangente y est horizontale, mais la courbe bouge.",
+    explanation: exp(
+      "La caractérisation des fonctions constantes exige que $f'$ soit nulle sur TOUT un intervalle.",
+      "S'annuler en un point isolé ne suffit pas : c'est ce qui arrive au sommet d'une parabole.",
+      "Pour $f(x) = (x-2)^2$, on a bien $f'(2) = 0$, et pourtant la fonction varie beaucoup autour de $2$.",
+      "Non : une annulation ponctuelle ne rend pas la fonction constante."
+    ),
+    tags: ["premiere", "maths", "variations", "constante", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_cst_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_constante",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelle est la dérivée de la fonction $f(x) = 7$ ?",
+    format: "short",
+    expected: ["0"],
+    comparator: "number_equal",
+    hint: "La fonction ne varie jamais.",
+    explanation: exp(
+      "Une fonction constante prend toujours la même valeur : sa variation est nulle.",
+      "Le taux de variation $\\dfrac{f(b) - f(a)}{b - a}$ vaut $\\dfrac{7 - 7}{b - a} = 0$.",
+      "Sa dérivée est donc nulle partout : la courbe est une droite horizontale.",
+      "$f'(x) = 0$."
+    ),
+    tags: ["premiere", "maths", "variations", "constante", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_cst_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_constante",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Deux fonctions $f$ et $g$ ont la MÊME dérivée sur un intervalle. Que peut-on en déduire ?",
+    format: "qcm",
+    choices: [
+      "elles diffèrent d'une constante : $f = g + k$",
+      "elles sont égales",
+      "elles sont toutes deux constantes",
+      "on ne peut rien dire",
+    ],
+    expected: ["elles diffèrent d'une constante : $f = g + k$"],
+    comparator: "mcq_exact",
+    hint: "Étudie la fonction $f - g$ : que vaut sa dérivée ?",
+    explanation: exp(
+      "On applique la caractérisation des fonctions constantes à la différence $f - g$.",
+      "$(f - g)' = f' - g' = 0$ sur l'intervalle, donc $f - g$ y est constante.",
+      "Il existe donc un nombre $k$ tel que $f = g + k$. Exemple : $x^2$ et $x^2 + 3$ ont la même dérivée $2x$ ; leurs courbes se déduisent l'une de l'autre par translation verticale.",
+      "Elles diffèrent d'une constante."
+    ),
+    tags: ["premiere", "maths", "variations", "constante", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_cst_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_constante",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Sur $[0 ; 3]$, une fonction vérifie $f'(x) = 0$ et $f(1) = 7$. Combien vaut $f(2)$ ?",
+    format: "short",
+    expected: ["7"],
+    comparator: "number_equal",
+    hint: "La fonction est constante sur tout l'intervalle.",
+    explanation: exp(
+      "Une dérivée nulle sur un intervalle rend la fonction constante sur cet intervalle.",
+      "Comme $1$ et $2$ appartiennent tous deux à $[0 ; 3]$, la fonction y prend la même valeur.",
+      "$f(2) = f(1) = 7$.",
+      "$f(2) = 7$."
+    ),
+    tags: ["premiere", "maths", "variations", "constante", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_cst_fixed_6",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_constante",
+    difficulty: 4,
+    theme: "neutral",
+    text: "À quoi ressemble la courbe d'une fonction dont la dérivée est nulle sur $\\mathbb{R}$ ?",
+    format: "qcm",
+    choices: [
+      "une droite horizontale",
+      "la droite d'équation $y = x$",
+      "l'axe des abscisses obligatoirement",
+      "une parabole",
+    ],
+    expected: ["une droite horizontale"],
+    comparator: "mcq_exact",
+    hint: "Une pente nulle partout, cela donne quelle allure ?",
+    explanation: exp(
+      "La dérivée donne la pente de la courbe en chaque point.",
+      "Une pente nulle partout signifie que la courbe ne monte ni ne descend jamais.",
+      "C'est donc une droite horizontale, d'équation $y = k$. Ce n'est l'axe des abscisses que dans le cas particulier $k = 0$.",
+      "Une droite horizontale."
+    ),
+    tags: ["premiere", "maths", "variations", "constante", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_cst_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_constante",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique la différence entre « $f'$ s'annule en un point » et « $f'$ est nulle sur un intervalle ».",
+    format: "open",
+    expected: ["intervalle", "point", "constante", "sommet"],
+    comparator: "contains_keyword",
+    hint: "L'un décrit un instant, l'autre une durée.",
+    explanation: exp(
+      "La caractérisation des fonctions constantes porte sur un INTERVALLE entier, pas sur un point.",
+      "$f'(a) = 0$ en un point isolé signifie seulement que la tangente y est horizontale : la fonction marque une pause, comme au sommet d'une parabole, puis repart.",
+      "$f' = 0$ sur tout un intervalle signifie que la fonction ne bouge pas du tout sur cet intervalle : elle y est constante.",
+      "Un point donne une tangente horizontale ; un intervalle entier donne une fonction constante."
+    ),
+    tags: ["premiere", "maths", "variations", "constante", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_cst_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_constante",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Les fonctions $f(x) = x^2$ et $g(x) = x^2 + 5$ ont la même dérivée. Explique ce que cela signifie pour leurs courbes.",
+    format: "open",
+    expected: ["translation", "constante", "parallèle", "5"],
+    comparator: "contains_keyword",
+    hint: "Que vaut $f - g$ ? Que fait cette différence à la courbe ?",
+    explanation: exp(
+      "Deux fonctions de même dérivée diffèrent d'une constante.",
+      "Ici $g - f = 5$ : en tout point, la courbe de $g$ est exactement $5$ unités au-dessus de celle de $f$.",
+      "Les deux courbes se déduisent donc l'une de l'autre par une translation verticale. Elles ont la même forme et, en chaque abscisse, exactement la même pente.",
+      "Les courbes sont translatées verticalement de $5$ : mêmes variations, hauteurs différentes."
+    ),
+    tags: ["premiere", "maths", "variations", "constante", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_var_cst_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_constante",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une dérivée nulle sur un intervalle : la fonction y garde la même valeur.",
+    tags: ["premiere", "maths", "variations", "constante", "template"],
+    generate: () => {
+      const val = randomInt(-8, 12);
+      const a = randomInt(0, 2);
+      const b = a + randomInt(3, 6);
+      const x1 = a + 1;
+      const x2 = b - 1;
+      return {
+        text: `Sur $[${a} ; ${b}]$, une fonction vérifie $f'(x) = 0$ et $f(${x1}) = ${val}$. Combien vaut $f(${x2})$ ?`,
+        format: "short",
+        expected: [String(val)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Une dérivée nulle sur tout un intervalle rend la fonction constante sur cet intervalle.",
+          `$${x1}$ et $${x2}$ appartiennent tous deux à $[${a} ; ${b}]$.`,
+          `La fonction y prend donc partout la même valeur : $f(${x2}) = f(${x1}) = ${val}$.`,
+          `$f(${x2}) = ${val}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_var_cst_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_constante",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Étudie la différence des deux fonctions et sa dérivée.",
+    tags: ["premiere", "maths", "variations", "constante", "open", "template"],
+    generate: () => {
+      const k = randomInt(2, 9);
+      const cas = pickOne([
+        { f: "x^2", d: "2x" },
+        { f: "x^3", d: "3x^2" },
+        { f: "4x", d: "4" },
+        { f: "x^2 - x", d: "2x - 1" },
+      ]);
+      return {
+        text: `Les fonctions $f(x) = ${cas.f}$ et $g(x) = ${cas.f} + ${k}$ ont la même dérivée $${cas.d}$. Explique ce que cela signifie pour leurs courbes.`,
+        format: "open",
+        expected: ["translation", String(k), "constante", "même"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Deux fonctions ayant la même dérivée sur un intervalle diffèrent d'une constante.",
+          `Ici la différence vaut $g - f = ${k}$, et sa dérivée est bien nulle.`,
+          `La courbe de $g$ est donc celle de $f$ décalée de $${k}$ vers le haut : même forme, même pente en chaque abscisse.`,
+          "Les deux courbes se déduisent l'une de l'autre par translation verticale."
+        ),
+      };
+    },
+  },
+
+  /* ===================== VAR_LECTURE_COURBE ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_var_lc_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_lecture_courbe",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Sur un graphique, une portion de courbe qui MONTE de gauche à droite indique que :",
+    format: "qcm",
+    choices: [
+      "la fonction est croissante sur cet intervalle",
+      "la fonction est positive",
+      "la dérivée est négative",
+      "la fonction atteint un maximum",
+    ],
+    expected: ["la fonction est croissante sur cet intervalle"],
+    comparator: "mcq_exact",
+    hint: "Ne pas confondre « monte » et « est au-dessus de l'axe ».",
+    explanation: exp(
+      "Le sens de variation se lit sur l'allure de la courbe, de gauche à droite.",
+      "Une courbe qui monte signifie que les images augmentent quand $x$ augmente : la fonction est croissante, et sa dérivée y est positive.",
+      "C'est indépendant du SIGNE de la fonction : une courbe peut monter tout en restant sous l'axe des abscisses, donc négative.",
+      "La fonction est croissante sur cet intervalle."
+    ),
+    tags: ["premiere", "maths", "variations", "lecture_courbe", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_lc_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_lecture_courbe",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Sur le graphique, la parabole a son sommet au point $S$. Que représente l'ORDONNÉE de $S$ ?",
+    format: "qcm",
+    choices: [
+      "l'extremum de la fonction",
+      "l'abscisse où l'extremum est atteint",
+      "une racine de la fonction",
+      "la pente de la tangente",
+    ],
+    expected: ["l'extremum de la fonction"],
+    comparator: "mcq_exact",
+    hint: "L'extremum est une VALEUR de la fonction, donc une ordonnée.",
+    explanation: exp(
+      "Le sommet est le point le plus haut ou le plus bas de la courbe.",
+      "Son ORDONNÉE est la valeur extrême atteinte par la fonction : c'est l'extremum lui-même.",
+      "Son ABSCISSE indique où cet extremum est atteint. Confondre les deux est l'erreur la plus fréquente en lecture graphique.",
+      "L'ordonnée du sommet est l'extremum."
+    ),
+    canvas: parabole(1, -2, -3),
+    tags: ["premiere", "maths", "variations", "lecture_courbe", "canvas", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_lc_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_lecture_courbe",
+    difficulty: 4,
+    theme: "neutral",
+    text: "La courbe de $f$ descend sur $]-\\infty ; 1]$ puis monte sur $[1 ; +\\infty[$. Que vaut $f'$ sur $]-\\infty ; 1[$ ?",
+    format: "qcm",
+    choices: [
+      "$f'(x) < 0$",
+      "$f'(x) > 0$",
+      "$f'(x) = 0$",
+      "on ne peut pas savoir",
+    ],
+    expected: ["$f'(x) < 0$"],
+    comparator: "mcq_exact",
+    hint: "La courbe descend : que dit la dérivée ?",
+    explanation: exp(
+      "Le sens de variation lu sur la courbe donne le signe de la dérivée.",
+      "Sur $]-\\infty ; 1[$ la courbe descend : la fonction y est décroissante.",
+      "Sa dérivée y est donc strictement négative. Elle s'annule en $1$, puis devient positive.",
+      "$f'(x) < 0$ sur cet intervalle."
+    ),
+    tags: ["premiere", "maths", "variations", "lecture_courbe", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_lc_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_lecture_courbe",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Une courbe monte tout en restant SOUS l'axe des abscisses. Que peut-on dire ?",
+    format: "qcm",
+    choices: [
+      "$f$ est croissante et négative",
+      "$f$ est croissante et positive",
+      "$f$ est décroissante et négative",
+      "c'est impossible",
+    ],
+    expected: ["$f$ est croissante et négative"],
+    comparator: "mcq_exact",
+    hint: "Le sens de variation et le signe sont deux lectures différentes.",
+    explanation: exp(
+      "Deux informations distinctes se lisent sur une courbe : son SENS (monte ou descend) et sa POSITION (au-dessus ou en dessous de l'axe).",
+      "Ici la courbe monte : la fonction est croissante, sa dérivée est positive.",
+      "Et elle reste sous l'axe : les images sont négatives. Exemple : $f(x) = x - 5$ sur $[0 ; 4]$ croît de $-5$ à $-1$.",
+      "$f$ est croissante et négative : rien n'est contradictoire."
+    ),
+    tags: ["premiere", "maths", "variations", "lecture_courbe", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_lc_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_lecture_courbe",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Sur le graphique, le sommet de la parabole est le point $S(1 ; -4)$. Quel est le minimum de $f$ ?",
+    format: "short",
+    expected: ["-4"],
+    comparator: "number_equal",
+    hint: "Le minimum est une valeur : c'est l'ordonnée.",
+    explanation: exp(
+      "L'extremum d'une fonction est une VALEUR, c'est-à-dire une ordonnée.",
+      "Le sommet est $S(1 ; -4)$ : l'abscisse $1$ dit OÙ, l'ordonnée $-4$ dit COMBIEN.",
+      "Le minimum vaut donc $-4$, atteint en $x = 1$.",
+      "Le minimum est $-4$."
+    ),
+    canvas: parabole(1, -2, -3),
+    tags: ["premiere", "maths", "variations", "lecture_courbe", "canvas", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_lc_fixed_6",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_lecture_courbe",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Sur une courbe, en combien de points la tangente est-elle horizontale si la fonction décroît puis croît puis décroît ?",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
+    hint: "Compte les changements de sens.",
+    explanation: exp(
+      "La tangente est horizontale là où la fonction change de sens de variation, c'est-à-dire aux extremums.",
+      "La fonction décroît, puis croît : premier changement, un minimum. Puis elle croît et décroît : second changement, un maximum.",
+      "Il y a donc $2$ changements de sens, donc $2$ points à tangente horizontale.",
+      "La tangente est horizontale en $2$ points."
+    ),
+    tags: ["premiere", "maths", "variations", "lecture_courbe", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_lc_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_lecture_courbe",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique la différence entre lire le SIGNE de $f$ et lire ses VARIATIONS sur un graphique.",
+    format: "open",
+    expected: ["axe", "monte", "au-dessus", "sens"],
+    comparator: "contains_keyword",
+    hint: "L'un se lit par rapport à l'axe des abscisses, l'autre par rapport au sens de parcours.",
+    explanation: exp(
+      "Ce sont deux lectures indépendantes de la même courbe.",
+      "Le SIGNE se lit par rapport à l'axe des abscisses : au-dessus, $f(x) > 0$ ; en dessous, $f(x) < 0$.",
+      "Les VARIATIONS se lisent dans le sens de parcours, de gauche à droite : la courbe monte ou descend. Une courbe peut monter tout en restant négative.",
+      "Le signe se lit par rapport à l'axe, les variations par le sens de la courbe."
+    ),
+    tags: ["premiere", "maths", "variations", "lecture_courbe", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_lc_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_lecture_courbe",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Une courbe passe par un sommet au point $(3 ; 8)$. Explique ce qu'on peut en déduire sur $f$, $f'$ et l'extremum.",
+    format: "open",
+    expected: ["8", "3", "tangente", "maximum"],
+    comparator: "contains_keyword",
+    hint: "Trois informations différentes se lisent en ce point.",
+    explanation: exp(
+      "Un sommet concentre plusieurs informations, qu'il faut distinguer.",
+      "La VALEUR : $f(3) = 8$, l'ordonnée du point. L'EXTREMUM vaut donc $8$, atteint en $x = 3$.",
+      "La DÉRIVÉE : au sommet, la tangente est horizontale, donc $f'(3) = 0$. Et $f'$ change de signe en $3$ : positive avant, négative après s'il s'agit d'un maximum.",
+      "$f(3) = 8$ est l'extremum, $f'(3) = 0$, et la tangente y est horizontale."
+    ),
+    tags: ["premiere", "maths", "variations", "lecture_courbe", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_var_lc_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_lecture_courbe",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "L'abscisse dit OÙ, l'ordonnée dit COMBIEN.",
+    tags: ["premiere", "maths", "variations", "lecture_courbe", "template"],
+    generate: () => {
+      const alpha = randomInt(-3, 3);
+      const beta = randomInt(-5, 5);
+      const versLeHaut = randomInt(0, 1) === 1;
+      const mot = versLeHaut ? "minimum" : "maximum";
+      const question = randomInt(0, 1) === 1;
+      return {
+        text: question
+          ? `Le sommet de la parabole est $S(${alpha} ; ${beta})$ et elle est tournée vers ${versLeHaut ? "le haut" : "le bas"}. Quel est le ${mot} de $f$ ?`
+          : `Le sommet de la parabole est $S(${alpha} ; ${beta})$ et elle est tournée vers ${versLeHaut ? "le haut" : "le bas"}. En quelle abscisse le ${mot} est-il atteint ?`,
+        format: "short",
+        expected: [String(question ? beta : alpha)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le sommet donne deux informations distinctes : son abscisse dit OÙ l'extremum est atteint, son ordonnée dit COMBIEN il vaut.",
+          `Ici $S(${alpha} ; ${beta})$, et la parabole tournée vers ${versLeHaut ? "le haut" : "le bas"} donne un ${mot}.`,
+          question
+            ? `La question porte sur la VALEUR : c'est l'ordonnée, $${beta}$.`
+            : `La question porte sur l'ENDROIT : c'est l'abscisse, $${alpha}$.`,
+          question
+            ? `Le ${mot} vaut $${beta}$, atteint en $x = ${alpha}$.`
+            : `Le ${mot} est atteint en $x = ${alpha}$, et il vaut $${beta}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_var_lc_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_lecture_courbe",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Traduis chaque morceau de courbe en signe de $f'$, puis conclus sur les extremums.",
+    tags: ["premiere", "maths", "variations", "lecture_courbe", "open", "template"],
+    generate: () => {
+      const cas = [
+        {
+          desc: "la courbe monte sur $]-\\infty ; 2]$ puis descend sur $[2 ; +\\infty[$",
+          mots: ["maximum", "2", "positive", "négative"],
+          lecture:
+            "$f'$ est positive avant $2$, nulle en $2$, négative après : la fonction atteint un MAXIMUM en $x = 2$.",
+        },
+        {
+          desc: "la courbe descend sur $]-\\infty ; -1]$ puis monte sur $[-1 ; +\\infty[$",
+          mots: ["minimum", "-1", "négative", "positive"],
+          lecture:
+            "$f'$ est négative avant $-1$, nulle en $-1$, positive après : la fonction atteint un MINIMUM en $x = -1$.",
+        },
+        {
+          desc: "la courbe monte sur tout $\\mathbb{R}$, sans jamais redescendre",
+          mots: ["croissante", "positive", "aucun", "extremum"],
+          lecture:
+            "$f'$ est positive partout : la fonction est croissante sur $\\mathbb{R}$ et n'admet aucun extremum.",
+        },
+        {
+          desc: "la courbe monte, marque un palier horizontal en $0$, puis remonte",
+          mots: ["croissante", "0", "tangente", "pas d'extremum"],
+          lecture:
+            "$f'$ s'annule en $0$ sans changer de signe : la tangente y est horizontale, mais il n'y a PAS d'extremum — c'est le cas de $x^3$.",
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Sur un graphique, ${c.desc}. Que peux-tu dire du signe de $f'$ et des extremums ?`,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Une courbe qui monte correspond à $f' > 0$, une courbe qui descend à $f' < 0$, un palier horizontal à $f' = 0$.",
+          "Un extremum apparaît là où $f'$ CHANGE de signe — s'annuler ne suffit pas.",
+          c.lecture,
+          "Lire une courbe, c'est traduire chaque morceau en signe de dérivée."
+        ),
+      };
+    },
+  },
+
+  /* ===================== VAR_EXTREMUM_TANGENTE ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_var_et_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_extremum_tangente",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Si une fonction dérivable admet un extremum en $a$ (à l'intérieur de son intervalle d'étude), que vaut $f'(a)$ ?",
+    format: "short",
+    expected: ["0"],
+    comparator: "number_equal",
+    hint: "Quelle est l'allure de la tangente au sommet d'une courbe ?",
+    explanation: exp(
+      "En un extremum, la fonction cesse de monter avant de descendre — ou l'inverse.",
+      "La tangente en ce point est donc horizontale.",
+      "Son coefficient directeur est nul, c'est-à-dire $f'(a) = 0$.",
+      "$f'(a) = 0$."
+    ),
+    tags: ["premiere", "maths", "variations", "extremum_tangente", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_et_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_extremum_tangente",
+    difficulty: 5,
+    theme: "neutral",
+    text: "La réciproque est-elle vraie : si $f'(a) = 0$, y a-t-il forcément un extremum en $a$ ?",
+    format: "qcm",
+    choices: [
+      "non : pour $f(x) = x^3$, $f'(0) = 0$ sans extremum",
+      "oui, toujours",
+      "oui, si $f$ est dérivable",
+      "non : $f'(a) = 0$ est impossible",
+    ],
+    expected: ["non : pour $f(x) = x^3$, $f'(0) = 0$ sans extremum"],
+    comparator: "mcq_exact",
+    hint: "Cherche une fonction dont la dérivée s'annule sans changer de signe.",
+    explanation: exp(
+      "Une dérivée nulle signale un candidat, pas un extremum garanti.",
+      "Pour $f(x) = x^3$ : $f'(x) = 3x^2$ s'annule en $0$, mais reste positive de part et d'autre.",
+      "La fonction continue donc de croître : la courbe a une tangente horizontale en $0$, sans y marquer d'extremum. Il faut que $f'$ CHANGE de signe.",
+      "Non : $x^3$ en $0$ est le contre-exemple."
+    ),
+    tags: ["premiere", "maths", "variations", "extremum_tangente", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_et_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_extremum_tangente",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour $f(x) = x^2 - 6x + 5$, en quelle abscisse la tangente est-elle horizontale ?",
+    format: "short",
+    expected: ["3"],
+    comparator: "number_equal",
+    hint: "Résous $f'(x) = 0$ avec $f'(x) = 2x - 6$.",
+    explanation: exp(
+      "Une tangente horizontale correspond à une dérivée nulle.",
+      "$f'(x) = 2x - 6$, et on résout $2x - 6 = 0$.",
+      "$x = 3$. En ce point, $f'$ passe du négatif au positif : c'est bien un minimum, le sommet de la parabole.",
+      "La tangente est horizontale en $x = 3$."
+    ),
+    canvas: parabole(1, -6, 5),
+    tags: ["premiere", "maths", "variations", "extremum_tangente", "canvas", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_et_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_extremum_tangente",
+    difficulty: 5,
+    theme: "neutral",
+    text: "« $f'(a) = 0$ » est, pour l'existence d'un extremum en $a$, une condition :",
+    format: "qcm",
+    choices: [
+      "nécessaire mais pas suffisante",
+      "suffisante mais pas nécessaire",
+      "nécessaire et suffisante",
+      "ni nécessaire ni suffisante",
+    ],
+    expected: ["nécessaire mais pas suffisante"],
+    comparator: "mcq_exact",
+    hint: "Un extremum impose-t-il $f'(a) = 0$ ? Et l'inverse ?",
+    explanation: exp(
+      "On teste les deux sens de l'implication.",
+      "Nécessaire : oui — un extremum intérieur d'une fonction dérivable impose une tangente horizontale, donc $f'(a) = 0$.",
+      "Suffisante : non — $x^3$ vérifie $f'(0) = 0$ sans extremum. Il faut en plus que $f'$ change de signe.",
+      "C'est une condition nécessaire mais pas suffisante."
+    ),
+    tags: ["premiere", "maths", "variations", "extremum_tangente", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_et_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_extremum_tangente",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Que faut-il vérifier, EN PLUS de $f'(a) = 0$, pour conclure à un extremum en $a$ ?",
+    format: "qcm",
+    choices: [
+      "que $f'$ change de signe en $a$",
+      "que $f(a) > 0$",
+      "que $f$ est croissante",
+      "que $a$ est positif",
+    ],
+    expected: ["que $f'$ change de signe en $a$"],
+    comparator: "mcq_exact",
+    hint: "C'est le changement de sens qui crée le sommet.",
+    explanation: exp(
+      "Un extremum apparaît quand la fonction change de sens de variation.",
+      "Ce changement se lit sur le signe de $f'$ : de $+$ à $-$ pour un maximum, de $-$ à $+$ pour un minimum.",
+      "Si $f'$ s'annule sans changer de signe, la fonction poursuit sa route : c'est le cas de $x^3$ en $0$.",
+      "Il faut que $f'$ change de signe en $a$."
+    ),
+    tags: ["premiere", "maths", "variations", "extremum_tangente", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_et_fixed_6",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_extremum_tangente",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Une fonction atteint son maximum en $a$, à l'intérieur de l'intervalle d'étude. Quelle est l'équation de la tangente en $a$ ?",
+    format: "qcm",
+    choices: [
+      "$y = f(a)$, une droite horizontale",
+      "$y = f'(a)x$",
+      "$y = x - a$",
+      "$x = a$, une droite verticale",
+    ],
+    expected: ["$y = f(a)$, une droite horizontale"],
+    comparator: "mcq_exact",
+    hint: "Applique $y = f'(a)(x - a) + f(a)$ avec $f'(a) = 0$.",
+    explanation: exp(
+      "L'équation de la tangente est $y = f'(a)(x - a) + f(a)$.",
+      "En un extremum intérieur, $f'(a) = 0$ : le premier terme disparaît.",
+      "Il reste $y = f(a)$, l'équation d'une droite HORIZONTALE passant par le sommet. Une droite verticale s'écrirait $x = a$ et n'est jamais une tangente ici.",
+      "$y = f(a)$, horizontale."
+    ),
+    tags: ["premiere", "maths", "variations", "extremum_tangente", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_et_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_extremum_tangente",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi $f'(a) = 0$ ne suffit pas à conclure à un extremum, en donnant un contre-exemple.",
+    format: "open",
+    expected: ["x^3", "change", "signe", "0"],
+    comparator: "contains_keyword",
+    hint: "Cherche une fonction dont la dérivée s'annule sans changer de signe.",
+    explanation: exp(
+      "Un extremum suppose un CHANGEMENT de sens de variation, pas seulement une pause.",
+      "Contre-exemple : $f(x) = x^3$. Sa dérivée $f'(x) = 3x^2$ s'annule en $0$, mais elle est positive avant comme après.",
+      "La fonction croît donc sur tout $\\mathbb{R}$ : en $0$, la courbe a une tangente horizontale, elle marque un palier, puis repart vers le haut. Aucun extremum.",
+      "Il faut que $f'$ change de signe, pas seulement qu'elle s'annule."
+    ),
+    tags: ["premiere", "maths", "variations", "extremum_tangente", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_et_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_extremum_tangente",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Décris la méthode complète pour trouver les extremums d'une fonction dérivable sur un intervalle.",
+    format: "open",
+    expected: ["dérivée", "annule", "signe", "tableau"],
+    comparator: "contains_keyword",
+    hint: "Trois étapes, dont une que beaucoup oublient.",
+    explanation: exp(
+      "Les extremums se trouvent là où la dérivée s'annule EN CHANGEANT de signe.",
+      "Étape 1 : calculer $f'$. Étape 2 : résoudre $f'(x) = 0$ pour obtenir les candidats.",
+      "Étape 3 — celle qu'on oublie : étudier le SIGNE de $f'$ autour de chaque candidat, dans un tableau de variations. De $+$ à $-$ : maximum. De $-$ à $+$ : minimum. Pas de changement : pas d'extremum. On calcule enfin l'image pour obtenir la valeur.",
+      "Dériver, annuler, étudier le signe — et ne pas oublier les bornes de l'intervalle."
+    ),
+    tags: ["premiere", "maths", "variations", "extremum_tangente", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_var_et_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_extremum_tangente",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Résous $f'(x) = 0$.",
+    tags: ["premiere", "maths", "variations", "extremum_tangente", "template"],
+    generate: () => {
+      const a = pickOne([1, 1, 2, -1]);
+      const alpha = randomInt(-3, 4);
+      const b = -2 * a * alpha;
+      const c = randomInt(-4, 4);
+      const signeB = b >= 0 ? `+ ${b}` : `- ${-b}`;
+      const signeC = c >= 0 ? `+ ${c}` : `- ${-c}`;
+      const coefA = a === 1 ? "" : a === -1 ? "-" : `${a}`;
+      return {
+        text: `Pour $f(x) = ${coefA}x^2 ${signeB}x ${signeC}$, en quelle abscisse la tangente est-elle horizontale ?`,
+        format: "short",
+        expected: [String(alpha)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Une tangente horizontale correspond à une dérivée nulle.",
+          `$f'(x) = ${2 * a}x ${signeB}$, et on résout $f'(x) = 0$.`,
+          `$x = ${alpha}$ : c'est l'abscisse du sommet de la parabole.`,
+          `La tangente est horizontale en $x = ${alpha}$, où $f$ atteint ${a > 0 ? "son minimum" : "son maximum"}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_var_et_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_extremum_tangente",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Regarde si la dérivée change de signe, et pas seulement si elle s'annule.",
+    tags: ["premiere", "maths", "variations", "extremum_tangente", "open", "template"],
+    generate: () => {
+      const cas = [
+        {
+          f: "$f(x) = x^3$",
+          d: "$f'(x) = 3x^2$",
+          mots: ["pas", "extremum", "signe", "0"],
+          verdict:
+            "$f'$ s'annule en $0$ mais reste positive de part et d'autre : PAS d'extremum, seulement une tangente horizontale.",
+        },
+        {
+          f: "$f(x) = x^2 - 4x$",
+          d: "$f'(x) = 2x - 4$",
+          mots: ["minimum", "2", "change", "signe"],
+          verdict:
+            "$f'$ s'annule en $2$ en passant du négatif au positif : la fonction atteint un MINIMUM en $x = 2$.",
+        },
+        {
+          f: "$f(x) = -x^2 + 6x$",
+          d: "$f'(x) = -2x + 6$",
+          mots: ["maximum", "3", "change", "signe"],
+          verdict:
+            "$f'$ s'annule en $3$ en passant du positif au négatif : la fonction atteint un MAXIMUM en $x = 3$.",
+        },
+        {
+          f: "$f(x) = (x - 1)^3$",
+          d: "$f'(x) = 3(x-1)^2$",
+          mots: ["pas", "extremum", "carré", "positive"],
+          verdict:
+            "$f'$ est un carré multiplié par $3$ : elle s'annule en $1$ sans jamais devenir négative. Aucun extremum.",
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Pour ${c.f}, on a ${c.d}. La dérivée s'annule-t-elle ? Y a-t-il un extremum ? Justifie.`,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Une dérivée nulle donne un candidat ; seul un CHANGEMENT de signe donne un extremum.",
+          "On résout $f'(x) = 0$, puis on étudie le signe de $f'$ de part et d'autre.",
+          c.verdict,
+          "S'annuler ne suffit pas : c'est le changement de signe qui crée le sommet."
+        ),
+      };
+    },
+  },
+
+  /* ===================== VAR_INEGALITE ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_var_ineg_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_inegalite",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour démontrer que $f(x) \\ge g(x)$ pour tout $x$, quelle est la méthode ?",
+    format: "qcm",
+    choices: [
+      "étudier la fonction $f - g$ et montrer qu'elle est positive",
+      "vérifier l'inégalité sur plusieurs valeurs",
+      "comparer $f'$ et $g'$",
+      "calculer $f(0)$ et $g(0)$",
+    ],
+    expected: ["étudier la fonction $f - g$ et montrer qu'elle est positive"],
+    comparator: "mcq_exact",
+    hint: "Ramène tout d'un côté, comme pour une inéquation.",
+    explanation: exp(
+      "Comparer deux fonctions revient à étudier le SIGNE de leur différence.",
+      "$f(x) \\ge g(x)$ équivaut à $f(x) - g(x) \\ge 0$ : on pose $h = f - g$.",
+      "On étudie alors les variations de $h$ pour trouver son minimum : s'il est positif ou nul, l'inégalité est démontrée pour TOUT $x$.",
+      "On étudie le signe de $f - g$."
+    ),
+    tags: ["premiere", "maths", "variations", "inegalite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_ineg_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_inegalite",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une fonction $h$ admet un minimum égal à $2$ sur $\\mathbb{R}$. Que peut-on en déduire ?",
+    format: "qcm",
+    choices: [
+      "$h(x) \\ge 2 > 0$ pour tout $x$ : $h$ est strictement positive",
+      "$h(x) = 2$ pour tout $x$",
+      "$h$ s'annule quelque part",
+      "$h$ est croissante",
+    ],
+    expected: ["$h(x) \\ge 2 > 0$ pour tout $x$ : $h$ est strictement positive"],
+    comparator: "mcq_exact",
+    hint: "Le minimum est la plus petite valeur atteinte.",
+    explanation: exp(
+      "Le minimum d'une fonction est la plus petite valeur qu'elle prend : toutes les autres lui sont supérieures.",
+      "Si ce minimum vaut $2$, alors $h(x) \\ge 2$ pour tout $x$.",
+      "Comme $2 > 0$, la fonction est strictement positive partout : elle ne s'annule jamais. C'est exactement ce qui permet de démontrer une inégalité.",
+      "$h(x) \\ge 2 > 0$ : $h$ est strictement positive."
+    ),
+    tags: ["premiere", "maths", "variations", "inegalite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_ineg_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_inegalite",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Quel est le minimum de $h(x) = x^2 - 2x + 3$ ?",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
+    hint: "$h'(x) = 2x - 2$ s'annule en $1$ : calcule $h(1)$.",
+    explanation: exp(
+      "Le minimum s'obtient là où la dérivée s'annule en changeant de signe.",
+      "$h'(x) = 2x - 2 = 0$ donne $x = 1$, et $h'$ passe du négatif au positif.",
+      "$h(1) = 1 - 2 + 3 = 2$.",
+      "Le minimum vaut $2$ : la fonction est donc toujours supérieure ou égale à $2$, donc strictement positive."
+    ),
+    tags: ["premiere", "maths", "variations", "inegalite", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_ineg_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_inegalite",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pour démontrer que $x^2 + 1 \\ge 2x$ pour tout réel $x$, que suffit-il de remarquer ?",
+    format: "qcm",
+    choices: [
+      "$x^2 + 1 - 2x = (x-1)^2 \\ge 0$",
+      "que c'est vrai pour $x = 0$ et $x = 5$",
+      "que $x^2 \\ge 0$",
+      "que $2x$ est croissante",
+    ],
+    expected: ["$x^2 + 1 - 2x = (x-1)^2 \\ge 0$"],
+    comparator: "mcq_exact",
+    hint: "Ramène tout d'un côté : reconnais-tu une identité remarquable ?",
+    explanation: exp(
+      "On ramène tout d'un côté pour étudier le signe de la différence.",
+      "$x^2 + 1 - 2x = x^2 - 2x + 1$, qu'on reconnaît comme $(x - 1)^2$.",
+      "Un carré est toujours positif ou nul : la différence l'est donc aussi, et l'inégalité est démontrée pour TOUT $x$ — avec égalité seulement en $x = 1$.",
+      "Il suffit de reconnaître $(x-1)^2 \\ge 0$."
+    ),
+    tags: ["premiere", "maths", "variations", "inegalite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_ineg_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_inegalite",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève vérifie que $x^2 + 3 > 2x$ pour $x = 0$, $x = 1$ et $x = 5$, puis conclut que c'est vrai partout. Qu'en penser ?",
+    format: "qcm",
+    choices: [
+      "des exemples ne démontrent rien : il faut étudier le minimum de la différence",
+      "trois valeurs suffisent",
+      "c'est correct car les valeurs sont bien choisies",
+      "il aurait fallu tester des valeurs négatives, et cela aurait suffi",
+    ],
+    expected: [
+      "des exemples ne démontrent rien : il faut étudier le minimum de la différence",
+    ],
+    comparator: "mcq_exact",
+    hint: "Combien de réels faudrait-il tester pour couvrir tous les cas ?",
+    explanation: exp(
+      "Une inégalité « pour tout $x$ » porte sur une infinité de valeurs : aucune vérification finie ne la démontre.",
+      "Il faut étudier $h(x) = x^2 - 2x + 3$ et montrer que son MINIMUM est positif.",
+      "Ici $h$ atteint son minimum en $1$, où elle vaut $2 > 0$ : l'inégalité est donc vraie partout. La conclusion de l'élève était juste, mais son raisonnement ne prouvait rien.",
+      "Il faut étudier le minimum de la différence, pas tester des valeurs."
+    ),
+    tags: ["premiere", "maths", "variations", "inegalite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_ineg_fixed_6",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_inegalite",
+    difficulty: 5,
+    theme: "neutral",
+    text: "On étudie $h = f - g$ et on trouve un minimum égal à $-1$. Que peut-on conclure ?",
+    format: "qcm",
+    choices: [
+      "l'inégalité $f \\ge g$ est FAUSSE : il existe des $x$ où $f < g$",
+      "$f \\ge g$ partout",
+      "$f = g$ partout",
+      "on ne peut rien conclure",
+    ],
+    expected: ["l'inégalité $f \\ge g$ est FAUSSE : il existe des $x$ où $f < g$"],
+    comparator: "mcq_exact",
+    hint: "Un minimum négatif signifie que la différence devient négative quelque part.",
+    explanation: exp(
+      "Le signe du minimum de $h = f - g$ décide de l'inégalité.",
+      "Un minimum de $-1$ signifie que $h$ atteint la valeur $-1$ : la différence devient négative.",
+      "Il existe donc des $x$ pour lesquels $f(x) < g(x)$ : l'inégalité $f \\ge g$ ne tient pas partout. La courbe de $f$ passe sous celle de $g$.",
+      "L'inégalité est fausse : $f$ passe sous $g$."
+    ),
+    tags: ["premiere", "maths", "variations", "inegalite", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_ineg_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_inegalite",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Démontre que $x^2 - 4x + 7 > 0$ pour tout réel $x$, en utilisant les variations.",
+    format: "open",
+    expected: ["minimum", "3", "2", "positif"],
+    comparator: "contains_keyword",
+    hint: "Cherche le minimum de la fonction, puis regarde son signe.",
+    explanation: exp(
+      "Pour montrer qu'une fonction est positive partout, il suffit de montrer que son MINIMUM l'est.",
+      "$h'(x) = 2x - 4$ s'annule en $x = 2$, en passant du négatif au positif : c'est un minimum.",
+      "$h(2) = 4 - 8 + 7 = 3$. Le minimum vaut $3$, donc $h(x) \\ge 3$ pour tout $x$.",
+      "Comme $3 > 0$, la fonction est strictement positive sur $\\mathbb{R}$."
+    ),
+    tags: ["premiere", "maths", "variations", "inegalite", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_ineg_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_inegalite",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi étudier le minimum d'une fonction permet de démontrer une inégalité valable pour TOUS les réels.",
+    format: "open",
+    expected: ["plus petite", "toutes", "supérieur", "infinité"],
+    comparator: "contains_keyword",
+    hint: "Si la plus petite valeur est positive, que valent les autres ?",
+    explanation: exp(
+      "Le minimum est, par définition, la plus petite valeur prise par la fonction.",
+      "Si ce minimum est positif, alors TOUTES les autres valeurs, qui lui sont supérieures, le sont aussi.",
+      "Un seul calcul règle donc le cas d'une infinité de valeurs — là où tester des exemples, même nombreux, ne prouverait jamais rien.",
+      "Si la plus petite valeur est positive, toutes les autres le sont."
+    ),
+    tags: ["premiere", "maths", "variations", "inegalite", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_var_ineg_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_inegalite",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Le minimum d'un trinôme est atteint en $-\\dfrac{b}{2a}$.",
+    tags: ["premiere", "maths", "variations", "inegalite", "template"],
+    generate: () => {
+      const alpha = randomInt(-3, 4);
+      const beta = randomInt(1, 6);
+      const b = -2 * alpha;
+      const c = beta + alpha * alpha;
+      const signeB = b >= 0 ? `+ ${b}` : `- ${-b}`;
+      return {
+        text: `Quel est le minimum de $h(x) = x^2 ${signeB}x + ${c}$ ?`,
+        format: "short",
+        expected: [String(beta)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le minimum d'un trinôme à coefficient dominant positif est atteint là où la dérivée s'annule.",
+          `$h'(x) = 2x ${signeB}$ s'annule en $x = ${alpha}$.`,
+          `$h(${alpha}) = ${alpha * alpha} ${b * alpha >= 0 ? "+ " + b * alpha : "- " + -(b * alpha)} + ${c} = ${beta}$.`,
+          `Le minimum vaut $${beta}$ : comme il est positif, $h(x) > 0$ pour tout réel $x$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_var_ineg_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_inegalite",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Ramène tout d'un côté, étudie la fonction obtenue, conclus sur son minimum.",
+    tags: ["premiere", "maths", "variations", "inegalite", "open", "template"],
+    generate: () => {
+      const cas = [
+        {
+          ineg: "$x^2 + 4 \\ge 4x$",
+          mots: ["(x-2)^2", "carré", "positif", "2"],
+          preuve:
+            "$x^2 + 4 - 4x = (x - 2)^2 \\ge 0$ : un carré est toujours positif ou nul. L'égalité a lieu pour $x = 2$.",
+        },
+        {
+          ineg: "$x^2 - 6x + 10 > 0$",
+          mots: ["minimum", "3", "1", "positif"],
+          preuve:
+            "La dérivée $2x - 6$ s'annule en $3$, minimum. $h(3) = 9 - 18 + 10 = 1 > 0$ : la fonction est strictement positive.",
+        },
+        {
+          ineg: "$x^2 + 9 \\ge 6x$",
+          mots: ["(x-3)^2", "carré", "positif", "3"],
+          preuve:
+            "$x^2 + 9 - 6x = (x - 3)^2 \\ge 0$ : c'est une identité remarquable, toujours positive ou nulle.",
+        },
+        {
+          ineg: "$x^2 - 2x + 5 > 0$",
+          mots: ["minimum", "1", "4", "positif"],
+          preuve:
+            "La dérivée $2x - 2$ s'annule en $1$, minimum. $h(1) = 1 - 2 + 5 = 4 > 0$ : la fonction ne s'annule jamais.",
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Démontre que ${c.ineg} pour tout réel $x$.`,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Pour démontrer une inégalité valable partout, on ramène tout d'un côté et on étudie le signe de la différence.",
+          "Deux voies : reconnaître une identité remarquable, ou chercher le minimum par la dérivée.",
+          c.preuve,
+          "Tester quelques valeurs ne démontrerait rien : il y en a une infinité."
+        ),
+      };
+    },
+  },
+
+  /* ===================== VAR_POSITION_RELATIVE ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_var_pos_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_position_relative",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour étudier la position relative des courbes de $f$ et $g$, que fait-on ?",
+    format: "qcm",
+    choices: [
+      "on étudie le signe de $f(x) - g(x)$",
+      "on compare $f'$ et $g'$",
+      "on calcule $f(0)$ et $g(0)$",
+      "on trace les deux courbes et on observe",
+    ],
+    expected: ["on étudie le signe de $f(x) - g(x)$"],
+    comparator: "mcq_exact",
+    hint: "Être au-dessus, c'est avoir une différence positive.",
+    explanation: exp(
+      "Comparer deux courbes revient à comparer les valeurs des deux fonctions en chaque abscisse.",
+      "On étudie donc le signe de la différence $d(x) = f(x) - g(x)$.",
+      "Là où $d(x) > 0$, la courbe de $f$ est AU-DESSUS de celle de $g$ ; là où $d(x) < 0$, elle est en dessous. Un tracé peut guider l'intuition, mais ne démontre rien.",
+      "On étudie le signe de $f(x) - g(x)$."
+    ),
+    tags: ["premiere", "maths", "variations", "position_relative", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_pos_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_position_relative",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Que signifie $f(x) - g(x) > 0$ sur un intervalle ?",
+    format: "qcm",
+    choices: [
+      "la courbe de $f$ est au-dessus de celle de $g$ sur cet intervalle",
+      "la courbe de $f$ est en dessous de celle de $g$",
+      "les deux courbes se coupent",
+      "$f$ est croissante",
+    ],
+    expected: [
+      "la courbe de $f$ est au-dessus de celle de $g$ sur cet intervalle",
+    ],
+    comparator: "mcq_exact",
+    hint: "Une différence positive signifie que $f(x)$ est plus grand.",
+    explanation: exp(
+      "Le signe de la différence donne la position relative des deux courbes.",
+      "$f(x) - g(x) > 0$ équivaut à $f(x) > g(x)$ : en chaque abscisse de l'intervalle, le point de $\\mathcal{C}_f$ est plus haut.",
+      "La courbe de $f$ est donc au-dessus de celle de $g$. Cela ne dit rien de leurs variations respectives : les deux peuvent monter, descendre, ou faire l'inverse l'une de l'autre.",
+      "$\\mathcal{C}_f$ est au-dessus de $\\mathcal{C}_g$."
+    ),
+    tags: ["premiere", "maths", "variations", "position_relative", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_pos_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_position_relative",
+    difficulty: 5,
+    theme: "neutral",
+    text: "En combien de points les courbes de $f(x) = x^2$ et $g(x) = 2x - 1$ se coupent-elles ?",
+    format: "short",
+    expected: ["1"],
+    comparator: "number_equal",
+    hint: "Résous $x^2 - 2x + 1 = 0$ : reconnais-tu une identité remarquable ?",
+    explanation: exp(
+      "Les points d'intersection sont les solutions de $f(x) = g(x)$, c'est-à-dire les racines de la différence.",
+      "$x^2 - (2x - 1) = x^2 - 2x + 1 = (x - 1)^2$.",
+      "Ce carré ne s'annule qu'en $x = 1$ : il y a UN seul point d'intersection. La droite est en fait tangente à la parabole en ce point.",
+      "Les courbes se coupent en $1$ point."
+    ),
+    tags: ["premiere", "maths", "variations", "position_relative", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_pos_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_position_relative",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Sur quel ensemble la courbe de $f(x) = x^2$ est-elle au-dessus de celle de $g(x) = x$ ?",
+    format: "qcm",
+    choices: [
+      "$]-\\infty ; 0[ \\cup ]1 ; +\\infty[$",
+      "$]0 ; 1[$",
+      "$\\mathbb{R}$",
+      "$]1 ; +\\infty[$",
+    ],
+    expected: ["$]-\\infty ; 0[ \\cup ]1 ; +\\infty[$"],
+    comparator: "mcq_exact",
+    hint: "Étudie le signe de $x^2 - x = x(x - 1)$.",
+    explanation: exp(
+      "On étudie le signe de la différence $d(x) = x^2 - x$.",
+      "$d(x) = x(x - 1)$ : c'est un trinôme de racines $0$ et $1$, avec un coefficient dominant positif.",
+      "Il est donc positif à l'EXTÉRIEUR des racines. La parabole est au-dessus de la droite pour $x < 0$ et pour $x > 1$ ; entre $0$ et $1$, elle passe en dessous.",
+      "$\\mathcal{C}_f$ est au-dessus sur $]-\\infty ; 0[ \\cup ]1 ; +\\infty[$."
+    ),
+    tags: ["premiere", "maths", "variations", "position_relative", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_pos_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_position_relative",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Deux fonctions vérifient $f' > g'$ sur un intervalle. La courbe de $f$ est-elle au-dessus de celle de $g$ ?",
+    format: "qcm",
+    choices: [
+      "non : cela dit seulement que $f$ croît plus vite",
+      "oui, toujours",
+      "oui, si les deux sont croissantes",
+      "non : elle est forcément en dessous",
+    ],
+    expected: ["non : cela dit seulement que $f$ croît plus vite"],
+    comparator: "mcq_exact",
+    hint: "Compare $f(x) = x$ et $g(x) = 0{,}5x + 100$.",
+    explanation: exp(
+      "Comparer les dérivées compare les VITESSES de variation, pas les valeurs.",
+      "Contre-exemple : $f(x) = x$ et $g(x) = 0{,}5x + 100$. On a bien $f' = 1 > 0{,}5 = g'$, et pourtant $f(0) = 0 < 100 = g(0)$.",
+      "La courbe de $f$ monte plus vite, mais elle part de bien plus bas : elle finira par rattraper $g$, sans être au-dessus dès le départ.",
+      "Non : il faut étudier le signe de $f - g$, pas celui de $f' - g'$."
+    ),
+    tags: ["premiere", "maths", "variations", "position_relative", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_pos_fixed_6",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_position_relative",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Les courbes de $f$ et $g$ se coupent aux points d'abscisses solutions de :",
+    format: "qcm",
+    choices: [
+      "$f(x) - g(x) = 0$",
+      "$f'(x) = g'(x)$",
+      "$f(x) + g(x) = 0$",
+      "$f(x) = 0$",
+    ],
+    expected: ["$f(x) - g(x) = 0$"],
+    comparator: "mcq_exact",
+    hint: "Se couper, c'est avoir la même ordonnée à la même abscisse.",
+    explanation: exp(
+      "Un point d'intersection appartient aux deux courbes : il a la même abscisse et la même ordonnée.",
+      "Cela signifie $f(x) = g(x)$, c'est-à-dire $f(x) - g(x) = 0$.",
+      "Les abscisses des points d'intersection sont donc les racines de la différence — celles-là mêmes qui font changer son signe.",
+      "Ce sont les solutions de $f(x) - g(x) = 0$."
+    ),
+    tags: ["premiere", "maths", "variations", "position_relative", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_pos_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_position_relative",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Étudie la position relative des courbes de $f(x) = x^2$ et $g(x) = 4x - 4$.",
+    format: "open",
+    expected: ["(x-2)^2", "au-dessus", "tangente", "2"],
+    comparator: "contains_keyword",
+    hint: "Calcule $f - g$ et reconnais une identité remarquable.",
+    explanation: exp(
+      "On étudie le signe de la différence $d(x) = f(x) - g(x)$.",
+      "$d(x) = x^2 - 4x + 4 = (x - 2)^2$.",
+      "Un carré est toujours positif ou nul : la parabole est donc TOUJOURS au-dessus de la droite, sauf en $x = 2$ où elles se touchent.",
+      "La droite est tangente à la parabole au point d'abscisse $2$ ; ailleurs, $\\mathcal{C}_f$ est strictement au-dessus."
+    ),
+    tags: ["premiere", "maths", "variations", "position_relative", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_pos_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_position_relative",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi comparer $f'$ et $g'$ ne renseigne pas sur la position des courbes.",
+    format: "open",
+    expected: ["vitesse", "valeur", "contre-exemple", "départ"],
+    comparator: "contains_keyword",
+    hint: "Deux voitures : l'une roule plus vite, est-elle devant ?",
+    explanation: exp(
+      "La dérivée mesure une vitesse de variation, pas une valeur.",
+      "Deux fonctions peuvent avoir des dérivées très différentes tout en étant à des hauteurs quelconques : la position dépend aussi d'où elles partent.",
+      "Contre-exemple : $f(x) = x$ et $g(x) = 0{,}5x + 100$. $f$ croît deux fois plus vite, et pourtant sa courbe est très en dessous pour les petites valeurs de $x$.",
+      "Seul le signe de $f - g$ donne la position ; $f' - g'$ ne donne que l'écart des vitesses."
+    ),
+    tags: ["premiere", "maths", "variations", "position_relative", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_var_pos_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_position_relative",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Résous $f(x) = g(x)$ : le nombre de solutions donne le nombre de points communs.",
+    tags: ["premiere", "maths", "variations", "position_relative", "template"],
+    generate: () => {
+      const cas = [
+        { g: "2x - 1", diff: "(x-1)^2", n: 1, com: "un carré parfait : la droite est tangente à la parabole" },
+        { g: "4x - 4", diff: "(x-2)^2", n: 1, com: "un carré parfait : la droite est tangente en $x = 2$" },
+        { g: "x + 2", diff: "x^2 - x - 2", n: 2, com: "un trinôme de racines $-1$ et $2$" },
+        { g: "3x - 2", diff: "x^2 - 3x + 2", n: 2, com: "un trinôme de racines $1$ et $2$" },
+        { g: "2x - 5", diff: "x^2 - 2x + 5", n: 0, com: "un trinôme de discriminant $-16 < 0$ : il ne s'annule jamais" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `En combien de points les courbes de $f(x) = x^2$ et $g(x) = ${c.g}$ se coupent-elles ?`,
+        format: "short",
+        expected: [String(c.n)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Les points d'intersection correspondent aux solutions de $f(x) - g(x) = 0$.",
+          `Ici la différence vaut $${c.diff}$.`,
+          `C'est ${c.com}.`,
+          c.n === 0
+            ? "Les courbes ne se coupent donc jamais : la parabole reste toujours au-dessus de la droite."
+            : c.n === 1
+              ? "Il y a donc $1$ seul point commun."
+              : "Il y a donc $2$ points communs."
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_var_pos_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_position_relative",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule la différence, factorise-la, puis étudie son signe.",
+    tags: ["premiere", "maths", "variations", "position_relative", "open", "template"],
+    generate: () => {
+      const cas = [
+        {
+          f: "$f(x) = x^2$",
+          g: "$g(x) = 6x - 9$",
+          mots: ["(x-3)^2", "au-dessus", "tangente", "3"],
+          etude:
+            "$f - g = x^2 - 6x + 9 = (x-3)^2 \\ge 0$ : la parabole est toujours au-dessus, et la droite lui est tangente en $x = 3$.",
+        },
+        {
+          f: "$f(x) = x^2$",
+          g: "$g(x) = x + 6$",
+          mots: ["-2", "3", "au-dessus", "extérieur"],
+          etude:
+            "$f - g = x^2 - x - 6 = (x+2)(x-3)$ : positif à l'extérieur de $[-2 ; 3]$. La parabole est au-dessus pour $x < -2$ et $x > 3$, en dessous entre les deux.",
+        },
+        {
+          f: "$f(x) = x^2 + 1$",
+          g: "$g(x) = 2x$",
+          mots: ["(x-1)^2", "au-dessus", "toujours", "1"],
+          etude:
+            "$f - g = x^2 - 2x + 1 = (x-1)^2 \\ge 0$ : $\\mathcal{C}_f$ est toujours au-dessus, avec un point de contact en $x = 1$.",
+        },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Étudie la position relative des courbes de ${c.f} et ${c.g}.`,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: exp(
+          "La position relative se lit sur le SIGNE de la différence $f - g$.",
+          "On calcule cette différence, on la factorise, puis on étudie son signe.",
+          c.etude,
+          "Une différence qui s'annule sans changer de signe signale une tangence, pas une traversée."
+        ),
+      };
+    },
+  },
+
+  /* ===================== VAR_SECOND_DEGRE ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_var_sd_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_second_degre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelle est la dérivée de $f(x) = ax^2 + bx + c$ ?",
+    format: "qcm",
+    choices: ["$2ax + b$", "$2ax + b + c$", "$ax + b$", "$2a + b$"],
+    expected: ["$2ax + b$"],
+    comparator: "mcq_exact",
+    hint: "On dérive terme à terme ; la constante disparaît.",
+    explanation: exp(
+      "On dérive chaque terme séparément.",
+      "$(ax^2)' = 2ax$ ; $(bx)' = b$ ; $(c)' = 0$.",
+      "$f'(x) = 2ax + b$ : c'est une fonction AFFINE, ce qui explique qu'un trinôme change de sens au plus une fois.",
+      "$f'(x) = 2ax + b$."
+    ),
+    tags: ["premiere", "maths", "variations", "second_degre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_sd_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_second_degre",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour $f(x) = 2x^2 - 8x + 1$, quelle est l'abscisse du sommet ?",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
+    hint: "Résous $f'(x) = 0$ avec $f'(x) = 4x - 8$.",
+    explanation: exp(
+      "Le sommet est atteint là où la dérivée s'annule.",
+      "$f'(x) = 4x - 8$, et $4x - 8 = 0$ donne $x = 2$.",
+      "On retrouve la formule $-\\dfrac{b}{2a} = -\\dfrac{-8}{4} = 2$ : les deux méthodes coïncident, la dérivation la démontre.",
+      "L'abscisse du sommet est $2$."
+    ),
+    canvas: parabole(2, -8, 1),
+    tags: ["premiere", "maths", "variations", "second_degre", "canvas", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_sd_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_second_degre",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi la formule $-\\dfrac{b}{2a}$ donne-t-elle l'abscisse du sommet ?",
+    format: "qcm",
+    choices: [
+      "car c'est la solution de $2ax + b = 0$, c'est-à-dire $f'(x) = 0$",
+      "car c'est la moyenne des racines uniquement",
+      "c'est une formule à retenir sans justification",
+      "car $b$ est toujours négatif",
+    ],
+    expected: [
+      "car c'est la solution de $2ax + b = 0$, c'est-à-dire $f'(x) = 0$",
+    ],
+    comparator: "mcq_exact",
+    hint: "Résous $f'(x) = 0$ dans le cas général.",
+    explanation: exp(
+      "Le sommet est le point où la tangente est horizontale, donc où $f'$ s'annule.",
+      "$f'(x) = 2ax + b$, et $2ax + b = 0$ donne $x = -\\dfrac{b}{2a}$.",
+      "La formule apprise en seconde se DÉMONTRE ainsi par la dérivation. (C'est aussi la moyenne des racines quand elles existent, mais la formule vaut même sans racine.)",
+      "C'est la solution de $f'(x) = 0$."
+    ),
+    tags: ["premiere", "maths", "variations", "second_degre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_sd_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_second_degre",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour un trinôme avec $a > 0$, quel est le sens de variation ?",
+    format: "qcm",
+    choices: [
+      "décroissante puis croissante",
+      "croissante puis décroissante",
+      "croissante sur $\\mathbb{R}$",
+      "décroissante sur $\\mathbb{R}$",
+    ],
+    expected: ["décroissante puis croissante"],
+    comparator: "mcq_exact",
+    hint: "$f'(x) = 2ax + b$ est une fonction affine croissante si $a > 0$.",
+    explanation: exp(
+      "Les variations d'un trinôme se lisent sur le signe de sa dérivée $f'(x) = 2ax + b$.",
+      "Si $a > 0$, cette fonction affine est croissante : elle est d'abord négative, s'annule au sommet, puis devient positive.",
+      "La fonction décroît donc, puis croît : la parabole est tournée vers le haut et son sommet est un minimum.",
+      "Décroissante puis croissante."
+    ),
+    tags: ["premiere", "maths", "variations", "second_degre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_sd_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_second_degre",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pour $f(x) = 2x^2 - 8x + 1$, quel est le minimum ?",
+    format: "short",
+    expected: ["-7"],
+    comparator: "number_equal",
+    hint: "Le sommet est en $x = 2$ : calcule $f(2)$.",
+    explanation: exp(
+      "Le minimum est l'image de l'abscisse du sommet.",
+      "$f'(x) = 4x - 8$ s'annule en $x = 2$, en passant du négatif au positif : c'est bien un minimum.",
+      "$f(2) = 2 \\times 4 - 16 + 1 = 8 - 16 + 1 = -7$.",
+      "Le minimum vaut $-7$, atteint en $x = 2$."
+    ),
+    canvas: parabole(2, -8, 1),
+    tags: ["premiere", "maths", "variations", "second_degre", "canvas", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_sd_fixed_6",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_second_degre",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Combien de fois un trinôme du second degré peut-il changer de sens de variation ?",
+    format: "short",
+    expected: ["1"],
+    comparator: "number_equal",
+    hint: "Sa dérivée est une fonction affine : combien de fois change-t-elle de signe ?",
+    explanation: exp(
+      "Le nombre de changements de sens correspond au nombre de changements de signe de la dérivée.",
+      "Pour un trinôme, $f'(x) = 2ax + b$ est une fonction AFFINE : elle s'annule une seule fois et change de signe une seule fois.",
+      "Le trinôme change donc de sens exactement une fois, au sommet. C'est pourquoi une parabole n'a qu'un seul sommet, contrairement à une fonction du troisième degré qui peut en avoir deux.",
+      "Une seule fois."
+    ),
+    tags: ["premiere", "maths", "variations", "second_degre", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_sd_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_second_degre",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Étudie les variations de $f(x) = -x^2 + 4x + 1$ par la dérivation, et donne son extremum.",
+    format: "open",
+    expected: ["2", "5", "maximum", "dérivée"],
+    comparator: "contains_keyword",
+    hint: "Dérive, annule, étudie le signe — et regarde le signe de $a$.",
+    explanation: exp(
+      "On étudie les variations d'un trinôme par le signe de sa dérivée.",
+      "$f'(x) = -2x + 4$, qui s'annule en $x = 2$. Comme $a = -1 < 0$, la dérivée est positive AVANT $2$ et négative après.",
+      "La fonction croît puis décroît : elle atteint un MAXIMUM en $x = 2$, égal à $f(2) = -4 + 8 + 1 = 5$.",
+      "Croissante sur $]-\\infty ; 2]$, décroissante ensuite, avec un maximum de $5$."
+    ),
+    canvas: parabole(-1, 4, 1),
+    tags: ["premiere", "maths", "variations", "second_degre", "canvas", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_sd_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_second_degre",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi le signe de $a$ suffit à connaître l'allure d'une parabole, sans calculer quoi que ce soit.",
+    format: "open",
+    expected: ["dérivée", "affine", "croissante", "minimum"],
+    comparator: "contains_keyword",
+    hint: "Quelle est la nature de $f'$, et que fait son signe ?",
+    explanation: exp(
+      "L'allure d'une parabole dépend entièrement du signe de $a$, et la dérivation l'explique.",
+      "$f'(x) = 2ax + b$ est une fonction affine dont le coefficient directeur est $2a$.",
+      "Si $a > 0$, $f'$ est croissante : elle passe du négatif au positif, donc $f$ décroît puis croît — parabole tournée vers le haut, sommet minimum. Si $a < 0$, tout s'inverse.",
+      "Le signe de $a$ fixe le sens de variation de $f'$, donc l'allure de la courbe."
+    ),
+    tags: ["premiere", "maths", "variations", "second_degre", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_var_sd_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_second_degre",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Dérive, puis résous $f'(x) = 0$.",
+    tags: ["premiere", "maths", "variations", "second_degre", "template"],
+    generate: () => {
+      const a = pickOne([1, 2, 3, -1, -2]);
+      const alpha = randomInt(-3, 4);
+      const b = -2 * a * alpha;
+      const c = randomInt(-5, 5);
+      const ys = a * alpha * alpha + b * alpha + c;
+      const signeB = b >= 0 ? `+ ${b}` : `- ${-b}`;
+      const signeC = c >= 0 ? `+ ${c}` : `- ${-c}`;
+      const coefA = a === 1 ? "" : a === -1 ? "-" : `${a}`;
+      const question = randomInt(0, 1) === 1;
+      return {
+        text: question
+          ? `Pour $f(x) = ${coefA}x^2 ${signeB}x ${signeC}$, quelle est l'abscisse du sommet ?`
+          : `Pour $f(x) = ${coefA}x^2 ${signeB}x ${signeC}$, quel est ${a > 0 ? "le minimum" : "le maximum"} ?`,
+        format: "short",
+        expected: [String(question ? alpha : ys)],
+        comparator: "number_equal",
+        explanation: exp(
+          "On étudie le trinôme par la dérivation : le sommet est là où $f'$ s'annule.",
+          `$f'(x) = ${2 * a}x ${signeB}$, qui s'annule en $x = ${alpha}$.`,
+          question
+            ? `L'abscisse du sommet est donc $${alpha}$.`
+            : `L'extremum est l'image : $f(${alpha}) = ${ys}$.`,
+          a > 0
+            ? `Comme $a > 0$, la fonction décroît puis croît : c'est un minimum${question ? "" : ` de $${ys}$`}.`
+            : `Comme $a < 0$, la fonction croît puis décroît : c'est un maximum${question ? "" : ` de $${ys}$`}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_var_sd_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_second_degre",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Dérive, annule, regarde le signe de $a$, conclus par un tableau.",
+    tags: ["premiere", "maths", "variations", "second_degre", "open", "template"],
+    generate: () => {
+      const a = pickOne([1, 2, -1, -3]);
+      const alpha = randomInt(-2, 3);
+      const b = -2 * a * alpha;
+      const c = randomInt(-4, 6);
+      const ys = a * alpha * alpha + b * alpha + c;
+      const signeB = b >= 0 ? `+ ${b}` : `- ${-b}`;
+      const signeC = c >= 0 ? `+ ${c}` : `- ${-c}`;
+      const coefA = a === 1 ? "" : a === -1 ? "-" : `${a}`;
+      return {
+        text: `Étudie les variations de $f(x) = ${coefA}x^2 ${signeB}x ${signeC}$ par la dérivation, et donne son extremum.`,
+        format: "open",
+        expected: [String(alpha), String(ys), a > 0 ? "minimum" : "maximum", "dérivée"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Les variations d'un trinôme se déduisent du signe de sa dérivée, qui est une fonction affine.",
+          `$f'(x) = ${2 * a}x ${signeB}$, qui s'annule en $x = ${alpha}$.`,
+          a > 0
+            ? `Comme $a > 0$, $f'$ est négative avant $${alpha}$ et positive après : $f$ décroît puis croît.`
+            : `Comme $a < 0$, $f'$ est positive avant $${alpha}$ et négative après : $f$ croît puis décroît.`,
+          `L'extremum est un ${a > 0 ? "minimum" : "maximum"} égal à $f(${alpha}) = ${ys}$.`
         ),
       };
     },
