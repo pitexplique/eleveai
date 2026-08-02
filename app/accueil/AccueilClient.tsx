@@ -1007,20 +1007,34 @@ export default function AccueilPage({
             <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[#1d1c16]/70 sm:text-xs">
               Le journal pour apprendre et s&apos;évaluer · Île de La Réunion
             </p>
-            {/* TI MARGO PERCHÉ SUR LA MANCHETTE (Frédéric, 02/08). Dimensionné
-                en `em` : il grandit avec le titre, donc il reste à la même
-                place sur téléphone comme sur grand écran. `align-top` le pose
-                à hauteur de capitale — il grimpe sur le « r », il ne flotte
-                pas à côté. Le 🦎 regarde vers la gauche dans la plupart des
-                polices : posé à droite, il regarde donc le mot. */}
-            <h1 className="mt-1 font-serif text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl">
-              eleveai<span className="text-cyan-800">.fr</span>
-              <span
-                className="ml-1 align-top text-[0.34em] leading-none"
-                role="img"
-                aria-label="Ti Margo, le margouillat du journal"
-              >
-                🦎
+            {/* TI MARGO EN MANCHETTE (Frédéric, 02/08). D'abord posé en emoji
+                à droite : il le veut à gauche, plus gros, et surtout AVEC SON
+                CRAYON — c'est-à-dire le vrai dessin des cahiers de vacances
+                (public/cahier-vacances/ti-margo.png), pas un pictogramme
+                système qui change de tête d'un téléphone à l'autre.
+                Le titre devient une ligne flex : `items-end` pose ses pattes
+                sur la ligne de base du mot, `h-[1.5em]` le dimensionne par
+                rapport au titre — il grandit donc avec la manchette, du
+                téléphone au grand écran, sans réglage par palier.
+                Pas de `lazy` : il est au-dessus de la ligne de flottaison. */}
+            <h1 className="mt-1 flex items-end justify-center gap-2 font-serif text-5xl font-black leading-none tracking-tight sm:text-6xl lg:text-7xl">
+              {/* Par next/image et pas <img> : le PNG d'origine pèse 682 Ko
+                  pour 1122×1402, et il est désormais la première image de la
+                  page. Servi tel quel, c'est lui qui retarderait l'affichage
+                  sur un téléphone au collège. next/image le redimensionne et
+                  le convertit en WebP ; `priority` le charge tout de suite
+                  puisqu'il est au-dessus de la ligne de flottaison. */}
+              <Image
+                src="/cahier-vacances/ti-margo.png"
+                alt="Ti Margo, le margouillat du journal, avec son crayon"
+                width={1122}
+                height={1402}
+                sizes="(max-width: 640px) 60px, (max-width: 1024px) 75px, 90px"
+                priority
+                className="h-[1.5em] w-auto shrink-0"
+              />
+              <span>
+                eleveai<span className="text-cyan-800">.fr</span>
               </span>
             </h1>
             <p className="mt-2 font-serif text-base font-black italic tracking-wide text-[#1d1c16]/70 sm:text-lg">
