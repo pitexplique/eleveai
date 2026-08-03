@@ -3449,4 +3449,405 @@ export const suitesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* =========================================================
+     QUESTIONS OUVERTES — compléments du 02/08/2026.
+     Les cinq micro-compétences ci-dessous avaient été écrites avant qu'on
+     abandonne le compteur d'items fixes : elles n'avaient aucune question
+     ouverte. Le BO demande de préparer l'oral « dès la classe de première ».
+     Deux ouvertes fixes + un TEMPLATE ouvert par micro, pour que la question
+     ouverte ne se répète pas elle non plus.
+  ========================================================= */
+
+  {
+    kind: "fixed",
+    id: "premiere_suite_ter_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_termes",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique la différence entre une suite définie de façon EXPLICITE et une suite définie par RÉCURRENCE.",
+    format: "open",
+    expected: ["directement", "precedent", "précédent", "de proche en proche", "n'importe quel rang", "un par un"],
+    comparator: "contains_keyword",
+    hint: "Pour calculer $u_{100}$, faut-il connaître $u_{99}$ ?",
+    explanation: exp(
+      "Les deux écritures décrivent la même suite, mais elles ne se calculent pas de la même façon.",
+      "Une définition EXPLICITE donne $u_n$ en fonction de $n$ : on calcule directement n'importe quel terme, sans les précédents. $u_{100}$ s'obtient en une ligne.",
+      "Une définition par RÉCURRENCE donne $u_{n+1}$ en fonction de $u_n$ : il faut avancer de proche en proche depuis le premier terme. Pour $u_{100}$, il faut avoir calculé les cent précédents.",
+      "L'explicite va droit au but ; la récurrence décrit le passage d'un terme au suivant, ce qui colle mieux à une situation concrète (« chaque mois, on ajoute… »)."
+    ),
+    tags: ["premiere", "maths", "suites", "termes", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suite_ter_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_termes",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève affirme que le premier terme d'une suite est toujours $u_1$. Explique pourquoi il faut se méfier.",
+    format: "open",
+    expected: ["rang", "u_0", "commence", "enonce", "énoncé", "depend", "dépend"],
+    comparator: "contains_keyword",
+    hint: "Que devient $u_{10}$ selon que la suite commence à $u_0$ ou à $u_1$ ?",
+    explanation: exp(
+      "Le rang du premier terme n'est pas imposé : c'est l'énoncé qui le fixe, et il faut le lire.",
+      "Beaucoup de suites commencent à $u_0$ — c'est même le cas le plus fréquent quand $n$ compte un nombre d'années écoulées, l'année de départ portant le rang $0$.",
+      "L'enjeu est concret : pour une population qui double chaque année à partir de $1000$, le terme au bout de dix ans est $u_{10}$ si on part de $u_0$, mais $u_{11}$ si on part de $u_1$. Un rang d'écart, c'est un doublement d'écart.",
+      "Il faut toujours vérifier à quel rang la suite commence avant de calculer quoi que ce soit."
+    ),
+    tags: ["premiere", "maths", "suites", "termes", "piege", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_suite_ter_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_termes",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Remplace $n$ par chaque rang demandé, sans avoir besoin des termes précédents.",
+    tags: ["premiere", "maths", "suites", "termes", "open", "template"],
+    generate: () => {
+      const a = randomInt(2, 6);
+      const b = randomInt(-4, 6);
+      const r = pickOne([20, 50, 100]);
+      return {
+        text: `La suite $(u_n)$ est définie pour tout entier $n$ par $u_n = ${a}n ${b >= 0 ? "+ " + b : "- " + -b}$. Calcule $u_0$ et $u_{${r}}$, puis explique pourquoi tu n'as pas eu besoin de calculer les termes intermédiaires.`,
+        format: "open",
+        expected: [String(b), String(a * r + b), "explicite", "directement", "remplace", "sans les precedents", "sans les précédents"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Une suite définie explicitement donne $u_n$ en fonction de $n$ : chaque terme se calcule seul, en remplaçant $n$ par le rang voulu.",
+          `On remplace $n$ par $0$ : $u_0 = ${a} \\times 0 ${b >= 0 ? "+ " + b : "- " + -b} = ${b}$.`,
+          `Puis $n$ par $${r}$ : $u_{${r}} = ${a} \\times ${r} ${b >= 0 ? "+ " + b : "- " + -b} = ${a * r + b}$.`,
+          `Aucun terme intermédiaire n'est nécessaire — c'est tout l'intérêt de la forme explicite. Avec une définition par récurrence, il aurait fallu $${r}$ calculs successifs.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_suite_ari_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_arithmetique",
+    difficulty: 5,
+    theme: "neutral",
+    text: "On te donne les premiers termes d'une suite. Comment reconnais-tu qu'elle est arithmétique ?",
+    format: "open",
+    expected: ["difference", "différence", "constante", "soustrait", "meme nombre", "même nombre"],
+    comparator: "contains_keyword",
+    hint: "Que fait-on entre deux termes consécutifs ?",
+    explanation: exp(
+      "Une suite est arithmétique lorsqu'on passe d'un terme au suivant en AJOUTANT toujours le même nombre, appelé la raison.",
+      "Pour le vérifier sur une liste, on calcule les différences entre termes consécutifs : $u_1 - u_0$, puis $u_2 - u_1$, etc.",
+      "Si toutes ces différences sont égales, la suite est arithmétique et cette valeur commune est la raison. Une seule différence qui s'écarte suffit à conclure que non.",
+      "Différences constantes → arithmétique. Attention : quelques termes ne PROUVENT rien, ils suggèrent ; la démonstration se fait sur $u_{n+1} - u_n$ en général."
+    ),
+    tags: ["premiere", "maths", "suites", "arithmetique", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suite_ari_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_arithmetique",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève dit que la suite $u_n = 3n + 2$ n'est pas arithmétique, « parce qu'on ne voit pas de $+r$ ». Explique-lui.",
+    format: "open",
+    expected: ["difference", "différence", "u_{n+1}", "raison 3", "3", "constante"],
+    comparator: "contains_keyword",
+    hint: "Calcule $u_{n+1} - u_n$.",
+    explanation: exp(
+      "Une suite arithmétique peut s'écrire de deux façons : par récurrence ($u_{n+1} = u_n + r$) ou explicitement ($u_n = u_0 + nr$). La seconde ne montre pas la raison à l'œil nu.",
+      "Pour trancher, on calcule la différence : $u_{n+1} - u_n = \\left(3(n+1) + 2\\right) - (3n + 2)$.",
+      "$= 3n + 3 + 2 - 3n - 2 = 3$. Cette différence est constante, donc la suite EST arithmétique, de raison $3$ et de premier terme $u_0 = 2$.",
+      "La forme explicite d'une suite arithmétique est toujours affine en $n$ : le coefficient de $n$ est la raison, la constante est $u_0$."
+    ),
+    tags: ["premiere", "maths", "suites", "arithmetique", "piege", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_suite_ari_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_arithmetique",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule $u_{n+1} - u_n$ : si le résultat ne dépend pas de $n$, la suite est arithmétique.",
+    tags: ["premiere", "maths", "suites", "arithmetique", "open", "template"],
+    generate: () => {
+      const cas = [
+        { f: "u_n = 5n - 3", ok: true, r: "5" },
+        { f: "u_n = -2n + 7", ok: true, r: "-2" },
+        { f: "u_n = n^2", ok: false, r: "2n + 1" },
+        { f: "u_n = 3 \\times 2^n", ok: false, r: "3 \\times 2^n" },
+        { f: "u_n = \\dfrac{n}{2} + 1", ok: true, r: "\\dfrac{1}{2}" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `La suite définie par $${c.f}$ est-elle arithmétique ? Justifie en calculant $u_{n+1} - u_n$.`,
+        format: "open",
+        expected: c.ok
+          ? ["constante", "ne depend pas de n", "ne dépend pas de n", "arithmetique", "arithmétique"]
+          : ["depend de n", "dépend de n", "pas constante", "pas arithmetique", "pas arithmétique"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Une suite est arithmétique si et seulement si la différence $u_{n+1} - u_n$ ne dépend pas de $n$.",
+          `On remplace : $u_{n+1}$ s'obtient en mettant $n+1$ à la place de $n$ dans $${c.f}$, puis on soustrait $u_n$.`,
+          c.ok
+            ? `On obtient $${c.r}$, un nombre fixe : la différence est bien constante.`
+            : `On obtient $${c.r}$, qui dépend encore de $n$ : l'écart entre deux termes consécutifs change à chaque rang.`,
+          c.ok
+            ? `La suite est arithmétique, de raison $${c.r}$.`
+            : "La suite n'est pas arithmétique."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_suite_geo_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_geometrique",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique la différence entre une suite arithmétique et une suite géométrique, avec un exemple concret de chacune.",
+    format: "open",
+    expected: ["ajoute", "multiplie", "raison", "difference", "différence", "quotient"],
+    comparator: "contains_keyword",
+    hint: "Dans un cas on ajoute, dans l'autre on multiplie.",
+    explanation: exp(
+      "Les deux suites décrivent une régularité, mais pas la même opération.",
+      "Arithmétique : on AJOUTE toujours le même nombre. Un livret qui reçoit $50$ € chaque mois, ou une pile de briques dont on ajoute trois rangées par jour.",
+      "Géométrique : on MULTIPLIE toujours par le même nombre. Un capital à $3\\,\\%$ par an (on multiplie par $1{,}03$), une population qui double, une quantité de médicament qui diminue de moitié.",
+      "On les distingue par un test : différences constantes → arithmétique ; quotients constants → géométrique. La géométrique s'emballe (ou s'effondre) bien plus vite."
+    ),
+    tags: ["premiere", "maths", "suites", "geometrique", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suite_geo_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_geometrique",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Une suite géométrique a un premier terme positif et une raison comprise entre $0$ et $1$. Explique pourquoi elle décroît sans jamais devenir négative.",
+    format: "open",
+    expected: ["multiplie", "fraction", "reste positif", "jamais negatif", "jamais négatif", "entre 0 et 1"],
+    comparator: "contains_keyword",
+    hint: "Que devient un nombre positif multiplié par $0{,}8$ ? Et si on recommence ?",
+    explanation: exp(
+      "Chaque terme s'obtient en multipliant le précédent par la raison : le signe et la taille se déduisent de cette seule opération.",
+      "La raison est strictement comprise entre $0$ et $1$ : multiplier par elle DIMINUE un nombre positif, donc la suite décroît.",
+      "Mais le produit de deux nombres strictement positifs reste strictement positif : aucun terme ne peut devenir nul ni négatif. Les termes se rapprochent de $0$ sans jamais l'atteindre.",
+      "Elle décroît parce qu'on multiplie par un nombre plus petit que $1$, et reste positive parce qu'on multiplie par un nombre positif — les deux conditions viennent du même encadrement."
+    ),
+    tags: ["premiere", "maths", "suites", "geometrique", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_suite_geo_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_geometrique",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Compare la raison à $1$, et regarde le signe du premier terme.",
+    tags: ["premiere", "maths", "suites", "geometrique", "open", "template"],
+    generate: () => {
+      const cas = [
+        { u0: 500, q: "1,05", sens: "croissante", pourcent: "+5 %" },
+        { u0: 200, q: "0,9", sens: "décroissante", pourcent: "−10 %" },
+        { u0: 1000, q: "0,75", sens: "décroissante", pourcent: "−25 %" },
+        { u0: 50, q: "1,2", sens: "croissante", pourcent: "+20 %" },
+        { u0: 800, q: "0,5", sens: "décroissante", pourcent: "−50 %" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Une suite géométrique a pour premier terme $u_0 = ${c.u0}$ et pour raison $${c.q}$. Est-elle croissante ou décroissante ? Que représente cette raison en pourcentage ? Justifie.`,
+        format: "open",
+        expected: [c.sens, c.pourcent, "raison", "1", "multiplie"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Pour une suite géométrique à termes positifs, tout se joue sur la position de la raison par rapport à $1$.",
+          `Ici la raison vaut $${c.q}$, et le premier terme $${c.u0}$ est positif.`,
+          c.sens === "croissante"
+            ? `Comme $${c.q} > 1$, chaque terme est plus grand que le précédent : la suite croît.`
+            : `Comme $0 < ${c.q} < 1$, chaque terme est une fraction du précédent : la suite décroît, tout en restant positive.`,
+          `La suite est ${c.sens}, et multiplier par $${c.q}$ correspond à une évolution de $${c.pourcent}$ à chaque étape.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_suite_var_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_variation",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Quelles sont les deux méthodes pour étudier le sens de variation d'une suite, et quand choisit-on l'une plutôt que l'autre ?",
+    format: "open",
+    expected: ["difference", "différence", "quotient", "signe", "comparer a 1", "comparer à 1"],
+    comparator: "contains_keyword",
+    hint: "L'une soustrait, l'autre divise. Laquelle convient à une suite géométrique ?",
+    explanation: exp(
+      "Étudier le sens de variation d'une suite, c'est comparer $u_{n+1}$ et $u_n$ pour tout $n$.",
+      "Première méthode — la DIFFÉRENCE : on calcule $u_{n+1} - u_n$ et on étudie son signe. Positive pour tout $n$ → croissante. C'est la méthode générale, celle qu'on essaie d'abord.",
+      "Seconde méthode — le QUOTIENT : on calcule $\\dfrac{u_{n+1}}{u_n}$ et on le compare à $1$. Elle n'est valable que si tous les termes sont strictement positifs, mais elle est bien plus simple pour les suites géométriques, où les puissances se simplifient.",
+      "Différence pour les suites définies par des sommes, quotient pour celles définies par des produits ou des puissances — à condition d'avoir vérifié que les termes sont positifs."
+    ),
+    tags: ["premiere", "maths", "suites", "variation", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suite_var_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_variation",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève calcule $u_0$, $u_1$, $u_2$ et $u_3$, constate qu'ils augmentent, et conclut que la suite est croissante. Que lui manque-t-il ?",
+    format: "open",
+    expected: ["tout n", "pour tout", "demonstration", "démonstration", "quelques termes", "pas une preuve"],
+    comparator: "contains_keyword",
+    hint: "Une suite peut-elle monter au début puis redescendre ?",
+    explanation: exp(
+      "Une suite est croissante si $u_{n+1} \\geqslant u_n$ POUR TOUT entier $n$ — pas seulement pour les premiers.",
+      "Quatre termes qui montent ne prouvent rien : la suite $u_n = -n^2 + 10n$ croît jusqu'au rang $5$ puis décroît définitivement.",
+      "Il faut donc une démonstration valable pour tout $n$ : calculer $u_{n+1} - u_n$ en gardant $n$ comme lettre, et montrer que le signe obtenu ne dépend pas de la valeur de $n$.",
+      "Quelques termes suggèrent, ils ne démontrent pas — c'est la même différence qu'entre un dessin et une preuve."
+    ),
+    tags: ["premiere", "maths", "suites", "variation", "piege", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_suite_var_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_variation",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule $u_{n+1} - u_n$ en gardant $n$ comme lettre, puis étudie le signe obtenu.",
+    tags: ["premiere", "maths", "suites", "variation", "open", "template"],
+    generate: () => {
+      const cas = [
+        { f: "u_n = 4n + 1", sens: "croissante", diff: "4", raison: "un nombre strictement positif" },
+        { f: "u_n = -3n + 10", sens: "décroissante", diff: "-3", raison: "un nombre strictement négatif" },
+        { f: "u_n = n^2", sens: "croissante", diff: "2n + 1", raison: "strictement positif pour tout entier naturel $n$" },
+        { f: "u_n = -n^2", sens: "décroissante", diff: "-2n - 1", raison: "strictement négatif pour tout entier naturel $n$" },
+        { f: "u_n = 2^n", sens: "croissante", diff: "2^n", raison: "strictement positif" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Étudie le sens de variation de la suite définie par $${c.f}$, et rédige ta justification comme au tableau.`,
+        format: "open",
+        expected: [c.sens === "croissante" ? "croissante" : "decroissante", c.sens, "u_{n+1} - u_n", "pour tout", "signe"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Le sens de variation d'une suite se démontre en étudiant le signe de $u_{n+1} - u_n$, valable POUR TOUT $n$.",
+          `On écrit $u_{n+1}$ en remplaçant $n$ par $n+1$ dans $${c.f}$, puis on soustrait $u_n$.`,
+          `Après simplification, on obtient $${c.diff}$, qui est ${c.raison}.`,
+          `La différence garde donc un signe constant : la suite est ${c.sens} sur $\\mathbb{N}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_suite_som_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_sommes",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique l'astuce qui permet de calculer $1 + 2 + \\ldots + n$ sans tout additionner.",
+    format: "open",
+    expected: ["paires", "deux a deux", "deux à deux", "n + 1", "double", "gauss"],
+    comparator: "contains_keyword",
+    hint: "Écris la somme à l'endroit, puis à l'envers, et additionne les deux lignes.",
+    explanation: exp(
+      "L'idée est de faire apparaître des paires qui donnent toutes le même total, au lieu d'additionner terme à terme.",
+      "On écrit la somme deux fois, la seconde à l'envers : $1 + 2 + \\ldots + n$ et $n + (n-1) + \\ldots + 1$.",
+      "En additionnant colonne par colonne, chaque paire vaut $n + 1$, et il y a $n$ colonnes : le total des deux lignes vaut $n(n+1)$. Comme on a compté la somme deux fois, on divise par $2$.",
+      "$1 + 2 + \\ldots + n = \\dfrac{n(n+1)}{2}$ — l'astuce attribuée au jeune Gauss, qui aurait additionné $1$ à $100$ en quelques secondes."
+    ),
+    tags: ["premiere", "maths", "suites", "sommes", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_suite_som_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_sommes",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Dans la formule d'une somme de termes arithmétiques, on multiplie le nombre de termes par la moyenne du premier et du dernier. Explique pourquoi cela fonctionne.",
+    format: "open",
+    expected: ["moyenne", "regulier", "régulier", "premier et dernier", "paires", "compense"],
+    comparator: "contains_keyword",
+    hint: "Que vaut la somme du premier et du dernier terme ? Et celle du deuxième et de l'avant-dernier ?",
+    explanation: exp(
+      "Dans une suite arithmétique, les termes sont régulièrement espacés : ce qu'on gagne d'un côté, on le perd de l'autre.",
+      "Le deuxième terme dépasse le premier de la raison, tandis que l'avant-dernier est en dessous du dernier de cette même raison : leur somme est donc la même que celle du premier et du dernier.",
+      "Toutes les paires « symétriques » donnent le même total. La moyenne de tous les termes est donc exactement la moyenne du premier et du dernier.",
+      "Somme $=$ nombre de termes $\\times$ moyenne des extrêmes. Cela ne marche QUE pour une suite arithmétique : sans régularité, les écarts ne se compensent plus."
+    ),
+    tags: ["premiere", "maths", "suites", "sommes", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_suite_som_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_sommes",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Nombre de termes $\\times$ moyenne du premier et du dernier.",
+    tags: ["premiere", "maths", "suites", "sommes", "open", "template"],
+    generate: () => {
+      const n = pickOne([10, 20, 50, 100, 200]);
+      const s = (n * (n + 1)) / 2;
+      return {
+        text: `Calcule $1 + 2 + 3 + \\ldots + ${n}$, et explique la méthode que tu utilises plutôt que d'additionner les ${n} termes un par un.`,
+        format: "open",
+        expected: [String(s), "n(n+1)/2", "paires", "moyenne", String(n + 1)],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "On regroupe les termes par paires de même total plutôt que de les additionner dans l'ordre.",
+          `En écrivant la somme à l'endroit puis à l'envers, chaque paire vaut $${n} + 1 = ${n + 1}$, et il y a $${n}$ paires.`,
+          `Le double de la somme vaut donc $${n} \\times ${n + 1} = ${n * (n + 1)}$, et la somme elle-même la moitié.`,
+          `$1 + 2 + \\ldots + ${n} = \\dfrac{${n} \\times ${n + 1}}{2} = ${s}$.`
+        ),
+      };
+    },
+  },
 ];

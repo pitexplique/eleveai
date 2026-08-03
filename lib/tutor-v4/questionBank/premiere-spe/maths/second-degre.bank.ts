@@ -3413,4 +3413,408 @@ export const secondDegreBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* =========================================================
+     QUESTIONS OUVERTES — compléments du 02/08/2026.
+     Les cinq micro-compétences de ce chapitre avaient été écrites avant qu'on
+     abandonne le compteur d'items fixes : aucune n'avait de question ouverte.
+     Deux ouvertes fixes + un TEMPLATE ouvert par micro.
+  ========================================================= */
+
+  {
+    kind: "fixed",
+    id: "premiere_sd_dis_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_discriminant",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Que peut-on savoir d'une équation du second degré rien qu'avec le SIGNE du discriminant, sans finir la résolution ?",
+    format: "open",
+    expected: ["nombre de solutions", "deux", "une", "aucune", "signe"],
+    comparator: "contains_keyword",
+    hint: "Trois cas, selon que $\\Delta$ est positif, nul ou négatif.",
+    explanation: exp(
+      "Le discriminant $\\Delta = b^2 - 4ac$ est ce qui se trouve sous la racine carrée dans la formule des solutions : son signe décide donc si cette racine existe.",
+      "Trois cas seulement : $\\Delta > 0$, $\\Delta = 0$, $\\Delta < 0$.",
+      "Si $\\Delta > 0$, la racine existe et se compte deux fois (une fois en plus, une fois en moins) : deux solutions distinctes. Si $\\Delta = 0$, la racine vaut $0$ et les deux formules donnent le même nombre : une solution double. Si $\\Delta < 0$, aucune racine carrée n'existe : pas de solution réelle.",
+      "Le signe seul donne le NOMBRE de solutions — et graphiquement, le nombre de points où la parabole coupe l'axe des abscisses."
+    ),
+    tags: ["premiere", "maths", "second_degre", "discriminant", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_dis_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_discriminant",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève calcule le discriminant de $x^2 - 4x + 4$ et trouve $\\Delta = 0$. Que se passe-t-il, géométriquement ?",
+    format: "open",
+    expected: ["tangente", "touche", "un seul point", "sommet", "double"],
+    comparator: "contains_keyword",
+    hint: "Combien de fois la parabole rencontre-t-elle l'axe des abscisses ?",
+    explanation: exp(
+      "Les solutions de $f(x) = 0$ sont les abscisses des points où la parabole rencontre l'axe des abscisses.",
+      "Un discriminant nul donne une seule solution, ici $x = 2$ : la parabole ne rencontre l'axe qu'en UN point.",
+      "Elle ne le traverse donc pas : elle le touche et repart du même côté. Ce point de contact est exactement le sommet, et l'axe des abscisses y est tangent à la courbe. On dit que $2$ est une racine double, et le trinôme s'écrit $(x-2)^2$.",
+      "$\\Delta = 0$ signifie que la parabole est POSÉE sur l'axe : elle le touche en son sommet sans le franchir."
+    ),
+    canvas: parabole(1, -4, 4),
+    tags: ["premiere", "maths", "second_degre", "discriminant", "canvas", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_dis_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_discriminant",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "$\\Delta = b^2 - 4ac$ — attention aux signes des coefficients.",
+    tags: ["premiere", "maths", "second_degre", "discriminant", "open", "template"],
+    generate: () => {
+      const cas = [
+        { a: 1, b: -5, c: 6, d: 1, n: "deux solutions distinctes" },
+        { a: 1, b: -6, c: 9, d: 0, n: "une solution double" },
+        { a: 1, b: 2, c: 5, d: -16, n: "aucune solution réelle" },
+        { a: 2, b: -4, c: 2, d: 0, n: "une solution double" },
+        { a: 1, b: 1, c: -6, d: 25, n: "deux solutions distinctes" },
+        { a: 3, b: 1, c: 4, d: -47, n: "aucune solution réelle" },
+      ];
+      const c = pickOne(cas);
+      const ecrire = (v: number, lettre: string) =>
+        v === 1 ? lettre : v === -1 ? "-" + lettre : `${v}${lettre}`;
+      return {
+        text: `Sans résoudre l'équation, dis combien de solutions admet $${ecrire(c.a, "x^2")} ${c.b >= 0 ? "+ " + ecrire(c.b, "x") : "- " + ecrire(-c.b, "x")} ${c.c >= 0 ? "+ " + c.c : "- " + -c.c} = 0$, et explique comment tu le sais.`,
+        format: "open",
+        expected: [String(c.d), "discriminant", c.d > 0 ? "deux" : c.d === 0 ? "double" : "aucune", "signe"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Le nombre de solutions d'une équation du second degré se lit sur le SIGNE du discriminant $\\Delta = b^2 - 4ac$.",
+          `Ici $a = ${c.a}$, $b = ${c.b}$ et $c = ${c.c}$ : $\\Delta = (${c.b})^2 - 4 \\times ${c.a} \\times (${c.c})$.`,
+          `$\\Delta = ${c.d}$, un nombre ${c.d > 0 ? "strictement positif" : c.d === 0 ? "nul" : "strictement négatif"}.`,
+          `L'équation admet donc ${c.n} — et il n'a pas été nécessaire de les calculer.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_sd_rac_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_racines",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi l'équation $x^2 = 9$ a-t-elle DEUX solutions, alors qu'on écrit souvent $\\sqrt{9} = 3$ ?",
+    format: "open",
+    expected: ["-3", "oppose", "opposé", "deux", "positif", "carre"],
+    comparator: "contains_keyword",
+    hint: "Combien de nombres ont pour carré $9$ ?",
+    explanation: exp(
+      "Il faut distinguer deux questions : « quels nombres ont pour carré $9$ ? » et « que vaut $\\sqrt{9}$ ? ».",
+      "Deux nombres ont pour carré $9$ : $3$ et $-3$, car un carré efface le signe. L'équation $x^2 = 9$ a donc bien deux solutions.",
+      "Mais $\\sqrt{9}$ désigne par convention le nombre POSITIF dont le carré vaut $9$ : c'est $3$, et seulement $3$. La racine carrée est une fonction, elle ne peut pas rendre deux valeurs.",
+      "On écrit donc $x = 3$ OU $x = -3$, et non $x = \\sqrt{9}$. L'oubli de la solution négative est l'erreur la plus fréquente du chapitre."
+    ),
+    tags: ["premiere", "maths", "second_degre", "racines", "piege", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_rac_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_racines",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Décris la démarche complète pour résoudre une équation du second degré, de la mise en forme jusqu'à la conclusion.",
+    format: "open",
+    expected: ["= 0", "identifier", "discriminant", "formule", "conclure"],
+    comparator: "contains_keyword",
+    hint: "Quatre étapes, dont une qu'on oublie souvent au tout début.",
+    explanation: exp(
+      "Une équation du second degré se résout toujours dans le même ordre, et la première étape est celle qu'on saute le plus souvent.",
+      "Étape 1 — tout ramener du même côté pour obtenir la forme $ax^2 + bx + c = 0$. Étape 2 — identifier $a$, $b$ et $c$ AVEC leurs signes.",
+      "Étape 3 — calculer $\\Delta = b^2 - 4ac$ et regarder son signe. Étape 4 — conclure : deux solutions $\\dfrac{-b \\pm \\sqrt{\\Delta}}{2a}$ si $\\Delta > 0$, une seule $\\dfrac{-b}{2a}$ si $\\Delta = 0$, aucune si $\\Delta < 0$.",
+      "Sans l'étape 1, on identifie de mauvais coefficients et tout le reste est faux — même avec une formule parfaitement appliquée."
+    ),
+    tags: ["premiere", "maths", "second_degre", "racines", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_rac_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_racines",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Ramène d'abord tout du même côté, puis identifie $a$, $b$ et $c$ avec leurs signes.",
+    tags: ["premiere", "maths", "second_degre", "racines", "open", "template"],
+    generate: () => {
+      const cas = [
+        { eq: "x^2 = 5x - 6", forme: "x^2 - 5x + 6 = 0", sols: "2 et 3" },
+        { eq: "x^2 + 3x = 4", forme: "x^2 + 3x - 4 = 0", sols: "1 et -4" },
+        { eq: "2x^2 = 8", forme: "2x^2 - 8 = 0", sols: "2 et -2" },
+        { eq: "x^2 + 6 = 5x", forme: "x^2 - 5x + 6 = 0", sols: "2 et 3" },
+        { eq: "x^2 = 2x + 15", forme: "x^2 - 2x - 15 = 0", sols: "5 et -3" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Résous l'équation $${c.eq}$ en rédigeant chaque étape de ta démarche.`,
+        format: "open",
+        expected: ["= 0", "discriminant", "delta", "identifie", c.sols.split(" et ")[0]],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "On ne peut identifier $a$, $b$ et $c$ que sur une équation écrite sous la forme $ax^2 + bx + c = 0$ : c'est donc par là qu'on commence.",
+          `On ramène tout du même côté : $${c.eq}$ devient $${c.forme}$.`,
+          "On identifie ensuite les coefficients avec leurs signes, on calcule le discriminant, et on applique la formule correspondant à son signe.",
+          `Les solutions sont $${c.sols}$ — et l'on n'oublie pas la seconde, même quand la première tombe juste.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_sd_fac_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_factorisation",
+    difficulty: 5,
+    theme: "neutral",
+    text: "À quoi sert la forme factorisée d'un trinôme, puisqu'on a déjà sa forme développée ?",
+    format: "open",
+    expected: ["racines", "produit nul", "signe", "resoudre", "résoudre", "lit"],
+    comparator: "contains_keyword",
+    hint: "Que devient un produit lorsqu'il est nul ?",
+    explanation: exp(
+      "Les trois formes d'un trinôme donnent la même fonction, mais chacune rend une information immédiate.",
+      "La forme factorisée $a(x - x_1)(x - x_2)$ fait apparaître un PRODUIT.",
+      "Or un produit est nul si et seulement si l'un de ses facteurs l'est : les racines se lisent directement, sans calcul. Et le signe de chaque facteur étant facile à étudier, le tableau de signes se dresse aussitôt.",
+      "Développée pour calculer une image, canonique pour le sommet, factorisée pour les racines et le signe : on choisit selon la question posée."
+    ),
+    tags: ["premiere", "maths", "second_degre", "factorisation", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_fac_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_factorisation",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève factorise $x^2 - 7x + 12$ en $(x - 3)(x - 4)$. Comment peut-il vérifier en deux secondes, sans tout redévelopper ?",
+    format: "open",
+    expected: ["somme", "produit", "12", "7", "verifie", "vérifie"],
+    comparator: "contains_keyword",
+    hint: "Que valent la somme et le produit des deux nombres qu'il a trouvés ?",
+    explanation: exp(
+      "Pour un trinôme $x^2 + bx + c$ de coefficient dominant $1$, les deux racines ont une somme égale à $-b$ et un produit égal à $c$.",
+      "Ici il propose $3$ et $4$ : leur somme vaut $7$, leur produit $12$.",
+      "On compare : $-b = 7$ et $c = 12$. Les deux coïncident, la factorisation est correcte. Si l'une des deux avait échoué, il aurait su immédiatement que c'était faux.",
+      "Somme et produit : deux additions mentales suffisent à valider — bien plus rapide qu'un développement complet, et ça marche aussi pour deviner les racines."
+    ),
+    tags: ["premiere", "maths", "second_degre", "factorisation", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_fac_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_factorisation",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Cherche deux nombres dont la somme vaut $-b$ et le produit $c$.",
+    tags: ["premiere", "maths", "second_degre", "factorisation", "open", "template"],
+    generate: () => {
+      const r1 = pickOne([1, 2, 3, 4, 5, -1, -2, -3]);
+      const r2 = pickOne([2, 3, 5, 6, -2, -4]);
+      const b = -(r1 + r2);
+      const c = r1 * r2;
+      const signe = (v: number) => (v >= 0 ? `- ${v}` : `+ ${-v}`);
+      return {
+        text: `Factorise $x^2 ${b >= 0 ? "+ " + b : "- " + -b}x ${c >= 0 ? "+ " + c : "- " + -c}$ en expliquant comment tu trouves les deux racines, puis dis comment tu vérifies ton résultat.`,
+        format: "open",
+        expected: ["somme", "produit", String(r1), String(r2), "verifie", "vérifie"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Pour un trinôme de coefficient dominant $1$, la somme des racines vaut $-b$ et leur produit $c$ : on peut donc les chercher de tête.",
+          `Ici il faut deux nombres de somme $${-b}$ et de produit $${c}$.`,
+          `Ce sont $${r1}$ et $${r2}$ : on vérifie que $${r1} + ${r2} = ${-b}$ et $${r1} \\times ${r2} = ${c}$.`,
+          `La forme factorisée est $(x ${signe(r1)})(x ${signe(r2)})$ — la vérification par somme et produit tient en deux calculs mentaux.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_sd_can_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_canonique",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Que lit-on immédiatement sur la forme canonique $a(x - \\alpha)^2 + \\beta$, qu'on ne voit pas sur la forme développée ?",
+    format: "open",
+    expected: ["sommet", "extremum", "axe de symetrie", "axe de symétrie", "minimum", "maximum"],
+    comparator: "contains_keyword",
+    hint: "Que valent $\\alpha$ et $\\beta$ pour la parabole ?",
+    explanation: exp(
+      "La forme canonique est construite pour que la variable $x$ n'apparaisse qu'à un seul endroit, dans le carré.",
+      "Ce carré est toujours positif ou nul, et il vaut $0$ exactement pour $x = \\alpha$ : c'est là que l'expression atteint sa valeur extrême, qui vaut alors $\\beta$.",
+      "On lit donc directement le sommet $(\\alpha ; \\beta)$ et l'axe de symétrie $x = \\alpha$ — informations invisibles sur la forme développée, où il faudrait calculer $-\\dfrac{b}{2a}$ puis son image.",
+      "Sommet, extremum et axe de symétrie : trois lectures immédiates, c'est la forme à choisir pour tout problème d'optimisation."
+    ),
+    tags: ["premiere", "maths", "second_degre", "canonique", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_can_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_canonique",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi le sommet donne-t-il un MINIMUM quand $a > 0$, et un MAXIMUM quand $a < 0$ ?",
+    format: "open",
+    expected: ["carre", "carré", "positif", "ajoute", "retire", "signe de a"],
+    comparator: "contains_keyword",
+    hint: "Quel est le signe de $(x - \\alpha)^2$, et que devient-il multiplié par $a$ ?",
+    explanation: exp(
+      "Tout se joue sur le terme $a(x - \\alpha)^2$, puisque $\\beta$ est une constante.",
+      "Le carré $(x - \\alpha)^2$ est toujours positif ou nul, et il ne s'annule qu'en $x = \\alpha$.",
+      "Si $a > 0$, ce terme est positif ou nul : il AJOUTE quelque chose à $\\beta$, sauf en $\\alpha$ où il n'ajoute rien. La valeur $\\beta$ est donc la plus petite atteinte. Si $a < 0$, il RETIRE toujours quelque chose : $\\beta$ devient la plus grande.",
+      "Le signe de $a$ décide du sens de la parabole — vers le haut, elle a un creux ; vers le bas, une bosse."
+    ),
+    tags: ["premiere", "maths", "second_degre", "canonique", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_can_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_canonique",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Le sommet a pour abscisse $-\\dfrac{b}{2a}$ ; son ordonnée est l'image de cette abscisse.",
+    tags: ["premiere", "maths", "second_degre", "canonique", "open", "template"],
+    generate: () => {
+      const a = pickOne([1, 2, -1, -2]);
+      const alpha = randomInt(-3, 3);
+      const beta = randomInt(-5, 5);
+      const b = -2 * a * alpha;
+      const c = a * alpha * alpha + beta;
+      const nature = a > 0 ? "minimum" : "maximum";
+      return {
+        text: `Soit $f(x) = ${a === 1 ? "" : a === -1 ? "-" : a}x^2 ${b >= 0 ? "+ " + b : "- " + -b}x ${c >= 0 ? "+ " + c : "- " + -c}$. Détermine les coordonnées du sommet de sa parabole, dis s'il s'agit d'un minimum ou d'un maximum, et justifie.`,
+        format: "open",
+        expected: [String(alpha), String(beta), nature, "signe de a", "sommet"],
+        comparator: "contains_keyword",
+        canvas: parabole(a, b, c),
+        explanation: exp(
+          "Le sommet de la parabole a pour abscisse $-\\dfrac{b}{2a}$, et son ordonnée s'obtient en calculant l'image de cette abscisse.",
+          `Ici $a = ${a}$ et $b = ${b}$, donc $\\alpha = -\\dfrac{${b}}{2 \\times ${a}} = ${alpha}$.`,
+          `On calcule ensuite $f(${alpha}) = ${beta}$ : le sommet est le point $(${alpha} ; ${beta})$.`,
+          `Comme $a = ${a}$ est ${a > 0 ? "positif, la parabole est tournée vers le haut" : "négatif, la parabole est tournée vers le bas"}, il s'agit d'un ${nature}, atteint en $x = ${alpha}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_sd_sig_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_signe",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique la règle « du signe de $a$ sauf entre les racines », en t'appuyant sur la parabole.",
+    format: "open",
+    expected: ["parabole", "coupe", "axe", "entre les racines", "traverse", "signe de a"],
+    comparator: "contains_keyword",
+    hint: "Où la courbe est-elle au-dessus de l'axe des abscisses, et où est-elle en dessous ?",
+    explanation: exp(
+      "Le signe d'un trinôme se lit sur la position de sa parabole par rapport à l'axe des abscisses : au-dessus, il est positif ; en dessous, négatif.",
+      "Les racines sont précisément les points où la courbe COUPE cet axe : ce sont les seuls endroits où le signe peut changer.",
+      "S'il y a deux racines, la parabole traverse l'axe deux fois : elle change de côté entre les deux, puis revient du côté de départ. Ce côté de départ (et d'arrivée) est celui vers lequel la parabole est tournée, donné par le signe de $a$.",
+      "D'où la règle : le trinôme est du signe de $a$ à l'extérieur des racines, et du signe contraire entre elles."
+    ),
+    tags: ["premiere", "maths", "second_degre", "signe", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_sd_sig_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_signe",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un trinôme a un discriminant strictement négatif. Que peut-on dire de son signe sur $\\mathbb{R}$, et pourquoi ?",
+    format: "open",
+    expected: ["ne s'annule", "jamais", "signe de a", "constant", "ne coupe pas", "ne traverse"],
+    comparator: "contains_keyword",
+    hint: "Si la parabole ne coupe jamais l'axe, peut-elle changer de côté ?",
+    explanation: exp(
+      "Un trinôme ne peut changer de signe qu'en s'annulant : c'est là que sa courbe traverse l'axe des abscisses.",
+      "Un discriminant strictement négatif signifie qu'il n'a aucune racine réelle : la parabole ne rencontre jamais cet axe.",
+      "Elle reste donc entièrement d'un seul côté — celui vers lequel elle est tournée, c'est-à-dire le côté donné par le signe de $a$.",
+      "Le trinôme garde le signe de $a$ sur $\\mathbb{R}$ tout entier, sans jamais s'annuler. C'est ce qui permet d'affirmer que $x^2 + x + 1 > 0$ pour tout réel, sans rien calculer d'autre que $\\Delta$."
+    ),
+    tags: ["premiere", "maths", "second_degre", "signe", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_sd_sig_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_signe",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Discriminant d'abord, puis racines s'il y en a, puis règle du signe de $a$.",
+    tags: ["premiere", "maths", "second_degre", "signe", "open", "template"],
+    generate: () => {
+      const cas = [
+        { f: "x^2 - 3x + 2", d: 1, r: "1 et 2", a: 1, conclusion: "positif à l'extérieur de $[1 ; 2]$, négatif entre les racines" },
+        { f: "-x^2 + 4", d: 16, r: "-2 et 2", a: -1, conclusion: "négatif à l'extérieur de $[-2 ; 2]$, positif entre les racines" },
+        { f: "x^2 + x + 3", d: -11, r: "aucune", a: 1, conclusion: "strictement positif sur $\\mathbb{R}$" },
+        { f: "-x^2 + 2x - 5", d: -16, r: "aucune", a: -1, conclusion: "strictement négatif sur $\\mathbb{R}$" },
+        { f: "x^2 - 6x + 9", d: 0, r: "3 (racine double)", a: 1, conclusion: "positif sur $\\mathbb{R}$, nul seulement en $3$" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Étudie le signe de $${c.f}$ sur $\\mathbb{R}$, et rédige ta justification.`,
+        format: "open",
+        expected: ["discriminant", "signe de a", c.d < 0 ? "aucune racine" : "racines", c.a > 0 ? "positif" : "negatif"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Le signe d'un trinôme se détermine en trois temps : discriminant, racines éventuelles, puis règle du signe de $a$.",
+          `Ici $\\Delta = ${c.d}$${c.d < 0 ? " : il n'y a aucune racine réelle" : c.d === 0 ? " : il y a une racine double" : " : il y a deux racines distinctes"}.`,
+          c.d < 0
+            ? `La parabole ne coupe jamais l'axe des abscisses : le trinôme garde le signe de $a = ${c.a}$ partout.`
+            : `Les racines sont $${c.r}$, et le coefficient $a = ${c.a}$ indique de quel côté la parabole est tournée.`,
+          `Conclusion : le trinôme est ${c.conclusion}.`
+        ),
+      };
+    },
+  },
 ];
