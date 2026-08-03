@@ -3000,4 +3000,323 @@ export const variationsFonctionsBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* =========================================================
+     QUESTIONS OUVERTES — compléments du 02/08/2026.
+     Quatre micro-compétences de ce chapitre n'avaient aucune question
+     ouverte : deux ouvertes fixes + un TEMPLATE ouvert pour chacune.
+  ========================================================= */
+
+  {
+    kind: "fixed",
+    id: "premiere_var_sig_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_signe_derivee",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi une dérivée positive entraîne une fonction croissante.",
+    format: "open",
+    expected: ["pente", "tangente", "monte", "coefficient directeur", "croissante"],
+    comparator: "contains_keyword",
+    hint: "Que représente $f'(x)$ en chaque point de la courbe ?",
+    explanation: exp(
+      "Le nombre dérivé $f'(x)$ est le coefficient directeur de la tangente à la courbe au point d'abscisse $x$ : il mesure l'inclinaison de la courbe.",
+      "Une dérivée positive signifie donc que la tangente monte, en chaque point de l'intervalle.",
+      "Si la courbe monte partout sur l'intervalle, elle ne peut pas redescendre : à mesure que $x$ augmente, $f(x)$ augmente. La fonction est croissante.",
+      "La dérivée est la pente instantanée ; son signe donne le sens de variation. Positive → ça monte, négative → ça descend, nulle sur un intervalle → c'est plat."
+    ),
+    tags: ["premiere", "maths", "variations", "signe_derivee", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_sig_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_signe_derivee",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève affirme : « $f'(0) = 0$, donc $f$ admet un extremum en $0$ ». Trouve un contre-exemple et explique.",
+    format: "open",
+    expected: ["x^3", "cube", "ne change pas de signe", "contre-exemple", "contre exemple", "s'annule"],
+    comparator: "contains_keyword",
+    hint: "Essaie avec la fonction cube.",
+    explanation: exp(
+      "Une dérivée nulle indique une tangente horizontale, mais cela ne suffit pas : il faut que la dérivée CHANGE DE SIGNE pour que la fonction change de sens.",
+      "Contre-exemple : $f(x) = x^3$. Sa dérivée est $f'(x) = 3x^2$, qui s'annule bien en $0$.",
+      "Mais $3x^2$ est positif de part et d'autre de $0$ : la dérivée ne change pas de signe. La fonction cube est croissante sur $\\mathbb{R}$ tout entier — elle marque une pause horizontale en $0$ sans jamais redescendre.",
+      "S'annuler ne suffit pas, il faut changer de signe : c'est la condition qu'on oublie le plus souvent."
+    ),
+    tags: ["premiere", "maths", "variations", "signe_derivee", "piege", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_var_sig_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_signe_derivee",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Dérive, étudie le signe de la dérivée, puis conclus sur les variations.",
+    tags: ["premiere", "maths", "variations", "signe_derivee", "open", "template"],
+    generate: () => {
+      const cas = [
+        { f: "f(x) = x^2 - 4x + 1", d: "2x - 4", zero: "2", sens: "décroissante puis croissante" },
+        { f: "f(x) = -x^2 + 6x", d: "-2x + 6", zero: "3", sens: "croissante puis décroissante" },
+        { f: "f(x) = x^2 + 2x - 3", d: "2x + 2", zero: "-1", sens: "décroissante puis croissante" },
+        { f: "f(x) = -x^2 - 4x + 2", d: "-2x - 4", zero: "-2", sens: "croissante puis décroissante" },
+        { f: "f(x) = 3x^2 - 12x", d: "6x - 12", zero: "2", sens: "décroissante puis croissante" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Étudie les variations de $${c.f}$ sur $\\mathbb{R}$, en rédigeant le raisonnement du signe de la dérivée jusqu'à la conclusion.`,
+        format: "open",
+        expected: [c.d.split(" ")[0], c.zero, "signe", "derivee", "dérivée", "croissante"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Le sens de variation d'une fonction dérivable se lit sur le SIGNE de sa dérivée : positive → croissante, négative → décroissante.",
+          `On dérive : $f'(x) = ${c.d}$.`,
+          `On cherche où elle s'annule et de quel signe elle est de part et d'autre : elle s'annule en $x = ${c.zero}$ et change de signe en ce point.`,
+          `La fonction est donc ${c.sens}, avec un extremum atteint en $x = ${c.zero}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_var_tab_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_tableau",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Décris les étapes pour dresser le tableau de variations d'une fonction.",
+    format: "open",
+    expected: ["derive", "dérive", "signe", "s'annule", "fleches", "flèches", "valeurs"],
+    comparator: "contains_keyword",
+    hint: "Quatre étapes, de la dérivée jusqu'aux flèches.",
+    explanation: exp(
+      "Un tableau de variations résume tout le comportement d'une fonction sur un intervalle : il se construit toujours dans le même ordre.",
+      "Étape 1 — dériver. Étape 2 — chercher où la dérivée s'annule, et étudier son signe sur l'intervalle.",
+      "Étape 3 — reporter ce signe dans la ligne $f'(x)$ du tableau. Étape 4 — en déduire les flèches de la ligne $f(x)$, et calculer les images aux bornes et aux points où la dérivée s'annule.",
+      "Le tableau ne s'invente pas : c'est la traduction ligne à ligne de l'étude du signe de $f'$."
+    ),
+    tags: ["premiere", "maths", "variations", "tableau", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_tab_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_tableau",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi n'écrit-on les valeurs de $f$ qu'aux bornes de l'intervalle et aux points où la dérivée s'annule ?",
+    format: "open",
+    expected: ["monotone", "entre", "fleche", "flèche", "suffit", "extremum"],
+    comparator: "contains_keyword",
+    hint: "Entre deux de ces points, que fait la fonction ?",
+    explanation: exp(
+      "Entre deux points où la dérivée s'annule, le signe de $f'$ ne change pas : la fonction y est monotone, elle monte sans redescendre ou l'inverse.",
+      "Sur un tel morceau, la flèche suffit à tout dire : il n'y a ni surprise ni détour à signaler.",
+      "Les seules valeurs qui apportent une information sont donc celles des bornes — où commence et où finit chaque morceau — et celles des extremums, qui sont les points de retournement.",
+      "Ajouter d'autres images n'apprendrait rien : le tableau donne la forme du parcours, pas la liste des étapes."
+    ),
+    tags: ["premiere", "maths", "variations", "tableau", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_var_tab_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_tableau",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Dérivée, signe, flèches, puis les images aux bornes et à l'extremum.",
+    tags: ["premiere", "maths", "variations", "tableau", "open", "template"],
+    generate: () => {
+      const a = pickOne([1, 2, -1, -2]);
+      const alpha = randomInt(-2, 3);
+      const beta = randomInt(-4, 4);
+      const b = -2 * a * alpha;
+      const c = a * alpha * alpha + beta;
+      return {
+        text: `Dresse le tableau de variations de $f(x) = ${a === 1 ? "" : a === -1 ? "-" : a}x^2 ${b >= 0 ? "+ " + b : "- " + -b}x ${c >= 0 ? "+ " + c : "- " + -c}$ sur $\\mathbb{R}$, et décris-le en toutes lettres.`,
+        format: "open",
+        expected: [String(alpha), String(beta), "derivee", "dérivée", "signe", a > 0 ? "minimum" : "maximum"],
+        comparator: "contains_keyword",
+        canvas: parabole(a, b, c),
+        explanation: exp(
+          "Un tableau de variations traduit l'étude du signe de la dérivée : on dérive, on étudie le signe, on en déduit les flèches.",
+          `Ici $f'(x) = ${2 * a}x ${b >= 0 ? "+ " + b : "- " + -b}$, qui s'annule en $x = ${alpha}$.`,
+          `Comme $a = ${a}$ est ${a > 0 ? "positif, la dérivée est négative avant $" + alpha + "$ puis positive après" : "négatif, la dérivée est positive avant $" + alpha + "$ puis négative après"}.`,
+          `La fonction est donc ${a > 0 ? "décroissante puis croissante, avec un MINIMUM" : "croissante puis décroissante, avec un MAXIMUM"} valant $${beta}$, atteint en $x = ${alpha}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_var_ext_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_extremum",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Quelle est la différence entre un extremum LOCAL et un extremum GLOBAL ?",
+    format: "open",
+    expected: ["voisinage", "autour", "tout l'intervalle", "partout", "local", "global"],
+    comparator: "contains_keyword",
+    hint: "Sur quelle portion de la courbe compare-t-on ?",
+    explanation: exp(
+      "Un extremum est une valeur qu'on compare aux autres — toute la question est de savoir à quelles autres.",
+      "Un extremum LOCAL est le plus grand (ou le plus petit) dans un VOISINAGE : sur un petit morceau autour du point, aucune valeur ne le dépasse.",
+      "Un extremum GLOBAL l'est sur tout l'intervalle d'étude : aucune valeur ne le dépasse nulle part.",
+      "Une chaîne de montagnes le dit bien : chaque sommet est un maximum local, un seul est le point culminant. Tout extremum global est local, l'inverse est faux."
+    ),
+    tags: ["premiere", "maths", "variations", "extremum", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_ext_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_extremum",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Comment justifier proprement qu'une fonction admet un maximum en un point, sans se contenter de dire « on le voit sur la courbe » ?",
+    format: "open",
+    expected: ["change de signe", "positive puis negative", "positive puis négative", "s'annule", "tableau"],
+    comparator: "contains_keyword",
+    hint: "Que doit faire la dérivée en ce point ?",
+    explanation: exp(
+      "Une courbe suggère, elle ne démontre pas : la justification passe par la dérivée.",
+      "On montre d'abord que la dérivée s'annule au point considéré.",
+      "On montre ensuite qu'elle CHANGE DE SIGNE en ce point : positive avant, négative après. La fonction croît puis décroît, donc elle atteint là sa plus grande valeur.",
+      "Annulation ET changement de signe : sans le second, on pourrait être dans le cas de $x^3$, qui a une tangente horizontale sans extremum."
+    ),
+    tags: ["premiere", "maths", "variations", "extremum", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_var_ext_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_extremum",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Annulation de la dérivée, puis changement de signe : les deux sont nécessaires.",
+    tags: ["premiere", "maths", "variations", "extremum", "open", "template"],
+    generate: () => {
+      const cas = [
+        { f: "f(x) = x^2 - 6x + 5", d: "2x - 6", zero: "3", nature: "un minimum", change: true },
+        { f: "f(x) = -x^2 + 2x + 3", d: "-2x + 2", zero: "1", nature: "un maximum", change: true },
+        { f: "f(x) = x^3", d: "3x^2", zero: "0", nature: "aucun extremum", change: false },
+        { f: "f(x) = x^2 + 8x", d: "2x + 8", zero: "-4", nature: "un minimum", change: true },
+        { f: "f(x) = x^3 + 1", d: "3x^2", zero: "0", nature: "aucun extremum", change: false },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `La fonction $${c.f}$ admet-elle un extremum ? Justifie complètement, en précisant ce que tu vérifies.`,
+        format: "open",
+        expected: [c.zero, "change de signe", "s'annule", c.change ? "extremum" : "pas d'extremum"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Deux conditions sont nécessaires : la dérivée s'annule ET elle change de signe en ce point.",
+          `On dérive : $f'(x) = ${c.d}$, qui s'annule en $x = ${c.zero}$.`,
+          c.change
+            ? `On étudie ensuite son signe de part et d'autre : elle change bien de signe en $${c.zero}$.`
+            : `On étudie ensuite son signe de part et d'autre : elle reste du MÊME signe des deux côtés. La courbe marque une tangente horizontale, puis repart dans le même sens.`,
+          c.change
+            ? `La fonction admet donc ${c.nature} en $x = ${c.zero}$.`
+            : `La fonction n'admet ${c.nature} : s'annuler ne suffit pas.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_var_opt_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_optimisation",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Décris la méthode complète pour résoudre un problème d'optimisation, depuis l'énoncé jusqu'à la phrase de conclusion.",
+    format: "open",
+    expected: ["variable", "fonction", "intervalle", "derive", "dérive", "conclure", "phrase"],
+    comparator: "contains_keyword",
+    hint: "Cinq étapes, dont deux qui n'ont rien de calculatoire.",
+    explanation: exp(
+      "Un problème d'optimisation demande de traduire une situation en fonction, puis d'en chercher l'extremum.",
+      "Étape 1 — choisir la variable et dire ce qu'elle représente. Étape 2 — exprimer la quantité à optimiser en fonction de cette variable, et déterminer l'intervalle où elle a un sens.",
+      "Étape 3 — dériver et étudier le signe de la dérivée. Étape 4 — dresser le tableau de variations pour localiser l'extremum.",
+      "Étape 5 — revenir à la question posée par une phrase : « l'aire est maximale pour une largeur de $5$ m, et vaut alors $25$ m² ». Un nombre seul ne répond pas à un problème concret."
+    ),
+    tags: ["premiere", "maths", "variations", "optimisation", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_var_opt_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_optimisation",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi faut-il toujours préciser l'intervalle d'étude dans un problème d'optimisation concret ?",
+    format: "open",
+    expected: ["sens", "negatif", "négatif", "impossible", "longueur", "contrainte"],
+    comparator: "contains_keyword",
+    hint: "Une longueur peut-elle être négative ? Dépasser la taille du terrain ?",
+    explanation: exp(
+      "La fonction obtenue est souvent définie sur $\\mathbb{R}$, alors que la situation concrète ne l'est pas.",
+      "Une longueur ne peut pas être négative ni dépasser ce que permet la contrainte : cela impose un intervalle, souvent de la forme $]0 ; L[$.",
+      "Sans lui, on peut trouver un extremum mathématiquement correct mais physiquement absurde — une largeur négative, ou plus grande que le terrain à clôturer. Et l'extremum peut se trouver à une BORNE de l'intervalle plutôt qu'en un point où la dérivée s'annule.",
+      "L'intervalle fait partie de la modélisation, pas de la décoration : c'est lui qui garde le résultat dans le monde réel."
+    ),
+    tags: ["premiere", "maths", "variations", "optimisation", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_var_opt_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_optimisation",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Nomme la variable, écris la fonction, précise l'intervalle, puis dérive.",
+    tags: ["premiere", "maths", "variations", "optimisation", "open", "template"],
+    generate: () => {
+      const p = pickOne([20, 40, 60, 100]);
+      const demi = p / 2;
+      const cote = demi / 2;
+      return {
+        text: `On dispose de $${p}$ m de grillage pour clôturer un enclos rectangulaire. Quelles dimensions donnent l'aire maximale ? Rédige toute la démarche, du choix de la variable à la phrase de conclusion.`,
+        format: "open",
+        expected: [String(cote), "variable", "intervalle", "derive", "dérive", "carre", "carré"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "On traduit la situation en fonction d'une seule variable, sans oublier l'intervalle où elle a un sens.",
+          `On note $x$ la largeur en mètres. Le périmètre valant $${p}$, la longueur est $${demi} - x$, et l'aire vaut $A(x) = x(${demi} - x)$, avec $x \\in \\left]0 ; ${demi}\\right[$ pour que les deux côtés soient positifs.`,
+          `On dérive : $A'(x) = ${demi} - 2x$, qui s'annule en $x = ${cote}$ et change de signe (positive avant, négative après).`,
+          `L'aire est donc maximale pour $x = ${cote}$ m : l'enclos est un CARRÉ de côté $${cote}$ m, d'aire $${cote * cote}$ m². À périmètre fixé, c'est toujours le carré qui gagne.`
+        ),
+      };
+    },
+  },
 ];

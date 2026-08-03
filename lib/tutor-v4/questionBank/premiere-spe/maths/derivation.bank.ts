@@ -3530,4 +3530,322 @@ export const derivationBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* =========================================================
+     QUESTIONS OUVERTES — compléments du 02/08/2026.
+     Quatre micro-compétences de ce chapitre n'avaient aucune question
+     ouverte : deux ouvertes fixes + un TEMPLATE ouvert pour chacune.
+  ========================================================= */
+
+  {
+    kind: "fixed",
+    id: "premiere_der_tau_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_taux",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Que représente le taux de variation d'une fonction entre deux points, sur le dessin de sa courbe ?",
+    format: "open",
+    expected: ["pente", "coefficient directeur", "secante", "sécante", "droite", "deux points"],
+    comparator: "contains_keyword",
+    hint: "Trace la droite qui joint les deux points de la courbe.",
+    explanation: exp(
+      "Le taux de variation de $f$ entre $a$ et $b$ est le quotient $\\dfrac{f(b) - f(a)}{b - a}$ : une variation d'ordonnées divisée par une variation d'abscisses.",
+      "C'est exactement la façon dont on calcule le coefficient directeur d'une droite à partir de deux de ses points.",
+      "Ici les deux points sont sur la courbe : la droite qui les joint s'appelle une SÉCANTE, et le taux de variation en est la pente.",
+      "C'est la pente moyenne entre les deux points — l'idée de la dérivation est ensuite de rapprocher le second point du premier pour obtenir la pente à un instant précis."
+    ),
+    tags: ["premiere", "maths", "derivation", "taux", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_tau_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_taux",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un trajet de $120$ km parcouru en $2$ heures donne une vitesse moyenne de $60$ km/h. En quoi cela ressemble-t-il à un taux de variation, et que ne dit-il pas ?",
+    format: "open",
+    expected: ["moyenne", "instant", "precis", "précis", "pas la vitesse", "secante", "sécante"],
+    comparator: "contains_keyword",
+    hint: "La vitesse a-t-elle valu $60$ km/h à chaque instant du trajet ?",
+    explanation: exp(
+      "La vitesse moyenne est le quotient de la distance parcourue par le temps écoulé : c'est un taux de variation de la position.",
+      "$\\dfrac{120}{2} = 60$ km/h : la même structure exactement que $\\dfrac{f(b) - f(a)}{b - a}$.",
+      "Mais elle ne dit rien de ce qui s'est passé pendant le trajet : on a pu s'arrêter, rouler à $90$, redémarrer. La moyenne écrase tout.",
+      "Le taux de variation donne une pente MOYENNE, pas la pente à un instant. Pour connaître la vitesse à un instant précis — ce qu'affiche le compteur — il faut le nombre dérivé."
+    ),
+    tags: ["premiere", "maths", "derivation", "taux", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_der_tau_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_taux",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "$\\dfrac{f(b) - f(a)}{b - a}$ — et dis ce que ce nombre représente sur la courbe.",
+    tags: ["premiere", "maths", "derivation", "taux", "open", "template"],
+    generate: () => {
+      const cas = [
+        { f: "f(x) = x^2", a: 1, b: 3, fa: 1, fb: 9, t: "4" },
+        { f: "f(x) = x^2", a: 0, b: 2, fa: 0, fb: 4, t: "2" },
+        { f: "f(x) = x^2 + 1", a: 2, b: 4, fa: 5, fb: 17, t: "6" },
+        { f: "f(x) = 3x - 1", a: 1, b: 5, fa: 2, fb: 14, t: "3" },
+        { f: "f(x) = x^3", a: 0, b: 2, fa: 0, fb: 8, t: "4" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Calcule le taux de variation de $${c.f}$ entre $${c.a}$ et $${c.b}$, puis explique ce que ce nombre représente sur la courbe.`,
+        format: "open",
+        expected: [c.t, "pente", "secante", "sécante", "coefficient directeur"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Le taux de variation entre deux points est le quotient de la variation des images par celle des abscisses.",
+          `On calcule les deux images : $f(${c.a}) = ${c.fa}$ et $f(${c.b}) = ${c.fb}$.`,
+          `Le taux vaut $\\dfrac{${c.fb} - ${c.fa}}{${c.b} - ${c.a}} = ${c.t}$.`,
+          `C'est le coefficient directeur de la sécante joignant les points d'abscisses $${c.a}$ et $${c.b}$ : la pente MOYENNE de la courbe entre ces deux points.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_der_tan_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_tangente",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Que représente le nombre $f'(a)$ sur le dessin de la courbe de $f$ ?",
+    format: "open",
+    expected: ["coefficient directeur", "pente", "tangente", "point d'abscisse"],
+    comparator: "contains_keyword",
+    hint: "Quelle droite touche la courbe au point d'abscisse $a$ ?",
+    explanation: exp(
+      "Le nombre dérivé $f'(a)$ s'obtient en rapprochant indéfiniment le second point du premier dans le taux de variation.",
+      "Les sécantes basculent alors vers une position limite : la TANGENTE à la courbe au point d'abscisse $a$.",
+      "$f'(a)$ est le coefficient directeur de cette tangente : la pente de la courbe à cet endroit précis. Une valeur positive signifie que la courbe monte, une valeur nulle que la tangente est horizontale.",
+      "$f'(a)$ mesure l'inclinaison de la courbe en un point — l'équation de la tangente s'écrit ensuite $y = f'(a)(x - a) + f(a)$."
+    ),
+    tags: ["premiere", "maths", "derivation", "tangente", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_tan_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_tangente",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève écrit l'équation de la tangente sous la forme $y = f'(a)(x - a)$ et oublie le terme $f(a)$. Qu'est-ce que cela change ?",
+    format: "open",
+    expected: ["passe par", "origine", "hauteur", "point de contact", "translation", "f(a)"],
+    comparator: "contains_keyword",
+    hint: "Sa droite passe-t-elle par le point de la courbe ?",
+    explanation: exp(
+      "Une droite est définie par deux informations : sa pente, et un point par lequel elle passe.",
+      "Le facteur $f'(a)$ donne la bonne pente : sa droite est donc bien PARALLÈLE à la tangente.",
+      "Mais sans le terme $f(a)$, elle passe par le point $(a ; 0)$ au lieu de $(a ; f(a))$ : elle est décalée verticalement de $f(a)$, et ne touche pas la courbe.",
+      "La pente est juste, la hauteur est fausse : $f'(a)$ dit comment la droite penche, $f(a)$ dit où elle passe."
+    ),
+    tags: ["premiere", "maths", "derivation", "tangente", "piege", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_der_tan_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_tangente",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "$y = f'(a)(x - a) + f(a)$ : il faut DEUX calculs, $f(a)$ et $f'(a)$.",
+    tags: ["premiere", "maths", "derivation", "tangente", "open", "template"],
+    generate: () => {
+      const a = randomInt(1, 4);
+      const fa = a * a;
+      const fpa = 2 * a;
+      return {
+        text: `Soit $f(x) = x^2$. Détermine l'équation de la tangente à sa courbe au point d'abscisse $${a}$, en expliquant à quoi sert chacun des deux nombres que tu calcules.`,
+        format: "open",
+        expected: [String(fa), String(fpa), "pente", "point", "tangente"],
+        comparator: "contains_keyword",
+        canvas: tangente(0, 0, a),
+        explanation: exp(
+          "L'équation de la tangente au point d'abscisse $a$ est $y = f'(a)(x - a) + f(a)$ : elle demande la pente ET le point de contact.",
+          `On calcule d'abord l'ordonnée du point : $f(${a}) = ${fa}$. La tangente passe donc par $(${a} ; ${fa})$.`,
+          `Puis la pente : $f'(x) = 2x$, donc $f'(${a}) = ${fpa}$.`,
+          `L'équation est $y = ${fpa}(x - ${a}) + ${fa}$, soit $y = ${fpa}x - ${fpa * a - fa}$. Sans $f(${a})$, la droite aurait la bonne pente mais ne toucherait pas la courbe.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_der_usu_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_usuelles",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi la dérivée d'une fonction constante est-elle nulle ?",
+    format: "open",
+    expected: ["horizontale", "pente", "ne varie pas", "taux", "0"],
+    comparator: "contains_keyword",
+    hint: "À quoi ressemble la courbe d'une fonction constante ?",
+    explanation: exp(
+      "La dérivée mesure la pente de la courbe, c'est-à-dire la vitesse à laquelle la fonction change.",
+      "Une fonction constante ne change jamais : sa courbe est une droite HORIZONTALE.",
+      "Le taux de variation le confirme : entre deux points quelconques, $\\dfrac{f(b) - f(a)}{b - a} = \\dfrac{0}{b - a} = 0$, puisque les deux images sont égales.",
+      "Une pente nulle partout donne une dérivée nulle partout — c'est aussi pourquoi une constante additive disparaît en dérivant."
+    ),
+    tags: ["premiere", "maths", "derivation", "usuelles", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_usu_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_usuelles",
+    difficulty: 5,
+    theme: "neutral",
+    text: "La fonction racine carrée est définie en $0$, mais elle n'y est pas dérivable. Que se passe-t-il sur sa courbe ?",
+    format: "open",
+    expected: ["verticale", "tangente", "pente infinie", "de plus en plus", "raide"],
+    comparator: "contains_keyword",
+    hint: "Regarde comment la courbe démarre à l'origine.",
+    explanation: exp(
+      "Être dérivable en un point, c'est avoir une tangente de pente FINIE en ce point.",
+      "La courbe de la racine carrée part de l'origine en montant très brutalement, puis s'aplatit progressivement.",
+      "Plus on s'approche de $0$, plus les sécantes deviennent raides : leur pente ne se stabilise pas, elle grandit sans limite. La courbe admet bien une tangente en $0$, mais elle est VERTICALE — et une droite verticale n'a pas de coefficient directeur.",
+      "La fonction existe en $0$ mais n'y a pas de nombre dérivé : sa dérivée $\\dfrac{1}{2\\sqrt{x}}$ n'est définie que sur $]0 ; +\\infty[$."
+    ),
+    tags: ["premiere", "maths", "derivation", "usuelles", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_der_usu_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_usuelles",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Donne la dérivée, puis dis sur quel ensemble elle est valable.",
+    tags: ["premiere", "maths", "derivation", "usuelles", "open", "template"],
+    generate: () => {
+      const cas = [
+        { f: "f(x) = x^2", d: "2x", ens: "$\\mathbb{R}$", note: "un polynôme est dérivable partout" },
+        { f: "f(x) = x^3", d: "3x^2", ens: "$\\mathbb{R}$", note: "un polynôme est dérivable partout" },
+        { f: "f(x) = \\dfrac{1}{x}", d: "-\\dfrac{1}{x^2}", ens: "$\\mathbb{R}^*$", note: "la fonction n'est pas définie en $0$" },
+        { f: "f(x) = \\sqrt{x}", d: "\\dfrac{1}{2\\sqrt{x}}", ens: "$]0 ; +\\infty[$", note: "définie en $0$, mais pas dérivable en $0$ : la tangente y est verticale" },
+        { f: "f(x) = 5", d: "0", ens: "$\\mathbb{R}$", note: "une constante ne varie pas" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Donne la dérivée de $${c.f}$, précise sur quel ensemble elle est définie, et justifie cet ensemble.`,
+        format: "open",
+        expected: [c.d.replace(/\\dfrac\{(.*?)\}\{(.*?)\}/, "$1/$2"), "derivable", "dérivable", "definie", "définie", "ensemble"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Une fonction n'est dérivable que là où la pente de sa courbe existe et reste finie : l'ensemble de dérivabilité peut être plus petit que l'ensemble de définition.",
+          `Ici la dérivée de $${c.f}$ est $${c.d}$.`,
+          `Elle est définie sur ${c.ens}, car ${c.note}.`,
+          "On précise toujours cet ensemble : écrire une dérivée sans dire où elle est valable, c'est laisser passer les cas limites."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_der_ope_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_operations",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi la dérivée d'un produit n'est-elle PAS le produit des dérivées ? Donne un contre-exemple.",
+    format: "open",
+    expected: ["contre-exemple", "contre exemple", "u'v + uv'", "x^2", "2x", "faux"],
+    comparator: "contains_keyword",
+    hint: "Essaie avec $f(x) = x \\times x$.",
+    explanation: exp(
+      "La dérivation se comporte bien avec l'addition, mais pas avec la multiplication : il faut la formule $(uv)' = u'v + uv'$.",
+      "Contre-exemple simple : prenons $u(x) = x$ et $v(x) = x$, donc $uv = x^2$.",
+      "Le produit des dérivées donnerait $1 \\times 1 = 1$. Or la dérivée de $x^2$ est $2x$, qui ne vaut $1$ que pour $x = 0{,}5$. La formule correcte donne bien $1 \\times x + x \\times 1 = 2x$.",
+      "Intuitivement : quand deux facteurs varient ensemble, chacun contribue à sa manière — d'où les DEUX termes de la formule."
+    ),
+    tags: ["premiere", "maths", "derivation", "operations", "piege", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_der_ope_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_operations",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Comment sait-on, en regardant une expression, quelle formule de dérivation appliquer ?",
+    format: "open",
+    expected: ["derniere operation", "dernière opération", "somme", "produit", "quotient", "structure"],
+    comparator: "contains_keyword",
+    hint: "Quelle est la DERNIÈRE opération qu'on effectuerait pour calculer l'expression ?",
+    explanation: exp(
+      "Chaque formule de dérivation correspond à une structure : somme, produit, quotient, ou fonction usuelle.",
+      "Pour choisir, on repère la dernière opération qu'on effectuerait en calculant l'expression pour un $x$ donné.",
+      "Dans $3x^2 + 5x$, la dernière opération est une addition : c'est la formule de la somme, et on dérive chaque morceau. Dans $(3x + 1)(x - 2)$, c'est une multiplication : formule du produit. Dans $\\dfrac{x}{x+1}$, une division : formule du quotient.",
+      "On dérive de l'extérieur vers l'intérieur : la structure d'ensemble d'abord, les morceaux ensuite."
+    ),
+    tags: ["premiere", "maths", "derivation", "operations", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_der_ope_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_operations",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Repère d'abord la structure : somme, produit ou quotient.",
+    tags: ["premiere", "maths", "derivation", "operations", "open", "template"],
+    generate: () => {
+      const cas = [
+        { f: "f(x) = x^2 + 3x - 5", struct: "une somme", regle: "on dérive chaque terme séparément", d: "2x + 3" },
+        { f: "f(x) = (2x + 1)(x - 3)", struct: "un produit", regle: "$(uv)' = u'v + uv'$", d: "2(x-3) + (2x+1) = 4x - 5" },
+        { f: "f(x) = x^2(x + 4)", struct: "un produit", regle: "$(uv)' = u'v + uv'$", d: "2x(x+4) + x^2 = 3x^2 + 8x" },
+        { f: "f(x) = 5x^3 - 2x", struct: "une somme", regle: "on dérive chaque terme séparément", d: "15x^2 - 2" },
+        { f: "f(x) = (x + 1)(x + 2)", struct: "un produit", regle: "$(uv)' = u'v + uv'$", d: "(x+2) + (x+1) = 2x + 3" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Dérive $${c.f}$, en disant d'abord quelle est la structure de l'expression et donc quelle formule tu appliques.`,
+        format: "open",
+        expected: [c.struct.split(" ")[1], "formule", "derive", "dérive", c.d.split(" ")[0]],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "On choisit la formule d'après la DERNIÈRE opération de l'expression : somme, produit ou quotient.",
+          `Ici $${c.f}$ est ${c.struct} : la règle à appliquer est ${c.regle}.`,
+          "On dérive ensuite chaque morceau, puis on remet le tout ensemble avant de simplifier.",
+          `On obtient $f'(x) = ${c.d}$.`
+        ),
+      };
+    },
+  },
 ];
