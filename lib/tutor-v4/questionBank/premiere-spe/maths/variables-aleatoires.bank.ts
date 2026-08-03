@@ -2,14 +2,33 @@
 //
 // Chapitre : Variables aléatoires réelles (notion "variables_aleatoires")
 // microSkills :
-//   va_loi       — déterminer la loi de probabilité
-//   va_esperance — calculer une espérance
-//   va_variance  — calculer une variance et un écart-type
-//   va_notation  — interpréter les notations {X = a}, P(X ⩽ a)
+//   va_definition         — une variable aléatoire est une FONCTION sur l'univers
+//   va_notation           — interpréter les notations {X = a}, P(X ⩽ a)
+//   va_modeliser          — modéliser une situation par une variable aléatoire
+//   va_loi                — déterminer la loi de probabilité
+//   va_esperance          — calculer une espérance
+//   va_esperance_probleme — mise, gain net, jeu équitable
+//   va_variance           — calculer une variance
+//   va_ecart_type         — calculer et interpréter un écart-type
+//   va_simulation         — simuler une variable aléatoire avec Python
+//   va_echantillon        — moyenne d'un échantillon et espérance
 //
-// PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM. Canvas : stat_graph (loi en bâtons).
+// ⚠️ Treize items écrits avant le découpage en dix micro-compétences sont
+// restés à leur place dans le fichier, mais leur `microId` a été réaffecté
+// (leur `id` est inchangé). C'est le `microId` qui fait foi.
+//
+// PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM.
+// Canvas : stat_graph (loi en bâtons), scratch (algorithmes de simulation).
+//
+// Règle d'écriture : un `fixed` pour une valeur exceptionnelle, un piège, une
+// propriété ou un contexte 974 ; un `template` pour tout calcul dont on peut
+// changer les nombres ; plusieurs ouvertes dont un template ouvert.
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
+
+function pickOne<T>(arr: readonly T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -156,7 +175,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "variables_aleatoires",
-    microId: "va_loi",
+    microId: "va_modeliser",
     difficulty: 5,
     theme: "neutral",
     text: "On lance deux fois une pièce équilibrée et $X$ compte le nombre de PILE. Combien vaut $P(X = 0)$ ?",
@@ -206,7 +225,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "variables_aleatoires",
-    microId: "va_loi",
+    microId: "va_definition",
     difficulty: 3,
     theme: "neutral",
     text: "Qu'est-ce qu'une variable aléatoire ?",
@@ -236,7 +255,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "variables_aleatoires",
-    microId: "va_loi",
+    microId: "va_modeliser",
     difficulty: 3,
     theme: "neutral",
     text: "Une urne contient $5$ boules dont $2$ gagnantes. $X$ vaut $1$ si la boule tirée est gagnante, $0$ sinon. Combien vaut $P(X = 1)$ ?",
@@ -258,7 +277,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "variables_aleatoires",
-    microId: "va_loi",
+    microId: "va_modeliser",
     difficulty: 4,
     theme: "neutral",
     text: "On lance un dé équilibré. $X$ vaut $10$ si on obtient $6$, et $0$ sinon. Combien vaut $P(X = 0)$ ?",
@@ -399,7 +418,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "variables_aleatoires",
-    microId: "va_esperance",
+    microId: "va_esperance_probleme",
     difficulty: 4,
     theme: "jeux_video",
     text: "Un jeu coûte $2$ €. Le gain $X$ (déjà net) vaut $0$ € (proba $0{,}7$) ou $5$ € (proba $0{,}3$). Quelle est l'espérance de gain $E(X)$ ?",
@@ -422,7 +441,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "variables_aleatoires",
-    microId: "va_esperance",
+    microId: "va_esperance_probleme",
     difficulty: 3,
     theme: "neutral",
     text: "Un jeu est dit « équitable » lorsque l'espérance de gain (mise déduite) vaut :",
@@ -540,7 +559,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "variables_aleatoires",
-    microId: "va_esperance",
+    microId: "va_esperance_probleme",
     difficulty: 5,
     theme: "neutral",
     text: "À un jeu, le gain NET $X$ vaut $-3$ € avec la probabilité $0{,}75$ et $7$ € avec la probabilité $0{,}25$. Calcule $E(X)$.",
@@ -562,7 +581,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "variables_aleatoires",
-    microId: "va_esperance",
+    microId: "va_esperance_probleme",
     difficulty: 4,
     theme: "neutral",
     text: "Un jeu a une espérance de gain de $-0{,}5$ € par partie. Quelle perte moyenne peut-on prévoir sur $100$ parties, en euros ?",
@@ -668,7 +687,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "variables_aleatoires",
-    microId: "va_variance",
+    microId: "va_ecart_type",
     difficulty: 3,
     theme: "neutral",
     text: "L'écart-type $\\sigma(X)$ se déduit de la variance par :",
@@ -714,7 +733,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "variables_aleatoires",
-    microId: "va_variance",
+    microId: "va_ecart_type",
     difficulty: 4,
     theme: "neutral",
     text: "Si $V(X) = 9$, combien vaut l'écart-type $\\sigma(X)$ ?",
@@ -736,7 +755,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "variables_aleatoires",
-    microId: "va_variance",
+    microId: "va_ecart_type",
     difficulty: 3,
     theme: "neutral",
     text: "Si $V(X) = 16$, combien vaut l'écart-type $\\sigma(X)$ ?",
@@ -780,7 +799,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "variables_aleatoires",
-    microId: "va_variance",
+    microId: "va_ecart_type",
     difficulty: 4,
     theme: "neutral",
     text: "Si l'écart-type vaut $\\sigma(X) = 3$, combien vaut la variance $V(X)$ ?",
@@ -908,7 +927,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "variables_aleatoires",
-    microId: "va_variance",
+    microId: "va_ecart_type",
     difficulty: 4,
     theme: "neutral",
     hint: "$\\sigma(X) = \\sqrt{V(X)}$.",
@@ -1257,6 +1276,1008 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           `$P(X \\le 2) = ${String(p1).replace(".", ",")} + ${String(p2).replace(".", ",")}$.`,
           `$= ${String(cumul).replace(".", ",")}$.`,
           `$P(X \\le 2) = ${String(cumul).replace(".", ",")}$.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== VA_DEFINITION (compléments) ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_va_def_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_definition",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pourquoi dit-on qu'une variable aléatoire est une FONCTION ?",
+    format: "qcm",
+    choices: [
+      "parce qu'elle associe un nombre à chaque issue de l'univers",
+      "parce qu'elle se représente par une courbe",
+      "parce qu'elle prend des valeurs au hasard",
+      "parce qu'elle a une dérivée",
+    ],
+    expected: ["parce qu'elle associe un nombre à chaque issue de l'univers"],
+    comparator: "mcq_exact",
+    hint: "Quel est l'ensemble de départ ? Quel est l'ensemble d'arrivée ?",
+    explanation: exp(
+      "Une fonction associe à chaque élément d'un ensemble de départ un unique élément d'un ensemble d'arrivée.",
+      "Ici l'ensemble de départ est l'univers $\\Omega$ — l'ensemble des issues possibles — et l'ensemble d'arrivée est $\\mathbb{R}$.",
+      "À chaque issue, $X$ associe donc un nombre, et un seul. Rien n'est « au hasard » dans $X$ elle-même : le hasard est dans le tirage de l'issue, pas dans la règle qui lui associe un nombre.",
+      "C'est une fonction de $\\Omega$ vers $\\mathbb{R}$ — le nom « variable » est trompeur."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "definition", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_def_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_definition",
+    difficulty: 5,
+    theme: "neutral",
+    text: "On lance deux dés et $X$ désigne la somme obtenue. Quel est l'ensemble de départ de $X$ ?",
+    format: "qcm",
+    choices: [
+      "l'ensemble des $36$ couples de résultats possibles",
+      "l'ensemble $\\{2 ; 3 ; \\ldots ; 12\\}$ des sommes",
+      "l'ensemble $\\{1 ; 2 ; \\ldots ; 6\\}$",
+      "l'intervalle $[2 ; 12]$",
+    ],
+    expected: ["l'ensemble des $36$ couples de résultats possibles"],
+    comparator: "mcq_exact",
+    hint: "Ne pas confondre l'ensemble de DÉPART et l'ensemble des VALEURS prises.",
+    explanation: exp(
+      "L'ensemble de départ d'une variable aléatoire est l'univers : l'ensemble des issues de l'expérience.",
+      "Ici une issue est un couple $(a ; b)$ donnant les deux faces : il y en a $6 \\times 6 = 36$.",
+      "L'ensemble $\\{2 ; \\ldots ; 12\\}$ est celui des VALEURS prises par $X$, c'est-à-dire son ensemble d'arrivée utile — pas son ensemble de départ. Plusieurs issues donnent d'ailleurs la même valeur : $(1 ; 3)$, $(2 ; 2)$ et $(3 ; 1)$ donnent tous $4$.",
+      "L'ensemble de départ est celui des $36$ couples."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "definition", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_def_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_definition",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi le nom « variable aléatoire » est trompeur.",
+    format: "open",
+    expected: ["fonction", "pas une variable", "issue", "univers", "hasard"],
+    comparator: "contains_keyword",
+    hint: "Est-ce que $X$ est une variable au sens de « $x$ » dans une équation ?",
+    explanation: exp(
+      "Dans « $2x + 3 = 7$ », la variable $x$ est un nombre inconnu. Une variable aléatoire, elle, n'est pas un nombre.",
+      "$X$ est une FONCTION : elle associe un nombre à chaque issue de l'expérience.",
+      "Et elle n'a rien d'aléatoire non plus : la règle est parfaitement déterminée. Le hasard porte sur l'issue tirée, pas sur $X$. Une fois l'issue connue, la valeur de $X$ l'est aussi.",
+      "Ni vraiment « variable », ni vraiment « aléatoire » : c'est une fonction définie sur l'univers, dont on ignore seulement l'argument."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "definition", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_def_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_definition",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Deux issues différentes peuvent-elles donner la même valeur de $X$ ? Et une même issue, deux valeurs ? Justifie.",
+    format: "open",
+    expected: ["fonction", "une seule", "plusieurs issues", "meme valeur", "même valeur", "unique"],
+    comparator: "contains_keyword",
+    hint: "C'est la définition d'une fonction qui répond aux deux questions.",
+    explanation: exp(
+      "Une fonction associe à chaque élément de départ UNE SEULE image ; mais rien n'interdit à plusieurs éléments d'avoir la même.",
+      "Deux issues différentes peuvent donc parfaitement donner la même valeur : avec deux dés, $(1 ; 3)$ et $(2 ; 2)$ donnent tous deux une somme de $4$.",
+      "En revanche, une même issue ne peut pas donner deux valeurs : ce ne serait plus une fonction, et $P(X = k)$ n'aurait plus de sens.",
+      "Oui pour la première, non pour la seconde — c'est exactement ce que dit le mot « fonction »."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "definition", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_va_def_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_definition",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une variable aléatoire associe un NOMBRE à chaque issue.",
+    tags: ["premiere", "maths", "variables_aleatoires", "definition", "template"],
+    generate: () => {
+      const cas = [
+        { d: "la somme des deux dés", ok: true },
+        { d: "la couleur de la boule tirée", ok: false },
+        { d: "le nombre de PILE en trois lancers", ok: true },
+        { d: "le prénom de l'élève interrogé", ok: false },
+        { d: "le gain en euros à la fin de la partie", ok: true },
+        { d: "le fait que le test soit positif ou négatif", ok: false },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `« ${c.d.charAt(0).toUpperCase() + c.d.slice(1)} » définit-il une variable aléatoire ?`,
+        format: "qcm",
+        choices: c.ok
+          ? ["oui", "non : ce n'est pas un nombre", "non : ce n'est pas aléatoire", "on ne peut pas savoir"]
+          : ["non : ce n'est pas un nombre", "oui", "oui, c'est une variable aléatoire", "on ne peut pas savoir"],
+        expected: [c.ok ? "oui" : "non : ce n'est pas un nombre"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une variable aléatoire est une fonction de l'univers vers $\\mathbb{R}$ : elle doit associer un NOMBRE à chaque issue.",
+          `On regarde ce que « ${c.d} » associe à une issue.`,
+          c.ok
+            ? "C'est bien un nombre : la définition est respectée."
+            : "Ce n'est pas un nombre mais une catégorie. On peut la coder par un nombre (par exemple $1$ et $0$), et c'est alors ce codage qui est la variable aléatoire.",
+          c.ok ? "Oui, c'est une variable aléatoire." : "Non, pas en l'état : il faut d'abord la coder par un nombre."
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_va_def_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_definition",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Sépare bien l'ensemble des ISSUES et l'ensemble des VALEURS prises.",
+    tags: ["premiere", "maths", "variables_aleatoires", "definition", "open", "template"],
+    generate: () => {
+      const cas = [
+        { exp: "on lance deux pièces et $X$ compte le nombre de PILE", univers: "les 4 couples possibles", valeurs: "$\\{0 ; 1 ; 2\\}$" },
+        { exp: "on lance un dé et $X$ vaut $10$ si on obtient $6$, $0$ sinon", univers: "les 6 faces", valeurs: "$\\{0 ; 10\\}$" },
+        { exp: "on tire une carte et $X$ vaut $1$ si c'est un cœur, $0$ sinon", univers: "les 52 cartes", valeurs: "$\\{0 ; 1\\}$" },
+        { exp: "on lance deux dés et $X$ donne le plus grand des deux résultats", univers: "les 36 couples", valeurs: "$\\{1 ; 2 ; 3 ; 4 ; 5 ; 6\\}$" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Dans l'expérience suivante — ${c.exp} — décris l'univers de départ et l'ensemble des valeurs prises par $X$, et explique pourquoi ce sont deux ensembles différents.`,
+        format: "open",
+        expected: ["issues", "univers", "valeurs", "plusieurs issues", "fonction"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Une variable aléatoire va de l'univers des ISSUES vers un ensemble de NOMBRES : les deux ensembles n'ont pas la même nature.",
+          `Ici l'univers est formé par ${c.univers} : ce sont les résultats bruts de l'expérience.`,
+          `Les valeurs prises par $X$ sont ${c.valeurs} : ce sont les nombres que la règle produit.`,
+          "Ils diffèrent parce que plusieurs issues peuvent donner la même valeur : $X$ regroupe des issues, elle ne les distingue plus."
+        ),
+      };
+    },
+  },
+
+  /* ===================== VA_MODELISER (compléments) ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_va_mod_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_modeliser",
+    difficulty: 5,
+    theme: "reunion",
+    text: "Une tombola d'école à Saint-Louis vend des tickets à $2$ €. Un ticket sur $50$ gagne un lot de $30$ €. Comment modéliser le gain NET d'un joueur ?",
+    format: "qcm",
+    choices: [
+      "$X = 28$ avec la probabilité $\\dfrac{1}{50}$, et $X = -2$ avec la probabilité $\\dfrac{49}{50}$",
+      "$X = 30$ avec la probabilité $\\dfrac{1}{50}$, et $X = 0$ avec la probabilité $\\dfrac{49}{50}$",
+      "$X = 30$ avec la probabilité $\\dfrac{1}{50}$, et $X = -2$ avec la probabilité $\\dfrac{49}{50}$",
+      "$X = 2$ avec la probabilité $\\dfrac{1}{50}$",
+    ],
+    expected: ["$X = 28$ avec la probabilité $\\dfrac{1}{50}$, et $X = -2$ avec la probabilité $\\dfrac{49}{50}$"],
+    comparator: "mcq_exact",
+    hint: "Le gain NET, c'est ce qu'on gagne moins ce qu'on a payé — y compris quand on gagne.",
+    explanation: exp(
+      "Modéliser un gain NET, c'est retrancher la mise dans TOUS les cas, y compris celui où l'on gagne.",
+      "Le joueur paie $2$ € quoi qu'il arrive. S'il gagne, il reçoit $30$ € : son gain net est $30 - 2 = 28$ €.",
+      "S'il perd, il ne reçoit rien : son gain net est $-2$ €. Les probabilités sont $\\dfrac{1}{50}$ et $\\dfrac{49}{50}$.",
+      "$X$ vaut $28$ ou $-2$ — l'oubli classique est de garder $30$ pour le cas gagnant."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "modeliser", "reunion", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_mod_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_modeliser",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Quelles sont les étapes pour modéliser une situation par une variable aléatoire ?",
+    format: "open",
+    expected: ["univers", "issues", "valeurs", "probabilites", "probabilités", "loi"],
+    comparator: "contains_keyword",
+    hint: "Trois questions à se poser, dans l'ordre.",
+    explanation: exp(
+      "Modéliser, c'est traduire une situation concrète en objets mathématiques manipulables.",
+      "Étape 1 — décrire l'expérience et son univers : quelles sont les issues possibles ?",
+      "Étape 2 — définir ce que $X$ associe à chaque issue, en une phrase précise (« $X$ est le gain net en euros »). Étape 3 — donner les valeurs prises et leurs probabilités, c'est-à-dire la loi.",
+      "Univers, puis règle, puis loi : la plupart des erreurs viennent d'une étape 2 imprécise — « le gain » ne dit pas si la mise est déduite."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "modeliser", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_mod_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_modeliser",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi faut-il préciser « gain net » ou « gain brut » quand on définit la variable aléatoire d'un jeu ?",
+    format: "open",
+    expected: ["mise", "deduite", "déduite", "retranche", "resultat different", "résultat différent"],
+    comparator: "contains_keyword",
+    hint: "Les deux choix donnent-ils la même espérance ?",
+    explanation: exp(
+      "« Gain » est ambigu : il peut désigner ce que le joueur reçoit, ou ce qu'il reçoit moins ce qu'il a payé.",
+      "Le gain brut ne retranche pas la mise ; le gain net la retranche dans tous les cas.",
+      "Les deux modélisations donnent des espérances qui diffèrent exactement de la mise. Or c'est le signe de l'espérance du gain NET qui dit si le jeu est favorable au joueur : se tromper de convention inverse parfois la conclusion.",
+      "Sans cette précision, on ne sait pas ce qu'on calcule — et la question « le jeu est-il équitable ? » n'a plus de réponse."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "modeliser", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_va_mod_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_modeliser",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Compte les issues favorables, puis divise par le nombre total d'issues.",
+    tags: ["premiere", "maths", "variables_aleatoires", "modeliser", "template"],
+    generate: () => {
+      const n = randomInt(5, 12);
+      const g = randomInt(1, n - 1);
+      const lot = pickOne([10, 20, 50, 100]);
+      const correct = `$\\dfrac{${g}}{${n}}$`;
+      return {
+        text: `Une urne contient $${n}$ jetons dont $${g}$ gagnants. On tire un jeton et $X$ vaut $${lot}$ si le jeton est gagnant, $0$ sinon. Combien vaut $P(X = ${lot})$ ?`,
+        format: "qcm",
+        choices: [correct, `$\\dfrac{${n - g}}{${n}}$`, `$\\dfrac{${g}}{${lot}}$`, `$\\dfrac{1}{${n}}$`],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'événement $\\{X = " + lot + "\\}$ regroupe les issues auxquelles $X$ associe cette valeur : ici, tirer un jeton gagnant.",
+          `Il y a $${g}$ jetons gagnants sur $${n}$ jetons au total, tous équiprobables.`,
+          `$P(X = ${lot}) = \\dfrac{${g}}{${n}}$, et l'autre valeur possible a pour probabilité $\\dfrac{${n - g}}{${n}}$.`,
+          `${correct} — les deux probabilités s'additionnent bien à $1$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_va_mod_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_modeliser",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "N'oublie pas de retrancher la mise dans TOUS les cas, gagnant compris.",
+    tags: ["premiere", "maths", "variables_aleatoires", "modeliser", "open", "template"],
+    generate: () => {
+      const mise = pickOne([1, 2, 3, 5]);
+      const lot = pickOne([20, 30, 50, 100]);
+      const n = pickOne([20, 25, 50, 100]);
+      return {
+        text: `Un jeu coûte $${mise}$ € par partie. Une partie sur $${n}$ fait gagner un lot de $${lot}$ €. Définis la variable aléatoire du gain NET : quelles valeurs prend-elle, avec quelles probabilités ?`,
+        format: "open",
+        expected: [String(lot - mise), "-" + mise, "mise", "net", "retranche"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Le gain net retranche la mise dans tous les cas : c'est ce que le joueur a réellement en poche à la fin.",
+          `En cas de gain, il reçoit $${lot}$ € mais a payé $${mise}$ € : son gain net vaut $${lot} - ${mise} = ${lot - mise}$ €.`,
+          `En cas de perte, il n'a rien reçu et a payé $${mise}$ € : son gain net vaut $-${mise}$ €. Les probabilités sont $\\dfrac{1}{${n}}$ et $\\dfrac{${n - 1}}{${n}}$.`,
+          `$X$ prend les valeurs $${lot - mise}$ et $-${mise}$ — l'erreur classique est de garder $${lot}$ pour le cas gagnant.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== VA_ESPERANCE_PROBLEME (compléments) ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_va_espp_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_esperance_probleme",
+    difficulty: 5,
+    theme: "neutral",
+    text: "L'espérance du gain net d'un jeu vaut $-0{,}4$ €. Que peut-on en conclure ?",
+    format: "qcm",
+    choices: [
+      "le jeu est défavorable au joueur : il perd en moyenne $0{,}40$ € par partie",
+      "le joueur perd exactement $0{,}40$ € à chaque partie",
+      "le jeu est équitable",
+      "le joueur ne peut jamais gagner",
+    ],
+    expected: ["le jeu est défavorable au joueur : il perd en moyenne $0{,}40$ € par partie"],
+    comparator: "mcq_exact",
+    hint: "L'espérance est une moyenne sur un grand nombre de parties, pas une garantie.",
+    explanation: exp(
+      "L'espérance est la valeur moyenne du gain, au sens où elle est approchée par la moyenne des gains sur un grand nombre de parties.",
+      "Une espérance négative signifie que la moyenne est une perte : le jeu est défavorable au joueur.",
+      "Mais elle ne dit rien d'une partie isolée : le joueur peut très bien gagner gros une fois. D'ailleurs, si $X$ ne prend que les valeurs $-2$ et $28$, il ne vaudra JAMAIS $-0{,}4$.",
+      "Le jeu est défavorable : sur $100$ parties, on peut prévoir environ $40$ € de perte."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "esperance_probleme", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_espp_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_esperance_probleme",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Comment détermine-t-on le prix qui rendrait un jeu équitable ?",
+    format: "open",
+    expected: ["esperance", "espérance", "nulle", "egale", "égale", "gain moyen", "mise"],
+    comparator: "contains_keyword",
+    hint: "Un jeu est équitable quand l'espérance du gain net est nulle.",
+    explanation: exp(
+      "Un jeu est équitable lorsque, en moyenne, ni le joueur ni l'organisateur ne gagne : l'espérance du gain NET est nulle.",
+      "On calcule d'abord l'espérance du gain BRUT, c'est-à-dire ce que le joueur reçoit en moyenne.",
+      "La mise équitable est exactement ce nombre : en la retranchant, l'espérance nette devient nulle.",
+      "Prix équitable = espérance du gain brut. Un jeu réel se fixe toujours au-dessus : la différence est la marge de l'organisateur."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "esperance_probleme", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_espp_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_esperance_probleme",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève dit : « l'espérance vaut $2{,}5$, donc je gagnerai $2{,}50$ € ». Explique pourquoi c'est faux.",
+    format: "open",
+    expected: ["moyenne", "grand nombre", "jamais", "valeurs possibles", "une partie"],
+    comparator: "contains_keyword",
+    hint: "L'espérance fait-elle partie des valeurs que $X$ peut prendre ?",
+    explanation: exp(
+      "L'espérance est une moyenne pondérée : elle décrit un comportement sur un grand nombre de répétitions, pas le résultat d'une partie.",
+      "Elle n'a même aucune raison d'appartenir aux valeurs possibles : si $X$ vaut $0$ ou $10$, une espérance de $2{,}5$ ne sera jamais obtenue.",
+      "Ce qu'elle prédit, c'est que la moyenne des gains sur $1000$ parties sera proche de $2{,}5$ € — c'est la loi des grands nombres.",
+      "Sur une partie, il gagnera l'une des valeurs possibles ; $2{,}50$ € est ce qu'il gagnerait EN MOYENNE, en jouant très longtemps."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "esperance_probleme", "piege", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_va_espp_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_esperance_probleme",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule l'espérance du gain brut, puis retranche la mise.",
+    tags: ["premiere", "maths", "variables_aleatoires", "esperance_probleme", "template"],
+    generate: () => {
+      const n = pickOne([10, 20, 25, 50]);
+      const lot = pickOne([20, 50, 100]);
+      const mise = pickOne([1, 2, 3, 5]);
+      const brut = lot / n;
+      const net = Math.round((brut - mise) * 100) / 100;
+      const correct = `$${String(net).replace(".", ",")}$ €`;
+      return {
+        text: `Un ticket coûte $${mise}$ €. Un ticket sur $${n}$ gagne $${lot}$ €. Quelle est l'espérance du gain NET par ticket ?`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$${String(Math.round(brut * 100) / 100).replace(".", ",")}$ €`,
+          `$${String(Math.round((brut + mise) * 100) / 100).replace(".", ",")}$ €`,
+          `$${lot}$ €`,
+        ],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'espérance du gain net est la moyenne des gains nets, pondérée par leurs probabilités.",
+          `Gain brut moyen : $${lot} \\times \\dfrac{1}{${n}} = ${String(Math.round(brut * 100) / 100).replace(".", ",")}$ €.`,
+          `On retranche la mise, payée dans tous les cas : $${String(Math.round(brut * 100) / 100).replace(".", ",")} - ${mise} = ${String(net).replace(".", ",")}$ €.`,
+          `${correct} — ${net < 0 ? "le jeu est défavorable au joueur" : net === 0 ? "le jeu est équitable" : "le jeu est favorable au joueur"}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_va_espp_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_esperance_probleme",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Le prix équitable est l'espérance du gain brut.",
+    tags: ["premiere", "maths", "variables_aleatoires", "esperance_probleme", "open", "template"],
+    generate: () => {
+      const n = pickOne([10, 20, 25, 40, 50]);
+      const lot = pickOne([20, 30, 50, 80, 100]);
+      const juste = Math.round((lot / n) * 100) / 100;
+      return {
+        text: `Une tombola met en jeu un lot de $${lot}$ € pour $${n}$ tickets vendus. À quel prix le ticket rendrait-il le jeu équitable ? Justifie.`,
+        format: "open",
+        expected: [String(juste).replace(".", ","), "esperance", "espérance", "nulle", "gain brut"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Un jeu est équitable quand l'espérance du gain NET est nulle : la mise doit donc valoir exactement l'espérance du gain brut.",
+          `Le gain brut vaut $${lot}$ € avec la probabilité $\\dfrac{1}{${n}}$, et $0$ sinon.`,
+          `Son espérance est $${lot} \\times \\dfrac{1}{${n}} = ${String(juste).replace(".", ",")}$ €.`,
+          `Le prix équitable est $${String(juste).replace(".", ",")}$ € — au-delà, l'organisateur gagne en moyenne.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== VA_ECART_TYPE (compléments) ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_va_et_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_ecart_type",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pourquoi préfère-t-on souvent l'écart-type à la variance pour interpréter une situation ?",
+    format: "qcm",
+    choices: [
+      "parce qu'il s'exprime dans la même unité que $X$",
+      "parce qu'il est toujours plus petit",
+      "parce qu'il est plus facile à calculer",
+      "parce qu'il ne peut pas être nul",
+    ],
+    expected: ["parce qu'il s'exprime dans la même unité que $X$"],
+    comparator: "mcq_exact",
+    hint: "Si $X$ est en euros, en quoi est la variance ?",
+    explanation: exp(
+      "La variance est une moyenne de CARRÉS d'écarts : son unité est le carré de celle de $X$.",
+      "Si $X$ est un gain en euros, la variance s'exprime en « euros au carré », ce qui ne veut rien dire concrètement.",
+      "L'écart-type, sa racine carrée, revient dans l'unité de départ : on peut alors dire « les gains s'écartent en moyenne de $3$ € de l'espérance ».",
+      "Même unité que $X$ : c'est ce qui le rend interprétable."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "ecart_type", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_et_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_ecart_type",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Deux jeux ont la même espérance de gain, mais des écarts-types de $1$ € et $40$ €. Que peut-on dire ?",
+    format: "qcm",
+    choices: [
+      "le second est beaucoup plus risqué : les gains sont très dispersés",
+      "le second rapporte plus en moyenne",
+      "le premier est plus intéressant à coup sûr",
+      "les deux jeux sont identiques",
+    ],
+    expected: ["le second est beaucoup plus risqué : les gains sont très dispersés"],
+    comparator: "mcq_exact",
+    hint: "L'écart-type mesure la dispersion, pas le niveau moyen.",
+    explanation: exp(
+      "L'espérance dit où se situe le centre ; l'écart-type dit à quel point les valeurs s'en écartent.",
+      "Ici les deux jeux ont le même gain moyen : sur un très grand nombre de parties, ils rapportent pareil.",
+      "Mais le second disperse beaucoup plus : de grosses pertes et de gros gains s'y compensent, alors que le premier donne des résultats presque toujours proches de la moyenne.",
+      "Même espérance, risque très différent — c'est précisément ce que l'espérance seule ne dit pas."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "ecart_type", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_et_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_ecart_type",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Que signifie concrètement un écart-type de $0$ ?",
+    format: "open",
+    expected: ["constante", "toujours la meme", "toujours la même", "aucune dispersion", "une seule valeur"],
+    comparator: "contains_keyword",
+    hint: "Une somme de carrés est nulle seulement si…",
+    explanation: exp(
+      "L'écart-type est la racine carrée de la variance, elle-même moyenne des carrés des écarts à l'espérance.",
+      "Un écart-type nul impose une variance nulle, donc une moyenne de carrés nulle.",
+      "Or une moyenne de nombres positifs n'est nulle que si tous sont nuls : chaque valeur prise par $X$ est égale à son espérance.",
+      "$X$ est alors CONSTANTE : il n'y a plus de hasard sur sa valeur, elle vaut toujours $E(X)$."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "ecart_type", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_et_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_ecart_type",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi la variance élève-t-elle les écarts au carré, plutôt que de les additionner tels quels ?",
+    format: "open",
+    expected: ["compensent", "annulent", "signe", "toujours positif", "nulle"],
+    comparator: "contains_keyword",
+    hint: "Que vaudrait la moyenne des écarts $X - E(X)$, sans les carrés ?",
+    explanation: exp(
+      "On cherche à mesurer à quel point les valeurs s'écartent de l'espérance, sans distinguer le dessus du dessous.",
+      "Sans les carrés, les écarts positifs et négatifs se compensent exactement : leur moyenne vaut toujours $0$, quelle que soit la dispersion.",
+      "Le carré supprime le signe et rend tous les écarts positifs ; il donne en plus davantage de poids aux grands écarts, ce qui correspond bien à l'idée de risque.",
+      "Sans les carrés, l'indicateur vaudrait $0$ pour toutes les variables : il ne mesurerait rien."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "ecart_type", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_va_et_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_ecart_type",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Compare les écarts-types, pas les espérances.",
+    tags: ["premiere", "maths", "variables_aleatoires", "ecart_type", "open", "template"],
+    generate: () => {
+      const s1 = pickOne([1, 2, 3]);
+      const s2 = pickOne([15, 20, 30, 40]);
+      const e = pickOne([0, 1, 2, 5]);
+      return {
+        text: `Deux placements ont la même espérance de gain, $${e}$ €, mais des écarts-types de $${s1}$ € et $${s2}$ €. Lequel choisirais-tu, et pourquoi ? Explique ce que change l'écart-type.`,
+        format: "open",
+        expected: ["dispersion", "risque", "ecart", "écart", "moyenne", "regulier", "régulier"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "L'espérance situe le centre, l'écart-type mesure la dispersion autour de ce centre : deux indicateurs qui répondent à deux questions différentes.",
+          `Ici les deux placements rapportent en moyenne la même chose, $${e}$ €.`,
+          `Le premier, d'écart-type $${s1}$ €, donne des résultats presque toujours proches de la moyenne. Le second, d'écart-type $${s2}$ €, alterne gros gains et grosses pertes.`,
+          "Il n'y a pas de bonne réponse unique : le premier est régulier, le second risqué. Ce qui compte est de dire que l'écart-type mesure le RISQUE, pas le rendement."
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_va_et_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_ecart_type",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "L'écart-type est la racine carrée de la variance.",
+    tags: ["premiere", "maths", "variables_aleatoires", "ecart_type", "template"],
+    generate: () => {
+      const s = randomInt(2, 12);
+      const v = s * s;
+      const correct = `$${s}$`;
+      return {
+        text: `Une variable aléatoire $X$, exprimée en euros, vérifie $V(X) = ${v}$. Quel est son écart-type, et dans quelle unité ?`,
+        format: "qcm",
+        choices: [`$${s}$ €`, `$${v}$ €`, `$${s}$ €$^2$`, `$${2 * s}$ €`],
+        expected: [`$${s}$ €`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'écart-type est la racine carrée de la variance, et il s'exprime dans la même unité que $X$.",
+          `Ici $\\sigma(X) = \\sqrt{${v}}$.`,
+          `$= ${s}$. La variance, elle, s'exprimait en euros au carré — une unité sans signification concrète.`,
+          `L'écart-type vaut ${correct} € : les gains s'écartent en moyenne de $${s}$ € de l'espérance.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== VA_SIMULATION ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_va_sim_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_simulation",
+    difficulty: 3,
+    theme: "neutral",
+    text: "En Python, quelle instruction simule le lancer d'un dé équilibré à six faces ?",
+    format: "qcm",
+    choices: [
+      "randint(1, 6)",
+      "random()",
+      "randint(0, 6)",
+      "randint(1, 7)",
+    ],
+    expected: ["randint(1, 6)"],
+    comparator: "mcq_exact",
+    hint: "Attention aux bornes : quelles valeurs veut-on obtenir ?",
+    explanation: exp(
+      "Simuler une expérience aléatoire, c'est produire des issues avec les bonnes probabilités.",
+      "Un dé donne un entier entre $1$ et $6$, chacun avec la probabilité $\\dfrac{1}{6}$ : c'est exactement ce que fait `randint(1, 6)`, dont les deux bornes sont incluses.",
+      "`random()` renvoie un décimal entre $0$ et $1$ : utile pour simuler un événement de probabilité donnée, pas un dé. `randint(0, 6)` ajouterait un $0$ impossible.",
+      "`randint(1, 6)` — vérifier les bornes est le premier réflexe de relecture d'une simulation."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "simulation", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_sim_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_simulation",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Comment simuler un événement de probabilité $0{,}3$ avec `random()`, qui renvoie un décimal entre $0$ et $1$ ?",
+    format: "qcm",
+    choices: [
+      "tester si `random() < 0.3`",
+      "tester si `random() == 0.3`",
+      "tester si `random() > 0.3`",
+      "multiplier `random()` par $0{,}3$",
+    ],
+    expected: ["tester si `random() < 0.3`"],
+    comparator: "mcq_exact",
+    hint: "Quelle proportion des nombres entre $0$ et $1$ est inférieure à $0{,}3$ ?",
+    explanation: exp(
+      "`random()` tire un décimal uniformément entre $0$ et $1$ : la probabilité de tomber dans un intervalle est la longueur de cet intervalle.",
+      "L'intervalle $[0 ; 0{,}3[$ a pour longueur $0{,}3$.",
+      "Le test `random() < 0.3` est donc vrai avec la probabilité $0{,}3$. Tester l'égalité serait absurde : elle a une probabilité nulle avec des décimaux.",
+      "`random() < 0.3` — et `random() < p` pour n'importe quelle probabilité $p$."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "simulation", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_sim_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_simulation",
+    difficulty: 5,
+    theme: "neutral",
+    text: "On simule $10\\,000$ parties et on obtient un gain moyen de $-0{,}52$ €. L'espérance calculée vaut $-0{,}5$ €. Que conclure ?",
+    format: "qcm",
+    choices: [
+      "la simulation confirme le calcul : la moyenne s'approche de l'espérance quand $n$ grandit",
+      "le calcul de l'espérance est faux",
+      "la simulation est mal programmée",
+      "l'espérance vaut en réalité $-0{,}52$ €",
+    ],
+    expected: ["la simulation confirme le calcul : la moyenne s'approche de l'espérance quand $n$ grandit"],
+    comparator: "mcq_exact",
+    hint: "Une simulation donne-t-elle exactement l'espérance ?",
+    explanation: exp(
+      "Une simulation produit une moyenne OBSERVÉE sur un échantillon : elle fluctue, elle ne tombe jamais exactement sur la valeur théorique.",
+      "Ce qu'on attend, c'est que cette moyenne se rapproche de l'espérance quand le nombre de parties augmente.",
+      "Un écart de $0{,}02$ sur $10\\,000$ parties est tout à fait normal ; ce serait un écart de $0{,}5$ qui devrait alerter.",
+      "La simulation confirme le calcul — c'est une illustration de la loi des grands nombres, pas une preuve."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "simulation", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_sim_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_simulation",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Décris l'algorithme qui estime l'espérance d'un gain en simulant un grand nombre de parties.",
+    format: "open",
+    expected: ["boucle", "somme", "compteur", "divise", "moyenne", "n parties"],
+    comparator: "contains_keyword",
+    hint: "Une boucle, un accumulateur, et une division à la fin.",
+    explanation: exp(
+      "Estimer une espérance par simulation, c'est calculer la moyenne des gains obtenus sur un grand nombre de parties.",
+      "On initialise une somme à $0$, puis on répète $n$ fois : simuler une partie, calculer le gain, l'ajouter à la somme.",
+      "À la sortie de la boucle, on divise la somme par $n$ : c'est la moyenne observée, qui estime l'espérance.",
+      "Boucle bornée + accumulateur + division finale — et plus $n$ est grand, plus l'estimation est stable."
+    ),
+    canvas: {
+      kind: "scratch",
+      title: "Estimer une espérance par simulation",
+      blocks: [
+        { type: "set_variable", variable: "somme", value: 0, text: "mettre somme à 0" },
+        {
+          type: "repeat",
+          times: 10000,
+          text: "répéter n fois",
+          children: [
+            { type: "set_variable", variable: "gain", text: "gain ← résultat d'une partie simulée" },
+            { type: "change_variable", variable: "somme", text: "ajouter gain à somme" },
+          ],
+        },
+        { type: "say", text: "afficher somme / n" },
+      ],
+    },
+    tags: ["premiere", "maths", "variables_aleatoires", "simulation", "canvas", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_sim_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_simulation",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Deux élèves lancent la même simulation de $1000$ parties et n'obtiennent pas la même moyenne. L'un des deux s'est-il forcément trompé ?",
+    format: "open",
+    expected: ["fluctuation", "hasard", "aleatoire", "aléatoire", "proche", "non"],
+    comparator: "contains_keyword",
+    hint: "Deux séries de $1000$ tirages au hasard donnent-elles les mêmes résultats ?",
+    explanation: exp(
+      "Une simulation repose sur des tirages au hasard : deux exécutions ne produisent pas la même suite d'issues.",
+      "Les deux moyennes obtenues sont donc des estimations différentes de la même espérance : c'est la fluctuation d'échantillonnage.",
+      "Ce qui doit se vérifier, c'est qu'elles sont PROCHES l'une de l'autre et de la valeur théorique — et que l'écart diminue si on passe à $100\\,000$ parties.",
+      "Non : obtenir deux résultats différents est normal. Ce serait obtenir exactement le même qui devrait étonner."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "simulation", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_va_sim_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_simulation",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Vérifie les bornes : sont-elles incluses ? Correspondent-elles aux valeurs possibles ?",
+    tags: ["premiere", "maths", "variables_aleatoires", "simulation", "template"],
+    generate: () => {
+      const cas = [
+        { but: "le lancer d'un dé à six faces", bonne: "randint(1, 6)" },
+        { but: "le lancer d'une pièce (0 pour pile, 1 pour face)", bonne: "randint(0, 1)" },
+        { but: "le tirage d'une carte parmi 52", bonne: "randint(1, 52)" },
+        { but: "un événement de probabilité 0,25", bonne: "random() < 0.25" },
+        { but: "le tirage d'un jeton parmi 10", bonne: "randint(1, 10)" },
+      ];
+      const c = pickOne(cas);
+      const toutes = ["randint(1, 6)", "randint(0, 1)", "randint(1, 52)", "random() < 0.25", "randint(1, 10)"];
+      return {
+        text: `Quelle instruction Python simule ${c.but} ?`,
+        format: "qcm",
+        choices: [c.bonne, ...toutes.filter((t) => t !== c.bonne).slice(0, 3)],
+        expected: [c.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "`randint(a, b)` tire un entier entre $a$ et $b$, bornes INCLUSES ; `random()` tire un décimal entre $0$ et $1$.",
+          `On cherche à simuler ${c.but} : on liste d'abord les valeurs possibles.`,
+          "On choisit ensuite l'instruction dont l'ensemble des résultats coïncide exactement avec ces valeurs.",
+          `L'instruction correcte est \`${c.bonne}\`.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_va_sim_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_simulation",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Décris la boucle, ce qu'on accumule, et ce qu'on affiche à la fin.",
+    tags: ["premiere", "maths", "variables_aleatoires", "simulation", "open", "template"],
+    generate: () => {
+      const cas = [
+        { but: "estimer la probabilité d'obtenir un $6$ avec un dé", accum: "un compteur de succès", fin: "compteur / n" },
+        { but: "estimer l'espérance du gain d'une tombola", accum: "la somme des gains", fin: "somme / n" },
+        { but: "estimer la probabilité d'obtenir deux PILE de suite", accum: "un compteur de succès", fin: "compteur / n" },
+        { but: "estimer le nombre moyen de lancers avant d'obtenir un $6$", accum: "la somme des nombres de lancers", fin: "somme / n" },
+      ];
+      const c = pickOne(cas);
+      const n = pickOne([1000, 10000, 100000]);
+      return {
+        text: `Décris un algorithme qui permet d'${c.but}, en simulant $${n}$ répétitions. Précise ce que tu initialises, ce que fait la boucle, et ce que tu affiches.`,
+        format: "open",
+        expected: ["boucle", "compteur", "somme", "divise", "moyenne", "frequence", "fréquence"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Toute estimation par simulation suit le même schéma : initialiser un accumulateur, répéter l'expérience, puis diviser.",
+          `On initialise ${c.accum} à $0$.`,
+          `Dans une boucle répétée $${n}$ fois, on simule l'expérience et on met à jour cet accumulateur.`,
+          `À la fin, on affiche \`${c.fin}\` : c'est l'estimation cherchée, d'autant plus fiable que $${n}$ est grand.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== VA_ECHANTILLON ===================== */
+  {
+    kind: "fixed",
+    id: "premiere_va_ech_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_echantillon",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Que dit la loi des grands nombres à propos de la moyenne d'un échantillon ?",
+    format: "qcm",
+    choices: [
+      "elle se rapproche de l'espérance quand la taille de l'échantillon augmente",
+      "elle est toujours égale à l'espérance",
+      "elle s'éloigne de l'espérance quand la taille augmente",
+      "elle ne dépend pas de la taille de l'échantillon",
+    ],
+    expected: ["elle se rapproche de l'espérance quand la taille de l'échantillon augmente"],
+    comparator: "mcq_exact",
+    hint: "Que se passe-t-il si on lance un dé $10$ fois, puis $10\\,000$ fois ?",
+    explanation: exp(
+      "Un échantillon de taille $n$ est une suite de $n$ répétitions indépendantes de la même expérience ; sa moyenne est une valeur observée, qui fluctue.",
+      "La loi des grands nombres dit que cette moyenne observée se rapproche de l'espérance quand $n$ grandit.",
+      "Sur $10$ lancers de dé, la moyenne peut valoir $2{,}8$ ou $4{,}5$ ; sur $10\\,000$, elle sera très proche de $3{,}5$.",
+      "Elle se rapproche de l'espérance : c'est ce qui fait le lien entre le calcul théorique et l'observation."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "echantillon", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_ech_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_echantillon",
+    difficulty: 5,
+    theme: "neutral",
+    text: "La moyenne observée sur $50$ lancers de dé vaut $3{,}9$, alors que l'espérance vaut $3{,}5$. Le dé est-il truqué ?",
+    format: "qcm",
+    choices: [
+      "on ne peut pas le conclure : sur $50$ lancers, un tel écart est courant",
+      "oui, la moyenne devrait être exactement $3{,}5$",
+      "oui, l'écart dépasse $0{,}1$",
+      "non, c'est impossible avec un dé truqué",
+    ],
+    expected: ["on ne peut pas le conclure : sur $50$ lancers, un tel écart est courant"],
+    comparator: "mcq_exact",
+    hint: "L'espérance est une limite de comportement, pas une valeur à atteindre.",
+    explanation: exp(
+      "La moyenne d'un échantillon fluctue autour de l'espérance : elle n'a aucune raison de tomber exactement dessus.",
+      "L'ampleur de cette fluctuation dépend de la taille de l'échantillon : elle est grande pour $n$ petit, faible pour $n$ grand.",
+      "Sur $50$ lancers, un écart de $0{,}4$ est banal. C'est en répétant sur des milliers de lancers, et en voyant l'écart PERSISTER, qu'on commencerait à soupçonner un truquage.",
+      "On ne peut rien conclure : un échantillon de $50$ est trop petit pour trancher."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "echantillon", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_ech_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_echantillon",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Quelle est la différence entre l'espérance d'une variable aléatoire et la moyenne d'un échantillon ?",
+    format: "open",
+    expected: ["theorique", "théorique", "observee", "observée", "calcul", "fluctue", "echantillon"],
+    comparator: "contains_keyword",
+    hint: "L'une se calcule avant l'expérience, l'autre se mesure après.",
+    explanation: exp(
+      "Ce sont deux nombres de nature différente, qu'on a tendance à confondre parce qu'ils sont proches.",
+      "L'espérance est THÉORIQUE : elle se calcule à partir de la loi de probabilité, avant même de faire l'expérience. Elle est fixe.",
+      "La moyenne d'un échantillon est OBSERVÉE : elle se calcule après coup, à partir de résultats réels. Elle change d'un échantillon à l'autre.",
+      "L'une se calcule, l'autre se mesure — et la loi des grands nombres dit que la seconde s'approche de la première quand $n$ grandit."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "echantillon", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_ech_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_echantillon",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi un sondage sur $1000$ personnes est-il plus fiable qu'un sondage sur $50$ personnes ?",
+    format: "open",
+    expected: ["fluctuation", "grands nombres", "plus proche", "taille", "dispersion", "diminue"],
+    comparator: "contains_keyword",
+    hint: "Comment la fluctuation de la moyenne évolue-t-elle avec la taille de l'échantillon ?",
+    explanation: exp(
+      "Un sondage estime une proportion théorique à partir d'un échantillon : le résultat obtenu est une moyenne observée, qui fluctue.",
+      "Cette fluctuation dépend de la taille de l'échantillon : plus il est grand, plus les résultats de deux sondages différents se ressemblent.",
+      "C'est la loi des grands nombres : la moyenne observée se resserre autour de la valeur théorique quand $n$ augmente. Sur $50$ personnes, deux sondages peuvent donner $40\\,\\%$ et $55\\,\\%$ ; sur $1000$, ils donneront des valeurs bien plus proches.",
+      "La taille de l'échantillon réduit la fluctuation — à condition que l'échantillon soit tiré au hasard, sans quoi aucune taille ne rattrape le biais."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "echantillon", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_va_ech_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_echantillon",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Sur un grand échantillon, la moyenne observée est proche de l'espérance.",
+    tags: ["premiere", "maths", "variables_aleatoires", "echantillon", "template"],
+    generate: () => {
+      const cas = [
+        { exp: "d'un dé équilibré", esp: "3,5", n: 10000 },
+        { exp: "du nombre de PILE sur deux lancers de pièce", esp: "1", n: 5000 },
+        { exp: "d'un gain net d'espérance $-0,5$ €", esp: "-0,5", n: 20000 },
+        { exp: "d'un dé à quatre faces équilibré", esp: "2,5", n: 8000 },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `On répète $${c.n}$ fois l'expérience ${c.exp} et on calcule la moyenne des résultats. De quelle valeur cette moyenne sera-t-elle proche ?`,
+        format: "qcm",
+        choices: [`$${c.esp}$`, `$${c.n}$`, "$0$", "on ne peut pas le prévoir"],
+        expected: [`$${c.esp}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La loi des grands nombres relie l'observé au théorique : la moyenne d'un échantillon se rapproche de l'espérance quand la taille augmente.",
+          `Ici l'espérance théorique vaut $${c.esp}$.`,
+          `Avec $${c.n}$ répétitions, l'échantillon est grand : la moyenne observée en sera très proche, sans jamais tomber exactement dessus.`,
+          `La moyenne sera proche de $${c.esp}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_va_ech_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_echantillon",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Regarde la taille de l'échantillon avant de conclure.",
+    tags: ["premiere", "maths", "variables_aleatoires", "echantillon", "open", "template"],
+    generate: () => {
+      const cas = [
+        { n: 20, ecart: "0,6", conclusion: false },
+        { n: 100, ecart: "0,4", conclusion: false },
+        { n: 100000, ecart: "0,5", conclusion: true },
+        { n: 50, ecart: "0,3", conclusion: false },
+        { n: 200000, ecart: "0,8", conclusion: true },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Sur $${c.n}$ lancers d'un dé, la moyenne observée s'écarte de $${c.ecart}$ de l'espérance théorique $3{,}5$. Peut-on soupçonner un dé truqué ? Justifie.`,
+        format: "open",
+        expected: ["taille", "fluctuation", "grand", "petit", "echantillon", "échantillon"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Un écart entre moyenne observée et espérance ne prouve rien à lui seul : tout dépend de la taille de l'échantillon.",
+          `Ici l'échantillon compte $${c.n}$ lancers.`,
+          c.conclusion
+            ? "Sur un échantillon aussi grand, la loi des grands nombres impose une moyenne très proche de l'espérance : un tel écart est anormal et mérite d'être examiné."
+            : "Sur un échantillon aussi petit, la fluctuation est importante : un tel écart survient couramment avec un dé parfaitement équilibré.",
+          c.conclusion
+            ? "Oui, l'écart est suspect à cette taille d'échantillon."
+            : "Non, on ne peut rien conclure : il faudrait beaucoup plus de lancers."
         ),
       };
     },
