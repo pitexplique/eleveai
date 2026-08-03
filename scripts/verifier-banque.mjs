@@ -93,9 +93,18 @@ const fichiers = fs.readdirSync(BANQUES).filter((f) => f.endsWith(".bank.ts"));
 
 // Même piège que dans auditer-banque.mjs : un `x.bank.ts.ts` est chargé par
 // TypeScript mais sauté ici. Le dire, plutôt que de rendre un rapport faux.
+// ⚠️ 02/08 — le test cherchait « .bank. », avec un point APRÈS : un fichier
+// nommé `x.banks.ts` (un « s » de trop) échappait au garde-fou lui-même.
+// On teste maintenant sur la simple présence de « bank » dans le nom.
 const suspects = fs
   .readdirSync(BANQUES)
-  .filter((f) => !f.endsWith(".bank.ts") && f !== "index.ts" && /\.bank\./.test(f));
+  .filter(
+    (f) =>
+      !f.endsWith(".bank.ts") &&
+      f !== "index.ts" &&
+      /bank/i.test(f) &&
+      !/^build[A-Z]/.test(f), // buildCycle2Bank.ts & co : des constructeurs, pas des banques
+  );
 
 console.log(`\nVÉRIFICATION ${CLASSE.toUpperCase()} · ${MATIERE.toUpperCase()}`);
 console.log("─".repeat(64));

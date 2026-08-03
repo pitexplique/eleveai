@@ -10,7 +10,7 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { microSkills } from "@/lib/tutor-v4/knowledge/maths/4e/microSkills";
 import { kitHelpers } from "@/components/kit/fromCoach";
-import { operationsRelatifsBank } from "@/lib/tutor-v4/questionBank/4e/maths/operations-relatifs.banks";
+import { operationsRelatifsBank } from "@/lib/tutor-v4/questionBank/4e/maths/operations-relatifs.bank";
 import { fractionsBank } from "@/lib/tutor-v4/questionBank/4e/maths/fractions.bank";
 import { proportionnaliteBank } from "@/lib/tutor-v4/questionBank/4e/maths/proportionnalite.bank";
 import { expressionsLitteralesBank } from "@/lib/tutor-v4/questionBank/4e/maths/expressions-litterales.bank";

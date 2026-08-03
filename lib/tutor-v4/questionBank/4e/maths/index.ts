@@ -24,7 +24,7 @@ import { transformationsBank } from "./transformations.bank";
 import { pythagoreBank } from "./pythagore.bank";
 import { probabilitesBank } from"./probabilites.bank";
 import { fractionsBank } from"./fractions.bank";
-import { operationsRelatifsBank } from "./operations-relatifs.banks";
+import { operationsRelatifsBank } from "./operations-relatifs.bank";
 import { identitesRemarquablesBank} from "./identites-remarquables.bank"
 import { factorisationBank } from "./factorisation.bank";
 import { proportionnaliteBank} from "./proportionnalite.bank"

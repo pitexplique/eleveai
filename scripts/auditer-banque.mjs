@@ -91,11 +91,18 @@ const fichiers = tousLesFichiers.filter((f) => f.endsWith(".bank.ts")).sort();
 // `./x.bank.ts` vers `x.bank.ts.ts`), mais l'audit ne le lisait pas et
 // annonçait 5 micro-compétences vides qui ne l'étaient pas. Un outil de
 // contrôle qui saute un fichier sans le dire est pire que pas d'outil.
+//
+// ⚠️ 02/08 — le garde-fou lui-même avait un trou : il cherchait « .bank. »,
+// avec un point APRÈS. Le jumeau 4ᵉ s'appelait `operations-relatifs.banks.ts`
+// (un « s » de trop) et passait donc entre les mailles : ni lu, ni signalé,
+// pendant qu'on annonçait 7 micro-compétences vides en 4ᵉ. On teste
+// maintenant sur la simple présence de « bank » dans le nom.
 const suspects = tousLesFichiers.filter(
   (f) =>
     !f.endsWith(".bank.ts") &&
     f !== "index.ts" &&
-    /\.bank\./.test(f) === true,
+    /bank/i.test(f) === true &&
+    !/^build[A-Z]/.test(f), // buildCycle2Bank.ts & co : des constructeurs, pas des banques
 );
 
 for (const fichier of fichiers) {

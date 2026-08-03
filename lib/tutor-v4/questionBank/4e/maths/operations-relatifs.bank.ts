@@ -1,4 +1,4 @@
-// lib/tutor-v4/question-banks/maths/4e/operations-relatifs.bank.ts
+// lib/tutor-v4/questionBank/4e/maths/operations-relatifs.bank.ts
 
 /**
  * Banque de questions Tutor V4 - Mathématiques 4e
