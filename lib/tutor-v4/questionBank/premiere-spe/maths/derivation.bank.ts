@@ -511,52 +511,6 @@ export const derivationBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "premiere_der_us_fixed_6",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "derivation",
-    microId: "der_usuelles",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Quelle est la dérivée de $f(x) = 5x + 3$ ?",
-    format: "qcm",
-    choices: ["$f'(x) = 5$", "$f'(x) = 5x$", "$f'(x) = 3$", "$f'(x) = 8$"],
-    expected: ["$f'(x) = 5$"],
-    comparator: "mcq_exact",
-    hint: "Dérivée d'une fonction affine $ax + b$.",
-    explanation: exp(
-      "La dérivée d'une fonction affine $ax + b$ est la constante $a$.",
-      "Ici $a = 5$.",
-      "$f'(x) = 5$.",
-      "$f'(x) = 5$."
-    ),
-    tags: ["premiere", "maths", "derivation", "usuelles", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_der_us_fixed_7",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "derivation",
-    microId: "der_usuelles",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Quelle est la dérivée de $f(x) = x^5$ ?",
-    format: "qcm",
-    choices: ["$f'(x) = 5x^4$", "$f'(x) = 5x^5$", "$f'(x) = x^4$", "$f'(x) = 4x^5$"],
-    expected: ["$f'(x) = 5x^4$"],
-    comparator: "mcq_exact",
-    hint: "L'exposant passe devant et diminue de $1$.",
-    explanation: exp(
-      "Pour $f(x) = x^n$, on a $f'(x) = n x^{n-1}$.",
-      "Ici $n = 5$ : l'exposant $5$ passe en facteur, et le nouvel exposant est $5 - 1 = 4$.",
-      "$f'(x) = 5x^4$.",
-      "$f'(x) = 5x^4$."
-    ),
-    tags: ["premiere", "maths", "derivation", "usuelles", "qcm"],
-  },
-  {
-    kind: "fixed",
     id: "premiere_der_us_fixed_8",
     niveau: "premiere-spe",
     matiere: "maths",
@@ -732,52 +686,6 @@ export const derivationBank: TutorBankItemV4[] = [
   /* ===================== DER_OPERATIONS ===================== */
   {
     kind: "fixed",
-    id: "premiere_der_op_fixed_1",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "derivation",
-    microId: "der_operations",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Quelle est la dérivée de $f(x) = x^2 + 3x$ ?",
-    format: "qcm",
-    choices: ["$f'(x) = 2x + 3$", "$f'(x) = 2x + 3x$", "$f'(x) = x + 3$", "$f'(x) = 2x$"],
-    expected: ["$f'(x) = 2x + 3$"],
-    comparator: "mcq_exact",
-    hint: "$(u + v)' = u' + v'$.",
-    explanation: exp(
-      "La dérivée d'une somme est la somme des dérivées.",
-      "$(x^2)' = 2x$ et $(3x)' = 3$.",
-      "$f'(x) = 2x + 3$.",
-      "$f'(x) = 2x + 3$."
-    ),
-    tags: ["premiere", "maths", "derivation", "operations", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_der_op_fixed_2",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "derivation",
-    microId: "der_operations",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Quelle est la dérivée de $f(x) = 3x^2 - 5x + 2$ ?",
-    format: "qcm",
-    choices: ["$f'(x) = 6x - 5$", "$f'(x) = 6x - 5 + 2$", "$f'(x) = 3x - 5$", "$f'(x) = 6x + 5$"],
-    expected: ["$f'(x) = 6x - 5$"],
-    comparator: "mcq_exact",
-    hint: "Dérive terme à terme.",
-    explanation: exp(
-      "On dérive chaque terme.",
-      "$(3x^2)' = 6x$, $(-5x)' = -5$, $(2)' = 0$.",
-      "$f'(x) = 6x - 5$.",
-      "$f'(x) = 6x - 5$."
-    ),
-    tags: ["premiere", "maths", "derivation", "operations", "qcm"],
-  },
-  {
-    kind: "fixed",
     id: "premiere_der_op_fixed_3",
     niveau: "premiere-spe",
     matiere: "maths",
@@ -823,57 +731,6 @@ export const derivationBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "premiere_der_op_fixed_5",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "derivation",
-    microId: "der_operations",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Quelle est la dérivée de $f(x) = x^3 - 2x^2$ ?",
-    format: "qcm",
-    choices: ["$f'(x) = 3x^2 - 4x$", "$f'(x) = 3x^2 - 2x$", "$f'(x) = 3x - 4x$", "$f'(x) = x^2 - 4x$"],
-    expected: ["$f'(x) = 3x^2 - 4x$"],
-    comparator: "mcq_exact",
-    hint: "$(x^3)' = 3x^2$, $(2x^2)' = 4x$.",
-    explanation: exp(
-      "On dérive terme à terme.",
-      "$(x^3)' = 3x^2$ et $(2x^2)' = 4x$.",
-      "$f'(x) = 3x^2 - 4x$.",
-      "$f'(x) = 3x^2 - 4x$."
-    ),
-    tags: ["premiere", "maths", "derivation", "operations", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_der_op_fixed_6",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "derivation",
-    microId: "der_operations",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Quelle est la dérivée de $f(x) = 2x^3 - 3x^2 + 4$ ?",
-    format: "qcm",
-    choices: [
-      "$f'(x) = 6x^2 - 6x$",
-      "$f'(x) = 6x^2 - 6x + 4$",
-      "$f'(x) = 6x^2 - 3x$",
-      "$f'(x) = 2x^2 - 6x$",
-    ],
-    expected: ["$f'(x) = 6x^2 - 6x$"],
-    comparator: "mcq_exact",
-    hint: "La dérivée d'une constante est nulle : le $+4$ disparaît.",
-    explanation: exp(
-      "On dérive terme à terme, en gardant les coefficients en facteur.",
-      "$(2x^3)' = 2 \\times 3x^2 = 6x^2$ ; $(3x^2)' = 3 \\times 2x = 6x$ ; $(4)' = 0$.",
-      "$f'(x) = 6x^2 - 6x$. Garder le $+4$ est l'erreur classique.",
-      "$f'(x) = 6x^2 - 6x$."
-    ),
-    tags: ["premiere", "maths", "derivation", "operations", "qcm"],
-  },
-  {
-    kind: "fixed",
     id: "premiere_der_op_fixed_7",
     niveau: "premiere-spe",
     matiere: "maths",
@@ -897,34 +754,6 @@ export const derivationBank: TutorBankItemV4[] = [
       "Contrairement au produit, la soustraction rend l'ORDRE des termes essentiel.",
       "Écrire $\\dfrac{uv' - u'v}{v^2}$ donne l'opposé du bon résultat, donc un sens de variation inversé.",
       "$\\left(\\dfrac{u}{v}\\right)' = \\dfrac{u'v - uv'}{v^2}$."
-    ),
-    tags: ["premiere", "maths", "derivation", "operations", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_der_op_fixed_8",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "derivation",
-    microId: "der_operations",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Quelle est la dérivée de $f(x) = (2x + 1)(x - 3)$ ?",
-    format: "qcm",
-    choices: [
-      "$f'(x) = 4x - 5$",
-      "$f'(x) = 2$",
-      "$f'(x) = 4x + 1$",
-      "$f'(x) = 2x - 3$",
-    ],
-    expected: ["$f'(x) = 4x - 5$"],
-    comparator: "mcq_exact",
-    hint: "Développe d'abord, ou applique $(uv)' = u'v + uv'$.",
-    explanation: exp(
-      "On peut développer avant de dériver, ou utiliser la formule du produit.",
-      "En développant : $f(x) = 2x^2 - 6x + x - 3 = 2x^2 - 5x - 3$.",
-      "$f'(x) = 4x - 5$. Par la formule du produit : $2(x - 3) + (2x + 1) \\times 1 = 4x - 5$ : même résultat.",
-      "$f'(x) = 4x - 5$. (Dériver chaque facteur séparément donnerait $2$ : c'est faux.)"
     ),
     tags: ["premiere", "maths", "derivation", "operations", "qcm"],
   },
@@ -1005,6 +834,85 @@ export const derivationBank: TutorBankItemV4[] = [
       "$f'(x) = \\dfrac{2}{\\sqrt{x}}$."
     ),
     tags: ["premiere", "maths", "derivation", "operations", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "premiere_der_op_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_operations",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Dérive terme à terme : $(ax^3)' = 3ax^2$.",
+    tags: ["premiere", "maths", "derivation", "operations", "template"],
+    generate: () => {
+      const a = randomInt(1, 4);
+      const b = pickOne([-4, -3, -2, 2, 3, 5]);
+      const c = randomInt(-6, 6);
+      const t = (k: number, s: string) => (k === 1 ? s : k === -1 ? "-" + s : `${k}${s}`);
+      const correct = `$f'(x) = ${t(3 * a, "x^2")} ${2 * b >= 0 ? "+ " + t(2 * b, "x") : "- " + t(-2 * b, "x")}$`;
+      return {
+        text: `Quelle est la dérivée de $f(x) = ${t(a, "x^3")} ${b >= 0 ? "+ " + t(b, "x^2") : "- " + t(-b, "x^2")} ${c >= 0 ? "+ " + c : "- " + -c}$ ?`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$f'(x) = ${t(3 * a, "x^2")} ${b >= 0 ? "+ " + t(b, "x") : "- " + t(-b, "x")}$`,
+          `$f'(x) = ${t(a, "x^2")} ${2 * b >= 0 ? "+ " + t(2 * b, "x") : "- " + t(-2 * b, "x")}$`,
+          `$f'(x) = ${t(3 * a, "x^2")} ${2 * b >= 0 ? "+ " + t(2 * b, "x") : "- " + t(-2 * b, "x")} ${c >= 0 ? "+ " + c : "- " + -c}$`,
+        ].filter((v, i, tt) => tt.indexOf(v) === i),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La dérivée d'une somme est la somme des dérivées : on traite chaque terme séparément.",
+          `$(${t(a, "x^3")})' = ${t(3 * a, "x^2")}$ et $(${t(b, "x^2")})' = ${t(2 * b, "x")}$.`,
+          `La constante $${c}$ disparaît : sa courbe est horizontale, sa pente est nulle.`,
+          `${correct}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_der_op_tpl_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_operations",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "$(uv)' = u'v + uv'$ — deux termes, jamais un seul.",
+    tags: ["premiere", "maths", "derivation", "operations", "template"],
+    generate: () => {
+      const a = randomInt(1, 4);
+      const b = randomInt(-4, 4);
+      const c = randomInt(1, 3);
+      const d = randomInt(-4, 4);
+      // (ax+b)(cx+d) → dérivée : 2ac x + (ad + bc)
+      const p = 2 * a * c;
+      const q = a * d + b * c;
+      const t = (k: number, s: string) => (k === 1 ? s : k === -1 ? "-" + s : `${k}${s}`);
+      const ecrire = (u: number, v: number) => `${t(u, "x")} ${v >= 0 ? "+ " + v : "- " + -v}`;
+      const correct = `$f'(x) = ${t(p, "x")} ${q >= 0 ? "+ " + q : "- " + -q}$`;
+      return {
+        text: `Quelle est la dérivée de $f(x) = (${ecrire(a, b)})(${ecrire(c, d)})$ ?`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$f'(x) = ${a * c}$`,
+          `$f'(x) = ${t(a * c, "x")} ${q >= 0 ? "+ " + q : "- " + -q}$`,
+          `$f'(x) = ${t(p, "x")}$`,
+        ].filter((v, i, tt) => tt.indexOf(v) === i),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La dérivée d'un produit n'est PAS le produit des dérivées : $(uv)' = u'v + uv'$, avec deux termes.",
+          `On pose $u = ${ecrire(a, b)}$ et $v = ${ecrire(c, d)}$, donc $u' = ${a}$ et $v' = ${c}$.`,
+          `$f'(x) = ${a}(${ecrire(c, d)}) + (${ecrire(a, b)}) \\times ${c}$, qu'on développe puis réduit.`,
+          `${correct} — le produit des dérivées aurait donné $${a * c}$, une constante, ce qui est visiblement faux pour un polynôme de degré $2$.`
+        ),
+      };
+    },
   },
   {
     kind: "template",
@@ -2124,29 +2032,6 @@ export const derivationBank: TutorBankItemV4[] = [
   /* ===================== DER_PUISSANCE ===================== */
   {
     kind: "fixed",
-    id: "premiere_der_pui_fixed_1",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "derivation",
-    microId: "der_puissance",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Quelle est la dérivée de $f(x) = x^7$ ?",
-    format: "qcm",
-    choices: ["$7x^6$", "$7x^7$", "$6x^6$", "$x^6$"],
-    expected: ["$7x^6$"],
-    comparator: "mcq_exact",
-    hint: "L'exposant passe devant, puis diminue de $1$.",
-    explanation: exp(
-      "Pour $f(x) = x^n$, la dérivée est $f'(x) = n x^{n-1}$.",
-      "Ici $n = 7$ : l'exposant $7$ passe en facteur devant.",
-      "Le nouvel exposant est $7 - 1 = 6$.",
-      "$f'(x) = 7x^6$."
-    ),
-    tags: ["premiere", "maths", "derivation", "puissance", "qcm"],
-  },
-  {
-    kind: "fixed",
     id: "premiere_der_pui_fixed_2",
     niveau: "premiere-spe",
     matiere: "maths",
@@ -2215,29 +2100,6 @@ export const derivationBank: TutorBankItemV4[] = [
       "$\\dfrac{1}{x} = x^{-1}$, donc avec $n = -1$ : $(x^{-1})' = -1 \\times x^{-2}$.",
       "$= -x^{-2} = -\\dfrac{1}{x^2}$, ce qui est bien la formule connue de la dérivée de l'inverse.",
       "$f'(x) = -\\dfrac{1}{x^2}$ : les deux méthodes concordent."
-    ),
-    tags: ["premiere", "maths", "derivation", "puissance", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_der_pui_fixed_5",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "derivation",
-    microId: "der_puissance",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Quelle est la dérivée de $f(x) = 5x^3$ ?",
-    format: "qcm",
-    choices: ["$15x^2$", "$5x^2$", "$3x^2$", "$15x^3$"],
-    expected: ["$15x^2$"],
-    comparator: "mcq_exact",
-    hint: "Le coefficient $5$ reste en facteur, la puissance se dérive.",
-    explanation: exp(
-      "Multiplier une fonction par une constante multiplie sa dérivée par cette même constante : $(ku)' = k u'$.",
-      "$(x^3)' = 3x^2$, donc $f'(x) = 5 \\times 3x^2$.",
-      "$= 15x^2$.",
-      "$f'(x) = 15x^2$."
     ),
     tags: ["premiere", "maths", "derivation", "puissance", "qcm"],
   },
@@ -2421,62 +2283,6 @@ export const derivationBank: TutorBankItemV4[] = [
       "On dérive le dénominateur, on met le tout sur $v^2$, et on change le signe.",
       "Contrôle sur $v = x$ : on obtient $-\\dfrac{1}{x^2}$, la dérivée connue de la fonction inverse.",
       "$\\left(\\dfrac{1}{v}\\right)' = -\\dfrac{v'}{v^2}$."
-    ),
-    tags: ["premiere", "maths", "derivation", "quotient", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_der_quo_fixed_2",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "derivation",
-    microId: "der_quotient",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Quelle est la dérivée de $f(x) = \\dfrac{1}{x + 1}$ ?",
-    format: "qcm",
-    choices: [
-      "$-\\dfrac{1}{(x+1)^2}$",
-      "$\\dfrac{1}{(x+1)^2}$",
-      "$-\\dfrac{1}{x+1}$",
-      "$-\\dfrac{1}{x^2 + 1}$",
-    ],
-    expected: ["$-\\dfrac{1}{(x+1)^2}$"],
-    comparator: "mcq_exact",
-    hint: "$v = x + 1$, donc $v' = 1$.",
-    explanation: exp(
-      "On applique $\\left(\\dfrac{1}{v}\\right)' = -\\dfrac{v'}{v^2}$.",
-      "Ici $v = x + 1$ et $v' = 1$.",
-      "$f'(x) = -\\dfrac{1}{(x+1)^2}$. Le dénominateur est le carré de TOUT le dénominateur, pas seulement de $x$.",
-      "$f'(x) = -\\dfrac{1}{(x+1)^2}$."
-    ),
-    tags: ["premiere", "maths", "derivation", "quotient", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_der_quo_fixed_3",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "derivation",
-    microId: "der_quotient",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Quelle est la dérivée de $f(x) = \\dfrac{2x + 1}{x}$ ?",
-    format: "qcm",
-    choices: [
-      "$-\\dfrac{1}{x^2}$",
-      "$\\dfrac{1}{x^2}$",
-      "$2$",
-      "$\\dfrac{2x - 1}{x^2}$",
-    ],
-    expected: ["$-\\dfrac{1}{x^2}$"],
-    comparator: "mcq_exact",
-    hint: "$u = 2x+1$, $v = x$ : applique $\\dfrac{u'v - uv'}{v^2}$.",
-    explanation: exp(
-      "On applique la formule du quotient $\\left(\\dfrac{u}{v}\\right)' = \\dfrac{u'v - uv'}{v^2}$.",
-      "Avec $u = 2x+1$, $u' = 2$, $v = x$, $v' = 1$ : $f'(x) = \\dfrac{2x - (2x+1)}{x^2}$.",
-      "$= \\dfrac{2x - 2x - 1}{x^2} = -\\dfrac{1}{x^2}$. Attention au signe moins qui se distribue sur tout le second terme.",
-      "$f'(x) = -\\dfrac{1}{x^2}$."
     ),
     tags: ["premiere", "maths", "derivation", "quotient", "qcm"],
   },
@@ -2697,6 +2503,49 @@ export const derivationBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    kind: "template",
+    id: "premiere_der_quo_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_quotient",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "$\\left(\\dfrac{u}{v}\\right)' = \\dfrac{u'v - uv'}{v^2}$ — attention au MOINS, l'ordre compte.",
+    tags: ["premiere", "maths", "derivation", "quotient", "template"],
+    generate: () => {
+      const a = randomInt(1, 4);
+      const b = randomInt(-4, 4);
+      const c = randomInt(1, 3);
+      const d = randomInt(-4, 4);
+      // (ax+b)/(cx+d) → dérivée : (ad - bc) / (cx+d)^2
+      const num = a * d - b * c;
+      const t = (k: number, s: string) => (k === 1 ? s : k === -1 ? "-" + s : `${k}${s}`);
+      const ecrire = (u: number, v: number) => `${t(u, "x")} ${v >= 0 ? "+ " + v : "- " + -v}`;
+      const den = `(${ecrire(c, d)})^2`;
+      const correct = `$f'(x) = \\dfrac{${num}}{${den}}$`;
+      return {
+        text: `Quelle est la dérivée de $f(x) = \\dfrac{${ecrire(a, b)}}{${ecrire(c, d)}}$ ?`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$f'(x) = \\dfrac{${-num}}{${den}}$`,
+          `$f'(x) = \\dfrac{${a}}{${c}}$`,
+          `$f'(x) = \\dfrac{${num}}{${ecrire(c, d)}}$`,
+        ].filter((v, i, tt) => tt.indexOf(v) === i),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La dérivée d'un quotient est $\\dfrac{u'v - uv'}{v^2}$ : un MOINS au numérateur, et le dénominateur au carré.",
+          `On pose $u = ${ecrire(a, b)}$ et $v = ${ecrire(c, d)}$, donc $u' = ${a}$ et $v' = ${c}$.`,
+          `Le numérateur vaut $${a}(${ecrire(c, d)}) - (${ecrire(a, b)}) \\times ${c}$ : les termes en $x$ se simplifient, il reste $${num}$.`,
+          `${correct} — inverser l'ordre du numérateur donnerait $${-num}$, soit le signe contraire.`
+        ),
+      };
+    },
+  },
+
   /* ===================== DER_COMPOSEE_AFFINE ===================== */
   {
     kind: "fixed",
@@ -2723,34 +2572,6 @@ export const derivationBank: TutorBankItemV4[] = [
       "La formule est $\\left(g(ax+b)\\right)' = a \\, g'(ax+b)$ : on dérive $g$, on garde $ax+b$ à l'intérieur, et on multiplie par $a$.",
       "Oublier ce facteur $a$ est l'erreur la plus fréquente du chapitre.",
       "$\\left(g(ax+b)\\right)' = a \\, g'(ax+b)$."
-    ),
-    tags: ["premiere", "maths", "derivation", "composee_affine", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_der_ca_fixed_2",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "derivation",
-    microId: "der_composee_affine",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Quelle est la dérivée de $f(x) = (3x + 1)^2$ ?",
-    format: "qcm",
-    choices: [
-      "$6(3x + 1)$",
-      "$2(3x + 1)$",
-      "$3(3x + 1)^2$",
-      "$6x + 1$",
-    ],
-    expected: ["$6(3x + 1)$"],
-    comparator: "mcq_exact",
-    hint: "Dérivée du carré : $2 \\times (\\dots)$, puis on multiplie par $a = 3$.",
-    explanation: exp(
-      "On applique $\\left(g(ax+b)\\right)' = a \\, g'(ax+b)$ avec $g$ la fonction carré et $a = 3$.",
-      "$g'(u) = 2u$, donc $g'(3x+1) = 2(3x+1)$.",
-      "On multiplie par $a = 3$ : $f'(x) = 3 \\times 2(3x+1) = 6(3x+1)$. Vérification en développant : $(9x^2 + 6x + 1)' = 18x + 6 = 6(3x+1)$.",
-      "$f'(x) = 6(3x + 1)$."
     ),
     tags: ["premiere", "maths", "derivation", "composee_affine", "qcm"],
   },
