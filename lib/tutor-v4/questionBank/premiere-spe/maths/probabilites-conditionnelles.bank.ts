@@ -2553,4 +2553,322 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* =========================================================
+     QUESTIONS OUVERTES — compléments du 02/08/2026.
+     Quatre micro-compétences écrites avant le découpage n'avaient aucune
+     question ouverte : deux ouvertes fixes + un TEMPLATE ouvert chacune.
+  ========================================================= */
+
+  {
+    kind: "fixed",
+    id: "premiere_pc_cond_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_conditionnelle",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi divise-t-on par $P(A)$ dans la formule $P_A(B) = \\dfrac{P(A \\cap B)}{P(A)}$ ?",
+    format: "open",
+    expected: ["nouvel univers", "univers", "reduit", "réduit", "ramene a 1", "ramène à 1", "reference"],
+    comparator: "contains_keyword",
+    hint: "Dans quel ensemble se place-t-on une fois qu'on sait $A$ réalisé ?",
+    explanation: exp(
+      "Savoir que $A$ est réalisé change le monde dans lequel on compte : les issues hors de $A$ n'existent plus.",
+      "$A$ devient le nouvel univers. Or un univers doit avoir une probabilité totale égale à $1$, et $A$ ne pèse que $P(A)$.",
+      "On divise donc tout par $P(A)$ pour « remettre à l'échelle » : c'est exactement ce que fait la formule. Le numérateur $P(A \\cap B)$ compte la part de $B$ qui survit dans ce nouvel univers.",
+      "La division ramène le sous-groupe à un univers complet — d'où l'exigence $P(A) \\neq 0$ : on ne peut pas se placer dans un événement impossible."
+    ),
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "conditionnelle", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_pc_cond_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_conditionnelle",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Peut-on avoir $P_A(B)$ plus grand que $P(B)$ ? Explique ce que cela signifie.",
+    format: "open",
+    expected: ["favorise", "augmente", "information", "plus probable", "lien", "oui"],
+    comparator: "contains_keyword",
+    hint: "Que dit-on quand savoir $A$ rend $B$ plus probable ?",
+    explanation: exp(
+      "$P(B)$ est la probabilité de $B$ dans la population entière ; $P_A(B)$ la même probabilité, mais restreinte aux individus de $A$.",
+      "Rien n'oblige les deux à être égales : si $B$ est plus fréquent parmi les $A$ que dans l'ensemble, alors $P_A(B) > P(B)$.",
+      "Cela signifie que savoir $A$ réalisé rend $B$ PLUS probable : les deux événements ne sont pas indépendants, $A$ « favorise » $B$. Exemple : parmi les élèves qui révisent, la proportion de bonnes notes dépasse celle de la classe entière.",
+      "Oui, c'est courant — et l'égalité $P_A(B) = P(B)$ est justement le cas particulier de l'indépendance."
+    ),
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "conditionnelle", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_cond_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_conditionnelle",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "$P_A(B) = \\dfrac{P(A \\cap B)}{P(A)}$ — puis compare le résultat à $P(B)$.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "conditionnelle", "open", "template"],
+    generate: () => {
+      const cas = [
+        { pA: 0.4, pAB: 0.3, pB: 0.5, r: "0,75", lien: "favorise" },
+        { pA: 0.5, pAB: 0.1, pB: 0.4, r: "0,2", lien: "défavorise" },
+        { pA: 0.6, pAB: 0.3, pB: 0.5, r: "0,5", lien: "n'influence pas" },
+        { pA: 0.2, pAB: 0.12, pB: 0.4, r: "0,6", lien: "favorise" },
+        { pA: 0.8, pAB: 0.16, pB: 0.3, r: "0,2", lien: "défavorise" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `On donne $P(A) = ${fr(c.pA)}$, $P(A \\cap B) = ${fr(c.pAB)}$ et $P(B) = ${fr(c.pB)}$. Calcule $P_A(B)$, puis compare-la à $P(B)$ et interprète.`,
+        format: "open",
+        expected: [c.r, "divise", c.lien.split(" ")[0], "compare", "independant"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Une probabilité conditionnelle se calcule en divisant l'intersection par la probabilité de la condition, puis s'interprète en la comparant à la probabilité simple.",
+          `$P_A(B) = \\dfrac{${fr(c.pAB)}}{${fr(c.pA)}} = ${c.r}$.`,
+          `On compare à $P(B) = ${fr(c.pB)}$ : la valeur conditionnelle est ${c.lien === "n'influence pas" ? "ÉGALE" : c.lien === "favorise" ? "PLUS GRANDE" : "PLUS PETITE"}.`,
+          c.lien === "n'influence pas"
+            ? "Savoir $A$ ne change rien à la probabilité de $B$ : les deux événements sont indépendants."
+            : `Savoir $A$ réalisé ${c.lien} $B$ : les deux événements ne sont pas indépendants.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_pc_arb_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_arbre",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Dans un arbre pondéré, pourquoi multiplie-t-on le long d'un chemin, mais additionne-t-on entre plusieurs chemins ?",
+    format: "open",
+    expected: ["et", "ou", "successivement", "plusieurs chemins", "intersection", "reunion", "réunion"],
+    comparator: "contains_keyword",
+    hint: "Un chemin traduit un « et » ; plusieurs chemins traduisent un « ou ».",
+    explanation: exp(
+      "Un arbre traduit deux opérations logiques différentes, et chacune a son opération arithmétique.",
+      "Suivre UN chemin, c'est réaliser une étape PUIS une autre : c'est un « et », donc une intersection. La règle du produit donne $P(A \\cap B) = P(A) \\times P_A(B)$.",
+      "Emprunter plusieurs chemins pour atteindre un même événement, c'est réaliser l'un OU l'autre : ces chemins sont incompatibles — on ne peut pas passer par deux branches à la fois — donc leurs probabilités s'additionnent.",
+      "Le long du chemin on multiplie (« et »), entre les chemins on additionne (« ou ») : c'est exactement la formule des probabilités totales."
+    ),
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "arbre", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_pc_arb_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_arbre",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Quels contrôles permettent de vérifier qu'un arbre pondéré est correct avant de s'en servir ?",
+    format: "open",
+    expected: ["somme", "1", "noeud", "nœud", "chemins", "verifie"],
+    comparator: "contains_keyword",
+    hint: "Deux sommes doivent valoir $1$ : lesquelles ?",
+    explanation: exp(
+      "Un arbre correct obéit à deux règles de somme, vérifiables d'un coup d'œil avant tout calcul.",
+      "Premier contrôle, à chaque nœud : les branches qui en partent décrivent tous les cas possibles à cette étape, leurs probabilités totalisent donc $1$.",
+      "Second contrôle, à la fin : la somme des probabilités de TOUS les chemins complets vaut également $1$, puisqu'ils épuisent les possibilités.",
+      "Si l'une des deux sommes ne tombe pas sur $1$, il y a une erreur — le plus souvent une probabilité simple placée là où il fallait une conditionnelle."
+    ),
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "arbre", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_arb_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_arbre",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Multiplie le long du chemin, puis vérifie que tous les chemins totalisent $1$.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "arbre", "open", "template"],
+    generate: () => {
+      const pA = pickOne([0.3, 0.4, 0.6, 0.7, 0.8]);
+      const pBsiA = pickOne([0.2, 0.5, 0.6, 0.9]);
+      const res = Math.round(pA * pBsiA * 100) / 100;
+      return {
+        text: `Sur un arbre, la première branche porte $P(A) = ${fr(pA)}$ et la branche suivante $P_A(B) = ${fr(pBsiA)}$. Calcule la probabilité du chemin $A$ puis $B$, et explique pourquoi on multiplie plutôt que d'additionner.`,
+        format: "open",
+        expected: [fr(res), "multiplie", "et", "successivement", "intersection"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "La probabilité d'un chemin est le produit des probabilités rencontrées, parce qu'un chemin traduit un « et » : $A$ PUIS $B$.",
+          `Ici $P(A \\cap B) = P(A) \\times P_A(B) = ${fr(pA)} \\times ${fr(pBsiA)}$.`,
+          `$= ${fr(res)}$. La seconde probabilité est conditionnelle : elle ne concerne déjà plus que les cas où $A$ s'est produit.`,
+          `Additionner n'aurait aucun sens : on ne cumule que les probabilités de chemins DIFFÉRENTS menant au même résultat.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_pc_tot_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_totales",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique l'idée de la formule des probabilités totales, avec tes mots.",
+    format: "open",
+    expected: ["decoupe", "découpe", "cas", "morceaux", "additionne", "chemins"],
+    comparator: "contains_keyword",
+    hint: "On découpe un événement en morceaux : selon quoi ?",
+    explanation: exp(
+      "La formule des probabilités totales sert quand on ne sait pas calculer $P(B)$ directement, mais qu'on sait la calculer dans chaque cas de figure.",
+      "On découpe l'univers en cas qui ne se chevauchent pas et n'oublient rien : une partition, souvent $\\{A ; \\bar A\\}$.",
+      "L'événement $B$ se découpe alors en morceaux correspondants : $B \\cap A$ et $B \\cap \\bar A$. Comme ces morceaux sont incompatibles, leurs probabilités s'additionnent.",
+      "$P(B) = P(A) \\times P_A(B) + P(\\bar A) \\times P_{\\bar A}(B)$ : sur l'arbre, c'est la somme de tous les chemins qui aboutissent à $B$."
+    ),
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "totales", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_pc_tot_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_totales",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève écrit $P(B) = P_A(B) + P_{\\bar A}(B)$. Explique pourquoi c'est faux.",
+    format: "open",
+    expected: ["pondere", "pondéré", "poids", "P(A)", "multiplie", "depasser 1", "dépasser 1"],
+    comparator: "contains_keyword",
+    hint: "Que se passerait-il si les deux conditionnelles valaient $0{,}8$ ?",
+    explanation: exp(
+      "Les probabilités conditionnelles se calculent dans des sous-groupes de tailles différentes : on ne peut pas les additionner telles quelles.",
+      "Il faut PONDÉRER chacune par la taille de son groupe, c'est-à-dire par $P(A)$ et $P(\\bar A)$.",
+      "Sans ces poids, le résultat peut dépasser $1$ : si $P_A(B) = P_{\\bar A}(B) = 0{,}8$, sa somme vaudrait $1{,}6$, ce qui est impossible. Avec les poids, on retrouverait $0{,}8$, ce qui est cohérent.",
+      "La formule correcte est $P(B) = P(A)P_A(B) + P(\\bar A)P_{\\bar A}(B)$ : c'est une moyenne pondérée, pas une somme."
+    ),
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "totales", "piege", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_tot_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_totales",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Somme des chemins menant à $B$ : chaque chemin est un produit.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "totales", "open", "template"],
+    generate: () => {
+      const pA = pickOne([0.3, 0.4, 0.6, 0.7]);
+      const p1 = pickOne([0.2, 0.5, 0.8, 0.9]);
+      const p2 = pickOne([0.1, 0.3, 0.4, 0.6]);
+      const res = Math.round((pA * p1 + (1 - pA) * p2) * 1000) / 1000;
+      return {
+        text: `On donne $P(A) = ${fr(pA)}$, $P_A(B) = ${fr(p1)}$ et $P_{\\bar A}(B) = ${fr(p2)}$. Calcule $P(B)$ en expliquant pourquoi chaque terme est pondéré.`,
+        format: "open",
+        expected: [fr(res), "pondere", "pondéré", "chemins", "additionne", "partition"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "L'événement $B$ se découpe selon la partition $\\{A ; \\bar A\\}$ : on additionne les chemins de l'arbre qui aboutissent à $B$.",
+          `Premier chemin : $P(A) \\times P_A(B) = ${fr(pA)} \\times ${fr(p1)} = ${fr(Math.round(pA * p1 * 1000) / 1000)}$.`,
+          `Second chemin : $P(\\bar A) \\times P_{\\bar A}(B) = ${fr(Math.round((1 - pA) * 100) / 100)} \\times ${fr(p2)} = ${fr(Math.round((1 - pA) * p2 * 1000) / 1000)}$.`,
+          `On additionne : $P(B) = ${fr(res)}$. Chaque conditionnelle est pondérée par la taille de son groupe — sans quoi la somme pourrait dépasser $1$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_pc_ind_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_independance",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Que signifie concrètement « $A$ et $B$ sont indépendants » ? Explique sans formule.",
+    format: "open",
+    expected: ["n'apprend rien", "ne change pas", "information", "savoir", "meme probabilite", "même probabilité"],
+    comparator: "contains_keyword",
+    hint: "Que se passe-t-il pour la probabilité de $B$ quand on apprend que $A$ est réalisé ?",
+    explanation: exp(
+      "L'indépendance est une question d'INFORMATION : apprendre quelque chose modifie-t-il ce qu'on attend de l'autre ?",
+      "Deux événements sont indépendants quand savoir que $A$ s'est produit n'apprend rien sur $B$ : sa probabilité reste la même.",
+      "Cela s'écrit $P_A(B) = P(B)$, ou de façon équivalente $P(A \\cap B) = P(A) \\times P(B)$. Deux lancers de dé successifs sont indépendants : le premier résultat ne renseigne pas sur le second.",
+      "À l'inverse, « être demi-pensionnaire » et « habiter loin » ne le sont probablement pas : connaître l'un change ce qu'on attend de l'autre."
+    ),
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "independance", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_pc_ind_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_independance",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Comment démontre-t-on que deux événements sont indépendants, et pourquoi l'intuition ne suffit-elle pas ?",
+    format: "open",
+    expected: ["calcul", "produit", "P(A) x P(B)", "verifie", "vérifie", "intersection"],
+    comparator: "contains_keyword",
+    hint: "Quelle égalité doit-on vérifier avec des nombres ?",
+    explanation: exp(
+      "L'indépendance a une définition chiffrée : $P(A \\cap B) = P(A) \\times P(B)$. Ce n'est pas une impression, c'est une égalité à vérifier.",
+      "On calcule donc séparément l'intersection d'un côté, le produit des deux probabilités de l'autre, puis on compare.",
+      "L'intuition trompe souvent : deux tirages « qui n'ont rien à voir » peuvent être liés par une cause commune, et deux événements qui semblent liés peuvent être numériquement indépendants. Seul le calcul tranche.",
+      "On compare $P(A \\cap B)$ et $P(A) \\times P(B)$ : égalité → indépendants, sinon non. Et attention, incompatibles ne veut pas dire indépendants — c'est même le contraire."
+    ),
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "independance", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_pc_ind_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "probabilites_conditionnelles",
+    microId: "pc_independance",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Compare $P(A \\cap B)$ et $P(A) \\times P(B)$.",
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "independance", "open", "template"],
+    generate: () => {
+      const cas = [
+        { pA: 0.4, pB: 0.5, pAB: 0.2, ok: true },
+        { pA: 0.3, pB: 0.6, pAB: 0.18, ok: true },
+        { pA: 0.5, pB: 0.4, pAB: 0.3, ok: false },
+        { pA: 0.2, pB: 0.5, pAB: 0.1, ok: true },
+        { pA: 0.6, pB: 0.5, pAB: 0.1, ok: false },
+      ];
+      const c = pickOne(cas);
+      const prod = Math.round(c.pA * c.pB * 100) / 100;
+      return {
+        text: `On donne $P(A) = ${fr(c.pA)}$, $P(B) = ${fr(c.pB)}$ et $P(A \\cap B) = ${fr(c.pAB)}$. Les événements sont-ils indépendants ? Justifie par le calcul, puis interprète.`,
+        format: "open",
+        expected: [fr(prod), "produit", c.ok ? "independants" : "pas independants", "compare"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Deux événements sont indépendants si et seulement si $P(A \\cap B) = P(A) \\times P(B)$ : on compare deux nombres.",
+          `On calcule le produit : $${fr(c.pA)} \\times ${fr(c.pB)} = ${fr(prod)}$.`,
+          `On le compare à $P(A \\cap B) = ${fr(c.pAB)}$ : ${c.ok ? "les deux sont égaux" : "les deux diffèrent"}.`,
+          c.ok
+            ? "Les événements sont indépendants : savoir que l'un s'est produit ne change pas la probabilité de l'autre."
+            : `Les événements ne sont pas indépendants : savoir que $A$ s'est produit ${c.pAB > prod ? "AUGMENTE" : "DIMINUE"} la probabilité de $B$.`
+        ),
+      };
+    },
+  },
 ];

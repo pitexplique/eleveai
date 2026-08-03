@@ -30,6 +30,11 @@ function pickOne<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+/** Affichage à la française : la virgule décimale, comme au tableau. */
+function fr(x: number): string {
+  return String(Math.round(x * 100) / 100).replace(".", ",");
+}
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -2278,6 +2283,324 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           c.conclusion
             ? "Oui, l'écart est suspect à cette taille d'échantillon."
             : "Non, on ne peut rien conclure : il faudrait beaucoup plus de lancers."
+        ),
+      };
+    },
+  },
+
+  /* =========================================================
+     QUESTIONS OUVERTES — compléments du 02/08/2026.
+     Quatre micro-compétences écrites avant le découpage n'avaient aucune
+     question ouverte : deux ouvertes fixes + un TEMPLATE ouvert chacune.
+  ========================================================= */
+
+  {
+    kind: "fixed",
+    id: "premiere_va_not_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_notation",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Que désigne exactement l'écriture $\\{X = 3\\}$ ? Pourquoi parle-t-on d'un ÉVÉNEMENT et non d'un nombre ?",
+    format: "open",
+    expected: ["evenement", "événement", "issues", "ensemble", "univers", "3"],
+    comparator: "contains_keyword",
+    hint: "Quelles issues de l'expérience regroupe cette écriture ?",
+    explanation: exp(
+      "$X$ est une fonction qui associe un nombre à chaque issue : l'écriture $\\{X = 3\\}$ ne désigne pas le nombre $3$, mais les issues dont l'image vaut $3$.",
+      "C'est donc un ENSEMBLE d'issues, c'est-à-dire un événement — sur lequel on peut calculer une probabilité.",
+      "Avec deux dés et $X$ la somme, $\\{X = 3\\}$ regroupe les issues $(1 ; 2)$ et $(2 ; 1)$ : deux issues, une seule valeur. C'est ce qui permet d'écrire $P(X = 3) = \\dfrac{2}{36}$.",
+      "Les accolades sont le signe qu'on parle d'un ensemble : $\\{X = 3\\}$ est un événement, $P(X = 3)$ est le nombre qui le mesure."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "notation", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_not_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_notation",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Quelle est la différence entre $P(X \\leqslant 2)$ et $P(X < 2)$ ? Dans quel cas sont-elles égales ?",
+    format: "open",
+    expected: ["inclut", "exclut", "P(X = 2)", "valeur 2", "prend pas", "egales"],
+    comparator: "contains_keyword",
+    hint: "L'une des deux compte la valeur $2$ elle-même.",
+    explanation: exp(
+      "Les deux écritures regroupent les issues dont l'image est en dessous de $2$, mais elles ne traitent pas $2$ de la même façon.",
+      "$P(X \\leqslant 2)$ INCLUT la valeur $2$ ; $P(X < 2)$ l'exclut. Elles diffèrent donc exactement de $P(X = 2)$.",
+      "Elles sont égales dans un seul cas : quand $P(X = 2) = 0$, c'est-à-dire quand $X$ ne prend jamais la valeur $2$ — par exemple si $X$ ne prend que les valeurs $1$, $3$ et $5$.",
+      "Un symbole d'inégalité mal recopié coûte un terme entier : c'est l'erreur la plus fréquente sur les lois de probabilité."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "notation", "piege", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_va_not_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_notation",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Liste d'abord les valeurs concernées par l'inégalité, puis additionne leurs probabilités.",
+    tags: ["premiere", "maths", "variables_aleatoires", "notation", "open", "template"],
+    generate: () => {
+      const p1 = pickOne([0.1, 0.2, 0.3]);
+      const p2 = pickOne([0.2, 0.4, 0.5]);
+      const p3 = Math.round((1 - p1 - p2) * 100) / 100;
+      const cas = pickOne([
+        { q: "P(X \\leqslant 2)", vals: "1 et 2", r: Math.round((p1 + p2) * 100) / 100 },
+        { q: "P(X < 2)", vals: "1 seulement", r: p1 },
+        { q: "P(X \\geqslant 2)", vals: "2 et 3", r: Math.round((p2 + p3) * 100) / 100 },
+        { q: "P(X > 1)", vals: "2 et 3", r: Math.round((p2 + p3) * 100) / 100 },
+      ]);
+      return {
+        text: `$X$ prend les valeurs $1$, $2$ et $3$ avec $P(X=1) = ${fr(p1)}$, $P(X=2) = ${fr(p2)}$ et $P(X=3) = ${fr(p3)}$. Calcule $${cas.q}$ en disant d'abord quelles valeurs sont concernées.`,
+        format: "open",
+        expected: [fr(cas.r), cas.vals.split(" ")[0], "additionne", "valeurs", "inegalite", "inégalité"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Une écriture comme $\\{X \\leqslant a\\}$ regroupe plusieurs valeurs : on les liste d'abord, puis on additionne leurs probabilités.",
+          `Ici l'inégalité concerne les valeurs ${cas.vals}.`,
+          `On additionne les probabilités correspondantes : on obtient $${fr(cas.r)}$.`,
+          "Le piège est le symbole : $\\leqslant$ inclut la borne, $<$ l'exclut — un terme entier d'écart."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_va_loi_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_loi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Que signifie « donner la loi de probabilité de $X$ » ? Que doit contenir une réponse complète ?",
+    format: "open",
+    expected: ["valeurs", "probabilites", "probabilités", "tableau", "toutes", "somme"],
+    comparator: "contains_keyword",
+    hint: "Deux listes, et une vérification.",
+    explanation: exp(
+      "Donner la loi d'une variable aléatoire, c'est décrire complètement son comportement au hasard.",
+      "Une réponse complète contient deux choses : la liste de TOUTES les valeurs que $X$ peut prendre, et la probabilité de chacune.",
+      "On les présente en général dans un tableau à deux lignes. Une valeur oubliée rend la loi fausse, même si les autres probabilités sont justes.",
+      "Contrôle final indispensable : la somme des probabilités doit valoir exactement $1$ — sinon il manque une valeur, ou l'une des probabilités est erronée."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "loi", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_loi_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_loi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi la somme des probabilités d'une loi vaut-elle toujours $1$ ?",
+    format: "open",
+    expected: ["tous les cas", "partition", "univers", "certain", "toutes les valeurs"],
+    comparator: "contains_keyword",
+    hint: "Que se passe-t-il forcément quand on réalise l'expérience ?",
+    explanation: exp(
+      "Les événements $\\{X = x_1\\}$, $\\{X = x_2\\}$, … découpent l'univers : chaque issue reçoit une valeur, et une seule.",
+      "Ils forment donc une partition : deux à deux incompatibles, et de réunion l'univers entier.",
+      "Or l'univers est l'événement certain, de probabilité $1$. La somme des probabilités des morceaux vaut donc $1$.",
+      "Dit autrement : quand on réalise l'expérience, $X$ prend forcément une de ses valeurs. C'est aussi le meilleur contrôle d'un tableau de loi — si la somme ne fait pas $1$, il y a une erreur."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "loi", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_va_loi_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_loi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Liste les valeurs possibles, compte les issues favorables, vérifie que la somme fait $1$.",
+    tags: ["premiere", "maths", "variables_aleatoires", "loi", "open", "template"],
+    generate: () => {
+      const cas = [
+        { exp: "on lance deux pièces équilibrées et $X$ compte le nombre de PILE", vals: "0, 1 et 2", probas: "1/4, 1/2 et 1/4" },
+        { exp: "on lance un dé équilibré et $X$ vaut $1$ si le résultat est pair, $0$ sinon", vals: "0 et 1", probas: "1/2 et 1/2" },
+        { exp: "une urne contient 3 boules gagnantes sur 5 ; $X$ vaut $1$ si la boule tirée gagne, $0$ sinon", vals: "0 et 1", probas: "2/5 et 3/5" },
+        { exp: "on lance un dé équilibré et $X$ vaut $10$ pour un $6$, $0$ sinon", vals: "0 et 10", probas: "5/6 et 1/6" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Détermine la loi de probabilité de $X$ dans la situation suivante : ${c.exp}. Présente ta réponse et explique comment tu la vérifies.`,
+        format: "open",
+        expected: ["valeurs", "somme", "1", "tableau", c.vals.split(",")[0]],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Donner une loi, c'est lister toutes les valeurs prises par $X$ et la probabilité de chacune, puis vérifier que le total vaut $1$.",
+          `Ici les valeurs possibles sont ${c.vals} : on repère pour chacune les issues qui la produisent.`,
+          `Les probabilités correspondantes sont ${c.probas}.`,
+          "On vérifie enfin que leur somme vaut $1$ : si ce n'est pas le cas, une valeur a été oubliée ou une probabilité mal comptée."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_va_esp_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_esperance",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi l'espérance est-elle une moyenne PONDÉRÉE, et non la simple moyenne des valeurs possibles ?",
+    format: "open",
+    expected: ["probabilites", "probabilités", "poids", "plus souvent", "frequence", "fréquence", "pondere"],
+    comparator: "contains_keyword",
+    hint: "Toutes les valeurs sortent-elles aussi souvent ?",
+    explanation: exp(
+      "L'espérance est ce que vaut $X$ en moyenne sur un très grand nombre de répétitions : elle doit donc tenir compte de la fréquence de chaque valeur.",
+      "Les valeurs possibles n'apparaissent pas aussi souvent les unes que les autres : chacune est pondérée par sa probabilité.",
+      "Exemple : si $X$ vaut $0$ avec la probabilité $0{,}9$ et $10$ avec la probabilité $0{,}1$, la moyenne simple donnerait $5$ — alors qu'on obtient $0$ neuf fois sur dix. L'espérance vaut $0 \\times 0{,}9 + 10 \\times 0{,}1 = 1$.",
+      "Chaque valeur pèse à hauteur de sa probabilité : c'est pour cela qu'on multiplie avant d'additionner."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "esperance", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_esp_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_esperance",
+    difficulty: 5,
+    theme: "neutral",
+    text: "L'espérance peut valoir un nombre que $X$ ne prend jamais. Explique pourquoi ce n'est pas contradictoire.",
+    format: "open",
+    expected: ["moyenne", "pas une valeur", "grand nombre", "repetitions", "répétitions", "3,5"],
+    comparator: "contains_keyword",
+    hint: "Quelle est l'espérance d'un dé équilibré ?",
+    explanation: exp(
+      "L'espérance n'est pas une valeur que la variable prend : c'est un indicateur calculé à partir de toutes ses valeurs.",
+      "Un dé équilibré a pour espérance $3{,}5$ — un résultat impossible à obtenir avec un dé.",
+      "Ce que $3{,}5$ signifie, c'est que la MOYENNE des résultats obtenus se rapproche de $3{,}5$ quand on lance le dé un très grand nombre de fois. C'est un comportement d'ensemble, pas une prédiction.",
+      "L'espérance décrit la tendance sur beaucoup de répétitions, pas ce qui arrivera une fois — comme une taille moyenne de $1{,}72$ m dans une classe où personne ne mesure exactement cela."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "esperance", "piege", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_va_esp_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_esperance",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Chaque valeur multipliée par sa probabilité, puis on additionne.",
+    tags: ["premiere", "maths", "variables_aleatoires", "esperance", "open", "template"],
+    generate: () => {
+      const x = pickOne([
+        [0, 1, 2],
+        [0, 5, 10],
+        [-2, 0, 3],
+        [1, 2, 5],
+      ]);
+      const p0 = pickOne([0.2, 0.3, 0.5]);
+      const p1 = pickOne([0.2, 0.3, 0.4]);
+      const p2 = Math.round((1 - p0 - p1) * 100) / 100;
+      const e = Math.round((x[0] * p0 + x[1] * p1 + x[2] * p2) * 100) / 100;
+      return {
+        text: `$X$ prend les valeurs $${x[0]}$, $${x[1]}$ et $${x[2]}$ avec les probabilités $${fr(p0)}$, $${fr(p1)}$ et $${fr(p2)}$. Calcule $E(X)$, puis explique ce que ce nombre signifie concrètement.`,
+        format: "open",
+        expected: [fr(e), "moyenne", "grand nombre", "pondere", "pondéré", "probabilite"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "L'espérance est la moyenne des valeurs, chacune pondérée par sa probabilité.",
+          `On calcule $${x[0]} \\times ${fr(p0)} + ${x[1]} \\times ${fr(p1)} + ${x[2]} \\times ${fr(p2)}$.`,
+          `$E(X) = ${fr(e)}$.`,
+          `Concrètement : en répétant l'expérience un très grand nombre de fois, la moyenne des résultats obtenus se rapprochera de $${fr(e)}$ — même si $X$ ne prend jamais exactement cette valeur.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_va_var_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_variance",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Que mesure la variance, et pourquoi l'espérance seule ne suffit-elle pas à décrire une variable aléatoire ?",
+    format: "open",
+    expected: ["dispersion", "ecart", "écart", "regroupe", "regroupées", "risque", "meme esperance"],
+    comparator: "contains_keyword",
+    hint: "Deux jeux peuvent avoir le même gain moyen : sont-ils pour autant identiques ?",
+    explanation: exp(
+      "L'espérance indique où se situe le centre des valeurs ; elle ne dit rien de leur étalement.",
+      "La variance mesure cet étalement : c'est la moyenne des CARRÉS des écarts à l'espérance.",
+      "Deux jeux peuvent avoir la même espérance et se comporter très différemment : l'un donne toujours à peu près la même chose, l'autre alterne grosses pertes et gros gains. Seule la variance les distingue.",
+      "L'espérance dit le niveau, la variance dit le risque : il faut les deux pour décrire une variable aléatoire."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "variance", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_va_var_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_variance",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi la variance ne peut-elle jamais être négative ?",
+    format: "open",
+    expected: ["carres", "carrés", "positifs", "moyenne", "somme de carres", "jamais"],
+    comparator: "contains_keyword",
+    hint: "De quoi la variance est-elle la moyenne ?",
+    explanation: exp(
+      "La variance est la moyenne des carrés des écarts à l'espérance, pondérée par les probabilités.",
+      "Or un carré est toujours positif ou nul, et les probabilités sont positives : chaque terme de la somme est positif ou nul.",
+      "Une somme de termes positifs ne peut pas être négative. La variance est donc toujours positive ou nulle — et un résultat négatif signale une erreur de calcul, le plus souvent un signe perdu dans $E(X)$.",
+      "Elle ne vaut $0$ que si tous les écarts sont nuls, c'est-à-dire si $X$ est constante."
+    ),
+    tags: ["premiere", "maths", "variables_aleatoires", "variance", "piege", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_va_var_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variables_aleatoires",
+    microId: "va_variance",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Moyenne des carrés des écarts à l'espérance, pondérée par les probabilités.",
+    tags: ["premiere", "maths", "variables_aleatoires", "variance", "open", "template"],
+    generate: () => {
+      const m = randomInt(1, 6);
+      const v = m * m;
+      return {
+        text: `$X$ vaut $0$ ou $${2 * m}$, avec la probabilité $0{,}5$ chacune, et $E(X) = ${m}$. Calcule $V(X)$ en détaillant, puis explique ce que le résultat dit de la dispersion.`,
+        format: "open",
+        expected: [String(v), "ecart", "écart", "carre", "carré", "dispersion"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "La variance est la moyenne des carrés des écarts à l'espérance, chaque écart étant pondéré par sa probabilité.",
+          `Les deux écarts valent $0 - ${m} = -${m}$ et $${2 * m} - ${m} = ${m}$.`,
+          `On élève au carré et on pondère : $0{,}5 \\times ${v} + 0{,}5 \\times ${v} = ${v}$.`,
+          `$V(X) = ${v}$, donc $\\sigma(X) = ${m}$ : les valeurs s'écartent en moyenne de $${m}$ de l'espérance — ici, exactement, puisqu'il n'y a que deux valeurs symétriques.`
         ),
       };
     },

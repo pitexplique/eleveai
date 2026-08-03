@@ -2838,4 +2838,336 @@ export const produitScalaireBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* =========================================================
+     QUESTIONS OUVERTES — compléments du 02/08/2026.
+     Quatre micro-compétences écrites avant le découpage n'avaient aucune
+     question ouverte : deux ouvertes fixes + un TEMPLATE ouvert chacune.
+  ========================================================= */
+
+  {
+    kind: "fixed",
+    id: "premiere_ps_na_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme_angle",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi la formule du produit scalaire fait-elle intervenir le COSINUS de l'angle, et non l'angle lui-même ?",
+    format: "open",
+    expected: ["projection", "projete", "projeté", "part", "direction", "cosinus"],
+    comparator: "contains_keyword",
+    hint: "Que mesure le cosinus, sur le triangle rectangle de la projection ?",
+    explanation: exp(
+      "Le produit scalaire mesure ce que deux vecteurs ont « en commun » dans une même direction : c'est une histoire de projection, pas d'angle brut.",
+      "Quand on projette $\\vec{v}$ sur la direction de $\\vec{u}$, la longueur du projeté vaut $\\|\\vec{v}\\| \\cos\\theta$ — c'est la définition même du cosinus dans le triangle rectangle formé.",
+      "Le produit scalaire multiplie alors cette part utile par $\\|\\vec{u}\\|$. L'angle seul ne conviendrait pas : il ne dit pas quelle FRACTION du vecteur se retrouve dans la direction de l'autre.",
+      "Le cosinus est le taux de projection : il vaut $1$ quand les vecteurs sont alignés, $0$ quand ils sont perpendiculaires, $-1$ quand ils sont opposés."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "norme_angle", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_na_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme_angle",
+    difficulty: 5,
+    theme: "neutral",
+    text: "À normes fixées, pour quel angle le produit scalaire est-il maximal ? minimal ? nul ? Justifie.",
+    format: "open",
+    expected: ["cosinus", "0", "180", "90", "1", "-1"],
+    comparator: "contains_keyword",
+    hint: "Seul le cosinus varie : entre quelles valeurs ?",
+    explanation: exp(
+      "Dans $\\vec{u} \\cdot \\vec{v} = \\|\\vec{u}\\| \\|\\vec{v}\\| \\cos\\theta$, les deux normes sont fixées : seul $\\cos\\theta$ change.",
+      "Or le cosinus varie entre $-1$ et $1$ quand l'angle va de $0°$ à $180°$, en décroissant.",
+      "Maximal pour $\\theta = 0°$ (cosinus $1$) : les vecteurs sont alignés de même sens, le produit vaut $\\|\\vec{u}\\|\\|\\vec{v}\\|$. Nul pour $\\theta = 90°$ : ils sont orthogonaux. Minimal pour $\\theta = 180°$ (cosinus $-1$) : ils sont opposés, le produit vaut $-\\|\\vec{u}\\|\\|\\vec{v}\\|$.",
+      "Tout se lit sur le cosinus : le produit scalaire est d'autant plus grand que les vecteurs pointent dans la même direction."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "norme_angle", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_na_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_norme_angle",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "$\\|\\vec{u}\\| \\|\\vec{v}\\| \\cos\\theta$ — et le signe se lit sur le cosinus.",
+    tags: ["premiere", "maths", "produit_scalaire", "norme_angle", "open", "template"],
+    generate: () => {
+      const cas = [
+        { nu: 4, nv: 3, deg: 60, cos: "\\dfrac{1}{2}", res: "6" },
+        { nu: 5, nv: 2, deg: 120, cos: "-\\dfrac{1}{2}", res: "-5" },
+        { nu: 6, nv: 4, deg: 90, cos: "0", res: "0" },
+        { nu: 3, nv: 7, deg: 0, cos: "1", res: "21" },
+        { nu: 8, nv: 2, deg: 180, cos: "-1", res: "-16" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Deux vecteurs ont pour normes $${c.nu}$ et $${c.nv}$, et forment un angle de $${c.deg}°$. Calcule leur produit scalaire, puis explique ce que son signe dit de leurs directions.`,
+        format: "open",
+        expected: [c.res, "cosinus", c.deg < 90 ? "meme sens" : c.deg === 90 ? "orthogonaux" : "sens contraire", "meme direction"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Le produit scalaire vaut $\\|\\vec{u}\\| \\|\\vec{v}\\| \\cos\\theta$ : les normes fixent la taille, le cosinus fixe le signe.",
+          `Ici $${c.nu} \\times ${c.nv} \\times \\cos ${c.deg}° = ${c.nu} \\times ${c.nv} \\times ${c.cos}$.`,
+          `On obtient $${c.res}$.`,
+          c.deg < 90
+            ? "Le produit est positif : les deux vecteurs pointent globalement dans la même direction."
+            : c.deg === 90
+              ? "Le produit est nul : les deux vecteurs sont orthogonaux, aucun n'a de part dans la direction de l'autre."
+              : "Le produit est négatif : les deux vecteurs pointent dans des directions opposées."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_ps_coo_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_coordonnees",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi la formule $\\vec{u} \\cdot \\vec{v} = xx' + yy'$ n'est-elle valable que dans un repère ORTHONORMÉ ?",
+    format: "open",
+    expected: ["perpendiculaires", "orthogonal", "norme 1", "axes", "unite", "unité"],
+    comparator: "contains_keyword",
+    hint: "Que suppose-t-on sur les deux vecteurs de base ?",
+    explanation: exp(
+      "Les coordonnées $(x ; y)$ décomposent un vecteur sur les deux vecteurs de base : $\\vec{u} = x\\vec{i} + y\\vec{j}$.",
+      "En développant le produit scalaire par bilinéarité, on fait apparaître les produits $\\vec{i} \\cdot \\vec{i}$, $\\vec{i} \\cdot \\vec{j}$ et $\\vec{j} \\cdot \\vec{j}$.",
+      "La formule simple ne survit que si $\\vec{i} \\cdot \\vec{j} = 0$ — les axes sont perpendiculaires — et si $\\vec{i} \\cdot \\vec{i} = \\vec{j} \\cdot \\vec{j} = 1$ — les vecteurs de base sont de norme $1$. C'est exactement la définition d'un repère orthonormé.",
+      "Dans un repère quelconque, les termes croisés ne disparaissent pas et la formule est fausse : c'est pourquoi l'énoncé précise toujours « repère orthonormé »."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "coordonnees", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_coo_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_coordonnees",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique, à partir des coordonnées, pourquoi $\\vec{u} \\cdot \\vec{u}$ est égal au carré de la norme de $\\vec{u}$.",
+    format: "open",
+    expected: ["x^2 + y^2", "pythagore", "norme", "carre", "carré", "meme vecteur"],
+    comparator: "contains_keyword",
+    hint: "Applique la formule des coordonnées avec le même vecteur des deux côtés.",
+    explanation: exp(
+      "Le produit scalaire par coordonnées s'écrit $xx' + yy'$ : rien n'interdit de prendre deux fois le même vecteur.",
+      "Avec $\\vec{v} = \\vec{u}$ : $\\vec{u} \\cdot \\vec{u} = x \\times x + y \\times y = x^2 + y^2$.",
+      "Or la norme vaut $\\|\\vec{u}\\| = \\sqrt{x^2 + y^2}$, par Pythagore. Son carré est donc exactement $x^2 + y^2$.",
+      "$\\vec{u} \\cdot \\vec{u} = \\|\\vec{u}\\|^2$ : ce carré scalaire est ce qui permet de développer $\\|\\vec{u} + \\vec{v}\\|^2$ et de faire le lien entre produit scalaire et longueurs."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "coordonnees", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_coo_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_coordonnees",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Commence par calculer les coordonnées des vecteurs, par différence des points.",
+    tags: ["premiere", "maths", "produit_scalaire", "coordonnees", "open", "template"],
+    generate: () => {
+      const xA = randomInt(-3, 3);
+      const yA = randomInt(-3, 3);
+      const xB = xA + randomInt(1, 4);
+      const yB = yA + randomInt(-3, 3);
+      const xC = xA + randomInt(-4, -1);
+      const yC = yA + randomInt(1, 4);
+      const ab = [xB - xA, yB - yA];
+      const ac = [xC - xA, yC - yA];
+      const ps = ab[0] * ac[0] + ab[1] * ac[1];
+      return {
+        text: `Dans un repère orthonormé, on donne $A(${xA} ; ${yA})$, $B(${xB} ; ${yB})$ et $C(${xC} ; ${yC})$. Calcule $\\vec{AB} \\cdot \\vec{AC}$ en détaillant chaque étape, et dis ce que le signe obtenu indique sur l'angle en $A$.`,
+        format: "open",
+        expected: [String(ps), "coordonnees", "coordonnées", "difference", "différence", ps > 0 ? "aigu" : ps === 0 ? "droit" : "obtus"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Les coordonnées d'un vecteur s'obtiennent en soustrayant celles de l'origine à celles de l'extrémité ; le produit scalaire est ensuite $xx' + yy'$.",
+          `$\\vec{AB}(${ab[0]} ; ${ab[1]})$ et $\\vec{AC}(${ac[0]} ; ${ac[1]})$.`,
+          `$\\vec{AB} \\cdot \\vec{AC} = ${ab[0]} \\times ${ac[0]} + ${ab[1]} \\times ${ac[1]} = ${ps}$.`,
+          `Le résultat est ${ps > 0 ? "positif : l'angle en $A$ est aigu" : ps === 0 ? "nul : l'angle en $A$ est droit, le triangle est rectangle en $A$" : "négatif : l'angle en $A$ est obtus"}.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_ps_ort_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_orthogonalite",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi teste-t-on l'orthogonalité par un produit scalaire nul, plutôt qu'en mesurant l'angle ?",
+    format: "open",
+    expected: ["exact", "mesure", "calcul", "coordonnees", "coordonnées", "sans angle"],
+    comparator: "contains_keyword",
+    hint: "Une mesure d'angle sur un dessin est-elle exacte ?",
+    explanation: exp(
+      "Vérifier un angle droit par la mesure suppose un dessin, un rapporteur, et donc une approximation.",
+      "Le produit scalaire, lui, se calcule à partir des seules coordonnées : $xx' + yy'$, deux multiplications et une addition.",
+      "Le résultat est EXACT : s'il vaut $0$, l'angle est droit, sans marge d'erreur. Un rapporteur ne distinguerait pas $90°$ de $89{,}8°$, le calcul si.",
+      "C'est aussi plus rapide qu'une réciproque de Pythagore, qui demande trois longueurs donc trois racines carrées — ici, aucune."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "orthogonalite", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_ort_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_orthogonalite",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève trouve $\\vec{u} \\cdot \\vec{v} = 0$ et conclut que $\\vec{u} = \\vec{0}$ ou $\\vec{v} = \\vec{0}$. Explique son erreur.",
+    format: "open",
+    expected: ["orthogonaux", "perpendiculaire", "non nuls", "produit de nombres", "pas la meme"],
+    comparator: "contains_keyword",
+    hint: "Il applique aux vecteurs une règle qui vaut pour les nombres.",
+    explanation: exp(
+      "Pour les NOMBRES, un produit nul entraîne qu'un des facteurs est nul. L'élève transpose cette règle au produit scalaire.",
+      "Mais le produit scalaire n'est pas une multiplication de nombres : il prend deux vecteurs et rend un nombre, et son annulation a un tout autre sens.",
+      "Contre-exemple : $\\vec{u}(1 ; 0)$ et $\\vec{v}(0 ; 1)$ donnent $1 \\times 0 + 0 \\times 1 = 0$, alors qu'aucun n'est nul. Ils sont simplement ORTHOGONAUX.",
+      "C'est justement ce qui rend le produit scalaire utile : son annulation caractérise la perpendicularité, pas la nullité."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "orthogonalite", "piege", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_ort_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_orthogonalite",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule le produit scalaire des deux vecteurs : nul ou pas ?",
+    tags: ["premiere", "maths", "produit_scalaire", "orthogonalite", "open", "template"],
+    generate: () => {
+      const cas = [
+        { u: [3, 4], v: [4, -3], ok: true },
+        { u: [2, 5], v: [5, -2], ok: true },
+        { u: [1, 2], v: [2, 1], ok: false },
+        { u: [6, -2], v: [1, 3], ok: true },
+        { u: [3, 1], v: [2, 4], ok: false },
+      ];
+      const c = pickOne(cas);
+      const ps = c.u[0] * c.v[0] + c.u[1] * c.v[1];
+      return {
+        text: `Les vecteurs $\\vec{u}(${c.u[0]} ; ${c.u[1]})$ et $\\vec{v}(${c.v[0]} ; ${c.v[1]})$ sont-ils orthogonaux ? Justifie, et dis pourquoi ce test est préférable à une mesure d'angle.`,
+        format: "open",
+        expected: [String(ps), "produit scalaire", c.ok ? "orthogonaux" : "pas orthogonaux", "exact"],
+        comparator: "contains_keyword",
+        canvas: vecteurs(c.u[0], c.u[1], c.v[0], c.v[1]),
+        explanation: exp(
+          "Deux vecteurs non nuls sont orthogonaux si et seulement si leur produit scalaire est nul.",
+          `On calcule $${c.u[0]} \\times ${c.v[0]} + ${c.u[1]} \\times ${c.v[1]}$.`,
+          `$= ${ps}$${c.ok ? " : le produit est nul." : " : le produit n'est pas nul."}`,
+          c.ok
+            ? "Les vecteurs sont donc orthogonaux — et le calcul est exact, alors qu'un rapporteur ne distinguerait pas $90°$ de $89{,}8°$."
+            : "Les vecteurs ne sont donc pas orthogonaux, même si le dessin peut le laisser croire."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_ps_alk_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_alkashi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique pourquoi la formule d'Al-Kashi est une généralisation du théorème de Pythagore.",
+    format: "open",
+    expected: ["90", "droit", "cos", "s'annule", "disparait", "disparaît", "terme"],
+    comparator: "contains_keyword",
+    hint: "Que devient $-2bc\\cos A$ quand l'angle $\\widehat{A}$ est droit ?",
+    explanation: exp(
+      "Al-Kashi s'écrit $a^2 = b^2 + c^2 - 2bc\\cos\\widehat{A}$ : c'est Pythagore, plus un terme correctif qui dépend de l'angle.",
+      "Ce terme correctif mesure de combien le triangle s'écarte du cas rectangle.",
+      "Si $\\widehat{A} = 90°$, alors $\\cos\\widehat{A} = 0$ et le terme disparaît : il reste $a^2 = b^2 + c^2$, exactement Pythagore.",
+      "Pythagore est donc le cas particulier d'Al-Kashi pour un angle droit — et le signe du terme correctif dit si l'angle est aigu (il retranche) ou obtus (il ajoute)."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "alkashi", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_ps_alk_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_alkashi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Dans quelles situations la formule d'Al-Kashi est-elle l'outil adapté, et quand vaut-il mieux s'en passer ?",
+    format: "open",
+    expected: ["deux cotes", "deux côtés", "angle", "trois longueurs", "coordonnees", "coordonnées", "quelconque"],
+    comparator: "contains_keyword",
+    hint: "De quelles données a-t-on besoin pour l'appliquer ?",
+    explanation: exp(
+      "Al-Kashi relie les trois longueurs d'un triangle et l'un de ses angles : elle sert dès qu'on connaît trois de ces quatre quantités.",
+      "Elle est l'outil adapté dans deux cas : on connaît deux côtés et l'angle entre eux et on cherche le troisième côté ; ou on connaît les trois côtés et on cherche un angle.",
+      "Elle est en revanche inutile si le triangle est rectangle — Pythagore suffit et va plus vite — ou si l'on dispose des coordonnées des points : le produit scalaire par $xx' + yy'$ donne alors l'angle sans passer par les longueurs.",
+      "Al-Kashi est la formule des triangles QUELCONQUES quand on n'a que des longueurs et des angles ; dès qu'il y a un repère, on lui préfère les coordonnées."
+    ),
+    tags: ["premiere", "maths", "produit_scalaire", "alkashi", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_ps_alk_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "produit_scalaire",
+    microId: "ps_alkashi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "$a^2 = b^2 + c^2 - 2bc\\cos\\widehat{A}$ — attention au signe du cosinus si l'angle est obtus.",
+    tags: ["premiere", "maths", "produit_scalaire", "alkashi", "open", "template"],
+    generate: () => {
+      const cas = [
+        { b: 4, c: 6, deg: 60, cos: "0{,}5", a2: 28 },
+        { b: 3, c: 5, deg: 60, cos: "0{,}5", a2: 19 },
+        { b: 2, c: 3, deg: 120, cos: "-0{,}5", a2: 19 },
+        { b: 5, c: 8, deg: 60, cos: "0{,}5", a2: 49 },
+        { b: 4, c: 4, deg: 120, cos: "-0{,}5", a2: 48 },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Dans un triangle $ABC$, on donne $b = ${c.b}$, $c = ${c.c}$ et $\\widehat{A} = ${c.deg}°$. Calcule $a^2$, et explique pourquoi Pythagore ne suffirait pas ici.`,
+        format: "open",
+        expected: [String(c.a2), "al-kashi", "alkashi", "cos", "pas rectangle", "correctif"],
+        comparator: "contains_keyword",
+        canvas: triangleCote(String(c.c), String(c.b), "a", c.deg + "°"),
+        explanation: exp(
+          "Al-Kashi s'applique à tout triangle : $a^2 = b^2 + c^2 - 2bc\\cos\\widehat{A}$, où le dernier terme corrige Pythagore selon l'angle.",
+          `Ici $a^2 = ${c.b}^2 + ${c.c}^2 - 2 \\times ${c.b} \\times ${c.c} \\times ${c.cos}$.`,
+          `$= ${c.b * c.b} + ${c.c * c.c} - ${2 * c.b * c.c} \\times ${c.cos} = ${c.a2}$.`,
+          `Pythagore donnerait $${c.b * c.b + c.c * c.c}$ : il ne vaut que pour un angle droit. Ici l'angle est ${c.deg < 90 ? "aigu, et le terme correctif RETRANCHE" : "obtus, et le terme correctif AJOUTE"}.`
+        ),
+      };
+    },
+  },
 ];
