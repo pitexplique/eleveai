@@ -1052,75 +1052,6 @@ export const exponentielleBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "premiere_exp_prop_fixed_7",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "exponentielle",
-    microId: "exp_proprietes",
-    difficulty: 3,
-    theme: "neutral",
-    text: "À quoi est égal $e^2 \\times e^5$ ?",
-    format: "qcm",
-    choices: ["$e^{7}$", "$e^{10}$", "$2e^{5}$", "$e^{2 \\times 5}$"],
-    expected: ["$e^{7}$"],
-    comparator: "mcq_exact",
-    hint: "Produit d'exponentielles → SOMME des exposants.",
-    explanation: exp(
-      "La propriété fondamentale est $e^a \\times e^b = e^{a+b}$.",
-      "Ici $a = 2$ et $b = 5$ : $e^2 \\times e^5 = e^{2+5}$.",
-      "$= e^7$. Multiplier les exposants ($e^{10}$) est l'erreur la plus fréquente : c'est la règle de la PUISSANCE, pas du produit.",
-      "$e^2 \\times e^5 = e^7$."
-    ),
-    tags: ["premiere", "maths", "exponentielle", "proprietes", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_exp_prop_fixed_8",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "exponentielle",
-    microId: "exp_proprietes",
-    difficulty: 3,
-    theme: "neutral",
-    text: "À quoi est égal $\\dfrac{e^{5}}{e^{3}}$ ?",
-    format: "qcm",
-    choices: ["$e^{2}$", "$e^{8}$", "$e^{\\frac{5}{3}}$", "$e^{15}$"],
-    expected: ["$e^{2}$"],
-    comparator: "mcq_exact",
-    hint: "Quotient d'exponentielles → DIFFÉRENCE des exposants.",
-    explanation: exp(
-      "La règle du quotient est $\\dfrac{e^a}{e^b} = e^{a-b}$.",
-      "Ici $\\dfrac{e^5}{e^3} = e^{5-3}$.",
-      "$= e^2$. On ne divise pas les exposants entre eux.",
-      "$\\dfrac{e^5}{e^3} = e^2$."
-    ),
-    tags: ["premiere", "maths", "exponentielle", "proprietes", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_exp_prop_fixed_9",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "exponentielle",
-    microId: "exp_proprietes",
-    difficulty: 3,
-    theme: "neutral",
-    text: "À quoi est égal $\\left(e^{2}\\right)^{3}$ ?",
-    format: "qcm",
-    choices: ["$e^{6}$", "$e^{5}$", "$e^{8}$", "$3e^{2}$"],
-    expected: ["$e^{6}$"],
-    comparator: "mcq_exact",
-    hint: "Puissance d'une puissance → PRODUIT des exposants.",
-    explanation: exp(
-      "La règle est $\\left(e^a\\right)^n = e^{na}$.",
-      "Ici $\\left(e^2\\right)^3 = e^{2 \\times 3}$.",
-      "$= e^6$. C'est ici qu'on multiplie les exposants — pas dans un produit d'exponentielles, où on les additionne.",
-      "$\\left(e^2\\right)^3 = e^6$."
-    ),
-    tags: ["premiere", "maths", "exponentielle", "proprietes", "qcm"],
-  },
-  {
-    kind: "fixed",
     id: "premiere_exp_prop_fixed_11",
     niveau: "premiere-spe",
     matiere: "maths",
@@ -1250,6 +1181,55 @@ export const exponentielleBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "exponentielle", "proprietes", "open"],
   },
 
+  {
+    kind: "template",
+    id: "premiere_exp_prop_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_proprietes",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Produit → on ajoute les exposants ; quotient → on soustrait ; puissance → on multiplie.",
+    tags: ["premiere", "maths", "exponentielle", "proprietes", "template"],
+    generate: () => {
+      const a = randomInt(2, 7);
+      const b = randomInt(2, 6);
+      const op = pickOne(["produit", "quotient", "puissance"] as const);
+      const res = op === "produit" ? a + b : op === "quotient" ? a - b : a * b;
+      const enonce =
+        op === "produit"
+          ? `e^{${a}} \\times e^{${b}}`
+          : op === "quotient"
+            ? `\\dfrac{e^{${a + b}}}{e^{${b}}}`
+            : `\\left(e^{${a}}\\right)^{${b}}`;
+      const juste = op === "quotient" ? a : res;
+      const correct = `$e^{${juste}}$`;
+      return {
+        text: `À quoi est égal $${enonce}$ ?`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$e^{${a * b}}$`,
+          `$e^{${a + b}}$`,
+          `$${juste}e$`,
+        ].filter((v, i, t) => t.indexOf(v) === i),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Les exponentielles suivent les règles des puissances : produit → somme des exposants, quotient → différence, puissance de puissance → produit.",
+          `Ici l'expression est ${op === "produit" ? "un produit" : op === "quotient" ? "un quotient" : "une puissance de puissance"}.`,
+          op === "produit"
+            ? `On ajoute : $${a} + ${b} = ${res}$.`
+            : op === "quotient"
+              ? `On soustrait : $${a + b} - ${b} = ${a}$.`
+              : `On multiplie : $${a} \\times ${b} = ${res}$.`,
+          `${correct}.`
+        ),
+      };
+    },
+  },
+
   /* ===================== EXP_SIMPLIFIER ===================== */
   {
     kind: "fixed",
@@ -1275,52 +1255,6 @@ export const exponentielleBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "premiere_exp_simp_fixed_2",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "exponentielle",
-    microId: "exp_simplifier",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Simplifie $\\dfrac{e^{2x} \\times e^{3x}}{e^{x}}$.",
-    format: "qcm",
-    choices: ["$e^{4x}$", "$e^{6x}$", "$e^{5x}$", "$e^{x}$"],
-    expected: ["$e^{4x}$"],
-    comparator: "mcq_exact",
-    hint: "$2x + 3x - x$.",
-    explanation: exp(
-      "On combine les exposants : produit → somme, quotient → différence.",
-      "$\\dfrac{e^{2x} \\times e^{3x}}{e^x} = e^{2x + 3x - x}$.",
-      "$= e^{4x}$.",
-      "$e^{4x}$."
-    ),
-    tags: ["premiere", "maths", "exponentielle", "simplifier", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_exp_simp_fixed_3",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "exponentielle",
-    microId: "exp_simplifier",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Simplifie $\\left(e^{x}\\right)^{3} \\times e^{x}$.",
-    format: "qcm",
-    choices: ["$e^{4x}$", "$e^{3x}$", "$e^{x^3}$", "$e^{3x^2}$"],
-    expected: ["$e^{4x}$"],
-    comparator: "mcq_exact",
-    hint: "$(e^x)^3 = e^{3x}$.",
-    explanation: exp(
-      "On applique la puissance puis le produit.",
-      "$(e^x)^3 = e^{3x}$, puis $e^{3x} \\times e^x = e^{3x + x}$.",
-      "$= e^{4x}$.",
-      "$e^{4x}$."
-    ),
-    tags: ["premiere", "maths", "exponentielle", "simplifier", "qcm"],
-  },
-  {
-    kind: "fixed",
     id: "premiere_exp_simp_fixed_4",
     niveau: "premiere-spe",
     matiere: "maths",
@@ -1339,144 +1273,6 @@ export const exponentielleBank: TutorBankItemV4[] = [
       "$\\dfrac{1}{e^{-2x}} = e^{-(-2x)}$.",
       "$= e^{2x}$.",
       "$e^{2x}$."
-    ),
-    tags: ["premiere", "maths", "exponentielle", "simplifier", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_exp_simp_fixed_5",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "exponentielle",
-    microId: "exp_simplifier",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Simplifie $e^{2x} \\times e^{-x}$.",
-    format: "qcm",
-    choices: ["$e^{x}$", "$e^{3x}$", "$e^{-2x^2}$", "$1$"],
-    expected: ["$e^{x}$"],
-    comparator: "mcq_exact",
-    hint: "On additionne les exposants : $2x + (-x)$.",
-    explanation: exp(
-      "Dans un produit d'exponentielles, on additionne les exposants.",
-      "$e^{2x} \\times e^{-x} = e^{2x - x}$.",
-      "$= e^{x}$.",
-      "$e^{2x} \\times e^{-x} = e^{x}$."
-    ),
-    tags: ["premiere", "maths", "exponentielle", "simplifier", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_exp_simp_fixed_6",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "exponentielle",
-    microId: "exp_simplifier",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Simplifie $\\dfrac{e^{5x}}{e^{2x}}$.",
-    format: "qcm",
-    choices: ["$e^{3x}$", "$e^{7x}$", "$e^{2{,}5x}$", "$e^{10x}$"],
-    expected: ["$e^{3x}$"],
-    comparator: "mcq_exact",
-    hint: "On soustrait les exposants.",
-    explanation: exp(
-      "Dans un quotient d'exponentielles, on soustrait les exposants.",
-      "$\\dfrac{e^{5x}}{e^{2x}} = e^{5x - 2x}$.",
-      "$= e^{3x}$.",
-      "$\\dfrac{e^{5x}}{e^{2x}} = e^{3x}$."
-    ),
-    tags: ["premiere", "maths", "exponentielle", "simplifier", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_exp_simp_fixed_7",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "exponentielle",
-    microId: "exp_simplifier",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Simplifie $\\left(e^{x}\\right)^{2} \\times e^{-2x}$.",
-    format: "qcm",
-    choices: ["$1$", "$e^{4x}$", "$e^{-4x}$", "$e^{x}$"],
-    expected: ["$1$"],
-    comparator: "mcq_exact",
-    hint: "Commence par $\\left(e^{x}\\right)^{2} = e^{2x}$.",
-    explanation: exp(
-      "On applique d'abord la règle de la puissance, puis celle du produit.",
-      "$\\left(e^{x}\\right)^{2} = e^{2x}$, donc l'expression vaut $e^{2x} \\times e^{-2x} = e^{2x - 2x}$.",
-      "$= e^{0} = 1$.",
-      "L'expression est constante et vaut $1$."
-    ),
-    tags: ["premiere", "maths", "exponentielle", "simplifier", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_exp_simp_fixed_8",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "exponentielle",
-    microId: "exp_simplifier",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Simplifie $e^{x+1} \\times e^{-1}$.",
-    format: "qcm",
-    choices: ["$e^{x}$", "$e^{x+2}$", "$e^{x-1}$", "$1$"],
-    expected: ["$e^{x}$"],
-    comparator: "mcq_exact",
-    hint: "$(x + 1) + (-1) = ?$",
-    explanation: exp(
-      "On additionne les exposants, en pensant bien à mettre l'exposant complet entre parenthèses.",
-      "$e^{x+1} \\times e^{-1} = e^{(x+1) + (-1)}$.",
-      "$= e^{x + 1 - 1} = e^{x}$.",
-      "$e^{x+1} \\times e^{-1} = e^{x}$."
-    ),
-    tags: ["premiere", "maths", "exponentielle", "simplifier", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_exp_simp_fixed_9",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "exponentielle",
-    microId: "exp_simplifier",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Simplifie $\\dfrac{e^{3x} \\times e^{x}}{e^{4x}}$.",
-    format: "qcm",
-    choices: ["$1$", "$e^{8x}$", "$e^{3x}$", "$e^{-4x}$"],
-    expected: ["$1$"],
-    comparator: "mcq_exact",
-    hint: "Simplifie d'abord le numérateur.",
-    explanation: exp(
-      "On regroupe le numérateur, puis on soustrait l'exposant du dénominateur.",
-      "$e^{3x} \\times e^{x} = e^{4x}$, donc l'expression vaut $\\dfrac{e^{4x}}{e^{4x}} = e^{4x - 4x}$.",
-      "$= e^{0} = 1$.",
-      "L'expression vaut $1$."
-    ),
-    tags: ["premiere", "maths", "exponentielle", "simplifier", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_exp_simp_fixed_10",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "exponentielle",
-    microId: "exp_simplifier",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Simplifie $\\left(e^{-x}\\right)^{3}$.",
-    format: "qcm",
-    choices: ["$e^{-3x}$", "$e^{3x}$", "$-e^{3x}$", "$\\dfrac{1}{3e^{x}}$"],
-    expected: ["$e^{-3x}$"],
-    comparator: "mcq_exact",
-    hint: "On multiplie les exposants, signe compris.",
-    explanation: exp(
-      "La puissance d'une exponentielle multiplie l'exposant : $\\left(e^a\\right)^n = e^{na}$.",
-      "Ici $a = -x$ et $n = 3$ : $\\left(e^{-x}\\right)^{3} = e^{3 \\times (-x)}$.",
-      "$= e^{-3x}$. Le résultat reste positif : le signe « moins » est dans l'exposant, pas devant.",
-      "$\\left(e^{-x}\\right)^{3} = e^{-3x}$."
     ),
     tags: ["premiere", "maths", "exponentielle", "simplifier", "qcm"],
   },
@@ -1564,6 +1360,43 @@ export const exponentielleBank: TutorBankItemV4[] = [
           `$e^{${a}x - ${a}x} = e^0$.`,
           "$= 1$.",
           "Le résultat est $1$."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_exp_simp_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_simplifier",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Commence par la puissance de puissance, puis regroupe le produit.",
+    tags: ["premiere", "maths", "exponentielle", "simplifier", "template"],
+    generate: () => {
+      const n = randomInt(2, 4);
+      const a = randomInt(1, 3);
+      const b = pickOne([-3, -2, -1, 1, 2]);
+      const total = n * a + b;
+      const ecrire = (k: number) => (k === 0 ? "1" : k === 1 ? "e^{x}" : `e^{${k}x}`);
+      const correct = `$${ecrire(total)}$`;
+      const faux = [`$${ecrire(a + b)}$`, `$${ecrire(n * a)}$`, `$${ecrire(total + 1)}$`].filter(
+        (v) => v !== correct,
+      );
+      return {
+        text: `Simplifie $\\left(e^{${a === 1 ? "x" : a + "x"}}\\right)^{${n}} \\times e^{${b === 1 ? "x" : b === -1 ? "-x" : b + "x"}}$.`,
+        format: "qcm",
+        choices: [correct, ...faux].filter((v, i, t) => t.indexOf(v) === i),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Deux règles se combinent : une puissance de puissance multiplie les exposants, un produit les additionne.",
+          `On traite d'abord la parenthèse : $\\left(e^{${a === 1 ? "x" : a + "x"}}\\right)^{${n}} = e^{${n * a}x}$.`,
+          `On regroupe ensuite le produit : $${n * a}x ${b >= 0 ? "+ " + b : "- " + -b}x = ${total}x$.`,
+          `${correct}${total === 0 ? " — les exposants se compensent exactement." : "."}`
         ),
       };
     },
