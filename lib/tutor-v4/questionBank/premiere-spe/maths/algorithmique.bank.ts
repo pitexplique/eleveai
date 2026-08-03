@@ -2327,4 +2327,259 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* =========================================================
+     QUESTIONS OUVERTES — compléments du 02/08/2026.
+     Trois micro-compétences écrites avant le découpage n'avaient aucune
+     question ouverte : deux ouvertes fixes + un TEMPLATE ouvert chacune.
+  ========================================================= */
+
+  {
+    kind: "fixed",
+    id: "premiere_algo_bcl_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "algorithmique",
+    microId: "algo_boucles",
+    difficulty: 5,
+    theme: "neutral",
+    text: "En Python, à quoi sert l'indentation après un `for` ? Que se passe-t-il si on décale une ligne de trop, ou pas assez ?",
+    format: "open",
+    expected: ["corps", "bloc", "repete", "répète", "une seule fois", "dedans"],
+    comparator: "contains_keyword",
+    hint: "Comment Python sait-il où la boucle s'arrête ?",
+    explanation: exp(
+      "Beaucoup de langages délimitent les blocs par des accolades ; Python le fait par l'INDENTATION, le décalage vers la droite.",
+      "Les lignes décalées après le `for` forment le corps de la boucle : ce sont elles qui se répètent à chaque tour.",
+      "Une ligne qu'on oublie de décaler sort de la boucle : elle ne s'exécute qu'UNE fois, après tous les tours. C'est l'erreur classique de l'affichage placé au mauvais endroit — soit on voit tous les résultats intermédiaires, soit on ne voit que le dernier.",
+      "L'indentation n'est pas de la mise en forme : elle change ce que fait le programme."
+    ),
+    tags: ["premiere", "maths", "algorithmique", "boucles", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_algo_bcl_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "algorithmique",
+    microId: "algo_boucles",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève affirme que `for i in range(5)` fait cinq tours en partant de $1$. Corrige-le.",
+    format: "open",
+    expected: ["0", "4", "commence a 0", "commence à 0", "cinq tours", "exclue"],
+    comparator: "contains_keyword",
+    hint: "Il a raison sur le nombre de tours. Sur quoi se trompe-t-il ?",
+    explanation: exp(
+      "`range(n)` produit les entiers de $0$ à $n - 1$ : la borne de gauche est incluse, celle de droite exclue.",
+      "L'élève a raison sur le compte : il y a bien CINQ tours.",
+      "Mais la variable `i` prend les valeurs $0$, $1$, $2$, $3$, $4$ — et non $1$ à $5$. Cela n'a pas d'importance si `i` ne sert qu'à compter les tours, mais tout change si `i` intervient dans le calcul : une somme $\\sum i$ vaudrait $10$ et non $15$.",
+      "Cinq tours, mais de $0$ à $4$. Pour parcourir $1$ à $5$, il faut écrire `range(1, 6)`."
+    ),
+    tags: ["premiere", "maths", "algorithmique", "boucles", "piege", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_algo_bcl_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "algorithmique",
+    microId: "algo_boucles",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Déroule les premiers tours en notant la valeur de l'accumulateur après chacun.",
+    tags: ["premiere", "maths", "algorithmique", "boucles", "open", "template"],
+    generate: () => {
+      const n = randomInt(4, 7);
+      const op = pickOne(["somme", "produit"]);
+      let val = op === "somme" ? 0 : 1;
+      for (let k = 1; k <= n; k += 1) val = op === "somme" ? val + k : val * k;
+      return {
+        text:
+          op === "somme"
+            ? `Que vaut \`s\` après : \`s = 0\` puis \`for k in range(1, ${n + 1}): s = s + k\` ? Explique ce que fait la boucle, tour par tour.`
+            : `Que vaut \`p\` après : \`p = 1\` puis \`for k in range(1, ${n + 1}): p = p * k\` ? Explique ce que fait la boucle, tour par tour.`,
+        format: "open",
+        expected: [String(val), "accumulateur", "chaque tour", "range", op === "somme" ? "ajoute" : "multiplie"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          op === "somme"
+            ? "La variable `s` est un ACCUMULATEUR : elle garde la somme des valeurs déjà rencontrées."
+            : "La variable `p` est un ACCUMULATEUR : elle garde le produit des valeurs déjà rencontrées.",
+          `\`range(1, ${n + 1})\` fait prendre à \`k\` les valeurs $1$ à $${n}$ — la borne de droite est exclue.`,
+          op === "somme"
+            ? `À chaque tour, on ajoute \`k\` : on calcule donc $1 + 2 + \\ldots + ${n}$.`
+            : `À chaque tour, on multiplie par \`k\` : on calcule donc $1 \\times 2 \\times \\ldots \\times ${n}$, la factorielle de $${n}$.`,
+          op === "somme" ? `\`s\` vaut $${val}$.` : `\`p\` vaut $${val}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_algo_seu_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "algorithmique",
+    microId: "algo_seuil",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Décris un algorithme de recherche de seuil, et explique pourquoi une boucle `for` ne conviendrait pas.",
+    format: "open",
+    expected: ["while", "tant que", "pas connu", "compteur", "depasse", "dépasse"],
+    comparator: "contains_keyword",
+    hint: "Sait-on à l'avance combien d'étapes il faudra ?",
+    explanation: exp(
+      "Une recherche de seuil cherche le premier rang à partir duquel une suite dépasse (ou passe sous) une valeur donnée.",
+      "On initialise le terme et un compteur, puis on répète : calculer le terme suivant, augmenter le compteur — TANT QUE le seuil n'est pas franchi.",
+      "Le nombre d'étapes n'est pas connu au départ : c'est justement ce qu'on cherche. Une boucle `for` exigerait de le fixer à l'avance, ce qui reviendrait à connaître la réponse avant de la chercher.",
+      "D'où le `while` : la boucle s'arrête d'elle-même quand la condition devient fausse, et le compteur donne le rang cherché."
+    ),
+    tags: ["premiere", "maths", "algorithmique", "seuil", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_algo_seu_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "algorithmique",
+    microId: "algo_seuil",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Dans un algorithme de seuil, pourquoi l'endroit où l'on place `n = n + 1` change-t-il le résultat ?",
+    format: "open",
+    expected: ["dans la boucle", "compte", "chaque etape", "chaque étape", "une fois", "decalage", "décalage"],
+    comparator: "contains_keyword",
+    hint: "Combien de fois s'exécute une ligne placée à l'intérieur de la boucle ? Et à l'extérieur ?",
+    explanation: exp(
+      "Le compteur doit enregistrer exactement le nombre d'étapes effectuées : sa place décide de ce qu'il compte.",
+      "Placé DANS la boucle, il s'incrémente à chaque passage : il compte bien les étapes.",
+      "Placé après la boucle, il ne s'incrémente qu'une fois, quel que soit le nombre de tours : le résultat vaut $1$, toujours. Et à l'intérieur mais avant la mise à jour du terme, il compte une étape qui n'a pas encore eu lieu — d'où un décalage de $1$.",
+      "Le compteur va dans la boucle, à côté de la mise à jour du terme : on vérifie sur un petit cas connu à la main."
+    ),
+    tags: ["premiere", "maths", "algorithmique", "seuil", "piege", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_algo_seu_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "algorithmique",
+    microId: "algo_seuil",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Déroule les étapes en notant le terme et le compteur, jusqu'à franchir le seuil.",
+    tags: ["premiere", "maths", "algorithmique", "seuil", "open", "template"],
+    generate: () => {
+      const cas = [
+        { u0: 1, op: "u = u * 2", seuil: 50, croissant: true },
+        { u0: 1, op: "u = u * 3", seuil: 100, croissant: true },
+        { u0: 2, op: "u = u + 5", seuil: 30, croissant: true },
+        { u0: 100, op: "u = u * 0.5", seuil: 10, croissant: false },
+        { u0: 200, op: "u = u - 30", seuil: 50, croissant: false },
+      ];
+      const c = pickOne(cas);
+      let u = c.u0;
+      let n = 0;
+      while (c.croissant ? u <= c.seuil : u >= c.seuil) {
+        if (c.op.includes("* 2")) u *= 2;
+        else if (c.op.includes("* 3")) u *= 3;
+        else if (c.op.includes("+ 5")) u += 5;
+        else if (c.op.includes("* 0.5")) u *= 0.5;
+        else u -= 30;
+        n += 1;
+      }
+      return {
+        text: `On part de \`u = ${c.u0}\` et on répète \`${c.op}\`. Écris l'algorithme qui trouve le nombre d'étapes nécessaires pour que \`u\` ${c.croissant ? "dépasse" : "passe sous"} $${c.seuil}$, et donne ce nombre.`,
+        format: "open",
+        expected: [String(n), "while", "tant que", "compteur", "condition"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Un algorithme de seuil répète une opération TANT QUE le seuil n'est pas franchi, en comptant les étapes.",
+          `On initialise \`u = ${c.u0}\` et \`n = 0\`, puis on écrit \`while u ${c.croissant ? "<=" : ">="} ${c.seuil}:\` avec, dans la boucle, l'opération \`${c.op}\` ET l'incrément \`n = n + 1\`.`,
+          `En déroulant, le terme franchit le seuil au bout de $${n}$ étapes.`,
+          `La réponse est $${n}$ — le compteur doit être dans la boucle, sinon il vaudrait $1$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_algo_fct_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "algorithmique",
+    microId: "algo_fonctions",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Dans `def f(x): return 2*x + 1`, à quoi sert le `x` ? Pourrait-on l'appeler autrement ?",
+    format: "open",
+    expected: ["parametre", "paramètre", "nom", "peu importe", "argument", "remplace"],
+    comparator: "contains_keyword",
+    hint: "Que devient ce `x` quand on écrit `f(3)` ?",
+    explanation: exp(
+      "Le `x` de la définition est un PARAMÈTRE : un nom provisoire donné à la valeur que la fonction recevra.",
+      "Lors de l'appel `f(3)`, ce nom est remplacé partout par $3$ dans le corps de la fonction, qui renvoie alors $7$.",
+      "Son nom n'a aucune importance : `def f(t): return 2*t + 1` définit exactement la même fonction. C'est comme la variable muette d'une somme en mathématiques.",
+      "Le paramètre est un emplacement à remplir, pas une valeur : ce qui compte est sa PLACE dans la définition, pas la lettre choisie."
+    ),
+    tags: ["premiere", "maths", "algorithmique", "fonctions", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_algo_fct_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "algorithmique",
+    microId: "algo_fonctions",
+    difficulty: 5,
+    theme: "neutral",
+    text: "En quoi une fonction Python ressemble-t-elle à une fonction mathématique, et en quoi diffère-t-elle ?",
+    format: "open",
+    expected: ["image", "renvoie", "plusieurs instructions", "instructions", "meme valeur", "même valeur"],
+    comparator: "contains_keyword",
+    hint: "Que reçoit-elle, que rend-elle, et que peut-elle faire en plus ?",
+    explanation: exp(
+      "Les deux objets partagent l'essentiel : ils reçoivent une valeur et en rendent une autre.",
+      "Comme en mathématiques, `f(3)` renvoie toujours la même chose : la fonction associe une image à chaque argument, et $f(3)$ ne change pas d'un appel à l'autre.",
+      "Mais une fonction Python peut contenir plusieurs instructions, des boucles, des tests — tout un algorithme, pas seulement une formule. Elle peut aussi ne rien renvoyer du tout si on oublie `return`, ce qui n'aurait aucun sens en mathématiques.",
+      "Même idée d'association ; la version informatique est un mode d'emploi, la version mathématique une correspondance."
+    ),
+    tags: ["premiere", "maths", "algorithmique", "fonctions", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_algo_fct_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "algorithmique",
+    microId: "algo_fonctions",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Remplace le paramètre par la valeur donnée, partout dans le corps de la fonction.",
+    tags: ["premiere", "maths", "algorithmique", "fonctions", "open", "template"],
+    generate: () => {
+      const cas = [
+        { d: "def u(n): return 3*n + 2", suite: "u_n = 3n + 2", k: 0, r: 2 },
+        { d: "def u(n): return 2**n", suite: "u_n = 2^n", k: 5, r: 32 },
+        { d: "def u(n): return n*n - 1", suite: "u_n = n^2 - 1", k: 4, r: 15 },
+        { d: "def u(n): return 5 - 2*n", suite: "u_n = 5 - 2n", k: 3, r: -1 },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `La fonction \`${c.d}\` calcule le terme de rang $n$ d'une suite. Que renvoie \`u(${c.k})\` ? Explique le lien entre cette fonction et l'écriture mathématique $${c.suite}$.`,
+        format: "open",
+        expected: [String(c.r), "remplace", "rang", "parametre", "paramètre", "image"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Une fonction Python qui calcule un terme de suite fait exactement ce que fait l'écriture explicite : elle remplace $n$ par le rang demandé.",
+          `L'appel \`u(${c.k})\` remplace le paramètre \`n\` par $${c.k}$ dans le corps de la fonction.`,
+          `Le calcul donne $${c.r}$, c'est-à-dire $u_{${c.k}}$ pour la suite $${c.suite}$.`,
+          `\`u(${c.k})\` renvoie $${c.r}$ — la fonction Python est la traduction directe de la forme explicite, ce qui permet de calculer n'importe quel rang sans les précédents.`
+        ),
+      };
+    },
+  },
 ];

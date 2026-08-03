@@ -3225,4 +3225,168 @@ export const exponentielleBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* =========================================================
+     QUESTIONS OUVERTES — compléments du 02/08/2026.
+     Les deux micro-compétences écrites avant le découpage n'avaient aucune
+     question ouverte : deux ouvertes fixes + un TEMPLATE ouvert chacune.
+  ========================================================= */
+
+  {
+    kind: "fixed",
+    id: "premiere_exp_sim_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_simplifier",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Quelles règles utilise-t-on pour simplifier une expression contenant des exponentielles, et dans quel ordre les applique-t-on ?",
+    format: "open",
+    expected: ["somme des exposants", "difference", "différence", "produit", "quotient", "puissance"],
+    comparator: "contains_keyword",
+    hint: "Trois règles seulement, les mêmes que pour les puissances.",
+    explanation: exp(
+      "Toutes les simplifications reposent sur trois règles, héritées des puissances : produit, quotient, puissance de puissance.",
+      "$e^{a} \\times e^{b} = e^{a+b}$ (on ajoute les exposants) ; $\\dfrac{e^{a}}{e^{b}} = e^{a-b}$ (on soustrait) ; $(e^{a})^{n} = e^{na}$ (on multiplie).",
+      "On applique d'abord les puissances de puissances, puis les produits et quotients, et on simplifie l'exposant obtenu à la fin. Un $e^{0}$ qui apparaît vaut $1$ et disparaît.",
+      "Trois règles, appliquées de l'intérieur vers l'extérieur — et surtout : elles ne concernent que des PRODUITS et des QUOTIENTS, jamais des sommes."
+    ),
+    tags: ["premiere", "maths", "exponentielle", "simplifier", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_exp_sim_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_simplifier",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève simplifie $\\dfrac{e^{2x} + e^{3x}}{e^{x}}$ en écrivant $e^{2x + 3x - x}$. Explique son erreur, puis donne la bonne méthode.",
+    format: "open",
+    expected: ["somme", "factorise", "pas un produit", "numerateur", "numérateur", "distribue"],
+    comparator: "contains_keyword",
+    hint: "La règle du quotient s'applique-t-elle quand le numérateur est une SOMME ?",
+    explanation: exp(
+      "La règle $\\dfrac{e^{a}}{e^{b}} = e^{a-b}$ suppose que le numérateur est une seule exponentielle, pas une somme.",
+      "L'élève a traité une somme comme un produit : il a additionné les exposants du numérateur, ce que rien n'autorise.",
+      "La bonne méthode est de séparer la fraction : $\\dfrac{e^{2x}}{e^{x}} + \\dfrac{e^{3x}}{e^{x}} = e^{x} + e^{2x}$. On peut aussi factoriser le numérateur par $e^{2x}$ avant de simplifier.",
+      "Devant une somme au numérateur : on distribue la division, ou on factorise. Jamais on n'additionne les exposants."
+    ),
+    tags: ["premiere", "maths", "exponentielle", "simplifier", "piege", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_exp_sim_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_simplifier",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Repère d'abord s'il s'agit d'un produit, d'un quotient ou d'une somme.",
+    tags: ["premiere", "maths", "exponentielle", "simplifier", "open", "template"],
+    generate: () => {
+      const cas = [
+        { e: "e^{3x} \\times e^{-x}", r: "e^{2x}", struct: "un produit", regle: "on ajoute les exposants" },
+        { e: "\\dfrac{e^{5x}}{e^{2x}}", r: "e^{3x}", struct: "un quotient", regle: "on soustrait les exposants" },
+        { e: "\\left(e^{2x}\\right)^{3}", r: "e^{6x}", struct: "une puissance de puissance", regle: "on multiplie les exposants" },
+        { e: "\\dfrac{e^{x} + e^{2x}}{e^{x}}", r: "1 + e^{x}", struct: "une SOMME au numérateur", regle: "on distribue la division, on n'additionne surtout pas les exposants" },
+        { e: "e^{x+2} \\times e^{-2}", r: "e^{x}", struct: "un produit", regle: "on ajoute les exposants" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Simplifie $${c.e}$, en disant d'abord quelle est la structure de l'expression et quelle règle elle appelle.`,
+        format: "open",
+        expected: [c.struct.split(" ")[1], "exposants", "regle", "règle", c.r.includes("+") ? "distribue" : "simplifie"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Chaque règle de simplification correspond à une structure : produit, quotient, ou puissance de puissance — et aucune ne s'applique à une somme.",
+          `Ici $${c.e}$ est ${c.struct}.`,
+          `La règle correspondante dit que ${c.regle}.`,
+          `On obtient $${c.r}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "premiere_exp_mod_open_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_modelisation",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Comment reconnaît-on qu'une situation se modélise par une exponentielle plutôt que par une fonction affine ?",
+    format: "open",
+    expected: ["pourcentage", "multiplie", "ajoute", "proportionnelle", "meme facteur", "même facteur"],
+    comparator: "contains_keyword",
+    hint: "Ajoute-t-on toujours la même quantité, ou multiplie-t-on toujours par le même nombre ?",
+    explanation: exp(
+      "Le mot à repérer dans l'énoncé est celui qui décrit l'évolution d'une étape à l'autre.",
+      "Une fonction affine correspond à une AUGMENTATION CONSTANTE : « on ajoute $50$ € chaque mois », « la température monte de $2$ degrés par heure ».",
+      "Une exponentielle correspond à un POURCENTAGE constant, donc à une multiplication par le même facteur : « la population augmente de $3\\,\\%$ par an », « la quantité diminue de moitié tous les cinq ans ». La vitesse de croissance y est proportionnelle à la quantité présente.",
+      "« Plus $x$ » → affine ; « plus $x$ pour cent » → exponentielle. C'est la différence entre un escalier régulier et une pente qui s'emballe."
+    ),
+    tags: ["premiere", "maths", "exponentielle", "modelisation", "open"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_exp_mod_open_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_modelisation",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Dans le modèle $N(t) = N_0 e^{kt}$, que représentent $N_0$ et $k$ ? Que change le signe de $k$ ?",
+    format: "open",
+    expected: ["initial", "depart", "départ", "taux", "croissance", "decroissance", "décroissance", "signe"],
+    comparator: "contains_keyword",
+    hint: "Que vaut $N(0)$ ? Et que devient la fonction si $k$ est négatif ?",
+    explanation: exp(
+      "Les deux constantes du modèle jouent des rôles très différents : l'une fixe le point de départ, l'autre la vitesse.",
+      "En $t = 0$ : $N(0) = N_0 e^{0} = N_0$. Donc $N_0$ est la quantité INITIALE, celle du début de l'observation.",
+      "Le coefficient $k$ est le taux de croissance : la dérivée vaut $k N(t)$, donc la vitesse d'évolution est proportionnelle à la quantité présente, avec $k$ pour facteur.",
+      "Si $k > 0$, la quantité augmente de plus en plus vite ; si $k < 0$, elle diminue en se rapprochant de $0$ sans l'atteindre. Le signe de $k$ décide de la croissance ou de la décroissance, sa taille décide de la rapidité."
+    ),
+    tags: ["premiere", "maths", "exponentielle", "modelisation", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_exp_mod_tpl_open",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_modelisation",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Repère la quantité initiale, puis le signe du coefficient de $t$.",
+    tags: ["premiere", "maths", "exponentielle", "modelisation", "open", "template"],
+    generate: () => {
+      const cas = [
+        { s: "une population de bactéries suit $N(t) = 500e^{0{,}4t}$, $t$ en heures", n0: "500", sens: "croissance" },
+        { s: "la masse d'un échantillon suit $m(t) = 80e^{-0{,}05t}$, $t$ en jours", n0: "80", sens: "décroissance" },
+        { s: "un capital suit $C(t) = 2000e^{0{,}03t}$, $t$ en années", n0: "2000", sens: "croissance" },
+        { s: "la concentration d'un médicament suit $c(t) = 12e^{-0{,}2t}$, $t$ en heures", n0: "12", sens: "décroissance" },
+        { s: "le nombre de vues suit $V(t) = 150e^{0{,}6t}$, $t$ en jours", n0: "150", sens: "croissance" },
+      ];
+      const c = pickOne(cas);
+      return {
+        text: `Dans la situation suivante — ${c.s} — interprète les deux constantes du modèle, et dis s'il s'agit d'une croissance ou d'une décroissance. Justifie.`,
+        format: "open",
+        expected: [c.n0, c.sens, "initial", "signe", "taux"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "Dans un modèle $N(t) = N_0 e^{kt}$, la constante devant l'exponentielle est la quantité initiale, et le coefficient de $t$ est le taux.",
+          `En $t = 0$, l'exponentielle vaut $1$ : la quantité de départ est donc $${c.n0}$.`,
+          `Le coefficient de $t$ est ${c.sens === "croissance" ? "positif" : "négatif"}, et la dérivée du modèle a le même signe que lui.`,
+          `Il s'agit donc d'une ${c.sens} : la quantité ${c.sens === "croissance" ? "augmente de plus en plus vite" : "diminue en se rapprochant de $0$ sans jamais l'atteindre"}.`
+        ),
+      };
+    },
+  },
 ];
