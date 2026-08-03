@@ -558,80 +558,6 @@ export const logiqueEnsemblesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "premiere_log_ope_fixed_3",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "logique_ensembles",
-    microId: "log_operations",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Que vaut $[1 ; 5] \\cap [3 ; 8]$ ?",
-    format: "qcm",
-    choices: ["$[3 ; 5]$", "$[1 ; 8]$", "$[1 ; 3]$", "$\\emptyset$"],
-    expected: ["$[3 ; 5]$"],
-    comparator: "mcq_exact",
-    hint: "Trace les deux intervalles l'un sous l'autre : où se superposent-ils ?",
-    explanation: exp(
-      "L'intersection de deux intervalles est la partie commune aux deux.",
-      "Un réel doit vérifier à la fois $1 \\le x \\le 5$ ET $3 \\le x \\le 8$, donc $3 \\le x \\le 5$.",
-      "On garde la plus GRANDE des bornes de gauche et la plus PETITE des bornes de droite.",
-      "$[1 ; 5] \\cap [3 ; 8] = [3 ; 5]$."
-    ),
-    tags: ["premiere", "maths", "logique", "operations", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_log_ope_fixed_4",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "logique_ensembles",
-    microId: "log_operations",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Que vaut $[1 ; 5] \\cup [3 ; 8]$ ?",
-    format: "qcm",
-    choices: ["$[1 ; 8]$", "$[3 ; 5]$", "$[1 ; 5]$", "$[5 ; 8]$"],
-    expected: ["$[1 ; 8]$"],
-    comparator: "mcq_exact",
-    hint: "Les deux intervalles se chevauchent : leur réunion est d'un seul tenant.",
-    explanation: exp(
-      "La réunion rassemble tous les réels appartenant à l'un OU l'autre des intervalles.",
-      "Comme $[1 ; 5]$ et $[3 ; 8]$ se chevauchent (sur $[3 ; 5]$), leur réunion n'a pas de trou.",
-      "Elle va donc de la plus petite borne à la plus grande : de $1$ à $8$.",
-      "$[1 ; 5] \\cup [3 ; 8] = [1 ; 8]$."
-    ),
-    tags: ["premiere", "maths", "logique", "operations", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_log_ope_fixed_5",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "logique_ensembles",
-    microId: "log_operations",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Que vaut $[0 ; 2] \\cap [5 ; 7]$ ?",
-    format: "qcm",
-    choices: [
-      "$\\emptyset$ (l'ensemble vide)",
-      "$[2 ; 5]$",
-      "$[0 ; 7]$",
-      "$\\{2 ; 5\\}$",
-    ],
-    expected: ["$\\emptyset$ (l'ensemble vide)"],
-    comparator: "mcq_exact",
-    hint: "Existe-t-il un nombre à la fois inférieur à $2$ et supérieur à $5$ ?",
-    explanation: exp(
-      "L'intersection est vide lorsque les deux ensembles n'ont aucun élément commun.",
-      "Il faudrait un réel vérifiant $x \\le 2$ ET $x \\ge 5$ : c'est impossible.",
-      "Les deux intervalles sont disjoints. Attention : $[2 ; 5]$ serait l'intervalle ENTRE les deux, ce qui est une autre question.",
-      "$[0 ; 2] \\cap [5 ; 7] = \\emptyset$."
-    ),
-    tags: ["premiere", "maths", "logique", "operations", "qcm"],
-  },
-  {
-    kind: "fixed",
     id: "premiere_log_ope_fixed_6",
     niveau: "premiere-spe",
     matiere: "maths",
@@ -910,6 +836,64 @@ export const logiqueEnsemblesBank: TutorBankItemV4[] = [
           inter
             ? `$[${a} ; ${b}] \\cap [${c} ; ${d}] = [${c} ; ${b}]$.`
             : `$[${a} ; ${b}] \\cup [${c} ; ${d}] = [${a} ; ${d}]$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_log_ope_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "logique_ensembles",
+    microId: "log_operations",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "L'intersection garde ce qui est dans LES DEUX ; la réunion garde ce qui est dans AU MOINS UN.",
+    tags: ["premiere", "maths", "logique", "operations", "template"],
+    generate: () => {
+      const a = randomInt(-4, 3);
+      const b = a + randomInt(2, 5);
+      const c = randomInt(a, b + 2);
+      const d = c + randomInt(2, 5);
+      const inter = pickOne([true, false]);
+      const debInter = Math.max(a, c);
+      const finInter = Math.min(b, d);
+      const vide = debInter > finInter;
+      const correct = inter
+        ? vide
+          ? "$\\varnothing$"
+          : `$[${debInter} ; ${finInter}]$`
+        : vide
+          ? `$[${a} ; ${b}] \\cup [${c} ; ${d}]$`
+          : `$[${Math.min(a, c)} ; ${Math.max(b, d)}]$`;
+      const autre = inter
+        ? `$[${Math.min(a, c)} ; ${Math.max(b, d)}]$`
+        : vide
+          ? "$\\varnothing$"
+          : `$[${debInter} ; ${finInter}]$`;
+      return {
+        text: `Que vaut $[${a} ; ${b}] ${inter ? "\\cap" : "\\cup"} [${c} ; ${d}]$ ?`,
+        format: "qcm",
+        choices: [correct, autre, `$[${a} ; ${d}]$`, `$[${c} ; ${b}]$`].filter(
+          (v, i, t) => t.indexOf(v) === i,
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          inter
+            ? "L'INTERSECTION rassemble les réels qui appartiennent aux DEUX intervalles à la fois."
+            : "La RÉUNION rassemble les réels qui appartiennent à AU MOINS UN des deux intervalles.",
+          "On place les quatre bornes sur une droite graduée et on regarde la zone commune, ou la zone couverte.",
+          inter
+            ? vide
+              ? `Les deux intervalles ne se chevauchent pas : aucune valeur n'est dans les deux.`
+              : `La zone commune va de la PLUS GRANDE borne de gauche, $${debInter}$, à la PLUS PETITE borne de droite, $${finInter}$.`
+            : vide
+              ? `Les deux intervalles sont disjoints : la réunion ne peut pas s'écrire comme un seul intervalle, on garde les deux morceaux.`
+              : `Les deux intervalles se chevauchent : la réunion va de la plus petite borne, $${Math.min(a, c)}$, à la plus grande, $${Math.max(b, d)}$.`,
+          `${correct}.`
         ),
       };
     },
