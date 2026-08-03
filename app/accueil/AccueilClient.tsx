@@ -676,7 +676,7 @@ function Kicker({
   return (
     <p
       id={id}
-      className="scroll-mt-24 text-[11px] font-black uppercase tracking-[0.22em]"
+      className="scroll-mt-24 break-words text-[11px] font-black uppercase tracking-[0.22em]"
       style={{ color: ACCENTS[accent] }}
     >
       {children}
@@ -1142,7 +1142,15 @@ export default function AccueilPage({
    */
   function ordre(id: string): React.CSSProperties {
     const r = rang(id);
-    return r === null ? { display: "none" } : { order: r };
+    // ⚠️ `minWidth: 0` est OBLIGATOIRE, pas une précaution. Un enfant de
+    // conteneur flex vaut `min-width: auto` par défaut : il refuse de rétrécir
+    // sous la largeur de son contenu. Depuis que <main> est passé en flex pour
+    // porter les rangs, le moindre bloc large — la bande des 8 tuiles, un
+    // titre à fort interlettrage — poussait toute la page en débordement
+    // horizontal sur mobile (375 px de fenêtre, 731 px de page).
+    return r === null
+      ? { display: "none" }
+      : { order: r, minWidth: 0 };
   }
 
   // L'avis d'élève en manchette (demande de Frédéric, 19/07) : rotation
@@ -1228,11 +1236,11 @@ export default function AccueilPage({
 
   return (
     <main
-      className="flex min-h-screen flex-col px-4 pb-16 pt-6 sm:px-6 lg:px-8"
+      className="flex min-h-screen flex-col overflow-x-hidden px-4 pb-16 pt-6 sm:px-6 lg:px-8"
       style={{ backgroundColor: PAPER, color: INK }}
     >
       {/* ══ LA MANCHETTE ═════════════════════════════════════════════════════ */}
-      <header className="mx-auto max-w-6xl">
+      <header className="mx-auto w-full min-w-0 max-w-6xl">
         {/* L'oreille : date · n° · lieu · prix — et la connexion à droite. */}
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#1d1c16]/25 pb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#1d1c16]/70">
           <p>
@@ -1666,9 +1674,9 @@ export default function AccueilPage({
             de maquettiste : chaque colonne est une colonne flex dont le
             dernier bloc s'ancre au pied (mt-auto) — les trois finissent
             toujours sur la même ligne, le mou respire À L'INTÉRIEUR. */}
-        <div className="grid gap-8 lg:grid-cols-12">
+        <div className="grid min-w-0 gap-8 lg:grid-cols-12">
           {/* L'article à la Une (RÉFLÉCHIR : ce qui se passe autour de toi). */}
-          <article className="lg:col-span-7 lg:flex lg:flex-col">
+          <article className="min-w-0 lg:col-span-7 lg:flex lg:flex-col">
             {/* Le carrousel façon MSN, piloté par la régie (/admin/journal) :
                 chaque slide porte son propre surtitre. */}
             <UneCarousel slides={slides} cycle={cycleChoisi} colonne={colonne} />
