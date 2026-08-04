@@ -262,12 +262,15 @@ const CYCLES: { id: string; emoji: string; label: string; classe: string; classe
   { id: "lycee", emoji: "🎓", label: "Lycée", classe: "seconde", classes: ["seconde", "premiere-spe", "terminale-spe"], accent: "flamboyant" },
 ];
 
-const PORTES_ADULTES: { emoji: string; label: string; href: string; accent: Accent }[] = [
-  { emoji: "👪", label: "Parent", href: "/parents", accent: "canne" },
-  { emoji: "🍎", label: "Professeur", href: "/enseignants", accent: "flamboyant" },
-  { emoji: "🏫", label: "Établissement", href: "/espace-ecoles", accent: "boucan" },
-  { emoji: "🏭", label: "Entreprise", href: "/entreprises", accent: "safran" },
+const PORTES_ADULTES: { emoji: string; label: string; colonne: Colonne; memo: string; accent: Accent }[] = [
+  { emoji: "👪", label: "Parent", colonne: "parent", memo: "parent", accent: "canne" },
+  { emoji: "🍎", label: "Professeur", colonne: "prof", memo: "enseignant", accent: "flamboyant" },
+  { emoji: "🏫", label: "Établissement", colonne: "principal", memo: "etablissement", accent: "boucan" },
+  { emoji: "🏭", label: "Entreprise", colonne: "entreprise", memo: "entreprise", accent: "safran" },
 ];
+
+/** L'audience choisie survit à la visite — même clé que useAudience. */
+const CLE_AUDIENCE = "eleveai-audience";
 
 /**
  * La 3ᵉ tuile de la bande adulte : sa destination change selon le profil.
@@ -1112,6 +1115,33 @@ export default function AccueilPage({
     }
   }, []);
 
+  // L'audience choisie à la main dans « Qui est-ce ? ». Lue après montage,
+  // comme le cycle, pour ne pas casser l'hydratation.
+  const [audienceChoisie, setAudienceChoisie] = useState<Colonne | null>(null);
+  useEffect(() => {
+    try {
+      const v = localStorage.getItem(CLE_AUDIENCE);
+      const p = PORTES_ADULTES.find((x) => x.memo === v);
+      if (p) setAudienceChoisie(p.colonne);
+    } catch {
+      /* localStorage indisponible */
+    }
+  }, []);
+
+  function choisirAudience(p: (typeof PORTES_ADULTES)[number]) {
+    // On RESTE sur la page : le sélecteur sert à la ranger, pas à la quitter.
+    // Le lien vers l'espace dédié est la 3ᵉ tuile de la bande adulte, qui
+    // apparaît juste en dessous une fois le profil connu.
+    setAudienceChoisie(p.colonne);
+    setCycleChoisi(null);
+    try {
+      localStorage.setItem(CLE_AUDIENCE, p.memo);
+      localStorage.removeItem(CLE_CYCLE);
+    } catch {
+      /* ignore */
+    }
+  }
+
   function choisirCycle(id: string) {
     const c = CYCLES.find((x) => x.id === id);
     if (!c) return;
@@ -1138,7 +1168,7 @@ export default function AccueilPage({
   // lu et ordre vu divergent. Acceptable ici (les sections sont indépendantes
   // et chacune porte son titre), à revoir si on masque plus d'une section.
   const { space } = useAudience();
-  const colonne: Colonne =
+  const colonneDeLaRoute: Colonne =
     space === "parent"
       ? "parent"
       : space === "enseignant"
@@ -1146,6 +1176,8 @@ export default function AccueilPage({
         : space === "etablissement"
           ? "principal"
           : "eleve";
+  // Le clic explicite dans « Qui est-ce ? » prime sur l'espace déduit.
+  const colonne: Colonne = audienceChoisie ?? colonneDeLaRoute;
 
   const correction = cycleChoisi ? (CORRECTION[cycleChoisi] ?? {}) : {};
 
@@ -1400,20 +1432,24 @@ export default function AccueilPage({
             bandeau de tableau de bord, on ne lui demande pas qui il est. */}
         {!isStaff && (
           <section className="border-b border-[#1d1c16]/25 py-4">
-            {cycleChoisi ? (
-              // Choix fait : la bande se replie en pastille et ne revient plus.
+            {cycleChoisi || audienceChoisie ? (
+              // Choix fait — cycle OU profil adulte : la bande se replie en
+              // pastille. Un adulte doit pouvoir changer d'avis comme un élève.
               <div className="flex flex-wrap items-center justify-center gap-2 text-sm">
                 <span className="font-serif font-black">
-                  {CYCLES.find((c) => c.id === cycleChoisi)?.emoji}{" "}
-                  {CYCLES.find((c) => c.id === cycleChoisi)?.label}
+                  {cycleChoisi
+                    ? `${CYCLES.find((c) => c.id === cycleChoisi)?.emoji} ${CYCLES.find((c) => c.id === cycleChoisi)?.label}`
+                    : `${PORTES_ADULTES.find((p) => p.colonne === audienceChoisie)?.emoji} ${PORTES_ADULTES.find((p) => p.colonne === audienceChoisie)?.label}`}
                 </span>
                 <span className="text-[#1d1c16]/50">·</span>
                 <button
                   type="button"
                   onClick={() => {
                     setCycleChoisi(null);
+                    setAudienceChoisie(null);
                     try {
                       localStorage.removeItem(CLE_CYCLE);
+                      localStorage.removeItem(CLE_AUDIENCE);
                     } catch {
                       /* ignore */
                     }
@@ -1453,9 +1489,10 @@ export default function AccueilPage({
                     </button>
                   ))}
                   {PORTES_ADULTES.map((p) => (
-                    <Link
-                      key={p.href}
-                      href={p.href}
+                    <button
+                      key={p.memo}
+                      type="button"
+                      onClick={() => choisirAudience(p)}
                       className="min-w-[82px] flex-1 border-2 border-[#1d1c16] bg-[#1d1c16]/[0.04] px-1 py-2.5 text-center transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
                     >
                       <span className="block text-2xl leading-none" aria-hidden>
@@ -1469,7 +1506,7 @@ export default function AccueilPage({
                         style={{ backgroundColor: ACCENTS[p.accent] }}
                         aria-hidden
                       />
-                    </Link>
+                    </button>
                   ))}
                 </div>
               </>
