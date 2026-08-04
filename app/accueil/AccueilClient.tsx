@@ -318,29 +318,75 @@ type Colonne = "eleve" | "prof" | "principal" | "parent" | "entreprise";
 // section oubliée ne resterait pas à sa place, elle remonterait en tête. Seuls
 // le cadre (manchette, sélecteur, édition personnalisée) reste à 0, et c'est
 // voulu — il ouvre la page.
+// ⚠️ `commence` ET `avis` SONT ENTRÉS DANS LE VECTEUR LE 04/08. Ils vivaient
+// dans la manchette, donc HORS matrice : quel que soit le profil, un lecteur se
+// prenait d'abord les 326 px de la rampe d'élève (« Commence ici », douze
+// classes) puis un avis d'élève, avant sa première ligne à lui. La matrice
+// rangeait consciencieusement quinze sections derrière deux qui ne bougeaient
+// jamais. C'est le bout qui manquait à la correction du 03/08 : le cadre, ce
+// sont la manchette, le sélecteur et l'édition personnalisée — pas le premier
+// geste de l'élève, qui est du CONTENU et se range comme le reste.
 const RANGS: Record<Colonne, Record<string, number>> = {
   // ⚠️ `evals` est VOLONTAIREMENT absent de la colonne élève : il a déjà le
   // bloc complet des évaluations dans la colonne 1 de la Une. Une section
   // absente d'une colonne est masquée pour ce profil (cf. `rang()`).
-  eleve: { une: 1, parti: 2, mosaique: 3, envrai: 4, maths: 5, apprendre: 6, cahiers: 7, agenda: 8, catalogue: 9, courrier: 10, honneur: 11, grands: 12, abonnement: 13, ours: 14 },
-  prof: { evals: 2, apprendre: 1, parti: 3, une: 4, maths: 5, catalogue: 6, envrai: 7, mosaique: 8, cahiers: 9, agenda: 10, courrier: 11, honneur: 12, grands: 13, abonnement: 14, ours: 15 },
+  eleve: { commence: 1, avis: 2, une: 3, parti: 4, mosaique: 5, envrai: 6, maths: 7, apprendre: 8, cahiers: 9, agenda: 10, catalogue: 11, courrier: 12, honneur: 13, grands: 14, abonnement: 15, ours: 16 },
+  prof: { apprendre: 1, evals: 2, parti: 3, avis: 4, commence: 5, une: 6, maths: 7, catalogue: 8, envrai: 9, mosaique: 10, cahiers: 11, agenda: 12, courrier: 13, honneur: 14, grands: 15, abonnement: 16, ours: 17 },
   // LE PRINCIPAL (Frédéric, 03/08 : « ce qui va l'intéresser c'est la
   // préparation aux évaluations nationales, il se fout des vidéos »). Il est
   // jugé sur ces épreuves, et elles sont dans cinq semaines : elles ouvrent sa
-  // page. « En vrai » — les vidéos — descend en 9.
-  principal: { evals: 1, parti: 2, grands: 3, une: 4, courrier: 5, catalogue: 6, apprendre: 7, maths: 8, envrai: 9, mosaique: 10, cahiers: 11, agenda: 12, honneur: 13, abonnement: 14, ours: 15 },
-  parent: { evals: 3, parti: 1, courrier: 2, apprendre: 4, une: 5, envrai: 6, mosaique: 7, maths: 8, cahiers: 9, catalogue: 10, agenda: 11, honneur: 12, grands: 13, abonnement: 14, ours: 15 },
+  // page. « En vrai » — les vidéos — descend en 11.
+  principal: { evals: 1, parti: 2, avis: 3, grands: 4, une: 5, courrier: 6, catalogue: 7, apprendre: 8, commence: 9, maths: 10, envrai: 11, mosaique: 12, cahiers: 13, agenda: 14, honneur: 15, abonnement: 16, ours: 17 },
+  parent: { parti: 1, courrier: 2, evals: 3, apprendre: 4, commence: 5, avis: 6, une: 7, envrai: 8, mosaique: 9, maths: 10, cahiers: 11, catalogue: 12, agenda: 13, honneur: 14, grands: 15, abonnement: 16, ours: 17 },
   // L'entreprise ne vient pas apprendre : elle vient comprendre pourquoi
   // soutenir, vérifier l'ancrage local, et savoir comment elle sera citée.
-  entreprise: { parti: 1, grands: 2, envrai: 3, honneur: 4, courrier: 5, une: 6, maths: 7, mosaique: 8, catalogue: 9, apprendre: 10, cahiers: 11, agenda: 12, abonnement: 13, ours: 14 },
+  entreprise: { parti: 1, grands: 2, envrai: 3, honneur: 4, courrier: 5, une: 6, avis: 7, maths: 8, mosaique: 9, catalogue: 10, apprendre: 11, commence: 12, cahiers: 13, agenda: 14, abonnement: 15, ours: 16 },
 };
 
+// LA RÈGLE QUI TIENT `avis` DANS LES CINQ COLONNES : le chapeau et le courrier
+// ne se touchent jamais. L'un annonce une phrase d'élève, l'autre les donne
+// toutes — collés, le premier ne fait que retarder le second. D'où l'avis haut
+// là où le courrier est bas (élève 2/12, prof 4/13, principal 3/6), et l'avis
+// BAS là où le courrier ouvre la page (parent : courrier 2, avis 6).
+//
+// Et `commence` suit le rôle, pas la page : premier pour l'élève, qui vient
+// s'entraîner ; cinquième pour le prof et le parent, qui veulent d'abord savoir
+// à quoi ils ont affaire ; neuvième pour le principal et douzième pour
+// l'entreprise, qui ne s'entraîneront jamais.
+
+// ─── HUIT TUILES, CINQ COLONNES ───────────────────────────────────────────────
+// Frédéric, 04/08 : « le sélecteur promet huit profils, le modèle n'en distingue
+// que cinq ». C'est vrai de la seule matrice des rôles, et c'est le rôle de la
+// CORRECTION de fermer l'écart — pas celui de trois colonnes de plus. Ajouter
+// `cp-ce2`, `cm1-cm2`, `6e-3e` et `lycee` comme colonnes pleines ferait passer
+// le modèle de 9 lignes à 8 × 17 nombres, c'est-à-dire exactement la matrice à
+// plat qu'il avait écartée le 02/08.
+//
+// Huit profils sortent donc de deux coordonnées : 4 (élève × cycle) + 4 portes
+// adultes. Ce qui manquait, c'est que les quatre cycles bougeaient trois
+// sections chacun sur seize — un CP et un lycéen voyaient presque la même page.
+// Chaque cycle déplace maintenant assez de rubriques pour qu'on reconnaisse la
+// sienne d'un coup d'œil, sans sortir de la forme « le rôle dit quoi montrer
+// d'abord, l'âge corrige ».
+//
 /** `"x"` = masqué. Le reste décale : négatif remonte, positif descend. */
 const CORRECTION: Record<string, Record<string, number | "x">> = {
-  "cp-ce2": { une: 2, maths: "x", cahiers: -4 },
-  "cm1-cm2": { maths: 3, apprendre: -1, cahiers: -2 },
-  "6e-3e": { apprendre: -2, cahiers: 1, catalogue: -1 },
-  lycee: { maths: -3, cahiers: 2, catalogue: -2 },
+  // CP–CE2 : personne ne lit ici — on regarde. Les images (mosaïque) et les
+  // vidéos passent devant l'article, les cahiers à imprimer remontent (c'est ce
+  // que cherche l'adulte qui tient le téléphone), et le catalogue de 21 entrées
+  // descend. « Un peu de maths » reste le seul ✕ assumé de toute la matrice :
+  // la rubrique est écrite pour le collège.
+  "cp-ce2": { mosaique: -2, envrai: -2, une: 2, cahiers: -4, catalogue: 3, maths: "x" },
+  // CM1–CM2 : l'entrée dans le coach et le guide de survie. Les cahiers et les
+  // pages matières remontent, « un peu de maths » attend encore un peu.
+  "cm1-cm2": { cahiers: -3, apprendre: -1, envrai: -1, maths: 3 },
+  // 6ᵉ–3ᵉ : le cœur de cible, celui pour qui la colonne élève est écrite. On y
+  // touche le moins — les matières remontent d'un cran, les cahiers d'été
+  // cèdent la place au catalogue de l'année.
+  "6e-3e": { apprendre: -2, catalogue: -1, cahiers: 1 },
+  // Lycée : la spécialité d'abord (« un peu de maths » et le catalogue
+  // remontent), les images et les cahiers de vacances passent derrière.
+  lycee: { maths: -3, catalogue: -3, mosaique: 4, cahiers: 3 },
 };
 
 // ─── Le catalogue COMPLET — « les pages du journal » ──────────────────────────
@@ -1179,24 +1225,51 @@ export default function AccueilPage({
   // Le clic explicite dans « Qui est-ce ? » prime sur l'espace déduit.
   const colonne: Colonne = audienceChoisie ?? colonneDeLaRoute;
 
-  const correction = cycleChoisi ? (CORRECTION[cycleChoisi] ?? {}) : {};
-
   /**
-   * Le rang d'une section pour le profil courant. `null` = masquée.
+   * LE RANG FINAL DE CHAQUE SECTION : on corrige, puis on RENUMÉROTE.
    *
-   * Une section ABSENTE de la colonne est masquée elle aussi. C'est une
-   * exception à la règle « chaque colonne est une permutation », et elle ne
-   * vaut que quand le lecteur ne perd rien : la bande des évaluations
-   * nationales n'existe que pour les adultes, parce qu'un élève a déjà le bloc
-   * complet dans la Une — on ne lui cache pas un argument, on évite de lui
-   * montrer deux fois la même chose.
+   * ⚠️ Sans cette renumérotation, une correction produit fatalement des ex
+   * æquo : la colonne occupe déjà 1…n sans trou, donc remonter une rubrique de
+   * trois crans la pose sur une autre. `order` tranchait alors par l'ordre du
+   * DOM — c'est-à-dire par le hasard de l'écriture du JSX, pas par une
+   * décision. Les corrections restaient donc timides pour éviter les collisions,
+   * et c'est bien ce qui empêchait les quatre cycles de vraiment se distinguer.
+   *
+   * On trie sur (rang corrigé, rang de la colonne) et on réattribue 1…n : à
+   * égalité, c'est le rôle qui tranche, et le résultat est toujours une
+   * permutation propre. Écrire `cahiers: -4` veut dire « très haut », sans avoir
+   * à vérifier quelle case est libre.
+   *
+   * Une section ABSENTE de la colonne est masquée. C'est une exception à la
+   * règle « chaque colonne est une permutation », et elle ne vaut que quand le
+   * lecteur ne perd rien : la bande des évaluations nationales n'existe que pour
+   * les adultes, parce qu'un élève a déjà le bloc complet dans la Une — on ne
+   * lui cache pas un argument, on évite de lui montrer deux fois la même chose.
    */
+  const rangs = useMemo(() => {
+    const base = RANGS[colonne];
+    const correction = cycleChoisi ? (CORRECTION[cycleChoisi] ?? {}) : {};
+    const final: Record<string, number> = {};
+    Object.keys(base)
+      .filter((id) => correction[id] !== "x")
+      .map((id) => {
+        const c = correction[id];
+        return {
+          id,
+          corrige: base[id] + (typeof c === "number" ? c : 0),
+          base: base[id],
+        };
+      })
+      .sort((a, b) => a.corrige - b.corrige || a.base - b.base)
+      .forEach((s, i) => {
+        final[s.id] = i + 1;
+      });
+    return final;
+  }, [colonne, cycleChoisi]);
+
+  /** Le rang d'une section pour le profil courant. `null` = masquée. */
   function rang(id: string): number | null {
-    const c = correction[id];
-    if (c === "x") return null;
-    const base = RANGS[colonne][id];
-    if (base === undefined) return null;
-    return base + (typeof c === "number" ? c : 0);
+    return rangs[id] ?? null;
   }
 
   /**
@@ -1513,133 +1586,16 @@ export default function AccueilPage({
             )}
           </section>
         )}
-        {/* ══ LE COACH — LE PREMIER GESTE ═══════════════════════════════════
-            Décision produit (24/07, Frédéric) : le COACH est la destination
-            (il entraîne), PARCOURS + DÉFIS sont l'épreuve (ils testent), et le
-            journal / simulateurs ne sont que la PORTE D'ENTRÉE. On remet donc
-            l'entraînement en tête d'affiche — trois verbes TOUJOURS visibles,
-            la classe affine la destination — au lieu de la bande repliée qui
-            cachait le coach derrière un clic. */}
-        <div className="border-b border-[#1d1c16]/25 py-4">
-          <div className="mx-auto max-w-4xl border-2 border-cyan-800 bg-cyan-800/[0.05] p-4 sm:p-5">
-            <p className="text-center text-[11px] font-black uppercase tracking-[0.22em] text-cyan-800">
-              ✏️ Commence ici · Le coach t&apos;entraîne
-            </p>
-            <h2 className="mt-1 text-center font-serif text-2xl font-black leading-tight sm:text-[1.75rem]">
-              Entraîne-toi maintenant — tout est corrigé
-            </h2>
-            {/* LE PARAGRAPHE DE DOCTRINE EST PARTI (02/08). Il expliquait en
-                48 px que « le coach t'explique et tu t'entraînes ; le parcours
-                et le défi te testent » — soit exactement ce que disent les
-                trois boutons juste en dessous, en plus long. Sur un premier
-                écran de 924 px avant le premier article, et avec le constat de
-                Frédéric que les gens ne lisent pas, c'était le morceau le plus
-                cher au mot. Les boutons restent, la leçon s'en va. */}
-
-            {/* Les 3 verbes de l'objectif — toujours visibles, un clic chacun :
-                s'entraîner (coach) · se tester (parcours) · le rituel du jour
-                (mini-slide : défi, dictée, anglais, espagnol, calcul). */}
-            <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2">
-              <Link
-                href="/explorer#coach"
-                className="inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-5 py-2.5 text-sm font-black text-[#f0fafc] shadow-sm transition hover:bg-[#1d1c16]"
-              >
-                ✏️ Entraîne-toi <span className="font-semibold opacity-80">· le Coach</span>
-              </Link>
-              <Link
-                href="/explorer#parcours"
-                className="inline-flex items-center gap-2 rounded-sm border-2 border-cyan-800 px-5 py-2.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
-              >
-                🧭 Teste-toi <span className="font-semibold opacity-80">· Parcours</span>
-              </Link>
-              <RituelDuJourChip />
-            </div>
-
-            {/* La classe affine la destination du coach (accordéon conservé). */}
-            <div className="mt-4 border-t border-[#1d1c16]/25 pt-3.5">
-              <div className="flex flex-wrap items-center justify-center gap-1.5">
-                <span className="mr-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/70">
-                  🎓 Ta classe :
-                </span>
-                {classesAffichees.map((c) => (
-              <button
-                key={c.slug}
-                type="button"
-                onClick={() => setClasseDepliee(c.slug)}
-                aria-pressed={classeActive === c.slug}
-                className={`rounded-sm border px-2.5 py-1 text-xs font-black transition ${
-                  classeActive === c.slug
-                    ? "border-[#1d1c16] bg-[#1d1c16] text-[#d8e9ee]"
-                    : "border-[#1d1c16]/25 text-[#1d1c16]/70 hover:border-[#1d1c16] hover:bg-[#1d1c16] hover:text-[#d8e9ee]"
-                }`}
-              >
-                {c.label}
-              </button>
-            ))}
-          </div>
-          {classeActive && (
-            <div className="mx-auto mt-2 max-w-2xl space-y-1.5 text-sm font-black">
-              {/* S'entraîner : les coachs de la classe. */}
-              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-                <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
-                  ✏️ S&apos;entraîner :
-                </span>
-                <Link href={`/coach-ia/maths?classe=${classeActive}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                  🧮 Maths
-                </Link>
-                {FRANCAIS_LEVELS.has(classeActive) && (
-                  <Link href={`/coach-ia/francais?classe=${classeActive}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                    📖 Français
-                  </Link>
-                )}
-                <Link href="/coach-ia/english-maths" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                  🇬🇧 Anglais
-                </Link>
-                <Link href="/coach-ia/espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                  🇪🇸 Espagnol
-                </Link>
-                <Link href="/coach-ia/ia" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                  🤖 IA
-                </Link>
-              </div>
-              {/* S evaluer : LE parcours de chaque matiere (rappel de
-                  Frédéric : il y en a un par matière, pas un seul). */}
-              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-                <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
-                  🧭 S&apos;&eacute;valuer :
-                </span>
-                <Link href="/parcours" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                  🧮 Maths
-                </Link>
-                {FRANCAIS_LEVELS.has(classeActive) && (
-                  <Link href="/parcours-francais" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                    📖 Français
-                  </Link>
-                )}
-                <Link href="/parcours-english-maths" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                  🇬🇧 Anglais
-                </Link>
-                <Link href="/parcours-espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                  🇪🇸 Espagnol
-                </Link>
-                <Link href="/parcours-ia" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
-                  🤖 IA
-                </Link>
-                <Link href={`/programme/${classeActive}`} className="text-[#1d1c16]/70 underline underline-offset-2 hover:no-underline">
-                  📋 Le programme
-                </Link>
-              </div>
-            </div>
-          )}
-            </div>
-          </div>
-        </div>
-
         {/* Le chemin de fer + la devise SUR LA MÊME BANDE (01/08). Ils avaient
             chacun la leur : deux filets de plus sur le premier écran, et trois
             accroches empilées sous le titre (le surtitre du journal, « Ici,
             personne n'apprend à ta place », puis la devise). Les mots restent,
-            la bande de trop s'en va. */}
+            la bande de trop s'en va.
+            REMONTÉ AU-DESSUS DE « COMMENCE ICI » (04/08) : il ferme la
+            manchette. Le sommaire d'un journal est du CADRE — il annonce les
+            rubriques, il n'en est pas une —, donc il reste en tête pour tout le
+            monde pendant que les deux blocs qui le suivaient entrent dans la
+            matrice. */}
         <div className="border-b border-[#1d1c16]/25 py-2">
         <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-[11px] font-black uppercase tracking-[0.16em]">
           <a href="#la-une" className="hover:text-cyan-800">La Une</a>
@@ -1669,30 +1625,170 @@ export default function AccueilPage({
           Comprendre. Apprendre. S&apos;amuser.
         </p>
         </div>
-
-        {/* Le courrier en manchette (demande de Frédéric, 19/07) : un avis
-            d'élève sous la rampe des classes — verbatim, fautes comprises
-            (authenticité), prénom + niveau seul (RGPD). Rotation douce
-            toutes les 8 s sur les mêmes avis que le courrier des lecteurs ;
-            le clic descend au courrier complet. */}
-        <a
-          href="#courrier"
-          className="block border-b border-[#1d1c16]/25 py-2 text-center transition hover:bg-[#1d1c16]/5"
-        >
-          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-            💬 Les avis des élèves
-          </p>
-          <p className="mx-auto mt-0.5 max-w-3xl px-2 font-serif text-sm font-medium italic leading-6 text-[#1d1c16]/70">
-            <span className="not-italic tracking-widest text-amber-600" aria-label={`Note ${avisManchette.note} sur 5`}>
-              {"★".repeat(avisManchette.note)}
-            </span>{" "}
-            « {avisManchette.quote} »{" "}
-            <span className="text-xs font-black not-italic uppercase tracking-[0.14em] text-[#1d1c16]/55">
-              — {avisManchette.prenom} · {avisManchette.detail}
-            </span>
-          </p>
-        </a>
       </header>
+
+      {/* ══ COMMENCE ICI — LE PREMIER GESTE ══════════════════════════════════
+          Décision produit (24/07, Frédéric) : le COACH est la destination
+          (il entraîne), PARCOURS + DÉFIS sont l'épreuve (ils testent), et le
+          journal / simulateurs ne sont que la PORTE D'ENTRÉE. On remet donc
+          l'entraînement en tête d'affiche — trois verbes TOUJOURS visibles,
+          la classe affine la destination — au lieu de la bande repliée qui
+          cachait le coach derrière un clic.
+
+          SORTI DE LA MANCHETTE (04/08) — c'est le bout qui manquait à la
+          correction du 03/08. Tant qu'il vivait dans le <header>, il passait
+          avant tout le monde : un principal venu pour les évaluations
+          nationales, un chef d'entreprise venu voir qui soutenir, se prenaient
+          d'abord 326 px de rampe d'élève. Il entre donc dans la matrice comme
+          les autres — premier pour l'élève, neuvième pour le principal.
+          ⚠️ `w-full min-w-0` : fille d'un <main> en flex (cf. `ordre`), sans
+          quoi elle refuse de rétrécir et fait déborder la page sur mobile. */}
+      <section
+        style={ordre("commence")}
+        className="mx-auto mt-6 w-full min-w-0 max-w-6xl"
+      >
+        <div className="mx-auto max-w-4xl border-2 border-cyan-800 bg-cyan-800/[0.05] p-4 sm:p-5">
+          <p className="text-center text-[11px] font-black uppercase tracking-[0.22em] text-cyan-800">
+            ✏️ Commence ici · Le coach t&apos;entraîne
+          </p>
+          <h2 className="mt-1 text-center font-serif text-2xl font-black leading-tight sm:text-[1.75rem]">
+            Entraîne-toi maintenant — tout est corrigé
+          </h2>
+          {/* LE PARAGRAPHE DE DOCTRINE EST PARTI (02/08). Il expliquait en
+              48 px que « le coach t'explique et tu t'entraînes ; le parcours
+              et le défi te testent » — soit exactement ce que disent les
+              trois boutons juste en dessous, en plus long. Sur un premier
+              écran de 924 px avant le premier article, et avec le constat de
+              Frédéric que les gens ne lisent pas, c'était le morceau le plus
+              cher au mot. Les boutons restent, la leçon s'en va. */}
+
+          {/* Les 3 verbes de l'objectif — toujours visibles, un clic chacun :
+              s'entraîner (coach) · se tester (parcours) · le rituel du jour
+              (mini-slide : défi, dictée, anglais, espagnol, calcul). */}
+          <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2">
+            <Link
+              href="/explorer#coach"
+              className="inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-5 py-2.5 text-sm font-black text-[#f0fafc] shadow-sm transition hover:bg-[#1d1c16]"
+            >
+              ✏️ Entraîne-toi <span className="font-semibold opacity-80">· le Coach</span>
+            </Link>
+            <Link
+              href="/explorer#parcours"
+              className="inline-flex items-center gap-2 rounded-sm border-2 border-cyan-800 px-5 py-2.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
+            >
+              🧭 Teste-toi <span className="font-semibold opacity-80">· Parcours</span>
+            </Link>
+            <RituelDuJourChip />
+          </div>
+
+          {/* La classe affine la destination du coach (accordéon conservé). */}
+          <div className="mt-4 border-t border-[#1d1c16]/25 pt-3.5">
+            <div className="flex flex-wrap items-center justify-center gap-1.5">
+              <span className="mr-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/70">
+                🎓 Ta classe :
+              </span>
+              {classesAffichees.map((c) => (
+                <button
+                  key={c.slug}
+                  type="button"
+                  onClick={() => setClasseDepliee(c.slug)}
+                  aria-pressed={classeActive === c.slug}
+                  className={`rounded-sm border px-2.5 py-1 text-xs font-black transition ${
+                    classeActive === c.slug
+                      ? "border-[#1d1c16] bg-[#1d1c16] text-[#d8e9ee]"
+                      : "border-[#1d1c16]/25 text-[#1d1c16]/70 hover:border-[#1d1c16] hover:bg-[#1d1c16] hover:text-[#d8e9ee]"
+                  }`}
+                >
+                  {c.label}
+                </button>
+              ))}
+            </div>
+            {classeActive && (
+              <div className="mx-auto mt-2 max-w-2xl space-y-1.5 text-sm font-black">
+                {/* S'entraîner : les coachs de la classe. */}
+                <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+                  <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
+                    ✏️ S&apos;entraîner :
+                  </span>
+                  <Link href={`/coach-ia/maths?classe=${classeActive}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                    🧮 Maths
+                  </Link>
+                  {FRANCAIS_LEVELS.has(classeActive) && (
+                    <Link href={`/coach-ia/francais?classe=${classeActive}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                      📖 Français
+                    </Link>
+                  )}
+                  <Link href="/coach-ia/english-maths" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                    🇬🇧 Anglais
+                  </Link>
+                  <Link href="/coach-ia/espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                    🇪🇸 Espagnol
+                  </Link>
+                  <Link href="/coach-ia/ia" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                    🤖 IA
+                  </Link>
+                </div>
+                {/* S evaluer : LE parcours de chaque matiere (rappel de
+                    Frédéric : il y en a un par matière, pas un seul). */}
+                <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+                  <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
+                    🧭 S&apos;&eacute;valuer :
+                  </span>
+                  <Link href="/parcours" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                    🧮 Maths
+                  </Link>
+                  {FRANCAIS_LEVELS.has(classeActive) && (
+                    <Link href="/parcours-francais" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                      📖 Français
+                    </Link>
+                  )}
+                  <Link href="/parcours-english-maths" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                    🇬🇧 Anglais
+                  </Link>
+                  <Link href="/parcours-espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                    🇪🇸 Espagnol
+                  </Link>
+                  <Link href="/parcours-ia" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                    🤖 IA
+                  </Link>
+                  <Link href={`/programme/${classeActive}`} className="text-[#1d1c16]/70 underline underline-offset-2 hover:no-underline">
+                    📋 Le programme
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ LES AVIS DES ÉLÈVES — le chapeau du courrier ══════════════════════
+          Demande de Frédéric (19/07) : un avis d'élève en manchette — verbatim,
+          fautes comprises (authenticité), prénom + niveau seul (RGPD). Rotation
+          douce toutes les 8 s sur les mêmes avis que le courrier des lecteurs ;
+          le clic descend au courrier complet.
+
+          SORTI DE LA MANCHETTE (04/08), lui aussi. Il garde son filet — un
+          bandeau encadré haut et bas, pour qu'il se lise comme une brève où
+          qu'il tombe — et il ne touche jamais le courrier complet (cf. la règle
+          sous RANGS) : l'un annonce, l'autre développe. */}
+      <a
+        href="#courrier"
+        style={ordre("avis")}
+        className="mx-auto mt-6 block w-full min-w-0 max-w-6xl border-y border-[#1d1c16]/25 py-2 text-center transition hover:bg-[#1d1c16]/5"
+      >
+        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+          💬 Les avis des élèves
+        </p>
+        <p className="mx-auto mt-0.5 max-w-3xl px-2 font-serif text-sm font-medium italic leading-6 text-[#1d1c16]/70">
+          <span className="not-italic tracking-widest text-amber-600" aria-label={`Note ${avisManchette.note} sur 5`}>
+            {"★".repeat(avisManchette.note)}
+          </span>{" "}
+          « {avisManchette.quote} »{" "}
+          <span className="text-xs font-black not-italic uppercase tracking-[0.14em] text-[#1d1c16]/55">
+            — {avisManchette.prenom} · {avisManchette.detail}
+          </span>
+        </p>
+      </a>
 
       {/* ══ LA BANDE DES ADULTES ════════════════════════════════════════════
           Frédéric, 03/08. Un adulte arrivait sur une page conçue pour un
