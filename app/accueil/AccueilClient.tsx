@@ -269,6 +269,19 @@ const PORTES_ADULTES: { emoji: string; label: string; href: string; accent: Acce
   { emoji: "🏭", label: "Entreprise", href: "/entreprises", accent: "safran" },
 ];
 
+/**
+ * La 3ᵉ tuile de la bande adulte : sa destination change selon le profil.
+ * C'est la matrice appliquée au CONTENU et plus seulement à l'ordre — chacun
+ * arrive sur la page écrite pour lui, qui existait déjà mais n'était liée
+ * nulle part sur le premier écran.
+ */
+const ESPACE_ADULTE: Partial<Record<Colonne, { href: string; kicker: string; titre: string }>> = {
+  principal: { href: "/espace-ecoles", kicker: "🏫 Votre établissement", titre: "Financement, RGPD, déploiement" },
+  prof: { href: "/enseignants", kicker: "🍎 Votre classe", titre: "Le suivi élève par élève" },
+  parent: { href: "/parents", kicker: "👪 Votre enfant", titre: "Ça aide ? C'est sûr ? Ça coûte quoi ?" },
+  entreprise: { href: "/entreprises", kicker: "🏭 Votre entreprise", titre: "Soutenir l'aventure" },
+};
+
 /** Le cycle choisi survit à la visite — même clé de nommage que useAudience. */
 const CLE_CYCLE = "eleveai-cycle";
 
@@ -1644,53 +1657,76 @@ export default function AccueilPage({
         </a>
       </header>
 
-      {/* ══ LES ÉVALUATIONS NATIONALES — LA BANDE DES ADULTES ════════════════
-          Frédéric, 03/08 : « ce qui va l'intéresser c'est la préparation aux
-          évaluations nationales, il se fout des vidéos ». Un principal est jugé
-          sur ces épreuves, et elles tombent le 7 septembre.
+      {/* ══ LA BANDE DES ADULTES ════════════════════════════════════════════
+          Frédéric, 03/08. Un adulte arrivait sur une page conçue pour un
+          enfant, sans une seule porte à lui sur le premier écran — alors que
+          /espace-ecoles répond déjà en 405 lignes au financement, au RGPD et
+          à la souveraineté des données, sans être liée nulle part en haut.
 
-          Le bloc complet existe déjà — compte à rebours, les quatre épreuves,
-          le hub — mais dans la colonne 1 de la Une, où un adulte ne le verra
-          jamais. On ne le DÉPLACE pas : il y a été mis exprès le 01/08 pour
-          combler le trou laissé par « À lire aussi », et l'en sortir rouvrirait
-          les 400 px de vide chassés deux fois.
+          Trois tuiles, une ligne, même grammaire que « Qui est-ce ? » : rien à
+          lire, et une hauteur qui ne repousse pas la Une comme l'avaient fait
+          les 326 px de « Commence ici ».
 
-          Donc une bande courte, et RÉSERVÉE AUX ADULTES (`evals` est absent de
-          la colonne élève). Personne ne voit deux fois la même chose : l'élève
-          a le bloc complet dans la Une, l'adulte a la bande en tête de page.
+          RÉSERVÉE AUX ADULTES (`evals` est absent de la colonne élève) : un
+          élève a déjà le bloc complet des évaluations dans la Une, donc
+          personne ne voit deux fois la même chose.
 
-          ⚠️ `w-full min-w-0` : la section est fille d'un <main> en flex, donc
-          `min-width: auto` par défaut — sans ça elle refuse de rétrécir et
-          repousse la page en débordement sur mobile (régression du 02/08). */}
+          ⚠️ La 3ᵉ tuile CHANGE DE DESTINATION selon le profil — c'est la
+          matrice appliquée au contenu et plus seulement à l'ordre.
+          ⚠️ `w-full min-w-0` : fille d'un <main> en flex, sans quoi elle
+          refuse de rétrécir et fait déborder la page sur mobile. */}
       <section
         style={ordre("evals")}
-        className="mx-auto mt-6 w-full min-w-0 max-w-6xl border-2 border-[#1d1c16] p-4 sm:p-5"
+        className="mx-auto mt-6 grid w-full min-w-0 max-w-6xl gap-2 sm:grid-cols-3"
       >
-        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-800">
-          🎓 La rentrée · Évaluations nationales de 6ᵉ et de 4ᵉ
-        </p>
-        <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-3">
-          {joursAvantEvalNationale() > 0 && (
-            <p className="font-serif text-4xl font-black leading-none tracking-tight text-cyan-800">
-              J−{joursAvantEvalNationale()}
-            </p>
-          )}
-          <div className="min-w-0 flex-1">
-            <p className="font-serif text-xl font-black leading-tight">
-              Vos élèves peuvent s&apos;y préparer dès maintenant
-            </p>
-            <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
-              Français et mathématiques, les quatre épreuves en blanc, avec le
-              bilan par compétence. {EVAL_MINUTES_PAR_JOUR} minutes par jour
-              d&apos;ici là suffisent à dépasser la durée de l&apos;épreuve.
-            </p>
-          </div>
-        </div>
         <Link
           href="/evaluation-nationale-college"
-          className="mt-3 inline-flex items-center gap-2 rounded-sm bg-[#1d1c16] px-4 py-2 text-sm font-black text-[#d8e9ee] transition hover:bg-cyan-800"
+          className="group min-w-0 border-2 border-[#1d1c16] p-3 transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
         >
-          Voir les épreuves et le bilan →
+          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-800">
+            🎓 La rentrée{joursAvantEvalNationale() > 0 ? ` · J−${joursAvantEvalNationale()}` : ""}
+          </p>
+          <p className="mt-1 font-serif text-lg font-black leading-tight">
+            Les évaluations nationales de 6ᵉ et 4ᵉ
+          </p>
+          <p className="mt-1 text-xs font-medium leading-5 text-[#1d1c16]/70">
+            Les quatre épreuves en blanc, le bilan par compétence.
+          </p>
+        </Link>
+
+        {/* LE RGPD DIT PAR SON MÉCANISME, PAS PAR UN PARAGRAPHE (idée de
+            Frédéric). « L'élève entre un code, pas une adresse mail » se
+            comprend en une seconde et se vérifie : la connexion élève demande
+            un code de 6 à 8 chiffres, son établissement et sa classe. On
+            n'affirme rien de plus — la page dédiée dit le reste. */}
+        <Link
+          href="/politique-confidentialite"
+          className="group min-w-0 border-2 border-[#1d1c16] p-3 transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
+        >
+          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#3f6b0c]">
+            🔒 Les données de vos élèves
+          </p>
+          <p className="mt-1 font-serif text-lg font-black leading-tight">
+            Un code d&apos;établissement, pas une adresse mail
+          </p>
+          <p className="mt-1 text-xs font-medium leading-5 text-[#1d1c16]/70">
+            L&apos;élève entre un code, son établissement et sa classe.
+          </p>
+        </Link>
+
+        <Link
+          href={ESPACE_ADULTE[colonne]?.href ?? "/espace-ecoles"}
+          className="group min-w-0 border-2 border-[#1d1c16] p-3 transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
+        >
+          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#bf3b1e]">
+            {ESPACE_ADULTE[colonne]?.kicker ?? "🏫 Votre établissement"}
+          </p>
+          <p className="mt-1 font-serif text-lg font-black leading-tight">
+            {ESPACE_ADULTE[colonne]?.titre ?? "Financement, RGPD, déploiement"}
+          </p>
+          <p className="mt-1 text-xs font-black text-[#bf3b1e]">
+            En savoir plus →
+          </p>
         </Link>
       </section>
 
