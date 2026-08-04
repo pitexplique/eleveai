@@ -139,23 +139,14 @@ export const microSkills: MicroSkillSource[] = [
   notionId: "fraction_calcul",
   prerequis: ["fraction_comparer", "fraction_multiplier"],
 },
-{
-  id: "fraction_inverse",
-  label: "Déterminer l’inverse d’un nombre rationnel ou d’une fraction",
-  notionId: "fraction_calcul",
-  prerequis: ["fraction_rationnel", "fraction_multiplier"],
-},
-{
-  id: "fraction_diviser",
-  label: "Diviser des fractions",
-  notionId: "fraction_calcul",
-  prerequis: ["fraction_inverse", "fraction_multiplier"],
-},
+// L'inverse et la division de fractions sont partis le 04/08/2026 : les
+// repères annuels les placent en 4e, où ils existent déjà (neuf questions
+// chacun). Un élève de 5e n'a pas à les croiser ici.
 {
   id: "fraction_calcul_defi",
   label: "Défis de calcul avec les fractions",
   notionId: "fraction_calcul",
-  prerequis: ["fraction_additionner", "fraction_quantite", "fraction_diviser"],
+  prerequis: ["fraction_additionner", "fraction_quantite", "fraction_multiplier"],
 },
 
   /* =========================
