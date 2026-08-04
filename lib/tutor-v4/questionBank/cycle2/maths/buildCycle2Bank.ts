@@ -32,7 +32,14 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
   // valeur de départ…) affichait la même proposition deux fois, et l'élève
   // voyait deux réponses justes. Dédupliquer AVANT de couper à quatre laisse
   // aussi une chance aux distracteurs surnuméraires de prendre la place.
-  return shuffle(Array.from(new Set([correct, ...wrongs]))).slice(0, 4);
+  // ⚠️ 04/08/2026 — la bonne réponse était jetée dans le même chapeau que les
+  // pièges : à cinq pièges écrits, le mélange pouvait la laisser au fond et
+  // le découpage à quatre l'emportait. L'élève voyait alors quatre pièges et
+  // rien d'autre. On la met de côté, on tire trois distracteurs, on mélange.
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
 }
 
 function exp(methode: string, calcul: string, conclusion: string) {

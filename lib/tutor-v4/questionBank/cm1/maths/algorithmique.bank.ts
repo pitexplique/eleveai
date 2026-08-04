@@ -15,7 +15,14 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
   // valeur de départ…) affichait la même proposition deux fois, et l'élève
   // voyait deux réponses justes. Dédupliquer AVANT de couper à quatre laisse
   // aussi une chance aux distracteurs surnuméraires de prendre la place.
-  return shuffle(Array.from(new Set([correct, ...wrongs]))).slice(0, 4);
+  // ⚠️ 04/08/2026 — la bonne réponse était jetée dans le même chapeau que les
+  // pièges : à cinq pièges écrits, le mélange pouvait la laisser au fond et
+  // le découpage à quatre l'emportait. L'élève voyait alors quatre pièges et
+  // rien d'autre. On la met de côté, on tire trois distracteurs, on mélange.
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
 }
 
 function pickOne<T>(arr: readonly T[]): T {
@@ -303,8 +310,8 @@ const algoDeplacement: TutorBankItemV4[] = [
       return {
         text: `Un robot avance de ${a} cases, tourne à droite, puis avance de ${b} cases. Combien de cases au total ?`,
         expected: [String(a + b)],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
+        format: "short" as const,
+        comparator: "number_equal" as const,
         explanation: `${a} + ${b} = ${a + b} cases. Tourner ne déplace pas.`,
       };
     },
@@ -461,8 +468,8 @@ const algoProgramme: TutorBankItemV4[] = [
       return {
         text: `Programme : Avancer de ${a} pas, puis Avancer de ${b} pas. Combien de pas au total ?`,
         expected: [String(a + b)],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
+        format: "short" as const,
+        comparator: "number_equal" as const,
         explanation: `${a} + ${b} = ${a + b} pas.`,
         canvas: scratchCanvas("Calcul de pas", [
           { type: "event", text: "Quand 🚩 est cliqué" },
@@ -654,8 +661,8 @@ const algoRepetition: TutorBankItemV4[] = [
       return {
         text: `Programme : Répéter ${fois} fois "Avancer de ${pas} pas". Combien de pas au total ?`,
         expected: [String(pas * fois)],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
+        format: "short" as const,
+        comparator: "number_equal" as const,
         explanation: `${fois} × ${pas} = ${pas * fois} pas.`,
         canvas: scratchCanvas("Répétition", [
           { type: "event", text: "Quand 🚩 est cliqué" },
@@ -730,8 +737,8 @@ const algoRepetition: TutorBankItemV4[] = [
       return {
         text: `Programme : Répéter ${fois} fois "Avancer de ${pas} pas", puis Avancer de ${extra} pas. Combien au total ?`,
         expected: [String(total)],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
+        format: "short" as const,
+        comparator: "number_equal" as const,
         explanation: `(${fois} × ${pas}) + ${extra} = ${pas * fois} + ${extra} = ${total} pas.`,
       };
     },
@@ -1014,8 +1021,8 @@ const algoDefi: TutorBankItemV4[] = [
       return {
         text: `Programme : Avancer ${a} cases · Tourner à droite · Avancer ${b} cases · Tourner à gauche · Avancer ${c} cases. Combien de cases au total ?`,
         expected: [String(a + b + c)],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
+        format: "short" as const,
+        comparator: "number_equal" as const,
         explanation: `${a} + ${b} + ${c} = ${a + b + c} cases. Les tournants ne comptent pas.`,
       };
     },
@@ -1034,8 +1041,8 @@ const algoDefi: TutorBankItemV4[] = [
       return {
         text: `Programme : Répéter ${fois} fois "Avancer de ${pas} pas". Combien de pas au total ?`,
         expected: [String(pas * fois)],
-        format: "qcm" as const,
-        comparator: "mcq_exact" as const,
+        format: "short" as const,
+        comparator: "number_equal" as const,
         explanation: `${fois} × ${pas} = ${pas * fois} pas.`,
       };
     },
