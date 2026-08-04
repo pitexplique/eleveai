@@ -1,6 +1,14 @@
-// lib/tutor-v4/question-banks/maths/5e/angles.bank.ts
+// Angles (5e).
+// ⚠️ C'est le microId de chaque item qui fait foi, PAS le commentaire de
+// section au-dessus : les items déplacés le 04/08/2026 vers angle_paires sont
+// restés à leur place dans le fichier pour garder leur id, et donc l'historique
+// des réponses des élèves.
 
-import type { TutorBankItemV4, AngleCanvasData } from "@/lib/tutor-v4/types";
+import type {
+  TutorBankItemV4,
+  AngleCanvasData,
+  DroitesCanvasData,
+} from "@/lib/tutor-v4/types";
 
 function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -55,6 +63,29 @@ function angleCanvas(params: {
         showRightAngle: params.showRightAngle ?? params.angleDeg === 90,
         placeholder: params.placeholder,
       },
+    },
+  };
+}
+
+// Deux parallèles couchées, une sécante en travers, et les deux points de
+// croisement nommés A et B. Le dessin ne porte AUCUNE mesure : c'est l'énoncé
+// qui les donne, sinon l'élève lirait la réponse au lieu de la chercher.
+function paralleleCanvas(): DroitesCanvasData {
+  return {
+    kind: "droites",
+    size: { width: 340, height: 240 },
+    display: { showGrid: false },
+    lines: [
+      { id: "d1", type: "droite", from: { x: 25, y: 75 }, to: { x: 315, y: 75 }, label: "(d1)" },
+      { id: "d2", type: "droite", from: { x: 25, y: 175 }, to: { x: 315, y: 175 }, label: "(d2)" },
+      { id: "s", type: "droite", from: { x: 60, y: 215 }, to: { x: 270, y: 35 }, label: "(s)" },
+    ],
+    intersections: [
+      { x: 223, y: 75, label: "A", highlight: true },
+      { x: 107, y: 175, label: "B", highlight: true },
+    ],
+    markers: {
+      parallels: [{ lineA: "d1", lineB: "d2", markCount: 1 }],
     },
   };
 }
@@ -1130,7 +1161,7 @@ export const anglesBank: TutorBankItemV4[] = [
     niveau: "5e",
     matiere: "maths",
     notionId: "angle_mesure",
-    microId: "angle_defi",
+    microId: "angle_paires",
     difficulty: 4,
     theme: "neutral",
     text: "Deux angles adjacents mesurent 40° et 50°. Quelle est la mesure de l’angle total ?",
@@ -1147,7 +1178,7 @@ export const anglesBank: TutorBankItemV4[] = [
     niveau: "5e",
     matiere: "maths",
     notionId: "angle_mesure",
-    microId: "angle_defi",
+    microId: "angle_paires",
     difficulty: 5,
     theme: "neutral",
     text: "Un angle mesure 70°. Combien mesure son complément (pour atteindre 90°) ?",
@@ -1164,7 +1195,7 @@ export const anglesBank: TutorBankItemV4[] = [
     niveau: "5e",
     matiere: "maths",
     notionId: "angle_mesure",
-    microId: "angle_defi",
+    microId: "angle_paires",
     difficulty: 5,
     theme: "neutral",
     text: "Un angle mesure 110°. Combien mesure son supplément (pour atteindre 180°) ?",
@@ -1201,7 +1232,7 @@ export const anglesBank: TutorBankItemV4[] = [
     niveau: "5e",
     matiere: "maths",
     notionId: "angle_mesure",
-    microId: "angle_defi",
+    microId: "angle_paires",
     difficulty: 5,
     theme: "neutral",
     hint: "Complément : 90 − a. Supplément : 180 − a.",
@@ -1221,6 +1252,511 @@ export const anglesBank: TutorBankItemV4[] = [
           complement
             ? `Complément = 90 - ${a} = ${res}°.`
             : `Supplément = 180 - ${a} = ${res}°.`
+        ),
+      };
+    },
+  },
+
+  /* ===== ANGLE_PAIRES =====
+     Deux angles qui se tiennent : complémentaires, supplémentaires, opposés
+     par le sommet. Les items figés portent les propriétés et les valeurs qui
+     se retiennent (45° son propre complément, 90° son propre supplément) ;
+     les calculs, eux, sont générés. */
+  {
+    kind: "fixed",
+    id: "angle_paires_fixed_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paires",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Deux angles sont complémentaires. Combien vaut la somme de leurs mesures ?",
+    format: "qcm",
+    choices: ["90°", "180°", "45°", "360°"],
+    expected: ["90°"],
+    comparator: "mcq_exact",
+    hint: "Complémentaires : ensemble, ils forment un angle droit.",
+    explanation: expl(
+      "Deux angles complémentaires forment ensemble un angle droit : leurs mesures s’additionnent pour faire 90°.",
+    ),
+    tags: ["angle_mesure", "paires", "complementaire", "propriete", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "angle_paires_fixed_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paires",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Deux angles sont supplémentaires. Combien vaut la somme de leurs mesures ?",
+    format: "qcm",
+    choices: ["180°", "90°", "360°", "270°"],
+    expected: ["180°"],
+    comparator: "mcq_exact",
+    hint: "Supplémentaires : mis bout à bout, ils forment un angle plat.",
+    explanation: expl(
+      "Deux angles supplémentaires forment ensemble un angle plat : leurs mesures s’additionnent pour faire 180°.",
+    ),
+    tags: ["angle_mesure", "paires", "supplementaire", "propriete", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "angle_paires_fixed_3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paires",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un angle est complémentaire de lui-même. Quelle est sa mesure ? Réponds par un nombre.",
+    format: "short",
+    expected: ["45"],
+    comparator: "number_equal",
+    hint: "Deux angles égaux dont la somme fait 90°.",
+    explanation: expl(
+      "Si les deux angles sont égaux et que leur somme fait 90°, chacun vaut 90 ÷ 2 = 45°. C’est le seul angle qui est son propre complémentaire.",
+    ),
+    tags: ["angle_mesure", "paires", "remarquable", "complementaire"],
+    canvas: angleCanvas({ angleDeg: 45, showMeasure: false, placeholder: "?" }),
+  },
+  {
+    kind: "fixed",
+    id: "angle_paires_fixed_4",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paires",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un angle est supplémentaire de lui-même. Quelle est sa mesure ? Réponds par un nombre.",
+    format: "short",
+    expected: ["90"],
+    comparator: "number_equal",
+    hint: "Deux angles égaux dont la somme fait 180°.",
+    explanation: expl(
+      "Si les deux angles sont égaux et que leur somme fait 180°, chacun vaut 180 ÷ 2 = 90°. L’angle droit est son propre supplémentaire.",
+    ),
+    tags: ["angle_mesure", "paires", "remarquable", "supplementaire"],
+    canvas: angleCanvas({ angleDeg: 90, showMeasure: false, showRightAngle: true, placeholder: "?" }),
+  },
+  {
+    kind: "fixed",
+    id: "angle_paires_qcm_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paires",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un angle mesure 40°, l’autre 50°. Comment sont-ils ?",
+    format: "qcm",
+    choices: [
+      "complémentaires",
+      "supplémentaires",
+      "opposés par le sommet",
+      "ni l’un ni l’autre",
+    ],
+    expected: ["complémentaires"],
+    comparator: "mcq_exact",
+    hint: "Additionne-les avant de choisir.",
+    explanation: expl(
+      "40 + 50 = 90. La somme fait un angle droit, donc les deux angles sont complémentaires. Le piège : on confond souvent avec supplémentaires, qui vaut 180°.",
+    ),
+    tags: ["angle_mesure", "paires", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "angle_paires_qcm_3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paires",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Deux droites se croisent. Que peut-on dire de deux angles opposés par le sommet ?",
+    format: "qcm",
+    choices: [
+      "ils ont la même mesure",
+      "leur somme fait 90°",
+      "leur somme fait 180°",
+      "on ne peut rien dire",
+    ],
+    expected: ["ils ont la même mesure"],
+    comparator: "mcq_exact",
+    hint: "Deux angles opposés par le sommet se font face de part et d’autre du croisement.",
+    explanation: expl(
+      "Quand deux droites se croisent, elles forment quatre angles. Deux angles qui se font face — opposés par le sommet — ont toujours la même mesure.",
+    ),
+    tags: ["angle_mesure", "paires", "oppose_sommet", "propriete", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "angle_paires_fixed_5",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paires",
+    difficulty: 4,
+    theme: "reunion",
+    text: "À Saint-Pierre, la rue des Bons-Enfants coupe le boulevard Hubert-Delisle. D’un côté du croisement, l’angle mesure 115°. Combien mesure l’angle juste à côté, de l’autre côté de la rue ? Réponds par un nombre.",
+    format: "short",
+    expected: ["65"],
+    comparator: "number_equal",
+    hint: "Les deux angles mis bout à bout font un angle plat.",
+    explanation: expl(
+      "Les deux angles sont adjacents et forment ensemble la ligne droite du boulevard : ils sont supplémentaires. 180 - 115 = 65°.",
+    ),
+    tags: ["angle_mesure", "paires", "reunion", "supplementaire"],
+  },
+  {
+    kind: "fixed",
+    id: "angle_paires_open_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paires",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique la différence entre deux angles complémentaires et deux angles supplémentaires.",
+    format: "open",
+    expected: ["90", "180", "droit", "plat"],
+    comparator: "contains_keyword",
+    hint: "Pense à l’angle que chaque paire forme une fois les deux angles réunis.",
+    explanation: expl(
+      "Deux angles complémentaires ont pour somme 90° : réunis, ils forment un angle droit. Deux angles supplémentaires ont pour somme 180° : réunis, ils forment un angle plat.",
+    ),
+    tags: ["angle_mesure", "paires", "open", "vocabulaire"],
+  },
+  {
+    kind: "fixed",
+    id: "angle_paires_open_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paires",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Deux droites se croisent. Explique pourquoi deux angles opposés par le sommet ont la même mesure.",
+    format: "open",
+    expected: ["180", "supplémentaire", "supplementaire", "plat", "même", "meme"],
+    comparator: "contains_keyword",
+    hint: "Regarde l’angle qui est entre les deux : il est voisin de l’un ET de l’autre.",
+    explanation: expl(
+      "Appelons a l’un des angles et b celui qui le touche. Ensemble ils forment un angle plat : a + b = 180°. L’angle opposé à a touche lui aussi b, donc il vaut également 180 - b. Les deux angles opposés par le sommet valent donc la même chose.",
+    ),
+    tags: ["angle_mesure", "paires", "open", "raisonnement"],
+  },
+  {
+    kind: "template",
+    id: "angle_paires_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paires",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Opposé par le sommet : même mesure. Angle voisin : 180 moins la mesure.",
+    tags: ["angle_mesure", "paires", "oppose_sommet", "template"],
+    generate: () => {
+      const a = randomChoice([35, 48, 55, 62, 74, 105, 118, 130]);
+      const oppose = randomChoice([true, false]);
+      const res = oppose ? a : 180 - a;
+      return {
+        text: oppose
+          ? `Deux droites se croisent. Un des quatre angles mesure ${a}°. Quelle est la mesure de l’angle opposé par le sommet ? Réponds par un nombre.`
+          : `Deux droites se croisent. Un des quatre angles mesure ${a}°. Quelle est la mesure de l’angle juste à côté ? Réponds par un nombre.`,
+        format: "short",
+        expected: [String(res)],
+        comparator: "number_equal",
+        explanation: expl(
+          oppose
+            ? `Deux angles opposés par le sommet ont la même mesure : l’angle cherché mesure ${a}°.`
+            : `Les deux angles voisins forment un angle plat : 180 - ${a} = ${res}°.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "angle_paires_tpl_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paires",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Dis quelle somme tu vises, puis quelle soustraction tu poses.",
+    tags: ["angle_mesure", "paires", "open", "template"],
+    generate: () => {
+      const a = randomChoice([22, 38, 41, 57, 63, 78]);
+      return {
+        text: `Un angle mesure ${a}°. Explique comment tu trouves la mesure de son complémentaire.`,
+        format: "open",
+        expected: ["90", "soustra", "retire", "enlève", "enleve", "moins"],
+        comparator: "contains_keyword",
+        explanation: expl(
+          `Deux angles complémentaires ont pour somme 90°. On retire donc la mesure connue de 90 : 90 - ${a} = ${90 - a}°.`,
+        ),
+      };
+    },
+  },
+
+  /* ===== ANGLE_PARALLELES =====
+     Deux parallèles et une sécante. Les propriétés (alternes-internes égaux,
+     correspondants égaux) et les pièges (droites non parallèles, réciproque)
+     sont figés ; les mesures à calculer sont générées. */
+  {
+    kind: "fixed",
+    id: "angle_paralleles_fixed_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paralleles",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Deux droites parallèles sont coupées par une sécante. Que peut-on dire de deux angles alternes-internes ?",
+    format: "qcm",
+    choices: [
+      "ils ont la même mesure",
+      "leur somme fait 180°",
+      "leur somme fait 90°",
+      "on ne peut rien dire",
+    ],
+    expected: ["ils ont la même mesure"],
+    comparator: "mcq_exact",
+    hint: "Alternes-internes : entre les deux parallèles, de part et d’autre de la sécante.",
+    explanation: expl(
+      "Quand les deux droites coupées sont parallèles, deux angles alternes-internes ont toujours la même mesure. C’est la propriété qui sert à calculer un angle sans le mesurer.",
+    ),
+    tags: ["angle_mesure", "paralleles", "alterne_interne", "propriete", "qcm"],
+    canvas: paralleleCanvas(),
+  },
+  {
+    kind: "fixed",
+    id: "angle_paralleles_fixed_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paralleles",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Deux droites parallèles sont coupées par une sécante. Que peut-on dire de deux angles correspondants ?",
+    format: "qcm",
+    choices: [
+      "ils ont la même mesure",
+      "leur somme fait 180°",
+      "leur somme fait 90°",
+      "l’un est le double de l’autre",
+    ],
+    expected: ["ils ont la même mesure"],
+    comparator: "mcq_exact",
+    hint: "Correspondants : même position à chacun des deux croisements.",
+    explanation: expl(
+      "Deux angles correspondants occupent la même position à chacun des deux croisements. Quand les droites coupées sont parallèles, ils ont la même mesure.",
+    ),
+    tags: ["angle_mesure", "paralleles", "correspondant", "propriete", "qcm"],
+    canvas: paralleleCanvas(),
+  },
+  {
+    kind: "fixed",
+    id: "angle_paralleles_fixed_3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paralleles",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une sécante coupe deux droites qui ne sont PAS parallèles. Deux angles correspondants sont-ils quand même égaux ?",
+    format: "qcm",
+    choices: ["non", "oui", "oui, si la sécante est perpendiculaire", "oui, toujours"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "La propriété commence par « si les droites sont parallèles ».",
+    explanation: expl(
+      "L’égalité des angles correspondants n’est vraie QUE si les deux droites coupées sont parallèles. Sans le parallélisme, les deux angles n’ont aucune raison d’être égaux.",
+    ),
+    tags: ["angle_mesure", "paralleles", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "angle_paralleles_fixed_4",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paralleles",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une sécante coupe deux droites. Deux angles correspondants mesurent 70° chacun. Que peut-on en conclure ?",
+    format: "qcm",
+    choices: [
+      "les deux droites sont parallèles",
+      "les deux droites sont perpendiculaires",
+      "les deux droites se coupent",
+      "on ne peut rien conclure",
+    ],
+    expected: ["les deux droites sont parallèles"],
+    comparator: "mcq_exact",
+    hint: "C’est la propriété lue dans l’autre sens.",
+    explanation: expl(
+      "La propriété se lit dans les deux sens. Si deux angles correspondants sont égaux, alors les deux droites coupées sont parallèles : c’est ainsi qu’on démontre un parallélisme sans règle ni équerre.",
+    ),
+    tags: ["angle_mesure", "paralleles", "reciproque", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "angle_paralleles_fixed_5",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paralleles",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Les droites (d1) et (d2) sont parallèles, coupées par la sécante (s) en A et en B. En A, l’angle mesure 65°. Quelle est la mesure de l’angle alterne-interne en B ? Réponds par un nombre.",
+    format: "short",
+    expected: ["65"],
+    comparator: "number_equal",
+    hint: "Alternes-internes et droites parallèles : les deux angles sont égaux.",
+    explanation: expl(
+      "Les droites (d1) et (d2) sont parallèles, donc deux angles alternes-internes sont égaux : l’angle en B mesure lui aussi 65°.",
+    ),
+    tags: ["angle_mesure", "paralleles", "alterne_interne", "canvas"],
+    canvas: paralleleCanvas(),
+  },
+  {
+    kind: "fixed",
+    id: "angle_paralleles_fixed_6",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paralleles",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Les droites (d1) et (d2) sont parallèles, coupées par la sécante (s) en A et en B. En A, l’angle mesure 110°. Un angle en B se trouve du MÊME côté de la sécante, entre les deux parallèles. Combien mesure-t-il ? Réponds par un nombre.",
+    format: "short",
+    expected: ["70"],
+    comparator: "number_equal",
+    hint: "Ces deux-là ne sont pas égaux : ils forment un angle plat ensemble.",
+    explanation: expl(
+      "Deux angles internes situés du même côté de la sécante sont supplémentaires quand les droites sont parallèles : 180 - 110 = 70°. C’est le piège classique, où l’on répond 110 par réflexe.",
+    ),
+    tags: ["angle_mesure", "paralleles", "piege", "canvas"],
+    canvas: paralleleCanvas(),
+  },
+  {
+    kind: "fixed",
+    id: "angle_paralleles_fixed_7",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paralleles",
+    difficulty: 4,
+    theme: "reunion",
+    text: "Sur la route du littoral, les deux bandes blanches qui bordent la voie sont parallèles. Une flèche peinte au sol les traverse en biais et fait un angle de 55° avec la bande du haut. Quel angle fait-elle avec la bande du bas, du même côté de la flèche ? Réponds par un nombre.",
+    format: "short",
+    expected: ["55"],
+    comparator: "number_equal",
+    hint: "Même position aux deux croisements : ce sont des angles correspondants.",
+    explanation: expl(
+      "Les deux bandes sont parallèles et la flèche joue le rôle de sécante. Les deux angles occupent la même position aux deux croisements : ils sont correspondants, donc égaux. La flèche fait aussi 55° avec la bande du bas.",
+    ),
+    tags: ["angle_mesure", "paralleles", "reunion", "correspondant"],
+  },
+  {
+    kind: "fixed",
+    id: "angle_paralleles_open_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paralleles",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique comment reconnaître deux angles alternes-internes sur une figure.",
+    format: "open",
+    expected: ["entre", "part et d", "côté", "cote", "sécante", "secante", "croisement"],
+    comparator: "contains_keyword",
+    hint: "Regarde où ils sont par rapport aux deux droites, puis par rapport à la sécante.",
+    explanation: expl(
+      "Deux angles alternes-internes sont tous les deux ENTRE les deux droites coupées — c’est le mot « internes » — et de part et d’autre de la sécante — c’est le mot « alternes ». Ils sont donc à deux croisements différents, en diagonale l’un de l’autre.",
+    ),
+    tags: ["angle_mesure", "paralleles", "open", "vocabulaire"],
+  },
+  {
+    kind: "fixed",
+    id: "angle_paralleles_open_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paralleles",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Une sécante coupe deux droites. Deux angles correspondants mesurent 60° et 68°. Que peux-tu en conclure sur les deux droites ? Explique.",
+    format: "open",
+    expected: ["pas parallèles", "pas paralleles", "non parallèles", "non paralleles", "coupent", "sécantes", "secantes"],
+    comparator: "contains_keyword",
+    hint: "Si elles étaient parallèles, que devrait-on lire ?",
+    explanation: expl(
+      "Si les deux droites étaient parallèles, les angles correspondants seraient égaux. Ici ils valent 60° et 68° : ils ne le sont pas. Les deux droites ne sont donc pas parallèles — prolongées assez loin, elles finiront par se couper.",
+    ),
+    tags: ["angle_mesure", "paralleles", "open", "raisonnement"],
+  },
+  {
+    kind: "template",
+    id: "angle_paralleles_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paralleles",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Alternes-internes et correspondants : égaux. Du même côté entre les parallèles : 180 moins la mesure.",
+    tags: ["angle_mesure", "paralleles", "template", "canvas"],
+    generate: () => {
+      const a = randomChoice([38, 52, 61, 65, 74, 108, 115, 124]);
+      const paire = randomChoice(["alternes-internes", "correspondants", "du même côté"]);
+      const egaux = paire !== "du même côté";
+      const res = egaux ? a : 180 - a;
+      return {
+        text:
+          `Les droites (d1) et (d2) sont parallèles, coupées par la sécante (s) en A et en B. ` +
+          `En A, l’angle mesure ${a}°. ` +
+          (egaux
+            ? `Quelle est la mesure de l’angle ${paire} en B ? Réponds par un nombre.`
+            : `Quelle est la mesure de l’angle en B situé du même côté de la sécante, entre les deux parallèles ? Réponds par un nombre.`),
+        format: "short",
+        expected: [String(res)],
+        comparator: "number_equal",
+        explanation: expl(
+          egaux
+            ? `Les droites sont parallèles, donc deux angles ${paire} sont égaux : l’angle cherché mesure ${a}°.`
+            : `Deux angles internes du même côté de la sécante sont supplémentaires : 180 - ${a} = ${res}°.`,
+        ),
+        canvas: paralleleCanvas(),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "angle_paralleles_tpl_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_paralleles",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Nomme la propriété que tu utilises, puis dis ce qu’elle donne.",
+    tags: ["angle_mesure", "paralleles", "open", "template"],
+    generate: () => {
+      const a = randomChoice([42, 56, 63, 71, 84]);
+      return {
+        text: `Les droites (d1) et (d2) sont parallèles, coupées par une sécante. Un angle mesure ${a}°. Explique comment tu trouves la mesure de son angle correspondant, sans rapporteur.`,
+        format: "open",
+        expected: ["parallèles", "paralleles", "correspondant", "égaux", "egaux", "même mesure", "meme mesure"],
+        comparator: "contains_keyword",
+        explanation: expl(
+          `Comme les deux droites sont parallèles, deux angles correspondants ont la même mesure. Il n’y a rien à calculer : l’angle cherché mesure lui aussi ${a}°.`,
         ),
       };
     },
