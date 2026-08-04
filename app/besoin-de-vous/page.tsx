@@ -36,8 +36,9 @@ export const metadata: Metadata = {
   },
 };
 
-// Recharge le mur au plus toutes les 5 minutes (comme /votre-avis).
-export const revalidate = 300;
+// Recharge le mur au plus toutes les heures (comme /votre-avis) — 04/08 :
+// allongé de 5 min à 1 h, quota ISR Reads.
+export const revalidate = 3600;
 
 // Le socle : les gens qui FONT EleveAI. Prénoms seuls pour les élèves (RGPD).
 const SOCLE = [

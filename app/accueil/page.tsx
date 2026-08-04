@@ -13,8 +13,15 @@ import { getElevesALHonneur, prenomCourt } from "@/lib/ameliorations/honneurServ
 import { fetchCatalogue } from "@/lib/server/catalogue";
 import { niveauPublic } from "@/lib/classe";
 
-// Les avis affichés sont rechargés au plus toutes les 5 minutes.
-export const revalidate = 300;
+// 04/08 : une heure, et non plus 5 minutes. Vercel a prévenu à 75 % du quota
+// « ISR Reads » (1 M d'unités de 8 Ko = ~8 Go relus du cache durable). Un
+// `revalidate` court fait périmer l'entrée CDN de CHAQUE région en continu :
+// l'accueil repartait chercher les mêmes données 288 fois par jour et par
+// région. Aucune fraîcheur perdue au passage : /api/admin/journal et
+// /api/admin/articles appellent déjà revalidatePath("/accueil") — ce que tu
+// publies depuis la régie apparaît dans la seconde. Cette heure ne sert plus
+// qu'aux données modifiées directement en base (avis, élèves à l'honneur).
+export const revalidate = 3600;
 
 // 18/07 : « il faut mettre en avant qu'on est différent » (Frédéric) — le
 // titre disait encore « plateforme d'apprentissage avec coach IA », le

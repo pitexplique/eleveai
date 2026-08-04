@@ -5,8 +5,11 @@ import {
   getAmeliorationsALHonneur,
 } from "@/lib/ameliorations/honneurServer";
 
-// Le palmarès « élèves à l'honneur » est rechargé au plus toutes les 5 minutes.
-export const revalidate = 300;
+// Le palmarès « élèves à l'honneur » est rechargé au plus toutes les heures.
+// 04/08 : 5 minutes → 1 heure, pour la même raison que l'accueil (quota ISR
+// Reads à 75 %). Un palmarès n'a pas besoin d'être à la minute — un élève qui
+// vient de laisser son avis se voit apparaître au prochain passage.
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Votre avis | EleveAI",

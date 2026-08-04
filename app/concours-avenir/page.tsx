@@ -13,8 +13,10 @@ import ConcoursAvenirClient from "./ConcoursAvenirClient";
 
 // La date du prochain créneau de soutien est recalculée régulièrement : elle
 // change une fois par semaine, et la page reste servie en statique le reste du
-// temps (elle a une vocation SEO).
-export const revalidate = 900;
+// temps (elle a une vocation SEO). 04/08 : 15 min → 1 h. Une date qui bouge une
+// fois par semaine n'a aucune raison d'être relue du cache durable quatre fois
+// par heure et par région (quota ISR Reads à 75 %).
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title:
