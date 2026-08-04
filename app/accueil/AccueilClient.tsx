@@ -303,13 +303,20 @@ type Colonne = "eleve" | "prof" | "principal" | "parent" | "entreprise";
 // le cadre (manchette, sélecteur, édition personnalisée) reste à 0, et c'est
 // voulu — il ouvre la page.
 const RANGS: Record<Colonne, Record<string, number>> = {
+  // ⚠️ `evals` est VOLONTAIREMENT absent de la colonne élève : il a déjà le
+  // bloc complet des évaluations dans la colonne 1 de la Une. Une section
+  // absente d'une colonne est masquée pour ce profil (cf. `rang()`).
   eleve: { une: 1, parti: 2, mosaique: 3, envrai: 4, maths: 5, apprendre: 6, cahiers: 7, agenda: 8, catalogue: 9, courrier: 10, honneur: 11, grands: 12, abonnement: 13, ours: 14 },
-  prof: { apprendre: 1, parti: 2, une: 3, maths: 4, envrai: 5, mosaique: 6, catalogue: 7, cahiers: 8, agenda: 9, courrier: 10, honneur: 11, grands: 12, abonnement: 13, ours: 14 },
-  principal: { parti: 1, grands: 2, envrai: 3, une: 4, apprendre: 5, catalogue: 6, maths: 7, mosaique: 8, cahiers: 9, agenda: 10, courrier: 11, honneur: 12, abonnement: 13, ours: 14 },
-  parent: { parti: 1, courrier: 2, apprendre: 3, une: 4, envrai: 5, mosaique: 6, maths: 7, cahiers: 8, catalogue: 9, agenda: 10, honneur: 11, grands: 12, abonnement: 13, ours: 14 },
+  prof: { evals: 2, apprendre: 1, parti: 3, une: 4, maths: 5, catalogue: 6, envrai: 7, mosaique: 8, cahiers: 9, agenda: 10, courrier: 11, honneur: 12, grands: 13, abonnement: 14, ours: 15 },
+  // LE PRINCIPAL (Frédéric, 03/08 : « ce qui va l'intéresser c'est la
+  // préparation aux évaluations nationales, il se fout des vidéos »). Il est
+  // jugé sur ces épreuves, et elles sont dans cinq semaines : elles ouvrent sa
+  // page. « En vrai » — les vidéos — descend en 9.
+  principal: { evals: 1, parti: 2, grands: 3, une: 4, courrier: 5, catalogue: 6, apprendre: 7, maths: 8, envrai: 9, mosaique: 10, cahiers: 11, agenda: 12, honneur: 13, abonnement: 14, ours: 15 },
+  parent: { evals: 3, parti: 1, courrier: 2, apprendre: 4, une: 5, envrai: 6, mosaique: 7, maths: 8, cahiers: 9, catalogue: 10, agenda: 11, honneur: 12, grands: 13, abonnement: 14, ours: 15 },
   // L'entreprise ne vient pas apprendre : elle vient comprendre pourquoi
   // soutenir, vérifier l'ancrage local, et savoir comment elle sera citée.
-  entreprise: { parti: 1, grands: 2, envrai: 3, honneur: 4, courrier: 5, une: 6, maths: 7, mosaique: 8, apprendre: 9, catalogue: 10, cahiers: 11, agenda: 12, abonnement: 13, ours: 14 },
+  entreprise: { parti: 1, grands: 2, envrai: 3, honneur: 4, courrier: 5, une: 6, maths: 7, mosaique: 8, catalogue: 9, apprendre: 10, cahiers: 11, agenda: 12, abonnement: 13, ours: 14 },
 };
 
 /** `"x"` = masqué. Le reste décale : négatif remonte, positif descend. */
@@ -1129,11 +1136,22 @@ export default function AccueilPage({
 
   const correction = cycleChoisi ? (CORRECTION[cycleChoisi] ?? {}) : {};
 
-  /** Le rang d'une section pour le profil courant. `null` = masquée. */
+  /**
+   * Le rang d'une section pour le profil courant. `null` = masquée.
+   *
+   * Une section ABSENTE de la colonne est masquée elle aussi. C'est une
+   * exception à la règle « chaque colonne est une permutation », et elle ne
+   * vaut que quand le lecteur ne perd rien : la bande des évaluations
+   * nationales n'existe que pour les adultes, parce qu'un élève a déjà le bloc
+   * complet dans la Une — on ne lui cache pas un argument, on évite de lui
+   * montrer deux fois la même chose.
+   */
   function rang(id: string): number | null {
     const c = correction[id];
     if (c === "x") return null;
-    return RANGS[colonne][id] + (typeof c === "number" ? c : 0);
+    const base = RANGS[colonne][id];
+    if (base === undefined) return null;
+    return base + (typeof c === "number" ? c : 0);
   }
 
   /**
@@ -1625,6 +1643,56 @@ export default function AccueilPage({
           </p>
         </a>
       </header>
+
+      {/* ══ LES ÉVALUATIONS NATIONALES — LA BANDE DES ADULTES ════════════════
+          Frédéric, 03/08 : « ce qui va l'intéresser c'est la préparation aux
+          évaluations nationales, il se fout des vidéos ». Un principal est jugé
+          sur ces épreuves, et elles tombent le 7 septembre.
+
+          Le bloc complet existe déjà — compte à rebours, les quatre épreuves,
+          le hub — mais dans la colonne 1 de la Une, où un adulte ne le verra
+          jamais. On ne le DÉPLACE pas : il y a été mis exprès le 01/08 pour
+          combler le trou laissé par « À lire aussi », et l'en sortir rouvrirait
+          les 400 px de vide chassés deux fois.
+
+          Donc une bande courte, et RÉSERVÉE AUX ADULTES (`evals` est absent de
+          la colonne élève). Personne ne voit deux fois la même chose : l'élève
+          a le bloc complet dans la Une, l'adulte a la bande en tête de page.
+
+          ⚠️ `w-full min-w-0` : la section est fille d'un <main> en flex, donc
+          `min-width: auto` par défaut — sans ça elle refuse de rétrécir et
+          repousse la page en débordement sur mobile (régression du 02/08). */}
+      <section
+        style={ordre("evals")}
+        className="mx-auto mt-6 w-full min-w-0 max-w-6xl border-2 border-[#1d1c16] p-4 sm:p-5"
+      >
+        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-800">
+          🎓 La rentrée · Évaluations nationales de 6ᵉ et de 4ᵉ
+        </p>
+        <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-3">
+          {joursAvantEvalNationale() > 0 && (
+            <p className="font-serif text-4xl font-black leading-none tracking-tight text-cyan-800">
+              J−{joursAvantEvalNationale()}
+            </p>
+          )}
+          <div className="min-w-0 flex-1">
+            <p className="font-serif text-xl font-black leading-tight">
+              Vos élèves peuvent s&apos;y préparer dès maintenant
+            </p>
+            <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
+              Français et mathématiques, les quatre épreuves en blanc, avec le
+              bilan par compétence. {EVAL_MINUTES_PAR_JOUR} minutes par jour
+              d&apos;ici là suffisent à dépasser la durée de l&apos;épreuve.
+            </p>
+          </div>
+        </div>
+        <Link
+          href="/evaluation-nationale-college"
+          className="mt-3 inline-flex items-center gap-2 rounded-sm bg-[#1d1c16] px-4 py-2 text-sm font-black text-[#d8e9ee] transition hover:bg-cyan-800"
+        >
+          Voir les épreuves et le bilan →
+        </Link>
+      </section>
 
       {/* ══ L'ÉDITION PERSONNALISÉE (connecté) ═══════════════════════════════ */}
       {isStaff ? (
