@@ -1546,7 +1546,7 @@ export const fractionsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "fraction_egale_tpl_1",
+    id: "fraction_egale_tpl_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "fraction_nombre",
@@ -1816,7 +1816,7 @@ export const fractionsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "fraction_comparer_tpl_1",
+    id: "fraction_comparer_tpl_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "fraction_nombre",
@@ -1896,13 +1896,15 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_multiplier",
     difficulty: 2,
     theme: "neutral",
-    text: "Calcule 2/3 × 3/4.",
+    text: "Calcule 5/8 × 8/5.",
     format: "short",
-    expected: ["1/2", "6/12"],
+    expected: ["1", "40/40"],
     comparator: "fraction_decimal_equivalent",
-    hint: "Multiplie les numérateurs entre eux et les dénominateurs entre eux.",
-    explanation: expl("2/3 × 3/4 = 6/12 = 1/2."),
-    tags: ["fraction_nombre", "produit"],
+    hint: "Multiplie les numérateurs entre eux et les dénominateurs entre eux, puis regarde ce que tu obtiens.",
+    explanation: expl(
+      "5/8 × 8/5 = 40/40 = 1. Ces deux fractions sont inverses l’une de l’autre : leur produit vaut toujours 1.",
+    ),
+    tags: ["fraction_nombre", "produit", "inverse", "remarquable"],
   },
   {
     kind: "fixed",
@@ -1923,7 +1925,7 @@ export const fractionsBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "fraction_multiplier_qcm_1",
+    id: "fraction_multiplier_qcm_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "fraction_nombre",
@@ -1941,7 +1943,7 @@ export const fractionsBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "fraction_multiplier_open_1",
+    id: "fraction_multiplier_open_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "fraction_nombre",
@@ -1958,7 +1960,7 @@ export const fractionsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "fraction_multiplier_tpl_1",
+    id: "fraction_multiplier_tpl_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "fraction_nombre",
@@ -2398,7 +2400,7 @@ export const fractionsBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "fraction_oppose_open_1",
+    id: "fraction_oppose_open_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "fraction_nombre",
@@ -2465,7 +2467,7 @@ export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "fraction_defi_fixed_2",
+    id: "fraction_defi_fixed_4",
     niveau: "5e",
     matiere: "maths",
     notionId: "fraction_nombre",
@@ -2482,7 +2484,7 @@ export const fractionsBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "fraction_defi_qcm_1",
+    id: "fraction_defi_qcm_3",
     niveau: "5e",
     matiere: "maths",
     notionId: "fraction_nombre",
@@ -2517,7 +2519,7 @@ export const fractionsBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "fraction_defi_open_1",
+    id: "fraction_defi_open_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "fraction_nombre",

@@ -958,7 +958,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "proba_vocabulaire_fixed_3",
+    id: "proba_vocabulaire_fixed_6",
     niveau: "5e",
     matiere: "maths",
     notionId: "proba_experience",
@@ -1028,19 +1028,19 @@ export const probabilitesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "proba_vocabulaire_open_1",
+    id: "proba_vocabulaire_open_3",
     niveau: "5e",
     matiere: "maths",
     notionId: "proba_experience",
     microId: "proba_vocabulaire",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique la différence entre une issue et un événement.",
+    text: "Pourquoi dit-on qu’une expérience est aléatoire ? Donne un exemple.",
     format: "open",
-    expected: ["issue", "événement", "résultat"],
+    expected: ["hasard", "prévoir", "prevoir", "avance", "sait pas", "plusieurs"],
     comparator: "contains_keyword",
-    hint: "Un événement peut regrouper plusieurs issues.",
-    explanation: expl("Une issue est un seul résultat possible (ex. obtenir 4). Un événement peut regrouper plusieurs issues (ex. obtenir un nombre pair : 2, 4 ou 6)."),
+    hint: "Pense à ce qu’on peut dire, ou pas, AVANT de lancer.",
+    explanation: expl("Une expérience est aléatoire quand on connaît tous les résultats possibles, mais qu’on ne peut pas prévoir à l’avance lequel sortira : c’est le hasard qui décide. Lancer un dé, tirer une bille dans un sac : à chaque fois, plusieurs résultats sont possibles."),
     tags: ["proba_experience", "vocabulaire", "open"],
   },
 
@@ -1067,7 +1067,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "proba_issue_qcm_1",
+    id: "proba_issue_qcm_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "proba_experience",
@@ -1085,7 +1085,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "proba_issue_open_1",
+    id: "proba_issue_open_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "proba_experience",
@@ -1102,7 +1102,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "proba_issue_tpl_1",
+    id: "proba_issue_tpl_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "proba_experience",

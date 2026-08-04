@@ -688,15 +688,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 3x + 2 ne peut pas se réduire en 5x.",
+    text: "5x × 2 se réduit en 10x, mais 5x + 2 ne se réduit pas. Explique cette différence.",
     format: "open",
-    expected: ["pas", "semblables", "3x+2", "lettre", "constant"],
+    expected: ["multipli", "produit", "addition", "semblables", "facteur"],
     comparator: "contains_keyword",
-    hint: "3x contient une lettre, mais 2 n’en contient pas.",
+    hint: "Dans un produit, le 2 multiplie tout ; dans une somme, il reste à côté.",
     explanation:
       "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
-          ("3x et 2 ne sont pas des termes semblables. 3x dépend de x alors que 2 est un terme constant. On ne peut donc pas écrire 3x + 2 = 5x.") +
+          ("Dans 5x × 2, le 2 est un facteur : il multiplie 5x, donc 5 × 2 × x = 10x. Dans 5x + 2, le 2 s’ajoute : ce n’est pas un terme semblable à 5x, il n’a pas de lettre. On ne peut donc rien regrouper.") +
           "\n\nConclusion : l’expression obtenue répond à la question.",
     tags: ["litteral_calcul", "defi", "piege", "raisonnement"],
   },

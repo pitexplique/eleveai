@@ -1358,7 +1358,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "prop_reconnaitre_open_1",
+    id: "prop_reconnaitre_open_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1483,7 +1483,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "prop_quatrieme_open_1",
+    id: "prop_quatrieme_open_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1580,7 +1580,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "prop_coeff_open_1",
+    id: "prop_coeff_open_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1676,7 +1676,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "prop_rapport_open_1",
+    id: "prop_rapport_open_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1836,7 +1836,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "prop_coeff_multiplicateur_open_1",
+    id: "prop_coeff_multiplicateur_open_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "prop_proportionnalite",

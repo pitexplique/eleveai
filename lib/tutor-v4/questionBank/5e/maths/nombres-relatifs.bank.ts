@@ -1548,7 +1548,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "relatif_lire_tpl_1",
+    id: "relatif_lire_tpl_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "relatif_nombre",
@@ -1632,7 +1632,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "relatif_signe_tpl_1",
+    id: "relatif_signe_tpl_2",
     niveau: "5e",
     matiere: "maths",
     notionId: "relatif_nombre",

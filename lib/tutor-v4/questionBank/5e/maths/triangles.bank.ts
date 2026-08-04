@@ -195,7 +195,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_nature",
     difficulty: 2,
     theme: "neutral",
-    text: "Quelle est la nature du triangle représenté ?",
+    text: "Observe le codage des côtés. Quelle est la nature de ce triangle ?",
     format: "qcm",
     choices: ["triangle isocèle", "triangle rectangle", "triangle quelconque", "quadrilatère"],
     expected: ["triangle isocèle"],
