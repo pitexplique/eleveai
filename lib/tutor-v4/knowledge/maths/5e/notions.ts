@@ -37,6 +37,17 @@ export const notions: NotionSource[] = [
     prerequis: ["relatif_nombre"],
     levels: [1, 2, 3],
   },
+  // Les critères de divisibilité sont au programme de 5e et manquaient : ils
+  // servent à simplifier les fractions, ce qui vient juste après.
+  // Ajoutés le 04/08/2026.
+  {
+    id: "divisibilite",
+    label: "Multiples, diviseurs et divisibilité",
+    boId: "BO5N3",
+    prerequis: [],
+    levels: [1, 2, 3],
+  },
+
   // Une notion est une séance de coach : au-delà de huit micro-compétences,
   // l'élève ne voit plus où il en est. Les fractions en portaient onze, et deux
   // gestes s'y mélangeaient — reconnaître une fraction, puis calculer avec.
@@ -108,6 +119,17 @@ export const notions: NotionSource[] = [
     boId: "BO5G1",
     prerequis: ["angle_mesure"],
     levels: [1, 2],
+  },
+  // Le parallélogramme existait côté grandeurs (son aire) mais pas côté
+  // géométrie. C'est pourtant en 5e qu'on démontre ses propriétés, et son
+  // centre de symétrie prolonge directement la symétrie centrale.
+  // Ajouté le 04/08/2026.
+  {
+    id: "parallelogramme",
+    label: "Parallélogrammes",
+    boId: "BO5G1",
+    prerequis: ["sym_centrale", "angle_mesure"],
+    levels: [1, 2, 3],
   },
 
   // =========================

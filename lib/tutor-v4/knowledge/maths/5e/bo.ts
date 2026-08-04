@@ -10,6 +10,10 @@ export const bo: KnowledgeBoCompetence[] = [
     label: "Fractions et nombres rationnels",
   },
   {
+    boId: "BO5N3",
+    label: "Multiples, diviseurs et divisibilité",
+  },
+  {
     boId: "BO5P1",
     label: "Proportionnalité, ratios et pourcentages",
   },

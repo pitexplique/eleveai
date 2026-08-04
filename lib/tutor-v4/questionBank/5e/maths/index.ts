@@ -15,9 +15,13 @@ import { symetrieCentraleBank} from "./symetrie_centrale.bank"
 import { volumesBank } from "./volumes.bank";
 import { airesBank } from "./aires.bank";
 import { algorithmiqueBank } from "./algorithmique.bank"
+import { divisibiliteBank } from "./divisibilite.bank";
+import { parallelogrammesBank } from "./parallelogrammes.bank";
 
 
 export const maths5eQuestionBank: TutorBankItemV4[] = [
+  ...divisibiliteBank,
+  ...parallelogrammesBank,
   ...nombresRelatifsBank,
   ...proportionnaliteBank,
   ...fractionsBank,

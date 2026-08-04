@@ -2,6 +2,40 @@ import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
 export const microSkills: MicroSkillSource[] = [
   /* =========================
+     DIVISIBILITÉ
+  ========================= */
+  {
+    id: "div_multiple_diviseur",
+    label: "Reconnaître un multiple et un diviseur",
+    notionId: "divisibilite",
+    prerequis: [],
+  },
+  {
+    id: "div_critere_2_5_10",
+    label: "Utiliser les critères de divisibilité par 2, 5 et 10",
+    notionId: "divisibilite",
+    prerequis: ["div_multiple_diviseur"],
+  },
+  {
+    id: "div_critere_3_9",
+    label: "Utiliser les critères de divisibilité par 3 et 9",
+    notionId: "divisibilite",
+    prerequis: ["div_multiple_diviseur"],
+  },
+  {
+    id: "div_lister_diviseurs",
+    label: "Lister tous les diviseurs d’un nombre",
+    notionId: "divisibilite",
+    prerequis: ["div_critere_2_5_10", "div_critere_3_9"],
+  },
+  {
+    id: "div_defi",
+    label: "Défis sur les multiples et les diviseurs",
+    notionId: "divisibilite",
+    prerequis: ["div_lister_diviseurs"],
+  },
+
+  /* =========================
      NOMBRES RELATIFS
   ========================= */
   {
@@ -91,7 +125,9 @@ export const microSkills: MicroSkillSource[] = [
   id: "fraction_simplifier",
   label: "Simplifier une fraction",
   notionId: "fraction_nombre",
-  prerequis: ["fraction_egale"],
+  // Les critères de divisibilité servent exactement à ça : trouver par quoi
+  // simplifier sans tâtonner.
+  prerequis: ["fraction_egale", "div_critere_3_9"],
 },
 {
   id: "fraction_rationnel",
@@ -383,6 +419,46 @@ export const microSkills: MicroSkillSource[] = [
     label: "Défis sur la symétrie centrale",
     notionId: "sym_centrale",
     prerequis: ["sym_centrale_propriete"],
+  },
+
+  /* =========================
+     PARALLÉLOGRAMMES
+  ========================= */
+  {
+    id: "para_reconnaitre",
+    label: "Reconnaître un parallélogramme",
+    notionId: "parallelogramme",
+    prerequis: [],
+  },
+  {
+    id: "para_cotes_angles",
+    label: "Utiliser les propriétés des côtés et des angles d’un parallélogramme",
+    notionId: "parallelogramme",
+    prerequis: ["para_reconnaitre"],
+  },
+  {
+    id: "para_diagonales",
+    label: "Utiliser les diagonales et le centre de symétrie d’un parallélogramme",
+    notionId: "parallelogramme",
+    prerequis: ["para_reconnaitre", "sym_centrale_propriete"],
+  },
+  {
+    id: "para_particuliers",
+    label: "Reconnaître un losange, un rectangle ou un carré",
+    notionId: "parallelogramme",
+    prerequis: ["para_cotes_angles", "para_diagonales"],
+  },
+  {
+    id: "para_construire",
+    label: "Construire un parallélogramme",
+    notionId: "parallelogramme",
+    prerequis: ["para_diagonales"],
+  },
+  {
+    id: "para_defi",
+    label: "Défis sur les parallélogrammes",
+    notionId: "parallelogramme",
+    prerequis: ["para_particuliers", "para_construire"],
   },
 
   /* =========================
