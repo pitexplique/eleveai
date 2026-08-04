@@ -1,3 +1,10 @@
+// Triangles (5e). L'inégalité triangulaire a son propre micro depuis le
+// 04/08/2026 (triangle_inegalite) : savoir si un triangle est constructible
+// n'est pas le même geste que le construire au compas.
+// ⚠️ C'est le microId de chaque item qui fait foi, PAS le commentaire de
+// section au-dessus : les items déplacés sont restés à leur place dans le
+// fichier pour garder leur id, et donc l'historique des réponses des élèves.
+
 import type { TutorBankItemV4, TriangleCanvasData } from "@/lib/tutor-v4/types";
 
 function randomChoice<T>(arr: T[]): T {
@@ -326,7 +333,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "5e",
     matiere: "maths",
     notionId: "triangle_figure",
-    microId: "triangle_construire",
+    microId: "triangle_inegalite",
     difficulty: 3,
     theme: "neutral",
     text: "Peut-on construire un triangle dont les côtés mesurent 2 cm, 3 cm et 8 cm ?",
@@ -347,7 +354,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "5e",
     matiere: "maths",
     notionId: "triangle_figure",
-    microId: "triangle_construire",
+    microId: "triangle_inegalite",
     difficulty: 3,
     theme: "neutral",
     text: "Peut-on construire un triangle dont les côtés mesurent 4 cm, 5 cm et 7 cm ?",
@@ -368,7 +375,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "5e",
     matiere: "maths",
     notionId: "triangle_figure",
-    microId: "triangle_construire",
+    microId: "triangle_inegalite",
     difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi on ne peut pas construire un triangle de côtés 2 cm, 3 cm et 8 cm.",
@@ -388,7 +395,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "5e",
     matiere: "maths",
     notionId: "triangle_figure",
-    microId: "triangle_construire",
+    microId: "triangle_inegalite",
     difficulty: 4,
     theme: "neutral",
     hint: "Le plus grand côté doit être plus petit que la somme des deux autres.",
@@ -1000,7 +1007,7 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "5e",
     matiere: "maths",
     notionId: "triangle_figure",
-    microId: "triangle_construire",
+    microId: "triangle_inegalite",
     difficulty: 3,
     theme: "neutral",
     hint: "Pour un triangle réalisable, le plus grand côté doit être inférieur à la somme des deux autres.",

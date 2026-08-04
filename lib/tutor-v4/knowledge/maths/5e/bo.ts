@@ -11,7 +11,7 @@ export const bo: KnowledgeBoCompetence[] = [
   },
   {
     boId: "BO5P1",
-    label: "Proportionnalité",
+    label: "Proportionnalité, ratios et pourcentages",
   },
   {
     boId: "BO5A1",
@@ -37,7 +37,8 @@ export const bo: KnowledgeBoCompetence[] = [
     boId: "BO5D2",
     label: "Probabilités",
   },
-  // knowledge/maths/5e/bo.ts
-  { boId: "BO5I1",
-   label: "Pensée informatique et algorithmique" },
+  {
+    boId: "BO5I1",
+    label: "Pensée informatique et algorithmique",
+  },
 ];

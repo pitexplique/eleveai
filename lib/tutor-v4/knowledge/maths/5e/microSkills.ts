@@ -106,36 +106,6 @@ export const microSkills: MicroSkillSource[] = [
   prerequis: ["fraction_simplifier"],
 },
 {
-  id: "fraction_additionner",
-  label: "Additionner ou soustraire des fractions simples",
-  notionId: "fraction_nombre",
-  prerequis: ["fraction_comparer"],
-},
-{
-  id: "fraction_multiplier",
-  label: "Multiplier des fractions",
-  notionId: "fraction_nombre",
-  prerequis: ["fraction_simplifier"],
-},
-{
-  id: "fraction_quantite",
-  label: "Calculer la fraction d’un nombre, d’une quantité ou d’une fraction",
-  notionId: "fraction_nombre",
-  prerequis: ["fraction_comparer", "fraction_multiplier"],
-},
-{
-  id: "fraction_inverse",
-  label: "Déterminer l’inverse d’un nombre rationnel ou d’une fraction",
-  notionId: "fraction_nombre",
-  prerequis: ["fraction_rationnel", "fraction_multiplier"],
-},
-{
-  id: "fraction_diviser",
-  label: "Diviser des fractions",
-  notionId: "fraction_nombre",
-  prerequis: ["fraction_inverse", "fraction_multiplier"],
-},
-{
   id: "fraction_oppose",
   label: "Exprimer l’opposé d’un nombre rationnel",
   notionId: "fraction_nombre",
@@ -143,9 +113,49 @@ export const microSkills: MicroSkillSource[] = [
 },
 {
   id: "fraction_defi",
-  label: "Défis sur les fractions et les nombres rationnels",
+  label: "Défis sur la lecture et la comparaison des fractions",
   notionId: "fraction_nombre",
-  prerequis: ["fraction_additionner", "fraction_quantite", "fraction_diviser", "fraction_oppose"],
+  prerequis: ["fraction_comparer", "fraction_rationnel", "fraction_oppose"],
+},
+
+  /* =========================
+     CALCULER AVEC LES FRACTIONS
+  ========================= */
+{
+  id: "fraction_additionner",
+  label: "Additionner ou soustraire des fractions simples",
+  notionId: "fraction_calcul",
+  prerequis: ["fraction_comparer"],
+},
+{
+  id: "fraction_multiplier",
+  label: "Multiplier des fractions",
+  notionId: "fraction_calcul",
+  prerequis: ["fraction_simplifier"],
+},
+{
+  id: "fraction_quantite",
+  label: "Calculer la fraction d’un nombre, d’une quantité ou d’une fraction",
+  notionId: "fraction_calcul",
+  prerequis: ["fraction_comparer", "fraction_multiplier"],
+},
+{
+  id: "fraction_inverse",
+  label: "Déterminer l’inverse d’un nombre rationnel ou d’une fraction",
+  notionId: "fraction_calcul",
+  prerequis: ["fraction_rationnel", "fraction_multiplier"],
+},
+{
+  id: "fraction_diviser",
+  label: "Diviser des fractions",
+  notionId: "fraction_calcul",
+  prerequis: ["fraction_inverse", "fraction_multiplier"],
+},
+{
+  id: "fraction_calcul_defi",
+  label: "Défis de calcul avec les fractions",
+  notionId: "fraction_calcul",
+  prerequis: ["fraction_additionner", "fraction_quantite", "fraction_diviser"],
 },
 
   /* =========================
@@ -176,34 +186,44 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["prop_table"],
   },
   {
+    id: "prop_probleme",
+    label: "Résoudre un problème de proportionnalité",
+    notionId: "prop_proportionnalite",
+    prerequis: ["prop_quatrieme", "prop_coeff"],
+  },
+  {
+    id: "prop_defi",
+    label: "Défis sur la proportionnalité",
+    notionId: "prop_proportionnalite",
+    prerequis: ["prop_quatrieme", "prop_probleme"],
+  },
+
+  /* =========================
+     RATIOS ET POURCENTAGES
+  ========================= */
+  {
     id: "prop_rapport",
     label: "Exprimer et utiliser un ratio simple",
-    notionId: "prop_proportionnalite",
+    notionId: "prop_ratio_pourcentage",
     prerequis: ["prop_reconnaitre"],
   },
   {
     id: "prop_pourcentage",
     label: "Calculer et interpréter un pourcentage simple",
-    notionId: "prop_proportionnalite",
+    notionId: "prop_ratio_pourcentage",
     prerequis: ["prop_coeff"],
   },
   {
     id: "prop_coeff_multiplicateur",
     label: "Utiliser un coefficient multiplicateur simple",
-    notionId: "prop_proportionnalite",
+    notionId: "prop_ratio_pourcentage",
     prerequis: ["prop_pourcentage"],
   },
   {
-    id: "prop_probleme",
-    label: "Résoudre un problème de proportionnalité",
-    notionId: "prop_proportionnalite",
-    prerequis: ["prop_quatrieme", "prop_coeff", "prop_pourcentage"],
-  },
-  {
-    id: "prop_defi",
-    label: "Défis sur la proportionnalité, les ratios et les pourcentages",
-    notionId: "prop_proportionnalite",
-    prerequis: ["prop_rapport", "prop_probleme", "prop_coeff_multiplicateur"],
+    id: "prop_ratio_defi",
+    label: "Défis sur les ratios et les pourcentages",
+    notionId: "prop_ratio_pourcentage",
+    prerequis: ["prop_rapport", "prop_coeff_multiplicateur"],
   },
 
   /* =========================
@@ -234,10 +254,22 @@ export const microSkills: MicroSkillSource[] = [
   prerequis: ["litteral_expression_comprendre"],
 },
 {
+  id: "litteral_tester",
+  label: "Tester si une égalité est vraie pour une valeur donnée",
+  notionId: "litteral_calcul",
+  prerequis: ["litteral_substituer"],
+},
+{
+  id: "litteral_distributivite",
+  label: "Développer un produit du type k(a + b)",
+  notionId: "litteral_calcul",
+  prerequis: ["litteral_reduire"],
+},
+{
   id: "litteral_defi",
   label: "Défis sur le calcul littéral",
   notionId: "litteral_calcul",
-  prerequis: ["litteral_traduire", "litteral_substituer", "litteral_reduire"],
+  prerequis: ["litteral_traduire", "litteral_tester", "litteral_distributivite"],
 },
 
   /* =========================
@@ -267,11 +299,25 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "angle_mesure",
     prerequis: ["angle_lire"],
   },
+  // Deux gestes du programme de 5e qui manquaient : les paires d'angles et la
+  // sécante à deux parallèles. Ajoutés le 04/08/2026.
+  {
+    id: "angle_paires",
+    label: "Utiliser des angles complémentaires, supplémentaires ou opposés par le sommet",
+    notionId: "angle_mesure",
+    prerequis: ["angle_lire"],
+  },
+  {
+    id: "angle_paralleles",
+    label: "Utiliser les angles formés par deux parallèles et une sécante",
+    notionId: "angle_mesure",
+    prerequis: ["angle_paires"],
+  },
   {
     id: "angle_defi",
     label: "Défis sur les angles",
     notionId: "angle_mesure",
-    prerequis: ["angle_tracer", "angle_estimer"],
+    prerequis: ["angle_tracer", "angle_estimer", "angle_paralleles"],
   },
 
   /* =========================
@@ -290,10 +336,16 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["triangle_reconnaitre"],
   },
   {
+    id: "triangle_inegalite",
+    label: "Reconnaître un triangle constructible (inégalité triangulaire)",
+    notionId: "triangle_figure",
+    prerequis: ["triangle_reconnaitre"],
+  },
+  {
     id: "triangle_construire",
     label: "Construire un triangle",
     notionId: "triangle_figure",
-    prerequis: ["triangle_reconnaitre", "angle_tracer"],
+    prerequis: ["triangle_reconnaitre", "triangle_inegalite", "angle_tracer"],
   },
   {
     id: "triangle_somme_angle",
@@ -538,22 +590,10 @@ export const microSkills: MicroSkillSource[] = [
   prerequis: ["algo_sequence"],
 },
 {
-  id: "algo_test_condition",
-  label: "Utiliser des tests et conditions simples",
-  notionId: "algo_programmation",
-  prerequis: ["algo_sequence"],
-},
-{
-  id: "algo_formule_bloc",
-  label: "Représenter une formule avec des blocs",
-  notionId: "algo_programmation",
-  prerequis: ["algo_entree_sortie", "litteral_expression_comprendre"],
-},
-{
   id: "algo_expression_valeur",
   label: "Calculer la valeur d’une expression informatique",
   notionId: "algo_programmation",
-  prerequis: ["algo_formule_bloc", "litteral_substituer"],
+  prerequis: ["algo_entree_sortie", "litteral_substituer"],
 },
 {
   id: "algo_prevoir_expression",
@@ -562,21 +602,43 @@ export const microSkills: MicroSkillSource[] = [
   prerequis: ["algo_expression_valeur"],
 },
 {
+  id: "algo_defi",
+  label: "Défis de lecture de programme",
+  notionId: "algo_programmation",
+  prerequis: ["algo_prevoir_expression", "algo_entree_sortie"],
+},
+
+  /* =========================
+     ÉCRIRE ET MODIFIER UN PROGRAMME
+  ========================= */
+{
+  id: "algo_formule_bloc",
+  label: "Représenter une formule avec des blocs",
+  notionId: "algo_construire",
+  prerequis: ["algo_entree_sortie", "litteral_expression_comprendre"],
+},
+{
+  id: "algo_test_condition",
+  label: "Utiliser des tests et conditions simples",
+  notionId: "algo_construire",
+  prerequis: ["algo_sequence"],
+},
+{
   id: "algo_parametre",
   label: "Analyser un programme simple et modifier ses paramètres",
-  notionId: "algo_programmation",
+  notionId: "algo_construire",
   prerequis: ["algo_prevoir_expression"],
 },
 {
   id: "algo_boucle",
   label: "Utiliser une boucle inconditionnelle simple",
-  notionId: "algo_programmation",
+  notionId: "algo_construire",
   prerequis: ["algo_sequence", "algo_parametre"],
 },
 {
-  id: "algo_defi",
-  label: "Défis d’algorithmique et programmation",
-  notionId: "algo_programmation",
-  prerequis: ["algo_boucle", "algo_prevoir_expression"],
+  id: "algo_construire_defi",
+  label: "Défis d’écriture de programme",
+  notionId: "algo_construire",
+  prerequis: ["algo_boucle", "algo_parametre"],
 },
 ];

@@ -7,9 +7,16 @@ export const notions: NotionSource[] = [
   // =========================
 {
   id: "algo_programmation",
-  label: "Algorithmique et programmation",
+  label: "Lire et exécuter un programme",
   boId: "BO5I1",
   prerequis: ["litteral_calcul", "prop_proportionnalite"],
+  levels: [1, 2, 3],
+},
+{
+  id: "algo_construire",
+  label: "Écrire et modifier un programme",
+  boId: "BO5I1",
+  prerequis: ["algo_programmation"],
   levels: [1, 2, 3],
 },
 
@@ -30,11 +37,22 @@ export const notions: NotionSource[] = [
     prerequis: ["relatif_nombre"],
     levels: [1, 2, 3],
   },
+  // Une notion est une séance de coach : au-delà de huit micro-compétences,
+  // l'élève ne voit plus où il en est. Les fractions en portaient onze, et deux
+  // gestes s'y mélangeaient — reconnaître une fraction, puis calculer avec.
+  // Coupées le 04/08/2026.
   {
     id: "fraction_nombre",
-    label: "Fractions et nombres rationnels",
+    label: "Fractions : reconnaître et comparer",
     boId: "BO5N2",
     prerequis: [],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "fraction_calcul",
+    label: "Calculer avec les fractions",
+    boId: "BO5N2",
+    prerequis: ["fraction_nombre"],
     levels: [1, 2, 3],
   },
 
@@ -46,6 +64,13 @@ export const notions: NotionSource[] = [
     label: "Proportionnalité",
     boId: "BO5P1",
     prerequis: ["fraction_nombre"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "prop_ratio_pourcentage",
+    label: "Ratios et pourcentages",
+    boId: "BO5P1",
+    prerequis: ["prop_proportionnalite"],
     levels: [1, 2, 3],
   },
 
