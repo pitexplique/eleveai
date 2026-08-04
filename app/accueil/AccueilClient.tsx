@@ -262,6 +262,24 @@ const CYCLES: { id: string; emoji: string; label: string; classe: string; classe
   { id: "lycee", emoji: "🎓", label: "Lycée", classe: "seconde", classes: ["seconde", "premiere-spe", "terminale-spe"], accent: "flamboyant" },
 ];
 
+// ─── LA COULEUR D'UNE CLASSE = CELLE DE SON CYCLE ─────────────────────────────
+// Frédéric, 04/08 : « le CSS des classes n'est pas joli, peut-être prendre des
+// couleurs d'IXL ». Le geste est juste — une rangée de douze rectangles gris
+// est ce qu'il y a de plus terne sur le premier écran, et IXL a raison de faire
+// du niveau une pastille qu'on reconnaît de loin. Mais l'arc-en-ciel de dix
+// teintes saturées est l'identité d'IXL, et le 18/07 la consigne était ⛔ « ne
+// copie pas IXL » : la page a déjà SES quatre couleurs, celles de l'île.
+//
+// Elles sont même déjà attribuées : chaque cycle porte son accent dans « Qui
+// est-ce ? ». On le fait simplement DESCENDRE sur les classes — un CM1 et un
+// CM2 sont verts comme la tuile CM1–CM2, un 4ᵉ est bleu boucan comme la tuile
+// 6ᵉ–3ᵉ. La couleur choisie en haut suit le lecteur en bas, et la rampe des
+// douze niveaux se lit d'un coup en quatre familles au lieu de douze pastilles
+// identiques. La couleur porte toujours la rubrique, elle ne décore pas.
+const ACCENT_PAR_CLASSE: Record<string, Accent> = Object.fromEntries(
+  CYCLES.flatMap((c) => c.classes.map((slug) => [slug, c.accent])),
+);
+
 const PORTES_ADULTES: { emoji: string; label: string; colonne: Colonne; memo: string; accent: Accent }[] = [
   { emoji: "👪", label: "Parent", colonne: "parent", memo: "parent", accent: "canne" },
   { emoji: "🍎", label: "Professeur", colonne: "prof", memo: "enseignant", accent: "flamboyant" },
@@ -1687,21 +1705,44 @@ export default function AccueilPage({
               <span className="mr-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/70">
                 🎓 Ta classe :
               </span>
-              {classesAffichees.map((c) => (
-                <button
-                  key={c.slug}
-                  type="button"
-                  onClick={() => setClasseDepliee(c.slug)}
-                  aria-pressed={classeActive === c.slug}
-                  className={`rounded-sm border px-2.5 py-1 text-xs font-black transition ${
-                    classeActive === c.slug
-                      ? "border-[#1d1c16] bg-[#1d1c16] text-[#d8e9ee]"
-                      : "border-[#1d1c16]/25 text-[#1d1c16]/70 hover:border-[#1d1c16] hover:bg-[#1d1c16] hover:text-[#d8e9ee]"
-                  }`}
-                >
-                  {c.label}
-                </button>
-              ))}
+              {classesAffichees.map((c) => {
+                const teinte = ACCENTS[ACCENT_PAR_CLASSE[c.slug] ?? "boucan"];
+                const actif = classeActive === c.slug;
+                // La couleur passe par `style` : Tailwind ne génère que les
+                // classes qu'il lit en clair dans le fichier, un
+                // `border-[${teinte}]` calculé ne sortirait jamais du build.
+                return (
+                  <button
+                    key={c.slug}
+                    type="button"
+                    onClick={() => setClasseDepliee(c.slug)}
+                    aria-pressed={actif}
+                    className="rounded-full border-2 px-3.5 py-1 text-sm font-black transition hover:-translate-y-0.5"
+                    // ⚠️ MESURÉ, pas supposé : écrire le label DANS sa teinte
+                    // donnait 4,29:1 pour le boucan et 4,36:1 pour le
+                    // flamboyant sur le papier — sous les 4,5:1 exigés à cette
+                    // taille (14 px gras ne compte pas comme du « grand
+                    // texte »). L'accent tient donc le cercle, l'encre garde le
+                    // mot : 13,7:1 au repos, et de 5,1 à 6,0:1 une fois la
+                    // pastille pleine, avec le clair des oreilles de manchette.
+                    style={
+                      actif
+                        ? {
+                            backgroundColor: teinte,
+                            borderColor: teinte,
+                            color: "#f0fafc",
+                            // L'ombre portée dure du journal, celle des tuiles
+                            // « Qui est-ce ? » — en deux pixels, à l'échelle
+                            // d'une pastille.
+                            boxShadow: `2px 2px 0 ${INK}`,
+                          }
+                        : { borderColor: teinte, color: INK }
+                    }
+                  >
+                    {c.label}
+                  </button>
+                );
+              })}
             </div>
             {classeActive && (
               <div className="mx-auto mt-2 max-w-2xl space-y-1.5 text-sm font-black">
