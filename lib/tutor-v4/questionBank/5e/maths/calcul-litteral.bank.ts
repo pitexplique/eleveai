@@ -1218,4 +1218,417 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     explanation: expl("On additionne les coefficients : 2 + 5 = 7, donc 2x + 5x = 7x."),
     tags: ["litteral_calcul", "reduire"],
   },
+
+  /* ===== LITTERAL_TESTER =====
+     Le programme de 5e demande de tester une égalité pour une valeur : c'est
+     la porte d'entrée vers les équations. Les items figés portent les cas qui
+     se retiennent — l'égalité vraie pour tout x, celle qui ne l'est que pour
+     zéro — et le piège du « vrai une fois, donc vrai toujours ». */
+  {
+    kind: "fixed",
+    id: "litteral_tester_fixed_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_tester",
+    difficulty: 2,
+    theme: "neutral",
+    text: "L’égalité 3x + 1 = 10 est-elle vraie pour x = 3 ?",
+    format: "qcm",
+    choices: ["oui", "non", "on ne peut pas savoir", "seulement si x est positif"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Remplace x par 3 dans le membre de gauche, puis compare.",
+    explanation: expl(
+      "On remplace x par 3 à gauche : 3 × 3 + 1 = 9 + 1 = 10. À droite, on lit 10. Les deux membres sont égaux, donc l’égalité est vraie pour x = 3.",
+    ),
+    tags: ["litteral_calcul", "tester", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_tester_fixed_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_tester",
+    difficulty: 2,
+    theme: "neutral",
+    text: "L’égalité 3x + 1 = 10 est-elle vraie pour x = 2 ?",
+    format: "qcm",
+    choices: ["non", "oui", "on ne peut pas savoir", "seulement si x est entier"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Calcule les deux membres séparément avant de conclure.",
+    explanation: expl(
+      "À gauche : 3 × 2 + 1 = 6 + 1 = 7. À droite : 10. Comme 7 n’est pas égal à 10, l’égalité est fausse pour x = 2.",
+    ),
+    tags: ["litteral_calcul", "tester", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_tester_fixed_3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_tester",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour quelles valeurs de x l’égalité x + 5 = 5 + x est-elle vraie ?",
+    format: "qcm",
+    choices: [
+      "pour toutes les valeurs de x",
+      "seulement pour x = 0",
+      "seulement pour x = 5",
+      "pour aucune valeur de x",
+    ],
+    expected: ["pour toutes les valeurs de x"],
+    comparator: "mcq_exact",
+    hint: "Essaie avec deux ou trois valeurs différentes avant de trancher.",
+    explanation: expl(
+      "Additionner dans un sens ou dans l’autre donne le même résultat. Quelle que soit la valeur de x, les deux membres sont égaux : cette égalité est toujours vraie.",
+    ),
+    tags: ["litteral_calcul", "tester", "remarquable", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_tester_fixed_4",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_tester",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour quelle valeur de x l’égalité 2x = x est-elle vraie ? Réponds par un nombre.",
+    format: "short",
+    expected: ["0"],
+    comparator: "number_equal",
+    hint: "Essaie 1, puis 2, puis 0.",
+    explanation: expl(
+      "Pour x = 1 : 2 × 1 = 2 et x = 1, ce n’est pas égal. Pour x = 0 : 2 × 0 = 0 et x = 0, les deux membres valent 0. Zéro est la seule valeur qui convient.",
+    ),
+    tags: ["litteral_calcul", "tester", "remarquable"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_tester_fixed_5",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_tester",
+    difficulty: 3,
+    theme: "reunion",
+    text: "Au marché de Saint-Paul, un letchi coûte 1 € et le panier 2 €. Le prix total est donné par p = x + 2, où x est le nombre de letchis. L’égalité est-elle vérifiée pour x = 7 et p = 9 ?",
+    format: "qcm",
+    choices: ["oui", "non", "on ne peut pas savoir", "seulement si le panier est gratuit"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Remplace x par 7, puis compare au prix annoncé.",
+    explanation: expl(
+      "On remplace x par 7 : 7 + 2 = 9. Le prix annoncé est bien 9 €. L’égalité est donc vérifiée pour ce couple de valeurs.",
+    ),
+    tags: ["litteral_calcul", "tester", "reunion", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_tester_open_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_tester",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Explique comment vérifier si x = 5 rend l’égalité 2x - 3 = 7 vraie.",
+    format: "open",
+    expected: ["remplace", "membre", "compare", "calcule"],
+    comparator: "contains_keyword",
+    hint: "Dis ce que tu fais du x, puis ce que tu compares.",
+    explanation: expl(
+      "On remplace x par 5 dans le membre de gauche : 2 × 5 - 3 = 10 - 3 = 7. On calcule ensuite le membre de droite : 7. On compare les deux résultats : ils sont égaux, donc x = 5 rend l’égalité vraie.",
+    ),
+    tags: ["litteral_calcul", "tester", "open", "methode"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_tester_open_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_tester",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève teste l’égalité 4x = 12 pour x = 3, trouve que c’est vrai, et conclut : « cette égalité est vraie pour tous les nombres ». Explique son erreur.",
+    format: "open",
+    expected: ["une seule", "seulement", "autre valeur", "essaye", "essaie", "contre-exemple", "pas toutes"],
+    comparator: "contains_keyword",
+    hint: "Que se passe-t-il si on essaie x = 1 ?",
+    explanation: expl(
+      "Tester une valeur ne renseigne que sur cette valeur-là. Avec x = 1 : 4 × 1 = 4, ce qui n’est pas 12. L’égalité est donc fausse pour x = 1. Elle n’est vraie que pour x = 3 : un seul essai réussi ne prouve rien pour les autres nombres.",
+    ),
+    tags: ["litteral_calcul", "tester", "open", "piege"],
+  },
+  {
+    kind: "template",
+    id: "litteral_tester_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_tester",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Remplace x par la valeur proposée, calcule les deux membres, compare.",
+    tags: ["litteral_calcul", "tester", "template"],
+    generate: () => {
+      const a = randomInt(2, 6);
+      const b = randomInt(1, 9);
+      const x = randomInt(2, 8);
+      const juste = randomChoice([true, true, false]);
+      const droite = juste ? a * x + b : a * x + b + randomChoice([-3, -2, 2, 3]);
+      return {
+        text: `L’égalité ${a}x + ${b} = ${droite} est-elle vraie pour x = ${x} ?`,
+        format: "qcm",
+        choices: shuffle(["oui", "non", "on ne peut pas savoir", "seulement si x est positif"]),
+        expected: [juste ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `On remplace x par ${x} à gauche : ${a} × ${x} + ${b} = ${a * x} + ${b} = ${a * x + b}. ` +
+            `À droite, on lit ${droite}. ` +
+            (juste
+              ? "Les deux membres sont égaux : l’égalité est vraie pour cette valeur."
+              : "Les deux membres sont différents : l’égalité est fausse pour cette valeur."),
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_tester_tpl_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_tester",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Dis ce que tu remplaces, ce que tu calcules, et ce que tu compares.",
+    tags: ["litteral_calcul", "tester", "open", "template"],
+    generate: () => {
+      const a = randomInt(2, 7);
+      const b = randomInt(1, 9);
+      const x = randomInt(2, 9);
+      return {
+        text: `Explique comment savoir si x = ${x} rend l’égalité ${a}x - ${b} = ${a * x - b} vraie.`,
+        format: "open",
+        expected: ["remplace", "membre", "compare", "calcule"],
+        comparator: "contains_keyword",
+        explanation: expl(
+          `On remplace x par ${x} dans le membre de gauche : ${a} × ${x} - ${b} = ${a * x} - ${b} = ${a * x - b}. ` +
+            `Le membre de droite vaut ${a * x - b}. Les deux résultats sont égaux, donc l’égalité est vraie pour x = ${x}.`,
+        ),
+      };
+    },
+  },
+
+  /* ===== LITTERAL_DISTRIBUTIVITE =====
+     Développer k(a + b), au programme de 5e. Le piège le plus tenace — celui
+     du facteur oublié, 5(x + 3) = 5x + 3 — est figé ; les développements, eux,
+     sont générés. */
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_fixed_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_distributivite",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Développe : 3(x + 2)",
+    format: "short",
+    expected: ["3x + 6", "3x+6", "6 + 3x"],
+    comparator: "exact_text",
+    hint: "Le 3 multiplie CE QUI EST DANS la parenthèse, les deux termes.",
+    explanation: expl(
+      "Le facteur 3 se distribue sur chaque terme : 3 × x = 3x, puis 3 × 2 = 6. On obtient 3x + 6.",
+    ),
+    tags: ["litteral_calcul", "distributivite"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_fixed_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_distributivite",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Développe : 4(x - 1)",
+    format: "short",
+    expected: ["4x - 4", "4x-4", "4x − 4"],
+    comparator: "exact_text",
+    hint: "Le signe moins reste : le 4 multiplie aussi le 1 qu’on retire.",
+    explanation: expl(
+      "Le facteur 4 se distribue sur les deux termes : 4 × x = 4x, puis 4 × 1 = 4, qu’on retire. On obtient 4x - 4.",
+    ),
+    tags: ["litteral_calcul", "distributivite", "signe"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_qcm_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_distributivite",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un élève écrit : 5(x + 3) = 5x + 3. Où est son erreur ?",
+    format: "qcm",
+    choices: [
+      "il a oublié de multiplier le 3 par 5",
+      "il a oublié de multiplier le x par 5",
+      "il fallait additionner 5 et 3",
+      "il n’y a pas d’erreur",
+    ],
+    expected: ["il a oublié de multiplier le 3 par 5"],
+    comparator: "mcq_exact",
+    hint: "Compte les termes de la parenthèse : combien doivent être multipliés ?",
+    explanation: expl(
+      "Le facteur se distribue sur TOUS les termes de la parenthèse, pas seulement le premier. 5 × x = 5x et 5 × 3 = 15, donc 5(x + 3) = 5x + 15. C’est l’erreur la plus fréquente du chapitre.",
+    ),
+    tags: ["litteral_calcul", "distributivite", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_fixed_3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_distributivite",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Développe : 2(3x + 4)",
+    format: "short",
+    expected: ["6x + 8", "6x+8", "8 + 6x"],
+    comparator: "exact_text",
+    hint: "2 × 3x, c’est 6x : les deux nombres se multiplient, la lettre reste.",
+    explanation: expl(
+      "2 × 3x = 6x, puis 2 × 4 = 8. On obtient 6x + 8.",
+    ),
+    tags: ["litteral_calcul", "distributivite"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_fixed_4",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_distributivite",
+    difficulty: 4,
+    theme: "reunion",
+    text: "Un planteur de Saint-Joseph a un champ rectangulaire de 5 m de large. Sa longueur mesure (x + 3) m. Écris l’aire du champ sous forme développée.",
+    format: "short",
+    expected: ["5x + 15", "5x+15", "15 + 5x"],
+    comparator: "exact_text",
+    hint: "L’aire d’un rectangle, c’est largeur × longueur.",
+    explanation: expl(
+      "L’aire vaut 5 × (x + 3). Le facteur 5 se distribue : 5 × x = 5x et 5 × 3 = 15. L’aire développée s’écrit 5x + 15 (en m²).",
+    ),
+    tags: ["litteral_calcul", "distributivite", "reunion", "aire"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_open_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_distributivite",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique pourquoi 3(x + 2) n’est pas égal à 3x + 2.",
+    format: "open",
+    expected: ["tous les termes", "les deux termes", "aussi", "chaque terme", "oublié", "oublie"],
+    comparator: "contains_keyword",
+    hint: "Essaie avec x = 1 : les deux écritures donnent-elles le même nombre ?",
+    explanation: expl(
+      "Le facteur 3 multiplie chaque terme de la parenthèse, donc aussi le 2 : 3(x + 2) = 3x + 6. On le vérifie avec x = 1 : à gauche 3 × (1 + 2) = 9, à droite 3 × 1 + 2 = 5. Les deux écritures ne donnent pas le même nombre.",
+    ),
+    tags: ["litteral_calcul", "distributivite", "open", "piege"],
+  },
+  {
+    kind: "fixed",
+    id: "litteral_distributivite_open_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_distributivite",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un rectangle de hauteur k est coupé en deux morceaux, l’un de largeur a, l’autre de largeur b. Explique pourquoi son aire s’écrit aussi bien k(a + b) que ka + kb.",
+    format: "open",
+    expected: ["aire", "deux morceaux", "somme", "ajoute", "additionne", "même", "meme"],
+    comparator: "contains_keyword",
+    hint: "Compte l’aire de deux façons : en un seul bloc, puis morceau par morceau.",
+    explanation: expl(
+      "En un seul bloc, la largeur totale vaut a + b et l’aire vaut k(a + b). Morceau par morceau, le premier a pour aire ka, le second kb, et la somme fait ka + kb. C’est le même rectangle mesuré de deux façons, donc les deux écritures sont égales.",
+    ),
+    tags: ["litteral_calcul", "distributivite", "open", "raisonnement"],
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_distributivite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le facteur devant la parenthèse multiplie chacun des deux termes.",
+    tags: ["litteral_calcul", "distributivite", "template"],
+    generate: () => {
+      const k = randomInt(2, 9);
+      const a = randomInt(1, 6);
+      const b = randomInt(1, 9);
+      const plus = randomChoice([true, true, false]);
+      const coefficient = k * a;
+      const constante = k * b;
+      const gauche = a === 1 ? "x" : `${a}x`;
+      const signe = plus ? "+" : "-";
+      return {
+        text: `Développe : ${k}(${gauche} ${signe} ${b})`,
+        format: "short",
+        expected: [
+          `${coefficient}x ${signe} ${constante}`,
+          `${coefficient}x${signe}${constante}`,
+        ],
+        comparator: "exact_text",
+        explanation: expl(
+          `${k} × ${gauche} = ${coefficient}x, puis ${k} × ${b} = ${constante}. ` +
+            `On obtient ${coefficient}x ${signe} ${constante}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_distributivite_tpl_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "litteral_calcul",
+    microId: "litteral_distributivite",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Dis sur quoi le facteur se distribue, puis donne les deux produits.",
+    tags: ["litteral_calcul", "distributivite", "open", "template"],
+    generate: () => {
+      const k = randomInt(3, 8);
+      const b = randomInt(2, 9);
+      return {
+        text: `Explique, étape par étape, comment tu développes ${k}(x + ${b}).`,
+        format: "open",
+        expected: ["chaque terme", "les deux termes", "distribu", "multipli"],
+        comparator: "contains_keyword",
+        explanation: expl(
+          `Le facteur ${k} se distribue sur chacun des deux termes de la parenthèse : ${k} × x = ${k}x, puis ${k} × ${b} = ${k * b}. ` +
+            `On additionne les deux résultats : ${k}(x + ${b}) = ${k}x + ${k * b}.`,
+        ),
+      };
+    },
+  },
 ];
