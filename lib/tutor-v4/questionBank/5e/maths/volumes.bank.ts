@@ -17,6 +17,17 @@ function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
+// Ajouté le 04/08/2026 : le gabarit du pavé droit proposait deux fois la même
+// valeur quand deux pièges tombaient d'accord (un cube, par exemple, où l'aire
+// de la base égale une autre proposition). On dédoublonne les distracteurs, et
+// la bonne réponse ne passe jamais à la trappe.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
 function formatNumber(n: number) {
   return Number.isInteger(n) ? String(n) : String(Math.round(n * 100) / 100);
 }
@@ -449,11 +460,11 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text: `Un pavé droit mesure ${longueur} cm, ${largeur} cm et ${hauteur} cm. Quel est son volume ?`,
         format: "qcm",
-        choices: shuffle([
-          `${volume} cm³`,
+        choices: makeChoices(`${volume} cm³`, [
           `${somme} cm³`,
           `${aireBase} cm³`,
           `${volume + hauteur} cm³`,
+          `${volume * 2} cm³`,
         ]),
         expected: [`${volume} cm³`],
         comparator: "mcq_exact",

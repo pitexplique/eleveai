@@ -14,6 +14,18 @@ function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
+// Ajouté le 04/08/2026 après un test qui tirait chaque générateur soixante
+// fois : deux gabarits d'aire proposaient deux fois la même valeur, et un
+// troisième perdait la bonne réponse au découpage — la question devenait
+// impossible sans que rien ne le signale. On met la bonne réponse de côté,
+// on tire trois distracteurs distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
 function formatNumber(n: number) {
   return Number.isInteger(n) ? String(n) : String(n).replace(".", ",");
 }
@@ -590,11 +602,11 @@ export const airesBank: TutorBankItemV4[] = [
       return {
         text: `Un triangle a une base de ${base} cm et une hauteur de ${hauteur} cm. Choisis son aire.`,
         format: "qcm",
-        choices: shuffle([
-          `${formatNumber(aire)} cm²`,
+        choices: makeChoices(`${formatNumber(aire)} cm²`, [
           `${formatNumber(produit)} cm²`,
           `${formatNumber(base + hauteur)} cm²`,
           `${formatNumber((base + hauteur) / 2)} cm²`,
+          `${formatNumber(produit * 2)} cm²`,
         ]),
         expected: [`${formatNumber(aire)} cm²`],
         comparator: "mcq_exact",
@@ -818,15 +830,13 @@ export const airesBank: TutorBankItemV4[] = [
 
     const good = `${formatNumber(aire)} cm²`;
 
-    const wrongs = [
+    const choices = makeChoices(good, [
       `${formatNumber(aire / 2)} cm²`,
       `${formatNumber(base + hauteur)} cm²`,
       `${formatNumber(2 * (base + hauteur))} cm²`,
       `${formatNumber(base * base)} cm²`,
       `${formatNumber(hauteur * hauteur)} cm²`,
-    ].filter((v) => v !== good);
-
-    const choices = shuffle(Array.from(new Set([good, ...wrongs]))).slice(0, 4);
+    ]);
 
     return {
       text: `Choisis l’aire correcte d’un parallélogramme de base ${base} cm et de hauteur ${hauteur} cm.`,
@@ -1428,11 +1438,11 @@ export const airesBank: TutorBankItemV4[] = [
 
       format: "qcm",
 
-      choices: shuffle([
-        `${formatNumber(aire)} cm²`,
+      choices: makeChoices(`${formatNumber(aire)} cm²`, [
         `${formatNumber((base * faux) / 2)} cm²`,
         `${formatNumber(base * hauteur)} cm²`,
         `${formatNumber(base + hauteur + faux)} cm²`,
+        `${formatNumber((hauteur * faux) / 2)} cm²`,
       ]),
 
       expected: [`${formatNumber(aire)} cm²`],
