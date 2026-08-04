@@ -306,6 +306,136 @@ const ESPACE_ADULTE: Partial<Record<Colonne, { href: string; kicker: string; tit
 /** Le cycle choisi survit à la visite — même clé de nommage que useAudience. */
 const CLE_CYCLE = "eleveai-cycle";
 
+// ─── LES OREILLES DE MANCHETTE, PAR PROFIL ────────────────────────────────────
+// Frédéric, 04/08. Dans un vrai quotidien, les deux pavés de part et d'autre du
+// titre sont les emplacements les plus vus de la page ; ici ils disaient la même
+// chose à tout le monde — et l'oreille droite disait « Professeurs » à un élève
+// de 6ᵉ, dans l'endroit le plus regardé du journal.
+//
+// MÊME FORME QUE LA MATRICE : le rôle décide des deux oreilles, le cycle
+// n'affine que la gauche (celle qui parle à l'élève). 5 × 2 + 1 = 11 textes à
+// tenir, pas 8 × 2 paires.
+//
+// ⚠️ LA RÈGLE QUI ÉVITE L'ERREUR DU 01/08 (« le même argument dit deux fois ne
+// s'entend plus ») : le premier écran porte maintenant TROIS blocs de portes —
+// les deux oreilles, les huit tuiles « Qui est-ce ? », et la bande adulte. Une
+// oreille doit donc mener là où RIEN D'AUTRE du premier écran ne mène. Chez les
+// adultes, la bande occupe déjà les évaluations nationales, les données et
+// l'espace dédié : les oreilles vont ailleurs, exprès.
+//
+// ⚠️ AUCUN CHOIX ⇒ RIEN NE CHANGE (demande de Frédéric). La colonne `eleve` sans
+// cycle porte mot pour mot les deux oreilles d'avant, et c'est elle que le
+// serveur rend : ce que Google lit ne bouge pas d'un visiteur à l'autre.
+type Oreille = { href: string; kicker: string; titre: string; action: string };
+
+const OREILLES: Record<Colonne, { gauche: Oreille; droite: Oreille }> = {
+  // ⚠️ NE PAS RÉÉCRIRE CETTE PAIRE sans le dire : c'est l'affichage par défaut,
+  // celui d'un visiteur venu de Google qui n'a encore rien choisi.
+  eleve: {
+    gauche: {
+      href: "/explorer",
+      kicker: "🗂️ Le catalogue · du CP à la Terminale",
+      titre: "Ta classe est dedans, et toutes tes matières",
+      action: "Explorer le catalogue →",
+    },
+    droite: {
+      href: "/enseignants",
+      kicker: "🧑‍🏫 Professeurs",
+      titre: "Vos élèves s'entraînent, la correction est déjà faite",
+      action: "Ouvrir le tableau de suivi →",
+    },
+  },
+  // Le prof : sa porte à gauche. À droite l'atelier de fiches, qui n'est
+  // aujourd'hui visible que pour un prof CONNECTÉ — donc invisible pour celui
+  // qu'il faut convaincre. C'est le même angle mort qu'on a déjà corrigé une
+  // fois, à un autre endroit de la page.
+  prof: {
+    gauche: {
+      href: "/enseignants",
+      kicker: "🍎 Votre classe",
+      titre: "Vos élèves s'entraînent, la correction est déjà faite",
+      action: "Ouvrir le tableau de suivi →",
+    },
+    droite: {
+      href: "/fiches-cours/maths",
+      kicker: "✂️ L'atelier du prof",
+      titre: "Composez votre fiche comme vous faites cours",
+      action: "Ouvrir l'atelier →",
+    },
+  },
+  // Le principal : la bande adulte lui sert déjà la rentrée, les données et son
+  // espace. Les oreilles prennent donc ce qu'elle ne dit pas — l'étendue de ce
+  // qui existe, et les élèves qui écrivent le journal (rang 15 chez lui, donc à
+  // 9 000 px du haut de page).
+  principal: {
+    gauche: {
+      href: "/explorer",
+      kicker: "🗂️ Le catalogue · du CP à la Terminale",
+      titre: "Cinq matières, douze niveaux, le même pour tous",
+      action: "Explorer le catalogue →",
+    },
+    droite: {
+      href: "#honneur",
+      kicker: "✍️ Ils font le journal",
+      titre: "Les élèves proposent, corrigent, signent",
+      action: "Lire ce qu'ils en disent →",
+    },
+  },
+  // Le parent : l'étendue, puis les cahiers à imprimer — la porte d'entrée n°1
+  // du site, et la seule chose de la page qui se pose sur une table.
+  parent: {
+    gauche: {
+      href: "/explorer",
+      kicker: "🗂️ Le catalogue · du CP à la Terminale",
+      titre: "Tout ce que votre enfant peut travailler",
+      action: "Explorer le catalogue →",
+    },
+    droite: {
+      href: "/cahier-vacances",
+      kicker: "🏖️ Les cahiers de vacances",
+      titre: "À imprimer, du CE2 au Bac +1 — avec Ti Margo",
+      action: "Voir les cahiers →",
+    },
+  },
+  // L'entreprise : `evals` étant absent de sa colonne, la bande adulte ne
+  // s'affiche PAS pour elle — /entreprises n'est donc lié nulle part sur son
+  // premier écran. L'oreille droite est la seule porte qui lui reste.
+  entreprise: {
+    gauche: {
+      href: "/explorer",
+      // Surtitre court, mesuré lui aussi : « Le catalogue · ce que vous
+      // soutenez » passait sur deux lignes à 343 px — la largeur d'une oreille
+      // sur un téléphone — et faisait grandir la manchette de 15 px. Le mot
+      // « catalogue » est de toute façon repris par la ligne d'action.
+      kicker: "🗂️ Ce que vous soutenez",
+      titre: "Du CP à la Terminale, gratuit pour l'élève",
+      action: "Explorer le catalogue →",
+    },
+    droite: {
+      href: "/entreprises",
+      // ⚠️ Surtitre court : à 219 px de large — la largeur d'une oreille sur un
+      // écran de 1280 — « Participez à l'aventure » passait sur deux lignes et
+      // poussait la boîte à 172 px contre 157 pour toutes les autres. La
+      // manchette entière grandissait de 8 px au moment où le profil est lu.
+      kicker: "🏭 Votre entreprise",
+      titre: "Ce que vous apportez, et comment vous êtes cités",
+      action: "En savoir plus →",
+    },
+  },
+};
+
+/**
+ * Un élève qui a dit son cycle n'a plus rien à faire de la porte du prof : elle
+ * cède la place à la série « en vrai », qui est à 2 700 px du haut de sa page et
+ * qui n'existe nulle part ailleurs sur le premier écran.
+ */
+const OREILLE_ELEVE_CYCLE: Oreille = {
+  href: "#en-vrai",
+  kicker: "🌋 En vrai · à La Réunion",
+  titre: "Le volcan, les requins, la canne : ton île",
+  action: "Voir la série →",
+};
+
 // ─── LA MATRICE D'ACCUEIL ─────────────────────────────────────────────────────
 // Idée de Frédéric (02/08), posée en mathématicien : un VECTEUR de sections, et
 // une MATRICE qui dit, pour chaque profil, laquelle vient en premier.
@@ -1307,6 +1437,22 @@ export default function AccueilPage({
       : { order: r, minWidth: 0 };
   }
 
+  /**
+   * Les deux oreilles de manchette du profil courant. Même forme que les
+   * rangs : le rôle décide, le cycle affine — et seulement la gauche, dont le
+   * surtitre nomme alors le niveau du lecteur.
+   */
+  const oreilles = useMemo(() => {
+    const paire = OREILLES[colonne];
+    const cycle = cycleChoisi ? CYCLES.find((c) => c.id === cycleChoisi) : null;
+    // Aucun choix (ou un adulte, qui n'a pas de cycle) ⇒ la paire telle quelle.
+    if (!cycle || colonne !== "eleve") return paire;
+    return {
+      gauche: { ...paire.gauche, kicker: `${cycle.emoji} Le catalogue · ${cycle.label}` },
+      droite: OREILLE_ELEVE_CYCLE,
+    };
+  }, [colonne, cycleChoisi]);
+
   // L'avis d'élève en manchette (demande de Frédéric, 19/07) : rotation
   // douce sur les mêmes avis que le courrier des lecteurs (verbatim).
   const [avisIdx, setAvisIdx] = useState(0);
@@ -1425,30 +1571,47 @@ export default function AccueilPage({
             (la connexion ouvre le tableau de suivi, la correction est faite).
             Style : fond clair, écriture bleu boucan canot. La dictée garde sa
             place dans « À lire aussi ». */}
-        <div className="grid items-center gap-3 border-b-4 border-double border-[#1d1c16] py-5 lg:grid-cols-[1fr_auto_1fr] lg:gap-6">
-          {/* Oreille gauche — l'élève : le coach + les séries d'exercices.
-              Destination /explorer (demande de Frédéric, 19/07) : l'oreille
-              promet le coach ET les séries — /explorer montre tout et laisse
-              choisir sa classe, le coach maths seul était réducteur. */}
+        {/* ⚠️ LES TROIS COLONNES ATTENDENT `xl`, PAS `lg` (04/08). Mesuré à
+            1024 px exactement : le titre du journal prend ce qu'il veut au
+            milieu (`auto`) et ne laissait que 117 px à chaque oreille — les
+            titres y tombaient sur cinq à sept lignes, et d'un profil à l'autre
+            la boîte passait de 226 à 256 px. Aucune hauteur figée ne rattrape
+            un écart pareil : la cause n'est pas le texte, c'est une manchette
+            en trois colonnes dans une fenêtre qui n'en tient que deux. En
+            dessous de 1280 px elle s'empile — les oreilles prennent toute la
+            largeur et leur titre tient sur une ligne. */}
+        <div className="grid items-center gap-3 border-b-4 border-double border-[#1d1c16] py-5 xl:grid-cols-[1fr_auto_1fr] xl:gap-6">
+          {/* Oreille gauche — FAIRE : la porte du lecteur, celle qui l'emmène
+              travailler. Par défaut (personne n'a rien choisi) c'est le
+              catalogue, destination /explorer (demande de Frédéric, 19/07) :
+              l'oreille promet le coach ET les séries — /explorer montre tout et
+              laisse choisir sa classe, le coach maths seul était réducteur.
+
+              NE PAS RÉPÉTER LE PAVÉ « COMMENCE ICI » (01/08) : l'oreille disait
+              « Il t'explique, tu t'entraînes — tout est corrigé » et, 300 px
+              plus bas, le pavé disait « Entraîne-toi maintenant — tout est
+              corrigé ». Les deux se voient en même temps : le même argument dit
+              deux fois ne s'entend plus. L'oreille prend donc l'ÉTENDUE (toutes
+              les classes, toutes les matières), le pavé garde le GESTE.
+
+              ⚠️ `min-h` + centrage vertical : le profil n'est lu qu'APRÈS le
+              montage, donc les mots changent ~100 ms après l'affichage. À
+              hauteur libre, deux oreilles de longueurs différentes feraient
+              sauter la manchette entière — le bloc le plus regardé de la page.
+              Hauteur figée : seuls les mots se précisent, la page ne bouge
+              pas. */}
           <Link
-            href="/explorer"
-            className="group order-2 border-2 border-cyan-800 bg-cyan-800 p-3 text-center text-[#f0fafc] transition hover:bg-[#f0fafc] hover:text-cyan-800 lg:order-1"
+            href={oreilles.gauche.href}
+            className="group order-2 flex min-h-[112px] flex-col justify-center border-2 border-cyan-800 bg-cyan-800 xl:min-h-[157px] p-3 text-center text-[#f0fafc] transition hover:bg-[#f0fafc] hover:text-cyan-800 xl:order-1"
           >
-            {/* NE PAS RÉPÉTER LE PAVÉ « COMMENCE ICI » (01/08) : l'oreille
-                disait « Il t'explique, tu t'entraînes — tout est corrigé »
-                et, 300 px plus bas, le pavé disait « Entraîne-toi maintenant
-                — tout est corrigé ». Les deux se voient en même temps : le
-                même argument dit deux fois ne s'entend plus. L'oreille prend
-                donc l'ÉTENDUE (toutes les classes, toutes les matières), le
-                pavé garde le GESTE (entraîne-toi maintenant). */}
             <p className="text-[10px] font-black uppercase tracking-[0.18em]">
-              🗂️ Le catalogue · du CP à la Terminale
+              {oreilles.gauche.kicker}
             </p>
             <p className="mt-1 font-serif text-lg font-black leading-tight">
-              Ta classe est dedans, et toutes tes matières
+              {oreilles.gauche.titre}
             </p>
             <p className="mt-1 text-xs font-black underline underline-offset-2">
-              Explorer le catalogue →
+              {oreilles.gauche.action}
             </p>
           </Link>
 
@@ -1456,7 +1619,7 @@ export default function AccueilPage({
               main : le titre du journal EST l'adresse (elle se grave à chaque
               visite). « Le Journal » passe en surtitre, la devise du manifeste
               cède la place à la phrase choc du coach. */}
-          <div className="order-1 text-center lg:order-2">
+          <div className="order-1 text-center xl:order-2">
             <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[#1d1c16]/70 sm:text-xs">
               Le journal pour apprendre et s&apos;évaluer · Île de La Réunion
             </p>
@@ -1495,22 +1658,24 @@ export default function AccueilPage({
             </p>
           </div>
 
-          {/* Oreille droite — le professeur : la connexion ouvre le tableau
-              de suivi (résultats élève par élève, correction automatique).
-              On ne promet QUE ce qui existe : pas de « vue classe » tant que
-              le chantier d'août n'a pas livré. */}
+          {/* Oreille droite — COMPRENDRE : ce que ça donne, la preuve, la porte
+              qu'aucun autre bloc du premier écran ne propose à ce lecteur.
+              Par défaut (personne n'a rien choisi) c'est le professeur : la
+              connexion ouvre le tableau de suivi, résultats élève par élève,
+              correction automatique. On ne promet QUE ce qui existe : pas de
+              « vue classe » tant que le chantier d'août n'a pas livré. */}
           <Link
-            href="/enseignants"
-            className="group order-3 border-2 border-cyan-800 bg-cyan-800 p-3 text-center text-[#f0fafc] transition hover:bg-[#f0fafc] hover:text-cyan-800"
+            href={oreilles.droite.href}
+            className="group order-3 flex min-h-[112px] flex-col justify-center border-2 border-cyan-800 bg-cyan-800 xl:min-h-[157px] p-3 text-center text-[#f0fafc] transition hover:bg-[#f0fafc] hover:text-cyan-800"
           >
             <p className="text-[10px] font-black uppercase tracking-[0.18em]">
-              🧑‍🏫 Professeurs
+              {oreilles.droite.kicker}
             </p>
             <p className="mt-1 font-serif text-lg font-black leading-tight">
-              Vos élèves s&apos;entraînent, la correction est déjà faite
+              {oreilles.droite.titre}
             </p>
             <p className="mt-1 text-xs font-black underline underline-offset-2">
-              Ouvrir le tableau de suivi →
+              {oreilles.droite.action}
             </p>
           </Link>
         </div>
