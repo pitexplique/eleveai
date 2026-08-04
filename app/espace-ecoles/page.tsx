@@ -16,6 +16,28 @@ export const metadata: Metadata = {
   },
 };
 
+// Le compte à rebours doit rester juste : sans revalidation, une page
+// statique figerait le J−N au jour du build. Une heure suffit largement.
+export const revalidate = 3600;
+
+// LES ÉVALUATIONS NATIONALES (Frédéric, 03/08 : « ce qui va l'intéresser
+// c'est la préparation aux évaluations nationales »). Un principal est jugé
+// dessus, et cette page — qui répond déjà au financement, au RGPD et à la
+// souveraineté des données — n'en disait pas un mot.
+const EVAL_NATIONALE_DATE = new Date("2026-09-07T08:00:00+04:00");
+
+function joursAvantEvalNationale(): number {
+  const diff = EVAL_NATIONALE_DATE.getTime() - Date.now();
+  return Math.max(0, Math.ceil(diff / 86_400_000));
+}
+
+const EPREUVES = [
+  { niveau: "6ᵉ", matiere: "Français", duree: "25 min", href: "/evaluation-nationale-college/6e-francais" },
+  { niveau: "6ᵉ", matiere: "Mathématiques", duree: "20 min", href: "/evaluation-nationale-college/6e-maths" },
+  { niveau: "4ᵉ", matiere: "Français", duree: "25 min", href: "/evaluation-nationale-college/4e-francais" },
+  { niveau: "4ᵉ", matiere: "Mathématiques", duree: "20 min", href: "/evaluation-nationale-college/4e-maths" },
+];
+
 // Le modèle économique = l'argument CEO n°1 pour un établissement.
 const modele = [
   {
@@ -158,6 +180,66 @@ export default function EspaceEcolesPage() {
         </section>
 
         {/* ── LE MODÈLE (argument CEO n°1) ── */}
+        {/* ── LES ÉVALUATIONS NATIONALES ──
+            Placée haut, avant le modèle économique : c'est l'échéance qui
+            occupe un chef d'établissement en août, pas le prix.
+            ⚠️ Cadrée « collège » explicitement. Les évaluations nationales
+            existent aussi en CP, CE1 et CM1 — mais notre hub ne couvre que la
+            6ᵉ et la 4ᵉ. Un directeur d'école primaire qui cliquerait sans
+            trouver son CP perdrait la confiance que cette page construit. */}
+        <section className="rounded-[2rem] border border-sky-200 bg-white/80 p-8 shadow-xl backdrop-blur">
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-700">
+            Pour les collèges · Rentrée 2026
+          </p>
+          <h2 className="mt-2 text-2xl font-black text-slate-950 sm:text-3xl">
+            Vos élèves peuvent préparer les évaluations nationales
+          </h2>
+
+          <div className="mt-5 flex flex-wrap items-center gap-5 border-y border-slate-200 py-5">
+            {joursAvantEvalNationale() > 0 && (
+              <p className="text-5xl font-black leading-none tracking-tight text-blue-700">
+                J−{joursAvantEvalNationale()}
+              </p>
+            )}
+            <p className="min-w-0 flex-1 text-sm font-semibold leading-relaxed text-slate-600">
+              Les épreuves de 6ᵉ et de 4ᵉ ont lieu à partir du 7 septembre.
+              Chaque élève peut passer les quatre épreuves en blanc et repart
+              avec un <strong className="text-slate-900">bilan par
+              compétence</strong> — de quoi vous dire, avant le jour J, où en
+              est chaque classe.
+            </p>
+          </div>
+
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {EPREUVES.map((e) => (
+              <Link
+                key={e.href}
+                href={e.href}
+                className="group rounded-[1.25rem] border border-slate-200 bg-white/70 p-4 transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md"
+              >
+                <p className="font-black text-slate-950">
+                  {e.niveau} {e.matiere}
+                </p>
+                <p className="mt-1 text-xs font-bold text-blue-700 group-hover:underline">
+                  Épreuve blanche · {e.duree} →
+                </p>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-5 flex flex-wrap items-center gap-4">
+            <Link
+              href="/evaluation-nationale-college"
+              className="rounded-full bg-blue-600 px-6 py-3 text-sm font-black text-white shadow-lg transition hover:brightness-110"
+            >
+              Voir le détail des épreuves →
+            </Link>
+            <p className="text-xs font-semibold text-slate-500">
+              Gratuit, sans compte, sans installation.
+            </p>
+          </div>
+        </section>
+
         <section>
           <h2 className="mb-2 text-center text-2xl font-black text-slate-950 sm:text-3xl">
             Le modèle : vous financez, tout le monde y accède
