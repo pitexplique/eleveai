@@ -1,4 +1,10 @@
-export const dynamic = "force-dynamic";
+// 04/08 : `force-dynamic` → ISR d'une heure. La page était rendue par une
+// fonction à CHAQUE visite, avec un aller-retour Supabase à chaque fois, pour
+// un catalogue qui bouge quelques fois par mois. Elle est maintenant servie
+// depuis le cache : plus rapide pour l'élève, et une seule lecture par région
+// et par heure côté Vercel. (Le catalogue s'édite en base, pas via une régie :
+// une modification met donc jusqu'à une heure à apparaître.)
+export const revalidate = 3600;
 
 import type { Metadata } from "next";
 import Link from "next/link";

@@ -8,8 +8,18 @@
 
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
 import { maths974Client, parseYoutubeId, MATHS974_BUCKET } from "@/lib/server/maths974";
+
+// 04/08 : /maths-974 est passée de `force-dynamic` à une ISR d'une heure
+// (quota ISR Reads). Pour que l'attente ne se voie pas, chaque mutation
+// régénère la page IMMÉDIATEMENT — même patron que la régie du journal.
+// L'accueil aussi : sa vitrine affiche les 3 dernières captures.
+function republierLes974() {
+  revalidatePath("/maths-974");
+  revalidatePath("/accueil");
+}
 
 const MAX_BYTES = 10 * 1024 * 1024; // 10 Mo (photos de téléphone)
 
@@ -128,6 +138,7 @@ export async function POST(req: Request) {
       throw error;
     }
 
+    republierLes974();
     return NextResponse.json({ ok: true, id: data?.id });
   } catch (e: any) {
     return NextResponse.json(
@@ -153,6 +164,7 @@ export async function PATCH(req: Request) {
   if (error) {
     return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
   }
+  republierLes974();
   return NextResponse.json({ ok: true });
 }
 
@@ -178,5 +190,6 @@ export async function DELETE(req: Request) {
   if (row?.image_path) {
     await supabase.storage.from(MATHS974_BUCKET).remove([row.image_path]);
   }
+  republierLes974();
   return NextResponse.json({ ok: true });
 }

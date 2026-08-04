@@ -1,4 +1,8 @@
-export const dynamic = "force-dynamic";
+// 04/08 : `force-dynamic` → ISR d'une heure. Un carnet de bord qui s'enrichit
+// au fil des sorties n'a aucune raison d'être recalculé à chaque visite. Et
+// l'attente ne se voit pas : /api/admin/maths-974 régénère la page dès qu'une
+// capture est ajoutée, masquée ou supprimée.
+export const revalidate = 3600;
 
 import type { Metadata } from "next";
 import Link from "next/link";
