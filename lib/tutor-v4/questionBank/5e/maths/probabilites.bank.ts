@@ -34,9 +34,16 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
   // Jamais deux fois la même ligne. Un gabarit dont le piège coïncide avec la
   // bonne réponse (les coordonnées inversées quand x = y, un arrondi égal à la
   // valeur de départ…) affichait la même proposition deux fois, et l'élève
-  // voyait deux réponses justes. Dédupliquer AVANT de couper à quatre laisse
-  // aussi une chance aux distracteurs surnuméraires de prendre la place.
-  return shuffle(Array.from(new Set([correct, ...wrongs]))).slice(0, 4);
+  // voyait deux réponses justes.
+  // ⚠️ 04/08/2026 — la version précédente dédoublonnait PUIS coupait à quatre :
+  // avec cinq distracteurs, le mélange pouvait renvoyer la bonne réponse en
+  // cinquième position et le découpage l'emportait. L'élève ne pouvait alors
+  // pas réussir, et rien ne le signalait. On met désormais la bonne réponse de
+  // côté, on tire trois distracteurs, puis on mélange l'ensemble.
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
 }
 
 const couleurs = {
@@ -1368,6 +1375,117 @@ export const probabilitesBank: TutorBankItemV4[] = [
         comparator: "fraction_decimal_equivalent",
         explanation: expl(`Les issues favorables sont ${faces.join(", ")} : ${favorables} sur 6, soit ${rawFraction(favorables, 6)}.`),
         canvas: deCanvas(faces),
+      };
+    },
+  },
+
+  /* ===== PROBA_VOCABULAIRE =====
+     Ce micro n'avait que des items figés : au dixième passage, l'élève
+     retombait forcément sur une question déjà vue. Deux générateurs le
+     réapprovisionnent, l'un sur le mot juste, l'autre sur ce que le mot veut
+     dire. */
+  {
+    kind: "template",
+    id: "proba_vocabulaire_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une issue est UN résultat ; un événement peut en regrouper plusieurs.",
+    tags: ["proba_experience", "vocabulaire", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        {
+          phrase: "obtenir 5 en lançant un dé",
+          bonne: "une issue",
+          pourquoi: "c’est un seul résultat possible du lancer, on ne peut pas le décomposer.",
+        },
+        {
+          phrase: "obtenir un nombre impair en lançant un dé",
+          bonne: "un événement",
+          pourquoi: "cette phrase regroupe trois issues à la fois : 1, 3 et 5.",
+        },
+        {
+          phrase: "tirer la bille rouge d’un sac qui en contient une seule",
+          bonne: "une issue",
+          pourquoi: "une seule bille répond à la description : c’est un résultat unique.",
+        },
+        {
+          phrase: "obtenir un nombre plus grand que 4 en lançant un dé",
+          bonne: "un événement",
+          pourquoi: "deux issues conviennent, 5 et 6 : la phrase en regroupe plusieurs.",
+        },
+        {
+          phrase: "obtenir pile en lançant une pièce",
+          bonne: "une issue",
+          pourquoi: "la pièce n’a que deux résultats possibles, et pile en est un seul.",
+        },
+      ]);
+      return {
+        text: `En probabilités, comment appelle-t-on « ${cas.phrase} » ?`,
+        format: "qcm",
+        choices: makeChoices(cas.bonne, [
+          "une issue",
+          "un événement",
+          "une expérience aléatoire",
+          "une fréquence",
+        ]),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `C’est ${cas.bonne} : ${cas.pourquoi} Rappel : une issue est UN résultat possible, un événement peut en regrouper plusieurs.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "proba_vocabulaire_tpl_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Demande-toi si la chose peut arriver jamais, toujours, ou parfois.",
+    tags: ["proba_experience", "vocabulaire", "open", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        {
+          phrase: "obtenir 7 en lançant un dé à six faces",
+          nature: "impossible",
+          proba: "0",
+          pourquoi: "aucune face ne porte le 7 : aucune issue ne convient.",
+        },
+        {
+          phrase: "obtenir un nombre plus petit que 7 en lançant un dé à six faces",
+          nature: "certain",
+          proba: "1",
+          pourquoi: "les six faces conviennent : toutes les issues sont favorables.",
+        },
+        {
+          phrase: "tirer une bille verte dans un sac qui ne contient que des billes rouges",
+          nature: "impossible",
+          proba: "0",
+          pourquoi: "aucune bille verte ne s’y trouve : aucune issue ne convient.",
+        },
+        {
+          phrase: "obtenir pile ou face en lançant une pièce",
+          nature: "certain",
+          proba: "1",
+          pourquoi: "la pièce retombe forcément sur l’une des deux faces.",
+        },
+      ]);
+      return {
+        text: `L’événement « ${cas.phrase} » est-il certain, impossible, ou ni l’un ni l’autre ? Explique.`,
+        format: "open",
+        expected: [cas.nature, cas.proba, "aucune", "toutes"],
+        comparator: "contains_keyword",
+        explanation: expl(
+          `Cet événement est ${cas.nature} : ${cas.pourquoi} Sa probabilité vaut donc ${cas.proba}.`,
+        ),
       };
     },
   },

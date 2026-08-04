@@ -2584,4 +2584,158 @@ export const fractionsBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ===== FRACTION_DEFI =====
+     Défis de lecture et de comparaison. Les défis de calcul sont partis vers
+     fraction_calcul_defi le 04/08/2026 ; ce qui reste ici se joue à l'œil et
+     au raisonnement, pas à la règle de calcul. */
+  {
+    kind: "fixed",
+    id: "fraction_defi_fixed_5",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Range ces trois fractions de la plus petite à la plus grande : 1/2 ; 1/5 ; 1/3",
+    format: "qcm",
+    choices: [
+      "1/5 ; 1/3 ; 1/2",
+      "1/2 ; 1/3 ; 1/5",
+      "1/2 ; 1/5 ; 1/3",
+      "1/3 ; 1/5 ; 1/2",
+    ],
+    expected: ["1/5 ; 1/3 ; 1/2"],
+    comparator: "mcq_exact",
+    hint: "Partage un même gâteau en 2, puis en 5. Quelle part est la plus grosse ?",
+    explanation: expl(
+      "Le numérateur est le même : c’est le dénominateur qui décide. Plus on partage en un grand nombre de parts, plus chaque part est petite. Donc 1/5 < 1/3 < 1/2.",
+    ),
+    tags: ["fraction_nombre", "defi", "comparer", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_defi_qcm_4",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Une fraction est plus grande que 1. Que peut-on dire de son numérateur ?",
+    format: "qcm",
+    choices: [
+      "il est plus grand que le dénominateur",
+      "il est plus petit que le dénominateur",
+      "il est égal au dénominateur",
+      "il est toujours pair",
+    ],
+    expected: ["il est plus grand que le dénominateur"],
+    comparator: "mcq_exact",
+    hint: "Compare avec une fraction qui vaut exactement 1.",
+    explanation: expl(
+      "Une fraction vaut 1 quand son numérateur est égal à son dénominateur, comme 7/7. Pour dépasser 1, il faut donc un numérateur plus grand que le dénominateur : 9/7 est plus grand que 1.",
+    ),
+    tags: ["fraction_nombre", "defi", "reconnaitre", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_defi_fixed_6",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
+    difficulty: 5,
+    theme: "reunion",
+    text: "Sur le marché forain de Saint-Pierre, Malia achète 3/4 d’un sac de letchis, Kevin 5/8 du même sac. Qui en a acheté le plus ?",
+    format: "qcm",
+    choices: ["Malia", "Kevin", "les deux pareil", "on ne peut pas comparer"],
+    expected: ["Malia"],
+    comparator: "mcq_exact",
+    hint: "Écris les deux fractions avec le même dénominateur.",
+    explanation: expl(
+      "On met les deux fractions sur 8 : 3/4 = 6/8. Il reste à comparer 6/8 et 5/8. Le dénominateur est maintenant le même, donc le plus grand numérateur gagne : 6 > 5, Malia a acheté le plus.",
+    ),
+    tags: ["fraction_nombre", "defi", "comparer", "reunion", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_defi_open_3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève affirme : « 3/8 est plus grand que 1/2, parce que 3 est plus grand que 1 et 8 est plus grand que 2 ». Explique son erreur.",
+    format: "open",
+    expected: ["même dénominateur", "meme denominateur", "4/8", "moitié", "moitie", "séparément", "separement"],
+    comparator: "contains_keyword",
+    hint: "Combien de huitièmes font une moitié ?",
+    explanation: expl(
+      "On ne compare pas les numérateurs et les dénominateurs séparément. Il faut le même dénominateur : 1/2 = 4/8. On compare alors 3/8 et 4/8, et 3 < 4. Donc 3/8 est plus PETIT que 1/2.",
+    ),
+    tags: ["fraction_nombre", "defi", "open", "piege"],
+  },
+  {
+    kind: "template",
+    id: "fraction_defi_tpl_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Même numérateur : c’est le dénominateur qui décide, et il décide à l’envers.",
+    tags: ["fraction_nombre", "defi", "comparer", "template"],
+    generate: () => {
+      // Le numérateur reste sous le plus petit dénominateur : on ne veut pas
+      // proposer 3/3, qui vaut 1 et change la nature de la question.
+      const num = randomChoice([1, 2]);
+      const [petit, grand] = shuffle([3, 4, 5, 6, 8, 9]).slice(0, 2).sort((a, b) => a - b);
+      const plusGrande = `${num}/${petit}`;
+      const plusPetite = `${num}/${grand}`;
+      return {
+        text: `Laquelle de ces deux fractions est la plus grande : ${plusPetite} ou ${plusGrande} ?`,
+        format: "qcm",
+        choices: shuffle([plusGrande, plusPetite, "elles sont égales", "on ne peut pas comparer"]),
+        expected: [plusGrande],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `Les deux fractions ont le même numérateur, ${num}. C’est donc le dénominateur qui décide, et il décide à l’envers : ` +
+            `partager en ${petit} parts donne des parts plus grosses que partager en ${grand} parts. Donc ${plusGrande} est la plus grande.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_defi_tpl_3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Dis à quoi tu compares la fraction avant de trancher.",
+    tags: ["fraction_nombre", "defi", "open", "template"],
+    generate: () => {
+      const d = randomChoice([4, 6, 8, 10]);
+      const n = randomChoice([d / 2 - 1, d / 2 + 1]);
+      const plusGrand = n > d / 2;
+      return {
+        text: `La fraction ${n}/${d} est-elle plus grande ou plus petite que 1/2 ? Explique comment tu le sais.`,
+        format: "open",
+        expected: ["moitié", "moitie", `${d / 2}/${d}`, "demi", "compare"],
+        comparator: "contains_keyword",
+        explanation: expl(
+          `On écrit 1/2 avec le dénominateur ${d} : 1/2 = ${d / 2}/${d}. On compare alors ${n}/${d} et ${d / 2}/${d} : ` +
+            (plusGrand
+              ? `${n} > ${d / 2}, donc ${n}/${d} est plus grande que 1/2.`
+              : `${n} < ${d / 2}, donc ${n}/${d} est plus petite que 1/2.`),
+        ),
+      };
+    },
+  },
 ];

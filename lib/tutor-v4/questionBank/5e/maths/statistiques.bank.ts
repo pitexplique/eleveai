@@ -25,9 +25,16 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
   // Jamais deux fois la même ligne. Un gabarit dont le piège coïncide avec la
   // bonne réponse (les coordonnées inversées quand x = y, un arrondi égal à la
   // valeur de départ…) affichait la même proposition deux fois, et l'élève
-  // voyait deux réponses justes. Dédupliquer AVANT de couper à quatre laisse
-  // aussi une chance aux distracteurs surnuméraires de prendre la place.
-  return shuffle(Array.from(new Set([correct, ...wrongs]))).slice(0, 4);
+  // voyait deux réponses justes.
+  // ⚠️ 04/08/2026 — la version précédente dédoublonnait PUIS coupait à quatre :
+  // avec cinq distracteurs, le mélange pouvait renvoyer la bonne réponse en
+  // cinquième position et le découpage l'emportait. L'élève ne pouvait alors
+  // pas réussir, et rien ne le signalait. On met désormais la bonne réponse de
+  // côté, on tire trois distracteurs, puis on mélange l'ensemble.
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
 }
 
 function sum(values: number[]) {
@@ -1946,6 +1953,108 @@ export const statistiquesBank: TutorBankItemV4[] = [
         expected: [`${formatNumber(pct)}%`, formatNumber(pct)],
         comparator: "number_equal",
         explanation: expl(`${oui} ÷ ${total} = ${formatNumber(oui / total)} = ${formatNumber(pct)} %.`),
+      };
+    },
+  },
+
+  /* ===== STAT_REPRESENTATION_CHOISIR =====
+     Ce micro n'avait que des items figés : au dixième passage, l'élève
+     retombait forcément sur une question déjà vue. Deux générateurs le
+     réapprovisionnent, l'un pour choisir, l'autre pour justifier. */
+  {
+    kind: "template",
+    id: "stat_representation_choisir_tpl_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_representation_choisir",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Des parts d’un tout : le camembert. Une comparaison : les barres. Une évolution : la ligne.",
+    tags: ["stat_statistique", "representation", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        {
+          situation: "la part de chaque type de déchet dans une poubelle de la classe",
+          bonne: "un diagramme circulaire",
+          pourquoi: "on répartit un tout en parts : le disque entier représente le total, chaque secteur une part.",
+        },
+        {
+          situation: "le nombre de licenciés dans cinq clubs sportifs de Saint-Denis",
+          bonne: "un diagramme en barres",
+          pourquoi: "on compare des quantités indépendantes : la hauteur des barres se compare d’un coup d’œil.",
+        },
+        {
+          situation: "la température relevée chaque jour pendant deux semaines",
+          bonne: "un graphique en ligne",
+          pourquoi: "on suit une évolution dans le temps : la ligne montre les hausses et les baisses.",
+        },
+        {
+          situation: "la répartition du budget d’une famille entre logement, nourriture et transport",
+          bonne: "un diagramme circulaire",
+          pourquoi: "les trois postes forment ensemble la totalité du budget : c’est un partage d’un tout.",
+        },
+        {
+          situation: "la hauteur d’un plant de canne mesurée chaque semaine",
+          bonne: "un graphique en ligne",
+          pourquoi: "la mesure évolue semaine après semaine : la ligne rend la progression visible.",
+        },
+      ]);
+      return {
+        text: `On veut représenter ${cas.situation}. Quelle représentation est la plus adaptée ?`,
+        format: "qcm",
+        choices: makeChoices(cas.bonne, [
+          "un diagramme circulaire",
+          "un diagramme en barres",
+          "un graphique en ligne",
+          "un tableau à double entrée",
+        ]),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        explanation: expl(`On choisit ${cas.bonne} : ${cas.pourquoi}`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "stat_representation_choisir_tpl_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_representation_choisir",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Dis ce que la représentation doit faire voir : des parts, une comparaison, ou une évolution.",
+    tags: ["stat_statistique", "representation", "open", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        {
+          situation: "la part de chaque matière dans l’emploi du temps d’une semaine",
+          quoi: "un partage d’un tout",
+          reponse:
+            "les heures de toutes les matières mises bout à bout font la semaine entière : un diagramme circulaire montre d’un coup quelle matière prend la plus grosse part.",
+        },
+        {
+          situation: "le nombre de visiteurs d’un musée mois par mois sur un an",
+          quoi: "une évolution dans le temps",
+          reponse:
+            "les mois se suivent dans l’ordre : un graphique en ligne fait voir la montée en saison et la baisse ensuite.",
+        },
+        {
+          situation: "le nombre d’élèves dans chacune des six classes de 5e",
+          quoi: "une comparaison de quantités",
+          reponse:
+            "les six classes n’ont pas d’ordre naturel et ne forment pas un tout à partager : un diagramme en barres les compare directement, hauteur contre hauteur.",
+        },
+      ]);
+      return {
+        text: `On veut représenter ${cas.situation}. Quelle représentation choisis-tu, et pourquoi ?`,
+        format: "open",
+        expected: ["circulaire", "barres", "ligne", "camembert", "part", "compar", "évolution", "evolution"],
+        comparator: "contains_keyword",
+        explanation: expl(
+          `Ici, ce qu’il faut faire voir, c’est ${cas.quoi} : ${cas.reponse}`,
+        ),
       };
     },
   },

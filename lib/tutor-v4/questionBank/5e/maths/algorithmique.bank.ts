@@ -3003,4 +3003,95 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ===== ALGO_DEFI =====
+     Les défis d'écriture sont partis vers algo_construire_defi le 04/08/2026,
+     et les deux questions ouvertes avec eux. Celles-ci les remplacent : lire
+     un programme, c'est savoir dire ce qu'il fera AVANT de cliquer. */
+  {
+    kind: "fixed",
+    id: "5e_algo_defi_open_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Explique comment on peut prévoir le résultat d’un programme sans le lancer.",
+    format: "open",
+    expected: ["ligne", "instruction", "une par une", "variable", "suit", "tableau"],
+    comparator: "contains_keyword",
+    hint: "Que fais-tu de la valeur des variables à chaque étape ?",
+    explanation: expl(
+      "prévoir un programme, c’est l’exécuter dans sa tête avant la machine.",
+      "on lit les instructions une par une, dans l’ordre, en notant la valeur de chaque variable après chaque ligne.",
+      "on tient une sorte de tableau : une colonne par variable, une ligne par instruction. À la fin du tableau, on lit le résultat.",
+      "on connaît le résultat avant de cliquer, et on sait où regarder si la machine dit autre chose.",
+    ),
+    tags: ["algo_programmation", "defi", "open", "methode"],
+  },
+  {
+    kind: "fixed",
+    id: "5e_algo_defi_open_3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un programme fait : mettre nombre à 5, puis « ajouter 3 à nombre » répété 4 fois. Un élève annonce 8. Explique son erreur.",
+    format: "open",
+    expected: ["une seule fois", "quatre fois", "4 fois", "répète", "repete", "17"],
+    comparator: "contains_keyword",
+    hint: "Combien de fois l’instruction « ajouter 3 » est-elle exécutée ?",
+    explanation: expl(
+      "une boucle « répéter n fois » exécute son contenu n fois, pas une seule.",
+      "on compte les répétitions avant de calculer : l’ajout se fait autant de fois que la boucle tourne.",
+      "l’élève n’a compté qu’un seul ajout : 5 + 3 = 8. Or l’instruction tourne 4 fois : 5 + 3 + 3 + 3 + 3 = 5 + 12 = 17.",
+      "la variable nombre vaut 17 à la fin, pas 8.",
+    ),
+    tags: ["algo_programmation", "defi", "open", "piege", "boucle"],
+    canvas: scratchCanvas("Le compte est bon ?", [
+      { type: "event" },
+      { type: "set_variable", variable: "nombre", value: 5 },
+      { type: "repeat", times: 4, children: [{ type: "change_variable", variable: "nombre", value: 3 }] },
+      { type: "say", text: "nombre" },
+    ]),
+  },
+  {
+    kind: "template",
+    id: "5e_algo_defi_tpl_x2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "algo_programmation",
+    microId: "algo_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Dis combien de fois la boucle tourne, puis ce que ça ajoute en tout.",
+    tags: ["algo_programmation", "defi", "open", "template"],
+    generate: () => {
+      const debut = randomChoice([2, 4, 5, 10]);
+      const ajout = randomChoice([2, 3, 5, 6]);
+      const times = randomChoice([3, 4, 5, 6]);
+      const final = debut + ajout * times;
+      return {
+        text: `La variable total vaut ${debut}. Le programme répète ${times} fois « ajouter ${ajout} à total ». Explique comment tu trouves la valeur finale sans lancer le programme.`,
+        format: "open",
+        expected: [String(ajout * times), "fois", "multipli", "ajoute", String(final)],
+        comparator: "contains_keyword",
+        explanation: expl(
+          "une boucle répète son contenu un nombre connu de fois.",
+          "on calcule d’abord l’augmentation totale, puis on l’ajoute à la valeur de départ.",
+          `La boucle tourne ${times} fois et ajoute ${ajout} à chaque tour : ${ajout} × ${times} = ${ajout * times}. On part de ${debut}, donc ${debut} + ${ajout * times} = ${final}.`,
+          `total vaut ${final} à la fin.`,
+        ),
+        canvas: scratchCanvas("Total", [
+          { type: "event" },
+          { type: "set_variable", variable: "total", value: debut },
+          { type: "repeat", times, children: [{ type: "change_variable", variable: "total", value: ajout }] },
+          { type: "say", text: "total" },
+        ]),
+      };
+    },
+  },
 ];

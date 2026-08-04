@@ -19,9 +19,16 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
   // Jamais deux fois la même ligne. Un gabarit dont le piège coïncide avec la
   // bonne réponse (les coordonnées inversées quand x = y, un arrondi égal à la
   // valeur de départ…) affichait la même proposition deux fois, et l'élève
-  // voyait deux réponses justes. Dédupliquer AVANT de couper à quatre laisse
-  // aussi une chance aux distracteurs surnuméraires de prendre la place.
-  return shuffle(Array.from(new Set([correct, ...wrongs]))).slice(0, 4);
+  // voyait deux réponses justes.
+  // ⚠️ 04/08/2026 — la version précédente dédoublonnait PUIS coupait à quatre :
+  // avec cinq distracteurs, le mélange pouvait renvoyer la bonne réponse en
+  // cinquième position et le découpage l'emportait. L'élève ne pouvait alors
+  // pas réussir, et rien ne le signalait. On met désormais la bonne réponse de
+  // côté, on tire trois distracteurs, puis on mélange l'ensemble.
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
 }
 
 function triangleCanvas(params: {
@@ -1251,6 +1258,93 @@ export const trianglesBank: TutorBankItemV4[] = [
         comparator: "number_equal",
         explanation: expl(`Troisième angle = 180 - ${a} - ${b} = ${c}°.`),
         canvas: triangleCanvas({ angleLabels: { A: `${a}°`, B: `${b}°`, C: "?" } }),
+      };
+    },
+  },
+
+  /* ===== TRIANGLE_CONSTRUIRE =====
+     Les deux générateurs de ce micro portaient sur l'inégalité triangulaire et
+     l'ont suivie le 04/08/2026. Celui-ci reste sur le geste de construction :
+     quel instrument, dans quel ordre. */
+  {
+    kind: "template",
+    id: "triangle_construire_tpl_3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_construire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une longueur se reporte au compas, un angle se trace au rapporteur.",
+    tags: ["triangle_figure", "construire", "template", "instrument"],
+    generate: () => {
+      const cas = randomChoice([
+        {
+          donnees: "les trois longueurs de ses côtés",
+          instrument: "le compas",
+          pourquoi:
+            "les deux derniers sommets se trouvent en reportant deux longueurs : seul le compas sait tracer tous les points situés à une distance donnée.",
+        },
+        {
+          donnees: "un côté et les deux angles à ses extrémités",
+          instrument: "le rapporteur",
+          pourquoi:
+            "une fois le côté tracé à la règle, il reste à ouvrir les deux angles à ses extrémités : c’est le travail du rapporteur.",
+        },
+        {
+          donnees: "deux côtés et l’angle entre les deux",
+          instrument: "le rapporteur",
+          pourquoi:
+            "on trace le premier côté à la règle, puis on ouvre l’angle au rapporteur avant de reporter la seconde longueur.",
+        },
+      ]);
+      return {
+        text: `Marie connaît ${cas.donnees}. Quel instrument lui est indispensable pour tracer son triangle ?`,
+        format: "qcm",
+        choices: makeChoices(cas.instrument, ["l’équerre", "le compas", "le rapporteur", "la calculatrice"]),
+        expected: [cas.instrument],
+        comparator: "mcq_exact",
+        explanation: expl(`On utilise ${cas.instrument} : ${cas.pourquoi}`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "triangle_construire_tpl_4",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_construire",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On commence toujours par ce qu’on peut tracer sans rien deviner.",
+    tags: ["triangle_figure", "construire", "template", "ordre"],
+    generate: () => {
+      // Triplets constructibles vérifiés un par un : un triangle impossible
+      // rendrait l'explication fausse, et l'élève chercherait longtemps
+      // l'intersection de deux arcs qui ne se croisent jamais.
+      const [a, b, c] = randomChoice([
+        [7, 5, 4],
+        [9, 6, 5],
+        [8, 7, 4],
+        [6, 5, 3],
+        [10, 7, 6],
+      ]);
+      const premier = `tracer le côté de ${a} cm à la règle`;
+      return {
+        text: `Un triangle a pour côtés ${a} cm, ${b} cm et ${c} cm. Quelle est la première chose à faire pour le construire ?`,
+        format: "qcm",
+        choices: makeChoices(premier, [
+          "mesurer les trois angles au rapporteur",
+          "placer les trois sommets au hasard",
+          "tracer un cercle de rayon 1 cm",
+        ]),
+        expected: [premier],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `On commence par ce qu’on peut tracer sans rien deviner : le plus grand côté, ${a} cm, à la règle. ` +
+            `Le troisième sommet vient ensuite, là où se croisent un arc de ${b} cm tracé depuis une extrémité et un arc de ${c} cm tracé depuis l’autre.`,
+        ),
       };
     },
   },

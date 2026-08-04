@@ -2083,4 +2083,145 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ===== PROP_DEFI =====
+     Les défis de pourcentage sont partis vers prop_ratio_defi le 04/08/2026.
+     Ce qui reste ici tient à la proportionnalité elle-même : la reconnaître,
+     et surtout savoir dire quand elle n'est PAS là. */
+  {
+    kind: "template",
+    id: "prop_defi_tpl_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
+    difficulty: 5,
+    theme: "reunion",
+    hint: "Passe d’abord par le prix d’un seul, puis multiplie.",
+    tags: ["prop_proportionnalite", "defi", "template", "reunion"],
+    generate: () => {
+      const unite = randomChoice([3, 4, 5, 6, 7]);
+      const lot = randomChoice([4, 5, 6, 8]);
+      const demande = randomChoice([7, 9, 11, 13]);
+      const produit = randomChoice([
+        { nom: "samoussas", lieu: "au snack de l’Étang-Salé" },
+        { nom: "bouchons", lieu: "au marché de Saint-Paul" },
+        { nom: "bonbons piments", lieu: "sur le front de mer de Saint-Pierre" },
+      ]);
+      return {
+        text: `${lot} ${produit.nom} coûtent ${lot * unite} € ${produit.lieu}. Combien coûtent ${demande} ${produit.nom} ?`,
+        format: "short",
+        expected: formatEuro(demande * unite),
+        comparator: "number_equal",
+        explanation: expl(
+          `On passe par l’unité : ${lot * unite} ÷ ${lot} = ${unite} € l’un. ` +
+            `Ensuite ${demande} × ${unite} = ${demande * unite} €.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_defi_tpl_3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Compare le prix d’un seul dans les deux cas.",
+    tags: ["prop_proportionnalite", "defi", "template", "non_proportionnalite"],
+    generate: () => {
+      const unite = randomChoice([2, 3, 4, 5]);
+      const a = randomChoice([4, 5, 6]);
+      const b = a * 2;
+      const proportionnel = randomChoice([true, false]);
+      const prixB = proportionnel ? b * unite : b * unite + randomChoice([2, 3, 4]);
+      return {
+        text:
+          `${a} entrées au musée coûtent ${a * unite} €, et ${b} entrées coûtent ${prixB} €. ` +
+          `Le prix est-il proportionnel au nombre d’entrées ?`,
+        format: "qcm",
+        choices: shuffle(["oui", "non", "seulement à partir de 10 entrées", "on ne peut pas savoir"]),
+        expected: [proportionnel ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `Prix d’une entrée dans le premier cas : ${a * unite} ÷ ${a} = ${unite} €. ` +
+            `Dans le second : ${prixB} ÷ ${b} = ${String(prixB / b).replace(".", ",")} €. ` +
+            (proportionnel
+              ? "Les deux donnent le même prix unitaire : le prix est bien proportionnel au nombre d’entrées."
+              : "Les deux prix unitaires diffèrent : le prix n’est donc PAS proportionnel au nombre d’entrées."),
+        ),
+      };
+    },
+  },
+
+  /* ===== PROP_RATIO_DEFI =====
+     Il manquait les questions ouvertes : un élève de 5e doit savoir dire ce
+     qu'il fait d'un pourcentage, pas seulement le calculer. */
+  {
+    kind: "fixed",
+    id: "prop_ratio_defi_open_1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "prop_ratio_pourcentage",
+    microId: "prop_ratio_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un magasin augmente un prix de 20 %, puis le baisse de 20 %. Le prix revient-il au point de départ ? Explique.",
+    format: "open",
+    expected: ["non", "plus petit", "moins", "pas le même", "pas le meme", "baisse"],
+    comparator: "contains_keyword",
+    hint: "Prends 100 € et fais les deux opérations l’une après l’autre.",
+    explanation: expl(
+      "Non. Partons de 100 € : après une hausse de 20 %, le prix est de 120 €. La baisse de 20 % s’applique alors à 120 €, pas à 100 € : elle retire 24 €, ce qui donne 96 €. Un pourcentage s’applique toujours à la valeur du moment, jamais à celle du départ.",
+    ),
+    tags: ["prop_ratio_pourcentage", "defi", "open", "piege"],
+  },
+  {
+    kind: "fixed",
+    id: "prop_ratio_defi_open_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "prop_ratio_pourcentage",
+    microId: "prop_ratio_defi",
+    difficulty: 4,
+    theme: "reunion",
+    text: "Dans une classe de 25 élèves du collège de Saint-Louis, 15 font de l’espagnol. Explique comment exprimer cette proportion en pourcentage.",
+    format: "open",
+    expected: ["100", "60", "sur 100", "quatrième", "quatrieme", "produit en croix"],
+    comparator: "contains_keyword",
+    hint: "Un pourcentage, c’est une proportion ramenée à 100.",
+    explanation: expl(
+      "Un pourcentage, c’est le nombre d’élèves qu’il y aurait s’ils étaient 100 en tout. On cherche donc la quatrième proportionnelle : 15 pour 25, combien pour 100 ? 100 ÷ 25 = 4, donc 15 × 4 = 60. Il y a 60 % d’élèves qui font de l’espagnol.",
+    ),
+    tags: ["prop_ratio_pourcentage", "defi", "open", "reunion"],
+  },
+  {
+    kind: "template",
+    id: "prop_ratio_defi_tpl_2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "prop_ratio_pourcentage",
+    microId: "prop_ratio_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Dis à quel total tu ramènes la proportion, et par combien tu multiplies.",
+    tags: ["prop_ratio_pourcentage", "defi", "open", "template"],
+    generate: () => {
+      const total = randomChoice([20, 25, 50]);
+      const part = randomChoice([2, 3, 4, 6, 7]) * (total / 10);
+      const facteur = 100 / total;
+      return {
+        text: `Sur ${total} personnes interrogées, ${part} répondent « oui ». Explique comment tu exprimes cette proportion en pourcentage.`,
+        format: "open",
+        expected: ["100", "sur 100", "multipli", "quatrième", "quatrieme", "produit en croix"],
+        comparator: "contains_keyword",
+        explanation: expl(
+          `Un pourcentage ramène la proportion à un total de 100. On passe de ${total} à 100 en multipliant par ${facteur}. ` +
+            `On applique le même facteur à la part : ${part} × ${facteur} = ${part * facteur}. La réponse est ${part * facteur} %.`,
+        ),
+      };
+    },
+  },
 ];

@@ -22,9 +22,16 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
   // Jamais deux fois la même ligne. Un gabarit dont le piège coïncide avec la
   // bonne réponse (les coordonnées inversées quand x = y, un arrondi égal à la
   // valeur de départ…) affichait la même proposition deux fois, et l'élève
-  // voyait deux réponses justes. Dédupliquer AVANT de couper à quatre laisse
-  // aussi une chance aux distracteurs surnuméraires de prendre la place.
-  return shuffle(Array.from(new Set([correct, ...wrongs]))).slice(0, 4);
+  // voyait deux réponses justes.
+  // ⚠️ 04/08/2026 — la version précédente dédoublonnait PUIS coupait à quatre :
+  // avec cinq distracteurs, le mélange pouvait renvoyer la bonne réponse en
+  // cinquième position et le découpage l'emportait. L'élève ne pouvait alors
+  // pas réussir, et rien ne le signalait. On met désormais la bonne réponse de
+  // côté, on tire trois distracteurs, puis on mélange l'ensemble.
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
 }
 
 function angleType(angle: number) {
