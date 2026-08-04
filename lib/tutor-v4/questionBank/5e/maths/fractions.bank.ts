@@ -78,7 +78,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_egale",
     difficulty: 1,
     theme: "neutral",
-    text: "1/2 et 2/4 représentent-ils la même quantité ?",
+    text: "$\\dfrac{1}{2}$ et $\\dfrac{2}{4}$ représentent-ils la même quantité ?",
     format: "short",
     expected: ["oui"],
     comparator: "contains_keyword",
@@ -99,7 +99,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_egale",
     difficulty: 1,
     theme: "neutral",
-    text: "3/5 et 6/10 sont-elles égales ?",
+    text: "$\\dfrac{3}{5}$ et $\\dfrac{6}{10}$ sont-elles égales ?",
     format: "short",
     expected: ["oui"],
     comparator: "contains_keyword",
@@ -120,7 +120,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_egale",
     difficulty: 2,
     theme: "neutral",
-    text: "2/3 et 4/5 sont-elles égales ?",
+    text: "$\\dfrac{2}{3}$ et $\\dfrac{4}{5}$ sont-elles égales ?",
     format: "short",
     expected: ["non"],
     comparator: "contains_keyword",
@@ -141,7 +141,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_egale",
     difficulty: 2,
     theme: "neutral",
-    text: "Quelle fraction est égale à 3/4 ?",
+    text: "Quelle fraction est égale à $\\dfrac{3}{4}$ ?",
     format: "qcm",
     choices: ["6/8", "5/8", "9/10", "4/3"],
     expected: ["6/8"],
@@ -174,7 +174,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const d2 = isEqual ? d * k : d * k + 1;
 
       return {
-        text: `${n}/${d} et ${n2}/${d2} sont-elles égales ?`,
+        text: `$\\dfrac{${n}}{${d}}$ et $\\dfrac{${n2}}{${d2}}$ sont-elles égales ?`,
         format: "short",
         expected: [isEqual ? "oui" : "non"],
         comparator: "contains_keyword",
@@ -200,7 +200,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_simplifier",
     difficulty: 1,
     theme: "neutral",
-    text: "Simplifie 6/8.",
+    text: "Simplifie $\\dfrac{6}{8}$.",
     format: "short",
     expected: ["3/4"],
     comparator: "fraction_decimal_equivalent",
@@ -221,7 +221,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_simplifier",
     difficulty: 1,
     theme: "neutral",
-    text: "Simplifie 9/12.",
+    text: "Simplifie $\\dfrac{9}{12}$.",
     format: "short",
     expected: ["3/4"],
     comparator: "fraction_decimal_equivalent",
@@ -242,7 +242,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_simplifier",
     difficulty: 2,
     theme: "neutral",
-    text: "Quelle est la forme simplifiée de 15/20 ?",
+    text: "Quelle est la forme simplifiée de $\\dfrac{15}{20}$ ?",
     format: "qcm",
     choices: ["3/4", "5/4", "10/15", "4/3"],
     expected: ["3/4"],
@@ -275,7 +275,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const simp = simplifyFraction(n, d);
 
       return {
-        text: `Simplifie ${n}/${d}.`,
+        text: `Simplifie $\\dfrac{${n}}{${d}}$.`,
         format: "short",
         expected: [fractionStr(simp.n, simp.d)],
         comparator: "fraction_decimal_equivalent",
@@ -299,7 +299,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_rationnel",
     difficulty: 1,
     theme: "neutral",
-    text: "Une fraction comme 3/5 représente-t-elle un nombre rationnel ?",
+    text: "Une fraction comme $\\dfrac{3}{5}$ représente-t-elle un nombre rationnel ?",
     format: "short",
     expected: ["oui"],
     comparator: "contains_keyword",
@@ -367,7 +367,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
-    text: "Quel est le plus grand : 1/2 ou 3/4 ?",
+    text: "Quel est le plus grand : $\\dfrac{1}{2}$ ou $\\dfrac{3}{4}$ ?",
     format: "short",
     expected: ["3/4"],
     comparator: "contains_keyword",
@@ -388,7 +388,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
-    text: "Compare 2/3 et 3/5. Réponds par >, < ou =.",
+    text: "Compare $\\dfrac{2}{3}$ et $\\dfrac{3}{5}$. Réponds par >, < ou =.",
     format: "short",
     expected: [">"],
     comparator: "contains_keyword",
@@ -456,7 +456,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const sign = v1 > v2 ? ">" : v1 < v2 ? "<" : "=";
 
       return {
-        text: `Compare ${n1}/${d1} et ${n2}/${d2}. Réponds par >, < ou =.`,
+        text: `Compare $\\dfrac{${n1}}{${d1}}$ et $\\dfrac{${n2}}{${d2}}$. Réponds par >, < ou =.`,
         format: "short",
         expected: [sign],
         comparator: "contains_keyword",
@@ -480,7 +480,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_additionner",
     difficulty: 2,
     theme: "neutral",
-    text: "Calcule 1/4 + 2/4.",
+    text: "Calcule $\\dfrac{1}{4} + \\dfrac{2}{4}$.",
     format: "short",
     expected: ["3/4"],
     comparator: "fraction_decimal_equivalent",
@@ -501,7 +501,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_additionner",
     difficulty: 2,
     theme: "neutral",
-    text: "Calcule 3/5 - 1/5.",
+    text: "Calcule $\\dfrac{3}{5} - \\dfrac{1}{5}$.",
     format: "short",
     expected: ["2/5"],
     comparator: "fraction_decimal_equivalent",
@@ -522,7 +522,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_additionner",
     difficulty: 3,
     theme: "neutral",
-    text: "Calcule 1/2 + 1/3.",
+    text: "Calcule $\\dfrac{1}{2} + \\dfrac{1}{3}$.",
     format: "short",
     expected: ["5/6"],
     comparator: "fraction_decimal_equivalent",
@@ -543,7 +543,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_additionner",
     difficulty: 3,
     theme: "reunion",
-    text: "À La Réunion, Inès mange 1/4 d’un gâteau le matin puis 1/2 du même gâteau à midi. Quelle quantité a-t-elle mangée en tout ?",
+    text: "À La Réunion, Inès mange $\\dfrac{1}{4}$ d’un gâteau le matin puis $\\dfrac{1}{2}$ du même gâteau à midi. Quelle quantité a-t-elle mangée en tout ?",
     format: "qcm",
     choices: ["2/3", "3/4", "1", "5/8"],
     expected: ["3/4"],
@@ -578,7 +578,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const simp = simplifyFraction(n1 * d2 + n2 * d1, d1 * d2);
 
       return {
-        text: `Calcule ${n1}/${d1} + ${n2}/${d2}.`,
+        text: `Calcule $\\dfrac{${n1}}{${d1}}$ + $\\dfrac{${n2}}{${d2}}$.`,
         format: "short",
         expected: [fractionStr(simp.n, simp.d)],
         comparator: "fraction_decimal_equivalent",
@@ -602,7 +602,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_multiplier",
     difficulty: 2,
     theme: "neutral",
-    text: "Calcule 2/3 × 3/4.",
+    text: "Calcule $\\dfrac{2}{3} \\times \\dfrac{3}{4}$.",
     format: "short",
     expected: ["1/2", "6/12"],
     comparator: "fraction_decimal_equivalent",
@@ -623,7 +623,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_multiplier",
     difficulty: 2,
     theme: "neutral",
-    text: "Calcule 5/6 × 2/5.",
+    text: "Calcule $\\dfrac{5}{6} \\times \\dfrac{2}{5}$.",
     format: "short",
     expected: ["1/3", "10/30"],
     comparator: "fraction_decimal_equivalent",
@@ -644,7 +644,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_multiplier",
     difficulty: 3,
     theme: "neutral",
-    text: "Quel est le résultat de 3/4 × 2/3 ?",
+    text: "Quel est le résultat de $\\dfrac{3}{4} \\times \\dfrac{2}{3}$ ?",
     format: "qcm",
     choices: ["1/2", "5/7", "6/7", "2/5"],
     expected: ["1/2"],
@@ -680,7 +680,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const simp = simplifyFraction(n1 * n2, d1 * d2);
 
       return {
-        text: `Calcule ${n1}/${d1} × ${n2}/${d2}.`,
+        text: `Calcule $\\dfrac{${n1}}{${d1}}$ × $\\dfrac{${n2}}{${d2}}$.`,
         format: "short",
         expected: [fractionStr(simp.n, simp.d)],
         comparator: "fraction_decimal_equivalent",
@@ -704,7 +704,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_quantite",
     difficulty: 2,
     theme: "neutral",
-    text: "Calcule 3/4 de 20.",
+    text: "Calcule $\\dfrac{3}{4}$ de 20.",
     format: "short",
     expected: ["15"],
     comparator: "number_equal",
@@ -725,7 +725,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "neutral",
-    text: "Calcule 2/5 de 30.",
+    text: "Calcule $\\dfrac{2}{5}$ de 30.",
     format: "short",
     expected: ["12"],
     comparator: "number_equal",
@@ -746,7 +746,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "cuisine",
-    text: "Pour une recette, Léa utilise 3/4 d’un paquet de 28 biscuits. Combien de biscuits cela représente-t-il ?",
+    text: "Pour une recette, Léa utilise $\\dfrac{3}{4}$ d’un paquet de 28 biscuits. Combien de biscuits cela représente-t-il ?",
     format: "short",
     expected: ["21"],
     comparator: "number_equal",
@@ -777,7 +777,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const good = (quantity * n) / d;
 
       return {
-        text: `Calcule ${n}/${d} de ${quantity}.`,
+        text: `Calcule $\\dfrac{${n}}{${d}}$ de ${quantity}.`,
         format: "short",
         expected: [String(good)],
         comparator: "number_equal",
@@ -809,7 +809,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_oppose",
     difficulty: 1,
     theme: "neutral",
-    text: "Quel est l’opposé de 3/5 ?",
+    text: "Quel est l’opposé de $\\dfrac{3}{5}$ ?",
     format: "short",
     expected: ["-3/5"],
     comparator: "fraction_decimal_equivalent",
@@ -830,7 +830,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_oppose",
     difficulty: 2,
     theme: "neutral",
-    text: "Quel est l’opposé de -7/9 ?",
+    text: "Quel est l’opposé de -$\\dfrac{7}{9}$ ?",
     format: "short",
     expected: ["7/9"],
     comparator: "fraction_decimal_equivalent",
@@ -855,7 +855,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 1/3 est plus grand que 1/4.",
+    text: "Explique pourquoi $\\dfrac{1}{3}$ est plus grand que $\\dfrac{1}{4}$.",
     format: "open",
     expected: ["plus grand", "parts", "quart", "tiers"],
     comparator: "contains_keyword",
@@ -876,7 +876,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_calcul_defi",
     difficulty: 4,
     theme: "cuisine",
-    text: "Une recette utilise 2/3 d’un litre de lait. Léa ne veut préparer que la moitié de la recette. Quelle quantité de lait doit-elle utiliser ?",
+    text: "Une recette utilise $\\dfrac{2}{3}$ d’un litre de lait. Léa ne veut préparer que la moitié de la recette. Quelle quantité de lait doit-elle utiliser ?",
     format: "short",
     expected: ["1/3"],
     comparator: "fraction_decimal_equivalent",
@@ -897,7 +897,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_calcul_defi",
     difficulty: 4,
     theme: "reunion",
-    text: "À La Réunion, Enzo mange 3/4 d’un gâteau le midi puis 1/6 du même gâteau le soir. Quelle quantité a-t-il mangée en tout ?",
+    text: "À La Réunion, Enzo mange $\\dfrac{3}{4}$ d’un gâteau le midi puis $\\dfrac{1}{6}$ du même gâteau le soir. Quelle quantité a-t-il mangée en tout ?",
     format: "qcm",
     choices: ["5/6", "7/12", "11/12", "1"],
     expected: ["11/12"],
@@ -922,7 +922,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_egale",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi 1/2 et 2/4 représentent la même quantité.",
+    text: "Explique pourquoi $\\dfrac{1}{2}$ et $\\dfrac{2}{4}$ représentent la même quantité.",
     format: "open",
     expected: ["multiplie", "numérateur", "dénominateur", "2"],
     comparator: "contains_keyword",
@@ -942,7 +942,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_simplifier",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique comment simplifier la fraction 12/18.",
+    text: "Explique comment simplifier la fraction $\\dfrac{12}{18}$.",
     format: "open",
     expected: ["divise", "6", "2/3"],
     comparator: "contains_keyword",
@@ -962,7 +962,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_comparer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi 2/3 est plus grand que 3/5.",
+    text: "Explique pourquoi $\\dfrac{2}{3}$ est plus grand que $\\dfrac{3}{5}$.",
     format: "open",
     expected: ["2/3", "3/5", "10", "9"],
     comparator: "contains_keyword",
@@ -982,7 +982,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_additionner",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi 1/2 + 1/3 = 5/6.",
+    text: "Explique pourquoi $\\dfrac{1}{2} + \\dfrac{1}{3}$ = $\\dfrac{5}{6}$.",
     format: "open",
     expected: ["même dénominateur", "3/6", "2/6", "5/6"],
     comparator: "contains_keyword",
@@ -1002,7 +1002,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_multiplier",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer 2/3 × 3/4.",
+    text: "Explique comment calculer $\\dfrac{2}{3} \\times \\dfrac{3}{4}$.",
     format: "open",
     expected: ["multiplie", "numérateurs", "dénominateurs", "1/2"],
     comparator: "contains_keyword",
@@ -1022,7 +1022,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer 3/4 de 20.",
+    text: "Explique comment calculer $\\dfrac{3}{4}$ de 20.",
     format: "open",
     expected: ["20", "4", "5", "15"],
     comparator: "contains_keyword",
@@ -1042,7 +1042,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_oppose",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique ce qu’est l’opposé de 3/5.",
+    text: "Explique ce qu’est l’opposé de $\\dfrac{3}{5}$.",
     format: "open",
     expected: ["signe", "-3/5", "0"],
     comparator: "contains_keyword",
@@ -1062,7 +1062,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_calcul_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève écrit : 1/2 + 1/3 = 2/5. Explique son erreur.",
+    text: "Un élève écrit : $\\dfrac{1}{2} + \\dfrac{1}{3}$ = $\\dfrac{2}{5}$. Explique son erreur.",
     format: "open",
     expected: ["dénominateur", "même dénominateur", "5/6", "erreur"],
     comparator: "contains_keyword",
@@ -1099,7 +1099,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const s = randomChoice(situations);
 
       return {
-        text: `Les fractions ${s.a[0]}/${s.a[1]} et ${s.b[0]}/${s.b[1]} représentent-elles la même quantité ?`,
+        text: `Les fractions $\\dfrac{${s.a[0]}}{${s.a[1]}}$ et $\\dfrac{${s.b[0]}}{${s.b[1]}}$ représentent-elles la même quantité ?`,
         format: "qcm",
         choices: shuffle(["oui", "non"]),
         expected: [s.answer],
@@ -1146,7 +1146,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const simp = simplifyFraction(s.n, s.d);
 
       return {
-        text: `Simplifie la fraction représentée : ${s.n}/${s.d}.`,
+        text: `Simplifie la fraction représentée : $\\dfrac{${s.n}}{${s.d}}$.`,
         format: "short",
         expected: [fractionStr(simp.n, simp.d), `${s.n}/${s.d}`],
         comparator: "fraction_decimal_equivalent",
@@ -1227,7 +1227,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const sign = va > vb ? ">" : va < vb ? "<" : "=";
 
       return {
-        text: `Compare ${s.a[0]}/${s.a[1]} et ${s.b[0]}/${s.b[1]}. Réponds par >, < ou =.`,
+        text: `Compare $\\dfrac{${s.a[0]}}{${s.a[1]}}$ et $\\dfrac{${s.b[0]}}{${s.b[1]}}$. Réponds par >, < ou =.`,
         format: "short",
         expected: [sign],
         comparator: "contains_keyword",
@@ -1266,7 +1266,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const simp = simplifyFraction(total, d);
 
       return {
-        text: `Calcule ${a}/${d} + ${b}/${d}.`,
+        text: `Calcule $\\dfrac{${a}}{${d}}$ + $\\dfrac{${b}}{${d}}$.`,
         format: "short",
         expected: [fractionStr(simp.n, simp.d), `${total}/${d}`],
         comparator: "fraction_decimal_equivalent",
@@ -1301,7 +1301,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const result = (base / d) * n;
 
       return {
-        text: `Calcule ${n}/${d} de ${base}.`,
+        text: `Calcule $\\dfrac{${n}}{${d}}$ de ${base}.`,
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
@@ -1327,7 +1327,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_egale",
     difficulty: 3,
     theme: "neutral",
-    text: "Deux figures ont 2 parts colorées sur 4. Peut-on toujours dire qu’elles représentent 2/4 ?",
+    text: "Deux figures ont 2 parts colorées sur 4. Peut-on toujours dire qu’elles représentent $\\dfrac{2}{4}$ ?",
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["non"],
@@ -1355,7 +1355,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_additionner",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève écrit : 1/2 + 1/3 = 2/5. Quelle est son erreur ?",
+    text: "Un élève écrit : $\\dfrac{1}{2} + \\dfrac{1}{3}$ = $\\dfrac{2}{5}$. Quelle est son erreur ?",
     format: "open",
     expected: ["dénominateur", "même dénominateur", "5/6", "additionne"],
     comparator: "contains_keyword",
@@ -1380,7 +1380,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_egale",
     difficulty: 2,
     theme: "neutral",
-    text: "Quelle fraction est égale à 2/5 ?",
+    text: "Quelle fraction est égale à $\\dfrac{2}{5}$ ?",
     format: "qcm",
     choices: ["4/10", "3/5", "2/10", "5/2"],
     expected: ["4/10"],
@@ -1405,7 +1405,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const d = randomChoice([2, 3, 4, 5]);
       const k = randomChoice([2, 3, 4]);
       return {
-        text: `Complète : ${n}/${d} = ?/${d * k}.`,
+        text: `Complète : $\\dfrac{${n}}{${d}}$ = ?/${d * k}.`,
         format: "short",
         expected: [String(n * k)],
         comparator: "number_equal",
@@ -1426,7 +1426,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_simplifier",
     difficulty: 2,
     theme: "neutral",
-    text: "Simplifie 10/15.",
+    text: "Simplifie $\\dfrac{10}{15}$.",
     format: "short",
     expected: ["2/3"],
     comparator: "fraction_decimal_equivalent",
@@ -1443,7 +1443,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_simplifier",
     difficulty: 3,
     theme: "neutral",
-    text: "Simplifie 24/36.",
+    text: "Simplifie $\\dfrac{24}{36}$.",
     format: "short",
     expected: ["2/3"],
     comparator: "fraction_decimal_equivalent",
@@ -1487,7 +1487,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const d = base[1] * k;
       const simp = simplifyFraction(n, d);
       return {
-        text: `Simplifie ${n}/${d}.`,
+        text: `Simplifie $\\dfrac{${n}}{${d}}$.`,
         format: "short",
         expected: [fractionStr(simp.n, simp.d)],
         comparator: "fraction_decimal_equivalent",
@@ -1616,7 +1616,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
-    text: "Compare 5/8 et 3/8. Réponds par >, < ou =.",
+    text: "Compare $\\dfrac{5}{8}$ et $\\dfrac{3}{8}$. Réponds par >, < ou =.",
     format: "short",
     expected: [">"],
     comparator: "contains_keyword",
@@ -1682,7 +1682,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const right = n2 * d1;
       const signe = left > right ? ">" : left < right ? "<" : "=";
       return {
-        text: `Compare ${n1}/${d1} et ${n2}/${d2}. Réponds par >, < ou =.`,
+        text: `Compare $\\dfrac{${n1}}{${d1}}$ et $\\dfrac{${n2}}{${d2}}$. Réponds par >, < ou =.`,
         format: "short",
         expected: [signe],
         comparator: "contains_keyword",
@@ -1703,7 +1703,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_additionner",
     difficulty: 2,
     theme: "neutral",
-    text: "Calcule 2/7 + 3/7.",
+    text: "Calcule $\\dfrac{2}{7} + \\dfrac{3}{7}$.",
     format: "short",
     expected: ["5/7"],
     comparator: "fraction_decimal_equivalent",
@@ -1720,7 +1720,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_additionner",
     difficulty: 3,
     theme: "neutral",
-    text: "Calcule 2/3 + 1/6.",
+    text: "Calcule $\\dfrac{2}{3} + \\dfrac{1}{6}$.",
     format: "short",
     expected: ["5/6"],
     comparator: "fraction_decimal_equivalent",
@@ -1741,7 +1741,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_multiplier",
     difficulty: 2,
     theme: "neutral",
-    text: "Calcule 5/8 × 8/5.",
+    text: "Calcule $\\dfrac{5}{8} \\times \\dfrac{8}{5}$.",
     format: "short",
     expected: ["1", "40/40"],
     comparator: "fraction_decimal_equivalent",
@@ -1760,7 +1760,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_multiplier",
     difficulty: 2,
     theme: "neutral",
-    text: "Calcule 1/2 × 4/5.",
+    text: "Calcule $\\dfrac{1}{2} \\times \\dfrac{4}{5}$.",
     format: "short",
     expected: ["2/5", "4/10"],
     comparator: "fraction_decimal_equivalent",
@@ -1777,7 +1777,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_multiplier",
     difficulty: 3,
     theme: "neutral",
-    text: "Quel est le résultat de 3/5 × 2/3 ?",
+    text: "Quel est le résultat de $\\dfrac{3}{5} \\times \\dfrac{2}{3}$ ?",
     format: "qcm",
     choices: ["2/5", "5/8", "6/8", "1"],
     expected: ["2/5"],
@@ -1824,7 +1824,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const [n1, d1, n2, d2] = randomChoice(pairs);
       const simp = simplifyFraction(n1 * n2, d1 * d2);
       return {
-        text: `Calcule ${n1}/${d1} × ${n2}/${d2}.`,
+        text: `Calcule $\\dfrac{${n1}}{${d1}}$ × $\\dfrac{${n2}}{${d2}}$.`,
         format: "short",
         expected: [fractionStr(simp.n, simp.d), fractionStr(n1 * n2, d1 * d2)],
         comparator: "fraction_decimal_equivalent",
@@ -1845,7 +1845,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_quantite",
     difficulty: 2,
     theme: "neutral",
-    text: "Calcule 1/3 de 18.",
+    text: "Calcule $\\dfrac{1}{3}$ de 18.",
     format: "short",
     expected: ["6"],
     comparator: "number_equal",
@@ -1862,7 +1862,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "neutral",
-    text: "Calcule 3/5 de 25.",
+    text: "Calcule $\\dfrac{3}{5}$ de 25.",
     format: "short",
     expected: ["15"],
     comparator: "number_equal",
@@ -1879,7 +1879,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "neutral",
-    text: "Combien vaut 2/3 de 9 ?",
+    text: "Combien vaut $\\dfrac{2}{3}$ de 9 ?",
     format: "qcm",
     choices: ["6", "3", "5", "18"],
     expected: ["6"],
@@ -1906,7 +1906,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const quantite = d * unit;
       const res = (quantite * n) / d;
       return {
-        text: `Un panier contient ${quantite} letchis. On en mange ${n}/${d}. Combien de letchis cela représente-t-il ?`,
+        text: `Un panier contient ${quantite} letchis. On en mange $\\dfrac{${n}}{${d}}$. Combien de letchis cela représente-t-il ?`,
         format: "short",
         expected: [String(res)],
         comparator: "number_equal",
@@ -1935,7 +1935,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_oppose",
     difficulty: 1,
     theme: "neutral",
-    text: "Quel est l’opposé de 2/7 ?",
+    text: "Quel est l’opposé de $\\dfrac{2}{7}$ ?",
     format: "short",
     expected: ["-2/7"],
     comparator: "fraction_decimal_equivalent",
@@ -1952,7 +1952,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_oppose",
     difficulty: 2,
     theme: "neutral",
-    text: "Quel est l’opposé de -4/9 ?",
+    text: "Quel est l’opposé de -$\\dfrac{4}{9}$ ?",
     format: "short",
     expected: ["4/9"],
     comparator: "fraction_decimal_equivalent",
@@ -1969,7 +1969,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_oppose",
     difficulty: 2,
     theme: "neutral",
-    text: "Quel est l’opposé de 5/6 ?",
+    text: "Quel est l’opposé de $\\dfrac{5}{6}$ ?",
     format: "qcm",
     choices: ["-5/6", "6/5", "5/6", "-6/5"],
     expected: ["-5/6"],
@@ -2028,7 +2028,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const n = randomChoice([1, 2, 3, 4, 5]);
       const d = randomChoice([3, 5, 7, 8, 9]);
       return {
-        text: `Quel est l’opposé de ${n}/${d} ?`,
+        text: `Quel est l’opposé de $\\dfrac{${n}}{${d}}$ ?`,
         format: "short",
         expected: [`-${n}/${d}`],
         comparator: "fraction_decimal_equivalent",
@@ -2051,7 +2051,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const n = randomChoice([2, 3, 4, 7]);
       const d = randomChoice([5, 6, 9, 11]);
       return {
-        text: `Quel est l’opposé de -${n}/${d} ?`,
+        text: `Quel est l’opposé de -$\\dfrac{${n}}{${d}}$ ?`,
         format: "short",
         expected: [fractionStr(n, d)],
         comparator: "fraction_decimal_equivalent",
@@ -2072,7 +2072,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_calcul_defi",
     difficulty: 4,
     theme: "reunion",
-    text: "À La Réunion, Tom parcourt 3/4 d’un sentier de 12 km. Combien de kilomètres a-t-il parcourus ?",
+    text: "À La Réunion, Tom parcourt $\\dfrac{3}{4}$ d’un sentier de 12 km. Combien de kilomètres a-t-il parcourus ?",
     format: "short",
     expected: ["9"],
     comparator: "number_equal",
@@ -2107,7 +2107,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_calcul_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Calcule 1/2 + 1/3 + 1/6.",
+    text: "Calcule $\\dfrac{1}{2} + \\dfrac{1}{3} + \\dfrac{1}{6}$.",
     format: "short",
     expected: ["1", "6/6"],
     comparator: "fraction_decimal_equivalent",
@@ -2124,7 +2124,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_calcul_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève dit : « 2/3 × 2/3 = 4/3 ». Explique son erreur.",
+    text: "Un élève dit : « $\\dfrac{2}{3} \\times \\dfrac{2}{3}$ = $\\dfrac{4}{3}$ ». Explique son erreur.",
     format: "open",
     expected: ["dénominateurs", "multiplie", "4/9"],
     comparator: "contains_keyword",
@@ -2141,7 +2141,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Dans une classe, 2/5 des élèves font de l’espagnol et 1/3 de l’allemand. Quelle langue est choisie par le plus d’élèves ?",
+    text: "Dans une classe, $\\dfrac{2}{5}$ des élèves font de l’espagnol et $\\dfrac{1}{3}$ de l’allemand. Quelle langue est choisie par le plus d’élèves ?",
     format: "qcm",
     choices: ["espagnol", "allemand", "autant des deux", "aucun"],
     expected: ["espagnol"],
@@ -2168,7 +2168,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const quantite = d * unit;
       const res = (quantite * n) / d;
       return {
-        text: `Un producteur de Saint-Joseph récolte ${quantite} kg de café. Il vend ${n}/${d} de sa récolte. Combien de kg vend-il ?`,
+        text: `Un producteur de Saint-Joseph récolte ${quantite} kg de café. Il vend $\\dfrac{${n}}{${d}}$ de sa récolte. Combien de kg vend-il ?`,
         format: "short",
         expected: [String(res)],
         comparator: "number_equal",
@@ -2190,7 +2190,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Range ces trois fractions de la plus petite à la plus grande : 1/2 ; 1/5 ; 1/3",
+    text: "Range ces trois fractions de la plus petite à la plus grande : $\\dfrac{1}{2}$ ; $\\dfrac{1}{5}$ ; $\\dfrac{1}{3}$",
     format: "qcm",
     choices: [
       "1/5 ; 1/3 ; 1/2",
@@ -2240,7 +2240,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 5,
     theme: "reunion",
-    text: "Sur le marché forain de Saint-Pierre, Malia achète 3/4 d’un sac de letchis, Kevin 5/8 du même sac. Qui en a acheté le plus ?",
+    text: "Sur le marché forain de Saint-Pierre, Malia achète $\\dfrac{3}{4}$ d’un sac de letchis, Kevin $\\dfrac{5}{8}$ du même sac. Qui en a acheté le plus ?",
     format: "qcm",
     choices: ["Malia", "Kevin", "les deux pareil", "on ne peut pas comparer"],
     expected: ["Malia"],
@@ -2260,7 +2260,7 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Un élève affirme : « 3/8 est plus grand que 1/2, parce que 3 est plus grand que 1 et 8 est plus grand que 2 ». Explique son erreur.",
+    text: "Un élève affirme : « $\\dfrac{3}{8}$ est plus grand que $\\dfrac{1}{2}$, parce que 3 est plus grand que 1 et 8 est plus grand que 2 ». Explique son erreur.",
     format: "open",
     expected: ["même dénominateur", "meme denominateur", "4/8", "moitié", "moitie", "séparément", "separement"],
     comparator: "contains_keyword",
@@ -2317,7 +2317,7 @@ export const fractionsBank: TutorBankItemV4[] = [
       const n = randomChoice([d / 2 - 1, d / 2 + 1]);
       const plusGrand = n > d / 2;
       return {
-        text: `La fraction ${n}/${d} est-elle plus grande ou plus petite que 1/2 ? Explique comment tu le sais.`,
+        text: `La fraction $\\dfrac{${n}}{${d}}$ est-elle plus grande ou plus petite que $\\dfrac{1}{2}$ ? Explique comment tu le sais.`,
         format: "open",
         expected: ["moitié", "moitie", `${d / 2}/${d}`, "demi", "compare"],
         comparator: "contains_keyword",
