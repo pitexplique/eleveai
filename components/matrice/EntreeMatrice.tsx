@@ -25,8 +25,15 @@ type EntreeHistorique = { question: string; profil: ProfilId; quand: number };
 
 export default function EntreeMatrice({
   variante = "page",
+  onProfil,
 }: {
   variante?: "page" | "accueil";
+  /**
+   * Prévenu à chaque choix de profil. C'est par là que l'accueil se réordonne :
+   * depuis le 05/08 cette barre REMPLACE les huit tuiles « Qui est-ce ? », donc
+   * c'est elle qui doit dire au journal pour qui il se range.
+   */
+  onProfil?: (profil: ProfilId) => void;
 }) {
   const surAccueil = variante === "accueil";
 
@@ -132,6 +139,7 @@ export default function EntreeMatrice({
       /* tant pis */
     }
     track("ia_profil", { profil: id, ou: variante });
+    onProfil?.(id);
     if (question.trim()) lancer(question, null, id);
     else setResultat(null);
     champ.current?.focus();

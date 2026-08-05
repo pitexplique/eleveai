@@ -1633,7 +1633,53 @@ export default function AccueilPage({
           endroit d'où la question a un sens.
 
           Le journal ne perd rien : il commence juste en dessous. */}
-      <EntreeMatrice variante="accueil" />
+      <EntreeMatrice
+        variante="accueil"
+        onProfil={(p) => {
+          // La barre a remplacé « Qui est-ce ? » : c'est donc elle qui range le
+          // journal. On écrit dans les MÊMES clés qu'avant (eleveai-cycle et
+          // eleveai-audience), pour que rien d'autre n'ait à changer — le
+          // header, les oreilles et useAudience continuent de lire ce qu'ils
+          // ont toujours lu.
+          const CYCLE_DU_PROFIL: Record<string, string> = {
+            cp: "cp-ce2", ce1: "cp-ce2", ce2: "cp-ce2",
+            cm1: "cm1-cm2", cm2: "cm1-cm2",
+            "6e": "6e-3e", "5e": "6e-3e", "4e": "6e-3e", "3e": "6e-3e",
+            seconde: "lycee", premiere: "lycee", terminale: "lycee",
+          };
+          const ADULTE: Record<string, Colonne> = {
+            parent: "parent", prof: "prof", direction: "principal",
+          };
+
+          const cycle = CYCLE_DU_PROFIL[p];
+          if (cycle) {
+            setCycleChoisi(cycle);
+            setAudienceChoisie(null);
+            setClasseDepliee(CYCLES.find((c) => c.id === cycle)?.classe ?? null);
+            try {
+              localStorage.setItem(CLE_CYCLE, cycle);
+              localStorage.removeItem(CLE_AUDIENCE);
+            } catch {
+              /* ignore */
+            }
+            return;
+          }
+
+          const colonne = ADULTE[p];
+          if (!colonne) return;
+          setAudienceChoisie(colonne);
+          setCycleChoisi(null);
+          try {
+            localStorage.setItem(
+              CLE_AUDIENCE,
+              PORTES_ADULTES.find((x) => x.colonne === colonne)?.memo ?? "",
+            );
+            localStorage.removeItem(CLE_CYCLE);
+          } catch {
+            /* ignore */
+          }
+        }}
+      />
 
       {/* ══ LA MANCHETTE ═════════════════════════════════════════════════════ */}
       <header className="mx-auto w-full min-w-0 max-w-6xl">
@@ -1776,13 +1822,20 @@ export default function AccueilPage({
           </Link>
         </div>
 
-        {/* ══ « QUI EST-CE ? » — LE SÉLECTEUR DE PROFIL ════════════════════════
-            Huit tuiles sur UNE SEULE LIGNE (demande de Frédéric) : sur un
-            téléphone la bande glisse horizontalement au lieu de passer à la
-            ligne — c'est le geste des rangées, et les quatre tuiles d'élève
-            restent les premières vues. Masqué pour un staff connecté : il a son
-            bandeau de tableau de bord, on ne lui demande pas qui il est. */}
-        {!isStaff && (
+        {/* ══ « QUI EST-CE ? » — RETIRÉ LE 05/08/2026 ══════════════════════════
+            La barre d'entrée, en tête de page, pose la même question en plus
+            précis : quinze profils au lieu de huit familles, et elle enchaîne
+            sur « Que veux-tu faire aujourd'hui ? ». Gardées toutes les deux, le
+            premier écran demandait TROIS fois qui était le lecteur (la barre,
+            ces huit tuiles, puis « Ta classe » dans Commence ici) — et quand
+            trois sélecteurs se disputent la même question, on n'en utilise
+            aucun.
+
+            Rien d'autre ne change : la barre écrit dans les mêmes clés
+            (eleveai-cycle, eleveai-audience), donc les oreilles, le header et
+            useAudience continuent de lire ce qu'ils lisaient. Le code des
+            tuiles reste là, prêt à revenir si le test ne donne rien. */}
+        {false && !isStaff && (
           <section className="border-b border-[#1d1c16]/25 py-4">
             {cycleChoisi || audienceChoisie ? (
               // Choix fait — cycle OU profil adulte : la bande se replie en
