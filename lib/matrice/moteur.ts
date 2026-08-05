@@ -13,7 +13,7 @@
 // On ne renvoie jamais plus de trois ressources : au-delà, on a recréé le
 // catalogue qu'on voulait enterrer.
 
-import { urlCoachCiblee } from "./coach";
+import { notionCoach, urlCoachCiblee } from "./coach";
 import { MARQUEURS_INTENTION, NOTIONS } from "./lexique";
 import { getProfil, chipsPour } from "./profils";
 import { RESSOURCES, STATUTS_PUBLIABLES } from "./ressources";
@@ -193,7 +193,14 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
     if (rangNiveau < 0 && !tousNiveaux) continue;
     let score = rangNiveau === 0 ? 6 : rangNiveau > 0 ? 3 : 1;
 
-    // ── 3. La notion. Si on en a lu une, on écarte ce qui parle d'autre chose.
+    // ── 3. La matière. Une question de conjugaison ne doit pas faire sortir le
+    // coach maths, même s'il est « toutes notions » : générique ne veut pas
+    // dire toutes matières.
+    if (notion && r.matiere && r.matiere !== "transversal" && r.matiere !== notion.matiere) {
+      continue;
+    }
+
+    // ── 4. La notion. Si on en a lu une, on écarte ce qui parle d'autre chose.
     const generique = r.notions.includes("*");
     const notionOk = Boolean(notion && r.notions.includes(notion.id));
     if (notion && !notionOk && !generique) continue;
@@ -207,19 +214,23 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
     // ── 5. Ce qui a déjà servi à de vrais élèves passe devant.
     if (r.statut === "testee_eleves") score += 1;
 
-    // Quand la ressource sait viser une notion, on ouvre la bonne porte du
-    // premier coup au lieu de laisser l'élève la chercher dans un menu.
-    const cible = r.accepteNotion
+    // Le coach s'ouvre sur la classe de la personne plutôt que sur sa page
+    // générale. Le bonus, lui, ne tombe que si la notion demandée existe
+    // vraiment à ce niveau — sinon on avantagerait le coach pour rien.
+    const url = r.accepteNotion
       ? urlCoachCiblee(profil.id, notion?.id ?? null, r.accepteNotion)
       : null;
-    if (cible) score += 2;
+    const viseNotion = r.accepteNotion
+      ? Boolean(notionCoach(profil.id, notion?.id ?? null, r.accepteNotion))
+      : false;
+    if (viseNotion) score += 2;
 
     candidates.push({
       ressource: r,
       score,
       raison: raisonner(r, rangNiveau, notionOk, intentionOk, intention, profil.groupe === "eleve"),
-      url: cible ?? r.url,
-      ciblee: Boolean(cible),
+      url: url ?? r.url,
+      ciblee: viseNotion,
     });
   }
 

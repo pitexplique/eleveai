@@ -17,13 +17,12 @@
 //      dans lib/tutor-v4/knowledge/<matiere>/<classe>/notions.ts — ne pas les
 //      inventer, les vérifier.
 //
-// ⛔ CONSTAT DU 05/08/2026, à traiter à part : le coach N'APPLIQUE PAS encore
-//    ?classe=. Testé en local avec ?classe=premiere-spe et ?classe=terminale-spe :
-//    le serveur renvoie bien la bonne page, mais la liste de notions affichée
-//    reste celle de la 6e (18 entrées, algo_programmation en tête). L'URL
-//    construite ici est juste — c'est sa prise en compte côté coach qui manque.
-//    Tant que ce n'est pas réglé, la page /ia n'annonce PAS « s'ouvre directement
-//    sur la notion » : on ne promet que ce qu'on a vu marcher.
+// ⚠️ CONSTAT DU 05/08/2026, vérifié en local sur les deux routes :
+//    — /coach-ia/<matiere>?classe=…  APPLIQUE bien la classe (premiere-spe y
+//      affiche Suites, Dérivation, Exponentielle). C'est celle qu'on utilise.
+//    — /tutor-v4?classe=…  ne l'applique PAS : la liste de notions reste celle
+//      de la 6e (18 entrées, algo_programmation en tête). À regarder à part —
+//      d'ici là, on ne construit pas de lien direct vers /tutor-v4.
 
 import type { ProfilId } from "./types";
 
@@ -141,8 +140,19 @@ export const NOTION_COACH_FRANCAIS: TableNotions = {
 };
 
 /**
- * L'URL du coach ouverte au bon endroit. Renvoie null s'il n'y a rien de
- * précis à viser — dans ce cas on garde l'URL générale de la ressource.
+ * L'URL du coach ouverte sur la bonne classe. Renvoie null si le coach ne
+ * couvre pas ce profil — on garde alors l'URL générale de la ressource.
+ *
+ * On passe par /coach-ia/<matiere>?classe=… — le sommaire des notions — parce
+ * que c'est la route qui APPLIQUE vraiment la classe (vérifié en local le
+ * 05/08 : ?classe=premiere-spe y affiche bien Suites, Dérivation,
+ * Exponentielle). C'est aussi celle que le site utilise déjà partout ailleurs.
+ *
+ * Le lien direct vers UNE notion existe — /tutor-v4?classe=…&notion=…&microId=…
+ * &display=simple, c'est ce que fait le sommaire quand on clique — mais il
+ * demande un microId qu'on n'a pas ici. Tant qu'on ne l'a pas, on ouvre la
+ * bonne classe et on laisse l'élève choisir sa notion dans une liste courte.
+ * `notionId` reste dans la signature : c'est là que le ciblage se branchera.
  */
 export function urlCoachCiblee(
   profil: ProfilId,
@@ -150,9 +160,20 @@ export function urlCoachCiblee(
   matiere: "maths" | "francais",
 ): string | null {
   const classe = CLASSE_COACH[profil];
+  if (!classe) return null;
+  // Le français n'a de notions déclarées qu'au primaire.
+  if (matiere === "francais" && !NOTION_COACH_FRANCAIS.lecture[classe]) return null;
+  return `/coach-ia/${matiere}?classe=${classe}`;
+}
+
+/** La notion du coach visée par une notion du lexique, si elle existe. */
+export function notionCoach(
+  profil: ProfilId,
+  notionId: string | null,
+  matiere: "maths" | "francais",
+): string | null {
+  const classe = CLASSE_COACH[profil];
   if (!classe || !notionId) return null;
   const table = matiere === "maths" ? NOTION_COACH_MATHS : NOTION_COACH_FRANCAIS;
-  const notion = table[notionId]?.[classe];
-  if (!notion) return null;
-  return `/tutor-v4?classe=${classe}&matiere=${matiere}&notion=${notion}`;
+  return table[notionId]?.[classe] ?? null;
 }

@@ -55,7 +55,9 @@ export const MARQUEURS_INTENTION: { intention: Intention; marqueurs: string[] }[
       "pas compris", "rien compris", "compris rien", "comprends pas", "comprend pas",
       "je comprends rien", "c'est quoi", "cest quoi", "qu'est ce que",
       "explique", "expliquer", "comprendre", "j'y arrive pas", "jy arrive pas",
-      "j'arrive pas", "je bloque", "difficile", "j'ai du mal", "aide moi",
+      // « arrive pas » sans le pronom : attrape « je n'arrive pas », « narrive
+      // pas », « j'arrive pas » d'un coup, apostrophe ou pas.
+      "arrive pas", "arrive plus", "je bloque", "difficile", "j'ai du mal", "aide moi",
       "comment on fait", "a quoi ca sert",
     ],
   },
