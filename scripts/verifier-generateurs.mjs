@@ -66,7 +66,20 @@ function contient(choices, attendu) {
 
 const MOTS_MORTS = /\b(undefined|NaN|null|\[object Object\])\b/;
 
-function controler(q) {
+/* Les nombres relatifs entrent en 5e. Avant, un « −10 » proposé à l'élève n'est
+   pas un piège : c'est une faute. Elle arrive toute seule quand un distracteur
+   se fabrique par décalage — « et s'il s'était trompé d'une dizaine ? » — sur
+   un petit résultat. Vu le 05/08/2026 dans le calcul mental de CE2, où le
+   complément de 910 à 1 000 proposait « −10 ». */
+const PRIMAIRE = new Set(["cp", "ce1", "ce2", "cm1", "cm2"]);
+
+// Seulement un moins EN TÊTE : « 40 - 8 » est une soustraction qu'on écrit
+// tous les jours au primaire, « -8 » est une réponse qui n'existe pas encore.
+function negatif(s) {
+  return /^[\s(]*[-−]\s?\d/.test(String(s));
+}
+
+function controler(q, classe) {
   const problemes = [];
   const texte = typeof q?.text === "string" ? q.text : "";
 
@@ -90,6 +103,9 @@ function controler(q) {
     for (const c of choix) {
       if (typeof c !== "string" || !String(c).trim()) problemes.push("proposition vide");
       else if (MOTS_MORTS.test(c)) problemes.push(`proposition abîmée : « ${c} »`);
+      else if (PRIMAIRE.has(classe) && negatif(c)) {
+        problemes.push(`nombre négatif proposé au primaire : « ${c} »`);
+      }
     }
 
     if (attendus.length && !attendus.some((a) => contient(choix, a))) {
@@ -155,7 +171,7 @@ for (const classe of CLASSES) {
       totalItems += 1;
 
       if (item.kind === "fixed") {
-        const problemes = controler(item);
+        const problemes = controler(item, classe);
         if (problemes.length) {
           rapports.push({ classe, fichier, id: item.id, problemes: [...new Set(problemes)] });
         }
@@ -176,7 +192,7 @@ for (const classe of CLASSES) {
           break;
         }
         enonces.add(q?.text);
-        for (const p of controler(q)) vus.add(p);
+        for (const p of controler(q, classe)) vus.add(p);
       }
 
       if (vus.size) {

@@ -3,6 +3,7 @@ import { microSkills } from "@/lib/tutor-v4/knowledge/maths/ce2/microSkills";
 import { buildCycle2QuestionBank } from "@/lib/tutor-v4/questionBank/cycle2/maths/buildCycle2Bank";
 
 import { nombresEntiersBank } from "./nombres-entiers.bank";
+import { calculBank } from "./calcul.bank";
 
 // Le CE2 quitte le constructeur commun, une notion à la fois.
 //
@@ -17,7 +18,10 @@ import { nombresEntiersBank } from "./nombres-entiers.bank";
 //
 // À chaque banque ajoutée : l'importer, l'ajouter à BANQUES_ECRITES. Le repli
 // disparaît tout seul pour les micro-compétences qu'elle couvre.
-const BANQUES_ECRITES: TutorBankItemV4[] = [...nombresEntiersBank];
+const BANQUES_ECRITES: TutorBankItemV4[] = [
+  ...nombresEntiersBank,
+  ...calculBank,
+];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
 
