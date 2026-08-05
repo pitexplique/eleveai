@@ -48,6 +48,7 @@ import { useEleve } from "@/context/EleveContext";
 import { problemesFixed } from "@/lib/defis-du-jour/problemes.fixed";
 import { chiffreDuJour } from "@/lib/chiffre-du-jour";
 import { problemeDuJourWeekly } from "@/lib/defis-du-jour/weekly";
+import EntreeMatrice from "@/components/matrice/EntreeMatrice";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
@@ -579,6 +580,7 @@ const CATALOGUE: { emoji: string; nom: string; ligne: string; href: string }[] =
   { emoji: "💧", nom: "Le barrage dans ta main", ligne: "Takamaka simulé : l'eau tombe de 500 m, l'île s'allume.", href: "/simulateur-barrage" },
   { emoji: "🌋", nom: "Le volcan dans ta main", ligne: "La Fournaise simulée : règle la lave, l'île grandit sur l'océan.", href: "/simulateur-volcan" },
   { emoji: "🐠", nom: "Le lagon dans ta main", ligne: "L'Ermitage simulé : la barrière casse la houle, la plage reste calme.", href: "/simulateur-lagon" },
+  { emoji: "🏨", nom: "L'hôtel dans ta main", ligne: "Terre-Sainte simulée : une fenêtre allumée, une chambre vendue.", href: "/simulateur-hotel" },
   { emoji: "🗣️", nom: "Le dico mots & gestes", ligne: "Le vocabulaire de l'évaluation nationale 6e.", href: "/dico" },
   { emoji: "🃏", nom: "Qui suis-je ? à imprimer", ligne: "Des jeux de cartes pour réviser en famille.", href: "/qui-suis-je-a-imprimer" },
   { emoji: "🎓", nom: "Éval blanche Pix IA", ligne: "Prépare l'évaluation nationale Pix IA (16 questions).", href: "/eval-pix-ia" },
@@ -839,6 +841,7 @@ const CATALOGUE_EMOJIS: Record<string, string> = {
   "simulateur-volcan": "🌋",
   "simulateur-lagon": "🐠",
   "simulateur-energie": "💪",
+  "simulateur-hotel": "🏨",
   "grand-oral": "🎤", "concours-ia": "🏆", "concours-general": "🏆",
   "concours-logo": "🎨", "cahier-vacances": "🏖️", "cahier-maths": "🏖️",
 };
@@ -1618,6 +1621,20 @@ export default function AccueilPage({
       className="flex min-h-screen flex-col overflow-x-hidden px-4 pb-16 pt-6 sm:px-6 lg:px-8"
       style={{ backgroundColor: PAPER, color: INK }}
     >
+      {/* ══ L'ENTRÉE ═════════════════════════════════════════════════════════
+          « Qui es-tu ? » puis « Que veux-tu faire aujourd'hui ? », au-dessus de
+          tout. Posée le 05/08, quinze jours avant la rentrée et pendant que rien
+          n'est facturé — c'est le moment de savoir si les gens repartent d'ici
+          vers une ressource au lieu de repartir tout court.
+
+          ⚠️ ELLE FAIT PARTIE DU CADRE, donc PAS de rang : `order` vaut 0 par
+          défaut et 0 passe avant 1 (cf. RANGS plus haut). Elle ouvre la page
+          quel que soit le profil, avant même la manchette — c'est le seul
+          endroit d'où la question a un sens.
+
+          Le journal ne perd rien : il commence juste en dessous. */}
+      <EntreeMatrice variante="accueil" />
+
       {/* ══ LA MANCHETTE ═════════════════════════════════════════════════════ */}
       <header className="mx-auto w-full min-w-0 max-w-6xl">
         {/* L'oreille : date · n° · lieu · prix — et la connexion à droite. */}
