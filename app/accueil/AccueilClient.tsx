@@ -3223,66 +3223,16 @@ export default function AccueilPage({
         <AgendaJournal />
       </div>
 
-      {/* ══ LE CATALOGUE — les petites annonces : TOUT est listé ═════════════ */}
-      <section id="catalogue" className="mx-auto mt-10 max-w-6xl scroll-mt-24" style={ordre("catalogue")}>
-        <Kicker accent="canne">Le catalogue · Tout ce que le journal contient</Kicker>
-        <TitreRubrique accent="canne">
-          Tout pour apprendre — <em className="not-italic underline decoration-emerald-800 decoration-4 underline-offset-4">gratuit</em>
-        </TitreRubrique>
-        <div className="mt-4 grid gap-px overflow-hidden border border-[#1d1c16]/25 bg-[#1d1c16]/25 sm:grid-cols-2 lg:grid-cols-4">
-          {(catalogue && catalogue.length > 0
-            ? // La base d'abord : catalogue_actions (actif, trié par ordre).
-              catalogue.map((a) => ({
-                key: a.id,
-                emoji: CATALOGUE_EMOJIS[a.id] ?? FAMILLE_EMOJIS[a.famille] ?? "📌",
-                famille: FAMILLE_LABELS[a.famille] ?? a.famille,
-                nom: a.label,
-                ligne: a.description ?? "",
-                href: getHref(a.route),
-              }))
-            : // Repli si la base ne répond pas : la liste en dur.
-              CATALOGUE.map((c) => ({
-                key: c.href,
-                emoji: c.emoji,
-                famille: null as string | null,
-                nom: c.nom,
-                ligne: c.ligne,
-                href: getHref(c.href),
-              }))
-          )
-            // « Tout explorer » ferme toujours la marche.
-            .concat([{ key: "explorer", emoji: "🔭", famille: null, nom: "Tout explorer", ligne: "La table des matières complète d'EleveAI.", href: "/explorer" }])
-            .map((c) => (
-              <Link prefetch={false}
-                key={c.key}
-                href={c.href}
-                className="group p-4 transition hover:bg-white/60"
-                style={{ backgroundColor: PAPER }}
-              >
-                <p className="text-3xl" aria-hidden>{c.emoji}</p>
-                {c.famille && (
-                  <p className="mt-1.5 text-[9px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
-                    {c.famille}
-                  </p>
-                )}
-                <h3 className="mt-1 font-serif text-base font-black leading-snug group-hover:underline">
-                  {c.nom}
-                </h3>
-                <p className="mt-1 text-xs font-medium leading-5 text-[#1d1c16]/70">
-                  {c.ligne}
-                </p>
-              </Link>
-            ))}
-        </div>
-        <p className="mt-2 text-xs font-medium italic text-[#1d1c16]/70">
-          Apprendre est gratuit, et ça le restera. Ce qui se paie : le suivi dans
-          la durée —{" "}
-          <Link prefetch={false} href="/tarifs" className="font-black text-cyan-800 underline underline-offset-2">
-            voir les offres
-          </Link>
-          .
-        </p>
-      </section>
+      {/* ══ LE CATALOGUE — RETIRÉ DE L'ACCUEIL LE 05/08/2026 ═══════════════════
+          « Tout ce que le journal contient » était l'ancien geste : on montre
+          tout, la personne cherche. La barre d'entrée fait l'inverse — elle
+          demande, puis elle propose deux ou trois choses. Les deux sur la même
+          page se contredisent, et le catalogue était le plus lourd des deux (le
+          poids du HTML est ce qui coûte le quota ISR de Vercel).
+          Rien n'est perdu : /explorer le porte toujours, l'oreille gauche de la
+          manchette y mène, et le code est dans l'historique git.
+          ⚠️ Le rang « catalogue » reste dans RANGS — un rang sans section ne
+          range rien, inutile d'y toucher. */}
 
       {/* ══ LE COURRIER DES LECTEURS — les avis, verbatim (fautes comprises) ══ */}
       <section id="courrier" className="mx-auto mt-10 max-w-6xl scroll-mt-24" style={ordre("courrier")}>

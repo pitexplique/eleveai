@@ -381,6 +381,7 @@ export default function EntreeMatrice({
               </p>
               <Link
                 href="/contact?from=ia"
+                prefetch={false}
                 onClick={() => track("ia_ressource", { id: "contact-humain", rang: 1, profil })}
                 className="mt-3 inline-block border-2 border-[#1d1c16] bg-[#1d1c16] px-3 py-1.5 text-sm font-bold text-[#f5fafb] hover:bg-[#0e7490] hover:border-[#0e7490]"
               >
@@ -409,6 +410,14 @@ export default function EntreeMatrice({
                 <li key={r.ressource.id}>
                   <Link
                     href={`${r.url}${r.url.includes("?") ? "&" : "?"}from=ia`}
+                    // ⚠️ PAS DE PRÉCHARGEMENT. Un <Link> d'App Router va
+                    // chercher la charge RSC de sa destination dès qu'il entre
+                    // dans le champ de vision, et sur une route statique c'est
+                    // une LECTURE du cache durable — le quota ISR Reads du
+                    // compte. Ces cartes changent à chaque question : les
+                    // laisser précharger ferait payer des destinations que
+                    // personne n'ouvre.
+                    prefetch={false}
                     onClick={() => track("ia_ressource", { id: r.ressource.id, rang: i + 1, profil })}
                     className={`block h-full border-2 bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16] ${
                       i === 0 ? "border-[#0e7490]" : "border-[#1d1c16]/30"

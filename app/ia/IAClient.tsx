@@ -26,7 +26,13 @@ export default function IAClient() {
             enseignant, celles qui peuvent le mieux t&apos;aider.
           </p>
           <p className="mt-3">
-            <Link href="/accueil" className="underline underline-offset-2 hover:text-slate-600">
+            {/* Pas de préchargement : /accueil est lourde et ce lien de bas de
+                page est rarement cliqué (cf. le quota ISR Reads). */}
+            <Link
+              href="/accueil"
+              prefetch={false}
+              className="underline underline-offset-2 hover:text-slate-600"
+            >
               Revenir au journal
             </Link>
           </p>
