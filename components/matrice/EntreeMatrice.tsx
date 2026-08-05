@@ -110,9 +110,30 @@ export default function EntreeMatrice({
         intention: res.lecture.intention ?? "aucune",
       });
 
+      // LA PHRASE ELLE-MÊME part en base — sans aucune identité. Compter les
+      // questions sans réponse disait COMBIEN ; il faut savoir LESQUELLES, sinon
+      // on ne sait pas quoi construire ensuite.
+      try {
+        fetch("/api/questions-entree", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            question: vecteur.question,
+            profil: quiEsTu,
+            chip: chipChoisie,
+            notion: res.lecture.notionId,
+            intention: res.lecture.intention,
+            trouves: res.recommandations.length,
+            ou: variante,
+          }),
+          keepalive: true,
+        }).catch(() => {});
+      } catch {
+        /* fire and forget : jamais bloquant */
+      }
+
       if (res.recommandations.length === 0) {
-        // Une question sans réponse vaut de l'or : c'est ce qui manque au
-        // catalogue. On la compte (sans le texte).
+        // Le compteur reste : il vit dans le suivi des pages, à côté du reste.
         try {
           fetch("/api/track", {
             method: "POST",
@@ -233,10 +254,15 @@ export default function EntreeMatrice({
             eleve ? "Écris ta question ou explique ce qui coince…" : "Décrivez votre besoin…"
           }
           aria-label="Ta question"
+          // ⚠️ ARRONDIE AUX QUATRE COINS, seule de toute la page (Frédéric,
+          // 05/08). Le journal est carré partout — filets, tuiles, encadrés —
+          // et c'est justement pour ça : une zone de saisie d'IA se reconnaît à
+          // sa forme avant d'être lue. La rondeur dit « écris ici » là où un
+          // rectangle dirait « encore un encadré ».
           className={
             surAccueil
-              ? "min-w-0 flex-1 border-2 border-[#1d1c16] bg-white px-3 py-2.5 text-base text-[#1d1c16] outline-none placeholder:text-[#1d1c16]/45 focus:ring-2 focus:ring-[#0e7490]/30"
-              : "min-w-0 flex-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-base outline-none placeholder:text-slate-400 focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20"
+              ? "min-w-0 flex-1 rounded-2xl border-2 border-[#1d1c16] bg-white px-4 py-3 text-base text-[#1d1c16] outline-none placeholder:text-[#1d1c16]/45 focus:ring-2 focus:ring-[#0e7490]/30"
+              : "min-w-0 flex-1 rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base outline-none placeholder:text-slate-400 focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20"
           }
         />
         <button
@@ -244,8 +270,8 @@ export default function EntreeMatrice({
           aria-label="Chercher"
           className={
             surAccueil
-              ? "shrink-0 border-2 border-[#1d1c16] bg-[#1d1c16] px-4 py-2.5 font-bold text-[#f5fafb] transition hover:bg-[#0e7490] hover:border-[#0e7490]"
-              : "shrink-0 rounded-xl bg-teal-700 px-4 py-3 text-white transition hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700/40"
+              ? "shrink-0 rounded-2xl border-2 border-[#1d1c16] bg-[#1d1c16] px-4 py-3 font-bold text-[#f5fafb] transition hover:border-[#0e7490] hover:bg-[#0e7490]"
+              : "shrink-0 rounded-2xl bg-teal-700 px-4 py-3 text-white transition hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700/40"
           }
         >
           <span aria-hidden="true">→</span>
