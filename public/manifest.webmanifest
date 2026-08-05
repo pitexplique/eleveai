@@ -1,7 +1,7 @@
 {
-  "name": "EleveAI — Le journal pour apprendre et s'évaluer · La Réunion",
+  "name": "EleveAI — apprendre et s'évaluer · La Réunion",
   "short_name": "EleveAI",
-  "description": "Le journal pédagogique gratuit de La Réunion : un coach IA qui explique sans faire à ta place, le défi et la dictée du jour, les machines de l'île dans ta main (cyclone, sucrerie, fromagerie) — maths, français, anglais, espagnol et IA, du CP à la Terminale. Ici, personne n'apprend à ta place.",
+  "description": "Dis qui tu es et ce que tu veux faire aujourd'hui : EleveAI cherche, parmi des ressources relues par un enseignant, celles qui peuvent t'aider. Un coach qui explique sans faire à ta place en maths, français, anglais, espagnol et IA, des exercices corrigés, la dictée et le défi du jour, les machines de l'île dans ta main. Du CP à la Terminale, gratuit, à La Réunion.",
   "start_url": "/accueil",
   "scope": "/",
   "display": "standalone",
@@ -24,7 +24,12 @@
   ],
   "shortcuts": [
     {
-      "name": "Le coach IA",
+      "name": "Que veux-tu faire ?",
+      "url": "/ia",
+      "description": "Dis ce qui coince, on cherche à ta place"
+    },
+    {
+      "name": "Le coach",
       "url": "/coach-ia/maths",
       "description": "Il explique, il ne fait jamais à ta place"
     },
