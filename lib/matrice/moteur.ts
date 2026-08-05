@@ -13,6 +13,7 @@
 // On ne renvoie jamais plus de trois ressources : au-delà, on a recréé le
 // catalogue qu'on voulait enterrer.
 
+import { urlCoachCiblee } from "./coach";
 import { MARQUEURS_INTENTION, NOTIONS } from "./lexique";
 import { getProfil, chipsPour } from "./profils";
 import { RESSOURCES, STATUTS_PUBLIABLES } from "./ressources";
@@ -206,10 +207,19 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
     // ── 5. Ce qui a déjà servi à de vrais élèves passe devant.
     if (r.statut === "testee_eleves") score += 1;
 
+    // Quand la ressource sait viser une notion, on ouvre la bonne porte du
+    // premier coup au lieu de laisser l'élève la chercher dans un menu.
+    const cible = r.accepteNotion
+      ? urlCoachCiblee(profil.id, notion?.id ?? null, r.accepteNotion)
+      : null;
+    if (cible) score += 2;
+
     candidates.push({
       ressource: r,
       score,
       raison: raisonner(r, rangNiveau, notionOk, intentionOk, intention, profil.groupe === "eleve"),
+      url: cible ?? r.url,
+      ciblee: Boolean(cible),
     });
   }
 

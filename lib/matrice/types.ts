@@ -70,6 +70,11 @@ export type RessourceEleveAI = {
   statut: StatutRessource;
   /** Renseigné quand une classe l'a réellement utilisée. */
   testeeAvec?: string;
+  /**
+   * La ressource sait s'ouvrir directement sur une notion (le coach le fait
+   * via ?classe=&matiere=&notion=). Voir coach.ts.
+   */
+  accepteNotion?: "maths" | "francais";
 };
 
 /** Ce que la personne a fourni. Rien de plus. */
@@ -94,6 +99,10 @@ export type Recommandation = {
   score: number;
   /** Pourquoi elle sort — affiché tel quel, pas de boîte noire. */
   raison: string;
+  /** L'URL à ouvrir : celle de la ressource, ou une version ciblée sur la notion. */
+  url: string;
+  /** Vrai quand l'URL vise directement la notion demandée. */
+  ciblee: boolean;
 };
 
 export type ResultatMatrice = {

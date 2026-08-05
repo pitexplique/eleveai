@@ -316,7 +316,7 @@ export default function IAClient() {
                 {resultat.recommandations.map((r, i) => (
                   <li key={r.ressource.id}>
                     <Link
-                      href={`${r.ressource.url}${r.ressource.url.includes("?") ? "&" : "?"}from=ia`}
+                      href={`${r.url}${r.url.includes("?") ? "&" : "?"}from=ia`}
                       onClick={() =>
                         track("ia_ressource", { id: r.ressource.id, rang: i + 1, profil })
                       }
@@ -337,6 +337,9 @@ export default function IAClient() {
                         </span>
                       </div>
                       <p className="mt-1 text-sm text-slate-600">{r.ressource.promesse}</p>
+                      {/* Pas de « s'ouvre directement sur… » tant que le coach
+                          n'applique pas vraiment ?classe= : on n'affiche pas une
+                          promesse qu'on n'a pas vérifiée. Voir coach.ts. */}
                       <p className="mt-2 text-xs text-slate-400">{r.raison}</p>
                     </Link>
                   </li>

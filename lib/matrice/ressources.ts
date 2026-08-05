@@ -37,6 +37,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     intentions: ["comprendre", "entrainer", "corriger", "preparer"],
     statut: "testee_eleves",
     testeeAvec: "Collège du Dimitile",
+    accepteNotion: "maths",
   },
   {
     id: "coach-francais",
@@ -49,6 +50,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     intentions: ["comprendre", "entrainer", "corriger", "preparer"],
     statut: "testee_eleves",
     testeeAvec: "Collège du Dimitile",
+    accepteNotion: "francais",
   },
   {
     id: "coach-anglais",
