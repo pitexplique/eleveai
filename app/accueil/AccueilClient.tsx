@@ -1621,66 +1621,6 @@ export default function AccueilPage({
       className="flex min-h-screen flex-col overflow-x-hidden px-4 pb-16 pt-6 sm:px-6 lg:px-8"
       style={{ backgroundColor: PAPER, color: INK }}
     >
-      {/* ══ L'ENTRÉE ═════════════════════════════════════════════════════════
-          « Qui es-tu ? » puis « Que veux-tu faire aujourd'hui ? », au-dessus de
-          tout. Posée le 05/08, quinze jours avant la rentrée et pendant que rien
-          n'est facturé — c'est le moment de savoir si les gens repartent d'ici
-          vers une ressource au lieu de repartir tout court.
-
-          ⚠️ ELLE FAIT PARTIE DU CADRE, donc PAS de rang : `order` vaut 0 par
-          défaut et 0 passe avant 1 (cf. RANGS plus haut). Elle ouvre la page
-          quel que soit le profil, avant même la manchette — c'est le seul
-          endroit d'où la question a un sens.
-
-          Le journal ne perd rien : il commence juste en dessous. */}
-      <EntreeMatrice
-        variante="accueil"
-        onProfil={(p) => {
-          // La barre a remplacé « Qui est-ce ? » : c'est donc elle qui range le
-          // journal. On écrit dans les MÊMES clés qu'avant (eleveai-cycle et
-          // eleveai-audience), pour que rien d'autre n'ait à changer — le
-          // header, les oreilles et useAudience continuent de lire ce qu'ils
-          // ont toujours lu.
-          const CYCLE_DU_PROFIL: Record<string, string> = {
-            cp: "cp-ce2", ce1: "cp-ce2", ce2: "cp-ce2",
-            cm1: "cm1-cm2", cm2: "cm1-cm2",
-            "6e": "6e-3e", "5e": "6e-3e", "4e": "6e-3e", "3e": "6e-3e",
-            seconde: "lycee", premiere: "lycee", terminale: "lycee",
-          };
-          const ADULTE: Record<string, Colonne> = {
-            parent: "parent", prof: "prof", direction: "principal",
-          };
-
-          const cycle = CYCLE_DU_PROFIL[p];
-          if (cycle) {
-            setCycleChoisi(cycle);
-            setAudienceChoisie(null);
-            setClasseDepliee(CYCLES.find((c) => c.id === cycle)?.classe ?? null);
-            try {
-              localStorage.setItem(CLE_CYCLE, cycle);
-              localStorage.removeItem(CLE_AUDIENCE);
-            } catch {
-              /* ignore */
-            }
-            return;
-          }
-
-          const colonne = ADULTE[p];
-          if (!colonne) return;
-          setAudienceChoisie(colonne);
-          setCycleChoisi(null);
-          try {
-            localStorage.setItem(
-              CLE_AUDIENCE,
-              PORTES_ADULTES.find((x) => x.colonne === colonne)?.memo ?? "",
-            );
-            localStorage.removeItem(CLE_CYCLE);
-          } catch {
-            /* ignore */
-          }
-        }}
-      />
-
       {/* ══ LA MANCHETTE ═════════════════════════════════════════════════════ */}
       <header className="mx-auto w-full min-w-0 max-w-6xl">
         {/* L'oreille : date · n° · lieu · prix — et la connexion à droite. */}
@@ -1821,6 +1761,64 @@ export default function AccueilPage({
             </p>
           </Link>
         </div>
+
+        {/* ══ L'ENTRÉE ═══════════════════════════════════════════════════════
+            « Qui es-tu ? » puis « Que veux-tu faire aujourd'hui ? », à la place
+            exacte des huit tuiles qu'elle remplace : sous le titre du journal,
+            pas au-dessus. On doit savoir OÙ ON EST avant qu'on nous demande QUI
+            ON EST — surtout un visiteur qui arrive de Google et n'a jamais vu
+            le nom du site (Frédéric, 05/08 : « la manchette en 1er, puis ça »).
+
+            Posée quinze jours avant la rentrée, pendant que personne n'est
+            facturé : c'est le moment de savoir si les gens repartent d'ici vers
+            une ressource au lieu de repartir tout court. */}
+        <EntreeMatrice
+          variante="accueil"
+          onProfil={(p) => {
+            // La barre a remplacé « Qui est-ce ? » : c'est donc elle qui range le
+            // journal. On écrit dans les MÊMES clés qu'avant (eleveai-cycle et
+            // eleveai-audience), pour que rien d'autre n'ait à changer — le
+            // header, les oreilles et useAudience continuent de lire ce qu'ils
+            // ont toujours lu.
+            const CYCLE_DU_PROFIL: Record<string, string> = {
+              cp: "cp-ce2", ce1: "cp-ce2", ce2: "cp-ce2",
+              cm1: "cm1-cm2", cm2: "cm1-cm2",
+              "6e": "6e-3e", "5e": "6e-3e", "4e": "6e-3e", "3e": "6e-3e",
+              seconde: "lycee", premiere: "lycee", terminale: "lycee",
+            };
+            const ADULTE: Record<string, Colonne> = {
+              parent: "parent", prof: "prof", direction: "principal",
+            };
+  
+            const cycle = CYCLE_DU_PROFIL[p];
+            if (cycle) {
+              setCycleChoisi(cycle);
+              setAudienceChoisie(null);
+              setClasseDepliee(CYCLES.find((c) => c.id === cycle)?.classe ?? null);
+              try {
+                localStorage.setItem(CLE_CYCLE, cycle);
+                localStorage.removeItem(CLE_AUDIENCE);
+              } catch {
+                /* ignore */
+              }
+              return;
+            }
+  
+            const colonne = ADULTE[p];
+            if (!colonne) return;
+            setAudienceChoisie(colonne);
+            setCycleChoisi(null);
+            try {
+              localStorage.setItem(
+                CLE_AUDIENCE,
+                PORTES_ADULTES.find((x) => x.colonne === colonne)?.memo ?? "",
+              );
+              localStorage.removeItem(CLE_CYCLE);
+            } catch {
+              /* ignore */
+            }
+          }}
+        />
 
         {/* ══ « QUI EST-CE ? » — RETIRÉ LE 05/08/2026 ══════════════════════════
             La barre d'entrée, en tête de page, pose la même question en plus
