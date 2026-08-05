@@ -46,6 +46,7 @@ const unPeuDeMaths = [
   { label: "Volcan", href: "/simulateur-volcan" },
   { label: "Barrage", href: "/simulateur-barrage" },
   { label: "Lagon", href: "/simulateur-lagon" },
+  { label: "L'hôtel Le Terre Sainte", href: "/simulateur-hotel" },
   { label: "Diagonale des Fous", href: "/diagonale-des-fous" },
   { label: "L'aiguille de Kakeya", href: "/aiguille-de-kakeya" },
   { label: "La dimension du volcan", href: "/dimension-du-volcan" },

@@ -49,6 +49,17 @@ const POINTS: Point[] = [
     href: "/picto-maths",
   },
   {
+    id: "terre-sainte",
+    lieu: "Hôtel Le Terre Sainte, Saint-Pierre",
+    x: 240, y: 301, emoji: "🏨", matiere: "maths",
+    notion: "Pourcentages",
+    question:
+      "Dans sa grille 2026, la chambre Supérieure passe de 96 € en basse saison à 131 € en saison pointe. De combien de % augmente-t-elle ?",
+    reponse:
+      "(131 − 96) ÷ 96 = 35 ÷ 96 ≈ 0,36, soit environ 36 % de plus. Change la saison toi-même sur la machine : la façade et la caisse suivent.",
+    href: "/simulateur-hotel",
+  },
+  {
     id: "ermitage",
     lieu: "Lagon de l'Ermitage",
     x: 60, y: 166, emoji: "🐠", matiere: "ecologie",

@@ -121,6 +121,14 @@ const nextConfig = {
         destination: "/simulateur-epsilon",
         permanent: false,
       },
+      // L'hôtel (05/08) — née d'une rencontre à Terre-Sainte : le métier
+      // d'hôtelier en pourcentages. L'adresse se dit à voix haute au comptoir
+      // d'une réception.
+      {
+        source: "/hotel",
+        destination: "/simulateur-hotel",
+        permanent: false,
+      },
       // Instagram ne donne qu'un lien (la bio) et le public tape l'adresse :
       // /insta = la porte Instagram, mesurable (lancement du journal, 16/07).
       {

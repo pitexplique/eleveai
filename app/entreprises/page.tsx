@@ -32,6 +32,14 @@ export const metadata: Metadata = {
 // Ce qu'on a DÉJÀ fait avec le réel de l'île — les preuves, cliquables.
 const PREUVES = [
   {
+    emoji: "🏨",
+    titre: "L'hôtel Le Terre Sainte",
+    ligne:
+      "Sa vraie grille de tarifs devenue une façade qui s'allume : remplissage, prix moyen, RevPAR, point mort.",
+    href: "/simulateur-hotel",
+    color: "border-amber-300/25 from-amber-400/[0.10]",
+  },
+  {
     emoji: "🏭",
     titre: "La machine à sucre",
     ligne: "De la canne au cristal : le rendement d'une usine sucrière, à manipuler.",
@@ -58,6 +66,50 @@ const PREUVES = [
     ligne: "25 défis « 1 image, 1 question » pris dans le quotidien de l'île.",
     href: "/picto-maths",
     color: "border-rose-300/25 from-rose-400/[0.10]",
+  },
+];
+
+// LA PROPOSITION, EN CLAIR — écrite pour la personne qui décide, en deux
+// colonnes : ce qu'elle donne, ce qu'elle reçoit. Un dirigeant n'a pas besoin
+// d'être convaincu, il a besoin de savoir ce qu'on lui demande exactement.
+const VOUS_DONNEZ = [
+  {
+    titre: "30 minutes, une fois",
+    texte:
+      "Vos vrais chiffres — ceux que vous regardez déjà tous les matins — et ce qui, dans votre métier, mérite d'être compris.",
+  },
+  {
+    titre: "Le droit d'être cité",
+    texte:
+      "Vous relisez et validez tout avant publication. Un mot qui ne va pas, on le change ; un chiffre que vous ne voulez pas donner, on s'en passe.",
+  },
+  {
+    titre: "Une heure sur place, si on filme",
+    texte:
+      "Seulement si on décide ensemble qu'une vidéo « en vrai » raconte mieux votre métier qu'une page. Un jour qui vous arrange.",
+  },
+];
+
+const VOUS_RECEVEZ = [
+  {
+    titre: "Une page permanente sur eleveai.fr",
+    texte:
+      "Votre métier devenu une machine qu'on manipule — pas une plaquette qu'on feuillette. Elle reste en ligne, elle est indexée, elle travaille toute l'année.",
+  },
+  {
+    titre: "Votre maison citée, avec le lien vers votre site",
+    texte:
+      "Créditée comme partenaire du journal. Jamais comme annonceur : il n'y aura pas d'encart publicitaire sur votre page, parce qu'il n'y en a nulle part.",
+  },
+  {
+    titre: "L'outil est le vôtre aussi",
+    texte:
+      "Montrez-le à vos apprentis, à vos stagiaires, au lycée professionnel d'à côté. C'est un support de formation, gratuit, que vous pouvez projeter tel quel.",
+  },
+  {
+    titre: "Vos métiers connus des élèves de l'île",
+    texte:
+      "Ceux qui vous recruteront dans cinq ans ont douze ans aujourd'hui. Ils apprendront votre métier en calculant dessus.",
   },
 ];
 
@@ -141,6 +193,98 @@ export default function EntreprisesPage() {
             </span>
           </p>
         </div>
+
+        {/* ── LA PROPOSITION, EN CLAIR ────────────────────────────────────
+            Placée haut, avant les preuves : un dirigeant qui ouvre cette page
+            sur son téléphone doit savoir en dix secondes ce qu'on lui demande
+            et ce qu'il y gagne. Deux colonnes, rien à deviner. */}
+        <h2 className="mt-10 text-xl font-black text-white sm:text-2xl">
+          🤝 La proposition, en clair
+        </h2>
+        <p className="mt-1 text-sm font-semibold text-white/60">
+          Ce que vous donnez, ce que vous recevez. Rien d&apos;autre en dessous.
+        </p>
+
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-sky-300/25 bg-gradient-to-br from-sky-400/[0.10] to-white/[0.03] p-5">
+            <h3 className="text-base font-black text-sky-200">Ce que vous donnez</h3>
+            <ul className="mt-3 space-y-3">
+              {VOUS_DONNEZ.map((d) => (
+                <li key={d.titre}>
+                  <p className="text-sm font-black text-white">{d.titre}</p>
+                  <p className="mt-0.5 text-sm font-semibold leading-6 text-white/70">
+                    {d.texte}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-amber-300/25 bg-gradient-to-br from-amber-400/[0.10] to-white/[0.03] p-5">
+            <h3 className="text-base font-black text-amber-200">Ce que vous recevez</h3>
+            <ul className="mt-3 space-y-3">
+              {VOUS_RECEVEZ.map((r) => (
+                <li key={r.titre}>
+                  <p className="text-sm font-black text-white">{r.titre}</p>
+                  <p className="mt-0.5 text-sm font-semibold leading-6 text-white/70">
+                    {r.texte}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Le prix et le délai — les deux questions qu'on pose toujours en
+            dernier, répondues avant qu'on ait à les poser. */}
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-2xl border border-emerald-300/25 bg-gradient-to-br from-emerald-400/[0.10] to-white/[0.03] p-5">
+            <p className="text-xs font-black uppercase tracking-wide text-emerald-300">
+              Ce que ça coûte
+            </p>
+            <p className="mt-1 text-3xl font-black text-white">0 €</p>
+            <p className="mt-1.5 text-sm font-semibold leading-6 text-white/75">
+              Des deux côtés : vous ne payez rien, vous ne recevez rien. Pas de
+              contrat, pas d&apos;engagement, pas d&apos;exclusivité. Si un jour
+              ça ne vous va plus, on retire la page — un appel suffit.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <p className="text-xs font-black uppercase tracking-wide text-white/50">
+              En combien de temps
+            </p>
+            <p className="mt-1 text-3xl font-black text-white">Le jour même</p>
+            <p className="mt-1.5 text-sm font-semibold leading-6 text-white/75">
+              La machine de l&apos;hôtel ci-dessous est née d&apos;une
+              conversation à Terre-Sainte, et elle a été écrite dans
+              l&apos;après-midi. On se parle, et vous voyez votre métier tourner
+              avant de vous quitter.
+            </p>
+          </div>
+        </div>
+
+        {/* L'exemple qui vient d'être fabriqué — la démonstration se clique. */}
+        <Link
+          href="/simulateur-hotel"
+          className="group mt-4 flex flex-col gap-1 rounded-2xl border border-amber-300/40 bg-gradient-to-br from-amber-400/[0.14] to-white/[0.03] p-5 transition hover:bg-white/[0.08]"
+        >
+          <p className="text-xs font-black uppercase tracking-wide text-amber-300">
+            🏨 L&apos;exemple, à manipuler tout de suite
+          </p>
+          <p className="text-lg font-black text-white group-hover:underline">
+            « L&apos;hôtel Le Terre Sainte dans ta main » — Saint-Pierre
+          </p>
+          <p className="text-sm font-semibold leading-6 text-white/75">
+            La maison a simplement ouvert sa grille de tarifs 2026. Choisissez
+            la saison, réglez le remplissage&nbsp;: les baies s&apos;allument une
+            à une, les petits-déjeuners se comptent, le linge s&apos;empile, la
+            caisse se remplit — et le{" "}
+            <strong className="font-black text-white">point mort</strong> dit à
+            partir de quel taux la nuit se paie enfin. Le tableau à double
+            entrée d&apos;un élève de CM2 et l&apos;équation d&apos;un élève de
+            Seconde, dans le même écran. →
+          </p>
+        </Link>
 
         {/* ── LES PREUVES : déjà en ligne ─────────────────────────────────── */}
         <h2 className="mt-10 text-xl font-black text-white sm:text-2xl">

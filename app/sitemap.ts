@@ -256,6 +256,9 @@ const ROUTES: RouteConfig[] = [
   // La salle de sport dans ta main (24/07) — l'effort en watts → joules → kcal,
   // le rendement musculaire de 25 %, puis l'assiette qui répare le muscle.
   { path: "/simulateur-energie", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-24") },
+  // L'hôtel dans ta main (05/08) — le métier d'hôtelier en pourcentages :
+  // taux d'occupation, recette, RevPAR, point mort. Née à Terre-Sainte.
+  { path: "/simulateur-hotel", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-08-05") },
   // La machine des epsilons (20/07) — le coefficient k, la suite géométrique :
   // « activer des epsilons peut engendrer des infinis ».
   { path: "/simulateur-epsilon", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-20") },
