@@ -17,12 +17,11 @@
 //      dans lib/tutor-v4/knowledge/<matiere>/<classe>/notions.ts — ne pas les
 //      inventer, les vérifier.
 //
-// ⚠️ CONSTAT DU 05/08/2026, vérifié en local sur les deux routes :
-//    — /coach-ia/<matiere>?classe=…  APPLIQUE bien la classe (premiere-spe y
-//      affiche Suites, Dérivation, Exponentielle). C'est celle qu'on utilise.
-//    — /tutor-v4?classe=…  ne l'applique PAS : la liste de notions reste celle
-//      de la 6e (18 entrées, algo_programmation en tête). À regarder à part —
-//      d'ici là, on ne construit pas de lien direct vers /tutor-v4.
+// ⚠️ Piège de VÉRIFICATION, pas du code : la page du tutor contient DEUX
+//    <select>. Le premier est celui du tutor, le second appartient au coach
+//    flottant et reste sur la 6e. Un test qui lit « le » select tombe sur le
+//    mauvais et fait croire que ?classe= est ignoré. Vérifier le fil d'ariane
+//    (« PREMIERE-SPE > Maths > Dérivation »), pas le premier select venu.
 
 import type { ProfilId } from "./types";
 
@@ -140,19 +139,17 @@ export const NOTION_COACH_FRANCAIS: TableNotions = {
 };
 
 /**
- * L'URL du coach ouverte sur la bonne classe. Renvoie null si le coach ne
- * couvre pas ce profil — on garde alors l'URL générale de la ressource.
+ * L'URL du coach, ouverte aussi précisément qu'on peut.
  *
- * On passe par /coach-ia/<matiere>?classe=… — le sommaire des notions — parce
- * que c'est la route qui APPLIQUE vraiment la classe (vérifié en local le
- * 05/08 : ?classe=premiere-spe y affiche bien Suites, Dérivation,
- * Exponentielle). C'est aussi celle que le site utilise déjà partout ailleurs.
+ * — Notion connue → le tutor s'ouvre DESSUS :
+ *     /tutor-v4?classe=premiere-spe&matiere=maths&notion=derivation&display=simple
+ *   (vérifié : le fil d'ariane affiche « PREMIERE-SPE > Maths > Dérivation »).
+ *   Pas de microId : sans lui la session ne démarre pas toute seule, l'élève
+ *   voit sa notion déjà choisie et clique « Commencer ». C'est voulu — on ne
+ *   lance pas une question dans la figure de quelqu'un qui vient d'arriver.
+ * — Sinon → le sommaire de sa classe : /coach-ia/<matiere>?classe=…
  *
- * Le lien direct vers UNE notion existe — /tutor-v4?classe=…&notion=…&microId=…
- * &display=simple, c'est ce que fait le sommaire quand on clique — mais il
- * demande un microId qu'on n'a pas ici. Tant qu'on ne l'a pas, on ouvre la
- * bonne classe et on laisse l'élève choisir sa notion dans une liste courte.
- * `notionId` reste dans la signature : c'est là que le ciblage se branchera.
+ * Renvoie null si le coach ne couvre pas ce profil (parent, prof, direction).
  */
 export function urlCoachCiblee(
   profil: ProfilId,
@@ -163,7 +160,14 @@ export function urlCoachCiblee(
   if (!classe) return null;
   // Le français n'a de notions déclarées qu'au primaire.
   if (matiere === "francais" && !NOTION_COACH_FRANCAIS.lecture[classe]) return null;
-  return `/coach-ia/${matiere}?classe=${classe}`;
+
+  const notion = notionId
+    ? (matiere === "maths" ? NOTION_COACH_MATHS : NOTION_COACH_FRANCAIS)[notionId]?.[classe]
+    : null;
+
+  return notion
+    ? `/tutor-v4?classe=${classe}&matiere=${matiere}&notion=${notion}&display=simple`
+    : `/coach-ia/${matiere}?classe=${classe}`;
 }
 
 /** La notion du coach visée par une notion du lexique, si elle existe. */

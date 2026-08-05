@@ -337,10 +337,14 @@ export default function IAClient() {
                         </span>
                       </div>
                       <p className="mt-1 text-sm text-slate-600">{r.ressource.promesse}</p>
-                      {/* Pas de « s'ouvre directement sur… » tant que le coach
-                          n'applique pas vraiment ?classe= : on n'affiche pas une
-                          promesse qu'on n'a pas vérifiée. Voir coach.ts. */}
-                      <p className="mt-2 text-xs text-slate-400">{r.raison}</p>
+                      <p className="mt-2 text-xs text-slate-400">
+                        {r.ciblee && resultat.lecture.notionLabel ? (
+                          <span className="text-teal-700">
+                            s&apos;ouvre sur {resultat.lecture.notionLabel} —{" "}
+                          </span>
+                        ) : null}
+                        {r.raison}
+                      </p>
                     </Link>
                   </li>
                 ))}
