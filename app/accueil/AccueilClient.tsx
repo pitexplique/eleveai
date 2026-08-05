@@ -2137,9 +2137,17 @@ export default function AccueilPage({
             de maquettiste : chaque colonne est une colonne flex dont le
             dernier bloc s'ancre au pied (mt-auto) — les trois finissent
             toujours sur la même ligne, le mou respire À L'INTÉRIEUR. */}
-        <div className="grid min-w-0 gap-8 lg:grid-cols-12">
+        {/* ⚠️ TROIS COLONNES À `xl`, PAS À `lg` (04/08) — même correction que la
+            manchette, même cause. À 1024 px, l'édito (2 colonnes sur 12) ne
+            faisait plus que 131 px : la signature « — Frédéric Lacoste, » y
+            occupe 143 px et débordait de sa colonne, retenue au bord de l'écran
+            par le seul `overflow-x-hidden` du <main>. Le `whitespace-nowrap`
+            n'est pas en cause — le nom ne se coupe jamais, c'est voulu — c'est
+            la colonne qui était trop étroite. En dessous de 1280 px les trois
+            colonnes s'empilent, et chacune retrouve toute la largeur. */}
+        <div className="grid min-w-0 gap-8 xl:grid-cols-12">
           {/* L'article à la Une (RÉFLÉCHIR : ce qui se passe autour de toi). */}
-          <article className="min-w-0 lg:col-span-7 lg:flex lg:flex-col">
+          <article className="min-w-0 xl:col-span-7 xl:flex xl:flex-col">
             {/* Le carrousel façon MSN, piloté par la régie (/admin/journal) :
                 chaque slide porte son propre surtitre. */}
             <UneCarousel slides={slides} cycle={cycleChoisi} colonne={colonne} />
@@ -2361,7 +2369,7 @@ export default function AccueilPage({
           </article>
 
           {/* Le fil du jour (APPRENDRE : les rendez-vous quotidiens). */}
-          <aside className="border-[#1d1c16]/25 lg:col-span-3 lg:flex lg:flex-col lg:border-l lg:pl-6">
+          <aside className="border-[#1d1c16]/25 xl:col-span-3 xl:flex xl:flex-col xl:border-l xl:pl-6">
             <Kicker>Apprendre · Aujourd&apos;hui</Kicker>
             {/* PLUS D'ANCRAGE FORCÉ ICI (01/08). L'encadré des évaluations
                 ayant grossi (compte à rebours + les quatre épreuves), c'est
@@ -2492,7 +2500,7 @@ export default function AccueilPage({
                   reste, mais il devient un plus.
                   ANCRÉ AU PIED (mt-auto, 01/08) : le fil du jour finit droit,
                   comme les deux autres colonnes. */}
-              <div className="py-3 lg:mt-auto">
+              <div className="py-3 xl:mt-auto">
                 <Link prefetch={false} href="/defis-du-jour" className="group block">
                   <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                     🎯 Le défi du jour · {defiDuJour.defi.theme}{" "}
@@ -2551,7 +2559,7 @@ export default function AccueilPage({
           </aside>
 
           {/* L'édito — le moment humain, signé (photo + lettre repliée). */}
-          <aside className="border-[#1d1c16]/25 lg:col-span-2 lg:flex lg:flex-col lg:border-l lg:pl-6">
+          <aside className="border-[#1d1c16]/25 xl:col-span-2 xl:flex xl:flex-col xl:border-l xl:pl-6">
             {/* L'ÉDITO VIENT DE LA BASE (24/07) : il s'appelait « du jour »
                 mais ne changeait jamais. Rubrique 'edito' de journal_articles,
                 éditable dans /admin/articles — le plus récent gagne, et sa
