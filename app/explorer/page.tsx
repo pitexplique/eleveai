@@ -143,8 +143,16 @@ function Carte({ a }: { a: ActionCatalogue }) {
             Bientôt disponible
           </span>
         ) : (
+          {/* ⚠️ PAS DE PRÉCHARGEMENT (05/08/2026). Ce lien est rendu en boucle
+              sur tout le catalogue : la page en sort avec 132 liens. Un <Link>
+              d'App Router va chercher la charge RSC de sa destination dès qu'il
+              entre dans le champ de vision, et sur une route statique c'est une
+              LECTURE du cache durable — le quota ISR Reads, à 87 % du million.
+              Dérouler /explorer coûtait donc des dizaines de lectures pour un
+              seul clic. Le lien reste instantané une fois cliqué. */}
           <Link
             href={a.route}
+            prefetch={false}
             className="inline-flex items-center gap-1.5 text-sm font-black text-cyan-700 hover:text-cyan-900"
           >
             Y aller
