@@ -189,7 +189,7 @@ function MatieresMenu({ pathname, paper }: { pathname: string; paper: boolean })
                             {inner}
                           </a>
                         ) : (
-                          <Link href={item.href} onClick={() => setOpen(false)} className={cls}>
+                          <Link prefetch={false} href={item.href} onClick={() => setOpen(false)} className={cls}>
                             {inner}
                           </Link>
                         )}
@@ -249,7 +249,7 @@ function MobileSection({
               {inner}
             </a>
           ) : (
-            <Link key={item.href} href={item.href} className={cls}>
+            <Link prefetch={false} key={item.href} href={item.href} className={cls}>
               {inner}
             </Link>
           );
@@ -327,7 +327,7 @@ export default function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
 
         {/* Logo */}
-        <Link href="/accueil" className="group flex shrink-0 items-center gap-3 rounded-full pr-1 transition hover:brightness-110">
+        <Link prefetch={false} href="/accueil" className="group flex shrink-0 items-center gap-3 rounded-full pr-1 transition hover:brightness-110">
           <div className="relative h-11 w-20 overflow-hidden rounded-[18px] shadow-[0_0_22px_rgba(248,200,70,0.22)] ring-1 ring-white/15">
             <Image
               src="/logo-eleveai-header.svg"
@@ -352,7 +352,7 @@ export default function Header() {
             Avant, seul le logo ramenait à la Une : peu évident pour les élèves
             et les parents → un lien « Accueil » explicite (demande de Frédéric). */}
         <div className="hidden items-center gap-1.5 lg:flex">
-          <Link
+          <Link prefetch={false}
             href="/accueil"
             className={[
               "inline-flex items-center gap-1.5 rounded-full px-2.5 py-2 text-sm font-black transition xl:px-3.5",
@@ -374,7 +374,7 @@ export default function Header() {
                   { href: "/explorer", label: "🧭 Explorer", active: "bg-violet-300 text-[#041B33] shadow-lg", idle: "bg-violet-300/15 text-violet-200 hover:bg-violet-300/25 hover:text-violet-100" },
                 ] as const
               ).map((c) => (
-                <Link
+                <Link prefetch={false}
                   key={c.href}
                   href={c.href}
                   className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition ${
@@ -394,7 +394,7 @@ export default function Header() {
             </>
           ) : (
             AUDIENCE_DOORS.map((d) => (
-              <Link
+              <Link prefetch={false}
                 key={d.space}
                 href={d.href}
                 className={[
@@ -415,7 +415,7 @@ export default function Header() {
 
           {eleve ? (
             <div className="ml-1 flex items-center gap-2">
-              <Link
+              <Link prefetch={false}
                 href={dashboardHref}
                 className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-black shadow-lg hover:brightness-110 ${
                   paper ? "bg-[#1d1c16] text-[#d8e9ee]" : `${dashboardColor} text-[#041B33]`
@@ -437,7 +437,7 @@ export default function Header() {
               </button>
             </div>
           ) : (
-            <Link
+            <Link prefetch={false}
               href="/auth/signin?mode=eleve"
               className={`ml-1 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-black shadow-lg transition hover:brightness-110 ${
                 paper
@@ -463,7 +463,7 @@ export default function Header() {
         {/* Mobile — bouton hamburger */}
         <div className="flex items-center gap-2 lg:hidden">
           {!eleve && (
-            <Link
+            <Link prefetch={false}
               href="/auth/signin?mode=eleve"
               className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-black shadow-lg ${
                 paper
@@ -502,7 +502,7 @@ export default function Header() {
           <div className="space-y-5">
 
             {/* Accueil (la Une) — même raison qu'en desktop : le logo ne suffit pas */}
-            <Link
+            <Link prefetch={false}
               href="/accueil"
               onClick={() => setMobileOpen(false)}
               className={`flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-black transition ${
@@ -523,7 +523,7 @@ export default function Header() {
                   paper ? "border-[#1d1c16]/15 bg-[#1d1c16]/5" : "border-white/10 bg-white/5"
                 }`}
               >
-                <Link
+                <Link prefetch={false}
                   href={dashboardHref}
                   className={`flex items-center gap-2 text-sm font-black ${paper ? "text-[#1d1c16]" : "text-white"}`}
                 >
@@ -543,7 +543,7 @@ export default function Header() {
                 </button>
               </div>
             ) : (
-              <Link
+              <Link prefetch={false}
                 href="/auth/signin?mode=eleve"
                 className={`flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-black shadow ${
                   paper
@@ -569,7 +569,7 @@ export default function Header() {
               /* Sinon → les 4 portes d'audience */
               <div className={`grid grid-cols-2 gap-2 border-t pt-4 ${paper ? "border-[#1d1c16]/15" : "border-white/10"}`}>
                 {AUDIENCE_DOORS.map((d) => (
-                  <Link
+                  <Link prefetch={false}
                     key={d.space}
                     href={d.href}
                     onClick={() => setMobileOpen(false)}
