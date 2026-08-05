@@ -459,6 +459,32 @@ export const RESSOURCES: RessourceEleveAI[] = [
     intentions: ["enseigner"],
     statut: "validee",
   },
+  // ⚠️ L'ORDRE COMPTE POUR LA DIRECTION : à score égal, le moteur garde l'ordre
+  // de ce fichier. L'espace établissement passe donc devant le tableau de bord
+  // (Frédéric, 05/08) — un chef d'établissement qui arrive veut d'abord savoir
+  // ce que c'est, comment ça se déploie et ce que ça coûte ; le suivi vient
+  // après, quand ses classes sont inscrites.
+  {
+    id: "espace-ecoles",
+    titre: "L'espace établissement",
+    promesse: "Financement, RGPD, déploiement : tout ce qu'il faut avant de dire oui.",
+    url: "/espace-ecoles",
+    niveaux: ["direction"],
+    notions: ["*"],
+    intentions: ["suivre", "enseigner", "comprendre"],
+    statut: "validee",
+  },
+  {
+    // Ce qui l'intéresse vraiment (Frédéric, 03/08) : il est jugé là-dessus.
+    id: "eval-nationales-hub",
+    titre: "Les évaluations nationales",
+    promesse: "Ce sur quoi l'établissement est attendu, et de quoi s'y préparer.",
+    url: "/evaluation-nationale-college",
+    niveaux: ["direction", "prof", "parent"],
+    notions: ["*"],
+    intentions: ["preparer", "suivre", "enseigner", "comprendre"],
+    statut: "validee",
+  },
   {
     id: "dashboard-principal",
     titre: "Le tableau de bord de l'établissement",
@@ -467,16 +493,6 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["direction"],
     notions: ["*"],
     intentions: ["suivre"],
-    statut: "validee",
-  },
-  {
-    id: "espace-ecoles",
-    titre: "L'espace établissement",
-    promesse: "Les accès, les classes, et ce qui s'y passe.",
-    url: "/espace-ecoles",
-    niveaux: ["direction"],
-    notions: ["*"],
-    intentions: ["suivre", "enseigner"],
     statut: "validee",
   },
 ];

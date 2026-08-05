@@ -49,6 +49,7 @@ import { problemesFixed } from "@/lib/defis-du-jour/problemes.fixed";
 import { chiffreDuJour } from "@/lib/chiffre-du-jour";
 import { problemeDuJourWeekly } from "@/lib/defis-du-jour/weekly";
 import EntreeMatrice from "@/components/matrice/EntreeMatrice";
+import { CLASSE_COACH } from "@/lib/matrice/coach";
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
@@ -580,7 +581,7 @@ const CATALOGUE: { emoji: string; nom: string; ligne: string; href: string }[] =
   { emoji: "💧", nom: "Le barrage dans ta main", ligne: "Takamaka simulé : l'eau tombe de 500 m, l'île s'allume.", href: "/simulateur-barrage" },
   { emoji: "🌋", nom: "Le volcan dans ta main", ligne: "La Fournaise simulée : règle la lave, l'île grandit sur l'océan.", href: "/simulateur-volcan" },
   { emoji: "🐠", nom: "Le lagon dans ta main", ligne: "L'Ermitage simulé : la barrière casse la houle, la plage reste calme.", href: "/simulateur-lagon" },
-  { emoji: "🏨", nom: "L'hôtel dans ta main", ligne: "Terre-Sainte simulée : une fenêtre allumée, une chambre vendue.", href: "/simulateur-hotel" },
+  { emoji: "🏨", nom: "L'hôtel Le Terre Sainte", ligne: "La vraie grille d'un hôtel de Saint-Pierre : une baie allumée, une nuit vendue.", href: "/simulateur-hotel" },
   { emoji: "🗣️", nom: "Le dico mots & gestes", ligne: "Le vocabulaire de l'évaluation nationale 6e.", href: "/dico" },
   { emoji: "🃏", nom: "Qui suis-je ? à imprimer", ligne: "Des jeux de cartes pour réviser en famille.", href: "/qui-suis-je-a-imprimer" },
   { emoji: "🎓", nom: "Éval blanche Pix IA", ligne: "Prépare l'évaluation nationale Pix IA (16 questions).", href: "/eval-pix-ia" },
@@ -1794,7 +1795,13 @@ export default function AccueilPage({
             if (cycle) {
               setCycleChoisi(cycle);
               setAudienceChoisie(null);
-              setClasseDepliee(CYCLES.find((c) => c.id === cycle)?.classe ?? null);
+              // LA CLASSE EXACTE, pas la première du cycle : quelqu'un qui
+              // disait « CE1 » voyait « CP » s'allumer dans la rampe juste en
+              // dessous. CLASSE_COACH fait déjà la traduction qui va bien, et
+              // c'est la même que celle de la rampe (premiere → premiere-spe).
+              setClasseDepliee(
+                CLASSE_COACH[p] ?? CYCLES.find((c) => c.id === cycle)?.classe ?? null,
+              );
               try {
                 localStorage.setItem(CLE_CYCLE, cycle);
                 localStorage.removeItem(CLE_AUDIENCE);
