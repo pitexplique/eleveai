@@ -17,6 +17,23 @@
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -473,7 +490,15 @@ export const droitesPlanBank: TutorBankItemV4[] = [
       const xb = xa + dx;
       const yb = ya + dy;
       const correct = `$(${dx}\\,;${dy})$`;
-      const choices = [correct, `$(${dy}\\,;${dx})$`, `$(${xb}\\,;${yb})$`, `$(${-dx}\\,;${dy})$`];
+      // Quand les deux déplacements sont égaux, « on a interverti » donne la
+      // bonne réponse : d'où le piège de signe sur l'ordonnée, gardé en
+      // réserve.
+      const choices = makeChoices(correct, [
+        `$(${dy}\\,;${dx})$`,
+        `$(${xb}\\,;${yb})$`,
+        `$(${-dx}\\,;${dy})$`,
+        `$(${dx}\\,;${-dy})$`,
+      ]);
       return {
         text: `La droite passant par $A(${xa}\\,;${ya})$ et $B(${xb}\\,;${yb})$ a pour vecteur directeur $\\vec{AB}$. Quelles sont ses coordonnées ?`,
         format: "qcm",
@@ -1435,7 +1460,14 @@ export const droitesPlanBank: TutorBankItemV4[] = [
       const s1 = b1 >= 0 ? `+ ${b1}` : `- ${-b1}`;
       const s2 = b2 >= 0 ? `+ ${b2}` : `- ${-b2}`;
       const correct = `$(${x}\\,;${y})$`;
-      const choices = [correct, `$(${y}\\,;${x})$`, `$(${x}\\,;${y + 1})$`, `$(${x + 1}\\,;${y})$`];
+      // Quand l'abscisse et l'ordonnée de la solution coïncident, « on a
+      // interverti le couple » donne la bonne réponse.
+      const choices = makeChoices(correct, [
+        `$(${y}\\,;${x})$`,
+        `$(${x}\\,;${y + 1})$`,
+        `$(${x + 1}\\,;${y})$`,
+        `$(${x}\\,;${y - 1})$`,
+      ]);
       return {
         text: `Quelle est la solution du système $\\begin{cases} y = ${a1}x ${s1} \\\\ y = ${a2}x ${s2} \\end{cases}$ ?`,
         format: "qcm",

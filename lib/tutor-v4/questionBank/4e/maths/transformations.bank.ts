@@ -5,6 +5,19 @@ import type {
   TransformationCanvasData,
 } from "@/lib/tutor-v4/types";
 
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -1147,13 +1160,15 @@ export const transformationsBank: TutorBankItemV4[] = [
     tags: ["transformation", "translation", "vecteur", "template", "canvas"],
     generate: () => {
       const dx = randomChoice([2, 3, 4]);
-      const dy = randomChoice([1, 2]);
+      // Les deux déplacements doivent différer : à 2 et 2, le piège « on a
+      // interverti l'horizontal et le vertical » s'écrit comme la bonne
+      // réponse, et l'élève voyait deux fois la même ligne.
+      const dy = randomChoice([1, 2].filter((v) => v !== dx));
 
       return {
         text: "Quel déplacement permet de passer de la figure bleue à la figure rouge ?",
         format: "qcm",
-        choices: shuffle([
-          `${dx} carreaux à droite et ${dy} vers le bas`,
+        choices: makeChoices(`${dx} carreaux à droite et ${dy} vers le bas`, [
           `${dx} carreaux à gauche et ${dy} vers le bas`,
           `${dy} carreaux à droite et ${dx} vers le bas`,
           "un demi-tour autour de O",
@@ -1675,11 +1690,14 @@ export const transformationsBank: TutorBankItemV4[] = [
       return {
         text: `Le point A(${x};${y}) subit une translation de ${dx} carreaux vers la droite et ${dy} vers le bas. Quelles sont les coordonnées de A' ?`,
         format: "qcm",
-        choices: shuffle([
-          `(${x + dx};${y + dy})`,
+        // Quand A est à l'origine, « on a pris le déplacement pour l'image »
+        // tombe sur la bonne réponse : d'où le piège des coordonnées
+        // interverties, gardé en réserve.
+        choices: makeChoices(`(${x + dx};${y + dy})`, [
           `(${x - dx};${y + dy})`,
           `(${x + dx};${y - dy})`,
           `(${dx};${dy})`,
+          `(${y + dy};${x + dx})`,
         ]),
         expected: [`(${x + dx};${y + dy})`],
         comparator: "mcq_exact",

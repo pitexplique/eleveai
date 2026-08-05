@@ -4,6 +4,23 @@ import type {
   FractionCanvasData,
 } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -309,11 +326,29 @@ export const fractionsBank: TutorBankItemV4[] = [
     generate: () => {
       const a = randomInt(1, 5);
       const b = randomInt(a + 1, 9);
-      const c = randomInt(1, 5);
-      const d = randomInt(c + 1, 9);
-      const left = a / b;
-      const right = c / d;
-      const correct = left > right ? `${a}/${b}` : `${c}/${d}`;
+      let c = randomInt(1, 5);
+      let d = randomInt(c + 1, 9);
+
+      // Deux fois la même fraction, c'est deux fois la même proposition, et la
+      // question n'a plus de sens : on retire jusqu'à ce qu'elles diffèrent.
+      while (c === a && d === b) {
+        c = randomInt(1, 5);
+        d = randomInt(c + 1, 9);
+      }
+
+      // On compare par produit en croix, jamais en décimal : $\frac{1}{2}$ et
+      // $\frac{2}{4}$ s'écrivent différemment mais valent autant, et la bonne
+      // réponse est alors « elles sont égales ». L'ancienne version désignait
+      // dans ce cas une des deux fractions — l'élève qui voyait juste avait
+      // faux.
+      const gauche = a * d;
+      const droite = c * b;
+      const correct =
+        gauche === droite
+          ? "elles sont égales"
+          : gauche > droite
+            ? `${a}/${b}`
+            : `${c}/${d}`;
 
       return {
         text: `Quelle fraction est la plus grande : ${a}/${b} ou ${c}/${d} ?`,
@@ -323,7 +358,10 @@ export const fractionsBank: TutorBankItemV4[] = [
         comparator: "mcq_exact",
         explanation: "Définition : une fraction représente un quotient ; le numérateur est au-dessus et le dénominateur est en dessous.\n\n" +
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
-          (`On compare ${a} × ${d} = ${a * d} et ${c} × ${b} = ${c * b}. La plus grande fraction est ${correct}.`) +
+          (`On compare ${a} × ${d} = ${a * d} et ${c} × ${b} = ${c * b}. ` +
+            (gauche === droite
+              ? "Les deux produits sont égaux : les deux fractions valent la même chose."
+              : `La plus grande fraction est ${correct}.`)) +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
       };
     },
@@ -1270,12 +1308,15 @@ export const fractionsBank: TutorBankItemV4[] = [
       return {
         text: `Simplifier $\\frac{${n}}{${d}}$.`,
         format: "qcm",
-        choices: [
-          `$\\frac{${n0}}{${d0}}$`,
+        // À $n_0 = 1$ et $k = 2$, « on a oublié de simplifier le numérateur »
+        // et « on a ajouté 1 au numérateur » donnent la même fraction : on
+        // garde un quatrième piège en réserve.
+        choices: makeChoices(`$\\frac{${n0}}{${d0}}$`, [
           `$\\frac{${n0 + 1}}{${d0}}$`,
           `$\\frac{${n}}{${d0}}$`,
           `$\\frac{${d0}}{${n0}}$`,
-        ],
+          `$\\frac{${n0}}{${d}}$`,
+        ]),
         expected: [`$\\frac{${n0}}{${d0}}$`],
         comparator: "mcq_exact",
         explanation:

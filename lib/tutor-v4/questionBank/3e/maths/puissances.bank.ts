@@ -2,6 +2,19 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -821,12 +834,18 @@ export const puissancesBank: TutorBankItemV4[] = [
     tags: ["entier_puissance", "comprendre", "qcm", "template"],
     generate: () => {
       const a = randomChoice([2, 3, 4, 6]);
-      const n = randomChoice([3, 4, 5]);
+      // La base et l'exposant doivent différer : sinon le piège « on a inverti
+      // les deux » s'écrit exactement comme la bonne réponse.
+      const n = randomChoice([3, 4, 5].filter((v) => v !== a));
       const correct = `$${a}^${n}$`;
       return {
         text: `Comment écrit-on sous forme de puissance le produit de $${n}$ facteurs égaux à $${a}$ ?`,
         format: "qcm",
-        choices: shuffle([correct, `$${n}^${a}$`, `$${a} \\times ${n}$`, `$${a}^${n + 1}$`]),
+        choices: makeChoices(correct, [
+          `$${n}^${a}$`,
+          `$${a} \\times ${n}$`,
+          `$${a}^${n + 1}$`,
+        ]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
@@ -1320,7 +1339,14 @@ export const puissancesBank: TutorBankItemV4[] = [
       return {
         text: `Simplifie $a^${m} \\times a^${n}$ (avec $a \\neq 0$).`,
         format: "qcm",
-        choices: shuffle([correct, `$a^{${m * n}}$`, `$a^{${Math.abs(m - n)}}$`, `$2a^{${m + n}}$`]),
+        // À $m = n = 2$, le piège « on a multiplié les exposants » tombe sur la
+        // bonne réponse : il faut un quatrième piège en réserve.
+        choices: makeChoices(correct, [
+          `$a^{${m * n}}$`,
+          `$a^{${Math.abs(m - n)}}$`,
+          `$2a^{${m + n}}$`,
+          `$a^{${m + n + 1}}$`,
+        ]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:

@@ -1,5 +1,18 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
@@ -1223,11 +1236,13 @@ export const airesBank: TutorBankItemV4[] = [
       return {
         text: `Une surface couvre ${a} rangées de ${b} carreaux unités. Quelle est son aire ?`,
         format: "qcm",
-        choices: shuffle([
-          String(good),
+        // À 2 rangées de 3, la somme des côtés vaut le produit moins un : les
+        // deux pièges s'écrivaient pareil. D'où le quatrième en réserve.
+        choices: makeChoices(String(good), [
           String(good - 1),
           String(good + 1),
           String(a + b),
+          String(good + a),
         ]),
         expected: [String(good)],
         comparator: "mcq_exact",
@@ -1467,11 +1482,13 @@ export const airesBank: TutorBankItemV4[] = [
       return {
         text: `Une figure composée est découpée en deux parties d’aires ${a} cm² et ${b} cm². Quelle est l’aire totale ?`,
         format: "qcm",
-        choices: shuffle([
-          `${good} cm²`,
+        // Quand les deux morceaux ont la même aire, « on n'a gardé que l'un des
+        // deux » s'écrit deux fois : d'où le quatrième piège en réserve.
+        choices: makeChoices(`${good} cm²`, [
           `${a} cm²`,
           `${b} cm²`,
           `${a * b} cm²`,
+          `${good + 1} cm²`,
         ]),
         expected: [`${good} cm²`],
         comparator: "mcq_exact",
@@ -1534,18 +1551,22 @@ export const airesBank: TutorBankItemV4[] = [
       const w = widths[Math.floor(Math.random() * widths.length)];
       const good = Number((l * w).toFixed(1));
 
-      const distractors = Array.from(
-        new Set([
-          Number((l + w).toFixed(1)),
-          Number((l * 2).toFixed(1)),
-          Number((w * 2).toFixed(1)),
-        ])
-      ).filter((n) => n !== good);
+      // À 2 m sur 2 m, la somme, le double de la longueur et le double de la
+      // largeur valent tous les trois l'aire cherchée : il ne restait qu'une
+      // seule ligne au QCM, la bonne. Deux pièges de secours suffisent à
+      // remplir les quatre.
+      const distractors = [
+        Number((l + w).toFixed(1)),
+        Number((l * 2).toFixed(1)),
+        Number((w * 2).toFixed(1)),
+        Number((good + w).toFixed(1)),
+        Number((good + l).toFixed(1)),
+      ];
 
-      const choices = shuffle([
+      const choices = makeChoices(
         `${String(good).replace(".", ",")} m²`,
-        ...distractors.slice(0, 3).map((n) => `${String(n).replace(".", ",")} m²`),
-      ]);
+        distractors.map((n) => `${String(n).replace(".", ",")} m²`),
+      );
 
       return {
         text: `Une pièce rectangulaire mesure ${String(l).replace(".", ",")} m sur ${w} m. Quelle est son aire ?`,

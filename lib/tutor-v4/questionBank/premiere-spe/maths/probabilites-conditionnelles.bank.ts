@@ -28,6 +28,23 @@
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -1623,7 +1640,12 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     generate: () => {
       const a = randomInt(20, 60);
       const b = randomInt(20, 60);
-      const c = randomInt(20, 60);
+      // Si $b$ et $c$ sont égaux, le total de la ligne et celui de la colonne
+      // le sont aussi : les deux propositions qui distinguent « sachant qu'il
+      // est en seconde » de « sachant qu'il est demi-pensionnaire » s'écrivent
+      // alors pareil, et la question ne teste plus rien.
+      let c = randomInt(20, 60);
+      while (c === b) c = randomInt(20, 60);
       const d = randomInt(20, 60);
       const ligne = a + b;
       const colonne = a + c;
@@ -2147,7 +2169,16 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           `Un test donne $P(M) = ${fr(pA)}$, $P_M(+) = ${fr(pBsiA)}$ et $P_{\\bar M}(+) = ${fr(pBsiNonA)}$. ` +
           `Quelle est la probabilité d'être malade sachant que le test est positif ? (arrondir au centième)`,
         format: "qcm",
-        choices: [correct, `$${fr(pBsiA)}$`, `$${fr(Math.round(num * 100) / 100)}$`, `$${fr(pA)}$`],
+        // Le numérateur arrondi au centième retombe souvent sur $P(M)$ : deux
+        // pièges, une seule ligne. On ajoute le taux de faux positifs et le
+        // complémentaire de la réponse, deux erreurs classiques.
+        choices: makeChoices(correct, [
+          `$${fr(pBsiA)}$`,
+          `$${fr(Math.round(num * 100) / 100)}$`,
+          `$${fr(pA)}$`,
+          `$${fr(pBsiNonA)}$`,
+          `$${fr(Math.round((1 - rep) * 100) / 100)}$`,
+        ]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(

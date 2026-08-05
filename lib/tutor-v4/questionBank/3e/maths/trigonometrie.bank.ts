@@ -2,6 +2,19 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 /* =========================
    HELPERS
 ========================= */
@@ -1375,12 +1388,19 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     tags: ["trigo_trigonometrie", "tangente", "valeur", "template"],
     generate: () => {
       const opp = randomChoice([3, 4, 6]);
-      const adj = randomChoice([4, 5, 8]);
+      // Opposé et adjacent doivent différer : à 4 et 4, le piège « on a inversé
+      // la fraction » s'écrit comme la bonne réponse, et les deux autres
+      // pièges deviennent identiques entre eux.
+      const adj = randomChoice([4, 5, 8].filter((v) => v !== opp));
       const correct = `$\\dfrac{${opp}}{${adj}}$`;
       return {
         text: `Dans un triangle rectangle, le côté opposé à l’angle étudié mesure ${opp} cm et le côté adjacent ${adj} cm. Quelle est la valeur de $\\tan(\\theta)$ ?`,
         format: "qcm",
-        choices: shuffle([correct, `$\\dfrac{${adj}}{${opp}}$`, `$\\dfrac{${opp}}{${opp + adj}}$`, `$\\dfrac{${adj}}{${opp + adj}}$`]),
+        choices: makeChoices(correct, [
+          `$\\dfrac{${adj}}{${opp}}$`,
+          `$\\dfrac{${opp}}{${opp + adj}}$`,
+          `$\\dfrac{${adj}}{${opp + adj}}$`,
+        ]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:

@@ -29,6 +29,23 @@
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -1142,7 +1159,15 @@ export const produitScalaireBank: TutorBankItemV4[] = [
       return {
         text: `On sait que $\\vec{u} \\cdot \\vec{v} = ${p}$. Combien vaut $(${k}\\vec{u}) \\cdot (${m}\\vec{v})$ ?`,
         format: "qcm",
-        choices: [correct, `$${k * p}$`, `$${k + m + p}$`, `$${p}$`],
+        // « On n'a gardé qu'un coefficient » et « on a tout additionné »
+        // tombent sur le même nombre pour certains tirages : d'où le quatrième
+        // piège, gardé en réserve.
+        choices: makeChoices(correct, [
+          `$${k * p}$`,
+          `$${k + m + p}$`,
+          `$${p}$`,
+          `$${res + p}$`,
+        ]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(
@@ -1377,18 +1402,22 @@ export const produitScalaireBank: TutorBankItemV4[] = [
     generate: () => {
       const nu = randomInt(2, 7);
       const nv = randomInt(2, 7);
-      const ps = pickOne([-6, -3, -2, 0, 2, 3, 5]);
+      // Un produit scalaire nul rend les vecteurs orthogonaux : le double
+      // produit disparaît, et le piège « on a oublié le double produit »
+      // devient la bonne réponse. Or c'est précisément ce que la question veut
+      // faire distinguer.
+      const ps = pickOne([-6, -3, -2, 2, 3, 5]);
       const res = nu * nu + 2 * ps + nv * nv;
       const correct = `$${res}$`;
       return {
         text: `On donne $\\|\\vec{u}\\| = ${nu}$, $\\|\\vec{v}\\| = ${nv}$ et $\\vec{u} \\cdot \\vec{v} = ${ps}$. Combien vaut $\\|\\vec{u} + \\vec{v}\\|^2$ ?`,
         format: "qcm",
-        choices: [
-          correct,
+        choices: makeChoices(correct, [
           `$${nu * nu + nv * nv}$`,
           `$${nu * nu - 2 * ps + nv * nv}$`,
           `$${(nu + nv) * (nu + nv)}$`,
-        ],
+          `$${nu * nv}$`,
+        ]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(

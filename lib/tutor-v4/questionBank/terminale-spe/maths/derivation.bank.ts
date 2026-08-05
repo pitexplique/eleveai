@@ -19,6 +19,19 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -841,15 +854,18 @@ export const derivationBank: TutorBankItemV4[] = [
       const a = randomInt(2, 6);
       const b = randomInt(1, 5);
       const correct = `$${2 * a}(${a}x + ${b})$`;
+      // À $a = 2$, « on a oublié la dérivée de l'intérieur » et « on ne l'a
+      // comptée qu'une fois » s'écrivent pareil : d'où le quatrième piège.
       const distracteurs = [
         `$2(${a}x + ${b})$`,
         `$${2 * a}(${a}x + ${b})^2$`,
         `$${a}(${a}x + ${b})$`,
+        `$${2 * a}x + ${b}$`,
       ];
       return {
         text: `Quelle est la dérivée de $f(x) = (${a}x + ${b})^2$ ?`,
         format: "qcm",
-        choices: shuffle([correct, ...distracteurs]),
+        choices: makeChoices(correct, distracteurs),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(

@@ -13,6 +13,23 @@
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -248,7 +265,14 @@ export const repereCoordonneesBank: TutorBankItemV4[] = [
       const x = randomInt(-4, 5);
       const y = randomInt(-4, 5);
       const correct = `$(${x}\\,;${y})$`;
-      const choices = [correct, `$(${y}\\,;${x})$`, `$(${x}\\,;${y + 1})$`, `$(${x - 1}\\,;${y})$`];
+      // Sur la première bissectrice, « on a interverti abscisse et ordonnée »
+      // donne la bonne réponse : d'où le décalage à droite, gardé en réserve.
+      const choices = makeChoices(correct, [
+        `$(${y}\\,;${x})$`,
+        `$(${x}\\,;${y + 1})$`,
+        `$(${x - 1}\\,;${y})$`,
+        `$(${x + 1}\\,;${y})$`,
+      ]);
       return {
         text: "Quelles sont les coordonnées du point $M$ représenté ci-dessous ?",
         format: "qcm",
@@ -536,7 +560,14 @@ export const repereCoordonneesBank: TutorBankItemV4[] = [
       const xm = (xa + xb) / 2;
       const ym = (ya + yb) / 2;
       const correct = `$(${xm}\\,;${ym})$`;
-      const choices = [correct, `$(${ym}\\,;${xm})$`, `$(${xa + xb}\\,;${ya + yb})$`, `$(${xm + 1}\\,;${ym})$`];
+      // Quand le milieu tombe sur la première bissectrice, « on a interverti »
+      // donne la bonne réponse : d'où le décalage vertical, gardé en réserve.
+      const choices = makeChoices(correct, [
+        `$(${ym}\\,;${xm})$`,
+        `$(${xa + xb}\\,;${ya + yb})$`,
+        `$(${xm + 1}\\,;${ym})$`,
+        `$(${xm}\\,;${ym + 1})$`,
+      ]);
       return {
         text: `Soit $A(${xa}\\,;${ya})$ et $B(${xb}\\,;${yb})$. Quelles sont les coordonnées du milieu de $[AB]$ ?`,
         format: "qcm",

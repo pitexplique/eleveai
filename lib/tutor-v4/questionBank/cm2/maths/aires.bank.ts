@@ -2,6 +2,19 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
@@ -472,11 +485,15 @@ export const airesBank: TutorBankItemV4[] = [
       const aire = longueur * largeur;
       const perimetre = 2 * (longueur + largeur);
 
-      const choices = shuffle([
-        `${aire} cm²`,
+      // Un 6 sur 3, un 4 sur 4 : l'aire et le périmètre tombent sur le même
+      // nombre. Le piège devenait la bonne réponse, écrite deux fois. On garde
+      // donc deux pièges de secours pour remplir les quatre lignes.
+      const choices = makeChoices(`${aire} cm²`, [
         `${perimetre} cm²`,
         `${longueur + largeur} cm²`,
         `${aire + longueur} cm²`,
+        `${aire + largeur} cm²`,
+        `${aire * 2} cm²`,
       ]);
 
       return {

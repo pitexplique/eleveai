@@ -1,5 +1,18 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
@@ -1267,11 +1280,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       return {
         text: `Si ${qty} objets coûtent ${total} €, combien coûtent ${targetQty} objets ?`,
         format: "qcm",
-        choices: shuffle([
-          `${good} €`,
+        // Quand on demande le prix d'un objet de plus que l'énoncé, « un objet
+        // de moins » retombe sur le prix de départ : deux pièges, une seule
+        // ligne. D'où le produit croisé farfelu, gardé en réserve.
+        choices: makeChoices(`${good} €`, [
           `${good + unit} €`,
           `${good - unit} €`,
           `${total} €`,
+          `${qty * targetQty} €`,
         ]),
         expected: [`${good} €`],
         comparator: "mcq_exact",

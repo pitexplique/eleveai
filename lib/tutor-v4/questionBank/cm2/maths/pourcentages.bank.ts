@@ -21,9 +21,14 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 function makeChoices(correct: string, wrongs: string[]) {
-  return shuffle([correct, ...wrongs])
-    .filter((choice, index, arr) => arr.indexOf(choice) === index)
-    .slice(0, 4);
+  // ⚠️ 04/08/2026 — dédoublonner puis couper à quatre ne suffit pas : à quatre
+  // pièges écrits, le mélange pouvait laisser la bonne réponse au fond du
+  // chapeau et le découpage l'emportait. L'élève voyait alors quatre pièges et
+  // rien d'autre. On la met de côté, on tire trois distracteurs, on mélange.
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
 }
 
 function exp(

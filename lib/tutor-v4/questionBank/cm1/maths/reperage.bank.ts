@@ -19,9 +19,46 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 function makeChoices(correct: string, wrongs: string[]) {
-  return shuffle([correct, ...wrongs])
-    .filter((choice, index, arr) => arr.indexOf(choice) === index)
-    .slice(0, 4);
+  // ⚠️ 04/08/2026 — dédoublonner puis couper à quatre ne suffit pas : à quatre
+  // pièges écrits, le mélange pouvait laisser la bonne réponse au fond du
+  // chapeau et le découpage l'emportait. L'élève voyait alors quatre pièges et
+  // rien d'autre. On la met de côté, on tire trois distracteurs, on mélange.
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+// Les pièges d'un repérage se ressemblent tous : on intervertit les deux
+// coordonnées, ou on recule d'un carreau. Écrits à la main, les trois
+// s'effondraient sur la bonne réponse dès que x valait y ou que le point
+// touchait le bord de la grille — le QCM n'affichait plus qu'une seule ligne,
+// la bonne, et l'élève cliquait sans réfléchir. On tire donc les voisins du
+// point dans la grille, en gardant ceux qui en diffèrent vraiment. Aux quatre
+// coins, cas le plus pauvre, il en reste trois : de quoi remplir le QCM.
+function piegesCoordonnees(x: number, y: number, max = 5): [number, number][] {
+  const voisins: [number, number][] = [
+    [y, x],
+    [x + 1, y],
+    [x - 1, y],
+    [x, y + 1],
+    [x, y - 1],
+    [x + 1, y + 1],
+    [x - 1, y - 1],
+  ];
+
+  const vus = new Set<string>([`${x};${y}`]);
+  const pieges: [number, number][] = [];
+
+  for (const [a, b] of voisins) {
+    if (a < 1 || b < 1 || a > max || b > max) continue;
+    const cle = `${a};${b}`;
+    if (vus.has(cle)) continue;
+    vus.add(cle);
+    pieges.push([a, b]);
+  }
+
+  return pieges;
 }
 
 function reperageCanvas(data: {
@@ -567,11 +604,10 @@ export const reperageBank: TutorBankItemV4[] = [
       return {
         text: "Quelles sont les coordonnées du point A ?",
         format: "qcm",
-        choices: makeChoices(correct, [
-          `(${y} ; ${x})`,
-          `(${Math.max(1, x - 1)} ; ${y})`,
-          `(${x} ; ${Math.max(1, y - 1)})`,
-        ]),
+        choices: makeChoices(
+          correct,
+          piegesCoordonnees(x, y).map(([a, b]) => `(${a} ; ${b})`),
+        ),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
@@ -608,11 +644,10 @@ export const reperageBank: TutorBankItemV4[] = [
       return {
         text: `Le point ${label} est placé en x = ${x} et y = ${y}. Quelle écriture est correcte ?`,
         format: "qcm",
-        choices: makeChoices(correct, [
-          `${label}(${y} ; ${x})`,
-          `${label}(${x} ; ${Math.max(1, y - 1)})`,
-          `${label}(${Math.max(1, x - 1)} ; ${y})`,
-        ]),
+        choices: makeChoices(
+          correct,
+          piegesCoordonnees(x, y).map(([a, b]) => `${label}(${a} ; ${b})`),
+        ),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
@@ -753,11 +788,10 @@ export const reperageBank: TutorBankItemV4[] = [
       return {
         text: `Quelles sont les coordonnées du point ${target.label} ?`,
         format: "qcm",
-        choices: makeChoices(correct, [
-          `(${target.y} ; ${target.x})`,
-          `(${Math.max(1, target.x - 1)} ; ${target.y})`,
-          `(${target.x} ; ${Math.max(1, target.y - 1)})`,
-        ]),
+        choices: makeChoices(
+          correct,
+          piegesCoordonnees(target.x, target.y).map(([a, b]) => `(${a} ; ${b})`),
+        ),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
@@ -799,11 +833,10 @@ export const reperageBank: TutorBankItemV4[] = [
       return {
         text: `Sur la carte quadrillée de La Réunion, quelles sont les coordonnées du lieu "${target.label}" ?`,
         format: "qcm",
-        choices: makeChoices(correct, [
-          `(${target.y} ; ${target.x})`,
-          `(${Math.max(1, target.x - 1)} ; ${target.y})`,
-          `(${target.x} ; ${Math.max(1, target.y - 1)})`,
-        ]),
+        choices: makeChoices(
+          correct,
+          piegesCoordonnees(target.x, target.y).map(([a, b]) => `(${a} ; ${b})`),
+        ),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
@@ -838,11 +871,10 @@ export const reperageBank: TutorBankItemV4[] = [
       return {
         text: `Le point mystère M est placé avec x = ${x} et y = ${y}. Quelles sont ses coordonnées ?`,
         format: "qcm",
-        choices: makeChoices(correct, [
-          `(${y} ; ${x})`,
-          `(${x} ; ${Math.max(1, y - 1)})`,
-          `(${Math.max(1, x - 1)} ; ${y})`,
-        ]),
+        choices: makeChoices(
+          correct,
+          piegesCoordonnees(x, y).map(([a, b]) => `(${a} ; ${b})`),
+        ),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
@@ -999,11 +1031,10 @@ export const reperageBank: TutorBankItemV4[] = [
       return {
         text: `Le point ${label} doit être placé en (${x} ; ${y}). Quelle position faut-il choisir ?`,
         format: "qcm",
-        choices: makeChoices(`x = ${x} et y = ${y}`, [
-          `x = ${y} et y = ${x}`,
-          `x = ${x} et y = ${Math.max(1, y - 1)}`,
-          `x = ${Math.max(1, x - 1)} et y = ${y}`,
-        ]),
+        choices: makeChoices(
+          `x = ${x} et y = ${y}`,
+          piegesCoordonnees(x, y).map(([a, b]) => `x = ${a} et y = ${b}`),
+        ),
         expected: [`x = ${x} et y = ${y}`],
         comparator: "mcq_exact",
         explanation:
@@ -1044,11 +1075,10 @@ export const reperageBank: TutorBankItemV4[] = [
       return {
         text: `Le point mystère M doit être placé avec x = ${x} et y = ${y}. Quelles sont ses coordonnées ?`,
         format: "qcm",
-        choices: makeChoices(correct, [
-          `(${y} ; ${x})`,
-          `(${x} ; ${Math.max(1, y - 1)})`,
-          `(${Math.max(1, x - 1)} ; ${y})`,
-        ]),
+        choices: makeChoices(
+          correct,
+          piegesCoordonnees(x, y).map(([a, b]) => `(${a} ; ${b})`),
+        ),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
@@ -1939,11 +1969,10 @@ export const reperageBank: TutorBankItemV4[] = [
       return {
         text: `Sur une carte au trésor de La Réunion, le trésor T est placé en x = ${x} et y = ${y}. Quelles sont ses coordonnées ?`,
         format: "qcm",
-        choices: makeChoices(correct, [
-          `(${y} ; ${x})`,
-          `(${Math.max(1, x - 1)} ; ${y})`,
-          `(${x} ; ${Math.max(1, y - 1)})`,
-        ]),
+        choices: makeChoices(
+          correct,
+          piegesCoordonnees(x, y).map(([a, b]) => `(${a} ; ${b})`),
+        ),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
@@ -2276,11 +2305,10 @@ export const reperageBank: TutorBankItemV4[] = [
       return {
         text: `Sur la carte quadrillée de La Réunion, quelles sont les coordonnées du lieu "${target.label}" ?`,
         format: "qcm",
-        choices: makeChoices(correct, [
-          `(${target.y} ; ${target.x})`,
-          `(${Math.max(1, target.x - 1)} ; ${target.y})`,
-          `(${target.x} ; ${Math.max(1, target.y - 1)})`,
-        ]),
+        choices: makeChoices(
+          correct,
+          piegesCoordonnees(target.x, target.y).map(([a, b]) => `(${a} ; ${b})`),
+        ),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:

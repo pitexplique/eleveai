@@ -17,6 +17,23 @@
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -722,7 +739,14 @@ export const vecteursPlanBank: TutorBankItemV4[] = [
       const sx = xu + xv;
       const sy = yu + yv;
       const correct = `$(${sx}\\,;${sy})$`;
-      const choices = [correct, `$(${sx}\\,;${sy + 1})$`, `$(${xu * xv}\\,;${yu * yv})$`, `$(${sy}\\,;${sx})$`];
+      // Quand les deux sommes coïncident, « on a interverti » donne la bonne
+      // réponse : d'où le décalage horizontal, gardé en réserve.
+      const choices = makeChoices(correct, [
+        `$(${sx}\\,;${sy + 1})$`,
+        `$(${xu * xv}\\,;${yu * yv})$`,
+        `$(${sy}\\,;${sx})$`,
+        `$(${sx + 1}\\,;${sy})$`,
+      ]);
       return {
         text: `Soit $\\vec{u}(${xu}\\,;${yu})$ et $\\vec{v}(${xv}\\,;${yv})$. Quelles sont les coordonnées de $\\vec{u} + \\vec{v}$ ?`,
         format: "qcm",
@@ -910,13 +934,27 @@ export const vecteursPlanBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "vecteurs", "coordonnees", "template"],
     generate: () => {
       const xa = randomInt(-4, 4);
-      const xb = randomInt(-4, 4);
       const ya = randomInt(-4, 4);
-      const yb = randomInt(-4, 4);
+      // Deux points confondus donnent le vecteur nul, et tous les pièges
+      // s'écrivent alors « $(0\,;0)$ » : il ne restait qu'une ligne au QCM.
+      let xb = randomInt(-4, 4);
+      let yb = randomInt(-4, 4);
+      while (xb === xa && yb === ya) {
+        xb = randomInt(-4, 4);
+        yb = randomInt(-4, 4);
+      }
       const dx = xb - xa;
       const dy = yb - ya;
       const correct = `$(${dx}\\,;${dy})$`;
-      const choices = [correct, `$(${-dx}\\,;${-dy})$`, `$(${dy}\\,;${dx})$`, `$(${xa + xb}\\,;${ya + yb})$`];
+      // Coordonnées égales, ou opposées : selon le tirage, deux des pièges
+      // coïncident. On en garde deux de plus en réserve.
+      const choices = makeChoices(correct, [
+        `$(${-dx}\\,;${-dy})$`,
+        `$(${dy}\\,;${dx})$`,
+        `$(${xa + xb}\\,;${ya + yb})$`,
+        `$(${dx}\\,;${-dy})$`,
+        `$(${-dx}\\,;${dy})$`,
+      ]);
       return {
         text: `Soit $A(${xa}\\,;${ya})$ et $B(${xb}\\,;${yb})$. Quelles sont les coordonnées de $\\vec{AB}$ ?`,
         format: "qcm",

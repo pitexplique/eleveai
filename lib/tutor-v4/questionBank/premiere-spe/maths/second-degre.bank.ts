@@ -12,6 +12,8 @@
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -2061,7 +2063,11 @@ export const secondDegreBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "second_degre", "deux_racines", "template"],
     generate: () => {
       const r1 = randomInt(-5, 5) || 1;
-      const r2 = randomInt(-5, 5) || 3;
+      // Deux racines opposées annulent la somme : le trinôme s'écrit alors
+      // « $+ 0x$ », et les pièges « on a gardé le signe de S » et « on l'a
+      // changé » deviennent la même ligne.
+      let r2 = randomInt(-5, 5) || 3;
+      while (r2 === -r1) r2 = randomInt(-5, 5) || 3;
       const s = r1 + r2;
       const p = r1 * r2;
       const ecrire = (b: number, c: number) =>

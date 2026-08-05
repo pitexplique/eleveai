@@ -18,6 +18,19 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -500,15 +513,18 @@ export const exponentielleBank: TutorBankItemV4[] = [
       const a = randomInt(2, 7);
       const b = randomInt(2, 7);
       const correct = `$e^{${a + b}}$`;
+      // À $a = b = 2$, somme et produit valent tous deux 4 : le piège « on a
+      // multiplié les exposants » devenait la bonne réponse.
       const distracteurs = [
         `$e^{${a * b}}$`,
         `$e^{${Math.abs(a - b)}}$`,
         `$2e^{${a + b}}$`,
+        `$e^{${a + b + 1}}$`,
       ];
       return {
         text: `Simplifie $e^{${a}} \\times e^{${b}}$.`,
         format: "qcm",
-        choices: shuffle([correct, ...distracteurs]),
+        choices: makeChoices(correct, distracteurs),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(
@@ -809,15 +825,18 @@ export const exponentielleBank: TutorBankItemV4[] = [
       const k = randomInt(2, 6);
       const b = randomInt(2, 5);
       const correct = `$${k * b}e^{${b}x}$`;
+      // À $k = b = 2$, somme et produit valent tous deux 4 : le piège « on a
+      // additionné les coefficients » devenait la bonne réponse.
       const distracteurs = [
         `$${k}e^{${b}x}$`,
         `$${k * b}e^{${b}x - 1}$`,
         `$${k + b}e^{${b}x}$`,
+        `$${k * b}e^{${b}x + 1}$`,
       ];
       return {
         text: `Quelle est la dérivée de $f(x) = ${k}e^{${b}x}$ ?`,
         format: "qcm",
-        choices: shuffle([correct, ...distracteurs]),
+        choices: makeChoices(correct, distracteurs),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(

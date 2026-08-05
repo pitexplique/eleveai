@@ -988,19 +988,21 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
       const k = randomInt(3, 10);
       const correctNumber = base * k;
 
-      const candidates = shuffle([
-        correctNumber,
-        correctNumber + 1,
-        correctNumber + 2,
-        correctNumber + base - 1,
-      ]);
-
       const correct = String(correctNumber);
 
       return {
         text: `Quel nombre est un multiple de ${base} ?`,
         format: "qcm",
-        choices: candidates.map(String),
+        // Pour un multiple de 3, « le suivant du suivant » et « le précédent du
+        // multiple d'après » sont le même nombre : l'élève voyait deux fois la
+        // même proposition. Aucun de ces voisins n'est multiple de la base,
+        // c'est ce qui en fait des pièges honnêtes.
+        choices: makeChoices(correct, [
+          String(correctNumber + 1),
+          String(correctNumber + 2),
+          String(correctNumber + base - 1),
+          String(correctNumber + base + 1),
+        ]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(
