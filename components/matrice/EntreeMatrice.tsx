@@ -340,18 +340,32 @@ export default function EntreeMatrice({
       {/* ── Ce qu'on a trouvé ───────────────────────────────────────────── */}
       {resultat && (
         <div className={surAccueil ? "mt-5" : "mt-10"} aria-live="polite">
-          <p className="mb-2 text-xs text-[#1d1c16]/55">
-            Ce que j&apos;ai compris :{" "}
-            <span className="text-[#1d1c16]">
-              {[
-                p.label,
-                resultat.lecture.intention ? libelleIntention(resultat.lecture.intention) : null,
-                resultat.lecture.notionLabel,
-              ]
-                .filter(Boolean)
-                .join(" · ")}
-            </span>
-          </p>
+          {/* Quand NI notion NI intention n'ont été lues, on n'a rien compris —
+              et écrire « Ce que j'ai compris : 4e » au-dessus de trois ressources
+              choisies au niveau seul serait un mensonge poli. On le dit, et les
+              ressources deviennent une proposition de départ, pas une réponse.
+              (Vu le 05/08 sur une frappe au hasard : « df » ressortait avec
+              trois recommandations et l'air de les avoir méritées.) */}
+          {!resultat.lecture.notionId && !resultat.lecture.intention ? (
+            <p className="mb-2 text-xs text-[#1d1c16]/55">
+              Je n&apos;ai pas bien compris la demande — voici par où{" "}
+              {p.tutoie ? "tu peux" : "vous pouvez"} commencer en{" "}
+              <span className="text-[#1d1c16]">{p.label}</span>.
+            </p>
+          ) : (
+            <p className="mb-2 text-xs text-[#1d1c16]/55">
+              Ce que j&apos;ai compris :{" "}
+              <span className="text-[#1d1c16]">
+                {[
+                  p.label,
+                  resultat.lecture.intention ? libelleIntention(resultat.lecture.intention) : null,
+                  resultat.lecture.notionLabel,
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </span>
+            </p>
+          )}
 
           {resultat.lecture.intention === "humain" ? (
             // Chercher quelqu'un, ce n'est pas chercher une ressource. On n'a
