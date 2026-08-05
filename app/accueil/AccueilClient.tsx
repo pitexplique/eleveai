@@ -275,7 +275,9 @@ const CLASSES_ENTREE: { slug: string; label: string }[] = [
 // « Ta classe » n'affiche plus les douze niveaux mais les deux à quatre du
 // cycle : on garde le réglage fin (un 4ᵉ reste un 4ᵉ, pas « collège ») en
 // divisant la hauteur du bloc. Cycle non choisi → les douze, comme avant.
-const CYCLES: { id: string; emoji: string; label: string; classe: string; classes: string[]; accent: Accent }[] = [
+// `image` : le dessin de la tuile quand il existera (cf. TuileProfil — huit ou
+// aucune). Chemin depuis /public, par exemple "/qui-est-ce/cp-ce2.png".
+const CYCLES: { id: string; emoji: string; image?: string; label: string; classe: string; classes: string[]; accent: Accent }[] = [
   { id: "cp-ce2", emoji: "🧸", label: "CP–CE2", classe: "cp", classes: ["cp", "ce1", "ce2"], accent: "safran" },
   { id: "cm1-cm2", emoji: "🌳", label: "CM1–CM2", classe: "cm1", classes: ["cm1", "cm2"], accent: "canne" },
   { id: "6e-3e", emoji: "🎒", label: "6ᵉ–3ᵉ", classe: "6e", classes: ["6e", "5e", "4e", "3e"], accent: "boucan" },
@@ -300,7 +302,7 @@ const ACCENT_PAR_CLASSE: Record<string, Accent> = Object.fromEntries(
   CYCLES.flatMap((c) => c.classes.map((slug) => [slug, c.accent])),
 );
 
-const PORTES_ADULTES: { emoji: string; label: string; colonne: Colonne; memo: string; accent: Accent }[] = [
+const PORTES_ADULTES: { emoji: string; image?: string; label: string; colonne: Colonne; memo: string; accent: Accent }[] = [
   { emoji: "👪", label: "Parent", colonne: "parent", memo: "parent", accent: "canne" },
   { emoji: "🍎", label: "Professeur", colonne: "prof", memo: "enseignant", accent: "flamboyant" },
   { emoji: "🏫", label: "Établissement", colonne: "principal", memo: "etablissement", accent: "boucan" },
@@ -918,6 +920,63 @@ function Kicker({
     >
       {children}
     </p>
+  );
+}
+
+/**
+ * Une tuile de « Qui est-ce ? ». Les huit sont identiques à leurs données près
+ * — elles étaient écrites deux fois, une pour les cycles, une pour les portes
+ * adultes.
+ *
+ * ⭐ LA PLACE DU DESSIN EST FAITE, PAS ENCORE REMPLIE (04/08). Frédéric veut des
+ * images à la place des emojis : un emoji change de tête d'un téléphone à
+ * l'autre, et la charte du journal dit que les annonces se font au dessin. Le
+ * `image` d'une tuile prend donc le pas sur son emoji quand il existe.
+ *
+ * ⚠️ HUIT OU AUCUNE. Trois dessins de Ti Margo existent aujourd'hui, contre huit
+ * tuiles : illustrer trois cases et laisser cinq emojis ferait une rangée qui a
+ * l'air en panne, pas une rangée en cours. Tant que les huit ne sont pas là, la
+ * rangée reste aux emojis — c'est une décision, pas un oubli.
+ *
+ * ⚠️ La boîte du haut fait 24 px, dessin ou emoji : c'est la hauteur exacte de
+ * l'emoji actuel, pour que le jour où les dessins arrivent la bande ne change
+ * pas de taille et ne repousse pas la Une.
+ */
+function TuileProfil({
+  emoji,
+  image,
+  label,
+  accent,
+  onClick,
+}: {
+  emoji: string;
+  image?: string;
+  label: string;
+  accent: Accent;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="min-w-[82px] flex-1 border-2 border-[#1d1c16] bg-[#1d1c16]/[0.04] px-1 py-2.5 text-center transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
+    >
+      <span className="flex h-6 items-center justify-center" aria-hidden>
+        {image ? (
+          <Image src={image} alt="" width={96} height={96} className="h-6 w-auto" />
+        ) : (
+          <span className="text-2xl leading-none">{emoji}</span>
+        )}
+      </span>
+      <span className="mt-1.5 block whitespace-nowrap font-serif text-[10px] font-black">
+        {label}
+      </span>
+      <span
+        className="mx-auto mt-1.5 block h-[3px] w-6 rounded-sm"
+        style={{ backgroundColor: ACCENTS[accent] }}
+        aria-hidden
+      />
+    </button>
   );
 }
 
@@ -1745,44 +1804,24 @@ export default function AccueilPage({
                 </p>
                 <div className="mt-2 flex flex-nowrap gap-2 overflow-x-auto pb-1">
                   {CYCLES.map((c) => (
-                    <button
+                    <TuileProfil
                       key={c.id}
-                      type="button"
+                      emoji={c.emoji}
+                      image={c.image}
+                      label={c.label}
+                      accent={c.accent}
                       onClick={() => choisirCycle(c.id)}
-                      className="min-w-[82px] flex-1 border-2 border-[#1d1c16] bg-[#1d1c16]/[0.04] px-1 py-2.5 text-center transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
-                    >
-                      <span className="block text-2xl leading-none" aria-hidden>
-                        {c.emoji}
-                      </span>
-                      <span className="mt-1.5 block whitespace-nowrap font-serif text-[10px] font-black">
-                        {c.label}
-                      </span>
-                      <span
-                        className="mx-auto mt-1.5 block h-[3px] w-6 rounded-sm"
-                        style={{ backgroundColor: ACCENTS[c.accent] }}
-                        aria-hidden
-                      />
-                    </button>
+                    />
                   ))}
                   {PORTES_ADULTES.map((p) => (
-                    <button
+                    <TuileProfil
                       key={p.memo}
-                      type="button"
+                      emoji={p.emoji}
+                      image={p.image}
+                      label={p.label}
+                      accent={p.accent}
                       onClick={() => choisirAudience(p)}
-                      className="min-w-[82px] flex-1 border-2 border-[#1d1c16] bg-[#1d1c16]/[0.04] px-1 py-2.5 text-center transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
-                    >
-                      <span className="block text-2xl leading-none" aria-hidden>
-                        {p.emoji}
-                      </span>
-                      <span className="mt-1.5 block whitespace-nowrap font-serif text-[10px] font-black">
-                        {p.label}
-                      </span>
-                      <span
-                        className="mx-auto mt-1.5 block h-[3px] w-6 rounded-sm"
-                        style={{ backgroundColor: ACCENTS[p.accent] }}
-                        aria-hidden
-                      />
-                    </button>
+                    />
                   ))}
                 </div>
               </>
