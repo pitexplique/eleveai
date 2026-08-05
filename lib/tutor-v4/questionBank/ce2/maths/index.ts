@@ -4,6 +4,7 @@ import { buildCycle2QuestionBank } from "@/lib/tutor-v4/questionBank/cycle2/math
 
 import { nombresEntiersBank } from "./nombres-entiers.bank";
 import { calculBank } from "./calcul.bank";
+import { problemeBank } from "./probleme.bank";
 
 // Le CE2 quitte le constructeur commun, une notion à la fois.
 //
@@ -21,6 +22,7 @@ import { calculBank } from "./calcul.bank";
 const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...nombresEntiersBank,
   ...calculBank,
+  ...problemeBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
