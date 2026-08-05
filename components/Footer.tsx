@@ -1,4 +1,12 @@
 // components/Footer.tsx
+//
+// ⚠️ TOUS LES LIENS EN `prefetch={false}` (04/08). Le pied de page est sur
+// TOUTES les pages du site : à préchargement ouvert, chaque visiteur qui
+// descend jusqu'en bas déclenchait quatorze lectures du cache ISR — quatorze,
+// à chaque page vue, pour des liens de pied de page qu'on clique rarement.
+// C'est le meilleur rapport entre ce qu'on économise et ce qu'on perd, le
+// quota gratuit de Vercel étant à 75 % (voir le commentaire dans
+// app/accueil/AccueilClient.tsx).
 import Link from "next/link";
 import Image from "next/image";
 
@@ -130,7 +138,7 @@ export default function Footer() {
 
           <nav aria-label="Le Journal" className="mt-4 flex flex-wrap gap-2">
             {journalQuotidien.map((l) => (
-              <Link
+              <Link prefetch={false}
                 key={l.href}
                 href={l.href}
                 className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1.5 text-xs font-semibold text-emerald-100 transition hover:bg-emerald-400/20"
@@ -145,7 +153,7 @@ export default function Footer() {
           </h3>
           <nav aria-label="Un peu de maths" className="flex flex-wrap gap-2">
             {unPeuDeMaths.map((l) => (
-              <Link
+              <Link prefetch={false}
                 key={l.href}
                 href={l.href}
                 className="rounded-full border border-slate-700 bg-slate-800/40 px-3 py-1.5 text-xs text-slate-300 transition hover:border-amber-300/40 hover:text-amber-200"
@@ -179,7 +187,7 @@ export default function Footer() {
 
             {/* Le visage derrière le site — même photo que l'édito de
                 l'accueil : on sait qui parle. */}
-            <Link href="/qui-sommes-nous" className="group flex items-center gap-3">
+            <Link prefetch={false} href="/qui-sommes-nous" className="group flex items-center gap-3">
               <Image
                 src="/images/avatar-frederic-Lacoste.jpg"
                 alt="Frédéric Lacoste"
@@ -196,7 +204,7 @@ export default function Footer() {
               </span>
             </Link>
 
-            <Link
+            <Link prefetch={false}
               href="/contact"
               className="inline-flex rounded-2xl border border-emerald-400/40 bg-emerald-400/10 px-4 py-2 text-xs font-semibold text-emerald-200 transition hover:bg-emerald-400/20"
             >
@@ -209,7 +217,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {outils.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-slate-400 transition hover:text-emerald-300">
+                  <Link prefetch={false} href={l.href} className="text-sm text-slate-400 transition hover:text-emerald-300">
                     {l.label}
                   </Link>
                 </li>
@@ -222,7 +230,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {espaces.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-slate-400 transition hover:text-sky-300">
+                  <Link prefetch={false} href={l.href} className="text-sm text-slate-400 transition hover:text-sky-300">
                     {l.label}
                   </Link>
                 </li>
@@ -233,7 +241,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {infos.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-slate-400 transition hover:text-sky-300">
+                  <Link prefetch={false} href={l.href} className="text-sm text-slate-400 transition hover:text-sky-300">
                     {l.label}
                   </Link>
                 </li>
@@ -246,7 +254,7 @@ export default function Footer() {
             <ul className="space-y-2 mb-6">
               {englishNiveaux.map((n) => (
                 <li key={n.slug}>
-                  <Link
+                  <Link prefetch={false}
                     href={`/coach-ia/english?niveau=${n.slug}`}
                     className="text-sm text-slate-400 transition hover:text-sky-300"
                   >
@@ -255,7 +263,7 @@ export default function Footer() {
                 </li>
               ))}
               <li>
-                <Link
+                <Link prefetch={false}
                   href="/parcours-english-maths"
                   className="text-sm text-slate-400 transition hover:text-sky-300"
                 >
@@ -268,7 +276,7 @@ export default function Footer() {
             <ul className="grid grid-cols-2 gap-x-3 gap-y-2 sm:grid-cols-1">
               {mathsClasses.map((c) => (
                 <li key={c.slug}>
-                  <Link
+                  <Link prefetch={false}
                     href={`/coach-ia/maths?classe=${c.slug}`}
                     className="text-sm text-slate-400 transition hover:text-amber-300"
                   >
@@ -284,7 +292,7 @@ export default function Footer() {
             <ul className="grid grid-cols-2 gap-x-3 gap-y-2 sm:grid-cols-1">
               {francaisClasses.map((c) => (
                 <li key={c.slug}>
-                  <Link
+                  <Link prefetch={false}
                     href={`/coach-ia/francais?classe=${c.slug}`}
                     className="text-sm text-slate-400 transition hover:text-sky-300"
                   >
@@ -298,7 +306,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {legal.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-xs text-slate-500 transition hover:text-slate-300">
+                  <Link prefetch={false} href={l.href} className="text-xs text-slate-500 transition hover:text-slate-300">
                     {l.label}
                   </Link>
                 </li>
@@ -312,11 +320,11 @@ export default function Footer() {
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px]">
             <span>Conçu à La Réunion</span>
             <span className="hidden text-slate-700 sm:inline">•</span>
-            <Link href="/mentions-legales" className="transition hover:text-slate-300">
+            <Link prefetch={false} href="/mentions-legales" className="transition hover:text-slate-300">
               Mentions légales
             </Link>
             <span className="hidden text-slate-700 sm:inline">•</span>
-            <Link href="/politique-confidentialite" className="transition hover:text-slate-300">
+            <Link prefetch={false} href="/politique-confidentialite" className="transition hover:text-slate-300">
               Confidentialité
             </Link>
           </div>

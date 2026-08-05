@@ -20,6 +20,26 @@
 //   « à ton nom » = élève connecté → bloc « L'édition de {prénom} » (reco du jour)
 //
 // RGPD : prénoms seuls, jamais reliés à une classe/un établissement précis.
+//
+// ─── ⚠️ `prefetch={false}` PARTOUT, SAUF SUR QUATRE LIENS ──────────────────────
+// Frédéric, 04/08 : Vercel annonce 75 % du quota gratuit d'« ISR Reads »
+// (1 000 000). Ces lectures ne se comptent PAS par déploiement — grouper les
+// pushes économise les régénérations et les minutes de build, pas ce
+// compteur-là. Elles se comptent par requête servie depuis le cache.
+//
+// Or un `<Link>` d'App Router précharge la charge RSC de sa destination DÈS
+// QU'IL ENTRE DANS LE CHAMP DE VISION, et pour une route statique ce
+// préchargement est une lecture du cache ISR. Cette page portait 61 liens sans
+// une seule exception : dérouler l'accueil jusqu'en bas déclenchait donc une
+// soixantaine de lectures pour UNE visite, sur des liens dont on n'en clique
+// qu'un. Le catalogue en aligne 21 à lui seul, les cahiers 11.
+//
+// Le préchargement ne reste donc que là où le clic est probable ET où la
+// vitesse se voit : les DEUX OREILLES de manchette et les DEUX BOUTONS de
+// « Commence ici ». Partout ailleurs il s'éteint — le lien s'ouvre en une
+// fraction de seconde de plus, sur des liens qu'on lit avant de cliquer.
+// ⚠️ Ne pas ajouter un `<Link>` ici sans `prefetch={false}` : c'est une lecture
+// de quota par visiteur qui déroule la page, pas une par clic.
 
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
@@ -967,7 +987,7 @@ function MotDuJourEncart() {
       <p className="mt-1.5 text-sm font-medium leading-6 text-[#1d1c16]/70">
         💡 {mot.indice}
       </p>
-      <Link
+      <Link prefetch={false}
         href="/dictee-du-jour"
         className="mt-1.5 inline-block text-xs font-black text-cyan-800 underline underline-offset-2 hover:text-[#1d1c16]"
       >
@@ -1110,7 +1130,7 @@ function UneCarousel({
             {carte}
           </a>
         ) : (
-          <Link href={ep.lien} className="group block border border-[#1d1c16]/25">
+          <Link prefetch={false} href={ep.lien} className="group block border border-[#1d1c16]/25">
             {carte}
           </Link>
         )}
@@ -1236,7 +1256,7 @@ function EditionPerso() {
         <div className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-2">
           {[reco.principale, ...(reco.alternative ? [reco.alternative] : [])].map(
             (carte) => (
-              <Link
+              <Link prefetch={false}
                 key={carte.titre}
                 href={carte.lien}
                 className="group border-t border-[#1d1c16]/25 pt-3"
@@ -1916,21 +1936,21 @@ export default function AccueilPage({
                   <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
                     ✏️ S&apos;entraîner :
                   </span>
-                  <Link href={`/coach-ia/maths?classe=${classeActive}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  <Link prefetch={false} href={`/coach-ia/maths?classe=${classeActive}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                     🧮 Maths
                   </Link>
                   {FRANCAIS_LEVELS.has(classeActive) && (
-                    <Link href={`/coach-ia/francais?classe=${classeActive}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                    <Link prefetch={false} href={`/coach-ia/francais?classe=${classeActive}`} className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                       📖 Français
                     </Link>
                   )}
-                  <Link href="/coach-ia/english-maths" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  <Link prefetch={false} href="/coach-ia/english-maths" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                     🇬🇧 Anglais
                   </Link>
-                  <Link href="/coach-ia/espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  <Link prefetch={false} href="/coach-ia/espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                     🇪🇸 Espagnol
                   </Link>
-                  <Link href="/coach-ia/ia" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  <Link prefetch={false} href="/coach-ia/ia" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                     🤖 IA
                   </Link>
                 </div>
@@ -1940,24 +1960,24 @@ export default function AccueilPage({
                   <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/55">
                     🧭 S&apos;&eacute;valuer :
                   </span>
-                  <Link href="/parcours" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  <Link prefetch={false} href="/parcours" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                     🧮 Maths
                   </Link>
                   {FRANCAIS_LEVELS.has(classeActive) && (
-                    <Link href="/parcours-francais" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                    <Link prefetch={false} href="/parcours-francais" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                       📖 Français
                     </Link>
                   )}
-                  <Link href="/parcours-english-maths" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  <Link prefetch={false} href="/parcours-english-maths" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                     🇬🇧 Anglais
                   </Link>
-                  <Link href="/parcours-espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  <Link prefetch={false} href="/parcours-espagnol" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                     🇪🇸 Espagnol
                   </Link>
-                  <Link href="/parcours-ia" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
+                  <Link prefetch={false} href="/parcours-ia" className="text-cyan-800 underline underline-offset-2 hover:no-underline">
                     🤖 IA
                   </Link>
-                  <Link href={`/programme/${classeActive}`} className="text-[#1d1c16]/70 underline underline-offset-2 hover:no-underline">
+                  <Link prefetch={false} href={`/programme/${classeActive}`} className="text-[#1d1c16]/70 underline underline-offset-2 hover:no-underline">
                     📋 Le programme
                   </Link>
                 </div>
@@ -2018,7 +2038,7 @@ export default function AccueilPage({
         style={ordre("evals")}
         className="mx-auto mt-6 grid w-full min-w-0 max-w-6xl gap-2 sm:grid-cols-3"
       >
-        <Link
+        <Link prefetch={false}
           href="/evaluation-nationale-college"
           className="group min-w-0 border-2 border-[#1d1c16] p-3 transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
         >
@@ -2038,7 +2058,7 @@ export default function AccueilPage({
             comprend en une seconde et se vérifie : la connexion élève demande
             un code de 6 à 8 chiffres, son établissement et sa classe. On
             n'affirme rien de plus — la page dédiée dit le reste. */}
-        <Link
+        <Link prefetch={false}
           href="/politique-confidentialite"
           className="group min-w-0 border-2 border-[#1d1c16] p-3 transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
         >
@@ -2053,7 +2073,7 @@ export default function AccueilPage({
           </p>
         </Link>
 
-        <Link
+        <Link prefetch={false}
           href={ESPACE_ADULTE[colonne]?.href ?? "/espace-ecoles"}
           className="group min-w-0 border-2 border-[#1d1c16] p-3 transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16]"
         >
@@ -2092,7 +2112,7 @@ export default function AccueilPage({
               attend dans votre tableau de bord.
             </p>
             <div className="mt-3 flex flex-wrap items-center gap-3">
-              <Link
+              <Link prefetch={false}
                 href="/fiches-cours/maths"
                 className="inline-flex items-center gap-2 rounded-sm bg-[#1d1c16] px-4 py-2 text-sm font-black text-[#d8e9ee] transition hover:bg-cyan-800"
               >
@@ -2226,7 +2246,7 @@ export default function AccueilPage({
                     minutes: 20,
                   },
                 ].map((e) => (
-                  <Link
+                  <Link prefetch={false}
                     key={e.href}
                     href={e.href}
                     className="group block border-t border-[#1d1c16]/25 pt-2"
@@ -2256,7 +2276,7 @@ export default function AccueilPage({
                   </Link>
                 ))}
               </div>
-              <Link
+              <Link prefetch={false}
                 href="/evaluation-nationale-college"
                 className="mt-3 block text-sm font-black text-cyan-800 hover:underline"
               >
@@ -2272,7 +2292,7 @@ export default function AccueilPage({
                   PIX EST À PART, ET DATÉ : la certification au collège, c'est
                   la 3ᵉ au printemps — pas la rentrée de 6ᵉ/4ᵉ. Mise sur le
                   même rang, elle brouillait l'encadré. */}
-              <Link
+              <Link prefetch={false}
                 href="/eval-pix-ia"
                 className="group mt-4 block border-t border-[#1d1c16]/25 pt-3"
               >
@@ -2320,7 +2340,7 @@ export default function AccueilPage({
                     href: "/concours-general",
                   },
                 ].map((c) => (
-                  <Link
+                  <Link prefetch={false}
                     key={c.href}
                     href={c.href}
                     className="group block border-b border-dotted border-[#1d1c16]/25 py-2"
@@ -2366,7 +2386,7 @@ export default function AccueilPage({
                   { emoji: "🇪🇸", nom: "L'espagnol du jour", quoi: "5 mots par jour, du A1 au B2", href: "/espagnol-du-jour" },
                   { emoji: "⚡", nom: "Le calcul rapide", quoi: "3 minutes d'automatismes chrono", href: "/calcul-rapide" },
                 ].map((r) => (
-                  <Link
+                  <Link prefetch={false}
                     key={r.href}
                     href={r.href}
                     className="group block border-b border-dotted border-[#1d1c16]/25 py-2"
@@ -2396,7 +2416,7 @@ export default function AccueilPage({
                   signale, il n'enfle pas.
                   Au passage `border-y` devient `border-b` — le dernier rituel
                   au-dessus porte déjà son filet, ça faisait un trait double. */}
-              <Link
+              <Link prefetch={false}
                 href="/guide-de-survie"
                 className="group block border-b border-dotted border-[#1d1c16]/25 py-3"
               >
@@ -2414,7 +2434,7 @@ export default function AccueilPage({
 
               {/* LES CAHIERS DE VACANCES — pointe le HUB, comme les guides :
                   chaque cahier livré y apparaît sans retoucher l'accueil. */}
-              <Link
+              <Link prefetch={false}
                 href="/cahier-vacances"
                 className="group block border-b border-dotted border-[#1d1c16]/25 py-3"
               >
@@ -2447,7 +2467,7 @@ export default function AccueilPage({
               {/* La machine reste visible, mais en format plus court dans cette colonne. */}
               <ReclameMachine />
 
-              <Link
+              <Link prefetch={false}
                 href="/simulateurs"
                 className="group mt-2 block border-2 border-cyan-800 bg-cyan-800/[0.05] p-2 transition hover:bg-cyan-800/[0.1]"
               >
@@ -2473,7 +2493,7 @@ export default function AccueilPage({
                   ANCRÉ AU PIED (mt-auto, 01/08) : le fil du jour finit droit,
                   comme les deux autres colonnes. */}
               <div className="py-3 lg:mt-auto">
-                <Link href="/defis-du-jour" className="group block">
+                <Link prefetch={false} href="/defis-du-jour" className="group block">
                   <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
                     🎯 Le défi du jour · {defiDuJour.defi.theme}{" "}
                     <PastilleJour />
@@ -2502,7 +2522,7 @@ export default function AccueilPage({
                     {defiDuJour.defi.explanation}
                   </p>
                 </details>
-                <Link
+                <Link prefetch={false}
                   href="/defis-du-jour"
                   className="mt-1.5 block text-sm font-black text-cyan-800 hover:underline"
                 >
@@ -2515,7 +2535,7 @@ export default function AccueilPage({
                   Frédéric du 18/07 : la colonne respire.) */}
 
               {jours > 0 && (
-                <Link href="/coach-brevet" className="group block py-3">
+                <Link prefetch={false} href="/coach-brevet" className="group block py-3">
                   <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
                     🏃 Sprint Brevet
                   </p>
@@ -2575,7 +2595,7 @@ export default function AccueilPage({
               </details>
             )}
             {editoDuJour.lien && editoDuJour.cta && (
-              <Link
+              <Link prefetch={false}
                 href={editoDuJour.lien}
                 className="mt-2 inline-block text-sm font-black text-cyan-800 hover:underline"
               >
@@ -2655,7 +2675,7 @@ export default function AccueilPage({
                   Votre métier peut devenir un article, une simulation, un
                   défi — comme la canne ou le barrage.
                 </p>
-                <Link
+                <Link prefetch={false}
                   href="/entreprises"
                   className="mt-2 inline-block border-2 border-[#1d1c16] bg-[#1d1c16] px-3 py-1.5 text-xs font-black text-amber-50 hover:bg-transparent hover:text-[#1d1c16]"
                 >
@@ -2737,7 +2757,7 @@ export default function AccueilPage({
         <div className="mt-2 border-t-2 border-[#1d1c16]" />
         <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
           {/* Le défi du jour — la vraie image du défi programmé aujourd'hui. */}
-          <Link
+          <Link prefetch={false}
             href="/defis-du-jour"
             className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/25 lg:aspect-[16/9]"
           >
@@ -2795,7 +2815,7 @@ export default function AccueilPage({
               { emoji: "🗺️", kicker: "L'exploration", titre: "La chasse aux trésors sur la carte de l'île", href: "/carte", image: "/images/lagon.webp" },
             ] as const
           ).map((t) => (
-            <Link
+            <Link prefetch={false}
               key={t.href}
               href={t.href}
               className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/25 lg:aspect-[16/9]"
@@ -2821,7 +2841,7 @@ export default function AccueilPage({
 
           {/* La dictée : pas de photo — dégradé + filigrane « Aa » (le glyphe
               émoji géant rendait mal, façon picto cassé). */}
-          <Link
+          <Link prefetch={false}
             href="/dictee-du-jour"
             className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-[#1d1c16]/25 bg-gradient-to-br from-sky-500 to-indigo-700 lg:aspect-[16/9]"
           >
@@ -2888,7 +2908,7 @@ export default function AccueilPage({
               c.image_url ??
               (c.youtube_id ? `https://i.ytimg.com/vi/${c.youtube_id}/hqdefault.jpg` : null);
             return (
-              <Link key={c.id} href="/maths-974" className="group border-t border-[#1d1c16]/25 pt-3">
+              <Link prefetch={false} key={c.id} href="/maths-974" className="group border-t border-[#1d1c16]/25 pt-3">
                 <div className="relative aspect-video w-full overflow-hidden border border-[#1d1c16]/25 bg-[#1d1c16]/5">
                   {img ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -2929,7 +2949,7 @@ export default function AccueilPage({
           >
             ▶ S&apos;abonner à la chaîne
           </a>
-          <Link
+          <Link prefetch={false}
             href="/carte"
             className="text-sm font-black text-cyan-800 underline underline-offset-2"
           >
@@ -2968,7 +2988,7 @@ export default function AccueilPage({
             />
           ))}
         </div>
-        <Link
+        <Link prefetch={false}
           href="/simulateurs"
           className="mt-4 inline-block text-sm font-black text-cyan-800 underline underline-offset-2"
         >
@@ -2984,7 +3004,7 @@ export default function AccueilPage({
         </TitreRubrique>
         <div className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
           {matieres.map((m) => (
-            <Link
+            <Link prefetch={false}
               key={m.label}
               href={getHref(m.href)}
               className="group border-t border-[#1d1c16]/25 pt-3"
@@ -3011,7 +3031,7 @@ export default function AccueilPage({
           </h3>
           <div className="mt-3 grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
             {parcours.map((p) => (
-              <Link key={p.href} href={p.href} className="group border-t border-[#1d1c16]/25 pt-2.5">
+              <Link prefetch={false} key={p.href} href={p.href} className="group border-t border-[#1d1c16]/25 pt-2.5">
                 <h4 className="font-serif text-lg font-black leading-snug group-hover:underline">
                   🧭 Parcours {p.label}
                 </h4>
@@ -3021,7 +3041,7 @@ export default function AccueilPage({
                 <p className="mt-1 text-sm font-black text-cyan-800">Passer le bilan →</p>
               </Link>
             ))}
-            <Link href="/eval-pix-ia" className="group border-t border-[#1d1c16]/25 pt-2.5">
+            <Link prefetch={false} href="/eval-pix-ia" className="group border-t border-[#1d1c16]/25 pt-2.5">
               <h4 className="font-serif text-lg font-black leading-snug group-hover:underline">
                 🎓 Éval blanche Pix IA
               </h4>
@@ -3033,7 +3053,7 @@ export default function AccueilPage({
           </div>
           <p className="mt-3 text-sm font-medium text-[#1d1c16]/70">
             Et les leçons sont dans les{" "}
-            <Link href="/fiches-cours" className="font-black text-cyan-800 underline underline-offset-2">
+            <Link prefetch={false} href="/fiches-cours" className="font-black text-cyan-800 underline underline-offset-2">
               fiches de cours
             </Link>
             .
@@ -3049,7 +3069,7 @@ export default function AccueilPage({
         <TitreRubrique accent="safran">Les cahiers de vacances — du CE1 au Bac +1</TitreRubrique>
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           {CAHIERS_VACANCES.map((c) => (
-            <Link
+            <Link prefetch={false}
               key={c.slug}
               href={`/cahier-vacances/${c.slug}`}
               className={`group flex flex-col justify-between rounded-sm bg-gradient-to-br ${c.grad} p-3 text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg`}
@@ -3069,7 +3089,7 @@ export default function AccueilPage({
         </div>
         <p className="mt-2 text-xs font-medium italic text-[#1d1c16]/70">
           Gratuits, imprimables, avec Ti Margo 🦎 —{" "}
-          <Link href="/cahier-vacances" className="font-black text-cyan-800 underline underline-offset-2">
+          <Link prefetch={false} href="/cahier-vacances" className="font-black text-cyan-800 underline underline-offset-2">
             tous les cahiers →
           </Link>
         </p>
@@ -3111,7 +3131,7 @@ export default function AccueilPage({
             // « Tout explorer » ferme toujours la marche.
             .concat([{ key: "explorer", emoji: "🔭", famille: null, nom: "Tout explorer", ligne: "La table des matières complète d'EleveAI.", href: "/explorer" }])
             .map((c) => (
-              <Link
+              <Link prefetch={false}
                 key={c.key}
                 href={c.href}
                 className="group p-4 transition hover:bg-white/60"
@@ -3135,7 +3155,7 @@ export default function AccueilPage({
         <p className="mt-2 text-xs font-medium italic text-[#1d1c16]/70">
           Apprendre est gratuit, et ça le restera. Ce qui se paie : le suivi dans
           la durée —{" "}
-          <Link href="/tarifs" className="font-black text-cyan-800 underline underline-offset-2">
+          <Link prefetch={false} href="/tarifs" className="font-black text-cyan-800 underline underline-offset-2">
             voir les offres
           </Link>
           .
@@ -3162,7 +3182,7 @@ export default function AccueilPage({
           ))}
         </div>
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-[#1d1c16]/25 pt-3">
-          <Link
+          <Link prefetch={false}
             href="/votre-avis"
             className="inline-flex items-center gap-2 rounded-sm bg-[#1d1c16] px-4 py-2 text-sm font-black text-[#d8e9ee] transition hover:bg-cyan-800"
           >
@@ -3205,11 +3225,11 @@ export default function AccueilPage({
           <p className="mt-2 text-sm font-medium text-[#1d1c16]/70">
             Leurs idées, les bugs qu&apos;ils repèrent et leurs avis font avancer
             la plateforme.{" "}
-            <Link href="/remerciements" className="font-black text-cyan-800 underline underline-offset-2">
+            <Link prefetch={false} href="/remerciements" className="font-black text-cyan-800 underline underline-offset-2">
               La page des remerciements →
             </Link>{" "}
             <span className="text-[#1d1c16]/30">·</span>{" "}
-            <Link href="/besoin-de-vous" className="font-black text-cyan-800 underline underline-offset-2">
+            <Link prefetch={false} href="/besoin-de-vous" className="font-black text-cyan-800 underline underline-offset-2">
               EleveAI a besoin de vous →
             </Link>
           </p>
@@ -3221,7 +3241,7 @@ export default function AccueilPage({
         <Kicker>La page des grands</Kicker>
         <TitreRubrique>Parents, enseignants, établissements</TitreRubrique>
         <div className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-3">
-          <Link href="/parents" className="group border-t border-[#1d1c16]/25 pt-3">
+          <Link prefetch={false} href="/parents" className="group border-t border-[#1d1c16]/25 pt-3">
             <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">👪 Parents</p>
             <h3 className="mt-1 font-serif text-xl font-black leading-snug group-hover:underline">
               L&apos;IA explique, elle ne triche pas
@@ -3232,7 +3252,7 @@ export default function AccueilPage({
             </p>
             <p className="mt-1.5 text-sm font-black text-cyan-800">En savoir plus →</p>
           </Link>
-          <Link href="/enseignants" className="group border-t border-[#1d1c16]/25 pt-3">
+          <Link prefetch={false} href="/enseignants" className="group border-t border-[#1d1c16]/25 pt-3">
             <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">🍎 Enseignants</p>
             <h3 className="mt-1 font-serif text-xl font-black leading-snug group-hover:underline">
               Suivez leur progression
@@ -3243,7 +3263,7 @@ export default function AccueilPage({
             </p>
             <p className="mt-1.5 text-sm font-black text-cyan-800">En savoir plus →</p>
           </Link>
-          <Link href="/espace-ecoles" className="group border-t border-[#1d1c16]/25 pt-3">
+          <Link prefetch={false} href="/espace-ecoles" className="group border-t border-[#1d1c16]/25 pt-3">
             <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">🏫 Établissements</p>
             <h3 className="mt-1 font-serif text-xl font-black leading-snug group-hover:underline">
               Financé par l&apos;établissement, gratuit pour les familles
@@ -3279,7 +3299,7 @@ export default function AccueilPage({
               payer.
             </p>
             <div className="mt-3 flex flex-wrap items-center gap-3">
-              <Link
+              <Link prefetch={false}
                 href="/fiches-cours/maths"
                 className="inline-flex items-center gap-2 rounded-sm bg-[#1d1c16] px-4 py-2 text-sm font-black text-[#d8e9ee] transition hover:bg-cyan-800"
               >
@@ -3294,7 +3314,7 @@ export default function AccueilPage({
         )}
 
         {/* Français de l'étranger — la ligne fine (insight d'Arthur). */}
-        <Link
+        <Link prefetch={false}
           href="/francais-de-l-etranger"
           className="mt-4 block border-t border-[#1d1c16]/25 pt-3 text-sm font-medium text-[#1d1c16]/70"
         >
@@ -3319,7 +3339,7 @@ export default function AccueilPage({
             <span className="mx-3 text-[#1d1c16]/30">|</span>
             🏫 Établissement · 4 €/élève/an — gratuit pour les familles
           </p>
-          <Link
+          <Link prefetch={false}
             href="/tarifs"
             className="mt-3 inline-flex items-center gap-2 rounded-sm bg-[#1d1c16] px-5 py-2.5 text-sm font-black text-[#d8e9ee] transition hover:bg-cyan-800"
           >
@@ -3338,15 +3358,15 @@ export default function AccueilPage({
           Écrit à La Réunion. Rédaction : les élèves et les profs. Mascotte :
           Ti Margo, margouillat 🦎. Fondé par Frédéric Lacoste, professeur de
           mathématiques. Sans publicité —{" "}
-          <Link href="/politique-confidentialite" className="font-black underline underline-offset-2">
+          <Link prefetch={false} href="/politique-confidentialite" className="font-black underline underline-offset-2">
             données protégées
           </Link>
           {" · "}
-          <Link href="/pourquoi-eleveai" className="font-black underline underline-offset-2">
+          <Link prefetch={false} href="/pourquoi-eleveai" className="font-black underline underline-offset-2">
             pourquoi EleveAI
           </Link>
           {" · "}
-          <Link href="/contact" className="font-black underline underline-offset-2">
+          <Link prefetch={false} href="/contact" className="font-black underline underline-offset-2">
             écrire à la rédaction
           </Link>
         </p>

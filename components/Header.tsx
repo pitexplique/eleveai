@@ -355,7 +355,7 @@ export default function Header() {
           <Link
             href="/accueil"
             className={[
-              "inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition",
+              "inline-flex items-center gap-1.5 rounded-full px-2.5 py-2 text-sm font-black transition xl:px-3.5",
               paper
                 ? "bg-[#1d1c16] text-[#d8e9ee] shadow"
                 : "text-white/85 hover:bg-white/15 hover:text-white",
@@ -398,7 +398,7 @@ export default function Header() {
                 key={d.space}
                 href={d.href}
                 className={[
-                  "inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-black transition",
+                  "inline-flex items-center gap-1.5 rounded-full px-2.5 py-2 text-sm font-black transition xl:px-3.5",
                   paper
                     ? d.space === space
                       ? "bg-[#1d1c16] text-[#d8e9ee] shadow"
@@ -446,7 +446,16 @@ export default function Header() {
               }`}
             >
               <GraduationCap className="h-4 w-4" />
-              Connexion / inscription
+              {/* ⚠️ LIBELLÉ COURT SOUS `xl` (04/08). Mesuré à 1024 px — la
+                  largeur d'un iPad en paysage : logo + « Accueil » + les quatre
+                  portes d'audience + ce bouton faisaient 1016 px pour 1009
+                  disponibles, et TOUT LE SITE défilait de 7 px sur le côté.
+                  Couper le mot « inscription » libère ~90 px, bien plus qu'il
+                  n'en faut, et garde la nav complète à cette largeur — la
+                  reléguer au menu hamburger aurait coûté bien plus que le mot.
+                  Le bouton dit la même chose : on s'inscrit par là. */}
+              <span className="xl:hidden">Connexion</span>
+              <span className="hidden xl:inline">Connexion / inscription</span>
             </Link>
           )}
         </div>
