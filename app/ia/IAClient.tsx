@@ -13,9 +13,10 @@ export default function IAClient() {
       <div className="mx-auto w-full max-w-2xl">
         <header className="mb-10 text-center">
           <p className="text-2xl font-semibold tracking-[0.14em] sm:text-3xl">ELEVEAI</p>
-          <p className="mt-2 text-sm text-slate-600 sm:text-base">
-            L&apos;IA éducative conçue à La Réunion
+          <p className="mt-2 text-sm text-slate-700 sm:text-base">
+            L&apos;IA éducative qui te propose des ressources vérifiées
           </p>
+          <p className="mt-1 text-xs text-slate-500">Conçue à La Réunion</p>
         </header>
 
         <EntreeMatrice variante="page" />

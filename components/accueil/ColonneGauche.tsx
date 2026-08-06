@@ -63,8 +63,8 @@ export default function ColonneGauche() {
   const labelProfil = profil ? PROFILS.find((p) => p.id === profil)?.label : null;
 
   const contenu = (
-    <div className="flex h-full flex-col">
-      <div className="flex-1 overflow-y-auto px-3 py-4">
+    <div className="flex min-h-full flex-col">
+      <div className="flex-1 px-3 py-4">
         <Link
           href="/"
           prefetch={false}
@@ -98,8 +98,8 @@ export default function ColonneGauche() {
         )}
       </div>
 
-      {/* ── Le compte, en bas ────────────────────────────────────────────── */}
-      <div className="relative border-t border-slate-200 p-3">
+      {/* ── Le compte, collé en bas de la FENÊTRE (pas de la colonne) ────── */}
+      <div className="sticky bottom-0 border-t border-slate-200 bg-slate-50 p-3">
         {menuOuvert && (
           <div className="absolute bottom-full left-3 right-3 mb-2 rounded-xl border border-slate-200 bg-white py-2 shadow-lg">
             {MENU.map((groupe) => (
@@ -183,9 +183,19 @@ export default function ColonneGauche() {
 
   return (
     <>
-      {/* Ordinateur */}
+      {/* Ordinateur.
+          ⚠️ PAS DE `h-screen` ICI, et pas de hauteur calculée non plus.
+          En `h-screen`, la colonne fait toute la fenêtre mais commence SOUS le
+          header : l'encart du compte tombait 78 px hors de l'écran, invisible
+          tant qu'on n'avait pas fait défiler. Soustraire une constante ne marche
+          pas — le bandeau « Installer l'app » se ferme et le header change de
+          hauteur — et une mesure en JavaScript ne s'appliquait pas.
+          La réponse est dans le CSS : la colonne s'étire sur toute la page
+          (`stretch` du parent en flex) et c'est l'ENCART qui est `sticky
+          bottom-0`. Il reste alors collé au bas de la fenêtre quoi qu'il
+          arrive, sans que personne ait à mesurer quoi que ce soit. */}
       <aside className="hidden w-64 shrink-0 border-r border-slate-200 bg-slate-50 lg:block">
-        <div className="sticky top-0 h-screen">{contenu}</div>
+        {contenu}
       </aside>
 
       {/* Téléphone : un bouton, et le tiroir n'existe que s'il est ouvert. */}

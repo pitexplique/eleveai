@@ -22,10 +22,24 @@
 import type { Metadata } from "next";
 import AccueilIA from "./AccueilIA";
 
+// ⚠️ LE <title> ET LE TITRE DE LA PAGE NE FONT PAS LE MÊME TRAVAIL (06/08).
+// Celui-ci se lit dans une liste de résultats Google : il doit contenir les
+// mots qu'on TAPE — exercices, gratuit, du CP au Bac. L'autre, sur la page,
+// dit la promesse à qui vient d'arriver. Les confondre coûte le clic.
+//
+// Mesuré : Google coupe le titre vers 60 signes et la description vers 155.
+// L'ancien titre (« Le journal pour apprendre et s'évaluer — La Réunion, du CP
+// à la Terminale ») perdait « du CP à la Terminale », et la description perdait
+// « gratuit » — les deux mots qui décident du clic. Ici, tout tient.
+//
+// La Réunion sort du titre : personne ne tape « La Réunion » pour chercher un
+// cahier de vacances, et les téléchargements viennent surtout de métropole.
+// Elle reste sur la page, dans l'à-propos et dans les contenus — c'est une
+// bonne histoire, pas un bon mot-clé.
 export const metadata: Metadata = {
-  title: "EleveAI — l'IA éducative conçue à La Réunion",
+  title: "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac",
   description:
-    "Dis-nous ce que tu cherches : EleveAI tient compte de ton profil et sélectionne, parmi des ressources relues par un enseignant, celles qui peuvent vraiment t'aider. Maths, français, anglais, espagnol et IA, du CP à la Terminale. Gratuit, conçu à La Réunion.",
+    "Dis ce que tu cherches, EleveAI te propose des ressources vérifiées : coach en maths, français, anglais, espagnol et IA, exercices corrigés, cahiers de vacances. Gratuit.",
   keywords: [
     "eleveai",
     "IA éducative",
@@ -39,9 +53,9 @@ export const metadata: Metadata = {
     "la réunion",
   ],
   openGraph: {
-    title: "EleveAI — l'IA éducative conçue à La Réunion",
+    title: "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac",
     description:
-      "Dis qui tu es et ce que tu veux faire aujourd'hui. EleveAI cherche parmi des ressources vérifiées celles qui peuvent t'aider — du CP à la Terminale, gratuitement.",
+      "Dis qui tu es et ce que tu veux faire aujourd'hui. EleveAI te propose des ressources vérifiées par un enseignant — maths, français, anglais, espagnol et IA, du CP au Bac, gratuitement.",
     url: "https://eleveai.fr",
     siteName: "EleveAI",
     images: [

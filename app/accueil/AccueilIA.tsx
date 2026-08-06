@@ -41,11 +41,21 @@ export default function AccueilIA() {
 
       <main className="min-w-0 flex-1">
         <div className="mx-auto flex min-h-screen w-full max-w-3xl flex-col px-4 pb-12 pt-16 sm:px-6 lg:pt-24">
+          {/* « PROPOSE », pas « trouve » : le moteur sort deux ou trois
+              ressources compatibles, il ne devine pas LA bonne — on ne promet
+              pas plus que ce que fait ressources.ts.
+              « VÉRIFIÉES », pas « adaptées » : adapté ne veut rien dire, tout
+              le monde l'écrit. Ce qui distingue vraiment, c'est qu'un
+              enseignant les a relues.
+              Et on tutoie, comme deux lignes plus bas. L'origine reste, en
+              petit, APRÈS la promesse : La Réunion est une bonne histoire, pas
+              un bon mot-clé. */}
           <header className="mb-10 text-center">
             <p className="text-2xl font-semibold tracking-[0.14em] sm:text-3xl">ELEVEAI</p>
-            <p className="mt-2 text-sm text-slate-600 sm:text-base">
-              L&apos;IA éducative conçue à La Réunion
+            <p className="mt-2 text-sm text-slate-700 sm:text-base">
+              L&apos;IA éducative qui te propose des ressources vérifiées
             </p>
+            <p className="mt-1 text-xs text-slate-500">Conçue à La Réunion</p>
           </header>
 
           <Suspense fallback={<div className="h-64" aria-hidden="true" />}>
