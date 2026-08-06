@@ -66,11 +66,19 @@ export default function AccueilIA() {
               priority
               className="mx-auto mb-3 h-16 w-auto sm:h-20"
             />
-            <p className="text-2xl font-semibold tracking-[0.14em] sm:text-3xl">ELEVEAI</p>
-            <p className="mt-2 text-sm text-slate-700 sm:text-base">
+            {/* ⛔ LE MOT « ELEVEAI » A ÉTÉ RETIRÉ D'ICI (06/08). Il était écrit
+                deux fois sur le même écran : en haut à gauche dans le header,
+                et en grand au milieu. Le header porte le nom sur les 270 pages
+                du site ; cet écran-ci n'a qu'un travail, faire poser une
+                question. C'est donc la PROMESSE qui devient le titre — c'est
+                elle qui convainc, un nom de marque ne convainc personne.
+                ⭐ Ti Margo RESTE, et au centre. Dans le header il ferait 24 px,
+                c'est-à-dire un favicon. Ici il est la seule chose qui dise que
+                cette page n'a pas été faite à Palo Alto. */}
+            <h1 className="text-xl font-semibold text-slate-900 sm:text-2xl">
               L&apos;IA éducative qui te propose des ressources vérifiées
-            </p>
-            <p className="mt-1 text-xs text-slate-500">Conçue à La Réunion</p>
+            </h1>
+            <p className="mt-1.5 text-xs text-slate-500">Conçue à La Réunion</p>
           </header>
 
           <Suspense fallback={<div className="h-64" aria-hidden="true" />}>
