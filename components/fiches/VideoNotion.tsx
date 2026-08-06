@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { PlayCircle } from "lucide-react";
 
-const CHAINE_YOUTUBE = "https://www.youtube.com/@eleveai-e1h";
+const CHAINE_YOUTUBE = "https://www.youtube.com/@eleveai974";
 
 export default function VideoNotion({
   matiere,

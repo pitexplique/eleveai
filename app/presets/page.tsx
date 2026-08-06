@@ -1,6 +1,10 @@
 // app/presets/page.tsx
 import PresetsClient from "./PresetsClient";
 
+// Le fichier existait depuis longtemps sans que personne l'importe : la page
+// portait donc le titre de l'accueil dans Google. Branché le 06/08/2026.
+export { metadata } from "./metadata";
+
 export default function PresetsPage() {
   return (
     <>

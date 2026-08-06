@@ -367,35 +367,33 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* Desktop nav — Accueil (la Une) + les 4 audiences / rituels + auth.
-            Avant, seul le logo ramenait à la Une : peu évident pour les élèves
-            et les parents → un lien « Accueil » explicite (demande de Frédéric). */}
-        {/* L'onglet « 🗞️ Accueil » est parti le 06/08 avec le journal — et il
-            est REVENU le soir même, sans son journal.
-            La raison de son retrait était « le logo mène déjà à l'accueil, un
-            geste que tout le monde connaît ». Frédéric lui-même ne l'a pas
-            trouvé en revenant de /espace-eleves : si l'auteur du site cherche
-            la sortie, un élève de 6ᵉ ne la cherchera pas, il partira.
-            Il est hors du ternaire, donc présent pour TOUT LE MONDE — connecté
-            ou non : c'est une porte de retour, pas une porte d'audience. */}
+        {/* ── LA PORTE DE RETOUR ─────────────────────────────────────────
+            L'onglet « 🗞️ Accueil » est parti le 06/08 avec le journal, puis
+            revenu le soir même sans son journal. La raison de son retrait était
+            « le logo mène déjà à l'accueil, un geste que tout le monde
+            connaît » ; Frédéric ne l'a pas trouvé en revenant de
+            /espace-eleves. Si l'auteur du site cherche la sortie, un élève de
+            6ᵉ ne la cherche pas : il part.
+
+            ⛔ MAIS PAS SUR L'ACCUEIL ELLE-MÊME (`!paper`). Là, le logo est au
+            bord gauche, en grand, et le lien répétait la même destination à
+            deux mètres d'intervalle. Ailleurs le header reste centré dans son
+            conteneur : le logo n'est plus au bord, et c'est exactement là que
+            la porte manquait. On la met donc où elle sert, et nulle part où
+            elle fait double emploi.
+
+            Hors du ternaire d'audience : c'est une porte de RETOUR, pas une
+            porte d'audience — elle vaut pour tout le monde, connecté ou non. */}
         <div className="hidden items-center gap-1.5 lg:flex">
+          {!paper && (
           <Link
             prefetch={false}
             href="/accueil"
-            /* ⭐ CE LIEN N'A PAS D'ÉTAT « ACTIF », ET C'EST VOULU.
-               Dans cette rangée, le fond plein veut déjà dire quelque chose :
-               « voici TON audience » (la porte Élève est pleine pour un élève,
-               sur toutes les pages du site). Lui donner aussi le sens « tu es
-               ici » mettait deux pastilles noires côte à côte sur l'accueil,
-               disant deux choses différentes dans la même langue.
-               Or une porte de sortie n'a pas besoin de se signaler quand on est
-               déjà dehors : sur l'accueil elle ne sert à rien, ailleurs elle
-               sert à revenir. Elle reste donc discrète, partout. */
-            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition ${
-              paper
-                ? "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10 hover:text-[#1d1c16]"
-                : "text-white/85 hover:bg-white/15 hover:text-white"
-            }`}
+            /* Pas d'état « actif » : dans cette rangée le fond plein veut déjà
+               dire « voici TON audience ». Deux pleins côte à côte diraient deux
+               choses différentes dans la même langue. Et de toute façon ce lien
+               ne s'affiche jamais sur la page vers laquelle il pointe. */
+            className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black text-white/85 transition hover:bg-white/15 hover:text-white"
           >
             {/* ⚠️ MÊME RÈGLE QUE LE BOUTON CONNEXION : le mot disparaît sous
                 `xl`. À 1024 px — un iPad en paysage — la nav complète tenait à
@@ -405,6 +403,7 @@ export default function Header() {
             <span className="hidden xl:inline">Accueil</span>
             <span className="sr-only xl:hidden">Accueil</span>
           </Link>
+          )}
 
           {eleve && !isStaff ? (
             /* Élève CONNECTÉ → ses matières + rituels (pas les portes d'audience) */

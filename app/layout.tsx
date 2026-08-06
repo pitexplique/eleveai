@@ -24,8 +24,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const SITE_URL = "https://eleveai.fr";
-const CANONICAL = "/accueil";
+// ⚠️ AVEC LE www, ET C'EST OBLIGATOIRE (corrigé le 06/08/2026).
+// `https://eleveai.fr` répond 308 vers `https://www.eleveai.fr` — c'est Vercel
+// qui le décide, et le www est donc la VRAIE adresse du site. Tant que cette
+// constante disait « eleveai.fr », chaque URL canonique et chaque ligne du
+// sitemap désignait une adresse qui redirige : on demandait aux moteurs
+// d'indexer une porte au lieu de la pièce.
+const SITE_URL = "https://www.eleveai.fr";
 
 export const viewport: Viewport = {
   themeColor: "#020617",
@@ -88,15 +93,21 @@ export const metadata: Metadata = {
     "dictée du jour",
   ],
 
-  alternates: {
-    canonical: CANONICAL,
-  },
+  // ⛔ PAS DE CANONIQUE ICI, PLUS JAMAIS (retirée le 06/08/2026).
+  // Elle valait `/accueil` et le layout la donne à TOUTES les pages qui n'en
+  // déclarent pas. Six pages disaient donc à Google « je suis une copie de
+  // l'accueil, indexe-le à ma place » : les quatre coachs, /parcours et
+  // /dictee-du-jour — celles-là mêmes que le sitemap annonce en priorité 0,95.
+  // Le site se contredisait, et c'est la balise qui gagne.
+  // Sans canonique déclarée, chaque page se désigne elle-même : c'est le bon
+  // comportement par défaut. Une canonique ne se pose QUE sur une page qui sait
+  // vraiment être le double d'une autre.
 
   openGraph: {
     title: "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac",
     description:
       "Dis ce que tu cherches, EleveAI te propose des ressources vérifiées par un enseignant : coach en maths, français, anglais, espagnol et IA, exercices corrigés, cahiers de vacances. Du CP au Bac, gratuit.",
-    url: CANONICAL,
+    url: "/accueil",
     type: "website",
     siteName: "EleveAI",
     locale: "fr_FR",
@@ -105,7 +116,10 @@ export const metadata: Metadata = {
         url: "/preview.jpg",
         width: 1200,
         height: 630,
-        alt: "EleveAI — le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent",
+        // ⛔ « le journal » retiré de ce texte alternatif le 06/08 : il décrivait
+        // encore une page qui n'existe plus, et c'est lui que lisent les
+        // lecteurs d'écran comme les IA quand elles décrivent l'aperçu.
+        alt: "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac, conçu à La Réunion",
       },
     ],
   },
@@ -140,7 +154,9 @@ export default function RootLayout({
         "EleveAI propose à chaque élève, parent ou enseignant les ressources vérifiées qui correspondent à sa demande : un coach qui explique sans faire à sa place en maths, français, anglais, espagnol et IA, des exercices corrigés, des cahiers de vacances et des activités ancrées dans le réel de La Réunion.",
       areaServed: { "@type": "Place", name: "La Réunion" },
       foundingLocation: { "@type": "Place", name: "La Réunion, France" },
-      sameAs: ["https://www.youtube.com/@eleveai-e1h"],
+      // La chaîne officielle, confirmée par Frédéric le 06/08. C'est ce lien
+      // qu'une IA cite quand on lui demande « la chaîne d'EleveAI ».
+      sameAs: ["https://www.youtube.com/@eleveai974"],
     },
     // ⛔ LE BLOC `Periodical` EST PARTI LE 06/08. Il déclarait EleveAI comme un
     // périodique — un journal — sur toutes les pages du site. Invisible pour un

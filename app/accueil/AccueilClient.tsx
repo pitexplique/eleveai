@@ -126,7 +126,7 @@ function joursAvantEvalNationale() {
   return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
 }
 
-const CHAINE_SABONNER = "https://www.youtube.com/@eleveai-e1h?sub_confirmation=1";
+const CHAINE_SABONNER = "https://www.youtube.com/@eleveai974?sub_confirmation=1";
 
 // ─── L'article à la Une + les brèves « en vrai » ──────────────────────────────
 // Série éditoriale courte → en dur ici. Le PREMIER épisode de la liste est

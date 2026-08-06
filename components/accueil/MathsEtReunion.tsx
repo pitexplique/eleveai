@@ -5,7 +5,7 @@
 // Série éditoriale courte → épisodes en dur ici (pas de table) : pour publier un
 // épisode, coller son URL YouTube dans EPISODES (url: null = carte « bientôt »).
 
-const CHAINE_SABONNER = "https://www.youtube.com/@eleveai-e1h?sub_confirmation=1";
+const CHAINE_SABONNER = "https://www.youtube.com/@eleveai974?sub_confirmation=1";
 
 type Episode = {
   emoji: string;

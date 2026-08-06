@@ -15,8 +15,8 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
-const CHAINE_URL = "https://www.youtube.com/@eleveai-e1h";
-const CHAINE_SABONNER = "https://www.youtube.com/@eleveai-e1h?sub_confirmation=1";
+const CHAINE_URL = "https://www.youtube.com/@eleveai974";
+const CHAINE_SABONNER = "https://www.youtube.com/@eleveai974?sub_confirmation=1";
 
 export type NotionVideo = { id: string; emoji: string; label: string };
 

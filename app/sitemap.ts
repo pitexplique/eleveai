@@ -4,7 +4,9 @@ import type { MetadataRoute } from "next";
 import { getAllBlogPosts } from "@/data/blogPosts";
 import { NIVEAUX, motsDeLaClasse } from "@/lib/dico";
 
-const BASE_URL = "https://eleveai.fr";
+// ⚠️ AVEC LE www : `eleveai.fr` répond 308 vers `www.eleveai.fr`. Sans lui,
+// les 270 lignes de ce fichier désignaient des adresses qui redirigent.
+const BASE_URL = "https://www.eleveai.fr";
 
 const u = (path: string) => `${BASE_URL}${path}`;
 
@@ -58,7 +60,10 @@ type RouteConfig = {
 
 const ROUTES: RouteConfig[] = [
   // ── ACCUEIL ────────────────────────────────────────────────────────────────
-  { path: "/", priority: 1.0, changeFrequency: "daily", lastMod: LASTMOD_HOME },
+  // ⚠️ `/accueil` ET NON `/` : la racine répond 308 vers /accueil. Déclarer `/`
+  // revenait à donner aux moteurs une adresse de redirection en page la plus
+  // prioritaire du site — et à contredire la canonique, qui dit /accueil.
+  { path: "/accueil", priority: 1.0, changeFrequency: "daily", lastMod: LASTMOD_HOME },
 
   // ── EXPLORER (catalogue de toutes les actions) ─────────────────────────────
   { path: "/explorer",        priority: 0.9,  changeFrequency: "weekly", lastMod: LASTMOD_EXPLORER },
