@@ -471,6 +471,14 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: [...notions, "machines"],
     intentions: ["decouvrir", "comprendre", "enseigner"],
+    // Elles ne s'invitent pas : il faut avoir demandé à découvrir, à
+    // manipuler, ou nommé une machine. Sinon un lycéen qui vient de dire son
+    // niveau ouvrait sur « la machine des epsilons ».
+    surDemande: true,
+    // Une seule machine par réponse : les huit sont interchangeables du point
+    // de vue de qui cherche, et trois simulateurs d'affilée valent moins
+    // qu'une machine + le réel + la chaîne.
+    famille: "machines",
     statut: "validee",
   })),
   {
@@ -493,6 +501,21 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: ["geometrie", "grandeurs"],
     intentions: ["decouvrir"],
+    statut: "validee",
+  },
+  {
+    // La porte vers TOUTES les machines. Elle n'a pas de famille : elle sort
+    // donc À CÔTÉ d'une machine, pas à sa place — on montre une machine, et
+    // on dit où sont les autres.
+    id: "toutes-les-machines",
+    titre: "Toutes les machines",
+    promesse: "Le lagon, le volcan, la canne, le barrage : à régler soi-même.",
+    url: "/simulateurs",
+    niveaux: ["cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof"],
+    matiere: "maths",
+    notions: ["machines", "*"],
+    intentions: ["decouvrir", "comprendre", "enseigner"],
+    surDemande: true,
     statut: "validee",
   },
   {

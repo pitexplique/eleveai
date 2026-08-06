@@ -84,6 +84,26 @@ export type RessourceEleveAI = {
    * a l'air de coller.
    */
   externe?: boolean;
+  /**
+   * NE SORT QUE SI ON LA DEMANDE — jamais dans la réponse par défaut.
+   *
+   * Quand quelqu'un choisit seulement son profil, sans rien écrire ni cliquer,
+   * on lui montre les portes de son niveau. Une machine n'en est pas une :
+   * elle est excellente quand on veut découvrir ou manipuler, absurde en
+   * première réponse à un lycéen qui vient d'arriver (constaté le 06/08 — la
+   * machine des epsilons ouvrait la liste). Il faut une intention ou une
+   * notion qui l'appelle.
+   */
+  surDemande?: boolean;
+  /**
+   * UNE SEULE PAR RÉPONSE. Les ressources d'une même famille se ressemblent
+   * trop pour occuper les trois places : huit machines à égalité de score
+   * auraient rempli l'écran de simulateurs, là où une machine, les maths en
+   * vrai et la chaîne valent mieux. La famille se choisit sur ce qui se
+   * substitue — deux machines sont interchangeables, une machine et un guide
+   * ne le sont pas.
+   */
+  famille?: string;
 };
 
 /** Ce que la personne a fourni. Rien de plus. */

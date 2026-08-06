@@ -202,9 +202,18 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
 
   const candidates: Recommandation[] = [];
 
+  // Personne n'a rien dit d'exploitable : on montrera les portes du niveau.
+  // C'est là que les ressources « sur demande » doivent se taire.
+  const repliSurLeNiveau = !notion && !intention && !matiereChip;
+
   for (const r of RESSOURCES) {
     // ── 1. Le statut. Rien d'autre ne compte tant que ce n'est pas relu.
     if (!STATUTS_PUBLIABLES.includes(r.statut)) continue;
+
+    // ── 1 bis. Les ressources qui ne s'invitent pas. Une machine est
+    // excellente quand on veut découvrir ; en première réponse à quelqu'un qui
+    // vient seulement de dire son niveau, elle est à côté.
+    if (r.surDemande && repliSurLeNiveau) continue;
 
     // ── 2. Le profil, filtre dur.
     const rangNiveau = profil.niveaux.findIndex((n) => r.niveaux.includes(n));
@@ -234,6 +243,11 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
 
     // ── 5. Ce qui a déjà servi à de vrais élèves passe devant.
     if (r.statut === "testee_eleves") score += 1;
+
+    // ── 6. Une ressource qui ne s'invite jamais passe DEVANT quand on
+    // l'appelle : si quelqu'un demande à découvrir, c'est précisément la
+    // machine qu'il veut, pas le coach qu'il aurait trouvé tout seul.
+    if (r.surDemande) score += 2;
 
     // Le coach s'ouvre sur la classe de la personne plutôt que sur sa page
     // générale. Le bonus, lui, ne tombe que si la notion demandée existe
@@ -265,7 +279,23 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
   // Sans notion NI intention, la personne n'a rien dit d'exploitable : on ne
   // devine pas, on montre les portes de son niveau (les mieux placées).
   const seuil = notion || intention ? 8 : 6;
-  const retenues = candidates.filter((c) => c.score >= seuil).slice(0, NB_MAX);
+
+  // UNE SEULE PAR FAMILLE. Sans ça, huit machines à égalité de score
+  // occupaient les trois places : le lagon, le cyclone et le volcan, quand une
+  // machine + les maths en vrai + la chaîne disent bien plus. On garde la
+  // mieux classée de chaque famille, les autres attendent leur tour.
+  const famillesVues = new Set<string>();
+  const retenues: Recommandation[] = [];
+  for (const c of candidates) {
+    if (c.score < seuil) continue;
+    const f = c.ressource.famille;
+    if (f) {
+      if (famillesVues.has(f)) continue;
+      famillesVues.add(f);
+    }
+    retenues.push(c);
+    if (retenues.length >= NB_MAX) break;
+  }
 
   return { lecture, recommandations: retenues };
 }
