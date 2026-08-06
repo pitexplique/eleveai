@@ -16,6 +16,7 @@
 // toujours à leurs routes, et ses ressources sont dans ressources.ts.
 
 import { Suspense } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import ColonneGauche from "@/components/accueil/ColonneGauche";
 import EntreeMatrice from "@/components/matrice/EntreeMatrice";
@@ -51,6 +52,20 @@ export default function AccueilIA() {
               petit, APRÈS la promesse : La Réunion est une bonne histoire, pas
               un bon mot-clé. */}
           <header className="mb-10 text-center">
+            {/* ⭐ TI MARGO RESTE. Il est parti avec la manchette lors de la
+                refonte — il était dans le titre du journal. Or il n'appartient
+                pas au journal : c'est la figure d'EleveAI, dessinée, celle des
+                vidéos et des cahiers. Une page d'entrée peut être sobre sans
+                être anonyme. */}
+            <Image
+              src="/cahier-vacances/ti-margo.png"
+              alt="Ti Margo, le margouillat d'EleveAI, avec son crayon"
+              width={1122}
+              height={1402}
+              sizes="72px"
+              priority
+              className="mx-auto mb-3 h-16 w-auto sm:h-20"
+            />
             <p className="text-2xl font-semibold tracking-[0.14em] sm:text-3xl">ELEVEAI</p>
             <p className="mt-2 text-sm text-slate-700 sm:text-base">
               L&apos;IA éducative qui te propose des ressources vérifiées
