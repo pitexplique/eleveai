@@ -13,7 +13,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { track } from "@vercel/analytics";
-import { PROFILS, exemplesPour, getProfil } from "@/lib/matrice/profils";
+import { PROFILS, getProfil } from "@/lib/matrice/profils";
+import { exemplesPour } from "@/lib/matrice/exemples";
 import { CHIPS_VISIBLES, chipsDisponibles, composerChip, matieresDisponibles } from "@/lib/matrice/chips";
 import { chercher, libelleIntention } from "@/lib/matrice/moteur";
 import type { ProfilId, ResultatMatrice } from "@/lib/matrice/types";

@@ -116,6 +116,15 @@ const LIBELLE_MATIERE: Record<string, string> = {
   transversal: "Tout",
 };
 
+/**
+ * Matières qu'on NE PROPOSE PAS comme bouton, même si des ressources existent.
+ * ⛔ « ia » retirée le 06/08 (Frédéric : « pas assez robuste »). Le coach IA et
+ * les parcours d'IA restent en ligne et sortent quand on les demande par leur
+ * nom — on ne les met simplement plus en devanture à côté des mathématiques.
+ * Une matière en vitrine engage : on l'y remettra quand elle sera prête.
+ */
+const MATIERES_MASQUEES = new Set(["ia"]);
+
 export function matieresDisponibles(profil: ProfilId): ChipMatiere[] {
   const compte = new Map<Matiere, number>();
   for (const r of ressourcesPour(profil)) {
@@ -123,6 +132,7 @@ export function matieresDisponibles(profil: ProfilId): ChipMatiere[] {
     // matière. L'afficher donnerait un bouton « Tout » à côté de « Maths »,
     // qui ne veut rien dire pour un élève.
     if (!r.matiere || r.matiere === "transversal") continue;
+    if (MATIERES_MASQUEES.has(r.matiere)) continue;
     compte.set(r.matiere, (compte.get(r.matiere) ?? 0) + 1);
   }
 
