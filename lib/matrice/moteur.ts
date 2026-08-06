@@ -13,7 +13,7 @@
 // On ne renvoie jamais plus de trois ressources : au-delà, on a recréé le
 // catalogue qu'on voulait enterrer.
 
-import { intentionDeLaChip } from "./chips";
+import { intentionDeLaChip, matiereDeLaChip } from "./chips";
 import { notionCoach, urlCoachCiblee } from "./coach";
 import { MARQUEURS_INTENTION, NOTIONS } from "./lexique";
 import { getProfil, chipsPour } from "./profils";
@@ -179,12 +179,20 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
   const intention = lireIntention(vecteur);
   const notion = lireNotion(vecteur.question);
 
+  // La chip peut porter une MATIÈRE au lieu d'une intention — c'est toujours
+  // le même et unique champ `chip` du vecteur, jamais un quatrième. Cliquer
+  // « Mathématiques » filtre dur : on ne propose pas de dictée à quelqu'un qui
+  // vient de dire qu'il veut des maths.
+  const matiereChip = vecteur.chip ? matiereDeLaChip(vecteur.quiEsTu, vecteur.chip) : null;
+  const matiereVoulue = matiereChip ?? notion?.matiere ?? null;
+
   const lecture: LectureDemande = {
     profil: profil.id,
     intention,
     notionId: notion?.id ?? null,
     notionLabel: notion?.label ?? null,
-    motsInconnus: motsInconnus(vecteur.question, Boolean(notion)),
+    matiere: matiereChip,
+    motsInconnus: motsInconnus(vecteur.question, Boolean(notion) || Boolean(matiereChip)),
   };
 
   const candidates: Recommandation[] = [];
@@ -201,10 +209,12 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
 
     // ── 3. La matière. Une question de conjugaison ne doit pas faire sortir le
     // coach maths, même s'il est « toutes notions » : générique ne veut pas
-    // dire toutes matières.
-    if (notion && r.matiere && r.matiere !== "transversal" && r.matiere !== notion.matiere) {
+    // dire toutes matières. Une chip de matière cliquée est plus stricte
+    // encore — elle écarte aussi ce qui n'a pas de matière du tout.
+    if (matiereVoulue && r.matiere && r.matiere !== "transversal" && r.matiere !== matiereVoulue) {
       continue;
     }
+    if (matiereChip && !r.matiere) continue;
 
     // ── 4. La notion. Si on en a lu une, on écarte ce qui parle d'autre chose.
     const generique = r.notions.includes("*");

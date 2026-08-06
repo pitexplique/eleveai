@@ -351,18 +351,11 @@ export default function Header() {
         {/* Desktop nav — Accueil (la Une) + les 4 audiences / rituels + auth.
             Avant, seul le logo ramenait à la Une : peu évident pour les élèves
             et les parents → un lien « Accueil » explicite (demande de Frédéric). */}
+        {/* ⛔ L'onglet « 🗞️ Accueil » est parti le 06/08. Deux raisons : le
+            journal a quitté l'accueil, et cette icône le portait encore sur
+            TOUTES les pages du site ; et le logo à gauche mène déjà à
+            l'accueil — l'onglet doublait un geste que tout le monde connaît. */}
         <div className="hidden items-center gap-1.5 lg:flex">
-          <Link prefetch={false}
-            href="/accueil"
-            className={[
-              "inline-flex items-center gap-1.5 rounded-full px-2.5 py-2 text-sm font-black transition xl:px-3.5",
-              paper
-                ? "bg-[#1d1c16] text-[#d8e9ee] shadow"
-                : "text-white/85 hover:bg-white/15 hover:text-white",
-            ].join(" ")}
-          >
-            <span>🗞️</span> Accueil
-          </Link>
           {eleve && !isStaff ? (
             /* Élève CONNECTÉ → ses matières + rituels (pas les portes d'audience) */
             <>
@@ -501,20 +494,8 @@ export default function Header() {
         >
           <div className="space-y-5">
 
-            {/* Accueil (la Une) — même raison qu'en desktop : le logo ne suffit pas */}
-            <Link prefetch={false}
-              href="/accueil"
-              onClick={() => setMobileOpen(false)}
-              className={`flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-black transition ${
-                paper
-                  ? isActive(pathname, "/accueil")
-                    ? "border-[#1d1c16]/40 bg-[#1d1c16]/10 text-[#1d1c16]"
-                    : "border-[#1d1c16]/15 bg-[#1d1c16]/5 text-[#1d1c16] hover:bg-[#1d1c16]/10"
-                  : "border-white/10 bg-white/5 text-white hover:bg-white/15"
-              }`}
-            >
-              <span>🗞️</span> Accueil
-            </Link>
+            {/* ⛔ « 🗞️ Accueil » retiré ici aussi (06/08) : même raison qu'en
+                desktop, et sur téléphone chaque ligne du menu compte. */}
 
             {/* Auth mobile */}
             {eleve ? (

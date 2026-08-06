@@ -209,4 +209,23 @@ export const NOTIONS: NotionLexique[] = [
     id: "ia", label: "l'intelligence artificielle", matiere: "ia",
     alias: ["intelligence artificielle", "ia", "chatgpt", "prompt", "algorithme", "reseau de neurones", "pix"],
   },
+
+  // ── LES MATIÈRES, EN DERNIER ────────────────────────────────────────────
+  // ⚠️ L'ORDRE EST LE MÉCANISME : lireNotion() rend la PREMIÈRE notion qui
+  // accroche. « les fractions en maths » doit donner les fractions, pas
+  // « les maths » — d'où ces deux entrées tout en bas, filet de sécurité pour
+  // qui écrit juste sa matière.
+  //
+  // Trou constaté le 06/08 : « anglais » et « espagnol » étaient reconnus
+  // (ce sont des notions), « maths » et « français » ne l'étaient pas. Taper
+  // « maths » tombait sur « je n'ai pas bien compris » avec seize notions de
+  // maths dans le lexique. C'était une asymétrie, pas un choix.
+  {
+    id: "maths", label: "les mathématiques", matiere: "maths",
+    alias: ["maths", "math", "mathematiques", "mathematique", "calculs"],
+  },
+  {
+    id: "francais", label: "le français", matiere: "francais",
+    alias: ["francais", "francai", "langue francaise"],
+  },
 ];

@@ -14,7 +14,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { track } from "@vercel/analytics";
 import { PROFILS, exemplesPour, getProfil } from "@/lib/matrice/profils";
-import { CHIPS_VISIBLES, chipsDisponibles } from "@/lib/matrice/chips";
+import { CHIPS_VISIBLES, chipsDisponibles, composerChip, matieresDisponibles } from "@/lib/matrice/chips";
 import { chercher, libelleIntention } from "@/lib/matrice/moteur";
 import type { ProfilId, ResultatMatrice } from "@/lib/matrice/types";
 
@@ -41,7 +41,15 @@ export default function EntreeMatrice({
   const [profil, setProfil] = useState<ProfilId>("6e");
   const [profilChoisi, setProfilChoisi] = useState(false);
   const [question, setQuestion] = useState("");
-  const [chip, setChip] = useState<string | null>(null);
+  // Deux sélections à l'écran, UNE SEULE chip dans le vecteur : elles se
+  // composent en « Mathématiques · M'entraîner ». Le vecteur reste à trois
+  // champs — c'est une règle du produit, pas une contrainte technique.
+  const [matiereChoisie, setMatiereChoisie] = useState<string | null>(null);
+  const [intentionChoisie, setIntentionChoisie] = useState<string | null>(null);
+  const chip = useMemo(
+    () => composerChip(matiereChoisie, intentionChoisie),
+    [matiereChoisie, intentionChoisie],
+  );
   const [resultat, setResultat] = useState<ResultatMatrice | null>(null);
   const [demandeProfil, setDemandeProfil] = useState(false);
   const [plusDOptions, setPlusDOptions] = useState(false);
@@ -83,6 +91,7 @@ export default function EntreeMatrice({
     () => (plusDOptions ? toutesLesChips : toutesLesChips.slice(0, CHIPS_VISIBLES)),
     [toutesLesChips, plusDOptions],
   );
+  const matieres = useMemo(() => matieresDisponibles(profil), [profil]);
   const exemples = useMemo(() => exemplesPour(profil), [profil]);
 
   const lancer = useCallback(
@@ -170,7 +179,8 @@ export default function EntreeMatrice({
     setProfil(id);
     setProfilChoisi(true);
     setDemandeProfil(false);
-    setChip(null);
+    setMatiereChoisie(null);
+    setIntentionChoisie(null);
     setPlusDOptions(false);
     try {
       localStorage.setItem(CLE_PROFIL, id);
@@ -184,10 +194,16 @@ export default function EntreeMatrice({
     champ.current?.focus();
   }
 
+  function cliquerMatiere(label: string) {
+    const suivante = matiereChoisie === label ? null : label;
+    setMatiereChoisie(suivante);
+    lancer(question, composerChip(suivante, intentionChoisie));
+  }
+
   function cliquerChip(label: string) {
-    const suivante = chip === label ? null : label;
-    setChip(suivante);
-    lancer(question, suivante);
+    const suivante = intentionChoisie === label ? null : label;
+    setIntentionChoisie(suivante);
+    lancer(question, composerChip(matiereChoisie, suivante));
   }
 
   const eleve = p.groupe === "eleve";
@@ -330,9 +346,45 @@ export default function EntreeMatrice({
         </p>
       )}
 
-      <div className="mt-3 flex flex-wrap gap-1.5 sm:gap-2">
+      {/* ── LES MATIÈRES ─────────────────────────────────────────────────
+          Sous le champ, pas au-dessus : la question et sa réponse doivent se
+          toucher, et les matières sont un raccourci pour qui ne sait pas quoi
+          écrire — pas un préalable à la saisie.
+          En pastilles PLEINES, là où les intentions sont à contour : sans cette
+          différence, on aurait douze boutons sur deux lignes et personne ne
+          verrait qu'ils ne répondent pas à la même question.
+          La matière ne s'écrit jamais dans le champ : le texte tapé reste celui
+          de la personne, et la pastille allumée dit le filtre. */}
+      {matieres.length > 1 && (
+        <div className="mt-3 flex flex-wrap gap-1.5 sm:gap-2">
+          {matieres.map((m) => {
+            const actif = matiereChoisie === m.label;
+            return (
+              <button
+                key={m.matiere}
+                type="button"
+                onClick={() => cliquerMatiere(m.label)}
+                aria-pressed={actif}
+                className={`rounded-full px-3 py-1.5 text-[13px] font-medium transition ${
+                  surAccueil
+                    ? actif
+                      ? "bg-[#0e7490] text-white"
+                      : "bg-[#1d1c16]/[0.07] text-[#1d1c16] hover:bg-[#1d1c16]/15"
+                    : actif
+                      ? "bg-teal-700 text-white"
+                      : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                }`}
+              >
+                {m.label}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      <div className="mt-2 flex flex-wrap gap-1.5 sm:gap-2">
         {chips.map((c) => {
-          const actif = chip === c.label;
+          const actif = intentionChoisie === c.label;
           return (
             <button
               key={c.label}
@@ -377,7 +429,7 @@ export default function EntreeMatrice({
               ressources deviennent une proposition de départ, pas une réponse.
               (Vu le 05/08 sur une frappe au hasard : « df » ressortait avec
               trois recommandations et l'air de les avoir méritées.) */}
-          {!resultat.lecture.notionId && !resultat.lecture.intention ? (
+          {!resultat.lecture.notionId && !resultat.lecture.intention && !matiereChoisie ? (
             <p className="mb-2 text-xs text-[#1d1c16]/55">
               Je n&apos;ai pas bien compris la demande — voici par où{" "}
               {p.tutoie ? "tu peux" : "vous pouvez"} commencer en{" "}
@@ -389,6 +441,7 @@ export default function EntreeMatrice({
               <span className="text-[#1d1c16]">
                 {[
                   p.label,
+                  matiereChoisie,
                   resultat.lecture.intention ? libelleIntention(resultat.lecture.intention) : null,
                   resultat.lecture.notionLabel,
                 ]

@@ -90,6 +90,8 @@ export type LectureDemande = {
   intention: Intention | null;
   notionId: string | null;
   notionLabel: string | null;
+  /** Renseignée quand une chip de matière a été cliquée. */
+  matiere: string | null;
   /** Mots de la question qu'aucune notion connue n'a reconnus. */
   motsInconnus: string[];
 };

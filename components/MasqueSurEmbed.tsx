@@ -10,11 +10,12 @@
 
 import { usePathname } from "next/navigation";
 
-// 06/08/2026 : /accueil rejoint la liste. La refonte lui donne sa propre
-// colonne de gauche et son propre pied de page minimal ; l'habillage du site
-// par-dessus lui remettrait exactement ce qu'on vient d'en retirer — le 🗞️,
-// les rubriques, le pied de page long. Une page d'entrée se suffit.
-const SANS_HABILLAGE = ["/embed", "/ia", "/accueil"];
+// ⚠️ /accueil N'EST PAS dans cette liste, et c'est réfléchi (06/08). La refonte
+// lui donne sa colonne de gauche et son pied de page court, mais sans le header
+// un visiteur perdrait toute porte vers les espaces élève, parent, enseignant
+// et établissement — et le haut de l'écran serait vide sur téléphone. Le header
+// reste ; seul le pied de page long est masqué, par MasqueSurGuide.
+const SANS_HABILLAGE = ["/embed", "/ia"];
 
 export default function MasqueSurEmbed({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
