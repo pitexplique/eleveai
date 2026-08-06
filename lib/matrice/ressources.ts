@@ -28,7 +28,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     id: "coach-maths",
     titre: "Le coach maths",
     promesse: "Une question à la fois, corrigée, avec l'explication quand tu te trompes.",
-    url: "/tutor-v4",
+    url: "/coach-ia/maths",
     niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
     matiere: "maths",
     notions: ["*"],
@@ -43,7 +43,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     id: "coach-francais",
     titre: "Le coach français",
     promesse: "Repérer l'erreur d'abord, corriger ensuite.",
-    url: "/tutor-v4?matiere=francais",
+    url: "/coach-ia/francais",
     niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"],
     matiere: "francais",
     notions: ["conjugaison", "grammaire", "orthographe", "lecture", "vocabulaire"],
@@ -56,11 +56,27 @@ export const RESSOURCES: RessourceEleveAI[] = [
     id: "coach-anglais",
     titre: "Le coach anglais",
     promesse: "Du A1 au B2, à ton rythme.",
-    url: "/tutor-v4?matiere=anglais",
+    // ⚠️ /coach-ia/english-maths, pas /tutor-v4?matiere=anglais : sans classe,
+    // le tutor retombe sur la 6e en maths (normalizeClasse a sa whitelist).
+    // Le sommaire, lui, ouvre bien la bonne matière.
+    url: "/coach-ia/english-maths",
     niveaux: ["6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
     matiere: "anglais",
     notions: ["anglais"],
     intentions: ["comprendre", "entrainer"],
+    statut: "validee",
+  },
+  {
+    // Manquait à l'inventaire jusqu'au 06/08 : le bouton « Espagnol » n'ouvrait
+    // que la dictée du jour, alors que le coach existe depuis des mois.
+    id: "coach-espagnol",
+    titre: "Le coach espagnol",
+    promesse: "Du A1 au B2, à ton rythme.",
+    url: "/coach-ia/espagnol",
+    niveaux: ["5e", "4e", "3e", "seconde", "premiere", "terminale"],
+    matiere: "espagnol",
+    notions: ["espagnol"],
+    intentions: ["comprendre", "entrainer", "preparer"],
     statut: "validee",
   },
   {
@@ -80,8 +96,73 @@ export const RESSOURCES: RessourceEleveAI[] = [
     promesse: "Une série guidée qui monte en difficulté, du début à la fin.",
     url: "/parcours",
     niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
+    matiere: "maths",
     notions: ["*"],
     intentions: ["entrainer", "preparer"],
+    statut: "testee_eleves",
+    testeeAvec: "Collège du Dimitile",
+  },
+  // Les parcours des AUTRES matières. Ils existaient tous en route, aucun
+  // n'était dans l'inventaire : « Espagnol » n'ouvrait que la dictée du jour,
+  // et le parcours restait invisible à qui ne connaissait pas son adresse.
+  {
+    id: "parcours-francais",
+    titre: "Les parcours de français",
+    promesse: "Une série guidée qui monte en difficulté, du début à la fin.",
+    url: "/parcours-francais",
+    niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e"],
+    matiere: "francais",
+    notions: ["conjugaison", "grammaire", "orthographe", "lecture", "vocabulaire"],
+    intentions: ["entrainer", "preparer"],
+    statut: "validee",
+  },
+  {
+    id: "parcours-anglais",
+    titre: "Les parcours d'anglais",
+    promesse: "L'anglais et les maths dans la même série.",
+    url: "/parcours-english-maths",
+    niveaux: ["6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
+    matiere: "anglais",
+    notions: ["anglais"],
+    intentions: ["entrainer", "preparer"],
+    statut: "validee",
+  },
+  {
+    id: "parcours-espagnol",
+    titre: "Les parcours d'espagnol",
+    promesse: "Une série guidée qui monte en difficulté, du début à la fin.",
+    url: "/parcours-espagnol",
+    niveaux: ["5e", "4e", "3e", "seconde", "premiere", "terminale"],
+    matiere: "espagnol",
+    notions: ["espagnol"],
+    intentions: ["entrainer", "preparer"],
+    statut: "validee",
+  },
+  {
+    id: "parcours-ia",
+    titre: "Les parcours d'IA",
+    promesse: "Comprendre l'intelligence artificielle en la pratiquant.",
+    url: "/parcours-ia",
+    niveaux: ["4e", "3e", "seconde", "premiere", "terminale"],
+    matiere: "ia",
+    notions: ["ia"],
+    intentions: ["entrainer", "decouvrir", "comprendre"],
+    statut: "validee",
+  },
+
+  {
+    // Manquait à l'inventaire (Frédéric, 06/08 : « si les élèves sont
+    // connectés ils voient leurs notes »). Un élève qui demandait « où j'en
+    // suis » ne trouvait rien, alors que la page existe et l'attend.
+    // ⏳ À terme, l'enseignant y suivra les notes de coach et de parcours de
+    // ses élèves, matière par matière — c'est le chantier du dashboard prof.
+    id: "dashboard-eleve",
+    titre: "Mes résultats",
+    promesse: "Tes notes de coach et de parcours, matière par matière.",
+    url: "/dashboard-eleve",
+    niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
+    notions: ["*"],
+    intentions: ["suivre"],
     statut: "testee_eleves",
     testeeAvec: "Collège du Dimitile",
   },
@@ -435,7 +516,13 @@ export const RESSOURCES: RessourceEleveAI[] = [
     url: "/dashboard-prof",
     niveaux: ["prof"],
     notions: ["*"],
-    intentions: ["suivre", "enseigner"],
+    // « suivre » SEULEMENT (06/08). Avec « enseigner », il sortait en tête sur
+    // « une activité pour ma classe » — un prof qui prépare sa séance ne
+    // demande pas son tableau de bord. Il le demandera en disant « où en sont
+    // mes élèves », et là il sera premier.
+    // ⏳ Le chantier du dashboard prof est en cours ; il y suivra les notes de
+    // coach et de parcours, matière par matière.
+    intentions: ["suivre"],
     statut: "testee_eleves",
     testeeAvec: "Collège du Dimitile",
   },
@@ -450,13 +537,17 @@ export const RESSOURCES: RessourceEleveAI[] = [
     statut: "validee",
   },
   {
-    id: "espace-profs",
-    titre: "L'espace professeurs",
-    promesse: "Les ressources à projeter, à imprimer, à donner.",
-    url: "/espace-profs",
+    // ⚠️ /enseignants, PAS /espace-profs (Frédéric, 06/08). Les deux routes
+    // existent — c'est /enseignants que le header pointe et que les profs
+    // connaissent. L'autre reste en ligne, elle n'est simplement plus ce que
+    // la matrice propose.
+    id: "espace-enseignants",
+    titre: "L'espace enseignant",
+    promesse: "Le suivi élève par élève, et les ressources à donner.",
+    url: "/enseignants",
     niveaux: ["prof"],
     notions: ["*"],
-    intentions: ["enseigner"],
+    intentions: ["enseigner", "suivre", "comprendre"],
     statut: "validee",
   },
   // ⚠️ L'ORDRE COMPTE POUR LA DIRECTION : à score égal, le moteur garde l'ordre

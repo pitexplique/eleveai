@@ -89,8 +89,20 @@ export const MARQUEURS_INTENTION: { intention: Intention; marqueurs: string[] }[
     intention: "suivre",
     marqueurs: [
       "progression", "progres", "resultats", "ou en est", "ou il en est",
-      "ou elle en est", "suivi", "bilan", "activite", "statistiques",
-      "difficultes", "tableau de bord", "classe",
+      "ou elle en est", "ou en sont", "ou ils en sont", "ou elles en sont",
+      "suivi", "bilan", "statistiques",
+      "difficultes", "tableau de bord",
+      // Les formes que l'élève emploie pour lui-même. « où j'en suis » ne
+      // s'attrapait pas par « où en est » : « suis » et « est » sont trop
+      // courts pour la tolérance aux fautes, et c'est très bien ainsi.
+      "ou j en suis", "ou jen suis", "mes notes", "mes points", "mes resultats",
+      "ma progression", "mon niveau",
+      // ⛔ « classe » et « activite » RETIRÉS le 06/08. Ils faisaient lire
+      // « suivre » dans « une activité pour ma classe » — qui est un
+      // professeur voulant ENSEIGNER, pas consulter des progrès. Deux mots
+      // trop larges pour être des marqueurs : ils vivent dans presque toutes
+      // les phrases d'un prof. Les formes explicites restent (« suivi »,
+      // « où en est », « tableau de bord »).
     ],
   },
   {
