@@ -83,6 +83,14 @@ export const MARQUEURS_INTENTION: { intention: Intention; marqueurs: string[] }[
       "decouvrir", "decouverte", "original", "curieux", "curiosite", "etonnant",
       "surprends moi", "surprend moi", "quelque chose", "je sais pas quoi",
       "au hasard", "amusant", "rigolo", "interessant",
+      // LES FORMATS (06/08). Personne ne trouvait les machines en tapant
+      // « simulation », ni les vidéos en tapant « vidéo » : ces mots ne sont
+      // ni des notions ni des matières, ils n'accrochaient donc rien. Ils
+      // disent une envie — voir, manipuler — et c'est bien « découvrir ».
+      // ⚠️ « projeter » reste à « enseigner » : c'est le geste d'un prof
+      // devant sa classe, pas celui d'un élève curieux.
+      "simulateur", "simulation", "machine", "manipuler", "experimenter",
+      "video", "videos", "en video", "regarder", "animation", "en images",
     ],
   },
   {
@@ -220,6 +228,21 @@ export const NOTIONS: NotionLexique[] = [
   {
     id: "ia", label: "l'intelligence artificielle", matiere: "ia",
     alias: ["intelligence artificielle", "ia", "chatgpt", "prompt", "algorithme", "reseau de neurones", "pix"],
+  },
+
+  // ── LES FORMATS, avant les matières ─────────────────────────────────────
+  // « Simulation » et « vidéo » sont AUSSI des marqueurs de l'intention
+  // « découvrir » — mais l'intention seule ne suffisait pas : toutes les
+  // ressources de découverte se retrouvaient à égalité, et l'ordre du fichier
+  // décidait. Quelqu'un qui demande une simulation recevait la carte de l'île.
+  // En les déclarant ici, le mot désigne la ressource, et pas seulement l'envie.
+  {
+    id: "machines", label: "les machines à manipuler", matiere: "maths",
+    alias: ["simulateur", "simulateurs", "simulation", "simulations", "machine", "machines", "manipuler", "experimenter"],
+  },
+  {
+    id: "videos", label: "les vidéos", matiere: "transversal",
+    alias: ["video", "videos", "en video", "animation", "animations", "regarder", "en images"],
   },
 
   // ── LES MATIÈRES, EN DERNIER ────────────────────────────────────────────

@@ -493,7 +493,17 @@ export default function EntreeMatrice({
               {resultat.recommandations.map((r, i) => (
                 <li key={r.ressource.id}>
                   <Link
-                    href={`${r.url}${r.url.includes("?") ? "&" : "?"}from=ia`}
+                    // Une ressource externe s'ouvre dans un nouvel onglet et ne
+                    // porte pas `?from=ia` : ce paramètre ne sert qu'à notre
+                    // suivi interne, et on ne renvoie personne d'un clic hors
+                    // du site sans qu'il puisse revenir.
+                    href={
+                      r.ressource.externe
+                        ? r.url
+                        : `${r.url}${r.url.includes("?") ? "&" : "?"}from=ia`
+                    }
+                    target={r.ressource.externe ? "_blank" : undefined}
+                    rel={r.ressource.externe ? "noopener noreferrer" : undefined}
                     // ⚠️ PAS DE PRÉCHARGEMENT. Un <Link> d'App Router va
                     // chercher la charge RSC de sa destination dès qu'il entre
                     // dans le champ de vision, et sur une route statique c'est

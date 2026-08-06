@@ -47,16 +47,24 @@ export const metadata: Metadata = {
     apple: "/icons/icon-192.png",
   },
 
+  // ⛔ « JOURNAL » RETIRÉ PARTOUT LE 06/08/2026. Ce titre-ci est le défaut de
+  // TOUTES les pages du site : tant qu'il annonçait un journal, chaque page
+  // sans metadata propre continuait de le dire — y compris après la refonte de
+  // l'accueil. Frédéric, le même jour : « je me fiche du journal scientifique ».
   title: {
-    default: "EleveAI — Le journal pour apprendre et s'évaluer · La Réunion",
+    default: "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac",
     template: "%s — EleveAI",
   },
 
   description:
-    "Le journal pour apprendre, gratuit, de La Réunion où les enfants comprennent l'île et s'entraînent : un coach IA qui explique sans faire à ta place en maths, français, anglais, espagnol et IA, des séries d'exercices corrigées, un défi et une dictée du jour — et un tableau de suivi où les profs voient la progression de chaque élève. Du CP au Bac. Vulgarisation rigoureuse, chiffres vérifiés.",
+    "Dis ce que tu cherches, EleveAI te propose des ressources vérifiées par un enseignant : coach en maths, français, anglais, espagnol et IA, exercices corrigés, cahiers de vacances, dictée et défi du jour. Du CP au Bac, gratuit.",
 
   keywords: [
     "EleveAI",
+    "exercices corrigés",
+    "cahier de vacances gratuit",
+    "aide aux devoirs",
+    "soutien scolaire gratuit",
     "mathématiques",
     "coach maths",
     "parcours progression",
@@ -85,9 +93,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "EleveAI — Le journal pour apprendre et s'évaluer · La Réunion",
+    title: "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac",
     description:
-      "Le journal pour apprendre, gratuit, de La Réunion : comprendre l'île (volcan, cyclones, baleines), s'entraîner avec un coach qui explique sans faire à ta place, et s'évaluer avec les parcours et les défis — tout corrigé, du CP au Bac.",
+      "Dis ce que tu cherches, EleveAI te propose des ressources vérifiées par un enseignant : coach en maths, français, anglais, espagnol et IA, exercices corrigés, cahiers de vacances. Du CP au Bac, gratuit.",
     url: CANONICAL,
     type: "website",
     siteName: "EleveAI",
@@ -104,9 +112,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "EleveAI — Comprendre l'île, s'entraîner avec un coach",
+    title: "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac",
     description:
-      "Le journal pour apprendre de La Réunion : comprendre l'île (volcan, cyclones, océan) et s'entraîner avec un coach en maths, français, anglais, espagnol et IA — il explique sans faire à ta place, tout corrigé.",
+      "Dis ce que tu cherches, EleveAI te propose des ressources vérifiées par un enseignant — maths, français, anglais, espagnol et IA. Il explique sans faire à ta place, tout est corrigé.",
     images: ["/preview.jpg"],
   },
 };
@@ -121,37 +129,24 @@ export default function RootLayout({
       "@context": "https://schema.org",
       "@type": "Organization",
       name: "EleveAI",
-      // Le nom public devient « pour apprendre » ; « journal scientifique de
-      // La Réunion » reste en alternateName pour ne pas perdre le classement
-      // gagné sur cette requête (devant le CNRS, 24/07).
-      alternateName: [
-        "Le journal pour apprendre et s'évaluer de La Réunion",
-        "Le journal pour apprendre de La Réunion",
-        "Le journal scientifique de La Réunion",
-      ],
+      // ⛔ Les trois alternateName « journal » sont partis le 06/08. Le dernier,
+      // « Le journal scientifique de La Réunion », était gardé pour un rang
+      // gagné devant le CNRS — Frédéric l'a explicitement lâché le même jour.
+      // Tant qu'il était là, on continuait de dire à Google qu'on est un
+      // journal, sur toutes les pages du site.
       url: SITE_URL,
       logo: `${SITE_URL}/preview.jpg`,
       description:
-        "Le journal pour apprendre de La Réunion où les enfants comprennent et s'entraînent : vulgarisation rigoureuse ancrée dans le réel de l'île (volcan, cyclones, océan, énergie), et un coach qui explique sans faire à ta place en maths, français, anglais, espagnol et IA, avec des exercices corrigés.",
+        "EleveAI propose à chaque élève, parent ou enseignant les ressources vérifiées qui correspondent à sa demande : un coach qui explique sans faire à sa place en maths, français, anglais, espagnol et IA, des exercices corrigés, des cahiers de vacances et des activités ancrées dans le réel de La Réunion.",
       areaServed: { "@type": "Place", name: "La Réunion" },
       foundingLocation: { "@type": "Place", name: "La Réunion, France" },
       sameAs: ["https://www.youtube.com/@eleveai-e1h"],
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "Periodical",
-      name: "Le journal pour apprendre et s'évaluer — La Réunion — EleveAI",
-      url: SITE_URL,
-      inLanguage: "fr-FR",
-      about: [
-        "Science",
-        "Mathématiques",
-        "Vulgarisation scientifique",
-        "La Réunion",
-      ],
-      audience: { "@type": "EducationalAudience", educationalRole: "student" },
-      publisher: { "@type": "Organization", name: "EleveAI" },
-    },
+    // ⛔ LE BLOC `Periodical` EST PARTI LE 06/08. Il déclarait EleveAI comme un
+    // périodique — un journal — sur toutes les pages du site. Invisible pour un
+    // visiteur, mais c'est exactement ce qu'on venait de retirer de la page.
+    // Le type qui dit ce qu'on est vraiment, `EducationalApplication`, est déjà
+    // là plus bas.
     {
       "@context": "https://schema.org",
       "@type": "WebSite",

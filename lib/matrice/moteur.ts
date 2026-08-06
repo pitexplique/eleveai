@@ -184,7 +184,12 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
   // « Mathématiques » filtre dur : on ne propose pas de dictée à quelqu'un qui
   // vient de dire qu'il veut des maths.
   const matiereChip = vecteur.chip ? matiereDeLaChip(vecteur.quiEsTu, vecteur.chip) : null;
-  const matiereVoulue = matiereChip ?? notion?.matiere ?? null;
+  // ⚠️ « transversal » n'est PAS une matière voulue : c'est l'absence de
+  // matière. Une notion comme « les vidéos » traverse tout — la prendre pour
+  // une matière écartait le coach, la chaîne et le reste, et « je veux voir
+  // une vidéo » renvoyait les défis du jour.
+  const matiereNotion = notion?.matiere === "transversal" ? null : notion?.matiere;
+  const matiereVoulue = matiereChip ?? matiereNotion ?? null;
 
   const lecture: LectureDemande = {
     profil: profil.id,

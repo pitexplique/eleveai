@@ -412,10 +412,28 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "Les maths en vrai — 974",
     promesse: "Là où les maths sortent dehors, sur l'île.",
     url: "/maths-974",
-    niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
+    // ⭐ « prof » AUSSI (Frédéric, 06/08) : c'est la ressource qu'un enseignant
+    // cherche pour accrocher une séance au réel. Elle n'était proposée qu'aux
+    // élèves — le premier public à qui elle sert était le seul à ne pas la voir.
+    niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof"],
     matiere: "maths",
     notions: ["*"],
-    intentions: ["decouvrir"],
+    intentions: ["decouvrir", "enseigner"],
+    statut: "validee",
+  },
+  {
+    // Les vidéos par notion sont encore peu nombreuses : plutôt que d'en
+    // inventorier trois et de faire croire à une bibliothèque, on renvoie à la
+    // chaîne. Le jour où il y en aura assez, elles entreront une par une.
+    id: "chaine-youtube",
+    titre: "Les vidéos d'EleveAI",
+    promesse: "Les maths de l'île en images, sur la chaîne.",
+    url: "https://www.youtube.com/@eleveai974",
+    externe: true,
+    niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof", "parent"],
+    matiere: "maths",
+    notions: ["videos", "*"],
+    intentions: ["decouvrir", "comprendre"],
     statut: "validee",
   },
   {
@@ -451,7 +469,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     url: `/simulateur-${slug}`,
     niveaux: ["cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof"],
     matiere: "maths",
-    notions: [...notions],
+    notions: [...notions, "machines"],
     intentions: ["decouvrir", "comprendre", "enseigner"],
     statut: "validee",
   })),

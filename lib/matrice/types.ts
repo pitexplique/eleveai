@@ -75,6 +75,15 @@ export type RessourceEleveAI = {
    * via ?classe=&matiere=&notion=). Voir coach.ts.
    */
   accepteNotion?: "maths" | "francais";
+  /**
+   * La ressource vit ailleurs que sur eleveai.fr (une chaîne YouTube, un site
+   * institutionnel). Elle s'ouvre alors dans un nouvel onglet, et on ne lui
+   * accroche pas de `?from=ia` — ce paramètre ne sert qu'à notre suivi interne.
+   * ⚠️ Une ressource externe se relit comme une interne : vue, vérifiée,
+   * associée à un niveau et à une intention. Pas de lien parce que le titre
+   * a l'air de coller.
+   */
+  externe?: boolean;
 };
 
 /** Ce que la personne a fourni. Rien de plus. */
