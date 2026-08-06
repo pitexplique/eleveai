@@ -73,7 +73,13 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "Le coach espagnol",
     promesse: "Du A1 au B2, à ton rythme.",
     url: "/coach-ia/espagnol",
-    niveaux: ["5e", "4e", "3e", "seconde", "premiere", "terminale"],
+    // ⭐ LA 6ᵉ EST DEDANS (tranché par Frédéric le 06/08). La LV2 commence
+    // officiellement en 5ᵉ, et l'espagnol ne sortait donc pas pour un 6ᵉ — ce
+    // qui était juste sur le papier et faux dans une salle : les classes
+    // bilangues font de l'espagnol dès la 6ᵉ, et le coach est en A1→B2, pas en
+    // niveaux de classe. On ne descend PAS plus bas : au primaire, la LV1 est
+    // l'anglais et rien d'autre.
+    niveaux: ["6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
     matiere: "espagnol",
     notions: ["espagnol"],
     intentions: ["comprendre", "entrainer", "preparer"],
@@ -132,7 +138,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "Les parcours d'espagnol",
     promesse: "Une série guidée qui monte en difficulté, du début à la fin.",
     url: "/parcours-espagnol",
-    niveaux: ["5e", "4e", "3e", "seconde", "premiere", "terminale"],
+    // 6ᵉ incluse, comme le coach : voir la note sur `coach-espagnol`.
+    niveaux: ["6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
     matiere: "espagnol",
     notions: ["espagnol"],
     intentions: ["entrainer", "preparer"],
@@ -208,7 +215,9 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "L'espagnol du jour",
     promesse: "Cinq mots par jour, entendus et écrits.",
     url: "/espagnol-du-jour",
-    niveaux: ["5e", "4e", "3e", "seconde", "premiere", "terminale"],
+    // 6ᵉ incluse, comme le coach : voir la note sur `coach-espagnol`.
+    // Cinq mots par jour ne demandent aucun prérequis de programme.
+    niveaux: ["6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
     matiere: "espagnol",
     notions: ["espagnol"],
     intentions: ["rituel"],

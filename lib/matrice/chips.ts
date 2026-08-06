@@ -53,11 +53,21 @@ function libelle(intention: Intention, profil: ProfilId): string {
   return l.defaut;
 }
 
-/** Les ressources qu'un profil peut réellement se voir proposer. */
-export function ressourcesPour(profil: ProfilId) {
-  const p = getProfil(profil);
+/**
+ * Les ressources qu'un profil peut réellement se voir proposer.
+ *
+ * ⭐ `null` = PERSONNE N'A ENCORE DIT QUI IL EST. On ne filtre alors sur aucun
+ * niveau, et c'est important : le composant démarre sur « 6e » par défaut, si
+ * bien qu'avant le moindre clic la page montrait le monde d'un sixième — pas
+ * d'espagnol, pas de spécialités — à un lycéen, à un professeur, à un CP.
+ * Un défaut technique se lisait comme une réponse. Tant que la question « qui
+ * es-tu ? » est ouverte, la réponse honnête est : tout ce qu'on a.
+ */
+export function ressourcesPour(profil: ProfilId | null) {
+  const p = profil ? getProfil(profil) : null;
   return RESSOURCES.filter((r) => {
     if (!STATUTS_PUBLIABLES.includes(r.statut)) return false;
+    if (!p) return true;
     return r.niveaux.includes("*") || p.niveaux.some((n) => r.niveaux.includes(n));
   });
 }
@@ -125,7 +135,7 @@ const LIBELLE_MATIERE: Record<string, string> = {
  */
 const MATIERES_MASQUEES = new Set(["ia"]);
 
-export function matieresDisponibles(profil: ProfilId): ChipMatiere[] {
+export function matieresDisponibles(profil: ProfilId | null): ChipMatiere[] {
   const compte = new Map<Matiere, number>();
   for (const r of ressourcesPour(profil)) {
     // « transversal » n'est pas une matière qu'on choisit : c'est l'absence de

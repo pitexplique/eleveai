@@ -30,6 +30,27 @@ const MAX_HISTORIQUE = 30;
 
 type EntreeHistorique = { question: string; profil: ProfilId; quand: number };
 
+/**
+ * Pourquoi on demande le profil AVANT de répondre — dit avec un exemple de la
+ * matière qu'on vient de cliquer.
+ *
+ * ⚠️ La phrase citait « les fractions » même quand on demandait de l'espagnol.
+ * L'argument restait vrai, mais l'exemple tombait à côté — et un exemple à côté
+ * donne l'impression de ne pas avoir été entendu, exactement au moment où l'on
+ * refuse de répondre. Chaque matière cite donc ce qui, chez elle, change
+ * vraiment de sens entre le début et la fin de la scolarité.
+ */
+const POURQUOI_LE_PROFIL: Partial<Record<string, string>> = {
+  maths: "« les fractions » ne veulent pas dire la même chose en CP et en Terminale",
+  francais: "« analyser une phrase » ne veut pas dire la même chose au CE1 et en Terminale",
+  anglais: "« parler du passé » ne s'apprend pas pareil en 6ᵉ et en Terminale",
+  espagnol: "« ser » et « estar » ne se travaillent pas pareil en 5ᵉ et en Terminale",
+  ia: "« un modèle » ne veut pas dire la même chose en 4ᵉ et en Terminale",
+};
+
+const POURQUOI_SANS_MATIERE =
+  "la même phrase ne veut pas dire la même chose en CP et en Terminale";
+
 export default function EntreeMatrice({
   variante = "page",
   onProfil,
@@ -97,7 +118,20 @@ export default function EntreeMatrice({
     () => (plusDOptions ? toutesLesChips : toutesLesChips.slice(0, CHIPS_VISIBLES)),
     [toutesLesChips, plusDOptions],
   );
-  const matieres = useMemo(() => matieresDisponibles(profil), [profil]);
+  // ⭐ Tant que personne n'a répondu à « Qui es-tu ? », on montre TOUTES les
+  // matières. `profil` vaut « 6e » au démarrage — un défaut technique, pas un
+  // choix de la personne — et il masquait l'espagnol à tout le monde avant le
+  // premier clic. Dès qu'un profil est choisi, la rangée se resserre sur lui.
+  const matieres = useMemo(
+    () => matieresDisponibles(profilChoisi ? profil : null),
+    [profil, profilChoisi],
+  );
+  /** La matière derrière le bouton allumé — on affiche des LIBELLÉS, mais c'est
+   *  l'identifiant qui sert à choisir la bonne phrase d'invite. */
+  const matiereDeLaRangee = useMemo(
+    () => matieres.find((m) => m.label === matiereChoisie)?.matiere ?? null,
+    [matieres, matiereChoisie],
+  );
   const exemples = useMemo(() => exemplesPour(profil), [profil]);
 
   const lancer = useCallback(
@@ -327,8 +361,11 @@ export default function EntreeMatrice({
               : "mt-3 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900"
           }
         >
-          Dis-moi d&apos;abord qui tu es — « les fractions » ne veulent pas dire la même chose en
-          CP et en Terminale.
+          {/* Toujours au tutoiement : ce message ne s'affiche QUE tant que
+              personne n'a dit qui il est. Un professeur qui a choisi son profil
+              ne le verra jamais. */}
+          Dis-moi d&apos;abord qui tu es —{" "}
+          {POURQUOI_LE_PROFIL[matiereDeLaRangee ?? ""] ?? POURQUOI_SANS_MATIERE}.
         </p>
       )}
 
