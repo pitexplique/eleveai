@@ -19,6 +19,12 @@ import type { ProfilId } from "@/lib/matrice/types";
 
 const CLE_PROFIL = "eleveai.ia.profil";
 const CLE_HISTORIQUE = "eleveai.ia.historique";
+// Replier la colonne est un choix qui doit SURVIVRE à la navigation : quelqu'un
+// qui la ferme veut de la place, pas la refermer à chaque page.
+const CLE_COLONNE = "eleveai.ia.colonne";
+
+/** Ce qu'on montre sans rien demander. Le reste attend « Afficher plus ». */
+const VISIBLES = 10;
 
 type EntreeHistorique = { question: string; profil: ProfilId; quand: number };
 
@@ -40,12 +46,31 @@ const MENU = [
   },
 ];
 
+/** L'icône « panneau latéral » — un rectangle et son montant, comme partout. */
+function IconePanneau({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      aria-hidden="true"
+      className={className}
+    >
+      <rect x="2.5" y="3.5" width="15" height="13" rx="2.5" />
+      <line x1="8" y1="3.5" x2="8" y2="16.5" />
+    </svg>
+  );
+}
+
 export default function ColonneGauche() {
   const { eleve, logout } = useEleve();
   const [historique, setHistorique] = useState<EntreeHistorique[]>([]);
   const [profil, setProfil] = useState<ProfilId | null>(null);
   const [menuOuvert, setMenuOuvert] = useState(false);
   const [tiroirOuvert, setTiroirOuvert] = useState(false);
+  const [toutAfficher, setToutAfficher] = useState(false);
+  const [replie, setReplie] = useState(false);
 
   useEffect(() => {
     try {
@@ -53,26 +78,53 @@ export default function ColonneGauche() {
       if (h) setHistorique(JSON.parse(h) as EntreeHistorique[]);
       const p = localStorage.getItem(CLE_PROFIL);
       if (p && PROFILS.some((x) => x.id === p)) setProfil(p as ProfilId);
+      setReplie(localStorage.getItem(CLE_COLONNE) === "repliee");
     } catch {
       /* navigation privée : la colonne vit sans */
     }
   }, []);
 
+  /** Le pli se retient. Sans ça, il faudrait refermer à chaque page. */
+  function basculerPli(valeur: boolean) {
+    setReplie(valeur);
+    try {
+      localStorage.setItem(CLE_COLONNE, valeur ? "repliee" : "ouverte");
+    } catch {
+      /* navigation privée : le choix ne dure que la visite */
+    }
+  }
+
   const prenom = eleve?.nom ? prenomFromNom(eleve.nom) : null;
   const initiales = (prenom ?? "?").slice(0, 2).toUpperCase();
   const labelProfil = profil ? PROFILS.find((p) => p.id === profil)?.label : null;
 
+  const listeVisible = toutAfficher ? historique : historique.slice(0, VISIBLES);
+  const reste = historique.length - listeVisible.length;
+
   const contenu = (
     <div className="flex min-h-full flex-col">
       <div className="flex-1 px-3 py-4">
-        <Link
-          href="/"
-          prefetch={false}
-          onClick={() => setTiroirOuvert(false)}
-          className="mb-4 flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-800 transition hover:border-slate-500"
-        >
-          <span aria-hidden="true">+</span> Nouvelle demande
-        </Link>
+        <div className="mb-4 flex items-center gap-2">
+          <Link
+            href="/"
+            prefetch={false}
+            onClick={() => setTiroirOuvert(false)}
+            className="flex min-w-0 flex-1 items-center gap-2 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-800 transition hover:border-slate-500"
+          >
+            <span aria-hidden="true">+</span> Nouvelle demande
+          </Link>
+          {/* Replier : réservé à l'ordinateur. Sur téléphone le tiroir se ferme
+              déjà en touchant à côté, un second geste ne servirait à rien. */}
+          <button
+            type="button"
+            onClick={() => basculerPli(true)}
+            aria-label="Replier la colonne"
+            title="Replier la colonne"
+            className="hidden shrink-0 rounded-xl p-2 text-slate-400 transition hover:bg-slate-200 hover:text-slate-700 lg:block"
+          >
+            <IconePanneau className="h-5 w-5" />
+          </button>
+        </div>
 
         {historique.length > 0 && (
           <>
@@ -80,7 +132,7 @@ export default function ColonneGauche() {
               Récent
             </p>
             <ul className="space-y-0.5">
-              {historique.slice(0, 8).map((h) => (
+              {listeVisible.map((h) => (
                 <li key={`${h.quand}-${h.question}`}>
                   <Link
                     href={`/?q=${encodeURIComponent(h.question)}`}
@@ -94,6 +146,26 @@ export default function ColonneGauche() {
                 </li>
               ))}
             </ul>
+            {/* « Afficher plus » n'apparaît QUE s'il y a vraiment autre chose
+                derrière : un bouton qui ne révèle rien est une petite trahison. */}
+            {reste > 0 && (
+              <button
+                type="button"
+                onClick={() => setToutAfficher(true)}
+                className="mt-1 block w-full rounded-lg px-2 py-1.5 text-left text-sm text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
+              >
+                Afficher plus
+              </button>
+            )}
+            {toutAfficher && historique.length > VISIBLES && (
+              <button
+                type="button"
+                onClick={() => setToutAfficher(false)}
+                className="mt-1 block w-full rounded-lg px-2 py-1.5 text-left text-sm text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
+              >
+                Afficher moins
+              </button>
+            )}
           </>
         )}
       </div>
@@ -148,8 +220,11 @@ export default function ColonneGauche() {
               {initiales}
             </span>
             <span className="min-w-0 flex-1">
+              {/* Le NOM en entier, pas le prénom seul : c'est son compte, pas
+                  une liste publique — et c'est ce qu'on reconnaît d'un coup
+                  d'œil quand on partage un écran en classe. */}
               <span className="block truncate text-sm font-medium text-slate-900">
-                {prenom ?? "Mon compte"}
+                {eleve.nom || "Mon compte"}
               </span>
               <span className="block truncate text-xs text-slate-500">
                 {labelProfil ?? eleve.classe ?? "Élève"}
@@ -194,15 +269,39 @@ export default function ColonneGauche() {
           (`stretch` du parent en flex) et c'est l'ENCART qui est `sticky
           bottom-0`. Il reste alors collé au bas de la fenêtre quoi qu'il
           arrive, sans que personne ait à mesurer quoi que ce soit. */}
-      <aside className="hidden w-64 shrink-0 border-r border-slate-200 bg-slate-50 lg:block">
-        {contenu}
-      </aside>
+      {!replie && (
+        <aside className="hidden w-64 shrink-0 border-r border-slate-200 bg-slate-50 lg:block">
+          {contenu}
+        </aside>
+      )}
 
-      {/* Téléphone : un bouton, et le tiroir n'existe que s'il est ouvert. */}
+      {/* Dépliée : le seul moyen de la faire revenir. Même icône que pour la
+          replier — c'est un interrupteur, pas deux boutons différents. */}
+      {replie && (
+        <button
+          type="button"
+          onClick={() => basculerPli(false)}
+          aria-label="Afficher la colonne"
+          title="Afficher la colonne"
+          className="fixed left-3 top-1/2 z-40 hidden -translate-y-1/2 rounded-xl border border-slate-300 bg-white p-2 text-slate-500 shadow-sm transition hover:text-slate-900 lg:block"
+        >
+          <IconePanneau className="h-5 w-5" />
+        </button>
+      )}
+
+      {/* Téléphone : un bouton, et le tiroir n'existe que s'il est ouvert.
+          ⚠️ IL Y A DÉJÀ UN HAMBURGER SUR CETTE PAGE — celui du header, à droite.
+          Les deux portaient le même nom « Ouvrir le menu » : au lecteur d'écran,
+          la page proposait deux fois le même geste pour deux contenus
+          différents. Celui-ci ouvre les demandes, pas le site — il le dit.
+          ⏳ Reste à régler : posé en `top-3`, il se superpose au bandeau du haut.
+          Le déplacer demande de connaître la hauteur du header, qui change quand
+          « Installer l'app » se ferme — c'est le même piège que l'encart du
+          compte, et il mérite le même genre de réponse en CSS, pas une constante. */}
       <button
         type="button"
         onClick={() => setTiroirOuvert(true)}
-        aria-label="Ouvrir le menu"
+        aria-label="Ouvrir mes demandes"
         className="fixed left-3 top-3 z-40 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm lg:hidden"
       >
         ☰

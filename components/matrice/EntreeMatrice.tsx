@@ -23,7 +23,10 @@ import type { ProfilId, ResultatMatrice } from "@/lib/matrice/types";
 
 const CLE_PROFIL = "eleveai.ia.profil";
 const CLE_HISTORIQUE = "eleveai.ia.historique";
-const MAX_HISTORIQUE = 8;
+// On en garde plus qu'on n'en montre : la colonne affiche les 10 dernières et
+// ouvre le reste derrière « Afficher plus ». 30, c'est quelques jours d'usage
+// pour quelques kilo-octets — au-delà, personne ne remonte.
+const MAX_HISTORIQUE = 30;
 
 type EntreeHistorique = { question: string; profil: ProfilId; quand: number };
 
