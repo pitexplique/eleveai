@@ -141,7 +141,11 @@ function MatieresMenu({ pathname, paper }: { pathname: string; paper: boolean })
         type="button"
         onClick={() => setOpen((v) => !v)}
         className={[
-          "inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition",
+          // ⚠️ `font-black` et `px-3` comme TOUS ses voisins de rangée (06/08).
+          // Elle était seule en `font-semibold px-4` : dans une rangée de cinq,
+          // un élément plus léger et plus large se lit comme un accident, pas
+          // comme une intention. Mesuré après : la nav tient toujours à 1024 px.
+          "inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition",
           paper
             ? active
               ? "bg-[#1d1c16] text-[#d8e9ee] shadow"
@@ -363,14 +367,19 @@ export default function Header() {
           <Link
             prefetch={false}
             href="/accueil"
+            /* ⭐ CE LIEN N'A PAS D'ÉTAT « ACTIF », ET C'EST VOULU.
+               Dans cette rangée, le fond plein veut déjà dire quelque chose :
+               « voici TON audience » (la porte Élève est pleine pour un élève,
+               sur toutes les pages du site). Lui donner aussi le sens « tu es
+               ici » mettait deux pastilles noires côte à côte sur l'accueil,
+               disant deux choses différentes dans la même langue.
+               Or une porte de sortie n'a pas besoin de se signaler quand on est
+               déjà dehors : sur l'accueil elle ne sert à rien, ailleurs elle
+               sert à revenir. Elle reste donc discrète, partout. */
             className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition ${
               paper
-                ? isActive(pathname, "/accueil")
-                  ? "bg-[#1d1c16] text-[#d8e9ee] shadow"
-                  : "bg-[#1d1c16]/10 text-[#1d1c16] hover:bg-[#1d1c16]/20"
-                : isActive(pathname, "/accueil")
-                  ? "bg-white text-[#041B33] shadow-lg"
-                  : "text-white/85 hover:bg-white/15 hover:text-white"
+                ? "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10 hover:text-[#1d1c16]"
+                : "text-white/85 hover:bg-white/15 hover:text-white"
             }`}
           >
             {/* ⚠️ MÊME RÈGLE QUE LE BOUTON CONNEXION : le mot disparaît sous
