@@ -15,18 +15,20 @@ import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
 import { prenomFromNom } from "@/lib/prenom";
 import { PROFILS } from "@/lib/matrice/profils";
+import {
+  EVENEMENT_HISTORIQUE,
+  lireHistorique,
+  type EntreeHistorique,
+} from "@/lib/matrice/historique";
 import type { ProfilId } from "@/lib/matrice/types";
 
 const CLE_PROFIL = "eleveai.ia.profil";
-const CLE_HISTORIQUE = "eleveai.ia.historique";
 // Replier la colonne est un choix qui doit SURVIVRE à la navigation : quelqu'un
 // qui la ferme veut de la place, pas la refermer à chaque page.
 const CLE_COLONNE = "eleveai.ia.colonne";
 
 /** Ce qu'on montre sans rien demander. Le reste attend « Afficher plus ». */
 const VISIBLES = 10;
-
-type EntreeHistorique = { question: string; profil: ProfilId; quand: number };
 
 /** Le menu du compte : uniquement des pages qui existent vraiment. */
 const MENU = [
@@ -73,15 +75,29 @@ export default function ColonneGauche() {
   const [replie, setReplie] = useState(false);
 
   useEffect(() => {
+    // ⭐ ON RELIT À CHAQUE DEMANDE, pas seulement au montage. L'entrée pose sa
+    // question sans changer de page : sans cette écoute, la demande qu'on vient
+    // de faire n'apparaissait dans le RÉCENT qu'au chargement suivant — on
+    // écrivait, et rien ne bougeait à gauche.
+    // `storage` en plus : il couvre les AUTRES onglets, que l'événement maison
+    // ne traverse pas.
+    const relire = () => setHistorique(lireHistorique());
+    relire();
+    window.addEventListener(EVENEMENT_HISTORIQUE, relire);
+    window.addEventListener("storage", relire);
+
     try {
-      const h = localStorage.getItem(CLE_HISTORIQUE);
-      if (h) setHistorique(JSON.parse(h) as EntreeHistorique[]);
       const p = localStorage.getItem(CLE_PROFIL);
       if (p && PROFILS.some((x) => x.id === p)) setProfil(p as ProfilId);
       setReplie(localStorage.getItem(CLE_COLONNE) === "repliee");
     } catch {
       /* navigation privée : la colonne vit sans */
     }
+
+    return () => {
+      window.removeEventListener(EVENEMENT_HISTORIQUE, relire);
+      window.removeEventListener("storage", relire);
+    };
   }, []);
 
   /** Le pli se retient. Sans ça, il faudrait refermer à chaque page. */

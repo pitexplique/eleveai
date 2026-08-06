@@ -19,16 +19,19 @@ import { PROFILS, getProfil } from "@/lib/matrice/profils";
 import { exemplesPour } from "@/lib/matrice/exemples";
 import { CHIPS_VISIBLES, chipsDisponibles, composerChip, matieresDisponibles } from "@/lib/matrice/chips";
 import { chercher, libelleIntention } from "@/lib/matrice/moteur";
+import {
+  CLE_HISTORIQUE,
+  EVENEMENT_HISTORIQUE,
+  lireHistorique,
+  type EntreeHistorique,
+} from "@/lib/matrice/historique";
 import type { ProfilId, ResultatMatrice } from "@/lib/matrice/types";
 
 const CLE_PROFIL = "eleveai.ia.profil";
-const CLE_HISTORIQUE = "eleveai.ia.historique";
 // On en garde plus qu'on n'en montre : la colonne affiche les 10 dernières et
 // ouvre le reste derrière « Afficher plus ». 30, c'est quelques jours d'usage
 // pour quelques kilo-octets — au-delà, personne ne remonte.
 const MAX_HISTORIQUE = 30;
-
-type EntreeHistorique = { question: string; profil: ProfilId; quand: number };
 
 /**
  * Pourquoi on demande le profil AVANT de répondre — dit avec un exemple de la
@@ -100,10 +103,7 @@ export default function EntreeMatrice({
           setResultat(chercher({ quiEsTu: p as ProfilId, question: q, chip: null }));
         }
       }
-      if (!surAccueil) {
-        const h = localStorage.getItem(CLE_HISTORIQUE);
-        if (h) setHistorique(JSON.parse(h) as EntreeHistorique[]);
-      }
+      if (!surAccueil) setHistorique(lireHistorique());
     } catch {
       /* navigation privée : on s'en passe */
     }
@@ -159,6 +159,14 @@ export default function EntreeMatrice({
           ].slice(0, MAX_HISTORIQUE);
           try {
             localStorage.setItem(CLE_HISTORIQUE, JSON.stringify(suite));
+            // ⭐ ON PRÉVIENT LA COLONNE. Elle lisait localStorage une seule
+            // fois, à son montage : la demande qu'on venait de poser n'entrait
+            // dans le RÉCENT qu'au changement de page suivant. Depuis que le
+            // bloc du bas a disparu, c'était le seul endroit qui la portait —
+            // et il ne la portait pas encore. `storage` ne suffit pas : il ne
+            // se déclenche QUE dans les autres onglets, jamais dans celui qui
+            // écrit.
+            window.dispatchEvent(new Event(EVENEMENT_HISTORIQUE));
           } catch {
             /* tant pis */
           }
