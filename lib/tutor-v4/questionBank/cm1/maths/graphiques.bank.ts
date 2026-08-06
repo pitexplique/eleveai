@@ -22,8 +22,16 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 function makeChoices(correct: string, wrongs: string[]) {
-  const unique = Array.from(new Set([correct, ...wrongs]));
-  return shuffle(unique).slice(0, 4);
+  // La bonne réponse ne doit JAMAIS sauter au découpage : on la met de côté,
+  // on tire trois distracteurs distincts, puis on mélange l'ensemble.
+  // ⚠️ 05/08/2026 — les versions précédentes jetaient la bonne réponse dans le
+  // même chapeau que les pièges avant de couper à quatre. Avec quatre pièges
+  // écrits, elle pouvait rester au fond : l'élève voyait alors quatre
+  // propositions dont aucune n'était bonne, sans que rien ne le signale.
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
 }
 
 function exp(

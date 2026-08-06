@@ -988,19 +988,20 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
       const k = randomInt(3, 10);
       const correctNumber = base * k;
 
-      const candidates = shuffle([
-        correctNumber,
-        correctNumber + 1,
-        correctNumber + 2,
-        correctNumber + base - 1,
-      ]);
-
       const correct = String(correctNumber);
+
+      // Les décalages doivent être distincts ET ne jamais retomber sur un
+      // multiple de la base. L'ancien « base - 1 » valait 2 quand la base
+      // valait 3 : le même nombre était alors proposé deux fois.
+      const decalages = [1, 2, base + 1];
 
       return {
         text: `Quel nombre est un multiple de ${base} ?`,
         format: "qcm",
-        choices: candidates.map(String),
+        choices: makeChoices(
+          correct,
+          decalages.map((d) => String(correctNumber + d)),
+        ),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(

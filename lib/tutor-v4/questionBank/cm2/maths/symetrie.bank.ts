@@ -13,6 +13,15 @@ function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
+// La bonne réponse ne doit JAMAIS sauter au découpage : on la met de côté, on
+// tire trois distracteurs distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
 function transformationCanvas(
   data: Omit<TransformationCanvasData, "kind">
 ): TransformationCanvasData {
@@ -641,9 +650,10 @@ export const symetrieBank: TutorBankItemV4[] = [
       return {
         text: `Combien d’axes de symétrie possède ${item.figure} ?`,
         format: "qcm",
-        choices: shuffle(["0", "1", "2", "3", "4"]).slice(0, 4).includes(item.expected)
-          ? shuffle(["0", "1", "2", "3", "4"]).slice(0, 4)
-          : shuffle([item.expected, "0", "1", "2", "4"]).slice(0, 4),
+        // Le test portait sur un premier mélange, et renvoyait un SECOND
+        // mélange indépendant : rien ne garantissait que la bonne réponse y
+        // figure. Neuf tirages sur soixante donnaient une question impossible.
+        choices: makeChoices(item.expected, ["0", "1", "2", "3", "4"]),
         expected: [item.expected],
         comparator: "mcq_exact",
         explanation: item.explanation,
