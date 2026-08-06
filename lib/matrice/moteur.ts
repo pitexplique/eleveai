@@ -14,10 +14,14 @@
 // catalogue qu'on voulait enterrer.
 
 import { intentionDeLaChip, matiereDeLaChip } from "./chips";
-import { notionCoach, urlCoachCiblee } from "./coach";
+import { normaliser } from "./normaliser";
+import { chercherNotionDeClasse } from "./notionsClasse";
+import { CLASSE_COACH, notionCoach, urlCoachCiblee } from "./coach";
 import { MARQUEURS_INTENTION, NOTIONS } from "./lexique";
 import { getProfil, chipsPour } from "./profils";
 import { RESSOURCES, STATUTS_PUBLIABLES } from "./ressources";
+export { normaliser };
+
 import type {
   Intention,
   LectureDemande,
@@ -29,16 +33,6 @@ import type {
 
 const NB_MAX = 3;
 
-/** Minuscules, accents retirés, ponctuation en espaces. */
-export function normaliser(texte: string): string {
-  return texte
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[^a-z0-9' ]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
 
 /** Distance de Levenshtein, bornée : au-delà de `max` on abandonne. */
 function distance(a: string, b: string, max: number): number {
@@ -177,7 +171,14 @@ function raisonner(
 export function chercher(vecteur: VecteurEntree): ResultatMatrice {
   const profil = getProfil(vecteur.quiEsTu);
   const intention = lireIntention(vecteur);
-  const notion = lireNotion(vecteur.question);
+
+  // LE PROGRAMME DE SA CLASSE D'ABORD. Ce sont les libellés officiels des 431
+  // notions du knowledge, comparés au mot près : quand ça accroche, c'est sûr.
+  // Le lexique passe ensuite — il porte les mots des élèves (« les x »,
+  // « fracsion ») et tolère les fautes, mais cette souplesse a un prix :
+  // « racine carrée » tombait sur « la géométrie », par l'alias « carré ».
+  const notionProgramme = chercherNotionDeClasse(vecteur.quiEsTu, vecteur.question);
+  const notion = notionProgramme ? null : lireNotion(vecteur.question);
 
   // La chip peut porter une MATIÈRE au lieu d'une intention — c'est toujours
   // le même et unique champ `chip` du vecteur, jamais un quatrième. Cliquer
@@ -189,22 +190,27 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
   // une matière écartait le coach, la chaîne et le reste, et « je veux voir
   // une vidéo » renvoyait les défis du jour.
   const matiereNotion = notion?.matiere === "transversal" ? null : notion?.matiere;
-  const matiereVoulue = matiereChip ?? matiereNotion ?? null;
+  const matiereVoulue = matiereChip ?? matiereNotion ?? notionProgramme?.matiere ?? null;
 
   const lecture: LectureDemande = {
     profil: profil.id,
     intention,
-    notionId: notion?.id ?? null,
-    notionLabel: notion?.label ?? null,
+    notionId: notion?.id ?? notionProgramme?.id ?? null,
+    // Le libellé du programme s'affiche tel qu'il est écrit dans le knowledge :
+    // c'est le mot que l'élève a sous les yeux dans son cours.
+    notionLabel: notion?.label ?? notionProgramme?.label ?? null,
     matiere: matiereChip,
-    motsInconnus: motsInconnus(vecteur.question, Boolean(notion) || Boolean(matiereChip)),
+    motsInconnus: motsInconnus(
+      vecteur.question,
+      Boolean(notion) || Boolean(matiereChip) || Boolean(notionProgramme),
+    ),
   };
 
   const candidates: Recommandation[] = [];
 
   // Personne n'a rien dit d'exploitable : on montrera les portes du niveau.
   // C'est là que les ressources « sur demande » doivent se taire.
-  const repliSurLeNiveau = !notion && !intention && !matiereChip;
+  const repliSurLeNiveau = !notion && !intention && !matiereChip && !notionProgramme;
 
   for (const r of RESSOURCES) {
     // ── 1. Le statut. Rien d'autre ne compte tant que ce n'est pas relu.
@@ -245,19 +251,33 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
     if (r.statut === "testee_eleves") score += 1;
 
     // ── 6. Une ressource qui ne s'invite jamais passe DEVANT quand on
-    // l'appelle : si quelqu'un demande à découvrir, c'est précisément la
-    // machine qu'il veut, pas le coach qu'il aurait trouvé tout seul.
-    if (r.surDemande) score += 2;
+    // l'appelle VRAIMENT : « découvrir », ou sa notion nommée. Pas dès qu'une
+    // notion quelconque traîne dans la phrase — « fractions » en Seconde
+    // faisait remonter les machines, que personne n'avait demandées.
+    if (r.surDemande && (notionOk || intention === "decouvrir")) score += 2;
 
     // Le coach s'ouvre sur la classe de la personne plutôt que sur sa page
     // générale. Le bonus, lui, ne tombe que si la notion demandée existe
     // vraiment à ce niveau — sinon on avantagerait le coach pour rien.
-    const url = r.accepteNotion
-      ? urlCoachCiblee(profil.id, notion?.id ?? null, r.accepteNotion)
-      : null;
-    const viseNotion = r.accepteNotion
-      ? Boolean(notionCoach(profil.id, notion?.id ?? null, r.accepteNotion))
-      : false;
+    // Deux chemins vers la même porte : la table du lexique (les mots des
+    // élèves) ou le programme de la classe (les libellés officiels). Le second
+    // donne DIRECTEMENT l'identifiant du coach — pas de traduction à faire.
+    const notionDuCoach =
+      r.accepteNotion && notionProgramme?.matiere === r.accepteNotion
+        ? notionProgramme.id
+        : r.accepteNotion
+          ? notionCoach(profil.id, notion?.id ?? null, r.accepteNotion)
+          : null;
+
+    const classeCoach = CLASSE_COACH[profil.id];
+    const url =
+      r.accepteNotion && notionDuCoach && classeCoach
+        ? `/tutor-v4?classe=${classeCoach}&matiere=${r.accepteNotion}&notion=${notionDuCoach}&display=simple`
+        : r.accepteNotion
+          ? urlCoachCiblee(profil.id, notion?.id ?? null, r.accepteNotion)
+          : null;
+
+    const viseNotion = Boolean(notionDuCoach);
     if (viseNotion) score += 2;
 
     candidates.push({
