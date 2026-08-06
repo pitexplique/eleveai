@@ -1,5 +1,18 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
@@ -905,10 +918,15 @@ export const entiersBank: TutorBankItemV4[] = [
           ? digits[2]
           : digits[3];
 
-      const wrongChoices = shuffle(
-        Array.from(new Set(digits.filter((d) => d !== answer)))
-      );
-      const choices = shuffle([answer, ...wrongChoices]).slice(0, 4);
+      // Un nombre comme 3 333 n'a qu'un seul chiffre distinct : les pièges
+      // tirés de son écriture disparaissaient tous, et il ne restait qu'une
+      // proposition — la bonne. On complète avec les chiffres suivants.
+      const choices = makeChoices(answer, [
+        ...digits.filter((d) => d !== answer),
+        String((Number(answer) + 1) % 10),
+        String((Number(answer) + 2) % 10),
+        String((Number(answer) + 3) % 10),
+      ]);
 
       return {
         text: `Dans le nombre ${chunkedNumber(
@@ -975,12 +993,15 @@ export const entiersBank: TutorBankItemV4[] = [
     hint: "Regarde d’abord le nombre de chiffres, puis la valeur des chiffres.",
     tags: ["entiers", "comparaison", "qcm", "template"],
     generate: () => {
-      const nums = [
-        randomInt(1000, 1999),
-        randomInt(1000, 1999),
-        randomInt(1000, 1999),
-        randomInt(1000, 1999),
-      ];
+      // Quatre tirages libres entre 1000 et 1999 finissent par sortir deux fois
+      // le même nombre — rare, mais l'élève se retrouve alors devant deux
+      // lignes identiques, et « le plus grand » n'a plus de réponse unique.
+      const nums: number[] = [];
+      while (nums.length < 4) {
+        const n = randomInt(1000, 1999);
+        if (!nums.includes(n)) nums.push(n);
+      }
+
       const good = Math.max(...nums);
       const choices = shuffle(nums.map((n) => chunkedNumber(n)));
 
@@ -1055,11 +1076,14 @@ export const entiersBank: TutorBankItemV4[] = [
       return {
         text: `Quelle est la bonne décomposition de ${n} ?`,
         format: "qcm",
-        choices: shuffle([
-          good,
+        // À 500, les dizaines et les unités sont nulles : « on a oublié les
+        // dizaines » et « on a oublié les unités » s'écrivent pareil. D'où la
+        // décomposition à l'envers, gardée en réserve.
+        choices: makeChoices(good, [
           `${Math.floor(n / 100)} + ${Math.floor((n % 100) / 10)} + ${units}`,
           `${hundreds} + ${units}`,
           `${hundreds} + ${tens}`,
+          `${units} + ${tens} + ${hundreds}`,
         ]),
         expected: [good],
         comparator: "mcq_exact",

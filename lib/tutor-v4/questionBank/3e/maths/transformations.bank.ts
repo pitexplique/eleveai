@@ -5,6 +5,19 @@ import type {
   TransformationCanvasData,
 } from "@/lib/tutor-v4/types";
 
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -1047,11 +1060,14 @@ export const transformationsBank: TutorBankItemV4[] = [
       return {
         text: `Par une homothétie de centre O, on a OA = ${OA} cm et OA' = ${OAp} cm. Quel est le rapport k ?`,
         format: "qcm",
-        choices: shuffle([
-          kData.label,
+        // OA − OA' retombe sur le dénominateur dès que OA' vaut 2 : on garde
+        // deux longueurs de secours dans le vivier.
+        choices: makeChoices(kData.label, [
           String(kData.denom),
           String(OA + OAp),
           String(OA - OAp),
+          String(OA),
+          String(OAp),
         ]),
         expected: [kData.label],
         comparator: "mcq_exact",

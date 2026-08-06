@@ -26,6 +26,23 @@
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function pickOne<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -1547,13 +1564,23 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "variables_aleatoires", "modeliser", "template"],
     generate: () => {
       const n = randomInt(5, 12);
-      const g = randomInt(1, n - 1);
-      const lot = pickOne([10, 20, 50, 100]);
+      // Un seul jeton gagnant, et le piège « une chance sur $n$ » devient la
+      // bonne réponse ; la moitié de gagnants, et c'est « les perdants » qui
+      // s'écrit pareil. On écarte les deux, ainsi que le lot égal au nombre de
+      // jetons, qui ferait coïncider le troisième piège.
+      const g = pickOne(
+        Array.from({ length: n - 3 }, (_, i) => i + 2).filter((v) => 2 * v !== n),
+      );
+      const lot = pickOne([10, 20, 50, 100].filter((v) => v !== n));
       const correct = `$\\dfrac{${g}}{${n}}$`;
       return {
         text: `Une urne contient $${n}$ jetons dont $${g}$ gagnants. On tire un jeton et $X$ vaut $${lot}$ si le jeton est gagnant, $0$ sinon. Combien vaut $P(X = ${lot})$ ?`,
         format: "qcm",
-        choices: [correct, `$\\dfrac{${n - g}}{${n}}$`, `$\\dfrac{${g}}{${lot}}$`, `$\\dfrac{1}{${n}}$`],
+        choices: makeChoices(correct, [
+          `$\\dfrac{${n - g}}{${n}}$`,
+          `$\\dfrac{${g}}{${lot}}$`,
+          `$\\dfrac{1}{${n}}$`,
+        ]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(
@@ -1878,13 +1905,20 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     hint: "L'écart-type est la racine carrée de la variance.",
     tags: ["premiere", "maths", "variables_aleatoires", "ecart_type", "template"],
     generate: () => {
-      const s = randomInt(2, 12);
+      // À un écart-type de 2, la variance vaut 4 et le double aussi : le piège
+      // « on a doublé au lieu de prendre la racine » s'écrivait comme celui de
+      // la variance. On démarre donc à 3.
+      const s = randomInt(3, 12);
       const v = s * s;
       const correct = `$${s}$`;
       return {
         text: `Une variable aléatoire $X$, exprimée en euros, vérifie $V(X) = ${v}$. Quel est son écart-type, et dans quelle unité ?`,
         format: "qcm",
-        choices: [`$${s}$ €`, `$${v}$ €`, `$${s}$ €$^2$`, `$${2 * s}$ €`],
+        choices: makeChoices(`$${s}$ €`, [
+          `$${v}$ €`,
+          `$${s}$ €$^2$`,
+          `$${2 * s}$ €`,
+        ]),
         expected: [`$${s}$ €`],
         comparator: "mcq_exact",
         explanation: exp(

@@ -11,6 +11,23 @@
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -664,9 +681,16 @@ export const derivationBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "derivation", "usuelles", "template"],
     generate: () => {
       const a = randomInt(2, 9);
-      const b = randomInt(-5, 5);
+      // $b$ ni nul — sinon « on a additionné les deux coefficients » donne la
+      // bonne réponse — ni égal à $a$, sinon c'est « on a gardé l'ordonnée à
+      // l'origine » qui la donne.
+      const b = pickOne([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5].filter((v) => v !== a));
       const correct = `$f'(x) = ${a}$`;
-      const choices = [correct, `$f'(x) = ${a}x$`, `$f'(x) = ${b}$`, `$f'(x) = ${a + b}$`];
+      const choices = makeChoices(correct, [
+        `$f'(x) = ${a}x$`,
+        `$f'(x) = ${b}$`,
+        `$f'(x) = ${a + b}$`,
+      ]);
       return {
         text: `Quelle est la dérivée de $f(x) = ${a}x ${b >= 0 ? "+ " + b : "- " + -b}$ ?`,
         format: "qcm",
@@ -2426,7 +2450,10 @@ export const derivationBank: TutorBankItemV4[] = [
     hint: "$\\left(\\dfrac{1}{v}\\right)' = -\\dfrac{v'}{v^2}$ : le dénominateur entier passe au carré.",
     tags: ["premiere", "maths", "derivation", "quotient", "template"],
     generate: () => {
-      const a = randomInt(1, 5);
+      // $a$ démarre à 2 : à 1, le piège « on a oublié de dériver le
+      // dénominateur » s'écrit comme la bonne réponse, et l'énoncé affichait un
+      // disgracieux $1x$.
+      const a = randomInt(2, 5);
       const b = randomInt(-6, 6) || 2;
       const signe = b < 0 ? `- ${-b}` : `+ ${b}`;
       return {

@@ -15,6 +15,23 @@
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -194,10 +211,16 @@ export const geometrieProblemesPlanBank: TutorBankItemV4[] = [
     hint: "Projeté sur l'axe des abscisses : ordonnée $\\to 0$.",
     tags: ["seconde", "maths", "geometrie", "projete", "template"],
     generate: () => {
-      const x = randomInt(-5, 5);
+      // Un point sur l'axe des ordonnées se projette sur l'origine : le piège
+      // « on a tout mis à zéro » devenait la bonne réponse.
+      const x = shuffle([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])[0];
       const y = randomInt(1, 5);
       const correct = `$(${x}\\,;0)$`;
-      const choices = [correct, `$(0\\,;${y})$`, `$(${x}\\,;${y})$`, `$(0\\,;0)$`];
+      const choices = makeChoices(correct, [
+        `$(0\\,;${y})$`,
+        `$(${x}\\,;${y})$`,
+        `$(0\\,;0)$`,
+      ]);
       return {
         text: `Quelles sont les coordonnées du projeté orthogonal de $M(${x}\\,;${y})$ sur l'axe des abscisses ?`,
         format: "qcm",
@@ -227,9 +250,15 @@ export const geometrieProblemesPlanBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "geometrie", "projete", "template"],
     generate: () => {
       const x = randomInt(1, 5);
-      const y = randomInt(-5, 5);
+      // Un point sur l'axe des abscisses fait coïncider deux pièges : « on a
+      // gardé l'abscisse » et « on a interverti » s'écrivent alors pareil.
+      const y = shuffle([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])[0];
       const correct = `$(0\\,;${y})$`;
-      const choices = [correct, `$(${x}\\,;0)$`, `$(${x}\\,;${y})$`, `$(${y}\\,;0)$`];
+      const choices = makeChoices(correct, [
+        `$(${x}\\,;0)$`,
+        `$(${x}\\,;${y})$`,
+        `$(${y}\\,;0)$`,
+      ]);
       return {
         text: `Quelles sont les coordonnées du projeté orthogonal de $M(${x}\\,;${y})$ sur l'axe des ordonnées ?`,
         format: "qcm",

@@ -17,6 +17,23 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -401,7 +418,14 @@ export const puissancesBank: TutorBankItemV4[] = [
       const m = randomInt(2, 6);
       const n = randomInt(2, 6);
       const correct = `$a^{${m + n}}$`;
-      const choices = [correct, `$a^{${m * n}}$`, `$a^{${m + n + 1}}$`, `$a^{${Math.abs(m - n)}}$`];
+      // À $2$ et $3$, « on a multiplié les exposants » et « on en a ajouté un »
+      // donnent le même 6 : d'où le quatrième piège, gardé en réserve.
+      const choices = makeChoices(correct, [
+        `$a^{${m * n}}$`,
+        `$a^{${m + n + 1}}$`,
+        `$a^{${Math.abs(m - n)}}$`,
+        `$a^{${m + n - 1}}$`,
+      ]);
       return {
         text: `Simplifie $a^{${m}} \\times a^{${n}}$ (avec $a \\neq 0$).`,
         format: "qcm",
@@ -734,7 +758,14 @@ export const puissancesBank: TutorBankItemV4[] = [
       const m = randomInt(2, 5);
       const n = randomInt(2, 4);
       const correct = `$x^{${m * n}}$`;
-      const choices = [correct, `$x^{${m + n}}$`, `$x^{${m}}$`, `$x^{${m * n + 2}}$`];
+      // À $m = n = 2$, somme et produit valent tous deux 4 : le piège « on a
+      // additionné les exposants » devenait la bonne réponse.
+      const choices = makeChoices(correct, [
+        `$x^{${m + n}}$`,
+        `$x^{${m}}$`,
+        `$x^{${m * n + 2}}$`,
+        `$x^{${m * n - 1}}$`,
+      ]);
       return {
         text: `Simplifie $(x^{${m}})^{${n}}$ (avec $x \\neq 0$).`,
         format: "qcm",
@@ -934,7 +965,14 @@ export const puissancesBank: TutorBankItemV4[] = [
       const n = 2;
       const denom = base ** n;
       const correct = `$\\dfrac{1}{${denom}}$`;
-      const choices = [correct, `$-${denom}$`, `$\\dfrac{1}{${base * n}}$`, `$${denom}$`];
+      // À la base 2, le carré et le double valent tous deux 4 : le piège « on a
+      // multiplié la base par l'exposant » devenait la bonne réponse.
+      const choices = makeChoices(correct, [
+        `$-${denom}$`,
+        `$\\dfrac{1}{${base * n}}$`,
+        `$${denom}$`,
+        `$\\dfrac{1}{${base}}$`,
+      ]);
       return {
         text: `Combien vaut $${base}^{-${n}}$ ?`,
         format: "qcm",

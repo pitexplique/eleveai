@@ -2,6 +2,8 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -495,12 +497,16 @@ export const limitesFonctionsBank: TutorBankItemV4[] = [
     tags: ["terminale-spe", "limite_fonction", "infini", "polynome", "template"],
     generate: () => {
       const a = randomChoice([-5, -4, -3, -2, 2, 3, 4, 5]);
-      const b = randomInt(-8, 8);
-      const c = randomInt(-8, 8);
+      // Un terme constant nul écrivait deux fois « 0 » dans les propositions.
+      const b = randomChoice([-8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8]);
+      const c = randomChoice([-8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8]);
       const result = a > 0 ? "+∞" : "-∞";
+      // On écrit « − 3x » plutôt que « + -3x » : l'énoncé se lit comme au
+      // tableau.
+      const signe = (v: number) => (v >= 0 ? `+ ${v}` : `− ${-v}`);
 
       return {
-        text: `Quelle est la limite de f(x) = ${a}x² + ${b}x + ${c} quand x tend vers +∞ ?`,
+        text: `Quelle est la limite de f(x) = ${a}x² ${signe(b)}x ${signe(c)} quand x tend vers +∞ ?`,
         format: "qcm",
         choices: shuffle(["+∞", "-∞", "0", String(c)]),
         expected: [result],
@@ -804,7 +810,9 @@ export const limitesFonctionsBank: TutorBankItemV4[] = [
     hint: "Si f(x) tend vers ℓ en +∞, l’asymptote horizontale est y = ℓ.",
     tags: ["terminale-spe", "limite_fonction", "asymptote", "template"],
     generate: () => {
-      const l = randomInt(-5, 8);
+      // Une limite nulle fait coïncider le piège « x = ℓ » avec le piège
+      // « x = 0 » : l'élève voyait deux fois la même ligne.
+      const l = randomChoice([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8]);
 
       return {
         text: `Si f(x) tend vers ${l} quand x tend vers +∞, quelle est l’asymptote horizontale ?`,

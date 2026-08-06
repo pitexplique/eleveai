@@ -27,6 +27,23 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -855,8 +872,15 @@ export const logiqueEnsemblesBank: TutorBankItemV4[] = [
     generate: () => {
       const a = randomInt(-4, 3);
       const b = a + randomInt(2, 5);
-      const c = randomInt(a, b + 2);
-      const d = c + randomInt(2, 5);
+      // Deux intervalles identiques rendent la question sans objet : réunion et
+      // intersection valent alors la même chose, et les quatre propositions
+      // s'écrivent toutes pareil. Le QCM n'affichait plus qu'une ligne.
+      let c = randomInt(a, b + 2);
+      let d = c + randomInt(2, 5);
+      while (c === a && d === b) {
+        c = randomInt(a, b + 2);
+        d = c + randomInt(2, 5);
+      }
       const inter = pickOne([true, false]);
       const debInter = Math.max(a, c);
       const finInter = Math.min(b, d);
@@ -876,9 +900,19 @@ export const logiqueEnsemblesBank: TutorBankItemV4[] = [
       return {
         text: `Que vaut $[${a} ; ${b}] ${inter ? "\\cap" : "\\cup"} [${c} ; ${d}]$ ?`,
         format: "qcm",
-        choices: [correct, autre, `$[${a} ; ${d}]$`, `$[${c} ; ${b}]$`].filter(
-          (v, i, t) => t.indexOf(v) === i,
-        ),
+        // Quand les deux intervalles se recouvrent exactement, les bornes
+        // croisées redonnent la bonne réponse : il ne restait parfois qu'une
+        // seule ligne au QCM. On garde les deux intervalles de l'énoncé en
+        // réserve — ce sont de toute façon les erreurs les plus courantes.
+        choices: makeChoices(correct, [
+          autre,
+          `$[${a} ; ${d}]$`,
+          `$[${c} ; ${b}]$`,
+          `$[${a} ; ${b}]$`,
+          `$[${c} ; ${d}]$`,
+          "$\\varnothing$",
+          `$[${a} ; ${b}] \\cup [${c} ; ${d}]$`,
+        ]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(

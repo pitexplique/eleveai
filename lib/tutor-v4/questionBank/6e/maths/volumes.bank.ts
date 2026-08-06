@@ -1,5 +1,18 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
@@ -948,11 +961,14 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text: `On réunit un solide de ${a} cubes et un solide de ${b} cubes. Quel est le volume total ?`,
         format: "qcm",
-        choices: shuffle([
-          String(good),
+        // Quand les deux solides ont le même nombre de cubes, « on n'a compté
+        // que l'un des deux » s'écrit deux fois : d'où le produit, gardé en
+        // réserve.
+        choices: makeChoices(String(good), [
           String(a),
           String(b),
           String(good + 2),
+          String(a * b),
         ]),
         expected: [String(good)],
         comparator: "mcq_exact",

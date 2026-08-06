@@ -483,11 +483,22 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     generate: () => {
       const a = randomInt(1, 8);
       const b = randomInt(2, 9);
-      const c = randomInt(1, 8);
-      const d = randomInt(2, 9);
+      let c = randomInt(1, 8);
+      let d = randomInt(2, 9);
 
-      const left = a / b;
-      const right = c / d;
+      // Deux fois la même écriture, c'est deux fois la même proposition — et
+      // une question sans objet. On retire jusqu'à ce qu'elles diffèrent.
+      // Deux fractions égales écrites autrement (1/2 et 2/4) restent bonnes à
+      // tirer : « ils sont égaux » devient alors la réponse.
+      while (c === a && d === b) {
+        c = randomInt(1, 8);
+        d = randomInt(2, 9);
+      }
+
+      // Produits en croix plutôt que division : c'est la méthode enseignée, et
+      // elle ne dépend pas de l'arrondi des décimaux.
+      const left = a * d;
+      const right = c * b;
 
       const f1 = formatFraction(a, b);
       const f2 = formatFraction(c, d);

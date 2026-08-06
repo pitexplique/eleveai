@@ -27,6 +27,23 @@
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -382,10 +399,17 @@ export const geometrieRepereeBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "geometrie_reperee", "vecteur_normal", "template"],
     generate: () => {
       const a = randomInt(1, 5);
-      const b = randomInt(-5, 5);
+      // $b$ ne doit être ni nul — sinon « on a changé le signe » et « on a
+      // interverti » s'écrivent pareil, et la droite s'affiche avec un $0y$ —
+      // ni égal à $a$, sinon l'interversion donne la bonne réponse.
+      const b = pickOne([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5].filter((v) => v !== a));
       const c = randomInt(-5, 5);
       const correct = `$(${a} ; ${b})$`;
-      const choices = [correct, `$(${b} ; ${a})$`, `$(${-b} ; ${a})$`, `$(${c} ; 0)$`];
+      const choices = makeChoices(correct, [
+        `$(${b} ; ${a})$`,
+        `$(${-b} ; ${a})$`,
+        `$(${c} ; 0)$`,
+      ]);
       return {
         text: `Quel est un vecteur normal à la droite $${a}x ${b >= 0 ? "+ " + b : "- " + -b}y ${c >= 0 ? "+ " + c : "- " + -c} = 0$ ?`,
         format: "qcm",
@@ -1165,14 +1189,21 @@ export const geometrieRepereeBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "geometrie_reperee", "vecteur_directeur", "template"],
     generate: () => {
       const a = pickOne([1, 2, 3, 4, 5, -2, -3]);
-      const b = pickOne([1, 2, 3, -1, -2, -4]);
+      // $b$ ne doit valoir ni $a$ ni $-a$ : dans le premier cas les deux pièges
+      // d'interversion s'écrivent pareil, dans le second c'est le piège « on a
+      // gardé le signe » qui devient la bonne réponse.
+      const b = pickOne([1, 2, 3, -1, -2, -4].filter((v) => v !== a && v !== -a));
       const c = randomInt(-5, 5);
       const correct = `$\\vec{u}(${-b} ; ${a})$`;
       const eq = `$${a}x ${b >= 0 ? "+ " + b : "- " + -b}y ${c >= 0 ? "+ " + c : "- " + -c} = 0$`;
       return {
         text: `Quel est un vecteur directeur de la droite d'équation ${eq} ?`,
         format: "qcm",
-        choices: [correct, `$\\vec{u}(${a} ; ${b})$`, `$\\vec{u}(${b} ; ${a})$`, `$\\vec{u}(${a} ; ${-b})$`],
+        choices: makeChoices(correct, [
+          `$\\vec{u}(${a} ; ${b})$`,
+          `$\\vec{u}(${b} ; ${a})$`,
+          `$\\vec{u}(${a} ; ${-b})$`,
+        ]),
         expected: [correct],
         comparator: "mcq_exact",
         canvas: droiteCanvas(a, b, c),
@@ -1733,14 +1764,22 @@ export const geometrieRepereeBank: TutorBankItemV4[] = [
     hint: "Sur un axe, projeter revient à annuler l'autre coordonnée.",
     tags: ["premiere", "maths", "geometrie_reperee", "projete", "template"],
     generate: () => {
-      const x = randomInt(-5, 5);
-      const y = randomInt(-5, 5);
+      // Un point sur un axe, ou sur la première bissectrice, fait coïncider deux
+      // des quatre propositions : $M$ doit être hors des axes et hors de la
+      // droite $y = x$.
+      const nonNuls = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5];
+      const x = pickOne(nonNuls);
+      const y = pickOne(nonNuls.filter((v) => v !== x));
       const surAbscisses = pickOne([true, false]);
       const correct = surAbscisses ? `$(${x} ; 0)$` : `$(0 ; ${y})$`;
       return {
         text: `Quel est le projeté orthogonal du point $M(${x} ; ${y})$ sur l'axe des ${surAbscisses ? "abscisses" : "ordonnées"} ?`,
         format: "qcm",
-        choices: [correct, surAbscisses ? `$(0 ; ${y})$` : `$(${x} ; 0)$`, `$(${y} ; ${x})$`, `$(${x} ; ${y})$`],
+        choices: makeChoices(correct, [
+          surAbscisses ? `$(0 ; ${y})$` : `$(${x} ; 0)$`,
+          `$(${y} ; ${x})$`,
+          `$(${x} ; ${y})$`,
+        ]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(
@@ -1850,19 +1889,21 @@ export const geometrieRepereeBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "geometrie_reperee", "cercle", "template"],
     generate: () => {
       const a = randomInt(-4, 4);
-      const b = randomInt(-4, 4);
+      // Un cercle centré à l'origine ne distingue plus « le signe s'inverse
+      // dans les parenthèses » de la bonne réponse : $- 0$ et $+ 0$ s'écrivent
+      // pareil. Si l'abscisse du centre est nulle, l'ordonnée ne l'est pas.
+      const b = a === 0 ? pickOne([-4, -3, -2, -1, 1, 2, 3, 4]) : randomInt(-4, 4);
       const r = randomInt(2, 7);
       const signe = (v: number) => (v >= 0 ? `- ${v}` : `+ ${-v}`);
       const correct = `$(x ${signe(a)})^2 + (y ${signe(b)})^2 = ${r * r}$`;
       return {
         text: `Quelle est l'équation du cercle de centre $\\Omega(${a} ; ${b})$ et de rayon $${r}$ ?`,
         format: "qcm",
-        choices: [
-          correct,
+        choices: makeChoices(correct, [
           `$(x ${signe(a)})^2 + (y ${signe(b)})^2 = ${r}$`,
           `$(x ${signe(-a)})^2 + (y ${signe(-b)})^2 = ${r * r}$`,
           `$(x ${signe(a)})^2 - (y ${signe(b)})^2 = ${r * r}$`,
-        ],
+        ]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(

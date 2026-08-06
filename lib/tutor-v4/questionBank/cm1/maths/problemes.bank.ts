@@ -33,6 +33,13 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
   return shuffle([correct, ...distracteurs]);
 }
 
+// ⚠️ 05/08/2026 — les nombres relatifs entrent en 5e. Ici, trois gabarits
+// proposaient « −1 » ou « −25 » à des CM1, parce qu'un piège se fabriquait en
+// soustrayant le plus grand du plus petit. On ne garde que les pièges positifs.
+function piegesPositifs(valeurs: readonly number[]): string[] {
+  return valeurs.filter((v) => v > 0).map(String);
+}
+
 function calculPoseCanvas(
   data: Omit<CalculPoseCanvasData, "kind">
 ): CalculPoseCanvasData {
@@ -992,11 +999,13 @@ export const problemesBank: TutorBankItemV4[] = [
       return {
         text: `Une association a ${a} affiches. Elle en imprime ${b} nouvelles. Combien d’affiches a-t-elle au total ?`,
         format: "qcm",
-        choices: makeChoices(String(total), [
-          String(a - b),
-          String(total + 10),
-          String(total - 10),
-        ]),
+        // « Il a soustrait au lieu d'ajouter » reste le bon piège, mais il ne
+        // vaut que si la différence est positive : 125 affiches moins 126 n'a
+        // pas de sens au CM1.
+        choices: makeChoices(
+          String(total),
+          piegesPositifs([a - b, total + 10, total - 10, total + 100]),
+        ),
         expected: [String(total)],
         comparator: "mcq_exact",
         explanation: exp(
@@ -1229,7 +1238,10 @@ export const problemesBank: TutorBankItemV4[] = [
     ],
     generate: () => {
       const total = randomChoice([150, 240, 360, 500]);
-      const retire = randomChoice([35, 85, 126, 175]);
+      // ⚠️ On ne retire jamais plus qu'il n'y a : « l'école possède 150
+      // feuilles, elle en utilise 175 » était un énoncé impossible, et la
+      // phrase-réponse annonçait « il reste −25 feuilles ».
+      const retire = randomChoice([35, 85, 126, 175].filter((r) => r < total));
       const reste = total - retire;
 
       return {
@@ -2126,7 +2138,10 @@ export const problemesBank: TutorBankItemV4[] = [
     ],
     generate: () => {
       const total = randomChoice([150, 240, 360, 500]);
-      const retire = randomChoice([35, 85, 126, 175]);
+      // ⚠️ On ne retire jamais plus qu'il n'y a : « l'école possède 150
+      // feuilles, elle en utilise 175 » était un énoncé impossible, et la
+      // phrase-réponse annonçait « il reste −25 feuilles ».
+      const retire = randomChoice([35, 85, 126, 175].filter((r) => r < total));
       const reste = total - retire;
 
       const correct = `Il reste ${reste} feuilles.`;
@@ -2304,7 +2319,10 @@ export const problemesBank: TutorBankItemV4[] = [
     ],
     generate: () => {
       const total = randomChoice([150, 240, 360, 500]);
-      const retire = randomChoice([35, 85, 126, 175]);
+      // ⚠️ On ne retire jamais plus qu'il n'y a : « l'école possède 150
+      // feuilles, elle en utilise 175 » était un énoncé impossible, et la
+      // phrase-réponse annonçait « il reste −25 feuilles ».
+      const retire = randomChoice([35, 85, 126, 175].filter((r) => r < total));
       const reste = total - retire;
 
       return {
@@ -2729,7 +2747,10 @@ export const problemesBank: TutorBankItemV4[] = [
     ],
     generate: () => {
       const total = randomChoice([150, 240, 360, 500]);
-      const retire = randomChoice([35, 85, 126, 175]);
+      // ⚠️ On ne retire jamais plus qu'il n'y a : « l'école possède 150
+      // feuilles, elle en utilise 175 » était un énoncé impossible, et la
+      // phrase-réponse annonçait « il reste −25 feuilles ».
+      const retire = randomChoice([35, 85, 126, 175].filter((r) => r < total));
       const reste = total - retire;
 
       return {
@@ -3527,11 +3548,18 @@ export const problemesBank: TutorBankItemV4[] = [
       return {
         text: `On achète ${groupes} paquets de ${parGroupe} cartes, puis on donne ${retire} cartes. Combien de cartes reste-t-il ?`,
         format: "qcm",
-        choices: makeChoices(String(reste), [
-          String(total),
-          String(groupes + parGroupe - retire),
-          String(groupes * (parGroupe - retire)),
-        ]),
+        // Les deux pièges d'étourderie passent sous zéro dès que le retrait
+        // dépasse le contenu d'un paquet : on les écarte alors.
+        choices: makeChoices(
+          String(reste),
+          piegesPositifs([
+            total,
+            groupes + parGroupe - retire,
+            groupes * (parGroupe - retire),
+            reste + retire * 2,
+            total + retire,
+          ]),
+        ),
         expected: [String(reste)],
         comparator: "mcq_exact",
         explanation: exp(

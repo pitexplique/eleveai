@@ -17,6 +17,23 @@
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -329,15 +346,19 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
       const dx = randomInt(1, 5), dy = randomInt(1, 5), dz = randomInt(1, 5);
       const bx = ax + dx, by = ay + dy, bz = az + dz;
       const correct = `$(${dx}\\,;${dy}\\,;${dz})$`;
+      // Quand la cote de A vaut le déplacement en z, « on a recopié une
+      // coordonnée du point » donne la bonne réponse : deux pièges de secours.
       const distracteurs = [
         `$(${bx}\\,;${by}\\,;${bz})$`,
         `$(${-dx}\\,;${-dy}\\,;${-dz})$`,
         `$(${dx}\\,;${dy}\\,;${az})$`,
+        `$(${dz}\\,;${dy}\\,;${dx})$`,
+        `$(${dx}\\,;${dy}\\,;${dz + 1})$`,
       ];
       return {
         text: `Soit $A(${ax}\\,;${ay}\\,;${az})$ et $B(${bx}\\,;${by}\\,;${bz})$. Quelles sont les coordonnées de $\\overrightarrow{AB}$ ?`,
         format: "qcm",
-        choices: [correct, ...distracteurs].sort(() => Math.random() - 0.5),
+        choices: makeChoices(correct, distracteurs),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(

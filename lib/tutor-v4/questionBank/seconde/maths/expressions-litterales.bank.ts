@@ -11,6 +11,23 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -232,9 +249,15 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "expressions", "modeliser", "template"],
     generate: () => {
       const k = randomInt(2, 6);
-      const b = randomInt(1, 9);
+      // Le coefficient et la constante doivent différer : sinon « on a
+      // interverti les deux nombres » s'écrit comme la bonne réponse.
+      const b = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9].filter((v) => v !== k))[0];
       const correct = `$${k}x + ${b}$`;
-      const choices = [correct, `$${k}(x + ${b})$`, `$${b}x + ${k}$`, `$x + ${k + b}$`];
+      const choices = makeChoices(correct, [
+        `$${k}(x + ${b})$`,
+        `$${b}x + ${k}$`,
+        `$x + ${k + b}$`,
+      ]);
       return {
         text: `Comment s'écrit « le produit de ${k} par $x$, augmenté de ${b} » ?`,
         format: "qcm",
@@ -777,9 +800,16 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "expressions", "reduire", "template"],
     generate: () => {
       const a = randomInt(2, 6);
-      const b = randomInt(2, 6);
+      // $2 + 2$ et $2 \times 2$ valent tous deux 4 : le piège « on a multiplié
+      // au lieu d'additionner » devenait la bonne réponse.
+      let b = randomInt(2, 6);
+      while (a === 2 && b === 2) b = randomInt(2, 6);
       const correct = `$${a + b}x$`;
-      const choices = [correct, `$${a * b}x$`, `$${a + b}x^2$`, `$${a + b}$`];
+      const choices = makeChoices(correct, [
+        `$${a * b}x$`,
+        `$${a + b}x^2$`,
+        `$${a + b}$`,
+      ]);
       return {
         text: `Réduis l'expression $${a}x + ${b}x$.`,
         format: "qcm",

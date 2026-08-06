@@ -13,6 +13,23 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
+// finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
+// (a = b, un coefficient nul, une fraction qui se simplifie…). L'élève voyait
+// alors deux fois la même ligne. On met la bonne réponse de côté, on tire trois
+// pièges réellement distincts, puis on mélange l'ensemble.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -235,12 +252,15 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     generate: () => {
       const n = randomInt(2, 9);
       const correct = `$x^2 + ${2 * n}x + ${n * n}$`;
-      const choices = [
-        correct,
+      // À $n = 2$, le carré et le double valent tous deux 4 : le piège « on a
+      // recopié le double produit au lieu du carré » devenait la bonne
+      // réponse. D'où le quatrième piège, gardé en réserve.
+      const choices = makeChoices(correct, [
         `$x^2 + ${n * n}$`,
         `$x^2 + ${n}x + ${n * n}$`,
         `$x^2 + ${2 * n}x + ${2 * n}$`,
-      ];
+        `$x^2 + ${2 * n}x - ${n * n}$`,
+      ]);
       return {
         text: `Quelle est la forme développée de $(x + ${n})^2$ ?`,
         format: "qcm",
