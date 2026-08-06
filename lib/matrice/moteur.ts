@@ -13,6 +13,7 @@
 // On ne renvoie jamais plus de trois ressources : au-delà, on a recréé le
 // catalogue qu'on voulait enterrer.
 
+import { intentionDeLaChip } from "./chips";
 import { notionCoach, urlCoachCiblee } from "./coach";
 import { MARQUEURS_INTENTION, NOTIONS } from "./lexique";
 import { getProfil, chipsPour } from "./profils";
@@ -90,7 +91,12 @@ function expressionPresente(mots: string[], expression: string): boolean {
 
 export function lireIntention(vecteur: VecteurEntree): Intention | null {
   // La chip a toujours raison : la personne l'a cliquée exprès.
+  // Les chips viennent des ressources réelles (chips.ts) ; on garde la table
+  // historique de profils.ts en repli, pour ne pas casser un libellé mémorisé
+  // dans un historique ou partagé dans un lien.
   if (vecteur.chip) {
+    const parRessources = intentionDeLaChip(vecteur.quiEsTu, vecteur.chip);
+    if (parRessources) return parRessources;
     const chip = chipsPour(vecteur.quiEsTu).find((c) => c.label === vecteur.chip);
     if (chip) return chip.intention;
   }

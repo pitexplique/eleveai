@@ -10,7 +10,11 @@
 
 import { usePathname } from "next/navigation";
 
-const SANS_HABILLAGE = ["/embed", "/ia"];
+// 06/08/2026 : /accueil rejoint la liste. La refonte lui donne sa propre
+// colonne de gauche et son propre pied de page minimal ; l'habillage du site
+// par-dessus lui remettrait exactement ce qu'on vient d'en retirer — le 🗞️,
+// les rubriques, le pied de page long. Une page d'entrée se suffit.
+const SANS_HABILLAGE = ["/embed", "/ia", "/accueil"];
 
 export default function MasqueSurEmbed({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

@@ -13,7 +13,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { track } from "@vercel/analytics";
-import { PROFILS, chipsPour, exemplesPour, getProfil } from "@/lib/matrice/profils";
+import { PROFILS, exemplesPour, getProfil } from "@/lib/matrice/profils";
+import { CHIPS_VISIBLES, chipsDisponibles } from "@/lib/matrice/chips";
 import { chercher, libelleIntention } from "@/lib/matrice/moteur";
 import type { ProfilId, ResultatMatrice } from "@/lib/matrice/types";
 
@@ -43,6 +44,7 @@ export default function EntreeMatrice({
   const [chip, setChip] = useState<string | null>(null);
   const [resultat, setResultat] = useState<ResultatMatrice | null>(null);
   const [demandeProfil, setDemandeProfil] = useState(false);
+  const [plusDOptions, setPlusDOptions] = useState(false);
   const [historique, setHistorique] = useState<EntreeHistorique[]>([]);
   const champ = useRef<HTMLInputElement>(null);
 
@@ -54,6 +56,14 @@ export default function EntreeMatrice({
       if (p && PROFILS.some((x) => x.id === p)) {
         setProfil(p as ProfilId);
         setProfilChoisi(true);
+        // Une demande rappelée depuis la colonne de gauche (?q=…) repart
+        // aussitôt : cliquer dans l'historique doit refaire la recherche, pas
+        // seulement remplir le champ.
+        const q = new URLSearchParams(window.location.search).get("q");
+        if (q) {
+          setQuestion(q);
+          setResultat(chercher({ quiEsTu: p as ProfilId, question: q, chip: null }));
+        }
       }
       if (!surAccueil) {
         const h = localStorage.getItem(CLE_HISTORIQUE);
@@ -65,7 +75,14 @@ export default function EntreeMatrice({
   }, [surAccueil]);
 
   const p = useMemo(() => getProfil(profil), [profil]);
-  const chips = useMemo(() => chipsPour(profil), [profil]);
+  // Les chips viennent des ressources réellement publiables pour ce profil —
+  // pas d'une liste de fonctionnalités souhaitées. Une intention sans ressource
+  // n'apparaît pas.
+  const toutesLesChips = useMemo(() => chipsDisponibles(profil), [profil]);
+  const chips = useMemo(
+    () => (plusDOptions ? toutesLesChips : toutesLesChips.slice(0, CHIPS_VISIBLES)),
+    [toutesLesChips, plusDOptions],
+  );
   const exemples = useMemo(() => exemplesPour(profil), [profil]);
 
   const lancer = useCallback(
@@ -154,6 +171,7 @@ export default function EntreeMatrice({
     setProfilChoisi(true);
     setDemandeProfil(false);
     setChip(null);
+    setPlusDOptions(false);
     try {
       localStorage.setItem(CLE_PROFIL, id);
     } catch {
@@ -335,6 +353,19 @@ export default function EntreeMatrice({
             </button>
           );
         })}
+        {toutesLesChips.length > CHIPS_VISIBLES && (
+          <button
+            type="button"
+            onClick={() => setPlusDOptions((v) => !v)}
+            className={`rounded-full px-3 py-1.5 text-[13px] underline underline-offset-2 transition ${
+              surAccueil ? "text-[#1d1c16]/60 hover:text-[#1d1c16]" : "text-slate-500 hover:text-slate-800"
+            }`}
+          >
+            {plusDOptions
+              ? "Moins d'options"
+              : `Plus d'options (${toutesLesChips.length - CHIPS_VISIBLES})`}
+          </button>
+        )}
       </div>
 
       {/* ── Ce qu'on a trouvé ───────────────────────────────────────────── */}
