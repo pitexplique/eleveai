@@ -148,7 +148,7 @@ function MatieresMenu({ pathname, paper }: { pathname: string; paper: boolean })
           "inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition",
           paper
             ? active
-              ? "bg-[#1d1c16] text-[#d8e9ee] shadow"
+              ? "bg-teal-700 text-white shadow"
               : "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10 hover:text-[#1d1c16]"
             : active
               ? "bg-white text-[#041B33] shadow-lg"
@@ -328,7 +328,22 @@ export default function Header() {
           : "sticky top-0 z-50 border-b border-cyan-300/20 bg-gradient-to-r from-[#041B33]/95 via-[#062A4F]/95 to-[#073B63]/95 shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-xl"
       }
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+      {/* ⭐ SUR L'ACCUEIL, LE HEADER VA D'UN BORD À L'AUTRE (06/08).
+          Le conteneur de 1 280 px centré vient du journal, où la page entière
+          était centrée et où rien ne vivait sur les bords. Depuis que l'accueil
+          a sa colonne de gauche, ce centrage laissait un coin vide en haut à
+          gauche — au-dessus de la colonne — et faisait flotter l'epsilon au
+          milieu de nulle part. À pleine largeur, la marque se pose à gauche,
+          au-dessus de la colonne, et la navigation part à droite.
+          ⚠️ Sans risque pour le calage à 1 024 px : en dessous de 1 280,
+          `max-w-7xl` ne contraignait rien. Seuls les grands écrans changent. */}
+      <nav
+        className={
+          paper
+            ? "flex w-full items-center justify-between px-4 py-3"
+            : "mx-auto flex max-w-7xl items-center justify-between px-4 py-3"
+        }
+      >
 
         {/* Logo */}
         <Link prefetch={false} href="/accueil" className="group flex shrink-0 items-center gap-3 rounded-full pr-1 transition hover:brightness-110">
@@ -408,7 +423,7 @@ export default function Header() {
                   className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition ${
                     paper
                       ? isActive(pathname, c.href)
-                        ? "bg-[#1d1c16] text-[#d8e9ee] shadow"
+                        ? "bg-teal-700 text-white shadow"
                         : "bg-[#1d1c16]/10 text-[#1d1c16] hover:bg-[#1d1c16]/20"
                       : isActive(pathname, c.href)
                         ? c.active
@@ -429,7 +444,7 @@ export default function Header() {
                   "inline-flex items-center gap-1.5 rounded-full px-2.5 py-2 text-sm font-black transition xl:px-3.5",
                   paper
                     ? d.space === space
-                      ? "bg-[#1d1c16] text-[#d8e9ee] shadow"
+                      ? "bg-teal-700 text-white shadow"
                       : "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10 hover:text-[#1d1c16]"
                     : d.space === space
                       ? "bg-white text-[#041B33] shadow-lg"
@@ -446,7 +461,7 @@ export default function Header() {
               <Link prefetch={false}
                 href={dashboardHref}
                 className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-black shadow-lg hover:brightness-110 ${
-                  paper ? "bg-[#1d1c16] text-[#d8e9ee]" : `${dashboardColor} text-[#041B33]`
+                  paper ? "bg-teal-700 text-white" : `${dashboardColor} text-[#041B33]`
                 }`}
               >
                 <GraduationCap className="h-4 w-4" />
@@ -469,7 +484,7 @@ export default function Header() {
               href="/auth/signin?mode=eleve"
               className={`ml-1 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-black shadow-lg transition hover:brightness-110 ${
                 paper
-                  ? "bg-[#1d1c16] text-[#d8e9ee] hover:bg-cyan-800"
+                  ? "bg-teal-700 text-white hover:bg-cyan-800"
                   : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
               }`}
             >
@@ -495,7 +510,7 @@ export default function Header() {
               href="/auth/signin?mode=eleve"
               className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-black shadow-lg ${
                 paper
-                  ? "bg-[#1d1c16] text-[#d8e9ee]"
+                  ? "bg-teal-700 text-white"
                   : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
               }`}
             >
@@ -577,7 +592,7 @@ export default function Header() {
                 href="/auth/signin?mode=eleve"
                 className={`flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-black shadow ${
                   paper
-                    ? "bg-[#1d1c16] text-[#d8e9ee]"
+                    ? "bg-teal-700 text-white"
                     : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
                 }`}
               >
