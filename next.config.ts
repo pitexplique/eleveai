@@ -5,6 +5,18 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // /ia a été le banc d'essai de la nouvelle entrée (05/08/2026), le temps
+      // de la comparer à l'ancien accueil sans y toucher. Le 06/08 l'entrée EST
+      // devenue l'accueil : garder les deux, c'était deux pages à faire vivre
+      // pour un seul geste, et celle du test n'avait même plus la colonne.
+      // 301 plutôt qu'une 404 : la page était en noindex, donc rien à sauver
+      // côté moteurs, mais elle a tourné deux jours et quelqu'un peut l'avoir
+      // en marque-page ou l'avoir passée à un collègue.
+      {
+        source: "/ia",
+        destination: "/",
+        permanent: true,
+      },
       // Renommage kit-de-survie → guide-de-survie (26/07/2026) : l'ancienne
       // URL a vécu ~1 jour dans le sitemap et l'accueil — 301 pour préserver
       // l'indexation et les liens déjà partagés (même règle que cartes-vacances).

@@ -74,6 +74,10 @@ export default function AccueilIA() {
           </header>
 
           <Suspense fallback={<div className="h-64" aria-hidden="true" />}>
+            {/* L'entrée n'affiche plus l'historique sous la recherche : c'est
+                la colonne de gauche qui le porte, et lui seul. Sur téléphone
+                la colonne devient un tiroir (bouton ☰) — le RÉCENT reste donc
+                atteignable, à un geste plutôt qu'à zéro. */}
             <EntreeMatrice variante="page" />
           </Suspense>
 

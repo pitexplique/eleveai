@@ -4,8 +4,10 @@
 //
 // Le même composant sert à deux endroits, et c'est voulu — une seule entrée,
 // pas deux qui divergeraient :
-//   — variante « page »    : /ia, l'écran complet, avec l'historique ;
-//   — variante « accueil » : en tête du journal, compacte, sans historique.
+//   — variante « page »    : l'accueil, en plein écran ;
+//   — variante « accueil » : en tête du journal, compacte.
+// (Une troisième vie a existé du 05 au 06/08/2026 : la route de test /ia, morte
+//  le jour où l'entrée est devenue l'accueil — un seul geste, un seul endroit.)
 //
 // Aucun appel d'API : tout se joue dans lib/matrice/moteur.ts. La même phrase
 // donne toujours la même réponse, et on peut dire pourquoi.
@@ -547,30 +549,12 @@ export default function EntreeMatrice({
         </div>
       )}
 
-      {/* ── Tes dernières demandes (seulement sur /ia) ──────────────────── */}
-      {!surAccueil && historique.length > 0 && (
-        <div className="mt-12 border-t border-slate-200 pt-6">
-          <h2 className="mb-3 text-xs font-medium uppercase tracking-wide text-slate-400">
-            {eleve ? "Tes dernières demandes" : "Vos dernières demandes"}
-          </h2>
-          <ul className="space-y-1">
-            {historique.map((h) => (
-              <li key={`${h.quand}-${h.question}`}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setQuestion(h.question);
-                    lancer(h.question, null);
-                  }}
-                  className="text-left text-sm text-slate-600 hover:text-teal-800 hover:underline"
-                >
-                  {h.question}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {/* ⛔ PAS D'HISTORIQUE ICI (retiré le 06/08/2026). Il vivait sous la
+          recherche du temps de /ia, qui n'avait rien d'autre pour le porter.
+          Depuis que l'entrée est l'accueil, la colonne de gauche l'affiche —
+          et il apparaissait deux fois sur le même écran. Un seul endroit pour
+          revenir sur ses pas : le RÉCENT, à gauche. `historique` reste, il
+          continue de s'écrire dans localStorage : c'est lui que la colonne lit. */}
     </section>
   );
 }
