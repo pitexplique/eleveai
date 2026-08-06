@@ -98,18 +98,11 @@ export default function DirectionClient() {
 
             <div className="space-y-4">
 
-              {/* LIEN OFFRE PILOTE */}
-              <Link
-                href="/formation/pilote"
-                className="block p-4 rounded-lg bg-slate-950 border border-emerald-500/40 hover:bg-slate-900 transition"
-              >
-                <h3 className="text-emerald-300 font-semibold">
-                  Offre Pilote & Formations IA
-                </h3>
-                <p className="text-xs text-slate-300 mt-1">
-                  Licences 1 490 € / 2 490 €, accompagnement, charte IA, sécurité.
-                </p>
-              </Link>
+              {/* ⛔ LIEN « OFFRE PILOTE » RETIRÉ LE 06/08/2026, avec la page.
+                  `/formation/pilote` annonçait des licences à 1 490 € et 2 490 €.
+                  La page partie, le lien serait devenu une porte sur un mur — et
+                  une porte qui promet un tarif fait pire que ne rien promettre.
+                  Les 628 lignes restent dans l'historique git si l'offre revient. */}
 
               {/* LIEN TABLEAU DE BORD */}
               <Link

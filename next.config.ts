@@ -5,6 +5,18 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // /presets était une bibliothèque de prompts guidés. Frédéric, 06/08 :
+      // « ne sert plus à rien, plus aucun intérêt ». Elle était orpheline —
+      // absente du sitemap, aucun lien du site n'y menait — donc elle ne vivait
+      // plus que pour qui avait gardé l'adresse. 301 vers /enseignants, la page
+      // qui parle aujourd'hui à ceux qu'elle visait.
+      // ⚠️ La TABLE Supabase des presets n'est pas touchée : seule l'interface
+      // s'en va. Si le sujet revient, les données sont là.
+      {
+        source: "/presets",
+        destination: "/enseignants",
+        permanent: true,
+      },
       // /ia a été le banc d'essai de la nouvelle entrée (05/08/2026), le temps
       // de la comparer à l'ancien accueil sans y toucher. Le 06/08 l'entrée EST
       // devenue l'accueil : garder les deux, c'était deux pages à faire vivre
