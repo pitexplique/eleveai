@@ -240,7 +240,18 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "La dictée du jour",
     promesse: "Cinq mots dictés, chaque jour, avec la série qui monte.",
     url: "/dictee-du-jour",
-    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"],
+    // ⭐ LE LYCÉE ENTRE (07/08, Frédéric : « tu as oublié français dans
+    // matières ! »). Ce n'était pas un trou de contenu mais un OUBLI DE
+    // DÉCLARATION — exactement le même que « Terminale spé » pour le calcul
+    // rapide, et il coûtait beaucoup plus cher : le français DISPARAISSAIT
+    // entièrement de la rangée des matières en Première et en Terminale.
+    // (En Seconde il tenait encore, par le repli sur les ressources de 3ᵉ.)
+    //
+    // Vérifié avant d'ouvrir, pas supposé : `lib/dictee-du-jour/parNiveau.ts`
+    // dérive ses niveaux du Dico et dit « CP → Terminale, SANS TROU » ;
+    // `motsDeLaClasse` rend 30 mots en 2ⁿᵈᵉ, 30 en 1ʳᵉ, 60 en Terminale, et
+    // `classeVersNiveau` traduit déjà seconde / premiere-spe / terminale-spe.
+    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
     matiere: "francais",
     notions: ["orthographe"],
     intentions: ["rituel", "entrainer"],

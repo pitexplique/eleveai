@@ -243,6 +243,20 @@ const LIBELLE_MATIERE: Record<string, string> = {
  */
 const MATIERES_MASQUEES = new Set<string>();
 
+/**
+ * L'ORDRE DES MATIÈRES, ÉCRIT — pas déduit du nombre de ressources.
+ *
+ * ⭐ Fixé le 07/08 (Frédéric : « Mathématiques Français Anglais Espagnol IA »).
+ * Le tri se faisait sur le NOMBRE de ressources derrière chaque matière, et
+ * l'ordre changeait donc d'un niveau à l'autre : le français était deuxième au
+ * collège, troisième en Seconde, et DERNIER en Première et en Terminale. Une
+ * rangée qui se réordonne toute seule oblige à relire les cinq boutons à chaque
+ * changement de classe.
+ *
+ * C'est l'ordre du bulletin, et c'est celui que tout le monde a en tête.
+ */
+const ORDRE_MATIERES: string[] = ["maths", "francais", "anglais", "espagnol", "ia"];
+
 export function matieresDisponibles(profil: ProfilId | null): ChipMatiere[] {
   const compte = new Map<Matiere, number>();
   for (const r of ressourcesPour(profil)) {
@@ -254,9 +268,14 @@ export function matieresDisponibles(profil: ProfilId | null): ChipMatiere[] {
     compte.set(r.matiere, (compte.get(r.matiere) ?? 0) + 1);
   }
 
+  const rangMatiere = (m: string) => {
+    const r = ORDRE_MATIERES.indexOf(m);
+    return r < 0 ? ORDRE_MATIERES.length : r;
+  };
+
   return [...compte.entries()]
     .map(([matiere, nombre]) => ({ matiere, nombre, label: LIBELLE_MATIERE[matiere] ?? matiere }))
-    .sort((a, b) => b.nombre - a.nombre || a.label.localeCompare(b.label));
+    .sort((a, b) => rangMatiere(a.matiere) - rangMatiere(b.matiere) || a.label.localeCompare(b.label));
 }
 
 // ─── LA CHIP COMPOSITE ─────────────────────────────────────────────────────

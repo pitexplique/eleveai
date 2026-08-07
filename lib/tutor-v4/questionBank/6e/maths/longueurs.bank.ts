@@ -1327,8 +1327,9 @@ export const longueursBank: TutorBankItemV4[] = [
 
   // ===== TOP-UP — AIRE_LONGUEUR_MESURER =====
   { kind: "fixed", id: "aire_longueur_mesurer_topup_1", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_mesurer", difficulty: 1, theme: "neutral",
-    text: "Combien y a-t-il de mètres dans 1 kilomètre ?", format: "short", expected: ["1000", "1 000"], comparator: "number_equal",
-    hint: "Le préfixe kilo- veut dire mille.", explanation: expl("Le préfixe kilo- signifie mille : 1 kilomètre contient 1 000 mètres."), tags: ["aire_longueur", "mesure", "conversion"] },
+    text: "Combien y a-t-il de centimètres dans 1 kilomètre ?", format: "short", expected: ["100000", "100 000"], comparator: "number_equal",
+    hint: "Passe par le mètre : combien de mètres dans 1 km, puis combien de cm dans 1 m ?",
+    explanation: expl("On enchaîne deux conversions. Un kilomètre contient 1 000 mètres, et chaque mètre contient 100 centimètres : 1 000 × 100 = 100 000 centimètres."), tags: ["aire_longueur", "mesure", "conversion"] },
   { kind: "fixed", id: "aire_longueur_mesurer_topup_2", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_mesurer", difficulty: 1, theme: "neutral",
     text: "Combien y a-t-il de millimètres dans 1 mètre ?", format: "short", expected: ["1000", "1 000"], comparator: "number_equal",
     hint: "1 m = 100 cm, et chaque centimètre vaut 10 mm.", explanation: expl("Un mètre contient 100 centimètres, et chaque centimètre contient 10 millimètres : 100 × 10 = 1 000 millimètres."), tags: ["aire_longueur", "mesure", "conversion"] },
