@@ -486,25 +486,25 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_condition",
     difficulty: 3,
     theme: "neutral",
-    text: "La variable x vaut 7. La condition “x = 7” est-elle vraie ?",
+    text: "La variable x vaut 12. La condition “x > 12” est-elle vraie ?",
     format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
+    choices: ["non", "oui"],
+    expected: ["non"],
     comparator: "mcq_exact",
-    hint: "Le signe = teste si les deux valeurs sont identiques.",
+    hint: "« Strictement plus grand » exclut la valeur elle-même.",
     explanation:
-      "Définition : une condition d’égalité vérifie si deux valeurs sont identiques.\n\n" +
-      "Méthode : on compare la valeur de x avec 7.\n\n" +
-      "Exécution : x vaut 7, donc x = 7 est vrai.\n\n" +
-      "Conclusion : la condition est vraie.",
-    tags: ["algo_programmation", "condition", "egalite", "qcm"],
-    canvas: scratchCanvas("Condition d’égalité", [
+      "Définition : une condition compare deux valeurs et vaut vrai ou faux.\n\n" +
+      "Méthode : on compare la valeur de x avec 12.\n\n" +
+      "Exécution : x vaut exactement 12. Or « x > 12 » demande STRICTEMENT plus grand : 12 n’est pas plus grand que 12, donc la condition est fausse. Écrite « x ≥ 12 », elle aurait été vraie.\n\n" +
+      "Conclusion : la condition est fausse.",
+    tags: ["algo_programmation", "condition", "comparaison", "piege", "qcm"],
+    canvas: scratchCanvas("Condition de comparaison", [
       { type: "event" },
-      { type: "set_variable", variable: "x", value: 7 },
+      { type: "set_variable", variable: "x", value: 12 },
       {
         type: "if",
-        condition: "x = 7",
-        children: [{ type: "say", text: "Exact" }],
+        condition: "x > 12",
+        children: [{ type: "say", text: "Plus grand" }],
       },
     ]),
   },
@@ -561,16 +561,16 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_condition",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique ce qu’est une condition dans un programme.",
+    text: "Explique la différence entre les conditions “score > 10” et “score ≥ 10”.",
     format: "open",
-    expected: ["vrai", "faux", "test", "si"],
+    expected: ["10", "égal", "egal", "strictement", "compte pas", "inclut"],
     comparator: "contains_keyword",
-    hint: "Utilise les mots vrai, faux et si.",
+    hint: "Que se passe-t-il si score vaut exactement 10 ?",
     explanation:
       "Définition : une condition est un test logique qui peut être vrai ou faux.\n\n" +
-      "Méthode : le programme vérifie la condition avant d’exécuter certains blocs.\n\n" +
-      "Exécution : dans “si score > 10”, le programme teste si score est supérieur à 10.\n\n" +
-      "Conclusion : une condition permet au programme de prendre une décision.",
+      "Méthode : on regarde ce qui arrive à la valeur limite, celle qui sépare les deux cas.\n\n" +
+      "Exécution : si score vaut 12, les deux conditions sont vraies. Si score vaut 9, les deux sont fausses. Tout se joue sur 10 : « score > 10 » est FAUSSE, car 10 n’est pas strictement plus grand que 10, alors que « score ≥ 10 » est VRAIE.\n\n" +
+      "Conclusion : les deux conditions ne diffèrent que sur une seule valeur — mais c’est souvent celle-là qui décide.",
     tags: ["algo_programmation", "condition", "open", "vocabulaire"],
   },
 
@@ -587,22 +587,22 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_instruction_conditionnelle",
     difficulty: 2,
     theme: "neutral",
-    text: "Un bloc “si ... alors” permet...",
+    text: "Dans un bloc “si ... alors ... sinon”, que se passe-t-il quand la condition est fausse ?",
     format: "qcm",
     choices: [
-      "d’exécuter des instructions seulement si une condition est vraie",
-      "de toujours exécuter toutes les instructions",
-      "de supprimer une variable",
-      "de répéter un bloc exactement 10 fois",
+      "seules les instructions du “sinon” sont exécutées",
+      "aucune instruction n’est exécutée",
+      "les deux parties sont exécutées l’une après l’autre",
+      "le programme s’arrête",
     ],
-    expected: ["d’exécuter des instructions seulement si une condition est vraie"],
+    expected: ["seules les instructions du “sinon” sont exécutées"],
     comparator: "mcq_exact",
-    hint: "Le mot important est “si”.",
+    hint: "Le “sinon” est là précisément pour ce cas.",
     explanation:
-      "Définition : une instruction conditionnelle dépend d’une condition.\n\n" +
-      "Méthode : on teste la condition avant d’exécuter les blocs à l’intérieur.\n\n" +
-      "Exécution : si la condition est vraie, les blocs sont exécutés ; sinon, ils sont ignorés.\n\n" +
-      "Conclusion : un bloc “si” exécute des instructions seulement si la condition est vraie.",
+      "Définition : une instruction conditionnelle choisit entre deux chemins.\n\n" +
+      "Méthode : on teste la condition, puis on suit UN SEUL des deux chemins.\n\n" +
+      "Exécution : condition vraie, le programme exécute la partie “alors” et saute le “sinon”. Condition fausse, il saute le “alors” et exécute le “sinon”. Jamais les deux.\n\n" +
+      "Conclusion : le “sinon” sert exactement à ça — dire quoi faire quand la condition n’est pas remplie.",
     tags: ["algo_programmation", "conditionnelle", "si", "qcm"],
     canvas: scratchCanvas("Instruction conditionnelle", [
       { type: "event" },

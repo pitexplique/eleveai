@@ -716,14 +716,14 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "quadrilatere_parallelogramme_aire",
     difficulty: 2,
     theme: "neutral",
-    text: "Calculer l’aire d’un parallélogramme de base 8 cm et de hauteur 5 cm.",
+    text: "Un parallélogramme a une aire de 42 cm² et une base de 7 cm. Quelle est sa hauteur, en cm ?",
     format: "short",
-    expected: ["40"],
+    expected: ["6"],
     comparator: "number_equal",
-    hint: "Aire du parallélogramme = base × hauteur.",
+    hint: "Si base × hauteur = aire, alors hauteur = aire ÷ base.",
     explanation: "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
           "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
-          ("A = 8 × 5 = 40.") +
+          ("L’aire vaut base × hauteur. On remonte donc par la division : 42 ÷ 7 = 6. La hauteur mesure 6 cm.") +
           "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
     tags: ["parallelogramme", "aire"],
   },
@@ -798,15 +798,15 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "quadrilatere_parallelogramme_aire",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi on utilise la hauteur et non le côté incliné pour calculer l’aire d’un parallélogramme.",
+    text: "Deux parallélogrammes ont la même base et la même hauteur, mais l’un est beaucoup plus penché que l’autre. Ont-ils la même aire ? Explique.",
     format: "open",
-    expected: ["base", "hauteur", "côté incliné"],
+    expected: ["oui", "même", "meme", "base", "hauteur", "penché", "penche"],
     comparator: "contains_keyword",
-    hint: "La hauteur est perpendiculaire à la base.",
+    hint: "Quels sont les deux nombres qui entrent dans le calcul de l’aire ?",
     explanation:
       "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
           "Méthode : on utilise la propriété du parallélogramme qui correspond aux données de l’énoncé.\n\nCalcul : " +
-          ("L’aire d’un parallélogramme se calcule avec base × hauteur. Le côté incliné n’est pas forcément perpendiculaire à la base, donc ce n’est pas la hauteur.") +
+          ("Oui, ils ont la même aire. Seules la base et la hauteur entrent dans le calcul : l’inclinaison n’y figure pas. Pencher un parallélogramme allonge son côté incliné, mais ne change ni sa base ni sa hauteur — donc ni son aire.") +
           "\n\nConclusion : la propriété choisie permet de conclure sur la figure.",
     tags: ["parallelogramme", "aire", "open", "erreur"],
   },
