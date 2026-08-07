@@ -993,15 +993,29 @@ export default function SignInPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#041B33] via-[#062A4F] to-[#041B33]" />
 
           <div className="relative z-10 flex h-full flex-col justify-center px-10 py-12 lg:px-14">
+            {/* ⭐ LA MÊME PHRASE QUE L'ACCUEIL, AU MOT PRÈS. Une promesse dite
+                deux fois de deux façons, c'est une promesse qu'on cesse de
+                croire — et cette page-ci est le moment exact où l'on décide de
+                donner son adresse.
+                ⚠️ SANS PRONOM. L'accueil tutoie (« te propose ») parce qu'il
+                s'adresse d'abord à un élève ; le formulaire de gauche vouvoie
+                (« Entrez votre adresse email ») parce qu'il sert aussi aux
+                parents, aux profs et aux principaux. Écrire « te » ici mettrait
+                deux voix sur le même écran. La promesse se dit donc à la
+                troisième personne, et les quatre étapes vouvoient comme le
+                formulaire. */}
             <h2 className="text-3xl font-black leading-tight">
-              Dites qui vous êtes.
+              Des ressources pédagogiques
               <br />
-              EleveAI cherche à votre place.
+              conçues, sélectionnées et vérifiées.
             </h2>
-            <p className="mt-3 max-w-md text-sm font-semibold leading-relaxed text-slate-300">
+            <p className="mt-2 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-300">
+              Conçues à La Réunion
+            </p>
+            <p className="mt-4 max-w-md text-sm font-semibold leading-relaxed text-slate-300">
               Pas de catalogue à explorer, pas de niveau à deviner. Vous dites
-              ce que vous cherchez, on vous propose ce qui existe vraiment pour
-              vous.
+              ce que vous cherchez, EleveAI va chercher parmi ce qui existe
+              vraiment pour vous.
             </p>
 
             <ol className="mt-8 space-y-5">
@@ -1041,17 +1055,19 @@ export default function SignInPage() {
               ))}
             </ol>
 
-            {/* La promesse de qualité — la même phrase que sur l'accueil, au
-                mot près. Deux formulations différentes du même engagement, et
-                c'est l'engagement qu'on cesse de croire. */}
+            {/* Ce que les trois mots veulent dire, une fois qu'on les a lus en
+                titre. C'est là que la promesse devient vérifiable — sinon ce
+                sont trois adjectifs de plus. */}
             <div className="mt-8 rounded-2xl border border-cyan-300/25 bg-cyan-300/10 p-4">
-              <p className="text-sm font-black leading-snug text-white">
-                Des ressources conçues, sélectionnées et vérifiées.
-              </p>
-              <p className="mt-1.5 text-xs font-semibold leading-relaxed text-slate-300">
-                Écrites ici pour la plupart, choisies ailleurs pour le reste — et
-                dans les deux cas relues par un enseignant avant d&apos;être
-                proposées à qui que ce soit.
+              <p className="text-xs font-semibold leading-relaxed text-slate-200">
+                <span className="font-black text-white">Conçues</span> — les
+                coachs, les parcours, les cahiers et les guides sont écrits ici,
+                par un enseignant en poste.{" "}
+                <span className="font-black text-white">Sélectionnées</span> —
+                le reste vient d&apos;ailleurs, et n&apos;entre que si ça tient.{" "}
+                <span className="font-black text-white">Vérifiées</span> — dans
+                les deux cas, relues avant d&apos;être proposées à qui que ce
+                soit. Ce qui n&apos;est pas relu n&apos;est pas recommandé.
               </p>
             </div>
 
