@@ -535,7 +535,22 @@ export default function Header() {
           ⚠️ SUR L'ACCUEIL, LE HEADER VA D'UN BORD À L'AUTRE (06/08). Le
           conteneur de 1 280 px centré vient du journal ; depuis que l'accueil a
           sa colonne de gauche, il laissait un coin vide au-dessus d'elle.
-          Sans effet sous 1 280 px : seuls les grands écrans changent. */}
+          Sans effet sous 1 280 px : seuls les grands écrans changent.
+
+          ── MESURÉ LE 07/08, et à ne PAS « corriger » ──────────────────────
+          À 1 440 px : écart de centrage 0 px, débordement 0. Exact.
+          À 1 024 px — la largeur d'un iPad en paysage, celle qui a déjà cassé
+          deux fois — débordement 0 lui aussi, mais le centre est 22 px à
+          gauche du milieu. Raison : la zone de droite (245 px) est plus large
+          que sa colonne `1fr` (223 px) ; une piste `1fr` ne descend pas sous
+          son contenu, elle prend donc de la place à celle de gauche et la
+          symétrie se perd.
+          ⛔ La tentation est d'écrire `minmax(0,1fr)` sur les côtés. NE PAS LE
+          FAIRE : les pistes deviendraient égales, mais la zone de droite
+          déborderait de la sienne — et elle irait mordre sur la navigation, à
+          la largeur exacte où l'on s'est déjà fait avoir. 22 px sur 1 009,
+          c'est 2 % : invisible, et ça se résorbe tout seul dès qu'il y a de la
+          place. On préfère un centrage imparfait à un chevauchement. */}
       <nav
         className={[
           "grid grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 py-2.5",
