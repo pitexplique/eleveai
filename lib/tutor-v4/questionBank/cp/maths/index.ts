@@ -1,9 +1,16 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { microSkills } from "@/lib/tutor-v4/knowledge/maths/cp/microSkills";
 import { buildCycle2QuestionBank } from "@/lib/tutor-v4/questionBank/cycle2/maths/buildCycle2Bank";
+import { applyMathsKeyboardFree } from "../../mathsKeyboardFreeTransform";
 
-export const mathsCpQuestionBank: TutorBankItemV4[] =
-  buildCycle2QuestionBank("cp", microSkills);
+// Pas de clavier au CP : on clique. Le principal l'avait demandé pour le CM1
+// parce que les élèves tapent trop lentement — un CP tape moins vite encore, et
+// il cherche ses chiffres un par un. Mesuré avant de brancher : les 186 items
+// restent, 89 d'entre eux passent d'une réponse à taper à une réponse à
+// cliquer, et aucun n'est perdu en route.
+export const mathsCpQuestionBank: TutorBankItemV4[] = applyMathsKeyboardFree(
+  buildCycle2QuestionBank("cp", microSkills),
+);
 
 export function getMathCpQuestionBank(args?: {
   notionId?: string | null;

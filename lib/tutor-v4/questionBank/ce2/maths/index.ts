@@ -1,6 +1,7 @@
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { microSkills } from "@/lib/tutor-v4/knowledge/maths/ce2/microSkills";
 import { buildCycle2QuestionBank } from "@/lib/tutor-v4/questionBank/cycle2/maths/buildCycle2Bank";
+import { applyMathsKeyboardFree } from "../../mathsKeyboardFreeTransform";
 
 import { nombresEntiersBank } from "./nombres-entiers.bank";
 import { calculBank } from "./calcul.bank";
@@ -31,10 +32,18 @@ const REPLI = buildCycle2QuestionBank("ce2", microSkills).filter(
   (item) => !MICROS_COUVERTES.has(item.microId),
 );
 
-export const mathsCe2QuestionBank: TutorBankItemV4[] = [
+// Pas de clavier au CE2 : on clique. Même règle qu'au CM1 et au CM2, où le
+// principal l'avait demandée parce que les élèves tapent trop lentement.
+// Mesuré avant de brancher : aucun item perdu, et 169 réponses passent du
+// clavier au clic.
+// ⚠️ Conséquence pour qui écrit les banques qui manquent : une question
+// `format: "open"` est RETIRÉE par cette transformation, sauf si elle demande
+// « quelle opération choisir ». Au cycle 2, on écrit donc des QCM et des
+// réponses courtes numériques — pas de rédaction.
+export const mathsCe2QuestionBank: TutorBankItemV4[] = applyMathsKeyboardFree([
   ...BANQUES_ECRITES,
   ...REPLI,
-];
+]);
 
 /** Micro-compétences qui attendent encore leur banque écrite à la main. */
 export const microsCe2SansBanque: string[] = microSkills
