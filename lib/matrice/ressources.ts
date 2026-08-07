@@ -23,7 +23,7 @@
 // moins bonne — elle ne remonte simplement rien, et il faut le savoir avant de
 // la donner à faire.
 
-import { GUIDES } from "./guides";
+import { CAHIERS, GUIDES } from "./guides";
 import type { RessourceEleveAI, StatutRessource } from "./types";
 
 /** Le statut d'une ressource qu'on vient d'ajouter. Ne PAS le changer. */
@@ -367,12 +367,16 @@ export const RESSOURCES: RessourceEleveAI[] = [
     url: `/guide-de-survie/${g.slug}`,
     niveaux: [...g.niveaux],
     matiere: g.matiere,
+    // ⭐ « guides » EN TÊTE (07/08). Taper « guide de survie » dans la barre
+    // renvoyait l'évaluation nationale : aucun mot de la phrase n'était
+    // reconnu, le moteur repliait sur le niveau, et le coup de pouce de saison
+    // faisait le reste. On demandait un guide, on recevait une épreuve.
     notions:
       g.matiere === "francais"
-        ? ["conjugaison", "grammaire", "orthographe", "*"]
+        ? ["guides", "conjugaison", "grammaire", "orthographe", "*"]
         : g.matiere === "anglais"
-          ? ["anglais"]
-          : ["*"],
+          ? ["guides", "anglais"]
+          : ["guides", "*"],
     intentions: ["preparer", "comprendre"],
     type: "guide",
     // Une page à imprimer ne remonte rien, et c'est très bien : elle sert au
@@ -381,27 +385,56 @@ export const RESSOURCES: RessourceEleveAI[] = [
   })),
 
   // Les cahiers de vacances — le dossier app/cahier-vacances/ fait foi.
-  ...([
-    ["vers-la-6e", "vers la 6e", ["cm2", "6e"]],
-    ["vers-la-5e", "vers la 5e", ["6e", "5e"]],
-    ["vers-la-4e", "vers la 4e", ["5e", "4e"]],
-    ["vers-la-3e", "vers la 3e", ["4e", "3e"]],
-    ["vers-la-2nde", "vers la Seconde", ["3e", "seconde"]],
-    ["vers-la-premiere", "vers la Première", ["seconde", "premiere"]],
-    ["vers-la-terminale", "vers la Terminale", ["premiere", "terminale"]],
-    ["vers-le-bac-plus-1", "vers le Bac+1", ["terminale"]],
-  ] as const).map(([slug, libelle, niveaux]): RessourceEleveAI => ({
-    id: `cahier-${slug}`,
-    titre: `Cahier de vacances — ${libelle}`,
+  //
+  // ⭐ LE PRIMAIRE ENTRE (07/08, Frédéric : « on n'a pas branché le cahier de
+  // vacances dans la matrice pour tous les niveaux »). Cinq cahiers existaient
+  // en ligne — vers le CP, le CE1, le CE2, le CM1, le CM2 — et AUCUN n'était
+  // dans l'inventaire. Un CP, un CE1, un CE2 n'avaient donc pas un seul cahier
+  // à se voir proposer, alors que les cahiers font l'essentiel du trafic du
+  // site. C'est le genre de trou qu'on ne voit pas : rien ne casse, la page
+  // répond, elle n'est simplement jamais recommandée.
+  //
+  // ⚠️ Le titre dit d'où l'on vient, les niveaux disent à qui on parle :
+  // « vers le CE1 » s'adresse à un enfant qui sort du CP, donc `["cp","ce1"]`.
+  // Même convention que les cahiers du collège, déjà en place.
+  // ⚠️ LA LISTE VIT DANS guides.ts, comme celle des guides de survie. Elle
+  // sert à deux endroits — l'inventaire ci-dessous et la pastille « Cahiers »
+  // de l'entrée — et deux copies d'un même catalogue finissent toujours par
+  // diverger d'une ligne, celle qu'on vient d'ajouter d'un seul côté.
+  ...CAHIERS.map((c): RessourceEleveAI => ({
+    id: `cahier-${c.slug}`,
+    titre: `Cahier de vacances — ${c.libelle}`,
     promesse: "À imprimer, avec les corrigés.",
-    url: `/cahier-vacances/${slug}`,
-    niveaux: [...niveaux],
-    notions: ["*"],
+    url: `/cahier-vacances/${c.slug}`,
+    niveaux: [...c.niveaux],
+    // Même correction que les guides : « cahier de vacances » tapé dans la
+    // barre ne trouvait rien et repartait sur l'évaluation nationale.
+    notions: ["cahiers", "*"],
     intentions: ["preparer", "entrainer"],
     type: "cahier",
     resultat: "corrige",
     statut: "validee",
   })),
+  {
+    // Le cahier de MATHS seul (app/cahier-vacances/maths), qui rejoue les
+    // défis de Picto Maths sur le collège. ⚠️ Il ne couvre PAS les mêmes
+    // niveaux que /picto-maths (CP→CM2) : sa page annonce CM2→3e.
+    // `famille` les rend exclusifs : ce sont les mêmes vingt-cinq défis, et
+    // les proposer tous les deux dans la même réponse serait proposer deux
+    // fois la même chose sous deux noms.
+    id: "cahier-maths",
+    titre: "Cahier de vacances de maths",
+    promesse: "Vingt-cinq défis « un dessin, une question », corrigés, à imprimer.",
+    url: "/cahier-vacances/maths",
+    niveaux: ["cm2", "6e", "5e", "4e", "3e"],
+    matiere: "maths",
+    notions: ["cahiers", "calcul", "geometrie", "grandeurs", "*"],
+    intentions: ["preparer", "entrainer", "decouvrir"],
+    type: "cahier",
+    resultat: "corrige",
+    famille: "picto",
+    statut: "validee",
+  },
   {
     id: "concours-avenir",
     titre: "Concours Avenir",
@@ -505,6 +538,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     intentions: ["decouvrir", "entrainer"],
     type: "defi",
     resultat: "corrige",
+    // Les mêmes vingt-cinq défis que « Cahier de vacances de maths ».
+    famille: "picto",
     statut: "testee_eleves",
     testeeAvec: "Collège du Dimitile",
   },

@@ -49,6 +49,7 @@ import { exemplesPour } from "@/lib/matrice/exemples";
 import { CHIPS_VISIBLES, chipsDisponibles, composerChip, matieresDisponibles } from "@/lib/matrice/chips";
 import { actionsPour, urlAction } from "@/lib/matrice/actions";
 import { afficherConcours } from "@/lib/matrice/concours";
+import { cahiersPour, guidesPour, urlCahierPour, urlGuidePour } from "@/lib/matrice/guides";
 import { chercher, libelleIntention } from "@/lib/matrice/moteur";
 import {
   CLE_HISTORIQUE,
@@ -253,6 +254,35 @@ export default function EntreeMatrice({
   /** Terminale + Mathématiques, et le collège pour le concours général. */
   const concours = useMemo(() => afficherConcours(profil, matiereId), [profil, matiereId]);
 
+  // ⭐ LE GUIDE DE SURVIE DE SA CLASSE, EN PASTILLE (07/08, Frédéric : « on n'a
+  // pas branché guide de survie dans les chips »). Il sortait déjà sous
+  // « Comprendre une notion » et « Préparer un contrôle », mais il fallait
+  // savoir qu'il existe pour le trouver.
+  //
+  // ⚠️ SEULEMENT SI SA CLASSE EN A UN. Le CP, le CE1 et le CE2 n'en ont aucun —
+  // ni en maths ni en français — et la pastille n'apparaît donc pas chez eux
+  // plutôt que d'ouvrir un sommaire où ils ne trouveront rien à leur niveau.
+  const guides = useMemo(() => guidesPour(profil), [profil]);
+  const hrefGuide = useMemo(() => urlGuidePour(profil), [profil]);
+
+  // ⭐ LE CAHIER DE VACANCES, EN PASTILLE AUSSI (07/08). Les cahiers font
+  // l'essentiel du trafic du site — Google et Bing y déposent la plupart des
+  // visiteurs — et ils n'avaient aucune porte depuis l'entrée. Ils viennent
+  // seulement d'entrer dans l'inventaire pour le primaire, où cinq d'entre eux
+  // existaient en ligne sans être proposés à personne.
+  const cahiers = useMemo(() => cahiersPour(profil), [profil]);
+
+  /**
+   * Les pastilles qui ne filtrent rien : elles ouvrent une page.
+   *
+   * ⚠️ Elles PRENNENT LA PLACE de chips, elles ne s'ajoutent pas. Sept
+   * pastilles à la suite ne tiennent pas sur une ligne d'ordinateur — mesuré,
+   * pas estimé — et une rangée qui déborde annule tout le travail de
+   * compactage. On garde donc trois chips quand il y en a trois derrière.
+   */
+  const raccourcis =
+    (concours.length > 0 ? 1 : 0) + (guides.length > 0 ? 1 : 0) + (cahiers.length > 0 ? 1 : 0);
+
   // ⭐ LA PASTILLE CONCOURS S'INSÈRE EN 5ᵉ POSITION (Frédéric, 07/08 : « le
   // concours arrive en 5ᵉ position ! »). L'ordre de la rangée suit les outils :
   //   1. M'entraîner      ─┐ le coach
@@ -266,12 +296,18 @@ export default function EntreeMatrice({
   // ne peut donc pas venir de `chipsDisponibles`, et sa place se calcule ici.
   // Quand il n'y a pas de concours à ce niveau, les cinq premières chips
   // occupent la ligne — on ne laisse pas un trou en attendant.
-  const AVANT_CONCOURS = 4;
+  // ⚠️ CHAQUE PASTILLE PREND LA PLACE D'UNE CHIP, jamais de place en plus.
+  // Sans cette règle la rangée montait à huit éléments (5 chips + 3 pastilles
+  // + « Plus d'options ») : elle se met alors à défiler sur un écran
+  // d'ordinateur, et tout le travail de compactage tombe.
+  // ⛔ MAIS JAMAIS MOINS DE TROIS CHIPS. En dessous, la rangée cesse de dire ce
+  // qu'on peut FAIRE pour ne plus montrer que des destinations — c'est-à-dire
+  // qu'elle redevient le catalogue qu'on vient d'enterrer.
+  const MINIMUM_CHIPS = 3;
   const chips = useMemo(() => {
     if (plusDOptions) return toutesLesChips;
-    // La pastille prend une place : sans elle, on montre une chip de plus.
-    return toutesLesChips.slice(0, concours.length > 0 ? AVANT_CONCOURS : CHIPS_VISIBLES);
-  }, [toutesLesChips, plusDOptions, concours.length]);
+    return toutesLesChips.slice(0, Math.max(MINIMUM_CHIPS, CHIPS_VISIBLES - raccourcis));
+  }, [toutesLesChips, plusDOptions, raccourcis]);
 
   /** Combien restent derrière « Plus d'options ». */
   const restantes = toutesLesChips.length - chips.length;
@@ -683,7 +719,48 @@ export default function EntreeMatrice({
                     : "border border-amber-500 bg-amber-50 text-amber-900 hover:bg-amber-100"
                 }`}
               >
-                🏆 Concours à venir
+                🏆 Concours
+              </Link>
+            )}
+
+            {/* ⭐ LE GUIDE DE SURVIE — celui de SA classe quand il n'y en a
+                qu'un, le sommaire filtré sur sa classe quand elle en a
+                plusieurs (`?niveau=`). Absent au CP, au CE1 et au CE2 : ils
+                n'en ont aucun, et une pastille qui mène à dix-neuf cartes dont
+                aucune n'est la sienne, c'est pire que pas de pastille. */}
+            {guides.length > 0 && (
+              <Link
+                href={`${hrefGuide}${hrefGuide.includes("?") ? "&" : "?"}from=ia`}
+                prefetch={false}
+                onClick={() => track("ia_guide", { profil: profil ?? "inconnu" })}
+                className={`rounded-full px-3 py-1.5 text-[13px] font-medium transition ${
+                  surAccueil
+                    ? "border-2 border-[#3f6b0c] bg-[#3f6b0c]/10 text-[#3f6b0c] hover:bg-[#3f6b0c]/20"
+                    : "border border-lime-600 bg-lime-50 text-lime-900 hover:bg-lime-100"
+                }`}
+              >
+                🆘 Guide
+              </Link>
+            )}
+
+            {/* ⭐ LES CAHIERS DE VACANCES — c'est par eux que la plupart des
+                visiteurs arrivent sur le site, et ils n'avaient aucune porte
+                depuis l'entrée. Un élève en a presque toujours deux : celui
+                qu'il finit et celui qui l'attend. On ouvre donc le sommaire
+                plutôt que de choisir à sa place s'il révise l'année écoulée ou
+                prépare la suivante. */}
+            {cahiers.length > 0 && (
+              <Link
+                href={`${urlCahierPour(profil)}?from=ia`}
+                prefetch={false}
+                onClick={() => track("ia_cahier", { profil: profil ?? "inconnu" })}
+                className={`rounded-full px-3 py-1.5 text-[13px] font-medium transition ${
+                  surAccueil
+                    ? "border-2 border-[#0e7490]/50 bg-[#0e7490]/10 text-[#0e7490] hover:bg-[#0e7490]/20"
+                    : "border border-sky-500 bg-sky-50 text-sky-900 hover:bg-sky-100"
+                }`}
+              >
+                📒 Cahiers
               </Link>
             )}
 

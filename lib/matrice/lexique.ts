@@ -259,6 +259,32 @@ export const NOTIONS: NotionLexique[] = [
     alias: ["video", "videos", "en video", "animation", "animations", "regarder", "en images"],
   },
   {
+    // ⭐ AJOUTÉE LE 07/08. Taper « guide de survie » renvoyait l'évaluation
+    // nationale : aucun mot n'était reconnu, le moteur repliait sur le niveau,
+    // et le coup de pouce de rentrée faisait le reste. On demandait un guide,
+    // on recevait une épreuve — le pire des deux mondes, parce que la réponse
+    // avait l'air assurée.
+    // ⚠️ « survie » et « imprimer » sont dans les alias : c'est comme ça qu'on
+    // les nomme entre profs et en classe, pas « guide de révision ».
+    id: "guides", label: "les guides de survie", matiere: "transversal",
+    alias: [
+      "guide", "guides", "guide de survie", "guides de survie", "survie",
+      "kit de survie", "fiche de survie", "memo", "l'essentiel", "lessentiel",
+      "a imprimer", "imprimer", "antiseche", "anti seche",
+    ],
+  },
+  {
+    // Même trou, même correction : « cahier de vacances » ne trouvait rien.
+    // ⚠️ C'est pourtant ce qui amène le plus de monde sur le site — Google et
+    // Bing envoient l'essentiel du trafic sur ces pages. Les gens arrivaient
+    // par les cahiers et ne pouvaient pas les redemander par leur nom.
+    id: "cahiers", label: "les cahiers de vacances", matiere: "transversal",
+    alias: [
+      "cahier", "cahiers", "cahier de vacances", "cahiers de vacances",
+      "cahier vacances", "vacances", "cahier d'ete", "cahier ete", "l'ete",
+    ],
+  },
+  {
     // ⭐ AJOUTÉE LE 07/08 (Frédéric : « si on tape concours général sur la
     // barre de recherche il doit envoyer sur ce répertoire », « idem si on
     // tape concours avenir »).

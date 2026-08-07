@@ -81,3 +81,52 @@ export function urlGuidePour(niveau: ProfilId | null | undefined): string {
   if (g.length > 1) return `${HUB_GUIDES}?niveau=${niveau}`;
   return HUB_GUIDES;
 }
+
+// ─── LES CAHIERS DE VACANCES ────────────────────────────────────────────────
+//
+// Même fichier, même règle, même raison : le dossier app/cahier-vacances/ fait
+// foi, et une seule liste sert à la fois l'inventaire de la matrice et la
+// pastille de l'entrée.
+//
+// ⚠️ LE TITRE DIT D'OÙ L'ON VIENT, LE NIVEAU DIT À QUI ON PARLE. « Vers le
+// CE1 » s'adresse à un enfant qui sort du CP : il vaut donc pour un CP comme
+// pour un CE1. C'est la convention déjà en place pour le collège, et c'est
+// elle qui fait qu'un élève voit toujours DEUX cahiers — celui qu'il vient de
+// finir et celui qui l'attend.
+
+export type CahierVacances = { slug: string; libelle: string; niveaux: ProfilId[] };
+
+export const CAHIERS: CahierVacances[] = [
+  { slug: "vers-le-cp", libelle: "vers le CP", niveaux: ["cp"] },
+  { slug: "vers-le-ce1", libelle: "vers le CE1", niveaux: ["cp", "ce1"] },
+  { slug: "vers-le-ce2", libelle: "vers le CE2", niveaux: ["ce1", "ce2"] },
+  { slug: "vers-le-cm1", libelle: "vers le CM1", niveaux: ["ce2", "cm1"] },
+  { slug: "vers-le-cm2", libelle: "vers le CM2", niveaux: ["cm1", "cm2"] },
+  { slug: "vers-la-6e", libelle: "vers la 6e", niveaux: ["cm2", "6e"] },
+  { slug: "vers-la-5e", libelle: "vers la 5e", niveaux: ["6e", "5e"] },
+  { slug: "vers-la-4e", libelle: "vers la 4e", niveaux: ["5e", "4e"] },
+  { slug: "vers-la-3e", libelle: "vers la 3e", niveaux: ["4e", "3e"] },
+  { slug: "vers-la-2nde", libelle: "vers la Seconde", niveaux: ["3e", "seconde"] },
+  { slug: "vers-la-premiere", libelle: "vers la Première", niveaux: ["seconde", "premiere"] },
+  { slug: "vers-la-terminale", libelle: "vers la Terminale", niveaux: ["premiere", "terminale"] },
+  { slug: "vers-le-bac-plus-1", libelle: "vers le Bac+1", niveaux: ["terminale"] },
+];
+
+/** Le sommaire des cahiers — il les montre tous, par niveau. */
+export const HUB_CAHIERS = "/cahier-vacances";
+
+export function cahiersPour(niveau: ProfilId | null | undefined): CahierVacances[] {
+  if (!niveau) return [];
+  return CAHIERS.filter((c) => c.niveaux.includes(niveau));
+}
+
+/**
+ * Là où mène « Cahiers ». Un seul cahier → le cahier. Plusieurs → le sommaire.
+ * ⚠️ Un élève en a presque toujours DEUX (celui qu'il finit, celui qui vient) :
+ * choisir pour lui, ce serait choisir s'il révise l'année écoulée ou prépare la
+ * suivante. Ce n'est pas à nous de trancher ça.
+ */
+export function urlCahierPour(niveau: ProfilId | null | undefined): string {
+  const c = cahiersPour(niveau);
+  return c.length === 1 ? `${HUB_CAHIERS}/${c[0].slug}` : HUB_CAHIERS;
+}
