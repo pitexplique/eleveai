@@ -2,7 +2,6 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
@@ -73,6 +72,26 @@ export default function SignInPage() {
   // … ou depuis un kit de survie lycée (?from=kit)
   const [fromKit, setFromKit] = useState(false);
 
+  /**
+   * ⭐ OÙ L'ON REPART APRÈS S'ÊTRE CONNECTÉ (07/08).
+   *
+   * Avant : tout le monde atterrissait sur son tableau de bord. C'était le bon
+   * réflexe du temps où l'accueil était un journal — il n'y avait rien à y
+   * faire. Depuis que l'accueil DEMANDE ce qu'on cherche, l'y renvoyer est la
+   * seule destination qui ne présume de rien : le tableau de bord répond à
+   * « où j'en suis », pas à « qu'est-ce que je fais aujourd'hui ».
+   *
+   * ⚠️ SAUF si la personne s'est connectée POUR quelque chose de précis :
+   * `?next=/coach-ia/maths` la ramène là où elle allait. On ne perd pas une
+   * intention en route.
+   * ⚠️ Et on n'accepte QUE des chemins internes (« / » suivi d'autre chose
+   * qu'un second « / ») : un `?next=https://…` serait une redirection ouverte,
+   * c'est-à-dire un hameçonnage offert avec notre nom de domaine dessus.
+   */
+  const [destination, setDestination] = useState<string | null>(null);
+  /** Arrivé par le bouton « Inscription » du header : on le dit, c'est tout. */
+  const [modeInscription, setModeInscription] = useState(false);
+
   // ---------------------------
   // Complément de profil (nouveaux comptes uniquement)
   // ---------------------------
@@ -130,6 +149,17 @@ export default function SignInPage() {
       // Le cahier s'adresse aux parents : on pré-sélectionne ce profil.
       if (!t) setTypeUtilisateur("parent");
     }
+
+    if (params.get("inscription") === "1") setModeInscription(true);
+
+    // ⚠️ CHEMIN INTERNE UNIQUEMENT. « /quelque-chose », jamais « //autre.site »
+    // ni « https://… » : accepter une URL absolue ici, c'est offrir une
+    // redirection ouverte — un lien qui porte notre nom de domaine et qui
+    // dépose la personne ailleurs, juste après qu'elle a tapé son code.
+    const suite = params.get("next") ?? params.get("redirect");
+    if (suite && suite.startsWith("/") && !suite.startsWith("//")) {
+      setDestination(suite);
+    }
   }, []);
 
   // ✅ Décompte cooldown
@@ -159,12 +189,17 @@ export default function SignInPage() {
       token: token ?? null,
     });
 
+    // ⭐ ON REPART SUR L'ACCUEIL (07/08), plus sur le tableau de bord.
+    // Le tableau de bord répond à « où j'en suis » ; l'accueil demande « que
+    // veux-tu faire aujourd'hui ? ». La deuxième question est celle qu'on se
+    // pose en se connectant. Le tableau de bord reste à un clic : « Mon
+    // espace » dans le header, et le menu du compte.
+    // ⛔ SAUF l'administration : ce compte n'existe QUE pour /dashboard, l'y
+    // envoyer n'est pas une supposition sur ce qu'il veut faire.
     if (type === "admin") {
-      router.push("/dashboard");
-    } else if (type === "prof") {
-      router.push("/dashboard-prof");
+      router.push(destination ?? "/dashboard");
     } else {
-      router.push("/dashboard-eleve");
+      router.push(destination ?? "/");
     }
   };
 
@@ -508,14 +543,11 @@ export default function SignInPage() {
         token: data.token ?? null,
       });
 
-      const type = session.role;
-      if (type === "principal" || type === "boss") {
-        router.push("/dashboard-principal");
-      } else if (type === "prof") {
-        router.push("/dashboard-prof");
-      } else {
-        router.push("/dashboard-eleve");
-      }
+      // Même règle que la connexion par email : on revient sur l'accueil, sauf
+      // si la personne s'était connectée POUR quelque chose de précis.
+      // Le tableau de bord — élève, prof ou principal — reste à un clic depuis
+      // « Mon espace » et le menu du compte.
+      router.push(destination ?? "/");
     } catch (err: any) {
       console.error("Unexpected etablissement login error:", err);
       setErrorEtab(err?.message || "Erreur inattendue. Réessayez.");
@@ -540,9 +572,14 @@ export default function SignInPage() {
               </div>
             </div>
 
+            {/* Le header a désormais DEUX boutons — « Connexion » et
+                « Inscription » — qui mènent au même endroit, parce que le flux
+                est le même : un email, un code. Mais quelqu'un qui a cliqué
+                « Inscription » et qui lit « Connexion » en arrivant croit
+                s'être trompé de porte. On lui renvoie son mot. */}
             <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-[11px] font-medium text-emerald-800">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              Connexion
+              {modeInscription ? "Inscription" : "Connexion"}
             </div>
 
             <div className="rounded-2xl bg-white p-6 shadow-lg shadow-slate-200/80 border border-slate-200">
@@ -927,121 +964,103 @@ export default function SignInPage() {
           </div>
         </div>
 
-        {/* COLONNE DROITE */}
+
+        {/* ── COLONNE DROITE ────────────────────────────────────────────────
+            ⭐ ENTIÈREMENT REFAITE LE 07/08. Ce qui partait, et pourquoi :
+
+            — « POURQUOI ELEVEAI » + « Un coach simple pour progresser sans se
+              perdre » : le produit n'est plus un coach de maths avec une page
+              d'explication autour. Il demande qui vous êtes et ce que vous
+              cherchez, puis il propose. La promesse d'avant décrivait le
+              premier module, pas le site.
+            — LES TROIS CARTES « Guidage clair / Rituels courts / Suivi
+              lisible » : trois affirmations invérifiables, sans accents, et
+              dont aucune ne dit ce qu'on va faire en arrivant.
+            — LES SIX VIGNETTES « Tous les espaces EleveAI » : un catalogue.
+              C'est exactement ce que la refonte de l'accueil a enterré — on ne
+              va pas le remettre sur la porte d'entrée. Et la moitié des noms
+              (« Podcast maths », « Défis du jour ») ne sont pas ce qu'on vient
+              chercher en créant un compte.
+
+            Ce qui reste, et pourquoi : LES AVIS D'ÉLÈVES. Ce ne sont pas
+            d'anciennes promesses, ce sont des phrases écrites par de vraies
+            personnes — la seule preuve de la page. Elles gardent leurs mots
+            tels quels, fautes comprises.
+
+            À la place : les quatre gestes, dans l'ordre où ils arrivent. Pas
+            « voici nos qualités » mais « voici ce qui va se passer ». */}
         <div className="relative hidden w-full overflow-hidden bg-[#041B33] text-white md:block md:w-1/2">
           <div className="absolute inset-0 bg-gradient-to-b from-[#041B33] via-[#062A4F] to-[#041B33]" />
 
-          <div className="relative z-10 flex h-full flex-col justify-start px-10 py-10 lg:px-14">
-            <div className="mb-6">
-              <p className="text-xs font-black uppercase tracking-[0.25em] text-yellow-300">
-                Pourquoi EleveAI
-              </p>
-              <h2 className="mt-1 text-3xl font-black leading-tight">
-                Un coach simple pour progresser sans se perdre
-              </h2>
-              <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-200">
-                Pour les parents, c'est une facon simple de voir que l'enfant
-                s'entraine regulierement et avance avec un cadre clair.
-              </p>
+          <div className="relative z-10 flex h-full flex-col justify-center px-10 py-12 lg:px-14">
+            <h2 className="text-3xl font-black leading-tight">
+              Dites qui vous êtes.
+              <br />
+              EleveAI cherche à votre place.
+            </h2>
+            <p className="mt-3 max-w-md text-sm font-semibold leading-relaxed text-slate-300">
+              Pas de catalogue à explorer, pas de niveau à deviner. Vous dites
+              ce que vous cherchez, on vous propose ce qui existe vraiment pour
+              vous.
+            </p>
 
-              <div className="mt-5 grid grid-cols-3 gap-3">
-                {[
-                  {
-                    title: "Guidage clair",
-                    text: "L'eleve sait quoi faire maintenant.",
-                  },
-                  {
-                    title: "Rituels courts",
-                    text: "Des sessions utiles meme en 10 minutes.",
-                  },
-                  {
-                    title: "Suivi lisible",
-                    text: "Les espaces retrouvent le bon parcours.",
-                  },
-                ].map((benefit) => (
-                  <div
-                    key={benefit.title}
-                    className="rounded-2xl border border-white/10 bg-white/[0.08] p-4 shadow-lg"
-                  >
-                    <p className="text-sm font-black leading-tight text-white">
-                      {benefit.title}
-                    </p>
-                    <p className="mt-2 text-xs font-semibold leading-relaxed text-slate-300">
-                      {benefit.text}
+            <ol className="mt-8 space-y-5">
+              {[
+                {
+                  titre: "Vous dites qui vous êtes",
+                  texte:
+                    "Élève et sa classe, parent, enseignant, chef d'établissement. « Les fractions » ne veulent pas dire la même chose en CP et en Terminale.",
+                },
+                {
+                  titre: "Vous dites ce que vous cherchez",
+                  texte:
+                    "Une matière, une notion, ou simplement ce qui coince — avec vos mots, y compris les fautes de frappe.",
+                },
+                {
+                  titre: "EleveAI propose ce qui vous correspond",
+                  texte:
+                    "Deux ou trois ressources, jamais dix : le coach ouvert sur votre notion, un parcours, une fiche, un guide à imprimer.",
+                },
+                {
+                  titre: "Vous y allez directement",
+                  texte:
+                    "Un clic, et vous êtes dedans. Rien à installer, rien à configurer.",
+                },
+              ].map((etape, i) => (
+                <li key={etape.titre} className="flex gap-4">
+                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cyan-300 text-sm font-black text-[#041B33]">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <p className="text-sm font-black leading-tight text-white">{etape.titre}</p>
+                    <p className="mt-1 max-w-md text-xs font-semibold leading-relaxed text-slate-300">
+                      {etape.texte}
                     </p>
                   </div>
-                ))}
-              </div>
-            </div>
+                </li>
+              ))}
+            </ol>
 
-            <div className="mb-4">
-              <p className="text-xs font-black uppercase tracking-[0.25em] text-slate-400">
-                Modules
+            {/* La promesse de qualité — la même phrase que sur l'accueil, au
+                mot près. Deux formulations différentes du même engagement, et
+                c'est l'engagement qu'on cesse de croire. */}
+            <div className="mt-8 rounded-2xl border border-cyan-300/25 bg-cyan-300/10 p-4">
+              <p className="text-sm font-black leading-snug text-white">
+                Des ressources conçues, sélectionnées et vérifiées.
               </p>
-              <h3 className="mt-1 text-2xl font-black leading-tight">
-                Tous les espaces EleveAI
-              </h3>
+              <p className="mt-1.5 text-xs font-semibold leading-relaxed text-slate-300">
+                Écrites ici pour la plupart, choisies ailleurs pour le reste — et
+                dans les deux cas relues par un enseignant avant d&apos;être
+                proposées à qui que ce soit.
+              </p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-3">
-                {[
-                  {
-                    image: "/images/cards/coach.webp",
-                    label: "Coach Maths IA",
-                  },
-                  {
-                    image: "/images/cards/parcours.webp",
-                    label: "Parcours",
-                  },
-                  {
-                    image: "/images/cards/calcul-rapide.webp",
-                    label: "Calcul rapide",
-                  },
-                  {
-                    image: "/images/cards/lecondujour.webp",
-                    label: "Podcast maths",
-                  },
-                  {
-                    image: "/images/cards/defis-du-jour.webp",
-                    label: "Defis du jour",
-                  },
-                  {
-                    image: "/images/cards/english-maths.webp",
-                    label: "English Maths",
-                  },
-                ].map((card) => (
-                  <div
-                    key={card.label}
-                    className="group relative h-[118px] w-[220px] overflow-hidden rounded-2xl border border-white/20 bg-white/10 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.18)]"
-                  >
-                    <Image
-                      src={card.image}
-                      alt=""
-                      fill
-                      sizes="220px"
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-90" />
-                    <div className="pointer-events-none absolute -left-20 top-0 h-full w-16 rotate-12 bg-white/25 blur-md transition-transform duration-700 group-hover:translate-x-[300px]" />
-                    <div className="absolute bottom-0 left-0 right-0 p-3">
-                      <p className="text-sm font-black leading-tight text-white">
-                        {card.label}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-            </div>
-
-            {/* AVIS D'ÉLÈVES */}
+            {/* AVIS D'ÉLÈVES — leurs mots, tels qu'ils les ont écrits. */}
             <div className="mt-8">
               <p className="text-xs font-black uppercase tracking-[0.25em] text-yellow-300">
-                Ils utilisent EleveAI
-              </p>
-              <h3 className="mt-1 text-2xl font-black leading-tight">
                 Ce que disent les élèves
-              </h3>
-
-              <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+              </p>
+              <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
                 {[
                   {
                     quote:
@@ -1069,21 +1088,15 @@ export default function SignInPage() {
                     className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.08] p-4 shadow-lg"
                   >
                     <div className="text-xs tracking-widest">
-                      <span className="text-yellow-300">
-                        {"★".repeat(avis.note)}
-                      </span>
-                      <span className="text-white/25">
-                        {"★".repeat(5 - avis.note)}
-                      </span>
+                      <span className="text-yellow-300">{"★".repeat(avis.note)}</span>
+                      <span className="text-white/25">{"★".repeat(5 - avis.note)}</span>
                     </div>
                     <blockquote className="mt-2 text-xs font-semibold leading-relaxed text-slate-200">
                       « {avis.quote} »
                     </blockquote>
                     <figcaption className="mt-3 text-[11px] font-bold text-white">
                       {avis.name}{" "}
-                      <span className="font-semibold text-slate-400">
-                        · {avis.classe}
-                      </span>
+                      <span className="font-semibold text-slate-400">· {avis.classe}</span>
                     </figcaption>
                   </figure>
                 ))}
@@ -1091,8 +1104,6 @@ export default function SignInPage() {
             </div>
           </div>
         </div>
-
-
       </div>
     </main>
   );

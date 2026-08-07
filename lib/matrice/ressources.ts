@@ -13,7 +13,17 @@
 // RÈGLE : seules `validee` et `testee_eleves` sortent du moteur. Une nouvelle
 // ressource naît en `a_verifier` — donc invisible. C'est volontaire : on ne
 // recommande jamais ce que personne n'a relu.
+//
+// ⭐ DEUX CHAMPS AJOUTÉS LE 07/08 : `type` et `resultat`.
+//   — `type` dit CE QUE C'EST (un parcours, une fiche, une machine) ;
+//   — `resultat` dit CE QUE ÇA REND (un score, une progression, un corrigé).
+// Ils ne changent rien pour un élève : ils font exister le filtre du
+// professeur, « les ressources que mes élèves peuvent vraiment faire, et dont
+// je verrai quelque chose revenir ». Une ressource sans `resultat` n'est pas
+// moins bonne — elle ne remonte simplement rien, et il faut le savoir avant de
+// la donner à faire.
 
+import { GUIDES } from "./guides";
 import type { RessourceEleveAI, StatutRessource } from "./types";
 
 /** Le statut d'une ressource qu'on vient d'ajouter. Ne PAS le changer. */
@@ -35,6 +45,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // « preparer » aussi : un élève qui a un contrôle vendredi vient s'entraîner
     // au coach — c'est même la première chose à lui proposer.
     intentions: ["comprendre", "entrainer", "corriger", "preparer"],
+    type: "coach",
+    resultat: "progression",
     statut: "testee_eleves",
     testeeAvec: "Collège du Dimitile",
     accepteNotion: "maths",
@@ -48,6 +60,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "francais",
     notions: ["conjugaison", "grammaire", "orthographe", "lecture", "vocabulaire"],
     intentions: ["comprendre", "entrainer", "corriger", "preparer"],
+    type: "coach",
+    resultat: "progression",
     statut: "testee_eleves",
     testeeAvec: "Collège du Dimitile",
     accepteNotion: "francais",
@@ -64,6 +78,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "anglais",
     notions: ["anglais"],
     intentions: ["comprendre", "entrainer"],
+    type: "coach",
+    resultat: "progression",
     statut: "validee",
   },
   {
@@ -83,6 +99,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "espagnol",
     notions: ["espagnol"],
     intentions: ["comprendre", "entrainer", "preparer"],
+    type: "coach",
+    resultat: "progression",
     statut: "validee",
   },
   {
@@ -94,6 +112,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "ia",
     notions: ["ia"],
     intentions: ["comprendre", "decouvrir"],
+    type: "coach",
+    resultat: "progression",
     statut: "validee",
   },
   {
@@ -104,7 +124,9 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
     matiere: "maths",
     notions: ["*"],
-    intentions: ["entrainer", "preparer"],
+    intentions: ["tester", "entrainer", "preparer"],
+    type: "parcours",
+    resultat: "score",
     statut: "testee_eleves",
     testeeAvec: "Collège du Dimitile",
   },
@@ -119,7 +141,9 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e"],
     matiere: "francais",
     notions: ["conjugaison", "grammaire", "orthographe", "lecture", "vocabulaire"],
-    intentions: ["entrainer", "preparer"],
+    intentions: ["tester", "entrainer", "preparer"],
+    type: "parcours",
+    resultat: "score",
     statut: "validee",
   },
   {
@@ -130,7 +154,9 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
     matiere: "anglais",
     notions: ["anglais"],
-    intentions: ["entrainer", "preparer"],
+    intentions: ["tester", "entrainer", "preparer"],
+    type: "parcours",
+    resultat: "score",
     statut: "validee",
   },
   {
@@ -142,7 +168,9 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
     matiere: "espagnol",
     notions: ["espagnol"],
-    intentions: ["entrainer", "preparer"],
+    intentions: ["tester", "entrainer", "preparer"],
+    type: "parcours",
+    resultat: "score",
     statut: "validee",
   },
   {
@@ -153,7 +181,9 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["4e", "3e", "seconde", "premiere", "terminale"],
     matiere: "ia",
     notions: ["ia"],
-    intentions: ["entrainer", "decouvrir", "comprendre"],
+    intentions: ["tester", "entrainer", "decouvrir", "comprendre"],
+    type: "parcours",
+    resultat: "score",
     statut: "validee",
   },
 
@@ -170,6 +200,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
     notions: ["*"],
     intentions: ["suivre"],
+    type: "suivi",
+    resultat: "progression",
     statut: "testee_eleves",
     testeeAvec: "Collège du Dimitile",
   },
@@ -184,6 +216,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: ["calcul"],
     intentions: ["rituel", "entrainer"],
+    type: "rituel",
+    resultat: "score",
     statut: "testee_eleves",
     testeeAvec: "Collège du Dimitile",
   },
@@ -196,6 +230,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "francais",
     notions: ["orthographe"],
     intentions: ["rituel", "entrainer"],
+    type: "rituel",
+    resultat: "score",
     statut: "testee_eleves",
     testeeAvec: "Collège du Dimitile",
   },
@@ -204,10 +240,23 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "L'anglais du jour",
     promesse: "Cinq mots par jour, entendus et écrits.",
     url: "/anglais-du-jour",
-    niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
+    // ⭐ IL DESCEND JUSQU'AU CP (07/08). Frédéric : « à chaque fois tu
+    // m'enlèves les matières anglais et espagnol » — au CE2, la rangée ne
+    // montrait que français et maths, et ce n'était pas un masquage mais un
+    // trou d'inventaire. Deux raisons de le combler :
+    //   — l'anglais est LV1 dès le CP au programme, ce n'est pas une avance ;
+    //   — le répertoire commence au A1 (lib/repertoire/anglais.ts, banque
+    //     englishA1QuestionBank), donc il y a vraiment du contenu derrière.
+    //     Cinq mots par jour avec le son ne demandent aucun prérequis.
+    // ⛔ L'ESPAGNOL NE DESCEND PAS, et ce n'est pas un oubli : Frédéric a
+    // tranché le 06/08 qu'au primaire la LV1 est l'anglais et rien d'autre.
+    // Une ligne suffira le jour où il en décidera autrement.
+    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
     matiere: "anglais",
     notions: ["anglais"],
     intentions: ["rituel"],
+    type: "rituel",
+    resultat: "score",
     statut: "validee",
   },
   {
@@ -221,6 +270,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "espagnol",
     notions: ["espagnol"],
     intentions: ["rituel"],
+    type: "rituel",
+    resultat: "score",
     statut: "validee",
   },
   {
@@ -231,6 +282,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e"],
     notions: ["*"],
     intentions: ["decouvrir", "rituel"],
+    type: "defi",
+    resultat: "score",
     statut: "validee",
   },
 
@@ -244,6 +297,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: ["*"],
     intentions: ["preparer"],
+    type: "evaluation",
+    resultat: "score",
     statut: "validee",
   },
   {
@@ -255,6 +310,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "francais",
     notions: ["*"],
     intentions: ["preparer"],
+    type: "evaluation",
+    resultat: "score",
     statut: "validee",
   },
   {
@@ -266,6 +323,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: ["*"],
     intentions: ["preparer"],
+    type: "evaluation",
+    resultat: "score",
     statut: "validee",
   },
   {
@@ -277,52 +336,33 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "francais",
     notions: ["*"],
     intentions: ["preparer"],
+    type: "evaluation",
+    resultat: "score",
     statut: "validee",
   },
-  // Les guides de survie — un par niveau, à imprimer. Le dossier
-  // app/guide-de-survie/ fait foi : ne pas inventer d'URL qui n'existe pas.
-  ...([
-    ["maths-cm1", "maths CM1", "cm1", "maths"],
-    ["maths-cm2", "maths CM2", "cm2", "maths"],
-    ["maths-sixieme", "maths 6e", "6e", "maths"],
-    ["maths-cinquieme", "maths 5e", "5e", "maths"],
-    ["maths-quatrieme", "maths 4e", "4e", "maths"],
-    ["maths-troisieme", "maths 3e", "3e", "maths"],
-    ["maths-seconde", "maths Seconde", "seconde", "maths"],
-    ["maths-premiere", "maths Première", "premiere", "maths"],
-    ["maths-terminale", "maths Terminale", "terminale", "maths"],
-    ["francais-cm1", "français CM1", "cm1", "francais"],
-    ["francais-cm2", "français CM2", "cm2", "francais"],
-    ["francais-6e", "français 6e", "6e", "francais"],
-    ["francais-5e", "français 5e", "5e", "francais"],
-    ["francais-4e", "français 4e", "4e", "francais"],
-    ["francais-3e", "français 3e", "3e", "francais"],
-  ] as const).map(([slug, libelle, niveau, matiere]): RessourceEleveAI => ({
-    id: `guide-${slug}`,
-    titre: `Guide de survie — ${libelle}`,
+
+  // ── Les guides de survie ───────────────────────────────────────────────
+  // ⭐ LA LISTE N'EST PLUS ICI (07/08) : elle vit dans lib/matrice/guides.ts,
+  // parce que le menu de l'élève connecté en a besoin lui aussi et qu'un même
+  // catalogue écrit à deux endroits finit toujours par diverger. Ici on ne fait
+  // que les habiller en ressources.
+  ...GUIDES.map((g): RessourceEleveAI => ({
+    id: `guide-${g.slug}`,
+    titre: `Guide de survie — ${g.libelle}`,
     promesse: "Ce qu'il faut avoir en tête, ramassé sur une page à imprimer.",
-    url: `/guide-de-survie/${slug}`,
-    niveaux: [niveau],
-    matiere,
+    url: `/guide-de-survie/${g.slug}`,
+    niveaux: [...g.niveaux],
+    matiere: g.matiere,
     notions:
-      matiere === "francais" ? ["conjugaison", "grammaire", "orthographe", "*"] : ["*"],
+      g.matiere === "francais"
+        ? ["conjugaison", "grammaire", "orthographe", "*"]
+        : g.matiere === "anglais"
+          ? ["anglais"]
+          : ["*"],
     intentions: ["preparer", "comprendre"],
-    statut: "validee",
-  })),
-  ...([
-    ["anglais-a1", "anglais A1", ["6e", "5e"]],
-    ["anglais-a2", "anglais A2", ["4e", "3e"]],
-    ["anglais-b1", "anglais B1", ["seconde", "premiere"]],
-    ["anglais-b2", "anglais B2", ["premiere", "terminale"]],
-  ] as const).map(([slug, libelle, niveaux]): RessourceEleveAI => ({
-    id: `guide-${slug}`,
-    titre: `Guide de survie — ${libelle}`,
-    promesse: "Ce qu'il faut avoir en tête, ramassé sur une page à imprimer.",
-    url: `/guide-de-survie/${slug}`,
-    niveaux: [...niveaux],
-    matiere: "anglais" as const,
-    notions: ["anglais"],
-    intentions: ["preparer", "comprendre"],
+    type: "guide",
+    // Une page à imprimer ne remonte rien, et c'est très bien : elle sert au
+    // moment où l'on n'a pas d'écran. Le champ le dit plutôt que de le taire.
     statut: "validee",
   })),
 
@@ -344,6 +384,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: [...niveaux],
     notions: ["*"],
     intentions: ["preparer", "entrainer"],
+    type: "cahier",
+    resultat: "corrige",
     statut: "validee",
   })),
   {
@@ -353,8 +395,38 @@ export const RESSOURCES: RessourceEleveAI[] = [
     url: "/concours-avenir",
     niveaux: ["terminale"],
     matiere: "maths",
-    notions: ["*"],
+    // ⭐ « concours » EXPLICITEMENT (07/08). Avec `["*"]` seul, elle sortait
+    // comme n'importe quelle ressource générique de Terminale ; taper
+    // « concours avenir » ne la faisait pas remonter d'un rang. Nommer la
+    // notion lui donne les 5 points du moteur — elle passe alors devant le
+    // coach, ce qui est exactement ce qu'on veut quand on l'a appelée par son
+    // nom.
+    notions: ["concours", "*"],
     intentions: ["preparer"],
+    type: "evaluation",
+    resultat: "score",
+    statut: "validee",
+  },
+  {
+    // ⭐ MANQUAIT À L'INVENTAIRE (ajoutée le 07/08). La page existe en
+    // production depuis des mois — Frédéric : « tu as même concours général ! »
+    // — et aucun élève ne pouvait la trouver depuis l'entrée.
+    // ⚠️ C'est une préparation COLLÈGE, pas le concours général du lycée :
+    // `app/concours-general/ConcoursGeneralClient.tsx` déclare
+    // `niveaux = ["6e","5e","4e","3e"]`. Le nom prête à confusion, le dossier
+    // fait foi.
+    id: "concours-general",
+    titre: "Concours général — collège",
+    promesse: "Vingt défis pour chercher, visualiser et expliquer, comme aux olympiades.",
+    url: "/concours-general",
+    niveaux: ["6e", "5e", "4e", "3e"],
+    matiere: "maths",
+    notions: ["concours", "*"],
+    // « decouvrir » aussi : on n'y va pas seulement pour préparer une échéance,
+    // on y va parce que ce sont des maths qui ne ressemblent pas au cours.
+    intentions: ["preparer", "decouvrir", "entrainer"],
+    type: "defi",
+    resultat: "score",
     statut: "validee",
   },
 
@@ -368,6 +440,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: ["*"],
     intentions: ["comprendre"],
+    type: "fiche",
     statut: "validee",
   },
   {
@@ -379,6 +452,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: ["*"],
     intentions: ["comprendre"],
+    type: "fiche",
     statut: "validee",
   },
   {
@@ -390,6 +464,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: ["*"],
     intentions: ["comprendre"],
+    type: "fiche",
     statut: "validee",
   },
   {
@@ -400,6 +475,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e"],
     notions: ["vocabulaire"],
     intentions: ["comprendre"],
+    type: "fiche",
     statut: "validee",
   },
 
@@ -413,6 +489,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: ["calcul", "geometrie", "grandeurs"],
     intentions: ["decouvrir", "entrainer"],
+    type: "defi",
+    resultat: "corrige",
     statut: "testee_eleves",
     testeeAvec: "Collège du Dimitile",
   },
@@ -428,6 +506,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: ["*"],
     intentions: ["decouvrir", "enseigner"],
+    type: "video",
     statut: "validee",
   },
   {
@@ -443,6 +522,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: ["videos", "*"],
     intentions: ["decouvrir", "comprendre"],
+    type: "video",
     statut: "validee",
   },
   {
@@ -454,6 +534,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: ["*"],
     intentions: ["decouvrir", "enseigner"],
+    type: "defi",
     statut: "validee",
   },
 
@@ -480,6 +561,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: [...notions, "machines"],
     intentions: ["decouvrir", "comprendre", "enseigner"],
+    type: "machine",
     // Elles ne s'invitent pas : il faut avoir demandé à découvrir, à
     // manipuler, ou nommé une machine. Sinon un lycéen qui vient de dire son
     // niveau ouvrait sur « la machine des epsilons ».
@@ -499,6 +581,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: ["fonctions", "statistiques", "ia"],
     intentions: ["decouvrir", "comprendre"],
+    type: "machine",
     statut: "validee",
   },
   {
@@ -510,6 +593,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: ["geometrie", "grandeurs"],
     intentions: ["decouvrir"],
+    type: "machine",
     statut: "validee",
   },
   {
@@ -524,6 +608,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "maths",
     notions: ["machines", "*"],
     intentions: ["decouvrir", "comprendre", "enseigner"],
+    type: "machine",
     surDemande: true,
     statut: "validee",
   },
@@ -535,6 +620,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
     notions: ["*"],
     intentions: ["decouvrir"],
+    type: "page",
     statut: "validee",
   },
 
@@ -547,6 +633,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["parent"],
     notions: ["*"],
     intentions: ["suivre", "comprendre"],
+    type: "page",
     statut: "validee",
   },
   {
@@ -557,6 +644,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["parent"],
     notions: ["*"],
     intentions: ["comprendre", "entrainer"],
+    type: "cahier",
+    resultat: "corrige",
     statut: "validee",
   },
   {
@@ -573,6 +662,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // ⏳ Le chantier du dashboard prof est en cours ; il y suivra les notes de
     // coach et de parcours, matière par matière.
     intentions: ["suivre"],
+    type: "suivi",
+    resultat: "progression",
     statut: "testee_eleves",
     testeeAvec: "Collège du Dimitile",
   },
@@ -584,6 +675,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["prof", "parent"],
     notions: ["*"],
     intentions: ["enseigner", "comprendre"],
+    type: "page",
     statut: "validee",
   },
   {
@@ -598,6 +690,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["prof"],
     notions: ["*"],
     intentions: ["enseigner", "suivre", "comprendre"],
+    type: "page",
     statut: "validee",
   },
   // ⚠️ L'ORDRE COMPTE POUR LA DIRECTION : à score égal, le moteur garde l'ordre
@@ -613,6 +706,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["direction"],
     notions: ["*"],
     intentions: ["suivre", "enseigner", "comprendre"],
+    type: "page",
     statut: "validee",
   },
   {
@@ -624,6 +718,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["direction", "prof", "parent"],
     notions: ["*"],
     intentions: ["preparer", "suivre", "enseigner", "comprendre"],
+    type: "evaluation",
+    resultat: "score",
     statut: "validee",
   },
   {
@@ -634,6 +730,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["direction"],
     notions: ["*"],
     intentions: ["suivre"],
+    type: "suivi",
+    resultat: "progression",
     statut: "validee",
   },
 ];

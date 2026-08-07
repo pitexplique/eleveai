@@ -28,6 +28,16 @@ export type ProfilId =
 export type Intention =
   | "comprendre"
   | "entrainer"
+  /**
+   * SE TESTER — « Teste-toi », et ça mène aux PARCOURS.
+   *
+   * Ajoutée le 07/08 (Frédéric). Elle n'existait pas, et les parcours vivaient
+   * donc sous « M'entraîner », à côté du coach. Ce n'est pas le même geste :
+   * le coach explique quand on se trompe, le parcours dit où l'on en est. Un
+   * élève qui veut savoir s'il a compris ne veut pas qu'on lui explique — il
+   * veut une note.
+   */
+  | "tester"
   | "preparer"
   | "corriger"
   | "decouvrir"
@@ -54,6 +64,45 @@ export type StatutRessource =
 /** Les niveaux d'une ressource. `"*"` = tous niveaux (un rituel, un outil). */
 export type NiveauRessource = ProfilId | "*";
 
+/**
+ * CE QU'UNE RESSOURCE EST — pas ce à quoi elle sert (ça, c'est l'intention).
+ *
+ * Ajouté le 07/08 pour « Trouver une ressource », côté professeur. Un
+ * enseignant ne cherche pas « quelque chose sur les fractions » : il cherche
+ * *un entraînement* sur les fractions, ou *une fiche*, ou *une évaluation*.
+ * Sans ce champ, la seule façon de trier était de lire les titres.
+ */
+export type TypeRessource =
+  | "coach"
+  | "parcours"
+  | "evaluation"
+  | "entrainement"
+  | "defi"
+  | "rituel"
+  | "fiche"
+  | "cahier"
+  | "guide"
+  | "video"
+  | "machine"
+  | "suivi"
+  | "page";
+
+/**
+ * CE QUE LA RESSOURCE REND À L'ÉLÈVE, quand elle rend quelque chose.
+ *
+ * C'est le filtre que Frédéric a demandé en premier : « les ressources
+ * réellement utilisables par les élèves et pouvant produire des résultats ou
+ * un suivi ». Une fiche à imprimer est excellente et ne produit rien —
+ * `undefined` n'est pas un défaut, c'est une information.
+ */
+export type ResultatRessource =
+  /** Une note, un score, un pourcentage de réussite. */
+  | "score"
+  /** Une progression enregistrée, visible dans un tableau de bord. */
+  | "progression"
+  /** Un corrigé fourni, mais rien qui remonte. */
+  | "corrige";
+
 export type RessourceEleveAI = {
   id: string;
   titre: string;
@@ -66,6 +115,11 @@ export type RessourceEleveAI = {
   /** Les notions du lexique que cette ressource travaille. `["*"]` = générale. */
   notions: string[];
   intentions: Intention[];
+
+  /** Ce que c'est. Sert aux filtres de « Trouver une ressource ». */
+  type?: TypeRessource;
+  /** Ce que l'élève en retire de mesurable. Absent = rien ne remonte. */
+  resultat?: ResultatRessource;
 
   statut: StatutRessource;
   /** Renseigné quand une classe l'a réellement utilisée. */

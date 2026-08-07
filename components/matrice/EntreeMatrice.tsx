@@ -11,6 +11,35 @@
 //
 // Aucun appel d'API : tout se joue dans lib/matrice/moteur.ts. La même phrase
 // donne toujours la même réponse, et on peut dire pourquoi.
+//
+// ─────────────────────────────────────────────────────────────────────────────
+// ⭐ REFONTE DU 07/08/2026 — QUATRE ÉTAPES SUR QUATRE LIGNES.
+//
+// 1. « Qui es-tu ? » se coupe en DEUX : le rôle d'abord (Élève · Parent ·
+//    Enseignant · Chef d'établissement), la classe ensuite. Quinze pastilles
+//    sur une seule question, ça passait à la ligne, et surtout ça mélangeait
+//    deux questions différentes — « que fais-tu dans l'école ? » et « en quelle
+//    année es-tu ? ». La classe n'apparaît que pour un élève, parce qu'un
+//    parent n'en a pas.
+//
+// 2. LA MATIÈRE PASSE AVANT « Que veux-tu faire aujourd'hui ? » (option A).
+//    C'était la question ouverte de Frédéric — A ou B. Ce qui a tranché n'est
+//    pas le goût mais une conséquence mesurable : les intentions se déduisent
+//    des ressources, donc les proposer APRÈS la matière permet de ne montrer
+//    que celles qui existent DANS cette matière. En B, un élève qui cliquait
+//    « Espagnol » lisait « Corriger une erreur » — une chip comptée sur le
+//    coach de maths, qui n'ouvrait rien. La hauteur, elle, est la même dans les
+//    deux ordres : ce sont les mêmes rangées.
+//    ⚠️ Conséquence à connaître : la rangée des matières ne s'écrit toujours
+//    JAMAIS dans le champ. Elle filtre, elle ne dicte pas.
+//
+// 3. Chaque étape tient sur UNE LIGNE, son intitulé à gauche (`rangee-defilante`
+//    dans globals.css). Sur téléphone la rangée défile au doigt plutôt que de
+//    se casser en deux. Gain mesuré : l'entrée passe de ~11 lignes à 5.
+//
+// 4. Le professeur et le chef d'établissement n'ont PAS de chips déduites mais
+//    des ACTIONS écrites (lib/matrice/actions.ts), qui ouvrent un outil. Une
+//    intention déduite ne peut pas produire un outil qui n'existe pas encore.
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
@@ -18,6 +47,8 @@ import { track } from "@vercel/analytics";
 import { PROFILS, getProfil } from "@/lib/matrice/profils";
 import { exemplesPour } from "@/lib/matrice/exemples";
 import { CHIPS_VISIBLES, chipsDisponibles, composerChip, matieresDisponibles } from "@/lib/matrice/chips";
+import { actionsPour, urlAction } from "@/lib/matrice/actions";
+import { afficherConcours } from "@/lib/matrice/concours";
 import { chercher, libelleIntention } from "@/lib/matrice/moteur";
 import {
   CLE_HISTORIQUE,
@@ -32,6 +63,31 @@ const CLE_PROFIL = "eleveai.ia.profil";
 // ouvre le reste derrière « Afficher plus ». 30, c'est quelques jours d'usage
 // pour quelques kilo-octets — au-delà, personne ne remonte.
 const MAX_HISTORIQUE = 30;
+
+/**
+ * LE RÔLE — la première question, et la seule que tout le monde peut lire.
+ *
+ * ⚠️ « Enseignant » et non « Professeur » : c'est le mot du header et celui des
+ * quatre portes d'audience. Le profil, lui, s'appelle toujours `prof` dans la
+ * matrice — un libellé se change, un identifiant se garde.
+ */
+type RoleId = "eleve" | "parent" | "prof" | "direction";
+
+const ROLES: { id: RoleId; label: string }[] = [
+  { id: "eleve", label: "Élève" },
+  { id: "parent", label: "Parent" },
+  { id: "prof", label: "Enseignant" },
+  { id: "direction", label: "Chef d'établissement" },
+];
+
+/** Les douze classes, du CP à la Terminale — dans l'ordre de la scolarité. */
+const CLASSES = PROFILS.filter((p) => p.groupe === "eleve");
+
+/** Le rôle auquel appartient un profil enregistré. */
+function roleDuProfil(profil: ProfilId): RoleId {
+  if (profil === "parent" || profil === "prof" || profil === "direction") return profil;
+  return "eleve";
+}
 
 /**
  * Pourquoi on demande le profil AVANT de répondre — dit avec un exemple de la
@@ -54,6 +110,49 @@ const POURQUOI_LE_PROFIL: Partial<Record<string, string>> = {
 const POURQUOI_SANS_MATIERE =
   "la même phrase ne veut pas dire la même chose en CP et en Terminale";
 
+/**
+ * UNE ÉTAPE = UNE LIGNE. L'intitulé à gauche, les pastilles à droite.
+ *
+ * C'est ce qui fait tenir les quatre questions sur quatre lignes au lieu de
+ * huit : un intitulé posé au-dessus de sa rangée coûte une ligne entière à
+ * chaque fois, et quatre lignes perdues en haut d'écran, ce sont les ressources
+ * qui passent sous le pli. Sur téléphone l'intitulé reprend sa place au-dessus —
+ * la largeur y est trop rare pour la partager.
+ *
+ * ⚠️ DÉFINIE ICI, AU NIVEAU DU MODULE, ET PAS DANS LE COMPOSANT. Une fonction
+ * de composant recréée à chaque rendu est un TYPE différent à chaque rendu :
+ * React démonte et remonte tout son contenu — le champ de saisie perdait le
+ * focus à chaque lettre tapée.
+ */
+function Etape({
+  intitule,
+  surAccueil,
+  children,
+}: {
+  intitule: string;
+  surAccueil: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    // ⚠️ `mt-4`, pas `mt-2.5` (07/08, retour de Frédéric : « manque
+    // d'aération »). La première passe visait à faire remonter les ressources
+    // au-dessus du pli — c'est gagné, et de loin : elles tenaient à 630 px sur
+    // un écran de 900. Il restait donc de la place, et quatre rangées collées
+    // se lisaient comme un formulaire administratif. On rend l'air qu'on
+    // n'avait pas besoin de prendre.
+    <div className="mt-4 flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-4">
+      <span
+        className={`shrink-0 text-[13px] font-medium leading-tight sm:w-32 ${
+          surAccueil ? "text-[#1d1c16]/70" : "text-slate-500"
+        }`}
+      >
+        {intitule}
+      </span>
+      <div className="min-w-0 flex-1">{children}</div>
+    </div>
+  );
+}
+
 export default function EntreeMatrice({
   variante = "page",
   onProfil,
@@ -68,8 +167,15 @@ export default function EntreeMatrice({
 }) {
   const surAccueil = variante === "accueil";
 
-  const [profil, setProfil] = useState<ProfilId>("6e");
-  const [profilChoisi, setProfilChoisi] = useState(false);
+  // ⭐ DEUX ÉTATS LÀ OÙ IL Y EN AVAIT UN. `profil` se DÉDUIT : c'est le rôle
+  // pour un adulte, la classe pour un élève. Tant qu'un élève n'a pas dit sa
+  // classe, il n'y a pas de profil — et c'est une information, pas un trou à
+  // combler par « 6e ». (L'ancien défaut technique « 6e » montrait le monde
+  // d'un sixième à un lycéen avant le moindre clic.)
+  const [role, setRole] = useState<RoleId | null>(null);
+  const [classe, setClasse] = useState<ProfilId | null>(null);
+  const profil: ProfilId | null = role === "eleve" ? classe : role;
+
   const [question, setQuestion] = useState("");
   // Deux sélections à l'écran, UNE SEULE chip dans le vecteur : elles se
   // composent en « Mathématiques · M'entraîner ». Le vecteur reste à trois
@@ -83,89 +189,142 @@ export default function EntreeMatrice({
   const [resultat, setResultat] = useState<ResultatMatrice | null>(null);
   const [demandeProfil, setDemandeProfil] = useState(false);
   const [plusDOptions, setPlusDOptions] = useState(false);
-  const [historique, setHistorique] = useState<EntreeHistorique[]>([]);
+  // Jamais affiché ICI — la colonne de gauche est le seul endroit qui montre le
+  // RÉCENT. Cet état existe pour une seule raison : c'est lui qui ÉCRIT dans
+  // localStorage, et il doit donc connaître ce qui s'y trouve déjà.
+  const [, setHistorique] = useState<EntreeHistorique[]>([]);
   const champ = useRef<HTMLInputElement>(null);
 
   // Le profil se retient : on ne redemande pas à un élève qui il est chaque
-  // matin. Et il est PARTAGÉ entre /ia et l'accueil — même clé, même personne.
+  // matin. Et il est PARTAGÉ entre l'entrée et la colonne — même clé, même
+  // personne.
   useEffect(() => {
     try {
+      // ⚠️ ON RELIT L'HISTORIQUE AVANT TOUT. Sans ça, la première demande de la
+      // visite repartait d'une liste vide et ÉCRASAIT tout ce qui était déjà
+      // enregistré : le RÉCENT de la colonne se vidait à chaque nouvelle
+      // question. C'est le seul composant qui écrit dans cette clé.
+      setHistorique(lireHistorique());
+
       const p = localStorage.getItem(CLE_PROFIL);
       if (p && PROFILS.some((x) => x.id === p)) {
-        setProfil(p as ProfilId);
-        setProfilChoisi(true);
+        const id = p as ProfilId;
+        const r = roleDuProfil(id);
+        setRole(r);
+        if (r === "eleve") setClasse(id);
         // Une demande rappelée depuis la colonne de gauche (?q=…) repart
         // aussitôt : cliquer dans l'historique doit refaire la recherche, pas
         // seulement remplir le champ.
         const q = new URLSearchParams(window.location.search).get("q");
         if (q) {
           setQuestion(q);
-          setResultat(chercher({ quiEsTu: p as ProfilId, question: q, chip: null }));
+          setResultat(chercher({ quiEsTu: id, question: q, chip: null }));
+        } else {
+          // Les portes de son niveau, sans avoir rien à taper. Le moteur sait
+          // déjà le faire (`repliSurLeNiveau`) ; il refusait simplement de le
+          // faire sur un vecteur vide, et l'écran restait blanc sous la barre.
+          setResultat(chercher({ quiEsTu: id, question: "", chip: null }));
         }
       }
-      if (!surAccueil) setHistorique(lireHistorique());
     } catch {
       /* navigation privée : on s'en passe */
     }
-  }, [surAccueil]);
+  }, []);
 
-  const p = useMemo(() => getProfil(profil), [profil]);
-  // Les chips viennent des ressources réellement publiables pour ce profil —
-  // pas d'une liste de fonctionnalités souhaitées. Une intention sans ressource
-  // n'apparaît pas.
-  const toutesLesChips = useMemo(() => chipsDisponibles(profil), [profil]);
-  const chips = useMemo(
-    () => (plusDOptions ? toutesLesChips : toutesLesChips.slice(0, CHIPS_VISIBLES)),
-    [toutesLesChips, plusDOptions],
-  );
+  const p = useMemo(() => (profil ? getProfil(profil) : null), [profil]);
+  const tutoie = p?.tutoie ?? true;
+
   // ⭐ Tant que personne n'a répondu à « Qui es-tu ? », on montre TOUTES les
-  // matières. `profil` vaut « 6e » au démarrage — un défaut technique, pas un
-  // choix de la personne — et il masquait l'espagnol à tout le monde avant le
-  // premier clic. Dès qu'un profil est choisi, la rangée se resserre sur lui.
-  const matieres = useMemo(
-    () => matieresDisponibles(profilChoisi ? profil : null),
-    [profil, profilChoisi],
-  );
+  // matières : la réponse honnête à une question ouverte, c'est tout ce qu'on a.
+  const matieres = useMemo(() => matieresDisponibles(profil), [profil]);
   /** La matière derrière le bouton allumé — on affiche des LIBELLÉS, mais c'est
-   *  l'identifiant qui sert à choisir la bonne phrase d'invite. */
-  const matiereDeLaRangee = useMemo(
+   *  l'identifiant qui sert à filtrer et à choisir la bonne phrase d'invite. */
+  const matiereId = useMemo(
     () => matieres.find((m) => m.label === matiereChoisie)?.matiere ?? null,
     [matieres, matiereChoisie],
   );
-  const exemples = useMemo(() => exemplesPour(profil), [profil]);
+
+  // Les chips viennent des ressources réellement publiables pour ce profil ET
+  // cette matière — pas d'une liste de fonctionnalités souhaitées.
+  const toutesLesChips = useMemo(
+    () => chipsDisponibles(profil, matiereId),
+    [profil, matiereId],
+  );
+  /** Terminale + Mathématiques, et le collège pour le concours général. */
+  const concours = useMemo(() => afficherConcours(profil, matiereId), [profil, matiereId]);
+
+  // ⭐ LA PASTILLE CONCOURS S'INSÈRE EN 5ᵉ POSITION (Frédéric, 07/08 : « le
+  // concours arrive en 5ᵉ position ! »). L'ordre de la rangée suit les outils :
+  //   1. M'entraîner      ─┐ le coach
+  //   2. Comprendre       ─┘
+  //   3. Teste-toi          les parcours
+  //   4. Cinq minutes       les rituels
+  //   5. 🏆 Concours        ← ici
+  //   … le reste derrière « Plus d'options »
+  //
+  // ⚠️ Elle n'est PAS une chip : elle ne filtre rien, elle ouvre une page. Elle
+  // ne peut donc pas venir de `chipsDisponibles`, et sa place se calcule ici.
+  // Quand il n'y a pas de concours à ce niveau, les cinq premières chips
+  // occupent la ligne — on ne laisse pas un trou en attendant.
+  const AVANT_CONCOURS = 4;
+  const chips = useMemo(() => {
+    if (plusDOptions) return toutesLesChips;
+    // La pastille prend une place : sans elle, on montre une chip de plus.
+    return toutesLesChips.slice(0, concours.length > 0 ? AVANT_CONCOURS : CHIPS_VISIBLES);
+  }, [toutesLesChips, plusDOptions, concours.length]);
+
+  /** Combien restent derrière « Plus d'options ». */
+  const restantes = toutesLesChips.length - chips.length;
+
+  /** Les actions ÉCRITES du professeur et du chef d'établissement. */
+  const actions = useMemo(() => (profil ? actionsPour(profil) : []), [profil]);
+
+  const exemples = useMemo(() => (profil ? exemplesPour(profil) : []), [profil]);
 
   const lancer = useCallback(
     (texte: string, chipChoisie: string | null, profilForce?: ProfilId) => {
       const quiEsTu = profilForce ?? profil;
-      const vecteur = { quiEsTu, question: texte.trim(), chip: chipChoisie };
-      if (!vecteur.question && !vecteur.chip) return;
+      const vecteur = { question: texte.trim(), chip: chipChoisie };
 
       // Sans profil, on ne devine pas : la même phrase ne veut pas dire la même
       // chose en CP et en Terminale.
-      if (!profilChoisi && !profilForce) {
-        setDemandeProfil(true);
-        setResultat(null);
+      if (!quiEsTu) {
+        if (vecteur.question || vecteur.chip) {
+          setDemandeProfil(true);
+          setResultat(null);
+        }
         return;
       }
 
-      const res = chercher(vecteur);
+      const res = chercher({ quiEsTu, ...vecteur });
       setResultat(res);
+      setDemandeProfil(false);
+
+      // Rien n'a été dit : on vient d'ouvrir les portes du niveau. Ce n'est pas
+      // une demande — on ne la compte pas, on ne l'enregistre pas.
+      if (!vecteur.question && !vecteur.chip) return;
 
       if (vecteur.question) {
         setHistorique((prec) => {
           const suite = [
-            { question: vecteur.question, profil: quiEsTu, quand: Date.now() },
+            {
+              question: vecteur.question,
+              profil: quiEsTu,
+              quand: Date.now(),
+              // ⭐ La matière voyage avec la demande : c'est elle qui fait
+              // exister les filtres du RÉCENT, dans la colonne de gauche.
+              matiere: res.lecture.matiere ?? null,
+              niveau: getProfil(quiEsTu).label,
+            },
             ...prec.filter((e) => e.question !== vecteur.question),
           ].slice(0, MAX_HISTORIQUE);
           try {
             localStorage.setItem(CLE_HISTORIQUE, JSON.stringify(suite));
             // ⭐ ON PRÉVIENT LA COLONNE. Elle lisait localStorage une seule
             // fois, à son montage : la demande qu'on venait de poser n'entrait
-            // dans le RÉCENT qu'au changement de page suivant. Depuis que le
-            // bloc du bas a disparu, c'était le seul endroit qui la portait —
-            // et il ne la portait pas encore. `storage` ne suffit pas : il ne
-            // se déclenche QUE dans les autres onglets, jamais dans celui qui
-            // écrit.
+            // dans le RÉCENT qu'au changement de page suivant. `storage` ne
+            // suffit pas : il ne se déclenche QUE dans les autres onglets,
+            // jamais dans celui qui écrit.
             window.dispatchEvent(new Event(EVENEMENT_HISTORIQUE));
           } catch {
             /* tant pis */
@@ -212,7 +371,7 @@ export default function EntreeMatrice({
           fetch("/api/track", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ page: "/ia", source: "sans-reponse" }),
+            body: JSON.stringify({ page: "/accueil", source: "sans-reponse" }),
             keepalive: true,
           }).catch(() => {});
         } catch {
@@ -220,32 +379,67 @@ export default function EntreeMatrice({
         }
       }
     },
-    [profil, profilChoisi, variante],
+    [profil, variante],
   );
 
-  function choisirProfil(id: ProfilId) {
-    setProfil(id);
-    setProfilChoisi(true);
+  /** Retenir qui l'on est — et prévenir la page, qui se range là-dessus. */
+  const memoriser = useCallback(
+    (id: ProfilId) => {
+      try {
+        localStorage.setItem(CLE_PROFIL, id);
+      } catch {
+        /* tant pis */
+      }
+      track("ia_profil", { profil: id, ou: variante });
+      onProfil?.(id);
+    },
+    [onProfil, variante],
+  );
+
+  function choisirRole(id: RoleId) {
+    setRole(id);
     setDemandeProfil(false);
     setMatiereChoisie(null);
     setIntentionChoisie(null);
     setPlusDOptions(false);
-    try {
-      localStorage.setItem(CLE_PROFIL, id);
-    } catch {
-      /* tant pis */
+
+    if (id === "eleve") {
+      // La classe déjà connue reste valable : on ne redemande pas.
+      if (classe) {
+        memoriser(classe);
+        lancer(question, null, classe);
+      } else {
+        // La rangée des classes vient de s'ouvrir — c'est elle, la réponse
+        // attendue. On n'affiche rien tant qu'elle n'est pas remplie.
+        setResultat(null);
+      }
+      return;
     }
-    track("ia_profil", { profil: id, ou: variante });
-    onProfil?.(id);
-    if (question.trim()) lancer(question, null, id);
-    else setResultat(null);
+
+    memoriser(id);
+    lancer(question, null, id);
+    champ.current?.focus();
+  }
+
+  function choisirClasse(id: ProfilId) {
+    setClasse(id);
+    setDemandeProfil(false);
+    setMatiereChoisie(null);
+    setIntentionChoisie(null);
+    setPlusDOptions(false);
+    memoriser(id);
+    lancer(question, null, id);
     champ.current?.focus();
   }
 
   function cliquerMatiere(label: string) {
     const suivante = matiereChoisie === label ? null : label;
     setMatiereChoisie(suivante);
-    lancer(question, composerChip(suivante, intentionChoisie));
+    // La matière restreint les intentions : celle qui était allumée peut ne
+    // plus exister ici. On la relâche plutôt que de garder un filtre invisible.
+    setIntentionChoisie(null);
+    setPlusDOptions(false);
+    lancer(question, composerChip(suivante, null));
   }
 
   function cliquerChip(label: string) {
@@ -254,10 +448,8 @@ export default function EntreeMatrice({
     lancer(question, composerChip(matiereChoisie, suivante));
   }
 
-  const eleve = p.groupe === "eleve";
-
-  // Sur le journal on emprunte l'encre et le papier de la page ; sur /ia on a
-  // notre propre calme. Deux habillages, un seul comportement.
+  // Sur le journal on emprunte l'encre et le papier de la page ; sur l'accueil
+  // on a notre propre calme. Deux habillages, un seul comportement.
   const bouton = (actif: boolean) =>
     surAccueil
       ? actif
@@ -272,114 +464,267 @@ export default function EntreeMatrice({
       aria-label="Que veux-tu faire aujourd'hui ?"
       className={
         surAccueil
-          ? "mx-auto mb-6 w-full min-w-0 max-w-6xl border-2 border-[#1d1c16] bg-white/60 px-4 py-5 sm:px-6"
+          ? "mx-auto mb-4 w-full min-w-0 max-w-6xl border-2 border-[#1d1c16] bg-white/60 px-4 py-4 sm:px-6"
           : ""
       }
     >
-      {surAccueil && (
-        <p className="mb-3 text-[11px] font-black uppercase tracking-[0.22em] text-[#0e7490]">
-          Dis-nous ce que tu cherches
-        </p>
+      {/* ── 1. Qui es-tu ? ──────────────────────────────────────────────── */}
+      <Etape intitule="Qui es-tu ?" surAccueil={surAccueil}>
+        <div className="rangee-defilante gap-1.5 sm:gap-2" role="group" aria-label="Qui es-tu ?">
+          {ROLES.map((r) => {
+            const actif = role === r.id;
+            return (
+              <button
+                key={r.id}
+                type="button"
+                onClick={() => choisirRole(r.id)}
+                aria-pressed={actif}
+                className={`rounded-full px-3 py-1.5 text-[13px] transition ${bouton(actif)}`}
+              >
+                {r.label}
+              </button>
+            );
+          })}
+        </div>
+      </Etape>
+
+      {/* ── 2. Ta classe ────────────────────────────────────────────────── */}
+      {role === "eleve" && (
+        <Etape intitule="Ta classe" surAccueil={surAccueil}>
+          <div className="rangee-defilante gap-1 sm:gap-1.5" role="group" aria-label="Ta classe">
+            {CLASSES.map((c) => {
+              const actif = classe === c.id;
+              return (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => choisirClasse(c.id)}
+                  aria-pressed={actif}
+                  // px-2.5 et non px-3 : douze pastilles doivent tenir sur une
+                  // ligne d'ordinateur, et ce sont ces 12 px qui manquaient.
+                  className={`rounded-full px-2.5 py-1.5 text-[13px] transition ${bouton(actif)}`}
+                >
+                  {c.label}
+                </button>
+              );
+            })}
+          </div>
+        </Etape>
       )}
 
-      {/* ── Qui es-tu ? ─────────────────────────────────────────────────── */}
-      <h2
-        className={
-          surAccueil
-            ? "mb-2 text-sm font-bold text-[#1d1c16]"
-            : "mb-3 text-sm font-medium text-slate-700"
-        }
-      >
-        Qui es-tu ?
-      </h2>
-      <div className="flex flex-wrap gap-1.5 sm:gap-2">
-        {PROFILS.map((x) => {
-          const actif = profilChoisi && x.id === profil;
-          return (
-            <button
-              key={x.id}
-              type="button"
-              onClick={() => choisirProfil(x.id)}
-              aria-pressed={actif}
-              className={`rounded-full px-3 py-1.5 text-[13px] transition sm:px-3.5 ${bouton(actif)}`}
-            >
-              {x.label}
-            </button>
-          );
-        })}
-      </div>
+      {/* ── 3. La matière ───────────────────────────────────────────────────
+          AVANT « Que veux-tu faire ? » depuis le 07/08 (option A). Elle ne
+          s'écrit JAMAIS dans le champ : le texte tapé reste celui de la
+          personne, et la pastille allumée dit le filtre. */}
+      {matieres.length > 1 && (
+        <Etape intitule={tutoie ? "Ta matière" : "La matière"} surAccueil={surAccueil}>
+          <div className="rangee-defilante gap-1.5 sm:gap-2" role="group" aria-label="La matière">
+            {matieres.map((m) => {
+              const actif = matiereChoisie === m.label;
+              return (
+                <button
+                  key={m.matiere}
+                  type="button"
+                  onClick={() => cliquerMatiere(m.label)}
+                  aria-pressed={actif}
+                  className={`rounded-full px-3 py-1.5 text-[13px] font-medium transition ${
+                    surAccueil
+                      ? actif
+                        ? "bg-[#0e7490] text-white"
+                        : "bg-[#1d1c16]/[0.07] text-[#1d1c16] hover:bg-[#1d1c16]/15"
+                      : actif
+                        ? "bg-teal-700 text-white"
+                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                  }`}
+                >
+                  {m.label}
+                </button>
+              );
+            })}
+          </div>
+        </Etape>
+      )}
 
-      {/* ── Que veux-tu faire aujourd'hui ? ─────────────────────────────── */}
-      <h2
-        className={
-          surAccueil
-            ? "mb-2 mt-5 text-sm font-bold text-[#1d1c16]"
-            : "mb-3 mt-8 text-sm font-medium text-slate-700"
-        }
-      >
-        {eleve ? "Que veux-tu faire aujourd'hui ?" : "Que voulez-vous faire aujourd'hui ?"}
-      </h2>
+      {/* ── 4. Que veux-tu faire aujourd'hui ? ──────────────────────────────
+          ⭐ LE CHAMP EST AU CENTRE, ET LA FLÈCHE EST DEDANS (07/08, Frédéric :
+          « le champ de saisie est vraiment centré sur Claude et ChatGPT », « la
+          flèche de validation doit être à l'intérieur du champ »).
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          lancer(question, chip);
-        }}
-        className="flex gap-2"
+          Ce qui le décentrait : l'intitulé posé à SA GAUCHE, comme pour les
+          trois rangées du dessus. 128 px de colonne + 16 px d'espace, et le
+          champ se retrouvait 75 px à droite du milieu de la page — assez pour
+          qu'on le voie sans savoir dire pourquoi. L'intitulé passe donc
+          au-dessus, centré ; le champ prend toute la largeur du conteneur, qui
+          est lui-même centré. Son milieu est alors exactement celui de la page.
+
+          Le filet marque en même temps la bascule : au-dessus on dit QUI on
+          est, en dessous ce qu'on CHERCHE. */}
+      <div
+        className={`mt-6 border-t pt-6 ${
+          surAccueil ? "border-[#1d1c16]/12" : "border-slate-200"
+        }`}
       >
-        <input
-          ref={champ}
-          type="text"
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-          placeholder={
-            eleve ? "Écris ta question ou explique ce qui coince…" : "Décrivez votre besoin…"
-          }
-          aria-label="Ta question"
-          // ⚠️ ARRONDIE AUX QUATRE COINS, seule de toute la page (Frédéric,
-          // 05/08). Le journal est carré partout — filets, tuiles, encadrés —
-          // et c'est justement pour ça : une zone de saisie d'IA se reconnaît à
-          // sa forme avant d'être lue. La rondeur dit « écris ici » là où un
-          // rectangle dirait « encore un encadré ».
-          className={
-            surAccueil
-              ? "min-w-0 flex-1 rounded-2xl border-2 border-[#1d1c16] bg-white px-4 py-3 text-base text-[#1d1c16] outline-none placeholder:text-[#1d1c16]/45 focus:ring-2 focus:ring-[#0e7490]/30"
-              : "min-w-0 flex-1 rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base outline-none placeholder:text-slate-400 focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20"
-          }
-        />
-        <button
-          type="submit"
-          aria-label="Chercher"
-          className={
-            surAccueil
-              ? "shrink-0 rounded-2xl border-2 border-[#1d1c16] bg-[#1d1c16] px-4 py-3 font-bold text-[#f5fafb] transition hover:border-[#0e7490] hover:bg-[#0e7490]"
-              : "shrink-0 rounded-2xl bg-teal-700 px-4 py-3 text-white transition hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700/40"
-          }
+        <p
+          className={`mb-2.5 text-center text-[13px] font-medium ${
+            surAccueil ? "text-[#1d1c16]/70" : "text-slate-500"
+          }`}
         >
-          <span aria-hidden="true">→</span>
-        </button>
-      </form>
+          {tutoie ? "Que veux-tu faire aujourd'hui ?" : "Que voulez-vous faire aujourd'hui ?"}
+        </p>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            lancer(question, chip);
+          }}
+          className="relative"
+        >
+          <input
+            ref={champ}
+            type="text"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            placeholder={
+              tutoie ? "Écris ta question ou explique ce qui coince…" : "Décrivez votre besoin…"
+            }
+            aria-label={tutoie ? "Ta question" : "Votre demande"}
+            // ⚠️ ARRONDI, seul de toute la page (Frédéric, 05/08). Le journal
+            // est carré partout — filets, tuiles, encadrés — et c'est justement
+            // pour ça : une zone de saisie d'IA se reconnaît à sa forme avant
+            // d'être lue. La rondeur dit « écris ici » là où un rectangle
+            // dirait « encore un encadré ».
+            // `pr-14` réserve la place de la flèche, qui vit DANS le champ.
+            className={
+              surAccueil
+                ? "w-full rounded-full border-2 border-[#1d1c16] bg-white py-3 pl-5 pr-14 text-base text-[#1d1c16] outline-none placeholder:text-[#1d1c16]/45 focus:ring-2 focus:ring-[#0e7490]/30"
+                : "w-full rounded-full border border-slate-300 bg-white py-3 pl-5 pr-14 text-base shadow-sm outline-none placeholder:text-slate-400 focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20"
+            }
+          />
+          <button
+            type="submit"
+            aria-label="Chercher"
+            className={`absolute right-2 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full transition ${
+              surAccueil
+                ? "bg-[#1d1c16] text-[#f5fafb] hover:bg-[#0e7490]"
+                : "bg-teal-700 text-white hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-700/40"
+            }`}
+          >
+            <span aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        {/* Les actions du professeur et du chef d'établissement — écrites, pas
+            déduites, et chacune ouvre un outil. Voir lib/matrice/actions.ts.
+            ⚠️ `sm:justify-center` et pas `justify-center` : centrer une rangée
+            qui défile rogne son DÉBUT dès qu'elle déborde, et sur téléphone
+            elle déborde toujours. */}
+        {actions.length > 0 ? (
+          <div className="rangee-defilante mt-3 gap-1.5 sm:justify-center sm:gap-2">
+            {actions.map((a) => (
+              <Link
+                key={a.href}
+                href={urlAction(a, { matiere: matiereId })}
+                prefetch={false}
+                title={a.aide}
+                onClick={() => track("ia_action", { action: a.label, profil: profil ?? "inconnu" })}
+                className={`rounded-full px-3 py-1.5 text-[13px] transition ${
+                  surAccueil
+                    ? "border-2 border-[#1d1c16]/25 bg-white/70 text-[#1d1c16]/80 hover:border-[#0e7490] hover:text-[#0e7490]"
+                    : "border border-slate-300 bg-white text-slate-700 hover:border-teal-700 hover:text-teal-800"
+                }`}
+              >
+                {a.label}
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="rangee-defilante mt-3 gap-1.5 sm:justify-center sm:gap-2">
+            {chips.map((c) => {
+              const actif = intentionChoisie === c.label;
+              return (
+                <button
+                  key={c.label}
+                  type="button"
+                  onClick={() => cliquerChip(c.label)}
+                  aria-pressed={actif}
+                  className={`rounded-full px-3 py-1.5 text-[13px] transition ${
+                    surAccueil
+                      ? actif
+                        ? "border-2 border-[#0e7490] bg-[#0e7490]/10 text-[#0e7490]"
+                        : "border-2 border-[#1d1c16]/25 bg-white/70 text-[#1d1c16]/80 hover:border-[#1d1c16]/60"
+                      : actif
+                        ? "border border-teal-700 bg-teal-50 text-teal-900"
+                        : "border border-slate-300 bg-white text-slate-600 hover:border-slate-500"
+                  }`}
+                >
+                  {c.label}
+                </button>
+              );
+            })}
+
+            {/* ⭐ CONCOURS À VENIR — Terminale + Mathématiques, et rien d'autre.
+                Une pastille, pas une carte : elle ouvre `/concours-avenir`, qui
+                existe depuis des mois avec ses dix épreuves blanches. J'avais
+                écrit une page `/concours` pour porter les dates — Frédéric l'a
+                écartée le 07/08, et il a raison : deux pages pour un concours,
+                c'est celle qui a le contenu qu'on finit par ne plus mettre à
+                jour.
+                S'il ne reste aucun concours ouvert, `afficherConcours` renvoie
+                une liste vide et cette pastille n'existe pas — pas de rubrique
+                vide. */}
+            {concours.length > 0 && (
+              <Link
+                href={`${concours[0].href}?from=ia`}
+                prefetch={false}
+                onClick={() => track("ia_concours", { profil: profil ?? "inconnu" })}
+                className={`rounded-full px-3 py-1.5 text-[13px] font-medium transition ${
+                  surAccueil
+                    ? "border-2 border-[#a34c07] bg-[#a34c07]/10 text-[#a34c07] hover:bg-[#a34c07]/20"
+                    : "border border-amber-500 bg-amber-50 text-amber-900 hover:bg-amber-100"
+                }`}
+              >
+                🏆 Concours à venir
+              </Link>
+            )}
+
+            {(restantes > 0 || plusDOptions) && (
+              <button
+                type="button"
+                onClick={() => setPlusDOptions((v) => !v)}
+                className={`rounded-full px-3 py-1.5 text-[13px] underline underline-offset-2 transition ${
+                  surAccueil ? "text-[#1d1c16]/60 hover:text-[#1d1c16]" : "text-slate-500 hover:text-slate-800"
+                }`}
+              >
+                {plusDOptions ? "Moins d'options" : `Plus d'options (${restantes})`}
+              </button>
+            )}
+          </div>
+        )}
+      </div>
 
       {demandeProfil && (
         <p
           role="alert"
           className={
             surAccueil
-              ? "mt-3 border-2 border-[#a34c07] bg-[#a34c07]/10 px-3 py-2 text-sm text-[#1d1c16]"
-              : "mt-3 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900"
+              ? "mt-2.5 border-2 border-[#a34c07] bg-[#a34c07]/10 px-3 py-2 text-sm text-[#1d1c16]"
+              : "mt-2.5 rounded-xl border border-amber-300 bg-amber-50 px-4 py-2 text-sm text-amber-900"
           }
         >
           {/* Toujours au tutoiement : ce message ne s'affiche QUE tant que
               personne n'a dit qui il est. Un professeur qui a choisi son profil
-              ne le verra jamais. */}
+              ne le verra jamais.
+              ⚠️ Il s'affiche aussi quand un ÉLÈVE n'a pas dit sa classe — c'est
+              le même trou, et c'est la même phrase qui le comble. */}
           Dis-moi d&apos;abord qui tu es —{" "}
-          {POURQUOI_LE_PROFIL[matiereDeLaRangee ?? ""] ?? POURQUOI_SANS_MATIERE}.
+          {POURQUOI_LE_PROFIL[matiereId ?? ""] ?? POURQUOI_SANS_MATIERE}.
         </p>
       )}
 
-      {/* Une barre vide, c'est la page blanche. On souffle trois départs. */}
-      {!resultat && !demandeProfil && (
-        <p className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#1d1c16]/60">
+      {/* Une barre vide, c'est la page blanche. On souffle trois départs —
+          mais seulement tant qu'il n'y a rien d'autre à lire à cet endroit. */}
+      {!resultat && !demandeProfil && exemples.length > 0 && (
+        <p className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs text-[#1d1c16]/60">
           <span>Par exemple :</span>
           {exemples.map((ex) => (
             <button
@@ -397,97 +742,26 @@ export default function EntreeMatrice({
         </p>
       )}
 
-      {/* ── LES MATIÈRES ─────────────────────────────────────────────────
-          Sous le champ, pas au-dessus : la question et sa réponse doivent se
-          toucher, et les matières sont un raccourci pour qui ne sait pas quoi
-          écrire — pas un préalable à la saisie.
-          En pastilles PLEINES, là où les intentions sont à contour : sans cette
-          différence, on aurait douze boutons sur deux lignes et personne ne
-          verrait qu'ils ne répondent pas à la même question.
-          La matière ne s'écrit jamais dans le champ : le texte tapé reste celui
-          de la personne, et la pastille allumée dit le filtre. */}
-      {matieres.length > 1 && (
-        <div className="mt-3 flex flex-wrap gap-1.5 sm:gap-2">
-          {matieres.map((m) => {
-            const actif = matiereChoisie === m.label;
-            return (
-              <button
-                key={m.matiere}
-                type="button"
-                onClick={() => cliquerMatiere(m.label)}
-                aria-pressed={actif}
-                className={`rounded-full px-3 py-1.5 text-[13px] font-medium transition ${
-                  surAccueil
-                    ? actif
-                      ? "bg-[#0e7490] text-white"
-                      : "bg-[#1d1c16]/[0.07] text-[#1d1c16] hover:bg-[#1d1c16]/15"
-                    : actif
-                      ? "bg-teal-700 text-white"
-                      : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                }`}
-              >
-                {m.label}
-              </button>
-            );
-          })}
-        </div>
-      )}
-
-      <div className="mt-2 flex flex-wrap gap-1.5 sm:gap-2">
-        {chips.map((c) => {
-          const actif = intentionChoisie === c.label;
-          return (
-            <button
-              key={c.label}
-              type="button"
-              onClick={() => cliquerChip(c.label)}
-              aria-pressed={actif}
-              className={`rounded-full px-3 py-1.5 text-[13px] transition ${
-                surAccueil
-                  ? actif
-                    ? "border-2 border-[#0e7490] bg-[#0e7490]/10 text-[#0e7490]"
-                    : "border-2 border-[#1d1c16]/25 bg-white/70 text-[#1d1c16]/80 hover:border-[#1d1c16]/60"
-                  : actif
-                    ? "border border-teal-700 bg-teal-50 text-teal-900"
-                    : "border border-slate-300 bg-white text-slate-600 hover:border-slate-500"
-              }`}
-            >
-              {c.label}
-            </button>
-          );
-        })}
-        {toutesLesChips.length > CHIPS_VISIBLES && (
-          <button
-            type="button"
-            onClick={() => setPlusDOptions((v) => !v)}
-            className={`rounded-full px-3 py-1.5 text-[13px] underline underline-offset-2 transition ${
-              surAccueil ? "text-[#1d1c16]/60 hover:text-[#1d1c16]" : "text-slate-500 hover:text-slate-800"
-            }`}
-          >
-            {plusDOptions
-              ? "Moins d'options"
-              : `Plus d'options (${toutesLesChips.length - CHIPS_VISIBLES})`}
-          </button>
-        )}
-      </div>
-
       {/* ── Ce qu'on a trouvé ───────────────────────────────────────────── */}
-      {resultat && (
-        <div className={surAccueil ? "mt-5" : "mt-10"} aria-live="polite">
+      {resultat && p && (
+        <div className={surAccueil ? "mt-6" : "mt-7"} aria-live="polite">
           {/* Quand NI notion NI intention n'ont été lues, on n'a rien compris —
               et écrire « Ce que j'ai compris : 4e » au-dessus de trois ressources
               choisies au niveau seul serait un mensonge poli. On le dit, et les
               ressources deviennent une proposition de départ, pas une réponse.
-              (Vu le 05/08 sur une frappe au hasard : « df » ressortait avec
-              trois recommandations et l'air de les avoir méritées.) */}
+              ⚠️ Sauf quand la personne n'a RIEN demandé : après un simple choix
+              de classe, « je n'ai pas bien compris la demande » reprocherait un
+              silence. On annonce alors ce que c'est — un point de départ. */}
           {!resultat.lecture.notionId && !resultat.lecture.intention && !matiereChoisie ? (
-            <p className="mb-2 text-xs text-[#1d1c16]/55">
-              Je n&apos;ai pas bien compris la demande — voici par où{" "}
+            <p className="mb-2.5 text-center text-xs text-[#1d1c16]/55">
+              {question.trim()
+                ? "Je n'ai pas bien compris la demande — voici par où "
+                : "Par où "}
               {p.tutoie ? "tu peux" : "vous pouvez"} commencer en{" "}
               <span className="text-[#1d1c16]">{p.label}</span>.
             </p>
           ) : (
-            <p className="mb-2 text-xs text-[#1d1c16]/55">
+            <p className="mb-2.5 text-center text-xs text-[#1d1c16]/55">
               Ce que j&apos;ai compris :{" "}
               <span className="text-[#1d1c16]">
                 {[
@@ -517,7 +791,7 @@ export default function EntreeMatrice({
               <Link
                 href="/contact?from=ia"
                 prefetch={false}
-                onClick={() => track("ia_ressource", { id: "contact-humain", rang: 1, profil })}
+                onClick={() => track("ia_ressource", { id: "contact-humain", rang: 1, profil: p.id })}
                 className="mt-3 inline-block border-2 border-[#1d1c16] bg-[#1d1c16] px-3 py-1.5 text-sm font-bold text-[#f5fafb] hover:bg-[#0e7490] hover:border-[#0e7490]"
               >
                 Écrire à un enseignant
@@ -540,7 +814,7 @@ export default function EntreeMatrice({
               )}
             </div>
           ) : (
-            <ul className={surAccueil ? "grid gap-2 sm:grid-cols-3" : "space-y-3"}>
+            <ul className="grid gap-2 sm:grid-cols-3">
               {resultat.recommandations.map((r, i) => (
                 <li key={r.ressource.id}>
                   <Link
@@ -563,7 +837,7 @@ export default function EntreeMatrice({
                     // laisser précharger ferait payer des destinations que
                     // personne n'ouvre.
                     prefetch={false}
-                    onClick={() => track("ia_ressource", { id: r.ressource.id, rang: i + 1, profil })}
+                    onClick={() => track("ia_ressource", { id: r.ressource.id, rang: i + 1, profil: p.id })}
                     className={`block h-full border-2 bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16] ${
                       i === 0 ? "border-[#0e7490]" : "border-[#1d1c16]/30"
                     }`}
@@ -581,7 +855,7 @@ export default function EntreeMatrice({
                       </span>
                     </div>
                     <p className="mt-1 text-sm text-[#1d1c16]/75">{r.ressource.promesse}</p>
-                    <p className="mt-2 text-xs text-[#1d1c16]/50">
+                    <p className="mt-1.5 text-xs text-[#1d1c16]/50">
                       {r.ciblee && resultat.lecture.notionLabel ? (
                         <span className="text-[#0e7490]">
                           s&apos;ouvre sur {resultat.lecture.notionLabel} —{" "}
@@ -601,8 +875,8 @@ export default function EntreeMatrice({
           recherche du temps de /ia, qui n'avait rien d'autre pour le porter.
           Depuis que l'entrée est l'accueil, la colonne de gauche l'affiche —
           et il apparaissait deux fois sur le même écran. Un seul endroit pour
-          revenir sur ses pas : le RÉCENT, à gauche. `historique` reste, il
-          continue de s'écrire dans localStorage : c'est lui que la colonne lit. */}
+          revenir sur ses pas : le RÉCENT, à gauche. L'écriture reste ici :
+          c'est elle que la colonne lit. */}
     </section>
   );
 }

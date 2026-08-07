@@ -80,6 +80,33 @@ body {
   }
 }
 
+/* ─── UNE RANGÉE QUI TIENT SUR UNE SEULE LIGNE ─────────────────────────────
+   Les profils, les classes, les matières et les intentions de la page d'entrée
+   passaient à la ligne dès qu'ils étaient nombreux : deux lignes de pastilles,
+   c'est deux lignes de moins pour les ressources, et elles tombaient sous le
+   pli. Ici, la rangée ne se casse jamais — sur téléphone elle défile au doigt.
+
+   La barre de défilement est masquée VISUELLEMENT et uniquement là : le
+   contenu reste atteignable au clavier (la rangée garde son défilement natif)
+   et au doigt. Sur ordinateur, la rangée est assez large pour que rien ne
+   dépasse — le débordement est le filet, pas le mode normal. */
+.rangee-defilante {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;              /* Firefox */
+  -ms-overflow-style: none;           /* anciens Edge */
+  -webkit-overflow-scrolling: touch;
+}
+.rangee-defilante::-webkit-scrollbar {
+  display: none;                      /* Chrome, Safari */
+}
+.rangee-defilante > * {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
 /* Fiches de cours — à l'écran, la correction est repliée derrière
    « Voir la correction ». À l'impression / PDF, elle se déplie (géré dans
    chaque fiche) et le libellé devient « Correction : » (raffinement 24/06/2026,

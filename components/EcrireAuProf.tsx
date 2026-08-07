@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
 import { prenomFromNom } from "@/lib/prenom";
+import { EVENEMENT_ECRIRE } from "@/lib/ecrireAuProf";
 
 // Aligné sur la limite serveur (app/api/contact/route.ts, source=eleve-message) :
 // 200 mots suffisent pour un message honnête, au-delà c'est un copier-collé d'IA.
@@ -19,7 +20,20 @@ const MAX_MOTS = 200;
  * role="Élève", topic="Question", source="eleve-message" → filtrable dans
  * l'admin. Composant autonome : il suffit de poser <EcrireAuProf />.
  *
- * Position : bas À GAUCHE (Calculatrice au centre, Coach IA à droite).
+ * ─────────────────────────────────────────────────────────────────────────────
+ * ⛔ 07/08/2026 — LE BOUTON FLOTTANT A ÉTÉ RETIRÉ, LE FORMULAIRE EST INTACT.
+ *
+ * Il vivait en `fixed bottom-5 left-5`, sur toutes les pages, dès qu'un élève
+ * était connecté : un rappel permanent pour une action qu'on fait deux fois par
+ * trimestre. Et sur l'accueil il tombait dans le même coin que le tiroir des
+ * demandes — deux pastilles rondes voisines, deux fonctions sans rapport.
+ *
+ * ⭐ CE QU'IL FAUT NE PAS CONFONDRE, dans ce fichier comme dans la demande de
+ * Frédéric : on a supprimé la SOLLICITATION, pas la fonction. Le formulaire, son
+ * compteur de mots, sa limite à 200, son envoi vers /api/contact et son accusé
+ * de réception n'ont pas bougé d'une ligne. Il s'ouvre désormais sur événement
+ * (`lib/ecrireAuProf.ts`), depuis l'entrée « ✉️ Écris-moi » du menu du compte —
+ * dans la colonne de gauche et dans le header.
  */
 export default function EcrireAuProf() {
   const { eleve } = useEleve();
@@ -37,6 +51,14 @@ export default function EcrireAuProf() {
   useEffect(() => {
     if (open && !envoye) champRef.current?.focus();
   }, [open, envoye]);
+
+  // ⭐ C'EST LE MENU DU COMPTE QUI OUVRE, MAINTENANT. Le composant n'a plus de
+  // déclencheur à lui : il attend qu'on l'appelle par son nom.
+  useEffect(() => {
+    const ouvrir = () => setOpen(true);
+    window.addEventListener(EVENEMENT_ECRIRE, ouvrir);
+    return () => window.removeEventListener(EVENEMENT_ECRIRE, ouvrir);
+  }, []);
 
   // Réservé aux élèves connectés.
   if (!connecte) return null;
@@ -116,18 +138,10 @@ export default function EcrireAuProf() {
     }
   }
 
-  if (!open) {
-    return (
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        aria-label="Écris-moi"
-        className="fixed bottom-5 left-5 z-50 flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-pink-500 px-5 py-3 text-sm font-black text-white shadow-2xl ring-2 ring-white/50 transition hover:scale-105 print:hidden"
-      >
-        ✉️ <span className="hidden sm:inline">Écris-moi</span>
-      </button>
-    );
-  }
+  // ⛔ RIEN TANT QU'ON NE L'APPELLE PAS. Il n'y a plus de pastille flottante :
+  // l'entrée « ✉️ Écris-moi » du menu du compte est la seule porte, et c'est
+  // exactement ce qui était demandé — garder le formulaire, retirer le rappel.
+  if (!open) return null;
 
   return (
     <aside className="fixed bottom-5 left-5 z-50 flex w-[300px] flex-col overflow-hidden rounded-3xl border border-amber-200 bg-white text-slate-800 shadow-2xl sm:w-[340px] print:hidden">

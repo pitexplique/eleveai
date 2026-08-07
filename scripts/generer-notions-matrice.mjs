@@ -32,7 +32,26 @@ function lireNotions(fichier) {
   // Les notions se déclarent { id: "...", label: "...", ... } — on apparie
   // chaque id au premier label qui le suit, dans l'ordre du fichier.
   const blocs = [...src.matchAll(/id:\s*"([a-z0-9_]+)"[\s\S]{0,400}?label:\s*"([^"]+)"/g)];
-  return blocs.map((b) => ({ id: b[1], label: b[2] }));
+
+  return blocs.map((b) => {
+    // ⭐ LES PRÉREQUIS AUSSI (07/08). « Préparer une progression », côté
+    // professeur, ne peut pas se contenter d'une liste de notions : ce qu'un
+    // enseignant construit, c'est un ORDRE, et l'ordre vient des prérequis.
+    // Ils sont déjà écrits dans le knowledge (`prerequis: [...]`) — les
+    // recopier à la main dans un troisième fichier, c'est garantir qu'ils
+    // divergeront.
+    //
+    // ⚠️ On cherche `prerequis` APRÈS le label et dans une fenêtre courte :
+    // au-delà, on attraperait celui de la notion suivante. Un tableau absent
+    // ou vide donne [] — ce qui est l'information « rien à savoir avant »,
+    // et c'est exactement ce qu'on veut afficher en tête de progression.
+    const apres = src.slice(b.index + b[0].length, b.index + b[0].length + 300);
+    const m = apres.match(/^\s*(?:[a-zA-Z]+:\s*[^\n]*\n\s*)*?prerequis:\s*\[([^\]]*)\]/);
+    const prerequis = m
+      ? [...m[1].matchAll(/"([a-z0-9_]+)"/g)].map((x) => x[1])
+      : [];
+    return { id: b[1], label: b[2], prerequis };
+  });
 }
 
 const paquets = [];
@@ -65,9 +84,14 @@ const entete = `// ⚠️ FICHIER GÉNÉRÉ — NE PAS MODIFIER À LA MAIN.
 // lire « les dérivées »), et reconnaître une notion écrite en toutes lettres
 // (« vecteurs », « racine carrée ») sans qu'on ait à l'inscrire au lexique.
 //
+// Elles portent aussi leurs PRÉREQUIS : c'est ce qui permet à « Préparer une
+// progression » (côté professeur) de proposer un ORDRE, et pas seulement une
+// liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
+// par où l'année peut commencer.
+//
 // ${total} notions, ${paquets.length} paquets.
 
-export type NotionCoach = { id: string; label: string };
+export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
 /** matière → classe → notions au programme. */
 export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = ${JSON.stringify(

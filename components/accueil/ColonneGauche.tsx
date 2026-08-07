@@ -10,13 +10,15 @@
 // Sur téléphone, elle devient un tiroir : rien n'est rendu tant qu'on ne l'ouvre
 // pas, et le bouton reste atteignable au pouce.
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
-import { prenomFromNom } from "@/lib/prenom";
+import { ouvrirEcrireAuProf } from "@/lib/ecrireAuProf";
 import { PROFILS } from "@/lib/matrice/profils";
 import {
   EVENEMENT_HISTORIQUE,
+  FILTRES_MATIERE,
+  correspondAuFiltre,
   lireHistorique,
   type EntreeHistorique,
 } from "@/lib/matrice/historique";
@@ -30,23 +32,14 @@ const CLE_COLONNE = "eleveai.ia.colonne";
 /** Ce qu'on montre sans rien demander. Le reste attend « Afficher plus ». */
 const VISIBLES = 10;
 
-/** Le menu du compte : uniquement des pages qui existent vraiment. */
-const MENU = [
-  {
-    titre: "Mon espace",
-    liens: [
-      { label: "Tableau de bord", href: "/dashboard-eleve" },
-      { label: "Mes apprentissages", href: "/parcours" },
-    ],
-  },
-  {
-    titre: "Participer",
-    liens: [
-      { label: "Donner mon avis", href: "/votre-avis" },
-      { label: "Signaler une erreur", href: "/contact" },
-    ],
-  },
-];
+/** « 4 août » — la date seule, sans l'année tant qu'on est dans la même. */
+function jourCourt(quand: number): string {
+  try {
+    return new Date(quand).toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+  } catch {
+    return "";
+  }
+}
 
 /** L'icône « panneau latéral » — un rectangle et son montant, comme partout. */
 function IconePanneau({ className = "" }: { className?: string }) {
@@ -73,6 +66,8 @@ export default function ColonneGauche() {
   const [tiroirOuvert, setTiroirOuvert] = useState(false);
   const [toutAfficher, setToutAfficher] = useState(false);
   const [replie, setReplie] = useState(false);
+  /** Le filtre du RÉCENT. `null` = « Toutes » — la vue principale. */
+  const [filtre, setFiltre] = useState<string | null>(null);
 
   useEffect(() => {
     // ⭐ ON RELIT À CHAQUE DEMANDE, pas seulement au montage. L'entrée pose sa
@@ -110,17 +105,38 @@ export default function ColonneGauche() {
     }
   }
 
-  const prenom = eleve?.nom ? prenomFromNom(eleve.nom) : null;
-  const initiales = (prenom ?? "?").slice(0, 2).toUpperCase();
+  const initiales = (eleve?.nom ?? "?").trim().slice(0, 2).toUpperCase();
   const labelProfil = profil ? PROFILS.find((p) => p.id === profil)?.label : null;
 
-  const listeVisible = toutAfficher ? historique : historique.slice(0, VISIBLES);
-  const reste = historique.length - listeVisible.length;
+  // ⭐ LES FILTRES DU RÉCENT (07/08). Trente demandes de quatre matières dans
+  // une seule liste, c'est un tas : retrouver « la question de conjugaison de
+  // mardi » demandait de tout relire.
+  // ⚠️ On n'affiche QUE les filtres qui ont quelque chose derrière — même règle
+  // que les chips de l'entrée. Un onglet « Espagnol » vide dirait qu'on n'a rien
+  // fait en espagnol, alors qu'il dit seulement qu'on n'a rien DEMANDÉ.
+  const filtresUtiles = useMemo(() => {
+    const presents = FILTRES_MATIERE.filter(
+      (f) => f.id !== null && historique.some((h) => correspondAuFiltre(h, f.id)),
+    );
+    // Un seul rayon rempli : le filtre ne trierait rien, il ferait du bruit.
+    return presents.length >= 2 ? [FILTRES_MATIERE[0], ...presents] : [];
+  }, [historique]);
+
+  const listeFiltree = useMemo(
+    () => historique.filter((h) => correspondAuFiltre(h, filtre)),
+    [historique, filtre],
+  );
+  const listeVisible = toutAfficher ? listeFiltree : listeFiltree.slice(0, VISIBLES);
+  const reste = listeFiltree.length - listeVisible.length;
+
+  /** Le libellé lisible d'une matière enregistrée dans l'historique. */
+  const libelleMatiere = (id?: string | null) =>
+    FILTRES_MATIERE.find((f) => f.id === id)?.label ?? null;
 
   const contenu = (
     <div className="flex min-h-full flex-col">
       <div className="flex-1 px-3 py-4">
-        <div className="mb-4 flex items-center gap-2">
+        <div className="mb-4 flex items-center gap-1.5">
           <Link
             href="/"
             prefetch={false}
@@ -129,14 +145,19 @@ export default function ColonneGauche() {
           >
             <span aria-hidden="true">+</span> Nouvelle demande
           </Link>
-          {/* Replier : réservé à l'ordinateur. Sur téléphone le tiroir se ferme
-              déjà en touchant à côté, un second geste ne servirait à rien. */}
+          {/* ⭐ PLUS DISCRET, ET DE LA MÊME HAUTEUR QUE SON VOISIN (07/08).
+              Il était posé en `p-2` à côté d'un bouton en `py-2` : deux hauteurs
+              différentes dans la même rangée, et l'œil lisait un décalage avant
+              de lire un outil. Il reste gris tant qu'on ne le survole pas — ce
+              n'est pas lui qu'on vient chercher en arrivant.
+              Replier est réservé à l'ordinateur : sur téléphone le tiroir se
+              ferme déjà en touchant à côté. */}
           <button
             type="button"
             onClick={() => basculerPli(true)}
             aria-label="Replier la colonne"
             title="Replier la colonne"
-            className="hidden shrink-0 rounded-xl p-2 text-slate-400 transition hover:bg-slate-200 hover:text-slate-700 lg:block"
+            className="hidden shrink-0 rounded-xl border border-transparent px-2 py-2 text-slate-400 transition hover:border-slate-300 hover:bg-white hover:text-slate-700 lg:block"
           >
             <IconePanneau className="h-5 w-5" />
           </button>
@@ -147,21 +168,63 @@ export default function ColonneGauche() {
             <p className="mb-2 px-1 text-[11px] font-medium uppercase tracking-wide text-slate-400">
               Récent
             </p>
+
+            {filtresUtiles.length > 0 && (
+              <div className="rangee-defilante mb-2 gap-1" role="group" aria-label="Filtrer par matière">
+                {filtresUtiles.map((f) => {
+                  const actif = filtre === f.id;
+                  return (
+                    <button
+                      key={f.label}
+                      type="button"
+                      onClick={() => {
+                        setFiltre(f.id);
+                        setToutAfficher(false);
+                      }}
+                      aria-pressed={actif}
+                      className={`rounded-full px-2 py-0.5 text-[11px] transition ${
+                        actif
+                          ? "bg-teal-700 text-white"
+                          : "bg-white text-slate-500 hover:bg-slate-200 hover:text-slate-800"
+                      }`}
+                    >
+                      {/* « Mathématiques » ne tient pas dans 256 px de colonne
+                          à côté de cinq autres : ici, et ici seulement, on dit
+                          « Maths ». */}
+                      {f.id === "maths" ? "Maths" : f.label}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+
             <ul className="space-y-0.5">
-              {listeVisible.map((h) => (
-                <li key={`${h.quand}-${h.question}`}>
-                  <Link
-                    href={`/?q=${encodeURIComponent(h.question)}`}
-                    prefetch={false}
-                    onClick={() => setTiroirOuvert(false)}
-                    className="block truncate rounded-lg px-2 py-1.5 text-sm text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
-                    title={h.question}
-                  >
-                    {h.question}
-                  </Link>
-                </li>
-              ))}
+              {listeVisible.map((h) => {
+                const matiere = libelleMatiere(h.matiere);
+                // La ligne du dessous ne s'affiche que si elle dit quelque
+                // chose : les demandes d'avant le 07/08 n'ont ni matière ni
+                // niveau, et une ligne vide sous chacune ferait une liste deux
+                // fois plus haute pour rien.
+                const contexte = [matiere, h.niveau, jourCourt(h.quand)].filter(Boolean).join(" · ");
+                return (
+                  <li key={`${h.quand}-${h.question}`}>
+                    <Link
+                      href={`/?q=${encodeURIComponent(h.question)}`}
+                      prefetch={false}
+                      onClick={() => setTiroirOuvert(false)}
+                      className="block rounded-lg px-2 py-1.5 transition hover:bg-slate-100"
+                      title={h.question}
+                    >
+                      <span className="block truncate text-sm text-slate-600">{h.question}</span>
+                      {contexte && (
+                        <span className="block truncate text-[11px] text-slate-400">{contexte}</span>
+                      )}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
+
             {/* « Afficher plus » n'apparaît QUE s'il y a vraiment autre chose
                 derrière : un bouton qui ne révèle rien est une petite trahison. */}
             {reste > 0 && (
@@ -173,7 +236,7 @@ export default function ColonneGauche() {
                 Afficher plus
               </button>
             )}
-            {toutAfficher && historique.length > VISIBLES && (
+            {toutAfficher && listeFiltree.length > VISIBLES && (
               <button
                 type="button"
                 onClick={() => setToutAfficher(false)}
@@ -181,6 +244,11 @@ export default function ColonneGauche() {
               >
                 Afficher moins
               </button>
+            )}
+            {listeFiltree.length === 0 && (
+              <p className="px-2 py-1.5 text-sm text-slate-400">
+                Rien dans cette matière pour l&apos;instant.
+              </p>
             )}
           </>
         )}
@@ -190,24 +258,64 @@ export default function ColonneGauche() {
       <div className="sticky bottom-0 border-t border-slate-200 bg-slate-50 p-3">
         {menuOuvert && (
           <div className="absolute bottom-full left-3 right-3 mb-2 rounded-xl border border-slate-200 bg-white py-2 shadow-lg">
-            {MENU.map((groupe) => (
-              <div key={groupe.titre} className="px-1 py-1">
-                <p className="px-3 py-1 text-[11px] font-medium uppercase tracking-wide text-slate-400">
-                  {groupe.titre}
-                </p>
-                {groupe.liens.map((l) => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    prefetch={false}
-                    onClick={() => setMenuOuvert(false)}
-                    className="block rounded-lg px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
-                  >
-                    {l.label}
-                  </Link>
-                ))}
-              </div>
-            ))}
+            <div className="px-1 py-1">
+              <p className="px-3 py-1 text-[11px] font-medium uppercase tracking-wide text-slate-400">
+                Mon espace
+              </p>
+              {[
+                { label: "Tableau de bord", href: "/dashboard-eleve" },
+                { label: "Mes apprentissages", href: "/parcours" },
+              ].map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  prefetch={false}
+                  onClick={() => setMenuOuvert(false)}
+                  className="block rounded-lg px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="px-1 py-1">
+              <p className="px-3 py-1 text-[11px] font-medium uppercase tracking-wide text-slate-400">
+                Participer
+              </p>
+              {[
+                { label: "Donner mon avis", href: "/votre-avis" },
+                { label: "Signaler une erreur", href: "/contact" },
+              ].map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  prefetch={false}
+                  onClick={() => setMenuOuvert(false)}
+                  className="block rounded-lg px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
+                >
+                  {l.label}
+                </Link>
+              ))}
+              {/* ⭐ « ÉCRIS-MOI » EST ICI DEPUIS LE 07/08, et nulle part ailleurs.
+                  Le formulaire n'a pas changé d'une ligne : c'est sa pastille
+                  flottante, en bas à gauche de toutes les pages, qui est partie.
+                  Réservé aux élèves connectés — c'est la condition du composant
+                  lui-même, on ne propose pas une porte qui ne s'ouvrira pas. */}
+              {eleve && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMenuOuvert(false);
+                    setTiroirOuvert(false);
+                    ouvrirEcrireAuProf();
+                  }}
+                  className="block w-full rounded-lg px-3 py-1.5 text-left text-sm text-slate-700 hover:bg-slate-100"
+                >
+                  ✉️ Écris-moi
+                </button>
+              )}
+            </div>
+
             {eleve && (
               <div className="mt-1 border-t border-slate-200 px-1 pt-2">
                 <button
@@ -292,33 +400,38 @@ export default function ColonneGauche() {
       )}
 
       {/* Dépliée : le seul moyen de la faire revenir. Même icône que pour la
-          replier — c'est un interrupteur, pas deux boutons différents. */}
+          replier — c'est un interrupteur, pas deux boutons différents.
+          ⭐ Adouci le 07/08 : à demi effacé au repos, net au survol. Posé au
+          milieu du bord gauche, il attirait l'œil plus que la question posée au
+          centre de l'écran. */}
       {replie && (
         <button
           type="button"
           onClick={() => basculerPli(false)}
-          aria-label="Afficher la colonne"
-          title="Afficher la colonne"
-          className="fixed left-3 top-1/2 z-40 hidden -translate-y-1/2 rounded-xl border border-slate-300 bg-white p-2 text-slate-500 shadow-sm transition hover:text-slate-900 lg:block"
+          aria-label="Afficher mes demandes"
+          title="Afficher mes demandes"
+          className="fixed left-2 top-1/2 z-40 hidden -translate-y-1/2 rounded-xl border border-slate-200 bg-white/70 p-2 text-slate-400 opacity-60 shadow-sm transition hover:border-slate-300 hover:bg-white hover:text-slate-800 hover:opacity-100 lg:block"
         >
           <IconePanneau className="h-5 w-5" />
         </button>
       )}
 
       {/* Téléphone : un bouton, et le tiroir n'existe que s'il est ouvert.
+          ⭐ IL EST PASSÉ EN BAS À GAUCHE (07/08) — il était en `top-3` et se
+          superposait au bandeau du haut. Le déplacer vers le bas règle le défaut
+          sans avoir à connaître la hauteur du header, qui change quand
+          « Installer l'app » se ferme : c'est exactement la réponse en CSS qu'on
+          cherchait. La place était libre : le bouton « Écris-moi » qui l'occupait
+          est parti dans le menu du compte le même jour.
           ⚠️ IL Y A DÉJÀ UN HAMBURGER SUR CETTE PAGE — celui du header, à droite.
           Les deux portaient le même nom « Ouvrir le menu » : au lecteur d'écran,
           la page proposait deux fois le même geste pour deux contenus
-          différents. Celui-ci ouvre les demandes, pas le site — il le dit.
-          ⏳ Reste à régler : posé en `top-3`, il se superpose au bandeau du haut.
-          Le déplacer demande de connaître la hauteur du header, qui change quand
-          « Installer l'app » se ferme — c'est le même piège que l'encart du
-          compte, et il mérite le même genre de réponse en CSS, pas une constante. */}
+          différents. Celui-ci ouvre les demandes, pas le site — il le dit. */}
       <button
         type="button"
         onClick={() => setTiroirOuvert(true)}
         aria-label="Ouvrir mes demandes"
-        className="fixed left-3 top-3 z-40 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm lg:hidden"
+        className="fixed bottom-4 left-3 z-40 rounded-full border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-600 shadow-lg lg:hidden print:hidden"
       >
         ☰
       </button>
@@ -330,7 +443,9 @@ export default function ColonneGauche() {
             onClick={() => setTiroirOuvert(false)}
             className="absolute inset-0 bg-slate-900/30"
           />
-          <div className="absolute left-0 top-0 h-full w-72 bg-slate-50 shadow-xl">{contenu}</div>
+          <div className="absolute left-0 top-0 h-full w-72 overflow-y-auto bg-slate-50 shadow-xl">
+            {contenu}
+          </div>
         </div>
       )}
     </>

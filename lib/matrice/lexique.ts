@@ -42,6 +42,20 @@ export const MARQUEURS_INTENTION: { intention: Intention; marqueurs: string[] }[
     ],
   },
   {
+    // ⭐ APRÈS « preparer », ET C'EST VOLONTAIRE (07/08). « Évaluation » et
+    // « contrôle » disent une ÉCHÉANCE : ils doivent rester sur « préparer ».
+    // Ici on ne garde que ce qui dit « je veux savoir où j'en suis », sans
+    // date derrière. Le premier bloc qui accroche gagne — celui-ci passe donc
+    // en second, et il n'attrape que ce que l'autre a laissé.
+    intention: "tester",
+    marqueurs: [
+      "teste moi", "teste-moi", "me tester", "je veux me tester", "tester mon niveau",
+      "test de niveau", "faire le point", "ou j'en suis", "ou j en suis",
+      "mon niveau", "quel niveau", "bilan", "diagnostic", "evaluer mon niveau",
+      "savoir si j'ai compris", "savoir si j ai compris", "verifier mon niveau",
+    ],
+  },
+  {
     intention: "corriger",
     marqueurs: [
       "corrige", "corriger", "correction", "mon erreur", "mes erreurs",
@@ -243,6 +257,29 @@ export const NOTIONS: NotionLexique[] = [
   {
     id: "videos", label: "les vidéos", matiere: "transversal",
     alias: ["video", "videos", "en video", "animation", "animations", "regarder", "en images"],
+  },
+  {
+    // ⭐ AJOUTÉE LE 07/08 (Frédéric : « si on tape concours général sur la
+    // barre de recherche il doit envoyer sur ce répertoire », « idem si on
+    // tape concours avenir »).
+    //
+    // ⚠️ « concours » était DÉJÀ un marqueur d'intention (« preparer ») : taper
+    // « concours avenir » se lisait donc « quelqu'un prépare une échéance » et
+    // sortait le cahier de vacances. L'intention était juste, le sujet passait
+    // à la trappe — et c'est le sujet qu'on avait nommé. Il fallait la notion
+    // en plus du marqueur, pas à la place.
+    //
+    // ⚠️ Les alias en DEUX MOTS d'abord n'auraient servi à rien : `lireNotion`
+    // rend la première notion qui accroche, et chaque alias est testé mot à
+    // mot dans l'ordre de la phrase. « concours » seul suffit à accrocher les
+    // deux ; ce sont les NIVEAUX des ressources qui départagent ensuite —
+    // Avenir en Terminale, le général au collège.
+    id: "concours", label: "les concours", matiere: "maths",
+    alias: [
+      "concours", "concours general", "concours generale", "concour general",
+      "concours avenir", "concour avenir", "avenir",
+      "olympiade", "olympiades", "olympiades junior",
+    ],
   },
 
   // ── LES MATIÈRES, EN DERNIER ────────────────────────────────────────────

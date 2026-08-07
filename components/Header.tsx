@@ -8,6 +8,10 @@ import { Menu, X, GraduationCap, LogOut, ChevronDown } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
 import { createClient } from "@/lib/supabase/client";
 import { useAudience, type Audience } from "@/lib/useAudience";
+import { ouvrirEcrireAuProf } from "@/lib/ecrireAuProf";
+import { urlGuidePour } from "@/lib/matrice/guides";
+import { PROFILS } from "@/lib/matrice/profils";
+import type { ProfilId } from "@/lib/matrice/types";
 
 // ─── Nav structure ────────────────────────────────────────────────────────────
 
@@ -268,12 +272,190 @@ function MobileSection({
 // « Élève » → /espace-eleves (25/07) : même destination que les sitelinks
 // Google/Bing — la vitrine curée. Le catalogue /explorer reste à un clic
 // (hero + fin de page d'espace-eleves, et menu de l'élève connecté).
+//
+// ⭐ AU PLURIEL DEPUIS LE 07/08 (« Élèves », « Parents »…). Ce ne sont pas des
+// étiquettes qu'on se colle en arrivant — ce sont des rayons. Au singulier, la
+// rangée demandait « qui es-tu ? » une deuxième fois, à deux centimètres de
+// l'endroit où la page le demande déjà.
 const AUDIENCE_DOORS: { space: Audience; emoji: string; label: string; href: string }[] = [
-  { space: "eleve", emoji: "🎓", label: "Élève", href: "/espace-eleves" },
-  { space: "parent", emoji: "👪", label: "Parent", href: "/parents" },
-  { space: "enseignant", emoji: "🍎", label: "Enseignant", href: "/enseignants" },
-  { space: "etablissement", emoji: "🏫", label: "Établissement", href: "/espace-ecoles" },
+  { space: "eleve", emoji: "🎓", label: "Élèves", href: "/espace-eleves" },
+  { space: "parent", emoji: "👪", label: "Parents", href: "/parents" },
+  { space: "enseignant", emoji: "🍎", label: "Enseignants", href: "/enseignants" },
+  { space: "etablissement", emoji: "🏫", label: "Établissements", href: "/espace-ecoles" },
 ];
+
+// ─── Le menu d'un élève CONNECTÉ ─────────────────────────────────────────────
+//
+// ⭐ REFAIT LE 07/08. Il portait « Dictée · Cahiers · Jeux · Explorer ·
+// Matières » : deux rituels, deux catalogues, et pas une seule porte vers ce
+// pour quoi les élèves viennent. Le coach et les parcours — les deux endroits
+// qui gardent une trace de son travail — n'étaient nulle part.
+//   ⛔ « Jeux » part : c'était /qui-suis-je-a-imprimer, des cartes à imprimer.
+//      Excellent en classe, mais le mot promettait un jeu à l'écran.
+//   ⛔ « Explorer » part : c'est le catalogue, et depuis que l'accueil demande
+//      ce qu'on cherche, un catalogue en haut de page est la question qu'on
+//      vient justement d'éviter. Il reste dans /espace-eleves et dans la
+//      matrice.
+//   ⭐ « Guide de survie » entre, et il ouvre CELUI DE SA CLASSE.
+const MENU_ELEVE: { href: string; label: string; court: string }[] = [
+  { href: "/coach-ia/maths", label: "🧠 Coach", court: "🧠 Coach" },
+  { href: "/parcours", label: "🛤️ Parcours", court: "🛤️ Parcours" },
+  { href: "/dictee-du-jour", label: "✍️ Dictée", court: "✍️ Dictée" },
+  { href: "/cahier-vacances", label: "☀️ Cahier", court: "☀️ Cahier" },
+];
+
+/**
+ * La classe enregistrée d'un élève → le niveau de la matrice.
+ *
+ * ⚠️ Les deux vocabulaires ne coïncident pas : le compte dit « premiere-spe »,
+ * la matrice dit « premiere ». Sans cette traduction, « Guide de survie »
+ * retombait sur le sommaire pour tout le lycée — c'est-à-dire au moment précis
+ * où le guide de SA classe existe.
+ */
+function profilDeLaClasse(classe?: string | null): ProfilId | null {
+  if (!classe) return null;
+  const c = classe.trim().toLowerCase();
+  const direct = PROFILS.find((p) => p.id === c);
+  if (direct) return direct.id;
+  if (c.startsWith("premiere")) return "premiere";
+  if (c.startsWith("terminale")) return "terminale";
+  if (c.startsWith("seconde") || c === "2nde") return "seconde";
+  return null;
+}
+
+// ─── Le menu du compte, à droite ─────────────────────────────────────────────
+
+function MenuCompte({
+  nom,
+  sousTitre,
+  dashboardHref,
+  estEleve,
+  paper,
+  onLogout,
+}: {
+  nom: string;
+  sousTitre: string | null;
+  dashboardHref: string;
+  estEleve: boolean;
+  paper: boolean;
+  onLogout: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handle(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handle);
+    return () => document.removeEventListener("mousedown", handle);
+  }, []);
+
+  const initiales = nom.trim().slice(0, 2).toUpperCase() || "?";
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-label="Mon compte"
+        className={`inline-flex items-center gap-1.5 rounded-full p-0.5 pr-2 transition ${
+          paper ? "hover:bg-[#1d1c16]/10" : "hover:bg-white/15"
+        }`}
+      >
+        <span
+          className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-black ${
+            paper ? "bg-teal-700 text-white" : "bg-cyan-300 text-[#041B33]"
+          }`}
+        >
+          {initiales}
+        </span>
+        <ChevronDown
+          className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""} ${
+            paper ? "text-[#1d1c16]/60" : "text-white/70"
+          }`}
+        />
+      </button>
+
+      {open && (
+        <div
+          className={`absolute right-0 top-full z-[80] mt-1 w-60 rounded-2xl border py-2 shadow-2xl ${
+            paper ? "border-[#1d1c16]/20 bg-white" : "border-white/10 bg-[#041B33]"
+          }`}
+        >
+          <div className={`px-4 pb-2 pt-1 ${paper ? "text-[#1d1c16]" : "text-white"}`}>
+            <p className="truncate text-sm font-black">{nom}</p>
+            {sousTitre && (
+              <p className={`truncate text-xs ${paper ? "text-[#1d1c16]/60" : "text-white/60"}`}>
+                {sousTitre}
+              </p>
+            )}
+          </div>
+
+          <div className={`border-t px-1 pt-1 ${paper ? "border-[#1d1c16]/10" : "border-white/10"}`}>
+            {[
+              { label: "Tableau de bord", href: dashboardHref },
+              { label: "Mes apprentissages", href: "/parcours" },
+              { label: "Donner mon avis", href: "/votre-avis" },
+            ].map((l) => (
+              <Link
+                key={l.href}
+                prefetch={false}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className={`block rounded-lg px-3 py-1.5 text-sm ${
+                  paper
+                    ? "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10"
+                    : "text-white/85 hover:bg-white/10"
+                }`}
+              >
+                {l.label}
+              </Link>
+            ))}
+
+            {/* ⭐ « ÉCRIS-MOI » — déplacé ici le 07/08 depuis la pastille
+                flottante qui occupait le bas-gauche de toutes les pages.
+                Le formulaire est intact ; c'est le rappel permanent qui est
+                parti. Réservé aux élèves : c'est la condition du composant. */}
+            {estEleve && (
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  ouvrirEcrireAuProf();
+                }}
+                className={`block w-full rounded-lg px-3 py-1.5 text-left text-sm ${
+                  paper
+                    ? "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10"
+                    : "text-white/85 hover:bg-white/10"
+                }`}
+              >
+                ✉️ Écris-moi
+              </button>
+            )}
+          </div>
+
+          <div className={`mt-1 border-t px-1 pt-1 ${paper ? "border-[#1d1c16]/10" : "border-white/10"}`}>
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                onLogout();
+              }}
+              className={`flex w-full items-center gap-2 rounded-lg px-3 py-1.5 text-left text-sm ${
+                paper ? "text-red-800 hover:bg-red-800/10" : "text-red-300 hover:bg-red-500/20"
+              }`}
+            >
+              <LogOut className="h-4 w-4" />
+              Se déconnecter
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 // ─── Main Header ──────────────────────────────────────────────────────────────
 
@@ -309,16 +491,26 @@ export default function Header() {
     : isProf
       ? "/dashboard-prof"
       : "/dashboard-eleve";
-  const dashboardLabel = isPrincipal
-    ? "Principal"
+  // ⭐ LE NOM N'EST PLUS DANS LA BARRE (07/08), il est dans le menu du compte.
+  // Le bouton affichait « MARIE DUPONT · 4C » en pastille pleine au milieu du
+  // header : le nom d'un élève, en grand, sur un écran souvent partagé en
+  // classe ou projeté. Ce qui reste visible dit la fonction — « Mon espace » —
+  // et l'identité attend qu'on ouvre son propre menu.
+  const dashboardSousTitre = isPrincipal
+    ? "Chef d'établissement"
     : isProf
-      ? "Prof"
+      ? "Enseignant"
       : eleveClasse
-        ? `${eleveLabel} · ${eleveClasse}`
-        : eleveLabel;
+        ? `Élève · ${eleveClasse}`
+        : "Élève";
   const dashboardColor = isStaff
     ? "bg-gradient-to-r from-blue-300 to-indigo-300"
     : "bg-gradient-to-r from-emerald-300 to-cyan-300";
+
+
+  // Le guide de survie de SA classe — et le sommaire quand sa classe en a
+  // plusieurs (ou aucun). On ne choisit pas les maths à la place de quelqu'un.
+  const hrefGuide = urlGuidePour(profilDeLaClasse(eleve?.classe));
 
   return (
     <header
@@ -328,119 +520,137 @@ export default function Header() {
           : "sticky top-0 z-50 border-b border-cyan-300/20 bg-gradient-to-r from-[#041B33]/95 via-[#062A4F]/95 to-[#073B63]/95 shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-xl"
       }
     >
-      {/* ⭐ SUR L'ACCUEIL, LE HEADER VA D'UN BORD À L'AUTRE (06/08).
-          Le conteneur de 1 280 px centré vient du journal, où la page entière
-          était centrée et où rien ne vivait sur les bords. Depuis que l'accueil
-          a sa colonne de gauche, ce centrage laissait un coin vide en haut à
-          gauche — au-dessus de la colonne — et faisait flotter l'epsilon au
-          milieu de nulle part. À pleine largeur, la marque se pose à gauche,
-          au-dessus de la colonne, et la navigation part à droite.
-          ⚠️ Sans risque pour le calage à 1 024 px : en dessous de 1 280,
-          `max-w-7xl` ne contraignait rien. Seuls les grands écrans changent. */}
+      {/* ⭐ TROIS ZONES, ET LA DU MILIEU EST VRAIMENT AU MILIEU (07/08).
+          Le header était un `justify-between` : la marque à gauche, TOUT le
+          reste poussé à droite en un seul bloc. La navigation d'audience et les
+          boutons de compte se touchaient, et le centre de la page était vide.
+
+          `grid-cols-[1fr_auto_1fr]` est la construction qui centre pour de bon :
+          la colonne du milieu prend la largeur de son contenu, les deux autres
+          se partagent EXACTEMENT ce qui reste. Le centre de la nav tombe donc
+          sur le centre de la page, quelle que soit la longueur du logo à gauche
+          ou du nom à droite. Un `justify-center` dans un flex ne fait pas ça :
+          il centre dans la place restante, ce qui n'est pas la même chose.
+
+          ⚠️ SUR L'ACCUEIL, LE HEADER VA D'UN BORD À L'AUTRE (06/08). Le
+          conteneur de 1 280 px centré vient du journal ; depuis que l'accueil a
+          sa colonne de gauche, il laissait un coin vide au-dessus d'elle.
+          Sans effet sous 1 280 px : seuls les grands écrans changent. */}
       <nav
-        className={
-          paper
-            ? "flex w-full items-center justify-between px-4 py-3"
-            : "mx-auto flex max-w-7xl items-center justify-between px-4 py-3"
-        }
+        className={[
+          "grid grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 py-2.5",
+          paper ? "w-full" : "mx-auto max-w-7xl",
+        ].join(" ")}
       >
-
-        {/* Logo */}
-        <Link prefetch={false} href="/accueil" className="group flex shrink-0 items-center gap-3 rounded-full pr-1 transition hover:brightness-110">
-          <div className="relative h-11 w-20 overflow-hidden rounded-[18px] shadow-[0_0_22px_rgba(248,200,70,0.22)] ring-1 ring-white/15">
-            <Image
-              src="/logo-eleveai-header.svg"
-              alt=""
-              fill
-              sizes="80px"
-              className="object-contain"
-              priority
-            />
-          </div>
-          <div className="flex flex-col leading-tight">
-            <span className={`text-[1.05rem] font-black tracking-tight ${paper ? "text-[#1d1c16]" : "text-white"}`}>
-              Eleve<span className={paper ? "text-cyan-800" : "text-cyan-200"}>AI</span>
-            </span>
-            <span className={`hidden text-xs sm:block ${paper ? "font-serif italic text-[#1d1c16]/60" : "text-cyan-100/75"}`}>
-              La liberté d&apos;apprendre
-            </span>
-          </div>
-        </Link>
-
-        {/* ── LA PORTE DE RETOUR ─────────────────────────────────────────
-            L'onglet « 🗞️ Accueil » est parti le 06/08 avec le journal, puis
-            revenu le soir même sans son journal. La raison de son retrait était
-            « le logo mène déjà à l'accueil, un geste que tout le monde
-            connaît » ; Frédéric ne l'a pas trouvé en revenant de
-            /espace-eleves. Si l'auteur du site cherche la sortie, un élève de
-            6ᵉ ne la cherche pas : il part.
-
-            ⛔ MAIS PAS SUR L'ACCUEIL ELLE-MÊME (`!paper`). Là, le logo est au
-            bord gauche, en grand, et le lien répétait la même destination à
-            deux mètres d'intervalle. Ailleurs le header reste centré dans son
-            conteneur : le logo n'est plus au bord, et c'est exactement là que
-            la porte manquait. On la met donc où elle sert, et nulle part où
-            elle fait double emploi.
-
-            Hors du ternaire d'audience : c'est une porte de RETOUR, pas une
-            porte d'audience — elle vaut pour tout le monde, connecté ou non. */}
-        <div className="hidden items-center gap-1.5 lg:flex">
-          {!paper && (
+        {/* ── ZONE 1 : LA MARQUE, complètement à gauche ─────────────────── */}
+        <div className="flex min-w-0 items-center gap-1.5 justify-self-start">
           <Link
             prefetch={false}
             href="/accueil"
-            /* Pas d'état « actif » : dans cette rangée le fond plein veut déjà
-               dire « voici TON audience ». Deux pleins côte à côte diraient deux
-               choses différentes dans la même langue. Et de toute façon ce lien
-               ne s'affiche jamais sur la page vers laquelle il pointe. */
-            className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black text-white/85 transition hover:bg-white/15 hover:text-white"
+            className="group flex shrink-0 items-center gap-2.5 rounded-full pr-1 transition hover:brightness-110"
           >
-            {/* ⚠️ MÊME RÈGLE QUE LE BOUTON CONNEXION : le mot disparaît sous
-                `xl`. À 1024 px — un iPad en paysage — la nav complète tenait à
-                7 px près, et c'est précisément ce lien qui la faisait déborder.
-                L'emoji seul garde la porte visible sans reprendre ces 7 px. */}
-            <span aria-hidden="true">🏠</span>
-            <span className="hidden xl:inline">Accueil</span>
-            <span className="sr-only xl:hidden">Accueil</span>
+            <div className="relative h-10 w-[72px] overflow-hidden rounded-[16px] shadow-[0_0_22px_rgba(248,200,70,0.22)] ring-1 ring-white/15">
+              <Image
+                src="/logo-eleveai-header.svg"
+                alt=""
+                fill
+                sizes="72px"
+                className="object-contain"
+                priority
+              />
+            </div>
+            <div className="flex flex-col leading-tight">
+              <span className={`text-[1.05rem] font-black tracking-tight ${paper ? "text-[#1d1c16]" : "text-white"}`}>
+                Eleve<span className={paper ? "text-cyan-800" : "text-cyan-200"}>AI</span>
+              </span>
+              <span className={`hidden text-xs xl:block ${paper ? "font-serif italic text-[#1d1c16]/60" : "text-cyan-100/75"}`}>
+                La liberté d&apos;apprendre
+              </span>
+            </div>
           </Link>
-          )}
 
+          {/* ── LA PORTE DE RETOUR ────────────────────────────────────────
+              L'onglet « 🏠 Accueil » est parti le 06/08 avec le journal, puis
+              revenu le soir même : Frédéric lui-même ne l'a pas trouvé en
+              revenant de /espace-eleves. Si l'auteur du site cherche la sortie,
+              un élève de 6ᵉ ne la cherche pas — il part.
+              ⛔ MAIS PAS SUR L'ACCUEIL ELLE-MÊME (`!paper`) : là, le lien
+              répéterait la destination du logo à deux centimètres.
+              Hors du bloc d'audience : c'est une porte de RETOUR, pas une porte
+              d'audience — elle vaut pour tout le monde, connecté ou non. */}
+          {!paper && (
+            <Link
+              prefetch={false}
+              href="/accueil"
+              title="Accueil"
+              className={`hidden shrink-0 rounded-full px-2.5 py-2 text-sm font-black transition lg:inline-flex ${
+                paper
+                  ? "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10"
+                  : "text-white/85 hover:bg-white/15 hover:text-white"
+              }`}
+            >
+              <span aria-hidden="true">🏠</span>
+              <span className="sr-only">Accueil</span>
+            </Link>
+          )}
+        </div>
+
+        {/* ── ZONE 2 : LA NAVIGATION, au centre de la page ──────────────── */}
+        <div className="hidden items-center gap-1 justify-self-center lg:flex">
           {eleve && !isStaff ? (
-            /* Élève CONNECTÉ → ses matières + rituels (pas les portes d'audience) */
+            /* Élève CONNECTÉ → son menu de travail.
+               Coach et Parcours en tête : ce sont les deux seuls endroits qui
+               gardent une trace de ce qu'il a fait. */
             <>
-              {(
-                [
-                  { href: "/dictee-du-jour", label: "✍️ Dictée", active: "bg-cyan-300 text-[#041B33] shadow-lg", idle: "bg-cyan-300/15 text-cyan-100 hover:bg-cyan-300/25 hover:text-white" },
-                  { href: "/cahier-vacances", label: "☀️ Cahiers", active: "bg-amber-300 text-[#041B33] shadow-lg", idle: "bg-amber-300/15 text-amber-200 hover:bg-amber-300/25 hover:text-amber-100" },
-                  { href: "/qui-suis-je-a-imprimer", label: "🃏 Jeux", active: "bg-fuchsia-300 text-[#041B33] shadow-lg", idle: "bg-fuchsia-300/15 text-fuchsia-200 hover:bg-fuchsia-300/25 hover:text-fuchsia-100" },
-                  { href: "/explorer", label: "🧭 Explorer", active: "bg-violet-300 text-[#041B33] shadow-lg", idle: "bg-violet-300/15 text-violet-200 hover:bg-violet-300/25 hover:text-violet-100" },
-                ] as const
-              ).map((c) => (
-                <Link prefetch={false}
+              {MENU_ELEVE.map((c) => (
+                <Link
+                  prefetch={false}
                   key={c.href}
                   href={c.href}
-                  className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-black transition ${
+                  className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-2 text-sm font-black transition ${
                     paper
                       ? isActive(pathname, c.href)
                         ? "bg-teal-700 text-white shadow"
-                        : "bg-[#1d1c16]/10 text-[#1d1c16] hover:bg-[#1d1c16]/20"
+                        : "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10"
                       : isActive(pathname, c.href)
-                        ? c.active
-                        : c.idle
+                        ? "bg-white text-[#041B33] shadow-lg"
+                        : "text-white/85 hover:bg-white/15 hover:text-white"
                   }`}
                 >
                   {c.label}
                 </Link>
               ))}
+              {/* Le guide de SA classe. Le mot complet n'apparaît qu'à partir
+                  de `xl` : à 1 024 px, six entrées plus le compte tiennent à
+                  quelques pixels près, et c'est ce libellé-là le plus long. */}
+              <Link
+                prefetch={false}
+                href={hrefGuide}
+                title="Guide de survie"
+                className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-2 text-sm font-black transition ${
+                  paper
+                    ? isActive(pathname, "/guide-de-survie")
+                      ? "bg-teal-700 text-white shadow"
+                      : "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10"
+                    : isActive(pathname, "/guide-de-survie")
+                      ? "bg-white text-[#041B33] shadow-lg"
+                      : "text-white/85 hover:bg-white/15 hover:text-white"
+                }`}
+              >
+                <span aria-hidden="true">🆘</span>
+                <span className="hidden xl:inline">Guide de survie</span>
+                <span className="xl:hidden">Guide</span>
+              </Link>
               <MatieresMenu pathname={pathname} paper={paper} />
             </>
           ) : (
             AUDIENCE_DOORS.map((d) => (
-              <Link prefetch={false}
+              <Link
+                prefetch={false}
                 key={d.space}
                 href={d.href}
                 className={[
-                  "inline-flex items-center gap-1.5 rounded-full px-2.5 py-2 text-sm font-black transition xl:px-3.5",
+                  "inline-flex items-center gap-1.5 rounded-full px-2.5 py-2 text-sm font-black transition xl:px-3",
                   paper
                     ? d.space === space
                       ? "bg-teal-700 text-white shadow"
@@ -454,81 +664,112 @@ export default function Header() {
               </Link>
             ))
           )}
+        </div>
 
+        {/* ── ZONE 3 : LE COMPTE, complètement à droite ─────────────────── */}
+        <div className="flex items-center gap-1.5 justify-self-end">
           {eleve ? (
-            <div className="ml-1 flex items-center gap-2">
-              <Link prefetch={false}
+            <>
+              {/* « MON ESPACE » plutôt que le nom et la classe (07/08).
+                  Le bouton affichait « MARIE DUPONT · 4C » en pastille verte
+                  au milieu de la barre : le nom d'un élève, en grand, sur un
+                  écran souvent partagé en classe. Le nom vit maintenant dans le
+                  menu du compte, là où on va exprès. */}
+              <Link
+                prefetch={false}
                 href={dashboardHref}
-                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-black shadow-lg hover:brightness-110 ${
+                className={`hidden items-center gap-2 rounded-full px-3.5 py-2 text-sm font-black shadow-lg transition hover:brightness-110 lg:inline-flex ${
                   paper ? "bg-teal-700 text-white" : `${dashboardColor} text-[#041B33]`
                 }`}
               >
                 <GraduationCap className="h-4 w-4" />
-                {dashboardLabel}
+                Mon espace
               </Link>
-              <button
-                type="button"
-                onClick={logoutEleve}
-                className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-sm font-bold transition ${
+              <Link
+                prefetch={false}
+                href="/besoin-de-vous"
+                className={`hidden items-center rounded-full px-3 py-2 text-sm font-black transition lg:inline-flex ${
                   paper
-                    ? "border-red-800/30 bg-red-800/10 text-red-800 hover:bg-red-800/20"
-                    : "border-red-400/30 bg-red-500/20 text-red-300 hover:bg-red-500/30"
+                    ? "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10"
+                    : "text-white/85 hover:bg-white/15 hover:text-white"
                 }`}
               >
-                <LogOut className="h-4 w-4" />
-              </button>
-            </div>
+                Participer
+              </Link>
+              <div className="hidden lg:block">
+                <MenuCompte
+                  nom={eleveLabel}
+                  sousTitre={dashboardSousTitre}
+                  dashboardHref={dashboardHref}
+                  estEleve={!isStaff}
+                  paper={paper}
+                  onLogout={logoutEleve}
+                />
+              </div>
+            </>
           ) : (
-            <Link prefetch={false}
-              href="/auth/signin?mode=eleve"
-              className={`ml-1 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-black shadow-lg transition hover:brightness-110 ${
-                paper
-                  ? "bg-teal-700 text-white hover:bg-cyan-800"
-                  : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
-              }`}
-            >
-              <GraduationCap className="h-4 w-4" />
-              {/* ⚠️ LIBELLÉ COURT SOUS `xl` (04/08). Mesuré à 1024 px — la
-                  largeur d'un iPad en paysage : logo + « Accueil » + les quatre
-                  portes d'audience + ce bouton faisaient 1016 px pour 1009
-                  disponibles, et TOUT LE SITE défilait de 7 px sur le côté.
-                  Couper le mot « inscription » libère ~90 px, bien plus qu'il
-                  n'en faut, et garde la nav complète à cette largeur — la
-                  reléguer au menu hamburger aurait coûté bien plus que le mot.
-                  Le bouton dit la même chose : on s'inscrit par là. */}
-              <span className="xl:hidden">Connexion</span>
-              <span className="hidden xl:inline">Connexion / inscription</span>
-            </Link>
+            <>
+              {/* CONNEXION ET INSCRIPTION, séparées (07/08). Le bouton unique
+                  disait « Connexion / inscription » : deux mots pour une seule
+                  pastille, dont le second était systématiquement coupé sous
+                  `xl`. Quelqu'un qui n'a pas de compte ne cherche pas
+                  « connexion ». Les deux mènent au même flux — l'email suffit,
+                  et le formulaire sait tout seul si le compte existe. */}
+              <Link
+                prefetch={false}
+                href="/auth/signin?mode=eleve"
+                className={`hidden items-center rounded-full px-3 py-2 text-sm font-black transition lg:inline-flex ${
+                  paper
+                    ? "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10"
+                    : "text-white/85 hover:bg-white/15 hover:text-white"
+                }`}
+              >
+                Connexion
+              </Link>
+              <Link
+                prefetch={false}
+                href="/auth/signin?mode=eleve&inscription=1"
+                className={`hidden items-center gap-2 rounded-full px-3.5 py-2 text-sm font-black shadow-lg transition hover:brightness-110 lg:inline-flex ${
+                  paper
+                    ? "bg-teal-700 text-white hover:bg-cyan-800"
+                    : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
+                }`}
+              >
+                <GraduationCap className="h-4 w-4" />
+                Inscription
+              </Link>
+            </>
           )}
-        </div>
 
-        {/* Mobile — bouton hamburger */}
-        <div className="flex items-center gap-2 lg:hidden">
-          {!eleve && (
-            <Link prefetch={false}
-              href="/auth/signin?mode=eleve"
-              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-black shadow-lg ${
+          {/* Mobile — bouton hamburger */}
+          <div className="flex items-center gap-2 lg:hidden">
+            {!eleve && (
+              <Link
+                prefetch={false}
+                href="/auth/signin?mode=eleve"
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-black shadow-lg ${
+                  paper
+                    ? "bg-teal-700 text-white"
+                    : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
+                }`}
+              >
+                <GraduationCap className="h-4 w-4" />
+                Connexion
+              </Link>
+            )}
+            <button
+              type="button"
+              onClick={() => setMobileOpen((v) => !v)}
+              className={`rounded-full border p-2 shadow-lg ${
                 paper
-                  ? "bg-teal-700 text-white"
-                  : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
+                  ? "border-[#1d1c16]/25 bg-[#1d1c16]/5 text-[#1d1c16]"
+                  : "border-cyan-200/20 bg-white/10 text-white"
               }`}
+              aria-label="Ouvrir le menu du site"
             >
-              <GraduationCap className="h-4 w-4" />
-              Connexion
-            </Link>
-          )}
-          <button
-            type="button"
-            onClick={() => setMobileOpen((v) => !v)}
-            className={`rounded-full border p-2 shadow-lg ${
-              paper
-                ? "border-[#1d1c16]/25 bg-[#1d1c16]/5 text-[#1d1c16]"
-                : "border-cyan-200/20 bg-white/10 text-white"
-            }`}
-            aria-label="Ouvrir le menu"
-          >
-            {mobileOpen ? <X /> : <Menu />}
-          </button>
+              {mobileOpen ? <X /> : <Menu />}
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -541,8 +782,7 @@ export default function Header() {
               : "border-cyan-300/20 bg-gradient-to-b from-[#062A4F] to-[#041B33]"
           }`}
         >
-          <div className="space-y-5">
-
+          <div className="space-y-4">
             {/* Le retour à l'accueil, en tête du menu. Sur téléphone la colonne
                 de gauche est un tiroir : sans cette ligne, revenir en arrière
                 demande de trouver le logo, puis de viser juste. */}
@@ -559,50 +799,105 @@ export default function Header() {
               <span aria-hidden="true">🏠</span> Accueil
             </Link>
 
-
             {/* Auth mobile */}
             {eleve ? (
               <div
-                className={`flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 ${
+                className={`rounded-2xl border px-4 py-3 ${
                   paper ? "border-[#1d1c16]/15 bg-[#1d1c16]/5" : "border-white/10 bg-white/5"
                 }`}
               >
-                <Link prefetch={false}
-                  href={dashboardHref}
-                  className={`flex items-center gap-2 text-sm font-black ${paper ? "text-[#1d1c16]" : "text-white"}`}
-                >
-                  <GraduationCap className={`h-4 w-4 ${paper ? "text-cyan-800" : "text-emerald-300"}`} />
-                  {dashboardLabel}
-                </Link>
-                <button
-                  type="button"
-                  onClick={logoutEleve}
-                  className={`rounded-full p-2 ${
-                    paper
-                      ? "bg-red-800/10 text-red-800 hover:bg-red-800/20"
-                      : "bg-red-500/20 text-red-300 hover:bg-red-500/30"
-                  }`}
-                >
-                  <LogOut className="h-4 w-4" />
-                </button>
+                <div className="flex items-center justify-between gap-3">
+                  <Link
+                    prefetch={false}
+                    href={dashboardHref}
+                    onClick={() => setMobileOpen(false)}
+                    className={`flex items-center gap-2 text-sm font-black ${paper ? "text-[#1d1c16]" : "text-white"}`}
+                  >
+                    <GraduationCap className={`h-4 w-4 ${paper ? "text-cyan-800" : "text-emerald-300"}`} />
+                    Mon espace
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={logoutEleve}
+                    aria-label="Se déconnecter"
+                    className={`rounded-full p-2 ${
+                      paper
+                        ? "bg-red-800/10 text-red-800 hover:bg-red-800/20"
+                        : "bg-red-500/20 text-red-300 hover:bg-red-500/30"
+                    }`}
+                  >
+                    <LogOut className="h-4 w-4" />
+                  </button>
+                </div>
+                <div className={`mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs font-bold ${paper ? "text-[#1d1c16]/70" : "text-white/70"}`}>
+                  <Link prefetch={false} href="/besoin-de-vous" onClick={() => setMobileOpen(false)}>
+                    Participer
+                  </Link>
+                  <Link prefetch={false} href="/votre-avis" onClick={() => setMobileOpen(false)}>
+                    Donner mon avis
+                  </Link>
+                  {!isStaff && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMobileOpen(false);
+                        ouvrirEcrireAuProf();
+                      }}
+                    >
+                      ✉️ Écris-moi
+                    </button>
+                  )}
+                </div>
               </div>
             ) : (
-              <Link prefetch={false}
-                href="/auth/signin?mode=eleve"
-                className={`flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-black shadow ${
-                  paper
-                    ? "bg-teal-700 text-white"
-                    : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
-                }`}
-              >
-                <GraduationCap className="h-4 w-4" />
-                Connexion / inscription
-              </Link>
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  prefetch={false}
+                  href="/auth/signin?mode=eleve"
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-black ${
+                    paper
+                      ? "border-[#1d1c16]/25 bg-white/60 text-[#1d1c16]"
+                      : "border-white/15 bg-white/5 text-white"
+                  }`}
+                >
+                  Connexion
+                </Link>
+                <Link
+                  prefetch={false}
+                  href="/auth/signin?mode=eleve&inscription=1"
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-black shadow ${
+                    paper
+                      ? "bg-teal-700 text-white"
+                      : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
+                  }`}
+                >
+                  Inscription
+                </Link>
+              </div>
             )}
 
             {eleve && !isStaff ? (
-              /* Élève connecté → toutes ses matières */
-              <div className="space-y-5">
+              /* Élève connecté → son menu, puis toutes ses matières */
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-2">
+                  {[...MENU_ELEVE, { href: hrefGuide, label: "🆘 Guide de survie", court: "🆘 Guide" }].map((c) => (
+                    <Link
+                      prefetch={false}
+                      key={c.href}
+                      href={c.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`flex items-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-bold ${
+                        paper
+                          ? "border-[#1d1c16]/15 bg-[#1d1c16]/5 text-[#1d1c16]"
+                          : "border-white/10 bg-white/5 text-white"
+                      }`}
+                    >
+                      {c.label}
+                    </Link>
+                  ))}
+                </div>
                 <MobileSection title="Maths"    accent="text-orange-300" items={NAV_MATHS}    pathname={pathname} paper={paper} />
                 <MobileSection title="Français" accent="text-sky-300"    items={NAV_FRANCAIS} pathname={pathname} paper={paper} />
                 <MobileSection title="Anglais"  accent="text-blue-300"   items={NAV_ANGLAIS}  pathname={pathname} paper={paper} />
@@ -613,7 +908,8 @@ export default function Header() {
               /* Sinon → les 4 portes d'audience */
               <div className={`grid grid-cols-2 gap-2 border-t pt-4 ${paper ? "border-[#1d1c16]/15" : "border-white/10"}`}>
                 {AUDIENCE_DOORS.map((d) => (
-                  <Link prefetch={false}
+                  <Link
+                    prefetch={false}
                     key={d.space}
                     href={d.href}
                     onClick={() => setMobileOpen(false)}
@@ -633,7 +929,6 @@ export default function Header() {
                 ))}
               </div>
             )}
-
           </div>
         </div>
       )}

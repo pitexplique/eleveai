@@ -6,8 +6,11 @@
 // le filtre ne fait que RESTREINDRE l'affichage ensuite, jamais retirer du DOM
 // initial. Un clic = une matière ; « Tout » ramène les trois.
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { PROFILS } from "@/lib/matrice/profils";
+import { guidesPour } from "@/lib/matrice/guides";
+import type { ProfilId } from "@/lib/matrice/types";
 
 export type Kit = {
   slug: string;
@@ -59,8 +62,39 @@ export default function HubFiltres({
   const [filtre, setFiltre] = useState<Matiere>("tout");
   const voir = (m: Matiere) => filtre === "tout" || filtre === m;
 
+  // ⭐ « TA CLASSE » EN TÊTE (07/08). Le menu de l'élève connecté porte une
+  // entrée « Guide de survie » ; comme la plupart des classes en ont deux ou
+  // trois (maths, français, anglais), elle ne peut pas ouvrir un guide en
+  // particulier sans choisir la matière à sa place. Elle ouvre donc le
+  // sommaire — mais un sommaire de dix-neuf cartes, c'est la même perte de
+  // temps qu'un catalogue. `?niveau=4e` met les siennes au-dessus.
+  //
+  // ⚠️ Rien n'est retiré : le catalogue complet reste rendu en dessous, donc le
+  // référencement de cette page ne bouge pas d'un pouce.
+  const [niveau, setNiveau] = useState<ProfilId | null>(null);
+  useEffect(() => {
+    const n = new URLSearchParams(window.location.search).get("niveau");
+    if (n && PROFILS.some((p) => p.id === n)) setNiveau(n as ProfilId);
+  }, []);
+
+  const tousLesKits = [...maths, ...francais, ...anglais];
+  const slugsDeLaClasse = niveau ? guidesPour(niveau).map((g) => g.slug) : [];
+  const kitsDeLaClasse = slugsDeLaClasse
+    .map((s) => tousLesKits.find((k) => k.slug === s))
+    .filter((k): k is Kit => Boolean(k));
+  const labelNiveau = niveau ? PROFILS.find((p) => p.id === niveau)?.label : null;
+
   return (
     <>
+      {kitsDeLaClasse.length > 0 && (
+        <section className="mb-10 rounded-2xl border-2 border-teal-200 bg-teal-50/60 p-4 sm:p-5">
+          <h2 className="mb-3 flex items-center gap-2 text-xl font-black text-slate-900">
+            <span aria-hidden="true">🎯</span> Ta classe — {labelNiveau}
+          </h2>
+          <CartesKits kits={kitsDeLaClasse} />
+        </section>
+      )}
+
       {/* ─── Les chips : choisir la matière (défilent en X sur mobile) ─── */}
       <div
         className="mb-8 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:justify-center"

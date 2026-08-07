@@ -20,6 +20,7 @@ import { CLASSE_COACH, notionCoach, urlCoachCiblee } from "./coach";
 import { MARQUEURS_INTENTION, NOTIONS } from "./lexique";
 import { getProfil, chipsPour } from "./profils";
 import { RESSOURCES, STATUTS_PUBLIABLES } from "./ressources";
+import { ressourcesDeSaison } from "./saison";
 export { normaliser };
 
 import type {
@@ -137,6 +138,7 @@ function motsInconnus(question: string, notionTrouvee: boolean): string[] {
 const LIBELLE_INTENTION: Record<Intention, string> = {
   comprendre: "comprendre",
   entrainer: "s'entraîner",
+  tester: "se tester",
   preparer: "préparer une échéance",
   corriger: "corriger une erreur",
   decouvrir: "découvrir",
@@ -212,6 +214,20 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
   // C'est là que les ressources « sur demande » doivent se taire.
   const repliSurLeNiveau = !notion && !intention && !matiereChip && !notionProgramme;
 
+  // ⭐ CE QUI TOMBE MAINTENANT (07/08) — les évaluations nationales de 6ᵉ et de
+  // 4ᵉ, en août et en septembre. Voir lib/matrice/saison.ts.
+  //
+  // ⚠️ LE BONUS NE S'APPLIQUE PAS À TOUTES LES DEMANDES, et c'est la moitié de
+  // la règle : un 6ᵉ qui écrit « je comprends rien aux fractions » un 3
+  // septembre doit recevoir le coach. Sa demande est précise, on ne la recouvre
+  // pas avec le calendrier. Le rendez-vous ne passe devant que si personne n'a
+  // rien demandé de précis, ou si l'intention lue est justement « préparer une
+  // échéance » — auquel cas c'est LA bonne échéance.
+  const saison =
+    repliSurLeNiveau || intention === "preparer"
+      ? ressourcesDeSaison(profil.id)
+      : new Set<string>();
+
   for (const r of RESSOURCES) {
     // ── 1. Le statut. Rien d'autre ne compte tant que ce n'est pas relu.
     if (!STATUTS_PUBLIABLES.includes(r.statut)) continue;
@@ -250,6 +266,13 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
     // ── 5. Ce qui a déjà servi à de vrais élèves passe devant.
     if (r.statut === "testee_eleves") score += 1;
 
+    // ── 5 bis. La saison. +6, c'est-à-dire autant que d'être pile au bon
+    // niveau : en septembre, l'évaluation nationale d'un 6ᵉ passe devant le
+    // coach et les cahiers. C'est beaucoup, et c'est voulu — elle a une date,
+    // eux non.
+    const deSaison = saison.has(r.id);
+    if (deSaison) score += 6;
+
     // ── 6. Une ressource qui ne s'invite jamais passe DEVANT quand on
     // l'appelle VRAIMENT : « découvrir », ou sa notion nommée. Pas dès qu'une
     // notion quelconque traîne dans la phrase — « fractions » en Seconde
@@ -283,7 +306,13 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
     candidates.push({
       ressource: r,
       score,
-      raison: raisonner(r, rangNiveau, notionOk, intentionOk, intention, profil.groupe === "eleve"),
+      // Quand c'est le calendrier qui la fait remonter, on le DIT. Sinon la
+      // raison affichée (« à ton niveau ») ne colle pas à la place occupée, et
+      // c'est exactement le genre de décalage qui fait passer une
+      // recommandation pour un hasard.
+      raison: deSaison
+        ? `c'est la saison — ${raisonner(r, rangNiveau, notionOk, intentionOk, intention, profil.groupe === "eleve")}`
+        : raisonner(r, rangNiveau, notionOk, intentionOk, intention, profil.groupe === "eleve"),
       url: url ?? r.url,
       ciblee: viseNotion,
     });

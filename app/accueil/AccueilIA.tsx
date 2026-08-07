@@ -41,44 +41,64 @@ export default function AccueilIA() {
       <ColonneGauche />
 
       <main className="min-w-0 flex-1">
-        <div className="mx-auto flex min-h-screen w-full max-w-3xl flex-col px-4 pb-12 pt-16 sm:px-6 lg:pt-24">
+        {/* ⭐ COMPACTÉ LE 07/08. Cette colonne commençait à `pt-16 lg:pt-24` —
+            96 px de vide au-dessus du margouillat sur un portable, avant même
+            de lire quoi que ce soit. Sur un écran de 768 px de haut, les
+            premières ressources tombaient sous le pli : la page proposait, et
+            personne ne voyait ce qu'elle proposait.
+            ⚠️ `max-w-4xl` et non `3xl` : les quatre actions du professeur et
+            les douze classes doivent tenir sur une seule ligne, et 768 px n'y
+            suffisaient pas. */}
+        {/* ⚠️ `100vh` MOINS LA HAUTEUR DU HAUT DE PAGE, pas `min-h-screen`.
+            Le piège : cette colonne commence ~116 px sous le sommet de la
+            fenêtre (le bandeau « Installer l'app » puis le header), et elle
+            réclamait quand même 100vh. Son milieu tombait donc 58 px plus bas
+            que le milieu de l'écran — et comme le champ est lui-même sous le
+            milieu de son bloc, il finissait 140 px trop bas. On ne centrait
+            pas mal : on centrait dans le mauvais cadre.
+            `6.5rem` couvre le header (66 px) et le bandeau (46 px) ; quand le
+            bandeau se ferme, la page a simplement un peu plus d'air en bas —
+            jamais de barre de défilement fantôme. */}
+        <div className="mx-auto flex min-h-[calc(100vh-6.5rem)] w-full max-w-4xl flex-col px-4 pb-6 sm:px-6">
+          {/* ⭐ LE BLOC EST CENTRÉ VERTICALEMENT (07/08), comme chez ChatGPT et
+              Claude, et le repère est LE CHAMP DE SAISIE — c'est lui qu'on
+              vient utiliser. Posé en haut, le bloc laissait 300 px de blanc
+              sous les ressources et se lisait comme un formulaire collé au
+              plafond. */}
+          <div className="flex flex-1 flex-col justify-center py-2">
           {/* « PROPOSE », pas « trouve » : le moteur sort deux ou trois
               ressources compatibles, il ne devine pas LA bonne — on ne promet
               pas plus que ce que fait ressources.ts.
-              « VÉRIFIÉES », pas « adaptées » : adapté ne veut rien dire, tout
-              le monde l'écrit. Ce qui distingue vraiment, c'est qu'un
-              enseignant les a relues.
-              Et on tutoie, comme deux lignes plus bas. L'origine reste, en
-              petit, APRÈS la promesse : La Réunion est une bonne histoire, pas
-              un bon mot-clé. */}
-          <header className="mb-10 text-center">
+              ⭐ « CONÇUES, SÉLECTIONNÉES ET VÉRIFIÉES » (Frédéric, 07/08).
+              « Vérifiées » seul laissait croire qu'EleveAI ne fait que relire
+              ce que d'autres ont écrit. C'est faux dans les deux sens : les
+              coachs, les parcours, les cahiers et les guides sont ÉCRITS ici ;
+              les vidéos et les pages du réel sont CHOISIES ailleurs. Le verbe
+              qui manquait, c'était le premier.
+              L'origine reste, en petit, APRÈS la promesse : La Réunion est une
+              bonne histoire, pas un bon mot-clé. */}
+          <header className="mb-6 text-center">
             {/* ⭐ TI MARGO RESTE. Il est parti avec la manchette lors de la
                 refonte — il était dans le titre du journal. Or il n'appartient
                 pas au journal : c'est la figure d'EleveAI, dessinée, celle des
                 vidéos et des cahiers. Une page d'entrée peut être sobre sans
-                être anonyme. */}
+                être anonyme.
+                Il a maigri de 16 px (07/08) : ce qu'on lui demande, c'est
+                d'être reconnu, pas d'occuper le premier écran. */}
             <Image
               src="/cahier-vacances/ti-margo.png"
               alt="Ti Margo, le margouillat d'EleveAI, avec son crayon"
               width={1122}
               height={1402}
-              sizes="72px"
+              sizes="64px"
               priority
-              className="mx-auto mb-3 h-16 w-auto sm:h-20"
+              className="mx-auto mb-2 h-14 w-auto sm:h-16"
             />
-            {/* ⛔ LE MOT « ELEVEAI » A ÉTÉ RETIRÉ D'ICI (06/08). Il était écrit
-                deux fois sur le même écran : en haut à gauche dans le header,
-                et en grand au milieu. Le header porte le nom sur les 270 pages
-                du site ; cet écran-ci n'a qu'un travail, faire poser une
-                question. C'est donc la PROMESSE qui devient le titre — c'est
-                elle qui convainc, un nom de marque ne convainc personne.
-                ⭐ Ti Margo RESTE, et au centre. Dans le header il ferait 24 px,
-                c'est-à-dire un favicon. Ici il est la seule chose qui dise que
-                cette page n'a pas été faite à Palo Alto. */}
-            <h1 className="text-xl font-semibold text-slate-900 sm:text-2xl">
-              L&apos;IA éducative qui te propose des ressources vérifiées
+            <h1 className="text-lg font-semibold leading-snug text-slate-900 sm:text-xl">
+              EleveAI te propose des ressources pédagogiques conçues,
+              sélectionnées et vérifiées
             </h1>
-            <p className="mt-1.5 text-xs text-slate-500">Conçue à La Réunion</p>
+            <p className="mt-1 text-xs text-slate-500">Conçue à La Réunion</p>
           </header>
 
           <Suspense fallback={<div className="h-64" aria-hidden="true" />}>
@@ -88,8 +108,9 @@ export default function AccueilIA() {
                 atteignable, à un geste plutôt qu'à zéro. */}
             <EntreeMatrice variante="page" />
           </Suspense>
+          </div>
 
-          <footer className="mt-auto pt-16">
+          <footer className="pt-10">
             <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-xs text-slate-400">
               {PIED.map((l) => (
                 <li key={l.href}>
