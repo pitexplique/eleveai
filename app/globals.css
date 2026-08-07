@@ -107,6 +107,30 @@ body {
   white-space: nowrap;
 }
 
+/* ─── … SAUF QUAND ON A DEMANDÉ À TOUT VOIR ────────────────────────────────
+   Défaut retrouvé le 07/08 par Frédéric : « lorsqu'on clique sur les chips
+   plus d'options, on ne les voit pas toutes ». C'était vrai — la rangée
+   passait de cinq à neuf pastilles sans jamais se casser, et les quatre
+   dernières attendaient derrière un débordement que rien n'annonçait.
+
+   Il proposait des flèches à gauche et à droite. On fait plus simple, et pour
+   une raison de fond : la règle « une seule ligne » existe pour garder les
+   ressources au-dessus du pli, et elle vaut donc pour l'état REPLIÉ. Quelqu'un
+   qui clique « Plus d'options » vient d'accepter de dépenser de la hauteur —
+   il n'a aucune raison de payer en plus deux clics de flèche pour découvrir ce
+   qu'il a demandé à voir.
+
+   Des flèches auraient gardé le contenu caché ; passer à la ligne le montre. */
+.rangee-defilante.depliee {
+  flex-wrap: wrap;
+  /* ⚠️ LES DEUX AXES, PAS SEULEMENT X. La spec est formelle : si un axe vaut
+     `visible` et l'autre autre chose, le navigateur recalcule le premier en
+     `auto`. Écrire `overflow-x: visible` en laissant `overflow-y: hidden`
+     n'aurait donc rien rendu visible — ça aurait fabriqué un second conteneur
+     de défilement, celui-là même qu'on veut supprimer. */
+  overflow: visible;
+}
+
 /* Fiches de cours — à l'écran, la correction est repliée derrière
    « Voir la correction ». À l'impression / PDF, elle se déplie (géré dans
    chaque fiche) et le libellé devient « Correction : » (raffinement 24/06/2026,

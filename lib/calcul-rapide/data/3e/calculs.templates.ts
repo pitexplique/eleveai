@@ -181,14 +181,40 @@ export const calculsTemplates3e: CalculRapideItem[] = [
     durationSec: 20,
     media: { text: "f(x) = {{a}}x + {{b}}. Que vaut f({{x}}) ?" },
     template: "f(x) = {{a}}x + {{b}}. Que vaut f({{x}}) ?",
+    // ⚠️ b contenait -7 et -4 : l'énoncé s'écrivait « f(x) = 4x + -7 ». Le
+    // moteur recopie la valeur telle quelle, il ne recolle pas les signes.
+    // Les constantes négatives ont leur propre générateur, juste en dessous,
+    // avec le « - » écrit dans le template.
     variables: {
       a: [4, 5, 6, 7],
-      b: [-7, -4, 3, 5],
+      b: [3, 5, 8, 10],
       x: [4, 5, 6, 7],
     },
     answerRule: "a * x + b",
-    hint: "Remplace x par la valeur donnee.",
+    hint: "Remplace x par la valeur donnée, puis calcule.",
     explanationTemplate: "f({{x}}) = {{answer}}.",
+    tags: ["fonction", "affine"],
+  },
+
+  {
+    id: "3e_template_fonction_affine_image_negatif_001",
+    niveau: "3e",
+    type: "calcul",
+    mode: "template",
+    notionId: "fonctions",
+    microId: "image_affine",
+    difficulty: 3,
+    durationSec: 20,
+    media: { text: "f(x) = {{a}}x - {{b}}. Que vaut f({{x}}) ?" },
+    template: "f(x) = {{a}}x - {{b}}. Que vaut f({{x}}) ?",
+    variables: {
+      a: [4, 5, 6, 7],
+      b: [4, 7, 9, 12],
+      x: [4, 5, 6, 7],
+    },
+    answerRule: "a * x - b",
+    hint: "La constante se retire une seule fois, après avoir multiplié.",
+    explanationTemplate: "f({{x}}) = {{a}} × {{x}} - {{b}} = {{answer}}.",
     tags: ["fonction", "affine"],
   },
 ];

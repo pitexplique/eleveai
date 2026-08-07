@@ -77,7 +77,10 @@ export const problemesTemplates5e: CalculRapideItem[] = [
   },
 
   {
-    id: "5e_template_vitesse_001",
+    // ⚠️ RENOMMÉ : cet identifiant était déjà pris par un CALCUL de
+    // calculs.templates.ts. Le moteur prend le premier trouvé, et concatène les
+    // calculs avant les problèmes : ce problème n'a donc jamais pu sortir.
+    id: "5e_template_probleme_vitesse_001",
     niveau: "5e",
     type: "probleme",
     mode: "template",
@@ -101,7 +104,8 @@ export const problemesTemplates5e: CalculRapideItem[] = [
   },
 
   {
-    id: "5e_template_aire_rectangle_001",
+    // ⚠️ RENOMMÉ, même raison : un calcul portait déjà cet identifiant.
+    id: "5e_template_probleme_aire_rectangle_001",
     niveau: "5e",
     type: "probleme",
     mode: "template",

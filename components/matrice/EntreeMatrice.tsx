@@ -674,7 +674,15 @@ export default function EntreeMatrice({
             ))}
           </div>
         ) : (
-          <div className="rangee-defilante mt-3 gap-1.5 sm:justify-center sm:gap-2">
+          // `depliee` casse le « une seule ligne » — et seulement là. Replié on
+          // tient la ligne pour garder les ressources au-dessus du pli ; déplié,
+          // la personne a demandé à voir, on montre tout d'un coup plutôt que de
+          // lui faire faire défiler une rangée qui ne dit pas qu'elle défile.
+          <div
+            className={`rangee-defilante mt-3 gap-1.5 sm:justify-center sm:gap-2 ${
+              plusDOptions ? "depliee" : ""
+            }`}
+          >
             {chips.map((c) => {
               const actif = intentionChoisie === c.label;
               return (

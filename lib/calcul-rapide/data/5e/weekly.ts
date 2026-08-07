@@ -16,7 +16,7 @@ export const weekly5e: CalculRapideWeek[] = [
         day: "lundi",
         title: "Défi du lundi",
         theme: "Longueurs",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_calcul_longueur_001",
           "5e_template_conversion_longueur_001",
@@ -34,7 +34,7 @@ export const weekly5e: CalculRapideWeek[] = [
         day: "mardi",
         title: "Défi du mardi",
         theme: "Masses",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_calcul_masse_001",
           "5e_template_conversion_masse_001",
@@ -52,7 +52,7 @@ export const weekly5e: CalculRapideWeek[] = [
         day: "mercredi",
         title: "Défi du mercredi",
         theme: "Contenances",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_calcul_contenance_001",
           "5e_template_conversion_contenance_001",
@@ -70,7 +70,7 @@ export const weekly5e: CalculRapideWeek[] = [
         day: "jeudi",
         title: "Défi du jeudi",
         theme: "Durées et vitesses",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_calcul_duree_001",
           "5e_template_conversion_duree_001",
@@ -88,7 +88,7 @@ export const weekly5e: CalculRapideWeek[] = [
         day: "vendredi",
         title: "Défi du vendredi",
         theme: "Aires et conversions",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_calcul_aire_001",
           "5e_template_aire_rectangle_001",
@@ -96,7 +96,9 @@ export const weekly5e: CalculRapideWeek[] = [
           "5e_template_conversion_masse_001",
           "5e_calcul_volume_001",
           "5e_probleme_aire_chambre_001",
-          "5e_template_aire_rectangle_001",
+          // Était un doublon du 2e item : la 7e place, réservée à un problème,
+          // servait un calcul de 20 s déjà posé plus haut.
+          "5e_template_probleme_aire_rectangle_001",
         ],
       },
 
@@ -106,7 +108,7 @@ export const weekly5e: CalculRapideWeek[] = [
         day: "samedi",
         title: "Défi du samedi",
         theme: "Mix de la semaine",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_template_conversion_longueur_001",
           "5e_template_conversion_contenance_001",
@@ -124,7 +126,7 @@ export const weekly5e: CalculRapideWeek[] = [
         day: "dimanche",
         title: "Final du dimanche 🏆",
         theme: "Challenge global mesures",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_template_conversion_longueur_001",
           "5e_template_conversion_masse_001",
@@ -155,7 +157,7 @@ export const weekly5e: CalculRapideWeek[] = [
         day: "lundi",
         title: "Défi du lundi",
         theme: "Comparer des relatifs",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_calcul_relatif_comparer_001",
           "5e_calcul_relatif_comparer_002",
@@ -173,7 +175,7 @@ export const weekly5e: CalculRapideWeek[] = [
         day: "mardi",
         title: "Défi du mardi",
         theme: "Additionner des relatifs",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_calcul_relatif_addition_001",
           "5e_calcul_relatif_addition_002",
@@ -191,7 +193,7 @@ export const weekly5e: CalculRapideWeek[] = [
         day: "mercredi",
         title: "Défi du mercredi",
         theme: "Soustraire des relatifs",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_calcul_relatif_soustraction_001",
           "5e_calcul_relatif_soustraction_002",
@@ -209,7 +211,7 @@ export const weekly5e: CalculRapideWeek[] = [
         day: "jeudi",
         title: "Défi du jeudi",
         theme: "Opposé et distance à zéro",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_calcul_relatif_oppose_001",
           "5e_template_relatif_oppose_001",
@@ -227,7 +229,7 @@ export const weekly5e: CalculRapideWeek[] = [
         day: "vendredi",
         title: "Défi du vendredi",
         theme: "Températures et situations",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_calcul_relatif_addition_001",
           "5e_template_relatif_addition_001",
@@ -245,7 +247,7 @@ export const weekly5e: CalculRapideWeek[] = [
         day: "samedi",
         title: "Défi du samedi",
         theme: "Mix relatifs",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_template_relatif_comparer_001",
           "5e_template_relatif_addition_001",
@@ -263,7 +265,7 @@ export const weekly5e: CalculRapideWeek[] = [
         day: "dimanche",
         title: "Final du dimanche 🏆",
         theme: "Challenge global relatifs",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_template_relatif_comparer_001",
           "5e_template_relatif_addition_001",
@@ -285,15 +287,15 @@ export const weekly5e: CalculRapideWeek[] = [
     niveau: "5e",
     week: "2026-S20",
     title: "Calcul rapide 5e - Fractions et proportions express",
-    themeDominant: "Fractions d'une quantite, simplifications et proportionnalite",
+    themeDominant: "Fractions d'une quantité, simplifications et proportionnalité",
     sessions: [
       {
         id: "5e_2026_S20_lundi",
         niveau: "5e",
         day: "lundi",
-        title: "Defi du lundi",
+        title: "Défi du lundi",
         theme: "Fractions equivalentes",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_calcul_fraction_simplifier_001",
           "5e_template_fraction_quantite_001",
@@ -308,9 +310,9 @@ export const weekly5e: CalculRapideWeek[] = [
         id: "5e_2026_S20_mardi",
         niveau: "5e",
         day: "mardi",
-        title: "Defi du mardi",
+        title: "Défi du mardi",
         theme: "Simplifier des fractions",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_calcul_fraction_simplifier_001",
           "5e_template_fraction_quantite_001",
@@ -325,9 +327,9 @@ export const weekly5e: CalculRapideWeek[] = [
         id: "5e_2026_S20_mercredi",
         niveau: "5e",
         day: "mercredi",
-        title: "Defi du mercredi",
-        theme: "Fraction d'une quantite",
-        durationTotalSec: 300,
+        title: "Défi du mercredi",
+        theme: "Fraction d'une quantité",
+        durationTotalSec: 220,
         itemIds: [
           "5e_template_fraction_quantite_001",
           "5e_template_fraction_quantite_001",
@@ -342,9 +344,9 @@ export const weekly5e: CalculRapideWeek[] = [
         id: "5e_2026_S20_jeudi",
         niveau: "5e",
         day: "jeudi",
-        title: "Defi du jeudi",
+        title: "Défi du jeudi",
         theme: "Proportions simples",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_calcul_proportion_001",
           "5e_template_proportion_prix_001",
@@ -359,9 +361,9 @@ export const weekly5e: CalculRapideWeek[] = [
         id: "5e_2026_S20_vendredi",
         niveau: "5e",
         day: "vendredi",
-        title: "Defi du vendredi",
+        title: "Défi du vendredi",
         theme: "Prix et proportions",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_template_proportion_prix_001",
           "5e_calcul_proportion_001",
@@ -376,9 +378,9 @@ export const weekly5e: CalculRapideWeek[] = [
         id: "5e_2026_S20_samedi",
         niveau: "5e",
         day: "samedi",
-        title: "Defi du samedi",
+        title: "Défi du samedi",
         theme: "Mix fractions et proportions",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_calcul_fraction_simplifier_001",
           "5e_template_fraction_quantite_001",
@@ -395,7 +397,7 @@ export const weekly5e: CalculRapideWeek[] = [
         day: "dimanche",
         title: "Final du dimanche",
         theme: "Challenge global fractions et proportions",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "5e_template_fraction_quantite_001",
           "5e_template_proportion_prix_001",

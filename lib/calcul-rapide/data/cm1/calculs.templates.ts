@@ -131,9 +131,14 @@ export const calculsTemplatesCM1: CalculRapideItem[] = [
     durationSec: 20,
     media: { text: "{{a}} - {{b}} = ?" },
     template: "{{a}} - {{b}} = ?",
-    variables: { a: [150, 300, 550, 850, 1250], b: [75, 100, 175, 350, 750] },
+    // ⚠️ b était plus grand que a sur plusieurs tirages (150 - 350) : le
+    // générateur servait des résultats NÉGATIFS à des CM1, qui ne font pas
+    // encore les relatifs. b reste maintenant sous le plus petit a.
+    variables: { a: [150, 300, 550, 850, 1250], b: [25, 50, 75, 100, 125] },
     answerRule: "a - b",
-    hint: "Tu peux compléter de {{b}} jusqu'à {{a}}.",
+    // Pas de {{variables}} ici : le moteur ne les remplace que dans `template`
+    // et `explanationTemplate`. L'indice les affichait en clair.
+    hint: "Complète du petit nombre jusqu'au grand, par étapes rondes.",
     explanationTemplate: "{{a}} - {{b}} = {{answer}}.",
     tags: ["soustraction"],
   },

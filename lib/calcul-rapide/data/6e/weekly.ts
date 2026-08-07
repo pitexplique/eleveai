@@ -20,7 +20,7 @@ export const weekly6e: CalculRapideWeek[] = [
         day: "lundi",
         title: "Défi du lundi",
         theme: "Moitié et quart",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "6e_calcul_fraction_moitie_001",
           "6e_template_fraction_moitie_001",
@@ -38,7 +38,7 @@ export const weekly6e: CalculRapideWeek[] = [
         day: "mardi",
         title: "Défi du mardi",
         theme: "Dixièmes",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "6e_calcul_fraction_dixieme_001",
           "6e_template_fraction_dixieme_001",
@@ -56,7 +56,7 @@ export const weekly6e: CalculRapideWeek[] = [
         day: "mercredi",
         title: "Défi du mercredi",
         theme: "Fraction d’une quantité",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "6e_calcul_fraction_trois_quarts_001",
           "6e_template_fraction_trois_quarts_001",
@@ -74,7 +74,7 @@ export const weekly6e: CalculRapideWeek[] = [
         day: "jeudi",
         title: "Défi du jeudi",
         theme: "Fractions, décimaux et pourcentages",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "6e_calcul_fraction_decimal_001",
           "6e_calcul_fraction_decimal_demi_001",
@@ -92,7 +92,7 @@ export const weekly6e: CalculRapideWeek[] = [
         day: "vendredi",
         title: "Défi du vendredi",
         theme: "Comparer des fractions",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "6e_calcul_fraction_comparer_001",
           "6e_calcul_fraction_comparer_002",
@@ -110,7 +110,7 @@ export const weekly6e: CalculRapideWeek[] = [
         day: "samedi",
         title: "Défi du samedi",
         theme: "Mix fractions",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "6e_template_fraction_moitie_001",
           "6e_template_fraction_quart_001",
@@ -128,7 +128,7 @@ export const weekly6e: CalculRapideWeek[] = [
         day: "dimanche",
         title: "Final du dimanche 🏆",
         theme: "Challenge global fractions",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "6e_template_fraction_moitie_001",
           "6e_template_fraction_quart_001",
@@ -149,16 +149,16 @@ export const weekly6e: CalculRapideWeek[] = [
     id: "6e_2026_S20",
     niveau: "6e",
     week: "2026-S20",
-    title: "Calcul rapide 6e - Decimaux express",
-    themeDominant: "Additionner, comparer et multiplier des nombres decimaux",
+    title: "Calcul rapide 6e - Décimaux express",
+    themeDominant: "Additionner, comparer et multiplier des nombres décimaux",
     sessions: [
       {
         id: "6e_2026_S20_lundi",
         niveau: "6e",
         day: "lundi",
-        title: "Defi du lundi",
-        theme: "Additionner des decimaux",
-        durationTotalSec: 300,
+        title: "Défi du lundi",
+        theme: "Additionner des décimaux",
+        durationTotalSec: 220,
         itemIds: [
           "6e_calcul_decimal_addition_001",
           "6e_template_decimal_addition_001",
@@ -173,9 +173,9 @@ export const weekly6e: CalculRapideWeek[] = [
         id: "6e_2026_S20_mardi",
         niveau: "6e",
         day: "mardi",
-        title: "Defi du mardi",
+        title: "Défi du mardi",
         theme: "Multiplier par 10 ou 100",
-        durationTotalSec: 300,
+        durationTotalSec: 260,
         itemIds: [
           "6e_calcul_decimal_multiplication_10_001",
           "6e_template_decimal_multiplier_10_100_001",
@@ -190,7 +190,7 @@ export const weekly6e: CalculRapideWeek[] = [
         id: "6e_2026_S20_mercredi",
         niveau: "6e",
         day: "mercredi",
-        title: "Defi du mercredi",
+        title: "Défi du mercredi",
         theme: "Prix et monnaie",
         durationTotalSec: 300,
         itemIds: [
@@ -207,9 +207,9 @@ export const weekly6e: CalculRapideWeek[] = [
         id: "6e_2026_S20_jeudi",
         niveau: "6e",
         day: "jeudi",
-        title: "Defi du jeudi",
-        theme: "Calcul mental decimal",
-        durationTotalSec: 300,
+        title: "Défi du jeudi",
+        theme: "Calcul mental décimal",
+        durationTotalSec: 260,
         itemIds: [
           "6e_template_decimal_addition_001",
           "6e_template_decimal_multiplier_10_100_001",
@@ -224,9 +224,9 @@ export const weekly6e: CalculRapideWeek[] = [
         id: "6e_2026_S20_vendredi",
         niveau: "6e",
         day: "vendredi",
-        title: "Defi du vendredi",
-        theme: "Mix decimaux",
-        durationTotalSec: 300,
+        title: "Défi du vendredi",
+        theme: "Mix décimaux",
+        durationTotalSec: 260,
         itemIds: [
           "6e_calcul_decimal_addition_001",
           "6e_template_decimal_addition_001",
@@ -241,9 +241,9 @@ export const weekly6e: CalculRapideWeek[] = [
         id: "6e_2026_S20_samedi",
         niveau: "6e",
         day: "samedi",
-        title: "Defi du samedi",
-        theme: "Entrainement decimaux",
-        durationTotalSec: 300,
+        title: "Défi du samedi",
+        theme: "Entraînement décimaux",
+        durationTotalSec: 260,
         itemIds: [
           "6e_template_decimal_addition_001",
           "6e_template_decimal_multiplier_10_100_001",
@@ -259,8 +259,8 @@ export const weekly6e: CalculRapideWeek[] = [
         niveau: "6e",
         day: "dimanche",
         title: "Final du dimanche",
-        theme: "Challenge global decimaux",
-        durationTotalSec: 300,
+        theme: "Challenge global décimaux",
+        durationTotalSec: 260,
         itemIds: [
           "6e_template_decimal_addition_001",
           "6e_template_decimal_multiplier_10_100_001",
@@ -269,6 +269,148 @@ export const weekly6e: CalculRapideWeek[] = [
           "6e_calcul_decimal_addition_001",
           "6e_calcul_decimal_multiplication_10_001",
           "6e_template_decimal_monnaie_001",
+        ],
+      },
+    ],
+  },
+
+  // ============================================================
+  // SEMAINE 21 - GRANDEURS ET MESURES
+  //
+  // ⭐ Cette semaine ne contient AUCUN item nouveau : elle rebranche les 19
+  // questions de 6e qui existaient depuis toujours dans les banques et que
+  // plus personne ne rencontrait — conversions, aires, volumes, durées. Sans
+  // elle, un élève de 6e ne faisait que des fractions et des décimaux, toute
+  // l'année.
+  //
+  // ⚠️ `durationTotalSec` vaut ici la VRAIE somme des chronos (5 × 20 s +
+  // 2 × 60 s = 220 s), et non 300 recopié par habitude : c'est cette valeur
+  // qui part en base dans `temps_total_sec`.
+  // ============================================================
+  {
+    id: "6e_2026_S21",
+    niveau: "6e",
+    week: "2026-S21",
+    title: "Calcul rapide 6e - Grandeurs et mesures",
+    themeDominant: "Conversions, durées, aires et volumes",
+    sessions: [
+      {
+        id: "6e_2026_S21_lundi",
+        niveau: "6e",
+        day: "lundi",
+        title: "Défi du lundi",
+        theme: "Les longueurs",
+        durationTotalSec: 220,
+        itemIds: [
+          "6e_template_conversion_longueur_001",
+          "6e_calcul_longueur_001",
+          "6e_template_conversion_masse_001",
+          "6e_calcul_duree_001",
+          "6e_template_conversion_duree_001",
+          "6e_template_randonnee_001",
+          "6e_probleme_sentier_001",
+        ],
+      },
+      {
+        id: "6e_2026_S21_mardi",
+        niveau: "6e",
+        day: "mardi",
+        title: "Défi du mardi",
+        theme: "Les masses",
+        durationTotalSec: 220,
+        itemIds: [
+          "6e_template_conversion_masse_001",
+          "6e_calcul_masse_001",
+          "6e_template_conversion_longueur_001",
+          "6e_calcul_contenance_001",
+          "6e_calcul_volume_001",
+          "6e_probleme_poisson_001",
+          "6e_template_jus_fruits_001",
+        ],
+      },
+      {
+        id: "6e_2026_S21_mercredi",
+        niveau: "6e",
+        day: "mercredi",
+        title: "Défi du mercredi",
+        theme: "Les contenances",
+        durationTotalSec: 220,
+        itemIds: [
+          "6e_template_conversion_contenance_001",
+          "6e_calcul_contenance_001",
+          "6e_calcul_volume_001",
+          "6e_template_conversion_masse_001",
+          "6e_calcul_longueur_001",
+          "6e_probleme_bouteilles_001",
+          "6e_template_jus_fruits_001",
+        ],
+      },
+      {
+        id: "6e_2026_S21_jeudi",
+        niveau: "6e",
+        day: "jeudi",
+        title: "Défi du jeudi",
+        theme: "Les durées",
+        durationTotalSec: 220,
+        itemIds: [
+          "6e_template_conversion_duree_001",
+          "6e_calcul_duree_001",
+          "6e_template_conversion_longueur_001",
+          "6e_calcul_aire_001",
+          "6e_template_conversion_contenance_001",
+          "6e_template_course_001",
+          "6e_probleme_sentier_001",
+        ],
+      },
+      {
+        id: "6e_2026_S21_vendredi",
+        niveau: "6e",
+        day: "vendredi",
+        title: "Défi du vendredi",
+        theme: "Aires et volumes",
+        durationTotalSec: 220,
+        itemIds: [
+          "6e_calcul_aire_001",
+          "6e_calcul_volume_001",
+          "6e_template_conversion_longueur_001",
+          "6e_template_conversion_contenance_001",
+          "6e_calcul_masse_001",
+          "6e_probleme_chambre_001",
+          "6e_template_randonnee_001",
+        ],
+      },
+      {
+        id: "6e_2026_S21_samedi",
+        niveau: "6e",
+        day: "samedi",
+        title: "Défi du samedi",
+        theme: "Toutes les conversions",
+        durationTotalSec: 220,
+        itemIds: [
+          "6e_template_conversion_longueur_001",
+          "6e_template_conversion_masse_001",
+          "6e_template_conversion_contenance_001",
+          "6e_template_conversion_duree_001",
+          "6e_calcul_fraction_pourcentage_trois_quarts_001",
+          "6e_template_jus_fruits_001",
+          "6e_probleme_fraction_bouteille_001",
+        ],
+      },
+      {
+        id: "6e_2026_S21_dimanche",
+        niveau: "6e",
+        day: "dimanche",
+        title: "Final du dimanche 🏆",
+        theme: "Challenge grandeurs et mesures",
+        durationTotalSec: 220,
+        itemIds: [
+          "6e_template_conversion_duree_001",
+          "6e_calcul_aire_001",
+          "6e_template_conversion_masse_001",
+          "6e_calcul_fraction_pourcentage_trois_quarts_001",
+          "6e_calcul_volume_001",
+          "6e_probleme_chambre_001",
+          "6e_probleme_fraction_bouteille_001",
         ],
       },
     ],

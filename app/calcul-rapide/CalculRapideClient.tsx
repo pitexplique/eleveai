@@ -5,24 +5,37 @@ import { useState } from "react";
 import Link from "next/link";
 import type { NiveauCalculRapide } from "@/lib/calcul-rapide";
 
+// Du CP à la Terminale, dans l'ordre de la scolarité — et « Calculs du
+// quotidien » à la fin, parce que ce n'est pas une classe : c'est le mode
+// écrit pour les adultes, souvent le parent assis à côté.
 const niveaux: NiveauCalculRapide[] = [
+  "CP",
+  "CE1",
+  "CE2",
   "CM1",
   "CM2",
   "6e",
   "5e",
   "4e",
   "3e",
+  "seconde",
+  "premiere-spe",
   "terminale-spe",
   "adulte",
 ];
 
 const niveauLabels: Record<NiveauCalculRapide, string> = {
+  CP: "CP",
+  CE1: "CE1",
+  CE2: "CE2",
   CM1: "CM1",
   CM2: "CM2",
   "6e": "6e",
   "5e": "5e",
   "4e": "4e",
   "3e": "3e",
+  seconde: "Seconde",
+  "premiere-spe": "Première spé",
   "terminale-spe": "Terminale spé",
   adulte: "Calculs du quotidien",
 };

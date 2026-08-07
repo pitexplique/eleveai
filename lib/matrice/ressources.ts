@@ -212,21 +212,23 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "Le calcul rapide",
     promesse: "Cinq minutes, chrono, et on recommence demain.",
     url: "/calcul-rapide",
-    // ⭐ RECALÉ SUR LA PAGE (07/08, Frédéric : « il faut intégrer calcul rapide
-    // dans la matrice »). `app/calcul-rapide/CalculRapideClient.tsx` déclare
-    // huit niveaux : CM1, CM2, 6e, 5e, 4e, 3e, terminale-spe, adulte. Cette
-    // ligne en annonçait d'autres, et il manquait les deux derniers :
-    //   ⛔ CE1 et CE2 SORTENT — ils étaient déclarés ici et n'existent pas sur
-    //      la page. Un CE1 était envoyé vers un écran dont le plus petit niveau
-    //      est le CM1. Ce n'est pas une chip en moins, c'est une impasse en
-    //      moins : la dictée et l'anglais du jour lui gardent son rituel.
-    //   ⭐ TERMINALE ENTRE — « Terminale spé » est sur la page depuis toujours,
-    //      et aucun élève de Terminale ne se la voyait proposer.
-    //   ⭐ PARENT ENTRE — c'est le mode « Calculs du quotidien », écrit pour
-    //      des adultes ; il n'était proposé à personne.
-    // ⚠️ Ni Seconde ni Première : la page ne les a pas. On ne comble pas un
-    // trou de contenu en l'annonçant.
-    niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "terminale", "parent"],
+    // ⭐ TOUTE LA SCOLARITÉ, du CP à la Terminale (chantier du 07/08).
+    // Cette ligne doit correspondre EXACTEMENT aux niveaux servis par
+    // `app/calcul-rapide/CalculRapideClient.tsx` — un niveau annoncé ici sans
+    // banque derrière, c'est une impasse servie à un élève ; un niveau servi
+    // par la page mais absent d'ici n'est jamais recommandé à personne (c'est
+    // ce qui est arrivé à « Terminale spé », en ligne depuis toujours).
+    //   ⭐ CP, CE1, CE2 ENTRENT — chacun a désormais ses deux semaines. Les
+    //      énoncés y sont des signes plutôt que des phrases : au CP, on ne
+    //      lit pas encore.
+    //   ⭐ SECONDE et PREMIÈRE ENTRENT — c'était le trou le plus visible : la
+    //      page sautait de la 3e à la Terminale alors que le coach couvre tout.
+    //   ⭐ « parent » = le mode « Calculs du quotidien », écrit pour des
+    //      adultes — souvent celui qui est assis à côté de l'enfant.
+    niveaux: [
+      "cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e",
+      "seconde", "premiere", "terminale", "parent",
+    ],
     matiere: "maths",
     notions: ["calcul"],
     intentions: ["rituel", "entrainer"],

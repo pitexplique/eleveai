@@ -14,7 +14,7 @@ export const weeklyCM2: CalculRapideWeek[] = [
         day: "lundi",
         title: "Défi du lundi",
         theme: "Décimaux express",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "cm2_template_addition_decimaux_001",
           "cm2_calcul_decimal_compare_001",
@@ -31,7 +31,7 @@ export const weeklyCM2: CalculRapideWeek[] = [
         day: "mardi",
         title: "Défi du mardi",
         theme: "Fractions décimales",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "cm2_template_fraction_dixieme_001",
           "cm2_calcul_fraction_decimal_001",
@@ -48,7 +48,7 @@ export const weeklyCM2: CalculRapideWeek[] = [
         day: "mercredi",
         title: "Défi du mercredi",
         theme: "Pourcentages simples",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "cm2_template_pourcentage_10_001",
           "cm2_template_pourcentage_50_001",
@@ -65,7 +65,7 @@ export const weeklyCM2: CalculRapideWeek[] = [
         day: "jeudi",
         title: "Défi du jeudi",
         theme: "Proportionnalité intuitive",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "cm2_template_multiplication_reflechie_001",
           "cm2_template_division_001",
@@ -82,7 +82,7 @@ export const weeklyCM2: CalculRapideWeek[] = [
         day: "vendredi",
         title: "Défi du vendredi",
         theme: "Bilan CM2",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "cm2_template_addition_decimaux_001",
           "cm2_calcul_decimal_compare_001",
@@ -99,7 +99,7 @@ export const weeklyCM2: CalculRapideWeek[] = [
         day: "samedi",
         title: "Défi du samedi",
         theme: "Révision douce",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "cm2_template_multiplication_reflechie_001",
           "cm2_template_division_001",
@@ -116,7 +116,7 @@ export const weeklyCM2: CalculRapideWeek[] = [
         day: "dimanche",
         title: "Final du dimanche",
         theme: "Challenge CM2",
-        durationTotalSec: 300,
+        durationTotalSec: 220,
         itemIds: [
           "cm2_template_addition_decimaux_001",
           "cm2_calcul_fraction_decimal_001",

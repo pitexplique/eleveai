@@ -10,8 +10,27 @@ import { buildLearningVideoHref } from "@/lib/videoSearch";
 
 import type {
   CalculRapideItem,
+  CalculRapideWeek,
   NiveauCalculRapide,
 } from "@/lib/calcul-rapide/types";
+
+import { weeklyCP } from "@/lib/calcul-rapide/data/cp/weekly";
+import { calculsFixedCP } from "@/lib/calcul-rapide/data/cp/calculs.fixed";
+import { calculsTemplatesCP } from "@/lib/calcul-rapide/data/cp/calculs.templates";
+import { problemesFixedCP } from "@/lib/calcul-rapide/data/cp/problemes.fixed";
+import { problemesTemplatesCP } from "@/lib/calcul-rapide/data/cp/problemes.templates";
+
+import { weeklyCE1 } from "@/lib/calcul-rapide/data/ce1/weekly";
+import { calculsFixedCE1 } from "@/lib/calcul-rapide/data/ce1/calculs.fixed";
+import { calculsTemplatesCE1 } from "@/lib/calcul-rapide/data/ce1/calculs.templates";
+import { problemesFixedCE1 } from "@/lib/calcul-rapide/data/ce1/problemes.fixed";
+import { problemesTemplatesCE1 } from "@/lib/calcul-rapide/data/ce1/problemes.templates";
+
+import { weeklyCE2 } from "@/lib/calcul-rapide/data/ce2/weekly";
+import { calculsFixedCE2 } from "@/lib/calcul-rapide/data/ce2/calculs.fixed";
+import { calculsTemplatesCE2 } from "@/lib/calcul-rapide/data/ce2/calculs.templates";
+import { problemesFixedCE2 } from "@/lib/calcul-rapide/data/ce2/problemes.fixed";
+import { problemesTemplatesCE2 } from "@/lib/calcul-rapide/data/ce2/problemes.templates";
 
 import { weeklyCM1 } from "@/lib/calcul-rapide/data/cm1/weekly";
 import { calculsFixedCM1 } from "@/lib/calcul-rapide/data/cm1/calculs.fixed";
@@ -48,6 +67,18 @@ import { calculsFixed3e } from "@/lib/calcul-rapide/data/3e/calculs.fixed";
 import { calculsTemplates3e } from "@/lib/calcul-rapide/data/3e/calculs.templates";
 import { problemesFixed3e } from "@/lib/calcul-rapide/data/3e/problemes.fixed";
 import { problemesTemplates3e } from "@/lib/calcul-rapide/data/3e/problemes.templates";
+
+import { weeklySeconde } from "@/lib/calcul-rapide/data/seconde/weekly";
+import { calculsFixedSeconde } from "@/lib/calcul-rapide/data/seconde/calculs.fixed";
+import { calculsTemplatesSeconde } from "@/lib/calcul-rapide/data/seconde/calculs.templates";
+import { problemesFixedSeconde } from "@/lib/calcul-rapide/data/seconde/problemes.fixed";
+import { problemesTemplatesSeconde } from "@/lib/calcul-rapide/data/seconde/problemes.templates";
+
+import { weeklyPremiereSpe } from "@/lib/calcul-rapide/data/premiere-spe/weekly";
+import { calculsFixedPremiereSpe } from "@/lib/calcul-rapide/data/premiere-spe/calculs.fixed";
+import { calculsTemplatesPremiereSpe } from "@/lib/calcul-rapide/data/premiere-spe/calculs.templates";
+import { problemesFixedPremiereSpe } from "@/lib/calcul-rapide/data/premiere-spe/problemes.fixed";
+import { problemesTemplatesPremiereSpe } from "@/lib/calcul-rapide/data/premiere-spe/problemes.templates";
 
 import { weeklyTerminaleSpe } from "@/lib/calcul-rapide/data/terminale-spe/weekly";
 import { calculsFixedTerminaleSpe } from "@/lib/calcul-rapide/data/terminale-spe/calculs.fixed";
@@ -105,8 +136,17 @@ function pickRandom(values: unknown[]) {
   return values[Math.floor(Math.random() * values.length)];
 }
 
+// ⚠️ Les nombres tirés au sort passent par formatNumber, comme les réponses.
+// Sinon un 4,35 recopié tel quel s'affiche « 4.35 », à l'anglaise : c'était le
+// cas de 24 questions du CM2 à la Terminale — « 1.8 + 1.4 = ? » servi chaque
+// jour à des élèves français, et « X suit B(22 ; 0.2) » à des Terminales.
+// Corrigé ici, une fois, plutôt que dans chaque banque.
 function replaceTemplate(text: string, values: Record<string, unknown>) {
-  return text.replace(/\{\{(\w+)\}\}/g, (_, key) => String(values[key] ?? ""));
+  return text.replace(/\{\{(\w+)\}\}/g, (_, key) => {
+    const value = values[key];
+    if (typeof value === "number") return formatNumber(value);
+    return String(value ?? "");
+  });
 }
 
 function computeAnswer(rule: string, values: Record<string, unknown>) {
@@ -162,100 +202,92 @@ function generateItem(item: CalculRapideItem): GeneratedCalculRapideItem {
   };
 }
 
-function getDataByNiveau(niveau: NiveauCalculRapide) {
-  if (niveau === "CM1") {
-    return {
-      weeks: weeklyCM1,
-      items: [
-        ...calculsFixedCM1,
-        ...calculsTemplatesCM1,
-        ...problemesFixedCM1,
-        ...problemesTemplatesCM1,
-      ],
-    };
-  }
-
-  if (niveau === "CM2") {
-    return {
-      weeks: weeklyCM2,
-      items: [
-        ...calculsFixedCM2,
-        ...calculsTemplatesCM2,
-        ...problemesFixedCM2,
-        ...problemesTemplatesCM2,
-      ],
-    };
-  }
-
-  if (niveau === "5e") {
-    return {
-      weeks: weekly5e,
-      items: [
-        ...calculsFixed5e,
-        ...calculsTemplates5e,
-        ...problemesFixed5e,
-        ...problemesTemplates5e,
-      ],
-    };
-  }
-
-  if (niveau === "4e") {
-    return {
-      weeks: weekly4e,
-      items: [
-        ...calculsFixed4e,
-        ...calculsTemplates4e,
-        ...problemesFixed4e,
-        ...problemesTemplates4e,
-      ],
-    };
-  }
-
-  if (niveau === "3e") {
-    return {
-      weeks: weekly3e,
-      items: [
-        ...calculsFixed3e,
-        ...calculsTemplates3e,
-        ...problemesFixed3e,
-        ...problemesTemplates3e,
-      ],
-    };
-  }
-
-  if (niveau === "terminale-spe") {
-    return {
-      weeks: weeklyTerminaleSpe,
-      items: [
-        ...calculsFixedTerminaleSpe,
-        ...calculsTemplatesTerminaleSpe,
-        ...problemesFixedTerminaleSpe,
-        ...problemesTemplatesTerminaleSpe,
-      ],
-    };
-  }
-
-  if (niveau === "adulte") {
-    return {
-      weeks: weeklyAdulte,
-      items: [
-        ...calculsFixedAdulte,
-        ...calculsTemplatesAdulte,
-        ...problemesFixedAdulte,
-        ...problemesTemplatesAdulte,
-      ],
-    };
-  }
-
-  return {
+// Une entrée par niveau, et le compilateur exige qu'elles y soient toutes :
+// `Record<NiveauCalculRapide, …>` refuse de compiler si on ajoute un niveau
+// au type sans lui donner sa banque. C'était une cascade de `if` avec un
+// repli silencieux sur la 6e — un niveau oublié y passait inaperçu.
+const BANQUES: Record<
+  NiveauCalculRapide,
+  { weeks: CalculRapideWeek[]; items: CalculRapideItem[] }
+> = {
+  CP: {
+    weeks: weeklyCP,
+    items: [...calculsFixedCP, ...calculsTemplatesCP, ...problemesFixedCP, ...problemesTemplatesCP],
+  },
+  CE1: {
+    weeks: weeklyCE1,
+    items: [...calculsFixedCE1, ...calculsTemplatesCE1, ...problemesFixedCE1, ...problemesTemplatesCE1],
+  },
+  CE2: {
+    weeks: weeklyCE2,
+    items: [...calculsFixedCE2, ...calculsTemplatesCE2, ...problemesFixedCE2, ...problemesTemplatesCE2],
+  },
+  CM1: {
+    weeks: weeklyCM1,
+    items: [...calculsFixedCM1, ...calculsTemplatesCM1, ...problemesFixedCM1, ...problemesTemplatesCM1],
+  },
+  CM2: {
+    weeks: weeklyCM2,
+    items: [...calculsFixedCM2, ...calculsTemplatesCM2, ...problemesFixedCM2, ...problemesTemplatesCM2],
+  },
+  "6e": {
     weeks: weekly6e,
+    items: [...calculsFixed6e, ...calculsTemplates6e, ...problemesFixed6e, ...problemesTemplates6e],
+  },
+  "5e": {
+    weeks: weekly5e,
+    items: [...calculsFixed5e, ...calculsTemplates5e, ...problemesFixed5e, ...problemesTemplates5e],
+  },
+  "4e": {
+    weeks: weekly4e,
+    items: [...calculsFixed4e, ...calculsTemplates4e, ...problemesFixed4e, ...problemesTemplates4e],
+  },
+  "3e": {
+    weeks: weekly3e,
+    items: [...calculsFixed3e, ...calculsTemplates3e, ...problemesFixed3e, ...problemesTemplates3e],
+  },
+  seconde: {
+    weeks: weeklySeconde,
     items: [
-      ...calculsFixed6e,
-      ...calculsTemplates6e,
-      ...problemesFixed6e,
-      ...problemesTemplates6e,
+      ...calculsFixedSeconde,
+      ...calculsTemplatesSeconde,
+      ...problemesFixedSeconde,
+      ...problemesTemplatesSeconde,
     ],
-  };
+  },
+  "premiere-spe": {
+    weeks: weeklyPremiereSpe,
+    items: [
+      ...calculsFixedPremiereSpe,
+      ...calculsTemplatesPremiereSpe,
+      ...problemesFixedPremiereSpe,
+      ...problemesTemplatesPremiereSpe,
+    ],
+  },
+  "terminale-spe": {
+    weeks: weeklyTerminaleSpe,
+    items: [
+      ...calculsFixedTerminaleSpe,
+      ...calculsTemplatesTerminaleSpe,
+      ...problemesFixedTerminaleSpe,
+      ...problemesTemplatesTerminaleSpe,
+    ],
+  },
+  adulte: {
+    weeks: weeklyAdulte,
+    items: [
+      ...calculsFixedAdulte,
+      ...calculsTemplatesAdulte,
+      ...problemesFixedAdulte,
+      ...problemesTemplatesAdulte,
+    ],
+  },
+};
+
+const NIVEAUX_VALIDES = Object.keys(BANQUES) as NiveauCalculRapide[];
+
+function getDataByNiveau(niveau: NiveauCalculRapide) {
+  return BANQUES[niveau] ?? BANQUES["6e"];
 }
 
 function getTodayDay() {
@@ -373,17 +405,13 @@ export default function CalculRapideDefiClient() {
   const searchParams = useSearchParams();
   const niveauParam = searchParams.get("niveau");
 
-  const niveau: NiveauCalculRapide =
-    niveauParam === "CM1" ||
-    niveauParam === "CM2" ||
-    niveauParam === "5e" ||
-    niveauParam === "6e" ||
-    niveauParam === "4e" ||
-    niveauParam === "3e" ||
-    niveauParam === "terminale-spe" ||
-    niveauParam === "adulte"
-      ? niveauParam
-      : "6e";
+  // Un niveau inconnu dans l'URL retombe sur la 6e. La liste vient de BANQUES :
+  // elle ne peut plus se désynchroniser du type.
+  const niveau: NiveauCalculRapide = NIVEAUX_VALIDES.includes(
+    niveauParam as NiveauCalculRapide
+  )
+    ? (niveauParam as NiveauCalculRapide)
+    : "6e";
 
   const questions = useMemo(() => buildSession(niveau), [niveau]);
 

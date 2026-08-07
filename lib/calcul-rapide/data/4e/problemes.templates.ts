@@ -79,7 +79,9 @@ export const problemesTemplates4e: CalculRapideItem[] = [
   },
 
   {
-    id: "4e_template_vitesse_001",
+    // ⚠️ RENOMMÉ : l'identifiant était déjà celui d'un CALCUL. Voir le même
+    // correctif en 5e — ce problème était inatteignable.
+    id: "4e_template_probleme_vitesse_001",
     niveau: "4e",
     type: "probleme",
     mode: "template",
@@ -283,7 +285,8 @@ export const problemesTemplates4e: CalculRapideItem[] = [
   },
 
   {
-    id: "4e_template_equation_simple_001",
+    // ⚠️ RENOMMÉ, même raison : un calcul portait déjà cet identifiant.
+    id: "4e_template_probleme_equation_simple_001",
     niveau: "4e",
     type: "probleme",
     mode: "template",

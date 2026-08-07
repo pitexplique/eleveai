@@ -1,0 +1,78 @@
+// lib/calcul-rapide/data/seconde/problemes.templates.ts
+
+import type { CalculRapideItem } from "../../types";
+
+export const problemesTemplatesSeconde: CalculRapideItem[] = [
+  {
+    id: "seconde_template_probleme_solde_001",
+    niveau: "seconde",
+    type: "probleme",
+    mode: "template",
+    notionId: "information_chiffree_evolutions",
+    microId: "info_taux_evolution",
+    difficulty: 3,
+    durationSec: 75,
+    media: { text: "Une paire de baskets coûte {{p}} €. Elle est soldée à -{{t}} %. Quel est le prix soldé, en euros ?" },
+    template: "Une paire de baskets coûte {{p}} €. Elle est soldée à -{{t}} %. Quel est le prix soldé, en euros ?",
+    variables: { p: [60, 80, 120, 150, 200], t: [10, 20, 25, 40] },
+    answerRule: "p * (1 - t / 100)",
+    hint: "Baisser de t %, c'est multiplier par 1 - t/100. Une seule opération, pas deux.",
+    explanationTemplate: "{{p}} × (1 - {{t}}/100) = {{answer}} €.",
+    tags: ["probleme", "pourcentage", "seconde"],
+  },
+
+  {
+    id: "seconde_template_probleme_forfait_001",
+    niveau: "seconde",
+    type: "probleme",
+    mode: "template",
+    notionId: "equations_inequations_1er_degre",
+    microId: "equation_probleme",
+    difficulty: 3,
+    durationSec: 75,
+    media: { text: "Un club de plongée demande 20 € d'inscription, puis {{p}} € par sortie. Combien de sorties peut-on faire avec {{total}} € ?" },
+    template: "Un club de plongée demande 20 € d'inscription, puis {{p}} € par sortie. Combien de sorties peut-on faire avec {{total}} € ?",
+    // (total - 20) est toujours divisible par 5 et par 10.
+    variables: { p: [5, 10], total: [70, 120, 220, 320] },
+    answerRule: "(total - 20) / p",
+    hint: "Retire d'abord l'inscription, qui ne se paie qu'une fois.",
+    explanationTemplate: "({{total}} - 20) ÷ {{p}} = {{answer}} sorties.",
+    tags: ["probleme", "equation", "974", "seconde"],
+  },
+
+  {
+    id: "seconde_template_probleme_moyenne_001",
+    niveau: "seconde",
+    type: "probleme",
+    mode: "template",
+    notionId: "statistiques_descriptives",
+    microId: "stat_moyenne_ponderee",
+    difficulty: 3,
+    durationSec: 75,
+    media: { text: "Le devoir compte coefficient 1, le contrôle coefficient 3. Tu as {{a}} au devoir et {{b}} au contrôle. Quelle est ta moyenne ?" },
+    template: "Le devoir compte coefficient 1, le contrôle coefficient 3. Tu as {{a}} au devoir et {{b}} au contrôle. Quelle est ta moyenne ?",
+    variables: { a: [8, 12, 16], b: [8, 12, 16] },
+    answerRule: "(a + 3 * b) / 4",
+    hint: "On divise par la somme des coefficients, pas par le nombre de notes.",
+    explanationTemplate: "({{a}} + 3 × {{b}}) ÷ 4 = {{answer}}.",
+    tags: ["probleme", "statistiques", "seconde"],
+  },
+
+  {
+    id: "seconde_template_probleme_aire_carre_001",
+    niveau: "seconde",
+    type: "probleme",
+    mode: "template",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_carre",
+    difficulty: 3,
+    durationSec: 75,
+    media: { text: "On multiplie le côté d'un carré par {{k}}. Par combien son aire est-elle multipliée ?" },
+    template: "On multiplie le côté d'un carré par {{k}}. Par combien son aire est-elle multipliée ?",
+    variables: { k: [2, 3, 4, 5, 10] },
+    answerRule: "k * k",
+    hint: "L'aire fait intervenir deux longueurs, pas une.",
+    explanationTemplate: "Le côté est multiplié par {{k}}, donc l'aire par {{k}}² = {{answer}}.",
+    tags: ["probleme", "aire", "seconde"],
+  },
+];

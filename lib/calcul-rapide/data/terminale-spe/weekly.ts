@@ -16,7 +16,7 @@ export const weeklyTerminaleSpe: CalculRapideWeek[] = [
         day: "lundi",
         title: "Défi du lundi",
         theme: "Dérivées express",
-        durationTotalSec: 300,
+        durationTotalSec: 250,
         itemIds: [
           "terminale_spe_calcul_derivee_polynome_001",
           "terminale_spe_template_derivee_ax2_001",
@@ -34,7 +34,7 @@ export const weeklyTerminaleSpe: CalculRapideWeek[] = [
         day: "mardi",
         title: "Défi du mardi",
         theme: "Suites",
-        durationTotalSec: 300,
+        durationTotalSec: 245,
         itemIds: [
           "terminale_spe_calcul_suite_geo_001",
           "terminale_spe_calcul_suite_arith_001",
@@ -52,7 +52,7 @@ export const weeklyTerminaleSpe: CalculRapideWeek[] = [
         day: "mercredi",
         title: "Défi du mercredi",
         theme: "Exponentielle et logarithme",
-        durationTotalSec: 300,
+        durationTotalSec: 205,
         itemIds: [
           "terminale_spe_calcul_ln_exp_001",
           "terminale_spe_calcul_exp_ln_001",
@@ -70,7 +70,7 @@ export const weeklyTerminaleSpe: CalculRapideWeek[] = [
         day: "jeudi",
         title: "Défi du jeudi",
         theme: "Probabilités",
-        durationTotalSec: 300,
+        durationTotalSec: 270,
         itemIds: [
           "terminale_spe_calcul_proba_indep_001",
           "terminale_spe_template_proba_indep_001",
@@ -88,7 +88,7 @@ export const weeklyTerminaleSpe: CalculRapideWeek[] = [
         day: "vendredi",
         title: "Défi du vendredi",
         theme: "Limites et variations",
-        durationTotalSec: 300,
+        durationTotalSec: 275,
         itemIds: [
           "terminale_spe_calcul_limite_carre_001",
           "terminale_spe_calcul_variation_derivee_001",
@@ -106,7 +106,7 @@ export const weeklyTerminaleSpe: CalculRapideWeek[] = [
         day: "samedi",
         title: "Défi du samedi",
         theme: "Mix bac express",
-        durationTotalSec: 300,
+        durationTotalSec: 240,
         itemIds: [
           "terminale_spe_template_derivee_ax2_001",
           "terminale_spe_template_suite_geo_001",
@@ -124,7 +124,7 @@ export const weeklyTerminaleSpe: CalculRapideWeek[] = [
         day: "dimanche",
         title: "Final du dimanche 🏆",
         theme: "Challenge global Terminale spé",
-        durationTotalSec: 300,
+        durationTotalSec: 250,
         itemIds: [
           "terminale_spe_calcul_derivee_exp_001",
           "terminale_spe_template_derivee_ax2_bx_001",
@@ -145,16 +145,16 @@ export const weeklyTerminaleSpe: CalculRapideWeek[] = [
     id: "terminale_spe_2026_S23",
     niveau: "terminale-spe",
     week: "2026-S23",
-    title: "Calcul rapide Terminale spe - Automatismes bac",
-    themeDominant: "Derivees, suites, exponentielle-logarithme, probabilites et variations",
+    title: "Calcul rapide Terminale spé - Automatismes bac",
+    themeDominant: "Dérivées, suites, exponentielle-logarithme, probabilités et variations",
     sessions: [
       {
         id: "terminale_spe_2026_S23_lundi",
         niveau: "terminale-spe",
         day: "lundi",
-        title: "Defi du lundi",
-        theme: "Derivees immediates",
-        durationTotalSec: 300,
+        title: "Défi du lundi",
+        theme: "Dérivées immédiates",
+        durationTotalSec: 230,
         itemIds: [
           "terminale_spe_calcul_automatisme_derivee_001",
           "terminale_spe_template_automatisme_derivee_001",
@@ -169,9 +169,9 @@ export const weeklyTerminaleSpe: CalculRapideWeek[] = [
         id: "terminale_spe_2026_S23_mardi",
         niveau: "terminale-spe",
         day: "mardi",
-        title: "Defi du mardi",
+        title: "Défi du mardi",
         theme: "Suites efficaces",
-        durationTotalSec: 300,
+        durationTotalSec: 235,
         itemIds: [
           "terminale_spe_calcul_automatisme_suite_geo_001",
           "terminale_spe_template_automatisme_suite_geo_001",
@@ -186,9 +186,9 @@ export const weeklyTerminaleSpe: CalculRapideWeek[] = [
         id: "terminale_spe_2026_S23_mercredi",
         niveau: "terminale-spe",
         day: "mercredi",
-        title: "Defi du mercredi",
+        title: "Défi du mercredi",
         theme: "Expo et log sans lourdeur",
-        durationTotalSec: 300,
+        durationTotalSec: 205,
         itemIds: [
           "terminale_spe_calcul_ln_exp_001",
           "terminale_spe_calcul_exp_ln_001",
@@ -203,8 +203,8 @@ export const weeklyTerminaleSpe: CalculRapideWeek[] = [
         id: "terminale_spe_2026_S23_jeudi",
         niveau: "terminale-spe",
         day: "jeudi",
-        title: "Defi du jeudi",
-        theme: "Probabilites rapides",
+        title: "Défi du jeudi",
+        theme: "Probabilités rapides",
         durationTotalSec: 300,
         itemIds: [
           "terminale_spe_probleme_automatisme_proba_001",
@@ -220,9 +220,9 @@ export const weeklyTerminaleSpe: CalculRapideWeek[] = [
         id: "terminale_spe_2026_S23_vendredi",
         niveau: "terminale-spe",
         day: "vendredi",
-        title: "Defi du vendredi",
+        title: "Défi du vendredi",
         theme: "Signes et variations",
-        durationTotalSec: 300,
+        durationTotalSec: 225,
         itemIds: [
           "terminale_spe_calcul_variation_derivee_001",
           "terminale_spe_calcul_automatisme_derivee_001",
@@ -237,9 +237,9 @@ export const weeklyTerminaleSpe: CalculRapideWeek[] = [
         id: "terminale_spe_2026_S23_samedi",
         niveau: "terminale-spe",
         day: "samedi",
-        title: "Defi du samedi",
+        title: "Défi du samedi",
         theme: "Mix automatismes",
-        durationTotalSec: 300,
+        durationTotalSec: 260,
         itemIds: [
           "terminale_spe_template_automatisme_derivee_001",
           "terminale_spe_template_automatisme_suite_geo_001",
@@ -256,7 +256,7 @@ export const weeklyTerminaleSpe: CalculRapideWeek[] = [
         day: "dimanche",
         title: "Final du dimanche",
         theme: "Challenge global automatismes bac",
-        durationTotalSec: 300,
+        durationTotalSec: 260,
         itemIds: [
           "terminale_spe_template_automatisme_derivee_001",
           "terminale_spe_template_automatisme_suite_geo_001",
