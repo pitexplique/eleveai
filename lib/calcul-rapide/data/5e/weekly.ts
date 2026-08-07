@@ -133,7 +133,10 @@ export const weekly5e: CalculRapideWeek[] = [
           "5e_template_conversion_contenance_001",
           "5e_template_conversion_duree_001",
           "5e_template_vitesse_001",
-          "5e_probleme_vitesse_001",
+          // La version À GÉNÉRATEUR du problème de vitesse : elle existait
+          // dans la banque sous le même identifiant qu'un calcul, donc
+          // inatteignable. Un générateur vaut mieux qu'un énoncé figé.
+          "5e_template_probleme_vitesse_001",
           "5e_probleme_aire_chambre_001",
         ],
       },
