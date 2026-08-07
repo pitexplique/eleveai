@@ -41,34 +41,56 @@ export type ActionProfil = {
   accepteFiltres?: boolean;
 };
 
+// ⚠️ CES TROIS ACTIONS MÈNENT À DES PAGES QUI EXISTENT DÉJÀ — et c'est tout
+// l'objet de cette version.
+//
+// La demande de Frédéric (point 12) décrivait QUATRE OUTILS À CONSTRUIRE :
+// un filtre de ressources par niveau/matière/notion/type/objectif, un
+// constructeur de progression annuelle, un constructeur d'évaluation (durée,
+// barème, critères, remédiation), et un générateur de prompt pédagogique.
+// Je les ai câblés vers `/enseignants/ressources`, `/progression`,
+// `/evaluation` et `/prompt` — quatre routes qui n'existent pas. Résultat :
+// quatre 404 servis à des professeurs, mesurés avant de m'en apercevoir.
+//
+// Tranché avec Frédéric le 07/08 : on branche sur l'existant maintenant, les
+// outils viendront dans leur propre session. Une action qui ouvre une page
+// approchante vaut mieux qu'une action qui ouvre une erreur.
+//
+// ⛔ « ÉCRIRE UN PROMPT PÉDAGOGIQUE » N'EST PAS DANS CETTE LISTE. C'est le seul
+// des quatre qui n'a AUCUN équivalent en ligne — le brancher sur une page
+// approchante aurait été un mensonge, pas un pis-aller. Il reste demandé (le
+// travail fait avec Valeria), et il reste à faire.
+//
+// ⏳ CE QU'IL FAUDRA CONSTRUIRE, et la donnée est déjà là :
+//   — « Trouver une ressource » : `type` et `resultat` viennent d'entrer dans
+//     ressources.ts (07/08), c'est exactement de quoi filtrer « les ressources
+//     que mes élèves peuvent faire, et dont je verrai un résultat revenir » ;
+//   — « Préparer une progression » : les 431 notions du programme portent
+//     désormais leurs PRÉREQUIS (notions.generated.ts, régénéré le 07/08) —
+//     de quoi proposer un ordre, pas seulement une liste.
 const PROF: ActionProfil[] = [
   {
     label: "Trouver une ressource",
-    href: "/enseignants/ressources",
-    aide: "Les ressources que vos élèves peuvent vraiment faire, avec un résultat à la clé",
+    // ⏳ Remplacer par le filtre dédié : /explorer est un catalogue, il ne
+    // sait pas trier par niveau + notion + type + « ça rend un résultat ».
+    href: "/explorer",
+    aide: "Le catalogue complet des ressources d'EleveAI",
     intention: "enseigner",
-    accepteFiltres: true,
   },
   {
     label: "Préparer une progression",
-    href: "/enseignants/progression",
-    aide: "L'ordre des notions de l'année, avec leurs prérequis",
+    // ⚠️ `/programme` seul est un 404 : la route est `/programme/[classe]`.
+    // La 6ᵉ est l'entrée déjà utilisée par la matrice (ressource
+    // « programme-seo »), et chaque page de programme mène aux autres.
+    href: "/programme/6e",
+    aide: "Ce qui est au programme, classe par classe, et de quoi l'entraîner",
     intention: "enseigner",
-    accepteFiltres: true,
   },
   {
     label: "Préparer une évaluation",
-    href: "/enseignants/evaluation",
-    aide: "Notion, durée, barème, critères de réussite et remédiation",
+    href: "/evaluation-nationale-college",
+    aide: "Les évaluations nationales, leurs épreuves blanches et leur suivi",
     intention: "preparer",
-    accepteFiltres: true,
-  },
-  {
-    label: "Écrire un prompt pédagogique",
-    href: "/enseignants/prompt",
-    aide: "Une demande simple devient un prompt complet, prêt à copier",
-    intention: "enseigner",
-    accepteFiltres: true,
   },
 ];
 

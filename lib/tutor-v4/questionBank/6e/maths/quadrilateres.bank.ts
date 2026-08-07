@@ -873,17 +873,17 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     microId: "quadrilatere_lire_propriete",
     difficulty: 2,
     theme: "neutral",
-    text: "Observe la figure. Quelles sont les diagonales de ce quadrilatère ?",
+    text: "Observe la figure. Combien un quadrilatère a-t-il de diagonales en tout ?",
     format: "qcm",
-    choices: ["AB et BC", "AC et BD", "AB et CD", "AD et BC"],
-    expected: ["AC et BD"],
+    choices: ["2", "1", "3", "4"],
+    expected: ["2"],
     comparator: "mcq_exact",
-    hint: "Une diagonale relie deux sommets opposés.",
+    hint: "Compte les paires de sommets qui se font face.",
     explanation:
       "Définition : un quadrilatère est un polygone qui possède 4 côtés.\n\n" +
       "Méthode : on observe les côtés, les sommets, les angles et les diagonales.\n\n" +
       "Calcul : " +
-      ("Les diagonales relient des sommets opposés. Ici, les diagonales sont AC et BD.") +
+      ("Une diagonale relie deux sommets opposés. Dans un quadrilatère ABCD, deux paires de sommets se font face : A avec C, et B avec D. Il y a donc exactement 2 diagonales, AC et BD.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["quadrilatere", "diagonales", "canvas"],
     canvas: {

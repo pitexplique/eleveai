@@ -605,16 +605,16 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Pourquoi une aire ne peut-elle pas s’exprimer en cm³ ?",
+    text: "Un élève écrit que le volume d’une boîte est 24 cm². Qu’est-ce qui cloche dans sa réponse ?",
     format: "short",
-    expected: ["aire", "cm²", "volume", "cm³"],
+    expected: ["cm³", "cm3", "trois dimensions", "3 dimensions", "cube", "aire"],
     comparator: "contains_keyword",
-    hint: "Une aire est en 2 dimensions, un volume en 3 dimensions.",
+    hint: "Regarde l’unité, pas le nombre.",
     explanation:
       "Définition : un volume mesure la place occupée par un solide.\n\n" +
       "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
       "Calcul : " +
-      ("Une aire mesure une surface, donc une grandeur en 2 dimensions : elle s’exprime en cm². Un volume mesure un espace en 3 dimensions : il s’exprime en cm³.") +
+      ("Le nombre peut être juste, mais l’unité ne l’est pas. Le cm² mesure une surface, une grandeur plate, à deux dimensions. Une boîte occupe un espace : longueur, largeur ET hauteur, donc trois dimensions. Le volume s’exprime en cm³.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["volume_solide", "defi", "raisonnement"],
   },

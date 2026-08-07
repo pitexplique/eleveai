@@ -1596,8 +1596,8 @@ export const perimetresBank: TutorBankItemV4[] = [
 
   // ===== TOP-UP — AIRE_PERIMETRE_FIGURE =====
   { kind: "fixed", id: "aire_perimetre_figure_topup_1", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_figure", difficulty: 1, theme: "neutral",
-    text: "Quel est le périmètre d’un carré de côté 5 cm ?", format: "short", expected: ["20"], comparator: "number_equal",
-    hint: "côté × 4.", explanation: expl("Périmètre d’un carré = côté × 4 = 5 × 4 = 20, donc 20 cm."), tags: ["aire_perimetre", "figure", "carre"] },
+    text: "Quel est le périmètre d’un carré de côté 12 cm ?", format: "short", expected: ["48", "48 cm", "48cm"], comparator: "number_equal",
+    hint: "côté × 4.", explanation: expl("Périmètre d’un carré = côté × 4 = 12 × 4 = 48, donc 48 cm."), tags: ["aire_perimetre", "figure", "carre"] },
   { kind: "fixed", id: "aire_perimetre_figure_topup_2", niveau: "6e", matiere: "maths", notionId: "aire_perimetre", microId: "aire_perimetre_figure", difficulty: 2, theme: "neutral",
     text: "Quel est le périmètre d’un rectangle de longueur 6 cm et de largeur 4 cm ?", format: "short", expected: ["20"], comparator: "number_equal",
     hint: "On additionne tous les côtés : 6 + 4 + 6 + 4.", explanation: expl("Périmètre d’un rectangle = 2 × (L + l) = 2 × (6 + 4) = 2 × 10 = 20, donc 20 cm."), tags: ["aire_perimetre", "figure", "rectangle"] },

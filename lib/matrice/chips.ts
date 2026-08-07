@@ -111,6 +111,7 @@ export function chipsDisponibles(
   for (const r of ressourcesPour(profil, matiere)) {
     for (const i of r.intentions) {
       if (i === "enseigner" && !adulte) continue;
+      if (SANS_CHIP.has(i)) continue;
       compte.set(i, (compte.get(i) ?? 0) + 1);
     }
   }
@@ -147,13 +148,35 @@ const ORDRE_INTENTIONS: Intention[] = [
   "comprendre",
   "tester",
   "rituel",
-  "corriger",
   "preparer",
   "suivre",
   "enseigner",
   "decouvrir",
+  "corriger",
   "humain",
 ];
+
+/**
+ * DES INTENTIONS QUI NE DEVIENNENT PAS DES CHIPS.
+ *
+ * ⛔ « Corriger une erreur » retirée le 07/08. Frédéric : « corriger une
+ * erreur ? en CP CM2 et seconde non ». Il visait trois niveaux ; en regardant
+ * pourquoi, c'est partout que la chip est fausse — elle n'était simplement
+ * visible qu'à ces trois-là, ailleurs le concours ou un rituel lui prenait sa
+ * place.
+ *
+ * La raison : CORRIGER UNE ERREUR, ÇA SE FAIT APRÈS S'ÊTRE TROMPÉ. C'est un
+ * geste du coach, une fois qu'une réponse est fausse et qu'on a l'explication
+ * sous les yeux. Sur la page d'entrée, personne n'a encore rien fait — la chip
+ * demandait de quelle erreur on parle avant qu'aucune erreur n'existe.
+ * Un CP, en plus, ne se dit jamais « je vais corriger une erreur ».
+ *
+ * ⚠️ L'INTENTION RESTE ENTIÈRE. Le lexique la lit toujours (« c'est faux »,
+ * « où est mon erreur », « je me trompe »), le moteur la score toujours, les
+ * coachs la portent toujours. On a retiré le BOUTON, pas la fonction — même
+ * distinction que pour « Écris-moi ».
+ */
+const SANS_CHIP = new Set<Intention>(["corriger"]);
 
 function rang(i: Intention): number {
   const r = ORDRE_INTENTIONS.indexOf(i);

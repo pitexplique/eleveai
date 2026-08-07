@@ -1695,10 +1695,10 @@ export const airesBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "aire_carre_topup_1", niveau: "6e", matiere: "maths",
     notionId: "aire_surface", microId: "aire_carre", difficulty: 1, theme: "neutral",
-    text: "Quelle est l’aire d’un carré de côté 5 cm ?",
-    format: "short", expected: ["25"], comparator: "number_equal",
+    text: "Quelle est l’aire d’un carré de côté 9 cm ?",
+    format: "short", expected: ["81", "81 cm²", "81 cm2", "81cm²", "81cm2"], comparator: "number_equal",
     hint: "Aire d’un carré = côté × côté.",
-    explanation: expl("L’aire d’un carré est côté × côté. Ici, 5 × 5 = 25, donc l’aire est 25 cm²."),
+    explanation: expl("L’aire d’un carré est côté × côté. Ici, 9 × 9 = 81, donc l’aire est 81 cm²."),
     tags: ["aire_surface", "carre"],
   },
   {

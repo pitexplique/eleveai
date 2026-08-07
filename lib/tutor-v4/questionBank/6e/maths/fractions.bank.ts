@@ -1739,16 +1739,16 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi 2/4 et 1/2 représentent la même quantité.",
+    text: "Un élève dit : « 3/6 est plus petit que 1/2, parce qu’il y a plus de parts. » Explique son erreur.",
     format: "open",
-    expected: ["même", "quantité", "moitié", "parts", "équivalentes"],
+    expected: ["même", "égales", "egales", "moitié", "moitie", "3 sur 6", "plus petites"],
     comparator: "contains_keyword",
-    hint: "Pense à une barre coupée en 4 parts égales.",
+    hint: "Coupe une barre en 6 parts, puis prends-en 3. Qu’obtiens-tu ?",
     explanation:
       "Définition : deux fractions sont équivalentes si elles représentent la même quantité.\n\n" +
       "Méthode : on compare les portions du même tout.\n\n" +
-      "Observation : 2 parts sur 4 correspondent à la moitié du tout, comme 1 part sur 2.\n\n" +
-      "Conclusion : 2/4 et 1/2 sont équivalentes.",
+      "Observation : couper en 6 donne bien plus de parts qu’en 2, mais chaque part est plus petite. Prendre 3 parts sur 6, c’est prendre la moitié de la barre — exactement comme 1 part sur 2.\n\n" +
+      "Conclusion : 3/6 et 1/2 représentent la même quantité, elles ne sont ni plus grandes ni plus petites l’une que l’autre.",
     tags: ["fraction_nombre", "open", "equivalence", "raisonnement"],
   },
 ];

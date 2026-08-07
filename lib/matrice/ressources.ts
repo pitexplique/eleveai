@@ -210,9 +210,23 @@ export const RESSOURCES: RessourceEleveAI[] = [
   {
     id: "calcul-rapide",
     titre: "Le calcul rapide",
-    promesse: "Quelques minutes, chrono, et on recommence demain.",
+    promesse: "Cinq minutes, chrono, et on recommence demain.",
     url: "/calcul-rapide",
-    niveaux: ["ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"],
+    // ⭐ RECALÉ SUR LA PAGE (07/08, Frédéric : « il faut intégrer calcul rapide
+    // dans la matrice »). `app/calcul-rapide/CalculRapideClient.tsx` déclare
+    // huit niveaux : CM1, CM2, 6e, 5e, 4e, 3e, terminale-spe, adulte. Cette
+    // ligne en annonçait d'autres, et il manquait les deux derniers :
+    //   ⛔ CE1 et CE2 SORTENT — ils étaient déclarés ici et n'existent pas sur
+    //      la page. Un CE1 était envoyé vers un écran dont le plus petit niveau
+    //      est le CM1. Ce n'est pas une chip en moins, c'est une impasse en
+    //      moins : la dictée et l'anglais du jour lui gardent son rituel.
+    //   ⭐ TERMINALE ENTRE — « Terminale spé » est sur la page depuis toujours,
+    //      et aucun élève de Terminale ne se la voyait proposer.
+    //   ⭐ PARENT ENTRE — c'est le mode « Calculs du quotidien », écrit pour
+    //      des adultes ; il n'était proposé à personne.
+    // ⚠️ Ni Seconde ni Première : la page ne les a pas. On ne comble pas un
+    // trou de contenu en l'annonçant.
+    niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "terminale", "parent"],
     matiere: "maths",
     notions: ["calcul"],
     intentions: ["rituel", "entrainer"],

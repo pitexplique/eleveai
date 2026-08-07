@@ -1327,11 +1327,11 @@ export const longueursBank: TutorBankItemV4[] = [
 
   // ===== TOP-UP — AIRE_LONGUEUR_MESURER =====
   { kind: "fixed", id: "aire_longueur_mesurer_topup_1", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_mesurer", difficulty: 1, theme: "neutral",
-    text: "Combien y a-t-il de centimètres dans 1 mètre ?", format: "short", expected: ["100"], comparator: "number_equal",
-    hint: "1 m = 100 cm.", explanation: expl("Par définition, 1 mètre contient 100 centimètres."), tags: ["aire_longueur", "mesure", "conversion"] },
+    text: "Combien y a-t-il de mètres dans 1 kilomètre ?", format: "short", expected: ["1000", "1 000"], comparator: "number_equal",
+    hint: "Le préfixe kilo- veut dire mille.", explanation: expl("Le préfixe kilo- signifie mille : 1 kilomètre contient 1 000 mètres."), tags: ["aire_longueur", "mesure", "conversion"] },
   { kind: "fixed", id: "aire_longueur_mesurer_topup_2", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_mesurer", difficulty: 1, theme: "neutral",
-    text: "Combien y a-t-il de millimètres dans 1 centimètre ?", format: "short", expected: ["10"], comparator: "number_equal",
-    hint: "1 cm = 10 mm.", explanation: expl("Par définition, 1 centimètre contient 10 millimètres."), tags: ["aire_longueur", "mesure", "conversion"] },
+    text: "Combien y a-t-il de millimètres dans 1 mètre ?", format: "short", expected: ["1000", "1 000"], comparator: "number_equal",
+    hint: "1 m = 100 cm, et chaque centimètre vaut 10 mm.", explanation: expl("Un mètre contient 100 centimètres, et chaque centimètre contient 10 millimètres : 100 × 10 = 1 000 millimètres."), tags: ["aire_longueur", "mesure", "conversion"] },
   { kind: "fixed", id: "aire_longueur_mesurer_topup_3", niveau: "6e", matiere: "maths", notionId: "aire_longueur", microId: "aire_longueur_mesurer", difficulty: 2, theme: "neutral",
     text: "Convertis 3 m en centimètres.", format: "short", expected: ["300"], comparator: "number_equal",
     hint: "1 m = 100 cm.", explanation: expl("On multiplie par 100 : 3 × 100 = 300. Donc 3 m = 300 cm."), tags: ["aire_longueur", "mesure", "conversion"] },

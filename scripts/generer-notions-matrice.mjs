@@ -41,15 +41,20 @@ function lireNotions(fichier) {
     // recopier à la main dans un troisième fichier, c'est garantir qu'ils
     // divergeront.
     //
-    // ⚠️ On cherche `prerequis` APRÈS le label et dans une fenêtre courte :
-    // au-delà, on attraperait celui de la notion suivante. Un tableau absent
-    // ou vide donne [] — ce qui est l'information « rien à savoir avant »,
-    // et c'est exactement ce qu'on veut afficher en tête de progression.
-    const apres = src.slice(b.index + b[0].length, b.index + b[0].length + 300);
-    const m = apres.match(/^\s*(?:[a-zA-Z]+:\s*[^\n]*\n\s*)*?prerequis:\s*\[([^\]]*)\]/);
-    const prerequis = m
-      ? [...m[1].matchAll(/"([a-z0-9_]+)"/g)].map((x) => x[1])
-      : [];
+    // ⚠️ ON S'ARRÊTE AU `id:` SUIVANT, et c'est tout le soin à prendre : sans
+    // cette borne, une notion sans prérequis hériterait de ceux de la notion
+    // d'après. Chercher « le prochain prerequis » dans le fichier, ça marche
+    // 90 % du temps — c'est-à-dire que ça produit dix pour cent de liens faux,
+    // impossibles à repérer à l'œil dans 431 notions.
+    //
+    // (Première version, ratée : je supposais que le champ suivait le label
+    // ligne à ligne. Il y a une virgule juste après le label, et le motif ne
+    // rattrapait plus rien — 431 notions, zéro prérequis, sans une erreur.)
+    const suite = src.slice(b.index + b[0].length);
+    const finBloc = suite.search(/\bid:\s*"/);
+    const bloc = finBloc >= 0 ? suite.slice(0, finBloc) : suite;
+    const m = bloc.match(/prerequis:\s*\[([^\]]*)\]/);
+    const prerequis = m ? [...m[1].matchAll(/"([a-z0-9_]+)"/g)].map((x) => x[1]) : [];
     return { id: b[1], label: b[2], prerequis };
   });
 }

@@ -8,9 +8,14 @@
 // lire « les dérivées »), et reconnaître une notion écrite en toutes lettres
 // (« vecteurs », « racine carrée ») sans qu'on ait à l'inscrire au lexique.
 //
+// Elles portent aussi leurs PRÉREQUIS : c'est ce qui permet à « Préparer une
+// progression » (côté professeur) de proposer un ORDRE, et pas seulement une
+// liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
+// par où l'année peut commencer.
+//
 // 431 notions, 31 paquets.
 
-export type NotionCoach = { id: string; label: string };
+export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
 /** matière → classe → notions au programme. */
 export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
@@ -18,1019 +23,1702 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     "3e": [
       {
         "id": "algo_programmation",
-        "label": "Algorithmique et programmation"
+        "label": "Algorithmique et programmation",
+        "prerequis": [
+          "litteral_calcul"
+        ]
       },
       {
         "id": "fraction_rationnel",
-        "label": "Nombres rationnels"
+        "label": "Nombres rationnels",
+        "prerequis": []
       },
       {
         "id": "entier_puissance",
-        "label": "Puissances"
+        "label": "Puissances",
+        "prerequis": [
+          "fraction_rationnel"
+        ]
       },
       {
         "id": "entier_racine_carree",
-        "label": "Racine carrée"
+        "label": "Racine carrée",
+        "prerequis": [
+          "fraction_rationnel"
+        ]
       },
       {
         "id": "entier_arithmetique",
-        "label": "Multiples et diviseurs"
+        "label": "Multiples et diviseurs",
+        "prerequis": [
+          "fraction_rationnel"
+        ]
       },
       {
         "id": "prop_proportionnalite",
-        "label": "Proportionnalité"
+        "label": "Proportionnalité",
+        "prerequis": [
+          "fraction_rationnel"
+        ]
       },
       {
         "id": "litteral_calcul",
-        "label": "Calcul littéral"
+        "label": "Calcul littéral",
+        "prerequis": []
       },
       {
         "id": "equation_resolution",
-        "label": "Équations"
+        "label": "Équations",
+        "prerequis": [
+          "litteral_calcul"
+        ]
       },
       {
         "id": "fonction_generalite",
-        "label": "Fonctions"
+        "label": "Fonctions",
+        "prerequis": [
+          "prop_proportionnalite"
+        ]
       },
       {
         "id": "affine_fonction",
-        "label": "Fonctions affines"
+        "label": "Fonctions affines",
+        "prerequis": [
+          "fonction_generalite",
+          "equation_resolution"
+        ]
       },
       {
         "id": "triangle_figure",
-        "label": "Triangles"
+        "label": "Triangles",
+        "prerequis": []
       },
       {
         "id": "pythagore_theoreme",
-        "label": "Théorème de Pythagore"
+        "label": "Théorème de Pythagore",
+        "prerequis": [
+          "triangle_figure"
+        ]
       },
       {
         "id": "thales_theoreme",
-        "label": "Théorème de Thalès"
+        "label": "Théorème de Thalès",
+        "prerequis": [
+          "triangle_figure",
+          "prop_proportionnalite"
+        ]
       },
       {
         "id": "trigo_trigonometrie",
-        "label": "Trigonométrie"
+        "label": "Trigonométrie",
+        "prerequis": [
+          "triangle_figure",
+          "pythagore_theoreme"
+        ]
       },
       {
         "id": "sym_transformation",
-        "label": "Transformations (dont homothéties)"
+        "label": "Transformations (dont homothéties)",
+        "prerequis": [
+          "triangle_figure"
+        ]
       },
       {
         "id": "volume_geometrie_espace",
-        "label": "Géométrie dans l’espace"
+        "label": "Géométrie dans l’espace",
+        "prerequis": []
       },
       {
         "id": "sections_solides",
-        "label": "Sections planes de solides"
+        "label": "Sections planes de solides",
+        "prerequis": [
+          "volume_geometrie_espace"
+        ]
       },
       {
         "id": "aire_perimetre",
-        "label": "Périmètres"
+        "label": "Périmètres",
+        "prerequis": []
       },
       {
         "id": "aire_surface",
-        "label": "Aires"
+        "label": "Aires",
+        "prerequis": []
       },
       {
         "id": "volume_solide",
-        "label": "Volumes"
+        "label": "Volumes",
+        "prerequis": [
+          "aire_surface"
+        ]
       },
       {
         "id": "stat_statistique",
-        "label": "Statistiques"
+        "label": "Statistiques",
+        "prerequis": []
       },
       {
         "id": "proba_experience",
-        "label": "Probabilités"
+        "label": "Probabilités",
+        "prerequis": []
       }
     ],
     "4e": [
       {
         "id": "algo_programmation",
-        "label": "Algorithmique et programmation"
+        "label": "Algorithmique et programmation",
+        "prerequis": [
+          "litteral_expression",
+          "prop_proportionnalite",
+          "equation_resolution"
+        ]
       },
       {
         "id": "relatif_operation",
-        "label": "Opérations sur les nombres relatifs"
+        "label": "Opérations sur les nombres relatifs",
+        "prerequis": []
       },
       {
         "id": "fraction_nombre",
-        "label": "Fractions et nombres rationnels"
+        "label": "Fractions et nombres rationnels",
+        "prerequis": [
+          "relatif_operation"
+        ]
       },
       {
         "id": "prop_proportionnalite",
-        "label": "Proportionnalité"
+        "label": "Proportionnalité",
+        "prerequis": [
+          "fraction_nombre"
+        ]
       },
       {
         "id": "litteral_expression",
-        "label": "Expressions littérales"
+        "label": "Expressions littérales",
+        "prerequis": [
+          "relatif_operation"
+        ]
       },
       {
         "id": "litteral_distributivite",
-        "label": "Distributivité"
+        "label": "Distributivité",
+        "prerequis": [
+          "litteral_expression"
+        ]
       },
       {
         "id": "litteral_identite_remarquable",
-        "label": "Identités remarquables"
+        "label": "Identités remarquables",
+        "prerequis": [
+          "litteral_distributivite"
+        ]
       },
       {
         "id": "litteral_factorisation",
-        "label": "Factorisation"
+        "label": "Factorisation",
+        "prerequis": [
+          "litteral_distributivite",
+          "litteral_identite_remarquable"
+        ]
       },
       {
         "id": "equation_resolution",
-        "label": "Équations"
+        "label": "Équations",
+        "prerequis": [
+          "litteral_expression",
+          "litteral_distributivite"
+        ]
       },
       {
         "id": "pythagore_theoreme",
-        "label": "Pythagore et sa réciproque"
+        "label": "Pythagore et sa réciproque",
+        "prerequis": []
       },
       {
         "id": "thales_theoreme",
-        "label": "Thalès et sa réciproque"
+        "label": "Thalès et sa réciproque",
+        "prerequis": [
+          "prop_proportionnalite"
+        ]
       },
       {
         "id": "trigo_cosinus",
-        "label": "Cosinus dans le triangle rectangle"
+        "label": "Cosinus dans le triangle rectangle",
+        "prerequis": [
+          "pythagore_theoreme"
+        ]
       },
       {
         "id": "quadrilatere_parallelogramme",
-        "label": "Parallélogrammes"
+        "label": "Parallélogrammes",
+        "prerequis": []
       },
       {
         "id": "sym_transformation",
-        "label": "Transformations (symétrie, translation, rotation)"
+        "label": "Transformations (symétrie, translation, rotation)",
+        "prerequis": []
       },
       {
         "id": "aire_perimetre",
-        "label": "Périmètres"
+        "label": "Périmètres",
+        "prerequis": []
       },
       {
         "id": "aire_surface",
-        "label": "Aires"
+        "label": "Aires",
+        "prerequis": [
+          "aire_perimetre"
+        ]
       },
       {
         "id": "volume_solide",
-        "label": "Volumes"
+        "label": "Volumes",
+        "prerequis": [
+          "aire_surface"
+        ]
       },
       {
         "id": "stat_statistique",
-        "label": "Statistiques"
+        "label": "Statistiques",
+        "prerequis": []
       },
       {
         "id": "proba_experience",
-        "label": "Probabilités"
+        "label": "Probabilités",
+        "prerequis": [
+          "fraction_nombre",
+          "stat_statistique"
+        ]
       }
     ],
     "5e": [
       {
         "id": "algo_programmation",
-        "label": "Lire et exécuter un programme"
+        "label": "Lire et exécuter un programme",
+        "prerequis": [
+          "litteral_calcul",
+          "prop_proportionnalite"
+        ]
       },
       {
         "id": "algo_construire",
-        "label": "Écrire et modifier un programme"
+        "label": "Écrire et modifier un programme",
+        "prerequis": [
+          "algo_programmation"
+        ]
       },
       {
         "id": "relatif_nombre",
-        "label": "Nombres relatifs"
+        "label": "Nombres relatifs",
+        "prerequis": []
       },
       {
         "id": "relatif_operation",
-        "label": "Opérations sur les nombres relatifs"
+        "label": "Opérations sur les nombres relatifs",
+        "prerequis": [
+          "relatif_nombre"
+        ]
       },
       {
         "id": "divisibilite",
-        "label": "Multiples, diviseurs et divisibilité"
+        "label": "Multiples, diviseurs et divisibilité",
+        "prerequis": []
       },
       {
         "id": "fraction_nombre",
-        "label": "Fractions : reconnaître et comparer"
+        "label": "Fractions : reconnaître et comparer",
+        "prerequis": []
       },
       {
         "id": "fraction_calcul",
-        "label": "Calculer avec les fractions"
+        "label": "Calculer avec les fractions",
+        "prerequis": [
+          "fraction_nombre"
+        ]
       },
       {
         "id": "prop_proportionnalite",
-        "label": "Proportionnalité"
+        "label": "Proportionnalité",
+        "prerequis": [
+          "fraction_nombre"
+        ]
       },
       {
         "id": "prop_ratio_pourcentage",
-        "label": "Ratios et pourcentages"
+        "label": "Ratios et pourcentages",
+        "prerequis": [
+          "prop_proportionnalite"
+        ]
       },
       {
         "id": "litteral_calcul",
-        "label": "Calcul littéral"
+        "label": "Calcul littéral",
+        "prerequis": [
+          "relatif_operation"
+        ]
       },
       {
         "id": "angle_mesure",
-        "label": "Angles"
+        "label": "Angles",
+        "prerequis": []
       },
       {
         "id": "triangle_figure",
-        "label": "Triangles"
+        "label": "Triangles",
+        "prerequis": [
+          "angle_mesure"
+        ]
       },
       {
         "id": "sym_centrale",
-        "label": "Symétrie centrale"
+        "label": "Symétrie centrale",
+        "prerequis": [
+          "angle_mesure"
+        ]
       },
       {
         "id": "parallelogramme",
-        "label": "Parallélogrammes"
+        "label": "Parallélogrammes",
+        "prerequis": [
+          "sym_centrale",
+          "angle_mesure"
+        ]
       },
       {
         "id": "aire_surface",
-        "label": "Aires"
+        "label": "Aires",
+        "prerequis": [
+          "triangle_figure"
+        ]
       },
       {
         "id": "volume_solide",
-        "label": "Volumes"
+        "label": "Volumes",
+        "prerequis": [
+          "aire_surface"
+        ]
       },
       {
         "id": "stat_statistique",
-        "label": "Statistiques"
+        "label": "Statistiques",
+        "prerequis": []
       },
       {
         "id": "proba_experience",
-        "label": "Probabilités"
+        "label": "Probabilités",
+        "prerequis": [
+          "stat_statistique"
+        ]
       }
     ],
     "6e": [
       {
         "id": "algo_programmation",
-        "label": "Algorithmique et programmation"
+        "label": "Algorithmique et programmation",
+        "prerequis": [
+          "entier_calcul_mental"
+        ]
       },
       {
         "id": "entier_nombre",
-        "label": "Nombres entiers"
+        "label": "Nombres entiers",
+        "prerequis": []
       },
       {
         "id": "decimal_nombre",
-        "label": "Nombres décimaux"
+        "label": "Nombres décimaux",
+        "prerequis": [
+          "entier_nombre"
+        ]
       },
       {
         "id": "fraction_nombre",
-        "label": "Fractions"
+        "label": "Fractions",
+        "prerequis": [
+          "decimal_nombre"
+        ]
       },
       {
         "id": "pourcentage_nombre",
-        "label": "Pourcentages"
+        "label": "Pourcentages",
+        "prerequis": [
+          "fraction_nombre"
+        ]
       },
       {
         "id": "prop_proportionnalite",
-        "label": "Proportionnalité"
+        "label": "Proportionnalité",
+        "prerequis": [
+          "pourcentage_nombre"
+        ]
       },
       {
         "id": "entier_calcul_pose",
-        "label": "Calcul posé"
+        "label": "Calcul posé",
+        "prerequis": [
+          "entier_nombre"
+        ]
       },
       {
         "id": "entier_calcul_mental",
-        "label": "Calcul mental"
+        "label": "Calcul mental",
+        "prerequis": []
       },
       {
         "id": "aire_longueur",
-        "label": "Longueurs"
+        "label": "Longueurs",
+        "prerequis": []
       },
       {
         "id": "aire_perimetre",
-        "label": "Périmètres"
+        "label": "Périmètres",
+        "prerequis": [
+          "aire_longueur"
+        ]
       },
       {
         "id": "aire_surface",
-        "label": "Aires"
+        "label": "Aires",
+        "prerequis": [
+          "aire_perimetre"
+        ]
       },
       {
         "id": "volume_solide",
-        "label": "Volumes"
+        "label": "Volumes",
+        "prerequis": [
+          "aire_surface"
+        ]
       },
       {
         "id": "angle_mesure",
-        "label": "Angles"
+        "label": "Angles",
+        "prerequis": []
       },
       {
         "id": "triangle_figure",
-        "label": "Triangles"
+        "label": "Triangles",
+        "prerequis": [
+          "angle_mesure"
+        ]
       },
       {
         "id": "quadrilatere_figure",
-        "label": "Quadrilatères"
+        "label": "Quadrilatères",
+        "prerequis": [
+          "angle_mesure"
+        ]
       },
       {
         "id": "sym_axiale",
-        "label": "Symétrie axiale"
+        "label": "Symétrie axiale",
+        "prerequis": [
+          "angle_mesure"
+        ]
       },
       {
         "id": "stat_donnee",
-        "label": "Données"
+        "label": "Données",
+        "prerequis": []
       },
       {
         "id": "proba_experience",
-        "label": "Probabilités"
+        "label": "Probabilités",
+        "prerequis": [
+          "stat_donnee"
+        ]
       }
     ],
     "adulte": [
       {
         "id": "calcul_mental_utile",
-        "label": "Calculer vite dans la vie courante"
+        "label": "Calculer vite dans la vie courante",
+        "prerequis": []
       },
       {
         "id": "argent_budget",
-        "label": "Gerer un budget simple"
+        "label": "Gerer un budget simple",
+        "prerequis": [
+          "calcul_mental_utile"
+        ]
       },
       {
         "id": "prix_comparer",
-        "label": "Comparer des prix et des offres"
+        "label": "Comparer des prix et des offres",
+        "prerequis": [
+          "argent_budget"
+        ]
       },
       {
         "id": "pourcentages_quotidien",
-        "label": "Utiliser les pourcentages au quotidien"
+        "label": "Utiliser les pourcentages au quotidien",
+        "prerequis": [
+          "calcul_mental_utile"
+        ]
       },
       {
         "id": "proportionnalite_pratique",
-        "label": "Adapter des quantites"
+        "label": "Adapter des quantites",
+        "prerequis": [
+          "calcul_mental_utile"
+        ]
       },
       {
         "id": "fractions_ratios",
-        "label": "Utiliser moitie, quart, tiers"
+        "label": "Utiliser moitie, quart, tiers",
+        "prerequis": [
+          "calcul_mental_utile"
+        ]
       },
       {
         "id": "mesures_conversions",
-        "label": "Convertir des mesures courantes"
+        "label": "Convertir des mesures courantes",
+        "prerequis": [
+          "calcul_mental_utile"
+        ]
       },
       {
         "id": "durees_trajets",
-        "label": "Calculer des durees et des horaires"
+        "label": "Calculer des durees et des horaires",
+        "prerequis": [
+          "calcul_mental_utile"
+        ]
       },
       {
         "id": "donnees_tableaux",
-        "label": "Lire un tableau ou une information chiffree"
+        "label": "Lire un tableau ou une information chiffree",
+        "prerequis": [
+          "calcul_mental_utile"
+        ]
       },
       {
         "id": "statistiques_simples",
-        "label": "Moyennes et reperes simples"
+        "label": "Moyennes et reperes simples",
+        "prerequis": [
+          "donnees_tableaux"
+        ]
       }
     ],
     "ce1": [
       {
         "id": "nombre_entier",
-        "label": "Nombres jusqu'a 1 000"
+        "label": "Nombres jusqu'a 1 000",
+        "prerequis": []
       },
       {
         "id": "suite_nombre",
-        "label": "Suites de nombres"
+        "label": "Suites de nombres",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "addition_soustraction",
-        "label": "Additions et soustractions"
+        "label": "Additions et soustractions",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "multiplication",
-        "label": "Multiplication"
+        "label": "Multiplication",
+        "prerequis": [
+          "addition_soustraction"
+        ]
       },
       {
         "id": "division_partage",
-        "label": "Partages et groupements"
+        "label": "Partages et groupements",
+        "prerequis": [
+          "multiplication"
+        ]
       },
       {
         "id": "calcul_mental",
-        "label": "Calcul mental"
+        "label": "Calcul mental",
+        "prerequis": [
+          "addition_soustraction",
+          "multiplication"
+        ]
       },
       {
         "id": "fraction",
-        "label": "Fractions simples"
+        "label": "Fractions simples",
+        "prerequis": [
+          "division_partage"
+        ]
       },
       {
         "id": "probleme",
-        "label": "Problemes"
+        "label": "Problemes",
+        "prerequis": [
+          "calcul_mental"
+        ]
       },
       {
         "id": "longueur",
-        "label": "Longueurs"
+        "label": "Longueurs",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "masse",
-        "label": "Masses"
+        "label": "Masses",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "contenance",
-        "label": "Contenances"
+        "label": "Contenances",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "duree",
-        "label": "Temps et durees"
+        "label": "Temps et durees",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "monnaie",
-        "label": "Monnaie"
+        "label": "Monnaie",
+        "prerequis": [
+          "addition_soustraction"
+        ]
       },
       {
         "id": "reperage",
-        "label": "Reperage sur quadrillage"
+        "label": "Reperage sur quadrillage",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "droites_segments",
-        "label": "Droites et segments"
+        "label": "Droites et segments",
+        "prerequis": [
+          "reperage"
+        ]
       },
       {
         "id": "figures_planes",
-        "label": "Figures planes"
+        "label": "Figures planes",
+        "prerequis": [
+          "droites_segments"
+        ]
       },
       {
         "id": "solides",
-        "label": "Solides"
+        "label": "Solides",
+        "prerequis": [
+          "figures_planes"
+        ]
       },
       {
         "id": "symetrie",
-        "label": "Symetrie axiale"
+        "label": "Symetrie axiale",
+        "prerequis": [
+          "figures_planes"
+        ]
       },
       {
         "id": "donnees",
-        "label": "Tableaux et graphiques simples"
+        "label": "Tableaux et graphiques simples",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "algorithmique",
-        "label": "Instructions et deplacements codes"
+        "label": "Instructions et deplacements codes",
+        "prerequis": [
+          "reperage"
+        ]
       }
     ],
     "ce2": [
       {
         "id": "nombre_entier",
-        "label": "Nombres jusqu'a 10 000"
+        "label": "Nombres jusqu'à 10 000",
+        "prerequis": []
       },
       {
         "id": "suite_nombre",
-        "label": "Suites de nombres"
+        "label": "Suites de nombres",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "addition_soustraction",
-        "label": "Additions et soustractions"
+        "label": "Additions et soustractions posées",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "multiplication",
-        "label": "Multiplication"
+        "label": "Multiplication",
+        "prerequis": [
+          "addition_soustraction"
+        ]
       },
       {
         "id": "division",
-        "label": "Division"
+        "label": "Partages et groupements",
+        "prerequis": [
+          "multiplication"
+        ]
       },
       {
         "id": "calcul_mental",
-        "label": "Calcul mental"
+        "label": "Calcul mental et fluence",
+        "prerequis": [
+          "multiplication",
+          "division"
+        ]
       },
       {
         "id": "fraction",
-        "label": "Fractions"
+        "label": "Fractions inférieures ou égales à 1",
+        "prerequis": [
+          "division"
+        ]
       },
       {
         "id": "probleme",
-        "label": "Problemes"
+        "label": "Résolution de problèmes",
+        "prerequis": [
+          "calcul_mental"
+        ]
       },
       {
         "id": "longueur",
-        "label": "Longueurs"
+        "label": "Longueurs",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "masse",
-        "label": "Masses"
+        "label": "Masses",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "contenance",
-        "label": "Contenances"
+        "label": "Contenances",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "duree",
-        "label": "Temps et durees"
+        "label": "Temps et durées",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "monnaie",
-        "label": "Monnaie"
+        "label": "Monnaie et écriture à virgule",
+        "prerequis": [
+          "addition_soustraction"
+        ]
       },
       {
         "id": "perimetre",
-        "label": "Perimetres"
+        "label": "Périmètres",
+        "prerequis": [
+          "longueur",
+          "addition_soustraction"
+        ]
       },
       {
         "id": "reperage",
-        "label": "Reperage sur quadrillage"
+        "label": "Repérage sur quadrillage",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "droites_angles",
-        "label": "Droites et angles droits"
+        "label": "Droites, angles droits et codages",
+        "prerequis": [
+          "reperage"
+        ]
       },
       {
         "id": "figures_planes",
-        "label": "Figures planes"
+        "label": "Figures planes",
+        "prerequis": [
+          "droites_angles"
+        ]
       },
       {
         "id": "solides",
-        "label": "Solides"
+        "label": "Solides",
+        "prerequis": [
+          "figures_planes"
+        ]
       },
       {
         "id": "symetrie",
-        "label": "Symetrie axiale"
+        "label": "Symétrie axiale",
+        "prerequis": [
+          "figures_planes"
+        ]
       },
       {
         "id": "donnees",
-        "label": "Tableaux et graphiques"
+        "label": "Tableaux et diagrammes en barres",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "algorithmique",
-        "label": "Programmes et deplacements codes"
+        "label": "Programmes et déplacements codés",
+        "prerequis": [
+          "reperage"
+        ]
       }
     ],
     "cm1": [
       {
         "id": "nombre_entier",
-        "label": "Nombres entiers"
+        "label": "Nombres entiers",
+        "prerequis": []
       },
       {
         "id": "suite",
-        "label": "Suites de nombres"
+        "label": "Suites de nombres",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "tables_multiplication",
-        "label": "Tables de multiplication"
+        "label": "Tables de multiplication",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "multiplication",
-        "label": "Multiplication"
+        "label": "Multiplication",
+        "prerequis": [
+          "tables_multiplication"
+        ]
       },
       {
         "id": "division",
-        "label": "Division"
+        "label": "Division",
+        "prerequis": [
+          "multiplication"
+        ]
       },
       {
         "id": "fraction",
-        "label": "Fractions"
+        "label": "Fractions",
+        "prerequis": [
+          "division"
+        ]
       },
       {
         "id": "nombre_decimal",
-        "label": "Nombres décimaux"
+        "label": "Nombres décimaux",
+        "prerequis": [
+          "fraction"
+        ]
       },
       {
         "id": "calcul",
-        "label": "Calculs"
+        "label": "Calculs",
+        "prerequis": [
+          "nombre_entier",
+          "nombre_decimal",
+          "multiplication"
+        ]
       },
       {
         "id": "probleme",
-        "label": "Problèmes"
+        "label": "Problèmes",
+        "prerequis": [
+          "calcul"
+        ]
       },
       {
         "id": "algebre",
-        "label": "Algèbre"
+        "label": "Algèbre",
+        "prerequis": [
+          "calcul",
+          "probleme"
+        ]
       },
       {
         "id": "proportionnalite",
-        "label": "Proportionnalité"
+        "label": "Proportionnalité",
+        "prerequis": [
+          "multiplication",
+          "division"
+        ]
       },
       {
         "id": "longueur",
-        "label": "Longueurs"
+        "label": "Longueurs",
+        "prerequis": [
+          "nombre_decimal"
+        ]
       },
       {
         "id": "masse",
-        "label": "Masses"
+        "label": "Masses",
+        "prerequis": [
+          "nombre_decimal"
+        ]
       },
       {
         "id": "contenance",
-        "label": "Contenances"
+        "label": "Contenances",
+        "prerequis": [
+          "nombre_decimal"
+        ]
       },
       {
         "id": "duree",
-        "label": "Durées"
+        "label": "Durées",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "perimetre",
-        "label": "Périmètres"
+        "label": "Périmètres",
+        "prerequis": [
+          "longueur"
+        ]
       },
       {
         "id": "aire",
-        "label": "Aires"
+        "label": "Aires",
+        "prerequis": [
+          "longueur",
+          "multiplication"
+        ]
       },
       {
         "id": "angle",
-        "label": "Angles"
+        "label": "Angles",
+        "prerequis": [
+          "droite"
+        ]
       },
       {
         "id": "reperage",
-        "label": "Repérage"
+        "label": "Repérage",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "droite",
-        "label": "Droites"
+        "label": "Droites",
+        "prerequis": [
+          "reperage"
+        ]
       },
       {
         "id": "symetrie",
-        "label": "Symétrie"
+        "label": "Symétrie",
+        "prerequis": [
+          "droite"
+        ]
       },
       {
         "id": "figure_plane",
-        "label": "Figures planes"
+        "label": "Figures planes",
+        "prerequis": [
+          "droite",
+          "angle"
+        ]
       },
       {
         "id": "solide",
-        "label": "Solides"
+        "label": "Solides",
+        "prerequis": [
+          "figure_plane"
+        ]
       },
       {
         "id": "tableau",
-        "label": "Tableaux"
+        "label": "Tableaux",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "graphique",
-        "label": "Graphiques et diagrammes"
+        "label": "Graphiques et diagrammes",
+        "prerequis": [
+          "tableau"
+        ]
       },
       {
         "id": "probabilite",
-        "label": "Probabilités simples"
+        "label": "Probabilités simples",
+        "prerequis": [
+          "tableau"
+        ]
       },
       {
         "id": "algorithmique",
-        "label": "Algorithmique"
+        "label": "Algorithmique",
+        "prerequis": [
+          "reperage"
+        ]
       }
     ],
     "cm2": [
       {
         "id": "nombre_entier",
-        "label": "Nombres entiers"
+        "label": "Nombres entiers",
+        "prerequis": []
       },
       {
         "id": "suite",
-        "label": "Suites de nombres"
+        "label": "Suites de nombres",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "multiplication",
-        "label": "Multiplication"
+        "label": "Multiplication",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "division",
-        "label": "Division"
+        "label": "Division",
+        "prerequis": [
+          "multiplication"
+        ]
       },
       {
         "id": "fraction",
-        "label": "Fractions"
+        "label": "Fractions",
+        "prerequis": [
+          "division"
+        ]
       },
       {
         "id": "nombre_decimal",
-        "label": "Nombres décimaux"
+        "label": "Nombres décimaux",
+        "prerequis": [
+          "fraction"
+        ]
       },
       {
         "id": "calcul",
-        "label": "Calculs"
+        "label": "Calculs",
+        "prerequis": [
+          "nombre_entier",
+          "nombre_decimal"
+        ]
       },
       {
         "id": "probleme",
-        "label": "Problèmes"
+        "label": "Problèmes",
+        "prerequis": [
+          "calcul"
+        ]
       },
       {
         "id": "algebre",
-        "label": "Algèbre"
+        "label": "Algèbre",
+        "prerequis": [
+          "calcul",
+          "probleme"
+        ]
       },
       {
         "id": "proportionnalite",
-        "label": "Proportionnalité"
+        "label": "Proportionnalité",
+        "prerequis": [
+          "multiplication",
+          "division"
+        ]
       },
       {
         "id": "pourcentage",
-        "label": "Pourcentages simples"
+        "label": "Pourcentages simples",
+        "prerequis": [
+          "fraction",
+          "proportionnalite"
+        ]
       },
       {
         "id": "echelle",
-        "label": "Échelles simples"
+        "label": "Échelles simples",
+        "prerequis": [
+          "proportionnalite",
+          "longueur"
+        ]
       },
       {
         "id": "longueur",
-        "label": "Longueurs"
+        "label": "Longueurs",
+        "prerequis": [
+          "nombre_decimal"
+        ]
       },
       {
         "id": "masse",
-        "label": "Masses"
+        "label": "Masses",
+        "prerequis": [
+          "nombre_decimal"
+        ]
       },
       {
         "id": "contenance",
-        "label": "Contenances"
+        "label": "Contenances",
+        "prerequis": [
+          "nombre_decimal"
+        ]
       },
       {
         "id": "duree",
-        "label": "Durées"
+        "label": "Durées",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "perimetre",
-        "label": "Périmètres"
+        "label": "Périmètres",
+        "prerequis": [
+          "longueur"
+        ]
       },
       {
         "id": "aire",
-        "label": "Aires"
+        "label": "Aires",
+        "prerequis": [
+          "longueur",
+          "multiplication"
+        ]
       },
       {
         "id": "angle",
-        "label": "Angles"
+        "label": "Angles",
+        "prerequis": [
+          "droite"
+        ]
       },
       {
         "id": "reperage",
-        "label": "Repérage"
+        "label": "Repérage",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "droite",
-        "label": "Droites"
+        "label": "Droites",
+        "prerequis": [
+          "reperage"
+        ]
       },
       {
         "id": "symetrie",
-        "label": "Symétrie"
+        "label": "Symétrie",
+        "prerequis": [
+          "droite"
+        ]
       },
       {
         "id": "figure_plane",
-        "label": "Figures planes"
+        "label": "Figures planes",
+        "prerequis": [
+          "droite",
+          "angle"
+        ]
       },
       {
         "id": "solide",
-        "label": "Solides"
+        "label": "Solides",
+        "prerequis": [
+          "figure_plane"
+        ]
       },
       {
         "id": "tableau",
-        "label": "Tableaux"
+        "label": "Tableaux",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "graphique",
-        "label": "Graphiques et diagrammes"
+        "label": "Graphiques et diagrammes",
+        "prerequis": [
+          "tableau"
+        ]
       },
       {
         "id": "probabilite",
-        "label": "Probabilités simples"
+        "label": "Probabilités simples",
+        "prerequis": [
+          "tableau"
+        ]
       },
       {
         "id": "algorithmique",
-        "label": "Algorithmique"
+        "label": "Algorithmique",
+        "prerequis": [
+          "reperage"
+        ]
       }
     ],
     "cp": [
       {
         "id": "nombre_entier",
-        "label": "Nombres jusqu'a 100"
+        "label": "Nombres jusqu'a 100",
+        "prerequis": []
       },
       {
         "id": "suite_nombre",
-        "label": "Suites de nombres"
+        "label": "Suites de nombres",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "addition_soustraction",
-        "label": "Additions et soustractions"
+        "label": "Additions et soustractions",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "calcul_mental",
-        "label": "Calcul mental"
+        "label": "Calcul mental",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "probleme",
-        "label": "Problemes additifs"
+        "label": "Problemes additifs",
+        "prerequis": [
+          "addition_soustraction"
+        ]
       },
       {
         "id": "longueur",
-        "label": "Longueurs"
+        "label": "Longueurs",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "masse_contenance",
-        "label": "Masses et contenances"
+        "label": "Masses et contenances",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "duree",
-        "label": "Temps et durees"
+        "label": "Temps et durees",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "monnaie",
-        "label": "Monnaie"
+        "label": "Monnaie",
+        "prerequis": [
+          "addition_soustraction"
+        ]
       },
       {
         "id": "reperage",
-        "label": "Reperage dans l'espace"
+        "label": "Reperage dans l'espace",
+        "prerequis": []
       },
       {
         "id": "figures_solides",
-        "label": "Figures planes et solides"
+        "label": "Figures planes et solides",
+        "prerequis": [
+          "reperage"
+        ]
       },
       {
         "id": "donnees",
-        "label": "Tableaux et donnees simples"
+        "label": "Tableaux et donnees simples",
+        "prerequis": [
+          "nombre_entier"
+        ]
       },
       {
         "id": "algorithmique",
-        "label": "Suites d'instructions"
+        "label": "Suites d'instructions",
+        "prerequis": [
+          "reperage"
+        ]
       }
     ],
     "premiere-spe": [
       {
         "id": "suites",
-        "label": "Suites numériques"
+        "label": "Suites numériques",
+        "prerequis": []
       },
       {
         "id": "second_degre",
-        "label": "Second degré"
+        "label": "Second degré",
+        "prerequis": []
       },
       {
         "id": "derivation",
-        "label": "Dérivation"
+        "label": "Dérivation",
+        "prerequis": [
+          "second_degre"
+        ]
       },
       {
         "id": "variations_fonctions",
-        "label": "Variations et courbes des fonctions"
+        "label": "Variations et courbes des fonctions",
+        "prerequis": [
+          "derivation"
+        ]
       },
       {
         "id": "exponentielle",
-        "label": "Fonction exponentielle"
+        "label": "Fonction exponentielle",
+        "prerequis": [
+          "derivation"
+        ]
       },
       {
         "id": "trigonometrie",
-        "label": "Fonctions trigonométriques"
+        "label": "Fonctions trigonométriques",
+        "prerequis": []
       },
       {
         "id": "produit_scalaire",
-        "label": "Calcul vectoriel et produit scalaire"
+        "label": "Calcul vectoriel et produit scalaire",
+        "prerequis": []
       },
       {
         "id": "geometrie_reperee",
-        "label": "Géométrie repérée"
+        "label": "Géométrie repérée",
+        "prerequis": [
+          "produit_scalaire"
+        ]
       },
       {
         "id": "probabilites_conditionnelles",
-        "label": "Probabilités conditionnelles et indépendance"
+        "label": "Probabilités conditionnelles et indépendance",
+        "prerequis": []
       },
       {
         "id": "variables_aleatoires",
-        "label": "Variables aléatoires réelles"
+        "label": "Variables aléatoires réelles",
+        "prerequis": [
+          "probabilites_conditionnelles"
+        ]
       },
       {
         "id": "algorithmique",
-        "label": "Algorithmique et programmation"
+        "label": "Algorithmique et programmation",
+        "prerequis": [
+          "suites"
+        ]
       },
       {
         "id": "logique_ensembles",
-        "label": "Vocabulaire ensembliste et logique"
+        "label": "Vocabulaire ensembliste et logique",
+        "prerequis": []
       }
     ],
     "seconde": [
       {
         "id": "reels_intervalles",
-        "label": "Nombres reels et intervalles"
+        "label": "Nombres reels et intervalles",
+        "prerequis": []
       },
       {
         "id": "arithmetique_entiers",
-        "label": "Multiples, diviseurs et nombres premiers"
+        "label": "Multiples, diviseurs et nombres premiers",
+        "prerequis": []
       },
       {
         "id": "puissances_2de",
-        "label": "Puissances"
+        "label": "Puissances",
+        "prerequis": [
+          "reels_intervalles"
+        ]
       },
       {
         "id": "racine_carree_2de",
-        "label": "Racine carree"
+        "label": "Racine carree",
+        "prerequis": [
+          "reels_intervalles"
+        ]
       },
       {
         "id": "developpement_factorisation_2de",
-        "label": "Developpement et factorisation"
+        "label": "Developpement et factorisation",
+        "prerequis": [
+          "reels_intervalles"
+        ]
       },
       {
         "id": "identites_remarquables_2de",
-        "label": "Identites remarquables"
+        "label": "Identites remarquables",
+        "prerequis": [
+          "developpement_factorisation_2de"
+        ]
       },
       {
         "id": "expressions_litterales_2de",
-        "label": "Expressions litterales"
+        "label": "Expressions litterales",
+        "prerequis": [
+          "developpement_factorisation_2de"
+        ]
       },
       {
         "id": "equations_inequations_1er_degre",
-        "label": "Equations et inequations du premier degre"
+        "label": "Equations et inequations du premier degre",
+        "prerequis": [
+          "developpement_factorisation_2de",
+          "reels_intervalles"
+        ]
       },
       {
         "id": "vecteurs_plan",
-        "label": "Vecteurs du plan"
+        "label": "Vecteurs du plan",
+        "prerequis": []
       },
       {
         "id": "repere_coordonnees",
-        "label": "Repere et coordonnees"
+        "label": "Repere et coordonnees",
+        "prerequis": [
+          "reels_intervalles"
+        ]
       },
       {
         "id": "droites_plan",
-        "label": "Droites du plan"
+        "label": "Droites du plan",
+        "prerequis": [
+          "repere_coordonnees",
+          "equations_inequations_1er_degre",
+          "vecteurs_plan"
+        ]
       },
       {
         "id": "geometrie_problemes_plan",
-        "label": "Problemes de geometrie plane"
+        "label": "Problemes de geometrie plane",
+        "prerequis": []
       },
       {
         "id": "fonction_vocabulaire_2de",
-        "label": "Fonctions : vocabulaire et representations"
+        "label": "Fonctions : vocabulaire et representations",
+        "prerequis": [
+          "reels_intervalles"
+        ]
       },
       {
         "id": "fonction_variations_extremums",
-        "label": "Variations et extremums"
+        "label": "Variations et extremums",
+        "prerequis": [
+          "fonction_vocabulaire_2de"
+        ]
       },
       {
         "id": "fonctions_affines_2de",
-        "label": "Fonctions affines"
+        "label": "Fonctions affines",
+        "prerequis": [
+          "fonction_vocabulaire_2de",
+          "droites_plan"
+        ]
       },
       {
         "id": "fonctions_reference_2de",
-        "label": "Fonctions de reference"
+        "label": "Fonctions de reference",
+        "prerequis": [
+          "fonction_variations_extremums",
+          "developpement_factorisation_2de"
+        ]
       },
       {
         "id": "information_chiffree_evolutions",
-        "label": "Information chiffree : proportions, pourcentages et evolutions"
+        "label": "Information chiffree : proportions, pourcentages et evolutions",
+        "prerequis": []
       },
       {
         "id": "statistiques_descriptives",
-        "label": "Statistiques descriptives"
+        "label": "Statistiques descriptives",
+        "prerequis": []
       },
       {
         "id": "probabilites_ensemble_fini",
-        "label": "Probabilites sur un ensemble fini"
+        "label": "Probabilites sur un ensemble fini",
+        "prerequis": [
+          "reels_intervalles"
+        ]
       },
       {
         "id": "echantillonnage_simulation",
-        "label": "Echantillonnage et simulation"
+        "label": "Echantillonnage et simulation",
+        "prerequis": [
+          "probabilites_ensemble_fini",
+          "statistiques_descriptives"
+        ]
       },
       {
         "id": "algorithmique_python_2de",
-        "label": "Algorithmique et Python"
+        "label": "Algorithmique et Python",
+        "prerequis": [
+          "expressions_litterales_2de"
+        ]
       },
       {
         "id": "logique_ensembles",
-        "label": "Vocabulaire ensembliste et logique"
+        "label": "Vocabulaire ensembliste et logique",
+        "prerequis": []
       }
     ],
     "terminale-spe": [
       {
         "id": "suite_numerique",
-        "label": "Suites numériques"
+        "label": "Suites numériques",
+        "prerequis": []
       },
       {
         "id": "limite_suite",
-        "label": "Limites de suites"
+        "label": "Limites de suites",
+        "prerequis": [
+          "suite_numerique"
+        ]
       },
       {
         "id": "limite_fonction",
-        "label": "Limites de fonctions"
+        "label": "Limites de fonctions",
+        "prerequis": []
       },
       {
         "id": "continuite_tvi",
-        "label": "Continuité et théorème des valeurs intermédiaires"
+        "label": "Continuité et théorème des valeurs intermédiaires",
+        "prerequis": [
+          "limite_fonction"
+        ]
       },
       {
         "id": "derivation_fonction",
-        "label": "Dérivation et variations"
+        "label": "Dérivation et variations",
+        "prerequis": [
+          "limite_fonction"
+        ]
       },
       {
         "id": "convexite_fonction",
-        "label": "Convexité"
+        "label": "Convexité",
+        "prerequis": [
+          "derivation_fonction"
+        ]
       },
       {
         "id": "fonction_exponentielle",
-        "label": "Fonction exponentielle"
+        "label": "Fonction exponentielle",
+        "prerequis": [
+          "derivation_fonction"
+        ]
       },
       {
         "id": "fonction_logarithme",
-        "label": "Fonction logarithme népérien"
+        "label": "Fonction logarithme népérien",
+        "prerequis": [
+          "fonction_exponentielle"
+        ]
       },
       {
         "id": "primitive_integrale",
-        "label": "Primitives et intégrales"
+        "label": "Primitives et intégrales",
+        "prerequis": [
+          "derivation_fonction",
+          "fonction_exponentielle",
+          "fonction_logarithme"
+        ]
       },
       {
         "id": "denombrement_combinatoire",
-        "label": "Dénombrement et combinatoire"
+        "label": "Dénombrement et combinatoire",
+        "prerequis": []
       },
       {
         "id": "geometrie_espace",
-        "label": "Géométrie dans l’espace"
+        "label": "Géométrie dans l’espace",
+        "prerequis": []
       },
       {
         "id": "produit_scalaire_espace",
-        "label": "Produit scalaire dans l’espace"
+        "label": "Produit scalaire dans l’espace",
+        "prerequis": [
+          "geometrie_espace"
+        ]
       },
       {
         "id": "probabilite_conditionnelle",
-        "label": "Probabilités conditionnelles"
+        "label": "Probabilités conditionnelles",
+        "prerequis": []
       },
       {
         "id": "variable_aleatoire",
-        "label": "Variables aléatoires"
+        "label": "Variables aléatoires",
+        "prerequis": [
+          "probabilite_conditionnelle"
+        ]
       },
       {
         "id": "loi_binomiale",
-        "label": "Loi binomiale"
+        "label": "Loi binomiale",
+        "prerequis": [
+          "variable_aleatoire",
+          "denombrement_combinatoire"
+        ]
       },
       {
         "id": "algorithmique_python",
-        "label": "Algorithmique et Python"
+        "label": "Algorithmique et Python",
+        "prerequis": [
+          "suite_numerique"
+        ]
       },
       {
         "id": "equation_differentielle",
-        "label": "Équations différentielles"
+        "label": "Équations différentielles",
+        "prerequis": [
+          "fonction_exponentielle",
+          "primitive_integrale"
+        ]
       },
       {
         "id": "concentration_echantillonnage",
-        "label": "Concentration, loi des grands nombres"
+        "label": "Concentration, loi des grands nombres",
+        "prerequis": [
+          "variable_aleatoire",
+          "loi_binomiale"
+        ]
       }
     ]
   },
@@ -1038,215 +1726,341 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     "ce1": [
       {
         "id": "langage_oral",
-        "label": "Langage oral"
+        "label": "Langage oral",
+        "prerequis": []
       },
       {
         "id": "fluence_lecture",
-        "label": "Fluence et lecture courante"
+        "label": "Fluence et lecture courante",
+        "prerequis": []
       },
       {
         "id": "sons_complexes",
-        "label": "Sons complexes et graphemes particuliers"
+        "label": "Sons complexes et graphemes particuliers",
+        "prerequis": [
+          "fluence_lecture"
+        ]
       },
       {
         "id": "comprehension_lecture",
-        "label": "Comprehension de textes"
+        "label": "Comprehension de textes",
+        "prerequis": [
+          "fluence_lecture"
+        ]
       },
       {
         "id": "types_textes",
-        "label": "Types de textes (narratif, documentaire, poetique)"
+        "label": "Types de textes (narratif, documentaire, poetique)",
+        "prerequis": [
+          "comprehension_lecture"
+        ]
       },
       {
         "id": "copie_fluente",
-        "label": "Copie fluente et soignee"
+        "label": "Copie fluente et soignee",
+        "prerequis": []
       },
       {
         "id": "ecriture_mots",
-        "label": "Ecriture de mots et dictee"
+        "label": "Ecriture de mots et dictee",
+        "prerequis": [
+          "copie_fluente"
+        ]
       },
       {
         "id": "production_ecrite",
-        "label": "Production d'ecrits"
+        "label": "Production d'ecrits",
+        "prerequis": [
+          "ecriture_mots"
+        ]
       },
       {
         "id": "grammaire_phrase",
-        "label": "La phrase et ses constituants"
+        "label": "La phrase et ses constituants",
+        "prerequis": [
+          "fluence_lecture"
+        ]
       },
       {
         "id": "classes_mots",
-        "label": "Classes de mots (nom, verbe, adjectif, determinant)"
+        "label": "Classes de mots (nom, verbe, adjectif, determinant)",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
       },
       {
         "id": "orthographe",
-        "label": "Orthographe lexicale et grammaticale"
+        "label": "Orthographe lexicale et grammaticale",
+        "prerequis": [
+          "ecriture_mots"
+        ]
       },
       {
         "id": "conjugaison",
-        "label": "Conjugaison – present et passe compose"
+        "label": "Conjugaison – present et passe compose",
+        "prerequis": [
+          "classes_mots"
+        ]
       },
       {
         "id": "vocabulaire",
-        "label": "Vocabulaire et sens des mots"
+        "label": "Vocabulaire et sens des mots",
+        "prerequis": [
+          "comprehension_lecture"
+        ]
       }
     ],
     "ce2": [
       {
         "id": "langage_oral",
-        "label": "Langage oral"
+        "label": "Langage oral",
+        "prerequis": []
       },
       {
         "id": "fluence_lecture",
-        "label": "Fluence et lecture expressive"
+        "label": "Fluence et lecture expressive",
+        "prerequis": []
       },
       {
         "id": "comprehension_lecture",
-        "label": "Comprehension de textes"
+        "label": "Comprehension de textes",
+        "prerequis": [
+          "fluence_lecture"
+        ]
       },
       {
         "id": "copie_fluente",
-        "label": "Copie fluente et soignee"
+        "label": "Copie fluente et soignee",
+        "prerequis": []
       },
       {
         "id": "production_ecrite",
-        "label": "Production d'ecrits courts"
+        "label": "Production d'ecrits courts",
+        "prerequis": [
+          "copie_fluente"
+        ]
       },
       {
         "id": "grammaire_phrase",
-        "label": "La phrase et ses constituants"
+        "label": "La phrase et ses constituants",
+        "prerequis": [
+          "fluence_lecture"
+        ]
       },
       {
         "id": "classes_mots",
-        "label": "Classes de mots"
+        "label": "Classes de mots",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
       },
       {
         "id": "orthographe",
-        "label": "Orthographe lexicale et grammaticale"
+        "label": "Orthographe lexicale et grammaticale",
+        "prerequis": [
+          "classes_mots"
+        ]
       },
       {
         "id": "conjugaison",
-        "label": "Conjugaison - temps simples"
+        "label": "Conjugaison - temps simples",
+        "prerequis": [
+          "classes_mots"
+        ]
       },
       {
         "id": "vocabulaire",
-        "label": "Vocabulaire et relations entre les mots"
+        "label": "Vocabulaire et relations entre les mots",
+        "prerequis": [
+          "comprehension_lecture"
+        ]
       }
     ],
     "cm1": [
       {
         "id": "fluence_lecture",
-        "label": "Lire avec fluidité et expressivité"
+        "label": "Lire avec fluidité et expressivité",
+        "prerequis": []
       },
       {
         "id": "comprehension_textes_documents",
-        "label": "Comprendre textes, documents et images"
+        "label": "Comprendre textes, documents et images",
+        "prerequis": [
+          "fluence_lecture"
+        ]
       },
       {
         "id": "lecture_oeuvres",
-        "label": "Lire une œuvre et se l'approprier"
+        "label": "Lire une œuvre et se l'approprier",
+        "prerequis": [
+          "comprehension_textes_documents"
+        ]
       },
       {
         "id": "ecriture",
-        "label": "Écrire pour apprendre et produire"
+        "label": "Écrire pour apprendre et produire",
+        "prerequis": []
       },
       {
         "id": "oral",
-        "label": "Écouter, dire et participer aux échanges"
+        "label": "Écouter, dire et participer aux échanges",
+        "prerequis": []
       },
       {
         "id": "vocabulaire",
-        "label": "Vocabulaire et relations entre les mots"
+        "label": "Vocabulaire et relations entre les mots",
+        "prerequis": [
+          "comprehension_textes_documents"
+        ]
       },
       {
         "id": "grammaire_orthographe",
-        "label": "Phrase simple, accords et orthographe grammaticale"
+        "label": "Phrase simple, accords et orthographe grammaticale",
+        "prerequis": [
+          "fluence_lecture"
+        ]
       },
       {
         "id": "conjugaison",
-        "label": "Conjugaison et valeur des temps"
+        "label": "Conjugaison et valeur des temps",
+        "prerequis": [
+          "grammaire_orthographe"
+        ]
       }
     ],
     "cm2": [
       {
         "id": "fluence_lecture",
-        "label": "Lire avec fluidité et expressivité"
+        "label": "Lire avec fluidité et expressivité",
+        "prerequis": []
       },
       {
         "id": "comprehension_textes_documents",
-        "label": "Comprendre des textes et documents complexes"
+        "label": "Comprendre des textes et documents complexes",
+        "prerequis": [
+          "fluence_lecture"
+        ]
       },
       {
         "id": "lecture_oeuvres",
-        "label": "Lire une œuvre et construire une culture littéraire"
+        "label": "Lire une œuvre et construire une culture littéraire",
+        "prerequis": [
+          "comprehension_textes_documents"
+        ]
       },
       {
         "id": "ecriture",
-        "label": "Produire, organiser et réviser des écrits"
+        "label": "Produire, organiser et réviser des écrits",
+        "prerequis": []
       },
       {
         "id": "oral",
-        "label": "Écouter, présenter et argumenter"
+        "label": "Écouter, présenter et argumenter",
+        "prerequis": []
       },
       {
         "id": "vocabulaire",
-        "label": "Vocabulaire, nuances et orthographe lexicale"
+        "label": "Vocabulaire, nuances et orthographe lexicale",
+        "prerequis": [
+          "comprehension_textes_documents"
+        ]
       },
       {
         "id": "grammaire_orthographe",
-        "label": "Phrase, groupes, accords et homophones"
+        "label": "Phrase, groupes, accords et homophones",
+        "prerequis": [
+          "fluence_lecture"
+        ]
       },
       {
         "id": "phrase_complexe",
-        "label": "Se repérer dans la phrase complexe"
+        "label": "Se repérer dans la phrase complexe",
+        "prerequis": [
+          "grammaire_orthographe"
+        ]
       },
       {
         "id": "conjugaison",
-        "label": "Conjugaison et valeur des temps"
+        "label": "Conjugaison et valeur des temps",
+        "prerequis": [
+          "grammaire_orthographe"
+        ]
       }
     ],
     "cp": [
       {
         "id": "langage_oral",
-        "label": "Langage oral"
+        "label": "Langage oral",
+        "prerequis": []
       },
       {
         "id": "conscience_phonologique",
-        "label": "Conscience phonologique"
+        "label": "Conscience phonologique",
+        "prerequis": []
       },
       {
         "id": "grapheme_phoneme",
-        "label": "Correspondances grapheme-phoneme"
+        "label": "Correspondances grapheme-phoneme",
+        "prerequis": [
+          "conscience_phonologique"
+        ]
       },
       {
         "id": "lecture_syllabique",
-        "label": "Lecture syllabique et dechiffrage"
+        "label": "Lecture syllabique et dechiffrage",
+        "prerequis": [
+          "grapheme_phoneme"
+        ]
       },
       {
         "id": "comprehension_lecture",
-        "label": "Comprehension de textes"
+        "label": "Comprehension de textes",
+        "prerequis": [
+          "lecture_syllabique"
+        ]
       },
       {
         "id": "copie",
-        "label": "Copie de mots et de phrases"
+        "label": "Copie de mots et de phrases",
+        "prerequis": [
+          "grapheme_phoneme"
+        ]
       },
       {
         "id": "ecriture_mots",
-        "label": "Ecriture de mots (dictee)"
+        "label": "Ecriture de mots (dictee)",
+        "prerequis": [
+          "grapheme_phoneme",
+          "copie"
+        ]
       },
       {
         "id": "production_ecrite",
-        "label": "Production d'ecrits simples"
+        "label": "Production d'ecrits simples",
+        "prerequis": [
+          "ecriture_mots"
+        ]
       },
       {
         "id": "grammaire_phrase",
-        "label": "La phrase"
+        "label": "La phrase",
+        "prerequis": [
+          "lecture_syllabique"
+        ]
       },
       {
         "id": "orthographe",
-        "label": "Orthographe de base"
+        "label": "Orthographe de base",
+        "prerequis": [
+          "ecriture_mots"
+        ]
       },
       {
         "id": "vocabulaire",
-        "label": "Vocabulaire"
+        "label": "Vocabulaire",
+        "prerequis": [
+          "comprehension_lecture"
+        ]
       }
     ]
   },
@@ -1254,289 +2068,421 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     "a1": [
       {
         "id": "en_a1_digits",
-        "label": "Digits"
+        "label": "Digits",
+        "prerequis": []
       },
       {
         "id": "en_a1_numbers",
-        "label": "Numbers"
+        "label": "Numbers",
+        "prerequis": [
+          "en_a1_digits"
+        ]
       },
       {
         "id": "en_a1_operations",
-        "label": "Operations"
+        "label": "Operations",
+        "prerequis": [
+          "en_a1_digits"
+        ]
       },
       {
         "id": "en_a1_comparisons",
-        "label": "Comparisons"
+        "label": "Comparisons",
+        "prerequis": [
+          "en_a1_digits"
+        ]
       },
       {
         "id": "en_a1_shapes",
-        "label": "Shapes"
+        "label": "Shapes",
+        "prerequis": []
       },
       {
         "id": "en_a1_verbs",
-        "label": "Math Verbs"
+        "label": "Math Verbs",
+        "prerequis": [
+          "en_a1_operations"
+        ]
       },
       {
         "id": "en_a1_sports",
-        "label": "Sports"
+        "label": "Sports",
+        "prerequis": []
       },
       {
         "id": "en_a1_sport_measurements",
-        "label": "Sport Measurements"
+        "label": "Sport Measurements",
+        "prerequis": [
+          "en_a1_sports"
+        ]
       },
       {
         "id": "en_a1_science_living",
-        "label": "Science — Living World"
+        "label": "Science — Living World",
+        "prerequis": []
       },
       {
         "id": "en_a1_science_earth",
-        "label": "Science — Earth"
+        "label": "Science — Earth",
+        "prerequis": []
       },
       {
         "id": "en_a1_money",
-        "label": "Économie - Gestion — Money"
+        "label": "Économie - Gestion — Money",
+        "prerequis": []
       },
       {
         "id": "en_a1_family_budget",
-        "label": "Économie - Gestion — Family Budget"
+        "label": "Économie - Gestion — Family Budget",
+        "prerequis": [
+          "en_a1_money"
+        ]
       },
       {
         "id": "en_a1_countries",
-        "label": "Géographie - Voyage — Countries"
+        "label": "Géographie - Voyage — Countries",
+        "prerequis": []
       },
       {
         "id": "en_a1_geography_basic",
-        "label": "Géographie - Voyage — Basic Geography"
+        "label": "Géographie - Voyage — Basic Geography",
+        "prerequis": [
+          "en_a1_countries"
+        ]
       },
       {
         "id": "en_a1_family",
-        "label": "Vie Quotidienne — Family"
+        "label": "Vie Quotidienne — Family",
+        "prerequis": []
       },
       {
         "id": "en_a1_school",
-        "label": "Vie Quotidienne — School"
+        "label": "Vie Quotidienne — School",
+        "prerequis": []
       },
       {
         "id": "en_a1_colors",
-        "label": "Vie Quotidienne — Colors"
+        "label": "Vie Quotidienne — Colors",
+        "prerequis": []
       },
       {
         "id": "en_a1_body",
-        "label": "Vie Quotidienne — Body"
+        "label": "Vie Quotidienne — Body",
+        "prerequis": []
       },
       {
         "id": "en_a1_food",
-        "label": "Vie Quotidienne — Food"
+        "label": "Vie Quotidienne — Food",
+        "prerequis": []
       }
     ],
     "a2": [
       {
         "id": "en_a2_verbs",
-        "label": "Mathematical Verbs A2"
+        "label": "Mathematical Verbs A2",
+        "prerequis": []
       },
       {
         "id": "en_a2_expressions",
-        "label": "Mathematical Expressions A2"
+        "label": "Mathematical Expressions A2",
+        "prerequis": [
+          "en_a2_verbs"
+        ]
       },
       {
         "id": "en_a2_fractions",
-        "label": "Fractions Vocabulary A2"
+        "label": "Fractions Vocabulary A2",
+        "prerequis": []
       },
       {
         "id": "en_a2_geometry",
-        "label": "Geometry Vocabulary A2"
+        "label": "Geometry Vocabulary A2",
+        "prerequis": []
       },
       {
         "id": "en_a2_sport_verbs",
-        "label": "Sport Verbs A2"
+        "label": "Sport Verbs A2",
+        "prerequis": []
       },
       {
         "id": "en_a2_sport_stats",
-        "label": "Sport Stats A2"
+        "label": "Sport Stats A2",
+        "prerequis": [
+          "en_a2_sport_verbs"
+        ]
       },
       {
         "id": "en_a2_sport_physics",
-        "label": "Sport Physics A2"
+        "label": "Sport Physics A2",
+        "prerequis": [
+          "en_a2_sport_verbs"
+        ]
       },
       {
         "id": "en_a2_science_biology",
-        "label": "Science — Biology A2"
+        "label": "Science — Biology A2",
+        "prerequis": []
       },
       {
         "id": "en_a2_science_chemistry",
-        "label": "Science — Chemistry A2"
+        "label": "Science — Chemistry A2",
+        "prerequis": []
       },
       {
         "id": "en_a2_science_physics",
-        "label": "Science — Physics A2"
+        "label": "Science — Physics A2",
+        "prerequis": []
       },
       {
         "id": "en_a2_economy_basics",
-        "label": "Économie - Gestion — Basics A2"
+        "label": "Économie - Gestion — Basics A2",
+        "prerequis": []
       },
       {
         "id": "en_a2_family_finance",
-        "label": "Économie - Gestion — Family Finance A2"
+        "label": "Économie - Gestion — Family Finance A2",
+        "prerequis": [
+          "en_a2_economy_basics"
+        ]
       },
       {
         "id": "en_a2_percentages_eco",
-        "label": "Économie - Gestion — Percentages A2"
+        "label": "Économie - Gestion — Percentages A2",
+        "prerequis": [
+          "en_a2_economy_basics"
+        ]
       },
       {
         "id": "en_a2_travel",
-        "label": "Géographie - Voyage — Travel A2"
+        "label": "Géographie - Voyage — Travel A2",
+        "prerequis": []
       },
       {
         "id": "en_a2_geography",
-        "label": "Géographie - Voyage — Geography A2"
+        "label": "Géographie - Voyage — Geography A2",
+        "prerequis": [
+          "en_a2_travel"
+        ]
       },
       {
         "id": "en_a2_directions",
-        "label": "Géographie - Voyage — Directions A2"
+        "label": "Géographie - Voyage — Directions A2",
+        "prerequis": [
+          "en_a2_travel"
+        ]
       },
       {
         "id": "en_a2_home",
-        "label": "Vie Quotidienne — Home A2"
+        "label": "Vie Quotidienne — Home A2",
+        "prerequis": []
       },
       {
         "id": "en_a2_daily_verbs",
-        "label": "Vie Quotidienne — Daily Verbs A2"
+        "label": "Vie Quotidienne — Daily Verbs A2",
+        "prerequis": []
       },
       {
         "id": "en_a2_adjectives",
-        "label": "Vie Quotidienne — Adjectives A2"
+        "label": "Vie Quotidienne — Adjectives A2",
+        "prerequis": [
+          "en_a2_daily_verbs"
+        ]
       },
       {
         "id": "en_a2_jobs",
-        "label": "Vie Quotidienne — Jobs A2"
+        "label": "Vie Quotidienne — Jobs A2",
+        "prerequis": []
       }
     ],
     "b1": [
       {
         "id": "en_b1_verbs",
-        "label": "Mathematical Verbs B1"
+        "label": "Mathematical Verbs B1",
+        "prerequis": []
       },
       {
         "id": "en_b1_algebra",
-        "label": "Algebra Vocabulary B1"
+        "label": "Algebra Vocabulary B1",
+        "prerequis": [
+          "en_b1_verbs"
+        ]
       },
       {
         "id": "en_b1_statistics",
-        "label": "Statistics Vocabulary B1"
+        "label": "Statistics Vocabulary B1",
+        "prerequis": []
       },
       {
         "id": "en_b1_reasoning",
-        "label": "Reasoning Phrases B1"
+        "label": "Reasoning Phrases B1",
+        "prerequis": [
+          "en_b1_verbs"
+        ]
       },
       {
         "id": "en_b1_sport_verbs",
-        "label": "Sport Verbs B1"
+        "label": "Sport Verbs B1",
+        "prerequis": []
       },
       {
         "id": "en_b1_sport_physics",
-        "label": "Sport Physics B1"
+        "label": "Sport Physics B1",
+        "prerequis": [
+          "en_b1_sport_verbs"
+        ]
       },
       {
         "id": "en_b1_sport_stats",
-        "label": "Sport Statistics B1"
+        "label": "Sport Statistics B1",
+        "prerequis": [
+          "en_b1_sport_verbs"
+        ]
       },
       {
         "id": "en_b1_science_biology",
-        "label": "Science — Biology B1"
+        "label": "Science — Biology B1",
+        "prerequis": []
       },
       {
         "id": "en_b1_science_chemistry",
-        "label": "Science — Chemistry B1"
+        "label": "Science — Chemistry B1",
+        "prerequis": []
       },
       {
         "id": "en_b1_science_physics",
-        "label": "Science — Physics B1"
+        "label": "Science — Physics B1",
+        "prerequis": []
       },
       {
         "id": "en_b1_economy",
-        "label": "Économie - Gestion — Economy B1"
+        "label": "Économie - Gestion — Economy B1",
+        "prerequis": []
       },
       {
         "id": "en_b1_finance",
-        "label": "Économie - Gestion — Finance B1"
+        "label": "Économie - Gestion — Finance B1",
+        "prerequis": [
+          "en_b1_economy"
+        ]
       },
       {
         "id": "en_b1_family_management",
-        "label": "Économie - Gestion — Family Management B1"
+        "label": "Économie - Gestion — Family Management B1",
+        "prerequis": [
+          "en_b1_economy"
+        ]
       },
       {
         "id": "en_b1_physical_geography",
-        "label": "Géographie - Voyage — Physical Geography B1"
+        "label": "Géographie - Voyage — Physical Geography B1",
+        "prerequis": []
       },
       {
         "id": "en_b1_travel_culture",
-        "label": "Géographie - Voyage — Travel & Culture B1"
+        "label": "Géographie - Voyage — Travel & Culture B1",
+        "prerequis": [
+          "en_b1_physical_geography"
+        ]
       },
       {
         "id": "en_b1_environment",
-        "label": "Géographie - Voyage — Environment B1"
+        "label": "Géographie - Voyage — Environment B1",
+        "prerequis": [
+          "en_b1_physical_geography"
+        ]
       }
     ],
     "b2": [
       {
         "id": "en_b2_verbs",
-        "label": "Mathematical Verbs B2"
+        "label": "Mathematical Verbs B2",
+        "prerequis": []
       },
       {
         "id": "en_b2_proof",
-        "label": "Proof & Logic B2"
+        "label": "Proof & Logic B2",
+        "prerequis": [
+          "en_b2_verbs"
+        ]
       },
       {
         "id": "en_b2_analysis",
-        "label": "Analysis Vocabulary B2"
+        "label": "Analysis Vocabulary B2",
+        "prerequis": [
+          "en_b2_verbs"
+        ]
       },
       {
         "id": "en_b2_sport_verbs",
-        "label": "Sport Verbs B2"
+        "label": "Sport Verbs B2",
+        "prerequis": []
       },
       {
         "id": "en_b2_sport_science",
-        "label": "Sport Science B2"
+        "label": "Sport Science B2",
+        "prerequis": [
+          "en_b2_sport_verbs"
+        ]
       },
       {
         "id": "en_b2_sport_data",
-        "label": "Sport Data Analysis B2"
+        "label": "Sport Data Analysis B2",
+        "prerequis": [
+          "en_b2_sport_verbs"
+        ]
       },
       {
         "id": "en_b2_science_biology",
-        "label": "Science — Biology B2"
+        "label": "Science — Biology B2",
+        "prerequis": []
       },
       {
         "id": "en_b2_science_chemistry",
-        "label": "Science — Chemistry B2"
+        "label": "Science — Chemistry B2",
+        "prerequis": []
       },
       {
         "id": "en_b2_science_physics",
-        "label": "Science — Physics B2"
+        "label": "Science — Physics B2",
+        "prerequis": []
       },
       {
         "id": "en_b2_macroeconomics",
-        "label": "Économie - Gestion — Macroeconomics B2"
+        "label": "Économie - Gestion — Macroeconomics B2",
+        "prerequis": []
       },
       {
         "id": "en_b2_business",
-        "label": "Économie - Gestion — Business B2"
+        "label": "Économie - Gestion — Business B2",
+        "prerequis": [
+          "en_b2_macroeconomics"
+        ]
       },
       {
         "id": "en_b2_eco_statistics",
-        "label": "Économie - Gestion — Statistics B2"
+        "label": "Économie - Gestion — Statistics B2",
+        "prerequis": [
+          "en_b2_macroeconomics"
+        ]
       },
       {
         "id": "en_b2_geopolitics",
-        "label": "Géographie - Voyage — Geopolitics B2"
+        "label": "Géographie - Voyage — Geopolitics B2",
+        "prerequis": []
       },
       {
         "id": "en_b2_climate_science",
-        "label": "Géographie - Voyage — Climate Science B2"
+        "label": "Géographie - Voyage — Climate Science B2",
+        "prerequis": [
+          "en_b2_geopolitics"
+        ]
       },
       {
         "id": "en_b2_geo_statistics",
-        "label": "Géographie - Voyage — Geo Statistics B2"
+        "label": "Géographie - Voyage — Geo Statistics B2",
+        "prerequis": [
+          "en_b2_geopolitics"
+        ]
       }
     ]
   },
@@ -1544,197 +2490,252 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     "a1": [
       {
         "id": "es_a1_digits",
-        "label": "Chiffres"
+        "label": "Chiffres",
+        "prerequis": []
       },
       {
         "id": "es_a1_numbers",
-        "label": "Nombres"
+        "label": "Nombres",
+        "prerequis": [
+          "es_a1_digits"
+        ]
       },
       {
         "id": "es_a1_operations",
-        "label": "Opérations"
+        "label": "Opérations",
+        "prerequis": [
+          "es_a1_digits"
+        ]
       },
       {
         "id": "es_a1_shapes",
-        "label": "Formes"
+        "label": "Formes",
+        "prerequis": []
       },
       {
         "id": "es_a1_colors",
-        "label": "Couleurs"
+        "label": "Couleurs",
+        "prerequis": []
       },
       {
         "id": "es_a1_family",
-        "label": "Famille"
+        "label": "Famille",
+        "prerequis": []
       },
       {
         "id": "es_a1_school",
-        "label": "École"
+        "label": "École",
+        "prerequis": []
       },
       {
         "id": "es_a1_body",
-        "label": "Corps"
+        "label": "Corps",
+        "prerequis": []
       },
       {
         "id": "es_a1_food",
-        "label": "Alimentation"
+        "label": "Alimentation",
+        "prerequis": []
       },
       {
         "id": "es_a1_animals",
-        "label": "Animaux"
+        "label": "Animaux",
+        "prerequis": []
       },
       {
         "id": "es_a1_clothes",
-        "label": "Vêtements"
+        "label": "Vêtements",
+        "prerequis": []
       },
       {
         "id": "es_a1_house",
-        "label": "Maison"
+        "label": "Maison",
+        "prerequis": []
       },
       {
         "id": "es_a1_days",
-        "label": "Jours & mois"
+        "label": "Jours & mois",
+        "prerequis": []
       },
       {
         "id": "es_a1_greetings",
-        "label": "Salutations"
+        "label": "Salutations",
+        "prerequis": []
       },
       {
         "id": "es_a1_money",
-        "label": "Argent & prix"
+        "label": "Argent & prix",
+        "prerequis": [
+          "es_a1_digits"
+        ]
       },
       {
         "id": "es_a1_geography_basic",
-        "label": "Géographie de base"
+        "label": "Géographie de base",
+        "prerequis": []
       },
       {
         "id": "es_a1_science_earth",
-        "label": "Sciences de la Terre"
+        "label": "Sciences de la Terre",
+        "prerequis": []
       },
       {
         "id": "es_a1_sport_measurements",
-        "label": "Sport & mesures"
+        "label": "Sport & mesures",
+        "prerequis": [
+          "es_a1_digits"
+        ]
       }
     ],
     "a2": [
       {
         "id": "es_a2_daily_life",
-        "label": "Vie quotidienne"
+        "label": "Vie quotidienne",
+        "prerequis": []
       },
       {
         "id": "es_a2_travel",
-        "label": "Voyage & transport"
+        "label": "Voyage & transport",
+        "prerequis": []
       },
       {
         "id": "es_a2_jobs",
-        "label": "Métiers"
+        "label": "Métiers",
+        "prerequis": []
       },
       {
         "id": "es_a2_adjectives",
-        "label": "Adjectifs"
+        "label": "Adjectifs",
+        "prerequis": []
       },
       {
         "id": "es_a2_time",
-        "label": "Temps & fréquence"
+        "label": "Temps & fréquence",
+        "prerequis": []
       },
       {
         "id": "es_a2_weather",
-        "label": "Météo & saisons"
+        "label": "Météo & saisons",
+        "prerequis": []
       },
       {
         "id": "es_a2_shopping",
-        "label": "Courses & achats"
+        "label": "Courses & achats",
+        "prerequis": []
       },
       {
         "id": "es_a2_health",
-        "label": "Santé"
+        "label": "Santé",
+        "prerequis": []
       },
       {
         "id": "es_a2_family_budget",
-        "label": "Budget familial"
+        "label": "Budget familial",
+        "prerequis": []
       },
       {
         "id": "es_a2_geography",
-        "label": "Géographie & repères"
+        "label": "Géographie & repères",
+        "prerequis": []
       },
       {
         "id": "es_a2_science_living",
-        "label": "Sciences du vivant"
+        "label": "Sciences du vivant",
+        "prerequis": []
       },
       {
         "id": "es_a2_sport_verbs",
-        "label": "Verbes du sport"
+        "label": "Verbes du sport",
+        "prerequis": []
       }
     ],
     "b1": [
       {
         "id": "es_b1_opinions",
-        "label": "Opinions & arguments"
+        "label": "Opinions & arguments",
+        "prerequis": []
       },
       {
         "id": "es_b1_environment",
-        "label": "Environnement & société"
+        "label": "Environnement & société",
+        "prerequis": []
       },
       {
         "id": "es_b1_media",
-        "label": "Médias & culture"
+        "label": "Médias & culture",
+        "prerequis": []
       },
       {
         "id": "es_b1_economy",
-        "label": "Économie de base"
+        "label": "Économie de base",
+        "prerequis": []
       },
       {
         "id": "es_b1_science",
-        "label": "Sciences & technologie"
+        "label": "Sciences & technologie",
+        "prerequis": []
       },
       {
         "id": "es_b1_finance",
-        "label": "Finance & argent"
+        "label": "Finance & argent",
+        "prerequis": []
       },
       {
         "id": "es_b1_physical_geography",
-        "label": "Géographie physique"
+        "label": "Géographie physique",
+        "prerequis": []
       },
       {
         "id": "es_b1_science_biology",
-        "label": "Biologie"
+        "label": "Biologie",
+        "prerequis": []
       },
       {
         "id": "es_b1_sport_stats",
-        "label": "Sport & statistiques"
+        "label": "Sport & statistiques",
+        "prerequis": []
       }
     ],
     "b2": [
       {
         "id": "es_b2_geopolitics",
-        "label": "Géopolitique hispanique"
+        "label": "Géopolitique hispanique",
+        "prerequis": []
       },
       {
         "id": "es_b2_literature",
-        "label": "Littérature & culture"
+        "label": "Littérature & culture",
+        "prerequis": []
       },
       {
         "id": "es_b2_economics",
-        "label": "Économie & mondialisation"
+        "label": "Économie & mondialisation",
+        "prerequis": []
       },
       {
         "id": "es_b2_philosophy",
-        "label": "Philosophie & éthique"
+        "label": "Philosophie & éthique",
+        "prerequis": []
       },
       {
         "id": "es_b2_macroeconomics",
-        "label": "Macroéconomie"
+        "label": "Macroéconomie",
+        "prerequis": []
       },
       {
         "id": "es_b2_geo_statistics",
-        "label": "Géographie & démographie"
+        "label": "Géographie & démographie",
+        "prerequis": []
       },
       {
         "id": "es_b2_climate_science",
-        "label": "Science du climat"
+        "label": "Science du climat",
+        "prerequis": []
       },
       {
         "id": "es_b2_sport_science",
-        "label": "Science du sport"
+        "label": "Science du sport",
+        "prerequis": []
       }
     ]
   },
@@ -1742,71 +2743,106 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     "a1": [
       {
         "id": "ia_a1_definition",
-        "label": "Qu'est-ce que l'IA ?"
+        "label": "Qu'est-ce que l'IA ?",
+        "prerequis": []
       },
       {
         "id": "ia_a1_usages_limites",
-        "label": "Ce que l'IA sait faire... et ses limites"
+        "label": "Ce que l'IA sait faire... et ses limites",
+        "prerequis": [
+          "ia_a1_definition"
+        ]
       },
       {
         "id": "ia_a1_responsabilite_impact",
-        "label": "Mon role et l'impact de l'IA"
+        "label": "Mon role et l'impact de l'IA",
+        "prerequis": [
+          "ia_a1_usages_limites"
+        ]
       }
     ],
     "a2": [
       {
         "id": "ia_a2_prompts",
-        "label": "Ecrire un bon prompt"
+        "label": "Ecrire un bon prompt",
+        "prerequis": []
       },
       {
         "id": "ia_a2_reviser",
-        "label": "Reviser et s'entrainer avec l'IA"
+        "label": "Reviser et s'entrainer avec l'IA",
+        "prerequis": [
+          "ia_a2_prompts"
+        ]
       },
       {
         "id": "ia_a2_apprendre_honnete",
-        "label": "Apprendre vraiment, sans tricher"
+        "label": "Apprendre vraiment, sans tricher",
+        "prerequis": [
+          "ia_a2_reviser"
+        ]
       }
     ],
     "b1": [
       {
         "id": "ia_b1_verification",
-        "label": "Verifier et garder l'esprit critique"
+        "label": "Verifier et garder l'esprit critique",
+        "prerequis": []
       },
       {
         "id": "ia_b1_securite",
-        "label": "Securite et donnees personnelles"
+        "label": "Securite et donnees personnelles",
+        "prerequis": [
+          "ia_b1_verification"
+        ]
       },
       {
         "id": "ia_b1_responsabilite_numerique",
-        "label": "Plagiat, droits et responsabilite"
+        "label": "Plagiat, droits et responsabilite",
+        "prerequis": [
+          "ia_b1_securite"
+        ]
       }
     ],
     "b2": [
       {
         "id": "ia_b2_prompt_avance",
-        "label": "Methode : prompt avance et iteration"
+        "label": "Methode : prompt avance et iteration",
+        "prerequis": []
       },
       {
         "id": "ia_b2_production",
-        "label": "Production creative"
+        "label": "Production creative",
+        "prerequis": [
+          "ia_b2_prompt_avance"
+        ]
       },
       {
         "id": "ia_b2_qualite_responsabilite",
-        "label": "Qualite, verification et responsabilite"
+        "label": "Qualite, verification et responsabilite",
+        "prerequis": [
+          "ia_b2_production"
+        ]
       }
     ],
     "c1": [
       {
         "id": "ia_c1_cadrer_projet",
-        "label": "Cadrer un projet IA utile"
+        "label": "Cadrer un projet IA utile",
+        "prerequis": []
       },
       {
         "id": "ia_c1_conception_responsable",
-        "label": "Concevoir de facon responsable"
+        "label": "Concevoir de facon responsable",
+        "prerequis": [
+          "ia_c1_cadrer_projet"
+        ]
       },
       {
         "id": "ia_c1_responsabilite_pitch",
-        "label": "Tester et presenter"
+        "label": "Tester et presenter",
+        "prerequis": [
+          "ia_c1_conception_responsable"
+        ]
       }
     ]
   }
