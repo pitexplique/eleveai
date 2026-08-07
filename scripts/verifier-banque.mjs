@@ -183,11 +183,24 @@ for (const f of fichiers) {
     nbFixes += 1;
     if (microId) densite.set(microId, (densite.get(microId) ?? 0) + 1);
 
-    // 1. Énoncés en double
+    // 1. Questions en double
+    // ⚠️ 07/08 — on comparait les seuls énoncés, et on criait au doublon sur
+    // des questions parfaitement distinctes : « Quelle affirmation est vraie ? »
+    // n'a de sens qu'avec ses propositions, et « quelle est l'aire de cette
+    // figure ? » qu'avec son dessin. Deux questions ne se répètent vraiment que
+    // si l'élève voit LA MÊME CHOSE : même énoncé, mêmes choix, même figure.
     const enonce = texte.match(/\n\s*text:\s*"((?:[^"\\]|\\.)*)"/)?.[1];
     if (enonce) {
-      if (!enonces.has(enonce)) enonces.set(enonce, []);
-      enonces.get(enonce).push(`${f} ${id}`);
+      const choix = texte.match(/choices:\s*(\[[^\]]*\])/)?.[1] ?? "";
+      // Le canvas court souvent sur plusieurs lignes : on prend TOUT ce qui
+      // suit « canvas: » jusqu'au bout du bloc. S'arrêter à la première ligne
+      // rendait identiques deux figures qui ne le sont pas — deux droites
+      // parallèles et deux droites sécantes, par exemple.
+      const iCanvas = texte.indexOf("canvas:");
+      const figure = iCanvas === -1 ? "" : texte.slice(iCanvas).replace(/\s+/g, " ");
+      const empreinte = `${enonce} ${choix} ${figure}`;
+      if (!enonces.has(empreinte)) enonces.set(empreinte, { enonce, ou: [] });
+      enonces.get(empreinte).ou.push(`${f} ${id}`);
     }
 
     // 2. QCM : la bonne réponse figure-t-elle dans les choix, en 1re position ?
@@ -245,10 +258,10 @@ for (const f of fichiers) {
 for (const [id, ou] of identifiants) {
   if (ou.length > 1) problemes.push(`identifiant en double : ${id} (${ou.join(", ")})`);
 }
-for (const [enonce, ou] of enonces) {
+for (const [, { enonce, ou }] of enonces) {
   if (ou.length > 1) {
     problemes.push(
-      `énoncé en double (${ou.length} fois) : « ${enonce.slice(0, 70)}… »\n        ${ou.join("\n        ")}`,
+      `question en double (${ou.length} fois) : « ${enonce.slice(0, 70)}… »\n        ${ou.join("\n        ")}`,
     );
   }
 }
