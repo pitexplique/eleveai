@@ -725,19 +725,19 @@ export const suitesBank: TutorBankItemV4[] = [
     microId: "suite_bornee",
     difficulty: 3,
     theme: "neutral",
-    text: "Une suite croissante et majorée est-elle convergente ?",
+    text: "Une suite croissante est-elle nécessairement minorée ?",
     format: "qcm",
     choices: ["oui", "non"],
     expected: ["oui"],
     comparator: "mcq_exact",
-    hint: "C’est le théorème de convergence monotone.",
+    hint: "Regarde le tout premier terme.",
     explanation: exp(
-      "Une suite monotone et bornée est convergente.",
-      "On vérifie le sens de variation et l’existence d’une borne.",
-      "La suite est croissante et majorée.",
-      "Elle est donc convergente."
+      "Une suite est minorée s’il existe un réel en dessous duquel elle ne descend jamais.",
+      "On cherche un minorant, sans se demander si la suite converge.",
+      "Une suite croissante ne redescend jamais : tous ses termes sont supérieurs ou égaux à $u_0$.",
+      "Elle est donc minorée par $u_0$ — ce qui ne dit rien sur le fait qu’elle soit majorée."
     ),
-    tags: ["terminale-spe", "suite", "bornee", "convergence", "qcm"],
+    tags: ["terminale-spe", "suite", "bornee", "minorant", "qcm"],
   },
 
   {
@@ -749,19 +749,19 @@ export const suitesBank: TutorBankItemV4[] = [
     microId: "suite_bornee",
     difficulty: 3,
     theme: "neutral",
-    text: "Une suite décroissante et minorée est-elle convergente ?",
+    text: "Une suite bornée est-elle nécessairement convergente ?",
     format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
+    choices: ["non", "oui"],
+    expected: ["non"],
     comparator: "mcq_exact",
-    hint: "Une suite monotone et bornée converge.",
+    hint: "Cherche une suite qui reste coincée entre deux valeurs sans jamais se stabiliser.",
     explanation: exp(
-      "Le théorème de convergence monotone dit qu’une suite monotone et bornée converge.",
-      "On vérifie que la suite est monotone et qu’elle possède une borne dans le bon sens.",
-      "Elle est décroissante et minorée.",
-      "Elle est donc convergente."
+      "Une suite bornée reste entre deux réels, mais rien ne l’oblige à s’approcher d’un nombre.",
+      "Pour réfuter, un seul contre-exemple suffit.",
+      "La suite $u_n = (-1)^n$ ne prend que les valeurs $-1$ et $1$ : elle est bornée. Pourtant elle saute de l’une à l’autre indéfiniment et ne converge pas.",
+      "Être bornée ne suffit donc pas. Il faut AUSSI être monotone — c'est le théorème de convergence monotone."
     ),
-    tags: ["terminale-spe", "suite", "bornee", "convergence", "qcm"],
+    tags: ["terminale-spe", "suite", "bornee", "contre_exemple", "piege", "qcm"],
   },
 
   {
@@ -895,18 +895,18 @@ export const suitesBank: TutorBankItemV4[] = [
     microId: "suite_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Dans un exercice de bac, on montre qu’une suite est croissante et majorée. Quelle conclusion peut-on donner ? Justifie.",
+    text: "Un élève écrit : « la suite $u_n = \\dfrac{1}{n}$ est décroissante, donc elle tend vers $-\\infty$ ». Explique son erreur.",
     format: "open",
-    expected: ["convergente", "croissante", "majorée", "théorème", "monotone"],
+    expected: ["minorée", "minoree", "0", "zéro", "zero", "positif", "descend pas"],
     comparator: "contains_keyword",
-    hint: "Utilise le théorème de convergence monotone.",
+    hint: "Cette suite peut-elle devenir négative ?",
     explanation: exp(
-      "Une suite monotone et bornée est convergente.",
-      "On identifie que la suite est croissante et majorée.",
-      "Comme elle est croissante et majorée, elle est monotone et bornée.",
-      "On peut conclure qu’elle est convergente."
+      "Décroître ne veut pas dire descendre indéfiniment : encore faut-il qu’aucun plancher n’arrête la descente.",
+      "On cherche si la suite est minorée avant de conclure sur sa limite.",
+      "Tous les termes de $\\dfrac{1}{n}$ sont strictement positifs : la suite est minorée par $0$. Elle décroît, mais en s’approchant de $0$ sans jamais le franchir.",
+      "Elle converge donc vers $0$. Une suite décroissante ne tend vers $-\\infty$ que si rien ne la minore."
     ),
-    tags: ["terminale-spe", "suite", "convergence", "type_bac", "open"],
+    tags: ["terminale-spe", "suite", "convergence", "piege", "open"],
   },
 
   {
@@ -1266,11 +1266,11 @@ export const suitesBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "terminale_spe_suite_bornee_h3", niveau: "terminale-spe", matiere: "maths",
     notionId: "suite_numerique", microId: "suite_bornee", difficulty: 3, theme: "neutral",
-    text: "Une suite croissante et majorée est :",
-    format: "qcm", choices: ["convergente", "divergente vers +∞", "décroissante", "non bornée"], expected: ["convergente"], comparator: "mcq_exact",
-    hint: "Théorème de convergence monotone.",
-    explanation: exp("Une suite monotone et bornée converge.", "Croissante + majorée vérifie les hypothèses.", "Elle admet donc une limite finie.", "La suite est convergente."),
-    tags: ["terminale-spe", "suite", "bornee", "convergence", "qcm"],
+    text: "Une suite bornée est une suite qui est :",
+    format: "qcm", choices: ["à la fois majorée et minorée", "seulement majorée", "seulement minorée", "forcément monotone"], expected: ["à la fois majorée et minorée"], comparator: "mcq_exact",
+    hint: "Il faut un plafond ET un plancher.",
+    explanation: exp("Une suite est bornée quand elle est encadrée des deux côtés.", "On cherche un majorant ET un minorant.", "Un seul des deux ne suffit pas : $u_n = n$ est minorée par $0$ mais monte à l’infini, elle n’est pas bornée.", "Être bornée, c’est rester entre deux réels fixés."),
+    tags: ["terminale-spe", "suite", "bornee", "definition", "qcm"],
   },
   {
     kind: "fixed", id: "terminale_spe_suite_bornee_h4", niveau: "terminale-spe", matiere: "maths",

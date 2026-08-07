@@ -1331,18 +1331,19 @@ export const convexiteBank: TutorBankItemV4[] = [
     microId: "convexite_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Soit $f(x) = x^3 - 3x^2$, donc $f''(x) = 6x - 6$. Quelle est l'abscisse du point d'inflexion ?",
-    format: "short",
-    expected: ["1"],
-    comparator: "number_equal",
-    hint: "Résous $6x - 6 = 0$.",
+    text: "Soit $f(x) = x^4$, donc $f''(x) = 12x^2$. La dérivée seconde s'annule en $0$. Y a-t-il un point d'inflexion en $0$ ?",
+    format: "qcm",
+    choices: ["non", "oui", "seulement si $f$ est croissante", "on ne peut pas conclure"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "S'annuler ne suffit pas : il faut CHANGER DE SIGNE.",
     explanation: exp(
-      "Le point d'inflexion se trouve là où $f''$ s'annule en changeant de signe.",
-      "On résout $f''(x) = 0$ : $6x - 6 = 0$.",
-      "$6x - 6 = 0 \\iff x = 1$, et $f''$ change de signe.",
-      "L'abscisse du point d'inflexion est $1$."
+      "Un point d'inflexion demande que $f''$ s'annule EN CHANGEANT DE SIGNE.",
+      "On étudie le signe de $f''$ de part et d'autre du point.",
+      "$12x^2$ est positif à gauche comme à droite de $0$, et ne s'annule qu'en ce point. Le signe ne change donc pas : la courbe reste convexe partout.",
+      "Il n'y a pas de point d'inflexion en $0$. C'est le piège classique du chapitre — on croit qu'annuler $f''$ suffit."
     ),
-    tags: ["terminale-spe", "convexite", "type_bac", "short"],
+    tags: ["terminale-spe", "convexite", "piege", "type_bac", "qcm"],
   },
 
   {
@@ -1378,18 +1379,24 @@ export const convexiteBank: TutorBankItemV4[] = [
     microId: "convexite_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Soit $f(x) = x^3 - 6x^2$, donc $f''(x) = 6x - 12$. Quelle est l'abscisse du point d'inflexion ?",
-    format: "short",
-    expected: ["2"],
-    comparator: "number_equal",
-    hint: "Résous $6x - 12 = 0$.",
+    text: "Soit $f(x) = x^3 - 6x^2$, donc $f''(x) = 6x - 12$. Sur quel intervalle la courbe est-elle convexe ?",
+    format: "qcm",
+    choices: [
+      "$[2 ; +\\infty[$",
+      "$]-\\infty ; 2]$",
+      "$[0 ; +\\infty[$",
+      "sur $\\mathbb{R}$ tout entier",
+    ],
+    expected: ["$[2 ; +\\infty[$"],
+    comparator: "mcq_exact",
+    hint: "La courbe est convexe là où $f''$ est POSITIVE.",
     explanation: exp(
-      "Le point d'inflexion se trouve là où $f''$ s'annule en changeant de signe.",
-      "On résout $f''(x) = 0$ : $6x - 12 = 0$.",
-      "$6x - 12 = 0 \\iff x = 2$, et $f''$ change de signe.",
-      "L'abscisse du point d'inflexion est $2$."
+      "Une fonction est convexe sur les intervalles où sa dérivée seconde est positive.",
+      "On étudie le signe de $f''(x) = 6x - 12$, sans se contenter de l'annuler.",
+      "$6x - 12 \\geq 0 \\iff x \\geq 2$. La dérivée seconde est donc négative avant $2$ et positive après.",
+      "La courbe est concave sur $]-\\infty ; 2]$ puis convexe sur $[2 ; +\\infty[$, avec un point d'inflexion en $x = 2$."
     ),
-    tags: ["terminale-spe", "convexite", "type_bac", "short"],
+    tags: ["terminale-spe", "convexite", "intervalle", "type_bac", "qcm"],
   },
 
   {
