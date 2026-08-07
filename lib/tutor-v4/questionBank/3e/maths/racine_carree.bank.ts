@@ -681,7 +681,7 @@ explanation:
 ========================= */
 {
   kind: "fixed",
-  id: "3e_entier_racine_comprendre_fixed_3",
+  id: "3e_entier_racine_comprendre_fixed_4",
   niveau: "3e",
   matiere: "maths",
   notionId: "entier_racine_carree",
@@ -774,7 +774,7 @@ explanation:
 },
 {
   kind: "template",
-  id: "3e_entier_racine_comprendre_tpl_1",
+  id: "3e_entier_racine_comprendre_tpl_2",
   niveau: "3e",
   matiere: "maths",
   notionId: "entier_racine_carree",
@@ -958,7 +958,7 @@ explanation:
 ========================= */
 {
   kind: "template",
-  id: "3e_entier_racine_calculer_tpl_2",
+  id: "3e_entier_racine_calculer_tpl_3",
   niveau: "3e",
   matiere: "maths",
   notionId: "entier_racine_carree",
@@ -985,7 +985,7 @@ explanation:
 },
 {
   kind: "fixed",
-  id: "3e_entier_racine_calculer_fixed_2",
+  id: "3e_entier_racine_calculer_fixed_3",
   niveau: "3e",
   matiere: "maths",
   notionId: "entier_racine_carree",
@@ -1059,7 +1059,7 @@ explanation:
 ========================= */
 {
   kind: "template",
-  id: "3e_entier_racine_encadrer_tpl_2",
+  id: "3e_entier_racine_encadrer_tpl_3",
   niveau: "3e",
   matiere: "maths",
   notionId: "entier_racine_carree",
@@ -1115,7 +1115,7 @@ explanation:
 },
 {
   kind: "fixed",
-  id: "3e_entier_racine_encadrer_fixed_1",
+  id: "3e_entier_racine_encadrer_fixed_3",
   niveau: "3e",
   matiere: "maths",
   notionId: "entier_racine_carree",

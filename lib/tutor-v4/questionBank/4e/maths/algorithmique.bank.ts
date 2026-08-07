@@ -479,7 +479,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   },
     {
     kind: "fixed",
-    id: "4e_algo_condition_fixed_3_piege_egalite",
+    id: "4e_algo_condition_fixed_3_piege_egalite_2",
     niveau: "4e",
     matiere: "maths",
     notionId: "algo_programmation",
@@ -511,7 +511,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_condition_tpl_5_expression",
+    id: "4e_algo_condition_tpl_5_expression_2",
     niveau: "4e",
     matiere: "maths",
     notionId: "algo_programmation",
@@ -554,7 +554,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_algo_condition_open_1_expliquer",
+    id: "4e_algo_condition_open_1_expliquer_2",
     niveau: "4e",
     matiere: "maths",
     notionId: "algo_programmation",
@@ -580,7 +580,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "4e_algo_instruction_conditionnelle_fixed_1_definition",
+    id: "4e_algo_instruction_conditionnelle_fixed_1_definition_2",
     niveau: "4e",
     matiere: "maths",
     notionId: "algo_programmation",
@@ -616,7 +616,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_instruction_conditionnelle_tpl_1_si_simple",
+    id: "4e_algo_instruction_conditionnelle_tpl_1_si_simple_2",
     niveau: "4e",
     matiere: "maths",
     notionId: "algo_programmation",
@@ -656,7 +656,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "4e_algo_instruction_conditionnelle_tpl_2_si_sinon",
+    id: "4e_algo_instruction_conditionnelle_tpl_2_si_sinon_2",
     niveau: "4e",
     matiere: "maths",
     notionId: "algo_programmation",

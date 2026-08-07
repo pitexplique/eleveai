@@ -155,8 +155,15 @@ for (const f of fichiers) {
 
   for (const { kind, texte } of items) {
     // Les id ne sont pas tous en snake_case : le CM1 utilise "cm1-algo-inst-001".
-    const id = texte.match(/\n\s*id:\s*"([A-Za-z0-9_-]+)"/)?.[1] ?? "(sans id)";
-    const microId = texte.match(/microId:\s*"([A-Za-z0-9_-]+)"/)?.[1];
+    // ⚠️ 07/08 — on cherchait « un saut de ligne puis id: ». Or la terminale
+    // écrit `kind: "fixed", id: "..."` sur UNE SEULE ligne : 112 items étaient
+    // déclarés « (sans id) », donc rangés ensemble et signalés comme un
+    // gigantesque doublon. On ancre maintenant sur le `kind` qui précède
+    // toujours l'id, quelle que soit la mise en forme.
+    const id =
+      texte.match(/kind:\s*"(?:fixed|template)",\s*id:\s*"([A-Za-zÀ-ÿ0-9_-]+)"/)?.[1] ??
+      "(sans id)";
+    const microId = texte.match(/microId:\s*"([A-Za-zÀ-ÿ0-9_-]+)"/)?.[1];
 
     if (!identifiants.has(id)) identifiants.set(id, []);
     identifiants.get(id).push(f);

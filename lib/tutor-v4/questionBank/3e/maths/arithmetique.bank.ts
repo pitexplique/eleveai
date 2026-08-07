@@ -823,7 +823,7 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "fixed",
-    id: "3e_entier_multiple_diviseur_fixed_2",
+    id: "3e_entier_multiple_diviseur_fixed_4",
     niveau: "3e",
     matiere: "maths",
     notionId: "entier_arithmetique",
@@ -845,7 +845,7 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "3e_entier_multiple_diviseur_tpl_1",
+    id: "3e_entier_multiple_diviseur_tpl_3",
     niveau: "3e",
     matiere: "maths",
     notionId: "entier_arithmetique",
@@ -928,7 +928,7 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "fixed",
-    id: "3e_entier_critere_divisibilite_fixed_1",
+    id: "3e_entier_critere_divisibilite_fixed_4",
     niveau: "3e",
     matiere: "maths",
     notionId: "entier_arithmetique",
@@ -1039,7 +1039,7 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "fixed",
-    id: "3e_entier_nombre_premier_fixed_1",
+    id: "3e_entier_nombre_premier_fixed_3",
     niveau: "3e",
     matiere: "maths",
     notionId: "entier_arithmetique",
@@ -1083,7 +1083,7 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "3e_entier_nombre_premier_tpl_1",
+    id: "3e_entier_nombre_premier_tpl_3",
     niveau: "3e",
     matiere: "maths",
     notionId: "entier_arithmetique",
@@ -1305,7 +1305,7 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "template",
-    id: "3e_entier_pgcd_ppcm_tpl_1",
+    id: "3e_entier_pgcd_ppcm_tpl_3",
     niveau: "3e",
     matiere: "maths",
     notionId: "entier_arithmetique",

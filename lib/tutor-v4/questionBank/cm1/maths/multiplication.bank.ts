@@ -1695,7 +1695,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "cm1_multiplication_puissance_dix_fixed_1_par_10",
+    id: "cm1_multiplication_puissance_dix_fixed_1_par_2",
     niveau: "cm1",
     matiere: "maths",
     notionId: "multiplication",
@@ -1718,7 +1718,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "cm1_multiplication_puissance_dix_fixed_2_par_100",
+    id: "cm1_multiplication_puissance_dix_fixed_2_par_2",
     niveau: "cm1",
     matiere: "maths",
     notionId: "multiplication",
@@ -1741,7 +1741,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "cm1_multiplication_puissance_dix_fixed_3_par_1000",
+    id: "cm1_multiplication_puissance_dix_fixed_3_par_2",
     niveau: "cm1",
     matiere: "maths",
     notionId: "multiplication",
@@ -1764,7 +1764,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "cm1_multiplication_puissance_dix_fixed_4_qcm",
+    id: "cm1_multiplication_puissance_dix_fixed_4_qcm_2",
     niveau: "cm1",
     matiere: "maths",
     notionId: "multiplication",
@@ -1788,7 +1788,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "cm1_multiplication_puissance_dix_fixed_5_piege_zero",
+    id: "cm1_multiplication_puissance_dix_fixed_5_piege_zero_2",
     niveau: "cm1",
     matiere: "maths",
     notionId: "multiplication",
@@ -1812,7 +1812,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "cm1_multiplication_puissance_dix_fixed_6_piege_nombre_grand",
+    id: "cm1_multiplication_puissance_dix_fixed_6_piege_nombre_grand_2",
     niveau: "cm1",
     matiere: "maths",
     notionId: "multiplication",
@@ -1836,7 +1836,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "cm1_multiplication_puissance_dix_fixed_7_rang",
+    id: "cm1_multiplication_puissance_dix_fixed_7_rang_2",
     niveau: "cm1",
     matiere: "maths",
     notionId: "multiplication",
@@ -1859,7 +1859,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "cm1_multiplication_puissance_dix_fixed_8_nombre_avec_zero",
+    id: "cm1_multiplication_puissance_dix_fixed_8_nombre_avec_zero_2",
     niveau: "cm1",
     matiere: "maths",
     notionId: "multiplication",
@@ -1882,7 +1882,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "cm1_multiplication_puissance_dix_tpl_1_par_10",
+    id: "cm1_multiplication_puissance_dix_tpl_1_par_2",
     niveau: "cm1",
     matiere: "maths",
     notionId: "multiplication",
@@ -1912,7 +1912,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "cm1_multiplication_puissance_dix_tpl_2_par_100",
+    id: "cm1_multiplication_puissance_dix_tpl_2_par_2",
     niveau: "cm1",
     matiere: "maths",
     notionId: "multiplication",
@@ -1942,7 +1942,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "cm1_multiplication_puissance_dix_tpl_3_par_1000",
+    id: "cm1_multiplication_puissance_dix_tpl_3_par_2",
     niveau: "cm1",
     matiere: "maths",
     notionId: "multiplication",
@@ -1972,7 +1972,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "cm1_multiplication_puissance_dix_tpl_4_qcm",
+    id: "cm1_multiplication_puissance_dix_tpl_4_qcm_2",
     niveau: "cm1",
     matiere: "maths",
     notionId: "multiplication",
@@ -2014,7 +2014,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "cm1_multiplication_puissance_dix_tpl_5_reunion_marche",
+    id: "cm1_multiplication_puissance_dix_tpl_5_reunion_marche_2",
     niveau: "cm1",
     matiere: "maths",
     notionId: "multiplication",
@@ -2045,7 +2045,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "cm1_multiplication_puissance_dix_tpl_6_erreur",
+    id: "cm1_multiplication_puissance_dix_tpl_6_erreur_2",
     niveau: "cm1",
     matiere: "maths",
     notionId: "multiplication",

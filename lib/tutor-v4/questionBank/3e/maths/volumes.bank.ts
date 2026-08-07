@@ -1207,7 +1207,7 @@ export const volumesBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "fixed",
-    id: "3e_volume_comprendre_fixed_2",
+    id: "3e_volume_comprendre_fixed_4",
     niveau: "3e",
     matiere: "maths",
     notionId: "volume_solide",
@@ -1358,7 +1358,7 @@ export const volumesBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "template",
-    id: "3e_volume_pave_tpl_2",
+    id: "3e_volume_pave_tpl_3",
     niveau: "3e",
     matiere: "maths",
     notionId: "volume_solide",
@@ -1923,7 +1923,7 @@ export const volumesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "3e_volume_agrandissement_tpl_1",
+    id: "3e_volume_agrandissement_tpl_3",
     niveau: "3e",
     matiere: "maths",
     notionId: "volume_solide",
@@ -1951,7 +1951,7 @@ export const volumesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "3e_volume_reduction_tpl_1",
+    id: "3e_volume_reduction_tpl_2",
     niveau: "3e",
     matiere: "maths",
     notionId: "volume_solide",
@@ -2027,7 +2027,7 @@ export const volumesBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "fixed",
-    id: "3e_volume_unite_fixed_1",
+    id: "3e_volume_unite_fixed_3",
     niveau: "3e",
     matiere: "maths",
     notionId: "volume_solide",

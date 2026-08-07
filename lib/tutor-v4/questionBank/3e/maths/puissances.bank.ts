@@ -730,7 +730,7 @@ export const puissancesBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "fixed",
-    id: "3e_entier_puissance_comprendre_fixed_2",
+    id: "3e_entier_puissance_comprendre_fixed_4",
     niveau: "3e",
     matiere: "maths",
     notionId: "entier_puissance",
@@ -774,7 +774,7 @@ export const puissancesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "3e_entier_puissance_comprendre_tpl_1",
+    id: "3e_entier_puissance_comprendre_tpl_2",
     niveau: "3e",
     matiere: "maths",
     notionId: "entier_puissance",
@@ -938,7 +938,7 @@ export const puissancesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "3e_entier_puissance_calculer_fixed_2",
+    id: "3e_entier_puissance_calculer_fixed_4",
     niveau: "3e",
     matiere: "maths",
     notionId: "entier_puissance",

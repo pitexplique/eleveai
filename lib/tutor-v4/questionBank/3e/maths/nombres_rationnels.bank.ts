@@ -956,7 +956,7 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "fixed",
-    id: "3e_fraction_rationnel_reconnaitre_fixed_3",
+    id: "3e_fraction_rationnel_reconnaitre_fixed_4",
     niveau: "3e",
     matiere: "maths",
     notionId: "fraction_rationnel",
@@ -1081,7 +1081,7 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "3e_fraction_rationnel_ecriture_fixed_1",
+    id: "3e_fraction_rationnel_ecriture_fixed_4",
     niveau: "3e",
     matiere: "maths",
     notionId: "fraction_rationnel",
@@ -1159,7 +1159,7 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "fixed",
-    id: "3e_fraction_rationnel_comparer_fixed_1",
+    id: "3e_fraction_rationnel_comparer_fixed_4",
     niveau: "3e",
     matiere: "maths",
     notionId: "fraction_rationnel",

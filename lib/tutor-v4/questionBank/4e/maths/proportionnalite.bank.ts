@@ -1414,7 +1414,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // ---------- PROP_RECONNAITRE ----------
   {
     kind: "fixed",
-    id: "prop_reconnaitre_fixed_2",
+    id: "prop_reconnaitre_fixed_5",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1468,7 +1468,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_reconnaitre_tpl_2",
+    id: "prop_reconnaitre_tpl_3",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1527,7 +1527,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "prop_reconnaitre_open_1",
+    id: "prop_reconnaitre_open_2",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1550,7 +1550,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // ---------- PROP_TABLE ----------
   {
     kind: "fixed",
-    id: "prop_table_fixed_1",
+    id: "prop_table_fixed_3",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1571,7 +1571,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_table_tpl_2",
+    id: "prop_table_tpl_4",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1609,7 +1609,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_table_tpl_3",
+    id: "prop_table_tpl_5",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1725,7 +1725,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // ---------- PROP_COEFF ----------
   {
     kind: "fixed",
-    id: "prop_coeff_fixed_1",
+    id: "prop_coeff_fixed_3",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1746,7 +1746,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_coeff_tpl_2",
+    id: "prop_coeff_tpl_4",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1774,7 +1774,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_coeff_tpl_3",
+    id: "prop_coeff_tpl_5",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1829,7 +1829,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "prop_coeff_open_1",
+    id: "prop_coeff_open_2",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1852,7 +1852,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // ---------- PROP_QUATRIEME ----------
   {
     kind: "fixed",
-    id: "prop_quatrieme_fixed_1",
+    id: "prop_quatrieme_fixed_3",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1873,7 +1873,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_quatrieme_tpl_2",
+    id: "prop_quatrieme_tpl_5",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -1903,7 +1903,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_quatrieme_tpl_3",
+    id: "prop_quatrieme_tpl_6",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -2013,7 +2013,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // ---------- PROP_POURCENTAGE ----------
   {
     kind: "fixed",
-    id: "prop_pourcentage_fixed_2",
+    id: "prop_pourcentage_fixed_3",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -2034,7 +2034,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_pourcentage_tpl_3",
+    id: "prop_pourcentage_tpl_5",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -2114,7 +2114,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // ---------- PROP_COEFF_MULTIPLICATEUR ----------
   {
     kind: "fixed",
-    id: "prop_coeff_multiplicateur_fixed_2",
+    id: "prop_coeff_multiplicateur_fixed_4",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -2158,7 +2158,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_coeff_multiplicateur_tpl_2",
+    id: "prop_coeff_multiplicateur_tpl_4",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -2239,7 +2239,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // ---------- PROP_EVOLUTION ----------
   {
     kind: "fixed",
-    id: "prop_evolution_fixed_1",
+    id: "prop_evolution_fixed_3",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -2260,7 +2260,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "prop_evolution_tpl_2",
+    id: "prop_evolution_tpl_5",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -2392,7 +2392,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "prop_probleme_open_1",
+    id: "prop_probleme_open_3",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",
@@ -2415,7 +2415,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // ---------- PROP_DEFIS ----------
   {
     kind: "fixed",
-    id: "prop_defi_fixed_1",
+    id: "prop_defi_fixed_3",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_proportionnalite",

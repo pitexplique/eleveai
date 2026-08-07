@@ -2104,7 +2104,7 @@ export const quadrilateresBank: TutorBankItemV4[] = [
   // =========================
   {
     kind: "fixed",
-    id: "quadrilatere_nommer_vocabulaire_fixed_5",
+    id: "quadrilatere_nommer_vocabulaire_fixed_7",
     niveau: "6e", matiere: "maths",
     notionId: "quadrilatere_figure", microId: "quadrilatere_nommer_vocabulaire",
     difficulty: 1, theme: "neutral",

@@ -1175,7 +1175,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "fixed",
-    id: "3e_section_reconnaitre_fixed_2",
+    id: "3e_section_reconnaitre_fixed_4",
     niveau: "3e",
     matiere: "maths",
     notionId: "sections_solides",
@@ -1246,7 +1246,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "3e_section_reconnaitre_tpl_1",
+    id: "3e_section_reconnaitre_tpl_2",
     niveau: "3e",
     matiere: "maths",
     notionId: "sections_solides",
@@ -1326,7 +1326,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
   ========================= */
   {
     kind: "fixed",
-    id: "3e_section_pave_cube_fixed_2",
+    id: "3e_section_pave_cube_fixed_3",
     niveau: "3e",
     matiere: "maths",
     notionId: "sections_solides",
@@ -1382,7 +1382,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "3e_section_pave_cube_tpl_1",
+    id: "3e_section_pave_cube_tpl_2",
     niveau: "3e",
     matiere: "maths",
     notionId: "sections_solides",
@@ -1541,7 +1541,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "3e_section_cylindre_tpl_1",
+    id: "3e_section_cylindre_tpl_2",
     niveau: "3e",
     matiere: "maths",
     notionId: "sections_solides",
@@ -1655,7 +1655,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "3e_section_cone_pyramide_tpl_1",
+    id: "3e_section_cone_pyramide_tpl_2",
     niveau: "3e",
     matiere: "maths",
     notionId: "sections_solides",
