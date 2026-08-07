@@ -56,7 +56,12 @@ if (!fs.existsSync(BANQUES)) {
    `microId` — sinon le rapport porterait sur une partie seulement du fichier,
    et un « 0 problème » serait un mensonge. */
 function decouper(src) {
-  const debuts = [...src.matchAll(/\{\s*\n\s*kind:\s*"(fixed|template)"/g)];
+  // ⚠️ 07/08 — on exigeait un saut de ligne entre « { » et « kind: ». Sept
+  // banques de 6e écrivent `{ kind: "fixed", id: …` sur une seule ligne : le
+  // découpage y trouvait moins d'items que de microId, et le garde-fou sautait
+  // alors le fichier ENTIER. Ces sept banques n'étaient donc pas vérifiées, et
+  // le rapport affichait quand même « aucun problème ».
+  const debuts = [...src.matchAll(/\{\s*kind:\s*"(fixed|template)"/g)];
   return debuts.map((m, i) => ({
     kind: m[1],
     texte: src.slice(m.index, debuts[i + 1]?.index ?? src.length),
