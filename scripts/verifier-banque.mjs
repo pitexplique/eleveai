@@ -68,6 +68,33 @@ function decouper(src) {
   }));
 }
 
+/**
+ * Valeur complète d'un champ, jusqu'à la virgule qui le ferme — parenthèses,
+ * crochets et chaînes compris. Un simple match sur la première chaîne perdrait
+ * tout ce qui est concaténé derrière : `text: "…" + code([…])`.
+ */
+function lireExpression(texte, champ) {
+  const i = texte.indexOf(`\n`) === -1 ? -1 : texte.search(new RegExp(`\\n\\s*${champ}`));
+  if (i === -1) return null;
+  let j = texte.indexOf(champ, i) + champ.length;
+  let prof = 0;
+  let quote = "";
+  const debut = j;
+  for (; j < texte.length; j += 1) {
+    const c = texte[j];
+    if (quote) {
+      if (c === "\\") j += 1;
+      else if (c === quote) quote = "";
+      continue;
+    }
+    if (c === '"' || c === "'" || c === "`") quote = c;
+    else if ("([{".includes(c)) prof += 1;
+    else if (")]}".includes(c)) prof -= 1;
+    else if (c === "," && prof === 0) break;
+  }
+  return texte.slice(debut, j).trim().replace(/\s+/g, " ");
+}
+
 /** Extrait les chaînes JS d'un tableau littéral commençant à `start` ("["). */
 function lireTableau(src, start) {
   const out = [];
@@ -194,7 +221,11 @@ for (const f of fichiers) {
     // n'a de sens qu'avec ses propositions, et « quelle est l'aire de cette
     // figure ? » qu'avec son dessin. Deux questions ne se répètent vraiment que
     // si l'élève voit LA MÊME CHOSE : même énoncé, mêmes choix, même figure.
-    const enonce = texte.match(/\n\s*text:\s*"((?:[^"\\]|\\.)*)"/)?.[1];
+    // ⚠️ 07/08 — on ne lisait que la PREMIÈRE chaîne du champ text. La terminale
+    // écrit `text: "Que vaut x ?" + code(["x = 10", …])` : deux questions dont
+    // seul le programme Python diffère paraissaient identiques. On prend
+    // maintenant l'expression entière, jusqu'à la virgule qui ferme le champ.
+    const enonce = lireExpression(texte, "text:");
     if (enonce) {
       const choix = texte.match(/choices:\s*(\[[^\]]*\])/)?.[1] ?? "";
       // Le canvas court souvent sur plusieurs lignes : on prend TOUT ce qui
