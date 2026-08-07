@@ -25,6 +25,18 @@ const MOTS_FAIBLES = new Set([
   "sont", "leur", "vocabulaire", "problemes", "probleme", "calcul", "nombres",
   "nombre", "simples", "simple", "premier", "degre", "type", "types", "et",
   "ou", "en", "de", "du", "la", "le", "un", "au",
+  // ⭐ « calculs » et « calculer » ajoutés le 07/08. « calcul » y était déjà,
+  // mais la comparaison gère les pluriels : le libellé de programme « Calculs »
+  // (CM1, CM2) rattrapait donc le mot « calcul » écrit au singulier, et
+  // « calcul rapide » accrochait une notion du programme.
+  // Conséquence, invisible et coûteuse : quand la notion vient du PROGRAMME, le
+  // moteur ne consulte pas la liste `notions` des ressources — « Le calcul
+  // rapide » ne touchait pas ses points de notion, et les parcours lui
+  // passaient devant. Il sortait en tête à tous les niveaux SAUF au CM1 et au
+  // CM2, exactement là où il commence.
+  // Un mot aussi courant ne désigne pas une notion à lui seul : c'est
+  // précisément ce que cette liste est faite pour dire.
+  "calculs", "calculer",
 ]);
 
 export type NotionTrouvee = { id: string; label: string; matiere: string; classe: string };
