@@ -313,7 +313,7 @@ const ROUTES: RouteConfig[] = [
   // ── ESPACES / AUDIENCES ────────────────────────────────────────────────────
   // Pages d'audience = portes du header et de l'accueil (destinations principales).
   { path: "/parents",         priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
-  { path: "/enseignants",     priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
+  { path: "/espace-profs",     priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
   { path: "/francais-de-l-etranger", priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-07-10") },
 
   // ── PROGRAMME PAR CLASSE (moteur SEO n°2 : les compétences des banques
@@ -324,7 +324,6 @@ const ROUTES: RouteConfig[] = [
   { path: "/espace-ecoles",   priority: 0.95, changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
   { path: "/espace-eleves",   priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/espace-parents",  priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
-  { path: "/espace-profs",    priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
 
   // ── AUTH (public) ──────────────────────────────────────────────────────────
   { path: "/auth/signin-eleve", priority: 0.8, changeFrequency: "monthly", lastMod: LASTMOD_CORE },

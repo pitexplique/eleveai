@@ -25,7 +25,7 @@ function hash12(s: string) {
 /** ✅ Retire tout ancien bloc Premium (évite de repartir sur un prompt “sale”) */
 function stripPremiumBlock(input: string) {
   const s = String(input || "").replace(/^\uFEFF/, "");
-  return s.replace(/\n?===\s*PRÉCISIONS\s*\(Valeria Premium\)\s*===([\s\S]*)$/i, "").trim();
+  return s.replace(/\n?===\s*PRÉCISIONS\s*\(Optimiseur Premium\)\s*===([\s\S]*)$/i, "").trim();
 }
 
 /**
@@ -34,13 +34,13 @@ function stripPremiumBlock(input: string) {
  */
 declare global {
   // eslint-disable-next-line no-var
-  var __VALERIA_PREMIUM_BY_CLIENT__: Map<string, string> | undefined;
+  var __OPTIMISEUR_PREMIUM_BY_CLIENT__: Map<string, string> | undefined;
 }
 function getClientIndex() {
-  if (!globalThis.__VALERIA_PREMIUM_BY_CLIENT__) {
-    globalThis.__VALERIA_PREMIUM_BY_CLIENT__ = new Map();
+  if (!globalThis.__OPTIMISEUR_PREMIUM_BY_CLIENT__) {
+    globalThis.__OPTIMISEUR_PREMIUM_BY_CLIENT__ = new Map();
   }
-  return globalThis.__VALERIA_PREMIUM_BY_CLIENT__;
+  return globalThis.__OPTIMISEUR_PREMIUM_BY_CLIENT__;
 }
 
 function clamp(n: number, a: number, b: number) {
@@ -223,7 +223,7 @@ function extractJsonText(resp: unknown): string {
  * Important: on ne "fait pas semblant" de connaître matière/niveau : on les DÉDUIT du prompt,
  * et on fournit des exemples adaptés au thème détecté.
  */
-function buildValeriaPremiumSystemPrompt(args: {
+function buildOptimiseurSystemPrompt(args: {
   type: string;
   audience: string;
   priorityGaps: readonly Gap[];
@@ -231,7 +231,11 @@ function buildValeriaPremiumSystemPrompt(args: {
   const { type, audience, priorityGaps } = args;
 
   return (
-    "Tu es Valeria Premium.\n" +
+    // ⛔ LE MODÈLE NE SE FAIT PLUS PASSER POUR QUELQU'UN (08/08/2026). Cette
+    // ligne lui disait « Tu es Valeria Premium » — c'est-à-dire qu'il se
+    // présentait sous le prénom d'une personne réelle à qui on n'a rien
+    // demandé. Le clin d'œil vit sur la page, pas dans la bouche du modèle.
+    "Tu es l'optimiseur de prompts pédagogiques d'EleveAI.\n" +
     "Mission: poser des questions de clarification qui TRANSFORMENT la ressource finale.\n" +
     "But: passer d’un prompt correct à une ressource immédiatement exploitable en classe.\n\n" +
 
@@ -290,7 +294,7 @@ async function llmGenerateQuestionsJSONOnce(args: {
     input: [
       {
         role: "system",
-        content: buildValeriaPremiumSystemPrompt({ type, audience, priorityGaps }),
+        content: buildOptimiseurSystemPrompt({ type, audience, priorityGaps }),
       },
       {
         role: "user",
@@ -305,7 +309,7 @@ async function llmGenerateQuestionsJSONOnce(args: {
     text: {
       format: {
         type: "json_schema",
-        name: "valeria_premium_questions",
+        name: "optimiseur_questions",
         description:
           "Questions de clarification premium (2 à 5) orientées exploitabilité terrain (données, tâches, traces).",
         schema,

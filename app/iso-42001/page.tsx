@@ -1,13 +1,13 @@
 // app/iso-42001/page.tsx
-// Page "Gouvernance IA" Valeria — inspirée ISO/IEC 42001 (AIMS)
+// Page "Gouvernance IA" d'EleveAI — inspirée ISO/IEC 42001 (AIMS)
 // ✅ Pédagogique, crédible, sans revendication de certification
 
 import Link from "next/link";
 
 export const metadata = {
-  title: "Gouvernance IA — inspirée ISO/IEC 42001 | Valeria",
+  title: "Gouvernance IA — inspirée ISO/IEC 42001",
   description:
-    "La philosophie de Valeria : supervision humaine, indicateurs, traçabilité et amélioration continue, inspirée des principes ISO/IEC 42001 (AIMS).",
+    "La philosophie d’EleveAI : supervision humaine, indicateurs, traçabilité et amélioration continue, inspirée des principes ISO/IEC 42001 (AIMS).",
 };
 
 export default function Iso42001Page() {
@@ -30,7 +30,7 @@ export default function Iso42001Page() {
           </h1>
 
           <p className="text-base text-slate-700 max-w-3xl">
-            Valeria applique des principes de pilotage d’un système IA :{" "}
+            EleveAI applique des principes de pilotage d’un système IA :{" "}
             <b>supervision humaine</b>, <b>indicateurs</b>, <b>traçabilité</b> et{" "}
             <b>amélioration continue</b>. Cette démarche est{" "}
             <b>inspirée des bonnes pratiques de la norme ISO/IEC 42001</b> (AI
@@ -40,13 +40,13 @@ export default function Iso42001Page() {
           <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3">
             <p className="text-sm text-amber-900">
               <b>Important :</b> cette page décrit une <b>démarche progressive</b>.
-              Valeria <b>n’affirme pas être certifié</b> ISO/IEC 42001 à ce stade.
+              EleveAI <b>n’affirme pas être certifié</b> ISO/IEC 42001 à ce stade.
             </p>
           </div>
 
           <div className="flex flex-wrap gap-2 pt-2">
             <Link
-              href="/optimiseur"
+              href="/prompt-pedagogique"
               className="inline-flex items-center justify-center rounded-xl bg-[#0047B6] px-4 py-2 text-sm font-semibold text-white hover:bg-[#003894]"
             >
               Accéder à l’Optimiseur
@@ -105,7 +105,7 @@ export default function Iso42001Page() {
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
             <h2 className="text-lg font-bold text-slate-900">4) Amélioration continue</h2>
             <p className="mt-2 text-sm text-slate-700">
-              Valeria progresse par boucle : mesurer → corriger → vérifier. C’est
+              EleveAI progresse par boucle : mesurer → corriger → vérifier. C’est
               l’esprit “système” (AIMS).
             </p>
             <ul className="mt-3 space-y-1 text-sm text-slate-700">
@@ -150,7 +150,7 @@ export default function Iso42001Page() {
 
           <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
             <p className="text-sm text-emerald-900">
-              <b>Principe clé :</b> Valeria aide à produire une ressource, mais
+              <b>Principe clé :</b> l’optimiseur aide à produire une ressource, mais
               <b> ne remplace pas l’enseignant</b> ni la vérification humaine.
             </p>
           </div>
@@ -158,7 +158,7 @@ export default function Iso42001Page() {
 
         {/* CHARTE COURTE */}
         <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-4">
-          <h2 className="text-xl font-extrabold text-[#0047B6]">Charte courte Valeria</h2>
+          <h2 className="text-xl font-extrabold text-[#0047B6]">Charte courte</h2>
 
           <ul className="space-y-2 text-sm text-slate-700">
             <li>
@@ -177,10 +177,10 @@ export default function Iso42001Page() {
 
           <div className="pt-2">
             <Link
-              href="/optimiseur"
+              href="/prompt-pedagogique"
               className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
             >
-              Tester Valeria maintenant
+              Tester l’optimiseur maintenant
             </Link>
           </div>
         </section>

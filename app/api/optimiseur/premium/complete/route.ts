@@ -11,7 +11,7 @@ import { getSession, deleteSession } from "@/lib/premiumSessionStore";
 function stripPremiumBlock(input: string) {
   const s = String(input || "").replace(/^\uFEFF/, "");
   return s
-    .replace(/\n?===\s*PRÉCISIONS\s*\(Valeria Premium\)\s*===([\s\S]*)$/i, "")
+    .replace(/\n?===\s*PRÉCISIONS\s*\(Optimiseur Premium\)\s*===([\s\S]*)$/i, "")
     .trim();
 }
 
@@ -96,7 +96,7 @@ export async function POST(req: Request) {
             "- N'ajoute pas de blabla.\n" +
             "- Évite les doublons (si déjà présent, harmonise).\n" +
             "- Corrige les fautes évidentes (ex: indicviduel -> individuel).\n" +
-            "- Sortie: UNIQUEMENT le prompt final (pas de bloc 'PRÉCISIONS (Valeria Premium)').",
+            "- Sortie: UNIQUEMENT le prompt final (pas de bloc 'PRÉCISIONS (Optimiseur Premium)').",
         },
         {
           role: "user",

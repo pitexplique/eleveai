@@ -165,7 +165,7 @@ export default function Sidebar({
 
   /**
    * NAV : alignée “Éducation + Entreprise”
-   * - Valeria Optimiseur (score / optimisation)
+   * - L'optimiseur de prompts pedagogiques (score / optimisation)
    * - section Éducation : Profs / Élèves
    * - section Entreprise : Consulting + Gouvernance IA (ISO)
    */
@@ -173,10 +173,10 @@ export default function Sidebar({
     () => [
       {
         kind: "link",
-        href: "/optimiseur",
-        label: "Valeria ",
+        href: "/prompt-pedagogique",
+        label: "L’optimiseur",
         // ✅ mieux : “inspirée ISO / AIMS” (pas “ISO” tout court)
-        description: "Optimisation mesurable de prompts ",
+        description: "Écrire un prompt pédagogique",
         icon: <BadgeCheck className="h-4 w-4 text-yellow-400" />,
       },
 
@@ -215,13 +215,6 @@ export default function Sidebar({
         icon: <Building2 className="h-3.5 w-3.5" />,
       },
 
-      {
-        kind: "link",
-        href: "/valeria",
-        label: "Valeria Consulting",
-        description: "Audit IA • Indicateurs • Gouvernance",
-        icon: <Building2 className="h-4 w-4 text-orange-400" />,
-      },
 
       // ✅ NEW : page ISO / Gouvernance IA
       {

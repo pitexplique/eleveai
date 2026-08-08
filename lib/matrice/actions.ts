@@ -56,10 +56,19 @@ export type ActionProfil = {
 // outils viendront dans leur propre session. Une action qui ouvre une page
 // approchante vaut mieux qu'une action qui ouvre une erreur.
 //
-// ⛔ « ÉCRIRE UN PROMPT PÉDAGOGIQUE » N'EST PAS DANS CETTE LISTE. C'est le seul
-// des quatre qui n'a AUCUN équivalent en ligne — le brancher sur une page
-// approchante aurait été un mensonge, pas un pis-aller. Il reste demandé (le
-// travail fait avec Valeria), et il reste à faire.
+// ⭐ « ÉCRIRE UN PROMPT PÉDAGOGIQUE » EST REVENUE LE 08/08 — ET ELLE EXISTAIT
+// DÉJÀ. Je l'avais retirée la veille : c'était le seul des quatre outils sans
+// équivalent en ligne, et le brancher sur une page approchante aurait été un
+// mensonge. Or l'outil tournait depuis des mois sous le nom `/optimiseur`,
+// avec un titre qui parlait d'autre chose. Renommé `/prompt-pedagogique`, il
+// est devenu trouvable — pour Google comme pour cette liste.
+// 🔑 La leçon vaut au-delà : avant de déclarer qu'une chose n'existe pas,
+// chercher sous quel autre nom elle vit. C'est la quatrième fois de la semaine.
+//
+// ⚠️ IL EST RÉSERVÉ AUX CONNECTÉS (`if (!eleve)` dans OptimiseurClient) et il
+// sert AUSSI AUX ÉLÈVES — Frédéric : « un prof ou un élève tape un prompt et ça
+// l'optimise ». S'il entre un jour dans les chips des élèves, ce n'est pas un
+// oubli à corriger ici : c'est une décision à prendre.
 //
 // ⏳ CE QU'IL FAUDRA CONSTRUIRE, et la donnée est déjà là :
 //   — « Trouver une ressource » : `type` et `resultat` viennent d'entrer dans
@@ -68,29 +77,71 @@ export type ActionProfil = {
 //   — « Préparer une progression » : les 431 notions du programme portent
 //     désormais leurs PRÉREQUIS (notions.generated.ts, régénéré le 07/08) —
 //     de quoi proposer un ordre, pas seulement une liste.
+// ⭐ LES QUATRE ACTIONS DU PROFESSEUR, DANS L'ORDRE DICTÉ PAR FRÉDÉRIC (08/08) :
+//   1. Coach — « le prof se met à la place de l'élève » ;
+//   2. Évaluation — c'est le PARCOURS ;
+//   3. Espace Profs ;
+//   4. Prompt pédagogique.
+//
+// Ce qui change par rapport à la veille : les trois premières menaient à des
+// pages approchantes faute de mieux (`/explorer`, `/programme/6e`,
+// `/evaluation-nationale-college`). Elles mènent maintenant aux outils que le
+// professeur ouvre vraiment — et les quatre existent, ce qui n'était pas le cas
+// il y a vingt-quatre heures.
 const PROF: ActionProfil[] = [
   {
-    label: "Trouver une ressource",
-    // ⏳ Remplacer par le filtre dédié : /explorer est un catalogue, il ne
-    // sait pas trier par niveau + notion + type + « ça rend un résultat ».
-    href: "/explorer",
-    aide: "Le catalogue complet des ressources d'EleveAI",
+    // Le coach, vu du côté de l'élève. C'est comme ça qu'un enseignant décide
+    // s'il le donne à sa classe : en le faisant lui-même, pas en lisant une
+    // page qui le décrit.
+    // ⚠️ Le coach n'était PAS ouvert au profil `prof` dans ressources.ts avant
+    // le 08/08 — la ressource la plus utilisée du site était invisible à celui
+    // qui la prescrit.
+    label: "Coach",
+    href: "/coach-ia/maths",
+    aide: "Se mettre à la place de l'élève : une question à la fois, corrigée",
     intention: "enseigner",
   },
   {
-    label: "Préparer une progression",
-    // ⚠️ `/programme` seul est un 404 : la route est `/programme/[classe]`.
-    // La 6ᵉ est l'entrée déjà utilisée par la matrice (ressource
-    // « programme-seo »), et chaque page de programme mène aux autres.
-    href: "/programme/6e",
-    aide: "Ce qui est au programme, classe par classe, et de quoi l'entraîner",
-    intention: "enseigner",
+    // ⭐ « ÉVALUATION » ET NON « PARCOURS » (Frédéric, 08/08 : « parcours ne
+    // veut rien dire, changer en évaluation dans les chips »).
+    //
+    // Le mot « parcours » est du vocabulaire d'EleveAI : il dit comment la
+    // chose est faite, pas à quoi elle sert. Un professeur, lui, cherche « une
+    // évaluation toute faite » — ses mots exacts, suivis de « je l'ai utilisée
+    // l'année dernière ! ». C'est la meilleure raison de renommer quelque
+    // chose : quelqu'un l'a utilisé et ne l'appelle pas comme nous.
+    //
+    // ⚠️ La destination NE CHANGE PAS — c'est bien /parcours qui s'ouvre, et
+    // c'est lui qui rend un bilan de compétences noté. On a changé le mot, pas
+    // la chose.
+    //
+    // ⏳ CE QU'ELLE NE FAIT PAS ENCORE, et il faut le savoir avant de la
+    // promettre : elle évalue TOUS LES CHAPITRES de l'année, en bloc. Frédéric,
+    // 08/08 : « plus tard on pourra sélectionner le chapitre ». Tant que ce
+    // n'est pas fait, l'aide dit « toute l'année » — un professeur qui la lance
+    // en septembre pour évaluer une seule notion serait déçu, et c'est le genre
+    // de déception qui coûte un utilisateur.
+    // ⭐ ET ÇA SERT DE DEVOIR MAISON (Frédéric, 08/08). Ce n'est pas un détail
+    // d'habillage : une évaluation se passe en classe, sous surveillance, et se
+    // range dans un créneau ; un devoir maison se donne le vendredi et se
+    // relève le lundi. Même outil, deux moments de la semaine — et c'est le
+    // second qui fait qu'on s'en sert souvent plutôt qu'une fois par trimestre.
+    label: "Évaluation",
+    href: "/parcours",
+    aide: "Une évaluation toute faite sur toute l'année, ou un devoir maison — bilan noté",
+    intention: "tester",
   },
   {
-    label: "Préparer une évaluation",
-    href: "/evaluation-nationale-college",
-    aide: "Les évaluations nationales, leurs épreuves blanches et leur suivi",
-    intention: "preparer",
+    label: "Espace Profs",
+    href: "/espace-profs",
+    aide: "Le suivi élève par élève, et les ressources à donner",
+    intention: "suivre",
+  },
+  {
+    label: "Prompt pédagogique",
+    href: "/prompt-pedagogique",
+    aide: "Votre demande est notée sur 20, complétée, puis réécrite",
+    intention: "enseigner",
   },
 ];
 

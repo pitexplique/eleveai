@@ -24,7 +24,7 @@ import EntreeMatrice from "@/components/matrice/EntreeMatrice";
 /** Un pied de page sobre : des repères, pas une seconde page d'accueil. */
 const PIED = [
   { label: "Comment ça marche", href: "/pourquoi-eleveai" },
-  { label: "Enseignants", href: "/enseignants" },
+  { label: "Enseignants", href: "/espace-profs" },
   { label: "Établissements", href: "/espace-ecoles" },
   { label: "Parents", href: "/parents" },
   { label: "Toutes les ressources", href: "/explorer" },

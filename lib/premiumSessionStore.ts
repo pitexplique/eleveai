@@ -21,16 +21,16 @@ export type PremiumSession = {
 const TTL_MS = 2 * 60 * 60 * 1000; // 2h
 
 declare global {
-  var __VALERIA_PREMIUM_SESSIONS__:
+  var __OPTIMISEUR_PREMIUM_SESSIONS__:
     | Map<string, PremiumSession>
     | undefined;
 }
 
 function getStore() {
-  if (!globalThis.__VALERIA_PREMIUM_SESSIONS__) {
-    globalThis.__VALERIA_PREMIUM_SESSIONS__ = new Map();
+  if (!globalThis.__OPTIMISEUR_PREMIUM_SESSIONS__) {
+    globalThis.__OPTIMISEUR_PREMIUM_SESSIONS__ = new Map();
   }
-  return globalThis.__VALERIA_PREMIUM_SESSIONS__;
+  return globalThis.__OPTIMISEUR_PREMIUM_SESSIONS__;
 }
 
 export function createSession(session: PremiumSession) {

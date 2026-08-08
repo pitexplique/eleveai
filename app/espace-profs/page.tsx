@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Enseignants — EleveAI",
+  title: "Suivre vos élèves et trouver vos ressources",
   description:
     "Voyez où en sont vos élèves et utilisez EleveAI en classe : tableau de bord en temps réel, calcul rapide en direct avec résultats validés, remédiation ciblée par prérequis. Vous restez la référence.",
   alternates: { canonical: "https://eleveai.fr/enseignants" },

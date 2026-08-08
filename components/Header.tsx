@@ -280,7 +280,7 @@ function MobileSection({
 const AUDIENCE_DOORS: { space: Audience; emoji: string; label: string; href: string }[] = [
   { space: "eleve", emoji: "🎓", label: "Élèves", href: "/espace-eleves" },
   { space: "parent", emoji: "👪", label: "Parents", href: "/parents" },
-  { space: "enseignant", emoji: "🍎", label: "Enseignants", href: "/enseignants" },
+  { space: "enseignant", emoji: "🍎", label: "Enseignants", href: "/espace-profs" },
   { space: "etablissement", emoji: "🏫", label: "Établissements", href: "/espace-ecoles" },
 ];
 

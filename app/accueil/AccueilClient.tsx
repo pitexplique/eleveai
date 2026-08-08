@@ -322,7 +322,7 @@ const CLE_AUDIENCE = "eleveai-audience";
  */
 const ESPACE_ADULTE: Partial<Record<Colonne, { href: string; kicker: string; titre: string }>> = {
   principal: { href: "/espace-ecoles", kicker: "🏫 Votre établissement", titre: "Financement, RGPD, déploiement" },
-  prof: { href: "/enseignants", kicker: "🍎 Votre classe", titre: "Le suivi élève par élève" },
+  prof: { href: "/espace-profs", kicker: "🍎 Votre classe", titre: "Le suivi élève par élève" },
   parent: { href: "/parents", kicker: "👪 Votre enfant", titre: "Ça aide ? C'est sûr ? Ça coûte quoi ?" },
   entreprise: { href: "/entreprises", kicker: "🏭 Votre entreprise", titre: "Soutenir l'aventure" },
 };
@@ -363,7 +363,7 @@ const OREILLES: Record<Colonne, { gauche: Oreille; droite: Oreille }> = {
       action: "Explorer le catalogue →",
     },
     droite: {
-      href: "/enseignants",
+      href: "/espace-profs",
       kicker: "🧑‍🏫 Professeurs",
       titre: "Vos élèves s'entraînent, la correction est déjà faite",
       action: "Ouvrir le tableau de suivi →",
@@ -375,7 +375,7 @@ const OREILLES: Record<Colonne, { gauche: Oreille; droite: Oreille }> = {
   // fois, à un autre endroit de la page.
   prof: {
     gauche: {
-      href: "/enseignants",
+      href: "/espace-profs",
       kicker: "🍎 Votre classe",
       titre: "Vos élèves s'entraînent, la correction est déjà faite",
       action: "Ouvrir le tableau de suivi →",
@@ -3324,7 +3324,7 @@ export default function AccueilPage({
             </p>
             <p className="mt-1.5 text-sm font-black text-cyan-800">En savoir plus →</p>
           </Link>
-          <Link prefetch={false} href="/enseignants" className="group border-t border-[#1d1c16]/25 pt-3">
+          <Link prefetch={false} href="/espace-profs" className="group border-t border-[#1d1c16]/25 pt-3">
             <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">🍎 Enseignants</p>
             <h3 className="mt-1 font-serif text-xl font-black leading-snug group-hover:underline">
               Suivez leur progression

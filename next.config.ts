@@ -14,7 +14,7 @@ const nextConfig = {
       // s'en va. Si le sujet revient, les données sont là.
       {
         source: "/presets",
-        destination: "/enseignants",
+        destination: "/espace-profs",
         permanent: true,
       },
       // /ia a été le banc d'essai de la nouvelle entrée (05/08/2026), le temps
@@ -27,6 +27,65 @@ const nextConfig = {
       {
         source: "/ia",
         destination: "/",
+        permanent: true,
+      },
+      // ⭐ TROIS PORTES POUR LES ENSEIGNANTS, IL N'EN RESTE QU'UNE (08/08/2026).
+      // `/enseignants`, `/espace-profs` et `/profs` existaient en parallèle,
+      // sans aucune redirection entre elles. Ce n'était pas qu'un désordre
+      // interne : Google en affichait DEUX comme rubriques du site sous le
+      // résultat de marque — « Espace professeurs » et « Enseignants » — soit
+      // deux emplacements sur cinq pour le même public. Rien ne lui disait
+      // laquelle est la bonne, puisque rien ne le disait nulle part.
+      //
+      // `/enseignants` gagne : c'est celle que le header pointe, celle que la
+      // matrice propose, celle du sitemap, et la plus fournie (365 lignes
+      // contre 220 et 75).
+      //
+      // ⚠️ CE QU'ON PERD, ET OÙ LE RETROUVER : `/profs` racontait « vous
+      // formulez une consigne → l'IA propose → vous jugez ». C'est exactement
+      // l'outil « Écrire un prompt pédagogique » qui reste à construire (point
+      // 12 de la refonte). Frédéric, 08/08 : « EleveAI n'est plus une machine à
+      // presets, sauf si après on veut se servir du générateur de prompts
+      // pédagogique Valeria ». Le texte est dans l'historique git — chercher
+      // `app/profs/page.tsx` avant ce commit.
+      {
+        source: "/enseignants",
+        destination: "/espace-profs",
+        permanent: true,
+      },
+      {
+        source: "/profs",
+        destination: "/espace-profs",
+        permanent: true,
+      },
+      // ⭐ VALERIA S'EN VA, L'OPTIMISEUR RESTE (Frédéric, 08/08 : « enlever tous
+      // valeria et rediriger vers optimiseur, qui est nettement mieux »).
+      // Les deux pages portaient une offre de conseil en IA qui n'a rien à voir
+      // avec ce que fait EleveAI aujourd'hui, et `/valeria-consulting` traînait
+      // depuis des mois avec un `metadata.ts` mort — elle affichait donc le
+      // titre de l'accueil dans Google, c'est-à-dire qu'elle lui prenait sa
+      // place sur le nom de la marque.
+      // ⚠️ `/optimiseur` n'est pas un remplacement de façade : c'est l'outil qui
+      // fait vraiment le travail (app/api/optimiseur/*), et il est déjà en
+      // ligne. Le seul lien interne vers Valeria était dans la Sidebar.
+      {
+        source: "/valeria",
+        destination: "/prompt-pedagogique",
+        permanent: true,
+      },
+      {
+        source: "/valeria-consulting",
+        destination: "/prompt-pedagogique",
+        permanent: true,
+      },
+      // `/optimiseur` est devenue `/prompt-pedagogique` le meme jour : personne
+      // ne TAPE « optimiseur » pour trouver ca, alors que « prompt pedagogique »
+      // se cherche. Le NOM, lui, reste sur la page — les eleves de Frederic
+      // l'appellent l'optimiseur, et un nom que de vrais utilisateurs ont
+      // adopte ne se jette pas. L'adresse et le nom ne sont pas le meme metier.
+      {
+        source: "/optimiseur",
+        destination: "/prompt-pedagogique",
         permanent: true,
       },
       // Renommage kit-de-survie → guide-de-survie (26/07/2026) : l'ancienne

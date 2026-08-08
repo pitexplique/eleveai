@@ -1,4 +1,21 @@
-// app/optimiseur/OptimiseurClient.tsx
+// app/prompt-pedagogique/OptimiseurClient.tsx
+//
+// Le composant garde son nom : « l'optimiseur » est le mot que les élèves
+// emploient, et Frédéric le rappelle le 08/08 — « mes élèves adoraient
+// l'optimiseur ! ». Seule la ROUTE a changé ce jour-là : /optimiseur est
+// devenue /prompt-pedagogique, parce que personne ne TAPE « optimiseur » pour
+// trouver ça. Le nom qu'on prononce et la phrase qu'on cherche ne sont pas le
+// même métier. Voir metadata.ts.
+//
+// ⭐ « VALERIA » SUR LE BADGE EST UN CLIN D'ŒIL, ET IL RESTE (Frédéric, 08/08).
+// ⛔ MAIS SEULEMENT LE PRÉNOM, AINSI ORTHOGRAPHIÉ. Jamais le nom de famille,
+// jamais la fonction, jamais les deux ensemble : c'est une personne réelle,
+// elle n'a rien demandé, et un clin d'œil cesse d'en être un dès qu'il devient
+// identifiable. Même règle que pour les autres personnes citées dans le site.
+// ⚠️ Le nom a par ailleurs été retiré de TOUT le reste le même jour : les
+// routes /valeria et /valeria-consulting (supprimées), la page de gouvernance
+// ISO, la Sidebar, et surtout l'instruction système envoyée au modèle, qui lui
+// faisait dire « Tu es Valeria Premium ».
 // ✅ Version PUBLIQUE (élèves + profs)
 // - Retire le bandeau ISO/AIMS + la section "Validation humaine"
 // - Garde : chips Type + Public, scoring, optimisation, courbe, historique, label "attendus"
@@ -435,7 +452,7 @@ export default function OptimiseurClient() {
   const runOptimisation = async () => {
     const initial = (promptRef.current || prompt || "").trim();
     if (!initial) {
-      setError("Colle un prompt avant de lancer Valeria.");
+      setError("Colle un prompt avant de lancer l’optimiseur.");
       return;
     }
 
@@ -772,7 +789,7 @@ const startPremium = async () => {
         {sessionPrete && (
           <div className="mx-auto w-full max-w-xl px-4 py-24 text-center space-y-5">
             <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-sky-900">
-              ✨ Valeria — Optimiseur de prompts pédagogique
+              ✨ Valeria — l’optimiseur de prompts pédagogiques
             </p>
             <h1 className="text-3xl font-extrabold text-[#0047B6]">
               Réservé aux utilisateurs connectés
@@ -800,7 +817,7 @@ const startPremium = async () => {
 <header className="space-y-3">
   <div className="flex flex-wrap items-center gap-2">
     <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-xs font-semibold text-sky-900">
-      ✨ Valeria — Optimiseur de prompts pédagogique
+      ✨ Valeria — l’optimiseur de prompts pédagogiques
     </p>
   </div>
 
@@ -809,14 +826,14 @@ const startPremium = async () => {
   </h1>
 
   <p className="text-sm text-slate-700 max-w-2xl">
-    Valeria analyse ton prompt, le note sur 20 (grille v{RUBRIC_VERSION}) et
+    L’optimiseur analyse ton prompt, le note sur 20 (grille v{RUBRIC_VERSION}) et
     propose des améliorations progressives pour atteindre un niveau
     pédagogique élevé. Tu peux suivre l’évolution du score et décider
     quand arrêter l’optimisation.
   </p>
 
   <p className="text-[12px] text-slate-500 max-w-2xl">
-    🔒 Valeria intègre en interne des garde-fous de qualité et de sécurité
+    🔒 L&apos;optimiseur intègre en interne des garde-fous de qualité et de sécurité
     inspirés des bonnes pratiques de gouvernance de l’IA (ISO/IEC 42001)
     afin de limiter les dérives et améliorer la fiabilité des prompts.
   </p>
@@ -1078,7 +1095,7 @@ const startPremium = async () => {
                   : "bg-[#0047B6] text-white hover:bg-[#003894]"
               }`}
             >
-              ✨ Lancer Valeria
+              ✨ Lancer l’optimiseur
             </button>
 
             <button
@@ -1095,7 +1112,7 @@ const startPremium = async () => {
             </button>
 
             {loading && (
-              <span className="text-xs text-slate-600">Valeria tourne… (tu peux Stop quand tu veux)</span>
+              <span className="text-xs text-slate-600">L’optimiseur tourne… (tu peux Stop quand tu veux)</span>
             )}
 
             {stopped && !loading && (
@@ -1221,7 +1238,7 @@ const startPremium = async () => {
           <h2 className="text-lg font-bold text-[#0047B6]">3) Historique</h2>
 
           {history.length === 0 ? (
-            <p className="text-sm text-slate-600">Aucun run. Clique sur “Scorer” ou “Lancer Valeria”.</p>
+            <p className="text-sm text-slate-600">Aucun run. Clique sur “Scorer” ou “Lancer l’optimiseur”.</p>
           ) : (
             <div className="space-y-2">
               {history

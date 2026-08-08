@@ -473,7 +473,7 @@ export default function EspaceEcolesPage() {
               📩 Demander le pilote gratuit
             </Link>
             <Link
-              href="/enseignants"
+              href="/espace-profs"
               className="rounded-2xl border border-white/40 bg-white/10 px-8 py-4 text-base font-black text-white hover:bg-white/20 transition"
             >
               Voir l'espace enseignant

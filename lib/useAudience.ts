@@ -53,7 +53,7 @@ export function useAudience(): AudienceState {
   if (role === "prof") space = "enseignant";
   else if (role === "principal" || role === "boss") space = "etablissement";
   else if (pathname.startsWith("/parents")) { space = "parent"; fromRoute = true; }
-  else if (pathname.startsWith("/enseignants")) { space = "enseignant"; fromRoute = true; }
+  else if (pathname.startsWith("/espace-profs")) { space = "enseignant"; fromRoute = true; }
   else if (pathname.startsWith("/espace-ecoles")) { space = "etablissement"; fromRoute = true; }
   else space = remembered ?? "eleve";
 

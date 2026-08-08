@@ -39,7 +39,12 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "Le coach maths",
     promesse: "Une question à la fois, corrigée, avec l'explication quand tu te trompes.",
     url: "/coach-ia/maths",
-    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
+    // ⭐ « prof » AJOUTE LE 08/08. Un enseignant ne voyait NI le coach NI les
+    // parcours : les deux ressources qui gardent une trace du travail des
+    // eleves etaient invisibles a celui qui les leur donne. C'est exactement
+    // la demande « trouver une ressource utilisable par mes eleves, avec un
+    // resultat a la cle » (point 12 de la refonte).
+    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof"],
     matiere: "maths",
     notions: ["*"],
     // « preparer » aussi : un élève qui a un contrôle vendredi vient s'entraîner
@@ -121,7 +126,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "Les parcours",
     promesse: "Une série guidée qui monte en difficulté, du début à la fin.",
     url: "/parcours",
-    niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
+    // « prof » aussi — voir la note sur le coach maths.
+    niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof"],
     matiere: "maths",
     notions: ["*"],
     intentions: ["tester", "entrainer", "preparer"],
@@ -184,6 +190,44 @@ export const RESSOURCES: RessourceEleveAI[] = [
     intentions: ["tester", "entrainer", "decouvrir", "comprendre"],
     type: "parcours",
     resultat: "score",
+    statut: "validee",
+  },
+  {
+    // ⚠️ `/espace-profs`, ET C'EST LA SEULE (08/08). Trois routes existaient en
+    // parallèle — `/enseignants`, `/espace-profs`, `/profs` — sans aucune
+    // redirection entre elles, et Google en affichait DEUX comme rubriques du
+    // site sous le résultat de marque : deux emplacements sur cinq pour le même
+    // public. Frédéric a tranché le nom qui survit ; les deux autres partent
+    // en 301 (voir next.config.ts).
+    id: "espace-enseignants",
+    titre: "L'espace enseignant",
+    promesse: "Le suivi élève par élève, et les ressources à donner.",
+    url: "/espace-profs",
+    niveaux: ["prof"],
+    notions: ["*"],
+    intentions: ["enseigner", "suivre", "comprendre"],
+    type: "page",
+    statut: "validee",
+  },
+  {
+    // ⭐ AJOUTÉ LE 08/08 (Frédéric : « il faudra dans la matrice ressources
+    // rajouter espace-profs et prompt pédagogique si on clique sur profs en
+    // page d'accueil »). L'outil tournait depuis des mois sous le nom
+    // `/optimiseur` — un mot que personne ne cherche — et n'était donc proposé
+    // à aucun enseignant.
+    // ⚠️ RÉSERVÉ AUX CONNECTÉS : la page affiche un mur si `!eleve`. On le
+    // propose quand même, parce que la connexion est gratuite et que la
+    // ressource est réelle — mais il faut le savoir avant de s'étonner.
+    // ⏭️ Il sert AUSSI aux élèves ; l'ouvrir à leurs niveaux est une décision
+    // à prendre, pas un oubli.
+    id: "prompt-pedagogique",
+    titre: "Écrire un prompt pédagogique",
+    promesse: "Votre demande est notée sur 20, complétée, puis réécrite.",
+    url: "/prompt-pedagogique",
+    niveaux: ["prof"],
+    notions: ["*"],
+    intentions: ["enseigner"],
+    type: "page",
     statut: "validee",
   },
 
@@ -737,21 +781,6 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["prof", "parent"],
     notions: ["*"],
     intentions: ["enseigner", "comprendre"],
-    type: "page",
-    statut: "validee",
-  },
-  {
-    // ⚠️ /enseignants, PAS /espace-profs (Frédéric, 06/08). Les deux routes
-    // existent — c'est /enseignants que le header pointe et que les profs
-    // connaissent. L'autre reste en ligne, elle n'est simplement plus ce que
-    // la matrice propose.
-    id: "espace-enseignants",
-    titre: "L'espace enseignant",
-    promesse: "Le suivi élève par élève, et les ressources à donner.",
-    url: "/enseignants",
-    niveaux: ["prof"],
-    notions: ["*"],
-    intentions: ["enseigner", "suivre", "comprendre"],
     type: "page",
     statut: "validee",
   },
