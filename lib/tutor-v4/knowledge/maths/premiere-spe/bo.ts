@@ -1,7 +1,7 @@
 // knowledge/maths/premiere-spe/bo.ts
 //
 // Grands domaines du programme de spécialité mathématiques de Première générale
-// (BO 2019). Cinq parties de contenus, plus le vocabulaire ensembliste et
+// (BO). Cinq parties de contenus, plus le vocabulaire ensembliste et
 // logique, que le programme traite comme une partie à part entière —
 // « transversale à tous les chapitres du programme », précise-t-il.
 

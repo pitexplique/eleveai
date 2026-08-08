@@ -1,6 +1,6 @@
 // lib/calcul-rapide/data/seconde/calculs.templates.ts
 //
-// Les automatismes de Seconde du BO 2019 : identités remarquables de tête,
+// Les automatismes de Seconde du BO : identités remarquables de tête,
 // puissances, racines, images et antécédents, taux d'évolution, moyennes.
 //
 // ⚠️ CONTRAINTE DU MOTEUR : `answerRule` est évaluée en JavaScript et rend un

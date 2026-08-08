@@ -8,7 +8,7 @@
 //   sd_signe        — étudier le signe d'un trinôme
 //   sd_canonique    — forme canonique, sommet, axe de symétrie
 //
-// PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM. Canvas : fonctionGraphique (parabole).
+// PÉRIMÈTRE BO Première spé. Conventions : LaTeX, règle QCM. Canvas : fonctionGraphique (parabole).
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 

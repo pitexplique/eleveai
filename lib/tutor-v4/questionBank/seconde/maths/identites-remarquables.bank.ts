@@ -9,7 +9,7 @@
 //   ir_application       — Appliquer les identites dans les deux sens
 //
 // Niveau 5 etoiles : items avec racines carrees (certains profs les introduisent ici).
-// PERIMETRE BO 2019. Conventions : LaTeX, regle QCM.
+// PERIMETRE BO. Conventions : LaTeX, regle QCM.
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 

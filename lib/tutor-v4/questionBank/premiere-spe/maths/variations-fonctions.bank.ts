@@ -7,7 +7,7 @@
 //   var_extremum      — déterminer un extremum
 //   var_optimisation  — résoudre un problème d'optimisation
 //
-// PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM. Canvas : fonctionGraphique.
+// PÉRIMÈTRE BO Première spé. Conventions : LaTeX, règle QCM. Canvas : fonctionGraphique.
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 

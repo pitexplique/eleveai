@@ -6,7 +6,7 @@
 //   expr_exprimer_variable  — Exprimer une variable en fonction des autres (formules)
 //   expr_reduire_substituer — Reduire une expression et substituer une valeur
 //
-// PERIMETRE BO 2019 (exprimer une variable : U=RI, d=vt, V=abc, V=pi r^2 h, ax+by=c).
+// PERIMETRE BO (exprimer une variable : U=RI, d=vt, V=abc, V=pi r^2 h, ax+by=c).
 // Conventions : LaTeX, regle QCM.
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";

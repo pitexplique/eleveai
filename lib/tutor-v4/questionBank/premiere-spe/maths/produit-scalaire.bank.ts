@@ -19,7 +19,7 @@
 // changé leur `microId` sans toucher à leur `id` (ils ont un historique de
 // réponses d'élèves). Se fier au `microId`, pas au commentaire de section.
 //
-// PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM.
+// PÉRIMÈTRE BO Première spé. Conventions : LaTeX, règle QCM.
 // Canvas : fonctionGraphique (vecteurs comme points), triangle (Al-Kashi).
 //
 // Règle d'écriture : un `fixed` pour une valeur exceptionnelle, un piège, une

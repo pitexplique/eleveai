@@ -2,7 +2,7 @@
 //
 // Notion : Multiples, diviseurs et nombres premiers (arithmetique_entiers)
 //
-// PERIMETRE BO 2019 (strict) : multiple, diviseur, pair, impair, nombre premier,
+// PERIMETRE BO (strict) : multiple, diviseur, pair, impair, nombre premier,
 // fraction irreductible (par division par un diviseur commun).
 // HORS PROGRAMME seconde -> volontairement ABSENTS : PGCD, PPCM, decomposition
 // en facteurs premiers.

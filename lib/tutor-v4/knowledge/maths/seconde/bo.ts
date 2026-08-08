@@ -1,6 +1,6 @@
 import type { KnowledgeBoCompetence } from "@/lib/tutor-v4/types";
 
-// Cinq grandes parties du programme officiel de seconde (BO 2019)
+// Cinq grandes parties du programme officiel de seconde (BO)
 // + le vocabulaire ensembliste et logique (section transversale du programme).
 export const bo: KnowledgeBoCompetence[] = [
   { boId: "BO2N1", label: "Nombres et calculs" },

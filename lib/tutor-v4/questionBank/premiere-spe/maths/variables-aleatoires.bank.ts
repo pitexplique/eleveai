@@ -17,7 +17,7 @@
 // restés à leur place dans le fichier, mais leur `microId` a été réaffecté
 // (leur `id` est inchangé). C'est le `microId` qui fait foi.
 //
-// PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM.
+// PÉRIMÈTRE BO Première spé. Conventions : LaTeX, règle QCM.
 // Canvas : stat_graph (loi en bâtons), scratch (algorithmes de simulation).
 //
 // Règle d'écriture : un `fixed` pour une valeur exceptionnelle, un piège, une

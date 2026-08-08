@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title:
     "Guide de survie spé maths Première : formules, pièges, réflexes (gratuit, à imprimer)",
   description:
-    "Le guide de survie de la spécialité maths en Première : les 11 chapitres du programme (BO 2019) en fiches — formules essentielles, réflexes, pièges classiques et test corrigé par chapitre. Gratuit, imprimable en A4, relié au coach en ligne.",
+    "Le guide de survie de la spécialité maths en Première : les 11 chapitres du programme (BO) en fiches — formules essentielles, réflexes, pièges classiques et test corrigé par chapitre. Gratuit, imprimable en A4, relié au coach en ligne.",
   alternates: { canonical: "https://eleveai.fr/guide-de-survie/maths-premiere" },
   openGraph: {
     title: "Guide de survie · Spé maths Première (gratuit, à imprimer)",

@@ -1,10 +1,10 @@
 // ─── Guide de survie · Spé maths Terminale ──────────────────────────────────
 // Contenu ALIGNÉ sur le coach (source de vérité unique) :
 // - chapitres      = notions de lib/tutor-v4/knowledge/maths/terminale-spe/notions.ts
-// - checklists     = micro-compétences de microSkills.ts (libellés du BO 2019)
+// - checklists     = micro-compétences de microSkills.ts (libellés du BO)
 // - test de survie = items "fixed" puisés dans les banques du coach
 // Condensés écrits par 18 rédacteurs parallèles (workflow du 26/07) puis VÉRIFIÉS
-// à la main contre le BO 2019 et les banques (exactitude des exemples, périmètre
+// à la main contre le BO et les banques (exactitude des exemples, périmètre
 // Terminale strict — pas de débordement vers le supérieur, couverture des micros).
 // Ici on n'écrit QUE le condensé de survie ; checklists + tests sont dérivés.
 

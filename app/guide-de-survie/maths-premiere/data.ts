@@ -1,7 +1,7 @@
 // ─── Guide de survie · Spé maths Première ─────────────────────────────────────
 // Contenu ALIGNÉ sur le coach (source de vérité unique) :
 // - chapitres      = notions de lib/tutor-v4/knowledge/maths/premiere-spe/notions.ts
-// - checklists     = micro-compétences de microSkills.ts (libellés du BO 2019)
+// - checklists     = micro-compétences de microSkills.ts (libellés du BO)
 // - test de survie = items "fixed" puisés dans les banques du coach
 // Ici on n'écrit QUE le condensé de survie : essentiel, formules, réflexes,
 // pièges, « en vrai ». Le reste est dérivé automatiquement.

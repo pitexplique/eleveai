@@ -1,6 +1,6 @@
 import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
-// Micro-competences de seconde alignees sur le programme officiel (BO 2019).
+// Micro-competences de seconde alignees sur le programme officiel (BO).
 export const microSkills: MicroSkillSource[] = [
   /* ===================== reels_intervalles ===================== */
   { id: "reels_ensembles", label: "Distinguer les ensembles N, Z, D, Q et R", notionId: "reels_intervalles", prerequis: [] },

@@ -19,7 +19,7 @@
 // (leur `id` est inchangé). C'est le `microId` qui fait foi, pas le
 // commentaire de section.
 //
-// PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM.
+// PÉRIMÈTRE BO Première spé. Conventions : LaTeX, règle QCM.
 // Canvas : arbre_proba, tableau_donnees (tableau croisé).
 //
 // Règle d'écriture : un `fixed` pour une valeur exceptionnelle, un piège, une

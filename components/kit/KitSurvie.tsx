@@ -295,7 +295,9 @@ export default function KitSurvie({ data }: { data: KitData }) {
           </p>
 
           <div className="mb-5 flex flex-wrap items-center justify-center gap-2 text-[12px] font-semibold text-slate-700">
-            <span className="rounded-full bg-emerald-50 px-3 py-1 ring-1 ring-emerald-200">✅ Conforme au programme (BO 2019)</span>
+            {/* ⛔ JAMAIS L'ANNÉE DU BO. Un guide daté 2019 se lit comme un guide
+               périmé, alors que le programme, lui, est celui de cette année. */}
+            <span className="rounded-full bg-emerald-50 px-3 py-1 ring-1 ring-emerald-200">✅ Conforme au programme (BO)</span>
             <span className="rounded-full bg-rose-50 px-3 py-1 ring-1 ring-rose-200">🌺 Conçu à La Réunion par un professeur</span>
             <span className="rounded-full bg-teal-50 px-3 py-1 ring-1 ring-teal-200">🧠 Relié au coach en ligne gratuit</span>
           </div>

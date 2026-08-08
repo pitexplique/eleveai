@@ -1,7 +1,7 @@
 // knowledge/maths/premiere-spe/notions.ts
 //
 // Notions (chapitres) de la spécialité mathématiques de Première générale.
-// Strictement alignées sur le BO 2019 — rien hors programme.
+// Strictement alignées sur le BO — rien hors programme.
 //
 // Organisation :
 // - Algèbre        : suites numériques ; second degré

@@ -8,7 +8,7 @@
 //   suite_variation     — sens de variation d'une suite
 //   suite_sommes        — sommes 1+2+...+n et 1+q+...+q^n
 //
-// PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM (bonne réponse en 1re position, mélangée par le moteur).
+// PÉRIMÈTRE BO Première spé. Conventions : LaTeX, règle QCM (bonne réponse en 1re position, mélangée par le moteur).
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 

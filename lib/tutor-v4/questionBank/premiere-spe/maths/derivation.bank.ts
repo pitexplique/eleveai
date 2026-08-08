@@ -7,7 +7,7 @@
 //   der_operations — dérivée d'une somme, d'un produit, d'un quotient
 //   der_tangente   — équation de la tangente en un point
 //
-// PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM. Canvas : fonctionGraphique (courbe + tangente).
+// PÉRIMÈTRE BO Première spé. Conventions : LaTeX, règle QCM. Canvas : fonctionGraphique (courbe + tangente).
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 

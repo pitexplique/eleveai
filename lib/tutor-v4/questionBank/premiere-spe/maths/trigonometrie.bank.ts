@@ -14,7 +14,7 @@
 //   trig_periodicite        — périodicité, traduction graphique
 //   trig_courbes            — courbes de cosinus et sinus, lien avec le cercle
 //
-// PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM.
+// PÉRIMÈTRE BO Première spé. Conventions : LaTeX, règle QCM.
 // Canvas : fonctionGraphique (courbes de cosinus et sinus via points) et
 // cercle (cercle trigonométrique avec le point image et son arc).
 //

@@ -8,7 +8,7 @@
 //   devfac_factoriser_identite  — Factoriser a l'aide d'une identite remarquable
 //   devfac_choisir_forme        — Choisir la forme la plus adaptee
 //
-// PERIMETRE BO 2019. Conventions : LaTeX, regle QCM.
+// PERIMETRE BO. Conventions : LaTeX, regle QCM.
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 

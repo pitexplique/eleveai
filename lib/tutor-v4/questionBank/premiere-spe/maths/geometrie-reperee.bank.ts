@@ -18,7 +18,7 @@
 // (leur `id` est inchangé : des élèves y ont déjà répondu). Les commentaires
 // de section disent où le bloc a été ÉCRIT ; c'est le `microId` qui fait foi.
 //
-// PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM.
+// PÉRIMÈTRE BO Première spé. Conventions : LaTeX, règle QCM.
 // Canvas : fonctionGraphique (parabole, droites et points via des segments).
 //
 // Règle d'écriture : un `fixed` pour une valeur exceptionnelle, un piège, une

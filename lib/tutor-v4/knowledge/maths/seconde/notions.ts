@@ -1,6 +1,6 @@
 import type { NotionSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
-// Notions de seconde alignées sur le programme officiel (BO 2019).
+// Notions de seconde alignées sur le programme officiel (BO).
 export const notions: NotionSource[] = [
   /* ===================== NOMBRES ET CALCULS (BO2N1) ===================== */
   {

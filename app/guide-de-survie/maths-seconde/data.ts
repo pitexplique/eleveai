@@ -1,10 +1,10 @@
 // ─── Guide de survie · Maths Seconde ────────────────────────────────────────
 // Contenu ALIGNÉ sur le coach (source de vérité unique) :
 // - chapitres      = notions de lib/tutor-v4/knowledge/maths/seconde/notions.ts
-// - checklists     = micro-compétences de microSkills.ts (BO 2019)
+// - checklists     = micro-compétences de microSkills.ts (BO)
 // - test de survie = items "fixed" puisés dans les banques du coach
 // Condensés écrits par 22 agents parallèles (workflow du 26/07) puis VÉRIFIÉS
-// à la main contre le BO 2019 et les banques (exactitude, périmètre seconde,
+// à la main contre le BO et les banques (exactitude, périmètre seconde,
 // couverture des micros) — patch appliqué : échantillonnage allégé (1/√n en
 // simple repère, réflexe [m−2s;m+2s] retiré, frontière de programme).
 

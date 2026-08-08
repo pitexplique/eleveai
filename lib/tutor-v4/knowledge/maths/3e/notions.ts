@@ -3,7 +3,7 @@
 // Notions de mathématiques pour la classe de 3e.
 //
 // Objectif :
-// - alignement avec le BO 2026 cycle 4 ;
+// - alignement avec le BO cycle 4 ;
 // - cohérence avec 5e et 4e ;
 // - progression logique pour Tutor V4 ;
 // - notions suffisamment larges pour porter les microSkills.

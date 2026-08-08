@@ -13,7 +13,7 @@
 // Choix :
 // - structure proche de la 4e ;
 // - ajout explicite de fonctions, car elles deviennent centrales en 3e ;
-// - ajout explicite de pensée informatique, car le BO 2026 l’identifie comme un domaine du cycle 4 ;
+// - ajout explicite de pensée informatique, car le BO l’identifie comme un domaine du cycle 4 ;
 // - séparation Géométrie plane / Espace / Grandeurs pour garder les volumes lisibles ;
 // - probabilités séparées des statistiques pour permettre des banks différentes.
 

@@ -1,7 +1,7 @@
 // knowledge/maths/premiere-spe/microSkills.ts
 //
 // Micro-compétences de la spécialité mathématiques de Première générale.
-// Chaque microId est dérivé d'une « capacité attendue » du BO 2019.
+// Chaque microId est dérivé d'une « capacité attendue » du BO.
 // prerequis : uniquement des microId existants (validés au runtime par buildKnowledge).
 //
 // ─────────────────────────────────────────────────────────────────────────────

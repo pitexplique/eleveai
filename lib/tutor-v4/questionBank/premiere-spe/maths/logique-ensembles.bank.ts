@@ -16,7 +16,7 @@
 //   log_negation         — nier une proposition quantifiée
 //   log_raisonnements    — disjonction de cas, absurde, contraposée
 //
-// PÉRIMÈTRE BO 2019 Première spé, section « Vocabulaire ensembliste et
+// PÉRIMÈTRE BO Première spé, section « Vocabulaire ensembliste et
 // logique ». Le programme précise que ces notions se travaillent « d'abord
 // dans des contextes où elles se présentent naturellement » : les énoncés
 // s'appuient donc autant que possible sur des objets déjà connus de l'élève

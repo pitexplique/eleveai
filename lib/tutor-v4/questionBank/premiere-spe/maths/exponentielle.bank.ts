@@ -14,7 +14,7 @@
 //   exp_suite_geo      — reconnaître que la suite (e^(na)) est géométrique
 //   exp_modelisation   — modéliser une croissance/décroissance exponentielle
 //
-// PÉRIMÈTRE BO 2019 Première spé. Conventions : LaTeX, règle QCM. Canvas : fonctionGraphique (courbe exp via points).
+// PÉRIMÈTRE BO Première spé. Conventions : LaTeX, règle QCM. Canvas : fonctionGraphique (courbe exp via points).
 //
 // Règle d'écriture (voir logique-ensembles.bank.ts, même méthode) : `fixed` pour
 // les pièges, les propriétés et les contextes réels ; `template` dès qu'on peut

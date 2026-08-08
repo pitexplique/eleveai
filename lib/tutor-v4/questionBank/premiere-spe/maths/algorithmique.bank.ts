@@ -17,7 +17,7 @@
 // restés à leur place dans le fichier, mais leur `microId` a été réaffecté
 // (leur `id` est inchangé). C'est le `microId` qui fait foi.
 //
-// PÉRIMÈTRE BO 2019 Première spé (Python). Conventions : code en `...`, LaTeX pour les maths, règle QCM.
+// PÉRIMÈTRE BO Première spé (Python). Conventions : code en `...`, LaTeX pour les maths, règle QCM.
 //
 // Règle d'écriture : un `fixed` pour une valeur exceptionnelle, un piège, une
 // propriété ou un contexte 974 ; un `template` pour tout calcul dont on peut
