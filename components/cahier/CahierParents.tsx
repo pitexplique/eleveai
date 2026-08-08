@@ -423,21 +423,43 @@ export default function CahierParents({
             ))}
           </div>
 
-          <div className="screen-only mt-8 rounded-2xl border border-teal-200 bg-teal-50 p-5 text-center">
-            <p className="text-sm font-bold text-slate-700">
-              Envie d&apos;accompagner votre enfant plus loin&nbsp;? Dites qui vous
-              êtes et ce que vous cherchez, EleveAI vous propose des ressources
-              pédagogiques conçues, sélectionnées et vérifiées.
-            </p>
-            {/* ⚠️ Pointait sur « / » : une redirection de plus avant d'arriver là où
-               on va vraiment. On vise /accueil directement. */}
-            <Link
-              href={lienAccueil("cta-fin", config.slug)}
-              className="mt-3 inline-flex items-center gap-2 rounded-full bg-teal-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-600/30 transition hover:bg-teal-500"
-            >
-              <Sparkles className="h-4 w-4" />
-              Découvrir EleveAI
-            </Link>
+          {/* ⚠️ CE BLOC ÉTAIT screen-only EN ENTIER : imprimé, le cahier des parents
+             se terminait sans aucun lien. Le bouton reste à l'écran, le QR s'imprime. */}
+          <div className="mt-8 rounded-2xl border border-teal-200 bg-teal-50 p-5">
+            <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
+              <div>
+                <p className="text-sm font-bold text-slate-700">
+                  Envie d&apos;accompagner votre enfant plus loin&nbsp;? Dites qui
+                  vous êtes et ce que vous cherchez, EleveAI vous propose des
+                  ressources pédagogiques conçues, sélectionnées et vérifiées.
+                </p>
+                {/* ⚠️ Pointait sur « / » : une redirection de plus avant d'arriver là
+                   où on va vraiment. On vise /accueil directement. */}
+                <Link
+                  href={lienAccueil("cta-fin", config.slug)}
+                  className="screen-only mt-3 inline-flex items-center gap-2 rounded-full bg-teal-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-600/30 transition hover:bg-teal-500"
+                >
+                  <Sparkles className="h-4 w-4" />
+                  Découvrir EleveAI
+                </Link>
+              </div>
+              <div className="shrink-0 text-center">
+                <div className="inline-block rounded-xl border border-slate-200 bg-white p-2">
+                  <QRCodeSVG
+                    value={lienAccueilQR("qr-fin", config.slug)}
+                    size={96}
+                    level="M"
+                    marginSize={2}
+                  />
+                </div>
+                <p className="mt-1 text-xs font-black leading-tight text-slate-700">
+                  Scannez pour
+                  <br />
+                  trouver la suite
+                </p>
+                <p className="text-[10px] font-bold text-slate-400">eleveai.fr</p>
+              </div>
+            </div>
           </div>
 
           <footer className="mt-8 flex items-center justify-between border-t border-slate-200 pt-5 text-xs text-slate-500">
