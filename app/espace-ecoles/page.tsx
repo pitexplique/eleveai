@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   title: "EleveAI pour les établissements — Collèges et lycées à La Réunion",
   description:
     "Un coach IA multi-matières et un suivi élève par élève, déployé en quelques heures. Financé par l'établissement, gratuit pour les familles. RGPD maîtrisé, conçu par un enseignant.",
-  alternates: { canonical: "https://eleveai.fr/espace-ecoles" },
+  alternates: { canonical: "https://www.eleveai.fr/espace-ecoles" },
   openGraph: {
     title: "EleveAI pour les établissements scolaires",
     description:
       "Coach IA multi-matières + suivi élève par élève. Financé par l'établissement, gratuit pour les familles. Offre pilote sur devis.",
-    url: "https://eleveai.fr/espace-ecoles",
+    url: "https://www.eleveai.fr/espace-ecoles",
     siteName: "EleveAI",
     type: "website",
   },

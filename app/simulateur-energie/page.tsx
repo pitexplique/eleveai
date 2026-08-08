@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "La centrale, c'est toi — la salle de sport dans ta main",
     description:
       "Ton effort en watts devient des joules, des kcal, des ampoules allumées et des litres d'eau hissés à 500 m — puis l'assiette répare le muscle. La physique de la salle de sport, simulée pour apprendre en jouant.",
-    url: "https://eleveai.fr/simulateur-energie",
+    url: "https://www.eleveai.fr/simulateur-energie",
     siteName: "EleveAI",
     locale: "fr_FR",
     type: "website",

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Suivre vos élèves et trouver vos ressources",
   description:
     "Voyez où en sont vos élèves et utilisez EleveAI en classe : tableau de bord en temps réel, calcul rapide en direct avec résultats validés, remédiation ciblée par prérequis. Vous restez la référence.",
-  alternates: { canonical: "https://eleveai.fr/enseignants" },
+  alternates: { canonical: "https://www.eleveai.fr/enseignants" },
 };
 
 // Ce qu'un prof peut FAIRE avec EleveAI — le cœur de la page.

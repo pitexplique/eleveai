@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Hong Wang, 2026 Fields Medal: the world's most economical U-turn",
     description:
       "The area halves with every trick — π/2, π/4, π/8… how far can it go? The Kakeya needle problem as a machine you set, the conjecture closed in 3D (2025), her blackboard decoded and challenges from age 6 to 18.",
-    url: "https://eleveai.fr/en/simulators/kakeya-needle",
+    url: "https://www.eleveai.fr/en/simulators/kakeya-needle",
     siteName: "EleveAI",
     locale: "en_US",
     type: "website",

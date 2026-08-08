@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "La fromagerie dans ta main — du pré au pot",
     description:
       "Règle les litres de lait des Hauts, regarde les flux se répartir : caillé, petit-lait, pots de fromage frais. La fromagerie péi simulée pour apprendre en jouant.",
-    url: "https://eleveai.fr/simulateur-fromage",
+    url: "https://www.eleveai.fr/simulateur-fromage",
     siteName: "EleveAI",
     images: [
       {

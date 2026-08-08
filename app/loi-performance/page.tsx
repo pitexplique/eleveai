@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "La loi de la performance — défauts ou qualités ?",
     description:
       "Le dessin d'un soir de juillet : ADN → traits → coefficients → réseau de neurones → performance. Règle tes coefficients et vois ce que Σ aᵢxᵢ te donne. La leçon de Mbappé, en équation.",
-    url: "https://eleveai.fr/loi-performance",
+    url: "https://www.eleveai.fr/loi-performance",
     siteName: "EleveAI",
     locale: "fr_FR",
     type: "website",

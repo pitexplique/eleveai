@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Le but qui sort de la moyenne — la loi de Pareto",
     description:
       "Le record n'est pas dans la moyenne, il est dans la queue. Combler ses défauts te ramène à la cloche ; cultiver ta qualité rare te projette dans la queue de Pareto — là où naissent les buteurs d'exception.",
-    url: "https://eleveai.fr/loi-pareto",
+    url: "https://www.eleveai.fr/loi-pareto",
     siteName: "EleveAI",
     locale: "fr_FR",
     type: "website",

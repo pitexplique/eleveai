@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Contact — EleveAI",
     description:
       "Contactez EleveAI : questions, retours, signalements, expérimentation ou collaboration.",
-    url: "https://eleveai.fr/contact",
+    url: "https://www.eleveai.fr/contact",
     siteName: "EleveAI",
     type: "website",
   },

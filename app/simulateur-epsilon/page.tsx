@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Active un epsilon — la machine à engendrer des infinis",
     description:
       "Chaque étincelle en allume k autres. Règle le coefficient et regarde la cascade : 1 024 à k = 2, un million à k = 4. « In min i lav lot » — une main lave l'autre.",
-    url: "https://eleveai.fr/simulateur-epsilon",
+    url: "https://www.eleveai.fr/simulateur-epsilon",
     siteName: "EleveAI",
     images: [
       {

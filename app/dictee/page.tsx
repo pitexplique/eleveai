@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "orthographe lexicale",
     "dictée corrigée mot à mot",
   ],
-  alternates: { canonical: "https://eleveai.fr/dictee" },
+  alternates: { canonical: "https://www.eleveai.fr/dictee" },
 };
 
 export default function Page() {

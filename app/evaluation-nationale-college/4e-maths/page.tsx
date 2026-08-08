@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "nombres relatifs 5e",
   ],
   alternates: {
-    canonical: "https://eleveai.fr/evaluation-nationale-college/4e-maths",
+    canonical: "https://www.eleveai.fr/evaluation-nationale-college/4e-maths",
   },
 };
 

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Le barrage dans ta main — l'eau de l'île fait la lumière",
     description:
       "Règle le débit, regarde l'eau tomber de 500 m et la turbine s'emballer : Takamaka simulé pour apprendre en jouant — et l'eau ressort intacte vers la rivière.",
-    url: "https://eleveai.fr/simulateur-barrage",
+    url: "https://www.eleveai.fr/simulateur-barrage",
     siteName: "EleveAI",
     images: [
       {

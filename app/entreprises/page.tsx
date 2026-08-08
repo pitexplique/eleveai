@@ -10,7 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import FormulaireAventure from "./FormulaireAventure";
 
-const SITE_URL = "https://eleveai.fr";
+const SITE_URL = "https://www.eleveai.fr";
 
 export const metadata: Metadata = {
   // Le layout ajoute déjà « — EleveAI » : pas de suffixe ici (sinon doublon).

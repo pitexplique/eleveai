@@ -15,7 +15,7 @@ import {
   type ProgrammeMatiere,
 } from "@/lib/programme";
 
-const SITE_URL = "https://eleveai.fr";
+const SITE_URL = "https://www.eleveai.fr";
 
 export function generateStaticParams() {
   return PROGRAMME_CLASSES.map((c) => ({ classe: c.slug }));

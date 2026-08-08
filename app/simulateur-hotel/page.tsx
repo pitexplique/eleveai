@@ -29,12 +29,12 @@ export const metadata: Metadata = {
     "simulateur pédagogique",
     "eleveai",
   ],
-  alternates: { canonical: "https://eleveai.fr/simulateur-hotel" },
+  alternates: { canonical: "https://www.eleveai.fr/simulateur-hotel" },
   openGraph: {
     title: "L'hôtel Le Terre Sainte dans ta main — une baie allumée, une nuit vendue",
     description:
       "Le métier d'hôtelier tient dans cinq nombres : le taux d'occupation, le prix moyen pondéré, la recette, le RevPAR, le point mort. Règle-les toi-même sur la vraie grille d'un hôtel de Saint-Pierre.",
-    url: "https://eleveai.fr/simulateur-hotel",
+    url: "https://www.eleveai.fr/simulateur-hotel",
     siteName: "EleveAI",
     images: [
       {

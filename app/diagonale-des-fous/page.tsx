@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "La Diagonale des Fous — l'équation différentielle du coureur",
     description:
       "Sa réserve se vide au carré de l'effort. Trop vite, c'est le mur ; le bon dosage la vide pile à Saint-Denis. Une équa diff qui se règle à la main, sur le profil de La Réunion.",
-    url: "https://eleveai.fr/diagonale-des-fous",
+    url: "https://www.eleveai.fr/diagonale-des-fous",
     siteName: "EleveAI",
     locale: "fr_FR",
     type: "website",

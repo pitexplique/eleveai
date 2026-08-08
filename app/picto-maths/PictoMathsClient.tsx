@@ -574,7 +574,7 @@ export default function PictoMathsClient({
   signupFrom?: string;
 } = {}) {
   // Tag de tracking du QR : "picto" sur /picto-maths, "cahier" sur /cahier-vacances/maths.
-  const signupUrl = `https://eleveai.fr/auth/signin?from=${signupFrom}`;
+  const signupUrl = `https://www.eleveai.fr/auth/signin?from=${signupFrom}`;
   return (
     <main className="relative isolate min-h-screen bg-[#f2fbfd] text-slate-800">
       {/* Barre écran */}

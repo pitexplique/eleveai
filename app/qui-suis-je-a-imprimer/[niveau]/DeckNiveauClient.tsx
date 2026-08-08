@@ -5,7 +5,7 @@ import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import { ArrowLeft, Download, Scissors, Sparkles, Star } from "lucide-react";
 
-const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cartes";
+const SIGNUP_URL = "https://www.eleveai.fr/auth/signin?from=cartes";
 const TI_MARGO = "/cahier-vacances/ti-margo.png";
 
 /* Une carte-question prête à afficher (préparée côté serveur). */

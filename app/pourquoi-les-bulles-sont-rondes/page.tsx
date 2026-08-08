@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title: "Pourquoi les bulles de savon sont-elles rondes ?",
     description:
       "Même ficelle, quelle forme tient le plus de place ? Le cercle gagne toujours (4πA ≤ P²), et la bulle le « résout » sans calcul. La question d'enfance de Yilin Wang.",
-    url: "https://eleveai.fr/pourquoi-les-bulles-sont-rondes",
+    url: "https://www.eleveai.fr/pourquoi-les-bulles-sont-rondes",
     siteName: "EleveAI",
     locale: "fr_FR",
     type: "website",

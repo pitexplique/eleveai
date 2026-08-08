@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Hong Wang, médaille Fields 2026 : le demi-tour le plus économe du monde",
     description:
       "L'aire se divise par 2 à chaque ruse — π/2, π/4, π/8… jusqu'où ? Le problème de l'aiguille en machine à régler, la conjecture de Kakeya fermée en 3D (2025), son tableau décodé et les défis du CP à la Terminale.",
-    url: "https://eleveai.fr/aiguille-de-kakeya",
+    url: "https://www.eleveai.fr/aiguille-de-kakeya",
     siteName: "EleveAI",
     locale: "fr_FR",
     type: "website",

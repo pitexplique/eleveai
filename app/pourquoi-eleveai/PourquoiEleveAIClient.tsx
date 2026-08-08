@@ -74,7 +74,7 @@ export default function PourquoiEleveAIClient() {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
     name: "EleveAI",
-    url: "https://eleveai.fr",
+    url: "https://www.eleveai.fr",
     description:
       "EleveAI : plusieurs portes d'entrée pour apprendre les maths et suivre la progression des élèves, du CM1 au Bac.",
     contactPoint: {

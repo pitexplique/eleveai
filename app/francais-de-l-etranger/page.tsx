@@ -11,7 +11,7 @@ import Link from "next/link";
 import Image from "next/image";
 import EncartCallEnDirect from "@/components/accueil/EncartCallEnDirect";
 
-const SITE_URL = "https://eleveai.fr";
+const SITE_URL = "https://www.eleveai.fr";
 
 export const metadata: Metadata = {
   title: "Le programme français à l'étranger — EleveAI",

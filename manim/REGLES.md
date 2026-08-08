@@ -104,7 +104,7 @@ Une seule personne (Frédéric) doit couvrir toutes les classes. On sépare **la
 ## Conventions YouTube
 
 - **Titre** : `Maths <classe> · <Titre de la notion> — EleveAI` (ex. `Maths 6e · Le calcul posé — EleveAI`)
-- **Description** : 1 phrase d'accroche + lien vers la fiche (`https://eleveai.fr/fiches-cours/maths/<classe>/<notion>`) + lien vers le coach (`https://eleveai.fr/coach-ia/maths?classe=<classe>`) + « Fait à La Réunion 🌋 »
+- **Description** : 1 phrase d'accroche + lien vers la fiche (`https://www.eleveai.fr/fiches-cours/maths/<classe>/<notion>`) + lien vers le coach (`https://www.eleveai.fr/coach-ia/maths?classe=<classe>`) + « Fait à La Réunion 🌋 »
 - **Playlist** : une par classe (`Maths 6e`, `Maths 5e`, …)
 - **Visibilité** : publique (la machine à contenu = le marketing)
 

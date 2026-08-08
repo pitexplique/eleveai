@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "L'usine dans ta main — du champ au sucre (et à la lumière)",
     description:
       "Règle le tonnage de canne, regarde les flux se répartir : sucre, mélasse, électricité. La sucrerie réunionnaise simulée pour apprendre en jouant.",
-    url: "https://eleveai.fr/simulateur-sucre",
+    url: "https://www.eleveai.fr/simulateur-sucre",
     siteName: "EleveAI",
     images: [
       {

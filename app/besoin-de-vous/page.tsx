@@ -18,7 +18,7 @@ import {
 } from "@/lib/ameliorations/honneurServer";
 import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
 
-const SITE_URL = "https://eleveai.fr";
+const SITE_URL = "https://www.eleveai.fr";
 
 export const metadata: Metadata = {
   title: "EleveAI a besoin de vous",

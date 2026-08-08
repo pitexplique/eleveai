@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const url = "https://eleveai.fr/pourquoi-nos-tarifs-sont-justes";
+const url = "https://www.eleveai.fr/pourquoi-nos-tarifs-sont-justes";
 
 export const metadata: Metadata = {
   title: "Pourquoi nos tarifs sont justes | EleveAI",

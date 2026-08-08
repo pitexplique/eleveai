@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Le volcan dans ta main — la Fournaise fabrique l'île",
     description:
       "Règle le débit de lave, regarde la coulée descendre les Grandes Pentes — et l'île grandir sur l'océan. Le Piton de la Fournaise simulé pour apprendre en jouant.",
-    url: "https://eleveai.fr/simulateur-volcan",
+    url: "https://www.eleveai.fr/simulateur-volcan",
     siteName: "EleveAI",
     images: [
       {

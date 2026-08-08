@@ -22,7 +22,7 @@ function page(title: string, message: string, ok: boolean): Response {
 <p style="font-size:28px;margin:0 0 8px">${ok ? "✅" : "⚠️"}</p>
 <h1 style="font-size:20px;margin:0 0 8px;color:${color}">${title}</h1>
 <p style="font-size:15px;line-height:1.6;color:#475569;margin:0 0 20px">${message}</p>
-<a href="https://eleveai.fr" style="display:inline-block;background:#0d9488;color:#fff;text-decoration:none;font-weight:700;padding:10px 20px;border-radius:9999px">Retour sur eleveai.fr</a>
+<a href="https://www.eleveai.fr" style="display:inline-block;background:#0d9488;color:#fff;text-decoration:none;font-weight:700;padding:10px 20px;border-radius:9999px">Retour sur eleveai.fr</a>
 </div></body></html>`;
   return new Response(html, {
     status: ok ? 200 : 400,

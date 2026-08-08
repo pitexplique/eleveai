@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "évaluation de rentrée quatrième",
   ],
   alternates: {
-    canonical: "https://eleveai.fr/evaluation-nationale-college",
+    canonical: "https://www.eleveai.fr/evaluation-nationale-college",
   },
 };
 

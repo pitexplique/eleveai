@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   description:
     "Générateur de prompts pour la vie scolaire : messages aux familles, rappels de règles, convocations, comptes-rendus, bilans d’incident. Clair, factuel, respectueux.",
   alternates: {
-    canonical: "https://eleveai.fr/espace-vie-scolaire",
+    canonical: "https://www.eleveai.fr/espace-vie-scolaire",
   },
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
-    url: "https://eleveai.fr/espace-vie-scolaire",
+    url: "https://www.eleveai.fr/espace-vie-scolaire",
     title: "Vie scolaire — Messages & documents | EleveAI",
     description:
       "Prompts prêts à copier pour la vie scolaire : rappel de règles, convocation, message aux familles, compte-rendu, suivi d’incident.",

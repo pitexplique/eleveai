@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import TarifsClient from "./TarifsClient";
 
-const url = "https://eleveai.fr/tarifs";
+const url = "https://www.eleveai.fr/tarifs";
 
 export const metadata: Metadata = {
   title: "Tarifs — pilote gratuit, établissements, familles",

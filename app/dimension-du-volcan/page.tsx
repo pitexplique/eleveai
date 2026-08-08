@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "La dimension du volcan — la rugosité de la Fournaise, en un seul nombre",
     description:
       "Compte les carrés sur le rempart, affine la grille : ×2 c'est une ligne lisse (d = 1), ×2,4 c'est le rempart (d ≈ 1,25). La dimension fractale se mesure — l'idée au cœur de la médaille Fields 2026 de Hong Wang, appliquée au volcan de La Réunion.",
-    url: "https://eleveai.fr/dimension-du-volcan",
+    url: "https://www.eleveai.fr/dimension-du-volcan",
     siteName: "EleveAI",
     locale: "fr_FR",
     type: "website",

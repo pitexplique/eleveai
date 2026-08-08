@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "programme de 5e français révision",
   ],
   alternates: {
-    canonical: "https://eleveai.fr/evaluation-nationale-college/4e-francais",
+    canonical: "https://www.eleveai.fr/evaluation-nationale-college/4e-francais",
   },
 };
 

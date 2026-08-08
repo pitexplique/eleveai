@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   title: "Suivre la progression de votre enfant",
   description:
     "EleveAI accompagne votre enfant en maths : Coach IA, Parcours, Brevet des collèges, Calcul rapide, English Maths. Résultats enregistrés, progression visible.",
-  alternates: { canonical: "https://eleveai.fr/espace-parents" },
+  alternates: { canonical: "https://www.eleveai.fr/espace-parents" },
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
-    url: "https://eleveai.fr/espace-parents",
+    url: "https://www.eleveai.fr/espace-parents",
     siteName: "EleveAI",
     title: "Espace parents | EleveAI",
     description:

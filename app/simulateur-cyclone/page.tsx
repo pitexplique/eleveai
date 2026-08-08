@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     title: "Dans l'œil du cyclone — le simulateur d'EleveAI",
     description:
       "Tiens le vent dans ta main : trace la trajectoire, règle la force, et apprends les alertes cycloniques de La Réunion en jouant.",
-    url: "https://eleveai.fr/simulateur-cyclone",
+    url: "https://www.eleveai.fr/simulateur-cyclone",
     siteName: "EleveAI",
     images: [
       {

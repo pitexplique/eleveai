@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title: "Concours Avenir — l'épreuve blanche de maths, en conditions réelles",
     description:
       "1h30, 60 questions, 45 comptées, +1 pour une bonne réponse et −1 pour une mauvaise. Répondre au hasard coûte un demi-point : apprends à choisir tes combats.",
-    url: "https://eleveai.fr/concours-avenir",
+    url: "https://www.eleveai.fr/concours-avenir",
     siteName: "EleveAI",
     locale: "fr_FR",
     type: "website",

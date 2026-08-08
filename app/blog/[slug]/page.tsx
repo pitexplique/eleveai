@@ -20,7 +20,7 @@ import {
 import GoogleFollowChip from "@/components/GoogleFollowChip";
 import PontCoach from "@/components/PontCoach";
 
-const SITE_URL = "https://eleveai.fr";
+const SITE_URL = "https://www.eleveai.fr";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/preview.jpg`;
 const LOGO_URL = `${SITE_URL}/logo.png`;
 

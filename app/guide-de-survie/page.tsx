@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   title: "Guides de survie EleveAI — maths, français et anglais, du CM1 au lycée (gratuit à imprimer)",
   description:
     "Les guides de survie EleveAI : le programme de maths (du CM1 au lycée), de français (du CM1 à la 3e) et le vocabulaire d'anglais (A1 à B2) condensés en fiches à imprimer — l'essentiel, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
-  alternates: { canonical: "https://eleveai.fr/guide-de-survie" },
+  alternates: { canonical: "https://www.eleveai.fr/guide-de-survie" },
 };
 
 // La collection grandit niveau par niveau et matière par matière — une carte =

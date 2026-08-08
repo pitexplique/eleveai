@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: "Why are soap bubbles round?",
     description:
       "Same string, which shape holds the most? The circle always wins (4πA ≤ P²), and a bubble solves it without any maths. The childhood question of Yilin Wang.",
-    url: "https://eleveai.fr/en/simulators/round-bubbles",
+    url: "https://www.eleveai.fr/en/simulators/round-bubbles",
     siteName: "EleveAI",
     locale: "en_US",
     type: "website",

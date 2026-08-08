@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Plus j'avance, plus ma vitesse augmente",
     description:
       "La même loi monte et descend : ta vitesse grandit avec ta hauteur, et ce que tu ne recharges pas s'efface. Deux curseurs pour le voir — dont la courbe de l'oubli qu'on relance en révisant.",
-    url: "https://eleveai.fr/exponentielle",
+    url: "https://www.eleveai.fr/exponentielle",
     siteName: "EleveAI",
     locale: "fr_FR",
     type: "website",

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "La courbe en cloche n'est pas tombée du ciel",
     description:
       "Pousse n : l'escalier de la binomiale — les coefficients du triangle de Pascal — se lisse en courbe de Gauss. De Moivre l'a prouvé en 1733, un curseur te le montre aujourd'hui.",
-    url: "https://eleveai.fr/loi-normale",
+    url: "https://www.eleveai.fr/loi-normale",
     siteName: "EleveAI",
     locale: "fr_FR",
     type: "website",

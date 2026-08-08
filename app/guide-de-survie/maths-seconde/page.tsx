@@ -7,12 +7,12 @@ export const metadata: Metadata = {
     "Guide de survie maths Seconde : formules, pièges, réflexes (gratuit, à imprimer)",
   description:
     "Le guide de survie des maths en Seconde : les 22 chapitres du programme (BO) en fiches — formules essentielles, réflexes, pièges classiques et test corrigé par chapitre. Gratuit, imprimable en A4, relié au coach en ligne.",
-  alternates: { canonical: "https://eleveai.fr/guide-de-survie/maths-seconde" },
+  alternates: { canonical: "https://www.eleveai.fr/guide-de-survie/maths-seconde" },
   openGraph: {
     title: "Guide de survie · Maths Seconde (gratuit, à imprimer)",
     description:
       "22 chapitres, 22 fiches : formules qui sauvent, réflexes, pièges et tests corrigés. Conforme au programme.",
-    url: "https://eleveai.fr/guide-de-survie/maths-seconde",
+    url: "https://www.eleveai.fr/guide-de-survie/maths-seconde",
   },
 };
 

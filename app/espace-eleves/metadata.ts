@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Ton espace EleveAI : cinq coachs (maths, français, anglais, espagnol, IA), la dictée et les mots du jour, des parcours pour faire le point et des machines pour comprendre. Gratuit, du CP au Bac.",
   alternates: {
-    canonical: "https://eleveai.fr/espace-eleves",
+    canonical: "https://www.eleveai.fr/espace-eleves",
   },
   robots: {
     index: true,
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    url: "https://eleveai.fr/espace-eleves",
+    url: "https://www.eleveai.fr/espace-eleves",
     siteName: "EleveAI",
     title: "Espace élèves | EleveAI",
     description:

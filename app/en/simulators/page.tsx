@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Interactive maths simulators — EleveAI",
     description:
       "Set the machine, grasp the idea, then test yourself. Why bubbles are round and the Kakeya needle — with challenges from age 6 to 18.",
-    url: "https://eleveai.fr/en/simulators",
+    url: "https://www.eleveai.fr/en/simulators",
     siteName: "EleveAI",
     locale: "en_US",
     type: "website",

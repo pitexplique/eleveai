@@ -19,7 +19,7 @@ EleveAI est un journal scientifique en ligne, gratuit et sans publicité, fondé
 
 Nous n'avons rien demandé, et pourtant l'hydroélectricité réunionnaise est déjà en ligne sur EleveAI, accessible et manipulable par les élèves de l'île. Trois contenus sont déjà publiés :
 
-- **Un simulateur interactif** — [eleveai.fr/simulateur-barrage](https://eleveai.fr/simulateur-barrage) — inspiré de l'hydroélectricité de montagne, dont la centrale de Takamaka sur la Rivière des Marsouins à Saint-Benoît, que vous exploitez. L'élève règle un curseur (le débit turbiné) et voit la puissance se calculer en direct, formule affichée en clair : **puissance = 8 × débit × chute**. Le simulateur insiste, chiffres à l'appui, sur le fait que l'eau est rendue intacte à la rivière : *« on emprunte sa chute, pas sa vie »*. Les valeurs de chute et de puissance qu'il utilise aujourd'hui sont des ordres de grandeur pédagogiques, que vos données réelles rendraient exacts.
+- **Un simulateur interactif** — [eleveai.fr/simulateur-barrage](https://www.eleveai.fr/simulateur-barrage) — inspiré de l'hydroélectricité de montagne, dont la centrale de Takamaka sur la Rivière des Marsouins à Saint-Benoît, que vous exploitez. L'élève règle un curseur (le débit turbiné) et voit la puissance se calculer en direct, formule affichée en clair : **puissance = 8 × débit × chute**. Le simulateur insiste, chiffres à l'appui, sur le fait que l'eau est rendue intacte à la rivière : *« on emprunte sa chute, pas sa vie »*. Les valeurs de chute et de puissance qu'il utilise aujourd'hui sont des ordres de grandeur pédagogiques, que vos données réelles rendraient exacts.
 - **Un schéma animé** en coupe du barrage (dessin de Frédéric, avec une animation où l'eau suit la conduite forcée jusqu'à la turbine), en tête de la Une.
 - **Un épisode vidéo « en vrai »** sur l'eau de La Réunion : de l'évaporation à l'effet de foehn, jusqu'à la centrale hydroélectrique.
 
@@ -71,4 +71,4 @@ Pas d'argent. L'accès au **réel** :
 Une étape simple, si le principe vous convient : **un échange de 20 minutes**, et idéalement une mise en relation avec l'ingénieur responsable de Takamaka pour vérifier ensemble trois chiffres (débit, chute, puissance). Nous corrigeons nos pages dans la foulée.
 
 **Contact EleveAI** — Frédéric Lacoste, professeur de mathématiques
-academienumerique@gmail.com · [eleveai.fr](https://eleveai.fr) · 06 92 74 29 58
+academienumerique@gmail.com · [eleveai.fr](https://www.eleveai.fr) · 06 92 74 29 58

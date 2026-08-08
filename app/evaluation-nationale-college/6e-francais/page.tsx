@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "programme de CM2 français révision",
   ],
   alternates: {
-    canonical: "https://eleveai.fr/evaluation-nationale-college/6e-francais",
+    canonical: "https://www.eleveai.fr/evaluation-nationale-college/6e-francais",
   },
 };
 

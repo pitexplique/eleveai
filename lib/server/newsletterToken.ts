@@ -45,7 +45,7 @@ export function verifyUnsubToken(email: string, token: unknown): boolean {
 // URL de désinscription absolue à insérer dans les emails.
 export function unsubUrl(email: string): string {
   const base = (
-    process.env.NEXT_PUBLIC_SITE_URL || "https://eleveai.fr"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.eleveai.fr"
   ).replace(/\/$/, "");
   const e = encodeURIComponent(normalize(email));
   const t = unsubToken(email);

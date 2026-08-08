@@ -153,7 +153,7 @@ export default function CartesDeck({
   partenaire?: string; // ex "Keep Cool" (co-branding optionnel)
   retourHref?: string;
 }) {
-  const signupUrl = `https://eleveai.fr/auth/signin?from=${signupFrom}`;
+  const signupUrl = `https://www.eleveai.fr/auth/signin?from=${signupFrom}`;
   const matieres = [...new Set(cartes.flatMap((c) => c.questions.map((q) => q.matiere)))];
   const departs: number[] = [];
   for (let i = 0; i < cartes.length; i += 5) departs.push(i);

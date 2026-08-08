@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "programme de CM2 révision",
   ],
   alternates: {
-    canonical: "https://eleveai.fr/evaluation-nationale-college/6e-maths",
+    canonical: "https://www.eleveai.fr/evaluation-nationale-college/6e-maths",
   },
 };
 

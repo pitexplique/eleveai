@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "EleveAI est un espace pédagogique créé par Frédéric Lacoste, professeur de mathématiques à La Réunion : maths, français, anglais, espagnol et IA, avec un suivi réel de la progression des élèves, du CP au Bac.",
   alternates: {
-    canonical: "https://eleveai.fr/qui-sommes-nous",
+    canonical: "https://www.eleveai.fr/qui-sommes-nous",
   },
   robots: {
     index: true,
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    url: "https://eleveai.fr/qui-sommes-nous",
+    url: "https://www.eleveai.fr/qui-sommes-nous",
     title: "Qui sommes-nous ? — EleveAI",
     description:
       "EleveAI : un outil pour tous avec plusieurs portes d’entrée et une cartographie de l’évolution des élèves.",

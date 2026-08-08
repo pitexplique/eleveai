@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "EleveAI remercie les élèves testeurs qui ont contribué à améliorer la plateforme grâce à leurs retours, leurs idées et leurs essais.",
 
   alternates: {
-    canonical: "https://eleveai.fr/remerciements",
+    canonical: "https://www.eleveai.fr/remerciements",
   },
 
   robots: {
@@ -18,14 +18,14 @@ export const metadata: Metadata = {
 
   openGraph: {
     type: "website",
-    url: "https://eleveai.fr/remerciements",
+    url: "https://www.eleveai.fr/remerciements",
     title: "Remerciements — EleveAI",
     description:
       "Merci aux élèves testeurs qui aident EleveAI à progresser par leurs retours, leurs idées et leurs essais.",
     siteName: "EleveAI",
     images: [
       {
-        url: "https://eleveai.fr/images/accueil-eleveai-reunion.png",
+        url: "https://www.eleveai.fr/images/accueil-eleveai-reunion.png",
         width: 1200,
         height: 630,
         alt: "EleveAI — Remerciements aux élèves testeurs",
@@ -38,6 +38,6 @@ export const metadata: Metadata = {
     title: "Remerciements — EleveAI",
     description:
       "Merci aux élèves testeurs qui aident EleveAI à progresser.",
-    images: ["https://eleveai.fr/images/accueil-eleveai-reunion.png"],
+    images: ["https://www.eleveai.fr/images/accueil-eleveai-reunion.png"],
   },
 };

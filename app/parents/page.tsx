@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Parents — EleveAI",
   description:
     "Une IA qui explique, jamais qui fait à la place. Encadrée par un enseignant, sans publicité, données protégées. Gratuit si le collège l'utilise, sinon offre famille.",
-  alternates: { canonical: "https://eleveai.fr/parents" },
+  alternates: { canonical: "https://www.eleveai.fr/parents" },
 };
 
 // Les 4 raisons d'être rassuré — le cœur de la décision d'un parent.

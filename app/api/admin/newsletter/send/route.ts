@@ -38,7 +38,7 @@ function wrapHtml(bodyHtml: string, unsub: string): string {
 ${bodyHtml}
 <hr style="margin:24px 0;border:none;border-top:1px solid #e2e8f0"/>
 <p style="font-size:12px;color:#64748b;line-height:1.5">
-Vous recevez cet email car vous êtes abonné·e aux nouveautés d'<a href="https://eleveai.fr" style="color:#0d9488">eleveai.fr</a> (compte ou abonnement au journal).<br/>
+Vous recevez cet email car vous êtes abonné·e aux nouveautés d'<a href="https://www.eleveai.fr" style="color:#0d9488">eleveai.fr</a> (compte ou abonnement au journal).<br/>
 EleveAI — La Réunion · <a href="${unsub}" style="color:#0d9488">Se désinscrire</a>
 </p>
 </div>`;

@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   description:
     "Générateur de prompts pour les personnels et services : notes, protocoles, fiches sécurité, affiches, remerciements. Clair, respectueux, adapté terrain.",
   alternates: {
-    canonical: "https://eleveai.fr/espace-personnels",
+    canonical: "https://www.eleveai.fr/espace-personnels",
   },
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
-    url: "https://eleveai.fr/espace-personnels",
+    url: "https://www.eleveai.fr/espace-personnels",
     title: "Espace personnels — Documents & services | EleveAI",
     description:
       "Prompts prêts à copier pour documents clairs (note, protocole, fiche sécurité, affiche, remerciements).",

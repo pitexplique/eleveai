@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Le lagon dans ta main — la muraille vivante qui fabrique la plage",
     description:
       "Règle la houle, regarde la vague déferler sur la crête du récif — et le lagon rester calme. Le lagon de l'Ermitage simulé pour apprendre en jouant.",
-    url: "https://eleveai.fr/simulateur-lagon",
+    url: "https://www.eleveai.fr/simulateur-lagon",
     siteName: "EleveAI",
     images: [
       {

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Le corail du lagon — mesurer sans toucher, en tournant autour",
     description:
       "Une seule photo est ambiguë ; en filmant sous tous les angles, la plus grande « ombre » donne la vraie taille. Le geste de Hong Wang (Kakeya), dans le lagon de La Réunion.",
-    url: "https://eleveai.fr/corail-du-lagon",
+    url: "https://www.eleveai.fr/corail-du-lagon",
     siteName: "EleveAI",
     locale: "fr_FR",
     type: "website",
