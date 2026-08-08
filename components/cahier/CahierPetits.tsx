@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -785,12 +786,18 @@ export default function CahierPetits({
              bouton reste réservé à l'écran, mais le QR, lui, s'imprime. */}
           <div className="mt-8 rounded-2xl border border-orange-200 bg-orange-50 p-5">
             <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
-              <div>
-                <p className="text-sm font-bold text-slate-700">
-                  Envie de continuer en ligne&nbsp;? Dites qui vous êtes et ce que
-                  vous cherchez, EleveAI vous propose des ressources pédagogiques
-                  conçues, sélectionnées et vérifiées.
-                </p>
+              <div className="flex-1">
+                {/* ⭐ ON MONTRE L'ENTRÉE PLUTÔT QUE DE LA DÉCRIRE — même fin que dans
+                   les autres cahiers : l'image à gauche, le QR à droite. Elle
+                   s'imprime : sur le papier, ces deux-là sont tout ce qui reste. */}
+                <Image
+                  src="/preview.jpg"
+                  alt="L'entrée d'EleveAI : dis qui tu es, ta classe, ta matière, puis écris ce que tu cherches"
+                  width={1200}
+                  height={630}
+                  sizes="(max-width: 640px) 90vw, 520px"
+                  className="w-full max-w-[520px] rounded-xl border border-orange-200"
+                />
                 <Link
                   href={lienAccueil("cta-fin", config.slug)}
                   className="screen-only mt-3 inline-flex items-center gap-2 rounded-full bg-orange-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-orange-500/30 transition hover:bg-orange-400"

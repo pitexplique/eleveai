@@ -812,25 +812,20 @@ export default function CahierVacances({
 
           <div className="mt-8 rounded-2xl border border-teal-200 bg-teal-50 p-5">
             <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
-              <div>
-                <p className="text-base font-black text-slate-900">
-                  Ce cahier vous a plu&nbsp;? La suite est en ligne sur{" "}
-                  <span className="text-teal-600">eleveai.fr</span>
-                </p>
-                {/* Ce paragraphe S'IMPRIME, les deux boutons non (screen-only) : sur
-                   le papier il ne reste que lui et le QR. Il ne peut donc plus parler
-                   d'un compte seul — le QR mène à l'entrée du site. L'ordre suit celui
-                   des gestes : d'abord dire ce qu'on cherche, ensuite le compte. */}
-                <p className="mt-1 text-sm font-bold text-slate-600">
-                  <span className="font-black text-slate-800">Parents&nbsp;:</span>{" "}
-                  dites qui vous êtes et ce que vous cherchez, EleveAI vous propose
-                  des ressources pédagogiques conçues, sélectionnées et vérifiées.
-                  Pour suivre votre enfant et recevoir les nouveautés (nouveaux
-                  cahiers, coach, dictée du jour…), créez un compte{" "}
-                  <span className="font-black">gratuit</span>. Rien à installer&nbsp;:
-                  ça s&apos;ouvre dans le navigateur, et s&apos;ajoute à l&apos;écran
-                  d&apos;accueil comme une appli.
-                </p>
+              <div className="flex-1">
+                {/* ⭐ ON MONTRE L'ENTRÉE PLUTÔT QUE DE LA DÉCRIRE. Il y avait ici
+                   deux paragraphes qui expliquaient la même chose en huit lignes ;
+                   l'image la met sous les yeux — qui es-tu, ta classe, ta matière,
+                   puis le champ où l'on écrit. Elle s'imprime, comme le QR d'à côté :
+                   sur le papier, ces deux-là sont tout ce qui reste. */}
+                <Image
+                  src="/preview.jpg"
+                  alt="L'entrée d'EleveAI : dis qui tu es, ta classe, ta matière, puis écris ce que tu cherches"
+                  width={1200}
+                  height={630}
+                  sizes="(max-width: 640px) 90vw, 520px"
+                  className="w-full max-w-[520px] rounded-xl border border-teal-200"
+                />
                 <div className="screen-only mt-3 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
                   <Link
                     href="/auth/signin?from=cahier&utm_source=cahier&utm_medium=cta-fin"

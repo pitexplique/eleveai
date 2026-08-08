@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -427,12 +428,18 @@ export default function CahierParents({
              se terminait sans aucun lien. Le bouton reste à l'écran, le QR s'imprime. */}
           <div className="mt-8 rounded-2xl border border-teal-200 bg-teal-50 p-5">
             <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
-              <div>
-                <p className="text-sm font-bold text-slate-700">
-                  Envie d&apos;accompagner votre enfant plus loin&nbsp;? Dites qui
-                  vous êtes et ce que vous cherchez, EleveAI vous propose des
-                  ressources pédagogiques conçues, sélectionnées et vérifiées.
-                </p>
+              <div className="flex-1">
+                {/* ⭐ ON MONTRE L'ENTRÉE PLUTÔT QUE DE LA DÉCRIRE — même fin que dans
+                   les autres cahiers : l'image à gauche, le QR à droite. Elle
+                   s'imprime : sur le papier, ces deux-là sont tout ce qui reste. */}
+                <Image
+                  src="/preview.jpg"
+                  alt="L'entrée d'EleveAI : dis qui tu es, ta classe, ta matière, puis écris ce que tu cherches"
+                  width={1200}
+                  height={630}
+                  sizes="(max-width: 640px) 90vw, 520px"
+                  className="w-full max-w-[520px] rounded-xl border border-teal-200"
+                />
                 {/* ⚠️ Pointait sur « / » : une redirection de plus avant d'arriver là
                    où on va vraiment. On vise /accueil directement. */}
                 <Link
