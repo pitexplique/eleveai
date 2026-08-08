@@ -285,6 +285,20 @@ export const NOTIONS: NotionLexique[] = [
     ],
   },
   {
+    // ⭐ AJOUTÉE LE 08/08 (Frédéric : « picto maths qui concerne le collège
+    // n'apparaît pas dans ressources, ça servira aux profs surtout »).
+    //
+    // Les défis Picto existent en deux versions — CP→CM2 et CM2→3e — et le
+    // nom « picto » n'était écrit nulle part dans ce que la machine sait lire.
+    // Un prof qui les a vus au primaire et les redemande par leur nom pour sa
+    // classe de 5e ne trouvait donc que la version des petits.
+    id: "picto", label: "les défis en images", matiere: "maths",
+    alias: [
+      "picto", "picto maths", "pictomaths", "defis en images", "defi en image",
+      "un dessin une question", "dessin question", "sans lire", "sans texte",
+    ],
+  },
+  {
     // ⭐ AJOUTÉE LE 07/08 (Frédéric : « si on tape concours général sur la
     // barre de recherche il doit envoyer sur ce répertoire », « idem si on
     // tape concours avenir »).

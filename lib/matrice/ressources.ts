@@ -483,10 +483,16 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "Cahier de vacances de maths",
     promesse: "Vingt-cinq défis « un dessin, une question », corrigés, à imprimer.",
     url: "/cahier-vacances/maths",
-    niveaux: ["cm2", "6e", "5e", "4e", "3e"],
+    // ⭐ « prof » AUSSI (Frédéric, 08/08) — même correction que pour
+    // « Les maths en vrai ». C'est la version COLLÈGE des défis Picto, et
+    // l'enseignant est son premier public : un dessin projeté, une question,
+    // pas une ligne à lire. Il était le seul à ne pas la voir.
+    niveaux: ["cm2", "6e", "5e", "4e", "3e", "prof"],
     matiere: "maths",
-    notions: ["cahiers", "calcul", "geometrie", "grandeurs", "*"],
-    intentions: ["preparer", "entrainer", "decouvrir"],
+    // « picto » nommé ici aussi : un prof qui a vu les défis au primaire les
+    // cherche sous ce nom-là, et tombait alors sur la version CP→CM2.
+    notions: ["cahiers", "picto", "calcul", "geometrie", "grandeurs", "*"],
+    intentions: ["preparer", "entrainer", "decouvrir", "enseigner"],
     type: "cahier",
     resultat: "corrige",
     famille: "picto",
@@ -591,7 +597,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     url: "/picto-maths",
     niveaux: ["cp", "ce1", "ce2", "cm1", "cm2"],
     matiere: "maths",
-    notions: ["calcul", "geometrie", "grandeurs"],
+    notions: ["picto", "calcul", "geometrie", "grandeurs"],
     intentions: ["decouvrir", "entrainer"],
     type: "defi",
     resultat: "corrige",
