@@ -153,7 +153,23 @@ export default function CartesDeck({
   partenaire?: string; // ex "Keep Cool" (co-branding optionnel)
   retourHref?: string;
 }) {
-  const signupUrl = `https://www.eleveai.fr/auth/signin?from=${signupFrom}`;
+  /* OÙ VA CELUI QUI SCANNE — l'entrée du site, comme depuis les cahiers et les
+     guides. Ce QR menait droit à un formulaire d'inscription : on demandait de
+     s'engager avant d'avoir rien vu. L'accueil, lui, commence par demander qui on
+     est, la classe et la matière, puis propose.
+     ⚠️ /accueil DIRECT, et TOUJOURS LE www : ce carré part à l'imprimante, après
+     quoi l'adresse ne se corrige plus. */
+  // « Vers la 1re » → « vers-la-1re » : le niveau voyage dans l'URL, c'est la
+  // seule chose qu'on sait déjà de celui qui scanne.
+  const contenu = niveau
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+  const lienAccueil = (medium: string) =>
+    `/accueil?from=${signupFrom}&utm_source=${signupFrom}&utm_medium=${medium}&utm_content=${contenu}`;
+  const accueilQrUrl = `https://www.eleveai.fr${lienAccueil("qr-couverture")}`;
   const matieres = [...new Set(cartes.flatMap((c) => c.questions.map((q) => q.matiere)))];
   const departs: number[] = [];
   for (let i = 0; i < cartes.length; i += 5) departs.push(i);
@@ -164,7 +180,7 @@ export default function CartesDeck({
       <CaptureApresTelechargement
         signupFrom={signupFrom}
         produitDe="des cartes"
-        coachHref="/accueil#coach"
+        coachHref={lienAccueil("modale")}
       />
       <div className="screen-only border-b border-slate-200 bg-white/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
@@ -224,7 +240,7 @@ export default function CartesDeck({
             </p>
           )}
           <div className="mt-5 flex flex-col items-center gap-2">
-            <QRCodeSVG value={signupUrl} size={84} />
+            <QRCodeSVG value={accueilQrUrl} size={84} aria-label="QR code vers l'entrée d'EleveAI" />
             <p className="text-sm font-black text-teal-700">eleveai.fr</p>
             <p className="text-[10px] font-black uppercase tracking-wide text-slate-400">
               Scanne pour continuer gratuitement
