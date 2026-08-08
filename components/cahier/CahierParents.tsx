@@ -8,7 +8,6 @@ import {
   Download,
   GraduationCap,
   HandHeart,
-  Heart,
   Lightbulb,
   Monitor,
   Pencil,
@@ -21,8 +20,18 @@ import { QRCodeSVG } from "qrcode.react";
 import type { CahierParentsConfig, CahierParentsData, JourParent } from "./parents-types";
 import CaptureApresTelechargement from "./CaptureApresTelechargement";
 
-/* URL d'inscription encodée dans le QR de la couverture. ?from=cahier = tracking. */
-const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cahier";
+/* OÙ VA LE PARENT QUAND IL QUITTE LE CAHIER — l'accueil, pas un formulaire.
+   Même règle que dans les deux autres cahiers : les cahiers font les trois quarts
+   des visites du site, l'accueil moins d'un dixième. Celui qui scanne ne sait pas
+   encore ce qu'il veut ; l'accueil sait le lui demander — qui es-tu, ta classe, ta
+   matière — puis propose.
+   ⚠️ /accueil DIRECT (jamais « / »), et TOUJOURS LE www dans les QR : eleveai.fr
+   répond 308 vers www.eleveai.fr, et un QR imprimé ne se corrige plus. */
+const lienAccueil = (medium: string, slug: string) =>
+  `/accueil?from=cahier&utm_source=cahier&utm_medium=${medium}&utm_content=${slug}`;
+
+const lienAccueilQR = (medium: string, slug: string) =>
+  `https://www.eleveai.fr${lienAccueil(medium, slug)}`;
 
 /* Couleurs + libellé par domaine. */
 const DOMAINES: Record<
@@ -81,7 +90,9 @@ export default function CahierParents({
 
   return (
     <main className="relative isolate min-h-screen bg-[#f8fafc] text-slate-800">
-      <CaptureApresTelechargement coachHref="/accueil#coach" />
+      {/* ⚠️ Pointait sur « /accueil#coach » : l'ancre a disparu avec la refonte du
+         06/08 — le lien tombait en haut d'une page qui ne parle plus de coach. */}
+      <CaptureApresTelechargement coachHref={lienAccueil("modale", config.slug)} />
       {/* Barre d'actions (écran) */}
       <div className="screen-only border-b border-slate-200 bg-white/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
@@ -135,8 +146,10 @@ export default function CahierParents({
               « Nou la fé&nbsp;! » 🌺
             </p>
 
-            {/* Mission + QR « créez votre compte » : la couverture est la page la
-               plus vue → point de fuite vers l'inscription. ?from=cahier = tracking. */}
+            {/* Mission + QR : la couverture est la page la plus vue, et sur le
+               PAPIER ce QR est le seul lien qui existe. Il mène à l'entrée du site
+               — dites qui vous êtes et ce que vous cherchez — et non plus droit à
+               un formulaire d'inscription. */}
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <div className="inline-flex items-center gap-2 rounded-full bg-teal-600 px-6 py-3 text-lg font-black text-white shadow-lg shadow-teal-600/30">
                 <Sparkles className="h-5 w-5" />
@@ -144,11 +157,16 @@ export default function CahierParents({
               </div>
               <div className="flex items-center gap-2">
                 <p className="max-w-[96px] text-right text-[10px] font-black leading-tight text-slate-600">
-                  Scannez pour créer votre compte{" "}
-                  <span className="text-teal-600">gratuit</span>
+                  Scannez pour trouver la suite,{" "}
+                  <span className="text-teal-600">gratuitement</span>
                 </p>
                 <div className="inline-block rounded-lg border border-slate-200 bg-white p-1">
-                  <QRCodeSVG value={SIGNUP_URL} size={52} level="M" marginSize={1} />
+                  <QRCodeSVG
+                    value={lienAccueilQR("qr-couverture", config.slug)}
+                    size={52}
+                    level="M"
+                    marginSize={1}
+                  />
                 </div>
               </div>
             </div>
@@ -170,8 +188,11 @@ export default function CahierParents({
             ))}
           </div>
 
-          {/* Mode d'emploi + solidaire */}
-          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+          {/* Mode d'emploi.
+             ⛔ « Un cahier solidaire » retiré le 08/08 : il demandait un merci
+             pour un geste que le lecteur n'a pas fait, là où il cherche juste
+             comment se servir du cahier. */}
+          <div className="mt-7">
             <div className="rounded-2xl border border-teal-200 bg-teal-50 p-4">
               <h2 className="flex items-center gap-2 text-base font-black text-slate-900">
                 <BookOpen className="h-5 w-5 text-teal-600" />
@@ -181,17 +202,6 @@ export default function CahierParents({
                 Une page par jour, 10 minutes. Vous (re)découvrez la méthode que
                 votre enfant apprend, vous l&apos;essayez, et vous repartez avec
                 des façons concrètes de l&apos;aider — sans faire à sa place.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-orange-200 bg-orange-50 p-4">
-              <h2 className="flex items-center gap-2 text-base font-black text-slate-900">
-                <Heart className="h-4 w-4 text-orange-500" />
-                Un cahier solidaire
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                Gratuit : en l&apos;utilisant, vous participez à offrir
-                l&apos;accès à EleveAI à un enfant qui n&apos;en a pas les
-                moyens. Merci&nbsp;!
               </p>
             </div>
           </div>
@@ -415,11 +425,14 @@ export default function CahierParents({
 
           <div className="screen-only mt-8 rounded-2xl border border-teal-200 bg-teal-50 p-5 text-center">
             <p className="text-sm font-bold text-slate-700">
-              Envie d&apos;un coach qui accompagne votre enfant pas à pas, sans
-              lui donner la réponse&nbsp;?
+              Envie d&apos;accompagner votre enfant plus loin&nbsp;? Dites qui vous
+              êtes et ce que vous cherchez, EleveAI vous propose des ressources
+              pédagogiques conçues, sélectionnées et vérifiées.
             </p>
+            {/* ⚠️ Pointait sur « / » : une redirection de plus avant d'arriver là où
+               on va vraiment. On vise /accueil directement. */}
             <Link
-              href="/"
+              href={lienAccueil("cta-fin", config.slug)}
               className="mt-3 inline-flex items-center gap-2 rounded-full bg-teal-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-teal-600/30 transition hover:bg-teal-500"
             >
               <Sparkles className="h-4 w-4" />

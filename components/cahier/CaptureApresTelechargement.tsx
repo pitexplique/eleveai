@@ -10,20 +10,22 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import { Sparkles, X } from "lucide-react";
-import BandeauCallCahier from "./BandeauCallCahier";
 
 export default function CaptureApresTelechargement({
   coachHref,
   signupFrom = "cahier",
   produitDe = "du cahier",
-  slug = "",
 }: {
   coachHref: string;
   signupFrom?: string; // tag de tracking (ex "cartes", "keepcool")
   produitDe?: string; // ex "du cahier", "des cartes" → « Profite bien {produitDe} »
-  slug?: string; // slug du cahier → cible le bon call en direct (lycée vs parents)
 }) {
-  const SIGNUP_URL = `https://eleveai.fr/auth/signin?from=${signupFrom}&utm_source=${signupFrom}&utm_medium=modale`;
+  // ⚠️ LE www N'EST PAS FACULTATIF : eleveai.fr répond 308 vers www.eleveai.fr,
+  // c'est Vercel qui le décide. Ce QR-ci s'affiche à l'écran, mais l'adresse est
+  // la même partout — autant qu'elle soit juste du premier coup.
+  // Ce bouton et ce QR restent sur l'inscription, eux : « créer mon espace » et
+  // « trouve-moi quelque chose » ne sont pas la même intention.
+  const SIGNUP_URL = `https://www.eleveai.fr/auth/signin?from=${signupFrom}&utm_source=${signupFrom}&utm_medium=modale`;
   const [open, setOpen] = useState(false);
   const [dejaVu, setDejaVu] = useState(false);
 
@@ -93,9 +95,10 @@ export default function CaptureApresTelechargement({
           </figcaption>
         </figure>
 
-        {/* Le call en direct : timing parfait — il vient de télécharger le
-           cahier, on lui propose de le faire ENSEMBLE (s'efface après le call). */}
-        <BandeauCallCahier slug={slug} />
+        {/* ⛔ « En direct avec Frédéric » retiré le 08/08 : le timing semblait
+           parfait — il vient d'imprimer, on lui proposait de le faire ensemble —
+           mais personne ne s'est inscrit depuis les cahiers. On ne garde pas une
+           ligne qui ne fait que retarder le seul bouton de cette carte. */}
 
         <div className="mt-4 flex items-center gap-4">
           <div className="flex-1 space-y-2">

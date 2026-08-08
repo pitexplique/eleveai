@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import {
@@ -11,7 +12,6 @@ import {
   Download,
   Dumbbell,
   GraduationCap,
-  Heart,
   Mouse,
   Pencil,
   Printer,
@@ -22,12 +22,30 @@ import {
 } from "lucide-react";
 import type { CahierConfig, CahierData } from "./types";
 import CaptureApresTelechargement from "./CaptureApresTelechargement";
-import BandeauCallCahier from "./BandeauCallCahier";
 import { bougeDuJour } from "@/lib/cahier/bougeDuJour";
 
-/* URL d'inscription encodée dans le QR de fin de cahier. Le ?from=cahier
-   permet de tracer les inscriptions venues du cahier de vacances. */
-const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cahier&utm_source=cahier&utm_medium=cta-fin";
+/* OÙ VA LE PARENT QUAND IL QUITTE LE CAHIER — l'accueil, pas un formulaire.
+   Les cahiers font les trois quarts des visites du site et l'accueil moins d'un
+   dixième : l'entrée doit être là où les gens arrivent. Le parent qui scanne ne
+   sait pas encore ce qu'il veut ; l'accueil, lui, sait le lui demander — qui es-tu,
+   ta classe, ta matière — puis propose. Un formulaire d'inscription, à cet
+   endroit, demande de s'engager avant d'avoir rien vu.
+   ⛔ SEULE EXCEPTION, plus bas : « Créer un compte gratuit ». Celui-là sait déjà
+   ce qu'il veut, on ne lui ajoute pas une étape.
+
+   ⚠️ /accueil DIRECT, jamais « / » : une redirection de moins sur le chemin, et
+   un QR imprimé ne doit dépendre de rien.
+   ⚠️ ET TOUJOURS LE www DANS LES QR. eleveai.fr répond 308 vers www.eleveai.fr,
+   c'est Vercel qui le décide. Une fois le cahier sorti de l'imprimante, l'adresse
+   ne se corrige plus. */
+const lienAccueil = (medium: string, slug: string) =>
+  `/accueil?from=cahier&utm_source=cahier&utm_medium=${medium}&utm_content=${slug}`;
+
+/* Le même lien, en absolu, pour les QR : le papier n'a pas de base d'URL.
+   utm_content porte le slug du cahier — la classe qu'on connaissait déjà et que
+   l'accueil va redemander ; au moins elle reste lisible dans les stats. */
+const lienAccueilQR = (medium: string, slug: string) =>
+  `https://www.eleveai.fr${lienAccueil(medium, slug)}`;
 
 /* Habillage de la rubrique « Comprendre le monde » selon son thème du jour. */
 const themesMonde = {
@@ -167,8 +185,7 @@ export default function CahierVacances({
     <main className="relative isolate min-h-screen bg-[#f8f6ff] text-slate-800">
       {/* Capter après le téléchargement/impression (jamais avant, aucun mur). */}
       <CaptureApresTelechargement
-        coachHref={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier&utm_source=cahier&utm_medium=modale`}
-        slug={config.slug}
+        coachHref={lienAccueil("modale", config.slug)}
       />
       {/* Barre d'actions (écran) */}
       <div className="screen-only border-b border-slate-200 bg-white/80 backdrop-blur-md">
@@ -191,22 +208,36 @@ export default function CahierVacances({
         </div>
       </div>
 
-      {/* CTA « aimant » en HAUT (écran) : UN seul geste évident — continuer avec
-         le coach IA. Capte le parent venu de Google AVANT qu'il ne reparte (le
-         cahier gratuit se suffit sinon). Bouton primaire seul, « Imprimer » passe
-         en secondaire, les autres liens descendent sous le cahier. ?from=cahier =
-         tracking. */}
+      {/* CTA « aimant » en HAUT (écran) : UN seul geste évident — continuer en
+         ligne. Capte le parent venu de Google AVANT qu'il ne reparte (le cahier
+         gratuit se suffit sinon). Bouton primaire seul, « Imprimer » passe en
+         secondaire, les autres liens descendent sous le cahier.
+         ⚠️ Ce pavé promettait « un coach IA » et menait droit au coach, matière
+         imposée. Il mène maintenant à l'accueil, qui demande d'abord qui on est —
+         donc il annonce ce qu'il livre, sinon on promet une porte et on en ouvre
+         une autre. */}
       <div className="screen-only mx-auto max-w-4xl px-5 pt-5 sm:px-8">
         <div className="rounded-2xl bg-amber-400 p-4 text-center shadow-lg shadow-amber-500/30 sm:p-5">
           <p className="inline-flex items-center gap-2 text-base font-black text-slate-900 sm:text-lg">
             <Sparkles className="h-5 w-5" />
-            Continuer avec un coach IA — gratuit
+            Continuer en ligne — gratuit
           </p>
-          <p className="mt-0.5 text-xs font-bold text-amber-950/80">
-            Maths, français, anglais… du CP au Bac, au rythme de ton enfant, sans jugement.
-          </p>
+          {/* ⭐ ON MONTRE L'ENTRÉE PLUTÔT QUE DE LA DÉCRIRE. Deux phrases
+             expliquaient ce qui attend le parent au bout du bouton ; l'image le
+             lui met sous les yeux — qui es-tu, ta classe, ta matière, puis le
+             champ où l'on écrit. C'est la même image que celle qui s'affiche
+             quand on partage un lien du site : ce qu'il voit ici, il le
+             retrouvera. */}
+          <Image
+            src="/preview.jpg"
+            alt="L'entrée d'EleveAI : dis qui tu es, ta classe, ta matière, puis écris ce que tu cherches"
+            width={1200}
+            height={630}
+            sizes="(max-width: 640px) 90vw, 480px"
+            className="mx-auto mt-3 w-full max-w-[480px] rounded-xl border border-amber-500/40 shadow-md"
+          />
           <Link
-            href={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier&utm_source=cahier&utm_medium=cta-haut`}
+            href={lienAccueil("cta-haut", config.slug)}
             className="mt-3 inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-black text-white shadow-md transition hover:bg-slate-800"
           >
             <Sparkles className="h-4 w-4" />
@@ -227,10 +258,11 @@ export default function CahierVacances({
           </figure>
         </div>
 
-        {/* Une seule LIGNE fine pour le call en direct (pas un 2e pavé : le haut
-           de page reste à UN geste principal). Ciblé par niveau, s'efface tout
-           seul une fois le call passé (lib/calls.ts). */}
-        <BandeauCallCahier slug={config.slug} />
+        {/* ⛔ « En direct avec Frédéric » retiré des cahiers le 08/08 : la ligne
+           s'affichait sur les onze cahiers, et personne ne s'est inscrit. Une
+           proposition qui ne trouve pas preneur encombre le seul geste qu'on
+           demande ici. Le composant reste sur le disque (BandeauCallCahier.tsx),
+           simplement plus appelé — les calls, eux, gardent leur page. */}
       </div>
 
       <article className="mx-auto max-w-4xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0">
@@ -334,20 +366,31 @@ export default function CahierVacances({
               <div className="mt-5 border-b-2 border-dotted border-slate-300" />
             </div>
             {/* QR « continuer gratuitement » : la couverture est la page la plus vue
-               et la plus partagée → le meilleur point de fuite vers l'inscription.
-               ?from=cahier = tracking. Impression 100 % libre, aucun mur.
-               Légende à gauche du QR (pas dessous) pour ne pas rallonger la garde. */}
+               et la plus partagée → le meilleur point de fuite. Sur le PAPIER, ce QR
+               est le seul lien qui existe : les boutons de l'écran ne s'impriment pas.
+               Il mène donc à l'entrée du site, pas à un formulaire.
+               Impression 100 % libre, aucun mur. Légende à gauche du QR (pas dessous)
+               pour ne pas rallonger la garde. */}
             <div className="flex shrink-0 items-center gap-2">
               <p className="max-w-[84px] text-right text-[10px] font-black leading-tight text-slate-600">
                 Scanne pour continuer <span className="text-teal-600">gratuitement</span>
               </p>
               <div className="inline-block rounded-lg border border-slate-200 bg-white p-1">
-                <QRCodeSVG value={SIGNUP_URL} size={52} level="M" marginSize={1} />
+                <QRCodeSVG
+                  value={lienAccueilQR("qr-couverture", config.slug)}
+                  size={52}
+                  level="M"
+                  marginSize={1}
+                />
               </div>
             </div>
           </div>
 
-          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+          {/* ⛔ « Un cahier solidaire » retiré le 08/08 : sur la couverture, il
+             demandait un merci pour un geste que le lecteur n'a pas fait, à
+             l'endroit où il cherche juste comment se servir du cahier. La grille
+             passe donc à une seule carte, pleine largeur. */}
+          <div className="mt-7">
             <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
               <h2 className="flex items-center gap-2 text-base font-black text-slate-900">
                 <BookOpen className="h-5 w-5 text-teal-500" />
@@ -357,16 +400,6 @@ export default function CahierVacances({
                 Une page par jour, à ton rythme : un peu de maths, un peu de
                 français, un mot nouveau et un défi. Les corrigés sont à la fin
                 du cahier.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-orange-200 bg-orange-50 p-4">
-              <h2 className="flex items-center gap-2 text-base font-black text-slate-900">
-                <Heart className="h-4 w-4 text-orange-500" />
-                Un cahier solidaire
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                En utilisant ce cahier, tu participes à offrir l&apos;accès à
-                EleveAI à un élève qui n&apos;en a pas les moyens. Merci&nbsp;!
               </p>
             </div>
           </div>
@@ -784,12 +817,18 @@ export default function CahierVacances({
                   Ce cahier vous a plu&nbsp;? La suite est en ligne sur{" "}
                   <span className="text-teal-600">eleveai.fr</span>
                 </p>
+                {/* Ce paragraphe S'IMPRIME, les deux boutons non (screen-only) : sur
+                   le papier il ne reste que lui et le QR. Il ne peut donc plus parler
+                   d'un compte seul — le QR mène à l'entrée du site. L'ordre suit celui
+                   des gestes : d'abord dire ce qu'on cherche, ensuite le compte. */}
                 <p className="mt-1 text-sm font-bold text-slate-600">
                   <span className="font-black text-slate-800">Parents&nbsp;:</span>{" "}
-                  créez un compte <span className="font-black">gratuit</span> pour
-                  suivre votre enfant et être prévenu·e des nouveautés (nouveaux
-                  cahiers, coach, dictée du jour…). Rien à installer&nbsp;: ça
-                  s&apos;ouvre dans le navigateur, et s&apos;ajoute à l&apos;écran
+                  dites qui vous êtes et ce que vous cherchez, EleveAI vous propose
+                  des ressources pédagogiques conçues, sélectionnées et vérifiées.
+                  Pour suivre votre enfant et recevoir les nouveautés (nouveaux
+                  cahiers, coach, dictée du jour…), créez un compte{" "}
+                  <span className="font-black">gratuit</span>. Rien à installer&nbsp;:
+                  ça s&apos;ouvre dans le navigateur, et s&apos;ajoute à l&apos;écran
                   d&apos;accueil comme une appli.
                 </p>
                 <div className="screen-only mt-3 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
@@ -801,23 +840,31 @@ export default function CahierVacances({
                     Créer un compte gratuit
                   </Link>
                   <Link
-                    href={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier&utm_source=cahier&utm_medium=cta-fin`}
+                    href={lienAccueil("cta-fin", config.slug)}
                     className="inline-flex items-center gap-2 rounded-full border border-teal-300 bg-white px-5 py-3 text-sm font-black text-teal-700 transition hover:bg-teal-50"
                   >
-                    Découvrir le Coach IA
+                    Découvrir EleveAI
                   </Link>
                 </div>
               </div>
 
-              {/* QR code vers l'inscription parent (visible écran ET impression) */}
+              {/* Le QR de la dernière page (visible écran ET impression). Le bouton
+                 « Créer un compte » est juste à côté pour qui lit à l'écran ; celui
+                 qui a la feuille en main, lui, n'a que ce carré — on l'emmène à
+                 l'entrée, pas devant un formulaire. */}
               <div className="shrink-0 text-center">
                 <div className="inline-block rounded-xl border border-slate-200 bg-white p-2">
-                  <QRCodeSVG value={SIGNUP_URL} size={112} level="M" marginSize={2} />
+                  <QRCodeSVG
+                    value={lienAccueilQR("qr-fin", config.slug)}
+                    size={112}
+                    level="M"
+                    marginSize={2}
+                  />
                 </div>
                 <p className="mt-1 text-xs font-black leading-tight text-slate-700">
-                  Scannez pour créer
+                  Scannez pour trouver
                   <br />
-                  votre compte gratuit
+                  la suite, gratuitement
                 </p>
                 <p className="text-[10px] font-bold text-slate-400">
                   eleveai.fr

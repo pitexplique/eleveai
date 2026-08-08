@@ -8,7 +8,6 @@ import {
   CheckCircle2,
   Download,
   Hand,
-  Heart,
   Pencil,
   Printer,
   Sparkles,
@@ -21,8 +20,21 @@ import type { Activite, CahierDataPetit, JourPetit } from "./petits-types";
 import CaptureApresTelechargement from "./CaptureApresTelechargement";
 import { bougeDuJour } from "@/lib/cahier/bougeDuJour";
 
-/* URL d'inscription encodée dans le QR de la couverture. ?from=cahier = tracking. */
-const SIGNUP_URL = "https://eleveai.fr/auth/signin?from=cahier";
+/* OÙ VA LE PARENT QUAND IL QUITTE LE CAHIER — l'accueil, pas un formulaire.
+   Même règle que dans CahierVacances : les cahiers font les trois quarts des
+   visites du site, l'accueil moins d'un dixième. Le parent qui scanne ne sait pas
+   encore ce qu'il veut ; l'accueil sait le lui demander — qui es-tu, ta classe, ta
+   matière — puis propose. Un formulaire d'inscription demanderait de s'engager
+   avant d'avoir rien vu.
+   ⚠️ /accueil DIRECT (jamais « / »), et TOUJOURS LE www dans les QR : eleveai.fr
+   répond 308 vers www.eleveai.fr, et un QR imprimé ne se corrige plus.
+   ⚠️ Ces liens n'avaient AUCUN utm : les deux cahiers des petits étaient
+   invisibles dans le tunnel — on ne savait pas s'ils ramenaient quelqu'un. */
+const lienAccueil = (medium: string, slug: string) =>
+  `/accueil?from=cahier&utm_source=cahier&utm_medium=${medium}&utm_content=${slug}`;
+
+const lienAccueilQR = (medium: string, slug: string) =>
+  `https://www.eleveai.fr${lienAccueil(medium, slug)}`;
 
 /* Barème de points — un cahier « petits » reste simple (sur 10). */
 const baremePoints = [
@@ -275,9 +287,7 @@ export default function CahierPetits({
 
   return (
     <main className="relative isolate min-h-screen bg-[#fff7ed] text-slate-800">
-      <CaptureApresTelechargement
-        coachHref={`/coach-ia/maths?classe=${config.coachClasse}&from=cahier`}
-      />
+      <CaptureApresTelechargement coachHref={lienAccueil("modale", config.slug)} />
       {/* Barre d'actions (écran) */}
       <div className="screen-only border-b border-slate-200 bg-white/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
@@ -406,13 +416,21 @@ export default function CahierPetits({
                 <span className="text-teal-600">gratuitement</span>
               </p>
               <div className="inline-block rounded-lg border border-slate-200 bg-white p-1">
-                <QRCodeSVG value={SIGNUP_URL} size={52} level="M" marginSize={1} />
+                <QRCodeSVG
+                  value={lienAccueilQR("qr-couverture", config.slug)}
+                  size={52}
+                  level="M"
+                  marginSize={1}
+                />
               </div>
             </div>
           </div>
 
-          {/* Mode d'emploi parent + solidaire */}
-          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+          {/* Mode d'emploi parent.
+             ⛔ « Un cahier solidaire » retiré le 08/08 : il demandait un merci
+             pour un geste que le lecteur n'a pas fait, là où il cherche juste
+             comment se servir du cahier. */}
+          <div className="mt-7">
             <div className="rounded-2xl border border-sky-200 bg-sky-50 p-4">
               <h2 className="flex items-center gap-2 text-base font-black text-slate-900">
                 <Hand className="h-5 w-5 text-sky-500" />
@@ -423,16 +441,6 @@ export default function CahierPetits({
                 Vous lisez les consignes <span className="font-bold">🗣️</span> à
                 voix haute ; l&apos;enfant compte, entoure, trace et colorie. Les
                 corrigés sont à la fin.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-orange-200 bg-orange-50 p-4">
-              <h2 className="flex items-center gap-2 text-base font-black text-slate-900">
-                <Heart className="h-4 w-4 text-orange-500" />
-                Un cahier solidaire
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                En utilisant ce cahier, vous participez à offrir l&apos;accès à
-                EleveAI à un enfant qui n&apos;en a pas les moyens. Merci&nbsp;!
               </p>
             </div>
           </div>
@@ -773,14 +781,16 @@ export default function CahierPetits({
 
           <div className="screen-only mt-8 rounded-2xl border border-orange-200 bg-orange-50 p-5 text-center">
             <p className="text-sm font-bold text-slate-700">
-              Envie de continuer en ligne, avec un coach qui s&apos;adapte&nbsp;?
+              Envie de continuer en ligne&nbsp;? Dites qui vous êtes et ce que vous
+              cherchez, EleveAI vous propose des ressources pédagogiques conçues,
+              sélectionnées et vérifiées.
             </p>
             <Link
-              href={`/coach-ia/maths?classe=${config.coachClasse}`}
+              href={lienAccueil("cta-fin", config.slug)}
               className="mt-3 inline-flex items-center gap-2 rounded-full bg-orange-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-orange-500/30 transition hover:bg-orange-400"
             >
               <Sparkles className="h-4 w-4" />
-              Découvrir le Coach IA
+              Découvrir EleveAI
             </Link>
           </div>
 
