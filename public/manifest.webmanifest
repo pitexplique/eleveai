@@ -1,7 +1,7 @@
 {
-  "name": "EleveAI — apprendre et s'évaluer · La Réunion",
+  "name": "EleveAI",
   "short_name": "EleveAI",
-  "description": "Dis qui tu es et ce que tu veux faire aujourd'hui : EleveAI cherche, parmi des ressources relues par un enseignant, celles qui peuvent t'aider. Un coach qui explique sans faire à ta place en maths, français, anglais, espagnol et IA, des exercices corrigés, la dictée et le défi du jour, les machines de l'île dans ta main. Du CP à la Terminale, gratuit, à La Réunion.",
+  "description": "EleveAI te propose des ressources pédagogiques conçues, sélectionnées et vérifiées. Dis qui tu es et ce que tu cherches : coach en maths, français, anglais, espagnol et IA, exercices corrigés, cahiers de vacances, dictée et calcul rapide. Du CP au Bac, gratuit, conçu à La Réunion.",
   "start_url": "/accueil",
   "scope": "/",
   "display": "standalone",
@@ -37,7 +37,7 @@
   "shortcuts": [
     {
       "name": "Que veux-tu faire ?",
-      "url": "/ia",
+      "url": "/accueil",
       "description": "Dis ce qui coince, on cherche à ta place"
     },
     {
@@ -46,9 +46,9 @@
       "description": "Il explique, il ne fait jamais à ta place"
     },
     {
-      "name": "Le défi du jour",
-      "url": "/defis-du-jour",
-      "description": "Un vrai problème chaque matin"
+      "name": "Le calcul rapide",
+      "url": "/calcul-rapide",
+      "description": "Cinq minutes, chrono, et on recommence demain"
     },
     {
       "name": "La dictée du jour",
@@ -56,28 +56,21 @@
       "description": "5 mots sans faute, avec l'audio"
     },
     {
-      "name": "Les machines dans ta main",
-      "url": "/simulateur-fromage",
-      "description": "Cyclone, sucrerie, fromagerie : règle, regarde, calcule"
+      "name": "Les cahiers de vacances",
+      "url": "/cahier-vacances",
+      "description": "À imprimer, avec les corrigés"
     }
   ],
   "screenshots": [
     {
-      "src": "/images/fromagerie.webp",
-      "sizes": "1200x675",
-      "type": "image/webp",
+      "src": "/preview.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
       "form_factor": "wide",
-      "label": "La fromagerie dans ta main — du pré au pot"
-    },
-    {
-      "src": "/images/usine-sucre.webp",
-      "sizes": "1200x675",
-      "type": "image/webp",
-      "form_factor": "wide",
-      "label": "L'usine dans ta main — du champ au sucre et à la lumière"
+      "label": "Dis qui tu es et ce que tu cherches — EleveAI propose"
     }
   ],
-  "categories": ["education", "news", "kids"],
+  "categories": ["education"],
   "lang": "fr-FR",
   "dir": "ltr"
 }

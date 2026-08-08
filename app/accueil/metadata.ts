@@ -23,8 +23,31 @@ export const metadata: Metadata = {
   // `absolute` dit au gabarit de ne pas s'appliquer ici.
   title: { absolute: TITRE },
 
+  // ⭐ RÉÉCRITE LE 08/08, ET VOICI CE QUI L'A DÉCLENCHÉ.
+  //
+  // Google a re-crawlé l'entrée refondue en deux jours — c'est rapide, et c'est
+  // vérifiable : le résultat de recherche affiche « Qui es-tu ? Élève Parent
+  // Enseignant Chef d'établissement. Ta matière. Mathématiques Français… ».
+  // Autrement dit, IL A JETÉ CETTE DESCRIPTION ET PRIS LE TEXTE DES BOUTONS.
+  //
+  // Pourquoi : elle ne disait plus la même chose que la page. Elle annonçait
+  // « des ressources vérifiées » quand le titre de la page dit « conçues,
+  // sélectionnées et vérifiées ». Quand la description ne colle pas au contenu
+  // visible, Google la remplace par ce qu'il trouve à l'écran — et sur une page
+  // de 68 mots, ce qu'il trouve, ce sont des libellés de pastilles.
+  //
+  // ⚠️ RIEN NE GARANTIT QU'IL LA REPRENNE. L'aligner sur la promesse est le
+  // seul levier qu'on tient ; le choix final lui appartient. Ce qui est sûr,
+  // c'est qu'une description qui contredit la page ne sera jamais retenue.
+  //
+  // La forme suit ChatGPT, Claude et IXL, comparés le 08/08 : « Use ChatGPT
+  // to… », « Claude is… », « IXL is… ». Les trois mettent LA MARQUE DANS LES
+  // TROIS PREMIERS MOTS, puis un verbe, puis du concret. Ici : « EleveAI te
+  // propose… ». La phrase d'action — « Dis qui tu es et ce que tu cherches » —
+  // vient en deuxième, parce qu'elle ne veut rien dire tant qu'on n'a pas dit
+  // de qui elle vient. 143 signes : Google coupe autour de 155.
   description:
-    "Dis ce que tu cherches, EleveAI te propose des ressources vérifiées : coach en maths, français, anglais, espagnol et IA, exercices corrigés, cahiers de vacances. Gratuit.",
+    "EleveAI te propose des ressources pédagogiques conçues, sélectionnées et vérifiées. Dis qui tu es et ce que tu cherches. Du CP au Bac, gratuit.",
 
   // ⭐ La SEULE canonique du site posée à la main, et elle est légitime :
   // la racine `/` répond 308 vers `/accueil`, donc deux adresses mènent
@@ -48,8 +71,11 @@ export const metadata: Metadata = {
 
   openGraph: {
     title: TITRE,
+    // Même promesse, au mot près. Trois formulations du même engagement sur
+    // trois surfaces, c'est l'engagement qu'on cesse de croire — et celle-ci
+    // est lue quand quelqu'un PARTAGE le lien, donc quand il en répond.
     description:
-      "Dis qui tu es et ce que tu veux faire aujourd'hui. EleveAI te propose des ressources vérifiées par un enseignant — maths, français, anglais, espagnol et IA, du CP au Bac, gratuitement.",
+      "EleveAI te propose des ressources pédagogiques conçues, sélectionnées et vérifiées. Dis qui tu es et ce que tu cherches. Du CP au Bac, gratuit.",
     url: "/accueil",
     type: "website",
     siteName: "EleveAI",

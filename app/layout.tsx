@@ -61,8 +61,19 @@ export const metadata: Metadata = {
     template: "%s — EleveAI",
   },
 
+  // ⚠️ C'EST LA DESCRIPTION DE TOUTE PAGE QUI N'EN DÉCLARE PAS. Elle voyage
+  // donc bien plus loin que l'accueil, et elle annonçait encore « des
+  // ressources vérifiées » alors que la promesse est devenue « conçues,
+  // sélectionnées et vérifiées » le 07/08. Le verbe manquant était le premier :
+  // « vérifiées » seul laisse croire qu'EleveAI ne fait que relire ce que
+  // d'autres ont écrit — les coachs, les parcours, les cahiers et les guides
+  // sont écrits ici.
+  //
+  // ⭐ LA MARQUE DANS LES TROIS PREMIERS MOTS (08/08). Forme reprise de
+  // ChatGPT, Claude et IXL, comparés le matin même : « Use ChatGPT to… »,
+  // « Claude is… », « IXL is… ». 149 signes ; Google coupe autour de 155.
   description:
-    "Dis ce que tu cherches, EleveAI te propose des ressources vérifiées par un enseignant : coach en maths, français, anglais, espagnol et IA, exercices corrigés, cahiers de vacances, dictée et défi du jour. Du CP au Bac, gratuit.",
+    "EleveAI te propose des ressources pédagogiques conçues, sélectionnées et vérifiées : maths, français, anglais, espagnol et IA. Du CP au Bac, gratuit.",
 
   keywords: [
     "EleveAI",
@@ -106,7 +117,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac",
     description:
-      "Dis ce que tu cherches, EleveAI te propose des ressources vérifiées par un enseignant : coach en maths, français, anglais, espagnol et IA, exercices corrigés, cahiers de vacances. Du CP au Bac, gratuit.",
+      "EleveAI te propose des ressources pédagogiques conçues, sélectionnées et vérifiées par un enseignant. Dis qui tu es et ce que tu cherches, du CP au Bac.",
     url: "/accueil",
     type: "website",
     siteName: "EleveAI",
@@ -119,7 +130,7 @@ export const metadata: Metadata = {
         // ⛔ « le journal » retiré de ce texte alternatif le 06/08 : il décrivait
         // encore une page qui n'existe plus, et c'est lui que lisent les
         // lecteurs d'écran comme les IA quand elles décrivent l'aperçu.
-        alt: "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac, conçu à La Réunion",
+        alt: "EleveAI — dis qui tu es, ta classe, ta matière, puis écris ce que tu cherches",
       },
     ],
   },
@@ -128,7 +139,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac",
     description:
-      "Dis ce que tu cherches, EleveAI te propose des ressources vérifiées par un enseignant — maths, français, anglais, espagnol et IA. Il explique sans faire à ta place, tout est corrigé.",
+      "EleveAI te propose des ressources pédagogiques conçues, sélectionnées et vérifiées par un enseignant — maths, français, anglais, espagnol et IA, du CP au Bac.",
     images: ["/preview.jpg"],
   },
 };
@@ -149,9 +160,15 @@ export default function RootLayout({
       // Tant qu'il était là, on continuait de dire à Google qu'on est un
       // journal, sur toutes les pages du site.
       url: SITE_URL,
-      logo: `${SITE_URL}/preview.jpg`,
+      // ⚠️ LE LOGO N'EST PAS L'APERÇU DE PARTAGE (corrigé le 08/08). Ce champ
+      // pointait vers `/preview.jpg`, qui RENVOYAIT 404 : le logo qu'une IA ou
+      // Google lisent pour représenter EleveAI menait nulle part. L'aperçu
+      // existe maintenant, mais c'est une bannière 1200×630 avec une phrase
+      // dedans — schema.org attend une MARQUE, pas une affiche. On donne donc
+      // l'icône de l'application, carrée, lisible en vignette.
+      logo: `${SITE_URL}/icons/icon-512.png`,
       description:
-        "EleveAI propose à chaque élève, parent ou enseignant les ressources vérifiées qui correspondent à sa demande : un coach qui explique sans faire à sa place en maths, français, anglais, espagnol et IA, des exercices corrigés, des cahiers de vacances et des activités ancrées dans le réel de La Réunion.",
+        "EleveAI propose à chaque élève, parent ou enseignant les ressources pédagogiques conçues, sélectionnées et vérifiées qui correspondent à sa demande : un coach qui explique sans faire à sa place en maths, français, anglais, espagnol et IA, des exercices corrigés, des cahiers de vacances et des activités ancrées dans le réel de La Réunion.",
       areaServed: { "@type": "Place", name: "La Réunion" },
       foundingLocation: { "@type": "Place", name: "La Réunion, France" },
       // La chaîne officielle, confirmée par Frédéric le 06/08. C'est ce lien

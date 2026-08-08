@@ -12,7 +12,7 @@ import { Compass, ArrowRight } from "lucide-react";
 import { fetchCatalogue, type ActionCatalogue } from "@/lib/server/catalogue";
 
 export const metadata: Metadata = {
-  title: "Explorer — tout ce que tu peux faire | EleveAI",
+  title: "Explorer tout ce que tu peux faire",
   description:
     "Le catalogue complet d'EleveAI : coachs, parcours, rituels du jour, révision, concours, cahiers de vacances. Trouve ta prochaine activité, dans ta matière forte ou une voie à découvrir.",
   alternates: { canonical: "/explorer" },

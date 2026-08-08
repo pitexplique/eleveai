@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Qui sommes-nous ? — EleveAI, plusieurs portes pour apprendre",
+  title: "Qui sommes-nous ? Un prof, à La Réunion",
   description:
     "EleveAI est un espace pédagogique créé par Frédéric Lacoste, professeur de mathématiques à La Réunion : maths, français, anglais, espagnol et IA, avec un suivi réel de la progression des élèves, du CP au Bac.",
   alternates: {

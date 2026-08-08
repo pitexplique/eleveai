@@ -5,7 +5,7 @@ import TarifsClient from "./TarifsClient";
 const url = "https://eleveai.fr/tarifs";
 
 export const metadata: Metadata = {
-  title: "Tarifs EleveAI — Pilote gratuit, établissements, familles",
+  title: "Tarifs — pilote gratuit, établissements, familles",
   description:
     "Accès pilote gratuit 4 semaines pour les collèges et lycées. Offre établissement sur devis. Abonnement famille 4,90 €/mois.",
   alternates: { canonical: url },

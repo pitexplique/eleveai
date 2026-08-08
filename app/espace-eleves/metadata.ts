@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 // La page tient la 2e place de la SERP de marque (constat Bing 25/07) : ce
 // texte est la vitrine « élève » vue des moteurs. Aucune promesse datée.
 export const metadata: Metadata = {
-  title: "Espace élèves | EleveAI — Coachs, rituels du jour, parcours",
+  title: "Apprendre à ton rythme, du CP au Bac",
   description:
     "Ton espace EleveAI : cinq coachs (maths, français, anglais, espagnol, IA), la dictée et les mots du jour, des parcours pour faire le point et des machines pour comprendre. Gratuit, du CP au Bac.",
   alternates: {

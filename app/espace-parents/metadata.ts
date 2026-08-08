@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Espace parents | EleveAI — Suivre la progression de votre enfant",
+  title: "Suivre la progression de votre enfant",
   description:
     "EleveAI accompagne votre enfant en maths : Coach IA, Parcours, Brevet des collèges, Calcul rapide, English Maths. Résultats enregistrés, progression visible.",
   alternates: { canonical: "https://eleveai.fr/espace-parents" },
