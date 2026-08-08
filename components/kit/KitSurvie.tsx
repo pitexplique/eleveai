@@ -2,10 +2,13 @@
 
 // Moteur « Guide de survie » : rendu écran + impression A4 d'un condensé de
 // programme (1 notion = 1 page). Piloté par les données (voir types.ts).
-// Règle produit : le kit est une PORTE, le coach est la destination — chaque
-// page ramène vers /coach-ia. Capture APRÈS la valeur, jamais de mur
+// Règle produit : le kit est une PORTE. Le pied de chaque fiche ramène au coach
+// du niveau — c'est une action précise, l'élève sait ce qu'il veut. Les QR, eux,
+// mènent à l'entrée du site (08/08) : on ne sait pas qui scanne, l'accueil sait
+// le demander. Capture APRÈS la valeur, jamais de mur
 // (CaptureApresTelechargement sur `afterprint`, QR en couverture).
 
+import Image from "next/image";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import MarkdownMath from "@/components/MarkdownMath";
@@ -238,11 +241,18 @@ export default function KitSurvie({ data }: { data: KitData }) {
   // dynamique /coach-ia/[matiere] qui lit ?classe=. On adapte donc la clé.
   const coachParam = data.matiere === "english-maths" ? "niveau" : "classe";
   const coachHref = `/coach-ia/${data.matiere}?${coachParam}=${data.coachClasse}`;
-  // Le QR de garde mène AU COACH du niveau (la destination), pas à un mur de
-  // connexion : le guide est une porte, on tient la promesse « continue et
-  // entraîne-toi ». La capture d'email se fait sans mur via la modale
-  // post-impression. `from=kit` = tracking de la porte → coach.
-  const coachQrUrl = `https://eleveai.fr/coach-ia/${data.matiere}?${coachParam}=${data.coachClasse}&from=kit`;
+
+  /* OÙ VA CELUI QUI QUITTE LE GUIDE — l'entrée du site, comme depuis les cahiers.
+     Le lien « m'entraîner sur ce chapitre » reste sur le coach : c'est une action
+     précise, celui qui clique sait déjà ce qu'il veut. Mais un QR, on ne sait pas
+     qui le scanne ni pourquoi — l'accueil, lui, sait le demander : qui es-tu, ta
+     classe, ta matière, puis il propose.
+     ⚠️ TOUJOURS LE www : eleveai.fr répond 308 vers www.eleveai.fr, et ce QR-là
+     part à l'imprimante — après, l'adresse ne se corrige plus. */
+  const contenu = `${data.matiere}-${data.coachClasse}`;
+  const lienAccueil = (medium: string) =>
+    `/accueil?from=kit&utm_source=kit&utm_medium=${medium}&utm_content=${contenu}`;
+  const lienAccueilQR = (medium: string) => `https://www.eleveai.fr${lienAccueil(medium)}`;
 
   return (
     <div className="kit-root bg-slate-100 print:bg-white">
@@ -313,12 +323,16 @@ export default function KitSurvie({ data }: { data: KitData }) {
               <p className="text-[12px] font-bold uppercase tracking-wide text-slate-500">Ce guide appartient à</p>
               <p className="mt-3 border-b border-slate-400 pb-0.5 text-sm text-slate-400">…</p>
               <p className="mt-2 text-[11px] leading-snug text-slate-500">
-                Scanne pour t&apos;entraîner <span className="font-bold">gratuitement</span> sur le coach —
-                exercices corrigés, pas à pas.
+                Scanne pour trouver la suite, <span className="font-bold">gratuitement</span> — dis ce
+                que tu cherches, on te propose.
               </p>
             </div>
             <div className="shrink-0 rounded-lg bg-white p-1.5 ring-1 ring-slate-200">
-              <QRCodeSVG value={coachQrUrl} size={64} aria-label="QR code vers le coach en ligne" />
+              <QRCodeSVG
+                value={lienAccueilQR("qr-couverture")}
+                size={64}
+                aria-label="QR code vers l'entrée d'EleveAI"
+              />
             </div>
           </div>
 
@@ -340,23 +354,58 @@ export default function KitSurvie({ data }: { data: KitData }) {
           />
         ))}
 
-        {/* Pied de parcours (écran) */}
-        <div className="screen-only mx-auto max-w-3xl rounded-2xl border-2 border-teal-200 bg-teal-50 p-6 text-center">
-          <p className="mb-2 text-lg font-black text-slate-900">Le guide t&apos;a sauvé ? Le coach t&apos;entraîne.</p>
-          <p className="mb-4 text-sm text-slate-600">
-            Des centaines d&apos;exercices corrigés pas à pas, chapitre par chapitre — gratuit.
-          </p>
-          <Link
-            href={coachHref}
-            className="inline-block rounded-full bg-teal-600 px-6 py-2.5 text-sm font-bold text-white transition hover:bg-teal-700"
-          >
-            🧠 S&apos;entraîner en {data.classeLabel}
-          </Link>
+        {/* Pied de parcours.
+           ⚠️ CE BLOC ÉTAIT screen-only EN ENTIER : imprimé, le guide se terminait
+           sans nulle part où aller. Il s'imprime maintenant — l'image de l'entrée à
+           gauche, le QR à droite, comme à la fin des cahiers. Le bouton, lui, reste
+           réservé à l'écran. */}
+        <div className="mx-auto max-w-3xl rounded-2xl border-2 border-teal-200 bg-teal-50 p-6">
+          <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
+            <div className="flex-1">
+              {/* ⭐ ON MONTRE L'ENTRÉE PLUTÔT QUE DE LA DÉCRIRE : qui es-tu, ta
+                 classe, ta matière, puis le champ où l'on écrit. */}
+              <Image
+                src="/preview.jpg"
+                alt="L'entrée d'EleveAI : dis qui tu es, ta classe, ta matière, puis écris ce que tu cherches"
+                width={1200}
+                height={630}
+                sizes="(max-width: 640px) 90vw, 520px"
+                className="w-full max-w-[520px] rounded-xl border border-teal-200"
+              />
+              <Link
+                href={coachHref}
+                className="screen-only mt-3 inline-block rounded-full bg-teal-600 px-6 py-2.5 text-sm font-bold text-white transition hover:bg-teal-700"
+              >
+                🧠 S&apos;entraîner en {data.classeLabel}
+              </Link>
+            </div>
+            <div className="shrink-0 text-center">
+              <div className="inline-block rounded-xl bg-white p-2 ring-1 ring-slate-200">
+                <QRCodeSVG
+                  value={lienAccueilQR("qr-fin")}
+                  size={96}
+                  level="M"
+                  marginSize={2}
+                  aria-label="QR code vers l'entrée d'EleveAI"
+                />
+              </div>
+              <p className="mt-1 text-xs font-black leading-tight text-slate-700">
+                Scanne pour trouver
+                <br />
+                la suite
+              </p>
+              <p className="text-[10px] font-bold text-slate-400">eleveai.fr</p>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Capture APRÈS la valeur (modale sur afterprint, aucun mur) */}
-      <CaptureApresTelechargement coachHref={coachHref} signupFrom="kit" produitDe="du guide" />
+      <CaptureApresTelechargement
+        coachHref={lienAccueil("modale")}
+        signupFrom="kit"
+        produitDe="du guide"
+      />
 
       {/* ─── Impression ─── */}
       <style jsx global>{`
