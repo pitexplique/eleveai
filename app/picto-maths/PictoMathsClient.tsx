@@ -574,7 +574,10 @@ export default function PictoMathsClient({
   signupFrom?: string;
 } = {}) {
   // Tag de tracking du QR : "picto" sur /picto-maths, "cahier" sur /cahier-vacances/maths.
-  const signupUrl = `https://www.eleveai.fr/auth/signin?from=${signupFrom}`;
+  // « Scanne pour continuer gratuitement » ne promet pas un compte : ce QR mène
+  // donc à l'entrée du site, qui demande d'abord qui on est — comme depuis les
+  // cahiers, les guides et les cartes. ⚠️ Avec le www : il part à l'imprimante.
+  const accueilQrUrl = `https://www.eleveai.fr/accueil?from=${signupFrom}&utm_source=${signupFrom}&utm_medium=qr-couverture`;
   return (
     <main className="relative isolate min-h-screen bg-[#f2fbfd] text-slate-800">
       {/* Barre écran */}
@@ -646,7 +649,7 @@ export default function PictoMathsClient({
           <div className="mt-6 flex flex-col items-center gap-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={TI_MARGO} alt="Ti Margo" className="h-16 w-16 object-contain" />
-            <QRCodeSVG value={signupUrl} size={84} />
+            <QRCodeSVG value={accueilQrUrl} size={84} aria-label="QR code vers l'entrée d'EleveAI" />
             <p className="text-sm font-black text-cyan-700">
               Scanne pour continuer gratuitement
             </p>

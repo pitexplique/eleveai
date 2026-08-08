@@ -161,8 +161,12 @@ export default function CartesDeck({
      quoi l'adresse ne se corrige plus. */
   // « Vers la 1re » → « vers-la-1re » : le niveau voyage dans l'URL, c'est la
   // seule chose qu'on sait déjà de celui qui scanne.
+  // ⚠️ Les exposants (ᵉ, ʳ) redeviennent des lettres AVANT le nettoyage, sinon
+  // « 1ʳᵉ » se réduirait à « 1 » tout court dans les statistiques.
   const contenu = niveau
     .toLowerCase()
+    .replace(/ᵉ/g, "e")
+    .replace(/ʳ/g, "r")
     .normalize("NFD")
     .replace(/[̀-ͯ]/g, "")
     .replace(/[^a-z0-9]+/g, "-")

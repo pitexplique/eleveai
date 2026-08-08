@@ -5,7 +5,16 @@ import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import { ArrowLeft, Download, Scissors, Sparkles, Star } from "lucide-react";
 
+/* La carte « Bravo ! » invite explicitement à s'inscrire : elle garde le
+   formulaire, celui qui la scanne sait ce qu'il veut. */
 const SIGNUP_URL = "https://www.eleveai.fr/auth/signin?from=cartes";
+
+/* La couverture, elle, ne promet rien de précis : « une autre façon
+   d'apprendre ». Elle mène donc à l'entrée du site, qui commence par demander
+   qui on est, la classe et la matière — comme depuis les cahiers, les guides et
+   les cartes défis. ⚠️ Avec le www : ce QR part à l'imprimante. */
+const ACCUEIL_QR = (contenu: string) =>
+  `https://www.eleveai.fr/accueil?from=cartes&utm_source=cartes&utm_medium=qr-couverture&utm_content=${contenu}`;
 const TI_MARGO = "/cahier-vacances/ti-margo.png";
 
 /* Une carte-question prête à afficher (préparée côté serveur). */
@@ -230,6 +239,18 @@ export default function DeckNiveauClient({
   cartes: CarteQ[];
 }) {
   const slots = construireSlots(cartes);
+  // « 6ᵉ » → « 6e » : le niveau voyage dans l'adresse du QR.
+  // ⚠️ Les exposants typographiques (ᵉ, ʳ) doivent redevenir des lettres AVANT
+  // de nettoyer, sinon « 6ᵉ » se réduit à « 6 » tout court — illisible dans les
+  // statistiques, où l'on cherche à savoir quel jeu de cartes ramène du monde.
+  const contenu = label
+    .toLowerCase()
+    .replace(/ᵉ/g, "e")
+    .replace(/ʳ/g, "r")
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
   const matieres = [...new Set(cartes.map((c) => c.matiere))];
   const departs: number[] = [];
   for (let i = 0; i < slots.length; i += 8) departs.push(i);
@@ -301,7 +322,7 @@ export default function DeckNiveauClient({
             })}
           </div>
           <div className="mt-5 flex flex-col items-center gap-2">
-            <QRCodeSVG value={SIGNUP_URL} size={84} />
+            <QRCodeSVG value={ACCUEIL_QR(contenu)} size={84} aria-label="QR code vers l'entrée d'EleveAI" />
             <p className="text-sm font-black text-teal-700">eleveai.fr</p>
             <p className="text-[10px] font-black uppercase tracking-wide text-slate-400">une autre façon d&apos;apprendre</p>
           </div>
