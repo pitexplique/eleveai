@@ -9,7 +9,6 @@ const supportLinks: Record<string, string[]> = {
   ce1_fraction_representer: ["ce1_division_partage"],
   ce1_longueur_convertir_simple: ["ce1_calcul_multiplier_10"],
   ce1_monnaie_rendre: ["ce1_calcul_complements_100"],
-  ce1_symetrie_completer: ["ce1_reperage_coordonnees"],
   ce1_algo_repetition: ["ce1_suite_pas"],
 };
 

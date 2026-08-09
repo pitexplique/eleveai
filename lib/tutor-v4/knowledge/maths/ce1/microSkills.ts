@@ -32,17 +32,20 @@
 //     une : ajouter 9, 19, 29 ; soustraire 9 ; multiplier par 10 un nombre
 //     plus petit que 100 ; décomposer un facteur entre 11 et 19.
 //
-// ⛔ CE QUI EST GARDÉ SANS ÊTRE AU PROGRAMME DU CE1. Le texte intégral l'a
-// confirmé, il ne s'agit plus d'une déduction :
-//   — `contenance` : le CE1 ne traite que « les longueurs et les masses ». Les
-//     contenances, le litre, le décilitre arrivent au CE2 ;
-//   — `symetrie` : la symétrie axiale est un objectif du CE2 ;
+// ⛔ RETIRÉ DU CE1 le 09/08/2026, sur décision de Frédéric — on colle au BO :
+//   — `contenance` (4 micros) : le CE1 ne traite que « les longueurs et les
+//     masses ». Les contenances, le litre, le décilitre et le centilitre sont
+//     des objectifs de CE2 ;
+//   — `symetrie` (3 micros) : reconnaître un axe et compléter une figure
+//     symétrique sont des objectifs de CE2.
+// Ces sept micro-compétences recevaient encore les questions hors sujet du
+// repli. Elles vivent au CE2, où elles ont déjà leurs banques.
+//
+// ⚠️ CE QUI RESTE SANS ÊTRE UN ATTENDU DE FIN D'ANNÉE, et qu'on garde :
 //   — `ce1_duree_calendrier` : au CE1, le calendrier relève de « Questionner
-//     le monde », pas des mathématiques ;
+//     le monde », pas des mathématiques — mais il se travaille en classe ;
 //   — `reperage` sur quadrillage : le CE1 travaille sur des plans et des
 //     itinéraires, le quadrillage n'y apparaît que sous le robot.
-// On les garde en attendant que Frédéric tranche, et leurs banques s'écriront
-// en dernier.
 //
 // ✅ EN REVANCHE, `division_partage` EST au programme, mais pas comme une
 // opération : le partage équitable est une STRUCTURE DE PROBLÈME du CE1 —
@@ -217,19 +220,6 @@ export const microSkills: MicroSkillSource[] = [
   { id: "ce1_masse_defi", label: "Résoudre un défi de masses", notionId: "masse", prerequis: ["ce1_masse_relation_kg_g"] },
 
   // ============================================================
-  // LES CONTENANCES
-  // ⛔ HORS PROGRAMME DU CE1, confirmé sur le texte intégral : le CE1 traite
-  // « les longueurs et les masses », le CE2 « les longueurs, les masses ET LES
-  // CONTENANCES ». Le litre, le décilitre et le centilitre sont des objectifs
-  // de CE2. Gardées en attendant l'arbitrage de Frédéric.
-  // ============================================================
-
-  { id: "ce1_contenance_comparer", label: "Comparer des contenances", notionId: "contenance", prerequis: ["ce1_entier_comparer"] },
-  { id: "ce1_contenance_litre", label: "Utiliser le litre", notionId: "contenance", prerequis: ["ce1_entier_lire_ecrire"] },
-  { id: "ce1_contenance_probleme", label: "Résoudre un problème simple de contenances", notionId: "contenance", prerequis: ["ce1_probleme_add_sous"] },
-  { id: "ce1_contenance_defi", label: "Résoudre un défi de contenances", notionId: "contenance", prerequis: ["ce1_contenance_litre"] },
-
-  // ============================================================
   // LE REPÉRAGE DANS LE TEMPS ET LES DURÉES
   // ⚠️ Au CE1 on lit l'heure entière, la demi-heure et le quart d'heure. Les
   // minutes de 5 en 5, c'est le CE2.
@@ -321,18 +311,6 @@ export const microSkills: MicroSkillSource[] = [
   { id: "ce1_solide_sommets_aretes", label: "Identifier sommets et arêtes", notionId: "solides", prerequis: ["ce1_solide_nommer"] },
   { id: "ce1_solide_construire", label: "Construire un cube, un pavé droit ou une pyramide", notionId: "solides", prerequis: ["ce1_solide_faces", "ce1_solide_sommets_aretes"] },
   { id: "ce1_solide_defi", label: "Résoudre un défi sur les solides", notionId: "solides", prerequis: ["ce1_solide_faces", "ce1_solide_sommets_aretes"] },
-
-  // ============================================================
-  // LA SYMÉTRIE AXIALE
-  // ⛔ HORS PROGRAMME DU CE1, confirmé sur le texte intégral : « Reconnaitre
-  // si une figure possède un ou plusieurs axes de symétrie » et « Compléter
-  // une figure pour la rendre symétrique » sont des objectifs de CE2. Gardée
-  // en attendant l'arbitrage de Frédéric.
-  // ============================================================
-
-  { id: "ce1_symetrie_axe", label: "Reconnaître un axe de symétrie", notionId: "symetrie", prerequis: ["ce1_figure_reconnaitre"] },
-  { id: "ce1_symetrie_completer", label: "Compléter une figure par symétrie sur quadrillage", notionId: "symetrie", prerequis: ["ce1_symetrie_axe", "ce1_reperage_cases_noeuds"] },
-  { id: "ce1_symetrie_defi", label: "Résoudre un défi de symétrie", notionId: "symetrie", prerequis: ["ce1_symetrie_completer"] },
 
   // ============================================================
   // ORGANISATION ET GESTION DE DONNÉES — deux attendus seulement

@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 431 notions, 31 paquets.
+// 429 notions, 31 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -602,7 +602,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     "ce1": [
       {
         "id": "nombre_entier",
-        "label": "Nombres jusqu'a 1 000",
+        "label": "Nombres jusqu'à 1 000",
         "prerequis": []
       },
       {
@@ -650,7 +650,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "probleme",
-        "label": "Problemes",
+        "label": "Problèmes",
         "prerequis": [
           "calcul_mental"
         ]
@@ -670,15 +670,8 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
-        "id": "contenance",
-        "label": "Contenances",
-        "prerequis": [
-          "nombre_entier"
-        ]
-      },
-      {
         "id": "duree",
-        "label": "Temps et durees",
+        "label": "Temps et durées",
         "prerequis": [
           "nombre_entier"
         ]
@@ -692,7 +685,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "reperage",
-        "label": "Reperage sur quadrillage",
+        "label": "Repérage sur quadrillage",
         "prerequis": [
           "nombre_entier"
         ]
@@ -719,13 +712,6 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
-        "id": "symetrie",
-        "label": "Symetrie axiale",
-        "prerequis": [
-          "figures_planes"
-        ]
-      },
-      {
         "id": "donnees",
         "label": "Tableaux et graphiques simples",
         "prerequis": [
@@ -734,7 +720,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "algorithmique",
-        "label": "Instructions et deplacements codes",
+        "label": "Instructions et déplacements codés",
         "prerequis": [
           "reperage"
         ]
@@ -1290,7 +1276,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     "cp": [
       {
         "id": "nombre_entier",
-        "label": "Nombres jusqu'a 100",
+        "label": "Nombres jusqu'à 100",
         "prerequis": []
       },
       {
@@ -1316,7 +1302,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "probleme",
-        "label": "Problemes additifs",
+        "label": "Problèmes",
         "prerequis": [
           "addition_soustraction"
         ]
@@ -1330,14 +1316,14 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "masse_contenance",
-        "label": "Masses et contenances",
+        "label": "Masses",
         "prerequis": [
           "nombre_entier"
         ]
       },
       {
         "id": "duree",
-        "label": "Temps et durees",
+        "label": "Repérage dans le temps",
         "prerequis": [
           "nombre_entier"
         ]
@@ -1351,7 +1337,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "reperage",
-        "label": "Reperage dans l'espace",
+        "label": "Repérage dans l'espace",
         "prerequis": []
       },
       {
@@ -1363,14 +1349,14 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "donnees",
-        "label": "Tableaux et donnees simples",
+        "label": "Tableaux et diagrammes",
         "prerequis": [
           "nombre_entier"
         ]
       },
       {
         "id": "algorithmique",
-        "label": "Suites d'instructions",
+        "label": "Instructions et déplacements codés",
         "prerequis": [
           "reperage"
         ]
