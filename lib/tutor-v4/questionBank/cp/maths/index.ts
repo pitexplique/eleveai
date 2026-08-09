@@ -5,6 +5,7 @@ import { applyMathsKeyboardFree } from "../../mathsKeyboardFreeTransform";
 
 import { nombresEntiersBank } from "./nombres-entiers.bank";
 import { monnaieBank } from "./monnaie.bank";
+import { dureeBank } from "./duree.bank";
 
 // ⏳ LE CP SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 09/08/2026.
 //
@@ -33,6 +34,7 @@ import { monnaieBank } from "./monnaie.bank";
 const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...nombresEntiersBank,
   ...monnaieBank,
+  ...dureeBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
