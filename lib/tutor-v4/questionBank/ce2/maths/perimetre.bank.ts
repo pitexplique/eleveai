@@ -3,9 +3,21 @@
 // Les périmètres du CE2, écrits à la main. Cinq micro-compétences qui passaient
 // par le constructeur commun.
 //
-// PÉRIMÈTRE BO (n° 41 du 31 octobre 2024, cycle 2) : comprendre ce qu'est le
-// périmètre, le déterminer pour un polygone en additionnant les côtés,
-// comparer des périmètres, et traiter le cas du rectangle et du carré.
+// PÉRIMÈTRE BO (n° 41 du 31 octobre 2024, applicable à la rentrée 2025,
+// cycle 2) : comprendre ce qu'est le périmètre, le déterminer pour un polygone
+// en additionnant les côtés, comparer des périmètres, et traiter le cas du
+// rectangle et du carré.
+//
+// ⚠️ DEUX FAÇONS DE COMPARER, et le texte les demande toutes les deux. La
+// seconde est longtemps restée absente d'ici : « Comparer le périmètre de
+// plusieurs polygones SANS RÈGLE GRADUÉE, en utilisant un COMPAS. » La méthode
+// est décrite mot pour mot : « reporter au compas les longueurs des côtés d'un
+// polygone sur une droite afin d'obtenir un segment ayant une longueur égale au
+// périmètre du polygone ».
+// Ce n'est pas une variante folklorique. C'est la seule façon de comparer deux
+// figures dont les côtés ne tombent pas sur des nombres entiers — et elle
+// montre qu'un périmètre est une LONGUEUR qu'on peut déplier, pas seulement un
+// calcul.
 // ⛔ Pas d'AIRE au cycle 2 : la surface arrive au CM1. On ne parle donc jamais
 // de cm² ici, et on ne demande jamais « combien de carreaux à l'intérieur ».
 // ⛔ Pas de formule à retenir non plus : au CE2 on ADDITIONNE les côtés. Pour
@@ -413,6 +425,10 @@ export const perimetreBank: TutorBankItemV4[] = [
 
   /* =========================================================
      CE2_PERIMETRE_COMPARER
+     Deux méthodes. On calcule quand on a les mesures ; on
+     REPORTE AU COMPAS quand on ne les a pas. Les items du bas
+     de section couvrent la seconde : elle ne demande aucun
+     nombre, et elle tranche quand même.
   ========================================================= */
   {
     kind: "fixed",
@@ -544,6 +560,138 @@ export const perimetreBank: TutorBankItemV4[] = [
           "On calcule chaque périmètre, puis on compare les deux nombres.",
           `Figure A : ${a.join(" + ")} = ${sommeA} cm. Figure B : ${b.join(" + ")} = ${sommeB} cm.`,
           `${gagnant.charAt(0).toUpperCase() + gagnant.slice(1)}.`,
+        ),
+      };
+    },
+  },
+
+  // --- Comparer SANS RÈGLE GRADUÉE, au compas ---------------
+  // Le compas ne mesure rien : il garde un écartement et le
+  // repose ailleurs. On déplie le contour sur une droite.
+  {
+    kind: "fixed",
+    id: "ce2_perimetre_comparer_fixed_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "ce2_perimetre_comparer",
+    difficulty: 4,
+    theme: "neutral",
+    text: "On veut comparer les périmètres de deux polygones dessinés sur une feuille. On n'a pas de règle graduée, seulement un compas. Comment fait-on ?",
+    format: "qcm",
+    choices: [
+      "on reporte les côtés bout à bout sur une droite, pour chaque figure, puis on compare les deux segments obtenus",
+      "on lit la longueur de chaque côté sur le compas",
+      "on regarde laquelle des deux figures est la plus grande",
+      "c'est impossible sans règle graduée",
+    ],
+    expected: [
+      "on reporte les côtés bout à bout sur une droite, pour chaque figure, puis on compare les deux segments obtenus",
+    ],
+    comparator: "mcq_exact",
+    hint: "Le compas ne donne aucun nombre. Mais il garde un écartement, et il peut le reposer ailleurs.",
+    explanation: exp(
+      "Un compas ne mesure pas : il garde un écartement et le reporte où l'on veut.",
+      "On ouvre le compas sur un côté, on le reporte sur une droite ; on repart de la pointe d'arrivée pour le côté suivant, et ainsi de suite jusqu'au dernier côté.",
+      "À la fin, chaque figure a donné un segment aussi long que son contour déplié. Le plus long des deux segments désigne le plus grand périmètre — et on n'a écrit aucun nombre.",
+      "On reporte les côtés bout à bout sur une droite, puis on compare les deux segments.",
+    ),
+    tags: ["ce2", "perimetre", "comparer", "compas", "methode", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_perimetre_comparer_fixed_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "ce2_perimetre_comparer",
+    difficulty: 4,
+    theme: "neutral",
+    text: "On reporte au compas, bout à bout sur une demi-droite, les cinq côtés d'un pentagone. Que représente le segment obtenu ?",
+    format: "qcm",
+    choices: [
+      "le périmètre du pentagone",
+      "le plus grand côté du pentagone",
+      "la moitié du périmètre",
+      "le nombre de côtés du pentagone",
+    ],
+    expected: ["le périmètre du pentagone"],
+    comparator: "mcq_exact",
+    hint: "On a posé le tour de la figure, morceau après morceau, sur une ligne droite.",
+    explanation: exp(
+      "Le périmètre est la longueur du contour : on peut le déplier sans le raccourcir.",
+      "On met les cinq côtés bout à bout sur une droite, dans n'importe quel ordre.",
+      "Les cinq côtés mis l'un derrière l'autre font exactement le tour de la figure, mais tendu. Le segment obtenu a donc la même longueur que le contour : c'est le périmètre.",
+      "C'est le périmètre du pentagone.",
+    ),
+    tags: ["ce2", "perimetre", "comparer", "compas", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_perimetre_comparer_fixed_5",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "ce2_perimetre_comparer",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Deux figures A et B sont dessinées. En reportant leurs côtés au compas, on obtient un segment plus long pour A que pour B. Que peut-on conclure ?",
+    format: "qcm",
+    choices: [
+      "A a le plus grand périmètre, même sans connaître une seule mesure",
+      "on ne peut rien conclure tant qu'on n'a pas mesuré en centimètres",
+      "A a plus de côtés que B",
+      "A occupe plus de place sur la feuille que B",
+    ],
+    expected: ["A a le plus grand périmètre, même sans connaître une seule mesure"],
+    comparator: "mcq_exact",
+    hint: "Comparer, ce n'est pas mesurer. Il suffit de savoir lequel est le plus long.",
+    explanation: exp(
+      "Comparer deux longueurs ne demande pas de les mesurer : il suffit de les mettre côte à côte.",
+      "Chaque segment reporté vaut le périmètre de sa figure. On compare les deux segments directement.",
+      "Le segment de A est plus long, donc le contour de A est plus long : A a le plus grand périmètre. Le nombre de côtés ne dit rien — une figure à trois grands côtés peut battre une figure à six petits. Et la place occupée sur la feuille, c'est l'intérieur, pas le contour.",
+      "A a le plus grand périmètre.",
+    ),
+    tags: ["ce2", "perimetre", "comparer", "compas", "piege", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "ce2_perimetre_comparer_tpl_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "perimetre",
+    microId: "ce2_perimetre_comparer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Un report par côté. Compte les côtés de la figure.",
+    tags: ["ce2", "perimetre", "comparer", "compas", "template"],
+    generate: () => {
+      const figure = randomChoice([
+        { nom: "un triangle", cotes: 3 },
+        { nom: "un carré", cotes: 4 },
+        { nom: "un rectangle", cotes: 4 },
+        { nom: "un losange", cotes: 4 },
+        { nom: "un pentagone", cotes: 5 },
+        { nom: "un hexagone", cotes: 6 },
+      ]);
+      return {
+        // Les six noms commencent par « un » : « d'un triangle », « d'un
+        // hexagone ». L'élision se pose une fois, sans cas particulier.
+        text: `On veut obtenir au compas un segment égal au périmètre d'${figure.nom}. Combien de fois faut-il reporter le compas sur la demi-droite ?`,
+        format: "qcm",
+        choices: makeChoices(`${figure.cotes} fois`, [
+          `${figure.cotes - 1} fois`,
+          `${figure.cotes + 1} fois`,
+          "une seule fois",
+          `${figure.cotes * 2} fois`,
+        ]),
+        expected: [`${figure.cotes} fois`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le périmètre est la somme de TOUS les côtés : au compas, cela fait un report par côté.",
+          "On compte les côtés de la figure, et on reporte autant de fois, bout à bout.",
+          `${figure.nom.charAt(0).toUpperCase() + figure.nom.slice(1)} a ${figure.cotes} côtés : il faut ${figure.cotes} reports. En oublier un, c'est laisser un morceau du tour de côté — le segment serait trop court.`,
+          `Il faut reporter ${figure.cotes} fois.`,
         ),
       };
     },
