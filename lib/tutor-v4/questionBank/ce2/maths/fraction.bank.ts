@@ -1349,6 +1349,258 @@ export const fractionBank: TutorBankItemV4[] = [
   },
 
   /* =========================================================
+     CE2_FRACTION_COMPARER — comparer deux fractions
+     Trois cas, ceux du BO, et chacun a sa règle :
+       • même nombre du bas : le plus grand du haut gagne ;
+       • même nombre du haut : le plus grand du bas PERD ;
+       • l'un multiple de l'autre : on récrit, puis on compare.
+     LE PIÈGE est dans le deuxième cas, et il est joli : 1/8 est
+     plus PETIT que 1/6 alors que 8 est plus GRAND que 6. Plus on
+     partage un gâteau en morceaux nombreux, plus les morceaux
+     sont petits. Le nombre du bas ne compte pas des parts : il
+     compte des coups de couteau.
+  ========================================================= */
+  {
+    kind: "fixed",
+    id: "ce2_fraction_comparer_fixed_1",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_comparer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Laquelle est la plus grande : 5/12 ou 7/12 ?",
+    format: "qcm",
+    choices: ["7/12", "5/12", "elles sont égales", "on ne peut pas savoir"],
+    expected: ["7/12"],
+    comparator: "mcq_exact",
+    hint: "Le partage est le même des deux côtés. Il ne reste qu'à compter les parts.",
+    explanation: exp(
+      "Quand deux fractions ont le même nombre du bas, elles sont faites de parts de même taille.",
+      "On compare alors simplement le nombre de parts, c'est-à-dire les nombres du haut.",
+      "Les deux fractions comptent des douzièmes, tous identiques. 7 douzièmes, c'est plus que 5 douzièmes : 7/12 est la plus grande.",
+      "C'est 7/12.",
+    ),
+    tags: ["ce2", "fraction", "comparer", "meme_denominateur", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_fraction_comparer_fixed_2",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_comparer",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Laquelle est la plus grande : 5/12 ou 5/8 ?",
+    format: "qcm",
+    choices: ["5/8", "5/12", "elles sont égales", "on ne peut pas savoir"],
+    expected: ["5/8"],
+    comparator: "mcq_exact",
+    hint: "On prend 5 parts des deux côtés. Où les parts sont-elles les plus grosses ?",
+    explanation: exp(
+      "Quand deux fractions ont le même nombre du haut, on prend autant de parts de chaque côté : c'est la taille des parts qui décide.",
+      "On regarde le nombre du bas — et il décide à l'envers.",
+      "Partager un gâteau en 8 donne des morceaux plus gros qu'en le partageant en 12. Cinq gros morceaux font plus que cinq petits : 5/8 est la plus grande, même si 12 est plus grand que 8.",
+      "C'est 5/8.",
+    ),
+    tags: ["ce2", "fraction", "comparer", "meme_numerateur", "piege", "qcm"],
+    canvas: fractionCanvas({
+      model: "compare",
+      fractions: [
+        { numerator: 5, denominator: 12, label: "5/12" },
+        { numerator: 5, denominator: 8, label: "5/8" },
+      ],
+      display: { showFraction: true, showParts: true },
+    }),
+  },
+  {
+    kind: "fixed",
+    id: "ce2_fraction_comparer_fixed_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_comparer",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pourquoi 1/8 est-il plus petit que 1/6, alors que 8 est plus grand que 6 ?",
+    format: "qcm",
+    choices: [
+      "parce qu'en partageant en 8, les parts sont plus petites qu'en partageant en 6",
+      "ce n'est pas vrai : 1/8 est plus grand que 1/6",
+      "parce que 8 est un nombre pair",
+      "parce qu'on prend une seule part des deux côtés",
+    ],
+    expected: [
+      "parce qu'en partageant en 8, les parts sont plus petites qu'en partageant en 6",
+    ],
+    comparator: "mcq_exact",
+    hint: "Un gâteau pour 8 invités ou pour 6 : dans quel cas ta part est-elle la plus grosse ?",
+    explanation: exp(
+      "Le nombre du bas ne compte pas des parts prises : il dit en combien de morceaux le tout a été coupé.",
+      "Plus il est grand, plus il y a de morceaux — donc plus chaque morceau est petit.",
+      "Un même gâteau partagé entre 8 personnes donne des parts plus petites que partagé entre 6. Prendre une de ces parts, c'est donc prendre moins : 1/8 est plus petit que 1/6. Le nombre du bas décide à l'envers, et c'est ce qui surprend.",
+      "Parce que couper en 8 donne des parts plus petites que couper en 6.",
+    ),
+    tags: ["ce2", "fraction", "comparer", "meme_numerateur", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_fraction_comparer_fixed_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_comparer",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Laquelle est la plus grande : 7/12 ou 5/6 ?",
+    format: "qcm",
+    choices: ["5/6", "7/12", "elles sont égales", "on ne peut pas savoir"],
+    expected: ["5/6"],
+    comparator: "mcq_exact",
+    hint: "12 est le double de 6. Récris 5/6 en douzièmes avant de comparer.",
+    explanation: exp(
+      "Quand un partage est un multiple de l'autre, on récrit les deux fractions avec le même partage.",
+      "On recoupe chaque sixième en deux douzièmes, puis on compare des nombres du haut.",
+      "5/6 = 10/12. On compare alors 7/12 et 10/12 : c'est 10/12 qui est la plus grande. Donc 5/6 dépasse 7/12 — comparer les nombres du haut sans récrire aurait donné le contraire.",
+      "C'est 5/6.",
+    ),
+    tags: ["ce2", "fraction", "comparer", "denominateur_multiple", "piege", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "ce2_fraction_comparer_tpl_1",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_comparer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Même nombre du bas : les parts ont la même taille, il suffit de les compter.",
+    tags: ["ce2", "fraction", "comparer", "meme_denominateur", "template"],
+    generate: () => {
+      const d = randomChoice([4, 5, 6, 8, 10, 12]);
+      const [petit, grand] = shuffle([...Array(d - 1).keys()].map((i) => i + 1))
+        .slice(0, 2)
+        .sort((a, b) => a - b);
+      return {
+        text: `Laquelle est la plus grande : ${petit}/${d} ou ${grand}/${d} ?`,
+        format: "qcm",
+        choices: makeChoices(`${grand}/${d}`, [
+          `${petit}/${d}`,
+          "elles sont égales",
+          "on ne peut pas savoir",
+        ]),
+        expected: [`${grand}/${d}`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Deux fractions de même dénominateur sont faites de parts de même taille.",
+          "On compare le nombre de parts, c'est-à-dire les nombres du haut.",
+          `Les deux comptent des ${nomFraction(2, d).split(" ")[1]}, tous identiques. ${grand} valent plus que ${petit} : ${grand}/${d} est la plus grande.`,
+          `C'est ${grand}/${d}.`,
+        ),
+        canvas: fractionCanvas({
+          model: "compare",
+          fractions: [
+            { numerator: petit, denominator: d, label: `${petit}/${d}` },
+            { numerator: grand, denominator: d, label: `${grand}/${d}` },
+          ],
+          display: { showFraction: true, showParts: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_fraction_comparer_tpl_2",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_comparer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Même nombre du haut : c'est le nombre du bas qui décide, et il décide à l'envers.",
+    tags: ["ce2", "fraction", "comparer", "meme_numerateur", "piege", "template"],
+    generate: () => {
+      const [petitD, grandD] = shuffle([3, 4, 5, 6, 8, 10, 12])
+        .slice(0, 2)
+        .sort((a, b) => a - b);
+      // Le numérateur commun doit rester sous le plus petit des deux
+      // dénominateurs : les deux fractions restent inférieures à 1.
+      const n = randomInt(1, petitD - 1);
+      return {
+        text: `Laquelle est la plus grande : ${n}/${petitD} ou ${n}/${grandD} ?`,
+        format: "qcm",
+        choices: makeChoices(`${n}/${petitD}`, [
+          `${n}/${grandD}`,
+          "elles sont égales",
+          "on ne peut pas savoir",
+        ]),
+        expected: [`${n}/${petitD}`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Quand le nombre du haut est le même, on prend autant de parts des deux côtés : c'est leur taille qui décide.",
+          "On regarde le nombre du bas — plus il est grand, plus les parts sont petites.",
+          `Partager en ${petitD} donne des parts plus grosses que partager en ${grandD}. On en prend ${n} dans les deux cas, donc ${n}/${petitD} est la plus grande — même si ${grandD} est plus grand que ${petitD}.`,
+          `C'est ${n}/${petitD}.`,
+        ),
+        canvas: fractionCanvas({
+          model: "compare",
+          fractions: [
+            { numerator: n, denominator: petitD, label: `${n}/${petitD}` },
+            { numerator: n, denominator: grandD, label: `${n}/${grandD}` },
+          ],
+          display: { showFraction: true, showParts: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_fraction_comparer_tpl_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_comparer",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Un partage est un multiple de l'autre : récris la première avant de comparer.",
+    tags: ["ce2", "fraction", "comparer", "denominateur_multiple", "template"],
+    generate: () => {
+      const { d, D } = randomChoice(PAIRES_MULTIPLES);
+      const k = D / d;
+      // On tire jusqu'à ce que les deux fractions diffèrent : « elles sont
+      // égales » serait alors juste, et deux réponses vraies feraient deux
+      // bonnes réponses.
+      const n = randomInt(1, d - 1);
+      let m = randomInt(1, D - 1);
+      while (n * k === m) {
+        m = randomInt(1, D - 1);
+      }
+      const premiereGagne = n * k > m;
+      const gagnante = premiereGagne ? `${n}/${d}` : `${m}/${D}`;
+      const perdante = premiereGagne ? `${m}/${D}` : `${n}/${d}`;
+      return {
+        text: `Laquelle est la plus grande : ${n}/${d} ou ${m}/${D} ?`,
+        format: "qcm",
+        choices: makeChoices(gagnante, [
+          perdante,
+          "elles sont égales",
+          "on ne peut pas savoir",
+        ]),
+        expected: [gagnante],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On ne compare deux fractions qu'une fois ramenées au même partage.",
+          `${D} est ${k} fois ${d} : on recoupe chaque part de ${nomFraction(1, d)} en ${k}, et la première fraction se récrit en ${nomFraction(2, D).split(" ")[1]}.`,
+          `${n}/${d} = ${n * k}/${D}. On compare alors ${n * k}/${D} et ${m}/${D} : c'est ${gagnante} qui l'emporte.`,
+          `C'est ${gagnante}.`,
+        ),
+      };
+    },
+  },
+
+  /* =========================================================
      CE2_FRACTION_COMPARER_UNITE — comparer à 1
      Au CE2 les fractions sont ≤ 1 : la question est donc
      « est-ce le tout, ou moins que le tout ? »

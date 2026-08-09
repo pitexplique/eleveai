@@ -120,6 +120,12 @@ export const microSkills: MicroSkillSource[] = [
   { id: "ce2_fraction_add_sous", label: "Additionner et soustraire des fractions", notionId: "fraction", prerequis: ["ce2_fraction_representer", "ce2_fraction_egalite"] },
   { id: "ce2_fraction_bande_unite", label: "Exprimer une fraction d'une unité de longueur avec la bande unité", notionId: "fraction", prerequis: ["ce2_fraction_representer"] },
   { id: "ce2_fraction_droite", label: "Placer une fraction simple sur une droite graduée", notionId: "fraction", prerequis: ["ce2_fraction_lire", "ce2_entier_droite"] },
+  // Troisième des quatre attendus fractions du CE2 : « Comparer des fractions
+  // inférieures à 1 ». Il manquait — la micro voisine compare une fraction à
+  // l'UNITÉ, ce qui n'est pas comparer deux fractions entre elles. Le BO donne
+  // ses trois cas : même dénominateur (5/12 et 7/12), même numérateur (5/12 et
+  // 5/8), et dénominateur de l'un multiple de l'autre (7/12 et 5/6).
+  { id: "ce2_fraction_comparer", label: "Comparer deux fractions inférieures à 1", notionId: "fraction", prerequis: ["ce2_fraction_representer", "ce2_fraction_egalite"] },
   { id: "ce2_fraction_comparer_unite", label: "Comparer une fraction simple à l'unité", notionId: "fraction", prerequis: ["ce2_fraction_representer"] },
   { id: "ce2_fraction_defi", label: "Résoudre un défi de fractions", notionId: "fraction", prerequis: ["ce2_fraction_droite", "ce2_fraction_comparer_unite"] },
 
