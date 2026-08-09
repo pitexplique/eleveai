@@ -739,4 +739,597 @@ export const problemeBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ============================================================
+  // COMPLÉMENTS DU 09/08/2026 — dix micro-compétences n'avaient qu'une ou deux
+  // questions. À la troisième, l'élève revoyait la première. Chaque ajout est
+  // un GÉNÉRATEUR, et prend un angle que la banque n'avait pas : les structures
+  // de problème que le BO nomme, avec ses propres exemples quand il en donne.
+  // ============================================================
+
+  {
+    kind: "template",
+    id: "ce2_probleme_choisir_tpl_002_groupes_ou_reunion",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_choisir_operation",
+    difficulty: 4,
+    theme: "reunion",
+    hint: "Les parts sont-elles toutes pareilles, ou différentes ?",
+    tags: ["ce2", "probleme", "choisir_operation", "template"],
+    generate: () => {
+      const c = randomChoice(CONTEXTES);
+      const groupesEgaux = randomChoice([true, false]);
+      const cartons = randomInt(4, 9);
+      const parCarton = randomInt(12, 40);
+      const autre = randomInt(120, 900);
+      const bonne = groupesEgaux ? "une multiplication" : "une addition";
+      return {
+        text: groupesEgaux
+          ? `${majuscule(c.lieu)} range ${cartons} cartons contenant chacun ${parCarton} ${c.objets}. Combien de ${c.objets} en tout ?\n\nQuelle opération faut-il choisir ?`
+          : `${majuscule(c.lieu)} a ${formatNumber(autre)} ${c.objets} en réserve et ${formatNumber(parCarton)} ${c.objets} en rayon. Combien de ${c.objets} en tout ?\n\nQuelle opération faut-il choisir ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          groupesEgaux ? "une addition" : "une multiplication",
+          "une soustraction",
+          "une division",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une multiplication réunit des parts TOUTES ÉGALES ; une addition réunit des parts quelconques.",
+          "On regarde si les quantités à réunir sont identiques ou non.",
+          groupesEgaux
+            ? `Les ${cartons} cartons contiennent tous ${parCarton} ${c.objets} : les parts sont égales, on multiplie. Additionner ${cartons} et ${parCarton} n'aurait aucun sens — l'un compte des cartons, l'autre des ${c.objets}.`
+            : `Les deux quantités n'ont aucune raison d'être égales : on ne peut que les additionner. Multiplier reviendrait à croire qu'il y a ${formatNumber(autre)} paquets.`,
+          `Il faut choisir ${bonne}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_probleme_choisir_tpl_003_partage",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_choisir_operation",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On connait le tout et on cherche une part : ce n'est pas une soustraction.",
+    tags: ["ce2", "probleme", "choisir_operation", "piege", "template"],
+    generate: () => {
+      const c = randomChoice(CONTEXTES);
+      const parts = randomInt(3, 9);
+      const parPart = randomInt(11, 60);
+      const total = parts * parPart;
+      return {
+        text: `${majuscule(c.lieu)} partage ${formatNumber(total)} ${c.objets} en ${parts} lots égaux. Combien de ${c.objets} dans chaque lot ?\n\nQuelle opération faut-il choisir ?`,
+        format: "qcm",
+        choices: makeChoices("une division", [
+          "une soustraction",
+          "une multiplication",
+          "une addition",
+        ]),
+        expected: ["une division"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Partager un tout en parts égales, c'est diviser.",
+          "On se demande ce qu'on connait — le tout — et ce qu'on cherche — une part.",
+          `On connait le tout (${formatNumber(total)}) et le nombre de parts (${parts}) : on cherche la valeur d'une part, donc on divise. Soustraire ${parts} ne retirerait que ${parts} ${c.objets}, ce qui ne partage rien.`,
+          "Il faut choisir une division.",
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_probleme_une_etape_tpl_003_etat_initial",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_une_etape",
+    difficulty: 5,
+    theme: "reunion",
+    hint: "On cherche le DÉPART : il est forcément plus grand que ce qui reste.",
+    tags: ["ce2", "probleme", "une_etape", "piege", "template"],
+    generate: () => {
+      const c = randomChoice(CONTEXTES);
+      const reste = randomInt(400, 3000);
+      const parti = randomInt(150, 1200);
+      const depart = reste + parti;
+      return {
+        text: `${majuscule(c.lieu)} a vendu ${formatNumber(parti)} ${c.objets} ce matin. Il lui en reste ${formatNumber(reste)}. Combien de ${c.objets} y avait-il au départ ?`,
+        format: "short",
+        expected: [String(depart)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Chercher l'état initial, c'est remonter le temps : on remet ce qui est parti.",
+          "On réunit ce qui reste et ce qui a été vendu.",
+          `${formatNumber(reste)} + ${formatNumber(parti)} = ${formatNumber(depart)}. Le mot « vendu » fait penser à une soustraction, mais c'est le DÉPART qu'on cherche : il est plus grand que ce qui reste.`,
+          `Il y avait ${formatNumber(depart)} ${c.objets} au départ.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_probleme_comparaison_tpl_002_ecart",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_comparaison",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On cherche l'écart entre les deux quantités.",
+    tags: ["ce2", "probleme", "comparaison", "template"],
+    generate: () => {
+      const [a, b] = shuffle(PRENOMS).slice(0, 2);
+      const c = randomChoice(CONTEXTES);
+      const grand = randomInt(600, 4000);
+      const petit = randomInt(120, grand - 100);
+      const ecart = grand - petit;
+      return {
+        text: `${a.nom} a ${formatNumber(grand)} ${c.objets} et ${b.nom} en a ${formatNumber(petit)}. Combien ${a.nom} en a-t-${pronom(a.feminin)} de plus ${que(b.nom)} ?`,
+        format: "short",
+        expected: [String(ecart)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Comparer deux quantités, c'est chercher leur écart.",
+          "On enlève la plus petite quantité à la plus grande.",
+          `${formatNumber(grand)} − ${formatNumber(petit)} = ${formatNumber(ecart)}. Le mot « plus » apparait dans la question, et pourtant on soustrait : c'est la différence qu'on cherche.`,
+          `${a.nom} en a ${formatNumber(ecart)} de plus.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_probleme_deux_etapes_tpl_002_le_reste",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_deux_etapes",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Réunis d'abord les deux catégories connues.",
+    tags: ["ce2", "probleme", "deux_etapes", "template"],
+    generate: () => {
+      const c = randomChoice(CONTEXTES);
+      const a = randomInt(120, 900);
+      const b = randomInt(80, 700);
+      const reste = randomInt(100, 900);
+      const total = a + b + reste;
+      return {
+        text: `${majuscule(c.lieu)} compte ${formatNumber(total)} ${c.objets} : ${formatNumber(a)} sont neufs, ${formatNumber(b)} sont abimés, et les autres sont à trier. Combien de ${c.objets} restent à trier ?`,
+        format: "short",
+        expected: [String(reste)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Quand une part est décrite comme « les autres », on la trouve en enlevant au tout toutes les parts connues.",
+          "On réunit d'abord les parts connues, puis on les enlève au total.",
+          `Première étape : ${formatNumber(a)} + ${formatNumber(b)} = ${formatNumber(a + b)}. Deuxième étape : ${formatNumber(total)} − ${formatNumber(a + b)} = ${formatNumber(reste)}.`,
+          `Il reste ${formatNumber(reste)} ${c.objets} à trier.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_probleme_deux_etapes_tpl_003_comparaison_puis_total",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_deux_etapes",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Trouve d'abord ce que possède le second, puis réunis les deux.",
+    tags: ["ce2", "probleme", "deux_etapes", "piege", "template"],
+    generate: () => {
+      // Le problème de comparaison qui demande le TOUT : le BO en fait une
+      // structure à part, « nécessitant donc une étape supplémentaire ».
+      const [a, b] = shuffle(PRENOMS).slice(0, 2);
+      const c = randomChoice(CONTEXTES);
+      const premier = randomInt(120, 900);
+      const ecart = randomInt(20, 300);
+      const second = premier + ecart;
+      const total = premier + second;
+      return {
+        text: `${a.nom} a ${formatNumber(premier)} ${c.objets}. ${b.nom} en a ${formatNumber(ecart)} de plus ${que(a.nom)}. Combien les deux enfants ont-ils ${de(c.objets)} en tout ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un problème de comparaison qui demande le tout se résout en deux étapes.",
+          "On calcule d'abord la quantité du second, puis on réunit les deux.",
+          `Première étape : ${formatNumber(premier)} + ${formatNumber(ecart)} = ${formatNumber(second)}, ce que possède ${b.nom}. Deuxième étape : ${formatNumber(premier)} + ${formatNumber(second)} = ${formatNumber(total)}. Répondre ${formatNumber(premier + ecart)} serait s'arrêter à la première étape.`,
+          `Ils ont ${formatNumber(total)} ${c.objets} en tout.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_probleme_trois_etapes_tpl_002_restaurant",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_trois_etapes",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Chaque sorte de table donne son total de places, puis on réunit.",
+    tags: ["ce2", "probleme", "trois_etapes", "template"],
+    generate: () => {
+      // L'exemple du BO, mot pour mot : « Dans un restaurant, il y a 4 tables
+      // de 6 personnes et 7 tables de 4 personnes. »
+      const grandes = randomInt(3, 9);
+      const placesGrandes = randomInt(6, 10);
+      const petites = randomInt(4, 12);
+      const placesPetites = randomInt(2, 5);
+      const total = grandes * placesGrandes + petites * placesPetites;
+      return {
+        text: `Dans un restaurant, il y a ${grandes} tables de ${placesGrandes} personnes et ${petites} tables de ${placesPetites} personnes. Combien ce restaurant peut-il recevoir de clients ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un problème mixte enchaine des multiplications et une addition.",
+          "On calcule les places de chaque sorte de table, puis on réunit.",
+          `${grandes} × ${placesGrandes} = ${grandes * placesGrandes} places aux grandes tables. ${petites} × ${placesPetites} = ${petites * placesPetites} places aux petites. En tout : ${grandes * placesGrandes} + ${petites * placesPetites} = ${total}.`,
+          `Le restaurant peut recevoir ${total} clients.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_probleme_trois_etapes_tpl_003_achats",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_trois_etapes",
+    difficulty: 5,
+    theme: "reunion",
+    hint: "Chaque achat d'abord, la dépense ensuite, le rendu en dernier.",
+    tags: ["ce2", "probleme", "trois_etapes", "template"],
+    generate: () => {
+      const nbA = randomInt(3, 8);
+      const prixA = randomInt(3, 12);
+      const nbB = randomInt(2, 6);
+      const prixB = randomInt(4, 15);
+      const depense = nbA * prixA + nbB * prixB;
+      const billet = Math.ceil((depense + 5) / 10) * 10;
+      const rendu = billet - depense;
+      return {
+        text: `Au marché, on achète ${nbA} barquettes de letchis à ${prixA} € et ${nbB} paquets de samoussas à ${prixB} €. On paie avec ${billet} €. Combien rend-on ?`,
+        format: "short",
+        expected: [String(rendu)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un problème à trois étapes se traite dans l'ordre où les choses se passent.",
+          "On calcule chaque achat, on réunit, puis on cherche le rendu.",
+          `Les letchis : ${nbA} × ${prixA} = ${nbA * prixA} €. Les samoussas : ${nbB} × ${prixB} = ${nbB * prixB} €. La dépense : ${nbA * prixA} + ${nbB * prixB} = ${depense} €. Le rendu : ${billet} − ${depense} = ${rendu} €.`,
+          `On rend ${rendu} €.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_probleme_compmult_tpl_002_prix",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_comparaison_multiplicative",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "« Quatre fois plus cher » ne veut pas dire « quatre euros de plus ».",
+    tags: ["ce2", "probleme", "comparaison_multiplicative", "piege", "template"],
+    generate: () => {
+      // L'exemple du BO : « Une trottinette coute quatre fois plus cher qu'un
+      // casque. Le casque coute 32 €. »
+      const prixPetit = randomInt(12, 60);
+      const facteur = randomInt(3, 8);
+      const prixGrand = prixPetit * facteur;
+      const paire = randomChoice([
+        { petit: "un casque", grand: "une trottinette" },
+        { petit: "un cahier", grand: "un dictionnaire" },
+        { petit: "un ballon", grand: "une paire de baskets" },
+      ]);
+      return {
+        text: `${majuscule(paire.grand)} coute ${facteur} fois plus cher ${que(paire.petit.split(" ")[1] || paire.petit)}. ${majuscule(paire.petit)} coute ${prixPetit} €. Combien coute ${paire.grand} ?`,
+        format: "short",
+        expected: [String(prixGrand)],
+        comparator: "number_equal",
+        explanation: exp(
+          "« Tant de fois plus » annonce une multiplication, pas une addition.",
+          "On multiplie le prix connu par le facteur donné.",
+          `${prixPetit} × ${facteur} = ${prixGrand}. Ajouter ${facteur} donnerait ${prixPetit + facteur} € : ce serait « ${facteur} euros de plus », ce qui n'est pas ce que dit l'énoncé.`,
+          `${majuscule(paire.grand)} coute ${prixGrand} €.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_probleme_cartesien_tpl_002_trois_ensembles",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_produit_cartesien",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On combine d'abord deux ensembles, puis on ajoute le troisième.",
+    tags: ["ce2", "probleme", "produit_cartesien", "template"],
+    generate: () => {
+      // L'exemple du BO : le clown, ses chapeaux, ses tee-shirts, ses pantalons.
+      const chapeaux = randomInt(2, 4);
+      const tshirts = randomInt(2, 4);
+      const pantalons = randomInt(2, 4);
+      const total = chapeaux * tshirts * pantalons;
+      return {
+        text: `Pour se déguiser, un clown dispose de ${chapeaux} chapeaux, de ${tshirts} tee-shirts et de ${pantalons} pantalons. Combien de costumes différents peut-il faire ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Chaque choix se combine avec tous les autres : on multiplie les possibilités.",
+          "On combine deux ensembles, puis on multiplie par le troisième.",
+          `Avec ${chapeaux} chapeaux et ${tshirts} tee-shirts, il y a déjà ${chapeaux * tshirts} débuts de costume. Chacun peut aller avec ${pantalons} pantalons : ${chapeaux * tshirts} × ${pantalons} = ${total}.`,
+          `Il peut faire ${total} costumes différents.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_probleme_cartesien_tpl_003_ensemble_manquant",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_produit_cartesien",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On connait le nombre de tenues et l'un des deux ensembles.",
+    tags: ["ce2", "probleme", "produit_cartesien", "piege", "template"],
+    generate: () => {
+      const hauts = randomInt(3, 9);
+      const bas = randomInt(3, 9);
+      const tenues = hauts * bas;
+      return {
+        text: `Avec ses tee-shirts et ses ${bas} shorts, Naïla peut composer ${tenues} tenues différentes. Combien a-t-elle de tee-shirts ?`,
+        format: "short",
+        expected: [String(hauts)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le nombre de tenues est le produit des deux ensembles : connaissant l'un, on retrouve l'autre.",
+          "On cherche par combien multiplier le nombre connu pour obtenir le total.",
+          `Chaque tee-shirt donne ${bas} tenues, une par short. Il faut donc ${hauts} tee-shirts, car ${hauts} × ${bas} = ${tenues}.`,
+          `Elle a ${hauts} tee-shirts.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_probleme_schema_tpl_002_comparaison",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_schema_barre",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "La barre du haut est plus longue de l'écart : calcule-la avant le total.",
+    tags: ["ce2", "probleme", "schema_barre", "template", "canvas"],
+    generate: () => {
+      // Le schéma du BO : « Léo a 188 billes. Lucie en a 75 de plus que Léo. »
+      const [a, b] = shuffle(PRENOMS).slice(0, 2);
+      const base = randomInt(80, 900);
+      const ecart = randomInt(20, 200);
+      const autre = base + ecart;
+      const total = base + autre;
+      return {
+        text: `${a.nom} a ${formatNumber(base)} billes. ${b.nom} en a ${formatNumber(ecart)} de plus ${que(a.nom)}. Combien les deux enfants ont-ils de billes en tout ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le schéma en barres montre l'écart comme un morceau ajouté à la barre la plus courte.",
+          "On calcule la barre longue, puis on réunit les deux barres.",
+          `${formatNumber(base)} + ${formatNumber(ecart)} = ${formatNumber(autre)} pour ${b.nom}. Puis ${formatNumber(base)} + ${formatNumber(autre)} = ${formatNumber(total)}.`,
+          `Ils ont ${formatNumber(total)} billes en tout.`,
+        ),
+        canvas: schemaBarre({
+          total: "?",
+          parts: [
+            { label: a.nom, value: formatNumber(base) },
+            { label: b.nom, value: `${formatNumber(base)} + ${formatNumber(ecart)}` },
+          ],
+          display: { showTotal: true, showPartLabels: true, showValues: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_probleme_schema_tpl_003_parts_egales",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_schema_barre",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La barre est coupée en parts toutes égales.",
+    tags: ["ce2", "probleme", "schema_barre", "template", "canvas"],
+    generate: () => {
+      // Le second schéma du BO : six dictionnaires payés 72 €.
+      const parts = randomInt(3, 8);
+      const prixUnite = randomInt(6, 25);
+      const total = parts * prixUnite;
+      const objet = randomChoice(["dictionnaires", "ballons", "cahiers", "casques"]);
+      return {
+        text: `La maitresse a acheté ${parts} ${objet} pour la classe. Elle a payé ${total} €. Quel est le prix d'un seul ?`,
+        format: "short",
+        expected: [String(prixUnite)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Quand un tout se partage en parts égales, le schéma en barres montre des morceaux tous de la même taille.",
+          "On cherche la valeur d'une part : on divise le tout par le nombre de parts.",
+          `${total} ÷ ${parts} = ${prixUnite}, car ${parts} × ${prixUnite} = ${total}.`,
+          `Un seul coute ${prixUnite} €.`,
+        ),
+        canvas: schemaBarre({
+          total: `${total} €`,
+          parts: Array.from({ length: parts }, () => ({ label: "?", unknown: true })),
+          questionLabel: `${parts} ${objet}`,
+          display: { showTotal: true, showPartLabels: true, showValues: false },
+        }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_probleme_verifier_tpl_002_part_plus_grande",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_verifier",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une part ne peut jamais dépasser le tout dont elle fait partie.",
+    tags: ["ce2", "probleme", "verifier", "piege", "template"],
+    generate: () => {
+      const c = randomChoice(CONTEXTES);
+      const total = randomInt(500, 4000);
+      const possible = randomChoice([true, false]);
+      const trouve = possible ? randomInt(50, total - 50) : total + randomInt(50, 900);
+      return {
+        text: `${majuscule(c.lieu)} a ${formatNumber(total)} ${c.objets} en tout, dont une partie est déjà vendue. Un élève trouve ${formatNumber(trouve)} ${c.objets} vendus. Cette réponse est-elle possible ?`,
+        format: "qcm",
+        choices: shuffle(["oui", "non"]),
+        expected: [possible ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Avant d'écrire sa réponse, on vérifie qu'elle est possible : c'est la régulation.",
+          "On compare le résultat trouvé au total donné par l'énoncé.",
+          possible
+            ? `${formatNumber(trouve)} est plus petit que ${formatNumber(total)} : c'est possible, il resterait ${formatNumber(total - trouve)} ${c.objets}.`
+            : `${formatNumber(trouve)} est plus grand que ${formatNumber(total)}, le total. Une part ne peut pas dépasser le tout : le calcul est à refaire.`,
+          possible ? "Oui, c'est possible." : "Non, ce n'est pas possible.",
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_probleme_verifier_tpl_003_somme_trop_petite",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_verifier",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Une somme est toujours plus grande que chacun des deux nombres réunis.",
+    tags: ["ce2", "probleme", "verifier", "piege", "template"],
+    generate: () => {
+      const a = randomInt(400, 2000);
+      const b = randomInt(300, 1800);
+      const possible = randomChoice([true, false]);
+      const trouve = possible ? a + b : randomInt(Math.min(a, b) - 200, Math.min(a, b) - 20);
+      return {
+        text: `On réunit ${formatNumber(a)} et ${formatNumber(b)}. Un élève annonce ${formatNumber(trouve)}. Cette réponse est-elle possible ?`,
+        format: "qcm",
+        choices: shuffle(["oui", "non"]),
+        expected: [possible ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une somme de deux nombres positifs est plus grande que chacun d'eux.",
+          "On compare le résultat annoncé aux deux nombres de départ, sans refaire le calcul.",
+          possible
+            ? `${formatNumber(trouve)} est plus grand que ${formatNumber(a)} et que ${formatNumber(b)} : la réponse tient debout, et le calcul le confirme.`
+            : `${formatNumber(trouve)} est plus PETIT que ${formatNumber(Math.min(a, b))}, l'un des deux nombres réunis. C'est impossible : en ajoutant, on ne peut pas obtenir moins qu'au départ.`,
+          possible ? "Oui, c'est possible." : "Non, ce n'est pas possible.",
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_probleme_defi_tpl_002_reste_du_partage",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Cherche ce qui ne rentre dans aucune boite complète.",
+    tags: ["ce2", "probleme", "defi", "template"],
+    generate: () => {
+      const parBoite = randomInt(6, 15);
+      const boites = randomInt(5, 20);
+      const reste = randomInt(1, parBoite - 1);
+      const total = boites * parBoite + reste;
+      const c = randomChoice(CONTEXTES);
+      return {
+        text: `${majuscule(c.lieu)} range ${formatNumber(total)} ${c.objets} dans des boites de ${parBoite}. Combien de ${c.objets} resteront en dehors des boites complètes ?`,
+        format: "short",
+        expected: [String(reste)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un partage ne tombe pas toujours juste : ce qui ne remplit pas une part entière s'appelle le reste.",
+          "On remplit autant de boites complètes que possible, puis on regarde ce qui n'a pas trouvé de place.",
+          `${boites} boites complètes contiennent ${boites} × ${parBoite} = ${formatNumber(boites * parBoite)} ${c.objets}. Il en restait ${formatNumber(total)} : ${formatNumber(total)} − ${formatNumber(boites * parBoite)} = ${reste}. Le reste est toujours plus petit que ${parBoite}, sinon on remplirait une boite de plus.`,
+          `Il restera ${reste} ${c.objets}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_probleme_defi_tpl_003_reste_selon_histoire",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "ce2_probleme_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Les derniers voyageurs ont-ils le droit de rester à quai ?",
+    tags: ["ce2", "probleme", "defi", "piege", "template"],
+    generate: () => {
+      // Le même reste, deux réponses différentes : c'est l'histoire qui décide
+      // s'il faut arrondir au-dessus ou en dessous.
+      const parVehicule = randomInt(4, 9);
+      const complets = randomInt(3, 12);
+      const reste = randomInt(1, parVehicule - 1);
+      const total = complets * parVehicule + reste;
+      const transporter = randomChoice([true, false]);
+      const bonne = transporter ? complets + 1 : complets;
+      return {
+        text: transporter
+          ? `${total} élèves partent en sortie. Chaque voiture transporte ${parVehicule} élèves. Combien faut-il de voitures pour que TOUS partent ?`
+          : `${total} élèves veulent jouer. Chaque équipe compte ${parVehicule} élèves. Combien d'équipes COMPLÈTES peut-on former ?`,
+        format: "short",
+        expected: [String(bonne)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un partage avec reste ne se termine pas par un calcul mais par une décision : que fait-on du reste ?",
+          "On calcule le nombre de parts complètes, puis on relit la question.",
+          transporter
+            ? `${complets} voitures pleines transportent ${complets * parVehicule} élèves. Il en reste ${reste}, qui ne peuvent pas rester sur place : il faut une voiture de plus, donc ${bonne}.`
+            : `${complets} équipes complètes réunissent ${complets * parVehicule} élèves. Il en reste ${reste}, trop peu pour former une équipe entière : on en compte ${bonne}.`,
+          transporter ? `Il faut ${bonne} voitures.` : `On peut former ${bonne} équipes complètes.`,
+        ),
+      };
+    },
+  },
 ];

@@ -877,4 +877,550 @@ export const calculBank: TutorBankItemV4[] = [
       };
     },
   },
+  // ============================================================
+  // COMPLÉMENTS DU 09/08/2026 — onze micro-compétences n'avaient qu'une ou
+  // deux questions : à la troisième, l'élève revoyait la première. Tous les
+  // ajouts sont des GÉNÉRATEURS, chacun sur un angle que la banque n'avait
+  // pas — l'étape intermédiaire, le facteur manquant, la procédure appliquée.
+  // ============================================================
+
+  {
+    kind: "template",
+    id: "ce2_calcul_complement_tpl_003_centaine_superieure",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_complements",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On complète d'abord les unités, puis les dizaines.",
+    tags: ["ce2", "calcul_mental", "complements", "template"],
+    generate: () => {
+      const centaines = randomInt(1, 8);
+      const dizaines = randomInt(1, 9);
+      const unites = randomInt(1, 9);
+      const n = centaines * 100 + dizaines * 10 + unites;
+      const cible = (centaines + 1) * 100;
+      const manque = cible - n;
+      const versDizaine = 10 - unites;
+      return {
+        text: `Combien faut-il ajouter à ${formatNumber(n)} pour aller à ${formatNumber(cible)} ?`,
+        format: "short",
+        expected: [String(manque)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le complément à la centaine supérieure se construit en deux temps.",
+          "On complète d'abord les unités jusqu'à la dizaine ronde, puis les dizaines jusqu'à la centaine.",
+          `De ${formatNumber(n)}, il faut ${versDizaine} pour atteindre ${formatNumber(n + versDizaine)}. Puis ${cible - n - versDizaine} pour atteindre ${formatNumber(cible)}. En tout : ${versDizaine} + ${cible - n - versDizaine} = ${manque}.`,
+          `Il faut ajouter ${manque}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_calcul_double_moitie_tpl_002_enchainement",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_doubles_moities",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Deux fois de suite : on applique la même opération au résultat.",
+    tags: ["ce2", "calcul_mental", "doubles_moities", "template"],
+    generate: () => {
+      const doubler = randomChoice([true, false]);
+      const base = doubler ? randomInt(12, 120) : randomInt(5, 60) * 4;
+      const etape = doubler ? base * 2 : base / 2;
+      const fin = doubler ? etape * 2 : etape / 2;
+      return {
+        text: doubler
+          ? `Quel est le double du double de ${formatNumber(base)} ?`
+          : `Quelle est la moitié de la moitié de ${formatNumber(base)} ?`,
+        format: "short",
+        expected: [String(fin)],
+        comparator: "number_equal",
+        explanation: exp(
+          doubler
+            ? "Doubler deux fois de suite revient à multiplier par quatre."
+            : "Prendre deux fois la moitié revient à partager en quatre.",
+          "On applique l'opération une première fois, puis on recommence sur le résultat.",
+          doubler
+            ? `Le double de ${formatNumber(base)} est ${formatNumber(etape)}, et le double de ${formatNumber(etape)} est ${formatNumber(fin)}. C'est bien ${formatNumber(base)} × 4.`
+            : `La moitié de ${formatNumber(base)} est ${formatNumber(etape)}, et la moitié de ${formatNumber(etape)} est ${formatNumber(fin)}. C'est bien ${formatNumber(base)} partagé en quatre.`,
+          `La réponse est ${formatNumber(fin)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_calcul_decomposer_tpl_002_difference",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_decomposer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Retire les dizaines, puis les unités.",
+    tags: ["ce2", "calcul_mental", "decomposer", "template"],
+    generate: () => {
+      const dizA = randomInt(4, 9);
+      const uniA = randomInt(4, 9);
+      const dizB = randomInt(1, dizA - 2);
+      const uniB = randomInt(1, uniA - 1);
+      const a = dizA * 10 + uniA;
+      const b = dizB * 10 + uniB;
+      return {
+        text: `Combien font ${a} − ${b} ?`,
+        format: "short",
+        expected: [String(a - b)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Calculer mentalement une différence, c'est retirer les rangs l'un après l'autre.",
+          "On enlève d'abord les dizaines, puis les unités.",
+          `${a} − ${dizB * 10} = ${a - dizB * 10}, puis ${a - dizB * 10} − ${uniB} = ${a - b}.`,
+          `${a} − ${b} = ${a - b}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_calcul_decomposer_tpl_003_dizaine_ronde",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_decomposer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Passe d'abord par la dizaine ronde : combien manque-t-il ?",
+    tags: ["ce2", "calcul_mental", "decomposer", "template"],
+    generate: () => {
+      const dizaines = randomInt(2, 8);
+      const unites = randomInt(4, 9);
+      const a = dizaines * 10 + unites;
+      const versDizaine = 10 - unites;
+      const b = randomInt(versDizaine + 1, 9 + versDizaine);
+      const reste = b - versDizaine;
+      return {
+        text: `Pour calculer ${a} + ${b}, on passe par ${(dizaines + 1) * 10}. Combien reste-t-il à ajouter ensuite ?`,
+        format: "short",
+        expected: [String(reste)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Passer par la dizaine ronde coupe l'ajout en deux morceaux faciles.",
+          "On complète jusqu'à la dizaine, puis on ajoute ce qui reste.",
+          `De ${a} à ${(dizaines + 1) * 10}, il faut ${versDizaine}. Sur les ${b} à ajouter, il en reste ${b} − ${versDizaine} = ${reste}, ce qui mène à ${a + b}.`,
+          `Il reste ${reste} à ajouter.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_calcul_ajouter8_18_tpl_002",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_ajouter_9_19",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "8, c'est 10 moins 2. 18, c'est 20 moins 2.",
+    tags: ["ce2", "calcul_mental", "ajouter_9_19", "template"],
+    generate: () => {
+      const n = randomInt(23, 900);
+      const a = randomChoice([8, 18]);
+      const rond = a + 2;
+      const r = n + a;
+      return {
+        text: `Combien font ${formatNumber(n)} + ${a} ?`,
+        format: "short",
+        expected: [String(r)],
+        comparator: "number_equal",
+        explanation: exp(
+          `Ajouter ${a}, c'est ajouter ${rond} puis rendre 2.`,
+          "On passe par la dizaine ronde, plus facile à ajouter.",
+          `${formatNumber(n)} + ${rond} = ${formatNumber(n + rond)}, puis on enlève 2 : ${formatNumber(r)}.`,
+          `${formatNumber(n)} + ${a} = ${formatNumber(r)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_calcul_soustraire9_tpl_002_etape",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_soustraire_9_19",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On a enlevé un de trop : que faut-il faire ensuite ?",
+    tags: ["ce2", "calcul_mental", "soustraire_9_19", "piege", "template"],
+    generate: () => {
+      const n = randomInt(80, 900);
+      const s = randomChoice([9, 19, 29, 39]);
+      const rond = s + 1;
+      return {
+        text: `Pour calculer ${formatNumber(n)} − ${s}, un élève commence par ${formatNumber(n)} − ${rond} = ${formatNumber(n - rond)}. Que doit-il faire ensuite ?`,
+        format: "qcm",
+        choices: makeChoices("ajouter 1", [
+          "enlever 1",
+          "ajouter 10",
+          "enlever 10",
+          "rien, il a fini",
+        ]),
+        expected: ["ajouter 1"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          `Enlever ${s}, c'est enlever ${rond} puis rendre 1.`,
+          "On regarde ce qu'on a retiré en trop.",
+          `Il fallait enlever ${s}, il a enlevé ${rond} : c'est 1 de trop. En ajoutant 1 à ${formatNumber(n - rond)}, il obtient ${formatNumber(n - s)}.`,
+          "Il doit ajouter 1.",
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_calcul_soustraire9_tpl_003",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_soustraire_9_19",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Enlève la dizaine ronde, puis rends ce que tu as pris en trop.",
+    tags: ["ce2", "calcul_mental", "soustraire_9_19", "template"],
+    generate: () => {
+      const n = randomInt(120, 2000);
+      const s = randomChoice([9, 19, 29, 39]);
+      const r = n - s;
+      return {
+        text: `Combien font ${formatNumber(n)} − ${s} ?`,
+        format: "short",
+        expected: [String(r)],
+        comparator: "number_equal",
+        explanation: exp(
+          `Enlever ${s}, c'est enlever ${s + 1} puis rendre 1.`,
+          "On passe par la dizaine ronde.",
+          `${formatNumber(n)} − ${s + 1} = ${formatNumber(n - s - 1)}, puis on rend 1 : ${formatNumber(r)}.`,
+          `${formatNumber(n)} − ${s} = ${formatNumber(r)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_calcul_x8_tpl_002_etapes",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_multiplier_4_8",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Multiplier par 8, c'est doubler trois fois.",
+    tags: ["ce2", "calcul_mental", "multiplier_4_8", "template"],
+    generate: () => {
+      const n = randomInt(11, 90);
+      const un = n * 2;
+      const deux = un * 2;
+      const trois = deux * 2;
+      return {
+        text: `Pour calculer ${n} × 8, on double trois fois. On a déjà ${n} × 2 = ${formatNumber(un)} et ${formatNumber(un)} × 2 = ${formatNumber(deux)}. Quel est le résultat final ?`,
+        format: "short",
+        expected: [String(trois)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Multiplier par 8, c'est doubler trois fois de suite : 2, puis 4, puis 8.",
+          "On repart du dernier résultat et on double encore une fois.",
+          `${formatNumber(deux)} × 2 = ${formatNumber(trois)}. On vérifie : ${n} × 8 = ${formatNumber(trois)}.`,
+          `${n} × 8 = ${formatNumber(trois)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_calcul_multiples25_tpl_002_combien_de_fois",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_multiples_25",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Quatre paquets de 25 font 100.",
+    tags: ["ce2", "calcul_mental", "multiples_25", "template"],
+    generate: () => {
+      const k = randomInt(2, 16);
+      const total = k * 25;
+      const centaines = Math.floor(k / 4);
+      const reste = k % 4;
+      return {
+        text: `Combien de fois 25 y a-t-il dans ${formatNumber(total)} ?`,
+        format: "short",
+        expected: [String(k)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Les multiples de 25 se comptent par paquets de quatre : quatre fois 25 font 100.",
+          "On compte les centaines entières, puis ce qui reste.",
+          centaines > 0
+            ? `${formatNumber(total)} contient ${centaines} centaine${centaines > 1 ? "s" : ""}, soit ${centaines * 4} fois 25, et il reste ${reste * 25}, soit ${reste} fois 25. En tout ${k} fois.`
+            : `${formatNumber(total)} ne fait même pas une centaine : il contient ${k} fois 25.`,
+          `Il y a ${k} fois 25 dans ${formatNumber(total)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_calcul_multiples25_tpl_003_monnaie",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_multiples_25",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Quatre pièces de 25 centimes font un euro.",
+    tags: ["ce2", "calcul_mental", "multiples_25", "template"],
+    generate: () => {
+      const euros = randomInt(2, 12);
+      const pieces = euros * 4;
+      return {
+        text: `Combien faut-il de pièces de 25 centimes pour faire ${euros} euros ?`,
+        format: "short",
+        expected: [String(pieces)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Quatre pièces de 25 centimes font 100 centimes, c'est-à-dire un euro.",
+          "On multiplie le nombre d'euros par quatre.",
+          `${euros} × 4 = ${pieces}. On vérifie : ${pieces} × 25 = ${formatNumber(pieces * 25)} centimes, soit ${euros} euros.`,
+          `Il faut ${pieces} pièces.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_calcul_dizaines_tpl_002_facteur_manquant",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_dizaines_entieres",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Enlève le zéro du résultat, puis cherche dans les tables.",
+    tags: ["ce2", "calcul_mental", "dizaines_entieres", "template"],
+    generate: () => {
+      const n = randomInt(2, 9);
+      const d = randomInt(2, 9);
+      const r = n * d * 10;
+      return {
+        text: `Quel nombre manque : ${n} × ? = ${formatNumber(r)}`,
+        format: "short",
+        expected: [String(d * 10)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un produit qui se termine par zéro vient d'un facteur qui est un nombre entier de dizaines.",
+          "On retire le zéro du résultat, on cherche dans les tables, puis on remet le zéro.",
+          `Sans son zéro, ${formatNumber(r)} devient ${n * d}. Or ${n} × ${d} = ${n * d}. Le facteur manquant est donc ${d}, avec son zéro : ${d * 10}.`,
+          `Le nombre manquant est ${d * 10}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_calcul_dizaines_tpl_003_centaines",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_dizaines_entieres",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On calcule sans les zéros, puis on les remet tous.",
+    tags: ["ce2", "calcul_mental", "dizaines_entieres", "template"],
+    generate: () => {
+      const n = randomInt(2, 9);
+      const c = randomInt(2, 9);
+      const r = n * c * 100;
+      return {
+        text: `Combien font ${n} × ${formatNumber(c * 100)} ?`,
+        format: "short",
+        expected: [String(r)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Multiplier par un nombre entier de centaines, c'est multiplier par le chiffre puis remettre les deux zéros.",
+          "On met les zéros de côté, on calcule, puis on les remet.",
+          `${n} × ${c} = ${n * c}. On remet les deux zéros : ${formatNumber(r)}.`,
+          `${n} × ${formatNumber(c * 100)} = ${formatNumber(r)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_calcul_distributivite_tpl_002_etape",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_distributivite",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Le nombre a été coupé en dizaines et unités : il reste un morceau à calculer.",
+    tags: ["ce2", "calcul_mental", "distributivite", "template"],
+    generate: () => {
+      const dizaines = randomInt(2, 9);
+      const unites = randomInt(1, 9);
+      const n = dizaines * 10 + unites;
+      const k = randomInt(3, 9);
+      const morceauDizaines = dizaines * 10 * k;
+      const morceauUnites = unites * k;
+      return {
+        text: `Pour calculer ${n} × ${k}, on coupe ${n} en ${dizaines * 10} + ${unites}. On a déjà ${dizaines * 10} × ${k} = ${formatNumber(morceauDizaines)}. Quel est le résultat final ?`,
+        format: "short",
+        expected: [String(morceauDizaines + morceauUnites)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Multiplier une somme, c'est multiplier chaque morceau puis réunir.",
+          "On calcule le second morceau, puis on additionne les deux.",
+          `${unites} × ${k} = ${morceauUnites}. On réunit : ${formatNumber(morceauDizaines)} + ${morceauUnites} = ${formatNumber(morceauDizaines + morceauUnites)}.`,
+          `${n} × ${k} = ${formatNumber(morceauDizaines + morceauUnites)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_calcul_distributivite_tpl_003_onze_dix_neuf",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_distributivite",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Coupe le nombre en 10 et le reste.",
+    tags: ["ce2", "calcul_mental", "distributivite", "template"],
+    generate: () => {
+      const unites = randomInt(1, 9);
+      const n = 10 + unites;
+      const k = randomInt(3, 9);
+      return {
+        text: `Combien font ${n} × ${k} ?`,
+        format: "short",
+        expected: [String(n * k)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un nombre entre 11 et 19 se coupe naturellement en 10 et quelques unités.",
+          "On multiplie chaque morceau, puis on réunit.",
+          `10 × ${k} = ${10 * k} et ${unites} × ${k} = ${unites * k}. On réunit : ${10 * k} + ${unites * k} = ${formatNumber(n * k)}.`,
+          `${n} × ${k} = ${formatNumber(n * k)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_calcul_fluence_tpl_003_faits",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_fluence",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un résultat par seconde : ce sont des faits à connaitre par cœur.",
+    tags: ["ce2", "calcul_mental", "fluence", "template"],
+    generate: () => {
+      const famille = randomChoice(["complement100", "double", "moitie"]);
+      if (famille === "complement100") {
+        const n = randomInt(1, 9) * 10;
+        return {
+          text: `${n} + ? = 100`,
+          format: "short",
+          expected: [String(100 - n)],
+          comparator: "number_equal",
+          explanation: exp(
+            "Les compléments à 100 des dizaines entières se retiennent par cœur.",
+            "On cherche la dizaine qui complète.",
+            `${n} + ${100 - n} = 100.`,
+            `Il manque ${100 - n}.`,
+          ),
+        };
+      }
+      if (famille === "double") {
+        const n = randomChoice([25, 30, 35, 40, 45, 50, 60, 75]);
+        return {
+          text: `Le double de ${n} = ?`,
+          format: "short",
+          expected: [String(n * 2)],
+          comparator: "number_equal",
+          explanation: exp(
+            "Les doubles des nombres usuels se restituent sans calculer.",
+            "On ajoute le nombre à lui-même.",
+            `${n} + ${n} = ${formatNumber(n * 2)}.`,
+            `Le double de ${n} est ${formatNumber(n * 2)}.`,
+          ),
+        };
+      }
+      const n = randomChoice([40, 60, 80, 100, 120, 150, 200, 300]);
+      return {
+        text: `La moitié de ${n} = ?`,
+        format: "short",
+        expected: [String(n / 2)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Les moitiés des dizaines et centaines entières se restituent sans calculer.",
+          "On partage en deux parts égales.",
+          `${n / 2} + ${n / 2} = ${formatNumber(n)}.`,
+          `La moitié de ${n} est ${formatNumber(n / 2)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_calcul_defi_tpl_003_choisir_la_procedure",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce2_calcul_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Regarde les nombres avant de te lancer : lequel est proche d'un nombre rond ?",
+    tags: ["ce2", "calcul_mental", "defi", "methode", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        {
+          calcul: (n: number) => `${formatNumber(n)} + 19`,
+          bonne: "ajouter 20, puis enlever 1",
+          pieges: ["ajouter 20, puis ajouter 1", "ajouter 10, puis enlever 9", "poser l'opération"],
+        },
+        {
+          calcul: (n: number) => `${formatNumber(n)} × 4`,
+          bonne: "doubler, puis doubler encore",
+          pieges: ["ajouter 4 fois de suite", "doubler une seule fois", "poser l'opération"],
+        },
+        {
+          calcul: (n: number) => `${formatNumber(n)} × 25`,
+          bonne: "compter par paquets de quatre, car 4 × 25 = 100",
+          pieges: ["ajouter 25 autant de fois", "multiplier par 20 puis par 5", "poser l'opération"],
+        },
+      ]);
+      const n = randomInt(24, 480);
+      return {
+        text: `Pour calculer ${cas.calcul(n)} de tête, quelle est la façon la plus sure ?`,
+        format: "qcm",
+        choices: makeChoices(cas.bonne, cas.pieges),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le calcul mental demande de choisir la procédure adaptée aux nombres, pas d'appliquer toujours la même.",
+          "On regarde les nombres en jeu avant de commencer.",
+          `Ici, la façon la plus sure est de ${cas.bonne}. Les autres marchent parfois, mais demandent plus d'étapes — donc plus d'occasions de se tromper.`,
+          `Il vaut mieux ${cas.bonne}.`,
+        ),
+      };
+    },
+  },
 ];

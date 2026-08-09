@@ -711,4 +711,263 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ============================================================
+  // COMPLÉMENTS DU 09/08/2026 — cinq micro-compétences n'avaient qu'une ou deux
+  // questions. Chaque ajout est un GÉNÉRATEUR, sur un angle absent : le rang
+  // qu'on encadre, la graduation qu'il faut lire avant de placer, et le nombre
+  // mystère décrit par ses rangs.
+  // ============================================================
+
+  {
+    kind: "template",
+    id: "ce2_entier_decomposer_tpl_003_ecriture_en_unites",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "ce2_entier_decomposer",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Attention : on parle de dizaines, pas du chiffre des dizaines.",
+    tags: ["ce2", "nombres_entiers", "decomposition", "piege", "template"],
+    generate: () => {
+      const n = randomInt(1000, 9999);
+      const dizaines = Math.floor(n / 10);
+      const unitesRestantes = n % 10;
+      return {
+        text: `${formatNumber(n)}, c'est ${formatNumber(dizaines)} dizaines et combien d'unités ?`,
+        format: "short",
+        expected: [String(unitesRestantes)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un nombre s'écrit aussi en unités de numération, et le NOMBRE de dizaines n'est pas le CHIFFRE des dizaines.",
+          "On regarde ce qui reste une fois toutes les dizaines entières comptées.",
+          `${formatNumber(dizaines)} dizaines valent ${formatNumber(dizaines * 10)}. De ${formatNumber(dizaines * 10)} à ${formatNumber(n)}, il reste ${unitesRestantes}. Donc ${formatNumber(n)} = ${formatNumber(dizaines)} dizaines et ${unitesRestantes} unités.`,
+          `Il reste ${unitesRestantes} unités.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_entier_comparer_tpl_003_encadrer_deux_nombres",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "ce2_entier_comparer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "« Compris entre » veut dire plus grand que l'un et plus petit que l'autre.",
+    tags: ["ce2", "nombres_entiers", "comparer", "template"],
+    generate: () => {
+      const bas = randomInt(1000, 8000);
+      const haut = bas + randomInt(200, 1500);
+      const dedans = randomInt(bas + 1, haut - 1);
+      const dehors = randomChoice([bas - randomInt(1, 500), haut + randomInt(1, 500)]);
+      const estDedans = randomChoice([true, false]);
+      const n = estDedans ? dedans : dehors;
+      return {
+        text: `${formatNumber(n)} est-il compris entre ${formatNumber(bas)} et ${formatNumber(haut)} ?`,
+        format: "qcm",
+        choices: shuffle(["oui", "non"]),
+        expected: [estDedans ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Être compris entre deux nombres, c'est être plus grand que le premier ET plus petit que le second.",
+          "On fait les deux comparaisons, pas une seule.",
+          estDedans
+            ? `${formatNumber(n)} est plus grand que ${formatNumber(bas)} et plus petit que ${formatNumber(haut)} : les deux conditions sont remplies.`
+            : n < bas
+              ? `${formatNumber(n)} est plus PETIT que ${formatNumber(bas)} : il est avant l'encadrement, pas dedans.`
+              : `${formatNumber(n)} est plus GRAND que ${formatNumber(haut)} : il est après l'encadrement, pas dedans.`,
+          estDedans ? "Oui, il est bien compris entre les deux." : "Non, il n'est pas compris entre les deux.",
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_entier_encadrer_tpl_002_milliers",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "ce2_entier_encadrer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le millier du dessous se lit dans le chiffre des milliers.",
+    tags: ["ce2", "nombres_entiers", "encadrer", "template"],
+    generate: () => {
+      const milliers = randomInt(1, 8);
+      const reste = randomInt(1, 999);
+      const n = milliers * 1000 + reste;
+      const dessus = (milliers + 1) * 1000;
+      return {
+        text: `Entre quels deux milliers qui se suivent se trouve ${formatNumber(n)} ? Donne celui du DESSUS.`,
+        format: "short",
+        expected: [String(dessus)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Encadrer un nombre entre deux milliers, c'est trouver le millier juste avant et le millier juste après.",
+          "On lit le chiffre des milliers, puis on ajoute un pour obtenir celui du dessus.",
+          `${formatNumber(n)} a ${milliers} millier${milliers > 1 ? "s" : ""} et il reste ${formatNumber(reste)}. Il est donc entre ${formatNumber(milliers * 1000)} et ${formatNumber(dessus)}.`,
+          `Le millier du dessus est ${formatNumber(dessus)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_entier_encadrer_tpl_003_dizaine_la_plus_proche",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "ce2_entier_encadrer",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Regarde le chiffre des unités : plus petit que 5, on descend ; sinon on monte.",
+    tags: ["ce2", "nombres_entiers", "encadrer", "piege", "template"],
+    generate: () => {
+      const dizaines = randomInt(10, 990);
+      const unites = randomChoice([1, 2, 3, 4, 6, 7, 8, 9]);
+      const n = dizaines * 10 + unites;
+      const proche = unites < 5 ? dizaines * 10 : (dizaines + 1) * 10;
+      return {
+        text: `${formatNumber(n)} est entre ${formatNumber(dizaines * 10)} et ${formatNumber((dizaines + 1) * 10)}. De laquelle de ces deux dizaines est-il le plus PROCHE ?`,
+        format: "qcm",
+        choices: shuffle([formatNumber(dizaines * 10), formatNumber((dizaines + 1) * 10)]),
+        expected: [formatNumber(proche)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Entre deux dizaines qui se suivent, un nombre est plus proche de l'une des deux.",
+          "On compare l'écart avec chacune, ou plus vite : on regarde le chiffre des unités.",
+          `${formatNumber(n)} est à ${unites} de ${formatNumber(dizaines * 10)} et à ${10 - unites} de ${formatNumber((dizaines + 1) * 10)}. Comme ${unites} ${unites < 5 ? "est plus petit que" : "dépasse"} 5, il est plus proche de ${formatNumber(proche)}.`,
+          `Il est plus proche de ${formatNumber(proche)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_entier_droite_tpl_002_pas_de_graduation",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "ce2_entier_droite",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Un trait ne vaut pas toujours 1 : regarde d'abord de combien la droite avance.",
+    tags: ["ce2", "nombres_entiers", "droite_graduee", "piege", "template"],
+    generate: () => {
+      // ⛔ LE piège de la droite graduée : lire les traits au lieu de lire la
+      // graduation. Un trait peut valoir 10, 50 ou 100.
+      const pas = randomChoice([10, 50, 100]);
+      const depart = randomInt(0, 20) * pas;
+      const traits = randomInt(2, 8);
+      const arrivee = depart + traits * pas;
+      return {
+        text: `Sur une droite graduée, deux traits voisins sont séparés de ${pas}. On part de ${formatNumber(depart)} et on avance de ${traits} traits. Où arrive-t-on ?`,
+        format: "short",
+        expected: [String(arrivee)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Sur une droite graduée, l'écart entre deux traits voisins n'est pas toujours 1 : il faut le lire.",
+          "On multiplie le nombre de traits parcourus par la valeur d'un trait, puis on ajoute au départ.",
+          `${traits} traits de ${pas} font ${formatNumber(traits * pas)}. En partant de ${formatNumber(depart)} : ${formatNumber(depart)} + ${formatNumber(traits * pas)} = ${formatNumber(arrivee)}. Compter les traits comme des unités aurait donné ${formatNumber(depart + traits)}.`,
+          `On arrive à ${formatNumber(arrivee)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_entier_droite_tpl_003_placer",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "ce2_entier_droite",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Compte combien de traits séparent le départ du nombre cherché.",
+    tags: ["ce2", "nombres_entiers", "droite_graduee", "template"],
+    generate: () => {
+      const pas = randomChoice([10, 100]);
+      const depart = randomInt(0, 30) * pas;
+      const traits = randomInt(2, 9);
+      const cible = depart + traits * pas;
+      return {
+        text: `Une droite est graduée de ${pas} en ${pas} à partir de ${formatNumber(depart)}. Combien de traits faut-il compter pour atteindre ${formatNumber(cible)} ?`,
+        format: "short",
+        expected: [String(traits)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Placer un nombre sur une droite graduée, c'est compter les traits qui le séparent du départ.",
+          "On cherche l'écart, puis on regarde combien de fois la graduation y tient.",
+          `De ${formatNumber(depart)} à ${formatNumber(cible)}, l'écart est de ${formatNumber(cible - depart)}. Chaque trait vaut ${pas} : ${formatNumber(cible - depart)} ÷ ${pas} = ${traits} traits.`,
+          `Il faut compter ${traits} traits.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_entier_defi_tpl_002_nombre_mystere",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "ce2_entier_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Écris les quatre rangs dans l'ordre, en commençant par les milliers.",
+    tags: ["ce2", "nombres_entiers", "defi", "template"],
+    generate: () => {
+      const m = randomInt(1, 9);
+      const c = randomInt(0, 9);
+      const d = randomInt(0, 9);
+      const u = randomInt(0, 9);
+      const n = m * 1000 + c * 100 + d * 10 + u;
+      return {
+        text: `Je suis un nombre à quatre chiffres. J'ai ${m} au rang des milliers, ${c} au rang des centaines, ${d} au rang des dizaines et ${u} au rang des unités. Qui suis-je ?`,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un nombre est entièrement décrit par le chiffre de chacun de ses rangs.",
+          "On écrit les rangs dans l'ordre, des milliers vers les unités.",
+          `${m} millier${m > 1 ? "s" : ""}, ${c} centaine${c > 1 ? "s" : ""}, ${d} dizaine${d > 1 ? "s" : ""} et ${u} unité${u > 1 ? "s" : ""} : cela donne ${formatNumber(n)}. Autrement dit ${formatNumber(m * 1000)} + ${c * 100} + ${d * 10} + ${u}.`,
+          `Je suis ${formatNumber(n)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_entier_defi_tpl_003_chiffres_imposes",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "ce2_entier_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Pour être le plus proche possible, le rang des milliers compte avant tout.",
+    tags: ["ce2", "nombres_entiers", "defi", "piege", "template"],
+    generate: () => {
+      const chiffres = shuffle([randomInt(1, 9), randomInt(1, 9), randomInt(1, 9)]);
+      const tries = [...chiffres].sort((a, b) => b - a);
+      const plusGrand = Number(tries.join(""));
+      const plusPetit = Number([...tries].reverse().join(""));
+      const ecart = plusGrand - plusPetit;
+      return {
+        text: `Avec les chiffres ${chiffres.join(", ")} utilisés une seule fois chacun, on écrit le plus grand nombre possible, puis le plus petit. Quel est l'écart entre les deux ?`,
+        format: "short",
+        expected: [String(ecart)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le rang le plus à gauche pèse le plus lourd : c'est lui qui décide de la taille du nombre.",
+          "On range les chiffres du plus grand au plus petit, puis dans l'autre sens, et on soustrait.",
+          `Le plus grand est ${formatNumber(plusGrand)}, le plus petit ${formatNumber(plusPetit)}. L'écart : ${formatNumber(plusGrand)} − ${formatNumber(plusPetit)} = ${formatNumber(ecart)}.`,
+          `L'écart est ${formatNumber(ecart)}.`,
+        ),
+      };
+    },
+  },
 ];
