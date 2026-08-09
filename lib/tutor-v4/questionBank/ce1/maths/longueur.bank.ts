@@ -700,6 +700,445 @@ export const longueurBank: TutorBankItemV4[] = [
   },
 
   /* =========================================================
+     CE1_LONGUEUR_UNITES — connaître le m, le cm et le km
+     Ce qui se joue ici : savoir laquelle est grande, laquelle
+     est petite. Sans cet ordre, aucune conversion ne tient.
+  ========================================================= */
+  {
+    kind: "fixed",
+    id: "ce1_longueur_unites_fixed_1",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "ce1_longueur_unites",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Parmi le mètre, le centimètre et le kilomètre, quelle est la plus PETITE unité ?",
+    format: "qcm",
+    choices: ["le centimètre", "le mètre", "le kilomètre", "elles sont pareilles"],
+    expected: ["le centimètre"],
+    comparator: "mcq_exact",
+    hint: "C'est celle qui sert à mesurer un crayon.",
+    explanation: exp(
+      "Le centimètre est la plus petite des trois unités qu'on utilise au CE1.",
+      "On range les unités de la plus petite à la plus grande : centimètre, mètre, kilomètre.",
+      "Il faut 100 centimètres pour faire 1 mètre, et 1 000 mètres pour faire 1 kilomètre. Le centimètre est donc tout en bas.",
+      "La plus petite est le centimètre.",
+    ),
+    tags: ["ce1", "longueur", "unites", "definition", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce1_longueur_unites_fixed_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "ce1_longueur_unites",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Dans le mot « kilomètre », que veut dire « kilo » ?",
+    format: "qcm",
+    choices: ["mille", "cent", "dix", "un million"],
+    expected: ["mille"],
+    comparator: "mcq_exact",
+    hint: "C'est le même « kilo » que dans kilogramme.",
+    explanation: exp(
+      "« Kilo » est un mot qui veut dire mille.",
+      "On lit le début du mot pour savoir combien de fois l'unité est répétée.",
+      "Un kilomètre, c'est mille mètres. C'est le même « kilo » que dans kilogramme, qui vaut mille grammes.",
+      "« Kilo » veut dire mille.",
+    ),
+    tags: ["ce1", "longueur", "unites", "remarquable", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce1_longueur_unites_fixed_3",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "ce1_longueur_unites",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Comment écrit-on l'abréviation de « centimètre » ?",
+    format: "qcm",
+    choices: ["cm", "ct", "cme", "c"],
+    expected: ["cm"],
+    comparator: "mcq_exact",
+    hint: "Le m final dit « mètre », la lettre devant dit lequel.",
+    explanation: exp(
+      "Chaque unité de longueur a une abréviation, toujours écrite sans point et sans s.",
+      "On garde la première lettre du début du mot, puis le m de mètre.",
+      "« centi » donne le c, « mètre » donne le m : cela fait cm. On écrit 5 cm, jamais 5 cms.",
+      "L'abréviation est cm.",
+    ),
+    tags: ["ce1", "longueur", "unites", "definition", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "ce1_longueur_unites_tpl_1",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "ce1_longueur_unites",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La première lettre donne la piste : c pour centi, k pour kilo.",
+    tags: ["ce1", "longueur", "unites", "template"],
+    generate: () => {
+      const u = randomChoice(UNITES);
+      return {
+        text: `Que veut dire l'abréviation « ${u.abrev} » ?`,
+        format: "qcm",
+        choices: makeChoices(u.nom, [
+          ...UNITES.map((x) => x.nom),
+          "le kilogramme",
+          "le litre",
+        ]),
+        expected: [u.nom],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Chaque unité de longueur a une abréviation, toujours écrite sans point et sans s.",
+          "On lit l'abréviation lettre par lettre : le m dit « mètre », ce qu'il y a devant dit lequel.",
+          `« ${u.abrev} » se lit « ${u.nom} ». On l'écrit toujours pareil, même pour plusieurs ${u.pluriel} : 5 ${u.abrev}, jamais 5 ${u.abrev}s.`,
+          `« ${u.abrev} » veut dire ${u.nom}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_longueur_unites_tpl_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "ce1_longueur_unites",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Range-les dans ta tête : cm, m, km.",
+    tags: ["ce1", "longueur", "unites", "template"],
+    generate: () => {
+      const [i, j] = shuffle([0, 1, 2]).slice(0, 2).sort((a, b) => a - b);
+      const petite = UNITES[i];
+      const grande = UNITES[j];
+      const plusGrande = randomChoice([true, false]);
+      const bonne = plusGrande ? grande.nom : petite.nom;
+      return {
+        text: plusGrande
+          ? `Laquelle de ces deux unités est la PLUS GRANDE : le ${petite.nom} ou le ${grande.nom} ?`
+          : `Laquelle de ces deux unités est la PLUS PETITE : le ${petite.nom} ou le ${grande.nom} ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          plusGrande ? petite.nom : grande.nom,
+          "elles sont égales",
+          "on ne peut pas comparer",
+          "cela dépend de l'objet mesuré",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Les unités de longueur du CE1 se rangent toujours dans le même ordre : centimètre, mètre, kilomètre.",
+          "On place les deux unités dans cette liste et on regarde laquelle vient après.",
+          `Le ${petite.nom} vient avant le ${grande.nom} dans la liste : il est donc plus petit.`,
+          `C'est le ${bonne}.`,
+        ),
+      };
+    },
+  },
+
+  /* =========================================================
+     CE1_LONGUEUR_CHOISIR_UNITE — l'unité la mieux adaptée
+     On choisit l'unité qui donne un nombre commode : ni un
+     nombre à sept chiffres, ni un nombre plus petit que 1.
+  ========================================================= */
+  {
+    kind: "fixed",
+    id: "ce1_longueur_choisir_unite_fixed_1",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "ce1_longueur_choisir_unite",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un élève écrit : « la porte de la classe mesure 2 cm de haut ». Quelle unité aurait-il dû écrire ?",
+    format: "qcm",
+    choices: ["le mètre", "le kilomètre", "le centimètre", "le gramme"],
+    expected: ["le mètre"],
+    comparator: "mcq_exact",
+    hint: "2 cm, c'est à peu près la largeur de ton pouce.",
+    explanation: exp(
+      "Une unité mal choisie rend la phrase impossible, même si le nombre est bon.",
+      "On compare avec un objet connu : 2 cm, c'est la largeur d'un pouce.",
+      "Une porte de classe fait environ 2 m, c'est-à-dire 200 cm. Le nombre 2 était juste, c'est l'unité qui manquait.",
+      "Il fallait écrire 2 m.",
+    ),
+    tags: ["ce1", "longueur", "choisir_unite", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce1_longueur_choisir_unite_fixed_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "ce1_longueur_choisir_unite",
+    difficulty: 2,
+    theme: "reunion",
+    text: "Avec quelle unité mesure-t-on la distance entre Saint-Denis et Saint-Pierre ?",
+    format: "qcm",
+    choices: ["le kilomètre", "le mètre", "le centimètre", "le litre"],
+    expected: ["le kilomètre"],
+    comparator: "mcq_exact",
+    hint: "C'est un trajet en voiture d'environ une heure et demie.",
+    explanation: exp(
+      "Pour les longues distances, on utilise le kilomètre.",
+      "On imagine le nombre obtenu avec chaque unité, et on garde celle qui donne le nombre le plus court.",
+      "Saint-Denis–Saint-Pierre fait environ 80 km. En mètres, cela ferait 80 000 m : personne ne dit une distance comme ça.",
+      "On mesure cette distance en kilomètres.",
+    ),
+    tags: ["ce1", "longueur", "choisir_unite", "reunion", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "ce1_longueur_choisir_unite_tpl_1",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "ce1_longueur_choisir_unite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le nombre peut être juste et l'unité fausse. Regarde l'unité.",
+    tags: ["ce1", "longueur", "choisir_unite", "piege", "template"],
+    generate: () => {
+      const phrases = [
+        { objet: "une table de classe", nombre: 1, bonne: "m", fausse: "km" },
+        { objet: "une trousse", nombre: 20, bonne: "cm", fausse: "m" },
+        { objet: "un terrain de foot", nombre: 100, bonne: "m", fausse: "cm" },
+        { objet: "un tableau de classe", nombre: 3, bonne: "m", fausse: "cm" },
+        { objet: "une clé", nombre: 6, bonne: "cm", fausse: "m" },
+        { objet: "un trajet en car", nombre: 15, bonne: "km", fausse: "cm" },
+      ] as const;
+      const p = randomChoice(phrases);
+      return {
+        text: `Un élève écrit : « ${p.objet} mesure ${p.nombre} ${p.fausse} ». Quelle unité fallait-il écrire ?`,
+        format: "qcm",
+        choices: makeChoices(p.bonne, ["cm", "m", "km", "kg"]),
+        expected: [p.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le nombre et l'unité vont ensemble : changer l'unité change complètement la longueur.",
+          "On garde le nombre et on cherche l'unité qui rend la phrase possible.",
+          `${p.nombre} ${p.fausse} est impossible pour ${p.objet}. Avec ${p.bonne}, la phrase devient juste : ${p.objet} mesure environ ${p.nombre} ${p.bonne}.`,
+          `Il fallait écrire ${p.nombre} ${p.bonne}.`,
+        ),
+      };
+    },
+  },
+
+  /* =========================================================
+     CE1_LONGUEUR_REFERENCES — les longueurs qu'on connaît
+     Une référence, c'est une longueur qu'on a dans la tête et
+     qui sert à juger toutes les autres.
+  ========================================================= */
+  {
+    kind: "fixed",
+    id: "ce1_longueur_references_fixed_1",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "ce1_longueur_references",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Combien mesure une règle d'écolier, celle qui tient dans la trousse ?",
+    format: "qcm",
+    choices: ["30 cm", "30 m", "3 cm", "3 m"],
+    expected: ["30 cm"],
+    comparator: "mcq_exact",
+    hint: "Elle couvre à peu près la largeur d'un grand cahier.",
+    explanation: exp(
+      "Une longueur de référence, c'est une longueur qu'on connaît par cœur et qui aide à juger les autres.",
+      "On regarde un objet qu'on a tous les jours dans la main.",
+      "La règle de la trousse mesure 30 cm. Trois règles bout à bout font presque 1 m.",
+      "Elle mesure 30 cm.",
+    ),
+    tags: ["ce1", "longueur", "references", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce1_longueur_references_fixed_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "ce1_longueur_references",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Combien mesure à peu près un adulte ?",
+    format: "qcm",
+    choices: ["1 m 70 cm", "70 cm", "17 cm", "7 m"],
+    expected: ["1 m 70 cm"],
+    comparator: "mcq_exact",
+    hint: "Il passe sous une porte sans se baisser, mais de justesse.",
+    explanation: exp(
+      "La taille d'un adulte est une référence très utile : elle sert à juger les hauteurs.",
+      "On se met à côté d'un adulte et on compare.",
+      "Un adulte mesure environ 1 m 70 cm, c'est-à-dire 170 cm. Une porte, un peu plus haute, fait environ 2 m.",
+      "Un adulte mesure environ 1 m 70 cm.",
+    ),
+    tags: ["ce1", "longueur", "references", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "ce1_longueur_references_tpl_1",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "ce1_longueur_references",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compare à un objet que tu as déjà tenu dans la main.",
+    tags: ["ce1", "longueur", "references", "template"],
+    generate: () => {
+      const refs = [
+        { objet: "une règle d'écolier", bonne: "30 cm", pourquoi: "elle tient dans la trousse" },
+        { objet: "une porte d'entrée", bonne: "2 m", pourquoi: "un adulte passe dessous sans se baisser" },
+        { objet: "une pièce de 1 euro", bonne: "2 cm", pourquoi: "elle se cache derrière un ongle de pouce" },
+        { objet: "un stylo", bonne: "14 cm", pourquoi: "il fait la largeur d'une main d'adulte" },
+        { objet: "une salle de classe", bonne: "8 m", pourquoi: "il faut une dizaine de grands pas pour la traverser" },
+        { objet: "un lit d'enfant", bonne: "1 m 60 cm", pourquoi: "on s'y allonge tout entier" },
+      ] as const;
+      const r = randomChoice(refs);
+      const autres = refs.filter((x) => x.bonne !== r.bonne).map((x) => x.bonne);
+      return {
+        text: `Environ combien mesure ${r.objet} ?`,
+        format: "qcm",
+        choices: makeChoices(r.bonne, autres),
+        expected: [r.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une longueur de référence, c'est une longueur qu'on connaît par cœur.",
+          "On cherche un repère du quotidien avant de choisir un nombre.",
+          `Pour ${r.objet}, le repère est simple : ${r.pourquoi}. Cela donne ${r.bonne}.`,
+          `${r.objet} mesure environ ${r.bonne}.`,
+        ),
+      };
+    },
+  },
+
+  /* =========================================================
+     CE1_LONGUEUR_ESTIMER — estimer sans mesurer
+     Estimer n'est pas deviner : c'est reporter une longueur
+     qu'on connaît déjà.
+  ========================================================= */
+  {
+    kind: "fixed",
+    id: "ce1_longueur_estimer_fixed_1",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "ce1_longueur_estimer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un élève dit que son doigt fait 1 m de large. Qu'aurait-il dû dire ?",
+    format: "qcm",
+    choices: ["1 cm", "1 km", "10 m", "100 m"],
+    expected: ["1 cm"],
+    comparator: "mcq_exact",
+    hint: "Combien de doigts pour faire la largeur de ta main ?",
+    explanation: exp(
+      "Une bonne référence permet de repérer tout de suite une estimation impossible.",
+      "On compare le doigt à un objet connu : la règle graduée.",
+      "Un doigt d'enfant fait environ 1 cm de large : dix doigts côte à côte font 10 cm, la largeur d'une main. Un mètre, ce serait cent doigts.",
+      "Il aurait dû dire 1 cm.",
+    ),
+    tags: ["ce1", "longueur", "estimer", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce1_longueur_estimer_fixed_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "ce1_longueur_estimer",
+    difficulty: 3,
+    theme: "reunion",
+    text: "La route du Littoral relie Saint-Denis à La Possession. Elle mesure environ 12 … ? Choisis l'unité.",
+    format: "qcm",
+    choices: ["km", "m", "cm", "kg"],
+    expected: ["km"],
+    comparator: "mcq_exact",
+    hint: "On la parcourt en voiture en un quart d'heure.",
+    explanation: exp(
+      "Pour un trajet en voiture, la bonne unité est le kilomètre.",
+      "On compare à une référence : marcher 1 km prend environ un quart d'heure.",
+      "12 m, ce serait la longueur d'un bus. La route du Littoral longe toute la falaise : c'est bien 12 km.",
+      "Elle mesure environ 12 km.",
+    ),
+    tags: ["ce1", "longueur", "estimer", "reunion", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "ce1_longueur_estimer_tpl_1",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "ce1_longueur_estimer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Combien de fois la référence tient-elle dans la longueur cherchée ?",
+    tags: ["ce1", "longueur", "estimer", "template"],
+    generate: () => {
+      const pas = 50; // un pas d'élève, la référence qu'on fabrique en classe
+      const metres = randomInt(2, 10);
+      const nbPas = (metres * 100) / pas;
+      return {
+        text: `Un pas d'élève mesure environ ${pas} cm. Environ combien de pas faut-il pour parcourir ${metres} m ?`,
+        format: "short",
+        expected: [String(nbPas)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Estimer une longueur, c'est reporter une longueur connue autant de fois qu'il faut.",
+          "On écrit la distance dans la même unité que le pas, puis on cherche combien de fois le pas y tient.",
+          `${metres} m = ${metres * 100} cm. Or ${pas} cm entrent 2 fois dans 1 m, donc il faut ${nbPas} pas.`,
+          `Il faut environ ${nbPas} pas.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_longueur_estimer_tpl_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "longueur",
+    microId: "ce1_longueur_estimer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Imagine l'objet à côté d'un adulte, ou dans ta main.",
+    tags: ["ce1", "longueur", "estimer", "template"],
+    generate: () => {
+      const objets = [
+        { nom: "un crayon neuf", bonne: "17 cm", pieges: ["17 m", "17 km", "1 m 70 cm"] },
+        { nom: "un bus", bonne: "12 m", pieges: ["12 cm", "12 km", "1 m 20 cm"] },
+        { nom: "une fourmi", bonne: "1 cm", pieges: ["1 m", "1 km", "10 m"] },
+        { nom: "un terrain de foot", bonne: "100 m", pieges: ["100 cm", "100 km", "10 m"] },
+        { nom: "une trousse", bonne: "20 cm", pieges: ["20 m", "20 km", "2 m"] },
+      ] as const;
+      const o = randomChoice(objets);
+      return {
+        text: `Environ combien mesure ${o.nom} ?`,
+        format: "qcm",
+        choices: makeChoices(o.bonne, o.pieges),
+        expected: [o.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Estimer, c'est comparer à une longueur qu'on connaît déjà, sans sortir la règle.",
+          "On regarde d'abord l'unité : elle doit rendre la phrase possible.",
+          `Pour ${o.nom}, la seule taille qui tient debout est ${o.bonne}. Les autres se trompent d'unité, pas de nombre.`,
+          `${o.nom} mesure environ ${o.bonne}.`,
+        ),
+      };
+    },
+  },
+
+  /* =========================================================
      CE1_LONGUEUR_DEFI — les défis
      Ce qui ne s'obtient pas en appliquant une règle : décider si
      ça rentre, et voir qu'une même longueur s'écrit de deux
