@@ -108,7 +108,7 @@ export const figuresSolidesBank: TutorBankItemV4[] = [
       "4 côtés tous égaux : c'est un carré. Le rectangle a aussi 4 côtés, mais ses côtés ne sont pas tous de la même longueur. Le triangle en a 3. Le disque n'a pas de côté du tout : son bord est tout rond.",
       "C'est un carré.",
     ),
-    tags: ["cp", "figures_solides", "figure_reconnaitre", "qcm"],
+    tags: ["cp", "figures_solides", "figure_reconnaitre", "definition", "qcm"],
   },
   {
     kind: "fixed",
@@ -264,51 +264,45 @@ export const figuresSolidesBank: TutorBankItemV4[] = [
      CP_SOLIDE_RECONNAITRE — cube, boule, cône, cylindre, pavé
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_solide_reconnaitre_fixed_1",
+    kind: "template",
+    id: "cp_solide_reconnaitre_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "figures_solides",
     microId: "cp_solide_reconnaitre",
-    difficulty: 2,
+    difficulty: 4,
     theme: "neutral",
-    text: "Une boite de conserve a la forme de quel solide ?",
-    format: "qcm",
-    choices: ["un cylindre", "un cube", "un pavé", "une boule"],
-    expected: ["un cylindre"],
-    comparator: "mcq_exact",
-    hint: "Ses deux bouts sont des disques, et elle roule sur le côté.",
-    explanation: exp(
-      "On reconnait un solide en le comparant à des objets familiers.",
-      "On regarde la forme de ses faces et si l'objet roule.",
-      "Une boite de conserve a un disque en haut, un disque en bas, et une surface ronde autour : c'est un cylindre. Elle roule si on la couche, mais tient debout sur ses disques.",
-      "C'est un cylindre.",
-    ),
-    tags: ["cp", "figures_solides", "solide", "qcm"],
+    hint: "Un solide roule s'il a une partie ronde.",
+    tags: ["cp", "figures_solides", "solide", "template"],
+    generate: () => {
+      // Le tri par critère visuel, que le BO installe au CP : « répartition en
+      // deux groupes en fonction d'un critère donné ».
+      const roulent = ["une boule", "un cylindre", "un cône"];
+      const neRoulentPas = ["un cube", "un pavé"];
+      const chercheRoule = randomChoice([true, false]);
+      const bonne = randomChoice(chercheRoule ? roulent : neRoulentPas);
+      const autres = chercheRoule ? neRoulentPas : roulent;
+      return {
+        text: `Quel solide ${chercheRoule ? "PEUT rouler" : "ne peut PAS rouler du tout"} ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, autres),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On trie les solides d'après ce qu'ils ont de rond ou de plat.",
+          "On regarde si le solide a une partie arrondie qui touche la table.",
+          chercheRoule
+            ? `${bonne.charAt(0).toUpperCase()}${bonne.slice(1)} a une partie ronde : posé sur cette partie, il roule. Le cube et le pavé, eux, n'ont que des faces plates : ils glissent, mais ne roulent pas.`
+            : `${bonne.charAt(0).toUpperCase()}${bonne.slice(1)} n'a que des faces plates : il ne roule jamais. La boule, le cylindre et le cône ont chacun une partie arrondie.`,
+          `C'est ${bonne}.`,
+        ),
+      };
+    },
   },
-  {
-    kind: "fixed",
-    id: "cp_solide_reconnaitre_fixed_2",
-    niveau: "cp",
-    matiere: "maths",
-    notionId: "figures_solides",
-    microId: "cp_solide_reconnaitre",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Une boite à chaussures a la forme de quel solide ?",
-    format: "qcm",
-    choices: ["un pavé", "un cube", "un cylindre", "une boule"],
-    expected: ["un pavé"],
-    comparator: "mcq_exact",
-    hint: "Toutes ses faces sont des rectangles, mais elles ne sont pas toutes pareilles.",
-    explanation: exp(
-      "Un pavé est un solide dont toutes les faces sont des rectangles.",
-      "On regarde la forme des faces et si elles sont toutes identiques.",
-      "Une boite à chaussures a 6 faces rectangulaires : c'est un pavé. Elle est plus longue que large : ses faces ne sont pas toutes pareilles, sinon ce serait un cube.",
-      "C'est un pavé.",
-    ),
-    tags: ["cp", "figures_solides", "solide", "qcm"],
-  },
+  // ⛔ « Une boite à chaussures a la forme de quel solide ? » était écrit ici
+  // en dur. Le gabarit `tpl_2` pose exactement cette question, avec six objets
+  // du quotidien qui tournent : un figé de plus n'aurait servi qu'à revenir
+  // toujours identique.
   {
     kind: "template",
     id: "cp_solide_reconnaitre_tpl_1",
@@ -410,7 +404,7 @@ export const figuresSolidesBank: TutorBankItemV4[] = [
       "Sur un dé : 1 face dessus, 1 face dessous, et 4 faces autour. Cela fait 6 faces, et c'est pour cela qu'un dé porte les nombres de 1 à 6.",
       "Un cube a 6 faces.",
     ),
-    tags: ["cp", "figures_solides", "faces"],
+    tags: ["cp", "figures_solides", "faces", "remarquable"],
   },
   {
     kind: "fixed",
@@ -433,7 +427,7 @@ export const figuresSolidesBank: TutorBankItemV4[] = [
       "Toutes les faces d'un cube sont des carrés, et elles sont toutes identiques. C'est ce qui distingue le cube du pavé, dont les faces sont des rectangles de tailles différentes.",
       "Les faces d'un cube sont des carrés.",
     ),
-    tags: ["cp", "figures_solides", "faces", "qcm"],
+    tags: ["cp", "figures_solides", "faces", "remarquable", "qcm"],
   },
   {
     kind: "template",
@@ -572,26 +566,38 @@ export const figuresSolidesBank: TutorBankItemV4[] = [
      CP_FIGURE_TRACER — construire sur quadrillage
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_figure_tracer_fixed_1",
+    kind: "template",
+    id: "cp_figure_tracer_tpl_2",
     niveau: "cp",
     matiere: "maths",
     notionId: "figures_solides",
     microId: "cp_figure_tracer",
     difficulty: 4,
     theme: "neutral",
-    text: "Sur un quadrillage, deux côtés d'un rectangle sont déjà tracés et forment un coin. Combien de côtés reste-t-il à tracer ?",
-    format: "short",
-    expected: ["2"],
-    comparator: "number_equal",
-    hint: "Un rectangle a 4 côtés en tout.",
-    explanation: exp(
-      "Un rectangle est une figure fermée à 4 côtés.",
-      "On compte les côtés déjà tracés, puis on cherche ce qui manque pour fermer la figure.",
-      "4 - 2 = 2. Il reste 2 côtés à tracer, et ils doivent suivre les lignes du quadrillage pour que les coins soient bien droits.",
-      "Il reste 2 côtés à tracer.",
-    ),
-    tags: ["cp", "figures_solides", "tracer"],
+    hint: "Compte d'abord combien de côtés a la figure entière.",
+    tags: ["cp", "figures_solides", "tracer", "template"],
+    generate: () => {
+      const figures = [
+        { nom: "un rectangle", cotes: 4 },
+        { nom: "un carré", cotes: 4 },
+        { nom: "un triangle", cotes: 3 },
+      ] as const;
+      const f = randomChoice(figures);
+      const traces = randomInt(1, f.cotes - 1);
+      const reste = f.cotes - traces;
+      return {
+        text: `Sur un quadrillage, ${traces} côté${traces > 1 ? "s" : ""} de ${f.nom} ${traces > 1 ? "sont déjà tracés" : "est déjà tracé"}. Combien de côtés reste-t-il à tracer ?`,
+        format: "short",
+        expected: [String(reste)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Une figure fermée n'est terminée que lorsque tous ses côtés sont tracés.",
+          "On compte les côtés de la figure entière, puis on enlève ceux qui sont déjà là.",
+          `${f.nom.charAt(0).toUpperCase()}${f.nom.slice(1)} a ${f.cotes} côtés. ${f.cotes} - ${traces} = ${reste}. Les côtés qui restent doivent suivre les lignes du quadrillage pour que les coins soient bien formés.`,
+          `Il reste ${reste} côté${reste > 1 ? "s" : ""} à tracer.`,
+        ),
+      };
+    },
   },
   {
     kind: "fixed",
@@ -619,7 +625,7 @@ export const figuresSolidesBank: TutorBankItemV4[] = [
       "En suivant les lignes, les côtés sont automatiquement bien droits et les coins bien formés. Il suffit alors de compter le même nombre de carreaux sur chaque côté pour obtenir un carré.",
       "Parce que les lignes du quadrillage guident les côtés et les coins.",
     ),
-    tags: ["cp", "figures_solides", "tracer", "qcm"],
+    tags: ["cp", "figures_solides", "tracer", "methode", "qcm"],
   },
   {
     kind: "template",
@@ -678,7 +684,7 @@ export const figuresSolidesBank: TutorBankItemV4[] = [
       "Chaque morceau a deux côtés du rectangle plus le trait de la coupe : 3 côtés, donc un triangle. Le BO le fait dire aux élèves dans l'autre sens : « il y a deux triangles qui forment un rectangle ».",
       "On obtient deux triangles.",
     ),
-    tags: ["cp", "figures_solides", "defi", "qcm"],
+    tags: ["cp", "figures_solides", "defi", "remarquable", "qcm"],
   },
   {
     kind: "fixed",
@@ -700,7 +706,7 @@ export const figuresSolidesBank: TutorBankItemV4[] = [
       "Un cube a 6 faces, et toutes sont des carrés identiques : il faut donc découper 6 carrés de la même taille.",
       "Il faut 6 carrés.",
     ),
-    tags: ["cp", "figures_solides", "defi"],
+    tags: ["cp", "figures_solides", "defi", "remarquable"],
   },
   {
     kind: "template",

@@ -68,27 +68,38 @@ export const monnaieBank: TutorBankItemV4[] = [
      Avant de compter, il faut savoir ce qu'on a dans la main.
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_monnaie_reconnaitre_fixed_1",
+    kind: "template",
+    id: "cp_monnaie_reconnaitre_tpl_2",
     niveau: "cp",
     matiere: "maths",
     notionId: "monnaie",
     microId: "cp_monnaie_reconnaitre",
-    difficulty: 1,
+    difficulty: 2,
     theme: "neutral",
-    text: "Parmi ces sommes, laquelle est un BILLET ?",
-    format: "qcm",
-    choices: ["10 €", "1 €", "2 €", "aucune"],
-    expected: ["10 €"],
-    comparator: "mcq_exact",
     hint: "Les petites sommes sont en métal, les grandes en papier.",
-    explanation: exp(
-      "L'argent existe en pièces, qui sont en métal, et en billets, qui sont en papier.",
-      "On regarde la valeur : les petites valeurs sont des pièces, les grandes des billets.",
-      "1 € et 2 € sont des pièces. Le premier billet est celui de 5 €, puis viennent 10 €, 20 € et 50 €.",
-      "10 € est un billet.",
-    ),
-    tags: ["cp", "monnaie", "reconnaitre", "qcm"],
+    tags: ["cp", "monnaie", "reconnaitre", "template"],
+    generate: () => {
+      const chercheBillet = randomChoice([true, false]);
+      const bonne = chercheBillet
+        ? `${randomChoice([...BILLETS])} €`
+        : `${randomChoice([...PIECES])} €`;
+      const autres = chercheBillet
+        ? PIECES.map((p) => `${p} €`)
+        : BILLETS.map((b) => `${b} €`);
+      return {
+        text: `Parmi ces sommes, laquelle est ${chercheBillet ? "un BILLET" : "une PIÈCE"} ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, autres),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'argent existe en pièces, qui sont en métal, et en billets, qui sont en papier.",
+          "On se rappelle la liste : pièces de 1 € et 2 €, billets de 5, 10, 20 et 50 €.",
+          `${bonne} fait partie des ${chercheBillet ? "billets" : "pièces"}. Les autres propositions sont des ${chercheBillet ? "pièces" : "billets"}.`,
+          `C'est ${bonne}.`,
+        ),
+      };
+    },
   },
   {
     kind: "fixed",
@@ -152,26 +163,34 @@ export const monnaieBank: TutorBankItemV4[] = [
      CP_MONNAIE_VALEUR — combien y a-t-il dans le porte-monnaie
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_monnaie_valeur_fixed_1",
+    kind: "template",
+    id: "cp_monnaie_valeur_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "monnaie",
     microId: "cp_monnaie_valeur",
-    difficulty: 2,
+    difficulty: 4,
     theme: "neutral",
-    text: "Dans un porte-monnaie, il y a 1 billet de 10 € et 2 pièces de 2 €. Combien y a-t-il d'euros ?",
-    format: "short",
-    expected: ["14"],
-    comparator: "number_equal",
-    hint: "Compte d'abord le billet, puis ajoute les pièces une à une.",
-    explanation: exp(
-      "La valeur d'un ensemble d'argent, c'est la somme de tout ce qu'il contient.",
-      "On commence par la plus grande valeur, puis on ajoute les autres.",
-      "Le billet vaut 10 €. Les deux pièces de 2 € valent 2 + 2 = 4 €. En tout : 10 + 4 = 14 €.",
-      "Il y a 14 €.",
-    ),
-    tags: ["cp", "monnaie", "valeur"],
+    hint: "Trois sortes d'argent : compte-les l'une après l'autre.",
+    tags: ["cp", "monnaie", "valeur", "template"],
+    generate: () => {
+      const billet = randomChoice([5, 10, 20]);
+      const nbDeux = randomInt(1, 4);
+      const nbUn = randomInt(1, 5);
+      const total = billet + nbDeux * 2 + nbUn;
+      return {
+        text: `Dans un porte-monnaie, il y a 1 billet de ${billet} €, ${accord(nbDeux, "pièce", "pièces")} de 2 € et ${accord(nbUn, "pièce", "pièces")} de 1 €. Combien y a-t-il d'euros ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La valeur d'un ensemble d'argent est la somme de tout ce qu'il contient.",
+          "On commence par la plus grande valeur, puis on ajoute les autres.",
+          `Le billet vaut ${billet} €. Les pièces de 2 € valent ${nbDeux * 2} €. Les pièces de 1 € valent ${nbUn} €. En tout : ${billet} + ${nbDeux * 2} + ${nbUn} = ${total} €.`,
+          `Il y a ${total} €.`,
+        ),
+      };
+    },
   },
   {
     kind: "fixed",
@@ -193,7 +212,7 @@ export const monnaieBank: TutorBankItemV4[] = [
       "1, 2, 3, 4, 5, 6, 7, 8, 9, 10. Il faut dix pièces. C'est le même dix que la dizaine : dix unités font une dizaine.",
       "Il faut 10 pièces de 1 €.",
     ),
-    tags: ["cp", "monnaie", "valeur", "dizaine"],
+    tags: ["cp", "monnaie", "valeur", "remarquable", "dizaine"],
   },
   {
     kind: "template",
@@ -411,26 +430,33 @@ export const monnaieBank: TutorBankItemV4[] = [
      CP_MONNAIE_CONSTITUER — fabriquer une somme donnée
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_monnaie_constituer_fixed_1",
+    kind: "template",
+    id: "cp_monnaie_constituer_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "monnaie",
     microId: "cp_monnaie_constituer",
     difficulty: 3,
     theme: "neutral",
-    text: "Tu as un billet de 10 € et beaucoup de pièces de 1 €. Combien de pièces faut-il ajouter au billet pour faire 13 € ?",
-    format: "short",
-    expected: ["3"],
-    comparator: "number_equal",
-    hint: "Le billet fait déjà 10 €. Cherche ce qui manque.",
-    explanation: exp(
-      "Constituer une somme, c'est réunir des pièces et des billets qui font exactement le montant demandé.",
-      "On pose d'abord la plus grande valeur, puis on complète.",
-      "Le billet vaut 10 €. De 10 à 13, il manque 3 €. Il faut donc 3 pièces de 1 €.",
-      "Il faut 3 pièces.",
-    ),
-    tags: ["cp", "monnaie", "constituer"],
+    hint: "Le billet est déjà posé. Cherche ce qui manque.",
+    tags: ["cp", "monnaie", "constituer", "template"],
+    generate: () => {
+      const billet = randomChoice([5, 10, 20]);
+      const manque = randomInt(1, 8);
+      const somme = billet + manque;
+      return {
+        text: `Tu as un billet de ${billet} € et beaucoup de pièces de 1 €. Combien de pièces faut-il ajouter au billet pour faire ${somme} € ?`,
+        format: "short",
+        expected: [String(manque)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Constituer une somme, c'est réunir des pièces et des billets qui font exactement le montant demandé.",
+          "On pose d'abord la plus grande valeur, puis on complète avec les pièces.",
+          `Le billet vaut ${billet} €. De ${billet} à ${somme}, il manque ${manque} € : il faut donc ${manque} pièces de 1 €.`,
+          `Il faut ${manque} pièces.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",
@@ -538,7 +564,7 @@ export const monnaieBank: TutorBankItemV4[] = [
       "Le billet vaut 5 € et l'objet coute 5 € : c'est exactement le compte. Il n'y a rien en trop, donc rien à rendre.",
       "Elle ne rend rien.",
     ),
-    tags: ["cp", "monnaie", "rendre", "qcm"],
+    tags: ["cp", "monnaie", "rendre", "piege", "qcm"],
   },
   {
     kind: "template",
@@ -583,26 +609,32 @@ export const monnaieBank: TutorBankItemV4[] = [
      deux façons de faire la même somme.
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_monnaie_defi_fixed_1",
+    kind: "template",
+    id: "cp_monnaie_defi_tpl_2",
     niveau: "cp",
     matiere: "maths",
     notionId: "monnaie",
     microId: "cp_monnaie_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Tu dois faire 6 € avec des pièces de 2 € seulement. Combien t'en faut-il ?",
-    format: "short",
-    expected: ["3"],
-    comparator: "number_equal",
-    hint: "Compte de deux en deux : 2, 4, 6.",
-    explanation: exp(
-      "Fabriquer une somme avec des pièces identiques, c'est compter de cette valeur en cette valeur.",
-      "On avance de 2 en 2 jusqu'à atteindre le montant.",
-      "2, puis 4, puis 6. Il a fallu trois pièces.",
-      "Il faut 3 pièces de 2 €.",
-    ),
-    tags: ["cp", "monnaie", "defi"],
+    hint: "Compte de deux en deux jusqu'au montant.",
+    tags: ["cp", "monnaie", "defi", "template"],
+    generate: () => {
+      const nb = randomInt(2, 9);
+      const somme = nb * 2;
+      return {
+        text: `Tu dois faire ${somme} € avec des pièces de 2 € seulement. Combien t'en faut-il ?`,
+        format: "short",
+        expected: [String(nb)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Fabriquer une somme avec des pièces identiques, c'est compter de cette valeur en cette valeur.",
+          "On avance de 2 en 2 jusqu'à atteindre le montant.",
+          `On compte : ${Array.from({ length: nb }, (_, i) => (i + 1) * 2).join(", ")}. Il a fallu ${nb} pièces.`,
+          `Il faut ${nb} pièces de 2 €.`,
+        ),
+      };
+    },
   },
   {
     kind: "fixed",

@@ -166,26 +166,31 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
      Avec la contrainte du BO : dix instructions, deux virages.
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_algo_deplacement_fixed_1",
+    kind: "template",
+    id: "cp_algo_deplacement_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "algorithmique",
     microId: "cp_algo_deplacement",
     difficulty: 3,
     theme: "neutral",
-    text: "Pour faire avancer un robot de 3 cases tout droit sur un tapis quadrillé, combien d'instructions « avancer d'une case » faut-il écrire ?",
-    format: "short",
-    expected: ["3"],
-    comparator: "number_equal",
     hint: "Une instruction pour chaque case franchie.",
-    explanation: exp(
-      "Coder un déplacement, c'est écrire la liste des instructions qui le réalisent.",
-      "On compte les cases à franchir, et on écrit une instruction par case.",
-      "Trois cases à franchir, donc trois fois « avancer d'une case ». Aucun virage n'est nécessaire puisque le robot va tout droit.",
-      "Il faut 3 instructions.",
-    ),
-    tags: ["cp", "algorithmique", "deplacement"],
+    tags: ["cp", "algorithmique", "deplacement", "template"],
+    generate: () => {
+      const cases = randomInt(2, 8);
+      return {
+        text: `Pour faire avancer un robot de ${cases} cases tout droit sur un tapis quadrillé, combien d'instructions « avancer d'une case » faut-il écrire ?`,
+        format: "short",
+        expected: [String(cases)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Coder un déplacement, c'est écrire la liste des instructions qui le réalisent.",
+          "On compte les cases à franchir, et on écrit une instruction par case.",
+          `${cases} cases à franchir, donc ${cases} fois « avancer d'une case ». Aucun virage n'est nécessaire puisque le robot va tout droit.`,
+          `Il faut ${cases} instructions.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",

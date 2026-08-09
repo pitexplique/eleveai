@@ -91,30 +91,37 @@ export const reperageBank: TutorBankItemV4[] = [
       "La trousse est en haut, la table en bas. Donc la trousse est sur la table, et la table est sous la trousse.",
       "La table est sous la trousse.",
     ),
-    tags: ["cp", "reperage", "vocabulaire", "qcm"],
+    tags: ["cp", "reperage", "vocabulaire", "definition", "qcm"],
   },
   {
-    kind: "fixed",
-    id: "cp_reperage_vocabulaire_fixed_2",
+    kind: "template",
+    id: "cp_reperage_vocabulaire_tpl_2",
     niveau: "cp",
     matiere: "maths",
     notionId: "reperage",
     microId: "cp_reperage_vocabulaire",
     difficulty: 3,
     theme: "neutral",
-    text: "Dans la file, Malia est devant Kevin, et Kevin est devant Ryan. Qui est ENTRE les deux autres ?",
-    format: "qcm",
-    choices: ["Kevin", "Malia", "Ryan", "personne"],
-    expected: ["Kevin"],
-    comparator: "mcq_exact",
     hint: "Celui du milieu a quelqu'un devant lui et quelqu'un derrière lui.",
-    explanation: exp(
-      "Être « entre » deux personnes, c'est avoir l'une devant soi et l'autre derrière soi.",
-      "On range les trois enfants dans l'ordre de la file, puis on regarde celui du milieu.",
-      "L'ordre est : Malia, Kevin, Ryan. Kevin a Malia devant lui et Ryan derrière lui : c'est lui qui est entre les deux.",
-      "C'est Kevin.",
-    ),
-    tags: ["cp", "reperage", "vocabulaire", "qcm"],
+    tags: ["cp", "reperage", "vocabulaire", "template"],
+    generate: () => {
+      const [a, b, c] = shuffle([
+        "Malia", "Kevin", "Naïla", "Ryan", "Léa", "Enzo",
+      ]).slice(0, 3);
+      return {
+        text: `Dans la file, ${a} est devant ${b}, et ${b} est devant ${c}. Qui est ENTRE les deux autres ?`,
+        format: "qcm",
+        choices: makeChoices(b, [a, c, "personne"]),
+        expected: [b],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Être « entre » deux personnes, c'est avoir l'une devant soi et l'autre derrière soi.",
+          "On range les trois enfants dans l'ordre de la file, puis on regarde celui du milieu.",
+          `L'ordre de la file est : ${a}, ${b}, ${c}. ${b} a ${a} devant et ${c} derrière : c'est ${b} qui est entre les deux.`,
+          `C'est ${b}.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",
@@ -275,7 +282,7 @@ export const reperageBank: TutorBankItemV4[] = [
       "Sur un plan de la classe, chaque table, la porte et le tableau ont une place. On peut alors dire où se trouve un objet sans être dans la pièce.",
       "Le plan sert à montrer où sont placées les choses, vues de dessus.",
     ),
-    tags: ["cp", "reperage", "plan", "qcm"],
+    tags: ["cp", "reperage", "plan", "definition", "qcm"],
   },
   {
     kind: "fixed",
@@ -298,7 +305,7 @@ export const reperageBank: TutorBankItemV4[] = [
       "« À côté de la porte » laisse peut-être deux tables. « Du côté du tableau » n'en garde qu'une. Deux indications suffisent souvent : c'est pour cela qu'on les donne ensemble.",
       "Il ne faut regarder qu'une seule table.",
     ),
-    tags: ["cp", "reperage", "plan", "qcm"],
+    tags: ["cp", "reperage", "plan", "definition", "qcm"],
   },
   {
     kind: "template",
@@ -334,26 +341,32 @@ export const reperageBank: TutorBankItemV4[] = [
      CP_REPERAGE_DEPLACEMENT — décrire un déplacement
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_reperage_deplacement_fixed_1",
+    kind: "template",
+    id: "cp_reperage_deplacement_tpl_2",
     niveau: "cp",
     matiere: "maths",
     notionId: "reperage",
     microId: "cp_reperage_deplacement",
     difficulty: 3,
     theme: "neutral",
-    text: "Un robot avance de 2 cases, puis avance encore de 3 cases, toujours tout droit. De combien de cases a-t-il avancé en tout ?",
-    format: "short",
-    expected: ["5"],
-    comparator: "number_equal",
     hint: "Il n'a pas tourné : les deux avancées s'ajoutent.",
-    explanation: exp(
-      "Quand un déplacement se fait dans la même direction, les distances s'additionnent.",
-      "On vérifie qu'il n'y a pas de virage, puis on additionne.",
-      "2 cases puis 3 cases, sans tourner : 2 + 3 = 5 cases. S'il avait tourné entre les deux, il ne serait pas allé tout droit et on ne pourrait pas additionner comme cela.",
-      "Il a avancé de 5 cases.",
-    ),
-    tags: ["cp", "reperage", "deplacement"],
+    tags: ["cp", "reperage", "deplacement", "template"],
+    generate: () => {
+      const a = randomInt(2, 6);
+      const b = randomInt(2, 6);
+      return {
+        text: `Un robot avance de ${a} cases, puis avance encore de ${b} cases, toujours tout droit. De combien de cases a-t-il avancé en tout ?`,
+        format: "short",
+        expected: [String(a + b)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Quand un déplacement se fait dans la même direction, les distances s'additionnent.",
+          "On vérifie d'abord qu'il n'y a pas de virage, puis on additionne.",
+          `${a} cases puis ${b} cases, sans tourner : ${a} + ${b} = ${a + b}. S'il avait tourné entre les deux, il ne serait pas allé tout droit et on ne pourrait pas additionner ainsi.`,
+          `Il a avancé de ${a + b} cases.`,
+        ),
+      };
+    },
   },
   {
     kind: "fixed",

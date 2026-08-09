@@ -69,26 +69,34 @@ export const calculMentalBank: TutorBankItemV4[] = [
      C = A + B. C'est le même savoir, et pas la même question.
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_calcul_tables_addition_fixed_1",
+    kind: "template",
+    id: "cp_calcul_tables_addition_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "calcul_mental",
     microId: "cp_calcul_tables_addition",
-    difficulty: 2,
+    difficulty: 3,
     theme: "neutral",
-    text: "Combien font 6 + 7 ?",
-    format: "short",
-    expected: ["13"],
-    comparator: "number_equal",
-    hint: "6 + 6 = 12, et il y a un de plus.",
-    explanation: exp(
-      "Les résultats des tables d'addition se retiennent par cœur, mais on peut s'appuyer sur un double.",
-      "On cherche le double le plus proche, puis on ajuste.",
-      "6 + 6 = 12, c'est un double qu'on connait. Or 7, c'est 6 et encore 1 : 12 + 1 = 13.",
-      "6 + 7 = 13.",
-    ),
-    tags: ["cp", "calcul_mental", "tables"],
+    hint: "Cherche le double le plus proche, puis ajuste d'un.",
+    tags: ["cp", "calcul_mental", "tables", "template"],
+    generate: () => {
+      // Les « presque-doubles » : 6 + 7, 8 + 9… Le BO fait de la mémorisation
+      // des doubles un appui pour toute la table d'addition.
+      const n = randomInt(2, 9);
+      const total = n + n + 1;
+      return {
+        text: `Combien font ${n} + ${n + 1} ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un résultat de table peut se retrouver en s'appuyant sur un double déjà connu.",
+          "On cherche le double le plus proche, puis on ajoute ou on retire ce qui manque.",
+          `${n} + ${n} = ${n * 2}, c'est un double qu'on connait. Or ${n + 1}, c'est ${n} et encore 1 : ${n * 2} + 1 = ${total}.`,
+          `${n} + ${n + 1} = ${total}.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",
@@ -152,26 +160,37 @@ export const calculMentalBank: TutorBankItemV4[] = [
      CP_CALCUL_COMPLEMENTS_10 — les compléments à 10
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_calcul_complements_10_fixed_1",
+    kind: "template",
+    id: "cp_calcul_complements_10_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "calcul_mental",
     microId: "cp_calcul_complements_10",
-    difficulty: 1,
+    difficulty: 2,
     theme: "neutral",
-    text: "Quel nombre faut-il ajouter à 7 pour obtenir 10 ?",
-    format: "short",
-    expected: ["3"],
-    comparator: "number_equal",
-    hint: "Compte sur tes doigts : 8, 9, 10.",
-    explanation: exp(
-      "Le complément à 10 d'un nombre, c'est ce qui lui manque pour atteindre dix.",
-      "On part du nombre et on compte jusqu'à dix.",
-      "De 7, on avance : 8, 9, 10. Cela fait 3 pas. Et en effet 7 + 3 = 10.",
-      "Il faut ajouter 3.",
-    ),
-    tags: ["cp", "calcul_mental", "complement_10"],
+    hint: "Compte ce qui manque pour remplir la boite.",
+    tags: ["cp", "calcul_mental", "complement_10", "template"],
+    generate: () => {
+      const deja = randomInt(1, 9);
+      const manque = 10 - deja;
+      const c = randomChoice([
+        { contenant: "une boite de 10 œufs", contenu: "œufs" },
+        { contenant: "une plaquette de 10 cases", contenu: "jetons" },
+        { contenant: "une barquette de 10 letchis", contenu: "letchis" },
+      ]);
+      return {
+        text: `Dans ${c.contenant}, il n'y a que ${deja} ${c.contenu}. Combien en manque-t-il pour que ce soit plein ?`,
+        format: "short",
+        expected: [String(manque)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Compléter à dix, c'est chercher ce qui manque pour atteindre une dizaine pleine.",
+          "On part de ce qu'on a et on compte jusqu'à dix.",
+          `De ${deja}, on avance jusqu'à 10 : cela fait ${manque} pas. Et en effet ${deja} + ${manque} = 10.`,
+          `Il en manque ${manque}.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",
@@ -241,26 +260,36 @@ export const calculMentalBank: TutorBankItemV4[] = [
      dizaines entières 20, 30, 40 et 50.
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_calcul_doubles_fixed_1",
+    kind: "template",
+    id: "cp_calcul_doubles_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "calcul_mental",
     microId: "cp_calcul_doubles",
-    difficulty: 2,
+    difficulty: 3,
     theme: "neutral",
-    text: "Quel est le double de 8 ?",
-    format: "short",
-    expected: ["16"],
-    comparator: "number_equal",
-    hint: "Le double, c'est deux fois le même nombre.",
-    explanation: exp(
-      "Le double d'un nombre, c'est ce nombre ajouté à lui-même.",
-      "On additionne le nombre avec lui-même.",
-      "8 + 8 = 16.",
-      "Le double de 8 est 16.",
-    ),
-    tags: ["cp", "calcul_mental", "doubles"],
+    hint: "Deux fois la même chose : c'est un double.",
+    tags: ["cp", "calcul_mental", "doubles", "template"],
+    generate: () => {
+      const n = randomInt(2, 10);
+      const c = randomChoice([
+        { texte: `${n} billes dans chaque poche, et il a deux poches`, quoi: "billes" },
+        { texte: `${n} images dans chaque paquet, et elle a deux paquets`, quoi: "images" },
+        { texte: `${n} letchis dans chaque main, et il a deux mains`, quoi: "letchis" },
+      ]);
+      return {
+        text: `Il y a ${c.texte}. Combien de ${c.quoi} en tout ?`,
+        format: "short",
+        expected: [String(n * 2)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Deux quantités identiques réunies forment un double.",
+          "On ajoute le nombre à lui-même.",
+          `${n} + ${n} = ${n * 2}. C'est le double de ${n}.`,
+          `Cela fait ${n * 2} ${c.quoi}.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",
@@ -507,26 +536,36 @@ export const calculMentalBank: TutorBankItemV4[] = [
      - 3 dizaines = 4 dizaines. Donc 76 - 30 = 46. »
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_calcul_dizaines_entieres_fixed_1",
+    kind: "template",
+    id: "cp_calcul_dizaines_entieres_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "calcul_mental",
     microId: "cp_calcul_dizaines_entieres",
-    difficulty: 4,
+    difficulty: 5,
     theme: "neutral",
-    text: "Combien font 76 - 30 ?",
-    format: "short",
-    expected: ["46"],
-    comparator: "number_equal",
-    hint: "30, c'est 3 dizaines. Compte en dizaines.",
-    explanation: exp(
-      "Retirer un nombre entier de dizaines ne touche pas au chiffre des unités.",
-      "On compte en dizaines : on retire les dizaines aux dizaines.",
-      "30, c'est 3 dizaines. 76 en a 7. 7 dizaines - 3 dizaines = 4 dizaines. Les 6 unités ne bougent pas : on obtient 46.",
-      "76 - 30 = 46.",
-    ),
-    tags: ["cp", "calcul_mental", "dizaines_entieres"],
+    hint: "Compare les dizaines des deux nombres.",
+    tags: ["cp", "calcul_mental", "dizaines_entieres", "template"],
+    generate: () => {
+      const unites = randomInt(1, 9);
+      const dizDepart = randomInt(2, 5);
+      const dizArrivee = randomInt(dizDepart + 1, 9);
+      const depart = dizDepart * 10 + unites;
+      const arrivee = dizArrivee * 10 + unites;
+      const pas = (dizArrivee - dizDepart) * 10;
+      return {
+        text: `Quel nombre faut-il ajouter à ${depart} pour obtenir ${arrivee} ?`,
+        format: "short",
+        expected: [String(pas)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Deux nombres qui ont les mêmes unités ne diffèrent que par leurs dizaines.",
+          "On compare les chiffres des dizaines, puis on transforme l'écart en dizaines entières.",
+          `${depart} a ${dizDepart} dizaines, ${arrivee} en a ${dizArrivee}. L'écart est de ${dizArrivee - dizDepart} dizaines, c'est-à-dire ${pas}. Les ${unites} unités sont les mêmes des deux côtés : elles ne comptent pas dans l'écart.`,
+          `Il faut ajouter ${pas}.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",
@@ -611,26 +650,40 @@ export const calculMentalBank: TutorBankItemV4[] = [
      supérieure… le complément à 10 de 4 est 6. »
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_calcul_complement_dizaine_fixed_1",
+    kind: "template",
+    id: "cp_calcul_complement_dizaine_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "calcul_mental",
     microId: "cp_calcul_complement_dizaine",
     difficulty: 4,
     theme: "neutral",
-    text: "Combien faut-il ajouter à 74 pour arriver à la dizaine juste au-dessus ?",
-    format: "short",
-    expected: ["6"],
-    comparator: "number_equal",
-    hint: "La dizaine au-dessus de 74, c'est 80. Regarde seulement les unités.",
-    explanation: exp(
-      "La dizaine supérieure d'un nombre est la dizaine entière qui vient juste après lui.",
-      "On regarde le chiffre des unités et on cherche son complément à 10.",
-      "74, c'est 7 dizaines et 4 unités. Le complément à 10 de 4 est 6. On ajoute donc 6 unités aux 4 pour obtenir 8 dizaines, c'est-à-dire 80.",
-      "Il faut ajouter 6.",
-    ),
-    tags: ["cp", "calcul_mental", "complement_dizaine"],
+    hint: "Il ne manque que des unités pour remplir la dernière dizaine.",
+    tags: ["cp", "calcul_mental", "complement_dizaine", "template"],
+    generate: () => {
+      const dizaines = randomInt(1, 8);
+      const unites = randomInt(1, 9);
+      const deja = dizaines * 10 + unites;
+      const cible = (dizaines + 1) * 10;
+      const manque = cible - deja;
+      const c = randomChoice([
+        { texte: `Il y a ${deja} chaises dans la salle. Il en faut ${cible}`, quoi: "chaises" },
+        { texte: `On a rangé ${deja} livres. Il y en a ${cible} à ranger`, quoi: "livres" },
+        { texte: `${deja} élèves sont arrivés. Ils sont ${cible} en tout`, quoi: "élèves" },
+      ]);
+      return {
+        text: `${c.texte}. Combien en manque-t-il ?`,
+        format: "short",
+        expected: [String(manque)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Aller jusqu'à la dizaine du dessus ne demande que de compléter les unités.",
+          "On cherche le complément à 10 du chiffre des unités.",
+          `${deja} a ${unites} unités. Le complément à 10 de ${unites} est ${manque} : ${deja} + ${manque} = ${cible}.`,
+          `Il en manque ${manque}.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",
@@ -729,7 +782,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "37 + 10 = 47, puis 47 - 1 = 46. Ajouter 10 est facile — le chiffre des dizaines monte de un. Retirer 1 ensuite ne coute rien. Et en effet 37 + 9 = 46.",
       "On ajoute 10, puis on retire 1.",
     ),
-    tags: ["cp", "calcul_mental", "ajouter_9", "qcm"],
+    tags: ["cp", "calcul_mental", "ajouter_9", "methode", "qcm"],
   },
   {
     kind: "template",
@@ -1022,7 +1075,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       "9 est tout près de 10 : 46 + 10 = 56, puis 56 - 1 = 55. Deux étapes faciles. Compter neuf fois de un en un marcherait aussi, mais serait long et donnerait plus d'occasions de se tromper.",
       "On ajoute 10, puis on retire 1.",
     ),
-    tags: ["cp", "calcul_mental", "defi", "qcm"],
+    tags: ["cp", "calcul_mental", "defi", "methode", "qcm"],
   },
   {
     kind: "template",

@@ -294,27 +294,33 @@ export const dureeBank: TutorBankItemV4[] = [
      CP_DUREE_JOUR_SEMAINE — l'heure et le moment de la journée
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_duree_jour_semaine_fixed_1",
+    kind: "template",
+    id: "cp_duree_jour_semaine_tpl_2",
     niveau: "cp",
     matiere: "maths",
     notionId: "duree",
     microId: "cp_duree_jour_semaine",
-    difficulty: 1,
+    difficulty: 2,
     theme: "neutral",
-    text: "À quel moment de la journée déjeune-t-on à la cantine ?",
-    format: "qcm",
-    choices: ["à midi", "à minuit", "au petit matin", "le soir"],
-    expected: ["à midi"],
-    comparator: "mcq_exact",
-    hint: "C'est le repas du milieu de la journée.",
-    explanation: exp(
-      "Chaque moment de la journée correspond à une heure que l'on peut lire sur une horloge.",
-      "On se rappelle le déroulement d'une journée d'école.",
-      "On déjeune à la cantine à midi, c'est-à-dire à 12 heures. La petite aiguille est alors sur le 12, et la grande aussi.",
-      "On déjeune à midi.",
-    ),
-    tags: ["cp", "duree", "moment_journee", "qcm"],
+    hint: "Repense à ce que tu fais à cette heure-là.",
+    tags: ["cp", "duree", "moment_journee", "template"],
+    generate: () => {
+      const m = randomChoice(MOMENTS);
+      const autres = MOMENTS.filter((x) => x.action !== m.action).map((x) => x.action);
+      return {
+        text: `Il est ${m.heure} heures ${m.moment === "à midi" ? "" : m.moment.replace("le ", "du ").replace("l'", "de l'")}. Que fait-on d'habitude à ce moment-là ?`,
+        format: "qcm",
+        choices: makeChoices(m.action, autres),
+        expected: [m.action],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Chaque heure de la journée correspond à des activités habituelles.",
+          "On se rappelle le déroulement d'une journée d'école, du lever au coucher.",
+          `À ${m.heure} heures ${m.moment === "à midi" ? "" : m.moment}, on fait cela : « ${m.action} ».`,
+          `On fait cela : ${m.action}.`,
+        ),
+      };
+    },
   },
   {
     kind: "fixed",
@@ -378,32 +384,50 @@ export const dureeBank: TutorBankItemV4[] = [
      CP_DUREE_ORDONNER — ranger les moments de la journée
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_duree_ordonner_fixed_1",
+    kind: "template",
+    id: "cp_duree_ordonner_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "duree",
     microId: "cp_duree_ordonner",
-    difficulty: 2,
+    difficulty: 3,
     theme: "neutral",
-    text: "Range ces trois moments dans l'ordre de la journée : déjeuner, se lever, se coucher.",
-    format: "qcm",
-    choices: [
-      "se lever, déjeuner, se coucher",
-      "déjeuner, se lever, se coucher",
-      "se coucher, déjeuner, se lever",
-      "se lever, se coucher, déjeuner",
-    ],
-    expected: ["se lever, déjeuner, se coucher"],
-    comparator: "mcq_exact",
-    hint: "Qu'est-ce qu'on fait en premier le matin ?",
-    explanation: exp(
-      "Les moments d'une journée se suivent toujours dans le même ordre.",
-      "On part du réveil et on avance jusqu'au soir.",
-      "On se lève le matin vers 7 heures, on déjeune à midi, puis on se couche le soir vers 8 heures.",
-      "L'ordre est : se lever, déjeuner, se coucher.",
-    ),
-    tags: ["cp", "duree", "ordonner", "qcm"],
+    hint: "Pars du réveil et avance jusqu'au soir.",
+    tags: ["cp", "duree", "ordonner", "template"],
+    generate: () => {
+      const journee = [
+        { action: "se lever", h: 7 },
+        { action: "arriver à l'école", h: 8 },
+        { action: "aller en récréation", h: 10 },
+        { action: "déjeuner", h: 12 },
+        { action: "sortir de l'école", h: 16 },
+        { action: "diner", h: 19 },
+        { action: "se coucher", h: 20 },
+      ];
+      const tirage = shuffle(journee).slice(0, 3);
+      const range = [...tirage].sort((x, y) => x.h - y.h);
+      const noms = (l: typeof range) => l.map((o) => o.action).join(", ");
+      const inverse = [...range].reverse();
+      const echangeDebut = [range[1], range[0], range[2]];
+      const echangeFin = [range[0], range[2], range[1]];
+      return {
+        text: `Range ces trois moments dans l'ordre de la journée : ${noms(tirage)}.`,
+        format: "qcm",
+        choices: makeChoices(noms(range), [
+          noms(inverse),
+          noms(echangeDebut),
+          noms(echangeFin),
+        ]),
+        expected: [noms(range)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Les moments d'une journée se suivent toujours dans le même ordre.",
+          "On compare les heures deux à deux, de la plus petite à la plus grande.",
+          `« ${range[0].action} » vers ${range[0].h} heures, puis « ${range[1].action} » vers ${range[1].h} heures, puis « ${range[2].action} » vers ${range[2].h} heures.`,
+          `L'ordre est : ${noms(range)}.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",
@@ -511,7 +535,7 @@ export const dureeBank: TutorBankItemV4[] = [
       "La petite aiguille marque 12 heures : elle est sur le 12. Il est l'heure pile, donc zéro minute : la grande est aussi sur le 12. C'est le seul moment de la journée où elles se superposent sur le 12.",
       "Les deux aiguilles sont sur le 12.",
     ),
-    tags: ["cp", "duree", "defi", "qcm"],
+    tags: ["cp", "duree", "defi", "remarquable", "qcm"],
   },
   {
     kind: "fixed",

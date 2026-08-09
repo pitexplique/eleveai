@@ -317,26 +317,36 @@ export const suiteNombreBank: TutorBankItemV4[] = [
      CP_SUITE_COMPLETER — les trous au milieu
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_suite_completer_fixed_1",
+    kind: "template",
+    id: "cp_suite_completer_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "suite_nombre",
     microId: "cp_suite_completer",
-    difficulty: 3,
+    difficulty: 4,
     theme: "neutral",
-    text: "Complète : 47 ; 48 ; … ; 50",
-    format: "short",
-    expected: ["49"],
-    comparator: "number_equal",
-    hint: "Le nombre manquant est juste avant 50.",
-    explanation: exp(
-      "Dans une suite de un en un, chaque nombre est encadré par celui qui le précède et celui qui le suit.",
-      "On avance depuis le nombre de gauche, ou on recule depuis celui de droite : les deux doivent donner le même résultat.",
-      "Après 48 vient 49. Et avant 50 vient aussi 49. Les deux chemins tombent d'accord.",
-      "Le nombre manquant est 49.",
-    ),
-    tags: ["cp", "suite_nombre", "completer"],
+    hint: "Deux trous : remplis d'abord celui qui touche un nombre écrit.",
+    tags: ["cp", "suite_nombre", "completer", "template"],
+    generate: () => {
+      // Une bande numérique lacunaire, comme celle que le BO fait compléter.
+      const depart = randomInt(5, 90);
+      const suite = [depart, depart + 1, depart + 2, depart + 3, depart + 4];
+      const trous = shuffle([1, 2, 3]).slice(0, 2).sort((a, b) => a - b);
+      const affichee = suite.map((n, i) => (trous.includes(i) ? "…" : String(n)));
+      const cherche = trous[0];
+      return {
+        text: `Dans cette bande, quel nombre va dans le PREMIER trou : ${affichee.join(" ; ")} ?`,
+        format: "short",
+        expected: [String(suite[cherche])],
+        comparator: "number_equal",
+        explanation: exp(
+          "Dans une bande numérique, les nombres se suivent de un en un.",
+          "On part d'un nombre écrit et on avance jusqu'au trou, case par case.",
+          `Le premier trou est ${cherche === 1 ? `juste après ${suite[0]}` : `à ${cherche} places après ${suite[0]}`} : c'est ${suite[cherche]}.`,
+          `Le premier trou est ${suite[cherche]}.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",

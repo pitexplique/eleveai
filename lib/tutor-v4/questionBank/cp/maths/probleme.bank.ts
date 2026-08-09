@@ -101,7 +101,7 @@ export const problemeBank: TutorBankItemV4[] = [
       "L'histoire donne deux nombres : 43 au départ, 18 mangées. La question porte sur ce qui reste dans le bol à la fin. C'est cela qu'il faudra calculer, et rien d'autre.",
       "On cherche les cerises qui restent.",
     ),
-    tags: ["cp", "probleme", "identifier", "qcm"],
+    tags: ["cp", "probleme", "identifier", "methode", "qcm"],
   },
   {
     kind: "fixed",
@@ -372,26 +372,35 @@ export const problemeBank: TutorBankItemV4[] = [
     },
   },
   {
-    kind: "fixed",
-    id: "cp_probleme_soustractif_fixed_1",
+    kind: "template",
+    id: "cp_probleme_soustractif_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "probleme",
     microId: "cp_probleme_soustractif",
     difficulty: 3,
     theme: "neutral",
-    text: "Léa a 53 euros dans son portemonnaie. Elle achète un livre à 7 euros. Combien lui reste-t-il ?",
-    format: "short",
-    expected: ["46"],
-    comparator: "number_equal",
     hint: "Acheter, c'est dépenser : l'argent diminue.",
-    explanation: exp(
-      "Une dépense diminue la somme dont on dispose.",
-      "On enlève le prix à la somme de départ.",
-      "53 - 7 = 46. On peut casser une dizaine : 53, c'est 40 et 13 ; 13 - 7 = 6, donc il reste 46.",
-      "Il lui reste 46 euros.",
-    ),
-    tags: ["cp", "probleme", "soustractif"],
+    tags: ["cp", "probleme", "soustractif", "template"],
+    generate: () => {
+      const somme = randomInt(25, 80);
+      const prix = randomInt(4, 19);
+      const reste = somme - prix;
+      const qui = randomChoice(["Léa", "Malia", "Naïla", "Anna"]);
+      const achat = randomChoice(["un livre", "un jeu", "un ballon", "une trousse"]);
+      return {
+        text: `${qui} a ${somme} euros dans son portemonnaie. Elle achète ${achat} à ${prix} euros. Combien lui reste-t-il ?`,
+        format: "short",
+        expected: [String(reste)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Une dépense diminue la somme dont on dispose.",
+          "On enlève le prix à la somme de départ.",
+          `${somme} - ${prix} = ${reste}.`,
+          `Il lui reste ${reste} euros.`,
+        ),
+      };
+    },
   },
 
   /* =========================================================
@@ -616,26 +625,40 @@ export const problemeBank: TutorBankItemV4[] = [
      CP_PROBLEME_MULTIPLICATIF — des groupes égaux, champ ≤ 30
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_probleme_multiplicatif_fixed_1",
+    kind: "template",
+    id: "cp_probleme_multiplicatif_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "probleme",
     microId: "cp_probleme_multiplicatif",
     difficulty: 4,
     theme: "neutral",
-    text: "Paul apporte 3 paquets de biscuits. Il y a 7 biscuits dans chaque paquet. Combien y a-t-il de biscuits en tout ?",
-    format: "short",
-    expected: ["21"],
-    comparator: "number_equal",
-    hint: "Trois paquets identiques : additionne trois fois la même quantité.",
-    explanation: exp(
-      "Quand toutes les parts contiennent la même quantité, on additionne cette quantité autant de fois qu'il y a de parts.",
-      "On écrit une addition répétée, ou on dessine les biscuits par paquets.",
-      "7 + 7 + 7 = 21. On dit aussi « trois fois sept ».",
-      "Il y a 21 biscuits.",
-    ),
-    tags: ["cp", "probleme", "multiplicatif"],
+    hint: "Compte une rangée, puis répète autant de fois qu'il y a de rangées.",
+    tags: ["cp", "probleme", "multiplicatif", "template"],
+    generate: () => {
+      // La disposition en rangées, que le BO fait dessiner en croix : on voit
+      // les parts égales sans les compter une à une.
+      const rangees = randomInt(2, 5);
+      const parRangee = randomInt(2, 6);
+      const total = rangees * parRangee;
+      const c = randomChoice([
+        { quoi: "chaises", lieu: "dans la salle" },
+        { quoi: "plants de letchis", lieu: "dans le jardin" },
+        { quoi: "gâteaux", lieu: "sur la plaque" },
+      ]);
+      return {
+        text: `${c.lieu.charAt(0).toUpperCase()}${c.lieu.slice(1)}, les ${c.quoi} sont rangés en ${rangees} rangées de ${parRangee}. Combien y a-t-il de ${c.quoi} en tout ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Des objets rangés en rangées égales forment des parts égales.",
+          "On compte une rangée, puis on l'additionne autant de fois qu'il y a de rangées.",
+          `${Array.from({ length: rangees }, () => parRangee).join(" + ")} = ${total}. On dit aussi « ${rangees} fois ${parRangee} ».`,
+          `Il y a ${total} ${c.quoi}.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",
@@ -705,26 +728,41 @@ export const problemeBank: TutorBankItemV4[] = [
      CP_PROBLEME_PARTAGE — chercher la valeur d'une part
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_probleme_partage_fixed_1",
+    kind: "template",
+    id: "cp_probleme_partage_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "probleme",
     microId: "cp_probleme_partage",
-    difficulty: 4,
+    difficulty: 5,
     theme: "neutral",
-    text: "3 enfants se partagent 18 images. Tous les enfants doivent avoir le même nombre d'images. Combien d'images aura chaque enfant ?",
-    format: "short",
-    expected: ["6"],
-    comparator: "number_equal",
-    hint: "Distribue les images une par une, comme des cartes.",
-    explanation: exp(
-      "Un partage équitable donne la même quantité à chacun.",
-      "On distribue un à un, ou on cherche le nombre qui, répété autant de fois qu'il y a d'enfants, donne le total.",
-      "6 + 6 + 6 = 18. Chaque enfant reçoit donc 6 images.",
-      "Chaque enfant aura 6 images.",
-    ),
-    tags: ["cp", "probleme", "partage"],
+    hint: "Vérifie : la part annoncée, répétée pour chacun, redonne-t-elle le total ?",
+    tags: ["cp", "probleme", "partage", "template"],
+    generate: () => {
+      const enfants = randomChoice([2, 3, 4, 5]);
+      const part = randomInt(2, 6);
+      const total = enfants * part;
+      const juste = randomChoice([true, false]);
+      const annonce = juste ? part : part + randomChoice([-1, 1]);
+      const qui = randomChoice(["Léa", "Ryan", "Malia", "Enzo"]);
+      return {
+        text: `${enfants} enfants se partagent ${total} images en parts égales. ${qui} dit que chacun en aura ${annonce}. A-t-${qui === "Ryan" || qui === "Enzo" ? "il" : "elle"} raison ?`,
+        format: "qcm",
+        choices: shuffle(["oui", "non"]),
+        expected: [juste ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un partage est équitable quand les parts réunies redonnent exactement le total.",
+          "On répète la part annoncée autant de fois qu'il y a d'enfants, puis on compare au total.",
+          `${Array.from({ length: enfants }, () => annonce).join(" + ")} = ${annonce * enfants}. ${
+            juste
+              ? `C'est bien le total de ${total} : le partage tombe juste.`
+              : `Or le total est ${total}, pas ${annonce * enfants}. La part annoncée est ${annonce > part ? "trop grande" : "trop petite"} : chacun doit en recevoir ${part}.`
+          }`,
+          juste ? "Oui, chacun en aura bien autant." : `Non : chacun en aura ${part}.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",

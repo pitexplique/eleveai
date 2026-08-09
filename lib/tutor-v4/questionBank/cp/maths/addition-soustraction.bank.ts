@@ -76,27 +76,49 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
      CP_ADD_SENS — ce que veut dire additionner
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_add_sens_fixed_1",
+    kind: "template",
+    id: "cp_add_sens_tpl_2",
     niveau: "cp",
     matiere: "maths",
     notionId: "addition_soustraction",
     microId: "cp_add_sens",
-    difficulty: 2,
+    difficulty: 3,
     theme: "neutral",
-    text: "Mila a 12 images. Elle en gagne 5. Quel calcul faut-il faire ?",
-    format: "qcm",
-    choices: ["12 + 5", "12 - 5", "5 - 12", "12 + 12"],
-    expected: ["12 + 5"],
-    comparator: "mcq_exact",
-    hint: "Elle en gagne : elle en a plus qu'avant.",
-    explanation: exp(
-      "Additionner, c'est réunir deux quantités, ou en ajouter une à une autre.",
-      "On se demande si la quantité augmente ou diminue.",
-      "Elle GAGNE des images : elle en a plus à la fin qu'au début. C'est donc une addition, 12 + 5.",
-      "Le calcul est 12 + 5.",
-    ),
-    tags: ["cp", "addition_soustraction", "sens", "qcm"],
+    hint: "Réunir deux tas, c'est additionner.",
+    tags: ["cp", "addition_soustraction", "sens", "template"],
+    generate: () => {
+      // Le sens de RÉUNION, distinct du sens d'AJOUT du gabarit voisin : deux
+      // collections existent déjà, et on cherche ce qu'elles font ensemble.
+      const a = randomInt(6, 30);
+      // ⚠️ b doit différer de a : sinon « a + a » et « b + b » valent la bonne
+      // réponse, « a - b » et « b - a » se confondent, et le QCM tombe à deux
+      // lignes.
+      const b = randomChoice([randomInt(4, a - 1), randomInt(a + 1, 31)]);
+      const c = randomChoice([
+        { qui1: "Malia", qui2: "Ryan", objet: "billes" },
+        { qui1: "Léa", qui2: "Enzo", objet: "images" },
+        { qui1: "Naïla", qui2: "Kevin", objet: "coquillages" },
+      ]);
+      const bonne = `${a} + ${b}`;
+      return {
+        text: `${c.qui1} a ${a} ${c.objet} et ${c.qui2} en a ${b}. Quel calcul donne le nombre de ${c.objet} qu'ils ont ENSEMBLE ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `${a} - ${b}`,
+          `${b} - ${a}`,
+          `${a} + ${a}`,
+          `${b} + ${b}`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Additionner, c'est aussi réunir deux collections qui existent déjà.",
+          "On repère les deux quantités, puis on les met ensemble.",
+          `${c.qui1} a ${a} ${c.objet}, ${c.qui2} en a ${b}. Ensemble, on réunit les deux tas : ${a} + ${b} = ${a + b}.`,
+          `Le calcul est ${bonne}.`,
+        ),
+      };
+    },
   },
   {
     kind: "fixed",
@@ -421,26 +443,34 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
     },
   },
   {
-    kind: "fixed",
-    id: "cp_add_calculer_fixed_1",
+    kind: "template",
+    id: "cp_add_calculer_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "addition_soustraction",
     microId: "cp_add_calculer",
     difficulty: 3,
     theme: "neutral",
-    text: "Calcule : 25 + 4",
-    format: "short",
-    expected: ["29"],
-    comparator: "number_equal",
     hint: "Les dizaines ne changent pas : seul le chiffre des unités bouge.",
-    explanation: exp(
-      "Ajouter un petit nombre à un nombre à deux chiffres ne touche souvent que les unités.",
-      "On regarde si les unités dépassent dix avant d'agir.",
-      "5 + 4 = 9, et 9 ne dépasse pas dix : les 2 dizaines restent. On obtient 29.",
-      "25 + 4 = 29.",
-    ),
-    tags: ["cp", "addition_soustraction", "calculer"],
+    tags: ["cp", "addition_soustraction", "calculer", "template"],
+    generate: () => {
+      const dizaines = randomInt(2, 8);
+      const unites = randomInt(1, 5);
+      const a = dizaines * 10 + unites;
+      const b = randomInt(1, 9 - unites);
+      return {
+        text: `Calcule : ${a} + ${b}`,
+        format: "short",
+        expected: [String(a + b)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Ajouter un petit nombre à un nombre à deux chiffres ne touche que les unités, tant qu'on ne dépasse pas la dizaine.",
+          "On vérifie que les unités additionnées ne dépassent pas dix, puis on ajoute.",
+          `${unites} + ${b} = ${unites + b}, ce qui ne dépasse pas dix : les ${dizaines} dizaines restent en place. On obtient ${a + b}.`,
+          `${a} + ${b} = ${a + b}.`,
+        ),
+      };
+    },
   },
 
   /* =========================================================
@@ -508,26 +538,36 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
   },
 
   {
-    kind: "fixed",
-    id: "cp_sous_calculer_fixed_1",
+    kind: "template",
+    id: "cp_sous_calculer_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "addition_soustraction",
     microId: "cp_sous_calculer",
-    difficulty: 3,
+    difficulty: 4,
     theme: "neutral",
-    text: "Calcule : 38 - 12",
-    format: "short",
-    expected: ["26"],
-    comparator: "number_equal",
     hint: "Retire les dizaines, puis les unités.",
-    explanation: exp(
-      "Pour soustraire un nombre à deux chiffres, on peut le décomposer.",
-      "On retire d'abord les dizaines, puis les unités.",
-      "12, c'est 10 et 2. On enlève d'abord 10 : 38 - 10 = 28. Puis on enlève 2 : 28 - 2 = 26.",
-      "38 - 12 = 26.",
-    ),
-    tags: ["cp", "addition_soustraction", "calculer"],
+    tags: ["cp", "addition_soustraction", "calculer", "template"],
+    generate: () => {
+      const dizA = randomInt(3, 9);
+      const uniA = randomInt(4, 9);
+      const dizB = randomInt(1, dizA - 1);
+      const uniB = randomInt(1, uniA - 1);
+      const a = dizA * 10 + uniA;
+      const b = dizB * 10 + uniB;
+      return {
+        text: `Calcule : ${a} - ${b}`,
+        format: "short",
+        expected: [String(a - b)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Pour soustraire un nombre à deux chiffres, on peut le décomposer en dizaines et unités.",
+          "On retire d'abord les dizaines, puis les unités.",
+          `${b}, c'est ${dizB * 10} et ${uniB}. On enlève d'abord ${dizB * 10} : ${a} - ${dizB * 10} = ${a - dizB * 10}. Puis on enlève ${uniB} : ${a - dizB * 10} - ${uniB} = ${a - b}.`,
+          `${a} - ${b} = ${a - b}.`,
+        ),
+      };
+    },
   },
 
   /* =========================================================
@@ -772,7 +812,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       "« 4 fois 5 », c'est quatre groupes de 5 : 5 + 5 + 5 + 5, ce qui fait 20.",
       "« 4 fois 5 » veut dire 5 + 5 + 5 + 5.",
     ),
-    tags: ["cp", "addition_soustraction", "multiplication", "qcm"],
+    tags: ["cp", "addition_soustraction", "multiplication", "definition", "qcm"],
   },
   {
     kind: "template",

@@ -504,7 +504,7 @@ export const longueurBank: TutorBankItemV4[] = [
       "2 cm, c'est à peine plus qu'un doigt : bien trop petit pour une trousse. 1 m, c'est presque la taille d'un élève de CP : bien trop grand. Il reste 20 cm, la longueur d'une grande règle.",
       "Une trousse mesure environ 20 cm.",
     ),
-    tags: ["cp", "longueur", "m_cm", "estimer", "qcm"],
+    tags: ["cp", "longueur", "m_cm", "estimer", "piege", "qcm"],
   },
   {
     kind: "template",

@@ -295,32 +295,39 @@ export const masseBank: TutorBankItemV4[] = [
      élèves est rangée dessous. Il ne parle plus que de masses.
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_masse_estimer_fixed_1",
+    kind: "template",
+    id: "cp_masse_estimer_tpl_2",
     niveau: "cp",
     matiere: "maths",
     notionId: "masse_contenance",
     microId: "cp_masse_contenance_estimer",
     difficulty: 3,
     theme: "neutral",
-    text: "Range du plus LÉGER au plus LOURD : un cartable plein, une gomme, une pomme.",
-    format: "qcm",
-    choices: [
-      "une gomme, une pomme, un cartable plein",
-      "un cartable plein, une pomme, une gomme",
-      "une pomme, une gomme, un cartable plein",
-      "une gomme, un cartable plein, une pomme",
-    ],
-    expected: ["une gomme, une pomme, un cartable plein"],
-    comparator: "mcq_exact",
     hint: "Commence par celui que tu soulèves d'un seul doigt.",
-    explanation: exp(
-      "Ranger des masses, c'est comparer les objets deux à deux, puis les mettre à la suite.",
-      "On cherche le plus léger, on le pose en premier, et on recommence avec ceux qui restent.",
-      "La gomme se soulève d'un doigt. La pomme tient dans une main mais pèse déjà un peu. Le cartable plein se porte sur le dos.",
-      "L'ordre est : une gomme, une pomme, un cartable plein.",
-    ),
-    tags: ["cp", "masse", "ranger", "qcm"],
+    tags: ["cp", "masse", "ranger", "template"],
+    generate: () => {
+      const tirage = shuffle(OBJETS).slice(0, 3);
+      const chercheLeger = randomChoice([true, false]);
+      const range = [...tirage].sort((x, y) => x.rang - y.rang);
+      const bonne = chercheLeger ? range[0] : range[2];
+      return {
+        text: `Parmi ces trois objets, lequel est le plus ${chercheLeger ? "LÉGER" : "LOURD"} : ${tirage.map((o) => o.nom).join(", ")} ?`,
+        format: "qcm",
+        choices: makeChoices(bonne.nom, [
+          chercheLeger ? range[2].nom : range[0].nom,
+          range[1].nom,
+          "les trois pèsent pareil",
+        ]),
+        expected: [bonne.nom],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour trouver le plus léger ou le plus lourd de trois objets, on les compare deux à deux.",
+          "On soupèse le premier et le deuxième, puis le gagnant et le troisième.",
+          `En les rangeant du plus léger au plus lourd : ${range.map((o) => o.nom).join(", puis ")}. Le plus ${chercheLeger ? "léger" : "lourd"} est donc ${bonne.nom}.`,
+          `C'est ${bonne.nom}.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",

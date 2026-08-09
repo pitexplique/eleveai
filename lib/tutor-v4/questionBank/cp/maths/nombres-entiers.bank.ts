@@ -88,26 +88,35 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
      dix. C'est la porte d'entrée de toute la numération.
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_entier_denombre_fixed_1",
+    kind: "template",
+    id: "cp_entier_denombre_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "nombre_entier",
     microId: "cp_entier_denombre",
-    difficulty: 2,
+    difficulty: 3,
     theme: "neutral",
-    text: "Sur la table, il y a 3 barres de dix cubes et 4 cubes tout seuls. Combien y a-t-il de cubes ?",
-    format: "short",
-    expected: ["34"],
-    comparator: "number_equal",
-    hint: "Compte d'abord les barres de dix : dix, vingt, trente. Puis ajoute les cubes tout seuls.",
-    explanation: exp(
-      "Une barre de dix cubes vaut dix cubes. On compte les barres par paquets de dix, puis les cubes isolés un par un.",
-      "On compte de dix en dix, puis de un en un.",
-      "Dix, vingt, trente pour les 3 barres. Puis trente-et-un, trente-deux, trente-trois, trente-quatre. Cela fait 3 dizaines et 4 unités.",
-      "Il y a 34 cubes.",
-    ),
-    tags: ["cp", "nombre_entier", "denombrer", "dizaine"],
+    hint: "Le comptage s'arrête sur le nombre d'objets.",
+    tags: ["cp", "nombre_entier", "denombrer", "template"],
+    generate: () => {
+      const dizaines = randomInt(2, 8);
+      const unites = randomInt(1, 6);
+      const total = dizaines * 10 + unites;
+      const dix = Array.from({ length: dizaines }, (_, i) => (i + 1) * 10);
+      const un = Array.from({ length: unites }, (_, i) => dizaines * 10 + i + 1);
+      return {
+        text: `Un élève compte une collection à voix haute, de dix en dix puis de un en un : « ${dix.join(", ")}, ${un.join(", ")} ». Combien y a-t-il d'objets ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le dernier nombre prononcé pendant le comptage donne la quantité d'objets.",
+          "On écoute jusqu'où va le comptage, sans compter les mots prononcés.",
+          `L'élève s'arrête sur ${total} : il y a donc ${total} objets. Il a compté ${dizaines} paquets de dix, puis ${unites} objets isolés.`,
+          `Il y a ${total} objets.`,
+        ),
+      };
+    },
   },
   {
     kind: "fixed",
@@ -332,26 +341,33 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
      Le mouvement inverse du dénombrement, et il s'apprend à part.
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_entier_construire_collection_fixed_1",
+    kind: "template",
+    id: "cp_entier_construire_collection_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "nombre_entier",
     microId: "cp_entier_construire_collection",
     difficulty: 2,
     theme: "neutral",
-    text: "Tu dois prendre 46 jetons. Les jetons sont rangés en sachets de dix. Combien prends-tu de sachets entiers ?",
-    format: "short",
-    expected: ["4"],
-    comparator: "number_equal",
-    hint: "Combien de dizaines y a-t-il dans 46 ?",
-    explanation: exp(
-      "Construire une collection, c'est fabriquer exactement le nombre demandé.",
-      "On lit le chiffre des dizaines : il dit combien de sachets prendre.",
-      "46, c'est 4 dizaines et 6 unités. On prend donc 4 sachets entiers, puis 6 jetons tout seuls.",
-      "On prend 4 sachets.",
-    ),
-    tags: ["cp", "nombre_entier", "construire", "dizaine"],
+    hint: "Le chiffre de gauche dit combien de sachets entiers prendre.",
+    tags: ["cp", "nombre_entier", "construire", "template"],
+    generate: () => {
+      const dizaines = randomInt(2, 9);
+      const unites = randomInt(1, 9);
+      const n = dizaines * 10 + unites;
+      return {
+        text: `Tu dois prendre ${n} jetons. Ils sont rangés en sachets de dix. Combien prends-tu de sachets entiers ?`,
+        format: "short",
+        expected: [String(dizaines)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Construire une collection, c'est fabriquer exactement le nombre demandé.",
+          "On lit le chiffre des dizaines : il dit combien de sachets prendre.",
+          `${n}, c'est ${dizaines} dizaines et ${unites} unités. On prend donc ${dizaines} sachets entiers, puis ${unites} jetons tout seuls.`,
+          `On prend ${dizaines} sachets.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",
@@ -545,26 +561,46 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
      numération, décomposition additive, lettres.
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_entier_representations_fixed_1",
+    kind: "template",
+    id: "cp_entier_representations_tpl_2",
     niveau: "cp",
     matiere: "maths",
     notionId: "nombre_entier",
     microId: "cp_entier_representations",
-    difficulty: 2,
+    difficulty: 3,
     theme: "neutral",
-    text: "Quel nombre s'écrit « 3 dizaines et 5 unités » ?",
-    format: "short",
-    expected: ["35"],
-    comparator: "number_equal",
-    hint: "Une dizaine vaut dix.",
-    explanation: exp(
-      "Un même nombre s'écrit de plusieurs façons, et toutes disent la même quantité.",
-      "On transforme les dizaines en unités, puis on ajoute.",
-      "3 dizaines valent 30. Avec 5 unités de plus : 30 + 5 = 35.",
-      "C'est le nombre 35.",
-    ),
-    tags: ["cp", "nombre_entier", "representations"],
+    hint: "On part du nombre écrit en chiffres, et on le dit en dizaines et unités.",
+    tags: ["cp", "nombre_entier", "representations", "template"],
+    generate: () => {
+      // Le chemin inverse de tpl_1 : des chiffres vers les unités de
+      // numération. Le BO demande de passer d'une écriture à l'autre « dans
+      // les deux sens ».
+      const dizaines = randomInt(2, 9);
+      // ⚠️ Les unités doivent différer des dizaines : sinon les deux pièges
+      // « chiffres inversés » et « même chiffre deux fois » valent tous deux
+      // la bonne réponse, et le QCM perd une ligne.
+      const unites = randomChoice([randomInt(1, dizaines - 1), ...(dizaines < 9 ? [randomInt(dizaines + 1, 9)] : [])]);
+      const n = dizaines * 10 + unites;
+      const bonne = `${dizaines} dizaines et ${unites} unités`;
+      return {
+        text: `Comment se dit le nombre ${n} en dizaines et en unités ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `${unites} dizaines et ${dizaines} unités`,
+          `${dizaines} dizaines et ${dizaines} unités`,
+          `${n} dizaines et 0 unité`,
+          `${dizaines + unites} unités`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un même nombre se dit de plusieurs façons : en chiffres, ou en unités de numération.",
+          "On lit le chiffre de gauche comme des dizaines, celui de droite comme des unités.",
+          `Dans ${n}, le ${dizaines} est à la place des dizaines et le ${unites} à celle des unités : cela fait ${bonne}. Et en effet ${dizaines * 10} + ${unites} = ${n}.`,
+          `${n}, c'est ${bonne}.`,
+        ),
+      };
+    },
   },
   {
     kind: "fixed",
@@ -823,32 +859,51 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
      CP_ENTIER_ORDONNER — croissant et décroissant
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_entier_ordonner_fixed_1",
+    kind: "template",
+    id: "cp_entier_ordonner_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "nombre_entier",
     microId: "cp_entier_ordonner",
-    difficulty: 2,
+    difficulty: 4,
     theme: "neutral",
-    text: "Range ces nombres dans l'ordre croissant : 27 ; 9 ; 41 ; 30.",
-    format: "qcm",
-    choices: [
-      "9 ; 27 ; 30 ; 41",
-      "41 ; 30 ; 27 ; 9",
-      "9 ; 30 ; 27 ; 41",
-      "27 ; 30 ; 41 ; 9",
-    ],
-    expected: ["9 ; 27 ; 30 ; 41"],
-    comparator: "mcq_exact",
-    hint: "Croissant veut dire du plus petit au plus grand.",
-    explanation: exp(
-      "Ranger dans l'ordre croissant, c'est aller du plus petit au plus grand.",
-      "On cherche le plus petit, on l'écrit, puis on recommence avec ceux qui restent.",
-      "Le plus petit est 9 : il n'a pas de dizaine. Viennent ensuite 27, puis 30, puis 41.",
-      "L'ordre croissant est 9 ; 27 ; 30 ; 41.",
-    ),
-    tags: ["cp", "nombre_entier", "ordonner", "qcm"],
+    hint: "Cinq nombres : cherche le premier, puis recommence avec ceux qui restent.",
+    tags: ["cp", "nombre_entier", "ordonner", "template"],
+    generate: () => {
+      // Le BO demande de savoir « ordonner CINQ nombres dans l'ordre croissant
+      // et dans l'ordre décroissant ». On tire donc cinq nombres, dont un à un
+      // seul chiffre : c'est lui qui se retrouve mal placé quand l'élève
+      // compare les chiffres au lieu des nombres.
+      const petit = randomInt(2, 9);
+      const autres = shuffle(Array.from({ length: 80 }, (_, i) => i + 12)).slice(0, 4);
+      const nombres = shuffle([petit, ...autres]);
+      const croissant = randomChoice([true, false]);
+      const range = [...nombres].sort((x, y) => (croissant ? x - y : y - x));
+      const inverse = [...range].reverse();
+      const petitMalPlace = croissant
+        ? [...range.slice(1), petit]
+        : [petit, ...range.filter((n) => n !== petit)];
+      const echange = [range[0], range[2], range[1], range[3], range[4]];
+      return {
+        text: `Range ces nombres dans l'ordre ${croissant ? "croissant" : "décroissant"} : ${nombres.join(" ; ")}.`,
+        format: "qcm",
+        choices: makeChoices(range.join(" ; "), [
+          inverse.join(" ; "),
+          petitMalPlace.join(" ; "),
+          echange.join(" ; "),
+        ]),
+        expected: [range.join(" ; ")],
+        comparator: "mcq_exact",
+        explanation: exp(
+          croissant
+            ? "L'ordre croissant va du plus petit au plus grand."
+            : "L'ordre décroissant va du plus grand au plus petit.",
+          "On cherche le premier de la liste, on l'écrit, puis on recommence avec ceux qui restent.",
+          `${petit} n'a qu'un seul chiffre : il n'a aucune dizaine, c'est donc le plus petit des cinq. L'ordre ${croissant ? "croissant" : "décroissant"} est ${range.join(" ; ")}.`,
+          `L'ordre est ${range.join(" ; ")}.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",
@@ -932,26 +987,31 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
      CP_ENTIER_DROITE — la demi-droite graduée, de un en un
   ========================================================= */
   {
-    kind: "fixed",
-    id: "cp_entier_droite_fixed_1",
+    kind: "template",
+    id: "cp_entier_droite_tpl_3",
     niveau: "cp",
     matiere: "maths",
     notionId: "nombre_entier",
     microId: "cp_entier_droite",
     difficulty: 3,
     theme: "neutral",
-    text: "Sur une droite graduée de un en un, quel nombre se trouve juste entre 38 et 40 ?",
-    format: "short",
-    expected: ["39"],
-    comparator: "number_equal",
     hint: "Sur cette droite, on avance de un à chaque trait.",
-    explanation: exp(
-      "Sur une droite graduée de un en un, chaque trait vaut une unité de plus que le précédent.",
-      "On avance d'un trait à partir du nombre écrit à gauche.",
-      "Après 38 vient 39, et après 39 vient 40. Le nombre au milieu est donc 39.",
-      "C'est 39.",
-    ),
-    tags: ["cp", "nombre_entier", "droite_graduee"],
+    tags: ["cp", "nombre_entier", "droite_graduee", "template"],
+    generate: () => {
+      const n = randomInt(11, 97);
+      return {
+        text: `Sur une droite graduée de un en un, quel nombre se trouve juste entre ${n} et ${n + 2} ?`,
+        format: "short",
+        expected: [String(n + 1)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Sur une droite graduée de un en un, chaque trait vaut une unité de plus que le précédent.",
+          "On avance d'un trait depuis le nombre de gauche, puis on vérifie en reculant depuis celui de droite.",
+          `Après ${n} vient ${n + 1}, et avant ${n + 2} vient aussi ${n + 1}. Les deux chemins tombent d'accord.`,
+          `C'est ${n + 1}.`,
+        ),
+      };
+    },
   },
   {
     kind: "template",
