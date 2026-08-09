@@ -23,20 +23,24 @@ import { reperageBank } from "./reperage.bank";
 import { symetrieBank } from "./symetrie.bank";
 import { suiteNombreBank } from "./suite-nombre.bank";
 import { algorithmiqueBank } from "./algorithmique.bank";
+import { donneesBank } from "./donnees.bank";
 
-// Le CE2 quitte le constructeur commun, une notion à la fois.
+// ✅ LE CE2 A QUITTÉ LE CONSTRUCTEUR COMMUN — 09/08/2026.
 //
 // `buildCycle2QuestionBank` aiguille sur la NOTION, jamais sur la
 // micro-compétence : les six notions de mesure y partagent une seule fonction,
 // les cinq notions de géométrie une autre. Mesuré le 05/08/2026, cela donnait
 // « Calculer un rendu de monnaie » → « Un ruban mesure 117 cm… », et les
 // vingt et une micro-compétences de géométrie servaient toutes « Combien de
-// côtés a un triangle ? ». On écrit donc de vraies banques, comme en CM1 et en
-// CM2, et on ne garde le constructeur que pour ce qui n'est pas encore écrit —
-// mieux vaut une question approximative que pas de question du tout.
+// côtés a un triangle ? ».
 //
-// À chaque banque ajoutée : l'importer, l'ajouter à BANQUES_ECRITES. Le repli
-// disparaît tout seul pour les micro-compétences qu'elle couvre.
+// Les 132 micro-compétences ont maintenant leur banque écrite à la main, dans
+// 21 fichiers. `REPLI` est donc VIDE : le constructeur n'est plus appelé que
+// pour être filtré à zéro. On le garde branché — il ne coûte rien et il
+// rattraperait une micro-compétence ajoutée au programme sans sa banque.
+//
+// Si une notion s'ajoute un jour : écrire son fichier, l'importer, l'ajouter à
+// BANQUES_ECRITES. Le repli s'efface tout seul pour ce qu'elle couvre.
 const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...nombresEntiersBank,
   ...calculBank,
@@ -58,6 +62,7 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...symetrieBank,
   ...suiteNombreBank,
   ...algorithmiqueBank,
+  ...donneesBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
