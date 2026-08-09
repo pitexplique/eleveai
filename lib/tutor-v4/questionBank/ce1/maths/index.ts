@@ -10,6 +10,7 @@ import { dureeBank } from "./duree.bank";
 import { nombresEntiersBank } from "./nombres-entiers.bank";
 import { fractionBank } from "./fraction.bank";
 import { additionSoustractionBank } from "./addition-soustraction.bank";
+import { multiplicationBank } from "./multiplication.bank";
 
 // ⏳ LE CE1 SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 09/08/2026.
 //
@@ -40,6 +41,7 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...nombresEntiersBank,
   ...fractionBank,
   ...additionSoustractionBank,
+  ...multiplicationBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
