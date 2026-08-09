@@ -687,6 +687,138 @@ export const dureeBank: TutorBankItemV4[] = [
   },
 
   /* =========================================================
+     CE1_DUREE_AJOUTER — ajouter ou soustraire des durées
+     Le programme en donne l'exemple : « Mamie a passé un quart
+     d'heure à tailler ses rosiers et une demi-heure à bêcher
+     son potager. Combien de temps est-elle restée dans le
+     jardin ? »
+     LE piège : additionner comme des nombres ordinaires et
+     écrire 1 h 75 au lieu de 2 h 15.
+  ========================================================= */
+  {
+    kind: "fixed",
+    id: "ce1_duree_ajouter_fixed_1",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "duree",
+    microId: "ce1_duree_ajouter",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Mamie taille ses rosiers pendant un quart d'heure, puis bêche son potager pendant une demi-heure. Combien de minutes est-elle restée dans le jardin ?",
+    format: "short",
+    expected: ["45"],
+    comparator: "number_equal",
+    hint: "Écris les deux durées en minutes avant d'additionner.",
+    explanation: exp(
+      "Pour additionner deux durées, on les écrit d'abord dans la même unité.",
+      "On transforme le quart d'heure et la demi-heure en minutes, puis on additionne.",
+      "Un quart d'heure fait 15 min, une demi-heure fait 30 min. 15 + 30 = 45.",
+      "Elle est restée 45 min dans le jardin.",
+    ),
+    tags: ["ce1", "duree", "ajouter"],
+  },
+  {
+    kind: "fixed",
+    id: "ce1_duree_ajouter_fixed_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "duree",
+    microId: "ce1_duree_ajouter",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Combien de quarts d'heure faut-il pour faire une heure ?",
+    format: "short",
+    expected: ["4"],
+    comparator: "number_equal",
+    hint: "Un quart, c'est une part sur quatre.",
+    explanation: exp(
+      "Un quart d'heure, c'est l'heure partagée en quatre parts égales.",
+      "On additionne les quarts jusqu'à retrouver l'heure entière.",
+      "15 + 15 + 15 + 15 = 60. Il faut donc 4 quarts d'heure. Et deux quarts d'heure font une demi-heure.",
+      "Il faut 4 quarts d'heure.",
+    ),
+    tags: ["ce1", "duree", "ajouter", "remarquable"],
+  },
+  {
+    kind: "template",
+    id: "ce1_duree_ajouter_tpl_1",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "duree",
+    microId: "ce1_duree_ajouter",
+    difficulty: 4,
+    theme: "reunion",
+    hint: "Mets les deux durées en minutes, puis additionne.",
+    tags: ["ce1", "duree", "ajouter", "reunion", "template"],
+    generate: () => {
+      const parts = [
+        { texte: "un quart d'heure", minutes: 15 },
+        { texte: "une demi-heure", minutes: 30 },
+        { texte: "trois quarts d'heure", minutes: 45 },
+      ] as const;
+      const a = randomChoice(parts);
+      const b = randomChoice(parts);
+      const total = a.minutes + b.minutes;
+      const activite = randomChoice([
+        { qui: "Malia", quoi1: "arroser les brèdes", quoi2: "ramasser les letchis" },
+        { qui: "Kevin", quoi1: "balayer la cour", quoi2: "ranger le kiosque" },
+        { qui: "Naïla", quoi1: "nourrir les poules", quoi2: "désherber le jardin" },
+      ]);
+      return {
+        text: `${activite.qui} passe ${a.texte} à ${activite.quoi1}, puis ${b.texte} à ${activite.quoi2}. Combien de minutes en tout ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Pour additionner deux durées, on les écrit d'abord dans la même unité.",
+          "On transforme chaque durée en minutes, puis on additionne.",
+          `${a.texte} fait ${a.minutes} min, ${b.texte} fait ${b.minutes} min. ${a.minutes} + ${b.minutes} = ${total}${total >= 60 ? `, c'est-à-dire ${Math.floor(total / 60)} h ${total % 60 === 0 ? "" : String(total % 60).padStart(2, "0")}`.trimEnd() : ""}.`,
+          `Cela fait ${total} min.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_duree_ajouter_tpl_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "duree",
+    microId: "ce1_duree_ajouter",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Enlève à la durée totale ce qui est déjà passé.",
+    tags: ["ce1", "duree", "ajouter", "template"],
+    generate: () => {
+      const total = randomChoice([30, 45, 60] as const);
+      const deja = randomChoice([15, 30] as const);
+      const reste = total - deja;
+      // Un reste nul ne fait pas une question : on écarte le tirage en
+      // repassant sur une durée totale plus longue.
+      const totalCorrige = reste <= 0 ? deja + 15 : total;
+      const resteCorrige = totalCorrige - deja;
+      const activite = randomChoice([
+        "le film",
+        "la séance de sport",
+        "l'atelier lecture",
+        "la répétition de chant",
+      ]);
+      return {
+        text: `${activite.charAt(0).toUpperCase()}${activite.slice(1)} dure ${totalCorrige} minutes. ${deja} minutes se sont déjà écoulées. Combien de minutes reste-t-il ?`,
+        format: "short",
+        expected: [String(resteCorrige)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Chercher ce qui reste d'une durée, c'est enlever le temps déjà passé.",
+          "On soustrait le temps écoulé à la durée totale.",
+          `${totalCorrige} - ${deja} = ${resteCorrige}.`,
+          `Il reste ${resteCorrige} min.`,
+        ),
+      };
+    },
+  },
+
+  /* =========================================================
      CE1_DUREE_CALENDRIER — lire un calendrier
      ⚠️ Cette micro-compétence n'est pas un attendu de fin
      d'année du CE1. Gardée en attendant l'arbitrage : on reste
