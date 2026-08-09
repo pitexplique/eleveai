@@ -101,10 +101,12 @@ export const microSkills: MicroSkillSource[] = [
   { id: "ce2_fraction_lire", label: "Lire et nommer une fraction simple", notionId: "fraction", prerequis: ["ce2_fraction_unite"] },
   { id: "ce2_fraction_representer", label: "Représenter une fraction d'un tout", notionId: "fraction", prerequis: ["ce2_fraction_lire"] },
   { id: "ce2_fraction_egalite", label: "Reconnaître deux fractions égales", notionId: "fraction", prerequis: ["ce2_fraction_representer"] },
-  // Attendu de fin de CE2 : « additionner et soustraire des fractions ». Le CE1
-  // le prépare déjà, avec le dénominateur commun. Les dénominateurs différents,
-  // eux, attendent le CM1.
-  { id: "ce2_fraction_add_sous", label: "Additionner et soustraire des fractions de même dénominateur", notionId: "fraction", prerequis: ["ce2_fraction_representer", "ce2_fraction_egalite"] },
+  // Attendu de fin de CE2, intitulé du BO : « Additionner et soustraire des
+  // fractions ». Le CE1 s'arrête au dénominateur commun ; le CE2 va un cran
+  // plus loin — « lorsque le dénominateur de l'une est un multiple du
+  // dénominateur de l'autre » (1/2 + 1/4). C'est là que l'égalité de fractions
+  // sert enfin à quelque chose, d'où le prérequis.
+  { id: "ce2_fraction_add_sous", label: "Additionner et soustraire des fractions", notionId: "fraction", prerequis: ["ce2_fraction_representer", "ce2_fraction_egalite"] },
   { id: "ce2_fraction_bande_unite", label: "Exprimer une fraction d'une unité de longueur avec la bande unité", notionId: "fraction", prerequis: ["ce2_fraction_representer"] },
   { id: "ce2_fraction_droite", label: "Placer une fraction simple sur une droite graduée", notionId: "fraction", prerequis: ["ce2_fraction_lire", "ce2_entier_droite"] },
   { id: "ce2_fraction_comparer_unite", label: "Comparer une fraction simple à l'unité", notionId: "fraction", prerequis: ["ce2_fraction_representer"] },

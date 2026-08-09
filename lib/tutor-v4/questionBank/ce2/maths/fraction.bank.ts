@@ -8,18 +8,22 @@
 // PÉRIMÈTRE BO (n° 41 du 31 octobre 2024, applicable à la rentrée 2025, cycle
 // 2), repris mot pour mot du tableau CE2 : « Les fractions rencontrées au CE2
 // ont un dénominateur inférieur ou égal à DOUZE et sont toutes INFÉRIEURES OU
-// ÉGALES À UN. » La banque tire dans {2, 3, 4, 5, 6, 8, 10} : on reste dedans.
+// ÉGALES À UN. » La banque tire dans {2, 3, 4, 5, 6, 8, 10, 12}.
 //
 // ⚠️ L'ADDITION DE FRACTIONS EST AU PROGRAMME. Cet en-tête a longtemps affirmé
-// le contraire — « tout cela arrive au CM1 et au CM2 ». C'était faux, et relu
-// contre le tableau le 09/08/2026 : « Additionner et soustraire des fractions »
-// est l'un des quatre attendus de fin de CE2, et le CE1 le prépare déjà avec
-// « additionner et soustraire des fractions de même dénominateur ». Seul le
-// dénominateur COMMUN est attendu ici : les dénominateurs différents, eux,
-// arrivent bien au CM1.
+// le contraire — « tout cela arrive au CM1 et au CM2 ». C'était faux. Relu
+// contre le tableau du BO le 09/08/2026 : « Additionner et soustraire des
+// fractions » est l'un des quatre attendus de fin de CE2, et le CE1 le prépare
+// déjà avec le dénominateur commun.
 //
-// Restent hors CE2, en revanche : la fraction plus grande que 1 et la
-// simplification.
+// Le CE2 va un cran plus loin que le CE1, et le texte le dit : l'élève sait
+// additionner et soustraire « lorsque le dénominateur de l'une est un MULTIPLE
+// du dénominateur de l'autre ». 1/2 + 1/4 est donc au programme — on récrit
+// 1/2 en 2/4 et on retombe sur un partage commun. C'est là que l'égalité de
+// fractions, travaillée juste avant, sert enfin à quelque chose.
+//
+// Restent hors CE2 : les dénominateurs sans rapport entre eux (1/3 + 1/4), la
+// fraction plus grande que 1 et la simplification.
 //
 // ⚠️ PAS DE QUESTION À RÉDIGER. `applyMathsKeyboardFree` retire les items
 // `format: "open"` au primaire (cf. ce2/maths/index.ts) : un CE2 clique, il ne
@@ -62,11 +66,29 @@ function nomFraction(n: number, d: number): string {
     6: ["sixième", "sixièmes"],
     8: ["huitième", "huitièmes"],
     10: ["dixième", "dixièmes"],
+    12: ["douzième", "douzièmes"],
   };
   const [sing, plur] = noms[d] ?? [`${d}ème`, `${d}èmes`];
   const chiffres = ["zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf"];
   return `${chiffres[n] ?? n} ${n > 1 ? plur : sing}`;
 }
+
+// Les couples que le CE2 sait traiter quand les partages diffèrent : le second
+// dénominateur est un MULTIPLE du premier, et il ne dépasse pas douze. Hors de
+// cette liste (1/3 + 1/4), on sort du programme.
+const PAIRES_MULTIPLES = [
+  { d: 2, D: 4 },
+  { d: 2, D: 6 },
+  { d: 2, D: 8 },
+  { d: 2, D: 10 },
+  { d: 2, D: 12 },
+  { d: 3, D: 6 },
+  { d: 3, D: 12 },
+  { d: 4, D: 8 },
+  { d: 4, D: 12 },
+  { d: 5, D: 10 },
+  { d: 6, D: 12 },
+] as const;
 
 function fractionCanvas(data: Omit<FractionCanvasData, "kind">): FractionCanvasData {
   return { kind: "fraction", ...data };
@@ -660,11 +682,16 @@ export const fractionBank: TutorBankItemV4[] = [
 
   /* =========================================================
      CE2_FRACTION_ADD_SOUS — additionner et soustraire
-     Dénominateur COMMUN, résultat au plus égal à 1.
+     Résultat au plus égal à 1. Deux cas, dans cet ordre :
+     le dénominateur COMMUN, puis le dénominateur de l'une
+     MULTIPLE de celui de l'autre (1/2 + 1/4).
      Ce qui se joue ici : le nombre du bas ne bouge pas. Il dit
      en combien de parts on a coupé, et personne n'a recoupé
      entre les deux morceaux. On ajoute des parts, pas des
      partages : 1/4 + 2/4 = 3/4, jamais 3/8.
+     Et quand les partages diffèrent, on ne les additionne pas
+     davantage : on recoupe le plus grand pour retomber sur le
+     plus fin, et là seulement on compte.
   ========================================================= */
   {
     kind: "fixed",
@@ -777,6 +804,60 @@ export const fractionBank: TutorBankItemV4[] = [
     tags: ["ce2", "fraction", "soustraction", "piege", "qcm"],
   },
   {
+    kind: "fixed",
+    id: "ce2_fraction_add_sous_fixed_5",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_add_sous",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Combien font 1/2 + 1/4 ?",
+    format: "qcm",
+    choices: ["3/4", "2/6", "2/4", "1/6"],
+    expected: ["3/4"],
+    comparator: "mcq_exact",
+    hint: "Les deux partages ne sont pas les mêmes. Coupe la moitié en deux : combien de quarts ça fait ?",
+    explanation: exp(
+      "Pour additionner deux fractions dont les partages diffèrent, on ramène d'abord les deux au même partage.",
+      "Ici, 4 est le double de 2 : chaque demi se recoupe en 2 quarts. On récrit donc 1/2 en 2/4.",
+      "1/2 = 2/4, donc 1/2 + 1/4 = 2/4 + 1/4 = 3/4. Le partage commun est le quart, et on en compte 3.",
+      "1/2 + 1/4 = 3/4.",
+    ),
+    tags: ["ce2", "fraction", "addition", "denominateur_multiple", "piege", "qcm"],
+    canvas: fractionCanvas({
+      model: "compare",
+      fractions: [
+        { numerator: 1, denominator: 2, label: "1/2" },
+        { numerator: 1, denominator: 4, label: "1/4" },
+      ],
+      display: { showFraction: true, showParts: true },
+    }),
+  },
+  {
+    kind: "fixed",
+    id: "ce2_fraction_add_sous_fixed_6",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_add_sous",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un gâteau est partagé en dixièmes. Marc en mange 1/10, Ange 3/10 et Saïd 2/10. Quelle fraction du gâteau reste-t-il ?",
+    format: "qcm",
+    choices: ["4/10", "6/10", "5/10", "4/30"],
+    expected: ["4/10"],
+    comparator: "mcq_exact",
+    hint: "Deux temps : ce qui est mangé, puis ce qui reste sur les 10 parts.",
+    explanation: exp(
+      "Quand plusieurs parts sont prises sur le même partage, on les additionne toutes, puis on retire le total du tout.",
+      "On additionne d'abord les trois parts mangées, ensuite on soustrait du gâteau entier.",
+      "1/10 + 3/10 + 2/10 = 6/10. Le gâteau entier vaut 10/10, donc il reste 10/10 − 6/10 = 4/10. Attention : 6/10 est ce qui a été mangé, pas ce qui reste.",
+      "Il reste 4/10 du gâteau.",
+    ),
+    tags: ["ce2", "fraction", "addition", "soustraction", "probleme", "piege", "qcm"],
+  },
+  {
     kind: "template",
     id: "ce2_fraction_add_sous_tpl_1",
     niveau: "ce2",
@@ -788,7 +869,7 @@ export const fractionBank: TutorBankItemV4[] = [
     hint: "Ajoute les nombres du haut. Celui du bas reste tel quel.",
     tags: ["ce2", "fraction", "addition", "template", "canvas"],
     generate: () => {
-      const d = randomChoice([3, 4, 5, 6, 8, 10]);
+      const d = randomChoice([3, 4, 5, 6, 8, 10, 12]);
       const n1 = randomInt(1, d - 2);
       const n2 = randomInt(1, d - 1 - n1);
       const somme = n1 + n2;
@@ -832,7 +913,7 @@ export const fractionBank: TutorBankItemV4[] = [
     hint: "Retire les nombres du haut. Celui du bas ne bouge pas.",
     tags: ["ce2", "fraction", "soustraction", "template"],
     generate: () => {
-      const d = randomChoice([3, 4, 5, 6, 8, 10]);
+      const d = randomChoice([3, 4, 5, 6, 8, 10, 12]);
       const n1 = randomInt(2, d - 1);
       // On garde n1 + n2 au plus égal à d : le piège « il a additionné » doit
       // rester une fraction du répertoire du CE2, jamais plus grande que 1.
@@ -871,7 +952,7 @@ export const fractionBank: TutorBankItemV4[] = [
     hint: "Il manque des parts pour arriver au tout. Combien ?",
     tags: ["ce2", "fraction", "addition", "complement", "template"],
     generate: () => {
-      const d = randomChoice([3, 4, 5, 6, 8, 10]);
+      const d = randomChoice([3, 4, 5, 6, 8, 10, 12]);
       const n = randomInt(1, d - 1);
       const manque = d - n;
       return {
@@ -906,7 +987,7 @@ export const fractionBank: TutorBankItemV4[] = [
     hint: "Fais d'abord le total des deux parts prises, puis regarde ce qui reste.",
     tags: ["ce2", "fraction", "addition", "soustraction", "probleme", "template"],
     generate: () => {
-      const d = randomChoice([4, 5, 6, 8, 10]);
+      const d = randomChoice([4, 5, 6, 8, 10, 12]);
       const n1 = randomInt(1, d - 3);
       const n2 = randomInt(1, d - 2 - n1);
       const pris = n1 + n2;
@@ -933,6 +1014,90 @@ export const fractionBank: TutorBankItemV4[] = [
           "Deux étapes : le total pris, puis ce qui reste sur le partage complet.",
           `${n1}/${d} + ${n2}/${d} = ${pris}/${d}. Le tout vaut ${d}/${d}, donc il reste ${d}/${d} − ${pris}/${d} = ${reste}/${d}.`,
           `Il reste ${reste}/${d} ${objet.part}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_fraction_add_sous_tpl_5",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_add_sous",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Les deux partages ne sont pas les mêmes. Recoupe le plus grand pour retomber sur le plus fin.",
+    tags: ["ce2", "fraction", "addition", "denominateur_multiple", "template"],
+    generate: () => {
+      // Le CE2 s'arrête là : le dénominateur de l'une est un MULTIPLE de
+      // l'autre. 1/3 + 1/4 n'est pas de ce niveau, la paire est donc choisie.
+      const { d, D } = randomChoice(PAIRES_MULTIPLES);
+      const k = D / d;
+      const n1 = randomInt(1, d - 1);
+      const n2 = randomInt(1, D - n1 * k);
+      const somme = n1 * k + n2;
+      return {
+        text: `Combien font ${n1}/${d} + ${n2}/${D} ?`,
+        format: "qcm",
+        choices: makeChoices(`${somme}/${D}`, [
+          `${n1 + n2}/${d + D}`,
+          `${n1 + n2}/${D}`,
+          `${n1 + n2}/${d}`,
+          `${somme + 1}/${D}`,
+        ]),
+        expected: [`${somme}/${D}`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On ne peut additionner des parts que si elles ont la même taille : il faut d'abord un partage commun.",
+          `${D} est ${k} fois ${d} : chaque part de ${nomFraction(1, d)} se recoupe en ${k} parts de ${nomFraction(1, D)}. On récrit donc la première fraction.`,
+          `${n1}/${d} = ${n1 * k}/${D}, donc ${n1}/${d} + ${n2}/${D} = ${n1 * k}/${D} + ${n2}/${D} = ${somme}/${D}.`,
+          `${n1}/${d} + ${n2}/${D} = ${somme}/${D}.`,
+        ),
+        canvas: fractionCanvas({
+          model: "compare",
+          fractions: [
+            { numerator: n1, denominator: d, label: `${n1}/${d}` },
+            { numerator: n2, denominator: D, label: `${n2}/${D}` },
+          ],
+          display: { showFraction: true, showParts: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_fraction_add_sous_tpl_6",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_add_sous",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Récris d'abord la première fraction avec le partage de la seconde, puis retire.",
+    tags: ["ce2", "fraction", "soustraction", "denominateur_multiple", "template"],
+    generate: () => {
+      const { d, D } = randomChoice(PAIRES_MULTIPLES);
+      const k = D / d;
+      const n1 = randomInt(1, d);
+      const n2 = randomInt(1, n1 * k - 1);
+      const reste = n1 * k - n2;
+      return {
+        text: `Combien font ${n1}/${d} − ${n2}/${D} ?`,
+        format: "qcm",
+        choices: makeChoices(`${reste}/${D}`, [
+          `${n1 * k + n2}/${D}`,
+          `${reste + 1}/${D}`,
+          `${reste}/${d}`,
+          `${D}/${reste}`,
+        ]),
+        expected: [`${reste}/${D}`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On ne peut retirer des parts que si elles ont la même taille : il faut d'abord un partage commun.",
+          `${D} est ${k} fois ${d} : on recoupe chaque part de ${nomFraction(1, d)} en ${k}, ce qui donne des parts de ${nomFraction(1, D)}.`,
+          `${n1}/${d} = ${n1 * k}/${D}, donc ${n1}/${d} − ${n2}/${D} = ${n1 * k}/${D} − ${n2}/${D} = ${reste}/${D}.`,
+          `${n1}/${d} − ${n2}/${D} = ${reste}/${D}.`,
         ),
       };
     },
