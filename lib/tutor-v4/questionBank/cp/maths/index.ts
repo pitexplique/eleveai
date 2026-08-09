@@ -8,6 +8,8 @@ import { monnaieBank } from "./monnaie.bank";
 import { dureeBank } from "./duree.bank";
 import { longueurBank } from "./longueur.bank";
 import { masseBank } from "./masse.bank";
+import { reperageBank } from "./reperage.bank";
+import { figuresSolidesBank } from "./figures-solides.bank";
 
 // ⏳ LE CP SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 09/08/2026.
 //
@@ -39,6 +41,8 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...dureeBank,
   ...longueurBank,
   ...masseBank,
+  ...reperageBank,
+  ...figuresSolidesBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
