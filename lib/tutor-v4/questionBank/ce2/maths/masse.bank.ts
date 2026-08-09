@@ -410,13 +410,10 @@ export const masseBank: TutorBankItemV4[] = [
       "1 kg = 1000 g. Or 1000 g est plus lourd que 900 g. Le nombre 900 est plus grand que 1, mais il compte des grammes, pas des kilos.",
       "1 kg est plus lourd que 900 g.",
     ),
-    tags: ["ce2", "masse", "comparer", "piege", "qcm", "canvas"],
-    canvas: masseCanvas({
-      variant: "balance",
-      gauche: { label: "Paquet A", icon: "📦", masse: "1 kg", grammes: 1000 },
-      droite: { label: "Paquet B", icon: "📦", masse: "900 g", grammes: 900 },
-      display: { showMasses: true, showLabels: true, showComparison: true },
-    }),
+    // ⛔ Pas de canvas balance ici : le fléau penche tout seul selon `grammes`,
+    // et l'élève lirait la réponse sur le dessin sans jamais convertir. Le
+    // piège de cette question est justement de devoir passer par 1 kg = 1000 g.
+    tags: ["ce2", "masse", "comparer", "piege", "qcm"],
   },
   {
     kind: "fixed",
@@ -444,13 +441,8 @@ export const masseBank: TutorBankItemV4[] = [
       "1 kg = 1000 g : les deux paquets pèsent exactement la même chose. Deux écritures différentes, une seule masse.",
       "La balance reste en équilibre.",
     ),
-    tags: ["ce2", "masse", "comparer", "remarquable", "qcm", "canvas"],
-    canvas: masseCanvas({
-      variant: "balance",
-      gauche: { label: "Paquet A", icon: "📦", masse: "1 kg", grammes: 1000 },
-      droite: { label: "Paquet B", icon: "📦", masse: "1000 g", grammes: 1000 },
-      display: { showMasses: true, showLabels: true, showComparison: true },
-    }),
+    // ⛔ Idem : le canvas afficherait « même masse » en toutes lettres.
+    tags: ["ce2", "masse", "comparer", "remarquable", "qcm"],
   },
   {
     kind: "fixed",
@@ -490,7 +482,8 @@ export const masseBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Même unité d'abord, comparaison ensuite.",
-    tags: ["ce2", "masse", "comparer", "piege", "template", "canvas"],
+    // ⛔ Sans canvas, pour la même raison : la balance penche et vend la mèche.
+    tags: ["ce2", "masse", "comparer", "piege", "template"],
     generate: () => {
       // Le nombre en grammes est TOUJOURS plus grand que celui en kilogrammes :
       // c'est ce décalage qui fait tomber les élèves dans le piège.
@@ -514,12 +507,6 @@ export const masseBank: TutorBankItemV4[] = [
           `${kg} kg = ${enG} g. On compare alors ${enG} g et ${g} g : ${g > enG ? `${g} est plus grand que ${enG}` : `${enG} est plus grand que ${g}`}.`,
           `Le plus lourd est ${gagnant}.`,
         ),
-        canvas: masseCanvas({
-          variant: "balance",
-          gauche: { label: "Paquet A", icon: "📦", masse: `${kg} kg`, grammes: enG },
-          droite: { label: "Paquet B", icon: "📦", masse: `${g} g`, grammes: g },
-          display: { showMasses: true, showLabels: true, showComparison: true },
-        }),
       };
     },
   },
