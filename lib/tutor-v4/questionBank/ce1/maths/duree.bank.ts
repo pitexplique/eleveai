@@ -76,34 +76,6 @@ export const dureeBank: TutorBankItemV4[] = [
   ========================================================= */
   {
     kind: "fixed",
-    id: "ce1_duree_lire_fixed_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "duree",
-    microId: "ce1_duree_lire_heure_demi",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Sur une horloge, la grande aiguille est sur le 6 et la petite entre le 2 et le 3. Quelle heure est-il ?",
-    format: "qcm",
-    choices: ["2 h 30", "3 h 30", "6 h 30", "2 h 06"],
-    expected: ["2 h 30"],
-    comparator: "mcq_exact",
-    hint: "La petite aiguille n'a pas encore atteint le 3 : l'heure est encore celle d'avant.",
-    explanation: exp(
-      "La petite aiguille donne l'heure, la grande donne les minutes.",
-      "On lit d'abord le nombre que la petite aiguille a DÉPASSÉ, puis on regarde la grande.",
-      "La petite aiguille a dépassé le 2 sans atteindre le 3 : il est 2 heures passées. La grande sur le 6 marque la demie, c'est-à-dire 30 minutes.",
-      "Il est 2 h 30.",
-    ),
-    canvas: dureeCanvas({
-      variant: "horloge",
-      time: { hour: 2, minute: 30 },
-      display: { showNumbers: true, showMinuteTicks: true, showDigital: false },
-    }),
-    tags: ["ce1", "duree", "lire", "qcm", "canvas"],
-  },
-  {
-    kind: "fixed",
     id: "ce1_duree_lire_fixed_2",
     niveau: "ce1",
     matiere: "maths",
@@ -238,28 +210,6 @@ export const dureeBank: TutorBankItemV4[] = [
      La lecture à l'envers : on connaît l'heure, on cherche où
      pointent les aiguilles.
   ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce1_duree_positionner_fixed_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "duree",
-    microId: "ce1_duree_positionner_aiguilles",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Il est 5 h 30. Sur quel nombre pointe la grande aiguille ?",
-    format: "short",
-    expected: ["6"],
-    comparator: "number_equal",
-    hint: "La demie, c'est la moitié du tour de cadran.",
-    explanation: exp(
-      "La grande aiguille fait un tour complet en 60 minutes.",
-      "On cherche le nombre qui correspond aux minutes : 5 minutes par nombre.",
-      "30 minutes, c'est la moitié du tour. La moitié de 12 nombres, c'est 6 : la grande aiguille pointe sur le 6.",
-      "Elle pointe sur le 6.",
-    ),
-    tags: ["ce1", "duree", "positionner"],
-  },
   {
     kind: "fixed",
     id: "ce1_duree_positionner_fixed_2",

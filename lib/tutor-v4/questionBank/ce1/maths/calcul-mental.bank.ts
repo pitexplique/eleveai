@@ -127,28 +127,6 @@ export const calculMentalBank: TutorBankItemV4[] = [
      CE1_CALCUL_TABLES_MULTIPLICATION — dans les deux sens
   ========================================================= */
   {
-    kind: "fixed",
-    id: "ce1_calcul_tables_multiplication_fixed_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_tables_multiplication",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Quel nombre manque : 5 × … = 45 ?",
-    format: "short",
-    expected: ["9"],
-    comparator: "number_equal",
-    hint: "Récite la table de 5 jusqu'à 45.",
-    explanation: exp(
-      "Connaître une table dans les deux sens, c'est savoir retrouver le facteur qui manque.",
-      "On récite la table du nombre connu jusqu'à tomber sur le résultat.",
-      "5, 10, 15, 20, 25, 30, 35, 40, 45 : c'est le neuvième. Donc 5 × 9 = 45.",
-      "Il manque 9.",
-    ),
-    tags: ["ce1", "calcul_mental", "tables_multiplication"],
-  },
-  {
     kind: "template",
     id: "ce1_calcul_tables_multiplication_tpl_1",
     niveau: "ce1",
@@ -310,28 +288,6 @@ export const calculMentalBank: TutorBankItemV4[] = [
      réinvestie toute l'année, et l'appui du rendu de monnaie.
   ========================================================= */
   {
-    kind: "fixed",
-    id: "ce1_calcul_complements_fixed_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_complements_100",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Combien faut-il ajouter à 74 pour atteindre la dizaine supérieure ?",
-    format: "short",
-    expected: ["6"],
-    comparator: "number_equal",
-    hint: "La dizaine supérieure de 74, c'est 80.",
-    explanation: exp(
-      "La dizaine supérieure est la dizaine juste après le nombre.",
-      "On regarde le chiffre des unités et on cherche son complément à 10.",
-      "74, c'est 7 dizaines et 4 unités. Le complément de 4 à 10 est 6 : 74 + 6 = 80.",
-      "Il faut ajouter 6.",
-    ),
-    tags: ["ce1", "calcul_mental", "complements"],
-  },
-  {
     kind: "template",
     id: "ce1_calcul_complements_tpl_1",
     niveau: "ce1",
@@ -397,28 +353,6 @@ export const calculMentalBank: TutorBankItemV4[] = [
      ou des centaines entières
   ========================================================= */
   {
-    kind: "fixed",
-    id: "ce1_calcul_dizaines_fixed_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_dizaines_centaines",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Combien font 234 + 60 ?",
-    format: "short",
-    expected: ["294"],
-    comparator: "number_equal",
-    hint: "Ajoute 6 dizaines aux 3 dizaines de 234.",
-    explanation: exp(
-      "Ajouter un nombre entier de dizaines, c'est ajouter des dizaines aux dizaines.",
-      "On laisse les unités tranquilles et on ne touche qu'au chiffre des dizaines.",
-      "234, c'est 2 centaines, 3 dizaines et 4 unités. 3 dizaines plus 6 dizaines font 9 dizaines : 294.",
-      "234 + 60 = 294.",
-    ),
-    tags: ["ce1", "calcul_mental", "dizaines"],
-  },
-  {
     kind: "template",
     id: "ce1_calcul_dizaines_tpl_1",
     niveau: "ce1",
@@ -459,28 +393,6 @@ export const calculMentalBank: TutorBankItemV4[] = [
      Le programme l'explique par la numération, pas par « on
      ajoute un zéro » : chaque unité devient une dizaine.
   ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce1_calcul_multiplier_10_fixed_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "calcul_mental",
-    microId: "ce1_calcul_multiplier_10",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Combien font 10 × 72 ?",
-    format: "short",
-    expected: ["720"],
-    comparator: "number_equal",
-    hint: "Les unités deviennent des dizaines, les dizaines des centaines.",
-    explanation: exp(
-      "Multiplier par 10 donne à chaque chiffre une valeur dix fois plus grande.",
-      "Le chiffre des unités passe aux dizaines, celui des dizaines passe aux centaines.",
-      "Dans 72, le 7 des dizaines devient 7 centaines et le 2 des unités devient 2 dizaines : cela donne 720, avec un 0 aux unités.",
-      "10 × 72 = 720.",
-    ),
-    tags: ["ce1", "calcul_mental", "multiplier_10"],
-  },
   {
     kind: "template",
     id: "ce1_calcul_multiplier_10_tpl_1",

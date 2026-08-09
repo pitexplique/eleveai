@@ -115,28 +115,6 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
     tags: ["ce1", "nombre_entier", "denombrer", "methode", "qcm"],
   },
   {
-    kind: "fixed",
-    id: "ce1_entier_denombrer_fixed_2",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce1_entier_denombrer",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Une collection est faite de 2 plaques de cent cubes, 3 barres de dix cubes et 4 cubes isolés. Combien y a-t-il de cubes ?",
-    format: "short",
-    expected: ["234"],
-    comparator: "number_equal",
-    hint: "Une plaque vaut 100, une barre vaut 10.",
-    explanation: exp(
-      "Chaque groupe a sa valeur : la plaque vaut cent, la barre vaut dix, le cube vaut un.",
-      "On compte les plaques, puis les barres, puis les cubes isolés.",
-      "2 plaques font 200, 3 barres font 30, et il reste 4 cubes. 200 + 30 + 4 = 234.",
-      "Il y a 234 cubes.",
-    ),
-    tags: ["ce1", "nombre_entier", "denombrer"],
-  },
-  {
     kind: "template",
     id: "ce1_entier_denombrer_tpl_1",
     niveau: "ce1",
@@ -460,29 +438,6 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
   ========================================================= */
   {
     kind: "fixed",
-    id: "ce1_entier_position_fixed_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce1_entier_valeur_position",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Dans le nombre 462, que vaut le chiffre 4 ?",
-    format: "qcm",
-    choices: ["4 centaines, donc 400", "4 unités", "4 dizaines, donc 40", "4 milliers"],
-    expected: ["4 centaines, donc 400"],
-    comparator: "mcq_exact",
-    hint: "Regarde à quelle place il est écrit, en partant de la droite.",
-    explanation: exp(
-      "La valeur d'un chiffre dépend de sa place dans le nombre.",
-      "On repère les rangs en partant de la droite : unités, dizaines, centaines.",
-      "Dans 462, le 2 est aux unités, le 6 aux dizaines, le 4 aux centaines. Le 4 vaut donc 400.",
-      "Le chiffre 4 vaut 4 centaines, c'est-à-dire 400.",
-    ),
-    tags: ["ce1", "nombre_entier", "position", "qcm"],
-  },
-  {
-    kind: "fixed",
     id: "ce1_entier_position_fixed_2",
     niveau: "ce1",
     matiere: "maths",
@@ -681,34 +636,6 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
      CE1_ENTIER_DECOMPOSER — la décomposition additive
   ========================================================= */
   {
-    kind: "fixed",
-    id: "ce1_entier_decomposer_fixed_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce1_entier_decomposer",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Quelle est la décomposition du nombre 574 ?",
-    format: "qcm",
-    choices: [
-      "500 + 70 + 4",
-      "5 + 7 + 4",
-      "50 + 70 + 4",
-      "500 + 7 + 40",
-    ],
-    expected: ["500 + 70 + 4"],
-    comparator: "mcq_exact",
-    hint: "Chaque chiffre garde la valeur de sa place.",
-    explanation: exp(
-      "Décomposer un nombre, c'est l'écrire comme une somme où chaque chiffre garde la valeur de son rang.",
-      "On écrit d'abord les centaines, puis les dizaines, puis les unités.",
-      "Dans 574 : le 5 vaut 500, le 7 vaut 70, le 4 vaut 4. Cela donne 500 + 70 + 4.",
-      "C'est 500 + 70 + 4.",
-    ),
-    tags: ["ce1", "nombre_entier", "decomposer", "qcm"],
-  },
-  {
     kind: "template",
     id: "ce1_entier_decomposer_tpl_1",
     niveau: "ce1",
@@ -782,29 +709,6 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
      grand, mais à nombre de chiffres égal, c'est le rang le
      plus à gauche qui décide.
   ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce1_entier_comparer_fixed_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce1_entier_comparer",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Quel signe faut-il placer entre 49 et 53 ?",
-    format: "qcm",
-    choices: ["<", ">", "=", "aucun des trois"],
-    expected: ["<"],
-    comparator: "mcq_exact",
-    hint: "La pointe du signe montre toujours le plus petit nombre.",
-    explanation: exp(
-      "Le signe < se lit « est inférieur à », le signe > se lit « est supérieur à ».",
-      "On compare d'abord les dizaines : 4 dizaines contre 5 dizaines.",
-      "49 a 4 dizaines, 53 en a 5 : 49 est plus petit. On écrit 49 < 53, la pointe tournée vers le plus petit.",
-      "Il faut placer le signe <.",
-    ),
-    tags: ["ce1", "nombre_entier", "comparer", "qcm"],
-  },
   {
     kind: "fixed",
     id: "ce1_entier_comparer_fixed_2",
@@ -971,34 +875,6 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
      CE1_ENTIER_ENCADRER — encadrer et intercaler
   ========================================================= */
   {
-    kind: "fixed",
-    id: "ce1_entier_encadrer_fixed_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce1_entier_encadrer",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Entre quelles dizaines se trouve le nombre 347 ?",
-    format: "qcm",
-    choices: [
-      "entre 340 et 350",
-      "entre 300 et 400",
-      "entre 346 et 348",
-      "entre 30 et 40",
-    ],
-    expected: ["entre 340 et 350"],
-    comparator: "mcq_exact",
-    hint: "Une dizaine se termine toujours par un zéro.",
-    explanation: exp(
-      "Encadrer un nombre par des dizaines, c'est trouver la dizaine juste avant et la dizaine juste après.",
-      "On garde le chiffre des dizaines, puis on prend la dizaine suivante.",
-      "347 a 34 dizaines et 7 unités. La dizaine juste avant est 340, la suivante est 350 : 340 < 347 < 350.",
-      "347 est entre 340 et 350.",
-    ),
-    tags: ["ce1", "nombre_entier", "encadrer", "qcm"],
-  },
-  {
     kind: "template",
     id: "ce1_entier_encadrer_tpl_1",
     niveau: "ce1",
@@ -1140,28 +1016,6 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
      Le programme fait le lien avec la règle graduée : la
      distance à l'origine, c'est le nombre.
   ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce1_entier_droite_fixed_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce1_entier_droite",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Sur une demi-droite graduée de dix en dix, quel nombre se trouve juste après 240 ?",
-    format: "short",
-    expected: ["250"],
-    comparator: "number_equal",
-    hint: "Chaque graduation avance de dix.",
-    explanation: exp(
-      "Sur une demi-droite graduée, on avance toujours du même pas d'une graduation à l'autre.",
-      "On repère le pas, puis on l'ajoute au nombre écrit.",
-      "Le pas est de dix : 240 + 10 = 250.",
-      "C'est 250.",
-    ),
-    tags: ["ce1", "nombre_entier", "droite"],
-  },
   {
     kind: "template",
     id: "ce1_entier_droite_tpl_1",
@@ -1339,28 +1193,6 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
   /* =========================================================
      CE1_ORDINAL_RANG_FILE — repérer un rang dans une file
   ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce1_ordinal_file_fixed_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "nombre_entier",
-    microId: "ce1_ordinal_rang_file",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Voici une liste de nombres : 2, 6, 10, 14, 18. Quel est le quatrième nombre ?",
-    format: "short",
-    expected: ["14"],
-    comparator: "number_equal",
-    hint: "Compte les nombres un par un depuis le début.",
-    explanation: exp(
-      "Le rang d'un nombre dit sa place dans la liste, pas sa valeur.",
-      "On compte les nombres depuis le début, en pointant chacun.",
-      "Premier : 2. Deuxième : 6. Troisième : 10. Quatrième : 14.",
-      "Le quatrième nombre est 14.",
-    ),
-    tags: ["ce1", "nombre_entier", "ordinaux", "file"],
-  },
   {
     kind: "template",
     id: "ce1_ordinal_file_tpl_1",

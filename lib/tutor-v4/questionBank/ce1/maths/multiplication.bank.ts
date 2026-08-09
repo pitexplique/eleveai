@@ -582,28 +582,6 @@ export const multiplicationBank: TutorBankItemV4[] = [
      CE1_MULTIPLICATION_CALCULER — calculer un produit
   ========================================================= */
   {
-    kind: "fixed",
-    id: "ce1_multiplication_calculer_fixed_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "multiplication",
-    microId: "ce1_multiplication_calculer",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Combien font 6 × 5 ?",
-    format: "short",
-    expected: ["30"],
-    comparator: "number_equal",
-    hint: "Compte de 5 en 5, six fois.",
-    explanation: exp(
-      "Un produit se calcule en répétant l'un des deux nombres autant de fois que l'autre l'indique.",
-      "On choisit la table la plus facile des deux : ici celle de 5.",
-      "5, 10, 15, 20, 25, 30 : six sauts de cinq. Donc 6 × 5 = 30.",
-      "6 × 5 = 30.",
-    ),
-    tags: ["ce1", "multiplication", "calculer"],
-  },
-  {
     kind: "template",
     id: "ce1_multiplication_calculer_tpl_1",
     niveau: "ce1",

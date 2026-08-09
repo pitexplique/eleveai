@@ -352,28 +352,6 @@ export const monnaieBank: TutorBankItemV4[] = [
   ========================================================= */
   {
     kind: "fixed",
-    id: "ce1_monnaie_valeur_fixed_1",
-    niveau: "ce1",
-    matiere: "maths",
-    notionId: "monnaie",
-    microId: "ce1_monnaie_valeur_ensemble",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Dans ma poche : un billet de 10 €, une pièce de 2 € et une pièce de 1 €. Combien ai-je en tout ?",
-    format: "short",
-    expected: ["13"],
-    comparator: "number_equal",
-    hint: "Additionne les valeurs, pas le nombre de pièces.",
-    explanation: exp(
-      "La valeur d'un ensemble, c'est la somme des valeurs écrites sur chaque pièce et chaque billet.",
-      "On commence par le plus grand, puis on ajoute les autres.",
-      "10 + 2 + 1 = 13. J'ai trois choses dans la poche, mais elles valent 13 €.",
-      "J'ai 13 €.",
-    ),
-    tags: ["ce1", "monnaie", "valeur"],
-  },
-  {
-    kind: "fixed",
     id: "ce1_monnaie_valeur_fixed_2",
     niveau: "ce1",
     matiere: "maths",
