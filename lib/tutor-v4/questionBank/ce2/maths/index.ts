@@ -12,6 +12,7 @@ import { masseBank } from "./masse.bank";
 import { contenanceBank } from "./contenance.bank";
 import { monnaieBank } from "./monnaie.bank";
 import { dureeBank } from "./duree.bank";
+import { multiplicationBank } from "./multiplication.bank";
 
 // Le CE2 quitte le constructeur commun, une notion à la fois.
 //
@@ -36,6 +37,7 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...contenanceBank,
   ...monnaieBank,
   ...dureeBank,
+  ...multiplicationBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
