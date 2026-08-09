@@ -363,6 +363,35 @@ export const masseBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    kind: "fixed",
+    id: "cp_masse_estimer_fixed_2",
+    niveau: "cp",
+    matiere: "maths",
+    notionId: "masse_contenance",
+    microId: "cp_masse_contenance_estimer",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Avec une balance à deux plateaux, comment ranger trois objets du plus léger au plus lourd ?",
+    format: "qcm",
+    choices: [
+      "en les comparant deux par deux",
+      "en les posant tous les trois sur le même plateau",
+      "en les regardant attentivement",
+      "en les mesurant avec une règle",
+    ],
+    expected: ["en les comparant deux par deux"],
+    comparator: "mcq_exact",
+    hint: "La balance n'a que deux plateaux : elle ne peut comparer que deux objets à la fois.",
+    explanation: exp(
+      "Une balance à deux plateaux compare deux masses, et deux seulement.",
+      "On pèse une première paire, puis une seconde, et on range les résultats à la suite.",
+      "On compare le premier et le deuxième, puis le deuxième et le troisième. Si le premier est plus léger que le deuxième, et le deuxième plus léger que le troisième, alors l'ordre est trouvé sans même les avoir tous posés ensemble.",
+      "On les compare deux par deux.",
+    ),
+    tags: ["cp", "masse", "ranger", "methode", "qcm"],
+  },
+
   /* =========================================================
      CP_MASSE_CONTENANCE_DEFI — ce qui ne se devine pas
   ========================================================= */

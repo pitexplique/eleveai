@@ -507,6 +507,29 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    kind: "fixed",
+    id: "cp_sous_calculer_fixed_1",
+    niveau: "cp",
+    matiere: "maths",
+    notionId: "addition_soustraction",
+    microId: "cp_sous_calculer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Calcule : 38 - 12",
+    format: "short",
+    expected: ["26"],
+    comparator: "number_equal",
+    hint: "Retire les dizaines, puis les unités.",
+    explanation: exp(
+      "Pour soustraire un nombre à deux chiffres, on peut le décomposer.",
+      "On retire d'abord les dizaines, puis les unités.",
+      "12, c'est 10 et 2. On enlève d'abord 10 : 38 - 10 = 28. Puis on enlève 2 : 28 - 2 = 26.",
+      "38 - 12 = 26.",
+    ),
+    tags: ["cp", "addition_soustraction", "calculer"],
+  },
+
   /* =========================================================
      CP_ADD_SOUS_LIGNE — l'égalité à trou
      Là où le malentendu sur le « = » se voit tout de suite.

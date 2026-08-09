@@ -150,6 +150,70 @@ export const problemeBank: TutorBankItemV4[] = [
     tags: ["cp", "probleme", "identifier", "piege", "qcm"],
   },
 
+  {
+    kind: "template",
+    id: "cp_probleme_identifier_tpl_1",
+    niveau: "cp",
+    matiere: "maths",
+    notionId: "probleme",
+    microId: "cp_probleme_identifier",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Relis la question : que demande-t-elle exactement ?",
+    tags: ["cp", "probleme", "identifier", "template"],
+    generate: () => {
+      const debut = randomInt(15, 45);
+      const change = randomInt(4, 12);
+      // Prénoms féminins seulement : les questions disent « a-t-elle ».
+      const qui = randomChoice(["Malia", "Naïla", "Léa", "Anna"]);
+      const cas = randomChoice([
+        {
+          histoire: `${qui} avait ${debut} images. ${qui} en gagne ${change}.`,
+          question: "Combien en a-t-elle maintenant ?",
+          cherche: "le nombre d'images à la fin",
+          pieges: [
+            "le nombre d'images gagnées",
+            "le nombre d'images du début",
+            "le nombre d'images perdues",
+          ],
+        },
+        {
+          histoire: `${qui} avait ${debut} billes. ${qui} en perd ${change}.`,
+          question: "Combien lui en reste-t-il ?",
+          cherche: "le nombre de billes qui restent",
+          pieges: [
+            "le nombre de billes perdues",
+            "le nombre de billes du début",
+            "le nombre de billes gagnées",
+          ],
+        },
+        {
+          histoire: `${qui} avait ${debut} bonbons. Il ne lui en reste que ${debut - change}.`,
+          question: "Combien en a-t-elle mangé ?",
+          cherche: "le nombre de bonbons mangés",
+          pieges: [
+            "le nombre de bonbons qui restent",
+            "le nombre de bonbons du début",
+            "le nombre de bonbons achetés",
+          ],
+        },
+      ]);
+      return {
+        text: `« ${cas.histoire} ${cas.question} » Que cherche-t-on ?`,
+        format: "qcm",
+        choices: makeChoices(cas.cherche, cas.pieges),
+        expected: [cas.cherche],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Comprendre un problème, c'est savoir dire ce que l'on cherche avant de calculer.",
+          "On relit la question seule, sans l'histoire, et on la redit avec ses propres mots.",
+          `L'histoire donne deux nombres, mais la question ne porte que sur une chose : ${cas.cherche}. Les autres nombres sont déjà connus, ou ne sont pas demandés.`,
+          `On cherche ${cas.cherche}.`,
+        ),
+      };
+    },
+  },
+
   /* =========================================================
      CP_PROBLEME_ADDITIF — parties-tout en une étape
   ========================================================= */

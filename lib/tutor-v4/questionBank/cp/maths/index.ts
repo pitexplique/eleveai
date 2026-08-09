@@ -13,8 +13,11 @@ import { figuresSolidesBank } from "./figures-solides.bank";
 import { additionSoustractionBank } from "./addition-soustraction.bank";
 import { calculMentalBank } from "./calcul-mental.bank";
 import { problemeBank } from "./probleme.bank";
+import { suiteNombreBank } from "./suite-nombre.bank";
+import { donneesBank } from "./donnees.bank";
+import { algorithmiqueBank } from "./algorithmique.bank";
 
-// ⏳ LE CP SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 09/08/2026.
+// ✅ LE CP A QUITTÉ LE CONSTRUCTEUR COMMUN — 09/08/2026.
 //
 // `buildCycle2QuestionBank` aiguille sur la NOTION, jamais sur la
 // micro-compétence. Mesuré ce jour-là en le faisant tourner sur le CP : les 62
@@ -30,14 +33,14 @@ import { problemeBank } from "./probleme.bank";
 // avec, parmi les propositions, le kilomètre et le litre — qui ne sont ni
 // l'un ni l'autre au programme du CP.
 //
-// Le mécanisme est celui du CE2. Chaque banque écrite à la main fait reculer
-// le repli micro par micro : ce que `BANQUES_ECRITES` couvre est retiré de ce
-// que le constructeur fabrique. On n'arrache rien d'avance — mieux vaut une
-// question approximative que pas de question du tout.
+// Les 89 micro-compétences ont maintenant leur banque écrite à la main, dans
+// 13 fichiers. `REPLI` est donc VIDE : le constructeur n'est plus appelé que
+// pour être filtré à zéro. On le garde branché — il ne coute rien et il
+// rattraperait une micro-compétence ajoutée au programme sans sa banque.
 //
-// Pour ajouter une notion : écrire son fichier `<notion>.bank.ts`, l'importer,
-// l'ajouter à BANQUES_ECRITES. Le repli s'efface tout seul pour ce qu'elle
-// couvre.
+// Si une notion s'ajoute un jour : écrire son fichier `<notion>.bank.ts`,
+// l'importer, l'ajouter à BANQUES_ECRITES. Le repli s'efface tout seul pour ce
+// qu'elle couvre.
 const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...nombresEntiersBank,
   ...monnaieBank,
@@ -49,6 +52,9 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...additionSoustractionBank,
   ...calculMentalBank,
   ...problemeBank,
+  ...suiteNombreBank,
+  ...donneesBank,
+  ...algorithmiqueBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
