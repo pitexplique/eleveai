@@ -3,6 +3,8 @@ import { microSkills } from "@/lib/tutor-v4/knowledge/maths/ce1/microSkills";
 import { buildCycle2QuestionBank } from "@/lib/tutor-v4/questionBank/cycle2/maths/buildCycle2Bank";
 import { applyMathsKeyboardFree } from "../../mathsKeyboardFreeTransform";
 
+import { longueurBank } from "./longueur.bank";
+
 // ⏳ LE CE1 SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 09/08/2026.
 //
 // `buildCycle2QuestionBank` aiguille sur la NOTION, jamais sur la
@@ -24,7 +26,9 @@ import { applyMathsKeyboardFree } from "../../mathsKeyboardFreeTransform";
 // Pour ajouter une notion : écrire son fichier `<notion>.bank.ts`, l'importer,
 // l'ajouter à BANQUES_ECRITES. Le repli s'efface tout seul pour ce qu'elle
 // couvre.
-const BANQUES_ECRITES: TutorBankItemV4[] = [];
+const BANQUES_ECRITES: TutorBankItemV4[] = [
+  ...longueurBank,
+];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
 
