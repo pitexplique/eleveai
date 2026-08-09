@@ -787,22 +787,23 @@ export const masseBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     hint: "Compare à un objet que tu as déjà soulevé.",
-    tags: ["ce2", "masse", "estimer", "template"],
+    tags: ["ce2", "masse", "estimer", "template", "canvas"],
     generate: () => {
       const refs = [
-        { objet: "une brique de lait", bonne: "1 kg", pourquoi: "on la soulève d'une main, sans effort" },
-        { objet: "une gomme", bonne: "15 g", pourquoi: "on la sent à peine dans la trousse" },
-        { objet: "un cartable plein", bonne: "3 kg", pourquoi: "on le porte sur le dos toute la journée" },
-        { objet: "une voiture", bonne: "1 t", pourquoi: "il faut une grue pour la soulever" },
-        { objet: "un œuf", bonne: "60 g", pourquoi: "il tient dans le creux de la main" },
-        { objet: "un sac de riz de la cuisine", bonne: "5 kg", pourquoi: "on le porte à deux mains" },
+        { objet: "une brique de lait", icon: "🥛", bonne: "1 kg", pourquoi: "on la soulève d'une main, sans effort" },
+        { objet: "une gomme", icon: "🧽", bonne: "15 g", pourquoi: "on la sent à peine dans la trousse" },
+        { objet: "un cartable plein", icon: "🎒", bonne: "3 kg", pourquoi: "on le porte sur le dos toute la journée" },
+        { objet: "une voiture", icon: "🚗", bonne: "1 t", pourquoi: "il faut une grue pour la soulever" },
+        { objet: "un œuf", icon: "🥚", bonne: "60 g", pourquoi: "il tient dans le creux de la main" },
+        { objet: "un sac de riz de la cuisine", icon: "🍚", bonne: "5 kg", pourquoi: "on le porte à deux mains" },
       ] as const;
       const r = randomChoice(refs);
       const autres = refs.filter((x) => x.bonne !== r.bonne).map((x) => x.bonne);
+      const choices = makeChoices(r.bonne, autres);
       return {
         text: `Environ combien pèse ${r.objet} ?`,
         format: "qcm",
-        choices: makeChoices(r.bonne, autres),
+        choices,
         expected: [r.bonne],
         comparator: "mcq_exact",
         explanation: exp(
@@ -811,6 +812,14 @@ export const masseBank: TutorBankItemV4[] = [
           `Pour ${r.objet}, le repère est simple : ${r.pourquoi}. Cela donne ${r.bonne}.`,
           `${r.objet} pèse environ ${r.bonne}.`,
         ),
+        // Variante « estimation » : le canvas force showMasses à false, l'objet
+        // est donc montré SANS son étiquette de masse. Rien n'est vendu.
+        canvas: masseCanvas({
+          variant: "estimation",
+          objet: { label: r.objet, icon: r.icon },
+          choix: choices,
+          display: { showLabels: true },
+        }),
       };
     },
   },
