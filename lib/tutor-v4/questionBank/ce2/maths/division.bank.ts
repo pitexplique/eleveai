@@ -3,10 +3,18 @@
 // Les partages et groupements du CE2, écrits à la main. Cinq micro-compétences
 // qui passaient par le constructeur commun.
 //
-// PÉRIMÈTRE BO (n° 41 du 31 octobre 2024, cycle 2) : la division comme PARTAGE
-// ou comme GROUPEMENT, le lien avec la multiplication, et l'interprétation du
-// reste. ⛔ Pas de division posée au cycle 2 : la technique opératoire arrive au
-// CM1. On cherche le quotient en s'appuyant sur les tables.
+// PÉRIMÈTRE BO (n° 41 du 31 octobre 2024, applicable à la rentrée 2025,
+// cycle 2) : la division comme PARTAGE ou comme GROUPEMENT, le lien avec la
+// multiplication, et l'interprétation du reste. ⛔ Pas de division posée au
+// cycle 2 : la technique opératoire arrive au CM1. On cherche le quotient en
+// s'appuyant sur les tables.
+//
+// ⚠️ LE SYMBOLE ÷ FAIT PARTIE DE L'ATTENDU, l'intitulé le dit : « Comprendre le
+// sens de la division et UTILISER LE SYMBOLE "÷" ». Il ne vivait ici que dans
+// les explications ; les énoncés, eux, parlaient toujours de partage en mots.
+// Un élève qui n'a jamais lu « 24 ÷ 4 » dans une question ne le reconnaîtra pas
+// le jour d'une évaluation. Le texte donne même son exemple : « On a
+// 7 × 13 = 91, donc 91 ÷ 7 = 13 et 91 ÷ 13 = 7. »
 //
 // LE PIÈGE DE LA NOTION : le reste qu'on jette. 26 élèves, des cars de
 // 8 places : 26 = 3 × 8 + 2, et l'élève répond 3 cars. Les deux derniers
@@ -219,6 +227,130 @@ export const divisionBank: TutorBankItemV4[] = [
             ? `« Des boîtes de ${chacun} » dit ce que contient chaque boîte. On cherche donc leur nombre : ${chacun} × ${parts} = ${total}, soit ${parts} boîtes.`
             : `« Entre ${parts} enfants » dit le nombre de parts. On cherche donc ce que reçoit chacun : ${parts} × ${chacun} = ${total}, soit ${chacun} bonbons.`,
           `On cherche ${bonne}.`,
+        ),
+      };
+    },
+  },
+
+  // --- Le symbole ÷ -----------------------------------------
+  // Jusqu'ici la banque disait « on partage 24 en 4 parts ».
+  // Elle ne l'écrivait jamais 24 ÷ 4. Un signe qu'on n'a jamais
+  // lu dans une question est un signe qu'on ne reconnaît pas.
+  {
+    kind: "fixed",
+    id: "ce2_division_sens_fixed_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "division",
+    microId: "ce2_division_sens",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Comment lit-on le signe ÷ dans le calcul 24 ÷ 4 ?",
+    format: "qcm",
+    choices: [
+      "24 divisé par 4",
+      "24 fois 4",
+      "24 moins 4",
+      "24 plus 4",
+    ],
+    expected: ["24 divisé par 4"],
+    comparator: "mcq_exact",
+    hint: "C'est le signe du partage.",
+    explanation: exp(
+      "Le signe ÷ se lit « divisé par ». Il note le partage ou le groupement.",
+      "On lit le nombre de gauche, puis « divisé par », puis le nombre de droite.",
+      "24 ÷ 4 se lit « 24 divisé par 4 ». Cela veut dire : on partage 24 en 4 parts égales, ou bien on cherche combien de fois 4 tient dans 24. Dans les deux cas, la réponse est 6.",
+      "On lit « 24 divisé par 4 ».",
+    ),
+    tags: ["ce2", "division", "symbole", "vocabulaire", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_division_sens_fixed_5",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "division",
+    microId: "ce2_division_sens",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Que veut dire 30 ÷ 5 ?",
+    format: "qcm",
+    choices: [
+      "on partage 30 en 5 parts égales",
+      "on ajoute 5 à 30",
+      "on enlève 5 à 30",
+      "on multiplie 30 par 5",
+    ],
+    expected: ["on partage 30 en 5 parts égales"],
+    comparator: "mcq_exact",
+    hint: "Le signe ÷ partage, il n'ajoute rien et n'enlève rien.",
+    explanation: exp(
+      "Écrire a ÷ b, c'est partager a en b parts égales — ou chercher combien de fois b tient dans a.",
+      "On traduit le signe en histoire avant de calculer.",
+      "30 ÷ 5, c'est 30 partagé en 5 parts égales : chaque part vaut 6. On peut aussi le lire « combien de fois 5 tient-il dans 30 ? » : six fois. Les deux lectures donnent 6.",
+      "30 ÷ 5, c'est partager 30 en 5 parts égales, et cela fait 6.",
+    ),
+    tags: ["ce2", "division", "symbole", "sens", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_division_sens_fixed_6",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "division",
+    microId: "ce2_division_sens",
+    difficulty: 4,
+    theme: "neutral",
+    text: "On sait que 7 × 13 = 91. Combien font 91 ÷ 7 ?",
+    format: "qcm",
+    choices: ["13", "7", "98", "91"],
+    expected: ["13"],
+    comparator: "mcq_exact",
+    hint: "La multiplication est déjà écrite. Lis-la à l'envers.",
+    explanation: exp(
+      "La division est l'opération inverse de la multiplication : elle défait ce que la multiplication a fait.",
+      "On repart de la multiplication connue et on cherche le facteur qui manque.",
+      "7 × 13 = 91, donc 91 ÷ 7 = 13. Et dans l'autre sens, 91 ÷ 13 = 7. Une seule multiplication apprise donne deux divisions.",
+      "91 ÷ 7 = 13.",
+    ),
+    tags: ["ce2", "division", "symbole", "lien_multiplication", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "ce2_division_sens_tpl_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "division",
+    microId: "ce2_division_sens",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche dans la table : combien de fois le second nombre tient-il dans le premier ?",
+    tags: ["ce2", "division", "symbole", "template"],
+    generate: () => {
+      const diviseur = randomInt(2, 9);
+      const quotient = randomInt(2, 9);
+      const total = diviseur * quotient;
+      return {
+        text: `Combien font ${total} ÷ ${diviseur} ?`,
+        format: "qcm",
+        // Deux pièges se recoupent quand le diviseur vaut 2 (4 ÷ 2 : « total
+        // moins diviseur » et « diviseur » donnent tous deux 2). On garde donc
+        // quatre pièges qui ne PEUVENT pas coïncider, plus ces deux-là.
+        choices: makeChoices(String(quotient), [
+          String(total + diviseur),
+          String(quotient + 1),
+          String(quotient + 2),
+          String(total),
+          String(total - diviseur),
+          String(diviseur),
+        ]),
+        expected: [String(quotient)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le signe ÷ se lit « divisé par » : on partage, ou on cherche combien de fois le second nombre tient dans le premier.",
+          "On s'appuie sur la table de multiplication : quel nombre, multiplié par le diviseur, donne le total ?",
+          `${diviseur} × ${quotient} = ${total}, donc ${total} ÷ ${diviseur} = ${quotient}.`,
+          `${total} ÷ ${diviseur} = ${quotient}.`,
         ),
       };
     },

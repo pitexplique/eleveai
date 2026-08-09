@@ -45,6 +45,9 @@ export const microSkills: MicroSkillSource[] = [
 
   { id: "ce2_addition_posee", label: "Poser une addition avec retenues", notionId: "addition_soustraction", prerequis: ["ce2_entier_decomposer"] },
   { id: "ce2_soustraction_posee", label: "Poser une soustraction avec retenues", notionId: "addition_soustraction", prerequis: ["ce2_entier_decomposer"] },
+  // Attendu du BO, sous-domaine « Les quatre opérations » : « Comprendre et
+  // utiliser les mots "terme", "somme" et "différence". » Il n'était nulle part.
+  { id: "ce2_add_sous_vocabulaire", label: "Comprendre et utiliser les mots terme, somme et différence", notionId: "addition_soustraction", prerequis: ["ce2_addition_posee", "ce2_soustraction_posee"] },
   { id: "ce2_add_sous_complement", label: "Compléter une égalité additive", notionId: "addition_soustraction", prerequis: ["ce2_addition_posee", "ce2_soustraction_posee"] },
   { id: "ce2_add_sous_estimer", label: "Contrôler un résultat par estimation", notionId: "addition_soustraction", prerequis: ["ce2_entier_encadrer"] },
   { id: "ce2_add_sous_defi", label: "Résoudre un défi addition-soustraction", notionId: "addition_soustraction", prerequis: ["ce2_add_sous_complement"] },
@@ -56,6 +59,9 @@ export const microSkills: MicroSkillSource[] = [
   { id: "ce2_tables_2_3_4_5_10", label: "Connaître les tables de 2, 3, 4, 5 et 10", notionId: "multiplication", prerequis: ["ce2_addition_posee"] },
   { id: "ce2_tables_6_7_8_9", label: "Connaître les tables de 6, 7, 8 et 9", notionId: "multiplication", prerequis: ["ce2_tables_2_3_4_5_10"] },
   { id: "ce2_multiplication_sens", label: "Relier multiplication, groupes égaux et tableau", notionId: "multiplication", prerequis: ["ce2_tables_2_3_4_5_10"] },
+  // Attendu du BO : « Comprendre et utiliser les mots "facteur", "produit" et
+  // "multiple". » Absent lui aussi.
+  { id: "ce2_multiplication_vocabulaire", label: "Comprendre et utiliser les mots facteur, produit et multiple", notionId: "multiplication", prerequis: ["ce2_multiplication_sens"] },
   // Intitulé du BO : « Poser et effectuer des multiplications d'un nombre à
   // deux ou trois chiffres par un nombre à UN OU DEUX chiffres. » Le label
   // s'arrêtait à un chiffre, il laissait tomber la moitié de l'attendu.
@@ -69,7 +75,9 @@ export const microSkills: MicroSkillSource[] = [
   // le lien avec la multiplication et l'interprétation du reste.
   // ============================================================
 
-  { id: "ce2_division_sens", label: "Comprendre la division comme partage ou groupement", notionId: "division", prerequis: ["ce2_multiplication_sens"] },
+  // Le BO écrit : « Comprendre le sens de la division et utiliser le symbole
+  // "÷". » Le symbole fait partie de l'attendu, pas seulement le sens.
+  { id: "ce2_division_sens", label: "Comprendre le sens de la division et utiliser le symbole ÷", notionId: "division", prerequis: ["ce2_multiplication_sens"] },
   { id: "ce2_division_lien_multiplication", label: "Utiliser le lien entre multiplication et division", notionId: "division", prerequis: ["ce2_tables_6_7_8_9"] },
   { id: "ce2_division_reste", label: "Interpréter le reste d'une division", notionId: "division", prerequis: ["ce2_division_sens"] },
   { id: "ce2_division_probleme", label: "Utiliser la division dans un problème", notionId: "division", prerequis: ["ce2_division_lien_multiplication"] },

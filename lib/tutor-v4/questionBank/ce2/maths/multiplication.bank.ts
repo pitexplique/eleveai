@@ -836,6 +836,188 @@ export const multiplicationBank: TutorBankItemV4[] = [
   },
 
   /* =========================================================
+     CE2_MULTIPLICATION_VOCABULAIRE — facteur, produit, multiple
+     Attendu du BO resté sans question. Les trois mots sont dans
+     le texte, avec ses phrases : « Le produit de 3 et de 25 est
+     75 », « 3 et 25 sont les facteurs de la multiplication
+     3 × 25 », « 75 est un multiple de 25 ».
+     LE PIÈGE : « multiple » n'est pas « multiplication ». 12 est
+     un multiple de 3 parce qu'il est dans la table de 3 — ce
+     n'est pas une opération, c'est ce qu'un nombre EST.
+     Son cousin : donner le calcul au lieu du résultat. Le
+     produit de 6 et de 7, c'est 42, pas « 6 × 7 ».
+  ========================================================= */
+  {
+    kind: "fixed",
+    id: "ce2_multiplication_vocabulaire_fixed_1",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_vocabulaire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quel est le produit de 6 et de 7 ?",
+    format: "qcm",
+    choices: ["42", "6 × 7", "13", "67"],
+    expected: ["42"],
+    comparator: "mcq_exact",
+    hint: "On te demande ce que donne la multiplication, pas comment elle s'écrit.",
+    explanation: exp(
+      "Le produit de deux nombres est le RÉSULTAT de leur multiplication.",
+      "On multiplie les deux nombres et on donne le nombre trouvé.",
+      "6 × 7 = 42. Écrire « 6 × 7 », c'est écrire le calcul, pas la réponse. Et 13, c'est la somme, pas le produit.",
+      "Le produit de 6 et de 7 est 42.",
+    ),
+    tags: ["ce2", "multiplication", "vocabulaire", "produit", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_multiplication_vocabulaire_fixed_2",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_vocabulaire",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Dans la multiplication 3 × 25, comment appelle-t-on 3 et 25 ?",
+    format: "qcm",
+    choices: ["les facteurs", "les termes", "les produits", "les multiples"],
+    expected: ["les facteurs"],
+    comparator: "mcq_exact",
+    hint: "Le mot « terme » est réservé à l'addition et à la soustraction.",
+    explanation: exp(
+      "Les nombres qu'on multiplie s'appellent les facteurs ; leur résultat s'appelle le produit.",
+      "On nomme d'abord ce qu'on multiplie, ensuite ce qu'on obtient.",
+      "3 et 25 sont les facteurs de la multiplication 3 × 25. Le nombre 75 est le produit. « Terme » appartient à l'addition et à la soustraction.",
+      "3 et 25 sont les facteurs.",
+    ),
+    tags: ["ce2", "multiplication", "vocabulaire", "facteur", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_multiplication_vocabulaire_fixed_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_vocabulaire",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Que veut dire « 12 est un multiple de 3 » ?",
+    format: "qcm",
+    choices: [
+      "12 est dans la table de 3 : on a 3 × 4 = 12",
+      "12 est une multiplication",
+      "12 est plus grand que 3",
+      "on peut multiplier 12 par 3",
+    ],
+    expected: ["12 est dans la table de 3 : on a 3 × 4 = 12"],
+    comparator: "mcq_exact",
+    hint: "« Multiple » n'est pas « multiplication ». Ce n'est pas une opération à faire, c'est ce que le nombre est déjà.",
+    explanation: exp(
+      "Un multiple d'un nombre est un résultat de sa table de multiplication.",
+      "On cherche s'il existe un nombre entier qui, multiplié par 3, donne 12.",
+      "3 × 4 = 12 : oui, 12 est un multiple de 3. On peut aussi dire que 12 est dans la table de 3. Attention, « multiple » n'est pas une opération : c'est ce qu'est le nombre. Et 12 est plus grand que 3 sans que cela ait le moindre rapport — 13 aussi, et 13 n'est pas un multiple de 3.",
+      "12 est un multiple de 3 parce que 3 × 4 = 12.",
+    ),
+    tags: ["ce2", "multiplication", "vocabulaire", "multiple", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_multiplication_vocabulaire_fixed_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_vocabulaire",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Les nombres pairs sont les multiples de quel nombre ?",
+    format: "qcm",
+    choices: ["2", "1", "5", "10"],
+    expected: ["2"],
+    comparator: "mcq_exact",
+    hint: "Un nombre pair se partage en deux parts égales.",
+    explanation: exp(
+      "Un nombre pair est un nombre qu'on peut partager en deux parts entières égales.",
+      "On regarde la table qui donne exactement les nombres pairs.",
+      "La table de 2 donne 2, 4, 6, 8, 10, 12… : ce sont tous les nombres pairs, et rien d'autre. Les nombres impairs, eux, ne sont pas des multiples de 2.",
+      "Les nombres pairs sont les multiples de 2.",
+    ),
+    tags: ["ce2", "multiplication", "vocabulaire", "multiple", "parite", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_vocabulaire_tpl_1",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_vocabulaire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le produit, c'est le résultat. Pas le calcul, pas la somme.",
+    tags: ["ce2", "multiplication", "vocabulaire", "produit", "template"],
+    generate: () => {
+      const a = randomInt(3, 9);
+      const b = randomInt(4, 25);
+      const produit = a * b;
+      return {
+        text: `Quel est le produit de ${a} et de ${b} ?`,
+        format: "qcm",
+        choices: makeChoices(String(produit), [
+          String(a + b),
+          `${a} × ${b}`,
+          String(produit + a),
+          String(produit - a),
+        ]),
+        expected: [String(produit)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le produit de deux nombres est le résultat de leur multiplication.",
+          "On multiplie les deux facteurs et on donne le nombre trouvé.",
+          `${a} × ${b} = ${produit}. La somme, elle, ferait ${a + b} : ce n'est pas ce qu'on demande. Et « ${a} × ${b} » est le calcul, pas la réponse.`,
+          `Le produit de ${a} et de ${b} est ${produit}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_vocabulaire_tpl_2",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_vocabulaire",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Cherche celui qui tombe juste dans la table.",
+    tags: ["ce2", "multiplication", "vocabulaire", "multiple", "template"],
+    generate: () => {
+      // On écarte 2 : les pièges « au voisinage » se recoupent quand le pas
+      // vaut 2, et le QCM perdrait une ligne. La parité a son item fixe.
+      const n = randomInt(3, 9);
+      const k = randomInt(3, 9);
+      const multiple = n * k;
+      return {
+        text: `Lequel de ces nombres est un multiple de ${n} ?`,
+        format: "qcm",
+        choices: makeChoices(String(multiple), [
+          String(multiple + 1),
+          String(multiple - 1),
+          String(multiple + n + 1),
+          String(multiple - n + 1),
+        ]),
+        expected: [String(multiple)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          `Un multiple de ${n} est un nombre qu'on obtient dans la table de ${n}.`,
+          `On parcourt la table de ${n} et on cherche lequel des nombres proposés y tombe.`,
+          `${n} × ${k} = ${multiple} : ${multiple} est bien un multiple de ${n}. Les trois autres tombent à côté de la table — juste à côté, mais à côté.`,
+          `C'est ${multiple}.`,
+        ),
+      };
+    },
+  },
+
+  /* =========================================================
      CE2_MULTIPLICATION_10_100 — multiplier par 10 ou par 100
      ⚠️ On refuse la recette « on ajoute un zéro ». Ce qui se
      passe, c'est que chaque chiffre MONTE d'un rang.

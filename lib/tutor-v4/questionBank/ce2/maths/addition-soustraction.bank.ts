@@ -384,6 +384,160 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
   },
 
   /* =========================================================
+     CE2_ADD_SOUS_VOCABULAIRE — terme, somme, différence
+     Attendu du BO, resté longtemps sans une seule question.
+     LE PIÈGE : confondre le nom de l'opération et le nom de son
+     résultat. La somme n'est pas l'addition, c'est ce qu'elle
+     produit. « Trouve la somme de 8 et 5 » ne demande pas
+     d'écrire 8 + 5, mais 13.
+     Son cousin : croire que « terme » ne vaut que pour
+     l'addition. Le BO écrit « 60 et 37 sont les termes de la
+     soustraction 60 − 37 ».
+  ========================================================= */
+  {
+    kind: "fixed",
+    id: "ce2_add_sous_vocabulaire_fixed_1",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "addition_soustraction",
+    microId: "ce2_add_sous_vocabulaire",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est la somme de 8 et de 5 ?",
+    format: "qcm",
+    choices: ["13", "8 + 5", "3", "40"],
+    expected: ["13"],
+    comparator: "mcq_exact",
+    hint: "On te demande le résultat, pas le calcul à écrire.",
+    explanation: exp(
+      "La somme de deux nombres est le RÉSULTAT de leur addition.",
+      "On additionne les deux nombres et on donne le nombre trouvé.",
+      "8 + 5 = 13. Écrire « 8 + 5 », c'est écrire le calcul : on n'a pas encore répondu. La somme, c'est 13.",
+      "La somme de 8 et de 5 est 13.",
+    ),
+    tags: ["ce2", "addition", "vocabulaire", "somme", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_add_sous_vocabulaire_fixed_2",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "addition_soustraction",
+    microId: "ce2_add_sous_vocabulaire",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Dans l'addition 12 + 25 = 37, comment appelle-t-on 12 et 25 ?",
+    format: "qcm",
+    choices: ["les termes", "les sommes", "les facteurs", "les différences"],
+    expected: ["les termes"],
+    comparator: "mcq_exact",
+    hint: "Ce sont les nombres qu'on additionne, pas le résultat.",
+    explanation: exp(
+      "Les nombres qu'on additionne s'appellent les termes ; leur résultat s'appelle la somme.",
+      "On repère ce qui est de chaque côté du signe, et ce qui est après le signe égal.",
+      "12 et 25 sont les termes de l'addition 12 + 25. Le nombre 37, lui, est la somme. « Facteur » appartient à la multiplication, pas à l'addition.",
+      "12 et 25 sont les termes.",
+    ),
+    tags: ["ce2", "addition", "vocabulaire", "terme", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_add_sous_vocabulaire_fixed_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "addition_soustraction",
+    microId: "ce2_add_sous_vocabulaire",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Dans la soustraction 60 − 37, comment appelle-t-on 60 et 37 ?",
+    format: "qcm",
+    choices: ["les termes", "les différences", "les facteurs", "les restes"],
+    expected: ["les termes"],
+    comparator: "mcq_exact",
+    hint: "Le mot ne sert pas qu'à l'addition.",
+    explanation: exp(
+      "Les nombres d'une soustraction s'appellent eux aussi des termes ; leur résultat s'appelle la différence.",
+      "On nomme d'abord ce qu'on calcule, ensuite ce qu'on obtient.",
+      "60 et 37 sont les termes de la soustraction 60 − 37. Le résultat, 23, est la différence. Un seul mot pour les deux opérations : terme.",
+      "60 et 37 sont les termes.",
+    ),
+    tags: ["ce2", "soustraction", "vocabulaire", "terme", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_add_sous_vocabulaire_fixed_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "addition_soustraction",
+    microId: "ce2_add_sous_vocabulaire",
+    difficulty: 4,
+    theme: "neutral",
+    text: "On demande à un élève : « Calcule la somme de 26 et de 14. » Il écrit « 26 + 14 » et s'arrête. A-t-il répondu ?",
+    format: "qcm",
+    choices: [
+      "non : la somme est le résultat, il fallait écrire 40",
+      "oui, c'est exactement ce qu'on demandait",
+      "non, il fallait écrire 26 − 14",
+      "non, il fallait écrire 14 + 26",
+    ],
+    expected: ["non : la somme est le résultat, il fallait écrire 40"],
+    comparator: "mcq_exact",
+    hint: "Il a écrit le calcul. On lui demandait ce que ce calcul donne.",
+    explanation: exp(
+      "La somme n'est pas l'addition : l'addition est l'opération, la somme est ce qu'elle produit.",
+      "On pose le calcul, puis on va jusqu'au bout et on écrit le nombre trouvé.",
+      "26 + 14 = 40. La réponse attendue est 40. Écrire « 26 + 14 », c'est répéter la question autrement.",
+      "Non : la somme de 26 et de 14 est 40.",
+    ),
+    tags: ["ce2", "addition", "vocabulaire", "somme", "piege", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "ce2_add_sous_vocabulaire_tpl_1",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "addition_soustraction",
+    microId: "ce2_add_sous_vocabulaire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Somme : on ajoute. Différence : on retire. Dans les deux cas, on donne le RÉSULTAT.",
+    tags: ["ce2", "addition", "soustraction", "vocabulaire", "template"],
+    generate: () => {
+      const a = randomInt(24, 96);
+      const b = randomInt(11, 23);
+      const somme = randomChoice([true, false]);
+      const resultat = somme ? a + b : a - b;
+      const autre = somme ? a - b : a + b;
+      return {
+        text: somme
+          ? `Quelle est la somme de ${a} et de ${b} ?`
+          : `Quelle est la différence entre ${a} et ${b} ?`,
+        format: "qcm",
+        choices: makeChoices(String(resultat), [
+          String(autre),
+          somme ? `${a} + ${b}` : `${a} − ${b}`,
+          String(resultat + 1),
+          String(resultat + 10),
+        ]),
+        expected: [String(resultat)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          somme
+            ? "La somme de deux nombres est le résultat de leur addition."
+            : "La différence entre deux nombres est le résultat de leur soustraction.",
+          "On effectue l'opération, et on donne le nombre trouvé — pas le calcul.",
+          somme
+            ? `${a} + ${b} = ${a + b}. Écrire « ${a} + ${b} » n'est pas une réponse : c'est le calcul.`
+            : `${a} − ${b} = ${a - b}. Écrire « ${a} − ${b} » n'est pas une réponse : c'est le calcul.`,
+          somme
+            ? `La somme de ${a} et de ${b} est ${a + b}.`
+            : `La différence entre ${a} et ${b} est ${a - b}.`,
+        ),
+      };
+    },
+  },
+
+  /* =========================================================
      CE2_ADD_SOUS_COMPLEMENT — compléter une égalité
      Le trou peut être n'importe où : ce n'est pas toujours
      une soustraction.
