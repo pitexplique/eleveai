@@ -207,6 +207,53 @@ export const droitesSegmentsBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "droites_segments", "alignement", "reunion", "qcm"],
   },
+  {
+    kind: "template",
+    id: "ce1_droite_alignement_tpl_1",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "droites_segments",
+    microId: "ce1_droite_alignement_regle",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La règle passe-t-elle par les trois points à la fois ?",
+    tags: ["ce1", "droites_segments", "alignement", "template"],
+    generate: () => {
+      const alignes = randomChoice([true, false]);
+      const trio = randomChoice([
+        { a: "A", b: "B", c: "C" },
+        { a: "M", b: "N", c: "P" },
+        { a: "R", b: "S", c: "T" },
+      ]);
+      const bonne = alignes
+        ? "oui, les trois points sont alignés"
+        : "non, les trois points ne sont pas alignés";
+      return {
+        text: alignes
+          ? `On pose le bord de la règle sur les points ${trio.a} et ${trio.b}. Le point ${trio.c} touche lui aussi le bord de la règle. Que peut-on dire ?`
+          : `On pose le bord de la règle sur les points ${trio.a} et ${trio.b}. Le point ${trio.c} reste un peu à côté du bord. Que peut-on dire ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          alignes
+            ? "non, les trois points ne sont pas alignés"
+            : "oui, les trois points sont alignés",
+          "il faut mesurer les distances pour le savoir",
+          "seuls deux points peuvent être alignés",
+          "il faut utiliser le compas",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Des points sont alignés quand une même droite passe par tous.",
+          "On pose le bord de la règle sur deux points, puis on regarde si le troisième le touche.",
+          alignes
+            ? `Le point ${trio.c} est contre le bord de la règle : la même droite passe par ${trio.a}, ${trio.b} et ${trio.c}.`
+            : `Le point ${trio.c} s'écarte du bord : aucune droite ne passe par les trois. Ils forment un triangle, même s'il est très aplati.`,
+          `${bonne.charAt(0).toUpperCase()}${bonne.slice(1)}.`,
+        ),
+      };
+    },
+  },
 
   /* =========================================================
      CE1_DROITE_SEGMENT_TRACER — tracer à la règle

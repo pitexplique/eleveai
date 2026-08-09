@@ -368,6 +368,39 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "figures_planes", "angle_droit", "piege", "qcm"],
   },
+  {
+    kind: "template",
+    id: "ce1_angle_droit_tpl_1",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "figures_planes",
+    microId: "ce1_angle_droit",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Pose le coin de l'équerre sur chaque angle, l'un après l'autre.",
+    tags: ["ce1", "figures_planes", "angle_droit", "template"],
+    generate: () => {
+      const figures = [
+        { nom: "un carré", droits: 4, pourquoi: "ses quatre angles sont droits" },
+        { nom: "un rectangle", droits: 4, pourquoi: "ses quatre angles sont droits" },
+        { nom: "un triangle rectangle", droits: 1, pourquoi: "un seul de ses trois angles est droit" },
+        { nom: "un cercle", droits: 0, pourquoi: "il n'a ni côté ni sommet, donc aucun angle" },
+      ] as const;
+      const f = randomChoice(figures);
+      return {
+        text: `Combien d'angles droits a ${f.nom} ?`,
+        format: "short",
+        expected: [String(f.droits)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un angle droit est celui du coin d'une feuille : on le vérifie avec l'équerre.",
+          "On pose le coin de l'équerre sur chaque sommet de la figure, l'un après l'autre.",
+          `Pour ${f.nom}, ${f.pourquoi}.`,
+          `Il en a ${f.droits}.`,
+        ),
+      };
+    },
+  },
 
   /* =========================================================
      CE1_ANGLE_AIGU_OBTUS — plus petit, plus grand
@@ -495,6 +528,49 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       "Il en faut 4.",
     ),
     tags: ["ce1", "figures_planes", "code"],
+  },
+  {
+    kind: "template",
+    id: "ce1_angle_droit_code_tpl_1",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "figures_planes",
+    microId: "ce1_angle_droit_code",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le code AFFIRME : quand il est là, il n'y a plus rien à vérifier.",
+    tags: ["ce1", "figures_planes", "code", "template"],
+    generate: () => {
+      const code = randomChoice([true, false]);
+      const figure = randomChoice(["cette figure", "ce quadrilatère", "ce triangle"]);
+      const bonne = code
+        ? "il est droit, le code le dit"
+        : "on ne sait pas encore, il faut vérifier à l'équerre";
+      return {
+        text: code
+          ? `Sur ${figure}, un angle porte un petit carré dans son coin. Que peut-on dire de cet angle ?`
+          : `Sur ${figure}, un angle ne porte aucun code. Que peut-on dire de cet angle ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          code
+            ? "on ne sait pas encore, il faut vérifier à l'équerre"
+            : "il est droit, le code le dit",
+          "il est forcément plus petit qu'un angle droit",
+          "il est forcément plus grand qu'un angle droit",
+          "le petit carré indique le plus long côté",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le petit carré dessiné dans un coin est le code de l'angle droit : il affirme que l'angle est droit.",
+          "On lit les codes avant de sortir l'équerre : ils disent ce qui est déjà su.",
+          code
+            ? "Le code est là : l'angle est droit, on n'a pas besoin de le vérifier."
+            : "Sans code, rien n'est affirmé : l'angle peut être droit ou non, et c'est l'équerre qui tranche.",
+          `${bonne.charAt(0).toUpperCase()}${bonne.slice(1)}.`,
+        ),
+      };
+    },
   },
 
   /* =========================================================
@@ -732,6 +808,41 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       "La figure obtenue n'est plus un cercle.",
     ),
     tags: ["ce1", "figures_planes", "compas", "piege", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "ce1_figure_compas_tpl_1",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "figures_planes",
+    microId: "ce1_figure_compas",
+    difficulty: 4,
+    theme: "neutral",
+    // ⚠️ Les mots « rayon » et « diamètre » sont du lexique de CE2 : au CE1 on
+    // parle de l'écartement du compas et de la distance au centre.
+    hint: "L'écartement du compas ne change pas pendant le tracé.",
+    tags: ["ce1", "figures_planes", "compas", "template"],
+    generate: () => {
+      const ecart = randomInt(2, 9);
+      const cherche = randomChoice(["distance", "traversee"] as const);
+      const bonne = cherche === "distance" ? ecart : ecart * 2;
+      return {
+        text: cherche === "distance"
+          ? `Tu écartes ton compas de ${ecart} cm et tu piques la pointe sur un point. À quelle distance de ce point passe le crayon ?`
+          : `Tu écartes ton compas de ${ecart} cm et tu traces un cercle. Si tu traverses ce cercle en passant par son centre, quelle longueur parcours-tu, d'un bord à l'autre ?`,
+        format: "short",
+        expected: [String(bonne)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Sur un cercle, tous les points sont à la même distance du centre : c'est l'écartement du compas.",
+          "On garde l'écartement fixe, et on repère ce que la question demande — un seul côté du centre, ou les deux.",
+          cherche === "distance"
+            ? `Le crayon reste toujours à ${ecart} cm de la pointe : c'est ce qui fait que la figure est un cercle.`
+            : `En traversant par le centre, on parcourt ${ecart} cm d'un côté et ${ecart} cm de l'autre : ${ecart} + ${ecart} = ${ecart * 2}.`,
+          `Cela fait ${bonne} cm.`,
+        ),
+      };
+    },
   },
 
   /* =========================================================

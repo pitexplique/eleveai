@@ -1272,6 +1272,38 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "nombre_entier", "ordinaux", "reunion", "piege"],
   },
+  {
+    kind: "template",
+    id: "ce1_ordinal_utiliser_tpl_1",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "nombre_entier",
+    microId: "ce1_ordinal_utiliser",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Compte depuis l'autre bout : le premier devient le dernier.",
+    tags: ["ce1", "nombre_entier", "ordinaux", "template"],
+    generate: () => {
+      const total = randomInt(5, 12);
+      const rangGauche = randomInt(2, total - 1);
+      const rangDroite = total - rangGauche + 1;
+      const bonne = ORDINAUX[rangDroite - 1].mot;
+      const autres = ORDINAUX.filter((o) => o.rang !== rangDroite && o.rang <= total).map((o) => o.mot);
+      return {
+        text: `${total} enfants font la queue. Kevin est le ${ORDINAUX[rangGauche - 1].mot} en partant du début. Quel est son rang en partant de la FIN ?`,
+        format: "qcm",
+        choices: makeChoices(`le ${bonne}`, autres.map((m) => `le ${m}`)),
+        expected: [`le ${bonne}`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un même enfant a deux rangs : un en partant du début, un autre en partant de la fin.",
+          "On compte les enfants placés derrière lui, puis on ajoute Kevin lui-même.",
+          `Devant Kevin il y a ${rangGauche - 1} enfant${rangGauche - 1 > 1 ? "s" : ""}, donc derrière lui il y en a ${total} - ${rangGauche} = ${total - rangGauche}. En partant de la fin, il est donc le ${bonne} : ${total - rangGauche} + 1 = ${rangDroite}.`,
+          `Il est le ${bonne} en partant de la fin.`,
+        ),
+      };
+    },
+  },
 
   /* =========================================================
      CE1_ORDINAL_SUITE_SYMBOLES — les suites répétitives
