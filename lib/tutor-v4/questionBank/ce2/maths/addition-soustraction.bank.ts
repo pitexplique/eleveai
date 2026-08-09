@@ -394,29 +394,11 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
      l'addition. Le BO écrit « 60 et 37 sont les termes de la
      soustraction 60 − 37 ».
   ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_add_sous_vocabulaire_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "addition_soustraction",
-    microId: "ce2_add_sous_vocabulaire",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Quelle est la somme de 8 et de 5 ?",
-    format: "qcm",
-    choices: ["13", "8 + 5", "3", "40"],
-    expected: ["13"],
-    comparator: "mcq_exact",
-    hint: "On te demande le résultat, pas le calcul à écrire.",
-    explanation: exp(
-      "La somme de deux nombres est le RÉSULTAT de leur addition.",
-      "On additionne les deux nombres et on donne le nombre trouvé.",
-      "8 + 5 = 13. Écrire « 8 + 5 », c'est écrire le calcul : on n'a pas encore répondu. La somme, c'est 13.",
-      "La somme de 8 et de 5 est 13.",
-    ),
-    tags: ["ce2", "addition", "vocabulaire", "somme", "piege", "qcm"],
-  },
+  // ⚠️ « Quelle est la somme de 8 et de 5 ? » était figé ici. C'est un calcul,
+  // pas un cas remarquable : le gabarit tpl_1 le tire déjà, et il descend
+  // maintenant jusqu'aux petits nombres pour garder cette porte d'entrée.
+  // Les trois `fixed` qui restent gagnent leur place : deux phrases littérales
+  // du programme, et le piège nommé.
   {
     kind: "fixed",
     id: "ce2_add_sous_vocabulaire_fixed_2",
@@ -503,8 +485,11 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
     hint: "Somme : on ajoute. Différence : on retire. Dans les deux cas, on donne le RÉSULTAT.",
     tags: ["ce2", "addition", "soustraction", "vocabulaire", "template"],
     generate: () => {
-      const a = randomInt(24, 96);
-      const b = randomInt(11, 23);
+      // On descend jusqu'à 8 : le gabarit doit couvrir la question facile
+      // « la somme de 8 et de 5 », qui était un item figé jusqu'ici.
+      // b reste sous a, sinon la différence passerait sous zéro.
+      const a = randomInt(8, 96);
+      const b = randomInt(3, Math.min(23, a - 1));
       const somme = randomChoice([true, false]);
       const resultat = somme ? a + b : a - b;
       const autre = somme ? a - b : a + b;
@@ -516,8 +501,10 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         choices: makeChoices(String(resultat), [
           String(autre),
           somme ? `${a} + ${b}` : `${a} − ${b}`,
+          // ⚠️ Pas de « + 10 » ici : sur une différence avec b = 5, il tombe
+          // exactement sur la somme, et deux pièges n'en font plus qu'un.
           String(resultat + 1),
-          String(resultat + 10),
+          String(resultat + 2),
         ]),
         expected: [String(resultat)],
         comparator: "mcq_exact",

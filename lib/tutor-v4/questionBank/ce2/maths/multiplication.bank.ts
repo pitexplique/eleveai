@@ -847,29 +847,11 @@ export const multiplicationBank: TutorBankItemV4[] = [
      Son cousin : donner le calcul au lieu du résultat. Le
      produit de 6 et de 7, c'est 42, pas « 6 × 7 ».
   ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_multiplication_vocabulaire_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "multiplication",
-    microId: "ce2_multiplication_vocabulaire",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Quel est le produit de 6 et de 7 ?",
-    format: "qcm",
-    choices: ["42", "6 × 7", "13", "67"],
-    expected: ["42"],
-    comparator: "mcq_exact",
-    hint: "On te demande ce que donne la multiplication, pas comment elle s'écrit.",
-    explanation: exp(
-      "Le produit de deux nombres est le RÉSULTAT de leur multiplication.",
-      "On multiplie les deux nombres et on donne le nombre trouvé.",
-      "6 × 7 = 42. Écrire « 6 × 7 », c'est écrire le calcul, pas la réponse. Et 13, c'est la somme, pas le produit.",
-      "Le produit de 6 et de 7 est 42.",
-    ),
-    tags: ["ce2", "multiplication", "vocabulaire", "produit", "piege", "qcm"],
-  },
+  // ⚠️ « Quel est le produit de 6 et de 7 ? » était figé ici. C'est un calcul,
+  // pas un cas remarquable, et le gabarit tpl_1 le tire déjà — avec les mêmes
+  // pièges, la somme et le calcul recopié. Les trois `fixed` qui restent
+  // gagnent leur place : deux phrases littérales du programme, et la
+  // définition de « multiple ».
   {
     kind: "fixed",
     id: "ce2_multiplication_vocabulaire_fixed_2",

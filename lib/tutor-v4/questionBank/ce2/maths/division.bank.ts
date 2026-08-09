@@ -264,34 +264,10 @@ export const divisionBank: TutorBankItemV4[] = [
     ),
     tags: ["ce2", "division", "symbole", "vocabulaire", "qcm"],
   },
-  {
-    kind: "fixed",
-    id: "ce2_division_sens_fixed_5",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "division",
-    microId: "ce2_division_sens",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Que veut dire 30 ÷ 5 ?",
-    format: "qcm",
-    choices: [
-      "on partage 30 en 5 parts égales",
-      "on ajoute 5 à 30",
-      "on enlève 5 à 30",
-      "on multiplie 30 par 5",
-    ],
-    expected: ["on partage 30 en 5 parts égales"],
-    comparator: "mcq_exact",
-    hint: "Le signe ÷ partage, il n'ajoute rien et n'enlève rien.",
-    explanation: exp(
-      "Écrire a ÷ b, c'est partager a en b parts égales — ou chercher combien de fois b tient dans a.",
-      "On traduit le signe en histoire avant de calculer.",
-      "30 ÷ 5, c'est 30 partagé en 5 parts égales : chaque part vaut 6. On peut aussi le lire « combien de fois 5 tient-il dans 30 ? » : six fois. Les deux lectures donnent 6.",
-      "30 ÷ 5, c'est partager 30 en 5 parts égales, et cela fait 6.",
-    ),
-    tags: ["ce2", "division", "symbole", "sens", "qcm"],
-  },
+  // ⚠️ « Que veut dire 30 ÷ 5 ? » était figé ici. Rien ne tenait au 30 ni au
+  // 5 : c'est devenu le gabarit tpl_4, juste en dessous. Les deux `fixed` qui
+  // restent gagnent leur place — l'un dit comment le signe se LIT, l'autre
+  // reprend l'exemple littéral du programme (7 × 13 = 91).
   {
     kind: "fixed",
     id: "ce2_division_sens_fixed_6",
@@ -351,6 +327,41 @@ export const divisionBank: TutorBankItemV4[] = [
           "On s'appuie sur la table de multiplication : quel nombre, multiplié par le diviseur, donne le total ?",
           `${diviseur} × ${quotient} = ${total}, donc ${total} ÷ ${diviseur} = ${quotient}.`,
           `${total} ÷ ${diviseur} = ${quotient}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_division_sens_tpl_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "division",
+    microId: "ce2_division_sens",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le signe ÷ partage. Il n'ajoute rien et n'enlève rien.",
+    tags: ["ce2", "division", "symbole", "sens", "template"],
+    generate: () => {
+      const diviseur = randomInt(2, 9);
+      const quotient = randomInt(2, 9);
+      const total = diviseur * quotient;
+      return {
+        text: `Que veut dire ${total} ÷ ${diviseur} ?`,
+        format: "qcm",
+        choices: makeChoices(`on partage ${total} en ${diviseur} parts égales`, [
+          `on ajoute ${diviseur} à ${total}`,
+          `on enlève ${diviseur} à ${total}`,
+          `on multiplie ${total} par ${diviseur}`,
+          `on partage ${diviseur} en ${total} parts égales`,
+        ]),
+        expected: [`on partage ${total} en ${diviseur} parts égales`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Écrire a ÷ b, c'est partager a en b parts égales — ou chercher combien de fois b tient dans a.",
+          "On traduit le signe en histoire avant de calculer.",
+          `${total} ÷ ${diviseur}, c'est ${total} partagé en ${diviseur} parts égales : chaque part vaut ${quotient}. On peut aussi le lire « combien de fois ${diviseur} tient-il dans ${total} ? », et la réponse est la même. Attention au sens de lecture : c'est le premier nombre qu'on partage, pas le second.`,
+          `C'est partager ${total} en ${diviseur} parts égales, et cela fait ${quotient}.`,
         ),
       };
     },

@@ -693,57 +693,11 @@ export const fractionBank: TutorBankItemV4[] = [
      davantage : on recoupe le plus grand pour retomber sur le
      plus fin, et là seulement on compte.
   ========================================================= */
-  {
-    kind: "fixed",
-    id: "ce2_fraction_add_sous_fixed_1",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_add_sous",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Une tarte à la vanille est partagée en 5 parts égales. Léa en mange 1/5, puis encore 2/5. Quelle part de la tarte a-t-elle mangée en tout ?",
-    format: "qcm",
-    choices: ["3/5", "3/10", "3/25", "2/5"],
-    expected: ["3/5"],
-    comparator: "mcq_exact",
-    hint: "La tarte est toujours coupée en 5. Compte les parts mangées.",
-    explanation: exp(
-      "Pour additionner deux fractions qui ont le même nombre du bas, on ajoute les parts et on garde le partage.",
-      "On compte les parts prises : 1 part, puis 2 parts. Le nombre du bas ne change pas, personne n'a recoupé la tarte.",
-      "1 part + 2 parts = 3 parts, sur une tarte coupée en 5 : 1/5 + 2/5 = 3/5.",
-      "Léa a mangé 3/5 de la tarte.",
-    ),
-    tags: ["ce2", "fraction", "addition", "piege", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "ce2_fraction_add_sous_fixed_2",
-    niveau: "ce2",
-    matiere: "maths",
-    notionId: "fraction",
-    microId: "ce2_fraction_add_sous",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Pour calculer 2/7 + 3/7, que fait-on des nombres du bas ?",
-    format: "qcm",
-    choices: [
-      "on garde 7 : le partage n'a pas changé",
-      "on les additionne, ça fait 14",
-      "on les multiplie, ça fait 49",
-      "on prend le plus petit des deux",
-    ],
-    expected: ["on garde 7 : le partage n'a pas changé"],
-    comparator: "mcq_exact",
-    hint: "Le nombre du bas dit en combien de parts on a coupé. A-t-on recoupé entre les deux morceaux ?",
-    explanation: exp(
-      "Le nombre du bas d'une fraction dit en combien de parts égales le tout est partagé.",
-      "On regarde ce qui a changé entre le début et la fin : le nombre de parts prises, pas le découpage.",
-      "Le tout reste coupé en 7. On prend 2 septièmes, puis 3 septièmes : 5 septièmes. 2/7 + 3/7 = 5/7. Additionner les 7 donnerait des quatorzièmes, des parts deux fois plus petites — alors que rien n'a été recoupé.",
-      "On garde 7 au dénominateur : 2/7 + 3/7 = 5/7.",
-    ),
-    tags: ["ce2", "fraction", "addition", "denominateur", "piege", "qcm"],
-  },
+  // ⚠️ Les deux premiers items de cette micro étaient figés — une tarte en
+  // cinquièmes, un 2/7 + 3/7. Rien n'y tenait au nombre : ce sont des calculs,
+  // pas des cas remarquables. Devenus les gabarits tpl_7 et tpl_8, en bas de
+  // section. Les quatre `fixed` qui restent gagnent leur place : 5/5 qui vaut
+  // le tout, la marmite, 1/2 + 1/4, et l'exemple littéral du programme.
   {
     kind: "fixed",
     id: "ce2_fraction_add_sous_fixed_3",
@@ -1098,6 +1052,86 @@ export const fractionBank: TutorBankItemV4[] = [
           `${D} est ${k} fois ${d} : on recoupe chaque part de ${nomFraction(1, d)} en ${k}, ce qui donne des parts de ${nomFraction(1, D)}.`,
           `${n1}/${d} = ${n1 * k}/${D}, donc ${n1}/${d} − ${n2}/${D} = ${n1 * k}/${D} − ${n2}/${D} = ${reste}/${D}.`,
           `${n1}/${d} − ${n2}/${D} = ${reste}/${D}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_fraction_add_sous_tpl_7",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_add_sous",
+    difficulty: 2,
+    theme: "reunion",
+    hint: "Le gâteau reste coupé pareil. Compte seulement les parts mangées.",
+    tags: ["ce2", "fraction", "addition", "reunion", "template"],
+    generate: () => {
+      const d = randomChoice([3, 4, 5, 6, 8, 10, 12]);
+      const n1 = randomInt(1, d - 2);
+      const n2 = randomInt(1, d - 1 - n1);
+      const somme = n1 + n2;
+      // Le participe voyage AVEC l'objet — « un gâteau partagé », « une tarte
+      // partagée ». Et la question se pose au passif : pas de pronom à
+      // accorder sur un prénom, ce qui ne se devine pas.
+      const scene = randomChoice([
+        { prenom: "Léa", objet: "Une tarte à la vanille", partage: "partagée", part: "de la tarte" },
+        { prenom: "Ryan", objet: "Un gâteau patate", partage: "partagé", part: "du gâteau" },
+        { prenom: "Maya", objet: "Une brioche de Saint-André", partage: "partagée", part: "de la brioche" },
+        { prenom: "Kevin", objet: "Un carré de chocolat", partage: "partagé", part: "du carré" },
+      ]);
+      return {
+        text: `${scene.objet} est ${scene.partage} en ${d} parts égales. ${scene.prenom} en mange ${n1}/${d}, puis encore ${n2}/${d}. Quelle part ${scene.part} a été mangée en tout ?`,
+        format: "qcm",
+        choices: makeChoices(`${somme}/${d}`, [
+          `${somme}/${2 * d}`,
+          `${somme}/${d * d}`,
+          `${somme + 1}/${d}`,
+          `${d}/${somme}`,
+        ]),
+        expected: [`${somme}/${d}`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour additionner deux fractions qui ont le même nombre du bas, on ajoute les parts et on garde le partage.",
+          "On compte les parts prises. Le nombre du bas ne change pas : personne n'a recoupé entre les deux bouchées.",
+          `${n1} part${n1 > 1 ? "s" : ""} + ${n2} part${n2 > 1 ? "s" : ""} = ${somme} parts, sur un tout coupé en ${d} : ${n1}/${d} + ${n2}/${d} = ${somme}/${d}.`,
+          `${scene.prenom} en a mangé ${somme}/${d}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_fraction_add_sous_tpl_8",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_add_sous",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le nombre du bas dit en combien de parts on a coupé. A-t-on recoupé entre les deux morceaux ?",
+    tags: ["ce2", "fraction", "addition", "denominateur", "piege", "template"],
+    generate: () => {
+      const d = randomChoice([4, 5, 6, 8, 10, 12]);
+      const n1 = randomInt(1, d - 2);
+      const n2 = randomInt(1, d - 1 - n1);
+      return {
+        text: `Pour calculer ${n1}/${d} + ${n2}/${d}, que fait-on des nombres du bas ?`,
+        format: "qcm",
+        choices: makeChoices(`on garde ${d} : le partage n'a pas changé`, [
+          `on les additionne, ça fait ${2 * d}`,
+          `on les multiplie, ça fait ${d * d}`,
+          "on prend le plus petit des deux",
+          "on les enlève, il n'en reste aucun",
+        ]),
+        expected: [`on garde ${d} : le partage n'a pas changé`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le nombre du bas d'une fraction dit en combien de parts égales le tout est partagé.",
+          "On regarde ce qui a changé entre le début et la fin : le nombre de parts prises, pas le découpage.",
+          `Le tout reste coupé en ${d} : ${n1}/${d} + ${n2}/${d} = ${n1 + n2}/${d}. Additionner les deux ${d} donnerait un partage en ${2 * d}, c'est-à-dire des parts deux fois plus petites — alors que personne n'a recoupé.`,
+          `On garde ${d} au dénominateur.`,
         ),
       };
     },
