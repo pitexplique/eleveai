@@ -361,11 +361,15 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
       return {
         text: `Dans ${formatNumber(n)}, quel est le NOMBRE de ${rang.rang} ?`,
         format: "qcm",
+        // ⚠️ Sur certains tirages, « ce qui reste après le rang » ou « le rang
+        // du dessus » retombent sur un autre piège et disparaissent au tri.
+        // Le voisin immédiat, lui, ne peut jamais se confondre.
         choices: makeChoices(correct, [
           String(chiffreDuRang),
           String(n % rang.puissance),
           String(Math.floor(n / (rang.puissance * 10))),
           String(nombreDeRang + 1),
+          String(nombreDeRang - 1),
         ]),
         expected: [correct],
         comparator: "mcq_exact",
@@ -410,6 +414,10 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           `(${m} × 100) + (${c} × 10) + (${d} × 1 000) + ${u}`,
           `(${c} × 1 000) + (${m} × 100) + (${d} × 10) + ${u}`,
           `(${m} × 1 000) + (${c} × 100) + (${u} × 10) + ${d}`,
+          // ⚠️ Piège de secours : les quatre autres échangent des chiffres, et
+          // retombent sur la bonne réponse dès que deux d'entre eux sont
+          // égaux. Celui-ci change une valeur, donc il diffère toujours.
+          `(${m} × 1 000) + (${c} × 100) + (${d + 1} × 10) + ${u}`,
         ]),
         expected: [correct],
         comparator: "mcq_exact",
@@ -454,11 +462,15 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
       return {
         text: `Quel nombre vaut ${morceaux} ?`,
         format: "qcm",
+        // ⚠️ Le quatrième piège recopiait le premier — `c * 10 + d * 100` et
+        // `d * 100 + c * 10` sont la même somme. Et quand les chiffres des
+        // centaines et des dizaines tombaient égaux, l'échange valait la bonne
+        // réponse : il ne restait que deux pièges, et le QCM trois lignes.
         choices: makeChoices(correct, [
           formatNumber(m * 1000 + d * 100 + c * 10 + u),
           formatNumber(n + 1000),
           formatNumber(n - 100),
-          formatNumber(m * 1000 + c * 10 + d * 100 + u),
+          formatNumber(n + 10),
         ]),
         expected: [correct],
         comparator: "mcq_exact",

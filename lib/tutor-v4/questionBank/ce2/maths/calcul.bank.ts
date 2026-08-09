@@ -633,12 +633,16 @@ export const calculBank: TutorBankItemV4[] = [
       return {
         text: `${a} × ${b} = ?`,
         format: "qcm",
+        // ⚠️ Quand les deux facteurs tombent égaux, « +a » et « +b » se
+        // confondent, « -a » et « -b » aussi, et a + b peut valoir le produit
+        // (2 × 2). Il ne restait alors que deux lignes fausses.
         choices: makeChoices(correct, [
           String(a * b + a),
           String(a * b - a),
           String(a * b + b),
           String(a * b - b),
           String(a + b),
+          String(a * b + 1),
         ]),
         expected: [correct],
         comparator: "mcq_exact",
@@ -743,11 +747,14 @@ export const calculBank: TutorBankItemV4[] = [
         return {
           text: `${k} × 25 = ?`,
           format: "qcm",
+          // ⚠️ À k = 5, k × 20 vaut r - 25 et k × 30 vaut r + 25 : les quatre
+          // pièges n'en faisaient plus que deux.
           choices: makeChoices(formatNumber(r), [
             formatNumber(r + 25),
             formatNumber(r - 25),
             formatNumber(k * 20),
             formatNumber(k * 30),
+            formatNumber(r + 5),
           ]),
           expected: [formatNumber(r)],
           comparator: "mcq_exact",
@@ -766,11 +773,13 @@ export const calculBank: TutorBankItemV4[] = [
       return {
         text: `${n} × ${d * 10} = ?`,
         format: "qcm",
+        // ⚠️ À n = d = 2, (n + d) × 10 vaut exactement le produit cherché.
         choices: makeChoices(formatNumber(r), [
           String(n * d),
           formatNumber(r * 10),
           formatNumber((n + d) * 10),
           formatNumber(r + 10),
+          formatNumber(r - 10),
         ]),
         expected: [formatNumber(r)],
         comparator: "mcq_exact",

@@ -354,11 +354,17 @@ export const reperageBank: TutorBankItemV4[] = [
       return {
         text: `On part du point (${x0} ; ${y0}). On avance de ${dx} case${dx > 1 ? "s" : ""} vers la droite, puis on monte de ${dy} case${dy > 1 ? "s" : ""}. Où arrive-t-on ?`,
         format: "qcm",
+        // ⚠️ Le piège des coordonnées inversées retombe sur la bonne réponse
+        // quand l'arrivée est sur la diagonale — (3 ; 3) — et le QCM tombait
+        // à trois lignes sur 12 % des tirages. Le point de DÉPART, lui, ne
+        // peut jamais valoir l'arrivée : le déplacement fait au moins une case
+        // dans chaque direction.
         choices: makeChoices(`(${x} ; ${y})`, [
           `(${dx} ; ${dy})`,
           `(${y} ; ${x})`,
           `(${x} ; ${y + 1})`,
           `(${x + 1} ; ${y})`,
+          `(${x0} ; ${y0})`,
         ]),
         expected: [`(${x} ; ${y})`],
         comparator: "mcq_exact",

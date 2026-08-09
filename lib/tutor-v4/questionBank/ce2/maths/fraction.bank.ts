@@ -346,12 +346,19 @@ export const fractionBank: TutorBankItemV4[] = [
       const d = randomChoice([2, 3, 4, 5, 10]);
       const n = randomInt(1, d - 1);
       const bonne = nomFraction(n, d);
-      const autreD = randomChoice([2, 3, 4, 5, 10].filter((x) => x !== d));
+      // ⚠️ Quand le numérateur vaut la moitié du dénominateur — 1/2, 2/4 —
+      // le piège `nomFraction(d - n, d)` retombe sur la bonne réponse et
+      // disparait au tri : le QCM se présentait alors à trois lignes sur
+      // 30 % des tirages. Un second dénominateur de secours ferme le trou.
+      const restants = [2, 3, 4, 5, 10].filter((x) => x !== d);
+      const autreD = randomChoice(restants);
+      const autreD2 = randomChoice(restants.filter((x) => x !== autreD));
       return {
         text: `Comment se lit la fraction ${n}/${d} ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           nomFraction(n, autreD),
+          nomFraction(n, autreD2),
           nomFraction(d - n, d),
           `${n} sur ${d} parts`,
         ]),
@@ -1210,9 +1217,13 @@ export const fractionBank: TutorBankItemV4[] = [
       return {
         text: `La bande unité est partagée en ${d} parts égales. Un segment couvre ${n} de ces parts. Quelle est sa longueur ?`,
         format: "qcm",
+        // ⚠️ `${d - n}/${d}` retombe sur la bonne réponse quand le segment
+        // couvre juste la moitié de la bande — 1/2, 2/4, 3/6, 4/8 — et le QCM
+        // tombait à trois lignes sur 26 % des tirages.
         choices: makeChoices(`${n}/${d} d'unité`, [
           `${d}/${n} d'unité`,
           `${d - n}/${d} d'unité`,
+          `${n}/${d + 1} d'unité`,
           `${n} unités`,
         ]),
         expected: [`${n}/${d} d'unité`],
