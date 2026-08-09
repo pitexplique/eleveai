@@ -14,6 +14,7 @@ import { multiplicationBank } from "./multiplication.bank";
 import { calculMentalBank } from "./calcul-mental.bank";
 import { problemeBank } from "./probleme.bank";
 import { divisionPartageBank } from "./division-partage.bank";
+import { suiteNombreBank } from "./suite-nombre.bank";
 
 // ⏳ LE CE1 SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 09/08/2026.
 //
@@ -48,6 +49,7 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...calculMentalBank,
   ...problemeBank,
   ...divisionPartageBank,
+  ...suiteNombreBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
