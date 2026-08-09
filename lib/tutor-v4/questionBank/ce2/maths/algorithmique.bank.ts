@@ -3,10 +3,21 @@
 // Les programmes et déplacements codés du CE2, écrits à la main. Cinq
 // micro-compétences qui passaient par le constructeur commun.
 //
-// PÉRIMÈTRE BO (n° 41 du 31 octobre 2024, cycle 2) : programmer les
-// déplacements d'un robot ou d'un personnage sur un quadrillage — lire une
-// suite d'instructions, la coder, utiliser une répétition, corriger un
-// programme qui ne marche pas.
+// ⚠️ HORS ATTENDUS DE FIN DE CE2 — RÉVISION DU CE1.
+// Relu sur le texte lui-même le 09/08/2026 (BO n° 41 du 31 octobre 2024,
+// applicable à la rentrée 2025) : il n'existe pas de sous-domaine
+// « algorithmique » au cycle 2. « Comprendre, utiliser et produire une suite
+// d'instructions qui codent un déplacement » vit à l'intérieur du repérage
+// dans l'espace, au CP (dix instructions au plus, dont deux virages) et au CE1
+// (quinze instructions, dont quatre virages). Au CE2, plus rien.
+// Gardées quand même — feu vert de Frédéric. C'est de la consolidation, et
+// c'est ce que l'élève réclame le plus volontiers.
+// ⛔ Ne pas s'appuyer là-dessus pour annoncer « l'algorithmique au programme
+// du CE2 » : ce serait faux.
+//
+// CE QU'ON Y TRAVAILLE : programmer les déplacements d'un robot ou d'un
+// personnage sur un quadrillage — lire une suite d'instructions, la coder,
+// utiliser une répétition, corriger un programme qui ne marche pas.
 // ⛔ Pas de variable, pas de condition au cycle 2 : ni « si… alors », ni
 // compteur. On avance, on tourne, on répète.
 //

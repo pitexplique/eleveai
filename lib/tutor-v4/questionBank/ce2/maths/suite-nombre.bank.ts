@@ -3,10 +3,21 @@
 // Les suites de nombres du CE2, écrites à la main. Quatre micro-compétences qui
 // passaient par le constructeur commun.
 //
-// PÉRIMÈTRE BO (n° 41 du 31 octobre 2024, cycle 2) : continuer une suite,
-// trouver sa règle, reconnaître si elle croît ou décroît. Les nombres restent
-// sous 10 000, et les règles sont des additions ou des soustractions répétées —
-// de 2 en 2, de 5 en 5, de 10 en 10, de 25 en 25, de 100 en 100.
+// ⚠️ HORS ATTENDUS DE FIN DE CE2 — RÉVISION DU CE1.
+// Relu sur le texte lui-même le 09/08/2026 (BO n° 41 du 31 octobre 2024,
+// applicable à la rentrée 2025) : les suites de nombres sont accrochées aux
+// nombres ordinaux — « utiliser les nombres ordinaux dans le cadre de l'étude
+// de suites de symboles, de formes, de lettres ou de nombres » — et cet
+// objectif s'arrête au CE1, qui traite les suites répétitives ET évolutives
+// (« 1, 2, 4, 7, 11, 16… », « 1, 2, 4, 8, 16… »). La colonne CE2 de « Les
+// nombres entiers » ne le reprend pas.
+// Gardées — feu vert de Frédéric. Une suite qu'on prolonge, c'est du calcul
+// mental déguisé en jeu, et le CE2 en fait tous les jours.
+//
+// CE QU'ON Y TRAVAILLE : continuer une suite, trouver sa règle, reconnaître si
+// elle croît ou décroît. Les nombres restent sous 10 000, et les règles sont
+// des additions ou des soustractions répétées — de 2 en 2, de 5 en 5, de 10 en
+// 10, de 25 en 25, de 100 en 100.
 // ⛔ Pas de suite géométrique au programme, sauf le doublement, qui se dit
 // « on double à chaque fois » et se comprend sans vocabulaire nouveau.
 //

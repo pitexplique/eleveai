@@ -32,6 +32,14 @@ export const microSkills: MicroSkillSource[] = [
 
   // ============================================================
   // SUITES DE NOMBRES
+  // ⚠️ HORS ATTENDUS DE FIN DE CE2. Les suites de nombres sont accrochées aux
+  // nombres ordinaux, et cet objectif s'arrête au CE1 : « utiliser les nombres
+  // ordinaux dans le cadre de l'étude de suites de symboles, de formes, de
+  // lettres ou de nombres », avec ses suites répétitives et évolutives
+  // (« 1, 2, 4, 7, 11, 16… »). La colonne CE2 de « Les nombres entiers » ne le
+  // reprend pas. On les GARDE comme révision du CE1 — feu vert de Frédéric le
+  // 09/08/2026 : un CE2 en difficulté a tout intérêt à y repasser, et c'est
+  // précisément à cela que sert le coach.
   // ============================================================
 
   { id: "ce2_suite_continuer", label: "Continuer une suite de nombres", notionId: "suite_nombre", prerequis: ["ce2_entier_lire_ecrire"] },
@@ -218,10 +226,12 @@ export const microSkills: MicroSkillSource[] = [
 
   // ============================================================
   // REPÉRAGE SUR QUADRILLAGE
-  // ⚠️ Le tableau CE2 du programme ne comporte plus de ligne « repérage dans
-  // l'espace » (elle est au CP et au CE1). On garde ces micro-compétences
-  // comme SUPPORT : le quadrillage sert à construire les figures et à
-  // compléter une symétrie, deux attendus explicites du CE2.
+  // ⚠️ HORS ATTENDUS DE FIN DE CE2. Vérifié sur le texte le 09/08/2026 :
+  // « Espace et géométrie » du CE2 ne contient que « Les solides » et « La
+  // géométrie plane ». Le repérage dans l'espace s'arrête au CE1.
+  // TRANCHÉ, feu vert de Frédéric : on les GARDE, pour deux raisons. C'est de
+  // la révision du CE1, et c'est un SUPPORT — le quadrillage sert à reproduire
+  // une figure et à compléter une symétrie, deux attendus explicites du CE2.
   // ============================================================
 
   { id: "ce2_reperage_coordonnees", label: "Lire et placer un point sur un quadrillage", notionId: "reperage", prerequis: ["ce2_entier_lire_ecrire"] },
@@ -287,10 +297,13 @@ export const microSkills: MicroSkillSource[] = [
 
   // ============================================================
   // PROGRAMMES ET DÉPLACEMENTS CODÉS
-  // ⚠️ Le tableau CE2 du nouveau programme ne comporte PAS de ligne
-  // programmation : « produire une suite d'instructions qui code un
-  // déplacement » est un attendu du CP et du CE1. On garde ces
-  // micro-compétences en consolidation du cycle, à trancher avec Frédéric.
+  // ⚠️ HORS ATTENDUS DE FIN DE CE2. Le programme n'a pas de sous-domaine
+  // « algorithmique » : « comprendre, utiliser et produire une suite
+  // d'instructions qui codent un déplacement » vit à l'intérieur du repérage
+  // dans l'espace, au CP (dix instructions, deux virages) et au CE1 (quinze
+  // instructions, quatre virages). La colonne CE2 est vide.
+  // TRANCHÉ le 09/08/2026, feu vert de Frédéric : on les GARDE, en révision
+  // du CE1. Rien n'est faux ici, c'est simplement un cran en amont.
   // ============================================================
 
   { id: "ce2_algo_instruction", label: "Lire un programme d'instructions", notionId: "algorithmique", prerequis: ["ce2_reperage_deplacement"] },

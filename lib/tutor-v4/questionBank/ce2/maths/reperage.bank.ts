@@ -4,8 +4,19 @@
 // micro-compétences qui passaient par le constructeur commun — celui qui
 // servait « Combien de côtés a un triangle ? » à `ce1_reperage_coordonnees`.
 //
-// PÉRIMÈTRE BO (n° 41 du 31 octobre 2024, cycle 2) : lire et placer un point
-// sur un quadrillage, décrire un déplacement, lire un plan simple.
+// ⚠️ HORS ATTENDUS DE FIN DE CE2 — RÉVISION DU CE1.
+// Relu sur le texte lui-même le 09/08/2026 (BO n° 41 du 31 octobre 2024,
+// applicable à la rentrée 2025) : « Espace et géométrie » du CE2 ne contient
+// que « Les solides » et « La géométrie plane ». Le sous-domaine « Le repérage
+// dans l'espace » existe au CP et au CE1, et sa colonne CE2 est VIDE.
+// Ces quatre micro-compétences sont donc gardées les yeux ouverts — feu vert
+// de Frédéric. Rien n'y est faux : c'est un cran en amont, et un CE2 qui
+// trébuche a tout intérêt à y repasser. C'est à cela que sert le coach.
+// Elles servent aussi de SUPPORT à deux attendus bien CE2 : reproduire une
+// figure sur quadrillage, et compléter une figure pour la rendre symétrique.
+//
+// CE QU'ON Y TRAVAILLE : lire et placer un point sur un quadrillage, décrire un
+// déplacement, lire un plan simple.
 // ⛔ Pas de repère orthonormé, pas d'abscisse ni d'ordonnée : ces mots sont de
 // cycle 3. Au CE2 on dit « la colonne, puis la ligne », ou « à droite, puis en
 // haut ».
