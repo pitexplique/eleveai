@@ -616,14 +616,26 @@ export const nombresDecimauxBank: TutorBankItemV4[] = [
       const sorted = [...values].sort((a, b) => a - b);
 
       const correct = sorted.map(formatComma).join(" ; ");
-      const wrong1 = [...sorted].reverse().map(formatComma).join(" ; ");
-      const wrong2 = shuffle(values).map(formatComma).join(" ; ");
-      const wrong3 = shuffle(values).map(formatComma).join(" ; ");
+
+      // ⚠️ Les deux derniers pièges étaient deux mélanges tirés au hasard des
+      // MÊMES trois nombres : ils tombaient souvent l'un sur l'autre, ou sur
+      // l'ordre correct, et il ne restait qu'une proposition en face. On liste
+      // donc les six rangements possibles, on écarte le bon, et on en prend
+      // trois : ils sont distincts par construction.
+      const [p, q, r] = sorted;
+      const rangements = [
+        [p, q, r],
+        [p, r, q],
+        [q, p, r],
+        [q, r, p],
+        [r, p, q],
+        [r, q, p],
+      ].map((ordre) => ordre.map(formatComma).join(" ; "));
 
       return {
         text: `Range dans l’ordre croissant : ${values.map(formatComma).join(" ; ")}`,
         format: "qcm",
-        choices: makeChoices(correct, [wrong1, wrong2, wrong3]),
+        choices: makeChoices(correct, shuffle(rangements)),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(

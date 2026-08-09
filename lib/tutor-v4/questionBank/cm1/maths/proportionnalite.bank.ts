@@ -2752,10 +2752,16 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       return {
         text: `Dans un tableau proportionnel, ${x} correspond à ${y}. Quel est le coefficient ?`,
         format: "qcm",
+        // ⚠️ Avec x = k = 2, les pièges « x » et « y − x » valent tous deux 2,
+        // c'est-à-dire la bonne réponse : ils disparaissaient et il ne restait
+        // qu'une proposition en face. Deux secours qui ne peuvent jamais
+        // coïncider — y lui-même (x vaut au moins 2) et le coefficient voisin.
         choices: makeChoices(String(k), [
           String(x + y),
           String(y - x),
           String(x),
+          String(y),
+          String(k + 1),
         ]),
         expected: [String(k)],
         comparator: "mcq_exact",

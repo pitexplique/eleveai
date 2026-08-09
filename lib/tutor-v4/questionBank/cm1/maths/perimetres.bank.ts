@@ -450,10 +450,16 @@ export const perimetresBank: TutorBankItemV4[] = [
       return {
         text: `Un triangle a pour côtés ${a} cm, ${b} cm et ${c} cm. Quel est son périmètre ?`,
         format: "qcm",
+        // ⚠️ Avec a = c, les pièges « a + b » et « b + c » s'écrivent pareil ;
+        // et avec un triangle équilatéral de côté 3, a × b vaut le périmètre.
+        // Il ne restait alors qu'une proposition en face. Deux secours : le
+        // troisième oubli de côté, et le périmètre voisin.
         choices: makeChoices(`${p} cm`, [
           `${a + b} cm`,
           `${b + c} cm`,
           `${a * b} cm`,
+          `${a + c} cm`,
+          `${p + 1} cm`,
         ]),
         expected: [`${p} cm`],
         comparator: "mcq_exact",
@@ -905,10 +911,16 @@ export const perimetresBank: TutorBankItemV4[] = [
       return {
         text: `Un carré a un côté de ${cote} cm. Quel est son périmètre ?`,
         format: "qcm",
+        // ⚠️ Avec un côté de 4, les trois pièges s'écrasent : côté × côté vaut
+        // le périmètre, et côté + 4 vaut 2 × côté. Il ne restait qu'une
+        // proposition en face. Deux secours : trois côtés au lieu de quatre,
+        // et cinq côtés.
         choices: makeChoices(`${p} cm`, [
           `${2 * cote} cm`,
           `${cote * cote} cm`,
           `${cote + 4} cm`,
+          `${3 * cote} cm`,
+          `${p + cote} cm`,
         ]),
         expected: [`${p} cm`],
         comparator: "mcq_exact",

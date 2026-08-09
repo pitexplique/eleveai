@@ -763,10 +763,17 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
       const rounded = Math.round(n / 100) * 100;
       const correct = formatNumber(rounded);
 
+      // ⚠️ L'un des deux voisins EST la bonne réponse — c'est le principe même
+      // de l'arrondi — et l'arrondi à la dizaine tombe dessus aussi quand les
+      // unités sont proches de 100 (7899 → 7900 des deux côtés). Il ne restait
+      // alors qu'une seule proposition en face. Deux centaines voisines, qui
+      // ne peuvent jamais coïncider, complètent la liste.
       const wrongs = [
         formatNumber(Math.floor(n / 100) * 100),
         formatNumber(Math.ceil(n / 100) * 100),
         formatNumber(Math.round(n / 10) * 10),
+        formatNumber(rounded + 100),
+        formatNumber(rounded - 100),
       ].filter((x) => x !== correct);
 
       return {
@@ -801,10 +808,15 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
       const rounded = Math.round(n / 1000) * 1000;
       const correct = formatNumber(rounded);
 
+      // ⚠️ Même raison qu'au gabarit précédent : l'un des voisins est la bonne
+      // réponse, et l'arrondi à la centaine tombe dessus quand le nombre est
+      // proche du millier (58 999 → 59 000 des deux côtés).
       const wrongs = [
         formatNumber(Math.floor(n / 1000) * 1000),
         formatNumber(Math.ceil(n / 1000) * 1000),
         formatNumber(Math.round(n / 100) * 100),
+        formatNumber(rounded + 1000),
+        formatNumber(rounded - 1000),
       ].filter((x) => x !== correct);
 
       return {

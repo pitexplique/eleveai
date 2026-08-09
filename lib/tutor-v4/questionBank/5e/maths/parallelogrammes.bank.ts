@@ -699,7 +699,9 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     tags: ["parallelogramme", "construire", "template"],
     generate: () => {
       const ab = randomChoice([5, 6, 7, 8]);
-      const bc = randomChoice([3, 4, 5]);
+      // ⚠️ bc ≠ ab : avec les deux côtés égaux, les trois pièges s'écrivent
+      // avec le même nombre et il ne restait qu'une proposition en face.
+      const bc = randomChoice([3, 4, 5].filter((x) => x !== ab));
       const rep = `à ${ab} cm de C et à ${bc} cm de A`;
       return {
         text: `On construit le parallélogramme ABCD avec AB = ${ab} cm et BC = ${bc} cm. Une fois A, B et C tracés, où se trouve le point D ?`,

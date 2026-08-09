@@ -4403,10 +4403,16 @@ export const calculBank: TutorBankItemV4[] = [
       return {
         text: `Quel est le résultat de ${a} + ${b} × ${c} ?`,
         format: "qcm",
+        // ⚠️ Les trois pièges sont des calculs : ils se rejoignent quand les
+        // tirages tombent mal (a × b + c = a + b × c dès que a et c sont
+        // égaux, par exemple). Deux secours qui ne peuvent jamais coïncider :
+        // les voisins immédiats du bon résultat.
         choices: makeChoices(String(result), [
           String(wrongLeftToRight),
           String(a + b + c),
           String(a * b + c),
+          String(result + 1),
+          String(result - 1),
         ]),
         expected: [String(result)],
         comparator: "mcq_exact",

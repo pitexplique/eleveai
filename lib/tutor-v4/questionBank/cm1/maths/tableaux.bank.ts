@@ -321,11 +321,14 @@ export const tableauxBank: TutorBankItemV4[] = [
         ...CONTEXTES_ECOLE,
       ]);
 
-      const values = [
-        randomInt(8, 18),
-        randomInt(8, 18),
-        randomInt(8, 18),
-      ];
+      // ⚠️ Tirées séparément, les trois valeurs tombaient souvent égales : les
+      // deux pièges « tu as lu la mauvaise colonne » devenaient alors la bonne
+      // réponse et disparaissaient. Et un tableau dont les trois colonnes
+      // portent le même nombre n'apprend rien à lire. On tire donc trois
+      // valeurs DISTINCTES.
+      const values = shuffle(
+        Array.from({ length: 11 }, (_, i) => i + 8),
+      ).slice(0, 3);
 
       const col = randomInt(0, 2);
       const correct = String(values[col]);

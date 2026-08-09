@@ -482,10 +482,17 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
       const rounded = Math.round(n / 1000) * 1000;
       const correct = formatNumber(rounded);
 
+      // ⚠️ L'un des deux voisins EST la bonne réponse — c'est le principe même
+      // de l'arrondi — et l'arrondi à la centaine tombe dessus aussi quand le
+      // nombre est proche du millier (78 999 → 79 000 des deux côtés). Il ne
+      // restait alors qu'une seule proposition en face. Deux milliers voisins,
+      // qui ne peuvent jamais coïncider, complètent la liste.
       const wrongs = [
         formatNumber(Math.floor(n / 1000) * 1000),
         formatNumber(Math.ceil(n / 1000) * 1000),
         formatNumber(Math.round(n / 100) * 100),
+        formatNumber(rounded + 1000),
+        formatNumber(rounded - 1000),
       ].filter((x) => x !== correct);
 
       return {

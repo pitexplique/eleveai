@@ -317,10 +317,16 @@ export const dureesBank: TutorBankItemV4[] = [
       return {
         text: `L’affichage indique ${hour}:${pad2(minute)}. Comment écrit-on cette heure ?`,
         format: "qcm",
+        // ⚠️ Le piège « minutes sans le zéro » ne mord qu'en dessous de 10 :
+        // au-delà, il s'écrit comme la bonne réponse. Et à 10 h 10, le piège
+        // des aiguilles échangées y tombe aussi — il ne restait alors qu'une
+        // proposition en face. Deux secours qui ne peuvent pas coïncider.
         choices: makeChoices(correct, [
           `${hour} h ${minute}`,
           `${minute} h ${pad2(hour)}`,
           `${hour + 1} h ${pad2(minute)}`,
+          `${hour - 1} h ${pad2(minute)}`,
+          `${hour} h ${pad2(60 - minute)}`,
         ]),
         expected: [correct],
         comparator: "mcq_exact",

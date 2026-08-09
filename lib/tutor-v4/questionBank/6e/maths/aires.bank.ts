@@ -1553,14 +1553,17 @@ export const airesBank: TutorBankItemV4[] = [
 
       // À 2 m sur 2 m, la somme, le double de la longueur et le double de la
       // largeur valent tous les trois l'aire cherchée : il ne restait qu'une
-      // seule ligne au QCM, la bonne. Deux pièges de secours suffisent à
-      // remplir les quatre.
+      // seule ligne au QCM, la bonne.
+      // ⚠️ 09/08/2026 — les deux pièges de secours ajoutés alors se
+      // ressemblaient trop : à l = w ils s'écrivaient pareil et la proposition
+      // manquante revenait. On prend maintenant deux valeurs qui ne peuvent
+      // jamais coïncider entre elles ni avec l'aire.
       const distractors = [
         Number((l + w).toFixed(1)),
         Number((l * 2).toFixed(1)),
         Number((w * 2).toFixed(1)),
-        Number((good + w).toFixed(1)),
-        Number((good + l).toFixed(1)),
+        Number((good + 1).toFixed(1)),
+        Number((good * 2).toFixed(1)),
       ];
 
       const choices = makeChoices(

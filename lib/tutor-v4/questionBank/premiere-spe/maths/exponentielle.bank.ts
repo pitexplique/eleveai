@@ -1233,12 +1233,20 @@ export const exponentielleBank: TutorBankItemV4[] = [
       return {
         text: `À quoi est égal $${enonce}$ ?`,
         format: "qcm",
+        // ⚠️ Avec a = b = 2, somme et produit valent tous deux 4 : sur un
+        // produit, les deux pièges d'exposant valent alors la bonne réponse et
+        // il ne restait qu'une proposition en face. Deux exposants voisins, qui
+        // ne peuvent jamais coïncider, complètent la liste.
         choices: [
           correct,
           `$e^{${a * b}}$`,
           `$e^{${a + b}}$`,
           `$${juste}e$`,
-        ].filter((v, i, t) => t.indexOf(v) === i),
+          `$e^{${juste + 1}}$`,
+          `$e^{${juste - 1}}$`,
+        ]
+          .filter((v, i, t) => t.indexOf(v) === i)
+          .slice(0, 4),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(

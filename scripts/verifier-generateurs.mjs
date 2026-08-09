@@ -49,26 +49,22 @@
 // Usage : node --experimental-strip-types scripts/verifier-generateurs.mjs [classe] [matiere] [tirages]
 //         node --experimental-strip-types scripts/verifier-generateurs.mjs 4e maths
 //         node --experimental-strip-types scripts/verifier-generateurs.mjs toutes maths 600
-//         node --experimental-strip-types scripts/verifier-generateurs.mjs ce2 maths 600 --strict-choix
 //
 // Sortie 1 s'il y a le moindre problème : utilisable comme garde-fou.
+// ⚠️ Un effondrement à DEUX propositions fait tomber la sortie. Les 24 cas
+// hérités ont été corrigés le 09/08/2026 : toute nouvelle apparition est une
+// régression, pas un arriéré. Les chutes à trois propositions restent
+// signalées sans bloquer — elles coûtent une ligne, pas la question.
 
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 const ARGS = process.argv.slice(2).filter((a) => !a.startsWith("--"));
-const DRAPEAUX = new Set(process.argv.slice(2).filter((a) => a.startsWith("--")));
 
 const CLASSE = ARGS[0] || "toutes";
 const MATIERE = ARGS[1] || "maths";
 const TIRAGES = Number(ARGS[2]) || 60;
-
-/* Les effondrements sont signalés TOUJOURS, mais ils ne font tomber la sortie
-   que sur demande : au 09/08/2026 il en reste 23 hérités dans les banques
-   déjà écrites, et rendre le garde-fou rouge d'un coup le rendrait inutile.
-   `--strict-choix` sert à le brancher en CI une fois l'arriéré traité. */
-const STRICT_CHOIX = DRAPEAUX.has("--strict-choix");
 
 const RACINE = path.resolve("lib/tutor-v4/questionBank");
 
@@ -372,16 +368,16 @@ if (effondrements.length) {
         : " Aucun ne tombe à deux propositions."),
   );
   console.log(
-    STRICT_CHOIX
-      ? "   --strict-choix : ces cas font tomber la sortie.\n"
-      : "   Ces cas ne font PAS tomber la sortie. Relancer avec --strict-choix pour les rendre bloquants.\n",
+    graves.length
+      ? "   ⛔ La chute à deux propositions fait tomber la sortie : c'est une régression.\n"
+      : "   Une chute à trois propositions coûte une ligne, pas la question : on signale sans bloquer.\n",
   );
 }
 
 if (!rapports.length) {
-  if (STRICT_CHOIX && graves.length) {
+  if (graves.length) {
     console.log(
-      `${graves.length} gabarit(s) tombent à deux propositions — bloquant avec --strict-choix.\n`,
+      `${graves.length} gabarit(s) tombent à deux propositions : l'élève a une chance sur deux au hasard.\n`,
     );
     process.exit(1);
   }

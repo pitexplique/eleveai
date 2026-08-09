@@ -830,12 +830,18 @@ export const airesBank: TutorBankItemV4[] = [
 
     const good = `${formatNumber(aire)} cm²`;
 
+    // ⚠️ Base 4, hauteur 4 : le périmètre, le carré de la base et celui de la
+    // hauteur valent tous les trois l'aire cherchée, et il ne restait qu'une
+    // proposition en face. Deux secours qui ne peuvent jamais coïncider avec
+    // elle : l'aire augmentée de la base, et son double.
     const choices = makeChoices(good, [
       `${formatNumber(aire / 2)} cm²`,
       `${formatNumber(base + hauteur)} cm²`,
       `${formatNumber(2 * (base + hauteur))} cm²`,
       `${formatNumber(base * base)} cm²`,
       `${formatNumber(hauteur * hauteur)} cm²`,
+      `${formatNumber(aire + base)} cm²`,
+      `${formatNumber(aire * 2)} cm²`,
     ]);
 
     return {
