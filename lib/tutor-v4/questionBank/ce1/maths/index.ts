@@ -4,6 +4,7 @@ import { buildCycle2QuestionBank } from "@/lib/tutor-v4/questionBank/cycle2/math
 import { applyMathsKeyboardFree } from "../../mathsKeyboardFreeTransform";
 
 import { longueurBank } from "./longueur.bank";
+import { masseBank } from "./masse.bank";
 
 // ⏳ LE CE1 SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 09/08/2026.
 //
@@ -28,6 +29,7 @@ import { longueurBank } from "./longueur.bank";
 // couvre.
 const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...longueurBank,
+  ...masseBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
