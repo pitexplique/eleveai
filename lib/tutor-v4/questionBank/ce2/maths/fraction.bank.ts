@@ -5,10 +5,21 @@
 // NOTION : « placer une fraction sur une droite graduée » et « comparer une
 // fraction à l'unité » recevaient la même question.
 //
-// PÉRIMÈTRE BO (n° 41 du 31 octobre 2024, cycle 2) : fractions INFÉRIEURES OU
-// ÉGALES À 1, dénominateurs simples — demis, tiers, quarts, cinquièmes,
-// dixièmes. Pas d'addition de fractions, pas de fraction plus grande que 1,
-// pas de simplification : tout cela arrive au CM1 et au CM2.
+// PÉRIMÈTRE BO (n° 41 du 31 octobre 2024, applicable à la rentrée 2025, cycle
+// 2), repris mot pour mot du tableau CE2 : « Les fractions rencontrées au CE2
+// ont un dénominateur inférieur ou égal à DOUZE et sont toutes INFÉRIEURES OU
+// ÉGALES À UN. » La banque tire dans {2, 3, 4, 5, 6, 8, 10} : on reste dedans.
+//
+// ⚠️ L'ADDITION DE FRACTIONS EST AU PROGRAMME. Cet en-tête a longtemps affirmé
+// le contraire — « tout cela arrive au CM1 et au CM2 ». C'était faux, et relu
+// contre le tableau le 09/08/2026 : « Additionner et soustraire des fractions »
+// est l'un des quatre attendus de fin de CE2, et le CE1 le prépare déjà avec
+// « additionner et soustraire des fractions de même dénominateur ». Seul le
+// dénominateur COMMUN est attendu ici : les dénominateurs différents, eux,
+// arrivent bien au CM1.
+//
+// Restent hors CE2, en revanche : la fraction plus grande que 1 et la
+// simplification.
 //
 // ⚠️ PAS DE QUESTION À RÉDIGER. `applyMathsKeyboardFree` retire les items
 // `format: "open"` au primaire (cf. ce2/maths/index.ts) : un CE2 clique, il ne
@@ -643,6 +654,286 @@ export const fractionBank: TutorBankItemV4[] = [
           ],
           display: { showFraction: true, showParts: true },
         }),
+      };
+    },
+  },
+
+  /* =========================================================
+     CE2_FRACTION_ADD_SOUS — additionner et soustraire
+     Dénominateur COMMUN, résultat au plus égal à 1.
+     Ce qui se joue ici : le nombre du bas ne bouge pas. Il dit
+     en combien de parts on a coupé, et personne n'a recoupé
+     entre les deux morceaux. On ajoute des parts, pas des
+     partages : 1/4 + 2/4 = 3/4, jamais 3/8.
+  ========================================================= */
+  {
+    kind: "fixed",
+    id: "ce2_fraction_add_sous_fixed_1",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_add_sous",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Une tarte à la vanille est partagée en 5 parts égales. Léa en mange 1/5, puis encore 2/5. Quelle part de la tarte a-t-elle mangée en tout ?",
+    format: "qcm",
+    choices: ["3/5", "3/10", "3/25", "2/5"],
+    expected: ["3/5"],
+    comparator: "mcq_exact",
+    hint: "La tarte est toujours coupée en 5. Compte les parts mangées.",
+    explanation: exp(
+      "Pour additionner deux fractions qui ont le même nombre du bas, on ajoute les parts et on garde le partage.",
+      "On compte les parts prises : 1 part, puis 2 parts. Le nombre du bas ne change pas, personne n'a recoupé la tarte.",
+      "1 part + 2 parts = 3 parts, sur une tarte coupée en 5 : 1/5 + 2/5 = 3/5.",
+      "Léa a mangé 3/5 de la tarte.",
+    ),
+    tags: ["ce2", "fraction", "addition", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_fraction_add_sous_fixed_2",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_add_sous",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Pour calculer 2/7 + 3/7, que fait-on des nombres du bas ?",
+    format: "qcm",
+    choices: [
+      "on garde 7 : le partage n'a pas changé",
+      "on les additionne, ça fait 14",
+      "on les multiplie, ça fait 49",
+      "on prend le plus petit des deux",
+    ],
+    expected: ["on garde 7 : le partage n'a pas changé"],
+    comparator: "mcq_exact",
+    hint: "Le nombre du bas dit en combien de parts on a coupé. A-t-on recoupé entre les deux morceaux ?",
+    explanation: exp(
+      "Le nombre du bas d'une fraction dit en combien de parts égales le tout est partagé.",
+      "On regarde ce qui a changé entre le début et la fin : le nombre de parts prises, pas le découpage.",
+      "Le tout reste coupé en 7. On prend 2 septièmes, puis 3 septièmes : 5 septièmes. 2/7 + 3/7 = 5/7. Additionner les 7 donnerait des quatorzièmes, des parts deux fois plus petites — alors que rien n'a été recoupé.",
+      "On garde 7 au dénominateur : 2/7 + 3/7 = 5/7.",
+    ),
+    tags: ["ce2", "fraction", "addition", "denominateur", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_fraction_add_sous_fixed_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_add_sous",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un gâteau est coupé en 5 parts égales. Kevin en prend 2/5 et Maya 3/5. Quelle part du gâteau ont-ils prise à eux deux ?",
+    format: "qcm",
+    choices: [
+      "5/5, c'est-à-dire le gâteau entier",
+      "5/10",
+      "6/5",
+      "1/5",
+    ],
+    expected: ["5/5, c'est-à-dire le gâteau entier"],
+    comparator: "mcq_exact",
+    hint: "Toutes les parts sont prises. Combien y en avait-il ?",
+    explanation: exp(
+      "Quand le nombre du haut rejoint le nombre du bas, la fraction vaut le tout : 5/5 = 1.",
+      "On additionne les parts prises et on garde le partage.",
+      "2 parts + 3 parts = 5 parts, et le gâteau en comptait 5 : 2/5 + 3/5 = 5/5. Les deux ont pris tout le gâteau, il n'en reste rien.",
+      "Ils ont pris 5/5 du gâteau, c'est-à-dire le gâteau entier.",
+    ),
+    tags: ["ce2", "fraction", "addition", "unite", "piege", "qcm"],
+    canvas: fractionCanvas({
+      model: "compare",
+      fractions: [
+        { numerator: 2, denominator: 5, label: "2/5" },
+        { numerator: 3, denominator: 5, label: "3/5" },
+      ],
+      display: { showFraction: true, showParts: true },
+    }),
+  },
+  {
+    kind: "fixed",
+    id: "ce2_fraction_add_sous_fixed_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_add_sous",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une marmite de cari est pleine aux 3/4. La famille en mange 2/4. Quelle part de la marmite reste-t-il ?",
+    format: "qcm",
+    choices: ["1/4", "1/8", "5/4", "1/0"],
+    expected: ["1/4"],
+    comparator: "mcq_exact",
+    hint: "3 parts moins 2 parts. Et la marmite, elle est toujours coupée en 4.",
+    explanation: exp(
+      "Pour soustraire deux fractions qui ont le même nombre du bas, on retire les parts et on garde le partage.",
+      "On enlève le nombre de parts mangées au nombre de parts qu'il y avait.",
+      "3 parts − 2 parts = 1 part, sur une marmite partagée en 4 : 3/4 − 2/4 = 1/4. Le nombre du bas ne se soustrait pas — 4 − 4 ferait 0, et une part sur zéro part ne veut rien dire.",
+      "Il reste 1/4 de la marmite.",
+    ),
+    tags: ["ce2", "fraction", "soustraction", "piege", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "ce2_fraction_add_sous_tpl_1",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_add_sous",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Ajoute les nombres du haut. Celui du bas reste tel quel.",
+    tags: ["ce2", "fraction", "addition", "template", "canvas"],
+    generate: () => {
+      const d = randomChoice([3, 4, 5, 6, 8, 10]);
+      const n1 = randomInt(1, d - 2);
+      const n2 = randomInt(1, d - 1 - n1);
+      const somme = n1 + n2;
+      return {
+        text: `Combien font ${n1}/${d} + ${n2}/${d} ?`,
+        format: "qcm",
+        choices: makeChoices(`${somme}/${d}`, [
+          `${somme}/${2 * d}`,
+          `${somme + 1}/${d}`,
+          `${somme - 1}/${d}`,
+          `${d}/${somme}`,
+        ]),
+        expected: [`${somme}/${d}`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Deux fractions de même dénominateur s'additionnent en ajoutant les numérateurs.",
+          "On ajoute les nombres du haut, on recopie le nombre du bas.",
+          `${n1} + ${n2} = ${somme}, et le tout reste partagé en ${d} : ${n1}/${d} + ${n2}/${d} = ${somme}/${d}, soit ${nomFraction(somme, d)}.`,
+          `${n1}/${d} + ${n2}/${d} = ${somme}/${d}.`,
+        ),
+        canvas: fractionCanvas({
+          model: "compare",
+          fractions: [
+            { numerator: n1, denominator: d, label: `${n1}/${d}` },
+            { numerator: n2, denominator: d, label: `${n2}/${d}` },
+          ],
+          display: { showFraction: true, showParts: true },
+        }),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_fraction_add_sous_tpl_2",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_add_sous",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Retire les nombres du haut. Celui du bas ne bouge pas.",
+    tags: ["ce2", "fraction", "soustraction", "template"],
+    generate: () => {
+      const d = randomChoice([3, 4, 5, 6, 8, 10]);
+      const n1 = randomInt(2, d - 1);
+      // On garde n1 + n2 au plus égal à d : le piège « il a additionné » doit
+      // rester une fraction du répertoire du CE2, jamais plus grande que 1.
+      const n2 = randomInt(1, Math.min(n1 - 1, d - n1));
+      const reste = n1 - n2;
+      return {
+        text: `Combien font ${n1}/${d} − ${n2}/${d} ?`,
+        format: "qcm",
+        choices: makeChoices(`${reste}/${d}`, [
+          `${n1 + n2}/${d}`,
+          `${reste + 1}/${d}`,
+          `${d}/${reste}`,
+          `${reste}/${2 * d}`,
+          `${n2}/${d}`,
+        ]),
+        expected: [`${reste}/${d}`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Deux fractions de même dénominateur se soustraient en retirant les numérateurs.",
+          "On enlève le nombre du haut de la deuxième au nombre du haut de la première, et on recopie le nombre du bas.",
+          `${n1} − ${n2} = ${reste}, et le tout reste partagé en ${d} : ${n1}/${d} − ${n2}/${d} = ${reste}/${d}.`,
+          `${n1}/${d} − ${n2}/${d} = ${reste}/${d}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_fraction_add_sous_tpl_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_add_sous",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Il manque des parts pour arriver au tout. Combien ?",
+    tags: ["ce2", "fraction", "addition", "complement", "template"],
+    generate: () => {
+      const d = randomChoice([3, 4, 5, 6, 8, 10]);
+      const n = randomInt(1, d - 1);
+      const manque = d - n;
+      return {
+        text: `Quelle fraction faut-il ajouter à ${n}/${d} pour obtenir le tout ?`,
+        format: "qcm",
+        choices: makeChoices(`${manque}/${d}`, [
+          `${n}/${d}`,
+          `${manque}/${2 * d}`,
+          `${d}/${manque}`,
+          `${manque + 1}/${d}`,
+        ]),
+        expected: [`${manque}/${d}`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          `Le tout, c'est ${d}/${d} : toutes les parts du partage.`,
+          "On cherche combien de parts il manque pour avoir toutes les parts.",
+          `Il y a ${n} parts sur ${d}, il en manque ${d} − ${n} = ${manque} : ${n}/${d} + ${manque}/${d} = ${d}/${d}, c'est-à-dire 1.`,
+          `Il faut ajouter ${manque}/${d}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_fraction_add_sous_tpl_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "fraction",
+    microId: "ce2_fraction_add_sous",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Fais d'abord le total des deux parts prises, puis regarde ce qui reste.",
+    tags: ["ce2", "fraction", "addition", "soustraction", "probleme", "template"],
+    generate: () => {
+      const d = randomChoice([4, 5, 6, 8, 10]);
+      const n1 = randomInt(1, d - 3);
+      const n2 = randomInt(1, d - 2 - n1);
+      const pris = n1 + n2;
+      const reste = d - pris;
+      const objet = randomChoice([
+        { nom: "une bouteille de jus de goyavier", part: "de la bouteille" },
+        { nom: "un paquet de bonbons piments", part: "du paquet" },
+        { nom: "une plaque de chocolat", part: "de la plaque" },
+        { nom: "un gâteau patate", part: "du gâteau" },
+      ]);
+      return {
+        text: `On partage ${objet.nom} en ${d} parts égales. Maya en prend ${n1}/${d} et Ryan ${n2}/${d}. Quelle part ${objet.part} reste-t-il ?`,
+        format: "qcm",
+        choices: makeChoices(`${reste}/${d}`, [
+          `${pris}/${d}`,
+          `${reste}/${2 * d}`,
+          `${reste + 1}/${d}`,
+          `${d}/${reste}`,
+        ]),
+        expected: [`${reste}/${d}`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On additionne d'abord les parts prises, puis on les retire du tout.",
+          "Deux étapes : le total pris, puis ce qui reste sur le partage complet.",
+          `${n1}/${d} + ${n2}/${d} = ${pris}/${d}. Le tout vaut ${d}/${d}, donc il reste ${d}/${d} − ${pris}/${d} = ${reste}/${d}.`,
+          `Il reste ${reste}/${d} ${objet.part}.`,
+        ),
       };
     },
   },
