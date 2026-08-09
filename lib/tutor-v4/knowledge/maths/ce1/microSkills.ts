@@ -8,36 +8,45 @@
 // accent jusqu'au 09/08/2026 — un CE1 lisait « Resoudre un defi de fractions
 // simples ».
 //
-// RELU LIGNE À LIGNE contre les 82 attendus de fin d'année du CE1, le
-// 09/08/2026. Le fichier en couvrait 92 micro-compétences, mais il manquait
-// des pans entiers du programme : les cinq attendus sur les nombres ordinaux,
-// les fractions au-delà du tiers, la moitié du calcul mental, les centimes,
-// les quarts d'heure, le code de l'angle droit, le compas, le tableau à
-// double entrée. Ils sont ajoutés ici.
+// RELU LIGNE À LIGNE contre le TEXTE INTÉGRAL du programme — « Annexe 4,
+// programme de mathématiques du cycle 2 » — le 09/08/2026. Une première
+// relecture s'était appuyée sur une synthèse d'enseignant qui ne donnait que
+// les attendus de fin d'année : elle a induit six erreurs, toutes corrigées
+// ici (calcul mental, problèmes, milieu du segment — voir plus bas).
 //
 // PÉRIMÈTRE DU CE1 — un an avant le CE2, et ce qui suit change les questions :
 //   — les nombres vont jusqu'à 1 000, les ordinaux jusqu'à cent ;
-//   — sept fractions unitaires : 1/2, 1/3, 1/4, 1/5, 1/6, 1/8 et 1/10, toutes
-//     inférieures ou égales à 1. On les compare, et on les additionne quand
-//     elles ont le même dénominateur ;
+//   — les fractions ont pour dénominateur 2, 3, 4, 5, 6, 8 ou 10, et sont
+//     toutes inférieures ou égales à 1. D'abord unitaires, puis non unitaires
+//     (3/8) ; on les compare, on les additionne et on les soustrait à
+//     dénominateur égal ;
 //   — les longueurs se disent en m, cm et km. PAS de décimètre ni de
 //     millimètre : ils arrivent au CE2 ;
 //   — les masses en g et kg, avec 1 kg = 1 000 g. Pas de tonne ;
 //   — la monnaie va jusqu'aux centimes ET à l'écriture à virgule ;
 //   — l'heure se lit en heures entières, demi-heures et quarts d'heure. Pas
 //     les minutes de 5 en 5 : c'est le CE2 ;
-//   — l'équerre, l'angle droit, son code et le COMPAS sont au programme.
+//   — l'équerre, l'angle droit, son code et le COMPAS sont au programme, ainsi
+//     que les angles aigu et obtus et le milieu d'un segment ;
+//   — le calcul mental reste sous 1 000, et ses procédures sont nommées une à
+//     une : ajouter 9, 19, 29 ; soustraire 9 ; multiplier par 10 un nombre
+//     plus petit que 100 ; décomposer un facteur entre 11 et 19.
 //
-// ⚠️ CE QUI EST GARDÉ SANS ÊTRE UN ATTENDU DE FIN D'ANNÉE. Les tableaux du BO
-// ne listent ni les contenances, ni la symétrie axiale, ni la division. Le
-// texte intégral du programme peut les traiter en travail préparatoire — leur
-// absence des attendus est un signal, pas une preuve. On les garde donc en
-// attendant que Frédéric tranche, et leurs banques s'écriront en dernier.
-// Sont dans le même cas : `ce1_droite_milieu` et `ce1_duree_calendrier`.
+// ⛔ CE QUI EST GARDÉ SANS ÊTRE AU PROGRAMME DU CE1. Le texte intégral l'a
+// confirmé, il ne s'agit plus d'une déduction :
+//   — `contenance` : le CE1 ne traite que « les longueurs et les masses ». Les
+//     contenances, le litre, le décilitre arrivent au CE2 ;
+//   — `symetrie` : la symétrie axiale est un objectif du CE2 ;
+//   — `ce1_duree_calendrier` : au CE1, le calendrier relève de « Questionner
+//     le monde », pas des mathématiques ;
+//   — `reperage` sur quadrillage : le CE1 travaille sur des plans et des
+//     itinéraires, le quadrillage n'y apparaît que sous le robot.
+// On les garde en attendant que Frédéric tranche, et leurs banques s'écriront
+// en dernier.
 //
-// ⚠️ Le tableau source porte une étiquette « calcul mental » sur le bloc des
-// problèmes — un copier-coller resté dans la synthèse. Ces six lignes sont
-// rattachées ici à la notion `probleme`, comme le dit leur contenu.
+// ✅ EN REVANCHE, `division_partage` EST au programme, mais pas comme une
+// opération : le partage équitable est une STRUCTURE DE PROBLÈME du CE1 —
+// chercher le nombre de parts, ou la valeur d'une part.
 
 import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
@@ -106,9 +115,11 @@ export const microSkills: MicroSkillSource[] = [
 
   // ============================================================
   // PARTAGES ET GROUPEMENTS
-  // ⚠️ La division n'apparaît pas dans les quatre opérations du CE1. Elle
-  // affleure pourtant dans les problèmes de comparaison multiplicative et de
-  // produit cartésien. Gardée en attendant l'arbitrage de Frédéric.
+  // ✅ La division n'est pas une opération du CE1, mais le partage équitable
+  // est une structure de problème nommée par le programme : « chercher le
+  // nombre de parts à partir de la quantité totale et de la quantité de chaque
+  // part », et « chercher la valeur d'une part ». Avec le reste à interpréter :
+  // 75 œufs vendus par boites de 6, combien de boites ?
   // ============================================================
 
   { id: "ce1_division_partage", label: "Partager une quantité en parts égales", notionId: "division_partage", prerequis: ["ce1_multiplication_sens"] },
@@ -125,14 +136,17 @@ export const microSkills: MicroSkillSource[] = [
   { id: "ce1_calcul_tables_addition", label: "Connaître les tables d'addition dans les deux sens", notionId: "calcul_mental", prerequis: ["ce1_addition_posee"] },
   { id: "ce1_calcul_tables_multiplication", label: "Connaître les tables de multiplication dans les deux sens", notionId: "calcul_mental", prerequis: ["ce1_multiplication_calculer"] },
   { id: "ce1_calcul_faits_multiplicatifs", label: "Connaître des faits multiplicatifs usuels", notionId: "calcul_mental", prerequis: ["ce1_calcul_tables_multiplication"] },
-  { id: "ce1_calcul_complements_100", label: "Connaître des compléments à 100", notionId: "calcul_mental", prerequis: ["ce1_entier_centaines"] },
-  { id: "ce1_calcul_doubles_moities", label: "Utiliser doubles et moitiés", notionId: "calcul_mental", prerequis: ["ce1_table_2"] },
-  { id: "ce1_calcul_multiplier_10", label: "Multiplier un nombre entier par 10 ou par 100", notionId: "calcul_mental", prerequis: ["ce1_table_10"] },
-  { id: "ce1_calcul_ajouter_9_19_29_39", label: "Ajouter 8, 9, 18, 19, 28, 29, 38 ou 39 à un nombre", notionId: "calcul_mental", prerequis: ["ce1_calcul_tables_addition"] },
-  { id: "ce1_calcul_soustraire_9_19_29_39", label: "Soustraire 9, 19, 29 ou 39 à un nombre", notionId: "calcul_mental", prerequis: ["ce1_calcul_ajouter_9_19_29_39"] },
-  { id: "ce1_calcul_multiplier_4_8", label: "Multiplier un nombre entier par 4 ou par 8", notionId: "calcul_mental", prerequis: ["ce1_calcul_doubles_moities"] },
-  { id: "ce1_calcul_dizaines_entieres", label: "Multiplier un nombre plus petit que 10 par un nombre entier de dizaines", notionId: "calcul_mental", prerequis: ["ce1_calcul_multiplier_10"] },
-  { id: "ce1_calcul_distributivite", label: "Calculer un produit en décomposant le plus grand facteur", notionId: "calcul_mental", prerequis: ["ce1_calcul_dizaines_entieres"] },
+  { id: "ce1_calcul_doubles_moities", label: "Connaître les doubles et les moitiés usuels", notionId: "calcul_mental", prerequis: ["ce1_table_2"] },
+  // Procédure du CP, réinvestie tout au long du CE1 — et l'appui direct du
+  // rendu de monnaie, où l'on complète à 100 centimes.
+  { id: "ce1_calcul_complements_100", label: "Trouver le complément d'un nombre à la dizaine ou à la centaine supérieure", notionId: "calcul_mental", prerequis: ["ce1_entier_centaines"] },
+  { id: "ce1_calcul_dizaines_centaines", label: "Ajouter ou soustraire un nombre entier de dizaines ou de centaines", notionId: "calcul_mental", prerequis: ["ce1_entier_centaines"] },
+  { id: "ce1_calcul_multiplier_10", label: "Multiplier par 10 un nombre plus petit que 100", notionId: "calcul_mental", prerequis: ["ce1_table_10"] },
+  { id: "ce1_calcul_ajouter_9_19_29_39", label: "Ajouter 9, 19 ou 29 à un nombre", notionId: "calcul_mental", prerequis: ["ce1_calcul_tables_addition"] },
+  { id: "ce1_calcul_soustraire_9", label: "Soustraire 9 à un nombre", notionId: "calcul_mental", prerequis: ["ce1_calcul_ajouter_9_19_29_39"] },
+  { id: "ce1_calcul_soustraire_inferieur_9", label: "Soustraire un nombre plus petit que 9 à un nombre", notionId: "calcul_mental", prerequis: ["ce1_calcul_soustraire_9"] },
+  { id: "ce1_calcul_moitie_nombre_pair", label: "Déterminer la moitié d'un nombre pair", notionId: "calcul_mental", prerequis: ["ce1_calcul_doubles_moities", "ce1_nombre_parite"] },
+  { id: "ce1_calcul_distributivite", label: "Calculer le produit d'un nombre entre 11 et 19 par un nombre plus petit que 10", notionId: "calcul_mental", prerequis: ["ce1_calcul_tables_multiplication"] },
   { id: "ce1_calcul_defi", label: "Résoudre un défi de calcul mental", notionId: "calcul_mental", prerequis: ["ce1_calcul_complements_100", "ce1_calcul_doubles_moities"] },
 
   // ============================================================
@@ -154,6 +168,7 @@ export const microSkills: MicroSkillSource[] = [
   { id: "ce1_fraction_comparer_meme_denominateur", label: "Comparer des fractions qui ont le même dénominateur", notionId: "fraction", prerequis: ["ce1_fraction_inferieure_1"] },
   { id: "ce1_fraction_comparer_unitaires", label: "Comparer des fractions dont le numérateur est 1", notionId: "fraction", prerequis: ["ce1_fraction_unitaires"] },
   { id: "ce1_fraction_additionner", label: "Additionner et soustraire des fractions de même dénominateur", notionId: "fraction", prerequis: ["ce1_fraction_comparer_meme_denominateur"] },
+  { id: "ce1_fraction_complement_1", label: "Trouver le complément d'une fraction à 1", notionId: "fraction", prerequis: ["ce1_fraction_additionner"] },
   { id: "ce1_fraction_defi", label: "Résoudre un défi de fractions simples", notionId: "fraction", prerequis: ["ce1_fraction_representer"] },
 
   // ============================================================
@@ -161,13 +176,14 @@ export const microSkills: MicroSkillSource[] = [
   // ============================================================
 
   { id: "ce1_probleme_operation", label: "Choisir l'opération adaptée", notionId: "probleme", prerequis: ["ce1_addition_posee", "ce1_soustraction_posee"] },
-  { id: "ce1_probleme_add_sous", label: "Résoudre un problème additif en une étape", notionId: "probleme", prerequis: ["ce1_probleme_operation"] },
+  { id: "ce1_probleme_add_sous", label: "Résoudre un problème additif de type parties-tout en une étape", notionId: "probleme", prerequis: ["ce1_probleme_operation"] },
+  { id: "ce1_probleme_comparaison", label: "Résoudre un problème additif de comparaison en une étape", notionId: "probleme", prerequis: ["ce1_probleme_add_sous"] },
   { id: "ce1_probleme_deux_etapes", label: "Résoudre un problème additif en deux étapes", notionId: "probleme", prerequis: ["ce1_probleme_add_sous"] },
   { id: "ce1_probleme_multiplicatif", label: "Résoudre un problème multiplicatif en une étape", notionId: "probleme", prerequis: ["ce1_multiplication_sens"] },
-  { id: "ce1_probleme_comparaison_multiplicative", label: "Résoudre un problème de comparaison multiplicative", notionId: "probleme", prerequis: ["ce1_probleme_multiplicatif"] },
-  { id: "ce1_probleme_produit_cartesien", label: "Compter toutes les façons de combiner deux collections", notionId: "probleme", prerequis: ["ce1_probleme_multiplicatif"] },
-  { id: "ce1_probleme_mixte", label: "Résoudre un problème mixte en deux ou trois étapes", notionId: "probleme", prerequis: ["ce1_probleme_deux_etapes", "ce1_probleme_multiplicatif"] },
-  { id: "ce1_probleme_schema", label: "Utiliser un schéma pour raisonner", notionId: "probleme", prerequis: ["ce1_probleme_operation"] },
+  { id: "ce1_probleme_mixte", label: "Résoudre un problème mixte en deux étapes", notionId: "probleme", prerequis: ["ce1_probleme_deux_etapes", "ce1_probleme_multiplicatif"] },
+  // Le schéma en barre est l'outil de modélisation nommé par le programme du
+  // CE1 : parties-tout, comparaison, déplacement sur un axe.
+  { id: "ce1_probleme_schema", label: "Utiliser un schéma en barre pour modéliser un problème", notionId: "probleme", prerequis: ["ce1_probleme_operation"] },
   { id: "ce1_probleme_reponse", label: "Rédiger une réponse avec l'unité", notionId: "probleme", prerequis: ["ce1_probleme_add_sous"] },
   { id: "ce1_probleme_defi", label: "Résoudre un défi de problème", notionId: "probleme", prerequis: ["ce1_probleme_reponse", "ce1_probleme_multiplicatif"] },
 
@@ -182,6 +198,9 @@ export const microSkills: MicroSkillSource[] = [
   { id: "ce1_longueur_comparer", label: "Comparer des longueurs", notionId: "longueur", prerequis: ["ce1_entier_comparer"] },
   { id: "ce1_longueur_references", label: "Connaître quelques longueurs de référence", notionId: "longueur", prerequis: ["ce1_longueur_unites"] },
   { id: "ce1_longueur_estimer", label: "Estimer la longueur d'un objet du quotidien", notionId: "longueur", prerequis: ["ce1_longueur_references"] },
+  // Le tracé d'un segment de longueur donnée est listé au CE2 côté mesures ;
+  // au CE1, il vit en géométrie, avec la règle graduée comme instrument de
+  // tracé. On le garde ici, c'est le même geste.
   { id: "ce1_longueur_tracer", label: "Tracer un segment de longueur donnée", notionId: "longueur", prerequis: ["ce1_longueur_mesurer_cm_m"] },
   { id: "ce1_longueur_defi", label: "Résoudre un défi de longueurs", notionId: "longueur", prerequis: ["ce1_longueur_convertir_simple"] },
 
@@ -199,9 +218,10 @@ export const microSkills: MicroSkillSource[] = [
 
   // ============================================================
   // LES CONTENANCES
-  // ⚠️ Absentes des attendus de fin d'année du CE1 : les Grandeurs et mesures
-  // n'y listent que longueurs, masses, monnaie et temps. Le litre n'apparaît
-  // nulle part. Gardées en attendant l'arbitrage de Frédéric.
+  // ⛔ HORS PROGRAMME DU CE1, confirmé sur le texte intégral : le CE1 traite
+  // « les longueurs et les masses », le CE2 « les longueurs, les masses ET LES
+  // CONTENANCES ». Le litre, le décilitre et le centilitre sont des objectifs
+  // de CE2. Gardées en attendant l'arbitrage de Frédéric.
   // ============================================================
 
   { id: "ce1_contenance_comparer", label: "Comparer des contenances", notionId: "contenance", prerequis: ["ce1_entier_comparer"] },
@@ -220,14 +240,16 @@ export const microSkills: MicroSkillSource[] = [
   { id: "ce1_duree_matin_apres_midi", label: "Distinguer les heures du matin et celles de l'après-midi", notionId: "duree", prerequis: ["ce1_duree_lire_heure_demi"] },
   { id: "ce1_duree_unites_h_min", label: "Connaître les unités heure et minute (h et min)", notionId: "duree", prerequis: ["ce1_duree_lire_heure_demi"] },
   { id: "ce1_duree_calculer_simple", label: "Comparer et mesurer une durée écoulée", notionId: "duree", prerequis: ["ce1_duree_unites_h_min"] },
-  // ⚠️ Pas un attendu de fin d'année. Gardé en attendant l'arbitrage.
+  { id: "ce1_duree_ajouter", label: "Ajouter ou soustraire des durées", notionId: "duree", prerequis: ["ce1_duree_calculer_simple"] },
+  // ⛔ Au CE1, le calendrier relève de « Questionner le monde », pas des
+  // mathématiques. Gardé en attendant l'arbitrage de Frédéric.
   { id: "ce1_duree_calendrier", label: "Utiliser un calendrier", notionId: "duree", prerequis: ["ce1_suite_continuer"] },
   { id: "ce1_duree_defi", label: "Résoudre un défi de durées", notionId: "duree", prerequis: ["ce1_duree_calculer_simple"] },
 
   // ============================================================
   // LA MONNAIE — euros ET centimes, jusqu'à l'écriture à virgule
-  // 📅 Jalon du programme : « Les centimes d'euro sont introduits au plus tard
-  // en période 2. »
+  // 📅 Jalons du programme : « Les centimes d'euro sont introduits au plus tard
+  // en période 2. L'écriture à virgule est utilisée à partir de la période 3. »
   // ⚠️ Le piège : « 4 euros et 5 centimes » écrit 4,5 € au lieu de 4,05 €.
   // ============================================================
 
@@ -242,6 +264,12 @@ export const microSkills: MicroSkillSource[] = [
 
   // ============================================================
   // LE REPÉRAGE DANS L'ESPACE
+  // Le CE1 travaille sur des espaces RÉELS et leurs plans : la classe, l'école,
+  // le quartier. Les déplacements codés vont jusqu'à quinze instructions, dont
+  // quatre virages.
+  // ⚠️ Le quadrillage n'apparaît au CE1 que sous le robot, sur son tapis. Les
+  // quatre micro-compétences de quadrillage ci-dessous sont donc un usage de
+  // classe plus qu'un objectif du programme — à trancher avec Frédéric.
   // ============================================================
 
   { id: "ce1_espace_positions", label: "Utiliser le vocabulaire des positions : devant, entre, à droite de…", notionId: "reperage", prerequis: [] },
@@ -260,8 +288,10 @@ export const microSkills: MicroSkillSource[] = [
   { id: "ce1_droite_segment_reconnaitre", label: "Reconnaître droite, segment et alignement", notionId: "droites_segments", prerequis: ["ce1_reperage_cases_noeuds"] },
   { id: "ce1_droite_alignement_regle", label: "Vérifier un alignement avec la règle", notionId: "droites_segments", prerequis: ["ce1_droite_segment_reconnaitre"] },
   { id: "ce1_droite_segment_tracer", label: "Tracer un segment ou une droite avec la règle", notionId: "droites_segments", prerequis: ["ce1_droite_segment_reconnaitre"] },
-  // ⚠️ Pas un attendu de fin d'année. Gardé en attendant l'arbitrage.
-  { id: "ce1_droite_milieu", label: "Repérer le milieu d'un segment simple", notionId: "droites_segments", prerequis: ["ce1_longueur_mesurer_cm_m"] },
+  // ✅ Bien au programme, contrairement à ce que laissait croire le tableau
+  // d'attendus : « milieu d'un segment » est dans le lexique géométrique du
+  // CE1, et le texte précise que l'élève le trouve PAR PLIAGE.
+  { id: "ce1_droite_milieu", label: "Trouver le milieu d'un segment par pliage", notionId: "droites_segments", prerequis: ["ce1_droite_segment_tracer"] },
   { id: "ce1_droite_defi", label: "Résoudre un défi sur droites et segments", notionId: "droites_segments", prerequis: ["ce1_droite_segment_tracer"] },
 
   // ============================================================
@@ -273,6 +303,7 @@ export const microSkills: MicroSkillSource[] = [
   { id: "ce1_figure_triangle_rectangle", label: "Reconnaître un triangle rectangle", notionId: "figures_planes", prerequis: ["ce1_figure_reconnaitre"] },
   { id: "ce1_figure_decrire", label: "Décrire une figure avec le vocabulaire géométrique", notionId: "figures_planes", prerequis: ["ce1_figure_reconnaitre"] },
   { id: "ce1_angle_droit", label: "Vérifier un angle droit avec l'équerre", notionId: "figures_planes", prerequis: ["ce1_figure_decrire"] },
+  { id: "ce1_angle_aigu_obtus", label: "Distinguer un angle droit, un angle aigu et un angle obtus", notionId: "figures_planes", prerequis: ["ce1_angle_droit"] },
   { id: "ce1_angle_droit_code", label: "Connaître et utiliser le code de l'angle droit", notionId: "figures_planes", prerequis: ["ce1_angle_droit"] },
   { id: "ce1_figure_proprietes", label: "Connaître les angles et les côtés égaux du carré et du rectangle", notionId: "figures_planes", prerequis: ["ce1_angle_droit"] },
   { id: "ce1_figure_construire", label: "Reproduire ou construire une figure simple", notionId: "figures_planes", prerequis: ["ce1_droite_segment_tracer"] },
@@ -293,8 +324,10 @@ export const microSkills: MicroSkillSource[] = [
 
   // ============================================================
   // LA SYMÉTRIE AXIALE
-  // ⚠️ Absente des attendus de fin d'année du CE1, alors que la géométrie
-  // plane y est détaillée sur sept lignes. Gardée en attendant l'arbitrage.
+  // ⛔ HORS PROGRAMME DU CE1, confirmé sur le texte intégral : « Reconnaitre
+  // si une figure possède un ou plusieurs axes de symétrie » et « Compléter
+  // une figure pour la rendre symétrique » sont des objectifs de CE2. Gardée
+  // en attendant l'arbitrage de Frédéric.
   // ============================================================
 
   { id: "ce1_symetrie_axe", label: "Reconnaître un axe de symétrie", notionId: "symetrie", prerequis: ["ce1_figure_reconnaitre"] },
