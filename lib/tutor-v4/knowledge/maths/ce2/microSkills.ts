@@ -56,7 +56,10 @@ export const microSkills: MicroSkillSource[] = [
   { id: "ce2_tables_2_3_4_5_10", label: "Connaître les tables de 2, 3, 4, 5 et 10", notionId: "multiplication", prerequis: ["ce2_addition_posee"] },
   { id: "ce2_tables_6_7_8_9", label: "Connaître les tables de 6, 7, 8 et 9", notionId: "multiplication", prerequis: ["ce2_tables_2_3_4_5_10"] },
   { id: "ce2_multiplication_sens", label: "Relier multiplication, groupes égaux et tableau", notionId: "multiplication", prerequis: ["ce2_tables_2_3_4_5_10"] },
-  { id: "ce2_multiplication_posee", label: "Poser une multiplication par un nombre à un chiffre", notionId: "multiplication", prerequis: ["ce2_tables_6_7_8_9"] },
+  // Intitulé du BO : « Poser et effectuer des multiplications d'un nombre à
+  // deux ou trois chiffres par un nombre à UN OU DEUX chiffres. » Le label
+  // s'arrêtait à un chiffre, il laissait tomber la moitié de l'attendu.
+  { id: "ce2_multiplication_posee", label: "Poser une multiplication par un nombre à un ou deux chiffres", notionId: "multiplication", prerequis: ["ce2_tables_6_7_8_9"] },
   { id: "ce2_multiplication_10_100", label: "Multiplier par 10 ou par 100", notionId: "multiplication", prerequis: ["ce2_entier_milliers"] },
   { id: "ce2_multiplication_defi", label: "Résoudre un défi de multiplication", notionId: "multiplication", prerequis: ["ce2_multiplication_posee"] },
 

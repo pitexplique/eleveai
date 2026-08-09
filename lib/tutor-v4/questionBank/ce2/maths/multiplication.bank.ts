@@ -3,10 +3,19 @@
 // La multiplication du CE2, écrite à la main. Six micro-compétences qui
 // passaient par le constructeur commun.
 //
-// PÉRIMÈTRE BO (n° 41 du 31 octobre 2024, cycle 2) : les tables de 2 à 9 et
-// celle de 10, le sens de la multiplication (groupes égaux, disposition en
-// rangées), la multiplication posée par un nombre À UN CHIFFRE, et la
+// PÉRIMÈTRE BO (n° 41 du 31 octobre 2024, applicable à la rentrée 2025,
+// cycle 2) : les tables de 2 à 9 et celle de 10, le sens de la multiplication
+// (groupes égaux, disposition en rangées), la multiplication posée « d'un
+// nombre à deux ou trois chiffres par un nombre À UN OU DEUX CHIFFRES », et la
 // multiplication par 10 et par 100. Les nombres restent sous 10 000.
+//
+// ⚠️ Le calendrier compte : « l'algorithme de la multiplication posée est
+// introduit en PÉRIODE 4 au plus tard ». Avant cela, l'élève multiplie sans
+// poser — par addition itérée ou par décomposition.
+//
+// Le texte donne aussi la disposition : pour 16 × 548, on pose « avec le
+// nombre ayant le moins de chiffres sur la deuxième ligne ». Deux lignes à
+// calculer au lieu de trois.
 //
 // LE PIÈGE DE LA NOTION : « pour multiplier par 10, on ajoute un zéro ». La
 // recette marche, et c'est bien le problème — elle cache ce qui se passe. Ce
@@ -491,8 +500,12 @@ export const multiplicationBank: TutorBankItemV4[] = [
   },
 
   /* =========================================================
-     CE2_MULTIPLICATION_POSEE — poser par un nombre à un chiffre
-     Le piège : la retenue qu'on oublie d'ajouter.
+     CE2_MULTIPLICATION_POSEE — par un nombre à un OU DEUX chiffres
+     Par un chiffre, le piège est la retenue qu'on oublie.
+     Par deux chiffres, c'en est un autre, et c'est un vrai saut :
+     il y a une DEUXIÈME LIGNE, et elle est décalée d'un rang.
+     Le chiffre des dizaines du multiplicateur ne compte pas des
+     unités — sa ligne démarre une colonne plus à gauche.
   ========================================================= */
   {
     kind: "fixed",
@@ -649,6 +662,174 @@ export const multiplicationBank: TutorBankItemV4[] = [
           "On pose la multiplication et on commence par les unités, en surveillant la retenue.",
           `${parBoite} × ${boites} = ${total}.`,
           `Il y a ${total} ${contexte.quoi}.`,
+        ),
+      };
+    },
+  },
+
+  // --- Par un nombre à DEUX chiffres -----------------------
+  // Ici s'ouvre la deuxième ligne. Tout se joue sur son décalage.
+  {
+    kind: "fixed",
+    id: "ce2_multiplication_posee_fixed_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_posee",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un élève pose 24 × 13. Il calcule 3 × 24 = 72, puis 1 × 24 = 24, il additionne les deux lignes l'une sous l'autre et annonce 96. Où s'est-il trompé ?",
+    format: "qcm",
+    choices: [
+      "le 1 de 13 compte des dizaines : sa ligne se décale d'un rang",
+      "il a oublié une retenue",
+      "il fallait commencer par le 1",
+      "72 est faux, c'est 62",
+    ],
+    expected: ["le 1 de 13 compte des dizaines : sa ligne se décale d'un rang"],
+    comparator: "mcq_exact",
+    hint: "Dans 13, le 1 ne vaut pas 1. Il vaut 10.",
+    explanation: exp(
+      "Dans une multiplication posée par un nombre à deux chiffres, la deuxième ligne est décalée d'un rang vers la gauche.",
+      "On multiplie d'abord par les unités du multiplicateur, puis par ses dizaines — et cette deuxième ligne démarre sous les dizaines, pas sous les unités.",
+      "Ses deux calculs sont bons : 3 × 24 = 72 et 1 × 24 = 24. Mais le 1 de 13 vaut une dizaine : sa ligne, c'est 10 × 24 = 240, pas 24. Le total est 72 + 240 = 312, pas 96.",
+      "Il n'a pas décalé la deuxième ligne : le résultat est 312.",
+    ),
+    tags: ["ce2", "multiplication", "posee", "deux_chiffres", "piege", "qcm", "canvas"],
+    canvas: calculPose({
+      operation: "multiplication",
+      numbers: ["24", "13"],
+      result: "312",
+      display: { showResult: false, showRetenues: false },
+    }),
+  },
+  {
+    kind: "fixed",
+    id: "ce2_multiplication_posee_fixed_5",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_posee",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Quand on pose 32 × 14, pourquoi écrit-on un zéro au bout de la deuxième ligne ?",
+    format: "qcm",
+    choices: [
+      "parce que le 1 de 14 vaut une dizaine : cette ligne, c'est 32 × 10",
+      "pour que les deux lignes aient la même longueur",
+      "parce qu'on termine toujours une multiplication par un zéro",
+      "c'est une habitude d'écriture, on peut l'oublier",
+    ],
+    expected: ["parce que le 1 de 14 vaut une dizaine : cette ligne, c'est 32 × 10"],
+    comparator: "mcq_exact",
+    hint: "Ce zéro n'est pas là pour décorer : il dit quelque chose sur le rang.",
+    explanation: exp(
+      "Le zéro de la deuxième ligne marque le décalage d'un rang : il dit que cette ligne compte des dizaines.",
+      "On regarde ce que vaut vraiment le chiffre par lequel on multiplie.",
+      "Dans 14, le 1 vaut 10. La deuxième ligne n'est donc pas 1 × 32 = 32, mais 10 × 32 = 320. Le zéro écrit au bout, c'est ce ×10. Sans lui, on additionnerait 32 au lieu de 320.",
+      "Le zéro dit que cette ligne, c'est 32 × 10.",
+    ),
+    tags: ["ce2", "multiplication", "posee", "deux_chiffres", "methode", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_multiplication_posee_fixed_6",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_posee",
+    difficulty: 3,
+    theme: "neutral",
+    text: "On doit poser 16 × 548. Quelle disposition donne le moins de lignes à calculer ?",
+    format: "qcm",
+    choices: [
+      "548 en haut et 16 en dessous",
+      "16 en haut et 548 en dessous",
+      "les deux donnent le même nombre de lignes",
+      "on ne peut pas poser cette multiplication",
+    ],
+    expected: ["548 en haut et 16 en dessous"],
+    comparator: "mcq_exact",
+    hint: "Chaque chiffre du nombre du bas fabrique une ligne. Lequel en a le moins ?",
+    explanation: exp(
+      "Dans une multiplication posée, le nombre du bas fabrique une ligne par chiffre.",
+      "On met donc en dessous celui qui a le moins de chiffres.",
+      "Avec 16 en dessous : 2 chiffres, donc 2 lignes. Avec 548 en dessous : 3 chiffres, donc 3 lignes. Le résultat est le même — 16 × 548 = 548 × 16 — mais il y a une ligne de moins à écrire, et une occasion de moins de se tromper.",
+      "On pose 548 en haut et 16 en dessous.",
+    ),
+    tags: ["ce2", "multiplication", "posee", "deux_chiffres", "methode", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_posee_tpl_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_posee",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Deux lignes : une pour les unités, une pour les dizaines. La seconde se décale.",
+    tags: ["ce2", "multiplication", "posee", "deux_chiffres", "template", "canvas"],
+    generate: () => {
+      const a = randomInt(23, 98);
+      const b = randomInt(12, 39);
+      const u = b % 10;
+      const d = Math.floor(b / 10);
+      const produit = a * b;
+      return {
+        text: `Combien font ${a} × ${b} ?`,
+        format: "short",
+        expected: [String(produit)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Par un nombre à deux chiffres, la multiplication posée a deux lignes, et la seconde est décalée d'un rang.",
+          "On multiplie par les unités, puis par les dizaines en décalant, puis on additionne les deux lignes.",
+          `${u} × ${a} = ${a * u}. Puis ${d} dizaine${d > 1 ? "s" : ""} : ${d * 10} × ${a} = ${a * d * 10}. On additionne : ${a * u} + ${a * d * 10} = ${produit}.`,
+          `${a} × ${b} = ${produit}.`,
+        ),
+        canvas: calculPose({
+          operation: "multiplication",
+          numbers: [String(a), String(b)],
+          result: String(produit),
+          display: { showResult: false, showRetenues: false },
+        }),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_posee_tpl_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_posee",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Regarde ce que vaut vraiment le chiffre de gauche du nombre du bas.",
+    tags: ["ce2", "multiplication", "posee", "deux_chiffres", "piege", "template"],
+    generate: () => {
+      const a = randomInt(23, 98);
+      const b = randomInt(12, 39);
+      const u = b % 10;
+      const d = Math.floor(b / 10);
+      const produit = a * b;
+      const sansDecalage = a * u + a * d;
+      return {
+        text: `Un élève pose ${a} × ${b}. Il écrit ses deux lignes l'une sous l'autre, sans décaler la seconde, et trouve ${sansDecalage}. Quel est le bon résultat ?`,
+        format: "qcm",
+        choices: makeChoices(String(produit), [
+          String(sansDecalage),
+          String(produit + a),
+          String(produit - a),
+          String(produit + 10 * a),
+        ]),
+        expected: [String(produit)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La deuxième ligne d'une multiplication posée est décalée d'un rang : elle compte des dizaines.",
+          "On reprend la ligne des dizaines à sa vraie valeur, puis on additionne.",
+          `${u} × ${a} = ${a * u}, c'est juste. Mais le ${d} de ${b} vaut ${d * 10}, pas ${d} : sa ligne est ${d * 10} × ${a} = ${a * d * 10}, et non ${a * d}. Le total est ${a * u} + ${a * d * 10} = ${produit}.`,
+          `${a} × ${b} = ${produit}.`,
         ),
       };
     },
