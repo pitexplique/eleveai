@@ -19,6 +19,8 @@ import { figuresPlanesBank } from "./figures-planes.bank";
 import { droitesAnglesBank } from "./droites-angles.bank";
 import { perimetreBank } from "./perimetre.bank";
 import { solidesBank } from "./solides.bank";
+import { reperageBank } from "./reperage.bank";
+import { symetrieBank } from "./symetrie.bank";
 
 // Le CE2 quitte le constructeur commun, une notion à la fois.
 //
@@ -50,6 +52,8 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...droitesAnglesBank,
   ...perimetreBank,
   ...solidesBank,
+  ...reperageBank,
+  ...symetrieBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
