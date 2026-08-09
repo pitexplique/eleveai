@@ -822,4 +822,474 @@ export const calculMentalBank: TutorBankItemV4[] = [
       };
     },
   },
+  // ============================================================
+  // COMPLÉMENTS DU 09/08/2026 — douze micro-compétences n'avaient qu'une ou
+  // deux questions : à la troisième, l'élève revoyait la première. Tous les
+  // ajouts sont des GÉNÉRATEURS, chacun sur un angle absent de la banque.
+  // ============================================================
+
+  {
+    kind: "template",
+    id: "ce1_calcul_tables_addition_tpl_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce1_calcul_tables_addition",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La somme est écrite à GAUCHE : le signe = se lit dans les deux sens.",
+    tags: ["ce1", "calcul_mental", "tables", "piege", "template"],
+    generate: () => {
+      const a = randomInt(2, 9);
+      const b = randomInt(2, 9);
+      return {
+        text: `Quel nombre manque : ${a + b} = ${a} + … ?`,
+        format: "short",
+        expected: [String(b)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Une table d'addition se connait dans les deux sens : A + B = C, mais aussi C = A + B.",
+          "On cherche ce qu'il faut ajouter à droite pour retrouver le nombre de gauche.",
+          `${a} et combien font ${a + b} ? Il faut ${b}, car ${a} + ${b} = ${a + b}.`,
+          `Le nombre manquant est ${b}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_calcul_tables_multiplication_tpl_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce1_calcul_tables_multiplication",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les tables du CE1 sont celles de 2, de 5 et de 10.",
+    tags: ["ce1", "calcul_mental", "tables_multiplication", "template"],
+    generate: () => {
+      const table = randomChoice([2, 5, 10]);
+      const k = randomInt(2, 9);
+      return {
+        text: `Combien font ${table} × ${k} ?`,
+        format: "short",
+        expected: [String(table * k)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Les tables de 2, de 5 et de 10 se restituent de mémoire.",
+          "Si le résultat ne vient pas, on compte de table en table.",
+          table === 2
+            ? `On compte de deux en deux, ${k} fois : ${table * k}. C'est aussi le double de ${k}.`
+            : table === 5
+              ? `On compte de cinq en cinq, ${k} fois : ${table * k}. Les résultats se terminent tous par 0 ou par 5.`
+              : `Multiplier par 10, c'est ajouter un zéro : ${k} devient ${table * k}.`,
+          `${table} × ${k} = ${table * k}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_calcul_tables_multiplication_tpl_3",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce1_calcul_tables_multiplication",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Cherche dans quelle table se trouve ce résultat.",
+    tags: ["ce1", "calcul_mental", "tables_multiplication", "template"],
+    generate: () => {
+      const table = randomChoice([2, 5, 10]);
+      const k = randomInt(2, 9);
+      const r = table * k;
+      return {
+        text: `Quel nombre manque : … × ${k} = ${r} ?`,
+        format: "short",
+        expected: [String(table)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Connaitre une table dans les deux sens, c'est aussi savoir retrouver un facteur.",
+          "On cherche par combien multiplier le nombre connu pour atteindre le résultat.",
+          `${table} × ${k} = ${r}. Le facteur manquant est donc ${table}.`,
+          `Le nombre manquant est ${table}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_calcul_faits_tpl_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce1_calcul_faits_multiplicatifs",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Quatre paquets de 25 font 100.",
+    tags: ["ce1", "calcul_mental", "faits_multiplicatifs", "template"],
+    generate: () => {
+      const fait = randomChoice([
+        { texte: "Combien de fois 25 faut-il pour faire 100 ?", reponse: 4, pourquoi: "25 + 25 + 25 + 25 = 100." },
+        { texte: "Combien de fois 50 faut-il pour faire 100 ?", reponse: 2, pourquoi: "50 + 50 = 100." },
+        { texte: "Combien de fois 20 faut-il pour faire 100 ?", reponse: 5, pourquoi: "20, 40, 60, 80, 100 : cinq fois." },
+        { texte: "Combien de fois 10 faut-il pour faire 100 ?", reponse: 10, pourquoi: "Dix dizaines font une centaine." },
+      ]);
+      return {
+        text: fait.texte,
+        format: "short",
+        expected: [String(fait.reponse)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Certains produits se retiennent comme des faits, parce qu'ils reviennent tout le temps.",
+          "On compte de la valeur en la valeur jusqu'à 100.",
+          fait.pourquoi,
+          `Il en faut ${fait.reponse}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_calcul_doubles_tpl_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce1_calcul_doubles_moities",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On te donne le double : cherche le nombre de départ.",
+    tags: ["ce1", "calcul_mental", "doubles_moities", "template"],
+    generate: () => {
+      const n = randomChoice([5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 40, 50]);
+      const double = n * 2;
+      return {
+        text: `Le double d'un nombre est ${double}. Quel est ce nombre ?`,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Chercher le nombre dont on connait le double, c'est chercher sa moitié.",
+          "On cherche le nombre qui, ajouté à lui-même, donne le résultat.",
+          `${n} + ${n} = ${double}. Le nombre cherché est donc ${n}.`,
+          `C'est ${n}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_calcul_complements_tpl_3",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce1_calcul_complements_100",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On complète d'abord les unités, puis les dizaines.",
+    tags: ["ce1", "calcul_mental", "complements", "template"],
+    generate: () => {
+      const dizaines = randomInt(1, 8);
+      const unites = randomInt(1, 9);
+      const n = dizaines * 10 + unites;
+      const manque = 100 - n;
+      const versDizaine = 10 - unites;
+      return {
+        text: `Combien faut-il ajouter à ${n} pour atteindre 100 ?`,
+        format: "short",
+        expected: [String(manque)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le complément à 100 se construit en deux temps.",
+          "On complète d'abord les unités jusqu'à la dizaine ronde, puis les dizaines jusqu'à 100.",
+          `De ${n}, il faut ${versDizaine} pour atteindre ${n + versDizaine}. Puis ${100 - n - versDizaine} pour atteindre 100. En tout : ${versDizaine} + ${100 - n - versDizaine} = ${manque}.`,
+          `Il faut ajouter ${manque}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_calcul_dizaines_tpl_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce1_calcul_dizaines_centaines",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Retirer une centaine ne change que le chiffre des centaines.",
+    tags: ["ce1", "calcul_mental", "dizaines_centaines", "piege", "template"],
+    generate: () => {
+      const centaines = randomInt(3, 9);
+      const dizaines = randomInt(0, 9);
+      const unites = randomInt(0, 9);
+      const n = centaines * 100 + dizaines * 10 + unites;
+      const pas = randomChoice([10, 100]);
+      const ajoute = randomChoice([true, false]);
+      const r = ajoute ? n + pas : n - pas;
+      return {
+        text: `Combien font ${n} ${ajoute ? "+" : "-"} ${pas} ?`,
+        format: "short",
+        expected: [String(r)],
+        comparator: "number_equal",
+        explanation: exp(
+          `${ajoute ? "Ajouter" : "Retirer"} ${pas}, c'est ${ajoute ? "ajouter" : "retirer"} ${pas === 10 ? "une dizaine" : "une centaine"}.`,
+          `On change le chiffre des ${pas === 10 ? "dizaines" : "centaines"} de un, sans toucher aux autres rangs.`,
+          pas === 10 && (ajoute ? dizaines === 9 : dizaines === 0)
+            ? `Ici le chiffre des dizaines ${ajoute ? "était déjà à 9 : la dizaine de plus fait changer les centaines" : "était à 0 : il faut emprunter une centaine"}. On obtient ${r}.`
+            : `${n} ${ajoute ? "+" : "-"} ${pas} = ${r} : seul le rang des ${pas === 10 ? "dizaines" : "centaines"} a bougé.`,
+          `${n} ${ajoute ? "+" : "-"} ${pas} = ${r}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_calcul_dizaines_tpl_3",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce1_calcul_dizaines_centaines",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Compte en dizaines : les unités ne bougent pas.",
+    tags: ["ce1", "calcul_mental", "dizaines_centaines", "template"],
+    generate: () => {
+      const dizaines = randomInt(3, 9);
+      const unites = randomInt(1, 9);
+      const n = dizaines * 10 + unites;
+      const pasDizaines = randomInt(1, dizaines - 1);
+      const pas = pasDizaines * 10;
+      const r = n - pas;
+      return {
+        text: `Combien font ${n} - ${pas} ?`,
+        format: "short",
+        expected: [String(r)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Retirer un nombre entier de dizaines ne touche pas au chiffre des unités.",
+          "On compte en dizaines : on retire les dizaines aux dizaines.",
+          `${pas}, c'est ${pasDizaines} dizaines. ${n} en a ${dizaines}. ${dizaines} - ${pasDizaines} = ${dizaines - pasDizaines} dizaines. Les ${unites} unités ne bougent pas : ${r}.`,
+          `${n} - ${pas} = ${r}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_calcul_multiplier_10_tpl_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce1_calcul_multiplier_10",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Chaque chiffre monte d'un rang : les unités deviennent des dizaines.",
+    tags: ["ce1", "calcul_mental", "multiplier_10", "piege", "template"],
+    generate: () => {
+      const n = randomInt(11, 99);
+      return {
+        text: `Quand on multiplie ${n} par 10, que devient le chiffre des unités de ${n} ?`,
+        format: "qcm",
+        choices: makeChoices("il devient le chiffre des dizaines", [
+          "il reste le chiffre des unités",
+          "il devient le chiffre des centaines",
+          "il disparait",
+        ]),
+        expected: ["il devient le chiffre des dizaines"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Multiplier par 10, ce n'est pas « ajouter un zéro » : c'est faire monter chaque chiffre d'un rang.",
+          "On regarde où se retrouve chaque chiffre dans le résultat.",
+          `${n} × 10 = ${n * 10}. Le ${n % 10} qui comptait des unités compte maintenant des dizaines, et le ${Math.floor(n / 10)} passe aux centaines. Le zéro qui apparait au bout n'est que la place laissée vide aux unités.`,
+          "Il devient le chiffre des dizaines.",
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_calcul_multiplier_10_tpl_3",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce1_calcul_multiplier_10",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Enlève le zéro du résultat.",
+    tags: ["ce1", "calcul_mental", "multiplier_10", "template"],
+    generate: () => {
+      const n = randomInt(2, 99);
+      const r = n * 10;
+      return {
+        text: `Quel nombre manque : … × 10 = ${r} ?`,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un nombre multiplié par 10 se termine toujours par zéro.",
+          "On retire le zéro final pour retrouver le nombre de départ.",
+          `${r} sans son zéro donne ${n}. On vérifie : ${n} × 10 = ${r}.`,
+          `Le nombre manquant est ${n}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_calcul_ajouter_9_tpl_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce1_calcul_ajouter_9_19_29_39",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On a ajouté un de trop : que faut-il faire ensuite ?",
+    tags: ["ce1", "calcul_mental", "ajouter_9", "piege", "template"],
+    generate: () => {
+      const n = randomInt(40, 800);
+      const a = randomChoice([9, 19, 29, 39]);
+      const rond = a + 1;
+      return {
+        text: `Pour calculer ${n} + ${a}, un élève commence par ${n} + ${rond} = ${n + rond}. Que doit-il faire ensuite ?`,
+        format: "qcm",
+        choices: makeChoices("retirer 1", [
+          "ajouter 1",
+          "retirer 10",
+          "ajouter 10",
+          "rien, il a fini",
+        ]),
+        expected: ["retirer 1"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          `Ajouter ${a}, c'est ajouter ${rond} puis retirer 1.`,
+          "On regarde ce qu'on a ajouté en trop.",
+          `Il fallait ajouter ${a}, il a ajouté ${rond} : c'est 1 de trop. En retirant 1 à ${n + rond}, il obtient ${n + a}.`,
+          "Il doit retirer 1.",
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_calcul_soustraire_9_tpl_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce1_calcul_soustraire_9",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Retirer 9, c'est retirer 10 puis rendre 1.",
+    tags: ["ce1", "calcul_mental", "soustraire_9", "template"],
+    generate: () => {
+      const dizaines = randomInt(3, 9);
+      const n = dizaines * 10 + randomInt(0, 9);
+      const r = n - 9;
+      return {
+        text: `Combien font ${n} - 9 ?`,
+        format: "short",
+        expected: [String(r)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Retirer 9, c'est retirer une dizaine puis rendre l'unité prise en trop.",
+          "On retire 10, puis on ajoute 1.",
+          `${n} - 10 = ${n - 10}, puis ${n - 10} + 1 = ${r}.`,
+          `${n} - 9 = ${r}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_calcul_soustraire_inf9_tpl_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce1_calcul_soustraire_inferieur_9",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Il faut casser une dizaine : les unités ne suffisent pas.",
+    tags: ["ce1", "calcul_mental", "soustraire_inferieur_9", "piege", "template"],
+    generate: () => {
+      const centaines = randomInt(1, 9);
+      const dizaines = randomInt(1, 9);
+      const n = centaines * 100 + dizaines * 10;
+      const b = randomInt(1, 9);
+      const r = n - b;
+      return {
+        text: `Combien font ${n} - ${b} ?`,
+        format: "short",
+        expected: [String(r)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Quand il n'y a pas assez d'unités pour retirer, on casse une dizaine.",
+          "On transforme une dizaine en dix unités, puis on retire.",
+          `${n} n'a aucune unité. On casse une dizaine : il reste ${dizaines - 1} dizaine${dizaines - 1 > 1 ? "s" : ""} et 10 unités. 10 - ${b} = ${10 - b}. On obtient ${r}.`,
+          `${n} - ${b} = ${r}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_calcul_moitie_tpl_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce1_calcul_moitie_nombre_pair",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Un nombre impair ne se partage pas en deux parts entières égales.",
+    tags: ["ce1", "calcul_mental", "moitie", "piege", "template"],
+    generate: () => {
+      const pair = randomChoice([true, false]);
+      const n = pair ? randomInt(5, 40) * 2 : randomInt(5, 40) * 2 + 1;
+      return {
+        text: `Peut-on partager ${n} en deux parts entières égales ?`,
+        format: "qcm",
+        choices: shuffle(["oui", "non"]),
+        expected: [pair ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Seuls les nombres pairs se partagent en deux parts entières égales.",
+          "On regarde le chiffre des unités : 0, 2, 4, 6 ou 8 annonce un nombre pair.",
+          pair
+            ? `${n} se termine par ${n % 10} : il est pair. Sa moitié est ${n / 2}, car ${n / 2} + ${n / 2} = ${n}.`
+            : `${n} se termine par ${n % 10} : il est impair. En le partageant en deux, on obtiendrait ${Math.floor(n / 2)} et ${Math.ceil(n / 2)}, qui ne sont pas égaux — il resterait toujours un de côté.`,
+          pair ? `Oui, la moitié est ${n / 2}.` : "Non, ce nombre est impair.",
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_calcul_distributivite_tpl_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "calcul_mental",
+    microId: "ce1_calcul_distributivite",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Le nombre a été coupé en 10 et le reste : il manque un morceau.",
+    tags: ["ce1", "calcul_mental", "distributivite", "template"],
+    generate: () => {
+      const unites = randomInt(1, 9);
+      const n = 10 + unites;
+      const k = randomInt(2, 9);
+      const morceauDix = 10 * k;
+      const morceauUnites = unites * k;
+      return {
+        text: `Pour calculer ${n} × ${k}, on coupe ${n} en 10 + ${unites}. On a déjà 10 × ${k} = ${morceauDix}. Quel est le résultat final ?`,
+        format: "short",
+        expected: [String(morceauDix + morceauUnites)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Multiplier une somme, c'est multiplier chaque morceau puis réunir.",
+          "On calcule le second morceau, puis on additionne les deux.",
+          `${unites} × ${k} = ${morceauUnites}. On réunit : ${morceauDix} + ${morceauUnites} = ${morceauDix + morceauUnites}.`,
+          `${n} × ${k} = ${morceauDix + morceauUnites}.`,
+        ),
+      };
+    },
+  },
 ];
