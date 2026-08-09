@@ -19,6 +19,7 @@ import { figuresPlanesBank } from "./figures-planes.bank";
 import { droitesSegmentsBank } from "./droites-segments.bank";
 import { solidesBank } from "./solides.bank";
 import { reperageBank } from "./reperage.bank";
+import { donneesBank } from "./donnees.bank";
 
 // ⏳ LE CE1 SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 09/08/2026.
 //
@@ -58,6 +59,7 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...droitesSegmentsBank,
   ...solidesBank,
   ...reperageBank,
+  ...donneesBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
