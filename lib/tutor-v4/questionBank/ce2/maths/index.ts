@@ -7,6 +7,7 @@ import { nombresEntiersBank } from "./nombres-entiers.bank";
 import { calculBank } from "./calcul.bank";
 import { problemeBank } from "./probleme.bank";
 import { fractionBank } from "./fraction.bank";
+import { longueurBank } from "./longueur.bank";
 
 // Le CE2 quitte le constructeur commun, une notion à la fois.
 //
@@ -26,6 +27,7 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...calculBank,
   ...problemeBank,
   ...fractionBank,
+  ...longueurBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
