@@ -4,6 +4,7 @@ import { buildCycle2QuestionBank } from "@/lib/tutor-v4/questionBank/cycle2/math
 import { applyMathsKeyboardFree } from "../../mathsKeyboardFreeTransform";
 
 import { nombresEntiersBank } from "./nombres-entiers.bank";
+import { monnaieBank } from "./monnaie.bank";
 
 // ⏳ LE CP SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 09/08/2026.
 //
@@ -31,6 +32,7 @@ import { nombresEntiersBank } from "./nombres-entiers.bank";
 // couvre.
 const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...nombresEntiersBank,
+  ...monnaieBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
