@@ -3,10 +3,23 @@
 // Les solides du CE2, écrits à la main. Cinq micro-compétences qui passaient
 // par le constructeur commun.
 //
-// PÉRIMÈTRE BO (n° 41 du 31 octobre 2024, cycle 2) : nommer le cube, la boule,
-// le pavé droit, le cône, la pyramide et le cylindre ; les décrire avec les
-// mots faces, arêtes et sommets ; connaître la nature des faces d'une
-// pyramide ; construire un cube à partir d'un patron.
+// PÉRIMÈTRE BO (n° 41 du 31 octobre 2024, applicable à la rentrée 2025,
+// cycle 2) : nommer le cube, la boule, le pavé droit, le cône, la pyramide et
+// le cylindre ; les décrire avec les mots faces, arêtes et sommets ; connaître
+// la nature des faces d'une pyramide ; construire un cube à partir d'un patron.
+//
+// ⚠️ LA PERSPECTIVE, note entière du programme longtemps sans question ici :
+// « En CE2, les élèves travaillent aussi avec des représentations en
+// perspective des solides dont ils sont familiers. Certaines faces, certaines
+// arêtes et certains sommets ne sont pas visibles dans de telles
+// représentations, et les arêtes non visibles sont souvent tracées en
+// pointillés. S'ils ne construisent pas eux-mêmes de telles représentations,
+// ils savent néanmoins IDENTIFIER un solide connu à partir d'une représentation
+// en perspective. »
+// ⚠️ Le canvas `solide_3d` dessine bien en perspective, mais avec des faces
+// opaques : il ne trace AUCUNE arête cachée en pointillés. Les questions qui
+// portent sur ce qu'on ne voit pas sont donc posées en MOTS, pas sur le dessin.
+// Le dessin, lui, sert à ce que le programme lui demande : reconnaître.
 // ⛔ Pas de volume au cycle 2 : le cm³ arrive au cycle 3. On compte des faces,
 // des arêtes et des sommets, jamais des cubes-unités.
 // ⛔ Pas de relation d'inclusion non plus : on ne demande pas « un cube est-il
@@ -293,10 +306,77 @@ export const solidesBank: TutorBankItemV4[] = [
     },
   },
 
+  // --- Reconnaître SUR UNE VUE EN PERSPECTIVE ---------------
+  // Le programme ne demande pas à l'élève de dessiner en
+  // perspective. Il lui demande de RECONNAÎTRE un solide sur un
+  // tel dessin — donc de ne pas se laisser arrêter par les
+  // faces qui se déforment.
+  {
+    kind: "fixed",
+    id: "ce2_solide_reconnaitre_fixed_5",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "solides",
+    microId: "ce2_solide_reconnaitre",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Sur un dessin en perspective, les faces carrées d'un cube ont l'air penchées, comme des losanges. Est-ce toujours un cube ?",
+    format: "qcm",
+    choices: [
+      "oui : c'est le dessin qui déforme, pas le solide",
+      "non, c'est un autre solide",
+      "non, ses faces sont devenues des losanges",
+      "on ne peut pas le savoir sur un dessin",
+    ],
+    expected: ["oui : c'est le dessin qui déforme, pas le solide"],
+    comparator: "mcq_exact",
+    hint: "Pense à une boîte de dés posée sur la table, vue de biais. Ses faces sont toujours carrées.",
+    explanation: exp(
+      "Une représentation en perspective montre un solide vu de biais : les faces s'y déforment, le solide non.",
+      "On se demande ce qu'est l'objet réel, pas ce que le dessin en montre.",
+      "Un cube vu de face montre un carré ; vu de biais, ce même carré devient un parallélogramme sur la feuille. La boîte n'a pas changé de forme, c'est l'angle de vue qui a changé. C'est un cube.",
+      "Oui, c'est toujours un cube : le dessin déforme, le solide non.",
+    ),
+    tags: ["ce2", "solides", "reconnaitre", "perspective", "piege", "qcm"],
+    canvas: solide("cube"),
+  },
+  {
+    kind: "fixed",
+    id: "ce2_solide_reconnaitre_fixed_6",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "solides",
+    microId: "ce2_solide_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Sur les dessins en perspective, on trace souvent certains traits en pointillés. Pourquoi ?",
+    format: "qcm",
+    choices: [
+      "ce sont les arêtes cachées derrière le solide",
+      "ce sont les arêtes les plus courtes",
+      "ce sont les arêtes qu'il ne faut pas compter",
+      "c'est pour faire joli",
+    ],
+    expected: ["ce sont les arêtes cachées derrière le solide"],
+    comparator: "mcq_exact",
+    hint: "Pose une boîte sur la table : les arêtes du fond, tu ne les vois pas. Elles existent quand même.",
+    explanation: exp(
+      "Dans une vue en perspective, une partie du solide passe derrière : ces arêtes-là se dessinent en pointillés.",
+      "On regarde ce que le dessin cache, et pas seulement ce qu'il montre.",
+      "Le pointillé veut dire « cette arête existe, mais elle est derrière ». Surtout pas « ne la compte pas » : elle compte comme les autres, exactement comme le fond d'une boîte qu'on ne voit pas mais qui est bien là.",
+      "Les pointillés marquent les arêtes cachées derrière le solide.",
+    ),
+    tags: ["ce2", "solides", "reconnaitre", "perspective", "qcm"],
+  },
+
   /* =========================================================
      CE2_SOLIDE_DECRIRE — faces, arêtes, sommets
      Le piège : compter les coins et croire qu'on a compté
      les arêtes.
+     Et sur une vue en perspective, un second piège se pose
+     par-dessus : compter ce qu'on VOIT. Un cube dessiné de
+     biais ne montre que 9 arêtes sur 12 et 7 sommets sur 8.
+     Le solide n'a pas changé, c'est le dessin qui cache.
   ========================================================= */
   {
     kind: "fixed",
@@ -436,6 +516,122 @@ export const solidesBank: TutorBankItemV4[] = [
           "On se demande si l'objet décrit a une surface, une longueur, ou s'il n'est qu'un point.",
           `${mot.desc.charAt(0).toUpperCase() + mot.desc.slice(1)}, cela s'appelle ${mot.nom}.`,
           `C'est ${mot.nom}.`,
+        ),
+      };
+    },
+  },
+
+  // --- Ce que la perspective CACHE -------------------------
+  // ⚠️ Posé en mots, pas sur le dessin : le canvas `solide_3d`
+  // rend des faces opaques et ne trace aucune arête cachée en
+  // pointillés. Une question qui demanderait de compter sur ce
+  // dessin-là compterait autre chose que ce qu'on croit.
+  {
+    kind: "fixed",
+    id: "ce2_solide_decrire_fixed_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "solides",
+    microId: "ce2_solide_decrire",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Un cube est dessiné en perspective. Un élève compte les arêtes sur le dessin : il en voit 9. Combien le cube a-t-il d'arêtes ?",
+    format: "qcm",
+    choices: ["12", "9", "8", "6"],
+    expected: ["12"],
+    comparator: "mcq_exact",
+    hint: "Les arêtes du fond sont derrière. Elles existent, on ne les voit pas.",
+    explanation: exp(
+      "Un cube a 12 arêtes, quelle que soit la façon dont on le dessine.",
+      "On compte sur le solide, pas sur l'image : on ajoute ce qui passe derrière.",
+      "Vu de biais, un cube ne montre que 9 arêtes : les 3 autres sont cachées derrière, et on les trace en pointillés. L'élève a bien compté ce qu'il voyait — il a compté le dessin, pas le cube. Le cube en a 12.",
+      "Le cube a 12 arêtes.",
+    ),
+    tags: ["ce2", "solides", "decrire", "perspective", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_solide_decrire_fixed_5",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "solides",
+    microId: "ce2_solide_decrire",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Sur un cube dessiné en perspective, on ne voit que 7 sommets. Combien le cube en a-t-il vraiment ?",
+    format: "qcm",
+    choices: ["8", "7", "12", "6"],
+    expected: ["8"],
+    comparator: "mcq_exact",
+    hint: "Un coin est caché derrière le solide, celui du fond.",
+    explanation: exp(
+      "Un cube a 8 sommets : les huit coins de la boîte.",
+      "On compte les coins du solide réel, en n'oubliant pas celui qui passe derrière.",
+      "Sur une vue en perspective, le coin du fond disparaît derrière le cube : il n'en reste que 7 de visibles. Le huitième est bien là — pose une boîte sur la table et tourne-la, il réapparaît.",
+      "Le cube a 8 sommets.",
+    ),
+    tags: ["ce2", "solides", "decrire", "perspective", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_solide_decrire_fixed_6",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "solides",
+    microId: "ce2_solide_decrire",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Sur un pavé droit dessiné en perspective, combien de faces voit-on au maximum en même temps ?",
+    format: "qcm",
+    choices: ["3", "6", "4", "2"],
+    expected: ["3"],
+    comparator: "mcq_exact",
+    hint: "Prends une boîte de gâteaux et regarde-la de biais. Le dessus, la devanture, et un côté.",
+    explanation: exp(
+      "Un pavé droit a 6 faces, mais elles vont deux par deux : chaque face en a une opposée, de l'autre côté.",
+      "On regarde combien de faces peuvent être tournées vers nous en même temps.",
+      "De biais, on voit le dessus, la face avant et une face latérale : trois faces. Les trois autres — le dessous, l'arrière et l'autre côté — sont exactement derrière celles-là. Le pavé en a bien 6, on n'en voit que la moitié à la fois.",
+      "On en voit 3 à la fois, sur les 6 que compte le pavé.",
+    ),
+    tags: ["ce2", "solides", "decrire", "perspective", "piege", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "ce2_solide_decrire_tpl_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "solides",
+    microId: "ce2_solide_decrire",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le dessin en cache une partie. On compte le solide, pas l'image.",
+    tags: ["ce2", "solides", "decrire", "perspective", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        { quoi: "arêtes", vues: 9, total: 12, solide: "cube" },
+        { quoi: "arêtes", vues: 9, total: 12, solide: "pavé droit" },
+        { quoi: "sommets", vues: 7, total: 8, solide: "cube" },
+        { quoi: "sommets", vues: 7, total: 8, solide: "pavé droit" },
+        { quoi: "faces", vues: 3, total: 6, solide: "cube" },
+        { quoi: "faces", vues: 3, total: 6, solide: "pavé droit" },
+      ] as const);
+      const caches = cas.total - cas.vues;
+      return {
+        text: `Un ${cas.solide} est dessiné en perspective : on n'en voit que ${cas.vues} ${cas.quoi}. Combien en a-t-il en tout ?`,
+        format: "qcm",
+        choices: makeChoices(String(cas.total), [
+          String(cas.vues),
+          String(cas.vues + 1),
+          String(cas.total + cas.vues),
+          String(caches),
+        ]),
+        expected: [String(cas.total)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          `Un ${cas.solide} a toujours ${cas.total} ${cas.quoi}, quelle que soit la façon dont on le dessine.`,
+          "On ajoute à ce qu'on voit ce que le dessin cache derrière.",
+          `Le dessin en montre ${cas.vues} ; ${caches} passe${caches > 1 ? "nt" : ""} derrière le solide et se trace${caches > 1 ? "nt" : ""} en pointillés. ${cas.vues} + ${caches} = ${cas.total}. Répondre ${cas.vues}, c'est décrire l'image et non le solide.`,
+          `Il en a ${cas.total}.`,
         ),
       };
     },
