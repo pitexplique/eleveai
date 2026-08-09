@@ -562,10 +562,18 @@ export const probabilitesBank: TutorBankItemV4[] = [
       return {
         text: "Quelle est la probabilité d’obtenir Rouge avec cette roue ?",
         format: "qcm",
+        // ⚠️ Bleu et Vert se tirent tous deux dans {1, 2} : une fois sur deux
+        // ils sont égaux, et leurs deux pièges n'en font plus qu'un. Quand
+        // Rouge vaut 1 lui aussi, il ne restait qu'UNE proposition en face de
+        // la bonne. Pièges de secours : le contraire (ce qui n'est pas rouge),
+        // la cote au lieu de la probabilité, et un voisin toujours distinct.
         choices: makeChoices(result, [
           `${poidsBleu}/${total}`,
           `${poidsVert}/${total}`,
           `${total}/${poidsRouge}`,
+          `${poidsBleu + poidsVert}/${total}`,
+          `${poidsRouge}/${total - poidsRouge}`,
+          `${poidsRouge + 1}/${total}`,
         ]),
         expected: [result],
         comparator: "mcq_exact",
@@ -726,10 +734,15 @@ export const probabilitesBank: TutorBankItemV4[] = [
       return {
         text: `Dans un panier de fruits à La Réunion, il y a ${mangues} mangues, ${ananas} ananas et ${letchis} letchis. On prend un fruit au hasard. Quelle est la probabilité de prendre une mangue ?`,
         format: "qcm",
+        // ⚠️ ananas et letchis tombent souvent sur le même nombre : leurs deux
+        // pièges n'en font plus qu'un. Secours : le rapport inversé et les
+        // fruits qui ne sont PAS des mangues.
         choices: makeChoices(result, [
           `${ananas}/${total}`,
           `${letchis}/${total}`,
           `${mangues}/${ananas}`,
+          `${total}/${mangues}`,
+          `${ananas + letchis}/${total}`,
         ]),
         expected: [result],
         comparator: "mcq_exact",

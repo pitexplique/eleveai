@@ -2229,15 +2229,25 @@ export const fractionsBank: TutorBankItemV4[] = [
       const d = randomInt(2, 7);
       const s = simplify(a * c, b * d);
       const correct = `$\\frac{${s.n}}{${s.d}}$`;
+      // ⚠️ Les pièges sont arithmétiques : ils se recoupent quand les tirages
+      // tombent mal (a·d = b·c, b + d = b·d…), et à cinq recoupements il ne
+      // restait qu'une proposition en face de la bonne. On écrit les pièges
+      // pédagogiques d'abord, puis on complète avec des voisins du numérateur
+      // — jamais égaux à la bonne réponse, donc toujours quatre lignes.
+      const propositions = [
+        correct,
+        `$\\frac{${a + c}}{${b + d}}$`,
+        `$\\frac{${a * d}}{${b * c}}$`,
+        `$\\frac{${a * c}}{${b + d}}$`,
+        `$\\frac{${a * c}}{${b * d}}$`,
+        `$\\frac{${s.n + 1}}{${s.d}}$`,
+        `$\\frac{${s.n + 2}}{${s.d}}$`,
+        `$\\frac{${s.n}}{${s.d + 1}}$`,
+      ].filter((v, i, arr) => arr.indexOf(v) === i);
       return {
         text: `Calculer $\\frac{${a}}{${b}} \\times \\frac{${c}}{${d}}$.`,
         format: "qcm",
-        choices: [
-          correct,
-          `$\\frac{${a + c}}{${b + d}}$`,
-          `$\\frac{${a * d}}{${b * c}}$`,
-          `$\\frac{${a * c}}{${b + d}}$`,
-        ].filter((v, i, arr) => arr.indexOf(v) === i),
+        choices: propositions.slice(0, 4),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
@@ -2659,7 +2669,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     tags: ["fraction_nombre", "division", "inverse", "qcm", "template"],
     generate: () => {
       const c = randomInt(2, 8);
-      const d = randomInt(2, 8);
+      // ⚠️ d ≠ c : avec c = d, l'inverse cherché s'écrit comme la fraction de
+      // départ. La question perd son sens et les propositions tombent à deux.
+      const d = randomChoice([2, 3, 4, 5, 6, 7, 8].filter((x) => x !== c));
       return {
         text: `Diviser par $\\frac{${c}}{${d}}$ revient à multiplier par…`,
         format: "qcm",
@@ -2969,7 +2981,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     tags: ["fraction_nombre", "oppose", "qcm", "template"],
     generate: () => {
       const a = randomInt(1, 9);
-      const b = randomInt(2, 10);
+      // ⚠️ b ≠ a : sinon l'inverse b/a s'écrit exactement comme la fraction
+      // elle-même, les deux pièges fondent et il ne reste que 2 propositions.
+      const b = randomChoice([2, 3, 4, 5, 6, 7, 8, 9, 10].filter((x) => x !== a));
       return {
         text: `Quel est l’opposé de $\\frac{${a}}{${b}}$ ?`,
         format: "qcm",
@@ -3002,7 +3016,9 @@ export const fractionsBank: TutorBankItemV4[] = [
     tags: ["fraction_nombre", "oppose", "negatif", "qcm", "template"],
     generate: () => {
       const a = randomInt(1, 9);
-      const b = randomInt(2, 10);
+      // ⚠️ Même raison qu'au gabarit précédent : a = b ferait fondre l'inverse
+      // sur la fraction elle-même.
+      const b = randomChoice([2, 3, 4, 5, 6, 7, 8, 9, 10].filter((x) => x !== a));
       return {
         text: `Quel est l’opposé de $-\\frac{${a}}{${b}}$ ?`,
         format: "qcm",

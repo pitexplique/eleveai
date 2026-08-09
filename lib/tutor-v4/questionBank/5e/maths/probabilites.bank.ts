@@ -901,10 +901,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
       return {
         text: `Dans un panier de fruits à La Réunion, il y a ${mangue} mangue(s), ${ananas} ananas et ${letchis} letchi(s). On prend un fruit au hasard. Quelle est la probabilité de prendre une mangue ?`,
         format: "qcm",
+        // ⚠️ ananas et letchis tombent souvent sur le même nombre : les deux
+        // premiers pièges s'écrivent alors pareil et fondent au dédoublonnage.
+        // Deux pièges de secours : le rapport inversé, et les fruits qui ne
+        // sont PAS des mangues.
         choices: makeChoices(result, [
           rawFraction(ananas, total),
           rawFraction(letchis, total),
           rawFraction(mangue, ananas),
+          rawFraction(total, mangue),
+          rawFraction(ananas + letchis, total),
         ]),
         expected: [result],
         comparator: "mcq_exact",

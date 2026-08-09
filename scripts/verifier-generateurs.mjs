@@ -35,6 +35,17 @@
 // habituel est de trois ou quatre et qui tombe plus bas sur une minorité de
 // tirages. Voir la section « propositions qui s'effondrent ».
 //
+// ✅ CE QUI N'EST PAS UN DÉFAUT, pour ne pas le redécouvrir. 391 gabarits sur
+// 1 568 écrivent `choices: [correct, piège, piège, piège]` sans `shuffle`, dont
+// 293 avec la bonne réponse en tête. Vu d'ici, on croit que l'élève peut
+// cliquer la première ligne sans lire. Il ne le peut pas : le pipeline mélange
+// à l'envoi — `shuffleChoices` dans `lib/tutor-v4/questionPairBuilder.ts`,
+// réamorcé à chaque tirage par un id qui contient l'horloge et un aléa. Mesuré
+// le 09/08/2026 en le rejouant : rang 1→149, 2→63, 3→103, 4→85 sur 400 tirages.
+// Un contrôle du rang dans la banque n'apprendrait donc rien et noierait les
+// vrais défauts. ⚠️ En revanche `shuffleChoices` DÉDOUBLONNE sans recompléter :
+// l'effondrement, lui, arrive bien jusqu'à l'élève.
+//
 // Usage : node --experimental-strip-types scripts/verifier-generateurs.mjs [classe] [matiere] [tirages]
 //         node --experimental-strip-types scripts/verifier-generateurs.mjs 4e maths
 //         node --experimental-strip-types scripts/verifier-generateurs.mjs toutes maths 600
@@ -174,35 +185,60 @@ const nonCouverts = [];
 /* Les gabarits dont le nombre de propositions varie d'un tirage à l'autre. */
 const effondrements = [];
 
-/* Un gabarit qui alterne DÉLIBÉRÉMENT entre deux formes — un « oui / non » une
-   fois sur deux et un QCM à quatre lignes le reste du temps — fait varier le
-   compte sans rien casser. On ne retient donc que la chute : le nombre le plus
-   fréquent est le nombre VOULU, et tout tirage qui descend en dessous est un
-   piège qui s'est évaporé au tri.
-   Grave = on tombe à deux propositions alors qu'on en visait trois ou quatre :
-   là, l'élève a une chance sur deux au hasard. */
-function analyserRepartition(compte) {
-  // À égalité de fréquence, on retient le PLUS GRAND nombre de propositions
-  // comme celui qui était voulu : l'auteur avait écrit assez de pièges, ce sont
-  // les tirages qui les ont fait fondre.
-  const paires = [...compte.entries()].sort((a, b) => b[1] - a[1] || b[0] - a[0]);
-  const voulu = paires[0][0];
-  const plancher = Math.min(...compte.keys());
-  if (plancher >= voulu) return null;
+/* ⚠️ Beaucoup de gabarits alternent DÉLIBÉRÉMENT entre plusieurs formes : un
+   « oui / non » à deux lignes une fois sur trois, un QCM à quatre lignes le
+   reste du temps (cm2_probabilite_defi_tpl_3_roue, par exemple). Compter les
+   propositions sur l'ensemble des tirages les accuse à tort.
+   On compare donc À ÉNONCÉ ÉGAL : les chiffres de la question sont remplacés
+   par des dièses, ce qui regroupe les tirages d'une même branche. Si UNE
+   branche sort tantôt à quatre lignes tantôt à deux, c'est un vrai
+   effondrement — les pièges se sont recoupés. Si chaque branche garde son
+   compte, l'alternance est voulue et on se tait.
+   Grave = une branche tombe à deux propositions alors qu'elle en vise trois ou
+   quatre : là, l'élève a une chance sur deux au hasard. */
+function empreinteEnonce(texte) {
+  return String(texte ?? "").replace(/\d+/g, "#");
+}
 
-  const chutes = paires.filter(([n]) => n < voulu);
-  const tiragesChutes = chutes.reduce((s, [, c]) => s + c, 0);
-  const total = paires.reduce((s, [, c]) => s + c, 0);
+function analyserRepartition(parEnonce) {
+  let pire = null;
 
-  return {
-    voulu,
-    plancher,
-    part: tiragesChutes / total,
-    // Un plancher à 1 ou 0 est déjà une erreur dure côté `controler` ; on le
-    // range quand même ici, la chute est la même histoire.
-    grave: plancher <= 2 && voulu >= 3,
-    detail: paires.map(([n, c]) => `${n}→${c}`).join("  "),
-  };
+  for (const compte of parEnonce.values()) {
+    if (compte.size < 2) continue;
+
+    // À égalité de fréquence, on retient le PLUS GRAND nombre de propositions
+    // comme celui qui était voulu : l'auteur avait écrit assez de pièges, ce
+    // sont les tirages qui les ont fait fondre.
+    const paires = [...compte.entries()].sort((a, b) => b[1] - a[1] || b[0] - a[0]);
+    const voulu = paires[0][0];
+    const plancher = Math.min(...compte.keys());
+    if (plancher >= voulu) continue;
+
+    const tiragesChutes = paires
+      .filter(([n]) => n < voulu)
+      .reduce((s, [, c]) => s + c, 0);
+    const total = paires.reduce((s, [, c]) => s + c, 0);
+
+    const candidat = {
+      voulu,
+      plancher,
+      part: tiragesChutes / total,
+      // Un plancher à 1 ou 0 est déjà une erreur dure côté `controler` ; on le
+      // range quand même ici, la chute est la même histoire.
+      grave: plancher <= 2 && voulu >= 3,
+      detail: paires.map(([n, c]) => `${n}→${c}`).join("  "),
+    };
+
+    if (
+      !pire ||
+      Number(candidat.grave) - Number(pire.grave) > 0 ||
+      (candidat.grave === pire.grave && candidat.part > pire.part)
+    ) {
+      pire = candidat;
+    }
+  }
+
+  return pire;
 }
 
 for (const classe of CLASSES) {
@@ -244,7 +280,9 @@ for (const classe of CLASSES) {
 
       const vus = new Set();
       const enonces = new Set();
-      const tailles = new Map();
+      /* Le compte des propositions, rangé PAR BRANCHE : un énoncé dont on a
+         gommé les chiffres identifie la branche du gabarit. */
+      const taillesParEnonce = new Map();
       for (let i = 0; i < TIRAGES; i++) {
         totalTirages += 1;
         let q;
@@ -256,15 +294,16 @@ for (const classe of CLASSES) {
         }
         enonces.add(q?.text);
         if (Array.isArray(q?.choices)) {
-          tailles.set(q.choices.length, (tailles.get(q.choices.length) ?? 0) + 1);
+          const cle = empreinteEnonce(q.text);
+          if (!taillesParEnonce.has(cle)) taillesParEnonce.set(cle, new Map());
+          const compte = taillesParEnonce.get(cle);
+          compte.set(q.choices.length, (compte.get(q.choices.length) ?? 0) + 1);
         }
         for (const p of controler(q, classe)) vus.add(p);
       }
 
-      if (tailles.size > 1) {
-        const chute = analyserRepartition(tailles);
-        if (chute) effondrements.push({ classe, fichier, id: item.id, ...chute });
-      }
+      const chute = analyserRepartition(taillesParEnonce);
+      if (chute) effondrements.push({ classe, fichier, id: item.id, ...chute });
 
       if (vus.size) {
         rapports.push({
