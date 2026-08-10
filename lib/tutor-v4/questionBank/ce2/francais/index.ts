@@ -13,6 +13,8 @@ import { comprehensionLectureBank } from "./comprehension-lecture.bank";
 import { typesTextesBank } from "./types-textes.bank";
 import { fluenceLectureBank } from "./fluence-lecture.bank";
 import { copieFluenteBank } from "./copie-fluente.bank";
+import { productionEcriteBank } from "./production-ecrite.bank";
+import { langageOralBank } from "./langage-oral.bank";
 
 // LE CE2 SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 10/08/2026, sur le
 // modèle du CP (`cp/francais/index.ts`, 09-10/08).
@@ -36,10 +38,16 @@ import { copieFluenteBank } from "./copie-fluente.bank";
 // une question de CP à laquelle, deux fois sur trois, aucune proposition ne
 // répond.
 //
-// Chaque banque écrite fait reculer le repli d'autant de micro-compétences. On
-// n'arrache rien : mieux vaut une question approximative que pas de question.
-// Quand `microsCe2FrancaisSansBanque` sera vide, le repli sera à zéro — c'est
-// l'objectif, celui que le CP a atteint.
+// ✅ LE REPLI EST À ZÉRO depuis le 10/08/2026. Les 120 micro-compétences ont
+// leur banque écrite à la main, et `microsCe2FrancaisSansBanque` est vide :
+// `REPLI` ne laisse plus passer un seul item du constructeur commun. On le
+// garde branché quand même — le jour où une micro-compétence sera ajoutée aux
+// `microSkills` sans sa banque, elle aura une question approximative plutôt
+// que pas de question du tout.
+//
+// Mesuré en exécutant, 1 500 tirages par item : 41 énoncés différents au
+// départ, 24 694 à l'arrivée, et le minimum par micro-compétence est de 12 —
+// contre une seule question pour six micro-compétences de classes de mots.
 //
 // Pour ajouter une notion : écrire `<notion>.bank.ts`, l'importer, l'ajouter à
 // BANQUES_ECRITES. Le repli s'efface tout seul pour ce qu'elle couvre.
@@ -55,6 +63,8 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...typesTextesBank,
   ...fluenceLectureBank,
   ...copieFluenteBank,
+  ...productionEcriteBank,
+  ...langageOralBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
