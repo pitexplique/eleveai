@@ -3,6 +3,7 @@ import { microSkills } from "@/lib/tutor-v4/knowledge/francais/cp/microSkills";
 import { buildCycle2FrancaisBank } from "@/lib/tutor-v4/questionBank/cycle2/francais/buildCycle2FrancaisBank";
 
 import { consciencePhonologiqueBank } from "./conscience-phonologique.bank";
+import { lectureSyllabiqueBank } from "./lecture-syllabique.bank";
 
 // LE CP SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 09/08/2026.
 //
@@ -33,6 +34,7 @@ import { consciencePhonologiqueBank } from "./conscience-phonologique.bank";
 // BANQUES_ECRITES. Le repli s'efface tout seul pour ce qu'elle couvre.
 const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...consciencePhonologiqueBank,
+  ...lectureSyllabiqueBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));

@@ -174,7 +174,7 @@ export const consciencePhonologiqueBank: TutorBankItemV4[] = [
     hint: "Frappe dans tes mains en disant le mot. Une seule fois ?",
     explanation: exp(
       "Une syllabe, c'est un morceau de mot qu'on dit d'un seul souffle.",
-      "On frappe dans ses mains à chaque morceau qu'on entend.",
+      "Frappe dans tes mains à chaque morceau que tu entends.",
       "« chat » se dit d'un coup : une seule frappe. Il a quatre LETTRES, mais on ne compte pas les lettres — on écoute.",
       "« chat » a 1 syllabe.",
     ),
@@ -202,7 +202,7 @@ export const consciencePhonologiqueBank: TutorBankItemV4[] = [
     hint: "Dis le mot à voix haute et frappe dans tes mains.",
     explanation: exp(
       "Les lettres, ça se voit. Les syllabes, ça s'entend.",
-      "On ferme les yeux et on frappe dans ses mains en disant le mot.",
+      "Ferme les yeux et frappe dans tes mains en disant le mot. Les yeux fermés, on ne peut plus compter les lettres.",
       "mar — gouil — lat : trois frappes. Onze lettres, mais trois syllabes seulement, parce que « ou », « ill » et « at » ne font qu'un son chacun.",
       "Léo se trompe : « margouillat » a 3 syllabes.",
     ),
@@ -229,7 +229,7 @@ export const consciencePhonologiqueBank: TutorBankItemV4[] = [
         comparator: "mcq_exact" as const,
         explanation: exp(
           "Une syllabe, c'est un morceau de mot qu'on dit d'un seul souffle.",
-          "On frappe dans ses mains à chaque morceau.",
+          "Frappe dans tes mains à chaque morceau. Ta main compte mieux que tes yeux.",
           `${item.coupe} → ${item.syl} frappe${item.syl > 1 ? "s" : ""}. Attention : le mot a ${item.lettres} lettres, et ce n'est pas la même chose.`,
           `« ${item.mot} » a ${item.syl} syllabe${item.syl > 1 ? "s" : ""}.`,
         ),
@@ -383,8 +383,8 @@ export const consciencePhonologiqueBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Écoute seulement la fin des deux mots, pas leur écriture.",
     explanation: exp(
-      "Deux mots riment quand la FIN se prononce pareil.",
-      "On dit les deux mots à voix haute et on n'écoute que la fin.",
+      "Deux mots riment quand leur fin chante pareil.",
+      "Dis les deux mots tout haut, et n'écoute que la fin.",
       "mais-ON, gar-ÇON : on entend le même son [ɔ̃] à la fin, même si ça ne s'écrit pas de la même façon. C'est l'oreille qui décide, pas l'œil.",
       "Oui, « maison » et « garçon » riment.",
     ),
@@ -412,8 +412,8 @@ export const consciencePhonologiqueBank: TutorBankItemV4[] = [
           expected: ["oui"],
           comparator: "mcq_exact" as const,
           explanation: exp(
-            "Deux mots riment quand leur fin se prononce pareil.",
-            "On dit les deux mots et on n'écoute que la fin.",
+            "Deux mots riment quand leur fin chante pareil.",
+            "Dis les deux mots tout haut, et n'écoute que la fin.",
             `« ${p.a} » et « ${p.b} » finissent tous les deux par le son ${p.son}.`,
             "Oui, ces deux mots riment.",
           ),
@@ -427,8 +427,8 @@ export const consciencePhonologiqueBank: TutorBankItemV4[] = [
         expected: ["non"],
         comparator: "mcq_exact" as const,
         explanation: exp(
-          "Deux mots riment quand leur fin se prononce pareil.",
-          "On dit les deux mots et on n'écoute que la fin.",
+          "Deux mots riment quand leur fin chante pareil.",
+          "Dis les deux mots tout haut, et n'écoute que la fin.",
           `« ${p.a} » finit par ${p.fa}, « ${p.b} » finit par ${p.fb}. Ce n'est pas le même son.`,
           "Non, ces deux mots ne riment pas.",
         ),
@@ -458,7 +458,7 @@ export const consciencePhonologiqueBank: TutorBankItemV4[] = [
         expected: [p.b],
         comparator: "mcq_exact" as const,
         explanation: exp(
-          "Deux mots riment quand leur fin se prononce pareil.",
+          "Deux mots riment quand leur fin chante pareil.",
           "On dit chaque proposition après le mot de départ et on écoute la fin.",
           `« ${p.a} » finit par le son ${p.son}. « ${p.b} » aussi.`,
           `« ${p.b} » rime avec « ${p.a} ».`,
@@ -488,7 +488,7 @@ export const consciencePhonologiqueBank: TutorBankItemV4[] = [
     hint: "Dis chaque mot lentement et écoute s'il y a « ou » dedans.",
     explanation: exp(
       "Identifier un son, c'est le retrouver à l'intérieur d'un mot qu'on entend.",
-      "On dit chaque mot lentement, en écoutant si le son cherché apparaît.",
+      "Dis chaque mot tout doucement, comme au ralenti, et guette le son.",
       "bou-can : on entend bien [u] au début. Dans « lagon », « letchi » et « vélo », il n'y est pas.",
       "Le son [u] est dans « boucan ».",
     ),
@@ -516,7 +516,7 @@ export const consciencePhonologiqueBank: TutorBankItemV4[] = [
         comparator: "mcq_exact" as const,
         explanation: exp(
           "Identifier un son, c'est le retrouver dans un mot qu'on entend.",
-          "On dit chaque proposition lentement en cherchant le son.",
+          "Dis chaque mot tout doucement, comme au ralenti, et guette le son.",
           `On entend bien ${s.son} dans « ${bon} ». Dans les autres, non.`,
           `Le son ${s.son} est dans « ${bon} ».`,
         ),
@@ -546,7 +546,7 @@ export const consciencePhonologiqueBank: TutorBankItemV4[] = [
         comparator: "mcq_exact" as const,
         explanation: exp(
           "Ici on cherche l'intrus : celui où le son n'est pas.",
-          "On dit les quatre mots l'un après l'autre en écoutant le son demandé.",
+          "Dis les quatre mots l'un après l'autre. Trois vont sonner pareil, un va détonner.",
           `${avec.map((m) => `« ${m} »`).join(", ")} contiennent ${s.son}. « ${intrus} », non.`,
           `L'intrus est « ${intrus} ».`,
         ),
@@ -575,8 +575,8 @@ export const consciencePhonologiqueBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Dis le mot doucement : le son arrive-t-il tout de suite ?",
     explanation: exp(
-      "Un son peut se trouver au début, au milieu ou à la fin d'un mot.",
-      "On dit le mot lentement en écoutant à quel moment le son arrive.",
+      "Un son se cache au début, au milieu ou à la fin d'un mot.",
+      "Dis le mot au ralenti et repère le moment où le son arrive.",
       "l-a-gon : le [l] est la toute première chose qu'on entend.",
       "Le son [l] est au début de « lagon ».",
     ),
@@ -602,8 +602,8 @@ export const consciencePhonologiqueBank: TutorBankItemV4[] = [
         expected: [item.position],
         comparator: "mcq_exact" as const,
         explanation: exp(
-          "Un son peut se trouver au début, au milieu ou à la fin d'un mot.",
-          "On dit le mot lentement et on repère le moment où le son arrive.",
+          "Un son se cache au début, au milieu ou à la fin d'un mot.",
+          "Dis le mot au ralenti et repère le moment où le son arrive.",
           `Dans « ${item.mot} », le son ${item.son} s'entend ${item.position}.`,
           `Le son ${item.son} est ${item.position} de « ${item.mot} ».`,
         ),
@@ -635,7 +635,7 @@ export const consciencePhonologiqueBank: TutorBankItemV4[] = [
         comparator: "mcq_exact" as const,
         explanation: exp(
           "Un son est au début quand c'est la première chose qu'on entend.",
-          "On dit chaque mot et on écoute son tout premier son.",
+          "Dis chaque mot et écoute la toute première chose qui sort de ta bouche.",
           `« ${item.mot} » commence par ${item.son}.`,
           `Le son ${item.son} est au début de « ${item.mot} ».`,
         ),
