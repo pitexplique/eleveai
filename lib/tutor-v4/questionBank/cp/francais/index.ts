@@ -14,7 +14,13 @@ import { vocabulaireBank } from "./vocabulaire.bank";
 import { ecritureBank } from "./ecriture.bank";
 import { oralEtLecteurBank } from "./oral-et-lecteur.bank";
 
-// LE CP SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 09/08/2026.
+// ✅ LE CP A QUITTÉ LE CONSTRUCTEUR COMMUN — terminé le 10/08/2026.
+//
+// 91 micro-compétences sur 91, 15 notions, 10 fichiers, 193 items (50 figés,
+// 143 générateurs), 100 827 questions différentes. `REPLI` est VIDE : le
+// constructeur n'est plus appelé que pour être filtré à zéro. On le garde
+// branché — il ne coute rien et il rattraperait une micro-compétence ajoutée
+// au programme sans sa banque.
 //
 // `buildCycle2FrancaisBank` aiguille sur la NOTION, jamais sur la
 // micro-compétence, et son paramètre de niveau s'appelle `_level` : aucun
@@ -34,10 +40,9 @@ import { oralEtLecteurBank } from "./oral-et-lecteur.bank";
 // sont `ro/no/lo` et `fi/si/di` : deux fois sur trois, aucune proposition ne
 // répondait à la question.
 //
-// Chaque banque écrite fait reculer le repli d'autant de micro-compétences.
-// On n'arrache rien : mieux vaut une question approximative que pas de
-// question. Quand `microsCpFrancaisSansBanque` sera vide, le repli sera à
-// zéro — c'est l'objectif, comme pour le CP de maths.
+// Chaque banque écrite a fait reculer le repli, notion par notion, sans jamais
+// rien arracher : mieux valait une question approximative que pas de question.
+// `microsCpFrancaisSansBanque` est maintenant vide.
 //
 // Pour ajouter une notion : écrire `<notion>.bank.ts`, l'importer, l'ajouter à
 // BANQUES_ECRITES. Le repli s'efface tout seul pour ce qu'elle couvre.
