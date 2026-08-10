@@ -6,6 +6,8 @@ import { conjugaisonBank } from "./conjugaison.bank";
 import { classesMotsBank } from "./classes-mots.bank";
 import { grammairePhraseBank } from "./grammaire-phrase.bank";
 import { orthographeBank } from "./orthographe.bank";
+import { orthographeLexicaleBank } from "./orthographe-lexicale.bank";
+import { ecritureMotsBank } from "./ecriture-mots.bank";
 
 // LE CE2 SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 10/08/2026, sur le
 // modèle du CP (`cp/francais/index.ts`, 09-10/08).
@@ -41,6 +43,8 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...classesMotsBank,
   ...grammairePhraseBank,
   ...orthographeBank,
+  ...orthographeLexicaleBank,
+  ...ecritureMotsBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
