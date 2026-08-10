@@ -100,6 +100,13 @@ const MOTS_DICTEE: readonly MotDictee[] = [
   { mot: "jardin", indice: "il y pousse des fleurs", faux: ["jardain", "jardein", "jardim"] },
   { mot: "cheval", indice: "on peut monter dessus", faux: ["chval", "cheval'", "chevale"] },
   { mot: "poisson", indice: "il nage dans le lagon", faux: ["poison", "poisonn", "poissson"] },
+  { mot: "bateau", indice: "il flotte sur l'eau", faux: ["bato", "batau", "batteau"] },
+  { mot: "lapin", indice: "il a de longues oreilles", faux: ["lapain", "lapein", "lappin"] },
+  { mot: "fleur", indice: "elle pousse dans le jardin", faux: ["fleure", "flur", "fleurr"] },
+  { mot: "souris", indice: "elle est toute petite et grise", faux: ["sourie", "sourri", "souri"] },
+  { mot: "tapis", indice: "on marche dessus", faux: ["tapi", "tappis", "tapisse"] },
+  { mot: "vélo", indice: "il a deux roues", faux: ["velo", "vélau", "vélot"] },
+  { mot: "marmite", indice: "on y fait cuire le cari", faux: ["marmit", "marmitte", "marmithe"] },
 ];
 
 const MOTS_MUETS: readonly MotMuet[] = [
@@ -111,6 +118,12 @@ const MOTS_MUETS: readonly MotMuet[] = [
   { mot: "lait", lettre: "t", famille: "laitier" },
   { mot: "blanc", lettre: "c", famille: "blanche" },
   { mot: "chant", lettre: "t", famille: "chanter" },
+  { mot: "froid", lettre: "d", famille: "froide" },
+  { mot: "long", lettre: "g", famille: "longue" },
+  { mot: "dent", lettre: "t", famille: "dentiste" },
+  { mot: "saut", lettre: "t", famille: "sauter" },
+  { mot: "plat", lettre: "t", famille: "plate" },
+  { mot: "bond", lettre: "d", famille: "bondir" },
 ];
 
 const PHRASES_DICTEE: readonly string[] = [
@@ -120,6 +133,14 @@ const PHRASES_DICTEE: readonly string[] = [
   "Papa prépare un cari.",
   "Le bateau part sur le lagon.",
   "Ma sœur lit un livre.",
+  "Le margouillat monte sur le mur.",
+  "Tom ramasse des letchis.",
+  "La maitresse ouvre la porte.",
+  "Le vent souffle très fort.",
+  "Nous partons à la plage.",
+  "Le piton fume au loin.",
+  "Mon frère range sa chambre.",
+  "Les oiseaux chantent le matin.",
 ];
 
 const LEGENDES: readonly Legende[] = [
@@ -143,6 +164,36 @@ const LEGENDES: readonly Legende[] = [
     bonne: "Le margouillat monte sur le mur.",
     faux: ["margouillat mur monte", "Un mur.", "Le mur de la case est gris et il y a du soleil dessus."],
   },
+  {
+    image: "un garçon qui arrose des fleurs",
+    bonne: "Le garçon arrose les fleurs.",
+    faux: ["garçon fleurs arrose", "Des fleurs.", "Le garçon a un arrosoir vert qu'il a reçu pour son anniversaire."],
+  },
+  {
+    image: "une maitresse qui écrit au tableau",
+    bonne: "La maitresse écrit au tableau.",
+    faux: ["maitresse tableau écrit", "Un tableau.", "La maitresse porte une robe bleue et tient une craie blanche dans la main."],
+  },
+  {
+    image: "un chat qui dort sur un tapis",
+    bonne: "Le chat dort sur le tapis.",
+    faux: ["chat tapis dort", "Un chat.", "Le tapis est vieux et il y a des taches de soleil dessus toute la journée."],
+  },
+  {
+    image: "des enfants qui courent dans la cour",
+    bonne: "Les enfants courent dans la cour.",
+    faux: ["enfants cour courent", "La cour.", "La cour de l'école est grande et il y a des arbres tout autour."],
+  },
+  {
+    image: "un pêcheur qui range son filet",
+    bonne: "Le pêcheur range son filet.",
+    faux: ["pêcheur filet range", "Un filet.", "Le filet est mouillé et il sent très fort le poisson et le sel."],
+  },
+  {
+    image: "une fille qui monte sur un vélo",
+    bonne: "La fille monte sur son vélo.",
+    faux: ["fille vélo monte", "Un vélo.", "Le vélo est rouge avec une sonnette argentée sur le guidon."],
+  },
 ];
 
 const REPONSES: readonly ReponseQ[] = [
@@ -165,6 +216,36 @@ const REPONSES: readonly ReponseQ[] = [
     question: "Qui prépare le cari ?",
     bonne: "C'est papa qui prépare le cari.",
     faux: ["papa", "le papa", "papa cari prépare"],
+  },
+  {
+    question: "De quelle couleur est le lagon ?",
+    bonne: "Le lagon est bleu.",
+    faux: ["bleu", "en bleu", "lagon bleu"],
+  },
+  {
+    question: "Combien de syllabes a le mot « domino » ?",
+    bonne: "Le mot « domino » a trois syllabes.",
+    faux: ["trois", "3", "domino trois syllabes"],
+  },
+  {
+    question: "Où monte le margouillat ?",
+    bonne: "Le margouillat monte sur le mur.",
+    faux: ["sur le mur", "le mur", "margouillat mur"],
+  },
+  {
+    question: "Que fait le pêcheur le matin ?",
+    bonne: "Le matin, le pêcheur part en mer.",
+    faux: ["il part en mer", "en mer", "pêcheur mer matin"],
+  },
+  {
+    question: "Pourquoi Nina met-elle ses bottes ?",
+    bonne: "Nina met ses bottes parce qu'il pleut.",
+    faux: ["parce qu'il pleut", "il pleut", "bottes pluie"],
+  },
+  {
+    question: "Combien de pattes a un margouillat ?",
+    bonne: "Le margouillat a quatre pattes.",
+    faux: ["quatre", "4 pattes", "margouillat quatre"],
   },
 ];
 
@@ -222,6 +303,44 @@ export const ecritureBank: TutorBankItemV4[] = [
       "Ce sont les lettres rondes : a, c, d, g, o, q, x.",
     ),
     tags: ["cp", "ecriture", "copie", "remarquable", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "cp_copie_lettre_tpl_1",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "copie",
+    microId: "cp_copie_lettre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Regarde si la lettre monte au-dessus de la ligne, descend en dessous, ou reste entre les deux.",
+    tags: ["cp", "ecriture", "copie", "template"],
+    generate: () => {
+      const familles = [
+        { nom: "qui monte au-dessus de la ligne", lettres: ["b", "d", "f", "h", "k", "l", "t"] },
+        { nom: "qui descend sous la ligne", lettres: ["g", "j", "p", "q", "y"] },
+        { nom: "qui reste entre les deux lignes", lettres: ["a", "c", "e", "i", "m", "n", "o", "r", "s", "u", "v", "w", "x"] },
+      ];
+      const f = randomChoice(familles);
+      const bonne = randomChoice(f.lettres);
+      const autres = shuffle(
+        familles.filter((x) => x.nom !== f.nom).flatMap((x) => x.lettres),
+      ).slice(0, 3);
+      return {
+        text: `Quelle lettre est une lettre ${f.nom} ?`,
+        format: "qcm" as const,
+        choices: makeChoices(bonne, autres),
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Sur la ligne du cahier, les lettres n'occupent pas toutes la même place : certaines montent, d'autres descendent, d'autres restent au milieu.",
+          "Trace la lettre en l'air et regarde où elle va.",
+          `« ${bonne} » est une lettre ${f.nom}. C'est ce qui lui donne sa hauteur dans le cahier.`,
+          `La lettre est « ${bonne} ».`,
+        ),
+      };
+    },
   },
 
   /* =========================================================
@@ -389,6 +508,53 @@ export const ecritureBank: TutorBankItemV4[] = [
       "On se relit sur sa propre feuille, mot par mot.",
     ),
     tags: ["cp", "ecriture", "copie", "piege", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "cp_copie_relire_tpl_1",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "copie",
+    microId: "cp_copie_relire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare ta copie et le modèle, mot par mot, du doigt.",
+    tags: ["cp", "ecriture", "copie", "template"],
+    generate: () => {
+      const p = randomChoice(PHRASES_COPIE);
+      const genre = randomChoice(["mot", "majuscule", "point"] as const);
+      const copie =
+        genre === "mot"
+          ? p.oubli
+          : genre === "majuscule"
+            ? p.modele.charAt(0).toLowerCase() + p.modele.slice(1)
+            : p.modele.slice(0, -1);
+      const bon =
+        genre === "mot"
+          ? "il manque un mot"
+          : genre === "majuscule"
+            ? "il manque la majuscule"
+            : "il manque le point";
+      return {
+        text: `Modèle : « ${p.modele} »\nTa copie : « ${copie} »\n\nQu'est-ce que tu corriges ?`,
+        format: "qcm" as const,
+        choices: shuffle([
+          "il manque un mot",
+          "il manque la majuscule",
+          "il manque le point",
+          "rien, la copie est exacte",
+        ]),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Se relire, c'est comparer sa feuille au modèle, morceau par morceau — les mots, puis les deux bornes.",
+          "Avance du doigt sur ta copie et sur le modèle en même temps, puis vérifie le début et la fin.",
+          `Il fallait écrire « ${p.modele} »`,
+          `Ce qu'on corrige : ${bon}.`,
+        ),
+      };
+    },
   },
 
   /* =========================================================
@@ -706,6 +872,14 @@ export const ecritureBank: TutorBankItemV4[] = [
         ["Léa met ses bottes.", "Elle sort sous la pluie.", "Ses bottes sont pleines d'eau."],
         ["Papa allume le feu.", "Il pose la marmite dessus.", "Le cari est prêt."],
         ["Le bateau quitte le port.", "Il glisse sur le lagon.", "Le pêcheur jette son filet."],
+        ["La cloche sonne.", "Les élèves rangent leurs cahiers.", "La cour se remplit."],
+        ["Nina cueille une mangue.", "Elle la lave sous le robinet.", "Elle la mange sur la terrasse."],
+        ["Le vent se lève.", "Les nuages cachent le piton.", "La pluie se met à tomber."],
+        ["Yann prépare son filet.", "Il part vers le lagon.", "Il revient avec trois poissons."],
+        ["La maitresse distribue les cahiers.", "Les élèves écrivent la date.", "La leçon commence."],
+        ["Le chien entend un bruit.", "Il gratte à la porte.", "Papa vient lui ouvrir."],
+        ["Léa ouvre son livre.", "Elle lit trois pages.", "Elle referme le livre et s'endort."],
+        ["Le facteur arrive.", "Il pose une lettre dans la boite.", "Mamie sourit en la lisant."],
       ];
       const h = randomChoice(histoires);
       const bon = h.join(" ");
