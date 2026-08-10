@@ -4,6 +4,7 @@ import { buildCycle2FrancaisBank } from "@/lib/tutor-v4/questionBank/cycle2/fran
 
 import { consciencePhonologiqueBank } from "./conscience-phonologique.bank";
 import { lectureSyllabiqueBank } from "./lecture-syllabique.bank";
+import { graphemePhonemeBank } from "./grapheme-phoneme.bank";
 
 // LE CP SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 09/08/2026.
 //
@@ -35,6 +36,7 @@ import { lectureSyllabiqueBank } from "./lecture-syllabique.bank";
 const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...consciencePhonologiqueBank,
   ...lectureSyllabiqueBank,
+  ...graphemePhonemeBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
