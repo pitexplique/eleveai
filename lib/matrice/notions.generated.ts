@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 429 notions, 31 paquets.
+// 438 notions, 31 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -1722,40 +1722,45 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "sons_complexes",
-        "label": "Sons complexes et graphemes particuliers",
+        "label": "Sons complexes et graphèmes particuliers",
         "prerequis": [
           "fluence_lecture"
         ]
       },
       {
         "id": "comprehension_lecture",
-        "label": "Comprehension de textes",
+        "label": "Compréhension de textes",
         "prerequis": [
           "fluence_lecture"
         ]
       },
       {
         "id": "types_textes",
-        "label": "Types de textes (narratif, documentaire, poetique)",
+        "label": "Types de textes (narratif, documentaire, prescriptif, poétique)",
         "prerequis": [
           "comprehension_lecture"
         ]
       },
       {
+        "id": "ecriture_cursive",
+        "label": "Écriture cursive et quatre écritures",
+        "prerequis": []
+      },
+      {
         "id": "copie_fluente",
-        "label": "Copie fluente et soignee",
+        "label": "Copie fluente et soignée",
         "prerequis": []
       },
       {
         "id": "ecriture_mots",
-        "label": "Ecriture de mots et dictee",
+        "label": "Écriture de mots et dictée",
         "prerequis": [
           "copie_fluente"
         ]
       },
       {
         "id": "production_ecrite",
-        "label": "Production d'ecrits",
+        "label": "Production d'écrits",
         "prerequis": [
           "ecriture_mots"
         ]
@@ -1769,21 +1774,28 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "classes_mots",
-        "label": "Classes de mots (nom, verbe, adjectif, determinant)",
+        "label": "Classes de mots (nom, verbe, adjectif, déterminant, pronom)",
         "prerequis": [
           "grammaire_phrase"
         ]
       },
       {
         "id": "orthographe",
-        "label": "Orthographe lexicale et grammaticale",
+        "label": "Orthographe grammaticale",
         "prerequis": [
           "ecriture_mots"
         ]
       },
       {
+        "id": "orthographe_lexicale",
+        "label": "Orthographe lexicale",
+        "prerequis": [
+          "sons_complexes"
+        ]
+      },
+      {
         "id": "conjugaison",
-        "label": "Conjugaison – present et passe compose",
+        "label": "Conjugaison – présent, imparfait, futur, passé composé",
         "prerequis": [
           "classes_mots"
         ]
@@ -1809,19 +1821,33 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "comprehension_lecture",
-        "label": "Comprehension de textes",
+        "label": "Compréhension de textes",
         "prerequis": [
           "fluence_lecture"
         ]
       },
       {
+        "id": "types_textes",
+        "label": "Types de textes (narratif, informatif, prescriptif, poétique, théâtral)",
+        "prerequis": [
+          "comprehension_lecture"
+        ]
+      },
+      {
         "id": "copie_fluente",
-        "label": "Copie fluente et soignee",
+        "label": "Copie fluente et soignée",
         "prerequis": []
       },
       {
+        "id": "ecriture_mots",
+        "label": "Écriture de mots et dictée",
+        "prerequis": [
+          "copie_fluente"
+        ]
+      },
+      {
         "id": "production_ecrite",
-        "label": "Production d'ecrits courts",
+        "label": "Production d'écrits",
         "prerequis": [
           "copie_fluente"
         ]
@@ -1835,21 +1861,28 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "classes_mots",
-        "label": "Classes de mots",
+        "label": "Classes de mots (avec l'adverbe)",
         "prerequis": [
           "grammaire_phrase"
         ]
       },
       {
         "id": "orthographe",
-        "label": "Orthographe lexicale et grammaticale",
+        "label": "Orthographe grammaticale",
         "prerequis": [
           "classes_mots"
         ]
       },
       {
+        "id": "orthographe_lexicale",
+        "label": "Orthographe lexicale",
+        "prerequis": [
+          "ecriture_mots"
+        ]
+      },
+      {
         "id": "conjugaison",
-        "label": "Conjugaison - temps simples",
+        "label": "Conjugaison – quatre temps, être, avoir, 1ᵉʳ groupe et huit irréguliers",
         "prerequis": [
           "classes_mots"
         ]
@@ -1986,23 +2019,37 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "grapheme_phoneme",
-        "label": "Correspondances grapheme-phoneme",
+        "label": "Correspondances graphème-phonème",
         "prerequis": [
           "conscience_phonologique"
         ]
       },
       {
         "id": "lecture_syllabique",
-        "label": "Lecture syllabique et dechiffrage",
+        "label": "Lecture syllabique et déchiffrage",
         "prerequis": [
           "grapheme_phoneme"
         ]
       },
       {
-        "id": "comprehension_lecture",
-        "label": "Comprehension de textes",
+        "id": "lecture_voix_haute",
+        "label": "Lire à voix haute",
         "prerequis": [
           "lecture_syllabique"
+        ]
+      },
+      {
+        "id": "comprehension_lecture",
+        "label": "Compréhension de textes",
+        "prerequis": [
+          "lecture_syllabique"
+        ]
+      },
+      {
+        "id": "devenir_lecteur",
+        "label": "Devenir lecteur",
+        "prerequis": [
+          "comprehension_lecture"
         ]
       },
       {
@@ -2014,7 +2061,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "ecriture_mots",
-        "label": "Ecriture de mots (dictee)",
+        "label": "Écriture de mots (dictée)",
         "prerequis": [
           "grapheme_phoneme",
           "copie"
@@ -2022,7 +2069,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "production_ecrite",
-        "label": "Production d'ecrits simples",
+        "label": "Production d'écrits simples",
         "prerequis": [
           "ecriture_mots"
         ]
@@ -2036,9 +2083,23 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "orthographe",
-        "label": "Orthographe de base",
+        "label": "Orthographe grammaticale",
         "prerequis": [
           "ecriture_mots"
+        ]
+      },
+      {
+        "id": "conjugaison",
+        "label": "Conjugaison – être et avoir au présent",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "orthographe_lexicale",
+        "label": "Orthographe lexicale",
+        "prerequis": [
+          "grapheme_phoneme"
         ]
       },
       {
