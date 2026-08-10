@@ -37,7 +37,15 @@ yarn-error.log*
 .vercel
 
 # notes & docs internes — restent en local, jamais dans le dépôt
-docs/
+docs/*
+# … sauf les playbooks et prompts de chantier : une session ouverte dans un
+# worktree ne verrait pas un fichier ignoré, et c'est justement là qu'elle en a
+# besoin. ⚠️ Tout le reste de docs/ reste local — la note de statut juridique
+# n'a rien à faire dans le dépôt.
+!docs/coach-francais-cycle2-playbook.md
+!docs/prompt-francais-cp.md
+!docs/prompt-francais-ce1.md
+!docs/prompt-francais-ce2.md
 
 # typescript
 *.tsbuildinfo
