@@ -4,6 +4,7 @@ import { buildCycle2FrancaisBank } from "@/lib/tutor-v4/questionBank/cycle2/fran
 
 import { conjugaisonBank } from "./conjugaison.bank";
 import { classesMotsBank } from "./classes-mots.bank";
+import { grammairePhraseBank } from "./grammaire-phrase.bank";
 
 // LE CE2 SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 10/08/2026, sur le
 // modèle du CP (`cp/francais/index.ts`, 09-10/08).
@@ -34,7 +35,11 @@ import { classesMotsBank } from "./classes-mots.bank";
 //
 // Pour ajouter une notion : écrire `<notion>.bank.ts`, l'importer, l'ajouter à
 // BANQUES_ECRITES. Le repli s'efface tout seul pour ce qu'elle couvre.
-const BANQUES_ECRITES: TutorBankItemV4[] = [...conjugaisonBank, ...classesMotsBank];
+const BANQUES_ECRITES: TutorBankItemV4[] = [
+  ...conjugaisonBank,
+  ...classesMotsBank,
+  ...grammairePhraseBank,
+];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
 
