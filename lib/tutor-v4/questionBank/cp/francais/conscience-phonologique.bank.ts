@@ -141,6 +141,23 @@ const POSITIONS = [
   { mot: "vélo", son: "[o]", position: "à la fin" },
   { mot: "chat", son: "[a]", position: "à la fin" },
   { mot: "tapis", son: "[i]", position: "à la fin" },
+  { mot: "tapis", son: "[t]", position: "au début" },
+  { mot: "mouton", son: "[m]", position: "au début" },
+  { mot: "piton", son: "[p]", position: "au début" },
+  { mot: "chocolat", son: "[ʃ] (ch)", position: "au début" },
+  { mot: "lapin", son: "[l]", position: "au début" },
+  { mot: "lagon", son: "[g]", position: "au milieu" },
+  { mot: "tapis", son: "[p]", position: "au milieu" },
+  { mot: "mouton", son: "[t]", position: "au milieu" },
+  { mot: "requin", son: "[k] (qu)", position: "au milieu" },
+  { mot: "canapé", son: "[n]", position: "au milieu" },
+  { mot: "papillon", son: "[j] (ill)", position: "au milieu" },
+  { mot: "lagon", son: "[ɔ̃] (on)", position: "à la fin" },
+  { mot: "mouton", son: "[ɔ̃] (on)", position: "à la fin" },
+  { mot: "requin", son: "[ɛ̃] (in)", position: "à la fin" },
+  { mot: "tamarin", son: "[ɛ̃] (in)", position: "à la fin" },
+  { mot: "cari", son: "[i]", position: "à la fin" },
+  { mot: "souris", son: "[i]", position: "à la fin" },
 ] as const;
 
 const SONS_PRESENTS = [
@@ -150,6 +167,11 @@ const SONS_PRESENTS = [
   { son: "[ʃ] (ch)", avec: ["chat", "chou", "chocolat", "letchi", "chien"], sans: ["lagon", "tapis", "vélo", "requin", "domino"] },
   { son: "[a]", avec: ["chat", "lagon", "chocolat", "tamarin", "canapé"], sans: ["letchi", "vélo", "souris", "chou", "piton"] },
   { son: "[i]", avec: ["letchi", "cari", "tapis", "souris", "domino"], sans: ["chat", "lagon", "chou", "banc", "bateau"] },
+  { son: "[m]", avec: ["margouillat", "domino", "tamarin", "mouton", "marché"], sans: ["chat", "lagon", "riz", "tapis", "chou"] },
+  { son: "[ʁ] (r)", avec: ["cari", "souris", "tamarin", "requin", "riz"], sans: ["chat", "chou", "lagon", "mouton", "vélo"] },
+  { son: "[l]", avec: ["lagon", "letchi", "lapin", "chocolat", "soleil"], sans: ["chat", "souris", "requin", "mouton", "tapis"] },
+  { son: "[t]", avec: ["tapis", "tamarin", "bateau", "piton", "mouton"], sans: ["lagon", "chou", "souris", "riz", "vélo"] },
+  { son: "[p]", avec: ["papillon", "piton", "lapin", "tapis", "parapluie"], sans: ["lagon", "chat", "souris", "mouton", "vélo"] },
 ] as const;
 
 export const consciencePhonologiqueBank: TutorBankItemV4[] = [
@@ -624,9 +646,15 @@ export const consciencePhonologiqueBank: TutorBankItemV4[] = [
     generate: () => {
       const debuts = POSITIONS.filter((p) => p.position === "au début");
       const item = randomChoice(debuts);
-      const autres = shuffle(
-        POSITIONS.filter((p) => p.position !== "au début" && p.mot !== item.mot),
-      ).slice(0, 3).map((p) => p.mot);
+      // ⚠️ Un même mot figure plusieurs fois dans POSITIONS, une fois par son.
+      // Sans ce dédoublonnage, deux pièges tombaient sur le même mot et le QCM
+      // perdait une ligne. Attrapé par `verifier-generateurs.mjs`.
+      const autres = shuffle([
+        ...new Set(
+          POSITIONS.filter((p) => p.position !== "au début" && p.mot !== item.mot)
+            .map((p) => p.mot),
+        ),
+      ]).slice(0, 3);
       return {
         text: `Dans quel mot le son ${item.son} est-il au DÉBUT ?`,
         format: "qcm" as const,

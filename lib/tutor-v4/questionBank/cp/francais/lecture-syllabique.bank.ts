@@ -136,16 +136,45 @@ const PHRASES_A_TROU = [
   { avant: "Papa verse le riz ___ la marmite.", bon: "dans", faux: ["avec", "sur", "sous"] },
   { avant: "Le chat ___ noir.", bon: "est", faux: ["et", "es", "ai"] },
   { avant: "Léa ___ Tom sont amis.", bon: "et", faux: ["est", "es", "ai"] },
+  { avant: "___ chien aboie.", bon: "Le", faux: ["La", "Les", "Une"] },
+  { avant: "___ fleurs sont rouges.", bon: "Les", faux: ["Le", "La", "Un"] },
+  { avant: "___ maitresse écrit au tableau.", bon: "La", faux: ["Le", "Les", "Un"] },
+  { avant: "Tom mange ___ letchi.", bon: "un", faux: ["une", "des", "les"] },
+  { avant: "Léa cueille ___ mangue.", bon: "une", faux: ["un", "des", "le"] },
+  { avant: "Papa coupe ___ bois.", bon: "le", faux: ["la", "les", "une"] },
+  { avant: "Les enfants courent ___ la cour.", bon: "dans", faux: ["avec", "sur", "pour"] },
+  { avant: "Ce cadeau est ___ toi.", bon: "pour", faux: ["avec", "dans", "sous"] },
+  { avant: "Tom part ___ son papa.", bon: "avec", faux: ["pour", "dans", "sur"] },
+  { avant: "___ est ma sœur.", bon: "Elle", faux: ["Il", "Les", "Un"] },
+  { avant: "___ est mon frère.", bon: "Il", faux: ["Elle", "Les", "Une"] },
+  { avant: "Léa et Tom ___ contents.", bon: "sont", faux: ["est", "et", "es"] },
+  { avant: "Le lagon ___ bleu.", bon: "est", faux: ["et", "es", "ai"] },
 ] as const;
 
 // Phrases courtes : le nombre de mots se compte aux espaces.
+// ⚠️ Aucune apostrophe : « l'ombre » compte-t-il pour un mot ou pour deux ?
+// Un CP n'a pas à trancher ça pour répondre.
 const PHRASES_MOTS = [
+  { phrase: "Il pleut.", mots: 2 },
+  { phrase: "Maman rit.", mots: 2 },
   { phrase: "Le chat dort.", mots: 3 },
   { phrase: "Le margouillat monte.", mots: 3 },
+  { phrase: "Le piton fume.", mots: 3 },
   { phrase: "Léa mange un letchi.", mots: 4 },
-  { phrase: "Tom joue dans le jardin.", mots: 5 },
-  { phrase: "Le bateau flotte sur le lagon.", mots: 6 },
   { phrase: "Papa prépare un cari.", mots: 4 },
+  { phrase: "Léa lit un livre.", mots: 4 },
+  { phrase: "Le chien court vite.", mots: 4 },
+  { phrase: "Tom ramasse des letchis.", mots: 4 },
+  { phrase: "Le vent souffle fort.", mots: 4 },
+  { phrase: "Papa gare la voiture.", mots: 4 },
+  { phrase: "Tom joue dans le jardin.", mots: 5 },
+  { phrase: "Nous allons à la plage.", mots: 5 },
+  { phrase: "La maitresse ouvre la porte.", mots: 5 },
+  { phrase: "Les enfants chantent une chanson.", mots: 5 },
+  { phrase: "Ma sœur mange une mangue.", mots: 5 },
+  { phrase: "Le bateau flotte sur le lagon.", mots: 6 },
+  { phrase: "Un requin nage dans le lagon.", mots: 6 },
+  { phrase: "Le soleil brille sur la mer.", mots: 6 },
 ] as const;
 
 const TEXTES = [
@@ -481,6 +510,38 @@ export const lectureSyllabiqueBank: TutorBankItemV4[] = [
           "Pose ton doigt sur chaque mot et compte, du premier au point.",
           `« ${p.phrase} » → ${p.phrase.replace(/\.$/, "").split(" ").map((m, i) => `${i + 1}. ${m}`).join("  ")}`,
           `Il y a ${p.mots} mots.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "cp_lec_phrase_simple_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "lecture_syllabique",
+    microId: "cp_lec_phrase_simple",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Pose ton doigt au début de la phrase, puis avance mot par mot.",
+    tags: ["cp", "lecture", "phrase", "template"],
+    generate: () => {
+      const p = randomChoice(PHRASES_MOTS);
+      const mots = p.phrase.replace(/\.$/, "").split(" ");
+      const cherchePremier = randomChoice([true, false]);
+      const bon = cherchePremier ? mots[0] : mots[mots.length - 1];
+      const autres = shuffle(mots.filter((m) => m !== bon)).slice(0, 3);
+      return {
+        text: `Dans cette phrase, quel est le ${cherchePremier ? "PREMIER" : "DERNIER"} mot ?\n\n« ${p.phrase} »`,
+        format: "qcm" as const,
+        choices: makeChoices(bon, autres),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une phrase se lit de gauche à droite : elle a un premier mot et un dernier.",
+          "Pose ton doigt tout au début, puis fais-le glisser jusqu'au point.",
+          `« ${p.phrase} » : le premier mot est « ${mots[0]} », le dernier est « ${mots[mots.length - 1]} ».`,
+          `Le ${cherchePremier ? "premier" : "dernier"} mot est « ${bon} ».`,
         ),
       };
     },
