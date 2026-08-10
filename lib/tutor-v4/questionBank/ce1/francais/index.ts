@@ -4,6 +4,7 @@ import { buildCycle2FrancaisBank } from "@/lib/tutor-v4/questionBank/cycle2/fran
 
 import { conjugaisonBank } from "./conjugaison.bank";
 import { orthographeBank } from "./orthographe.bank";
+import { vocabulaireBank } from "./vocabulaire.bank";
 
 // LE CE1 SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 10/08/2026, après le
 // CP, qui est le patron.
@@ -36,6 +37,7 @@ import { orthographeBank } from "./orthographe.bank";
 const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...conjugaisonBank,
   ...orthographeBank,
+  ...vocabulaireBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
