@@ -1777,4 +1777,347 @@ export const conjugaisonBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* =========================================================
+     LES QUESTIONS OUVERTES — une par micro-compétence
+
+     ⚠️ `contains_keyword` valide dès qu'UN SEUL mot de `expected` apparaît
+     dans la réponse, en sous-chaîne. Les mots-clés sont donc choisis
+     DISCRIMINANTS, et jamais un mot qui se cache dans un autre : « ait »
+     validerait « ça fait longtemps ».
+     ⚠️ `normalize()` conserve les accents : chaque mot accentué est doublé de
+     sa forme sans accent, parce qu'un enfant de neuf ans tape rarement les
+     accents.
+
+     On demande « explique comment tu as trouvé », jamais « justifie ta
+     démarche » : c'est à un enfant de neuf ans qu'on parle, et il répond en
+     une phrase.
+  ========================================================= */
+  {
+    kind: "template",
+    id: "ce2_conj_infinitif_open_1",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "conjugaison",
+    microId: "ce2_conj_infinitif",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Raconte ce que tu fais dans ta tête, dans l'ordre.",
+    tags: ["ce2", "conjugaison", "infinitif", "ouverte"],
+    generate: () => {
+      const v = randomChoice(TOUS);
+      const temps = randomChoice(TEMPS_SIMPLES);
+      const p = Math.floor(Math.random() * 6);
+      return {
+        text: `« ${majuscule(attacher(PRONOMS[p], v.formes[temps][p]))} »\n\nExplique comment tu ferais pour retrouver l'infinitif de ce verbe.`,
+        format: "open" as const,
+        expected: [
+          "enlève",
+          "enleve",
+          "terminaison",
+          "il faut",
+          "dictionnaire",
+          "forme de base",
+          v.inf,
+        ],
+        comparator: "contains_keyword" as const,
+        explanation: exp(
+          "L'infinitif est la forme de base du verbe, celle du dictionnaire.",
+          "Deux gestes possibles : enlever la terminaison qui a changé, ou poser « il faut… » devant le verbe.",
+          `il faut ${v.inf} → l'infinitif est « ${v.inf} ».`,
+          `L'infinitif est « ${v.inf} ».`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_conj_radical_terminaison_open_1",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "conjugaison",
+    microId: "ce2_conj_radical_terminaison",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare les six personnes du même verbe et regarde ce qui bouge.",
+    tags: ["ce2", "conjugaison", "radical", "ouverte"],
+    generate: () => {
+      const v = randomChoice(LES_ER);
+      const rad = radicalEr(v.inf);
+      return {
+        text: `${v.formes.present.map((f, i) => attacher(PRONOMS[i], f)).join(", ")}.\n\nQuelle partie du verbe ne change JAMAIS ? Explique en une phrase.`,
+        format: "open" as const,
+        expected: ["radical", rad, "début", "debut", "commencement"],
+        comparator: "contains_keyword" as const,
+        explanation: exp(
+          "Un verbe conjugué a deux morceaux : le radical, qui porte le sens, et la terminaison, qui dit qui fait l'action et quand.",
+          "Écris les six personnes les unes sous les autres et regarde où la colonne se met à changer.",
+          `${rad} ne bouge pas d'une ligne à l'autre. C'est le radical de « ${v.inf} ».`,
+          `La partie qui ne change jamais est le radical : « ${rad} ».`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "ce2_conj_present_etre_avoir_open_1",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "conjugaison",
+    microId: "ce2_conj_present_etre_avoir",
+    difficulty: 3,
+    theme: "neutral",
+    text: "« Ils ont faim. » et « Ils sont contents. »\n\nComment fais-tu pour savoir lequel est le verbe avoir ? Explique en une phrase.",
+    format: "open",
+    expected: ["possède", "possede", "avoir", "on a", "quelque chose", "sens"],
+    comparator: "contains_keyword",
+    hint: "Demande-toi si la phrase dit ce qu'on POSSÈDE, ou ce qu'on EST.",
+    explanation: exp(
+      "Être et avoir ont des formes qui riment : ont / sont, es / est, as / a.",
+      "Regarde le sens : ce qu'on possède, c'est avoir ; ce qu'on est, c'est être.",
+      "La faim, on l'a. Contents, on l'est. C'est le sens qui tranche, pas le son.",
+      "« ont » est le verbe avoir, parce que la faim, on la possède.",
+    ),
+    tags: ["ce2", "conjugaison", "etre-avoir", "methode", "ouverte"],
+  },
+  {
+    kind: "template",
+    id: "ce2_conj_present_er_open_1",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "conjugaison",
+    microId: "ce2_conj_present_er",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Ce n'est pas ton oreille qui décide. C'est quoi, alors ?",
+    tags: ["ce2", "conjugaison", "present", "ouverte"],
+    generate: () => {
+      const v = randomChoice(LES_ER);
+      const complement = randomChoice(v.complements);
+      const sujet = randomChoice(SUJETS_PL);
+      return {
+        text: `« ${majuscule(sujet)} ${v.formes.present[5]} ${complement}. »\n\nOn n'entend pas le « -ent » à la fin du verbe. Explique pourquoi il faut quand même l'écrire.`,
+        format: "open" as const,
+        expected: ["pluriel", "plusieurs", "sujet", "ils", "marque"],
+        comparator: "contains_keyword" as const,
+        explanation: exp(
+          "La marque du pluriel des verbes est « -nt ». Elle s'écrit et ne s'entend pas.",
+          "Ne compte pas sur ton oreille : remonte au sujet et compte combien ils sont.",
+          `« ${sujet} », c'est plusieurs. Ta bouche dit la même chose qu'au singulier ; c'est le sujet qui prévient.`,
+          "Il faut l'écrire parce que le sujet est au pluriel, même si on ne l'entend pas.",
+        ),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "ce2_conj_present_irreguliers_open_1",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "conjugaison",
+    microId: "ce2_conj_present_irreguliers",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Beaucoup d'élèves écrivent « vous faisez ». Explique pourquoi c'est une erreur — et pourquoi elle est facile à faire.",
+    format: "open",
+    expected: ["faites", "exception", "irrégulier", "irregulier", "par cœur", "par coeur", "règle", "regle"],
+    comparator: "contains_keyword",
+    hint: "L'élève qui écrit « faisez » a appliqué une règle. Laquelle ?",
+    explanation: exp(
+      "Avec « vous », les verbes se terminent presque toujours par « -ez ». Trois verbes font exception.",
+      "Retiens les trois : vous faites, vous dites, vous êtes.",
+      "L'enfant qui écrit « faisez » n'a rien oublié : il a bien appliqué la règle du -ez. C'est la règle qui a un trou, et il n'y a que trois trous.",
+      "C'est « vous faites » : faire est une des trois exceptions au « -ez ».",
+    ),
+    tags: ["ce2", "conjugaison", "irreguliers", "piege", "ouverte"],
+  },
+  {
+    kind: "fixed",
+    id: "ce2_conj_imparfait_open_1",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "conjugaison",
+    microId: "ce2_conj_imparfait",
+    difficulty: 3,
+    theme: "neutral",
+    text: "À quoi sert l'imparfait ? Écris une phrase à l'imparfait qui raconte quelque chose que tu faisais quand tu étais petit.",
+    format: "open",
+    expected: ["autrefois", "avant", "petit", "durait", "répétait", "repetait", "chaque", "souvent", "ais", "ions"],
+    comparator: "contains_keyword",
+    hint: "Pense à ce qui se répétait, ou qui durait longtemps.",
+    explanation: exp(
+      "L'imparfait raconte le passé qui durait ou qui se répétait : ce qu'on faisait souvent, ce qui était là autour.",
+      "Ses terminaisons sont toujours les mêmes : -ais, -ais, -ait, -ions, -iez, -aient.",
+      "Quand j'étais petit, je jouais dans la cour tous les matins. L'action ne s'est pas passée une fois : elle revenait.",
+      "L'imparfait sert à raconter ce qui durait ou se répétait dans le passé.",
+    ),
+    tags: ["ce2", "conjugaison", "imparfait", "definition", "ouverte"],
+  },
+  {
+    kind: "template",
+    id: "ce2_conj_imparfait_irreguliers_open_1",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "conjugaison",
+    microId: "ce2_conj_imparfait_irreguliers",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Il y a une personne du présent qui te donne le radical de tout l'imparfait.",
+    tags: ["ce2", "conjugaison", "imparfait", "irreguliers", "ouverte"],
+    generate: () => {
+      const v = randomChoice(LES_HUIT);
+      return {
+        text: `Tu dois écrire « ${v.inf} » à l'imparfait, mais tu ne t'en souviens plus.\n\nExplique où tu peux aller chercher son radical.`,
+        format: "open" as const,
+        expected: ["nous", "présent", "present", "ons", v.formes.present[3]],
+        comparator: "contains_keyword" as const,
+        explanation: exp(
+          "Le radical de l'imparfait se trouve toujours dans le « nous » du présent, pour tous les verbes.",
+          "Dis « nous… » au présent, enlève le « -ons », et ajoute la terminaison de l'imparfait.",
+          `nous ${v.formes.present[3]} → ${attacher(PRONOMS[2], v.formes.imparfait[2])}.`,
+          `Le radical se prend sur « nous ${v.formes.present[3]} ».`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "ce2_conj_futur_open_1",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "conjugaison",
+    microId: "ce2_conj_futur",
+    difficulty: 3,
+    theme: "neutral",
+    text: "« Demain, il jouera dans la cour. »\n\nOn n'entend pas le « e » de « jouera ». Explique pourquoi il faut l'écrire.",
+    format: "open",
+    expected: ["infinitif", "jouer", "entier", "en entier", "tout le verbe"],
+    comparator: "contains_keyword",
+    hint: "Écris l'infinitif du verbe, puis colle la terminaison derrière sans rien enlever.",
+    explanation: exp(
+      "Au futur, la terminaison se colle sur l'INFINITIF tout entier, pas sur le radical.",
+      "Écris l'infinitif en entier, puis ajoute -ai, -as, -a, -ons, -ez ou -ont.",
+      "jouer + a = jouera. Le « e » est là parce que « jouer » est là, en entier.",
+      "Parce qu'au futur on garde l'infinitif entier : jouer + a.",
+    ),
+    tags: ["ce2", "conjugaison", "futur", "methode", "ouverte"],
+  },
+  {
+    kind: "template",
+    id: "ce2_conj_futur_irreguliers_open_1",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "conjugaison",
+    microId: "ce2_conj_futur_irreguliers",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare le début du futur et l'infinitif : se ressemblent-ils ?",
+    tags: ["ce2", "conjugaison", "futur", "irreguliers", "ouverte"],
+    generate: () => {
+      const v = randomChoice(LES_HUIT);
+      return {
+        text: `Infinitif : « ${v.inf} ». Au futur : « ${attacher(PRONOMS[0], v.formes.futur[0])} ».\n\nQu'est-ce qui a changé, et pourquoi ne peut-on pas le deviner ? Explique.`,
+        format: "open" as const,
+        expected: ["radical", "début", "debut", "irrégulier", "irregulier", "par cœur", "par coeur", "apprendre", "retenir"],
+        comparator: "contains_keyword" as const,
+        explanation: exp(
+          "Chez les verbes du premier groupe, le futur garde l'infinitif entier. Chez les huit irréguliers, le début se refabrique.",
+          "Il n'y a rien à calculer : ces huit débuts s'apprennent par cœur.",
+          `${v.inf} → ${v.formes.futur[0]}… Les terminaisons, elles, ne changent pas : -ai, -as, -a, -ons, -ez, -ont.`,
+          `C'est le début du verbe qui change, et il faut le retenir : « ${v.formes.futur[0]} ».`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "ce2_conj_passe_compose_open_1",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "conjugaison",
+    microId: "ce2_conj_passe_compose",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Pourquoi le passé composé s'appelle-t-il « composé » ? Explique en une phrase.",
+    format: "open",
+    expected: ["deux", "auxiliaire", "être", "etre", "avoir", "participe", "morceau"],
+    comparator: "contains_keyword",
+    hint: "Compte les mots qu'il faut pour l'écrire.",
+    explanation: exp(
+      "Composé veut dire « fait de plusieurs morceaux ».",
+      "Cherche les deux mots : d'abord être ou avoir au présent, puis le participe passé.",
+      "Hier, j'ai ramassé des letchis. « ai » porte la personne, « ramassé » porte le sens. Deux mots pour un seul verbe.",
+      "Parce qu'il s'écrit en deux mots : un auxiliaire, puis le participe passé.",
+    ),
+    tags: ["ce2", "conjugaison", "passe-compose", "definition", "ouverte"],
+  },
+  {
+    kind: "template",
+    id: "ce2_conj_participe_infinitif_open_1",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "conjugaison",
+    microId: "ce2_conj_participe_infinitif",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Il te faut un verbe dont les deux formes ne se disent PAS pareil.",
+    tags: ["ce2", "conjugaison", "participe", "ouverte"],
+    generate: () => {
+      const v = randomChoice(LES_ER);
+      return {
+        text: `« ${v.inf} » et « ${v.participe} » se disent exactement pareil.\n\nExplique le truc qui te permet de choisir lequel écrire.`,
+        format: "open" as const,
+        expected: ["prendre", "pris", "remplace", "remplacer", "mordre", "vendre"],
+        comparator: "contains_keyword" as const,
+        explanation: exp(
+          "Chez les verbes du premier groupe, l'infinitif et le participe passé se prononcent de la même façon. Seule l'orthographe les sépare.",
+          "Remplace le verbe par « prendre », qui a deux formes bien différentes, et écoute laquelle se dit.",
+          `Je vais PRENDRE → je vais ${v.inf}. J'ai PRIS → j'ai ${v.participe}. Ton oreille ne sert à rien sur « ${v.inf} », elle sert sur « prendre ».`,
+          "Le truc, c'est de remplacer par « prendre » : prendre, ou pris ?",
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_conj_defi_open_1",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "conjugaison",
+    microId: "ce2_conj_defi",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Dis les deux choses que tu as regardées : d'abord le quand, ensuite le qui.",
+    tags: ["ce2", "conjugaison", "defi", "ouverte"],
+    generate: () => {
+      const v = randomChoice([...LES_HUIT, ...LES_ER]);
+      const complement = randomChoice(v.complements);
+      const temps = randomChoice(TEMPS_SIMPLES);
+      const p = randomChoice([2, 5]);
+      const sujet = sujetPour(v, temps, p);
+      return {
+        text: `« ${majuscule(sujet)} ${v.formes[temps][p]} ${complement}. »\n\nÀ quel temps est cette phrase, et à quoi l'as-tu vu ? Explique comment tu as trouvé.`,
+        format: "open" as const,
+        expected: [
+          // Chaque mot accentué est doublé sans accent : à neuf ans, on tape
+          // « present », pas « présent », et `normalize()` garde les accents.
+          ...(temps === "present"
+            ? ["présent", "present"]
+            : temps === "imparfait"
+              ? ["imparfait"]
+              : ["futur"]),
+          "terminaison",
+          "fin du verbe",
+          v.formes[temps][p],
+        ],
+        comparator: "contains_keyword" as const,
+        explanation: exp(
+          "Le temps d'une phrase se lit sur la fin du verbe, pas sur les autres mots.",
+          "Regarde la terminaison : -ait et -aient pour l'imparfait, -ra et -ront pour le futur, deux mots pour le passé composé.",
+          `« ${v.formes[temps][p]} » est ${TEMPS_PHRASE[temps]}.`,
+          `Cette phrase est ${TEMPS_PHRASE[temps]}.`,
+        ),
+      };
+    },
+  },
 ];
