@@ -3,6 +3,7 @@ import { microSkills } from "@/lib/tutor-v4/knowledge/francais/ce1/microSkills";
 import { buildCycle2FrancaisBank } from "@/lib/tutor-v4/questionBank/cycle2/francais/buildCycle2FrancaisBank";
 
 import { conjugaisonBank } from "./conjugaison.bank";
+import { orthographeBank } from "./orthographe.bank";
 
 // LE CE1 SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 10/08/2026, après le
 // CP, qui est le patron.
@@ -34,6 +35,7 @@ import { conjugaisonBank } from "./conjugaison.bank";
 // BANQUES_ECRITES. Le repli s'efface tout seul pour ce qu'elle couvre.
 const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...conjugaisonBank,
+  ...orthographeBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
