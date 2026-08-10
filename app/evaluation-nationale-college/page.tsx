@@ -3,6 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 
+// La palette vit dans `_composants/couleurs.ts` : le hub et les quatre
+// épreuves y puisent la MÊME couleur par slug, sinon une carte safran
+// ouvrirait une épreuve boucan.
+import { BOUCAN, CANNE, FLAMBOYANT, FOND, SAFRAN } from "./_composants/couleurs";
+
 export const metadata: Metadata = {
   title:
     "Les évaluations nationales du collège — 6e et 4e, français et maths | EleveAI",
@@ -20,45 +25,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.eleveai.fr/evaluation-nationale-college",
   },
-};
-
-// ─── LES COULEURS ─────────────────────────────────────────────────────────────
-// LE PAPIER JOURNAL S'EN VA (Frédéric, 09/08 : « cette page demande un fond
-// fun »). Le crème `#f6f1e4` et ses filets noirs venaient de l'accueil-journal,
-// qui n'est plus rendu depuis le 06/08 : cette page portait donc les habits
-// d'un journal qui n'existe plus, pour parler à des 6ᵉ et des 4ᵉ la semaine de
-// la rentrée. Un fond d'annonce officielle, sur une page dont tout le propos
-// est « ce n'est pas un examen, il n'y a pas de note ».
-//
-// On reprend la palette de l'île déjà tranchée le 02/08 — SES mots : boucan
-// canot, flamboyant, canne, safran péi — et sa règle : la couleur PORTE, elle
-// ne décore pas. Ici elle porte l'épreuve : une couleur par carte, jamais deux
-// voisines identiques. L'encre ne bouge pas.
-const CIEL = "#e7f4f7"; // le boucan canot dilué de l'accueil, encore éclairci
-const INK = "#1d1c16";
-
-const BOUCAN = "#0e7490";
-const FLAMBOYANT = "#bf3b1e";
-const CANNE = "#3f6b0c";
-const SAFRAN = "#a34c07";
-
-// Le fond : quatre lavis de l'île très dilués + le quadrillage d'un cahier
-// par-dessus. Aucune image, aucun octet téléchargé — que du CSS, sur une page
-// qui doit s'ouvrir vite en septembre. ⚠️ L'ORDRE COMPTE : la première couche
-// est celle du DESSUS (le quadrillage), et `backgroundSize` se lit dans le
-// même ordre.
-const FOND = {
-  backgroundColor: CIEL,
-  backgroundImage: [
-    "linear-gradient(rgba(29,28,22,0.045) 1px, transparent 1px)",
-    "linear-gradient(90deg, rgba(29,28,22,0.045) 1px, transparent 1px)",
-    "radial-gradient(58rem 40rem at 88% -8%, rgba(163,76,7,0.20), transparent 62%)",
-    "radial-gradient(52rem 38rem at -8% 14%, rgba(14,116,144,0.24), transparent 62%)",
-    "radial-gradient(46rem 34rem at 16% 108%, rgba(63,107,12,0.18), transparent 62%)",
-    "radial-gradient(42rem 32rem at 104% 92%, rgba(191,59,30,0.16), transparent 62%)",
-  ].join(", "),
-  backgroundSize: "30px 30px, 30px 30px, auto, auto, auto, auto",
-  color: INK,
 };
 
 // LE HUB D'ABORD, LES ÉPREUVES ENSUITE (Frédéric, 01/08) : on branche la
@@ -158,7 +124,7 @@ export default function EvaluationNationaleCollegePage() {
             annonçait une page qui n'existe plus. */}
         <Link
           href="/accueil"
-          className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/60 shadow-sm ring-1 ring-[#1d1c16]/10 transition hover:bg-white hover:text-cyan-800"
+          className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/60 shadow-sm ring-1 ring-[#1d1c16]/10 transition hover:bg-white hover:text-[#0e7490]"
         >
           ← L&apos;accueil
         </Link>
@@ -360,12 +326,20 @@ export default function EvaluationNationaleCollegePage() {
           </Link>
         </section>
 
-        {/* CE QUI EST EN CHANTIER — dit en clair plutôt que promis en vitrine. */}
+        {/* ⚠️ CE PARAGRAPHE MENTAIT (corrigé le 09/08). Écrit le 01/08 quand
+            aucune épreuve n'existait, il annonçait encore « les quatre épreuves
+            blanches sont en construction » — juste sous quatre cartes qui
+            affichent « L'épreuve blanche est prête ». Deux points relus dans le
+            code avant de réécrire, parce que la phrase se trompait deux fois :
+            il n'y a AUCUN bouton retour (`validerEtContinuer` n'incrémente
+            que), et rien n'est corrigé « au fur et à mesure » — `construireBilan`
+            ne tourne qu'à l'étape `bilan`, thème par thème et micro par micro. */}
         <p className="mt-8 rounded-2xl bg-white/60 p-4 text-xs font-medium italic leading-5 text-[#1d1c16]/70 ring-1 ring-[#1d1c16]/10">
           Les quatre épreuves blanches — français et maths, en 6ᵉ et en 4ᵉ —
-          sont en construction : même durée, même forme, corrigées au fur et à
-          mesure. Elles se rangeront ici. En attendant, les liens ci-dessus
-          travaillent sur les mêmes compétences.
+          sont en ligne : même durée, même forme, une question à la fois et pas
+          de retour en arrière. La correction arrive à la fin, compétence par
+          compétence, sans note. Les liens sous chaque épreuve travaillent
+          exactement les mêmes compétences, sans chrono.
         </p>
       </div>
     </main>

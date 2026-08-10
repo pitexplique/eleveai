@@ -19,8 +19,7 @@ import {
   type QuestionEval,
 } from "@/lib/eval-nationale/moteur";
 
-const PAPER = "#f6f1e4";
-const INK = "#1d1c16";
+import { FOND, accentDe } from "./couleurs";
 
 type Etape = "accueil" | "prise-en-main" | "epreuve" | "bilan";
 
@@ -66,6 +65,14 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
   const NB_QUESTIONS = compterQuestions(config);
   /** « 6e » s'écrit « 6ᵉ » quand on l'affiche. */
   const classeLabel = config.classe.replace(/e$/, "ᵉ");
+  /**
+   * LA COULEUR DE L'ÉPREUVE, la même que sa carte sur le hub (09/08). Elle
+   * remplace le `cyan-800` unique du papier journal : quatre épreuves qui se
+   * ressemblaient trait pour trait, on ne savait plus laquelle on passait.
+   * Elle est posée en style INLINE — une classe Tailwind construite au vol
+   * (`text-[${accent}]`) n'existerait pas dans le CSS généré.
+   */
+  const accent = accentDe(config.slug);
   /**
    * « de » + « le CM2 » se contracte en « du CM2 » ; « la 5ᵉ » ne bouge pas.
    * Sans ça, les deux épreuves de 6ᵉ affichaient « le programme de le CM2 » et
@@ -291,29 +298,45 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
   }
 
   return (
-    <main
-      className="min-h-screen px-4 pb-16 pt-8 sm:px-6 lg:px-8"
-      style={{ backgroundColor: PAPER, color: INK }}
-    >
+    <main className="min-h-screen px-4 pb-16 pt-8 sm:px-6 lg:px-8" style={FOND}>
       <div ref={hautRef} className="mx-auto max-w-3xl scroll-mt-24">
         {/* ══ ACCUEIL ══════════════════════════════════════════════════════ */}
         {etape === "accueil" && (
           <>
             <Link
               href="/evaluation-nationale-college"
-              className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55 hover:text-cyan-800"
+              className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/60 shadow-sm ring-1 ring-[#1d1c16]/10 transition hover:bg-white"
             >
               ← Les évaluations du collège
             </Link>
 
-            <header className="mt-3 border-b-4 border-double border-[#1d1c16] pb-5">
-              <p className="text-[11px] font-black uppercase tracking-[0.18em] text-cyan-800">
+            <header className="mt-4">
+              <p
+                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-white"
+                style={{ backgroundColor: accent }}
+              >
                 🎓 Épreuve blanche · {classeLabel} · {config.matiereLabel}
               </p>
-              <h1 className="mt-1 font-serif text-4xl font-black leading-none tracking-tight sm:text-5xl">
-                L&apos;évaluation nationale, en vrai
+              {/* Même surligneur que le hub, dans la couleur de l'épreuve —
+                  c'est le fil qui relie la carte cliquée à la page ouverte.
+                  ⚠️ `boxDecorationBreak: clone` : sans lui, un titre qui passe
+                  à la ligne ne reçoit son trait que sur le dernier fragment. */}
+              <h1 className="mt-2 font-serif text-3xl font-black leading-tight tracking-tight sm:text-5xl">
+                <span
+                  className="px-1"
+                  style={{
+                    backgroundImage: `linear-gradient(${accent}33, ${accent}33)`,
+                    backgroundSize: "100% 0.3em",
+                    backgroundPosition: "0 88%",
+                    backgroundRepeat: "no-repeat",
+                    WebkitBoxDecorationBreak: "clone",
+                    boxDecorationBreak: "clone",
+                  }}
+                >
+                  L&apos;évaluation nationale, en vrai
+                </span>
               </h1>
-              <p className="mt-3 text-sm font-medium leading-6 text-[#1d1c16]/70">
+              <p className="mt-4 text-sm font-medium leading-6 text-[#1d1c16]/75">
                 Même forme que le jour J : les questions défilent une par une,
                 on ne revient pas en arrière, et le temps court.
               </p>
@@ -321,7 +344,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                   officielle enchaîne bien plus de questions dans ses 50
                   minutes : environ une par minute. On ne prétend pas au même
                   volume — on tient la même cadence, et on l'écrit. */}
-              <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/70">
+              <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/75">
                 Le jour J, tu auras à peu près une minute par question. Ici
                 aussi : {NB_QUESTIONS} questions, {dureeMinutes} minutes. La
                 vraie épreuve en pose simplement beaucoup plus — ce qu&apos;on
@@ -329,7 +352,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
               </p>
             </header>
 
-            <div className="mt-5 grid gap-3 sm:grid-cols-3">
+            <div className="mt-6 grid gap-3 sm:grid-cols-3">
               {[
                 {
                   chiffre: String(dureeMinutes),
@@ -343,8 +366,15 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                 },
                 { chiffre: "0", unite: "note", quoi: "un profil, pas un chiffre" },
               ].map((c) => (
-                <div key={c.unite} className="border-2 border-[#1d1c16] p-3 text-center">
-                  <p className="font-serif text-4xl font-black leading-none text-cyan-800">
+                <div
+                  key={c.unite}
+                  className="rounded-2xl border-2 bg-white/85 p-3 text-center shadow-[0_8px_24px_-14px_rgba(29,28,22,0.5)]"
+                  style={{ borderColor: accent }}
+                >
+                  <p
+                    className="font-serif text-4xl font-black leading-none"
+                    style={{ color: accent }}
+                  >
                     {c.chiffre}
                   </p>
                   <p className="mt-1 text-sm font-black">{c.unite}</p>
@@ -353,31 +383,45 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
               ))}
             </div>
 
-            <section className="mt-6 border-t-2 border-[#1d1c16] pt-4">
-              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+            <section className="mt-5 rounded-2xl bg-white/70 p-4 ring-1 ring-[#1d1c16]/10">
+              <p
+                className="text-[10px] font-black uppercase tracking-[0.16em]"
+                style={{ color: accent }}
+              >
                 Les thèmes de l&apos;épreuve
               </p>
               <div className="mt-2 grid gap-x-8 gap-y-3 sm:grid-cols-2">
                 {config.themes.map((t) => (
-                  <div key={t.id} className="border-t border-[#1d1c16]/25 pt-2">
-                    <p className="font-serif text-[15px] font-black leading-snug">
-                      {t.label}
-                    </p>
-                    <p className="mt-0.5 text-xs font-medium leading-5 text-[#1d1c16]/70">
-                      {t.quoi}
-                    </p>
+                  <div key={t.id} className="flex gap-2.5">
+                    <span
+                      aria-hidden
+                      className="w-1 shrink-0 self-stretch rounded-full"
+                      style={{ backgroundColor: accent }}
+                    />
+                    <div>
+                      <p className="font-serif text-[15px] font-black leading-snug">
+                        {t.label}
+                      </p>
+                      <p className="mt-0.5 text-xs font-medium leading-5 text-[#1d1c16]/70">
+                        {t.quoi}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
             </section>
 
             {/* Ce que la vraie ne dit pas, et qui est la raison d'être de
-                celle-ci. */}
-            <div className="mt-6 border-2 border-[#1d1c16] bg-cyan-800/[0.05] p-4">
+                celle-ci. Le bloc est PLEIN, pas teinté : c'est la promesse de
+                la page, elle mérite de se voir depuis le haut de l'écran. */}
+            <div
+              className="mt-5 rounded-2xl p-4 text-white sm:p-5"
+              style={{ backgroundColor: accent }}
+            >
               <p className="font-serif text-lg font-black leading-tight">
                 À la fin, tu sauras exactement ce qui a coincé
               </p>
-              <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
+              <p className="mt-1 text-sm font-medium leading-6 text-white/85">
                 Pas une note. Le nom de chaque compétence testée, celles que tu
                 tiens et celles à retravailler — et le lien pour t&apos;y
                 mettre tout de suite. La vraie épreuve, elle, ne te le dira
@@ -387,7 +431,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
 
             {/* LA CLASSE TESTÉE N'EST PAS LA SIENNE — c'est le point que les
                 élèves comprennent mal, et qui change tout à leur préparation. */}
-            <p className="mt-5 text-sm font-medium leading-6 text-[#1d1c16]/70">
+            <p className="mt-5 text-sm font-medium leading-6 text-[#1d1c16]/75">
               Les questions portent sur le programme {duSource} :
               l&apos;évaluation de rentrée mesure ce que
               tu emportes de l&apos;an dernier, pas ce que tu n&apos;as pas
@@ -398,7 +442,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                 domaines manquants laisserait croire qu'on reproduit toute
                 l'épreuve — on ne promet que ce qui existe. */}
             {config.reserve && (
-              <p className="mt-3 border-l-4 border-[#1d1c16]/25 pl-3 text-sm font-medium leading-6 text-[#1d1c16]/70">
+              <p className="mt-3 rounded-xl border-l-4 border-[#1d1c16]/25 bg-white/60 py-2 pl-3 pr-3 text-sm font-medium leading-6 text-[#1d1c16]/75">
                 {config.reserve}
               </p>
             )}
@@ -406,7 +450,8 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
             <button
               type="button"
               onClick={commencerPriseEnMain}
-              className="mt-5 inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-6 py-3 text-sm font-black text-[#f0fafc] transition hover:bg-[#1d1c16]"
+              className="mt-6 inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-sm font-black text-white shadow-sm transition hover:brightness-110"
+              style={{ backgroundColor: accent }}
             >
               Commencer par la prise en main →
             </button>
@@ -416,20 +461,29 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
         {/* ══ PRISE EN MAIN ════════════════════════════════════════════════ */}
         {etape === "prise-en-main" && (
           <>
-            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-cyan-800">
+            <p
+              className="inline-flex rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-white"
+              style={{ backgroundColor: accent }}
+            >
               Prise en main · {indexPrise + 1} / {PRISE_EN_MAIN.length}
             </p>
-            <h1 className="mt-1 font-serif text-3xl font-black leading-tight">
+            <h1 className="mt-2 font-serif text-3xl font-black leading-tight">
               D&apos;abord, on vérifie que tu es à l&apos;aise
             </h1>
-            <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/70">
+            <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/75">
               Ces questions ne comptent pas. Elles servent à te montrer comment
               répondre — c&apos;est exactement ce que fait la vraie évaluation
               avant de commencer.
             </p>
 
-            <div className="mt-5 border-2 border-[#1d1c16] p-4 sm:p-5">
-              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+            {/* LA QUESTION SUR CARTE BLANCHE OPAQUE, pas sur le fond : le
+                quadrillage et les lavis restent AUTOUR de ce qu'on lit. C'est
+                la règle de toutes les étapes qui demandent de répondre. */}
+            <div
+              className="mt-5 rounded-2xl border-2 bg-white p-4 shadow-[0_10px_28px_-16px_rgba(29,28,22,0.55)] sm:p-5"
+              style={{ borderColor: accent }}
+            >
+              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
                 {PRISE_EN_MAIN[indexPrise].consigne}
               </p>
               <p className="mt-2 font-serif text-2xl font-black leading-tight">
@@ -443,11 +497,16 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                     type="button"
                     onClick={() => setChoixPrise(c)}
                     className={[
-                      "border-2 px-4 py-3 text-left text-sm font-black transition",
+                      "rounded-xl border-2 px-4 py-3 text-left text-sm font-black transition",
                       choixPrise === c
-                        ? "border-cyan-800 bg-cyan-800 text-[#f0fafc]"
-                        : "border-[#1d1c16]/25 hover:border-[#1d1c16] hover:bg-[#1d1c16]/5",
+                        ? "text-white"
+                        : "border-[#1d1c16]/20 hover:border-[#1d1c16]/50 hover:bg-[#1d1c16]/5",
                     ].join(" ")}
+                    style={
+                      choixPrise === c
+                        ? { backgroundColor: accent, borderColor: accent }
+                        : undefined
+                    }
                   >
                     {c}
                   </button>
@@ -461,7 +520,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                       ? "✅ C'est ça. Tu sais répondre."
                       : "Ce n'était pas la bonne, mais peu importe : ici on apprend juste à cliquer."}
                   </p>
-                  <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
+                  <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/75">
                     {PRISE_EN_MAIN[indexPrise].apprend}
                   </p>
                   <button
@@ -475,7 +534,8 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                         setTimeout(commencerEpreuve, 0);
                       }
                     }}
-                    className="mt-3 inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-5 py-2.5 text-sm font-black text-[#f0fafc] transition hover:bg-[#1d1c16]"
+                    className="mt-3 inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-black text-white shadow-sm transition hover:brightness-110"
+                    style={{ backgroundColor: accent }}
                   >
                     {indexPrise + 1 < PRISE_EN_MAIN.length
                       ? "Continuer →"
@@ -485,11 +545,15 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
               )}
             </div>
 
-            <div className="mt-5 border-l-4 border-red-800 pl-3">
-              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
+            {/* L'AVERTISSEMENT RESTE ROUGE, il ne prend pas la couleur de
+                l'épreuve : « on ne revient jamais en arrière » doit se lire
+                comme un avertissement sur les quatre, pas comme un élément de
+                décor qui change de teinte selon la matière. */}
+            <div className="mt-5 rounded-xl border-l-4 border-red-800 bg-white/70 py-2.5 pl-3 pr-3">
+              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-red-800">
                 À savoir avant de commencer
               </p>
-              <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
+              <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/75">
                 Une fois l&apos;épreuve lancée, chaque question s&apos;en va
                 quand tu passes à la suivante :{" "}
                 <span className="font-black text-[#1d1c16]">
@@ -504,25 +568,35 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
         {/* ══ L'ÉPREUVE ════════════════════════════════════════════════════ */}
         {etape === "epreuve" && question && (
           <>
-            {/* La barre de tête : où on en est, et combien de temps il reste. */}
-            <div className="flex flex-wrap items-baseline justify-between gap-2 border-b-2 border-[#1d1c16] pb-2">
-              <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
-                Question {index + 1} / {questions.length}
-              </p>
-              <p
-                className={[
-                  "font-serif text-2xl font-black leading-none tabular-nums",
-                  restant <= 300 ? "text-red-800" : "text-cyan-800",
-                ].join(" ")}
-              >
-                {formatChrono(restant)}
-              </p>
-            </div>
-            <div className="h-1 w-full bg-[#1d1c16]/10">
-              <div
-                className="h-1 bg-cyan-800 transition-all duration-500"
-                style={{ width: `${((index + 1) / questions.length) * 100}%` }}
-              />
+            {/* La barre de tête : où on en est, et combien de temps il reste.
+                Elle prend sa propre carte blanche — sur le papier journal un
+                filet suffisait à la détacher, sur un fond quadrillé non.
+                ⛔ PAS de `sticky` : l'en-tête du site est déjà collant et sa
+                hauteur bouge quand « Installer l'app » se ferme — la barre
+                passerait dessous. Même piège que l'encart du compte.
+                Le chrono garde son rouge sous 5 minutes, quelle que soit la
+                couleur de l'épreuve : c'est une alerte, pas une décoration. */}
+            <div className="rounded-xl bg-white/90 px-3 py-2.5 shadow-[0_6px_18px_-14px_rgba(29,28,22,0.6)]">
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
+                  Question {index + 1} / {questions.length}
+                </p>
+                <p
+                  className="font-serif text-2xl font-black leading-none tabular-nums"
+                  style={{ color: restant <= 300 ? "#991b1b" : accent }}
+                >
+                  {formatChrono(restant)}
+                </p>
+              </div>
+              <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-[#1d1c16]/10">
+                <div
+                  className="h-1.5 rounded-full transition-all duration-500"
+                  style={{
+                    width: `${((index + 1) / questions.length) * 100}%`,
+                    backgroundColor: accent,
+                  }}
+                />
+              </div>
             </div>
 
             {/* La diapositive. `key` sur l'index : React remonte le bloc à
@@ -533,7 +607,10 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
 
               {/* NOTION ET MICRO-COMPÉTENCE APPARENTES (demande de Frédéric) :
                   la vraie épreuve ne dit jamais ce qu'elle teste. Ici si. */}
-              <p className="mt-4 text-[10px] font-black uppercase tracking-[0.18em] text-cyan-800">
+              <p
+                className="mt-4 text-[10px] font-black uppercase tracking-[0.16em]"
+                style={{ color: accent }}
+              >
                 {question.themeLabel} · {question.notionLabel}
               </p>
               <p className="text-[11px] font-bold text-[#1d1c16]/70">
@@ -547,8 +624,14 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                   propre : sur téléphone, un texte de 200 mots repousserait
                   les propositions hors de l'écran. */}
               {question.support && !question.support.oral && (
-                <figure className="mt-3 border-2 border-[#1d1c16] bg-[#1d1c16]/[0.03] p-4">
-                  <figcaption className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                <figure
+                  className="mt-3 rounded-2xl border-2 bg-white p-4"
+                  style={{ borderColor: accent }}
+                >
+                  <figcaption
+                    className="text-[10px] font-black uppercase tracking-[0.16em]"
+                    style={{ color: accent }}
+                  >
                     {question.support.kicker}
                   </figcaption>
                   <p className="mt-1 font-serif text-lg font-black leading-tight">
@@ -557,7 +640,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                   <div className="mt-2 max-h-[42vh] overflow-y-auto whitespace-pre-line font-serif text-[15px] leading-7">
                     {question.support.texte}
                   </div>
-                  <p className="mt-2 border-t border-[#1d1c16]/25 pt-1.5 text-[11px] font-medium italic text-[#1d1c16]/55">
+                  <p className="mt-2 border-t border-[#1d1c16]/15 pt-1.5 text-[11px] font-medium italic text-[#1d1c16]/55">
                     {question.support.source}
                   </p>
                 </figure>
@@ -569,14 +652,20 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                   vaut pour les cinq questions du même enregistrement : il ne
                   se remet à zéro qu'en changeant de support. */}
               {question.support?.oral && (
-                <div className="mt-3 border-2 border-cyan-800 bg-cyan-800/[0.05] p-4">
-                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-800">
+                <div
+                  className="mt-3 rounded-2xl border-2 bg-white p-4"
+                  style={{ borderColor: accent }}
+                >
+                  <p
+                    className="text-[10px] font-black uppercase tracking-[0.16em]"
+                    style={{ color: accent }}
+                  >
                     {question.support.kicker}
                   </p>
                   <p className="mt-1 font-serif text-lg font-black leading-tight">
                     🎧 {question.support.titre}
                   </p>
-                  <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/70">
+                  <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/75">
                     Écoute bien : le texte ne s&apos;affiche pas. Tu réponds
                     ensuite de mémoire, comme le jour J.
                   </p>
@@ -585,7 +674,8 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                       type="button"
                       onClick={ecouter}
                       disabled={ecoutesRestantes <= 0}
-                      className="inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-5 py-2.5 text-sm font-black text-[#f0fafc] transition hover:bg-[#1d1c16] disabled:cursor-not-allowed disabled:opacity-40"
+                      className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-black text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+                      style={{ backgroundColor: accent }}
                     >
                       🔊 Écouter l&apos;enregistrement
                     </button>
@@ -596,7 +686,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                     </p>
                   </div>
                   {sansVoix && (
-                    <p className="mt-2 border-l-4 border-red-800 pl-3 text-sm font-medium leading-6 text-[#1d1c16]/70">
+                    <p className="mt-2 border-l-4 border-red-800 pl-3 text-sm font-medium leading-6 text-[#1d1c16]/75">
                       Ton navigateur ne sait pas lire à voix haute : ces
                       questions ne peuvent pas être posées correctement chez
                       toi. Réponds au mieux, elles compteront à part.
@@ -605,50 +695,63 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                 </div>
               )}
 
-              <MarkdownMath className="mt-3 whitespace-pre-line font-serif text-2xl font-black leading-snug">
-                {question.text}
-              </MarkdownMath>
+              {/* ⭐ LA QUESTION ET SES PROPOSITIONS SUR BLANC OPAQUE. Le fond
+                  quadrillé et ses lavis restent AUTOUR : pendant une épreuve
+                  chronométrée, ce qu'on lit ne se lit pas sur un décor. C'est
+                  la seule concession du « fond fun » — et elle n'en est pas
+                  une, la couleur revient par le cadre et le bouton. */}
+              <div className="mt-3 rounded-2xl bg-white p-4 shadow-[0_10px_28px_-16px_rgba(29,28,22,0.55)] sm:p-5">
+                <MarkdownMath className="whitespace-pre-line font-serif text-2xl font-black leading-snug">
+                  {question.text}
+                </MarkdownMath>
 
-              {question.canvas && (
-                <div className="mt-4 border border-[#1d1c16]/25 bg-white p-3">
-                  <CanvasRenderer figure={question.canvas} />
+                {question.canvas && (
+                  <div className="mt-4 rounded-xl border border-[#1d1c16]/15 bg-white p-3">
+                    <CanvasRenderer figure={question.canvas} />
+                  </div>
+                )}
+
+                <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                  {question.choices.map((c) => (
+                    <button
+                      key={c}
+                      type="button"
+                      onClick={() => setChoix(c)}
+                      className={[
+                        "rounded-xl border-2 px-4 py-3 text-left text-sm font-black transition",
+                        choix === c
+                          ? "text-white"
+                          : "border-[#1d1c16]/20 hover:border-[#1d1c16]/50 hover:bg-[#1d1c16]/5",
+                      ].join(" ")}
+                      style={
+                        choix === c
+                          ? { backgroundColor: accent, borderColor: accent }
+                          : undefined
+                      }
+                    >
+                      <MarkdownMath className="inline">{c}</MarkdownMath>
+                    </button>
+                  ))}
                 </div>
-              )}
 
-              <div className="mt-4 grid gap-2 sm:grid-cols-2">
-                {question.choices.map((c) => (
+                <div className="mt-5 flex flex-wrap items-center gap-3 border-t border-[#1d1c16]/15 pt-4">
                   <button
-                    key={c}
                     type="button"
-                    onClick={() => setChoix(c)}
-                    className={[
-                      "border-2 px-4 py-3 text-left text-sm font-black transition",
-                      choix === c
-                        ? "border-cyan-800 bg-cyan-800 text-[#f0fafc]"
-                        : "border-[#1d1c16]/25 hover:border-[#1d1c16] hover:bg-[#1d1c16]/5",
-                    ].join(" ")}
+                    onClick={validerEtContinuer}
+                    disabled={choix === null}
+                    className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-sm font-black text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+                    style={{ backgroundColor: accent }}
                   >
-                    <MarkdownMath className="inline">{c}</MarkdownMath>
+                    {index + 1 >= questions.length
+                      ? "Terminer l'épreuve →"
+                      : "Valider et continuer →"}
                   </button>
-                ))}
-              </div>
-
-              <div className="mt-5 flex flex-wrap items-center gap-3 border-t border-[#1d1c16]/25 pt-4">
-                <button
-                  type="button"
-                  onClick={validerEtContinuer}
-                  disabled={choix === null}
-                  className="inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-6 py-3 text-sm font-black text-[#f0fafc] transition hover:bg-[#1d1c16] disabled:cursor-not-allowed disabled:opacity-40"
-                >
-                  {index + 1 >= questions.length
-                    ? "Terminer l'épreuve →"
-                    : "Valider et continuer →"}
-                </button>
-                <p className="text-xs font-medium text-[#1d1c16]/70">
-                  {choix === null
-                    ? "Choisis une réponse pour continuer."
-                    : "Attention : on ne revient pas en arrière."}
-                </p>
+                  <p className="text-xs font-medium text-[#1d1c16]/70">
+                    {choix === null
+                      ? "Choisis une réponse pour continuer."
+                      : "Attention : on ne revient pas en arrière."}
+                  </p>
+                </div>
               </div>
             </div>
           </>
@@ -657,12 +760,15 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
         {/* ══ LE BILAN ═════════════════════════════════════════════════════ */}
         {etape === "bilan" && (
           <>
-            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-cyan-800">
+            <p
+              className="inline-flex rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-white"
+              style={{ backgroundColor: accent }}
+            >
               Épreuve terminée
             </p>
             {/* Le titre suit le résultat : annoncer « ce qui a coincé » à un
                 élève qui a bien réussi, c'est lui dire quelque chose de faux. */}
-            <h1 className="mt-1 font-serif text-4xl font-black leading-none tracking-tight">
+            <h1 className="mt-2 font-serif text-3xl font-black leading-tight tracking-tight sm:text-4xl">
               {groupeDeMaitrise(totalJustes, totalPosees) === "satisfaisant"
                 ? "Voilà où tu en es"
                 : "Voilà ce qui a coincé"}
@@ -672,8 +778,8 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
             {(() => {
               const g = GROUPES[groupeDeMaitrise(totalJustes, totalPosees)];
               return (
-                <div className="mt-4 border-y-2 border-[#1d1c16] py-3">
-                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                <div className="mt-4 rounded-2xl bg-white/90 p-4 shadow-[0_10px_28px_-16px_rgba(29,28,22,0.55)] sm:p-5">
+                  <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
                     Sur l&apos;ensemble de l&apos;épreuve
                   </p>
                   <p
@@ -682,7 +788,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                     {g.label}
                   </p>
                   {/* Deux temps : ce qui est là, puis ce qu'on fait. */}
-                  <p className="mt-2 max-w-2xl text-sm font-medium leading-6 text-[#1d1c16]/70">
+                  <p className="mt-2 max-w-2xl text-sm font-medium leading-6 text-[#1d1c16]/75">
                     {g.constat}
                   </p>
                   <p className="mt-1 max-w-2xl text-sm font-black leading-6">
@@ -698,7 +804,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
             })()}
 
             {chronoEcoule && (
-              <p className="mt-2 border-l-4 border-red-800 pl-3 text-sm font-medium leading-6 text-[#1d1c16]/70">
+              <p className="mt-2 rounded-xl border-l-4 border-red-800 bg-white/70 py-2 pl-3 pr-3 text-sm font-medium leading-6 text-[#1d1c16]/75">
                 Le temps s&apos;est écoulé avant la fin. Ce n&apos;est pas
                 grave, mais regarde où tu en étais : le jour J, savoir se
                 déplacer vite compte autant que savoir répondre.
@@ -709,17 +815,21 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                 classe à la rentrée. Dit sobrement, jamais comme une
                 récompense. */}
             {enregistrement === "ok" && (
-              <p className="mt-2 text-xs font-black uppercase tracking-[0.14em] text-cyan-800">
+              <p
+                className="mt-2 text-xs font-black uppercase tracking-[0.14em]"
+                style={{ color: accent }}
+              >
                 ✅ Résultat enregistré
               </p>
             )}
             {enregistrement === "non-connecte" && (
-              <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/70">
+              <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/75">
                 Tu n&apos;es pas connecté : ce bilan reste sur cette page et
                 disparaîtra en la quittant.{" "}
                 <Link
                   href="/auth/signin-eleve"
-                  className="font-black text-cyan-800 underline underline-offset-2"
+                  className="font-black underline underline-offset-2"
+                  style={{ color: accent }}
                 >
                   Se connecter
                 </Link>{" "}
@@ -740,32 +850,46 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                 const rates = t.micros.filter((m) => !m.reussi);
                 const tenus = t.micros.filter((m) => m.reussi);
                 return (
-                  <section key={t.themeId} className="border-2 border-[#1d1c16] p-4">
+                  <section
+                    key={t.themeId}
+                    className="overflow-hidden rounded-2xl border-2 bg-white/90 p-4 shadow-[0_8px_24px_-16px_rgba(29,28,22,0.5)]"
+                    style={{ borderColor: accent }}
+                  >
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
                       <p className="font-serif text-xl font-black leading-tight">
                         {t.themeLabel}
                       </p>
                       <p className="flex items-baseline gap-3">
+                        {/* ⛔ La couleur du GROUPE DE MAÎTRISE ne prend pas
+                            l'accent de l'épreuve : « Fragile » doit se lire
+                            pareil sur les quatre. C'est un résultat, pas une
+                            rubrique. */}
                         <span
                           className={`text-[11px] font-black uppercase tracking-[0.14em] ${GROUPES[groupeDeMaitrise(t.justes, t.total)].couleur}`}
                         >
                           {GROUPES[groupeDeMaitrise(t.justes, t.total)].label}
                         </span>
-                        <span className="font-serif text-2xl font-black leading-none text-cyan-800">
+                        <span
+                          className="font-serif text-2xl font-black leading-none"
+                          style={{ color: accent }}
+                        >
                           {t.justes}/{t.total}
                         </span>
                       </p>
                     </div>
-                    <div className="mt-2 h-2 w-full bg-[#1d1c16]/10">
+                    <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-[#1d1c16]/10">
                       <div
-                        className="h-2 bg-cyan-800"
-                        style={{ width: `${(t.justes / t.total) * 100}%` }}
+                        className="h-2 rounded-full"
+                        style={{
+                          width: `${(t.justes / t.total) * 100}%`,
+                          backgroundColor: accent,
+                        }}
                       />
                     </div>
 
                     <div className="mt-4 grid gap-x-8 gap-y-4 sm:grid-cols-2">
                       <div>
-                        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#1d1c16]/55">
+                        <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
                           ✅ Tu tiens
                         </p>
                         {tenus.length === 0 ? (
@@ -788,7 +912,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                       </div>
 
                       <div>
-                        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-800">
+                        <p className="text-[10px] font-black uppercase tracking-[0.16em] text-red-800">
                           À retravailler
                         </p>
                         {rates.length === 0 ? (
@@ -811,7 +935,8 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                                     m.notionId,
                                     m.microId,
                                   )}
-                                  className="text-xs font-black text-cyan-800 hover:underline"
+                                  className="text-xs font-black hover:underline"
+                                  style={{ color: accent }}
                                 >
                                   S&apos;entraîner là-dessus →
                                 </Link>
@@ -826,23 +951,25 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
               })}
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-3 border-t-2 border-[#1d1c16] pt-4">
+            <div className="mt-6 flex flex-wrap gap-3">
               <button
                 type="button"
                 onClick={commencerEpreuve}
-                className="inline-flex items-center gap-2 rounded-sm bg-cyan-800 px-5 py-2.5 text-sm font-black text-[#f0fafc] transition hover:bg-[#1d1c16]"
+                className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-black text-white shadow-sm transition hover:brightness-110"
+                style={{ backgroundColor: accent }}
               >
                 Refaire · avec d&apos;autres questions →
               </button>
               <Link
                 href={`/coach-ia/${config.matiere}?classe=${config.classeSource}`}
-                className="inline-flex items-center gap-2 rounded-sm border-2 border-cyan-800 px-5 py-2.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
+                className="inline-flex items-center gap-2 rounded-xl border-2 bg-white/80 px-5 py-3 text-sm font-black transition hover:bg-white"
+                style={{ borderColor: accent, color: accent }}
               >
                 Ouvrir le coach {duSource} →
               </Link>
             </div>
 
-            <p className="mt-4 text-xs font-medium italic leading-5 text-[#1d1c16]/70">
+            <p className="mt-4 rounded-xl bg-white/60 p-3 text-xs font-medium italic leading-5 text-[#1d1c16]/70">
               Les questions déjà tombées sont mises de côté : en refaisant
               l&apos;épreuve, tu en auras d&apos;autres.
             </p>
