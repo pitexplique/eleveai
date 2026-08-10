@@ -12,6 +12,11 @@ import { sonsComplexesBank } from "./sons-complexes.bank";
 import { orthographeLexicaleBank } from "./orthographe-lexicale.bank";
 import { ecritureMotsBank } from "./ecriture-mots.bank";
 import { fluenceLectureBank } from "./fluence-lecture.bank";
+import { typesTextesBank } from "./types-textes.bank";
+import { ecritureCursiveBank } from "./ecriture-cursive.bank";
+import { copieFluenteBank } from "./copie-fluente.bank";
+import { productionEcriteBank } from "./production-ecrite.bank";
+import { langageOralBank } from "./langage-oral.bank";
 
 // LE CE1 SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 10/08/2026, après le
 // CP, qui est le patron.
@@ -52,6 +57,11 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...orthographeLexicaleBank,
   ...ecritureMotsBank,
   ...fluenceLectureBank,
+  ...typesTextesBank,
+  ...ecritureCursiveBank,
+  ...copieFluenteBank,
+  ...productionEcriteBank,
+  ...langageOralBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
