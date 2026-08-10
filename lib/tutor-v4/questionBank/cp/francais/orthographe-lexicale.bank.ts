@@ -78,7 +78,12 @@ const PAIRES_S = [
 const MOTS_S_DOUX = ["maison", "rose", "chemise", "cerise", "vase", "usine"] as const;
 const MOTS_S_DUR = ["tasse", "classe", "dessin", "assiette", "poisson", "brosse"] as const;
 
-const VALEUR_C = [
+// ⚠️ Typées à la main : `const table = surC ? VALEUR_C : VALEUR_G` produisait
+// une union de deux tuples littéraux, que TypeScript refuse de passer aux
+// helpers génériques.
+type LettreValeur = { readonly mot: string; readonly suite: string; readonly son: string };
+
+const VALEUR_C: readonly LettreValeur[] = [
   { mot: "cari", suite: "a", son: "[k]" },
   { mot: "colle", suite: "o", son: "[k]" },
   { mot: "cube", suite: "u", son: "[k]" },
@@ -89,9 +94,9 @@ const VALEUR_C = [
   { mot: "ciel", suite: "i", son: "[s]" },
   { mot: "cinéma", suite: "i", son: "[s]" },
   { mot: "cerf", suite: "e", son: "[s]" },
-] as const;
+];
 
-const VALEUR_G = [
+const VALEUR_G: readonly LettreValeur[] = [
   { mot: "gomme", suite: "o", son: "[g]" },
   { mot: "lagon", suite: "o", son: "[g]" },
   { mot: "gâteau", suite: "â", son: "[g]" },
@@ -102,7 +107,7 @@ const VALEUR_G = [
   { mot: "genou", suite: "e", son: "[ʒ]" },
   { mot: "geler", suite: "e", son: "[ʒ]" },
   { mot: "gymnase", suite: "y", son: "[ʒ]" },
-] as const;
+];
 
 // Le m se met à la place du n devant m, b et p.
 const MOTS_M = [

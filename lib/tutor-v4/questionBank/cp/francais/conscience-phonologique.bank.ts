@@ -99,7 +99,13 @@ const MOTS = [
 ] as const;
 
 // Paires vérifiées à l'oreille, pas à l'œil : c'est le SON de la fin qui compte.
-const PAIRES_RIMENT = [
+// ⚠️ Ces deux tables sont typées à la main plutôt qu'en `as const` : avec des
+// types littéraux, TypeScript refuse de comparer un mot de l'une à un mot de
+// l'autre — « ces types n'ont aucun recouvrement » — et le build casse.
+type PaireRime = { readonly a: string; readonly b: string; readonly son: string };
+type PaireSansRime = { readonly a: string; readonly b: string; readonly fa: string; readonly fb: string };
+
+const PAIRES_RIMENT: readonly PaireRime[] = [
   { a: "chat", b: "rat", son: "[a]" },
   { a: "lapin", b: "sapin", son: "[ɛ̃]" },
   { a: "main", b: "pain", son: "[ɛ̃]" },
@@ -113,9 +119,9 @@ const PAIRES_RIMENT = [
   { a: "lagon", b: "wagon", son: "[ɔ̃]" },
   { a: "maison", b: "garçon", son: "[ɔ̃]" },
   { a: "soleil", b: "oreille", son: "[ɛj]" },
-] as const;
+];
 
-const PAIRES_NE_RIMENT_PAS = [
+const PAIRES_NE_RIMENT_PAS: readonly PaireSansRime[] = [
   { a: "chat", b: "chien", fa: "[a]", fb: "[jɛ̃]" },
   { a: "lagon", b: "lapin", fa: "[ɔ̃]", fb: "[ɛ̃]" },
   { a: "souris", b: "mouton", fa: "[i]", fb: "[ɔ̃]" },
@@ -124,7 +130,7 @@ const PAIRES_NE_RIMENT_PAS = [
   { a: "piton", b: "pilote", fa: "[ɔ̃]", fb: "[ɔt]" },
   { a: "letchi", b: "lagon", fa: "[i]", fb: "[ɔ̃]" },
   { a: "chou", b: "chat", fa: "[u]", fb: "[a]" },
-] as const;
+];
 
 // Un seul exemplaire du son dans le mot : sinon la position n'a pas de réponse.
 const POSITIONS = [

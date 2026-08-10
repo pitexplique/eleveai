@@ -94,7 +94,13 @@ const SONS_COMPOSES = [
 ] as const;
 
 // LE piège, première face : un son, plusieurs façons de l'écrire.
-const GRAPHIES_DU_SON = [
+// ⚠️ Table typée à la main plutôt qu'en `as const` : le champ `cas` devenait
+// un tuple littéral, et TypeScript refusait de le passer aux helpers
+// génériques. Le build cassait à la compilation, pas à l'exécution.
+type GraphieCas = { readonly mot: string; readonly graphie: string };
+type SonGraphies = { readonly son: string; readonly ancre: string; readonly cas: readonly GraphieCas[] };
+
+const GRAPHIES_DU_SON: readonly SonGraphies[] = [
   {
     son: "[o]", ancre: "moto",
     cas: [
@@ -199,7 +205,7 @@ const GRAPHIES_DU_SON = [
       { mot: "rayon", graphie: "y" },
     ],
   },
-] as const;
+];
 // ⚠️ Pas de son [e] contre [ɛ] dans cette table — « lait » se dit [lɛ] dans le
 // nord et souvent [le] ici. Un enfant de La Réunion aurait faux à cause de son
 // accent, pas de son orthographe. Les onze sons retenus se prononcent pareil
