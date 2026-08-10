@@ -3,6 +3,7 @@ import { microSkills } from "@/lib/tutor-v4/knowledge/francais/ce2/microSkills";
 import { buildCycle2FrancaisBank } from "@/lib/tutor-v4/questionBank/cycle2/francais/buildCycle2FrancaisBank";
 
 import { conjugaisonBank } from "./conjugaison.bank";
+import { classesMotsBank } from "./classes-mots.bank";
 
 // LE CE2 SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 10/08/2026, sur le
 // modèle du CP (`cp/francais/index.ts`, 09-10/08).
@@ -33,7 +34,7 @@ import { conjugaisonBank } from "./conjugaison.bank";
 //
 // Pour ajouter une notion : écrire `<notion>.bank.ts`, l'importer, l'ajouter à
 // BANQUES_ECRITES. Le repli s'efface tout seul pour ce qu'elle couvre.
-const BANQUES_ECRITES: TutorBankItemV4[] = [...conjugaisonBank];
+const BANQUES_ECRITES: TutorBankItemV4[] = [...conjugaisonBank, ...classesMotsBank];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
 
