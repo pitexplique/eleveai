@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/ia-fondements-definir-l-ia";
 
 export const metadata: Metadata = {
-  title: "Définir l'IA — fiche de cours | EleveAI",
+  title: "Définir l'IA — fiche de cours",
   description:
     "Définition, deux grandes approches, exemples corrigés et exercices : la fiche de cours complète pour comprendre ce qu'est l'intelligence artificielle (référentiel Pix, domaine Fondements).",
 };

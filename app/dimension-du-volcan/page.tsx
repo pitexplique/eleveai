@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 import DimensionDuVolcanClient from "./DimensionDuVolcanClient";
 
 export const metadata: Metadata = {
-  title: "La dimension du volcan : mesure la rugosité de la Fournaise | EleveAI",
+  title: "La dimension du volcan : mesure la rugosité de la Fournaise",
   description:
     "Pose une grille sur le profil du rempart de la Fournaise, compte les carrés que la crête traverse, affine — le multiplicateur donne la dimension fractale (box-counting) : ligne lisse ×2 → d = 1, rempart ×2,4 → d ≈ 1,25. La même notion de dimension que la conjecture de Kakeya en 3D démontrée par Hong Wang, médaille Fields 2026. Défis du CP à la Terminale.",
   keywords: [

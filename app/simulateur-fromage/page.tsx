@@ -11,7 +11,7 @@ import type { Metadata } from "next";
 import SimulateurFromageClient from "./SimulateurFromageClient";
 
 export const metadata: Metadata = {
-  title: "La fromagerie dans ta main — le lait des Hauts | EleveAI",
+  title: "La fromagerie dans ta main — le lait des Hauts",
   description:
     "Règle les litres de lait de la Plaine des Cafres et regarde la fromagerie travailler : la pasteurisation, les ferments, le caillé, le petit-lait... et les pots de fromage frais. Proportionnalité et pourcentages en direct, avec la vraie étiquette à lire.",
   keywords: [

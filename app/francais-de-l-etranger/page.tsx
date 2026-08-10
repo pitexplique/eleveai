@@ -14,7 +14,7 @@ import EncartCallEnDirect from "@/components/accueil/EncartCallEnDirect";
 const SITE_URL = "https://www.eleveai.fr";
 
 export const metadata: Metadata = {
-  title: "Le programme français à l'étranger — EleveAI",
+  title: "Le programme français à l'étranger",
   description:
     "Votre enfant grandit loin de la France ? Dictée quotidienne, coach IA aligné sur le programme français (CP au Bac), cahiers de vacances à imprimer — où que vous soyez, à votre fuseau horaire. Conçu par un professeur français, à La Réunion.",
   alternates: { canonical: `${SITE_URL}/francais-de-l-etranger` },

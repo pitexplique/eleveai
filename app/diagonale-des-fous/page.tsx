@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 import DiagonaleDesFousClient from "./DiagonaleDesFousClient";
 
 export const metadata: Metadata = {
-  title: "La Diagonale des Fous — l'équation différentielle du coureur | EleveAI",
+  title: "La Diagonale des Fous — l'équation différentielle du coureur",
   description:
     "Le Grand Raid de La Réunion traduit en maths : la réserve d'énergie se vide au carré de l'effort et avec la pente (dR/dt = −c·effort²·(1+pente)). Règle l'allure, lance la course sur le profil de l'île — trop vite tu tapes le mur, trop lent la barrière te rattrape. La méthode d'Euler en action, avec les défis du CP à la Terminale.",
   keywords: [

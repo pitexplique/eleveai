@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "FAQ EleveAI – Professeurs, Parents, Établissements",
+  title: "FAQ – Professeurs, Parents, Établissements",
   description:
     "Toutes les réponses sur EleveAI : usages pédagogiques, cadre anti-triche, protection des données et accompagnement des établissements.",
   alternates: { canonical: "/faq" },

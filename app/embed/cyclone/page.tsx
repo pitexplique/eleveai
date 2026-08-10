@@ -14,7 +14,7 @@ import type { Metadata } from "next";
 import SimulateurCycloneClient from "../../simulateur-cyclone/SimulateurCycloneClient";
 
 export const metadata: Metadata = {
-  title: "Dans l'œil du cyclone — widget | EleveAI",
+  title: "Dans l'œil du cyclone — widget",
   robots: { index: false, follow: false },
 };
 

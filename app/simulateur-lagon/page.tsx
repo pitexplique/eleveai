@@ -12,7 +12,7 @@ import type { Metadata } from "next";
 import SimulateurLagonClient from "./SimulateurLagonClient";
 
 export const metadata: Metadata = {
-  title: "Le lagon dans ta main — l'Ermitage et sa barrière de corail | EleveAI",
+  title: "Le lagon dans ta main — l'Ermitage et sa barrière de corail",
   description:
     "Règle la houle du large et regarde la barrière de corail travailler : la vague déferle sur la crête, le lagon reste calme, les poissons-perroquets fabriquent le sable blanc. Le lagon de l'Ermitage simulé — hauteurs, pourcentages et durées en direct, avec les défis intégrés.",
   keywords: [

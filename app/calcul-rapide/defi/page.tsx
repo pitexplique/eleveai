@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import CalculRapideDefiClient from "./CalculRapideDefiClient";
 
 export const metadata: Metadata = {
-  title: "Défi calcul rapide | EleveAI",
+  title: "Défi calcul rapide",
   description: "Lance le défi du jour en calcul rapide.",
 };
 

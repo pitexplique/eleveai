@@ -12,7 +12,7 @@ import {
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Votre avis | EleveAI",
+  title: "Votre avis",
   description:
     "Aide-nous à améliorer EleveAI : signale un bug, propose une idée ou donne ton avis sur la plateforme.",
 };

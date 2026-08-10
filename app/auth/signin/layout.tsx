@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Connexion EleveAI",
+  title: "Connexion",
   description: "Connexion a l'espace EleveAI.",
   robots: {
     index: false,

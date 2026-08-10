@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-cm2-nombres-entiers";
 
 export const metadata: Metadata = {
-  title: "Les nombres entiers — fiche de cours CM2 | EleveAI",
+  title: "Les nombres entiers — fiche de cours CM2",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète des nombres entiers (tableau de numération, lire, comparer, décomposer, arrondir, multiples) en CM2, à lire, imprimer ou réviser en flashcards.",
 };

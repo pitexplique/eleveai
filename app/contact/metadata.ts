@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact — EleveAI",
+  title: "Contact",
   description:
     "Contactez EleveAI (parents, enseignants, établissements, partenaires) : questions, retours, signalements, expérimentation ou collaboration.",
   alternates: { canonical: "/contact" },

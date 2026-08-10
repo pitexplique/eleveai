@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import SimulateurEpsilonClient from "./SimulateurEpsilonClient";
 
 export const metadata: Metadata = {
-  title: "Active un epsilon — la machine à engendrer des infinis | EleveAI",
+  title: "Active un epsilon — la machine à engendrer des infinis",
   description:
     "Règle le coefficient k : chaque étincelle en allume k autres. À k = 2, dix générations font 1 024 ; à k = 4, plus d'un million — l'île entière. La suite géométrique, le R₀ et l'effet d'entraide dans une machine, avec les défis intégrés.",
   keywords: [

@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 import SimulateurCycloneClient from "./SimulateurCycloneClient";
 
 export const metadata: Metadata = {
-  title: "Simulateur de cyclone — La Réunion | EleveAI",
+  title: "Simulateur de cyclone — La Réunion",
   description:
     "Place ton cyclone sur l'océan Indien, trace sa trajectoire, règle sa force et sa vitesse : le simulateur pédagogique qui apprend les alertes cycloniques de La Réunion (jaune, orange, rouge, violette) et les maths du météorologue — temps = distance ÷ vitesse.",
   keywords: [

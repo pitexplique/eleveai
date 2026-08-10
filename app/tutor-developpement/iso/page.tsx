@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Architecture du tuteur IA — Gouvernance inspirée ISO/IEC 42001 | EleveAI",
+  title: "Architecture du tuteur IA — Gouvernance inspirée ISO/IEC 42001",
   description:
     "EleveAI développe un tuteur pédagogique adaptatif basé sur un graphe de compétences, une matrice pédagogique et un moteur déterministe. Démarche inspirée ISO/IEC 42001.",
 };

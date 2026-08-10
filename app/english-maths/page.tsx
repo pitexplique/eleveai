@@ -3,7 +3,7 @@
 import EnglishMathsClient from "./EnglishMathsClient";
 
 export const metadata = {
-  title: "English Maths - EleveAI",
+  title: "English Maths",
   description: "La semaine des verbes en anglais pour progresser en maths.",
 };
 

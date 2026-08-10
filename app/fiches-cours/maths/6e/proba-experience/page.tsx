@@ -6,7 +6,7 @@ import FicheCoursClient from "@/components/fiches/FicheCoursClient";
 import { ficheProbabilites6e, slidesProbabilites6e } from "@/lib/fiches/maths-6e-probabilites";
 
 export const metadata: Metadata = {
-  title: "Premiers pas en probabilités — fiche de cours 6e | EleveAI",
+  title: "Premiers pas en probabilités — fiche de cours 6e",
   description:
     "Découvrir les probabilités en 6e : le vocabulaire du hasard (possible, certain, impossible), repérer et compter les issues, comparer et estimer des chances, avec exemples corrigés et exercices, à lire, imprimer ou réviser en flashcards.",
 };

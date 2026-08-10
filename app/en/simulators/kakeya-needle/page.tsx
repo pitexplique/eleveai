@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 import KakeyaNeedleClient from "./KakeyaNeedleClient";
 
 export const metadata: Metadata = {
-  title: "Hong Wang, 2026 Fields Medal: the Kakeya needle problem | EleveAI",
+  title: "Hong Wang, 2026 Fields Medal: the Kakeya needle problem",
   description:
     "Turn a needle a full half-turn while sweeping the smallest possible area: around the tip (π/2), around the center (π/4), inside the deltoid (π/8)… and Besicovitch proved you can get as close to 0 as you like. Hong Wang, the 3rd woman to win the Fields Medal, closed the Kakeya conjecture in 3D with Joshua Zahl (2025). Her blackboard decoded (projection, shadows, the pigeonhole principle), her words — the tribute to her French teachers, \"no difference between women and men\" — and challenges from age 6 to 18.",
   keywords: [

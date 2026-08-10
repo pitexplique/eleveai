@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Politique de confidentialité | EleveAI",
+  title: "Politique de confidentialité",
   description:
     "Comment EleveAI protège les données des élèves, des professeurs et des établissements : données minimales, aucune revente, vos droits (accès, rectification, suppression).",
 };

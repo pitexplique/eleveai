@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/maths-5e-fractions";
 
 export const metadata: Metadata = {
-  title: "Les fractions — fiche de cours 5e | EleveAI",
+  title: "Les fractions — fiche de cours 5e",
   description:
     "Définition, propriétés, exemples corrigés et exercices : la fiche de cours complète des fractions en 5e (simplifier, comparer, additionner, multiplier, diviser, inverse, opposé), à lire, imprimer ou réviser en flashcards.",
 };

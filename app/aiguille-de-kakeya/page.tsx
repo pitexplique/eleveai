@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 import AiguilleDeKakeyaClient from "./AiguilleDeKakeyaClient";
 
 export const metadata: Metadata = {
-  title: "Hong Wang, médaille Fields 2026 : le problème de l'aiguille | EleveAI",
+  title: "Hong Wang, médaille Fields 2026 : le problème de l'aiguille",
   description:
     "Fais faire demi-tour à une aiguille en balayant le moins de place possible : autour du bout (π/2), du centre (π/4), dans le deltoïde (π/8)… et Besicovitch a prouvé qu'on peut approcher 0. Hong Wang, 3e femme médaillée Fields, a fermé la conjecture de Kakeya en 3D avec Joshua Zahl (2025). Son tableau décodé (projection, ombres, principe des tiroirs), ses mots — l'hommage à ses profs français, « aucune différence entre les femmes et les hommes » — et les défis du CP à la Terminale.",
   keywords: [

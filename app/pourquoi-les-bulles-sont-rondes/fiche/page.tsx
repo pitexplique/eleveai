@@ -7,7 +7,7 @@ import FicheProf from "@/components/simulateurs/FicheProf";
 import { DEFIS } from "../PourquoiLesBullesClient";
 
 export const metadata: Metadata = {
-  title: "Fiche prof — Pourquoi les bulles sont rondes (isopérimétrie) | EleveAI",
+  title: "Fiche prof — Pourquoi les bulles sont rondes (isopérimétrie)",
   description:
     "Fiche prof imprimable pour le simulateur « Pourquoi les bulles sont rondes » : objectif, déroulé en 3 temps (question, machine, trace écrite), défis notés du CP à la Terminale avec corrigé. À imprimer ou projeter, usage libre en classe.",
   alternates: { canonical: "/pourquoi-les-bulles-sont-rondes/fiche" },

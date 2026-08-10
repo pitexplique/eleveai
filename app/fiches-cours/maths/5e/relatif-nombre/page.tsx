@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-5e-nombres-relatifs";
 
 export const metadata: Metadata = {
-  title: "Les nombres relatifs — fiche de cours 5e | EleveAI",
+  title: "Les nombres relatifs — fiche de cours 5e",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète des nombres relatifs (signe, opposé, valeur absolue, comparaison, droite graduée) en 5e, à lire, imprimer ou réviser en flashcards.",
 };

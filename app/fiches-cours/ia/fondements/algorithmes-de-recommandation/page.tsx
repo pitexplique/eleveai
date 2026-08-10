@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/ia-fondements-algorithmes-de-recommandation";
 
 export const metadata: Metadata = {
-  title: "Les algorithmes de recommandation — fiche de cours | EleveAI",
+  title: "Les algorithmes de recommandation — fiche de cours",
   description:
     "Comment YouTube, TikTok ou Netflix te recommandent des contenus, la bulle de filtre et comment reprendre la main : fiche de cours IA (référentiel Pix, Fondements) avec exemples et exercices.",
 };

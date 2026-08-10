@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 const url = "https://www.eleveai.fr/pourquoi-nos-tarifs-sont-justes";
 
 export const metadata: Metadata = {
-  title: "Pourquoi nos tarifs sont justes | EleveAI",
+  title: "Pourquoi nos tarifs sont justes",
   description:
     "Pourquoi EleveAI n’est pas gratuit : coûts réels, sécurité, RGPD, qualité pédagogique, support, et plafonds sans surprise. Une page transparente pour parents, professeurs et établissements.",
   alternates: {

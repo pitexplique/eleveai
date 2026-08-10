@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Parents — EleveAI",
+  title: "Parents",
   description:
     "Une IA qui explique, jamais qui fait à la place. Encadrée par un enseignant, sans publicité, données protégées. Gratuit si le collège l'utilise, sinon offre famille.",
   alternates: { canonical: "https://www.eleveai.fr/parents" },

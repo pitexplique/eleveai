@@ -10,7 +10,7 @@ import { MapPin, Sparkles, ArrowRight } from "lucide-react";
 import { fetchUsages974, type Usage974 } from "@/lib/server/maths974";
 
 export const metadata: Metadata = {
-  title: "Maths Réel · 974 | EleveAI",
+  title: "Maths Réel · 974",
   description:
     "Un carnet de bord réel de La Réunion : sur le terrain, une vraie photo, une vraie situation, et la notion de maths qui se cache derrière. À chaque étape, un mini-défi à résoudre.",
   alternates: { canonical: "/maths-974" },

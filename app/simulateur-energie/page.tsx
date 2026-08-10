@@ -12,7 +12,7 @@ import type { Metadata } from "next";
 import SimulateurEnergieClient from "./SimulateurEnergieClient";
 
 export const metadata: Metadata = {
-  title: "La centrale, c'est toi — la salle de sport dans ta main | EleveAI",
+  title: "La centrale, c'est toi — la salle de sport dans ta main",
   description:
     "Règle ta puissance (en watts), ta durée d'effort et ton poids : la machine convertit tout — joules, kcal, le rendement musculaire de 25 %, les ampoules LED que ton effort allume, les carrés de chocolat, les litres d'eau hissés à 500 m comme à Takamaka. Et la récup' : les protéines de l'assiette. Avec les défis intégrés, du CM2 au lycée.",
   keywords: [

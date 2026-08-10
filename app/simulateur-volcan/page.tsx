@@ -11,7 +11,7 @@ import type { Metadata } from "next";
 import SimulateurVolcanClient from "./SimulateurVolcanClient";
 
 export const metadata: Metadata = {
-  title: "Le volcan dans ta main — Piton de la Fournaise | EleveAI",
+  title: "Le volcan dans ta main — Piton de la Fournaise",
   description:
     "Règle le débit de lave du Piton de la Fournaise et regarde l'éruption travailler : la chambre magmatique, les fontaines, la coulée qui descend les Grandes Pentes... et la nouvelle terre gagnée sur l'océan. Le volcan de La Réunion simulé — volumes, vitesses et durées en direct, avec les défis intégrés.",
   keywords: [

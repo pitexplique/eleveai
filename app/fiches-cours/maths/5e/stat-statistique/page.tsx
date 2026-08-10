@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-5e-statistiques";
 
 export const metadata: Metadata = {
-  title: "Les statistiques — fiche de cours 5e | EleveAI",
+  title: "Les statistiques — fiche de cours 5e",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète des statistiques en 5e (effectif, total, fréquence, moyenne, diagramme en barres et camembert), à lire, imprimer ou réviser en flashcards.",
 };

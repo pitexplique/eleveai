@@ -21,7 +21,9 @@ import ElevesALHonneur from "@/components/ameliorations/ElevesALHonneur";
 const SITE_URL = "https://www.eleveai.fr";
 
 export const metadata: Metadata = {
-  title: "EleveAI a besoin de vous",
+  // La marque EST le sujet de la phrase : `absolute` échappe au gabarit du
+  // layout, sinon le titre servi disait « EleveAI a besoin de vous — EleveAI ».
+  title: { absolute: "EleveAI a besoin de vous" },
   description:
     "EleveAI n'est pas fait par un algorithme, mais par des gens : un prof, ses élèves, des parents. Viens apprendre, améliorer le site, ou juste dire un mot — et ajoute-toi au socle.",
   alternates: { canonical: `${SITE_URL}/besoin-de-vous` },

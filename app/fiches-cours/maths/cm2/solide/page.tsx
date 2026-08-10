@@ -3,7 +3,7 @@ import FicheCoursClient from "@/components/fiches/FicheCoursClient";
 import { ficheSolidesCM2, slidesSolidesCM2 } from "@/lib/fiches/maths-cm2-solides";
 
 export const metadata: Metadata = {
-  title: "Les solides — fiche de cours CM2 | EleveAI",
+  title: "Les solides — fiche de cours CM2",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète des solides (cube, pavé droit, cylindre, cône, boule, pyramide ; faces, arêtes et sommets ; polyèdre, patron du cube, compter des cubes) en CM2, à lire, imprimer ou réviser en flashcards.",
 };

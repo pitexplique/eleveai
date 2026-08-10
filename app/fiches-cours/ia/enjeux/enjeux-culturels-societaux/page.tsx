@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/ia-enjeux-enjeux-culturels-societaux";
 
 export const metadata: Metadata = {
-  title: "Les enjeux culturels et sociétaux de l'IA — fiche de cours | EleveAI",
+  title: "Les enjeux culturels et sociétaux de l'IA — fiche de cours",
   description:
     "Biais, désinformation, diversité culturelle, droits des créateurs : la fiche de cours complète sur les enjeux culturels et sociétaux de l'IA (référentiel Pix, Enjeux), à lire, imprimer ou réviser en flashcards.",
 };

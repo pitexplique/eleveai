@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 import CorailDuLagonClient from "./CorailDuLagonClient";
 
 export const metadata: Metadata = {
-  title: "Le corail du lagon — mesurer un corail sans le toucher | EleveAI",
+  title: "Le corail du lagon — mesurer un corail sans le toucher",
   description:
     "Un sous-marin filme un corail du lagon et mesure ses dimensions en tournant autour : chaque image est une projection (w(φ) = 2·√(A²·sin²(θ−φ) + B²·cos²(θ−φ))). Une seule photo est ambiguë ; la plus grande largeur filmée donne la vraie longueur, la plus petite la largeur. Le geste « projeter dans toutes les directions » au cœur de la conjecture de Kakeya, démontrée par Hong Wang. Avec les défis du CP à la Terminale.",
   keywords: [

@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/maths-6e-quadrilateres";
 
 export const metadata: Metadata = {
-  title: "Les quadrilatères — fiche de cours 6e | EleveAI",
+  title: "Les quadrilatères — fiche de cours 6e",
   description:
     "Nommer un quadrilatère, lire ses propriétés et reconnaître sa nature (rectangle, losange, carré) : la fiche de cours complète de 6e avec exemples corrigés et exercices, à lire, imprimer ou réviser en flashcards.",
 };

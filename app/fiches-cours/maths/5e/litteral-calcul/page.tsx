@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-5e-calcul-litteral";
 
 export const metadata: Metadata = {
-  title: "Le calcul littéral — fiche de cours 5e | EleveAI",
+  title: "Le calcul littéral — fiche de cours 5e",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète du calcul littéral en 5e (expression, coefficient, traduire, substituer, réduire les termes semblables), à lire, imprimer ou réviser en flashcards.",
 };

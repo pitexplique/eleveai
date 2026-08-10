@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "EleveAI pour les établissements — Collèges et lycées à La Réunion",
+  // Même cas que /besoin-de-vous : la marque ouvre la phrase, `absolute` évite
+  // que le gabarit du layout la répète en fin de titre.
+  title: {
+    absolute: "EleveAI pour les établissements — Collèges et lycées à La Réunion",
+  },
   description:
     "Un coach IA multi-matières et un suivi élève par élève, déployé en quelques heures. Financé par l'établissement, gratuit pour les familles. RGPD maîtrisé, conçu par un enseignant.",
   alternates: { canonical: "https://www.eleveai.fr/espace-ecoles" },

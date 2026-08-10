@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import CarteClient from "./CarteClient";
 
 export const metadata: Metadata = {
-  title: "La chasse aux trésors des savoirs · 974 — La Réunion | EleveAI",
+  title: "La chasse aux trésors des savoirs · 974 — La Réunion",
   description:
     "Une chasse au trésor sur la carte de La Réunion : clique sur un lieu (volcan, marché, lagon, cirques…), résous l'énigme et déniche les trésors — maths, écologie, histoire. Explore l'île, discipline par discipline.",
   keywords: [

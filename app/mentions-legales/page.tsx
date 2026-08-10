@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mentions légales | EleveAI",
+  title: "Mentions légales",
   description:
     "Mentions légales de la plateforme EleveAI, IA au service des élèves, professeurs et établissements.",
 };

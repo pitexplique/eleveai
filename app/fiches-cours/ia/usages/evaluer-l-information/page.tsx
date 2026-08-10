@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/ia-usages-evaluer-l-information";
 
 export const metadata: Metadata = {
-  title: "Évaluer l'information à l'ère de l'IA — fiche de cours | EleveAI",
+  title: "Évaluer l'information à l'ère de l'IA — fiche de cours",
   description:
     "Hypertrucages (deepfakes), bots, vérification des sources : la fiche de cours complète pour apprendre à évaluer l'information à l'ère de l'IA, avec réflexes, exemples corrigés et exercices (référentiel Pix, domaine Usages).",
 };

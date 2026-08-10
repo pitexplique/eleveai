@@ -11,7 +11,7 @@ import type { Metadata } from "next";
 import SimulateurBarrageClient from "./SimulateurBarrageClient";
 
 export const metadata: Metadata = {
-  title: "Le barrage dans ta main — Takamaka, La Réunion | EleveAI",
+  title: "Le barrage dans ta main — Takamaka, La Réunion",
   description:
     "Règle le débit de la rivière des Marsouins et regarde la centrale de Takamaka travailler : la chute de ~500 m, la turbine, l'alternateur... et l'électricité de l'île. L'hydroélectricité réunionnaise simulée — proportionnalité et puissance en direct, avec les défis intégrés.",
   keywords: [

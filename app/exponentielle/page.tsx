@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 import ExponentielleClient from "./ExponentielleClient";
 
 export const metadata: Metadata = {
-  title: "Plus j'avance, plus ma vitesse augmente — l'exponentielle en miroir | EleveAI",
+  title: "Plus j'avance, plus ma vitesse augmente — l'exponentielle en miroir",
   description:
     "L'exponentielle a deux visages : la montée (ta vitesse grandit avec ta hauteur, le plat du début n'est pas l'échec) et la descente (la courbe de l'oubli, qu'on relance par la révision espacée). Deux machines à curseur, la loi f' = k·f, et les défis intégrés.",
   keywords: [

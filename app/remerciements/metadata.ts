@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Remerciements — EleveAI",
+  title: "Remerciements",
   description:
     "EleveAI remercie les élèves testeurs qui ont contribué à améliorer la plateforme grâce à leurs retours, leurs idées et leurs essais.",
 

@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import CalculRapideClient from "./CalculRapideClient";
 
 export const metadata: Metadata = {
-  title: "Calcul rapide | EleveAI",
+  title: "Calcul rapide",
   description:
     "Un défi de calcul rapide en 5 minutes pour progresser en mathématiques.",
 };

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Conditions générales d’utilisation | EleveAI",
+  title: "Conditions générales d’utilisation",
   description:
     "Conditions générales d’utilisation de la plateforme EleveAI pour élèves, professeurs et établissements.",
 };

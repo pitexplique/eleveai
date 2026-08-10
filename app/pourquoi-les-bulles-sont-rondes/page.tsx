@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import PourquoiLesBullesClient from "./PourquoiLesBullesClient";
 
 export const metadata: Metadata = {
-  title: "Pourquoi les bulles de savon sont-elles rondes ? | EleveAI",
+  title: "Pourquoi les bulles de savon sont-elles rondes ?",
   description:
     "À ficelle égale (périmètre fixe), quelle forme enferme le plus de place ? Ajoute des côtés à un polygone : l'aire monte jusqu'au cercle, qui reste le champion — c'est l'inégalité isopérimétrique 4πA ≤ P². La bulle de savon la résout sans calcul : sa peau se contracte pour avoir le moins de surface possible, donc une sphère. La question qu'une mathématicienne, Yilin Wang (prix Salem 2024), se posait enfant. Avec les défis du CP à la Terminale.",
   keywords: [

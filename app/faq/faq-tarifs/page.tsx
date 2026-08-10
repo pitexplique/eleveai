@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import FAQTarifs from "./FAQTarifs";
 
 export const metadata: Metadata = {
-  title: "FAQ Tarifs – EleveAI",
+  title: "FAQ Tarifs",
   description:
     "Questions fréquentes sur les tarifs EleveAI : essais gratuits, abonnement, historique complet, paiement Stripe et résiliation.",
   alternates: { canonical: "/faq/faq-tarifs" },

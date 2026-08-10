@@ -11,7 +11,7 @@ import type { Metadata } from "next";
 import SimulateurSucreClient from "./SimulateurSucreClient";
 
 export const metadata: Metadata = {
-  title: "L'usine à sucre dans ta main — La Réunion | EleveAI",
+  title: "L'usine à sucre dans ta main — La Réunion",
   description:
     "Règle le tonnage de canne et regarde l'usine travailler : le jus, la bagasse, le sucre roux, la mélasse... et l'électricité. La sucrerie réunionnaise simulée, avec les vraies proportions — proportionnalité et pourcentages en direct, pendant la campagne sucrière.",
   keywords: [

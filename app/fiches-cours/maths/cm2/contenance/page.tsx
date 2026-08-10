@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-cm2-contenances";
 
 export const metadata: Metadata = {
-  title: "Les contenances — fiche de cours CM2 | EleveAI",
+  title: "Les contenances — fiche de cours CM2",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète des contenances (litre, centilitre, millilitre, estimer, comparer, convertir L/mL, 1 L = 1000 mL) en CM2, à lire, imprimer ou réviser en flashcards.",
 };

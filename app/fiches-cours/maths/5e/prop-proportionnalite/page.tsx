@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-5e-proportionnalite";
 
 export const metadata: Metadata = {
-  title: "La proportionnalité — fiche de cours 5e | EleveAI",
+  title: "La proportionnalité — fiche de cours 5e",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète de la proportionnalité en 5e (coefficient, tableau, retour à l'unité, ratio, pourcentage, hausse et baisse), à lire, imprimer ou réviser en flashcards.",
 };

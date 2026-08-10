@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/maths-4e-cosinus";
 
 export const metadata: Metadata = {
-  title: "Le cosinus — fiche de cours 4e | EleveAI",
+  title: "Le cosinus — fiche de cours 4e",
   description:
     "Définition, propriétés, formule, exemples corrigés et exercices : la fiche de cours complète du cosinus en 4e, à lire, imprimer ou réviser en flashcards.",
 };

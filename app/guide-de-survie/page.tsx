@@ -22,7 +22,7 @@ import { KIT_ANGLAIS_B1 } from "./anglais-b1/data";
 import { KIT_ANGLAIS_B2 } from "./anglais-b2/data";
 
 export const metadata: Metadata = {
-  title: "Guides de survie EleveAI — maths, français et anglais, du CM1 au lycée (gratuit à imprimer)",
+  title: "Guides de survie — maths, français et anglais, du CM1 au lycée (gratuit à imprimer)",
   description:
     "Les guides de survie EleveAI : le programme de maths (du CM1 au lycée), de français (du CM1 à la 3e) et le vocabulaire d'anglais (A1 à B2) condensés en fiches à imprimer — l'essentiel, réflexes, pièges classiques et tests corrigés, chapitre par chapitre. Gratuit, conforme aux programmes, relié au coach en ligne.",
   alternates: { canonical: "https://www.eleveai.fr/guide-de-survie" },

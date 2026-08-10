@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-cm2-division";
 
 export const metadata: Metadata = {
-  title: "La division — fiche de cours CM2 | EleveAI",
+  title: "La division — fiche de cours CM2",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète de la division (partage, dividende, diviseur, quotient, reste, division posée, lien avec la multiplication) en CM2, à lire, imprimer ou réviser en flashcards.",
 };

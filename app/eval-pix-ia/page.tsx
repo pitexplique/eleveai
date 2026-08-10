@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import EvalPixIaClient from "./EvalPixIaClient";
 
 export const metadata: Metadata = {
-  title: "Éval blanche Pix IA - EleveAI",
+  title: "Éval blanche Pix IA",
   description:
     "Entraîne-toi pour le Pix IA : une évaluation blanche sur les 3 domaines du référentiel (fondements, usages, enjeux) avec ton profil de compétences.",
 };

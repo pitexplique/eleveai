@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-cm2-multiplication";
 
 export const metadata: Metadata = {
-  title: "La multiplication — fiche de cours CM2 | EleveAI",
+  title: "La multiplication — fiche de cours CM2",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète de la multiplication (tables, calcul mental, multiplication posée, × 10 100 1000, problèmes) en CM2, à lire, imprimer ou réviser en flashcards.",
 };

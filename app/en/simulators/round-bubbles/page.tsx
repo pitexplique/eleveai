@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 import RoundBubblesClient from "./RoundBubblesClient";
 
 export const metadata: Metadata = {
-  title: "Why are soap bubbles round? | EleveAI",
+  title: "Why are soap bubbles round?",
   description:
     "With the same loop of string (a fixed perimeter), which shape holds the most space? Add sides to a polygon and the area climbs, all the way to the circle — that's the isoperimetric inequality 4πA ≤ P². A soap bubble solves it without any calculation: its skin contracts to have the least surface possible, so a sphere. The question that mathematician Yilin Wang (2024 Salem Prize) asked as a child. With challenges from age 6 to 18.",
   keywords: [

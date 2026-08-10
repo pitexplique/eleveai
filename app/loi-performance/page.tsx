@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import LoiPerformanceClient from "./LoiPerformanceClient";
 
 export const metadata: Metadata = {
-  title: "La loi de la performance — faut-il améliorer ses défauts ou ses qualités ? | EleveAI",
+  title: "La loi de la performance — faut-il améliorer ses défauts ou ses qualités ?",
   description:
     "Né d'une interview de Mbappé : améliorer ses défauts, mais surtout ses qualités. En maths, c'est un neurone — une somme pondérée Σ aᵢxᵢ. Règle tes coefficients (ton énergie) sur tes traits et vois ta performance, avec les défis du CP à la Terminale.",
   keywords: [

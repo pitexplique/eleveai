@@ -10,7 +10,7 @@ const PAPER = "#f6f1e4";
 const INK = "#1d1c16";
 
 export const metadata: Metadata = {
-  title: "Interactive maths simulators — set them with your fingertips | EleveAI",
+  title: "Interactive maths simulators — set them with your fingertips",
   description:
     "Hands-on maths machines you set with a slider to understand a big idea, then check yourself with challenges from age 6 to 18. Why soap bubbles are round (the isoperimetric inequality) and the Kakeya needle (Hong Wang, 2026 Fields Medal).",
   keywords: [

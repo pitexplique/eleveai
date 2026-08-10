@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/maths-4e-pythagore";
 
 export const metadata: Metadata = {
-  title: "Théorème de Pythagore — fiche de cours 4e | EleveAI",
+  title: "Théorème de Pythagore — fiche de cours 4e",
   description:
     "Définition, propriétés, formule, exemples corrigés et exercices : la fiche de cours complète du théorème de Pythagore en 4e, à lire, imprimer ou réviser en flashcards.",
 };

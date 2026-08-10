@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import LoiParetoClient from "./LoiParetoClient";
 
 export const metadata: Metadata = {
-  title: "Le but qui sort de la moyenne — la loi de Pareto, de Mbappé aux records | EleveAI",
+  title: "Le but qui sort de la moyenne — la loi de Pareto, de Mbappé aux records",
   description:
     "« On renforce ses défauts, mais ce sont nos qualités qui nous différencient » (Mbappé). En maths : la moyenne, c'est la loi normale ; le record, c'est la queue lourde de la loi de Pareto. Pousse le curseur, joue une saison, et regarde les buteurs d'exception surgir — avec les défis du CP à la Terminale.",
   keywords: [
