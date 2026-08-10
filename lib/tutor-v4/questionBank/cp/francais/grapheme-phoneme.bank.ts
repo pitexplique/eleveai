@@ -152,7 +152,58 @@ const GRAPHIES_DU_SON = [
       { mot: "maison", graphie: "s" },
     ],
   },
+  {
+    son: "[ɑ̃]", ancre: "banc",
+    cas: [
+      { mot: "banc", graphie: "an" },
+      { mot: "dent", graphie: "en" },
+      { mot: "jambe", graphie: "am" },
+      { mot: "temps", graphie: "em" },
+      { mot: "chanter", graphie: "an" },
+      { mot: "enfant", graphie: "en" },
+    ],
+  },
+  {
+    son: "[ɔ̃]", ancre: "lagon",
+    cas: [
+      { mot: "lagon", graphie: "on" },
+      { mot: "pompier", graphie: "om" },
+      { mot: "piton", graphie: "on" },
+      { mot: "nombre", graphie: "om" },
+    ],
+  },
+  {
+    son: "[ʒ]", ancre: "jardin",
+    cas: [
+      { mot: "jardin", graphie: "j" },
+      { mot: "girafe", graphie: "g" },
+      { mot: "jaune", graphie: "j" },
+      { mot: "gilet", graphie: "g" },
+    ],
+  },
+  {
+    son: "[g]", ancre: "gomme",
+    cas: [
+      { mot: "gomme", graphie: "g" },
+      { mot: "guitare", graphie: "gu" },
+      { mot: "lagon", graphie: "g" },
+      { mot: "bague", graphie: "gu" },
+    ],
+  },
+  {
+    son: "[j]", ancre: "papillon",
+    cas: [
+      { mot: "papillon", graphie: "ill" },
+      { mot: "crayon", graphie: "y" },
+      { mot: "famille", graphie: "ill" },
+      { mot: "rayon", graphie: "y" },
+    ],
+  },
 ] as const;
+// ⚠️ Pas de son [e] contre [ɛ] dans cette table — « lait » se dit [lɛ] dans le
+// nord et souvent [le] ici. Un enfant de La Réunion aurait faux à cause de son
+// accent, pas de son orthographe. Les onze sons retenus se prononcent pareil
+// partout.
 
 export const graphemePhonemeBank: TutorBankItemV4[] = [
   /* =========================================================

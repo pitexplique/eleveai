@@ -125,6 +125,20 @@ const MOTS_FREQUENTS = [
   { mot: "mon", faux: ["monn", "mmon", "moon"] },
   { mot: "mes", faux: ["mmes", "mees", "mse"] },
   { mot: "qui", faux: ["qiu", "uqi", "quii"] },
+  { mot: "que", faux: ["qeu", "uqe", "quee"] },
+  { mot: "ils", faux: ["iils", "sli", "ilss"] },
+  { mot: "sont", faux: ["snot", "sotn", "sonnt"] },
+  { mot: "avait", faux: ["avaitt", "aviat", "avvait"] },
+  { mot: "chez", faux: ["chze", "cehz", "cchez"] },
+  { mot: "très", faux: ["trés", "tèrs", "trrès"] },
+  { mot: "bien", faux: ["bein", "biein", "bienn"] },
+  { mot: "aussi", faux: ["ausis", "assui", "aussii"] },
+  { mot: "encore", faux: ["encoree", "enocre", "ecnore"] },
+  { mot: "toujours", faux: ["toujour", "tuojours", "toujuors"] },
+  { mot: "beaucoup", faux: ["beacoup", "beaucou", "buacoep"] },
+  { mot: "puis", faux: ["pius", "spui", "puiss"] },
+  { mot: "quand", faux: ["qaund", "qunad", "quandd"] },
+  { mot: "petit", faux: ["ptiet", "petti", "peitt"] },
 ] as const;
 
 // Phrases à trou dont une seule réponse tient debout.
@@ -478,6 +492,51 @@ export const lectureSyllabiqueBank: TutorBankItemV4[] = [
           "Essaie chaque proposition à voix haute, dans la phrase entière.",
           `« ${p.avant.replace("___", p.bon)} » : celle-là se dit bien.`,
           `Le mot qui manque est « ${p.bon} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_lec_mots_frequents_tpl_3",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "lecture_syllabique",
+    microId: "cp_lec_mots_frequents",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Balaie la phrase des yeux : trois de ces mots y sont, un seul manque.",
+    tags: ["cp", "lecture", "mots-frequents", "template"],
+    generate: () => {
+      const p = randomChoice(PHRASES_MOTS);
+      // ⚠️ Dédoublonné : « Le bateau flotte sur le lagon. » contient deux fois
+      // « le », et l'élève voyait deux fois la même proposition.
+      const dedans = [
+        ...new Set(p.phrase.replace(/\.$/, "").split(" ").map((m) => m.toLowerCase())),
+      ];
+      const absents = MOTS_FREQUENTS.map((m) => m.mot).filter((m) => !dedans.includes(m));
+      const presents = dedans.filter((m) =>
+        MOTS_FREQUENTS.some((f) => f.mot === m),
+      );
+      // S'il n'y a pas assez de petits mots dans la phrase, on complète avec
+      // des mots pleins de la phrase : ils sont dedans, c'est tout ce qu'on
+      // demande.
+      const dansLaPhrase = shuffle(
+        presents.length >= 3 ? presents : [...new Set([...presents, ...dedans])],
+      ).slice(0, 3);
+      const intrus = randomChoice(absents);
+      return {
+        text: `Quel mot n'est PAS dans cette phrase ?\n\n« ${p.phrase} »`,
+        format: "qcm" as const,
+        choices: shuffle([intrus, ...dansLaPhrase]),
+        expected: [intrus],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Lire, ce n'est pas deviner : c'est vérifier ce qui est vraiment écrit.",
+          "Pose ton doigt sur chaque mot de la phrase et coche ceux que tu retrouves dans la liste.",
+          `« ${p.phrase} » contient ${dansLaPhrase.map((m) => `« ${m} »`).join(", ")}. « ${intrus} » n'y est pas.`,
+          `Le mot absent est « ${intrus} ».`,
         ),
       };
     },
