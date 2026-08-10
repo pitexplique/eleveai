@@ -11,6 +11,7 @@ import { grammairePhraseBank } from "./grammaire-phrase.bank";
 import { orthographeBank } from "./orthographe.bank";
 import { comprehensionLectureBank } from "./comprehension-lecture.bank";
 import { vocabulaireBank } from "./vocabulaire.bank";
+import { ecritureBank } from "./ecriture.bank";
 
 // LE CP SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 09/08/2026.
 //
@@ -49,6 +50,7 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...orthographeBank,
   ...comprehensionLectureBank,
   ...vocabulaireBank,
+  ...ecritureBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
