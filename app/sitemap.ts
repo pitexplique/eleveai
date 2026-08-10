@@ -36,20 +36,10 @@ const LASTMOD_KIT = new Date("2026-07-28");
 const LASTMOD_AUDIENCES = new Date("2026-07-05");
 const LASTMOD_LEGAL   = new Date("2026-02-18");
 
-const MATHS_CLASSES    = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe"];
-const FRANCAIS_CLASSES = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
-const ENGLISH_NIVEAUX  = ["a1", "a2", "b1", "b2"];
-const IA_NIVEAUX       = ["a1", "a2", "b1", "b2", "c1"];
-const ESPAGNOL_NIVEAUX = ["a1", "a2", "b1", "b2"];
-const ECONOMIE_NIVEAUX = ["eco-decouverte", "eco-college", "eco-lycee"];
-
-// Rubriques Géographie - Voyage disponibles par niveau
-const ENGLISH_RUBRIQUES: Record<string, string[]> = {
-  a1: ["sports", "science", "economie-gestion", "geographie-voyage"],
-  a2: ["sports", "science", "economie-gestion", "geographie-voyage"],
-  b1: ["sports", "science", "economie-gestion", "geographie-voyage"],
-  b2: ["sports", "science", "economie-gestion", "geographie-voyage"],
-};
+// Les classes du site vivent dans `/programme/<classe>` (plus bas) : c'est là
+// que chaque niveau a du TEXTE à lire. Les six listes de niveaux qui servaient
+// à fabriquer les adresses à « ? » du coach sont parties avec elles — le
+// pourquoi est écrit juste après la liste des routes.
 
 type RouteConfig = {
   path: string;
@@ -360,73 +350,24 @@ const ROUTES: RouteConfig[] = [
   { path: "/cgu",                        priority: 0.3, changeFrequency: "yearly", lastMod: LASTMOD_LEGAL },
 ];
 
-const coachRoutes: RouteConfig[] = [
-  // English — une entrée par niveau
-  ...ENGLISH_NIVEAUX.map((niveau) => ({
-    path: `/coach-ia/english-maths?niveau=${niveau}`,
-    priority: 0.9,
-    changeFrequency: "daily" as const,
-    lastMod: LASTMOD_CORE,
-  })),
-  // English — une entrée par niveau + rubrique
-  ...ENGLISH_NIVEAUX.flatMap((niveau) =>
-    (ENGLISH_RUBRIQUES[niveau] ?? []).map((rubrique) => ({
-      path: `/coach-ia/english-maths?niveau=${niveau}&rubrique=${rubrique}`,
-      priority: 0.85,
-      changeFrequency: "weekly" as const,
-      lastMod: LASTMOD_CORE,
-    }))
-  ),
-  // Parcours English — par niveau
-  ...ENGLISH_NIVEAUX.map((niveau) => ({
-    path: `/parcours-english-maths?niveau=${niveau}`,
-    priority: 0.85,
-    changeFrequency: "weekly" as const,
-    lastMod: LASTMOD_CORE,
-  })),
-  // Coach IA — par niveau
-  ...IA_NIVEAUX.map((niveau) => ({
-    path: `/coach-ia/ia?classe=${niveau}`,
-    priority: 0.9,
-    changeFrequency: "daily" as const,
-    lastMod: LASTMOD_CORE,
-  })),
-  // Parcours IA — par niveau
-  ...IA_NIVEAUX.map((niveau) => ({
-    path: `/parcours-ia?niveau=${niveau}`,
-    priority: 0.85,
-    changeFrequency: "weekly" as const,
-    lastMod: LASTMOD_CORE,
-  })),
-  // Maths — par classe
-  ...MATHS_CLASSES.map((classe) => ({
-    path: `/coach-ia/maths?classe=${classe}`,
-    priority: classe === "terminale-spe" ? 0.85 : 0.9,
-    changeFrequency: "daily" as const,
-    lastMod: LASTMOD_CORE,
-  })),
-  // Français — par classe
-  ...FRANCAIS_CLASSES.map((classe) => ({
-    path: `/coach-ia/francais?classe=${classe}`,
-    priority: 0.9,
-    changeFrequency: "daily" as const,
-    lastMod: LASTMOD_CORE,
-  })),
-  // Espagnol — par niveau
-  ...ESPAGNOL_NIVEAUX.map((niveau) => ({
-    path: `/coach-ia/espagnol?classe=${niveau}`,
-    priority: 0.85,
-    changeFrequency: "daily" as const,
-    lastMod: LASTMOD_CORE,
-  })),
-  // Économie — par niveau
-  ...ECONOMIE_NIVEAUX.map((classe) => ({
-    path: `/coach-ia/economie?classe=${classe}`,
-    priority: 0.8,
-    changeFrequency: "weekly" as const,
-    lastMod: LASTMOD_CORE,
-  })),
-];
+// ⛔ LES 62 ADRESSES À « ? » SONT PARTIES (10/08/2026).
+//
+// On déclarait ici une ligne par classe et par niveau — `/coach-ia/maths?classe=cp`,
+// `/parcours-ia?niveau=b1`, `/coach-ia/english-maths?niveau=a1&rubrique=sports`…
+// Vue de Google, chacune était un DOUBLON de la page nue : le coach est rendu
+// côté client, le paramètre ne change pas une ligne de ce que le robot lit, et
+// la page elle-même déclare sa canonique sans paramètre (`/coach-ia/maths`).
+// On envoyait donc 62 adresses en disant, dans le même souffle, qu'aucune ne
+// compte. C'est exactement ce que la Search Console range en « URL envoyée non
+// sélectionnée comme canonique » — du bruit qu'on avait écrit nous-mêmes.
+//
+// ⭐ CE QUI COUVRE VRAIMENT LE BESOIN : les pages `/programme/<classe>`, une par
+// classe du CP à la Terminale, avec les compétences EN TEXTE. Un moteur peut les
+// lire ; elles renvoient au coach. Le travail par classe se fait là, pas ici.
+//
+// ⚠️ Les adresses continuent de MARCHER — un lien partagé, un favori, le
+// bouton d'une carte : rien n'est cassé. On cesse seulement de les déclarer.
+// Les 9 pages nues (`/coach-ia/maths`, `/parcours-ia`, …) restent dans ROUTES.
 
 // Jeu « Qui suis-je ? » — un paquet par classe, généré depuis les classes qui ont
 // du contenu (GS-CP → Terminale au fur et à mesure). Toute nouvelle classe s'ajoute
@@ -582,7 +523,7 @@ const VIDEOS_FICHES: Record<
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Routes statiques
-  const staticRoutes = [...ROUTES, ...coachRoutes, ...jeuxCartesRoutes].map((route) => {
+  const staticRoutes = [...ROUTES, ...jeuxCartesRoutes].map((route) => {
     const videos = VIDEOS_FICHES[route.path];
     return {
       url: u(route.path),
