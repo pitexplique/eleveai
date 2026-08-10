@@ -1,12 +1,20 @@
-// app/enseignants/page.tsx
+// app/espace-profs/page.tsx
 import Link from "next/link";
 import type { Metadata } from "next";
 
+// ⚠️ LA CANONIQUE SUIT LA REDIRECTION, ELLE NE LA CONTREDIT PAS (10/08/2026).
+// Cette page a vécu à `/enseignants` ; depuis le 08/08 c'est l'inverse qui est
+// vrai — `/enseignants` répond 308 ICI. La canonique, elle, était restée sur
+// l'ancienne adresse : la page disait donc « la vraie, c'est /enseignants », et
+// /enseignants renvoyait aussitôt vers elle. Google refuse une canonique qui
+// pointe vers une redirection, choisit l'adresse réelle, et signale l'écart
+// (« Google n'a pas choisi la même URL canonique que l'utilisateur »).
+// Une page se désigne elle-même — c'est le seul défaut qui ne se périme pas.
 export const metadata: Metadata = {
   title: "Suivre vos élèves et trouver vos ressources",
   description:
     "Voyez où en sont vos élèves et utilisez EleveAI en classe : tableau de bord en temps réel, calcul rapide en direct avec résultats validés, remédiation ciblée par prérequis. Vous restez la référence.",
-  alternates: { canonical: "https://www.eleveai.fr/enseignants" },
+  alternates: { canonical: "https://www.eleveai.fr/espace-profs" },
 };
 
 // Ce qu'un prof peut FAIRE avec EleveAI — le cœur de la page.
