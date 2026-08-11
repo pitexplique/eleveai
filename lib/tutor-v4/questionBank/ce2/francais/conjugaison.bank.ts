@@ -1779,51 +1779,65 @@ export const conjugaisonBank: TutorBankItemV4[] = [
   },
 
   /* =========================================================
-     LES QUESTIONS OUVERTES — une par micro-compétence
+     LES QCM DE MÉTHODE — un par micro-compétence
 
-     ⚠️ `contains_keyword` valide dès qu'UN SEUL mot de `expected` apparaît
-     dans la réponse, en sous-chaîne. Les mots-clés sont donc choisis
-     DISCRIMINANTS, et jamais un mot qui se cache dans un autre : « ait »
-     validerait « ça fait longtemps ».
-     ⚠️ `normalize()` conserve les accents : chaque mot accentué est doublé de
-     sa forme sans accent, parce qu'un enfant de neuf ans tape rarement les
-     accents.
+     CE QU'ILS REMPLACENT (11/08/2026). Ces douze items étaient des questions
+     OUVERTES corrigées par le comparateur « contains-keyword », qui valide dès
+     qu'UN mot de `expected` apparait EN SOUS-CHAÎNE. Le mot-clé « s » validait
+     « je sais pas ». Trois choses ne vont pas ensemble à neuf ans : un clavier
+     qu'on cherche lettre par lettre, un comparateur qui lit des lettres au lieu
+     du sens, et deux échecs opposés — féliciter l'enfant qui n'a rien écrit, ou
+     refuser une explication juste dite autrement.
 
-     On demande « explique comment tu as trouvé », jamais « justifie ta
-     démarche » : c'est à un enfant de neuf ans qu'on parle, et il répond en
-     une phrase.
+     L'INTENTION EST GARDÉE : rendre la méthode explicite, qui est le meilleur
+     moment de la notion. On la fait CHOISIR au lieu de la faire taper. La bonne
+     réponse était déjà écrite — c'est la ligne « Méthode : » de l'explication.
+     Ce qui s'écrit ici, ce sont les TROIS FAUSSES méthodes, dans cet ordre de
+     valeur : l'erreur que l'enfant fait vraiment (elle nomme le piège), puis la
+     méthode d'une micro-compétence voisine, puis au plus une seule pioche au
+     hasard — elle n'apprend rien.
+
+     ⚠️ UNE SEULE méthode juste par question. Deux méthodes correctes pour le
+     même énoncé arrivent vite, et l'élève a raison de se plaindre.
+     ⚠️ La position ne se gère pas ici : `questionPairBuilder.ts` mélange les
+     choix à l'envoi. On écrit la bonne réponse en premier, c'est plus lisible.
+     ⚠️ Le CP n'a aucune question ouverte, le CE1 en avait quatorze : le CE2
+     était seul de son espèce. `verifier-banque.mjs` réclamera désormais « SANS
+     QUESTION OUVERTE » sur ces micros — c'est le résultat voulu.
   ========================================================= */
   {
     kind: "template",
-    id: "ce2_conj_infinitif_open_1",
+    id: "ce2_conj_infinitif_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "conjugaison",
     microId: "ce2_conj_infinitif",
     difficulty: 3,
     theme: "neutral",
-    hint: "Raconte ce que tu fais dans ta tête, dans l'ordre.",
-    tags: ["ce2", "conjugaison", "infinitif", "ouverte"],
+    hint: "Pose « il faut… » devant le verbe, et écoute ce qui se dit derrière.",
+    tags: ["ce2", "conjugaison", "infinitif", "methode"],
     generate: () => {
       const v = randomChoice(TOUS);
       const temps = randomChoice(TEMPS_SIMPLES);
       const p = Math.floor(Math.random() * 6);
+      const bonne = `Je pose « il faut… » devant le verbe : il faut ${v.inf}.`;
       return {
-        text: `« ${majuscule(attacher(PRONOMS[p], v.formes[temps][p]))} »\n\nExplique comment tu ferais pour retrouver l'infinitif de ce verbe.`,
-        format: "open" as const,
-        expected: [
-          "enlève",
-          "enleve",
-          "terminaison",
-          "il faut",
-          "dictionnaire",
-          "forme de base",
-          v.inf,
+        text: `« ${majuscule(attacher(PRONOMS[p], v.formes[temps][p]))} »\n\nComment fais-tu pour retrouver l'infinitif de ce verbe ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : l'enfant recopie la forme qu'il a sous les yeux.
+          "Je recopie le verbe tel qu'il est écrit dans la phrase.",
+          // La méthode voisine : « prendre » sert à choisir entre -er et -é,
+          // pas à remonter à l'infinitif d'un verbe déjà conjugué.
+          "Je remplace le verbe par « prendre » et j'écoute ce qui se dit.",
+          "Je remonte au sujet et je regarde s'il est au pluriel.",
         ],
-        comparator: "contains_keyword" as const,
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "L'infinitif est la forme de base du verbe, celle du dictionnaire.",
-          "Deux gestes possibles : enlever la terminaison qui a changé, ou poser « il faut… » devant le verbe.",
+          "Pose « il faut… » devant le verbe : ce qui se dit derrière, c'est l'infinitif.",
           `il faut ${v.inf} → l'infinitif est « ${v.inf} ».`,
           `L'infinitif est « ${v.inf} ».`,
         ),
@@ -1832,23 +1846,31 @@ export const conjugaisonBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_conj_radical_terminaison_open_1",
+    id: "ce2_conj_radical_terminaison_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "conjugaison",
     microId: "ce2_conj_radical_terminaison",
     difficulty: 3,
     theme: "neutral",
-    hint: "Compare les six personnes du même verbe et regarde ce qui bouge.",
-    tags: ["ce2", "conjugaison", "radical", "ouverte"],
+    hint: "Écris les six personnes l'une sous l'autre, et regarde où la colonne se met à bouger.",
+    tags: ["ce2", "conjugaison", "radical", "methode"],
     generate: () => {
       const v = randomChoice(LES_ER);
       const rad = radicalEr(v.inf);
+      const bonne = `J'écris les six personnes l'une sous l'autre et je garde le morceau qui ne bouge jamais : « ${rad} ».`;
       return {
-        text: `${v.formes.present.map((f, i) => attacher(PRONOMS[i], f)).join(", ")}.\n\nQuelle partie du verbe ne change JAMAIS ? Explique en une phrase.`,
-        format: "open" as const,
-        expected: ["radical", rad, "début", "debut", "commencement"],
-        comparator: "contains_keyword" as const,
+        text: `${v.formes.present.map((f, i) => attacher(PRONOMS[i], f)).join(", ")}.\n\nComment fais-tu pour trouver le radical de ce verbe ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Le piège de la notion, retourné : c'est la terminaison qui bouge.
+          "Je regarde la fin du verbe : c'est elle qui reste toujours pareille.",
+          `Je prends la forme avec « je » : « ${attacher(PRONOMS[0], v.formes.present[0])} », donc le radical est « ${v.formes.present[0]} ».`,
+          "Je remplace le sujet par « nous » et je garde le verbe en entier.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un verbe conjugué a deux morceaux : le radical, qui porte le sens, et la terminaison, qui dit qui fait l'action et quand.",
           "Écris les six personnes les unes sous les autres et regarde où la colonne se met à changer.",
@@ -1860,17 +1882,26 @@ export const conjugaisonBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce2_conj_present_etre_avoir_open_1",
+    id: "ce2_conj_present_etre_avoir_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "conjugaison",
     microId: "ce2_conj_present_etre_avoir",
     difficulty: 3,
     theme: "neutral",
-    text: "« Ils ont faim. » et « Ils sont contents. »\n\nComment fais-tu pour savoir lequel est le verbe avoir ? Explique en une phrase.",
-    format: "open",
-    expected: ["possède", "possede", "avoir", "on a", "quelque chose", "sens"],
-    comparator: "contains_keyword",
+    text: "« Ils ont faim. » et « Ils sont contents. »\n\nComment fais-tu pour savoir lequel des deux est le verbe avoir ?",
+    format: "qcm",
+    choices: [
+      "Je regarde le sens : la faim, on la POSSÈDE, donc « ont » est le verbe avoir.",
+      // L'erreur réelle : justement, « ont » et « sont » riment.
+      "J'écoute la fin des deux verbes : « ont » et « sont » ne se ressemblent pas.",
+      "Je regarde le sujet : quand il est au pluriel, c'est toujours le verbe être.",
+      "Je compte les lettres : le verbe avoir est toujours le plus court des deux.",
+    ],
+    expected: [
+      "Je regarde le sens : la faim, on la POSSÈDE, donc « ont » est le verbe avoir.",
+    ],
+    comparator: "mcq_exact",
     hint: "Demande-toi si la phrase dit ce qu'on POSSÈDE, ou ce qu'on EST.",
     explanation: exp(
       "Être et avoir ont des formes qui riment : ont / sont, es / est, as / a.",
@@ -1878,11 +1909,11 @@ export const conjugaisonBank: TutorBankItemV4[] = [
       "La faim, on l'a. Contents, on l'est. C'est le sens qui tranche, pas le son.",
       "« ont » est le verbe avoir, parce que la faim, on la possède.",
     ),
-    tags: ["ce2", "conjugaison", "etre-avoir", "methode", "ouverte"],
+    tags: ["ce2", "conjugaison", "etre-avoir", "methode", "qcm"],
   },
   {
     kind: "template",
-    id: "ce2_conj_present_er_open_1",
+    id: "ce2_conj_present_er_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "conjugaison",
@@ -1890,16 +1921,24 @@ export const conjugaisonBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Ce n'est pas ton oreille qui décide. C'est quoi, alors ?",
-    tags: ["ce2", "conjugaison", "present", "ouverte"],
+    tags: ["ce2", "conjugaison", "present", "methode"],
     generate: () => {
       const v = randomChoice(LES_ER);
       const complement = randomChoice(v.complements);
       const sujet = randomChoice(SUJETS_PL);
+      const bonne = `Parce que le sujet est au pluriel : « ${sujet} », c'est plusieurs.`;
       return {
-        text: `« ${majuscule(sujet)} ${v.formes.present[5]} ${complement}. »\n\nOn n'entend pas le « -ent » à la fin du verbe. Explique pourquoi il faut quand même l'écrire.`,
-        format: "open" as const,
-        expected: ["pluriel", "plusieurs", "sujet", "ils", "marque"],
-        comparator: "contains_keyword" as const,
+        text: `« ${majuscule(sujet)} ${v.formes.present[5]} ${complement}. »\n\nOn n'entend pas le « -ent » à la fin du verbe. Pourquoi faut-il quand même l'écrire ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          "Parce que tous les verbes en -er se terminent par « -ent ».",
+          // L'erreur réelle : l'enfant croit qu'il entend, alors qu'il devine.
+          "Parce qu'on entend un petit « e » si on lit très lentement.",
+          "Parce que la phrase se passe au présent.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "La marque du pluriel des verbes est « -nt ». Elle s'écrit et ne s'entend pas.",
           "Ne compte pas sur ton oreille : remonte au sujet et compte combien ils sont.",
@@ -1911,17 +1950,25 @@ export const conjugaisonBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce2_conj_present_irreguliers_open_1",
+    id: "ce2_conj_present_irreguliers_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "conjugaison",
     microId: "ce2_conj_present_irreguliers",
     difficulty: 3,
     theme: "neutral",
-    text: "Beaucoup d'élèves écrivent « vous faisez ». Explique pourquoi c'est une erreur — et pourquoi elle est facile à faire.",
-    format: "open",
-    expected: ["faites", "exception", "irrégulier", "irregulier", "par cœur", "par coeur", "règle", "regle"],
-    comparator: "contains_keyword",
+    text: "Beaucoup d'élèves écrivent « vous faisez ». Pourquoi cette erreur est-elle si facile à faire ?",
+    format: "qcm",
+    choices: [
+      "Parce qu'ils ont bien appliqué la règle du « -ez » — mais faire, dire et être sont les trois exceptions.",
+      "Parce qu'ils ont oublié d'apprendre le verbe faire.",
+      "Parce qu'ils ont confondu « vous » et « nous ».",
+      "Parce qu'ils ont écrit ce qu'ils entendaient.",
+    ],
+    expected: [
+      "Parce qu'ils ont bien appliqué la règle du « -ez » — mais faire, dire et être sont les trois exceptions.",
+    ],
+    comparator: "mcq_exact",
     hint: "L'élève qui écrit « faisez » a appliqué une règle. Laquelle ?",
     explanation: exp(
       "Avec « vous », les verbes se terminent presque toujours par « -ez ». Trois verbes font exception.",
@@ -1929,21 +1976,30 @@ export const conjugaisonBank: TutorBankItemV4[] = [
       "L'enfant qui écrit « faisez » n'a rien oublié : il a bien appliqué la règle du -ez. C'est la règle qui a un trou, et il n'y a que trois trous.",
       "C'est « vous faites » : faire est une des trois exceptions au « -ez ».",
     ),
-    tags: ["ce2", "conjugaison", "irreguliers", "piege", "ouverte"],
+    tags: ["ce2", "conjugaison", "irreguliers", "piege", "qcm"],
   },
   {
     kind: "fixed",
-    id: "ce2_conj_imparfait_open_1",
+    id: "ce2_conj_imparfait_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "conjugaison",
     microId: "ce2_conj_imparfait",
     difficulty: 3,
     theme: "neutral",
-    text: "À quoi sert l'imparfait ? Écris une phrase à l'imparfait qui raconte quelque chose que tu faisais quand tu étais petit.",
-    format: "open",
-    expected: ["autrefois", "avant", "petit", "durait", "répétait", "repetait", "chaque", "souvent", "ais", "ions"],
-    comparator: "contains_keyword",
+    text: "À quoi sert l'imparfait ?",
+    format: "qcm",
+    choices: [
+      "À raconter ce qui durait ou se répétait dans le passé : quand j'étais petit, je jouais dans la cour tous les matins.",
+      // La voisine : une action du passé arrivée UNE fois, c'est le passé composé.
+      "À raconter une action du passé arrivée une seule fois : hier, j'ai ramassé un letchi.",
+      "À raconter ce qui se passera demain.",
+      "À dire ce qu'on fait en ce moment, pendant qu'on parle.",
+    ],
+    expected: [
+      "À raconter ce qui durait ou se répétait dans le passé : quand j'étais petit, je jouais dans la cour tous les matins.",
+    ],
+    comparator: "mcq_exact",
     hint: "Pense à ce qui se répétait, ou qui durait longtemps.",
     explanation: exp(
       "L'imparfait raconte le passé qui durait ou qui se répétait : ce qu'on faisait souvent, ce qui était là autour.",
@@ -1951,11 +2007,11 @@ export const conjugaisonBank: TutorBankItemV4[] = [
       "Quand j'étais petit, je jouais dans la cour tous les matins. L'action ne s'est pas passée une fois : elle revenait.",
       "L'imparfait sert à raconter ce qui durait ou se répétait dans le passé.",
     ),
-    tags: ["ce2", "conjugaison", "imparfait", "definition", "ouverte"],
+    tags: ["ce2", "conjugaison", "imparfait", "definition", "qcm"],
   },
   {
     kind: "template",
-    id: "ce2_conj_imparfait_irreguliers_open_1",
+    id: "ce2_conj_imparfait_irreguliers_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "conjugaison",
@@ -1963,14 +2019,22 @@ export const conjugaisonBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Il y a une personne du présent qui te donne le radical de tout l'imparfait.",
-    tags: ["ce2", "conjugaison", "imparfait", "irreguliers", "ouverte"],
+    tags: ["ce2", "conjugaison", "imparfait", "irreguliers", "methode"],
     generate: () => {
       const v = randomChoice(LES_HUIT);
+      const bonne = `Je dis « nous » au présent — nous ${v.formes.present[3]} — et j'enlève le « -ons ».`;
       return {
-        text: `Tu dois écrire « ${v.inf} » à l'imparfait, mais tu ne t'en souviens plus.\n\nExplique où tu peux aller chercher son radical.`,
-        format: "open" as const,
-        expected: ["nous", "présent", "present", "ons", v.formes.present[3]],
-        comparator: "contains_keyword" as const,
+        text: `Tu dois écrire « ${v.inf} » à l'imparfait, mais tu ne t'en souviens plus.\n\nComment fais-tu pour retrouver son radical ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // La voisine : garder l'infinitif entier, c'est le geste du FUTUR.
+          "Je prends l'infinitif en entier et je colle la terminaison derrière.",
+          `Je prends le « je » du présent — ${attacher(PRONOMS[0], v.formes.present[0])} — et j'enlève la dernière lettre.`,
+          "Je choisis la forme qui sonne le mieux à mon oreille.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Le radical de l'imparfait se trouve toujours dans le « nous » du présent, pour tous les verbes.",
           "Dis « nous… » au présent, enlève le « -ons », et ajoute la terminaison de l'imparfait.",
@@ -1982,17 +2046,26 @@ export const conjugaisonBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce2_conj_futur_open_1",
+    id: "ce2_conj_futur_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "conjugaison",
     microId: "ce2_conj_futur",
     difficulty: 3,
     theme: "neutral",
-    text: "« Demain, il jouera dans la cour. »\n\nOn n'entend pas le « e » de « jouera ». Explique pourquoi il faut l'écrire.",
-    format: "open",
-    expected: ["infinitif", "jouer", "entier", "en entier", "tout le verbe"],
-    comparator: "contains_keyword",
+    text: "« Demain, il jouera dans la cour. »\n\nOn n'entend pas le « e » de « jouera ». Pourquoi faut-il l'écrire ?",
+    format: "qcm",
+    choices: [
+      "Parce qu'au futur la terminaison se colle sur l'infinitif ENTIER : jouer + a = jouera.",
+      // L'erreur réelle : l'enfant justifie une lettre par le mot du début.
+      "Parce que la phrase commence par « Demain ».",
+      "Parce que le sujet « il » est au singulier.",
+      "Parce que tous les verbes prennent un « e » avant leur terminaison.",
+    ],
+    expected: [
+      "Parce qu'au futur la terminaison se colle sur l'infinitif ENTIER : jouer + a = jouera.",
+    ],
+    comparator: "mcq_exact",
     hint: "Écris l'infinitif du verbe, puis colle la terminaison derrière sans rien enlever.",
     explanation: exp(
       "Au futur, la terminaison se colle sur l'INFINITIF tout entier, pas sur le radical.",
@@ -2000,11 +2073,11 @@ export const conjugaisonBank: TutorBankItemV4[] = [
       "jouer + a = jouera. Le « e » est là parce que « jouer » est là, en entier.",
       "Parce qu'au futur on garde l'infinitif entier : jouer + a.",
     ),
-    tags: ["ce2", "conjugaison", "futur", "methode", "ouverte"],
+    tags: ["ce2", "conjugaison", "futur", "methode", "qcm"],
   },
   {
     kind: "template",
-    id: "ce2_conj_futur_irreguliers_open_1",
+    id: "ce2_conj_futur_irreguliers_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "conjugaison",
@@ -2012,14 +2085,22 @@ export const conjugaisonBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Compare le début du futur et l'infinitif : se ressemblent-ils ?",
-    tags: ["ce2", "conjugaison", "futur", "irreguliers", "ouverte"],
+    tags: ["ce2", "conjugaison", "futur", "irreguliers", "methode"],
     generate: () => {
       const v = randomChoice(LES_HUIT);
+      const bonne = `Le début du verbe s'est refabriqué : « ${v.formes.futur[0]} ». Il n'y a rien à calculer, il s'apprend par cœur.`;
       return {
-        text: `Infinitif : « ${v.inf} ». Au futur : « ${attacher(PRONOMS[0], v.formes.futur[0])} ».\n\nQu'est-ce qui a changé, et pourquoi ne peut-on pas le deviner ? Explique.`,
-        format: "open" as const,
-        expected: ["radical", "début", "debut", "irrégulier", "irregulier", "par cœur", "par coeur", "apprendre", "retenir"],
-        comparator: "contains_keyword" as const,
+        text: `Infinitif : « ${v.inf} ». Au futur : « ${attacher(PRONOMS[0], v.formes.futur[0])} ».\n\nQu'est-ce qui a changé ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // La voisine : vraie pour les verbes en -er, fausse pour ces huit-là.
+          "Rien de spécial : au futur, on garde toujours l'infinitif en entier.",
+          "C'est la terminaison qui a changé : au futur, elle est différente pour chaque verbe.",
+          "Le verbe a changé de groupe en passant au futur.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Chez les verbes du premier groupe, le futur garde l'infinitif entier. Chez les huit irréguliers, le début se refabrique.",
           "Il n'y a rien à calculer : ces huit débuts s'apprennent par cœur.",
@@ -2031,17 +2112,26 @@ export const conjugaisonBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce2_conj_passe_compose_open_1",
+    id: "ce2_conj_passe_compose_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "conjugaison",
     microId: "ce2_conj_passe_compose",
     difficulty: 3,
     theme: "neutral",
-    text: "Pourquoi le passé composé s'appelle-t-il « composé » ? Explique en une phrase.",
-    format: "open",
-    expected: ["deux", "auxiliaire", "être", "etre", "avoir", "participe", "morceau"],
-    comparator: "contains_keyword",
+    text: "Pourquoi le passé composé s'appelle-t-il « composé » ?",
+    format: "qcm",
+    choices: [
+      "Parce qu'il s'écrit en deux mots : d'abord être ou avoir, puis le participe passé.",
+      "Parce qu'il mélange deux temps : le présent et l'imparfait.",
+      // L'erreur réelle : l'enfant compte les lettres au lieu des mots.
+      "Parce que sa terminaison est plus longue que celle des autres temps.",
+      "Parce qu'il sert à composer des poésies et des chansons.",
+    ],
+    expected: [
+      "Parce qu'il s'écrit en deux mots : d'abord être ou avoir, puis le participe passé.",
+    ],
+    comparator: "mcq_exact",
     hint: "Compte les mots qu'il faut pour l'écrire.",
     explanation: exp(
       "Composé veut dire « fait de plusieurs morceaux ».",
@@ -2049,11 +2139,11 @@ export const conjugaisonBank: TutorBankItemV4[] = [
       "Hier, j'ai ramassé des letchis. « ai » porte la personne, « ramassé » porte le sens. Deux mots pour un seul verbe.",
       "Parce qu'il s'écrit en deux mots : un auxiliaire, puis le participe passé.",
     ),
-    tags: ["ce2", "conjugaison", "passe-compose", "definition", "ouverte"],
+    tags: ["ce2", "conjugaison", "passe-compose", "definition", "qcm"],
   },
   {
     kind: "template",
-    id: "ce2_conj_participe_infinitif_open_1",
+    id: "ce2_conj_participe_infinitif_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "conjugaison",
@@ -2061,14 +2151,22 @@ export const conjugaisonBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Il te faut un verbe dont les deux formes ne se disent PAS pareil.",
-    tags: ["ce2", "conjugaison", "participe", "ouverte"],
+    tags: ["ce2", "conjugaison", "participe", "methode"],
     generate: () => {
       const v = randomChoice(LES_ER);
+      const bonne = `Je remplace par « prendre » : si « prendre » se dit, j'écris « ${v.inf} » ; si c'est « pris », j'écris « ${v.participe} ».`;
       return {
-        text: `« ${v.inf} » et « ${v.participe} » se disent exactement pareil.\n\nExplique le truc qui te permet de choisir lequel écrire.`,
-        format: "open" as const,
-        expected: ["prendre", "pris", "remplace", "remplacer", "mordre", "vendre"],
-        comparator: "contains_keyword" as const,
+        text: `« ${v.inf} » et « ${v.participe} » se disent exactement pareil.\n\nQu'est-ce qui te permet de trancher ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : l'oreille, qui ne sert justement à rien ici.
+          "Je dis le mot à voix haute : si j'entends « é », j'écris « é ».",
+          "Je regarde s'il y a « je » ou « il » devant le verbe.",
+          `J'écris toujours « ${v.inf} » : c'est l'écriture la plus fréquente.`,
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Chez les verbes du premier groupe, l'infinitif et le participe passé se prononcent de la même façon. Seule l'orthographe les sépare.",
           "Remplace le verbe par « prendre », qui a deux formes bien différentes, et écoute laquelle se dit.",
@@ -2080,37 +2178,37 @@ export const conjugaisonBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_conj_defi_open_1",
+    id: "ce2_conj_defi_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "conjugaison",
     microId: "ce2_conj_defi",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis les deux choses que tu as regardées : d'abord le quand, ensuite le qui.",
-    tags: ["ce2", "conjugaison", "defi", "ouverte"],
+    // Le défi est un cran plus dur : on retire le marqueur de temps, celui sur
+    // lequel les trois autres gabarits de ce micro s'appuient. Il ne reste plus
+    // qu'un endroit où regarder, et les trois pièges sont les trois endroits
+    // où l'enfant regarde d'habitude.
+    hint: "Il n'y a plus de « hier » ni de « demain » : il ne te reste qu'un endroit où regarder.",
+    tags: ["ce2", "conjugaison", "defi", "methode"],
     generate: () => {
       const v = randomChoice([...LES_HUIT, ...LES_ER]);
       const complement = randomChoice(v.complements);
       const temps = randomChoice(TEMPS_SIMPLES);
       const p = randomChoice([2, 5]);
       const sujet = sujetPour(v, temps, p);
+      const bonne = `Je regarde la terminaison du verbe : « ${v.formes[temps][p]} » est ${TEMPS_PHRASE[temps]}.`;
       return {
-        text: `« ${majuscule(sujet)} ${v.formes[temps][p]} ${complement}. »\n\nÀ quel temps est cette phrase, et à quoi l'as-tu vu ? Explique comment tu as trouvé.`,
-        format: "open" as const,
-        expected: [
-          // Chaque mot accentué est doublé sans accent : à neuf ans, on tape
-          // « present », pas « présent », et `normalize()` garde les accents.
-          ...(temps === "present"
-            ? ["présent", "present"]
-            : temps === "imparfait"
-              ? ["imparfait"]
-              : ["futur"]),
-          "terminaison",
-          "fin du verbe",
-          v.formes[temps][p],
+        text: `« ${majuscule(sujet)} ${v.formes[temps][p]} ${complement}. »\n\nAucun mot comme « hier » ou « demain » ne t'aide.\nComment fais-tu pour trouver le temps de cette phrase ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          "Je regarde le premier mot de la phrase : c'est lui qui annonce le moment.",
+          "Je regarde le début du verbe : il ne change pas, donc la phrase est au présent.",
+          "Je regarde le sujet : quand il est au pluriel, l'action est déjà passée.",
         ],
-        comparator: "contains_keyword" as const,
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Le temps d'une phrase se lit sur la fin du verbe, pas sur les autres mots.",
           "Regarde la terminaison : -ait et -aient pour l'imparfait, -ra et -ront pour le futur, deux mots pour le passé composé.",
