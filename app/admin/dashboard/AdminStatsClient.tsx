@@ -90,6 +90,12 @@ const MODULES: { key: string; label: string; color: string }[] = [
   { key: "english", label: "🇬🇧 English-Maths", color: "bg-sky-500" },
   { key: "dictee", label: "✍️ Dictée du jour", color: "bg-cyan-500" },
   { key: "langue", label: "🗣️ Langues du jour", color: "bg-fuchsia-500" },
+  // ⚠️ La moyenne d'une épreuve blanche NE SE LIT PAS comme les autres : elle
+  // porte sur le programme de l'année d'AVANT, et l'évaluation officielle ne
+  // note pas — elle range en trois groupes. Un 40 % ici n'est donc pas un
+  // mauvais résultat, c'est un profil de rentrée. La vue qui compte est
+  // /evaluation-nationale-college/ma-classe, par groupe de maîtrise.
+  { key: "evaluation", label: "🎓 Évaluation nationale", color: "bg-rose-500" },
 ];
 
 // Libellés lisibles des sections (1er segment d'URL) — « où vont les élèves ».
@@ -258,6 +264,33 @@ export default function AdminStatsClient() {
           </button>
         </div>
       </div>
+
+      {/* LA VUE DE CLASSE DE L'ÉVALUATION NATIONALE.
+          Elle emporte le périmètre déjà choisi ci-dessus : cliquer depuis
+          « 🏫 DIMITILE » ouvre la 6ᵉ de Dimitile, pas un sélecteur vide. Les
+          moyennes du dashboard ne disent pas ce que dit cette page — un
+          pourcentage n'est pas un groupe de maîtrise, et c'est en groupes que
+          l'institution rend son bilan. */}
+      <a
+        href={
+          scope && scope !== "all" && scope !== "INDEPENDANT"
+            ? `/evaluation-nationale-college/ma-classe?etab=${encodeURIComponent(scope)}`
+            : "/evaluation-nationale-college/ma-classe"
+        }
+        className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-rose-500/30 bg-rose-500/5 px-4 py-3 transition hover:bg-rose-500/10"
+      >
+        <span>
+          <span className="block text-sm font-black text-rose-200">
+            🎓 Évaluation nationale — la vue de classe
+          </span>
+          <span className="block text-[11px] font-semibold text-slate-400">
+            Chaque élève rangé en « à besoins / fragile / satisfaisant »,
+            domaine par domaine. Y compris ceux qui n&apos;ont pas encore passé
+            l&apos;épreuve.
+          </span>
+        </span>
+        <span className="text-sm font-black text-rose-200">→</span>
+      </a>
 
       {error && (
         <p className="rounded-xl bg-red-500/10 px-4 py-3 text-sm font-semibold text-red-300">

@@ -21,8 +21,15 @@ export const dynamic = "force-dynamic";
 
 const JOUR_MS = 24 * 60 * 60 * 1000;
 
-// 8 tables de résultats, regroupées par module pour le dashboard.
+// Les tables de résultats, regroupées par module pour le dashboard.
 // Les 4 parcours comptent ensemble dans le module « parcours ».
+//
+// ⚠️ UNE TABLE QUI N'EST PAS ICI N'EXISTE PAS POUR L'ADMINISTRATION. Les
+// épreuves blanches de l'évaluation nationale y ont manqué du 01/08 au 11/08 :
+// elles enregistraient consciencieusement en base et n'apparaissaient nulle
+// part — ni dans les KPI, ni dans « évaluation par module », ni dans
+// l'engagement. Ajouter la table de résultats sans ajouter sa ligne ici, c'est
+// se rendre aveugle à ce qu'on vient de construire.
 const TABLES_RESULTATS: { table: string; module: string; hasScore: boolean }[] = [
   { table: "resultats_parcours_maths", module: "parcours", hasScore: true },
   { table: "resultats_parcours_english", module: "parcours", hasScore: true },
@@ -34,6 +41,11 @@ const TABLES_RESULTATS: { table: string; module: string; hasScore: boolean }[] =
   { table: "resultats_dictee", module: "dictee", hasScore: true },
   { table: "resultats_langue_du_jour", module: "langue", hasScore: true },
   { table: "resultats_tutor", module: "coach", hasScore: false },
+  {
+    table: "resultats_evaluation_nationale",
+    module: "evaluation",
+    hasScore: true,
+  },
 ];
 
 type ResultRow = {

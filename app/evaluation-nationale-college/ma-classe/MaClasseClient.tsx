@@ -123,6 +123,17 @@ export default function MaClasseClient() {
     setChargement(false);
   }, [eleve?.token, classe, matiere, etab]);
 
+  // L'ÉTABLISSEMENT PEUT ARRIVER PAR L'URL — c'est ainsi que le tableau de
+  // bord admin fait suivre le collège déjà sélectionné. Lu sur
+  // `window.location` plutôt qu'avec `useSearchParams`, qui imposerait une
+  // frontière Suspense à toute la page pour un seul paramètre.
+  // ⚠️ Sans droits admin, ce paramètre ne donne rien : la route l'ignore et
+  // s'en tient à l'établissement de la session.
+  useEffect(() => {
+    const v = new URLSearchParams(window.location.search).get("etab");
+    if (v) setEtab(v);
+  }, []);
+
   useEffect(() => {
     charger();
   }, [charger]);
