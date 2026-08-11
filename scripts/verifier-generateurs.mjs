@@ -74,7 +74,16 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { register } from "node:module";
 import { pathToFileURL } from "node:url";
+
+/* ⚠️ 11/08/2026 — sans ce hook, toute banque qui importe autre chose que des
+   types échouait à se charger, et le script l'écrivait dans une liste « non
+   couverts » en bas de page. Les français de CM1, CM2 et 6e sont bâtis par
+   `buildCycle3FrancaisBank` derrière un `index.ts` en `@/` : le script n'en
+   voyait que la couche `fixed.bank.ts`, tirait ZÉRO question et concluait
+   « Aucun problème ». Voir scripts/lib/alias-loader.mjs. */
+register("./lib/alias-loader.mjs", import.meta.url);
 
 const ARGS = process.argv.slice(2).filter((a) => !a.startsWith("--"));
 
@@ -260,12 +269,25 @@ for (const classe of CLASSES) {
     process.exit(1);
   }
 
-  /* Les `index.ts` ne font que réexporter, avec des chemins sans extension que
-     Node ne sait pas résoudre. On va droit aux banques. */
+  /* ⚠️ 11/08/2026 — l'`index.ts` était SAUTÉ, au motif qu'il ne fait que
+     réexporter. C'est vrai des banques de maths, où chaque notion a son
+     fichier. Ce l'est faux du français de CM1, CM2 et 6e : leur banque est
+     FABRIQUÉE dans l'index (`buildCycle3FrancaisBank`), et le dossier ne
+     contient qu'une couche `fixed.bank.ts`. Les sauter revenait à ne rien
+     vérifier du tout.
+     On le charge donc, mais EN DERNIER : les items qu'un vrai fichier expose
+     gardent le nom de ce fichier dans le rapport, et l'index ne sert qu'à
+     rattraper ce que personne n'expose. D'où le dédoublonnage par id. */
   const fichiers = fs
     .readdirSync(dossier)
-    .filter((f) => f.endsWith(".ts") && !f.startsWith("index."))
-    .sort();
+    .filter((f) => f.endsWith(".ts"))
+    .sort(
+      (a, b) =>
+        Number(a.startsWith("index.")) - Number(b.startsWith("index.")) ||
+        a.localeCompare(b),
+    );
+
+  const idsVus = new Set();
 
   for (const fichier of fichiers) {
     const chemin = path.join(dossier, fichier);
@@ -278,6 +300,8 @@ for (const classe of CLASSES) {
     }
 
     for (const item of items(mod)) {
+      if (idsVus.has(item.id)) continue;
+      idsVus.add(item.id);
       totalItems += 1;
 
       if (item.kind === "fixed") {
