@@ -19,17 +19,31 @@
 //   3. Un "$" orphelin casse le rendu KaTeX d'un item. On ne s'en aperçoit
 //      qu'en tombant dessus, c'est-à-dire trop tard.
 //
-// On lit le SOURCE, pas le module : les banques sont du TypeScript avec des
-// imports, les exécuter demanderait un runner qu'on n'a pas (même méthode que
-// auditer-banque.mjs et valider-banques-concours.mjs).
+// DEUX PASSES DEPUIS LE 11/08/2026.
+//   1. LE SOURCE d'abord, comme avant. Il montre ce qu'aucune exécution ne
+//      montre : la position de la bonne réponse dans le fichier, les énoncés
+//      recopiés à l'identique, le LaTeX mal fermé.
+//   2. L'EXÉCUTION ensuite, pour compléter. L'en-tête disait ici « les
+//      exécuter demanderait un runner qu'on n'a pas » : on l'a désormais
+//      (scripts/lib/alias-loader.mjs). Sans elle, les banques de français de
+//      CM1, CM2 et 6e — dont la couche fixe passe par une fabrique à arguments
+//      positionnels et dont le gros est bâti dans index.ts — étaient SAUTÉES,
+//      et la couverture annonçait « AUCUN ITEM : 46 sur 46 » sur 212 items.
 //
-// Usage : node scripts/verifier-banque.mjs [classe] [matiere] [cible]
-//         node scripts/verifier-banque.mjs premiere-spe maths 11
+// Usage : node --experimental-strip-types scripts/verifier-banque.mjs [classe] [matiere]
+//         node --experimental-strip-types scripts/verifier-banque.mjs cm1 francais
 //
 // Sortie 1 s'il y a le moindre problème : utilisable comme garde-fou.
 
 import fs from "node:fs";
 import path from "node:path";
+import { register } from "node:module";
+import { pathToFileURL } from "node:url";
+
+/* Résout l'alias `@/` et les imports relatifs sans extension, pour que la
+   passe à l'exécution puisse charger les banques. Voir le bloc « Passe À
+   L'EXÉCUTION » plus bas. */
+register("./lib/alias-loader.mjs", import.meta.url);
 
 const CLASSE = process.argv[2] || "premiere-spe";
 const MATIERE = process.argv[3] || "maths";
@@ -172,15 +186,18 @@ let nbFixes = 0;
 let nbQcm = 0;
 let nbQcmOpaques = 0;
 let nbChaines = 0;
+/* Fichiers que le découpage du source n'a pas su lire. Ils ne deviennent un
+   problème QUE si la passe à l'exécution ne les rattrape pas non plus. */
+const sourceIllisible = [];
+let nbRuntime = 0;
 
 for (const f of fichiers) {
   const src = fs.readFileSync(path.join(BANQUES, f), "utf8");
   const items = decouper(src);
   const attendus = [...src.matchAll(/microId:\s*"/g)].length;
   if (items.length !== attendus) {
-    problemes.push(
-      `${f} : ${items.length} items découpés pour ${attendus} microId — ` +
-        "mise en forme inattendue, la vérification serait PARTIELLE.",
+    sourceIllisible.push(
+      `${f} : ${items.length} items découpés pour ${attendus} microId`,
     );
     continue;
   }
@@ -291,6 +308,103 @@ for (const f of fichiers) {
   }
 }
 
+/* ─── Passe À L'EXÉCUTION ────────────────────────────────────────────────────
+   ⚠️ 11/08/2026 — CE QUE CETTE PASSE RÉPARE.
+
+   Le découpage du source cherche `microId: "…"`. Les banques de français de
+   CM1, CM2 et 6e n'en écrivent aucun : leur couche fixe passe par une fabrique
+   `qcm(id, notionId, microId, …)` à arguments POSITIONNELS, et le gros de la
+   banque est FABRIQUÉ dans `index.ts` par `buildCycle3FrancaisBank`.
+   Résultat : « 1 items découpés pour 0 microId », le fichier était sauté, et
+   la section COUVERTURE annonçait « ⬜ AUCUN ITEM : 46 sur 46 » sur une banque
+   de 212 items. Un rapport faux de bout en bout, qui sortait en rouge pour la
+   mauvaise raison.
+
+   L'en-tête de ce script disait « les exécuter demanderait un runner qu'on
+   n'a pas ». On l'a depuis : `scripts/lib/alias-loader.mjs`.
+
+   La passe source reste PREMIÈRE et inchangée — elle lit ce qu'aucune
+   exécution ne montre : la position de la bonne réponse dans le fichier, les
+   énoncés recopiés, le LaTeX. La passe d'exécution ne fait que compléter, et
+   seulement pour les items qu'aucun fichier n'a exposés. */
+const cheminsRuntime = [
+  ...(fs.existsSync(path.join(BANQUES, "index.ts")) ? ["index.ts"] : []),
+  ...fichiers,
+];
+
+/* Les fichiers qui se sont chargés. ⚠️ Un `fixed.bank.ts` illisible au source
+   est rattrapé dès que la banque se charge — même si ses items arrivent par
+   l'`index.ts` qui le réexporte. C'est le chargement qui compte, pas d'où
+   l'item est vu. */
+const chargesRuntime = new Set();
+
+for (const f of cheminsRuntime) {
+  let mod;
+  try {
+    mod = await import(pathToFileURL(path.join(BANQUES, f)).href);
+    chargesRuntime.add(f);
+    if (f === "index.ts") for (const autre of fichiers) chargesRuntime.add(autre);
+  } catch (e) {
+    // On ne le signale que si la passe source n'avait rien pu lire non plus.
+    if (sourceIllisible.some((s) => s.startsWith(f))) {
+      problemes.push(`${f} : illisible au source ET à l'exécution — ${e.message.split("\n")[0]}`);
+    }
+    continue;
+  }
+
+  for (const valeur of Object.values(mod)) {
+    if (!Array.isArray(valeur)) continue;
+    for (const item of valeur) {
+      if (!item || typeof item !== "object" || !("kind" in item) || !("id" in item)) continue;
+      if (identifiants.has(item.id)) continue; // déjà vu au source
+      identifiants.set(item.id, [f]);
+      nbRuntime += 1;
+
+      const micro = item.microId;
+      if (micro && (item.format === "open" || item.comparator === "contains_keyword")) {
+        ouvertes.set(micro, (ouvertes.get(micro) ?? 0) + 1);
+      }
+      if (item.kind === "template") {
+        if (micro) generateurs.set(micro, (generateurs.get(micro) ?? 0) + 1);
+        continue;
+      }
+      nbFixes += 1;
+      if (micro) densite.set(micro, (densite.get(micro) ?? 0) + 1);
+
+      // Question impossible et propositions en double : les deux contrôles que
+      // le source fait aussi, et qui valent tout autant ici.
+      if (Array.isArray(item.choices) && Array.isArray(item.expected) && item.expected.length) {
+        nbQcm += 1;
+        if (!item.choices.includes(item.expected[0])) {
+          problemes.push(
+            `${f} ${item.id} : QUESTION IMPOSSIBLE — la réponse attendue n'est pas dans les choix\n` +
+              `        attendu : ${item.expected[0]}\n` +
+              `        choix   : ${item.choices.join(" | ")}`,
+          );
+        }
+        if (new Set(item.choices).size !== item.choices.length) {
+          problemes.push(`${f} ${item.id} : deux choix identiques`);
+        }
+      }
+
+      if (typeof item.text === "string") {
+        const empreinte = `${item.text} ${JSON.stringify(item.choices ?? [])}`;
+        if (!enonces.has(empreinte)) enonces.set(empreinte, { enonce: item.text, ou: [] });
+        enonces.get(empreinte).ou.push(`${f} ${item.id}`);
+      }
+    }
+  }
+}
+
+/* Un fichier illisible au source ET non rattrapé à l'exécution reste un
+   problème : on ne peut rien dire de lui, et le taire serait pire. */
+for (const s of sourceIllisible) {
+  const fichier = s.split(" :")[0];
+  if (!chargesRuntime.has(fichier)) {
+    problemes.push(`${s} — mise en forme inattendue, la vérification serait PARTIELLE.`);
+  }
+}
+
 for (const [id, ou] of identifiants) {
   if (ou.length > 1) problemes.push(`identifiant en double : ${id} (${ou.join(", ")})`);
 }
@@ -305,6 +419,11 @@ for (const [, { enonce, ou }] of enonces) {
 console.log(
   `${fichiers.length} fichiers · ${nbFixes} items fixes · ${nbQcm} QCM vérifiables · ${nbChaines} chaînes LaTeX`,
 );
+if (nbRuntime) {
+  console.log(
+    `      (${nbRuntime} items vus À L'EXÉCUTION seulement — banque fabriquée, illisible au source)`,
+  );
+}
 if (nbQcmOpaques) {
   console.log(
     `      (${nbQcmOpaques} QCM aux choix construits à l'exécution — non vérifiables sur le source)`,
@@ -338,10 +457,35 @@ if (fs.existsSync(MICRO_SRC)) {
   const sansOuverte = [];
   let total = 0;
 
+  /* Les micro-compétences se lisent au source quand elles y sont écrites en
+     toutes lettres (CP → CM2). ⚠️ Celles du collège sont FABRIQUÉES —
+     `buildCollegeFrancaisMicroSkills("6e")` — et le fichier ne contient pas un
+     seul `id:`. On tombait alors sur « COUVERTURE : 0 micro-compétences
+     déclarées », suivi d'un « ✅ chacune a des items » vide de sens. */
+  let declarees = [];
   for (const bloc of microSrc.split(/\n\s*\{/).slice(1)) {
     const id = bloc.match(/id:\s*"([a-z0-9_]+)"/)?.[1];
     const label = bloc.match(/label:\s*"([^"]+)"/)?.[1] ?? id;
     if (!id || !bloc.includes("notionId")) continue;
+    declarees.push({ id, label });
+  }
+  let lues = "au source";
+  if (declarees.length === 0) {
+    try {
+      const mod = await import(pathToFileURL(MICRO_SRC).href);
+      const liste = Object.values(mod).find(
+        (v) => Array.isArray(v) && v.every((m) => m && typeof m === "object" && "notionId" in m),
+      );
+      if (Array.isArray(liste)) {
+        declarees = liste.map((m) => ({ id: m.id, label: m.label ?? m.id }));
+        lues = "à l'exécution";
+      }
+    } catch {
+      /* on le dira par le total à zéro, plutôt que par un ✅ mensonger */
+    }
+  }
+
+  for (const { id, label } of declarees) {
     total += 1;
     const f = densite.get(id) ?? 0;
     const g = generateurs.get(id) ?? 0;
@@ -362,8 +506,12 @@ if (fs.existsSync(MICRO_SRC)) {
     if (tab.length > 25) console.log(`      … et ${tab.length - 25} autres`);
   };
 
-  console.log(`\nCOUVERTURE : ${total} micro-compétences déclarées`);
-  if (!vides.length && !sansGenerateur.length && !sansOuverte.length) {
+  console.log(
+    total
+      ? `\nCOUVERTURE : ${total} micro-compétences déclarées (lues ${lues})`
+      : "\nCOUVERTURE : ⛔ aucune micro-compétence lue — ni au source, ni à l'exécution.",
+  );
+  if (total && !vides.length && !sansGenerateur.length && !sansOuverte.length) {
     console.log("      ✅ chacune a des items, un générateur et une question ouverte.");
   }
   liste("⬜ AUCUN ITEM", vides, () => "");
