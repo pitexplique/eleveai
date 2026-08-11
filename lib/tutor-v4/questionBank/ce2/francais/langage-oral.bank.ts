@@ -784,17 +784,26 @@ export const langageOralBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce2_oral_ecouter_open_1",
+    id: "ce2_oral_ecouter_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "langage_oral",
     microId: "ce2_oral_ecouter",
     difficulty: 3,
     theme: "neutral",
-    text: "Quand la maitresse annonce une sortie, beaucoup d'élèves oublient la moitié des informations.\n\nQue peux-tu faire pour ne rien oublier ? Explique.",
-    format: "open",
-    expected: ["noter", "écrire", "ecrire", "répéter", "repeter", "redis", "cahier", "questions"],
-    comparator: "contains_keyword",
+    text: "Quand la maitresse annonce une sortie, beaucoup d'élèves oublient la moitié des informations.\n\nQue fais-tu pour ne rien oublier ?",
+    format: "qcm",
+    choices: [
+      "Je note les chiffres et les dates, je redis dans ma tête ce que je viens d'entendre, et je pose une question si quelque chose manque.",
+      // L'erreur réelle : croire que l'attention seule suffit à retenir.
+      "J'écoute très fort, sans rien écrire : ça rentre mieux.",
+      "Je retiens la première information : les autres suivront toutes seules.",
+      "Je demande à un copain de me le redire après.",
+    ],
+    expected: [
+      "Je note les chiffres et les dates, je redis dans ma tête ce que je viens d'entendre, et je pose une question si quelque chose manque.",
+    ],
+    comparator: "mcq_exact",
     hint: "Pense à ce que tu fais quand quelqu'un te donne un numéro de téléphone.",
     explanation: exp(
       "Une information entendue s'efface vite : on n'en garde que deux ou trois éléments si on ne fait rien.",
@@ -802,7 +811,7 @@ export const langageOralBank: TutorBankItemV4[] = [
       "Pour une sortie, il y a toujours quatre choses : le jour, l'heure, ce qu'il faut apporter, et où l'on va. Note-les dans cet ordre.",
       "On note les informations importantes, on les redit dans sa tête, et on pose une question si quelque chose manque.",
     ),
-    tags: ["ce2", "oral", "ecouter", "methode", "ouverte"],
+    tags: ["ce2", "oral", "ecouter", "methode", "qcm"],
   },
 
   /* ── CE2_ORAL_RELIER_INFOS ────────────────────────────────────────────── */
@@ -836,22 +845,31 @@ export const langageOralBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_oral_relier_infos_open_1",
+    id: "ce2_oral_relier_infos_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "langage_oral",
     microId: "ce2_oral_relier_infos",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis les deux informations, puis ce qu'elles donnent ensemble.",
-    tags: ["ce2", "oral", "relier", "ouverte"],
+    hint: "Deux informations séparées ne disent rien. Ensemble, elles disent quelque chose.",
+    tags: ["ce2", "oral", "relier", "methode"],
     generate: () => {
       const m = randomChoice(MESSAGES);
+      const bonne = `Je note les informations séparément, puis je regarde ce qu'elles donnent ensemble : ${m.conclusion}.`;
       return {
-        text: `${m.message}\n\nQuelles informations dois-tu relier, et qu'est-ce que cela t'apprend ? Explique.`,
-        format: "open" as const,
-        expected: m.conclusion.split(" ").filter((w) => w.length > 4),
-        comparator: "contains_keyword" as const,
+        text: `${m.message}\n\nComment fais-tu pour en tirer quelque chose que personne n'a dit à voix haute ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : compléter le message au lieu de le relier.
+          "J'invente ce qui manque : ça complète le message.",
+          "Je retiens la dernière information : c'est la plus importante.",
+          // La voisine : redire mot à mot, c'est reformuler, pas relier.
+          "Je redis le message mot à mot.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Relier deux informations, c'est en tirer une conclusion que personne n'a dite à voix haute.",
           "Note les informations séparément, puis regarde ce qu'elles impliquent ensemble.",
@@ -893,7 +911,7 @@ export const langageOralBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_oral_reformuler_open_1",
+    id: "ce2_oral_reformuler_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "langage_oral",
@@ -901,14 +919,23 @@ export const langageOralBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Une phrase suffit. Garde ce qui sert, jette le reste.",
-    tags: ["ce2", "oral", "reformuler", "ouverte"],
+    tags: ["ce2", "oral", "reformuler", "methode"],
     generate: () => {
       const m = randomChoice(MESSAGES);
+      const bonne = `Je me demande : si je ne pouvais dire qu'une phrase à quelqu'un qui n'a rien entendu, laquelle ? — « ${m.reformulation} »`;
       return {
-        text: `${m.message}\n\nRedis l'essentiel en une phrase, avec tes mots.`,
-        format: "open" as const,
-        expected: m.reformulation.replace(/[.,]/g, "").split(" ").filter((w) => w.length > 4),
-        comparator: "contains_keyword" as const,
+        text: `${m.message}\n\nComment fais-tu pour redire l'essentiel en une phrase ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : répéter à l'identique, faute d'oser choisir.
+          "Je répète le message mot à mot : c'est plus sûr.",
+          "Je garde la première et la dernière phrase.",
+          // La voisine : donner son avis, c'est autre chose que reformuler.
+          "Je dis ce que j'en pense.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Une reformulation garde les informations utiles et supprime le reste, sans jamais changer le sens.",
           "Demande-toi : si je ne pouvais dire qu'une phrase à quelqu'un qui n'a rien entendu, laquelle ?",
@@ -950,22 +977,30 @@ export const langageOralBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_oral_argumenter_open_1",
+    id: "ce2_oral_argumenter_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "langage_oral",
     microId: "ce2_oral_argumenter",
     difficulty: 3,
     theme: "neutral",
-    hint: "Ton avis, puis « parce que ».",
-    tags: ["ce2", "oral", "argumenter", "ouverte"],
+    hint: "Ton avis, puis « parce que » — et derrière le « parce que », un fait.",
+    tags: ["ce2", "oral", "argumenter", "methode"],
     generate: () => {
       const a = randomChoice(AVIS);
+      const bonne = `Je dis ce que je pense, puis j'ajoute « parce que » avec un fait : « ${a.argument} »`;
       return {
-        text: `${a.question}\n\nDonne ton avis et explique pourquoi tu penses cela.`,
-        format: "open" as const,
-        expected: ["parce que", "car", "puisque", ...a.argument.split(" ").filter((w) => w.length > 6)],
-        comparator: "contains_keyword" as const,
+        text: `${a.question}\n\nComment donnes-tu ton avis pour qu'on puisse te répondre ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : l'avis sans raison ferme la discussion.
+          "Je dis ce que je pense et je m'arrête là : c'est mon avis.",
+          "Je dis « parce que c'est comme ça ».",
+          "Je dis ce que pensent mes copains.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un avis se défend avec une raison : c'est la raison qui permet à l'autre de te répondre.",
           "Dis ce que tu penses, puis ajoute « parce que » et donne un fait, pas une préférence.",
@@ -1007,22 +1042,30 @@ export const langageOralBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_oral_expliquer_demarche_open_1",
+    id: "ce2_oral_expliquer_demarche_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "langage_oral",
     microId: "ce2_oral_expliquer_demarche",
     difficulty: 3,
     theme: "neutral",
-    hint: "Raconte ce que tu as fait dans ta tête, dans l'ordre.",
-    tags: ["ce2", "oral", "demarche", "ouverte"],
+    hint: "Ce qu'on demande, ce n'est pas ce que tu as trouvé, c'est comment.",
+    tags: ["ce2", "oral", "demarche", "methode"],
     generate: () => {
       const d = randomChoice(DEMARCHES);
+      const bonne = `Je dis « J'ai… », puis je raconte l'essai, la vérification, et ce qui m'a décidé : « ${d.explication} »`;
       return {
-        text: `${d.probleme}\n\nExplique comment tu as trouvé.`,
-        format: "open" as const,
-        expected: ["j'ai", "remplac", "récité", "recite", "demandé", "demande", "pensé", "pense", ...d.explication.split(" ").filter((w) => w.length > 6)],
-        comparator: "contains_keyword" as const,
+        text: `${d.probleme}\n\nComment expliques-tu ce que tu as fait pour trouver ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège de la notion : donner le résultat au lieu du chemin.
+          "Je donne le résultat : c'est bien cela qu'on me demande.",
+          "Je récite la règle du cahier.",
+          "Je dis que je le savais déjà.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Une démarche s'explique par les gestes qu'on a faits, pas par le résultat qu'on a obtenu.",
           "Dis « J'ai… », puis raconte l'essai, la vérification, et ce qui t'a décidé.",
@@ -1064,17 +1107,26 @@ export const langageOralBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce2_oral_expose_open_1",
+    id: "ce2_oral_expose_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "langage_oral",
     microId: "ce2_oral_expose",
     difficulty: 3,
     theme: "neutral",
-    text: "Tu dois présenter un exposé de trois minutes devant la classe.\n\nComment le prépares-tu ? Explique.",
-    format: "open",
-    expected: ["notes", "idées", "idees", "trois", "annonce", "conclusion", "regarder", "répète", "repete"],
-    comparator: "contains_keyword",
+    text: "Tu dois présenter un exposé de trois minutes devant la classe.\n\nComment le prépares-tu ?",
+    format: "qcm",
+    choices: [
+      "Je choisis trois idées, j'écris des notes — pas un texte —, j'annonce mon sujet en une phrase, et je parle en regardant la classe.",
+      // L'erreur réelle : un exposé n'est ni une lecture ni une récitation.
+      "J'écris tout mon exposé et je le lis à voix haute.",
+      "J'apprends tout par cœur, mot à mot.",
+      "Je rassemble quinze idées : plus il y en a, mieux c'est.",
+    ],
+    expected: [
+      "Je choisis trois idées, j'écris des notes — pas un texte —, j'annonce mon sujet en une phrase, et je parle en regardant la classe.",
+    ],
+    comparator: "mcq_exact",
     hint: "Il y a ce qu'on prépare avant, et ce qu'on fait au moment de parler.",
     explanation: exp(
       "Un exposé n'est ni une lecture ni une récitation : c'est une parole préparée.",
@@ -1082,7 +1134,7 @@ export const langageOralBank: TutorBankItemV4[] = [
       "Trois minutes, c'est court : trois idées développées passent bien, quinze idées survolées ne laissent rien. Et on termine en proposant des questions.",
       "On choisit trois idées, on écrit des notes, on annonce le sujet, et on parle en regardant la classe.",
     ),
-    tags: ["ce2", "oral", "expose", "methode", "ouverte"],
+    tags: ["ce2", "oral", "expose", "methode", "qcm"],
   },
 
   /* ── CE2_ORAL_REBONDIR ────────────────────────────────────────────────── */
@@ -1116,7 +1168,7 @@ export const langageOralBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_oral_rebondir_open_1",
+    id: "ce2_oral_rebondir_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "langage_oral",
@@ -1124,14 +1176,22 @@ export const langageOralBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Reprends ses mots d'abord, puis ajoute quelque chose.",
-    tags: ["ce2", "oral", "rebondir", "ouverte"],
+    tags: ["ce2", "oral", "rebondir", "methode"],
     generate: () => {
       const e = randomChoice(ECHANGES);
+      const bonne = `Je redis ce qu'il vient de dire, pour montrer que j'ai écouté, puis j'ajoute une question ou une idée : « ${e.bonneReprise} »`;
       return {
-        text: `${e.propos}\n\nQue lui réponds-tu pour faire avancer la discussion ?`,
-        format: "open" as const,
-        expected: ["tu dis", "tu penses", "d'accord", "et si", "j'ajoute", "est-ce que", ...e.bonneReprise.split(" ").filter((w) => w.length > 6)],
-        comparator: "contains_keyword" as const,
+        text: `${e.propos}\n\nComment lui réponds-tu pour faire avancer la discussion ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Le piège fin : reprendre n'est pas répéter. Répéter n'avance rien.
+          "Je répète exactement sa phrase, et rien de plus.",
+          "Je donne mon avis tout de suite, sans reprendre le sien.",
+          "Je dis que je ne suis pas d'accord, et je change de sujet.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Une discussion avance quand chacun s'appuie sur ce que l'autre vient de dire.",
           "Deux temps : redis ce qu'il a dit pour montrer que tu as écouté, puis ajoute une question ou une idée.",
@@ -1173,7 +1233,7 @@ export const langageOralBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_oral_registre_open_1",
+    id: "ce2_oral_registre_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "langage_oral",
@@ -1181,14 +1241,22 @@ export const langageOralBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Il n'y a pas de bonne façon de parler « en général » : cela dépend de la situation.",
-    tags: ["ce2", "oral", "registre", "ouverte"],
+    tags: ["ce2", "oral", "registre", "methode"],
     generate: () => {
       const r = randomChoice(REGISTRES);
+      const bonne = `Je regarde à qui je parle et où je suis, puis je choisis mes mots : « ${r.bonne} »`;
       return {
-        text: `${r.situation}\n\nÉcris ce que tu dirais, et explique pourquoi tu parles comme ça.`,
-        format: "open" as const,
-        expected: ["poli", "adulte", "connais", "situation", "école", "ecole", "copain", "ami", ...r.bonne.split(" ").filter((w) => w.length > 5)],
-        comparator: "contains_keyword" as const,
+        text: `${r.situation}\n\nComment choisis-tu ta façon de parler ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : un seul registre, tenu pour le seul honnête.
+          "Je parle toujours de la même façon : c'est plus honnête.",
+          "Je parle comme à la maison : c'est ma vraie façon de parler.",
+          "J'emploie les mots les plus compliqués que je connais.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Le registre se choisit selon la personne à qui l'on parle et l'endroit où l'on est.",
           "Avec un adulte qu'on connait peu : on dit bonjour, on vouvoie, on ajoute « s'il vous plait ». Avec un copain : on peut aller droit au but.",
@@ -1260,7 +1328,7 @@ export const langageOralBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_oral_tics_verbaux_open_1",
+    id: "ce2_oral_tics_verbaux_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "langage_oral",
@@ -1268,14 +1336,23 @@ export const langageOralBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Ne te contente pas d'enlever le mot : mets autre chose à la place.",
-    tags: ["ce2", "oral", "tics", "ouverte"],
+    tags: ["ce2", "oral", "tics", "methode"],
     generate: () => {
       const t = randomChoice(TICS);
+      const bonne = `J'enlève le mot qui revient — « ${t.tic} » — et je mets un vrai connecteur à la place si le lien manquait : « ${t.mieux} »`;
       return {
-        text: `« ${t.phrase} »\n\nRécris cette phrase pour qu'elle soit plus claire, et dis ce que tu as enlevé.`,
-        format: "open" as const,
-        expected: [...t.tic.split(" ").filter((w) => w.length > 3), "répète", "repete", "connecteur", "puis", "ensuite"],
-        comparator: "contains_keyword" as const,
+        text: `« ${t.phrase} »\n\nComment rends-tu cette phrase plus claire ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Le piège fin : enlever sans remplacer laisse un trou à la place
+          // du lien, et la phrase n'est pas plus claire.
+          "J'enlève le mot qui revient, et je ne mets rien à la place.",
+          "Je remplace le mot par un autre tic, moins voyant.",
+          "Je parle plus vite : on entend moins les tics.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Les tics verbaux remplissent les silences pendant qu'on cherche ses mots. On les enlève en préparant ce qu'on va dire.",
           "Repère le mot qui revient, supprime-le, et mets un vrai connecteur si le lien manquait.",
@@ -1318,26 +1395,32 @@ export const langageOralBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_oral_defi_open_1",
+    id: "ce2_oral_defi_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "langage_oral",
     microId: "ce2_oral_defi",
     difficulty: 3,
     theme: "neutral",
-    hint: "Trois choses : ce que tu as retenu, ton avis, et pourquoi.",
-    tags: ["ce2", "oral", "defi", "ouverte"],
+    // Le cran de plus : deux gestes à enchainer, et c'est leur ORDRE qui fait
+    // qu'on est écouté — reformuler d'abord, donner son avis ensuite.
+    hint: "Deux gestes, et l'ordre compte : d'abord ce que tu as retenu.",
+    tags: ["ce2", "oral", "defi", "methode"],
     generate: () => {
       const m = randomChoice(MESSAGES);
+      const bonne = `D'abord l'essentiel en une phrase — « ${m.reformulation} » —, ensuite « je pense que… parce que… ».`;
       return {
-        text: `${m.message}\n\nRedis l'essentiel en une phrase, puis dis ce que tu en penses et pourquoi.`,
-        format: "open" as const,
-        expected: [
-          "parce que",
-          "car",
-          ...m.reformulation.replace(/[.,]/g, "").split(" ").filter((w) => w.length > 5),
+        text: `${m.message}\n\nOn te demande de redire l'essentiel ET de donner ton avis. Comment enchaines-tu ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Le piège fin : l'avis d'abord, et personne ne sait de quoi on parle.
+          "Je donne mon avis d'abord : c'est le plus intéressant.",
+          "Je mélange les deux dans la même phrase.",
+          "Je redis l'essentiel, et je m'arrête : mon avis, on ne me l'a pas demandé.",
         ],
-        comparator: "contains_keyword" as const,
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Prendre la parole, c'est souvent enchainer deux gestes : reformuler ce qu'on a entendu, puis donner son avis motivé.",
           "D'abord l'essentiel en une phrase. Ensuite « je pense que… parce que… ».",
