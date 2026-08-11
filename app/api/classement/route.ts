@@ -7,10 +7,11 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { verifySessionToken } from "@/lib/server/session";
 import { calculerPointsAvis } from "@/lib/points/feedbackPoints";
+import { pointsSignalementsParEleve } from "@/lib/points/signalementPoints";
 import { estProbablementIA } from "@/lib/detection-ia";
 // « PONTALBA TURPIN Kathalynna » -> « Kathalynna » : prenom seul, jamais le nom
 // de famille (RGPD). Heuristique partagee, voir lib/prenom.ts.
-import { prenomCourt } from "@/lib/prenom";
+import { prenomCourt, prenomFromNom } from "@/lib/prenom";
 
 export async function GET(req: Request) {
   const auth = req.headers.get("authorization") ?? "";
@@ -61,12 +62,44 @@ export async function GET(req: Request) {
     parEleve.set(key, e);
   }
 
-  const classement = [...parEleve.values()]
-    .map((e) => ({
+  // 11/08 : les signalements retenus entrent dans le classement. Un élève peut
+  // n'avoir QUE des signalements (jamais d'avis) : il n'est alors pas dans la
+  // carte ci-dessus, et son prénom n'est nulle part — on va le chercher dans
+  // acces_etablissement, seul endroit qui le connaisse.
+  const pointsSignalements = await pointsSignalementsParEleve(
+    supabase,
+    session.code_etablissement
+  );
+
+  const inconnus = [...pointsSignalements.keys()].filter((c) => !parEleve.has(c));
+  const nomsDeSecours = new Map<string, string | null>();
+  if (inconnus.length > 0) {
+    const { data: comptes } = await supabase
+      .from("acces_etablissement")
+      .select("code_utilisateur, nom")
+      .eq("code_etablissement", session.code_etablissement)
+      .in("code_utilisateur", inconnus);
+    for (const c of comptes ?? []) {
+      nomsDeSecours.set(c.code_utilisateur as string, prenomFromNom(c.nom as string | null));
+    }
+  }
+
+  const classement = [
+    ...[...parEleve.values()].map((e) => ({
       code_eleve: e.code_eleve,
       prenom: prenomCourt(e.prenom),
-      points: calculerPointsAvis(e.nb, e.nbT, e.nbH),
-    }))
+      points:
+        calculerPointsAvis(e.nb, e.nbT, e.nbH) +
+        (pointsSignalements.get(e.code_eleve) ?? 0),
+    })),
+    // Ceux qui n'ont jamais donné d'avis mais ont signalé : « Élève » si son
+    // prénom reste introuvable, jamais un nom de famille.
+    ...inconnus.map((code) => ({
+      code_eleve: code,
+      prenom: nomsDeSecours.get(code) ?? "Élève",
+      points: pointsSignalements.get(code) ?? 0,
+    })),
+  ]
     .filter((e) => e.points > 0)
     .sort((a, b) => b.points - a.points);
 

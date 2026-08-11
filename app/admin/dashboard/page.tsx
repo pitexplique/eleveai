@@ -65,6 +65,18 @@ export default async function AdminDashboardPage() {
         </Link>
 
         <Link
+          href="/admin/signalements"
+          className="block rounded-xl border border-sky-700 bg-sky-900/30 p-4 transition hover:bg-sky-900/50"
+        >
+          <p className="font-bold text-sky-300">🔎 Signalements</p>
+          <p className="mt-1 text-sm text-slate-400">
+            Ce que les gens ont trouvé cassé, avec la question et la notion
+            concernées. Retenir un signalement donne les points à son auteur —
+            c&apos;est le même bouton.
+          </p>
+        </Link>
+
+        <Link
           href="/admin/beta-testeurs"
           className="block rounded-xl border border-indigo-700 bg-indigo-900/30 p-4 transition hover:bg-indigo-900/50"
         >

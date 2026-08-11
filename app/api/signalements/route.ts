@@ -101,6 +101,10 @@ export async function POST(req: Request) {
       connecte,
       profil: texte(body?.profil, 20),
       code_etablissement: connecte ? codeEtab : null,
+      // 11/08 : QUI a signalé. Sans cette colonne on savait qu'un élève du
+      // collège avait trouvé une erreur, jamais lequel — et `points_attribues`
+      // ne pouvait donc créditer personne.
+      code_utilisateur: connecte ? codeUtil : null,
       type_utilisateur: typeUtilisateur,
       type: TYPES.has(typeBrut) ? typeBrut : "bug",
       message,

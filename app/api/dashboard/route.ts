@@ -11,6 +11,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { verifySessionToken } from "@/lib/server/session";
 import { calculerPointsAvis } from "@/lib/points/feedbackPoints";
+import { pointsSignalementsDe } from "@/lib/points/signalementPoints";
 import { estProbablementIA } from "@/lib/detection-ia";
 
 const ROLES_ETABLISSEMENT = new Set(["prof", "principal", "boss"]);
@@ -153,6 +154,14 @@ export async function GET(req: Request) {
       valides.length,
       valides.filter((r) => r.traite).length,
       valides.filter((r) => r.a_lhonneur).length
+    );
+    // 11/08 : les signalements retenus comptent enfin. `points_attribues`
+    // existait depuis le début et n'était lu nulle part — un élève qui
+    // signalait une vraie erreur ne gagnait donc rien.
+    pointsAvis += await pointsSignalementsDe(
+      supabaseAdmin,
+      session.code_etablissement,
+      session.code_utilisateur
     );
   }
 
