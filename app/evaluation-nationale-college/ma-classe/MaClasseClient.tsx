@@ -32,6 +32,13 @@ type BlocBilan = {
   groupe: string;
 };
 
+type MicroBilan = {
+  microId: string;
+  microLabel: string;
+  notionLabel: string;
+  reussi: boolean;
+};
+
 type EleveDeLaClasse = {
   codeUtilisateur: string;
   groupe: string;
@@ -45,9 +52,66 @@ type EleveDeLaClasse = {
     simule: boolean;
     domaines: BlocBilan[];
     tests: BlocBilan[];
+    micros: MicroBilan[];
     passeLe: string;
   } | null;
 };
+
+/**
+ * UNE LIGNE PAR SAVOIR-FAIRE — la colonne de gauche de la restitution
+ * officielle, celle que M. Pelka a envoyée en exemple.
+ *
+ * C'est la moitié de sa demande que les domaines ne servent pas : savoir que
+ * « Nombres et calculs » coince ne dit pas quoi reprendre lundi. Savoir que
+ * « Comparer et ordonner des nombres décimaux » est à 26 %, si.
+ *
+ * ⚠️ TOUS LES ÉLÈVES N'ONT PAS EU LES MÊMES QUESTIONS — le tirage est
+ * individuel, contrairement au jour J où toute la France a le même sujet. Le
+ * «sur combien» varie donc d'une ligne à l'autre, et il est AFFICHÉ : un
+ * 100 % sur deux élèves ne se lit pas comme un 100 % sur vingt.
+ */
+type SavoirFaire = {
+  microId: string;
+  label: string;
+  notionLabel: string;
+  reussites: number;
+  sur: number;
+  pct: number;
+};
+
+function savoirsFaire(eleves: EleveDeLaClasse[]): SavoirFaire[] {
+  const acc = new Map<string, SavoirFaire>();
+  for (const e of eleves) {
+    for (const m of e.resultat?.micros ?? []) {
+      const v = acc.get(m.microId) ?? {
+        microId: m.microId,
+        label: m.microLabel,
+        notionLabel: m.notionLabel,
+        reussites: 0,
+        sur: 0,
+        pct: 0,
+      };
+      v.sur += 1;
+      if (m.reussi) v.reussites += 1;
+      acc.set(m.microId, v);
+    }
+  }
+  return [...acc.values()]
+    .map((v) => ({ ...v, pct: Math.round((v.reussites / v.sur) * 100) }))
+    // ⭐ LE PLUS BAS EN PREMIER. La restitution officielle garde l'ordre des
+    // questions ; nous n'en avons pas de commun puisque le tirage est
+    // individuel. Trier par réussite croissante répond directement à la
+    // question posée — « celles qui posent des difficultés » d'abord.
+    .sort((a, b) => a.pct - b.pct || b.sur - a.sur);
+}
+
+/** Les couleurs de la restitution officielle : rouge, orange, jaune, vert. */
+function couleurPct(pct: number) {
+  if (pct < 30) return "bg-red-100 text-red-900";
+  if (pct < 50) return "bg-orange-100 text-orange-900";
+  if (pct < 70) return "bg-amber-100 text-amber-900";
+  return "bg-emerald-100 text-emerald-900";
+}
 
 const ORDRE: GroupeMaitrise[] = ["a_besoins", "fragile", "satisfaisant"];
 
@@ -93,6 +157,8 @@ export default function MaClasseClient() {
   // demonstration sortaient d'un seul bloc de cinquante eleves — un tas dont
   // un principal ne peut rien faire.
   const [groupes, setGroupes] = useState<string[]>([]);
+  /** Les groupes du niveau dont personne n'a encore passé l'épreuve. */
+  const [groupesEnAttente, setGroupesEnAttente] = useState<string[]>([]);
   const [groupe, setGroupe] = useState("");
 
   const charger = useCallback(async () => {
@@ -123,11 +189,29 @@ export default function MaClasseClient() {
         setAdmin(Boolean(j.admin));
         setEleves(j.eleves as EleveDeLaClasse[]);
         setSimule(Boolean(j.contientDesSimulations));
-        const g = (j.groupes as string[]) ?? [];
-        setGroupes(g);
-        // On garde le groupe choisi s'il existe encore apres un changement de
-        // niveau ou de matiere ; sinon on prend le premier.
-        setGroupe((actuel) => (actuel && g.includes(actuel) ? actuel : g[0] ?? ""));
+        // ⭐ UN GROUPE N'ENTRE DANS CETTE VUE QUE SI L'UN DES SIENS A PASSÉ
+        // L'ÉPREUVE (règle posée le 11/08, demande de Frédéric : « enlève la
+        // 6°C… mes anciens élèves doivent avoir leurs comptes actifs »).
+        //
+        // La 6ᵉ C de Dimitile est sa classe de l'an dernier : vingt comptes
+        // bien vivants, qui n'ont rien à faire dans une évaluation de rentrée
+        // qu'ils ne passeront pas. ⛔ ILS NE SONT PAS SUPPRIMÉS POUR AUTANT —
+        // ce serait effacer une année de travail. C'est la VUE qui les ignore.
+        //
+        // La règle se maintient toute seule : le jour où une classe passe
+        // l'épreuve, elle apparaît ; tant qu'elle ne l'a pas passée, elle
+        // n'encombre pas. Aucune liste d'exclusion à tenir à jour.
+        const eleves = j.eleves as EleveDeLaClasse[];
+        const concernes = [
+          ...new Set(eleves.filter((e) => e.resultat).map((e) => e.groupe)),
+        ].sort();
+        setGroupes(concernes);
+        setGroupesEnAttente(
+          ((j.groupes as string[]) ?? []).filter((g) => !concernes.includes(g)),
+        );
+        setGroupe((actuel) =>
+          actuel && concernes.includes(actuel) ? actuel : concernes[0] ?? "",
+        );
       }
     } catch {
       setErreur("Lecture impossible. Réessayez.");
@@ -169,6 +253,18 @@ export default function MaClasseClient() {
     ...(passes[0]?.resultat?.domaines ?? []),
     ...(passes[0]?.resultat?.tests ?? []),
   ].map((b) => ({ id: b.id, label: b.label }));
+
+  // ⚠️ ON N'AFFICHE PAS UN SAVOIR-FAIRE VU PAR DEUX ÉLÈVES (seuil posé le
+  // 11/08). Le tirage étant individuel, la première synthèse sortait 122
+  // lignes pour 15 élèves, dont beaucoup à « 100 % (1/1) » ou « 0 % (0/1) ».
+  // Ces lignes-là ne disent rien de la classe — elles disent qu'un enfant a eu
+  // de la chance, ou pas. Les laisser en tête du tableau trié par réussite
+  // croissante, c'est envoyer un professeur préparer une séance sur un hasard.
+  // Le jour J le problème n'existe pas : toute la France a le même sujet.
+  const MINIMUM_ELEVES = 3;
+  const tousSavoirs = savoirsFaire(passes);
+  const savoirs = tousSavoirs.filter((sf) => sf.sur >= MINIMUM_ELEVES);
+  const savoirsEcartes = tousSavoirs.length - savoirs.length;
 
   const parColonne = colonnes.map((c) => {
     const blocsDe = (e: EleveDeLaClasse) =>
@@ -323,7 +419,7 @@ export default function MaClasseClient() {
         {/* LE GROUPE CLASSE. Il n'apparaît que s'il y en a plusieurs — un
             collège à une seule 6ᵉ n'a rien à choisir, et un bouton unique
             ferait croire qu'il manque quelque chose. */}
-        {groupes.length > 1 && (
+        {groupes.length > 0 && (
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <span className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
               Classe
@@ -351,6 +447,17 @@ export default function MaClasseClient() {
                 )}
               </button>
             ))}
+            {/* Dit sans en faire un onglet : ces classes existent, elles n'ont
+                simplement pas passé l'épreuve. Les taire laisserait croire
+                qu'elles n'existent pas ; leur donner un bouton vide laisserait
+                croire qu'il y a quelque chose à y voir. */}
+            {groupesEnAttente.length > 0 && (
+              <span className="text-xs font-medium text-[#1d1c16]/55">
+                {groupesEnAttente.join(", ")} n&apos;
+                {groupesEnAttente.length > 1 ? "ont" : "a"} pas passé
+                l&apos;épreuve.
+              </span>
+            )}
           </div>
         )}
 
@@ -413,6 +520,84 @@ export default function MaClasseClient() {
                 </div>
               )}
             </section>
+
+            {/* ── SAVOIR-FAIRE PAR SAVOIR-FAIRE ─────────────────────────────
+                La colonne de gauche de sa restitution officielle. C'est la
+                moitié de sa demande que les domaines ne servent pas : « Nombres
+                et calculs coince » ne dit pas quoi reprendre lundi. */}
+            {savoirs.length > 0 && (
+              <section className="mt-5 rounded-2xl bg-white/90 p-4 shadow-[0_10px_28px_-16px_rgba(29,28,22,0.55)] sm:p-5">
+                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
+                  Compétence par compétence
+                </p>
+                <p className="mt-1 max-w-3xl text-sm font-medium leading-6 text-[#1d1c16]/75">
+                  Ce que la classe réussit et ce qu&apos;elle rate, savoir-faire
+                  par savoir-faire, du plus bas au plus haut. C&apos;est cette
+                  liste qui se transforme en séance.
+                </p>
+                {savoirsEcartes > 0 && (
+                  <p className="mt-1 max-w-3xl text-xs font-medium leading-5 text-[#1d1c16]/60">
+                    {savoirsEcartes} autre{savoirsEcartes > 1 ? "s" : ""}{" "}
+                    savoir-faire {savoirsEcartes > 1 ? "ont" : "a"} été
+                    rencontré{savoirsEcartes > 1 ? "s" : ""} par moins de{" "}
+                    {MINIMUM_ELEVES} élèves : chaque élève tire ses propres
+                    questions, et sur si peu de monde un pourcentage ne dirait
+                    rien. Ils apparaîtront quand la classe aura passé
+                    l&apos;épreuve plus souvent.
+                  </p>
+                )}
+                <div className="mt-3 overflow-x-auto">
+                  <table className="w-full min-w-[520px] text-left text-sm">
+                    <thead>
+                      <tr className="border-b border-[#1d1c16]/12 text-[10px] font-black uppercase tracking-[0.12em] text-[#1d1c16]/55">
+                        <th className="px-3 py-2 w-8">N°</th>
+                        <th className="px-3 py-2">Savoir-faire</th>
+                        <th className="px-3 py-2 whitespace-nowrap">
+                          % réussite
+                        </th>
+                        <th className="px-3 py-2 whitespace-nowrap">Sur</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {savoirs.map((sf, i) => (
+                        <tr
+                          key={sf.microId}
+                          className="border-b border-[#1d1c16]/8 last:border-0"
+                        >
+                          <td className="px-3 py-2 text-xs font-medium text-[#1d1c16]/45">
+                            {i + 1}
+                          </td>
+                          <td className="px-3 py-2">
+                            <span className="font-black">{sf.label}</span>
+                            {sf.notionLabel && (
+                              <span className="ml-2 text-xs font-medium text-[#1d1c16]/50">
+                                {sf.notionLabel}
+                              </span>
+                            )}
+                          </td>
+                          <td className="px-3 py-2">
+                            <span
+                              className={`inline-block rounded-md px-2 py-0.5 text-xs font-black ${couleurPct(sf.pct)}`}
+                            >
+                              {sf.pct} %
+                            </span>
+                          </td>
+                          {/* ⚠️ « SUR COMBIEN » EST AFFICHÉ, et ce n'est pas un
+                              détail : le tirage étant individuel, tous les
+                              élèves n'ont pas eu la même question. Un 100 %
+                              sur deux élèves ne vaut pas un 100 % sur vingt,
+                              et sans cette colonne on lirait les deux pareil. */}
+                          <td className="px-3 py-2 text-xs font-medium text-[#1d1c16]/60 whitespace-nowrap">
+                            {sf.reussites}/{sf.sur} élève
+                            {sf.sur > 1 ? "s" : ""}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            )}
 
             {/* ── DOMAINE PAR DOMAINE ───────────────────────────────────── */}
             {parColonne.length > 0 && (

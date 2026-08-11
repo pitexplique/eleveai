@@ -68,6 +68,7 @@ export type EleveDeLaClasse = {
     simule: boolean;
     domaines: BlocBilan[];
     tests: BlocBilan[];
+    micros: MicroBilan[];
     passeLe: string;
   } | null;
 };
@@ -79,6 +80,30 @@ type BlocBilan = {
   total: number;
   groupe: string;
 };
+
+type MicroBilan = {
+  microId: string;
+  microLabel: string;
+  notionLabel: string;
+  reussi: boolean;
+};
+
+function micros(source: unknown): MicroBilan[] {
+  if (!Array.isArray(source)) return [];
+  return source.flatMap((m) => {
+    if (!m || typeof m !== "object") return [];
+    const o = m as Record<string, unknown>;
+    if (typeof o.microId !== "string") return [];
+    return [
+      {
+        microId: o.microId,
+        microLabel: String(o.microLabel ?? o.microId),
+        notionLabel: String(o.notionLabel ?? ""),
+        reussi: o.reussi === true,
+      },
+    ];
+  });
+}
 
 function blocs(source: unknown): BlocBilan[] {
   if (!Array.isArray(source)) return [];
@@ -247,6 +272,7 @@ export async function GET(req: Request) {
         simule: details.simule === true,
         domaines: blocs(details.themes),
         tests: blocs(details.tests),
+        micros: micros(details.micros),
         passeLe: String(r.created_at ?? ""),
       },
     };
