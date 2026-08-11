@@ -1153,17 +1153,33 @@ export const orthographeBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce1_orth_defi_ouverte_1",
+    id: "ce1_orth_defi_meth_1",
     niveau: "ce1",
     matiere: "francais",
     notionId: "orthographe",
     microId: "ce1_orth_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "« Les margouillats grimpent sur le mur. »\n\nQuatre lettres de cette phrase ne s'entendent pas du tout. Explique avec tes mots comment tu sais qu'il faut les écrire.",
-    format: "open",
-    expected: ["les", "plusieurs", "pluriel", "s", "nt", "petit mot", "sujet", "devant"],
-    comparator: "contains_keyword",
+    // ⚠️ 11/08/2026 — cet item était la SEULE des quatorze questions ouvertes
+    // du CE1 à accepter une réponse vide de sens : son mot-clé « s » validait
+    // « je sais pas » et « j'aime les bananes ». C'est le défaut exact qui a
+    // fait convertir les cent vingt ouvertes du CE2 le même jour.
+    // ⏳ Les treize autres ouvertes du CE1 ne sont pas laxistes à ce test,
+    //    mais sept portent des mots-clés de trois lettres ou moins — « la »,
+    //    « il », « roi », « fil », « ss ». Chantier à part.
+    text: "« Les margouillats grimpent sur le mur. »\n\nQuatre lettres de cette phrase ne s'entendent pas du tout. Comment sais-tu qu'il faut les écrire ?",
+    format: "qcm",
+    choices: [
+      "C'est « Les », au début, qui prévient : il annonce plusieurs, donc « margouillats » prend un « s » et « grimpent » prend « -nt ».",
+      // LE piège : ces quatre lettres-là ne s'entendent jamais, même lentement.
+      "Je les entends quand je lis lentement.",
+      "Je mets un « s » à tous les mots de la phrase.",
+      "Je regarde la fin de la phrase : le point dit s'il y en a plusieurs.",
+    ],
+    expected: [
+      "C'est « Les », au début, qui prévient : il annonce plusieurs, donc « margouillats » prend un « s » et « grimpent » prend « -nt ».",
+    ],
+    comparator: "mcq_exact",
     hint: "Regarde le petit mot du début, puis la fin du nom, puis la fin du verbe.",
     explanation: exp(
       "Le « s » du nom et le « -nt » du verbe s'écrivent sans jamais s'entendre. Seul le petit mot du début prévient.",
@@ -1171,6 +1187,6 @@ export const orthographeBank: TutorBankItemV4[] = [
       "« Les » annonce plusieurs. Donc « margouillats » prend un « s », et « grimpent » prend « -nt ». Dis la phrase au singulier : ta bouche dit presque la même chose.",
       "C'est « les », au début, qui prévient qu'il faut écrire le « s » et le « -nt ».",
     ),
-    tags: ["ce1", "orthographe", "defi", "methode", "open"],
+    tags: ["ce1", "orthographe", "defi", "methode", "qcm"],
   },
 ];
