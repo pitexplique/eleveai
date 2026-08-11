@@ -282,9 +282,15 @@ export default function ColonneGauche() {
               <p className="px-3 py-1 text-[11px] font-medium uppercase tracking-wide text-slate-400">
                 Participer
               </p>
+              {/* « Devenir bêta testeur » est ici pour tout le monde, invité
+                  compris : les 50 places sont ouvertes aux parents et aux profs
+                  autant qu'aux élèves, et neuf visiteurs sur dix arrivent sans
+                  compte. La réserver aux connectés fermerait la porte à ceux
+                  qu'on cherche justement. */}
               {[
                 { label: "Donner mon avis", href: "/votre-avis" },
                 { label: "Signaler une erreur", href: "/contact" },
+                { label: "Devenir bêta testeur", href: "/devenir-beta-testeur" },
               ].map((l) => (
                 <Link
                   key={l.href}
