@@ -6,6 +6,7 @@ import {
   getCoachBrevetItemsByIds,
   getCoachBrevetProblemById,
 } from "@/lib/coach-brevet";
+import BoutonSignalerQuestion from "@/components/signalement/BoutonSignalerQuestion";
 
 type TabMode = "search" | "correction";
 
@@ -231,6 +232,12 @@ export default function CoachBrevetClient() {
                       >
                         {item.theme}
                       </span>
+                      {/* Ne s'affiche que pour un bêta testeur accepté. */}
+                      <BoutonSignalerQuestion
+                        page="/coach-brevet"
+                        question={generated.text}
+                        notion={item.notionId}
+                      />
                     </div>
                   </div>
 

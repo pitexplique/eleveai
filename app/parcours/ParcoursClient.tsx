@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import { CanvasRenderer } from "@/lib/canvas";
 import { MarkdownMath } from "@/components/MarkdownMath";
+import BoutonSignalerQuestion from "@/components/signalement/BoutonSignalerQuestion";
 import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
 import { buildLearningVideoHref } from "@/lib/videoSearch";
@@ -821,9 +822,17 @@ export default function ParcoursClient() {
                       <h2 className="text-2xl font-black">{q.notionLabel}</h2>
                     </div>
 
-                    <span className="rounded-full bg-amber-100 px-4 py-2 text-xs font-black text-amber-800 ring-1 ring-amber-200">
-                      ⭐⭐⭐ défi
-                    </span>
+                    <div className="flex items-center gap-2">
+                      {/* Ne s'affiche que pour un bêta testeur accepté. */}
+                      <BoutonSignalerQuestion
+                        page="/parcours"
+                        question={q.question.text}
+                        notion={q.notionId}
+                      />
+                      <span className="rounded-full bg-amber-100 px-4 py-2 text-xs font-black text-amber-800 ring-1 ring-amber-200">
+                        ⭐⭐⭐ défi
+                      </span>
+                    </div>
                   </div>
 
                   <MarkdownMath className={`whitespace-pre-line font-semibold leading-relaxed ${classText.question(classBoard)}`}>

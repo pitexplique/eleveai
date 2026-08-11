@@ -8,6 +8,7 @@ import {
   getCoachBacItemsByIds,
   getCoachBacProblemById,
 } from "@/lib/coach-bac-spe";
+import BoutonSignalerQuestion from "@/components/signalement/BoutonSignalerQuestion";
 
 type TabMode = "search" | "correction";
 
@@ -383,6 +384,13 @@ export default function CoachBacSpeClient() {
                       >
                         {item.theme}
                       </span>
+
+                      {/* Ne s'affiche que pour un bêta testeur accepté. */}
+                      <BoutonSignalerQuestion
+                        page="/coach-bac-spe"
+                        question={generated.text}
+                        notion={item.notionId}
+                      />
                     </div>
                   </div>
 

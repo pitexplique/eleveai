@@ -14,6 +14,7 @@ import {
   ClassBoardToggle,
   classText,
 } from "@/components/parcours/ClassBoard";
+import BoutonSignalerQuestion from "@/components/signalement/BoutonSignalerQuestion";
 
 const NIVEAUX: ParcoursNiveauIa[] = ["a1", "a2", "b1", "b2", "c1"];
 
@@ -261,7 +262,15 @@ export default function ParcoursIaClient() {
                     <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-black text-slate-600">
                       {index + 1} / {questions.length}
                     </span>
-                    <span className="text-xs font-bold text-slate-400">{q.notionLabel}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold text-slate-400">{q.notionLabel}</span>
+                      {/* Ne s'affiche que pour un bêta testeur accepté. */}
+                      <BoutonSignalerQuestion
+                        page="/parcours-ia"
+                        question={q.question.text}
+                        notion={q.notionId}
+                      />
+                    </div>
                   </div>
 
                   <p className={`mb-4 font-bold text-slate-800 ${classText.question(classBoard)}`}>{q.question.text}</p>
