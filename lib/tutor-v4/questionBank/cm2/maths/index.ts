@@ -29,6 +29,13 @@ import { algorithmiqueBank } from "./algorithmique.bank";
 import { massesBank} from "./masses.bank"
 
 import { contenancesBank} from "./contenance.bank"
+// ⚠️ OUBLIÉE JUSQU'AU 11/08. Le fichier existait, ses 65 items portaient bien
+// `notionId: "echelle"`, la notion est déclarée dans le knowledge — mais la
+// banque n'était importée nulle part. Autrement dit : aucune question
+// d'échelle n'a jamais été servie, ni dans le coach, ni dans les épreuves.
+// Trouvée en cherchant pourquoi la tranche « résolution de problèmes » de
+// grandeurs et mesures s'épuisait au cinquième passage.
+import { echellesBank } from "./echelles.bank";
 // Les 7 micro-compétences que l'audit avait trouvées vides (01/08) — quatre
 // sur les fractions, deux sur les figures planes, une sur les probabilités.
 // Voir scripts/auditer-banque.mjs.
@@ -66,6 +73,7 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
 
   ...applyMathsKeyboardFree(massesBank),
   ...applyMathsKeyboardFree(contenancesBank),
+  ...applyMathsKeyboardFree(echellesBank),
 
   ...applyMathsKeyboardFree(complementsEvalNationaleBank),
 ];
