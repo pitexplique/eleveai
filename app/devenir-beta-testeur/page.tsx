@@ -151,13 +151,20 @@ export default function DevenirBetaTesteurPage() {
               </div>
             ))}
           </div>
-          <p className="mt-3 text-sm font-semibold text-white/55">
-            ⚠️ À VALIDER PAR FRÉDÉRIC — À la fin de l’année scolaire, la place
-            s’arrête. On peut repostuler pour l’année suivante avec ce qu’on a
-            trouvé : rien n’est reconduit automatiquement. (Cette phrase engage
-            pour des années : dis-moi si tu veux la formuler autrement avant la
-            mise en ligne.)
-          </p>
+          {/* La sortie de bêta, écrite AVANT la mise en ligne. Sans cette
+              phrase, on créait 50 accès gratuits à vie sans l'avoir décidé —
+              et la FAQ des tarifs porte déjà une promesse de ce genre. */}
+          <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+            <p className="font-black text-white">Et après ?</p>
+            <p className="mt-1 text-sm font-semibold text-white/70">
+              Ta place court jusqu’au {FIN_BETA}, puis elle s’arrête. Elle est{" "}
+              <strong className="text-white">
+                renouvelable chaque année, après approbation
+              </strong>{" "}
+              — rien n’est reconduit tout seul. En juin, tu repostules avec ce
+              que tu as trouvé pendant l’année.
+            </p>
+          </div>
         </section>
 
         {/* ── NOUS RECHERCHONS + FORMULAIRE ────────────────────────────── */}
