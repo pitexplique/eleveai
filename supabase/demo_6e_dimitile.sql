@@ -30,10 +30,15 @@
 
 do $$
 declare
-  -- ⚠️⚠️ METTRE ICI LE CODE ÉTABLISSEMENT DE M. PELKA, celui avec lequel il se
-  -- connecte déjà. Sans ça, la classe se crée sous un établissement qui
-  -- n'existe pas et il ne verra rien.
-  v_etab text := 'REMPLACER-PAR-LE-CODE-DIMITILE';
+  -- Le code établissement du collège Capitaine Dimitile, celui avec lequel
+  -- M. Pelka se connecte déjà (donné par Frédéric le 11/08/2026).
+  --
+  -- ⚠️ VÉRIFIER AVANT DE JOUER LE SCRIPT que c'est bien la valeur exacte de
+  -- `code_etablissement` dans `acces_etablissement` — la casse compte :
+  --   select distinct code_etablissement from public.acces_etablissement;
+  -- Un code qui ne correspond à rien créerait trente élèves dans un
+  -- établissement fantôme, invisible pour lui.
+  v_etab text := 'DIMITILE';
 
   v_prenoms text[] := array[
     'Anaïs','Malik','Soline','Ryan','Kelly','Dimitri','Océane','Yohan',
