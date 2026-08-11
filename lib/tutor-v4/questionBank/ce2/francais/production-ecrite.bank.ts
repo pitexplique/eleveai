@@ -1004,7 +1004,12 @@ export const productionEcriteBank: TutorBankItemV4[] = [
       const d = randomChoice(DIALOGUES);
       const bonne = `J'annonce avec deux points, puis j'encadre les paroles avec des guillemets : ${d.correct}`;
       return {
-        text: `Tu veux écrire qu'un personnage parle.\n\nComment ponctues-tu ses paroles ?`,
+        // ⚠️ Le dialogue tiré DOIT apparaitre dans l'énoncé. Sans lui, ce
+        // gabarit ne produisait qu'un seul énoncé, et le micro tombait de
+        // onze énoncés distincts à six. Mesuré le 11/08 après conversion.
+        // On montre la version fautive : elle varie, et elle ne donne pas la
+        // réponse — contrairement à la version correcte.
+        text: `Un camarade a écrit :\n\n${d.fautes[0]}\n\nComment faut-il ponctuer les paroles d'un personnage ?`,
         format: "qcm" as const,
         choices: [
           bonne,
