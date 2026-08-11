@@ -289,7 +289,10 @@ export default function ColonneGauche() {
                   qu'on cherche justement. */}
               {[
                 { label: "Donner mon avis", href: "/votre-avis" },
-                { label: "Signaler une erreur", href: "/contact" },
+                // 11/08 : pointait vers /contact, un formulaire général qui ne
+                // gardait ni la question, ni la notion, ni la ressource visée.
+                // Le lien promettait donc un geste que rien ne recevait.
+                { label: "Signaler une erreur", href: "/signaler-une-erreur" },
                 { label: "Devenir bêta testeur", href: "/devenir-beta-testeur" },
               ].map((l) => (
                 <Link

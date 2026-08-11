@@ -398,6 +398,8 @@ function MenuCompte({
               { label: "Tableau de bord", href: dashboardHref },
               { label: "Mes apprentissages", href: "/parcours" },
               { label: "Donner mon avis", href: "/votre-avis" },
+              { label: "Signaler une erreur", href: "/signaler-une-erreur" },
+              { label: "Devenir bêta testeur", href: "/devenir-beta-testeur" },
             ].map((l) => (
               <Link
                 key={l.href}
