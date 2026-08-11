@@ -217,6 +217,43 @@ function lienRemediation(classe: string, matiere: string, sf: SavoirFaire) {
   );
 }
 
+/**
+ * L'EXPORT TABLEUR — la seconde moitié de ce que rend l'institution.
+ *
+ * Le document professeur de la DEPP est explicite : la restitution
+ * individuelle est un PDF, celle de la classe « se présente sous la forme d'un
+ * fichier tableur afin de faciliter le traitement des résultats ». Les deux ne
+ * servent pas à la même chose — le PDF se transmet et s'archive, le tableur se
+ * trie, se filtre, et devient un emploi du temps de groupes de besoins.
+ *
+ * ⚠️ TROIS DÉTAILS SANS LESQUELS EXCEL EN FRANÇAIS OUVRE UNE BOUILLIE :
+ *  • le séparateur est le POINT-VIRGULE (Excel FR lit la virgule comme un
+ *    séparateur décimal, pas de colonne) ;
+ *  • le fichier commence par un BOM UTF-8, sans quoi « à besoins » devient
+ *    « Ã  besoins » ;
+ *  • les fins de ligne sont en CRLF.
+ * Ce sont trois lignes de code et la différence entre un fichier utilisable et
+ * un fichier qu'on nous renvoie en disant « ça ne marche pas ».
+ */
+function versCsv(lignes: string[][]): string {
+  const echappe = (v: string) =>
+    /[";\r\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v;
+  return (
+    "\uFEFF" + lignes.map((l) => l.map(echappe).join(";")).join("\r\n")
+  );
+}
+
+function telecharger(nom: string, contenu: string) {
+  const url = URL.createObjectURL(
+    new Blob([contenu], { type: "text/csv;charset=utf-8;" }),
+  );
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = nom;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 const ORDRE: GroupeMaitrise[] = ["a_besoins", "fragile", "satisfaisant"];
 
 function estGroupe(v: string | null | undefined): v is GroupeMaitrise {
@@ -415,6 +452,50 @@ export default function MaClasseClient() {
     .filter((e) => e.resultat?.groupe === "a_besoins")
     .map((e) => e.nom ?? e.codeUtilisateur);
 
+  // Le tableur : une ligne par élève, une colonne par domaine et par test —
+  // la forme exacte de la restitution de classe officielle.
+  function exporterTableur() {
+    const entete = [
+      "Classe",
+      "Code",
+      "Élève",
+      "A passé l'épreuve",
+      "Groupe d'ensemble",
+      "Score",
+      "Sur",
+      ...colonnes.flatMap((c) => [c.label, `${c.label} (réussites)`]),
+      "Durée (min)",
+      "Arrêté par le chrono",
+    ];
+    const lignes = duGroupe.map((e) => {
+      const tous = [
+        ...(e.resultat?.domaines ?? []),
+        ...(e.resultat?.tests ?? []),
+      ];
+      const g = (v: string | null | undefined) =>
+        estGroupe(v) ? GROUPES[v].label : "";
+      return [
+        e.groupe,
+        e.codeUtilisateur,
+        e.nom ?? "",
+        e.resultat ? "oui" : "non",
+        g(e.resultat?.groupe),
+        e.resultat ? String(e.resultat.score) : "",
+        e.resultat ? String(e.resultat.total) : "",
+        ...colonnes.flatMap((c) => {
+          const b = tous.find((x) => x.id === c.id);
+          return b ? [g(b.groupe), `${b.justes}/${b.total}`] : ["", ""];
+        }),
+        e.resultat?.dureeSec ? String(Math.round(e.resultat.dureeSec / 60)) : "",
+        e.resultat?.chronoEcoule ? "oui" : "",
+      ];
+    });
+    telecharger(
+      `evaluation-${classe}-${matiere}-${groupe || "classe"}.csv`,
+      versCsv([entete, ...lignes]),
+    );
+  }
+
   if (besoinConnexion) {
     return (
       <main className="min-h-screen" style={FOND}>
@@ -441,7 +522,7 @@ export default function MaClasseClient() {
       <div className="mx-auto max-w-6xl px-4 py-8 sm:py-12">
         <Link
           href="/evaluation-nationale-college"
-          className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/60 hover:text-[#1d1c16]"
+          className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/60 hover:text-[#1d1c16] print:hidden"
         >
           ← Les évaluations du collège
         </Link>
@@ -449,6 +530,33 @@ export default function MaClasseClient() {
         <h1 className="mt-3 font-serif text-3xl font-black leading-tight sm:text-4xl">
           Votre classe, avant le jour J
         </h1>
+        {/* ── L'EN-TÊTE DU DOCUMENT IMPRIMÉ ──────────────────────────────
+            Invisible à l'écran, indispensable sur le papier. Une feuille qui
+            circule sans dire de quel collège, de quelle classe et de quel jour
+            elle parle devient inexploitable dès la deuxième — et un bilan de
+            rentrée, ça se compare à celui d'après. */}
+        <div className="hidden print:block">
+          <p className="text-xs font-bold">
+            {etab || "Établissement"} · {classe.replace(/e$/, "ᵉ")}{" "}
+            {groupe && `— ${groupe}`} ·{" "}
+            {matiere === "maths" ? "Mathématiques" : "Français"}
+          </p>
+          <p className="text-xs">
+            Évaluation nationale — épreuve blanche EleveAI. Édité le{" "}
+            {new Date().toLocaleDateString("fr-FR", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+            .
+          </p>
+          {simule && (
+            <p className="mt-1 text-xs font-black">
+              ⚠️ Document de démonstration — résultats simulés.
+            </p>
+          )}
+        </div>
+
         <p className="mt-3 max-w-3xl text-sm font-medium leading-6 text-[#1d1c16]/75">
           Chaque élève est rangé dans les trois groupes de l&apos;institution —
           à besoins, fragile, satisfaisant — domaine par domaine. Ce sont les
@@ -474,7 +582,7 @@ export default function MaClasseClient() {
             Un principal ne le voit jamais : la route ignore `?etab=` sur une
             session, et refuserait de toute façon de lire un autre collège. */}
         {admin && (
-          <div className="mt-5 rounded-xl border-2 border-[#1d1c16]/15 bg-white/80 p-3">
+          <div className="mt-5 rounded-xl border-2 border-[#1d1c16]/15 bg-white/80 p-3 print:hidden">
             <label
               className="flex flex-wrap items-center gap-2 text-sm font-black"
               htmlFor="etab"
@@ -507,7 +615,32 @@ export default function MaClasseClient() {
           </div>
         )}
 
-        <div className="mt-5 flex flex-wrap items-center gap-3">
+        {/* ⛔ PAS DE LIBRAIRIE PDF. L'impression du navigateur donne un document
+            au texte sélectionnable, dans la police de la page, sans un octet
+            téléchargé — là où jsPDF & co. rembarquent une mise en page qu'il
+            faudrait tenir en double. La feuille de style `print:` ci-dessous
+            fait le reste. */}
+        {eleves && eleves.length > 0 && (
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="mt-5 inline-flex items-center gap-2 rounded-xl border-2 px-4 py-2.5 text-sm font-black transition hover:bg-[#1d1c16]/5 print:hidden"
+            style={{ borderColor: accent, color: accent }}
+          >
+            🖨️ Imprimer ou enregistrer en PDF
+          </button>
+        )}
+        {eleves && eleves.length > 0 && (
+          <button
+            type="button"
+            onClick={exporterTableur}
+            className="ml-2 mt-5 inline-flex items-center gap-2 rounded-xl border-2 border-[#1d1c16]/20 px-4 py-2.5 text-sm font-black transition hover:bg-[#1d1c16]/5 print:hidden"
+          >
+            📊 Télécharger le tableur
+          </button>
+        )}
+
+        <div className="mt-5 flex flex-wrap items-center gap-3 print:hidden">
           {(["6e", "4e"] as const).map((c) => (
             <button
               key={c}
@@ -555,7 +688,7 @@ export default function MaClasseClient() {
             collège à une seule 6ᵉ n'a rien à choisir, et un bouton unique
             ferait croire qu'il manque quelque chose. */}
         {groupes.length > 0 && (
-          <div className="mt-3 flex flex-wrap items-center gap-2">
+          <div className="mt-3 flex flex-wrap items-center gap-2 print:hidden">
             <span className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
               Classe
             </span>
@@ -1060,6 +1193,65 @@ export default function MaClasseClient() {
           </>
         )}
       </div>
+
+      {/* ── LA FEUILLE D'IMPRESSION ──────────────────────────────────────────
+          Écrite en CSS brut et non en classes Tailwind : elle touche des
+          choses qui n'ont pas de classe — le fond de la page, les marges de
+          la feuille, et surtout `print-color-adjust`.
+
+          ⚠️ SANS `print-color-adjust: exact`, LES NAVIGATEURS SUPPRIMENT LES
+          APLATS À L'IMPRESSION. L'anneau des groupes de maîtrise et les
+          pastilles de couleur sortiraient blancs — c'est-à-dire que le
+          document perdrait précisément ce qui se lit d'un coup d'œil.
+
+          Et `break-inside: avoid` sur les blocs : une conclusion coupée en
+          deux par un saut de page, personne ne la lit en entier. */}
+      <style>{`
+        @media print {
+          @page {
+            margin: 14mm;
+          }
+          html,
+          body {
+            background: #fff !important;
+          }
+          main {
+            background: #fff !important;
+          }
+          * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+          /* Les ombres portées deviennent des salissures grises sur papier. */
+          section,
+          div {
+            box-shadow: none !important;
+          }
+          section {
+            break-inside: avoid;
+            page-break-inside: avoid;
+          }
+          /* Le tableau élève par élève est le seul qu'on autorise à courir sur
+             deux pages — à trente élèves il ne tient pas, et l'empêcher de se
+             couper le rejetterait entier sur une feuille vide. */
+          table {
+            break-inside: auto;
+          }
+          tr {
+            break-inside: avoid;
+          }
+          thead {
+            display: table-header-group;
+          }
+          /* Rien ne défile sur du papier. */
+          .overflow-x-auto {
+            overflow: visible !important;
+          }
+          table {
+            min-width: 0 !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }
