@@ -1623,10 +1623,12 @@ const NATURE_FONCTION: QcmItem[] = [
     methode: "Sujet ? complément ? attribut ? C'est la phrase qui répond.",
   },
   {
-    text: "« Complément du nom », c'est…",
+    // ⚠️ Ce pool sert aussi au CM1, qui n'a pas encore rencontré le complément
+    // du nom — il entre au CM2. « Épithète », lui, est abordé dès le CM1.
+    text: "« Épithète », c'est…",
     correct: "une fonction",
     wrongs: ["une nature", "une classe grammaticale", "un temps du verbe"],
-    methode: "Complément de quelque chose : c'est un rôle, donc une fonction.",
+    methode: "Un adjectif (nature) peut être épithète ou attribut (fonctions) selon la phrase.",
   },
   {
     text: "Dans « Les enfants ramassent des letchis », quelle est la nature de « des » ?",
@@ -3184,6 +3186,768 @@ const DISCOURS_RECIT: QcmItem[] = [
   },
 ];
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   LE CM1 — mise au niveau du BO, 11/08/2026
+
+   Le CM1 sautait aux constituants de la phrase sans jamais nommer les classes
+   de mots ni les types de phrases. Le BO leur consacre deux rubriques
+   entières au CM1, sur des corpus plus longs qu'au CE2.
+
+   ⚠️ CE QUI N'EST PAS RÉUTILISÉ DU CM2, ET POURQUOI :
+   — le participe passé. Au CM1, le BO ne demande que l'auxiliaire ÊTRE.
+     L'accord avec le COD antéposé (auxiliaire avoir) entre au CM2. Servir le
+     pool du CM2 mettrait le CM1 en avance d'un an sur son programme ;
+   — l'épithète. Au CM1 c'est « aborder la notion » dans le groupe nominal ;
+     le complément du nom, lui, n'arrive qu'au CM2. Le pool COMPLEMENT_NOM
+     oppose les deux : il est hors de portée ici.
+   Le reste se partage : COD_COI, NATURE_FONCTION et MANIPULATIONS sont écrits
+   au niveau que le BO demande dès le CM1.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const TYPES_PHRASES: QcmItem[] = [
+  {
+    text: "« Range ton cartable. » De quel type est cette phrase ?",
+    correct: "impérative",
+    wrongs: ["déclarative", "interrogative", "exclamative"],
+    methode: "Elle donne un ordre. Attention : « exclamative » est une forme, pas un type.",
+  },
+  {
+    text: "« Où vas-tu ? » De quel type est cette phrase ?",
+    correct: "interrogative",
+    wrongs: ["déclarative", "impérative", "négative"],
+    methode: "Elle pose une question et attend une réponse.",
+  },
+  {
+    text: "« Le margouillat dort sur le mur. » De quel type est cette phrase ?",
+    correct: "déclarative",
+    wrongs: ["interrogative", "impérative", "exclamative"],
+    methode: "Elle raconte un fait, sans rien demander ni ordonner.",
+  },
+  {
+    text: "Combien y a-t-il de types de phrases ?",
+    correct: "trois : déclaratif, interrogatif, impératif",
+    wrongs: ["deux", "quatre", "cinq"],
+    methode: "L'exclamation et la négation sont des FORMES, pas des types.",
+  },
+  {
+    text: "« Comme la mer est belle ! » Cette phrase est déclarative, à la forme…",
+    correct: "exclamative",
+    wrongs: ["négative", "interrogative", "impérative"],
+    methode: "Un type et une forme se cumulent toujours.",
+  },
+  {
+    text: "L'exclamation est…",
+    correct: "une forme, pas un type",
+    wrongs: ["un type de phrase", "un temps du verbe", "une classe de mots"],
+    methode: "C'est le piège de la notion : le point d'exclamation ne donne pas le type.",
+  },
+  {
+    text: "« Il ne pleut pas. » Cette phrase est à la forme…",
+    correct: "négative",
+    wrongs: ["exclamative", "interrogative", "impérative"],
+    methode: "« ne … pas » encadre le verbe : c'est la marque de la forme négative.",
+  },
+  {
+    text: "À quoi sert une phrase impérative ?",
+    correct: "à donner un ordre ou un conseil",
+    wrongs: [
+      "à poser une question",
+      "à raconter un fait",
+      "à décrire un lieu",
+    ],
+    methode: "Elle attend qu'on fasse quelque chose, pas qu'on réponde.",
+  },
+  {
+    text: "Quel signe termine une phrase interrogative ?",
+    correct: "le point d'interrogation",
+    wrongs: ["le point d'exclamation", "le point", "la virgule"],
+    methode: "Il annonce qu'on attend une réponse.",
+  },
+  {
+    text: "Une phrase déclarative peut-elle être à la forme négative ?",
+    correct: "Oui : « Il ne pleut pas. »",
+    wrongs: ["Non, jamais", "Seulement à l'oral", "Seulement au pluriel"],
+    methode: "Type et forme sont deux choses différentes, et se combinent.",
+  },
+  {
+    text: "« Ne cours pas dans le couloir ! » Quel type et quelle forme ?",
+    correct: "impérative, à la forme négative",
+    wrongs: [
+      "déclarative, à la forme exclamative",
+      "interrogative, à la forme négative",
+      "impérative, à la forme exclamative",
+    ],
+    methode: "Un ordre — donc impérative — et « ne … pas » — donc négative.",
+  },
+  {
+    text: "Le type d'une phrase se lit sur…",
+    correct: "ce qu'elle fait : raconter, demander, ordonner",
+    wrongs: [
+      "sa longueur",
+      "son premier mot",
+      "le nombre de virgules",
+    ],
+    methode: "Demande-toi ce que la phrase attend de celui qui l'écoute.",
+  },
+];
+
+const TRANSFORMER_PHRASE: QcmItem[] = [
+  {
+    text: "« Tu viens. » Transforme en phrase interrogative.",
+    correct: "Est-ce que tu viens ?",
+    wrongs: ["Tu viens !", "Tu ne viens pas.", "Viens."],
+    methode: "« Est-ce que » au début, point d'interrogation à la fin.",
+  },
+  {
+    text: "« Tu viens. » Transforme en phrase impérative.",
+    correct: "Viens.",
+    wrongs: ["Est-ce que tu viens ?", "Tu viens !", "Tu ne viens pas."],
+    methode: "L'impératif se passe du pronom sujet.",
+  },
+  {
+    text: "« Il pleut. » Mets à la forme négative.",
+    correct: "Il ne pleut pas.",
+    wrongs: ["Il pleut !", "Est-ce qu'il pleut ?", "Pleut-il ?"],
+    methode: "On encadre le verbe par « ne » et « pas ».",
+  },
+  {
+    text: "Quelles sont les trois façons de poser une question ?",
+    correct: "l'intonation, « est-ce que », l'inversion du sujet",
+    wrongs: [
+      "le point, la virgule, le tiret",
+      "le présent, le passé, le futur",
+      "le nom, le verbe, l'adjectif",
+    ],
+    methode: "« Tu viens ? », « Est-ce que tu viens ? », « Viens-tu ? »",
+  },
+  {
+    text: "« Ton frère vient. » Pose la question par inversion du sujet.",
+    correct: "Ton frère vient-il ?",
+    wrongs: [
+      "Est-ce que ton frère vient ?",
+      "Ton frère vient ?",
+      "Vient ton frère.",
+    ],
+    methode: "Le pronom passe derrière le verbe, relié par un trait d'union.",
+  },
+  {
+    text: "Pour passer à la forme négative, on encadre le verbe par…",
+    correct: "« ne » et « pas »",
+    wrongs: ["deux virgules", "des guillemets", "« est-ce que »"],
+    methode: "Les deux mots, toujours : à l'écrit, « ne » ne s'oublie pas.",
+  },
+  {
+    text: "« Range ta chambre. » Transforme en phrase déclarative.",
+    correct: "Tu ranges ta chambre.",
+    wrongs: [
+      "Ranges-tu ta chambre ?",
+      "Ne range pas ta chambre.",
+      "Range ta chambre !",
+    ],
+    methode: "On rend le pronom sujet au verbe, et on raconte au lieu d'ordonner.",
+  },
+  {
+    text: "« Les enfants jouent. » Mets à la forme exclamative.",
+    correct: "Comme les enfants jouent !",
+    wrongs: [
+      "Les enfants jouent ?",
+      "Les enfants ne jouent pas.",
+      "Jouez !",
+    ],
+    methode: "« Comme », « Que », « Quel » ouvrent l'exclamation.",
+  },
+  {
+    text: "Que change-t-on pour passer d'un type de phrase à un autre ?",
+    correct: "l'ordre des mots et la ponctuation",
+    wrongs: [
+      "seulement le temps du verbe",
+      "seulement le sujet",
+      "rien du tout",
+    ],
+    methode: "Le sens de base reste ; c'est la façon de le dire qui change.",
+  },
+  {
+    text: "« Est-ce que tu as fini ? » Écris la même question par inversion.",
+    correct: "As-tu fini ?",
+    wrongs: ["Tu as fini.", "Tu n'as pas fini.", "Finis !"],
+    methode: "On supprime « est-ce que » et on renverse le pronom.",
+  },
+  {
+    text: "À l'oral, comment pose-t-on souvent une question ?",
+    correct: "en montant la voix à la fin",
+    wrongs: [
+      "en parlant plus fort",
+      "en parlant plus lentement",
+      "en répétant le verbe",
+    ],
+    methode: "L'intonation suffit à l'oral ; à l'écrit, il faut le point d'interrogation.",
+  },
+  {
+    text: "« Il ne vient pas. » Mets à la forme affirmative.",
+    correct: "Il vient.",
+    wrongs: ["Vient-il ?", "Il vient !", "Viens."],
+    methode: "On retire les deux mots de la négation, et rien d'autre.",
+  },
+];
+
+const CLASSES_MOTS: QcmItem[] = [
+  {
+    text: "Dans « le margouillat », quelle est la nature du mot « le » ?",
+    correct: "un déterminant : un article défini",
+    wrongs: ["un pronom", "une préposition", "un adjectif"],
+    methode: "Il est collé devant le nom et l'annonce.",
+  },
+  {
+    text: "Dans « un cari », le mot « un » est…",
+    correct: "un article indéfini",
+    wrongs: ["un article défini", "un déterminant possessif", "un adverbe"],
+    methode: "« un, une, des » : on ne sait pas encore lequel.",
+  },
+  {
+    text: "Dans « ma sœur », le mot « ma » est…",
+    correct: "un déterminant possessif",
+    wrongs: ["un article défini", "un déterminant démonstratif", "un pronom"],
+    methode: "Il dit à qui c'est : mon, ton, son, ma, ta, sa…",
+  },
+  {
+    text: "Dans « ce bateau », le mot « ce » est…",
+    correct: "un déterminant démonstratif",
+    wrongs: ["un article indéfini", "un déterminant possessif", "une conjonction"],
+    methode: "Il montre : ce, cet, cette, ces.",
+  },
+  {
+    text: "Quelle liste ne contient QUE des conjonctions de coordination ?",
+    correct: "mais, ou, et, donc",
+    wrongs: [
+      "le, la, les, des",
+      "je, tu, il, elle",
+      "à, dans, sur, avec",
+    ],
+    methode: "mais, ou, et, donc, or, ni, car : les sept.",
+  },
+  {
+    text: "Dans « Il court vite », quelle est la nature du mot « vite » ?",
+    correct: "un adverbe",
+    wrongs: ["un adjectif", "un nom", "un déterminant"],
+    methode: "Il dit comment se passe l'action, et il ne change jamais.",
+  },
+  {
+    text: "Les adverbes sont des mots…",
+    correct: "invariables : ils ne changent jamais",
+    wrongs: [
+      "qui s'accordent avec le nom",
+      "qui se conjuguent",
+      "qui prennent un s au pluriel",
+    ],
+    methode: "« ils courent vite » : « vite » ne bouge pas.",
+  },
+  {
+    text: "À quoi sert un déterminant ?",
+    correct: "à annoncer le nom et à donner son genre et son nombre",
+    wrongs: [
+      "à conjuguer le verbe",
+      "à relier deux phrases",
+      "à dire comment se passe l'action",
+    ],
+    methode: "« des letchis » : c'est « des » qui prévient qu'il y en a plusieurs.",
+  },
+  {
+    text: "Dans « Les enfants jouent souvent dehors », combien y a-t-il d'adverbes ?",
+    correct: "deux : « souvent » et « dehors »",
+    wrongs: ["un seul", "trois", "aucun"],
+    methode: "L'un dit quand, l'autre dit où : les deux accompagnent le verbe.",
+  },
+  {
+    text: "Un adverbe accompagne surtout…",
+    correct: "le verbe",
+    wrongs: ["le déterminant", "le nom", "la conjonction"],
+    methode: "Adverbe : le mot dit « auprès du verbe ».",
+  },
+  {
+    text: "Dans « Léa et Tom », le mot « et » est…",
+    correct: "une conjonction de coordination",
+    wrongs: ["un déterminant", "un adverbe", "un pronom"],
+    methode: "Il relie deux éléments de même rang.",
+  },
+  {
+    text: "Comment reconnait-on un déterminant ?",
+    correct: "Il est collé devant un nom",
+    wrongs: [
+      "Il est collé devant un verbe",
+      "Il termine la phrase",
+      "Il porte toujours un accent",
+    ],
+    methode: "Cherche d'abord le nom, puis regarde le petit mot devant lui.",
+  },
+];
+
+const PRONOMS_SUJET_OBJET: QcmItem[] = [
+  {
+    text: "Dans « Il dort », le mot « il » est un pronom personnel…",
+    correct: "sujet",
+    wrongs: ["complément", "possessif", "démonstratif"],
+    methode: "Qui est-ce qui dort ? « il ».",
+  },
+  {
+    text: "Dans « Je le vois », le mot « le » est un pronom personnel…",
+    correct: "complément",
+    wrongs: ["sujet", "possessif", "démonstratif"],
+    methode: "Le sujet est « Je » ; « le » est ce qu'on voit.",
+  },
+  {
+    text: "« Le pêcheur répare son filet. » Remplace le SUJET par un pronom.",
+    correct: "Il répare son filet.",
+    wrongs: [
+      "Le répare son filet.",
+      "Lui répare son filet.",
+      "Le pêcheur le répare.",
+    ],
+    methode: "Un groupe sujet se remplace par un pronom sujet.",
+  },
+  {
+    text: "« Léa mange une mangue. » Remplace le COMPLÉMENT par un pronom.",
+    correct: "Léa la mange.",
+    wrongs: [
+      "Léa elle mange.",
+      "Léa mange la.",
+      "Elle mange une mangue.",
+    ],
+    methode: "Le pronom complément se place DEVANT le verbe.",
+  },
+  {
+    text: "Quels sont les pronoms personnels SUJETS ?",
+    correct: "je, tu, il, elle, nous, vous, ils, elles",
+    wrongs: [
+      "me, te, le, la, les",
+      "mon, ton, son, notre",
+      "qui, que, où",
+    ],
+    methode: "Ce sont ceux qui commandent la terminaison du verbe.",
+  },
+  {
+    text: "Où se place le pronom personnel complément ?",
+    correct: "devant le verbe",
+    wrongs: [
+      "après le verbe",
+      "au début de la phrase",
+      "à la fin de la phrase",
+    ],
+    methode: "« Je LE vois » et non « Je vois le ».",
+  },
+  {
+    text: "Dans « Les enfants les ramassent », quelle est la nature du PREMIER « les » ?",
+    correct: "un déterminant",
+    wrongs: ["un pronom sujet", "un pronom complément", "un adverbe"],
+    methode: "Il est collé devant le nom « enfants ».",
+  },
+  {
+    text: "Dans « Les enfants les ramassent », quelle est la nature du SECOND « les » ?",
+    correct: "un pronom complément",
+    wrongs: ["un déterminant", "un pronom sujet", "une conjonction"],
+    methode: "Il est devant le verbe et remplace ce qu'on ramasse.",
+  },
+  {
+    text: "À quoi sert un pronom ?",
+    correct: "à remplacer un nom déjà dit, pour ne pas le répéter",
+    wrongs: [
+      "à conjuguer le verbe",
+      "à accorder l'adjectif",
+      "à poser une question",
+    ],
+    methode: "Sans lui, on redirait le même nom à chaque phrase.",
+  },
+  {
+    text: "« Tom et Léa arrivent. » Remplace le sujet par un pronom.",
+    correct: "Ils arrivent.",
+    wrongs: ["Il arrive.", "Elles arrivent.", "Les arrivent."],
+    methode: "Deux personnes dont un garçon : « ils ».",
+  },
+  {
+    text: "Le pronom sujet commande…",
+    correct: "la terminaison du verbe",
+    wrongs: [
+      "le genre du nom",
+      "la place du complément",
+      "rien du tout",
+    ],
+    methode: "« je chante », « nous chantons » : c'est lui qui décide.",
+  },
+  {
+    text: "« Nous voyons les baleines. » Remplace le complément par un pronom.",
+    correct: "Nous les voyons.",
+    wrongs: [
+      "Nous voyons les.",
+      "Nous elles voyons.",
+      "Elles nous voient.",
+    ],
+    methode: "Le pronom complément passe devant le verbe.",
+  },
+];
+
+const GN_EPITHETE: QcmItem[] = [
+  {
+    text: "Dans « le grand bateau », comment le groupe nominal est-il construit ?",
+    correct: "Déterminant + Adjectif + Nom",
+    wrongs: [
+      "Déterminant + Nom + Adjectif",
+      "Nom + Déterminant",
+      "Adjectif + Nom seulement",
+    ],
+    methode: "L'adjectif peut se placer avant ou après le nom.",
+  },
+  {
+    text: "Dans « une plage déserte », comment le groupe nominal est-il construit ?",
+    correct: "Déterminant + Nom + Adjectif",
+    wrongs: [
+      "Déterminant + Adjectif + Nom",
+      "Nom + Adjectif seulement",
+      "Adjectif + Déterminant",
+    ],
+    methode: "Ici l'adjectif suit le nom.",
+  },
+  {
+    text: "Dans « le vieux tamarin », quel est le nom noyau ?",
+    correct: "tamarin",
+    wrongs: ["vieux", "le", "il n'y en a pas"],
+    methode: "C'est le nom principal, celui qui commande tout le groupe.",
+  },
+  {
+    text: "Le nom noyau, c'est…",
+    correct: "le nom principal du groupe, celui qui commande l'accord",
+    wrongs: [
+      "le premier mot du groupe",
+      "le mot le plus long",
+      "l'adjectif du groupe",
+    ],
+    methode: "Déterminant et adjectif s'accordent avec lui.",
+  },
+  {
+    text: "Un adjectif collé au nom s'appelle…",
+    correct: "une épithète",
+    wrongs: ["un attribut", "un déterminant", "un adverbe"],
+    methode: "Épithète : il est dans le groupe nominal, sans verbe entre les deux.",
+  },
+  {
+    text: "Dans « des letchis mûrs », quel mot est épithète ?",
+    correct: "mûrs",
+    wrongs: ["des", "letchis", "aucun mot"],
+    methode: "C'est l'adjectif, collé au nom noyau.",
+  },
+  {
+    text: "Peut-on supprimer l'épithète ?",
+    correct: "Oui : le groupe nominal tient encore debout",
+    wrongs: [
+      "Non, jamais",
+      "Seulement au pluriel",
+      "Seulement si elle est devant le nom",
+    ],
+    methode: "« des letchis mûrs » → « des letchis ». On perd un détail, pas la phrase.",
+  },
+  {
+    text: "Dans « le petit bateau blanc », combien y a-t-il d'épithètes ?",
+    correct: "deux : « petit » et « blanc »",
+    wrongs: ["une seule", "trois", "aucune"],
+    methode: "Un adjectif avant le nom, un après : les deux sont épithètes.",
+  },
+  {
+    text: "Avec quoi l'épithète s'accorde-t-elle ?",
+    correct: "avec le nom noyau",
+    wrongs: [
+      "avec le verbe",
+      "avec le sujet de la phrase",
+      "avec le déterminant seulement",
+    ],
+    methode: "Le nom noyau est le donneur d'accord du groupe.",
+  },
+  {
+    text: "Un groupe nominal contient toujours…",
+    correct: "un nom",
+    wrongs: ["un verbe", "un adverbe", "une conjonction"],
+    methode: "C'est ce qui lui donne son nom : groupe NOMINAL.",
+  },
+  {
+    text: "Dans « ma vieille case », quel est le déterminant ?",
+    correct: "ma",
+    wrongs: ["vieille", "case", "il n'y en a pas"],
+    methode: "Le petit mot du début, qui annonce le nom.",
+  },
+  {
+    text: "Comment trouver le nom noyau d'un groupe nominal ?",
+    correct: "On enlève les adjectifs : le nom qui reste est le noyau",
+    wrongs: [
+      "On prend le premier mot",
+      "On prend le dernier mot",
+      "On compte les lettres",
+    ],
+    methode: "Ce qui ne peut pas partir sans casser le groupe, c'est le noyau.",
+  },
+];
+
+const PARTICIPE_PASSE_ETRE: QcmItem[] = [
+  {
+    text: "« Elle est allé___ au marché. »",
+    correct: "allée",
+    wrongs: ["allé", "allés", "aller"],
+    methode: "Avec « être », le participe s'accorde avec le sujet : féminin singulier.",
+  },
+  {
+    text: "Avec l'auxiliaire ÊTRE, le participe passé s'accorde avec…",
+    correct: "le sujet",
+    wrongs: ["le complément", "l'auxiliaire", "personne"],
+    methode: "C'est la seule règle du CM1, et elle ne souffre pas d'exception.",
+  },
+  {
+    text: "« Les enfants sont parti___ tôt. »",
+    correct: "partis",
+    wrongs: ["parti", "partie", "parties"],
+    methode: "Sujet masculin pluriel.",
+  },
+  {
+    text: "« Elles sont venu___ hier. »",
+    correct: "venues",
+    wrongs: ["venu", "venus", "venue"],
+    methode: "Sujet féminin pluriel : « -ues ».",
+  },
+  {
+    text: "« Tom et Léo sont arrivé___ ensemble. »",
+    correct: "arrivés",
+    wrongs: ["arrivé", "arrivée", "arrivées"],
+    methode: "Deux sujets masculins : masculin pluriel.",
+  },
+  {
+    text: "« Ma sœur est resté___ à la maison. »",
+    correct: "restée",
+    wrongs: ["resté", "restés", "rester"],
+    methode: "« rester » se conjugue avec être : le participe suit le sujet.",
+  },
+  {
+    text: "Comment savoir quelle terminaison mettre au participe passé ?",
+    correct: "On cherche le sujet, puis on regarde son genre et son nombre",
+    wrongs: [
+      "On regarde la fin de la phrase",
+      "On écoute comment le mot se dit",
+      "On met toujours un « s »",
+    ],
+    methode: "L'accord ne s'entend pas : il se raisonne.",
+  },
+  {
+    text: "« Le bateau est parti___ ce matin. »",
+    correct: "parti",
+    wrongs: ["partie", "partis", "partir"],
+    methode: "Sujet masculin singulier : rien à ajouter.",
+  },
+  {
+    text: "Dans « Elles sont sorties », pourquoi la terminaison « -es » ?",
+    correct: "Parce que le sujet « Elles » est féminin pluriel",
+    wrongs: [
+      "Parce que le verbe est long",
+      "Parce qu'il y a le mot « sont »",
+      "Parce que c'est du passé",
+    ],
+    methode: "On remonte au sujet, toujours.",
+  },
+  {
+    text: "« Mes cousines sont descendu___ à la plage. »",
+    correct: "descendues",
+    wrongs: ["descendu", "descendus", "descendue"],
+    methode: "« Mes cousines » : féminin pluriel.",
+  },
+  {
+    text: "Avec « être », le participe passé se comporte comme…",
+    correct: "un adjectif : il s'accorde avec le sujet",
+    wrongs: [
+      "un adverbe : il ne change jamais",
+      "un déterminant",
+      "un nom",
+    ],
+    methode: "« Elles sont parties » se comporte comme « Elles sont contentes ».",
+  },
+  {
+    text: "« Nous sommes rentré___. » (le groupe est composé de garçons)",
+    correct: "rentrés",
+    wrongs: ["rentré", "rentrée", "rentrées"],
+    methode: "« Nous » masculin pluriel : « -és ».",
+  },
+];
+
+const MARQUES_TEMPS_PERSONNE: QcmItem[] = [
+  {
+    text: "Dans « nous chantions », quelle est la marque de PERSONNE ?",
+    correct: "-ons",
+    wrongs: ["-i-", "chant-", "-ions"],
+    methode: "Elle dit QUI fait l'action : « -ons » va avec « nous ».",
+  },
+  {
+    text: "Dans « nous chantions », quelle est la marque de TEMPS de l'imparfait ?",
+    correct: "-i-",
+    wrongs: ["-ons", "chant-", "-ez"],
+    methode: "L'imparfait se reconnait à son « -ai- » ou son « -i- ».",
+  },
+  {
+    text: "Quelle lettre annonce le futur dans « je chanterai » ?",
+    correct: "le « r »",
+    wrongs: ["le « a » final", "le « e »", "le « i »"],
+    methode: "Le « -r- » est la marque du futur, dans tous les verbes.",
+  },
+  {
+    text: "Un verbe conjugué se découpe en…",
+    correct: "un radical et une terminaison",
+    wrongs: [
+      "un sujet et un verbe",
+      "un nom et un adjectif",
+      "deux mots séparés",
+    ],
+    methode: "Le radical porte le sens, la terminaison dit qui et quand.",
+  },
+  {
+    text: "Dans « tu chantais », que dit la terminaison « -ais » ?",
+    correct: "le temps ET la personne",
+    wrongs: [
+      "seulement le temps",
+      "seulement la personne",
+      "ni l'un ni l'autre",
+    ],
+    methode: "« -ai- » pour l'imparfait, « -s » pour « tu » : deux marques en une.",
+  },
+  {
+    text: "Quelle marque de personne va avec « vous » ?",
+    correct: "-ez",
+    wrongs: ["-ons", "-ent", "-s"],
+    methode: "Sauf trois exceptions : vous faites, vous dites, vous êtes.",
+  },
+  {
+    text: "Quelle marque de personne va avec « ils » au présent ?",
+    correct: "-ent",
+    wrongs: ["-ez", "-ons", "-s"],
+    methode: "Elle s'écrit et ne s'entend pas.",
+  },
+  {
+    text: "Dans « il chantera », où se trouve la marque du futur ?",
+    correct: "dans le « r » de « -ra »",
+    wrongs: ["dans le « a » final", "dans « chant »", "il n'y en a pas"],
+    methode: "Le « a » est la marque de personne ; le « r » celle du temps.",
+  },
+  {
+    text: "Dans « je finissais », quel est le radical ?",
+    correct: "finiss-",
+    wrongs: ["je", "-ais", "fin-"],
+    methode: "C'est le morceau qui ne bouge pas d'une personne à l'autre.",
+  },
+  {
+    text: "À quoi sert de savoir isoler le radical d'un verbe ?",
+    correct: "à retrouver le verbe et à ne pas se tromper de terminaison",
+    wrongs: [
+      "à compter les syllabes",
+      "à trouver le sujet",
+      "à mettre le nom au pluriel",
+    ],
+    methode: "Radical d'un côté, terminaison de l'autre : on ne mélange plus.",
+  },
+  {
+    text: "Laquelle de ces formes est à l'imparfait ?",
+    correct: "nous marchions",
+    wrongs: ["nous marchons", "nous marcherons", "nous avons marché"],
+    methode: "Le « -i- » avant la marque de personne signe l'imparfait.",
+  },
+  {
+    text: "Laquelle de ces formes est au futur ?",
+    correct: "vous parlerez",
+    wrongs: ["vous parliez", "vous parlez", "vous avez parlé"],
+    methode: "Le « -r- » signe le futur.",
+  },
+];
+
+const RADICAL_VARIATIONS: QcmItem[] = [
+  {
+    text: "« Nous ___ le riz. » (manger, au présent)",
+    correct: "mangeons",
+    wrongs: ["mangons", "mangions", "mangez"],
+    methode: "On garde le « e » pour conserver le son « j ».",
+  },
+  {
+    text: "Pourquoi écrit-on « nous mangeons » avec un « e » ?",
+    correct: "Pour garder le son « j » devant le « o »",
+    wrongs: [
+      "Parce que c'est un verbe irrégulier",
+      "Parce que « nous » est au pluriel",
+      "Pour faire plus joli",
+    ],
+    methode: "Sans lui, on lirait « manguons ».",
+  },
+  {
+    text: "« Nous ___ un dessin. » (commencer, au présent)",
+    correct: "commençons",
+    wrongs: ["commencons", "commencions", "commencez"],
+    methode: "La cédille garde le son « s » devant le « o ».",
+  },
+  {
+    text: "Pourquoi une cédille dans « nous commençons » ?",
+    correct: "Pour garder le son « s » devant le « o »",
+    wrongs: [
+      "Parce que le verbe est long",
+      "Parce qu'il y a deux « c »",
+      "Pour marquer le pluriel",
+    ],
+    methode: "Sans elle, on lirait « commenkons ».",
+  },
+  {
+    text: "« Nous ___ la corde. » (lancer, au présent)",
+    correct: "lançons",
+    wrongs: ["lancons", "lancions", "lancez"],
+    methode: "Même règle que « commencer » : cédille devant le « o ».",
+  },
+  {
+    text: "« J'___ mon frère. » (appeler, au présent)",
+    correct: "appelle",
+    wrongs: ["appele", "appélle", "appelles"],
+    methode: "Les verbes en -eler doublent souvent le « l ».",
+  },
+  {
+    text: "« Tu ___ les feuilles. » (jeter, au présent)",
+    correct: "jettes",
+    wrongs: ["jetes", "jètes", "jeter"],
+    methode: "Les verbes en -eter doublent souvent le « t ».",
+  },
+  {
+    text: "Les verbes en -yer changent le « y » en…",
+    correct: "« i » devant un e muet : il nettoie",
+    wrongs: [
+      "« e » : il netteoe",
+      "rien du tout",
+      "« ï » : il nettoïe",
+    ],
+    methode: "nettoyer, essuyer, appuyer : tous suivent cette règle.",
+  },
+  {
+    text: "« Il ___ la vitre. » (nettoyer, au présent)",
+    correct: "nettoie",
+    wrongs: ["nettoye", "nettoies", "nettoyer"],
+    methode: "Le « y » devient « i » devant la terminaison muette.",
+  },
+  {
+    text: "« Nous ___ le sable. » (nettoyer, au présent)",
+    correct: "nettoyons",
+    wrongs: ["nettoions", "nettoyions", "nettoyez"],
+    methode: "Avec « nous », la terminaison s'entend : le « y » reste.",
+  },
+  {
+    text: "Le radical d'un verbe du premier groupe…",
+    correct: "peut changer légèrement selon la personne",
+    wrongs: [
+      "ne change jamais",
+      "change à chaque personne",
+      "disparait au pluriel",
+    ],
+    methode: "Il ne change pas de sens, seulement d'orthographe, et pour le son.",
+  },
+  {
+    text: "« Vous ___ la table. » (déplacer, au présent)",
+    correct: "déplacez",
+    wrongs: ["déplaçez", "déplacons", "déplacions"],
+    methode: "⚠️ Pas de cédille devant « e » : le « c » se dit déjà « s ».",
+  },
+];
+
 // ── CONJUGAISON ─────────────────────────────────────────────────────────────
 // Present / imparfait / futur / infinitif sont produits par le moteur
 // parametrique (conjugationEngine.ts). Restent ici les notions conceptuelles.
@@ -3496,6 +4260,11 @@ function conjugaisonQuestion(microId: string): Generated {
     return qcm(IMPERATIF_CONDITIONNEL);
   }
   if (microId.includes("discours_recit")) return qcm(DISCOURS_RECIT);
+  /* CM1 (11/08/2026) : les marques de temps et de personne, et les variations
+     du radical du premier groupe. Deux attendus explicites du BO au CM1, qui
+     tombaient jusqu'ici sur le moteur du présent. */
+  if (microId.includes("radical_variations")) return qcm(RADICAL_VARIATIONS);
+  if (microId.includes("conj_marques")) return qcm(MARQUES_TEMPS_PERSONNE);
 
   // Present / imparfait / futur / infinitif : moteur parametrique (centaines de
   // variantes). Passe compose et valeur des temps : pools rediges (notions plus
@@ -3540,6 +4309,15 @@ function grammaireQuestion(microId: string): Generated {
      passer avant « cm2_gram_attribut », sinon on lui sert la reconnaissance de
      l'attribut au lieu de son accord.
      Ces `microId` n'existent qu'au CM2 : le CM1 et la 6e ne les portent pas. */
+  /* ⚠️ CM1 EN PREMIER, sur deux notions que le CM2 traite plus loin :
+     — « participe_passe_etre » avant « participe_passe » : au CM1 le BO ne
+       demande QUE l'auxiliaire être. Servir le pool du CM2, qui contient
+       l'accord avec le COD antéposé, mettrait le CM1 un an en avance ;
+     — « gn_epithete » avant « epithete » : au CM1 c'est le groupe nominal et
+       son noyau ; le complément du nom, qu'oppose le pool du CM2, n'arrive
+       qu'au CM2. */
+  if (microId.includes("participe_passe_etre")) return qcm(PARTICIPE_PASSE_ETRE);
+  if (microId.includes("gn_epithete")) return qcm(GN_EPITHETE);
   if (microId.includes("participe_passe")) return qcm(PARTICIPE_PASSE);
   if (microId.includes("orth_attribut")) return qcm(ACCORD_ATTRIBUT);
   if (microId.includes("attribut")) return qcm(ATTRIBUT);
@@ -3547,6 +4325,13 @@ function grammaireQuestion(microId: string): Generated {
   // 6e : l'antécédent et les manipulations syntaxiques (ajoutées le 11/08/2026).
   if (microId.includes("pronom_antecedent")) return qcm(PRONOM_ANTECEDENT);
   if (microId.includes("manipulations")) return qcm(MANIPULATIONS);
+  /* CM1 (11/08/2026). « types_phrases » et « transformer_phrase » passent
+     avant la branche « phrase_simple » plus bas, qui ne les attraperait pas
+     mais dont la lecture laisserait un doute. */
+  if (microId.includes("types_phrases")) return qcm(TYPES_PHRASES);
+  if (microId.includes("transformer_phrase")) return qcm(TRANSFORMER_PHRASE);
+  if (microId.includes("classes_mots")) return qcm(CLASSES_MOTS);
+  if (microId.includes("gram_pronoms")) return qcm(PRONOMS_SUJET_OBJET);
   if (microId.includes("cod_coi")) return qcm(COD_COI);
   if (microId.includes("cc_sortes")) return qcm(CC_SORTES);
   if (microId.includes("sujet_inverse")) return qcm(SUJET_INVERSE);
