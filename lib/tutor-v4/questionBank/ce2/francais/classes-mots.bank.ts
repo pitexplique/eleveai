@@ -719,7 +719,7 @@ export const classesMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_cm_nom_open_1",
+    id: "ce2_cm_nom_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "classes_mots",
@@ -727,14 +727,23 @@ export const classesMotsBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Attention : la majuscule du début de phrase ne compte pas.",
-    tags: ["ce2", "classes-mots", "nom", "ouverte"],
+    tags: ["ce2", "classes-mots", "nom", "methode"],
     generate: () => {
       const mot = randomChoice(NOMS_PROPRES);
+      const bonne = "Je le déplace au milieu d'une phrase : s'il garde sa majuscule, c'est un nom propre.";
       return {
-        text: `« ${mot} » est un nom propre.\n\nExplique comment tu le reconnais, sans te tromper avec le premier mot d'une phrase.`,
-        format: "open" as const,
-        expected: ["majuscule", "partout", "un seul", "milieu", "déplace", "deplace", "nom propre"],
-        comparator: "contains_keyword" as const,
+        text: `« ${mot} » est un nom propre.\n\nComment le reconnais-tu, sans te tromper avec le premier mot d'une phrase ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège : le premier mot d'une phrase a lui aussi sa majuscule.
+          "Je regarde s'il a une majuscule : ça suffit.",
+          // La voisine : le déterminant annonce le nom commun.
+          "Je regarde s'il y a un déterminant devant.",
+          "Je regarde s'il est plus long que les autres mots.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un nom propre désigne un seul être ou un seul lieu, et sa majuscule le suit partout.",
           "Déplace le mot au milieu de la phrase : s'il garde sa majuscule, c'est un nom propre.",
@@ -837,23 +846,31 @@ export const classesMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_cm_determinant_open_1",
+    id: "ce2_cm_determinant_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "classes_mots",
     microId: "ce2_cm_determinant",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis où tu regardes dans la phrase pour le trouver.",
-    tags: ["ce2", "classes-mots", "determinant", "ouverte"],
+    hint: "On ne cherche pas le déterminant en premier : on cherche le nom.",
+    tags: ["ce2", "classes-mots", "determinant", "methode"],
     generate: () => {
       const p = randomChoice(phrasesAvec("determinant"));
       const d = p.determinants[0];
+      const bonne = `Je cherche d'abord un nom, puis je regarde le petit mot collé devant : ici « ${d} », devant « ${p.noms[0]} ».`;
       return {
-        text: `Dans « ${p.phrase} », le mot « ${d} » est un déterminant.\n\nExplique comment tu le repères dans une phrase.`,
-        format: "open" as const,
-        expected: ["devant", "avant le nom", "petit mot", "annonce", "nom", p.noms[0]],
-        comparator: "contains_keyword" as const,
+        text: `Dans « ${p.phrase} », le mot « ${d} » est un déterminant.\n\nComment repères-tu un déterminant dans une phrase ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // La voisine : dire comment est le nom, c'est le travail de l'adjectif.
+          "Je cherche le mot qui dit comment est le nom.",
+          "Je cherche le mot le plus court de la phrase.",
+          "Je cherche le mot placé juste après le verbe.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Le déterminant est le petit mot placé juste devant le nom : il l'annonce et donne son genre et son nombre.",
           "Cherche d'abord un nom, puis regarde le mot collé devant lui.",
@@ -956,23 +973,32 @@ export const classesMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_cm_adjectif_open_1",
+    id: "ce2_cm_adjectif_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "classes_mots",
     microId: "ce2_cm_adjectif",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis ce que l'adjectif apporte de plus au nom.",
-    tags: ["ce2", "classes-mots", "adjectif", "ouverte"],
+    hint: "Enlève-le : la phrase reste correcte, mais elle en dit moins. Moins de quoi ?",
+    tags: ["ce2", "classes-mots", "adjectif", "methode"],
     generate: () => {
       const p = randomChoice(phrasesAvec("adjectif"));
       const bon = p.adjectifs[0];
+      const bonne = `Il dit comment est « ${p.noms[0]} » : si on l'enlève, la phrase reste correcte, mais elle en dit moins.`;
       return {
-        text: `Dans « ${p.phrase} », le mot « ${bon} » est un adjectif.\n\nExplique ce qu'il apporte à la phrase.`,
-        format: "open" as const,
-        expected: ["comment", "décrit", "decrit", "détail", "detail", "précise", "precise", p.noms[0]],
-        comparator: "contains_keyword" as const,
+        text: `Dans « ${p.phrase} », le mot « ${bon} » est un adjectif.\n\nQu'apporte-t-il à la phrase ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Les trois voisines : sujet, adverbe, pronom. Chacune est le rôle
+          // d'une autre classe, et aucune n'est celui de l'adjectif.
+          "Il dit qui fait l'action.",
+          "Il dit quand l'action se passe.",
+          "Il remplace le nom pour ne pas le répéter.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "L'adjectif dit comment est le nom : sa couleur, sa taille, son gout, son humeur.",
           "Enlève-le : la phrase reste correcte, mais elle en dit moins.",
@@ -1075,26 +1101,39 @@ export const classesMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_cm_verbe_open_1",
+    id: "ce2_cm_verbe_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "classes_mots",
     microId: "ce2_cm_verbe",
     difficulty: 3,
     theme: "neutral",
-    hint: "Raconte le geste que tu fais dans ta tête pour le trouver.",
-    tags: ["ce2", "classes-mots", "verbe", "ouverte"],
+    // ⚠️ Le geste du MOMENT (hier / demain) est déjà posé par
+    // ce2_cm_verbe_fixed_1. Celui-ci est l'autre moitié de la définition :
+    // le verbe change aussi avec la PERSONNE. Deux vérifications, deux items.
+    hint: "Le verbe change avec le moment, mais aussi avec qui fait l'action.",
+    tags: ["ce2", "classes-mots", "verbe", "methode"],
     generate: () => {
       const p = randomChoice(PHRASES);
+      const bonne = `Je change le sujet — « ils », « nous » — et je regarde si « ${p.verbe} » bouge : le verbe est le seul mot qui suive.`;
       return {
-        text: `« ${p.phrase} »\n\nQuel est le verbe, et comment l'as-tu trouvé ? Explique.`,
-        format: "open" as const,
-        expected: [p.verbe, "hier", "demain", "change", "moment", "conjugue", "temps"],
-        comparator: "contains_keyword" as const,
+        text: `« ${p.phrase} »\n\nTu penses que le verbe est « ${p.verbe} ». Comment le vérifies-tu ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : la place prise pour la classe.
+          "Je regarde s'il est placé après le sujet : le verbe est toujours là.",
+          // La voisine : -er, -ir, -re, ce sont les fins de l'INFINITIF, pas
+          // celles d'un verbe conjugué dans une phrase.
+          "Je regarde s'il se termine par -er, -ir ou -re.",
+          "Je vérifie qu'il y a un déterminant devant.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
-          "Le verbe est le seul mot qui se conjugue : il change avec le moment et avec la personne.",
-          "Redis la phrase avec « hier », puis avec « demain ». Le mot qui bouge est le verbe.",
-          `Hier, ${p.phrase.charAt(0).toLowerCase() + p.phrase.slice(1)} — seul « ${p.verbe} » aurait changé.`,
+          "Le verbe est le seul mot qui se conjugue : il change avec le moment ET avec la personne.",
+          "Redis la phrase avec « ils », puis avec « nous ». Le mot qui bouge est le verbe.",
+          `${p.phrase} — si le sujet devient « nous » ou « ils », seul « ${p.verbe} » change.`,
           `Le verbe est « ${p.verbe} ».`,
         ),
       };
@@ -1205,23 +1244,32 @@ export const classesMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_cm_pronom_open_1",
+    id: "ce2_cm_pronom_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "classes_mots",
     microId: "ce2_cm_pronom",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis les deux choses que tu dois vérifier avant de choisir.",
-    tags: ["ce2", "classes-mots", "pronom", "ouverte"],
+    hint: "Il tient une place. Laquelle, et de quoi ?",
+    tags: ["ce2", "classes-mots", "pronom", "methode"],
     generate: () => {
       const p = randomChoice(phrasesAvec("pronom"));
       const bon = p.pronoms[0];
+      const bonne = `Il se met à la place du groupe qui fait l'action, pour ne pas le répéter — et c'est lui qui commande la fin du verbe « ${p.verbe} ».`;
       return {
-        text: `Dans « ${p.phrase} », qui fait l'action « ${p.verbe} » ?\n\nExplique à quoi sert un pronom comme « ${bon} ».`,
-        format: "open" as const,
-        expected: ["remplace", "à la place", "a la place", "sujet", "répéter", "repeter", "nom"],
-        comparator: "contains_keyword" as const,
+        text: `Dans « ${p.phrase} », à quoi sert le pronom « ${bon} » ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // La voisine la plus proche : le déterminant annonce aussi, mais il
+          // ne remplace rien — il se colle devant le nom, qui reste là.
+          "Il annonce le nom et donne son genre et son nombre.",
+          "Il dit comment est le nom.",
+          "Il dit quand se passe l'action.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un pronom personnel sujet se met à la place du groupe qui fait l'action, pour ne pas le répéter.",
           "Demande-toi qui fait l'action, puis vérifie deux choses : un seul ou plusieurs ? masculin ou féminin ?",
@@ -1323,23 +1371,33 @@ export const classesMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_cm_adverbe_open_1",
+    id: "ce2_cm_adverbe_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "classes_mots",
     microId: "ce2_cm_adverbe",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis à quelle question l'adverbe répond.",
-    tags: ["ce2", "classes-mots", "adverbe", "ouverte"],
+    hint: "Deux vérifications : la question à laquelle il répond, et ce qu'il fait au pluriel.",
+    tags: ["ce2", "classes-mots", "adverbe", "methode"],
     generate: () => {
       const p = randomChoice(phrasesAvec("adverbe"));
       const bon = p.adverbes[0];
+      const bonne = `Je pose la question au verbe — ${p.verbe} comment ? ${bon} — et je vérifie qu'il ne change jamais, même au pluriel.`;
       return {
-        text: `Dans « ${p.phrase} », le mot « ${bon} » est un adverbe.\n\nÀ quelle question répond-il, et pourquoi n'a-t-il jamais de « s » ? Explique.`,
-        format: "open" as const,
-        expected: ["comment", "quand", "où", "ou ", "invariable", "change pas", "jamais"],
-        comparator: "contains_keyword" as const,
+        text: `Dans « ${p.phrase} », le mot « ${bon} » est un adverbe.\n\nComment le reconnais-tu ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : tous les adverbes ne finissent pas par -ment,
+          // et « vraiment » n'est pas plus adverbe que « bien » ou « hier ».
+          "Je regarde s'il se termine par « -ment » : tous les adverbes finissent ainsi.",
+          "Je regarde s'il est placé juste après le verbe.",
+          // La voisine : s'accorder avec le nom, c'est le propre de l'adjectif.
+          "Je regarde s'il s'accorde avec le nom.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "L'adverbe accompagne le verbe et dit comment, quand ou où se passe l'action.",
           "Pose la question au verbe : comment ? quand ? où ?",
@@ -1436,7 +1494,7 @@ export const classesMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_cm_adverbes_ment_open_1",
+    id: "ce2_cm_adverbes_ment_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "classes_mots",
@@ -1444,14 +1502,23 @@ export const classesMotsBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Il y a une étape entre les deux mots. Laquelle ?",
-    tags: ["ce2", "classes-mots", "adverbe", "ouverte"],
+    tags: ["ce2", "classes-mots", "adverbe", "methode"],
     generate: () => {
       const a = randomChoice(ADVERBES_MENT.filter((x) => x.m !== x.f));
+      const bonne = `Parce qu'on part du FÉMININ : ${a.m} → ${a.f} → ${a.adverbe}.`;
       return {
-        text: `L'adjectif « ${a.m} » donne l'adverbe « ${a.adverbe} ».\n\nExplique pourquoi ce n'est pas « ${a.m}ment ».`,
-        format: "open" as const,
-        expected: ["féminin", "feminin", a.f, "on part du"],
-        comparator: "contains_keyword" as const,
+        text: `L'adjectif « ${a.m} » donne l'adverbe « ${a.adverbe} ».\n\nPourquoi ce n'est pas « ${a.m}ment » ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : bricoler la fin du masculin au lieu de passer
+          // par le féminin.
+          "Parce qu'on enlève la dernière lettre de l'adjectif avant de coller « -ment ».",
+          "Parce que « -ment » ne se colle jamais directement sur un adjectif.",
+          "Parce que le mot serait trop long à prononcer.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un adverbe en -ment se fabrique sur le FÉMININ de l'adjectif, jamais sur son masculin.",
           "Passe l'adjectif au féminin d'abord, puis colle « -ment » derrière.",
@@ -1549,17 +1616,26 @@ export const classesMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce2_cm_adverbes_frequents_open_1",
+    id: "ce2_cm_adverbes_frequents_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "classes_mots",
     microId: "ce2_cm_adverbes_frequents",
     difficulty: 3,
     theme: "neutral",
-    text: "« aujourd'hui » est un mot difficile à écrire.\n\nDonne un truc que tu utiliserais pour t'en souvenir.",
-    format: "open",
-    expected: ["apostrophe", "jour", "découpe", "decoupe", "recopie", "hui", "par cœur", "par coeur"],
-    comparator: "contains_keyword",
+    text: "« aujourd'hui » est un mot difficile à écrire.\n\nQuel truc t'aide à t'en souvenir ?",
+    format: "qcm",
+    choices: [
+      "Je le découpe en morceaux que je reconnais : au + JOUR + d' + hui. Et c'est bien du jour qu'il parle.",
+      // L'erreur réelle : écrire ce qu'on entend, et perdre le h et l'apostrophe.
+      "Je l'écris comme je l'entends : aujourdui.",
+      "Je cherche sa famille : il vient du verbe « aujourder ».",
+      "Je compte ses syllabes avant de l'écrire.",
+    ],
+    expected: [
+      "Je le découpe en morceaux que je reconnais : au + JOUR + d' + hui. Et c'est bien du jour qu'il parle.",
+    ],
+    comparator: "mcq_exact",
     hint: "Regarde s'il n'y aurait pas un mot que tu connais déjà caché dedans.",
     explanation: exp(
       "Les mots invariables ne se devinent pas : on les apprend de l'œil et de la main.",
@@ -1567,7 +1643,7 @@ export const classesMotsBank: TutorBankItemV4[] = [
       "au-JOUR-d'-hui : le mot « jour » est caché dedans, et c'est bien du jour qu'il parle. Reste l'apostrophe, qui est au milieu.",
       "On peut le découper : au + jour + d' + hui, avec l'apostrophe au milieu.",
     ),
-    tags: ["ce2", "classes-mots", "adverbe", "methode", "ouverte"],
+    tags: ["ce2", "classes-mots", "adverbe", "methode", "qcm"],
   },
 
   /* =========================================================
@@ -1671,17 +1747,26 @@ export const classesMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce2_cm_variables_open_1",
+    id: "ce2_cm_variables_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "classes_mots",
     microId: "ce2_cm_variables",
     difficulty: 3,
     theme: "neutral",
-    text: "Comment fais-tu pour savoir si un mot est variable ou invariable ? Explique ton geste en une phrase.",
-    format: "open",
-    expected: ["pluriel", "plusieurs", "féminin", "feminin", "change", "bouge", "essaie"],
-    comparator: "contains_keyword",
+    text: "Comment fais-tu pour savoir si un mot est variable ou invariable ?",
+    format: "qcm",
+    choices: [
+      "Je le mets au pluriel dans ma tête : un letchi → des letchis, il a bougé ; toujours → toujours, il n'a pas bougé.",
+      // L'erreur réelle : lire le « s » déjà présent comme une marque de pluriel.
+      "Je regarde s'il se termine déjà par un « s ».",
+      "Je regarde sa classe : les noms sont variables, tout le reste ne l'est pas.",
+      "Je regarde s'il est court : les mots courts sont invariables.",
+    ],
+    expected: [
+      "Je le mets au pluriel dans ma tête : un letchi → des letchis, il a bougé ; toujours → toujours, il n'a pas bougé.",
+    ],
+    comparator: "mcq_exact",
     hint: "Il y a un test que tu peux faire dans ta tête, sur n'importe quel mot.",
     explanation: exp(
       "Un mot variable change de forme selon le genre et le nombre ; un mot invariable garde toujours la même.",
@@ -1689,7 +1774,7 @@ export const classesMotsBank: TutorBankItemV4[] = [
       "un letchi → des letchis : il a bougé, il est variable. toujours → toujours : rien n'a bougé, il est invariable.",
       "On essaie de le mettre au pluriel : s'il ne change pas, il est invariable.",
     ),
-    tags: ["ce2", "classes-mots", "invariables", "methode", "ouverte"],
+    tags: ["ce2", "classes-mots", "invariables", "methode", "qcm"],
   },
 
   /* =========================================================
@@ -1762,23 +1847,34 @@ export const classesMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_cm_defi_open_1",
+    id: "ce2_cm_defi_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "classes_mots",
     microId: "ce2_cm_defi",
     difficulty: 3,
     theme: "neutral",
+    // Le cran de plus : personne ne nomme la classe. Il faut la trouver, et
+    // les trois pièges sont les trois raccourcis — la place, la terminaison,
+    // la lettre finale.
     hint: "Regarde ce que le mot fait, pas où il est placé.",
-    tags: ["ce2", "classes-mots", "defi", "ouverte"],
+    tags: ["ce2", "classes-mots", "defi", "methode"],
     generate: () => {
       const p = randomChoice(phrasesAvec("adverbe"));
       const mot = p.adverbes[0];
+      const bonne = `Je regarde ce que le mot FAIT : il répond à « ${p.verbe} comment ? », et il ne changera pas au pluriel. C'est un adverbe.`;
       return {
-        text: `Dans « ${p.phrase} », à quelle classe appartient le mot « ${mot} » ?\n\nExplique comment tu as trouvé.`,
-        format: "open" as const,
-        expected: ["adverbe", "verbe", "comment", "invariable", "change pas"],
-        comparator: "contains_keyword" as const,
+        text: `Dans « ${p.phrase} », comment trouves-tu à quelle classe appartient le mot « ${mot} » ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège de la notion : la place ne fait pas la classe.
+          "Je regarde où il est placé dans la phrase : la place donne la classe.",
+          "Je regarde sa terminaison : elle donne toujours la classe.",
+          "Je regarde s'il porte un « s » : les mots avec un « s » sont des noms.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Pour trouver la classe d'un mot, on regarde ce qu'il fait dans la phrase, pas où il est placé.",
           "Pose la question au verbe : comment ? quand ? où ? Si le mot répond et qu'il ne change jamais, c'est un adverbe.",
