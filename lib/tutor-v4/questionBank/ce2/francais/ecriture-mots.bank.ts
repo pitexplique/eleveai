@@ -430,22 +430,30 @@ export const ecritureMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_dict_mots_reguliers_open_1",
+    id: "ce2_dict_mots_reguliers_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "ecriture_mots",
     microId: "ce2_dict_mots_reguliers",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis ce que tu fais AVANT d'écrire, et ce que tu fais APRÈS.",
-    tags: ["ce2", "dictee", "mots-reguliers", "ouverte"],
+    hint: "Il y a ce qu'on fait AVANT d'écrire, et ce qu'on fait APRÈS.",
+    tags: ["ce2", "dictee", "mots-reguliers", "methode"],
     generate: () => {
       const m = randomChoice(MOTS_REGULIERS);
+      const bonne = "Je dis le mot lentement, je le découpe en syllabes, je les écris une par une, puis je relis ma feuille du doigt.";
       return {
-        text: `Tu dois écrire « ${m.mot} » sous la dictée.\n\nRaconte comment tu t'y prends, du début à la fin.`,
-        format: "open" as const,
-        expected: ["syllabe", "découpe", "decoupe", "relis", "relire", "lentement", "morceau"],
-        comparator: "contains_keyword" as const,
+        text: `Tu dois écrire « ${m.mot} » sous la dictée.\n\nComment t'y prends-tu ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : écrire d'un jet, et ne jamais se relire.
+          "J'écris vite ce que j'entends, et je passe au mot suivant.",
+          "J'écris la première lettre, puis je devine le reste.",
+          "J'attends que la maitresse répète pour être sûr.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Écrire sous la dictée, ce n'est pas écrire vite : c'est écrire, puis se relire.",
           "Dis le mot lentement, découpe-le en syllabes, écris-les une par une, puis relis ta feuille du doigt.",
@@ -546,22 +554,31 @@ export const ecritureMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_dict_mots_irreguliers_open_1",
+    id: "ce2_dict_mots_irreguliers_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "ecriture_mots",
     microId: "ce2_dict_mots_irreguliers",
     difficulty: 3,
     theme: "neutral",
-    hint: "Compare ce que tu entends et ce qui est écrit.",
-    tags: ["ce2", "dictee", "mots-irreguliers", "ouverte"],
+    hint: "Il n'a pas fait n'importe quoi. Il a fait ce qu'on lui a appris.",
+    tags: ["ce2", "dictee", "mots-irreguliers", "methode"],
     generate: () => {
       const m = randomChoice(MOTS_IRREGULIERS);
+      const bonne = `Il a écrit ce qu'il entendait — c'est ce qu'on lui a appris à faire — mais « ${m.mot} » ne s'écrit pas au son.`;
       return {
-        text: `Un camarade écrit « ${m.fautes[0]} » au lieu de « ${m.mot} ».\n\nIl n'a pas fait n'importe quoi : explique ce qu'il a fait, et pourquoi ça ne marche pas ici.`,
-        format: "open" as const,
-        expected: ["au son", "entend", "écouté", "ecoute", "irrégulier", "irregulier", "par cœur", "par coeur", "muette"],
-        comparator: "contains_keyword" as const,
+        text: `Un camarade écrit « ${m.fautes[0]} » au lieu de « ${m.mot} ».\n\nQu'a-t-il fait ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle du regard adulte : prendre pour de l'inattention
+          // une règle correctement appliquée au mauvais endroit.
+          "Il n'a pas écouté la maitresse.",
+          "Il a confondu ce mot avec un autre mot de sa famille.",
+          "Il a écrit trop vite.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un mot irrégulier ne s'écrit pas comme il se dit : l'écrire au son donne une faute, même en s'appliquant.",
           "Retiens ces mots-là par l'image : regarde, revois, écris, vérifie.",
@@ -667,7 +684,7 @@ export const ecritureMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_dict_graphies_son_open_1",
+    id: "ce2_dict_graphies_son_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "ecriture_mots",
@@ -675,15 +692,23 @@ export const ecritureMotsBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Si le son ne suffit pas à choisir, qu'est-ce qui décide ?",
-    tags: ["ce2", "dictee", "graphies", "ouverte"],
+    tags: ["ce2", "dictee", "graphies", "methode"],
     generate: () => {
       const g = randomChoice(GRAPHIES_NOMMABLES);
       const memeSon = [...new Set(GRAPHIES_NOMMABLES.filter((x) => x.son === g.son).map((x) => x.graphie))];
+      const bonne = `C'est le MOT qui décide : je revois son image telle que je l'ai lue. « ${g.mot} » s'écrit avec « ${g.graphie} », et rien dans le son ne l'annonçait.`;
       return {
-        text: `Le son ${g.son} s'écrit ${memeSon.map((x) => `« ${x} »`).join(", ")} selon les mots.\n\nComment sais-tu laquelle choisir quand tu écris ? Explique.`,
-        format: "open" as const,
-        expected: ["le mot", "par cœur", "par coeur", "cahier", "revoir", "image", "appris", "mémoire", "memoire", "vu"],
-        comparator: "contains_keyword" as const,
+        text: `Le son ${g.son} s'écrit ${memeSon.map((x) => `« ${x} »`).join(", ")} selon les mots.\n\nComment sais-tu laquelle choisir quand tu écris ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège : mieux écouter ne peut rien donner — le son est le même.
+          "J'écoute mieux : le son finit par dire laquelle.",
+          "Je prends toujours la même : c'est la plus fréquente.",
+          "Je prends la graphie la plus courte.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Le son ne dit pas quelle graphie utiliser : plusieurs conviendraient. C'est le MOT qui décide.",
           "Revois le mot tel que tu l'as lu : c'est la mémoire de son image qui tranche, pas l'oreille.",
@@ -760,22 +785,31 @@ export const ecritureMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_dict_chaines_accord_open_1",
+    id: "ce2_dict_chaines_accord_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "ecriture_mots",
     microId: "ce2_dict_chaines_accord",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis dans quel ordre tu vérifies, et sur quelle feuille tu regardes.",
-    tags: ["ce2", "dictee", "accords", "ouverte"],
+    hint: "Dans quel ordre, et surtout : sur quelle feuille regardes-tu ?",
+    tags: ["ce2", "dictee", "accords", "methode"],
     generate: () => {
       const d = randomChoice(DICTEES);
+      const bonne = "Les accords un par un, en remontant à celui qui commande — le nom pour l'adjectif, le sujet pour le verbe — et je relis sur MA feuille.";
       return {
-        text: `Tu viens d'écrire « ${d.phrase} » sous la dictée.\n\nQue vérifies-tu avant de rendre ta feuille ? Explique.`,
-        format: "open" as const,
-        expected: ["accord", "sujet", "verbe", "pluriel", "relis", "terminaison", "ma feuille", "chaine", "chaîne"],
-        comparator: "contains_keyword" as const,
+        text: `Tu viens d'écrire « ${d.phrase} » sous la dictée.\n\nQue vérifies-tu avant de rendre ta feuille ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège : l'œil qui relit le modèle relit une phrase juste.
+          "Je relis sur le modèle : c'est lui qui a la bonne orthographe.",
+          "Je vérifie tout en même temps, en relisant une fois.",
+          // La voisine : soigner sa graphie, ce n'est pas vérifier son orthographe.
+          "Je vérifie que mon écriture est bien lisible.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Se relire, c'est vérifier une chose à la fois : d'abord les accords du groupe nominal, ensuite celui du verbe avec son sujet.",
           "Relis sur TA feuille, jamais sur le modèle : c'est ton écrit qu'il faut corriger, et l'œil glisse sur ce qu'il a déjà lu ailleurs.",
@@ -857,22 +891,30 @@ export const ecritureMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_dict_phrase_open_1",
+    id: "ce2_dict_phrase_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "ecriture_mots",
     microId: "ce2_dict_phrase",
     difficulty: 3,
     theme: "neutral",
-    hint: "Attention : on ne se relit jamais sur le modèle.",
-    tags: ["ce2", "dictee", "phrase", "ouverte"],
+    hint: "Ce n'est pas le mot qui était inconnu : c'est sa fin qui n'a pas suivi.",
+    tags: ["ce2", "dictee", "phrase", "methode"],
     generate: () => {
       const d = randomChoice(DICTEES);
+      const bonne = "La vérification des accords : en remontant du mot à celui qui le commande, la faute se voit tout de suite.";
       return {
-        text: `Tu as écrit « ${d.fauteAccord} » alors qu'il fallait écrire « ${d.phrase} ».\n\nQu'est-ce qui a manqué, et comment l'éviter la prochaine fois ? Explique.`,
-        format: "open" as const,
-        expected: ["accord", "relire", "relis", "sujet", "pluriel", "terminaison", "vérifier", "verifier"],
-        comparator: "contains_keyword" as const,
+        text: `Tu as écrit « ${d.fauteAccord} » alors qu'il fallait écrire « ${d.phrase} ».\n\nQu'est-ce qui a manqué ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Le piège fin : le mot était connu, c'est sa terminaison qui a lâché.
+          "Je ne connaissais pas l'orthographe de ce mot.",
+          "Rien : cette faute-là ne se voit pas en se relisant.",
+          "J'ai manqué d'écouter la dictée jusqu'au bout.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Presque toutes les fautes d'une dictée de CE2 se corrigent en se relisant — à condition de savoir quoi chercher.",
           "Relis sur TA feuille, jamais sur le modèle, et cherche une seule chose à la fois : d'abord les accords, puis les mots.",
@@ -953,17 +995,29 @@ export const ecritureMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce2_dict_defi_open_1",
+    id: "ce2_dict_defi_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "ecriture_mots",
     microId: "ce2_dict_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "Après une dictée, on te laisse deux minutes pour te relire.\n\nQue regardes-tu, et dans quel ordre ? Explique.",
-    format: "open",
-    expected: ["accord", "sujet", "verbe", "pluriel", "ma feuille", "terminaison", "mot", "une chose"],
-    comparator: "contains_keyword",
+    // Le cran de plus : ce n'est plus un geste mais trois passages ordonnés,
+    // et les deux pièges principaux de la notion sont réunis dans les faux.
+    text: "Après une dictée, on te laisse deux minutes pour te relire.\n\nQue regardes-tu, et dans quel ordre ?",
+    format: "qcm",
+    choices: [
+      "Trois passages, sur MA feuille : les accords du groupe, l'accord du verbe avec son sujet, puis les mots difficiles.",
+      // Les deux pièges de la relecture, réunis : tout à la fois, et sur le
+      // modèle plutôt que sur son propre écrit.
+      "Je relis une fois, en cherchant toutes les fautes à la fois.",
+      "Je relis sur le modèle, pour comparer.",
+      "Je recopie la dictée au propre.",
+    ],
+    expected: [
+      "Trois passages, sur MA feuille : les accords du groupe, l'accord du verbe avec son sujet, puis les mots difficiles.",
+    ],
+    comparator: "mcq_exact",
     hint: "On ne cherche pas tout en même temps. Une chose à la fois.",
     explanation: exp(
       "Se relire n'est pas relire : c'est chercher une chose précise, puis une autre.",
@@ -971,6 +1025,6 @@ export const ecritureMotsBank: TutorBankItemV4[] = [
       "Et surtout : on se relit sur SA feuille, jamais sur le modèle. L'œil qui a lu la bonne phrase ailleurs ne voit plus la faute qu'il a écrite.",
       "On passe trois fois : les accords du groupe, l'accord du verbe, puis les mots — sur sa propre feuille.",
     ),
-    tags: ["ce2", "dictee", "defi", "methode", "ouverte"],
+    tags: ["ce2", "dictee", "defi", "methode", "qcm"],
   },
 ];
