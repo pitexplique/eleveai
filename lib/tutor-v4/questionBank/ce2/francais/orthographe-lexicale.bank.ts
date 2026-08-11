@@ -390,7 +390,7 @@ export const orthographeLexicaleBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_orthlex_accents_open_1",
+    id: "ce2_orthlex_accents_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "orthographe_lexicale",
@@ -398,14 +398,22 @@ export const orthographeLexicaleBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Un accent, c'est comme une lettre : il compte.",
-    tags: ["ce2", "orthographe-lexicale", "accents", "ouverte"],
+    tags: ["ce2", "orthographe-lexicale", "accents", "methode"],
     generate: () => {
       const m = randomChoice(ACCENTS);
+      const bonne = `L'accent n'est pas le bon, ou pas au bon endroit : on écrit « ${m.mot} ». Un accent fait partie du mot, comme une lettre.`;
       return {
-        text: `Un camarade écrit « ${m.fautes[0]} ».\n\nExplique-lui ce qui ne va pas, et comment il peut s'en souvenir.`,
-        format: "open" as const,
-        expected: [m.mot, "accent", "grave", "aigu", "circonflexe", "lettre"],
-        comparator: "contains_keyword" as const,
+        text: `Un camarade écrit « ${m.fautes[0]} ».\n\nQu'est-ce qui ne va pas ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège : l'accent tenu pour un ornement facultatif.
+          "Rien : l'accent, ça ne compte pas vraiment.",
+          "Il manque une lettre au mot.",
+          "Le mot est au pluriel alors qu'il devrait être au singulier.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un accent fait partie du mot au même titre qu'une lettre : le déplacer, c'est faire une faute.",
           "Recopie le mot correct, puis compare-le au tien voyelle par voyelle.",
@@ -480,22 +488,31 @@ export const orthographeLexicaleBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_orthlex_radical_open_1",
+    id: "ce2_orthlex_radical_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "orthographe_lexicale",
     microId: "ce2_orthlex_radical",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis à quoi sert la famille quand on ne sait pas écrire un mot.",
-    tags: ["ce2", "orthographe-lexicale", "radical", "ouverte"],
+    hint: "Si tu sais écrire un mot de la famille, tu en sais déjà beaucoup sur les autres.",
+    tags: ["ce2", "orthographe-lexicale", "radical", "methode"],
     generate: () => {
       const f = randomChoice(FAMILLES);
+      const bonne = `Le radical « ${f.radical} » s'écrit pareil dans toute la famille : si je sais écrire l'un, je sais écrire le début des autres.`;
       return {
-        text: `« ${f.mots.join(" », « ")} » sont de la même famille.\n\nEn quoi cela peut-il t'aider à les écrire ? Explique.`,
-        format: "open" as const,
-        expected: [f.radical, "radical", "famille", "pareil", "même début", "meme debut", "commun"],
-        comparator: "contains_keyword" as const,
+        text: `« ${f.mots.join(" », « ")} » sont de la même famille.\n\nEn quoi cela t'aide-t-il à les écrire ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège : croire que chaque mot s'apprend seul.
+          "Cela n'aide pas : chaque mot a sa propre orthographe.",
+          // L'erreur réelle : c'est le DÉBUT qui est commun, pas la fin.
+          "Cela aide pour la fin des mots : ils se terminent tous pareil.",
+          "Cela aide à savoir combien de syllabes ils ont.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Les mots d'une famille s'écrivent tous avec le même radical, même quand on ne l'entend plus pareil.",
           "Quand tu hésites sur un mot, cherche un mot de sa famille où la lettre douteuse s'entend.",
@@ -577,24 +594,33 @@ export const orthographeLexicaleBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_orthlex_affixes_open_1",
+    id: "ce2_orthlex_affixes_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "orthographe_lexicale",
     microId: "ce2_orthlex_affixes",
     difficulty: 3,
     theme: "neutral",
-    hint: "Découpe le mot en deux morceaux, et explique ce que chacun apporte.",
-    tags: ["ce2", "orthographe-lexicale", "affixes", "ouverte"],
+    // ⚠️ Le découpage en lui-même est déjà demandé côté vocabulaire
+    // (ce2_voc_prefixe_suffixe_meth_1). Ici, la question est orthographique :
+    // à quoi le découpage sert-il quand il s'agit d'ÉCRIRE le mot ?
+    hint: "Tu sais déjà écrire une partie de ce mot. Laquelle ?",
+    tags: ["ce2", "orthographe-lexicale", "affixes", "methode"],
     generate: () => {
       const m = randomChoice(MOTS_CONSTRUITS);
+      const bonne = `Parce que je connais déjà « ${m.base} » : je l'écris comme d'habitude, et j'ajoute le morceau autour.`;
       return {
-        text: `Découpe le mot « ${m.mot} » et explique ce que chaque morceau apporte.`,
-        format: "open" as const,
-        expected: [m.base, m.prefixe ?? "", m.suffixe ?? "", "préfixe", "prefixe", "suffixe", "devant", "derrière", "derriere"].filter(
-          (x) => x !== "",
-        ),
-        comparator: "contains_keyword" as const,
+        text: `Tu dois écrire « ${m.mot} ».\n\nEn quoi le découper en morceaux t'aide-t-il à ne pas faire de faute ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Le piège fin : le découpage sert aux deux, au sens ET à l'écriture.
+          "Cela aide à trouver son sens, mais pas son orthographe.",
+          "Cela n'aide pas : un mot construit s'écrit comme il s'entend.",
+          "Cela aide à savoir combien de lettres il faut.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un mot construit se lit en morceaux : le radical porte le sens, l'affixe le modifie.",
           "Cherche d'abord le mot que tu connais à l'intérieur, puis regarde ce qui l'entoure.",
@@ -667,22 +693,31 @@ export const orthographeLexicaleBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_orthlex_analogie_open_1",
+    id: "ce2_orthlex_analogie_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "orthographe_lexicale",
     microId: "ce2_orthlex_analogie",
     difficulty: 3,
     theme: "neutral",
-    hint: "Donne un mot que tu connais déjà, et dis ce qu'il t'apprend.",
-    tags: ["ce2", "orthographe-lexicale", "analogie", "ouverte"],
+    hint: "Appelle à l'aide un mot que tu sais déjà écrire, et qui finit pareil.",
+    tags: ["ce2", "orthographe-lexicale", "analogie", "methode"],
     generate: () => {
       const a = randomChoice(ANALOGIES);
+      const bonne = `J'appelle un mot connu qui finit par le même son — « ${a.connu} » — et je recopie sa fin exactement : « ${a.fin} ».`;
       return {
-        text: `Tu dois écrire « ${a.nouveau} » et tu hésites sur la fin.\n\nQuel mot connu peux-tu appeler à l'aide, et pourquoi ? Explique.`,
-        format: "open" as const,
-        expected: [a.connu, a.fin.replace("-", ""), "pareil", "même fin", "meme fin", "termine"],
-        comparator: "contains_keyword" as const,
+        text: `Tu dois écrire « ${a.nouveau} » et tu hésites sur la fin.\n\nComment fais-tu ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège : écrire la fin au son, alors qu'un même son a plusieurs fins.
+          "J'écris la fin comme je l'entends.",
+          // L'erreur réelle : le bon outil, appliqué au mauvais bout du mot.
+          "Je cherche un mot connu qui COMMENCE pareil.",
+          "Je choisis la fin la plus courte.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "L'analogie consiste à écrire un mot nouveau en copiant la fin d'un mot déjà connu.",
           "Cherche un mot familier qui se termine par le même son, puis recopie sa fin exactement.",
@@ -757,22 +792,32 @@ export const orthographeLexicaleBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_orthlex_lettre_muette_open_1",
+    id: "ce2_orthlex_lettre_muette_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "orthographe_lexicale",
     microId: "ce2_orthlex_lettre_muette",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis le geste : qu'est-ce que tu cherches, exactement ?",
-    tags: ["ce2", "orthographe-lexicale", "lettre-muette", "ouverte"],
+    hint: "Allonge le mot, et la lettre sort de son silence.",
+    tags: ["ce2", "orthographe-lexicale", "lettre-muette", "methode"],
     generate: () => {
       const l = randomChoice(LETTRES_MUETTES);
+      const bonne = `J'allonge le mot : je cherche un mot de la même famille — « ${l.famille} » — et la lettre se met à s'entendre.`;
       return {
-        text: `Le mot « ${l.mot} » se termine par une lettre qu'on n'entend pas.\n\nComment peux-tu la trouver sans la connaitre par cœur ? Explique.`,
-        format: "open" as const,
-        expected: [l.famille, "famille", "allonge", "féminin", "feminin", "verbe", "même famille", "meme famille"],
-        comparator: "contains_keyword" as const,
+        text: `Le mot « ${l.mot} » se termine par une lettre qu'on n'entend pas.\n\nComment la trouver sans la connaitre par cœur ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège : renoncer, alors que la notion existe justement pour
+          // montrer que cette lettre se déduit.
+          "On ne peut pas : il faut l'apprendre par cœur.",
+          // L'erreur réelle : le pluriel ajoute un « s », il ne révèle rien.
+          "Je mets le mot au pluriel : la lettre apparait.",
+          "Je regarde la première lettre du mot.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "La lettre finale muette n'est pas là par hasard : elle vient de la famille du mot.",
           "Allonge le mot — mets-le au féminin, ou trouve le verbe de la famille. La lettre se met à s'entendre.",
@@ -847,22 +892,32 @@ export const orthographeLexicaleBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_orthlex_defi_open_1",
+    id: "ce2_orthlex_defi_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "orthographe_lexicale",
     microId: "ce2_orthlex_defi",
     difficulty: 3,
     theme: "neutral",
-    hint: "Tu as deux outils : la famille du mot, et un mot connu qui finit pareil.",
-    tags: ["ce2", "orthographe-lexicale", "defi", "ouverte"],
+    // Le cran de plus : le micro voisin demande UN geste ; le défi en demande
+    // trois, et son piège le plus fin s'arrête au premier.
+    hint: "Tu as trois outils, pas un seul. Si le premier ne répond pas, il en reste deux.",
+    tags: ["ce2", "orthographe-lexicale", "defi", "methode"],
     generate: () => {
       const l = randomChoice(LETTRES_MUETTES);
+      const bonne = `Trois gestes : chercher un mot de la famille — « ${l.famille} » —, mettre au féminin, ou penser à un mot connu qui finit pareil.`;
       return {
-        text: `Tu dois écrire le mot « ${l.mot} » et tu ne sais pas s'il y a une lettre à la fin.\n\nRaconte les deux ou trois choses que tu peux essayer.`,
-        format: "open" as const,
-        expected: [l.famille, "famille", "allonge", "féminin", "feminin", "connu", "pareil", "verbe"],
-        comparator: "contains_keyword" as const,
+        text: `Tu dois écrire le mot « ${l.mot} » et tu ne sais pas s'il y a une lettre à la fin.\n\nQu'essaies-tu ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Le piège fin : s'arrêter au premier outil, et conclure trop vite.
+          "Un seul geste suffit : si la famille ne répond pas, c'est qu'il n'y a pas de lettre.",
+          "J'écris le mot sans lettre finale : c'est le plus fréquent.",
+          "Je demande à quelqu'un, c'est plus rapide.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Devant un mot difficile, on ne devine pas : on essaie des outils, l'un après l'autre.",
           "Trois gestes : chercher un mot de la famille, mettre au féminin, ou penser à un mot connu qui finit pareil.",
