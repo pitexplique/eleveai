@@ -65,6 +65,19 @@ export default async function AdminDashboardPage() {
         </Link>
 
         <Link
+          href="/admin/beta-testeurs"
+          className="block rounded-xl border border-indigo-700 bg-indigo-900/30 p-4 transition hover:bg-indigo-900/50"
+        >
+          <p className="font-bold text-indigo-300">🧪 Bêta testeurs</p>
+          <p className="mt-1 text-sm text-slate-400">
+            Les candidatures de{" "}
+            <span className="font-semibold">/devenir-beta-testeur</span> : accepter
+            attribue la place ET le numéro que la personne gardera toute l&apos;année.
+            Les quotas par groupe sont affichés en haut.
+          </p>
+        </Link>
+
+        <Link
           href="/admin/newsletter"
           className="block rounded-xl border border-teal-700 bg-teal-900/30 p-4 transition hover:bg-teal-900/50"
         >
