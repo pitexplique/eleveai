@@ -60,9 +60,23 @@ function simuler(config: ConfigEpreuve) {
     const dejaVus = new Set(vus);
     const rejoues = questions.filter((q) => dejaVus.has(q.cle)).length;
 
+    // ON DESCEND JUSQU'À LA TRANCHE quand le domaine en a (ajouté le 11/08,
+    // avec les tests spécifiques de la 6ᵉ en maths). Savoir que « grandeurs et
+    // mesures » rend 16 questions sur 18 ne dit pas quoi corriger ; savoir que
+    // c'est sa tranche « résolution de problèmes » qui est à sec, si.
     const parTheme = config.themes.map((t) => {
       const n = questions.filter((q) => q.themeId === t.id).length;
-      return `${t.id} ${n}/${t.nbQuestions}`;
+      const tete = `${t.id} ${n}/${t.nbQuestions}`;
+      if (!t.repartition || n === t.nbQuestions) return tete;
+      const detail = t.repartition
+        .map((r) => {
+          const k = questions.filter(
+            (q) => q.themeId === t.id && q.typeItem === r.type,
+          ).length;
+          return `${r.type} ${k}/${r.nbQuestions}`;
+        })
+        .join(", ");
+      return `${tete} [${detail}]`;
     });
 
     if (questions.length === attendu) passagesPleins += 1;

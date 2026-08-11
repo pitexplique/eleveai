@@ -37,8 +37,13 @@ export const metadata: Metadata = {
 // ⚠️ `minutes` EST RECOPIÉ À LA MAIN de `dureeSecondes` (lib/eval-nationale/
 // <slug>.ts). Importer les configs ici embarquerait les quatre banques dans le
 // bundle de ce hub, alors que chaque épreuve n'emporte que la sienne. Une
-// minute par question depuis l'arbitrage du 01/08 : 20 en maths, 25 en
-// français.
+// minute par question depuis l'arbitrage du 01/08 : 25 en français, 20 en
+// maths de 4ᵉ.
+//
+// ⚠️ SAUF LA 6ᵉ EN MATHS, à 50 minutes depuis le 11/08 : c'est la seule épreuve
+// dont nous ayons les effectifs officiels (document professeur DEPP), et elle
+// reprend donc le sujet entier — 62 questions — au lieu d'en tenir la cadence
+// sur un échantillon.
 const EPREUVES = [
   {
     niveau: "6ᵉ",
@@ -63,14 +68,17 @@ const EPREUVES = [
     niveau: "6ᵉ",
     matiere: "Mathématiques",
     slug: "6e-maths",
-    minutes: 20,
+    minutes: 50,
     emoji: "🔢",
     accent: FLAMBOYANT,
+    // LES INTITULÉS DU SUJET OFFICIEL, dans son ordre. « Résoudre un problème »
+    // a quitté la liste des domaines pour rejoindre les tests spécifiques :
+    // ce n'en a jamais été un.
     teste: [
-      "Les nombres et le calcul",
-      "Les grandeurs et les mesures",
       "L'espace et la géométrie",
-      "Résoudre un problème",
+      "Les grandeurs et les mesures",
+      "Les nombres et le calcul",
+      "Automatismes et résolution de problèmes",
     ],
     // LIVRÉE (01/08) : l'épreuve blanche existe pour ce couple niveau/matière.
     epreuve: "/evaluation-nationale-college/6e-maths",

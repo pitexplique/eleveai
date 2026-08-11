@@ -17,6 +17,36 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import type { CanvasFigure } from "@/lib/tutor-v4/types_canvas";
 import type { SupportTexte } from "./supports";
 
+/**
+ * LES DEUX TESTS SPÉCIFIQUES DE L'ÉVALUATION OFFICIELLE, et le reste.
+ *
+ * Ils ne sont pas des domaines : ils les TRAVERSENT. Le test d'automatismes
+ * pioche 15 questions dans « Nombres et calculs » et 8 dans « Grandeurs et
+ * mesures » ; celui de résolution de problèmes, 10 et 9. Un item appartient
+ * donc à la fois à un domaine et — parfois — à un test. L'élève reçoit cinq
+ * groupes de maîtrise : trois pour les domaines, deux pour les tests.
+ *
+ * `autre` est la catégorie du document officiel lui-même : « items appartenant
+ * à un domaine donné mais qui ne sont pas intégrés à un test spécifique ».
+ * Tout « Espace et géométrie » est de ce type — aucun test spécifique n'y
+ * touche.
+ */
+export type TypeItem = "automatisme" | "resolution_probleme" | "autre";
+
+/**
+ * LES SEUILS SONT DONNÉS EN NOMBRE DE RÉPONSES, PAS EN POURCENTAGE, et ils ne
+ * sont pas les mêmes d'un domaine à l'autre (document professeur DEPP,
+ * septembre 2025). Sur 30 questions en nombres et calculs il faut 17 bonnes
+ * réponses pour être « satisfaisant » — 57 % ; sur 14 en géométrie, 9 — 64 %.
+ * Appliquer un 30/60 uniforme rangeait donc des élèves dans le mauvais groupe.
+ */
+export type SeuilsMaitrise = {
+  /** Au-dessus de ce nombre de bonnes réponses, on quitte « à besoins ». */
+  aBesoinsMax: number;
+  /** À partir de ce nombre de bonnes réponses, on est « satisfaisant ». */
+  satisfaisantMin: number;
+};
+
 export type ThemeEval = {
   id: string;
   label: string;
@@ -25,6 +55,15 @@ export type ThemeEval = {
   /** Notions de la banque source qui l'alimentent. */
   notions: string[];
   nbQuestions: number;
+  /**
+   * COMMENT LES QUESTIONS DU DOMAINE SE RÉPARTISSENT entre les deux tests
+   * spécifiques. Quand elle est présente, c'est elle qui commande le tirage —
+   * `nbQuestions` n'est plus qu'un total, et doit valoir leur somme.
+   * Absente, on tire comme avant, sans distinguer.
+   */
+  repartition?: { type: TypeItem; nbQuestions: number }[];
+  /** Seuils officiels du domaine. Absents, on retombe sur 30 % / 60 %. */
+  seuils?: SeuilsMaitrise;
   /**
    * TEXTES SUPPORTS — pour les thèmes de compréhension de l'écrit. Quand un
    * thème en a, l'épreuve tire UN support et pose SES questions à la suite,
@@ -51,6 +90,16 @@ export type ConfigEpreuve = {
   matiereLabel: string;
   dureeSecondes: number;
   /**
+   * L'ÉPREUVE REPREND LE VOLUME DU SUJET OFFICIEL, et pas seulement sa cadence.
+   * Ce qu'on écrit à l'élève sur la page d'accueil en dépend, et ce n'est pas
+   * un détail de formulation : lui promettre « la même épreuve » quand on lui
+   * en pose un tiers, c'est lui mentir sur ce qu'il vient de mesurer.
+   * Seule l'épreuve de 6ᵉ en maths est dans ce cas — le document professeur de
+   * la DEPP en donne les effectifs exacts, aucun équivalent n'est publié pour
+   * les trois autres.
+   */
+  volumeOfficiel?: boolean;
+  /**
    * Ce que notre épreuve NE couvre pas de l'épreuve officielle, dit à l'élève
    * sur la page d'accueil. En français, la fluence n'est pas numérique et la
    * compréhension de l'oral demande un support audio : taire ces deux
@@ -58,6 +107,23 @@ export type ConfigEpreuve = {
    */
   reserve?: string;
   themes: ThemeEval[];
+  /**
+   * LES TESTS SPÉCIFIQUES, qui traversent les domaines. Ils ne changent rien
+   * au tirage — ce sont les `repartition` des domaines qui le font — mais ils
+   * portent leur libellé et leurs seuils propres, et le bilan les rend à part.
+   */
+  testsSpecifiques?: {
+    id: TypeItem;
+    label: string;
+    quoi: string;
+    seuils: SeuilsMaitrise;
+  }[];
+  /**
+   * Range une micro-compétence dans un test spécifique. Ce qui n'y figure pas
+   * est « autre » — c'est le défaut, et c'est ce qui vaut pour les épreuves
+   * qui ne connaissent pas les tests spécifiques.
+   */
+  typesMicro?: Map<string, TypeItem>;
   /** La banque où piocher — déjà transformée (zéro-clavier au primaire). */
   banque: TutorBankItemV4[];
   /** Libellés lisibles, portés par le knowledge et non par la banque. */
@@ -101,6 +167,8 @@ export type QuestionEval = {
   notionLabel: string;
   microId: string;
   microLabel: string;
+  /** Le test spécifique dont relève la question, « autre » sinon. */
+  typeItem: TypeItem;
   text: string;
   choices: string[];
   expected: string[];
@@ -163,6 +231,11 @@ function sansDoublon(choices: readonly string[]): string[] {
   });
 }
 
+/** Dans quel test spécifique tombe une micro-compétence. « autre » par défaut. */
+function typeDeMicro(config: ConfigEpreuve, microId: string): TypeItem {
+  return config.typesMicro?.get(microId) ?? "autre";
+}
+
 /**
  * Rend l'item jouable : un `template` se génère à la volée, un `fixed` se
  * prend tel quel. On ne garde que ce qui a des propositions — l'épreuve se
@@ -203,6 +276,7 @@ function materialiser(
     notionLabel: config.labelsNotion.get(item.notionId) ?? item.notionId,
     microId: item.microId,
     microLabel: config.labelsMicro.get(item.microId) ?? item.microId,
+    typeItem: typeDeMicro(config, item.microId),
     text,
     choices: melanger(choices),
     expected,
@@ -258,6 +332,7 @@ function tirerTheme(
             notionLabel: config.labelsNotion.get(q.notionId) ?? q.notionId,
             microId: q.microId,
             microLabel: config.labelsMicro.get(q.microId) ?? q.microId,
+            typeItem: typeDeMicro(config, q.microId),
             text: q.text,
             choices: melanger(sansDoublon(q.choices)),
             expected: [q.expected],
@@ -283,14 +358,63 @@ function tirerTheme(
     if (theme.supports.some((s) => s.oral)) return [];
   }
 
+  // ── LE TIRAGE ORDINAIRE, TRANCHE PAR TRANCHE ────────────────────────────
+  // Sans `repartition`, il n'y a qu'une tranche et rien ne change pour les
+  // trois autres épreuves. Avec, on tire séparément les questions de chaque
+  // test spécifique : leurs effectifs sont fixés par le sujet officiel — en
+  // nombres et calculs, 15 automatismes et 10 problèmes, et pas l'inverse.
+  // Tirer 30 questions d'un coup dans le domaine donnerait le bon total et la
+  // mauvaise épreuve.
+  const tranches: { type: TypeItem; nbQuestions: number }[] =
+    theme.repartition ?? [{ type: "autre", nbQuestions: theme.nbQuestions }];
+
+  // PARTAGÉ ENTRE LES TRANCHES : une micro-compétence prise en automatismes ne
+  // doit pas revenir en résolution de problèmes. Le bilan doit couvrir large.
+  const microsPris = new Set<string>();
+
+  return tranches.flatMap((tranche) =>
+    tirerTranche(
+      theme,
+      config,
+      tranche,
+      Boolean(theme.repartition),
+      dejaVus,
+      textesDuTirage,
+      microsPris,
+    ),
+  );
+}
+
+/**
+ * Une tranche du tirage : les questions d'un même test spécifique, prises en
+ * TOURNANT sur les notions du domaine plutôt qu'en piochant au hasard dans le
+ * tas — sans ça, une notion à 200 items rafle tout et le domaine ne teste
+ * qu'elle.
+ */
+function tirerTranche(
+  theme: ThemeEval,
+  config: ConfigEpreuve,
+  tranche: { type: TypeItem; nbQuestions: number },
+  filtrerParType: boolean,
+  dejaVus: Set<string>,
+  textesDuTirage: Set<string>,
+  microsPris: Set<string>,
+): QuestionEval[] {
   // AUCUN PRÉ-FILTRE SUR L'ID : on ne peut juger qu'après génération, puisque
-  // « déjà vu » porte désormais sur l'énoncé et non sur l'item.
+  // « déjà vu » porte désormais sur l'énoncé et non sur l'item. Le type, lui,
+  // se lit sur la micro-compétence sans rien générer : il se filtre ici.
   const parNotion = melanger(theme.notions).map((notionId) =>
-    melanger(config.banque.filter((item) => item.notionId === notionId)),
+    melanger(
+      config.banque.filter(
+        (item) =>
+          item.notionId === notionId &&
+          (!filtrerParType ||
+            typeDeMicro(config, item.microId) === tranche.type),
+      ),
+    ),
   );
 
   const questions: QuestionEval[] = [];
-  const microsPris = new Set<string>();
 
   // Deux passes : la première refuse deux fois la même micro-compétence
   // (le bilan doit couvrir large), la seconde accepte tout pour compléter.
@@ -301,12 +425,12 @@ function tirerTheme(
     // n'était alors jamais exécutée. C'est ce qui laissait l'épreuve de
     // français de 4ᵉ à 19 questions sur 20.
     let tour = 0;
-    while (questions.length < theme.nbQuestions && tour < 400) {
+    while (questions.length < tranche.nbQuestions && tour < 400) {
       tour += 1;
       let piocheFaite = false;
 
       for (const pile of parNotion) {
-        if (questions.length >= theme.nbQuestions) break;
+        if (questions.length >= tranche.nbQuestions) break;
         if (!pile.length) continue;
         piocheFaite = true;
 
@@ -364,7 +488,7 @@ function tirerTheme(
 
       if (!piocheFaite) break;
     }
-    if (questions.length >= theme.nbQuestions) break;
+    if (questions.length >= tranche.nbQuestions) break;
   }
 
   return questions;
@@ -406,10 +530,18 @@ export type BilanMicro = {
 // professeur reçoit sa classe dans ces termes-là. Parler la même langue que le
 // bilan officiel, c'est ce qui rend le nôtre lisible pour lui.
 //
-// LES SEUILS viennent du test d'automatismes de 6ᵉ, sur 30 questions :
-// 9 réponses ou moins → à besoins ; 10 à 17 → fragile ; 18 ou plus →
-// satisfaisant. Soit 30 % et 60 %, qu'on applique en proportion puisque nos
-// épreuves n'ont pas 30 questions.
+// LES SEUILS. Deux régimes, et le second est le bon quand on les connaît.
+//
+// Quand l'épreuve porte les seuils officiels (`theme.seuils`), on les applique
+// tels quels, EN NOMBRE DE RÉPONSES. Ils ne se déduisent d'aucune règle : le
+// document professeur DEPP de septembre 2025 les fixe domaine par domaine, et
+// ils ne tombent pas sur les mêmes proportions — 17/30 en nombres et calculs
+// (57 %), 10/18 en grandeurs et mesures (56 %), 9/14 en espace et géométrie
+// (64 %), 13/23 en automatismes, 10/19 en résolution de problèmes.
+//
+// À défaut — les trois autres épreuves, dont aucune n'a de barème publié —
+// on garde le 30 % / 60 % appliqué en proportion. C'est une approximation,
+// elle est désormais nommée comme telle.
 //
 // LE TON : UN MIX, ET IL EST DÉLIBÉRÉ (Frédéric, 01/08).
 //
@@ -457,8 +589,17 @@ export const GROUPES: Record<
   },
 };
 
-export function groupeDeMaitrise(justes: number, total: number): GroupeMaitrise {
+export function groupeDeMaitrise(
+  justes: number,
+  total: number,
+  seuils?: SeuilsMaitrise,
+): GroupeMaitrise {
   if (total === 0) return "a_besoins";
+  if (seuils) {
+    if (justes >= seuils.satisfaisantMin) return "satisfaisant";
+    if (justes > seuils.aBesoinsMax) return "fragile";
+    return "a_besoins";
+  }
   const pct = (justes / total) * 100;
   if (pct >= 60) return "satisfaisant";
   if (pct > 30) return "fragile";
@@ -471,7 +612,33 @@ export type BilanTheme = {
   justes: number;
   total: number;
   micros: BilanMicro[];
+  /** Seuils à appliquer à CE bloc — déjà ramenés au nombre de questions
+   *  réellement posées. Absents, on retombe sur les pourcentages. */
+  seuils?: SeuilsMaitrise;
 };
+
+/**
+ * LES SEUILS OFFICIELS SUPPOSENT L'ÉPREUVE ENTIÈRE. Si une tranche n'a pas pu
+ * être remplie — banque à sec sur un type, ou tout déjà vu lors des passages
+ * précédents — le domaine sort avec moins de questions que prévu, et un seuil
+ * absolu se retourne contre l'élève : exiger 9 bonnes réponses sur 14, c'est
+ * lui laisser 5 erreurs ; exiger les mêmes 9 sur 11 questions posées, plus que
+ * 2. On ramène donc le seuil au nombre de questions réellement posées.
+ */
+function seuilsAjustes(
+  theme: ThemeEval,
+  total: number,
+): SeuilsMaitrise | undefined {
+  if (!theme.seuils) return undefined;
+  if (total === theme.nbQuestions || theme.nbQuestions === 0) {
+    return theme.seuils;
+  }
+  const ratio = total / theme.nbQuestions;
+  return {
+    aBesoinsMax: Math.round(theme.seuils.aBesoinsMax * ratio),
+    satisfaisantMin: Math.ceil(theme.seuils.satisfaisantMin * ratio),
+  };
+}
 
 export function construireBilan(
   config: ConfigEpreuve,
@@ -504,6 +671,82 @@ export function construireBilan(
         justes,
         total,
         micros,
+        seuils: seuilsAjustes(theme, total),
+      };
+    })
+    .filter((t) => t.total > 0);
+}
+
+/**
+ * LE BILAN DES TESTS SPÉCIFIQUES — la seconde moitié de ce que rend
+ * l'évaluation officielle, et celle qui manquait.
+ *
+ * Il ne se déduit pas du bilan par domaine : un test spécifique les traverse.
+ * Les 23 questions d'automatismes sont dispersées entre « Nombres et calculs »
+ * et « Grandeurs et mesures », et c'est leur total à elles qui décide du
+ * groupe. Un élève peut donc être satisfaisant en nombres et calculs et à
+ * besoins en automatismes — c'est même l'information la plus utile au
+ * professeur, puisqu'elle dit que ce qui manque, ce sont des réflexes et non
+ * des connaissances.
+ */
+export function construireBilanTests(
+  config: ConfigEpreuve,
+  questions: QuestionEval[],
+  reponses: Record<number, string>,
+): BilanTheme[] {
+  if (!config.testsSpecifiques?.length) return [];
+
+  // L'effectif officiel du test : la somme de ce que les domaines lui donnent.
+  const attenduDe = (type: TypeItem) =>
+    config.themes.reduce(
+      (n, t) =>
+        n +
+        (t.repartition ?? []).reduce(
+          (m, r) => m + (r.type === type ? r.nbQuestions : 0),
+          0,
+        ),
+      0,
+    );
+
+  return config.testsSpecifiques
+    .map((test) => {
+      const micros: BilanMicro[] = [];
+      let justes = 0;
+      let total = 0;
+
+      questions.forEach((q, index) => {
+        if (q.typeItem !== test.id) return;
+        total += 1;
+        const reussi = reponses[index] === q.expected[0];
+        if (reussi) justes += 1;
+        micros.push({
+          microId: q.microId,
+          microLabel: q.microLabel,
+          notionId: q.notionId,
+          notionLabel: q.notionLabel,
+          reussi,
+        });
+      });
+
+      return {
+        themeId: test.id,
+        themeLabel: test.label,
+        justes,
+        total,
+        micros,
+        // On réutilise l'ajusteur des domaines : un test spécifique tronqué
+        // pose exactement le même piège.
+        seuils: seuilsAjustes(
+          {
+            id: test.id,
+            label: test.label,
+            quoi: test.quoi,
+            notions: [],
+            nbQuestions: attenduDe(test.id),
+            seuils: test.seuils,
+          },
+          total,
+        ),
       };
     })
     .filter((t) => t.total > 0);

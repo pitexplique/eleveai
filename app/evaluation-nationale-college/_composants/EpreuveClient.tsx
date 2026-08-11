@@ -11,6 +11,7 @@ import { useEleve } from "@/context/EleveContext";
 import {
   GROUPES,
   construireBilan,
+  construireBilanTests,
   groupeDeMaitrise,
   nbQuestions as compterQuestions,
   routeRemediation,
@@ -208,6 +209,17 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
     [etape, config, questions, reponses],
   );
 
+  // LES TESTS SPÉCIFIQUES — vides pour les épreuves qui n'en déclarent pas.
+  // ⚠️ Ils ne s'ajoutent PAS au décompte : leurs questions sont déjà comptées
+  // dans les domaines. Ce sont les mêmes réponses, relues autrement.
+  const bilanTests = useMemo(
+    () =>
+      etape === "bilan"
+        ? construireBilanTests(config, questions, reponses)
+        : [],
+    [etape, config, questions, reponses],
+  );
+
   const totalJustes = bilan.reduce((n, t) => n + t.justes, 0);
   const totalPosees = bilan.reduce((n, t) => n + t.total, 0);
 
@@ -242,7 +254,17 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
           label: t.themeLabel,
           justes: t.justes,
           total: t.total,
-          groupe: groupeDeMaitrise(t.justes, t.total),
+          groupe: groupeDeMaitrise(t.justes, t.total, t.seuils),
+        })),
+        // LES TESTS SPÉCIFIQUES PARTENT AUSSI EN BASE, dans un champ à part :
+        // ce sont eux que le professeur lit en premier dans la restitution
+        // officielle, et le tableau de bord d'établissement s'appuiera dessus.
+        tests: bilanTests.map((t) => ({
+          id: t.themeId,
+          label: t.themeLabel,
+          justes: t.justes,
+          total: t.total,
+          groupe: groupeDeMaitrise(t.justes, t.total, t.seuils),
         })),
         micros: bilan.flatMap((t) => t.micros),
       },
@@ -252,6 +274,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
   }, [
     etape,
     bilan,
+    bilanTests,
     eleve,
     totalJustes,
     totalPosees,
@@ -340,15 +363,26 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                 Même forme que le jour J : les questions défilent une par une,
                 on ne revient pas en arrière, et le temps court.
               </p>
-              {/* LE TEMPS, DIT SANS L'ARRONDIR (arbitrage du 01/08). L'épreuve
-                  officielle enchaîne bien plus de questions dans ses 50
-                  minutes : environ une par minute. On ne prétend pas au même
-                  volume — on tient la même cadence, et on l'écrit. */}
+              {/* LE TEMPS, DIT SANS L'ARRONDIR. Deux cas, et la différence
+                  compte : quand nous avons les effectifs officiels (6ᵉ maths,
+                  document DEPP), l'épreuve reprend le volume ET la durée du
+                  jour J ; sinon, on tient la cadence sur moins de questions —
+                  et on l'écrit plutôt que de laisser croire au contraire. */}
               <p className="mt-2 text-sm font-medium leading-6 text-[#1d1c16]/75">
-                Le jour J, tu auras à peu près une minute par question. Ici
-                aussi : {NB_QUESTIONS} questions, {dureeMinutes} minutes. La
-                vraie épreuve en pose simplement beaucoup plus — ce qu&apos;on
-                reproduit, c&apos;est le rythme, pas le nombre.
+                {config.volumeOfficiel ? (
+                  <>
+                    Le jour J : {NB_QUESTIONS} questions en {dureeMinutes}{" "}
+                    minutes. Ici, les mêmes — c&apos;est l&apos;épreuve entière,
+                    au tempo réel, moins de cinquante secondes par question.
+                  </>
+                ) : (
+                  <>
+                    Le jour J, tu auras à peu près une minute par question. Ici
+                    aussi : {NB_QUESTIONS} questions, {dureeMinutes} minutes. La
+                    vraie épreuve en pose simplement beaucoup plus — ce
+                    qu&apos;on reproduit, c&apos;est le rythme, pas le nombre.
+                  </>
+                )}
               </p>
             </header>
 
@@ -357,12 +391,16 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                 {
                   chiffre: String(dureeMinutes),
                   unite: "minutes",
-                  quoi: "une par question",
+                  quoi: config.volumeOfficiel
+                    ? "la durée officielle"
+                    : "une par question",
                 },
                 {
                   chiffre: String(NB_QUESTIONS),
                   unite: "questions",
-                  quoi: `en ${config.themes.length} thèmes`,
+                  quoi: config.volumeOfficiel
+                    ? `en ${config.themes.length} domaines`
+                    : `en ${config.themes.length} thèmes`,
                 },
                 { chiffre: "0", unite: "note", quoi: "un profil, pas un chiffre" },
               ].map((c) => (
@@ -845,6 +883,65 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                 </p>
               )}
 
+            {/* ══ LES TESTS SPÉCIFIQUES ══════════════════════════════════════
+                Ils viennent AVANT les domaines, comme dans la restitution
+                officielle : c'est la première chose que lit le professeur.
+                Et ils ne posent aucune question de plus — ce sont les mêmes
+                réponses, relues en travers des domaines. On le dit, sinon
+                l'élève croit avoir passé deux épreuves. */}
+            {bilanTests.length > 0 && (
+              <div className="mt-6">
+                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
+                  Les deux tests de l&apos;épreuve officielle
+                </p>
+                <p className="mt-1 max-w-2xl text-xs font-medium leading-5 text-[#1d1c16]/70">
+                  Pas de nouvelles questions : ce sont tes réponses, relues
+                  autrement. Un élève peut tenir en nombres et calculs et
+                  flancher en automatismes — cela veut dire que ce qui manque,
+                  ce sont des réflexes, pas des connaissances.
+                </p>
+                <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                  {bilanTests.map((t) => {
+                    const g = GROUPES[
+                      groupeDeMaitrise(t.justes, t.total, t.seuils)
+                    ];
+                    return (
+                      <div
+                        key={t.themeId}
+                        className="rounded-2xl bg-white/90 p-4 shadow-[0_8px_24px_-16px_rgba(29,28,22,0.5)]"
+                      >
+                        <p className="font-serif text-lg font-black leading-tight">
+                          {t.themeLabel}
+                        </p>
+                        <p className="mt-2 flex items-baseline justify-between gap-3">
+                          <span
+                            className={`text-[11px] font-black uppercase tracking-[0.14em] ${g.couleur}`}
+                          >
+                            {g.label}
+                          </span>
+                          <span
+                            className="font-serif text-2xl font-black leading-none"
+                            style={{ color: accent }}
+                          >
+                            {t.justes}/{t.total}
+                          </span>
+                        </p>
+                        <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-[#1d1c16]/10">
+                          <div
+                            className="h-2 rounded-full"
+                            style={{
+                              width: `${(t.justes / t.total) * 100}%`,
+                              backgroundColor: accent,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
             <div className="mt-6 space-y-5">
               {bilan.map((t) => {
                 const rates = t.micros.filter((m) => !m.reussi);
@@ -865,9 +962,13 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                             pareil sur les quatre. C'est un résultat, pas une
                             rubrique. */}
                         <span
-                          className={`text-[11px] font-black uppercase tracking-[0.14em] ${GROUPES[groupeDeMaitrise(t.justes, t.total)].couleur}`}
+                          className={`text-[11px] font-black uppercase tracking-[0.14em] ${GROUPES[groupeDeMaitrise(t.justes, t.total, t.seuils)].couleur}`}
                         >
-                          {GROUPES[groupeDeMaitrise(t.justes, t.total)].label}
+                          {
+                            GROUPES[
+                              groupeDeMaitrise(t.justes, t.total, t.seuils)
+                            ].label
+                          }
                         </span>
                         <span
                           className="font-serif text-2xl font-black leading-none"
