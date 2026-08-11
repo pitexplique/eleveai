@@ -435,29 +435,31 @@ export const fluenceLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_flue_mots_irreguliers_open_1",
+    id: "ce2_flue_mots_irreguliers_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "fluence_lecture",
     microId: "ce2_flue_mots_irreguliers",
     difficulty: 3,
     theme: "neutral",
-    hint: "Compare ce que tu vois et ce que tu dis.",
-    tags: ["ce2", "fluence", "mots-irreguliers", "ouverte"],
+    hint: "Celui-là ne se déchiffre pas. Il se reconnait.",
+    tags: ["ce2", "fluence", "mots-irreguliers", "methode"],
     generate: () => {
       const m = randomChoice(MOTS_LECTURE.filter((x) => !x.regulier));
+      const bonne = "Je le regarde en entier, je ferme les yeux, je le revois — puis je le lis d'un coup, sans le déchiffrer.";
       return {
-        text: `Le mot « ${m.mot} » ne se lit pas comme il s'écrit.\n\nExplique où est le piège, et comment tu ferais pour le retenir.`,
-        format: "open" as const,
-        expected: [
-          ...m.surprise.split(" ").filter((w) => w.length > 4),
-          "par cœur",
-          "par coeur",
-          "regarde",
-          "image",
-          "muet",
+        text: `Le mot « ${m.mot} » ne se lit pas comme il s'écrit.\n\nComment fais-tu pour le lire sans buter dessus ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège : déchiffrer un mot irrégulier donne le mauvais son.
+          "Je le déchiffre lettre par lettre, lentement.",
+          // La voisine : découper, c'est le geste des mots longs réguliers.
+          "Je le coupe en syllabes.",
+          "Je le saute et je continue.",
         ],
-        comparator: "contains_keyword" as const,
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un mot irrégulier ne se déchiffre pas : il se reconnait.",
           "Regarde-le, ferme les yeux, revois-le, puis lis-le en entier sans t'arrêter.",
@@ -529,22 +531,30 @@ export const fluenceLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_flue_mots_inconnus_open_1",
+    id: "ce2_flue_mots_inconnus_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "fluence_lecture",
     microId: "ce2_flue_mots_inconnus",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis où tu couperais, et pourquoi là.",
-    tags: ["ce2", "fluence", "mots-inconnus", "ouverte"],
+    hint: "Il y a un endroit où couper, et il n'est pas au milieu.",
+    tags: ["ce2", "fluence", "mots-inconnus", "methode"],
     generate: () => {
       const m = randomChoice(MOTS_LONGS);
+      const bonne = `Je le coupe en morceaux qui se disent chacun d'un coup : ${m.decoupe}.`;
       return {
-        text: `Tu dois lire « ${m.mot} » à voix haute sans t'arrêter.\n\nComment t'y prends-tu ? Explique.`,
-        format: "open" as const,
-        expected: ["morceau", "coupe", "découpe", "decoupe", "syllabe", m.decoupe.split("-")[0]],
-        comparator: "contains_keyword" as const,
+        text: `Tu dois lire « ${m.mot} » à voix haute sans t'arrêter.\n\nComment t'y prends-tu ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : couper au milieu, sans écouter les morceaux.
+          "Je coupe au milieu, en deux parts égales.",
+          "Je le lis lettre par lettre.",
+          "Je le lis très vite : on ne verra pas l'erreur.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "On lit un mot long en le coupant en morceaux qui se prononcent chacun d'un coup.",
           "Coupe après une voyelle, ou entre deux consonnes, et vérifie que chaque morceau se dit tout seul.",
@@ -618,22 +628,32 @@ export const fluenceLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_flue_lettres_muettes_open_1",
+    id: "ce2_flue_lettres_muettes_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "fluence_lecture",
     microId: "ce2_flue_lettres_muettes",
     difficulty: 3,
     theme: "neutral",
-    hint: "Une lettre muette sert à l'écriture, même si elle gêne la lecture.",
-    tags: ["ce2", "fluence", "lettres-muettes", "ouverte"],
+    hint: "Elle gêne la lecture, et elle sert à l'écriture. Allonge le mot pour l'entendre.",
+    tags: ["ce2", "fluence", "lettres-muettes", "methode"],
     generate: () => {
       const m = randomChoice(LETTRES_MUETTES.filter((x) => x.lettre.includes("final")));
+      const bonne = "À l'écriture : on la retrouve dans la famille du mot, et si on allonge le mot, elle se met à s'entendre.";
       return {
-        text: `Dans « ${m.mot} », ${m.lettre} ne se prononce pas.\n\nEn lisant, tu dois le sauter. Mais à quoi sert-il, alors ? Explique.`,
-        format: "open" as const,
-        expected: ["famille", "féminin", "feminin", "verbe", "écrire", "ecrire", "allonge"],
-        comparator: "contains_keyword" as const,
+        text: `Dans « ${m.mot} », ${m.lettre} ne se prononce pas.\n\nEn lisant, tu dois le sauter. Alors, à quoi sert-il ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : une lettre inutile, gardée par habitude.
+          "À rien : c'est une lettre en trop qu'on garde par habitude.",
+          // La voisine : la marque du pluriel est une autre lettre muette,
+          // mais celle-ci n'en est pas une.
+          "À marquer le pluriel.",
+          "À montrer que le mot est difficile.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Une lettre finale muette relie le mot aux autres mots de sa famille.",
           "Allonge le mot : la lettre se met à s'entendre, et tu sais qu'il faut l'écrire.",
@@ -709,28 +729,30 @@ export const fluenceLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_flue_phrase_expression_open_1",
+    id: "ce2_flue_phrase_expression_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "fluence_lecture",
     microId: "ce2_flue_phrase_expression",
     difficulty: 3,
     theme: "neutral",
-    hint: "Décris ce que fait ta voix, du début à la fin.",
-    tags: ["ce2", "fluence", "ponctuation", "ouverte"],
+    hint: "Il y a un signe dans la phrase, et c'est lui qui commande.",
+    tags: ["ce2", "fluence", "ponctuation", "methode"],
     generate: () => {
       const p = randomChoice(PHRASES_A_LIRE);
+      const bonne = `La ponctuation : ${p.signe} demande de lire ${p.consigne}.`;
       return {
-        text: `Tu dois lire cette phrase à voix haute devant la classe :\n\n« ${p.phrase} »\n\nQue fait ta voix, et pourquoi ? Explique.`,
-        format: "open" as const,
-        expected: [
-          ...p.consigne.split(" ").filter((w) => w.length > 4),
-          "voix",
-          "pause",
-          "arrête",
-          "monte",
+        text: `Tu dois lire cette phrase à voix haute devant la classe :\n\n« ${p.phrase} »\n\nQu'est-ce qui dit à ta voix ce qu'elle doit faire ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : la lecture plate, tout au même ton.
+          "Rien : on lit tout de la même façon, c'est plus clair.",
+          "Le premier mot de la phrase : c'est lui qui donne le ton.",
+          "La longueur de la phrase.",
         ],
-        comparator: "contains_keyword" as const,
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "La ponctuation dit à la voix ce qu'elle doit faire : monter, descendre, s'arrêter, forcer.",
           "Repère le signe AVANT de commencer : on prépare une lecture, on ne la découvre pas en la faisant.",
@@ -830,22 +852,30 @@ export const fluenceLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_flue_liaisons_open_1",
+    id: "ce2_flue_liaisons_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "fluence_lecture",
     microId: "ce2_flue_liaisons",
     difficulty: 3,
     theme: "neutral",
-    hint: "Explique ce qui arrive à la lettre de la fin du premier mot.",
-    tags: ["ce2", "fluence", "liaisons", "ouverte"],
+    hint: "Ce son n'est pas nouveau : il était déjà écrit, et il se taisait.",
+    tags: ["ce2", "fluence", "liaisons", "methode"],
     generate: () => {
       const l = randomChoice(LIAISONS.filter((x) => x.faite));
+      const bonne = `De la dernière lettre du premier mot : muette d'habitude, elle se réveille parce que le mot suivant commence par une voyelle — on entend ${l.son}.`;
       return {
-        text: `Dans « ${l.groupe} », on entend un son de plus entre les deux mots.\n\nD'où vient-il ? Explique.`,
-        format: "open" as const,
-        expected: ["lettre", "muette", "voyelle", "réveille", "reveille", "fin du mot", l.son],
-        comparator: "contains_keyword" as const,
+        text: `Dans « ${l.groupe} », on entend un son de plus entre les deux mots.\n\nD'où vient-il ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège : croire qu'on ajoute une lettre qui n'était pas écrite.
+          "D'une lettre nouvelle qu'on ajoute entre les deux mots.",
+          "De la première lettre du deuxième mot.",
+          "De rien : c'est juste une façon de parler vite.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Une liaison, c'est une lettre muette qui se réveille parce que le mot d'après commence par une voyelle.",
           "Regarde la dernière lettre du premier mot : c'est elle qu'on entend, pas une lettre nouvelle.",
@@ -923,17 +953,26 @@ export const fluenceLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce2_flue_texte_90_open_1",
+    id: "ce2_flue_texte_90_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "fluence_lecture",
     microId: "ce2_flue_texte_90",
     difficulty: 3,
     theme: "neutral",
-    text: "Lire vite n'est pas le but : c'est un moyen.\n\nÀ quoi sert de lire à 90 mots par minute plutôt qu'à 40 ? Explique.",
-    format: "open",
-    expected: ["comprendre", "comprend", "sens", "phrase", "oublie", "fil", "histoire"],
-    comparator: "contains_keyword",
+    text: "Lire vite n'est pas le but : c'est un moyen.\n\nÀ quoi sert de lire à 90 mots par minute plutôt qu'à 40 ?",
+    format: "qcm",
+    choices: [
+      "À libérer de la place dans la tête pour comprendre : à 40, on a oublié le début de la phrase avant d'arriver au bout.",
+      // L'erreur réelle : la vitesse prise pour le but, et non pour le moyen.
+      "À finir le livre plus tôt.",
+      "À montrer à la maitresse qu'on sait lire.",
+      "À ne pas avoir à relire le texte.",
+    ],
+    expected: [
+      "À libérer de la place dans la tête pour comprendre : à 40, on a oublié le début de la phrase avant d'arriver au bout.",
+    ],
+    comparator: "mcq_exact",
     hint: "Pense à ce qui se passe dans ta tête pendant que tu déchiffres.",
     explanation: exp(
       "La vitesse de lecture n'a d'intérêt que parce qu'elle libère la place pour comprendre.",
@@ -941,7 +980,7 @@ export const fluenceLectureBank: TutorBankItemV4[] = [
       "À 40 mots par minute, on a oublié le début de la phrase avant d'arriver au bout. Toute la tête est occupée à déchiffrer, il ne reste rien pour comprendre. À 90, les mots viennent seuls, et la tête est libre pour l'histoire.",
       "Cela libère de la place dans la tête pour comprendre ce qu'on lit.",
     ),
-    tags: ["ce2", "fluence", "vitesse", "methode", "ouverte"],
+    tags: ["ce2", "fluence", "vitesse", "methode", "qcm"],
   },
 
   /* =========================================================
@@ -977,29 +1016,30 @@ export const fluenceLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_flue_expressive_open_1",
+    id: "ce2_flue_expressive_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "fluence_lecture",
     microId: "ce2_flue_expressive",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis ce que tu regardes AVANT de commencer à lire.",
-    tags: ["ce2", "fluence", "expressive", "ouverte"],
+    hint: "Une lecture expressive se prépare des yeux. Trois regards suffisent.",
+    tags: ["ce2", "fluence", "expressive", "methode"],
     generate: () => {
       const p = randomChoice(PASSAGES);
+      const bonne = `Je regarde trois choses : qui parle, où sont les pauses, et ce qui change de rythme — ici, ${p.consigne}.`;
       return {
-        text: `Tu dois lire ce passage à voix haute devant la classe :\n\n${p.texte}\n\nComment le prépares-tu ? Explique.`,
-        format: "open" as const,
-        expected: [
-          ...p.consigne.split(" ").filter((w) => w.length > 4),
-          "voix",
-          "pause",
-          "prépare",
-          "prepare",
-          "relis",
+        text: `Tu dois lire ce passage à voix haute devant la classe :\n\n${p.texte}\n\nQue fais-tu AVANT de commencer ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : découvrir le texte en le lisant devant les autres.
+          "Rien : je commence, et je verrai bien.",
+          "J'apprends le passage par cœur.",
+          "Je compte les mots pour savoir combien de temps cela va prendre.",
         ],
-        comparator: "contains_keyword" as const,
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Une lecture expressive se prépare : on ne l'improvise pas au moment de parler.",
           "Trois regards avant de lire : qui parle, où sont les pauses, et ce qui change de rythme.",
@@ -1061,33 +1101,34 @@ export const fluenceLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_flue_defi_open_1",
+    id: "ce2_flue_defi_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "fluence_lecture",
     microId: "ce2_flue_defi",
     difficulty: 3,
     theme: "neutral",
-    hint: "Une lecture se prépare : dis tout ce que tu vérifies.",
-    tags: ["ce2", "fluence", "defi", "ouverte"],
+    // Le cran de plus : trois vérifications à tenir ensemble, alors que chaque
+    // micro-compétence n'en demandait qu'une. Le piège n'en garde qu'une.
+    hint: "Une lecture se prépare, et pas sur un seul point.",
+    tags: ["ce2", "fluence", "defi", "methode"],
     generate: () => {
       const p = randomChoice(PHRASES_A_LIRE);
       const m = randomChoice(MOTS_LONGS);
+      const bonne = `Trois choses : je découpe « ${m.mot} » en ${m.decoupe}, je repère les liaisons, et je regarde la ponctuation jusqu'au bout de la phrase.`;
       return {
-        text: `On te demande de lire à voix haute :\n\n« ${p.phrase} »\n\net il y a le mot « ${m.mot} » un peu plus loin.\n\nQue prépares-tu avant de commencer ? Explique.`,
-        format: "open" as const,
-        expected: [
-          "découpe",
-          "decoupe",
-          "morceau",
-          "liaison",
-          "ponctuation",
-          "pause",
-          "voix",
-          "relis",
-          ...p.consigne.split(" ").filter((w) => w.length > 5),
+        text: `On te demande de lire à voix haute :\n\n« ${p.phrase} »\n\net il y a le mot « ${m.mot} » un peu plus loin.\n\nQue prépares-tu avant de commencer ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Le piège fin : préparer le mot long seulement, et découvrir la
+          // ponctuation la voix déjà lancée.
+          "Je prépare le mot long, et je découvrirai la ponctuation en lisant.",
+          "Je lis la phrase une fois dans ma tête, et ça suffit.",
+          "Je m'entraine à lire le plus vite possible.",
         ],
-        comparator: "contains_keyword" as const,
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Une lecture à voix haute se prépare des yeux, avant que la voix ne commence.",
           "Trois choses : découper les mots longs, repérer les liaisons, et regarder la ponctuation jusqu'au bout de la phrase.",
