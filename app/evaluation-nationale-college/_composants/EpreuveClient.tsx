@@ -14,6 +14,7 @@ import {
   construireBilanTests,
   groupeDeMaitrise,
   nbQuestions as compterQuestions,
+  reponseTableau,
   routeRemediation,
   tirerEpreuve,
   type ConfigEpreuve,
@@ -94,6 +95,10 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
   const [questions, setQuestions] = useState<QuestionEval[]>([]);
   const [index, setIndex] = useState(0);
   const [choix, setChoix] = useState<string | null>(null);
+  // LE TABLEAU SÉRIE se répond ligne par ligne, pas d'un clic : on garde le
+  // classement de chaque proposition jusqu'à la validation, qui le réduit à
+  // une seule réponse — juste, ou fausse.
+  const [grille, setGrille] = useState<Record<string, "vrai" | "faux">>({});
   const [reponses, setReponses] = useState<Record<number, string>>({});
   const [restant, setRestant] = useState(config.dureeSecondes);
 
@@ -163,6 +168,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
     setQuestions(epreuve.questions);
     setIndex(0);
     setChoix(null);
+    setGrille({});
     setReponses({});
     setRestant(epreuve.dureeSecondes);
     setChronoEcoule(false);
@@ -173,10 +179,24 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
   }
 
   function validerEtContinuer() {
-    if (choix === null) return;
-    const suivant = { ...reponses, [index]: choix };
+    const q = questions[index];
+    let retenue: string | null = choix;
+
+    // ⚠️ TOUT JUSTE OU RIEN — la règle du sujet officiel, mot pour mot :
+    // « L'élève doit avoir répondu correctement à toutes les lignes pour
+    // qu'on considère qu'il a réussi la question. » On réduit donc la grille
+    // à une réponse unique — la bonne si les quatre lignes sont justes, un
+    // marqueur sinon. Le bilan et les seuils n'ont ainsi rien à connaître du
+    // format : une question de tableau compte comme n'importe quelle autre.
+    if (q?.format === "tableau") {
+      retenue = reponseTableau(q, grille);
+    }
+
+    if (retenue === null) return;
+    const suivant = { ...reponses, [index]: retenue };
     setReponses(suivant);
     setChoix(null);
+    setGrille({});
 
     // `setReponses` juste au-dessus est appliqué avant le rendu du bilan
     // (React groupe les mises à jour d'un même gestionnaire) : la dernière
@@ -284,6 +304,14 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
   ]);
 
   const question = questions[index];
+
+  // Un tableau série ne se valide pas tant qu'il reste une ligne sans réponse.
+  // C'est la même exigence que pour les autres formats, où l'on ne passe pas
+  // sans avoir choisi : ici, choisir, c'est classer les quatre lignes.
+  const peutValider =
+    question?.format === "tableau"
+      ? question.choices.every((c) => grille[c])
+      : choix !== null;
 
   // ─── L'ÉCOUTE DES SUPPORTS ORAUX ────────────────────────────────────────
   // Le compteur suit le SUPPORT, pas la question : les cinq questions d'un
@@ -753,7 +781,53 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                     « sous la forme d'une liste de cases à cocher » ou « sous la
                     forme d'un menu déroulant ». On rencontre les deux ici pour
                     ne pas les découvrir le jour J. */}
-                {question.format === "liste" ? (
+                {question.format === "tableau" ? (
+                  <div className="mt-4 overflow-hidden rounded-xl border-2 border-[#1d1c16]/20">
+                    <p className="bg-[#1d1c16]/5 px-3 py-2 text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/70">
+                      Cocher une réponse par ligne — il faut les quatre justes
+                    </p>
+                    {question.choices.map((c, rang) => (
+                      <div
+                        key={c}
+                        className={[
+                          "flex flex-wrap items-center gap-x-3 gap-y-2 px-3 py-2.5",
+                          rang > 0 ? "border-t border-[#1d1c16]/12" : "",
+                        ].join(" ")}
+                      >
+                        <span className="min-w-0 flex-1 text-sm font-black">
+                          <MarkdownMath className="inline">{c}</MarkdownMath>
+                        </span>
+                        <span className="flex shrink-0 gap-2">
+                          {(["vrai", "faux"] as const).map((v) => (
+                            <button
+                              key={v}
+                              type="button"
+                              onClick={() =>
+                                setGrille((g) => ({ ...g, [c]: v }))
+                              }
+                              className={[
+                                "rounded-lg border-2 px-3 py-1.5 text-xs font-black uppercase tracking-[0.1em] transition",
+                                grille[c] === v
+                                  ? "text-white"
+                                  : "border-[#1d1c16]/20 hover:border-[#1d1c16]/50 hover:bg-[#1d1c16]/5",
+                              ].join(" ")}
+                              style={
+                                grille[c] === v
+                                  ? {
+                                      backgroundColor: accent,
+                                      borderColor: accent,
+                                    }
+                                  : undefined
+                              }
+                            >
+                              {v}
+                            </button>
+                          ))}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ) : question.format === "liste" ? (
                   <div className="mt-4">
                     <label
                       className="flex flex-wrap items-center gap-2 text-sm font-black"
@@ -810,7 +884,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                   <button
                     type="button"
                     onClick={validerEtContinuer}
-                    disabled={choix === null}
+                    disabled={!peutValider}
                     className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-sm font-black text-white shadow-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
                     style={{ backgroundColor: accent }}
                   >

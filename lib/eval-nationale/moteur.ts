@@ -160,11 +160,19 @@ export function routeRemediation(
  * cliqué, et il se manipule autrement. Un élève qui ne l'a jamais rencontré
  * perd du temps le jour J — ce que la prise en main est justement là pour
  * éviter.
+ *
+ * ET IL EXISTE UN SECOND TYPE DE QUESTION, le « tableau série » (dit aussi
+ * tableau à double entrée) : une proposition par ligne, à classer dans les
+ * colonnes, et — c'est toute sa dureté — « l'élève doit avoir répondu
+ * correctement à TOUTES les lignes pour qu'on considère qu'il a réussi la
+ * question ». Une case fausse sur quatre, et la question est perdue.
  */
-export type FormatReponse = "cases" | "liste";
+export type FormatReponse = "cases" | "liste" | "tableau";
 
 /** Au-delà, une proposition n'entre pas lisiblement dans un menu déroulant. */
 const LONGUEUR_MAX_LISTE = 40;
+/** Au-delà, une proposition ne tient pas dans une ligne de tableau. */
+const LONGUEUR_MAX_TABLEAU = 70;
 
 /**
  * ⚠️ LE FORMAT SE TIRE SUR L'EMPREINTE DE L'ÉNONCÉ, jamais au hasard : une
@@ -177,12 +185,78 @@ const LONGUEUR_MAX_LISTE = 40;
  * mesurerait l'agilité plutôt que les mathématiques.
  */
 function formatDe(q: QuestionEval): FormatReponse {
+  const tirage = parseInt(q.cle, 36);
+
+  // ── LE TABLEAU SÉRIE ────────────────────────────────────────────────────
+  // ⚠️ IL EST FABRIQUÉ À PARTIR DU QCM, et c'est un choix assumé (11/08) :
+  // le sujet officiel décrit exactement cela — « une série de propositions à
+  // classer » —, et un QCM à quatre propositions dont une est juste EST une
+  // série à classer en vrai/faux. Écrire des items conçus pour ce format
+  // serait meilleur ; c'est un chantier de contenu, pas de mécanique, et le
+  // moteur n'aura pas à changer le jour où on les écrira.
+  //
+  // ⛔ MAIS PAS N'IMPORTE QUEL QCM, et le garde-fou est SÉVÈRE À DESSEIN.
+  //
+  // Dans le sujet officiel, les lignes d'un tableau sont des PROPOSITIONS qui
+  // se tiennent seules — « (d4) et (d5) sont perpendiculaires » —, pas des
+  // réponses candidates. « 8 — vrai ou faux ? » ne veut rien dire hors de sa
+  // question, et « 21 cm — vrai ou faux ? » guère plus : c'est encore la
+  // réponse d'un QCM, déguisée.
+  //
+  // D'où l'exigence d'un VRAI MOT de trois lettres au moins dans chaque
+  // proposition — ce qui écarte « 21 cm », dont le seul mot est une unité.
+  // Conséquence assumée, mesurée le 11/08 : le tableau devient rare en maths
+  // (nos propositions y sont surtout numériques) et fréquent en français.
+  // Mieux vaut un format rare et juste que fréquent et bancal — les vrais
+  // items de tableau restent à écrire, et ce jour-là le moteur ne bougera pas.
+  const classables = q.choices.every(
+    (c) =>
+      /\p{L}{3,}/u.test(c) &&
+      /\s/.test(c) &&
+      c.length <= LONGUEUR_MAX_TABLEAU &&
+      !/[$\\^_{}]/.test(c),
+  );
+  // Une sur huit : c'est le format le plus dur de l'épreuve — tout juste ou
+  // rien — et le sujet dit le QCM « majoritairement employé ».
+  if (classables && tirage % 8 === 0) return "tableau";
+
   if (q.choices.some((c) => c.length > LONGUEUR_MAX_LISTE)) return "cases";
   // ⛔ NI LATEX NI MARKDOWN DANS UN MENU DÉROULANT. Les propositions passent
   // partout ailleurs par `MarkdownMath` ; une <option> ne rend que du texte
   // brut, et une fraction y apparaîtrait telle quelle — « \dfrac{1}{2} ».
   if (q.choices.some((c) => /[$\\^_{}]/.test(c))) return "cases";
-  return parseInt(q.cle, 36) % 4 === 0 ? "liste" : "cases";
+  return tirage % 4 === 0 ? "liste" : "cases";
+}
+
+/**
+ * Ce qu'on enregistre quand une grille de tableau série n'est pas entièrement
+ * juste. Le caractère nul en tête est délibéré : aucune proposition de banque
+ * ne peut lui ressembler, donc il ne sera jamais pris pour une bonne réponse.
+ */
+export const GRILLE_FAUSSE = " grille-fausse";
+
+/**
+ * LA RÈGLE DU TABLEAU SÉRIE, ET ELLE EST DURE : « L'élève doit avoir répondu
+ * correctement à TOUTES les lignes pour qu'on considère qu'il a réussi la
+ * question. » Une case fausse sur quatre, et tout est perdu.
+ *
+ * On réduit donc la grille à une réponse unique — la bonne si les quatre
+ * lignes sont justes, un marqueur sinon. Le bilan et les seuils n'ont ainsi
+ * rien à connaître du format : une question de tableau se compte comme les
+ * autres. La règle vit ici, et pas dans le composant, parce que c'est une
+ * règle d'épreuve : elle doit pouvoir se vérifier sans navigateur.
+ *
+ * @returns `null` tant que la grille est incomplète — on ne valide pas.
+ */
+export function reponseTableau(
+  q: Pick<QuestionEval, "choices" | "expected">,
+  grille: Record<string, "vrai" | "faux" | undefined>,
+): string | null {
+  if (!q.choices.every((c) => grille[c])) return null;
+  const toutJuste = q.choices.every(
+    (c) => (grille[c] === "vrai") === (c === q.expected[0]),
+  );
+  return toutJuste ? q.expected[0] : GRILLE_FAUSSE;
 }
 
 export type QuestionEval = {
