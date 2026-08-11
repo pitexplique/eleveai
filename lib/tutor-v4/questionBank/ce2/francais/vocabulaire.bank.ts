@@ -478,12 +478,10 @@ const SENS_FIGURES: readonly SensFigure[] = [
 type Expression = {
   readonly expression: string;
   readonly sens: string;
-  /** Le sens qu'on obtiendrait en prenant les mots un par un. */
+  /** Le sens qu'on obtiendrait en prenant les mots un par un. C'est lui qui
+   *  fait la bonne réponse du QCM de méthode : l'expression ne se lit pas mot
+   *  à mot, et « avoir avalé un petit animal » le montre mieux qu'une règle. */
   readonly piegeLitteral: string;
-  /** ⚠️ Écrits à la main, et sans ponctuation. Les découper à la volée depuis
-   *  `sens` produirait des clés comme « distrait, » — avec la virgule — que
-   *  `contains_keyword` chercherait telle quelle dans la réponse de l'élève. */
-  readonly motsCles: readonly string[];
 };
 
 const EXPRESSIONS: readonly Expression[] = [
@@ -491,61 +489,51 @@ const EXPRESSIONS: readonly Expression[] = [
     expression: "avoir un chat dans la gorge",
     sens: "être enroué, avoir du mal à parler",
     piegeLitteral: "avoir avalé un petit animal",
-    motsCles: ["enroué", "enroue", "parler", "voix", "rhume"],
   },
   {
     expression: "il pleut des cordes",
     sens: "il pleut très fort",
     piegeLitteral: "des cordes tombent du ciel",
-    motsCles: ["pleut", "pluie", "fort", "averse", "orage"],
   },
   {
     expression: "avoir la tête dans les nuages",
     sens: "être distrait, rêver au lieu d'écouter",
     piegeLitteral: "être plus grand que les nuages",
-    motsCles: ["distrait", "rêve", "reve", "écoute pas", "ecoute pas", "pense à autre"],
   },
   {
     expression: "tomber dans les pommes",
     sens: "s'évanouir",
     piegeLitteral: "tomber dans un panier de fruits",
-    motsCles: ["évanoui", "evanoui", "malaise", "tombe", "connaissance"],
   },
   {
     expression: "donner sa langue au chat",
     sens: "renoncer à deviner",
     piegeLitteral: "offrir sa langue à un animal",
-    motsCles: ["renonce", "devine", "trouve pas", "abandonne", "réponse"],
   },
   {
     expression: "avoir le cœur sur la main",
     sens: "être très généreux",
     piegeLitteral: "porter son cœur dans sa paume",
-    motsCles: ["généreux", "genereux", "donne", "partage", "gentil"],
   },
   {
     expression: "mettre la main à la pâte",
     sens: "participer au travail",
     piegeLitteral: "toucher de la farine",
-    motsCles: ["participe", "aide", "travail", "coup de main"],
   },
   {
     expression: "être comme un poisson dans l'eau",
     sens: "se sentir tout à fait à l'aise",
     piegeLitteral: "savoir nager très bien",
-    motsCles: ["à l'aise", "a l'aise", "bien", "content", "habitude"],
   },
   {
     expression: "avoir un poil dans la main",
     sens: "être très paresseux",
     piegeLitteral: "avoir un cheveu sur la paume",
-    motsCles: ["paresseux", "flemme", "travaille pas", "fait rien"],
   },
   {
     expression: "casser les pieds",
     sens: "ennuyer quelqu'un",
     piegeLitteral: "faire mal aux jambes",
-    motsCles: ["ennuie", "embête", "embete", "agace", "énerve", "enerve"],
   },
 ];
 
@@ -706,22 +694,31 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_voc_contexte_open_1",
+    id: "ce2_voc_contexte_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "vocabulaire",
     microId: "ce2_voc_contexte",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis ce que tu fais quand tu tombes sur un mot que tu ne connais pas.",
-    tags: ["ce2", "vocabulaire", "contexte", "ouverte"],
+    hint: "Le mot inconnu ne se devine pas tout seul : il se devine avec ses voisins.",
+    tags: ["ce2", "vocabulaire", "contexte", "methode"],
     generate: () => {
       const c = randomChoice(CONTEXTES);
+      const bonne = "Je relis toute la phrase, je saute le mot, et je cherche ce qui aurait du sens à sa place.";
       return {
-        text: `« ${c.phrase} »\n\nTu ne connais pas le mot « ${c.mot} ». Explique comment tu t'y prends pour en deviner le sens.`,
-        format: "open" as const,
-        expected: ["autour", "contexte", "phrase", "relis", "indice", "reste", "avant", "après", "apres"],
-        comparator: "contains_keyword" as const,
+        text: `« ${c.phrase} »\n\nTu ne connais pas le mot « ${c.mot} ». Comment fais-tu pour en deviner le sens ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : sauter le mot pour de bon, et perdre la phrase.
+          "Je saute le mot et je continue ma lecture sans m'en occuper.",
+          "Je regarde sa première lettre et je cherche un mot connu qui commence pareil.",
+          // La voisine : découper, c'est déchiffrer — ça ne donne pas le sens.
+          "Je découpe le mot en syllabes et je le lis à voix haute.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un mot inconnu se devine grâce aux mots qui l'entourent : c'est ce qu'on appelle le contexte.",
           "Relis la phrase entière, saute le mot, et demande-toi ce qui aurait du sens à sa place.",
@@ -797,7 +794,7 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_voc_famille_open_1",
+    id: "ce2_voc_famille_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "vocabulaire",
@@ -805,14 +802,22 @@ export const vocabulaireBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Il ne suffit pas que les mots commencent pareil.",
-    tags: ["ce2", "vocabulaire", "famille", "ouverte"],
+    tags: ["ce2", "vocabulaire", "famille", "methode"],
     generate: () => {
       const f = randomChoice(FAMILLES_LEXICALES);
+      const bonne = `Parce qu'ils ne parlent pas de la même chose : « ${f.intrus} » n'a rien à voir avec l'idée de « ${f.radical} ».`;
       return {
-        text: `« ${f.radical} » et « ${f.intrus} » commencent presque pareil, mais ne sont PAS de la même famille.\n\nExplique pourquoi.`,
-        format: "open" as const,
-        expected: ["sens", "idée", "idee", "même chose", "meme chose", "parle", "veut dire", "signifie"],
-        comparator: "contains_keyword" as const,
+        text: `« ${f.radical} » et « ${f.intrus} » commencent presque pareil, mais ne sont PAS de la même famille.\n\nPourquoi ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : croire qu'une famille est une affaire de lettres.
+          "Parce que pour être de la même famille, il faudrait exactement le même début, lettre pour lettre.",
+          "Parce qu'ils ne sont pas de la même classe de mots : l'un est un nom, l'autre un verbe.",
+          "Parce qu'ils n'ont pas le même nombre de lettres.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Une famille de mots, ce n'est pas une ressemblance de lettres : c'est une parenté de SENS.",
           "Demande-toi si les deux mots parlent de la même chose. Si non, ce sont des voisins, pas des parents.",
@@ -885,22 +890,30 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_voc_prefixe_suffixe_open_1",
+    id: "ce2_voc_prefixe_suffixe_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "vocabulaire",
     microId: "ce2_voc_prefixe_suffixe",
     difficulty: 3,
     theme: "neutral",
-    hint: "Deux morceaux, deux rôles. Dis-les tous les deux.",
-    tags: ["ce2", "vocabulaire", "affixes", "ouverte"],
+    hint: "Cherche d'abord le mot que tu connais déjà, caché à l'intérieur.",
+    tags: ["ce2", "vocabulaire", "affixes", "methode"],
     generate: () => {
       const a = randomChoice(AFFIXES);
+      const bonne = `Je cherche le mot que je connais à l'intérieur — « ${a.base} » — et je regarde ce qui l'entoure : « ${a.affixe} ».`;
       return {
-        text: `Découpe « ${a.mot} » en morceaux et dis ce que chacun apporte.`,
-        format: "open" as const,
-        expected: [a.base, a.affixe.replace(/-/g, ""), a.type, "devant", "derrière", "derriere"],
-        comparator: "contains_keyword" as const,
+        text: `Comment fais-tu pour découper « ${a.mot} » en morceaux ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : une syllabe n'est pas un morceau de sens.
+          "Je coupe le mot en syllabes : chaque syllabe est un morceau.",
+          "Je coupe le mot en deux, au milieu.",
+          "Je regarde la dernière lettre du mot.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un mot construit se lit en morceaux : le radical porte l'idée, l'affixe la modifie.",
           "Cherche d'abord le mot que tu connais à l'intérieur, puis regarde ce qui l'entoure.",
@@ -974,22 +987,31 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_voc_prefixes_negatifs_open_1",
+    id: "ce2_voc_prefixes_negatifs_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "vocabulaire",
     microId: "ce2_voc_prefixes_negatifs",
     difficulty: 3,
     theme: "neutral",
-    hint: "Il y en a plusieurs, et ils ne se mettent pas devant n'importe quel mot.",
-    tags: ["ce2", "vocabulaire", "prefixes", "ouverte"],
+    hint: "Le mot de départ ne bouge pas : on lui colle quelque chose devant.",
+    tags: ["ce2", "vocabulaire", "prefixes", "methode"],
     generate: () => {
       const p = randomChoice(PREFIXES_NEGATIFS);
+      const bonne = `Je colle un préfixe comme « ${p.prefixe} » devant le mot, sans rien changer au reste : ${p.base} → ${p.mot}.`;
       return {
-        text: `« ${p.mot} » veut dire ${p.sens}.\n\nDonne un autre mot qui utilise un préfixe pour dire le contraire, et explique comment il est fabriqué.`,
-        format: "open" as const,
-        expected: ["dé", "de-", "in", "im", "mal", "dés", "contraire", "préfixe", "prefixe", "devant"],
-        comparator: "contains_keyword" as const,
+        text: `« ${p.mot} » veut dire ${p.sens}.\n\nComment fabrique-t-on un mot qui dit le contraire d'un autre ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : « pas content » au lieu de « mécontent ».
+          "J'ajoute le mot « pas » devant : ça suffit à dire le contraire.",
+          // La voisine : le suffixe, qui se colle derrière et ne retourne rien.
+          "Je colle le morceau derrière le mot, à la fin.",
+          "Je change la première lettre du mot.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un préfixe négatif retourne le sens du mot sans toucher au reste.",
           "Prends un mot que tu connais et essaie de lui coller dé-, in-, im- ou mal- devant.",
@@ -1065,22 +1087,31 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_voc_derivation_open_1",
+    id: "ce2_voc_derivation_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "vocabulaire",
     microId: "ce2_voc_derivation",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis ce qu'ils ont en commun, et ce qui les distingue.",
-    tags: ["ce2", "vocabulaire", "derivation", "ouverte"],
+    hint: "Deux choses à la fois : un morceau commun, et une idée commune.",
+    tags: ["ce2", "vocabulaire", "derivation", "methode"],
     generate: () => {
       const f = randomChoice(FAMILLES_LEXICALES);
+      const bonne = `Le radical « ${f.radical} », et l'idée qu'il porte : chacun ajoute quelque chose, mais l'idée de départ reste.`;
       return {
-        text: `« ${f.radical} », « ${f.derives[0]} », « ${f.derives[1]} ».\n\nQu'ont ces trois mots en commun ? Explique.`,
-        format: "open" as const,
-        expected: [f.radical, "radical", "famille", "même", "meme", "idée", "idee"],
-        comparator: "contains_keyword" as const,
+        text: `« ${f.radical} », « ${f.derives[0]} », « ${f.derives[1]} ».\n\nQu'ont ces trois mots en commun ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // La voisine : partager une idée n'est pas dire la même chose.
+          "Ils veulent dire exactement la même chose : ce sont des synonymes.",
+          // L'erreur réelle : la ressemblance de lettres prise pour une parenté.
+          "Ils commencent par la même lettre, et c'est cela qui fait une famille.",
+          "Ils s'écrivent avec le même nombre de lettres.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Des mots dérivés partagent un radical et une idée : ils sont fabriqués les uns à partir des autres.",
           "Souligne le morceau commun, puis dis en une phrase l'idée qu'ils partagent.",
@@ -1162,7 +1193,7 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_voc_synonyme_antonyme_open_1",
+    id: "ce2_voc_synonyme_antonyme_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "vocabulaire",
@@ -1170,14 +1201,22 @@ export const vocabulaireBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "À quoi ça sert d'avoir deux mots pour la même idée ?",
-    tags: ["ce2", "vocabulaire", "synonymes", "ouverte"],
+    tags: ["ce2", "vocabulaire", "synonymes", "methode"],
     generate: () => {
       const t = randomChoice(SYNONYMES);
+      const bonne = `À ne pas écrire deux fois « ${t.mot} » : la seconde fois, j'écris « ${t.synonyme} ».`;
       return {
-        text: `« ${t.mot} » et « ${t.synonyme} » veulent dire à peu près la même chose.\n\nÀ quoi cela peut-il te servir quand tu écris un texte ? Explique.`,
-        format: "open" as const,
-        expected: ["répéter", "repeter", "répétition", "repetition", "varier", "changer", "plusieurs fois", "même mot", "meme mot"],
-        comparator: "contains_keyword" as const,
+        text: `« ${t.mot} » et « ${t.synonyme} » veulent dire à peu près la même chose.\n\nÀ quoi cela te sert-il quand tu écris un texte ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // La voisine : ce serait le rôle de l'antonyme, pas du synonyme.
+          "À dire le contraire de ce que je viens d'écrire.",
+          "À écrire des phrases plus longues.",
+          "À faire moins de fautes d'orthographe.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Les synonymes servent à ne pas répéter le même mot dans un texte.",
           "Quand tu relis ton texte, entoure les mots qui reviennent, et remplace-en un par un synonyme.",
@@ -1259,23 +1298,32 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_voc_gradation_open_1",
+    id: "ce2_voc_gradation_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "vocabulaire",
     microId: "ce2_voc_gradation",
     difficulty: 3,
     theme: "neutral",
-    hint: "Range-les comme des marches, et dis pourquoi dans cet ordre.",
-    tags: ["ce2", "vocabulaire", "gradation", "ouverte"],
+    hint: "Ce n'est pas le mot qu'il faut regarder, c'est la scène qu'il raconte.",
+    tags: ["ce2", "vocabulaire", "gradation", "methode"],
     generate: () => {
       const g = randomChoice(GRADATIONS);
       const melange = shuffle([...g.echelle]);
+      const bonne = "J'imagine trois scènes — une petite, une moyenne, une très grande — et je donne un mot à chacune.";
       return {
-        text: `Range ces trois mots du plus faible au plus fort : « ${melange.join(" », « ")} ».\n\nExplique ton choix.`,
-        format: "open" as const,
-        expected: [g.echelle[0], g.echelle[2], "fort", "faible", "moins", "plus"],
-        comparator: "contains_keyword" as const,
+        text: `« ${melange.join(" », « ")} » disent la même idée, mais pas avec la même force.\n\nComment fais-tu pour les ranger du plus faible au plus fort ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : compter les lettres au lieu d'imaginer la scène.
+          "Je les range du plus court au plus long : le mot le plus long est le plus fort.",
+          "Je les range dans l'ordre de l'alphabet.",
+          // La voisine : les antonymes, qui s'opposent au lieu de se graduer.
+          "Je cherche lequel est le contraire des deux autres.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Une gradation, ce sont des mots qui disent la même idée avec des forces différentes.",
           "Imagine trois scènes : une petite, une moyenne, une très grande. Attribue un mot à chacune.",
@@ -1350,22 +1398,31 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_voc_generique_open_1",
+    id: "ce2_voc_generique_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "vocabulaire",
     microId: "ce2_voc_generique",
     difficulty: 3,
     theme: "neutral",
-    hint: "Donne trois exemples, pas un seul.",
-    tags: ["ce2", "vocabulaire", "generique", "ouverte"],
+    hint: "Il y a une petite phrase à essayer, et elle tient debout ou non.",
+    tags: ["ce2", "vocabulaire", "generique", "methode"],
     generate: () => {
       const c = randomChoice(CATEGORIES);
+      const bonne = `J'essaie la phrase « ${c.membres[0]}, c'est ${c.generique} » : si elle tient debout, le mot entre dedans.`;
       return {
-        text: `« ${c.generique} » est un mot général.\n\nDonne trois mots plus précis qui entrent dedans.`,
-        format: "open" as const,
-        expected: c.membres.map((m) => m.replace(/^(un |une )/, "")),
-        comparator: "contains_keyword" as const,
+        text: `« ${c.generique} » est un mot général.\n\nComment vérifies-tu qu'un mot entre bien dans cette catégorie ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : la ressemblance des mots prise pour une catégorie.
+          "Je regarde si les deux mots se ressemblent : même début, même longueur.",
+          // La voisine : la famille de mots, qui n'a rien à voir avec la catégorie.
+          "Je regarde s'ils sont de la même famille, comme port et portuaire.",
+          "Je regarde s'ils prennent tous les deux « un » ou tous les deux « une ».",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un mot générique contient plusieurs mots particuliers, comme une boite contient des objets.",
           "Pense à ce que tu connais autour de toi qui entre dans cette catégorie.",
@@ -1445,22 +1502,31 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_voc_polysemie_open_1",
+    id: "ce2_voc_polysemie_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "vocabulaire",
     microId: "ce2_voc_polysemie",
     difficulty: 3,
     theme: "neutral",
-    hint: "Écris une phrase à toi, où le mot a l'autre sens.",
-    tags: ["ce2", "vocabulaire", "polysemie", "ouverte"],
+    hint: "Essaie un sens dans la phrase, et écoute si elle tient debout.",
+    tags: ["ce2", "vocabulaire", "polysemie", "methode"],
     generate: () => {
       const p = randomChoice(POLYSEMES);
+      const bonne = `Je remplace « ${p.mot} » par le sens que j'imagine, et j'écoute si la phrase tient debout.`;
       return {
-        text: `Dans « ${p.phraseA} », le mot « ${p.mot} » veut dire ${p.sensA}.\n\nDonne un autre sens de ce mot, ou écris une phrase où il veut dire autre chose.`,
-        format: "open" as const,
-        expected: [p.sensB.split(" ").filter((w) => w.length > 4)[0] ?? p.mot, p.mot, "autre sens"],
-        comparator: "contains_keyword" as const,
+        text: `Dans « ${p.phraseA} », « ${p.mot} » veut dire ${p.sensA}. Ailleurs, il veut dire autre chose.\n\nComment fais-tu pour savoir quel sens choisir ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : le premier sens venu, sans regarder la phrase.
+          "Je prends le sens que je connais le mieux : c'est presque toujours celui-là.",
+          // La voisine : découper le mot, c'est le geste de la dérivation.
+          "Je découpe le mot en morceaux pour trouver son sens.",
+          "Je regarde si le mot est au singulier ou au pluriel.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Beaucoup de mots courants ont deux sens ou plus : on les appelle des mots polysémiques.",
           "Cherche dans quel autre endroit de ta vie tu emploies ce mot-là.",
@@ -1537,17 +1603,26 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce2_voc_sens_propre_figure_open_1",
+    id: "ce2_voc_sens_propre_figure_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "vocabulaire",
     microId: "ce2_voc_sens_propre_figure",
     difficulty: 3,
     theme: "neutral",
-    text: "« Il souffle ses bougies. » et « Il souffle la réponse à son voisin. »\n\nExplique la différence entre ces deux emplois de « souffler ».",
-    format: "open",
-    expected: ["propre", "figuré", "figure", "image", "vraiment", "de vrai", "tout bas", "air"],
-    comparator: "contains_keyword",
+    text: "« Il souffle ses bougies. » et « Il souffle la réponse à son voisin. »\n\nQu'est-ce qui te permet de dire lequel est au sens figuré ?",
+    format: "qcm",
+    choices: [
+      "Je me demande si la scène est photographiable : sur les bougies, de l'air sort vraiment ; pour la réponse, non.",
+      // L'erreur réelle : se fier à la place de la phrase, pas à la scène.
+      "Le sens figuré est toujours dans la seconde phrase.",
+      "Le sens figuré, c'est quand la phrase est plus longue.",
+      "Le sens figuré, c'est quand le verbe n'est pas au présent.",
+    ],
+    expected: [
+      "Je me demande si la scène est photographiable : sur les bougies, de l'air sort vraiment ; pour la réponse, non.",
+    ],
+    comparator: "mcq_exact",
     hint: "Dans un des deux cas, il y a vraiment de l'air qui sort.",
     explanation: exp(
       "Le sens propre est le sens premier, concret. Le sens figuré est une image bâtie sur lui.",
@@ -1555,7 +1630,7 @@ export const vocabulaireBank: TutorBankItemV4[] = [
       "Souffler ses bougies : de l'air sort de la bouche, on peut le voir. Souffler une réponse : personne n'éteint rien — on dit tout bas, et l'image de l'air qui passe est restée. C'est l'exemple que le programme donne lui-même.",
       "Le premier est le sens propre, le second le sens figuré : dire tout bas.",
     ),
-    tags: ["ce2", "vocabulaire", "sens-figure", "definition", "ouverte"],
+    tags: ["ce2", "vocabulaire", "sens-figure", "methode", "qcm"],
   },
 
   /* =========================================================
@@ -1623,22 +1698,31 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_voc_expressions_open_1",
+    id: "ce2_voc_expressions_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "vocabulaire",
     microId: "ce2_voc_expressions",
     difficulty: 3,
     theme: "neutral",
-    hint: "Raconte une situation où tu pourrais la dire.",
-    tags: ["ce2", "vocabulaire", "expressions", "ouverte"],
+    hint: "Essaie de la comprendre mot à mot : tu obtiens une scène impossible.",
+    tags: ["ce2", "vocabulaire", "expressions", "methode"],
     generate: () => {
       const e = randomChoice(EXPRESSIONS);
+      const bonne = `Parce que c'est une image : mot à mot, ce serait « ${e.piegeLitteral} », et personne ne veut dire ça.`;
       return {
-        text: `L'expression « ${e.expression} » veut dire ${e.sens}.\n\nRaconte une situation où tu pourrais l'employer.`,
-        format: "open" as const,
-        expected: [...e.motsCles],
-        comparator: "contains_keyword" as const,
+        text: `L'expression « ${e.expression} » veut dire ${e.sens}.\n\nPourquoi ne peut-on pas la comprendre en lisant chaque mot l'un après l'autre ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Le piège fin : c'est l'expression ENTIÈRE qui porte le sens, pas
+          // chaque mot pris à part.
+          "Parce que chacun de ses mots a changé de sens tout seul.",
+          "Parce que les mots ne sont pas rangés dans le bon ordre.",
+          "Parce que l'expression vient d'une autre langue.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Une expression ne s'apprend pas seule : elle s'apprend avec la situation où on l'emploie.",
           "Imagine une scène de ta vie, puis vérifie que l'expression y aurait sa place.",
@@ -1716,7 +1800,7 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_voc_niveaux_langue_open_1",
+    id: "ce2_voc_niveaux_langue_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "vocabulaire",
@@ -1724,14 +1808,22 @@ export const vocabulaireBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Ce n'est pas une question de bien ou de mal : c'est une question de situation.",
-    tags: ["ce2", "vocabulaire", "niveaux-langue", "ouverte"],
+    tags: ["ce2", "vocabulaire", "niveaux-langue", "methode"],
     generate: () => {
       const n = randomChoice(NIVEAUX);
+      const bonne = `Je regarde à qui je parle et où : « ${n.familier} » entre copains dans la cour, « ${n.courant} » à l'école et à l'écrit.`;
       return {
-        text: `« ${n.familier} » et « ${n.courant} » veulent dire la même chose.\n\nÀ qui dirais-tu l'un, à qui dirais-tu l'autre ? Explique.`,
-        format: "open" as const,
-        expected: ["copain", "ami", "maitresse", "maîtresse", "école", "ecole", "écrit", "ecrit", "familier", "courant", "adulte"],
-        comparator: "contains_keyword" as const,
+        text: `« ${n.familier} » et « ${n.courant} » veulent dire la même chose.\n\nComment choisis-tu lequel employer ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : juger le mot au lieu de regarder la situation.
+          `Je prends toujours « ${n.courant} » : « ${n.familier} » est un mot incorrect.`,
+          "Je prends celui que j'entends le plus souvent à la télévision.",
+          "Je prends le plus court : il va plus vite à écrire.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Le niveau de langue se choisit selon la personne à qui l'on s'adresse.",
           "Pose-toi la question avant de parler ou d'écrire : à qui je parle, et où ?",
@@ -1834,22 +1926,30 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_voc_dictionnaire_open_1",
+    id: "ce2_voc_dictionnaire_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "vocabulaire",
     microId: "ce2_voc_dictionnaire",
     difficulty: 3,
     theme: "neutral",
-    hint: "Le dictionnaire ne donne pas que le sens.",
-    tags: ["ce2", "vocabulaire", "dictionnaire", "ouverte"],
+    hint: "Le dictionnaire ne choisit pas à ta place. Qui choisit, alors ?",
+    tags: ["ce2", "vocabulaire", "dictionnaire", "methode"],
     generate: () => {
       const p = randomChoice(POLYSEMES);
+      const bonne = "Je reviens à la phrase où j'ai lu le mot : c'est elle qui décide. Les exemples du dictionnaire m'aident aussi.";
       return {
-        text: `Tu cherches « ${p.mot} » dans le dictionnaire et tu trouves DEUX définitions.\n\nComment sais-tu laquelle est la bonne ? Explique.`,
-        format: "open" as const,
-        expected: ["phrase", "contexte", "texte", "sens", "exemple", "autour", "situation"],
-        comparator: "contains_keyword" as const,
+        text: `Tu cherches « ${p.mot} » dans le dictionnaire et tu trouves DEUX définitions.\n\nComment sais-tu laquelle est la bonne ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : la première définition venue, sans revenir au texte.
+          "Je prends la première : c'est toujours la bonne.",
+          "Je prends la plus longue : c'est la plus complète.",
+          "Je prends celle qui contient le plus de mots que je connais.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un mot polysémique a plusieurs définitions dans le dictionnaire, numérotées les unes après les autres.",
           "Reviens à ta phrase de départ : c'est elle qui dit laquelle des définitions convient. Les exemples du dictionnaire t'aident aussi.",
@@ -1923,7 +2023,7 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_voc_repertoire_open_1",
+    id: "ce2_voc_repertoire_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "vocabulaire",
@@ -1931,14 +2031,22 @@ export const vocabulaireBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Un répertoire ne sert à rien si on ne s'en ressert pas.",
-    tags: ["ce2", "vocabulaire", "repertoire", "ouverte"],
+    tags: ["ce2", "vocabulaire", "repertoire", "methode"],
     generate: () => {
       const t = randomChoice(THEMES);
+      const bonne = `Le jour où j'écris un texte sur ${t.theme}, j'ouvre la page : ${t.mots[0]}, ${t.mots[1]} sont déjà là, je ne repars pas de zéro.`;
       return {
-        text: `Tu tiens un carnet où tu ranges les mots nouveaux par thème.\n\nDonne deux mots que tu écrirais dans la page « ${t.theme} », et dis à quoi ce carnet peut te servir.`,
-        format: "open" as const,
-        expected: [...t.mots, "écrire", "ecrire", "retrouver", "réemployer", "reemployer", "texte", "rédaction", "redaction"],
-        comparator: "contains_keyword" as const,
+        text: `Tu tiens un carnet où tu ranges les mots nouveaux par thème, page « ${t.theme} ».\n\nÀ quoi te sert ce carnet ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : le carnet confondu avec un dictionnaire.
+          "À ranger les mots dans l'ordre de l'alphabet.",
+          "À recopier chaque mot plusieurs fois pour bien l'écrire.",
+          "À savoir combien de mots je connais en tout.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un répertoire lexical personnel est un carnet de mots rangés par thème, qu'on enrichit toute l'année.",
           "Quand tu écris un texte, ouvre la page du thème : les mots précis sont déjà là, tu n'as plus à les chercher.",
@@ -2024,22 +2132,31 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_voc_defi_open_1",
+    id: "ce2_voc_defi_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "vocabulaire",
     microId: "ce2_voc_defi",
     difficulty: 3,
     theme: "neutral",
-    hint: "Tu as plusieurs outils : le contexte, la famille, le dictionnaire.",
-    tags: ["ce2", "vocabulaire", "defi", "ouverte"],
+    // Le défi ne demande pas UN outil mais leur ORDRE : c'est le cran de plus.
+    hint: "Tu as trois outils. La question n'est pas lequel, mais dans quel ordre.",
+    tags: ["ce2", "vocabulaire", "defi", "methode"],
     generate: () => {
       const c = randomChoice(CONTEXTES);
+      const bonne = "D'abord le contexte, les mots autour. Ensuite la forme du mot : sa famille, ses préfixes. Le dictionnaire en dernier.";
       return {
-        text: `Tu lis « ${c.phrase} » et tu ne connais pas « ${c.mot} ».\n\nRaconte tout ce que tu peux essayer pour en trouver le sens, dans l'ordre.`,
-        format: "open" as const,
-        expected: ["contexte", "autour", "phrase", "famille", "dictionnaire", "relis", "indice"],
-        comparator: "contains_keyword" as const,
+        text: `Tu lis « ${c.phrase} » et tu ne connais pas « ${c.mot} ».\n\nDans quel ordre essaies-tu tes outils ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : le dictionnaire d'abord, alors que la phrase suffit.
+          "D'abord le dictionnaire : c'est lui qui a la vraie réponse.",
+          "D'abord je découpe le mot en morceaux, et je n'ai besoin de rien d'autre.",
+          "D'abord je demande à quelqu'un, et si personne ne sait, je saute le mot.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Devant un mot inconnu, on a plusieurs outils, et on les essaie dans l'ordre du plus rapide au plus long.",
           "D'abord le contexte : les mots autour. Ensuite la forme du mot : sa famille, ses préfixes. En dernier, le dictionnaire.",
