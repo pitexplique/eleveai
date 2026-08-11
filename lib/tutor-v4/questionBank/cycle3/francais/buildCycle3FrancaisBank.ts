@@ -2405,6 +2405,785 @@ const CONJ_PLUS_QUE_PARFAIT: QcmItem[] = [
   },
 ];
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   LA PHRASE COMPLEXE — CM2 et 6e, ajoutée le 11/08/2026
+
+   ⛔ CE QUE ÇA RÉPARE. `questionForNotion` n'avait aucune branche pour la
+   notion `phrase_complexe`. Les trois micros du CM2 — propositions,
+   coordination, pronom relatif — tombaient donc sur le `return qcm(LECTURE)`
+   final : neuf gabarits qui servaient des questions de COMPRÉHENSION DE
+   LECTURE. « Pourquoi l'oiseau s'envole-t-il ? » à un élève qui travaille la
+   juxtaposition. Mesuré, pas supposé : dix-huit énoncés tirés, aucun sur la
+   phrase complexe.
+   Aucun vérificateur ne pouvait le voir : chaque question était valide, bien
+   formée, avec sa bonne réponse dans ses choix. Elle n'était simplement pas
+   sur le sujet. C'est l'angle mort d'un aiguillage par sous-chaîne.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const PROPOSITION: QcmItem[] = [
+  {
+    text: "Qu'est-ce qui permet de compter les propositions d'une phrase ?",
+    correct: "le nombre de verbes conjugués",
+    wrongs: ["le nombre de virgules", "le nombre de mots", "le nombre de majuscules"],
+    methode: "Une proposition s'organise autour d'un verbe conjugué : autant de verbes, autant de propositions.",
+  },
+  {
+    text: "« Le vent souffle et la pluie tombe. » Combien de propositions ?",
+    correct: "deux",
+    wrongs: ["une", "trois", "aucune"],
+    methode: "Deux verbes conjugués : souffle, tombe.",
+  },
+  {
+    text: "« Le vent souffle sur le lagon. » Cette phrase est…",
+    correct: "une phrase simple",
+    wrongs: ["une phrase complexe", "deux propositions", "une proposition subordonnée"],
+    methode: "Un seul verbe conjugué : une seule proposition.",
+  },
+  {
+    text: "« Quand la pluie s'arrête, les enfants sortent. » Cette phrase est…",
+    correct: "une phrase complexe",
+    wrongs: ["une phrase simple", "une phrase sans verbe", "une seule proposition"],
+    methode: "« s'arrête » et « sortent » : deux verbes conjugués.",
+  },
+  {
+    text: "Une proposition, c'est…",
+    correct: "un groupe de mots organisé autour d'un verbe conjugué",
+    wrongs: [
+      "un groupe de mots placé entre deux virgules",
+      "une phrase entière",
+      "un groupe nominal",
+    ],
+    methode: "Le verbe conjugué est le noyau : sans lui, pas de proposition.",
+  },
+  {
+    text: "« Le pêcheur, fatigué, rentra chez lui. » Combien de propositions ?",
+    correct: "une seule : il n'y a qu'un verbe conjugué",
+    wrongs: ["deux", "trois", "aucune"],
+    methode: "Les virgules ne découpent pas des propositions : seul le verbe compte.",
+  },
+  {
+    text: "Une phrase simple contient…",
+    correct: "une seule proposition",
+    wrongs: ["deux propositions", "toujours une virgule", "toujours un sujet inversé"],
+    methode: "Simple ne veut pas dire courte : elle n'a qu'un verbe conjugué.",
+  },
+  {
+    text: "« Il pleut, mais nous sortons quand même. » Cette phrase est…",
+    correct: "complexe : deux verbes conjugués",
+    wrongs: ["simple", "sans proposition", "une seule proposition"],
+    methode: "« pleut » et « sortons ».",
+  },
+  {
+    text: "Un verbe à l'infinitif compte-t-il pour une proposition ?",
+    correct: "Non : il faut un verbe CONJUGUÉ",
+    wrongs: ["Oui, toujours", "Oui, s'il est en fin de phrase", "Seulement au pluriel"],
+    methode: "« Il aime lire » : un seul verbe conjugué, donc une seule proposition.",
+  },
+  {
+    text: "« Les enfants qui jouent sur la plage rentrent tard. » Combien de propositions ?",
+    correct: "deux",
+    wrongs: ["une", "trois", "aucune"],
+    methode: "« jouent » et « rentrent » : deux verbes conjugués.",
+  },
+  {
+    text: "Pour savoir si une phrase est complexe, on compte…",
+    correct: "les verbes conjugués",
+    wrongs: ["les noms", "les adjectifs", "les compléments"],
+    methode: "C'est le seul comptage qui réponde à la question.",
+  },
+  {
+    text: "« Léa range sa chambre, puis elle sort. » Combien de verbes conjugués ?",
+    correct: "deux",
+    wrongs: ["un", "trois", "aucun"],
+    methode: "« range » et « sort » : la phrase est donc complexe.",
+  },
+];
+
+const ARTICULATION: QcmItem[] = [
+  {
+    text: "« Le vent souffle, la pluie tombe, la mer monte. » Comment les propositions sont-elles reliées ?",
+    correct: "par juxtaposition",
+    wrongs: ["par coordination", "par subordination", "elles ne sont pas reliées"],
+    methode: "Juxtaposer, c'est poser côte à côte, avec un simple signe de ponctuation.",
+  },
+  {
+    text: "« Le vent souffle et la pluie tombe. » Les propositions sont reliées…",
+    correct: "par coordination",
+    wrongs: ["par juxtaposition", "par subordination", "par un pronom relatif"],
+    methode: "« et » est une conjonction de coordination.",
+  },
+  {
+    text: "« Nous sortirons quand la pluie s'arrêtera. » Les propositions sont reliées…",
+    correct: "par subordination",
+    wrongs: ["par juxtaposition", "par coordination", "par une virgule"],
+    methode: "« quand » soumet la seconde proposition à la première.",
+  },
+  {
+    text: "La juxtaposition relie les propositions par…",
+    correct: "un signe de ponctuation : virgule, point-virgule, deux-points",
+    wrongs: [
+      "une conjonction de coordination",
+      "une conjonction de subordination",
+      "un verbe",
+    ],
+    methode: "Aucun mot de liaison : c'est la ponctuation qui fait le travail.",
+  },
+  {
+    text: "La coordination relie les propositions par…",
+    correct: "mais, ou, et, donc, or, ni, car",
+    wrongs: [
+      "une virgule seule",
+      "que, quand, si, comme",
+      "un pronom personnel",
+    ],
+    methode: "Les sept conjonctions de coordination.",
+  },
+  {
+    text: "La subordination met une proposition…",
+    correct: "sous la dépendance d'une autre",
+    wrongs: [
+      "à côté d'une autre, à égalité",
+      "avant le sujet",
+      "entre deux virgules",
+    ],
+    methode: "Le mot le dit : subordonner, c'est placer en dessous.",
+  },
+  {
+    text: "« Il rentre parce qu'il pleut. » Quelle proposition dépend de l'autre ?",
+    correct: "« parce qu'il pleut »",
+    wrongs: ["« Il rentre »", "aucune des deux", "les deux à la fois"],
+    methode: "Elle ne peut pas vivre seule : « Parce qu'il pleut. » ne tient pas debout.",
+  },
+  {
+    text: "Dans une juxtaposition, peut-on supprimer une proposition ?",
+    correct: "Oui : les propositions sont à égalité",
+    wrongs: ["Non, jamais", "Seulement la première", "Seulement s'il y a « et »"],
+    methode: "Chacune tiendrait debout toute seule.",
+  },
+  {
+    text: "Laquelle de ces phrases contient une subordination ?",
+    correct: "Je crois que tu as raison.",
+    wrongs: [
+      "Je crois, tu as raison.",
+      "Je crois et tu as raison.",
+      "Je crois : tu as raison.",
+    ],
+    methode: "Seul « que » soumet une proposition à l'autre ; les autres les posent à égalité.",
+  },
+  {
+    text: "Quelles sont les trois façons de relier des propositions ?",
+    correct: "juxtaposition, coordination, subordination",
+    wrongs: [
+      "sujet, verbe, complément",
+      "nom, adjectif, déterminant",
+      "passé, présent, futur",
+    ],
+    methode: "Ponctuation seule, mot de coordination, ou mot de subordination.",
+  },
+  {
+    text: "Dans « Il pleut, donc nous restons », le mot « donc » marque…",
+    correct: "une coordination",
+    wrongs: ["une subordination", "une juxtaposition", "une préposition"],
+    methode: "« donc » fait partie des sept conjonctions de coordination.",
+  },
+  {
+    text: "« Léa lit, Tom dessine. » Qu'est-ce qui relie les deux propositions ?",
+    correct: "la virgule",
+    wrongs: ["« et »", "« que »", "rien du tout"],
+    methode: "Une ponctuation seule : c'est une juxtaposition.",
+  },
+];
+
+const PRONOM_RELATIF: QcmItem[] = [
+  {
+    text: "« Le pêcheur ___ répare son filet est mon voisin. »",
+    correct: "qui",
+    wrongs: ["que", "où", "quand"],
+    methode: "« qui » est le sujet du verbe qui suit : qui répare ? le pêcheur.",
+  },
+  {
+    text: "« Le livre ___ je lis est passionnant. »",
+    correct: "que",
+    wrongs: ["qui", "où", "quand"],
+    methode: "Le sujet de « lis » est « je » : ce n'est donc pas « qui ».",
+  },
+  {
+    text: "« La plage ___ nous allons est déserte. »",
+    correct: "où",
+    wrongs: ["qui", "que", "et"],
+    methode: "« où » reprend un lieu.",
+  },
+  {
+    text: "Comment choisir entre « qui » et « que » ?",
+    correct: "« qui » est sujet du verbe qui suit ; « que » ne l'est pas",
+    wrongs: [
+      "« qui » pour les personnes, « que » pour les choses",
+      "« qui » au singulier, « que » au pluriel",
+      "on choisit au hasard",
+    ],
+    methode: "« le filet qui sèche » : un filet n'est pas une personne, et c'est bien « qui ».",
+  },
+  {
+    text: "Dans « le margouillat qui dort », que remplace « qui » ?",
+    correct: "« le margouillat »",
+    wrongs: ["« dort »", "rien du tout", "le sujet de la phrase suivante"],
+    methode: "Le mot repris s'appelle l'antécédent.",
+  },
+  {
+    text: "À quoi servent « qui », « que », « où » ?",
+    correct: "à relier une proposition à un nom",
+    wrongs: [
+      "à relier deux noms",
+      "à conjuguer un verbe",
+      "à accorder un adjectif",
+    ],
+    methode: "Ils accrochent une proposition entière à un nom pour le préciser.",
+  },
+  {
+    text: "« La case ___ mes grands-parents habitaient. »",
+    correct: "où",
+    wrongs: ["qui", "que", "quand"],
+    methode: "Habiter QUELQUE PART : « où » reprend le lieu.",
+  },
+  {
+    text: "Dans « le cari que ma mère prépare », le mot « que » est…",
+    correct: "un pronom relatif",
+    wrongs: [
+      "une conjonction de coordination",
+      "une préposition",
+      "un déterminant",
+    ],
+    methode: "Il reprend « le cari » et introduit la proposition qui le précise.",
+  },
+  {
+    text: "« Les enfants ___ ramassent des letchis rentrent tard. »",
+    correct: "qui",
+    wrongs: ["que", "où", "dont"],
+    methode: "Qui ramasse ? Les enfants. Le pronom est sujet : c'est « qui ».",
+  },
+  {
+    text: "Le mot qu'un pronom relatif remplace s'appelle…",
+    correct: "l'antécédent",
+    wrongs: ["le sujet", "le complément", "le radical"],
+    methode: "Il est placé AVANT : anté-cédent.",
+  },
+  {
+    text: "« C'est le jour ___ nous sommes partis. »",
+    correct: "où",
+    wrongs: ["qui", "que", "quand"],
+    methode: "« où » reprend aussi un moment, pas seulement un lieu.",
+  },
+  {
+    text: "« Le filet ___ le pêcheur répare est déchiré. »",
+    correct: "que",
+    wrongs: ["qui", "où", "et"],
+    methode: "Le sujet de « répare » est « le pêcheur » : le pronom ne peut pas être sujet.",
+  },
+];
+
+const CONJONCTIONS_ROLE: QcmItem[] = [
+  {
+    text: "Quelle est la différence entre une conjonction de coordination et une conjonction de subordination ?",
+    correct: "La coordination met les propositions à égalité ; la subordination en soumet une à l'autre",
+    wrongs: [
+      "Il n'y en a aucune",
+      "La coordination s'emploie à l'oral, la subordination à l'écrit",
+      "La coordination est invariable, l'autre s'accorde",
+    ],
+    methode: "Égalité d'un côté, dépendance de l'autre.",
+  },
+  {
+    text: "Le mot « et » est…",
+    correct: "une conjonction de coordination",
+    wrongs: [
+      "une conjonction de subordination",
+      "une préposition",
+      "un adverbe",
+    ],
+    methode: "mais, ou, et, donc, or, ni, car : les sept.",
+  },
+  {
+    text: "Dans « Je pense que tu as raison », le mot « que » est…",
+    correct: "une conjonction de subordination",
+    wrongs: [
+      "une conjonction de coordination",
+      "une préposition",
+      "un pronom personnel",
+    ],
+    methode: "Elle accroche une proposition entière au verbe « pense ».",
+  },
+  {
+    text: "Après une conjonction de subordination, on trouve…",
+    correct: "une proposition avec un verbe conjugué",
+    wrongs: ["un nom seul", "un adjectif seul", "rien"],
+    methode: "C'est ce qui la sépare d'une préposition, qui n'introduit qu'un groupe.",
+  },
+  {
+    text: "Peut-on supprimer la proposition introduite par « parce que » ?",
+    correct: "Oui : la première proposition tient encore debout",
+    wrongs: [
+      "Non, jamais",
+      "Seulement si elle est courte",
+      "Seulement à l'oral",
+    ],
+    methode: "« Il rentre parce qu'il pleut. » → « Il rentre. » Toujours une phrase.",
+  },
+  {
+    text: "« Il pleut et le vent souffle. » Peut-on inverser les deux propositions ?",
+    correct: "Oui : elles sont à égalité",
+    wrongs: [
+      "Non, jamais",
+      "Seulement si on change le verbe",
+      "Seulement à l'écrit",
+    ],
+    methode: "C'est le propre de la coordination.",
+  },
+  {
+    text: "Laquelle de ces conjonctions est une conjonction de SUBORDINATION ?",
+    correct: "comme",
+    wrongs: ["mais", "donc", "or"],
+    methode: "Les trois autres font partie des sept coordonnants.",
+  },
+  {
+    text: "Combien y a-t-il de conjonctions de coordination ?",
+    correct: "sept : mais, ou, et, donc, or, ni, car",
+    wrongs: ["cinq", "trois", "dix"],
+    methode: "Une liste fermée, qu'on apprend une fois pour toutes.",
+  },
+  {
+    text: "Une conjonction de coordination peut relier…",
+    correct: "deux mots, deux groupes ou deux propositions",
+    wrongs: [
+      "seulement deux propositions",
+      "seulement deux noms",
+      "un nom et son déterminant",
+    ],
+    methode: "« du riz et du cari » : elle relie aussi des groupes.",
+  },
+  {
+    text: "Dans « Je sortirai si la pluie s'arrête », le mot « si » introduit…",
+    correct: "une proposition subordonnée",
+    wrongs: [
+      "une proposition coordonnée",
+      "un complément du nom",
+      "une question",
+    ],
+    methode: "La proposition dépend de la première : sans elle, la condition disparait.",
+  },
+  {
+    text: "Dans « Il est parti, car il était tard », le mot « car » marque…",
+    correct: "une coordination qui donne la cause",
+    wrongs: ["une subordination", "une juxtaposition", "une préposition"],
+    methode: "Attention : « car » coordonne, « parce que » subordonne — et tous deux disent la cause.",
+  },
+  {
+    text: "Quel mot ne peut PAS commencer une proposition subordonnée ?",
+    correct: "donc",
+    wrongs: ["quand", "parce que", "si"],
+    methode: "« donc » coordonne : il ne soumet aucune proposition à une autre.",
+  },
+];
+
+const PRONOM_ANTECEDENT: QcmItem[] = [
+  {
+    text: "Dans « Léa a pris son cartable, puis elle est sortie », à qui renvoie « elle » ?",
+    correct: "à Léa",
+    wrongs: ["au cartable", "à personne", "à celui qui lit"],
+    methode: "On remonte au nom déjà cité : c'est l'antécédent.",
+  },
+  {
+    text: "L'antécédent d'un pronom, c'est…",
+    correct: "le mot qu'il remplace, dit avant lui",
+    wrongs: ["le mot qui le suit", "son sujet", "sa terminaison"],
+    methode: "Anté-cédent : ce qui vient avant.",
+  },
+  {
+    text: "Dans « Le pêcheur répare son filet ; il le pose ensuite », que remplace « le » ?",
+    correct: "« son filet »",
+    wrongs: ["« Le pêcheur »", "« il »", "rien du tout"],
+    methode: "« il » reprend le pêcheur, « le » reprend le filet : deux pronoms, deux antécédents.",
+  },
+  {
+    text: "Dans « Le pêcheur répare son filet ; il le pose ensuite », quelle est la fonction de « il » ?",
+    correct: "sujet",
+    wrongs: ["complément d'objet direct", "attribut du sujet", "complément du nom"],
+    methode: "Qui est-ce qui pose ? « il ».",
+  },
+  {
+    text: "Dans « Je les vois », quelle est la fonction de « les » ?",
+    correct: "complément d'objet direct",
+    wrongs: ["sujet", "déterminant", "attribut du sujet"],
+    methode: "Vois qui ? « les ». Le pronom est complément.",
+  },
+  {
+    text: "Comment vérifier qu'on a trouvé le bon antécédent ?",
+    correct: "On remplace le pronom par le nom : la phrase doit tenir debout",
+    wrongs: [
+      "On prend le nom le plus proche",
+      "On prend le sujet de la phrase",
+      "On regarde la ponctuation",
+    ],
+    methode: "Le nom le plus proche n'est pas toujours le bon.",
+  },
+  {
+    text: "Dans « Les letchis sont mûrs : nous les ramasserons demain », « les » renvoie à…",
+    correct: "« Les letchis »",
+    wrongs: ["« nous »", "« demain »", "rien du tout"],
+    methode: "On remonte, puis on remplace pour vérifier.",
+  },
+  {
+    text: "Le mot « les » peut être…",
+    correct: "déterminant ou pronom, selon sa place",
+    wrongs: [
+      "toujours un déterminant",
+      "toujours un pronom",
+      "toujours un adverbe",
+    ],
+    methode: "« les enfants » : déterminant. « je les vois » : pronom.",
+  },
+  {
+    text: "Dans « les enfants les regardent », quelle est la nature du PREMIER « les » ?",
+    correct: "un déterminant",
+    wrongs: ["un pronom", "un adverbe", "une préposition"],
+    methode: "Il est collé devant un nom : c'est un déterminant.",
+  },
+  {
+    text: "Pourquoi faut-il savoir repérer l'antécédent ?",
+    correct: "Sans lui, on ne sait plus de qui ou de quoi on parle",
+    wrongs: [
+      "Pour accorder l'adjectif",
+      "Pour conjuguer le verbe",
+      "Pour poser une question",
+    ],
+    methode: "C'est le fil qui tient le texte d'une phrase à l'autre.",
+  },
+  {
+    text: "Dans « Tom parle à sa sœur ; il lui explique le jeu », que remplace « lui » ?",
+    correct: "« sa sœur »",
+    wrongs: ["« Tom »", "« le jeu »", "« il »"],
+    methode: "Explique à qui ? À sa sœur. « lui » est complément d'objet indirect.",
+  },
+  {
+    text: "Un pronom personnel prend le genre et le nombre…",
+    correct: "de son antécédent",
+    wrongs: ["du verbe", "du complément", "du dernier mot de la phrase"],
+    methode: "« Les vagues… elles » : féminin pluriel, comme le nom repris.",
+  },
+];
+
+const MANIPULATIONS: QcmItem[] = [
+  {
+    text: "Pour vérifier qu'un groupe est bien le sujet, on l'encadre par…",
+    correct: "« c'est … qui »",
+    wrongs: ["« c'est … que »", "des guillemets", "deux virgules"],
+    methode: "« C'est le pêcheur QUI répare » : l'encadrement désigne le sujet.",
+  },
+  {
+    text: "Pour vérifier qu'un groupe est un complément circonstanciel, on essaie de…",
+    correct: "le déplacer ou le supprimer",
+    wrongs: [
+      "le conjuguer",
+      "l'accorder avec le sujet",
+      "le remplacer par un adjectif",
+    ],
+    methode: "S'il supporte les deux, il est facultatif : c'est un circonstanciel.",
+  },
+  {
+    text: "« Hier, les enfants ont ramassé des letchis. » Que donne le déplacement de « Hier » ?",
+    correct: "« Les enfants ont ramassé des letchis hier. » — la phrase tient debout",
+    wrongs: [
+      "la phrase devient fausse",
+      "le verbe change de temps",
+      "le sujet change",
+    ],
+    methode: "Le déplacement réussi prouve que le groupe est circonstanciel.",
+  },
+  {
+    text: "Remplacer un groupe par un pronom, cette manipulation s'appelle…",
+    correct: "la substitution",
+    wrongs: ["le déplacement", "la suppression", "l'encadrement"],
+    methode: "On substitue : on met une chose à la place d'une autre.",
+  },
+  {
+    text: "À quoi servent les manipulations en grammaire ?",
+    correct: "à prouver la fonction d'un groupe, au lieu de la deviner",
+    wrongs: [
+      "à rendre la phrase plus jolie",
+      "à raccourcir la phrase",
+      "à corriger l'orthographe",
+    ],
+    methode: "On ne discute pas : on essaie, et la phrase répond.",
+  },
+  {
+    text: "« Le pêcheur répare son filet. » Que donne l'encadrement par « c'est … qui » ?",
+    correct: "« C'est le pêcheur qui répare son filet. » — « le pêcheur » est bien le sujet",
+    wrongs: [
+      "la phrase devient une question",
+      "le verbe change de personne",
+      "rien du tout",
+    ],
+    methode: "Si l'encadrement marche, le groupe est sujet.",
+  },
+  {
+    text: "À quelle manipulation un complément d'objet résiste-t-il ?",
+    correct: "à la suppression : on ne peut pas l'enlever",
+    wrongs: [
+      "au déplacement seulement",
+      "à la substitution",
+      "à aucune",
+    ],
+    methode: "« Léa mange. » perd son sens : le complément d'objet est essentiel.",
+  },
+  {
+    text: "« Léa mange une mangue. » Remplace le complément par un pronom.",
+    correct: "Léa la mange.",
+    wrongs: ["Léa mange elle.", "Léa lui mange.", "Léa mange la."],
+    methode: "Le pronom complément se place DEVANT le verbe.",
+  },
+  {
+    text: "En quoi consiste l'addition ?",
+    correct: "à ajouter un mot pour éprouver la phrase",
+    wrongs: [
+      "à supprimer un mot",
+      "à déplacer un groupe",
+      "à conjuguer le verbe",
+    ],
+    methode: "Ajouter un adjectif, une négation… et regarder ce qui résiste.",
+  },
+  {
+    text: "Pourquoi ne pas se fier à la PLACE d'un groupe pour trouver sa fonction ?",
+    correct: "Parce qu'un groupe peut se déplacer sans changer de fonction",
+    wrongs: [
+      "Parce que la place ne change jamais",
+      "Parce que les groupes sont toujours au pluriel",
+      "Parce que le verbe est toujours au milieu",
+    ],
+    methode: "« Hier, il pleuvait. » / « Il pleuvait hier. » Même fonction, deux places.",
+  },
+  {
+    text: "« Sous le tamarin dorment deux chiens. » Quel encadrement désigne le SUJET ?",
+    correct: "« Ce sont deux chiens qui dorment sous le tamarin. »",
+    wrongs: [
+      "« C'est sous le tamarin que dorment deux chiens. »",
+      "« Ce sont des chiens sous le tamarin. »",
+      "« Dorment deux chiens sous le tamarin. »",
+    ],
+    methode: "« c'est … QUE » encadre un complément ; « c'est … QUI » encadre le sujet.",
+  },
+  {
+    text: "Que prouve-t-on en supprimant un groupe sans casser la phrase ?",
+    correct: "que ce groupe est facultatif : c'est un complément circonstanciel",
+    wrongs: [
+      "qu'il est le sujet",
+      "qu'il est le verbe",
+      "qu'il est un complément d'objet",
+    ],
+    methode: "Sujet, verbe et complément d'objet ne se suppriment pas.",
+  },
+];
+
+const IMPERATIF_CONDITIONNEL: QcmItem[] = [
+  {
+    text: "À quoi sert l'impératif ?",
+    correct: "à donner un ordre ou un conseil",
+    wrongs: [
+      "à poser une question",
+      "à raconter le passé",
+      "à décrire un lieu",
+    ],
+    methode: "« Range ta chambre ! » : c'est un ordre.",
+  },
+  {
+    text: "Combien de personnes l'impératif présent a-t-il ?",
+    correct: "trois",
+    wrongs: ["six", "une", "deux"],
+    methode: "2ᵉ du singulier, 1ʳᵉ et 2ᵉ du pluriel. Rien d'autre.",
+  },
+  {
+    text: "L'impératif s'écrit…",
+    correct: "sans pronom sujet",
+    wrongs: [
+      "toujours avec « tu »",
+      "toujours avec « vous »",
+      "avec le pronom entre parenthèses",
+    ],
+    methode: "« Viens ! » et non « Tu viens ! » : c'est ce qui le distingue du présent.",
+  },
+  {
+    text: "« ___ ton cartable ! » (ranger, impératif, 2ᵉ personne du singulier)",
+    correct: "Range",
+    wrongs: ["Ranges", "Rangez", "Rangeons"],
+    methode: "Les verbes en -er ne prennent pas de « s » à cette personne.",
+  },
+  {
+    text: "Comment se forme le conditionnel présent ?",
+    correct: "le radical du futur + les terminaisons de l'imparfait",
+    wrongs: [
+      "le radical du présent + « -rais »",
+      "l'infinitif employé seul",
+      "l'auxiliaire + le participe passé",
+    ],
+    methode: "je viendr- (futur) + -ais (imparfait) = je viendrais.",
+  },
+  {
+    text: "« Si j'avais le temps, je ___ avec toi. » (venir, conditionnel présent)",
+    correct: "viendrais",
+    wrongs: ["viendrai", "venais", "viens"],
+    methode: "« viendrai » serait le futur : ici, rien n'est certain.",
+  },
+  {
+    text: "Quelle différence entre « je viendrai » et « je viendrais » ?",
+    correct: "« viendrai » est au futur, « viendrais » au conditionnel",
+    wrongs: [
+      "aucune différence",
+      "« viendrais » est au passé",
+      "« viendrai » est au conditionnel",
+    ],
+    methode: "Un « s » sépare ce qui aura lieu de ce qui aurait lieu.",
+  },
+  {
+    text: "Le conditionnel présent sert à dire…",
+    correct: "ce qui se passerait sous condition",
+    wrongs: [
+      "ce qui s'est passé hier",
+      "un ordre",
+      "ce qui se passe en ce moment",
+    ],
+    methode: "« Si… alors je… » : la condition d'abord, le conditionnel ensuite.",
+  },
+  {
+    text: "« ___ prudents ! » (être, impératif, 2ᵉ personne du pluriel)",
+    correct: "Soyez",
+    wrongs: ["Soyer", "Êtes", "Serez"],
+    methode: "« être » à l'impératif : sois, soyons, soyez.",
+  },
+  {
+    text: "« Nous ___ partir plus tôt. » (aimer, conditionnel présent)",
+    correct: "aimerions",
+    wrongs: ["aimerons", "aimions", "aimons"],
+    methode: "« aimerons » est le futur, « aimions » l'imparfait : le conditionnel prend les deux.",
+  },
+  {
+    text: "À l'impératif, les verbes en -er à la 2ᵉ personne du singulier…",
+    correct: "ne prennent pas de « s »",
+    wrongs: [
+      "prennent toujours un « s »",
+      "prennent un « x »",
+      "s'écrivent à l'infinitif",
+    ],
+    methode: "« Mange ! », « Va ! » — mais « Manges-en ! » devant « en ».",
+  },
+  {
+    text: "« ___-moi, s'il te plait. » (aider, impératif)",
+    correct: "Aide",
+    wrongs: ["Aides", "Aidez", "Aider"],
+    methode: "2ᵉ personne du singulier d'un verbe en -er : pas de « s ».",
+  },
+];
+
+const DISCOURS_RECIT: QcmItem[] = [
+  {
+    text: "Quels sont les temps du RÉCIT ?",
+    correct: "l'imparfait, le passé simple, le plus-que-parfait",
+    wrongs: [
+      "le présent, le passé composé, le futur",
+      "l'impératif et le conditionnel",
+      "l'infinitif et le participe",
+    ],
+    methode: "Ce sont les temps d'une histoire racontée, coupée du moment où l'on parle.",
+  },
+  {
+    text: "Quels sont les temps du DISCOURS ?",
+    correct: "le présent, le passé composé, le futur",
+    wrongs: [
+      "l'imparfait et le passé simple",
+      "le plus-que-parfait seul",
+      "l'impératif seul",
+    ],
+    methode: "Ce sont les temps de quelqu'un qui parle depuis maintenant.",
+  },
+  {
+    text: "« Il ouvrit la porte et sortit. » Ce passage relève…",
+    correct: "du récit",
+    wrongs: ["du discours", "d'une consigne", "d'une description au présent"],
+    methode: "Le passé simple ne s'emploie pas quand on parle : c'est un temps du récit.",
+  },
+  {
+    text: "« J'ai fini mon travail, je pars. » Ce passage relève…",
+    correct: "du discours",
+    wrongs: ["du récit", "d'un poème", "d'une description au passé simple"],
+    methode: "Passé composé et présent : on parle depuis maintenant.",
+  },
+  {
+    text: "Pourquoi distingue-t-on les temps du discours et ceux du récit ?",
+    correct: "Parce qu'ils disent d'où l'on parle : depuis maintenant, ou depuis l'histoire",
+    wrongs: [
+      "Parce que les uns sont plus difficiles que les autres",
+      "Parce que les uns s'emploient au singulier",
+      "Parce que le récit n'a pas de verbe conjugué",
+    ],
+    methode: "Ce n'est pas une question de difficulté, c'est une question de point de vue.",
+  },
+  {
+    text: "Dans un roman, quel temps fait avancer les évènements ?",
+    correct: "le passé simple",
+    wrongs: ["le futur", "l'impératif", "le conditionnel"],
+    methode: "Il marque les actions qui arrivent, une par une.",
+  },
+  {
+    text: "Dans un roman, quel temps plante le décor ?",
+    correct: "l'imparfait",
+    wrongs: ["le passé simple", "le futur", "l'impératif"],
+    methode: "Il dit ce qui durait pendant que l'histoire avançait.",
+  },
+  {
+    text: "Quand un personnage PARLE dans un récit, il emploie le plus souvent…",
+    correct: "les temps du discours : présent, passé composé, futur",
+    wrongs: [
+      "toujours le passé simple",
+      "toujours l'imparfait",
+      "toujours le plus-que-parfait",
+    ],
+    methode: "Entre guillemets, on quitte le récit : le personnage parle depuis son présent.",
+  },
+  {
+    text: "Le passé composé appartient…",
+    correct: "aux temps du discours",
+    wrongs: [
+      "aux temps du récit",
+      "aux deux, indifféremment",
+      "à aucun des deux",
+    ],
+    methode: "C'est le passé de celui qui parle ; le passé simple est celui qui raconte.",
+  },
+  {
+    text: "« Le vent soufflait. Soudain, un volet claqua. » Combien de temps différents ?",
+    correct: "deux : l'imparfait, puis le passé simple",
+    wrongs: ["un seul", "trois", "aucun"],
+    methode: "Le décor à l'imparfait, l'évènement au passé simple.",
+  },
+  {
+    text: "Un même fait peut-il se raconter avec les deux séries de temps ?",
+    correct: "Oui : « il est parti » ou « il partit », selon d'où l'on parle",
+    wrongs: [
+      "Non, jamais",
+      "Seulement au pluriel",
+      "Seulement dans les poèmes",
+    ],
+    methode: "Le fait ne change pas ; c'est le point de vue qui change.",
+  },
+  {
+    text: "Le temps CHRONOLOGIQUE (passé, présent, futur) et le temps VERBAL (imparfait, passé simple…) sont…",
+    correct: "deux choses différentes",
+    wrongs: [
+      "exactement la même chose",
+      "des synonymes",
+      "réservés l'un au récit, l'autre au discours",
+    ],
+    methode: "Un verbe au présent peut raconter le passé : « En 1946, la Réunion devient un département. »",
+  },
+];
+
 // ── CONJUGAISON ─────────────────────────────────────────────────────────────
 // Present / imparfait / futur / infinitif sont produits par le moteur
 // parametrique (conjugationEngine.ts). Restent ici les notions conceptuelles.
@@ -2695,7 +3474,29 @@ const CONJ_VALEUR_TEMPS: QcmItem[] = [
 
 // ── ROUTAGE NOTION + MICRO-COMPETENCE ───────────────────────────────────────
 
+/** La phrase complexe — CM2 (3 micros) et 6e (3 micros).
+ *  ⛔ Cette fonction n'existait pas, et `questionForNotion` n'avait aucune
+ *  branche pour la notion : les neuf gabarits du CM2 tombaient sur le défaut
+ *  `qcm(LECTURE)` et servaient des questions de compréhension de lecture. */
+function phraseComplexeQuestion(microId: string): Generated {
+  if (microId.includes("relatif")) return qcm(PRONOM_RELATIF);
+  if (microId.includes("conjonctions")) return qcm(CONJONCTIONS_ROLE);
+  if (microId.includes("coordination") || microId.includes("articulation")) {
+    return qcm(ARTICULATION);
+  }
+  if (microId.includes("proposition")) return qcm(PROPOSITION);
+  return qcm(PROPOSITION);
+}
+
 function conjugaisonQuestion(microId: string): Generated {
+  /* 6e, ajoutées le 11/08/2026. Elles passent AVANT la branche générique du
+     collège (identifier / composer / employer), qui ferait tourner les temps
+     déjà connus au lieu de servir les deux modes que le BO ajoute en 6e. */
+  if (microId.includes("imperatif") || microId.includes("conditionnel")) {
+    return qcm(IMPERATIF_CONDITIONNEL);
+  }
+  if (microId.includes("discours_recit")) return qcm(DISCOURS_RECIT);
+
   // Present / imparfait / futur / infinitif : moteur parametrique (centaines de
   // variantes). Passe compose et valeur des temps : pools rediges (notions plus
   // conceptuelles, peu mecaniques).
@@ -2742,7 +3543,10 @@ function grammaireQuestion(microId: string): Generated {
   if (microId.includes("participe_passe")) return qcm(PARTICIPE_PASSE);
   if (microId.includes("orth_attribut")) return qcm(ACCORD_ATTRIBUT);
   if (microId.includes("attribut")) return qcm(ATTRIBUT);
-  if (microId.includes("complement_nom")) return qcm(COMPLEMENT_NOM);
+  if (microId.includes("complement_nom") || microId.includes("epithete")) return qcm(COMPLEMENT_NOM);
+  // 6e : l'antécédent et les manipulations syntaxiques (ajoutées le 11/08/2026).
+  if (microId.includes("pronom_antecedent")) return qcm(PRONOM_ANTECEDENT);
+  if (microId.includes("manipulations")) return qcm(MANIPULATIONS);
   if (microId.includes("cod_coi")) return qcm(COD_COI);
   if (microId.includes("cc_sortes")) return qcm(CC_SORTES);
   if (microId.includes("sujet_inverse")) return qcm(SUJET_INVERSE);
@@ -2820,6 +3624,13 @@ function questionForNotion(notionId: string, microId: string): Generated {
   if (notionId.includes("vocabulaire")) return vocabulaireQuestion(microId);
   if (notionId.includes("conjugaison")) return conjugaisonQuestion(microId);
   if (notionId.includes("grammaire")) return grammaireQuestion(microId);
+  /* ⛔ CETTE BRANCHE MANQUAIT (corrigé le 11/08/2026). Sans elle, la notion
+     « phrase_complexe » traversait toute la fonction et tombait sur le
+     `return qcm(LECTURE)` final : le CM2 servait des questions de
+     compréhension de lecture à ses trois micros de phrase complexe. Aucun
+     vérificateur ne pouvait le voir — les questions étaient valides, elles
+     n'étaient simplement pas sur le sujet. */
+  if (notionId.includes("complexe")) return phraseComplexeQuestion(microId);
   // 6e : "culture_litteraire" (genres, personnages, morale, carnet) -> pool OEUVRE
   // (deja on-topic). "lecture_voix_haute" tombe sur le defaut LECTURE : aucun pool
   // existant ne couvre la mise en voix -> c'est la couche "fixed" (ecrite main,

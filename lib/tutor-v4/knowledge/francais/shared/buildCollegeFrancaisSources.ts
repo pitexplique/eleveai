@@ -33,6 +33,12 @@ export function buildCollegeFrancaisBo(level: CollegeFrancaisLevel): KnowledgeBo
 export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): NotionSource[] {
   const p = labels[level].boPrefix;
   const hasComplexAnalysis = level !== "6e";
+  /* ⚠️ La 6e FERME le cycle 3 ; elle n'ouvre pas le cycle 4. Ce module la
+     traite comme une classe de collège parmi quatre, et c'est ce qui lui a
+     coûté la phrase complexe : le BO n° 16 du 17 avril 2025 lui consacre une
+     rubrique entière (notion de proposition, juxtaposition, coordination,
+     subordination) que le CM2 avait et pas elle. */
+  const estCycle3 = level === "6e";
 
   return [
     {
@@ -86,6 +92,17 @@ export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): Notion
       prerequis: ["lecture_comprehension"],
       levels: [1, 2, 3],
     },
+    ...(estCycle3
+      ? [
+          {
+            id: "phrase_complexe",
+            label: "Se repérer dans la phrase complexe",
+            boId: `${p}G`,
+            prerequis: ["grammaire_phrase"],
+            levels: [2, 3],
+          } satisfies NotionSource,
+        ]
+      : []),
     ...(hasComplexAnalysis
       ? [
           {
@@ -152,6 +169,47 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
     { id: `${prefix}_conj_composer`, label: "Composer et conjuguer les formes verbales attendues", notionId: "conjugaison", prerequis: [`${prefix}_conj_identifier`] },
     { id: `${prefix}_conj_employer`, label: "Employer les temps et modes selon le sens", notionId: "conjugaison", prerequis: [`${prefix}_conj_composer`] },
   ];
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LA 6e FERME LE CYCLE 3 — bloc ajouté le 11/08/2026
+
+     Les micros ci-dessus sont partagées avec la 5e, la 4e et la 3e : seul le
+     préfixe change. C'est légitime pour la lecture, l'écriture, l'oral et la
+     culture. Ça ne l'est pas pour l'étude de la langue, parce que la 6e est
+     la dernière année du cycle 3 et suit le BO n° 16 du 17 avril 2025 — pas
+     le programme du cycle 4.
+
+     Résultat mesuré avant correction : 31 micros en 6e contre 50 au CM2, sur
+     un programme plus riche. Dix objectifs nommés par le BO n'avaient rien —
+     à commencer par la phrase complexe ENTIÈRE, que le CM2 avait déjà.
+     ═══════════════════════════════════════════════════════════════════════ */
+  if (level === "6e") {
+    base.push(
+      // « Opposer et distinguer attribut du sujet et complément d'objet direct »
+      { id: `${prefix}_gram_attribut_cod`, label: "Opposer l'attribut du sujet et le complément d'objet direct", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_fonctions`] },
+      // « Identifier et différencier sans ambigüité […] épithète et […] complément du nom »
+      { id: `${prefix}_gram_epithete_cn`, label: "Différencier épithète et complément du nom", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_fonctions`] },
+      // « Mettre en relation un pronom personnel avec son antécédent »
+      { id: `${prefix}_gram_pronom_antecedent`, label: "Relier un pronom personnel à son antécédent et préciser sa fonction", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_fonctions`] },
+      // « Utiliser les manipulations syntaxiques […] au service de la
+      //   reconnaissance des constituants d'une phrase »
+      { id: `${prefix}_gram_manipulations`, label: "Utiliser les manipulations syntaxiques pour reconnaitre les constituants", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_constituants`] },
+      // « Accorder le participe passé […] avec l'auxiliaire être » / « avec le
+      //   COD […] (pronom personnel antéposé) »
+      { id: `${prefix}_orth_participe_passe`, label: "Accorder le participe passé avec être, et avec le COD antéposé pour avoir", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_accords`] },
+
+      // Rubrique « Se repérer dans la phrase complexe » — absente jusqu'ici.
+      { id: `${prefix}_complexe_proposition`, label: "Comprendre la notion de proposition", notionId: "phrase_complexe", prerequis: [`${prefix}_gram_constituants`] },
+      { id: `${prefix}_complexe_articulation`, label: "Distinguer juxtaposition, coordination et subordination", notionId: "phrase_complexe", prerequis: [`${prefix}_complexe_proposition`] },
+      { id: `${prefix}_complexe_conjonctions`, label: "Distinguer le rôle des conjonctions de coordination et de subordination", notionId: "phrase_complexe", prerequis: [`${prefix}_complexe_articulation`] },
+
+      // « Conjugaisons à mémoriser et à maîtriser : impératif présent,
+      //   conditionnel présent »
+      { id: `${prefix}_conj_imperatif_conditionnel`, label: "Conjuguer à l'impératif présent et au conditionnel présent", notionId: "conjugaison", prerequis: [`${prefix}_conj_composer`] },
+      // « des temps du discours, puis des temps du récit »
+      { id: `${prefix}_conj_discours_recit`, label: "Distinguer les temps du discours et les temps du récit", notionId: "conjugaison", prerequis: [`${prefix}_conj_employer`] },
+    );
+  }
 
   if (level !== "6e") {
     base.push(
