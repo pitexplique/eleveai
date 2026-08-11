@@ -13,8 +13,13 @@
 // qui ne montrerait que les passages laisserait croire la classe complète.
 
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import { createClient } from "@supabase/supabase-js";
+import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
 import { verifySessionToken } from "@/lib/server/session";
+
+// La route lit un cookie : elle ne peut pas être mise en cache.
+export const dynamic = "force-dynamic";
 
 /** Seuls ces rôles voient l'établissement entier. Un élève ne voit que lui. */
 const ROLES_ETABLISSEMENT = new Set(["prof", "principal", "boss"]);
@@ -67,23 +72,6 @@ function blocs(source: unknown): BlocBilan[] {
 }
 
 export async function GET(req: Request) {
-  const auth = req.headers.get("authorization") ?? "";
-  const token = auth.startsWith("Bearer ") ? auth.slice(7) : "";
-
-  const session = verifySessionToken(token);
-  if (!session) {
-    return NextResponse.json(
-      { ok: false, error: "Session expirée. Reconnectez-vous." },
-      { status: 401 },
-    );
-  }
-  if (!ROLES_ETABLISSEMENT.has(session.type_utilisateur)) {
-    return NextResponse.json(
-      { ok: false, error: "Cette vue est réservée aux professeurs et à la direction." },
-      { status: 403 },
-    );
-  }
-
   const url = new URL(req.url);
   const classe = url.searchParams.get("classe") ?? "6e";
   const matiere = url.searchParams.get("matiere") ?? "maths";
@@ -94,16 +82,84 @@ export async function GET(req: Request) {
     );
   }
 
+  // ── QUI DEMANDE, ET SUR QUEL ÉTABLISSEMENT ──────────────────────────────
+  // DEUX PORTES, ET ELLES NE DONNENT PAS SUR LA MÊME CHOSE.
+  //
+  //  • Le cookie admin (Frédéric) ouvre TOUS les établissements, mais il faut
+  //    en désigner un : `?etab=`. Sans lui, on rend la liste de ceux qui ont
+  //    des résultats, pour qu'il choisisse — plutôt qu'une erreur, ou pire,
+  //    un mélange de plusieurs collèges dans un même tableau.
+  //  • Le jeton de session (M. Pelka, ses professeurs) n'ouvre QUE son
+  //    établissement, et `?etab=` y est ignoré. C'est le point de sécurité de
+  //    la route : un principal ne doit pas pouvoir lire le collège voisin en
+  //    changeant un paramètre d'URL.
+  const cookieStore = await cookies();
+  const estAdmin = verifyAdminCookieValue(cookieStore.get("admin-auth")?.value);
+
   const supabaseAdmin = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
   );
 
+  let codeEtablissement: string;
+
+  if (estAdmin) {
+    const demande = (url.searchParams.get("etab") ?? "").trim();
+    if (!demande) {
+      // Les établissements qui ont au moins un passage — inutile d'en
+      // proposer un dont la liste serait vide.
+      const { data } = await supabaseAdmin
+        .from("resultats_evaluation_nationale")
+        .select("code_etablissement")
+        .eq("classe", classe)
+        .eq("matiere", matiere);
+      const etablissements = [
+        ...new Set(
+          (data ?? []).map((r) =>
+            String((r as Record<string, unknown>).code_etablissement ?? ""),
+          ),
+        ),
+      ]
+        .filter(Boolean)
+        .sort();
+      return NextResponse.json({
+        ok: true,
+        admin: true,
+        choisirEtablissement: true,
+        etablissements,
+        classe,
+        matiere,
+      });
+    }
+    codeEtablissement = demande;
+  } else {
+    const auth = req.headers.get("authorization") ?? "";
+    const token = auth.startsWith("Bearer ") ? auth.slice(7) : "";
+    const session = verifySessionToken(token);
+    if (!session) {
+      return NextResponse.json(
+        { ok: false, error: "Session expirée. Reconnectez-vous." },
+        { status: 401 },
+      );
+    }
+    if (!ROLES_ETABLISSEMENT.has(session.type_utilisateur)) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: "Cette vue est réservée aux professeurs et à la direction.",
+        },
+        { status: 403 },
+      );
+    }
+    // ⛔ JAMAIS `?etab=` ICI. C'est la session qui décide, pas l'URL.
+    codeEtablissement = session.code_etablissement;
+  }
+
   const [comptesRes, resultatsRes] = await Promise.all([
     supabaseAdmin
       .from("acces_etablissement")
       .select("code_utilisateur, nom, classe, actif")
-      .eq("code_etablissement", session.code_etablissement)
+      .eq("code_etablissement", codeEtablissement)
       .eq("classe", classe)
       .eq("type_utilisateur", "eleve")
       .eq("actif", true)
@@ -113,7 +169,7 @@ export async function GET(req: Request) {
       .select(
         "code_utilisateur, nom, score, total, duree_sec, chrono_ecoule, details, created_at",
       )
-      .eq("code_etablissement", session.code_etablissement)
+      .eq("code_etablissement", codeEtablissement)
       .eq("classe", classe)
       .eq("matiere", matiere)
       .order("created_at", { ascending: false }),
@@ -163,6 +219,8 @@ export async function GET(req: Request) {
 
   return NextResponse.json({
     ok: true,
+    admin: estAdmin,
+    etablissement: codeEtablissement,
     classe,
     matiere,
     eleves,

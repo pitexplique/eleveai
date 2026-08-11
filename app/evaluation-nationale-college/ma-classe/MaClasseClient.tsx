@@ -77,21 +77,43 @@ export default function MaClasseClient() {
   const [erreur, setErreur] = useState<string | null>(null);
   const [simule, setSimule] = useState(false);
   const [chargement, setChargement] = useState(false);
+  const [besoinConnexion, setBesoinConnexion] = useState(false);
+  // ── LA PORTE ADMIN ───────────────────────────────────────────────────────
+  // Frédéric doit pouvoir ouvrir la page sans le compte de M. Pelka. Le
+  // cookie admin part tout seul avec la requête ; c'est donc la RÉPONSE qui
+  // nous apprend qu'on est admin, et non l'inverse — le cookie est httpOnly,
+  // la page ne peut pas le lire. Sans établissement choisi, la route rend la
+  // liste de ceux qui ont des résultats.
+  const [admin, setAdmin] = useState(false);
+  const [etablissements, setEtablissements] = useState<string[] | null>(null);
+  const [etab, setEtab] = useState("");
 
   const charger = useCallback(async () => {
-    if (!eleve?.token) return;
     setChargement(true);
     setErreur(null);
+    setBesoinConnexion(false);
     try {
+      const params = new URLSearchParams({ classe, matiere });
+      if (etab) params.set("etab", etab);
       const r = await fetch(
-        `/api/evaluation-nationale/classe?classe=${classe}&matiere=${matiere}`,
-        { headers: { authorization: `Bearer ${eleve.token}` } },
+        `/api/evaluation-nationale/classe?${params.toString()}`,
+        eleve?.token
+          ? { headers: { authorization: `Bearer ${eleve.token}` } }
+          : undefined,
       );
       const j = await r.json();
       if (!j.ok) {
-        setErreur(j.error ?? "Lecture impossible.");
+        // 401 = ni cookie admin ni session : ce n'est pas une panne, c'est
+        // qu'il faut se connecter. Les deux ne se disent pas pareil.
+        if (r.status === 401) setBesoinConnexion(true);
+        else setErreur(j.error ?? "Lecture impossible.");
+        setEleves(null);
+      } else if (j.choisirEtablissement) {
+        setAdmin(true);
+        setEtablissements(j.etablissements as string[]);
         setEleves(null);
       } else {
+        setAdmin(Boolean(j.admin));
         setEleves(j.eleves as EleveDeLaClasse[]);
         setSimule(Boolean(j.contientDesSimulations));
       }
@@ -99,7 +121,7 @@ export default function MaClasseClient() {
       setErreur("Lecture impossible. Réessayez.");
     }
     setChargement(false);
-  }, [eleve?.token, classe, matiere]);
+  }, [eleve?.token, classe, matiere, etab]);
 
   useEffect(() => {
     charger();
@@ -136,7 +158,7 @@ export default function MaClasseClient() {
     };
   });
 
-  if (!eleve?.token) {
+  if (besoinConnexion) {
     return (
       <main className="min-h-screen" style={FOND}>
         <div className="mx-auto max-w-3xl px-4 py-16">
@@ -189,6 +211,43 @@ export default function MaClasseClient() {
             montrer la page avant la rentrée. Ils seront effacés avant que vos
             vraies classes ne passent l&apos;épreuve.
           </p>
+        )}
+
+        {/* LE SÉLECTEUR D'ÉTABLISSEMENT — pour l'administration seulement.
+            Un principal ne le voit jamais : la route ignore `?etab=` sur une
+            session, et refuserait de toute façon de lire un autre collège. */}
+        {admin && (
+          <div className="mt-5 rounded-xl border-2 border-[#1d1c16]/15 bg-white/80 p-3">
+            <label
+              className="flex flex-wrap items-center gap-2 text-sm font-black"
+              htmlFor="etab"
+            >
+              <span className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
+                Administration
+              </span>
+              Établissement
+              <select
+                id="etab"
+                value={etab}
+                onChange={(e) => setEtab(e.target.value)}
+                className="rounded-lg border-2 border-[#1d1c16]/20 bg-white px-3 py-2 text-sm font-black"
+              >
+                <option value="">— en choisir un —</option>
+                {(etablissements ?? []).map((e) => (
+                  <option key={e} value={e}>
+                    {e}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {etablissements?.length === 0 && (
+              <p className="mt-2 text-xs font-medium leading-5 text-[#1d1c16]/70">
+                Aucun établissement n&apos;a de résultat pour ce couple
+                classe/matière — personne n&apos;a encore passé cette épreuve,
+                ou le jeu de démonstration n&apos;est pas encore chargé.
+              </p>
+            )}
+          </div>
         )}
 
         <div className="mt-5 flex flex-wrap items-center gap-3">
