@@ -597,22 +597,30 @@ export const orthographeBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_orth_accord_gn_open_1",
+    id: "ce2_orth_accord_gn_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "orthographe",
     microId: "ce2_orth_accord_gn",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis dans quel ordre tu regardes les mots du groupe.",
-    tags: ["ce2", "orthographe", "accord", "ouverte"],
+    hint: "Compte les mots du groupe, puis compte les marques.",
+    tags: ["ce2", "orthographe", "accord", "methode"],
     generate: () => {
       const g = randomChoice(GROUPES);
+      const bonne = "Les trois mots du groupe ont pris la marque du pluriel — déterminant, nom, adjectif — et aucune ne s'entend.";
       return {
-        text: `« ${g.singulier} » devient « ${g.pluriel} ».\n\nQu'est-ce qui a changé, et pourquoi ne l'entend-on pas ? Explique.`,
-        format: "open" as const,
-        expected: ["s", "chaine", "chaîne", "tous", "trois", "déterminant", "determinant", "adjectif", "entend pas"],
-        comparator: "contains_keyword" as const,
+        text: `« ${g.singulier} » devient « ${g.pluriel} ».\n\nQu'est-ce qui a changé ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : la chaine s'arrête au nom, et l'adjectif reste nu.
+          "Seul le nom a pris un « s » : c'est lui qui compte.",
+          "Seul le déterminant a changé : les autres mots le suivent sans bouger.",
+          "Rien n'a changé à l'écrit : on entend juste la différence.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Le déterminant, le nom et l'adjectif forment une chaine d'accord : ils portent tous la marque du pluriel.",
           "Relis le groupe mot à mot et vérifie que chacun porte sa marque.",
@@ -690,7 +698,7 @@ export const orthographeBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_orth_pluriel_open_1",
+    id: "ce2_orth_pluriel_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "orthographe",
@@ -698,14 +706,24 @@ export const orthographeBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Si l'oreille ne sert à rien, qu'est-ce qui sert ?",
-    tags: ["ce2", "orthographe", "pluriel", "ouverte"],
+    tags: ["ce2", "orthographe", "pluriel", "methode"],
     generate: () => {
       const g = randomChoice(GROUPES);
+      const bonne = "Au petit mot devant le nom — des, les, deux, mes, ces : c'est lui qui prévient.";
       return {
-        text: `« ${g.singulier} » et « ${g.pluriel} » se disent presque pareil.\n\nÀ quoi vois-tu qu'il faut mettre un « s » ? Explique.`,
-        format: "open" as const,
-        expected: ["déterminant", "determinant", "des", "petit mot", "devant", "plusieurs"],
-        comparator: "contains_keyword" as const,
+        text: `« ${g.singulier} » et « ${g.pluriel} » se disent presque pareil.\n\nÀ quoi vois-tu qu'il faut mettre un « s » ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège : le « s » du pluriel ne s'entend pas, jamais.
+          "À l'oreille : on entend un petit « s » à la fin.",
+          // La voisine, à l'envers : c'est le nom qui commande le verbe, et
+          // non le verbe qui donne le nombre du nom.
+          "Au verbe de la phrase : c'est lui qui donne le nombre du nom.",
+          "À la longueur du mot : les mots longs prennent un « s ».",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "La marque du pluriel s'écrit mais ne s'entend pas. C'est le déterminant qui annonce combien il y en a.",
           "Regarde le petit mot devant le nom : des, les, deux, mes, ces… Il t'oblige à mettre le « s ».",
@@ -833,7 +851,7 @@ export const orthographeBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_orth_pluriel_irregulier_open_1",
+    id: "ce2_orth_pluriel_irregulier_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "orthographe",
@@ -841,14 +859,22 @@ export const orthographeBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Cette fois, la marque du pluriel s'entend. C'est nouveau.",
-    tags: ["ce2", "orthographe", "pluriel", "ouverte"],
+    tags: ["ce2", "orthographe", "pluriel", "methode"],
     generate: () => {
       const p = randomChoice(PLURIELS_IRREGULIERS.filter((x) => x.famille === "-al → -aux"));
+      const bonne = "Ce n'est pas un « s » ajouté : toute la fin du mot change, et cette fois on l'entend.";
       return {
-        text: `« un ${p.singulier} » devient « des ${p.pluriel} ».\n\nEn quoi ce pluriel est-il différent de « des letchis » ? Explique.`,
-        format: "open" as const,
-        expected: ["entend", "aux", "toute la fin", "change", "pas un s", "irrégulier", "irregulier"],
-        comparator: "contains_keyword" as const,
+        text: `« un ${p.singulier} » devient « des ${p.pluriel} ».\n\nEn quoi ce pluriel est-il différent de « des letchis » ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : « -aux » pris pour une autre façon d'écrire « s ».
+          "Il n'y a pas de différence : « -aux » est une autre façon d'écrire le « s ».",
+          "La différence est que le déterminant change aussi.",
+          "La différence est qu'il n'y a aucune marque de pluriel.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Les noms en -al font leur pluriel en -aux : ce n'est pas un « s » ajouté, c'est toute la fin qui change.",
           "Dis les deux à voix haute et compare : letchi / letchis se disent pareil, cheval / chevaux non.",
@@ -950,7 +976,7 @@ export const orthographeBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_orth_feminin_entendu_open_1",
+    id: "ce2_orth_feminin_entendu_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "orthographe",
@@ -958,14 +984,24 @@ export const orthographeBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Compare ce qui se passe dans ta bouche, puis sur ta feuille.",
-    tags: ["ce2", "orthographe", "feminin", "ouverte"],
+    tags: ["ce2", "orthographe", "feminin", "methode"],
     generate: () => {
       const c = randomChoice(FEMININS_ENTENDUS);
+      const bonne = `La fin du mot change, et on l'entend : « ${c.m} » → « ${c.f} ». À l'écrit, une consonne apparait.`;
       return {
-        text: `Dis « ${c.m} », puis « ${c.f} ».\n\nQu'entends-tu de différent, et qu'est-ce qui a changé à l'écrit ? Explique.`,
-        format: "open" as const,
-        expected: ["entend", "fin", "consonne", c.f, "change"],
-        comparator: "contains_keyword" as const,
+        text: `Dis « ${c.m} », puis « ${c.f} ».\n\nQu'est-ce qui change ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Le piège : on vient d'apprendre que le « s » du pluriel est muet,
+          // et l'enfant applique la même conclusion au féminin. Ici, ça
+          // s'entend — c'est justement ce qui rend ce féminin remarquable.
+          "Rien ne change à l'oreille : seule l'écriture change, comme pour le « s » du pluriel.",
+          "Seule la première lettre du mot change.",
+          "Le mot devient plus court.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Quand le féminin fait apparaitre une consonne, on l'entend — contrairement au « s » du pluriel.",
           "Prononce les deux formes lentement et écoute la fin.",
@@ -1038,7 +1074,7 @@ export const orthographeBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_orth_chaine_phrase_open_1",
+    id: "ce2_orth_chaine_phrase_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "orthographe",
@@ -1046,14 +1082,23 @@ export const orthographeBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Le verbe est loin du déterminant, et pourtant il obéit au même sujet.",
-    tags: ["ce2", "orthographe", "chaine", "ouverte"],
+    tags: ["ce2", "orthographe", "chaine", "methode"],
     generate: () => {
       const c = randomChoice(CHAINES);
+      const bonne = `Parce que son sujet, « ${c.sujetPl} », est au pluriel : le verbe suit son sujet, même de loin.`;
       return {
-        text: `« ${c.pluriel} »\n\nPourquoi le verbe « ${c.verbePl} » prend-il « -nt » ? Explique.`,
-        format: "open" as const,
-        expected: ["sujet", "pluriel", "plusieurs", c.sujetPl.toLowerCase(), "accorde"],
-        comparator: "contains_keyword" as const,
+        text: `« ${c.pluriel} »\n\nPourquoi le verbe « ${c.verbePl} » prend-il « -nt » ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège de la chaine longue : le mot le plus proche n'est pas le
+          // sujet, et c'est lui que l'enfant regarde.
+          "Parce que le mot placé juste avant le verbe est au pluriel.",
+          "Parce qu'on entend un « -nt » à la fin.",
+          "Parce que la phrase est longue.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Le verbe s'accorde avec son sujet, même quand le sujet est un groupe de plusieurs mots.",
           `Pose la question « Qui est-ce qui ${c.verbePl} ? », puis compte : un seul, ou plusieurs ?`,
@@ -1128,22 +1173,31 @@ export const orthographeBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_orth_sujet_verbe_open_1",
+    id: "ce2_orth_sujet_verbe_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "orthographe",
     microId: "ce2_orth_sujet_verbe",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis la question que tu poses avant d'écrire la fin du verbe.",
-    tags: ["ce2", "orthographe", "sujet-verbe", "ouverte"],
+    hint: "Il y a un geste à faire AVANT d'écrire la fin du verbe.",
+    tags: ["ce2", "orthographe", "sujet-verbe", "methode"],
     generate: () => {
       const c = randomChoice(CHAINES);
+      const bonne = `Je remonte du verbe vers le sujet et je compte : « Qui est-ce qui ${c.verbePl} ? » — ${c.sujetPl}, ils sont plusieurs.`;
       return {
-        text: `« ${c.singulier} » devient « ${c.pluriel} ».\n\nPourquoi « ${c.verbeSg} » devient-il « ${c.verbePl} » ? Explique.`,
-        format: "open" as const,
-        expected: ["sujet", "pluriel", "plusieurs", "accorde", "nt"],
-        comparator: "contains_keyword" as const,
+        text: `« ${c.singulier} » devient « ${c.pluriel} ».\n\nQuel geste fais-tu avant d'écrire la fin du verbe ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle d'ORDRE : écrire d'abord, vérifier ensuite — et
+          // on ne vérifie jamais.
+          "J'écris la fin du verbe, et je vérifie le sujet après.",
+          "Je dis la phrase à voix haute : la fin du verbe s'entend.",
+          "Je regarde le temps de la phrase : c'est lui qui donne la fin.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Le verbe suit son sujet : plusieurs, il prend « -nt ».",
           "Remonte du verbe vers le sujet, et compte.",
@@ -1216,22 +1270,30 @@ export const orthographeBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_orth_homophones_open_1",
+    id: "ce2_orth_homophones_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "orthographe",
     microId: "ce2_orth_homophones",
     difficulty: 3,
     theme: "neutral",
-    hint: "Ne dis pas la réponse : dis le geste qui te la donne.",
-    tags: ["ce2", "orthographe", "homophones", "ouverte"],
+    hint: "Ils se disent pareil. Ton oreille ne peut donc rien pour toi.",
+    tags: ["ce2", "orthographe", "homophones", "methode"],
     generate: () => {
       const h = randomChoice(HOMOPHONES);
+      const bonne = `Je remplace par « ${h.truc} » et j'écoute si la phrase tient debout.`;
       return {
-        text: `« ${h.phrase} »\n\nComment fais-tu pour choisir entre « ${h.bon} » et « ${h.autre} » ? Explique ton truc.`,
-        format: "open" as const,
-        expected: [h.truc, "remplace", "remplacer", "essaie", "se dit"],
-        comparator: "contains_keyword" as const,
+        text: `« ${h.phrase} »\n\nComment fais-tu pour choisir entre « ${h.bon} » et « ${h.autre} » ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège des homophones : justement, les deux se disent pareil.
+          "J'écoute lequel des deux se dit : c'est celui-là.",
+          "Je prends le plus court : c'est le plus fréquent.",
+          "Je regarde s'il y a un accent : l'accent dit toujours lequel choisir.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Les homophones se disent pareil : l'oreille seule ne suffit jamais.",
           `Remplace par « ${h.truc} » et écoute si la phrase tient debout.`,
@@ -1303,17 +1365,26 @@ export const orthographeBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce2_orth_mots_invariables_open_1",
+    id: "ce2_orth_mots_invariables_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "orthographe",
     microId: "ce2_orth_mots_invariables",
     difficulty: 3,
     theme: "neutral",
-    text: "Les mots invariables ne suivent aucune règle : on ne peut pas les deviner.\n\nQuel moyen utilises-tu pour les retenir ? Explique.",
-    format: "open",
-    expected: ["recopie", "relis", "par cœur", "par coeur", "cahier", "liste", "apprends", "mémoire", "memoire"],
-    comparator: "contains_keyword",
+    text: "Les mots invariables ne suivent aucune règle : on ne peut pas les deviner.\n\nComment les retiens-tu ?",
+    format: "qcm",
+    choices: [
+      "Je les lis souvent et je les recopie : la main retient ce que la règle ne peut pas donner.",
+      // L'erreur réelle : répéter dans sa tête sans jamais écrire.
+      "Je les répète dix fois dans ma tête, sans écrire.",
+      "Je cherche leur famille : elle donne leur orthographe.",
+      "Je les écris comme je les entends.",
+    ],
+    expected: [
+      "Je les lis souvent et je les recopie : la main retient ce que la règle ne peut pas donner.",
+    ],
+    comparator: "mcq_exact",
     hint: "Pense à ce que tu fais quand tu dois retenir un mot difficile.",
     explanation: exp(
       "Un mot invariable s'écrit toujours pareil, et rien dans le mot ne dit comment.",
@@ -1321,7 +1392,7 @@ export const orthographeBank: TutorBankItemV4[] = [
       "Recopier « aujourd'hui » trois fois de suite marche mieux que se le répéter dix fois dans sa tête : l'œil et la main travaillent ensemble.",
       "On les apprend par cœur, en les relisant et en les recopiant.",
     ),
-    tags: ["ce2", "orthographe", "invariables", "methode", "ouverte"],
+    tags: ["ce2", "orthographe", "invariables", "methode", "qcm"],
   },
 
   /* =========================================================
@@ -1400,22 +1471,33 @@ export const orthographeBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_orth_defi_open_1",
+    id: "ce2_orth_defi_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "orthographe",
     microId: "ce2_orth_defi",
     difficulty: 3,
     theme: "neutral",
+    // Le cran de plus : deux comptes sur la même phrase, et ils ne donnent pas
+    // le même chiffre. C'est toute la difficulté de l'orthographe française.
     hint: "Toutes les marques ne se comportent pas pareil. Lesquelles s'entendent ?",
-    tags: ["ce2", "orthographe", "defi", "ouverte"],
+    tags: ["ce2", "orthographe", "defi", "methode"],
     generate: () => {
       const c = randomChoice(CHAINES);
+      const bonne = "Quatre marques écrites — déterminant, nom, adjectif, verbe — et une seule prévient à l'oreille : celle du déterminant.";
       return {
-        text: `« ${c.pluriel} »\n\nCombien de mots portent une marque de pluriel, et combien en entends-tu ? Explique.`,
-        format: "open" as const,
-        expected: ["4", "quatre", "entend pas", "aucun", "muet", "déterminant", "determinant"],
-        comparator: "contains_keyword" as const,
+        text: `« ${c.pluriel} »\n\nCombien de mots portent une marque de pluriel, et combien en entends-tu ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Le piège le plus fin : « aucune » est presque juste. Le déterminant,
+          // lui, s'entend — et c'est le seul avertissement qu'on reçoive.
+          "Quatre marques écrites, et on n'en entend aucune.",
+          "Quatre marques écrites, et on les entend toutes les quatre.",
+          "Une seule marque écrite, sur le nom, et on ne l'entend pas.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "La chaine d'accord traverse toute la phrase : déterminant, nom, adjectif, verbe.",
           "Compte d'abord ce que tu écris, puis compte ce que tu entends. Les deux comptes ne donnent pas le même chiffre.",
