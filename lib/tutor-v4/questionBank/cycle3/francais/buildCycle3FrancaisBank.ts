@@ -1564,6 +1564,847 @@ const HOMOPHONES: QcmItem[] = [
   },
 ];
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   LES NEUF POOLS AJOUTÉS LE 11/08/2026 — CM2, mise au niveau du BO
+
+   Relu sur le programme du cycle 3 (BO n° 16 du 17 avril 2025), rubrique
+   « Grammaire et orthographe grammaticale — Cours moyen deuxième année ».
+   Neuf objectifs d'apprentissage nommés par le texte n'avaient ni
+   micro-compétence ni question. La couverture affichait pourtant 50/50.
+
+   ⚠️ Douze énoncés par pool au minimum. Chaque micro reçoit trois gabarits qui
+   puisent tous dans le même pool : en dessous de douze, l'élève reverrait la
+   même question dès son deuxième passage. Le plancher mesuré du CE2 est de 11.
+   ⚠️ Ces pools ne servent qu'au CM2 : les branches d'aiguillage sont accrochées
+   à des `microId` que le CM1 et la 6e n'ont pas.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const NATURE_FONCTION: QcmItem[] = [
+  {
+    text: "Dans « Le pêcheur répare son filet », quelle est la NATURE du mot « pêcheur » ?",
+    correct: "un nom",
+    wrongs: ["un sujet", "un complément", "une fonction"],
+    methode: "La nature dit ce que le mot EST. Sujet et complément sont des fonctions, pas des natures.",
+  },
+  {
+    text: "Dans « Le pêcheur répare son filet », quelle est la FONCTION du groupe « Le pêcheur » ?",
+    correct: "sujet du verbe",
+    wrongs: ["un nom", "un groupe nominal", "un déterminant"],
+    methode: "La fonction dit le RÔLE du groupe dans la phrase.",
+  },
+  {
+    text: "« Sujet », c'est…",
+    correct: "une fonction",
+    wrongs: ["une nature", "une classe de mots", "un temps du verbe"],
+    methode: "On est sujet DANS une phrase : c'est un rôle, donc une fonction.",
+  },
+  {
+    text: "« Adjectif », c'est…",
+    correct: "une nature",
+    wrongs: ["une fonction", "un complément", "un accord"],
+    methode: "Un mot est adjectif dans le dictionnaire, avant toute phrase.",
+  },
+  {
+    text: "Un même mot peut-il changer de fonction d'une phrase à l'autre ?",
+    correct: "Oui : sa nature ne bouge pas, sa fonction change",
+    wrongs: ["Non, jamais", "Oui, et sa nature change aussi", "Seulement les verbes"],
+    methode: "« Le chien dort » / « Je vois le chien » : nom dans les deux, sujet puis complément.",
+  },
+  {
+    text: "Pour trouver la NATURE d'un mot, on se demande…",
+    correct: "ce qu'il est : nom, verbe, adjectif, déterminant…",
+    wrongs: ["quel rôle il joue dans la phrase", "où il est placé", "s'il est au pluriel"],
+    methode: "La nature se lit sur le mot seul ; la fonction demande la phrase entière.",
+  },
+  {
+    text: "Pour trouver la FONCTION d'un groupe, on se demande…",
+    correct: "quel rôle il joue dans la phrase",
+    wrongs: ["à quelle classe il appartient", "combien il a de lettres", "s'il porte un accent"],
+    methode: "Sujet ? complément ? attribut ? C'est la phrase qui répond.",
+  },
+  {
+    text: "« Complément du nom », c'est…",
+    correct: "une fonction",
+    wrongs: ["une nature", "une classe grammaticale", "un temps du verbe"],
+    methode: "Complément de quelque chose : c'est un rôle, donc une fonction.",
+  },
+  {
+    text: "Dans « Les enfants ramassent des letchis », quelle est la nature de « des » ?",
+    correct: "un déterminant",
+    wrongs: ["un nom", "un pronom", "une préposition"],
+    methode: "Il annonce le nom « letchis » et donne son nombre.",
+  },
+  {
+    text: "Dans « Le lagon est calme », quelle est la nature de « calme » ?",
+    correct: "un adjectif",
+    wrongs: ["un nom", "un adverbe", "un verbe"],
+    methode: "Il dit comment est le lagon : c'est un adjectif.",
+  },
+  {
+    text: "Un pronom peut avoir la fonction de…",
+    correct: "sujet ou complément",
+    wrongs: ["verbe", "adjectif", "déterminant"],
+    methode: "« Il dort » : sujet. « Je le vois » : complément. Même nature, deux fonctions.",
+  },
+  {
+    text: "Dans « Léa lit un livre », quelle est la fonction de « un livre » ?",
+    correct: "complément du verbe",
+    wrongs: ["sujet", "un nom", "un groupe nominal"],
+    methode: "« Lit quoi ? » — un livre. C'est le rôle du groupe, donc sa fonction.",
+  },
+];
+
+const PREPOSITIONS: QcmItem[] = [
+  {
+    text: "Dans « Le margouillat dort sur le mur », quel mot est une préposition ?",
+    correct: "sur",
+    wrongs: ["le", "margouillat", "dort"],
+    methode: "La préposition relie le verbe à son complément : à, de, dans, sur, sous, pour, avec…",
+  },
+  {
+    text: "Laquelle de ces listes ne contient QUE des prépositions ?",
+    correct: "à, dans, pour, avec",
+    wrongs: ["mais, ou, et, donc", "le, la, les, des", "je, tu, il, elle"],
+    methode: "mais/ou/et/donc coordonnent ; le/la/les déterminent ; je/tu/il sont des pronoms.",
+  },
+  {
+    text: "Dans « Je pense que tu as raison », le mot « que » est…",
+    correct: "une conjonction de subordination",
+    wrongs: ["une préposition", "un pronom personnel", "un déterminant"],
+    methode: "Il accroche une proposition entière à la première.",
+  },
+  {
+    text: "Dans « Il rentre parce qu'il pleut », « parce que » est…",
+    correct: "une conjonction de subordination",
+    wrongs: ["une conjonction de coordination", "une préposition", "un adverbe"],
+    methode: "Elle introduit une proposition qui donne la cause.",
+  },
+  {
+    text: "« mais, ou, et, donc, or, ni, car » sont des…",
+    correct: "conjonctions de coordination",
+    wrongs: ["conjonctions de subordination", "prépositions", "adverbes"],
+    methode: "Elles relient deux éléments de même rang, sans en soumettre un à l'autre.",
+  },
+  {
+    text: "À quoi sert une préposition ?",
+    correct: "à relier un mot à son complément",
+    wrongs: ["à relier deux propositions", "à conjuguer un verbe", "à accorder un adjectif"],
+    methode: "« le cari DE ma grand-mère » : « de » accroche le complément au nom.",
+  },
+  {
+    text: "Dans « le cari de ma grand-mère », quel mot introduit le complément du nom ?",
+    correct: "de",
+    wrongs: ["le", "cari", "grand-mère"],
+    methode: "Le complément du nom passe presque toujours par une préposition.",
+  },
+  {
+    text: "Dans « Il attend depuis le matin », le mot « depuis » est…",
+    correct: "une préposition",
+    wrongs: ["un adverbe", "une conjonction de subordination", "un verbe"],
+    methode: "Il introduit le groupe « le matin » et ne se conjugue pas.",
+  },
+  {
+    text: "Quelle conjonction de subordination introduit une cause ?",
+    correct: "parce que",
+    wrongs: ["et", "mais", "ou"],
+    methode: "Les trois autres coordonnent : elles ne disent pas pourquoi.",
+  },
+  {
+    text: "Une conjonction de subordination relie…",
+    correct: "une proposition à une autre",
+    wrongs: ["deux noms", "un nom à son déterminant", "deux adjectifs"],
+    methode: "Elle demande un verbe conjugué derrière elle.",
+  },
+  {
+    text: "Dans « Nous partirons quand la pluie s'arrêtera », le mot « quand » est…",
+    correct: "une conjonction de subordination",
+    wrongs: ["une préposition", "un adverbe de lieu", "un déterminant"],
+    methode: "Derrière lui, une proposition entière avec son verbe conjugué.",
+  },
+  {
+    text: "Les prépositions sont des mots…",
+    correct: "invariables",
+    wrongs: ["qui s'accordent avec le nom", "qui se conjuguent", "qui prennent un s au pluriel"],
+    methode: "« sur le mur », « sur les murs » : « sur » ne bouge pas.",
+  },
+];
+
+const SUJET_INVERSE: QcmItem[] = [
+  {
+    text: "Dans « Sur le piton souffle un vent froid », quel est le sujet ?",
+    correct: "un vent froid",
+    wrongs: ["Sur le piton", "souffle", "froid"],
+    methode: "Qui est-ce qui souffle ? Un vent froid — même s'il est placé derrière le verbe.",
+  },
+  {
+    text: "Dans « Où va ton frère ? », quel est le sujet ?",
+    correct: "ton frère",
+    wrongs: ["Où", "va", "ton"],
+    methode: "Dans une question, le sujet passe souvent derrière le verbe.",
+  },
+  {
+    text: "Comment trouve-t-on un sujet inversé ?",
+    correct: "On pose « qui est-ce qui ? » devant le verbe, même si la réponse est derrière",
+    wrongs: [
+      "On prend toujours le premier groupe de la phrase",
+      "On prend le dernier mot",
+      "On regarde le signe de ponctuation final",
+    ],
+    methode: "La question marche toujours ; la place, non.",
+  },
+  {
+    text: "Un sujet inversé est un sujet qui…",
+    correct: "est placé après le verbe",
+    wrongs: ["n'existe pas", "est toujours au pluriel", "est toujours un pronom"],
+    methode: "Inversé veut dire « retourné » : le verbe passe devant.",
+  },
+  {
+    text: "Dans « Arrivent alors les pêcheurs », le sujet est…",
+    correct: "les pêcheurs",
+    wrongs: ["Arrivent", "alors", "il n'y en a pas"],
+    methode: "Qui est-ce qui arrive ? Les pêcheurs.",
+  },
+  {
+    text: "Dans « Que veut ta sœur ? », le sujet est…",
+    correct: "ta sœur",
+    wrongs: ["Que", "veut", "ta"],
+    methode: "« Que » est le complément : qui est-ce qui veut ? Ta sœur.",
+  },
+  {
+    text: "« Dans le lagon nagent des poissons. » Avec quoi le verbe s'accorde-t-il ?",
+    correct: "avec « des poissons »",
+    wrongs: ["avec « le lagon »", "avec « Dans »", "avec rien du tout"],
+    methode: "Le groupe le plus proche du verbe n'est pas le sujet : le sujet est derrière.",
+  },
+  {
+    text: "Quand rencontre-t-on souvent un sujet inversé ?",
+    correct: "dans une question",
+    wrongs: ["dans une phrase négative", "dans une phrase exclamative seulement", "jamais"],
+    methode: "« Viens-tu ? », « Où va ton frère ? » : le verbe passe devant.",
+  },
+  {
+    text: "Dans « Ainsi parlait le maitre », le sujet est…",
+    correct: "le maitre",
+    wrongs: ["Ainsi", "parlait", "Ainsi parlait"],
+    methode: "« Ainsi » dit comment : c'est un complément, pas le sujet.",
+  },
+  {
+    text: "« Sous les filaos dorment deux chiens. » Combien la phrase a-t-elle de sujets ?",
+    correct: "un seul : « deux chiens »",
+    wrongs: ["deux : les filaos et les chiens", "aucun", "trois"],
+    methode: "« Sous les filaos » dit où : c'est un complément circonstanciel.",
+  },
+  {
+    text: "Pourquoi faut-il savoir repérer un sujet inversé ?",
+    correct: "Parce que c'est lui qui commande l'accord du verbe",
+    wrongs: [
+      "Parce qu'il faut le supprimer",
+      "Parce qu'il change le temps du verbe",
+      "Parce qu'il prend une majuscule",
+    ],
+    methode: "Se tromper de sujet, c'est se tromper de terminaison.",
+  },
+  {
+    text: "« Que disent tes parents ? » Pourquoi le verbe est-il au pluriel ?",
+    correct: "Parce que le sujet « tes parents » est au pluriel",
+    wrongs: [
+      "Parce que « Que » est au pluriel",
+      "Parce que la phrase est une question",
+      "Parce qu'il y a un point d'interrogation",
+    ],
+    methode: "Le sujet inversé commande, exactement comme un sujet placé devant.",
+  },
+];
+
+const COD_COI: QcmItem[] = [
+  {
+    text: "Dans « Léa mange une mangue », le groupe « une mangue » est…",
+    correct: "un complément d'objet direct",
+    wrongs: ["un complément d'objet indirect", "un complément de lieu", "le sujet"],
+    methode: "Il suit le verbe sans préposition : mange QUOI ?",
+  },
+  {
+    text: "Dans « Léa parle à sa grand-mère », le groupe « à sa grand-mère » est…",
+    correct: "un complément d'objet indirect",
+    wrongs: ["un complément d'objet direct", "un complément de temps", "un attribut du sujet"],
+    methode: "Une préposition s'est glissée entre le verbe et son complément : parle À QUI ?",
+  },
+  {
+    text: "Comment reconnait-on un complément d'objet DIRECT ?",
+    correct: "Il suit le verbe sans préposition : on demande « qui ? » ou « quoi ? »",
+    wrongs: [
+      "Il est toujours au début de la phrase",
+      "Il commence toujours par « à »",
+      "Il peut toujours se supprimer",
+    ],
+    methode: "Direct veut dire : rien entre le verbe et lui.",
+  },
+  {
+    text: "Comment reconnait-on un complément d'objet INDIRECT ?",
+    correct: "Il est relié au verbe par une préposition : à, de…",
+    wrongs: [
+      "Il suit le verbe sans préposition",
+      "Il est toujours un pronom",
+      "Il est toujours au pluriel",
+    ],
+    methode: "Indirect veut dire : on y arrive par un petit mot.",
+  },
+  {
+    text: "Dans « Il pense à son voyage », le complément est…",
+    correct: "un COI",
+    wrongs: ["un COD", "un complément de lieu", "un attribut du sujet"],
+    methode: "Pense À quoi ? La préposition « à » signe le complément indirect.",
+  },
+  {
+    text: "Dans « Le pêcheur répare son filet », quelle question pose-t-on ?",
+    correct: "répare quoi ?",
+    wrongs: ["répare à qui ?", "répare où ?", "répare quand ?"],
+    methode: "Pas de préposition : la question est « qui ? » ou « quoi ? ».",
+  },
+  {
+    text: "Lequel de ces verbes se construit avec un complément d'objet INDIRECT ?",
+    correct: "téléphoner à quelqu'un",
+    wrongs: ["manger quelque chose", "regarder quelque chose", "prendre quelque chose"],
+    methode: "On téléphone À quelqu'un : la préposition fait partie du verbe.",
+  },
+  {
+    text: "Dans « Elle offre un cadeau à son frère », quel est le COD ?",
+    correct: "un cadeau",
+    wrongs: ["à son frère", "Elle", "offre"],
+    methode: "Offre quoi ? Un cadeau, sans préposition.",
+  },
+  {
+    text: "Dans « Elle offre un cadeau à son frère », quel est le COI ?",
+    correct: "à son frère",
+    wrongs: ["un cadeau", "Elle", "offre"],
+    methode: "Offre à qui ? À son frère — la préposition est là.",
+  },
+  {
+    text: "Peut-on supprimer le complément d'objet d'une phrase ?",
+    correct: "Non : la phrase ne veut plus rien dire",
+    wrongs: ["Oui, toujours", "Seulement s'il est au pluriel", "Seulement dans une question"],
+    methode: "C'est ce qui le sépare du complément circonstanciel, lui facultatif.",
+  },
+  {
+    text: "Dans « Nous parlons de la sortie », le groupe « de la sortie » est…",
+    correct: "un COI",
+    wrongs: ["un COD", "un complément de lieu", "un complément du nom"],
+    methode: "Parlons DE quoi ? La préposition « de » signe l'indirect.",
+  },
+  {
+    text: "Le complément d'objet direct répond à la question…",
+    correct: "qui ? ou quoi ?",
+    wrongs: ["à qui ? ou à quoi ?", "où ?", "quand ?"],
+    methode: "Sans préposition dans la question : c'est le signe du direct.",
+  },
+];
+
+const CC_SORTES: QcmItem[] = [
+  {
+    text: "Dans « Hier, nous sommes allés au marché », « Hier » est un complément circonstanciel de…",
+    correct: "temps",
+    wrongs: ["lieu", "cause", "manière"],
+    methode: "Il répond à « quand ? ».",
+  },
+  {
+    text: "Dans « Hier, nous sommes allés au marché », « au marché » est un complément circonstanciel de…",
+    correct: "lieu",
+    wrongs: ["temps", "cause", "manière"],
+    methode: "Il répond à « où ? ».",
+  },
+  {
+    text: "Dans « Il est rentré parce qu'il pleuvait », le groupe souligné dit…",
+    correct: "la cause",
+    wrongs: ["le temps", "le lieu", "la manière"],
+    methode: "Il répond à « pourquoi ? ».",
+  },
+  {
+    text: "Un complément circonstanciel de cause répond à la question…",
+    correct: "pourquoi ?",
+    wrongs: ["quand ?", "où ?", "comment ?"],
+    methode: "La cause explique ce qui a provoqué l'action.",
+  },
+  {
+    text: "Un complément circonstanciel de temps répond à la question…",
+    correct: "quand ?",
+    wrongs: ["où ?", "pourquoi ?", "avec qui ?"],
+    methode: "Hier, demain, depuis trois jours, le samedi…",
+  },
+  {
+    text: "Un complément circonstanciel de lieu répond à la question…",
+    correct: "où ?",
+    wrongs: ["quand ?", "pourquoi ?", "combien ?"],
+    methode: "Sur la plage, au marché, sous le tamarin…",
+  },
+  {
+    text: "« Le samedi, les enfants jouent sur la plage. » Combien y a-t-il de compléments circonstanciels ?",
+    correct: "deux : un de temps, un de lieu",
+    wrongs: ["un seul", "trois", "aucun"],
+    methode: "« Le samedi » dit quand, « sur la plage » dit où.",
+  },
+  {
+    text: "Dans « À cause de la pluie, le match est annulé », le complément dit…",
+    correct: "la cause",
+    wrongs: ["le temps", "le lieu", "la manière"],
+    methode: "« À cause de » annonce toujours la cause.",
+  },
+  {
+    text: "Peut-on déplacer un complément circonstanciel dans la phrase ?",
+    correct: "Oui : c'est justement ce qui le distingue du complément d'objet",
+    wrongs: ["Non, jamais", "Seulement s'il est court", "Seulement à la fin"],
+    methode: "« Hier, il pleuvait. » / « Il pleuvait hier. » Les deux tiennent debout.",
+  },
+  {
+    text: "Dans « Depuis trois jours, il souffle un vent fort », le complément dit…",
+    correct: "le temps",
+    wrongs: ["le lieu", "la cause", "la manière"],
+    methode: "Depuis quand ? Depuis trois jours.",
+  },
+  {
+    text: "Dans « Ils se sont abrités sous le tamarin », le complément dit…",
+    correct: "le lieu",
+    wrongs: ["le temps", "la cause", "la manière"],
+    methode: "Abrités où ? Sous le tamarin.",
+  },
+  {
+    text: "Comment vérifier qu'un groupe est bien un complément circonstanciel ?",
+    correct: "On essaie de le déplacer ou de le supprimer : la phrase tient encore",
+    wrongs: [
+      "On regarde s'il est au pluriel",
+      "On regarde s'il suit le verbe",
+      "On compte ses mots",
+    ],
+    methode: "Le complément d'objet, lui, ne supporte ni l'un ni l'autre.",
+  },
+];
+
+const ATTRIBUT: QcmItem[] = [
+  {
+    text: "Dans « Le lagon est calme », le mot « calme » est…",
+    correct: "un attribut du sujet",
+    wrongs: ["un complément d'objet direct", "un complément de lieu", "le sujet"],
+    methode: "Il dit ce que le lagon EST, et il passe par le verbe « être ».",
+  },
+  {
+    text: "Qu'est-ce qui relie un attribut à son sujet ?",
+    correct: "un verbe d'état : être, sembler, devenir, paraitre, rester",
+    wrongs: ["une préposition", "un déterminant", "une conjonction de coordination"],
+    methode: "Sans verbe d'état, pas d'attribut.",
+  },
+  {
+    text: "Dans « Elle est devenue maitresse », le mot « maitresse » est…",
+    correct: "un attribut du sujet",
+    wrongs: ["un COD", "un COI", "un complément du nom"],
+    methode: "« devenir » est un verbe d'état : il annonce ce que le sujet est.",
+  },
+  {
+    text: "Comment distinguer un attribut du sujet d'un complément d'objet ?",
+    correct: "L'attribut dit ce que le sujet EST ; le complément d'objet dit ce qu'il subit",
+    wrongs: [
+      "L'attribut est toujours placé après le verbe, le complément avant",
+      "L'attribut est toujours un nom",
+      "Le complément d'objet est toujours au pluriel",
+    ],
+    methode: "« Il est pêcheur » : il L'EST. « Il voit un pêcheur » : ce n'est pas lui.",
+  },
+  {
+    text: "Dans « Tom regarde la mer », le groupe « la mer » est…",
+    correct: "un complément d'objet direct",
+    wrongs: ["un attribut du sujet", "un complément de lieu", "le sujet"],
+    methode: "« regarder » n'est pas un verbe d'état : Tom n'est pas la mer.",
+  },
+  {
+    text: "Lequel de ces verbes est un verbe d'état ?",
+    correct: "sembler",
+    wrongs: ["manger", "courir", "prendre"],
+    methode: "Les verbes d'état ne disent pas une action : ils relient le sujet à ce qu'il est.",
+  },
+  {
+    text: "Dans « Les letchis sont mûrs », le mot « mûrs » est…",
+    correct: "un attribut du sujet",
+    wrongs: ["une épithète", "un COD", "un complément du nom"],
+    methode: "Il passe par « sont » : c'est un attribut, pas une épithète collée au nom.",
+  },
+  {
+    text: "Peut-on supprimer l'attribut du sujet ?",
+    correct: "Non : « Le lagon est. » ne veut plus rien dire",
+    wrongs: ["Oui, toujours", "Seulement si c'est un adjectif", "Seulement au pluriel"],
+    methode: "Le verbe d'état ne peut pas rester seul.",
+  },
+  {
+    text: "Dans « Mon frère parait fatigué », quel est le verbe d'état ?",
+    correct: "parait",
+    wrongs: ["Mon frère", "fatigué", "il n'y en a pas"],
+    methode: "paraitre, sembler, devenir, rester, demeurer : tous des verbes d'état.",
+  },
+  {
+    text: "Un attribut du sujet peut être…",
+    correct: "un adjectif ou un nom",
+    wrongs: ["seulement un adjectif", "seulement un verbe", "seulement un adverbe"],
+    methode: "« Il est grand » (adjectif), « Il est pêcheur » (nom).",
+  },
+  {
+    text: "Dans « Il est pêcheur », à quoi se rapporte le mot « pêcheur » ?",
+    correct: "au sujet « Il »",
+    wrongs: ["au verbe « est »", "à personne", "au complément"],
+    methode: "L'attribut décrit toujours le sujet : c'est pour cela qu'il s'accorde avec lui.",
+  },
+  {
+    text: "Laquelle de ces phrases contient un attribut du sujet ?",
+    correct: "La mer est agitée.",
+    wrongs: ["Elle prend son cartable.", "Il court sur la plage.", "Nous mangeons un cari."],
+    methode: "Cherche le verbe d'état : c'est lui qui annonce l'attribut.",
+  },
+];
+
+const COMPLEMENT_NOM: QcmItem[] = [
+  {
+    text: "Dans « le cari de ma grand-mère », le groupe « de ma grand-mère » est…",
+    correct: "un complément du nom",
+    wrongs: ["un attribut du sujet", "un complément d'objet direct", "une épithète"],
+    methode: "Il complète le nom « cari », et il passe par une préposition.",
+  },
+  {
+    text: "Une épithète, c'est…",
+    correct: "un adjectif collé au nom, sans préposition",
+    wrongs: [
+      "un groupe introduit par une préposition",
+      "un verbe d'état",
+      "un pronom qui remplace le nom",
+    ],
+    methode: "« une plage déserte » : rien entre le nom et l'adjectif.",
+  },
+  {
+    text: "Dans « une plage déserte », le mot « déserte » est…",
+    correct: "une épithète",
+    wrongs: ["un attribut du sujet", "un complément du nom", "un adverbe"],
+    methode: "Il est collé au nom, sans verbe entre les deux.",
+  },
+  {
+    text: "Dans « La plage est déserte », le mot « déserte » est…",
+    correct: "un attribut du sujet",
+    wrongs: ["une épithète", "un complément du nom", "un COD"],
+    methode: "Le verbe « est » s'est glissé entre le nom et l'adjectif : ce n'est plus une épithète.",
+  },
+  {
+    text: "Qu'est-ce qui sépare une épithète d'un attribut du sujet ?",
+    correct: "L'épithète est collée au nom ; l'attribut passe par un verbe d'état",
+    wrongs: [
+      "L'épithète est toujours au pluriel",
+      "L'attribut est toujours un nom",
+      "Rien : ce sont deux mots pour la même chose",
+    ],
+    methode: "Même adjectif, deux fonctions : tout dépend du verbe.",
+  },
+  {
+    text: "Un complément du nom est presque toujours introduit par…",
+    correct: "une préposition : de, à, en…",
+    wrongs: ["un déterminant", "un verbe", "un adverbe"],
+    methode: "« un jus DE letchi », « une case EN tôle ».",
+  },
+  {
+    text: "Dans « un jus de letchi », quel est le nom noyau ?",
+    correct: "jus",
+    wrongs: ["letchi", "de", "un"],
+    methode: "C'est le nom principal ; « de letchi » ne fait que le préciser.",
+  },
+  {
+    text: "Dans « la case en tôle », le groupe « en tôle » est…",
+    correct: "un complément du nom",
+    wrongs: ["une épithète", "un attribut du sujet", "un complément de lieu"],
+    methode: "Il précise « case », et il passe par la préposition « en ».",
+  },
+  {
+    text: "Comment enrichir le nom « bateau » avec un COMPLÉMENT DU NOM ?",
+    correct: "un bateau de pêche",
+    wrongs: ["un bateau rapide", "le bateau part", "ce bateau"],
+    methode: "Le complément du nom passe par une préposition ; l'épithète, non.",
+  },
+  {
+    text: "Comment enrichir le nom « bateau » avec une ÉPITHÈTE ?",
+    correct: "un bateau rapide",
+    wrongs: ["un bateau de pêche", "le bateau du pêcheur", "ce bateau"],
+    methode: "Un adjectif collé au nom, sans petit mot entre les deux.",
+  },
+  {
+    text: "À quoi servent l'épithète et le complément du nom ?",
+    correct: "tous les deux à préciser le nom",
+    wrongs: [
+      "à conjuguer le verbe",
+      "à remplacer le sujet",
+      "à relier deux phrases",
+    ],
+    methode: "Ils enrichissent le groupe nominal, chacun à sa façon.",
+  },
+  {
+    text: "Dans « le chemin du piton », que précise le groupe « du piton » ?",
+    correct: "le nom « chemin »",
+    wrongs: ["le verbe de la phrase", "le sujet de la phrase", "rien du tout"],
+    methode: "Quel chemin ? Celui du piton. Il complète le nom.",
+  },
+];
+
+const ACCORD_ATTRIBUT: QcmItem[] = [
+  {
+    text: "« Les letchis sont mûr___. » Que faut-il écrire ?",
+    correct: "mûrs",
+    wrongs: ["mûr", "mûre", "mûres"],
+    methode: "L'attribut s'accorde avec le sujet : « Les letchis » est masculin pluriel.",
+  },
+  {
+    text: "« La mer est agité___. »",
+    correct: "agitée",
+    wrongs: ["agité", "agités", "agitées"],
+    methode: "Sujet féminin singulier : l'attribut prend un « e ».",
+  },
+  {
+    text: "L'attribut du sujet s'accorde…",
+    correct: "avec le sujet",
+    wrongs: ["avec le complément d'objet", "avec le verbe", "jamais"],
+    methode: "C'est lui qu'il décrit, c'est donc lui qui commande.",
+  },
+  {
+    text: "« Mes cousines semblent fatigué___. »",
+    correct: "fatiguées",
+    wrongs: ["fatigué", "fatigués", "fatiguée"],
+    methode: "« Mes cousines » : féminin pluriel. L'attribut suit.",
+  },
+  {
+    text: "« Le cari est bon. » Écris cette phrase au pluriel.",
+    correct: "Les caris sont bons.",
+    wrongs: ["Les caris sont bon.", "Les caris est bons.", "Les caris sont bonnes."],
+    methode: "Trois mots bougent : le déterminant, le verbe, et l'attribut.",
+  },
+  {
+    text: "Pour accorder l'attribut, que cherche-t-on en premier ?",
+    correct: "le sujet du verbe d'état",
+    wrongs: [
+      "le complément d'objet",
+      "le dernier mot de la phrase",
+      "le déterminant le plus proche",
+    ],
+    methode: "On remonte au sujet, puis on regarde son genre et son nombre.",
+  },
+  {
+    text: "« Ces filaos paraissent vieux. » Avec quoi « vieux » s'accorde-t-il ?",
+    correct: "avec « Ces filaos »",
+    wrongs: ["avec « paraissent »", "avec le déterminant « Ces » seulement", "avec rien"],
+    methode: "L'attribut s'accorde avec le groupe sujet tout entier.",
+  },
+  {
+    text: "« Ma sœur est devenue institutrice. » Pourquoi « institutrice » ?",
+    correct: "Parce que le sujet « Ma sœur » est féminin singulier",
+    wrongs: [
+      "Parce que le verbe est au passé",
+      "Parce que c'est un nom de métier",
+      "Parce qu'il y a le mot « devenue »",
+    ],
+    methode: "Un attribut peut être un nom : il s'accorde quand même avec le sujet.",
+  },
+  {
+    text: "« Les enfants restent calme___. »",
+    correct: "calmes",
+    wrongs: ["calme", "calmement", "calmés"],
+    methode: "« rester » est un verbe d'état : « calmes » est attribut et suit le sujet.",
+  },
+  {
+    text: "Dans « Les vagues sont hautes », combien y a-t-il de chaînes d'accords ?",
+    correct: "deux : sujet → verbe, et sujet → attribut",
+    wrongs: [
+      "une seule : sujet → verbe",
+      "une seule : verbe → attribut",
+      "aucune",
+    ],
+    methode: "Le sujet commande deux fois : la fin du verbe ET la fin de l'attribut.",
+  },
+  {
+    text: "« Le pêcheur et son fils sont content___. »",
+    correct: "contents",
+    wrongs: ["content", "contente", "contentes"],
+    methode: "Deux sujets masculins : l'attribut passe au masculin pluriel.",
+  },
+  {
+    text: "L'attribut peut-il s'accorder avec le complément ?",
+    correct: "Non, jamais : il s'accorde avec le sujet",
+    wrongs: [
+      "Oui, s'il en est plus proche",
+      "Oui, au pluriel seulement",
+      "Oui, si le verbe est « être »",
+    ],
+    methode: "Le mot le plus proche n'est pas celui qui commande.",
+  },
+];
+
+const PARTICIPE_PASSE: QcmItem[] = [
+  {
+    text: "« Elle est allé___ au marché. »",
+    correct: "allée",
+    wrongs: ["allé", "allés", "aller"],
+    methode: "Auxiliaire ÊTRE : le participe s'accorde avec le sujet, ici féminin singulier.",
+  },
+  {
+    text: "Avec l'auxiliaire ÊTRE, le participe passé s'accorde avec…",
+    correct: "le sujet",
+    wrongs: ["le complément d'objet", "l'auxiliaire", "personne"],
+    methode: "« Elles sont venues » : le sujet commande.",
+  },
+  {
+    text: "« Les enfants sont parti___ tôt. »",
+    correct: "partis",
+    wrongs: ["parti", "partie", "parties"],
+    methode: "Sujet masculin pluriel, auxiliaire être : « partis ».",
+  },
+  {
+    text: "« Elle a mangé___ une mangue. »",
+    correct: "mangé",
+    wrongs: ["mangée", "mangés", "manger"],
+    methode: "Auxiliaire AVOIR et complément placé APRÈS : pas d'accord.",
+  },
+  {
+    text: "Avec l'auxiliaire AVOIR, le participe passé s'accorde avec le complément d'objet direct…",
+    correct: "seulement si ce complément est placé AVANT le verbe",
+    wrongs: ["toujours", "jamais", "seulement au pluriel"],
+    methode: "C'est la seule règle à retenir, et elle tient en un mot : avant.",
+  },
+  {
+    text: "« La mangue qu'elle a mangé___. »",
+    correct: "mangée",
+    wrongs: ["mangé", "mangés", "manger"],
+    methode: "Le complément « La mangue » est passé devant : l'accord se fait.",
+  },
+  {
+    text: "« Nous avons ramassé___ des letchis. »",
+    correct: "ramassé",
+    wrongs: ["ramassés", "ramassée", "ramasser"],
+    methode: "« des letchis » est derrière le verbe : rien ne bouge.",
+  },
+  {
+    text: "« Les letchis que nous avons ramassé___. »",
+    correct: "ramassés",
+    wrongs: ["ramassé", "ramassée", "ramasser"],
+    methode: "Cette fois « Les letchis » est devant : le participe s'accorde avec lui.",
+  },
+  {
+    text: "Comment savoir s'il faut accorder un participe passé ?",
+    correct: "On cherche l'auxiliaire : être → avec le sujet ; avoir → avec le COD s'il est avant",
+    wrongs: [
+      "On accorde toujours",
+      "On n'accorde jamais avec « avoir »",
+      "On regarde la fin de la phrase",
+    ],
+    methode: "Deux questions, dans cet ordre : quel auxiliaire ? et le complément est-il devant ?",
+  },
+  {
+    text: "« Elles sont venu___ hier. »",
+    correct: "venues",
+    wrongs: ["venu", "venus", "venue"],
+    methode: "Auxiliaire être, sujet féminin pluriel.",
+  },
+  {
+    text: "Dans « Il a pris son cartable », faut-il accorder « pris » ?",
+    correct: "Non : le complément « son cartable » est placé après le verbe",
+    wrongs: [
+      "Oui, avec « Il »",
+      "Oui, avec « son cartable »",
+      "Oui : avec « avoir », on accorde toujours",
+    ],
+    methode: "Avec « avoir », le sujet ne commande jamais le participe.",
+  },
+  {
+    text: "« Tom et Léo sont arrivé___ ensemble. »",
+    correct: "arrivés",
+    wrongs: ["arrivé", "arrivée", "arrivées"],
+    methode: "Deux sujets masculins et l'auxiliaire être : masculin pluriel.",
+  },
+];
+
+const CONJ_PLUS_QUE_PARFAIT: QcmItem[] = [
+  {
+    text: "Comment se forme le plus-que-parfait ?",
+    correct: "l'auxiliaire à l'imparfait + le participe passé",
+    wrongs: [
+      "l'auxiliaire au présent + le participe passé",
+      "le verbe à l'imparfait, en un seul mot",
+      "l'infinitif + une terminaison",
+    ],
+    methode: "« j'avais mangé » : « avais » est à l'imparfait.",
+  },
+  {
+    text: "« Quand je suis arrivé, il ___ déjà parti. »",
+    correct: "était",
+    wrongs: ["est", "sera", "serait"],
+    methode: "L'auxiliaire se met à l'imparfait : « était parti ».",
+  },
+  {
+    text: "« Nous ___ fini avant la pluie. » (plus-que-parfait)",
+    correct: "avions",
+    wrongs: ["avons", "aurons", "aurions"],
+    methode: "« avons » est au présent, « aurons » au futur : il faut l'imparfait.",
+  },
+  {
+    text: "À quel temps est « il avait mangé » ?",
+    correct: "au plus-que-parfait",
+    wrongs: ["au passé composé", "à l'imparfait", "au passé simple"],
+    methode: "Auxiliaire à l'imparfait + participe passé.",
+  },
+  {
+    text: "À quel temps est « il a mangé » ?",
+    correct: "au passé composé",
+    wrongs: ["au plus-que-parfait", "à l'imparfait", "au futur"],
+    methode: "Auxiliaire au PRÉSENT + participe passé.",
+  },
+  {
+    text: "À quoi sert le plus-que-parfait ?",
+    correct: "à raconter une action passée AVANT une autre action passée",
+    wrongs: [
+      "à raconter une action qui se répète aujourd'hui",
+      "à raconter une action à venir",
+      "à donner un ordre",
+    ],
+    methode: "« Il était parti quand je suis arrivé » : deux passés, l'un avant l'autre.",
+  },
+  {
+    text: "« Elle ___ terminé son dessin quand la cloche a sonné. »",
+    correct: "avait",
+    wrongs: ["a", "aura", "aurait"],
+    methode: "Le dessin est fini AVANT la cloche : plus-que-parfait.",
+  },
+  {
+    text: "Le plus-que-parfait est un temps…",
+    correct: "composé : il s'écrit en deux mots",
+    wrongs: ["simple : un seul mot", "du futur", "de l'impératif"],
+    methode: "Auxiliaire + participe passé, comme le passé composé.",
+  },
+  {
+    text: "« Ils ___ déjà partis quand nous sommes arrivés. »",
+    correct: "étaient",
+    wrongs: ["sont", "seront", "ont"],
+    methode: "« partir » se conjugue avec être : l'auxiliaire passe à l'imparfait.",
+  },
+  {
+    text: "Quelle différence entre « il avait fini » et « il a fini » ?",
+    correct: "« avait fini » se passe avant un autre moment du passé",
+    wrongs: [
+      "aucune différence",
+      "« avait fini » est au futur",
+      "« a fini » est au présent",
+    ],
+    methode: "Le plus-que-parfait recule d'un cran dans le passé.",
+  },
+  {
+    text: "« J'___ oublié mon cahier. » (plus-que-parfait)",
+    correct: "avais",
+    wrongs: ["ai", "aurai", "aurais"],
+    methode: "« ai » donnerait le passé composé.",
+  },
+  {
+    text: "Dans « Le vent avait soufflé toute la nuit », le verbe est…",
+    correct: "au plus-que-parfait",
+    wrongs: ["à l'imparfait", "au passé composé", "au passé simple"],
+    methode: "Deux mots, et l'auxiliaire est à l'imparfait.",
+  },
+];
+
 // ── CONJUGAISON ─────────────────────────────────────────────────────────────
 // Present / imparfait / futur / infinitif sont produits par le moteur
 // parametrique (conjugationEngine.ts). Restent ici les notions conceptuelles.
@@ -1664,6 +2505,92 @@ const CONJ_PASSE_COMPOSE: QcmItem[] = [
     correct: "fini",
     wrongs: ["finir", "finit", "finissant"],
     methode: "Le participe passé de finir est 'fini'.",
+  },
+];
+
+/* Le passé simple était servi depuis CONJ_VALEUR_TEMPS, qui parle du RÔLE des
+   temps et non de leurs formes. Le BO du CM2 le range parmi les « conjugaisons
+   à mémoriser et à maîtriser » : il lui faut ses propres formes. */
+const CONJ_PASSE_SIMPLE: QcmItem[] = [
+  {
+    text: "« Ce jour-là, il ___ dans la cour. » (jouer, au passé simple)",
+    correct: "joua",
+    wrongs: ["jouait", "joue", "jouera"],
+    methode: "« jouait » est l'imparfait : il dure. Le passé simple, lui, arrive d'un coup.",
+  },
+  {
+    text: "À quel temps est « ils partirent » ?",
+    correct: "au passé simple",
+    wrongs: ["à l'imparfait", "au passé composé", "au plus-que-parfait"],
+    methode: "Un seul mot, et une terminaison qu'on ne rencontre que dans les récits.",
+  },
+  {
+    text: "À quoi sert le passé simple ?",
+    correct: "à raconter une action passée, courte et terminée",
+    wrongs: [
+      "à décrire ce qui durait ou se répétait",
+      "à dire ce qu'on fait en ce moment",
+      "à donner un ordre",
+    ],
+    methode: "C'est le temps des évènements du récit ; l'imparfait est celui du décor.",
+  },
+  {
+    text: "« Le pêcheur ___ son filet et partit. » (prendre, au passé simple)",
+    correct: "prit",
+    wrongs: ["prend", "prenait", "prendra"],
+    methode: "Les deux verbes de la phrase sont au même temps : prit… partit.",
+  },
+  {
+    text: "Laquelle de ces formes est au passé simple ?",
+    correct: "il fut",
+    wrongs: ["il était", "il est", "il sera"],
+    methode: "« être » au passé simple : je fus, tu fus, il fut, nous fûmes…",
+  },
+  {
+    text: "« Les enfants ___ la cour en courant. » (traverser, au passé simple)",
+    correct: "traversèrent",
+    wrongs: ["traversaient", "traversent", "traverseront"],
+    methode: "Au pluriel, les verbes en -er font « -èrent ».",
+  },
+  {
+    text: "Dans un récit, quel temps accompagne le plus souvent le passé simple ?",
+    correct: "l'imparfait",
+    wrongs: ["le futur", "le présent", "le conditionnel"],
+    methode: "L'imparfait plante le décor, le passé simple fait arriver les évènements.",
+  },
+  {
+    text: "« Elle ___ la porte et sortit. » (ouvrir, au passé simple)",
+    correct: "ouvrit",
+    wrongs: ["ouvrait", "ouvre", "ouvrira"],
+    methode: "Deux actions qui se suivent : les deux au passé simple.",
+  },
+  {
+    text: "À la 3ᵉ personne du pluriel, les verbes du 1ᵉʳ groupe font au passé simple…",
+    correct: "-èrent",
+    wrongs: ["-aient", "-ent", "-eront"],
+    methode: "« ils chantèrent ». « -aient » serait l'imparfait.",
+  },
+  {
+    text: "« Il ___ très peur. » (avoir, au passé simple)",
+    correct: "eut",
+    wrongs: ["avait", "a eu", "aura"],
+    methode: "« avoir » au passé simple : j'eus, tu eus, il eut, ils eurent.",
+  },
+  {
+    text: "Quelle différence entre « il chantait » et « il chanta » ?",
+    correct: "« chantait » dure ou se répète ; « chanta » arrive une fois",
+    wrongs: [
+      "aucune différence",
+      "« chanta » est au futur",
+      "« chantait » est au présent",
+    ],
+    methode: "C'est le partage du récit : le décor d'un côté, l'évènement de l'autre.",
+  },
+  {
+    text: "« Ils ___ au marché de Saint-Pierre. » (aller, au passé simple)",
+    correct: "allèrent",
+    wrongs: ["allaient", "vont", "iront"],
+    methode: "« aller » suit les verbes en -er : ils allèrent.",
   },
 ];
 
@@ -1786,16 +2713,42 @@ function conjugaisonQuestion(microId: string): Generated {
     if (r < 0.8) return qcm(CONJ_PASSE_COMPOSE);
     return qcm(CONJ_VALEUR_TEMPS);
   }
+  /* ⚠️ Le plus-que-parfait EN PREMIER : « plus_que_parfait » ne contient pas
+     « imparfait » — les lettres ne se suivent pas — mais l'ordre le dit, et
+     personne n'aura à le revérifier. Micro ajoutée au CM2 le 11/08/2026. */
+  if (microId.includes("plus_que_parfait")) return qcm(CONJ_PLUS_QUE_PARFAIT);
   if (microId.includes("imparfait")) return fromConjItem(generateConjugationItem("imparfait"));
   if (microId.includes("futur")) return fromConjItem(generateConjugationItem("futur"));
   if (microId.includes("passe_compose")) return qcm(CONJ_PASSE_COMPOSE);
-  if (microId.includes("passe_simple")) return qcm(CONJ_VALEUR_TEMPS);
+  /* Le passé simple était servi depuis CONJ_VALEUR_TEMPS, qui parle du rôle
+     des temps et pas de leurs formes. Le BO du CM2 le veut « à mémoriser et à
+     maîtriser » : il a désormais son pool. */
+  if (microId.includes("passe_simple")) return qcm(CONJ_PASSE_SIMPLE);
   if (microId.includes("valeur")) return qcm(CONJ_VALEUR_TEMPS);
   if (microId.includes("infinitif") || microId.includes("groupe")) return fromConjItem(generateInfinitifItem());
   return fromConjItem(generateConjugationItem("present"));
 }
 
 function grammaireQuestion(microId: string): Generated {
+  /* ── CM2, mise au niveau du BO (11/08/2026) ───────────────────────────────
+     ⚠️ CES NEUF BRANCHES PASSENT EN PREMIER, et ce n'est pas un détail :
+     l'aiguillage se fait par SOUS-CHAÎNE, et les branches génériques plus bas
+     attrapent tout. « cm2_gram_complement_nom » contient « complement » : sous
+     l'ancienne branche, il aurait été servi depuis le pool des compléments
+     circonstanciels. « cm2_orth_attribut » contient « attribut » : il doit
+     passer avant « cm2_gram_attribut », sinon on lui sert la reconnaissance de
+     l'attribut au lieu de son accord.
+     Ces `microId` n'existent qu'au CM2 : le CM1 et la 6e ne les portent pas. */
+  if (microId.includes("participe_passe")) return qcm(PARTICIPE_PASSE);
+  if (microId.includes("orth_attribut")) return qcm(ACCORD_ATTRIBUT);
+  if (microId.includes("attribut")) return qcm(ATTRIBUT);
+  if (microId.includes("complement_nom")) return qcm(COMPLEMENT_NOM);
+  if (microId.includes("cod_coi")) return qcm(COD_COI);
+  if (microId.includes("cc_sortes")) return qcm(CC_SORTES);
+  if (microId.includes("sujet_inverse")) return qcm(SUJET_INVERSE);
+  if (microId.includes("nature_fonction")) return qcm(NATURE_FONCTION);
+  if (microId.includes("prepositions")) return qcm(PREPOSITIONS);
+
   // 6e (constituants / fonctions / accords / oral_ecrit) : les micros college ne
   // portent pas les memes libelles que cm1/cm2 -> on route vers les pools et
   // moteurs EXISTANTS les plus proches (aucun nouveau pool).

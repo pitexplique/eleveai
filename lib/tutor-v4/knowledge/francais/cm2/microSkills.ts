@@ -1,6 +1,30 @@
 // Micro-compétences de français pour la classe de CM2.
 // Référence : programme officiel du cycle 3,
-// BO n° 16 du 17 avril 2025, application progressive au CM2.
+// BO n° 16 du 17 avril 2025. ⚠️ Le CM1 et la 6e y sont passés à la rentrée
+// 2025 ; le CM2 y bascule à la rentrée 2026 — ce n'est plus « progressif ».
+//
+// ⚠️ RELU SUR LE TEXTE DU BO le 11/08/2026, rubrique « Grammaire et
+// orthographe grammaticale — Cours moyen deuxième année ». Dix objectifs
+// d'apprentissage nommés par le programme n'avaient AUCUNE micro-compétence :
+//   — « Différencier attribut du sujet et complément d'objet » ;
+//   — « Différencier complément d'objet direct et complément d'objet
+//     indirect » ;
+//   — « Différencier les compléments circonstanciels de temps, de lieu, de
+//     cause » ;
+//   — « Identifier le sujet inversé dans des cas simples » ;
+//   — « Connaître et distinguer les notions de nature et fonction » ;
+//   — « Identifier et nommer les prépositions » et « les conjonctions de
+//     subordination » ;
+//   — « Aborder la notion de complément du nom » et « différencier épithète et
+//     attribut du sujet » ;
+//   — « identifier et appliquer la chaîne d'accords sujet/attribut du sujet » ;
+//   — « Accorder le participe passé avec le sujet dans le cas de l'emploi avec
+//     l'auxiliaire être » et « avec le COD pour les verbes conjugués avec
+//     l'auxiliaire avoir » ;
+//   — « Conjugaisons à mémoriser et à maîtriser : passé simple,
+//     plus-que-parfait ».
+// Elles sont déclarées ci-dessous. La couverture affichait 50/50 — 100 % de ce
+// que la banque déclarait, pas du programme.
 
 import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
@@ -55,8 +79,18 @@ export const microSkills: MicroSkillSource[] = [
   { id: "cm2_gram_sujet_verbe", label: "Identifier sujet, verbe et compléments", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_phrase_simple"] },
   { id: "cm2_gram_gn", label: "Analyser le groupe nominal et ses expansions", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_sujet_verbe"] },
   { id: "cm2_gram_complements", label: "Distinguer compléments de verbe et compléments circonstanciels", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_sujet_verbe"] },
+  // ⚠️ Les six qui suivent manquaient. Le BO les nomme une par une au CM2.
+  { id: "cm2_gram_nature_fonction", label: "Distinguer la nature d'un mot et sa fonction", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_phrase_simple"] },
+  { id: "cm2_gram_prepositions", label: "Identifier prépositions et conjonctions de subordination", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_nature_fonction"] },
+  { id: "cm2_gram_sujet_inverse", label: "Identifier un sujet inversé", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_sujet_verbe"] },
+  { id: "cm2_gram_cod_coi", label: "Différencier complément d'objet direct et indirect", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_complements"] },
+  { id: "cm2_gram_cc_sortes", label: "Différencier les compléments circonstanciels de temps, de lieu et de cause", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_complements"] },
+  { id: "cm2_gram_attribut", label: "Différencier l'attribut du sujet et le complément d'objet", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_cod_coi"] },
+  { id: "cm2_gram_complement_nom", label: "Repérer le complément du nom et le distinguer de l'épithète", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_gn"] },
   { id: "cm2_orth_accord_gn", label: "Accorder le groupe nominal avec expansions", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_gn"] },
   { id: "cm2_orth_sujet_verbe", label: "Accorder le verbe avec un sujet éloigné ou inversé simple", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_sujet_verbe"] },
+  { id: "cm2_orth_attribut", label: "Accorder l'attribut avec le sujet", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_attribut", "cm2_orth_sujet_verbe"] },
+  { id: "cm2_orth_participe_passe", label: "Accorder le participe passé avec être, et avec le COD pour avoir", notionId: "grammaire_orthographe", prerequis: ["cm2_orth_sujet_verbe"] },
   { id: "cm2_orth_homophones", label: "Choisir des homophones grammaticaux courants", notionId: "grammaire_orthographe", prerequis: ["cm2_orth_sujet_verbe"] },
 
   // Phrase complexe
@@ -70,6 +104,11 @@ export const microSkills: MicroSkillSource[] = [
   { id: "cm2_conj_imparfait", label: "Conjuguer à l'imparfait", notionId: "conjugaison", prerequis: ["cm2_conj_present"] },
   { id: "cm2_conj_futur", label: "Conjuguer au futur", notionId: "conjugaison", prerequis: ["cm2_conj_present"] },
   { id: "cm2_conj_passe_compose", label: "Employer le passé composé avec être ou avoir", notionId: "conjugaison", prerequis: ["cm2_conj_present"] },
-  { id: "cm2_conj_passe_simple_intro", label: "Reconnaître des formes simples du passé simple", notionId: "conjugaison", prerequis: ["cm2_conj_imparfait"] },
+  // ⚠️ L'id garde son « _intro » — il sert de clé au suivi des élèves et le
+  // renommer effacerait leur historique. Le LIBELLÉ, lui, est remis au niveau
+  // du BO : le passé simple est « à mémoriser et à maîtriser » au CM2, pas
+  // seulement à reconnaître.
+  { id: "cm2_conj_passe_simple_intro", label: "Conjuguer au passé simple les verbes fréquents", notionId: "conjugaison", prerequis: ["cm2_conj_imparfait"] },
+  { id: "cm2_conj_plus_que_parfait", label: "Conjuguer au plus-que-parfait", notionId: "conjugaison", prerequis: ["cm2_conj_imparfait", "cm2_conj_passe_compose"] },
   { id: "cm2_conj_valeur_temps", label: "Comprendre la valeur des temps dans un récit", notionId: "conjugaison", prerequis: ["cm2_conj_imparfait", "cm2_conj_passe_compose"] },
 ];
