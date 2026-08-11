@@ -448,22 +448,30 @@ export const copieFluenteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_copie_phrase_open_1",
+    id: "ce2_copie_phrase_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "copie_fluente",
     microId: "ce2_copie_phrase",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis combien de mots tu prends à la fois, et ce que tu fais ensuite.",
-    tags: ["ce2", "copie", "phrase", "ouverte"],
+    hint: "Ce qui compte, ce n'est pas la vitesse de ta main : c'est le nombre de fois où tu lèves les yeux.",
+    tags: ["ce2", "copie", "phrase", "methode"],
     generate: () => {
       const c = randomChoice(COPIES);
+      const bonne = "Je lis un groupe de mots entier, je le garde en tête, je l'écris sans regarder le modèle, puis je vérifie.";
       return {
-        text: `Tu dois copier cette phrase : « ${c.modele} »\n\nRaconte comment tu t'y prends, du premier regard au point final.`,
-        format: "open" as const,
-        expected: ["groupe", "plusieurs mots", "mémoire", "memoire", "tête", "tete", "relis", "sans regarder"],
-        comparator: "contains_keyword" as const,
+        text: `Tu dois copier cette phrase : « ${c.modele} »\n\nComment t'y prends-tu ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège : lettre à lettre, on lève les yeux quarante fois par ligne.
+          "Je copie lettre par lettre : c'est le plus sûr.",
+          "Je copie mot par mot, en revenant au modèle à chaque mot.",
+          "J'écris le plus vite possible : la vitesse vient de la main.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Copier vite, ce n'est pas écrire vite : c'est lever les yeux moins souvent.",
           "Lis un groupe de mots entier, garde-le en tête, écris-le sans regarder le modèle, puis vérifie.",
@@ -546,22 +554,31 @@ export const copieFluenteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_copie_paragraphe_open_1",
+    id: "ce2_copie_paragraphe_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "copie_fluente",
     microId: "ce2_copie_paragraphe",
     difficulty: 3,
     theme: "neutral",
-    hint: "Explique pourquoi c'est toujours au moment où on relève les yeux que ça arrive.",
-    tags: ["ce2", "copie", "paragraphe", "ouverte"],
+    hint: "C'est toujours au moment où on relève les yeux que ça arrive.",
+    tags: ["ce2", "copie", "paragraphe", "methode"],
     generate: () => {
       const c = randomChoice(COPIES);
+      const bonne = `Avant de relever les yeux, je retiens le DERNIER mot que je viens d'écrire ; en revenant au modèle, je le cherche et je repars juste après.`;
       return {
-        text: `Tu as copié « ${c.doublon} » au lieu de « ${c.modele} ».\n\nExplique comment cette erreur a pu arriver, et comment l'éviter.`,
-        format: "open" as const,
-        expected: ["deux fois", "doublé", "double", "yeux", "regard", "repère", "repere", "endroit", "relis"],
-        comparator: "contains_keyword" as const,
+        text: `Tu as copié « ${c.doublon} » au lieu de « ${c.modele} ».\n\nComment éviter cette erreur ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège : ce n'est pas de l'inattention, c'est un repérage manqué.
+          "Je fais plus attention : c'est une erreur d'inattention.",
+          // Le piège fin : un mot doublé se relit souvent très bien.
+          "Je relis ma copie sans regarder le modèle.",
+          "Je copie plus lentement.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un mot doublé n'est pas une faute d'inattention : c'est une erreur de repérage entre le modèle et la copie.",
           "Avant de relever les yeux, retiens le DERNIER mot que tu viens d'écrire. En revenant au modèle, cherche-le, et repars juste après.",
@@ -633,17 +650,26 @@ export const copieFluenteBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce2_copie_dix_lignes_open_1",
+    id: "ce2_copie_dix_lignes_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "copie_fluente",
     microId: "ce2_copie_dix_lignes",
     difficulty: 3,
     theme: "neutral",
-    text: "Tu dois copier un texte de dix lignes sans faute.\n\nRaconte ta méthode, du premier regard à la relecture finale.",
-    format: "open",
-    expected: ["groupe", "tête", "tete", "mémoire", "memoire", "relis", "relecture", "compare", "modèle", "modele"],
-    comparator: "contains_keyword",
+    text: "Tu dois copier un texte de dix lignes sans faute.\n\nQuelle est ta méthode ?",
+    format: "qcm",
+    choices: [
+      "Pendant : je lis un groupe entier, je le garde en tête, je l'écris sans regarder. Après : je compare ligne à ligne avec le modèle.",
+      // L'erreur réelle : compter sur son attention au lieu d'une relecture.
+      "Je copie d'un trait sans m'arrêter, et je ne relis pas : je fais attention pendant.",
+      "Je copie lettre par lettre : à dix lignes, il ne faut pas se tromper.",
+      "Je copie la moitié, je fais une pause, puis l'autre moitié.",
+    ],
+    expected: [
+      "Pendant : je lis un groupe entier, je le garde en tête, je l'écris sans regarder. Après : je compare ligne à ligne avec le modèle.",
+    ],
+    comparator: "mcq_exact",
     hint: "Il y a deux temps : pendant la copie, et après.",
     explanation: exp(
       "Copier dix lignes se fait en deux temps : la copie par groupes de mots, puis la relecture comparée.",
@@ -651,7 +677,7 @@ export const copieFluenteBank: TutorBankItemV4[] = [
       "Et une chose à ne pas oublier : le repère. Avant de relever les yeux, retiens le dernier mot écrit — c'est lui qui t'évitera d'en sauter un ou d'en doubler un.",
       "On copie par groupes de mots gardés en tête, puis on relit en comparant au modèle.",
     ),
-    tags: ["ce2", "copie", "strategie", "methode", "ouverte"],
+    tags: ["ce2", "copie", "strategie", "methode", "qcm"],
   },
 
   /* =========================================================
@@ -687,30 +713,30 @@ export const copieFluenteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_copie_mise_en_page_open_1",
+    id: "ce2_copie_mise_en_page_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "copie_fluente",
     microId: "ce2_copie_mise_en_page",
     difficulty: 3,
     theme: "neutral",
-    hint: "Que perdrait-on si on écrivait tout à la suite ?",
-    tags: ["ce2", "copie", "mise-en-page", "ouverte"],
+    hint: "La présentation n'est pas une décoration : elle dit de quel texte il s'agit.",
+    tags: ["ce2", "copie", "mise-en-page", "methode"],
     generate: () => {
       const m = randomChoice(MISES_EN_PAGE);
+      const bonne = `Ce qui permettait de reconnaitre le texte : ${m.aReproduire}. La mise en page dit de quel type de texte il s'agit.`;
       return {
-        text: `Tu copies ${m.document} en écrivant tout à la suite, sans reproduire sa présentation.\n\nQu'est-ce qui se perd ? Explique.`,
-        format: "open" as const,
-        expected: [
-          ...m.aReproduire.split(" ").filter((w) => w.length > 5),
-          "forme",
-          "reconnait",
-          "type",
-          "lire",
-          "présentation",
-          "presentation",
+        text: `Tu copies ${m.document} en écrivant tout à la suite, sans reproduire sa présentation.\n\nQu'est-ce qui se perd ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège : la présentation prise pour un ornement facultatif.
+          "Rien : seuls les mots comptent.",
+          "On perd les majuscules et les points.",
+          "On perd de la place sur la feuille.",
         ],
-        comparator: "contains_keyword" as const,
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "La mise en page n'est pas une décoration : c'est elle qui dit de quel type de texte il s'agit, et elle aide à le lire.",
           "Regarde la forme avant les mots, et reproduis-la : retours à la ligne, colonnes, capitales, tirets.",
@@ -782,22 +808,31 @@ export const copieFluenteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_copie_relire_open_1",
+    id: "ce2_copie_relire_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "copie_fluente",
     microId: "ce2_copie_relire",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis dans quel ordre tu vérifies les choses.",
-    tags: ["ce2", "copie", "relire", "ouverte"],
+    hint: "Sur quelle feuille poses-tu ton doigt ? C'est là que tout se joue.",
+    tags: ["ce2", "copie", "relire", "methode"],
     generate: () => {
       const c = randomChoice(COPIES);
+      const bonne = "Sur MA feuille, en avançant du doigt : d'abord les mots — aucun oublié, aucun doublé —, puis les accents, puis la ponctuation.";
       return {
-        text: `Tu viens de copier « ${c.modele} ».\n\nComment relis-tu ta copie ? Explique dans l'ordre.`,
-        format: "open" as const,
-        expected: ["mot à mot", "compare", "ma feuille", "doigt", "accent", "ponctuation", "point", "modèle", "modele"],
-        comparator: "contains_keyword" as const,
+        text: `Tu viens de copier « ${c.modele} ».\n\nComment relis-tu ta copie ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège : l'œil qui relit le modèle ne voit jamais les erreurs
+          // de la copie — il relit un texte juste.
+          "Je relis le modèle : c'est lui qui dit ce qui est juste.",
+          "Je relis tout d'un coup, en cherchant toutes les erreurs en même temps.",
+          "Je relis à voix haute : on entend les fautes.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Relire, c'est comparer sa copie au modèle, une chose à la fois.",
           "Trois passages : les mots (aucun oublié, aucun doublé), les accents, puis la ponctuation.",
@@ -877,22 +912,31 @@ export const copieFluenteBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_copie_omissions_open_1",
+    id: "ce2_copie_omissions_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "copie_fluente",
     microId: "ce2_copie_omissions",
     difficulty: 3,
     theme: "neutral",
-    hint: "Trouve l'écart, puis dis à quelle famille il appartient.",
-    tags: ["ce2", "copie", "omissions", "ouverte"],
+    hint: "On peut savoir qu'il manque un mot avant même de savoir lequel.",
+    tags: ["ce2", "copie", "omissions", "methode"],
     generate: () => {
       const c = randomChoice(COPIES);
+      const bonne = `Je compare le nombre de mots d'abord : s'il en manque un, je le sais avant même de savoir lequel. Ici, c'est « ${c.motOmis} ».`;
       return {
-        text: `Modèle : « ${c.modele} »\nTa copie : « ${c.omission} »\n\nQu'est-ce qui manque, et comment aurais-tu pu t'en apercevoir ? Explique.`,
-        format: "open" as const,
-        expected: [c.motOmis, "manque", "oublié", "oublie", "compare", "mot à mot", "relis"],
-        comparator: "contains_keyword" as const,
+        text: `Modèle : « ${c.modele} »\nTa copie : « ${c.omission} »\n\nComment aurais-tu pu t'apercevoir qu'il manque un mot ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Le piège fin : une phrase amputée d'un mot se relit souvent très
+          // bien — la tête remet le mot toute seule.
+          "En relisant ma copie toute seule : une phrase à qui il manque un mot ne veut plus rien dire.",
+          "En regardant si ma ligne est plus courte que celle du modèle.",
+          "On ne peut pas s'en apercevoir : c'est pour cela qu'on relit le modèle.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un mot sauté est l'erreur de copie la plus fréquente, et la plus facile à trouver en relisant.",
           "Compare le nombre de mots d'abord : s'il en manque un, tu le sais avant même de savoir lequel.",
