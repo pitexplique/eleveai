@@ -749,28 +749,62 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                   </div>
                 )}
 
-                <div className="mt-4 grid gap-2 sm:grid-cols-2">
-                  {question.choices.map((c) => (
-                    <button
-                      key={c}
-                      type="button"
-                      onClick={() => setChoix(c)}
-                      className={[
-                        "rounded-xl border-2 px-4 py-3 text-left text-sm font-black transition",
-                        choix === c
-                          ? "text-white"
-                          : "border-[#1d1c16]/20 hover:border-[#1d1c16]/50 hover:bg-[#1d1c16]/5",
-                      ].join(" ")}
-                      style={
-                        choix === c
-                          ? { backgroundColor: accent, borderColor: accent }
-                          : undefined
-                      }
+                {/* LES DEUX FORMES DU SUJET OFFICIEL. Le même QCM, affiché
+                    « sous la forme d'une liste de cases à cocher » ou « sous la
+                    forme d'un menu déroulant ». On rencontre les deux ici pour
+                    ne pas les découvrir le jour J. */}
+                {question.format === "liste" ? (
+                  <div className="mt-4">
+                    <label
+                      className="flex flex-wrap items-center gap-2 text-sm font-black"
+                      htmlFor="reponse-liste"
                     >
-                      <MarkdownMath className="inline">{c}</MarkdownMath>
-                    </button>
-                  ))}
-                </div>
+                      Choisir la réponse
+                      <select
+                        id="reponse-liste"
+                        value={choix ?? ""}
+                        onChange={(e) => setChoix(e.target.value || null)}
+                        className="rounded-xl border-2 bg-white px-3 py-2.5 text-sm font-black"
+                        style={{
+                          borderColor: choix ? accent : "rgba(29,28,22,0.2)",
+                        }}
+                      >
+                        {/* « --- laisser vide --- » : c'est l'option qu'affiche
+                            le sujet officiel, et ne pas la proposer changerait
+                            l'épreuve — un élève doit pouvoir ne pas répondre. */}
+                        <option value="">— laisser vide —</option>
+                        {question.choices.map((c) => (
+                          <option key={c} value={c}>
+                            {c}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  </div>
+                ) : (
+                  <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                    {question.choices.map((c) => (
+                      <button
+                        key={c}
+                        type="button"
+                        onClick={() => setChoix(c)}
+                        className={[
+                          "rounded-xl border-2 px-4 py-3 text-left text-sm font-black transition",
+                          choix === c
+                            ? "text-white"
+                            : "border-[#1d1c16]/20 hover:border-[#1d1c16]/50 hover:bg-[#1d1c16]/5",
+                        ].join(" ")}
+                        style={
+                          choix === c
+                            ? { backgroundColor: accent, borderColor: accent }
+                            : undefined
+                        }
+                      >
+                        <MarkdownMath className="inline">{c}</MarkdownMath>
+                      </button>
+                    ))}
+                  </div>
+                )}
 
                 <div className="mt-5 flex flex-wrap items-center gap-3 border-t border-[#1d1c16]/15 pt-4">
                   <button

@@ -149,6 +149,42 @@ export function routeRemediation(
   );
 }
 
+/**
+ * COMMENT LA QUESTION SE PRÉSENTE À L'ÉLÈVE.
+ *
+ * Le sujet officiel n'emploie qu'un seul type de question — le QCM à quatre
+ * propositions, une juste et trois distracteurs — mais il l'affiche de DEUX
+ * façons : « sous la forme d'une liste de cases à cocher » ou « sous la forme
+ * d'un menu déroulant ». Ce n'est pas de la décoration : un menu déroulant se
+ * lit après l'avoir ouvert, il masque les propositions tant qu'on n'a pas
+ * cliqué, et il se manipule autrement. Un élève qui ne l'a jamais rencontré
+ * perd du temps le jour J — ce que la prise en main est justement là pour
+ * éviter.
+ */
+export type FormatReponse = "cases" | "liste";
+
+/** Au-delà, une proposition n'entre pas lisiblement dans un menu déroulant. */
+const LONGUEUR_MAX_LISTE = 40;
+
+/**
+ * ⚠️ LE FORMAT SE TIRE SUR L'EMPREINTE DE L'ÉNONCÉ, jamais au hasard : une
+ * question doit garder le même habit d'un rendu à l'autre. Avec `Math.random`,
+ * le moindre re-rendu de React aurait fait passer la question de la liste aux
+ * cases sous les yeux de l'élève.
+ *
+ * Une sur quatre en menu déroulant : le document officiel dit le QCM en cases
+ * « majoritairement employé », et une épreuve où le format alterne sans cesse
+ * mesurerait l'agilité plutôt que les mathématiques.
+ */
+function formatDe(q: QuestionEval): FormatReponse {
+  if (q.choices.some((c) => c.length > LONGUEUR_MAX_LISTE)) return "cases";
+  // ⛔ NI LATEX NI MARKDOWN DANS UN MENU DÉROULANT. Les propositions passent
+  // partout ailleurs par `MarkdownMath` ; une <option> ne rend que du texte
+  // brut, et une fraction y apparaîtrait telle quelle — « \dfrac{1}{2} ».
+  if (q.choices.some((c) => /[$\\^_{}]/.test(c))) return "cases";
+  return parseInt(q.cle, 36) % 4 === 0 ? "liste" : "cases";
+}
+
 export type QuestionEval = {
   /**
    * CE QU'ON MÉMORISE POUR NE PAS LE REVOIR — et ce n'est pas l'identifiant de
@@ -169,6 +205,8 @@ export type QuestionEval = {
   microLabel: string;
   /** Le test spécifique dont relève la question, « autre » sinon. */
   typeItem: TypeItem;
+  /** Comment la question s'affiche. Posé par `tirerEpreuve`, « cases » sinon. */
+  format?: FormatReponse;
   text: string;
   choices: string[];
   expected: string[];
@@ -506,9 +544,11 @@ export function tirerEpreuve(
   // Partagé entre les thèmes : un même énoncé ne doit pas tomber deux fois
   // dans la même épreuve, fût-ce sous deux notions différentes.
   const textesDuTirage = new Set<string>();
-  const questions = config.themes.flatMap((theme) =>
-    tirerTheme(theme, config, vus, textesDuTirage),
-  );
+  const questions = config.themes
+    .flatMap((theme) => tirerTheme(theme, config, vus, textesDuTirage))
+    // L'habit se pose EN DERNIER, quand l'énoncé et ses propositions sont
+    // arrêtés : il se décide sur eux.
+    .map((q) => ({ ...q, format: formatDe(q) }));
 
   return { questions, dureeSecondes: config.dureeSecondes };
 }
