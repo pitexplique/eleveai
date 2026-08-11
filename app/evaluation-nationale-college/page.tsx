@@ -304,6 +304,38 @@ export default function EvaluationNationaleCollegePage() {
           ))}
         </div>
 
+        {/* POUR LA DIRECTION ET LES PROFESSEURS (11/08/2026, demande de
+            M. Pelka : « pour une classe et pour un niveau, les compétences
+            réussies et celles qui posent des difficultés »).
+            ⚠️ Le lien est montré à TOUT LE MONDE, et c'est assumé : la page
+            elle-même vérifie la session et le rôle, et un élève qui l'ouvre
+            voit un écran de connexion, pas des données. Le cacher derrière
+            une condition côté client ne protégerait rien de plus et rendrait
+            la page introuvable pour ceux à qui elle est destinée. */}
+        <section className="mt-8 rounded-2xl border-2 border-[#1d1c16]/15 bg-white/80 p-5 sm:p-6">
+          <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
+            Pour la direction et les professeurs
+          </p>
+          <Link href="/evaluation-nationale-college/ma-classe" className="group mt-2 block">
+            <span className="block font-serif text-lg font-black leading-snug group-hover:underline">
+              Voir où en est votre classe, avant le jour J
+            </span>
+            <span className="mt-1 block max-w-2xl text-sm font-medium leading-6 text-[#1d1c16]/75">
+              Vos élèves passent l&apos;épreuve blanche, et vous les retrouvez
+              rangés dans les trois groupes de l&apos;institution — à besoins,
+              fragile, satisfaisant — domaine par domaine. Les mots mêmes du
+              bilan officiel, mais des semaines avant lui. Ni note, ni
+              classement.
+            </span>
+            <span
+              className="mt-3 inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-black text-white transition group-hover:brightness-110"
+              style={{ backgroundColor: "#1d1c16" }}
+            >
+              Ouvrir la vue de classe <span aria-hidden>→</span>
+            </span>
+          </Link>
+        </section>
+
         {/* PIX N'EST PAS LA MÊME ÉCHÉANCE (info de Frédéric, 01/08) : la
             certification Pix au collège, c'est la 3ᵉ, au printemps — pas la
             6ᵉ ni la 4ᵉ à la rentrée. La ranger avec les évaluations
