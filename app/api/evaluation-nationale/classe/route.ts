@@ -84,6 +84,8 @@ type BlocBilan = {
 type MicroBilan = {
   microId: string;
   microLabel: string;
+  /** Nécessaire pour construire le lien de remédiation. */
+  notionId: string;
   notionLabel: string;
   reussi: boolean;
 };
@@ -98,6 +100,7 @@ function micros(source: unknown): MicroBilan[] {
       {
         microId: o.microId,
         microLabel: String(o.microLabel ?? o.microId),
+        notionId: String(o.notionId ?? ""),
         notionLabel: String(o.notionLabel ?? ""),
         reussi: o.reussi === true,
       },

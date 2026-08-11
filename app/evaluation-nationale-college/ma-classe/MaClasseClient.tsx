@@ -35,6 +35,7 @@ type BlocBilan = {
 type MicroBilan = {
   microId: string;
   microLabel: string;
+  notionId: string;
   notionLabel: string;
   reussi: boolean;
 };
@@ -72,6 +73,7 @@ type EleveDeLaClasse = {
  */
 type SavoirFaire = {
   microId: string;
+  notionId: string;
   label: string;
   notionLabel: string;
   reussites: number;
@@ -85,6 +87,7 @@ function savoirsFaire(eleves: EleveDeLaClasse[]): SavoirFaire[] {
     for (const m of e.resultat?.micros ?? []) {
       const v = acc.get(m.microId) ?? {
         microId: m.microId,
+        notionId: m.notionId,
         label: m.microLabel,
         notionLabel: m.notionLabel,
         reussites: 0,
@@ -105,12 +108,113 @@ function savoirsFaire(eleves: EleveDeLaClasse[]): SavoirFaire[] {
     .sort((a, b) => a.pct - b.pct || b.sur - a.sur);
 }
 
+/**
+ * LES TROIS COULEURS DES GROUPES DE MAÎTRISE, en dur pour le SVG.
+ *
+ * Ce sont celles de la restitution officielle — orange, ocre, vert — pour que
+ * M. Pelka retrouve son code couleur. ⚠️ VALIDÉES, PAS CHOISIES À L'ŒIL : le
+ * premier jeu (rouge/ambre/cyan, celui des barres empilées) était refusé —
+ * le cyan tombait sous le plancher de chroma et passait pour du gris.
+ * Celui-ci passe le seuil de séparation daltonienne (ΔE 12,5) et le plancher
+ * de vision normale (16,5). Le seul avertissement porte sur le contraste de
+ * l'ocre sur fond clair : il est levé parce que chaque part porte son nombre
+ * écrit à côté — la couleur ne porte jamais l'information seule.
+ */
+const COULEUR_GROUPE: Record<GroupeMaitrise, string> = {
+  a_besoins: "#c2410c",
+  fragile: "#ca8a04",
+  satisfaisant: "#166534",
+};
+
+/**
+ * L'ANNEAU DES TROIS GROUPES — la forme que porte sa restitution officielle.
+ *
+ * Dessiné en SVG, sans aucune librairie : trois arcs, un trait de fond de la
+ * couleur de la page entre eux pour qu'ils ne se touchent pas. Un camembert
+ * n'est légitime que pour une part-de-tout lue d'un coup d'œil, à peu de
+ * parts — trois, ici. Les nombres sont écrits à côté, jamais dans les parts.
+ */
+function Anneau({
+  parts,
+  total,
+}: {
+  parts: { groupe: GroupeMaitrise; n: number }[];
+  total: number;
+}) {
+  const R = 54;
+  const C = 2 * Math.PI * R;
+  let depart = 0;
+  return (
+    <svg viewBox="0 0 140 140" className="h-32 w-32 shrink-0" role="img"
+      aria-label={parts
+        .map((p) => `${GROUPES[p.groupe].label} ${p.n} sur ${total}`)
+        .join(", ")}
+    >
+      <g transform="translate(70,70) rotate(-90)">
+        <circle r={R} fill="none" stroke="#1d1c16" strokeOpacity={0.08} strokeWidth={20} />
+        {parts.map((p) => {
+          const part = total > 0 ? p.n / total : 0;
+          const longueur = part * C;
+          const el = (
+            <circle
+              key={p.groupe}
+              r={R}
+              fill="none"
+              stroke={COULEUR_GROUPE[p.groupe]}
+              strokeWidth={20}
+              strokeDasharray={`${Math.max(longueur - 2, 0)} ${C - Math.max(longueur - 2, 0)}`}
+              strokeDashoffset={-depart}
+            />
+          );
+          depart += longueur;
+          return el;
+        })}
+      </g>
+      <text
+        x="70" y="66" textAnchor="middle"
+        className="fill-[#1d1c16] font-serif text-[26px] font-black"
+      >
+        {total}
+      </text>
+      <text
+        x="70" y="82" textAnchor="middle"
+        className="fill-[#1d1c16]/60 text-[10px] font-bold"
+      >
+        {total > 1 ? "élèves" : "élève"}
+      </text>
+    </svg>
+  );
+}
+
 /** Les couleurs de la restitution officielle : rouge, orange, jaune, vert. */
 function couleurPct(pct: number) {
   if (pct < 30) return "bg-red-100 text-red-900";
   if (pct < 50) return "bg-orange-100 text-orange-900";
   if (pct < 70) return "bg-amber-100 text-amber-900";
   return "bg-emerald-100 text-emerald-900";
+}
+
+/**
+ * OÙ ENVOYER RETRAVAILLER UNE COMPÉTENCE.
+ *
+ * ⚠️ L'épreuve porte sur l'année d'AVANT — un entrant de 6ᵉ est évalué sur le
+ * CM2. Le coach doit donc s'ouvrir sur le CM2, pas sur la 6ᵉ, sans quoi on
+ * enverrait l'élève réviser une notion qu'il n'a pas encore vue.
+ *
+ * La table est écrite ici plutôt qu'importée de la `ConfigEpreuve` : importer
+ * la config embarquerait toute la banque de questions dans le bundle de cette
+ * page, qui n'en pose aucune.
+ */
+const CLASSE_SOURCE: Record<string, string> = { "6e": "cm2", "4e": "5e" };
+
+function lienRemediation(classe: string, matiere: string, sf: SavoirFaire) {
+  if (!sf.notionId) return null;
+  return (
+    `/tutor-v4?classe=${encodeURIComponent(CLASSE_SOURCE[classe] ?? classe)}` +
+    `&matiere=${encodeURIComponent(matiere)}` +
+    `&notion=${encodeURIComponent(sf.notionId)}` +
+    `&microId=${encodeURIComponent(sf.microId)}&display=simple`
+  );
 }
 
 const ORDRE: GroupeMaitrise[] = ["a_besoins", "fragile", "satisfaisant"];
@@ -279,6 +383,37 @@ export default function MaClasseClient() {
       })),
     };
   });
+
+  // ── LA CONCLUSION ────────────────────────────────────────────────────────
+  // Demande de Frédéric le 11/08 : « c'est bien mais il manque une
+  // conclusion ». Il a raison — la page rendait quatre tableaux et laissait
+  // le lecteur en tirer lui-même la phrase. Or c'est cette phrase-là qu'un
+  // principal cherche, et il la cherchera de toute façon : autant qu'elle
+  // soit calculée juste plutôt que devinée de travers.
+  //
+  // ⛔ ELLE NE COMMENTE PAS, ELLE COMPTE. Aucun adjectif sur le niveau de la
+  // classe, aucun « des résultats encourageants » : des nombres, les noms des
+  // compétences les plus basses, et ce que ça implique. Un principal qui lit
+  // « satisfaisant dans l'ensemble » sous des chiffres moyens cesse de nous
+  // croire, et il a raison.
+  const aBesoins = repartition.find((r) => r.groupe === "a_besoins")?.n ?? 0;
+  const fragiles = repartition.find((r) => r.groupe === "fragile")?.n ?? 0;
+  const aRenforcer = aBesoins + fragiles;
+  const coupes = passes.filter((e) => e.resultat?.chronoEcoule).length;
+  // Le domaine où le plus d'élèves sont « à besoins ».
+  const domaineFaible = [...parColonne].sort(
+    (a, b) =>
+      (b.groupes.find((g) => g.groupe === "a_besoins")?.n ?? 0) -
+      (a.groupes.find((g) => g.groupe === "a_besoins")?.n ?? 0),
+  )[0];
+  const troisPlusBas = savoirs.slice(0, 3);
+  // ⭐ LE GROUPE DE BESOINS, NOMMÉ. C'est l'usage que le document officiel
+  // assigne à la restitution : « faciliter l'accompagnement personnalisé et la
+  // mise en place de groupes de besoins ». Une répartition en pourcentages ne
+  // se transforme pas en emploi du temps ; une liste de prénoms, si.
+  const groupeDeBesoins = passes
+    .filter((e) => e.resultat?.groupe === "a_besoins")
+    .map((e) => e.nom ?? e.codeUtilisateur);
 
   if (besoinConnexion) {
     return (
@@ -494,7 +629,12 @@ export default function MaClasseClient() {
               </p>
 
               {passes.length > 0 && (
-                <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                <div className="mt-4 flex flex-col items-center gap-5 sm:flex-row sm:items-start">
+                  <Anneau
+                    parts={repartition.map((r) => ({ groupe: r.groupe, n: r.n }))}
+                    total={passes.length}
+                  />
+                  <div className="grid w-full flex-1 gap-3 sm:grid-cols-3">
                   {repartition.map(({ groupe, n }) => {
                     const g = GROUPES[groupe];
                     return (
@@ -502,10 +642,16 @@ export default function MaClasseClient() {
                         key={groupe}
                         className="rounded-xl border-2 border-[#1d1c16]/12 p-3"
                       >
-                        <p
-                          className={`text-[11px] font-black uppercase tracking-[0.12em] ${g.couleur}`}
-                        >
-                          {g.label}
+                        <p className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-[0.12em]">
+                          {/* La pastille relie la carte à sa part de l'anneau —
+                              sans elle, il faudrait deviner quelle couleur va
+                              avec quel groupe. */}
+                          <span
+                            aria-hidden
+                            className="inline-block h-2.5 w-2.5 rounded-full"
+                            style={{ backgroundColor: COULEUR_GROUPE[groupe] }}
+                          />
+                          <span className={g.couleur}>{g.label}</span>
                         </p>
                         <p className="mt-1 font-serif text-3xl font-black leading-none">
                           {n}
@@ -517,9 +663,178 @@ export default function MaClasseClient() {
                       </div>
                     );
                   })}
+                  </div>
                 </div>
               )}
             </section>
+
+            {/* ── CE QU'IL FAUT EN RETENIR ────────────────────────────────
+                Placée APRÈS les chiffres et AVANT les tableaux : on ne conclut
+                pas avant d'avoir montré, et on ne laisse pas le lecteur
+                traverser quatre tableaux sans lui dire ce qu'il cherche. */}
+            {passes.length > 0 && (
+              <section
+                className="mt-5 rounded-2xl border-l-4 bg-white/90 p-4 shadow-[0_10px_28px_-16px_rgba(29,28,22,0.55)] sm:p-5"
+                style={{ borderColor: accent }}
+              >
+                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
+                  Ce qu&apos;il faut en retenir
+                </p>
+                <p className="mt-2 max-w-3xl text-sm font-medium leading-6 text-[#1d1c16]/85">
+                  Sur {passes.length} élève{passes.length > 1 ? "s" : ""} ayant
+                  passé l&apos;épreuve,{" "}
+                  <strong className="font-black">
+                    {aRenforcer} {aRenforcer > 1 ? "sont" : "est"} à besoins ou
+                    fragile
+                  </strong>
+                  {aBesoins > 0 && (
+                    <>
+                      , dont {aBesoins} pour {aBesoins > 1 ? "lesquels" : "lequel"}{" "}
+                      un accompagnement ciblé paraît nécessaire
+                    </>
+                  )}
+                  .
+                  {domaineFaible &&
+                    (domaineFaible.groupes.find((g) => g.groupe === "a_besoins")
+                      ?.n ?? 0) > 0 && (
+                      <>
+                        {" "}
+                        C&apos;est en{" "}
+                        <strong className="font-black">
+                          {domaineFaible.label}
+                        </strong>{" "}
+                        que le groupe « à besoins » est le plus fourni.
+                      </>
+                    )}
+                  {enAttente.length > 0 && (
+                    <>
+                      {" "}
+                      {enAttente.length} élève{enAttente.length > 1 ? "s" : ""}{" "}
+                      n&apos;{enAttente.length > 1 ? "ont" : "a"} pas encore
+                      passé l&apos;épreuve : ces chiffres ne décrivent pas
+                      encore toute la classe.
+                    </>
+                  )}
+                </p>
+
+                {troisPlusBas.length > 0 && (
+                  <>
+                    <p className="mt-3 text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
+                      Par où reprendre
+                    </p>
+                    <ul className="mt-1 space-y-1">
+                      {troisPlusBas.map((sf) => (
+                        <li
+                          key={sf.microId}
+                          className="flex flex-wrap items-baseline gap-x-2 text-sm font-medium leading-6"
+                        >
+                          <span
+                            className={`inline-block rounded-md px-1.5 py-0.5 text-xs font-black ${couleurPct(sf.pct)}`}
+                          >
+                            {sf.pct} %
+                          </span>
+                          <span className="font-black">{sf.label}</span>
+                          <span className="text-xs text-[#1d1c16]/55">
+                            {sf.reussites}/{sf.sur} élèves
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+
+                {/* ── LES ACTIONS ────────────────────────────────────────
+                    Demande de Frédéric : « il faut rajouter actions
+                    correctives ». Un constat sans suite se lit une fois et ne
+                    change rien. ⚠️ Ce sont les actions D'UN PRINCIPAL — former
+                    un groupe, dire à une équipe quoi reprendre — et non celles
+                    d'un élève : il ne cliquera pas sur « s'entraîner ». */}
+                <p className="mt-4 text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
+                  Ce que ça appelle
+                </p>
+                <ul className="mt-1.5 space-y-2.5">
+                  {groupeDeBesoins.length > 0 && (
+                    <li className="text-sm font-medium leading-6">
+                      <span className="font-black">
+                        Constituer le groupe de besoins
+                      </span>{" "}
+                      — {groupeDeBesoins.length} élève
+                      {groupeDeBesoins.length > 1 ? "s" : ""} :{" "}
+                      <span className="text-[#1d1c16]/75">
+                        {groupeDeBesoins.join(", ")}
+                      </span>
+                      . C&apos;est l&apos;usage que le bilan officiel assigne à
+                      ces groupes : l&apos;accompagnement personnalisé.
+                    </li>
+                  )}
+                  {troisPlusBas.length > 0 && (
+                    <li className="text-sm font-medium leading-6">
+                      <span className="font-black">
+                        Faire reprendre {troisPlusBas.length === 1 ? "cette compétence" : "ces compétences"} par l&apos;équipe
+                      </span>{" "}
+                      — {troisPlusBas.map((sf) => sf.label.toLowerCase()).join(", ")}.
+                      {troisPlusBas.some((sf) =>
+                        lienRemediation(classe, matiere, sf),
+                      ) && (
+                        <>
+                          {" "}
+                          Chacune ouvre un entraînement prêt à donner :{" "}
+                          {troisPlusBas.map((sf, i) => {
+                            const href = lienRemediation(classe, matiere, sf);
+                            if (!href) return null;
+                            return (
+                              <span key={sf.microId}>
+                                {i > 0 && " · "}
+                                <Link
+                                  href={href}
+                                  className="font-black underline underline-offset-2"
+                                  style={{ color: accent }}
+                                >
+                                  {sf.label}
+                                </Link>
+                              </span>
+                            );
+                          })}
+                          .
+                        </>
+                      )}
+                    </li>
+                  )}
+                  {enAttente.length > 0 && (
+                    <li className="text-sm font-medium leading-6">
+                      <span className="font-black">
+                        Faire passer l&apos;épreuve aux {enAttente.length}{" "}
+                        élève{enAttente.length > 1 ? "s" : ""} restant
+                        {enAttente.length > 1 ? "s" : ""}
+                      </span>{" "}
+                      — elle dure cinquante minutes, sur ordinateur, et se
+                      corrige seule. Tant qu&apos;ils manquent, la répartition
+                      ci-dessus peut encore bouger.
+                    </li>
+                  )}
+                  {coupes > 0 && (
+                    <li className="text-sm font-medium leading-6">
+                      <span className="font-black">Travailler le rythme</span> —{" "}
+                      {coupes} élève{coupes > 1 ? "s" : ""}{" "}
+                      {coupes > 1 ? "ont été arrêtés" : "a été arrêté"} par le
+                      chrono. Savoir faire ne suffit pas le jour J : il reste
+                      moins de cinquante secondes par question.
+                    </li>
+                  )}
+                </ul>
+
+                {/* ⚠️ LE CHRONO EST UNE INFORMATION, PAS UN DÉTAIL. Un élève
+                    coupé par le temps n'a pas le même problème qu'un élève qui
+                    s'est trompé : le premier sait peut-être faire, mais pas
+                    assez vite. Le jour J laisse 48 secondes par question. */}
+                {simule && (
+                  <p className="mt-3 text-xs font-medium italic leading-5 text-[#1d1c16]/60">
+                    Rappel : cette classe est une démonstration. Ces phrases
+                    sont calculées sur des résultats inventés.
+                  </p>
+                )}
+              </section>
+            )}
 
             {/* ── SAVOIR-FAIRE PAR SAVOIR-FAIRE ─────────────────────────────
                 La colonne de gauche de sa restitution officielle. C'est la
