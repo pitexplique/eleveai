@@ -36,7 +36,17 @@ function shuffleChoices(choices: string[], id: string): string[] {
   const arr = uniques(choices);
   for (let i = arr.length - 1; i > 0; i--) {
     seed = (seed * 1664525 + 1013904223) >>> 0;
-    const j = seed % (i + 1);
+    // ⚠️ 11/08/2026 — c'était `seed % (i + 1)`, et le mélange était FAUX sur
+    // les QCM à quatre lignes : la bonne réponse tombait en 1ʳᵉ ligne 33,3 %
+    // du temps et en 2ᵉ 16,7 %, au lieu de 25 % partout. Mesuré sur 200 000
+    // tirages, à trois lignes comme à deux le biais n'apparaissait pas — d'où
+    // son invisibilité.
+    // La cause : le dernier tour fait `% 2`, c'est-à-dire le BIT DE POIDS
+    // FAIBLE d'un générateur congruentiel de modulo 2³². Ce bit-là alterne, il
+    // n'est pas aléatoire. On lit donc les bits de POIDS FORT, qui le sont.
+    // Un enfant qui cliquait toujours la première ligne avait 33 % de réussite
+    // au lieu de 25.
+    const j = Math.floor((seed / 0x100000000) * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
@@ -98,7 +108,22 @@ function materializeBankItem(
       microId: item.microId,
       text: item.text,
       format: item.format,
-      choices: item.choices ? shuffleChoices(item.choices as string[], item.id) : undefined,
+      // ⚠️ 11/08/2026 — le mélange était amorcé par `item.id`, CONSTANT pour un
+      // item figé : la permutation était donc la même pour tous les élèves, à
+      // tous les tirages, pour toujours. Mesuré sur les 686 items fixes du
+      // français : 0 changeaient de place, et la bonne réponse tombait en
+      // PREMIÈRE ligne dans 33,5 % des cas. Un enfant qui refait le même item
+      // retient la position, pas la réponse.
+      // Les gabarits, eux, allaient bien : leur `generatedId` contient déjà
+      // l'horloge et un aléa. On leur emprunte leur amorce.
+      // ⚠️ Ne change RIEN à la correction : `ChoiceDiagnostic.choice` est le
+      // TEXTE du distracteur et `mcq_exact` compare du texte — jamais un rang.
+      choices: item.choices
+        ? shuffleChoices(
+            item.choices as string[],
+            `${item.id}__${Date.now()}_${Math.floor(Math.random() * 10000)}`,
+          )
+        : undefined,
       expected: item.expected,
       comparator: item.comparator,
       hint: item.hint,

@@ -39,11 +39,27 @@
 // 1 568 écrivent `choices: [correct, piège, piège, piège]` sans `shuffle`, dont
 // 293 avec la bonne réponse en tête. Vu d'ici, on croit que l'élève peut
 // cliquer la première ligne sans lire. Il ne le peut pas : le pipeline mélange
-// à l'envoi — `shuffleChoices` dans `lib/tutor-v4/questionPairBuilder.ts`,
-// réamorcé à chaque tirage par un id qui contient l'horloge et un aléa. Mesuré
-// le 09/08/2026 en le rejouant : rang 1→149, 2→63, 3→103, 4→85 sur 400 tirages.
-// Un contrôle du rang dans la banque n'apprendrait donc rien et noierait les
-// vrais défauts. ⚠️ En revanche `shuffleChoices` DÉDOUBLONNE sans recompléter :
+// à l'envoi — `shuffleChoices` dans `lib/tutor-v4/questionPairBuilder.ts`.
+// Un contrôle du rang DANS LA BANQUE n'apprendrait donc rien : le rang qui
+// compte est celui d'après le mélange.
+//
+// ⚠️ CORRIGÉ LE 11/08/2026 — ce paragraphe a été FAUX pendant deux jours, et
+// c'est lui qui a empêché de voir le défaut. Il affirmait que le mélange était
+// « réamorcé à chaque tirage par un id qui contient l'horloge et un aléa », et
+// donnait sa mesure : rang 1→149, 2→63, 3→103, 4→85 sur 400 tirages.
+//   — vrai pour les GABARITS, faux pour les items FIXES : ceux-là étaient
+//     amorcés par `item.id`, constant. Les 686 items fixes du français ne
+//     changeaient JAMAIS de place, pour aucun élève, jamais ;
+//   — et ces chiffres-là, 149/63/103/85, ne montraient pas un mélange correct :
+//     ils montraient déjà le biais. Le dernier tour faisait `seed % 2`, le bit
+//     de poids faible d'un générateur congruentiel — qui alterne. La bonne
+//     réponse tombait en 1ʳᵉ ligne 33,3 % du temps au lieu de 25 %.
+// Les deux sont réparés dans `questionPairBuilder.ts`. Mesuré après : 25 %
+// partout, sur les fixes comme sur les gabarits.
+// ⚠️ Le biais ne se voyait qu'à QUATRE lignes : à deux et à trois, `% 2` et
+// `% 3` donnent des répartitions justes. C'est pourquoi il a survécu.
+//
+// ⚠️ En revanche `shuffleChoices` DÉDOUBLONNE sans recompléter :
 // l'effondrement, lui, arrive bien jusqu'à l'élève.
 //
 // Usage : node --experimental-strip-types scripts/verifier-generateurs.mjs [classe] [matiere] [tirages]
