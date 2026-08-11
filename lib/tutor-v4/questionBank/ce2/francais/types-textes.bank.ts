@@ -301,6 +301,45 @@ Qu'est-ce qui montre que c'est ${LABEL[type]} ?`,
   };
 }
 
+/** Le QCM de MÉTHODE. Il a remplacé le 11/08/2026 la question ouverte « de
+ *  quel type de texte s'agit-il, et à quoi l'as-tu vu ? », que le comparateur
+ *  par mots-clés validait dès que la réponse contenait « vers » ou « personnage »
+ *  — donc aussi « je vois des personnages » écrit devant une recette.
+ *  ⚠️ Le corps des cinq ouvertes était recopié à la main dans chaque item,
+ *  parce que `verifier-banque.mjs` lit le source et y cherchait la question
+ *  ouverte item par item.
+ *  Ce n'est plus nécessaire : ce sont des QCM comme leurs trois voisins, et ils
+ *  se factorisent comme eux. Les ITEMS, eux, restent écrits un par un. */
+function questionDeLaMethode(type: TypeTexte) {
+  const e = randomChoice(echantillonsDe(type));
+  const bonne =
+    "Je regarde d'abord sa forme — la mise en page, les retours à la ligne, les noms — puis je vérifie avec ce qu'il veut de moi.";
+  return {
+    text: `Lis cet extrait :
+
+${e.extrait}
+
+Comment fais-tu pour reconnaitre le type d'un texte ?`,
+    format: "qcm" as const,
+    choices: [
+      bonne,
+      // LE piège de la notion : on peut écrire sur les baleines un
+      // documentaire, un poème ou une scène de théâtre.
+      "Je regarde de quoi il parle : c'est le sujet qui donne le type.",
+      "Je compte les lignes : un texte court est un poème.",
+      "Je regarde le premier mot du texte.",
+    ],
+    expected: [bonne],
+    comparator: "mcq_exact" as const,
+    explanation: exp(
+      `${LABEL[type].charAt(0).toUpperCase()}${LABEL[type].slice(1)} sert à ${BUT[type]}.`,
+      "Regarde d'abord la forme — la mise en page, les retours à la ligne, les noms — puis vérifie avec le sens.",
+      `Ici, ${e.marque}.`,
+      `C'est ${LABEL[type]} : ${e.marque}.`,
+    ),
+  };
+}
+
 function questionDuBut(type: TypeTexte) {
   const e = randomChoice(echantillonsDe(type));
   return {
@@ -372,38 +411,16 @@ export const typesTextesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_type_narratif_open_1",
+    id: "ce2_type_narratif_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "types_textes",
     microId: "ce2_type_narratif",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis ce que tu vois AVANT de lire, puis ce que tu comprends en lisant.",
-    tags: ["ce2", "types-textes", "narratif", "ouverte"],
-    generate: () => {
-      // ⚠️ Ce corps-là est écrit ici, et non appelé depuis une fonction
-      // partagée comme ses trois voisins : `verifier-banque.mjs` LIT LE SOURCE
-      // et cherche `format: "open"` dans l'item. Factorisé, il ne le voyait
-      // plus et rangeait les cinq types dans « sans question ouverte ».
-      const e = randomChoice(echantillonsDe("narratif"));
-      return {
-        text: `Lis cet extrait :
-
-${e.extrait}
-
-De quel type de texte s'agit-il, et à quoi l'as-tu vu ? Explique.`,
-        format: "open" as const,
-        expected: ["narratif", ...e.marque.split(" ").filter((m) => m.length > 5)],
-        comparator: "contains_keyword" as const,
-        explanation: exp(
-          `${LABEL["narratif"].charAt(0).toUpperCase()}${LABEL["narratif"].slice(1)} sert à ${BUT["narratif"]}.`,
-          "Regarde d'abord la forme — la mise en page, les retours à la ligne, les noms — puis vérifie avec le sens.",
-          `Ici, ${e.marque}.`,
-          `C'est ${LABEL["narratif"]} : ${e.marque}.`,
-        ),
-      };
-    },
+    hint: "Ce qu'on voit AVANT de lire renseigne déjà. Le sens ne fait que confirmer.",
+    tags: ["ce2", "types-textes", "narratif", "methode"],
+    generate: () => questionDeLaMethode("narratif"),
   },
 
   /* =========================================================
@@ -450,38 +467,16 @@ De quel type de texte s'agit-il, et à quoi l'as-tu vu ? Explique.`,
   },
   {
     kind: "template",
-    id: "ce2_type_informatif_open_1",
+    id: "ce2_type_informatif_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "types_textes",
     microId: "ce2_type_informatif",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis ce que tu vois AVANT de lire, puis ce que tu comprends en lisant.",
-    tags: ["ce2", "types-textes", "informatif", "ouverte"],
-    generate: () => {
-      // ⚠️ Ce corps-là est écrit ici, et non appelé depuis une fonction
-      // partagée comme ses trois voisins : `verifier-banque.mjs` LIT LE SOURCE
-      // et cherche `format: "open"` dans l'item. Factorisé, il ne le voyait
-      // plus et rangeait les cinq types dans « sans question ouverte ».
-      const e = randomChoice(echantillonsDe("informatif"));
-      return {
-        text: `Lis cet extrait :
-
-${e.extrait}
-
-De quel type de texte s'agit-il, et à quoi l'as-tu vu ? Explique.`,
-        format: "open" as const,
-        expected: ["informatif", ...e.marque.split(" ").filter((m) => m.length > 5)],
-        comparator: "contains_keyword" as const,
-        explanation: exp(
-          `${LABEL["informatif"].charAt(0).toUpperCase()}${LABEL["informatif"].slice(1)} sert à ${BUT["informatif"]}.`,
-          "Regarde d'abord la forme — la mise en page, les retours à la ligne, les noms — puis vérifie avec le sens.",
-          `Ici, ${e.marque}.`,
-          `C'est ${LABEL["informatif"]} : ${e.marque}.`,
-        ),
-      };
-    },
+    hint: "Ce qu'on voit AVANT de lire renseigne déjà. Le sens ne fait que confirmer.",
+    tags: ["ce2", "types-textes", "informatif", "methode"],
+    generate: () => questionDeLaMethode("informatif"),
   },
 
   /* =========================================================
@@ -528,38 +523,16 @@ De quel type de texte s'agit-il, et à quoi l'as-tu vu ? Explique.`,
   },
   {
     kind: "template",
-    id: "ce2_type_prescriptif_open_1",
+    id: "ce2_type_prescriptif_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "types_textes",
     microId: "ce2_type_prescriptif",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis ce que tu vois AVANT de lire, puis ce que tu comprends en lisant.",
-    tags: ["ce2", "types-textes", "prescriptif", "ouverte"],
-    generate: () => {
-      // ⚠️ Ce corps-là est écrit ici, et non appelé depuis une fonction
-      // partagée comme ses trois voisins : `verifier-banque.mjs` LIT LE SOURCE
-      // et cherche `format: "open"` dans l'item. Factorisé, il ne le voyait
-      // plus et rangeait les cinq types dans « sans question ouverte ».
-      const e = randomChoice(echantillonsDe("prescriptif"));
-      return {
-        text: `Lis cet extrait :
-
-${e.extrait}
-
-De quel type de texte s'agit-il, et à quoi l'as-tu vu ? Explique.`,
-        format: "open" as const,
-        expected: ["prescriptif", ...e.marque.split(" ").filter((m) => m.length > 5)],
-        comparator: "contains_keyword" as const,
-        explanation: exp(
-          `${LABEL["prescriptif"].charAt(0).toUpperCase()}${LABEL["prescriptif"].slice(1)} sert à ${BUT["prescriptif"]}.`,
-          "Regarde d'abord la forme — la mise en page, les retours à la ligne, les noms — puis vérifie avec le sens.",
-          `Ici, ${e.marque}.`,
-          `C'est ${LABEL["prescriptif"]} : ${e.marque}.`,
-        ),
-      };
-    },
+    hint: "Ce qu'on voit AVANT de lire renseigne déjà. Le sens ne fait que confirmer.",
+    tags: ["ce2", "types-textes", "prescriptif", "methode"],
+    generate: () => questionDeLaMethode("prescriptif"),
   },
 
   /* =========================================================
@@ -606,38 +579,16 @@ De quel type de texte s'agit-il, et à quoi l'as-tu vu ? Explique.`,
   },
   {
     kind: "template",
-    id: "ce2_type_poetique_open_1",
+    id: "ce2_type_poetique_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "types_textes",
     microId: "ce2_type_poetique",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis ce que tu vois AVANT de lire, puis ce que tu comprends en lisant.",
-    tags: ["ce2", "types-textes", "poetique", "ouverte"],
-    generate: () => {
-      // ⚠️ Ce corps-là est écrit ici, et non appelé depuis une fonction
-      // partagée comme ses trois voisins : `verifier-banque.mjs` LIT LE SOURCE
-      // et cherche `format: "open"` dans l'item. Factorisé, il ne le voyait
-      // plus et rangeait les cinq types dans « sans question ouverte ».
-      const e = randomChoice(echantillonsDe("poetique"));
-      return {
-        text: `Lis cet extrait :
-
-${e.extrait}
-
-De quel type de texte s'agit-il, et à quoi l'as-tu vu ? Explique.`,
-        format: "open" as const,
-        expected: ["poétique", "poesie", "poeme", "vers", ...e.marque.split(" ").filter((m) => m.length > 5)],
-        comparator: "contains_keyword" as const,
-        explanation: exp(
-          `${LABEL["poetique"].charAt(0).toUpperCase()}${LABEL["poetique"].slice(1)} sert à ${BUT["poetique"]}.`,
-          "Regarde d'abord la forme — la mise en page, les retours à la ligne, les noms — puis vérifie avec le sens.",
-          `Ici, ${e.marque}.`,
-          `C'est ${LABEL["poetique"]} : ${e.marque}.`,
-        ),
-      };
-    },
+    hint: "Ce qu'on voit AVANT de lire renseigne déjà. Le sens ne fait que confirmer.",
+    tags: ["ce2", "types-textes", "poetique", "methode"],
+    generate: () => questionDeLaMethode("poetique"),
   },
 
   /* =========================================================
@@ -684,38 +635,16 @@ De quel type de texte s'agit-il, et à quoi l'as-tu vu ? Explique.`,
   },
   {
     kind: "template",
-    id: "ce2_type_theatral_open_1",
+    id: "ce2_type_theatral_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "types_textes",
     microId: "ce2_type_theatral",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis ce que tu vois AVANT de lire, puis ce que tu comprends en lisant.",
-    tags: ["ce2", "types-textes", "theatral", "ouverte"],
-    generate: () => {
-      // ⚠️ Ce corps-là est écrit ici, et non appelé depuis une fonction
-      // partagée comme ses trois voisins : `verifier-banque.mjs` LIT LE SOURCE
-      // et cherche `format: "open"` dans l'item. Factorisé, il ne le voyait
-      // plus et rangeait les cinq types dans « sans question ouverte ».
-      const e = randomChoice(echantillonsDe("theatral"));
-      return {
-        text: `Lis cet extrait :
-
-${e.extrait}
-
-De quel type de texte s'agit-il, et à quoi l'as-tu vu ? Explique.`,
-        format: "open" as const,
-        expected: ["théâtre", "theatre", "réplique", "replique", "personnage", ...e.marque.split(" ").filter((m) => m.length > 5)],
-        comparator: "contains_keyword" as const,
-        explanation: exp(
-          `${LABEL["theatral"].charAt(0).toUpperCase()}${LABEL["theatral"].slice(1)} sert à ${BUT["theatral"]}.`,
-          "Regarde d'abord la forme — la mise en page, les retours à la ligne, les noms — puis vérifie avec le sens.",
-          `Ici, ${e.marque}.`,
-          `C'est ${LABEL["theatral"]} : ${e.marque}.`,
-        ),
-      };
-    },
+    hint: "Ce qu'on voit AVANT de lire renseigne déjà. Le sens ne fait que confirmer.",
+    tags: ["ce2", "types-textes", "theatral", "methode"],
+    generate: () => questionDeLaMethode("theatral"),
   },
 
   /* =========================================================
@@ -783,24 +712,36 @@ De quel type de texte s'agit-il, et à quoi l'as-tu vu ? Explique.`,
   },
   {
     kind: "fixed",
-    id: "ce2_type_defi_open_1",
+    id: "ce2_type_defi_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "types_textes",
     microId: "ce2_type_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "On peut écrire sur les baleines un texte documentaire, un poème, ou une scène de théâtre.\n\nQu'est-ce qui changerait dans les trois textes ? Explique.",
-    format: "open",
-    expected: ["forme", "but", "sert", "chiffres", "vers", "personnage", "réplique", "replique", "rime", "présentation", "presentation"],
-    comparator: "contains_keyword",
-    hint: "Le sujet serait le même dans les trois. Alors, qu'est-ce qui les distingue ?",
+    // Le cran de plus : les cinq autres questions montrent un extrait et
+    // demandent de le classer. Celle-ci retire l'extrait et garde le sujet
+    // constant — il ne reste plus que ce qui fait vraiment le type.
+    text: "On peut écrire sur les baleines un texte documentaire, un poème, ou une scène de théâtre.\n\nQu'est-ce qui change entre les trois ?",
+    format: "qcm",
+    choices: [
+      "La forme et le but : des chiffres pour le documentaire, des vers et des rimes pour le poème, des noms en capitales et des répliques à jouer pour le théâtre.",
+      // LE piège : le sujet est le même dans les trois, et c'est tout le propos.
+      "Le sujet : chacun parlerait d'un animal différent.",
+      "La longueur : le poème serait le plus court, le documentaire le plus long.",
+      "La difficulté des mots employés.",
+    ],
+    expected: [
+      "La forme et le but : des chiffres pour le documentaire, des vers et des rimes pour le poème, des noms en capitales et des répliques à jouer pour le théâtre.",
+    ],
+    comparator: "mcq_exact",
+    hint: "Le sujet est le même dans les trois. Alors, qu'est-ce qui les distingue ?",
     explanation: exp(
       "Un texte ne se reconnait pas à son sujet, mais à sa forme et à son but.",
       "Devant un texte inconnu, regarde d'abord comment il est posé sur la page, puis demande-toi ce qu'il veut de toi.",
       "Le documentaire donnerait des chiffres et des faits. Le poème irait à la ligne, chercherait des images et des rimes. La scène de théâtre mettrait des noms en capitales, avec des répliques à jouer. Trois textes sur les mêmes baleines, trois formes, trois buts.",
       "Ce sont la forme et le but qui changent, pas le sujet.",
     ),
-    tags: ["ce2", "types-textes", "defi", "definition", "ouverte"],
+    tags: ["ce2", "types-textes", "defi", "methode", "qcm"],
   },
 ];
