@@ -902,25 +902,34 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_comp_infos_explicites_open_1",
+    id: "ce2_comp_infos_explicites_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "comprehension_lecture",
     microId: "ce2_comp_infos_explicites",
     difficulty: 3,
     theme: "neutral",
-    hint: "Réponds en une phrase, avec les mots du texte.",
-    tags: ["ce2", "comprehension", "explicite", "ouverte"],
+    hint: "La réponse est écrite. Il ne s'agit pas de la deviner, mais de la retrouver.",
+    tags: ["ce2", "comprehension", "explicite", "methode"],
     generate: () => {
       const t = randomChoice(TEXTES);
+      const bonne = "Je cherche dans le texte les mots de la question, et je pose mon doigt sur la réponse.";
       return {
-        text: `Lis ce texte :\n\n« ${t.texte} »\n\n${t.info.q} Réponds en une phrase.`,
-        format: "open" as const,
-        expected: t.info.r.split(" ").filter((m) => m.length > 3),
-        comparator: "contains_keyword" as const,
+        text: `Lis ce texte :\n\n« ${t.texte} »\n\n${t.info.q}\n\nComment fais-tu pour trouver la réponse ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // La voisine : mobiliser ce qu'on sait, c'est le geste d'une autre
+          // micro-compétence — ici la réponse est écrite noir sur blanc.
+          "Je réponds avec ce que je sais déjà : le texte n'est pas obligé de le dire.",
+          "Je relis seulement la première phrase : c'est là que tout est annoncé.",
+          "Je choisis la réponse la plus longue.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
-          "Répondre à une question sur un texte, c'est retrouver l'information et la redire avec ses mots.",
-          "Relis en cherchant les mots de la question, puis écris ta phrase.",
+          "Une information explicite est écrite noir sur blanc : il n'y a rien à deviner.",
+          "Relis en cherchant les mots de la question, puis pose ton doigt sur la réponse.",
           `Le texte dit : ${t.info.r}.`,
           `La réponse est : ${t.info.r}.`,
         ),
@@ -984,27 +993,31 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_comp_anaphore_open_1",
+    id: "ce2_comp_anaphore_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "comprehension_lecture",
     microId: "ce2_comp_anaphore",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis comment tu vérifies que tu ne t'es pas trompé.",
-    tags: ["ce2", "comprehension", "anaphore", "ouverte"],
+    hint: "Une fois que tu as une idée, il reste un geste : la vérifier.",
+    tags: ["ce2", "comprehension", "anaphore", "methode"],
     generate: () => {
       const t = randomChoice(TEXTES);
+      const bonne = "Je remonte d'une phrase ou deux, puis je remplace le mot par le nom que je propose : si la phrase tient debout, c'est le bon.";
       return {
-        text: `Dans « ${t.texte} », on lit « ${t.anaphore.contexte} ».\n\nDe qui ou de quoi s'agit-il, et comment en es-tu sûr ? Explique.`,
-        format: "open" as const,
-        expected: [
-          ...t.anaphore.referent.split(" ").filter((m) => m.length > 3),
-          "remonte",
-          "avant",
-          "remplace",
+        text: `Dans « ${t.texte} », on lit « ${t.anaphore.contexte} ».\n\nComment fais-tu pour savoir de qui ou de quoi on parle ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // LE piège que le programme signale : le dernier nom cité n'est pas
+          // forcément celui dont on parle.
+          "Je prends le dernier nom écrit juste avant : c'est toujours lui.",
+          "Je prends le personnage principal de l'histoire : c'est de lui qu'on parle le plus.",
+          "Je regarde si le mot est au masculin ou au féminin, et c'est tout.",
         ],
-        comparator: "contains_keyword" as const,
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un texte remplace les noms par des pronoms pour ne pas se répéter : il faut savoir les remettre en place.",
           "Remonte dans le texte, puis remplace le pronom par le nom que tu proposes. Si la phrase tient debout, c'est le bon.",
@@ -1077,25 +1090,31 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_comp_inferences_open_1",
+    id: "ce2_comp_inferences_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "comprehension_lecture",
     microId: "ce2_comp_inferences",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis ce que tu as compris, ET où tu l'as pris.",
-    tags: ["ce2", "comprehension", "inference", "ouverte"],
+    hint: "Deviner n'est pas inventer : il faut pouvoir montrer l'endroit du doigt.",
+    tags: ["ce2", "comprehension", "inference", "methode"],
     generate: () => {
       const t = randomChoice(TEXTES);
+      const bonne = `Je montre du doigt le morceau qui me l'a fait comprendre : « ${t.inference.indice} ».`;
       return {
-        text: `Lis ce texte :\n\n« ${t.texte} »\n\nQu'est-ce que tu comprends sans que ce soit écrit ? Explique comment tu l'as deviné.`,
-        format: "open" as const,
-        expected: [
-          ...t.inference.conclusion.split(" ").filter((m) => m.length > 4),
-          ...t.inference.indice.split(" ").filter((m) => m.length > 5),
+        text: `Lis ce texte :\n\n« ${t.texte} »\n\nOn comprend que ${t.inference.conclusion}, et pourtant ce n'est écrit nulle part.\nComment fais-tu pour en être sûr ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : « c'est logique » n'est pas une preuve.
+          "Je me dis que c'est logique, et ça me suffit.",
+          // La voisine : chercher la phrase qui le dit — impossible ici.
+          "Je cherche la phrase du texte qui le dit en toutes lettres.",
+          "Je demande à quelqu'un qui a déjà lu l'histoire.",
         ],
-        comparator: "contains_keyword" as const,
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Une inférence relie un indice écrit à une conclusion qui, elle, ne l'est pas.",
           "Dis les deux : ce que tu as compris, et le morceau de texte qui te l'a fait comprendre.",
@@ -1139,7 +1158,7 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_comp_connaissances_open_1",
+    id: "ce2_comp_connaissances_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "comprehension_lecture",
@@ -1147,14 +1166,22 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Ta réponse ne sera pas dans le texte : elle est dans ta tête.",
-    tags: ["ce2", "comprehension", "connaissances", "ouverte"],
+    tags: ["ce2", "comprehension", "connaissances", "methode"],
     generate: () => {
       const t = randomChoice(TEXTES);
+      const bonne = "Je cherche dans ce que je sais déjà du monde : je relis la scène, et je vois ce que je connais qui l'explique.";
       return {
-        text: `Lis ce texte :\n\n« ${t.texte} »\n\n${t.connaissance.q} Explique en une phrase.`,
-        format: "open" as const,
-        expected: t.connaissance.r.split(" ").filter((m) => m.length > 4),
-        comparator: "contains_keyword" as const,
+        text: `Lis ce texte :\n\n« ${t.texte} »\n\n${t.connaissance.q}\nLa réponse n'est pas écrite. Où vas-tu la chercher ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : s'acharner sur le texte, qui ne le dira jamais.
+          "Je relis le texte encore une fois, jusqu'à tomber sur la phrase.",
+          "J'invente une réponse qui va bien avec l'histoire.",
+          "Je réponds que le texte ne le dit pas, et je m'arrête là.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Certaines questions n'ont pas leur réponse dans le texte : elles demandent ce qu'on sait du monde.",
           "Relis la scène, puis demande-toi ce que tu connais qui pourrait l'expliquer.",
@@ -1228,22 +1255,32 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_comp_chronologie_open_1",
+    id: "ce2_comp_chronologie_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "comprehension_lecture",
     microId: "ce2_comp_chronologie",
     difficulty: 3,
     theme: "neutral",
-    hint: "Trois étapes suffisent, dans l'ordre.",
-    tags: ["ce2", "comprehension", "chronologie", "ouverte"],
+    hint: "Trois moments suffisent : le début, ce qui change, la fin.",
+    tags: ["ce2", "comprehension", "chronologie", "methode"],
     generate: () => {
       const t = randomChoice(TEXTES);
+      const bonne = "Je repère le début, ce qui change au milieu, et comment cela finit — et je suis le fil du texte sans sauter d'étape.";
       return {
-        text: `Lis ce texte :\n\n« ${t.texte} »\n\nRaconte l'histoire en trois étapes, dans l'ordre.`,
-        format: "open" as const,
-        expected: t.chronologie.flatMap((e) => e.split(" ").filter((m) => m.length > 5)),
-        comparator: "contains_keyword" as const,
+        text: `Lis ce texte :\n\n« ${t.texte} »\n\nComment fais-tu pour le raconter dans l'ordre ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : commencer par ce qui a plu, et perdre le fil.
+          "Je commence par le moment le plus intéressant, puis je dis le reste.",
+          // La voisine : les mots du temps servent en conjugaison ; ici le fil
+          // du récit ne s'y trouve pas.
+          "Je cherche les mots « hier » et « demain » : ce sont eux qui donnent l'ordre.",
+          "Je recopie les phrases du texte, de la plus courte à la plus longue.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Résumer un récit dans l'ordre, c'est garder les trois moments qui font avancer l'histoire.",
           "Repère le début, ce qui change au milieu, et comment cela finit.",
@@ -1316,22 +1353,31 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_comp_retour_texte_open_1",
+    id: "ce2_comp_retour_texte_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "comprehension_lecture",
     microId: "ce2_comp_retour_texte",
     difficulty: 3,
     theme: "neutral",
-    hint: "Recopie le morceau de phrase qui te donne la réponse.",
-    tags: ["ce2", "comprehension", "retour-texte", "ouverte"],
+    hint: "Une preuve, ça se montre. Ce n'est pas ce qu'on a compris, c'est ce qui est écrit.",
+    tags: ["ce2", "comprehension", "retour-texte", "methode"],
     generate: () => {
       const t = randomChoice(TEXTES);
+      const bonne = "Je recopie le morceau du texte qui donne la réponse, mot à mot.";
       return {
-        text: `Lis ce texte :\n\n« ${t.texte} »\n\n${t.preuve.q} Recopie le morceau de texte qui te le prouve.`,
-        format: "open" as const,
-        expected: t.preuve.phrase.split(" ").filter((m) => m.length > 4),
-        comparator: "contains_keyword" as const,
+        text: `Lis ce texte :\n\n« ${t.texte} »\n\n${t.preuve.q}\nQu'est-ce qui prouve ta réponse ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : la mémoire prise pour une preuve.
+          "Je dis que je m'en souviens : je viens de le lire.",
+          // La voisine : redire avec ses mots, c'est résumer — pas prouver.
+          "J'écris ce que j'ai compris, avec mes mots à moi.",
+          "Je raconte l'histoire en entier : la preuve est forcément dedans.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Justifier, c'est montrer l'endroit du texte qui donne la réponse.",
           "Relis chaque phrase et arrête-toi sur celle qui répond exactement à la question.",
@@ -1375,25 +1421,30 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_comp_titre_open_1",
+    id: "ce2_comp_titre_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "comprehension_lecture",
     microId: "ce2_comp_titre",
     difficulty: 3,
     theme: "neutral",
-    hint: "Trois ou quatre mots suffisent.",
-    tags: ["ce2", "comprehension", "titre", "ouverte"],
+    hint: "Un titre annonce tout le texte, pas un morceau du texte.",
+    tags: ["ce2", "comprehension", "titre", "methode"],
     generate: () => {
       const t = randomChoice(TEXTES);
+      const bonne = "Je résume le texte dans ma tête, puis je garde les deux ou trois mots les plus importants.";
       return {
-        text: `Lis ce texte :\n\n« ${t.texte} »\n\nInvente-lui un titre, et dis pourquoi tu l'as choisi.`,
-        format: "open" as const,
-        expected: [
-          ...t.titre.split(" ").filter((m) => m.length > 3),
-          ...t.resume.split(" ").filter((m) => m.length > 6),
+        text: `Lis ce texte :\n\n« ${t.texte} »\n\nComment fais-tu pour lui trouver un bon titre ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : le titre qui raconte un détail au lieu du tout.
+          "Je prends le détail qui m'a le plus plu.",
+          "Je prends les premiers mots du texte.",
+          "Je choisis le titre le plus long : il en dit plus.",
         ],
-        comparator: "contains_keyword" as const,
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un titre dit en quelques mots de quoi parle tout le texte.",
           "Résume d'abord le texte dans ta tête, puis garde les deux ou trois mots les plus importants.",
@@ -1494,17 +1545,26 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce2_comp_mise_en_page_open_1",
+    id: "ce2_comp_mise_en_page_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "comprehension_lecture",
     microId: "ce2_comp_mise_en_page",
     difficulty: 3,
     theme: "neutral",
-    text: "Tu dois trouver, dans un gros livre documentaire, à quoi sert la queue d'un margouillat.\n\nQue regardes-tu en premier, et pourquoi ? Explique.",
-    format: "open",
-    expected: ["sommaire", "titre", "sous-titre", "table", "chapitre", "index", "paragraphe"],
-    comparator: "contains_keyword",
+    text: "Tu dois trouver, dans un gros livre documentaire, à quoi sert la queue d'un margouillat.\n\nQue regardes-tu en premier ?",
+    format: "qcm",
+    choices: [
+      "Le sommaire, puis les titres et les sous-titres : ils m'envoient directement à la bonne page.",
+      // L'erreur réelle : lire un documentaire comme un roman.
+      "La première page, et je lis jusqu'à tomber dessus.",
+      "Les images : c'est là qu'on voit les animaux.",
+      "La dernière page : les réponses sont souvent à la fin.",
+    ],
+    expected: [
+      "Le sommaire, puis les titres et les sous-titres : ils m'envoient directement à la bonne page.",
+    ],
+    comparator: "mcq_exact",
     hint: "On ne lit pas un documentaire de la première à la dernière page.",
     explanation: exp(
       "Un documentaire ne se lit pas comme un roman : on y cherche une information précise.",
@@ -1512,7 +1572,7 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
       "Le sommaire t'envoie au chapitre sur le corps de l'animal ; les sous-titres t'envoient au paragraphe sur la queue. Trois regards, au lieu de cent pages.",
       "On regarde le sommaire et les titres, pour aller directement à la bonne page.",
     ),
-    tags: ["ce2", "comprehension", "mise-en-page", "methode", "ouverte"],
+    tags: ["ce2", "comprehension", "mise-en-page", "methode", "qcm"],
   },
 
   /* =========================================================
@@ -1548,27 +1608,30 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_comp_mot_inconnu_open_1",
+    id: "ce2_comp_mot_inconnu_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "comprehension_lecture",
     microId: "ce2_comp_mot_inconnu",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis ce qui, dans le texte, t'a mis sur la piste.",
-    tags: ["ce2", "comprehension", "mot-inconnu", "ouverte"],
+    hint: "Tu as une idée. Il reste à la mettre à l'épreuve du texte.",
+    tags: ["ce2", "comprehension", "mot-inconnu", "methode"],
     generate: () => {
       const t = randomChoice(TEXTES);
+      const bonne = "Je remets mon idée à la place du mot et je relis le texte en entier : si tout tient debout, c'est bon.";
       return {
-        text: `Dans ce texte, tu ne connais pas le mot « ${t.motInconnu.mot} » :\n\n« ${t.texte} »\n\nQue veut-il dire, et comment l'as-tu deviné ? Explique.`,
-        format: "open" as const,
-        expected: [
-          ...t.motInconnu.sens.split(" ").filter((m) => m.length > 4),
-          "phrase",
-          "autour",
-          "contexte",
+        text: `Dans ce texte, tu ne connais pas le mot « ${t.motInconnu.mot} » :\n\n« ${t.texte} »\n\nTu penses qu'il veut dire ${t.motInconnu.sens}. Comment vérifies-tu ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : « ça sonne bien », donc on ne vérifie pas.
+          "Je ne vérifie pas : si ça sonne bien, c'est que c'est ça.",
+          "Je cherche le mot ailleurs dans le texte, pour voir s'il y revient.",
+          "Je regarde si le mot est long ou court.",
         ],
-        comparator: "contains_keyword" as const,
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Le contexte, ce sont les mots qui entourent le mot inconnu : ils suffisent souvent à en deviner le sens.",
           "Relis la phrase entière, puis vérifie que ton hypothèse tient dans tout le texte.",
@@ -1613,22 +1676,30 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_comp_resume_open_1",
+    id: "ce2_comp_resume_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "comprehension_lecture",
     microId: "ce2_comp_resume",
     difficulty: 3,
     theme: "neutral",
-    hint: "Une phrase suffit. Deux, au maximum.",
-    tags: ["ce2", "comprehension", "resume", "ouverte"],
+    hint: "Une phrase suffit. Ce qui compte, c'est ce que tu jettes.",
+    tags: ["ce2", "comprehension", "resume", "methode"],
     generate: () => {
       const t = randomChoice(TEXTES);
+      const bonne = "Je garde qui, où, et ce qui se passe — et j'écarte les détails.";
       return {
-        text: `Lis ce texte :\n\n« ${t.texte} »\n\nRésume-le en une phrase, avec tes mots.`,
-        format: "open" as const,
-        expected: t.resume.split(" ").filter((m) => m.length > 4),
-        comparator: "contains_keyword" as const,
+        text: `Lis ce texte :\n\n« ${t.texte} »\n\nComment fais-tu pour le résumer en une phrase ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : résumer par découpage, sans choisir.
+          "Je recopie la première phrase et la dernière phrase du texte.",
+          "Je raconte le passage que j'ai préféré.",
+          "Je recopie tout le texte en écrivant plus petit.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Un résumé garde l'essentiel : qui, où, et ce qui se passe.",
           "Écarte les détails, garde ce qui ferait comprendre l'histoire à quelqu'un qui ne l'a pas lue.",
@@ -1707,26 +1778,33 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_comp_defi_open_1",
+    id: "ce2_comp_defi_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "comprehension_lecture",
     microId: "ce2_comp_defi",
     difficulty: 3,
     theme: "neutral",
-    hint: "Trois choses : qui, ce qui se passe, et ce qu'on devine.",
-    tags: ["ce2", "comprehension", "defi", "ouverte"],
+    // Le cran de plus : il ne s'agit plus d'un seul geste, mais de trois à
+    // tenir ensemble — et le piège fin oppose deviner à inventer.
+    hint: "Trois choses à la fois : qui, ce qui se passe, et ce qu'on devine.",
+    tags: ["ce2", "comprehension", "defi", "methode"],
     generate: () => {
       const t = randomChoice(TEXTES);
+      const bonne = `Je dis de qui il s'agit — ${t.personnage} —, ce qui se passe, et ce que le texte laisse deviner sans l'écrire.`;
       return {
-        text: `Lis ce texte :\n\n« ${t.texte} »\n\nRaconte-le à quelqu'un qui ne l'a pas lu : dis de qui il s'agit, ce qui se passe, et une chose que tu as devinée sans qu'elle soit écrite.`,
-        format: "open" as const,
-        expected: [
-          ...t.personnage.split(" ").filter((m) => m.length > 3),
-          ...t.resume.split(" ").filter((m) => m.length > 5),
-          ...t.inference.conclusion.split(" ").filter((m) => m.length > 5),
+        text: `Lis ce texte :\n\n« ${t.texte} »\n\nTu dois le raconter à quelqu'un qui ne l'a pas lu. Que dis-tu ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Le piège fin : ce qui se devine n'est pas ce qui s'invente. Refuser
+          // l'inférence, c'est perdre la moitié du texte.
+          "Je dis seulement ce qui est écrit noir sur blanc : le reste, on ne peut pas l'inventer.",
+          "Je récite le texte par cœur, du début à la fin.",
+          "Je commence par la fin : c'est le plus important.",
         ],
-        comparator: "contains_keyword" as const,
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Comprendre un texte, c'est pouvoir le redire — et dire aussi ce qu'on a compris entre les lignes.",
           "Trois temps : de qui on parle, ce qui arrive, et ce que le texte laisse deviner.",
