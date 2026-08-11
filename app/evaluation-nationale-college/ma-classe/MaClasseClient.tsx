@@ -34,6 +34,7 @@ type BlocBilan = {
 
 type EleveDeLaClasse = {
   codeUtilisateur: string;
+  groupe: string;
   nom: string | null;
   resultat: {
     score: number;
@@ -87,6 +88,12 @@ export default function MaClasseClient() {
   const [admin, setAdmin] = useState(false);
   const [etablissements, setEtablissements] = useState<string[] | null>(null);
   const [etab, setEtab] = useState("");
+  // ── LE GROUPE CLASSE ─────────────────────────────────────────────────────
+  // Un college n'a pas « une 6e ». A Dimitile, la vraie 6e C et la classe de
+  // demonstration sortaient d'un seul bloc de cinquante eleves — un tas dont
+  // un principal ne peut rien faire.
+  const [groupes, setGroupes] = useState<string[]>([]);
+  const [groupe, setGroupe] = useState("");
 
   const charger = useCallback(async () => {
     setChargement(true);
@@ -116,6 +123,11 @@ export default function MaClasseClient() {
         setAdmin(Boolean(j.admin));
         setEleves(j.eleves as EleveDeLaClasse[]);
         setSimule(Boolean(j.contientDesSimulations));
+        const g = (j.groupes as string[]) ?? [];
+        setGroupes(g);
+        // On garde le groupe choisi s'il existe encore apres un changement de
+        // niveau ou de matiere ; sinon on prend le premier.
+        setGroupe((actuel) => (actuel && g.includes(actuel) ? actuel : g[0] ?? ""));
       }
     } catch {
       setErreur("Lecture impossible. Réessayez.");
@@ -138,8 +150,11 @@ export default function MaClasseClient() {
     charger();
   }, [charger]);
 
-  const passes = (eleves ?? []).filter((e) => e.resultat);
-  const enAttente = (eleves ?? []).filter((e) => !e.resultat);
+  // ⚠️ TOUT CE QUI SUIT PORTE SUR LE GROUPE CHOISI, pas sur le niveau entier :
+  // une repartition qui melangerait deux classes ne decrirait aucune des deux.
+  const duGroupe = (eleves ?? []).filter((e) => !groupe || e.groupe === groupe);
+  const passes = duGroupe.filter((e) => e.resultat);
+  const enAttente = duGroupe.filter((e) => !e.resultat);
 
   // La répartition en groupes, sur l'ENSEMBLE de l'épreuve.
   const repartition = ORDRE.map((g) => ({
@@ -305,6 +320,40 @@ export default function MaClasseClient() {
           ))}
         </div>
 
+        {/* LE GROUPE CLASSE. Il n'apparaît que s'il y en a plusieurs — un
+            collège à une seule 6ᵉ n'a rien à choisir, et un bouton unique
+            ferait croire qu'il manque quelque chose. */}
+        {groupes.length > 1 && (
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <span className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
+              Classe
+            </span>
+            {groupes.map((g) => (
+              <button
+                key={g}
+                type="button"
+                onClick={() => setGroupe(g)}
+                className={[
+                  "rounded-lg border-2 px-3 py-1.5 text-xs font-black transition",
+                  groupe === g
+                    ? "text-white"
+                    : "border-[#1d1c16]/20 hover:border-[#1d1c16]/50",
+                ].join(" ")}
+                style={
+                  groupe === g
+                    ? { backgroundColor: accent, borderColor: accent }
+                    : undefined
+                }
+              >
+                {g}
+                {g === "6ETEST" && (
+                  <span className="ml-1.5 font-medium opacity-70">démo</span>
+                )}
+              </button>
+            ))}
+          </div>
+        )}
+
         {erreur && (
           <p className="mt-5 rounded-xl border-l-4 border-red-800 bg-white/80 py-2.5 pl-3 pr-3 text-sm font-medium leading-6 text-red-900">
             {erreur}
@@ -326,7 +375,7 @@ export default function MaClasseClient() {
               </p>
               <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/75">
                 {passes.length} élève{passes.length > 1 ? "s" : ""} sur{" "}
-                {eleves.length} {passes.length > 1 ? "ont" : "a"} passé
+                {duGroupe.length} {passes.length > 1 ? "ont" : "a"} passé
                 l&apos;épreuve.
                 {enAttente.length > 0 && (
                   <>
@@ -434,7 +483,7 @@ export default function MaClasseClient() {
                     </tr>
                   </thead>
                   <tbody>
-                    {eleves.map((e) => {
+                    {duGroupe.map((e) => {
                       const tous = [
                         ...(e.resultat?.domaines ?? []),
                         ...(e.resultat?.tests ?? []),

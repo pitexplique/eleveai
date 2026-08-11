@@ -27,8 +27,35 @@ const ROLES_ETABLISSEMENT = new Set(["prof", "principal", "boss"]);
 const CLASSES = new Set(["6e", "4e"]);
 const MATIERES = new Set(["maths", "francais"]);
 
+/**
+ * LE GROUPE CLASSE SE LIT SUR LE CODE, faute de colonne pour le porter.
+ *
+ * `acces_etablissement.classe` ne connaît que le NIVEAU — '6e', '4e' — et sa
+ * contrainte SQL n'accepte rien d'autre. Or un collège n'a pas « une 6ᵉ » : il
+ * a une 6ᵉ A, une 6ᵉ B, une 6ᵉ C. Constaté à Dimitile le 11/08 en découvrant
+ * que la vraie 6ᵉ C (codes 6C00…6C19) et la classe de démonstration
+ * (6ETEST-01…30) s'affichaient d'un seul bloc de cinquante élèves. Un
+ * principal ne peut rien faire d'un tel tas.
+ *
+ * La convention est celle du collège lui-même : un préfixe, puis un numéro.
+ * `6C07` → « 6C » ; `6ETEST-12` → « 6ETEST ».
+ *
+ * ⚠️ CE N'EST QU'UN DÉPANNAGE. La vraie correction est une colonne `groupe`
+ * dans `acces_etablissement` — voir [[association-prof-eleves-chantier]]. Tant
+ * qu'elle n'existe pas, un établissement qui nommerait ses codes autrement
+ * (« ELEVE-0001 ») verrait tous ses élèves dans un même groupe. Ce n'est pas
+ * faux, c'est seulement inutile — et ça ne casse rien.
+ */
+function groupeDuCode(code: string): string {
+  const m = code.match(/^(.*?)[-_ ]?\d+$/);
+  const prefixe = (m?.[1] ?? "").trim();
+  return prefixe || code;
+}
+
 export type EleveDeLaClasse = {
   codeUtilisateur: string;
+  /** Le groupe classe déduit du code : « 6C », « 6ETEST »… */
+  groupe: string;
   nom: string | null;
   /** null = l'élève n'a pas encore passé l'épreuve. */
   resultat: {
@@ -197,11 +224,19 @@ export async function GET(req: Request) {
     const compte = c as Record<string, unknown>;
     const code = String(compte.code_utilisateur ?? "");
     const r = dernier.get(code);
-    if (!r) return { codeUtilisateur: code, nom: (compte.nom as string) ?? null, resultat: null };
+    if (!r) {
+      return {
+        codeUtilisateur: code,
+        groupe: groupeDuCode(code),
+        nom: (compte.nom as string) ?? null,
+        resultat: null,
+      };
+    }
 
     const details = (r.details ?? {}) as Record<string, unknown>;
     return {
       codeUtilisateur: code,
+      groupe: groupeDuCode(code),
       nom: ((compte.nom as string) ?? (r.nom as string)) ?? null,
       resultat: {
         score: Number(r.score ?? 0),
@@ -223,6 +258,9 @@ export async function GET(req: Request) {
     etablissement: codeEtablissement,
     classe,
     matiere,
+    // Les groupes présents, pour que la page propose un choix plutôt qu'un
+    // tas. Triés : « 6A » avant « 6B », et la démo se range d'elle-même.
+    groupes: [...new Set(eleves.map((e) => e.groupe))].sort(),
     eleves,
     // ⚠️ SIGNALÉ, PAS MASQUÉ. Si une seule ligne de démonstration traîne, le
     // principal doit le savoir avant de lire la répartition — sinon il prend
