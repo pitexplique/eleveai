@@ -571,30 +571,32 @@ export const grammairePhraseBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_gram_phrase_types_open_1",
+    id: "ce2_gram_phrase_types_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "grammaire_phrase",
     microId: "ce2_gram_phrase_types",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis ce que la phrase fait à celui qui l'écoute.",
-    tags: ["ce2", "grammaire", "types-phrases", "ouverte"],
+    hint: "Le point final ne suffit pas. Demande-toi ce que la phrase attend de toi.",
+    tags: ["ce2", "grammaire", "types-phrases", "methode"],
     generate: () => {
       const s = randomChoice(SCENES);
       const t = randomChoice(TYPES);
+      const bonne = "Je me demande ce que celui qui écoute doit faire : écouter, répondre, ou obéir.";
       return {
-        text: `« ${s[t]} »\n\nDe quel type est cette phrase, et à quoi l'as-tu vu ? Explique.`,
-        format: "open" as const,
-        expected: [
-          LABEL_TYPE[t],
-          // Sans accent aussi : `normalize()` les conserve, et à neuf ans on
-          // tape « declarative ».
-          t === "declarative" ? "declarative" : t === "imperative" ? "imperative" : "interrogative",
-          t === "interrogative" ? "question" : t === "imperative" ? "ordre" : "raconte",
-          t === "interrogative" ? "réponse" : t === "imperative" ? "commande" : "fait",
+        text: `« ${s[t]} »\n\nComment fais-tu pour trouver le type de cette phrase ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : le point d'exclamation est une FORME, pas un
+          // type. Le signe final ne suffit donc jamais.
+          "Je regarde le point à la fin : il donne le type à lui seul.",
+          "Je regarde le premier mot de la phrase.",
+          "Je compte les mots : les phrases courtes sont des ordres.",
         ],
-        comparator: "contains_keyword" as const,
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Le type d'une phrase dit ce qu'elle fait : raconter, demander, ou commander.",
           "Ne t'arrête pas au point final. Demande-toi ce que celui qui écoute doit faire.",
@@ -676,22 +678,32 @@ export const grammairePhraseBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_gram_produire_types_open_1",
+    id: "ce2_gram_produire_types_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "grammaire_phrase",
     microId: "ce2_gram_produire_types",
     difficulty: 3,
     theme: "neutral",
-    hint: "Écris ta phrase en entier, avec sa ponctuation.",
-    tags: ["ce2", "grammaire", "types-phrases", "ouverte"],
+    hint: "Deux gestes en même temps : un mot au début, un signe à la fin.",
+    tags: ["ce2", "grammaire", "types-phrases", "methode"],
     generate: () => {
       const s = randomChoice(SCENES);
+      const bonne = `J'ajoute « Est-ce que » au début et je remplace le point par un point d'interrogation : « ${s.interrogative} »`;
       return {
-        text: `« ${s.declarative} »\n\nÉcris la même idée sous la forme d'une question.`,
-        format: "open" as const,
-        expected: ["?", "est-ce que", s.verbe],
-        comparator: "contains_keyword" as const,
+        text: `« ${s.declarative} »\n\nComment transformes-tu cette phrase en question ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Les voisines : l'exclamative, la forme négative, le changement de
+          // temps. Chacune transforme la phrase, mais aucune n'en fait une
+          // question.
+          "Je mets un point d'exclamation à la fin.",
+          "Je mets la phrase à la forme négative.",
+          "Je change le verbe de temps.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Une phrase interrogative pose une question et se termine par un point d'interrogation.",
           "Le plus simple : ajoute « Est-ce que » au début et remplace le point par un point d'interrogation.",
@@ -788,22 +800,31 @@ export const grammairePhraseBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_gram_sujet_verbe_open_1",
+    id: "ce2_gram_sujet_verbe_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "grammaire_phrase",
     microId: "ce2_gram_sujet_verbe",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis la question que tu poses à la phrase.",
-    tags: ["ce2", "grammaire", "sujet-verbe", "ouverte"],
+    hint: "Il y a une question à poser à la phrase. Laquelle ?",
+    tags: ["ce2", "grammaire", "sujet-verbe", "methode"],
     generate: () => {
       const s = randomChoice(SCENES);
+      const bonne = `Je pose la question « Qui est-ce qui ${s.verbe} ? » à la phrase.`;
       return {
-        text: `« ${s.declarative} »\n\nQui fait l'action, et comment l'as-tu trouvé ? Explique.`,
-        format: "open" as const,
-        expected: [s.sujet.toLowerCase(), "qui est-ce qui", "qui fait", "question"],
-        comparator: "contains_keyword" as const,
+        text: `« ${s.declarative} »\n\nComment trouves-tu qui fait l'action ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : le sujet n'est pas toujours en tête de phrase.
+          "Je prends le premier mot de la phrase : c'est toujours le sujet.",
+          // La voisine : après le verbe, c'est le complément.
+          "Je prends le groupe placé juste après le verbe.",
+          "Je prends le mot le plus long de la phrase.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Le groupe sujet est celui qui fait l'action ; c'est lui qui commande la terminaison du verbe.",
           `Pose la question « Qui est-ce qui ${s.verbe} ? » à la phrase.`,
@@ -884,17 +905,26 @@ export const grammairePhraseBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce2_gram_complements_open_1",
+    id: "ce2_gram_complements_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "grammaire_phrase",
     microId: "ce2_gram_complements",
     difficulty: 3,
     theme: "neutral",
-    text: "« Les pêcheurs réparent le filet. »\n\nDécoupe cette phrase en trois morceaux et dis à quoi sert chacun.",
-    format: "open",
-    expected: ["sujet", "verbe", "complète", "complete", "complément", "complement", "filet"],
-    comparator: "contains_keyword",
+    text: "« Les pêcheurs réparent le filet. »\n\nComment découpes-tu cette phrase en trois morceaux ?",
+    format: "qcm",
+    choices: [
+      "Je pose trois questions dans l'ordre : qui est-ce qui ? que fait-il ? et quoi ? — Les pêcheurs | réparent | le filet.",
+      // L'erreur réelle : découper des mots au lieu de découper des groupes.
+      "Je coupe après chaque mot : chaque mot est un morceau.",
+      "Je coupe la phrase en trois parts de la même longueur.",
+      "Je coupe à l'endroit des virgules.",
+    ],
+    expected: [
+      "Je pose trois questions dans l'ordre : qui est-ce qui ? que fait-il ? et quoi ? — Les pêcheurs | réparent | le filet.",
+    ],
+    comparator: "mcq_exact",
     hint: "Qui ? Que fait-il ? Sur quoi ?",
     explanation: exp(
       "Une phrase se découpe en groupes : le groupe sujet, le verbe, et ce qui complète le verbe.",
@@ -902,7 +932,7 @@ export const grammairePhraseBank: TutorBankItemV4[] = [
       "Les pêcheurs | réparent | le filet. Le premier dit qui, le deuxième dit l'action, le troisième dit sur quoi elle porte.",
       "« Les pêcheurs » est le sujet, « réparent » le verbe, « le filet » complète le verbe.",
     ),
-    tags: ["ce2", "grammaire", "complements", "methode", "ouverte"],
+    tags: ["ce2", "grammaire", "complements", "methode", "qcm"],
   },
 
   /* =========================================================
@@ -967,22 +997,30 @@ export const grammairePhraseBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_gram_phrase_negative_open_1",
+    id: "ce2_gram_phrase_negative_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "grammaire_phrase",
     microId: "ce2_gram_phrase_negative",
     difficulty: 3,
     theme: "neutral",
-    hint: "À l'oral on en oublie souvent un des deux. Lequel ?",
-    tags: ["ce2", "grammaire", "negative", "ouverte"],
+    hint: "À l'oral on en oublie souvent un des deux. À l'écrit, il est obligatoire.",
+    tags: ["ce2", "grammaire", "negative", "methode"],
     generate: () => {
       const s = randomChoice(SCENES);
+      const bonne = `« ne » devant le verbe et « pas » derrière : les deux encadrent « ${s.verbe} ».`;
       return {
-        text: `« ${s.negative} »\n\nQuels sont les deux petits mots de la négation, et où se placent-ils ? Explique.`,
-        format: "open" as const,
-        expected: ["ne", "pas", "encadre", "autour", "avant", "après", "apres", "verbe"],
-        comparator: "contains_keyword" as const,
+        text: `« ${s.negative} »\n\nOù se placent les deux petits mots de la négation ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle, et elle vient de l'oral : on avale le « ne ».
+          "« pas » tout seul suffit : à l'oral, on ne dit jamais « ne ».",
+          "Tous les deux au début de la phrase.",
+          "Tous les deux à la fin, après le complément.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "La négation s'écrit toujours en deux morceaux : « ne » (ou « n' ») et « pas ».",
           "Repère le verbe, puis pose « ne » devant et « pas » derrière.",
@@ -1060,22 +1098,31 @@ export const grammairePhraseBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_gram_forme_exclamative_open_1",
+    id: "ce2_gram_forme_exclamative_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "grammaire_phrase",
     microId: "ce2_gram_forme_exclamative",
     difficulty: 3,
     theme: "neutral",
-    hint: "Commence par « Comme… » ou « Quel… », et n'oublie pas le point d'exclamation.",
-    tags: ["ce2", "grammaire", "exclamative", "ouverte"],
+    hint: "Un mot au début, un signe à la fin. Les majuscules ne servent à rien.",
+    tags: ["ce2", "grammaire", "exclamative", "methode"],
     generate: () => {
       const s = randomChoice(SCENES);
+      const bonne = `Je commence par « Comme », « Que » ou « Quel », et je termine par un point d'exclamation : « ${s.exclamative} »`;
       return {
-        text: `« ${s.declarative} »\n\nRécris cette idée pour montrer que tu es impressionné.`,
-        format: "open" as const,
-        expected: ["!", "comme", "que", "quel"],
-        comparator: "contains_keyword" as const,
+        text: `« ${s.declarative} »\n\nComment récris-tu cette idée pour montrer que tu es impressionné ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : à neuf ans, le cri s'écrit en capitales.
+          "J'écris la phrase en majuscules.",
+          // La voisine : « Est-ce que » ouvre une question, pas une exclamation.
+          "J'ajoute « Est-ce que » au début.",
+          "Je répète le verbe deux fois.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "La forme exclamative dit une émotion en plus du fait.",
           "Commence par « Comme », « Que » ou « Quel », et termine par un point d'exclamation.",
@@ -1158,22 +1205,31 @@ export const grammairePhraseBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_gram_substituer_pronom_open_1",
+    id: "ce2_gram_substituer_pronom_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "grammaire_phrase",
     microId: "ce2_gram_substituer_pronom",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis ce que tu vérifies avant de choisir ton pronom.",
-    tags: ["ce2", "grammaire", "pronom", "ouverte"],
+    hint: "Deux questions, toujours les mêmes, toujours dans le même ordre.",
+    tags: ["ce2", "grammaire", "pronom", "methode"],
     generate: () => {
       const s = randomChoice(SCENES);
+      const bonne = `Deux choses, dans cet ordre : un seul ou plusieurs ? masculin ou féminin ? — ici, « ${s.pronom} ».`;
       return {
-        text: `Tu veux remplacer « ${s.sujet} » par un pronom.\n\nQue dois-tu vérifier avant de choisir ? Explique.`,
-        format: "open" as const,
-        expected: ["genre", "nombre", "masculin", "féminin", "feminin", "pluriel", "singulier", "plusieurs"],
-        comparator: "contains_keyword" as const,
+        text: `Tu veux remplacer « ${s.sujet} » par un pronom.\n\nQue vérifies-tu avant de choisir ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : « il » par défaut, sans regarder le groupe.
+          "Rien : je prends « il », c'est le pronom le plus courant.",
+          // La voisine : le temps du verbe regarde la conjugaison, pas le pronom.
+          "Je vérifie le temps du verbe.",
+          "Je vérifie la longueur du groupe : plus il est long, plus le pronom est court.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Le pronom garde le genre et le nombre du groupe qu'il remplace.",
           "Deux questions, toujours dans cet ordre : un seul ou plusieurs ? masculin ou féminin ?",
@@ -1254,22 +1310,30 @@ export const grammairePhraseBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_gram_ponctuation_fin_open_1",
+    id: "ce2_gram_ponctuation_fin_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "grammaire_phrase",
     microId: "ce2_gram_ponctuation_fin",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis à quoi sert ce signe-là, pas seulement son nom.",
-    tags: ["ce2", "grammaire", "ponctuation", "ouverte"],
+    hint: "Demande-toi si quelqu'un doit répondre après la phrase.",
+    tags: ["ce2", "grammaire", "ponctuation", "methode"],
     generate: () => {
       const s = randomChoice(SCENES);
+      const bonne = "Parce qu'elle attend une réponse : quelqu'un doit dire quelque chose après.";
       return {
-        text: `« ${s.interrogative} »\n\nPourquoi cette phrase se termine-t-elle par « ? » et non par « . » ? Explique.`,
-        format: "open" as const,
-        expected: ["question", "réponse", "reponse", "demande", "interroge"],
-        comparator: "contains_keyword" as const,
+        text: `« ${s.interrogative} »\n\nPourquoi cette phrase se termine-t-elle par « ? » et non par « . » ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // L'erreur réelle : le point d'interrogation confondu avec le ton.
+          "Parce qu'on la dit plus fort.",
+          "Parce qu'elle commence par un mot interrogatif, et c'est cela seul qui compte.",
+          "Parce que le point d'interrogation se met à la fin des phrases importantes.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Le point d'interrogation annonce qu'on attend une réponse.",
           "Demande-toi si quelqu'un doit répondre après la phrase.",
@@ -1375,7 +1439,7 @@ export const grammairePhraseBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_gram_discours_rapporte_open_1",
+    id: "ce2_gram_discours_rapporte_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "grammaire_phrase",
@@ -1383,14 +1447,22 @@ export const grammairePhraseBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Deux signes, et chacun a son rôle.",
-    tags: ["ce2", "grammaire", "discours-rapporte", "ouverte"],
+    tags: ["ce2", "grammaire", "discours-rapporte", "methode"],
     generate: () => {
       const d = randomChoice(DIALOGUES);
+      const bonne = "Les deux points annoncent que quelqu'un va parler ; les guillemets encadrent ses paroles exactes.";
       return {
-        text: `« ${d.phrase} »\n\nÀ quoi servent les deux points et les guillemets dans cette phrase ? Explique.`,
-        format: "open" as const,
-        expected: ["annonce", "encadre", "paroles", "parle", "dit", "guillemets", "deux points"],
-        comparator: "contains_keyword" as const,
+        text: `« ${d.phrase} »\n\nÀ quoi servent les deux points et les guillemets ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // La voisine : ces deux emplois existent — mais ailleurs, pas ici.
+          "Les deux points annoncent une liste, et les guillemets un mot étranger.",
+          "Les deux points marquent une pause, et les guillemets montrent un mot important.",
+          "Les deux points remplacent le verbe, et les guillemets remplacent le point.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Les deux points annoncent que quelqu'un va parler ; les guillemets encadrent ses paroles exactes.",
           "Repère qui parle avant les deux points, puis ce qui est dit entre les guillemets.",
@@ -1485,22 +1557,32 @@ export const grammairePhraseBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_gram_defi_open_1",
+    id: "ce2_gram_defi_meth_1",
     niveau: "ce2",
     matiere: "francais",
     notionId: "grammaire_phrase",
     microId: "ce2_gram_defi",
     difficulty: 3,
     theme: "neutral",
-    hint: "Découpe d'abord, étiquette ensuite.",
-    tags: ["ce2", "grammaire", "defi", "ouverte"],
+    // Le cran de plus : deux plans à lire sur la même phrase — ses groupes et
+    // sa forme. Le piège le plus fin prétend qu'il faut choisir entre les deux.
+    hint: "Découpe d'abord, étiquette ensuite. Les deux tiennent dans la même phrase.",
+    tags: ["ce2", "grammaire", "defi", "methode"],
     generate: () => {
       const s = randomChoice(SCENES);
+      const bonne = `Je pose « Qui est-ce qui ${s.verbe} ? » pour le sujet, puis je cherche les deux petits mots autour du verbe pour la forme.`;
       return {
-        text: `« ${s.negative} »\n\nQui fait l'action ? Et qu'est-ce qui montre que la phrase est à la forme négative ? Explique.`,
-        format: "open" as const,
-        expected: [s.sujet.toLowerCase(), "ne", "pas", "négative", "negative"],
-        comparator: "contains_keyword" as const,
+        text: `« ${s.negative} »\n\nOn te demande QUI fait l'action ET à quelle forme est la phrase. Comment fais-tu ?`,
+        format: "qcm" as const,
+        choices: [
+          bonne,
+          // Le piège fin : les deux plans coexistent, on n'a pas à choisir.
+          "Je réponds pour l'un ou pour l'autre : on ne peut pas voir les deux dans la même phrase.",
+          "Je regarde le point final : il donne les deux à la fois.",
+          "Je prends le premier groupe pour le sujet, et le dernier mot pour la forme.",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact" as const,
         explanation: exp(
           "Une phrase se lit sur deux plans : ses groupes (qui fait quoi) et sa forme (affirmative ou négative).",
           `Pose « Qui est-ce qui ${s.verbe} ? » pour le sujet, puis cherche les deux petits mots autour du verbe.`,
