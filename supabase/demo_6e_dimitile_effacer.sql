@@ -17,6 +17,26 @@
 -- et lire ce qu'ils renvoient : rien d'autre que des codes 6ETEST-NN ne doit
 -- apparaître. La suppression, elle, ne se rattrape pas.
 
+-- ⚠️⚠️ L'ÉTABLISSEMENT FANTÔME — À NETTOYER TOUT DE SUITE, sans attendre la
+-- rentrée (constaté le 11/08/2026). Le script de peuplement a été joué une
+-- première fois AVANT que le code établissement n'y soit écrit : il a donc
+-- créé 30 comptes et 15 résultats sous le code littéral
+-- « REMPLACER-PAR-LE-CODE-DIMITILE ». Ils n'appartiennent à personne, mais ils
+-- comptent dans les KPI du tableau de bord admin et polluent son sélecteur de
+-- périmètre. C'est exactement le cas contre lequel le script mettait en garde.
+--
+-- Vérifier :
+--   select code_etablissement, count(*) from public.acces_etablissement
+--   where code_etablissement = 'REMPLACER-PAR-LE-CODE-DIMITILE' group by 1;
+--
+-- Puis supprimer (les résultats d'abord) :
+--
+-- delete from public.resultats_evaluation_nationale
+-- where code_etablissement = 'REMPLACER-PAR-LE-CODE-DIMITILE';
+--
+-- delete from public.acces_etablissement
+-- where code_etablissement = 'REMPLACER-PAR-LE-CODE-DIMITILE';
+
 -- ── 1. CE QUI VA ÊTRE SUPPRIMÉ ───────────────────────────────────────────────
 select code_etablissement, code_utilisateur, nom, classe
 from public.acces_etablissement
