@@ -772,12 +772,32 @@ export default function EntreeMatrice({
                 survie hors du CP, du CE1 et du CE2 : une pastille qui ne mène
                 à rien d'utilisable est pire que pas de pastille.
 
-                ⚠️ Elle exige un compte. Un élève non connecté tombera sur le
-                bouton de connexion, pas sur une erreur. */}
+                ⭐ ET LE PARENT (Frédéric, 12/08 : « essentielle pour aider son
+                enfant »). C'est même le geste le plus naturel des trois : le
+                parent a le cahier sous les yeux le soir, il ne comprend pas
+                toujours la leçon, et il ne peut pas inventer des exercices
+                dessus. Lui, il n'a pas besoin qu'on lui dise sa classe.
+
+                ⚠️ POUR UN ÉLÈVE, `profil` EST SA CLASSE — elle vaut `null`
+                tant qu'il ne l'a pas choisie, et la pastille n'apparaît donc
+                qu'après. C'est déjà le cas de « Guide de survie »
+                (`guidesPour` renvoie une liste vide sans classe) : on ne
+                propose pas au hasard un outil dont on ignore s'il est de son
+                âge.
+
+                ⚠️ Elle exige un compte. Un visiteur non connecté tombera sur
+                le bouton de connexion, pas sur une erreur. */}
             {profil &&
-              ["6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"].includes(
-                profil,
-              ) && (
+              [
+                "6e",
+                "5e",
+                "4e",
+                "3e",
+                "seconde",
+                "premiere",
+                "terminale",
+                "parent",
+              ].includes(profil) && (
                 <Link
                   href="/photo-cours?from=ia"
                   prefetch={false}
