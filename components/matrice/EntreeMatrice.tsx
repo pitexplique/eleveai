@@ -185,19 +185,21 @@ export default function EntreeMatrice({
   const classeConnue = useMemo<ProfilId | null>(() => {
     const c = eleve?.classe;
     if (!c) return null;
-    return (CLASSES.find((p) => p.id === c)?.id as ProfilId | undefined) ?? null;
+    // ⚠️ DEUX VOCABULAIRES POUR LA MÊME CLASSE. `acces_etablissement` dit
+    // « premiere-spe » et « terminale-spe » (le niveau ET la spécialité dans
+    // un seul champ) ; les pastilles disent « premiere » et « terminale », qui
+    // sont des niveaux. Sans ce raccord, un lycéen n'aurait RIEN de
+    // présélectionné — et en silence, puisqu'une classe introuvable vaut null.
+    const id = c.replace(/-spe$/, "");
+    return (CLASSES.find((p) => p.id === id)?.id as ProfilId | undefined) ?? null;
   }, [eleve?.classe]);
 
   const [role, setRole] = useState<RoleId | null>(null);
   const [classe, setClasse] = useState<ProfilId | null>(null);
 
-  // La session arrive après le premier rendu (localStorage, puis /api/ma-classe
-  // qui la rafraîchit). On n'écrase jamais un choix déjà fait à l'écran.
-  useEffect(() => {
-    if (!classeConnue) return;
-    setRole((r) => r ?? "eleve");
-    setClasse((c) => c ?? classeConnue);
-  }, [classeConnue]);
+  // Un clic fait DANS CETTE VISITE : il gagne sur tout le reste, y compris sur
+  // le compte. Un élève de 5e a le droit d'aller regarder la 3e.
+  const choixManuel = useRef(false);
 
   const profil: ProfilId | null = role === "eleve" ? classe : role;
 
@@ -457,6 +459,7 @@ export default function EntreeMatrice({
   );
 
   function choisirRole(id: RoleId) {
+    choixManuel.current = true;
     setRole(id);
     setDemandeProfil(false);
     setMatiereChoisie(null);
@@ -481,7 +484,34 @@ export default function EntreeMatrice({
     champ.current?.focus();
   }
 
+  // LE COMPTE GAGNE SUR LE PROFIL MÉMORISÉ (12/08/2026).
+  //
+  // L'effet de montage ci-dessus restaure `CLE_PROFIL` — un clic d'une visite
+  // passée. Arthur, passé en 5e le matin même, s'affichait donc en CP sur
+  // l'accueil parce qu'un « CP » traînait dans son localStorage, alors que son
+  // tableau de bord disait bien 5e. Un souvenir de clic ne peut pas primer sur
+  // ce que dit le compte.
+  //
+  // Deux raisons de ne pas se contenter de `setClasse` :
+  //   • l'effet de montage a déjà calculé un RÉSULTAT pour le CP — changer la
+  //     pastille sans relancer laisserait les portes du CP sous la barre ;
+  //   • le CP resterait écrit dans localStorage et reviendrait à la visite
+  //     suivante. On réécrit la clé.
+  //
+  // `choixManuel` protège le seul cas où l'écran doit gagner : un clic fait
+  // pendant cette visite. La session arrive tard (localStorage, puis
+  // /api/ma-classe) — sans ce garde-fou, elle écraserait un choix délibéré.
+  useEffect(() => {
+    if (!classeConnue || choixManuel.current) return;
+    if (classe === classeConnue && role === "eleve") return;
+    setRole("eleve");
+    setClasse(classeConnue);
+    memoriser(classeConnue);
+    setResultat(chercher({ quiEsTu: classeConnue, question: "", chip: null }));
+  }, [classeConnue, classe, role, memoriser]);
+
   function choisirClasse(id: ProfilId) {
+    choixManuel.current = true;
     setClasse(id);
     setDemandeProfil(false);
     setMatiereChoisie(null);
