@@ -8,6 +8,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { verifySessionToken } from "@/lib/server/session";
 import { computeBulletin } from "@/lib/bulletin/computeBulletin";
+import type { Bulletin } from "@/lib/bulletin/types";
 
 export const dynamic = "force-dynamic";
 
@@ -36,7 +37,21 @@ export async function GET(req: Request) {
       .eq("code_utilisateur", session.code_utilisateur)
       .maybeSingle();
     if (data?.data) {
-      return NextResponse.json({ ok: true, bulletin: data.data });
+      // ⚠️ LE SNAPSHOT FIGE LA CLASSE DU JOUR OÙ IL A ÉTÉ CALCULÉ.
+      // Il n'est réécrit qu'à la sauvegarde d'un résultat : un élève passé en
+      // 5e à la rentrée garderait donc « 6e » en tête de son bulletin jusqu'à
+      // son premier exercice de l'année — soit précisément le moment où il
+      // ouvre son tableau de bord pour la première fois. Constaté le 12/08 sur
+      // Arthur (6C19), snapshot du 4 juin.
+      //
+      // Les CHIFFRES du snapshot restent justes : ils portent sur des
+      // exercices réellement faits en 6e. Seul l'en-tête doit dire qui est
+      // l'élève AUJOURD'HUI — et ça, c'est la session qui le sait.
+      const snapshot = data.data as Bulletin;
+      return NextResponse.json({
+        ok: true,
+        bulletin: { ...snapshot, classe: session.classe ?? snapshot.classe },
+      });
     }
   } catch {
     // table absente / non lisible : on bascule sur le calcul à la volée.
