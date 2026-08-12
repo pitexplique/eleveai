@@ -385,6 +385,33 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       { id: `${prefix}_cult_voyage_poesie`, label: "Voyager en poésie : « Du monde entier au cœur du monde »", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
       { id: `${prefix}_cult_theatre`, label: "Expérimenter et jouer au théâtre : la société sens dessus dessous", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
       { id: `${prefix}_cult_plaire_instruire`, label: "Imaginer, sentir, raisonner : des histoires pour plaire et instruire", notionId: "culture_litteraire", prerequis: [`${prefix}_cult_heros`] },
+
+      /* ── VOCABULAIRE ET ORTHOGRAPHE LEXICALE ────────────────────────────────
+         Cinq objectifs et seize attendus au BO ; le coach en avait cinq micros
+         génériques. On n'ajoute ici que ce qui n'était nulle part — les
+         registres restent tenus par `_discours_registres`. */
+      // « Connaitre le sens des préfixes et suffixes les plus fréquents. »
+      { id: `${prefix}_voc_prefixe_suffixe`, label: "Connaitre le sens des préfixes et des suffixes fréquents", notionId: "vocabulaire", prerequis: [`${prefix}_voc_formation`] },
+      // « Appréhender la dimension historique des mots (étymologie) en
+      //   maitrisant quelques éléments latins, grecs ou empruntés. »
+      { id: `${prefix}_voc_etymologie`, label: "Reconnaitre un élément latin ou grec dans un mot", notionId: "vocabulaire", prerequis: [`${prefix}_voc_prefixe_suffixe`] },
+      // « Comprendre le fonctionnement du néologisme (de forme et de sens). »
+      { id: `${prefix}_voc_neologisme`, label: "Comprendre comment un mot nouveau entre dans la langue", notionId: "vocabulaire", prerequis: [`${prefix}_voc_prefixe_suffixe`] },
+      // « Comprendre le principe de la dérivation des mots et son incidence sur
+      //   l'orthographe. »
+      { id: `${prefix}_voc_derivation_orthographe`, label: "Trouver la lettre muette par un mot de la même famille", notionId: "vocabulaire", prerequis: [`${prefix}_voc_prefixe_suffixe`] },
+      // « Utiliser les mots en exploitant les variations de sens. »
+      { id: `${prefix}_voc_variations_sens`, label: "Choisir le sens d'un mot selon la phrase où il apparait", notionId: "vocabulaire", prerequis: [`${prefix}_voc_contexte`] },
+      // « Maitriser l'usage du dictionnaire de langue en version papier et
+      //   numérique. »
+      { id: `${prefix}_voc_dictionnaire`, label: "Lire un article de dictionnaire, sur papier comme à l'écran", notionId: "vocabulaire", prerequis: [`${prefix}_voc_contexte`] },
+
+      /* ── « Analyser et employer des paroles rapportées » ─────────────────────
+         Deux attendus en 5e : « Identifier des paroles rapportées aux discours
+         direct et indirect » et « Insérer des paroles au discours direct dans
+         un texte ». Une seule micro générique les portait. */
+      { id: `${prefix}_discours_direct_indirect`, label: "Distinguer le discours direct du discours indirect", notionId: "analyse_discours", prerequis: [`${prefix}_discours_rapportees`] },
+      { id: `${prefix}_discours_inserer`, label: "Insérer des paroles au discours direct et les ponctuer", notionId: "analyse_discours", prerequis: [`${prefix}_discours_direct_indirect`] },
     );
   }
 

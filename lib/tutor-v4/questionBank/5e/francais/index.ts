@@ -19,6 +19,9 @@ import { conjugaison5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/conju
 // Les QUATRE entrées de culture littéraire que le BO nomme, sous la perspective
 // annuelle « Éprouver, expérimenter ». Aucune n'existait.
 import { cultureLitteraire5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/culture-litteraire.bank";
+// Vocabulaire (étymologie, néologisme, dérivation, dictionnaire) et paroles
+// rapportées : seize attendus du BO, cinq micros génériques dans le coach.
+import { vocabulaireDiscours5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/vocabulaire-discours.bank";
 
 // Banque du coach = gabarits générés (variété) + couche "fixed" imprimable
 // (≥5 QCM fixes par notion). La couche "fixed" enrichit le coach ET sert de
@@ -31,6 +34,7 @@ export const francais5eQuestionBank: TutorBankItemV4[] = [
   ...orthographeGrammaticale5eBank,
   ...conjugaison5eBank,
   ...cultureLitteraire5eBank,
+  ...vocabulaireDiscours5eBank,
 ];
 
 export function getFrancais5eQuestionBank(args?: {
