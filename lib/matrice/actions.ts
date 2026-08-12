@@ -77,11 +77,17 @@ export type ActionProfil = {
 //   — « Préparer une progression » : les 431 notions du programme portent
 //     désormais leurs PRÉREQUIS (notions.generated.ts, régénéré le 07/08) —
 //     de quoi proposer un ordre, pas seulement une liste.
-// ⭐ LES QUATRE ACTIONS DU PROFESSEUR, DANS L'ORDRE DICTÉ PAR FRÉDÉRIC (08/08) :
+// ⭐ LES ACTIONS DU PROFESSEUR, DANS L'ORDRE DICTÉ PAR FRÉDÉRIC (08/08, puis
+// 12/08 pour la troisième) :
 //   1. Coach — « le prof se met à la place de l'élève » ;
 //   2. Évaluation — c'est le PARCOURS ;
-//   3. Espace Profs ;
-//   4. Prompt pédagogique.
+//   3. Photographier un cours ;
+//   4. Espace Profs ;
+//   5. Prompt pédagogique.
+//
+// ⚠️ ELLES SONT CINQ DEPUIS LE 12/08, et l'en-tête de ce fichier dit « quatre
+// et trois » parce qu'un menu qui déborde ne se lit plus. La règle tient
+// toujours : cinq est le plafond, pas une nouvelle habitude.
 //
 // Ce qui change par rapport à la veille : les trois premières menaient à des
 // pages approchantes faute de mieux (`/explorer`, `/programme/6e`,
@@ -130,6 +136,29 @@ const PROF: ActionProfil[] = [
     href: "/parcours",
     aide: "Une évaluation toute faite sur toute l'année, ou un devoir maison — bilan noté",
     intention: "tester",
+  },
+  {
+    // ⭐ TROISIÈME POSITION, demandée par Frédéric le 12/08 — le jour même où
+    // la fonction est née. Ce n'est pas une place d'attente : elle passe devant
+    // l'Espace Profs et devant le prompt pédagogique.
+    //
+    // Elle le mérite parce qu'elle répond au reproche n°1 fait à tout soutien
+    // en ligne — « ce n'est pas ce qu'on fait en classe ». Les quatre autres
+    // actions donnent au professeur ce que NOUS avons écrit ; celle-ci part de
+    // ce que LUI a écrit au tableau.
+    //
+    // ⚠️ ELLE EST EN ESSAI. La page est en noindex et n'a jamais tourné sur une
+    // vraie photo de cahier manuscrit. Elle entre ici pour qu'on sache enfin
+    // qui s'en sert (le bloc violet du dashboard admin le dira) — pas parce
+    // qu'elle a fait ses preuves.
+    //
+    // ⚠️ Elle exige un compte : la matrice, elle, s'ouvre à qui déclare être
+    // professeur sans être connecté. Ces gens-là verront « Connectez-vous pour
+    // photographier un cours » — une invitation, pas une erreur.
+    label: "Photographier un cours",
+    href: "/photo-cours",
+    aide: "Votre cours au tableau devient des exercices, dans vos notations",
+    intention: "enseigner",
   },
   {
     label: "Espace Profs",
