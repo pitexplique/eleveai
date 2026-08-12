@@ -13,6 +13,7 @@ import {
 } from "@/lib/tutor-v4/catalog";
 import FloatingCoach from "@/components/FloatingCoach";
 import BoiteAOutils from "@/components/BoiteAOutils";
+import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
 import { BookOpen, CirclePlay, Play } from "lucide-react";
 import { ficheHrefPourCoach } from "@/lib/fiches/registre";
@@ -201,13 +202,40 @@ export default function CoachIA() {
     matiere === "ia" ? "a1" :
     "6e";
   const classes = useMemo(() => getClassesForMatiere(matiere), [matiere]);
+
+  // LA CLASSE DE L'ÉLÈVE CONNECTÉ SERT DE DÉFAUT (12/08/2026).
+  //
+  // Le coach ne lisait que `?classe=`. Or les liens du tableau de bord et du
+  // header pointent vers `/coach-ia/maths` tout court : un élève de 5e
+  // atterrissait donc sur le repli — la 6e en maths, le CP en français — et
+  // devait re-choisir sa classe à chaque visite. Corriger les liens un par un
+  // n'aurait rien réglé : le prochain lien oublié rouvrait le trou.
+  //
+  // ORDRE DE PRIORITÉ. L'URL gagne toujours : un prof qui ouvre `?classe=3e`
+  // veut voir la 3e, même connecté. Vient ensuite la classe de l'élève
+  // connecté, puis le repli de la matière. `normalizeClasse` écarte au passage
+  // ce qui n'existe pas pour cette matière — un élève de 5e sur le coach
+  // d'anglais retombe sur `a1`, les niveaux y étant CECRL.
+  const { eleve } = useEleve();
+  const classeEleve = eleve?.classe ?? null;
+
   const [classe, setClasse] = useState<Classe>(() =>
-    normalizeClasse(searchParams.get("classe"), classes, defaultClasse)
+    normalizeClasse(
+      searchParams.get("classe") ?? classeEleve,
+      classes,
+      defaultClasse
+    )
   );
 
   useEffect(() => {
-    setClasse(normalizeClasse(searchParams.get("classe"), classes, defaultClasse));
-  }, [searchParams, classes, defaultClasse]);
+    setClasse(
+      normalizeClasse(
+        searchParams.get("classe") ?? classeEleve,
+        classes,
+        defaultClasse
+      )
+    );
+  }, [searchParams, classes, defaultClasse, classeEleve]);
 
   const notionOptions = getNotionOptions(classe, matiere);
   const notionMicroMap = getNotionMicroMap(classe, matiere);

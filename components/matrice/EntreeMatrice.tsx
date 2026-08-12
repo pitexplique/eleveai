@@ -44,6 +44,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { track } from "@vercel/analytics";
+import { useEleve } from "@/context/EleveContext";
 import { PROFILS, getProfil } from "@/lib/matrice/profils";
 import { exemplesPour } from "@/lib/matrice/exemples";
 import { CHIPS_VISIBLES, chipsDisponibles, composerChip, matieresDisponibles } from "@/lib/matrice/chips";
@@ -173,8 +174,31 @@ export default function EntreeMatrice({
   // classe, il n'y a pas de profil — et c'est une information, pas un trou à
   // combler par « 6e ». (L'ancien défaut technique « 6e » montrait le monde
   // d'un sixième à un lycéen avant le moindre clic.)
+  //
+  // ⭐ NUANCE AJOUTÉE LE 12/08/2026 : ne rien inventer ≠ ignorer ce qu'on sait.
+  // Un élève CONNECTÉ a déjà dit sa classe — elle est dans son compte. La lui
+  // redemander à chaque visite, c'est lui faire retaper une réponse qu'il a
+  // donnée. On pré-sélectionne donc SA classe, jamais un défaut : un visiteur
+  // anonyme continue de partir de null, et le lycéen ne voit toujours pas le
+  // monde d'un sixième avant son premier clic.
+  const { eleve } = useEleve();
+  const classeConnue = useMemo<ProfilId | null>(() => {
+    const c = eleve?.classe;
+    if (!c) return null;
+    return (CLASSES.find((p) => p.id === c)?.id as ProfilId | undefined) ?? null;
+  }, [eleve?.classe]);
+
   const [role, setRole] = useState<RoleId | null>(null);
   const [classe, setClasse] = useState<ProfilId | null>(null);
+
+  // La session arrive après le premier rendu (localStorage, puis /api/ma-classe
+  // qui la rafraîchit). On n'écrase jamais un choix déjà fait à l'écran.
+  useEffect(() => {
+    if (!classeConnue) return;
+    setRole((r) => r ?? "eleve");
+    setClasse((c) => c ?? classeConnue);
+  }, [classeConnue]);
+
   const profil: ProfilId | null = role === "eleve" ? classe : role;
 
   const [question, setQuestion] = useState("");
