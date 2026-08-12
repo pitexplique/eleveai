@@ -10,6 +10,8 @@
 // quand la lecture est bonne — c'est le prix d'une fiche dont il répond.
 
 import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEleve } from "@/context/EleveContext";
 import { compresserPhoto } from "@/lib/photo-cours/compresser";
 import { PRODUCTIONS, type LectureCours, type TypeProduction } from "@/lib/photo-cours/types";
@@ -18,6 +20,7 @@ type Etape = "photo" | "relecture" | "resultat";
 
 export default function PhotoCours() {
   const { eleve } = useEleve();
+  const chemin = usePathname();
 
   const [etape, setEtape] = useState<Etape>("photo");
   const [apercu, setApercu] = useState<string | null>(null);
@@ -37,9 +40,20 @@ export default function PhotoCours() {
   if (!eleve) {
     return (
       <Cadre>
-        <p className="text-sm text-slate-600">
-          Connectez-vous pour photographier un cours.
-        </p>
+        {/* ⭐ UN BOUTON, PAS UNE PHRASE (Frédéric, 12/08). « Connectez-vous
+            pour photographier un cours » demandait à la personne de trouver
+            elle-même où se connecter — dans le header, ou par le menu. Trois
+            gestes pour une invitation qui en demandait un.
+            ⚠️ `next` porte le chemin COURANT, pas /photo-cours en dur : la
+            brique est faite pour être posée ailleurs, et elle doit ramener là
+            où on était, pas là où elle est née. La page de connexion refuse
+            les destinations externes, donc un chemin interne est sûr. */}
+        <Link
+          href={`/auth/signin?next=${encodeURIComponent(chemin || "/photo-cours")}`}
+          className="inline-block rounded-lg bg-slate-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-900"
+        >
+          Se connecter pour photographier un cours
+        </Link>
       </Cadre>
     );
   }
