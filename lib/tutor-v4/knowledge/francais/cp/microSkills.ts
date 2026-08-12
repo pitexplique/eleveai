@@ -16,8 +16,25 @@
 //
 // 📅 Jalons du BO, que le coach ne sait pas encore utiliser : 12 à 15 CGP en
 // fin de période 1, 25 à 30 en milieu d'année ; dictée de phrases à partir de
-// la période 2 ; écrits de 1 à 5 lignes à partir de la période 2 ; 30 mots par
-// minute sans préparation en fin d'année, 50 après préparation.
+// la période 2 ; écrits de 1 à 5 lignes à partir de la période 2.
+//
+// Relu de nouveau le 12/08/2026, rubrique « Devenir lecteur ». Le BO lui donne
+// CINQ objectifs ; le coach n'en couvrait que deux — reconnaitre des types de
+// personnages, et différencier le narratif de l'informatif. Manquaient les
+// trois autres, qui sont ceux du PARCOURS DE LECTEUR : « Lire 5 à 10 œuvres
+// complètes et variées issues du patrimoine et de la littérature de jeunesse
+// (albums, romans, contes, fables, poèmes, pièces de théâtre et
+// documentaires) », « Aller vers les livres et être capable d'en choisir à
+// titre personnel », « Relier ses lectures à son expérience personnelle, être
+// en mesure d'établir des liens entre ses différentes lectures (mise en
+// réseau) », « Fréquenter régulièrement des lieux de lecture et se familiariser
+// avec eux, rencontrer des acteurs du livre ».
+//
+// 📅 Le repère chiffré de fin d'année entre lui aussi : « Lire après
+// préparation un texte adapté à son niveau de lecture avec une vitesse de
+// 30 mots par minute au minimum sans préparation, 50 après préparation. »
+// Le CE1 avait son 70, le CE2 son 90, le CM1 110, le CM2 120, la 6e 130 : le CP
+// était le seul niveau sans repère.
 
 import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
@@ -58,6 +75,7 @@ export const microSkills: MicroSkillSource[] = [
   { id: "cp_voix_ponctuation",  label: "Repérer le point et la virgule pour lire une phrase",  notionId: "lecture_voix_haute", prerequis: ["cp_lec_phrase_simple"] },
   { id: "cp_voix_groupes_mots", label: "Lire les mots par groupes de sens",                    notionId: "lecture_voix_haute", prerequis: ["cp_voix_ponctuation"] },
   { id: "cp_voix_expressive",   label: "Faire parler un personnage en changeant sa voix",      notionId: "lecture_voix_haute", prerequis: ["cp_voix_groupes_mots"] },
+  { id: "cp_voix_30_mots",      label: "Lire 30 mots par minute, 50 après préparation",        notionId: "lecture_voix_haute", prerequis: ["cp_voix_groupes_mots"] },
 
   // ── Compréhension de textes ───────────────────────────────────────────────
   { id: "cp_comp_personnage",      label: "Identifier le personnage principal",              notionId: "comprehension_lecture", prerequis: ["cp_lec_phrase_simple"] },
@@ -72,6 +90,10 @@ export const microSkills: MicroSkillSource[] = [
   // ── Devenir lecteur ───────────────────────────────────────────────────────
   { id: "cp_lect_types_personnages",   label: "Reconnaître des types de personnages",            notionId: "devenir_lecteur", prerequis: ["cp_comp_personnage"] },
   { id: "cp_lect_narratif_informatif", label: "Distinguer un texte qui raconte d'un texte qui informe", notionId: "devenir_lecteur", prerequis: ["cp_comp_question_simple"] },
+  { id: "cp_lect_sortes_de_livres",    label: "Reconnaître les sortes de livres : album, conte, poème, documentaire…", notionId: "devenir_lecteur", prerequis: ["cp_lect_narratif_informatif"] },
+  { id: "cp_lect_choisir_livre",       label: "Choisir un livre selon ce qu'on aime",            notionId: "devenir_lecteur", prerequis: ["cp_lect_sortes_de_livres"] },
+  { id: "cp_lect_relier_lectures",     label: "Relier une lecture à une autre, ou à ce qu'on a vécu", notionId: "devenir_lecteur", prerequis: ["cp_lect_types_personnages"] },
+  { id: "cp_lect_lieux_lecture",       label: "Emprunter un livre et se repérer dans une bibliothèque", notionId: "devenir_lecteur", prerequis: ["cp_lect_choisir_livre"] },
 
   // ── Copie ─────────────────────────────────────────────────────────────────
   { id: "cp_copie_lettre",    label: "Copier des lettres en respectant leur forme",       notionId: "copie", prerequis: ["cp_gph_voyelles"] },

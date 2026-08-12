@@ -21,17 +21,27 @@
 //   compte sur un texte préparé » ; « il repère les groupes de mots qui doivent
 //   être lus ensemble en s'appuyant sur le sens et la chaine d'accords » ;
 //   « Amorcer une lecture expressive » ; « Après préparation, il modifie sa voix
-//   pour faire parler tel ou tel personnage. »
-//   DEVENIR LECTEUR — « Repérer et reconnaitre des types de personnages » ;
-//   « Il différencie le type narratif du type informatif » ; 5 à 10 œuvres
-//   complètes dans l'année.
+//   pour faire parler tel ou tel personnage » ; « Lire après préparation un
+//   texte adapté à son niveau de lecture avec une vitesse de 30 mots par minute
+//   au minimum sans préparation, 50 après préparation. »
+//   DEVENIR LECTEUR — les CINQ objectifs : « Lire 5 à 10 œuvres complètes et
+//   variées issues du patrimoine et de la littérature de jeunesse (albums,
+//   romans, contes, fables, poèmes, pièces de théâtre et documentaires) » ;
+//   « Repérer et reconnaitre des types de personnages » ; « Aller vers les
+//   livres et être capable d'en choisir à titre personnel » ; « Relier ses
+//   lectures à son expérience personnelle, être en mesure d'établir des liens
+//   entre ses différentes lectures (mise en réseau) » ; « Fréquenter
+//   régulièrement des lieux de lecture et se familiariser avec eux, rencontrer
+//   des acteurs du livre ». Plus l'exemple de réussite « Il différencie le type
+//   narratif du type informatif ».
 //
 // ⚠️ CE QUE LE COACH NE PEUT PAS FAIRE, et qu'il ne prétend pas faire : il
-// n'entend pas l'élève. La fluence se mesure au chronomètre par le professeur
-// — 30 mots par minute sans préparation, 50 après —, l'articulation s'écoute,
-// et le respect des règles d'échange se vit à plusieurs. Ce qui est ici, c'est
-// ce qui se RÉFLÉCHIT : où s'arrête la voix, quel mot enchaine deux idées,
-// pourquoi on ne parle pas pareil en classe et dans la cour.
+// n'entend pas l'élève. La fluence se mesure au chronomètre par le professeur,
+// l'articulation s'écoute, et le respect des règles d'échange se vit à
+// plusieurs. Ce qui est ici, c'est ce qui se RÉFLÉCHIT : où s'arrête la voix,
+// quel mot enchaine deux idées, pourquoi on ne parle pas pareil en classe et
+// dans la cour — et, pour le repère chiffré, savoir ce que veulent dire ces
+// 30 mots par minute et où l'on en est par rapport à eux.
 //
 // ⚠️ Tables typées à la main, jamais en `as const` : leurs champs se comparent
 // entre eux, et des types littéraux font casser le build à la compilation sans
@@ -72,6 +82,11 @@ type Registre = { readonly cour: string; readonly classe: string };
 type PhraseVoix = { readonly phrase: string; readonly signe: string; readonly voix: string };
 type Groupes = { readonly phrase: string; readonly decoupe: string; readonly faux: readonly string[] };
 type Personnage = { readonly type: string; readonly indices: string; readonly faux: readonly string[] };
+type SorteLivre = { readonly sorte: string; readonly indice: string };
+type Gout = { readonly prenom: string; readonly gout: string; readonly livre: string };
+type Paire = { readonly a: string; readonly b: string; readonly commun: string; readonly faux: readonly string[] };
+type Lieu = { readonly situation: string; readonly bon: string; readonly faux: readonly string[] };
+type Vitesse = { readonly prenom: string; readonly mots: number };
 
 const CONSIGNES: readonly Consigne[] = [
   { consigne: "Entoure le mot le plus long.", action: "on entoure un mot", faux: ["on souligne une phrase", "on recopie tout", "on colorie le dessin"] },
@@ -283,6 +298,28 @@ const GROUPES: readonly Groupes[] = [
     decoupe: "Une grosse pluie / tombe / sur le toit.",
     faux: ["Une / grosse pluie tombe sur / le toit.", "Une grosse / pluie tombe / sur le / toit.", "Une grosse pluie tombe sur le toit. (sans respirer)"],
   },
+  // Les quatre suivantes ajoutées le 12/08/2026 : la table en comptait dix, et
+  // `cp_voix_groupes_mots` n'avait donc que dix énoncés — sous le plancher.
+  {
+    phrase: "Le vieux pêcheur pousse sa barque à l'eau.",
+    decoupe: "Le vieux pêcheur / pousse sa barque / à l'eau.",
+    faux: ["Le / vieux pêcheur pousse sa / barque à l'eau.", "Le vieux / pêcheur pousse / sa barque à / l'eau.", "Le vieux pêcheur pousse sa barque à l'eau. (sans respirer)"],
+  },
+  {
+    phrase: "Ma maitresse raconte une histoire aux élèves.",
+    decoupe: "Ma maitresse / raconte une histoire / aux élèves.",
+    faux: ["Ma / maitresse raconte une / histoire aux élèves.", "Ma maitresse raconte / une / histoire aux / élèves.", "Ma maitresse raconte une histoire aux élèves. (sans respirer)"],
+  },
+  {
+    phrase: "Un petit crabe court sur le sable.",
+    decoupe: "Un petit crabe / court / sur le sable.",
+    faux: ["Un / petit crabe court sur / le sable.", "Un petit / crabe court / sur le / sable.", "Un petit crabe court sur le sable. (sans respirer)"],
+  },
+  {
+    phrase: "Les cannes poussent au bord de la route.",
+    decoupe: "Les cannes / poussent / au bord de la route.",
+    faux: ["Les / cannes poussent au / bord de la route.", "Les cannes poussent / au / bord de la / route.", "Les cannes poussent au bord de la route. (sans respirer)"],
+  },
 ];
 
 const PERSONNAGES: readonly Personnage[] = [
@@ -296,6 +333,14 @@ const PERSONNAGES: readonly Personnage[] = [
   { type: "le dragon", indices: "il crache du feu et garde un trésor dans une grotte", faux: ["le roi", "la fée", "le pêcheur"] },
   { type: "la princesse", indices: "elle vit dans un château et attend qu'on vienne la délivrer", faux: ["la sorcière", "l'ogre", "la maitresse"] },
   { type: "la grand-mère", indices: "elle raconte des histoires le soir et connait tous les secrets", faux: ["l'ogre", "le dragon", "le loup"] },
+  // Les quatre suivantes ajoutées le 12/08/2026 : la table en comptait dix, et
+  // `cp_lect_types_personnages` comme `cp_voix_expressive` s'y arrêtaient.
+  // ⚠️ Toute entrée ajoutée ici doit recevoir sa voix dans
+  // `cp_voix_expressive_tpl_1`, sinon la bonne réponse y devient `undefined`.
+  { type: "le pirate", indices: "il a un bateau, un drapeau noir, et il cherche un trésor", faux: ["le roi", "la fée", "la grand-mère"] },
+  { type: "le renard", indices: "il est rusé et il obtient ce qu'il veut par de belles paroles", faux: ["l'ogre", "le géant", "la princesse"] },
+  { type: "le lutin", indices: "il est tout petit, farceur, et il se cache dans la maison", faux: ["le géant", "le dragon", "le roi"] },
+  { type: "le chevalier", indices: "il porte une armure, il monte à cheval et il défend les plus faibles", faux: ["la sorcière", "l'ogre", "la grand-mère"] },
 ];
 
 const TEXTES_TYPE: readonly (readonly [string, string])[] = [
@@ -313,6 +358,244 @@ const TEXTES_TYPE: readonly (readonly [string, string])[] = [
   ["Le cari se prépare avec du curcuma, des oignons et de la tomate.", "un texte qui informe"],
   ["Léo grimpa sur le muret pour mieux voir passer le cortège.", "un texte qui raconte"],
   ["Le paille-en-queue est un oiseau blanc. Il niche dans les falaises de l'île.", "un texte qui informe"],
+];
+
+/* =============================================================================
+   LE PARCOURS DE LECTEUR — les trois objectifs du BO qui manquaient
+   ---------------------------------------------------------------------------
+   « Lire 5 à 10 œuvres complètes et variées issues du patrimoine et de la
+   littérature de jeunesse (albums, romans, contes, fables, poèmes, pièces de
+   théâtre et documentaires) » ; « Aller vers les livres et être capable d'en
+   choisir à titre personnel » ; « Relier ses lectures à son expérience
+   personnelle, être en mesure d'établir des liens entre ses différentes
+   lectures (mise en réseau) » ; « Fréquenter régulièrement des lieux de lecture
+   et se familiariser avec eux, rencontrer des acteurs du livre ».
+
+   ⚠️ ON N'INTERROGE JAMAIS UNE ŒUVRE PRÉCISE. Les livres sont choisis par le
+   professeur, et le coach n'a rien fait lire. Ce qui s'interroge, c'est ce qui
+   se transporte d'un livre à l'autre : la SORTE de livre, le geste de choisir,
+   le point commun entre deux histoires, le fonctionnement d'une bibliothèque.
+   Les personnages du patrimoine — le loup, l'ogre, la fée — sont pris comme le
+   fait déjà `PERSONNAGES` : tout enfant les a croisés, sans qu'aucun titre ne
+   soit exigé.
+   ========================================================================== */
+
+/** Les sept sortes que le BO énumère, deux indices chacune sauf le roman. */
+const SORTES_LIVRES: readonly SorteLivre[] = [
+  { sorte: "un album", indice: "il y a une grande image sur presque chaque page, et peu de texte" },
+  { sorte: "un album", indice: "les dessins racontent autant de choses que les mots" },
+  { sorte: "un conte", indice: "ça commence par « Il était une fois », et il y a une fée" },
+  { sorte: "un conte", indice: "un enfant part dans la forêt, rencontre un loup qui parle, et tout finit bien" },
+  { sorte: "une fable", indice: "des animaux parlent, l'histoire est très courte, et elle finit par une leçon" },
+  { sorte: "une fable", indice: "un renard et un corbeau discutent, et à la fin on apprend quelque chose sur les gens" },
+  { sorte: "un poème", indice: "les lignes sont courtes, on va à la ligne avant la fin de la phrase, et les mots riment" },
+  { sorte: "un poème", indice: "le texte est écrit en petits morceaux qu'on appelle des vers" },
+  { sorte: "une pièce de théâtre", indice: "avant chaque phrase, il y a le nom de celui qui la dit" },
+  { sorte: "une pièce de théâtre", indice: "c'est écrit pour être joué sur une scène, devant des gens" },
+  { sorte: "un documentaire", indice: "il y a des photos, des titres, et de vrais renseignements sur les volcans" },
+  { sorte: "un documentaire", indice: "on y apprend ce que mange un animal, pour de vrai" },
+  { sorte: "un roman", indice: "c'est une longue histoire, avec des chapitres, et presque pas d'images" },
+  { sorte: "un roman", indice: "on suit les mêmes personnages pendant plus de cent pages" },
+];
+
+const TOUTES_SORTES: readonly string[] = [
+  ...new Set(SORTES_LIVRES.map((s) => s.sorte)),
+];
+
+/** « Il est capable de choisir un livre en fonction de ses centres d'intérêt. » */
+const GOUTS: readonly Gout[] = [
+  { prenom: "Tom", gout: "veut savoir comment vivent les tortues", livre: "un documentaire sur les tortues" },
+  { prenom: "Léa", gout: "adore les histoires qui font un peu peur", livre: "un conte avec un ogre" },
+  { prenom: "Nina", gout: "veut apprendre à faire un gâteau", livre: "un livre de recettes" },
+  { prenom: "Malik", gout: "aime les histoires courtes où les animaux parlent", livre: "un livre de fables" },
+  { prenom: "Ravi", gout: "veut comprendre pourquoi le piton fume", livre: "un documentaire sur les volcans" },
+  { prenom: "Jade", gout: "aime les mots qui riment", livre: "un recueil de poèmes" },
+  { prenom: "Émile", gout: "veut une longue histoire pour tout l'été", livre: "un roman" },
+  { prenom: "Alix", gout: "aime regarder de grandes images en lisant", livre: "un album" },
+  { prenom: "Noé", gout: "veut jouer une histoire avec ses copains", livre: "une pièce de théâtre" },
+  { prenom: "Lina", gout: "veut savoir ce que mange un margouillat", livre: "un documentaire sur les animaux de l'île" },
+  { prenom: "Maya", gout: "veut connaitre le nom des étoiles", livre: "un documentaire sur le ciel" },
+  { prenom: "Sara", gout: "adore les histoires de bateaux et de pirates", livre: "un roman d'aventure" },
+  { prenom: "Yann", gout: "aime chercher qui a fait le coup", livre: "un roman policier" },
+  { prenom: "Anaïs", gout: "veut une histoire courte avant de dormir", livre: "un album" },
+];
+
+const TOUS_LIVRES: readonly string[] = [...new Set(GOUTS.map((g) => g.livre))];
+
+/** Mise en réseau : deux lectures, un point commun.
+ *
+ * ⚠️ Les trois pièges sont VRAIS D'UNE SEULE des deux histoires. C'est l'erreur
+ * réelle de l'enfant — il retient un détail de celle qu'il a préférée — et
+ * c'est ce qui oblige à relire les deux. Un piège pris ailleurs dans la table
+ * risquerait d'être vrai lui aussi : on ne réutilise jamais un `commun`. */
+const PAIRES: readonly Paire[] = [
+  {
+    a: "un loup tourne autour d'une maison et essaie d'entrer",
+    b: "un ogre cherche des enfants pour son diner",
+    commun: "le méchant veut attraper quelqu'un",
+    faux: ["il y a un loup dans les deux", "les deux se passent dans une maison", "les deux parlent d'un repas"],
+  },
+  {
+    a: "une petite fille traverse la forêt toute seule",
+    b: "un garçon part sur la mer tout seul dans une barque",
+    commun: "le héros part seul, et il a un peu peur",
+    faux: ["les deux se passent dans la forêt", "les deux parlent de la mer", "les deux ont une fille comme héros"],
+  },
+  {
+    a: "une fée exauce trois vœux",
+    b: "une lampe trouvée dans le sable réalise trois souhaits",
+    commun: "quelque chose de magique réalise trois souhaits",
+    faux: ["il y a une fée dans les deux", "les deux se passent au bord de la mer", "il y a une lampe dans les deux"],
+  },
+  {
+    a: "un renard flatte un corbeau pour lui prendre son fromage",
+    b: "un chat fait semblant d'être gentil pour attraper une souris",
+    commun: "le rusé trompe l'autre pour obtenir ce qu'il veut",
+    faux: ["il y a un oiseau dans les deux", "les deux parlent de fromage", "il y a un chat dans les deux"],
+  },
+  {
+    a: "un enfant perd son chien et le cherche dans tout le quartier",
+    b: "une fillette perd son doudou et retourne toute la maison",
+    commun: "on cherche partout quelque chose qu'on a perdu",
+    faux: ["les deux parlent d'un animal", "les deux se passent dans une maison", "les deux se passent dans la rue"],
+  },
+  {
+    a: "trois cochons construisent chacun leur maison",
+    b: "sept chevreaux se cachent chacun dans un coin",
+    commun: "ils sont plusieurs, et le dernier s'en sort le mieux",
+    faux: ["ils sont trois dans les deux", "les deux parlent de construire", "les deux parlent de se cacher"],
+  },
+  {
+    a: "un pêcheur remonte dans son filet un poisson qui parle",
+    b: "un bucheron s'arrête devant un arbre qui se met à parler",
+    commun: "un être de la nature se met à parler",
+    faux: ["les deux se passent au bord de l'eau", "les deux parlent d'un poisson", "les deux se passent dans la forêt"],
+  },
+  {
+    a: "un roi promet la moitié de son royaume à qui le sauvera",
+    b: "une reine promet un coffre d'or à qui retrouvera sa fille",
+    commun: "on promet une récompense à celui qui réussira",
+    faux: ["c'est un roi dans les deux", "les deux parlent d'or", "les deux parlent d'une fille perdue"],
+  },
+  {
+    a: "un enfant raconte que le vase s'est cassé tout seul",
+    b: "un berger crie au loup pour rire, et le jour du vrai loup, personne ne vient",
+    commun: "le mensonge finit par se retourner contre celui qui ment",
+    faux: ["il y a un loup dans les deux", "les deux se passent à la maison", "les deux parlent d'un objet cassé"],
+  },
+  {
+    a: "une souris ronge le filet où le lion est pris",
+    b: "une fourmi sauve une colombe tombée dans l'eau",
+    commun: "le plus petit sauve le plus grand",
+    faux: ["il y a un oiseau dans les deux", "les deux parlent d'un filet", "les deux se passent dans l'eau"],
+  },
+  {
+    a: "un enfant part de chez lui fâché, et revient le soir",
+    b: "un chat s'échappe par la fenêtre et retrouve sa maison après trois jours",
+    commun: "on part loin, et on finit par revenir chez soi",
+    faux: ["les deux parlent d'un animal", "les deux durent trois jours", "les deux parlent d'une dispute"],
+  },
+  {
+    a: "un géant fait trembler le sol quand il marche",
+    b: "un dragon crache du feu au-dessus du village",
+    commun: "une créature énorme fait peur à tout un pays",
+    faux: ["les deux crachent du feu", "les deux parlent d'un village", "les deux font trembler le sol"],
+  },
+];
+
+/** « Fréquenter des lieux de lecture… rencontrer des acteurs du livre. » */
+const LIEUX: readonly Lieu[] = [
+  {
+    situation: "Tu veux emprunter un livre à la bibliothèque de l'école.",
+    bon: "tu le fais enregistrer, et tu le rapportes à la date prévue",
+    faux: ["tu le mets dans ton sac sans rien dire", "tu le gardes toute l'année", "tu le prends pour un camarade qui n'est pas là"],
+  },
+  {
+    situation: "Tu ne trouves pas le livre que tu cherches.",
+    bon: "tu demandes à la personne qui s'occupe de la bibliothèque",
+    faux: ["tu abandonnes et tu repars", "tu prends n'importe quel livre", "tu sors tous les livres de l'étagère"],
+  },
+  {
+    situation: "Tu as fini le livre que tu avais emprunté.",
+    bon: "tu le rapportes, pour qu'un autre enfant puisse le lire",
+    faux: ["tu le gardes chez toi", "tu le ranges dans ton casier", "tu le prêtes à un copain sans le dire"],
+  },
+  {
+    situation: "Comment appelle-t-on la personne qui range les livres et te conseille à la bibliothèque ?",
+    bon: "le bibliothécaire",
+    faux: ["l'auteur", "l'illustrateur", "le libraire"],
+  },
+  {
+    situation: "Comment appelle-t-on celui qui a écrit l'histoire ?",
+    bon: "l'auteur",
+    faux: ["l'illustrateur", "le bibliothécaire", "le libraire"],
+  },
+  {
+    situation: "Comment appelle-t-on celui qui a fait les dessins du livre ?",
+    bon: "l'illustrateur",
+    faux: ["l'auteur", "le bibliothécaire", "le libraire"],
+  },
+  {
+    situation: "Comment appelle-t-on la personne qui vend des livres dans son magasin ?",
+    bon: "le libraire",
+    faux: ["le bibliothécaire", "l'auteur", "l'illustrateur"],
+  },
+  {
+    situation: "À la bibliothèque, les histoires ne sont pas rangées avec les documentaires. Pourquoi ?",
+    bon: "parce qu'on range par sortes de livres, pour les retrouver vite",
+    faux: ["parce que les documentaires sont plus grands", "parce qu'on ne peut pas les emprunter", "parce qu'ils coutent plus cher"],
+  },
+  {
+    situation: "Tu as taché la page d'un livre emprunté.",
+    bon: "tu le dis à la personne qui s'occupe des livres",
+    faux: ["tu arraches la page", "tu ne dis rien et tu le rapportes", "tu le caches au fond de l'étagère"],
+  },
+  {
+    situation: "Autour de toi, plusieurs enfants sont en train de lire.",
+    bon: "tu parles doucement pour ne pas les déranger",
+    faux: ["tu appelles ton copain de l'autre bout de la salle", "tu lis tout haut", "tu attends que tout le monde parte"],
+  },
+  {
+    situation: "Comment appelle-t-on la bibliothèque qui se trouve dans l'école ?",
+    bon: "la BCD",
+    faux: ["la médiathèque", "la librairie", "la salle informatique"],
+  },
+  {
+    situation: "Comment appelle-t-on le grand lieu de la ville où on emprunte des livres, des films et de la musique ?",
+    bon: "la médiathèque",
+    faux: ["la BCD", "la librairie", "la salle des maitres"],
+  },
+  {
+    situation: "Un auteur vient dans ta classe parler de son livre.",
+    bon: "tu prépares une question à lui poser",
+    faux: ["tu lui demandes de te donner un livre", "tu ne dis rien du tout", "tu lui racontes une autre histoire"],
+  },
+  {
+    situation: "Tu veux savoir de quoi parle un livre avant de l'emprunter.",
+    bon: "tu lis ce qui est écrit au dos, sur la quatrième de couverture",
+    faux: ["tu lis la dernière page", "tu regardes le prix", "tu comptes les pages"],
+  },
+];
+
+/** Le repère chiffré de fin de CP : 30 mots par minute sans préparation, 50
+ *  après préparation. Les nombres sont choisis pour tomber dans les trois cas —
+ *  en dessous de 30, entre 30 et 49, et au-delà de 50 — et la comparaison reste
+ *  celle du CP : deux nombres jusqu'à cent, rien à multiplier. */
+const VITESSES: readonly Vitesse[] = [
+  { prenom: "Tom", mots: 18 },
+  { prenom: "Léa", mots: 24 },
+  { prenom: "Nina", mots: 27 },
+  { prenom: "Malik", mots: 29 },
+  { prenom: "Ravi", mots: 31 },
+  { prenom: "Jade", mots: 34 },
+  { prenom: "Émile", mots: 38 },
+  { prenom: "Alix", mots: 42 },
+  { prenom: "Noé", mots: 45 },
+  { prenom: "Lina", mots: 49 },
+  { prenom: "Maya", mots: 52 },
+  { prenom: "Sara", mots: 56 },
+  { prenom: "Yann", mots: 61 },
+  { prenom: "Anaïs", mots: 68 },
 ];
 
 export const oralEtLecteurBank: TutorBankItemV4[] = [
@@ -798,6 +1081,10 @@ export const oralEtLecteurBank: TutorBankItemV4[] = [
         "le dragon": "une voix rauque",
         "la princesse": "une voix claire et polie",
         "la grand-mère": "une voix lente et tranquille",
+        "le pirate": "une voix rude, qui crie par-dessus le vent",
+        "le renard": "une voix douce et flatteuse",
+        "le lutin": "une petite voix rapide",
+        "le chevalier": "une voix droite, qui ne tremble pas",
       };
       const bonne = voix[p.type];
       const autres = shuffle(Object.values(voix).filter((v) => v !== bonne)).slice(0, 3);
@@ -909,5 +1196,305 @@ export const oralEtLecteurBank: TutorBankItemV4[] = [
       "On va chercher dans un documentaire sur les animaux.",
     ),
     tags: ["cp", "devenir-lecteur", "types-textes", "methode", "qcm"],
+  },
+
+  /* =========================================================
+     CP_VOIX_30_MOTS — le repère chiffré de fin d'année
+     « Lire après préparation un texte adapté à son niveau de lecture avec
+       une vitesse de 30 mots par minute au minimum sans préparation,
+       50 après préparation. »
+  ========================================================= */
+  {
+    kind: "template",
+    id: "cp_voix_30_mots_tpl_1",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "lecture_voix_haute",
+    microId: "cp_voix_30_mots",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compare les deux nombres, puis conclus. Les deux doivent aller ensemble.",
+    tags: ["cp", "voix-haute", "30-mots", "template"],
+    generate: () => {
+      const v = randomChoice(VITESSES);
+      const atteint = v.mots >= 30;
+      const bon = atteint
+        ? `oui, ${v.mots} est plus grand que 30`
+        : `non, ${v.mots} est plus petit que 30`;
+      return {
+        text: `En fin de CP, il faut lire au moins 30 mots par minute sans avoir préparé le texte.\n\n${v.prenom} lit ${v.mots} mots en une minute. L'objectif est-il atteint ?`,
+        format: "qcm" as const,
+        choices: shuffle([
+          `oui, ${v.mots} est plus grand que 30`,
+          `oui, ${v.mots} est plus petit que 30`,
+          `non, ${v.mots} est plus grand que 30`,
+          `non, ${v.mots} est plus petit que 30`,
+        ]),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "L'objectif de fin de CP est de trente mots par minute, lus correctement, sur un texte qu'on n'a pas préparé.",
+          "Compare d'abord les deux nombres, puis dis oui ou non. La réponse n'est juste que si les deux morceaux le sont.",
+          `${v.mots} est ${atteint ? "plus grand" : "plus petit"} que 30, donc l'objectif ${atteint ? "est atteint" : "n'est pas encore atteint"}.`,
+          bon.charAt(0).toUpperCase() + bon.slice(1) + ".",
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "cp_voix_30_mots_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "lecture_voix_haute",
+    microId: "cp_voix_30_mots",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Il y a deux objectifs, et l'un est plus haut que l'autre.",
+    tags: ["cp", "voix-haute", "30-mots", "preparation", "template"],
+    generate: () => {
+      const v = randomChoice(VITESSES);
+      const LES_DEUX = "les deux : les 30 mots sans préparation et les 50 après préparation";
+      const TRENTE = "seulement les 30 mots sans préparation";
+      const CINQUANTE = "seulement les 50 mots après préparation";
+      const AUCUN = "aucun des deux : il faut d'abord arriver à 30";
+      const bon = v.mots >= 50 ? LES_DEUX : v.mots >= 30 ? TRENTE : AUCUN;
+      return {
+        text: `En fin de CP, il faut lire 30 mots par minute sur un texte qu'on n'a pas préparé, et 50 sur un texte qu'on a préparé.\n\n${v.prenom} lit ${v.mots} mots en une minute. Quel objectif est atteint ?`,
+        format: "qcm" as const,
+        choices: shuffle([LES_DEUX, TRENTE, CINQUANTE, AUCUN]),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Le BO donne deux repères pour la fin du CP : 30 mots par minute sans préparation, 50 après préparation. Préparer un texte, c'est l'avoir déjà lu une ou deux fois.",
+          "Place le nombre par rapport à 30, puis par rapport à 50.",
+          v.mots >= 50
+            ? `${v.mots} dépasse 50, donc il dépasse aussi 30 : les deux objectifs sont atteints.`
+            : v.mots >= 30
+              ? `${v.mots} dépasse 30 mais pas 50 : seul le premier objectif est atteint. Passer 50 ne peut pas arriver avant de passer 30.`
+              : `${v.mots} n'atteint pas encore 30, donc aucun des deux. Cela vient en lisant tous les jours.`,
+          `${bon.charAt(0).toUpperCase()}${bon.slice(1)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "cp_voix_30_mots_fixed_1",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "lecture_voix_haute",
+    microId: "cp_voix_30_mots",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Tu lis 22 mots en une minute, et l'objectif de fin de CP est de 30.\n\nQue fais-tu pour progresser ?",
+    format: "qcm",
+    choices: [
+      "relire chaque jour un texte court à voix haute, jusqu'à ce qu'il vienne tout seul",
+      "lire le plus vite possible, même sans comprendre",
+      "sauter les mots difficiles pour gagner du temps",
+      "attendre le CE1 : ça viendra tout seul",
+    ],
+    expected: ["relire chaque jour un texte court à voix haute, jusqu'à ce qu'il vienne tout seul"],
+    comparator: "mcq_exact",
+    hint: "La vitesse vient de la répétition, pas de la précipitation.",
+    explanation: exp(
+      "Lire vite n'est pas le but : c'est ce qui arrive quand les mots ne demandent plus d'effort. Le BO dit « s'entrainer à lire des textes déchiffrables de manière à automatiser sa lecture ».",
+      "Prends un texte court, relis-le à voix haute chaque jour, jusqu'à ne plus avoir à déchiffrer.",
+      "Se dépêcher fait sauter des mots, et un texte dont on a sauté les mots ne veut plus rien dire. Sauter les mots difficiles, c'est justement laisser de côté ceux qui feraient progresser.",
+      "On relit chaque jour un texte court à voix haute, jusqu'à ce qu'il vienne tout seul.",
+    ),
+    tags: ["cp", "voix-haute", "30-mots", "methode", "qcm"],
+  },
+
+  /* =========================================================
+     CP_LECT_SORTES_DE_LIVRES — « 5 à 10 œuvres complètes et VARIÉES »
+  ========================================================= */
+  {
+    kind: "template",
+    id: "cp_lect_sortes_de_livres_tpl_1",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "cp_lect_sortes_de_livres",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Regarde la forme du livre, pas ce qu'il raconte.",
+    tags: ["cp", "devenir-lecteur", "sortes-de-livres", "template"],
+    generate: () => {
+      const s = randomChoice(SORTES_LIVRES);
+      return {
+        text: `Dans ce livre, ${s.indice}.\n\nQuelle sorte de livre est-ce ?`,
+        format: "qcm" as const,
+        choices: makeChoices(s.sorte, TOUTES_SORTES),
+        expected: [s.sorte],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Dans une année, on lit plusieurs sortes de livres : des albums, des contes, des fables, des poèmes, des pièces de théâtre, des documentaires et des romans. Chacune se reconnait à sa forme.",
+          "Ne regarde pas de quoi ça parle : regarde comment c'est fait, et à quoi ça sert.",
+          `${s.indice.charAt(0).toUpperCase()}${s.indice.slice(1)} : c'est ${s.sorte}.`,
+          `C'est ${s.sorte}.`,
+        ),
+      };
+    },
+  },
+
+  /* =========================================================
+     CP_LECT_CHOISIR_LIVRE — « aller vers les livres et en choisir à titre
+     personnel »
+  ========================================================= */
+  {
+    kind: "template",
+    id: "cp_lect_choisir_livre_tpl_1",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "cp_lect_choisir_livre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Pars de ce qu'il veut, pas du livre le plus joli.",
+    tags: ["cp", "devenir-lecteur", "choisir", "template"],
+    generate: () => {
+      const g = randomChoice(GOUTS);
+      return {
+        text: `${g.prenom} ${g.gout}.\n\nQuel livre lui faut-il ?`,
+        format: "qcm" as const,
+        choices: makeChoices(g.livre, TOUS_LIVRES),
+        expected: [g.livre],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Choisir un livre, ce n'est pas prendre celui qui est devant soi : c'est partir de ce qu'on a envie de savoir ou de vivre.",
+          "Dis d'abord ce que tu cherches, puis cherche le livre qui répond à cela.",
+          `${g.prenom} ${g.gout} : il lui faut ${g.livre}. Les autres sont de vrais livres, mais ils ne répondent pas à cette envie-là.`,
+          `Il lui faut ${g.livre}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "cp_lect_choisir_livre_fixed_1",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "cp_lect_choisir_livre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Tu es devant l'étagère et tu ne sais pas quoi prendre.\n\nQue fais-tu ?",
+    format: "qcm",
+    choices: [
+      "tu penses à ce qui t'intéresse, puis tu cherches un livre qui en parle",
+      "tu prends le plus mince pour finir vite",
+      "tu prends le même que ton voisin",
+      "tu prends celui qui est le plus près de ta main",
+    ],
+    expected: ["tu penses à ce qui t'intéresse, puis tu cherches un livre qui en parle"],
+    comparator: "mcq_exact",
+    hint: "Le choix commence dans ta tête, pas sur l'étagère.",
+    explanation: exp(
+      "Aller vers les livres, c'est apprendre à en choisir un pour soi — pas parce qu'il est là.",
+      "Commence par ce qui t'intéresse : les animaux, la mer, les histoires qui font peur, les blagues. Puis cherche ce qui en parle.",
+      "Prendre le plus mince, ou le même que le voisin, c'est laisser quelqu'un d'autre choisir à ta place — et le livre finit souvent inachevé.",
+      "On part de ce qui nous intéresse, puis on cherche un livre qui en parle.",
+    ),
+    tags: ["cp", "devenir-lecteur", "choisir", "methode", "qcm"],
+  },
+
+  /* =========================================================
+     CP_LECT_RELIER_LECTURES — la mise en réseau
+  ========================================================= */
+  {
+    kind: "template",
+    id: "cp_lect_relier_lectures_tpl_1",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "cp_lect_relier_lectures",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le point commun doit être vrai des DEUX histoires, pas d'une seule.",
+    tags: ["cp", "devenir-lecteur", "reseau", "template"],
+    generate: () => {
+      const p = randomChoice(PAIRES);
+      return {
+        text: `Tu as lu deux histoires.\n\nDans la première, ${p.a}.\nDans la seconde, ${p.b}.\n\nQu'est-ce qu'elles ont en commun ?`,
+        format: "qcm" as const,
+        choices: makeChoices(p.commun, p.faux),
+        expected: [p.commun],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Relier deux lectures, c'est trouver ce qui se retrouve dans les deux : le genre de personnage, ce qui lui arrive, ou la leçon.",
+          "Vérifie chaque proposition sur la première histoire, PUIS sur la seconde. Si elle n'est vraie que d'une seule, ce n'est pas un point commun.",
+          `Ici : ${p.commun}. Les autres propositions sont vraies d'une histoire seulement — c'est le piège, et c'est l'erreur qu'on fait quand on ne relit que celle qu'on a préférée.`,
+          `Elles ont ceci en commun : ${p.commun}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "fixed",
+    id: "cp_lect_relier_lectures_fixed_1",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "cp_lect_relier_lectures",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Tu viens de finir un livre.\n\nComment fais-tu pour le relier à ce que tu as déjà lu ?",
+    format: "qcm",
+    choices: [
+      "tu cherches ce qui ressemble à une autre histoire : le personnage, le lieu, ou ce qui arrive",
+      "tu regardes si les deux couvertures ont la même couleur",
+      "tu comptes les pages des deux livres",
+      "tu gardes seulement celui que tu as préféré",
+    ],
+    expected: ["tu cherches ce qui ressemble à une autre histoire : le personnage, le lieu, ou ce qui arrive"],
+    comparator: "mcq_exact",
+    hint: "On relie par ce qui est DANS l'histoire, pas par l'objet.",
+    explanation: exp(
+      "Les livres qu'on a lus ne restent pas chacun dans son coin : ils se répondent. C'est cela, se faire une mémoire de lecteur.",
+      "Après un livre, demande-toi : ce personnage, cet endroit, ce qui arrive à la fin — où l'ai-je déjà rencontré ?",
+      "La couleur de la couverture et le nombre de pages ne disent rien de l'histoire. Deux livres qui ne se ressemblent pas du tout peuvent raconter la même chose.",
+      "On cherche ce qui ressemble à une autre histoire : le personnage, le lieu, ou ce qui arrive.",
+    ),
+    tags: ["cp", "devenir-lecteur", "reseau", "methode", "qcm"],
+  },
+
+  /* =========================================================
+     CP_LECT_LIEUX_LECTURE — « fréquenter des lieux de lecture, rencontrer
+     des acteurs du livre »
+  ========================================================= */
+  {
+    kind: "template",
+    id: "cp_lect_lieux_lecture_tpl_1",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "cp_lect_lieux_lecture",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une bibliothèque, ça se partage : les livres y retournent toujours.",
+    tags: ["cp", "devenir-lecteur", "bibliotheque", "template"],
+    generate: () => {
+      const l = randomChoice(LIEUX);
+      // Les lignes qui nomment un métier ou un lieu posent déjà leur question ;
+      // les autres décrivent une situation, et il faut la leur poser.
+      const enonce = l.situation.endsWith("?")
+        ? l.situation
+        : `${l.situation}\n\nQue fais-tu ?`;
+      return {
+        text: enonce,
+        format: "qcm" as const,
+        choices: makeChoices(l.bon, l.faux),
+        expected: [l.bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une bibliothèque n'est à personne et elle est à tout le monde : les livres y sont prêtés, puis ils reviennent. Autour d'eux travaillent des gens — l'auteur qui écrit, l'illustrateur qui dessine, le libraire qui vend, le bibliothécaire qui prête et conseille.",
+          "Demande-toi ce qui permettra au livre suivant d'arriver entre les mains d'un autre enfant.",
+          `${l.situation} → ${l.bon}.`,
+          `${l.bon.charAt(0).toUpperCase()}${l.bon.slice(1)}.`,
+        ),
+      };
+    },
   },
 ];
