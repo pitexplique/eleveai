@@ -65,7 +65,23 @@ Conclusion : ${conclusion}`;
 
 type MomentConte = { readonly moment: string; readonly element: string };
 type Fable = { readonly recit: string; readonly morale: string; readonly faux: readonly string[] };
-type Situation = { readonly situation: string; readonly bon: string; readonly faux: readonly string[] };
+/** `question` n'est là que pour les lignes dont la réponse n'est PAS un geste :
+ *  « tu peux t'attendre à retrouver sa façon de raconter » ne répond pas à
+ *  « Que fais-tu ? ». Trouvé en LISANT les tirages — aucun script ne le voit. */
+type Situation = {
+  readonly situation: string;
+  readonly question?: string;
+  readonly bon: string;
+  readonly faux: readonly string[];
+};
+
+/** Assemble l'énoncé : la question propre à la ligne, celle qu'elle porte déjà,
+ *  ou « Que fais-tu ? » par défaut. */
+function enonceDe(s: Situation): string {
+  if (s.question) return `${s.situation}\n\n${s.question}`;
+  if (s.situation.endsWith("?")) return s.situation;
+  return `${s.situation}\n\nQue fais-tu ?`;
+}
 type Reseau = { readonly a: string; readonly b: string; readonly lien: string; readonly faux: readonly string[] };
 
 /* =============================================================================
@@ -241,6 +257,7 @@ const OEUVRE_COMPLETE: readonly Situation[] = [
   },
   {
     situation: "Tu commences un livre d'un auteur dont tu as déjà lu un autre livre.",
+    question: "À quoi peux-tu t'attendre ?",
     bon: "tu peux t'attendre à retrouver sa façon de raconter",
     faux: ["ce sera forcément la même histoire", "ce sera forcément plus difficile", "il n'y a jamais aucun rapport"],
   },
@@ -629,11 +646,8 @@ export const devenirLecteurBank: TutorBankItemV4[] = [
     tags: ["ce1", "devenir-lecteur", "oeuvre-complete", "template"],
     generate: () => {
       const s = randomChoice(OEUVRE_COMPLETE);
-      const enonce = s.situation.endsWith("?")
-        ? s.situation
-        : `${s.situation}\n\nQue fais-tu ?`;
       return {
-        text: enonce,
+        text: enonceDe(s),
         format: "qcm" as const,
         choices: makeChoices(s.bon, s.faux),
         expected: [s.bon],
@@ -664,11 +678,8 @@ export const devenirLecteurBank: TutorBankItemV4[] = [
     tags: ["ce1", "devenir-lecteur", "emprunter", "template"],
     generate: () => {
       const s = randomChoice(EMPRUNTER);
-      const enonce = s.situation.endsWith("?")
-        ? s.situation
-        : `${s.situation}\n\nQue fais-tu ?`;
       return {
-        text: enonce,
+        text: enonceDe(s),
         format: "qcm" as const,
         choices: makeChoices(s.bon, s.faux),
         expected: [s.bon],
@@ -731,11 +742,8 @@ export const devenirLecteurBank: TutorBankItemV4[] = [
     tags: ["ce1", "devenir-lecteur", "presenter", "template"],
     generate: () => {
       const s = randomChoice(PRESENTER);
-      const enonce = s.situation.endsWith("?")
-        ? s.situation
-        : `${s.situation}\n\nQue fais-tu ?`;
       return {
-        text: enonce,
+        text: enonceDe(s),
         format: "qcm" as const,
         choices: makeChoices(s.bon, s.faux),
         expected: [s.bon],

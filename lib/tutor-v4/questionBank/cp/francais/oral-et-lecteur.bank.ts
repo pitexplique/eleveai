@@ -384,17 +384,17 @@ const TEXTES_TYPE: readonly (readonly [string, string])[] = [
 const SORTES_LIVRES: readonly SorteLivre[] = [
   { sorte: "un album", indice: "il y a une grande image sur presque chaque page, et peu de texte" },
   { sorte: "un album", indice: "les dessins racontent autant de choses que les mots" },
-  { sorte: "un conte", indice: "ça commence par « Il était une fois », et il y a une fée" },
+  { sorte: "un conte", indice: "l'histoire commence par « Il était une fois », et il y a une fée" },
   { sorte: "un conte", indice: "un enfant part dans la forêt, rencontre un loup qui parle, et tout finit bien" },
   { sorte: "une fable", indice: "des animaux parlent, l'histoire est très courte, et elle finit par une leçon" },
   { sorte: "une fable", indice: "un renard et un corbeau discutent, et à la fin on apprend quelque chose sur les gens" },
   { sorte: "un poème", indice: "les lignes sont courtes, on va à la ligne avant la fin de la phrase, et les mots riment" },
   { sorte: "un poème", indice: "le texte est écrit en petits morceaux qu'on appelle des vers" },
   { sorte: "une pièce de théâtre", indice: "avant chaque phrase, il y a le nom de celui qui la dit" },
-  { sorte: "une pièce de théâtre", indice: "c'est écrit pour être joué sur une scène, devant des gens" },
+  { sorte: "une pièce de théâtre", indice: "tout est écrit pour être joué sur une scène, devant des gens" },
   { sorte: "un documentaire", indice: "il y a des photos, des titres, et de vrais renseignements sur les volcans" },
-  { sorte: "un documentaire", indice: "on y apprend ce que mange un animal, pour de vrai" },
-  { sorte: "un roman", indice: "c'est une longue histoire, avec des chapitres, et presque pas d'images" },
+  { sorte: "un documentaire", indice: "on apprend ce que mange un animal, pour de vrai" },
+  { sorte: "un roman", indice: "l'histoire est longue, découpée en chapitres, et il n'y a presque pas d'images" },
   { sorte: "un roman", indice: "on suit les mêmes personnages pendant plus de cent pages" },
 ];
 
