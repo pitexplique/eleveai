@@ -111,6 +111,17 @@ export function chipsDisponibles(
   for (const r of ressourcesPour(profil, matiere)) {
     for (const i of r.intentions) {
       if (i === "enseigner" && !adulte) continue;
+      // ⛔ « PRÉPARER UN CONTRÔLE » RETIRÉE AUX ÉLÈVES (Frédéric, 12/08) — sa
+      // place va à « Photographier un cours », dans EntreeMatrice.
+      //
+      // ⚠️ L'INTENTION RESTE ENTIÈRE, comme pour « corriger » plus bas : le
+      // lexique lit toujours « j'ai un contrôle », le moteur la score toujours,
+      // et un élève qui l'écrit dans le champ obtient toujours ses parcours et
+      // son guide de survie. On retire le BOUTON, pas la fonction.
+      //
+      // ⚠️ `!adulte` : le professeur et le chef d'établissement gardent
+      // « Préparer une évaluation », qui ne désigne pas le même geste.
+      if (i === "preparer" && !adulte) continue;
       if (SANS_CHIP.has(i)) continue;
       compte.set(i, (compte.get(i) ?? 0) + 1);
     }

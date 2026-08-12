@@ -760,6 +760,38 @@ export default function EntreeMatrice({
               );
             })}
 
+            {/* ⭐ PHOTOGRAPHIER UN COURS — à la place de « Préparer un
+                contrôle », retirée aux élèves le 12/08 (voir chips.ts).
+                Une pastille et pas une chip : les chips filtrent les
+                ressources, celle-ci OUVRE un outil — même nature que
+                « Concours » et « Guide de survie » juste en dessous.
+
+                ⚠️ PAS AVANT LA 6ᵉ. Un CM2 n'a pas de téléphone en classe, son
+                cours tient en quatre lignes au tableau, et ce qui sort d'ici
+                est écrit pour un adulte. Même raison qui tient le guide de
+                survie hors du CP, du CE1 et du CE2 : une pastille qui ne mène
+                à rien d'utilisable est pire que pas de pastille.
+
+                ⚠️ Elle exige un compte. Un élève non connecté tombera sur le
+                bouton de connexion, pas sur une erreur. */}
+            {profil &&
+              ["6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"].includes(
+                profil,
+              ) && (
+                <Link
+                  href="/photo-cours?from=ia"
+                  prefetch={false}
+                  onClick={() => track("ia_photo_cours", { profil })}
+                  className={`rounded-full px-3 py-1.5 text-[13px] transition ${
+                    surAccueil
+                      ? "border-2 border-[#1d1c16]/25 bg-white/70 text-[#1d1c16]/80 hover:border-[#1d1c16]/60"
+                      : "border border-slate-300 bg-white text-slate-600 hover:border-slate-500"
+                  }`}
+                >
+                  Photographier un cours
+                </Link>
+              )}
+
             {/* ⭐ CONCOURS À VENIR — Terminale + Mathématiques, et rien d'autre.
                 Une pastille, pas une carte : elle ouvre `/concours-avenir`, qui
                 existe depuis des mois avec ses dix épreuves blanches. J'avais
