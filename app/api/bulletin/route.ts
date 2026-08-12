@@ -28,6 +28,29 @@ export async function GET(req: Request) {
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
 
+  // LA CLASSE SE RELIT EN BASE, JAMAIS DANS LE JETON (12/08/2026).
+  //
+  // Le jeton de session fige `classe` au moment de la connexion et vit 30
+  // jours. Un élève connecté la veille d'un passage d'année garderait donc son
+  // ancienne classe en tête de bulletin pendant un mois. La table, elle, dit
+  // toujours la vérité du jour — et cette route est `force-dynamic`, une
+  // lecture d'une ligne sur un index ne lui coûte rien.
+  //
+  // Repli sur le jeton si la lecture échoue ou ne rend rien (compte e-mail,
+  // dont la classe vit dans `users_email` et arrive déjà par le jeton).
+  let classeCourante = session.classe;
+  try {
+    const { data: compte } = await supabase
+      .from("acces_etablissement")
+      .select("classe")
+      .eq("code_etablissement", session.code_etablissement)
+      .eq("code_utilisateur", session.code_utilisateur)
+      .maybeSingle();
+    if (compte?.classe) classeCourante = compte.classe as string;
+  } catch {
+    // compte e-mail ou lecture impossible : le jeton fait foi.
+  }
+
   // 1) Snapshot pré-calculé (rapide).
   try {
     const { data } = await supabase
@@ -50,7 +73,7 @@ export async function GET(req: Request) {
       const snapshot = data.data as Bulletin;
       return NextResponse.json({
         ok: true,
-        bulletin: { ...snapshot, classe: session.classe ?? snapshot.classe },
+        bulletin: { ...snapshot, classe: classeCourante ?? snapshot.classe },
       });
     }
   } catch {
@@ -62,7 +85,7 @@ export async function GET(req: Request) {
     codeEtablissement: session.code_etablissement,
     codeUtilisateur: session.code_utilisateur,
     nom: session.nom,
-    classe: session.classe,
+    classe: classeCourante,
   });
   if (!bulletin) {
     return NextResponse.json({ ok: true, bulletin: null });
