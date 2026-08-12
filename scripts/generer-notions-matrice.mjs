@@ -7,16 +7,33 @@
 // Écrire 431 notions à la main, c'est en oublier — et ne jamais les mettre à
 // jour quand le programme bouge.
 //
-// Méthode : on lit le SOURCE des notions.ts, pas le module. C'est la même que
-// scripts/auditer-banque.mjs et valider-banques-concours.mjs — les banques sont
-// du TypeScript avec des imports, les exécuter demanderait un runner qu'on n'a
-// pas.
+// ⛔ DÉFAUT CORRIGÉ LE 12/08/2026 — LE COLLÈGE ÉTAIT ABSENT, SANS UN MOT.
 //
-// Usage : node scripts/generer-notions-matrice.mjs
+// La première version lisait le SOURCE des notions.ts et y cherchait des
+// `id: "…"` / `label: "…"` littéraux. Or les notions du collège ne sont pas
+// écrites à la main : `francais/{6e,5e,4e,3e}/notions.ts` ne contient qu'un
+//
+//     export const notions = buildCollegeFrancaisNotions("5e");
+//
+// Le motif ne trouvait rien, `if (!notions.length) continue;` sautait la
+// classe, et le fichier généré annonçait « 442 notions » sans une seule notion
+// de 6e, 5e, 4e ou 3e en français. La ligne manquait dans la sortie console —
+// personne ne lit une ligne absente.
+//
+// Méthode désormais : on CHARGE le module, avec le hook qui résout l'alias `@/`
+// (scripts/lib/alias-loader.mjs, écrit le 11/08 pour la même raison dans
+// verifier-generateurs.mjs). La lecture du source ne sert plus que de repli, et
+// elle le DIT. Toute classe qui ressort à zéro est signalée en fin de rapport.
+//
+// Usage : node --experimental-strip-types scripts/generer-notions-matrice.mjs
 // À relancer quand une notion entre au programme ou en sort.
 
 import fs from "node:fs";
 import path from "node:path";
+import { register } from "node:module";
+import { pathToFileURL } from "node:url";
+
+register("./lib/alias-loader.mjs", import.meta.url);
 
 const RACINE = path.resolve("lib/tutor-v4/knowledge");
 const SORTIE = path.resolve("lib/matrice/notions.generated.ts");
@@ -26,6 +43,25 @@ const MATIERES = ["maths", "francais", "english", "espagnol", "ia"];
 
 /** Le nom de matière côté matrice (english → anglais). */
 const NOM_MATIERE = { english: "anglais" };
+
+/** Charge les notions en EXÉCUTANT le module. C'est la seule façon de voir
+ *  celles qui sortent d'une fabrique. Renvoie `null` si le module ne se charge
+ *  pas — l'appelant se rabat alors sur le source, et le signale. */
+async function chargerNotions(fichier) {
+  try {
+    const mod = await import(pathToFileURL(fichier).href);
+    const notions =
+      mod.notions ?? Object.values(mod).find((v) => Array.isArray(v) && v.some((x) => x?.id));
+    if (!Array.isArray(notions)) return null;
+    return notions.map((n) => ({
+      id: n.id,
+      label: n.label,
+      prerequis: Array.isArray(n.prerequis) ? [...n.prerequis] : [],
+    }));
+  } catch {
+    return null;
+  }
+}
 
 function lireNotions(fichier) {
   const src = fs.readFileSync(fichier, "utf8");
@@ -60,6 +96,7 @@ function lireNotions(fichier) {
 }
 
 const paquets = [];
+const vides = [];
 let total = 0;
 
 for (const matiere of MATIERES) {
@@ -70,13 +107,32 @@ for (const matiere of MATIERES) {
     const fichier = path.join(base, classe, "notions.ts");
     if (!fs.existsSync(fichier)) continue;
 
-    const notions = lireNotions(fichier);
-    if (!notions.length) continue;
+    // On exécute d'abord ; on ne relit le source que si le module résiste.
+    let notions = await chargerNotions(fichier);
+    let repli = false;
+    if (!notions || !notions.length) {
+      notions = lireNotions(fichier);
+      repli = true;
+    }
+
+    if (!notions.length) {
+      // ⛔ Une classe à zéro ne se saute plus en silence : c'est exactement
+      // comme cela que tout le collège avait disparu de la matrice.
+      vides.push(`${matiere}/${classe}`);
+      continue;
+    }
 
     paquets.push({ matiere: NOM_MATIERE[matiere] ?? matiere, classe, notions });
     total += notions.length;
-    console.log(`${(matiere + "/" + classe).padEnd(22)} ${String(notions.length).padStart(3)}`);
+    console.log(
+      `${(matiere + "/" + classe).padEnd(22)} ${String(notions.length).padStart(3)}${repli ? "   ⚠️ lu dans le source" : ""}`,
+    );
   }
+}
+
+if (vides.length) {
+  console.log(`\n⛔ ${vides.length} classe(s) SANS AUCUNE NOTION — à regarder :`);
+  for (const v of vides) console.log(`   ${v}`);
 }
 
 const entete = `// ⚠️ FICHIER GÉNÉRÉ — NE PAS MODIFIER À LA MAIN.
