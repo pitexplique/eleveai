@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 442 notions, 31 paquets.
+// 479 notions, 35 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -1709,6 +1709,249 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     ]
   },
   "francais": {
+    "3e": [
+      {
+        "id": "lecture_comprehension",
+        "label": "Comprendre, interpréter et apprécier",
+        "prerequis": []
+      },
+      {
+        "id": "lecture_voix_haute",
+        "label": "Lire à voix haute et mettre en voix",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "culture_litteraire",
+        "label": "Culture littéraire — Engagement humaniste et émancipation",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "ecriture",
+        "label": "Écrire pour apprendre, inventer et réfléchir",
+        "prerequis": []
+      },
+      {
+        "id": "oral",
+        "label": "Prendre la parole, écouter et interagir",
+        "prerequis": []
+      },
+      {
+        "id": "vocabulaire",
+        "label": "Vocabulaire et orthographe lexicale",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "grammaire_phrase",
+        "label": "Phrase, constituants et accords",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "analyse_discours",
+        "label": "Discours, registres et paroles rapportées",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "conjugaison",
+        "label": "Formes verbales, temps et modes",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      }
+    ],
+    "4e": [
+      {
+        "id": "lecture_comprehension",
+        "label": "Comprendre, interpréter et apprécier",
+        "prerequis": []
+      },
+      {
+        "id": "lecture_voix_haute",
+        "label": "Lire à voix haute et mettre en voix",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "culture_litteraire",
+        "label": "Culture littéraire — Jugement, valeurs et vérité",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "ecriture",
+        "label": "Écrire pour apprendre, inventer et réfléchir",
+        "prerequis": []
+      },
+      {
+        "id": "oral",
+        "label": "Prendre la parole, écouter et interagir",
+        "prerequis": []
+      },
+      {
+        "id": "vocabulaire",
+        "label": "Vocabulaire et orthographe lexicale",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "grammaire_phrase",
+        "label": "Phrase, constituants et accords",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "analyse_discours",
+        "label": "Discours, registres et paroles rapportées",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "conjugaison",
+        "label": "Formes verbales, temps et modes",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      }
+    ],
+    "5e": [
+      {
+        "id": "lecture_comprehension",
+        "label": "Comprendre, interpréter et apprécier",
+        "prerequis": []
+      },
+      {
+        "id": "lecture_voix_haute",
+        "label": "Lire à voix haute et mettre en voix",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "culture_litteraire",
+        "label": "Culture littéraire — Éprouver, expérimenter : la découverte de soi, d'autrui et du monde",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "ecriture",
+        "label": "Écrire pour apprendre, inventer et réfléchir",
+        "prerequis": []
+      },
+      {
+        "id": "oral",
+        "label": "Prendre la parole, écouter et interagir",
+        "prerequis": []
+      },
+      {
+        "id": "vocabulaire",
+        "label": "Vocabulaire et orthographe lexicale",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "grammaire_phrase",
+        "label": "Phrase, constituants et accords",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "analyse_discours",
+        "label": "Discours, registres et paroles rapportées",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "orthographe_grammaticale",
+        "label": "Accorder les mots dans la phrase et expliquer ses choix",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "conjugaison",
+        "label": "Formes verbales, temps et modes",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      }
+    ],
+    "6e": [
+      {
+        "id": "lecture_comprehension",
+        "label": "Comprendre, interpréter et apprécier",
+        "prerequis": []
+      },
+      {
+        "id": "lecture_voix_haute",
+        "label": "Lire à voix haute et mettre en voix",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "culture_litteraire",
+        "label": "Culture littéraire et artistique",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "ecriture",
+        "label": "Écrire pour apprendre, inventer et réfléchir",
+        "prerequis": []
+      },
+      {
+        "id": "oral",
+        "label": "Prendre la parole, écouter et interagir",
+        "prerequis": []
+      },
+      {
+        "id": "vocabulaire",
+        "label": "Vocabulaire et orthographe lexicale",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "grammaire_phrase",
+        "label": "Phrase, constituants et accords",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "phrase_complexe",
+        "label": "Se repérer dans la phrase complexe",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "conjugaison",
+        "label": "Formes verbales, temps et modes",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      }
+    ],
     "ce1": [
       {
         "id": "langage_oral",

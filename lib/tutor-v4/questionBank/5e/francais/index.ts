@@ -6,6 +6,16 @@ import { francais5eFixedBank } from "@/lib/tutor-v4/questionBank/5e/francais/fix
 // ne produisait que 7 énoncés par micro-compétence, contre 32 en cycle 3, et
 // ce sont ces notions qui alimentent 15 des 20 questions de l'épreuve blanche.
 import { complementsEtudeLangue5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/complements-etude-langue.bank";
+// La 5e passe au NOUVEAU programme (BO n° 10 du 5 mars 2026) à la rentrée 2026.
+// Douze micro-compétences de grammaire ouvertes avec leur banque écrite — le
+// builder cycle 4 aiguille par sous-chaîne et n'aurait servi que du générique.
+import { grammairePhrase5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/grammaire-phrase.bank";
+// « Savoir accorder les mots dans la phrase et expliquer ses choix » : objectif
+// à part entière du BO, cinq attendus, qui tenait dans UNE micro-compétence.
+import { orthographeGrammaticale5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/orthographe-grammaticale.bank";
+// « Approfondir sa maitrise des formes conjuguées du verbe et leur emploi » :
+// deux objectifs, six attendus, qui tenaient dans trois micros génériques.
+import { conjugaison5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/conjugaison.bank";
 
 // Banque du coach = gabarits générés (variété) + couche "fixed" imprimable
 // (≥5 QCM fixes par notion). La couche "fixed" enrichit le coach ET sert de
@@ -14,6 +24,9 @@ export const francais5eQuestionBank: TutorBankItemV4[] = [
   ...buildCycle4FrancaisBank("5e", microSkills),
   ...francais5eFixedBank,
   ...complementsEtudeLangue5eBank,
+  ...grammairePhrase5eBank,
+  ...orthographeGrammaticale5eBank,
+  ...conjugaison5eBank,
 ];
 
 export function getFrancais5eQuestionBank(args?: {

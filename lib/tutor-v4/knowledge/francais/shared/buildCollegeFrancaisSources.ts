@@ -13,16 +13,29 @@ const labels: Record<CollegeFrancaisLevel, { code: string; levelLabel: string; b
   "3e": { code: "3e", levelLabel: "3e", boPrefix: "BO3EFR" },
 };
 
+/* Les perspectives annuelles du cycle 4.
+   ⚠️ Celle de 5e est reprise MOT POUR MOT du BO n° 10 du 5 mars 2026, qui
+   s'applique à elle dès la rentrée 2026. Celles de 4e et de 3e restent
+   approximatives tant que ces classes suivent le programme de 2018 : elles
+   seront reprises à leur bascule, en 2027 et 2028. */
 const cycle4Perspectives: Record<Extract<CollegeFrancaisLevel, "5e" | "4e" | "3e">, string> = {
-  "5e": "Découverte de soi, d'autrui et du monde",
+  "5e": "Éprouver, expérimenter : la découverte de soi, d'autrui et du monde",
   "4e": "Jugement, valeurs et vérité",
   "3e": "Engagement humaniste et émancipation",
 };
 
+/* ⚠️ LA CULTURE LITTÉRAIRE EST UN DOMAINE À PART — corrigé le 12/08/2026.
+   Elle était repliée dans la Lecture (« Lecture, compréhension et culture
+   littéraire »), alors que les DEUX programmes en font un domaine autonome :
+   le BO n° 16 du 17 avril 2025 pour la 6e, et le BO n° 10 du 5 mars 2026 pour
+   le cycle 4, qui lui consacre une perspective annuelle et quatre entrées
+   nommées par niveau. C'est cette confusion qui laissait `culture_litteraire`
+   ne porter que des gestes génériques. */
 export function buildCollegeFrancaisBo(level: CollegeFrancaisLevel): KnowledgeBoCompetence[] {
   const p = labels[level].boPrefix;
   return [
-    { boId: `${p}L`, label: "Lecture, compréhension et culture littéraire" },
+    { boId: `${p}L`, label: "Lecture et compréhension" },
+    { boId: `${p}C`, label: "Culture littéraire et artistique" },
     { boId: `${p}E`, label: "Écriture et production de textes" },
     { boId: `${p}O`, label: "Oral, mise en voix et échanges" },
     { boId: `${p}V`, label: "Vocabulaire et orthographe lexicale" },
@@ -60,7 +73,7 @@ export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): Notion
       label: level === "6e"
         ? "Culture littéraire et artistique"
         : `Culture littéraire — ${cycle4Perspectives[level]}`,
-      boId: `${p}L`,
+      boId: `${p}C`,
       prerequis: ["lecture_comprehension"],
       levels: [1, 2, 3],
     },
@@ -111,6 +124,23 @@ export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): Notion
             boId: `${p}G`,
             prerequis: ["grammaire_phrase"],
             levels: [2, 3],
+          } satisfies NotionSource,
+        ]
+      : []),
+    /* « Savoir accorder les mots dans la phrase et expliquer ses choix » est,
+       dans le BO n° 10 du 5 mars 2026, un OBJECTIF À PART de la grammaire —
+       cinq attendus rien qu'en 5e. Il était replié dans `grammaire_phrase`,
+       derrière une seule micro : « Accorder les mots dans la phrase ».
+       ⛔ Gardé pour la 5e tant que la 4e et la 3e suivent le programme de
+       2018 ; il s'ouvrira pour elles en 2027 et 2028. */
+    ...(level === "5e"
+      ? [
+          {
+            id: "orthographe_grammaticale",
+            label: "Accorder les mots dans la phrase et expliquer ses choix",
+            boId: `${p}G`,
+            prerequis: ["grammaire_phrase"],
+            levels: [1, 2, 3],
           } satisfies NotionSource,
         ]
       : []),
@@ -234,6 +264,115 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       // « Copier des textes de façon lisible, régulière, soignée et sans
       //   erreur d'orthographe ou de ponctuation » — objectif CM1, CM2 ET 6e.
       { id: `${prefix}_ecrit_copie`, label: "Écrire à la main de manière fluide et efficace", notionId: "ecriture", prerequis: [] },
+    );
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LA 5e PASSE AU NOUVEAU PROGRAMME — bloc ajouté le 12/08/2026
+
+     ⚠️ RÉFÉRENCE NEUVE : BO n° 10 du 5 mars 2026 (arrêté du 18 février 2026),
+     « Annexe 1 – Programme de français pour le cycle 4 ». Il s'applique en 5e
+     À LA RENTRÉE 2026, en 4e à la rentrée 2027, en 3e à la rentrée 2028.
+     ⛔ La 4e et la 3e restent donc, cette année, sur le programme de 2015
+     modifié en 2018 : NE PAS leur étendre ce bloc avant leur date.
+
+     L'état de départ, mesuré : 5e, 4e et 3e avaient les 34 MÊMES micros, à
+     deux libellés près. Un élève de 3e en avait moins qu'un élève de 6e (50),
+     et exactement les mêmes qu'un élève de 5e. Pour la seule grammaire, quatre
+     micros couvraient tout le cycle.
+
+     Ce bloc ouvre la rubrique « Comprendre et expliquer le fonctionnement
+     d'une phrase », que le BO détaille en deux objectifs et treize attendus.
+     ⚠️ Les micros ne sont ajoutées qu'AVEC leur banque écrite : sans elle,
+     `buildCycle4FrancaisBank` aiguille par sous-chaîne et sert autre chose
+     sans jamais tomber en panne — c'est ce qui était arrivé au CM2.
+     ═══════════════════════════════════════════════════════════════════════ */
+  if (level === "5e") {
+    base.push(
+      /* ── « Comprendre ce qu'est une phrase pour mieux lire et mieux écrire » */
+      // « Identifier et réinvestir le rôle des différents signes de ponctuation
+      //   en lien avec les constituants de la phrase. »
+      { id: `${prefix}_gram_ponctuation`, label: "Expliquer le rôle d'un signe de ponctuation dans la phrase", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_constituants`] },
+      // « Identifier trois types de phrases » / « Reconnaitre trois formes de
+      //   phrases et leurs caractéristiques (exclamative et négative). »
+      { id: `${prefix}_gram_types_formes`, label: "Identifier le type d'une phrase et ses formes exclamative ou négative", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_constituants`] },
+      // « Comprendre et expliciter la différence entre phrase simple, phrase
+      //   complexe, phrase non verbale. »
+      { id: `${prefix}_gram_simple_complexe`, label: "Distinguer phrase simple, phrase complexe et phrase non verbale", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_types_formes`] },
+      // « Comprendre les effets de sens produits par les relations de
+      //   juxtaposition et coordination. »
+      { id: `${prefix}_gram_juxta_coord`, label: "Comprendre ce qu'exprime une juxtaposition ou une coordination", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_simple_complexe`] },
+
+      /* ── « Connaitre les différents constituants d'une phrase » ─────────── */
+      // « Identifier le sujet, les compléments d'objet direct et indirect… »
+      // ⚠️ Le libellé dit « et des autres fonctions » parce que la banque sert
+      // aussi des circonstanciels et des attributs comme bonnes réponses : un
+      // COD ne se reconnait qu'en s'opposant à eux. Promettre « COD et COI »
+      // et servir un circonstanciel serait le défaut du CM2 à nouveau.
+      { id: `${prefix}_gram_cod_coi`, label: "Distinguer les compléments d'objet direct et indirect des autres fonctions", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_fonctions`] },
+      // « …l'attribut du sujet » ; « Identifier les verbes attributifs »
+      { id: `${prefix}_gram_attribut`, label: "Identifier l'attribut du sujet et les verbes attributifs", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_cod_coi`] },
+      // « …les compléments circonstanciels de lieu, de cause, de temps et de
+      //   manière, en utilisant des manipulations syntaxiques. »
+      { id: `${prefix}_gram_circonstanciels`, label: "Identifier un complément circonstanciel de lieu, de cause, de temps ou de manière", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_fonctions`] },
+      // « Comprendre la structure du groupe nominal minimal et du groupe
+      //   nominal étendu ; les identifier dans une phrase ou un court passage. »
+      { id: `${prefix}_gram_gn_etendu`, label: "Analyser le groupe nominal minimal et le groupe nominal étendu", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_fonctions`] },
+      // « Identifier les prépositions, les adverbes et les mots subordonnants. »
+      { id: `${prefix}_gram_prepositions`, label: "Identifier prépositions, adverbes et mots subordonnants", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_constituants`] },
+      // « Distinguer les déterminants et les pronoms. »
+      { id: `${prefix}_gram_determinant_pronom`, label: "Distinguer un déterminant d'un pronom", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_gn_etendu`] },
+      // « Identifier les pronoms personnels, démonstratifs et indéfinis, sans
+      //   chercher l'exhaustivité. »
+      { id: `${prefix}_gram_pronoms`, label: "Identifier les pronoms personnels, démonstratifs et indéfinis", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_determinant_pronom`] },
+      // « Identifier les mots coordonnants et comprendre leurs rôles syntaxique
+      //   et sémantique dans la phrase. »
+      { id: `${prefix}_gram_coordonnants`, label: "Identifier un mot coordonnant et le rapport qu'il établit", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_juxta_coord`] },
+
+      /* ── « Savoir accorder les mots dans la phrase et expliquer ses choix »
+         Cinq attendus, que le BO détache de la grammaire de la phrase. Le
+         verbe du BO est « expliquer » et « justifier » : ce ne sont pas des
+         accords à appliquer, ce sont des accords à RAISONNER. */
+      // « Maitriser les chaines d'accord du groupe nominal en développant son
+      //   raisonnement. »
+      { id: `${prefix}_orth_chaine_gn`, label: "Tenir la chaine d'accord dans le groupe nominal", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_gn_etendu`] },
+      // « Maitriser les chaines d'accord de l'attribut du sujet. »
+      { id: `${prefix}_orth_accord_attribut`, label: "Accorder l'attribut avec le sujet", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_attribut`] },
+      // « Maitriser les cas complexes de l'accord sujet-verbe (sujet séparé du
+      //   verbe par un complément, sujet comportant plusieurs noms). »
+      { id: `${prefix}_orth_sujet_verbe_complexe`, label: "Accorder le verbe quand le sujet est éloigné, inversé ou multiple", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_cod_coi`] },
+      // « Justifier […] l'accord du participe passé employé avec l'auxiliaire
+      //   être… »
+      { id: `${prefix}_orth_participe_etre`, label: "Accorder le participe passé employé avec être", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_accord_attribut`] },
+      // « …et avec l'auxiliaire avoir (COD antéposé…) »
+      { id: `${prefix}_orth_participe_avoir`, label: "Accorder le participe passé avec avoir quand le COD est placé avant", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_participe_etre`] },
+      // « …dont pronom personnel COD, À DISTINGUER DU COI. » C'est là que se
+      //   joue l'erreur : « je leur ai parlé » ne s'accorde pas.
+      { id: `${prefix}_orth_cod_coi_antepose`, label: "Ne pas accorder quand le pronom placé avant est un COI", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_participe_avoir`] },
+
+      /* ── « Approfondir sa maitrise des formes conjuguées du verbe et leur
+         emploi » — deux objectifs, six attendus. Le coach en avait trois
+         micros génériques, les mêmes de la 5e à la 3e. */
+      // « …les éléments qui constituent une forme verbale : radical verbal et
+      //   terminaison (marques de temps et de personne). »
+      { id: `${prefix}_conj_radical_terminaison`, label: "Lire dans la terminaison le temps et la personne", notionId: "conjugaison", prerequis: [`${prefix}_conj_identifier`] },
+      // « …la morphologie des temps simples (… passé simple de l'indicatif…) »
+      { id: `${prefix}_conj_passe_simple`, label: "Conjuguer au passé simple de l'indicatif", notionId: "conjugaison", prerequis: [`${prefix}_conj_radical_terminaison`] },
+      // « … conditionnel et présent de l'impératif »
+      { id: `${prefix}_conj_conditionnel_imperatif`, label: "Conjuguer au conditionnel présent et à l'impératif présent", notionId: "conjugaison", prerequis: [`${prefix}_conj_radical_terminaison`] },
+      // « …et des temps composés (passé composé et plus-que-parfait). »
+      { id: `${prefix}_conj_temps_composes`, label: "Former le passé composé et le plus-que-parfait", notionId: "conjugaison", prerequis: [`${prefix}_conj_radical_terminaison`] },
+      // « Conjuguer un verbe par imitation, au passé antérieur et au futur
+      //   antérieur de l'indicatif. »
+      { id: `${prefix}_conj_anterieurs`, label: "Conjuguer au passé antérieur et au futur antérieur", notionId: "conjugaison", prerequis: [`${prefix}_conj_temps_composes`] },
+      // « Consolider la conjugaison des verbes réguliers et des principaux
+      //   verbes irréguliers en fonction de la variation de leur radical. »
+      { id: `${prefix}_conj_radical_variable`, label: "Conjuguer les verbes dont le radical change", notionId: "conjugaison", prerequis: [`${prefix}_conj_radical_terminaison`] },
+      // « Approfondir sa maitrise des valeurs temporelles et aspectuelles des
+      //   temps simples et composés. »
+      { id: `${prefix}_conj_valeurs`, label: "Distinguer ce qu'exprime chaque temps du récit", notionId: "conjugaison", prerequis: [`${prefix}_conj_passe_simple`, `${prefix}_conj_temps_composes`] },
+      // « Approfondir sa maitrise des modes indicatif et impératif. »
+      { id: `${prefix}_conj_modes`, label: "Distinguer l'indicatif de l'impératif et ce que chacun fait", notionId: "conjugaison", prerequis: [`${prefix}_conj_conditionnel_imperatif`] },
     );
   }
 
