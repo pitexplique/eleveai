@@ -373,6 +373,18 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       { id: `${prefix}_conj_valeurs`, label: "Distinguer ce qu'exprime chaque temps du récit", notionId: "conjugaison", prerequis: [`${prefix}_conj_passe_simple`, `${prefix}_conj_temps_composes`] },
       // « Approfondir sa maitrise des modes indicatif et impératif. »
       { id: `${prefix}_conj_modes`, label: "Distinguer l'indicatif de l'impératif et ce que chacun fait", notionId: "conjugaison", prerequis: [`${prefix}_conj_conditionnel_imperatif`] },
+
+      /* ── LES QUATRE ENTRÉES DE CULTURE LITTÉRAIRE ───────────────────────────
+         Le BO les nomme une par une, sous la perspective annuelle « Éprouver,
+         expérimenter : la découverte de soi, d'autrui et du monde ». La notion
+         `culture_litteraire` ne portait que quatre gestes génériques — genres,
+         contexte, réseau, trace —, les mêmes de la 5e à la 3e.
+         ⛔ On interroge les NOTIONS, jamais une œuvre : les livres sont choisis
+         par le professeur. Appui sur les figures que tout élève a croisées. */
+      { id: `${prefix}_cult_heros`, label: "Devenir héroïne, héros : destins romanesques", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_voyage_poesie`, label: "Voyager en poésie : « Du monde entier au cœur du monde »", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_theatre`, label: "Expérimenter et jouer au théâtre : la société sens dessus dessous", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_plaire_instruire`, label: "Imaginer, sentir, raisonner : des histoires pour plaire et instruire", notionId: "culture_litteraire", prerequis: [`${prefix}_cult_heros`] },
     );
   }
 

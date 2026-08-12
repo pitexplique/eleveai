@@ -16,6 +16,9 @@ import { orthographeGrammaticale5eBank } from "@/lib/tutor-v4/questionBank/5e/fr
 // « Approfondir sa maitrise des formes conjuguées du verbe et leur emploi » :
 // deux objectifs, six attendus, qui tenaient dans trois micros génériques.
 import { conjugaison5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/conjugaison.bank";
+// Les QUATRE entrées de culture littéraire que le BO nomme, sous la perspective
+// annuelle « Éprouver, expérimenter ». Aucune n'existait.
+import { cultureLitteraire5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/culture-litteraire.bank";
 
 // Banque du coach = gabarits générés (variété) + couche "fixed" imprimable
 // (≥5 QCM fixes par notion). La couche "fixed" enrichit le coach ET sert de
@@ -27,6 +30,7 @@ export const francais5eQuestionBank: TutorBankItemV4[] = [
   ...grammairePhrase5eBank,
   ...orthographeGrammaticale5eBank,
   ...conjugaison5eBank,
+  ...cultureLitteraire5eBank,
 ];
 
 export function getFrancais5eQuestionBank(args?: {
