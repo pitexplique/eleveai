@@ -406,10 +406,16 @@ export const vocabulaireDiscours5eBank: TutorBankItemV4[] = [
     tags: ["5e", "vocabulaire", "polysemie", "template"],
     generate: () => {
       const v = randomChoice(VARIATIONS);
+      // ⚠️ Le piège qui compte est L'AUTRE SENS DU MÊME MOT — c'est celui-là
+      // que l'élève doit écarter en relisant la phrase. Tiré au hasard dans la
+      // table, il ne sortait qu'une fois sur cinq, et les autres propositions
+      // s'éliminaient d'un coup d'œil. On le force.
+      const jumeau = VARIATIONS.find((x) => x.mot === v.mot && x.sens !== v.sens);
+      const autres = shuffle(TOUS_SENS.filter((s) => s !== v.sens && s !== jumeau?.sens)).slice(0, 2);
       return {
         text: `« ${v.phrase} »\n\nQue signifie « ${v.mot} » ici ?`,
         format: "qcm" as const,
-        choices: makeChoices(v.sens, TOUS_SENS),
+        choices: shuffle([v.sens, ...(jumeau ? [jumeau.sens] : []), ...autres]),
         expected: [v.sens],
         comparator: "mcq_exact" as const,
         explanation: exp(
