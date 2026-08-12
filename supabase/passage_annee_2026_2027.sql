@@ -27,11 +27,19 @@
 -- L'update écrase l'ancienne classe sans la garder nulle part. Cette table
 -- est la seule trace qui restera de l'année 2025-2026 — et le seul moyen
 -- d'annuler (bloc 6). C'est maintenant ou jamais.
+--
+-- ⚠️ RLS OBLIGATOIRE : la table contient les NOMS d'élèves mineurs et leur
+-- classe. Un `create table as select` ne l'active pas tout seul (Supabase le
+-- signale par une alerte « Potential issue detected » — répondre « Run and
+-- enable RLS »). On garde la convention de tout le dépôt : RLS activé et
+-- AUCUNE policy → le navigateur est bloqué, seule la clé service_role lit.
 
 create table if not exists public.affectations_2025_2026 as
 select code_etablissement, code_utilisateur, nom, classe, actif
 from public.acces_etablissement
 where type_utilisateur = 'eleve';
+
+alter table public.affectations_2025_2026 enable row level security;
 
 
 -- ═══════════════════════════════════════════════════════════════════════
@@ -58,8 +66,9 @@ order by 1, 2;
 -- + le chemin de repli de /api/code-login). Les données restent cohérentes,
 -- les comptes ne polluent plus les tableaux de bord.
 --
--- ⏭️ S'il n'y a aucun 3e en base (le bloc 2 le dit), ce bloc ne fait rien.
---    Le jouer quand même ne coûte rien.
+-- ⏭️ AOÛT 2026 : aucun 3e en base, ce bloc est SANS EFFET cette année et a été
+--    sauté. Il devient INDISPENSABLE en août 2027 : les 4e que le bloc 4 promeut
+--    aujourd'hui sont les sortants de la rentrée suivante.
 
 update public.acces_etablissement
 set actif = false
