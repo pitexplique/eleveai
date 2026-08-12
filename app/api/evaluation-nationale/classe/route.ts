@@ -28,23 +28,25 @@ const CLASSES = new Set(["6e", "4e"]);
 const MATIERES = new Set(["maths", "francais"]);
 
 /**
- * LE GROUPE CLASSE SE LIT SUR LE CODE, faute de colonne pour le porter.
+ * LE GROUPE CLASSE SE LIT DANS `acces_etablissement.division` (12/08/2026).
  *
- * `acces_etablissement.classe` ne connaît que le NIVEAU — '6e', '4e' — et sa
- * contrainte SQL n'accepte rien d'autre. Or un collège n'a pas « une 6ᵉ » : il
- * a une 6ᵉ A, une 6ᵉ B, une 6ᵉ C. Constaté à Dimitile le 11/08 en découvrant
- * que la vraie 6ᵉ C (codes 6C00…6C19) et la classe de démonstration
- * (6ETEST-01…30) s'affichaient d'un seul bloc de cinquante élèves. Un
- * principal ne peut rien faire d'un tel tas.
+ * `classe` ne connaît que le NIVEAU — '6e', '4e' — et sa contrainte SQL
+ * n'accepte rien d'autre. Or un collège n'a pas « une 6ᵉ » : il a une 6ᵉ A,
+ * une 6ᵉ B, une 6ᵉ C. Constaté à Dimitile le 11/08 en découvrant que la vraie
+ * 6ᵉ C (codes 6C00…6C19) et la classe de démonstration (6ETEST-01…30)
+ * s'affichaient d'un seul bloc de cinquante élèves. Un principal ne peut rien
+ * faire d'un tel tas.
  *
- * La convention est celle du collège lui-même : un préfixe, puis un numéro.
- * `6C07` → « 6C » ; `6ETEST-12` → « 6ETEST ».
+ * La division était alors DEVINÉE sur le préfixe du code. Ça tenait tant que
+ * le code décrivait la classe — et ça s'est effondré au passage d'année du
+ * 12/08 : les « 6C00 » désignent désormais des élèves de 5ᵉ. Un code est une
+ * identité, pas une description ; il ne bouge jamais, donc il ment vite.
+ * `supabase/acces_etablissement_division.sql` pose la colonne et y rejoue le
+ * devinage UNE FOIS, en reprise.
  *
- * ⚠️ CE N'EST QU'UN DÉPANNAGE. La vraie correction est une colonne `groupe`
- * dans `acces_etablissement` — voir [[association-prof-eleves-chantier]]. Tant
- * qu'elle n'existe pas, un établissement qui nommerait ses codes autrement
- * (« ELEVE-0001 ») verrait tous ses élèves dans un même groupe. Ce n'est pas
- * faux, c'est seulement inutile — et ça ne casse rien.
+ * ⚠️ LE REPLI CI-DESSOUS RESTE, et doit rester : la colonne est nullable, et
+ * un collège qui n'a pas encore rempli ses divisions doit continuer de voir
+ * ses classes séparées comme avant. `division` gagne dès qu'elle est remplie.
  */
 function groupeDuCode(code: string): string {
   const m = code.match(/^(.*?)[-_ ]?\d+$/);
@@ -52,15 +54,30 @@ function groupeDuCode(code: string): string {
   return prefixe || code;
 }
 
+/** La division réelle si elle est connue, sinon le devinage d'autrefois. */
+function divisionDeLEleve(division: unknown, code: string): string {
+  const d = typeof division === "string" ? division.trim() : "";
+  return d || groupeDuCode(code);
+}
+
 export type EleveDeLaClasse = {
   codeUtilisateur: string;
-  /** Le groupe classe déduit du code : « 6C », « 6ETEST »… */
+  /**
+   * La DIVISION de l'élève : « 6C », « 6ETEST »… Lue dans
+   * `acces_etablissement.division`, à défaut devinée sur le préfixe du code.
+   *
+   * ⚠️ NE PAS CONFONDRE avec `resultat.groupe` ci-dessous, qui est le groupe
+   * de MAÎTRISE de l'institution (`a_besoins`, `fragile`, `satisfaisant`).
+   * Deux sens du mot « groupe » cohabitent dans ce fichier ; le champ élève
+   * garde son nom pour ne pas casser les pages qui le consomment.
+   */
   groupe: string;
   nom: string | null;
   /** null = l'élève n'a pas encore passé l'épreuve. */
   resultat: {
     score: number;
     total: number;
+    /** Le groupe de MAÎTRISE DEPP, pas la division : « a_besoins »… */
     groupe: string | null;
     dureeSec: number | null;
     chronoEcoule: boolean;
@@ -213,7 +230,7 @@ export async function GET(req: Request) {
   const [comptesRes, resultatsRes] = await Promise.all([
     supabaseAdmin
       .from("acces_etablissement")
-      .select("code_utilisateur, nom, classe, actif")
+      .select("code_utilisateur, nom, classe, division, actif")
       .eq("code_etablissement", codeEtablissement)
       .eq("classe", classe)
       .eq("type_utilisateur", "eleve")
@@ -251,11 +268,12 @@ export async function GET(req: Request) {
   const eleves: EleveDeLaClasse[] = (comptesRes.data ?? []).map((c) => {
     const compte = c as Record<string, unknown>;
     const code = String(compte.code_utilisateur ?? "");
+    const division = divisionDeLEleve(compte.division, code);
     const r = dernier.get(code);
     if (!r) {
       return {
         codeUtilisateur: code,
-        groupe: groupeDuCode(code),
+        groupe: division,
         nom: (compte.nom as string) ?? null,
         resultat: null,
       };
@@ -264,7 +282,7 @@ export async function GET(req: Request) {
     const details = (r.details ?? {}) as Record<string, unknown>;
     return {
       codeUtilisateur: code,
-      groupe: groupeDuCode(code),
+      groupe: division,
       nom: ((compte.nom as string) ?? (r.nom as string)) ?? null,
       resultat: {
         score: Number(r.score ?? 0),
