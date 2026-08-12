@@ -7,6 +7,19 @@
 // « Encoder puis écrire sous dictée » aux trois niveaux ; « Types de textes »,
 // parce que le CE2 doit différencier le narratif de l'informatif et du
 // prescriptif ; et « Orthographe lexicale », que le BO range sous Vocabulaire.
+//
+// 12/08/2026 — « Devenir lecteur » ajoutée. Le BO découpe la Lecture en QUATRE
+// objectifs, aux trois niveaux du cycle : identifier les mots, lire à voix
+// haute, comprendre un texte, et devenir lecteur. Le quatrième n'existait ni
+// au CE1 ni au CE2 : le parcours de lecteur — lire seul une œuvre entière, la
+// mise en réseau, le carnet, les lieux de lecture — n'était nulle part.
+//
+// ⚠️ À ne pas confondre avec `types_textes`, qui est déjà là : celle-là
+// reconnait le TYPE d'un texte qu'on a sous les yeux (narratif, informatif,
+// prescriptif, poétique, théâtral). « Devenir lecteur » prend l'autre moitié
+// de la réussite du BO — « différencie les caractéristiques des genres […] les
+// plus courants : […] récit (policier, d'aventure, etc.) » — et surtout ce
+// qu'un lecteur emporte d'un livre au suivant.
 
 import type { NotionSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
@@ -35,6 +48,13 @@ export const notions: NotionSource[] = [
   {
     id: "types_textes",
     label: "Types de textes (narratif, informatif, prescriptif, poétique, théâtral)",
+    boId: "BOCE2FL1",
+    prerequis: ["comprehension_lecture"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "devenir_lecteur",
+    label: "Devenir lecteur",
     boId: "BOCE2FL1",
     prerequis: ["comprehension_lecture"],
     levels: [1, 2, 3],

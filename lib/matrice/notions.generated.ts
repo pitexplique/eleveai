@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 438 notions, 31 paquets.
+// 442 notions, 31 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -1742,6 +1742,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "devenir_lecteur",
+        "label": "Devenir lecteur",
+        "prerequis": [
+          "comprehension_lecture"
+        ]
+      },
+      {
         "id": "ecriture_cursive",
         "label": "Écriture cursive et quatre écritures",
         "prerequis": []
@@ -1834,6 +1841,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "devenir_lecteur",
+        "label": "Devenir lecteur",
+        "prerequis": [
+          "comprehension_lecture"
+        ]
+      },
+      {
         "id": "copie_fluente",
         "label": "Copie fluente et soignée",
         "prerequis": []
@@ -1916,6 +1930,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "culture_litteraire",
+        "label": "Culture littéraire et artistique",
+        "prerequis": [
+          "lecture_oeuvres"
+        ]
+      },
+      {
         "id": "ecriture",
         "label": "Écrire pour apprendre et produire",
         "prerequis": []
@@ -1965,6 +1986,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "label": "Lire une œuvre et construire une culture littéraire",
         "prerequis": [
           "comprehension_textes_documents"
+        ]
+      },
+      {
+        "id": "culture_litteraire",
+        "label": "Culture littéraire et artistique",
+        "prerequis": [
+          "lecture_oeuvres"
         ]
       },
       {

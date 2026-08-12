@@ -76,6 +76,29 @@ export const microSkills: MicroSkillSource[] = [
   { id: "ce2_type_theatral",    label: "Reconnaître un texte de théâtre",                   notionId: "types_textes", prerequis: ["ce2_type_narratif"] },
   { id: "ce2_type_defi",        label: "Défi types de textes",                              notionId: "types_textes", prerequis: ["ce2_type_prescriptif", "ce2_type_poetique", "ce2_type_theatral"] },
 
+  // ── Devenir lecteur ───────────────────────────────────────────────────────
+  // Quatrième objectif de Lecture du BO, absent jusqu'au 12/08/2026 :
+  // « Lire de manière autonome 5 à 10 œuvres complètes et variées issues du
+  //   patrimoine et de la littérature de jeunesse » ; « Relier ses lectures à
+  //   son expérience personnelle, être en mesure d'établir des liens entre ses
+  //   différentes lectures (mise en réseau) » ; « Fréquenter des lieux de
+  //   lecture régulièrement et rencontrer des acteurs du livre ».
+  // Les exemples de réussite ajoutent : des personnages-types « de plus en plus
+  // diversifiés » ; « il différencie les caractéristiques des genres et types
+  // les plus courants : poésie, théâtre, récit (policier, d'aventure, etc.) » ;
+  // « il consigne ses expériences de lecture dans un carnet de lecteur ».
+  //
+  // ⚠️ La poésie et le théâtre sont déjà tenus par `types_textes` : on n'ajoute
+  // ici que les GENRES DU RÉCIT, qui n'étaient nulle part.
+  { id: "ce2_lect_autonomie",          label: "Lire seul une œuvre entière, du début à la fin",          notionId: "devenir_lecteur", prerequis: ["ce2_comp_chronologie"] },
+  { id: "ce2_lect_genres_recit",       label: "Différencier les genres du récit : policier, aventure, fantastique, historique", notionId: "devenir_lecteur", prerequis: ["ce2_type_narratif"] },
+  { id: "ce2_lect_personnages_types",  label: "Reconnaître des personnages-types de plus en plus variés", notionId: "devenir_lecteur", prerequis: ["ce2_lect_genres_recit"] },
+  { id: "ce2_lect_reseau",             label: "Mettre deux lectures en réseau",                          notionId: "devenir_lecteur", prerequis: ["ce2_lect_personnages_types"] },
+  { id: "ce2_lect_experience",         label: "Relier une lecture à sa propre expérience",               notionId: "devenir_lecteur", prerequis: ["ce2_lect_autonomie"] },
+  { id: "ce2_lect_carnet",             label: "Tenir un carnet de lecteur",                              notionId: "devenir_lecteur", prerequis: ["ce2_lect_autonomie"] },
+  { id: "ce2_lect_lieux_acteurs",      label: "Fréquenter les lieux de lecture et connaître les métiers du livre", notionId: "devenir_lecteur", prerequis: ["ce2_lect_autonomie"] },
+  { id: "ce2_lect_defi",               label: "Défi devenir lecteur",                                    notionId: "devenir_lecteur", prerequis: ["ce2_lect_reseau", "ce2_lect_experience", "ce2_lect_carnet", "ce2_lect_lieux_acteurs"] },
+
   // ── Copie fluente ─────────────────────────────────────────────────────────
   { id: "ce2_copie_phrase",        label: "Copier une phrase sans erreur",                        notionId: "copie_fluente", prerequis: [] },
   { id: "ce2_copie_paragraphe",    label: "Copier un paragraphe court avec soin",                 notionId: "copie_fluente", prerequis: ["ce2_copie_phrase"] },

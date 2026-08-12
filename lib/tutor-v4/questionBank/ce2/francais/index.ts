@@ -15,6 +15,7 @@ import { fluenceLectureBank } from "./fluence-lecture.bank";
 import { copieFluenteBank } from "./copie-fluente.bank";
 import { productionEcriteBank } from "./production-ecrite.bank";
 import { langageOralBank } from "./langage-oral.bank";
+import { devenirLecteurBank } from "./devenir-lecteur.bank";
 
 // LE CE2 SORT DU CONSTRUCTEUR COMMUN — chantier ouvert le 10/08/2026, sur le
 // modèle du CP (`cp/francais/index.ts`, 09-10/08).
@@ -65,6 +66,7 @@ const BANQUES_ECRITES: TutorBankItemV4[] = [
   ...copieFluenteBank,
   ...productionEcriteBank,
   ...langageOralBank,
+  ...devenirLecteurBank,
 ];
 
 const MICROS_COUVERTES = new Set(BANQUES_ECRITES.map((item) => item.microId));
