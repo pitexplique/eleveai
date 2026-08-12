@@ -449,6 +449,29 @@ export default function DashboardProfClient() {
               ))}
             </div>
 
+            {/* L'ÉVALUATION NATIONALE — même raison que sur le tableau de bord
+                principal (11/08) : un professeur connecté atterrit ici, pas sur
+                le hub public. La vue se cale sur SON établissement, décidé par
+                le jeton de session et jamais par l'URL. */}
+            <Link
+              href="/evaluation-nationale-college/ma-classe"
+              className="flex flex-wrap items-center justify-between gap-3 rounded-[2rem] bg-white p-6 text-slate-950 shadow-xl transition hover:brightness-95"
+            >
+              <span>
+                <span className="block text-xl font-black">
+                  🎓 Évaluation nationale — votre classe
+                </span>
+                <span className="mt-1 block text-sm font-semibold text-slate-500">
+                  Chaque élève rangé en « à besoins / fragile / satisfaisant »,
+                  domaine par domaine, avec ce qu&apos;il faut reprendre. Y
+                  compris ceux qui n&apos;ont pas encore passé l&apos;épreuve.
+                </span>
+              </span>
+              <span className="rounded-2xl bg-rose-100 px-4 py-2 text-sm font-black text-rose-900 ring-1 ring-rose-200">
+                Ouvrir →
+              </span>
+            </Link>
+
             {/* MES FICHES DE COURS (compositions enregistrées) */}
             <div className="rounded-[2rem] bg-white p-6 text-slate-950 shadow-xl">
               <div className="flex flex-wrap items-center justify-between gap-2">

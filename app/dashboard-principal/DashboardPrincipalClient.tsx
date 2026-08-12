@@ -268,6 +268,15 @@ export default function DashboardPrincipalClient() {
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
+              {/* ⭐ L'ÉVALUATION NATIONALE DANS SON TABLEAU DE BORD, et pas
+                  seulement sur le hub public (11/08). Un principal connecté
+                  atterrit ici : lui demander de penser à aller chercher la vue
+                  de classe ailleurs, c'est qu'il ne la trouvera jamais. La vue
+                  se cale d'elle-même sur SON établissement — c'est le jeton de
+                  session qui le décide, jamais l'URL. */}
+              <Link href="/evaluation-nationale-college/ma-classe" className="rounded-2xl bg-rose-100 px-4 py-2 text-sm font-black text-rose-900 ring-1 ring-rose-200 hover:bg-rose-200">
+                🎓 Évaluation nationale
+              </Link>
               <Link href="/dashboard-prof" className="rounded-2xl bg-blue-100 px-4 py-2 text-sm font-black text-blue-900 ring-1 ring-blue-200 hover:bg-blue-200">
                 👩‍🏫 Vue professeur
               </Link>
