@@ -11,6 +11,7 @@ import AdminStatsClient from "./AdminStatsClient";
 import AdminCallsClient from "./AdminCallsClient";
 import AdminContactMessagesClient from "./AdminContactMessagesClient";
 import MaintenanceChecklist from "./MaintenanceChecklist";
+import PhotoCoursClient from "./PhotoCoursClient";
 
 export default async function AdminDashboardPage() {
   const cookieStore = await cookies();
@@ -41,6 +42,9 @@ export default async function AdminDashboardPage() {
 
         {/* Inscriptions aux calls « En direct » (lib/calls.ts + call_messages) */}
         <AdminCallsClient />
+
+        {/* Qui se sert de « Photographier un cours » (essai ouvert le 12/08) */}
+        <PhotoCoursClient />
 
         <Link
           href="/admin/journal"
