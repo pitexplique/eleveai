@@ -8,6 +8,17 @@
 // scripte en cursive ; et « Orthographe lexicale », que le BO range sous
 // Vocabulaire (accents, graphèmes à prononciation variable, lettre muette
 // finale anticipée par la famille).
+//
+// 12/08/2026 — « Devenir lecteur » ajoutée. Le BO découpe la Lecture en QUATRE
+// objectifs, aux trois niveaux du cycle : identifier les mots, lire à voix
+// haute, comprendre un texte, et devenir lecteur. Le quatrième n'existait pas
+// au CE1, ni au CE2 : le parcours de lecteur — les œuvres complètes, le choix
+// personnel, la mise en réseau — n'était nulle part.
+//
+// ⚠️ À ne pas confondre avec `types_textes`, qui est déjà là : celle-là
+// reconnait le TYPE d'un texte qu'on a sous les yeux (narratif, documentaire,
+// prescriptif, poétique). « Devenir lecteur » ne parle pas d'un texte, elle
+// parle du LECTEUR : ce qu'il rapporte d'une lecture à la suivante.
 
 import type { NotionSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 
@@ -48,6 +59,13 @@ export const notions: NotionSource[] = [
   {
     id: "types_textes",
     label: "Types de textes (narratif, documentaire, prescriptif, poétique)",
+    boId: "BOCE1FL2",
+    prerequis: ["comprehension_lecture"],
+    levels: [1, 2],
+  },
+  {
+    id: "devenir_lecteur",
+    label: "Devenir lecteur",
     boId: "BOCE1FL2",
     prerequis: ["comprehension_lecture"],
     levels: [1, 2],

@@ -88,6 +88,28 @@ export const microSkills: MicroSkillSource[] = [
   { id: "ce1_type_poetique",     label: "Reconnaître un texte poétique (rime, vers)",      notionId: "types_textes", prerequis: ["ce1_type_narratif"] },
   { id: "ce1_type_defi",         label: "Défi types de textes",                            notionId: "types_textes", prerequis: ["ce1_type_poetique", "ce1_type_prescriptif", "ce1_type_documentaire"] },
 
+  // ── Devenir lecteur ───────────────────────────────────────────────────────
+  // Quatrième objectif de Lecture du BO, absent jusqu'au 12/08/2026 :
+  // « Lire 5 à 10 œuvres complètes et variées issues du patrimoine et de la
+  //   littérature de jeunesse » ; « Se familiariser aux différents genres et
+  //   types de textes » ; « Faire preuve d'initiative dans ses lectures
+  //   personnelles en empruntant des livres en fonction de ses gouts » ;
+  //   « Relier ses lectures à son expérience personnelle, être en mesure
+  //   d'établir des liens entre ses différentes lectures (mise en réseau) ».
+  // Les exemples de réussite ajoutent : reconnaitre les grandes
+  // caractéristiques d'un conte, d'une fable, d'un poème ; présenter une
+  // lecture à ses camarades ; écrire à propos de ses lectures.
+  //
+  // ⚠️ Le poème est déjà tenu par `ce1_type_poetique` sous `types_textes` :
+  // on n'ajoute ici que le conte et la fable, qui n'étaient nulle part.
+  { id: "ce1_lect_conte",           label: "Reconnaître les caractéristiques d'un conte",           notionId: "devenir_lecteur", prerequis: ["ce1_type_narratif"] },
+  { id: "ce1_lect_fable",           label: "Reconnaître une fable et sa morale",                    notionId: "devenir_lecteur", prerequis: ["ce1_type_narratif"] },
+  { id: "ce1_lect_oeuvre_complete", label: "Suivre une œuvre complète du début à la fin",           notionId: "devenir_lecteur", prerequis: ["ce1_comp_chronologie"] },
+  { id: "ce1_lect_emprunter",       label: "Emprunter un livre de soi-même, selon ses gouts",       notionId: "devenir_lecteur", prerequis: ["ce1_lect_oeuvre_complete"] },
+  { id: "ce1_lect_reseau",          label: "Faire le lien entre deux lectures (mise en réseau)",    notionId: "devenir_lecteur", prerequis: ["ce1_lect_conte", "ce1_lect_fable"] },
+  { id: "ce1_lect_presenter",       label: "Présenter une lecture et dire ce qu'on en a pensé",     notionId: "devenir_lecteur", prerequis: ["ce1_lect_oeuvre_complete"] },
+  { id: "ce1_lect_defi",            label: "Défi devenir lecteur",                                  notionId: "devenir_lecteur", prerequis: ["ce1_lect_reseau", "ce1_lect_emprunter", "ce1_lect_presenter"] },
+
   // ── Copie fluente ─────────────────────────────────────────────────────────
   { id: "ce1_copie_mot",          label: "Copier un mot sans erreur",                          notionId: "copie_fluente", prerequis: [] },
   { id: "ce1_copie_phrase",       label: "Copier une phrase avec majuscule et ponctuation",    notionId: "copie_fluente", prerequis: ["ce1_copie_mot"] },
