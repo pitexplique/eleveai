@@ -35,6 +35,18 @@ export const microSkills: MicroSkillSource[] = [
   { id: "cm1_oeuvre_carnet", label: "Garder trace de ses lectures", notionId: "lecture_oeuvres", prerequis: ["cm1_oeuvre_reaction"] },
   { id: "cm1_oeuvre_perseverer", label: "S'engager et persévérer dans une lecture longue", notionId: "lecture_oeuvres", prerequis: ["cm1_oeuvre_carnet"] },
 
+  // Culture littéraire et artistique — LES SIX ENTRÉES DU COURS MOYEN.
+  // ⚠️ Ajoutées le 11/08/2026. Le BO les nomme une par une et en fait un
+  // domaine à part ; la banque n'en nommait aucune. Elles sont identiques en
+  // CM1 et en CM2 : ce qui change d'une année à l'autre, dit le programme,
+  // c'est « la difficulté et la quantité des lectures », pas les thèmes.
+  { id: "cm1_cult_heros", label: "Découvrir des héroïnes, des héros", notionId: "culture_litteraire", prerequis: ["cm1_oeuvre_personnages"] },
+  { id: "cm1_cult_merveilleux", label: "Se confronter au merveilleux, à l'étrange", notionId: "culture_litteraire", prerequis: ["cm1_oeuvre_personnages"] },
+  { id: "cm1_cult_autres_vies", label: "Imaginer et vivre d'autres vies", notionId: "culture_litteraire", prerequis: ["cm1_cult_heros"] },
+  { id: "cm1_cult_morale", label: "Comprendre et interroger la morale", notionId: "culture_litteraire", prerequis: ["cm1_cult_heros"] },
+  { id: "cm1_cult_poesie", label: "Savourer le goût des mots, imaginer et créer en poésie", notionId: "culture_litteraire", prerequis: ["cm1_oeuvre_reaction"] },
+  { id: "cm1_cult_rapport_autres", label: "Se découvrir, s'affirmer dans le rapport aux autres", notionId: "culture_litteraire", prerequis: ["cm1_cult_autres_vies"] },
+
   // Écriture
   { id: "cm1_ecrit_copie", label: "Copier un texte court avec soin et efficacité", notionId: "ecriture", prerequis: [] },
   { id: "cm1_ecrit_notes", label: "Écrire pour retenir une idée ou une information", notionId: "ecriture", prerequis: ["cm1_ecrit_copie"] },

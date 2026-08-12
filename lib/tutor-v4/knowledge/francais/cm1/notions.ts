@@ -27,6 +27,18 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
   {
+    /* ⚠️ Ajoutée le 11/08/2026. « Culture littéraire et artistique » est un
+       domaine À PART du BO, à côté de la Lecture, et il nomme SIX entrées au
+       cours moyen. La banque n'en nommait aucune : `lecture_oeuvres` porte les
+       gestes du lecteur (relier, réagir, garder trace), pas les thèmes que le
+       programme prescrit d'aborder dans l'année. */
+    id: "culture_litteraire",
+    label: "Culture littéraire et artistique",
+    boId: "BOCM1FL1",
+    prerequis: ["lecture_oeuvres"],
+    levels: [1, 2, 3],
+  },
+  {
     id: "ecriture",
     label: "Écrire pour apprendre et produire",
     boId: "BOCM1FE1",

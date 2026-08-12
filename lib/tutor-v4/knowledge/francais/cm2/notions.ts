@@ -27,6 +27,17 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
   {
+    /* ⚠️ Ajoutée le 11/08/2026 — voir le même commentaire au CM1. Les six
+       entrées du cours moyen sont les mêmes en CM1 et en CM2 : le BO demande
+       de « prévoir une progression dans la difficulté et la quantité des
+       lectures » sur les deux années, pas de changer de thèmes. */
+    id: "culture_litteraire",
+    label: "Culture littéraire et artistique",
+    boId: "BOCM2FL1",
+    prerequis: ["lecture_oeuvres"],
+    levels: [1, 2, 3],
+  },
+  {
     id: "ecriture",
     label: "Produire, organiser et réviser des écrits",
     boId: "BOCM2FE1",

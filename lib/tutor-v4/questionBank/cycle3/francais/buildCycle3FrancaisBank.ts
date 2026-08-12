@@ -3948,6 +3948,1258 @@ const RADICAL_VARIATIONS: QcmItem[] = [
   },
 ];
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   CULTURE LITTÉRAIRE ET ARTISTIQUE — 11/08/2026
+
+   Le BO en fait un DOMAINE À PART, à côté de la Lecture, et il nomme ses
+   entrées une par une : six au cours moyen, cinq en 6e. « Cette mise en
+   correspondance est recommandée en CM et PRESCRITE en 6e. »
+   La banque n'en nommait aucune : `lecture_oeuvres` (CM) et
+   `culture_litteraire` (6e) ne portaient que des gestes de lecteur — relier,
+   réagir, garder trace, reconnaitre un genre.
+
+   ⚠️ CE QUE CES QUESTIONS PEUVENT ET NE PEUVENT PAS FAIRE. Les œuvres sont
+   choisies par le professeur : la banque ne peut pas interroger sur un livre
+   qu'elle n'a pas fait lire. Elle interroge donc les NOTIONS de chaque entrée
+   — ce qui fait un héros, ce qui sépare le merveilleux de l'étrange, à quoi
+   sert une ruse au théâtre — en s'appuyant sur le patrimoine que tout élève
+   de cycle 3 a croisé : contes, fables, mythes. Jamais sur un roman précis
+   qu'il faudrait avoir lu.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const HEROS: QcmItem[] = [
+  {
+    text: "Qu'est-ce qui fait d'un personnage une héroïne ou un héros ?",
+    correct: "Il affronte une épreuve plus grande que lui, et ce qu'il choisit de faire nous apprend quelque chose",
+    wrongs: ["Il est toujours le plus fort", "Il gagne toujours à la fin", "Il a des pouvoirs magiques"],
+    methode: "Ce n'est pas la force qui fait le héros, c'est l'épreuve et le choix.",
+  },
+  {
+    text: "Dans quels genres rencontre-t-on le plus souvent des héros ?",
+    correct: "l'épopée, le conte, le roman, la fable, le théâtre",
+    wrongs: ["la recette de cuisine", "la notice de montage", "le bulletin météo"],
+    methode: "Le BO cite ces genres-là pour l'entrée « Découvrir des héroïnes, des héros ».",
+  },
+  {
+    text: "Ulysse, dans l'Odyssée, est un héros surtout parce qu'…",
+    correct: "il est rusé et ne renonce jamais à rentrer chez lui",
+    wrongs: ["il est le plus fort de tous", "il possède un objet magique", "il est roi"],
+    methode: "Sa ruse et sa persévérance comptent plus que sa force.",
+  },
+  {
+    text: "Un héros peut-il avoir des faiblesses ?",
+    correct: "Oui, et c'est souvent ce qui le rend intéressant",
+    wrongs: ["Non, jamais", "Seulement à la fin du récit", "Seulement dans les contes"],
+    methode: "Le BO demande de percevoir « leurs éventuelles fragilités ».",
+  },
+  {
+    text: "Qu'est-ce qui pousse un héros à agir ?",
+    correct: "un but, une promesse ou une valeur qu'il défend",
+    wrongs: ["le hasard", "l'ordre du narrateur", "rien de particulier"],
+    methode: "Comprendre ses motivations, c'est comprendre le récit.",
+  },
+  {
+    text: "Antigone, Jeanne d'Arc, Alice : ce sont…",
+    correct: "des héroïnes de récits ou de l'histoire",
+    wrongs: ["des autrices", "des genres littéraires", "des figures de style"],
+    methode: "Le programme demande expressément de veiller à la représentation des femmes.",
+  },
+  {
+    text: "Dans un conte, l'héroïne ou le héros est souvent…",
+    correct: "aidé par un adjuvant et gêné par un opposant",
+    wrongs: ["seul du début à la fin", "toujours adulte", "toujours le narrateur"],
+    methode: "Le conte distribue les rôles autour du héros.",
+  },
+  {
+    text: "Que veut dire « s'identifier à un personnage » ?",
+    correct: "se mettre à sa place et ressentir ce qu'il ressent",
+    wrongs: ["lui ressembler physiquement", "avoir le même nom", "l'imiter dans la vraie vie"],
+    methode: "C'est ce qui permet d'ouvrir le champ de ses représentations.",
+  },
+  {
+    text: "Un héros de la littérature de jeunesse peut être…",
+    correct: "un enfant ordinaire placé dans une situation extraordinaire",
+    wrongs: [
+      "obligatoirement un adulte",
+      "obligatoirement un roi ou un guerrier",
+      "obligatoirement un animal",
+    ],
+    methode: "C'est même le cas le plus fréquent.",
+  },
+  {
+    text: "Les valeurs qu'un héros défend, ce sont…",
+    correct: "ce à quoi il tient : la justice, l'amitié, la liberté",
+    wrongs: ["ses objets magiques", "ses ennemis", "son apparence"],
+    methode: "Le BO demande de s'interroger sur les valeurs dont les héros sont porteurs.",
+  },
+  {
+    text: "Pourquoi lit-on encore des récits de héros très anciens ?",
+    correct: "Parce que leurs questions se posent encore aujourd'hui",
+    wrongs: ["Parce qu'ils sont courts", "Parce qu'ils sont faciles", "Parce qu'il n'y a rien d'autre"],
+    methode: "Ce sont des questionnements universels : c'est pour cela qu'ils durent.",
+  },
+  {
+    text: "Dans une fable, le personnage principal est souvent…",
+    correct: "un animal qui se conduit comme un humain",
+    wrongs: ["un chevalier", "le narrateur lui-même", "un poète"],
+    methode: "L'animal permet de parler des hommes sans les nommer.",
+  },
+];
+
+const MERVEILLEUX: QcmItem[] = [
+  {
+    text: "Dans un conte merveilleux, les faits magiques…",
+    correct: "sont admis : personne ne s'en étonne",
+    wrongs: ["font toujours peur", "sont expliqués à la fin", "n'arrivent jamais"],
+    methode: "C'est ce qui définit le merveilleux : la magie va de soi.",
+  },
+  {
+    text: "Quelle est la différence entre le merveilleux et l'étrange ?",
+    correct: "Dans le merveilleux la magie est admise ; dans l'étrange elle inquiète et reste sans explication",
+    wrongs: [
+      "Il n'y en a aucune",
+      "Le merveilleux est plus long",
+      "L'étrange s'écrit toujours en vers",
+    ],
+    methode: "L'un rassure et enchante, l'autre trouble et laisse un doute.",
+  },
+  {
+    text: "Une fée, un ogre, une baguette magique appartiennent…",
+    correct: "au merveilleux",
+    wrongs: ["au documentaire", "au texte prescriptif", "à la presse"],
+    methode: "Ce sont les figures propres au conte merveilleux.",
+  },
+  {
+    text: "Dans « Le Petit Poucet », l'ogre est…",
+    correct: "un être merveilleux, dont l'existence n'est pas discutée",
+    wrongs: ["un homme ordinaire", "le narrateur", "un animal réel"],
+    methode: "Le conte ne cherche jamais à le rendre vraisemblable.",
+  },
+  {
+    text: "Pourquoi les contes merveilleux font-ils peur sans danger ?",
+    correct: "Parce qu'on éprouve la peur en sécurité, à distance, en lisant",
+    wrongs: [
+      "Parce qu'ils sont courts",
+      "Parce qu'ils finissent toujours bien",
+      "Parce qu'ils sont écrits pour les adultes",
+    ],
+    methode: "C'est ce qui permet d'explorer la peur sans la subir.",
+  },
+  {
+    text: "Le merveilleux permet d'explorer des thèmes universels comme…",
+    correct: "la peur, le désir d'évasion, la curiosité pour l'inexplicable",
+    wrongs: [
+      "les règles d'accord",
+      "les tables de multiplication",
+      "la lecture de documents composites",
+    ],
+    methode: "Le BO nomme ces trois-là pour cette entrée.",
+  },
+  {
+    text: "Un récit étrange laisse souvent le lecteur…",
+    correct: "avec un doute : rêve, folie, ou réalité ?",
+    wrongs: ["avec une réponse claire", "avec une morale écrite", "avec une liste d'objets"],
+    methode: "Le doute n'est pas un défaut du récit : c'est son effet.",
+  },
+  {
+    text: "Où et quand se passent la plupart des contes merveilleux ?",
+    correct: "dans un lieu et un temps qu'on ne peut pas situer : « Il était une fois… »",
+    wrongs: [
+      "dans une ville précise et datée",
+      "toujours à l'école",
+      "toujours dans le futur",
+    ],
+    methode: "L'imprécision est voulue : elle rend le conte transportable partout.",
+  },
+  {
+    text: "À La Réunion, les récits autour de Grand-mère Kal relèvent…",
+    correct: "du merveilleux et de l'étrange",
+    wrongs: ["du documentaire", "du texte prescriptif", "de la poésie savante"],
+    methode: "Les légendes locales appartiennent au même domaine que les contes.",
+  },
+  {
+    text: "Qu'est-ce qu'un objet magique dans un conte ?",
+    correct: "un objet qui donne un pouvoir et fait avancer l'histoire",
+    wrongs: [
+      "un objet décoratif",
+      "un objet du quotidien sans rôle",
+      "le titre du conte",
+    ],
+    methode: "S'il ne change rien à l'histoire, ce n'est pas un objet magique.",
+  },
+  {
+    text: "Le merveilleux se rencontre…",
+    correct: "dans les contes, les mythes et la fantasy",
+    wrongs: ["seulement dans les contes", "seulement au théâtre", "seulement en poésie"],
+    methode: "C'est un registre, pas un genre : il traverse plusieurs formes.",
+  },
+  {
+    text: "Que développe surtout la lecture de récits merveilleux ?",
+    correct: "l'imagination ET l'esprit critique : on sait que c'est inventé",
+    wrongs: ["la vitesse de lecture", "l'orthographe", "le calcul mental"],
+    methode: "Savoir qu'on lit une fiction fait partie de l'exercice.",
+  },
+];
+
+const AUTRES_VIES: QcmItem[] = [
+  {
+    text: "Que veut dire « vivre d'autres vies » en lisant ?",
+    correct: "se projeter dans une existence qui n'est pas la sienne",
+    wrongs: ["lire plusieurs livres à la fois", "changer de nom", "relire le même livre"],
+    methode: "C'est le titre même de cette entrée du programme.",
+  },
+  {
+    text: "Un récit de vie raconte…",
+    correct: "l'existence d'une personne, réelle ou imaginée",
+    wrongs: ["une recette", "une règle de grammaire", "un mode d'emploi"],
+    methode: "Le BO parle de « récits de vie offerts par la littérature de jeunesse ».",
+  },
+  {
+    text: "Qu'apporte la lecture d'un récit qui se passe loin de chez soi ?",
+    correct: "on découvre d'autres façons de vivre, et on comprend mieux la sienne",
+    wrongs: ["rien de particulier", "seulement du vocabulaire", "seulement des noms de lieux"],
+    methode: "S'immerger dans un univers étranger, dit le BO, développe l'empathie.",
+  },
+  {
+    text: "L'empathie, c'est…",
+    correct: "la capacité à ressentir ce que ressent un autre",
+    wrongs: ["la capacité à lire vite", "la mémoire des dates", "le goût du théâtre"],
+    methode: "C'est ce que le programme attend de cette entrée.",
+  },
+  {
+    text: "Dans un roman, un journal intime sert à…",
+    correct: "faire entendre les pensées du personnage",
+    wrongs: ["donner la morale", "décrire le décor", "indiquer le genre"],
+    methode: "Il ouvre l'intérieur du personnage au lecteur.",
+  },
+  {
+    text: "Se démarquer d'un personnage, c'est…",
+    correct: "comprendre ce qu'il fait sans être d'accord avec lui",
+    wrongs: ["l'oublier", "le détester", "changer de livre"],
+    methode: "Le BO met « s'identifier » et « s'en démarquer » sur le même plan.",
+  },
+  {
+    text: "Pourquoi un auteur choisit-il de raconter à la première personne ?",
+    correct: "pour qu'on entre dans la tête du personnage",
+    wrongs: ["pour écrire plus vite", "pour faire plus court", "pour éviter les dialogues"],
+    methode: "Le « je » rapproche : c'est un choix, pas une facilité.",
+  },
+  {
+    text: "Une autobiographie raconte…",
+    correct: "la vie de l'auteur, écrite par lui-même",
+    wrongs: ["la vie d'un autre", "une histoire entièrement inventée", "un fait scientifique"],
+    methode: "auto (soi) + bio (vie) + graphie (écriture).",
+  },
+  {
+    text: "Que peut-on apprendre d'un personnage très différent de soi ?",
+    correct: "que plusieurs façons de vivre sont possibles",
+    wrongs: ["rien du tout", "seulement son nom", "seulement son âge"],
+    methode: "C'est ce que le BO appelle « se projeter dans des existences nouvelles ».",
+  },
+  {
+    text: "Un récit d'enfance permet souvent au lecteur…",
+    correct: "de comparer son propre vécu à celui du personnage",
+    wrongs: ["d'apprendre des règles", "de réviser l'orthographe", "de mémoriser des dates"],
+    methode: "La comparaison est le moteur de cette entrée.",
+  },
+  {
+    text: "Lire la vie d'un personnage nourrit surtout…",
+    correct: "la sensibilité et la créativité du lecteur",
+    wrongs: ["sa vitesse de calcul", "sa mémoire des lieux", "son écriture cursive"],
+    methode: "Le BO le dit en toutes lettres pour cette entrée.",
+  },
+  {
+    text: "Dans un roman, le narrateur et l'auteur…",
+    correct: "ne sont pas toujours la même personne",
+    wrongs: [
+      "sont toujours la même personne",
+      "n'existent jamais ensemble",
+      "désignent le lecteur",
+    ],
+    methode: "Un auteur peut faire raconter par un personnage qui n'est pas lui.",
+  },
+];
+
+const MORALE: QcmItem[] = [
+  {
+    text: "À la fin d'une fable, la morale…",
+    correct: "dit la leçon que l'histoire veut faire comprendre",
+    wrongs: ["raconte la suite", "présente l'auteur", "donne le titre"],
+    methode: "Elle condense en une phrase ce que le récit a montré.",
+  },
+  {
+    text: "La morale d'une fable est-elle toujours écrite ?",
+    correct: "Non : parfois il faut la déduire soi-même",
+    wrongs: ["Oui, toujours", "Jamais", "Seulement chez La Fontaine"],
+    methode: "Une morale implicite se cherche dans ce qui arrive aux personnages.",
+  },
+  {
+    text: "Dans « Le Corbeau et le Renard », que retient-on ?",
+    correct: "qu'il faut se méfier de ceux qui flattent",
+    wrongs: [
+      "qu'il faut chanter plus fort",
+      "qu'il ne faut pas manger de fromage",
+      "que les renards sont dangereux",
+    ],
+    methode: "La fable est écrite pour cette leçon-là, et elle le dit à la fin.",
+  },
+  {
+    text: "« Interroger la morale », cela veut dire…",
+    correct: "se demander si l'on est d'accord, et pourquoi",
+    wrongs: ["l'apprendre par cœur", "la recopier", "la traduire"],
+    methode: "Le BO demande d'interroger, pas seulement de comprendre.",
+  },
+  {
+    text: "Une valeur, dans un récit, c'est…",
+    correct: "ce à quoi les personnages tiennent : justice, tolérance, liberté",
+    wrongs: ["le prix du livre", "le nombre de pages", "le nom de l'auteur"],
+    methode: "Le BO cite justice, tolérance, liberté, respect des différences.",
+  },
+  {
+    text: "Les conséquences des actes d'un personnage servent à…",
+    correct: "faire réfléchir le lecteur à ses propres choix",
+    wrongs: ["allonger l'histoire", "donner le genre", "présenter le narrateur"],
+    methode: "C'est par les conséquences que le récit fait réfléchir.",
+  },
+  {
+    text: "Deux lecteurs peuvent-ils tirer des leçons différentes du même récit ?",
+    correct: "Oui, et en débattre fait partie de la lecture",
+    wrongs: ["Non, jamais", "Seulement s'ils ont le même âge", "Seulement au théâtre"],
+    methode: "L'esprit critique se construit dans l'échange.",
+  },
+  {
+    text: "Un personnage qui fait un mauvais choix…",
+    correct: "peut quand même apprendre quelque chose au lecteur",
+    wrongs: ["n'a aucun intérêt", "doit disparaitre du récit", "n'existe pas en littérature"],
+    methode: "L'erreur d'un personnage est souvent la leçon du lecteur.",
+  },
+  {
+    text: "Le respect des différences est…",
+    correct: "une valeur que la littérature permet d'interroger",
+    wrongs: ["une règle de grammaire", "un genre littéraire", "une figure de style"],
+    methode: "Le BO le range parmi les fondements de la vie en commun.",
+  },
+  {
+    text: "Une fable met souvent en scène des animaux pour…",
+    correct: "parler des humains sans les nommer",
+    wrongs: ["apprendre la zoologie", "faire rire seulement", "allonger le texte"],
+    methode: "Le détour par l'animal rend la leçon supportable.",
+  },
+  {
+    text: "L'esprit critique du lecteur, c'est…",
+    correct: "sa capacité à se faire un avis en s'appuyant sur le texte",
+    wrongs: [
+      "sa capacité à tout critiquer",
+      "sa vitesse de lecture",
+      "sa mémoire des personnages",
+    ],
+    methode: "Un avis sans appui sur le texte n'est pas un avis de lecteur.",
+  },
+  {
+    text: "La préservation de l'environnement peut-elle être le sujet d'une œuvre littéraire ?",
+    correct: "Oui : le BO la cite parmi les valeurs à interroger",
+    wrongs: [
+      "Non, c'est un sujet de sciences",
+      "Seulement en poésie",
+      "Seulement au collège",
+    ],
+    methode: "Justice, tolérance, liberté, respect des différences, environnement.",
+  },
+];
+
+const POESIE: QcmItem[] = [
+  {
+    text: "À quoi reconnait-on un poème du premier coup d'œil ?",
+    correct: "à sa forme sur la page : des vers, des strophes, des blancs",
+    wrongs: ["à sa longueur", "à son titre", "à ses guillemets"],
+    methode: "La forme se voit avant que la lecture ne commence.",
+  },
+  {
+    text: "Une rime, c'est…",
+    correct: "un même son à la fin de deux vers",
+    wrongs: ["un même mot répété", "une phrase courte", "un titre en gras"],
+    methode: "C'est le son qui compte, pas l'orthographe.",
+  },
+  {
+    text: "Qu'est-ce qu'une image poétique ?",
+    correct: "une façon de dire une chose en en montrant une autre",
+    wrongs: ["un dessin dans le livre", "une photographie", "une lettre majuscule"],
+    methode: "Le BO dit que la force de la poésie réside dans ses images.",
+  },
+  {
+    text: "Dans « la mer était un drap froissé », que fait le poète ?",
+    correct: "il compare la mer à un drap : c'est une image",
+    wrongs: ["il décrit un lit", "il fait une erreur", "il donne une définition"],
+    methode: "L'image rapproche deux choses qu'on n'aurait pas rapprochées.",
+  },
+  {
+    text: "Un poème doit-il toujours rimer ?",
+    correct: "Non : le vers libre existe",
+    wrongs: ["Oui, toujours", "Seulement s'il est long", "Seulement à l'école"],
+    methode: "La rime est un procédé parmi d'autres, pas une obligation.",
+  },
+  {
+    text: "Pourquoi lit-on un poème à voix haute ?",
+    correct: "parce que ses sons et son rythme font partie du sens",
+    wrongs: ["pour aller plus vite", "pour compter les mots", "pour trouver le sujet"],
+    methode: "Un poème qu'on ne dit pas perd la moitié de ce qu'il est.",
+  },
+  {
+    text: "Le poète peut-il inventer des mots ou bousculer la grammaire ?",
+    correct: "Oui : il joue avec la langue en connaissant la règle",
+    wrongs: ["Non, jamais", "Seulement en prose", "Seulement s'il est célèbre"],
+    methode: "Le BO dit que l'élève « mesure les écarts à la norme » et en joue.",
+  },
+  {
+    text: "Une strophe, c'est…",
+    correct: "un groupe de vers séparé des autres par une ligne blanche",
+    wrongs: ["une phrase", "un paragraphe de roman", "un titre"],
+    methode: "C'est le paragraphe du poème.",
+  },
+  {
+    text: "Que veut dire « savourer le goût des mots » ?",
+    correct: "prendre plaisir à leur son, à leur rythme, à ce qu'ils évoquent",
+    wrongs: ["apprendre leur définition", "les compter", "les classer par ordre alphabétique"],
+    methode: "C'est le titre de cette entrée du programme.",
+  },
+  {
+    text: "Un recueil de poèmes, c'est…",
+    correct: "un livre qui rassemble plusieurs poèmes",
+    wrongs: ["un poème très long", "un roman écrit en vers", "un dictionnaire"],
+    methode: "Recueillir : rassembler.",
+  },
+  {
+    text: "Écrire un poème « à la manière de », c'est…",
+    correct: "reprendre sa forme ou son procédé pour en faire un à soi",
+    wrongs: ["le recopier", "le traduire", "le résumer"],
+    methode: "On emprunte le moule, pas les mots.",
+  },
+  {
+    text: "La poésie parle-t-elle seulement de choses belles ?",
+    correct: "Non : elle parle de tout, y compris du quotidien",
+    wrongs: ["Oui, toujours", "Seulement de la nature", "Seulement de l'amour"],
+    methode: "Un caillou, une casserole, un bus : tout peut devenir poème.",
+  },
+];
+
+const RAPPORT_AUTRES: QcmItem[] = [
+  {
+    text: "Dans un récit, un personnage se construit surtout…",
+    correct: "au fil de ses rencontres et de ses choix",
+    wrongs: [
+      "dès la première page, une fois pour toutes",
+      "grâce au narrateur seul",
+      "grâce au titre",
+    ],
+    methode: "Le BO parle de personnages qui « se construisent et se redéfinissent ».",
+  },
+  {
+    text: "L'amitié, dans un roman, sert souvent à…",
+    correct: "montrer comment un personnage change au contact d'un autre",
+    wrongs: ["allonger l'histoire", "donner la morale", "décrire le décor"],
+    methode: "C'est une rencontre, et une rencontre transforme.",
+  },
+  {
+    text: "Un conflit entre deux personnages permet…",
+    correct: "de comprendre ce à quoi chacun tient",
+    wrongs: ["de finir l'histoire plus vite", "d'ajouter des pages", "de changer de genre"],
+    methode: "Le désaccord révèle les valeurs de chacun.",
+  },
+  {
+    text: "« S'affirmer », pour un personnage, c'est…",
+    correct: "oser dire ou faire ce qu'il pense juste, même seul",
+    wrongs: ["crier plus fort", "gagner un combat", "être le plus âgé"],
+    methode: "S'affirmer n'est pas s'imposer.",
+  },
+  {
+    text: "Que peut apporter la lecture d'un récit sur le harcèlement ?",
+    correct: "des mots pour comprendre une situation et pour en parler",
+    wrongs: ["rien", "des règles d'orthographe", "des dates à retenir"],
+    methode: "La littérature donne des mots là où on n'en avait pas.",
+  },
+  {
+    text: "Un personnage peut-il changer d'avis au cours d'un récit ?",
+    correct: "Oui : c'est souvent ce qui rend l'histoire intéressante",
+    wrongs: ["Non, jamais", "Seulement à la fin", "Seulement s'il est adulte"],
+    methode: "Un personnage qui ne bouge pas n'a pas d'histoire.",
+  },
+  {
+    text: "Le regard des autres, dans un récit, agit sur le personnage…",
+    correct: "en l'aidant ou en le freinant",
+    wrongs: ["jamais", "seulement au théâtre", "seulement en poésie"],
+    methode: "Se découvrir est « à la fois intime et collectif », dit le BO.",
+  },
+  {
+    text: "Une bande dessinée peut-elle traiter de sujets graves ?",
+    correct: "Oui : le BO la cite à côté des romans et du théâtre",
+    wrongs: ["Non, c'est fait pour rire", "Seulement pour les petits", "Seulement en couleur"],
+    methode: "Le support ne décide pas du sérieux du propos.",
+  },
+  {
+    text: "Discuter d'un livre en classe permet…",
+    correct: "de découvrir que d'autres l'ont lu autrement",
+    wrongs: [
+      "de gagner du temps",
+      "d'éviter de le lire",
+      "de trouver l'unique bonne réponse",
+    ],
+    methode: "Il n'y a pas une lecture juste, il y a des lectures fondées.",
+  },
+  {
+    text: "Se découvrir en lisant, cela veut dire…",
+    correct: "comprendre quelque chose sur soi grâce à l'histoire d'un autre",
+    wrongs: ["trouver son nom dans le livre", "lire sa biographie", "écrire son journal"],
+    methode: "Le détour par un autre est le chemin le plus court vers soi.",
+  },
+  {
+    text: "Un personnage de théâtre se révèle surtout…",
+    correct: "par ce qu'il dit et par ce qu'il fait devant les autres",
+    wrongs: [
+      "par sa description physique",
+      "par le titre de la pièce",
+      "par les didascalies seules",
+    ],
+    methode: "Au théâtre, il n'y a pas de narrateur pour expliquer.",
+  },
+  {
+    text: "Pourquoi le BO parle-t-il d'une aventure « à la fois intime et collective » ?",
+    correct: "Parce qu'on se construit seul, mais toujours au contact des autres",
+    wrongs: [
+      "Parce qu'on lit à voix haute",
+      "Parce que toute la classe lit le même livre",
+      "Parce que les livres coutent cher",
+    ],
+    methode: "Les deux mots vont ensemble : c'est tout le sens de l'entrée.",
+  },
+];
+
+/* ── LES QUATRE ENTRÉES PROPRES À LA 6e ─────────────────────────────────────
+   La cinquième, la poésie, partage le pool POESIE avec le cours moyen : les
+   deux entrées disent la même chose — les images et le pouvoir d'évocation.
+   ⚠️ Si la 6e doit un jour aller plus loin (versification, registres), elle
+   prendra son propre pool ; pour l'instant, dupliquer serait recopier. */
+
+const ORIGINES: QcmItem[] = [
+  {
+    text: "Qu'est-ce qu'un récit des origines ?",
+    correct: "un récit qui explique comment le monde, les hommes ou une chose sont apparus",
+    wrongs: [
+      "un récit qui se passe au début du livre",
+      "la première page d'un roman",
+      "la biographie de l'auteur",
+    ],
+    methode: "Il répond à un « d'où cela vient-il ? ».",
+  },
+  {
+    text: "Un mythe étiologique explique…",
+    correct: "l'origine d'un phénomène : pourquoi la mer est salée, pourquoi l'araignée tisse",
+    wrongs: ["la fin du monde", "les règles de grammaire", "la vie de l'auteur"],
+    methode: "Étiologie : la recherche des causes.",
+  },
+  {
+    text: "Un texte fondateur, c'est…",
+    correct: "un récit ancien sur lequel une culture s'est construite",
+    wrongs: [
+      "le premier livre écrit par un auteur",
+      "un texte de loi",
+      "un manuel scolaire",
+    ],
+    methode: "Il fonde une culture, pas une œuvre.",
+  },
+  {
+    text: "La Genèse, l'Odyssée, les mythes grecs sont…",
+    correct: "des textes fondateurs",
+    wrongs: ["des romans modernes", "des documentaires", "des pièces de théâtre"],
+    methode: "Le BO demande d'en découvrir au moins un, issu des religions monothéistes.",
+  },
+  {
+    text: "Prométhée apporte le feu aux hommes. Ce récit explique…",
+    correct: "l'origine d'un savoir humain, et son prix",
+    wrongs: ["la météo", "une règle de grammaire", "la géographie de la Grèce"],
+    methode: "Le mythe explique, et il fait payer : les deux comptent.",
+  },
+  {
+    text: "Pourquoi trouve-t-on des récits des origines dans toutes les cultures ?",
+    correct: "Parce que toutes les sociétés cherchent à expliquer d'où elles viennent",
+    wrongs: ["Parce qu'ils sont faciles à écrire", "Par hasard", "Parce qu'ils sont courts"],
+    methode: "C'est ce que le BO appelle un questionnement universel.",
+  },
+  {
+    text: "Un symbole, dans un mythe, c'est…",
+    correct: "une image concrète qui porte une idée plus large",
+    wrongs: ["un signe de ponctuation", "un titre", "un nom propre"],
+    methode: "Le feu de Prométhée n'est pas seulement du feu.",
+  },
+  {
+    text: "Que veut dire « recréer le monde » dans une production d'élève ?",
+    correct: "écrire à son tour un récit qui explique une origine",
+    wrongs: ["recopier un mythe", "traduire un texte ancien", "résumer un roman"],
+    methode: "Le BO attend des « productions écrites et créatives ».",
+  },
+  {
+    text: "Les mythes se sont d'abord transmis…",
+    correct: "à l'oral, avant d'être écrits",
+    wrongs: ["par écrit seulement", "par le théâtre", "par la peinture"],
+    methode: "C'est pourquoi il en existe plusieurs versions.",
+  },
+  {
+    text: "Un récit étiologique réunionnais pourrait expliquer…",
+    correct: "pourquoi le piton fume, ou d'où vient le nom d'un lieu",
+    wrongs: ["la recette du cari", "les horaires du bus", "la table de 7"],
+    methode: "Toute culture, y compris la plus proche, a ses récits d'origine.",
+  },
+  {
+    text: "Que gagne-t-on à comparer deux récits des origines ?",
+    correct: "on voit ce que deux cultures partagent et ce qui les sépare",
+    wrongs: ["rien", "du temps", "la correction des fautes"],
+    methode: "Le BO parle de mythes « issus de différents continents et traditions ».",
+  },
+  {
+    text: "Les valeurs portées par un mythe…",
+    correct: "se lisent dans ce que font les personnages et dans ce qui leur arrive",
+    wrongs: [
+      "sont toujours écrites à la fin",
+      "sont données par le titre",
+      "n'existent pas",
+    ],
+    methode: "Le mythe montre ; il n'explique presque jamais.",
+  },
+];
+
+const THEATRE: QcmItem[] = [
+  {
+    text: "Une didascalie, c'est…",
+    correct: "une indication de jeu ou de mise en scène, écrite par l'auteur",
+    wrongs: ["une réplique", "le titre d'une scène", "un poème"],
+    methode: "Elle n'est pas dite sur scène : elle est jouée.",
+  },
+  {
+    text: "Une réplique, c'est…",
+    correct: "ce que dit un personnage",
+    wrongs: ["l'entrée d'un personnage", "la description du décor", "un acte"],
+    methode: "Au théâtre, presque tout passe par la parole.",
+  },
+  {
+    text: "Dans une comédie, la ruse sert souvent à…",
+    correct: "déjouer un obstacle et faire rire",
+    wrongs: ["décrire le décor", "donner la morale", "allonger la pièce"],
+    methode: "C'est le ressort dramatique et comique de cette entrée.",
+  },
+  {
+    text: "Un quiproquo, c'est…",
+    correct: "un malentendu : un personnage croit une chose, le public en sait une autre",
+    wrongs: ["une longue réplique", "un changement de décor", "une rime"],
+    methode: "Le public en sait plus : c'est de là que vient le rire.",
+  },
+  {
+    text: "Pourquoi le public rit-il d'une ruse au théâtre ?",
+    correct: "parce qu'il en sait plus que le personnage trompé",
+    wrongs: [
+      "parce que les répliques sont courtes",
+      "parce qu'il y a de la musique",
+      "parce que c'est écrit en vers",
+    ],
+    methode: "Le savoir du spectateur est le moteur du comique.",
+  },
+  {
+    text: "Une pièce de théâtre est découpée en…",
+    correct: "actes et scènes",
+    wrongs: ["chapitres et paragraphes", "strophes et vers", "titres et sous-titres"],
+    methode: "L'acte est la grande unité, la scène la petite.",
+  },
+  {
+    text: "Au théâtre, le masque sert à…",
+    correct: "cacher qui l'on est pour jouer un autre — et parfois dire plus vrai",
+    wrongs: ["protéger le visage", "changer de voix seulement", "indiquer l'acte"],
+    methode: "« Se masquer, jouer, déjouer » : l'illusion et la vérité vont ensemble.",
+  },
+  {
+    text: "Un texte de théâtre est écrit d'abord pour être…",
+    correct: "joué",
+    wrongs: ["lu en silence", "résumé", "recopié"],
+    methode: "C'est pourquoi la mise en voix fait partie de l'étude.",
+  },
+  {
+    text: "Que change la mise en voix d'une réplique ?",
+    correct: "le ton donne un sens que le texte seul ne dit pas",
+    wrongs: ["rien du tout", "la longueur de la scène", "le nombre de personnages"],
+    methode: "« Très bien. » peut vouloir dire son contraire.",
+  },
+  {
+    text: "L'illusion théâtrale, c'est…",
+    correct: "le fait d'accepter, le temps de la pièce, que ce qu'on voit est vrai",
+    wrongs: ["un tour de magie", "un décor peint", "une erreur de l'auteur"],
+    methode: "Le BO parle du rapport entre « l'illusion et le réel ».",
+  },
+  {
+    text: "Quand un personnage parle au public sans que les autres l'entendent, on appelle cela…",
+    correct: "un aparté",
+    wrongs: ["une didascalie", "un monologue intérieur", "un quiproquo"],
+    methode: "À part : dit de côté, pour le public seul.",
+  },
+  {
+    text: "Jouer une scène en classe permet surtout…",
+    correct: "de comprendre le texte par le corps et par la voix",
+    wrongs: [
+      "d'apprendre le texte par cœur",
+      "de gagner du temps",
+      "d'éviter de le lire",
+    ],
+    methode: "Le BO attend des « activités de théâtralisation ».",
+  },
+];
+
+const AVENTURE: QcmItem[] = [
+  {
+    text: "Qu'est-ce qui fait le moteur d'un récit d'aventure ?",
+    correct: "un départ, un danger et un but à atteindre",
+    wrongs: [
+      "un décor très détaillé",
+      "un narrateur bavard",
+      "une morale finale",
+    ],
+    methode: "Sans enjeu, il n'y a pas d'aventure.",
+  },
+  {
+    text: "Un récit d'aventure commence souvent par…",
+    correct: "une situation d'équilibre, rompue par un élément déclencheur",
+    wrongs: ["la morale", "le dénouement", "le portrait complet du héros"],
+    methode: "Quelque chose doit se casser pour que le récit parte.",
+  },
+  {
+    text: "Pourquoi le héros doit-il quitter son monde connu ?",
+    correct: "parce que c'est le départ qui rend l'aventure possible",
+    wrongs: [
+      "parce que l'auteur l'a décidé au hasard",
+      "pour finir plus vite",
+      "pour changer de genre",
+    ],
+    methode: "Le BO parle de « l'élan constitutif de l'aventure ».",
+  },
+  {
+    text: "À quoi sert un obstacle dans un récit d'aventure ?",
+    correct: "à montrer ce dont le héros est capable",
+    wrongs: ["à allonger le livre", "à ennuyer le lecteur", "à changer de narrateur"],
+    methode: "Un héros sans obstacle n'apprend rien et n'apprend rien au lecteur.",
+  },
+  {
+    text: "L'Île au trésor et Vingt mille lieues sous les mers sont…",
+    correct: "des romans d'aventure",
+    wrongs: ["des recueils de poésie", "des pièces de théâtre", "des documentaires"],
+    methode: "Deux classiques de cette entrée.",
+  },
+  {
+    text: "Le suspense, c'est…",
+    correct: "l'attente créée chez le lecteur quand il ignore ce qui va arriver",
+    wrongs: ["la description du décor", "la fin de l'histoire", "la morale"],
+    methode: "Il se fabrique : l'auteur retient l'information.",
+  },
+  {
+    text: "Dans un récit d'aventure, le voyage est souvent…",
+    correct: "aussi un voyage intérieur : le héros change",
+    wrongs: [
+      "seulement un déplacement",
+      "toujours en bateau",
+      "sans effet sur l'histoire",
+    ],
+    methode: "On ne revient jamais tout à fait le même.",
+  },
+  {
+    text: "Le narrateur d'un récit d'aventure peut…",
+    correct: "être le héros lui-même ou quelqu'un d'extérieur",
+    wrongs: ["être toujours le héros", "être toujours extérieur", "ne pas exister"],
+    methode: "Les deux choix existent, et ils ne racontent pas pareil.",
+  },
+  {
+    text: "Un récit de voyage, c'est…",
+    correct: "un texte qui raconte la découverte, réelle ou imaginée, d'un ailleurs",
+    wrongs: ["une carte", "un guide touristique", "un horaire de train"],
+    methode: "Ce qui compte, c'est le récit de la découverte.",
+  },
+  {
+    text: "Pourquoi les récits d'aventure plaisent-ils depuis si longtemps ?",
+    correct: "parce qu'ils donnent à vivre ce qu'on ne vivra pas",
+    wrongs: ["parce qu'ils sont courts", "parce qu'ils sont faciles", "parce qu'ils sont récents"],
+    methode: "Le BO parle de « l'expression littéraire qui en décuple le pouvoir ».",
+  },
+  {
+    text: "Écrire un récit d'aventure demande d'abord…",
+    correct: "de choisir un but, un obstacle et un enjeu",
+    wrongs: ["de trouver un titre", "de compter les pages", "de choisir un décor"],
+    methode: "Le reste s'écrit autour de ces trois-là.",
+  },
+  {
+    text: "Le dénouement d'un récit d'aventure…",
+    correct: "résout la quête, heureusement ou non",
+    wrongs: [
+      "recommence l'histoire",
+      "donne obligatoirement une morale",
+      "présente les personnages",
+    ],
+    methode: "Résoudre ne veut pas dire finir bien.",
+  },
+];
+
+const MONSTRES: QcmItem[] = [
+  {
+    text: "Qu'est-ce qui fait un monstre en littérature ?",
+    correct: "une part d'humain et une part qui fait peur, tenues ensemble",
+    wrongs: ["sa taille", "ses dents", "son nom"],
+    methode: "Le BO parle de « la part d'humanité d'un personnage monstrueux ».",
+  },
+  {
+    text: "Le Minotaure, le Cyclope et la Méduse viennent…",
+    correct: "des mythes grecs",
+    wrongs: ["des contes de Perrault", "du théâtre classique", "de la poésie moderne"],
+    methode: "Trois figures que la 6e croise dans les récits des origines.",
+  },
+  {
+    text: "Pourquoi certains monstres inspirent-ils de la pitié ?",
+    correct: "parce qu'ils souffrent d'être rejetés",
+    wrongs: ["parce qu'ils sont petits", "parce qu'ils perdent", "parce qu'ils parlent"],
+    methode: "Le BO dit : « inspirant la peur ou la compassion ».",
+  },
+  {
+    text: "À quoi sert le monstre dans un récit ?",
+    correct: "à faire apparaitre ce que le héros a de plus humain",
+    wrongs: ["à remplir des pages", "à faire rire", "à donner le titre"],
+    methode: "Il est l'épreuve qui révèle.",
+  },
+  {
+    text: "Que veut dire « expérience de l'autre, expérience de soi » ?",
+    correct: "en rencontrant le monstre, on découvre aussi quelque chose sur soi",
+    wrongs: ["on rencontre un ami", "on voyage", "on change de livre"],
+    methode: "C'est le sous-titre même de cette entrée.",
+  },
+  {
+    text: "Un monstre peut-il être le personnage principal ?",
+    correct: "Oui, et le récit change alors de point de vue",
+    wrongs: ["Non, jamais", "Seulement au théâtre", "Seulement en poésie"],
+    methode: "Raconter depuis le monstre renverse tout le récit.",
+  },
+  {
+    text: "Pourquoi la figure du monstre traverse-t-elle les époques ?",
+    correct: "parce que chaque époque y met ce qui lui fait peur",
+    wrongs: [
+      "parce que les auteurs se copient",
+      "parce que c'est plus facile à écrire",
+      "parce que c'est obligatoire",
+    ],
+    methode: "Le BO parle de « la permanence de la figure du monstre à travers les âges ».",
+  },
+  {
+    text: "Dans « La Belle et la Bête », la Bête est monstrueuse…",
+    correct: "d'apparence, et pas de cœur",
+    wrongs: ["de cœur, et pas d'apparence", "des deux façons", "d'aucune façon"],
+    methode: "Tout le conte tient dans cet écart.",
+  },
+  {
+    text: "Qu'est-ce qui distingue un monstre d'un simple méchant ?",
+    correct: "le monstre trouble : on ne sait pas toujours s'il faut le craindre ou le plaindre",
+    wrongs: ["sa taille", "le nombre de ses apparitions", "son nom"],
+    methode: "Le méchant est clair ; le monstre ne l'est pas.",
+  },
+  {
+    text: "Créer un monstre dans un texte demande de…",
+    correct: "choisir ce qui, en lui, fait peur ET ce qui touche",
+    wrongs: [
+      "lui donner beaucoup de dents",
+      "le décrire très longuement",
+      "lui donner un nom compliqué",
+    ],
+    methode: "Sans la seconde part, ce n'est qu'un décor effrayant.",
+  },
+  {
+    text: "La visée éducative d'un conte à monstre est souvent…",
+    correct: "d'apprendre à ne pas juger sur l'apparence",
+    wrongs: [
+      "d'apprendre la géographie",
+      "de faire peur pour faire peur",
+      "de donner du vocabulaire",
+    ],
+    methode: "Le BO demande de « dégager la visée éducative » du récit.",
+  },
+  {
+    text: "Dans beaucoup de récits, le monstre garde…",
+    correct: "un lieu ou un secret que le héros doit atteindre",
+    wrongs: ["rien du tout", "la morale", "la dernière page"],
+    methode: "Le franchir, c'est franchir l'épreuve.",
+  },
+];
+
+/* ── TROIS TROUS DES RUBRIQUES LECTURE ET ÉCRITURE ──────────────────────────
+   Relevés le 11/08/2026 en lisant les rubriques que je n'avais pas ouvertes.
+   La 6e, passée par la fabrique collège, avait perdu des attendus que le CM1
+   et le CM2 portent pourtant. */
+
+const FLUENCE_130: QcmItem[] = [
+  {
+    text: "Quel repère de fluence la classe de 6e vise-t-elle ?",
+    correct: "environ 130 mots par minute",
+    wrongs: ["60 mots par minute", "90 mots par minute", "200 mots par minute"],
+    methode: "Le CM1 vise 110, le CM2 120, la 6e 130.",
+  },
+  {
+    text: "Pourquoi viser un nombre de mots par minute ?",
+    correct: "parce qu'une lecture fluide libère la tête pour comprendre",
+    wrongs: [
+      "pour classer les élèves entre eux",
+      "pour finir les livres plus vite",
+      "pour améliorer l'orthographe",
+    ],
+    methode: "La vitesse est un moyen ; la compréhension est le but.",
+  },
+  {
+    text: "Comment progresse-t-on en fluence ?",
+    correct: "en relisant plusieurs fois le même texte",
+    wrongs: [
+      "en lisant chaque jour un texte nouveau, jamais le même",
+      "en lisant plus fort",
+      "en lisant plus lentement",
+    ],
+    methode: "C'est la relecture qui automatise, pas la nouveauté.",
+  },
+  {
+    text: "Lire vite sans comprendre, c'est…",
+    correct: "manquer le but : la vitesse n'est qu'un moyen",
+    wrongs: ["très bien", "exactement le but recherché", "impossible"],
+    methode: "Un élève qui lit vite et ne retient rien n'a pas lu.",
+  },
+  {
+    text: "Un groupe syntaxique, c'est…",
+    correct: "un groupe de mots qui va ensemble et qu'on lit d'un seul souffle",
+    wrongs: ["une phrase entière", "un paragraphe", "une syllabe"],
+    methode: "Le BO demande de « prendre en compte les groupes syntaxiques ».",
+  },
+  {
+    text: "La prosodie, c'est…",
+    correct: "la mélodie de la voix : rythme, pauses, intonation",
+    wrongs: ["la vitesse seule", "le volume seul", "l'orthographe"],
+    methode: "C'est ce qui distingue une lecture vivante d'une récitation plate.",
+  },
+  {
+    text: "Où fait-on une pause en lisant à voix haute ?",
+    correct: "à la ponctuation et à la fin des groupes de sens",
+    wrongs: ["toutes les cinq syllabes", "à chaque mot long", "jamais"],
+    methode: "La pause au mauvais endroit casse le sens.",
+  },
+  {
+    text: "Une liaison mal faite en lecture à voix haute…",
+    correct: "casse le rythme et gêne la compréhension",
+    wrongs: [
+      "n'a aucune importance",
+      "accélère la lecture",
+      "améliore le sens",
+    ],
+    methode: "Le BO cite les liaisons parmi ce qu'il faut prendre en compte.",
+  },
+  {
+    text: "Le CM1 vise 110 mots par minute, le CM2 120. Et la 6e ?",
+    correct: "130",
+    wrongs: ["115", "150", "200"],
+    methode: "Dix mots de plus par an : la progression est régulière.",
+  },
+  {
+    text: "Lecture silencieuse et lecture à voix haute…",
+    correct: "s'entrainent toutes les deux et se nourrissent l'une l'autre",
+    wrongs: [
+      "sont exactement la même chose",
+      "s'opposent",
+      "ne concernent que l'école primaire",
+    ],
+    methode: "Le BO demande un entrainement quotidien aux deux.",
+  },
+  {
+    text: "Que faire devant un mot long inconnu, en lecture à voix haute ?",
+    correct: "le préparer des yeux avant de le dire",
+    wrongs: ["le sauter", "le lire lettre par lettre", "s'arrêter net"],
+    methode: "Une lecture à voix haute se prépare avant que la voix ne commence.",
+  },
+  {
+    text: "Pourquoi un texte préparé se lit-il mieux ?",
+    correct: "parce que l'œil a déjà repéré les pièges et la ponctuation",
+    wrongs: [
+      "parce qu'on l'a appris par cœur",
+      "parce qu'il est plus court",
+      "parce qu'on le lit plus fort",
+    ],
+    methode: "Préparer, ce n'est pas mémoriser.",
+  },
+];
+
+const DOCUMENTS: QcmItem[] = [
+  {
+    text: "Qu'est-ce qu'un document composite ?",
+    correct: "un document qui mêle texte, image, tableau ou schéma",
+    wrongs: ["un document très long", "un livre de poche", "un poème"],
+    methode: "Composite : fait de plusieurs éléments de natures différentes.",
+  },
+  {
+    text: "La source d'un document, c'est…",
+    correct: "d'où il vient : auteur, publication, date",
+    wrongs: ["son titre", "sa longueur", "ses couleurs"],
+    methode: "Le BO demande d'« identifier la nature et la source des documents ».",
+  },
+  {
+    text: "Pourquoi vérifier la source d'un document ?",
+    correct: "pour savoir qui parle, et si l'on peut s'y fier",
+    wrongs: ["pour le classer", "pour le résumer", "pour l'illustrer"],
+    methode: "Une information sans source n'est pas une information.",
+  },
+  {
+    text: "Comparer deux documents sur le même sujet permet…",
+    correct: "de voir ce qu'ils partagent et ce sur quoi ils divergent",
+    wrongs: ["de gagner du temps", "de n'en lire qu'un", "de corriger les fautes"],
+    methode: "Le BO demande de « repérer ce qui les rapproche et ce qui les différencie ».",
+  },
+  {
+    text: "Deux documents convergents, ce sont…",
+    correct: "deux documents qui vont dans le même sens",
+    wrongs: [
+      "deux documents qui se contredisent",
+      "deux documents du même auteur",
+      "deux documents de même longueur",
+    ],
+    methode: "Converger : aller vers le même point.",
+  },
+  {
+    text: "À quoi sert la légende d'une image ?",
+    correct: "à dire ce que l'image montre et d'où elle vient",
+    wrongs: ["à décorer la page", "à donner le titre du livre", "à remplacer le texte"],
+    methode: "Sans légende, une image peut dire à peu près n'importe quoi.",
+  },
+  {
+    text: "À quoi sert un schéma ?",
+    correct: "à montrer d'un coup d'œil une organisation ou un fonctionnement",
+    wrongs: ["à faire joli", "à remplacer les mots", "à allonger le document"],
+    methode: "Il dit en une image ce qui prendrait un paragraphe.",
+  },
+  {
+    text: "Prélever une information, c'est…",
+    correct: "aller la chercher précisément, en sachant ce qu'on cherche",
+    wrongs: [
+      "lire tout du début à la fin",
+      "recopier le document",
+      "en faire le résumé",
+    ],
+    methode: "On part de la question, pas du document.",
+  },
+  {
+    text: "Un article de presse et un article d'encyclopédie…",
+    correct: "n'ont pas le même but, donc pas le même ton",
+    wrongs: ["sont identiques", "ont le même auteur", "ont la même longueur"],
+    methode: "L'un informe sur l'actualité, l'autre fait le point sur un savoir.",
+  },
+  {
+    text: "Que faire quand deux documents se contredisent ?",
+    correct: "regarder leurs sources et leurs dates avant de trancher",
+    wrongs: ["choisir le plus court", "choisir le premier lu", "abandonner"],
+    methode: "La contradiction est une information, pas un obstacle.",
+  },
+  {
+    text: "Un tableau de chiffres se lit…",
+    correct: "en repérant d'abord ce que disent ses lignes et ses colonnes",
+    wrongs: [
+      "de gauche à droite comme un texte",
+      "en commençant par le bas",
+      "sans en tenir compte",
+    ],
+    methode: "Sans les entêtes, un nombre ne veut rien dire.",
+  },
+  {
+    text: "Croiser deux documents, c'est…",
+    correct: "combiner leurs informations pour répondre à une question qu'aucun ne résout seul",
+    wrongs: [
+      "les lire l'un après l'autre",
+      "comparer leur longueur",
+      "n'en garder qu'un",
+    ],
+    methode: "Le BO parle d'informations « combinées pour donner un sens global ».",
+  },
+];
+
+const IMAGE: QcmItem[] = [
+  {
+    text: "Qu'est-ce qu'une image fixe ?",
+    correct: "une image qui ne bouge pas : photo, tableau, dessin, affiche",
+    wrongs: ["un film", "une animation", "un enregistrement sonore"],
+    methode: "Fixe s'oppose à animée.",
+  },
+  {
+    text: "Le premier plan d'une image, c'est…",
+    correct: "ce qui est le plus près de celui qui regarde",
+    wrongs: ["le fond", "le titre", "le cadre"],
+    methode: "Du plus près au plus loin : premier plan, second plan, arrière-plan.",
+  },
+  {
+    text: "Le cadrage d'une photographie, c'est…",
+    correct: "le choix de ce qu'on montre et de ce qu'on laisse dehors",
+    wrongs: ["sa taille d'impression", "ses couleurs", "sa date"],
+    methode: "Ce qui est hors du cadre a été écarté par quelqu'un.",
+  },
+  {
+    text: "Pourquoi dit-on qu'une image est un choix ?",
+    correct: "parce que quelqu'un a décidé de ce qu'on voit et de ce qu'on ne voit pas",
+    wrongs: [
+      "parce qu'elle est en couleur",
+      "parce qu'elle est ancienne",
+      "parce qu'elle porte une légende",
+    ],
+    methode: "Une image n'est jamais neutre : c'est le premier réflexe à prendre.",
+  },
+  {
+    text: "Que regarde-t-on en premier dans une image ?",
+    correct: "ce qui attire l'œil : la lumière, une couleur vive, un personnage au centre",
+    wrongs: ["le coin en bas à droite", "le cadre", "la légende seule"],
+    methode: "Le regard est guidé : reste à comprendre par quoi.",
+  },
+  {
+    text: "Une affiche cherche surtout à…",
+    correct: "faire agir : acheter, venir, se souvenir",
+    wrongs: [
+      "raconter une longue histoire",
+      "expliquer une règle",
+      "décrire un paysage",
+    ],
+    methode: "Son but explique ses choix de couleurs et de mots.",
+  },
+  {
+    text: "Une prise de vue en plongée, vue d'en haut, donne souvent…",
+    correct: "l'impression que le sujet est petit ou dominé",
+    wrongs: ["l'impression qu'il est grand", "aucune impression", "plus de couleurs"],
+    methode: "L'angle raconte, autant que ce qui est photographié.",
+  },
+  {
+    text: "Interpréter une image, c'est…",
+    correct: "dire ce qu'elle montre, puis ce qu'elle suggère, en s'appuyant sur ce qu'on voit",
+    wrongs: [
+      "inventer librement une histoire",
+      "la décrire élément par élément et s'arrêter là",
+      "en donner le prix",
+    ],
+    methode: "Décrire d'abord, interpréter ensuite — jamais l'inverse.",
+  },
+  {
+    text: "Une illustration dans un roman sert à…",
+    correct: "prolonger ou éclairer le texte, pas à le remplacer",
+    wrongs: ["remplacer le texte", "occuper la page", "donner la morale"],
+    methode: "Elle dialogue avec le texte.",
+  },
+  {
+    text: "Que dit la lumière dans une image ?",
+    correct: "elle oriente le regard et donne une atmosphère",
+    wrongs: ["rien", "l'heure exacte de la prise de vue", "le nom de l'auteur"],
+    methode: "Sombre ou éclatante, elle installe un climat avant tout mot.",
+  },
+  {
+    text: "Deux personnes peuvent-elles interpréter la même image autrement ?",
+    correct: "Oui, si chacune s'appuie sur ce qu'elle voit",
+    wrongs: ["Non, jamais", "Seulement si elles ont le même âge", "Seulement en classe"],
+    methode: "Interpréter n'est pas inventer : il faut pouvoir montrer du doigt.",
+  },
+  {
+    text: "Avant d'interpréter une image, il faut d'abord…",
+    correct: "la décrire : qui, quoi, où, et comment c'est cadré",
+    wrongs: ["connaitre son prix", "connaitre son auteur", "en faire un résumé"],
+    methode: "On ne peut pas interpréter ce qu'on n'a pas regardé.",
+  },
+];
+
+const ECRIRE_MAIN: QcmItem[] = [
+  {
+    text: "Que demande le programme quand on copie un texte ?",
+    correct: "une copie lisible, régulière, soignée et sans erreur",
+    wrongs: [
+      "une copie rapide avant tout",
+      "une copie faite de mémoire",
+      "une copie en majuscules",
+    ],
+    methode: "Quatre exigences, et la vitesse n'en fait pas partie.",
+  },
+  {
+    text: "Copier vite, ce n'est pas écrire vite. C'est…",
+    correct: "lever les yeux moins souvent",
+    wrongs: [
+      "appuyer plus fort",
+      "écrire plus petit",
+      "sauter les mots inutiles",
+    ],
+    methode: "Le temps se perd dans les allers-retours, pas dans la main.",
+  },
+  {
+    text: "Quelle est la meilleure méthode de copie ?",
+    correct: "lire un groupe de mots, le garder en tête, l'écrire sans regarder, vérifier",
+    wrongs: [
+      "copier lettre par lettre",
+      "copier mot par mot",
+      "copier sans jamais relire",
+    ],
+    methode: "C'est la taille du morceau gardé en tête qui fait la différence.",
+  },
+  {
+    text: "Pourquoi la copie reste-t-elle importante au cycle 3 ?",
+    correct: "parce qu'elle entraine le geste et fixe l'orthographe des mots",
+    wrongs: ["pour occuper le temps", "pour remplir le cahier", "pour la note"],
+    methode: "Le BO dit que « la maîtrise de l'écriture cursive reste importante ».",
+  },
+  {
+    text: "Quelle est l'erreur de copie la plus fréquente ?",
+    correct: "un mot sauté ou doublé au moment où l'on relève les yeux",
+    wrongs: ["une faute d'accord", "une majuscule oubliée", "une rature"],
+    methode: "C'est une erreur de repérage, pas d'inattention.",
+  },
+  {
+    text: "Comment éviter de sauter un mot en copiant ?",
+    correct: "retenir le dernier mot écrit avant de revenir au modèle",
+    wrongs: ["copier plus lentement", "copier debout", "ne pas relire"],
+    methode: "Le repère se prend sur SA feuille, avant de lever les yeux.",
+  },
+  {
+    text: "La mise en forme d'un texte produit, c'est…",
+    correct: "les marges, les alinéas, les titres, la lisibilité",
+    wrongs: ["sa longueur", "son nombre de mots", "la couleur du stylo"],
+    methode: "Le BO demande de « veiller à la lisibilité et à la mise en forme ».",
+  },
+  {
+    text: "Sur quelle feuille se relit-on ?",
+    correct: "sur la sienne, jamais sur le modèle",
+    wrongs: ["sur le modèle", "sur les deux à la fois", "sur celle du voisin"],
+    methode: "L'œil qui relit le modèle relit un texte juste, et ne voit rien.",
+  },
+  {
+    text: "L'écriture cursive au collège…",
+    correct: "reste importante, même si l'on écrit aussi au clavier",
+    wrongs: ["ne sert plus à rien", "est abandonnée", "remplace le clavier"],
+    methode: "Le BO le dit : « la maîtrise du geste cursif reste importante ».",
+  },
+  {
+    text: "Un texte bien présenté…",
+    correct: "se lit plus vite et se comprend mieux",
+    wrongs: [
+      "est plus long",
+      "vaut automatiquement une meilleure note",
+      "n'a pas d'importance",
+    ],
+    methode: "La présentation est au service du lecteur.",
+  },
+  {
+    text: "Que vérifie-t-on en relisant une copie ?",
+    correct: "les mots oubliés ou doublés, puis les accents, puis la ponctuation",
+    wrongs: [
+      "seulement les majuscules",
+      "seulement la longueur",
+      "rien : on a déjà copié",
+    ],
+    methode: "Une chose à la fois, dans cet ordre.",
+  },
+  {
+    text: "Écrire à la main « de manière fluide », cela veut dire…",
+    correct: "sans y penser, pour garder sa tête libre pour ce qu'on écrit",
+    wrongs: ["très vite", "en gros caractères", "sans lever le stylo"],
+    methode: "Un geste automatisé libère l'attention pour le contenu.",
+  },
+];
+
 // ── CONJUGAISON ─────────────────────────────────────────────────────────────
 // Present / imparfait / futur / infinitif sont produits par le moteur
 // parametrique (conjugationEngine.ts). Restent ici les notions conceptuelles.
@@ -4400,7 +5652,41 @@ function vocabulaireQuestion(microId: string): Generated {
   return qcm(VOC_CONTEXTE);
 }
 
+/** Les micros du 11/08/2026 dont la NOTION ne suffit pas à les aiguiller.
+ *  ⚠️ Elles passent AVANT tout le reste, parce qu'elles vivent dans des
+ *  notions génériques qui les avaleraient : les onze entrées littéraires
+ *  tomberaient toutes sur le même pool OEUVRE, `comp_documents` et
+ *  `comp_image` sur LECTURE, `ecrit_copie` sur ECRITURE, `flue_130_mots` sur
+ *  le défaut final. C'est la leçon de la phrase complexe du CM2 : un
+ *  aiguillage trop large ne panne pas, il sert simplement autre chose. */
+function questionParMicro(microId: string): Generated | null {
+  // Les six entrées du cours moyen.
+  if (microId.includes("cult_heros")) return qcm(HEROS);
+  if (microId.includes("cult_merveilleux")) return qcm(MERVEILLEUX);
+  if (microId.includes("cult_autres_vies")) return qcm(AUTRES_VIES);
+  if (microId.includes("cult_morale")) return qcm(MORALE);
+  if (microId.includes("cult_rapport_autres")) return qcm(RAPPORT_AUTRES);
+  // Les cinq entrées de la 6e. `cult_poesie` sert les deux niveaux.
+  if (microId.includes("cult_poesie")) return qcm(POESIE);
+  if (microId.includes("cult_origines")) return qcm(ORIGINES);
+  if (microId.includes("cult_theatre")) return qcm(THEATRE);
+  if (microId.includes("cult_aventure")) return qcm(AVENTURE);
+  if (microId.includes("cult_monstres")) return qcm(MONSTRES);
+  // Les trois trous de Lecture et Écriture relevés en 6e.
+  if (microId.includes("flue_130")) return qcm(FLUENCE_130);
+  if (microId.includes("comp_documents")) return qcm(DOCUMENTS);
+  if (microId.includes("comp_image")) return qcm(IMAGE);
+  /* ⚠️ `ecrit_copie` existe AUSSI au CM1 et au CM2, où il tombait jusqu'ici
+     sur le pool générique ECRITURE. Le BO leur demande pourtant la même chose
+     qu'à la 6e — « Copier et produire des textes », « Acquérir des stratégies
+     de copie ». Les trois niveaux y viennent donc ensemble. */
+  if (microId.includes("ecrit_copie")) return qcm(ECRIRE_MAIN);
+  return null;
+}
+
 function questionForNotion(notionId: string, microId: string): Generated {
+  const parMicro = questionParMicro(microId);
+  if (parMicro) return parMicro;
   if (notionId.includes("fluence")) return qcm(LECTURE);
   if (notionId.includes("comprehension")) return Math.random() < 0.5 ? qcm(LECTURE) : qcm(DOCUMENT);
   if (notionId.includes("oeuvre")) return qcm(OEUVRE);

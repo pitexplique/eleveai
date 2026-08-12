@@ -208,6 +208,32 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       { id: `${prefix}_conj_imperatif_conditionnel`, label: "Conjuguer à l'impératif présent et au conditionnel présent", notionId: "conjugaison", prerequis: [`${prefix}_conj_composer`] },
       // « des temps du discours, puis des temps du récit »
       { id: `${prefix}_conj_discours_recit`, label: "Distinguer les temps du discours et les temps du récit", notionId: "conjugaison", prerequis: [`${prefix}_conj_employer`] },
+
+      /* ── Les CINQ ENTRÉES LITTÉRAIRES de la 6e ──────────────────────────
+         Le BO les nomme une par une, et précise que la mise en correspondance
+         avec un genre est « recommandée en CM et PRESCRITE en 6e ». La banque
+         n'en nommait aucune : `culture_litteraire` ne portait que des gestes
+         génériques — genres, contexte, réseau, trace. */
+      { id: `${prefix}_cult_origines`, label: "Créer, recréer le monde : récits des origines", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_poesie`, label: "Chanter et enchanter le monde : mots et merveilles (poésie)", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_theatre`, label: "Se masquer, jouer, déjouer : ruses en action (théâtre)", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_aventure`, label: "Partir à l'aventure !", notionId: "culture_litteraire", prerequis: [`${prefix}_cult_origines`] },
+      { id: `${prefix}_cult_monstres`, label: "Rencontrer des monstres : expérience de l'autre, expérience de soi", notionId: "culture_litteraire", prerequis: [`${prefix}_cult_origines`] },
+
+      /* ── Trois trous relevés dans les rubriques Lecture et Écriture ──────
+         La 6e avait perdu, en passant par la fabrique collège, des attendus
+         que le CM1 et le CM2 portent pourtant : */
+      // « Parvenir à lire correctement en ciblant 130 mots par minute en
+      //   moyenne » — le CM1 vise 110, le CM2 120, la 6e ne visait rien.
+      { id: `${prefix}_flue_130_mots`, label: "Viser une lecture fluide autour de 130 mots par minute", notionId: "lecture_voix_haute", prerequis: [`${prefix}_voix_preparer`] },
+      // « Identifier la nature et la source des documents » ; « Comparer des
+      //   documents de genres différents » ; « Prendre appui sur les éléments
+      //   essentiels d'une image fixe et les interpréter »
+      { id: `${prefix}_comp_documents`, label: "Identifier, comparer et croiser des documents", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_indices`] },
+      { id: `${prefix}_comp_image`, label: "Prendre appui sur les éléments essentiels d'une image fixe", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_documents`] },
+      // « Copier des textes de façon lisible, régulière, soignée et sans
+      //   erreur d'orthographe ou de ponctuation » — objectif CM1, CM2 ET 6e.
+      { id: `${prefix}_ecrit_copie`, label: "Écrire à la main de manière fluide et efficace", notionId: "ecriture", prerequis: [] },
     );
   }
 

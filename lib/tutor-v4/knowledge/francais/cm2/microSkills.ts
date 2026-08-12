@@ -51,6 +51,17 @@ export const microSkills: MicroSkillSource[] = [
   { id: "cm2_oeuvre_carnet", label: "Tenir une trace personnelle et organisée de ses lectures", notionId: "lecture_oeuvres", prerequis: ["cm2_oeuvre_experience"] },
   { id: "cm2_oeuvre_choix", label: "Choisir une œuvre et justifier son choix", notionId: "lecture_oeuvres", prerequis: ["cm2_oeuvre_carnet"] },
 
+  // Culture littéraire et artistique — LES SIX ENTRÉES DU COURS MOYEN.
+  // ⚠️ Ajoutées le 11/08/2026, identiques à celles du CM1 : le BO ne change
+  // pas les thèmes d'une année sur l'autre, il demande une progression dans
+  // « la difficulté et la quantité des lectures ».
+  { id: "cm2_cult_heros", label: "Découvrir des héroïnes, des héros", notionId: "culture_litteraire", prerequis: ["cm2_oeuvre_theme"] },
+  { id: "cm2_cult_merveilleux", label: "Se confronter au merveilleux, à l'étrange", notionId: "culture_litteraire", prerequis: ["cm2_oeuvre_theme"] },
+  { id: "cm2_cult_autres_vies", label: "Imaginer et vivre d'autres vies", notionId: "culture_litteraire", prerequis: ["cm2_cult_heros"] },
+  { id: "cm2_cult_morale", label: "Comprendre et interroger la morale", notionId: "culture_litteraire", prerequis: ["cm2_cult_heros"] },
+  { id: "cm2_cult_poesie", label: "Savourer le goût des mots, imaginer et créer en poésie", notionId: "culture_litteraire", prerequis: ["cm2_oeuvre_experience"] },
+  { id: "cm2_cult_rapport_autres", label: "Se découvrir, s'affirmer dans le rapport aux autres", notionId: "culture_litteraire", prerequis: ["cm2_cult_autres_vies"] },
+
   // Écriture
   { id: "cm2_ecrit_copie", label: "Copier efficacement un texte plus long", notionId: "ecriture", prerequis: [] },
   { id: "cm2_ecrit_notes", label: "Prendre des notes simples pour apprendre", notionId: "ecriture", prerequis: ["cm2_ecrit_copie"] },
