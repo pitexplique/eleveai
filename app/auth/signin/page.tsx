@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
-import { inferClasseFromCode, useEleve } from "@/context/EleveContext";
+import { useEleve } from "@/context/EleveContext";
 
 const RESEND_COOLDOWN_SECONDS = 30;
 const INDEPENDENT_ETABLISSEMENT_CODE = "INDEPENDANT";
@@ -536,10 +536,9 @@ export default function SignInPage() {
         code_eleve: session.code_utilisateur,
         nom: session.nom,
         type_utilisateur: session.role,
-        classe: session.classe ?? inferClasseFromCode(
-          session.code_utilisateur,
-          session.code_etablissement
-        ),
+        // La classe vient du serveur, jamais du code : « 6C19 » désigne un
+        // élève, pas une 6e. Inconnue = null, et EleveProvider la relira.
+        classe: session.classe ?? null,
         token: data.token ?? null,
       });
 
