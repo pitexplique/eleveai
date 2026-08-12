@@ -18,6 +18,7 @@ import {
   routeRemediation,
   tirerEpreuve,
   type ConfigEpreuve,
+  type FormatReponse,
   type QuestionEval,
 } from "@/lib/eval-nationale/moteur";
 
@@ -30,8 +31,18 @@ type Etape = "accueil" | "prise-en-main" | "epreuve" | "bilan";
 // on vérifie que l'élève sait se servir de la souris et choisir une réponse.
 // Un enfant qui perd des points parce qu'il n'a pas compris l'interface, on ne
 // mesure pas ses maths — on mesure son habitude de l'ordinateur.
-const PRISE_EN_MAIN = [
+type EcranPrise = {
+  format: FormatReponse;
+  consigne: string;
+  question: string;
+  choices: string[];
+  expected: string;
+  apprend: string;
+};
+
+const PRISE_CASES: EcranPrise[] = [
   {
+    format: "cases",
     consigne: "Clique sur la bonne réponse, puis sur « Continuer ».",
     question: "Quelle est la couleur du ciel par temps clair ?",
     choices: ["Bleu", "Vert", "Rouge", "Marron"],
@@ -39,6 +50,7 @@ const PRISE_EN_MAIN = [
     apprend: "Une seule réponse à la fois : cliquer sur une autre change ton choix.",
   },
   {
+    format: "cases",
     consigne: "Même chose. Regarde bien : ta réponse s'entoure quand elle est prise en compte.",
     question: "Combien font 2 + 3 ?",
     choices: ["5", "4", "6", "23"],
@@ -47,6 +59,55 @@ const PRISE_EN_MAIN = [
       "Tant que tu n'as pas cliqué sur « Continuer », tu peux changer d'avis.",
   },
 ];
+
+/**
+ * ⚠️ LA PRISE EN MAIN N'ENSEIGNAIT QUE LES CASES À COCHER (défaut relevé par
+ * Frédéric le 11/08). L'épreuve sert désormais trois formats — cases, menu
+ * déroulant, tableau série. Un élève qui découvre un menu déroulant le chrono
+ * lancé perd trente secondes à comprendre qu'il faut l'ouvrir : c'est
+ * exactement ce que la prise en main existe pour éviter, et on mesurait de
+ * nouveau son habitude de l'ordinateur au lieu de ses mathématiques.
+ *
+ * ⭐ ON N'ENSEIGNE QUE CE QUI VA TOMBER. Les formats sont lus sur le tirage
+ * réel — d'où le tirage AVANT la prise en main, et non après. Le tableau série
+ * est rare en maths : apprendre à un élève un format qu'il ne rencontrera pas
+ * lui prend du temps et de l'attention pour rien.
+ */
+const PRISE_LISTE: EcranPrise = {
+  format: "liste",
+  consigne:
+    "Certaines questions se répondent dans un menu. Ouvre-le et choisis.",
+  question: "Quel animal vit dans l'eau ?",
+  choices: ["Le poisson", "Le chat", "Le margouillat", "L'oiseau"],
+  expected: "Le poisson",
+  apprend:
+    "Le menu cache les réponses tant qu'on ne l'ouvre pas. « Laisser vide » existe aussi : c'est le droit de ne pas répondre.",
+};
+
+const PRISE_TABLEAU: EcranPrise = {
+  format: "tableau",
+  consigne:
+    "Et parfois, il faut classer CHAQUE ligne. Vrai ou faux, pour les quatre.",
+  question: "Coche vrai ou faux pour chaque phrase.",
+  choices: [
+    "Un carré a quatre côtés égaux",
+    "Un triangle a cinq côtés",
+    "Un cercle a des angles droits",
+    "Un rectangle a six sommets",
+  ],
+  expected: "Un carré a quatre côtés égaux",
+  apprend:
+    "⚠️ Celui-là ne pardonne rien : il faut les QUATRE lignes justes pour que la question compte. Une seule case fausse, et tout est perdu — c'est la règle du jour J.",
+};
+
+function ecransPriseEnMain(questions: QuestionEval[]): EcranPrise[] {
+  const formats = new Set(questions.map((q) => q.format ?? "cases"));
+  return [
+    ...PRISE_CASES,
+    ...(formats.has("liste") ? [PRISE_LISTE] : []),
+    ...(formats.has("tableau") ? [PRISE_TABLEAU] : []),
+  ];
+}
 
 function formatChrono(secondes: number) {
   const m = Math.floor(secondes / 60);
@@ -90,6 +151,10 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
   // Prise en main
   const [indexPrise, setIndexPrise] = useState(0);
   const [choixPrise, setChoixPrise] = useState<string | null>(null);
+  /** Le tableau série de la prise en main se répond ligne par ligne. */
+  const [grillePrise, setGrillePrise] = useState<
+    Record<string, "vrai" | "faux">
+  >({});
 
   // Épreuve
   const [questions, setQuestions] = useState<QuestionEval[]>([]);
@@ -148,13 +213,14 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
     return () => clearInterval(t);
   }, [etape, cloturer]);
 
+  /**
+   * ⭐ LE TIRAGE SE FAIT ICI, AVANT LA PRISE EN MAIN — et non plus au départ
+   * du chrono (déplacé le 11/08). C'est ce qui permet à la prise en main de
+   * n'enseigner QUE les formats que l'élève va réellement rencontrer : sans
+   * les questions, on ne sait pas s'il verra un menu déroulant ou un tableau.
+   * Le chrono, lui, ne démarre toujours qu'à `commencerEpreuve`.
+   */
   function commencerPriseEnMain() {
-    setEtape("prise-en-main");
-    setIndexPrise(0);
-    setChoixPrise(null);
-  }
-
-  function commencerEpreuve() {
     // ⚠️ Le tirage utilise Math.random : il DOIT tourner après le montage,
     // jamais au rendu, sinon le serveur et le navigateur ne tirent pas la
     // même épreuve (erreur d'hydratation).
@@ -166,11 +232,18 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
     }
     const epreuve = tirerEpreuve(config, vus);
     setQuestions(epreuve.questions);
+    setRestant(epreuve.dureeSecondes);
+    setEtape("prise-en-main");
+    setIndexPrise(0);
+    setChoixPrise(null);
+    setGrillePrise({});
+  }
+
+  function commencerEpreuve() {
     setIndex(0);
     setChoix(null);
     setGrille({});
     setReponses({});
-    setRestant(epreuve.dureeSecondes);
     setChronoEcoule(false);
     setEnregistrement(null);
     // Sans ce remise à zéro, un deuxième passage ne serait jamais enregistré.
@@ -302,6 +375,16 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
     chronoEcoule,
     config,
   ]);
+
+  // Les écrans de prise en main, déduits du tirage : on n'apprend que ce qu'on
+  // va rencontrer.
+  const ECRANS_PRISE = ecransPriseEnMain(questions);
+  const ecranPrise = ECRANS_PRISE[indexPrise];
+  // Sur un tableau, on ne passe qu'une fois les quatre lignes classées.
+  const priseRepondue =
+    ecranPrise?.format === "tableau"
+      ? ecranPrise.choices.every((c) => grillePrise[c])
+      : choixPrise !== null;
 
   const question = questions[index];
 
@@ -531,7 +614,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
               className="inline-flex rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-white"
               style={{ backgroundColor: accent }}
             >
-              Prise en main · {indexPrise + 1} / {PRISE_EN_MAIN.length}
+              Prise en main · {indexPrise + 1} / {ECRANS_PRISE.length}
             </p>
             <h1 className="mt-2 font-serif text-3xl font-black leading-tight">
               D&apos;abord, on vérifie que tu es à l&apos;aise
@@ -550,51 +633,134 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
               style={{ borderColor: accent }}
             >
               <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
-                {PRISE_EN_MAIN[indexPrise].consigne}
+                {ecranPrise.consigne}
               </p>
               <p className="mt-2 font-serif text-2xl font-black leading-tight">
-                {PRISE_EN_MAIN[indexPrise].question}
+                {ecranPrise.question}
               </p>
 
-              <div className="mt-4 grid gap-2 sm:grid-cols-2">
-                {PRISE_EN_MAIN[indexPrise].choices.map((c) => (
-                  <button
-                    key={c}
-                    type="button"
-                    onClick={() => setChoixPrise(c)}
-                    className={[
-                      "rounded-xl border-2 px-4 py-3 text-left text-sm font-black transition",
-                      choixPrise === c
-                        ? "text-white"
-                        : "border-[#1d1c16]/20 hover:border-[#1d1c16]/50 hover:bg-[#1d1c16]/5",
-                    ].join(" ")}
-                    style={
-                      choixPrise === c
-                        ? { backgroundColor: accent, borderColor: accent }
-                        : undefined
-                    }
+              {/* LES TROIS FORMATS S'APPRENNENT ICI, exactement comme ils se
+                  présenteront pendant l'épreuve — même balise, même geste. Une
+                  démonstration qui ressemble sans être identique n'apprend
+                  rien : l'élève découvrirait la vraie le chrono lancé. */}
+              {ecranPrise.format === "tableau" ? (
+                <div className="mt-4 overflow-hidden rounded-xl border-2 border-[#1d1c16]/20">
+                  <p className="bg-[#1d1c16]/5 px-3 py-2 text-[11px] font-black uppercase tracking-[0.14em] text-[#1d1c16]/70">
+                    Cocher une réponse par ligne — il faut les quatre justes
+                  </p>
+                  {ecranPrise.choices.map((c, rang) => (
+                    <div
+                      key={c}
+                      className={[
+                        "flex flex-wrap items-center gap-x-3 gap-y-2 px-3 py-2.5",
+                        rang > 0 ? "border-t border-[#1d1c16]/12" : "",
+                      ].join(" ")}
+                    >
+                      <span className="min-w-0 flex-1 text-sm font-black">
+                        {c}
+                      </span>
+                      <span className="flex shrink-0 gap-2">
+                        {(["vrai", "faux"] as const).map((v) => (
+                          <button
+                            key={v}
+                            type="button"
+                            onClick={() =>
+                              setGrillePrise((g) => ({ ...g, [c]: v }))
+                            }
+                            className={[
+                              "rounded-lg border-2 px-3 py-1.5 text-xs font-black uppercase tracking-[0.1em] transition",
+                              grillePrise[c] === v
+                                ? "text-white"
+                                : "border-[#1d1c16]/20 hover:border-[#1d1c16]/50 hover:bg-[#1d1c16]/5",
+                            ].join(" ")}
+                            style={
+                              grillePrise[c] === v
+                                ? { backgroundColor: accent, borderColor: accent }
+                                : undefined
+                            }
+                          >
+                            {v}
+                          </button>
+                        ))}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ) : ecranPrise.format === "liste" ? (
+                <div className="mt-4">
+                  <label
+                    className="flex flex-wrap items-center gap-2 text-sm font-black"
+                    htmlFor="prise-liste"
                   >
-                    {c}
-                  </button>
-                ))}
-              </div>
+                    Choisir la réponse
+                    <select
+                      id="prise-liste"
+                      value={choixPrise ?? ""}
+                      onChange={(e) => setChoixPrise(e.target.value || null)}
+                      className="rounded-xl border-2 bg-white px-3 py-2.5 text-sm font-black"
+                      style={{
+                        borderColor: choixPrise ? accent : "rgba(29,28,22,0.2)",
+                      }}
+                    >
+                      <option value="">— laisser vide —</option>
+                      {ecranPrise.choices.map((c) => (
+                        <option key={c} value={c}>
+                          {c}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+              ) : (
+                <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                  {ecranPrise.choices.map((c) => (
+                    <button
+                      key={c}
+                      type="button"
+                      onClick={() => setChoixPrise(c)}
+                      className={[
+                        "rounded-xl border-2 px-4 py-3 text-left text-sm font-black transition",
+                        choixPrise === c
+                          ? "text-white"
+                          : "border-[#1d1c16]/20 hover:border-[#1d1c16]/50 hover:bg-[#1d1c16]/5",
+                      ].join(" ")}
+                      style={
+                        choixPrise === c
+                          ? { backgroundColor: accent, borderColor: accent }
+                          : undefined
+                      }
+                    >
+                      {c}
+                    </button>
+                  ))}
+                </div>
+              )}
 
-              {choixPrise !== null && (
+              {priseRepondue && (
                 <div className="mt-4 border-t border-[#1d1c16]/25 pt-3">
                   <p className="text-sm font-black">
-                    {choixPrise === PRISE_EN_MAIN[indexPrise].expected
+                    {(
+                      ecranPrise.format === "tableau"
+                        ? ecranPrise.choices.every(
+                            (c) =>
+                              (grillePrise[c] === "vrai") ===
+                              (c === ecranPrise.expected),
+                          )
+                        : choixPrise === ecranPrise.expected
+                    )
                       ? "✅ C'est ça. Tu sais répondre."
                       : "Ce n'était pas la bonne, mais peu importe : ici on apprend juste à cliquer."}
                   </p>
                   <p className="mt-1 text-sm font-medium leading-6 text-[#1d1c16]/75">
-                    {PRISE_EN_MAIN[indexPrise].apprend}
+                    {ecranPrise.apprend}
                   </p>
                   <button
                     type="button"
                     onClick={() => {
-                      if (indexPrise + 1 < PRISE_EN_MAIN.length) {
+                      if (indexPrise + 1 < ECRANS_PRISE.length) {
                         setIndexPrise((i) => i + 1);
                         setChoixPrise(null);
+                        setGrillePrise({});
                       } else {
                         setEtape("accueil");
                         setTimeout(commencerEpreuve, 0);
@@ -603,7 +769,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                     className="mt-3 inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-black text-white shadow-sm transition hover:brightness-110"
                     style={{ backgroundColor: accent }}
                   >
-                    {indexPrise + 1 < PRISE_EN_MAIN.length
+                    {indexPrise + 1 < ECRANS_PRISE.length
                       ? "Continuer →"
                       : `Je suis prêt · démarrer les ${dureeMinutes} minutes →`}
                   </button>
