@@ -16,13 +16,13 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { createClient } from "@supabase/supabase-js";
 import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
-import { verifySessionToken } from "@/lib/server/session";
+import {
+  verifySessionToken,
+  voitToutSonEtablissement,
+} from "@/lib/server/session";
 
 // La route lit un cookie : elle ne peut pas être mise en cache.
 export const dynamic = "force-dynamic";
-
-/** Seuls ces rôles voient l'établissement entier. Un élève ne voit que lui. */
-const ROLES_ETABLISSEMENT = new Set(["prof", "principal", "boss"]);
 
 const CLASSES = new Set(["6e", "4e"]);
 const MATIERES = new Set(["maths", "francais"]);
@@ -214,7 +214,9 @@ export async function GET(req: Request) {
         { status: 401 },
       );
     }
-    if (!ROLES_ETABLISSEMENT.has(session.type_utilisateur)) {
+    // ⚠️ Le rôle seul ne suffit pas : il est auto-déclaré à l'inscription par
+    // e-mail. Voir voitToutSonEtablissement() dans lib/server/session.ts.
+    if (!voitToutSonEtablissement(session)) {
       return NextResponse.json(
         {
           ok: false,

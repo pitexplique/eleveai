@@ -3,18 +3,24 @@
 // depuis l'activation du RLS. Le périmètre dépend du rôle porté par le
 // jeton de session signé :
 //   - élève / perso : uniquement SES résultats (colonnes détaillées) ;
-//   - prof / principal / boss : comptes + résultats de SON établissement.
+//   - prof / principal / boss D'UN VRAI ÉTABLISSEMENT : comptes + résultats
+//     de SON établissement.
 // Un élève ne peut donc plus lire les résultats des autres, ni un prof
 // ceux d'un autre établissement.
+//
+// ⚠️ Le rôle seul ne donne PAS le périmètre établissement : il est
+// auto-déclaré à l'inscription par e-mail. Voir voitToutSonEtablissement()
+// dans lib/server/session.ts, qui porte la règle et le pourquoi.
 
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import { verifySessionToken } from "@/lib/server/session";
+import {
+  verifySessionToken,
+  voitToutSonEtablissement,
+} from "@/lib/server/session";
 import { calculerPointsAvis } from "@/lib/points/feedbackPoints";
 import { pointsSignalementsDe } from "@/lib/points/signalementPoints";
 import { estProbablementIA } from "@/lib/detection-ia";
-
-const ROLES_ETABLISSEMENT = new Set(["prof", "principal", "boss"]);
 
 // Colonnes par table : détaillées (dashboard élève, avec details) et
 // synthétiques (dashboards prof/principal, sans details — trop lourd à
@@ -71,7 +77,7 @@ export async function GET(req: Request) {
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
 
-  const etabScope = ROLES_ETABLISSEMENT.has(session.type_utilisateur);
+  const etabScope = voitToutSonEtablissement(session);
   const cols = etabScope ? COLONNES.etablissement : COLONNES.eleve;
 
   // Élève : filtre (établissement + code). Prof/principal : établissement.
