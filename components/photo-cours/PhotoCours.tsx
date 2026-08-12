@@ -9,7 +9,7 @@
 // RELIT, puis on produit. Le professeur passe par l'écran de relecture même
 // quand la lecture est bonne — c'est le prix d'une fiche dont il répond.
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEleve } from "@/context/EleveContext";
@@ -33,6 +33,46 @@ export default function PhotoCours() {
   const [sortie, setSortie] = useState("");
   const [enCours, setEnCours] = useState(false);
   const [erreur, setErreur] = useState<string | null>(null);
+  const [survol, setSurvol] = useState(false);
+
+  // ⚠️ ELLE NE MARCHAIT QUE SUR TÉLÉPHONE (Frédéric l'a essayée sur ordinateur
+  // le 12/08 au soir). En cause : `capture="environment"` sur le champ de
+  // fichier. Sur mobile c'est exactement ce qu'on veut — le bouton ouvre
+  // l'appareil photo arrière, sans passer par une galerie. Sur ordinateur, le
+  // navigateur ne l'ignore pas toujours poliment : il ouvre la webcam, et une
+  // webcam ne photographie pas un tableau.
+  //
+  // On teste `pointer: coarse` plutôt que l'user-agent : c'est le doigt qu'on
+  // cherche, pas le nom du système, et un ordinateur tactile a le bon
+  // comportement dans les deux cas.
+  //
+  // ⚠️ Dans un effet, jamais au premier rendu : le serveur n'a pas de
+  // `window`, et un `capture` qui change entre le HTML et l'hydratation ferait
+  // hurler React.
+  const [surMobile, setSurMobile] = useState(false);
+  useEffect(() => {
+    setSurMobile(window.matchMedia("(pointer: coarse)").matches);
+  }, []);
+
+  // COLLER (Ctrl+V) — le geste du bureau que personne ne pense à offrir.
+  // Sur ordinateur, un cours arrive rarement par l'appareil photo : c'est une
+  // capture d'écran, une image reçue, une page de manuel scannée. Tout ça vit
+  // dans le presse-papier, et le trajet « enregistrer sur le bureau, cliquer,
+  // retrouver le fichier » coûte quatre gestes pour rien.
+  useEffect(() => {
+    function auCollage(e: ClipboardEvent) {
+      const fichier = [...(e.clipboardData?.files ?? [])].find((f) =>
+        f.type.startsWith("image/")
+      );
+      if (fichier) {
+        e.preventDefault();
+        void choisirPhoto(fichier);
+      }
+    }
+    document.addEventListener("paste", auCollage);
+    return () => document.removeEventListener("paste", auCollage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Ouvert à tout compte connecté (12/08). La restriction par rôle se rallume
   // côté serveur dans lib/photo-cours/auth.ts, pas ici : une porte qui ne tient
@@ -151,22 +191,46 @@ export default function PhotoCours() {
       {/* ── 1. La photo ─────────────────────────────────────────────────── */}
       {etape === "photo" && (
         <div className="space-y-4">
-          <label className="block cursor-pointer rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 px-4 py-8 text-center transition hover:border-sky-300 hover:bg-sky-50">
+          <label
+            // GLISSER-DÉPOSER : l'autre geste du bureau. Il ne coûte rien à
+            // offrir et évite l'aller-retour par la fenêtre de fichiers.
+            onDragOver={(e) => {
+              e.preventDefault();
+              setSurvol(true);
+            }}
+            onDragLeave={() => setSurvol(false)}
+            onDrop={(e) => {
+              e.preventDefault();
+              setSurvol(false);
+              void choisirPhoto(
+                [...e.dataTransfer.files].find((f) => f.type.startsWith("image/"))
+              );
+            }}
+            className={`block cursor-pointer rounded-xl border-2 border-dashed px-4 py-8 text-center transition ${
+              survol
+                ? "border-sky-400 bg-sky-50"
+                : "border-slate-300 bg-slate-50 hover:border-sky-300 hover:bg-sky-50"
+            }`}
+          >
             <input
               type="file"
               accept="image/*"
-              // Sur téléphone, ouvre directement l'appareil photo arrière :
-              // le geste visé est « je photographie mon tableau », pas
-              // « je cherche un fichier ».
-              capture="environment"
+              // ⚠️ SEULEMENT SUR TÉLÉPHONE — voir la note sur `surMobile`.
+              // Là, il ouvre l'appareil photo arrière et le geste visé est
+              // « je photographie mon tableau », pas « je cherche un fichier ».
+              // Sur ordinateur, il ouvrait la webcam : le champ redevient donc
+              // un simple sélecteur de fichiers.
+              capture={surMobile ? "environment" : undefined}
               className="hidden"
               onChange={(e) => choisirPhoto(e.target.files?.[0])}
             />
             <span className="block text-sm font-semibold text-slate-700">
-              Photographier le cours
+              {surMobile ? "Photographier le cours" : "Choisir une image du cours"}
             </span>
             <span className="mt-1 block text-xs text-slate-500">
-              Le tableau, le cahier, le polycopié. Bien à plat, bien éclairé.
+              {surMobile
+                ? "Le tableau, le cahier, le polycopié. Bien à plat, bien éclairé."
+                : "Déposez-la ici, ou collez-la avec Ctrl+V — photo du tableau, capture d'écran, page scannée."}
             </span>
           </label>
 
