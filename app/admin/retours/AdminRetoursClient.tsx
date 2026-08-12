@@ -16,6 +16,7 @@ type Retour = {
   email: string | null;
   traite: boolean;
   a_lhonneur: boolean;
+  archive: boolean;
   amelioration: string | null;
   created_at: string;
   reponse: string | null;
@@ -170,6 +171,33 @@ export default function AdminRetoursClient() {
       if (res.ok && data?.ok) {
         setRetours((prev) =>
           prev.map((r) => (r.id === retour.id ? { ...r, traite: nouvelEtat } : r))
+        );
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    setPatching(null);
+  }
+
+  // ARCHIVER, PAS SUPPRIMER. L'échange disparaît du tableau de bord de
+  // l'élève ; la ligne reste. Les points du palmarès sont recomptés à partir
+  // de ces lignes (/api/classement) — supprimer un retour retirerait ses
+  // points à l'élève et le ferait reculer au classement. Archiver, non.
+  async function toggleArchive(retour: Retour) {
+    setPatching(retour.id);
+    const nouvelEtat = !retour.archive;
+
+    try {
+      const res = await fetch("/api/admin/retours", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: retour.id, archive: nouvelEtat }),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data?.ok) {
+        setRetours((prev) =>
+          prev.map((r) => (r.id === retour.id ? { ...r, archive: nouvelEtat } : r))
         );
       }
     } catch (err) {
@@ -434,6 +462,25 @@ export default function AdminRetoursClient() {
                             ].join(" ")}
                           >
                             {r.traite ? "↩️ Remettre à traiter" : "✅ Marquer traité"}
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => toggleArchive(r)}
+                            disabled={patching === r.id}
+                            title={
+                              r.archive
+                                ? "Le remettre sur le tableau de bord de l'élève."
+                                : "Le retirer du tableau de bord de l'élève. Ses points et sa place au palmarès ne bougent pas."
+                            }
+                            className={[
+                              "rounded-2xl px-3 py-1.5 text-xs font-black transition disabled:opacity-50",
+                              r.archive
+                                ? "bg-amber-100 text-amber-800 ring-1 ring-amber-300 hover:brightness-95"
+                                : "bg-slate-100 text-slate-600 ring-1 ring-slate-200 hover:brightness-95",
+                            ].join(" ")}
+                          >
+                            {r.archive ? "👁️ Réafficher à l'élève" : "🗄️ Archiver"}
                           </button>
                         </div>
 

@@ -44,11 +44,17 @@ export async function GET(req: Request) {
 
   // 2) Avis / bugs / idées de l'élève AUXQUELS le prof a répondu (on n'affiche
   // que ceux avec une réponse, pour ne pas noyer le dashboard).
+  //
+  // `archive` écarte les échanges qui n'ont plus lieu d'être — une idée déjà
+  // réalisée, un bug corrigé. La LIGNE reste : /api/classement recompte les
+  // points à partir de ces lignes, sans jamais regarder `archive`. Archiver
+  // nettoie l'écran de l'élève ; ça ne lui retire ni ses points ni sa place.
   const { data: avis } = await supabase
     .from("retours_eleves")
     .select("id, type, note, message, reponse, reponse_at, created_at")
     .eq("code_etablissement", session.code_etablissement)
     .eq("code_eleve", session.code_utilisateur)
+    .eq("archive", false)
     .not("reponse", "is", null)
     .order("reponse_at", { ascending: false })
     .limit(50);

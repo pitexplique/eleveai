@@ -13,7 +13,7 @@ import { createClient } from "@supabase/supabase-js";
 import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
 
 const COLONNES =
-  "id, type, page, message, note, code_etablissement, code_eleve, prenom, classe, email, traite, a_lhonneur, amelioration, reponse, reponse_at, created_at";
+  "id, type, page, message, note, code_etablissement, code_eleve, prenom, classe, email, traite, a_lhonneur, archive, amelioration, reponse, reponse_at, created_at";
 
 const PAGE_SIZE = 200;
 
@@ -125,10 +125,18 @@ export async function PATCH(request: Request) {
   const id = typeof body?.id === "string" ? body.id : null;
   const traite = typeof body?.traite === "boolean" ? body.traite : null;
   const aLHonneur = typeof body?.a_lhonneur === "boolean" ? body.a_lhonneur : null;
+  const archive = typeof body?.archive === "boolean" ? body.archive : null;
   const aReponse = body?.reponse !== undefined;
   const aAmelioration = body?.amelioration !== undefined;
 
-  if (!id || (traite === null && aLHonneur === null && !aReponse && !aAmelioration)) {
+  if (
+    !id ||
+    (traite === null &&
+      aLHonneur === null &&
+      archive === null &&
+      !aReponse &&
+      !aAmelioration)
+  ) {
     return NextResponse.json(
       { ok: false, error: "Requête invalide." },
       { status: 400 }
@@ -153,6 +161,12 @@ export async function PATCH(request: Request) {
     update.a_lhonneur = aLHonneur;
     if (aLHonneur) update.traite = true;
   }
+  // ARCHIVER ≠ SUPPRIMER. L'échange quitte le tableau de bord de l'élève —
+  // une idée déjà réalisée, un bug corrigé — mais la ligne reste. Il n'existe
+  // aucune table de points : /api/classement les recompte à partir de ces
+  // lignes, sans jamais lire `archive`. L'élève garde donc ses points et sa
+  // place au palmarès, et on garde la trace de ce qu'il a proposé.
+  if (archive !== null) update.archive = archive;
 
   const { error } = await serviceClient()
     .from("retours_eleves")
