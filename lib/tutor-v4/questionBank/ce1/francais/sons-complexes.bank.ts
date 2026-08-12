@@ -577,17 +577,26 @@ export const sonsComplexesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce1_sons_defi_ouverte_1",
+    id: "ce1_sons_defi_meth_1",
     niveau: "ce1",
     matiere: "francais",
     notionId: "sons_complexes",
     microId: "ce1_sons_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "« Il y a un poisson dans l'assiette. » et « Il y a un poison dans l'assiette. »\n\nUne seule lettre change. Explique avec tes mots pourquoi il faut faire très attention à celle-là.",
-    format: "open",
-    expected: ["deux s", "ss", "sens", "dangereux", "manger", "pas la même chose", "poison", "poisson", "change"],
-    comparator: "contains_keyword",
+    text: "« Il y a un poisson dans l'assiette. » et « Il y a un poison dans l'assiette. »\n\nUne seule lettre change. Pourquoi faut-il faire très attention à celle-là ?",
+    format: "qcm",
+    choices: [
+      "Parce qu'un seul « s » entre deux voyelles se lit [z] : le mot devient un autre mot.",
+      // L'erreur réelle : ne voir qu'une variante d'écriture, pas deux mots.
+      "Parce que les deux mots veulent dire la même chose, écrite de deux façons.",
+      "Parce que la lettre « s » est difficile à écrire.",
+      "Parce qu'il faut toujours doubler les consonnes au milieu d'un mot.",
+    ],
+    expected: [
+      "Parce qu'un seul « s » entre deux voyelles se lit [z] : le mot devient un autre mot.",
+    ],
+    comparator: "mcq_exact",
     hint: "Dis les deux mots à voix haute, la main sur la gorge.",
     explanation: exp(
       "Entre deux voyelles, un seul « s » se dit [z] et deux « ss » se disent [s]. Cette lettre en plus change tout le mot.",
@@ -595,6 +604,6 @@ export const sonsComplexesBank: TutorBankItemV4[] = [
       "Un poisson se mange. Un poison rend malade. Une lettre de différence à l'écrit, et deux phrases qui ne disent pas du tout la même chose.",
       "Parce qu'un seul « s » entre deux voyelles se lit [z] : le mot devient un autre mot.",
     ),
-    tags: ["ce1", "sons", "defi", "piege", "open"],
+    tags: ["ce1", "sons", "defi", "piege", "qcm"],
   },
 ];

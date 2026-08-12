@@ -769,17 +769,26 @@ export const classesMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce1_cm_defi_ouverte_1",
+    id: "ce1_cm_defi_meth_1",
     niveau: "ce1",
     matiere: "francais",
     notionId: "classes_mots",
     microId: "ce1_cm_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "« La porte est ouverte. » et « Il porte un cartable. »\n\nC'est le même mot dans les deux phrases, et il ne fait pas le même travail. Explique avec tes mots comment tu fais pour le savoir.",
-    format: "open",
-    expected: ["phrase", "avant", "devant", "chose", "action", "fait", "la", "il", "petit mot", "sujet"],
-    comparator: "contains_keyword",
+    text: "« La porte est ouverte. » et « Il porte un cartable. »\n\nC'est le même mot dans les deux phrases, et il ne fait pas le même travail. Comment fais-tu pour le savoir ?",
+    format: "qcm",
+    choices: [
+      "Je regarde le petit mot d'avant : après « la », c'est une chose ; après « il », c'est une action.",
+      // LE piège : le mot s'écrit pareil, et cela ne prouve rien.
+      "Je regarde comment il s'écrit : il s'écrit pareil, donc c'est la même classe.",
+      "Je compte les lettres du mot.",
+      "Je regarde s'il y a un point à la fin de la phrase.",
+    ],
+    expected: [
+      "Je regarde le petit mot d'avant : après « la », c'est une chose ; après « il », c'est une action.",
+    ],
+    comparator: "mcq_exact",
     hint: "Regarde le petit mot qui vient juste avant.",
     explanation: exp(
       "Un mot ne porte pas sa classe sur le dos : c'est la phrase qui la lui donne.",
@@ -787,6 +796,6 @@ export const classesMotsBank: TutorBankItemV4[] = [
       "« LA porte » : on peut la pousser, c'est une chose — un nom. « IL porte » : c'est ce qu'il fait — un verbe. Le mot s'écrit pareil, et il ne se classe pas pareil.",
       "C'est le petit mot d'avant, et le travail du mot dans la phrase, qui décident.",
     ),
-    tags: ["ce1", "classes-mots", "defi", "piege", "open"],
+    tags: ["ce1", "classes-mots", "defi", "piege", "qcm"],
   },
 ];

@@ -314,17 +314,26 @@ export const ecritureCursiveBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce1_cursive_majuscules_ouverte_1",
+    id: "ce1_cursive_majuscules_meth_1",
     niveau: "ce1",
     matiere: "francais",
     notionId: "ecriture_cursive",
     microId: "ce1_cursive_majuscules",
     difficulty: 3,
     theme: "neutral",
-    text: "La lettre « a » et la lettre « A » ne se ressemblent pas du tout.\n\nExplique avec tes mots pourquoi c'est quand même la même lettre.",
-    format: "open",
-    expected: ["même son", "meme son", "même lettre", "alphabet", "nom", "majuscule", "minuscule", "écriture", "ecriture"],
-    comparator: "contains_keyword",
+    text: "La lettre « a » et la lettre « A » ne se ressemblent pas du tout.\n\nPourquoi est-ce quand même la même lettre ?",
+    format: "qcm",
+    choices: [
+      "Parce qu'elles se disent pareil et occupent la même place dans l'alphabet : seul le dessin change.",
+      // LE piège : confondre la lettre et son dessin.
+      "Ce ne sont pas la même lettre : elles ne se dessinent pas pareil.",
+      "Parce qu'elles ont le même nombre de traits.",
+      "Parce que « A » est simplement une plus grande version de « a ».",
+    ],
+    expected: [
+      "Parce qu'elles se disent pareil et occupent la même place dans l'alphabet : seul le dessin change.",
+    ],
+    comparator: "mcq_exact",
     hint: "Dis les deux à voix haute. Qu'est-ce qui est pareil ?",
     explanation: exp(
       "Une lettre garde son nom et son son quelle que soit l'écriture : scripte ou cursive, minuscule ou majuscule.",
@@ -332,6 +341,6 @@ export const ecritureCursiveBank: TutorBankItemV4[] = [
       "a et A se disent pareil et occupent la même place dans l'alphabet. Ce sont deux habits pour une seule lettre — et il y en a quatre en tout.",
       "Parce qu'elles se disent pareil et occupent la même place dans l'alphabet : seul le dessin change.",
     ),
-    tags: ["ce1", "cursive", "majuscules", "piege", "open"],
+    tags: ["ce1", "cursive", "majuscules", "piege", "qcm"],
   },
 ];

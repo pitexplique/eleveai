@@ -720,17 +720,26 @@ export const langageOralBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce1_oral_defi_ouverte_1",
+    id: "ce1_oral_defi_meth_1",
     niveau: "ce1",
     matiere: "francais",
     notionId: "langage_oral",
     microId: "ce1_oral_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "Un camarade dit quelque chose que tu crois faux.\n\nExplique avec tes mots comment tu le lui dis sans le fâcher.",
-    format: "open",
-    expected: ["parce que", "pas d'accord", "explique", "raison", "texte", "poliment", "gentiment", "pourquoi", "preuve"],
-    comparator: "contains_keyword",
+    text: "Un camarade dit quelque chose que tu crois faux.\n\nComment le lui dis-tu sans le fâcher ?",
+    format: "qcm",
+    choices: [
+      "Je dis « je ne suis pas d'accord », puis « parce que… », et je donne ce que j'ai lu ou entendu.",
+      // L'erreur réelle : « c'est faux » ferme la discussion au lieu de l'ouvrir.
+      "Je lui dis « c'est faux ».",
+      "Je ne dis rien, pour éviter la dispute.",
+      "Je répète mon avis plus fort jusqu'à ce qu'il change d'avis.",
+    ],
+    expected: [
+      "Je dis « je ne suis pas d'accord », puis « parce que… », et je donne ce que j'ai lu ou entendu.",
+    ],
+    comparator: "mcq_exact",
     hint: "Il y a deux mots magiques à ajouter après ton avis.",
     explanation: exp(
       "On peut n'être pas d'accord sans dire que l'autre a tort. On parle de ce qui est dit, pas de la personne.",
@@ -738,7 +747,7 @@ export const langageOralBank: TutorBankItemV4[] = [
       "« C'est faux » ferme la discussion. « Je ne suis pas d'accord, parce que le texte dit le contraire » l'ouvre : l'autre peut aller vérifier, et vous avancez tous les deux.",
       "On dit qu'on n'est pas d'accord, et on ajoute POURQUOI.",
     ),
-    tags: ["ce1", "oral", "defi", "methode", "open"],
+    tags: ["ce1", "oral", "defi", "methode", "qcm"],
   },
 ];
 

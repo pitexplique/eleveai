@@ -748,17 +748,27 @@ export const orthographeLexicaleBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce1_orthlex_defi_ouverte_1",
+    id: "ce1_orthlex_defi_meth_1",
     niveau: "ce1",
     matiere: "francais",
     notionId: "orthographe_lexicale",
     microId: "ce1_orthlex_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "Tu veux écrire le mot « grand » mais tu n'entends pas la dernière lettre.\n\nExplique avec tes mots comment tu peux savoir laquelle écrire.",
-    format: "open",
-    expected: ["grandir", "grande", "famille", "allonge", "féminin", "feminin", "mot plus long", "entend"],
-    comparator: "contains_keyword",
+    text: "Tu veux écrire le mot « grand » mais tu n'entends pas la dernière lettre.\n\nComment sais-tu laquelle écrire ?",
+    format: "qcm",
+    choices: [
+      "Je cherche un mot de la même famille : « grandir » ou « grande » réveillent le « d ».",
+      // LE piège : la lettre est muette, mieux écouter ne donnera rien.
+      "J'écoute mieux : la lettre finit par s'entendre.",
+      // L'erreur réelle : le pluriel ajoute un « s » et ne révèle rien.
+      "Je mets le mot au pluriel : « grands ».",
+      "Je mets un « t » : c'est la lettre muette la plus fréquente.",
+    ],
+    expected: [
+      "Je cherche un mot de la même famille : « grandir » ou « grande » réveillent le « d ».",
+    ],
+    comparator: "mcq_exact",
     hint: "Cherche un mot de la même famille, plus long.",
     explanation: exp(
       "La lettre finale muette d'un mot se retrouve grâce à un mot de la même famille, où elle se prononce.",
@@ -766,6 +776,6 @@ export const orthographeLexicaleBank: TutorBankItemV4[] = [
       "grand → grandir, ou grand → grande. Dans les deux, on entend le « d ». C'est donc un « d » qu'il faut écrire, et pas un « t ».",
       "On cherche un mot de la même famille : « grandir » ou « grande » réveillent le « d ».",
     ),
-    tags: ["ce1", "orthographe-lexicale", "defi", "methode", "open"],
+    tags: ["ce1", "orthographe-lexicale", "defi", "methode", "qcm"],
   },
 ];

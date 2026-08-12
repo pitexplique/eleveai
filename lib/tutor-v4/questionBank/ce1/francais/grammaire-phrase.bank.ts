@@ -1017,17 +1017,26 @@ export const grammairePhraseBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce1_gram_defi_ouverte_1",
+    id: "ce1_gram_defi_meth_1",
     niveau: "ce1",
     matiere: "francais",
     notionId: "grammaire_phrase",
     microId: "ce1_gram_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "« Léa ramasse des mangues chaque matin. »\n\nOn peut enlever « chaque matin », mais pas « des mangues ». Explique avec tes mots comment tu as fait pour le savoir.",
-    format: "open",
-    expected: ["enlève", "enlever", "relis", "essaye", "essaie", "se dit", "phrase", "verbe", "ramasse quoi", "manque"],
-    comparator: "contains_keyword",
+    text: "« Léa ramasse des mangues chaque matin. »\n\nOn peut enlever « chaque matin », mais pas « des mangues ». Comment le sais-tu ?",
+    format: "qcm",
+    choices: [
+      "J'enlève un groupe, je relis à voix haute, et j'écoute si la phrase tient encore.",
+      // L'erreur réelle : décider par la place plutôt que par l'essai.
+      "Je regarde lequel est le plus près du verbe.",
+      "Je regarde lequel est à la fin de la phrase.",
+      "Je regarde lequel est le plus long.",
+    ],
+    expected: [
+      "J'enlève un groupe, je relis à voix haute, et j'écoute si la phrase tient encore.",
+    ],
+    comparator: "mcq_exact",
     hint: "Enlève un groupe, relis la phrase à voix haute, et écoute.",
     explanation: exp(
       "Un groupe qu'on peut enlever ajoute une précision. Un groupe qu'on ne peut pas enlever est tenu par le verbe.",
@@ -1035,6 +1044,6 @@ export const grammairePhraseBank: TutorBankItemV4[] = [
       "« Léa ramasse des mangues. » se dit très bien. « Léa ramasse chaque matin. » laisse une question en l'air : ramasse quoi ? Le verbe réclame son complément.",
       "On enlève, on relit, et on écoute si la phrase tient encore debout.",
     ),
-    tags: ["ce1", "grammaire", "defi", "methode", "open"],
+    tags: ["ce1", "grammaire", "defi", "methode", "qcm"],
   },
 ];

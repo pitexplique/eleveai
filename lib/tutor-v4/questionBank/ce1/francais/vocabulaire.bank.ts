@@ -1444,17 +1444,26 @@ export const vocabulaireBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce1_voc_defi_ouverte_1",
+    id: "ce1_voc_defi_meth_1",
     niveau: "ce1",
     matiere: "francais",
     notionId: "vocabulaire",
     microId: "ce1_voc_defi",
     difficulty: 3,
     theme: "reunion",
-    text: "« Le pêcheur pose sa nasse dans le lagon pour attraper des poissons. »\n\nTu ne connais pas le mot « nasse ». Explique avec tes mots comment tu peux quand même deviner ce que c'est.",
-    format: "open",
-    expected: ["poisson", "attraper", "phrase", "autour", "piège", "pêcheur", "lagon", "deviner"],
-    comparator: "contains_keyword",
+    text: "« Le pêcheur pose sa nasse dans le lagon pour attraper des poissons. »\n\nTu ne connais pas le mot « nasse ». Comment peux-tu quand même deviner ce que c'est ?",
+    format: "qcm",
+    choices: [
+      "La phrase le dit juste après : « pour attraper des poissons ». C'est donc un piège à poissons.",
+      // L'erreur réelle : chercher dans le mot au lieu de chercher autour.
+      "Je regarde sa première lettre et je cherche un mot connu qui commence pareil.",
+      "Je saute le mot : il n'est pas important.",
+      "Je cherche dans le dictionnaire : c'est le seul moyen.",
+    ],
+    expected: [
+      "La phrase le dit juste après : « pour attraper des poissons ». C'est donc un piège à poissons.",
+    ],
+    comparator: "mcq_exact",
     hint: "Qu'est-ce que la phrase dit AUTOUR du mot ?",
     explanation: exp(
       "Un mot inconnu se devine presque toujours grâce à la phrase qui l'entoure.",
@@ -1462,6 +1471,6 @@ export const vocabulaireBank: TutorBankItemV4[] = [
       "« pour attraper des poissons » : c'est écrit juste après. Une nasse sert donc à attraper des poissons — c'est un piège. On n'a pas eu besoin du dictionnaire.",
       "La phrase dit « pour attraper des poissons » : c'est elle qui donne la réponse.",
     ),
-    tags: ["ce1", "vocabulaire", "defi", "methode", "open"],
+    tags: ["ce1", "vocabulaire", "defi", "methode", "qcm"],
   },
 ];

@@ -857,17 +857,24 @@ export const productionEcriteBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce1_prod_defi_ouverte_1",
+    id: "ce1_prod_defi_meth_1",
     niveau: "ce1",
     matiere: "francais",
     notionId: "production_ecrite",
     microId: "ce1_prod_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "« Le margouillat grimpe. Les mangues sont mûres. Papa répare le vélo. Il pleut sur le piton. »\n\nCes quatre phrases sont justes, et pourtant ce n'est pas un texte. Explique avec tes mots ce qui manque.",
-    format: "open",
-    expected: ["fil", "ensemble", "même", "meme", "suite", "lien", "rapport", "histoire", "connecteur", "relie"],
-    comparator: "contains_keyword",
+    text: "« Le margouillat grimpe. Les mangues sont mûres. Papa répare le vélo. Il pleut sur le piton. »\n\nCes quatre phrases sont justes, et pourtant ce n'est pas un texte. Qu'est-ce qui manque ?",
+    format: "qcm",
+    choices: [
+      "Le fil : elles ne parlent pas de la même chose, et rien ne les relie.",
+      // L'erreur réelle : croire qu'un texte, c'est une question de quantité.
+      "Des phrases : quatre, ce n'est pas assez pour faire un texte.",
+      "Les majuscules et les points.",
+      "Un titre.",
+    ],
+    expected: ["Le fil : elles ne parlent pas de la même chose, et rien ne les relie."],
+    comparator: "mcq_exact",
     hint: "Est-ce que ces phrases parlent de la même chose ?",
     explanation: exp(
       "Un texte n'est pas une pile de phrases justes : c'est une suite de phrases qui parlent de la même chose et se répondent.",
@@ -875,6 +882,6 @@ export const productionEcriteBank: TutorBankItemV4[] = [
       "Chacune de ces quatre phrases est correcte, et elles ne se connaissent pas. Il manque le fil : les mêmes personnages, le même endroit, et des connecteurs pour relier.",
       "Il manque le fil entre les phrases : elles ne parlent pas de la même chose.",
     ),
-    tags: ["ce1", "production", "defi", "piege", "open"],
+    tags: ["ce1", "production", "defi", "piege", "qcm"],
   },
 ];

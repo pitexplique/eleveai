@@ -1773,17 +1773,24 @@ export const conjugaisonBank: TutorBankItemV4[] = [
   ========================================================= */
   {
     kind: "fixed",
-    id: "ce1_conj_defi_ouverte_1",
+    id: "ce1_conj_defi_meth_1",
     niveau: "ce1",
     matiere: "francais",
     notionId: "conjugaison",
     microId: "ce1_conj_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "« Demain, nous chanterons dans la cour. »\n\nComment as-tu su qu'il fallait écrire le verbe au futur ? Explique avec tes mots.",
-    format: "open",
-    expected: ["demain", "pas encore", "plus tard", "futur", "après", "début", "premier mot"],
-    comparator: "contains_keyword",
+    text: "« Demain, nous chanterons dans la cour. »\n\nComment sais-tu qu'il faut écrire le verbe au futur ?",
+    format: "qcm",
+    choices: [
+      "Le mot « Demain » prévient : ce n'est pas encore arrivé.",
+      // L'erreur réelle : « -ons » dit QUI, pas QUAND.
+      "Parce que le verbe se termine par « -ons ».",
+      "Parce qu'il y a une virgule après le premier mot.",
+      "Parce que la phrase parle de la cour.",
+    ],
+    expected: ["Le mot « Demain » prévient : ce n'est pas encore arrivé."],
+    comparator: "mcq_exact",
     hint: "Regarde le tout premier mot de la phrase.",
     explanation: exp(
       "Un petit mot au début de la phrase plante le moment, et le verbe n'a plus qu'à suivre.",
@@ -1791,7 +1798,7 @@ export const conjugaisonBank: TutorBankItemV4[] = [
       "« Demain » : ce n'est pas encore arrivé. Donc le verbe se met au futur, et il fait « chanterons ».",
       "C'est le mot « demain » qui prévient : la phrase parle de ce qui n'est pas encore arrivé.",
     ),
-    tags: ["ce1", "conjugaison", "defi", "methode", "open"],
+    tags: ["ce1", "conjugaison", "defi", "methode", "qcm"],
   },
   {
     kind: "template",

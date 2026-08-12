@@ -637,17 +637,26 @@ export const ecritureMotsBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce1_dict_defi_ouverte_1",
+    id: "ce1_dict_defi_meth_1",
     niveau: "ce1",
     matiere: "francais",
     notionId: "ecriture_mots",
     microId: "ce1_dict_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "« Où est mon cahier ? » et « Tu veux un letchi ou une mangue ? »\n\nLes deux petits mots se disent exactement pareil, et un seul porte un accent. Explique avec tes mots comment tu choisis.",
-    format: "open",
-    expected: ["endroit", "lieu", "où", "ou bien", "choix", "choisir", "accent", "remplace"],
-    comparator: "contains_keyword",
+    text: "« Où est mon cahier ? » et « Tu veux un letchi ou une mangue ? »\n\nLes deux petits mots se disent exactement pareil, et un seul porte un accent. Comment choisis-tu ?",
+    format: "qcm",
+    choices: [
+      "Je remplace par « ou bien » : si la phrase tient, c'est « ou » sans accent.",
+      // LE piège des homophones : justement, l'oreille ne peut rien.
+      "J'écoute : on entend bien l'accent.",
+      // L'erreur réelle : « Où est mon cahier ? » est une question, et la
+      // coïncidence donne une fausse règle.
+      "Je mets l'accent quand la phrase est une question.",
+      "Je mets l'accent sur le plus court des deux mots.",
+    ],
+    expected: ["Je remplace par « ou bien » : si la phrase tient, c'est « ou » sans accent."],
+    comparator: "mcq_exact",
     hint: "Essaie de remplacer par « ou bien ». Est-ce que ça se dit ?",
     explanation: exp(
       "« ou » sert à choisir entre deux choses. « où » sert à dire un endroit, et lui seul porte un accent.",
@@ -655,6 +664,6 @@ export const ecritureMotsBank: TutorBankItemV4[] = [
       "« un letchi OU BIEN une mangue » se dit : pas d'accent. « OU BIEN est mon cahier » ne se dit pas : on demande un endroit, il faut l'accent.",
       "On remplace par « ou bien » : si la phrase tient, c'est « ou » sans accent.",
     ),
-    tags: ["ce1", "dictee", "defi", "piege", "open"],
+    tags: ["ce1", "dictee", "defi", "piege", "qcm"],
   },
 ];

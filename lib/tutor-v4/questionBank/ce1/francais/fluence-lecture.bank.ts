@@ -768,17 +768,24 @@ export const fluenceLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce1_flue_defi_ouverte_1",
+    id: "ce1_flue_defi_meth_1",
     niveau: "ce1",
     matiere: "francais",
     notionId: "fluence_lecture",
     microId: "ce1_flue_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "Un élève lit très vite, mais personne ne comprend ce qu'il raconte.\n\nExplique avec tes mots ce qui lui manque.",
-    format: "open",
-    expected: ["ponctuation", "point", "virgule", "respire", "souffle", "pause", "voix", "trop vite", "s'arrêter", "arrêter"],
-    comparator: "contains_keyword",
+    text: "Un élève lit très vite, mais personne ne comprend ce qu'il raconte.\n\nQu'est-ce qui lui manque ?",
+    format: "qcm",
+    choices: [
+      "Les pauses : il ne s'arrête ni aux points ni aux virgules.",
+      // LE piège : croire que la vitesse est le but, et en redemander.
+      "De la vitesse : il doit lire encore plus vite.",
+      "Du volume : il doit lire plus fort.",
+      "Des mots : le texte est trop court.",
+    ],
+    expected: ["Les pauses : il ne s'arrête ni aux points ni aux virgules."],
+    comparator: "mcq_exact",
     hint: "Que fait-il des points et des virgules ?",
     explanation: exp(
       "Lire vite ne suffit pas : il faut respecter la ponctuation et respirer entre les groupes de mots.",
@@ -786,6 +793,6 @@ export const fluenceLectureBank: TutorBankItemV4[] = [
       "Une phrase lue d'un seul souffle arrive à l'auditeur comme un bloc. Ce sont les pauses qui découpent le sens — c'est pour ça que le BO demande la vitesse ET la ponctuation.",
       "Il lui manque les pauses : la ponctuation et les groupes de souffle.",
     ),
-    tags: ["ce1", "fluence", "defi", "methode", "open"],
+    tags: ["ce1", "fluence", "defi", "methode", "qcm"],
   },
 ];

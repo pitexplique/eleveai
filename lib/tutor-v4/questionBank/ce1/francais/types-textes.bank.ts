@@ -541,17 +541,26 @@ export const typesTextesBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce1_type_defi_ouverte_1",
+    id: "ce1_type_defi_meth_1",
     niveau: "ce1",
     matiere: "francais",
     notionId: "types_textes",
     microId: "ce1_type_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "« Épluche deux mangues. Coupe-les en morceaux. Ajoute un peu de sucre. »\n\nCe texte n'est ni une histoire, ni un poème. Explique avec tes mots comment tu l'as vu.",
-    format: "open",
-    expected: ["ordre", "quoi faire", "recette", "étapes", "etapes", "verbe", "commence", "cuisine", "faire"],
-    comparator: "contains_keyword",
+    text: "« Épluche deux mangues. Coupe-les en morceaux. Ajoute un peu de sucre. »\n\nCe texte n'est ni une histoire, ni un poème. Comment l'as-tu vu ?",
+    format: "qcm",
+    choices: [
+      "Les phrases commencent par des verbes qui disent quoi faire, et les étapes se suivent dans un ordre.",
+      // LE piège de la notion : le sujet du texte ne donne pas son type.
+      "Parce qu'il parle de nourriture.",
+      "Parce qu'il n'y a pas de personnage.",
+      "Parce qu'il est court.",
+    ],
+    expected: [
+      "Les phrases commencent par des verbes qui disent quoi faire, et les étapes se suivent dans un ordre.",
+    ],
+    comparator: "mcq_exact",
     hint: "Regarde le premier mot de chaque phrase.",
     explanation: exp(
       "Un texte prescriptif ne raconte pas et n'explique pas : il dit quoi faire, dans l'ordre.",
@@ -559,6 +568,6 @@ export const typesTextesBank: TutorBankItemV4[] = [
       "Épluche, coupe, ajoute : ce sont des ordres. Et l'ordre des phrases compte — on n'ajoute pas le sucre avant d'éplucher.",
       "Les phrases commencent par des verbes qui disent quoi faire, et les étapes se suivent dans un ordre.",
     ),
-    tags: ["ce1", "types-textes", "defi", "methode", "open"],
+    tags: ["ce1", "types-textes", "defi", "methode", "qcm"],
   },
 ];

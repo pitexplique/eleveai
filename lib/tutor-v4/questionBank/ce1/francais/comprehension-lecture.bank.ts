@@ -1062,17 +1062,26 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
-    id: "ce1_comp_defi_ouverte_1",
+    id: "ce1_comp_defi_meth_1",
     niveau: "ce1",
     matiere: "francais",
     notionId: "comprehension_lecture",
     microId: "ce1_comp_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "« Le lion dort dans l'herbe haute. Il ouvre un œil. Le fauve a entendu quelque chose. Le roi de la savane se lève sans bruit. »\n\nIl n'y a qu'UN seul animal dans ce texte. Explique avec tes mots comment tu le sais.",
-    format: "open",
-    expected: ["lion", "même", "meme", "fauve", "roi", "remplace", "autre mot", "répéter", "repeter", "un seul"],
-    comparator: "contains_keyword",
+    text: "« Le lion dort dans l'herbe haute. Il ouvre un œil. Le fauve a entendu quelque chose. Le roi de la savane se lève sans bruit. »\n\nIl n'y a qu'UN seul animal dans ce texte. Comment le sais-tu ?",
+    format: "qcm",
+    choices: [
+      "« il », « le fauve » et « le roi de la savane » nomment tous le lion : personne d'autre n'est arrivé.",
+      // LE piège : chaque nouveau mot est pris pour un nouveau personnage.
+      "« Le fauve » et « le roi de la savane » sont deux autres animaux qui dorment aussi.",
+      "Parce qu'on ne voit qu'une seule fois le mot « lion ».",
+      "Parce que le texte est court.",
+    ],
+    expected: [
+      "« il », « le fauve » et « le roi de la savane » nomment tous le lion : personne d'autre n'est arrivé.",
+    ],
+    comparator: "mcq_exact",
     hint: "« Le fauve » et « le roi de la savane » : de qui parle-t-on à chaque fois ?",
     explanation: exp(
       "Pour éviter de se répéter, un texte remplace un nom par « il » ou par un autre mot qui désigne la même chose.",
@@ -1080,6 +1089,6 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
       "Le lion → il → le fauve → le roi de la savane. Personne d'autre n'est arrivé : c'est le même animal, nommé quatre fois autrement.",
       "Ce sont quatre façons de nommer le lion, et rien d'autre.",
     ),
-    tags: ["ce1", "comprehension", "defi", "piege", "open"],
+    tags: ["ce1", "comprehension", "defi", "piege", "qcm"],
   },
 ];
