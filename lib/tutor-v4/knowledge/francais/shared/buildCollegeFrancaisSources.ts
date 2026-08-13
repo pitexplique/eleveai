@@ -412,6 +412,32 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
          un texte ». Une seule micro générique les portait. */
       { id: `${prefix}_discours_direct_indirect`, label: "Distinguer le discours direct du discours indirect", notionId: "analyse_discours", prerequis: [`${prefix}_discours_rapportees`] },
       { id: `${prefix}_discours_inserer`, label: "Insérer des paroles au discours direct et les ponctuer", notionId: "analyse_discours", prerequis: [`${prefix}_discours_direct_indirect`] },
+
+      /* ── LECTURE : les quatre objectifs du BO ───────────────────────────────
+         Le coach avait sept micros génériques pour les quatre objectifs. On
+         ouvre les attendus nommés qui n'étaient nulle part. */
+      // « Travailler la lecture silencieuse et développer les différentes
+      //   stratégies de compréhension » ; « contrôler sa compréhension ».
+      { id: `${prefix}_comp_strategies`, label: "Contrôler sa compréhension et se débloquer en lisant seul", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_indices`] },
+      // « Formuler un jugement fondé sur des émotions, sur des critères
+      //   esthétiques, sur des idées et des valeurs. »
+      { id: `${prefix}_comp_jugement`, label: "Dire sur quoi se fonde son jugement de lecteur", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_apprecier`] },
+      // « Apprendre à recourir à quelques outils d'analyse pertinents. »
+      { id: `${prefix}_comp_outils_analyse`, label: "Choisir l'outil d'analyse qui répond à la question posée", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_implicite`] },
+      // « Repérer des éléments à améliorer dans sa lecture oralisée ou celle
+      //   des autres. »
+      { id: `${prefix}_voix_ameliorer`, label: "Repérer ce qui est à améliorer dans une lecture à voix haute", notionId: "lecture_voix_haute", prerequis: [`${prefix}_voix_expressive`] },
+      // « Comprendre et interpréter le parcours d'un ou plusieurs personnages
+      //   afin d'appréhender les enjeux de l'œuvre. »
+      { id: `${prefix}_lect_parcours_personnage`, label: "Suivre le parcours d'un personnage pour saisir les enjeux de l'œuvre", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_contexte`] },
+      // « Comparer les langages différents d'une œuvre littéraire et d'une
+      //   œuvre artistique. »
+      { id: `${prefix}_lect_langages`, label: "Comparer ce que peuvent les mots, l'image, la musique et la scène", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_reseau`] },
+      // « Tirer parti des informations sur le contexte de production d'une
+      //   œuvre pour la comprendre et l'interpréter. »
+      { id: `${prefix}_lect_contexte_production`, label: "Se servir du contexte de production pour interpréter une œuvre", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_contexte`] },
+      // « Se constituer des repères dans l'histoire littéraire. »
+      { id: `${prefix}_lect_reperes_histoire`, label: "Se constituer des repères dans l'histoire littéraire", notionId: "culture_litteraire", prerequis: [`${prefix}_lect_contexte_production`] },
     );
   }
 

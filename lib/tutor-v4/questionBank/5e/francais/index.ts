@@ -22,6 +22,10 @@ import { cultureLitteraire5eBank } from "@/lib/tutor-v4/questionBank/5e/francais
 // Vocabulaire (étymologie, néologisme, dérivation, dictionnaire) et paroles
 // rapportées : seize attendus du BO, cinq micros génériques dans le coach.
 import { vocabulaireDiscours5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/vocabulaire-discours.bank";
+// Les attendus nommés des quatre objectifs de Lecture : contrôler sa
+// compréhension, fonder son jugement, les outils d'analyse, le parcours d'un
+// personnage, les langages, le contexte, les repères d'histoire littéraire.
+import { lecture5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/lecture.bank";
 
 // Banque du coach = gabarits générés (variété) + couche "fixed" imprimable
 // (≥5 QCM fixes par notion). La couche "fixed" enrichit le coach ET sert de
@@ -35,6 +39,7 @@ export const francais5eQuestionBank: TutorBankItemV4[] = [
   ...conjugaison5eBank,
   ...cultureLitteraire5eBank,
   ...vocabulaireDiscours5eBank,
+  ...lecture5eBank,
 ];
 
 export function getFrancais5eQuestionBank(args?: {
