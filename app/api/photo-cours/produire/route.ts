@@ -22,6 +22,7 @@ import {
   journaliserUsage,
 } from "@/lib/photo-cours/journal";
 import { pontsPour } from "@/lib/photo-cours/coach";
+import { contexteProgramme } from "@/lib/photo-cours/programme";
 import { productionValide, publicDuCompte } from "@/lib/photo-cours/types";
 
 const MODELE = "gpt-4.1-mini";
@@ -114,7 +115,20 @@ export async function POST(req: Request) {
       temperature: 0.4,
       max_tokens: MAX_TOKENS,
       messages: [
-        { role: "system", content: promptProduction(pub, type) },
+        {
+          role: "system",
+          // ⭐ LE PROGRAMME DE LA CLASSE, GLISSÉ DANS LA CONSIGNE (13/08).
+          // ⛔ INVISIBLE À L'UTILISATEUR, et c'est voulu — Frédéric : « personne
+          // ne doit le voir à part nous, c'est un gage de qualité ». On ne
+          // décore pas la page d'un tampon « conforme au BO » : on met la
+          // conformité DANS le travail, et elle se voit au résultat.
+          // Voir lib/photo-cours/programme.ts : écrire « respecte le Bulletin
+          // Officiel » ne rend rien conforme ; donner la liste réelle des
+          // notions de la classe, si.
+          content: [promptProduction(pub, type), contexteProgramme({ classe: niveau, matiere })]
+            .filter(Boolean)
+            .join("\n\n"),
+        },
         {
           role: "user",
           content: [
