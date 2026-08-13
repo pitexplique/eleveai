@@ -438,6 +438,29 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       { id: `${prefix}_lect_contexte_production`, label: "Se servir du contexte de production pour interpréter une œuvre", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_contexte`] },
       // « Se constituer des repères dans l'histoire littéraire. »
       { id: `${prefix}_lect_reperes_histoire`, label: "Se constituer des repères dans l'histoire littéraire", notionId: "culture_litteraire", prerequis: [`${prefix}_lect_contexte_production`] },
+
+      /* ── ÉCRITURE : les trois objectifs du BO ───────────────────────────── */
+      // « Repérer l'idée principale d'un message écrit ou oral. »
+      { id: `${prefix}_ecrit_idee_principale`, label: "Repérer l'idée principale d'un message pour en rendre compte", notionId: "ecriture", prerequis: [`${prefix}_ecrit_notes`] },
+      // « Planifier son écrit en étant accompagné. »
+      { id: `${prefix}_ecrit_planifier`, label: "Planifier son écrit avant de rédiger", notionId: "ecriture", prerequis: [`${prefix}_ecrit_notes`] },
+      // « Écrire des textes narratifs et descriptifs. »
+      { id: `${prefix}_ecrit_narratif_descriptif`, label: "Écrire un texte narratif et descriptif", notionId: "ecriture", prerequis: [`${prefix}_ecrit_planifier`] },
+      // « Écrire un texte à visée argumentative à partir de consignes simples. »
+      { id: `${prefix}_ecrit_argumentatif`, label: "Bâtir un texte à visée argumentative", notionId: "ecriture", prerequis: [`${prefix}_ecrit_planifier`] },
+      // « Utiliser le brouillon comme un écrit à retravailler. »
+      { id: `${prefix}_ecrit_brouillon`, label: "Se servir du brouillon comme d'un écrit à retravailler", notionId: "ecriture", prerequis: [`${prefix}_ecrit_reviser`] },
+
+      /* ── ORAL : les trois objectifs du BO ───────────────────────────────── */
+      // « Entrer dans un dialogue. »
+      { id: `${prefix}_oral_dialogue`, label: "Entrer dans un dialogue et y tenir sa place", notionId: "oral", prerequis: [`${prefix}_oral_presenter`] },
+      // « Intervenir dans un débat en respectant les règles d'un échange
+      //   argumentatif. »
+      { id: `${prefix}_oral_debat`, label: "Intervenir dans un débat en respectant les règles de l'échange", notionId: "oral", prerequis: [`${prefix}_oral_argumenter`] },
+      // « Comprendre les visées d'une production orale spécifique. »
+      { id: `${prefix}_oral_visees`, label: "Reconnaitre la visée d'une production orale", notionId: "oral", prerequis: [`${prefix}_oral_ecouter`] },
+      // « Utiliser les ressources de la voix et du corps. »
+      { id: `${prefix}_oral_corps`, label: "Se servir des ressources de la voix et du corps", notionId: "oral", prerequis: [`${prefix}_oral_jouer`] },
     );
   }
 

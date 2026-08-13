@@ -26,6 +26,9 @@ import { vocabulaireDiscours5eBank } from "@/lib/tutor-v4/questionBank/5e/franca
 // compréhension, fonder son jugement, les outils d'analyse, le parcours d'un
 // personnage, les langages, le contexte, les repères d'histoire littéraire.
 import { lecture5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/lecture.bank";
+// Écriture et oral : la méthode, seule part qu'un QCM puisse tenir de deux
+// domaines qui sont des productions.
+import { ecritureOral5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/ecriture-oral.bank";
 
 // Banque du coach = gabarits générés (variété) + couche "fixed" imprimable
 // (≥5 QCM fixes par notion). La couche "fixed" enrichit le coach ET sert de
@@ -40,6 +43,7 @@ export const francais5eQuestionBank: TutorBankItemV4[] = [
   ...cultureLitteraire5eBank,
   ...vocabulaireDiscours5eBank,
   ...lecture5eBank,
+  ...ecritureOral5eBank,
 ];
 
 export function getFrancais5eQuestionBank(args?: {
