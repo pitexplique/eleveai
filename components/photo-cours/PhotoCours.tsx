@@ -24,6 +24,37 @@ import {
 
 type Etape = "photo" | "relecture" | "resultat";
 
+/**
+ * ⭐ LE MÊME OUTIL, DEUX MÉTIERS (Frédéric, 13/08 : « le prompt pédagogique
+ * est de faire un prompt pédagogique, ça sert surtout aux profs — faire un
+ * cours — et aux élèves pour bien formuler une demande à une IA »).
+ *
+ * Ma première version disait « apprendre à mieux demander » pour tout le
+ * monde : juste pour l'élève, à côté pour le professeur, qui ne vient pas
+ * s'entraîner à écrire — il vient produire un cours.
+ *
+ * ⚠️ ET C'EST UNE COMPÉTENCE, côté élève, pas une ficelle. Savoir formuler
+ * une demande à une IA est au référentiel ; le dire ainsi vaut mieux que de le
+ * vendre comme une astuce pour obtenir de meilleures réponses.
+ */
+const PROMPT_PEDA: Record<PublicPhoto, { titre: string; detail: string }> = {
+  prof: {
+    titre: "Écrire le prompt qui fera le cours",
+    detail:
+      "Vous décrivez ce que vous voulez enseigner : la demande est notée sur 20, complétée de ce qui lui manque, puis réécrite.",
+  },
+  eleve: {
+    titre: "Apprendre à bien demander à une IA",
+    detail:
+      "Tu écris ta demande, elle est notée sur 20, on te dit ce qui lui manque et on la réécrit. C'est une compétence à part entière — et elle sert partout.",
+  },
+  parent: {
+    titre: "Apprendre à bien demander à une IA",
+    detail:
+      "Vous écrivez votre demande, elle est notée sur 20, complétée puis réécrite. Utile ici, et partout ailleurs où vous en utiliserez une.",
+  },
+};
+
 /** Les classes, dans l'ordre de la scolarité. Vide = « je ne sais pas ». */
 const CLASSES = [
   "CP", "CE1", "CE2", "CM1", "CM2",
@@ -501,12 +532,10 @@ export default function PhotoCours() {
             className="block rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 transition hover:border-slate-400"
           >
             <span className="text-sm font-semibold text-slate-800">
-              Apprendre à mieux demander
+              {PROMPT_PEDA[pub].titre}
             </span>
             <span className="mt-0.5 block text-xs text-slate-600">
-              Un autre outil {vouvoie ? "prend votre" : "prend ta"} demande, la
-              note sur 20, dit ce qui lui manque et la réécrit — pour obtenir
-              mieux, ici comme ailleurs.
+              {PROMPT_PEDA[pub].detail}
             </span>
           </Link>
 
