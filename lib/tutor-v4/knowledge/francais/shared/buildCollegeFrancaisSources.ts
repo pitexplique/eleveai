@@ -127,6 +127,25 @@ export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): Notion
           } satisfies NotionSource,
         ]
       : []),
+    /* LA 4e N'AVAIT PAS DE NOTION `phrase_complexe` — alors que le CM2 et la 6e
+       en ont une. Le programme de cycle 4 encore en vigueur pour elle (arrêté
+       du 9 novembre 2015, version consolidée au BO n° 31 du 30 juillet 2020) y
+       consacre une section entière : « Fonctionnement de la phrase complexe ».
+       ⛔ Gardée pour la 4e. La 3e suit le MÊME programme jusqu'en 2028 et
+       aurait besoin du même bloc, avec des cas plus difficiles ; elle viendra
+       à son tour, on ne lui recopie pas les items de la 4e. */
+    ...(level === "4e"
+      ? [
+          {
+            id: "phrase_complexe",
+            label: "Fonctionnement de la phrase complexe",
+            boId: `${p}G`,
+            prerequis: ["grammaire_phrase"],
+            levels: [1, 2, 3],
+          } satisfies NotionSource,
+        ]
+      : []),
+
     /* « Savoir accorder les mots dans la phrase et expliquer ses choix » est,
        dans le BO n° 10 du 5 mars 2026, un OBJECTIF À PART de la grammaire —
        cinq attendus rien qu'en 5e. Il était replié dans `grammaire_phrase`,
@@ -469,6 +488,32 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       { id: `${prefix}_discours_registres`, label: "Identifier et ajuster les registres de langue", notionId: "analyse_discours", prerequis: [`${prefix}_gram_oral_ecrit`] },
       { id: `${prefix}_discours_rapportees`, label: "Analyser et employer des paroles rapportées", notionId: "analyse_discours", prerequis: [`${prefix}_discours_registres`] },
       { id: `${prefix}_discours_argumentatif`, label: "Repérer procédés du discours argumentatif", notionId: "analyse_discours", prerequis: [`${prefix}_discours_rapportees`] }
+    );
+  }
+
+  /* ── LA 4e, SUR SON PROGRAMME ENCORE EN VIGUEUR ─────────────────────────────
+     ⚠️ Le nouveau BO du 5 mars 2026 ne l'atteindra qu'en septembre 2027 : la 4e
+     relève du programme de cycle 4 de l'arrêté du 9 novembre 2015, version
+     consolidée au BO n° 31 du 30 juillet 2020. C'est ce texte-là qui est suivi
+     ici, pas celui de la 5e.
+
+     « Fonctionnement de la phrase complexe » y est une section entière, et la
+     4e n'avait même pas la notion — le CM2 et la 6e l'ont. */
+  if (level === "4e") {
+    base.push(
+      // « Distinguer phrase simple / complexe. »
+      { id: `${prefix}_phrc_simple_complexe`, label: "Distinguer phrase simple, phrase complexe et phrase non verbale", notionId: "phrase_complexe", prerequis: [`${prefix}_gram_constituants`] },
+      // « Connaître les notions de juxtaposition, coordination, subordination. »
+      { id: `${prefix}_phrc_juxta_coord_sub`, label: "Distinguer juxtaposition, coordination et subordination", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_simple_complexe`] },
+      // « Analyser les positions des propositions subordonnées (conjonctive,
+      //   interrogative indirecte, relative, infinitive, participiale). »
+      { id: `${prefix}_phrc_subordonnees`, label: "Reconnaitre les cinq sortes de propositions subordonnées", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_juxta_coord_sub`] },
+      // « Comprendre la fonction grammaticale des propositions subordonnées. »
+      { id: `${prefix}_phrc_fonction_subordonnee`, label: "Donner la fonction d'une subordonnée dans la phrase", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_subordonnees`] },
+      // « …identifier la fonction du pronom relatif dans la subordonnée. »
+      { id: `${prefix}_phrc_pronom_relatif`, label: "Identifier la fonction du pronom relatif dans sa subordonnée", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_subordonnees`] },
+      // « Analyser le rôle syntaxique des signes de ponctuation. »
+      { id: `${prefix}_phrc_ponctuation`, label: "Analyser le rôle syntaxique d'un signe de ponctuation", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_juxta_coord_sub`] },
     );
   }
 

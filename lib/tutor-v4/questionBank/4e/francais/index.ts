@@ -5,6 +5,9 @@ import { francais4eFixedBank } from "@/lib/tutor-v4/questionBank/4e/francais/fix
 // Enrichissement des pools d'étude de la langue (01/08) : le builder cycle 4
 // ne produisait que 7 énoncés par micro-compétence, contre 32 en cycle 3.
 import { complementsEtudeLangue4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/complements-etude-langue.bank";
+// « Fonctionnement de la phrase complexe » : section entière du programme de
+// cycle 4 encore en vigueur pour la 4e, et la notion n'existait pas.
+import { phraseComplexe4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/phrase-complexe.bank";
 
 // Banque du coach = gabarits générés (variété) + couche "fixed" imprimable
 // (≥5 QCM fixes par notion). La couche "fixed" enrichit le coach ET sert de
@@ -13,6 +16,7 @@ export const francais4eQuestionBank: TutorBankItemV4[] = [
   ...buildCycle4FrancaisBank("4e", microSkills),
   ...francais4eFixedBank,
   ...complementsEtudeLangue4eBank,
+  ...phraseComplexe4eBank,
 ];
 
 export function getFrancais4eQuestionBank(args?: {
