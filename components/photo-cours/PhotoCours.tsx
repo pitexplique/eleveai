@@ -52,7 +52,6 @@ export default function PhotoCours() {
   const [classe, setClasse] = useState("");
   const [matiere, setMatiere] = useState("");
   const [type, setType] = useState("");
-  const [precisions, setPrecisions] = useState("");
   const [sortie, setSortie] = useState("");
   const [ponts, setPonts] = useState<Pont[]>([]);
   const [enCours, setEnCours] = useState(false);
@@ -174,7 +173,6 @@ export default function PhotoCours() {
           niveau: classe,
           matiere,
           notion: lecture?.notion ?? "",
-          precisions,
           confiance: lecture?.confiance ?? null,
           compteurs: {
             illisibles: lecture?.zonesIllisibles.length ?? 0,
@@ -203,7 +201,6 @@ export default function PhotoCours() {
     setTexte("");
     setSortie("");
     setPonts([]);
-    setPrecisions("");
     setErreur(null);
   }
 
@@ -282,17 +279,55 @@ export default function PhotoCours() {
       {/* ── 2. La relecture — le garde-fou ──────────────────────────────── */}
       {etape === "relecture" && lecture && (
         <div className="space-y-4">
-          <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2">
-            <p className="text-sm font-semibold text-amber-900">
-              {vouvoie ? "Relisez avant de produire." : "Relis avant de continuer."}
-            </p>
-            <p className="mt-1 text-xs text-amber-800">
-              Ce texte est ce que la machine a cru voir. Tout ce qui suit en
-              découle — une erreur laissée ici s&apos;y retrouvera.
-            </p>
-          </div>
+          {/* UNE LIGNE, PAS UN ENCADRÉ (Frédéric, 13/08 : « plus simple »).
+              L'avertissement tenait sur deux phrases et une étiquette séparée
+              disait la lisibilité. Sur un téléphone, ça poussait le cours —
+              la seule chose à relire — sous le pli. */}
+          <p className="text-sm text-slate-700">
+            <span className="font-semibold">
+              {vouvoie ? "Relisez :" : "Relis :"}
+            </span>{" "}
+            c&apos;est ce que la machine a cru voir.
+            <span className="ml-1 text-slate-400">
+              Lisibilité {lecture.confiance}/100
+            </span>
+          </p>
 
-          <Etiquette>Lisibilité : {lecture.confiance}/100</Etiquette>
+          {/* ⭐ LA CLASSE ET LA MATIÈRE, EN HAUT (Frédéric, 13/08 : « doit
+              passer en haut »). Elles étaient sous la zone de texte, donc
+              après quatorze lignes de cours à relire : personne ne descendait
+              jusque-là, et une classe fausse fait produire un cours de 5ᵉ à un
+              élève de 4ᵉ. « Fraction en 5e et en 4e, ce n'est pas la même. »
+              Elles ouvrent maintenant la relecture — c'est le contexte, et un
+              contexte se pose avant le détail, pas après.
+
+              ⚠️ Toujours pas demandées AVANT la photo : la lecture n'en a pas
+              besoin — elle lit, elle ne juge pas. C'est la production qui en
+              dépend. Pré-remplies : zéro geste en plus quand c'est juste.
+
+              ⛔ DES CHIPS, PAS DES <select> (Frédéric, 13/08 : « je préfère
+              chips que select sur téléphone, plus pratique »). Un menu déroulant
+              ouvre un sélecteur natif par-dessus l'écran, à faire défiler puis
+              valider — trois gestes pour dire « 4ᵉ ». Une pastille se tape.
+              Et le site entier fonctionne comme ça : la matrice, les matières,
+              les intentions. C'était l'intrus.
+              Deuxième bénéfice, moins visible : la valeur choisie se VOIT sans
+              qu'on ait à la lire — le <select> l'affichait dans un gris si pâle
+              qu'on croyait le champ vide. */}
+          <div className="space-y-3">
+            <ChoixChips
+              intitule="Classe"
+              options={CLASSES}
+              valeur={classe}
+              onChange={setClasse}
+            />
+            <ChoixChips
+              intitule="Matière"
+              options={MATIERES}
+              valeur={matiere}
+              onChange={setMatiere}
+            />
+          </div>
 
           {lecture.confiance < 60 && (
             <p className="rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-800">
@@ -349,51 +384,10 @@ export default function PhotoCours() {
             value={texte}
             onChange={(e) => setTexte(e.target.value)}
             rows={14}
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 font-mono text-sm leading-relaxed focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-200"
+            // Mêmes couleurs explicites que les <select> : c'est le cours de
+            // quelqu'un, il doit se lire sans effort pour être relu.
+            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 font-mono text-sm leading-relaxed text-slate-900 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-200"
           />
-
-          {/* ⭐ LA CLASSE ET LA MATIÈRE, DEMANDÉES ICI ET PAS AVANT (Frédéric,
-              12/08 : « fraction en 5e et en 4e, ce n'est pas la même »). La
-              LECTURE n'en a pas besoin — elle lit, elle ne juge pas ; c'est la
-              production qui en dépend, et le pont vers le coach ne peut pas
-              ouvrir la bonne notion sans la classe. Pré-remplies : zéro geste
-              en plus quand c'est juste. */}
-          <div className="grid gap-3 sm:grid-cols-2">
-            <label className="block">
-              <span className="mb-1 block text-xs font-semibold text-slate-600">
-                Classe
-              </span>
-              <select
-                value={classe}
-                onChange={(e) => setClasse(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
-              >
-                <option value="">Non précisée</option>
-                {CLASSES.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="block">
-              <span className="mb-1 block text-xs font-semibold text-slate-600">
-                Matière
-              </span>
-              <select
-                value={matiere}
-                onChange={(e) => setMatiere(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
-              >
-                <option value="">Non précisée</option>
-                {MATIERES.map((m) => (
-                  <option key={m} value={m}>
-                    {m}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
 
           <div>
             <p className="mb-2 text-sm font-semibold text-slate-700">
@@ -422,18 +416,10 @@ export default function PhotoCours() {
             </p>
           </div>
 
-          <input
-            type="text"
-            value={precisions}
-            onChange={(e) => setPrecisions(e.target.value)}
-            placeholder={
-              vouvoie
-                ? "Une précision ? (ex. : 20 minutes, sans calculatrice)"
-                : "Une précision ? (ex. : j'ai un contrôle vendredi)"
-            }
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-200"
-          />
-
+          {/* ⛔ LE CHAMP « une précision ? » A ÉTÉ RETIRÉ (Frédéric, 13/08 :
+              « plus simple »). C'était le troisième champ libre d'un écran qui
+              en demandait déjà deux, pour un usage qu'on n'a jamais vu servir.
+              Il reviendra si quelqu'un le réclame — pas avant. */}
           <div className="flex flex-wrap gap-2">
             <Bouton onClick={produire} enCours={enCours}>
               {enCours ? "En cours…" : "Allons-y"}
@@ -582,6 +568,55 @@ function Bloc({
     <div className={`rounded-lg border px-3 py-2 text-xs ${tons[ton]}`}>
       <p className="mb-1 font-semibold">{titre}</p>
       {children}
+    </div>
+  );
+}
+
+/**
+ * Une rangée de pastilles pour choisir une valeur — la classe, la matière.
+ *
+ * ⚠️ `rangee-defilante` (globals.css) : douze classes ne tiennent pas sur la
+ * largeur d'un téléphone. Elles défilent au doigt plutôt que de casser la mise
+ * en page en trois lignes de pastilles, comme partout ailleurs sur le site.
+ *
+ * ⚠️ Recliquer la pastille active la DÉSÉLECTIONNE. Il n'y a donc pas de
+ * pastille « non précisée » à faire vivre : ne rien choisir est déjà une
+ * réponse, et c'est celle qu'on a par défaut.
+ */
+function ChoixChips({
+  intitule,
+  options,
+  valeur,
+  onChange,
+}: {
+  intitule: string;
+  options: string[];
+  valeur: string;
+  onChange: (v: string) => void;
+}) {
+  return (
+    <div>
+      <p className="mb-1.5 text-xs font-semibold text-slate-600">{intitule}</p>
+      <div className="rangee-defilante gap-1.5">
+        {options.map((o) => {
+          const actif = valeur === o;
+          return (
+            <button
+              key={o}
+              type="button"
+              onClick={() => onChange(actif ? "" : o)}
+              aria-pressed={actif}
+              className={`shrink-0 rounded-full border px-3 py-1.5 text-[13px] transition ${
+                actif
+                  ? "border-slate-800 bg-slate-800 font-semibold text-white"
+                  : "border-slate-300 bg-white text-slate-600 hover:border-slate-500"
+              }`}
+            >
+              {o}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
