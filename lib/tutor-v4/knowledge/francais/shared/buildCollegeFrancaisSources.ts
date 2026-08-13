@@ -131,10 +131,11 @@ export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): Notion
        en ont une. Le programme de cycle 4 encore en vigueur pour elle (arrêté
        du 9 novembre 2015, version consolidée au BO n° 31 du 30 juillet 2020) y
        consacre une section entière : « Fonctionnement de la phrase complexe ».
-       ⛔ Gardée pour la 4e. La 3e suit le MÊME programme jusqu'en 2028 et
-       aurait besoin du même bloc, avec des cas plus difficiles ; elle viendra
-       à son tour, on ne lui recopie pas les items de la 4e. */
-    ...(level === "4e"
+       ⛔ Ouverte à la 4e ET à la 3e : elles suivent le même texte jusqu'en 2027
+       et 2028. Les micros et les items ne sont PAS les mêmes — la 3e est le
+       niveau terminal, celui où la maitrise est exigée : subordonnées
+       enchâssées, degré de dépendance, analyse propositionnelle complète. */
+    ...(level === "4e" || level === "3e"
       ? [
           {
             id: "phrase_complexe",
@@ -150,13 +151,15 @@ export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): Notion
        dans le BO n° 10 du 5 mars 2026, un OBJECTIF À PART de la grammaire —
        cinq attendus rien qu'en 5e. Il était replié dans `grammaire_phrase`,
        derrière une seule micro : « Accorder les mots dans la phrase ».
-       ⛔ Ouvert à la 5e et à la 4e, pour deux raisons DIFFÉRENTES : la 5e parce
-       que le BO du 5 mars 2026 en fait un objectif nommé, la 4e parce que son
-       propre programme — cycle 4 de 2015, consolidé en 2020 — exige les mêmes
-       chaines d'accord sans que la moindre notion les porte. Les micros et les
-       items ne sont PAS les mêmes : ceux de la 4e vont jusqu'au groupe nominal
-       complexe, au participe apposé et au passif. La 3e viendra à son tour. */
-    ...(level === "5e" || level === "4e"
+       ⛔ Ouvert à la 5e, à la 4e et à la 3e, pour deux raisons DIFFÉRENTES : la
+       5e parce que le BO du 5 mars 2026 en fait un objectif nommé, la 4e et la
+       3e parce que leur propre programme — cycle 4 de 2015, consolidé en 2020 —
+       exige les mêmes chaines d'accord sans que la moindre notion les porte.
+       Les micros et les items ne sont PAS les mêmes : ceux de la 4e vont
+       jusqu'au groupe nominal complexe, au participe apposé et au passif ; ceux
+       de la 3e vont plus loin encore — participe passé suivi d'un infinitif,
+       cas où il reste invariable, pronominaux réciproques, homophones. */
+    ...(level === "5e" || level === "4e" || level === "3e"
       ? [
           {
             id: "orthographe_grammaticale",
@@ -543,27 +546,6 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       { id: `${prefix}_conj_irreguliers`, label: "Conjuguer les onze verbes irréguliers du 3e groupe", notionId: "conjugaison", prerequis: [`${prefix}_conj_subjonctif`] },
       { id: `${prefix}_conj_valeurs_aspect`, label: "Reconnaitre ce qu'exprime un temps dans le récit", notionId: "conjugaison", prerequis: [`${prefix}_conj_temps_composes`] },
 
-      /* « Lire des textes non littéraires, des images et des documents
-         composites (y compris numériques) » est une COMPÉTENCE TRAVAILLÉE
-         entière du programme, au même rang que « élaborer une interprétation
-         de textes littéraires ». Elle n'existait nulle part en 4e. */
-      { id: `${prefix}_lect_documents_types`, label: "Reconnaitre la nature d'un document et ce qu'elle implique", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_indices`] },
-      { id: `${prefix}_lect_sources_croiser`, label: "Identifier la source d'un document et croiser plusieurs documents", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_documents_types`] },
-      { id: `${prefix}_lect_image_fixe`, label: "Lire une image fixe : cadrage, plan, angle, lumière", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_documents_types`] },
-      { id: `${prefix}_lect_dessin_presse`, label: "Interpréter un dessin de presse ou une caricature", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_image_fixe`] },
-
-      // « paroles rapportées : discours direct, indirect, INDIRECT LIBRE » —
-      // la terminologie l'exige, et il n'était nulle part.
-      { id: `${prefix}_discours_indirect_libre`, label: "Reconnaitre le discours indirect libre", notionId: "analyse_discours", prerequis: [`${prefix}_discours_rapportees`] },
-
-      /* « Enrichir et structurer le lexique » — cinq micros génériques pour un
-         objectif qui énumère sept attendus. On ouvre ce qui n'était nulle part. */
-      { id: `${prefix}_voc_derivation_categorie`, label: "Voir le changement de classe qu'opère la dérivation", notionId: "vocabulaire", prerequis: [`${prefix}_voc_formation`] },
-      { id: `${prefix}_voc_racines`, label: "Reconnaitre une racine latine ou grecque", notionId: "vocabulaire", prerequis: [`${prefix}_voc_formation`] },
-      { id: `${prefix}_voc_intensite_generalite`, label: "Classer des mots par degré d'intensité et de généralité", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
-      { id: `${prefix}_voc_denotation_connotation`, label: "Distinguer ce qu'un mot désigne de ce qu'il suggère", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
-      { id: `${prefix}_voc_homonymie_polysemie`, label: "Distinguer polysémie, homonymie, synonymie et antonymie", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
-      { id: `${prefix}_voc_construction_verbe`, label: "Voir comment la construction d'un verbe change son sens", notionId: "vocabulaire", prerequis: [`${prefix}_voc_contexte`] },
     );
   }
 
