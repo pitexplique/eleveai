@@ -158,6 +158,18 @@ export type RessourceEleveAI = {
    * ne le sont pas.
    */
   famille?: string;
+
+  /**
+   * UN PICTOGRAMME DANS LA CARTE, quand le GESTE se dessine mieux qu'il ne
+   * s'écrit (Frédéric, 12/08 : « un svg représentant un appareil photo comme
+   * sur Le Bon Coin »).
+   *
+   * ⚠️ À réserver aux ressources dont l'action est un geste physique —
+   * photographier, ici. Une fiche, un parcours, un guide n'ont rien à
+   * dessiner : leur donner une icône par symétrie transformerait la rangée en
+   * planche de pictogrammes, et plus rien ne ressortirait.
+   */
+  icone?: "camera";
 };
 
 /** Ce que la personne a fourni. Rien de plus. */

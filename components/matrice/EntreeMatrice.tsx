@@ -1033,6 +1033,32 @@ export default function EntreeMatrice({
                       i === 0 ? "border-[#0e7490]" : "border-[#1d1c16]/30"
                     }`}
                   >
+                    {/* ⭐ LE PICTOGRAMME DU GESTE (Frédéric, 12/08 : « comme
+                        sur Le Bon Coin »). Un appareil photo dit « il y a une
+                        photo à prendre » avant qu'on ait lu le titre — et
+                        « photographier » est le seul geste PHYSIQUE de toute
+                        la rangée, donc le seul qui gagne à être dessiné.
+                        ⚠️ Discret et sur une seule carte : trois vignettes
+                        côte à côte se neutraliseraient, et la carte perdrait
+                        la place de sa promesse. `aria-hidden` — le titre dit
+                        déjà tout à qui n'y voit pas. */}
+                    {r.ressource.icone === "camera" && (
+                      <div className="mb-2 flex h-14 items-center justify-center rounded border border-[#1d1c16]/10 bg-[#1d1c16]/[0.04]">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                          className="h-7 w-7 text-[#1d1c16]/40"
+                        >
+                          <path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.2a1.5 1.5 0 0 0 1.3-.75l.7-1.2A1.5 1.5 0 0 1 10 4.3h4a1.5 1.5 0 0 1 1.3.75l.7 1.2A1.5 1.5 0 0 0 17.3 7h2.2A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z" />
+                          <circle cx="12" cy="13" r="3.4" />
+                        </svg>
+                      </div>
+                    )}
                     <div className="flex items-start justify-between gap-2">
                       <p className="font-bold text-[#1d1c16]">{r.ressource.titre}</p>
                       <span

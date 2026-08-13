@@ -814,6 +814,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     intentions: ["comprendre", "entrainer", "preparer"],
     type: "machine",
     statut: "validee",
+    icone: "camera",
   },
   {
     id: "cahier-aider",
