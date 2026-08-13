@@ -244,6 +244,51 @@ export default function PhotoCours() {
     }
   }
 
+  async function telechargerLivre() {
+    if (!eleve || !sortie) return;
+    setEnCours(true);
+    setErreur(null);
+    try {
+      const r = await fetch("/api/photo-cours/livre", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          codeEtablissement: eleve.code_etablissement,
+          codeUtilisateur: eleve.code_eleve,
+          cours: texte,
+          document: sortie,
+          intitule: productionsPour(pub).find((p) => p.id === type)?.label ?? "",
+          classe,
+          matiere,
+          notion: lecture?.notion ?? "",
+        }),
+      });
+      if (!r.ok) {
+        const data = await r.json().catch(() => ({}));
+        throw new Error(data?.error || "Téléchargement impossible.");
+      }
+
+      // ⚠️ On passe par un blob et un <a> plutôt que par une navigation : la
+      // route est en POST (elle porte le cours dans son corps), et un
+      // `window.location` ne saurait pas l'appeler. Le nom du fichier vient de
+      // l'en-tête Content-Disposition, qu'on relit ici.
+      const nom =
+        /filename="([^"]+)"/.exec(r.headers.get("Content-Disposition") ?? "")?.[1] ??
+        "cours-eleveai.epub";
+      const blob = await r.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = nom;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      setErreur(e instanceof Error ? e.message : "Téléchargement impossible.");
+    } finally {
+      setEnCours(false);
+    }
+  }
+
   function recommencer() {
     setEtape("photo");
     setApercu(null);
@@ -576,6 +621,15 @@ export default function PhotoCours() {
           </Link>
 
           <div className="flex flex-wrap gap-2">
+            {/* ⭐ LE LIVRE (Frédéric, 13/08 : « comme un epub », « avec le
+                margouillat et eleveai.fr »). Une page se ferme ; un fichier se
+                garde, se lit dans le train sans réseau, s'envoie à l'élève
+                absent, se retrouve avant le brevet.
+                ⚠️ Aucun appel au modèle : le document est déjà produit et payé,
+                on ne fait que le mettre en forme. */}
+            <BoutonPlat onClick={telechargerLivre}>
+              {enCours ? "…" : "Télécharger le livre"}
+            </BoutonPlat>
             <BoutonPlat onClick={() => navigator.clipboard.writeText(sortie)}>
               Copier
             </BoutonPlat>
