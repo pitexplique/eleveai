@@ -14,6 +14,9 @@ import { orthographeGrammaticale4eBank } from "@/lib/tutor-v4/questionBank/4e/fr
 // 5e. Voir l'en-tête du fichier : les deux banques ont raison chacune pour sa
 // classe, il ne faut pas les « harmoniser ».
 import { conjugaison4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/conjugaison.bank";
+// « Lire des textes non littéraires, des images et des documents composites » :
+// une compétence travaillée ENTIÈRE du programme, qui n'existait nulle part.
+import { documentsComposites4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/documents-composites.bank";
 
 // Banque du coach = gabarits générés (variété) + couche "fixed" imprimable
 // (≥5 QCM fixes par notion). La couche "fixed" enrichit le coach ET sert de
@@ -25,6 +28,7 @@ export const francais4eQuestionBank: TutorBankItemV4[] = [
   ...phraseComplexe4eBank,
   ...orthographeGrammaticale4eBank,
   ...conjugaison4eBank,
+  ...documentsComposites4eBank,
 ];
 
 export function getFrancais4eQuestionBank(args?: {

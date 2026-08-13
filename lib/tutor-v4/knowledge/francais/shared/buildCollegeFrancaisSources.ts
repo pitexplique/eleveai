@@ -542,6 +542,19 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       { id: `${prefix}_conj_pronominaux`, label: "Accorder les verbes pronominaux", notionId: "conjugaison", prerequis: [`${prefix}_conj_temps_composes`, `${prefix}_orth_participe_etre_avoir`] },
       { id: `${prefix}_conj_irreguliers`, label: "Conjuguer les onze verbes irréguliers du 3e groupe", notionId: "conjugaison", prerequis: [`${prefix}_conj_subjonctif`] },
       { id: `${prefix}_conj_valeurs_aspect`, label: "Reconnaitre ce qu'exprime un temps dans le récit", notionId: "conjugaison", prerequis: [`${prefix}_conj_temps_composes`] },
+
+      /* « Lire des textes non littéraires, des images et des documents
+         composites (y compris numériques) » est une COMPÉTENCE TRAVAILLÉE
+         entière du programme, au même rang que « élaborer une interprétation
+         de textes littéraires ». Elle n'existait nulle part en 4e. */
+      { id: `${prefix}_lect_documents_types`, label: "Reconnaitre la nature d'un document et ce qu'elle implique", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_indices`] },
+      { id: `${prefix}_lect_sources_croiser`, label: "Identifier la source d'un document et croiser plusieurs documents", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_documents_types`] },
+      { id: `${prefix}_lect_image_fixe`, label: "Lire une image fixe : cadrage, plan, angle, lumière", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_documents_types`] },
+      { id: `${prefix}_lect_dessin_presse`, label: "Interpréter un dessin de presse ou une caricature", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_image_fixe`] },
+
+      // « paroles rapportées : discours direct, indirect, INDIRECT LIBRE » —
+      // la terminologie l'exige, et il n'était nulle part.
+      { id: `${prefix}_discours_indirect_libre`, label: "Reconnaitre le discours indirect libre", notionId: "analyse_discours", prerequis: [`${prefix}_discours_rapportees`] },
     );
   }
 
