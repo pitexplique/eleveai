@@ -45,6 +45,12 @@ type Donnees = {
   lecturesFaibles?: number;
   utilisateurs?: Utilisateur[];
   recents?: Ligne[];
+  tokens?: {
+    entree: number;
+    sortie: number;
+    coutDollars: number;
+    coutParCours: number;
+  };
 };
 
 function dateCourte(iso: string) {
@@ -124,6 +130,29 @@ export default function PhotoCoursClient() {
           {(donnees.utilisateurs?.length ?? 0) === 0 && (
             <p className="mt-3 text-sm text-slate-400">
               Personne ne s&apos;en est encore servi.
+            </p>
+          )}
+
+          {/* ⭐ CE QUE ÇA COÛTE, sur les 300 derniers appels. Le chiffre qui
+              décide si la fonction peut rester gratuite — et il se lit ici
+              plutôt que sur le tableau de bord d'OpenAI, qui mélange tout le
+              site. ⚠️ ESTIMATION dite comme telle : les tarifs bougent, ils
+              sont en constante dans la route. */}
+          {(donnees.tokens?.entree ?? 0) > 0 && (
+            <p className="mt-3 text-xs text-slate-400">
+              {(donnees.tokens!.entree / 1000).toFixed(0)}k tokens en entrée ·{" "}
+              {(donnees.tokens!.sortie / 1000).toFixed(0)}k en sortie —{" "}
+              <span className="font-semibold text-slate-300">
+                ~{donnees.tokens!.coutDollars.toFixed(2)} $
+              </span>{" "}
+              sur ces {donnees.total} appels, soit environ{" "}
+              <span className="font-semibold text-slate-300">
+                {(donnees.tokens!.coutParCours * 100).toFixed(2)} centimes
+              </span>{" "}
+              par cours photographié.{" "}
+              <span className="text-slate-500">
+                Estimation : le tarif exact est sur platform.openai.com/usage.
+              </span>
             </p>
           )}
 

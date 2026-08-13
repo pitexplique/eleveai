@@ -42,6 +42,16 @@ export type LigneUsage = {
   notion?: string | null;
   matiere?: string | null;
   zonesIllisibles?: number | null;
+
+  /**
+   * ⭐ CE QUE L'APPEL A COÛTÉ (13/08). L'API renvoie le compte exact dans
+   * chaque réponse ; on le jetait, et « combien ça a coûté ? » n'avait pour
+   * réponse qu'une estimation. Les tokens se gardent, le PRIX se calcule à la
+   * lecture : les tarifs changent, les tokens consommés non.
+   */
+  modele?: string | null;
+  inputTokens?: number | null;
+  outputTokens?: number | null;
 };
 
 export async function journaliserUsage(ligne: LigneUsage): Promise<void> {
@@ -59,6 +69,9 @@ export async function journaliserUsage(ligne: LigneUsage): Promise<void> {
     notion: ligne.notion || null,
     matiere: ligne.matiere || null,
     zones_illisibles: ligne.zonesIllisibles ?? null,
+    modele: ligne.modele ?? null,
+    input_tokens: ligne.inputTokens ?? null,
+    output_tokens: ligne.outputTokens ?? null,
   });
 
   if (error) {

@@ -33,7 +33,22 @@ type Ligne = {
   notion: string | null;
   matiere: string | null;
   zones_illisibles: number | null;
+  modele: string | null;
+  input_tokens: number | null;
+  output_tokens: number | null;
 };
+
+/**
+ * ⚠️ TARIFS À VÉRIFIER, ET C'EST POUR ÇA QU'ILS SONT ICI ET PAS ENFOUIS.
+ * Dollars par MILLION de tokens, `gpt-4.1-mini` au 13/08/2026. Ils changent
+ * sans prévenir — le chiffre affiché est donc une ESTIMATION, et l'écran le
+ * dit. La vérité est sur platform.openai.com/usage.
+ * ⭐ On stocke les TOKENS en base, jamais un montant : les tarifs bougent, les
+ * tokens consommés non. Changer ces deux nombres suffit à recalculer tout
+ * l'historique.
+ */
+const TARIF_ENTREE = 0.4;
+const TARIF_SORTIE = 1.6;
 
 export async function GET() {
   const cookieStore = await cookies();
@@ -62,7 +77,7 @@ export async function GET() {
   const { data, error } = await supabase
     .from("photo_cours_usages")
     .select(
-      "id, created_at, code_etablissement, code_utilisateur, type_utilisateur, nom, etape, type_production, confiance, niveau, notion, matiere, zones_illisibles"
+      "id, created_at, code_etablissement, code_utilisateur, type_utilisateur, nom, etape, type_production, confiance, niveau, notion, matiere, zones_illisibles, modele, input_tokens, output_tokens"
     )
     .order("created_at", { ascending: false })
     .limit(PAGE_SIZE);
@@ -120,9 +135,29 @@ export async function GET() {
     .filter((l) => l.etape === "lecture" && typeof l.confiance === "number")
     .map((l) => l.confiance as number);
 
+  // ⭐ CE QUE ÇA COÛTE (13/08). Frédéric : « combien ça a coûté ? » — et la
+  // seule réponse possible était une estimation, parce qu'on jetait le compte
+  // que l'API nous donnait à chaque appel.
+  const entree = lignes.reduce((s, l) => s + (l.input_tokens ?? 0), 0);
+  const sortie = lignes.reduce((s, l) => s + (l.output_tokens ?? 0), 0);
+  const cout = (entree / 1_000_000) * TARIF_ENTREE + (sortie / 1_000_000) * TARIF_SORTIE;
+
   return NextResponse.json({
     ok: true,
     total: lignes.length,
+    tokens: {
+      entree,
+      sortie,
+      // Deux décimales suffiraient à afficher « 0,00 » sur des sommes réelles :
+      // on garde quatre chiffres, c'est un coût de fonctionnement, pas un prix
+      // de vente.
+      coutDollars: Math.round(cout * 10000) / 10000,
+      // Combien coûte UN cours photographié, en moyenne. C'est le chiffre qui
+      // sert à décider si la fonction peut rester gratuite.
+      coutParCours: lignes.length
+        ? Math.round((cout / Math.max(1, lignes.filter((l) => l.etape === "lecture").length)) * 10000) / 10000
+        : 0,
+    },
     lectures: lignes.filter((l) => l.etape === "lecture").length,
     productions: lignes.filter((l) => l.etape === "production").length,
     confianceMoyenne: confiances.length

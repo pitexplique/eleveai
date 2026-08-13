@@ -205,6 +205,9 @@ export async function POST(req: Request) {
       niveau,
       notion,
       matiere,
+      modele: MODELE,
+      inputTokens: completion.usage?.prompt_tokens ?? null,
+      outputTokens: completion.usage?.completion_tokens ?? null,
     });
 
     return NextResponse.json({ output, ponts, id });

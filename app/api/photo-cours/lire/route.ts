@@ -186,6 +186,11 @@ export async function POST(req: Request) {
       notion: lecture.notion,
       matiere: lecture.matiere,
       zonesIllisibles: lecture.zonesIllisibles.length,
+      // Ce que l'appel a coûté, en tokens. La lecture est l'appel CHER des
+      // deux : l'image en `detail: high` pèse plus que tout le reste.
+      modele: MODELE,
+      inputTokens: completion.usage?.prompt_tokens ?? null,
+      outputTokens: completion.usage?.completion_tokens ?? null,
     });
 
     return NextResponse.json({
