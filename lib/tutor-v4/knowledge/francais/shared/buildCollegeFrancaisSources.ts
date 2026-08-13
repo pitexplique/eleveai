@@ -546,6 +546,129 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       { id: `${prefix}_conj_irreguliers`, label: "Conjuguer les onze verbes irréguliers du 3e groupe", notionId: "conjugaison", prerequis: [`${prefix}_conj_subjonctif`] },
       { id: `${prefix}_conj_valeurs_aspect`, label: "Reconnaitre ce qu'exprime un temps dans le récit", notionId: "conjugaison", prerequis: [`${prefix}_conj_temps_composes`] },
 
+      /* « Lire des textes non littéraires, des images et des documents
+         composites (y compris numériques) » est une COMPÉTENCE TRAVAILLÉE
+         entière du programme, au même rang que « élaborer une interprétation
+         de textes littéraires ». Elle n'existait nulle part en 4e. */
+      { id: `${prefix}_lect_documents_types`, label: "Reconnaitre la nature d'un document et ce qu'elle implique", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_indices`] },
+      { id: `${prefix}_lect_sources_croiser`, label: "Identifier la source d'un document et croiser plusieurs documents", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_documents_types`] },
+      { id: `${prefix}_lect_image_fixe`, label: "Lire une image fixe : cadrage, plan, angle, lumière", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_documents_types`] },
+      { id: `${prefix}_lect_dessin_presse`, label: "Interpréter un dessin de presse ou une caricature", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_image_fixe`] },
+
+      // « paroles rapportées : discours direct, indirect, INDIRECT LIBRE » —
+      // la terminologie l'exige, et il n'était nulle part.
+      { id: `${prefix}_discours_indirect_libre`, label: "Reconnaitre le discours indirect libre", notionId: "analyse_discours", prerequis: [`${prefix}_discours_rapportees`] },
+
+      /* « Enrichir et structurer le lexique » — cinq micros génériques pour un
+         objectif qui énumère sept attendus. On ouvre ce qui n'était nulle part. */
+      { id: `${prefix}_voc_derivation_categorie`, label: "Voir le changement de classe qu'opère la dérivation", notionId: "vocabulaire", prerequis: [`${prefix}_voc_formation`] },
+      { id: `${prefix}_voc_racines`, label: "Reconnaitre une racine latine ou grecque", notionId: "vocabulaire", prerequis: [`${prefix}_voc_formation`] },
+      { id: `${prefix}_voc_intensite_generalite`, label: "Classer des mots par degré d'intensité et de généralité", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
+      { id: `${prefix}_voc_denotation_connotation`, label: "Distinguer ce qu'un mot désigne de ce qu'il suggère", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
+      { id: `${prefix}_voc_homonymie_polysemie`, label: "Distinguer polysémie, homonymie, synonymie et antonymie", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
+      { id: `${prefix}_voc_construction_verbe`, label: "Voir comment la construction d'un verbe change son sens", notionId: "vocabulaire", prerequis: [`${prefix}_voc_contexte`] },
+    );
+  }
+
+  /* ── LA 3e, DERNIÈRE ANNÉE DE SON PROGRAMME ─────────────────────────────────
+     ⚠️ Le nouveau BO du 5 mars 2026 ne l'atteindra qu'en septembre 2028. La 3e
+     relève donc, comme la 4e, du programme de cycle 4 de l'arrêté du 9 novembre
+     2015, version consolidée au BO n° 31 du 30 juillet 2020.
+
+     ⭐ CE QUI LA SÉPARE DE LA 4e DANS CE TEXTE : les « attendus de fin de
+     cycle » sont les attendus de fin de 3e. Mêmes rubriques, mais le niveau
+     terminal — celui où la maitrise est exigée, et l'année du brevet. On ne lui
+     recopie donc pas les items de la 4e : mêmes notions, cas plus difficiles.
+
+     État de départ mesuré le 13/08/2026 : 34 micros, 9 notions, 239 items —
+     exactement ce qu'avait la 4e la veille au matin, et pour cause : les deux
+     niveaux portaient les mêmes 34 micros, à deux libellés près.
+
+     ⛔⛔ DANS CE PROGRAMME, LE CONDITIONNEL EST UN MODE — « mode conditionnel
+     présent, passé », dit la terminologie exigible. C'est l'INVERSE de la 5e,
+     passée au texte de 2026 où il est un temps de l'indicatif. Les deux banques
+     disent deux choses différentes et elles ont raison chacune pour sa classe :
+     ne pas « harmoniser ». */
+  if (level === "3e") {
+    base.push(
+      /* « Fonctionnement de la phrase complexe » — la notion n'existait pas en
+         3e, alors que le CM2 et la 6e l'ont. Au niveau terminal, le programme
+         demande l'analyse propositionnelle complète : on ne se contente plus de
+         nommer les subordonnées, on les emboite et on pèse leur dépendance. */
+      { id: `${prefix}_phrc_analyse_complete`, label: "Découper une phrase complexe en propositions et les compter", notionId: "phrase_complexe", prerequis: [`${prefix}_gram_constituants`] },
+      { id: `${prefix}_phrc_enchassement`, label: "Repérer une subordonnée enchâssée dans une autre subordonnée", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_analyse_complete`] },
+      { id: `${prefix}_phrc_degre_dependance`, label: "Mesurer le degré de dépendance d'une proposition", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_analyse_complete`] },
+      // « Utiliser le mode et le temps qui conviennent » / « exprimer un rapport
+      //   logique » : la circonstancielle dit une cause, un but, une concession.
+      { id: `${prefix}_phrc_circonstancielles_logique`, label: "Reconnaitre le rapport logique qu'exprime une circonstancielle", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_degre_dependance`] },
+      { id: `${prefix}_phrc_relative_determinative`, label: "Distinguer la relative déterminative de la relative explicative", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_analyse_complete`] },
+      // « L'expression de la condition et de l'hypothèse » — nommée par le
+      //   programme, et c'est là que le mode conditionnel prend son sens.
+      { id: `${prefix}_phrc_condition_hypothese`, label: "Analyser l'expression de la condition et de l'hypothèse", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_circonstancielles_logique`] },
+
+      /* « Connaître le fonctionnement des chaînes d'accord » — la 3e n'avait
+         aucune notion d'orthographe grammaticale non plus. Les cas retenus sont
+         ceux que la 4e n'a pas : le participe suivi d'un infinitif, les cas
+         d'invariabilité, les pronominaux réciproques, les homophones.
+         ⛔ Aucun cas où l'usage hésite : « un tas de feuilles couvrait /
+         couvraient » se dit des deux façons, un QCM ne peut pas le trancher. */
+      { id: `${prefix}_orth_participe_infinitif`, label: "Accorder le participe passé suivi d'un infinitif", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_accords`] },
+      { id: `${prefix}_orth_participe_invariable`, label: "Reconnaitre les cas où le participe passé reste invariable", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_participe_infinitif`] },
+      { id: `${prefix}_orth_pronominaux_reciproques`, label: "Accorder le participe des pronominaux réfléchis et réciproques", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_participe_invariable`] },
+      { id: `${prefix}_orth_accord_distance`, label: "Tenir l'accord quand le sujet est loin ou repris par un pronom", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_accords`] },
+      { id: `${prefix}_orth_homophones`, label: "Trancher entre les homophones grammaticaux", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_accords`] },
+      { id: `${prefix}_orth_passif_agent`, label: "Construire le passif et mesurer l'effacement de l'agent", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_accord_distance`] },
+
+      /* « Maîtriser la morphologie verbale écrite » et « mettre en évidence le
+         lien entre le temps employé et le sens » — trois micros génériques
+         portaient tout cela. En 3e : les temps du subjonctif que le récit
+         littéraire emploie, la concordance, les valeurs modales, et le système
+         des temps tenu à l'échelle d'un texte entier. */
+      { id: `${prefix}_conj_subjonctif_imparfait_pqp`, label: "Reconnaitre l'imparfait et le plus-que-parfait du subjonctif", notionId: "conjugaison", prerequis: [`${prefix}_conj_composer`] },
+      { id: `${prefix}_conj_concordance`, label: "Respecter la concordance des temps dans la subordonnée", notionId: "conjugaison", prerequis: [`${prefix}_conj_subjonctif_imparfait_pqp`] },
+      { id: `${prefix}_conj_valeurs_modales`, label: "Reconnaitre la valeur modale d'une forme verbale", notionId: "conjugaison", prerequis: [`${prefix}_conj_employer`] },
+      { id: `${prefix}_conj_systeme_temps_texte`, label: "Repérer le système des temps d'un texte", notionId: "conjugaison", prerequis: [`${prefix}_conj_valeurs_modales`] },
+      { id: `${prefix}_conj_participe_gerondif`, label: "Distinguer participe présent, adjectif verbal et gérondif", notionId: "conjugaison", prerequis: [`${prefix}_conj_identifier`] },
+      { id: `${prefix}_conj_irreguliers_temps_rares`, label: "Conjuguer les verbes irréguliers aux temps les moins fréquents", notionId: "conjugaison", prerequis: [`${prefix}_conj_subjonctif_imparfait_pqp`] },
+
+      /* « Lire des textes non littéraires, des images et des documents
+         composites (y compris numériques) » : compétence travaillée ENTIÈRE du
+         programme, absente en 3e comme elle l'était en 4e. En 3e, le texte
+         insiste sur l'ARGUMENTATION — dans la presse et dans l'image. */
+      { id: `${prefix}_lect_these_arguments`, label: "Repérer la thèse, les arguments et les exemples", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_indices`] },
+      { id: `${prefix}_lect_procedes_argumentatifs`, label: "Reconnaitre un procédé qui cherche à convaincre ou à persuader", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_these_arguments`] },
+      { id: `${prefix}_lect_titraille`, label: "Lire la titraille d'un article et ce qu'elle oriente", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_indices`] },
+      { id: `${prefix}_lect_image_argument`, label: "Voir comment une image argumente", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_procedes_argumentatifs`] },
+      { id: `${prefix}_lect_fiabilite_numerique`, label: "Évaluer la fiabilité d'une information numérique", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_titraille`] },
+
+      // « Dénoncer les travers de la société » demande l'ironie, et la
+      //   terminologie du programme la range dans les procédés du discours.
+      { id: `${prefix}_discours_ironie`, label: "Reconnaitre l'ironie et l'antiphrase", notionId: "analyse_discours", prerequis: [`${prefix}_discours_argumentatif`] },
+
+      /* « Enrichir et structurer le lexique » — sept attendus, cinq micros
+         génériques. Le programme attache à la 3e le lexique du jugement, des
+         valeurs et de l'engagement : c'est celui de ses quatre questionnements. */
+      // ⛔ Aucune de ces six ne reprend celles de la 4e — dérivation, racines,
+      //    intensité, connotation, polysémie, construction du verbe. Ce sont
+      //    celles dont l'argumentation de 3e a besoin.
+      { id: `${prefix}_voc_modalisateurs`, label: "Repérer les mots qui disent le degré de certitude", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
+      { id: `${prefix}_voc_notions_abstraites`, label: "Distinguer des mots proches qui nomment des idées", notionId: "vocabulaire", prerequis: [`${prefix}_voc_modalisateurs`] },
+      { id: `${prefix}_voc_nominalisation`, label: "Nominaliser pour passer du fait à l'idée", notionId: "vocabulaire", prerequis: [`${prefix}_voc_formation`] },
+      { id: `${prefix}_voc_sens_figure`, label: "Comprendre l'emploi figuré d'un mot", notionId: "vocabulaire", prerequis: [`${prefix}_voc_contexte`] },
+      { id: `${prefix}_voc_connecteurs`, label: "Reconnaitre ce qu'un connecteur fait dans un raisonnement", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
+      { id: `${prefix}_voc_histoire_mots`, label: "Suivre l'histoire d'un mot : emprunts et évolutions", notionId: "vocabulaire", prerequis: [`${prefix}_voc_formation`] },
+
+      /* ── LES QUATRE QUESTIONNEMENTS DE 3e, PLUS LE COMPLÉMENTAIRE ───────────
+         Le programme les nomme un par un. Contrairement à ceux de la 4e, ils
+         ont trois ans de vie devant eux — la bascule de 2028 les remplacera,
+         pas la rentrée prochaine : ça vaut le coup de les écrire.
+         ⛔ On interroge les NOTIONS, jamais une œuvre : les livres sont choisis
+         par le professeur. */
+      { id: `${prefix}_cult_se_raconter`, label: "Se raconter, se représenter", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_denoncer`, label: "Dénoncer les travers de la société", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_visions_poetiques`, label: "Visions poétiques du monde", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_agir_cite`, label: "Agir dans la cité : individu et pouvoir", notionId: "culture_litteraire", prerequis: [`${prefix}_cult_denoncer`] },
+      { id: `${prefix}_cult_progres_reves`, label: "Progrès et rêves scientifiques", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_reseau`] },
     );
   }
 

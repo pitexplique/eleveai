@@ -15,6 +15,15 @@ import { orthographeGrammaticale3eBank } from "@/lib/tutor-v4/questionBank/3e/fr
 // 5e. Voir l'en-tête du fichier : les deux banques ont raison chacune pour sa
 // classe, il ne faut pas les « harmoniser ».
 import { conjugaison3eBank } from "@/lib/tutor-v4/questionBank/3e/francais/conjugaison.bank";
+// « Lire des textes non littéraires, des images et des documents composites » :
+// une compétence travaillée ENTIÈRE, qui n'existait nulle part. En 3e, le
+// programme insiste sur l'argumentation, dans la presse et dans l'image.
+import { argumentationPresse3eBank } from "@/lib/tutor-v4/questionBank/3e/francais/argumentation-presse.bank";
+// « Enrichir et structurer le lexique » : sept attendus, cinq micros génériques.
+import { vocabulaire3eBank } from "@/lib/tutor-v4/questionBank/3e/francais/vocabulaire.bank";
+// Les quatre questionnements de 3e que le programme nomme, plus le
+// complémentaire. ⚠️ Ils ont trois ans de vie devant eux, jusqu'en 2028.
+import { cultureLitteraire3eBank } from "@/lib/tutor-v4/questionBank/3e/francais/culture-litteraire.bank";
 
 // Banque du coach = gabarits générés (variété) + couche "fixed" imprimable
 // (≥5 QCM fixes par notion). La couche "fixed" enrichit le coach ET sert de
@@ -26,6 +35,9 @@ export const francais3eQuestionBank: TutorBankItemV4[] = [
   ...phraseComplexe3eBank,
   ...orthographeGrammaticale3eBank,
   ...conjugaison3eBank,
+  ...argumentationPresse3eBank,
+  ...vocabulaire3eBank,
+  ...cultureLitteraire3eBank,
 ];
 
 export function getFrancais3eQuestionBank(args?: {
