@@ -244,7 +244,7 @@ export default function PhotoCours() {
     }
   }
 
-  async function telechargerLivre() {
+  async function telechargerLivre(format: "epub" | "pdf") {
     if (!eleve || !sortie) return;
     setEnCours(true);
     setErreur(null);
@@ -261,6 +261,7 @@ export default function PhotoCours() {
           classe,
           matiere,
           notion: lecture?.notion ?? "",
+          format,
         }),
       });
       if (!r.ok) {
@@ -274,7 +275,7 @@ export default function PhotoCours() {
       // l'en-tête Content-Disposition, qu'on relit ici.
       const nom =
         /filename="([^"]+)"/.exec(r.headers.get("Content-Disposition") ?? "")?.[1] ??
-        "cours-eleveai.epub";
+        `cours-eleveai.${format}`;
       const blob = await r.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
@@ -627,8 +628,11 @@ export default function PhotoCours() {
                 absent, se retrouve avant le brevet.
                 ⚠️ Aucun appel au modèle : le document est déjà produit et payé,
                 on ne fait que le mettre en forme. */}
-            <BoutonPlat onClick={telechargerLivre}>
-              {enCours ? "…" : "Télécharger le livre"}
+            <BoutonPlat onClick={() => telechargerLivre("pdf")}>
+              {enCours ? "…" : "PDF"}
+            </BoutonPlat>
+            <BoutonPlat onClick={() => telechargerLivre("epub")}>
+              {enCours ? "…" : "EPUB"}
             </BoutonPlat>
             <BoutonPlat onClick={() => navigator.clipboard.writeText(sortie)}>
               Copier

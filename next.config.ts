@@ -3,6 +3,21 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+
+  // ⚠️ LES POLICES DE PDFKIT, SANS QUOI LE PDF MARCHE EN LOCAL ET CASSE EN
+  // PRODUCTION — ce qui est la pire des deux situations (13/08/2026).
+  //
+  // `/api/photo-cours/livre` fabrique le PDF du cours photographié avec pdfkit.
+  // Celui-ci lit les métriques de ses polices standard (Helvetica, Times) dans
+  // des fichiers .afm livrés avec le paquet, via un `readFileSync` calculé À
+  // L'EXÉCUTION. Or le tracing de Next ne suit que les `import` : il ne peut
+  // pas deviner ce chemin, n'embarque pas le dossier, et la fonction serverless
+  // se retrouve sans police — « ENOENT Helvetica.afm » à la première requête.
+  //
+  // 636 Ko pour cette seule route. C'est le prix d'un PDF qui s'ouvre.
+  outputFileTracingIncludes: {
+    "/api/photo-cours/livre": ["./node_modules/pdfkit/js/data/**"],
+  },
   async redirects() {
     return [
       // /presets était une bibliothèque de prompts guidés. Frédéric, 06/08 :

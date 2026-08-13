@@ -14,6 +14,7 @@
 import { NextResponse } from "next/server";
 import { clean, tropDAppels, verifierCompteConnecte } from "@/lib/photo-cours/auth";
 import { fabriquerEpub, nomDeFichier } from "@/lib/photo-cours/epub";
+import { fabriquerPdf } from "@/lib/photo-cours/pdf";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -29,6 +30,7 @@ export async function POST(req: Request) {
       classe?: string;
       matiere?: string;
       notion?: string;
+      format?: string;
     };
 
     const codeEtablissement = clean(body.codeEtablissement, 80);
@@ -63,22 +65,35 @@ export async function POST(req: Request) {
     const matiere = clean(body.matiere, 40);
     const notion = clean(body.notion, 120);
 
-    const octets = await fabriquerEpub({
+    // ⭐ LES DEUX FORMATS (Frédéric, 13/08 : « télécharger en epub ou pdf, il
+    // faut les deux »). Un EPUB se LIT — il se reflue sur un téléphone, une
+    // liseuse. Un PDF s'IMPRIME et se pose sur une photocopieuse. Ce ne sont
+    // pas deux façons du même geste : un prof veut le second, un élève dans le
+    // bus veut le premier.
+    const pdf = body.format === "pdf";
+
+    const args = {
       cours,
       document,
       intitule,
       classe,
       matiere,
       notion,
-      // La date est passée par l'appelant : la fabrique reste pure.
+      // La date est passée par l'appelant : les fabriques restent pures.
       date: new Date(),
-    });
+    };
+
+    const octets = pdf ? await fabriquerPdf(args) : await fabriquerEpub(args);
+    const nom = nomDeFichier({ notion, classe, intitule }).replace(
+      /\.epub$/,
+      pdf ? ".pdf" : ".epub"
+    );
 
     return new Response(octets as unknown as BodyInit, {
       status: 200,
       headers: {
-        "Content-Type": "application/epub+zip",
-        "Content-Disposition": `attachment; filename="${nomDeFichier({ notion, classe, intitule })}"`,
+        "Content-Type": pdf ? "application/pdf" : "application/epub+zip",
+        "Content-Disposition": `attachment; filename="${nom}"`,
         // ⛔ Aucun cache : le livre porte le cours de quelqu'un.
         "Cache-Control": "no-store",
       },
