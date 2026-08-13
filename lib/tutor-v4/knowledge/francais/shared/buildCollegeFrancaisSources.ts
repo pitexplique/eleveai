@@ -555,6 +555,15 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       // « paroles rapportées : discours direct, indirect, INDIRECT LIBRE » —
       // la terminologie l'exige, et il n'était nulle part.
       { id: `${prefix}_discours_indirect_libre`, label: "Reconnaitre le discours indirect libre", notionId: "analyse_discours", prerequis: [`${prefix}_discours_rapportees`] },
+
+      /* « Enrichir et structurer le lexique » — cinq micros génériques pour un
+         objectif qui énumère sept attendus. On ouvre ce qui n'était nulle part. */
+      { id: `${prefix}_voc_derivation_categorie`, label: "Voir le changement de classe qu'opère la dérivation", notionId: "vocabulaire", prerequis: [`${prefix}_voc_formation`] },
+      { id: `${prefix}_voc_racines`, label: "Reconnaitre une racine latine ou grecque", notionId: "vocabulaire", prerequis: [`${prefix}_voc_formation`] },
+      { id: `${prefix}_voc_intensite_generalite`, label: "Classer des mots par degré d'intensité et de généralité", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
+      { id: `${prefix}_voc_denotation_connotation`, label: "Distinguer ce qu'un mot désigne de ce qu'il suggère", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
+      { id: `${prefix}_voc_homonymie_polysemie`, label: "Distinguer polysémie, homonymie, synonymie et antonymie", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
+      { id: `${prefix}_voc_construction_verbe`, label: "Voir comment la construction d'un verbe change son sens", notionId: "vocabulaire", prerequis: [`${prefix}_voc_contexte`] },
     );
   }
 
