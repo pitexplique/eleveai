@@ -760,35 +760,31 @@ export default function EntreeMatrice({
               );
             })}
 
-            {/* ⭐ PHOTOGRAPHIER UN COURS — à la place de « Préparer un
-                contrôle », retirée aux élèves le 12/08 (voir chips.ts).
-                Une pastille et pas une chip : les chips filtrent les
-                ressources, celle-ci OUVRE un outil — même nature que
-                « Concours » et « Guide de survie » juste en dessous.
+            {/* ⭐ LES MATHS EN VRAI — cette place a d'abord été celle de
+                « Photographier un cours », le 12/08, quand la chip « Préparer
+                un contrôle » a été retirée aux élèves (voir chips.ts).
+                Elle a tenu deux heures : la photo est devenue une CARTE le
+                même soir, en troisième position, et l'outil se retrouvait
+                DEUX FOIS sur le même écran, à dix centimètres près. Frédéric
+                a tranché — « garde la carte et enlève la pastille » — et la
+                place revient au réel de l'île.
+                🔑 Ce qu'on retient : une carte porte un titre, une promesse et
+                un pictogramme ; une pastille porte un mot. Quand les deux
+                mènent au même endroit, c'est la pastille qui s'efface.
 
-                ⚠️ PAS AVANT LA 6ᵉ. Un CM2 n'a pas de téléphone en classe, son
-                cours tient en quatre lignes au tableau, et ce qui sort d'ici
-                est écrit pour un adulte. Même raison qui tient le guide de
-                survie hors du CP, du CE1 et du CE2 : une pastille qui ne mène
-                à rien d'utilisable est pire que pas de pastille.
-
-                ⭐ ET LE PARENT (Frédéric, 12/08 : « essentielle pour aider son
-                enfant »). C'est même le geste le plus naturel des trois : le
-                parent a le cahier sous les yeux le soir, il ne comprend pas
-                toujours la leçon, et il ne peut pas inventer des exercices
-                dessus. Lui, il n'a pas besoin qu'on lui dise sa classe.
+                ⚠️ CM1 ET CM2 COMPRIS, contrairement à la photo : les maths en
+                vrai ne demandent ni compte, ni téléphone, ni lecture d'adulte.
+                Ce sont les niveaux de la ressource elle-même — au-dessous,
+                elle n'existe pas. Le parent, lui, n'en a pas : il a sa carte.
 
                 ⚠️ POUR UN ÉLÈVE, `profil` EST SA CLASSE — elle vaut `null`
                 tant qu'il ne l'a pas choisie, et la pastille n'apparaît donc
                 qu'après. C'est déjà le cas de « Guide de survie »
-                (`guidesPour` renvoie une liste vide sans classe) : on ne
-                propose pas au hasard un outil dont on ignore s'il est de son
-                âge.
-
-                ⚠️ Elle exige un compte. Un visiteur non connecté tombera sur
-                le bouton de connexion, pas sur une erreur. */}
+                (`guidesPour` renvoie une liste vide sans classe). */}
             {profil &&
               [
+                "cm1",
+                "cm2",
                 "6e",
                 "5e",
                 "4e",
@@ -796,19 +792,18 @@ export default function EntreeMatrice({
                 "seconde",
                 "premiere",
                 "terminale",
-                "parent",
               ].includes(profil) && (
                 <Link
-                  href="/photo-cours?from=ia"
+                  href="/maths-974?from=ia"
                   prefetch={false}
-                  onClick={() => track("ia_photo_cours", { profil })}
+                  onClick={() => track("ia_maths_reel", { profil })}
                   className={`rounded-full px-3 py-1.5 text-[13px] transition ${
                     surAccueil
                       ? "border-2 border-[#1d1c16]/25 bg-white/70 text-[#1d1c16]/80 hover:border-[#1d1c16]/60"
                       : "border border-slate-300 bg-white text-slate-600 hover:border-slate-500"
                   }`}
                 >
-                  Photographier un cours
+                  Les maths en vrai
                 </Link>
               )}
 
