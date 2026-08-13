@@ -63,7 +63,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
   {
     id: "coach-maths",
     titre: "Le coach maths",
-    promesse: "Une question à la fois, corrigée, avec l'explication quand tu te trompes.",
+    promesse: "Une question à la fois, corrigée, avec l'explication quand on se trompe.",
     url: "/coach-ia/maths",
     // ⭐ « prof » AJOUTE LE 08/08. Un enseignant ne voyait NI le coach NI les
     // parcours : les deux ressources qui gardent une trace du travail des
@@ -105,7 +105,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
   {
     id: "coach-anglais",
     titre: "Le coach anglais",
-    promesse: "Du A1 au B2, à ton rythme.",
+    promesse: "Du A1 au B2, chacun à son rythme.",
     // ⚠️ /coach-ia/english-maths, pas /tutor-v4?matiere=anglais : sans classe,
     // le tutor retombe sur la 6e en maths (normalizeClasse a sa whitelist).
     // Le sommaire, lui, ouvre bien la bonne matière.
@@ -123,7 +123,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // que la dictée du jour, alors que le coach existe depuis des mois.
     id: "coach-espagnol",
     titre: "Le coach espagnol",
-    promesse: "Du A1 au B2, à ton rythme.",
+    promesse: "Du A1 au B2, chacun à son rythme.",
     url: "/coach-ia/espagnol",
     // ⭐ LA 6ᵉ EST DEDANS (tranché par Frédéric le 06/08). La LV2 commence
     // officiellement en 5ᵉ, et l'espagnol ne sortait donc pas pour un 6ᵉ — ce
@@ -611,7 +611,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
   {
     id: "dico",
     titre: "Le dico des mots et des gestes",
-    promesse: "Le mot que tu n'as pas compris dans la consigne.",
+    promesse: "Le mot de la consigne qu'on n'a pas compris.",
     url: "/dico",
     niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e"],
     notions: ["vocabulaire"],
@@ -758,7 +758,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
   {
     id: "explorer",
     titre: "Explorer",
-    promesse: "Tout ce qu'il y a à voir, quand tu ne sais pas quoi chercher.",
+    promesse: "Tout ce qu'il y a à voir, quand on ne sait pas quoi chercher.",
     url: "/explorer",
     niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
     notions: ["*"],

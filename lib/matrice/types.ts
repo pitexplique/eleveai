@@ -106,7 +106,23 @@ export type ResultatRessource =
 export type RessourceEleveAI = {
   id: string;
   titre: string;
-  /** Une ligne, dite à l'élève — pas une description de catalogue. */
+  /**
+   * Une ligne, dite à la personne — pas une description de catalogue.
+   *
+   * ⛔ NI TUTOIEMENT NI VOUVOIEMENT (Frédéric, 12/08 : « on adopte le
+   * vouvoiement », pour les promesses des cartes). La raison est mécanique :
+   * une promesse est UN texte, lu par un élève de CP tutoyé partout ailleurs
+   * ET par le parent assis à côté de lui. « L'explication quand tu te
+   * trompes » sonnait faux sur la carte d'un parent depuis que le coach s'est
+   * ouvert à lui.
+   *
+   * La sortie n'est pas de choisir un camp mais de n'en choisir aucun : « on »
+   * et les tournures impersonnelles vont aux deux. « quand on se trompe »,
+   * « chacun à son rythme », « le mot qu'on n'a pas compris ».
+   *
+   * ⚠️ Ça ne vaut QUE pour les promesses. Le tutoiement de l'élève reste
+   * entier partout ailleurs — le champ `tutoie` du profil n'a pas bougé.
+   */
   promesse: string;
 
   url: string;
