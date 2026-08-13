@@ -10,6 +10,10 @@ import { complementsEtudeLangue4eBank } from "@/lib/tutor-v4/questionBank/4e/fra
 import { phraseComplexe4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/phrase-complexe.bank";
 // Les chaines d'accord que le programme énumère, et qu'aucune notion ne portait.
 import { orthographeGrammaticale4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/orthographe-grammaticale.bank";
+// ⚠️ Dans le programme de la 4e, le conditionnel est un MODE — l'inverse de la
+// 5e. Voir l'en-tête du fichier : les deux banques ont raison chacune pour sa
+// classe, il ne faut pas les « harmoniser ».
+import { conjugaison4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/conjugaison.bank";
 
 // Banque du coach = gabarits générés (variété) + couche "fixed" imprimable
 // (≥5 QCM fixes par notion). La couche "fixed" enrichit le coach ET sert de
@@ -20,6 +24,7 @@ export const francais4eQuestionBank: TutorBankItemV4[] = [
   ...complementsEtudeLangue4eBank,
   ...phraseComplexe4eBank,
   ...orthographeGrammaticale4eBank,
+  ...conjugaison4eBank,
 ];
 
 export function getFrancais4eQuestionBank(args?: {

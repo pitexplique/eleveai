@@ -529,6 +529,19 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       { id: `${prefix}_orth_participe_appose`, label: "Accorder le participe passé mis en apposition", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_participe_etre_avoir`] },
       { id: `${prefix}_orth_sujet_verbe_complexe`, label: "Accorder le verbe dans les cas complexes", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_accords`] },
       { id: `${prefix}_orth_passif`, label: "Construire le passif et accorder le participe", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_participe_etre_avoir`] },
+
+      /* « Maîtriser la morphologie verbale écrite » — trois micros génériques
+         portaient onze temps et onze verbes irréguliers nommés.
+         ⚠️ DANS CE PROGRAMME, LE CONDITIONNEL EST UN MODE : la terminologie
+         exigible dit « mode conditionnel présent, passé ». C'est l'inverse du
+         programme suivi par la 5e, où il est un temps de l'indicatif. */
+      { id: `${prefix}_conj_modes_personnels`, label: "Distinguer les modes personnels et non personnels", notionId: "conjugaison", prerequis: [`${prefix}_conj_identifier`] },
+      { id: `${prefix}_conj_subjonctif`, label: "Former et employer le subjonctif présent", notionId: "conjugaison", prerequis: [`${prefix}_conj_modes_personnels`] },
+      { id: `${prefix}_conj_conditionnel`, label: "Former le conditionnel présent et le conditionnel passé", notionId: "conjugaison", prerequis: [`${prefix}_conj_modes_personnels`] },
+      { id: `${prefix}_conj_temps_composes`, label: "Construire les temps composés et écrire les participes passés", notionId: "conjugaison", prerequis: [`${prefix}_conj_modes_personnels`] },
+      { id: `${prefix}_conj_pronominaux`, label: "Accorder les verbes pronominaux", notionId: "conjugaison", prerequis: [`${prefix}_conj_temps_composes`, `${prefix}_orth_participe_etre_avoir`] },
+      { id: `${prefix}_conj_irreguliers`, label: "Conjuguer les onze verbes irréguliers du 3e groupe", notionId: "conjugaison", prerequis: [`${prefix}_conj_subjonctif`] },
+      { id: `${prefix}_conj_valeurs_aspect`, label: "Reconnaitre ce qu'exprime un temps dans le récit", notionId: "conjugaison", prerequis: [`${prefix}_conj_temps_composes`] },
     );
   }
 
