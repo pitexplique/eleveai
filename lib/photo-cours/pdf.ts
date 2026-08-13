@@ -51,6 +51,18 @@ import type { LivreArgs } from "./epub";
 
 const SITE = "eleveai.fr";
 
+// ⭐ LA DEVISE, EN TOUTES LETTRES (Frédéric, 13/08 : « EleveAI.fr, notre
+// devise, et en petit Ti Margo » — « tout doit rester discret »).
+//
+// ⛔ PAS LE SIGLE « ε → ∞ », et ce n'est pas un choix de goût : les quatorze
+// polices standard du PDF sont encodées en WinAnsi, qui ne contient ni
+// l'epsilon grec ni la flèche ni le symbole infini. pdfkit ne PROTESTE PAS —
+// il les remplace en silence, et le pied de page serait sorti troué sans que
+// rien ne le signale. La police Symbol les a, mais mélanger deux polices sur
+// une ligne de 7 points pour trois caractères, c'est de la fragilité contre
+// rien : les mots disent la même chose et se lisent partout.
+const DEVISE = "des epsilons engendrent des infinis";
+
 // La charte du livre : encre presque noire, gris de service, un accent sobre.
 const ENCRE = "#1d1c16";
 const GRIS = "#6b6558";
@@ -95,9 +107,23 @@ export async function fabriquerPdf(args: LivreArgs): Promise<Buffer> {
   // Ti Margo, s'il est lisible. Facultatif, comme dans l'EPUB : un margouillat
   // manquant est un détail, un téléchargement qui échoue est une
   // fonctionnalité morte.
+  // ⚠️ `openImage` UNE FOIS, RÉUTILISÉ ENSUITE — et ce n'est pas une
+  // optimisation de confort. Passer le même ArrayBuffer à `doc.image()` à
+  // chaque appel le fait ré-embarquer À CHAQUE FOIS : pdfkit déduplique par
+  // référence, et deux buffers identiques lui sont étrangers l'un à l'autre.
+  // Mesuré : 534 Ko pour trois pages, contre 178 en ouvrant l'image une seule
+  // fois. Sur un téléphone au collège, ce sont 350 Ko payés pour rien.
+  // ⚠️ `openImage` existe dans pdfkit depuis des années, mais @types/pdfkit ne
+  // le déclare pas : on décrit donc la méthode ici plutôt que de renoncer à
+  // l'utiliser. L'objet rendu n'a pas d'autre usage que d'être repassé à
+  // `doc.image()`, d'où le `unknown`.
+  let margo: unknown = null;
   try {
     const chemin = path.join(process.cwd(), "public", "cahier-vacances", "ti-margo.png");
     const image = fs.readFileSync(chemin);
+    margo = (doc as unknown as { openImage(src: unknown): unknown }).openImage(
+      image.buffer.slice(image.byteOffset, image.byteOffset + image.byteLength)
+    );
     // ⚠️ UN ArrayBuffer, PAS UN Buffer — et ça n'a rien d'un détail de style.
     // Le bundle standalone n'embarque pas le `Buffer` de Node : son
     // `Buffer.isBuffer(...)` répond false, il en conclut qu'on lui a passé un
@@ -105,12 +131,7 @@ export async function fabriquerPdf(args: LivreArgs): Promise<Buffer> {
     // virtuel. D'où « fs.readFileSync is not a function » — un message qui
     // désigne le contraire du problème. Un ArrayBuffer, lui, est reconnu tel
     // quel. (Une data URI base64 marche aussi, mais coûte 33 % de plus.)
-    doc.image(
-      image.buffer.slice(image.byteOffset, image.byteOffset + image.byteLength) as never,
-      doc.page.width / 2 - 45,
-      130,
-      { width: 90 }
-    );
+    doc.image(margo as never, doc.page.width / 2 - 45, 130, { width: 90 });
   } catch (e) {
     // ⚠️ ON LE DIT. La première version avalait l'erreur en silence : le PDF
     // sortait à 5 Ko au lieu de 181, sans que rien ne signale que la
@@ -192,16 +213,35 @@ export async function fabriquerPdf(args: LivreArgs): Promise<Buffer> {
     const basInitial = doc.page.margins.bottom;
     doc.page.margins.bottom = 0;
 
+    const y = doc.page.height - MARGE + 8;
+
+    // ⭐ TI MARGO EN PETIT, À GAUCHE. 11 points de haut : on le reconnaît sans
+    // qu'il prenne la parole. « Tout doit rester discret » — un pied de page
+    // qui se remarque est un pied de page raté.
+    if (margo) {
+      try {
+        doc.image(margo as never, MARGE, y - 3, { width: 9 });
+      } catch {
+        /* la ligne de texte se suffit */
+      }
+    }
+
     doc
       .font("Helvetica")
-      .fontSize(8)
+      .fontSize(7)
       .fillColor(GRIS)
       .text(
-        `EleveAI · ${SITE}     —     page ${i - pages.start}`,
-        MARGE,
-        doc.page.height - MARGE + 8,
-        { width: doc.page.width - 2 * MARGE, align: "center", lineBreak: false }
-      );
+        `${SITE} · ${DEVISE}`,
+        MARGE + (margo ? 14 : 0),
+        y,
+        { lineBreak: false }
+      )
+      // Le numéro de page à droite, sur la même ligne de base.
+      .text(`${i - pages.start}`, doc.page.width - MARGE - 20, y, {
+        width: 20,
+        align: "right",
+        lineBreak: false,
+      });
 
     doc.page.margins.bottom = basInitial;
   }

@@ -25,6 +25,12 @@ import path from "node:path";
 
 const SITE = "eleveai.fr";
 
+// ⭐ La devise en toutes lettres (Frédéric, 13/08). ⛔ Pas le sigle « ε → ∞ » :
+// il passerait ici — l'EPUB est en UTF-8 — mais pas dans le PDF, dont les
+// polices standard n'ont ni epsilon grec ni flèche. Deux formats du même
+// document qui ne signent pas pareil, c'est un détail qui se voit.
+const DEVISE = "des epsilons engendrent des infinis";
+
 export type LivreArgs = {
   /** Le cours relu et validé par la personne. */
   cours: string;
@@ -201,13 +207,32 @@ function coursVersXhtml(texte: string): string {
 
 /* ── Le livre ────────────────────────────────────────────────────────────── */
 
-function page(titre: string, corps: string, classe = ""): string {
+/**
+ * Une page du livre.
+ *
+ * ⭐ `signe` ajoute le pied : Ti Margo en petit, l'adresse et la devise. Un
+ * EPUB n'a pas de pied de page fixe comme un PDF — la pagination appartient à
+ * la liseuse — alors on signe la FIN de chaque chapitre. La couverture, elle,
+ * porte déjà tout ça en grand : la signer deux fois serait bavard.
+ */
+function page(
+  titre: string,
+  corps: string,
+  opts: { classe?: string; signe?: boolean; margouillat?: boolean } = {}
+): string {
+  const pied = opts.signe
+    ? `\n<p class="signature">${
+        opts.margouillat
+          ? '<img src="ti-margo.png" alt=""/> '
+          : ""
+      }${SITE} · ${esc(DEVISE)}</p>`
+    : "";
   return `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="fr" xml:lang="fr">
 <head><meta charset="utf-8"/><title>${esc(titre)}</title><link rel="stylesheet" type="text/css" href="style.css"/></head>
-<body${classe ? ` class="${classe}"` : ""}>
-${corps}
+<body${opts.classe ? ` class="${opts.classe}"` : ""}>
+${corps}${pied}
 </body></html>`;
 }
 
@@ -236,6 +261,11 @@ td { border-bottom: 1px solid #e5e1d8; padding: .35em .6em .35em 0; vertical-ali
 .pied { font-size: .8em; color: #6b6558; margin-top: 3em; }
 .source { background: #f4f1ea; padding: .8em 1em; border-left: 3px solid #d8d4cc; font-size: .95em; }
 .note { font-size: .85em; color: #6b6558; font-style: italic; }
+/* La signature de fin de chapitre. Elle doit se lire si on la cherche, et
+   disparaître si on ne la cherche pas. */
+.signature { margin-top: 3em; padding-top: .8em; border-top: 1px solid #e5e1d8;
+  font-size: .72em; color: #8a8478; text-align: center; }
+.signature img { width: 11px; vertical-align: -1px; margin-right: .3em; }
 `.trim();
 
 /**
@@ -298,8 +328,9 @@ ${margouillat ? '<p><img src="ti-margo.png" alt="Ti Margo, le margouillat d\'Ele
 <h1>${esc(titre || "Un cours photographié")}</h1>
 <p class="sous-titre">${esc(args.intitule)}</p>
 <p class="pied">${esc([args.matiere, args.classe].filter(Boolean).join(" · "))}<br/>${esc(jour)}</p>
+<p class="pied">${esc(DEVISE)}</p>
 </div>`,
-      "couverture-page"
+      { classe: "couverture-page" }
     )
   );
 
@@ -311,7 +342,8 @@ ${margouillat ? '<p><img src="ti-margo.png" alt="Ti Margo, le margouillat d\'Ele
 <p class="note">Tel qu'il a été photographié, puis relu et corrigé. La photo, elle, n'a pas été conservée.</p>
 <div class="source">
 ${coursVersXhtml(args.cours)}
-</div>`
+</div>`,
+      { signe: true, margouillat }
     )
   );
 
@@ -326,8 +358,9 @@ ${coursVersXhtml(args.cours)}
       args.intitule,
       `${documentCommenceParUnTitre ? "" : `<h2>${esc(args.intitule)}</h2>\n`}${markdownVersXhtml(args.document)}
 <hr/>
-<p class="pied">Produit à partir de ce cours par EleveAI — ${SITE}<br/>
-Relisez avant de vous en servir : une machine a lu cette page.</p>`
+<p class="pied">Produit à partir de ce cours par EleveAI.<br/>
+Relisez avant de vous en servir : une machine a lu cette page.</p>`,
+      { signe: true, margouillat }
     )
   );
 
