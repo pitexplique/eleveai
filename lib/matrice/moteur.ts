@@ -19,7 +19,7 @@ import { chercherNotionDeClasse } from "./notionsClasse";
 import { CLASSE_COACH, notionCoach, urlCoachCiblee } from "./coach";
 import { MARQUEURS_INTENTION, NOTIONS } from "./lexique";
 import { getProfil, chipsPour } from "./profils";
-import { RESSOURCES, STATUTS_PUBLIABLES } from "./ressources";
+import { PORTES_ECRITES, RESSOURCES, STATUTS_PUBLIABLES } from "./ressources";
 import { ressourcesDeSaison } from "./saison";
 export { normaliser };
 
@@ -335,7 +335,33 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
   // mieux classée de chaque famille, les autres attendent leur tour.
   const famillesVues = new Set<string>();
   const retenues: Recommandation[] = [];
+
+  // ⭐ LES PORTES ÉCRITES PASSENT D'ABORD — et seulement quand la personne n'a
+  // rien demandé. Voir PORTES_ECRITES dans ressources.ts : sur le premier
+  // écran, « les mieux classées » n'est pas la même chose que « les bonnes ».
+  // Dès qu'une notion ou une intention est lue, le score reprend la main : il
+  // répond alors à une demande, et il le fait mieux qu'une liste figée.
+  //
+  // ⚠️ Elles ne sont pas soumises au seuil — elles sont écrites, c'est leur
+  // raison d'être. Mais elles sont prises DANS `candidates`, donc elles ont
+  // passé tous les filtres durs (profil, statut, matière). Un id qui n'y est
+  // pas est sauté sans bruit.
+  const portes = !notion && !intention ? PORTES_ECRITES[profil.id] : undefined;
+  if (portes) {
+    const parId = new Map(candidates.map((c) => [c.ressource.id, c] as const));
+    for (const id of portes) {
+      const c = parId.get(id);
+      if (!c) continue;
+      if (c.ressource.famille) famillesVues.add(c.ressource.famille);
+      retenues.push(c);
+      if (retenues.length >= NB_MAX) break;
+    }
+  }
+
+  const dejaPrises = new Set(retenues.map((c) => c.ressource.id));
   for (const c of candidates) {
+    if (retenues.length >= NB_MAX) break;
+    if (dejaPrises.has(c.ressource.id)) continue;
     if (c.score < seuil) continue;
     const f = c.ressource.famille;
     if (f) {
@@ -343,7 +369,6 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
       famillesVues.add(f);
     }
     retenues.push(c);
-    if (retenues.length >= NB_MAX) break;
   }
 
   return { lecture, recommandations: retenues };

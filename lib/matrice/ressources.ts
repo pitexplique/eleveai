@@ -24,13 +24,39 @@
 // la donner à faire.
 
 import { CAHIERS, GUIDES } from "./guides";
-import type { RessourceEleveAI, StatutRessource } from "./types";
+import type { ProfilId, RessourceEleveAI, StatutRessource } from "./types";
 
 /** Le statut d'une ressource qu'on vient d'ajouter. Ne PAS le changer. */
 export const STATUT_PAR_DEFAUT: StatutRessource = "a_verifier";
 
 /** Les seuls statuts que le moteur accepte de recommander. */
 export const STATUTS_PUBLIABLES: StatutRessource[] = ["validee", "testee_eleves"];
+
+/**
+ * ⭐ LES PORTES ÉCRITES — l'ordre des cartes quand la personne n'a RIEN dit.
+ *
+ * Le moteur classe au score, et c'est la bonne règle dès qu'une notion ou une
+ * intention est exprimée : il répond alors à une demande. Mais sur le premier
+ * écran, personne n'a rien demandé — le commentaire du moteur le dit déjà,
+ * « on montre les portes de son niveau ». Or « les mieux classées » n'est pas
+ * la même chose que « les bonnes » : le calcul rapide arrivait premier chez le
+ * parent parce qu'il porte `testee_eleves` (+1), pas parce qu'un parent vient
+ * chercher ça.
+ *
+ * Frédéric, 12/08 : « Espace parents en premier, coach en 2°, photographier
+ * un cours en troisième ». Trois portes, dans cet ordre, et le score reprend
+ * la main dès qu'on lui parle.
+ *
+ * ⚠️ Un id absent des candidats est simplement sauté (mauvais profil, statut
+ * non publiable) : cette liste ne force jamais l'affichage d'une ressource
+ * qui n'a pas passé les filtres.
+ *
+ * ⛔ N'écrire une liste ici que si l'ordre au score est FAUX pour ce profil.
+ * Ailleurs, le score fait mieux que nous.
+ */
+export const PORTES_ECRITES: Partial<Record<ProfilId, string[]>> = {
+  parent: ["espace-parents", "coach-maths", "photo-cours"],
+};
 
 export const RESSOURCES: RessourceEleveAI[] = [
   // ── Le coach ───────────────────────────────────────────────────────────
@@ -44,7 +70,12 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // eleves etaient invisibles a celui qui les leur donne. C'est exactement
     // la demande « trouver une ressource utilisable par mes eleves, avec un
     // resultat a la cle » (point 12 de la refonte).
-    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof"],
+    // ⭐ « parent » AJOUTÉ LE 12/08. Il ne voyait PAS le coach — la ressource
+    // la plus utilisée du site était invisible à l'adulte assis à côté de
+    // l'enfant, exactement comme le professeur avant le 08/08. Un parent ne
+    // vient pas s'entraîner pour lui : il vient voir ce que son enfant fait,
+    // et refaire une question avec lui.
+    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof", "parent"],
     matiere: "maths",
     notions: ["*"],
     // « preparer » aussi : un élève qui a un contrôle vendredi vient s'entraîner
@@ -746,6 +777,42 @@ export const RESSOURCES: RessourceEleveAI[] = [
     notions: ["*"],
     intentions: ["suivre", "comprendre"],
     type: "page",
+    statut: "validee",
+  },
+  {
+    // ⭐ POUR LE PARENT (Frédéric, 12/08 : « essentielle pour aider son
+    // enfant », puis « lorsque son fils prend mal son cours, ça peut vraiment
+    // l'aider »). Il a le cahier sous les yeux le soir, il ne comprend pas
+    // toujours la leçon, et il ne peut pas inventer des exercices dessus.
+    //
+    // ⚠️ LA PROMESSE NE DIT PAS QU'ON RÉPARE UN COURS MAL PRIS, et c'est
+    // volontaire. Jeanne (SVT) et les élèves de Frédéric disent la même chose
+    // le même jour : ils prennent mal le cours. Mais la machine lit ce qui est
+    // écrit — elle ne devine pas la moitié qui manque. Tant qu'elle ne sait
+    // pas SIGNALER les trous (chantier du 13/08), la carte promet ce qu'elle
+    // tient : des exercices sur la page telle qu'elle est.
+    //
+    // ⚠️ `validee` et pas `testee_eleves` : le bandeau de la carte se décide
+    // là-dessus et dirait « testée en classe » pour une fonction née ce
+    // matin. Elle porte « vérifiée » — c'est vrai, et c'est tout ce qu'on peut
+    // en dire. On changera le jour où une classe s'en sera servie.
+    //
+    // ⚠️ Sa place en TROISIÈME ne vient pas du score : elle est écrite dans
+    // PORTES_PARENT plus bas. Sans ça, le calcul rapide la doublait (+1 pour
+    // `testee_eleves`).
+    //
+    // ⛔ PAS pour le prof : chez lui la chip de la matrice suffit, et Frédéric
+    // a explicitement écarté la carte le 12/08 (« on touche à rien, c'est dans
+    // les chips »).
+    id: "photo-cours",
+    titre: "Photographier un cours",
+    promesse: "Photographiez la page du cahier : elle devient des exercices à faire ensemble.",
+    url: "/photo-cours",
+    niveaux: ["parent"],
+    matiere: "transversal",
+    notions: ["*"],
+    intentions: ["comprendre", "entrainer", "preparer"],
+    type: "machine",
     statut: "validee",
   },
   {
