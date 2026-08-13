@@ -150,9 +150,13 @@ export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): Notion
        dans le BO n° 10 du 5 mars 2026, un OBJECTIF À PART de la grammaire —
        cinq attendus rien qu'en 5e. Il était replié dans `grammaire_phrase`,
        derrière une seule micro : « Accorder les mots dans la phrase ».
-       ⛔ Gardé pour la 5e tant que la 4e et la 3e suivent le programme de
-       2018 ; il s'ouvrira pour elles en 2027 et 2028. */
-    ...(level === "5e"
+       ⛔ Ouvert à la 5e et à la 4e, pour deux raisons DIFFÉRENTES : la 5e parce
+       que le BO du 5 mars 2026 en fait un objectif nommé, la 4e parce que son
+       propre programme — cycle 4 de 2015, consolidé en 2020 — exige les mêmes
+       chaines d'accord sans que la moindre notion les porte. Les micros et les
+       items ne sont PAS les mêmes : ceux de la 4e vont jusqu'au groupe nominal
+       complexe, au participe apposé et au passif. La 3e viendra à son tour. */
+    ...(level === "5e" || level === "4e"
       ? [
           {
             id: "orthographe_grammaticale",
@@ -514,6 +518,17 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       { id: `${prefix}_phrc_pronom_relatif`, label: "Identifier la fonction du pronom relatif dans sa subordonnée", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_subordonnees`] },
       // « Analyser le rôle syntaxique des signes de ponctuation. »
       { id: `${prefix}_phrc_ponctuation`, label: "Analyser le rôle syntaxique d'un signe de ponctuation", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_juxta_coord_sub`] },
+
+      /* « Connaître le fonctionnement des chaînes d'accord » — la 4e n'avait
+         aucune notion d'orthographe grammaticale. Le programme nomme les cas :
+         groupe nominal complexe, participe passé avec être et avec avoir,
+         participe passé en apposition, accord sujet-verbe dans les cas
+         complexes, et construction du passif. */
+      { id: `${prefix}_orth_chaine_gn_complexe`, label: "Tenir la chaine d'accord dans un groupe nominal complexe", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_accords`] },
+      { id: `${prefix}_orth_participe_etre_avoir`, label: "Accorder le participe passé avec être et avec avoir", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_chaine_gn_complexe`] },
+      { id: `${prefix}_orth_participe_appose`, label: "Accorder le participe passé mis en apposition", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_participe_etre_avoir`] },
+      { id: `${prefix}_orth_sujet_verbe_complexe`, label: "Accorder le verbe dans les cas complexes", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_accords`] },
+      { id: `${prefix}_orth_passif`, label: "Construire le passif et accorder le participe", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_participe_etre_avoir`] },
     );
   }
 

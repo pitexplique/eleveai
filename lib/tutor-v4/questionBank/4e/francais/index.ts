@@ -8,6 +8,8 @@ import { complementsEtudeLangue4eBank } from "@/lib/tutor-v4/questionBank/4e/fra
 // « Fonctionnement de la phrase complexe » : section entière du programme de
 // cycle 4 encore en vigueur pour la 4e, et la notion n'existait pas.
 import { phraseComplexe4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/phrase-complexe.bank";
+// Les chaines d'accord que le programme énumère, et qu'aucune notion ne portait.
+import { orthographeGrammaticale4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/orthographe-grammaticale.bank";
 
 // Banque du coach = gabarits générés (variété) + couche "fixed" imprimable
 // (≥5 QCM fixes par notion). La couche "fixed" enrichit le coach ET sert de
@@ -17,6 +19,7 @@ export const francais4eQuestionBank: TutorBankItemV4[] = [
   ...francais4eFixedBank,
   ...complementsEtudeLangue4eBank,
   ...phraseComplexe4eBank,
+  ...orthographeGrammaticale4eBank,
 ];
 
 export function getFrancais4eQuestionBank(args?: {
