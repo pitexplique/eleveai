@@ -53,9 +53,35 @@ export const STATUTS_PUBLIABLES: StatutRessource[] = ["validee", "testee_eleves"
  *
  * ⛔ N'écrire une liste ici que si l'ordre au score est FAUX pour ce profil.
  * Ailleurs, le score fait mieux que nous.
+ *
+ * ── TROIS FORMES D'ENTRÉE ───────────────────────────────────────────────────
+ *   « photo-cours »  un id précis ;
+ *   « type:coach »   la mieux classée de ce TYPE — c'est ce qu'il faut pour
+ *                    « le coach », parce qu'il y en a cinq et que celui qui
+ *                    convient dépend de la matière cliquée. Un id figé aurait
+ *                    donné le coach de maths à un élève venu pour l'espagnol ;
+ *   « * »            la mieux classée qui reste, quelle qu'elle soit. C'est
+ *                    le TROU laissé au score.
+ *
+ * Frédéric, 12/08, pour l'élève à partir de la 6ᵉ : « Coach en 1er, en 2de
+ * position ce que tu veux en fonction de la classe, et en 3ᵉ photo du cours ».
+ * La place du milieu reste donc au moteur : c'est là que la saison, le niveau
+ * et les évaluations nationales font leur travail, et ils le font mieux
+ * qu'une liste écrite en août.
  */
+const PORTES_ELEVE_DES_LA_6E = ["type:coach", "*", "photo-cours"];
+
 export const PORTES_ECRITES: Partial<Record<ProfilId, string[]>> = {
   parent: ["espace-parents", "coach-maths", "photo-cours"],
+  // ⛔ Rien avant la 6ᵉ : « photo-cours » n'est pas ouverte au primaire, et
+  // sans elle ces listes ne diraient rien de plus que le score.
+  "6e": PORTES_ELEVE_DES_LA_6E,
+  "5e": PORTES_ELEVE_DES_LA_6E,
+  "4e": PORTES_ELEVE_DES_LA_6E,
+  "3e": PORTES_ELEVE_DES_LA_6E,
+  seconde: PORTES_ELEVE_DES_LA_6E,
+  premiere: PORTES_ELEVE_DES_LA_6E,
+  terminale: PORTES_ELEVE_DES_LA_6E,
 };
 
 export const RESSOURCES: RessourceEleveAI[] = [
@@ -801,6 +827,12 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // PORTES_PARENT plus bas. Sans ça, le calcul rapide la doublait (+1 pour
     // `testee_eleves`).
     //
+    // ⭐ ET L'ÉLÈVE, DÈS LA 6ᵉ (Frédéric, 12/08, après Jeanne — prof de SVT —
+    // et ses propres élèves : « ils prennent mal le cours et veulent réviser
+    // avec une photo de leur page »). Pas avant : au primaire le cours tient
+    // en quatre lignes au tableau, et ce qui sort d'ici est écrit pour un
+    // adulte.
+    //
     // ⛔ PAS pour le prof : chez lui la chip de la matrice suffit, et Frédéric
     // a explicitement écarté la carte le 12/08 (« on touche à rien, c'est dans
     // les chips »).
@@ -808,7 +840,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "Photographier un cours",
     promesse: "Photographiez la page du cahier : elle devient des exercices à faire ensemble.",
     url: "/photo-cours",
-    niveaux: ["parent"],
+    niveaux: ["6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "parent"],
     matiere: "transversal",
     notions: ["*"],
     intentions: ["comprendre", "entrainer", "preparer"],

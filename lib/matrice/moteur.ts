@@ -348,10 +348,25 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
   // pas est sauté sans bruit.
   const portes = !notion && !intention ? PORTES_ECRITES[profil.id] : undefined;
   if (portes) {
-    const parId = new Map(candidates.map((c) => [c.ressource.id, c] as const));
-    for (const id of portes) {
-      const c = parId.get(id);
+    const pris = new Set<string>();
+    // `candidates` est déjà trié : le PREMIER qui correspond est toujours le
+    // mieux classé. C'est ce qui fait marcher « type:coach » et « * » sans
+    // retrier quoi que ce soit.
+    const premier = (va: (c: Recommandation) => boolean) =>
+      candidates.find((c) => !pris.has(c.ressource.id) && va(c));
+
+    for (const porte of portes) {
+      const c = porte.startsWith("type:")
+        ? premier((x) => x.ressource.type === porte.slice(5))
+        : porte === "*"
+          ? // Le trou laissé au score. Il respecte le seuil, lui : une porte
+            // écrite nomme quelque chose, « * » ne nomme rien — et servir une
+            // ressource à peine pertinente pour tenir une case serait pire
+            // que de n'en montrer que deux.
+            premier((x) => x.score >= seuil)
+          : premier((x) => x.ressource.id === porte);
       if (!c) continue;
+      pris.add(c.ressource.id);
       if (c.ressource.famille) famillesVues.add(c.ressource.famille);
       retenues.push(c);
       if (retenues.length >= NB_MAX) break;
