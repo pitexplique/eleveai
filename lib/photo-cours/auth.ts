@@ -42,7 +42,20 @@ export type Identite = {
 };
 
 export type ResultatAuth =
-  | { ok: true; accesId: string; typeUtilisateur: string; nom: string | null }
+  | {
+      ok: true;
+      accesId: string;
+      typeUtilisateur: string;
+      nom: string | null;
+      /**
+       * ⭐ LA CLASSE DU COMPTE FAIT FOI (12/08). « Fraction en 5e et en 4e, ce
+       * n'est pas la même » — et le pont vers le coach ne peut pas ouvrir la
+       * bonne notion sans elle. Un cahier peut porter l'en-tête de l'an
+       * dernier ; un compte non. Elle vaut `null` pour un professeur ou un
+       * parent, qui n'en ont pas : à eux, on la demande.
+       */
+      classe: string | null;
+    }
   | { ok: false; status: number; error: string };
 
 export function clean(value: unknown, maxLength: number): string {
@@ -68,7 +81,7 @@ export async function verifierCompteConnecte(
 
   const { data, error } = await supabaseAdmin
     .from("acces_etablissement")
-    .select("id, type_utilisateur, nom, actif")
+    .select("id, type_utilisateur, nom, classe, actif")
     .eq("code_etablissement", codeEtablissement)
     .eq("code_utilisateur", codeUtilisateur)
     .eq("actif", true)
@@ -94,6 +107,7 @@ export async function verifierCompteConnecte(
     accesId: data.id,
     typeUtilisateur: data.type_utilisateur ?? "",
     nom: data.nom ?? null,
+    classe: data.classe ?? null,
   };
 }
 

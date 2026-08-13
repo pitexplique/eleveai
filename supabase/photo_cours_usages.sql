@@ -5,11 +5,16 @@
 --
 -- ⛔ CE QUE CETTE TABLE NE CONTIENDRA JAMAIS : la photo, et le texte du cours.
 -- La photo est lue puis oubliée — elle porte une écriture, souvent un prénom,
--- parfois le nom d'un établissement, et rien ne justifie de la garder. Le cours
--- lui-même appartient au professeur (ou à un éditeur de manuel) : le conserver
--- ferait de nous un dépôt d'œuvres qu'on n'a pas le droit de détenir.
--- On garde l'USAGE : qui, quand, quelle étape, sur quelle notion, et si la
+-- parfois le nom d'un établissement, et rien ne justifie de la garder.
+-- On garde ICI l'USAGE : qui, quand, quelle étape, sur quelle notion, et si la
 -- lecture a tenu. C'est ce qu'il faut pour décider si la fonction sert.
+--
+-- ⚠️ LE COURS, LUI, A FINI PAR ÊTRE CONSERVÉ — mais AILLEURS, dans la table
+-- `photo_cours` (12/08 au soir, quand la fonction s'est ouverte à l'élève et au
+-- parent, dont le besoin est de REVENIR). Cette table-ci n'a pas changé : des
+-- statistiques sans contenu, lisibles par l'admin. L'autre est privée, jamais
+-- mutualisée, purgée à 12 mois. Les deux ne se mélangent pas, et c'est exprès :
+-- on peut regarder l'usage sans jamais ouvrir le cahier de quelqu'un.
 --
 -- Alimentée côté serveur uniquement (clé service role) depuis :
 --   /api/photo-cours/lire      -> etape = 'lecture'

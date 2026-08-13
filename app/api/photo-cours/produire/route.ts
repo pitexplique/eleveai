@@ -1,18 +1,28 @@
 // app/api/photo-cours/produire/route.ts
 //
-// ÉTAPE 2 — à partir du cours RELU ET CORRIGÉ par le professeur.
+// ÉTAPE 2 — à partir du cours RELU ET CORRIGÉ par la personne.
 //
 // ⭐ L'image n'arrive pas jusqu'ici. Ce que reçoit cette route, c'est du texte
-// que le professeur a eu sous les yeux et qu'il a validé. C'est ce qui rend la
-// production défendable : si elle se trompe, ce n'est plus parce que la machine
-// a mal vu.
+// que quelqu'un a eu sous les yeux et validé. C'est ce qui rend la production
+// défendable : si elle se trompe, ce n'est plus parce que la machine a mal vu.
+//
+// ⭐ ET LE PUBLIC VIENT DU COMPTE, PAS DU NAVIGATEUR. C'est lui qui décide si
+// on a le droit de COMPLÉTER le cours (élève, parent) ou si on doit s'en tenir
+// strictement à ce qui est écrit (professeur). Laisser le client le choisir,
+// c'est laisser n'importe qui obtenir le prompt du professeur — et surtout,
+// c'est perdre la seule garantie qu'on donne aux profs.
 
 import { NextResponse } from "next/server";
 import { openai } from "@/lib/openai";
 import { promptProduction } from "@/lib/photo-cours/prompts";
 import { clean, tropDAppels, verifierCompteConnecte } from "@/lib/photo-cours/auth";
-import { journaliserUsage } from "@/lib/photo-cours/journal";
-import { PRODUCTIONS } from "@/lib/photo-cours/types";
+import {
+  enregistrerCours,
+  enregistrerProduction,
+  journaliserUsage,
+} from "@/lib/photo-cours/journal";
+import { pontsPour } from "@/lib/photo-cours/coach";
+import { productionValide, publicDuCompte } from "@/lib/photo-cours/types";
 
 const MODELE = "gpt-4.1-mini";
 
@@ -22,9 +32,9 @@ const MODELE = "gpt-4.1-mini";
 // plus une fiche, c'est un chapitre que personne ne relit.
 const MAX_TOKENS = 4000;
 
-// Jumelle de nettoyerLatex() dans /api/agent-prof. ⏳ À factoriser dans
-// lib/ quand la brique sera branchée pour de bon — pas avant : tant qu'on
-// essaie, on ne touche pas à une route qui tourne déjà.
+// Jumelle de nettoyerLatex() dans /api/agent-prof. ⏳ À factoriser dans lib/
+// le jour où l'on touchera à agent-prof — pas avant : on ne modifie pas une
+// route qui tourne pour faire de la place à une qui commence.
 function nettoyerLatex(texte: string): string {
   if (!texte) return texte;
   let t = texte;
@@ -55,9 +65,11 @@ export async function POST(req: Request) {
       texte?: string;
       type?: string;
       niveau?: string;
+      matiere?: string;
       notion?: string;
       precisions?: string;
-      latexMode?: boolean;
+      confiance?: number;
+      compteurs?: { illisibles?: number; manques?: number; erreurs?: number };
     };
 
     const codeEtablissement = clean(body.codeEtablissement, 80);
@@ -86,33 +98,37 @@ export async function POST(req: Request) {
       );
     }
 
-    const type = PRODUCTIONS.some((p) => p.id === body.type)
-      ? (body.type as string)
-      : "exercices";
-    const niveau = clean(body.niveau, 40);
+    const pub = publicDuCompte(auth.typeUtilisateur);
+    const type = productionValide(pub, body.type);
+
+    // ⭐ La classe et la matière sont CONFIRMÉES sur l'écran de relecture —
+    // « fraction en 5e et en 4e, ce n'est pas la même » (Frédéric, 12/08). On
+    // retombe sur celle du compte quand la personne n'a rien dit.
+    const niveau = clean(body.niveau, 40) || auth.classe || "";
+    const matiere = clean(body.matiere, 40);
     const notion = clean(body.notion, 120);
     const precisions = clean(body.precisions, 600);
-    const latexMode = body.latexMode === true;
 
     const completion = await openai.chat.completions.create({
       model: MODELE,
       temperature: 0.4,
       max_tokens: MAX_TOKENS,
       messages: [
-        { role: "system", content: promptProduction(type, latexMode) },
+        { role: "system", content: promptProduction(pub, type) },
         {
           role: "user",
           content: [
-            `Niveau : ${niveau || "non précisé"}`,
+            `Classe : ${niveau || "non précisée"}`,
+            `Matière : ${matiere || "non précisée"}`,
             `Notion : ${notion || "non précisée"}`,
             "",
-            "LE COURS DU PROFESSEUR (relu et validé par lui) :",
+            "LE COURS, RELU ET VALIDÉ :",
             "---",
             texte,
             "---",
             "",
             precisions
-              ? `Ce que le professeur demande en plus :\n${precisions}`
+              ? `Ce qui est demandé en plus :\n${precisions}`
               : "Aucune demande particulière.",
           ].join("\n"),
         },
@@ -124,7 +140,47 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Réponse vide." }, { status: 500 });
     }
 
-    // Voir la note dans /lire : on trace l'usage, jamais le contenu.
+    const output = nettoyerLatex(brut);
+
+    // ⭐ LES PONTS AVANT TOUT : quand la notion existe dans les banques, ce
+    // qu'on vient de générer vaut moins que le coach, qui est relu, calibré,
+    // et qui laisse une trace dans le tableau de bord.
+    const ponts = pontsPour({
+      texte,
+      niveau,
+      notion,
+      matiere,
+      classeDuCompte: auth.classe,
+    });
+
+    // On garde le cours relu et sa production, pour pouvoir y revenir.
+    // ⚠️ Sans `await` bloquant la réponse : perdre l'archive ne doit jamais
+    // coûter le travail de la personne.
+    const id = await enregistrerCours({
+      codeEtablissement,
+      codeUtilisateur,
+      typeUtilisateur: auth.typeUtilisateur,
+      nom: auth.nom,
+      publicVise: pub,
+      niveau,
+      matiere,
+      notion,
+      texte,
+      confiance: typeof body.confiance === "number" ? body.confiance : null,
+      zonesIllisibles: body.compteurs?.illisibles ?? 0,
+      manques: body.compteurs?.manques ?? 0,
+      erreursProbables: body.compteurs?.erreurs ?? 0,
+    }).catch(() => null);
+
+    if (id) {
+      void enregistrerProduction({
+        photoCoursId: id,
+        codeUtilisateur,
+        typeProduction: type,
+        contenu: output,
+      });
+    }
+
     void journaliserUsage({
       codeEtablissement,
       codeUtilisateur,
@@ -134,11 +190,10 @@ export async function POST(req: Request) {
       typeProduction: type,
       niveau,
       notion,
+      matiere,
     });
 
-    return NextResponse.json({
-      output: latexMode ? brut : nettoyerLatex(brut),
-    });
+    return NextResponse.json({ output, ponts, id });
   } catch (error) {
     console.error("Erreur /api/photo-cours/produire :", error);
     return NextResponse.json(

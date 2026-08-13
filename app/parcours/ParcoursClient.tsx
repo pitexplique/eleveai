@@ -141,6 +141,27 @@ export default function ParcoursClient() {
   const [questionCount, setQuestionCount] = useState<QuestionCount>(10);
   const [difficulteMode, setDifficulteMode] = useState<ParcoursDifficulteMode>("revision");
 
+  // ⭐ `?classe=` — ajouté le 12/08 pour que « Photographier un cours » puisse
+  // ouvrir le BON parcours. Cette page ne lisait aucun paramètre d'URL : un
+  // élève de 4ᵉ envoyé ici arrivait sur la 6ᵉ, et rien ne le lui disait. Même
+  // piège silencieux que `normalizeClasse` côté coach.
+  //
+  // ⚠️ On lit `window.location` plutôt que `useSearchParams` : ce dernier
+  // impose une frontière Suspense en App Router et changerait la façon dont
+  // cette page est rendue. Un effet au montage suffit — le paramètre ne change
+  // jamais en cours de session.
+  //
+  // ⚠️ Validé contre `classes` : une valeur inconnue est ignorée, on garde la
+  // 6ᵉ. Il ne s'agit pas de se protéger d'un attaquant (il n'y a rien à
+  // prendre) mais d'un lien mal écrit, qui casserait la page au lieu de
+  // simplement ne rien faire.
+  useEffect(() => {
+    const demandee = new URLSearchParams(window.location.search).get("classe");
+    if (demandee && (classes as string[]).includes(demandee)) {
+      setClasse(demandee as ParcoursClasse);
+    }
+  }, []);
+
   const [started, setStarted] = useState(false);
   const [questions, setQuestions] = useState<ParcoursQuestion[]>([]);
   const [answers, setAnswers] = useState<Record<string, string>>({});
