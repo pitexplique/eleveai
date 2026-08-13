@@ -53,6 +53,7 @@ export default function PhotoCours() {
   const [classe, setClasse] = useState("");
   const [matiere, setMatiere] = useState("");
   const [type, setType] = useState("");
+  const [precisions, setPrecisions] = useState("");
   const [sortie, setSortie] = useState("");
   const [ponts, setPonts] = useState<Pont[]>([]);
   const [enCours, setEnCours] = useState(false);
@@ -174,6 +175,7 @@ export default function PhotoCours() {
           niveau: classe,
           matiere,
           notion: lecture?.notion ?? "",
+          precisions,
           confiance: lecture?.confiance ?? null,
           compteurs: {
             illisibles: lecture?.zonesIllisibles.length ?? 0,
@@ -202,6 +204,7 @@ export default function PhotoCours() {
     setTexte("");
     setSortie("");
     setPonts([]);
+    setPrecisions("");
     setErreur(null);
   }
 
@@ -417,10 +420,26 @@ export default function PhotoCours() {
             </p>
           </div>
 
-          {/* ⛔ LE CHAMP « une précision ? » A ÉTÉ RETIRÉ (Frédéric, 13/08 :
-              « plus simple »). C'était le troisième champ libre d'un écran qui
-              en demandait déjà deux, pour un usage qu'on n'a jamais vu servir.
-              Il reviendra si quelqu'un le réclame — pas avant. */}
+          {/* ⭐ « UNE PRÉCISION ? » — retiré le matin du 13/08 en simplifiant
+              l'écran, REMIS dans l'heure : « ne enlève pas le champ une
+              précision que je trouve super ». C'est le seul endroit où la
+              personne parle avec ses mots au lieu de choisir dans une liste —
+              « j'ai un contrôle vendredi », « sans calculatrice », « elle est
+              en difficulté ». Aucune pastille ne remplace ça.
+              🔑 Simplifier, c'est enlever ce qui encombre, pas ce qui est peu
+              rempli. */}
+          <input
+            type="text"
+            value={precisions}
+            onChange={(e) => setPrecisions(e.target.value)}
+            placeholder={
+              vouvoie
+                ? "Une précision ? (ex. : 20 minutes, sans calculatrice)"
+                : "Une précision ? (ex. : j'ai un contrôle vendredi)"
+            }
+            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-200"
+          />
+
           <div className="flex flex-wrap gap-2">
             <Bouton onClick={produire} enCours={enCours}>
               {enCours ? "En cours…" : "Allons-y"}
@@ -465,6 +484,31 @@ export default function PhotoCours() {
               </div>
             </div>
           )}
+
+          {/* ⭐ LE PROMPT PÉDAGOGIQUE (Frédéric, 13/08). ⚠️ UN COMPLÉMENT, PAS
+              UN RATTRAPAGE — première version corrigée dans la foulée : « le
+              prompt pédagogique est autre chose ». Il ne répare pas une
+              production ratée, il apprend à demander. Le champ « une
+              précision ? » juste au-dessus reste, lui, le moyen normal
+              d'ajuster ce qu'on veut ici.
+
+              ⚠️ ON DIT CE QU'IL FAIT, PAS SON NOM. « Prompt pédagogique » ne
+              veut rien dire à un parent, et un lien qu'on ne comprend pas ne se
+              clique pas. */}
+          <Link
+            href="/prompt-pedagogique?from=photo-cours"
+            prefetch={false}
+            className="block rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 transition hover:border-slate-400"
+          >
+            <span className="text-sm font-semibold text-slate-800">
+              Apprendre à mieux demander
+            </span>
+            <span className="mt-0.5 block text-xs text-slate-600">
+              Un autre outil {vouvoie ? "prend votre" : "prend ta"} demande, la
+              note sur 20, dit ce qui lui manque et la réécrit — pour obtenir
+              mieux, ici comme ailleurs.
+            </span>
+          </Link>
 
           <div className="flex flex-wrap gap-2">
             <BoutonPlat onClick={() => navigator.clipboard.writeText(sortie)}>
