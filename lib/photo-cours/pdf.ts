@@ -22,7 +22,29 @@
 // police de 300 Ko à charger dans chaque instance — pour un document qu'on lit
 // une fois.
 
-import PDFDocument from "pdfkit";
+// ⭐ LE BUNDLE « STANDALONE », ET PAS `pdfkit` TOUT COURT (13/08, après que
+// l'EPUB ait marché en production et le PDF non).
+//
+// `pdfkit/js/pdfkit.js` charge les métriques de ses polices ainsi :
+//     fs.readFileSync(__dirname + '/data/Helvetica.afm', 'utf8')
+// Un chemin CALCULÉ À L'EXÉCUTION. Le tracing de Next ne suit que les
+// `import` : il ne voit pas cette ligne, n'embarque pas le dossier, et la
+// fonction déployée meurt sur « ENOENT Helvetica.afm » — alors que tout
+// marchait en local, où node_modules est là.
+//
+// `pdfkit.standalone.js` embarque les mêmes polices en base64 : plus aucune
+// lecture de disque, donc plus rien à tracer. 2,4 Mo dans le bundle de cette
+// seule route — c'est le prix, et il est payé une fois.
+//
+// ⚠️ J'avais cru régler ça avec `outputFileTracingIncludes` dans next.config.
+// Ça n'a pas suffi : inclure le DOSSIER ne garantit pas que `__dirname` pointe
+// au bon endroit une fois la fonction reconstruite. La règle à retenir : un
+// paquet qui lit le disque à l'exécution ne se répare pas en copiant des
+// fichiers, il se remplace par une version qui ne lit rien.
+//
+// @ts-expect-error — le bundle n'expose pas de types ; l'API est identique à
+// celle de `pdfkit`, dont on garde les types pour les annotations ci-dessous.
+import PDFDocument from "pdfkit/js/pdfkit.standalone.js";
 import fs from "node:fs";
 import path from "node:path";
 import type { LivreArgs } from "./epub";
@@ -40,6 +62,11 @@ const MARGE = 64;
 export async function fabriquerPdf(args: LivreArgs): Promise<Buffer> {
   const doc = new PDFDocument({
     size: "A4",
+    // ⚠️ `bufferPages` EST OBLIGATOIRE pour revenir écrire les pieds de page
+    // à la fin (`bufferedPageRange` + `switchToPage`). Sans lui, pdfkit écrit
+    // chaque page au fil de l'eau et ne sait plus y revenir : la boucle des
+    // pieds de page tournait à vide — sans erreur, ce qui est pire.
+    bufferPages: true,
     margins: { top: MARGE, bottom: MARGE + 20, left: MARGE, right: MARGE },
     info: {
       Title: [args.notion || args.intitule, args.classe].filter(Boolean).join(" — "),
@@ -71,9 +98,24 @@ export async function fabriquerPdf(args: LivreArgs): Promise<Buffer> {
   try {
     const chemin = path.join(process.cwd(), "public", "cahier-vacances", "ti-margo.png");
     const image = fs.readFileSync(chemin);
-    doc.image(image, doc.page.width / 2 - 45, 130, { width: 90 });
-  } catch {
-    /* sans lui */
+    // ⚠️ UN ArrayBuffer, PAS UN Buffer — et ça n'a rien d'un détail de style.
+    // Le bundle standalone n'embarque pas le `Buffer` de Node : son
+    // `Buffer.isBuffer(...)` répond false, il en conclut qu'on lui a passé un
+    // CHEMIN de fichier, et appelle un `fs` qu'il a remplacé par un système
+    // virtuel. D'où « fs.readFileSync is not a function » — un message qui
+    // désigne le contraire du problème. Un ArrayBuffer, lui, est reconnu tel
+    // quel. (Une data URI base64 marche aussi, mais coûte 33 % de plus.)
+    doc.image(
+      image.buffer.slice(image.byteOffset, image.byteOffset + image.byteLength) as never,
+      doc.page.width / 2 - 45,
+      130,
+      { width: 90 }
+    );
+  } catch (e) {
+    // ⚠️ ON LE DIT. La première version avalait l'erreur en silence : le PDF
+    // sortait à 5 Ko au lieu de 181, sans que rien ne signale que la
+    // couverture était vide.
+    console.error("[photo-cours] Ti Margo absent du PDF :", (e as Error).message);
   }
 
   doc.y = 260;
@@ -139,6 +181,17 @@ export async function fabriquerPdf(args: LivreArgs): Promise<Buffer> {
   const pages = doc.bufferedPageRange();
   for (let i = pages.start + 1; i < pages.start + pages.count; i++) {
     doc.switchToPage(i);
+
+    // ⚠️ ON ANNULE LA MARGE DU BAS LE TEMPS D'ÉCRIRE. Sans ça, écrire à
+    // `page.height - MARGE` tombe SOUS la zone de texte, et pdfkit fait ce
+    // qu'il fait toujours quand on déborde : il ajoute une page. Chaque pied
+    // de page en créait une nouvelle, qui en réclamait un autre — le PDF
+    // sortait avec deux pages blanches à la fin.
+    // 🔑 Le symptôme ne ressemblait pas à la cause : « 5 pages au lieu de 3 »
+    // ne dit pas « ton pied de page déborde ».
+    const basInitial = doc.page.margins.bottom;
+    doc.page.margins.bottom = 0;
+
     doc
       .font("Helvetica")
       .fontSize(8)
@@ -146,9 +199,11 @@ export async function fabriquerPdf(args: LivreArgs): Promise<Buffer> {
       .text(
         `EleveAI · ${SITE}     —     page ${i - pages.start}`,
         MARGE,
-        doc.page.height - MARGE + 4,
+        doc.page.height - MARGE + 8,
         { width: doc.page.width - 2 * MARGE, align: "center", lineBreak: false }
       );
+
+    doc.page.margins.bottom = basInitial;
   }
 
   doc.end();

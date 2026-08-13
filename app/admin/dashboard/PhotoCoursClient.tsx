@@ -37,6 +37,7 @@ type Ligne = {
 type Donnees = {
   ok: boolean;
   tableManquante?: boolean;
+  colonneManquante?: boolean;
   error?: string;
   total?: number;
   lectures?: number;
@@ -95,6 +96,18 @@ export default function PhotoCoursClient() {
 
       {!donnees && (
         <p className="mt-3 text-sm text-slate-500">Chargement…</p>
+      )}
+
+      {donnees?.colonneManquante && (
+        <p className="mt-3 rounded-lg border border-amber-700 bg-amber-900/30 px-3 py-2 text-sm text-amber-200">
+          La table existe, mais il lui manque des colonnes. Exécute{" "}
+          <code className="font-mono">supabase/photo_cours_usages_tokens.sql</code>{" "}
+          — les données arrivent bien, c&apos;est seulement l&apos;affichage qui
+          est bloqué.
+          <span className="mt-1 block font-mono text-[11px] text-amber-300/70">
+            {donnees.error}
+          </span>
+        </p>
       )}
 
       {donnees?.tableManquante && (
@@ -254,7 +267,7 @@ export default function PhotoCoursClient() {
         </>
       )}
 
-      {donnees && !donnees.ok && !donnees.tableManquante && (
+      {donnees && !donnees.ok && !donnees.tableManquante && !donnees.colonneManquante && (
         <p className="mt-3 text-sm text-rose-300">{donnees.error}</p>
       )}
     </section>

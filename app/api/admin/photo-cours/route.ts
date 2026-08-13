@@ -83,11 +83,20 @@ export async function GET() {
     .limit(PAGE_SIZE);
 
   if (error) {
-    // La table n'existe pas encore = le SQL n'a pas été passé. On le DIT, au
-    // lieu d'afficher un zéro qui ressemblerait à « personne ne s'en sert ».
+    // ⚠️ ON NE DIT PLUS « la table n'existe pas » À TOUTE ERREUR (13/08).
+    // La table existait, elle contenait déjà des lignes, et l'écran affirmait
+    // le contraire — parce que le `select` réclamait trois colonnes ajoutées
+    // depuis (`modele`, `input_tokens`, `output_tokens`). Frédéric a donc
+    // cherché à créer une table qu'il avait déjà.
+    // 🔑 Un message d'erreur qui NOMME une cause qu'il n'a pas vérifiée envoie
+    // chercher au mauvais endroit — c'est pire que « une erreur est survenue ».
+    const m = error.message.toLowerCase();
+    const tableManquante = m.includes("does not exist") && m.includes("relation");
+    const colonneManquante = m.includes("column") || m.includes("colonne");
     return NextResponse.json({
       ok: false,
-      tableManquante: true,
+      tableManquante,
+      colonneManquante: colonneManquante && !tableManquante,
       error: error.message,
     });
   }

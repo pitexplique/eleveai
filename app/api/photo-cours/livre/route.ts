@@ -100,8 +100,14 @@ export async function POST(req: Request) {
     });
   } catch (error) {
     console.error("Erreur /api/photo-cours/livre :", error);
+    // ⚠️ ON REMONTE LE MESSAGE RÉEL (13/08). Le PDF marchait en local et pas en
+    // production, et « Impossible de fabriquer le livre » ne permettait pas de
+    // savoir POURQUOI — il fallait aller lire les logs Vercel. Ces erreurs-ci
+    // ne disent rien de sensible : ce sont des noms de fichiers de polices
+    // manquants, pas des données de quelqu'un.
+    const detail = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
-      { error: "Impossible de fabriquer le livre." },
+      { error: `Impossible de fabriquer le livre. (${detail.slice(0, 200)})` },
       { status: 500 }
     );
   }
