@@ -9,11 +9,12 @@
 // RELIT, puis on produit. Tout le monde passe par l'écran de relecture, même
 // quand la lecture est bonne — c'est le prix d'un document dont on répond.
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEleve } from "@/context/EleveContext";
 import { compresserPhoto } from "@/lib/photo-cours/compresser";
+import Rendu from "./Rendu";
 import {
   productionsPour,
   type LectureCours,
@@ -432,9 +433,9 @@ export default function PhotoCours() {
       {/* ── 3. Le résultat ──────────────────────────────────────────────── */}
       {etape === "resultat" && (
         <div className="space-y-3">
-          <pre className="max-h-[32rem] overflow-auto whitespace-pre-wrap rounded-lg border border-slate-200 bg-white px-4 py-3 font-sans text-sm leading-relaxed text-slate-800">
-            {sortie}
-          </pre>
+          {/* Le Markdown du modèle était affiché tel quel : les `##` et les
+              `**` se lisaient à l'écran. Voir Rendu.tsx. */}
+          <Rendu>{sortie}</Rendu>
 
           {/* ⭐ LES PONTS. Ce qu'on vient de générer est neuf : personne ne l'a
               relu. Les banques du coach, elles, sont écrites, vérifiées et
@@ -575,9 +576,19 @@ function Bloc({
 /**
  * Une rangée de pastilles pour choisir une valeur — la classe, la matière.
  *
- * ⚠️ `rangee-defilante` (globals.css) : douze classes ne tiennent pas sur la
- * largeur d'un téléphone. Elles défilent au doigt plutôt que de casser la mise
- * en page en trois lignes de pastilles, comme partout ailleurs sur le site.
+ * ⚠️ Douze classes ne tiennent pas sur la largeur d'un téléphone. Elles
+ * défilent au doigt plutôt que de casser la mise en page en trois lignes,
+ * comme partout ailleurs sur le site.
+ *
+ * ⭐ AVEC DEUX FLÈCHES (Frédéric, 13/08 : « si tu fais défiler ajoute deux
+ * flèches, plus pratique »). Une rangée qui défile ne dit pas qu'elle défile :
+ * au doigt on le découvre par hasard, à la souris on ne le découvre jamais —
+ * il n'y a pas de barre de défilement sur une rangée de cette hauteur. Les
+ * flèches sont le seul indice que la Terminale existe à droite du CP.
+ *
+ * ⚠️ Elles n'apparaissent QUE quand il y a de quoi aller — masquées aux deux
+ * bords et quand tout tient à l'écran. Une flèche qui ne fait rien apprend à
+ * ne plus cliquer les flèches.
  *
  * ⚠️ Recliquer la pastille active la DÉSÉLECTIONNE. Il n'y a donc pas de
  * pastille « non précisée » à faire vivre : ne rien choisir est déjà une
@@ -594,30 +605,99 @@ function ChoixChips({
   valeur: string;
   onChange: (v: string) => void;
 }) {
+  const piste = useRef<HTMLDivElement>(null);
+  const [aGauche, setAGauche] = useState(false);
+  const [aDroite, setADroite] = useState(false);
+
+  function mesurer() {
+    const el = piste.current;
+    if (!el) return;
+    setAGauche(el.scrollLeft > 4);
+    // -4 : les largeurs sont fractionnaires, et un `scrollLeft` à 0,5 px du
+    // bout laisserait une flèche droite allumée qui ne bouge plus rien.
+    setADroite(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
+  }
+
+  useEffect(() => {
+    mesurer();
+    window.addEventListener("resize", mesurer);
+    return () => window.removeEventListener("resize", mesurer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [options.length]);
+
+  function pousser(sens: -1 | 1) {
+    const el = piste.current;
+    if (!el) return;
+    // Les deux tiers de la largeur visible : on avance franchement tout en
+    // gardant une pastille déjà vue à l'écran, pour ne pas perdre le fil.
+    el.scrollBy({ left: sens * el.clientWidth * 0.66, behavior: "smooth" });
+  }
+
   return (
     <div>
       <p className="mb-1.5 text-xs font-semibold text-slate-600">{intitule}</p>
-      <div className="rangee-defilante gap-1.5">
-        {options.map((o) => {
-          const actif = valeur === o;
-          return (
-            <button
-              key={o}
-              type="button"
-              onClick={() => onChange(actif ? "" : o)}
-              aria-pressed={actif}
-              className={`shrink-0 rounded-full border px-3 py-1.5 text-[13px] transition ${
-                actif
-                  ? "border-slate-800 bg-slate-800 font-semibold text-white"
-                  : "border-slate-300 bg-white text-slate-600 hover:border-slate-500"
-              }`}
-            >
-              {o}
-            </button>
-          );
-        })}
+      <div className="relative">
+        {aGauche && <Fleche sens="gauche" onClick={() => pousser(-1)} />}
+        <div
+          ref={piste}
+          onScroll={mesurer}
+          className="flex gap-1.5 overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {options.map((o) => {
+            const actif = valeur === o;
+            return (
+              <button
+                key={o}
+                type="button"
+                onClick={() => onChange(actif ? "" : o)}
+                aria-pressed={actif}
+                className={`shrink-0 rounded-full border px-3 py-1.5 text-[13px] transition ${
+                  actif
+                    ? "border-slate-800 bg-slate-800 font-semibold text-white"
+                    : "border-slate-300 bg-white text-slate-600 hover:border-slate-500"
+                }`}
+              >
+                {o}
+              </button>
+            );
+          })}
+        </div>
+        {aDroite && <Fleche sens="droite" onClick={() => pousser(1)} />}
       </div>
     </div>
+  );
+}
+
+function Fleche({
+  sens,
+  onClick,
+}: {
+  sens: "gauche" | "droite";
+  onClick: () => void;
+}) {
+  const gauche = sens === "gauche";
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={gauche ? "Voir les précédents" : "Voir les suivants"}
+      className={`absolute top-1/2 z-10 -translate-y-1/2 rounded-full border border-slate-300 bg-white/95 px-2 py-1.5 text-slate-600 shadow-sm transition hover:border-slate-500 hover:text-slate-900 ${
+        gauche ? "left-0" : "right-0"
+      }`}
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+        className="h-3.5 w-3.5"
+      >
+        <path d={gauche ? "M15 18l-6-6 6-6" : "M9 18l6-6-6-6"} />
+      </svg>
+    </button>
   );
 }
 
