@@ -104,6 +104,16 @@ export default function PhotoCours() {
     setSurMobile(window.matchMedia("(pointer: coarse)").matches);
   }, []);
 
+  // La classe du compte, dès l'ouverture — un élève ne doit pas avoir à dire
+  // ce que le site sait déjà. ⚠️ Elle arrive en différé (localStorage, puis
+  // /api/ma-classe), d'où la dépendance : au premier rendu, elle est absente.
+  // ⛔ On ne touche à rien si la personne a déjà choisi : le compte informe,
+  // il ne corrige pas quelqu'un qui vient de parler.
+  useEffect(() => {
+    if (!classe && eleve?.classe) setClasse(normaliserClasse(eleve.classe));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [eleve?.classe]);
+
   // COLLER (Ctrl+V) — le geste du bureau que personne ne pense à offrir. Sur
   // ordinateur, un cours arrive rarement par l'appareil photo : c'est une
   // capture d'écran, une image reçue, une page scannée. Tout ça vit dans le
@@ -168,6 +178,10 @@ export default function PhotoCours() {
           codeEtablissement: eleve.code_etablissement,
           codeUtilisateur: eleve.code_eleve,
           image: apercu,
+          // Le contexte aide à LIRE, pas à juger : savoir qu'on est en maths
+          // de 4ᵉ lève des ambiguïtés d'écriture manuscrite.
+          classe,
+          matiere,
         }),
       });
       const data = await r.json();
@@ -178,10 +192,13 @@ export default function PhotoCours() {
       setTexte(lu.texte);
       setPub(data.public as PublicPhoto);
       setType(productionsPour(data.public as PublicPhoto)[0].id);
-      // La classe du COMPTE d'abord — un cahier peut porter l'en-tête de l'an
-      // dernier, un compte non. Celle lue sur la photo en second.
-      setClasse(normaliserClasse(data.classeDuCompte) || normaliserClasse(lu.niveau));
-      setMatiere(normaliserMatiere(lu.matiere));
+      // ⛔ ON N'ÉCRASE PAS CE QUE LA PERSONNE A CHOISI À L'ÉCRAN 1. Ce que la
+      // machine croit avoir lu sur la page ne comble que les trous : quelqu'un
+      // qui a dit « 4ᵉ » a raison contre un en-tête de cahier de l'an dernier.
+      setClasse(
+        (c) => c || normaliserClasse(data.classeDuCompte) || normaliserClasse(lu.niveau)
+      );
+      setMatiere((m) => m || normaliserMatiere(lu.matiere));
       setEtape("relecture");
     } catch (e) {
       setErreur(e instanceof Error ? e.message : "Lecture impossible.");
@@ -255,6 +272,45 @@ export default function PhotoCours() {
       {/* ── 1. La photo ─────────────────────────────────────────────────── */}
       {etape === "photo" && (
         <div className="space-y-4">
+          {/* ⭐ LA CLASSE ET LA MATIÈRE AVANT LA PHOTO (Frédéric, 13/08 :
+              « je voudrais que tu mettes classe et matière dans le premier
+              écran »). Elles ont d'abord vécu sous la zone de texte, puis en
+              haut de la relecture ; leur place est ici.
+
+              Deux raisons, dont une que je n'avais pas vue :
+              1. « Fraction en 5e et en 4e, ce n'est pas la même » — c'est le
+                 contexte de tout ce qui suit, et un contexte se pose d'abord ;
+              2. ⭐ ON PEUT LE DIRE AU LECTEUR. Savoir qu'on lit un cours de 4ᵉ
+                 en maths lève des ambiguïtés d'écriture manuscrite qu'aucune
+                 relecture ne rattrape : un « x » de multiplication contre une
+                 inconnue, un « 1 » contre un « l ». La lecture ne JUGE
+                 toujours pas — elle sait juste où elle est.
+
+              La classe est pré-remplie depuis le compte de l'élève ; un
+              professeur ou un parent n'en a pas, il la choisit. */}
+          <div className="space-y-3">
+            <ChoixChips
+              intitule="Classe"
+              options={CLASSES}
+              valeur={classe}
+              onChange={setClasse}
+            />
+            <ChoixChips
+              intitule="Matière"
+              options={MATIERES}
+              valeur={matiere}
+              onChange={setMatiere}
+            />
+          </div>
+
+          {/* Une lecture déjà faite ne se rejette pas parce qu'on a corrigé une
+              pastille : relire coûte un appel au modèle pour rien. */}
+          {lecture && (
+            <BoutonPlat onClick={() => setEtape("relecture")}>
+              Revenir au cours lu
+            </BoutonPlat>
+          )}
+
           <label
             onDragOver={(e) => {
               e.preventDefault();
@@ -328,41 +384,21 @@ export default function PhotoCours() {
             </span>
           </p>
 
-          {/* ⭐ LA CLASSE ET LA MATIÈRE, EN HAUT (Frédéric, 13/08 : « doit
-              passer en haut »). Elles étaient sous la zone de texte, donc
-              après quatorze lignes de cours à relire : personne ne descendait
-              jusque-là, et une classe fausse fait produire un cours de 5ᵉ à un
-              élève de 4ᵉ. « Fraction en 5e et en 4e, ce n'est pas la même. »
-              Elles ouvrent maintenant la relecture — c'est le contexte, et un
-              contexte se pose avant le détail, pas après.
-
-              ⚠️ Toujours pas demandées AVANT la photo : la lecture n'en a pas
-              besoin — elle lit, elle ne juge pas. C'est la production qui en
-              dépend. Pré-remplies : zéro geste en plus quand c'est juste.
-
-              ⛔ DES CHIPS, PAS DES <select> (Frédéric, 13/08 : « je préfère
-              chips que select sur téléphone, plus pratique »). Un menu déroulant
-              ouvre un sélecteur natif par-dessus l'écran, à faire défiler puis
-              valider — trois gestes pour dire « 4ᵉ ». Une pastille se tape.
-              Et le site entier fonctionne comme ça : la matrice, les matières,
-              les intentions. C'était l'intrus.
-              Deuxième bénéfice, moins visible : la valeur choisie se VOIT sans
-              qu'on ait à la lire — le <select> l'affichait dans un gris si pâle
-              qu'on croyait le champ vide. */}
-          <div className="space-y-3">
-            <ChoixChips
-              intitule="Classe"
-              options={CLASSES}
-              valeur={classe}
-              onChange={setClasse}
-            />
-            <ChoixChips
-              intitule="Matière"
-              options={MATIERES}
-              valeur={matiere}
-              onChange={setMatiere}
-            />
-          </div>
+          {/* La classe et la matière se choisissent AVANT la photo (écran 1)
+              depuis le 13/08 — voir la note là-bas. On les rappelle ici, où
+              elles restent corrigeables : c'est le moment où l'on découvre que
+              le cahier ne disait pas ce qu'on croyait. */}
+          <p className="text-xs text-slate-500">
+            {classe || "Classe non précisée"} ·{" "}
+            {matiere || "matière non précisée"}
+            <button
+              type="button"
+              onClick={() => setEtape("photo")}
+              className="ml-2 underline hover:text-slate-800"
+            >
+              corriger
+            </button>
+          </p>
 
           {lecture.confiance < 60 && (
             <p className="rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-800">

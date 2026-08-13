@@ -54,6 +54,8 @@ export async function POST(req: Request) {
       codeEtablissement?: string;
       codeUtilisateur?: string;
       image?: string;
+      classe?: string;
+      matiere?: string;
     };
 
     const codeEtablissement = clean(body.codeEtablissement, 80);
@@ -85,6 +87,13 @@ export async function POST(req: Request) {
       );
     }
 
+    const contexte = [
+      clean(body.classe, 40) && `classe de ${clean(body.classe, 40)}`,
+      clean(body.matiere, 40) && `matière : ${clean(body.matiere, 40)}`,
+    ]
+      .filter(Boolean)
+      .join(", ");
+
     const completion = await openai.chat.completions.create({
       model: MODELE,
       // 0 : on veut la MÊME lecture à chaque fois. Rien à inventer ici.
@@ -96,7 +105,20 @@ export async function POST(req: Request) {
         {
           role: "user",
           content: [
-            { type: "text", text: "Lis ce cours." },
+            {
+              type: "text",
+              // ⭐ LE CONTEXTE AIDE À LIRE, PAS À JUGER (13/08). La classe et
+              // la matière sont désormais demandées AVANT la photo, donc
+              // disponibles ici. Savoir qu'on lit des maths de 4ᵉ lève des
+              // ambiguïtés qu'aucune relecture ne rattrape : un « x » de
+              // multiplication contre une inconnue, un « 1 » contre un « l ».
+              // ⛔ On répète l'interdiction dans la même phrase : le contexte
+              // ne doit surtout pas devenir une autorisation de compléter le
+              // cours avec ce qu'on attend d'une classe de ce niveau.
+              text: contexte
+                ? `Lis ce cours. Contexte donné par la personne : ${contexte}. Il ne sert qu'à mieux DÉCHIFFRER l'écriture — tu ne complètes toujours rien, tu ne corriges toujours rien.`
+                : "Lis ce cours.",
+            },
             // detail "high" : en "low" le modèle ne distingue pas un exposant
             // d'un facteur, ni le haut du bas d'une fraction — ce qui est
             // précisément ce qu'on lui demande de voir.
