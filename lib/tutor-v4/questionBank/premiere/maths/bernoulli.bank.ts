@@ -79,58 +79,56 @@ const PROBAS_RONDES = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8] as const;
 
 const CONTEXTES = [
   {
-    // L'exemple dont Frédéric se sert en classe, et qui parle ici : les
-    // conteneurs contrôlés à l'arrivée au port.
+    // L'exemple dont Frédéric se sert en classe : le conteneur contrôlé à
+    // l'arrivée au port. On dit CE QU'ON CHERCHE dedans — « un défaut » ne
+    // veut rien dire, une rupture de la chaîne du froid, si.
     intro:
-      "À l'arrivée au port, on contrôle les conteneurs un par un. Chaque conteneur peut présenter un défaut, indépendamment des autres.",
-    succes: "trouver un conteneur défectueux",
+      "À l'arrivée au port, on ouvre des conteneurs de marchandises réfrigérées pour vérifier que la chaîne du froid a tenu pendant la traversée.",
+    succes: "trouver un conteneur dont le froid a été rompu",
     unite: "conteneur",
     action: "On contrôle",
   },
   {
-    intro: "On tire une boule dans une urne, on note sa couleur, puis on la REMET dans l'urne.",
-    succes: "tirer une boule rouge",
-    unite: "tirage",
-    action: "On répète le tirage",
-  },
-  {
-    // Le contrôle qualité sur chaîne : prélèvement au hasard dans un lot très
-    // grand, ce qui rend les prélèvements indépendants en pratique.
     intro:
-      "Sur une chaîne agroalimentaire, on prélève au hasard des pots pour vérifier leur poids. Le lot est assez grand pour que les prélèvements soient indépendants.",
-    succes: "prélever un pot non conforme",
-    unite: "pot",
+      "Dans une fromagerie, chaque camembert doit peser entre 245 g et 255 g. On en prélève au hasard sur la chaîne, dans une production assez grande pour qu'un prélèvement n'influence pas les suivants.",
+    succes: "prélever un camembert hors du poids autorisé",
+    unite: "camembert",
     action: "On prélève",
   },
   {
-    intro: "Une usine contrôle ses pièces une par une, indépendamment les unes des autres.",
-    succes: "tomber sur une pièce défectueuse",
-    unite: "contrôle",
-    action: "On contrôle",
+    intro:
+      "En fin de chaîne, chaque moteur passe au banc d'essai : on le démarre une fois pour vérifier qu'il part du premier coup.",
+    succes: "tomber sur un moteur qui ne démarre pas",
+    unite: "moteur",
+    action: "On teste",
   },
   {
-    intro: "Un joueur de basket tire des lancers francs ; ses tirs sont indépendants.",
+    intro:
+      "Une embouteilleuse remplit des bouteilles de jus de fruits ; le bouchon est parfois mal serré, et la bouteille fuit.",
+    succes: "trouver une bouteille qui fuit",
+    unite: "bouteille",
+    action: "On vérifie",
+  },
+  {
+    intro:
+      "Dans un atelier de conditionnement, des sachets de riz sont remplis automatiquement ; certains sortent sous-remplis.",
+    succes: "trouver un sachet sous-rempli",
+    unite: "sachet",
+    action: "On pèse",
+  },
+  {
+    intro:
+      "Un joueur de basket tire des lancers francs ; ses tirs n'ont aucune influence les uns sur les autres.",
     succes: "marquer un lancer franc",
     unite: "lancer",
     action: "Il tire",
   },
   {
-    intro: "Un élève répond au hasard aux questions d'un QCM, chaque question étant indépendante.",
+    intro:
+      "Un élève répond complètement au hasard aux questions d'un QCM à quatre propositions, dont une seule est juste.",
     succes: "tomber sur la bonne réponse",
     unite: "question",
     action: "Il répond à",
-  },
-  {
-    intro: "Un site propose chaque jour un code promotionnel, indépendamment des jours précédents.",
-    succes: "obtenir un code gagnant",
-    unite: "jour",
-    action: "On se connecte pendant",
-  },
-  {
-    intro: "Un capteur météo peut tomber en panne un jour donné, indépendamment des autres jours.",
-    succes: "constater une panne",
-    unite: "jour",
-    action: "On observe le capteur pendant",
   },
 ] as const;
 
@@ -271,27 +269,29 @@ export const bernoulliBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     text:
-      "Une urne contient $3$ boules rouges et $7$ boules noires. On tire deux boules SANS remise. " +
+      "Un carton contient $10$ bouteilles, dont $3$ ont un bouchon mal serré. " +
+      "On en sort deux pour les vérifier, sans les remettre dans le carton. " +
       "S'agit-il d'une répétition d'épreuves identiques et indépendantes ?",
     format: "qcm",
     choices: [
-      "Non : après le premier tirage, la composition de l'urne a changé",
-      "Oui, car il n'y a que deux couleurs",
-      "Oui, car les tirages se suivent",
-      "Non, car les boules ne sont pas en nombre égal",
+      "Non : après la première bouteille sortie, il n'en reste que $9$ dans le carton",
+      "Oui, car une bouteille fuit ou ne fuit pas : deux issues",
+      "Oui, car les deux vérifications se suivent",
+      "Non, car les bouteilles abîmées sont moins nombreuses que les autres",
     ],
-    expected: ["Non : après le premier tirage, la composition de l'urne a changé"],
+    expected: ["Non : après la première bouteille sortie, il n'en reste que $9$ dans le carton"],
     comparator: "mcq_exact",
-    hint: "Que vaut la probabilité de tirer une rouge au second tirage ? Dépend-elle du premier ?",
+    hint: "Quelle est la probabilité que la deuxième fuie ? Dépend-elle de la première ?",
     explanation: exp(
       "L'indépendance exige que la probabilité de succès soit la même à chaque épreuve, quoi qu'il se soit produit avant.",
-      "On compare la probabilité du second tirage selon le résultat du premier.",
-      "Au premier tirage, $P(\\text{rouge}) = \\frac{3}{10}$. Au second, elle vaut $\\frac{2}{9}$ si la première était rouge, et $\\frac{3}{9}$ sinon. Les deux diffèrent.",
-      "Ce n'est PAS une répétition d'épreuves indépendantes. C'est la remise qui l'assure — d'où l'insistance du programme sur les « tirages avec remise dans une urne »."
+      "On compare la probabilité pour la deuxième bouteille selon ce qu'a donné la première.",
+      "Première bouteille : $P(\\text{fuit}) = \\frac{3}{10}$. Deuxième : $\\frac{2}{9}$ si la première fuyait, $\\frac{3}{9}$ sinon. Les deux diffèrent, donc les épreuves ne sont pas indépendantes.",
+      "Ce n'est PAS une répétition d'épreuves indépendantes — le carton est trop petit. " +
+        "Sur une CHAÎNE de production, en revanche, retirer un article d'un lot de plusieurs milliers ne change rien : c'est ce qui rend le contrôle qualité modélisable ainsi."
     ),
     choiceDiagnostics: [
       {
-        choice: "Oui, car il n'y a que deux couleurs",
+        choice: "Oui, car une bouteille fuit ou ne fuit pas : deux issues",
         cause: "deux issues font une épreuve de Bernoulli, mais ne garantissent pas l'indépendance des répétitions",
       },
     ],
