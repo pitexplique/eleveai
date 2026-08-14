@@ -10,7 +10,6 @@ import Footer from "@/components/Footer";
 import MasqueSurEmbed from "@/components/MasqueSurEmbed";
 import { EleveProvider } from "@/context/EleveContext";
 import MasqueSurGuide from "@/components/MasqueSurGuide";
-import RemerciementsBar from "@/components/remerciements/RemerciementsBar";
 import EcrireAuProf from "@/components/EcrireAuProf";
 import PageViewTracker from "@/components/PageViewTracker";
 
@@ -244,10 +243,16 @@ export default function RootLayout({
 
           <MasqueSurEmbed>
             {/* Les guides de survie (imprimables) finissent sur leur propre
-                CTA coach : pas de footer ni de remerciements élèves là-bas. */}
+                CTA coach : pas de footer là-bas.
+                14/08 — la barre des remerciements élèves, qui vivait ici sous
+                le footer, est retirée de TOUTES les pages : elle s'invitait
+                dans chaque capture d'écran, et son extrait polluait les
+                résultats de recherche (l'initiale de la pastille collée au
+                prénom donnait « MMaëlle », « KKeïla »). Les élèves restent
+                remerciés là où c'est leur place : la section « À l'honneur »
+                de l'accueil et la page /remerciements. */}
             <MasqueSurGuide>
               <Footer />
-              <RemerciementsBar />
             </MasqueSurGuide>
             <EcrireAuProf />
           </MasqueSurEmbed>
