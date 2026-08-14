@@ -27,6 +27,13 @@ import { concordanceTempsSecondeBank } from "./concordance-temps.bank";
 import { phraseComplexeSecondeBank } from "./phrase-complexe.bank";
 import { relativesSecondeBank } from "./relatives.bank";
 
+// --- Étude de la langue : lexique (2de ET 1re, dit le programme) ---
+import { lexiqueSecondeBank } from "./lexique.bank";
+
+// --- Expression écrite et orale ---
+import { relationsLogiquesSecondeBank } from "./relations-logiques.bank";
+import { methodeExercicesSecondeBank } from "./methode-exercices.bank";
+
 export const francaisSecondeQuestionBank: TutorBankItemV4[] = [
   // === ÉTUDE DE LA LANGUE : GRAMMAIRE (BO2DEFRG) ===
   ...accordsSecondeBank,
@@ -34,6 +41,11 @@ export const francaisSecondeQuestionBank: TutorBankItemV4[] = [
   ...concordanceTempsSecondeBank,
   ...phraseComplexeSecondeBank,
   ...relativesSecondeBank,
+  // === ÉTUDE DE LA LANGUE : LEXIQUE (BO2DEFRV) ===
+  ...lexiqueSecondeBank,
+  // === EXPRESSION ÉCRITE ET ORALE (BO2DEFRE) ===
+  ...relationsLogiquesSecondeBank,
+  ...methodeExercicesSecondeBank,
 ];
 
 export function getFrancaisSecondeQuestionBank(args?: {
