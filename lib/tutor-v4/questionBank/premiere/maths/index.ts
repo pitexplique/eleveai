@@ -47,6 +47,7 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { evolutionsBank } from "./evolutions.bank";
+import { lectureGraphiqueBank } from "./lecture-graphique.bank";
 import { suitesArithmetiquesBank } from "./suites-arithmetiques.bank";
 import { suitesGeometriquesBank } from "./suites-geometriques.bank";
 import { probabilitesConditionnellesBank } from "./probabilites-conditionnelles.bank";
@@ -55,6 +56,7 @@ import { arbresPonderesBank } from "./arbres-ponderes.bank";
 export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
   // === AUTOMATISMES ===
   ...evolutionsBank, // coefficient multiplicateur · taux d'évolution
+  ...lectureGraphiqueBank, // lire · résoudre graphiquement · droites
   // === VARIATION LINÉAIRE ===
   ...suitesArithmetiquesBank, // suite arithmétique · terme général
   // === VARIATION EXPONENTIELLE ===
