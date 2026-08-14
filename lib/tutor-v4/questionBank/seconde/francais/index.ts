@@ -43,6 +43,9 @@ import { lexiqueSecondeBank } from "./lexique.bank";
 import { relationsLogiquesSecondeBank } from "./relations-logiques.bank";
 import { methodeExercicesSecondeBank } from "./methode-exercices.bank";
 
+// --- Objet d'étude : la poésie du Moyen Âge au XVIIIe siècle ---
+import { poesieSecondeBank } from "./poesie.bank";
+
 export const francaisSecondeQuestionBank: TutorBankItemV4[] = [
   // === ÉTUDE DE LA LANGUE : GRAMMAIRE (BO2DEFRG) ===
   ...accordsSecondeBank,
@@ -55,6 +58,8 @@ export const francaisSecondeQuestionBank: TutorBankItemV4[] = [
   // === EXPRESSION ÉCRITE ET ORALE (BO2DEFRE) ===
   ...relationsLogiquesSecondeBank,
   ...methodeExercicesSecondeBank,
+  // === LA POÉSIE DU MOYEN ÂGE AU XVIIIe SIÈCLE (BO2DEFRP) ===
+  ...poesieSecondeBank,
 ];
 
 export function getFrancaisSecondeQuestionBank(args?: {
