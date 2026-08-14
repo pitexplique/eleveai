@@ -34,6 +34,14 @@ import { francais6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/francais"
 import { francais5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/francais";
 import { francais4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/francais";
 import { francais3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/francais";
+// ⭐ LA SECONDE, AJOUTÉE LE 14/08/2026. Son `index.ts` ordonne de mesurer la
+// couverture à l'exécution AVANT d'ouvrir la porte élève — et l'outil pour le
+// faire ne connaissait pas la classe. La consigne était donc invérifiable.
+// ⚠️ Au lycée il n'existe AUCUN repli générique (`buildCycle4FrancaisBank` ne
+// couvre que 5e|4e|3e) : une micro sans banque rend un tableau vide, jamais du
+// hors-sujet. C'est pour ça que le décompte des micros à zéro ci-dessous n'est
+// pas un détail de confort — c'est la liste de ce que l'élève trouverait vide.
+import { francaisSecondeQuestionBank } from "@/lib/tutor-v4/questionBank/seconde/francais";
 
 const BANQUES: Record<string, TutorBankItemV4[]> = {
   cm1: francaisCm1QuestionBank,
@@ -42,6 +50,7 @@ const BANQUES: Record<string, TutorBankItemV4[]> = {
   "5e": francais5eQuestionBank,
   "4e": francais4eQuestionBank,
   "3e": francais3eQuestionBank,
+  seconde: francaisSecondeQuestionBank,
 };
 
 /** Seuil sous lequel un micro n'a pas de quoi tenir deux passages. */
@@ -55,6 +64,34 @@ function auditer(classe: string) {
   }
 
   const pack = getKnowledgePack(classe as Classe, "francais");
+
+  // ⛔ GARDE-FOU AJOUTÉ LE 14/08/2026 — SANS ELLE CET AUDIT ACCUSE LA BANQUE À TORT.
+  //
+  // `getKnowledge` répartit par `switch` et se termine par
+  // `default: return buildKnowledgeCe1Francais()` (voir lib/tutor-v4/catalog.ts).
+  // Une classe absente de la répartition ne lève donc RIEN : elle rend le paquet
+  // du CE1. En demandant la seconde, cet audit a comparé 48 micros de lycée aux
+  // micros de CE1, puis annoncé « en banque mais pas dans le knowledge : 48 » —
+  // une accusation contre des banques parfaitement justes.
+  //
+  // Le recouvrement nul est la signature de ce cas : si AUCUN identifiant de la
+  // banque n'existe dans le paquet, ce n'est jamais un défaut de couverture,
+  // c'est le mauvais paquet. On s'arrête bruyamment, comme l'exige l'en-tête.
+  const idsDuPack = new Set(pack.microSkills.map((m) => m.id));
+  const recouvrement = new Set(banque.map((i) => i.microId).filter((id) => idsDuPack.has(id)));
+  if (banque.length > 0 && recouvrement.size === 0) {
+    console.error(
+      `\n⛔ ${classe.toUpperCase()} — PAQUET DE CONNAISSANCES INCOHÉRENT, audit interrompu.\n` +
+        `   La banque porte ${banque.length} items sur ${new Set(banque.map((i) => i.microId)).size} micros,\n` +
+        `   et AUCUN n'existe dans le paquet rendu par getKnowledge("${classe}", "francais").\n` +
+        `   Le paquet rendu contient ${idsDuPack.size} micros, dont : ${[...idsDuPack].slice(0, 3).join(", ")}…\n\n` +
+        `   Cause quasi certaine : « ${classe} » manque au switch du français dans\n` +
+        `   lib/tutor-v4/catalog.ts, qui retombe alors en silence sur le CE1.\n` +
+        `   Tant que ce n'est pas réglé, AUCUN chiffre de couverture n'a de sens ici.`
+    );
+    process.exitCode = 1;
+    return;
+  }
 
   const compte = new Map<string, { fixes: number; templates: number }>();
   for (const item of banque) {
