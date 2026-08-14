@@ -53,6 +53,7 @@ import { suitesGeometriquesBank } from "./suites-geometriques.bank";
 import { ajustementAffineBank } from "./ajustement-affine.bank";
 import { deriveeLectureBank } from "./derivee-lecture.bank";
 import { deriveeCalculBank } from "./derivee-calcul.bank";
+import { paraboleBank } from "./parabole.bank";
 import { probabilitesConditionnellesBank } from "./probabilites-conditionnelles.bank";
 import { arbresPonderesBank } from "./arbres-ponderes.bank";
 
@@ -69,6 +70,8 @@ export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
   // === PHÉNOMÈNES ALÉATOIRES ===
   ...probabilitesConditionnellesBank, // conditionnelle · calcul · indépendance
   ...arbresPonderesBank, // arbre pondéré · calcul sur l'arbre
+  // === MODÉLISATION QUADRATIQUE ===
+  ...paraboleBank, // parabole · sommet et axe · variations · racines et signe
   // === DÉRIVATION ===
   ...deriveeLectureBank, // lire un graphique · nombre dérivé et tangente
   ...deriveeCalculBank, // formules · polynômes · signe · variations
