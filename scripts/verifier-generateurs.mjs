@@ -366,6 +366,27 @@ if (nonCouverts.length) {
   console.log("");
 }
 
+/* ⛔ 14/08/2026 — ZÉRO TIRAGE N'EST PAS UN SUCCÈS.
+   C'est la DEUXIÈME fois que ce script tire zéro question et conclut « Aucun
+   problème » : le 11/08 pour les français de CM1, CM2 et 6e (voir le hook
+   alias-loader plus haut), et aujourd'hui pour la 1re non-spé, dont les six
+   fichiers échouaient sur `Unknown file extension ".ts"`. On avait alors
+   réparé le CHARGEMENT sans jamais toucher au VERDICT — le piège est donc
+   revenu par une autre porte, et il reviendra encore.
+   La règle qui ferme la famille entière : un contrôle qui n'a rien contrôlé
+   doit le dire et sortir en échec, quelle que soit la raison du silence. */
+if (totalTirages === 0) {
+  console.error(
+    `⛔ AUCUN TIRAGE — ce contrôle n'a rien vérifié, et ce n'est donc PAS un succès.\n\n` +
+      (nonCouverts.length
+        ? `   Les ${nonCouverts.length} fichiers ci-dessus n'ont pas pu être chargés.\n` +
+          `   Si la raison est « Unknown file extension ".ts" », relancer avec :\n\n` +
+          `       node --experimental-strip-types scripts/verifier-generateurs.mjs ${ARGS.join(" ")}\n`
+        : `   Aucun fichier de banque n'a été trouvé pour cette classe.\n`),
+  );
+  process.exit(1);
+}
+
 /* ─── Propositions qui s'effondrent ─────────────────────────────────────────
    Section à part : le défaut ne rend pas la question impossible, il la rend
    trop facile. Il se voit au compte, pas au contenu. */
