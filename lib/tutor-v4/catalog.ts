@@ -25,6 +25,7 @@ import { buildKnowledge6eFrancais } from "@/lib/tutor-v4/knowledge/francais/6e/b
 import { buildKnowledge5eFrancais } from "@/lib/tutor-v4/knowledge/francais/5e/buildKnowledge5eFrancais";
 import { buildKnowledge4eFrancais } from "@/lib/tutor-v4/knowledge/francais/4e/buildKnowledge4eFrancais";
 import { buildKnowledge3eFrancais } from "@/lib/tutor-v4/knowledge/francais/3e/buildKnowledge3eFrancais";
+import { buildKnowledgeSecondeFrancais } from "@/lib/tutor-v4/knowledge/francais/seconde/buildKnowledgeSecondeFrancais";
 import { buildKnowledgeEco4e } from "@/lib/tutor-v4/knowledge/economie/4e/buildKnowledgeEco4e";
 import { buildKnowledgeA1Espagnol } from "@/lib/tutor-v4/knowledge/espagnol/a1/buildKnowledgeA1Espagnol";
 import { buildKnowledgeA2Espagnol } from "@/lib/tutor-v4/knowledge/espagnol/a2/buildKnowledgeA2Espagnol";
@@ -86,6 +87,14 @@ function getKnowledge(classe: Classe, matiere: Matiere = "maths") {
       case "5e": return buildKnowledge5eFrancais();
       case "4e": return buildKnowledge4eFrancais();
       case "3e": return buildKnowledge3eFrancais();
+      case "seconde": return buildKnowledgeSecondeFrancais();
+      /* ⛔⛔ CE REPLI EST UN PIÈGE, ET IL A DÉJÀ MORDU (14/08/2026).
+         Une classe absente de ce switch ne tombe pas en panne : elle reçoit les
+         125 micros du CE1, EN SILENCE. La seconde en français a ainsi rendu du
+         CE1 pendant toute une session, alors que ses banques étaient écrites et
+         que `loadKnowledgeV4` la connaissait déjà — deux registres, un seul
+         branché. Avant d'ajouter une classe, la brancher ICI AUSSI.
+         ⚠️ Ne jamais se fier à l'absence d'erreur : ce repli n'en lève aucune. */
       default:    return buildKnowledgeCe1Francais(); // fallback
     }
   }

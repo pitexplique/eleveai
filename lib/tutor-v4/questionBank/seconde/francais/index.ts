@@ -7,12 +7,21 @@
 // `knowledge/francais/seconde/microSkills.ts` — lexique, expression, poésie,
 // littérature d'idées et presse, roman, théâtre — n'ont PAS encore de banque.
 //
-// ⛔ CE N'EST PAS UN BUG SILENCIEUX, ET C'EST VOULU. Contrairement au cycle 4,
-// AUCUN REPLI GÉNÉRIQUE N'EXISTE AU LYCÉE : `buildCycle4FrancaisBank` ne
-// couvre que 5e|4e|3e. Une micro sans banque renvoie donc un tableau vide au
-// lieu de servir du hors-sujet — c'est le piège du CM2, retourné à notre
-// avantage. La porte élève reste fermée (`lib/programme.ts`, la seconde n'a que
-// « maths » dans ses matières) tant que tout n'est pas écrit.
+// ⚠️ RECTIFICATION DU 14/08 — la version précédente de cet en-tête affirmait
+// qu'« AUCUN REPLI GÉNÉRIQUE N'EXISTE AU LYCÉE ». C'est vrai DE LA BANQUE et
+// c'était FAUX DU KNOWLEDGE, ce qui rassurait à tort :
+//   — côté BANQUE, c'est exact : `buildCycle4FrancaisBank` ne couvre que
+//     5e|4e|3e, donc une micro sans items rend un tableau vide, jamais du
+//     hors-sujet. C'est le piège du CM2, retourné à notre avantage ;
+//   — côté KNOWLEDGE, c'était faux : `lib/tutor-v4/catalog.ts` finissait sur
+//     `default: return buildKnowledgeCe1Francais()`. La seconde y était absente
+//     et recevait les 125 micros du CE1, EN SILENCE. Corrigé le 14/08.
+// ⭐ La leçon vaut au-delà : il y a DEUX registres de knowledge —
+// `loaders/loadKnowledgeV4.ts` ET `catalog.ts` — et n'en brancher qu'un ne lève
+// aucune erreur. Le second est celui qu'utilise `TutorV4Client`.
+//
+// La porte élève reste fermée (`lib/programme.ts`, la seconde n'a que « maths »
+// dans ses matières) tant que tout n'est pas écrit.
 //
 // ⚠️ Ne JAMAIS ouvrir cette porte avant d'avoir mesuré la couverture à
 // l'exécution : charger `microSkills` et cet index, compter par `microId`, et
