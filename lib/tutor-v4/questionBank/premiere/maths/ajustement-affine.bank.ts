@@ -376,6 +376,44 @@ export const ajustementAffineBank: TutorBankItemV4[] = [
     },
   },
 
+  /* ═══════════════ info_point_moyen_droite ═══════════════ */
+
+  {
+    kind: "template",
+    id: "premiere_info_point_moyen_droite_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "info_point_moyen",
+    microId: "info_point_moyen_droite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde où passe la droite par rapport au point $G$.",
+    tags: ["premiere", "maths", "statistiques", "point-moyen", "ajustement", "template"],
+    generate: () => {
+      const n = nuage();
+      return {
+        text:
+          `Le point $G$ et la droite d'ajustement sont tracés ci-contre. ` +
+          `Que peut-on dire de leur position relative ?`,
+        format: "qcm",
+        choices: makeChoices("La droite d'ajustement passe par le point moyen $G$", [
+          "La droite passe par le premier point du nuage",
+          "La droite passe par le point le plus haut du nuage",
+          "La droite ne passe par aucun point particulier",
+        ]),
+        expected: ["La droite d'ajustement passe par le point moyen $G$"],
+        comparator: "mcq_exact",
+        canvas: canvasNuage(n, { droite: true, pointMoyen: true }),
+        explanation: exp(
+          "Une droite d'ajustement résume le nuage, et elle passe toujours par le point moyen $G(\\bar{x} \\, ; \\, \\bar{y})$.",
+          "On vérifie sur le graphique que $G$ est bien sur la droite.",
+          `$G(2 \\, ; \\, ${fr(n.yMoyen)})$, et la droite d'équation $y = ${fr(n.a)}x + ${fr(n.b)}$ donne pour $x = 2$ : $${fr(2 * n.a + n.b)}$.`,
+          "La droite passe par $G$. C'est une propriété utile : connaissant le point moyen et le coefficient directeur, on peut retrouver toute l'équation."
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ info_ajust_pertinence ═══════════════ */
 
   {

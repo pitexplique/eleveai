@@ -140,7 +140,8 @@ export const microSkills: MicroSkillSource[] = [
   /* ───────────────────────── auto_proba_lecture ───────────────────────── */
 
   { id: "auto_proba_conditionnelle_lecture", label: "Calculer une probabilité conditionnelle à partir d'un tableau croisé ou d'un arbre pondéré", notionId: "auto_proba_lecture", prerequis: ["auto_proba_equiprobabilite"] },
-  { id: "auto_proba_distinguer", label: "Distinguer P(A ∩ B), P_A(B) et P_B(A)", notionId: "auto_proba_lecture", prerequis: ["auto_proba_conditionnelle_lecture"] },
+  { id: "auto_proba_intersection_tableau", label: "Lire P(A ∩ B) dans un tableau croisé d'effectifs", notionId: "auto_proba_lecture", prerequis: ["auto_proba_conditionnelle_lecture"] },
+  { id: "auto_proba_distinguer", label: "Distinguer P(A ∩ B), P_A(B) et P_B(A)", notionId: "auto_proba_lecture", prerequis: ["auto_proba_intersection_tableau"] },
 
   /* ─────────────────────── info_tableau_croise ─────────────────────── */
 
@@ -171,6 +172,7 @@ export const microSkills: MicroSkillSource[] = [
 
   { id: "info_point_moyen_calculer", label: "Calculer les coordonnées du point moyen d'un nuage", notionId: "info_point_moyen", prerequis: ["info_nuage_construire"] },
   { id: "info_point_moyen_placer", label: "Placer le point moyen dans le nuage", notionId: "info_point_moyen", prerequis: ["info_point_moyen_calculer"] },
+  { id: "info_point_moyen_droite", label: "Savoir que la droite d'ajustement passe par le point moyen", notionId: "info_point_moyen", prerequis: ["info_point_moyen_placer"] },
 
   /* ─────────────────────── info_ajustement_affine ─────────────────────── */
 
@@ -301,6 +303,7 @@ export const microSkills: MicroSkillSource[] = [
 
   { id: "quad_extremum", label: "Déterminer le maximum ou le minimum d'une fonction polynôme de degré 2", notionId: "quad_variations", prerequis: ["quad_sommet"] },
   { id: "quad_tableau_variations", label: "Dresser le tableau de variations d'une fonction polynôme de degré 2", notionId: "quad_variations", prerequis: ["quad_extremum"] },
+  { id: "quad_comparer_images", label: "Comparer deux images à l'aide des variations, sans les calculer", notionId: "quad_variations", prerequis: ["quad_tableau_variations"] },
 
   /* ───────────────────────── quad_racines_signe ───────────────────────── */
 

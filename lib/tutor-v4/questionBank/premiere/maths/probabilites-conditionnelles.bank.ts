@@ -231,6 +231,40 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     },
   },
 
+  /* ═══ auto_proba_intersection_tableau (automatisme, domaine BOP1AU) ═══ */
+
+  {
+    kind: "template",
+    id: "premiere_auto_proba_intersection_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "auto_proba_lecture",
+    microId: "auto_proba_intersection_tableau",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "L'intersection se lit dans UNE case, et se divise par l'effectif TOTAL.",
+    tags: ["premiere", "maths", "probabilites", "tableau", "automatisme", "template", "short"],
+    generate: () => {
+      const t = tableau();
+      const { s } = t;
+      return {
+        text:
+          `${enonceTableau(t)} Quelle est la probabilité que le ${s.individu} choisi soit ` +
+          `à la fois ${s.ligneA} et ${s.colonneA} ? (Réponds par une fraction.)`,
+        format: "short",
+        expected: reponsesProba(t.a, t.total),
+        comparator: "fraction_decimal_equivalent",
+        canvas: canvasTableau(t),
+        explanation: exp(
+          "$P(A \\cap B)$ est la probabilité que les DEUX évènements se produisent ensemble.",
+          "On lit la case située au croisement de la ligne et de la colonne, puis on divise par l'effectif total.",
+          `La case « ${s.ligneA} » × « ${s.colonneA} » contient $${t.a}$, et le total est $${t.total}$.`,
+          `$P(A \\cap B) = \\dfrac{${t.a}}{${t.total}}$. ⚠️ On divise par le TOTAL, pas par la ligne : diviser par $${t.ligne1}$ donnerait la conditionnelle $P_A(B)$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ alea_cond_notation ═══════════════ */
 
   {

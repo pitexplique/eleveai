@@ -269,6 +269,63 @@ export const paraboleBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    kind: "template",
+    id: "premiere_quad_racines_courbe_tpl_2",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "quad_parabole",
+    microId: "quad_lire_racines_courbe",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compte les points où la courbe rencontre l'axe horizontal — il peut n'y en avoir aucun.",
+    tags: ["premiere", "maths", "parabole", "racines", "graphique", "template"],
+    generate: () => {
+      // Trois cas, et seul le graphique permet de les distinguer : le
+      // discriminant n'est pas au programme.
+      const cas = pick(["deux", "une", "aucune"] as const);
+      const sommetX = pick([-2, -1, 1, 2] as const);
+      const a = pick([1, -1] as const);
+      // f(x) = a(x − sommetX)² + k : k décide du nombre de racines.
+      const k = cas === "une" ? 0 : cas === "deux" ? (a > 0 ? -4 : 4) : a > 0 ? 3 : -3;
+      const b = -2 * a * sommetX;
+      const c = a * sommetX * sommetX + k;
+      return {
+        text: `Combien la fonction représentée ci-contre admet-elle de racines ?`,
+        format: "qcm",
+        choices: makeChoices(
+          cas === "deux" ? "deux racines" : cas === "une" ? "une seule racine" : "aucune racine",
+          ["deux racines", "une seule racine", "aucune racine", "une infinité de racines"]
+        ),
+        expected: [
+          cas === "deux" ? "deux racines" : cas === "une" ? "une seule racine" : "aucune racine",
+        ],
+        comparator: "mcq_exact",
+        canvas: canvasParabole(a, b, c),
+        explanation: exp(
+          "Les racines d'une fonction sont les abscisses des points où sa courbe coupe l'axe des abscisses.",
+          "On compte les intersections avec l'axe horizontal. Une parabole peut le couper deux fois, le toucher une fois, ou ne jamais l'atteindre.",
+          cas === "deux"
+            ? "Ici la courbe traverse l'axe en deux endroits."
+            : cas === "une"
+              ? `Ici le sommet est POSÉ sur l'axe, en $${fr(sommetX)}$ : la courbe le touche sans le traverser.`
+              : `Ici la parabole est tournée vers le ${a > 0 ? "haut" : "bas"} et son sommet est ${a > 0 ? "au-dessus" : "en dessous"} de l'axe : elle ne l'atteint jamais.`,
+          cas === "deux"
+            ? "La fonction admet deux racines."
+            : cas === "une"
+              ? `La fonction admet une seule racine, $${fr(sommetX)}$ : c'est le cas où le sommet est sur l'axe.`
+              : "La fonction n'admet aucune racine — et c'est le graphique qui le montre, sans aucun calcul."
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "une infinité de racines",
+            cause: "une parabole ne peut couper l'axe qu'en deux points au plus",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ quad_allure ═══════════════ */
 
   {
@@ -523,6 +580,63 @@ export const paraboleBank: TutorBankItemV4[] = [
     },
   },
 
+  /* ═══════════════ quad_comparer_images ═══════════════ */
+
+  {
+    kind: "template",
+    id: "premiere_quad_comparer_images_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "quad_variations",
+    microId: "quad_comparer_images",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Si les deux abscisses sont du même côté du sommet, les variations suffisent à conclure.",
+    tags: ["premiere", "maths", "parabole", "variations", "template"],
+    generate: () => {
+      const sommetX = pick([-1, 0, 1] as const);
+      const a = pick([1, -1] as const);
+      const b = -2 * a * sommetX;
+      // Deux abscisses du MÊME côté du sommet : les variations tranchent.
+      const x1 = sommetX + 1;
+      const x2 = sommetX + 3;
+      const croissanteApres = a > 0;
+      return {
+        text:
+          `Une fonction polynôme de degré 2 a pour sommet le point d'abscisse $${fr(sommetX)}$, ` +
+          `et sa courbe est tournée vers le ${a > 0 ? "haut" : "bas"}. ` +
+          `Sans calculer, compare $f(${fr(x1)})$ et $f(${fr(x2)})$.`,
+        format: "qcm",
+        choices: makeChoices(
+          croissanteApres ? `$f(${fr(x1)}) < f(${fr(x2)})$` : `$f(${fr(x1)}) > f(${fr(x2)})$`,
+          [
+            croissanteApres ? `$f(${fr(x1)}) > f(${fr(x2)})$` : `$f(${fr(x1)}) < f(${fr(x2)})$`,
+            `$f(${fr(x1)}) = f(${fr(x2)})$`,
+            "on ne peut pas comparer sans calculer",
+          ]
+        ),
+        expected: [
+          croissanteApres ? `$f(${fr(x1)}) < f(${fr(x2)})$` : `$f(${fr(x1)}) > f(${fr(x2)})$`,
+        ],
+        comparator: "mcq_exact",
+        canvas: canvasParabole(a, b, 0),
+        explanation: exp(
+          "Sur un intervalle où une fonction est monotone, l'ordre des images se déduit de l'ordre des abscisses.",
+          "On vérifie d'abord que les deux abscisses sont du même côté du sommet, puis on applique le sens de variation.",
+          `$${fr(x1)}$ et $${fr(x2)}$ sont tous deux à droite du sommet $${fr(sommetX)}$, où $f$ est ${croissanteApres ? "croissante" : "décroissante"}. ` +
+            `Comme $${fr(x1)} < ${fr(x2)}$, on en déduit ${croissanteApres ? `$f(${fr(x1)}) < f(${fr(x2)})$` : `$f(${fr(x1)}) > f(${fr(x2)})$`}.`,
+          `Aucun calcul n'a été nécessaire. ⚠️ Si les deux abscisses avaient encadré le sommet, les variations seules n'auraient pas suffi.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "on ne peut pas comparer sans calculer",
+            cause: "les variations suffisent quand les deux abscisses sont du même côté du sommet",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ quad_racines_factorisee ═══════════════ */
 
   {
@@ -608,6 +722,69 @@ export const paraboleBank: TutorBankItemV4[] = [
           {
             choice: `$]-\\infty \\, ; \\, ${fr(x1)}] \\cup [${fr(x2)} \\, ; \\, +\\infty[$`,
             cause: "a donné l'intervalle où la fonction est POSITIVE",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_quad_signe_tpl_2",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "quad_racines_signe",
+    microId: "quad_signe_tableau",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La courbe donne le signe directement : au-dessus de l'axe, $f(x) > 0$ ; en dessous, $f(x) < 0$.",
+    tags: ["premiere", "maths", "parabole", "signe", "graphique", "template"],
+    generate: () => {
+      const x1 = pick([-4, -3, -2] as const);
+      const x2 = pick([1, 2, 3] as const);
+      const a = pick([1, -1] as const);
+      const ecrire = (r: number) => `(x ${r < 0 ? "+" : "-"} ${Math.abs(r)})`;
+      // Positive à l'extérieur des racines si a > 0, à l'intérieur si a < 0.
+      const positifDehors = a > 0;
+      return {
+        text:
+          `On lit sur la courbe ci-contre que $f$ s'annule en $${fr(x1)}$ et en $${fr(x2)}$, ` +
+          `et que $f(x) = a${ecrire(x1)}${ecrire(x2)}$. ` +
+          `Que donne la courbe pour le signe de $a$ et celui de $f$ ?`,
+        format: "qcm",
+        choices: makeChoices(
+          positifDehors
+            ? `$a > 0$, et $f(x) > 0$ à l'extérieur des racines`
+            : `$a < 0$, et $f(x) > 0$ entre les racines`,
+          [
+            positifDehors
+              ? `$a > 0$, et $f(x) > 0$ entre les racines`
+              : `$a < 0$, et $f(x) > 0$ à l'extérieur des racines`,
+            positifDehors
+              ? `$a < 0$, et $f(x) > 0$ entre les racines`
+              : `$a > 0$, et $f(x) > 0$ à l'extérieur des racines`,
+            "$a = 0$, et $f$ garde un signe constant",
+          ]
+        ),
+        expected: [
+          positifDehors
+            ? `$a > 0$, et $f(x) > 0$ à l'extérieur des racines`
+            : `$a < 0$, et $f(x) > 0$ entre les racines`,
+        ],
+        comparator: "mcq_exact",
+        canvas: canvasParabole(a, -a * (x1 + x2), a * x1 * x2),
+        explanation: exp(
+          "La courbe donne à elle seule le signe de $a(x - x_1)(x - x_2)$ : là où elle est au-dessus de l'axe, le produit est positif ; en dessous, négatif.",
+          "On regarde d'abord le sens d'ouverture, qui donne le signe de $a$, puis de quel côté des racines la courbe passe au-dessus de l'axe.",
+          `La parabole est tournée vers le ${a > 0 ? "haut, donc $a > 0$" : "bas, donc $a < 0$"}. ` +
+            `Elle est au-dessus de l'axe ${positifDehors ? `avant $${fr(x1)}$ et après $${fr(x2)}$` : `entre $${fr(x1)}$ et $${fr(x2)}$`}.`,
+          `$f$ est du signe de $a$ à l'EXTÉRIEUR des racines, et du signe contraire ENTRE elles. ` +
+            `Un tableau de signes redit la même chose, mais la courbe le montre d'un coup d'œil — et sans discriminant.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "$a = 0$, et $f$ garde un signe constant",
+            cause: "si $a$ était nul, la fonction ne serait pas du second degré et sa courbe ne serait pas une parabole",
           },
         ],
       };
