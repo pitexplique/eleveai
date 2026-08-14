@@ -17,7 +17,7 @@
 // la notation indicielle uₙ. Les deux sont travaillées, et le passage de l'une
 // à l'autre est une micro-compétence à part entière.
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { CanvasFigure, TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 /* ─────────────────────────── outils ─────────────────────────── */
 
@@ -55,6 +55,33 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
     `Calcul / Observation : ${calcul}\n\n` +
     `Conclusion : ${conclusion}`
   );
+}
+
+// Les termes d'une suite, placés dans un repère : les points $(n \, ; \, u_n)$.
+// C'est là que l'alignement se VOIT — et le programme demande explicitement de
+// « réaliser et exploiter la représentation graphique des termes d'une suite ».
+// `droite` superpose la droite qui les porte, quand la question est justement
+// de constater qu'ils sont alignés.
+function canvasNuage(
+  termes: number[],
+  options?: { titre?: string; droite?: { a: number; b: number } }
+): CanvasFigure {
+  const ymax = Math.max(...termes);
+  const ymin = Math.min(...termes, 0);
+  const marge = Math.max(1, Math.round((ymax - ymin) * 0.15));
+  return {
+    kind: "fonctionGraphique",
+    titre: options?.titre ?? "Les termes de la suite",
+    xmin: -0.5,
+    xmax: termes.length - 0.5,
+    ymin: ymin - marge,
+    ymax: ymax + marge,
+    grille: true,
+    courbes: options?.droite
+      ? [{ id: "droite", type: "affine", a: options.droite.a, b: options.droite.b, couleur: "#94a3b8" }]
+      : undefined,
+    points: termes.map((u, n) => ({ x: n, y: u, label: `u${n}` })),
+  };
 }
 
 // Contextes des sujets 2026. `unite` sert aux phrases de conclusion.
@@ -605,7 +632,7 @@ export const suitesArithmetiquesBank: TutorBankItemV4[] = [
     microId: "lin_suite_graphique",
     difficulty: 2,
     theme: "neutral",
-    text: "On place dans un repère les points de coordonnées $(n \\, ; \\, u_n)$ d'une suite arithmétique. Comment sont-ils disposés ?",
+    text: "Ci-contre, les points $(n \\, ; \\, u_n)$ d'une suite arithmétique de premier terme $2$ et de raison $3$. Comment sont-ils disposés ?",
     format: "qcm",
     choices: [
       "Ils sont alignés",
@@ -615,6 +642,7 @@ export const suitesArithmetiquesBank: TutorBankItemV4[] = [
     ],
     expected: ["Ils sont alignés"],
     comparator: "mcq_exact",
+    canvas: canvasNuage([2, 5, 8, 11, 14, 17], { titre: "u₀ = 2 et r = 3" }),
     hint: "$u_n = u_0 + rn$ ressemble à $y = mx + p$.",
     explanation: exp(
       "Pour une suite arithmétique, $u_n = u_0 + r \\times n$.",
@@ -647,11 +675,15 @@ export const suitesArithmetiquesBank: TutorBankItemV4[] = [
       const r = pick([25, 50, 75, 100] as const);
       return {
         text:
-          `Les points $(n \\, ; \\, u_n)$ d'une suite arithmétique sont alignés sur une droite. ` +
+          `Ci-contre, les termes d'une suite arithmétique et la droite qui les porte. ` +
           `Cette droite passe par $(0 \\, ; \\, ${u0})$ et $(4 \\, ; \\, ${fr(u0 + 4 * r)})$. Quelle est la raison de la suite ?`,
         format: "short",
         expected: [fr(r)],
         comparator: "number_equal",
+        canvas: canvasNuage(
+          Array.from({ length: 5 }, (_, n) => u0 + n * r),
+          { droite: { a: r, b: u0 } }
+        ),
         explanation: exp(
           "La raison d'une suite arithmétique est le coefficient directeur de la droite qui porte ses points.",
           "On calcule ce coefficient à partir de deux points.",

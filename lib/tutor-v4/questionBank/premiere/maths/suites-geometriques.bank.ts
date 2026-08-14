@@ -17,7 +17,7 @@
 // 0,5³ = 0,125). Les sujets, eux, fournissent un tableau de puissances — le
 // coach fait autrement : il garde des nombres calculables de tête.
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { CanvasFigure, TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 /* ─────────────────────────── outils ─────────────────────────── */
 
@@ -55,6 +55,25 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
     `Calcul / Observation : ${calcul}\n\n` +
     `Conclusion : ${conclusion}`
   );
+}
+
+// Les points $(n \, ; \, u_n)$ dans un repère. Pour une suite géométrique, ils
+// ne sont PAS alignés : c'est ce que l'élève doit voir, et c'est ce qui la
+// distingue d'un coup d'œil d'une suite arithmétique.
+function canvasNuage(termes: number[], titre?: string): CanvasFigure {
+  const ymax = Math.max(...termes);
+  const ymin = Math.min(...termes, 0);
+  const marge = Math.max(1, (ymax - ymin) * 0.15);
+  return {
+    kind: "fonctionGraphique",
+    titre: titre ?? "Les termes de la suite",
+    xmin: -0.5,
+    xmax: termes.length - 0.5,
+    ymin: ymin - marge,
+    ymax: ymax + marge,
+    grille: true,
+    points: termes.map((u, n) => ({ x: n, y: u, label: `u${n}` })),
+  };
 }
 
 // Taux dont le coefficient donne des puissances exactes sur de petits rangs.
@@ -465,8 +484,9 @@ export const suitesGeometriquesBank: TutorBankItemV4[] = [
     microId: "expo_suite_graphique",
     difficulty: 3,
     theme: "neutral",
-    text: "On place les points $(n \\, ; \\, u_n)$ d'une suite géométrique de raison $q = 1,5$ et de premier terme positif. Que voit-on ?",
+    text: "Ci-contre, les points $(n \\, ; \\, u_n)$ d'une suite géométrique de premier terme $100$ et de raison $q = 1,5$. Que voit-on ?",
     format: "qcm",
+    canvas: canvasNuage([100, 150, 225, 337.5, 506.25], "u₀ = 100 et q = 1,5"),
     choices: [
       "Des points de plus en plus écartés, qui montent de plus en plus vite",
       "Des points alignés",
@@ -513,9 +533,10 @@ export const suitesGeometriquesBank: TutorBankItemV4[] = [
         : [u0, u0 + r, u0 + 2 * r, u0 + 3 * r];
       return {
         text:
-          `Un relevé donne les valeurs $${termes.map((t) => fr(t)).join(" \\; ; \\; ")}$. ` +
-          `Représentés dans un repère, ces points sont :`,
+          `Un relevé donne les valeurs $${termes.map((t) => fr(t)).join(" \\; ; \\; ")}$, ` +
+          `placées ci-contre dans un repère. Ces points sont :`,
         format: "qcm",
+        canvas: canvasNuage(termes, "Le relevé"),
         choices: makeChoices(
           geometrique ? "sur une courbe qui s'incurve vers le haut" : "alignés",
           [

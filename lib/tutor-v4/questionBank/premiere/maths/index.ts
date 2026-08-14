@@ -29,6 +29,8 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { evolutionsBank } from "./evolutions.bank";
 import { suitesArithmetiquesBank } from "./suites-arithmetiques.bank";
 import { suitesGeometriquesBank } from "./suites-geometriques.bank";
+import { probabilitesConditionnellesBank } from "./probabilites-conditionnelles.bank";
+import { arbresPonderesBank } from "./arbres-ponderes.bank";
 
 export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
   // === AUTOMATISMES ===
@@ -37,6 +39,9 @@ export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
   ...suitesArithmetiquesBank, // suite arithmétique · terme général
   // === VARIATION EXPONENTIELLE ===
   ...suitesGeometriquesBank, // suite géométrique · terme général
+  // === PHÉNOMÈNES ALÉATOIRES ===
+  ...probabilitesConditionnellesBank, // conditionnelle · calcul · indépendance
+  ...arbresPonderesBank, // arbre pondéré · calcul sur l'arbre
 ];
 
 export function getMathsPremiereQuestionBank(args?: {
