@@ -16,7 +16,7 @@
 //   - des générateurs partout, du fixed seulement pour les pièges — celui de
 //     la baisse puis hausse de même taux se raconte, il ne se paramètre pas.
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { CanvasFigure, TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 /* ─────────────────────────── outils ─────────────────────────── */
 
@@ -62,6 +62,36 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
     `Calcul / Observation : ${calcul}\n\n` +
     `Conclusion : ${conclusion}`
   );
+}
+
+// Une évolution lue SUR UN GRAPHIQUE : l'élève relève lui-même la valeur de
+// départ et celle d'arrivée, puis applique (V_f − V_i) / V_i. C'est le geste
+// demandé à l'épreuve — « estimer graphiquement une valeur atteinte » figure
+// dans la liste des automatismes, et le taux se calcule ensuite.
+//
+// Les points intermédiaires ne servent qu'à rendre la courbe crédible : les
+// deux années sur lesquelles porte la question sont étiquetées, les autres non.
+function canvasEvolution(
+  valeurs: number[],
+  anneeDebut: number,
+  indices: { i: number; f: number },
+  titre: string
+): CanvasFigure {
+  const ymax = Math.max(...valeurs);
+  return {
+    kind: "fonctionGraphique",
+    titre,
+    xmin: anneeDebut - 0.5,
+    xmax: anneeDebut + valeurs.length - 0.5,
+    ymin: 0,
+    ymax: Math.ceil((ymax * 1.15) / 10) * 10,
+    grille: true,
+    points: valeurs.map((v, k) => ({
+      x: anneeDebut + k,
+      y: v,
+      label: k === indices.i || k === indices.f ? String(v) : undefined,
+    })),
+  };
 }
 
 // Taux qui se calculent de tête, et leur coefficient exact.
@@ -584,6 +614,134 @@ export const evolutionsBank: TutorBankItemV4[] = [
             cause: "a donné la variation absolue, pas le taux",
           },
         ],
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_evo_taux_graphique_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "auto_taux_evolution",
+    microId: "auto_evo_calculer_taux",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Relève les deux valeurs sur le graphique, puis applique $\\frac{V_f - V_i}{V_i}$.",
+    tags: ["premiere", "maths", "evolutions", "taux", "graphique", "template", "short"],
+    generate: () => {
+      const annee = pick([2019, 2020, 2021] as const);
+      const vi = pick([200, 400, 500, 800] as const);
+      const t = pick([-25, -20, 20, 25, 50] as const);
+      const vf = vi * (1 + t / 100);
+      // Trois points intermédiaires plausibles, non étiquetés : la question
+      // porte sur le premier et le dernier.
+      const valeurs = [vi, ...[1, 2, 3].map((k) => Math.round((vi + ((vf - vi) * k) / 4) / 10) * 10), vf];
+      return {
+        text:
+          `Le graphique ci-contre donne le chiffre d'affaires d'une entreprise, en milliers d'euros. ` +
+          `Quel est le taux d'évolution entre $${annee}$ et $${annee + 4}$, en pourcentage ? ` +
+          `(Réponds par un nombre, négatif s'il s'agit d'une baisse.)`,
+        format: "short",
+        expected: [fr(t)],
+        comparator: "number_equal",
+        canvas: canvasEvolution(valeurs, annee, { i: 0, f: 4 }, "Chiffre d'affaires (en milliers d'euros)"),
+        explanation: exp(
+          "Le taux d'évolution vaut $\\dfrac{V_{\\text{finale}} - V_{\\text{initiale}}}{V_{\\text{initiale}}}$.",
+          "On relève d'abord les deux valeurs sur le graphique, puis on applique la formule.",
+          `En $${annee}$ : $${vi}$. En $${annee + 4}$ : $${fr(vf)}$. ` +
+            `$\\dfrac{${fr(vf)} - ${vi}}{${vi}} = ${fr(t / 100)}$, soit $${fr(t)}\\,\\%$.`,
+          `Le chiffre d'affaires a ${t > 0 ? "augmenté" : "baissé"} de $${fr(Math.abs(t))}\\,\\%$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_evo_taux_graphique_tpl_2",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "auto_taux_evolution",
+    microId: "auto_evo_calculer_taux",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On divise l'écart par la valeur de DÉPART, celle de l'année la plus ancienne.",
+    tags: ["premiere", "maths", "evolutions", "taux", "graphique", "template"],
+    generate: () => {
+      const annee = pick([2019, 2020, 2021] as const);
+      const vi = pick([200, 400, 500, 800] as const);
+      const t = pick([20, 25, 50] as const);
+      const vf = vi * (1 + t / 100);
+      const valeurs = [vi, ...[1, 2, 3].map((k) => Math.round((vi + ((vf - vi) * k) / 4) / 10) * 10), vf];
+      return {
+        text:
+          `Le graphique ci-contre donne une population entre $${annee}$ et $${annee + 4}$. ` +
+          `Quel calcul donne le taux d'évolution sur cette période ?`,
+        format: "qcm",
+        choices: makeChoices(`$\\dfrac{${fr(vf)} - ${vi}}{${vi}}$`, [
+          `$\\dfrac{${fr(vf)} - ${vi}}{${fr(vf)}}$`,
+          `$\\dfrac{${vi}}{${fr(vf)}}$`,
+          `$${fr(vf)} - ${vi}$`,
+        ]),
+        expected: [`$\\dfrac{${fr(vf)} - ${vi}}{${vi}}$`],
+        comparator: "mcq_exact",
+        canvas: canvasEvolution(valeurs, annee, { i: 0, f: 4 }, "Population"),
+        explanation: exp(
+          "Le taux d'évolution rapporte l'écart à la valeur INITIALE.",
+          "On lit les deux valeurs, on calcule l'écart, puis on le divise par la valeur de départ.",
+          `$\\dfrac{${fr(vf)} - ${vi}}{${vi}} = ${fr(t / 100)}$, soit $${t}\\,\\%$.`,
+          `Le bon calcul est $\\dfrac{${fr(vf)} - ${vi}}{${vi}}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$\\dfrac{${fr(vf)} - ${vi}}{${fr(vf)}}$`,
+            cause: "a divisé par la valeur d'arrivée au lieu de la valeur de départ",
+          },
+          {
+            choice: `$${fr(vf)} - ${vi}$`,
+            cause: "donne l'écart en valeur absolue, pas un taux",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_evo_finale_graphique_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "auto_coefficient_multiplicateur",
+    microId: "auto_evo_valeur_finale",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Relève la valeur de la dernière année, puis multiplie par le coefficient.",
+    tags: ["premiere", "maths", "evolutions", "valeur-finale", "graphique", "template", "short"],
+    generate: () => {
+      const annee = pick([2019, 2020, 2021] as const);
+      const vi = pick([200, 400, 500, 800] as const);
+      const t0 = pick([20, 25] as const);
+      const derniere = vi * (1 + t0 / 100);
+      const valeurs = [vi, ...[1, 2, 3].map((k) => Math.round((vi + ((derniere - vi) * k) / 4) / 10) * 10), derniere];
+      const t = pick(TAUX_SIMPLES);
+      const prevision = derniere * (1 + t / 100);
+      return {
+        text:
+          `Le graphique ci-contre donne le nombre d'adhérents d'un club. ` +
+          `On prévoit que le nombre de $${annee + 4}$ augmentera encore de $${t}\\,\\%$ l'année suivante. ` +
+          `Combien d'adhérents prévoit-on en $${annee + 5}$ ?`,
+        format: "short",
+        expected: [fr(prevision)],
+        comparator: "number_equal",
+        canvas: canvasEvolution(valeurs, annee, { i: 0, f: 4 }, "Nombre d'adhérents"),
+        explanation: exp(
+          "Appliquer une hausse de $t\\,\\%$ revient à multiplier par $1 + \\dfrac{t}{100}$.",
+          `On relève sur le graphique le nombre d'adhérents en $${annee + 4}$, puis on applique le coefficient.`,
+          `En $${annee + 4}$ : $${fr(derniere)}$. Coefficient : $${fr(1 + t / 100)}$. ` +
+            `$${fr(derniere)} \\times ${fr(1 + t / 100)} = ${fr(prevision)}$.`,
+          `On prévoit $${fr(prevision)}$ adhérents en $${annee + 5}$.`
+        ),
       };
     },
   },
