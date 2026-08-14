@@ -28,12 +28,15 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 import { evolutionsBank } from "./evolutions.bank";
 import { suitesArithmetiquesBank } from "./suites-arithmetiques.bank";
+import { suitesGeometriquesBank } from "./suites-geometriques.bank";
 
 export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
   // === AUTOMATISMES ===
   ...evolutionsBank, // coefficient multiplicateur · taux d'évolution
   // === VARIATION LINÉAIRE ===
   ...suitesArithmetiquesBank, // suite arithmétique · terme général
+  // === VARIATION EXPONENTIELLE ===
+  ...suitesGeometriquesBank, // suite géométrique · terme général
 ];
 
 export function getMathsPremiereQuestionBank(args?: {
