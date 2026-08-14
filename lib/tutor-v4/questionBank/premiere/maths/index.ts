@@ -4,8 +4,27 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 //
 // ⚠️ VIDE AU 14/08/2026. La structure (bo → notions → micro-compétences) est
 // posée, les banques restent à écrire, notion par notion. Tant que ce tableau
-// est vide, la classe apparaît dans le coach mais aucune question ne tombe :
-// ne pas l'annoncer aux élèves avant d'avoir écrit de quoi travailler.
+// est vide, la classe n'est branchée ni au coach ni aux pages programme : on
+// n'annonce pas ce qui n'a rien derrière.
+//
+// ─────────────────────────────────────────────────────────────────────────────
+// EN ÉCRIVANT : DES GÉNÉRATEURS, PAS DES ITEMS FIGÉS (rappel de Frédéric)
+//
+//   template → tout ce qui se calcule. Un générateur bat dix items figés :
+//              il ne s'épuise pas, l'élève peut refaire la notion en boucle.
+//   fixed    → réservé aux PIÈGES, à ce qui ne se paramètre pas : une baisse
+//              de 10 % suivie d'une hausse de 10 % ne ramène pas au prix
+//              initial ; P_A(B) confondu avec P_B(A) sur un test médical ;
+//              « ils sont indépendants » quand ils sont incompatibles.
+//
+// Cette classe s'y prête particulièrement : taux d'évolution, termes d'une
+// suite, dérivée d'un polynôme, racines d'une forme factorisée, fréquences
+// dans un tableau croisé — tout cela se génère.
+//
+// ⛔ Deux interdits du programme, à tenir dans CHAQUE item :
+//    pas de discriminant (racines par la forme factorisée seulement) ;
+//    suites géométriques à termes strictement positifs.
+// ─────────────────────────────────────────────────────────────────────────────
 
 export const mathsPremiereQuestionBank: TutorBankItemV4[] = [];
 
