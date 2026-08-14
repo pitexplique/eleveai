@@ -414,6 +414,7 @@ export type SchoolLevel =
   | "4e"
   | "3e"
   | "seconde"
+  | "premiere"
   | "premiere-spe"
   | "terminale-spe"
   | "adulte"
