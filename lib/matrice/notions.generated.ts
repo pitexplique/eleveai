@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 483 notions, 35 paquets.
+// 499 notions, 36 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -2406,6 +2406,102 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "label": "Vocabulaire",
         "prerequis": [
           "comprehension_lecture"
+        ]
+      }
+    ],
+    "seconde": [
+      {
+        "id": "accords_2de",
+        "label": "Les accords dans le groupe nominal et entre le sujet et le verbe",
+        "prerequis": []
+      },
+      {
+        "id": "verbe_valeurs_2de",
+        "label": "Le verbe : valeurs temporelles, aspectuelles et modales",
+        "prerequis": []
+      },
+      {
+        "id": "concordance_temps_2de",
+        "label": "La concordance des temps",
+        "prerequis": [
+          "verbe_valeurs_2de"
+        ]
+      },
+      {
+        "id": "phrase_complexe_2de",
+        "label": "Les relations au sein de la phrase complexe",
+        "prerequis": []
+      },
+      {
+        "id": "relatives_2de",
+        "label": "La syntaxe des propositions subordonnées relatives",
+        "prerequis": [
+          "phrase_complexe_2de"
+        ]
+      },
+      {
+        "id": "lexique_2de",
+        "label": "Le lexique : formation des mots et relations lexicales",
+        "prerequis": []
+      },
+      {
+        "id": "relations_logiques_2de",
+        "label": "Les relations logiques et la cohésion du propos",
+        "prerequis": [
+          "phrase_complexe_2de"
+        ]
+      },
+      {
+        "id": "exercices_methode_2de",
+        "label": "Les exercices du lycée : ce que chacun attend",
+        "prerequis": [
+          "relations_logiques_2de"
+        ]
+      },
+      {
+        "id": "poesie_formes_2de",
+        "label": "La poésie : formes, vers et sonorités",
+        "prerequis": []
+      },
+      {
+        "id": "poesie_histoire_2de",
+        "label": "Histoire et mouvements de la poésie, du Moyen Âge au XVIIIe siècle",
+        "prerequis": []
+      },
+      {
+        "id": "argumentation_2de",
+        "label": "L'argumentation : visée, présupposés et genres du discours",
+        "prerequis": []
+      },
+      {
+        "id": "presse_medias_2de",
+        "label": "La presse et les médias, du XIXe siècle au XXIe siècle",
+        "prerequis": [
+          "argumentation_2de"
+        ]
+      },
+      {
+        "id": "roman_formes_2de",
+        "label": "Les formes du récit : roman, nouvelle, voyage, journal, biographique",
+        "prerequis": []
+      },
+      {
+        "id": "narration_2de",
+        "label": "La narration : narrateur, focalisation et temporalité",
+        "prerequis": [
+          "roman_formes_2de"
+        ]
+      },
+      {
+        "id": "theatre_texte_2de",
+        "label": "Le théâtre : genres, action et dramaturgie",
+        "prerequis": []
+      },
+      {
+        "id": "theatre_representation_2de",
+        "label": "La représentation et la mise en scène",
+        "prerequis": [
+          "theatre_texte_2de"
         ]
       }
     ]
