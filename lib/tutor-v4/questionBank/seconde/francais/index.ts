@@ -49,6 +49,9 @@ import { poesieSecondeBank } from "./poesie.bank";
 // --- Objet d'étude : la littérature d'idées et la presse ---
 import { ideesPresseSecondeBank } from "./idees-presse.bank";
 
+// --- Objet d'étude : le roman et le récit du XVIIIe au XXIe siècle ---
+import { romanRecitSecondeBank } from "./roman-recit.bank";
+
 export const francaisSecondeQuestionBank: TutorBankItemV4[] = [
   // === ÉTUDE DE LA LANGUE : GRAMMAIRE (BO2DEFRG) ===
   ...accordsSecondeBank,
@@ -65,6 +68,8 @@ export const francaisSecondeQuestionBank: TutorBankItemV4[] = [
   ...poesieSecondeBank,
   // === LA LITTÉRATURE D'IDÉES ET LA PRESSE (BO2DEFRI) ===
   ...ideesPresseSecondeBank,
+  // === LE ROMAN ET LE RÉCIT DU XVIIIe AU XXIe SIÈCLE (BO2DEFRR) ===
+  ...romanRecitSecondeBank,
 ];
 
 export function getFrancaisSecondeQuestionBank(args?: {
