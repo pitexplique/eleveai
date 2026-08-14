@@ -273,28 +273,38 @@ const FOCALISATIONS: readonly string[] = [
   "une focalisation externe : on ne voit que ce qu'une caméra verrait",
 ];
 
+/* ⚠️ DÉFAUT TROUVÉ EN LISANT DES TIRAGES, le 14/08 — invisible aux 58 000
+   tirages et au détecteur de lignes mortes. La quatrième ligne disait
+   seulement « une focalisation qui change d'un personnage à l'autre » : or
+   entrer dans deux consciences, c'est AUSSI la définition de la focalisation
+   zéro, et un professeur aurait répondu « zéro » sans avoir tort. Deux réponses
+   défendables pour un même item.
+   ⭐ LA DISTINCTION JUSTE, et les cas la tenaient déjà : en focalisation zéro,
+   le narrateur sait des choses QUE PERSONNE dans l'histoire ne sait ; en
+   interne alternée, il ne sait rien de plus que les deux personnages, il passe
+   seulement de l'un à l'autre. C'est le LIBELLÉ qui ne le disait pas. */
 const FOCALISATIONS4: readonly string[] = [
   ...FOCALISATIONS,
-  "une focalisation qui change en cours de scène, d'un personnage à l'autre",
+  "une focalisation interne portée tour à tour par deux personnages, sans que le narrateur en sache plus qu'eux",
 ];
 
 const CAS_FOCALISATION: readonly Cas[] = [
   { enonce: "« Elle crut reconnaitre son pas dans l'escalier, et son cœur se serra. »", rep: "une focalisation interne : on ne sait que ce qu'un personnage sait", raison: "on partage sa croyance et son émotion, sans savoir si elle a raison" },
   { enonce: "« Elle crut reconnaitre son pas. C'était le voisin, mais elle ne l'apprendrait que le lendemain. »", rep: "une focalisation zéro : le narrateur sait tout, de tous, à tout moment", raison: "le narrateur sait ce qu'elle ignore, et la suite" },
   { enonce: "« Elle s'immobilisa dans l'escalier. Sa main resta un instant sur la rampe. »", rep: "une focalisation externe : on ne voit que ce qu'une caméra verrait", raison: "seuls les gestes sont donnés, sans aucun accès à l'intérieur" },
-  { enonce: "« Il la trouvait distante ; elle le croyait indifférent. Ni l'un ni l'autre ne parla. »", rep: "une focalisation qui change en cours de scène, d'un personnage à l'autre", raison: "on entre successivement dans les deux consciences" },
+  { enonce: "« Il la trouvait distante ; elle le croyait indifférent. Ni l'un ni l'autre ne parla. »", rep: "une focalisation interne portée tour à tour par deux personnages, sans que le narrateur en sache plus qu'eux", raison: "on entre successivement dans les deux consciences" },
   { enonce: "« Il ne comprit pas tout de suite ce que la lettre signifiait. »", rep: "une focalisation interne : on ne sait que ce qu'un personnage sait", raison: "le récit épouse sa lenteur de compréhension" },
   { enonce: "« Il ne comprit pas ; sa femme, elle, avait compris depuis longtemps. »", rep: "une focalisation zéro : le narrateur sait tout, de tous, à tout moment", raison: "le narrateur accède aux deux, et au passé de l'une" },
   { enonce: "« L'homme posa l'enveloppe sur la table et sortit. La porte resta entrouverte. »", rep: "une focalisation externe : on ne voit que ce qu'une caméra verrait", raison: "aucune pensée n'est donnée" },
-  { enonce: "« Elle pensait à demain ; lui pensait à la veille ; le train roulait. »", rep: "une focalisation qui change en cours de scène, d'un personnage à l'autre", raison: "le récit passe d'une conscience à l'autre" },
+  { enonce: "« Elle pensait à demain ; lui pensait à la veille ; le train roulait. »", rep: "une focalisation interne portée tour à tour par deux personnages, sans que le narrateur en sache plus qu'eux", raison: "le récit passe d'une conscience à l'autre" },
   { enonce: "« Elle ne voyait du jardin que ce que la fenêtre en laissait paraitre. »", rep: "une focalisation interne : on ne sait que ce qu'un personnage sait", raison: "le champ de vision est celui du personnage" },
   { enonce: "« Personne dans la maison ne savait encore ce qui s'était passé à Paris. »", rep: "une focalisation zéro : le narrateur sait tout, de tous, à tout moment", raison: "le narrateur sait ce que nul personnage ne sait" },
   { enonce: "« Deux hommes attendaient sous l'auvent. L'un fumait. L'autre regardait sa montre. »", rep: "une focalisation externe : on ne voit que ce qu'une caméra verrait", raison: "le récit se borne au visible" },
-  { enonce: "« Le père croyait bien faire. Le fils y voyait une trahison. »", rep: "une focalisation qui change en cours de scène, d'un personnage à l'autre", raison: "les deux intériorités sont données tour à tour" },
+  { enonce: "« Le père croyait bien faire. Le fils y voyait une trahison. »", rep: "une focalisation interne portée tour à tour par deux personnages, sans que le narrateur en sache plus qu'eux", raison: "les deux intériorités sont données tour à tour" },
   { enonce: "« Il lui sembla que la pièce avait changé, sans qu'il pût dire en quoi. »", rep: "une focalisation interne : on ne sait que ce qu'un personnage sait", raison: "l'impression est donnée avec ses limites" },
   { enonce: "« Ce qu'aucun d'eux ne pouvait deviner, c'est que la lettre était déjà partie. »", rep: "une focalisation zéro : le narrateur sait tout, de tous, à tout moment", raison: "le narrateur surplombe tous les personnages" },
   { enonce: "« La femme entra, s'assit, commanda. Elle ne regarda pas la porte une seule fois. »", rep: "une focalisation externe : on ne voit que ce qu'une caméra verrait", raison: "le comportement seul est rapporté" },
-  { enonce: "« Elle attendait un mot ; il cherchait ses mots ; le silence dura. »", rep: "une focalisation qui change en cours de scène, d'un personnage à l'autre", raison: "on suit alternativement les deux consciences" },
+  { enonce: "« Elle attendait un mot ; il cherchait ses mots ; le silence dura. »", rep: "une focalisation interne portée tour à tour par deux personnages, sans que le narrateur en sache plus qu'eux", raison: "on suit alternativement les deux consciences" },
 ];
 
 /* =========== 9. CHANGER DE FOCALISATION (2de_nar_changer_focalisation) =========== */
