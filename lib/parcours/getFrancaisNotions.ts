@@ -1,5 +1,6 @@
 import type { ParcoursNotion } from "./types";
 
+import { buildKnowledgeSecondeFrancais } from "@/lib/tutor-v4/knowledge/francais/seconde/buildKnowledgeSecondeFrancais";
 import { buildKnowledgeCpFrancais } from "@/lib/tutor-v4/knowledge/francais/cp/buildKnowledgeCpFrancais";
 import { buildKnowledgeCe1Francais } from "@/lib/tutor-v4/knowledge/francais/ce1/buildKnowledgeCe1Francais";
 import { buildKnowledgeCe2Francais } from "@/lib/tutor-v4/knowledge/francais/ce2/buildKnowledgeCe2Francais";
@@ -13,6 +14,7 @@ import { buildKnowledge3eFrancais } from "@/lib/tutor-v4/knowledge/francais/3e/b
 // Le parcours français couvre les classes qui ont une banque de questions
 // (cp → 3e), contrairement aux langues (niveaux A1 → B2).
 export type ParcoursClasseFrancais =
+  | "seconde"
   | "cp"
   | "ce1"
   | "ce2"
@@ -27,6 +29,7 @@ export function getFrancaisNotions(
   classe: ParcoursClasseFrancais
 ): ParcoursNotion[] {
   switch (classe) {
+    case "seconde": return buildKnowledgeSecondeFrancais().notions;
     case "cp": return buildKnowledgeCpFrancais().notions;
     case "ce1": return buildKnowledgeCe1Francais().notions;
     case "ce2": return buildKnowledgeCe2Francais().notions;

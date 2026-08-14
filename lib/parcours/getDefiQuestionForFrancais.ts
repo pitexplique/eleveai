@@ -12,9 +12,11 @@ import { francais6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/francais"
 import { francais5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/francais";
 import { francais4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/francais";
 import { francais3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/francais";
+import { francaisSecondeQuestionBank } from "@/lib/tutor-v4/questionBank/seconde/francais";
 
 function getBank(classe: ParcoursClasseFrancais): TutorBankItemV4[] {
   switch (classe) {
+    case "seconde": return francaisSecondeQuestionBank;
     case "cp": return francaisCpQuestionBank;
     case "ce1": return francaisCe1QuestionBank;
     case "ce2": return francaisCe2QuestionBank;

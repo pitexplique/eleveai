@@ -18,6 +18,11 @@ import {
 } from "@/components/parcours/ClassBoard";
 import BoutonSignalerQuestion from "@/components/signalement/BoutonSignalerQuestion";
 
+/* ⚠️ LA SECONDE N'EST PAS DANS CETTE LISTE, ET C'EST VOLONTAIRE (14/08/2026).
+   C'est `CLASSES` qui commande l'affichage, pas `classeLabels` : le français de
+   2de est entièrement écrit (16 notions, 96 micros, 97 items) et branché
+   partout, mais rien n'est montré aux élèves tant qu'un échantillon d'items
+   n'a pas été relu à la main. Ajouter "seconde" ici est le dernier geste. */
 const CLASSES: ParcoursClasseFrancais[] = [
   "cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e",
 ];
@@ -25,6 +30,7 @@ const CLASSES: ParcoursClasseFrancais[] = [
 const classeLabels: Record<ParcoursClasseFrancais, string> = {
   cp: "CP", ce1: "CE1", ce2: "CE2", cm1: "CM1", cm2: "CM2",
   "6e": "6e", "5e": "5e", "4e": "4e", "3e": "3e",
+  seconde: "Seconde",
 };
 
 const questionCountOptions = [
