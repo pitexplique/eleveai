@@ -51,6 +51,7 @@ import { lectureGraphiqueBank } from "./lecture-graphique.bank";
 import { suitesArithmetiquesBank } from "./suites-arithmetiques.bank";
 import { suitesGeometriquesBank } from "./suites-geometriques.bank";
 import { ajustementAffineBank } from "./ajustement-affine.bank";
+import { informationChiffreeBank } from "./information-chiffree.bank";
 import { deriveeLectureBank } from "./derivee-lecture.bank";
 import { deriveeCalculBank } from "./derivee-calcul.bank";
 import { paraboleBank } from "./parabole.bank";
@@ -66,6 +67,7 @@ export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
   // === VARIATION EXPONENTIELLE ===
   ...suitesGeometriquesBank, // suite géométrique · terme général
   // === ANALYSE DE L'INFORMATION CHIFFRÉE ===
+  ...informationChiffreeBank, // tableau croisé · fréquences · diagrammes · tableur · filtres
   ...ajustementAffineBank, // nuage · point moyen · ajustement · interpoler
   // === PHÉNOMÈNES ALÉATOIRES ===
   ...probabilitesConditionnellesBank, // conditionnelle · calcul · indépendance
