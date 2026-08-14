@@ -52,6 +52,7 @@ import { suitesArithmetiquesBank } from "./suites-arithmetiques.bank";
 import { suitesGeometriquesBank } from "./suites-geometriques.bank";
 import { ajustementAffineBank } from "./ajustement-affine.bank";
 import { deriveeLectureBank } from "./derivee-lecture.bank";
+import { deriveeCalculBank } from "./derivee-calcul.bank";
 import { probabilitesConditionnellesBank } from "./probabilites-conditionnelles.bank";
 import { arbresPonderesBank } from "./arbres-ponderes.bank";
 
@@ -70,6 +71,7 @@ export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
   ...arbresPonderesBank, // arbre pondéré · calcul sur l'arbre
   // === DÉRIVATION ===
   ...deriveeLectureBank, // lire un graphique · nombre dérivé et tangente
+  ...deriveeCalculBank, // formules · polynômes · signe · variations
 ];
 
 export function getMathsPremiereQuestionBank(args?: {
