@@ -51,6 +51,7 @@ import { lectureGraphiqueBank } from "./lecture-graphique.bank";
 import { suitesArithmetiquesBank } from "./suites-arithmetiques.bank";
 import { fonctionsAffinesBank } from "./fonctions-affines.bank";
 import { suitesGeometriquesBank } from "./suites-geometriques.bank";
+import { fonctionExponentielleBank } from "./fonction-exponentielle.bank";
 import { ajustementAffineBank } from "./ajustement-affine.bank";
 import { informationChiffreeBank } from "./information-chiffree.bank";
 import { deriveeLectureBank } from "./derivee-lecture.bank";
@@ -68,6 +69,7 @@ export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
   ...fonctionsAffinesBank, // fonction affine · lecture · modéliser · seuil
   // === VARIATION EXPONENTIELLE ===
   ...suitesGeometriquesBank, // suite géométrique · terme général
+  ...fonctionExponentielleBank, // fonction a^x · taux moyen · modéliser · seuil
   // === ANALYSE DE L'INFORMATION CHIFFRÉE ===
   ...informationChiffreeBank, // tableau croisé · fréquences · diagrammes · tableur · filtres
   ...ajustementAffineBank, // nuage · point moyen · ajustement · interpoler
