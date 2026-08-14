@@ -59,6 +59,7 @@ import { deriveeCalculBank } from "./derivee-calcul.bank";
 import { paraboleBank } from "./parabole.bank";
 import { probabilitesConditionnellesBank } from "./probabilites-conditionnelles.bank";
 import { arbresPonderesBank } from "./arbres-ponderes.bank";
+import { bernoulliBank } from "./bernoulli.bank";
 
 export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
   // === AUTOMATISMES ===
@@ -76,6 +77,7 @@ export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
   // === PHÉNOMÈNES ALÉATOIRES ===
   ...probabilitesConditionnellesBank, // conditionnelle · calcul · indépendance
   ...arbresPonderesBank, // arbre pondéré · calcul sur l'arbre
+  ...bernoulliBank, // épreuves de Bernoulli · répétition (n ⩽ 4)
   // === MODÉLISATION QUADRATIQUE ===
   ...paraboleBank, // parabole · sommet et axe · variations · racines et signe
   // === DÉRIVATION ===
