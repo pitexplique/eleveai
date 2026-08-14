@@ -51,6 +51,7 @@ import { lectureGraphiqueBank } from "./lecture-graphique.bank";
 import { suitesArithmetiquesBank } from "./suites-arithmetiques.bank";
 import { suitesGeometriquesBank } from "./suites-geometriques.bank";
 import { ajustementAffineBank } from "./ajustement-affine.bank";
+import { deriveeLectureBank } from "./derivee-lecture.bank";
 import { probabilitesConditionnellesBank } from "./probabilites-conditionnelles.bank";
 import { arbresPonderesBank } from "./arbres-ponderes.bank";
 
@@ -67,6 +68,8 @@ export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
   // === PHÉNOMÈNES ALÉATOIRES ===
   ...probabilitesConditionnellesBank, // conditionnelle · calcul · indépendance
   ...arbresPonderesBank, // arbre pondéré · calcul sur l'arbre
+  // === DÉRIVATION ===
+  ...deriveeLectureBank, // lire un graphique · nombre dérivé et tangente
 ];
 
 export function getMathsPremiereQuestionBank(args?: {
