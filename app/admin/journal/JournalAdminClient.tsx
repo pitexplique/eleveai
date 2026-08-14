@@ -25,9 +25,10 @@ type Slide = {
 
 // Les huit options du sélecteur de l'accueil. Les quatre cycles sont des
 // SEUILS (« à partir de »), les quatre profils adultes sont des CIBLES.
-// ⚠️ À garder aligné sur la contrainte CHECK de journal_une ET sur ORDRE_CYCLES
-// / PROFIL_ADULTE dans AccueilClient : une valeur hors liste est rejetée en
-// base avec un 23514.
+// ⚠️ À garder aligné sur la contrainte CHECK de journal_une : une valeur hors
+// liste est rejetée en base avec un 23514. Le filtrage côté lecteur vivait dans
+// AccueilClient (ORDRE_CYCLES / PROFIL_ADULTE), supprimé le 14/08 — cette liste
+// et la contrainte en base sont désormais les deux seules sources.
 const NIVEAUX: { v: string; label: string }[] = [
   { v: "", label: "Tout le monde (aucun garde-fou)" },
   { v: "cp-ce2", label: "À partir du CP–CE2" },

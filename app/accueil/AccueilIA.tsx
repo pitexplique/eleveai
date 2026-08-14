@@ -12,8 +12,9 @@
 //     existe — une notion, une question, une réponse, une erreur. Sur un écran
 //     d'accueil il n'aurait rien de tout ça, et il ferait doublon avec l'entrée.
 //
-// L'ancien AccueilClient.tsx reste sur le disque : ses rubriques vivent
-// toujours à leurs routes, et ses ressources sont dans ressources.ts.
+// L'ancien AccueilClient.tsx a été supprimé le 14/08 : ses rubriques vivent
+// toujours à leurs routes, et ses ressources sont dans ressources.ts. Ce qu'il
+// emportait sans remplaçant est listé en tête de page.tsx.
 
 import { Suspense } from "react";
 import Image from "next/image";

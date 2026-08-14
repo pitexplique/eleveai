@@ -5,8 +5,13 @@
 // descend jusqu'en bas déclenchait quatorze lectures du cache ISR — quatorze,
 // à chaque page vue, pour des liens de pied de page qu'on clique rarement.
 // C'est le meilleur rapport entre ce qu'on économise et ce qu'on perd, le
-// quota gratuit de Vercel étant à 75 % (voir le commentaire dans
-// app/accueil/AccueilClient.tsx).
+// quota gratuit de Vercel étant à 75 %.
+//
+// Le mécanisme, puisque le fichier qui l'expliquait n'existe plus : un `<Link>`
+// d'App Router précharge la charge RSC de sa destination DÈS QU'IL ENTRE DANS
+// LE CHAMP DE VISION, et pour une route statique ce préchargement est une
+// lecture du cache ISR. Ces lectures se comptent par requête servie, pas par
+// déploiement — donc par visiteur qui déroule la page, pas par clic.
 import Link from "next/link";
 import Image from "next/image";
 

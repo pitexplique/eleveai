@@ -1,9 +1,9 @@
 // lib/calls.server.ts — les liens visio, et EUX SEULS.
 //
 // Pourquoi ce fichier séparé : `lib/calls.ts` est importé par des composants
-// « use client » (AgendaJournal, EncartCallEnDirect). Tout ce qu'il exporte
-// part donc dans le bundle JavaScript envoyé au navigateur — y compris ce
-// qu'on croyait privé.
+// « use client » (EncartCallEnDirect ; AgendaJournal aussi, jusqu'au 14/08).
+// Tout ce qu'il exporte part donc dans le bundle JavaScript envoyé au
+// navigateur — y compris ce qu'on croyait privé.
 //
 // C'est exactement ce qui s'était produit : les liens Meet, pourtant annotés
 // « PRIVÉ, jamais affiché sur le site », étaient lisibles en clair dans le
