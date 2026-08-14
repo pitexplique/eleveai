@@ -46,6 +46,9 @@ import { methodeExercicesSecondeBank } from "./methode-exercices.bank";
 // --- Objet d'étude : la poésie du Moyen Âge au XVIIIe siècle ---
 import { poesieSecondeBank } from "./poesie.bank";
 
+// --- Objet d'étude : la littérature d'idées et la presse ---
+import { ideesPresseSecondeBank } from "./idees-presse.bank";
+
 export const francaisSecondeQuestionBank: TutorBankItemV4[] = [
   // === ÉTUDE DE LA LANGUE : GRAMMAIRE (BO2DEFRG) ===
   ...accordsSecondeBank,
@@ -60,6 +63,8 @@ export const francaisSecondeQuestionBank: TutorBankItemV4[] = [
   ...methodeExercicesSecondeBank,
   // === LA POÉSIE DU MOYEN ÂGE AU XVIIIe SIÈCLE (BO2DEFRP) ===
   ...poesieSecondeBank,
+  // === LA LITTÉRATURE D'IDÉES ET LA PRESSE (BO2DEFRI) ===
+  ...ideesPresseSecondeBank,
 ];
 
 export function getFrancaisSecondeQuestionBank(args?: {
