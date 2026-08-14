@@ -78,6 +78,20 @@ for (const n of notions) {
   }
 }
 
+// Un identifiant porté à la fois par une notion et par une micro : légal pour
+// buildKnowledge (qui les vérifie séparément), mais on finit par écrire l'un
+// pour l'autre.
+for (const id of notionIds) {
+  if (microIds.has(id)) erreurs.push(`« ${id} » est à la fois une notion et une micro-compétence`);
+}
+
+// Une notion trop grosse est une séance qui ne se termine pas. Avertissement
+// et non erreur : les classes écrites avant cette règle en ont encore.
+const trapues = notions
+  .map((n) => ({ id: n.id, nb: microSkills.filter((m) => m.notionId === n.id).length }))
+  .filter((n) => n.nb > 5)
+  .sort((a, b) => b.nb - a.nb);
+
 for (const b of bo) {
   if (!notions.some((n) => n.boId === b.boId)) {
     erreurs.push(`Domaine « ${b.boId} » : aucune notion, il n'apparaîtra nulle part`);
@@ -103,6 +117,11 @@ for (const b of bo) {
   const ns = notions.filter((n) => n.boId === b.boId);
   const nbMicros = microSkills.filter((m) => ns.some((n) => n.id === m.notionId)).length;
   console.log(`  ${b.boId}  ${String(ns.length).padStart(2)} notions  ${String(nbMicros).padStart(3)} micros  — ${b.label}`);
+}
+
+if (trapues.length) {
+  console.log(`\n${trapues.length} notion(s) au-delà de 5 micros — à couper en deux :`);
+  for (const t of trapues) console.log(`  · ${t.id} (${t.nb})`);
 }
 
 if (situations) {
