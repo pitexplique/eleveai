@@ -26,7 +26,12 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 //    suites géométriques à termes strictement positifs.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const mathsPremiereQuestionBank: TutorBankItemV4[] = [];
+import { evolutionsBank } from "./evolutions.bank";
+
+export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
+  // === AUTOMATISMES ===
+  ...evolutionsBank, // coefficient multiplicateur · taux d'évolution
+];
 
 export function getMathsPremiereQuestionBank(args?: {
   notionId?: string | null;
