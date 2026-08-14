@@ -49,6 +49,7 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { evolutionsBank } from "./evolutions.bank";
 import { lectureGraphiqueBank } from "./lecture-graphique.bank";
 import { suitesArithmetiquesBank } from "./suites-arithmetiques.bank";
+import { fonctionsAffinesBank } from "./fonctions-affines.bank";
 import { suitesGeometriquesBank } from "./suites-geometriques.bank";
 import { ajustementAffineBank } from "./ajustement-affine.bank";
 import { informationChiffreeBank } from "./information-chiffree.bank";
@@ -64,6 +65,7 @@ export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
   ...lectureGraphiqueBank, // lire · résoudre graphiquement · droites
   // === VARIATION LINÉAIRE ===
   ...suitesArithmetiquesBank, // suite arithmétique · terme général
+  ...fonctionsAffinesBank, // fonction affine · lecture · modéliser · seuil
   // === VARIATION EXPONENTIELLE ===
   ...suitesGeometriquesBank, // suite géométrique · terme général
   // === ANALYSE DE L'INFORMATION CHIFFRÉE ===
