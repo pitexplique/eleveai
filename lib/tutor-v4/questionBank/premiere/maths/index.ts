@@ -8,6 +8,26 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 // n'annonce pas ce qui n'a rien derrière.
 //
 // ─────────────────────────────────────────────────────────────────────────────
+// À QUI ON ÉCRIT (Frédéric, 14/08/2026)
+//
+// Ces élèves n'ont pas pris la spécialité, et pour beaucoup d'entre eux les
+// maths se sont mal passées jusqu'ici. Ce n'est pas une raison pour baisser le
+// niveau — le programme est le programme — mais ça décide de la FORME :
+//
+//   · un GRAPHIQUE ou un TABLEAU dès qu'une question peut en porter un. On lit
+//     avant de calculer ; une valeur relevée soi-même sur une courbe est une
+//     prise, une valeur donnée dans un énoncé n'est qu'un nombre de plus ;
+//   · des SITUATIONS CONCRÈTES, jamais « soit f(x) = 2x² − 3x + 1 » tout seul :
+//     un prix, une population, un capital, des adhérents, une substance dans le
+//     sang. Le programme fournit lui-même ces situations, elles sont rangées
+//     par notion dans knowledge/maths/premiere/situations.ts ;
+//   · le MAXIMUM de générateurs — et ce programme s'y prête presque partout.
+//
+// Canvas disponibles et déjà utilisés ici : `fonctionGraphique` (nuage de
+// points d'une suite, courbe d'évolution, droite), `tableau_donnees` (tableau
+// croisé à double entrée), `arbre_proba` (arbre pondéré, branche effaçable).
+// ─────────────────────────────────────────────────────────────────────────────
+//
 // EN ÉCRIVANT : DES GÉNÉRATEURS, PAS DES ITEMS FIGÉS (rappel de Frédéric)
 //
 //   template → tout ce qui se calcule. Un générateur bat dix items figés :
