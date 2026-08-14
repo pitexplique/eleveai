@@ -67,21 +67,70 @@ function canvasRepetition(p: number, n: number, titre: string): CanvasFigure {
   };
 }
 
+// Des situations concrètes, et des probabilités variées : un élève ne doit pas
+// pouvoir reconnaître la réponse à l'énoncé. Toutes les valeurs ci-dessous
+// gardent des produits calculables de tête jusqu'à la puissance 3 —
+// 0,3² = 0,09 ; 0,4³ = 0,064 ; 0,8² = 0,64.
+const PROBAS = [0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.8] as const;
+
+// Pour les items qui font MULTIPLIER trois facteurs, on écarte 0,25 : son
+// complémentaire 0,75 donne 0,5625 puis 0,421875, exact mais impossible de tête.
+const PROBAS_RONDES = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8] as const;
+
 const CONTEXTES = [
+  {
+    // L'exemple dont Frédéric se sert en classe, et qui parle ici : les
+    // conteneurs contrôlés à l'arrivée au port.
+    intro:
+      "À l'arrivée au port, on contrôle les conteneurs un par un. Chaque conteneur peut présenter un défaut, indépendamment des autres.",
+    succes: "trouver un conteneur défectueux",
+    unite: "conteneur",
+    action: "On contrôle",
+  },
   {
     intro: "On tire une boule dans une urne, on note sa couleur, puis on la REMET dans l'urne.",
     succes: "tirer une boule rouge",
-    court: "tirage",
+    unite: "tirage",
+    action: "On répète le tirage",
   },
   {
-    intro: "Une machine produit des pièces ; chaque pièce est contrôlée indépendamment des autres.",
-    succes: "obtenir une pièce défectueuse",
-    court: "contrôle",
+    // Le contrôle qualité sur chaîne : prélèvement au hasard dans un lot très
+    // grand, ce qui rend les prélèvements indépendants en pratique.
+    intro:
+      "Sur une chaîne agroalimentaire, on prélève au hasard des pots pour vérifier leur poids. Le lot est assez grand pour que les prélèvements soient indépendants.",
+    succes: "prélever un pot non conforme",
+    unite: "pot",
+    action: "On prélève",
   },
   {
-    intro: "On lance une pièce truquée plusieurs fois de suite.",
-    succes: "obtenir pile",
-    court: "lancer",
+    intro: "Une usine contrôle ses pièces une par une, indépendamment les unes des autres.",
+    succes: "tomber sur une pièce défectueuse",
+    unite: "contrôle",
+    action: "On contrôle",
+  },
+  {
+    intro: "Un joueur de basket tire des lancers francs ; ses tirs sont indépendants.",
+    succes: "marquer un lancer franc",
+    unite: "lancer",
+    action: "Il tire",
+  },
+  {
+    intro: "Un élève répond au hasard aux questions d'un QCM, chaque question étant indépendante.",
+    succes: "tomber sur la bonne réponse",
+    unite: "question",
+    action: "Il répond à",
+  },
+  {
+    intro: "Un site propose chaque jour un code promotionnel, indépendamment des jours précédents.",
+    succes: "obtenir un code gagnant",
+    unite: "jour",
+    action: "On se connecte pendant",
+  },
+  {
+    intro: "Un capteur météo peut tomber en panne un jour donné, indépendamment des autres jours.",
+    succes: "constater une panne",
+    unite: "jour",
+    action: "On observe le capteur pendant",
   },
 ] as const;
 
@@ -264,11 +313,12 @@ export const bernoulliBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "probabilites", "bernoulli", "arbre", "template", "short"],
     generate: () => {
       const n = pick([2, 3, 4] as const);
-      const p = pick([0.2, 0.3, 0.5] as const);
+      const p = pick(PROBAS);
+      const ctx = pick(CONTEXTES);
       return {
         text:
-          `On répète $${n}$ fois une épreuve de Bernoulli, comme sur l'arbre ci-contre. ` +
-          `Combien de chemins l'arbre comporte-t-il au total ?`,
+          `${ctx.intro} ${ctx.action} $${n}$ ${ctx.unite}s de suite, ` +
+          `comme sur l'arbre ci-contre. Combien de chemins l'arbre comporte-t-il au total ?`,
         format: "short",
         expected: [String(2 ** n)],
         comparator: "number_equal",
@@ -298,13 +348,13 @@ export const bernoulliBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "probabilites", "bernoulli", "template", "short"],
     generate: () => {
       const n = pick([2, 3] as const);
-      const p = pick([0.2, 0.5] as const);
+      const p = pick(PROBAS_RONDES);
       const ctx = pick(CONTEXTES);
       return {
         text:
-          `${ctx.intro} La probabilité de « ${ctx.succes} » vaut $${fr(p)}$ à chaque fois, ` +
-          `et l'on répète l'expérience $${n}$ fois. ` +
-          `Quelle est la probabilité d'obtenir $${n}$ succès ?`,
+          `${ctx.intro} La probabilité de « ${ctx.succes} » vaut $${fr(p)}$ à chaque fois. ` +
+          `${ctx.action} $${n}$ ${ctx.unite}s. ` +
+          `Quelle est la probabilité que les $${n}$ soient des succès ?`,
         format: "short",
         expected: [fr(p ** n)],
         comparator: "number_equal",
@@ -331,14 +381,16 @@ export const bernoulliBank: TutorBankItemV4[] = [
     hint: "Plusieurs chemins mènent à « exactement un succès » : on les compte, puis on additionne.",
     tags: ["premiere", "maths", "probabilites", "bernoulli", "template", "short"],
     generate: () => {
-      const p = pick([0.2, 0.5] as const);
+      const p = pick(PROBAS_RONDES);
       const q = 1 - p;
       const n = 3;
+      const ctx = pick(CONTEXTES);
       // Trois chemins : SÉÉ, ÉSÉ, ÉÉS, tous de probabilité p·q².
       const valeur = 3 * p * q * q;
       return {
         text:
-          `On répète $3$ fois une épreuve de Bernoulli dont la probabilité de succès vaut $${fr(p)}$. ` +
+          `${ctx.intro} La probabilité de « ${ctx.succes} » vaut $${fr(p)}$. ` +
+          `${ctx.action} $3$ ${ctx.unite}s. ` +
           `Quelle est la probabilité d'obtenir EXACTEMENT un succès ?`,
         format: "short",
         expected: [fr(Math.round(valeur * 1000000) / 1000000)],
@@ -372,12 +424,14 @@ export const bernoulliBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "probabilites", "bernoulli", "template", "short"],
     generate: () => {
       const n = pick([2, 3] as const);
-      const p = pick([0.2, 0.5] as const);
+      const p = pick(PROBAS_RONDES);
       const q = 1 - p;
+      const ctx = pick(CONTEXTES);
       const valeur = 1 - q ** n;
       return {
         text:
-          `On répète $${n}$ fois une épreuve de Bernoulli dont la probabilité de succès vaut $${fr(p)}$. ` +
+          `${ctx.intro} La probabilité de « ${ctx.succes} » vaut $${fr(p)}$. ` +
+          `${ctx.action} $${n}$ ${ctx.unite}s. ` +
           `Quelle est la probabilité d'obtenir AU MOINS un succès ?`,
         format: "short",
         expected: [fr(Math.round(valeur * 1000000) / 1000000)],
