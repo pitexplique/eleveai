@@ -194,6 +194,21 @@ const ROUTES: RouteConfig[] = [
   // Semaine « Les baleines sont là ! » depuis le 16/07 (remplace le foot).
   { path: "/defis-du-jour",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_HOME },
 
+  // ── ÉVALUATIONS NATIONALES COLLÈGE ─────────────────────────────────────────
+  // ⚠️ AJOUTÉES LE 14/08, LIVRÉES DÉBUT AOÛT. Six pages en ligne depuis le 08,
+  // dont aucune n'était déclarée : le hub et les quatre épreuves blanches se
+  // sont retrouvés invisibles pendant toute la semaine où l'on mesurait
+  // justement pourquoi les moteurs ne connaissent que cinq pages du site.
+  // Priorité haute jusqu'à la rentrée — c'est en septembre qu'on les cherche.
+  //
+  // ⛔ /evaluation-nationale-college/ma-classe RESTE DEHORS : elle porte un
+  // `noindex`. C'est la vue du professeur sur sa classe, pas une page publique.
+  { path: "/evaluation-nationale-college",             priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-08-11") },
+  { path: "/evaluation-nationale-college/6e-maths",    priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-08-11") },
+  { path: "/evaluation-nationale-college/6e-francais", priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-08-08") },
+  { path: "/evaluation-nationale-college/4e-maths",    priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-08-08") },
+  { path: "/evaluation-nationale-college/4e-francais", priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-08-08") },
+
   // ── DICO (vocabulaire & gestes — prépa éval nationale) ─────────────────────
   { path: "/dico",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/dico/maths/6e",   priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
@@ -279,6 +294,18 @@ const ROUTES: RouteConfig[] = [
   // La vitrine ANGLAISE de l'aiguille (28/07) — même machine, texte anglais :
   // vise le trafic mondial « Kakeya needle », première d'une famille /en/simulators/*.
   { path: "/en/simulators/kakeya-needle", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-28") },
+  // ⚠️ 14/08 — LA FAMILLE ANGLAISE ANNONCÉE CI-DESSUS N'AVAIT QUE SON PREMIER
+  // MEMBRE DÉCLARÉ. Le hub /en/simulators et la deuxième machine existaient
+  // depuis le 10/08 sans qu'aucun moteur en entende parler.
+  { path: "/en/simulators", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-08-10") },
+  { path: "/en/simulators/round-bubbles", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-08-10") },
+  // Pourquoi les bulles sont rondes (10/08) — l'isopérimétrie : le moins de
+  // peau possible autour du plus de volume. Avec sa fiche à imprimer.
+  { path: "/pourquoi-les-bulles-sont-rondes", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-08-10") },
+  { path: "/pourquoi-les-bulles-sont-rondes/fiche", priority: 0.75, changeFrequency: "weekly", lastMod: new Date("2026-08-10") },
+  // Le corail du lagon (10/08) — la même idée prise par l'autre bout : la
+  // surface maximale pour un volume donné, l'inverse de la bulle.
+  { path: "/corail-du-lagon", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-08-10") },
   // La dimension du volcan (26/07) — box-counting sur le rempart de la
   // Fournaise : la rugosité en un nombre (d ≈ 1,25), l'idée de la médaille.
   { path: "/dimension-du-volcan", priority: 0.8, changeFrequency: "weekly", lastMod: new Date("2026-07-26") },
