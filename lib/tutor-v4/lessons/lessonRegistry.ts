@@ -9,6 +9,7 @@ import { getFrancais6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/franca
 import { getFrancais5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/francais";
 import { getFrancais4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/francais";
 import { getFrancais3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/francais";
+import { getFrancaisSecondeQuestionBank } from "@/lib/tutor-v4/questionBank/seconde/francais";
 import { getMathCpQuestionBank } from "@/lib/tutor-v4/questionBank/cp/maths";
 import { getMathCe1QuestionBank } from "@/lib/tutor-v4/questionBank/ce1/maths";
 import { getMathCe2QuestionBank } from "@/lib/tutor-v4/questionBank/ce2/maths";
@@ -48,6 +49,7 @@ export function getLessonBank(args: {
       case "5e": return getFrancais5eQuestionBank(bankArgs);
       case "4e": return getFrancais4eQuestionBank(bankArgs);
       case "3e": return getFrancais3eQuestionBank(bankArgs);
+      case "seconde": return getFrancaisSecondeQuestionBank(bankArgs);
       default:    return [];
     }
   }
