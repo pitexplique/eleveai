@@ -29,14 +29,22 @@ const outils = [
   { label: "Concours Avenir", href: "/concours-avenir" },
 ];
 
-// Le Journal — la nouveauté du jour + les histoires « comprendre » (simulateurs,
-// « un peu de maths »). Mises en tête du footer en liens SERVEUR toujours
-// présents dans le HTML : c'est par là que Google découvre le cœur du journal,
-// que la nav (cachée derrière la connexion) ne lui montrait pas.
-const journalQuotidien = [
-  { label: "Le Journal du jour", href: "/accueil" },
+// Les rituels du jour — ce qu'on peut faire chaque matin, plus les histoires
+// « comprendre » (simulateurs, « un peu de maths »). En tête du footer et en
+// liens SERVEUR toujours présents dans le HTML : c'est par là que Google
+// découvre le cœur du site, que la nav (cachée derrière la connexion) ne lui
+// montre pas.
+//
+// 14/08 — deux corrections. La pastille « Le Journal du jour », qui pointait sur
+// /accueil, est retirée : le journal n'est plus rendu depuis la refonte en
+// entrée « Qui es-tu ? », et /accueil n'est pas une rubrique, c'est la page
+// d'accueil. Et l'anglais comme l'espagnol du jour, deux rituels bien en ligne,
+// n'avaient aucun lien de pied de page — donc aucune porte pour Google.
+const rituelsDuJour = [
   { label: "Défis du jour", href: "/defis-du-jour" },
   { label: "Dictée du jour", href: "/dictee-du-jour" },
+  { label: "L'anglais du jour", href: "/anglais-du-jour" },
+  { label: "L'espagnol du jour", href: "/espagnol-du-jour" },
   { label: "Maths Réel · 974", href: "/maths-974" },
 ];
 
@@ -123,22 +131,23 @@ export default function Footer() {
     <footer className="border-t border-slate-800 bg-[#041B33]">
       <div className="mx-auto max-w-6xl px-4 py-10 sm:py-12">
 
-        {/* Bandeau « Le Journal » — en tête du footer. Rend visibles pour Google
+        {/* Bandeau des rituels — en tête du footer. Rend visibles pour Google
             (liens serveur, toujours dans le HTML) les destinations que la nav
-            cachait : le journal du jour, les rituels quotidiens et les histoires
-            « un peu de maths » (les simulateurs de l'île). */}
+            cachait : les rituels quotidiens et les histoires « un peu de maths »
+            (les simulateurs de l'île). */}
         <section className="mb-10 border-b border-slate-800 pb-8">
           <h2 className="text-sm font-black text-slate-100">
-            Le Journal{" "}
-            <span className="font-semibold text-emerald-300">· une nouveauté chaque jour</span>
+            Les rituels du jour{" "}
+            <span className="font-semibold text-emerald-300">· quelque chose de neuf chaque matin</span>
           </h2>
           <p className="mt-1 text-xs text-slate-400">
-            Chaque matin à La Réunion : un défi, une dictée et une histoire de
-            sciences à comprendre.
+            Chaque matin à La Réunion : un défi, une dictée, cinq mots
+            d&apos;anglais ou d&apos;espagnol, et une histoire de sciences à
+            comprendre.
           </p>
 
-          <nav aria-label="Le Journal" className="mt-4 flex flex-wrap gap-2">
-            {journalQuotidien.map((l) => (
+          <nav aria-label="Les rituels du jour" className="mt-4 flex flex-wrap gap-2">
+            {rituelsDuJour.map((l) => (
               <Link prefetch={false}
                 key={l.href}
                 href={l.href}

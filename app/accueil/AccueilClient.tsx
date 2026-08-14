@@ -50,7 +50,6 @@ import { chiffreDuJour } from "@/lib/chiffre-du-jour";
 import { problemeDuJourWeekly } from "@/lib/defis-du-jour/weekly";
 import EntreeMatrice from "@/components/matrice/EntreeMatrice";
 import { CLASSE_COACH } from "@/lib/matrice/coach";
-import GoogleFollowChip from "@/components/GoogleFollowChip";
 import FloatingCoach from "@/components/FloatingCoach";
 import StaffAccueilBanner from "@/components/accueil/StaffAccueilBanner";
 import AgendaJournal from "@/components/accueil/AgendaJournal";
@@ -3423,29 +3422,15 @@ export default function AccueilPage({
       {/* ══ L'ABONNEMENT — recevez le journal (gratuit, newsletter Resend) ═══ */}
       <div style={ordre("abonnement")}><AbonnementJournal /></div>
 
-      {/* ══ L'OURS — qui fait ce journal (le pied de page du quotidien) ══════ */}
-      <footer className="mx-auto mt-10 max-w-6xl border-t-4 border-double border-[#1d1c16] pt-4 text-center" style={ordre("ours")}>
-        <p className="font-serif text-sm font-black">Le Journal d&apos;EleveAI</p>
-        <p className="mx-auto mt-1 max-w-3xl text-xs font-medium leading-6 text-[#1d1c16]/70">
-          Écrit à La Réunion. Rédaction : les élèves et les profs. Mascotte :
-          Ti Margo, margouillat 🦎. Fondé par Frédéric Lacoste, professeur de
-          mathématiques. Sans publicité —{" "}
-          <Link prefetch={false} href="/politique-confidentialite" className="font-black underline underline-offset-2">
-            données protégées
-          </Link>
-          {" · "}
-          <Link prefetch={false} href="/pourquoi-eleveai" className="font-black underline underline-offset-2">
-            pourquoi EleveAI
-          </Link>
-          {" · "}
-          <Link prefetch={false} href="/contact" className="font-black underline underline-offset-2">
-            écrire à la rédaction
-          </Link>
-        </p>
-        <div className="mt-4 flex justify-center pb-2">
-          <GoogleFollowChip />
-        </div>
-      </footer>
+      {/* 14/08 — L'OURS EST RETIRÉ. Ce petit pied de page « Le Journal
+          d'EleveAI · Rédaction : les élèves et les profs » datait de l'accueil-
+          journal, qui n'est plus rendu depuis la refonte en entrée « Qui es-tu ? ».
+          Il s'empilait sous le grand footer du layout : deux pieds de page l'un
+          sur l'autre, d'où l'impression de site inachevé. Ses trois liens
+          (confidentialité, pourquoi EleveAI, contact) sont tous dans le grand
+          footer. Le GoogleFollowChip part avec : il invitait à suivre le site
+          sur Google News, ce qui ne veut plus rien dire ici — il reste sur le
+          blog, où il se justifie encore. */}
 
       {/* Le coach flottant reste : c'est le kiosquier qu'on peut interpeller. */}
       <FloatingCoach />
