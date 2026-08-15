@@ -2689,6 +2689,12 @@ const POOLS: Record<string, (level: Cycle4Level) => QcmItem[]> = {
   gram_fonctions,
   gram_accords,
   gram_oral_ecrit,
+  // La chaîne anaphorique (15/08). Sans ces trois lignes, les micros tombent
+  // sur le repli `gram_fonctions` : des questions de fonction grammaticale
+  // sous une étiquette d'anaphore, valides et hors sujet.
+  gram_anaphore_pronom,
+  gram_reprise_nominale,
+  gram_chaine_reference,
   discours_registres,
   discours_rapportees,
   discours_argumentatif,
@@ -2696,6 +2702,184 @@ const POOLS: Record<string, (level: Cycle4Level) => QcmItem[]> = {
   conj_composer,
   conj_employer,
 };
+
+/* ═════════════════════════════════════════════════════════════════════════
+   LA CHAÎNE ANAPHORIQUE (15/08/2026) — pools des trois micro-compétences
+   ouvertes en 5ᵉ. Elles vivent ICI parce que `POOLS` est la seule table que
+   `questionForMicro` consulte : une micro absente de cette table reçoit le
+   repli `gram_fonctions`, c'est-à-dire des questions de fonction grammaticale
+   sous une étiquette d'anaphore.
+   ⚠️ MESURÉ AVANT CORRECTION : 540 questions sur 900 tombaient hors sujet.
+   Les gabarits écrits à la main dans `5e/francais/anaphore.bank.ts` ne
+   suffisent pas — le builder en produit trois de plus par micro, quoi qu'on
+   fasse, et ce sont eux qui déraillaient.
+   ⚠️ Les distracteurs sont TOUS des noms présents dans le passage : un piège
+   pris hors du texte se repère sans le lire, et on mesurerait le hasard.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+function gram_anaphore_pronom(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "« Le marchand rencontra un voyageur sur la route de Cilaos. Celui-ci portait un sac trop lourd pour lui. »\n\nQue reprend « Celui-ci » ?",
+      correct: "le voyageur",
+      wrongs: ["le marchand", "le sac", "la route"],
+      methode:
+        "« Celui-ci » désigne le plus proche des deux, celui qui vient d'être nommé.",
+    },
+    {
+      text: "« Maëva tendit la lettre à sa grand-mère. Elle l'avait écrite la veille, sans rien dire à personne. »\n\nQue reprend « Elle » ?",
+      correct: "Maëva",
+      wrongs: ["sa grand-mère", "la lettre", "la veille"],
+      methode:
+        "« Sans rien dire à personne » ne peut se rapporter qu'à celle qui a écrit.",
+    },
+    {
+      text: "« Les pêcheurs remontèrent les filets. Ils étaient déchirés en trois endroits. »\n\nQue reprend « Ils » ?",
+      correct: "les filets",
+      wrongs: ["les pêcheurs", "les endroits", "les bateaux"],
+      methode:
+        "Les deux candidats sont masculins pluriels : c'est le sens qui tranche, pas l'accord.",
+    },
+    {
+      text: "« Le cyclone a traversé l'île en une nuit. Il a arraché les tôles du hangar. »\n\nQue reprend « Il » ?",
+      correct: "le cyclone",
+      wrongs: ["le hangar", "l'île", "la nuit"],
+      methode: "Seul le cyclone peut arracher des tôles.",
+    },
+    {
+      text: "« Ludovic prêta sa canne à son cousin. Il la lui rendit cassée le lendemain. »\n\nQue reprend « lui » ?",
+      correct: "Ludovic",
+      wrongs: ["son cousin", "la canne", "le lendemain"],
+      methode:
+        "« Il » est celui qui rend, « lui » celui à qui l'on rend : le propriétaire.",
+    },
+    {
+      text: "« La directrice reçut les parents dans son bureau. Elle leur expliqua la décision du conseil. »\n\nQue reprend « leur » ?",
+      correct: "les parents",
+      wrongs: ["la directrice", "le bureau", "le conseil"],
+      methode: "« Elle » parle, « leur » désigne ceux à qui elle parle.",
+    },
+    {
+      text: "« Sarah a rangé les livres et les cahiers. Elle les a posés sur l'étagère du haut. »\n\nQue reprend « les » ?",
+      correct: "les livres et les cahiers",
+      wrongs: ["les livres seulement", "les cahiers seulement", "les étagères"],
+      methode:
+        "Rien dans la phrase ne sépare les deux : le pronom reprend l'ensemble.",
+    },
+  ];
+}
+
+function gram_reprise_nominale(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "« Un margouillat s'était glissé sous l'armoire. Le petit lézard ne bougeait plus. »\n\nQue désigne « Le petit lézard » ?",
+      correct: "le margouillat",
+      wrongs: ["l'armoire", "un autre animal", "la maison"],
+      methode:
+        "Le nom change, la bête non : un margouillat EST un lézard. C'est une reprise.",
+    },
+    {
+      text: "« Le Piton de la Fournaise est entré en éruption mardi. Le volcan a rejeté de la lave pendant douze heures. »\n\nQue désigne « Le volcan » ?",
+      correct: "le Piton de la Fournaise",
+      wrongs: ["la lave", "un autre volcan", "l'éruption"],
+      methode: "On reprend un nom propre par le nom commun qui dit ce qu'il est.",
+    },
+    {
+      text: "« Madame Lucie soigne les plantes du quartier depuis quarante ans. La vieille dame connaît chaque feuille. »\n\nQue désigne « La vieille dame » ?",
+      correct: "Madame Lucie",
+      wrongs: ["une voisine", "les plantes", "le quartier"],
+      methode:
+        "La reprise ajoute une information — l'âge — sans changer de personne.",
+    },
+    {
+      text: "« Un vieux camion s'est arrêté devant l'école. Le véhicule bloquait toute la rue. »\n\nQue désigne « Le véhicule » ?",
+      correct: "le vieux camion",
+      wrongs: ["l'école", "la rue", "un autre camion"],
+      methode:
+        "« Véhicule » est plus général que « camion » : la reprise la plus fréquente, et la moins vue.",
+    },
+    {
+      text: "« Naïla a trouvé une carapace de tortue sur la plage. L'objet était plus léger qu'elle ne pensait. »\n\nQue désigne « L'objet » ?",
+      correct: "la carapace",
+      wrongs: ["la tortue", "la plage", "Naïla"],
+      methode:
+        "Une reprise très générale désigne le dernier élément dont on parlait.",
+    },
+    {
+      text: "« Une odeur de vanille montait de la cuisine. Ce parfum réveilla toute la maison. »\n\nQue désigne « Ce parfum » ?",
+      correct: "l'odeur de vanille",
+      wrongs: ["la cuisine", "la maison", "la vanille seule"],
+      methode:
+        "Le déterminant démonstratif « ce » signale à lui seul qu'on reprend.",
+    },
+    {
+      text: "« Les élèves ont préparé une exposition sur les baleines. Le travail a duré trois semaines. »\n\nQue désigne « Le travail » ?",
+      correct: "la préparation de l'exposition",
+      wrongs: ["les élèves", "les baleines", "les trois semaines"],
+      methode:
+        "Une reprise peut désigner une ACTION déjà racontée, pas seulement une chose.",
+    },
+  ];
+}
+
+function gram_chaine_reference(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "« Tante Aline a rapporté un poisson du marché. Elle l'a posé sur la table, puis elle est repartie. Quand elle est revenue, il avait disparu. Le chat dormait sous la véranda, l'air très satisfait. »\n\nDans « il avait disparu », de quoi parle-t-on ?",
+      correct: "du poisson",
+      wrongs: ["de tante Aline", "du chat", "du marché"],
+      methode:
+        "Le poisson est le seul masculin singulier repris depuis le début de la chaîne.",
+    },
+    {
+      text: "« Le facteur a déposé un colis devant la porte. Le paquet est resté là toute la journée. Personne ne l'a vu, sauf le voisin, qui n'a rien dit. »\n\nCombien de mots différents désignent le colis ?",
+      correct: "trois : « un colis », « le paquet », « l' »",
+      wrongs: [
+        "deux : « un colis » et « le paquet »",
+        "un seul : « un colis »",
+        "quatre, en comptant « le voisin »",
+      ],
+      methode:
+        "Une chaîne se compte : le nom qui introduit, les reprises nominales, les pronoms.",
+    },
+    {
+      text: "« Mon grand-père gardait une vieille montre dans un tiroir. L'objet ne marchait plus depuis longtemps. Il ne voulait pourtant pas s'en séparer. »\n\nQui est « il », et que désigne « en » ?",
+      correct: "« il » = le grand-père, « en » = la montre",
+      wrongs: [
+        "« il » = la montre, « en » = le tiroir",
+        "« il » = le tiroir, « en » = la montre",
+        "« il » = le grand-père, « en » = le tiroir",
+      ],
+      methode:
+        "Deux chaînes courent en parallèle. Seul un être humain peut « vouloir ».",
+    },
+    {
+      text: "« Les pompiers sont arrivés les premiers. Ces hommes travaillaient depuis douze heures. Ils ont pourtant tenu jusqu'au matin. »\n\n« Ces hommes » et « Ils » désignent-ils la même chose ?",
+      correct: "oui, les deux désignent les pompiers",
+      wrongs: [
+        "non, « ils » désigne d'autres secours",
+        "non, « ces hommes » désigne des habitants",
+        "on ne peut pas le savoir",
+      ],
+      methode:
+        "Tant qu'aucun nouveau nom n'est introduit, la chaîne continue.",
+    },
+    {
+      text: "« Sarah et Maëva ont monté la tente. Celle-ci s'est effondrée pendant la nuit. Elles ont dormi dans la voiture. »\n\nDans « Celle-ci s'est effondrée », de quoi parle-t-on ?",
+      correct: "de la tente",
+      wrongs: ["de Sarah", "de Maëva", "de la voiture"],
+      methode:
+        "« Celle-ci » est au singulier : il ne peut pas reprendre « Sarah et Maëva ».",
+    },
+    {
+      text: "« Le boulanger prépare le pain dès quatre heures. Cet artisan travaille pendant que le quartier dort. Ses clients ne le voient jamais à l'œuvre. »\n\nQuelle expression NE désigne PAS le boulanger ?",
+      correct: "« ses clients »",
+      wrongs: ["« cet artisan »", "« le »", "« ses »"],
+      methode:
+        "« Ses » et « le » renvoient au boulanger, « cet artisan » le reprend.",
+    },
+  ];
+}
 
 // Repli par notion si un microId inattendu apparaît : on garde toujours un pool
 // on-topic pour la notion (jamais de contenu hors sujet).

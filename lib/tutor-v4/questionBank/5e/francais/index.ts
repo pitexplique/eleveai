@@ -10,6 +10,11 @@ import { complementsEtudeLangue5eBank } from "@/lib/tutor-v4/questionBank/5e/fra
 // Douze micro-compétences de grammaire ouvertes avec leur banque écrite — le
 // builder cycle 4 aiguille par sous-chaîne et n'aurait servi que du générique.
 import { grammairePhrase5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/grammaire-phrase.bank";
+// La chaîne anaphorique : « maîtriser la chaine anaphorique et l'emploi des
+// pronoms représentants » est le point le plus bas des résultats mesurés
+// (19 %, 24 %, 43 % sur six items). Le coach savait identifier un pronom, pas
+// dire ce qu'il reprend.
+import { anaphore5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/anaphore.bank";
 // « Savoir accorder les mots dans la phrase et expliquer ses choix » : objectif
 // à part entière du BO, cinq attendus, qui tenait dans UNE micro-compétence.
 import { orthographeGrammaticale5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/orthographe-grammaticale.bank";
@@ -38,6 +43,7 @@ export const francais5eQuestionBank: TutorBankItemV4[] = [
   ...francais5eFixedBank,
   ...complementsEtudeLangue5eBank,
   ...grammairePhrase5eBank,
+  ...anaphore5eBank,
   ...orthographeGrammaticale5eBank,
   ...conjugaison5eBank,
   ...cultureLitteraire5eBank,

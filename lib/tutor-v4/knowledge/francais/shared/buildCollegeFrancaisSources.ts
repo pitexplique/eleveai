@@ -355,6 +355,30 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       //   et sémantique dans la phrase. »
       { id: `${prefix}_gram_coordonnants`, label: "Identifier un mot coordonnant et le rapport qu'il établit", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_juxta_coord`] },
 
+      /* ── LA CHAÎNE ANAPHORIQUE (ajoutée le 15/08/2026) ───────────────────
+         ⭐ POURQUOI, ET SUR QUOI JE M'APPUIE. L'évaluation nationale de 5ᵉ
+         mesure « maîtriser la chaine anaphorique et l'emploi des pronoms
+         représentants » sur six items. Les résultats 2025 d'un collège de
+         l'île y donnent 19 %, 24 % et 43 % — le point le plus bas de tout
+         le document, français et maths confondus.
+         Les attendus de fin de CM2 nomment déjà « les substituts (ex :
+         reprises pronominales) » parmi les indices sur lesquels l'élève
+         s'appuie pour comprendre un texte : la compétence est installée en
+         amont, elle n'est pas nouvelle en 5ᵉ.
+
+         ⚠️ `${prefix}_gram_pronoms` NE LA COUVRE PAS. Identifier qu'un mot
+         est un pronom démonstratif, c'est une question de classe de mot.
+         Retrouver ce que ce pronom REPREND deux phrases plus haut, c'est une
+         question de texte. Un intitulé voisin n'est pas une couverture —
+         même écart qu'entre « nuance de sens » et « niveau de langue ».
+
+         ⚠️ Trois micros, et leur banque est écrite (anaphore.bank.ts) :
+         sans elle, `buildCycle4FrancaisBank` aiguille par sous-chaîne et
+         sert autre chose sans jamais tomber en panne. */
+      { id: `${prefix}_gram_anaphore_pronom`, label: "Retrouver ce qu'un pronom reprend dans un texte", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_pronoms`] },
+      { id: `${prefix}_gram_reprise_nominale`, label: "Identifier une reprise nominale et ce qu'elle désigne", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_gn_etendu`] },
+      { id: `${prefix}_gram_chaine_reference`, label: "Suivre une chaîne de reprises d'un bout à l'autre d'un texte", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_anaphore_pronom`, `${prefix}_gram_reprise_nominale`] },
+
       /* ── « Savoir accorder les mots dans la phrase et expliquer ses choix »
          Cinq attendus, que le BO détache de la grammaire de la phrase. Le
          verbe du BO est « expliquer » et « justifier » : ce ne sont pas des
