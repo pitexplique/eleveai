@@ -112,11 +112,13 @@ const EPREUVES = [
     // LES QUATRE DOMAINES, PUIS LES DEUX TESTS, comme en 6ᵉ : depuis le 15/08
     // l'épreuve reprend le volume du sujet officiel, et le bilan rend donc
     // les automatismes et la résolution de problèmes à part.
+    // LES INTITULÉS DU BILAN OFFICIEL, mot pour mot — ce sont ceux que le
+    // professeur retrouvera sur ses résultats du jour J.
     teste: [
-      "Les nombres et le calcul",
-      "Les grandeurs et les mesures",
-      "L'espace et la géométrie",
-      "Données, proportionnalité et programmation",
+      "Nombres et calculs",
+      "Grandeurs et mesures",
+      "Espace et géométrie",
+      "Organisation et gestion de données",
       "Automatismes et résolution de problèmes",
     ],
     // LIVRÉE (01/08) : l'épreuve pioche dans le programme de 5ᵉ.

@@ -57,12 +57,21 @@ const knowledge = buildKnowledge5eMaths();
 // leur micro-compétence, le reste s'aligne sur la définition officielle. Les
 // micros ainsi ancrées sont signalées par ✅ ci-dessous.
 //
-// ⚠️ ET LA RÈGLE DE 6ᵉ NE VAUT PAS ICI. En 6ᵉ, aucune micro-compétence de
-// géométrie n'entre dans un test spécifique — le document l'écrit noir sur
-// blanc. En 4ᵉ, c'est faux : l'item officiel sur la somme des angles d'un
-// triangle est étiqueté « automatismes ». Reconduire la règle de 6ᵉ aurait
-// vidé la géométrie des deux tests sur la foi d'un document qui parle d'une
-// autre épreuve.
+// ⛔ ET LA RÈGLE DE 6ᵉ TIENT AUSSI ICI : AUCUNE MICRO-COMPÉTENCE DE GÉOMÉTRIE
+// N'ENTRE DANS UN TEST SPÉCIFIQUE.
+//
+// Corrigé le 15/08, après coup. Nous avions conclu l'inverse en voyant que
+// l'item officiel sur la somme des angles d'un triangle porte l'étiquette
+// « automatismes » — mais c'était lire notre propre rangement, pas le sien.
+// Le document de résultats du collège étiquette CHAQUE item des deux tests
+// par son domaine, et cet item-là est rangé en NC. Sur les 41 items des deux
+// tests de 4ᵉ, la mention « EG » n'apparaît pas une seule fois. Une absence
+// sur 41 items, ce n'est plus un silence : c'est une règle.
+//
+// ⭐ CE N'EST PAS UNE PERTE, C'EST L'INVERSE. Toute la géométrie devient
+// « autre », donc ses 24 micro-compétences et ses 164 énoncés alimentent le
+// domaine au lieu des cinq micros de construction qui s'y épuisaient. Le
+// domaine passe de 6 passages tenables à 11.
 
 // AUTOMATISMES — « des tâches relevant d'une activité mentale pouvant être
 // attendue dans un temps court ». Lire, comparer, convertir, estimer,
@@ -107,23 +116,12 @@ const AUTOMATISMES = [
   "volume_prisme",
   "volume_cylindre",
   "volume_unite",
-  // Espace et géométrie
-  "triangle_reconnaitre",
-  "triangle_nature",
-  "triangle_inegalite",
-  "triangle_somme_angle", // ✅ item officiel — et c'est lui qui casse la règle de 6ᵉ
-  "angle_lire",
-  "angle_mesurer",
-  "angle_estimer",
-  "angle_paires",
-  "angle_paralleles",
-  "sym_centrale_reconnaitre",
-  "sym_centrale_propriete",
-  "para_reconnaitre",
-  "para_particuliers",
-  "para_cotes_angles",
-  "para_diagonales",
-  // Données, proportionnalité et probabilités
+  // ⛔ RIEN D'ESPACE ET GÉOMÉTRIE : voir plus haut, le document ne range
+  // aucun item des deux tests dans ce domaine. `triangle_somme_angle` porte
+  // pourtant un item officiel d'automatismes — il est rangé « NC » par la
+  // DEPP, alors que notre notion le met en géométrie. L'item reste servi,
+  // simplement compté comme « autre ».
+  // Organisation et gestion de données
   "prop_reconnaitre",
   "prop_table", // ✅ item officiel
   "prop_pourcentage",
@@ -166,12 +164,8 @@ const RESOLUTION_PROBLEMES = [
   "aire_defi",
   "volume_assemblage",
   "volume_defi",
-  // Espace et géométrie
-  "triangle_defi",
-  "angle_defi",
-  "sym_centrale_defi",
-  "para_defi",
-  // Données, proportionnalité et probabilités
+  // ⛔ RIEN D'ESPACE ET GÉOMÉTRIE ici non plus.
+  // Organisation et gestion de données
   "prop_coeff", // ✅ item officiel
   "prop_quatrieme", // ✅ item officiel
   "prop_probleme", // ✅ deux items officiels sur trois
@@ -184,9 +178,9 @@ const RESOLUTION_PROBLEMES = [
 // ⛔ CE QUI N'EST DANS AUCUNE DES DEUX LISTES EST « AUTRE », et ce n'est pas
 // un reste : ce sont les 21 questions que le sujet officiel laisse hors des
 // tests. Trois familles, et elles se tiennent :
-//   • LES CONSTRUCTIONS — tracer un angle, construire un triangle, placer
-//     l'image d'un point par symétrie. Ni activité mentale courte, ni
-//     situation à modéliser : un geste, qu'on interroge ici sur sa procédure.
+//   • TOUT ESPACE ET GÉOMÉTRIE — les 24 micro-compétences des triangles, des
+//     parallélogrammes, des angles et de la symétrie centrale. C'est la règle
+//     du document, et elle vaut en 6ᵉ comme en 4ᵉ.
 //   • LE CHOIX D'UNE REPRÉSENTATION — organiser des données, choisir le
 //     diagramme qui convient. C'est un jugement, pas un calcul.
 //   • TOUTE L'ALGORITHMIQUE, comme en 6ᵉ. Lire un programme, prévoir sa
@@ -211,38 +205,61 @@ const TYPES_MICRO = new Map<string, TypeItem>([
 // et un problème lait/beurre qui mêle kilogrammes et grammes. Sans
 // `grandeur_conversion`, ce domaine ne ressemblait pas au jour J.
 //
-// ⭐ LES EFFECTIFS PAR TRANCHE SUIVENT LE VIVIER, ET C'EST TOUT LEUR SENS.
-// Le total (62) et les deux tests (22 / 19) sont fixés par le sujet ; ce qui
-// restait libre, c'est OÙ les prendre. On les a mis là où il y a de quoi
-// servir. Le rapport « énoncés distincts disponibles ÷ questions posées »
-// donne le nombre de passages qu'un élève peut faire avant de revoir une
-// question :
-//   nombres     automatismes 517 ÷ 10 = 51×  ·  problèmes  46 ÷ 4 = 11×
-//   grandeurs   automatismes 210 ÷  5 = 42×  ·  problèmes 458 ÷ 7 = 65×
-//   espace      automatismes  84 ÷  4 = 21×  ·  problèmes  23 ÷ 3 =  7×
-//   données     automatismes 105 ÷  3 = 35×  ·  problèmes 132 ÷ 5 = 26×
-//   autres       espace 57 ÷ 9 = 6×          ·  données  161 ÷ 12 = 13×
+// ⭐ LA RÉPARTITION SUIT LE DOCUMENT, PAS NOTRE CONFORT (corrigée le 15/08).
+// Le document de résultats étiquette chaque item des deux tests par son
+// domaine. Compté item par item :
+//   AUTOMATISMES 22 → 15 « NC », 7 « GM », 0 « OGD », 0 « EG ».
+//   RÉSOLUTION   19 →  3 « NC », 5 « GM », 11 « OGD », 0 « EG ».
 //
-// 📏 MESURÉ, DIX PASSAGES D'AFFILÉE avec la mémoire des questions déjà vues
-// (`scripts/simuler-epreuves-blanches.ts 4e-maths`) : CINQ PASSAGES COMPLETS
-// à 62 sur 62, 555 questions servies sans jamais deux fois le même énoncé,
-// 103 micro-compétences touchées sur 107. Au-delà du cinquième, l'épreuve se
-// raccourcit au lieu de se répéter — et `seuilsAjustes` ramène alors les
-// seuils au nombre de questions réellement posées, pour que l'élève ne soit
-// pas puni d'une banque à sec.
+// ⭐ CE QUE ÇA APPREND, ET QUE NOUS AVIONS À L'ENVERS : la résolution de
+// problèmes en 4ᵉ est un test de PROPORTIONNALITÉ. Onze de ses dix-neuf items
+// sont en organisation et gestion de données, et leur intitulé le dit —
+// « utiliser la proportionnalité » y revient huit fois, en contexte simple,
+// inverse, avec retour à l'unité, avec conversion, en pourcentage. Nous
+// mettions sept de ces questions en grandeurs et cinq en données ; c'est
+// l'inverse.
 //
-// ⏳ LA TRANCHE LA PLUS COURTE COMMANDE TOUT : « autres » en géométrie, six
-// passages. Ce sont les cinq micro-compétences de construction — tracer un
-// angle, construire un triangle ou un parallélogramme, placer l'image d'un
-// point ou d'une figure par symétrie — et elles ne portent que 57 énoncés.
-// Neuf questions y tiennent ; en demander onze ramènerait les mêmes dès le
-// cinquième passage.
+// ⚠️ UN ÉCART ASSUMÉ SUR LES AUTOMATISMES : le document en range 7 en « GM »,
+// mais trois d'entre eux sont, à lire leur intitulé, de la gestion de données
+// (« compléter un tableau de proportionnalité », « repérer un point dans un
+// repère ») ou du calcul (« associer différentes écritures d'un décimal »).
+// L'étiquetage du tableau est approximatif là où celui de la résolution de
+// problèmes colle. On garde donc 15 NC, mais on rend 3 des 7 « GM » à leur
+// domaine de contenu — sinon lire un graphique ou calculer un pourcentage
+// disparaîtrait d'une épreuve de 62 questions.
 //
-// ⏳ LES DEUX AUTRES PLANCHERS : la résolution de problèmes en nombres (46
-// énoncés, dont 35 sous le seul `fraction_defi`) et en géométrie (23). Quatre
-// et trois questions y tiennent. C'est un chantier de contenu, pas de
-// mécanique — le jour où ces micros seront étoffées, seuls les chiffres
-// ci-dessous bougeront, et l'épreuve tiendra dix passages comme celle de 6ᵉ.
+// LES 21 « AUTRES » : la géométrie en prend 14, comme en 6ᵉ où le domaine
+// entier est hors test ; les 7 dernières vont à la gestion de données, où
+// vivent le choix d'une représentation et toute l'algorithmique.
+//
+// 📏 MESURÉ, DIX PASSAGES D'AFFILÉE (`scripts/simuler-epreuves-blanches.ts
+// 4e-maths`) : deux passages complets à 62 sur 62, puis 55 tenus jusqu'au
+// dixième. 551 questions servies sans jamais deux fois le même énoncé, 103
+// micro-compétences sur 107. `seuilsAjustes` ramène les seuils au nombre de
+// questions réellement posées, pour que l'élève ne paie pas une banque à sec.
+//
+// ⭐ LA GÉOMÉTRIE, ELLE, NE FLÉCHIT PLUS : 14 sur 14 aux dix passages. C'est
+// le gain direct de la correction ci-dessus — le domaine tire désormais sur
+// ses 24 micro-compétences au lieu des 5 de construction.
+//
+// ⏳ LE GOULOT EST DÉSORMAIS NOMMÉ, ET C'EST UN CHANTIER DE CONTENU : les 11
+// problèmes de gestion de données. Le document est formel, ce test EST un
+// test de proportionnalité — mais notre vivier n'y tient que 5 énoncés sous
+// `prop_probleme`, 4 sous `prop_quatrieme`, 3 sous `prop_coeff`, 3 sous
+// `stat_defi` et zéro sous `prop_ratio_defi`. Seuls `prop_defi` (50) et
+// `proba_defi` (67) sont fournis, et le tirage tourne par notion : dès le
+// troisième passage la tranche rend 5 questions sur 11.
+// ⛔ ON NE CORRIGE PAS ÇA EN BAISSANT LE COMPTEUR : onze est le chiffre du
+// sujet. Ce sont ces cinq micro-compétences qu'il faut étoffer.
+//
+// Vivier, en passages tenables avant qu'une question ne revienne :
+//   nombres     automatismes 517 ÷ 15 = 34×  ·  problèmes  46 ÷  3 = 15×
+//   grandeurs   automatismes 210 ÷  4 = 52×  ·  problèmes 458 ÷  5 = 91×
+//   espace      autres       164 ÷ 14 = 11×
+//   données     automatismes 105 ÷  3 = 35×  ·  problèmes 132 ÷ 11 = 12× ⚠️
+//                                            ·  autres    161 ÷  7 = 23×
+//   ⚠️ le 12× des problèmes de données est trompeur : 117 de ses 132 énoncés
+//      sont sous deux micros, et le tirage tourne par notion, pas par énoncé.
 //
 // ⛔ ON N'A PAS COMBLÉ CES TROUS EN DÉPLAÇANT LES QUESTIONS AILLEURS : les
 // grandeurs auraient pu prendre les cinq questions manquantes sans broncher
@@ -251,7 +268,7 @@ const TYPES_MICRO = new Map<string, TypeItem>([
 const THEMES: ThemeEval[] = [
   {
     id: "nombres",
-    label: "Les nombres et le calcul",
+    label: "Nombres et calculs",
     quoi: "Relatifs, fractions, divisibilité et premières lettres du calcul littéral.",
     notions: [
       "relatif_nombre",
@@ -261,26 +278,26 @@ const THEMES: ThemeEval[] = [
       "litteral_calcul",
       "divisibilite",
     ],
-    nbQuestions: 14,
+    nbQuestions: 18,
     repartition: [
-      { type: "automatisme", nbQuestions: 10 },
-      { type: "resolution_probleme", nbQuestions: 4 },
+      { type: "automatisme", nbQuestions: 15 },
+      { type: "resolution_probleme", nbQuestions: 3 },
     ],
   },
   {
     id: "grandeurs",
-    label: "Les grandeurs et les mesures",
+    label: "Grandeurs et mesures",
     quoi: "Conversions, durées, aires des figures usuelles et volumes des solides.",
     notions: ["grandeur_conversion", "aire_surface", "volume_solide"],
-    nbQuestions: 12,
+    nbQuestions: 9,
     repartition: [
-      { type: "automatisme", nbQuestions: 5 },
-      { type: "resolution_probleme", nbQuestions: 7 },
+      { type: "automatisme", nbQuestions: 4 },
+      { type: "resolution_probleme", nbQuestions: 5 },
     ],
   },
   {
     id: "espace",
-    label: "L'espace et la géométrie",
+    label: "Espace et géométrie",
     quoi: "Triangles, parallélogrammes, angles et symétrie centrale.",
     notions: [
       "triangle_figure",
@@ -288,17 +305,19 @@ const THEMES: ThemeEval[] = [
       "angle_mesure",
       "sym_centrale",
     ],
-    nbQuestions: 16,
-    repartition: [
-      { type: "automatisme", nbQuestions: 4 },
-      { type: "resolution_probleme", nbQuestions: 3 },
-      { type: "autre", nbQuestions: 9 },
-    ],
+    // ⛔ UNE SEULE TRANCHE, « autres », comme le domaine de géométrie en 6ᵉ :
+    // aucun des 41 items des deux tests n'est étiqueté « EG ». Ses 24
+    // micro-compétences y passent donc toutes, ce qui donne au domaine
+    // 164 énoncés au lieu des 57 des seules constructions.
+    nbQuestions: 14,
+    repartition: [{ type: "autre", nbQuestions: 14 }],
   },
   {
     id: "donnees",
-    label: "Données, proportionnalité et programmation",
-    quoi: "Lire des statistiques, comparer des chances, raisonner par étapes, exécuter un programme.",
+    // LE LIBELLÉ DU DOCUMENT, mot pour mot : c'est celui que le professeur
+    // lit sur ses résultats officiels, et le nôtre doit s'y superposer.
+    label: "Organisation et gestion de données, fonctions",
+    quoi: "Proportionnalité, statistiques, probabilités — et lire un programme.",
     notions: [
       "prop_proportionnalite",
       "prop_ratio_pourcentage",
@@ -307,11 +326,11 @@ const THEMES: ThemeEval[] = [
       "algo_programmation",
       "algo_construire",
     ],
-    nbQuestions: 20,
+    nbQuestions: 21,
     repartition: [
       { type: "automatisme", nbQuestions: 3 },
-      { type: "resolution_probleme", nbQuestions: 5 },
-      { type: "autre", nbQuestions: 12 },
+      { type: "resolution_probleme", nbQuestions: 11 },
+      { type: "autre", nbQuestions: 7 },
     ],
   },
 ];
