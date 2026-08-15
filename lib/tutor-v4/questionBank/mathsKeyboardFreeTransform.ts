@@ -114,6 +114,13 @@ type QcmOverride = {
   format: QuestionFormat;
   choices: string[];
   comparator: ComparatorName;
+  /**
+   * Réécrit la réponse attendue quand les propositions ne sortent PAS de
+   * `expected` — c'est le cas des QCM d'opérations, fabriqués à partir d'une
+   * table d'étiquettes. Laissé vide pour les « short » numériques, dont
+   * `expected[0]` est déjà l'une des propositions.
+   */
+  expected?: string[];
 };
 
 // Calcule les champs QCM à appliquer si la question est un "short" numérique.
@@ -178,11 +185,24 @@ function operationOverride(
   const found = OPERATIONS.filter((op) => expected.includes(op));
   if (found.length !== 1) return null;
 
-  // Le comparateur normalise en minuscules : « Addition » matche « addition ».
+  // ⚠️ `expected` EST RÉÉCRIT, et ce n'est pas cosmétique (corrigé le 15/08).
+  // Les propositions sortent d'ici, pas de `expected` : sans cette ligne
+  // l'item gardait la liste de mots-clés de sa version tapée
+  // (["240", "136", "addition", "total", "376"]) et `expected[0]` était un
+  // NOMBRE, alors qu'aucune proposition n'est un nombre.
+  // L'élève, lui, n'était pas pénalisé — `mcq_exact` accepte n'importe quel
+  // élément de la liste et normalise la casse. Mais tout code qui lit
+  // `expected[0]` comme « la bonne réponse » comptait un clic juste comme
+  // faux : c'est ce que fait `construireBilan` dans le moteur des épreuves
+  // nationales (`reponses[index] === q.expected[0]`), et c'est le contrat
+  // écrit en tête de ce fichier.
+  // On garde l'étiquette telle qu'elle est affichée, pas le mot en minuscules :
+  // la proposition cliquée et la réponse attendue doivent être la MÊME chaîne.
   return {
     format: "qcm",
     choices: shuffle(OPERATIONS.map((op) => OPERATION_LABELS[op])),
     comparator: "mcq_exact",
+    expected: [OPERATION_LABELS[found[0]]],
   };
 }
 
