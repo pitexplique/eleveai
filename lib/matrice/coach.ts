@@ -37,7 +37,13 @@ export const CLASSE_COACH: Record<ProfilId, string | null> = {
   "4e": "4e",
   "3e": "3e",
   seconde: "seconde",
-  premiere: "premiere-spe",
+  // ⚠️ 15/08/2026 — bascule de « premiere-spe » vers « premiere ». La matrice
+  // n'a qu'un rang « première », alors qu'il y a deux classes : la spécialité
+  // (4 h) et le module spécifique (1 h 30). La majorité des élèves de première
+  // générale ne prend PAS la spécialité, et c'est eux qui passent l'épreuve
+  // anticipée — le défaut va donc au module spécifique. Un élève de spé change
+  // de classe en deux clics dans le coach.
+  premiere: "premiere",
   terminale: "terminale-spe",
   parent: null,
   prof: null,
@@ -70,30 +76,43 @@ export const NOTION_COACH_MATHS: TableNotions = {
     "6e": "prop_proportionnalite", "5e": "prop_proportionnalite",
     "4e": "prop_proportionnalite", "3e": "prop_proportionnalite",
     seconde: "information_chiffree_evolutions",
+    premiere: "auto_taux_evolution",
   },
   equations: {
     "5e": "litteral_calcul", "4e": "equation_resolution", "3e": "equation_resolution",
     seconde: "equations_inequations_1er_degre",
+    premiere: "auto_equations",
   },
   fonctions: {
     "3e": "fonction_generalite", seconde: "fonction_vocabulaire_2de",
+    premiere: "lin_affine",
     "premiere-spe": "variations_fonctions", "terminale-spe": "limite_fonction",
   },
-  derivees: { "premiere-spe": "derivation", "terminale-spe": "derivation_fonction" },
-  suites: { "premiere-spe": "suites", "terminale-spe": "suite_numerique" },
+  derivees: {
+    premiere: "der_nombre_derive",
+    "premiere-spe": "derivation", "terminale-spe": "derivation_fonction",
+  },
+  suites: {
+    premiere: "lin_suite_arithmetique",
+    "premiere-spe": "suites", "terminale-spe": "suite_numerique",
+  },
   exponentielle: {
+    premiere: "expo_fonction",
     "premiere-spe": "exponentielle", "terminale-spe": "fonction_exponentielle",
   },
   probabilites: {
     cm1: "probabilite", cm2: "probabilite", "6e": "proba_experience",
     "5e": "proba_experience", "4e": "proba_experience", "3e": "proba_experience",
-    seconde: "probabilites_ensemble_fini", "premiere-spe": "probabilites_conditionnelles",
+    seconde: "probabilites_ensemble_fini",
+    premiere: "alea_conditionnelle",
+    "premiere-spe": "probabilites_conditionnelles",
     "terminale-spe": "probabilite_conditionnelle",
   },
   statistiques: {
     cm1: "tableau", cm2: "tableau", "6e": "stat_donnee", "5e": "stat_statistique",
     "4e": "stat_statistique", "3e": "stat_statistique",
     seconde: "statistiques_descriptives",
+    premiere: "info_tableau_croise",
   },
   geometrie: {
     cp: "figures_solides", ce1: "figures_planes", ce2: "figures_planes",

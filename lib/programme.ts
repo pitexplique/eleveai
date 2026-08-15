@@ -43,6 +43,7 @@ export const PROGRAMME_CLASSES: ProgrammeClasse[] = [
   { slug: "4e",  label: "4e",  enClasse: "en 4e",  matieres: ["maths", "francais"], anglais: "A2",       espagnol: "A1 → A2",  ia: "A2",   cahierSlug: "vers-la-4e", calculRapide: true },
   { slug: "3e",  label: "3e",  enClasse: "en 3e",  matieres: ["maths", "francais"], anglais: "A2 (B1 pour les plus à l'aise)", espagnol: "A2", ia: "A2", cahierSlug: "vers-la-3e", calculRapide: true },
   { slug: "seconde", label: "Seconde", enClasse: "en seconde", matieres: ["maths"], anglais: "B1", espagnol: "B1", ia: "A2 et plus", cahierSlug: "vers-la-2nde", calculRapide: false },
+  { slug: "premiere", label: "Première (sans spé maths)", enClasse: "en première", matieres: ["maths"], anglais: "B1 → B2", espagnol: "B1", ia: "B1 et plus", cahierSlug: "vers-la-premiere", calculRapide: false },
   { slug: "premiere-spe", label: "Première spé maths", enClasse: "en première", matieres: ["maths"], anglais: "B1 → B2", espagnol: "B1", ia: "B1 et plus", cahierSlug: "vers-la-premiere", calculRapide: false },
   { slug: "terminale-spe", label: "Terminale spé maths", enClasse: "en terminale", matieres: ["maths"], anglais: "B1 → B2", espagnol: "B1 → B2", ia: "B1 et plus", cahierSlug: "vers-la-terminale", calculRapide: true },
 ];

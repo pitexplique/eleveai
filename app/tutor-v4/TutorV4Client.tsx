@@ -353,6 +353,7 @@ function normalizeClasse(value: string | null): Classe {
     value === "4e" ||
     value === "3e" ||
     value === "seconde" ||
+    value === "premiere" ||
     value === "premiere-spe" ||
     value === "terminale-spe" ||
     value === "adulte" ||
