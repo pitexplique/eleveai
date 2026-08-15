@@ -21,6 +21,9 @@ import { parallelogrammesBank } from "./parallelogrammes.bank";
 // ils sont écrits sur le programme de 5ᵉ, donc ils vivent dans cette banque —
 // l'épreuve blanche de 4ᵉ y pioche, et le coach de 5ᵉ aussi.
 import { evaluationNationale4eBank } from "./evaluation-nationale-4e.bank";
+// Conversions et durées : la notion `grandeur_conversion`, ajoutée le 15/08
+// parce que `BO5M1 « Grandeurs et mesures »` ne portait que les aires.
+import { conversionsBank } from "./conversions.bank";
 
 
 export const maths5eQuestionBank: TutorBankItemV4[] = [
@@ -40,6 +43,7 @@ export const maths5eQuestionBank: TutorBankItemV4[] = [
   ...airesBank,
   ...algorithmiqueBank,
   ...evaluationNationale4eBank,
+  ...conversionsBank,
 ];
 
 export function getMaths5eQuestionBank(args?: {

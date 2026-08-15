@@ -496,6 +496,38 @@ export const microSkills: MicroSkillSource[] = [
   },
 
 /* =========================
+   CONVERSIONS ET DURÉES
+   Ajoutées le 15/08/2026 — voir le commentaire de `grandeur_conversion`
+   dans notions.ts. Quatre micro-compétences, pas davantage : une notion
+   doit tenir dans une séance et se terminer.
+========================= */
+
+  {
+    id: "conversion_decimal",
+    label: "Convertir une longueur, une masse ou une contenance",
+    notionId: "grandeur_conversion",
+    prerequis: [],
+  },
+  {
+    id: "conversion_duree",
+    label: "Convertir une durée en heures et minutes",
+    notionId: "grandeur_conversion",
+    prerequis: [],
+  },
+  {
+    id: "conversion_avant_calcul",
+    label: "Convertir avant de comparer ou de calculer",
+    notionId: "grandeur_conversion",
+    prerequis: ["conversion_decimal"],
+  },
+  {
+    id: "conversion_coherence",
+    label: "Contrôler qu’un résultat converti est cohérent",
+    notionId: "grandeur_conversion",
+    prerequis: ["conversion_decimal", "conversion_duree"],
+  },
+
+/* =========================
    VOLUMES
 ========================= */
 

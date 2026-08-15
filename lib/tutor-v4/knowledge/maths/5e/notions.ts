@@ -142,6 +142,22 @@ export const notions: NotionSource[] = [
     prerequis: ["triangle_figure"],
     levels: [1, 2],
   },
+  // AJOUTÉE LE 15/08/2026, sur constat de l'évaluation nationale de 4ᵉ.
+  // `BO5M1 « Grandeurs et mesures »` était déclaré mais ne portait qu'une seule
+  // notion, les aires — alors que l'évaluation officielle teste dans ce même
+  // domaine les CONVERSIONS et les DURÉES (135 min = 2 h 15, 75 L = 7 500 cL,
+  // 20 L de lait pour 1 kg de beurre). Le thème « grandeurs » de l'épreuve
+  // blanche de 4ᵉ ne pouvait donc proposer que des aires et des volumes :
+  // cinq questions sur vingt ne ressemblaient pas à celles du jour J.
+  // ⚠️ Ce n'est pas une notion inventée pour boucher un trou — c'est la
+  // compétence du BO qui n'était pas servie.
+  {
+    id: "grandeur_conversion",
+    label: "Conversions et durées",
+    boId: "BO5M1",
+    prerequis: [],
+    levels: [1, 2],
+  },
 
   // =========================
   // GÉOMÉTRIE DANS L’ESPACE

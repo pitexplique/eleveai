@@ -36,8 +36,13 @@ const THEMES: ThemeEval[] = [
   {
     id: "grandeurs",
     label: "Les grandeurs et les mesures",
-    quoi: "Aires des figures usuelles et volumes des solides.",
-    notions: ["aire_surface", "volume_solide"],
+    // ⚠️ LES CONVERSIONS ONT ÉTÉ AJOUTÉES LE 15/08, sur constat des items
+    // officiels : l'évaluation nationale teste dans ce domaine 135 min en
+    // heures et minutes, 75 L en centilitres, et un problème lait/beurre qui
+    // mêle kilogrammes et grammes. Ce thème ne proposait qu'aires et volumes —
+    // cinq questions sur vingt ne ressemblaient pas à celles du jour J.
+    quoi: "Conversions, durées, aires des figures usuelles et volumes des solides.",
+    notions: ["grandeur_conversion", "aire_surface", "volume_solide"],
     nbQuestions: 5,
   },
   {
