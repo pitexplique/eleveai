@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Printer, Dumbbell, Sparkles, Scissors } from "lucide-react";
+import LienPrefetchSurvol from "@/components/LienPrefetchSurvol";
 
 export const metadata: Metadata = {
   title:
@@ -73,10 +74,12 @@ export default function CartesVacancesIndexPage() {
           </p>
         </header>
 
-        {/* Cartes des decks */}
+        {/* Cartes des decks.
+            ⚠️ `LienPrefetchSurvol` ET NON `Link` — même raison qu'au hub des
+            cahiers : ne précharger que la carte visée, pas les six. */}
         <section className="mt-10 grid gap-5 sm:grid-cols-2">
           {decks.map((d) => (
-            <Link
+            <LienPrefetchSurvol
               key={d.slug}
               href={`/cahier-vacances-cartes/${d.slug}`}
               className={`group relative flex flex-col overflow-hidden rounded-3xl bg-gradient-to-br ${d.grad} p-6 text-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:rotate-[-1.5deg] hover:scale-[1.03] hover:shadow-2xl`}
@@ -100,7 +103,7 @@ export default function CartesVacancesIndexPage() {
                 Imprimer &amp; découper
                 <span className="transition-transform group-hover:translate-x-1">→</span>
               </span>
-            </Link>
+            </LienPrefetchSurvol>
           ))}
         </section>
 

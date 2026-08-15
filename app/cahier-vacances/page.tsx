@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Download, Heart, Printer, Sparkles } from "lucide-react";
+import LienPrefetchSurvol from "@/components/LienPrefetchSurvol";
 
 export const metadata: Metadata = {
   title: "Cahiers de vacances à imprimer (PDF gratuit) — CM2, 6e, 5e",
@@ -77,10 +78,14 @@ export default function CahiersVacancesIndexPage() {
           </p>
         </header>
 
-        {/* Cartes des cahiers */}
+        {/* Cartes des cahiers.
+            ⚠️ `LienPrefetchSurvol` ET NON `Link` : 15 cartes préchargées d'office,
+            c'était ~1,1 Mo par visite et 15 lectures ISR facturées pour un seul
+            cahier ouvert — en plus de rendre les chiffres par cahier illisibles
+            dans Vercel. Le composant précharge au survol. Voir son en-tête. */}
         <section className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {cahiers.map((c) => (
-            <Link
+            <LienPrefetchSurvol
               key={c.slug}
               href={`/cahier-vacances/${c.slug}`}
               className={`group relative flex flex-col overflow-hidden rounded-3xl bg-gradient-to-br ${c.grad} p-6 text-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:rotate-[-1.5deg] hover:scale-[1.03] hover:shadow-2xl`}
@@ -107,7 +112,7 @@ export default function CahiersVacancesIndexPage() {
                 Ouvrir &amp; imprimer
                 <span className="transition-transform group-hover:translate-x-1">→</span>
               </span>
-            </Link>
+            </LienPrefetchSurvol>
           ))}
         </section>
 
