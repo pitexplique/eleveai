@@ -2695,6 +2695,24 @@ const POOLS: Record<string, (level: Cycle4Level) => QcmItem[]> = {
   gram_anaphore_pronom,
   gram_reprise_nominale,
   gram_chaine_reference,
+  // Les quinze pools manquants (15/08, seconde passe) — mêmes raisons, même
+  // panne muette. ⛔ Ne PAS ajouter `gram_cod_coi` ni `gram_attribut` : pour
+  // elles, une question de fonction grammaticale est légitime.
+  gram_ponctuation,
+  gram_types_formes,
+  gram_simple_complexe,
+  gram_juxta_coord,
+  gram_coordonnants,
+  gram_gn_etendu,
+  gram_prepositions,
+  gram_determinant_pronom,
+  gram_pronoms,
+  orth_chaine_gn,
+  orth_accord_attribut,
+  orth_sujet_verbe_complexe,
+  orth_participe_etre,
+  orth_participe_avoir,
+  orth_cod_coi_antepose,
   discours_registres,
   discours_rapportees,
   discours_argumentatif,
@@ -2702,6 +2720,603 @@ const POOLS: Record<string, (level: Cycle4Level) => QcmItem[]> = {
   conj_composer,
   conj_employer,
 };
+
+/* ═════════════════════════════════════════════════════════════════════════
+   LES QUINZE POOLS MANQUANTS (15/08/2026, seconde passe)
+   ---------------------------------------------------------------------------
+   ⛔ LE DÉFAUT, MESURÉ. Les douze micro-compétences de grammaire ouvertes le
+   12/08 pour le nouveau BO, et les six d'orthographe grammaticale, n'avaient
+   AUCUNE entrée dans `POOLS`. Elles recevaient donc le repli `gram_fonctions`
+   sur environ la moitié de leurs tirages : « Dans « … », quelle est la
+   fonction de ce groupe ? » posé sous « Expliquer le rôle d'un signe de
+   ponctuation », sous « Accorder le participe passé employé avec être »…
+   Des questions justes, hors sujet, et qu'aucun vérificateur ne sait voir.
+   Relevé avant correction : `gram_simple_complexe` 60 %, `juxta_coord` 52 %,
+   `coordonnants` 51 %, `ponctuation` 50 %, `pronoms` 50 %, `gn_etendu` 48 %,
+   `prepositions` 47 %, `determinant_pronom` 46 %, `types_formes` 44 %, et les
+   six orthographiques entre 46 et 54 %.
+
+   ⛔ NE PAS AJOUTER `gram_fonctions`, `gram_cod_coi` NI `gram_attribut` ICI :
+   pour elles, une question de fonction grammaticale est LÉGITIME. Le repli
+   tombe juste, il n'y a rien à corriger. Mon premier relevé annonçait 19
+   micros touchées en confondant les deux cas — vérifier le SENS, pas
+   seulement la forme de l'énoncé.
+
+   ⚠️ Ces pools servent aussi la 4ᵉ et la 3ᵉ si les mêmes micros y sont un
+   jour déclarées (la clé est l'id SANS le préfixe de niveau). Le contenu est
+   donc écrit pour rester juste au-delà de la 5ᵉ.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+function gram_ponctuation(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "« Mon oncle, qui vit à Cilaos, arrive demain. »\n\nQue font les deux virgules ?",
+      correct: "elles détachent un groupe qui donne une précision sur l'oncle",
+      wrongs: [
+        "elles séparent deux actions successives",
+        "elles marquent une pause pour respirer",
+        "elles annoncent une énumération",
+      ],
+      methode:
+        "Retire le groupe encadré : la phrase tient encore debout. C'est le signe d'un détachement.",
+    },
+    {
+      text: "« Il n'a pas répondu : il n'avait rien à dire. »\n\nQue fait le deux-points ?",
+      correct: "il annonce l'explication de ce qui précède",
+      wrongs: [
+        "il annonce une énumération",
+        "il introduit une parole rapportée",
+        "il sépare deux phrases sans lien",
+      ],
+      methode:
+        "Le deux-points fait trois choses : annoncer une liste, ouvrir une parole, ou expliquer. Ici on peut le remplacer par « car ».",
+    },
+    {
+      text: "« Le vent se leva. Les volets claquèrent. »\n\nQuel effet produit le point entre les deux ?",
+      correct: "il détache les deux faits et accélère le récit",
+      wrongs: [
+        "il montre que le second fait cause le premier",
+        "il marque une hésitation du narrateur",
+        "il indique que les faits sont simultanés",
+      ],
+      methode:
+        "Comparer avec « Le vent se leva et les volets claquèrent » : le point coupe, la conjonction lie.",
+    },
+    {
+      text: "« Elle prit son sac (celui du marché), ses clés et sortit. »\n\nQue font les parenthèses ?",
+      correct: "elles ajoutent une précision secondaire",
+      wrongs: [
+        "elles rapportent des paroles",
+        "elles indiquent une hésitation",
+        "elles remplacent un mot oublié",
+      ],
+      methode:
+        "Ce que contiennent les parenthèses peut disparaître sans que la phrase perde son sens principal.",
+    },
+    {
+      text: "« Attention — le sol est glissant. »\n\nQue fait le tiret ?",
+      correct: "il met en relief ce qui suit",
+      wrongs: [
+        "il indique un dialogue",
+        "il sépare deux sujets différents",
+        "il remplace une virgule sans rien changer",
+      ],
+      methode:
+        "Le tiret unique jette la lumière sur la suite. Deux tirets, eux, encadrent comme des parenthèses.",
+    },
+    {
+      text: "« Tu viens ? »\n\nQue nous apprend le point d'interrogation sur cette phrase ?",
+      correct: "qu'elle est une question, alors que sa forme ressemble à une affirmation",
+      wrongs: [
+        "qu'elle exprime la surprise",
+        "qu'elle donne un ordre",
+        "qu'elle est incomplète",
+      ],
+      methode:
+        "Sans le signe, « Tu viens » serait une déclaration. Ici la ponctuation change le type de la phrase à elle seule.",
+    },
+  ];
+}
+
+function gram_types_formes(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "« Ferme la fenêtre, s'il te plaît. »\n\nDe quel type est cette phrase ?",
+      correct: "injonctive : elle donne un ordre ou une consigne",
+      wrongs: [
+        "déclarative : elle raconte un fait",
+        "interrogative : elle pose une question",
+        "exclamative : elle exprime un sentiment",
+      ],
+      methode:
+        "« S'il te plaît » adoucit l'ordre, il ne le supprime pas : le verbe reste à l'impératif.",
+    },
+    {
+      text: "« Quelle chaleur aujourd'hui ! »\n\nQuelle forme prend cette phrase ?",
+      correct: "la forme exclamative",
+      wrongs: [
+        "la forme négative",
+        "la forme interrogative",
+        "la forme passive",
+      ],
+      methode:
+        "Le type dit ce que fait la phrase, la forme dit comment elle le fait. Ici, l'exclamation.",
+    },
+    {
+      text: "« Personne n'a rien vu. »\n\nQue peut-on dire de cette phrase ?",
+      correct: "elle est déclarative et de forme négative",
+      wrongs: [
+        "elle est interrogative et négative",
+        "elle est injonctive et négative",
+        "elle est déclarative et affirmative",
+      ],
+      methode:
+        "Une phrase a toujours UN type et peut prendre plusieurs formes. Le type ici est déclaratif.",
+    },
+    {
+      text: "« Est-ce que tu ne viens pas ? »\n\nCette phrase est...",
+      correct: "interrogative et négative à la fois",
+      wrongs: [
+        "interrogative seulement",
+        "négative seulement",
+        "injonctive et négative",
+      ],
+      methode:
+        "Type et forme se cumulent : « est-ce que » donne le type, « ne… pas » la forme.",
+    },
+    {
+      text: "« Comme il court vite ! »\n\nQu'exprime cette phrase ?",
+      correct: "l'admiration ou la surprise, par une exclamation",
+      wrongs: [
+        "une question sur sa vitesse",
+        "un ordre de courir",
+        "une simple constatation neutre",
+      ],
+      methode:
+        "« Comme » suivi d'un point d'exclamation n'introduit pas une comparaison : il exprime l'intensité.",
+    },
+    {
+      text: "« N'oublie pas ton parapluie. »\n\nDe quel type et de quelle forme est cette phrase ?",
+      correct: "injonctive et négative",
+      wrongs: [
+        "déclarative et négative",
+        "interrogative et négative",
+        "exclamative et affirmative",
+      ],
+      methode:
+        "Le verbe est à l'impératif — donc injonctive — et encadré par « n'… pas » — donc négative.",
+    },
+  ];
+}
+
+function gram_simple_complexe(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "« Le facteur a sonné puis il est reparti. »\n\nCette phrase est...",
+      correct: "complexe : elle contient deux verbes conjugués",
+      wrongs: [
+        "simple : elle ne raconte qu'un événement",
+        "non verbale : elle n'a pas de verbe principal",
+        "simple : « puis » n'est pas un verbe",
+      ],
+      methode:
+        "On compte les verbes CONJUGUÉS, pas les actions ni les mots de liaison. Deux verbes, deux propositions.",
+    },
+    {
+      text: "« Défense d'entrer. »\n\nComment appelle-t-on cette phrase ?",
+      correct: "une phrase non verbale",
+      wrongs: [
+        "une phrase simple",
+        "une phrase complexe",
+        "une proposition subordonnée",
+      ],
+      methode:
+        "Aucun verbe conjugué : la phrase existe pourtant, elle est simplement construite autour d'un nom.",
+    },
+    {
+      text: "« Les élèves qui avaient terminé sont sortis. »\n\nCombien de propositions cette phrase contient-elle ?",
+      correct: "deux",
+      wrongs: ["une", "trois", "aucune"],
+      methode:
+        "« Avaient terminé » et « sont sortis » sont deux verbes conjugués : deux propositions.",
+    },
+    {
+      text: "« Malgré la pluie, le match a eu lieu. »\n\nCette phrase est...",
+      correct: "simple : elle n'a qu'un verbe conjugué",
+      wrongs: [
+        "complexe : elle contient deux idées",
+        "complexe : « malgré » introduit une proposition",
+        "non verbale",
+      ],
+      methode:
+        "« Malgré la pluie » est un groupe, pas une proposition : il n'y a pas de verbe conjugué dedans.",
+    },
+    {
+      text: "« Il pleut, la route est glissante, les voitures ralentissent. »\n\nCette phrase est complexe. Combien de propositions ?",
+      correct: "trois",
+      wrongs: ["une", "deux", "quatre"],
+      methode:
+        "Trois verbes conjugués — pleut, est, ralentissent — donc trois propositions, ici juxtaposées.",
+    },
+    {
+      text: "« Quel silence dans la cour ! »\n\nCette phrase est...",
+      correct: "non verbale, malgré son point d'exclamation",
+      wrongs: [
+        "simple, car elle contient un verbe sous-entendu",
+        "complexe, car elle contient deux groupes",
+        "interrogative",
+      ],
+      methode:
+        "La ponctuation donne le type, pas la structure. Sans verbe conjugué, la phrase est non verbale.",
+    },
+  ];
+}
+
+function gram_juxta_coord(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "« Il ouvrit la porte, la referma aussitôt. »\n\nQu'exprime la juxtaposition par la virgule ?",
+      correct: "la rapidité de l'enchaînement",
+      wrongs: [
+        "une opposition entre les deux gestes",
+        "une cause et sa conséquence",
+        "un choix entre deux possibilités",
+      ],
+      methode:
+        "Comparer avec « puis il la referma » : la virgule seule serre les deux gestes l'un contre l'autre.",
+    },
+    {
+      text: "« Il a plu toute la nuit, donc la rivière est haute. »\n\nQuel rapport la coordination établit-elle ?",
+      correct: "une conséquence",
+      wrongs: ["une opposition", "un choix", "une addition simple"],
+      methode:
+        "« Donc » relie une cause à son effet. C'est le mot coordonnant qui porte le rapport, pas les propositions.",
+    },
+    {
+      text: "« Elle est fatiguée mais elle continue. »\n\nQuel rapport « mais » établit-il ?",
+      correct: "une opposition",
+      wrongs: ["une conséquence", "une cause", "une addition"],
+      methode:
+        "« Mais » annonce que la suite va contre ce qu'on attendait après la première proposition.",
+    },
+    {
+      text: "« Le vent tombe : la mer se calme. »\n\nQu'exprime ici le deux-points entre deux propositions ?",
+      correct: "une conséquence, sans mot de liaison",
+      wrongs: [
+        "une opposition",
+        "une simple succession dans le temps",
+        "une énumération",
+      ],
+      methode:
+        "La juxtaposition peut porter un rapport logique : c'est au lecteur de le reconstituer.",
+    },
+    {
+      text: "« Prends ton imperméable ou tu seras trempé. »\n\nQuel rapport « ou » établit-il ici ?",
+      correct: "une alternative dont la seconde branche est une menace",
+      wrongs: [
+        "une addition de deux conseils",
+        "une opposition entre deux avis",
+        "une cause",
+      ],
+      methode:
+        "« Ou » n'offre pas toujours un vrai choix : ici la seconde possibilité sert à convaincre.",
+    },
+    {
+      text: "« Il travaille, il révise, il recommence. »\n\nQuel effet produit cette juxtaposition répétée ?",
+      correct: "elle donne une impression d'accumulation et d'obstination",
+      wrongs: [
+        "elle marque une opposition entre les trois actions",
+        "elle indique que les actions sont simultanées",
+        "elle montre une hésitation",
+      ],
+      methode:
+        "Trois propositions de même construction, sans liaison : le rythme lui-même produit le sens.",
+    },
+  ];
+}
+
+function gram_coordonnants(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "« Je n'ai pas répondu car je n'avais rien à dire. »\n\nQuel rapport « car » établit-il ?",
+      correct: "une cause",
+      wrongs: ["une conséquence", "une opposition", "un but"],
+      methode:
+        "« Car » introduit la raison de ce qui précède. « Donc » ferait l'inverse.",
+    },
+    {
+      text: "« Il pleut, or le match est maintenu. »\n\nQuel rapport « or » établit-il ?",
+      correct: "une opposition, en introduisant un fait inattendu",
+      wrongs: ["une cause", "une conséquence", "une addition"],
+      methode:
+        "« Or » signale un élément qui contrarie ce qu'on attendait. Il est plus fort que « et », moins net que « mais ».",
+    },
+    {
+      text: "« Elle chante et elle danse. »\n\nQuel rapport « et » établit-il ici ?",
+      correct: "une addition",
+      wrongs: ["une opposition", "une cause", "un choix"],
+      methode:
+        "« Et » ajoute. C'est le plus neutre des coordonnants — d'où l'intérêt de repérer quand un auteur en choisit un autre.",
+    },
+    {
+      text: "« Il n'a ni téléphoné ni écrit. »\n\nQue fait « ni… ni » ?",
+      correct: "il coordonne deux éléments en les niant tous les deux",
+      wrongs: [
+        "il exprime un choix entre deux actions",
+        "il oppose deux comportements",
+        "il indique une conséquence",
+      ],
+      methode:
+        "« Ni » est le « et » de la phrase négative : il additionne des absences.",
+    },
+    {
+      text: "Dans « Il est parti, cependant il reviendra », quel mot pourrait remplacer « cependant » sans changer le rapport ?",
+      correct: "mais",
+      wrongs: ["donc", "car", "et"],
+      methode:
+        "Tester le remplacement est la méthode la plus sûre : seul un coordonnant d'opposition convient.",
+    },
+    {
+      text: "« Le colis est arrivé, donc la commande est complète. »\n\nSi l'on remplace « donc » par « car », que devient la phrase ?",
+      correct: "le rapport s'inverse : la cause devient la conséquence",
+      wrongs: [
+        "la phrase garde exactement le même sens",
+        "la phrase devient interrogative",
+        "la phrase devient négative",
+      ],
+      methode:
+        "Le coordonnant ne décore pas : changer de mot change ce que la phrase affirme.",
+    },
+  ];
+}
+
+function gram_gn_etendu(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "« la vieille case créole du bord de mer »\n\nQuel est le nom noyau de ce groupe nominal ?",
+      correct: "case",
+      wrongs: ["vieille", "créole", "mer"],
+      methode:
+        "Supprime tout ce qui peut disparaître : ce qui reste avec le déterminant est le noyau.",
+    },
+    {
+      text: "« un chemin bordé de filaos »\n\nQuelle expansion complète le nom ?",
+      correct: "« bordé de filaos », un participe employé comme adjectif",
+      wrongs: [
+        "« un », le déterminant",
+        "« de filaos » seulement",
+        "il n'y a pas d'expansion",
+      ],
+      methode:
+        "L'expansion est tout ce qui s'ajoute au noyau. Ici elle est construite autour d'un participe passé.",
+    },
+    {
+      text: "« le livre de ma sœur »\n\nDe quelle nature est l'expansion « de ma sœur » ?",
+      correct: "un complément du nom",
+      wrongs: [
+        "un adjectif épithète",
+        "une proposition relative",
+        "un complément circonstanciel",
+      ],
+      methode:
+        "Introduite par une préposition et construite autour d'un nom : c'est la marque du complément du nom.",
+    },
+    {
+      text: "« les élèves qui ont terminé »\n\nQuelle est la nature de l'expansion ?",
+      correct: "une proposition subordonnée relative",
+      wrongs: [
+        "un complément du nom",
+        "un adjectif épithète",
+        "un groupe nominal apposé",
+      ],
+      methode:
+        "Un pronom relatif — qui, que, dont, où — et un verbe conjugué : c'est une relative.",
+    },
+    {
+      text: "« des mangues »\n\nCe groupe nominal est-il minimal ou étendu ?",
+      correct: "minimal : un déterminant et un nom, rien d'autre",
+      wrongs: [
+        "étendu, car « des » est une expansion",
+        "étendu, car le nom est au pluriel",
+        "ce n'est pas un groupe nominal",
+      ],
+      methode:
+        "Le déterminant fait partie du groupe minimal ; il n'est pas une expansion.",
+    },
+    {
+      text: "« un vieux volcan endormi depuis des siècles »\n\nCombien d'expansions le nom reçoit-il ?",
+      correct: "trois : « vieux », « endormi », « depuis des siècles »",
+      wrongs: [
+        "une seule : « vieux »",
+        "deux : « vieux » et « endormi »",
+        "aucune",
+      ],
+      methode:
+        "Chaque groupe supprimable sans détruire la phrase compte pour une expansion.",
+    },
+  ];
+}
+
+function gram_prepositions(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "« Il est parti sans son sac. »\n\nÀ quelle classe appartient « sans » ?",
+      correct: "une préposition",
+      wrongs: ["un adverbe", "une conjonction de coordination", "un déterminant"],
+      methode:
+        "Une préposition ne varie jamais et introduit toujours un groupe. Elle ne peut pas rester seule.",
+    },
+    {
+      text: "« Elle marche lentement. »\n\nÀ quelle classe appartient « lentement » ?",
+      correct: "un adverbe",
+      wrongs: ["une préposition", "un adjectif", "un pronom"],
+      methode:
+        "L'adverbe modifie le verbe et se suffit à lui-même : rien ne le suit obligatoirement.",
+    },
+    {
+      text: "« Je crois qu'il viendra. »\n\nQuel est le rôle de « que » ici ?",
+      correct: "il subordonne : il rattache une proposition à une autre",
+      wrongs: [
+        "il coordonne deux propositions de même niveau",
+        "il introduit un groupe nominal",
+        "c'est un adverbe d'intensité",
+      ],
+      methode:
+        "Un mot subordonnant crée une dépendance : la proposition qu'il introduit ne peut pas vivre seule.",
+    },
+    {
+      text: "Dans « il est passé devant la mairie », quelle est la classe de « devant » ?",
+      correct: "une préposition, car un groupe la suit",
+      wrongs: [
+        "un adverbe, car elle indique un lieu",
+        "une conjonction",
+        "un déterminant",
+      ],
+      methode:
+        "Certains mots changent de classe selon l'emploi : « il est passé devant » sans suite serait un adverbe.",
+    },
+    {
+      text: "« Il travaille pour réussir. »\n\nQue fait « pour » ?",
+      correct: "il introduit un groupe qui exprime le but",
+      wrongs: [
+        "il coordonne deux verbes",
+        "il exprime la cause",
+        "il remplace un pronom",
+      ],
+      methode:
+        "La préposition apporte le rapport de sens : « pour » le but, « à cause de » la cause, « malgré » l'opposition.",
+    },
+    {
+      text: "Parmi ces mots, lequel n'est PAS une préposition ?",
+      correct: "pourtant",
+      wrongs: ["chez", "parmi", "malgré"],
+      methode:
+        "« Pourtant » ne peut pas introduire de groupe : c'est un adverbe qui relie des idées.",
+    },
+  ];
+}
+
+function gram_determinant_pronom(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "« Cette histoire m'a plu. J'ai aimé celle-là aussi. »\n\nQuel mot est un pronom ?",
+      correct: "celle-là",
+      wrongs: ["cette", "histoire", "aussi"],
+      methode:
+        "Le déterminant accompagne un nom, le pronom le remplace. « Cette » est suivi de « histoire », « celle-là » ne l'est pas.",
+    },
+    {
+      text: "« Mon vélo est cassé, prends le mien. »\n\nQuelle est la classe de « mien » précédé de « le » ?",
+      correct: "un pronom possessif",
+      wrongs: [
+        "un déterminant possessif",
+        "un adjectif qualificatif",
+        "un nom commun",
+      ],
+      methode:
+        "« Mon » accompagne « vélo » : déterminant. « Le mien » remplace « mon vélo » : pronom.",
+    },
+    {
+      text: "« Je les ai vus. »\n\nQuelle est la classe de « les » ?",
+      correct: "un pronom personnel",
+      wrongs: [
+        "un déterminant défini",
+        "un adverbe",
+        "une préposition",
+      ],
+      methode:
+        "Aucun nom ne suit : « les » remplace ici un groupe déjà nommé. Devant un nom, il serait déterminant.",
+    },
+    {
+      text: "Dans « Quel livre lis-tu ? » et « Quel est ton avis ? », le mot « quel » est-il de la même classe ?",
+      correct: "non : déterminant dans la première, pronom dans la seconde",
+      wrongs: [
+        "oui, déterminant dans les deux",
+        "oui, pronom dans les deux",
+        "non : adverbe puis déterminant",
+      ],
+      methode:
+        "Un même mot change de classe selon qu'un nom le suit ou non. C'est l'emploi qui décide.",
+    },
+    {
+      text: "« Plusieurs élèves sont absents. Plusieurs reviendront demain. »\n\nDans la seconde phrase, « plusieurs » est...",
+      correct: "un pronom, car il ne s'appuie sur aucun nom exprimé",
+      wrongs: [
+        "un déterminant, comme dans la première phrase",
+        "un adverbe de quantité",
+        "un adjectif",
+      ],
+      methode:
+        "Le test est toujours le même : cherche le nom. S'il n'y en a pas, le mot le remplace.",
+    },
+    {
+      text: "« Ce sac est lourd. »\n\nQuelle est la classe de « ce » ?",
+      correct: "un déterminant démonstratif",
+      wrongs: [
+        "un pronom démonstratif",
+        "un pronom personnel",
+        "une préposition",
+      ],
+      methode:
+        "« Ce » précède « sac » : il l'accompagne. « Ceci », « celui-là » le remplaceraient.",
+    },
+  ];
+}
+
+function gram_pronoms(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "« Elle le lui a rendu. »\n\nCombien de pronoms personnels cette phrase contient-elle ?",
+      correct: "trois",
+      wrongs: ["un", "deux", "quatre"],
+      methode:
+        "« Elle », « le » et « lui » remplacent chacun un groupe : trois pronoms, trois éléments déjà connus.",
+    },
+    {
+      text: "« Prends celui-ci, il est plus solide. »\n\nDe quelle sorte est le pronom « celui-ci » ?",
+      correct: "démonstratif",
+      wrongs: ["personnel", "possessif", "indéfini"],
+      methode:
+        "Les démonstratifs — celui, celle, ceci, cela — désignent en montrant, souvent le plus proche.",
+    },
+    {
+      text: "« Chacun a rendu sa copie. »\n\nDe quelle sorte est « chacun » ?",
+      correct: "indéfini",
+      wrongs: ["personnel", "démonstratif", "possessif"],
+      methode:
+        "L'indéfini ne désigne personne en particulier : quelqu'un, chacun, tous, personne, rien.",
+    },
+    {
+      text: "« Rien ne bougeait dans la cour. »\n\nQuelle est la fonction du pronom « rien » ?",
+      correct: "sujet du verbe « bougeait »",
+      wrongs: [
+        "complément d'objet direct",
+        "complément circonstanciel",
+        "attribut du sujet",
+      ],
+      methode:
+        "Un pronom occupe une fonction comme un nom. « Qui est-ce qui bougeait ? » — rien.",
+    },
+    {
+      text: "« Nous nous sommes trompés. »\n\nQuel est le rôle du second « nous » ?",
+      correct: "il est le pronom réfléchi du verbe pronominal",
+      wrongs: [
+        "il répète le sujet pour insister",
+        "il est complément circonstanciel",
+        "c'est une erreur de répétition",
+      ],
+      methode:
+        "Dans un verbe pronominal, le second pronom fait corps avec le verbe : se tromper, nous nous trompons.",
+    },
+    {
+      text: "« Les tiens sont rangés dans l'armoire. »\n\nDe quelle sorte est « les tiens » ?",
+      correct: "possessif",
+      wrongs: ["démonstratif", "indéfini", "relatif"],
+      methode:
+        "Le pronom possessif remplace un nom en indiquant à qui il appartient : le mien, le tien, les nôtres.",
+    },
+  ];
+}
 
 /* ═════════════════════════════════════════════════════════════════════════
    LA CHAÎNE ANAPHORIQUE (15/08/2026) — pools des trois micro-compétences
@@ -2877,6 +3492,317 @@ function gram_chaine_reference(_level: Cycle4Level): QcmItem[] {
       wrongs: ["« cet artisan »", "« le »", "« ses »"],
       methode:
         "« Ses » et « le » renvoient au boulanger, « cet artisan » le reprend.",
+    },
+  ];
+}
+
+/* ── ORTHOGRAPHE GRAMMATICALE : les six pools manquants ────────────────────
+   ⛔ AUCUN ITEM NE DEMANDE DE RÉCITER UNE RÈGLE. On donne la phrase, l'élève
+   choisit la forme et l'explication tient dans la méthode. C'est la
+   différence entre savoir la règle et savoir accorder. */
+
+function orth_chaine_gn(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "Choisis la forme correcte : « des histoires anciennes et ___ »",
+      correct: "merveilleuses",
+      wrongs: ["merveilleuse", "merveilleux", "merveilleuses-là"],
+      methode:
+        "Les deux adjectifs se rapportent au même nom féminin pluriel : ils prennent la même marque.",
+    },
+    {
+      text: "Choisis la forme correcte : « les vieux murs ___ de la case »",
+      correct: "blanchis",
+      wrongs: ["blanchi", "blanchie", "blanchies"],
+      methode:
+        "Le participe employé comme adjectif s'accorde avec le nom : « murs » est masculin pluriel.",
+    },
+    {
+      text: "Quel groupe nominal est correctement accordé ?",
+      correct: "de longues journées ensoleillées",
+      wrongs: [
+        "de longue journées ensoleillées",
+        "de longues journée ensoleillées",
+        "de longues journées ensoleillée",
+      ],
+      methode:
+        "La marque du pluriel court sur toute la chaîne : déterminant, adjectif, nom, second adjectif.",
+    },
+    {
+      text: "Choisis la forme correcte : « une paire de gants ___ »",
+      correct: "neufs",
+      wrongs: ["neuf", "neuve", "neuves"],
+      methode:
+        "L'adjectif s'accorde avec ce qu'il qualifie vraiment : ce sont les gants qui sont neufs, pas la paire.",
+    },
+    {
+      text: "Choisis la forme correcte : « des cheveux châtain ___ »",
+      correct: "clair",
+      wrongs: ["clairs", "claire", "claires"],
+      methode:
+        "Quand deux adjectifs de couleur se suivent pour n'en former qu'un, l'ensemble reste invariable.",
+    },
+    {
+      text: "Choisis la forme correcte : « ces trois ___ chemins de montagne »",
+      correct: "étroits",
+      wrongs: ["étroit", "étroite", "étroites"],
+      methode:
+        "L'adjectif placé avant le nom s'accorde exactement comme celui placé après.",
+    },
+  ];
+}
+
+function orth_accord_attribut(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "Choisis la forme correcte : « Ces mangues semblent ___ »",
+      correct: "mûres",
+      wrongs: ["mûr", "mûre", "mûrs"],
+      methode:
+        "Après un verbe d'état — sembler, paraître, devenir — l'attribut s'accorde avec le sujet.",
+    },
+    {
+      text: "Choisis la forme correcte : « Les élèves sont ___ de leur travail. »",
+      correct: "fiers",
+      wrongs: ["fier", "fière", "fières"],
+      methode:
+        "« Être » relie le sujet à son attribut : masculin pluriel, donc « fiers ».",
+    },
+    {
+      text: "Dans « La nuit paraissait interminable », quel mot est attribut du sujet ?",
+      correct: "interminable",
+      wrongs: ["nuit", "paraissait", "la"],
+      methode:
+        "L'attribut dit ce qu'EST le sujet, à travers un verbe d'état. Il ne peut pas se déplacer.",
+    },
+    {
+      text: "Choisis la forme correcte : « Cette histoire et ce film sont ___ »",
+      correct: "passionnants",
+      wrongs: ["passionnante", "passionnantes", "passionnant"],
+      methode:
+        "Deux sujets dont l'un est masculin : l'attribut se met au masculin pluriel.",
+    },
+    {
+      text: "Choisis la forme correcte : « Elles sont restées ___ toute la soirée. »",
+      correct: "silencieuses",
+      wrongs: ["silencieux", "silencieuse", "silencieusement"],
+      methode:
+        "« Rester » est un verbe d'état : ce qui suit s'accorde. « Silencieusement » serait un adverbe, invariable.",
+    },
+    {
+      text: "Pourquoi écrit-on « Ils ont l'air heureux » et non « heureuse » ?",
+      correct: "parce que l'attribut s'accorde avec le sujet « ils »",
+      wrongs: [
+        "parce que « air » est masculin singulier",
+        "parce que l'attribut est toujours invariable",
+        "parce que « avoir » n'accorde jamais",
+      ],
+      methode:
+        "« Avoir l'air » fonctionne comme « sembler » : l'accord se fait avec celui dont on parle.",
+    },
+  ];
+}
+
+function orth_sujet_verbe_complexe(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "Choisis la forme correcte : « Le panier de mangues ___ sur la table. »",
+      correct: "est posé",
+      wrongs: ["sont posés", "sont posé", "est posés"],
+      methode:
+        "Le sujet est « le panier », pas « mangues ». Le complément du nom n'accorde jamais le verbe.",
+    },
+    {
+      text: "Choisis la forme correcte : « Sous les arbres ___ des bancs de bois. »",
+      correct: "se trouvent",
+      wrongs: ["se trouve", "se trouvait", "se trouvant"],
+      methode:
+        "Le sujet est inversé : cherche QUI fait l'action. Ce sont les bancs qui se trouvent.",
+    },
+    {
+      text: "Choisis la forme correcte : « Ni Sarah ni Maëva n'___ répondu. »",
+      correct: "ont",
+      wrongs: ["a", "avaient répondues", "ont répondues"],
+      methode:
+        "Deux sujets coordonnés, même par « ni… ni » : le verbe se met au pluriel.",
+    },
+    {
+      text: "Choisis la forme correcte : « La plupart des élèves ___ terminé. »",
+      correct: "ont",
+      wrongs: ["a", "avaient", "ayant"],
+      methode:
+        "Avec « la plupart de », l'accord se fait avec le complément : ce sont les élèves qui ont terminé.",
+    },
+    {
+      text: "Choisis la forme correcte : « Les livres que tu m'as prêtés ___ passionnants. »",
+      correct: "sont",
+      wrongs: ["est", "était", "étant"],
+      methode:
+        "Une relative sépare le sujet de son verbe : retire-la pour retrouver « les livres… sont ».",
+    },
+    {
+      text: "Choisis la forme correcte : « Toi et moi ___ raison. »",
+      correct: "avons",
+      wrongs: ["ont", "as", "a"],
+      methode:
+        "« Toi et moi » vaut « nous » : le verbe se met à la première personne du pluriel.",
+    },
+  ];
+}
+
+function orth_participe_etre(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "Choisis la forme correcte : « Elles sont ___ tôt ce matin. »",
+      correct: "parties",
+      wrongs: ["parti", "partis", "partie"],
+      methode:
+        "Avec « être », le participe passé s'accorde avec le sujet : féminin pluriel.",
+    },
+    {
+      text: "Choisis la forme correcte : « Les volets ont été ___ par le vent. »",
+      correct: "arrachés",
+      wrongs: ["arraché", "arrachée", "arrachées"],
+      methode:
+        "Même à la voix passive, l'auxiliaire est « être » : l'accord se fait avec le sujet.",
+    },
+    {
+      text: "Choisis la forme correcte : « Ma sœur et moi sommes ___ au marché. »",
+      correct: "allés",
+      wrongs: ["allé", "allée", "allées"],
+      methode:
+        "« Ma sœur et moi » vaut « nous ». Si le groupe comprend un masculin, l'accord est masculin pluriel.",
+    },
+    {
+      text: "Choisis la forme correcte : « La lettre est ___ hier. »",
+      correct: "arrivée",
+      wrongs: ["arrivé", "arrivés", "arrivées"],
+      methode:
+        "Le sujet « la lettre » est féminin singulier : le participe prend un -e.",
+    },
+    {
+      text: "Pourquoi écrit-on « Les fleurs sont fanées » avec un -s ?",
+      correct: "parce que le participe s'accorde avec le sujet « les fleurs »",
+      wrongs: [
+        "parce que le verbe est au passé",
+        "parce que « fanées » est un adjectif",
+        "parce qu'il y a plusieurs verbes",
+      ],
+      methode:
+        "Avec « être », on cherche le sujet, jamais le complément. La question est « qui est fané ? ».",
+    },
+    {
+      text: "Choisis la forme correcte : « Nous nous sommes ___ à l'entrée. »",
+      correct: "retrouvés",
+      wrongs: ["retrouvé", "retrouvée", "retrouver"],
+      methode:
+        "Verbe pronominal construit avec « être » : l'accord se fait avec le sujet « nous ».",
+    },
+  ];
+}
+
+function orth_participe_avoir(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "Choisis la forme correcte : « Les photos que j'ai ___ sont floues. »",
+      correct: "prises",
+      wrongs: ["pris", "prise", "prit"],
+      methode:
+        "Avec « avoir », le participe s'accorde si le COD est placé AVANT. Ici « que » remplace « les photos ».",
+    },
+    {
+      text: "Choisis la forme correcte : « J'ai ___ les photos hier. »",
+      correct: "pris",
+      wrongs: ["prises", "prise", "prit"],
+      methode:
+        "Même verbe, même COD — mais placé APRÈS le participe : pas d'accord.",
+    },
+    {
+      text: "Choisis la forme correcte : « Cette chanson, je l'ai ___ cent fois. »",
+      correct: "écoutée",
+      wrongs: ["écouté", "écoutés", "écoutées"],
+      methode:
+        "Le pronom « l' » reprend « cette chanson » et se trouve avant le verbe : accord au féminin singulier.",
+    },
+    {
+      text: "Choisis la forme correcte : « Les efforts qu'ils ont ___ ont payé. »",
+      correct: "fournis",
+      wrongs: ["fourni", "fournie", "fournies"],
+      methode:
+        "« Qu' » reprend « les efforts », masculin pluriel, et il précède le participe.",
+    },
+    {
+      text: "Pourquoi écrit-on « Elle a mangé des mangues » sans accord ?",
+      correct: "parce que le COD « des mangues » est placé après le participe",
+      wrongs: [
+        "parce que le sujet est féminin singulier",
+        "parce que « manger » ne s'accorde jamais",
+        "parce que « des » est un article indéfini",
+      ],
+      methode:
+        "Avec « avoir », la position du COD décide seule. Le sujet n'entre jamais en compte.",
+    },
+    {
+      text: "Choisis la forme correcte : « Quelle décision avez-vous ___ ? »",
+      correct: "prise",
+      wrongs: ["pris", "prises", "prendre"],
+      methode:
+        "« Quelle décision » est le COD, et la question le place avant le verbe : accord féminin singulier.",
+    },
+  ];
+}
+
+function orth_cod_coi_antepose(_level: Cycle4Level): QcmItem[] {
+  return [
+    {
+      text: "Choisis la forme correcte : « Ces amies, je leur ai ___ hier. »",
+      correct: "téléphoné",
+      wrongs: ["téléphonées", "téléphonée", "téléphonés"],
+      methode:
+        "On téléphone À quelqu'un : « leur » est un COI, et un COI n'accorde jamais le participe.",
+    },
+    {
+      text: "Choisis la forme correcte : « Les lettres que je lui ai ___ sont arrivées. »",
+      correct: "écrites",
+      wrongs: ["écrit", "écrite", "écrits"],
+      methode:
+        "Deux pronoms : « lui » est COI, mais « que » reprend « les lettres », qui est le COD antéposé. C'est lui qui commande.",
+    },
+    {
+      text: "Pourquoi n'écrit-on pas « Je leur ai parlées » ?",
+      correct: "parce que « leur » est un COI, et qu'un COI n'entraîne pas d'accord",
+      wrongs: [
+        "parce que « parler » est un verbe d'état",
+        "parce que le sujet est masculin",
+        "parce que le participe suit l'auxiliaire",
+      ],
+      methode:
+        "Le test : peut-on dire « parler quelqu'un » ? Non — on parle À quelqu'un. Donc COI, donc pas d'accord.",
+    },
+    {
+      text: "Choisis la forme correcte : « Ses parents, il les a ___ à la gare. »",
+      correct: "attendus",
+      wrongs: ["attendu", "attendue", "attendues"],
+      methode:
+        "On attend quelqu'un, sans préposition : « les » est un COD antéposé, l'accord se fait.",
+    },
+    {
+      text: "Choisis la forme correcte : « Ces élèves, je leur ai ___ le devoir. »",
+      correct: "rendu",
+      wrongs: ["rendus", "rendue", "rendues"],
+      methode:
+        "Le COD est « le devoir », placé après. « Leur » n'est que le COI : aucun accord.",
+    },
+    {
+      text: "Dans « Les nouvelles que je leur ai annoncées », avec quoi le participe s'accorde-t-il ?",
+      correct: "avec « que », qui reprend « les nouvelles » et qui est COD",
+      wrongs: [
+        "avec « leur », qui est placé avant",
+        "avec « je », le sujet",
+        "avec rien : il reste invariable",
+      ],
+      methode:
+        "Quand un COD et un COI précèdent tous deux le verbe, seul le COD compte.",
     },
   ];
 }
