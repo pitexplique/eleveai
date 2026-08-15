@@ -423,7 +423,16 @@ export default function TutorV4Page() {
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
   const [classe, setClasse] = useState<Classe>("6e");
+
   const [matiere, setMatiere] = useState<Matiere>("maths");
+
+  // ⛔ L'épreuve anticipée de mathématiques se passe SANS CALCULATRICE : deux
+  // heures, coefficient 2, six points d'automatismes en QCM. En première
+  // « maths spécifique », la boîte à outils reste donc fermée — on s'entraîne
+  // dans les conditions de l'épreuve, et tous les items de cette classe sont
+  // écrits pour se calculer de tête (les sujets, eux, fournissent un tableau
+  // de puissances quand un calcul le demande).
+  const calculatriceAutorisee = matiere === "maths" && classe !== "premiere";
   const [notion, setNotion] = useState("");
   const [urlInitDone, setUrlInitDone] = useState(false);
   const [showLesson, setShowLesson] = useState(false);
@@ -1486,7 +1495,7 @@ function handleInputKeyDown(
           onSave={() => void enregistrerSeance()}
         />
         {lessonModal}
-        {matiere === "maths" && <BoiteAOutils />}
+        {calculatriceAutorisee && <BoiteAOutils />}
       </>
     );
   }
@@ -2116,7 +2125,7 @@ function handleInputKeyDown(
         </aside>
       </div>
     </div>
-    {matiere === "maths" && <BoiteAOutils />}
+    {calculatriceAutorisee && <BoiteAOutils />}
   </main>
 );
 }
