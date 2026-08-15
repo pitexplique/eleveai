@@ -45,6 +45,7 @@ import { automatismesGraphiquesBank } from "./automatismes-graphiques.bank";
 import { automatismesTerminaleBank } from "./automatismes-terminale.bank";
 import { suitesPremiereBank } from "./suites-premiere.bank";
 import { suitesTerminaleBank } from "./suites-terminale.bank";
+import { fonctionsRepresentationBank } from "./fonctions-representation.bank";
 
 export const mathsStmgQuestionBank: TutorBankItemV4[] = [
   ...proportionsEvolutionsBank,
@@ -54,4 +55,5 @@ export const mathsStmgQuestionBank: TutorBankItemV4[] = [
   ...automatismesTerminaleBank,
   ...suitesPremiereBank,
   ...suitesTerminaleBank,
+  ...fonctionsRepresentationBank,
 ];
