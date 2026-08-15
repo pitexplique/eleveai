@@ -17,6 +17,10 @@ import { airesBank } from "./aires.bank";
 import { algorithmiqueBank } from "./algorithmique.bank"
 import { divisibiliteBank } from "./divisibilite.bank";
 import { parallelogrammesBank } from "./parallelogrammes.bank";
+// Les items libérés de l'évaluation nationale de 4ᵉ (Éduscol, juillet 2023) :
+// ils sont écrits sur le programme de 5ᵉ, donc ils vivent dans cette banque —
+// l'épreuve blanche de 4ᵉ y pioche, et le coach de 5ᵉ aussi.
+import { evaluationNationale4eBank } from "./evaluation-nationale-4e.bank";
 
 
 export const maths5eQuestionBank: TutorBankItemV4[] = [
@@ -34,8 +38,8 @@ export const maths5eQuestionBank: TutorBankItemV4[] = [
   ...symetrieCentraleBank,
   ...volumesBank,
   ...airesBank,
-  ...algorithmiqueBank
-
+  ...algorithmiqueBank,
+  ...evaluationNationale4eBank,
 ];
 
 export function getMaths5eQuestionBank(args?: {
