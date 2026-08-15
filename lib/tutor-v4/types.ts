@@ -417,6 +417,7 @@ export type SchoolLevel =
   | "premiere"
   | "premiere-spe"
   | "terminale-spe"
+  | "stmg"
   | "adulte"
   | "a1"
   | "a2"

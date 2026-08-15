@@ -23,6 +23,10 @@ import {
   MATIERE_YOUTUBE_LABEL,
 } from "@/lib/videos/youtubeSearch";
 
+// ⚠️ « stmg » n'y figure pas encore : ses banques sont vides au 15/08/2026, et
+// on n'annonce pas ce qui n'a rien derrière. À l'ajouter, la liste passera à
+// 15 boutons : c'est le moment de la GROUPER par cycle et par voie (générale /
+// technologique) plutôt que d'allonger la ligne.
 const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "premiere-spe", "terminale-spe", "adulte"];
 const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
 const ECONOMIE_CLASSES: Classe[] = ["eco-decouverte", "eco-college", "eco-lycee"];
@@ -63,6 +67,7 @@ function getMatiereTitle(matiere: string, classe: Classe) {
     premiere: "Première",
     "premiere-spe": "Première spé",
     "terminale-spe": "Term Spe",
+    stmg: "STMG",
     adulte: "Calculs du quotidien",
     a1: "A1",
     a2: "A2",
@@ -95,6 +100,7 @@ function getClasseNavLabel(classe: Classe) {
     premiere: "1re",
     "premiere-spe": "1re spé",
     "terminale-spe": "Term spec",
+    stmg: "STMG",
     adulte: "Adulte",
     "eco-decouverte": "D�couverte",
     "eco-college": "Coll�ge",
@@ -105,7 +111,7 @@ function getClasseNavLabel(classe: Classe) {
 }
 
 function getClasseButtonSize(classe: Classe) {
-  if (["seconde", "premiere", "premiere-spe", "terminale-spe", "adulte", "eco-decouverte", "eco-college", "eco-lycee"].includes(classe)) {
+  if (["seconde", "premiere", "premiere-spe", "terminale-spe", "stmg", "adulte", "eco-decouverte", "eco-college", "eco-lycee"].includes(classe)) {
     return "h-14 min-w-16 px-2 rounded-full text-sm leading-tight";
   }
 

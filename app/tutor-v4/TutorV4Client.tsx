@@ -356,6 +356,7 @@ function normalizeClasse(value: string | null): Classe {
     value === "premiere" ||
     value === "premiere-spe" ||
     value === "terminale-spe" ||
+    value === "stmg" ||
     value === "adulte" ||
     value === "a1" ||
     value === "a2" ||

@@ -10,6 +10,7 @@ import { loadKnowledge4eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowl
 import { loadKnowledge3eMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledge3eMaths";
 import { loadKnowledgeSecondeMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeSecondeMaths";
 import { loadKnowledgePremiereMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgePremiereMaths";
+import { loadKnowledgeStmgMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeStmgMaths";
 import { loadKnowledgePremiereSpeMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgePremiereSpeMaths";
 import { loadKnowledgeTerminaleSpeMaths} from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeTerminaleSpeMaths";
 import { loadKnowledgeAdulteMaths } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeAdulteMaths";
@@ -90,6 +91,9 @@ export async function loadKnowledgeV4(
   }
   if (classe === "premiere-spe" && matiere === "maths") {
     return loadKnowledgePremiereSpeMaths() as KnowledgePack;
+  }
+  if (classe === "stmg" && matiere === "maths") {
+    return loadKnowledgeStmgMaths() as KnowledgePack;
   }
     if (classe === "terminale-spe" && matiere === "maths") {
     return loadKnowledgeTerminaleSpeMaths() as KnowledgePack;
