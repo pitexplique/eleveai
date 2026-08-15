@@ -38,4 +38,8 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 //    probabilité conditionnelle s'y calcule uniquement sur un tableau croisé
 //    (ni arbre, ni probabilités totales).
 
-export const mathsStmgQuestionBank: TutorBankItemV4[] = [];
+import { proportionsEvolutionsBank } from "./proportions-evolutions.bank";
+
+export const mathsStmgQuestionBank: TutorBankItemV4[] = [
+  ...proportionsEvolutionsBank,
+];
