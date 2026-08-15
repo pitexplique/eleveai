@@ -1036,6 +1036,597 @@ Alors, se parlent-ils ? Ils se transmettent des informations, sans aucun doute. 
 };
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   SIX TEXTES DE PLUS, TROIS PAR NIVEAU (15/08/2026)
+   ---------------------------------------------------------------------------
+   ⛔ LE DÉFAUT ÉTAIT INVISIBLE. `simuler-epreuves-blanches.ts` annonçait
+   10/10 passages complets : l'épreuve servait bien ses cinq questions
+   d'écrit, sur un vrai texte, à chaque fois. Mais en comptant les ÉNONCÉS
+   DISTINCTS, on trouvait **15 pour 50 posés** — trois textes seulement, et
+   une question déjà vue dès le 2ᵉ ou le 3ᵉ passage. Un compteur de
+   complétude ne dit rien de la répétition.
+   📏 Mesuré avant : 15 énoncés distincts, 3 textes, répétition au passage 2
+   en 4ᵉ et au passage 3 en 6ᵉ.
+
+   ⭐ CE QU'ILS TESTENT, ET POURQUOI. Les résultats 2025 sont sans ambiguïté :
+   ce qui manque n'est pas le prélèvement d'information — les élèves y sont
+   proches du national — mais **l'implicite, l'inférence et la visée**. En 6ᵉ,
+   « établir des inférences (réussite complète) » tombe à 13 %, « rendre
+   compte du sens global » à 23 %. En 4ᵉ, « comprendre des informations
+   implicites » à 13 %, « rendre compte de la visée de chaque document » à
+   17 %, avec 30 % d'élèves « à besoins » contre 20 % au national.
+   Ces six textes sont donc écrits POUR qu'on ne puisse pas y répondre en
+   recopiant une phrase : ce qui est demandé n'est jamais écrit tel quel.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+const LE_VELO_DE_MALO: SupportTexte = {
+  id: "cm2_velo_de_malo",
+  kicker: "Texte littéraire",
+  titre: "Le vélo de Malo",
+  source: "Texte original — EleveAI",
+  texte: `Le vélo était appuyé contre le mur du garage depuis l'hiver. La chaîne avait rouillé, le pneu arrière était à plat, et Malo ne le regardait plus en passant.
+
+Ce samedi-là, il partit tôt avec sa mère au marché de Saint-Louis. Ils rentrèrent vers midi, les bras chargés.
+
+Le vélo n'était plus contre le mur. Il était au milieu de la cour, droit sur sa béquille. La chaîne brillait. Les deux pneus étaient gonflés.
+
+Malo se tourna vers le garage. La porte était ouverte, et il aperçut, sur l'établi, un chiffon noir et une burette d'huile posée de travers.
+
+Son père était assis sous la varangue, un journal ouvert devant lui. Il ne leva pas les yeux.
+
+« Il fait beau », dit-il simplement.
+
+Malo resta un moment sans bouger. Puis il attrapa le guidon, poussa le vélo jusqu'au portail, et se retourna une dernière fois.
+
+Son père tournait une page. Mais le journal, remarqua Malo, était à l'envers.`,
+  questions: [
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_implicite",
+      text: "Qui a réparé le vélo ?",
+      choices: [
+        "le père de Malo",
+        "Malo lui-même",
+        "la mère de Malo",
+        "un voisin",
+      ],
+      expected: "le père de Malo",
+      explanation:
+        "Le texte ne le dit jamais. Il donne des indices : le chiffon et l'huile dans le garage, le père seul à la maison, et son silence. Comprendre un texte, c'est aussi lire ce qu'il montre sans le dire.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_implicite",
+      text: "Que nous apprend la dernière phrase, « le journal était à l'envers » ?",
+      choices: [
+        "le père ne lisait pas : il guettait la réaction de Malo",
+        "le père a mal rangé son journal",
+        "le père ne sait pas lire",
+        "le journal était mal imprimé",
+      ],
+      expected: "le père ne lisait pas : il guettait la réaction de Malo",
+      explanation:
+        "Un détail placé en dernière phrase n'est jamais un hasard. Celui-ci dit toute l'émotion que le père n'a pas voulu montrer.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_essentiel",
+      text: "Pourquoi le père dit-il seulement « Il fait beau » ?",
+      choices: [
+        "parce qu'il ne veut pas parler de ce qu'il a fait",
+        "parce qu'il n'a pas vu le vélo",
+        "parce qu'il veut que Malo sorte",
+        "parce qu'il parle de la météo du lendemain",
+      ],
+      expected: "parce qu'il ne veut pas parler de ce qu'il a fait",
+      explanation:
+        "Ce que dit un personnage compte moins que ce qu'il évite de dire. Le père détourne la conversation au lieu de réclamer un merci.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_autonomie",
+      text: "Combien de temps le vélo est-il resté sans servir ?",
+      choices: [
+        "depuis l'hiver",
+        "depuis une semaine",
+        "depuis samedi",
+        "le texte ne le dit pas",
+      ],
+      expected: "depuis l'hiver",
+      explanation:
+        "L'information est donnée dès la première phrase. Toutes les questions ne demandent pas d'inférence : certaines vérifient qu'on a lu.",
+    },
+    {
+      notionId: "lecture_oeuvres",
+      microId: "cm2_oeuvre_theme",
+      text: "Quel est le thème principal de ce texte ?",
+      choices: [
+        "une attention qu'on donne sans le dire",
+        "la réparation d'un vélo",
+        "une matinée au marché",
+        "une dispute entre un père et son fils",
+      ],
+      expected: "une attention qu'on donne sans le dire",
+      explanation:
+        "Le vélo n'est que le prétexte. Ce que le texte raconte, c'est une manière d'aimer qui passe par les gestes plutôt que par les mots.",
+    },
+  ],
+};
+
+const LA_LETTRE_DE_TANTINE: SupportTexte = {
+  id: "cm2_lettre_de_tantine",
+  kicker: "Texte littéraire",
+  titre: "La lettre de Tantine Rosa",
+  source: "Texte original — EleveAI",
+  texte: `Chaque année, pour son anniversaire, Élise recevait une lettre de Tantine Rosa. Toujours la même enveloppe bleue, toujours la même écriture penchée.
+
+Cette année, l'enveloppe est arrivée avec trois jours d'avance.
+
+Élise l'a ouverte dans sa chambre. La lettre était plus courte que d'habitude. Tantine racontait le jardin, les letchis qui avaient bien donné, la pluie de la semaine passée. Rien d'autre.
+
+À la fin, au lieu de « à très bientôt », il y avait écrit : « Prends soin de toi, ma grande. »
+
+Élise a relu cette ligne plusieurs fois. Puis elle est descendue à la cuisine. Sa mère parlait au téléphone, dos tourné, la voix basse. Elle a raccroché en voyant Élise.
+
+« C'était Tantine ? » a demandé Élise.
+
+Sa mère a mis un peu trop de temps à répondre.
+
+« Tu as fini tes devoirs ? »`,
+  questions: [
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_implicite",
+      text: "Qu'est-ce qui laisse penser que quelque chose ne va pas ?",
+      choices: [
+        "la lettre est arrivée en avance, elle est plus courte, et la formule de fin a changé",
+        "Tantine parle du jardin et des letchis",
+        "Élise a lu la lettre dans sa chambre",
+        "la mère demande si les devoirs sont finis",
+      ],
+      expected:
+        "la lettre est arrivée en avance, elle est plus courte, et la formule de fin a changé",
+      explanation:
+        "Aucun de ces détails ne dit quoi que ce soit tout seul. C'est leur accumulation, et le fait qu'ils rompent tous une habitude, qui alerte le lecteur.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_implicite",
+      text: "Pourquoi la mère met-elle « un peu trop de temps à répondre » ?",
+      choices: [
+        "parce qu'elle cherche quoi dire à Élise",
+        "parce qu'elle n'a pas entendu la question",
+        "parce qu'elle est fâchée",
+        "parce qu'elle pense aux devoirs",
+      ],
+      expected: "parce qu'elle cherche quoi dire à Élise",
+      explanation:
+        "L'hésitation est le seul indice donné, et le narrateur la souligne — « un peu trop ». Ce silence en dit plus que la réponse qui suit.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_essentiel",
+      text: "Que fait la mère au lieu de répondre à la question d'Élise ?",
+      choices: [
+        "elle pose une autre question",
+        "elle raccroche le téléphone",
+        "elle sort de la cuisine",
+        "elle lit la lettre",
+      ],
+      expected: "elle pose une autre question",
+      explanation:
+        "Répondre à une question par une autre est une manière d'éviter. Le texte s'arrête là, et c'est au lecteur de comprendre pourquoi.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_autonomie",
+      text: "Qu'est-ce qui, dans la lettre, était toujours pareil les autres années ?",
+      choices: [
+        "l'enveloppe bleue et l'écriture penchée",
+        "la longueur de la lettre",
+        "la date d'arrivée",
+        "la formule de fin",
+      ],
+      expected: "l'enveloppe bleue et l'écriture penchée",
+      explanation:
+        "Le texte pose les habitudes au début précisément pour qu'on remarque, ensuite, tout ce qui change.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_genres",
+      text: "Comment se termine ce texte ?",
+      choices: [
+        "sur une question qui laisse le lecteur dans le doute",
+        "sur une explication complète",
+        "sur une dispute",
+        "sur le départ d'Élise",
+      ],
+      expected: "sur une question qui laisse le lecteur dans le doute",
+      explanation:
+        "Certains récits ne concluent pas : ils s'arrêtent au moment où le lecteur a compris, et le laissent avec ce qu'il a compris.",
+    },
+  ],
+};
+
+const DOCUMENT_MANGROVE_CM2: SupportTexte = {
+  id: "cm2_document_mangrove",
+  kicker: "Document composite",
+  titre: "À quoi sert une mangrove ?",
+  source: "Document original — EleveAI",
+  texte: `TITRE DU DOCUMENT : La mangrove, une forêt qui a les pieds dans l'eau
+
+CHAPEAU : On la prend souvent pour un marécage sans intérêt. C'est en réalité l'un des milieux les plus utiles du littoral tropical.
+
+PARAGRAPHE 1 — Des arbres sur pilotis
+Les palétuviers poussent dans l'eau salée. Leurs racines sortent de la vase comme des échasses. Cet enchevêtrement retient la terre et empêche la côte de s'effriter.
+
+PARAGRAPHE 2 — Un rempart contre la mer
+Quand une forte houle arrive, elle traverse d'abord la mangrove. Les racines cassent la force des vagues. Derrière, les habitations reçoivent une eau beaucoup moins puissante.
+
+PARAGRAPHE 3 — Une nurserie
+Les jeunes poissons s'y cachent des prédateurs, qui ne peuvent pas circuler entre les racines. Beaucoup d'espèces pêchées au large ont commencé leur vie dans une mangrove.
+
+ENCADRÉ — Un chiffre : environ un tiers des mangroves du monde ont disparu en quarante ans, remplacées par des cultures, des ports et des hôtels.
+
+LÉGENDE DU SCHÉMA : coupe d'une mangrove — de gauche à droite : la mer, les racines en échasses, la vase, puis le village.`,
+  questions: [
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_doc_composite",
+      text: "Quels éléments composent ce document ?",
+      choices: [
+        "un titre, un chapeau, trois paragraphes, un encadré et un schéma légendé",
+        "un titre et un seul long paragraphe",
+        "une interview et une photographie",
+        "un poème et sa traduction",
+      ],
+      expected:
+        "un titre, un chapeau, trois paragraphes, un encadré et un schéma légendé",
+      explanation:
+        "Savoir nommer les parties d'un document, c'est déjà savoir où chercher une information : le chapeau résume, l'encadré isole un chiffre, la légende explique l'image.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_doc_croiser_infos",
+      text: "D'après le schéma et le paragraphe 2, pourquoi le village est-il protégé ?",
+      choices: [
+        "parce que les racines se trouvent entre la mer et lui, et cassent la force des vagues",
+        "parce que le village est construit en hauteur",
+        "parce que la vase absorbe l'eau",
+        "parce que les poissons éloignent la houle",
+      ],
+      expected:
+        "parce que les racines se trouvent entre la mer et lui, et cassent la force des vagues",
+      explanation:
+        "Ni le texte ni le schéma ne suffisent seuls : c'est l'ordre donné par la légende, mer puis racines puis village, qui rend le paragraphe 2 concret.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_implicite",
+      text: "L'encadré donne un chiffre. Que cherche-t-il à faire comprendre ?",
+      choices: [
+        "que cette protection est en train de disparaître",
+        "que les mangroves sont trop nombreuses",
+        "que les hôtels sont bien construits",
+        "que les mangroves poussent vite",
+      ],
+      expected: "que cette protection est en train de disparaître",
+      explanation:
+        "L'encadré ne le dit pas. Mais placé après trois paragraphes qui expliquent l'utilité de la mangrove, le chiffre prend le sens d'un avertissement.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_essentiel",
+      text: "Pourquoi les jeunes poissons sont-ils en sécurité dans la mangrove ?",
+      choices: [
+        "parce que les prédateurs ne peuvent pas circuler entre les racines",
+        "parce que l'eau y est plus froide",
+        "parce qu'il y a beaucoup de nourriture",
+        "parce que les pêcheurs n'y vont pas",
+      ],
+      expected:
+        "parce que les prédateurs ne peuvent pas circuler entre les racines",
+      explanation:
+        "La raison est donnée dans le paragraphe 3, juste après l'affirmation. Un document explicatif justifie presque toujours ce qu'il avance.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_autonomie",
+      text: "Quelle est l'intention de ce document ?",
+      choices: [
+        "montrer qu'un milieu qu'on croit inutile rend en réalité de grands services",
+        "apprendre à reconnaître les espèces de poissons",
+        "raconter l'histoire d'un village du littoral",
+        "expliquer comment planter un palétuvier",
+      ],
+      expected:
+        "montrer qu'un milieu qu'on croit inutile rend en réalité de grands services",
+      explanation:
+        "Le chapeau annonce déjà cette intention — « on la prend souvent pour un marécage sans intérêt » — et tout le reste du document la démontre.",
+    },
+  ],
+};
+
+const LE_CONCOURS_5E: SupportTexte = {
+  id: "5e_le_concours",
+  kicker: "Texte littéraire",
+  titre: "Le concours",
+  source: "Texte original — EleveAI",
+  texte: `Ils étaient onze à attendre les résultats, adossés au mur du gymnase. Nolan relisait ses mains.
+
+Quand madame Ferrand est sortie avec la feuille, personne n'a bougé. Elle a lu les trois premiers noms. Nolan n'y était pas.
+
+Autour de lui, deux garçons se sont serrés dans les bras. Un autre a shooté dans un gravier. Nolan, lui, a hoché la tête lentement, comme s'il approuvait quelque chose, et il a souri.
+
+« Tu le prends bien », a dit Sarah.
+
+« C'est un concours », a répondu Nolan.
+
+Il a ramassé son sac, l'a mis sur une épaule, et il est parti vers le portail sans attendre les autres. Il marchait vite. Trop vite pour quelqu'un qui n'a nulle part où aller.
+
+Le lendemain matin, il était au gymnase à sept heures. Seul. La liste des résultats était encore affichée sur la porte. Il ne l'a pas regardée.
+
+Il est entré, et il a recommencé à s'entraîner.`,
+  questions: [
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_implicite",
+      text: "Que ressent réellement Nolan à l'annonce des résultats ?",
+      choices: [
+        "de la déception, qu'il s'efforce de cacher",
+        "de l'indifférence : le concours lui importait peu",
+        "de la joie pour ses camarades",
+        "de la colère contre madame Ferrand",
+      ],
+      expected: "de la déception, qu'il s'efforce de cacher",
+      explanation:
+        "Le sourire et le hochement de tête disent le contraire de ce que fait le corps : il part sans attendre personne et marche trop vite. Ce sont les gestes qui trahissent, pas les mots.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "Quelle phrase du texte contredit le plus nettement le calme apparent de Nolan ?",
+      choices: [
+        "« Trop vite pour quelqu'un qui n'a nulle part où aller. »",
+        "« C'est un concours », a répondu Nolan.",
+        "« Il a ramassé son sac. »",
+        "« Ils étaient onze à attendre. »",
+      ],
+      expected: "« Trop vite pour quelqu'un qui n'a nulle part où aller. »",
+      explanation:
+        "C'est la seule phrase où le narrateur commente au lieu de décrire. Ce commentaire est un signal : il invite le lecteur à ne pas croire l'apparence.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_implicite",
+      text: "Pourquoi Nolan ne regarde-t-il pas la liste, le lendemain ?",
+      choices: [
+        "parce qu'il a décidé de regarder devant plutôt que derrière",
+        "parce qu'il ne sait pas encore les résultats",
+        "parce qu'il fait trop sombre",
+        "parce que la liste a été retirée",
+      ],
+      expected: "parce qu'il a décidé de regarder devant plutôt que derrière",
+      explanation:
+        "Le texte insiste : la liste est « encore affichée », et il « ne l'a pas regardée ». Ce refus est un choix, et il annonce la dernière phrase.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_sens_global",
+      text: "Que raconte ce texte, au fond ?",
+      choices: [
+        "la façon dont on encaisse un échec sans le montrer, et ce qu'on en fait",
+        "l'organisation d'un concours sportif",
+        "une amitié entre Nolan et Sarah",
+        "l'injustice d'un classement",
+      ],
+      expected:
+        "la façon dont on encaisse un échec sans le montrer, et ce qu'on en fait",
+      explanation:
+        "Le concours n'est qu'un cadre. Le texte s'intéresse à ce que Nolan fait de sa déception — et la dernière phrase donne la réponse.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_apprecier",
+      text: "Quel effet produit la dernière phrase, « il a recommencé à s'entraîner » ?",
+      choices: [
+        "elle donne au personnage une force que rien n'avait annoncée ouvertement",
+        "elle montre que Nolan n'a pas compris les résultats",
+        "elle suggère qu'il abandonnera bientôt",
+        "elle referme l'histoire sur un échec",
+      ],
+      expected:
+        "elle donne au personnage une force que rien n'avait annoncée ouvertement",
+      explanation:
+        "Une chute brève après un récit retenu frappe d'autant plus fort. Le texte n'explique rien : il montre, et laisse le lecteur juger.",
+    },
+  ],
+};
+
+const LE_GARDIEN_DU_PHARE_5E: SupportTexte = {
+  id: "5e_gardien_du_phare",
+  kicker: "Texte littéraire",
+  titre: "Le gardien",
+  source: "Texte original — EleveAI",
+  texte: `On disait dans le village que le vieux Firmin n'avait jamais quitté la pointe. Quarante ans à monter les cent trente marches, deux fois par nuit.
+
+Le phare a été automatisé un mardi de novembre. Un technicien est venu, a posé une armoire grise au pied de l'escalier, et il est reparti avant midi.
+
+Firmin a continué de monter. Personne ne le lui avait demandé. Il vérifiait la lentille, essuyait le verre, redescendait. La lumière tournait très bien sans lui.
+
+L'hiver, on le voyait moins. Au printemps, plus du tout.
+
+Un matin de juin, des marcheurs ont trouvé la porte du phare ouverte et l'escalier balayé de frais. En haut, le verre de la lentille était propre. Il n'y avait personne.
+
+Depuis, les gens du village disent que le phare est bien entretenu. Ils ne disent pas par qui.`,
+  questions: [
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_implicite",
+      text: "Pourquoi Firmin continue-t-il de monter après l'automatisation ?",
+      choices: [
+        "parce que ce travail est ce qui donne sens à ses journées",
+        "parce que la machine ne fonctionne pas bien",
+        "parce qu'on le lui a demandé",
+        "parce qu'il est payé pour cela",
+      ],
+      expected: "parce que ce travail est ce qui donne sens à ses journées",
+      explanation:
+        "Le texte écarte lui-même les autres explications : « Personne ne le lui avait demandé », « La lumière tournait très bien sans lui ». Ce qui reste est l'attachement.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_sens_global",
+      text: "Quelle atmosphère se dégage de ce texte ?",
+      choices: [
+        "une mélancolie retenue, sans plainte",
+        "une tension inquiétante",
+        "une gaieté légère",
+        "une colère contre le progrès",
+      ],
+      expected: "une mélancolie retenue, sans plainte",
+      explanation:
+        "Rien n'est dit de la tristesse de Firmin. Elle passe par des faits brefs et par ce que le texte tait : c'est cette retenue qui crée l'atmosphère.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "Quels indices suggèrent que quelqu'un entretient encore le phare ?",
+      choices: [
+        "la porte ouverte, l'escalier balayé de frais, le verre propre",
+        "l'armoire grise au pied de l'escalier",
+        "les cent trente marches",
+        "la venue du technicien",
+      ],
+      expected: "la porte ouverte, l'escalier balayé de frais, le verre propre",
+      explanation:
+        "Trois traces, aucune explication. Le texte donne des preuves d'une présence sans jamais nommer celui qui les laisse.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_implicite",
+      text: "Que veut dire la dernière phrase : « Ils ne disent pas par qui » ?",
+      choices: [
+        "les villageois préfèrent ne pas trancher sur ce qu'ils croient",
+        "les villageois ignorent tout du phare",
+        "personne n'entretient le phare",
+        "le technicien revient chaque semaine",
+      ],
+      expected: "les villageois préfèrent ne pas trancher sur ce qu'ils croient",
+      explanation:
+        "La phrase joue sur ce qui n'est pas dit. Elle laisse ouvertes deux lectures — le souvenir de Firmin, ou quelqu'un qui a pris sa suite — et refuse de choisir.",
+    },
+    {
+      notionId: "culture_litteraire",
+      microId: "5e_culture_genres",
+      text: "À quel genre ce texte se rattache-t-il le plus nettement ?",
+      choices: [
+        "un récit bref, proche de la nouvelle, à chute suggérée",
+        "un article de presse",
+        "une notice technique",
+        "un poème en prose",
+      ],
+      expected: "un récit bref, proche de la nouvelle, à chute suggérée",
+      explanation:
+        "Peu de personnages, un temps resserré, et une fin qui suggère au lieu d'expliquer : ce sont les marques de la nouvelle.",
+    },
+  ],
+};
+
+const DOCUMENTS_LUMIERE_5E: SupportTexte = {
+  id: "5e_documents_lumiere",
+  kicker: "Groupement de documents",
+  titre: "Faut-il éteindre la lumière la nuit ?",
+  source: "Documents originaux — EleveAI",
+  texte: `DOCUMENT 1 — Article d'information
+
+Depuis quinze ans, plusieurs communes éteignent leur éclairage public entre minuit et cinq heures. Les économies d'électricité constatées vont de 30 à 50 %. Les études menées sur ces communes n'ont pas relevé de hausse des cambriolages ni des accidents. Les insectes nocturnes, eux, retrouvent leurs déplacements habituels : une lampe allumée en attire des milliers, qui meurent d'épuisement autour d'elle.
+
+DOCUMENT 2 — Tribune signée par un commerçant
+
+« On nous parle d'économies. Mais qui pense à ceux qui rentrent tard ? Ma boulangerie ouvre à quatre heures. Mes employées traversent un bourg noir. On me répond que les chiffres sont rassurants — les chiffres ne marchent pas seuls dans la rue. Je ne demande pas qu'on rallume partout. Je demande qu'on éclaire les trajets qui servent encore à cette heure-là. »
+
+DOCUMENT 3 — Encadré chiffré
+
+Éclairage public : environ 40 % de la facture d'électricité d'une commune.
+Communes françaises pratiquant l'extinction totale ou partielle : plus de 12 000.`,
+  questions: [
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_sens_global",
+      text: "Quelle est la visée du document 1 ?",
+      choices: [
+        "informer en présentant des faits mesurés",
+        "convaincre d'éteindre partout",
+        "raconter l'histoire de l'éclairage public",
+        "défendre les commerçants",
+      ],
+      expected: "informer en présentant des faits mesurés",
+      explanation:
+        "Le document 1 aligne des constats sans prendre parti. C'est la marque du texte informatif : il rapporte, il ne réclame rien.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_implicite",
+      text: "Quelle est la visée du document 2, et en quoi diffère-t-elle de la première ?",
+      choices: [
+        "convaincre : il défend un point de vue à partir d'une expérience personnelle",
+        "informer : il donne les mêmes chiffres autrement",
+        "raconter une histoire vécue, sans intention",
+        "expliquer le fonctionnement de l'éclairage",
+      ],
+      expected:
+        "convaincre : il défend un point de vue à partir d'une expérience personnelle",
+      explanation:
+        "Une tribune est signée et engagée. Reconnaître la visée d'un document, c'est d'abord regarder qui parle et ce qu'il demande.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "Que reproche le commerçant aux chiffres du document 1 ?",
+      choices: [
+        "qu'ils ne rendent pas compte du sentiment de ceux qui marchent la nuit",
+        "qu'ils sont faux",
+        "qu'ils sont trop anciens",
+        "qu'ils ont été calculés par les communes",
+      ],
+      expected:
+        "qu'ils ne rendent pas compte du sentiment de ceux qui marchent la nuit",
+      explanation:
+        "Il ne conteste pas les chiffres : « les chiffres ne marchent pas seuls dans la rue ». Son objection porte sur ce qu'ils ne mesurent pas.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_apprecier",
+      text: "En croisant les trois documents, que peut-on dire de la demande du commerçant ?",
+      choices: [
+        "elle est modérée : il réclame un éclairage ciblé, pas un retour en arrière",
+        "elle contredit tous les chiffres donnés",
+        "elle demande de rallumer toute la nuit",
+        "elle rejoint exactement la position du document 1",
+      ],
+      expected:
+        "elle est modérée : il réclame un éclairage ciblé, pas un retour en arrière",
+      explanation:
+        "Il le précise lui-même : « Je ne demande pas qu'on rallume partout. » Lire un débat, c'est mesurer l'écart réel entre les positions, pas le supposer maximal.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "Quelle information n'est donnée QUE par le document 3 ?",
+      choices: [
+        "la part de l'éclairage dans la facture d'une commune",
+        "les économies constatées",
+        "l'effet sur les insectes",
+        "les horaires de la boulangerie",
+      ],
+      expected: "la part de l'éclairage dans la facture d'une commune",
+      explanation:
+        "Dans un groupement, chaque document apporte quelque chose que les autres n'ont pas. Repérer ce qui est unique évite de tout confondre.",
+    },
+  ],
+};
+
+/* ═══════════════════════════════════════════════════════════════════════════
    SIX ENREGISTREMENTS DE PLUS, TROIS PAR NIVEAU (15/08/2026)
    ---------------------------------------------------------------------------
    ⭐ POURQUOI : c'était le goulot, et il était chiffré. `simuler-epreuves-
@@ -2501,15 +3092,26 @@ Il n'y avait ni thermomètre ni carnet à ces époques. L'arbre, lui, prenait de
 // Le récit d'abord, le document ensuite, l'oral en dernier : c'est l'ordre de
 // l'épreuve officielle, et le tirage choisit celui dont l'élève a vu le moins
 // de questions.
+// SIX TEXTES DE PLUS depuis le 15/08 (trois par niveau). ⚠️ Le compteur de
+// complétude ne voyait rien : l'épreuve servait bien ses 5 questions d'écrit
+// à chaque passage, mais sur 15 énoncés distincts seulement, et une question
+// revenait dès le 2ᵉ ou 3ᵉ passage. C'est la RÉPÉTITION qu'il fallait mesurer,
+// pas la complétude.
 export const SUPPORTS_CM2: SupportTexte[] = [
   POISSON_DE_LUDOVIC,
   MANGUIER_DE_MADAME_LUCIE,
   DOCUMENT_SOMMEIL_CM2,
+  LE_VELO_DE_MALO,
+  LA_LETTRE_DE_TANTINE,
+  DOCUMENT_MANGROVE_CM2,
 ];
 export const SUPPORTS_5E: SupportTexte[] = [
   AVIS_DE_CYCLONE,
   LA_BOURSE_DU_MARCHAND,
   DOCUMENT_ECRANS_5E,
+  LE_CONCOURS_5E,
+  LE_GARDIEN_DU_PHARE_5E,
+  DOCUMENTS_LUMIERE_5E,
 ];
 
 // CINQ ENREGISTREMENTS PAR NIVEAU depuis le 15/08 (deux auparavant). Le thème
