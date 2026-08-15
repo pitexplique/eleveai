@@ -94,9 +94,12 @@ export type ConfigEpreuve = {
    * Ce qu'on écrit à l'élève sur la page d'accueil en dépend, et ce n'est pas
    * un détail de formulation : lui promettre « la même épreuve » quand on lui
    * en pose un tiers, c'est lui mentir sur ce qu'il vient de mesurer.
-   * Seule l'épreuve de 6ᵉ en maths est dans ce cas — le document professeur de
-   * la DEPP en donne les effectifs exacts, aucun équivalent n'est publié pour
-   * les trois autres.
+   * LES DEUX ÉPREUVES DE MATHS sont dans ce cas. En 6ᵉ, le document professeur
+   * de la DEPP donne tout — total, durée, effectifs par domaine et barèmes. En
+   * 4ᵉ (15/08), il donne le total, la durée et les effectifs des deux tests
+   * spécifiques, mais ni la répartition par domaine ni les barèmes : le volume
+   * est donc bien celui du jour J, et c'est tout ce que ce drapeau promet à
+   * l'élève. Rien d'équivalent n'est publié pour les deux épreuves de français.
    */
   volumeOfficiel?: boolean;
   /**
@@ -116,7 +119,14 @@ export type ConfigEpreuve = {
     id: TypeItem;
     label: string;
     quoi: string;
-    seuils: SeuilsMaitrise;
+    /**
+     * Seuils officiels du test. OPTIONNELS depuis le 15/08, avec la 4ᵉ : son
+     * sujet nous donne les effectifs des deux tests, pas leurs barèmes. Les
+     * rendre obligatoires forçait à en écrire un — et un barème inventé est
+     * pire qu'une proportion assumée, parce qu'il range avec l'autorité du
+     * chiffre officiel. Absents, on retombe sur le 30 % / 60 %.
+     */
+    seuils?: SeuilsMaitrise;
   }[];
   /**
    * Range une micro-compétence dans un test spécifique. Ce qui n'y figure pas
@@ -498,6 +508,17 @@ function tirerTheme(
 }
 
 /**
+ * COMBIEN DE FOIS ON RELANCE UN GÉNÉRATEUR avant de renoncer à l'item.
+ *
+ * Douze, et le chiffre se calcule plutôt qu'il ne se choisit : un gabarit dont
+ * il reste un énoncé neuf sur dix le rend avec une probabilité de 1 − 0,9¹²,
+ * soit 72 %. Monter plus haut ne rachète que des gabarits déjà presque
+ * épuisés, et chaque essai coûte un `generate()` — mesuré à 62 questions,
+ * l'épreuve entière se tire toujours en moins d'une seconde.
+ */
+const ESSAIS_PAR_GABARIT = 12;
+
+/**
  * Une tranche du tirage : les questions d'un même test spécifique, prises en
  * TOURNANT sur les notions du domaine plutôt qu'en piochant au hasard dans le
  * tas — sans ça, une notion à 200 items rafle tout et le domaine ne teste
@@ -512,25 +533,46 @@ function tirerTranche(
   textesDuTirage: Set<string>,
   microsPris: Set<string>,
 ): QuestionEval[] {
-  // AUCUN PRÉ-FILTRE SUR L'ID : on ne peut juger qu'après génération, puisque
-  // « déjà vu » porte désormais sur l'énoncé et non sur l'item. Le type, lui,
-  // se lit sur la micro-compétence sans rien générer : il se filtre ici.
-  const parNotion = melanger(theme.notions).map((notionId) =>
-    melanger(
-      config.banque.filter(
-        (item) =>
-          item.notionId === notionId &&
-          (!filtrerParType ||
-            typeDeMicro(config, item.microId) === tranche.type),
-      ),
-    ),
-  );
-
   const questions: QuestionEval[] = [];
 
   // Deux passes : la première refuse deux fois la même micro-compétence
   // (le bilan doit couvrir large), la seconde accepte tout pour compléter.
   for (const strict of [true, false]) {
+    // ⭐ LES PILES SONT RECONSTITUÉES À CHAQUE PASSE (corrigé le 15/08), et
+    // c'est ce qui rendait la seconde inutile.
+    //
+    // La passe stricte dépile jusqu'à trouver une micro-compétence encore
+    // libre, en jetant au passage tout ce qu'elle refuse — les items sans QCM
+    // et ceux dont l'énoncé est déjà tombé. Une micro-compétence à bout de
+    // souffle vide donc la pile de SA NOTION : `volume_assemblage` n'a que
+    // deux énoncés, et dès le deuxième passage ses dix items sont dix échecs
+    // qui emportent avec eux la place des items de `volume_defi`, lequel en a
+    // trois cent trente et un. La passe permissive héritait d'une pile à sec
+    // et ne complétait rien.
+    //
+    // Mesuré sur la tranche « grandeurs / résolution de problèmes » : la
+    // passe stricte consommait 29 items pour 3 questions, et laissait 16
+    // items dont plus aucun n'était jouable. L'épreuve tombait à 4 sur 8 dans
+    // un domaine qui a 458 énoncés en réserve.
+    //
+    // On repart donc de la banque entière pour la seconde passe. Le coût est
+    // de re-générer quelques items déjà écartés ; le gain est que le vivier
+    // réel redevient accessible.
+    //
+    // ⚠️ AUCUN PRÉ-FILTRE SUR L'ID : on ne peut juger qu'après génération,
+    // puisque « déjà vu » porte sur l'énoncé et non sur l'item. Le type, lui,
+    // se lit sur la micro-compétence sans rien générer : il se filtre ici.
+    const parNotion = melanger(theme.notions).map((notionId) =>
+      melanger(
+        config.banque.filter(
+          (item) =>
+            item.notionId === notionId &&
+            (!filtrerParType ||
+              typeDeMicro(config, item.microId) === tranche.type),
+        ),
+      ),
+    );
+
     // ⚠️ COMPTEUR REMIS À ZÉRO À CHAQUE PASSE. Partagé, il était épuisé par la
     // passe stricte — qui tourne à vide une fois toutes les micro-compétences
     // prises, puisque les recalés lui reviennent — et la passe permissive
@@ -571,17 +613,33 @@ function tirerTranche(
             recales.push(item);
             continue;
           }
-          const candidat = materialiser(item, config);
-          // Déjà tombé lors d'un passage précédent, ou déjà dans CETTE
-          // épreuve : deux gabarits différents peuvent produire le même
-          // énoncé.
-          if (
-            !candidat ||
-            dejaVus.has(candidat.cle) ||
-            textesDuTirage.has(candidat.text)
-          ) {
-            continue;
+          // ⭐ UN GABARIT A DROIT À PLUSIEURS TIRAGES (corrigé le 15/08). Il
+          // n'en avait qu'un : `generate()` était appelé une fois, et si
+          // l'énoncé sorti avait déjà été vu, l'item était écarté — avec tous
+          // les autres énoncés qu'il savait encore produire. Un gabarit à
+          // trente-cinq énoncés valait donc UN énoncé par tirage de tranche,
+          // exactement comme un item figé. C'est ce qui faisait tomber
+          // l'épreuve de 4ᵉ en maths de 62 questions à 52 dès le quatrième
+          // passage, alors que la banque en avait de quoi en servir des
+          // centaines. Le vivier n'était pas maigre : on n'y puisait pas.
+          const essais = item.kind === "template" ? ESSAIS_PAR_GABARIT : 1;
+          let candidat: QuestionEval | null = null;
+          for (let essai = 0; essai < essais; essai += 1) {
+            const tire = materialiser(item, config);
+            // Déjà tombé lors d'un passage précédent, ou déjà dans CETTE
+            // épreuve : deux gabarits différents peuvent produire le même
+            // énoncé. On retire — un générateur en a souvent d'autres.
+            if (
+              !tire ||
+              dejaVus.has(tire.cle) ||
+              textesDuTirage.has(tire.text)
+            ) {
+              continue;
+            }
+            candidat = tire;
+            break;
           }
+          if (!candidat) continue;
           retenue = candidat;
           microRetenu = item.microId;
           break;
