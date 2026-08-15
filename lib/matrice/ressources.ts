@@ -720,6 +720,11 @@ export const RESSOURCES: RessourceEleveAI[] = [
     ["energie", "L'énergie de l'effort", "Ce que ton corps dépense, en vrai.", ["proportionnalite", "grandeurs", "fonctions"]],
     ["sucre", "Le sucre de la canne", "De la canne au sucre, en proportions.", ["proportionnalite", "grandeurs"]],
     ["fromage", "La fromagerie", "Du lait au fromage, tout est affaire de rapport.", ["proportionnalite", "grandeurs"]],
+    // ⭐ L'HÔTEL MANQUAIT (15/08/2026). Né le 05/08 d'une rencontre à
+    // Terre-Sainte, il avait sa page, son adresse courte /hotel et sa carte
+    // dans /simulateurs — mais aucune entrée ici. « Dis-nous ce que tu
+    // cherches » ne pouvait donc PAS le proposer, à personne, jamais.
+    ["hotel", "L'hôtel Le Terre Sainte", "La vraie grille d'un hôtel de Saint-Pierre, saison par saison.", ["proportionnalite", "statistiques", "grandeurs"]],
     ["epsilon", "La machine des epsilons", "Des epsilons qui finissent par engendrer des infinis.", ["suites", "fonctions"]],
   ] as const).map(([slug, titre, promesse, notions]): RessourceEleveAI => ({
     id: `simulateur-${slug}`,
@@ -738,6 +743,37 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // Une seule machine par réponse : les huit sont interchangeables du point
     // de vue de qui cherche, et trois simulateurs d'affilée valent moins
     // qu'une machine + le réel + la chaîne.
+    famille: "machines",
+    statut: "validee",
+  })),
+
+  // ── Les machines DU CÔTÉ MATHS ─────────────────────────────────────────
+  // Même famille que les précédentes — ce sont des machines à régler — mais
+  // le sujet n'est plus l'île, c'est la notion elle-même. Elles vivaient au
+  // catalogue /simulateurs sans exister ici : six machines écrites, en ligne,
+  // indexées, et introuvables par la seule porte qui sait à qui les proposer.
+  //
+  // ⚠️ LES NIVEAUX SONT DANS LE TUPLE, contrairement aux machines du réel qui
+  // les partagent. Une équation différentielle ne se propose pas à un CM2 ;
+  // le lagon, si. C'est toute la différence entre les deux familles.
+  ...([
+    ["loi-normale", "La courbe en cloche", "La planche de Galton, et la cloche qui apparaît toute seule.", ["statistiques", "probabilites"], ["premiere", "terminale", "prof"]],
+    ["exponentielle", "L'exponentielle en miroir", "Celle qui monte, et la courbe de l'oubli qui descend.", ["exponentielle", "fonctions", "suites"], ["premiere", "terminale", "prof"]],
+    ["loi-pareto", "Le but qui sort de la moyenne", "Là où naissent les records, loin de la moyenne.", ["statistiques", "probabilites"], ["premiere", "terminale", "prof"]],
+    ["diagonale-des-fous", "La Diagonale des Fous", "La réserve du coureur qui se vide, au carré de l'effort.", ["fonctions", "derivees"], ["terminale", "prof"]],
+    ["aiguille-de-kakeya", "L'aiguille de Kakeya", "Le demi-tour le plus économe — médaille Fields 2026.", ["geometrie"], ["seconde", "premiere", "terminale", "prof"]],
+    ["dimension-du-volcan", "La dimension du volcan", "La rugosité du rempart de la Fournaise, mesurée par un nombre.", ["geometrie", "grandeurs"], ["seconde", "premiere", "terminale", "prof"]],
+  ] as const).map(([slug, titre, promesse, notions, niveaux]): RessourceEleveAI => ({
+    id: slug,
+    titre,
+    promesse,
+    url: `/${slug}`,
+    niveaux: [...niveaux],
+    matiere: "maths",
+    notions: [...notions, "machines"],
+    intentions: ["decouvrir", "comprendre", "enseigner"],
+    type: "machine",
+    surDemande: true,
     famille: "machines",
     statut: "validee",
   })),
