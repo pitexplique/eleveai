@@ -171,9 +171,11 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
     hint: "$f(a) = b$ se lit : « l'image de $a$ par $f$ est $b$ ».",
     tags: ["stmg", "maths", "fonctions", "template"],
     generate: () => {
-      // ⚠️ $a \neq 0$ et $b \neq a$ : sinon plusieurs propositions coïncident
-      // et l'élève n'a plus que deux ou trois lignes à départager.
-      const a = pick([-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const);
+      // ⚠️ Les deux réservoirs sont DISJOINTS et ne contiennent pas zéro :
+      // si $a = b$, deux propositions deviennent identiques mot pour mot
+      // (« l'image de −4 par f est −4 »), et l'élève n'a plus trois lignes à
+      // départager. Le vérificateur de générateurs l'a attrapé.
+      const a = pick([-6, -5, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const);
       const b = pick([-9, -7, -4, 10, 11, 13, 15, 17, 18, 20] as const);
       const sens = pick(["image", "antecedent", "notation"] as const);
       if (sens === "notation") {
