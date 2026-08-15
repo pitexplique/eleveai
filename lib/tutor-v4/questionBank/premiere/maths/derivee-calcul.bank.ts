@@ -303,6 +303,43 @@ export const deriveeCalculBank: TutorBankItemV4[] = [
     },
   },
 
+  /* ═══════════════ der_derivee_somme ═══════════════ */
+
+  {
+    kind: "fixed",
+    id: "premiere_der_somme_fixed_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "der_polynome",
+    microId: "der_derivee_somme",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Comment dérive-t-on une somme de deux fonctions, $f = u + v$ ?",
+    format: "qcm",
+    choices: [
+      "$f' = u' + v'$ : on dérive chaque terme séparément",
+      "$f' = u' \\times v'$",
+      "$f' = (u + v)'$ qu'on ne peut pas simplifier",
+      "$f' = u' + v$",
+    ],
+    expected: ["$f' = u' + v'$ : on dérive chaque terme séparément"],
+    comparator: "mcq_exact",
+    hint: "C'est ce qui permet de dériver un polynôme terme à terme.",
+    explanation: exp(
+      "La dérivée d'une somme est la somme des dérivées : $(u + v)' = u' + v'$.",
+      "On dérive chaque terme indépendamment, puis on additionne les résultats.",
+      "Pour $f(x) = 3x^2 + 5x - 2$ : la dérivée de $3x^2$ est $6x$, celle de $5x$ est $5$, celle de $-2$ est $0$. D'où $f'(x) = 6x + 5$.",
+      "$f' = u' + v'$. C'est cette règle, jointe à celle du produit par un réel, qui permet de dériver n'importe quel polynôme terme à terme."
+    ),
+    choiceDiagnostics: [
+      {
+        choice: "$f' = u' \\times v'$",
+        cause: "confond la règle de la somme avec celle d'un produit",
+      },
+    ],
+    tags: ["premiere", "maths", "derivation", "polynome"],
+  },
+
   /* ═══════════════ der_derivee_degre3 ═══════════════ */
 
   {

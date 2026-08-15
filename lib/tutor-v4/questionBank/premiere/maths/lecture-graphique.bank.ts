@@ -262,6 +262,140 @@ export const lectureGraphiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  /* ═══════════════ auto_fct_reperer_graphique ═══════════════ */
+
+  {
+    kind: "template",
+    id: "premiere_fct_reperer_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "auto_lecture_graphique",
+    microId: "auto_fct_reperer_graphique",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Avant de lire une valeur, il faut savoir ce que chaque axe mesure, et dans quelle unité.",
+    tags: ["premiere", "maths", "graphique", "reperage", "template"],
+    generate: () => {
+      const a = pick([2, 3] as const);
+      const b = pick([1, 2] as const);
+      return {
+        text:
+          `Le graphique ci-contre donne le coût d'une location, en euros, en fonction du nombre de jours. ` +
+          `Que représente une graduation d'UNE unité sur l'axe horizontal ?`,
+        format: "qcm",
+        choices: makeChoices("un jour de location", [
+          "un euro",
+          `${a} euros`,
+          "un pourcentage",
+        ]),
+        expected: ["un jour de location"],
+        comparator: "mcq_exact",
+        canvas: canvasDroite(a, b, { titre: "Coût de la location (en euros)" }),
+        explanation: exp(
+          "Lire un graphique commence par identifier les grandeurs portées par chaque axe, avec leurs unités.",
+          "On relit l'énoncé : « le coût EN FONCTION DU nombre de jours ».",
+          "Ce qui suit « en fonction de » va en abscisse : ici le nombre de jours. Le coût, lui, se lit en ordonnée, en euros.",
+          "Une graduation horizontale vaut un jour de location. Se tromper d'axe, c'est lire l'inverse de ce qui est demandé."
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "un euro",
+            cause: "a interverti les axes : les euros sont en ordonnée",
+          },
+        ],
+      };
+    },
+  },
+
+  /* ═══════════════ auto_fct_tracer_droite ═══════════════ */
+
+  {
+    kind: "template",
+    id: "premiere_fct_tracer_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "auto_droites",
+    microId: "auto_fct_tracer_droite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On place l'ordonnée à l'origine, puis on avance de $1$ et on monte du coefficient directeur.",
+    tags: ["premiere", "maths", "graphique", "droite", "template"],
+    generate: () => {
+      const a = pick([-2, -1, 2, 3] as const);
+      // ⛔ b ≠ a : les pièges « (1 ; a) » et « (1 ; b) » se confondraient.
+      const b = pick(([-2, 1, 3] as const).filter((v) => v !== a));
+      return {
+        text:
+          `On veut tracer la droite d'équation $y = ${fr(a)}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)}$. ` +
+          `Après avoir placé le point $(0 \\, ; \\, ${fr(b)})$, quel second point peut-on placer ?`,
+        format: "qcm",
+        choices: makeChoices(`$(1 \\, ; \\, ${fr(a + b)})$`, [
+          `$(1 \\, ; \\, ${fr(a)})$`,
+          `$(${fr(a)} \\, ; \\, 1)$`,
+          `$(1 \\, ; \\, ${fr(b)})$`,
+          `$(1 \\, ; \\, ${fr(a - b)})$`,
+        ]),
+        expected: [`$(1 \\, ; \\, ${fr(a + b)})$`],
+        comparator: "mcq_exact",
+        canvas: canvasDroite(a, b),
+        explanation: exp(
+          "Deux points suffisent à tracer une droite. Le plus simple : l'ordonnée à l'origine, puis le point obtenu en avançant de $1$.",
+          "On calcule l'image de $1$.",
+          `$y = ${fr(a)} \\times 1 ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = ${fr(a + b)}$.`,
+          `Le second point est $(1 \\, ; \\, ${fr(a + b)})$ : depuis l'ordonnée à l'origine, on avance de $1$ et l'on ${a > 0 ? "monte" : "descend"} de $${fr(Math.abs(a))}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$(1 \\, ; \\, ${fr(a)})$`,
+            cause: "a oublié d'ajouter l'ordonnée à l'origine",
+          },
+        ],
+      };
+    },
+  },
+
+  /* ═══════════════ auto_fct_lire_croissance ═══════════════ */
+
+  {
+    kind: "template",
+    id: "premiere_fct_lire_croissance_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "auto_resolution_graphique",
+    microId: "auto_fct_lire_croissance",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une droite monte toujours de la même façon ; une parabole, non.",
+    tags: ["premiere", "maths", "graphique", "croissance", "template"],
+    generate: () => {
+      const droite = Math.random() < 0.5;
+      const a = pick([1, 2] as const);
+      return {
+        text: `Comment la grandeur représentée ci-contre augmente-t-elle ?`,
+        format: "qcm",
+        choices: makeChoices(
+          droite ? "à vitesse constante" : "de plus en plus vite",
+          ["à vitesse constante", "de plus en plus vite", "de plus en plus lentement", "elle diminue"]
+        ),
+        expected: [droite ? "à vitesse constante" : "de plus en plus vite"],
+        comparator: "mcq_exact",
+        canvas: droite
+          ? canvasDroite(a, 1, { titre: "Évolution de la grandeur" })
+          : canvasParabole(a, 0, -2, "Évolution de la grandeur"),
+        explanation: exp(
+          "Lire les variations d'une grandeur, ce n'est pas seulement dire si elle monte : c'est dire COMMENT elle monte.",
+          "On compare l'augmentation sur des intervalles successifs de même largeur.",
+          droite
+            ? "La courbe est une droite : quand on avance de $1$, la grandeur augmente toujours de la même quantité."
+            : "La courbe s'incurve vers le haut : quand on avance de $1$, la grandeur augmente de plus en plus.",
+          droite
+            ? "Elle augmente à vitesse constante — c'est une croissance linéaire."
+            : "Elle augmente de plus en plus vite : la croissance s'accélère."
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ auto_fct_resoudre_graphiquement ═══════════════ */
 
   {

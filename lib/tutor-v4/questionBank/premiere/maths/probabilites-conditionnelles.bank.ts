@@ -231,6 +231,88 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     },
   },
 
+  /* ═══════════ auto_proba_conditionnelle_lecture ═══════════ */
+
+  {
+    kind: "template",
+    id: "premiere_auto_proba_cond_lecture_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "auto_proba_lecture",
+    microId: "auto_proba_conditionnelle_lecture",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« Parmi les… » : le dénominateur est le total de cette ligne, pas le total général.",
+    tags: ["premiere", "maths", "probabilites", "tableau", "automatisme", "template", "short"],
+    generate: () => {
+      const t = tableau();
+      const { s } = t;
+      return {
+        text:
+          `${enonceTableau(t)} Parmi les ${s.individu}s ${s.ligneB}, ` +
+          `quelle est la probabilité d'être ${s.colonneA} ? (Réponds par une fraction.)`,
+        format: "short",
+        expected: reponsesProba(t.c, t.ligne2),
+        comparator: "fraction_decimal_equivalent",
+        canvas: canvasTableau(t),
+        explanation: exp(
+          "Une probabilité conditionnelle se lit directement dans un tableau croisé : la case au numérateur, le total de la sous-population au dénominateur.",
+          `« Parmi les ${s.ligneB} » réduit la population à cette ligne.`,
+          `Ils sont $${t.c} + ${t.d} = ${t.ligne2}$, dont $${t.c}$ sont ${s.colonneA} : la probabilité vaut $\\dfrac{${t.c}}{${t.ligne2}}$.`,
+          `La probabilité cherchée est $\\dfrac{${t.c}}{${t.ligne2}}$.`
+        ),
+      };
+    },
+  },
+
+  /* ═══════════════ auto_proba_distinguer ═══════════════ */
+
+  {
+    kind: "template",
+    id: "premiere_auto_proba_distinguer_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "auto_proba_lecture",
+    microId: "auto_proba_distinguer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Trois quotients, trois dénominateurs différents : le total, la ligne, la colonne.",
+    tags: ["premiere", "maths", "probabilites", "tableau", "automatisme", "template"],
+    generate: () => {
+      const t = tableau();
+      const { s } = t;
+      return {
+        text:
+          `${enonceTableau(t)} On note $A$ « être ${s.ligneA} » et $B$ « être ${s.colonneA} ». ` +
+          `Laquelle de ces trois quantités se calcule en divisant par le TOTAL des ${t.total} ${s.individu}s ?`,
+        format: "qcm",
+        choices: makeChoices("$P(A \\cap B)$", [
+          "$P_A(B)$",
+          "$P_B(A)$",
+          "les trois se divisent par le total",
+        ]),
+        expected: ["$P(A \\cap B)$"],
+        comparator: "mcq_exact",
+        canvas: canvasTableau(t),
+        explanation: exp(
+          "Les trois quantités ont le même numérateur — l'effectif de la case — mais trois dénominateurs différents.",
+          "On identifie la population de référence de chacune.",
+          `$P(A \\cap B) = \\dfrac{${t.a}}{${t.total}}$ : population entière. ` +
+            `$P_A(B) = \\dfrac{${t.a}}{${t.ligne1}}$ : réduite à $A$. ` +
+            `$P_B(A) = \\dfrac{${t.a}}{${t.col1}}$ : réduite à $B$.`,
+          `Seule $P(A \\cap B)$ se divise par le total. Les deux autres sont des probabilités CONDITIONNELLES : ` +
+            `leur dénominateur est celui de la condition.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "les trois se divisent par le total",
+            cause: "une conditionnelle se divise par l'effectif de la condition, jamais par le total",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══ auto_proba_intersection_tableau (automatisme, domaine BOP1AU) ═══ */
 
   {

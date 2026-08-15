@@ -276,6 +276,41 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
     },
   },
 
+  /* ═══════════════ expo_fct_graphique ═══════════════ */
+
+  {
+    kind: "template",
+    id: "premiere_expo_fct_graphique_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "expo_fonction_lecture",
+    microId: "expo_fct_graphique",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On repère l'abscisse, puis on lit l'ordonnée du point correspondant.",
+    tags: ["premiere", "maths", "exponentielle", "graphique", "template", "short"],
+    generate: () => {
+      const a = pick([2, 3] as const);
+      const x = pick([1, 2, 3] as const);
+      const valeurs = [0, 1, 2, 3, 4].map((k) => a ** k);
+      return {
+        text:
+          `Les points ci-contre sont ceux de la fonction $f(x) = ${a}^x$. ` +
+          `Quelle est l'ordonnée du point d'abscisse $${x}$ ?`,
+        format: "short",
+        expected: [fr(a ** x)],
+        comparator: "number_equal",
+        canvas: canvasExponentielle(valeurs, `Les valeurs de ${a}^x`),
+        explanation: exp(
+          "La représentation graphique d'une fonction exponentielle se lit comme celle de n'importe quelle fonction : l'ordonnée d'un point est l'image de son abscisse.",
+          "On repère l'abscisse demandée et l'on lit la valeur correspondante.",
+          `$f(${x}) = ${a}^{${x}} = ${fr(a ** x)}$.`,
+          `L'ordonnée vaut $${fr(a ** x)}$. On voit aussi que les points s'écartent de plus en plus : la croissance s'accélère.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ expo_fct_prolonger_suite ═══════════════ */
 
   {
@@ -520,6 +555,55 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
     },
   },
 
+  /* ═══════════════ expo_modele_reconnaitre ═══════════════ */
+
+  {
+    kind: "template",
+    id: "premiere_expo_modele_reconnaitre_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "expo_modeliser",
+    microId: "expo_modele_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde si l'on passe d'une valeur à la suivante en ajoutant, ou en multipliant.",
+    tags: ["premiere", "maths", "exponentielle", "modelisation", "template"],
+    generate: () => {
+      const expo = Math.random() < 0.5;
+      const depart = pick([100, 200] as const);
+      const q = pick([1.5, 2] as const);
+      const r = pick([50, 100] as const);
+      const valeurs = expo
+        ? [0, 1, 2, 3].map((k) => depart * q ** k)
+        : [0, 1, 2, 3].map((k) => depart + r * k);
+      return {
+        text:
+          `Un relevé donne les valeurs $${valeurs.map((v) => fr(v)).join(" \\, ; \\, ")}$. ` +
+          `De quel type de croissance s'agit-il ?`,
+        format: "qcm",
+        choices: makeChoices(expo ? "exponentielle" : "linéaire", [
+          expo ? "linéaire" : "exponentielle",
+          "il n'y a pas de croissance",
+          "quadratique",
+        ]),
+        expected: [expo ? "exponentielle" : "linéaire"],
+        comparator: "mcq_exact",
+        canvas: canvasExponentielle(valeurs, "Le relevé"),
+        explanation: exp(
+          "Une croissance est linéaire quand on AJOUTE toujours la même quantité, exponentielle quand on MULTIPLIE toujours par le même nombre.",
+          "On calcule les différences, puis les quotients.",
+          expo
+            ? `Différences : $${fr(valeurs[1] - valeurs[0])}$ puis $${fr(valeurs[2] - valeurs[1])}$ — elles changent. ` +
+              `Quotients : $${fr(valeurs[1] / valeurs[0])}$ puis $${fr(valeurs[2] / valeurs[1])}$ — ils sont constants.`
+            : `Différences : $${fr(valeurs[1] - valeurs[0])}$ puis $${fr(valeurs[2] - valeurs[1])}$ — elles sont constantes.`,
+          expo
+            ? "La croissance est exponentielle : les points s'incurvent vers le haut."
+            : "La croissance est linéaire : les points sont alignés."
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ expo_modele_comparer ═══════════════ */
 
   {
@@ -678,6 +762,43 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
           "On parcourt la colonne des capitaux jusqu'à atteindre la somme visée.",
           `La première valeur supérieure ou égale à $${cible}$ € apparaît à l'année $${premier}$.`,
           `Le capital atteint $${cible}$ € au bout de $${premier}$ années. C'est la démarche de l'exercice 2 du sujet de Métropole.`
+        ),
+      };
+    },
+  },
+
+  /* ═══════════════ expo_seuil_graphique ═══════════════ */
+
+  {
+    kind: "template",
+    id: "premiere_expo_seuil_graphique_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "expo_seuil",
+    microId: "expo_seuil_graphique",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On repère la hauteur du seuil, puis le premier point qui la dépasse.",
+    tags: ["premiere", "maths", "exponentielle", "seuil", "graphique", "template", "short"],
+    generate: () => {
+      const depart = pick([100, 200] as const);
+      const q = 2;
+      const valeurs = [0, 1, 2, 3, 4].map((k) => depart * q ** k);
+      const rang = pick([2, 3, 4] as const);
+      const seuil = valeurs[rang] - depart / 2;
+      return {
+        text:
+          `Le graphique ci-contre donne l'évolution d'une population qui double à chaque étape. ` +
+          `À partir de quelle étape dépasse-t-elle $${fr(seuil)}$ individus ?`,
+        format: "short",
+        expected: [String(rang)],
+        comparator: "number_equal",
+        canvas: canvasExponentielle(valeurs, "Population à chaque étape"),
+        explanation: exp(
+          "Résoudre graphiquement un problème de seuil, c'est repérer le premier point situé au-dessus de la hauteur visée.",
+          `On trace mentalement la ligne horizontale à $${fr(seuil)}$, puis on regarde quel point la dépasse en premier.`,
+          `Les valeurs sont $${valeurs.map((v) => fr(v)).join(" \\, ; \\, ")}$. La première qui dépasse $${fr(seuil)}$ est $${fr(valeurs[rang])}$, à l'étape $${rang}$.`,
+          `Le seuil est franchi à l'étape $${rang}$. Une lecture graphique suffit — et le programme l'autorise explicitement, au même titre que le calcul ou l'outil numérique.`
         ),
       };
     },

@@ -340,6 +340,38 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
     },
   },
 
+  /* ═══════════════ auto_alg_equation_quotient ═══════════════ */
+
+  {
+    kind: "template",
+    id: "premiere_auto_equation_quotient_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "auto_equations",
+    microId: "auto_alg_equation_quotient",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On multiplie les deux membres par $x$, ce qui suppose $x \\neq 0$.",
+    tags: ["premiere", "maths", "automatisme", "equation", "template", "short"],
+    generate: () => {
+      const solution = pick([2, 4, 5, 10] as const);
+      const b = pick([2, 3, 6] as const);
+      const a = solution * b;
+      return {
+        text: `Résous l'équation $\\dfrac{${a}}{x} = ${b}$.`,
+        format: "short",
+        expected: [fr(solution)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Une équation du type $\\dfrac{a}{x} = b$ se résout en multipliant les deux membres par $x$, sous réserve que $x$ ne soit pas nul.",
+          "On multiplie par $x$, puis on divise par le coefficient obtenu.",
+          `$\\dfrac{${a}}{x} = ${b}$ donne $${a} = ${b}x$, donc $x = \\dfrac{${a}}{${b}} = ${fr(solution)}$.`,
+          `La solution est $x = ${fr(solution)}$. ⚠️ L'inconnue était au DÉNOMINATEUR : diviser $${a}$ par $${b}$ est le dernier geste, pas le premier.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ auto_alg_inequation ═══════════════ */
 
   {

@@ -405,6 +405,48 @@ export const informationChiffreeBank: TutorBankItemV4[] = [
     },
   },
 
+  /* ═══════════════ info_rep_circulaire ═══════════════ */
+
+  {
+    kind: "template",
+    id: "premiere_info_circulaire_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "info_representations_croisees",
+    microId: "info_rep_circulaire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Sur un diagramme circulaire, l'angle est proportionnel à la part : le tour complet fait $360°$.",
+    tags: ["premiere", "maths", "statistiques", "diagramme", "template", "short"],
+    generate: () => {
+      const parts = [50, 25, 15, 10];
+      const labels = ["Bus", "Voiture", "À pied", "Vélo"] as const;
+      const k = pick([0, 1, 2] as const);
+      const angle = (parts[k] * 360) / 100;
+      return {
+        text:
+          `Le diagramme circulaire ci-contre donne la répartition des élèves selon leur mode de transport. ` +
+          `Quel angle correspond au secteur « ${labels[k]} » ?`,
+        format: "short",
+        expected: [fr(angle)],
+        comparator: "number_equal",
+        canvas: {
+          kind: "stat_graph",
+          graphType: "camembert",
+          title: "Mode de transport (en %)",
+          data: labels.map((l, i) => ({ label: l, value: parts[i] })),
+          display: { showValues: true, showLabels: true },
+        },
+        explanation: exp(
+          "Sur un diagramme circulaire, l'angle d'un secteur est proportionnel à la part qu'il représente : le disque entier vaut $360°$ et correspond à $100\\,\\%$.",
+          "On applique le pourcentage à $360°$.",
+          `$${parts[k]}\\,\\%$ de $360° = 360 \\times ${fr(parts[k] / 100)} = ${fr(angle)}°$.`,
+          `Le secteur « ${labels[k]} » mesure $${fr(angle)}°$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ info_rep_choisir ═══════════════ */
 
   {
@@ -664,7 +706,72 @@ export const informationChiffreeBank: TutorBankItemV4[] = [
     },
   },
 
+  /* ═══════════════ info_tableur_diagramme ═══════════════ */
+
+  {
+    kind: "fixed",
+    id: "premiere_info_tableur_diagramme_fixed_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "info_tableur",
+    microId: "info_tableur_diagramme",
+    difficulty: 3,
+    theme: "neutral",
+    text:
+      "Une feuille de calcul contient, pour chaque année de 2015 à 2025, la population d'une commune. " +
+      "Quel diagramme choisir pour montrer l'ÉVOLUTION de cette population ?",
+    format: "qcm",
+    choices: [
+      "Une courbe, ou un nuage de points reliés",
+      "Un diagramme circulaire",
+      "Un diagramme en boîte",
+      "Un tableau croisé",
+    ],
+    expected: ["Une courbe, ou un nuage de points reliés"],
+    comparator: "mcq_exact",
+    hint: "Une évolution se lit dans le temps : il faut un axe pour les années.",
+    explanation: exp(
+      "Le choix d'une représentation dépend de ce qu'on veut montrer : une évolution dans le temps demande un axe des temps.",
+      "On repère la question posée : comment la population change au fil des années.",
+      "Une courbe place les années en abscisse et la population en ordonnée : la tendance se voit immédiatement. Un diagramme circulaire, lui, montrerait des parts d'un tout — ce qui n'a aucun sens pour des années successives.",
+      "On choisit une courbe ou un nuage de points. C'est d'ailleurs la représentation qui prépare l'ajustement affine."
+    ),
+    tags: ["premiere", "maths", "tableur", "diagramme"],
+  },
+
   /* ═══════════════ info_filtre_sous_ensemble / ET / OU / NON ═══════════════ */
+
+  {
+    kind: "template",
+    id: "premiere_info_filtre_sous_ensemble_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "info_filtre_donnees",
+    microId: "info_filtre_sous_ensemble",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Un filtre sur un seul critère garde une ligne entière du tableau.",
+    tags: ["premiere", "maths", "statistiques", "filtre", "template", "short"],
+    generate: () => {
+      const t = tableau();
+      const { s } = t;
+      return {
+        text:
+          `Dans le fichier de données résumé ci-contre, on ne garde que les ${s.individu}s « ${s.lignes[0]} ». ` +
+          `Combien d'individus le filtre renvoie-t-il ?`,
+        format: "short",
+        expected: [String(t.ligne1)],
+        comparator: "number_equal",
+        canvas: canvasTableau(t),
+        explanation: exp(
+          "Filtrer un fichier, c'est en extraire le sous-ensemble des individus qui vérifient un critère.",
+          "Un critère portant sur un seul caractère correspond à une ligne entière du tableau croisé.",
+          `La ligne « ${s.lignes[0]} » contient $${t.a} + ${t.b} = ${t.ligne1}$ individus.`,
+          `Le filtre renvoie $${t.ligne1}$ ${s.individu}s — toutes colonnes confondues, puisque le second caractère n'est pas contraint.`
+        ),
+      };
+    },
+  },
 
   {
     kind: "template",
