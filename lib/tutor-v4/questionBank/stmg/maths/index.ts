@@ -2,10 +2,39 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 // Banques par notion du cycle terminal de la voie technologique (série STMG).
 //
-// ⚠️ VIDE AU 15/08/2026. La structure (bo → notions → micro-compétences) est
-// posée, les banques restent à écrire, notion par notion. Tant que ce tableau
-// est vide, la classe n'est branchée ni au sélecteur du coach ni aux pages
-// programme : on n'annonce pas ce qui n'a rien derrière.
+// ─────────────────────────────────────────────────────────────────────────────
+// OÙ ON EN EST — 15/08/2026
+//
+// 167 items, 141 micro-compétences sur 304. Trois domaines sur dix terminés :
+//
+//   ✅ STMGAU  Automatismes .......................... 61/61 micros
+//   ✅ STMGSU  Suites numériques ..................... 45/45
+//   ✅ STMGFO  Fonctions et polynômes ................ 35/35
+//   ⏳ STMGDE  Dérivation ............................  0/25
+//   ⏳ STMGEX  Exponentielles et logarithme décimal ..  0/31
+//   ⏳ STMGDC  Données croisées ......................  0/12
+//   ⏳ STMGST  Statistique à deux variables ..........  0/16
+//   ⏳ STMGPR  Probabilités conditionnelles ..........  0/22
+//   ⏳ STMGVA  Variables aléatoires et loi binomiale .  0/28
+//   ⏳ STMGAL  Algorithmique, tableur et logique .....  0/29
+//
+// ⏳ La classe n'est PAS encore au sélecteur du coach : on n'annonce pas ce
+// qui n'a rien derrière. Au moment de l'ajouter (`CLASSES` dans
+// app/coach-ia/[matiere]/page.tsx), la liste passe à 15 boutons — c'est le
+// moment de la grouper par cycle et par voie plutôt que d'allonger la ligne.
+//
+// À CHAQUE BANQUE, les quatre vérificateurs :
+//   node --experimental-strip-types scripts/verifier-knowledge.mjs stmg
+//   node --experimental-strip-types scripts/verifier-generateurs.mjs stmg maths 600
+//   node --experimental-strip-types scripts/verifier-variete.mjs stmg maths
+//   node --experimental-strip-types scripts/verifier-canvas.mjs stmg maths
+//   npx tsc --noEmit
+//
+// Ils ont eu raison une dizaine de fois sur ce chantier, dont trois sur des
+// corrections que je venais d'écrire. Les défauts qu'ils attrapent ne se
+// voient PAS à la relecture : des distracteurs qui se recoupent sur certains
+// tirages seulement, un croisement de courbes qui tombe hors du tableau
+// affiché, un générateur juste mais qui ne produit que trois énoncés.
 //
 // ─────────────────────────────────────────────────────────────────────────────
 // À QUI ON ÉCRIT
