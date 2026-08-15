@@ -1594,6 +1594,910 @@ Les deux ont raison sur un point au moins : aucun ne conteste que les écrans po
   ],
 };
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   DIX ENREGISTREMENTS DE PLUS, CINQ PAR NIVEAU (15/08/2026, seconde salve)
+   ---------------------------------------------------------------------------
+   La première salve avait porté chaque niveau de 2 à 5 enregistrements, donc
+   de 2 à 5 passages complets sur 10. Celle-ci finit le travail : cinq de plus
+   par niveau, et l'épreuve de français sert enfin **dix passages entiers**,
+   comme les mathématiques.
+   ⚠️ C'est le dernier point où le vivier commandait la complétude. Au-delà,
+   ajouter un enregistrement n'ajoute plus de passage : il ajoute de la
+   variété, ce qui est une autre question.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+const ORAL_REQUINS_CM2: SupportTexte = {
+  id: "cm2_oral_requins",
+  kicker: "Compréhension de l'oral",
+  titre: "Les requins méritent-ils leur réputation ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `La question vient d'Éliot, dix ans : est-ce que les requins attaquent vraiment les humains ?
+
+Commençons par un chiffre. Dans le monde, on compte en moyenne une dizaine de morts par an à cause des requins. C'est dix de trop, et pour les familles concernées, aucun chiffre ne console. Mais gardons-le en tête pour la suite.
+
+Car les moustiques, eux, tuent plusieurs centaines de milliers de personnes chaque année, en transmettant des maladies. Personne n'a peur d'un moustique.
+
+Pourquoi cette différence ? Parce que notre peur ne se règle pas sur les chiffres. Elle se règle sur les images. Un requin est grand, silencieux, il vient d'un monde où nous ne voyons rien. Un moustique, on le connaît depuis toujours.
+
+Cela ne veut pas dire qu'il faut se baigner n'importe où. Cela veut dire que la prudence et la peur sont deux choses différentes. La prudence regarde les faits. La peur, elle, regarde les images.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Combien de morts par an les requins causent-ils dans le monde, d'après l'émission ?",
+      choices: [
+        "une dizaine",
+        "une centaine",
+        "un millier",
+        "plusieurs milliers",
+      ],
+      expected: "une dizaine",
+      explanation:
+        "Le chiffre est donné au tout début, et l'émission demande explicitement de le garder en tête : c'est le signe qu'il servira plus loin.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Quel animal l'émission compare-t-elle au requin ?",
+      choices: ["le moustique", "le serpent", "l'abeille", "le chien"],
+      expected: "le moustique",
+      explanation:
+        "La comparaison n'est pas un détail : c'est elle qui porte tout le raisonnement de l'émission.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Pourquoi avons-nous plus peur du requin que du moustique ?",
+      choices: [
+        "parce que notre peur se règle sur les images, pas sur les chiffres",
+        "parce que le requin est plus dangereux",
+        "parce qu'on voit plus souvent des requins",
+        "parce que les moustiques sont plus petits",
+      ],
+      expected:
+        "parce que notre peur se règle sur les images, pas sur les chiffres",
+      explanation:
+        "L'émission pose la question « Pourquoi cette différence ? » et répond aussitôt. C'est la structure la plus fréquente à l'oral.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_reformuler",
+      text: "Comment résumerais-tu ce que dit l'émission ?",
+      choices: [
+        "Le requin fait peur plus qu'il n'est dangereux, mais la prudence reste nécessaire.",
+        "Les requins ne sont pas dangereux du tout.",
+        "Les moustiques sont plus méchants que les requins.",
+        "Il ne faut plus se baigner dans la mer.",
+      ],
+      expected:
+        "Le requin fait peur plus qu'il n'est dangereux, mais la prudence reste nécessaire.",
+      explanation:
+        "L'émission prend soin de ne pas nier le danger : « Cela ne veut pas dire qu'il faut se baigner n'importe où. » Un résumé qui l'oublie trahit le texte.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_argumenter",
+      text: "Quelle différence l'émission fait-elle entre la prudence et la peur ?",
+      choices: [
+        "la prudence regarde les faits, la peur regarde les images",
+        "la prudence est pour les adultes, la peur pour les enfants",
+        "la prudence est inutile, la peur protège",
+        "il n'y a aucune différence",
+      ],
+      expected: "la prudence regarde les faits, la peur regarde les images",
+      explanation:
+        "C'est la dernière phrase, et c'est la conclusion de tout le raisonnement. À l'oral, la fin porte souvent l'idée à retenir.",
+    },
+  ],
+};
+
+const ORAL_FOURMIS_CM2: SupportTexte = {
+  id: "cm2_oral_fourmis",
+  kicker: "Compréhension de l'oral",
+  titre: "Comment les fourmis retrouvent-elles leur chemin ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Aujourd'hui, une question de Lina, neuf ans : comment fait une fourmi pour rentrer chez elle ?
+
+On imagine souvent qu'elle suit son odorat, et c'est en partie vrai. Une fourmi qui trouve de la nourriture dépose une trace odorante tout au long du retour. Les autres suivent cette trace. Plus elles sont nombreuses à passer, plus l'odeur se renforce.
+
+Mais il y a plus étonnant. Dans le désert, certaines fourmis vivent sur un sol trop chaud pour garder la moindre odeur. Elles ne peuvent donc suivre aucune piste. Et pourtant elles rentrent, en ligne droite.
+
+Des chercheurs ont voulu comprendre. Ils ont collé de minuscules échasses sous les pattes de quelques fourmis. Résultat : ces fourmis-là ont dépassé leur nid, et se sont arrêtées trop loin.
+
+L'explication tient en peu de mots. La fourmi compte ses pas. Avec des pattes plus longues, chaque pas devient plus grand, et le compte tombe faux.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Que dépose une fourmi qui a trouvé de la nourriture ?",
+      choices: [
+        "une trace odorante",
+        "un morceau de nourriture",
+        "un grain de sable",
+        "un fil très fin",
+      ],
+      expected: "une trace odorante",
+      explanation:
+        "L'information vient au début, dans la partie que l'émission présente comme déjà connue.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Quel problème posent les fourmis du désert ?",
+      choices: [
+        "le sol est trop chaud pour garder une odeur",
+        "elles n'ont pas d'odorat",
+        "elles ne sortent que la nuit",
+        "elles ne rentrent jamais au nid",
+      ],
+      expected: "le sol est trop chaud pour garder une odeur",
+      explanation:
+        "L'émission annonce « il y a plus étonnant » : cette formule prévient qu'on va sortir de ce qu'on croyait savoir.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Qu'ont fait les chercheurs pour comprendre ?",
+      choices: [
+        "ils ont collé des échasses sous les pattes de fourmis",
+        "ils ont déplacé le nid",
+        "ils ont mesuré la température du sol",
+        "ils ont supprimé les odeurs",
+      ],
+      expected: "ils ont collé des échasses sous les pattes de fourmis",
+      explanation:
+        "L'expérience est racontée en une phrase. Repérer QUI fait QUOI aide à retenir un protocole entendu une seule fois.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_argumenter",
+      text: "Les fourmis à échasses se sont arrêtées trop loin. Qu'est-ce que cela prouve ?",
+      choices: [
+        "que la fourmi compte ses pas",
+        "que les échasses les ont blessées",
+        "qu'elles avaient perdu l'odeur",
+        "qu'elles cherchaient un autre nid",
+      ],
+      expected: "que la fourmi compte ses pas",
+      explanation:
+        "Le résultat n'a de sens qu'avec l'explication qui suit : des pas plus grands, donc un compte faux. Un résultat d'expérience se relie toujours à ce qu'il démontre.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_reformuler",
+      // ⚠️ Énoncé rendu SPÉCIFIQUE : « Quelle est l'idée principale de cette
+      // émission ? » existe déjà mot pour mot dans l'enregistrement sur
+      // l'ennui, et le tirage déduplique sur le TEXTE — deux questions
+      // identiques n'en font qu'une, et l'épreuve perd une ligne.
+      text: "Que faut-il retenir de la façon dont les fourmis s'orientent ?",
+      choices: [
+        "Les fourmis s'orientent par l'odeur, mais aussi en comptant leurs pas.",
+        "Les fourmis se perdent facilement.",
+        "Les fourmis du désert n'ont pas d'odorat.",
+        "Les chercheurs ont abîmé les fourmis.",
+      ],
+      expected:
+        "Les fourmis s'orientent par l'odeur, mais aussi en comptant leurs pas.",
+      explanation:
+        "L'émission ne remplace pas une explication par l'autre : elle en ajoute une seconde. Le résumé doit garder les deux.",
+    },
+  ],
+};
+
+const ORAL_OUBLI_CM2: SupportTexte = {
+  id: "cm2_oral_oubli",
+  kicker: "Compréhension de l'oral",
+  titre: "Pourquoi oublie-t-on ce qu'on a appris ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Voici une question que beaucoup se posent, et elle vient d'Anaïs, en CM2 : pourquoi ai-je tout oublié le lendemain d'un contrôle ?
+
+Rassure-toi tout de suite : c'est normal, et ce n'est pas un défaut de mémoire. Un chercheur a mesuré cela il y a plus de cent ans. Sans rien faire de particulier, on oublie environ la moitié de ce qu'on vient d'apprendre en un jour.
+
+Pourquoi le cerveau fait-il ça ? Parce qu'il trie. S'il gardait tout, il garderait aussi la couleur de la voiture croisée ce matin. Il conserve donc ce qui revient, et efface ce qui ne revient pas.
+
+D'où le seul remède qui fonctionne vraiment, et il n'est pas celui qu'on croit. Relire dix fois de suite le soir sert peu. Revoir la même chose trois fois, à trois jours d'écart, sert beaucoup. Le cerveau ne compte pas le temps passé : il compte les retours.
+
+Autrement dit, ce n'est pas ta mémoire qu'il faut changer. C'est le moment où tu ouvres ton cahier.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Quelle proportion de ce qu'on apprend oublie-t-on en un jour ?",
+      choices: ["environ la moitié", "environ un quart", "presque tout", "presque rien"],
+      expected: "environ la moitié",
+      explanation:
+        "Le chiffre est donné juste après « un chercheur a mesuré cela » : une mesure annoncée est presque toujours suivie de son résultat.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Pourquoi le cerveau efface-t-il des choses, d'après l'émission ?",
+      choices: [
+        "parce qu'il trie et garde ce qui revient",
+        "parce qu'il est fatigué",
+        "parce qu'il manque de place",
+        "parce qu'on dort trop peu",
+      ],
+      expected: "parce qu'il trie et garde ce qui revient",
+      explanation:
+        "L'émission illustre le tri par un exemple — la couleur d'une voiture croisée. L'exemple sert à rendre l'idée concrète, pas à ajouter une information.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Quelle méthode l'émission présente-t-elle comme efficace ?",
+      choices: [
+        "revoir la même chose trois fois, à trois jours d'écart",
+        "relire dix fois le soir",
+        "apprendre le matin",
+        "écrire ses leçons deux fois",
+      ],
+      expected: "revoir la même chose trois fois, à trois jours d'écart",
+      explanation:
+        "Les deux méthodes sont opposées dans la même phrase : « sert peu » d'un côté, « sert beaucoup » de l'autre.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_reformuler",
+      text: "Quelle phrase résume le mieux l'émission ?",
+      choices: [
+        "Oublier est normal ; ce qui compte, c'est de revenir plusieurs fois sur ce qu'on apprend.",
+        "Il faut travailler plus longtemps chaque soir.",
+        "Certains ont une bonne mémoire, d'autres non.",
+        "Les contrôles ne servent à rien.",
+      ],
+      expected:
+        "Oublier est normal ; ce qui compte, c'est de revenir plusieurs fois sur ce qu'on apprend.",
+      explanation:
+        "Les deux temps du texte sont là : l'oubli est normal, et le remède est le retour. Une moitié seule ne résume pas.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_argumenter",
+      text: "L'émission finit par : « ce n'est pas ta mémoire qu'il faut changer, c'est le moment où tu ouvres ton cahier ». Que veut-elle dire ?",
+      choices: [
+        "il vaut mieux répartir son travail sur plusieurs jours",
+        "il faut travailler dans un autre endroit",
+        "il faut changer de cahier",
+        "il faut apprendre plus longtemps d'un coup",
+      ],
+      expected: "il vaut mieux répartir son travail sur plusieurs jours",
+      explanation:
+        "La formule reprend le paragraphe précédent : le cerveau « compte les retours », pas le temps passé. Une conclusion imagée renvoie à ce qui vient d'être expliqué.",
+    },
+  ],
+};
+
+const ORAL_NOMS_DE_RUES_CM2: SupportTexte = {
+  id: "cm2_oral_noms_de_rues",
+  kicker: "Compréhension de l'oral",
+  titre: "Qui choisit le nom des rues ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Question du jour, posée par Yanis, dix ans : qui décide du nom des rues ?
+
+La réponse est plus simple qu'on ne croit : c'est la commune. Le conseil municipal vote, et la rue change de nom. Cela peut arriver plusieurs fois dans l'histoire d'une même rue.
+
+D'où viennent ces noms ? De trois endroits, le plus souvent. Du paysage d'abord : rue du Ravin, chemin des Manguiers. Du métier qu'on y exerçait ensuite : rue des Pêcheurs, rue de la Forge. Et enfin d'une personne qu'on a voulu honorer.
+
+C'est cette troisième source qui fait parfois discuter. Honorer quelqu'un, c'est dire à tous les habitants que cette personne compte. Alors quand le regard change sur un personnage historique, la question du nom revient. Certaines communes ont ainsi débaptisé des rues, après des débats parfois longs.
+
+Une plaque de rue, ce n'est donc pas seulement une adresse. C'est aussi ce qu'une ville a choisi de garder en mémoire.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Qui décide du nom d'une rue ?",
+      choices: [
+        "le conseil municipal de la commune",
+        "l'État",
+        "les habitants de la rue",
+        "le facteur",
+      ],
+      expected: "le conseil municipal de la commune",
+      explanation:
+        "La réponse arrive dès le deuxième paragraphe, annoncée par « la réponse est plus simple qu'on ne croit ».",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Quelles sont les trois sources des noms de rues citées ?",
+      choices: [
+        "le paysage, les métiers, les personnes honorées",
+        "les arbres, les animaux, les couleurs",
+        "les dates, les chiffres, les lettres",
+        "les rivières, les montagnes, la mer",
+      ],
+      expected: "le paysage, les métiers, les personnes honorées",
+      explanation:
+        "L'émission annonce « de trois endroits » avant de les énumérer. Une annonce chiffrée aide à retenir une liste entendue.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Quelle source de noms fait parfois discuter ?",
+      choices: [
+        "les personnes honorées",
+        "les noms de paysage",
+        "les noms de métiers",
+        "les numéros de rue",
+      ],
+      expected: "les personnes honorées",
+      explanation:
+        "L'émission le dit en désignant « cette troisième source ». Il faut avoir retenu l'ordre de la liste pour savoir laquelle c'est.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_argumenter",
+      text: "Pourquoi le nom d'une rue peut-il être changé, d'après l'émission ?",
+      choices: [
+        "parce que le regard porté sur une personne peut changer",
+        "parce que les plaques s'abîment",
+        "parce que les habitants déménagent",
+        "parce que la rue est trop longue",
+      ],
+      expected: "parce que le regard porté sur une personne peut changer",
+      explanation:
+        "L'émission relie honorer et regarder : si honorer, c'est dire que quelqu'un compte, un changement de regard rouvre la question.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_reformuler",
+      text: "Que veut dire la dernière phrase : « une plaque de rue, c'est aussi ce qu'une ville a choisi de garder en mémoire » ?",
+      choices: [
+        "les noms de rues disent ce qu'une ville juge important",
+        "les plaques sont difficiles à lire",
+        "les rues portent toutes le nom d'une personne",
+        "il faudrait numéroter les rues",
+      ],
+      expected: "les noms de rues disent ce qu'une ville juge important",
+      explanation:
+        "La phrase élargit le propos : d'une question pratique — l'adresse — on passe à une question de mémoire. C'est la conclusion du raisonnement.",
+    },
+  ],
+};
+
+const ORAL_ANIMAL_MENTEUR_CM2: SupportTexte = {
+  id: "cm2_oral_animal_menteur",
+  kicker: "Compréhension de l'oral",
+  titre: "Un animal peut-il mentir ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Voici une question surprenante, posée par Maya, onze ans : est-ce qu'un animal peut mentir ?
+
+Tout dépend de ce qu'on appelle mentir. Beaucoup d'animaux trompent, et depuis toujours. Un papillon porte sur ses ailes deux dessins qui ressemblent à des yeux de hibou. Un oiseau fait semblant d'avoir une aile cassée pour éloigner un prédateur de son nid. Mais ces animaux ne choisissent pas : ils font ce que leur espèce fait.
+
+Mentir, c'est autre chose. C'est savoir ce que l'autre croit, et vouloir lui faire croire le faux.
+
+Or on a observé cela chez certains singes. Un jeune capucin pousse un cri d'alerte alors qu'aucun danger n'approche. Les autres fuient. Et pendant qu'ils fuient, il mange leur part tranquillement. Il a recommencé plusieurs fois — et il a fini par ne plus être cru.
+
+Cette histoire dit deux choses. Que mentir demande de se représenter ce que pense l'autre. Et qu'un mensonge répété finit toujours par se retourner contre celui qui le fait.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Quel exemple d'animal qui trompe sans choisir est donné ?",
+      choices: [
+        "un papillon dont les ailes imitent des yeux de hibou",
+        "un capucin qui crie au danger",
+        "un chien qui cache un os",
+        "un poisson qui change de couleur",
+      ],
+      expected: "un papillon dont les ailes imitent des yeux de hibou",
+      explanation:
+        "Le papillon et l'oiseau illustrent la tromperie sans intention. Le capucin, lui, sert à illustrer le contraire.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "D'après l'émission, qu'est-ce que mentir suppose ?",
+      choices: [
+        "savoir ce que l'autre croit et vouloir lui faire croire le faux",
+        "parler une langue",
+        "être un animal intelligent",
+        "avoir peur d'un prédateur",
+      ],
+      expected:
+        "savoir ce que l'autre croit et vouloir lui faire croire le faux",
+      explanation:
+        "L'émission pose cette définition avant de raconter l'histoire du capucin : c'est elle qui permet de juger si le singe ment vraiment.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Qu'a fait le jeune capucin ?",
+      choices: [
+        "il a crié au danger sans danger, pour manger la part des autres",
+        "il a partagé sa nourriture",
+        "il a prévenu le groupe d'un vrai danger",
+        "il s'est caché dans un arbre",
+      ],
+      expected:
+        "il a crié au danger sans danger, pour manger la part des autres",
+      explanation:
+        "L'histoire est racontée en trois temps : le cri, la fuite des autres, le repas. Suivre l'ordre aide à comprendre l'intention.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_argumenter",
+      text: "Pourquoi le capucin a-t-il fini par ne plus être cru ?",
+      choices: [
+        "parce qu'il avait recommencé plusieurs fois",
+        "parce qu'il criait trop fort",
+        "parce que les autres l'avaient vu manger",
+        "parce qu'il avait changé de groupe",
+      ],
+      expected: "parce qu'il avait recommencé plusieurs fois",
+      explanation:
+        "Le texte lie explicitement la répétition et la perte de crédit : « Il a recommencé plusieurs fois — et il a fini par ne plus être cru. »",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_reformuler",
+      text: "Quelles sont les deux idées que l'émission tire de cette histoire ?",
+      choices: [
+        "mentir demande de se représenter ce que pense l'autre, et un mensonge répété se retourne contre son auteur",
+        "les singes sont plus intelligents que les papillons, et ils mangent beaucoup",
+        "les animaux ne mentent jamais, et les humains si",
+        "il ne faut pas crier au danger, et il faut partager sa nourriture",
+      ],
+      expected:
+        "mentir demande de se représenter ce que pense l'autre, et un mensonge répété se retourne contre son auteur",
+      explanation:
+        "L'émission annonce elle-même « cette histoire dit deux choses ». Quand un texte annonce un nombre, il faut retrouver les deux.",
+    },
+  ],
+};
+
+const ORAL_MARRONNIER_5E: SupportTexte = {
+  id: "5e_oral_marronnier",
+  kicker: "Compréhension de l'oral",
+  titre: "Ces informations qui reviennent chaque année",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Avez-vous remarqué que certains sujets reviennent aux mêmes dates ? Le prix de la rentrée scolaire en août. Les bonnes résolutions en janvier. Les départs en vacances à chaque veille de week-end prolongé.
+
+Dans les rédactions, ces sujets ont un nom : on les appelle des marronniers. Le mot vient de l'arbre, qui fleurit chaque année au même moment.
+
+Un marronnier n'est pas une fausse information. Le prix des fournitures augmente réellement, et le dire est utile. Mais le sujet n'est pas traité parce qu'il vient de se produire. Il est traité parce que c'est la saison.
+
+Cela change quelque chose pour celui qui écoute. Une information choisie parce qu'elle est nouvelle et une information choisie parce que c'est le moment, ce ne sont pas les mêmes. La seconde occupe une place qu'une autre aurait pu prendre.
+
+Le repérer n'oblige à rien. Cela permet seulement de savoir pourquoi on vous parle de ça, aujourd'hui, plutôt que d'autre chose.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Comment appelle-t-on, dans les rédactions, un sujet qui revient chaque année à la même date ?",
+      choices: ["un marronnier", "un serpent de mer", "une brève", "un éditorial"],
+      expected: "un marronnier",
+      explanation:
+        "Le mot est donné puis expliqué par son origine — l'arbre qui fleurit toujours au même moment.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "L'émission dit-elle qu'un marronnier est une fausse information ?",
+      choices: [
+        "non, elle précise le contraire",
+        "oui, c'est une invention",
+        "oui, mais seulement en janvier",
+        "elle ne le dit pas",
+      ],
+      expected: "non, elle précise le contraire",
+      explanation:
+        "La phrase est explicite : « Un marronnier n'est pas une fausse information. » Écarter une confusion est souvent la première chose que fait un propos construit.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Qu'est-ce qui distingue un marronnier d'une autre information ?",
+      choices: [
+        "il est traité parce que c'est la saison, non parce qu'il vient de se produire",
+        "il est plus court",
+        "il est toujours faux",
+        "il ne concerne que l'école",
+      ],
+      expected:
+        "il est traité parce que c'est la saison, non parce qu'il vient de se produire",
+      explanation:
+        "L'opposition est posée par « Mais » : ce n'est pas le contenu qui change, c'est la raison de le publier.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_visees",
+      // ⚠️ Énoncé rendu spécifique — voir la note de l'enregistrement sur les
+      // fourmis : le tirage déduplique sur le texte.
+      text: "Dans quel but cette émission explique-t-elle ce qu'est un marronnier ?",
+      choices: [
+        "expliquer pourquoi certains sujets sont choisis, pour mieux les situer",
+        "dénoncer des journalistes malhonnêtes",
+        "conseiller de ne plus suivre l'actualité",
+        "raconter l'histoire d'un arbre",
+      ],
+      expected:
+        "expliquer pourquoi certains sujets sont choisis, pour mieux les situer",
+      explanation:
+        "La dernière phrase dit exactement ce que l'émission cherche : « Le repérer n'oblige à rien. Cela permet seulement de savoir pourquoi on vous parle de ça. »",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Que veut dire l'émission par « la seconde occupe une place qu'une autre aurait pu prendre » ?",
+      choices: [
+        "traiter un marronnier, c'est renoncer à traiter un autre sujet",
+        "les marronniers sont trop longs",
+        "il y a trop d'informations chaque jour",
+        "les journaux manquent de place",
+      ],
+      expected:
+        "traiter un marronnier, c'est renoncer à traiter un autre sujet",
+      explanation:
+        "L'idée est implicite : le temps d'antenne est limité, donc tout choix en écarte un autre. C'est le vrai coût que l'émission signale.",
+    },
+  ],
+};
+
+const ORAL_PRIX_BILLET_5E: SupportTexte = {
+  id: "5e_oral_prix_billet",
+  kicker: "Compréhension de l'oral",
+  titre: "Pourquoi le prix d'un billet change tous les jours",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Vous avez peut-être déjà vécu cela : vous regardez un billet d'avion un lundi, il coûte deux cents euros. Le mercredi, le même vol en coûte trois cents. Rien n'a changé dans l'avion. Que s'est-il passé ?
+
+Le prix ne dépend pas du coût du voyage. Il dépend du nombre de places restantes et de la date à laquelle vous achetez. Un logiciel ajuste le tarif en permanence, plusieurs fois par jour parfois.
+
+La logique est la suivante : plus il reste de places longtemps à l'avance, plus le prix baisse pour remplir l'avion. Et plus la date approche avec peu de places libres, plus le prix monte, parce que ceux qui achètent au dernier moment ne peuvent plus vraiment renoncer.
+
+On appelle cela le prix dynamique. Il ne concerne pas que les avions : les hôtels, les concerts, certains trains fonctionnent pareil.
+
+Ce qu'il faut en retenir n'est pas une astuce pour payer moins cher. C'est que le prix affiché n'est pas la valeur de la chose. C'est ce qu'on estime que vous êtes prêt à payer, à cet instant précis.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "De quoi dépend le prix d'un billet, d'après l'émission ?",
+      choices: [
+        "du nombre de places restantes et de la date d'achat",
+        "du coût du carburant",
+        "de la longueur du vol",
+        "du nombre de bagages",
+      ],
+      expected: "du nombre de places restantes et de la date d'achat",
+      explanation:
+        "L'émission écarte d'abord une explication attendue — le coût du voyage — avant de donner la vraie.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Pourquoi le prix monte-t-il quand la date approche ?",
+      choices: [
+        "parce que ceux qui achètent au dernier moment ne peuvent plus renoncer",
+        "parce que l'avion coûte plus cher à remplir",
+        "parce que les taxes augmentent",
+        "parce que les places deviennent plus confortables",
+      ],
+      expected:
+        "parce que ceux qui achètent au dernier moment ne peuvent plus renoncer",
+      explanation:
+        "La raison est donnée dans la même phrase, après « parce que ». Elle porte sur l'acheteur, pas sur le vol.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Quels autres domaines fonctionnent avec un prix dynamique ?",
+      choices: [
+        "les hôtels, les concerts, certains trains",
+        "les librairies et les boulangeries",
+        "les hôpitaux et les écoles",
+        "les musées uniquement",
+      ],
+      expected: "les hôtels, les concerts, certains trains",
+      explanation:
+        "L'énumération vient juste après le nom du procédé. Retenir un exemple suffit rarement quand la question porte sur la liste.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_visees",
+      // ⚠️ Énoncé rendu spécifique — le tirage déduplique sur le texte.
+      text: "Dans quel but cette émission explique-t-elle le prix dynamique ?",
+      choices: [
+        "faire comprendre ce que le prix affiché mesure réellement",
+        "donner des astuces pour payer moins cher",
+        "critiquer les compagnies aériennes",
+        "encourager à voyager davantage",
+      ],
+      expected: "faire comprendre ce que le prix affiché mesure réellement",
+      explanation:
+        "L'émission écarte elle-même l'autre visée possible : « Ce qu'il faut en retenir n'est pas une astuce pour payer moins cher. »",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Que signifie « le prix affiché n'est pas la valeur de la chose » ?",
+      choices: [
+        "le prix mesure ce qu'on pense que l'acheteur acceptera de payer",
+        "les billets sont toujours trop chers",
+        "la valeur d'un vol est impossible à calculer",
+        "les logiciels se trompent souvent",
+      ],
+      expected:
+        "le prix mesure ce qu'on pense que l'acheteur acceptera de payer",
+      explanation:
+        "La phrase suivante l'explique : « C'est ce qu'on estime que vous êtes prêt à payer, à cet instant précis. »",
+    },
+  ],
+};
+
+const ORAL_NOTES_5E: SupportTexte = {
+  id: "5e_oral_notes",
+  kicker: "Compréhension de l'oral",
+  titre: "Faut-il noter les élèves ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Deux enseignants débattent aujourd'hui. D'abord madame Rivière.
+
+« Je note, et j'assume. Une note situe. Elle dit à l'élève où il en est, à la famille aussi, et en peu de place. Je n'ignore pas ses défauts : deux copies proches peuvent recevoir des notes différentes selon le moment de la correction. Mais supprimer la note ne supprime pas le classement — il devient seulement invisible, et donc plus difficile à discuter. »
+
+Ensuite monsieur Ambroise.
+
+« Ce que je reproche à la note, ce n'est pas d'être imprécise. C'est qu'elle arrête le travail. Quand l'élève lit son quinze ou son huit, il ne lit plus rien d'autre : ni les remarques, ni ce qu'il faudrait reprendre. J'écris donc ce qui est acquis et ce qui ne l'est pas, sans chiffre. Cela me prend plus de temps, je le reconnais. »
+
+Aucun des deux ne dit que l'évaluation est inutile. Ils ne s'opposent pas sur la nécessité d'évaluer, mais sur ce qu'un chiffre fait à celui qui le reçoit.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Quel défaut madame Rivière reconnaît-elle à la note ?",
+      choices: [
+        "deux copies proches peuvent recevoir des notes différentes",
+        "elle prend trop de temps à calculer",
+        "les familles ne la comprennent pas",
+        "elle décourage les meilleurs élèves",
+      ],
+      expected: "deux copies proches peuvent recevoir des notes différentes",
+      explanation:
+        "Elle le concède elle-même — « Je n'ignore pas ses défauts ». Reconnaître une faiblesse de son propre camp rend un argument plus solide, pas moins.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Quel est l'argument principal de monsieur Ambroise contre la note ?",
+      choices: [
+        "elle arrête le travail : l'élève ne lit plus les remarques",
+        "elle est imprécise",
+        "elle prend trop de temps",
+        "elle est injuste envers les familles",
+      ],
+      expected: "elle arrête le travail : l'élève ne lit plus les remarques",
+      explanation:
+        "Il écarte explicitement l'imprécision : « Ce que je reproche à la note, ce n'est pas d'être imprécise. » Son objection est ailleurs.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Que répond madame Rivière à ceux qui veulent supprimer la note ?",
+      choices: [
+        "le classement deviendrait invisible, donc plus difficile à discuter",
+        "les élèves travailleraient moins",
+        "les familles protesteraient",
+        "les professeurs perdraient du temps",
+      ],
+      expected:
+        "le classement deviendrait invisible, donc plus difficile à discuter",
+      explanation:
+        "Son argument ne défend pas la note pour elle-même : il porte sur ce qui se passerait sans elle.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Monsieur Ambroise dit : « Cela me prend plus de temps, je le reconnais. » Que fait-il ainsi ?",
+      choices: [
+        "il admet une faiblesse de sa propre position",
+        "il critique ses collègues",
+        "il change d'avis",
+        "il refuse de répondre",
+      ],
+      expected: "il admet une faiblesse de sa propre position",
+      explanation:
+        "Concéder un point contre soi est une manière de débattre : cela montre qu'on a examiné l'objection au lieu de l'ignorer.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_visees",
+      // ⚠️ Énoncé rendu spécifique — le tirage déduplique sur le texte.
+      text: "Dans quel but a-t-on fait entendre ces deux enseignants ?",
+      choices: [
+        "montrer sur quoi porte exactement le désaccord",
+        "convaincre de supprimer les notes",
+        "convaincre de garder les notes",
+        "expliquer comment calculer une moyenne",
+      ],
+      expected: "montrer sur quoi porte exactement le désaccord",
+      explanation:
+        "La dernière phrase le formule : ils ne s'opposent pas sur la nécessité d'évaluer, mais sur ce qu'un chiffre fait à celui qui le reçoit.",
+    },
+  ],
+};
+
+const ORAL_NATUREL_5E: SupportTexte = {
+  id: "5e_oral_naturel",
+  kicker: "Compréhension de l'oral",
+  titre: "Que veut dire « naturel » sur un emballage ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Prenez un paquet dans un rayon et lisez ce qui est écrit devant. Vous y trouverez peut-être « naturel », « authentique », « à l'ancienne ». Ces mots ont un point commun : aucun ne correspond à une règle précise.
+
+Il faut les distinguer d'autres mentions. « Bio » répond, lui, à un cahier des charges vérifié, avec des contrôles. « Naturel », non. Un fabricant peut l'écrire sans avoir à le prouver.
+
+Cela ne signifie pas que le produit est mauvais. Il peut être excellent. Le problème est ailleurs : le mot ne vous apprend rien, alors qu'il donne l'impression de vous apprendre quelque chose. Et c'est justement à cela qu'il sert.
+
+Où regarder, alors ? Au dos. La liste des ingrédients, elle, est obligatoire et réglementée. Elle est écrite plus petit, dans un ordre imposé : du plus présent au moins présent.
+
+C'est une règle assez simple à retenir : ce qui est écrit gros a été choisi pour vous plaire, ce qui est écrit petit a été imposé pour vous informer.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Quelle mention répond à un cahier des charges vérifié ?",
+      choices: ["« bio »", "« naturel »", "« authentique »", "« à l'ancienne »"],
+      expected: "« bio »",
+      explanation:
+        "L'émission oppose « bio » aux trois autres : la distinction porte sur l'existence d'un contrôle, pas sur le sens des mots.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Dans quel ordre la liste des ingrédients est-elle écrite ?",
+      choices: [
+        "du plus présent au moins présent",
+        "par ordre alphabétique",
+        "du moins cher au plus cher",
+        "dans un ordre libre",
+      ],
+      expected: "du plus présent au moins présent",
+      explanation:
+        "Cette information est donnée en passant, mais elle est utilisable : le premier ingrédient est celui qu'il y a le plus.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "L'émission dit-elle qu'un produit portant « naturel » est mauvais ?",
+      choices: [
+        "non, elle dit qu'il peut être excellent",
+        "oui, toujours",
+        "oui, sauf s'il est aussi bio",
+        "elle ne se prononce pas",
+      ],
+      expected: "non, elle dit qu'il peut être excellent",
+      explanation:
+        "L'émission écarte cette lecture pour déplacer la question : le problème n'est pas la qualité du produit, c'est ce que le mot fait croire.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_visees",
+      text: "D'après l'émission, à quoi sert le mot « naturel » sur un emballage ?",
+      choices: [
+        "à donner l'impression d'informer sans rien apprendre",
+        "à garantir l'absence de produits chimiques",
+        "à respecter une obligation légale",
+        "à indiquer l'origine du produit",
+      ],
+      expected: "à donner l'impression d'informer sans rien apprendre",
+      explanation:
+        "La phrase est nette : « le mot ne vous apprend rien, alors qu'il donne l'impression de vous apprendre quelque chose. Et c'est justement à cela qu'il sert. »",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Que veut dire la dernière phrase de l'émission ?",
+      choices: [
+        "les grosses mentions servent à séduire, les petites à informer",
+        "il faut acheter les produits sans emballage",
+        "les petites lettres sont illisibles exprès",
+        "les fabricants mentent sur leurs listes",
+      ],
+      expected: "les grosses mentions servent à séduire, les petites à informer",
+      explanation:
+        "La formule résume tout le propos par une opposition : choisi pour vous plaire d'un côté, imposé pour vous informer de l'autre.",
+    },
+  ],
+};
+
+const ORAL_AGE_ARBRE_5E: SupportTexte = {
+  id: "5e_oral_age_arbre",
+  kicker: "Compréhension de l'oral",
+  titre: "Ce qu'un arbre coupé raconte du passé",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Tout le monde sait qu'on peut compter les cercles d'un tronc coupé pour connaître l'âge d'un arbre. Un cercle, une année. C'est vrai, et c'est peu de chose à côté de ce qu'ils racontent vraiment.
+
+Regardez leur épaisseur. Une année pluvieuse et douce fait un anneau large. Une année de sécheresse ou de froid en fait un étroit. Un tronc n'est donc pas seulement un compteur d'années : c'est une suite de bonnes et de mauvaises saisons, dans l'ordre.
+
+Les chercheurs s'en servent bien au-delà de l'arbre. Comme tous les arbres d'une même région vivent les mêmes années, leurs anneaux dessinent le même motif. On peut alors relier un arbre vivant à une poutre ancienne qui porte la fin du même motif, puis cette poutre à une plus vieille encore.
+
+De proche en proche, on remonte ainsi sur plusieurs milliers d'années. Et cela permet de dater une charpente, une épave, un tableau peint sur bois.
+
+Il n'y avait ni thermomètre ni carnet à ces époques. L'arbre, lui, prenait des notes sans le savoir.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Que révèle l'épaisseur d'un anneau ?",
+      choices: [
+        "si l'année a été bonne ou mauvaise pour l'arbre",
+        "l'âge exact de l'arbre",
+        "l'espèce de l'arbre",
+        "la hauteur de l'arbre",
+      ],
+      expected: "si l'année a été bonne ou mauvaise pour l'arbre",
+      explanation:
+        "L'émission distingue deux informations : le nombre d'anneaux donne l'âge, leur épaisseur donne les conditions de chaque année.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Pourquoi les arbres d'une même région ont-ils le même motif d'anneaux ?",
+      choices: [
+        "parce qu'ils ont vécu les mêmes années",
+        "parce qu'ils ont le même âge",
+        "parce qu'ils sont de la même espèce",
+        "parce qu'ils poussent à la même vitesse",
+      ],
+      expected: "parce qu'ils ont vécu les mêmes années",
+      explanation:
+        "C'est cette identité de motif qui rend possible tout le raccordement expliqué ensuite. Sans elle, la méthode ne tiendrait pas.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Comment remonte-t-on plusieurs milliers d'années ?",
+      choices: [
+        "en reliant un arbre vivant à une poutre plus ancienne, puis à une plus ancienne encore",
+        "en coupant les arbres les plus vieux du monde",
+        "en mesurant la hauteur des forêts",
+        "en comparant les espèces entre elles",
+      ],
+      expected:
+        "en reliant un arbre vivant à une poutre plus ancienne, puis à une plus ancienne encore",
+      explanation:
+        "L'expression « de proche en proche » désigne cet enchaînement : chaque pièce recouvre partiellement la précédente.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Que permet de dater cette méthode ?",
+      choices: [
+        "une charpente, une épave, un tableau peint sur bois",
+        "des ossements",
+        "des pierres taillées",
+        "des poteries",
+      ],
+      expected: "une charpente, une épave, un tableau peint sur bois",
+      explanation:
+        "Les trois exemples ont un point commun qu'il faut voir : ils sont tous en bois. La méthode ne vaut que pour lui.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Que veut dire la dernière phrase : « l'arbre prenait des notes sans le savoir » ?",
+      choices: [
+        "l'arbre a enregistré le climat des années qu'il a vécues",
+        "l'arbre écrit vraiment quelque chose",
+        "les chercheurs ont écrit sur les arbres",
+        "l'arbre se souvient de son passé",
+      ],
+      expected: "l'arbre a enregistré le climat des années qu'il a vécues",
+      explanation:
+        "L'image répond à la phrase précédente — « il n'y avait ni thermomètre ni carnet ». L'arbre remplace l'instrument qui n'existait pas.",
+    },
+  ],
+};
+
 // Le récit d'abord, le document ensuite, l'oral en dernier : c'est l'ordre de
 // l'épreuve officielle, et le tirage choisit celui dont l'élève a vu le moins
 // de questions.
@@ -1617,6 +2521,11 @@ export const SUPPORTS_ORAL_CM2: SupportTexte[] = [
   ORAL_VOLCAN_CM2,
   ORAL_MOTS_NOUVEAUX_CM2,
   ORAL_ENNUI_CM2,
+  ORAL_REQUINS_CM2,
+  ORAL_FOURMIS_CM2,
+  ORAL_OUBLI_CM2,
+  ORAL_NOMS_DE_RUES_CM2,
+  ORAL_ANIMAL_MENTEUR_CM2,
 ];
 export const SUPPORTS_ORAL_5E: SupportTexte[] = [
   ORAL_VRAI_FAUX_5E,
@@ -1624,4 +2533,9 @@ export const SUPPORTS_ORAL_5E: SupportTexte[] = [
   ORAL_PUBLICITE_5E,
   ORAL_CARTES_5E,
   ORAL_TELEPHONES_5E,
+  ORAL_MARRONNIER_5E,
+  ORAL_PRIX_BILLET_5E,
+  ORAL_NOTES_5E,
+  ORAL_NATUREL_5E,
+  ORAL_AGE_ARBRE_5E,
 ];
