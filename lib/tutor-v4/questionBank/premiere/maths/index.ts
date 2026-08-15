@@ -47,6 +47,7 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { automatismesCalculBank } from "./automatismes-calcul.bank";
+import { automatismesAlgebreBank } from "./automatismes-algebre.bank";
 import { evolutionsBank } from "./evolutions.bank";
 import { lectureGraphiqueBank } from "./lecture-graphique.bank";
 import { suitesArithmetiquesBank } from "./suites-arithmetiques.bank";
@@ -65,6 +66,7 @@ import { bernoulliBank } from "./bernoulli.bank";
 export const mathsPremiereQuestionBank: TutorBankItemV4[] = [
   // === AUTOMATISMES ===
   ...automatismesCalculBank, // comparer · fractions et puissances · ordres et unités
+  ...automatismesAlgebreBank, // développer-factoriser · équations · signe · formules
   ...evolutionsBank, // coefficient multiplicateur · taux d'évolution
   ...lectureGraphiqueBank, // lire · résoudre graphiquement · droites
   // === VARIATION LINÉAIRE ===
