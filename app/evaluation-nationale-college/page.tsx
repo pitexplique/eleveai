@@ -37,13 +37,12 @@ export const metadata: Metadata = {
 // ⚠️ `minutes` EST RECOPIÉ À LA MAIN de `dureeSecondes` (lib/eval-nationale/
 // <slug>.ts). Importer les configs ici embarquerait les quatre banques dans le
 // bundle de ce hub, alors que chaque épreuve n'emporte que la sienne. Une
-// minute par question depuis l'arbitrage du 01/08 : 25 en français, 20 en
-// maths de 4ᵉ.
+// minute par question depuis l'arbitrage du 01/08 : 25 en français.
 //
-// ⚠️ SAUF LA 6ᵉ EN MATHS, à 50 minutes depuis le 11/08 : c'est la seule épreuve
-// dont nous ayons les effectifs officiels (document professeur DEPP), et elle
-// reprend donc le sujet entier — 62 questions — au lieu d'en tenir la cadence
-// sur un échantillon.
+// ⚠️ SAUF LES DEUX ÉPREUVES DE MATHS, à 50 minutes — la 6ᵉ depuis le 11/08, la
+// 4ᵉ depuis le 15/08. Ce sont celles dont nous avons les effectifs officiels :
+// elles reprennent le sujet entier, 62 questions chacune, au lieu d'en tenir
+// la cadence sur un échantillon.
 const EPREUVES = [
   {
     niveau: "6ᵉ",
@@ -107,14 +106,18 @@ const EPREUVES = [
     niveau: "4ᵉ",
     matiere: "Mathématiques",
     slug: "4e-maths",
-    minutes: 20,
+    minutes: 50,
     emoji: "📐",
     accent: SAFRAN,
+    // LES QUATRE DOMAINES, PUIS LES DEUX TESTS, comme en 6ᵉ : depuis le 15/08
+    // l'épreuve reprend le volume du sujet officiel, et le bilan rend donc
+    // les automatismes et la résolution de problèmes à part.
     teste: [
-      "Les nombres et les calculs",
-      "Lire et organiser des données",
+      "Les nombres et le calcul",
       "Les grandeurs et les mesures",
-      "La géométrie",
+      "L'espace et la géométrie",
+      "Données, proportionnalité et programmation",
+      "Automatismes et résolution de problèmes",
     ],
     // LIVRÉE (01/08) : l'épreuve pioche dans le programme de 5ᵉ.
     epreuve: "/evaluation-nationale-college/4e-maths",
