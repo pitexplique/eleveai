@@ -102,7 +102,7 @@ export const deriveeCalculBank: TutorBankItemV4[] = [
     hint: "Une fonction constante ne varie pas : sa courbe est une droite horizontale.",
     tags: ["premiere", "maths", "derivation", "formules", "template", "short"],
     generate: () => {
-      const k = pick([-7, -3, 4, 12, 25] as const);
+      const k = pick([-25, -12, -7, -3, 2, 4, 8, 12, 18, 25, 40] as const);
       return {
         text: `Soit $f$ la fonction définie par $f(x) = ${k}$. Combien vaut $f'(x)$ ?`,
         format: "short",
@@ -583,8 +583,8 @@ export const deriveeCalculBank: TutorBankItemV4[] = [
     hint: "Un produit de deux facteurs du premier degré : on étudie le signe de chacun, puis on multiplie.",
     tags: ["premiere", "maths", "derivation", "signe", "template"],
     generate: () => {
-      const r1 = pick([1, 2] as const);
-      const r2 = pick([4, 5, 6] as const);
+      const r1 = pick([1, 2, 3] as const);
+      const r2 = pick([5, 6, 7, 8] as const);
       return {
         text:
           `La dérivée d'une fonction $f$ s'écrit $f'(x) = (x - ${r1})(${r2} - x)$ sur $[0 \\, ; \\, 10]$. ` +
@@ -722,8 +722,8 @@ export const deriveeCalculBank: TutorBankItemV4[] = [
     hint: "Le tableau de variations se lit en deux lignes : le signe de $f'$, puis les flèches de $f$.",
     tags: ["premiere", "maths", "derivation", "tableau", "template"],
     generate: () => {
-      const r1 = pick([1, 2] as const);
-      const r2 = pick([4, 5, 6] as const);
+      const r1 = pick([1, 2, 3] as const);
+      const r2 = pick([5, 6, 7, 8] as const);
       return {
         text:
           `Sur $[0 \\, ; \\, 10]$, une fonction $f$ a pour dérivée $f'(x) = (x - ${r1})(${r2} - x)$. ` +
@@ -765,8 +765,8 @@ export const deriveeCalculBank: TutorBankItemV4[] = [
     hint: "L'extremum est atteint là où la dérivée s'annule EN CHANGEANT de signe.",
     tags: ["premiere", "maths", "derivation", "extremum", "template", "short"],
     generate: () => {
-      const r1 = pick([1, 2] as const);
-      const r2 = pick([4, 5, 6] as const);
+      const r1 = pick([1, 2, 3] as const);
+      const r2 = pick([5, 6, 7, 8] as const);
       return {
         text:
           `Sur $[0 \\, ; \\, 10]$, une fonction $f$ a pour dérivée $f'(x) = (x - ${r1})(${r2} - x)$. ` +

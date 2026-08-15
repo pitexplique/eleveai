@@ -419,9 +419,14 @@ export const informationChiffreeBank: TutorBankItemV4[] = [
     hint: "Sur un diagramme circulaire, l'angle est proportionnel à la part : le tour complet fait $360°$.",
     tags: ["premiere", "maths", "statistiques", "diagramme", "template", "short"],
     generate: () => {
-      const parts = [50, 25, 15, 10];
+      const parts = pick([
+        [50, 25, 15, 10],
+        [40, 30, 20, 10],
+        [25, 25, 30, 20],
+        [60, 20, 10, 10],
+      ] as const);
       const labels = ["Bus", "Voiture", "À pied", "Vélo"] as const;
-      const k = pick([0, 1, 2] as const);
+      const k = pick([0, 1, 2, 3] as const);
       const angle = (parts[k] * 360) / 100;
       return {
         text:
@@ -743,10 +748,13 @@ export const informationChiffreeBank: TutorBankItemV4[] = [
     hint: "On parcourt la colonne jusqu'à dépasser le seuil.",
     tags: ["premiere", "maths", "tableur", "seuil", "template", "short"],
     generate: () => {
-      const base = 1000;
-      const coef = 1.2;
+      const base = pick([500, 800, 1000, 1200, 1500] as const);
+      const coef = pick([1.2, 1.25, 1.5] as const);
       const valeurs = [0, 1, 2, 3, 4].map((n) => [n, Math.round(base * coef ** n)]);
-      const seuil = pick([1400, 1700, 2000] as const);
+      const seuil = pick([
+        Math.round(base * coef ** 2) - 1,
+        Math.round(base * coef ** 3) - 1,
+      ] as const);
       const premier = valeurs.find((v) => (v[1] as number) > seuil)![0];
       return {
         text:

@@ -839,13 +839,13 @@ export const evolutionsBank: TutorBankItemV4[] = [
     hint: "Le coefficient réciproque est l'INVERSE du coefficient : $\\frac{1}{k}$.",
     tags: ["premiere", "maths", "evolutions", "reciproque", "template", "short"],
     generate: () => {
-      const t = pick([25, 50, 100, 150] as const);
+      const t = pick([25, 50, 60, 100, 150, 200, 300] as const);
       const coef = 1 + t / 100;
       const reciproque = 1 / coef;
       return {
         text:
-          `Un prix a augmenté de $${t}\\,\\%$. ` +
-          `Par quel nombre faut-il le multiplier pour revenir au prix de départ ?`,
+          `${pick(["Un prix", "Un loyer", "Un capital", "Un effectif", "Un tarif"] as const)} a augmenté de $${t}\\,\\%$. ` +
+          `Par quel nombre faut-il le multiplier pour revenir à sa valeur de départ ?`,
         format: "short",
         expected: [fr(reciproque)],
         comparator: "number_equal",

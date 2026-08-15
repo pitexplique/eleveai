@@ -507,8 +507,9 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     hint: "$P_A(B) = \\frac{P(A \\cap B)}{P(A)}$ : divise l'intersection par la condition.",
     tags: ["premiere", "maths", "probabilites", "conditionnelle", "template", "short"],
     generate: () => {
-      const pA = pick([0.2, 0.4, 0.5, 0.8] as const);
-      const pInter = pick([0.1, 0.2] as const);
+      const pA = pick([0.2, 0.25, 0.4, 0.5, 0.6, 0.8] as const);
+      // P(A ∩ B) ne peut pas dépasser P(A).
+      const pInter = pick(([0.05, 0.1, 0.15, 0.2, 0.3] as const).filter((v) => v <= pA));
       const valeur = pInter / pA;
       return {
         text:

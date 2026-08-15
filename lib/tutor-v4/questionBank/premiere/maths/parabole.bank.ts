@@ -182,8 +182,8 @@ export const paraboleBank: TutorBankItemV4[] = [
     hint: "Où la courbe coupe-t-elle l'axe vertical ?",
     tags: ["premiere", "maths", "parabole", "template", "short"],
     generate: () => {
-      const a = pick([0.5, 1] as const);
-      const c = pick([-4, -2, 1, 3] as const);
+      const a = pick([0.5, 1, 2] as const);
+      const c = pick([-5, -4, -3, -2, -1, 1, 2, 3, 4] as const);
       return {
         text: `La courbe ci-contre représente $f(x) = ${fr(a)}x^2 + c$. Combien vaut $c$ ?`,
         format: "short",

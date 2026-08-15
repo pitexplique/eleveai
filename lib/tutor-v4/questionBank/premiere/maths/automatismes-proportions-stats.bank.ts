@@ -333,8 +333,16 @@ export const automatismesProportionsStatsBank: TutorBankItemV4[] = [
     hint: "Comparer deux barres, c'est comparer deux hauteurs — mais le total, lui, se calcule.",
     tags: ["premiere", "maths", "automatisme", "statistiques", "template", "short"],
     generate: () => {
-      const mois = ["Janvier", "Février", "Mars"] as const;
-      const valeurs = [pick([100, 150] as const), pick([200, 250] as const), pick([50, 80] as const)];
+      const mois = pick([
+        ["Janvier", "Février", "Mars"],
+        ["Avril", "Mai", "Juin"],
+        ["Septembre", "Octobre", "Novembre"],
+      ] as const);
+      const valeurs = [
+        pick([100, 120, 150, 180] as const),
+        pick([200, 220, 250, 300] as const),
+        pick([50, 60, 80, 90] as const),
+      ];
       const total = valeurs.reduce((s, v) => s + v, 0);
       return {
         text: `D'après le diagramme ci-contre, quel est le total des ventes sur les trois mois ?`,
@@ -428,9 +436,9 @@ export const automatismesProportionsStatsBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "automatisme", "moyenne", "template", "short"],
     generate: () => {
       const n = pick([5, 6] as const);
-      const base = pick([8, 10, 12] as const);
-      // Des valeurs dont la somme est un multiple de n.
-      const valeurs = Array.from({ length: n }, (_, i) => base + ((i * 2) % 5) - 2);
+      const base = pick([6, 8, 9, 10, 11, 12, 14, 15] as const);
+      const ecart = pick([1, 2, 3] as const);
+      const valeurs = Array.from({ length: n }, (_, i) => base + ((i * ecart) % 5) - 2);
       const somme = valeurs.reduce((s, v) => s + v, 0);
       const moyenne = somme / n;
       return {
@@ -501,9 +509,14 @@ export const automatismesProportionsStatsBank: TutorBankItemV4[] = [
     hint: "Le premier quartile est la plus petite valeur telle qu'au moins un quart de la série lui soit inférieur ou égal.",
     tags: ["premiere", "maths", "automatisme", "quartiles", "template", "short"],
     generate: () => {
-      // Effectif 8 : Q1 est la 2ᵉ valeur (8/4 = 2).
-      const valeurs = shuffle([3, 5, 6, 8, 9, 11, 12, 15] as const).slice(0, 8);
-      const triees = [...valeurs].sort((a, b) => a - b);
+      // Effectif 8 : Q1 est la 2ᵉ valeur (8/4 = 2). Les valeurs sont tirées,
+      // pas seulement mélangées : le tableau affiche la série TRIÉE, donc un
+      // simple mélange donnerait toujours le même énoncé.
+      const depart = pick([2, 3, 4, 5, 6] as const);
+      const pas = pick([1, 2, 3] as const);
+      const bruit = pick([0, 1, 2] as const);
+      const triees = Array.from({ length: 8 }, (_, i) => depart + i * pas + (i % 3 === 0 ? bruit : 0));
+      const valeurs = triees;
       const q1 = triees[1];
       return {
         text:
@@ -826,11 +839,18 @@ export const automatismesProportionsStatsBank: TutorBankItemV4[] = [
     hint: "$P(\\overline{A}) = 1 - P(A)$.",
     tags: ["premiere", "maths", "automatisme", "probabilites", "template", "short"],
     generate: () => {
-      const p = pick([0.15, 0.25, 0.4, 0.72, 0.9] as const);
+      const p = pick([0.05, 0.12, 0.15, 0.2, 0.25, 0.3, 0.4, 0.55, 0.72, 0.8, 0.9] as const);
+      const ctx = pick([
+        { quoi: "un appareil tombe en panne au cours d'une journée", contraire: "il ne tombe PAS en panne" },
+        { quoi: "un train arrive en retard", contraire: "il arrive à l'heure" },
+        { quoi: "un candidat réussit l'épreuve", contraire: "il ne la réussit pas" },
+        { quoi: "il pleuve demain", contraire: "il ne pleuve pas" },
+        { quoi: "une pièce prélevée soit défectueuse", contraire: "elle soit conforme" },
+      ] as const);
       return {
         text:
-          `La probabilité qu'un appareil tombe en panne au cours d'une journée vaut $${fr(p)}$. ` +
-          `Quelle est la probabilité qu'il ne tombe PAS en panne ?`,
+          `La probabilité que ${ctx.quoi} vaut $${fr(p)}$. ` +
+          `Quelle est la probabilité que ${ctx.contraire} ?`,
         format: "short",
         expected: [fr(Math.round((1 - p) * 100) / 100)],
         comparator: "number_equal",

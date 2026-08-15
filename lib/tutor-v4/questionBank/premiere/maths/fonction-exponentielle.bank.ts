@@ -134,8 +134,8 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
     hint: "$a^x$ signifie qu'on multiplie $a$ par lui-même $x$ fois.",
     tags: ["premiere", "maths", "exponentielle", "template", "short"],
     generate: () => {
-      const a = pick([2, 3, 5, 10] as const);
-      const x = pick([2, 3] as const);
+      const a = pick([2, 3, 4, 5, 6, 10] as const);
+      const x = pick([2, 3, 4] as const);
       return {
         text: `Soit $f(x) = ${a}^x$. Combien vaut $f(${x})$ ?`,
         format: "short",
@@ -214,7 +214,7 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
     hint: "$a^{1/n}$ est le nombre qui, élevé à la puissance $n$, redonne $a$.",
     tags: ["premiere", "maths", "exponentielle", "racine", "template", "short"],
     generate: () => {
-      const base = pick([4, 9, 16, 25, 100] as const);
+      const base = pick([4, 9, 16, 25, 36, 49, 64, 81, 100, 144] as const);
       return {
         text: `Combien vaut $${base}^{\\frac{1}{2}}$ ?`,
         format: "short",
@@ -290,8 +290,8 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
     hint: "On repère l'abscisse, puis on lit l'ordonnée du point correspondant.",
     tags: ["premiere", "maths", "exponentielle", "graphique", "template", "short"],
     generate: () => {
-      const a = pick([2, 3] as const);
-      const x = pick([1, 2, 3] as const);
+      const a = pick([2, 3, 4, 5] as const);
+      const x = pick([1, 2, 3, 4] as const);
       const valeurs = [0, 1, 2, 3, 4].map((k) => a ** k);
       return {
         text:
@@ -537,8 +537,8 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "exponentielle", "taux-moyen", "template", "short"],
     generate: () => {
       // Cas où la racine tombe juste : coefficient moyen c, sur n périodes.
-      const c = pick([1.2, 1.5, 2, 0.5] as const);
-      const n = pick([2, 3] as const);
+      const c = pick([1.2, 1.5, 2, 3, 0.5, 0.2] as const);
+      const n = pick([2, 3, 4] as const);
       const global = c ** n;
       return {
         text:
@@ -572,8 +572,8 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
     hint: "Le coefficient global est le produit des coefficients de chaque période.",
     tags: ["premiere", "maths", "exponentielle", "taux-moyen", "template", "short"],
     generate: () => {
-      const t = pick([10, 20, 50] as const);
-      const n = pick([2, 3] as const);
+      const t = pick([5, 10, 20, 25, 50, 100] as const);
+      const n = pick([2, 3, 4] as const);
       const coef = 1 + t / 100;
       const global = coef ** n;
       return {
@@ -807,8 +807,8 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
     hint: "Doubler dix fois, ce n'est pas multiplier par vingt.",
     tags: ["premiere", "maths", "exponentielle", "ordre-de-grandeur", "template", "short"],
     generate: () => {
-      const n = pick([5, 6, 10] as const);
-      const depart = pick([1, 2] as const);
+      const n = pick([4, 5, 6, 7, 8, 10, 12] as const);
+      const depart = pick([1, 2, 3, 5] as const);
       return {
         text:
           `Une rumeur se propage : chaque personne informée en informe deux autres à chaque étape, ` +
@@ -842,8 +842,8 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
     hint: "On teste les puissances successives jusqu'à dépasser le seuil.",
     tags: ["premiere", "maths", "exponentielle", "seuil", "template", "short"],
     generate: () => {
-      const depart = pick([100, 200] as const);
-      const n = pick([3, 4, 5] as const);
+      const depart = pick([50, 80, 100, 150, 200, 400] as const);
+      const n = pick([3, 4, 5, 6] as const);
       const seuil = depart * 2 ** n - 1;
       return {
         text:
@@ -877,17 +877,21 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
     hint: "On lit la colonne jusqu'à la première valeur qui atteint la cible.",
     tags: ["premiere", "maths", "exponentielle", "seuil", "tableau", "template", "short"],
     generate: () => {
-      const depart = 20000;
-      const coef = 1.02;
+      const depart = pick([10000, 15000, 20000, 25000, 30000] as const);
+      const coef = pick([1.02, 1.03] as const);
       const valeurs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => [
         n,
         Math.round(depart * coef ** n),
       ]);
-      const cible = pick([21000, 22000, 23000] as const);
+      // ⚠️ La cible se DÉDUIT du tableau : une valeur écrite en dur devenait
+      // inatteignable dès qu'on a fait varier le capital de départ, et le
+      // générateur cassait. Vu à l'exécution, jamais à la lecture.
+      const rang = pick([3, 5, 7, 9] as const);
+      const cible = Math.round(((valeurs[rang][1] as number) - 50) / 50) * 50;
       const premier = valeurs.find((v) => (v[1] as number) >= cible)![0];
       return {
         text:
-          `Un capital de $${depart}$ € est placé à $2\\,\\%$ par an. ` +
+          `Un capital de $${depart}$ € est placé à $${fr((coef - 1) * 100)}\\,\\%$ par an. ` +
           `À l'aide du tableau ci-contre, détermine à partir de quelle année il atteint $${cible}$ €.`,
         format: "short",
         expected: [String(premier)],
@@ -922,7 +926,7 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
     hint: "On repère la hauteur du seuil, puis le premier point qui la dépasse.",
     tags: ["premiere", "maths", "exponentielle", "seuil", "graphique", "template", "short"],
     generate: () => {
-      const depart = pick([100, 200] as const);
+      const depart = pick([25, 50, 80, 100, 150, 200] as const);
       const q = 2;
       const valeurs = [0, 1, 2, 3, 4].map((k) => depart * q ** k);
       const rang = pick([2, 3, 4] as const);
