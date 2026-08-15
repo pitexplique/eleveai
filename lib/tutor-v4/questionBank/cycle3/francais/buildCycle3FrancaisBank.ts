@@ -5659,7 +5659,296 @@ function vocabulaireQuestion(microId: string): Generated {
  *  `comp_image` sur LECTURE, `ecrit_copie` sur ECRITURE, `flue_130_mots` sur
  *  le défaut final. C'est la leçon de la phrase complexe du CM2 : un
  *  aiguillage trop large ne panne pas, il sert simplement autre chose. */
+/* ── LEXIQUE : LES CINQ POOLS AJOUTÉS LE 15/08/2026 ─────────────────────────
+   Deux sources qui se recoupent. Les « Attendus de fin d'année de CM2 »
+   réclament, sous « Enrichir le lexique », les racines latines et grecques,
+   l'homonymie et la composition. Et l'évaluation nationale de 6ᵉ mesure deux
+   savoir-faire absents du coach, sur lesquels les écarts au national sont les
+   plus lourds de toute l'épreuve de lexique : le NIVEAU DE LANGUE (26 % de
+   réussite contre 57 %) et le SENS FIGURÉ (64 % contre 82 %).
+
+   ⚠️ Ces pools existent pour que les gabarits soient SUR LE SUJET. Sans eux,
+   les nouvelles micro-compétences seraient servies par `vocabulaireQuestion`
+   depuis les pools génériques : des questions justes, portant sur autre chose
+   que leur intitulé. C'est la panne qu'avait connue `phrase_complexe`, et
+   qu'aucun vérificateur ne sait voir. */
+
+const SENS_FIGURE: QcmItem[] = [
+  {
+    text: "Dans « Il a le cœur sur la main », que veut dire l'expression ?",
+    correct: "il est très généreux",
+    wrongs: ["il a mal au cœur", "il tient quelque chose dans sa main", "il a peur"],
+    methode:
+      "Au sens figuré, l'image remplace l'idée : la main qui donne dit la générosité.",
+  },
+  {
+    text: "Dans quelle phrase « dévorer » est-il employé au sens figuré ?",
+    correct: "Elle a dévoré ce roman en deux soirs.",
+    wrongs: [
+      "Le chien a dévoré sa gamelle.",
+      "Nous avons dévoré le poulet.",
+      "Le chat dévore sa pâtée.",
+    ],
+    methode:
+      "On ne mange pas un livre : quand le verbe ne peut pas être pris au pied de la lettre, il est au sens figuré.",
+  },
+  {
+    text: "« Tomber dans les pommes » signifie…",
+    correct: "s'évanouir",
+    wrongs: ["glisser sur un fruit", "faire une chute de vélo", "avoir très faim"],
+    methode:
+      "Une expression figée ne se comprend pas mot à mot : c'est l'ensemble qui porte le sens.",
+  },
+  {
+    text: "Dans « Cette nouvelle m'a glacé le sang », le mot « glacé » est employé…",
+    correct: "au sens figuré",
+    wrongs: [
+      "au sens propre",
+      "comme un nom",
+      "comme un complément de lieu",
+    ],
+    methode:
+      "Le sang ne gèle pas vraiment : l'image dit la peur. C'est le sens figuré.",
+  },
+  {
+    text: "Dans laquelle de ces phrases « brûler » est-il au sens propre ?",
+    correct: "Le feu de camp brûle depuis une heure.",
+    wrongs: [
+      "Il brûle d'impatience.",
+      "Elle a brûlé les étapes.",
+      "Ce joueur brûle les planches.",
+    ],
+    methode:
+      "Le sens propre est le sens premier, celui qu'on peut voir : ici, une vraie flamme.",
+  },
+  {
+    text: "« Avoir un chat dans la gorge » veut dire…",
+    correct: "être enroué",
+    wrongs: [
+      "avoir avalé quelque chose",
+      "avoir un animal chez soi",
+      "parler très fort",
+    ],
+    methode:
+      "L'image de la gêne dans la gorge dit l'enrouement. On ne cherche pas le chat.",
+  },
+];
+
+const NIVEAU_LANGUE: QcmItem[] = [
+  {
+    text: "Parmi ces mots, lequel appartient au langage familier ?",
+    correct: "bouquin",
+    wrongs: ["livre", "ouvrage", "roman"],
+    methode:
+      "« Bouquin » se dit entre amis, pas dans un devoir : c'est du registre familier.",
+  },
+  {
+    text: "Quel mot appartient au langage soutenu ?",
+    correct: "demeure",
+    wrongs: ["maison", "baraque", "logement"],
+    methode:
+      "Trois niveaux : « baraque » (familier), « maison » (courant), « demeure » (soutenu).",
+  },
+  {
+    text: "« Je suis crevé » — dans quel niveau de langue est cette phrase ?",
+    correct: "familier",
+    wrongs: ["courant", "soutenu", "poétique"],
+    methode:
+      "Le courant dirait « je suis fatigué », le soutenu « je suis épuisé ». « Crevé » est familier.",
+  },
+  {
+    text: "Tu écris une lettre au maire de ta commune. Quelle formulation choisis-tu ?",
+    correct: "Je vous prie de bien vouloir examiner ma demande.",
+    wrongs: [
+      "Répondez-moi vite s'il vous plaît.",
+      "Faut que vous regardiez mon truc.",
+      "Jetez un œil à ma demande.",
+    ],
+    methode:
+      "On adapte le niveau de langue à qui l'on parle : à une autorité, on écrit en langage soutenu.",
+  },
+  {
+    text: "Quel est l'équivalent COURANT du mot familier « fringues » ?",
+    correct: "vêtements",
+    wrongs: ["parures", "haillons", "costumes"],
+    methode:
+      "Le registre courant est celui de tous les jours, ni relâché ni cérémonieux.",
+  },
+  {
+    text: "Range ces trois mots du plus familier au plus soutenu : voiture, bagnole, automobile.",
+    correct: "bagnole, voiture, automobile",
+    wrongs: [
+      "voiture, bagnole, automobile",
+      "automobile, voiture, bagnole",
+      "bagnole, automobile, voiture",
+    ],
+    methode:
+      "Familier, courant, soutenu : c'est l'ordre du registre, pas celui de la longueur du mot.",
+  },
+];
+
+const RACINES: QcmItem[] = [
+  {
+    text: "Dans « bibliothèque », que veut dire la racine grecque « biblio » ?",
+    correct: "livre",
+    wrongs: ["maison", "école", "papier"],
+    methode:
+      "« Biblio » = livre, « thèque » = rangement. Une bibliothèque range des livres.",
+  },
+  {
+    text: "Que signifie la racine grecque « chrono », dans « chronomètre » ?",
+    correct: "le temps",
+    wrongs: ["la vitesse", "la mesure", "la distance"],
+    methode:
+      "« Chrono » = temps, « mètre » = mesure : un chronomètre mesure le temps.",
+  },
+  {
+    text: "Dans « aquarium » et « aquatique », que veut dire la racine latine « aqua » ?",
+    correct: "l'eau",
+    wrongs: ["le verre", "le poisson", "le sable"],
+    methode:
+      "Une racine commune éclaire toute une famille de mots : aqua, c'est l'eau.",
+  },
+  {
+    text: "Quel mot NE contient PAS la racine « thermo » (chaleur) ?",
+    correct: "thermite",
+    wrongs: ["thermomètre", "thermos", "thermal"],
+    methode:
+      "On teste le sens : thermomètre, thermos et thermal parlent tous de chaleur.",
+  },
+  {
+    text: "« Télé » veut dire « loin ». Que fait donc un téléphone ?",
+    correct: "il porte la voix au loin",
+    wrongs: [
+      "il montre des images",
+      "il sonne très fort",
+      "il enregistre des sons",
+    ],
+    methode:
+      "« Télé » (loin) + « phone » (voix) : le mot dit lui-même à quoi il sert.",
+  },
+  {
+    text: "Dans « géographie » et « géologie », que désigne la racine « géo » ?",
+    correct: "la Terre",
+    wrongs: ["le ciel", "la carte", "la pierre"],
+    methode:
+      "« Géo » = Terre. Géographie : décrire la Terre. Géologie : étudier la Terre.",
+  },
+];
+
+const COMPOSITION: QcmItem[] = [
+  {
+    text: "Quel mot est formé par composition (deux mots réunis) ?",
+    correct: "porte-monnaie",
+    wrongs: ["portail", "portier", "portable"],
+    methode:
+      "Un mot composé réunit deux mots qui existent seuls : porte + monnaie.",
+  },
+  {
+    text: "« Chou-fleur » est formé…",
+    correct: "de deux noms réunis",
+    wrongs: [
+      "d'un préfixe et d'un nom",
+      "d'un nom et d'un suffixe",
+      "d'un seul mot raccourci",
+    ],
+    methode:
+      "Ni préfixe ni suffixe : deux noms entiers, reliés par un trait d'union.",
+  },
+  {
+    text: "Lequel de ces mots N'EST PAS un mot composé ?",
+    correct: "grandeur",
+    wrongs: ["grand-père", "arc-en-ciel", "sous-marin"],
+    methode:
+      "« Grandeur » vient de « grand » + le suffixe -eur : c'est une dérivation, pas une composition.",
+  },
+  {
+    text: "Que désigne le mot composé « ouvre-boîte » ?",
+    correct: "un outil qui sert à ouvrir des boîtes",
+    wrongs: [
+      "une boîte qui s'ouvre seule",
+      "une boîte ouverte",
+      "quelqu'un qui range des boîtes",
+    ],
+    methode:
+      "Dans un mot composé verbe + nom, le premier dit l'action, le second sur quoi elle porte.",
+  },
+  {
+    text: "« Une pomme de terre » — combien de mots composent ce mot composé ?",
+    correct: "trois",
+    wrongs: ["un", "deux", "quatre"],
+    methode:
+      "Un mot composé peut s'écrire sans trait d'union : pomme + de + terre forment un seul nom.",
+  },
+  {
+    text: "Quel mot composé désigne un meuble ?",
+    correct: "porte-manteau",
+    wrongs: ["porte-parole", "porte-bonheur", "porte-avions"],
+    methode:
+      "Le second mot dit ce qu'on porte : le manteau. Les autres portent la parole, la chance, des avions.",
+  },
+];
+
+const HOMONYMIE: QcmItem[] = [
+  {
+    text: "« Le ver, le verre, le vert » : ces mots sont…",
+    correct: "des homonymes",
+    wrongs: ["des synonymes", "des antonymes", "des mots de la même famille"],
+    methode:
+      "Les homonymes se prononcent pareil mais n'ont ni le même sens ni la même orthographe.",
+  },
+  {
+    text: "Complète : « Maman a acheté un … de lait. »",
+    correct: "pot",
+    wrongs: ["peau", "pos", "peaux"],
+    methode:
+      "Deux mots se prononcent [po] : on choisit celui dont le sens convient, ici le récipient.",
+  },
+  {
+    text: "Dans « La reine porte une chaîne », quels mots sont homonymes d'autres mots courants ?",
+    correct: "reine (rêne, renne) et chaîne (chêne)",
+    wrongs: [
+      "porte seulement",
+      "une seulement",
+      "aucun mot de la phrase",
+    ],
+    methode:
+      "Un homonyme s'entend, il ne se voit pas : il faut passer par le sens de la phrase.",
+  },
+  {
+    text: "Quel mot est l'homonyme de « conte » (une histoire) ?",
+    correct: "compte",
+    wrongs: ["contre", "comté", "content"],
+    methode:
+      "Même prononciation, sens différent : un conte se raconte, un compte se calcule.",
+  },
+  {
+    text: "« Cet élève est sans faute » ou « cent faute » ? Choisis et dis pourquoi.",
+    correct: "sans faute — « sans » indique l'absence",
+    wrongs: [
+      "cent faute — « cent » est un nombre",
+      "s'en faute — « s'en » est un pronom",
+      "sang faute — « sang » est un liquide",
+    ],
+    methode:
+      "Quatre homonymes en [sɑ̃] : sans, cent, s'en, sang. Seul le sens de la phrase tranche.",
+  },
+  {
+    text: "Lequel de ces couples N'EST PAS un couple d'homonymes ?",
+    correct: "grand / grande",
+    wrongs: ["mer / mère", "cour / cours", "temps / tant"],
+    methode:
+      "« Grand » et « grande » sont le même mot au masculin et au féminin, pas deux mots différents.",
+  },
+];
+
 function questionParMicro(microId: string): Generated | null {
+  // Les cinq entrées du lexique ajoutées le 15/08 — voir le bloc au-dessus.
+  if (microId.includes("voc_sens_figure")) return qcm(SENS_FIGURE);
+  if (microId.includes("voc_niveau_langue")) return qcm(NIVEAU_LANGUE);
+  if (microId.includes("voc_racines")) return qcm(RACINES);
+  if (microId.includes("voc_composition")) return qcm(COMPOSITION);
+  if (microId.includes("voc_homonymie")) return qcm(HOMONYMIE);
   // Les six entrées du cours moyen.
   if (microId.includes("cult_heros")) return qcm(HEROS);
   if (microId.includes("cult_merveilleux")) return qcm(MERVEILLEUX);

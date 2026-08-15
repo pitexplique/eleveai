@@ -397,6 +397,170 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
     "« Terrifié » marque une peur très intense, plus forte que « inquiet »."
   ),
 
+  /* ── 6 bis. Sens figuré, niveaux de langue, racines, composition, homonymes ──
+     Ajoutés le 15/08/2026. Deux sources qui se recoupent : les « Attendus de
+     fin d'année de CM2 » réclament racines latines et grecques, homonymie et
+     composition ; et l'évaluation nationale de 6ᵉ mesure le niveau de langue
+     et le sens figuré, sur lesquels les écarts au national sont les plus
+     lourds de toute l'épreuve de lexique (26 % contre 57 %, 64 % contre 82 %).
+     Trois items fixes par micro-compétence : c'est le seuil sous lequel
+     `auditer-banque` annonce une répétition garantie. */
+
+  qcm(
+    "cm2_fr_fixed_voc_figure_1",
+    "vocabulaire",
+    "cm2_voc_sens_figure",
+    2,
+    "Dans « Elle a dévoré ce livre en une soirée », le verbe « dévorer » est employé...",
+    ["au sens propre", "au sens figuré", "comme un nom", "comme un adjectif"],
+    "au sens figuré",
+    "On ne mange pas un livre : quand le verbe ne peut pas être pris au pied de la lettre, il est au sens figuré."
+  ),
+  qcm(
+    "cm2_fr_fixed_voc_figure_2",
+    "vocabulaire",
+    "cm2_voc_sens_figure",
+    2,
+    "Que veut dire l'expression « avoir le cœur sur la main » ?",
+    ["être très généreux", "avoir mal au cœur", "tenir un objet dans la main", "avoir peur"],
+    "être très généreux",
+    "Une expression imagée ne se comprend pas mot à mot : la main qui donne dit la générosité."
+  ),
+  qcm(
+    "cm2_fr_fixed_voc_figure_3",
+    "vocabulaire",
+    "cm2_voc_sens_figure",
+    3,
+    "Dans quelle phrase « brûler » est-il employé au sens PROPRE ?",
+    ["Il brûle d'impatience.", "Le feu de camp brûle depuis une heure.", "Elle a brûlé les étapes.", "Ce comédien brûle les planches."],
+    "Le feu de camp brûle depuis une heure.",
+    "Le sens propre est le sens premier, celui qu'on peut voir : ici, une vraie flamme."
+  ),
+
+  qcm(
+    "cm2_fr_fixed_voc_registre_1",
+    "vocabulaire",
+    "cm2_voc_niveau_langue",
+    1,
+    "Parmi ces mots, lequel appartient au langage familier ?",
+    ["livre", "bouquin", "ouvrage", "roman"],
+    "bouquin",
+    "« Bouquin » se dit entre amis, pas dans un devoir : c'est le registre familier."
+  ),
+  qcm(
+    "cm2_fr_fixed_voc_registre_2",
+    "vocabulaire",
+    "cm2_voc_niveau_langue",
+    2,
+    "Tu écris une lettre au maire de ta commune. Quelle formulation choisis-tu ?",
+    ["Faut que vous regardiez mon truc.", "Répondez-moi vite s'il vous plaît.", "Je vous prie de bien vouloir examiner ma demande.", "Jetez un œil à ma demande."],
+    "Je vous prie de bien vouloir examiner ma demande.",
+    "On adapte le niveau de langue à qui l'on s'adresse : à une autorité, on écrit en langage soutenu."
+  ),
+  qcm(
+    "cm2_fr_fixed_voc_registre_3",
+    "vocabulaire",
+    "cm2_voc_niveau_langue",
+    3,
+    "Range du plus familier au plus soutenu : voiture, bagnole, automobile.",
+    ["voiture, bagnole, automobile", "bagnole, voiture, automobile", "automobile, voiture, bagnole", "bagnole, automobile, voiture"],
+    "bagnole, voiture, automobile",
+    "Familier, courant, soutenu : c'est l'ordre du registre, pas celui de la longueur du mot."
+  ),
+
+  qcm(
+    "cm2_fr_fixed_voc_racine_1",
+    "vocabulaire",
+    "cm2_voc_racines",
+    2,
+    "Dans « bibliothèque », que veut dire la racine grecque « biblio » ?",
+    ["maison", "livre", "école", "papier"],
+    "livre",
+    "« Biblio » veut dire livre et « thèque » rangement : une bibliothèque range des livres."
+  ),
+  qcm(
+    "cm2_fr_fixed_voc_racine_2",
+    "vocabulaire",
+    "cm2_voc_racines",
+    2,
+    "Dans « aquarium » et « aquatique », que désigne la racine latine « aqua » ?",
+    ["le verre", "le poisson", "l'eau", "le sable"],
+    "l'eau",
+    "Une racine commune éclaire toute une famille de mots : « aqua », c'est l'eau."
+  ),
+  qcm(
+    "cm2_fr_fixed_voc_racine_3",
+    "vocabulaire",
+    "cm2_voc_racines",
+    3,
+    "« Télé » veut dire « loin ». Que fait donc un téléphone ?",
+    ["il montre des images", "il sonne très fort", "il porte la voix au loin", "il enregistre des sons"],
+    "il porte la voix au loin",
+    "« Télé » (loin) et « phone » (voix) : le mot dit lui-même à quoi il sert."
+  ),
+
+  qcm(
+    "cm2_fr_fixed_voc_compose_1",
+    "vocabulaire",
+    "cm2_voc_composition",
+    1,
+    "Quel mot est formé par composition, c'est-à-dire par la réunion de deux mots ?",
+    ["portail", "porte-monnaie", "portier", "portable"],
+    "porte-monnaie",
+    "Un mot composé réunit deux mots qui existent seuls : porte et monnaie."
+  ),
+  qcm(
+    "cm2_fr_fixed_voc_compose_2",
+    "vocabulaire",
+    "cm2_voc_composition",
+    2,
+    "Lequel de ces mots N'EST PAS un mot composé ?",
+    ["grand-père", "arc-en-ciel", "grandeur", "sous-marin"],
+    "grandeur",
+    "« Grandeur » vient de « grand » et du suffixe -eur : c'est une dérivation, pas une composition."
+  ),
+  qcm(
+    "cm2_fr_fixed_voc_compose_3",
+    "vocabulaire",
+    "cm2_voc_composition",
+    2,
+    "Que désigne le mot composé « ouvre-boîte » ?",
+    ["une boîte qui s'ouvre seule", "un outil qui sert à ouvrir des boîtes", "une boîte ouverte", "une personne qui range des boîtes"],
+    "un outil qui sert à ouvrir des boîtes",
+    "Dans un mot composé formé d'un verbe et d'un nom, le premier dit l'action et le second sur quoi elle porte."
+  ),
+
+  qcm(
+    "cm2_fr_fixed_voc_homonyme_1",
+    "vocabulaire",
+    "cm2_voc_homonymie",
+    1,
+    "« Le ver, le verre, le vert » : ces mots sont...",
+    ["des synonymes", "des homonymes", "des antonymes", "des mots de la même famille"],
+    "des homonymes",
+    "Les homonymes se prononcent de la même façon mais n'ont ni le même sens ni la même orthographe."
+  ),
+  qcm(
+    "cm2_fr_fixed_voc_homonyme_2",
+    "vocabulaire",
+    "cm2_voc_homonymie",
+    2,
+    "Quel mot est l'homonyme de « conte », une histoire ?",
+    ["contre", "comté", "compte", "content"],
+    "compte",
+    "Même prononciation, sens différent : un conte se raconte, un compte se calcule."
+  ),
+  qcm(
+    "cm2_fr_fixed_voc_homonyme_3",
+    "vocabulaire",
+    "cm2_voc_homonymie",
+    3,
+    "Lequel de ces couples N'EST PAS un couple d'homonymes ?",
+    ["mer / mère", "cour / cours", "grand / grande", "temps / tant"],
+    "grand / grande",
+    "« Grand » et « grande » sont le même mot au masculin et au féminin, pas deux mots différents."
+  ),
+
   // ── 7. Phrase, groupes, accords et homophones ──────────────────────────────
   qcm(
     "cm2_fr_fixed_gram_1",

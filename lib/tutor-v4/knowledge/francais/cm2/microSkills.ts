@@ -85,6 +85,32 @@ export const microSkills: MicroSkillSource[] = [
   { id: "cm2_voc_reemploi", label: "Réemployer le vocabulaire étudié dans un écrit", notionId: "vocabulaire", prerequis: ["cm2_voc_nuance", "cm2_voc_polysemie"] },
   { id: "cm2_voc_orthographe", label: "Mémoriser et vérifier l'orthographe lexicale", notionId: "vocabulaire", prerequis: ["cm2_voc_reemploi"] },
 
+  /* CINQ MICRO-COMPÉTENCES AJOUTÉES LE 15/08/2026, sur deux sources qui se
+     recoupent — les « Attendus de fin d'année de CM2 » (annexe 9, Français) et
+     les résultats 2025 d'un collège de l'île, item par item.
+
+     ⭐ Les attendus demandent explicitement, sous « Enrichir le lexique » :
+     les racines latines et grecques, la notion d'homonymie, la formation des
+     mots par composition. Aucune des trois n'était déclarée.
+
+     ⭐ Et l'évaluation nationale de 6ᵉ mesure deux choses qui manquaient
+     aussi, avec les écarts au national les plus lourds de toute l'épreuve :
+     « identifier le niveau de langue d'une expression » (26 % de réussite
+     contre 57 % au national) et « déduire le sens d'une expression figurée »
+     (64 % contre 82 %). `cm2_voc_nuance` n'en dit rien : choisir une nuance de
+     sens, ce n'est pas reconnaître un registre.
+
+     ⚠️ Chacune reçoit son POOL dédié dans buildCycle3FrancaisBank —
+     `questionParMicro`. Sans cela le builder les servirait depuis le pool
+     générique du vocabulaire : des questions valides, mais hors sujet, et
+     aucun vérificateur ne peut le voir. C'est exactement ce qui était arrivé
+     à `phrase_complexe`. */
+  { id: "cm2_voc_sens_figure", label: "Distinguer le sens propre et le sens figuré", notionId: "vocabulaire", prerequis: ["cm2_voc_polysemie"] },
+  { id: "cm2_voc_niveau_langue", label: "Identifier le niveau de langue d'un mot ou d'une expression", notionId: "vocabulaire", prerequis: ["cm2_voc_nuance"] },
+  { id: "cm2_voc_racines", label: "Reconnaître une racine latine ou grecque", notionId: "vocabulaire", prerequis: ["cm2_voc_famille_prefixe_suffixe"] },
+  { id: "cm2_voc_composition", label: "Comprendre un mot formé par composition", notionId: "vocabulaire", prerequis: ["cm2_voc_famille_prefixe_suffixe"] },
+  { id: "cm2_voc_homonymie", label: "Distinguer des homonymes", notionId: "vocabulaire", prerequis: ["cm2_voc_polysemie"] },
+
   // Grammaire et orthographe grammaticale
   { id: "cm2_gram_phrase_simple", label: "Analyser les constituants d'une phrase simple", notionId: "grammaire_orthographe", prerequis: ["cm2_flue_unites_syntaxiques"] },
   { id: "cm2_gram_sujet_verbe", label: "Identifier sujet, verbe et compléments", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_phrase_simple"] },
