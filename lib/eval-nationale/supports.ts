@@ -1035,6 +1035,565 @@ Alors, se parlent-ils ? Ils se transmettent des informations, sans aucun doute. 
   ],
 };
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   SIX ENREGISTREMENTS DE PLUS, TROIS PAR NIVEAU (15/08/2026)
+   ---------------------------------------------------------------------------
+   ⭐ POURQUOI : c'était le goulot, et il était chiffré. `simuler-epreuves-
+   blanches.ts` donnait **2 passages complets sur 10** en français, aux DEUX
+   niveaux. Dès le troisième, le thème oral tombait à 0/5 et l'épreuve passait
+   de 25 à 20 questions — parce que l'oral ne se replie JAMAIS sur la banque
+   (ce serait un mensonge d'étiquette). Deux enregistrements = deux passages.
+   Chaque enregistrement ajouté rend un passage complet de plus.
+
+   ⭐ CE QU'ILS TESTENT EN PRIORITÉ, et ce n'est pas un choix de goût : les
+   résultats 2025 montrent que ce qui manque n'est pas le prélèvement
+   d'information mais **le sens global, l'implicite et la visée** — 13 % sur
+   « établir des inférences », 13 % sur « comprendre l'implicite », 17 % sur
+   « rendre compte de la visée de chaque document ». Les questions faciles de
+   repérage restent, mais chaque enregistrement porte au moins une question de
+   sens global ou de visée.
+
+   ⚠️ En 5ᵉ, `5e_oral_visees` (« Reconnaitre la visée d'une production orale »)
+   existait dans le knowledge et n'était utilisée NULLE PART. Elle l'est ici.
+   ⚠️ Textes originaux, écrits pour être ENTENDUS : phrases courtes, une idée
+   par phrase, aucune information qui ne tienne qu'à la ponctuation. Le texte
+   ne s'affiche pas, l'élève répond de mémoire, deux écoutes.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+const ORAL_VOLCAN_CM2: SupportTexte = {
+  id: "cm2_oral_volcan",
+  kicker: "Compréhension de l'oral",
+  titre: "Pourquoi le Piton de la Fournaise fume-t-il ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Aujourd'hui, la question vient de Tom, dix ans, qui habite Sainte-Rose : pourquoi le volcan fume-t-il, même quand il n'y a pas d'éruption ?
+
+Commençons par une surprise. Ce qu'on voit monter, ce n'est pas de la fumée. La fumée, c'est ce qui reste quand quelque chose brûle. Or le volcan ne brûle pas. Ce panache blanc, c'est de la vapeur d'eau.
+
+D'où vient cette eau ? De la pluie, tout simplement. L'eau s'infiltre dans les fissures de la roche, descend, et rencontre en profondeur des pierres encore brûlantes. Elle se transforme alors en vapeur et remonte. Ce n'est pas le volcan qui se réveille : c'est de l'eau qui repart d'où elle venait.
+
+Cela dit, les scientifiques surveillent quand même ce panache de très près. Pas pour sa quantité, mais pour ce qu'il contient. Quand le magma se rapproche de la surface, la vapeur emporte avec elle des gaz particuliers. Les capteurs les détectent avant qu'aucun œil ne voie quoi que ce soit.
+
+C'est pour cela qu'à La Réunion, l'éruption est presque toujours annoncée avant d'être visible.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "D'après l'émission, qu'est-ce qui monte du volcan ?",
+      choices: [
+        "de la vapeur d'eau",
+        "de la fumée",
+        "de la poussière de roche",
+        "de la lave liquide",
+      ],
+      expected: "de la vapeur d'eau",
+      explanation:
+        "La réponse est donnée juste après l'annonce d'une surprise. Quand un texte dit « voici une surprise », l'information importante arrive dans la phrase suivante.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "D'où vient l'eau qui devient de la vapeur ?",
+      choices: [
+        "de la pluie qui s'infiltre dans la roche",
+        "de la mer toute proche",
+        "d'une rivière souterraine",
+        "de la neige du sommet",
+      ],
+      expected: "de la pluie qui s'infiltre dans la roche",
+      explanation:
+        "Le texte l'annonce par une question — « D'où vient cette eau ? » — puis répond aussitôt. Une question posée à l'oral sert presque toujours à introduire ce qu'il faut retenir.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_reformuler",
+      text: "Comment résumerais-tu l'idée principale de l'émission ?",
+      choices: [
+        "Le panache du volcan est de la vapeur, mais on le surveille pour les gaz qu'il transporte.",
+        "Le volcan brûle en permanence sous la surface.",
+        "Il pleut beaucoup autour du Piton de la Fournaise.",
+        "Les éruptions sont impossibles à prévoir.",
+      ],
+      expected:
+        "Le panache du volcan est de la vapeur, mais on le surveille pour les gaz qu'il transporte.",
+      explanation:
+        "Résumer, c'est garder les deux temps du texte : ce que le panache est, et pourquoi on l'observe quand même. Une seule des deux idées ne suffit pas.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Que surveillent les scientifiques dans ce panache ?",
+      choices: [
+        "les gaz qu'il contient",
+        "sa hauteur",
+        "sa couleur",
+        "sa température",
+      ],
+      expected: "les gaz qu'il contient",
+      explanation:
+        "Le texte oppose explicitement deux choses : « pas pour sa quantité, mais pour ce qu'il contient ». Quand on entend « pas… mais… », la réponse est dans la seconde partie.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_argumenter",
+      text: "L'émission se termine par : « l'éruption est presque toujours annoncée avant d'être visible ». Qu'est-ce qui explique cela, d'après ce que tu as entendu ?",
+      choices: [
+        "les capteurs détectent les gaz avant que l'œil ne voie quelque chose",
+        "le panache devient plus gros plusieurs jours avant",
+        "les habitants entendent le volcan gronder",
+        "la pluie s'arrête juste avant l'éruption",
+      ],
+      expected:
+        "les capteurs détectent les gaz avant que l'œil ne voie quelque chose",
+      explanation:
+        "La dernière phrase ne s'explique pas toute seule : elle découle du paragraphe d'avant. À l'oral, une conclusion renvoie presque toujours à ce qui vient d'être dit.",
+    },
+  ],
+};
+
+const ORAL_MOTS_NOUVEAUX_CM2: SupportTexte = {
+  id: "cm2_oral_mots_nouveaux",
+  kicker: "Compréhension de l'oral",
+  titre: "D'où viennent les mots qu'on invente ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `La question du jour vient de Chloé, en CM2 : est-ce qu'on a le droit d'inventer des mots ?
+
+La réponse va peut-être te surprendre : oui. Tout le monde en invente, et la langue française s'est construite comme ça, mot après mot.
+
+Mais inventer ne suffit pas. Pour qu'un mot existe vraiment, il faut que d'autres gens le reprennent. C'est là que presque tout se joue. Un mot inventé qu'on est seul à employer reste une plaisanterie entre amis. Un mot que des milliers de personnes utilisent finit par entrer dans le dictionnaire.
+
+Comment fabrique-t-on un mot nouveau ? Le plus souvent, on ne part pas de rien. On colle deux mots ensemble, comme dans « porte-monnaie ». On ajoute un petit morceau devant ou derrière, comme « re » dans « recommencer ». Ou bien on emprunte à une autre langue.
+
+Et il y a une chose que les dictionnaires ne font pas : ils ne décident pas. Ils constatent. Quand un mot est employé partout depuis assez longtemps, ils l'inscrivent — parfois des années après que tout le monde l'utilise déjà.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "D'après l'émission, a-t-on le droit d'inventer des mots ?",
+      choices: [
+        "oui, tout le monde en invente",
+        "non, c'est interdit",
+        "seulement les écrivains",
+        "seulement les dictionnaires",
+      ],
+      expected: "oui, tout le monde en invente",
+      explanation:
+        "La réponse arrive dès le deuxième paragraphe, annoncée par « la réponse va peut-être te surprendre ».",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Que faut-il pour qu'un mot inventé existe vraiment ?",
+      choices: [
+        "que d'autres gens le reprennent",
+        "qu'un professeur l'accepte",
+        "qu'il soit écrit dans un livre",
+        "qu'il vienne d'une autre langue",
+      ],
+      expected: "que d'autres gens le reprennent",
+      explanation:
+        "Le texte le souligne : « C'est là que presque tout se joue. » Cette phrase signale l'idée la plus importante du passage.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_reformuler",
+      text: "Quelle phrase résume le mieux ce qui a été dit ?",
+      choices: [
+        "Un mot naît quand on l'invente, mais il n'existe que si beaucoup de gens l'emploient.",
+        "Seuls les dictionnaires ont le droit de créer des mots.",
+        "Il ne faut pas inventer de mots, cela abîme la langue.",
+        "Les mots nouveaux viennent tous de l'anglais.",
+      ],
+      expected:
+        "Un mot naît quand on l'invente, mais il n'existe que si beaucoup de gens l'emploient.",
+      explanation:
+        "Le « mais » du résumé reprend exactement l'opposition du texte : inventer d'un côté, être repris de l'autre.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Quel exemple de mot fabriqué en collant deux mots a été donné ?",
+      choices: [
+        "porte-monnaie",
+        "recommencer",
+        "dictionnaire",
+        "plaisanterie",
+      ],
+      expected: "porte-monnaie",
+      explanation:
+        "« Recommencer » servait à illustrer autre chose : le petit morceau ajouté devant. Il faut relier chaque exemple à ce qu'il illustre.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_argumenter",
+      text: "Le texte dit que les dictionnaires « ne décident pas, ils constatent ». Qu'est-ce que cela veut dire ?",
+      choices: [
+        "ils inscrivent les mots que les gens emploient déjà",
+        "ils choisissent les mots les plus beaux",
+        "ils interdisent les mots inventés",
+        "ils créent chaque année de nouveaux mots",
+      ],
+      expected: "ils inscrivent les mots que les gens emploient déjà",
+      explanation:
+        "La phrase est expliquée juste après : ils inscrivent un mot « parfois des années après que tout le monde l'utilise ». L'explication suit l'affirmation.",
+    },
+  ],
+};
+
+const ORAL_ENNUI_CM2: SupportTexte = {
+  id: "cm2_oral_ennui",
+  kicker: "Compréhension de l'oral",
+  titre: "À quoi ça sert de s'ennuyer ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Aujourd'hui, une question posée par Ryan, onze ans : pourquoi les adultes disent-ils que s'ennuyer, c'est bon pour nous ?
+
+Commençons par ce que c'est. S'ennuyer, ce n'est pas être triste. C'est se retrouver sans rien à faire, et sans savoir quoi faire. C'est désagréable, personne ne dit le contraire.
+
+Seulement voilà. Des chercheurs ont observé des enfants dans deux situations. Les uns avaient des jeux et des écrans à volonté. Les autres attendaient dans une pièce, sans rien. Puis on a demandé aux deux groupes d'inventer une histoire. Ceux qui s'étaient ennuyés ont inventé les histoires les plus originales.
+
+L'explication est simple. Quand plus rien ne l'occupe, le cerveau ne s'arrête pas. Il part chercher tout seul, il relie des idées qui n'avaient rien à voir. C'est de là que viennent souvent les meilleures trouvailles.
+
+Alors la prochaine fois que tu t'ennuies, tu peux te dire une chose : ce moment vide n'est pas du temps perdu. C'est peut-être le moment où tu es en train d'inventer quelque chose.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "D'après l'émission, s'ennuyer, c'est...",
+      choices: [
+        "se retrouver sans rien à faire et sans savoir quoi faire",
+        "être triste",
+        "être fatigué",
+        "être en colère",
+      ],
+      expected: "se retrouver sans rien à faire et sans savoir quoi faire",
+      explanation:
+        "Le texte commence par écarter une confusion — « ce n'est pas être triste » — avant de donner la vraie définition.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Dans l'expérience racontée, quel groupe a inventé les histoires les plus originales ?",
+      choices: [
+        "ceux qui avaient attendu sans rien",
+        "ceux qui avaient des jeux et des écrans",
+        "les deux groupes également",
+        "aucun des deux",
+      ],
+      expected: "ceux qui avaient attendu sans rien",
+      explanation:
+        "Le résultat arrive à la fin du paragraphe, après la description des deux groupes. Il faut tenir les deux situations en tête jusque-là.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_reformuler",
+      text: "Quelle est l'idée principale de cette émission ?",
+      choices: [
+        "L'ennui est désagréable, mais il laisse le cerveau libre d'inventer.",
+        "Il faut supprimer tous les écrans.",
+        "L'ennui rend les enfants tristes.",
+        "Les chercheurs n'ont rien trouvé de sûr.",
+      ],
+      expected:
+        "L'ennui est désagréable, mais il laisse le cerveau libre d'inventer.",
+      explanation:
+        "L'idée principale tient les deux faces : le texte ne nie jamais que ce soit désagréable, et il explique pourquoi c'est utile.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Que fait le cerveau quand plus rien ne l'occupe ?",
+      choices: [
+        "il relie des idées qui n'avaient rien à voir",
+        "il se met en pause",
+        "il se fatigue plus vite",
+        "il oublie ce qu'il a appris",
+      ],
+      expected: "il relie des idées qui n'avaient rien à voir",
+      explanation:
+        "L'explication est annoncée par « l'explication est simple » : à l'oral, cette formule prévient qu'il faut écouter la suite.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_argumenter",
+      text: "Pourquoi l'émission dit-elle que ce moment vide « n'est pas du temps perdu » ?",
+      choices: [
+        "parce que c'est peut-être là qu'on invente quelque chose",
+        "parce qu'on se repose",
+        "parce qu'on rattrape son sommeil",
+        "parce qu'on révise sans s'en rendre compte",
+      ],
+      expected: "parce que c'est peut-être là qu'on invente quelque chose",
+      explanation:
+        "La conclusion reprend tout ce qui précède : l'expérience, puis l'explication. Une fin d'émission ne dit presque jamais quelque chose de neuf.",
+    },
+  ],
+};
+
+const ORAL_PUBLICITE_5E: SupportTexte = {
+  id: "5e_oral_publicite",
+  kicker: "Compréhension de l'oral",
+  titre: "Un conseil, ou une publicité ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Vous connaissez sans doute ces vidéos qui commencent par « je vais vous donner trois astuces ». Le ton est amical, la personne parle de sa vie, et à la fin elle cite une marque. Alors, conseil ou publicité ?
+
+Regardons comment c'est construit. Les deux premières astuces sont vraies, utiles, et ne coûtent rien. Elles servent à une chose : vous convaincre que la personne connaît son sujet. La troisième, elle, mène à un produit précis, avec un code de réduction.
+
+Ce n'est pas un hasard, c'est une méthode. On l'appelle le placement de produit. La loi française oblige d'ailleurs à le signaler — mais la mention est souvent minuscule, ou passe en une seconde.
+
+Attention, il ne s'agit pas de dire que ces vidéos mentent. Les astuces peuvent être excellentes. La question n'est pas là. Elle est de savoir dans quel but on vous parle. Un conseil cherche à vous rendre service. Une publicité cherche à vous faire acheter. Les deux peuvent se ressembler mot pour mot.
+
+Le réflexe à prendre est simple : avant de vous demander si c'est vrai, demandez-vous à qui cela profite.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "5e_oral_visees",
+      text: "Quelle est la visée principale de cette émission ?",
+      choices: [
+        "apprendre à reconnaître dans quel but on nous parle",
+        "dénoncer des vidéos qui mentent",
+        "vendre un produit",
+        "expliquer comment tourner une vidéo",
+      ],
+      expected: "apprendre à reconnaître dans quel but on nous parle",
+      explanation:
+        "La visée d'un propos, c'est ce qu'il cherche à obtenir de vous. Ici l'émission le dit elle-même : « La question est de savoir dans quel but on vous parle. »",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "À quoi servent les deux premières astuces, d'après l'émission ?",
+      choices: [
+        "à vous convaincre que la personne connaît son sujet",
+        "à faire durer la vidéo",
+        "à respecter la loi",
+        "à vendre deux produits différents",
+      ],
+      expected: "à vous convaincre que la personne connaît son sujet",
+      explanation:
+        "Le texte l'annonce sans détour : « Elles servent à une chose ». Cette formule signale une information à retenir.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Que dit l'émission sur la loi française ?",
+      choices: [
+        "elle oblige à signaler le placement de produit",
+        "elle interdit le placement de produit",
+        "elle ne s'occupe pas de ces vidéos",
+        "elle impose un code de réduction",
+      ],
+      expected: "elle oblige à signaler le placement de produit",
+      explanation:
+        "L'obligation porte sur la mention, pas sur l'interdiction. Le texte ajoute d'ailleurs que la mention est souvent minuscule.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_visees",
+      text: "D'après l'émission, quelle est la différence entre un conseil et une publicité ?",
+      choices: [
+        "le but : rendre service, ou faire acheter",
+        "le vocabulaire employé",
+        "la longueur de la vidéo",
+        "la vérité de ce qui est dit",
+      ],
+      expected: "le but : rendre service, ou faire acheter",
+      explanation:
+        "L'émission écarte explicitement la vérité comme critère : « Les astuces peuvent être excellentes. La question n'est pas là. » Ce qui distingue les deux, c'est l'intention.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Quel réflexe l'émission conseille-t-elle de prendre ?",
+      choices: [
+        "se demander à qui cela profite",
+        "vérifier chaque astuce sur internet",
+        "ne plus regarder ce genre de vidéos",
+        "chercher la mention légale",
+      ],
+      expected: "se demander à qui cela profite",
+      explanation:
+        "Le conseil est donné dans la toute dernière phrase, et il est présenté comme venant AVANT la vérification : « avant de vous demander si c'est vrai ».",
+    },
+  ],
+};
+
+const ORAL_CARTES_5E: SupportTexte = {
+  id: "5e_oral_cartes",
+  kicker: "Compréhension de l'oral",
+  titre: "Pourquoi toutes les cartes du monde sont fausses",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Voici une affirmation qui va vous sembler exagérée : toutes les cartes du monde sont fausses. Toutes, sans exception. Et pourtant elles sont utiles. Voyons pourquoi.
+
+Le problème vient d'une impossibilité. La Terre est une sphère, la carte est plate. Or on ne peut pas aplatir une sphère sans la déformer quelque part. Essayez avec une peau d'orange : elle se déchire ou elle s'étire, jamais elle ne s'aplatit proprement.
+
+Chaque carte choisit donc ce qu'elle accepte de fausser. La carte accrochée dans beaucoup de classes conserve les formes des pays et les angles, ce qui est très pratique pour naviguer. Mais elle triche sur les surfaces. Résultat, le Groenland y paraît aussi grand que l'Afrique, alors que l'Afrique est quatorze fois plus vaste.
+
+D'autres cartes font le choix inverse. Elles respectent les surfaces, et déforment les formes : les pays y paraissent étirés, presque écrasés vers le bas.
+
+Il n'existe donc pas de carte parfaite, et il n'en existera jamais. Ce qu'il faut savoir, c'est ce que celle qu'on regarde a choisi de sacrifier.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Pourquoi aucune carte ne peut-elle être exacte ?",
+      choices: [
+        "on ne peut pas aplatir une sphère sans la déformer",
+        "les continents bougent trop vite",
+        "les instruments de mesure sont imprécis",
+        "les pays changent de frontières",
+      ],
+      expected: "on ne peut pas aplatir une sphère sans la déformer",
+      explanation:
+        "Le texte parle d'une « impossibilité », puis l'illustre avec la peau d'orange. L'exemple sert à rendre la cause concrète.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Que conserve la carte accrochée dans beaucoup de classes ?",
+      choices: [
+        "les formes des pays et les angles",
+        "les surfaces exactes",
+        "les distances exactes",
+        "les couleurs réelles",
+      ],
+      expected: "les formes des pays et les angles",
+      explanation:
+        "Le texte oppose ensuite ce qu'elle conserve à ce sur quoi elle triche. Retenir l'un des deux ne suffit pas.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Combien de fois l'Afrique est-elle plus vaste que le Groenland, d'après l'émission ?",
+      choices: ["quatorze fois", "quatre fois", "quarante fois", "deux fois"],
+      expected: "quatorze fois",
+      explanation:
+        "Un chiffre donné une seule fois à l'oral demande une attention particulière : c'est souvent lui qui rend l'exemple frappant.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_visees",
+      text: "Quelle est la visée de cette émission ?",
+      choices: [
+        "faire comprendre que chaque carte fait un choix, et lequel",
+        "critiquer les professeurs de géographie",
+        "expliquer comment fabriquer une carte",
+        "convaincre de ne plus utiliser de cartes",
+      ],
+      expected: "faire comprendre que chaque carte fait un choix, et lequel",
+      explanation:
+        "L'émission ne condamne rien : elle insiste au contraire sur l'utilité des cartes. Sa dernière phrase dit ce qu'elle veut faire savoir.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "L'émission commence par « toutes les cartes du monde sont fausses » et ajoute aussitôt « et pourtant elles sont utiles ». Pourquoi cette précision est-elle importante ?",
+      choices: [
+        "elle annonce que le propos n'est pas de rejeter les cartes, mais de les comprendre",
+        "elle sert à faire durer l'introduction",
+        "elle contredit ce qui suit",
+        "elle indique que l'émission parlera de navigation",
+      ],
+      expected:
+        "elle annonce que le propos n'est pas de rejeter les cartes, mais de les comprendre",
+      explanation:
+        "Un « et pourtant » placé dès l'ouverture annonce la direction de tout le propos. Le repérer évite de se tromper sur l'intention.",
+    },
+  ],
+};
+
+const ORAL_TELEPHONES_5E: SupportTexte = {
+  id: "5e_oral_telephones",
+  kicker: "Compréhension de l'oral",
+  titre: "Faut-il interdire les téléphones au collège ?",
+  source: "Texte original — EleveAI",
+  oral: { ecoutes: 2 },
+  texte: `Deux élèves de troisième débattent aujourd'hui. Écoutez d'abord Inès.
+
+« Je suis pour l'interdiction. Dans mon collège, on l'applique depuis deux ans. Au début, tout le monde râlait. Maintenant, la cour est bruyante — et c'est justement le signe que ça marche. Avant, à la récréation, chacun regardait son écran dans son coin. Il ne s'agit pas de punir : il s'agit de rendre la récréation à ce qu'elle est. »
+
+Maintenant, Kevin.
+
+« Je comprends l'argument, et je ne dis pas qu'il est faux. Mais interdire n'apprend rien. Dans deux ans, au lycée, on aura tous un téléphone et personne ne nous aura montré comment nous en servir. Je préférerais qu'on nous apprenne à le poser nous-mêmes, plutôt qu'on nous le confisque. »
+
+Les deux ont raison sur un point au moins : aucun ne conteste que les écrans posent un problème. Ce qu'ils discutent, c'est la réponse à y apporter. Interdire aujourd'hui, ou apprendre pour demain.`,
+  questions: [
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Quel argument Inès donne-t-elle pour dire que l'interdiction fonctionne ?",
+      choices: [
+        "la cour est devenue bruyante",
+        "les élèves ont de meilleures notes",
+        "les parents sont satisfaits",
+        "il y a moins de bagarres",
+      ],
+      expected: "la cour est devenue bruyante",
+      explanation:
+        "L'argument est contre-intuitif : le bruit est présenté comme un bon signe. Il faut entendre pourquoi — avant, chacun était seul devant son écran.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Que reproche Kevin à l'interdiction ?",
+      choices: [
+        "elle n'apprend pas à se servir d'un téléphone",
+        "elle est impossible à appliquer",
+        "elle est injuste envers les élèves sérieux",
+        "elle coûte trop cher au collège",
+      ],
+      expected: "elle n'apprend pas à se servir d'un téléphone",
+      explanation:
+        "Kevin ne conteste pas les faits d'Inès : il conteste ce qu'on en fait. Sa phrase clé est « interdire n'apprend rien ».",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Kevin commence par « Je comprends l'argument, et je ne dis pas qu'il est faux ». Que fait-il ainsi ?",
+      choices: [
+        "il reconnaît ce qui est vrai chez Inès avant de s'y opposer",
+        "il change complètement de sujet",
+        "il donne raison à Inès",
+        "il refuse de répondre",
+      ],
+      expected: "il reconnaît ce qui est vrai chez Inès avant de s'y opposer",
+      explanation:
+        "C'est une manière de débattre : on accorde d'abord un point à l'autre, ce qui rend l'objection plus solide. Le « mais » qui suit annonce le désaccord.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_visees",
+      text: "Quelle est la visée de cet enregistrement ?",
+      choices: [
+        "présenter deux points de vue opposés sans trancher",
+        "convaincre d'interdire les téléphones",
+        "convaincre d'autoriser les téléphones",
+        "raconter la vie d'un collège",
+      ],
+      expected: "présenter deux points de vue opposés sans trancher",
+      explanation:
+        "La fin ne donne raison à personne : elle dit ce que les deux partagent et ce qui les sépare. Un propos qui n'a pas de camp a pour visée d'éclairer, pas de convaincre.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Sur quel point les deux élèves sont-ils d'accord ?",
+      choices: [
+        "les écrans posent un problème",
+        "il faut interdire les téléphones",
+        "le lycée est trop permissif",
+        "la récréation est trop courte",
+      ],
+      expected: "les écrans posent un problème",
+      explanation:
+        "C'est dit dans la dernière phrase : « aucun ne conteste que les écrans posent un problème ». Dans un débat, repérer l'accord aide à comprendre le désaccord.",
+    },
+  ],
+};
+
 // Le récit d'abord, le document ensuite, l'oral en dernier : c'est l'ordre de
 // l'épreuve officielle, et le tirage choisit celui dont l'élève a vu le moins
 // de questions.
@@ -1049,11 +1608,20 @@ export const SUPPORTS_5E: SupportTexte[] = [
   DOCUMENT_ECRANS_5E,
 ];
 
+// CINQ ENREGISTREMENTS PAR NIVEAU depuis le 15/08 (deux auparavant). Le thème
+// oral ne se replie jamais sur la banque : le nombre d'enregistrements EST le
+// nombre de passages complets que l'épreuve peut servir.
 export const SUPPORTS_ORAL_CM2: SupportTexte[] = [
   ORAL_LA_PEUR_CM2,
   ORAL_MER_SALEE_CM2,
+  ORAL_VOLCAN_CM2,
+  ORAL_MOTS_NOUVEAUX_CM2,
+  ORAL_ENNUI_CM2,
 ];
 export const SUPPORTS_ORAL_5E: SupportTexte[] = [
   ORAL_VRAI_FAUX_5E,
   ORAL_LANGAGE_ANIMAL_5E,
+  ORAL_PUBLICITE_5E,
+  ORAL_CARTES_5E,
+  ORAL_TELEPHONES_5E,
 ];
