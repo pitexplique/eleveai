@@ -636,6 +636,77 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "automatisme", "formule", "sujet-2026"],
   },
 
+  {
+    kind: "template",
+    id: "premiere_auto_isoler_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "auto_formules",
+    microId: "auto_alg_isoler_variable",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Ce qui MULTIPLIE la variable cherchée passe au dénominateur ; ce qui la DIVISE passe au numérateur.",
+    tags: ["premiere", "maths", "automatisme", "formule", "template"],
+    generate: () => {
+      // Des formules de plusieurs disciplines : le geste est le même, le
+      // contexte change à chaque tirage.
+      const cas = pick([
+        {
+          formule: "P = U \\times I",
+          question: "I",
+          bonne: "I = \\dfrac{P}{U}",
+          pieges: ["I = P \\times U", "I = \\dfrac{U}{P}", "I = P - U"],
+          discipline: "La puissance électrique",
+        },
+        {
+          formule: "d = v \\times t",
+          question: "t",
+          bonne: "t = \\dfrac{d}{v}",
+          pieges: ["t = d \\times v", "t = \\dfrac{v}{d}", "t = d - v"],
+          discipline: "La distance parcourue",
+        },
+        {
+          formule: "V = L \\times l \\times h",
+          question: "h",
+          bonne: "h = \\dfrac{V}{L \\times l}",
+          pieges: [
+            "h = \\dfrac{V \\times L}{l}",
+            "h = V \\times L \\times l",
+            "h = \\dfrac{L \\times l}{V}",
+          ],
+          discipline: "Le volume d'un pavé droit",
+        },
+        {
+          formule: "C = \\dfrac{m}{V}",
+          question: "V",
+          bonne: "V = \\dfrac{m}{C}",
+          pieges: ["V = m \\times C", "V = \\dfrac{C}{m}", "V = m - C"],
+          discipline: "La concentration d'une solution",
+        },
+        {
+          formule: "R = \\dfrac{U^2}{P}",
+          question: "P",
+          bonne: "P = \\dfrac{U^2}{R}",
+          pieges: ["P = R \\times U^2", "P = \\dfrac{R}{U^2}", "P = U^2 - R"],
+          discipline: "La résistance d'un appareil",
+        },
+      ] as const);
+      return {
+        text: `${cas.discipline} vérifie $${cas.formule}$. Quelle égalité donne $${cas.question}$ ?`,
+        format: "qcm",
+        choices: makeChoices(`$${cas.bonne}$`, cas.pieges.map((p) => `$${p}$`)),
+        expected: [`$${cas.bonne}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Isoler une variable, c'est la laisser seule d'un côté du signe égal, en effectuant la même opération des deux côtés.",
+          "On repère ce qui l'accompagne : un facteur passe de l'autre côté en divisant, un diviseur en multipliant.",
+          `Depuis $${cas.formule}$, on obtient $${cas.bonne}$.`,
+          `$${cas.bonne}$. Ce geste sert dans toutes les disciplines : c'est le même que résoudre une équation, avec des lettres à la place des nombres.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ auto_alg_application_formule ═══════════════ */
 
   {

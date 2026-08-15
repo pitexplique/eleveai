@@ -209,6 +209,109 @@ export const deriveeCalculBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "derivation", "formules"],
   },
 
+  {
+    kind: "template",
+    id: "premiere_der_carre_cube_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "der_formules",
+    microId: "der_derivee_carre_cube",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "L'exposant descend en facteur, ET diminue de $1$. Les deux gestes, pas un seul.",
+    tags: ["premiere", "maths", "derivation", "formules", "template"],
+    generate: () => {
+      const n = pick([2, 3] as const);
+      const nom = n === 2 ? "carré" : "cube";
+      const derivee = n === 2 ? "2x" : "3x^2";
+      return {
+        text: `Quelle est la dérivée de la fonction ${nom}, $f(x) = x^${n}$ ?`,
+        format: "qcm",
+        choices: makeChoices(`$f'(x) = ${derivee}$`, [
+          `$f'(x) = ${n}x$`,
+          `$f'(x) = x^${n - 1}$`,
+          `$f'(x) = ${n}$`,
+          `$f'(x) = ${n + 1}x^${n + 1}$`,
+        ]),
+        expected: [`$f'(x) = ${derivee}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La dérivée de $x \\mapsto x^n$ est $x \\mapsto n \\, x^{n-1}$.",
+          "L'exposant passe devant en facteur, puis on lui retire $1$.",
+          `Pour $n = ${n}$ : $f'(x) = ${n} \\, x^{${n}-1} = ${derivee}$.`,
+          `$f'(x) = ${derivee}$. ⚠️ Deux gestes : descendre l'exposant ET le diminuer. ` +
+            `N'en faire qu'un donne $${n === 2 ? "2" : "3x"}$ ou $${n === 2 ? "x" : "x^2"}$, deux réponses fausses.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$f'(x) = ${n}x$`,
+            cause: n === 2 ? "réponse juste par hasard pour le carré, fausse ici" : "a fait descendre l'exposant mais l'a trop diminué",
+          },
+          {
+            choice: `$f'(x) = x^${n - 1}$`,
+            cause: "a diminué l'exposant sans le faire descendre en facteur",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_der_somme_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "der_polynome",
+    microId: "der_derivee_somme",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "On dérive chaque terme séparément, puis on additionne les résultats.",
+    tags: ["premiere", "maths", "derivation", "polynome", "template"],
+    generate: () => {
+      const cas = pick([
+        {
+          question: "Comment dérive-t-on une somme de deux fonctions, $f = u + v$ ?",
+          bonne: "$f' = u' + v'$ : on dérive chaque terme séparément",
+          pieges: ["$f' = u' \\times v'$", "$f' = u' + v$", "$f' = (u + v)^2$"],
+        },
+        {
+          question: "La dérivée de $f(x) = x^2 + x^3$ est :",
+          bonne: "$f'(x) = 2x + 3x^2$",
+          pieges: ["$f'(x) = 2x \\times 3x^2$", "$f'(x) = 5x^5$", "$f'(x) = x + x^2$"],
+        },
+        {
+          question: "La dérivée de $f(x) = 4x + 7$ est :",
+          bonne: "$f'(x) = 4$",
+          pieges: ["$f'(x) = 4x$", "$f'(x) = 4 + 7$", "$f'(x) = 11$"],
+        },
+        {
+          question:
+            "Pourquoi peut-on dériver un polynôme terme à terme, comme $3x^2 - 5x + 2$ ?",
+          bonne: "parce que la dérivée d'une somme est la somme des dérivées",
+          pieges: [
+            "parce qu'un polynôme est toujours croissant",
+            "parce que les exposants sont entiers",
+            "on ne peut pas : il faut d'abord factoriser",
+          ],
+        },
+      ] as const);
+      return {
+        text: cas.question,
+        format: "qcm",
+        choices: makeChoices(cas.bonne, cas.pieges),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La dérivée d'une somme est la somme des dérivées : $(u + v)' = u' + v'$.",
+          "On dérive chaque terme indépendamment, puis on additionne.",
+          "Pour $f(x) = 3x^2 + 5x - 2$ : la dérivée de $3x^2$ est $6x$, celle de $5x$ est $5$, celle de $-2$ est $0$. D'où $f'(x) = 6x + 5$.",
+          `${cas.bonne.charAt(0).toUpperCase()}${cas.bonne.slice(1)}. ` +
+            `C'est cette règle, avec celle du produit par un réel, qui permet de dériver n'importe quel polynôme.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ der_derivee_produit_reel ═══════════════ */
 
   {

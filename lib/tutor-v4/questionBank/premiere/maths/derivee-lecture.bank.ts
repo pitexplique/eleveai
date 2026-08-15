@@ -285,6 +285,89 @@ export const deriveeLectureBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "derivation", "interpretation", "sujet-2026"],
   },
 
+  {
+    kind: "template",
+    id: "premiere_der_sens_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "der_nombre_derive",
+    microId: "der_nombre_derive_sens",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$f$ donne la grandeur ; $f'$ donne la façon dont elle CHANGE.",
+    tags: ["premiere", "maths", "derivation", "interpretation", "template"],
+    generate: () => {
+      const cas = pick([
+        {
+          grandeur: "la taille d'un enfant",
+          variable: "le temps, en années",
+          instant: 12,
+          bonne: "sa vitesse de croissance à $12$ ans, en cm par an",
+          pieges: ["sa taille à $12$ ans", "sa taille moyenne depuis la naissance", "son âge adulte"],
+        },
+        {
+          grandeur: "la distance parcourue par un mobile",
+          variable: "le temps, en secondes",
+          instant: 5,
+          bonne: "sa vitesse instantanée à $5$ secondes",
+          pieges: [
+            "la distance parcourue en $5$ secondes",
+            "sa vitesse moyenne sur les $5$ secondes",
+            "le temps mis pour parcourir $5$ mètres",
+          ],
+        },
+        {
+          grandeur: "le coût total de production d'une entreprise",
+          variable: "la quantité produite",
+          instant: 100,
+          bonne: "le coût marginal : ce que coûte la centième unité supplémentaire",
+          pieges: [
+            "le coût total de $100$ unités",
+            "le coût moyen par unité",
+            "le bénéfice réalisé sur $100$ unités",
+          ],
+        },
+        {
+          grandeur: "le nombre d'abonnés d'un service",
+          variable: "le temps, en mois",
+          instant: 6,
+          bonne: "la vitesse à laquelle le nombre d'abonnés change au sixième mois",
+          pieges: [
+            "le nombre d'abonnés au sixième mois",
+            "le nombre total d'abonnés gagnés en six mois",
+            "le nombre de mois pour atteindre six abonnés",
+          ],
+        },
+        {
+          grandeur: "la quantité d'un produit formé lors d'une réaction chimique",
+          variable: "le temps, en minutes",
+          instant: 3,
+          bonne: "la vitesse d'apparition du produit à la troisième minute",
+          pieges: [
+            "la quantité de produit formée en $3$ minutes",
+            "la quantité totale formée à la fin",
+            "le temps nécessaire pour former $3$ grammes",
+          ],
+        },
+      ] as const);
+      return {
+        text:
+          `Une fonction $f$ modélise ${cas.grandeur} en fonction de ${cas.variable}. ` +
+          `Que représente $f'(${cas.instant})$ ?`,
+        format: "qcm",
+        choices: makeChoices(cas.bonne, cas.pieges),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le nombre dérivé $f'(a)$ mesure la vitesse à laquelle la grandeur varie à l'instant $a$.",
+          "On distingue la grandeur elle-même, $f$, de sa vitesse de variation, $f'$.",
+          `$f(${cas.instant})$ donnerait ${cas.grandeur} à cet instant. $f'(${cas.instant})$ donne la vitesse à laquelle elle change.`,
+          `$f'(${cas.instant})$ est ${cas.bonne}. ⚠️ $f$ et $f'$ ne se mesurent même pas dans la même unité.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ der_tangente_coefficient ═══════════════ */
 
   {
@@ -314,6 +397,76 @@ export const deriveeLectureBank: TutorBankItemV4[] = [
       "$f'(a)$ est le coefficient directeur de la tangente au point d'abscisse $a$. C'est ce qui permet de le LIRE sur un graphique sans connaître l'expression de $f$."
     ),
     tags: ["premiere", "maths", "derivation", "tangente"],
+  },
+
+  {
+    kind: "template",
+    id: "premiere_der_coefficient_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "der_nombre_derive",
+    microId: "der_tangente_coefficient",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La tangente est la droite qui « épouse » la courbe en un point : sa pente est le nombre dérivé.",
+    tags: ["premiere", "maths", "derivation", "tangente", "template"],
+    generate: () => {
+      const a = pick([0.5, 1] as const);
+      const b = pick([-2, -1, 1, 2] as const);
+      // ⛔ la pente ne doit valoir ni x0 ni −x0 : sinon les pièges « $x_0$ » et
+      // « pente opposée » valent la bonne réponse.
+      const x0 = pick(
+        ([-2, -1, 1, 2] as const).filter(
+          (v) => 2 * a * v + b !== v && 2 * a * v + b !== -v && 2 * a * v + b !== 0
+        )
+      );
+      const pente = 2 * a * x0 + b;
+      const cas = pick([
+        {
+          question: "Géométriquement, que représente le nombre dérivé $f'(a)$ ?",
+          bonne: "le coefficient directeur de la tangente au point d'abscisse $a$",
+          pieges: [
+            "l'ordonnée du point de la courbe d'abscisse $a$",
+            "l'aire sous la courbe jusqu'à $a$",
+            "la distance entre la courbe et l'axe des abscisses",
+          ],
+        },
+        {
+          question: `La tangente tracée ci-contre a pour coefficient directeur $${fr(pente)}$. Que vaut $f'(${x0})$ ?`,
+          bonne: `$${fr(pente)}$`,
+          pieges: [`$${fr(-pente)}$`, `$${fr(x0)}$`, "on ne peut pas le savoir sans l'expression de $f$"],
+        },
+        {
+          question: "Si la tangente à la courbe en un point est HORIZONTALE, que vaut le nombre dérivé en ce point ?",
+          bonne: "$0$",
+          pieges: ["$1$", "il n'existe pas", "il est infini"],
+        },
+        {
+          question:
+            "Deux courbes différentes ont, en un même point, des tangentes parallèles. Que peut-on dire de leurs nombres dérivés en ce point ?",
+          bonne: "ils sont égaux",
+          pieges: [
+            "ils sont opposés",
+            "ils sont nuls tous les deux",
+            "on ne peut rien en dire",
+          ],
+        },
+      ] as const);
+      return {
+        text: cas.question,
+        format: "qcm",
+        choices: makeChoices(cas.bonne, cas.pieges),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        canvas: canvasTangente(a, b, 0, x0),
+        explanation: exp(
+          "La tangente en un point est la position limite des sécantes passant par ce point ; son coefficient directeur EST le nombre dérivé.",
+          "On relie ce que l'on voit (une pente) à ce que l'on calcule (un nombre dérivé).",
+          "Des tangentes parallèles ont le même coefficient directeur, donc le même nombre dérivé ; une tangente horizontale a un coefficient directeur nul.",
+          `${cas.bonne.charAt(0).toUpperCase()}${cas.bonne.slice(1)}. C'est ce lien qui permet de LIRE une dérivée sur un graphique, sans connaître l'expression de $f$.`
+        ),
+      };
+    },
   },
 
   /* ═══════════════ der_modele_interpreter ═══════════════ */

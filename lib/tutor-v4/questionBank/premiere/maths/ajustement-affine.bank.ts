@@ -445,6 +445,76 @@ export const ajustementAffineBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "statistiques", "ajustement"],
   },
 
+  {
+    kind: "template",
+    id: "premiere_info_pertinence_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "info_ajustement_affine",
+    microId: "info_ajust_pertinence",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un ajustement affine remplace le nuage par une DROITE : encore faut-il que le nuage y ressemble.",
+    tags: ["premiere", "maths", "statistiques", "ajustement", "template"],
+    generate: () => {
+      const cas = pick([
+        {
+          nuage: "les points montent régulièrement, presque alignés",
+          bonne: "oui, un ajustement affine convient",
+          pieges: [
+            "non, il faudrait d'abord calculer la moyenne",
+            "non, les points ne sont pas parfaitement alignés",
+            "on ne peut pas le savoir sans l'équation",
+          ],
+          pourquoi: "un nuage sensiblement rectiligne se résume bien par une droite ; la perfection n'est pas exigée",
+        },
+        {
+          nuage: "les points montent d'abord puis redescendent",
+          bonne: "non, une droite ne suivrait pas ce retournement",
+          pieges: [
+            "oui, il suffit de prendre la droite moyenne",
+            "oui, puisque les points sont nombreux",
+            "oui, à condition d'ignorer les derniers points",
+          ],
+          pourquoi: "une droite ne change jamais de sens : elle passerait loin d'une bonne partie des points",
+        },
+        {
+          nuage: "les points s'incurvent de plus en plus vers le haut",
+          bonne: "non, la croissance ressemble à une exponentielle",
+          pieges: [
+            "oui, un ajustement affine convient toujours",
+            "oui, car les points sont croissants",
+            "on ne peut pas le savoir sans le point moyen",
+          ],
+          pourquoi: "une courbe qui s'incurve signale une croissance non linéaire",
+        },
+        {
+          nuage: "les points sont dispersés sans direction visible",
+          bonne: "non, il n'y a aucune tendance à résumer",
+          pieges: [
+            "oui, la droite passera au milieu",
+            "oui, puisqu'on peut toujours calculer un point moyen",
+            "oui, si l'on retire les points extrêmes",
+          ],
+          pourquoi: "on peut toujours CALCULER une droite, mais elle ne représenterait rien",
+        },
+      ] as const);
+      return {
+        text: `Sur un nuage de points, ${cas.nuage}. Un ajustement affine est-il pertinent ?`,
+        format: "qcm",
+        choices: makeChoices(cas.bonne, cas.pieges),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un ajustement affine remplace le nuage par une droite : il n'a de sens que si le nuage suit lui-même une direction rectiligne.",
+          "On regarde la forme du nuage AVANT de calculer quoi que ce soit.",
+          `Ici, ${cas.pourquoi}.`,
+          `${cas.bonne.charAt(0).toUpperCase()}${cas.bonne.slice(1)}. Le calcul est toujours possible ; c'est sa pertinence qui se juge à l'œil.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ info_ajust_determiner ═══════════════ */
 
   {

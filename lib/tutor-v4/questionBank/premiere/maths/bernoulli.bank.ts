@@ -298,6 +298,81 @@ export const bernoulliBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "probabilites", "bernoulli", "piege"],
   },
 
+  {
+    kind: "template",
+    id: "premiere_bern_remise_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "alea_bernoulli",
+    microId: "alea_bern_avec_sans_remise",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La probabilité du second tirage change-t-elle selon ce qu'a donné le premier ?",
+    tags: ["premiere", "maths", "probabilites", "bernoulli", "template"],
+    generate: () => {
+      const cas = pick([
+        {
+          situation:
+            "Un carton contient $10$ bouteilles, dont $3$ fuient. On en sort deux pour les vérifier, sans les remettre.",
+          independant: false,
+          pourquoi:
+            "après la première bouteille sortie, il n'en reste que $9$ : $P$ passe de $\\frac{3}{10}$ à $\\frac{2}{9}$ ou $\\frac{3}{9}$",
+        },
+        {
+          situation:
+            "Sur une chaîne qui produit des milliers de pots par jour, on en prélève trois au hasard pour les peser.",
+          independant: true,
+          pourquoi:
+            "retirer trois pots d'un lot de plusieurs milliers ne change pratiquement rien à la proportion restante",
+        },
+        {
+          situation:
+            "Une urne contient $5$ boules rouges et $5$ noires. On tire une boule, on note sa couleur, puis on la REMET avant de tirer la suivante.",
+          independant: true,
+          pourquoi: "la remise rétablit exactement la composition de départ à chaque tirage",
+        },
+        {
+          situation:
+            "Dans une classe de $30$ élèves, on désigne successivement deux délégués différents.",
+          independant: false,
+          pourquoi:
+            "le premier désigné ne peut plus l'être une seconde fois : il ne reste que $29$ candidats",
+        },
+        {
+          situation:
+            "On lance trois fois de suite le même dé équilibré et l'on note à chaque fois si l'on obtient un six.",
+          independant: true,
+          pourquoi: "le dé n'a pas de mémoire : chaque lancer repart des mêmes six faces",
+        },
+      ] as const);
+      return {
+        text: `${cas.situation} S'agit-il d'une répétition d'épreuves identiques et indépendantes ?`,
+        format: "qcm",
+        choices: makeChoices(cas.independant ? "Oui" : "Non", [
+          cas.independant ? "Non" : "Oui",
+          "Oui, mais seulement si les issues sont équiprobables",
+          "On ne peut pas le savoir sans connaître les probabilités",
+        ]),
+        expected: [cas.independant ? "Oui" : "Non"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Des épreuves sont identiques et indépendantes lorsque la probabilité de succès reste la même à chaque fois, quoi qu'il se soit produit avant.",
+          "On se demande si le premier résultat modifie les probabilités du suivant.",
+          `Ici, ${cas.pourquoi}.`,
+          cas.independant
+            ? "Les épreuves sont bien identiques et indépendantes : on peut les modéliser par une répétition d'épreuves de Bernoulli."
+            : "Les épreuves ne sont PAS indépendantes : le modèle de la répétition d'épreuves de Bernoulli ne s'applique pas."
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "Oui, mais seulement si les issues sont équiprobables",
+            cause: "l'équiprobabilité n'a rien à voir : une pièce truquée convient parfaitement",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ alea_bern_arbre ═══════════════ */
 
   {

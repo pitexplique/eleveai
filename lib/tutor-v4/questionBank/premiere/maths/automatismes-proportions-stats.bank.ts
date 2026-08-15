@@ -562,6 +562,78 @@ export const automatismesProportionsStatsBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "automatisme", "indicateurs", "esprit-critique"],
   },
 
+  {
+    kind: "template",
+    id: "premiere_auto_interpreter_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "auto_indicateurs",
+    microId: "auto_stat_interpreter_indicateurs",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La médiane ne bouge pas quand une valeur extrême devient plus extrême. La moyenne, si.",
+    tags: ["premiere", "maths", "automatisme", "indicateurs", "template"],
+    generate: () => {
+      const cas = pick([
+        {
+          quoi: "les salaires d'une entreprise",
+          unite: "€",
+          moyenne: 2800,
+          mediane: 2100,
+          cause: "quelques salaires très élevés",
+        },
+        {
+          quoi: "les loyers d'un quartier",
+          unite: "€",
+          moyenne: 950,
+          mediane: 780,
+          cause: "quelques loyers très élevés",
+        },
+        {
+          quoi: "les temps de trajet des élèves d'un lycée",
+          unite: "min",
+          moyenne: 35,
+          mediane: 22,
+          cause: "quelques élèves venant de très loin",
+        },
+        {
+          quoi: "les dons reçus par une association",
+          unite: "€",
+          moyenne: 140,
+          mediane: 40,
+          cause: "quelques dons très importants",
+        },
+      ] as const);
+      return {
+        text:
+          `Pour ${cas.quoi}, la MOYENNE vaut $${cas.moyenne}$ ${cas.unite} et la MÉDIANE $${cas.mediane}$ ${cas.unite}. ` +
+          `Que peut-on en déduire ?`,
+        format: "qcm",
+        choices: makeChoices(`${cas.cause} tirent la moyenne vers le haut`, [
+          `la moitié des valeurs valent $${cas.moyenne}$ ${cas.unite}`,
+          `toutes les valeurs sont comprises entre $${cas.mediane}$ et $${cas.moyenne}$ ${cas.unite}`,
+          "il y a une erreur : la moyenne ne peut pas dépasser la médiane",
+        ]),
+        expected: [`${cas.cause} tirent la moyenne vers le haut`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La médiane partage l'effectif en deux ; la moyenne tient compte de la VALEUR de chaque donnée, y compris des valeurs extrêmes.",
+          "On compare les deux indicateurs : un écart important signale une distribution déséquilibrée.",
+          `Ici la moyenne dépasse la médiane de $${cas.moyenne - cas.mediane}$ ${cas.unite} : la moitié des valeurs sont sous $${cas.mediane}$, ` +
+            `mais ${cas.cause} suffisent à relever la moyenne.`,
+          `${cas.cause.charAt(0).toUpperCase()}${cas.cause.slice(1)} tirent la moyenne vers le haut. ` +
+            `C'est pourquoi on publie souvent la MÉDIANE : elle résiste aux valeurs extrêmes.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `la moitié des valeurs valent $${cas.moyenne}$ ${cas.unite}`,
+            cause: "confond moyenne et médiane : c'est la médiane qui partage l'effectif en deux",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ auto_stat_boites ═══════════════ */
 
   {
@@ -591,6 +663,74 @@ export const automatismesProportionsStatsBank: TutorBankItemV4[] = [
       "La largeur de la boîte est l'écart interquartile $Q_3 - Q_1$. Une boîte étroite signale des valeurs resserrées ; une boîte large, une série dispersée — c'est ce qui permet de COMPARER deux distributions d'un coup d'œil."
     ),
     tags: ["premiere", "maths", "automatisme", "boites"],
+  },
+
+  {
+    kind: "template",
+    id: "premiere_auto_boites_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "auto_indicateurs",
+    microId: "auto_stat_boites",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Les bords de la boîte sont $Q_1$ et $Q_3$ ; les moustaches vont jusqu'aux extrêmes.",
+    tags: ["premiere", "maths", "automatisme", "boites", "template"],
+    generate: () => {
+      const cas = pick([
+        {
+          question: "que représente la LARGEUR de la boîte ?",
+          bonne: "l'écart interquartile, qui contient la moitié centrale des valeurs",
+          pieges: [
+            "l'étendue totale de la série",
+            "la moyenne de la série",
+            "le nombre de valeurs de la série",
+          ],
+          cle: "Les bords de la boîte sont $Q_1$ et $Q_3$ : entre eux se trouvent $50\\,\\%$ des valeurs.",
+        },
+        {
+          question: "que représente le TRAIT à l'intérieur de la boîte ?",
+          bonne: "la médiane",
+          pieges: ["la moyenne", "le premier quartile", "l'étendue"],
+          cle: "Le trait intérieur partage l'effectif en deux : c'est la médiane, pas la moyenne.",
+        },
+        {
+          question: "que représentent les extrémités des MOUSTACHES ?",
+          bonne: "le minimum et le maximum de la série",
+          pieges: [
+            "le premier et le troisième quartile",
+            "la moyenne plus ou moins un écart",
+            "les valeurs les plus fréquentes",
+          ],
+          cle: "Les moustaches vont jusqu'aux valeurs extrêmes ; ce sont les BORDS DE LA BOÎTE qui portent les quartiles.",
+        },
+        {
+          question:
+            "deux séries sont représentées : l'une a une boîte étroite, l'autre une boîte large. Que peut-on dire ?",
+          bonne: "les valeurs de la première sont plus resserrées",
+          pieges: [
+            "la première a une moyenne plus élevée",
+            "la première contient moins de valeurs",
+            "les deux séries sont identiques",
+          ],
+          cle: "La largeur de la boîte mesure la DISPERSION de la moitié centrale, pas le niveau ni l'effectif.",
+        },
+      ] as const);
+      return {
+        text: `Sur un diagramme en boîte, ${cas.question}`,
+        format: "qcm",
+        choices: makeChoices(cas.bonne, cas.pieges),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un diagramme en boîte résume une série par cinq nombres : minimum, $Q_1$, médiane, $Q_3$, maximum.",
+          "On repère à quel élément du dessin correspond chacun de ces cinq nombres.",
+          cas.cle,
+          `${cas.bonne.charAt(0).toUpperCase()}${cas.bonne.slice(1)}. ` +
+            `C'est ce qui permet de COMPARER deux distributions d'un seul coup d'œil.`
+        ),
+      };
+    },
   },
 
   /* ═══════════════ auto_proba_encadrement ═══════════════ */

@@ -344,6 +344,77 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "exponentielle", "suites"],
   },
 
+  {
+    kind: "template",
+    id: "premiere_expo_prolonger_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "expo_fonction_lecture",
+    microId: "expo_fct_prolonger_suite",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La suite ne donne des valeurs qu'aux rangs entiers ; la fonction, partout.",
+    tags: ["premiere", "maths", "exponentielle", "suites", "template"],
+    generate: () => {
+      const a = pick([2, 3, 1.5] as const);
+      const cas = pick([
+        {
+          question: `Que vaut $f(2)$ pour $f(x) = ${fr(a)}^x$, comparé au terme de rang $2$ de la suite géométrique de raison $${fr(a)}$ et de premier terme $1$ ?`,
+          bonne: "les deux valent la même chose",
+          pieges: [
+            "la fonction donne le double",
+            "la suite donne une valeur plus grande",
+            "on ne peut pas les comparer",
+          ],
+          cle: `$f(2) = ${fr(a)}^2 = ${fr(a * a)}$, et le terme de rang $2$ de la suite vaut aussi $${fr(a * a)}$`,
+        },
+        {
+          question: `Que peut calculer la fonction $f(x) = ${fr(a)}^x$ que la suite géométrique correspondante ne peut PAS calculer ?`,
+          bonne: "une valeur pour un rang non entier, comme $1{,}5$",
+          pieges: [
+            "une valeur pour un rang négatif seulement",
+            "rien de plus, elles sont identiques",
+            "la somme de tous les termes",
+          ],
+          cle: "la suite n'est définie qu'aux rangs entiers ; la fonction l'est pour tout réel positif",
+        },
+        {
+          question: `Graphiquement, quel est le lien entre les points de la suite géométrique de raison $${fr(a)}$ et la courbe de $f(x) = ${fr(a)}^x$ ?`,
+          bonne: "la courbe passe exactement par tous les points de la suite",
+          pieges: [
+            "la courbe passe au-dessus de tous les points",
+            "la courbe ne rencontre les points qu'en $x = 0$",
+            "les points sont alignés sur la courbe, qui est une droite",
+          ],
+          cle: "on place les points de la suite, puis on « complète » le nuage pour obtenir la courbe continue",
+        },
+        {
+          question: `Pourquoi le programme présente-t-il la fonction exponentielle APRÈS les suites géométriques ?`,
+          bonne: "parce qu'elle en est le prolongement à des valeurs non entières",
+          pieges: [
+            "parce qu'elle est plus difficile à calculer",
+            "parce qu'elle n'a rien à voir avec elles",
+            "parce qu'elle décroît toujours",
+          ],
+          cle: "le texte dit : « présentées comme un prolongement des suites géométriques de raison positive à des valeurs non entières positives »",
+        },
+      ] as const);
+      return {
+        text: cas.question,
+        format: "qcm",
+        choices: makeChoices(cas.bonne, cas.pieges),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une fonction exponentielle prolonge une suite géométrique : elle coïncide avec elle aux rangs entiers, et donne en plus une valeur partout ailleurs.",
+          "On compare ce que chacune sait calculer.",
+          `Ici, ${cas.cle}.`,
+          `${cas.bonne.charAt(0).toUpperCase()}${cas.bonne.slice(1)}.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ expo_taux_moyen_sens ═══════════════ */
 
   {
@@ -379,6 +450,76 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
       },
     ],
     tags: ["premiere", "maths", "exponentielle", "taux-moyen"],
+  },
+
+  {
+    kind: "template",
+    id: "premiere_expo_taux_moyen_sens_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "expo_taux_moyen",
+    microId: "expo_taux_moyen_sens",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« Moyen » ne veut pas dire « moyenne des taux » : les coefficients se multiplient.",
+    tags: ["premiere", "maths", "exponentielle", "taux-moyen", "template"],
+    generate: () => {
+      const n = pick([3, 4, 5] as const);
+      const cas = pick([
+        {
+          question: `Qu'appelle-t-on taux d'évolution moyen sur $${n}$ périodes ?`,
+          bonne: `le taux qui, appliqué $${n}$ fois, donnerait la même évolution globale`,
+          pieges: [
+            `la moyenne arithmétique des $${n}$ taux`,
+            `le taux global divisé par $${n}$`,
+            `le plus grand des $${n}$ taux`,
+          ],
+          cle: "son coefficient $c$ vérifie $c^n = C$, où $C$ est le coefficient global",
+        },
+        {
+          question:
+            "Une hausse de $20\\,\\%$ suivie d'une baisse de $20\\,\\%$ : que vaut le taux d'évolution moyen ?",
+          bonne: "il est légèrement négatif",
+          pieges: ["il est nul", "il vaut $20\\,\\%$", "il est légèrement positif"],
+          cle: "le coefficient global vaut $1{,}2 \\times 0{,}8 = 0{,}96 < 1$, donc l'évolution d'ensemble est une baisse",
+        },
+        {
+          question:
+            "Le taux d'évolution moyen d'une population sur dix ans est de $3\\,\\%$. Chaque année a-t-elle connu une hausse de $3\\,\\%$ ?",
+          bonne: "non, seule l'évolution d'ensemble équivaut à cela",
+          pieges: [
+            "oui, c'est la définition",
+            "oui, sauf la première année",
+            "non, aucune année n'a pu être à $3\\,\\%$",
+          ],
+          cle: "le taux moyen résume le résultat final, il ne décrit pas chaque période",
+        },
+        {
+          question:
+            "Pour trouver le coefficient moyen sur $4$ périodes, connaissant le coefficient global $C$, que fait-on ?",
+          bonne: "on cherche le nombre dont la puissance quatrième vaut $C$",
+          pieges: [
+            "on divise $C$ par $4$",
+            "on multiplie $C$ par $4$",
+            "on prend la moitié de $C$",
+          ],
+          cle: "on résout $c^4 = C$, c'est-à-dire $c = C^{1/4}$",
+        },
+      ] as const);
+      return {
+        text: cas.question,
+        format: "qcm",
+        choices: makeChoices(cas.bonne, cas.pieges),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le taux d'évolution moyen sur $n$ périodes est le taux CONSTANT qui produirait la même évolution globale.",
+          "On raisonne sur les coefficients, qui se multiplient, et non sur les taux, qui ne s'additionnent pas.",
+          `Ici, ${cas.cle}.`,
+          `${cas.bonne.charAt(0).toUpperCase()}${cas.bonne.slice(1)}.`
+        ),
+      };
+    },
   },
 
   /* ═══════════════ expo_taux_moyen_calculer ═══════════════ */

@@ -478,6 +478,66 @@ export const informationChiffreeBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "statistiques", "diagramme"],
   },
 
+  {
+    kind: "template",
+    id: "premiere_info_choisir_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "info_representations_croisees",
+    microId: "info_rep_choisir",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une répartition, une comparaison, une évolution, une relation : à chaque intention sa représentation.",
+    tags: ["premiere", "maths", "statistiques", "diagramme", "template"],
+    generate: () => {
+      const cas = pick([
+        {
+          but: "montrer comment une population se RÉPARTIT entre quatre catégories",
+          bonne: "un diagramme circulaire",
+          pieges: ["un nuage de points", "une courbe", "un diagramme en boîte"],
+          pourquoi: "une répartition, ce sont des parts d'un tout : le disque entier vaut 100 %",
+        },
+        {
+          but: "COMPARER les effectifs de plusieurs catégories",
+          bonne: "un diagramme en barres",
+          pieges: ["un diagramme circulaire", "une courbe", "un nuage de points"],
+          pourquoi: "des hauteurs se comparent d'un coup d'œil, mieux que des secteurs d'angles proches",
+        },
+        {
+          but: "montrer l'ÉVOLUTION d'une grandeur au fil des années",
+          bonne: "une courbe",
+          pieges: ["un diagramme circulaire", "un diagramme en boîte", "un tableau croisé"],
+          pourquoi: "une évolution demande un axe des temps",
+        },
+        {
+          but: "étudier la RELATION entre deux caractères quantitatifs",
+          bonne: "un nuage de points",
+          pieges: ["un diagramme circulaire", "un diagramme en barres", "un diagramme en boîte"],
+          pourquoi: "chaque individu donne un point, et la forme du nuage montre s'il y a une tendance",
+        },
+        {
+          but: "COMPARER la dispersion de deux séries de notes",
+          bonne: "deux diagrammes en boîte",
+          pieges: ["deux diagrammes circulaires", "une courbe", "un tableau croisé"],
+          pourquoi: "la largeur des boîtes se compare directement, et les moustaches montrent les extrêmes",
+        },
+      ] as const);
+      return {
+        text: `On veut ${cas.but}. Quelle représentation est la plus adaptée ?`,
+        format: "qcm",
+        choices: makeChoices(cas.bonne, cas.pieges),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le choix d'une représentation dépend de ce qu'on veut MONTRER : une répartition, une comparaison, une évolution ou une relation.",
+          "On identifie l'intention avant de choisir le dessin.",
+          `Ici, ${cas.pourquoi}.`,
+          `On choisit ${cas.bonne}. Une représentation mal choisie ne rend pas les données fausses : elle les rend illisibles.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ info_rep_commenter ═══════════════ */
 
   {
@@ -737,6 +797,62 @@ export const informationChiffreeBank: TutorBankItemV4[] = [
       "On choisit une courbe ou un nuage de points. C'est d'ailleurs la représentation qui prépare l'ajustement affine."
     ),
     tags: ["premiere", "maths", "tableur", "diagramme"],
+  },
+
+  {
+    kind: "template",
+    id: "premiere_info_tableur_diagramme_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "info_tableur",
+    microId: "info_tableur_diagramme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Que contiennent les colonnes ? Des années, des catégories, ou deux grandeurs mesurées ?",
+    tags: ["premiere", "maths", "tableur", "diagramme", "template"],
+    generate: () => {
+      const cas = pick([
+        {
+          feuille: "pour chaque année de 2015 à 2025, la population d'une commune",
+          but: "l'ÉVOLUTION de cette population",
+          bonne: "une courbe, ou un nuage de points reliés",
+          pieges: ["un diagramme circulaire", "un diagramme en boîte", "un tableau croisé"],
+        },
+        {
+          feuille: "le nombre d'élèves inscrits dans chacune des cinq options",
+          but: "la RÉPARTITION des élèves entre les options",
+          bonne: "un diagramme circulaire",
+          pieges: ["une courbe", "un nuage de points", "un diagramme en boîte"],
+        },
+        {
+          feuille: "pour vingt villes, la population et le nombre de médecins",
+          but: "s'il existe une RELATION entre les deux",
+          bonne: "un nuage de points",
+          pieges: ["un diagramme circulaire", "une courbe du temps", "un diagramme en barres"],
+        },
+        {
+          feuille: "les ventes de quatre magasins sur le même mois",
+          but: "COMPARER les quatre magasins",
+          bonne: "un diagramme en barres",
+          pieges: ["une courbe", "un nuage de points", "un diagramme en boîte"],
+        },
+      ] as const);
+      return {
+        text:
+          `Une feuille de calcul contient ${cas.feuille}. ` +
+          `Quel diagramme choisir pour montrer ${cas.but} ?`,
+        format: "qcm",
+        choices: makeChoices(cas.bonne, cas.pieges),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un tableur peut tout dessiner : c'est à nous de choisir la représentation qui répond à la question posée.",
+          "On regarde ce que contiennent les colonnes, puis ce qu'on veut faire voir.",
+          `Ici les données sont « ${cas.feuille} », et l'on cherche à montrer ${cas.but}.`,
+          `On choisit ${cas.bonne}.`
+        ),
+      };
+    },
   },
 
   /* ═══════════════ info_filtre_sous_ensemble / ET / OU / NON ═══════════════ */

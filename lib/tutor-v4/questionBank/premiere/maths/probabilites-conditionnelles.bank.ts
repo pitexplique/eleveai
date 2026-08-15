@@ -727,6 +727,80 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "probabilites", "independance"],
   },
 
+  {
+    kind: "template",
+    id: "premiere_alea_indep_definition_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "alea_independance",
+    microId: "alea_indep_definition",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Indépendants : savoir que l'un s'est produit ne change RIEN à la probabilité de l'autre.",
+    tags: ["premiere", "maths", "probabilites", "independance", "template"],
+    generate: () => {
+      const cas = pick([
+        {
+          question: "Deux évènements $A$ et $B$ sont indépendants lorsque :",
+          bonne: "$P_B(A) = P(A)$",
+          pieges: ["$P(A \\cap B) = 0$", "$P(A) + P(B) = 1$", "$P(A) = P(B)$"],
+          cle: "Savoir que $B$ est arrivé n'apprend rien sur $A$ : la probabilité de $A$ est inchangée.",
+        },
+        {
+          question: "Quelle égalité caractérise aussi l'indépendance de $A$ et $B$ ?",
+          bonne: "$P(A \\cap B) = P(A) \\times P(B)$",
+          pieges: [
+            "$P(A \\cap B) = P(A) + P(B)$",
+            "$P(A \\cap B) = P(A) - P(B)$",
+            "$P(A \\cap B) = 1$",
+          ],
+          cle: "En multipliant $P_B(A) = P(A)$ par $P(B)$, on obtient $P(A \\cap B) = P(A) \\times P(B)$.",
+        },
+        {
+          question:
+            "Si $A$ et $B$ sont indépendants et que l'on apprend que $B$ s'est produit, que devient $P(A)$ ?",
+          bonne: "elle ne change pas",
+          pieges: ["elle augmente", "elle diminue", "elle devient nulle"],
+          cle: "C'est la définition même : l'information sur $B$ n'apporte rien sur $A$.",
+        },
+        {
+          question: "Deux évènements de probabilités non nulles peuvent-ils être indépendants ?",
+          bonne: "oui, c'est le cas courant",
+          pieges: [
+            "non, jamais",
+            "oui, seulement s'ils ont la même probabilité",
+            "oui, seulement s'ils sont incompatibles",
+          ],
+          cle: "L'indépendance n'impose aucune égalité entre $P(A)$ et $P(B)$ : elle porte sur l'absence d'influence.",
+        },
+        {
+          question: "Que signifie la notation $P_B(A)$ dans la définition de l'indépendance ?",
+          bonne: "la probabilité de $A$ sachant que $B$ est réalisé",
+          pieges: [
+            "la probabilité de $B$ sachant $A$",
+            "la probabilité que $A$ et $B$ se produisent ensemble",
+            "le produit de $P(A)$ par $P(B)$",
+          ],
+          cle: "L'indice porte la condition : $P_B(A)$ se lit « probabilité de $A$ SACHANT $B$ ».",
+        },
+      ] as const);
+      return {
+        text: cas.question,
+        format: "qcm",
+        choices: makeChoices(cas.bonne, cas.pieges),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "$A$ et $B$ sont indépendants si la réalisation de l'un ne modifie pas la probabilité de l'autre : $P_B(A) = P(A)$, avec $P(B) \\neq 0$.",
+          "On traduit la situation en termes d'information : ce que l'on apprend change-t-il quelque chose ?",
+          cas.cle,
+          `${cas.bonne.charAt(0).toUpperCase()}${cas.bonne.slice(1)}. ` +
+            `⚠️ À ne pas confondre avec l'incompatibilité, qui est $P(A \\cap B) = 0$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ alea_indep_produit ═══════════════ */
 
   {
@@ -811,6 +885,79 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           {
             choice: "Oui, car ils peuvent se produire ensemble",
             cause: "pouvoir se produire ensemble n'est pas l'indépendance : c'est seulement le contraire de l'incompatibilité",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_alea_incompatible_tpl_1",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "alea_independance",
+    microId: "alea_indep_incompatible",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Incompatibles : ils ne peuvent pas arriver ensemble. Indépendants : l'un n'apprend rien sur l'autre.",
+    tags: ["premiere", "maths", "probabilites", "independance", "template"],
+    generate: () => {
+      const cas = pick([
+        {
+          situation:
+            "On lance un dé équilibré. $A$ : « le résultat est pair », $B$ : « le résultat est $3$ ».",
+          bonne: "ils sont incompatibles, donc PAS indépendants",
+          cle: "$P(A \\cap B) = 0$ alors que $P(A) \\times P(B) = \\frac{1}{2} \\times \\frac{1}{6} = \\frac{1}{12} \\neq 0$",
+        },
+        {
+          situation:
+            "On tire une carte dans un jeu de $32$. $A$ : « la carte est un cœur », $B$ : « la carte est un pique ».",
+          bonne: "ils sont incompatibles, donc PAS indépendants",
+          cle: "une carte ne peut pas être à la fois cœur et pique : $P(A \\cap B) = 0$",
+        },
+        {
+          situation:
+            "On lance deux fois une pièce. $A$ : « pile au premier lancer », $B$ : « pile au second lancer ».",
+          bonne: "ils sont indépendants, et compatibles",
+          cle: "les deux peuvent arriver ensemble, et le premier lancer n'influence pas le second",
+        },
+        {
+          situation:
+            "On interroge une personne au hasard. $A$ : « elle a plus de 18 ans », $B$ : « elle est mineure ».",
+          bonne: "ils sont incompatibles, donc PAS indépendants",
+          cle: "les deux ne peuvent jamais être vrais en même temps, et savoir l'un détermine l'autre",
+        },
+        {
+          situation:
+            "On tire une boule dans une urne, on la remet, puis on en tire une seconde. $A$ : « la première est rouge », $B$ : « la seconde est rouge ».",
+          bonne: "ils sont indépendants, et compatibles",
+          cle: "la remise rétablit la composition : le premier tirage n'apprend rien sur le second",
+        },
+      ] as const);
+      return {
+        text: `${cas.situation} Que peut-on dire de $A$ et $B$ ?`,
+        format: "qcm",
+        choices: makeChoices(cas.bonne, [
+          "ils sont incompatibles, donc PAS indépendants",
+          "ils sont indépendants, et compatibles",
+          "ils sont à la fois incompatibles et indépendants",
+          "ils sont incompatibles, DONC indépendants",
+        ]),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Incompatibles signifie $P(A \\cap B) = 0$ : les deux ne peuvent pas se produire ensemble. Indépendants signifie $P(A \\cap B) = P(A) \\times P(B)$ : l'un n'apprend rien sur l'autre. Ce sont deux notions DIFFÉRENTES.",
+          "On regarde d'abord si les deux peuvent arriver ensemble, puis si l'un renseigne sur l'autre.",
+          `Ici, ${cas.cle}.`,
+          `${cas.bonne.charAt(0).toUpperCase()}${cas.bonne.slice(1)}. ` +
+            `⚠️ Deux évènements incompatibles de probabilités non nulles ne sont JAMAIS indépendants : ` +
+            `savoir que l'un s'est produit rend l'autre impossible, ce qui est l'influence maximale.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "ils sont incompatibles, DONC indépendants",
+            cause: "prend « incompatible » pour un synonyme d'« indépendant » : c'est presque le contraire",
           },
         ],
       };
