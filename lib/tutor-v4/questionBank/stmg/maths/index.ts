@@ -42,10 +42,12 @@ import { proportionsEvolutionsBank } from "./proportions-evolutions.bank";
 import { automatismesCalculBank } from "./automatismes-calcul.bank";
 import { automatismesAlgebreBank } from "./automatismes-algebre.bank";
 import { automatismesGraphiquesBank } from "./automatismes-graphiques.bank";
+import { automatismesTerminaleBank } from "./automatismes-terminale.bank";
 
 export const mathsStmgQuestionBank: TutorBankItemV4[] = [
   ...proportionsEvolutionsBank,
   ...automatismesCalculBank,
   ...automatismesAlgebreBank,
   ...automatismesGraphiquesBank,
+  ...automatismesTerminaleBank,
 ];

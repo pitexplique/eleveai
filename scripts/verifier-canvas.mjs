@@ -52,6 +52,16 @@ const MOTS_GRAPHIQUES = [
   "tableur",
 ];
 
+// Les micros dont l'intitulé sonne graphique mais qui doivent se passer de
+// figure. Une exception se déclare ICI, avec sa raison — pas en silence dans
+// une banque. La liste doit rester très courte : si elle grossit, c'est que
+// les mots-clés ci-dessus sont mal choisis.
+const SANS_FIGURE_VOULU = {
+  autoT_signe_image_mentale:
+    "le BO demande de conclure « à l'aide d'une image mentale de la courbe », " +
+    "donc SANS la tracer : fournir le dessin supprimerait l'automatisme travaillé",
+};
+
 function estGraphique(label) {
   const l = label.toLowerCase();
   return MOTS_GRAPHIQUES.some((mot) => l.includes(mot));
@@ -120,11 +130,14 @@ const manquantes = [];
 const partielles = [];
 const couvertes = [];
 const bonus = [];
+const exceptions = [];
 
 for (const [micro, e] of [...parMicro].sort((a, b) => a[0].localeCompare(b[0]))) {
   const label = labels.get(micro) ?? micro;
   const ligne = `${micro} — ${e.figures}/${e.total} item(s) avec figure`;
-  if (estGraphique(label)) {
+  if (SANS_FIGURE_VOULU[micro]) {
+    exceptions.push({ micro, raison: SANS_FIGURE_VOULU[micro] });
+  } else if (estGraphique(label)) {
     if (e.figures === 0) manquantes.push({ ligne, label });
     else if (e.figures < e.total) partielles.push({ ligne, label });
     else couvertes.push({ ligne, label });
@@ -142,6 +155,12 @@ if (couvertes.length) {
 if (bonus.length) {
   console.log(`➕ Figures ajoutées là où l'intitulé ne l'exigeait pas (${bonus.length}) :`);
   for (const b of bonus) console.log(`     ${b.ligne}`);
+  console.log("");
+}
+
+if (exceptions.length) {
+  console.log(`⚪ Sans figure, volontairement (${exceptions.length}) :`);
+  for (const ex of exceptions) console.log(`     ${ex.micro}\n       ${ex.raison}`);
   console.log("");
 }
 
