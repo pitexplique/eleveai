@@ -26,7 +26,7 @@
 // pas du tout au programme de première générale. C'est l'écart le plus net
 // entre les deux voies.
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { CanvasFigure, TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 /* ─────────────────────────── outils ─────────────────────────── */
 
@@ -118,8 +118,18 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
       const entreprise = pick(ENTREPRISES);
       return {
         text:
-          `Sur les $${tout}$ salariés de ${entreprise}, $${partie}$ travaillent à temps partiel. ` +
+          `Le diagramme donne la répartition des salariés de ${entreprise}. ` +
           `Quelle proportion de salariés travaille à temps partiel ?`,
+        canvas: {
+          kind: "stat_graph",
+          graphType: "barres",
+          title: `Salariés de ${entreprise}`,
+          data: [
+            { label: "Temps partiel", value: partie },
+            { label: "Temps plein", value: tout - partie },
+          ],
+          display: { showValues: true, showLabels: true },
+        } satisfies CanvasFigure,
         format: "qcm",
         choices: makeChoices(`$${p}\\,\\%$`, [
           `$${fr(100 - p)}\\,\\%$`,
@@ -775,10 +785,22 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
       const vi = pick([50, 80, 100, 200, 400, 500] as const);
       const t = pick([-50, -25, -20, -10, 10, 20, 25, 50] as const);
       const vf = vi * (1 + t / 100);
+      const entreprise = pick(ENTREPRISES);
       return {
         text:
-          `${pick(ENTREPRISES)} a réalisé $${vi}$ k€ de chiffre d'affaires l'an dernier et $${fr(vf)}$ k€ cette année. ` +
-          `Quel est le taux d'évolution, en pourcentage ? (donne un nombre négatif s'il s'agit d'une baisse)`,
+          `Le graphique donne le chiffre d'affaires de ${entreprise}. ` +
+          `Quel est le taux d'évolution entre l'an dernier et cette année, en pourcentage ? ` +
+          `(nombre négatif s'il s'agit d'une baisse)`,
+        canvas: {
+          kind: "stat_graph",
+          graphType: "batons",
+          title: `Chiffre d'affaires de ${entreprise} (k€)`,
+          data: [
+            { label: "L'an dernier", value: vi },
+            { label: "Cette année", value: vf },
+          ],
+          display: { showValues: true, showLabels: true },
+        } satisfies CanvasFigure,
         format: "short",
         expected: [fr(t)],
         comparator: "number_equal",
@@ -1241,10 +1263,20 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
       const annee = pick([2015, 2018, 2020, 2021] as const);
       const t = pick([-25, -20, -10, -5, 5, 10, 20, 25, 40] as const);
       const indice = 100 + t;
+      // Les indices intermédiaires ne servent qu'à rendre la série crédible :
+      // seul celui de la dernière colonne porte la question.
+      const intermediaires = [0, 1, 2].map((k) => 100 + Math.round((t * (k + 1)) / 4));
       return {
         text:
-          `En base $100$ en ${annee}, l'indice du chiffre d'affaires d'un secteur vaut $${indice}$ cette année. ` +
-          `Cela signifie que le chiffre d'affaires a :`,
+          `Le tableau donne l'indice du chiffre d'affaires d'un secteur, en base $100$ en ${annee}. ` +
+          `Que signifie l'indice de la dernière colonne ?`,
+        canvas: {
+          kind: "tableau_donnees",
+          title: `Indice du chiffre d'affaires (base 100 en ${annee})`,
+          headers: [String(annee), String(annee + 1), String(annee + 2), String(annee + 3), "Cette année"],
+          rows: [{ label: "Indice", values: [100, ...intermediaires, indice] }],
+          highlight: { col: 4 },
+        } satisfies CanvasFigure,
         format: "qcm",
         choices: makeChoices(
           `${t > 0 ? "augmenté" : "diminué"} de $${Math.abs(t)}\\,\\%$ depuis ${annee}`,
@@ -1408,8 +1440,17 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
       return {
         text:
           `Deux secteurs sont suivis en base $100$ la même année de référence. ` +
-          `Cette année, le secteur A a un indice de $${iA}$ et le secteur B un indice de $${iB}$. ` +
-          `Lequel a le plus progressé depuis l'année de référence ?`,
+          `Lequel a le plus progressé depuis cette année-là ?`,
+        canvas: {
+          kind: "stat_graph",
+          graphType: "barres",
+          title: "Indices des deux secteurs (base 100 l'année de référence)",
+          data: [
+            { label: "Secteur A", value: iA },
+            { label: "Secteur B", value: iB },
+          ],
+          display: { showValues: true, showLabels: true },
+        } satisfies CanvasFigure,
         format: "qcm",
         choices: shuffle([
           `le secteur ${gagnant}`,

@@ -39,7 +39,11 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 //    (ni arbre, ni probabilités totales).
 
 import { proportionsEvolutionsBank } from "./proportions-evolutions.bank";
+import { automatismesCalculBank } from "./automatismes-calcul.bank";
+import { automatismesGraphiquesBank } from "./automatismes-graphiques.bank";
 
 export const mathsStmgQuestionBank: TutorBankItemV4[] = [
   ...proportionsEvolutionsBank,
+  ...automatismesCalculBank,
+  ...automatismesGraphiquesBank,
 ];
