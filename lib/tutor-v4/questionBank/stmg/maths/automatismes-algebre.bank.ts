@@ -775,6 +775,13 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
         { formule: "P = 2(L + l)", isoler: "L", bonne: "L = \\dfrac{P}{2} - l", faux: ["L = P - 2l", "L = \\dfrac{P - l}{2}", "L = 2P - l"] },
         { formule: "d = v \\times t", isoler: "t", bonne: "t = \\dfrac{d}{v}", faux: ["t = d \\times v", "t = \\dfrac{v}{d}", "t = d - v"] },
         { formule: "T = \\dfrac{A}{B}", isoler: "A", bonne: "A = T \\times B", faux: ["A = \\dfrac{T}{B}", "A = \\dfrac{B}{T}", "A = T + B"] },
+        { formule: "T = \\dfrac{A}{B}", isoler: "B", bonne: "B = \\dfrac{A}{T}", faux: ["B = A \\times T", "B = \\dfrac{T}{A}", "B = A - T"] },
+        { formule: "CA = p \\times q", isoler: "q", bonne: "q = \\dfrac{CA}{p}", faux: ["q = CA \\times p", "q = \\dfrac{p}{CA}", "q = CA + p"] },
+        { formule: "M = V - A", isoler: "A", bonne: "A = V - M", faux: ["A = M - V", "A = M + V", "A = \\dfrac{V}{M}"] },
+        { formule: "P = 2(L + l)", isoler: "l", bonne: "l = \\dfrac{P}{2} - L", faux: ["l = P - 2L", "l = \\dfrac{P - L}{2}", "l = 2P - L"] },
+        { formule: "d = v \\times t", isoler: "v", bonne: "v = \\dfrac{d}{t}", faux: ["v = d \\times t", "v = \\dfrac{t}{d}", "v = d - t"] },
+        { formule: "C = f + u \\times x", isoler: "x", bonne: "x = \\dfrac{C - f}{u}", faux: ["x = \\dfrac{C}{u} - f", "x = C - f - u", "x = \\dfrac{C - u}{f}"] },
+        { formule: "C = f + u \\times x", isoler: "f", bonne: "f = C - u \\times x", faux: ["f = \\dfrac{C}{u \\times x}", "f = C + u \\times x", "f = \\dfrac{C - x}{u}"] },
       ] as const);
       return {
         text: `Dans la formule $${cas.formule}$, exprime $${cas.isoler}$ en fonction des autres grandeurs.`,

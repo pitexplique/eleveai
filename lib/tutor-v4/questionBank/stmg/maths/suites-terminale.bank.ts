@@ -602,21 +602,28 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
     hint: "Cherche si la question porte sur UNE valeur à une date, ou sur le CUMUL de toutes les valeurs.",
     tags: ["stmg", "maths", "suites", "terminale", "template"],
     generate: () => {
+      // ⚠️ Les nombres de ces phrases sont TIRÉS, pas figés. Avec des durées et
+      // des montants constants, la micro ne produisait que quatre questions
+      // réellement distinctes : dix textes, mais les mêmes nombres. C'est le
+      // genre d'inflation d'habillage que `echantillon-banque.mjs` révèle et
+      // que le compteur de textes distincts masquait.
       const somme = Math.random() < 0.5;
+      const montant = pick([50, 80, 100, 120, 150, 200] as const);
+      const duree = pick([3, 4, 5, 6, 8, 10, 12] as const);
       const phrase = somme
         ? pick([
-            "on verse 100 € chaque mois pendant 3 ans et l'on veut savoir combien on a versé en tout",
-            "une entreprise cumule ses bénéfices annuels sur cinq exercices",
-            "on additionne les loyers perçus sur toute la durée du bail",
-            "on veut le total des intérêts encaissés sur dix ans",
-            "on calcule le nombre total de commandes traitées sur les six premiers mois",
+            `on verse ${montant} € chaque mois pendant ${duree} ans et l'on veut savoir combien on a versé en tout`,
+            `une entreprise cumule ses bénéfices annuels sur ${duree} exercices`,
+            `on additionne les ${montant} € de loyer perçus chaque mois sur les ${duree} années du bail`,
+            `on veut le total des intérêts encaissés sur ${duree} ans`,
+            `on calcule le nombre total de commandes traitées sur les ${duree} premiers mois`,
           ] as const)
         : pick([
-            "on veut la valeur d'un capital placé au bout de 8 ans",
-            "on cherche le nombre d'abonnés à la fin de la cinquième année",
-            "on veut connaître le prix d'un article après trois hausses successives",
-            "on cherche la valeur résiduelle d'une machine après six ans",
-            "on veut l'effectif du club au bout de quatre saisons",
+            `on veut la valeur d'un capital de ${montant * 10} € placé au bout de ${duree} ans`,
+            `on cherche le nombre d'abonnés à la fin de la ${duree}ᵉ année`,
+            `on veut connaître le prix d'un article après ${duree} hausses successives`,
+            `on cherche la valeur résiduelle d'une machine après ${duree} ans`,
+            `on veut l'effectif du club au bout de ${duree} saisons`,
           ] as const);
       return {
         text: `Cette situation relève-t-elle du calcul d'un TERME ou d'une SOMME de termes ? ${phrase.charAt(0).toUpperCase()}${phrase.slice(1)}.`,

@@ -239,7 +239,7 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
     hint: "La dérivée de $\\dfrac{1}{x}$ est $-\\dfrac{1}{x^2}$ — le signe moins n'est pas une faute de frappe.",
     tags: ["stmg", "maths", "fonctions", "inverse", "derivation", "template"],
     generate: () => {
-      const k = pick([1, 2, 3, 5, 6, 8, 10, 12] as const);
+      const k = pick([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 18, 20, 24, 25, 30] as const);
       return {
         text: `Soit $f(x) = \\dfrac{${k}}{x}$ sur $]0\\,;\\,+\\infty[$. Quelle est l'expression de $f'(x)$ ?`,
         format: "qcm",
@@ -279,11 +279,16 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
     microId: "fctT_inverse_variations",
     difficulty: 2,
     theme: "neutral",
-    hint: "$x^2$ est toujours positif : c'est le signe moins qui décide de tout.",
+    hint: "$x^2$ est toujours positif : tout se joue sur le signe du numérateur.",
     tags: ["stmg", "maths", "fonctions", "inverse", "derivation", "template"],
     generate: () => {
-      const k = pick([2, 3, 4, 6, 9, 12] as const);
+      // ⚠️ Le numérateur prend les DEUX signes. Avec un k toujours positif, la
+      // réponse était invariablement « décroissante » : l'élève retenait le mot
+      // sans refaire le raisonnement. C'est le vrai défaut qu'a révélé la
+      // mesure des questions RÉELLEMENT distinctes — pas le nombre d'énoncés.
+      const k = pick([2, 3, 4, 5, 6, 8, 9, 10, 12, 15, -2, -3, -4, -5, -6, -8, -9, -12] as const);
       const intervalle = pick(["]0 ; +∞[", "]−∞ ; 0["] as const);
+      const decroit = k > 0;
       return {
         text:
           `Soit $f(x) = \\dfrac{${k}}{x}$. Quel est le sens de variation de $f$ sur ` +
@@ -296,18 +301,19 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
           "constante",
           "croissante puis décroissante",
         ]),
-        expected: ["décroissante"],
+        expected: [decroit ? "décroissante" : "croissante"],
         comparator: "mcq_exact",
         explanation: exp(
           "Le sens de variation se lit sur le signe de la dérivée : $f'(x) = -\\dfrac{k}{x^2}$.",
-          "On observe que $x^2$ est strictement positif partout où $f$ est définie ; avec $k > 0$, la dérivée est donc strictement négative sur CHACUN des deux intervalles.",
-          `$f'(x) = -\\dfrac{${k}}{x^2} < 0$ pour tout $x \\neq 0$ : la fonction décroît sur chaque intervalle pris séparément.`,
-          "$f$ est décroissante sur cet intervalle."
+          "On observe que $x^2$ est strictement positif partout où $f$ est définie : le signe de la dérivée est donc l'OPPOSÉ de celui de $k$, sur chacun des deux intervalles.",
+          `Ici $k = ${k}$, donc $f'(x) = ${decroit ? "-" : "+"}\\dfrac{${Math.abs(k)}}{x^2}$, ` +
+            `strictement ${decroit ? "négative" : "positive"} pour tout $x \\neq 0$.`,
+          `$f$ est ${decroit ? "décroissante" : "croissante"} sur cet intervalle.`
         ),
         choiceDiagnostics: [
           {
-            choice: "croissante",
-            cause: "a oublié le signe moins de la dérivée",
+            choice: decroit ? "croissante" : "décroissante",
+            cause: "a appliqué le sens de variation de 1/x sans regarder le signe du numérateur",
           },
         ],
       };

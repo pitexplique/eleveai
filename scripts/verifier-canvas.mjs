@@ -170,6 +170,19 @@ if (partielles.length) {
   console.log("");
 }
 
+// ── taux de couverture, toutes micros confondues ──
+//
+// « Les STMG et les STL ne sont pas très forts en calcul pur. » (Frédéric,
+// 15/08/2026) Une figure ne sert pas qu'aux micros dont l'intitulé la réclame :
+// elle donne une prise là où le calcul seul bloque. On affiche donc le taux
+// global, pour que la couverture se pilote au lieu d'arriver par hasard.
+const avecFigure = [...parMicro.values()].filter((e) => e.figures > 0).length;
+const taux = Math.round((avecFigure / parMicro.size) * 100);
+console.log(
+  `📊 Couverture globale : ${avecFigure}/${parMicro.size} micro-compétences portent une figure (${taux} %).\n` +
+    `   Les micros « graphiques » y sont obligées ; les autres en profitent.\n`
+);
+
 if (manquantes.length) {
   console.log(`⛔ ${manquantes.length} micro(s) GRAPHIQUE(S) sans aucune figure :`);
   for (const m of manquantes) console.log(`     ${m.ligne}\n       « ${m.label} »`);

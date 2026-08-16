@@ -911,6 +911,14 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
           phrase: "le chiffre d'affaires a chuté de $45\\,\\%$ au dernier trimestre",
           reponse: "une évolution",
         },
+        { phrase: "$62\\,\\%$ des commandes sont livrées en moins de 48 heures", reponse: "une proportion" },
+        { phrase: "les délais de livraison se sont allongés de $62\\,\\%$ en six mois", reponse: "une évolution" },
+        { phrase: "le taux de marge de l'entreprise s'élève à $28\\,\\%$", reponse: "une proportion" },
+        { phrase: "la marge a progressé de $28\\,\\%$ par rapport à l'an dernier", reponse: "une évolution" },
+        { phrase: "$7\\,\\%$ des articles du stock sont invendus", reponse: "une proportion" },
+        { phrase: "le stock d'invendus a fondu de $7\\,\\%$ ce mois-ci", reponse: "une évolution" },
+        { phrase: "le taux de rendement du placement est de $3\\,\\%$", reponse: "une proportion" },
+        { phrase: "le nombre de réclamations a reculé de $3\\,\\%$ en un an", reponse: "une évolution" },
       ] as const);
       return {
         text: `Dans la phrase suivante, le pourcentage exprime-t-il une proportion ou une évolution ?\n\n« ${cas.phrase} »`,
@@ -1190,7 +1198,7 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
     hint: "Multiplie les deux coefficients : le résultat n'est jamais exactement $1$.",
     tags: ["stmg", "maths", "evolutions", "piege", "template", "short"],
     generate: () => {
-      const t = pick([10, 20, 25, 50] as const);
+      const t = pick([4, 5, 8, 10, 12, 15, 20, 25, 30, 40, 50] as const);
       const k = (1 + t / 100) * (1 - t / 100);
       const tGlobal = Math.round((k - 1) * 10000) / 100;
       return {

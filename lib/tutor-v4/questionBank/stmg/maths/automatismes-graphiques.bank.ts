@@ -445,10 +445,15 @@ export const automatismesGraphiquesBank: TutorBankItemV4[] = [
     generate: () => {
       const serie = pick(SERIES);
       const anneeDebut = pick([2018, 2019, 2020] as const);
-      const sommet = randomInt(2, 4);
+      const sommet = randomInt(1, 4);
       // Croissance jusqu'au sommet, décroissance ensuite : le maximum est unique.
+      // ⚠️ Le départ et les deux pentes sont tirés, pas figés : avec des valeurs
+      // constantes, ce gabarit ne produisait que neuf graphiques différents.
+      const depart = randomInt(2, 8) * 10;
+      const montee = randomInt(2, 5) * 10;
+      const descente = randomInt(1, 4) * 10;
       const valeurs = Array.from({ length: 6 }, (_, k) =>
-        k <= sommet ? 40 + k * 25 : 40 + sommet * 25 - (k - sommet) * 20
+        k <= sommet ? depart + k * montee : depart + sommet * montee - (k - sommet) * descente
       );
       const anneeSommet = anneeDebut + sommet;
       return {
