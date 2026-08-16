@@ -21,17 +21,37 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 // minimum de 10 — le seuil de la règle d'or. 51 % des micros portent une
 // figure ; les 13 micros graphiques obligatoires sont toutes illustrées.
 //
-// ⏳ RESTE À FAIRE : brancher la classe au sélecteur du coach (`CLASSES` dans
-// app/coach-ia/[matiere]/page.tsx), à `PROGRAMME_CLASSES` dans lib/programme.ts
-// et à lib/matrice/coach.ts. La liste du sélecteur passera à 15 boutons : c'est
-// le moment de la grouper par cycle et par voie (générale / technologique)
-// plutôt que d'allonger la ligne.
+// ✅ Classe branchée et ouverte : coach, parcours, /programme/stmg. Le
+// sélecteur du coach est groupé par cycle et par voie.
 //
-// À CHAQUE BANQUE, les quatre vérificateurs :
+// ⛔⛔ UN ITEM PAR MICRO — CE QUE ÇA COÛTE, ET POURQUOI ON L'A GARDÉ
+//
+// Cette banque compte 338 items pour 304 micros, soit 1,1 item par micro, là
+// où les autres classes en ont ~9. Ce n'est PAS une pauvreté de contenu :
+// ailleurs ce sont des items FIGÉS, ici c'est un générateur par micro, qui
+// produit 94 questions réellement distinctes en médiane. 94 bat 9.
+//
+// Mais le coach sert des PAIRES de questions, et `questionPairBuilder`
+// comptait les ITEMS de banque, pas les questions générables : sous deux
+// items, il levait « Aucune paire disponible dans la notion … ». La classe
+// était verte aux cinq vérificateurs et 274 micros sur 304 ne démarraient
+// pas — c'est en l'ouvrant dans un navigateur qu'on l'a vu, jamais autrement.
+//
+// En mode simple (« Affichage classe »), une seule question est affichée :
+// `allowSingleItem` autorise donc le second tirage à venir du même
+// générateur, avec d'autres nombres. 304/304 démarrent.
+// En mode complet, deux questions sont OPPOSÉES et doivent contraster : il y
+// faut deux items d'angles différents. 30/304 aujourd'hui.
+//
+// ⏳ RESTE À FAIRE : un second générateur par micro, d'un ANGLE DIFFÉRENT du
+// premier — pas une variante de nombres, sinon le contraste ne sert à rien.
+//
+// À CHAQUE BANQUE, les cinq vérificateurs :
 //   node --experimental-strip-types scripts/verifier-knowledge.mjs stmg
 //   node --experimental-strip-types scripts/verifier-generateurs.mjs stmg maths 600
 //   node --experimental-strip-types scripts/verifier-variete.mjs stmg maths
 //   node --experimental-strip-types scripts/verifier-canvas.mjs stmg maths
+//   node --experimental-strip-types scripts/echantillon-banque.mjs stmg maths --lire 2
 //   npx tsc --noEmit
 //
 // Ils ont eu raison une dizaine de fois sur ce chantier, dont trois sur des
@@ -39,6 +59,14 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 // voient PAS à la relecture : des distracteurs qui se recoupent sur certains
 // tirages seulement, un croisement de courbes qui tombe hors du tableau
 // affiché, un générateur juste mais qui ne produit que trois énoncés.
+//
+// ⚠️ Mais AUCUN des cinq ne lit la LANGUE ni ne lance le coach. La lecture à
+// la main du 16/08 a trouvé, après leur feu vert : deux propositions
+// équivalentes dans un QCM (l'élève avait raison et était compté faux), un
+// effectif d'abonnés à 118,75, un crédit à coût négatif, et 55 tournures
+// fautives nées des réservoirs de contexte (« Combien de abonnés », « la
+// probabilité que il est hors tolérance »). Les réservoirs portent désormais
+// le genre et l'élision : ne pas y remettre un nom sans son genre.
 //
 // ─────────────────────────────────────────────────────────────────────────────
 // À QUI ON ÉCRIT
