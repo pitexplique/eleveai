@@ -6,9 +6,10 @@
  * latéral. La vue « complète » rend la main : les deux énoncés proposés, le
  * détail des micro-compétences, la progression.
  *
- * La règle : à partir de la 5e, l'élève prend la vue complète ; jusqu'à la 6e
- * incluse, il garde la vue simple. Un enfant de CE1 n'a rien à faire d'un
- * tableau de bord, et un élève de 3e n'a pas à se voir retirer le choix.
+ * La règle : la vue complète commence AU COLLÈGE, dès la 6e ; le primaire garde
+ * la vue simple. Un enfant de CE1 n'a rien à faire d'un tableau de bord, et un
+ * entrant de 6e n'a pas à se voir retirer le choix — il vient d'arriver dans
+ * un établissement où on lui demande justement d'apprendre à choisir.
  *
  * Les niveaux du CECRL (a1 → c1, pour l'anglais, l'espagnol et l'IA) ne sont
  * pas des classes : ils gardent la vue simple, comme aujourd'hui.
@@ -27,7 +28,6 @@ const CLASSES_MODE_SIMPLE: readonly string[] = [
   "ce2",
   "cm1",
   "cm2",
-  "6e",
   "a1",
   "a2",
   "b1",
