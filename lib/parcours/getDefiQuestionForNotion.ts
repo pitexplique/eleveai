@@ -21,6 +21,7 @@ import { mathsSecondeQuestionBank } from "@/lib/tutor-v4/questionBank/seconde/ma
 import { mathsPremiereSpeQuestionBank } from "@/lib/tutor-v4/questionBank/premiere-spe/maths";
 import { mathsTerminaleSpeQuestionBank } from "@/lib/tutor-v4/questionBank/terminale-spe/maths";
 import { mathsAdulteQuestionBank } from "@/lib/tutor-v4/questionBank/adulte/maths";
+import { mathsStmgQuestionBank } from "@/lib/tutor-v4/questionBank/stmg/maths";
 
 function getQuestionBank(classe: ParcoursClasse): TutorBankItemV4[] {
   if (classe === "cp") return mathsCpQuestionBank;
@@ -35,8 +36,14 @@ function getQuestionBank(classe: ParcoursClasse): TutorBankItemV4[] {
   if (classe === "seconde") return mathsSecondeQuestionBank;
   if (classe === "premiere-spe") return mathsPremiereSpeQuestionBank;
   if (classe === "terminale-spe") return mathsTerminaleSpeQuestionBank;
+  if (classe === "stmg") return mathsStmgQuestionBank;
   if (classe === "adulte") return mathsAdulteQuestionBank;
 
+  // ⚠️ Ce `return []` est un REPLI MUET : une classe oubliée ici rend un
+  // parcours sans aucune question, sans lever d'erreur. Le parcours tient sa
+  // propre liste de banques, séparée de `loadQuestionBankV4` — brancher une
+  // classe dans le coach ne la branche PAS ici. Les deux listes se vérifient
+  // ensemble.
   return [];
 }
 

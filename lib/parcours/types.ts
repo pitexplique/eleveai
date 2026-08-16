@@ -18,6 +18,7 @@ export type ParcoursClasse =
   | "seconde"
   | "premiere-spe"
   | "terminale-spe"
+  | "stmg"
   | "adulte";
 
 export type ParcoursNiveauEnglish = "a1" | "a2" | "b1" | "b2";

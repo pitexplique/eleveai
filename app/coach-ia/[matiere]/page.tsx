@@ -23,11 +23,7 @@ import {
   MATIERE_YOUTUBE_LABEL,
 } from "@/lib/videos/youtubeSearch";
 
-// ⚠️ « stmg » n'y figure pas encore : ses banques sont vides au 15/08/2026, et
-// on n'annonce pas ce qui n'a rien derrière. À l'ajouter, la liste passera à
-// 15 boutons : c'est le moment de la GROUPER par cycle et par voie (générale /
-// technologique) plutôt que d'allonger la ligne.
-const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "premiere-spe", "terminale-spe", "adulte"];
+const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "premiere-spe", "terminale-spe", "stmg", "adulte"];
 const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
 const ECONOMIE_CLASSES: Classe[] = ["eco-decouverte", "eco-college", "eco-lycee"];
 const ESPAGNOL_CLASSES: Classe[] = ["a1", "a2", "b1", "b2"];
@@ -39,6 +35,42 @@ function getClassesForMatiere(matiere: Matiere): Classe[] {
   if (matiere === "espagnol") return ESPAGNOL_CLASSES;
   if (matiere === "ia") return IA_CLASSES;
   return CLASSES;
+}
+
+/**
+ * Les classes rangées par cycle, et au lycée par VOIE.
+ *
+ * À quinze boutons, une colonne plate ne se lit plus : un élève de STMG
+ * cherchait sa classe au milieu des CP. Les groupes portent un intitulé
+ * minuscule qui sert de repère, pas de titre.
+ *
+ * ⚠️ Une classe absente d'un groupe DISPARAÎT du sélecteur. Le dernier groupe
+ * ramasse donc tout ce qui n'a pas été rangé : ajouter une classe à `CLASSES`
+ * sans la ranger ici la laisse visible, à la fin, plutôt que de l'effacer en
+ * silence — c'est le même genre de repli muet que le `default:` du catalogue.
+ */
+const GROUPES: { titre: string; classes: Classe[] }[] = [
+  { titre: "Primaire", classes: ["cp", "ce1", "ce2", "cm1", "cm2"] },
+  { titre: "Collège", classes: ["6e", "5e", "4e", "3e"] },
+  { titre: "Lycée général", classes: ["seconde", "premiere", "premiere-spe", "terminale-spe"] },
+  { titre: "Voie techno.", classes: ["stmg"] },
+  { titre: "Adultes", classes: ["adulte"] },
+];
+
+function getGroupesForMatiere(matiere: Matiere): { titre: string | null; classes: Classe[] }[] {
+  const disponibles = getClassesForMatiere(matiere);
+  if (matiere !== "maths") return [{ titre: null, classes: disponibles }];
+
+  const groupes = GROUPES.map((g) => ({
+    titre: g.titre,
+    classes: g.classes.filter((c) => disponibles.includes(c)),
+  })).filter((g) => g.classes.length > 0);
+
+  const rangees = new Set(GROUPES.flatMap((g) => g.classes));
+  const orphelines = disponibles.filter((c) => !rangees.has(c));
+  if (orphelines.length > 0) groupes.push({ titre: "Autres", classes: orphelines });
+
+  return groupes;
 }
 
 function normalizeClasse(value: string | null, classes: Classe[], fallback: Classe): Classe {
@@ -210,6 +242,7 @@ export default function CoachIA() {
     matiere === "ia" ? "a1" :
     "6e";
   const classes = useMemo(() => getClassesForMatiere(matiere), [matiere]);
+  const groupes = useMemo(() => getGroupesForMatiere(matiere), [matiere]);
 
   // LA CLASSE DE L'ÉLÈVE CONNECTÉ SERT DE DÉFAUT (12/08/2026).
   //
@@ -302,38 +335,56 @@ export default function CoachIA() {
           <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-cyan-500 text-lg font-bold text-white">
             IA
           </div>
-          {classes.map((item) => (
-            <button
-              key={item}
-              type="button"
-              onClick={() => setClasse(item)}
-              className={[
-                "flex items-center justify-center border text-center font-bold transition",
-                getClasseButtonSize(item),
-                getClasseBadgeColor(item, classe === item),
-              ].join(" ")}
-            >
-              {getClasseNavLabel(item)}
-            </button>
+          {groupes.map((groupe) => (
+            <div key={groupe.titre ?? "tous"} className="flex flex-col items-center gap-2">
+              {groupe.titre && (
+                <span className="mt-1 text-[10px] font-black uppercase tracking-wide text-slate-400">
+                  {groupe.titre}
+                </span>
+              )}
+              {groupe.classes.map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  onClick={() => setClasse(item)}
+                  className={[
+                    "flex items-center justify-center border text-center font-bold transition",
+                    getClasseButtonSize(item),
+                    getClasseBadgeColor(item, classe === item),
+                  ].join(" ")}
+                >
+                  {getClasseNavLabel(item)}
+                </button>
+              ))}
+            </div>
           ))}
         </aside>
 
         <section className="w-full px-4 py-5 sm:px-6 lg:px-8">
           <header className="mb-6 border-b border-slate-200 pb-5">
             {/* Classes mobiles */}
-            <div className="mb-4 flex flex-wrap gap-2 md:hidden">
-              {classes.map((item) => (
-                <button
-                  key={item}
-                  type="button"
-                  onClick={() => setClasse(item)}
-                  className={[
-                    "rounded-full border px-4 py-2 text-sm font-bold transition",
-                    getClasseBadgeColor(item, classe === item),
-                  ].join(" ")}
-                >
-                  {getClasseNavLabel(item)}
-                </button>
+            <div className="mb-4 space-y-2 md:hidden">
+              {groupes.map((groupe) => (
+                <div key={groupe.titre ?? "tous"} className="flex flex-wrap items-center gap-2">
+                  {groupe.titre && (
+                    <span className="text-[10px] font-black uppercase tracking-wide text-slate-400">
+                      {groupe.titre}
+                    </span>
+                  )}
+                  {groupe.classes.map((item) => (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => setClasse(item)}
+                      className={[
+                        "rounded-full border px-4 py-2 text-sm font-bold transition",
+                        getClasseBadgeColor(item, classe === item),
+                      ].join(" ")}
+                    >
+                      {getClasseNavLabel(item)}
+                    </button>
+                  ))}
+                </div>
               ))}
             </div>
 

@@ -46,6 +46,7 @@ const classes: ParcoursClasse[] = [
   "seconde",
   "premiere-spe",
   "terminale-spe",
+  "stmg",
   "adulte",
 ];
 
@@ -62,6 +63,7 @@ const classeLabels: Record<ParcoursClasse, string> = {
   seconde: "Seconde",
   "premiere-spe": "Première",
   "terminale-spe": "Terminale spé",
+  stmg: "STMG",
   adulte: "Calculs du quotidien",
 };
 

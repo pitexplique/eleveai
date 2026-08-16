@@ -46,6 +46,10 @@ export const PROGRAMME_CLASSES: ProgrammeClasse[] = [
   { slug: "premiere", label: "Première (sans spé maths)", enClasse: "en première", matieres: ["maths"], anglais: "B1 → B2", espagnol: "B1", ia: "B1 et plus", cahierSlug: "vers-la-premiere", calculRapide: false },
   { slug: "premiere-spe", label: "Première spé maths", enClasse: "en première", matieres: ["maths"], anglais: "B1 → B2", espagnol: "B1", ia: "B1 et plus", cahierSlug: "vers-la-premiere", calculRapide: false },
   { slug: "terminale-spe", label: "Terminale spé maths", enClasse: "en terminale", matieres: ["maths"], anglais: "B1 → B2", espagnol: "B1 → B2", ia: "B1 et plus", cahierSlug: "vers-la-terminale", calculRapide: true },
+  // Le cycle terminal de la voie technologique, en une seule classe : le
+  // programme est écrit sur deux ans et il est COMMUN à toutes les séries
+  // technologiques. Le contenu vaut donc aussi pour ST2S, STL, STI2D et STHR.
+  { slug: "stmg", label: "Maths STMG (1re et terminale)", enClasse: "en STMG", matieres: ["maths"], anglais: "B1 → B2", espagnol: "B1", ia: "B1 et plus", cahierSlug: "vers-la-premiere", calculRapide: true },
 ];
 
 export function getProgrammeClasse(slug: string): ProgrammeClasse | undefined {

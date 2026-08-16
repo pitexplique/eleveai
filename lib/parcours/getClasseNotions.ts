@@ -15,6 +15,7 @@ import { buildKnowledge3eMaths } from "@/lib/tutor-v4/knowledge/maths/3e/buildKn
 import { buildKnowledgeSecondeMaths } from "@/lib/tutor-v4/knowledge/maths/seconde/buildKnowledgeSeconde";
 import { buildKnowledgePremiereSpeMaths } from "@/lib/tutor-v4/knowledge/maths/premiere-spe/buildKnowledgePremiereSpe";
 import { buildKnowledgeTerminaleSpeMaths} from "@/lib/tutor-v4/knowledge/maths/terminale-spe/buildKnowledgeTerminaleSpe";
+import { buildKnowledgeStmgMaths } from "@/lib/tutor-v4/knowledge/maths/stmg/buildKnowledgeStmg";
 import { buildKnowledgeAdulteMaths } from "@/lib/tutor-v4/knowledge/maths/adulte/buildKnowledgeAdulte";
 
 export function getClasseNotions(
@@ -63,6 +64,9 @@ export function getClasseNotions(
   }
     if (classe === "terminale-spe") {
     return buildKnowledgeTerminaleSpeMaths().notions;
+  }
+  if (classe === "stmg") {
+    return buildKnowledgeStmgMaths().notions;
   }
 
   if (classe === "adulte") {
