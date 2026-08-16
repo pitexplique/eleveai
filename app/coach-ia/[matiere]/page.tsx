@@ -152,12 +152,15 @@ function getClasseNavLabel(classe: Classe) {
   return labels[classe] ?? classe;
 }
 
+// Pastilles resserrées : à h-14, les quinze classes de maths débordaient de
+// l'écran, et le bas de la colonne (le lycée) devenait inaccessible. Voir le
+// commentaire de l'`<aside>` : la taille soulage, le défilement corrige.
 function getClasseButtonSize(classe: Classe) {
   if (["seconde", "premiere", "premiere-spe", "terminale-spe", "stmg", "adulte", "eco-decouverte", "eco-college", "eco-lycee", "pix-college", "pix-lycee"].includes(classe)) {
-    return "h-14 min-w-16 px-2 rounded-full text-sm leading-tight";
+    return "h-12 min-w-16 px-2 rounded-full text-sm leading-tight";
   }
 
-  return "h-14 w-14 rounded-full text-lg";
+  return "h-12 w-12 rounded-full text-base";
 }
 
 function getMatiereColor(matiere: string) {
@@ -320,6 +323,27 @@ export default function CoachIA() {
     };
   }, [matiere, classe]);
 
+  // HAUTEUR DE L'EN-TÊTE COLLANT (16/08/2026).
+  //
+  // La colonne des classes était `sticky top-0 h-screen` : elle réservait donc
+  // TOUT l'écran, alors que l'en-tête du site — collant lui aussi, z-50 — lui
+  // en mange le haut. Ses derniers ~60 px tombaient sous le bord de la fenêtre,
+  // et avec eux les dernières classes. Sur un portable, un élève de terminale
+  // voyait « LYCÉE GÉNÉRAL » coupé au ras du bord sans aucun moyen d'y
+  // descendre. On mesure l'en-tête au lieu de coder sa hauteur en dur : elle
+  // change avec la largeur de la fenêtre (le menu se replie), et un nombre figé
+  // aurait re-cassé au premier remaniement du header.
+  const [hauteurHeader, setHauteurHeader] = useState(0);
+  useEffect(() => {
+    const header = document.querySelector("header");
+    if (!header) return;
+    const mesurer = () => setHauteurHeader(Math.round(header.getBoundingClientRect().height));
+    mesurer();
+    const ro = new ResizeObserver(mesurer);
+    ro.observe(header);
+    return () => ro.disconnect();
+  }, []);
+
   const domaines = useMemo(() => getDomaineMap(classe, matiere), [classe, matiere]);
 
   const [search, setSearch] = useState("");
@@ -341,14 +365,32 @@ export default function CoachIA() {
     <main className="min-h-screen bg-[#f5f8ef] text-slate-800">
       <div className="flex min-h-screen">
         {/* Sidebar classes */}
-        <aside className="sticky top-0 hidden h-screen w-28 shrink-0 border-r border-slate-200 bg-white md:flex md:flex-col md:items-center md:gap-3 md:py-6">
-          <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-cyan-500 text-lg font-bold text-white">
+        {/* LA COLONNE DOIT POUVOIR DÉFILER (16/08/2026).
+            En maths elle empile désormais quinze classes et cinq intitulés de
+            groupe : ~1175 px, contre 720 px sur l'écran d'un portable. Comme
+            elle est `sticky h-screen`, tout ce qui dépassait — le lycée, la
+            voie techno, les adultes — était HORS D'ATTEINTE : la roulette
+            faisait défiler la page (qui, elle, ne bouge pas la barre), et rien
+            ne permettait de descendre. `overflow-y-auto` lui rend son propre
+            ascenseur ; `overscroll-contain` évite d'emporter la page quand on
+            arrive en bout de course ; `shrink-0` empêche les pastilles de
+            s'écraser au lieu de créer le débordement. Pastilles et espacements
+            resserrés au passage, pour que la plupart des écrans n'aient plus
+            du tout à défiler. */}
+        <aside
+          className="sticky hidden w-28 shrink-0 overflow-y-auto overscroll-contain border-r border-slate-200 bg-white md:flex md:flex-col md:items-center md:gap-2 md:py-4"
+          style={{
+            top: hauteurHeader,
+            height: `calc(100dvh - ${hauteurHeader}px)`,
+          }}
+        >
+          <div className="mb-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-base font-bold text-white">
             IA
           </div>
           {groupes.map((groupe) => (
-            <div key={groupe.titre ?? "tous"} className="flex flex-col items-center gap-2">
+            <div key={groupe.titre ?? "tous"} className="flex shrink-0 flex-col items-center gap-1.5">
               {groupe.titre && (
-                <span className="mt-1 text-[10px] font-black uppercase tracking-wide text-slate-400">
+                <span className="text-[10px] font-black uppercase tracking-wide text-slate-400">
                   {groupe.titre}
                 </span>
               )}
@@ -358,7 +400,7 @@ export default function CoachIA() {
                   type="button"
                   onClick={() => setClasse(item)}
                   className={[
-                    "flex items-center justify-center border text-center font-bold transition",
+                    "flex shrink-0 items-center justify-center border text-center font-bold transition",
                     getClasseButtonSize(item),
                     getClasseBadgeColor(item, classe === item),
                   ].join(" ")}
