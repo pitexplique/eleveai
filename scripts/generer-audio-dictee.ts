@@ -20,15 +20,31 @@ import { dirname, join } from "path";
 import { createRequire } from "module";
 import { TOUS_LES_MOTS, slugMot } from "../lib/dictee-du-jour/words";
 
-// google-tts-api v0.0.6 exporte DIRECTEMENT une fonction (text, lang, speed)
-// qui renvoie l'URL de l'audio. On la charge en CommonJS (fiable).
+// ⚠️ L'API du paquet a CHANGÉ depuis la génération des 110 premiers mp3 :
+//   • v0.0.6 exporte DIRECTEMENT une fonction (text, lang, speed) => url ;
+//   • v2.x (ce que `npm install` ramène aujourd'hui) exporte un objet
+//     { getAudioUrl, getAudioBase64, … } — ce script s'arrêtait donc net sur
+//     « fonction introuvable ». On accepte les deux formes.
 const require = createRequire(import.meta.url);
 const _m: any = require("google-tts-api");
-const ttsUrl: (text: string, lang: string, speed?: number) => Promise<string> =
-  typeof _m === "function" ? _m : _m?.default;
 
-if (typeof ttsUrl !== "function") {
-  console.error("⚠️  google-tts-api : fonction introuvable (type =", typeof _m, ")");
+const mp3 = async (text: string, lang: string): Promise<Buffer> => {
+  if (typeof _m?.getAudioBase64 === "function") {
+    const b64 = await _m.getAudioBase64(text, { lang, slow: false });
+    return Buffer.from(b64, "base64");
+  }
+  const url = await (typeof _m === "function" ? _m : _m?.default)(text, lang, 1);
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return Buffer.from(await res.arrayBuffer());
+};
+
+if (
+  typeof _m?.getAudioBase64 !== "function" &&
+  typeof _m !== "function" &&
+  typeof _m?.default !== "function"
+) {
+  console.error("⚠️  google-tts-api : API inconnue (clés =", Object.keys(_m ?? {}), ")");
   process.exit(1);
 }
 
@@ -48,10 +64,7 @@ async function main() {
       continue;
     }
     try {
-      const url = await ttsUrl(w.mot, w.lang, 1);
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const buf = Buffer.from(await res.arrayBuffer());
+      const buf = await mp3(w.mot, w.lang);
       mkdirSync(dirname(dest), { recursive: true });
       writeFileSync(dest, buf);
       crees++;
