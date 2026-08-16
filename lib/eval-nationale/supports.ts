@@ -458,6 +458,78 @@ Je n'ai pas dormi. Pas à cause du bruit — le bruit n'était pas encore venu.`
       explanation:
         "Les « je » et les « mon père » situent le narrateur à l'intérieur de l'histoire. Un article prendrait de la distance et donnerait des faits vérifiables ; une pièce n'aurait que des répliques et des didascalies.",
     },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "Que fait le père pendant toute la journée ?",
+      choices: [
+        "Il cloue des planches, rentre les tôles et attache le portail.",
+        "Il écoute la radio et attend les nouvelles.",
+        "Il part chercher de l'eau et des provisions au bourg.",
+        "Il répare l'échelle et repeint les volets.",
+      ],
+      expected: "Il cloue des planches, rentre les tôles et attache le portail.",
+      explanation:
+        "Trois gestes énumérés dans la même phrase, et aucun n'est décoratif : chacun ferme une entrée par où le vent passerait. Retrouver une information explicite, c'est parfois retrouver une liste entière, pas un mot.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "À quel moment l'air devient-il tiède et immobile ?",
+      choices: [
+        "vers cinq heures, quand le vent tourne",
+        "au petit matin, avant que le père se lève",
+        "juste après le dîner à la bougie",
+        "pendant la nuit, quand le bruit arrive",
+      ],
+      expected: "vers cinq heures, quand le vent tourne",
+      explanation:
+        "L'heure est donnée, mais la question la demande autrement que le texte : lui parle du vent qui tourne, elle parle de l'air tiède. Il faut donc reconnaître l'information sous une autre formulation — c'est plus difficile que de la recopier.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_implicite",
+      text: "« Je n'ai pas dormi. Pas à cause du bruit — le bruit n'était pas encore venu. » Que ressent le narrateur ?",
+      choices: [
+        "L'attente de ce qui va arriver, plus dure à supporter que le cyclone lui-même.",
+        "La peur du noir, parce qu'ils ont dîné à la bougie.",
+        "La colère contre son père, qui ne l'a pas remercié.",
+        "L'excitation de ne pas avoir école le lendemain.",
+      ],
+      expected:
+        "L'attente de ce qui va arriver, plus dure à supporter que le cyclone lui-même.",
+      explanation:
+        "Le texte prend soin d'écarter la mauvaise explication avant qu'on la propose : « pas à cause du bruit ». Ce qui empêche de dormir, ce n'est donc pas ce qui se passe, c'est ce qui n'a pas encore commencé.",
+    },
+    {
+      notionId: "culture_litteraire",
+      microId: "5e_lect_parcours_personnage",
+      text: "En réunissant tout ce que fait et dit le père, quel homme apparaît ?",
+      choices: [
+        "Quelqu'un qui agit sans parler, et qui rassure par sa façon de faire.",
+        "Quelqu'un que le danger paralyse et qui attend les secours.",
+        "Quelqu'un qui cherche à effrayer sa famille pour qu'elle obéisse.",
+        "Quelqu'un qui ne croit pas à l'alerte et continue sa journée.",
+      ],
+      expected:
+        "Quelqu'un qui agit sans parler, et qui rassure par sa façon de faire.",
+      explanation:
+        "Aucune phrase ne le décrit. Il faut assembler : il éteint la radio « sans rien dire », il travaille toute la journée, et il annonce le cyclone « comme on annonce la pluie ». Un personnage se construit par accumulation, pas par portrait.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_sens_global",
+      text: "Quelle atmosphère domine dans ce texte ?",
+      choices: [
+        "une tension calme, où chacun se prépare sans le dire",
+        "une panique générale et désordonnée",
+        "une gaieté insouciante malgré l'alerte",
+        "une tristesse liée à un deuil récent",
+      ],
+      expected: "une tension calme, où chacun se prépare sans le dire",
+      explanation:
+        "Rien ne crie dans ce texte, et c'est justement ce qui inquiète : le père se tait, la mère chantonne « ce qu'elle ne fait jamais », les oiseaux se taisent d'un coup. L'atmosphère naît de ces silences, pas des mots employés.",
+    },
   ],
 };
 
@@ -564,6 +636,73 @@ Le marchand ouvrit la bouche, la referma, et s'en alla les mains vides.`,
       expected: "un conte de sagesse, où un juge rend justice par la ruse",
       explanation:
         "Ni lieu, ni date, ni nom : des personnages réduits à leur rôle — un marchand, un porteur, un juge — et une leçon qui se dégage de l'action. C'est la manière du conte, pas celle du fait divers.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "Combien de pièces le marchand avait-il promises à qui retrouverait sa bourse ?",
+      choices: ["dix", "cent", "deux cents", "cent quatre-vingt-dix-neuf"],
+      expected: "dix",
+      explanation:
+        "Quatre nombres circulent dans ce texte, et trois sont des pièges parce qu'ils y figurent vraiment. La récompense promise est la seule qui n'a rien à voir avec le contenu de la bourse : dix.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "Combien de pièces la bourse rapportée contient-elle réellement ?",
+      choices: [
+        "cent quatre-vingt-dix-neuf",
+        "deux cents",
+        "cent quatre-vingt-dix",
+        "le texte ne le dit pas",
+      ],
+      expected: "cent quatre-vingt-dix-neuf",
+      explanation:
+        "Le juge le dit lui-même, et c'est sur ce nombre que tout bascule. Deux cents, c'est ce que le marchand affirme avoir perdu — l'écart d'une seule pièce entre les deux suffit au juge pour retourner l'accusation.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_implicite",
+      text: "« Le porteur devint tout rouge. » Que traduit cette réaction ?",
+      choices: [
+        "L'indignation d'être accusé alors qu'il a été honnête.",
+        "La honte d'avoir été pris en train de voler.",
+        "La joie d'avoir enfin trouvé la bourse.",
+        "La fatigue de sa journée de travail.",
+      ],
+      expected: "L'indignation d'être accusé alors qu'il a été honnête.",
+      explanation:
+        "Rougir peut dire la honte ou la colère : c'est la suite qui tranche. Il « jura qu'il n'avait jamais ouvert la bourse », et le texte a précisé plus haut qu'il l'avait « gardée fermée ». Une émotion ne se lit jamais seule.",
+    },
+    {
+      notionId: "culture_litteraire",
+      microId: "5e_lect_parcours_personnage",
+      text: "Qu'est-ce qui caractérise le juge, si l'on rassemble tout ce qu'il fait ?",
+      choices: [
+        "Il écoute jusqu'au bout, puis retourne contre le marchand ses propres paroles.",
+        "Il tranche vite, en se fiant à sa première impression.",
+        "Il refuse de choisir et renvoie les deux hommes dos à dos.",
+        "Il fait fouiller le porteur pour retrouver la pièce manquante.",
+      ],
+      expected:
+        "Il écoute jusqu'au bout, puis retourne contre le marchand ses propres paroles.",
+      explanation:
+        "Trois gestes à réunir : il « écouta sans l'interrompre une seule fois », il fait confirmer le chiffre, puis il en tire la conclusion. Il n'apporte aucune preuve nouvelle — il se sert seulement de ce que le menteur a dit lui-même.",
+    },
+    {
+      notionId: "vocabulaire",
+      microId: "5e_voc_contexte",
+      text: "« Le marchand haussa les épaules. » Que signifie ce geste ici ?",
+      choices: [
+        "Il fait semblant que la récompense promise n'a plus d'importance.",
+        "Il avoue qu'il s'est trompé en comptant.",
+        "Il a froid et resserre son manteau.",
+        "Il salue le juge qui vient d'arriver.",
+      ],
+      expected:
+        "Il fait semblant que la récompense promise n'a plus d'importance.",
+      explanation:
+        "Le geste est expliqué par la phrase qui le suit : « sa promesse ne valait plus rien, puisqu'on venait de le voler ». Hausser les épaules, c'est écarter une obligation en la faisant passer pour un détail.",
     },
   ],
 };
@@ -829,6 +968,63 @@ DOCUMENT 3 — Témoignage
       expected: "un témoignage, à la première personne",
       explanation:
         "Guillemets, « je », prénom et âge à la fin : quelqu'un de réel rapporte son expérience. Un témoignage ne prouve rien à lui seul — il rend sensible ce que les chiffres montrent de loin.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "D'après le document 1, combien de temps de plus met un adolescent à s'endormir après son téléphone ?",
+      choices: [
+        "une demi-heure en moyenne",
+        "deux heures en moyenne",
+        "cinq minutes en moyenne",
+        "le document ne le chiffre pas",
+      ],
+      expected: "une demi-heure en moyenne",
+      explanation:
+        "Le chiffre est écrit en toutes lettres au milieu d'un paragraphe, pas mis en avant. Dans un groupement, les nombres ne sont pas tous dans le tableau : il faut aussi les chercher dans le texte suivi.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_outils_analyse",
+      text: "À qui a-t-on posé les questions du document 2 ?",
+      choices: [
+        "à 500 élèves de 5ᵉ",
+        "à 500 parents d'adolescents",
+        "à 500 médecins du sommeil",
+        "le document ne le précise pas",
+      ],
+      expected: "à 500 élèves de 5ᵉ",
+      explanation:
+        "Savoir qui a été interrogé change ce que le chiffre veut dire : 61 % d'élèves de 5ᵉ, ce n'est pas 61 % de Français. Un document chiffré se lit toujours avec sa source — c'est elle qui dit jusqu'où le résultat vaut.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_implicite",
+      text: "Quel rôle joue le document 2 par rapport au document 1 ?",
+      choices: [
+        "Il mesure l'ampleur du phénomène que l'article explique.",
+        "Il contredit ce que l'article affirme.",
+        "Il donne des conseils pour mieux dormir.",
+        "Il raconte l'expérience d'une élève en particulier.",
+      ],
+      expected: "Il mesure l'ampleur du phénomène que l'article explique.",
+      explanation:
+        "L'article dit pourquoi les écrans retardent le sommeil ; l'enquête dit combien d'élèves sont concernés. Identifier le rôle d'un document, c'est répondre à « qu'est-ce qu'il apporte que les autres n'apportent pas ? ».",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_sens_global",
+      text: "Quelle est la visée de chacun des trois documents ?",
+      choices: [
+        "Le premier explique, le deuxième mesure, le troisième fait entendre une voix.",
+        "Les trois cherchent à interdire les écrans le soir.",
+        "Les trois racontent l'expérience d'adolescents différents.",
+        "Le premier alerte, les deux autres le contredisent.",
+      ],
+      expected:
+        "Le premier explique, le deuxième mesure, le troisième fait entendre une voix.",
+      explanation:
+        "Ils parlent du même sujet, mais aucun ne fait le même travail : un mécanisme, un chiffre, une expérience vécue. Confondre leurs visées, c'est croire qu'un groupement répète trois fois la même chose — alors qu'il avance à chaque fois autrement.",
     },
   ],
 };
@@ -1895,6 +2091,71 @@ Il est entré, et il a recommencé à s'entraîner.`,
       explanation:
         "Une chute brève après un récit retenu frappe d'autant plus fort. Le texte n'explique rien : il montre, et laisse le lecteur juger.",
     },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "Combien de candidats attendaient les résultats ?",
+      choices: ["onze", "trois", "deux", "sept"],
+      expected: "onze",
+      explanation:
+        "Le texte donne aussi « trois » — le nombre de noms lus — et « deux » garçons qui s'embrassent. Trois nombres dans un texte de vingt lignes : c'est celui de la première phrase qu'il fallait retenir.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "Que se passe-t-il exactement quand madame Ferrand sort avec la feuille ?",
+      choices: [
+        "Personne ne bouge, et elle lit les trois premiers noms.",
+        "Tout le monde se précipite vers elle pour lire la liste.",
+        "Elle affiche la feuille sur la porte sans rien dire.",
+        "Elle appelle Nolan à part pour lui annoncer le résultat.",
+      ],
+      expected: "Personne ne bouge, et elle lit les trois premiers noms.",
+      explanation:
+        "L'affichage sur la porte existe bien dans le texte, mais le lendemain matin. Confondre les deux moments, c'est perdre tout le récit : le premier est celui de l'échec, le second celui de ce que Nolan en fait.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_implicite",
+      text: "« Nolan relisait ses mains. » Que dit ce détail, au tout début ?",
+      choices: [
+        "Qu'il est tendu et cherche où poser son regard.",
+        "Qu'il vérifie une antisèche écrite sur sa paume.",
+        "Qu'il s'est blessé pendant l'épreuve.",
+        "Qu'il s'ennuie en attendant les résultats.",
+      ],
+      expected: "Qu'il est tendu et cherche où poser son regard.",
+      explanation:
+        "On ne « relit » pas ses mains : le verbe est déplacé exprès, et c'est ce décalage qui fait sentir l'attente. Le texte n'écrit jamais que Nolan est nerveux — il le montre par un geste qui ne sert à rien.",
+    },
+    {
+      notionId: "culture_litteraire",
+      microId: "5e_lect_parcours_personnage",
+      text: "Qu'est-ce qui change chez Nolan entre le soir et le lendemain matin ?",
+      choices: [
+        "Rien dans son attitude, mais il agit : il revient s'entraîner.",
+        "Il accepte enfin sa défaite et abandonne le concours.",
+        "Il devient agressif envers les autres candidats.",
+        "Il demande à madame Ferrand de revoir le classement.",
+      ],
+      expected: "Rien dans son attitude, mais il agit : il revient s'entraîner.",
+      explanation:
+        "Suivre un personnage, c'est comparer deux moments. Le soir, il sourit et marche « trop vite pour quelqu'un qui n'a nulle part où aller » — le calme est une façade. Le lendemain, il ne dit toujours rien, mais il est là à sept heures. C'est l'acte qui a changé, pas le discours.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_sens_global",
+      text: "Quelle atmosphère le texte installe-t-il autour de Nolan ?",
+      choices: [
+        "un calme de surface, que de petits détails viennent démentir",
+        "une joie partagée par tous les candidats",
+        "une violence ouverte entre les concurrents",
+        "une indifférence totale au résultat du concours",
+      ],
+      expected: "un calme de surface, que de petits détails viennent démentir",
+      explanation:
+        "Autour de lui, tout s'exprime : on s'embrasse, on shoote dans un gravier. Lui hoche la tête et sourit. L'atmosphère tient dans cet écart entre ce qu'il montre et ce que le narrateur laisse voir — la marche trop rapide, le silence.",
+    },
   ],
 };
 
@@ -1984,6 +2245,78 @@ Depuis, les gens du village disent que le phare est bien entretenu. Ils ne disen
       expected: "un récit bref, proche de la nouvelle, à chute suggérée",
       explanation:
         "Peu de personnages, un temps resserré, et une fin qui suggère au lieu d'expliquer : ce sont les marques de la nouvelle.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "Combien de marches Firmin montait-il, et combien de fois par nuit ?",
+      choices: [
+        "cent trente marches, deux fois par nuit",
+        "cent trente marches, une fois par nuit",
+        "quarante marches, deux fois par nuit",
+        "deux cents marches, trois fois par nuit",
+      ],
+      expected: "cent trente marches, deux fois par nuit",
+      explanation:
+        "Deux chiffres dans la même phrase, plus un troisième juste avant — quarante ans. Le piège est de prendre les années pour des marches. Retrouver plusieurs informations explicites d'un coup demande de les tenir séparées.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "Que fait exactement le technicien venu automatiser le phare ?",
+      choices: [
+        "Il pose une armoire grise au pied de l'escalier et repart avant midi.",
+        "Il démonte la lentille et l'emporte avec lui.",
+        "Il explique à Firmin comment surveiller la nouvelle machine.",
+        "Il reste plusieurs jours pour régler l'installation.",
+      ],
+      expected:
+        "Il pose une armoire grise au pied de l'escalier et repart avant midi.",
+      explanation:
+        "La brièveté est le sujet de la phrase : une armoire, une matinée, et quarante ans de travail deviennent inutiles. Personne ne parle à Firmin — c'est ce qui n'arrive pas qui fait mal.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_implicite",
+      text: "« La lumière tournait très bien sans lui. » Que dit cette phrase de la situation de Firmin ?",
+      choices: [
+        "Il continue un travail dont plus personne n'a besoin.",
+        "Il a mal réglé la machine et doit corriger son erreur.",
+        "Il est fier que le phare fonctionne enfin tout seul.",
+        "Il surveille l'armoire grise pour éviter une panne.",
+      ],
+      expected: "Il continue un travail dont plus personne n'a besoin.",
+      explanation:
+        "La phrase est neutre, presque administrative, et c'est ce qui la rend dure. Placée juste après « Personne ne le lui avait demandé », elle dit que ses montées ne servent plus au phare — elles lui servent à lui.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_implicite",
+      text: "À la fin, l'escalier est balayé et le verre est propre, mais « il n'y avait personne ». Que faut-il en conclure ?",
+      choices: [
+        "Le texte laisse le doute : ce peut être Firmin, ou une histoire que le village se raconte.",
+        "Firmin est certainement mort et son fantôme entretient le phare.",
+        "Le technicien est revenu nettoyer sans prévenir.",
+        "Les marcheurs ont eux-mêmes balayé l'escalier.",
+      ],
+      expected:
+        "Le texte laisse le doute : ce peut être Firmin, ou une histoire que le village se raconte.",
+      explanation:
+        "Le texte ne tranche pas, et il faut résister à l'envie de trancher pour lui. La dernière phrase — « Ils ne disent pas par qui » — dit précisément que le village choisit de ne pas savoir. Distinguer ce que le texte affirme de ce qu'il suggère, c'est refuser d'ajouter ce qui n'y est pas.",
+    },
+    {
+      notionId: "vocabulaire",
+      microId: "5e_voc_contexte",
+      text: "« Le phare a été automatisé un mardi de novembre. » Que veut dire « automatisé » ?",
+      choices: [
+        "rendu capable de fonctionner sans personne",
+        "réparé après une panne",
+        "fermé définitivement au public",
+        "repeint et remis à neuf",
+      ],
+      expected: "rendu capable de fonctionner sans personne",
+      explanation:
+        "Le mot contient « automate », et la suite le confirme : une armoire est posée, puis « la lumière tournait très bien sans lui ». Quand un mot est difficile, le texte en donne presque toujours la preuve deux lignes plus loin.",
     },
   ],
 };
@@ -2078,6 +2411,53 @@ Communes françaises pratiquant l'extinction totale ou partielle : plus de 12 00
       expected: "la part de l'éclairage dans la facture d'une commune",
       explanation:
         "Dans un groupement, chaque document apporte quelque chose que les autres n'ont pas. Repérer ce qui est unique évite de tout confondre.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "De combien sont les économies d'électricité constatées, d'après le document 1 ?",
+      choices: ["de 30 à 50 %", "de 40 %", "de 12 %", "de 5 à 10 %"],
+      expected: "de 30 à 50 %",
+      explanation:
+        "Deux pourcentages circulent dans ce dossier et ils ne mesurent pas la même chose : 30 à 50 %, c'est ce qu'on économise en éteignant ; 40 %, c'est la part de l'éclairage dans la facture. Les confondre, c'est se tromper de raisonnement.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_indices",
+      text: "Combien de communes françaises pratiquent l'extinction, totale ou partielle ?",
+      choices: ["plus de 12 000", "environ 500", "une quarantaine", "plus de 40 000"],
+      expected: "plus de 12 000",
+      explanation:
+        "L'information n'est ni dans l'article ni dans la tribune : elle est isolée dans l'encadré. C'est le propre d'un encadré — sortir un chiffre du texte pour qu'on ne puisse pas le manquer.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_implicite",
+      text: "« Les chiffres ne marchent pas seuls dans la rue. » Que fait cette phrase ?",
+      choices: [
+        "Elle oppose une expérience vécue à un raisonnement statistique.",
+        "Elle affirme que les chiffres du document 1 sont faux.",
+        "Elle explique comment les études ont été menées.",
+        "Elle demande que l'on rallume l'éclairage partout.",
+      ],
+      expected:
+        "Elle oppose une expérience vécue à un raisonnement statistique.",
+      explanation:
+        "Le commerçant ne conteste aucun chiffre — il déplace la question. En prêtant aux chiffres le geste de marcher, il rappelle que ce sont des personnes qui traversent le bourg. C'est une image, et c'est un argument.",
+    },
+    {
+      notionId: "lecture_comprehension",
+      microId: "5e_comp_outils_analyse",
+      text: "À qui le commerçant s'adresse-t-il dans sa tribune ?",
+      choices: [
+        "à ceux qui décident de l'extinction dans la commune",
+        "à ses employées, pour les rassurer",
+        "aux clients de sa boulangerie",
+        "aux auteurs des études citées dans le document 1",
+      ],
+      expected: "à ceux qui décident de l'extinction dans la commune",
+      explanation:
+        "Le « on » qu'il reprend deux fois — « on nous parle d'économies », « on me répond » — désigne ceux qui ont pris la décision, et sa dernière phrase leur demande quelque chose. Identifier le destinataire, c'est chercher à qui la demande est faite, pas de qui le texte parle.",
     },
   ],
 };
