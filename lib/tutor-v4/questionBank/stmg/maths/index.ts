@@ -80,6 +80,7 @@ import { fonctionInverseBank } from "./fonction-inverse.bank";
 import { derivationBank } from "./derivation.bank";
 import { exponentiellesBank } from "./exponentielles.bank";
 import { logarithmeBank } from "./logarithme.bank";
+import { donneesCroiseesBank } from "./donnees-croisees.bank";
 
 export const mathsStmgQuestionBank: TutorBankItemV4[] = [
   ...proportionsEvolutionsBank,
@@ -95,4 +96,5 @@ export const mathsStmgQuestionBank: TutorBankItemV4[] = [
   ...derivationBank,
   ...exponentiellesBank,
   ...logarithmeBank,
+  ...donneesCroiseesBank,
 ];
