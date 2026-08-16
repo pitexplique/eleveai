@@ -428,7 +428,16 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // dérive ses niveaux du Dico et dit « CP → Terminale, SANS TROU » ;
     // `motsDeLaClasse` rend 30 mots en 2ⁿᵈᵉ, 30 en 1ʳᵉ, 60 en Terminale, et
     // `classeVersNiveau` traduit déjà seconde / premiere-spe / terminale-spe.
-    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
+    //
+    // ⭐ LES ADULTES ENTRENT (16/08, Frédéric : « ça peut être utile à la
+    // maison et en classe »). Un parent qui cherche un rituel du soir et un
+    // enseignant qui cherche cinq minutes de rentrée demandent la même chose
+    // que l'élève — la dictée ne leur était simplement pas DÉCLARÉE, comme le
+    // lycée avant le 07/08. Rien à coder derrière : la page ne demande aucun
+    // compte, et le sélecteur « 🎓 Ta classe » couvre déjà CP → Terminale,
+    // donc un adulte tombe sur le bon niveau quel que soit l'enfant ou la
+    // classe dont il parle.
+    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof", "parent"],
     matiere: "francais",
     notions: ["orthographe"],
     intentions: ["rituel", "entrainer"],
