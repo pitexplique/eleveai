@@ -82,6 +82,7 @@ import { exponentiellesBank } from "./exponentielles.bank";
 import { logarithmeBank } from "./logarithme.bank";
 import { donneesCroiseesBank } from "./donnees-croisees.bank";
 import { probabilitesConditionnellesBank } from "./probabilites-conditionnelles.bank";
+import { variablesAleatoiresBank } from "./variables-aleatoires.bank";
 
 export const mathsStmgQuestionBank: TutorBankItemV4[] = [
   ...proportionsEvolutionsBank,
@@ -99,4 +100,5 @@ export const mathsStmgQuestionBank: TutorBankItemV4[] = [
   ...logarithmeBank,
   ...donneesCroiseesBank,
   ...probabilitesConditionnellesBank,
+  ...variablesAleatoiresBank,
 ];
