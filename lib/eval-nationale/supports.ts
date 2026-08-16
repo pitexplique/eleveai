@@ -139,6 +139,72 @@ Le soir, il y avait du poisson dans les assiettes. Ludovic a mangé lentement, s
       explanation:
         "Personne ne le dit dans le texte — c'est la main sur l'épaule, le silence de la grand-mère et le regard vers la canne qui le disent. Le thème d'un récit se lit souvent dans ce que les personnages font, pas dans ce qu'ils déclarent.",
     },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_autonomie",
+      text: "Combien de temps attendent-ils avant que le fil se tende ?",
+      choices: ["deux heures", "quelques minutes", "toute la matinée", "deux jours"],
+      expected: "deux heures",
+      explanation:
+        "« Pendant deux heures, rien. » L'information est donnée une seule fois, en trois mots, et le texte passe à autre chose. Un lecteur pressé la saute ; c'est pourtant elle qui dit combien l'attente a été longue.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_autonomie",
+      text: "Où se trouve la grand-mère quand Ludovic se lève ?",
+      choices: [
+        "dans la cour, la canne à pêche déjà posée contre le mur",
+        "encore endormie dans sa chambre",
+        "sur le sentier qui descend au lagon",
+        "à la cuisine, en train de préparer le petit-déjeuner",
+      ],
+      expected: "dans la cour, la canne à pêche déjà posée contre le mur",
+      explanation:
+        "Tout est dans le mot « déjà » : elle attendait avant lui. Retrouver une information explicite, ce n'est pas seulement repérer un mot, c'est prendre la phrase entière — le lieu, l'objet, et ce petit adverbe qui dit qui s'est levé le premier.",
+    },
+    {
+      notionId: "vocabulaire",
+      microId: "cm2_voc_contexte",
+      text: "« La mer était plate, à peine ridée. » Que veut dire « ridée » ici ?",
+      choices: [
+        "parcourue de toutes petites vagues",
+        "couverte d'écume blanche",
+        "vieille et abîmée",
+        "d'une couleur sombre",
+      ],
+      expected: "parcourue de toutes petites vagues",
+      explanation:
+        "Le mot fait d'habitude penser à un visage. Ici, c'est « plate » juste avant et « à peine » qui commandent : si la mer est plate, ce qui la ride ne peut être que minuscule. Deviner un mot, c'est d'abord regarder ses voisins.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_implicite",
+      text: "« Ludovic a serré les dents. Ses bras tremblaient, mais il n'a pas lâché. » Que comprend-on ?",
+      choices: [
+        "Le poisson était difficile à remonter et Ludovic a lutté.",
+        "Ludovic avait froid ce matin-là au bord du lagon.",
+        "Ludovic avait peur de ce qu'il allait remonter.",
+        "La canne à pêche était trop lourde pour ses bras.",
+      ],
+      expected: "Le poisson était difficile à remonter et Ludovic a lutté.",
+      explanation:
+        "Le texte ne dit jamais « c'était dur ». Il montre un corps : des dents serrées, des bras qui tremblent, une main qui tient. C'est au lecteur de traduire ces gestes en effort — et le « mais » dit que l'effort a été gagné.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_implicite",
+      text: "« Sa grand-mère n'a rien dit. Elle a seulement posé sa main sur son épaule. » Pourquoi ne dit-elle rien ?",
+      choices: [
+        "Parce que le geste dit mieux que les mots qu'elle est fière de lui.",
+        "Parce qu'elle est déçue par la taille du poisson.",
+        "Parce qu'elle est trop essoufflée pour parler.",
+        "Parce qu'elle lui reproche d'avoir menti le matin.",
+      ],
+      expected:
+        "Parce que le geste dit mieux que les mots qu'elle est fière de lui.",
+      explanation:
+        "Le mot « seulement » est un piège : il fait croire à peu de chose. Or ce geste arrive juste après la déception du petit poisson, et il précède un retour « ensemble ». Dans ce texte, ce sont les silences qui parlent.",
+    },
   ],
 };
 
@@ -229,6 +295,71 @@ Ma mère dit que madame Lucie vivait seule depuis longtemps, et qu'elle ne recev
       expected: "Parce que madame Lucie choisit de donner ce qu'on lui prenait.",
       explanation:
         "C'est tout l'enjeu du récit : elle renverse la situation d'un seul geste. En transformant le vol en cadeau, elle enlève aux enfants l'envie de recommencer — et se donne une raison de les revoir.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_autonomie",
+      text: "Combien d'enfants cueillaient les mangues ?",
+      choices: ["trois", "deux", "six", "toute la classe"],
+      expected: "trois",
+      explanation:
+        "« À trois, en rentrant de l'école. » Le chiffre est donné sans insister, et il ne revient jamais. Attention au six du panier : il compte les mangues, pas les enfants. Une information explicite se trouve, mais encore faut-il ne pas la confondre avec sa voisine.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_autonomie",
+      text: "Que dit madame Lucie en ouvrant sa fenêtre, ce jeudi-là ?",
+      choices: [
+        "que les mangues seront meilleures le lendemain",
+        "qu'elle va prévenir leurs parents",
+        "qu'ils peuvent en prendre autant qu'ils veulent",
+        "qu'elle ne veut plus les voir près du mur",
+      ],
+      expected: "que les mangues seront meilleures le lendemain",
+      explanation:
+        "Elle ne parle ni du vol, ni de punition : elle parle du fruit. C'est ce déplacement qui surprend, et tout le texte tient dedans. Le texte prend d'ailleurs soin de préciser « Elle n'a pas crié », pour qu'on mesure ce qu'elle ne fait pas.",
+    },
+    {
+      notionId: "vocabulaire",
+      microId: "cm2_voc_contexte",
+      text: "« Ses branches ployaient si bas qu'on pouvait cueillir sans se hisser. » Que veut dire « ployaient » ?",
+      choices: [
+        "se courbaient sous le poids",
+        "se cassaient net",
+        "poussaient très vite",
+        "perdaient leurs feuilles",
+      ],
+      expected: "se courbaient sous le poids",
+      explanation:
+        "La suite de la phrase donne la réponse : si l'on peut cueillir « sans se hisser », c'est que les branches sont descendues. Et elles descendent parce qu'elles portent des fruits. Le sens d'un mot inconnu est presque toujours dans ce qui l'entoure.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_implicite",
+      text: "Le lendemain, le panier est là mais il n'y a « personne à la fenêtre ». Pourquoi madame Lucie ne se montre-t-elle pas ?",
+      choices: [
+        "Pour que les enfants prennent le panier sans avoir honte.",
+        "Parce qu'elle est sortie faire ses courses ce matin-là.",
+        "Parce qu'elle a oublié qu'elle avait posé le panier.",
+        "Pour vérifier en cachette s'ils vont encore voler.",
+      ],
+      expected: "Pour que les enfants prennent le panier sans avoir honte.",
+      explanation:
+        "Le texte souligne l'absence au lieu de la passer sous silence : c'est le signe qu'elle est voulue. Se montrer, ce serait obliger les enfants à remercier — et transformer le cadeau en leçon. Elle donne, et elle s'efface.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_essentiel",
+      text: "« Nous n'en avons plus jamais cueilli nous-mêmes. Chaque samedi, pourtant, le panier était là. » Qu'est-ce que ces deux phrases apprennent ?",
+      choices: [
+        "Le geste de madame Lucie est devenu une habitude entre eux.",
+        "Les enfants ont eu peur et ont changé de chemin.",
+        "Le manguier ne donnait plus de fruits après novembre.",
+        "Madame Lucie a fini par vendre ses mangues au marché.",
+      ],
+      expected: "Le geste de madame Lucie est devenu une habitude entre eux.",
+      explanation:
+        "« Plus jamais » d'un côté, « chaque samedi » de l'autre : le vol s'arrête, le don continue. Le mot « pourtant » relie les deux et dit l'essentiel — ce n'était pas un cadeau d'un jour, c'est devenu un rendez-vous.",
     },
   ],
 };
@@ -547,6 +678,57 @@ DOCUMENT 2 — Tableau : heures de sommeil conseillées
       expected: "à informer",
       explanation:
         "Aucun personnage, aucune histoire : des explications et des chiffres. Un document documentaire cherche à faire savoir, là où un récit cherche à faire vivre quelque chose au lecteur.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_doc_croiser_infos",
+      text: "D'après le tableau, combien d'heures un adolescent de 15 ans dort-il de plus, au minimum, qu'un adulte ?",
+      choices: ["1 heure", "2 heures", "3 heures", "aucune"],
+      expected: "1 heure",
+      explanation:
+        "Deux lignes à lire, puis une soustraction : 8 heures au minimum pour un 13-18 ans, 7 pour un adulte. Le piège est de comparer les maximums (10 et 9) ou de mélanger les deux bouts. Croiser deux informations, c'est d'abord choisir laquelle de chaque ligne on compare.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_doc_composite",
+      text: "À quoi sert le document 2 par rapport au document 1 ?",
+      choices: [
+        "Il chiffre ce que l'article explique avec des mots.",
+        "Il contredit ce que dit l'article.",
+        "Il raconte l'histoire d'un enfant qui dort mal.",
+        "Il donne des conseils pour s'endormir plus vite.",
+      ],
+      expected: "Il chiffre ce que l'article explique avec des mots.",
+      explanation:
+        "L'article dit « les besoins changent avec l'âge » ; le tableau dit lesquels. Dans un document composite, les parties ne se répètent pas et ne se contredisent pas : elles se complètent, et c'est en passant de l'une à l'autre qu'on comprend.",
+    },
+    {
+      notionId: "vocabulaire",
+      microId: "cm2_voc_contexte",
+      text: "« Un adulte se contente de sept à huit heures. » Que veut dire « se contente de » ici ?",
+      choices: [
+        "il lui suffit de",
+        "il est heureux de",
+        "il refuse de",
+        "il a besoin de bien plus que",
+      ],
+      expected: "il lui suffit de",
+      explanation:
+        "L'expression est trompeuse : elle contient le mot « content », mais il n'est pas question de plaisir. La phrase compare un bébé qui dort presque tout le temps et un adulte qui dort peu — « se contenter de », ici, c'est n'avoir besoin de rien de plus.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_implicite",
+      text: "« L'enfant qui grandit a besoin de beaucoup plus de sommeil qu'on ne le croit. » Pourquoi l'article ajoute-t-il « qu'on ne le croit » ?",
+      choices: [
+        "Pour prévenir le lecteur qu'il se trompe sûrement.",
+        "Pour dire que les scientifiques ne sont pas d'accord.",
+        "Pour montrer que personne ne connaît la réponse.",
+        "Pour indiquer que le tableau est approximatif.",
+      ],
+      expected: "Pour prévenir le lecteur qu'il se trompe sûrement.",
+      explanation:
+        "Ces quatre mots ne donnent aucune information nouvelle sur le sommeil : ils s'adressent à celui qui lit. L'article sait qu'on sous-estime ce besoin, et il le dit avant de donner les chiffres. Repérer ce genre de phrase, c'est comprendre à qui un texte parle.",
     },
   ],
 };
@@ -1149,6 +1331,78 @@ Son père tournait une page. Mais le journal, remarqua Malo, était à l'envers.
       explanation:
         "Le vélo n'est que le prétexte. Ce que le texte raconte, c'est une manière d'aimer qui passe par les gestes plutôt que par les mots.",
     },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_autonomie",
+      text: "Où Malo et sa mère sont-ils allés ce samedi matin ?",
+      choices: [
+        "au marché de Saint-Louis",
+        "chez un réparateur de vélos",
+        "à la plage pour la matinée",
+        "rendre visite à un voisin",
+      ],
+      expected: "au marché de Saint-Louis",
+      explanation:
+        "Une seule phrase le dit, et elle sert surtout à éloigner Malo de la maison. C'est souvent le rôle d'une information explicite dans un récit : elle n'est pas là pour elle-même, elle laisse au père le temps d'agir.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_autonomie",
+      text: "Dans quel état était le vélo au début du texte ?",
+      choices: [
+        "la chaîne rouillée et le pneu arrière à plat",
+        "les deux pneus crevés et le guidon tordu",
+        "la chaîne cassée et la béquille manquante",
+        "en bon état, mais couvert de poussière",
+      ],
+      expected: "la chaîne rouillée et le pneu arrière à plat",
+      explanation:
+        "Deux défauts, précisément nommés — et c'est exactement ce qui aura changé au retour du marché : la chaîne brille, les deux pneus sont gonflés. Le texte décrit l'avant pour qu'on mesure l'après sans qu'il ait à l'expliquer.",
+    },
+    {
+      notionId: "vocabulaire",
+      microId: "cm2_voc_contexte",
+      text: "« Il était au milieu de la cour, droit sur sa béquille. » Qu'est-ce qu'une béquille de vélo ?",
+      choices: [
+        "la petite tige qui le fait tenir debout à l'arrêt",
+        "la barre qui relie les deux roues",
+        "le support qui porte les bagages",
+        "la canne sur laquelle s'appuie un blessé",
+      ],
+      expected: "la petite tige qui le fait tenir debout à l'arrêt",
+      explanation:
+        "Le mot a bien un autre sens — celui de la canne d'un blessé — et c'est le piège. Ici « droit sur sa » commande : ce qui tient un vélo debout tout seul. Un mot change de sens selon l'objet dont on parle.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_implicite",
+      text: "« Il ne leva pas les yeux. » Pourquoi le père évite-t-il de regarder Malo ?",
+      choices: [
+        "Pour qu'on ne devine pas que c'est lui qui a réparé le vélo.",
+        "Parce que son article de journal le passionne.",
+        "Parce qu'il en veut à Malo d'avoir laissé le vélo à l'abandon.",
+        "Parce qu'il n'a pas entendu Malo rentrer.",
+      ],
+      expected:
+        "Pour qu'on ne devine pas que c'est lui qui a réparé le vélo.",
+      explanation:
+        "La dernière phrase du texte tranche : le journal était à l'envers, donc il ne lisait pas. Ses yeux baissés ne sont pas de l'indifférence, ce sont des yeux qui se cachent. Deux détails éloignés, une seule explication.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_essentiel",
+      text: "Malo « resta un moment sans bouger », puis il « se retourna une dernière fois ». Que traduisent ces deux gestes ?",
+      choices: [
+        "Il a compris ce que son père a fait, et il cherche à le lui montrer.",
+        "Il hésite à sortir parce qu'il ne fait pas si beau.",
+        "Il a peur que son père lui interdise de partir.",
+        "Il ne reconnaît pas son vélo et se demande à qui il est.",
+      ],
+      expected:
+        "Il a compris ce que son père a fait, et il cherche à le lui montrer.",
+      explanation:
+        "Aucun des deux ne parle de la réparation, et pourtant tous deux savent. L'immobilité dit la surprise, le regard en arrière dit le merci. C'est un texte où le sens passe entièrement par les corps.",
+    },
   ],
 };
 
@@ -1243,6 +1497,74 @@ Sa mère a mis un peu trop de temps à répondre.
       expected: "sur une question qui laisse le lecteur dans le doute",
       explanation:
         "Certains récits ne concluent pas : ils s'arrêtent au moment où le lecteur a compris, et le laissent avec ce qu'il a compris.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_autonomie",
+      text: "Avec combien de jours d'avance l'enveloppe est-elle arrivée cette année ?",
+      choices: ["trois jours", "une semaine", "un jour", "elle est arrivée en retard"],
+      expected: "trois jours",
+      explanation:
+        "Une phrase de dix mots, seule sur sa ligne. Le texte l'isole exprès : c'est la première habitude qui se brise, et le lecteur doit la retenir pour comprendre la suite.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_autonomie",
+      text: "De quoi Tantine Rosa parle-t-elle dans sa lettre ?",
+      choices: [
+        "du jardin, des letchis et de la pluie",
+        "de sa santé et de ses examens",
+        "de l'anniversaire d'Élise et de son cadeau",
+        "de son prochain voyage chez Élise",
+      ],
+      expected: "du jardin, des letchis et de la pluie",
+      explanation:
+        "Trois sujets, tous sans importance — et le texte ajoute « Rien d'autre ». C'est justement ce vide qui compte : elle écrit pour écrire, pas pour dire. Une information explicite peut servir à montrer ce qui manque.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_implicite",
+      text: "Pourquoi Élise relit-elle « Prends soin de toi, ma grande » plusieurs fois ?",
+      choices: [
+        "Parce que cette formule ne ressemble pas aux autres années et l'inquiète.",
+        "Parce qu'elle ne comprend pas l'écriture penchée de Tantine.",
+        "Parce qu'elle est heureuse d'être appelée « ma grande ».",
+        "Parce qu'elle cherche l'adresse de Tantine Rosa.",
+      ],
+      expected:
+        "Parce que cette formule ne ressemble pas aux autres années et l'inquiète.",
+      explanation:
+        "Le texte a pris soin de dire ce qu'il y avait d'habitude : « à très bientôt ». Une promesse de revoir remplacée par un conseil de prudence — Élise le sent avant de pouvoir le formuler, et c'est pour ça qu'elle relit.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_implicite",
+      text: "Que fait la mère au moment précis où Élise entre dans la cuisine ?",
+      choices: [
+        "Elle raccroche le téléphone alors qu'elle parlait à voix basse.",
+        "Elle range la lettre de Tantine dans un tiroir.",
+        "Elle prépare le repas sans se retourner.",
+        "Elle compose le numéro de Tantine Rosa.",
+      ],
+      expected:
+        "Elle raccroche le téléphone alors qu'elle parlait à voix basse.",
+      explanation:
+        "Trois détails collés : le dos tourné, la voix basse, et le fait de raccrocher « en voyant Élise ». Chacun peut s'expliquer seul ; ensemble, ils disent une conversation qu'on ne voulait pas faire entendre.",
+    },
+    {
+      notionId: "lecture_oeuvres",
+      microId: "cm2_oeuvre_theme",
+      text: "De quoi ce texte parle-t-il vraiment ?",
+      choices: [
+        "d'une mauvaise nouvelle que les adultes n'arrivent pas à annoncer",
+        "d'une lettre d'anniversaire égarée par la poste",
+        "d'une dispute entre Élise et sa mère",
+        "de la vie quotidienne dans le jardin de Tantine",
+      ],
+      expected:
+        "d'une mauvaise nouvelle que les adultes n'arrivent pas à annoncer",
+      explanation:
+        "Le mot « malade » n'apparaît jamais, et aucun personnage n'explique rien. Le texte est construit entièrement sur des choses tues : une lettre trop courte, un téléphone raccroché, une question esquivée. C'est ce silence-là, son sujet.",
     },
   ],
 };
@@ -1342,6 +1664,58 @@ LÉGENDE DU SCHÉMA : coupe d'une mangrove — de gauche à droite : la mer, les
         "montrer qu'un milieu qu'on croit inutile rend en réalité de grands services",
       explanation:
         "Le chapeau annonce déjà cette intention — « on la prend souvent pour un marécage sans intérêt » — et tout le reste du document la démontre.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_doc_croiser_infos",
+      text: "D'après la légende du schéma, qu'y a-t-il entre les racines en échasses et le village ?",
+      choices: ["la vase", "la mer", "un mur de pierres", "une route"],
+      expected: "la vase",
+      explanation:
+        "La légende donne un ordre, et il faut le suivre dans le bon sens : mer, racines, vase, village. La mer est bien citée, mais de l'autre côté des racines. Lire un schéma, c'est lire une position autant qu'un mot.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_doc_composite",
+      text: "Dans quelle partie du document trouve-t-on ce que les mangroves sont devenues ?",
+      choices: [
+        "dans l'encadré",
+        "dans le chapeau",
+        "dans le paragraphe 1",
+        "dans la légende du schéma",
+      ],
+      expected: "dans l'encadré",
+      explanation:
+        "Chaque partie a son emploi : le chapeau introduit, les paragraphes expliquent, la légende situe. L'encadré, lui, sort un chiffre du texte pour le rendre impossible à manquer. Savoir cela, c'est trouver une information sans tout relire.",
+    },
+    {
+      notionId: "vocabulaire",
+      microId: "cm2_voc_contexte",
+      text: "« Cet enchevêtrement retient la terre. » Que désigne « enchevêtrement » ?",
+      choices: [
+        "les racines emmêlées les unes dans les autres",
+        "la couche de vase déposée par la mer",
+        "le va-et-vient des vagues",
+        "le feuillage épais des palétuviers",
+      ],
+      expected: "les racines emmêlées les unes dans les autres",
+      explanation:
+        "Le mot est long et peu familier, mais la phrase d'avant vient de décrire des racines « comme des échasses », et « cet » renvoie forcément à elles. Un déterminant démonstratif est une flèche : il pointe ce dont on vient de parler.",
+    },
+    {
+      notionId: "comprehension_textes_documents",
+      microId: "cm2_comp_implicite",
+      text: "Le paragraphe 3 s'intitule « Une nurserie ». Pourquoi ce titre ?",
+      choices: [
+        "Parce que la mangrove est l'endroit où les poissons grandissent avant de partir au large.",
+        "Parce que les palétuviers y sont plantés tout jeunes.",
+        "Parce que des enfants y sont gardés pendant que les parents pêchent.",
+        "Parce que c'est le paragraphe le plus court du document.",
+      ],
+      expected:
+        "Parce que la mangrove est l'endroit où les poissons grandissent avant de partir au large.",
+      explanation:
+        "Le mot est emprunté au monde des bébés, et c'est une image : le paragraphe explique que « beaucoup d'espèces pêchées au large ont commencé leur vie » là. Un intertitre résume son paragraphe — le comprendre, c'est déjà comprendre le paragraphe.",
     },
   ],
 };
