@@ -77,6 +77,7 @@ import { suitesTerminaleBank } from "./suites-terminale.bank";
 import { fonctionsRepresentationBank } from "./fonctions-representation.bank";
 import { fonctionsPolynomesBank } from "./fonctions-polynomes.bank";
 import { fonctionInverseBank } from "./fonction-inverse.bank";
+import { derivationBank } from "./derivation.bank";
 
 export const mathsStmgQuestionBank: TutorBankItemV4[] = [
   ...proportionsEvolutionsBank,
@@ -89,4 +90,5 @@ export const mathsStmgQuestionBank: TutorBankItemV4[] = [
   ...fonctionsRepresentationBank,
   ...fonctionsPolynomesBank,
   ...fonctionInverseBank,
+  ...derivationBank,
 ];
