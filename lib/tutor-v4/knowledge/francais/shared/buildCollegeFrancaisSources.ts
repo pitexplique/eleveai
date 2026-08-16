@@ -532,6 +532,24 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
      4e n'avait même pas la notion — le CM2 et la 6e l'ont. */
   if (level === "4e") {
     base.push(
+      /* ── LES QUATRE QUESTIONNEMENTS DE 4e, PLUS LE COMPLÉMENTAIRE ────────
+         Ajoutés le 16/08/2026. La 4e était la SEULE classe du collège sans
+         aucune entrée littéraire nommée : la 6e en a cinq, la 5e quatre, la 3e
+         cinq. `culture_litteraire` n'y portait que les quatre gestes
+         génériques — reconnaitre un genre, situer, mettre en réseau, garder
+         une trace —, identiques d'un niveau à l'autre.
+
+         ⏳ UN AN DE VIE, ET C'EST ASSUMÉ (arbitrage de Frédéric). Le BO du
+         5 mars 2026 atteint la 4e en septembre 2027 et les remplacera par
+         quatre autres, déjà connues mot pour mot. La session du 13/08 les
+         avait écartées pour cette raison ; une année, c'est une cohorte
+         entière, et la 3e tourne déjà sur ce même texte de 2020. */
+      { id: `${prefix}_cult_dire_amour`, label: "Dire l'amour", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_individu_societe`, label: "Individu et société : confrontations de valeurs ?", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_fiction_reel`, label: "La fiction pour interroger le réel", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_informer_deformer`, label: "Informer, s'informer, déformer ?", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_reseau`] },
+      { id: `${prefix}_cult_ville`, label: "La ville, lieu de tous les possibles ?", notionId: "culture_litteraire", prerequis: [`${prefix}_cult_fiction_reel`] },
+
       // « Distinguer phrase simple / complexe. »
       { id: `${prefix}_phrc_simple_complexe`, label: "Distinguer phrase simple, phrase complexe et phrase non verbale", notionId: "phrase_complexe", prerequis: [`${prefix}_gram_constituants`] },
       // « Connaître les notions de juxtaposition, coordination, subordination. »

@@ -19,6 +19,9 @@ import { conjugaison4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/conju
 import { documentsComposites4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/documents-composites.bank";
 // « Enrichir et structurer le lexique » : sept attendus, cinq micros génériques.
 import { vocabulaire4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/vocabulaire.bank";
+// Les quatre questionnements de 4e, plus le complémentaire. La 4e était la
+// seule classe du collège sans aucune entrée littéraire nommée.
+import { cultureLitteraire4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/culture-litteraire.bank";
 
 // Banque du coach = gabarits générés (variété) + couche "fixed" imprimable
 // (≥5 QCM fixes par notion). La couche "fixed" enrichit le coach ET sert de
@@ -32,6 +35,7 @@ export const francais4eQuestionBank: TutorBankItemV4[] = [
   ...conjugaison4eBank,
   ...documentsComposites4eBank,
   ...vocabulaire4eBank,
+  ...cultureLitteraire4eBank,
 ];
 
 export function getFrancais4eQuestionBank(args?: {

@@ -3852,11 +3852,35 @@ function makeTemplate(
   };
 }
 
+/**
+ * ⛔ LES ENTRÉES LITTÉRAIRES NOMMÉES SONT SERVIES PAR LEUR BANQUE, PAS ICI
+ * (16/08/2026).
+ *
+ * Le builder fabrique trois gabarits pour CHAQUE micro-compétence, sans
+ * condition. Pour les entrées du programme — `cult_heros`, `cult_dire_amour`,
+ * `cult_se_raconter`… — c'est un repli muet de plus : leur clé n'est pas dans
+ * `POOLS`, donc `poolForNotion` voit « culture » et renvoie le pool des
+ * GENRES. Résultat mesuré sur la 4e : « Un poème qui chante les sentiments du
+ * poète est… » servi sous l'étiquette « Dire l'amour ». Valide, hors sujet, et
+ * aucun vérificateur ne sait le voir — la même famille que le repli vers
+ * `gram_fonctions`.
+ *
+ * Les trois niveaux ont désormais leur `culture-litteraire.bank.ts` : 5e
+ * (12/08), 3e (13/08), 4e (16/08). Le builder leur laisse la place.
+ *
+ * ⚠️ ON NE SAUTE QUE `_cult_`, JAMAIS `_culture_` : les quatre gestes
+ * génériques — reconnaitre un genre, situer, mettre en réseau, garder une
+ * trace — sont bien dans `POOLS` et doivent continuer d'être générés.
+ */
+const SERVIE_PAR_SA_BANQUE = /_cult_/;
+
 export function buildCycle4FrancaisBank(
   level: Cycle4Level,
   microSkills: readonly MicroSkillSource[]
 ): TutorBankItemV4[] {
-  return microSkills.flatMap((micro) => [
+  return microSkills
+    .filter((micro) => !SERVIE_PAR_SA_BANQUE.test(micro.id))
+    .flatMap((micro) => [
     makeTemplate(level, micro, 0),
     makeTemplate(level, micro, 1),
     {
