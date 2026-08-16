@@ -27,10 +27,23 @@ import { FOND, accentDe } from "./couleurs";
 type Etape = "accueil" | "prise-en-main" | "epreuve" | "bilan";
 
 // ─── LA PRISE EN MAIN ─────────────────────────────────────────────────────────
-// La vraie évaluation commence par là (Frédéric) : avant de mesurer les maths,
-// on vérifie que l'élève sait se servir de la souris et choisir une réponse.
-// Un enfant qui perd des points parce qu'il n'a pas compris l'interface, on ne
-// mesure pas ses maths — on mesure son habitude de l'ordinateur.
+// La vraie évaluation commence par là (Frédéric) : avant de mesurer quoi que
+// ce soit, on vérifie que l'élève sait se servir de la souris et choisir une
+// réponse. Un enfant qui perd des points parce qu'il n'a pas compris
+// l'interface, on ne mesure pas ce qu'il sait — on mesure son habitude de
+// l'ordinateur.
+//
+// ⭐ UN ÉCRAN PAR FORMAT, JAMAIS DEUX (corrigé le 16/08, défaut relevé par
+// Frédéric). Il y avait deux écrans de cases à cocher d'affilée : le second
+// n'apprenait aucun geste nouveau, il retardait seulement l'épreuve. Sa seule
+// leçon utile — on peut changer d'avis tant qu'on n'a pas validé — a rejoint
+// le premier écran, où elle est à sa place.
+//
+// ⛔ ET LE CONTENU SUIT LA MATIÈRE. La prise en main de français posait
+// « Combien font 2 + 3 ? » puis un tableau sur les côtés du carré et du
+// triangle. Ce n'est pas anodin : le premier contact d'un élève avec son
+// épreuve de français ne peut pas être une question de géométrie. Les écrans
+// neutres restent communs, le tableau a désormais une version par matière.
 type EcranPrise = {
   format: FormatReponse;
   consigne: string;
@@ -40,25 +53,17 @@ type EcranPrise = {
   apprend: string;
 };
 
-const PRISE_CASES: EcranPrise[] = [
-  {
-    format: "cases",
-    consigne: "Clique sur la bonne réponse, puis sur « Continuer ».",
-    question: "Quelle est la couleur du ciel par temps clair ?",
-    choices: ["Bleu", "Vert", "Rouge", "Marron"],
-    expected: "Bleu",
-    apprend: "Une seule réponse à la fois : cliquer sur une autre change ton choix.",
-  },
-  {
-    format: "cases",
-    consigne: "Même chose. Regarde bien : ta réponse s'entoure quand elle est prise en compte.",
-    question: "Combien font 2 + 3 ?",
-    choices: ["5", "4", "6", "23"],
-    expected: "5",
-    apprend:
-      "Tant que tu n'as pas cliqué sur « Continuer », tu peux changer d'avis.",
-  },
-];
+// Neutre à dessein : la question ne doit rien mesurer, seulement montrer le
+// geste. Elle sert aux quatre épreuves.
+const PRISE_CASES: EcranPrise = {
+  format: "cases",
+  consigne: "Clique sur la bonne réponse, puis sur « Continuer ».",
+  question: "Quelle est la couleur du ciel par temps clair ?",
+  choices: ["Bleu", "Vert", "Rouge", "Marron"],
+  expected: "Bleu",
+  apprend:
+    "Une seule réponse à la fois : cliquer sur une autre change ton choix. Et tant que tu n'as pas cliqué sur « Continuer », tu peux encore changer d'avis.",
+};
 
 /**
  * ⚠️ LA PRISE EN MAIN N'ENSEIGNAIT QUE LES CASES À COCHER (défaut relevé par
@@ -84,28 +89,57 @@ const PRISE_LISTE: EcranPrise = {
     "Le menu cache les réponses tant qu'on ne l'ouvre pas. « Laisser vide » existe aussi : c'est le droit de ne pas répondre.",
 };
 
-const PRISE_TABLEAU: EcranPrise = {
-  format: "tableau",
-  consigne:
-    "Et parfois, il faut classer CHAQUE ligne. Vrai ou faux, pour les quatre.",
-  question: "Coche vrai ou faux pour chaque phrase.",
-  choices: [
-    "Un carré a quatre côtés égaux",
-    "Un triangle a cinq côtés",
-    "Un cercle a des angles droits",
-    "Un rectangle a six sommets",
-  ],
-  expected: "Un carré a quatre côtés égaux",
-  apprend:
-    "⚠️ Celui-là ne pardonne rien : il faut les QUATRE lignes justes pour que la question compte. Une seule case fausse, et tout est perdu — c'est la règle du jour J.",
+/**
+ * LE TABLEAU SÉRIE, DANS LA MATIÈRE DE L'ÉPREUVE.
+ *
+ * Une seule ligne est vraie, les trois autres fausses — c'est la règle de
+ * `reponseTableau`. Et les quatre propositions doivent être décidables d'un
+ * coup d'œil : on apprend un geste, on ne teste rien.
+ */
+const PRISE_TABLEAU: Record<"maths" | "francais", EcranPrise> = {
+  maths: {
+    format: "tableau",
+    consigne:
+      "Et parfois, il faut classer CHAQUE ligne. Vrai ou faux, pour les quatre.",
+    question: "Coche vrai ou faux pour chaque phrase.",
+    choices: [
+      "Un carré a quatre côtés égaux",
+      "Un triangle a cinq côtés",
+      "Un cercle a des angles droits",
+      "Un rectangle a six sommets",
+    ],
+    expected: "Un carré a quatre côtés égaux",
+    apprend:
+      "⚠️ Celui-là ne pardonne rien : il faut les QUATRE lignes justes pour que la question compte. Une seule case fausse, et tout est perdu — c'est la règle du jour J.",
+  },
+  francais: {
+    format: "tableau",
+    consigne:
+      "Et parfois, il faut classer CHAQUE ligne. Vrai ou faux, pour les quatre.",
+    question: "Coche vrai ou faux pour chaque phrase.",
+    choices: [
+      "Une phrase commence par une majuscule",
+      "Le pluriel de « cheval » est « chevals »",
+      "Un verbe ne se conjugue jamais",
+      "On écrit « les enfant » au pluriel",
+    ],
+    expected: "Une phrase commence par une majuscule",
+    apprend:
+      "⚠️ Celui-là ne pardonne rien : il faut les QUATRE lignes justes pour que la question compte. Une seule case fausse, et tout est perdu — c'est la règle du jour J.",
+  },
 };
 
-function ecransPriseEnMain(questions: QuestionEval[]): EcranPrise[] {
+function ecransPriseEnMain(
+  questions: QuestionEval[],
+  matiere: string,
+): EcranPrise[] {
   const formats = new Set(questions.map((q) => q.format ?? "cases"));
+  const tableau =
+    matiere === "francais" ? PRISE_TABLEAU.francais : PRISE_TABLEAU.maths;
   return [
-    ...PRISE_CASES,
+    PRISE_CASES,
     ...(formats.has("liste") ? [PRISE_LISTE] : []),
-    ...(formats.has("tableau") ? [PRISE_TABLEAU] : []),
+    ...(formats.has("tableau") ? [tableau] : []),
   ];
 }
 
@@ -377,8 +411,8 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
   ]);
 
   // Les écrans de prise en main, déduits du tirage : on n'apprend que ce qu'on
-  // va rencontrer.
-  const ECRANS_PRISE = ecransPriseEnMain(questions);
+  // va rencontrer. La matière décide du contenu du tableau série.
+  const ECRANS_PRISE = ecransPriseEnMain(questions, config.matiere);
   const ecranPrise = ECRANS_PRISE[indexPrise];
   // Sur un tableau, on ne passe qu'une fois les quatre lignes classées.
   const priseRepondue =
