@@ -424,6 +424,11 @@ export type SchoolLevel =
   | "b1"
   | "b2"
   | "c1"
+  /* Les deux portes du coach IA, calées sur les paliers Pix : novice +
+     indépendant d'un côté, avancé + expert de l'autre. Ce ne sont pas des
+     classes non plus — voir lib/tutor-v4/knowledge/ia/pix/socle.ts. */
+  | "pix-college"
+  | "pix-lycee"
   | "eco-decouverte"
   | "eco-college"
   | "eco-lycee";

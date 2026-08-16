@@ -38,6 +38,8 @@ import { loadKnowledgeA2Ia } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledg
 import { loadKnowledgeB1Ia } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeB1Ia";
 import { loadKnowledgeB2Ia } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeB2Ia";
 import { loadKnowledgeC1Ia } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeC1Ia";
+import { loadKnowledgePixCollegeIa } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgePixCollegeIa";
+import { loadKnowledgePixLyceeIa } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgePixLyceeIa";
 
 import type { KnowledgePack } from "@/lib/tutor-v4/types";
 
@@ -130,6 +132,9 @@ export async function loadKnowledgeV4(
   if (classe === "b1" && matiere === "ia") return loadKnowledgeB1Ia() as KnowledgePack;
   if (classe === "b2" && matiere === "ia") return loadKnowledgeB2Ia() as KnowledgePack;
   if (classe === "c1" && matiere === "ia") return loadKnowledgeC1Ia() as KnowledgePack;
+
+  if (classe === "pix-college" && matiere === "ia") return loadKnowledgePixCollegeIa() as KnowledgePack;
+  if (classe === "pix-lycee" && matiere === "ia") return loadKnowledgePixLyceeIa() as KnowledgePack;
 
   throw new Error(`Knowledge V4 introuvable pour ${classe}/${matiere}`);
 }

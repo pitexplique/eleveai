@@ -37,6 +37,8 @@ import { iaA2QuestionBank } from "@/lib/tutor-v4/questionBank/a2/ia";
 import { iaB1QuestionBank } from "@/lib/tutor-v4/questionBank/b1/ia";
 import { iaB2QuestionBank } from "@/lib/tutor-v4/questionBank/b2/ia";
 import { iaC1QuestionBank } from "@/lib/tutor-v4/questionBank/c1/ia";
+import { iaPixCollegeQuestionBank } from "@/lib/tutor-v4/questionBank/pix-college/ia";
+import { iaPixLyceeQuestionBank } from "@/lib/tutor-v4/questionBank/pix-lycee/ia";
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 export async function loadQuestionBankV4(
@@ -135,6 +137,9 @@ export async function loadQuestionBankV4(
   if (classe === "b1" && matiere === "ia") return iaB1QuestionBank;
   if (classe === "b2" && matiere === "ia") return iaB2QuestionBank;
   if (classe === "c1" && matiere === "ia") return iaC1QuestionBank;
+
+  if (classe === "pix-college" && matiere === "ia") return iaPixCollegeQuestionBank;
+  if (classe === "pix-lycee" && matiere === "ia") return iaPixLyceeQuestionBank;
 
   throw new Error(`QuestionBank V4 introuvable pour ${classe}/${matiere}`);
 }

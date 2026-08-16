@@ -37,6 +37,8 @@ import { matrixA2Ia } from "@/lib/tutor-v4/matrix/matrixA2Ia";
 import { matrixB1Ia } from "@/lib/tutor-v4/matrix/matrixB1Ia";
 import { matrixB2Ia } from "@/lib/tutor-v4/matrix/matrixB2Ia";
 import { matrixC1Ia } from "@/lib/tutor-v4/matrix/matrixC1Ia";
+import { matrixPixCollegeIa } from "@/lib/tutor-v4/matrix/matrixPixCollegeIa";
+import { matrixPixLyceeIa } from "@/lib/tutor-v4/matrix/matrixPixLyceeIa";
 import type { SkillMatrix } from "@/lib/tutor-v4/types";
 
 export async function loadMatrixV4(
@@ -127,6 +129,9 @@ export async function loadMatrixV4(
   if (classe === "b1" && matiere === "ia") return matrixB1Ia;
   if (classe === "b2" && matiere === "ia") return matrixB2Ia;
   if (classe === "c1" && matiere === "ia") return matrixC1Ia;
+
+  if (classe === "pix-college" && matiere === "ia") return matrixPixCollegeIa;
+  if (classe === "pix-lycee" && matiere === "ia") return matrixPixLyceeIa;
 
   throw new Error(`Matrix V4 introuvable pour ${classe}/${matiere}`);
 }

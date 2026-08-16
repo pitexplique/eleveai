@@ -37,6 +37,8 @@ import { buildKnowledgeA2Ia } from "@/lib/tutor-v4/knowledge/ia/a2/buildKnowledg
 import { buildKnowledgeB1Ia } from "@/lib/tutor-v4/knowledge/ia/b1/buildKnowledgeB1Ia";
 import { buildKnowledgeB2Ia } from "@/lib/tutor-v4/knowledge/ia/b2/buildKnowledgeB2Ia";
 import { buildKnowledgeC1Ia } from "@/lib/tutor-v4/knowledge/ia/c1/buildKnowledgeC1Ia";
+import { buildKnowledgePixCollegeIa } from "@/lib/tutor-v4/knowledge/ia/pix-college/buildKnowledgePixCollegeIa";
+import { buildKnowledgePixLyceeIa } from "@/lib/tutor-v4/knowledge/ia/pix-lycee/buildKnowledgePixLyceeIa";
 
 // =========================
 // TYPES
@@ -63,6 +65,8 @@ export type Classe =
   | "b1"
   | "b2"
   | "c1"
+  | "pix-college"
+  | "pix-lycee"
   | "eco-decouverte"
   | "eco-college"
   | "eco-lycee";
@@ -114,6 +118,10 @@ function getKnowledge(classe: Classe, matiere: Matiere = "maths") {
   // IA
   if (matiere === "ia") {
     switch (classe) {
+      // L'ossature Pix — les 16 compétences officielles.
+      case "pix-college": return buildKnowledgePixCollegeIa();
+      case "pix-lycee":   return buildKnowledgePixLyceeIa();
+      // L'échelle maison A1→C1, en cours de reversement dans Pix (16/08/2026).
       case "a1": return buildKnowledgeA1Ia();
       case "a2": return buildKnowledgeA2Ia();
       case "b1": return buildKnowledgeB1Ia();

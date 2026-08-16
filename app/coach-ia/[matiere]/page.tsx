@@ -107,6 +107,8 @@ function getMatiereTitle(matiere: string, classe: Classe) {
     b1: "B1",
     b2: "B2",
     c1: "C1",
+    "pix-college": "Collège",
+    "pix-lycee": "Lycée",
     "eco-decouverte": "Déco.",
     "eco-college":    "Collège",
     "eco-lycee":      "Lycée",

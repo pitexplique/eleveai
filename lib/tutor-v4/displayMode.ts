@@ -33,6 +33,11 @@ const CLASSES_MODE_SIMPLE: readonly string[] = [
   "b1",
   "b2",
   "c1",
+  /* Les deux portes Pix du coach IA. On garde la vue simple, comme l'IA
+     aujourd'hui : le chantier en cours porte sur le CONTENU, et changer la
+     vue en même temps rendrait impossible de dire ce qui a amélioré quoi. */
+  "pix-college",
+  "pix-lycee",
 ];
 
 export function defaultDisplayModeForClasse(
