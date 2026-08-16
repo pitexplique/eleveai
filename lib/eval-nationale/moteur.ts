@@ -484,7 +484,7 @@ function tirerTheme(
       return melanger(neuves)
         .slice(0, theme.nbQuestions)
         .map((q) => {
-          textesDuTirage.add(cleDe(q.text, q.choices));
+          textesDuTirage.add(q.text);
           return {
             cle: cleDe(q.text, q.choices),
             itemId: `${support.id}_${q.microId}`,
@@ -670,7 +670,7 @@ function tirerTranche(
             // Déjà tombé lors d'un passage précédent, ou déjà dans CETTE
             // épreuve : deux gabarits différents peuvent produire la même
             // question. On retire — un générateur en a souvent d'autres.
-            if (!tire || dejaVus.has(tire.cle) || textesDuTirage.has(tire.cle)) {
+            if (!tire || dejaVus.has(tire.cle) || textesDuTirage.has(tire.text)) {
               continue;
             }
             candidat = tire;
@@ -684,7 +684,7 @@ function tirerTranche(
         pile.push(...recales);
         if (!retenue) continue;
 
-        textesDuTirage.add(retenue.cle);
+        textesDuTirage.add(retenue.text);
         microsPris.add(microRetenu);
         questions.push({
           ...retenue,
@@ -712,10 +712,19 @@ export function tirerEpreuve(
   const vus = new Set(dejaVus);
   // Partagé entre les thèmes : un même énoncé ne doit pas tomber deux fois
   // dans la même épreuve, fût-ce sous deux notions différentes.
-  // Les CLÉS déjà servies dans cette épreuve — énoncé + propositions, voir
-  // `cleDe`. Le nom parle de textes pour des raisons d'histoire ; il porte des
-  // clés depuis le 16/08, sans quoi deux accords différents sous la même
-  // consigne se seraient chassés l'un l'autre.
+  /* ⭐ LES DEUX ANTI-RÉPÉTITIONS N'ONT PAS LE MÊME BESOIN, et les confondre
+     casse l'une ou l'autre (introduit puis corrigé le 16/08, en une heure).
+
+     `dejaVus`, D'UN PASSAGE À L'AUTRE, porte la CLÉ COMPLÈTE — énoncé plus
+     propositions. Deux accords différents sous la même consigne sont deux
+     questions différentes : l'élève ne les a pas faites, il n'y a aucune
+     raison de les lui refuser.
+
+     `textesDuTirage`, À L'INTÉRIEUR D'UNE ÉPREUVE, porte le TEXTE SEUL. Là,
+     c'est l'inverse qui compte : voir deux fois « Choisis le groupe nominal
+     correctement accordé. » dans la même épreuve donne à l'élève l'impression
+     d'un bug, même si les groupes nominaux diffèrent. Le tirage va chercher
+     ailleurs, et il a de quoi. */
   const textesDuTirage = new Set<string>();
   const questions = config.themes
     .flatMap((theme) => tirerTheme(theme, config, vus, textesDuTirage))
