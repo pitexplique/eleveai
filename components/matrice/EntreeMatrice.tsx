@@ -61,6 +61,15 @@ import {
 import type { ProfilId, ResultatMatrice } from "@/lib/matrice/types";
 
 const CLE_PROFIL = "eleveai.ia.profil";
+/**
+ * LA CLASSE D'UN ADULTE, retenue à part.
+ *
+ * ⚠️ DEUX CLÉS ET NON UNE, et ce n'est pas une commodité : chez un élève la
+ * classe EST le profil (`CLE_PROFIL` suffit), chez un parent elle s'ajoute au
+ * rôle sans le remplacer. Les écrire au même endroit, ce serait perdre le rôle
+ * à la visite suivante — le parent reviendrait en « 5e », c'est-à-dire en élève.
+ */
+const CLE_CLASSE_ADULTE = "eleveai.ia.classe";
 // On en garde plus qu'on n'en montre : la colonne affiche les 10 dernières et
 // ouvre le reste derrière « Afficher plus ». 30, c'est quelques jours d'usage
 // pour quelques kilo-octets — au-delà, personne ne remonte.
@@ -84,6 +93,35 @@ const ROLES: { id: RoleId; label: string }[] = [
 
 /** Les douze classes, du CP à la Terminale — dans l'ordre de la scolarité. */
 const CLASSES = PROFILS.filter((p) => p.groupe === "eleve");
+
+/**
+ * ⭐ QUI A UNE CLASSE À DIRE (16/08/2026, Frédéric : « il faut afficher classe
+ * et matière pas que pour l'élève mais aussi pour prof et parents »).
+ *
+ * La rangée des classes ne sortait que pour l'élève, et l'intitulé de l'étape
+ * 2 disait pourquoi : « un parent n'en a pas ». C'était vrai de sa scolarité à
+ * lui, et faux de sa demande — un parent ne vient jamais chercher « quelque
+ * chose pour un parent », il vient pour un enfant qui est en 5ᵉ. Sans cette
+ * classe, le moteur n'avait de son côté que huit ressources marquées
+ * « parent » : la rangée des matières ne s'affichait pas (une seule matière),
+ * aucune notion du programme n'était reconnue, et le coach ne pouvait s'ouvrir
+ * sur rien.
+ *
+ * ⛔ LE CHEF D'ÉTABLISSEMENT N'EN A PAS, et c'est délibéré : il ne parle pas
+ * d'une classe mais de son établissement. Lui en demander une le ferait
+ * choisir au hasard entre douze réponses également fausses.
+ */
+const ROLES_AVEC_CLASSE = new Set<RoleId>(["eleve", "parent", "prof"]);
+
+/**
+ * L'intitulé de la rangée des classes, dans les mots de chacun.
+ * Un parent ne dit pas « ma classe » ; un enseignant en a plusieurs.
+ */
+const INTITULE_CLASSE: Record<string, string> = {
+  eleve: "Ta classe",
+  parent: "La classe de votre enfant",
+  prof: "La classe",
+};
 
 /** Le rôle auquel appartient un profil enregistré. */
 function roleDuProfil(profil: ProfilId): RoleId {
@@ -203,6 +241,21 @@ export default function EntreeMatrice({
 
   const profil: ProfilId | null = role === "eleve" ? classe : role;
 
+  /**
+   * LA CLASSE DITE PAR UN ADULTE — `null` chez l'élève, dont la classe est déjà
+   * le profil, et `null` chez le chef d'établissement, qui n'en a pas.
+   * C'est ce qui part dans le vecteur, à côté de « qui es-tu ».
+   */
+  const classeAdulte: ProfilId | null =
+    role === "parent" || role === "prof" ? classe : null;
+
+  /**
+   * LE NIVEAU DONT ON PARLE, quel que soit le rôle. C'est lui — et non le
+   * profil — qui décide du guide de survie, du cahier de vacances et du
+   * concours : ces trois-là sont attachés à une CLASSE, jamais à un rôle.
+   */
+  const niveauContexte: ProfilId | null = role && ROLES_AVEC_CLASSE.has(role) ? classe : null;
+
   const [question, setQuestion] = useState("");
   // Deux sélections à l'écran, UNE SEULE chip dans le vecteur : elles se
   // composent en « Mathématiques · M'entraîner ». Le vecteur reste à trois
@@ -238,19 +291,35 @@ export default function EntreeMatrice({
         const id = p as ProfilId;
         const r = roleDuProfil(id);
         setRole(r);
-        if (r === "eleve") setClasse(id);
+
+        // La classe se relit selon le rôle : celle de l'élève EST son profil,
+        // celle d'un adulte vit dans sa propre clé.
+        let classeRelue: ProfilId | null = null;
+        if (r === "eleve") {
+          classeRelue = id;
+        } else if (r === "parent" || r === "prof") {
+          const c = localStorage.getItem(CLE_CLASSE_ADULTE);
+          if (c && CLASSES.some((x) => x.id === c)) classeRelue = c as ProfilId;
+        }
+        setClasse(classeRelue);
+
+        // ⚠️ Un adulte garde sa classe dans le vecteur, un élève non : chez lui
+        // elle est déjà dans `quiEsTu`, et l'y remettre serait l'écrire deux
+        // fois (voir l'invariant de VecteurEntree).
+        const classeVecteur = r === "eleve" ? null : classeRelue;
+
         // Une demande rappelée depuis la colonne de gauche (?q=…) repart
         // aussitôt : cliquer dans l'historique doit refaire la recherche, pas
         // seulement remplir le champ.
         const q = new URLSearchParams(window.location.search).get("q");
         if (q) {
           setQuestion(q);
-          setResultat(chercher({ quiEsTu: id, question: q, chip: null }));
+          setResultat(chercher({ quiEsTu: id, classe: classeVecteur, question: q, chip: null }));
         } else {
           // Les portes de son niveau, sans avoir rien à taper. Le moteur sait
           // déjà le faire (`repliSurLeNiveau`) ; il refusait simplement de le
           // faire sur un vecteur vide, et l'écran restait blanc sous la barre.
-          setResultat(chercher({ quiEsTu: id, question: "", chip: null }));
+          setResultat(chercher({ quiEsTu: id, classe: classeVecteur, question: "", chip: null }));
         }
       }
     } catch {
@@ -261,9 +330,22 @@ export default function EntreeMatrice({
   const p = useMemo(() => (profil ? getProfil(profil) : null), [profil]);
   const tutoie = p?.tutoie ?? true;
 
+  /**
+   * « 5e » quand un adulte l'a dite — et rien du tout sinon.
+   *
+   * ⚠️ Ce n'est pas de la décoration. « Par où vous pouvez commencer en
+   * Parent » ne veut rien dire : ce n'est pas un niveau, c'est un rôle. Dès
+   * qu'une classe est dite, c'est ELLE que la phrase doit nommer, sinon on
+   * affiche des ressources de 5ᵉ en annonçant qu'elles sont « pour un parent ».
+   */
+  const labelClasseAdulte = useMemo(
+    () => (classeAdulte ? getProfil(classeAdulte).label : null),
+    [classeAdulte],
+  );
+
   // ⭐ Tant que personne n'a répondu à « Qui es-tu ? », on montre TOUTES les
   // matières : la réponse honnête à une question ouverte, c'est tout ce qu'on a.
-  const matieres = useMemo(() => matieresDisponibles(profil), [profil]);
+  const matieres = useMemo(() => matieresDisponibles(profil, classeAdulte), [profil, classeAdulte]);
   /** La matière derrière le bouton allumé — on affiche des LIBELLÉS, mais c'est
    *  l'identifiant qui sert à filtrer et à choisir la bonne phrase d'invite. */
   const matiereId = useMemo(
@@ -274,11 +356,14 @@ export default function EntreeMatrice({
   // Les chips viennent des ressources réellement publiables pour ce profil ET
   // cette matière — pas d'une liste de fonctionnalités souhaitées.
   const toutesLesChips = useMemo(
-    () => chipsDisponibles(profil, matiereId),
-    [profil, matiereId],
+    () => chipsDisponibles(profil, matiereId, classeAdulte),
+    [profil, matiereId, classeAdulte],
   );
   /** Terminale + Mathématiques, et le collège pour le concours général. */
-  const concours = useMemo(() => afficherConcours(profil, matiereId), [profil, matiereId]);
+  const concours = useMemo(
+    () => afficherConcours(niveauContexte, matiereId),
+    [niveauContexte, matiereId],
+  );
 
   // ⭐ LE GUIDE DE SURVIE DE SA CLASSE, EN PASTILLE (07/08, Frédéric : « on n'a
   // pas branché guide de survie dans les chips »). Il sortait déjà sous
@@ -288,15 +373,18 @@ export default function EntreeMatrice({
   // ⚠️ SEULEMENT SI SA CLASSE EN A UN. Le CP, le CE1 et le CE2 n'en ont aucun —
   // ni en maths ni en français — et la pastille n'apparaît donc pas chez eux
   // plutôt que d'ouvrir un sommaire où ils ne trouveront rien à leur niveau.
-  const guides = useMemo(() => guidesPour(profil), [profil]);
-  const hrefGuide = useMemo(() => urlGuidePour(profil), [profil]);
+  // ⚠️ `niveauContexte` ET NON `profil` : un guide de survie appartient à une
+  // CLASSE. Un parent qui a dit « 5ᵉ » a droit au guide de 5ᵉ — c'est même la
+  // page à imprimer qu'il cherche le plus souvent.
+  const guides = useMemo(() => guidesPour(niveauContexte), [niveauContexte]);
+  const hrefGuide = useMemo(() => urlGuidePour(niveauContexte), [niveauContexte]);
 
   // ⭐ LE CAHIER DE VACANCES, EN PASTILLE AUSSI (07/08). Les cahiers font
   // l'essentiel du trafic du site — Google et Bing y déposent la plupart des
   // visiteurs — et ils n'avaient aucune porte depuis l'entrée. Ils viennent
   // seulement d'entrer dans l'inventaire pour le primaire, où cinq d'entre eux
   // existaient en ligne sans être proposés à personne.
-  const cahiers = useMemo(() => cahiersPour(profil), [profil]);
+  const cahiers = useMemo(() => cahiersPour(niveauContexte), [niveauContexte]);
 
   /**
    * Les pastilles qui ne filtrent rien : elles ouvrent une page.
@@ -344,9 +432,22 @@ export default function EntreeMatrice({
   const exemples = useMemo(() => (profil ? exemplesPour(profil) : []), [profil]);
 
   const lancer = useCallback(
-    (texte: string, chipChoisie: string | null, profilForce?: ProfilId) => {
-      const quiEsTu = profilForce ?? profil;
-      const vecteur = { question: texte.trim(), chip: chipChoisie };
+    (
+      texte: string,
+      chipChoisie: string | null,
+      /**
+       * Ce qu'on vient de cliquer, quand React n'a pas encore rendu l'état.
+       * ⚠️ `classe: null` VEUT DIRE « pas de classe », pas « prends celle de
+       * l'état » — d'où le `in` plutôt qu'un `??` : un élève qui choisit son
+       * rôle doit repartir SANS classe dans le vecteur, et un `??` aurait
+       * silencieusement ressuscité celle de l'écran précédent.
+       */
+      forcage?: { profil?: ProfilId; classe?: ProfilId | null },
+    ) => {
+      const quiEsTu = forcage?.profil ?? profil;
+      const laClasse =
+        forcage && "classe" in forcage ? (forcage.classe ?? null) : classeAdulte;
+      const vecteur = { question: texte.trim(), chip: chipChoisie, classe: laClasse };
 
       // Sans profil, on ne devine pas : la même phrase ne veut pas dire la même
       // chose en CP et en Terminale.
@@ -441,7 +542,7 @@ export default function EntreeMatrice({
         }
       }
     },
-    [profil, variante],
+    [profil, classeAdulte, variante],
   );
 
   /** Retenir qui l'on est — et prévenir la page, qui se range là-dessus. */
@@ -458,6 +559,16 @@ export default function EntreeMatrice({
     [onProfil, variante],
   );
 
+  /** Retenir la classe d'un adulte — l'autre moitié de « qui es-tu ». */
+  const retenirClasse = useCallback((id: ProfilId | null) => {
+    try {
+      if (id) localStorage.setItem(CLE_CLASSE_ADULTE, id);
+      else localStorage.removeItem(CLE_CLASSE_ADULTE);
+    } catch {
+      /* tant pis */
+    }
+  }, []);
+
   function choisirRole(id: RoleId) {
     choixManuel.current = true;
     setRole(id);
@@ -470,7 +581,7 @@ export default function EntreeMatrice({
       // La classe déjà connue reste valable : on ne redemande pas.
       if (classe) {
         memoriser(classe);
-        lancer(question, null, classe);
+        lancer(question, null, { profil: classe, classe: null });
       } else {
         // La rangée des classes vient de s'ouvrir — c'est elle, la réponse
         // attendue. On n'affiche rien tant qu'elle n'est pas remplie.
@@ -480,7 +591,16 @@ export default function EntreeMatrice({
     }
 
     memoriser(id);
-    lancer(question, null, id);
+    // ⭐ LA CLASSE SURVIT AU CHANGEMENT DE RÔLE (16/08). Une classe reste une
+    // classe : un parent qui bascule sur « Enseignant » parle toujours de la
+    // 5ᵉ, et la lui redemander serait lui faire retaper une réponse donnée dix
+    // secondes plus tôt. Seul le chef d'établissement la met de côté — il n'a
+    // pas de rangée pour la montrer, donc il ne doit pas en avoir une cachée
+    // qui filtre en silence.
+    lancer(question, null, {
+      profil: id,
+      classe: ROLES_AVEC_CLASSE.has(id) ? classe : null,
+    });
     champ.current?.focus();
   }
 
@@ -517,8 +637,19 @@ export default function EntreeMatrice({
     setMatiereChoisie(null);
     setIntentionChoisie(null);
     setPlusDOptions(false);
-    memoriser(id);
-    lancer(question, null, id);
+
+    // ⚠️ DEUX GESTES DIFFÉRENTS SOUS LE MÊME CLIC. Chez l'élève, choisir sa
+    // classe c'est dire QUI IL EST : le profil devient la classe. Chez un
+    // adulte, c'est dire DE QUI IL PARLE : le rôle ne bouge pas, la classe
+    // s'ajoute à côté. Confondre les deux ferait d'un parent un élève de 5ᵉ —
+    // il verrait « Teste-toi » et perdrait son espace parents.
+    if (role === "eleve") {
+      memoriser(id);
+      lancer(question, null, { profil: id, classe: null });
+    } else {
+      retenirClasse(id);
+      lancer(question, null, { classe: id });
+    }
     champ.current?.focus();
   }
 
@@ -578,10 +709,18 @@ export default function EntreeMatrice({
         </div>
       </Etape>
 
-      {/* ── 2. Ta classe ────────────────────────────────────────────────── */}
-      {role === "eleve" && (
-        <Etape intitule="Ta classe" surAccueil={surAccueil}>
-          <div className="rangee-defilante gap-1 sm:gap-1.5" role="group" aria-label="Ta classe">
+      {/* ── 2. La classe ──────────────────────────────────────────────────
+          ⭐ PLUS SEULEMENT L'ÉLÈVE (16/08) : le parent et l'enseignant l'ont
+          aussi. Voir ROLES_AVEC_CLASSE en tête de fichier — c'est la classe qui
+          fait exister leurs matières, leur guide de survie et la porte du
+          coach. */}
+      {role && ROLES_AVEC_CLASSE.has(role) && (
+        <Etape intitule={INTITULE_CLASSE[role] ?? "La classe"} surAccueil={surAccueil}>
+          <div
+            className="rangee-defilante gap-1 sm:gap-1.5"
+            role="group"
+            aria-label={INTITULE_CLASSE[role] ?? "La classe"}
+          >
             {CLASSES.map((c) => {
               const actif = classe === c.id;
               return (
@@ -713,7 +852,11 @@ export default function EntreeMatrice({
             {actions.map((a) => (
               <Link
                 key={a.href}
-                href={urlAction(a, { matiere: matiereId })}
+                // La classe part avec la matière : le jour où une action
+                // acceptera des filtres (`accepteFiltres`), elle s'ouvrira déjà
+                // sur la bonne — l'enseignant vient de la dire deux lignes plus
+                // haut, la redemander à l'écran suivant serait ne pas l'écouter.
+                href={urlAction(a, { matiere: matiereId, niveau: niveauContexte })}
                 prefetch={false}
                 title={a.aide}
                 onClick={() => track("ia_action", { action: a.label, profil: profil ?? "inconnu" })}
@@ -944,7 +1087,7 @@ export default function EntreeMatrice({
                 ? "Je n'ai pas bien compris la demande — voici par où "
                 : "Par où "}
               {p.tutoie ? "tu peux" : "vous pouvez"} commencer en{" "}
-              <span className="text-[#1d1c16]">{p.label}</span>.
+              <span className="text-[#1d1c16]">{labelClasseAdulte ?? p.label}</span>.
             </p>
           ) : (
             <p className="mb-2.5 text-center text-xs text-[#1d1c16]/55">
@@ -952,6 +1095,7 @@ export default function EntreeMatrice({
               <span className="text-[#1d1c16]">
                 {[
                   p.label,
+                  labelClasseAdulte,
                   matiereChoisie,
                   resultat.lecture.intention ? libelleIntention(resultat.lecture.intention) : null,
                   resultat.lecture.notionLabel,

@@ -191,6 +191,23 @@ export type RessourceEleveAI = {
 /** Ce que la personne a fourni. Rien de plus. */
 export type VecteurEntree = {
   quiEsTu: ProfilId;
+  /**
+   * LA CLASSE DONT ON PARLE — et ce n'est PAS un quatrième champ.
+   *
+   * La règle fondatrice dit trois choses : qui tu es, ta question, une chip.
+   * Celle-ci est la seconde moitié de « qui tu es », pas une quatrième
+   * dimension : pour un élève, `quiEsTu` EST déjà sa classe ; pour un parent ou
+   * un enseignant, dire « parent » ne dit pas encore de QUI on parle, et sans
+   * cette moitié-là le vecteur reste incomplet.
+   *
+   * ⚠️ INVARIANT : elle n'est renseignée QUE pour un profil adulte. Pour un
+   * élève elle vaut `null` — sa classe est déjà dans `quiEsTu`, et l'écrire
+   * deux fois créerait le jour où les deux se contrediront.
+   *
+   * ⛔ Le chef d'établissement n'en a pas : il ne parle pas d'une classe, il
+   * parle de son établissement. La laisser à `null` chez lui n'est pas un oubli.
+   */
+  classe?: ProfilId | null;
   question: string;
   chip: string | null;
 };

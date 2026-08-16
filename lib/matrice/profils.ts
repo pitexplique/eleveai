@@ -45,6 +45,27 @@ export function getProfil(id: ProfilId): Profil {
   return p;
 }
 
+/**
+ * À QUELLE DISTANCE UNE RESSOURCE EST D'UN PROFIL.
+ *   0  → pile à son niveau ;
+ *   1+ → le niveau juste en dessous (le repli, écrit dans `niveaux`) ;
+ *  -1  → hors de portée.
+ *
+ * Le calcul était écrit deux fois — une dans le moteur pour le score, une dans
+ * chips.ts pour le filtre. Il est devenu le même geste le jour où un adulte a
+ * pu dire une classe : on interroge alors DEUX profils pour une seule
+ * ressource (le sien, et la classe dont il parle), et deux copies d'un même
+ * calcul appelé deux fois plus souvent, c'est deux fois plus de chances qu'elles
+ * divergent.
+ */
+export function rangNiveaux(
+  profil: ProfilId | null | undefined,
+  niveauxRessource: readonly string[],
+): number {
+  if (!profil) return -1;
+  return getProfil(profil).niveaux.findIndex((n) => niveauxRessource.includes(n));
+}
+
 export type Chip = { label: string; intention: Intention };
 
 /**

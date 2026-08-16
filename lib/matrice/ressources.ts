@@ -170,12 +170,79 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "Le coach IA",
     promesse: "Comprendre ce qu'est vraiment une intelligence artificielle.",
     url: "/coach-ia/ia",
-    niveaux: ["4e", "3e", "seconde", "premiere", "terminale"],
+    // ⭐ DU CM1 À LA TERMINALE (16/08/2026). Frédéric : « la matière IA a
+    // disparu » — écran de 5ᵉ à l'appui — puis, quand je proposais la 6ᵉ :
+    // « le coach pour la matière IA n'est pas fait par classe mais par niveau ! »
+    //
+    // Ce n'était pas un masquage (MATIERES_MASQUEES est vide depuis le 07/08),
+    // c'était ARITHMÉTIQUE : l'IA n'existait qu'à partir de la 4ᵉ, un 5ᵉ n'avait
+    // donc aucune ressource d'IA, et la rangée des matières — qui se déduit des
+    // ressources — n'avait rien à afficher. Le mécanisme a bien fonctionné ; ce
+    // sont les niveaux déclarés ici qui étaient faux.
+    //
+    // 🔑 ET LA RAISON DE FOND EST CELLE DE FRÉDÉRIC : CE COACH N'EST PAS RANGÉ
+    // PAR CLASSE. Sa banque est en A1 → C1 (questionBank/{a1,a2,b1,b2,c1}/ia)
+    // et `IA_CLASSES` dans app/coach-ia/[matiere]/page.tsx ne contient pas une
+    // seule classe. Écrire « à partir de la 4ᵉ » revenait donc à traduire en
+    // classes une échelle qui n'en a pas — la même erreur que pour l'espagnol
+    // et l'anglais, qui sont aussi en niveaux du cadre européen.
+    //
+    // ⚠️ LE CM1 N'EST PAS UN PLANCHER DE CONTENU, C'EST UN PLANCHER DE LECTURE.
+    // Le A1 se lit (« Avec tes mots : qu'est-ce qu'une intelligence
+    // artificielle ? »), mais il se lit seul, en QCM, sans image — au CP, au
+    // CE1 et au CE2, on apprend encore à déchiffrer. Une ligne suffit le jour
+    // où une banque d'IA leur sera écrite.
+    // ⭐ « prof » ET « parent » AUSSI (16/08, Frédéric : « si un élève, prof ou
+    // parent coche IA, tu affiches coach IA et parcours IA dans les encarts »).
+    // C'est la même correction que pour le coach de maths le 08/08 puis le
+    // 12/08 : sans ces deux mots, un enseignant qui clique « IA » n'obtient
+    // rien du tout — la matière existe pour lui dans la rangée, et la réponse
+    // en dessous est vide.
+    niveaux: [
+      "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale",
+      "prof", "parent",
+    ],
     matiere: "ia",
     notions: ["ia"],
     intentions: ["comprendre", "decouvrir"],
     type: "coach",
     resultat: "progression",
+    statut: "validee",
+  },
+  {
+    // ⭐ TROUVÉ PAR L'AUDIT DU 16/08/2026 (Frédéric : « et vérifier le fichier
+    // ressources.ts »). La page est en production, elle a son titre, sa
+    // description et ses trente jours — et elle n'était dans l'inventaire de
+    // personne. Un 3ᵉ qui écrivait « je prépare le brevet » recevait
+    // l'évaluation nationale et les cahiers de vacances : ce qu'on avait de
+    // mieux, faute d'avoir déclaré ce qu'on avait de juste.
+    // 🔑 C'est la cinquième fois : une ressource absente ne casse rien, ne lève
+    // aucune erreur, ne fait tomber aucun garde-fou. Elle est simplement
+    // invisible, et seule la LECTURE du dossier app/ la retrouve.
+    // ⚠️ Pas de `resultat` : ni fetch ni localStorage dans CoachBrevetClient —
+    // rien ne remonte, et le dire vaut mieux que de le supposer.
+    id: "coach-brevet",
+    titre: "Le coach Brevet",
+    promesse: "Trente jours pour arriver au brevet de maths sans trou.",
+    url: "/coach-brevet",
+    niveaux: ["3e"],
+    matiere: "maths",
+    notions: ["*"],
+    intentions: ["preparer", "entrainer"],
+    type: "coach",
+    statut: "validee",
+  },
+  {
+    // Le jumeau du précédent, en Terminale : même absence, même correction.
+    id: "coach-bac-spe",
+    titre: "Le coach Bac spé maths",
+    promesse: "Vingt et un jours : calcul rapide, pièges classiques, sujets express.",
+    url: "/coach-bac-spe",
+    niveaux: ["terminale"],
+    matiere: "maths",
+    notions: ["*"],
+    intentions: ["preparer", "entrainer"],
+    type: "coach",
     statut: "validee",
   },
   {
@@ -241,7 +308,14 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "Les parcours d'IA",
     promesse: "Comprendre l'intelligence artificielle en la pratiquant.",
     url: "/parcours-ia",
-    niveaux: ["4e", "3e", "seconde", "premiere", "terminale"],
+    // Mêmes niveaux que le coach d'IA, et pour la même raison : la banque est
+    // en A1 → C1, pas en classes. Les deux se suivent — une matière qui
+    // s'ouvre avec un seul de ses deux outils est une matière à moitié
+    // ouverte, et c'est l'autre moitié qu'on cherchera.
+    niveaux: [
+      "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale",
+      "prof", "parent",
+    ],
     matiere: "ia",
     notions: ["ia"],
     intentions: ["tester", "entrainer", "decouvrir", "comprendre"],
@@ -469,6 +543,34 @@ export const RESSOURCES: RessourceEleveAI[] = [
     statut: "validee",
   },
 
+  {
+    // ⭐ L'ÉVALUATION DE LA MATIÈRE IA (ajoutée le 16/08/2026 par l'audit).
+    // La page tourne, le chef d'établissement l'avait déjà en action écrite
+    // (actions.ts) — mais elle n'était dans l'inventaire de personne, donc
+    // invisible à l'élève qui la passe et au professeur qui la donne.
+    //
+    // Frédéric, 16/08 : « tu peux aussi parcours qui est une évaluation ».
+    // C'est exactement la troisième porte de l'IA : le coach explique, le
+    // parcours entraîne et note, celle-ci rend un PROFIL DE COMPÉTENCES sur les
+    // trois domaines du référentiel Pix (fondements, usages, enjeux).
+    //
+    // ⚠️ 4ᵉ ET AU-DESSUS, alors que le coach d'IA descend au CM1 : ici le
+    // découpage EST scolaire — `EvalPixIaClient` ne connaît que deux modes,
+    // « collège » et « lycée », et le référentiel Pix vise le cycle 4 puis le
+    // lycée. Le niveau se choisit sur la page ; on ne le devine pas.
+    id: "eval-pix-ia",
+    titre: "Éval blanche Pix IA",
+    promesse: "Les trois domaines du référentiel, et le profil de compétences à la fin.",
+    url: "/eval-pix-ia",
+    niveaux: ["4e", "3e", "seconde", "premiere", "terminale", "prof", "direction"],
+    matiere: "ia",
+    notions: ["ia"],
+    intentions: ["preparer", "tester"],
+    type: "evaluation",
+    resultat: "score",
+    statut: "validee",
+  },
+
   // ── Les guides de survie ───────────────────────────────────────────────
   // ⭐ LA LISTE N'EST PLUS ICI (07/08) : elle vit dans lib/matrice/guides.ts,
   // parce que le menu de l'élève connecté en a besoin lui aussi et qu'un même
@@ -598,6 +700,17 @@ export const RESSOURCES: RessourceEleveAI[] = [
   },
 
   // ── Comprendre une notion ──────────────────────────────────────────────
+  //
+  // ⏳ L'AUDIT DU 16/08/2026 A TROUVÉ TROIS NIVEAUX DE FICHES EN LIGNE ET NON
+  // DÉCLARÉS — CM2, 5ᵉ, 4ᵉ — plus les fiches d'IA (`app/fiches-cours/ia`). Je
+  // les avais ajoutées ; Frédéric les a retirées le jour même : « fiches de
+  // cours pas complète, c'est un autre chantier auquel je réfléchis ».
+  //
+  // 🔑 Et c'est la bonne décision, pour la raison qui gouverne tout ce fichier :
+  // une ressource déclarée est une ressource PROMISE. Une collection à moitié
+  // écrite tient la promesse au hasard des notions — l'élève qui tombe sur le
+  // trou n'en conclut pas que la fiche manque, il en conclut que le site ment.
+  // ⛔ NE PAS LES REMETTRE avant que le chantier des fiches soit tranché.
   {
     id: "fiches-maths-6e",
     titre: "Fiches de cours — maths 6e",

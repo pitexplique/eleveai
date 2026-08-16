@@ -15,7 +15,7 @@
 // une ressource « créer une remédiation » entre dans ressources.ts, sa chip
 // apparaît toute seule. Rien à synchroniser à la main.
 
-import { getProfil } from "./profils";
+import { getProfil, rangNiveaux } from "./profils";
 import { RESSOURCES, STATUTS_PUBLIABLES } from "./ressources";
 import type { Intention, ProfilId } from "./types";
 
@@ -68,8 +68,24 @@ function libelle(intention: Intention, profil: ProfilId | null): string {
  * d'espagnol, pas de spécialités — à un lycéen, à un professeur, à un CP.
  * Un défaut technique se lisait comme une réponse. Tant que la question « qui
  * es-tu ? » est ouverte, la réponse honnête est : tout ce qu'on a.
+ *
+ * ⭐ `classe` — LA CLASSE DITE PAR UN ADULTE (16/08/2026, Frédéric : « il faut
+ * afficher classe et matière pas que pour l'élève mais aussi pour prof et
+ * parents »). Un parent voyait UNE matière, un enseignant aussi : leurs profils
+ * n'acceptent que les ressources marquées « parent » ou « prof », et il y en a
+ * huit en tout, presque toutes en maths. La rangée des matières ne s'affichait
+ * donc jamais chez eux — pas par choix, par arithmétique.
+ *
+ * Une ressource passe désormais si elle est au niveau du PROFIL **ou** à celui
+ * de la classe dite. Ce n'est pas un élargissement du filtre : c'est le filtre
+ * qui manquait. Un parent ne cherche pas « une ressource pour parents », il
+ * cherche ce que son enfant de 5ᵉ peut faire ce soir.
  */
-export function ressourcesPour(profil: ProfilId | null, matiere?: string | null) {
+export function ressourcesPour(
+  profil: ProfilId | null,
+  matiere?: string | null,
+  classe?: ProfilId | null,
+) {
   const p = profil ? getProfil(profil) : null;
   return RESSOURCES.filter((r) => {
     if (!STATUTS_PUBLIABLES.includes(r.statut)) return false;
@@ -81,8 +97,9 @@ export function ressourcesPour(profil: ProfilId | null, matiere?: string | null)
     // « transversal » traverse tout : elle ne contredit aucune matière.
     if (matiere && r.matiere && r.matiere !== "transversal" && r.matiere !== matiere) return false;
     if (matiere && !r.matiere) return false;
-    if (!p) return true;
-    return r.niveaux.includes("*") || p.niveaux.some((n) => r.niveaux.includes(n));
+    if (!p && !classe) return true;
+    if (r.niveaux.includes("*")) return true;
+    return rangNiveaux(profil, r.niveaux) >= 0 || rangNiveaux(classe, r.niveaux) >= 0;
   });
 }
 
@@ -96,6 +113,7 @@ export function ressourcesPour(profil: ProfilId | null, matiere?: string | null)
 export function chipsDisponibles(
   profil: ProfilId | null,
   matiere?: string | null,
+  classe?: ProfilId | null,
 ): ChipDynamique[] {
   // ⭐ « ENSEIGNER » N'EST PAS UNE INTENTION D'ÉLÈVE (corrigé le 07/08).
   // Un 6ᵉ lisait « Trouver une ressource » à côté de « M'entraîner » : la
@@ -108,7 +126,7 @@ export function chipsDisponibles(
   const adulte = profil ? getProfil(profil).groupe === "adulte" : false;
 
   const compte = new Map<Intention, number>();
-  for (const r of ressourcesPour(profil, matiere)) {
+  for (const r of ressourcesPour(profil, matiere, classe)) {
     for (const i of r.intentions) {
       if (i === "enseigner" && !adulte) continue;
       // ⛔ « PRÉPARER UN CONTRÔLE » RETIRÉE AUX ÉLÈVES (Frédéric, 12/08) — sa
@@ -205,9 +223,20 @@ function rang(i: Intention): number {
  */
 export const CHIPS_VISIBLES = 5;
 
-/** Retrouve l'intention derrière une chip, même composite. */
-export function intentionDeLaChip(profil: ProfilId, chip: string): Intention | null {
-  const dispo = chipsDisponibles(profil);
+/**
+ * Retrouve l'intention derrière une chip, même composite.
+ *
+ * ⚠️ LA CLASSE DOIT SUIVRE. Les libellés se déduisent des ressources : sans
+ * elle, un parent qui a dit « 5ᵉ » puis cliqué « Teste-toi » voyait sa chip
+ * relue dans une liste où elle n'existe pas — et le moteur repartait sans
+ * intention, comme si le clic n'avait pas eu lieu.
+ */
+export function intentionDeLaChip(
+  profil: ProfilId,
+  chip: string,
+  classe?: ProfilId | null,
+): Intention | null {
+  const dispo = chipsDisponibles(profil, null, classe);
   for (const partie of partiesDeLaChip(chip)) {
     const trouve = dispo.find((c) => c.label === partie);
     if (trouve) return trouve.intention;
@@ -268,9 +297,12 @@ const MATIERES_MASQUEES = new Set<string>();
  */
 const ORDRE_MATIERES: string[] = ["maths", "francais", "anglais", "espagnol", "ia"];
 
-export function matieresDisponibles(profil: ProfilId | null): ChipMatiere[] {
+export function matieresDisponibles(
+  profil: ProfilId | null,
+  classe?: ProfilId | null,
+): ChipMatiere[] {
   const compte = new Map<Matiere, number>();
-  for (const r of ressourcesPour(profil)) {
+  for (const r of ressourcesPour(profil, null, classe)) {
     // « transversal » n'est pas une matière qu'on choisit : c'est l'absence de
     // matière. L'afficher donnerait un bouton « Tout » à côté de « Maths »,
     // qui ne veut rien dire pour un élève.
@@ -308,8 +340,12 @@ export function partiesDeLaChip(chip: string | null): string[] {
 }
 
 /** Retrouve la matière derrière une chip, même composite. */
-export function matiereDeLaChip(profil: ProfilId, chip: string): Matiere | null {
-  const dispo = matieresDisponibles(profil);
+export function matiereDeLaChip(
+  profil: ProfilId,
+  chip: string,
+  classe?: ProfilId | null,
+): Matiere | null {
+  const dispo = matieresDisponibles(profil, classe);
   for (const partie of partiesDeLaChip(chip)) {
     const trouve = dispo.find((m) => m.label === partie);
     if (trouve) return trouve.matiere;

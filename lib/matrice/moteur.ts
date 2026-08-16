@@ -18,7 +18,7 @@ import { normaliser } from "./normaliser";
 import { chercherNotionDeClasse } from "./notionsClasse";
 import { CLASSE_COACH, notionCoach, urlCoachCiblee } from "./coach";
 import { MARQUEURS_INTENTION, NOTIONS } from "./lexique";
-import { getProfil, chipsPour } from "./profils";
+import { getProfil, chipsPour, rangNiveaux } from "./profils";
 import { PORTES_ECRITES, RESSOURCES, STATUTS_PUBLIABLES } from "./ressources";
 import { ressourcesDeSaison } from "./saison";
 export { normaliser };
@@ -90,7 +90,7 @@ export function lireIntention(vecteur: VecteurEntree): Intention | null {
   // historique de profils.ts en repli, pour ne pas casser un libellé mémorisé
   // dans un historique ou partagé dans un lien.
   if (vecteur.chip) {
-    const parRessources = intentionDeLaChip(vecteur.quiEsTu, vecteur.chip);
+    const parRessources = intentionDeLaChip(vecteur.quiEsTu, vecteur.chip, vecteur.classe);
     if (parRessources) return parRessources;
     const chip = chipsPour(vecteur.quiEsTu).find((c) => c.label === vecteur.chip);
     if (chip) return chip.intention;
@@ -159,6 +159,13 @@ function raisonner(
   intentionOk: boolean,
   intention: Intention | null,
   eleve: boolean,
+  /**
+   * La classe dite par un adulte, quand c'est ELLE qui a fait entrer la
+   * ressource. `null` chez un élève (il a déjà « à ton niveau ») et chez un
+   * adulte dont c'est le profil qui l'a fait entrer — dire « au niveau 5e »
+   * de l'espace parents serait faux.
+   */
+  libelleClasse: string | null,
 ): string {
   const bouts: string[] = [];
   if (notionOk) bouts.push("sur la notion demandée");
@@ -166,6 +173,10 @@ function raisonner(
   // On ne dit « à ton niveau » qu'à un élève : un parent n'a pas de niveau.
   if (eleve && rangNiveau === 0) bouts.push("à ton niveau");
   else if (eleve && rangNiveau > 0) bouts.push("au niveau juste en dessous");
+  // Un adulte, lui, a le niveau de la classe qu'il a dite — et le nommer est la
+  // seule façon de lui montrer qu'on l'a entendu.
+  else if (libelleClasse && rangNiveau === 0) bouts.push(`au niveau ${libelleClasse}`);
+  else if (libelleClasse && rangNiveau > 0) bouts.push("au niveau juste en dessous");
   if (r.testeeAvec) bouts.push("déjà utilisée en classe");
   return bouts.length ? bouts.join(", ") : "disponible pour ce profil";
 }
@@ -174,19 +185,33 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
   const profil = getProfil(vecteur.quiEsTu);
   const intention = lireIntention(vecteur);
 
+  // ⭐ LE NIVEAU DONT ON PARLE (16/08/2026) — la classe de l'élève, ou celle
+  // qu'un adulte vient de dire. Tout ce qui dépend d'une CLASSE et non d'un
+  // rôle passe par lui : le programme, le calendrier, la porte du coach.
+  //
+  // Sans lui, un parent était traité comme s'il n'avait pas de classe du tout
+  // (`CLASSE_COACH.parent` vaut `null`) : « ma fille bloque sur les fractions »
+  // ne reconnaissait aucune notion, n'ouvrait le coach sur rien, et rendait la
+  // même réponse que « bonjour ».
+  const classeDite = vecteur.classe ?? null;
+  const niveau = classeDite ?? profil.id;
+  const profilClasse = classeDite ? getProfil(classeDite) : null;
+
   // LE PROGRAMME DE SA CLASSE D'ABORD. Ce sont les libellés officiels des 431
   // notions du knowledge, comparés au mot près : quand ça accroche, c'est sûr.
   // Le lexique passe ensuite — il porte les mots des élèves (« les x »,
   // « fracsion ») et tolère les fautes, mais cette souplesse a un prix :
   // « racine carrée » tombait sur « la géométrie », par l'alias « carré ».
-  const notionProgramme = chercherNotionDeClasse(vecteur.quiEsTu, vecteur.question);
+  const notionProgramme = chercherNotionDeClasse(niveau, vecteur.question);
   const notion = notionProgramme ? null : lireNotion(vecteur.question);
 
   // La chip peut porter une MATIÈRE au lieu d'une intention — c'est toujours
   // le même et unique champ `chip` du vecteur, jamais un quatrième. Cliquer
   // « Mathématiques » filtre dur : on ne propose pas de dictée à quelqu'un qui
   // vient de dire qu'il veut des maths.
-  const matiereChip = vecteur.chip ? matiereDeLaChip(vecteur.quiEsTu, vecteur.chip) : null;
+  const matiereChip = vecteur.chip
+    ? matiereDeLaChip(vecteur.quiEsTu, vecteur.chip, classeDite)
+    : null;
   // ⚠️ « transversal » n'est PAS une matière voulue : c'est l'absence de
   // matière. Une notion comme « les vidéos » traverse tout — la prendre pour
   // une matière écartait le coach, la chaîne et le reste, et « je veux voir
@@ -225,7 +250,10 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
   // échéance » — auquel cas c'est LA bonne échéance.
   const saison =
     repliSurLeNiveau || intention === "preparer"
-      ? ressourcesDeSaison(profil.id)
+      ? // Le calendrier suit la CLASSE, pas le rôle : l'évaluation nationale de
+        // 6ᵉ tombe à la rentrée pour l'élève comme pour le parent qui la lui
+        // prépare.
+        ressourcesDeSaison(niveau)
       : new Set<string>();
 
   for (const r of RESSOURCES) {
@@ -237,8 +265,20 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
     // vient seulement de dire son niveau, elle est à côté.
     if (r.surDemande && repliSurLeNiveau) continue;
 
-    // ── 2. Le profil, filtre dur.
-    const rangNiveau = profil.niveaux.findIndex((n) => r.niveaux.includes(n));
+    // ── 2. Le profil, filtre dur. DEUX PORTES D'ENTRÉE depuis le 16/08 : le
+    // rôle, et la classe dont on parle. Une ressource passe par la meilleure
+    // des deux — un parent qui a dit « 5ᵉ » est au niveau d'une ressource de
+    // 5ᵉ, exactement comme l'élève qu'il accompagne.
+    //
+    // ⚠️ ON GARDE LES DEUX RANGS SÉPARÉS, on ne les fond pas. Le rang sert au
+    // score, mais il sert AUSSI à écrire la raison affichée : sans savoir par
+    // laquelle des deux portes la ressource est entrée, « L'espace parents » se
+    // serait annoncé « au niveau 5e ».
+    const rangProfil = rangNiveaux(profil.id, r.niveaux);
+    const rangClasse = rangNiveaux(classeDite, r.niveaux);
+    const rangNiveau =
+      rangProfil < 0 ? rangClasse : rangClasse < 0 ? rangProfil : Math.min(rangProfil, rangClasse);
+    const parLaClasse = rangClasse >= 0 && (rangProfil < 0 || rangClasse < rangProfil);
     const tousNiveaux = r.niveaux.includes("*");
     if (rangNiveau < 0 && !tousNiveaux) continue;
     let score = rangNiveau === 0 ? 6 : rangNiveau > 0 ? 3 : 1;
@@ -289,10 +329,10 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
       r.accepteNotion && notionProgramme?.matiere === r.accepteNotion
         ? notionProgramme.id
         : r.accepteNotion
-          ? notionCoach(profil.id, notion?.id ?? null, r.accepteNotion)
+          ? notionCoach(niveau, notion?.id ?? null, r.accepteNotion)
           : null;
 
-    const classeCoach = CLASSE_COACH[profil.id];
+    const classeCoach = CLASSE_COACH[niveau];
     const url =
       r.accepteNotion && notionDuCoach && classeCoach
         ? `/tutor-v4?classe=${classeCoach}&matiere=${r.accepteNotion}&notion=${notionDuCoach}&display=simple`
@@ -311,8 +351,16 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
       // c'est exactement le genre de décalage qui fait passer une
       // recommandation pour un hasard.
       raison: deSaison
-        ? `c'est la saison — ${raisonner(r, rangNiveau, notionOk, intentionOk, intention, profil.groupe === "eleve")}`
-        : raisonner(r, rangNiveau, notionOk, intentionOk, intention, profil.groupe === "eleve"),
+        ? `c'est la saison — ${raisonner(r, rangNiveau, notionOk, intentionOk, intention, profil.groupe === "eleve", parLaClasse ? (profilClasse?.label ?? null) : null)}`
+        : raisonner(
+            r,
+            rangNiveau,
+            notionOk,
+            intentionOk,
+            intention,
+            profil.groupe === "eleve",
+            parLaClasse ? (profilClasse?.label ?? null) : null,
+          ),
       url: url ?? r.url,
       ciblee: viseNotion,
     });
@@ -346,7 +394,25 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
   // raison d'être. Mais elles sont prises DANS `candidates`, donc elles ont
   // passé tous les filtres durs (profil, statut, matière). Un id qui n'y est
   // pas est sauté sans bruit.
-  const portes = !notion && !intention ? PORTES_ECRITES[profil.id] : undefined;
+  // ⚠️ `repliSurLeNiveau` ET NON `!notion && !intention` (16/08/2026). La
+  // condition oubliait la MATIÈRE, et c'est ce qui a fait échouer la demande de
+  // Frédéric — « si un parent coche IA, tu affiches coach IA et parcours IA
+  // dans les encarts ». Chez lui, les portes écrites sont des identifiants
+  // (espace-parents, coach-maths) : la matière « IA » les écarte tous les
+  // deux, sauf « photographier un cours », qui est transversal et survit à
+  // tous les filtres. Résultat, la première carte d'une demande d'IA était un
+  // appareil photo.
+  //
+  // Le fichier disait déjà la règle, il ne l'appliquait qu'à moitié : les
+  // portes valent quand personne n'a rien demandé, et cliquer une matière EST
+  // une demande. `repliSurLeNiveau` est justement le nom que porte cet
+  // état-là — notion, intention ET matière, toutes muettes.
+  //
+  // ⚠️ Conséquence à connaître : sur une matière cliquée, la 3ᵉ carte n'est
+  // plus « Photographier un cours » d'office ; elle revient au score. La photo
+  // garde sa place écrite sur l'écran d'accueil, là où elle avait été demandée
+  // (12/08) — c'est-à-dire quand on n'a encore rien dit.
+  const portes = repliSurLeNiveau ? PORTES_ECRITES[profil.id] : undefined;
   if (portes) {
     const pris = new Set<string>();
     // `candidates` est déjà trié : le PREMIER qui correspond est toujours le
