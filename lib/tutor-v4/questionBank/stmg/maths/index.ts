@@ -3,25 +3,29 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 // Banques par notion du cycle terminal de la voie technologique (série STMG).
 //
 // ─────────────────────────────────────────────────────────────────────────────
-// OÙ ON EN EST — 15/08/2026
-//
-// 167 items, 141 micro-compétences sur 304. Trois domaines sur dix terminés :
+// ✅ COMPLET — 15/08/2026 : 338 items, 304 micro-compétences sur 304.
 //
 //   ✅ STMGAU  Automatismes .......................... 61/61 micros
 //   ✅ STMGSU  Suites numériques ..................... 45/45
 //   ✅ STMGFO  Fonctions et polynômes ................ 35/35
-//   ⏳ STMGDE  Dérivation ............................  0/25
-//   ⏳ STMGEX  Exponentielles et logarithme décimal ..  0/31
-//   ⏳ STMGDC  Données croisées ......................  0/12
-//   ⏳ STMGST  Statistique à deux variables ..........  0/16
-//   ⏳ STMGPR  Probabilités conditionnelles ..........  0/22
-//   ⏳ STMGVA  Variables aléatoires et loi binomiale .  0/28
-//   ⏳ STMGAL  Algorithmique, tableur et logique .....  0/29
+//   ✅ STMGDE  Dérivation ............................ 25/25
+//   ✅ STMGEX  Exponentielles et logarithme décimal .. 31/31
+//   ✅ STMGDC  Données croisées ...................... 12/12
+//   ✅ STMGST  Statistique à deux variables .......... 16/16
+//   ✅ STMGPR  Probabilités conditionnelles .......... 22/22
+//   ✅ STMGVA  Variables aléatoires et loi binomiale . 28/28
+//   ✅ STMGAL  Algorithmique, tableur et logique ..... 29/29
 //
-// ⏳ La classe n'est PAS encore au sélecteur du coach : on n'annonce pas ce
-// qui n'a rien derrière. Au moment de l'ajouter (`CLASSES` dans
-// app/coach-ia/[matiere]/page.tsx), la liste passe à 15 boutons — c'est le
-// moment de la grouper par cycle et par voie plutôt que d'allonger la ligne.
+// Aucune micro sans question. Médiane de 94 questions RÉELLEMENT distinctes
+// par micro (nombres et figure différents, pas seulement l'habillage) et
+// minimum de 10 — le seuil de la règle d'or. 51 % des micros portent une
+// figure ; les 13 micros graphiques obligatoires sont toutes illustrées.
+//
+// ⏳ RESTE À FAIRE : brancher la classe au sélecteur du coach (`CLASSES` dans
+// app/coach-ia/[matiere]/page.tsx), à `PROGRAMME_CLASSES` dans lib/programme.ts
+// et à lib/matrice/coach.ts. La liste du sélecteur passera à 15 boutons : c'est
+// le moment de la grouper par cycle et par voie (générale / technologique)
+// plutôt que d'allonger la ligne.
 //
 // À CHAQUE BANQUE, les quatre vérificateurs :
 //   node --experimental-strip-types scripts/verifier-knowledge.mjs stmg
@@ -84,6 +88,7 @@ import { donneesCroiseesBank } from "./donnees-croisees.bank";
 import { probabilitesConditionnellesBank } from "./probabilites-conditionnelles.bank";
 import { variablesAleatoiresBank } from "./variables-aleatoires.bank";
 import { statistiqueDeuxVariablesBank } from "./statistique-deux-variables.bank";
+import { algorithmiqueBank } from "./algorithmique.bank";
 
 export const mathsStmgQuestionBank: TutorBankItemV4[] = [
   ...proportionsEvolutionsBank,
@@ -103,4 +108,5 @@ export const mathsStmgQuestionBank: TutorBankItemV4[] = [
   ...probabilitesConditionnellesBank,
   ...variablesAleatoiresBank,
   ...statistiqueDeuxVariablesBank,
+  ...algorithmiqueBank,
 ];
