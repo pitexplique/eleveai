@@ -54,6 +54,21 @@ export type ThemeEval = {
   quoi: string;
   /** Notions de la banque source qui l'alimentent. */
   notions: string[];
+  /**
+   * RESTREINT LE TIRAGE À CES MICRO-COMPÉTENCES, quand la notion est trop
+   * large pour le domaine (ajouté le 16/08, avec la 6ᵉ en français).
+   *
+   * L'épreuve officielle sépare « Étude de la langue — Grammaire » et
+   * « Étude de la langue — Orthographe » en DEUX domaines, notés à part : au
+   * collège de référence, 15 % d'élèves à besoins d'un côté, 28 % de l'autre.
+   * Les fondre en un seul thème effacerait précisément l'écart qui sert au
+   * professeur. Or nos deux familles vivent sous une seule notion,
+   * `grammaire_orthographe`. Le filtre par notion ne suffisait donc pas.
+   *
+   * Absent, on tire dans toute la notion — c'est le cas de tous les autres
+   * thèmes, et rien ne change pour eux.
+   */
+  micros?: string[];
   nbQuestions: number;
   /**
    * COMMENT LES QUESTIONS DU DOMAINE SE RÉPARTISSENT entre les deux tests
@@ -567,6 +582,7 @@ function tirerTranche(
         config.banque.filter(
           (item) =>
             item.notionId === notionId &&
+            (!theme.micros || theme.micros.includes(item.microId)) &&
             (!filtrerParType ||
               typeDeMicro(config, item.microId) === tranche.type),
         ),

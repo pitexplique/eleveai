@@ -37,25 +37,31 @@ export const metadata: Metadata = {
 // ⚠️ `minutes` EST RECOPIÉ À LA MAIN de `dureeSecondes` (lib/eval-nationale/
 // <slug>.ts). Importer les configs ici embarquerait les quatre banques dans le
 // bundle de ce hub, alors que chaque épreuve n'emporte que la sienne. Une
-// minute par question depuis l'arbitrage du 01/08 : 25 en français.
+// minute par question depuis l'arbitrage du 01/08 : c'est ce qui reste pour la
+// 4ᵉ en français, seule épreuve à ne pas encore connaître ses effectifs.
 //
-// ⚠️ SAUF LES DEUX ÉPREUVES DE MATHS, à 50 minutes — la 6ᵉ depuis le 11/08, la
-// 4ᵉ depuis le 15/08. Ce sont celles dont nous avons les effectifs officiels :
-// elles reprennent le sujet entier, 62 questions chacune, au lieu d'en tenir
-// la cadence sur un échantillon.
+// ⚠️ LES TROIS AUTRES SONT À 50 MINUTES, la durée officielle de passation :
+// 6ᵉ maths depuis le 11/08, 4ᵉ maths le 15/08, 6ᵉ français le 16/08. Elles
+// reprennent le sujet entier — 62, 62 et 60 questions — au lieu d'en tenir la
+// cadence sur un échantillon.
 const EPREUVES = [
   {
     niveau: "6ᵉ",
     matiere: "Français",
     slug: "6e-francais",
-    minutes: 25,
+    minutes: 50,
     emoji: "📖",
     accent: BOUCAN,
+    // LES SIX DOMAINES DU BILAN OFFICIEL, dans son ordre. La fluence y figure
+    // parce qu'elle EST un domaine de l'épreuve — la page de l'épreuve dit
+    // ensuite, en clair, que c'est le seul que nous ne pouvons pas évaluer.
     teste: [
-      "Comprendre un texte qu'on lit",
-      "Comprendre un texte qu'on écoute",
-      "Le vocabulaire et la grammaire",
-      "Lire à voix haute, sans buter",
+      "Compréhension de l'écrit",
+      "Compréhension de l'oral",
+      "Lexique",
+      "Étude de la langue — Grammaire",
+      "Étude de la langue — Orthographe",
+      "Fluence",
     ],
     // LIVRÉE (01/08) : l'épreuve pioche dans le programme de CM2. La fluence
     // et la compréhension de l'oral n'y sont pas — c'est dit sur la page.

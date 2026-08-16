@@ -3896,21 +3896,44 @@ Il n'y avait ni thermomètre ni carnet à ces époques. L'arbre, lui, prenait de
 // à chaque passage, mais sur 15 énoncés distincts seulement, et une question
 // revenait dès le 2ᵉ ou 3ᵉ passage. C'est la RÉPÉTITION qu'il fallait mesurer,
 // pas la complétude.
-export const SUPPORTS_CM2: SupportTexte[] = [
+// ⭐ LITTÉRAIRE ET COMPOSITE SE TIRENT SÉPARÉMENT (16/08). Le sujet officiel
+// ne pose pas dix-neuf questions sur un support : il en pose DIX sur un texte
+// littéraire, puis NEUF sur un document composite, dans la même épreuve. Ce
+// sont deux supports simultanés, pas un au choix — et deux savoir-faire
+// distincts, puisqu'un document composite se lit en croisant ses parties.
+// Tant que les deux vivaient dans une seule liste, le tirage en prenait un et
+// laissait l'autre : une épreuve sur trois n'avait aucun document composite.
+export const SUPPORTS_CM2_LITTERAIRE: SupportTexte[] = [
   POISSON_DE_LUDOVIC,
   MANGUIER_DE_MADAME_LUCIE,
-  DOCUMENT_SOMMEIL_CM2,
   LE_VELO_DE_MALO,
   LA_LETTRE_DE_TANTINE,
+];
+export const SUPPORTS_CM2_COMPOSITE: SupportTexte[] = [
+  DOCUMENT_SOMMEIL_CM2,
   DOCUMENT_MANGROVE_CM2,
 ];
-export const SUPPORTS_5E: SupportTexte[] = [
+export const SUPPORTS_5E_LITTERAIRE: SupportTexte[] = [
   AVIS_DE_CYCLONE,
   LA_BOURSE_DU_MARCHAND,
-  DOCUMENT_ECRANS_5E,
   LE_CONCOURS_5E,
   LE_GARDIEN_DU_PHARE_5E,
+];
+export const SUPPORTS_5E_COMPOSITE: SupportTexte[] = [
+  DOCUMENT_ECRANS_5E,
   DOCUMENTS_LUMIERE_5E,
+];
+
+// ⚠️ GARDÉES POUR LA 4ᵉ, qui n'a pas encore basculé : son thème « écrit »
+// tire toujours dans un seul lot. À supprimer le jour où elle passera aux six
+// domaines officiels, comme la 6ᵉ.
+export const SUPPORTS_CM2: SupportTexte[] = [
+  ...SUPPORTS_CM2_LITTERAIRE,
+  ...SUPPORTS_CM2_COMPOSITE,
+];
+export const SUPPORTS_5E: SupportTexte[] = [
+  ...SUPPORTS_5E_LITTERAIRE,
+  ...SUPPORTS_5E_COMPOSITE,
 ];
 
 // CINQ ENREGISTREMENTS PAR NIVEAU depuis le 15/08 (deux auparavant). Le thème
