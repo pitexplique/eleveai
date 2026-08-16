@@ -1402,6 +1402,59 @@ Et c'est là le point important. Une image peut être authentique et raconter qu
       explanation:
         "L'argument est donné juste après le constat. Ce n'est pas le partage qui pose problème en soi : c'est qu'on ne puisse remonter à personne.",
     },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "De quand datait réellement la photo, d'après l'émission ?",
+      choices: ["d'il y a douze ans", "d'hier", "d'il y a deux ans", "de la semaine dernière"],
+      expected: "d'il y a douze ans",
+      explanation:
+        "Deux durées passent dans l'émission : l'image circule « depuis hier », mais elle a été publiée « il y a douze ans ». C'est tout l'écart entre les deux qui fait la tromperie.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Quel est le deuxième réflexe conseillé ?",
+      choices: [
+        "chercher l'image elle-même pour savoir où elle est déjà parue",
+        "compter le nombre de partages",
+        "demander son avis à un adulte",
+        "regarder si les commentaires sont d'accord",
+      ],
+      expected:
+        "chercher l'image elle-même pour savoir où elle est déjà parue",
+      explanation:
+        "L'émission annonce ses étapes — « première chose à faire », « deuxième réflexe » — et c'est une aide pour l'oreille. Repérer ces marqueurs, c'est retrouver un plan sans rien avoir sous les yeux.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_presenter",
+      text: "L'émission parle d'« un vieux faux qui ressort ». Que veut-elle dire ?",
+      choices: [
+        "Une tromperie ancienne, déjà démentie, remise en circulation.",
+        "Une photo abîmée par le temps et devenue floue.",
+        "Un faux fabriqué récemment avec une vieille technique.",
+        "Une information vraie que plus personne ne croit.",
+      ],
+      expected:
+        "Une tromperie ancienne, déjà démentie, remise en circulation.",
+      explanation:
+        "La formule est ramassée, et elle s'oppose à celle qui la précède : « ce n'est pas un faux tout neuf ». Comprendre une expression à l'oral, c'est souvent la rattacher à celle qu'elle corrige.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_visees",
+      text: "Pourquoi l'émission raconte-t-elle l'histoire de cette image ?",
+      choices: [
+        "apprendre à vérifier une information avant de la partager",
+        "dénoncer les personnes qui ont partagé cette image",
+        "raconter une tempête qui a inondé une ville",
+        "expliquer comment les requins se déplacent",
+      ],
+      expected: "apprendre à vérifier une information avant de la partager",
+      explanation:
+        "L'image du requin n'est qu'un prétexte : l'émission s'en sert pour dérouler une méthode en deux étapes, puis en tire une règle générale sur la légende qu'on colle aux photos. La visée se lit dans ce qu'on emporte, pas dans l'exemple.",
+    },
   ],
 };
 
@@ -1491,6 +1544,64 @@ Alors, se parlent-ils ? Ils se transmettent des informations, sans aucun doute. 
       expected: "pouvoir inventer un message que personne n'a encore dit",
       explanation:
         "L'argument est repris deux fois, à la fin de chaque partie : la mésange ne peut pas raconter sa journée d'hier, et une langue c'est « pouvoir dire ce qui n'a pas encore été dit ». Ce n'est pas le nombre de signaux qui compte, c'est la possibilité d'en créer.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Que font les autres mésanges quand le cri annonce un rapace dans le ciel ?",
+      choices: [
+        "elles se plaquent contre le tronc",
+        "elles s'envolent aussitôt",
+        "elles répètent le même cri",
+        "elles descendent au sol",
+      ],
+      expected: "elles se plaquent contre le tronc",
+      explanation:
+        "Deux dangers, deux cris, deux réactions — et l'émission les donne dans l'ordre. S'envoler est la réponse à l'autre cri, celui du danger venu du sol. C'est justement parce que les réactions diffèrent qu'on sait que le cri dit d'où vient la menace.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Qu'indique la direction de la danse de l'abeille ?",
+      choices: [
+        "où se trouvent les fleurs",
+        "à quelle distance elles sont",
+        "combien elles sont nombreuses",
+        "à quelle heure y aller",
+      ],
+      expected: "où se trouvent les fleurs",
+      explanation:
+        "La danse porte deux informations, et l'émission les sépare nettement : la direction dit l'endroit, la durée dit la distance. Les intervertir, c'est perdre ce qui rend l'exemple frappant — un seul geste transmet deux choses.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_presenter",
+      text: "« Communiquer, ce n'est pas parler. » Sur quoi repose cette distinction ?",
+      choices: [
+        "Communiquer, c'est transmettre des signaux fixes ; parler, c'est pouvoir en inventer.",
+        "Communiquer se fait par gestes, parler se fait par la voix.",
+        "Communiquer concerne les animaux, parler concerne les humains adultes.",
+        "Communiquer sert à prévenir d'un danger, parler sert à raconter.",
+      ],
+      expected:
+        "Communiquer, c'est transmettre des signaux fixes ; parler, c'est pouvoir en inventer.",
+      explanation:
+        "Attention au piège de la troisième réponse : elle a l'air juste, mais elle décrit qui parle, pas ce qui distingue les deux. L'émission fonde la différence sur une capacité — créer du neuf — et non sur l'espèce.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_visees",
+      text: "Dans quel but cette chronique a-t-elle été faite ?",
+      choices: [
+        "répondre à une question courante en distinguant deux idées qu'on confond",
+        "convaincre qu'il faut protéger les mésanges et les abeilles",
+        "raconter une expérience menée sur des animaux",
+        "apprendre à reconnaître les cris d'oiseaux",
+      ],
+      expected:
+        "répondre à une question courante en distinguant deux idées qu'on confond",
+      explanation:
+        "Toute la chronique est bâtie sur ce partage : d'abord « oui, ils communiquent », ensuite « mais communiquer n'est pas parler ». Sa visée n'est pas d'informer sur les animaux, c'est d'empêcher une confusion.",
     },
   ],
 };
@@ -2970,6 +3081,64 @@ Le réflexe à prendre est simple : avant de vous demander si c'est vrai, demand
       explanation:
         "Le conseil est donné dans la toute dernière phrase, et il est présenté comme venant AVANT la vérification : « avant de vous demander si c'est vrai ».",
     },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Qu'y a-t-il de particulier dans la troisième astuce ?",
+      choices: [
+        "Elle mène à un produit précis, avec un code de réduction.",
+        "Elle est plus utile que les deux premières.",
+        "Elle ne coûte rien, comme les autres.",
+        "Elle est annoncée dès le début de la vidéo.",
+      ],
+      expected: "Elle mène à un produit précis, avec un code de réduction.",
+      explanation:
+        "Les trois astuces ne se valent pas, et c'est le cœur de l'émission : les deux premières installent la confiance, la troisième s'en sert. La place d'un argument dans un discours fait partie de son sens.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Comment appelle-t-on la méthode décrite dans l'émission ?",
+      choices: [
+        "le placement de produit",
+        "le marronnier",
+        "le prix dynamique",
+        "la publicité comparative",
+      ],
+      expected: "le placement de produit",
+      explanation:
+        "L'émission nomme la chose au milieu du propos — « ce n'est pas un hasard, c'est une méthode » — et le nom sert de repère à l'oreille. Un terme technique annoncé de cette façon est presque toujours à retenir.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Pourquoi l'émission précise-t-elle que ces vidéos ne mentent pas forcément ?",
+      choices: [
+        "Pour montrer que la question n'est pas la vérité, mais l'intention.",
+        "Pour dire que ces vidéos sont finalement sans danger.",
+        "Pour éviter d'être accusée de diffamation par les marques.",
+        "Parce que les astuces données sont toujours excellentes.",
+      ],
+      expected:
+        "Pour montrer que la question n'est pas la vérité, mais l'intention.",
+      explanation:
+        "C'est une précaution de raisonnement, et elle est explicite : « la question n'est pas là ». En écartant un reproche qu'on n'a pas fait, l'émission déplace le débat vers celui qui compte — dans quel but on vous parle.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_visees",
+      text: "« Demandez-vous à qui cela profite. » Que change cette question par rapport à « est-ce vrai ? »",
+      choices: [
+        "Elle porte sur l'intention de celui qui parle, pas sur le contenu.",
+        "Elle permet de vérifier les informations plus rapidement.",
+        "Elle évite d'avoir à lire les mentions légales.",
+        "Elle sert uniquement pour les vidéos, pas pour les articles.",
+      ],
+      expected:
+        "Elle porte sur l'intention de celui qui parle, pas sur le contenu.",
+      explanation:
+        "Les deux questions ne visent pas le même objet : l'une examine le message, l'autre l'émetteur. L'émission place la seconde en premier, parce qu'un contenu exact peut servir un but qu'on ne vous dit pas.",
+    },
   ],
 };
 
@@ -3054,6 +3223,58 @@ Il n'existe donc pas de carte parfaite, et il n'en existera jamais. Ce qu'il fau
         "elle annonce que le propos n'est pas de rejeter les cartes, mais de les comprendre",
       explanation:
         "Un « et pourtant » placé dès l'ouverture annonce la direction de tout le propos. Le repérer évite de se tromper sur l'intention.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Quelle image l'émission propose-t-elle pour faire comprendre le problème ?",
+      choices: [
+        "une peau d'orange qu'on essaie d'aplatir",
+        "un ballon qu'on dégonfle",
+        "une feuille de papier qu'on plie en deux",
+        "un miroir déformant",
+      ],
+      expected: "une peau d'orange qu'on essaie d'aplatir",
+      explanation:
+        "L'image est là pour rendre palpable une impossibilité mathématique : elle « se déchire ou s'étire, jamais elle ne s'aplatit proprement ». À l'oral, une comparaison concrète est souvent le seul point d'appui de la mémoire.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Que font les cartes qui respectent les surfaces ?",
+      choices: [
+        "elles déforment les formes des pays",
+        "elles conservent aussi les angles",
+        "elles ne montrent que les océans",
+        "elles agrandissent le Groenland",
+      ],
+      expected: "elles déforment les formes des pays",
+      explanation:
+        "L'émission présente deux familles de cartes qui font le choix inverse l'une de l'autre : conserver les formes en trichant sur les surfaces, ou l'inverse. Agrandir le Groenland est le défaut de la PREMIÈRE — attribuer un défaut à la mauvaise carte, c'est perdre l'opposition.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Sur la carte accrochée dans beaucoup de classes, quel pays paraît aussi grand que l'Afrique ?",
+      choices: ["le Groenland", "l'Australie", "la Russie", "le Canada"],
+      expected: "le Groenland",
+      explanation:
+        "L'exemple est unique dans l'émission, et il est choisi parce qu'il est spectaculaire : quatorze fois plus petit, et pourtant représenté aussi grand. Un seul chiffre bien placé vaut mieux qu'une explication.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Que faut-il retenir, d'après la conclusion de l'émission ?",
+      choices: [
+        "Il faut savoir ce que la carte qu'on regarde a choisi de sacrifier.",
+        "Il faut chercher la carte la plus exacte possible.",
+        "Il ne faut plus se fier aux cartes du monde.",
+        "Il faut préférer les cartes qui respectent les surfaces.",
+      ],
+      expected:
+        "Il faut savoir ce que la carte qu'on regarde a choisi de sacrifier.",
+      explanation:
+        "L'émission écarte explicitement les deux réponses faciles : aucune carte n'est parfaite, et « il n'en existera jamais ». Ce qu'elle demande n'est donc pas de choisir la bonne carte, mais de connaître le prix payé par celle qu'on a sous les yeux.",
     },
   ],
 };
@@ -3143,6 +3364,59 @@ Les deux ont raison sur un point au moins : aucun ne conteste que les écrans po
       expected: "les écrans posent un problème",
       explanation:
         "C'est dit dans la dernière phrase : « aucun ne conteste que les écrans posent un problème ». Dans un débat, repérer l'accord aide à comprendre le désaccord.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Depuis combien de temps l'interdiction s'applique-t-elle dans le collège d'Inès ?",
+      choices: ["deux ans", "un an", "cinq ans", "depuis cette rentrée"],
+      expected: "deux ans",
+      explanation:
+        "La durée n'est pas un détail : c'est ce qui permet à Inès de parler d'un avant et d'un après. Un argument tiré de l'expérience vaut par le temps qu'il a eu pour se vérifier.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_debat",
+      text: "Que propose Kevin à la place de l'interdiction ?",
+      choices: [
+        "qu'on apprenne aux élèves à poser eux-mêmes leur téléphone",
+        "qu'on autorise le téléphone uniquement en récréation",
+        "qu'on attende le lycée pour en discuter",
+        "qu'on confisque les téléphones seulement en cas d'abus",
+      ],
+      expected:
+        "qu'on apprenne aux élèves à poser eux-mêmes leur téléphone",
+      explanation:
+        "Kevin ne se contente pas de refuser : il avance une autre solution. C'est ce qui distingue une objection d'un simple désaccord — et, dans un débat réglé, c'est ce qui oblige l'autre à répondre.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_dialogue",
+      text: "Comment Inès et Kevin s'y prennent-ils l'un envers l'autre ?",
+      choices: [
+        "Kevin reconnaît la valeur de l'argument d'Inès avant d'y opposer le sien.",
+        "Chacun répète son avis sans écouter celui de l'autre.",
+        "Kevin accuse Inès de ne pas connaître le sujet.",
+        "Inès change d'avis après avoir entendu Kevin.",
+      ],
+      expected:
+        "Kevin reconnaît la valeur de l'argument d'Inès avant d'y opposer le sien.",
+      explanation:
+        "« Je comprends l'argument, et je ne dis pas qu'il est faux. » Concéder d'abord n'affaiblit pas une position : cela oblige à trouver un vrai désaccord, au lieu de se battre contre une caricature de l'autre.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_debat",
+      text: "Comment l'enregistrement résume-t-il l'opposition entre les deux élèves ?",
+      choices: [
+        "Interdire aujourd'hui, ou apprendre pour demain.",
+        "Punir les élèves, ou leur faire confiance.",
+        "Croire les chiffres, ou croire son expérience.",
+        "Garder son téléphone, ou le laisser à la maison.",
+      ],
+      expected: "Interdire aujourd'hui, ou apprendre pour demain.",
+      explanation:
+        "La formule finale ramasse tout le débat en deux temps, et elle porte sur le MOMENT autant que sur la méthode. C'est la marque d'une synthèse réussie : elle nomme le désaccord sans donner raison à personne.",
     },
   ],
 };
@@ -3908,6 +4182,65 @@ Le repérer n'oblige à rien. Cela permet seulement de savoir pourquoi on vous p
       explanation:
         "L'idée est implicite : le temps d'antenne est limité, donc tout choix en écarte un autre. C'est le vrai coût que l'émission signale.",
     },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Quels exemples de sujets revenant chaque année l'émission cite-t-elle ?",
+      choices: [
+        "le prix de la rentrée, les bonnes résolutions, les départs en vacances",
+        "les élections, les procès, les catastrophes naturelles",
+        "les résultats sportifs, la météo, les faits divers",
+        "les nouveautés au cinéma et les sorties de jeux",
+      ],
+      expected:
+        "le prix de la rentrée, les bonnes résolutions, les départs en vacances",
+      explanation:
+        "Trois exemples, chacun attaché à un moment de l'année — août, janvier, les veilles de week-end prolongé. C'est leur régularité, et non leur contenu, qui les rassemble.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "D'où vient le mot « marronnier », d'après l'émission ?",
+      choices: [
+        "de l'arbre, qui fleurit chaque année au même moment",
+        "du nom du journaliste qui a inventé la méthode",
+        "de la couleur des vieux journaux",
+        "d'un mot anglais mal traduit",
+      ],
+      expected: "de l'arbre, qui fleurit chaque année au même moment",
+      explanation:
+        "L'origine du mot n'est pas une anecdote : elle porte toute l'idée. Ce qui revient à date fixe revient parce que c'est la saison, pas parce qu'il s'est passé quelque chose.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Pourquoi l'émission insiste-t-elle sur le fait qu'un marronnier n'est pas une fausse information ?",
+      choices: [
+        "Pour que la critique porte sur le choix du sujet, pas sur son exactitude.",
+        "Pour rassurer les journalistes qui écrivent ces articles.",
+        "Parce que les chiffres cités sont toujours vérifiés.",
+        "Pour montrer que ces sujets sont les plus lus.",
+      ],
+      expected:
+        "Pour que la critique porte sur le choix du sujet, pas sur son exactitude.",
+      explanation:
+        "L'émission concède d'abord — « le prix des fournitures augmente réellement » — puis déplace la question. Reprocher à une information d'être fausse quand elle est vraie ferait manquer le vrai problème : pourquoi celle-là, maintenant.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_visees",
+      text: "Que l'émission demande-t-elle à celui qui l'écoute ?",
+      choices: [
+        "Rien de particulier : seulement de savoir pourquoi on lui parle de ça.",
+        "De ne plus lire les articles de rentrée scolaire.",
+        "De vérifier systématiquement les chiffres annoncés.",
+        "De se méfier de tous les journalistes.",
+      ],
+      expected:
+        "Rien de particulier : seulement de savoir pourquoi on lui parle de ça.",
+      explanation:
+        "L'émission le dit franchement : « le repérer n'oblige à rien ». Une visée n'est pas toujours de faire agir — celle-ci se contente d'armer le regard, et c'est déjà beaucoup.",
+    },
   ],
 };
 
@@ -4000,6 +4333,63 @@ Ce qu'il faut en retenir n'est pas une astuce pour payer moins cher. C'est que l
       explanation:
         "La phrase suivante l'explique : « C'est ce qu'on estime que vous êtes prêt à payer, à cet instant précis. »",
     },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Quels prix l'émission donne-t-elle en exemple pour le même vol ?",
+      choices: [
+        "deux cents euros le lundi, trois cents le mercredi",
+        "cent euros le lundi, deux cents le mercredi",
+        "trois cents euros le lundi, deux cents le mercredi",
+        "l'émission ne donne aucun chiffre",
+      ],
+      expected: "deux cents euros le lundi, trois cents le mercredi",
+      explanation:
+        "Le sens de la variation compte autant que les montants : le prix MONTE entre lundi et mercredi. Inverser les deux, c'est raconter l'histoire à l'envers et perdre l'explication qui suit.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Comment appelle-t-on ce système de prix ?",
+      choices: [
+        "le prix dynamique",
+        "le placement de produit",
+        "le prix de saison",
+        "le tarif réglementé",
+      ],
+      expected: "le prix dynamique",
+      explanation:
+        "Le terme est posé au milieu de l'émission, après la démonstration et avant l'élargissement aux hôtels et aux concerts. Nommer une chose une fois qu'on l'a comprise, c'est la manière de faire d'une bonne explication.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Pourquoi le prix baisse-t-il quand il reste beaucoup de places longtemps à l'avance ?",
+      choices: [
+        "pour remplir l'avion",
+        "parce que le vol coûte moins cher à cette période",
+        "pour récompenser ceux qui s'organisent tôt",
+        "parce que la loi l'impose",
+      ],
+      expected: "pour remplir l'avion",
+      explanation:
+        "La raison n'a rien à voir avec le voyageur : elle est donnée du point de vue de la compagnie. C'est exactement ce que l'émission veut faire entendre — le prix ne décrit pas le service, il décrit une situation commerciale.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Pourquoi l'émission précise-t-elle que ce n'est pas « une astuce pour payer moins cher » ?",
+      choices: [
+        "Parce qu'elle veut faire comprendre un mécanisme, pas donner un truc.",
+        "Parce qu'il n'existe aucun moyen de payer moins cher.",
+        "Parce que les prix sont fixés au hasard.",
+        "Parce que la méthode ne marche que pour les avions.",
+      ],
+      expected:
+        "Parce qu'elle veut faire comprendre un mécanisme, pas donner un truc.",
+      explanation:
+        "L'émission écarte d'avance ce qu'on attendait d'elle. Ce refus est sa visée même : elle ne cherche pas à vous faire économiser, elle cherche à changer ce que vous croyez lire dans un prix.",
+    },
   ],
 };
 
@@ -4091,6 +4481,63 @@ Aucun des deux ne dit que l'évaluation est inutile. Ils ne s'opposent pas sur l
       explanation:
         "La dernière phrase le formule : ils ne s'opposent pas sur la nécessité d'évaluer, mais sur ce qu'un chiffre fait à celui qui le reçoit.",
     },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Qu'écrit monsieur Ambroise sur les copies, à la place d'une note ?",
+      choices: [
+        "ce qui est acquis et ce qui ne l'est pas",
+        "une appréciation générale en une ligne",
+        "un classement de la copie dans la classe",
+        "rien du tout, il rend les copies vierges",
+      ],
+      expected: "ce qui est acquis et ce qui ne l'est pas",
+      explanation:
+        "Il ne supprime pas l'évaluation, il en change la forme — et c'est ce qui rend sa position tenable. Un débat se comprend mal si l'on croit qu'un des deux ne propose rien.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Que répond madame Rivière à ceux qui voudraient supprimer la note ?",
+      choices: [
+        "Le classement ne disparaît pas, il devient invisible et plus dur à discuter.",
+        "Les familles ne comprendraient plus rien aux bulletins.",
+        "Les élèves travailleraient beaucoup moins.",
+        "Il faudrait alors corriger deux fois chaque copie.",
+      ],
+      expected:
+        "Le classement ne disparaît pas, il devient invisible et plus dur à discuter.",
+      explanation:
+        "C'est un renversement : elle prend l'objection de l'adversaire et montre qu'elle se retourne. Supprimer le signe ne supprime pas la chose — et ce qui ne se voit plus ne se conteste plus.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_dialogue",
+      text: "Qu'ont en commun la façon de parler des deux enseignants ?",
+      choices: [
+        "Chacun reconnaît une faiblesse de sa propre position.",
+        "Chacun refuse d'entendre les arguments de l'autre.",
+        "Chacun s'appuie sur des études scientifiques.",
+        "Chacun s'adresse directement aux élèves.",
+      ],
+      expected: "Chacun reconnaît une faiblesse de sa propre position.",
+      explanation:
+        "Elle admet que deux copies proches peuvent recevoir des notes différentes ; il admet que sa méthode lui prend plus de temps. Concéder un point de son propre camp est ce qui rend un débat honnête — et ce qui rend l'autre écoutable.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_debat",
+      text: "Sur quoi porte exactement le désaccord entre les deux enseignants ?",
+      choices: [
+        "sur ce qu'un chiffre produit chez celui qui le reçoit",
+        "sur la nécessité même d'évaluer les élèves",
+        "sur le temps que prend la correction des copies",
+        "sur le niveau réel des élèves de leur classe",
+      ],
+      expected: "sur ce qu'un chiffre produit chez celui qui le reçoit",
+      explanation:
+        "Le piège est de croire qu'ils s'opposent sur l'évaluation : « aucun des deux ne dit que l'évaluation est inutile ». Situer un désaccord au bon endroit, c'est la première chose à faire pour se faire une opinion.",
+    },
   ],
 };
 
@@ -4174,6 +4621,64 @@ C'est une règle assez simple à retenir : ce qui est écrit gros a été choisi
       expected: "les grosses mentions servent à séduire, les petites à informer",
       explanation:
         "La formule résume tout le propos par une opposition : choisi pour vous plaire d'un côté, imposé pour vous informer de l'autre.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Quels mots l'émission cite-t-elle comme n'obéissant à aucune règle précise ?",
+      choices: [
+        "« naturel », « authentique », « à l'ancienne »",
+        "« bio », « équitable », « certifié »",
+        "« léger », « allégé », « sans sucre »",
+        "« frais », « du jour », « fait maison »",
+      ],
+      expected: "« naturel », « authentique », « à l'ancienne »",
+      explanation:
+        "Trois mots donnés d'un coup, et un quatrième — « bio » — mis exprès de l'autre côté. Toute l'émission tient dans cette frontière : les uns évoquent, l'autre engage.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Où l'émission conseille-t-elle de regarder ?",
+      choices: [
+        "au dos, dans la liste des ingrédients",
+        "devant, sur les mentions en gros",
+        "sur le prix au kilo",
+        "sur la date de fabrication",
+      ],
+      expected: "au dos, dans la liste des ingrédients",
+      explanation:
+        "Le conseil est concret, et il est justifié : la liste est « obligatoire et réglementée », contrairement aux mots de la face avant. Un bon conseil dit toujours pourquoi il vaut mieux que l'habitude qu'il remplace.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_argumenter",
+      text: "Pourquoi « bio » et « naturel » ne se valent-ils pas, d'après l'émission ?",
+      choices: [
+        "« Bio » répond à un cahier des charges contrôlé, « naturel » ne s'appuie sur rien.",
+        "« Bio » concerne les légumes, « naturel » les produits transformés.",
+        "« Bio » est plus cher, donc plus fiable.",
+        "« Naturel » est interdit par la loi française.",
+      ],
+      expected:
+        "« Bio » répond à un cahier des charges contrôlé, « naturel » ne s'appuie sur rien.",
+      explanation:
+        "L'émission oppose deux mots qui se ressemblent à l'oreille et qui n'ont pas le même statut. L'un peut être vérifié par quelqu'un d'autre que le fabricant ; l'autre, non. C'est là toute la différence.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_visees",
+      text: "L'émission dit que le mot « naturel » « ne vous apprend rien, alors qu'il donne l'impression de vous apprendre quelque chose ». Que dénonce-t-elle ?",
+      choices: [
+        "Un mot qui occupe la place d'une information sans en être une.",
+        "Un mensonge sur la composition du produit.",
+        "Une erreur d'étiquetage due au fabricant.",
+        "Un mot trop compliqué pour les acheteurs.",
+      ],
+      expected:
+        "Un mot qui occupe la place d'une information sans en être une.",
+      explanation:
+        "Ce n'est pas un mensonge, et l'émission le dit — le produit « peut être excellent ». Le reproche est plus fin : le mot rassure à la place d'informer, et il empêche de chercher plus loin. « Et c'est justement à cela qu'il sert. »",
     },
   ],
 };
@@ -4264,6 +4769,59 @@ Il n'y avait ni thermomètre ni carnet à ces époques. L'arbre, lui, prenait de
       expected: "l'arbre a enregistré le climat des années qu'il a vécues",
       explanation:
         "L'image répond à la phrase précédente — « il n'y avait ni thermomètre ni carnet ». L'arbre remplace l'instrument qui n'existait pas.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "À quoi correspond un cercle sur un tronc coupé ?",
+      choices: ["à une année", "à une saison", "à dix années", "à une sécheresse"],
+      expected: "à une année",
+      explanation:
+        "L'émission part de ce que tout le monde sait — « un cercle, une année » — pour aller vers ce qu'on ignore. Une explication commence souvent par confirmer une évidence, afin de pouvoir la dépasser.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_ecouter",
+      text: "Que traduit un anneau large ?",
+      choices: [
+        "une année pluvieuse et douce",
+        "une année de sécheresse",
+        "une année de froid",
+        "une année où l'arbre a été taillé",
+      ],
+      expected: "une année pluvieuse et douce",
+      explanation:
+        "Large et étroit s'opposent terme à terme dans l'émission : l'un pour la pluie et la douceur, l'autre pour la sécheresse ou le froid. Retenir la paire entière protège de l'inverser.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_presenter",
+      text: "Comment les chercheurs remontent-ils sur plusieurs milliers d'années ?",
+      choices: [
+        "En reliant un arbre vivant à une poutre ancienne, puis celle-ci à une plus vieille.",
+        "En comptant les anneaux d'un seul arbre très ancien.",
+        "En mesurant la profondeur des racines.",
+        "En comparant les arbres de régions différentes.",
+      ],
+      expected:
+        "En reliant un arbre vivant à une poutre ancienne, puis celle-ci à une plus vieille.",
+      explanation:
+        "L'émission emploie l'expression « de proche en proche », et c'est le mot juste : aucun arbre n'a mille ans, mais les motifs se chevauchent, et le chevauchement fait la chaîne. Le raisonnement compte ici autant que le fait.",
+    },
+    {
+      notionId: "oral",
+      microId: "5e_oral_visees",
+      text: "Que cherche à faire comprendre cette chronique ?",
+      choices: [
+        "Montrer qu'un objet ordinaire garde la trace d'un passé qu'on ne peut plus mesurer.",
+        "Apprendre à reconnaître les essences d'arbres.",
+        "Alerter sur la disparition des vieilles forêts.",
+        "Expliquer comment on abat un arbre sans danger.",
+      ],
+      expected:
+        "Montrer qu'un objet ordinaire garde la trace d'un passé qu'on ne peut plus mesurer.",
+      explanation:
+        "La chronique va d'un savoir d'enfance — compter les cercles — jusqu'à la datation d'une charpente ou d'une épave. Sa visée n'est pas botanique : elle est de faire voir un instrument de mesure là où l'on voyait un tronc.",
     },
   ],
 };
