@@ -369,11 +369,18 @@ function normalizeClasse(value: string | null): Classe {
     value === "c1" ||
     value === "eco-decouverte" ||
     value === "eco-college" ||
-    value === "eco-lycee"
+    value === "eco-lycee" ||
+    value === "pix-college" ||
+    value === "pix-lycee"
   ) {
     return value;
   }
 
+  /* ⚠️ CE REPLI EST MUET, ET IL A MORDU LE 16/08/2026. Une classe absente
+     de la liste ci-dessus ne l'est pas rejetée : elle devient « 6e », et
+     l'API répond 500 sur une combinaison qui n'existe pas (« Knowledge V4
+     introuvable pour 6e/ia »). L'élève voit « Chargement du tutor… » pour
+     toujours. Ajouter une classe au catalogue oblige à l'ajouter ICI AUSSI. */
   return "6e";
 }
 

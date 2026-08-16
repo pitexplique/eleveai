@@ -36,9 +36,9 @@ const FICHES: Record<string, Fiche> = {
       "Ser ou estar, conjugaison, vocabulaire du quotidien : le coach d'espagnol d'EleveAI t'entraîne à ton niveau, de A1 à B2, avec la correction expliquée. Gratuit, dès la 6e.",
   },
   ia: {
-    titre: "Coach d'intelligence artificielle — de A1 à C1",
+    titre: "Coach d'intelligence artificielle — préparer le Pix IA",
     description:
-      "Comprendre ce qu'est vraiment une intelligence artificielle : modèles, apprentissage, usages, limites et enjeux. Quinze notions, de la découverte au niveau avancé. Gratuit.",
+      "Comprendre ce qu'est vraiment une intelligence artificielle : modèles, apprentissage, usages, limites et enjeux. Les 16 compétences du référentiel Pix IA, du collège au lycée, avec la correction expliquée. Gratuit.",
   },
   economie: {
     titre: "Coach d'économie — découvrir, collège, lycée",

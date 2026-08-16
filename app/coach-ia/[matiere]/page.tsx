@@ -28,7 +28,12 @@ const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "
 const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
 const ECONOMIE_CLASSES: Classe[] = ["eco-decouverte", "eco-college", "eco-lycee"];
 const ESPAGNOL_CLASSES: Classe[] = ["a1", "a2", "b1", "b2"];
-const IA_CLASSES: Classe[] = ["a1", "a2", "b1", "b2", "c1"];
+/* Le coach IA est adossé au référentiel Pix depuis le 16/08/2026 : deux
+   portes, collège (paliers novice + indépendant) et lycée (avancé + expert).
+   L'échelle maison A1→C1 n'est plus proposée — son contenu reste en place le
+   temps d'être reversé, et `normalizeClasse` renvoie proprement un ancien lien
+   `?classe=a1` vers la première classe de la liste plutôt que de casser. */
+const IA_CLASSES: Classe[] = ["pix-college", "pix-lycee"];
 
 function getClassesForMatiere(matiere: Matiere): Classe[] {
   if (matiere === "francais") return FRANCAIS_READY_CLASSES;
@@ -137,6 +142,8 @@ function getClasseNavLabel(classe: Classe) {
     "terminale-spe": "Term spec",
     stmg: "STMG",
     adulte: "Adulte",
+    "pix-college": "Collège",
+    "pix-lycee": "Lycée",
     "eco-decouverte": "D�couverte",
     "eco-college": "Coll�ge",
     "eco-lycee": "Lyc�e",
@@ -146,7 +153,7 @@ function getClasseNavLabel(classe: Classe) {
 }
 
 function getClasseButtonSize(classe: Classe) {
-  if (["seconde", "premiere", "premiere-spe", "terminale-spe", "stmg", "adulte", "eco-decouverte", "eco-college", "eco-lycee"].includes(classe)) {
+  if (["seconde", "premiere", "premiere-spe", "terminale-spe", "stmg", "adulte", "eco-decouverte", "eco-college", "eco-lycee", "pix-college", "pix-lycee"].includes(classe)) {
     return "h-14 min-w-16 px-2 rounded-full text-sm leading-tight";
   }
 

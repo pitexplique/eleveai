@@ -31,6 +31,8 @@ export const CLASSE_YOUTUBE_LABEL: Record<string, string> = {
   "eco-decouverte": "découverte",
   "eco-college": "collège",
   "eco-lycee": "lycée",
+  "pix-college": "collège",
+  "pix-lycee": "lycée",
 };
 
 export const MATIERE_YOUTUBE_LABEL: Record<string, string> = {
