@@ -109,6 +109,11 @@ function applyVoice(utter: SpeechSynthesisUtterance, lang: SpeechLang) {
  *
  * @param opts.rate débit ; 1 par défaut. L'épreuve d'oral descend à 0,95 —
  *   c'est le débit d'une émission, pas d'une dictée.
+ * @param opts.onStart appelé quand le son PART VRAIMENT. Indispensable à la
+ *   dictée : `true` ci-dessous veut seulement dire « la demande est passée »,
+ *   pas « l'élève a entendu ». Une voix réseau absente reste muette sans lever
+ *   la moindre erreur (cf. `pickVoice`) — l'appelant a besoin de la différence.
+ * @param opts.onFail appelé si le moteur renonce.
  * @returns `false` si le navigateur n'a pas de synthèse vocale, pour que
  *   l'appelant puisse le dire à l'élève au lieu de le laisser devant un
  *   bouton muet.
@@ -116,7 +121,7 @@ function applyVoice(utter: SpeechSynthesisUtterance, lang: SpeechLang) {
 export function speakText(
   text: string,
   lang: SpeechLang = "fr",
-  opts?: { rate?: number },
+  opts?: { rate?: number; onStart?: () => void; onFail?: () => void },
 ): boolean {
   if (!speechAvailable()) return false;
   if (!text.trim()) return true;
@@ -126,6 +131,8 @@ export function speakText(
   utter.rate = opts?.rate ?? 1;
   utter.volume = 1;
   applyVoice(utter, lang);
+  if (opts?.onStart) utter.onstart = opts.onStart;
+  if (opts?.onFail) utter.onerror = opts.onFail;
   synth.speak(utter);
   return true;
 }

@@ -132,6 +132,9 @@ export default function DicteeDuJourPage() {
   const [showIndice, setShowIndice] = useState(false);
   const [streak, setStreak] = useState(0);
   const [dejaFait, setDejaFait] = useState(false);
+  // Le son n'est pas parti : on le dit plutôt que de laisser un bouton muet.
+  const [sonMuet, setSonMuet] = useState(false);
+  const muetTimer = useRef<number | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const { eleve } = useEleve();
   const [saving, setSaving] = useState(false);
@@ -154,6 +157,7 @@ export default function DicteeDuJourPage() {
     setShowIndice(false);
     setSaved(false);
     setSaveMsg(null);
+    setSonMuet(false);
   }
 
   useEffect(() => {
@@ -248,10 +252,33 @@ export default function DicteeDuJourPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fini]);
 
+  // « Parfois on n'entend pas le mot » (une élève, 16/08). Un mot muet est le
+  // pire cas d'une dictée : impossible de répondre, et rien ne dit pourquoi.
+  // On ne fait donc plus confiance à « la lecture a été demandée » — on attend
+  // le signal de démarrage réel, et sans lui on le DIT (avec l'indice, pour
+  // qu'elle puisse continuer quand même).
   function ecouter() {
     if (!current) return;
+    setSonMuet(false);
+    if (muetTimer.current) window.clearTimeout(muetTimer.current);
+    let parti = false;
+    const demarre = () => {
+      parti = true;
+      setSonMuet(false);
+    };
     // mp3 pré-généré (fort + correct partout) ; repli TTS si le fichier manque.
-    playMotDictee(current, () => speakText(current.mot, current.lang));
+    playMotDictee(
+      current,
+      () =>
+        speakText(current.mot, current.lang, {
+          onStart: demarre,
+          onFail: () => setSonMuet(true),
+        }) || setSonMuet(true),
+      demarre
+    );
+    muetTimer.current = window.setTimeout(() => {
+      if (!parti) setSonMuet(true);
+    }, 1800);
   }
 
   function valider() {
@@ -266,6 +293,8 @@ export default function DicteeDuJourPage() {
     setReveal(null);
     setSaisie("");
     setShowIndice(false);
+    setSonMuet(false);
+    if (muetTimer.current) window.clearTimeout(muetTimer.current);
     if (idx + 1 >= total) {
       setFini(true);
       enregistrerReussite();
@@ -398,6 +427,25 @@ export default function DicteeDuJourPage() {
         {!mots ? (
           <div className="rounded-3xl bg-white p-8 text-center text-slate-400 shadow-sm">
             Chargement…
+          </div>
+        ) : mots.length === 0 ? (
+          /* Une source sans mot (Dico d'un niveau vide, dicos éval absents)
+             renvoyait un tableau vide : la page ne rendait RIEN, écran blanc et
+             sans explication. On le dit, et on ramène à la dictée du jour. */
+          <div className="rounded-3xl border border-amber-200 bg-white p-8 text-center shadow-sm">
+            <p className="text-base font-black text-slate-700">
+              Pas encore de mots pour {labelSource(source)}.
+            </p>
+            <p className="mt-1 text-sm font-semibold text-slate-500">
+              Cette dictée arrive bientôt.
+            </p>
+            <button
+              type="button"
+              onClick={() => chargerDictee({ type: "melange" })}
+              className="mt-4 rounded-xl bg-sky-600 px-6 py-3 text-sm font-black text-white shadow-sm hover:bg-sky-700"
+            >
+              🎲 Faire la dictée du jour →
+            </button>
           </div>
         ) : fini ? (
           /* ── Écran de résultat ─────────────────────────────────────────── */
@@ -547,6 +595,21 @@ export default function DicteeDuJourPage() {
               </button>
             </div>
 
+            {/* Le son n'est pas parti : on l'annonce et on donne l'indice, pour
+                que l'élève ne reste pas bloquée devant un bouton silencieux. */}
+            {sonMuet && !reveal && (
+              <div className="mb-5 rounded-2xl bg-amber-50 px-4 py-3 text-center">
+                <p className="text-sm font-black text-amber-800">
+                  🔇 Le son n&apos;est pas parti. Réessaie en cliquant sur
+                  « Écouter le mot ».
+                </p>
+                <p className="mt-1 text-sm font-semibold text-amber-700">
+                  Si ça ne vient pas : monte le volume, ou aide-toi de
+                  l&apos;indice — 💡 {current.indice}
+                </p>
+              </div>
+            )}
+
             <input
               ref={inputRef}
               value={saisie}
@@ -554,10 +617,16 @@ export default function DicteeDuJourPage() {
               onKeyDown={(e) =>
                 e.key === "Enter" && (reveal ? suivant() : valider())
               }
-              disabled={!!reveal}
+              /* readOnly (et non disabled) : un champ désactivé ne reçoit plus
+                 aucune touche, ce qui rendait la touche Entrée inopérante après
+                 la validation — l'élève était obligé de cliquer entre chaque
+                 mot. En lecture seule, il garde le focus et Entrée enchaîne. */
+              readOnly={!!reveal}
               placeholder="Écris le mot ici…"
               aria-label="Ta réponse"
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-center text-lg font-semibold text-slate-900 outline-none focus:border-sky-500 disabled:bg-slate-50"
+              className={`w-full rounded-xl border border-slate-300 px-4 py-3 text-center text-lg font-semibold text-slate-900 outline-none focus:border-sky-500 ${
+                reveal ? "bg-slate-50" : "bg-white"
+              }`}
             />
 
             {!reveal ? (
