@@ -330,13 +330,38 @@ export type EpreuveEval = {
 
 // ─── Tirage ───────────────────────────────────────────────────────────────────
 
-/** Empreinte courte d'un énoncé — on en stocke des centaines côté navigateur. */
+/** Empreinte courte — on en stocke des centaines côté navigateur. */
 function empreinte(texte: string): string {
   let h = 0;
   for (let i = 0; i < texte.length; i += 1) {
     h = (h * 31 + texte.charCodeAt(i)) | 0;
   }
   return (h >>> 0).toString(36);
+}
+
+/**
+ * ⭐ LA CLÉ D'UNE QUESTION, C'EST SON ÉNONCÉ **ET SES PROPOSITIONS** (corrigé
+ * le 16/08).
+ *
+ * Elle ne portait que l'énoncé, et c'était juste pour la plupart des items —
+ * mais faux pour toute une famille, la plus productive de nos banques : celles
+ * dont l'énoncé est une CONSIGNE GÉNÉRIQUE et dont tout le contenu est dans
+ * les propositions. Le moteur d'accord du cycle 3 en est l'exemple parfait. Il
+ * produit des milliers de groupes nominaux — « ces jardins rouges », « les
+ * tables rouges », « mon gâteau noir » — sous un énoncé qui ne bouge jamais :
+ * « Choisis le groupe nominal correctement accordé. »
+ *
+ * Résultat, mesuré : `cm2_orth_accord_gn` ne servait que DEUX questions
+ * distinctes, et `cm1_orth_accord_gn` une seule. Toutes les autres étaient
+ * générées, puis jetées comme « déjà vues » — alors qu'un élève ne les avait
+ * jamais rencontrées. Le vivier n'était pas maigre : la clé le rendait maigre.
+ *
+ * ⚠️ LES PROPOSITIONS SONT TRIÉES AVANT D'ÊTRE HACHÉES. Elles sont mélangées à
+ * l'affichage : sans tri, la même question changerait de clé d'un tirage à
+ * l'autre, et l'anti-répétition ne servirait plus à rien du tout.
+ */
+function cleDe(texte: string, choices: readonly string[]): string {
+  return empreinte(`${texte} ${[...choices].sort().join(" ")}`);
 }
 
 function melanger<T>(liste: readonly T[]): T[] {
@@ -402,10 +427,10 @@ function materialiser(
   if (!choices.includes(expected[0])) return null;
 
   return {
-    // L'empreinte de l'ÉNONCÉ, pas de l'item : deux gabarits différents
+    // L'empreinte de la QUESTION, pas de l'item : deux gabarits différents
     // peuvent produire la même question, et c'est la question que l'élève
-    // reconnaît — pas son origine.
-    cle: empreinte(text),
+    // reconnaît — pas son origine. Énoncé ET propositions, voir `cleDe`.
+    cle: cleDe(text, choices),
     itemId: item.id,
     themeId: "",
     themeLabel: "",
@@ -447,7 +472,7 @@ function tirerTheme(
     // neuve faisait basculer tout le thème vers le repli, alors qu'un autre
     // était intact.
     const neuvesDe = (s: SupportTexte) =>
-      s.questions.filter((q) => !dejaVus.has(empreinte(q.text)));
+      s.questions.filter((q) => !dejaVus.has(cleDe(q.text, q.choices)));
     const dispos = melanger(theme.supports).sort(
       (a, b) => neuvesDe(b).length - neuvesDe(a).length,
     );
@@ -459,9 +484,9 @@ function tirerTheme(
       return melanger(neuves)
         .slice(0, theme.nbQuestions)
         .map((q) => {
-          textesDuTirage.add(q.text);
+          textesDuTirage.add(cleDe(q.text, q.choices));
           return {
-            cle: empreinte(q.text),
+            cle: cleDe(q.text, q.choices),
             itemId: `${support.id}_${q.microId}`,
             themeId: theme.id,
             themeLabel: theme.label,
@@ -643,13 +668,9 @@ function tirerTranche(
           for (let essai = 0; essai < essais; essai += 1) {
             const tire = materialiser(item, config);
             // Déjà tombé lors d'un passage précédent, ou déjà dans CETTE
-            // épreuve : deux gabarits différents peuvent produire le même
-            // énoncé. On retire — un générateur en a souvent d'autres.
-            if (
-              !tire ||
-              dejaVus.has(tire.cle) ||
-              textesDuTirage.has(tire.text)
-            ) {
+            // épreuve : deux gabarits différents peuvent produire la même
+            // question. On retire — un générateur en a souvent d'autres.
+            if (!tire || dejaVus.has(tire.cle) || textesDuTirage.has(tire.cle)) {
               continue;
             }
             candidat = tire;
@@ -663,7 +684,7 @@ function tirerTranche(
         pile.push(...recales);
         if (!retenue) continue;
 
-        textesDuTirage.add(retenue.text);
+        textesDuTirage.add(retenue.cle);
         microsPris.add(microRetenu);
         questions.push({
           ...retenue,
@@ -691,6 +712,10 @@ export function tirerEpreuve(
   const vus = new Set(dejaVus);
   // Partagé entre les thèmes : un même énoncé ne doit pas tomber deux fois
   // dans la même épreuve, fût-ce sous deux notions différentes.
+  // Les CLÉS déjà servies dans cette épreuve — énoncé + propositions, voir
+  // `cleDe`. Le nom parle de textes pour des raisons d'histoire ; il porte des
+  // clés depuis le 16/08, sans quoi deux accords différents sous la même
+  // consigne se seraient chassés l'un l'autre.
   const textesDuTirage = new Set<string>();
   const questions = config.themes
     .flatMap((theme) => tirerTheme(theme, config, vus, textesDuTirage))
