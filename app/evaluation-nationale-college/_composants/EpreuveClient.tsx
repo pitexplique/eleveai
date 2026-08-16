@@ -7,6 +7,7 @@ import { CanvasRenderer } from "@/lib/canvas";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
+import { speakText, stopSpeak } from "@/app/tutor-v4/ListenButton";
 
 import {
   GROUPES,
@@ -447,21 +448,49 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
     }
   }, [supportOral, supportEcoute]);
 
+  /**
+   * ⛔ ON COUPE LA VOIX QUAND ON QUITTE L'ENREGISTREMENT (16/08).
+   *
+   * Rien ne l'arrêtait. Un élève qui valide pendant la lecture emportait la
+   * voix avec lui : elle continuait par-dessus la question suivante, et
+   * jusque sur le bilan. Pire, elle mangeait une écoute du support suivant
+   * sans que personne ne l'ait demandée. La synthèse vocale vit hors de
+   * React — si on ne l'arrête pas, elle ne s'arrête pas.
+   */
+  const titreOral = supportOral?.titre ?? null;
+  useEffect(() => {
+    return () => stopSpeak();
+  }, [titreOral]);
+  useEffect(() => {
+    if (etape !== "epreuve") stopSpeak();
+  }, [etape]);
+
   const ecoutesRestantes = supportOral
     ? Math.max(0, (supportOral.oral?.ecoutes ?? 0) - ecoutesFaites)
     : 0;
 
+  /**
+   * ⭐ ON PASSE PAR `speakText`, ET CE N'EST PAS COSMÉTIQUE (16/08).
+   *
+   * L'épreuve fabriquait son utterance à la main : `lang = "fr-FR"`, et rien
+   * d'autre. Elle laissait donc le navigateur choisir la voix — or `ListenButton`
+   * a appris à ne pas la laisser faire, et le commentaire y est explicite :
+   * les voix « en ligne » peuvent rester MUETTES. C'est ce qui avait donné
+   * « anglais muet, espagnol OK » dans le coach. Une épreuve de compréhension
+   * de l'oral qui ne joue rien ne rend pas un mauvais score : elle rend un
+   * domaine entier faussé, et l'élève ne peut même pas savoir pourquoi.
+   *
+   * `speakText` préfère une voix LOCALE française, pose le volume au maximum,
+   * et dit si le navigateur n'a pas de synthèse du tout.
+   */
   function ecouter() {
     if (!supportOral || ecoutesRestantes <= 0) return;
-    if (typeof window === "undefined" || !window.speechSynthesis) {
+    // 0,95 : le débit d'une émission, pas d'une dictée.
+    const aParle = speakText(supportOral.texte, "fr", { rate: 0.95 });
+    if (!aParle) {
       setSansVoix(true);
       return;
     }
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(supportOral.texte);
-    u.lang = "fr-FR";
-    u.rate = 0.95; // débit d'une émission, pas d'une dictée
-    window.speechSynthesis.speak(u);
     setEcoutesFaites((n) => n + 1);
   }
 

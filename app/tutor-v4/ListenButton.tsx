@@ -98,15 +98,36 @@ function applyVoice(utter: SpeechSynthesisUtterance, lang: SpeechLang) {
   if (voice) utter.voice = voice;
 }
 
-/** Lit un texte dans la langue donnée (français par défaut). Annule la lecture en cours. */
-export function speakText(text: string, lang: SpeechLang = "fr") {
-  if (!speechAvailable() || !text.trim()) return;
+/**
+ * Lit un texte dans la langue donnée (français par défaut). Annule la lecture
+ * en cours.
+ *
+ * ⭐ LE VOLUME EST POSÉ À FOND, EXPLICITEMENT (Frédéric, 16/08, avant de
+ * tester la compréhension de l'oral). La spécification dit bien que `volume`
+ * vaut 1 par défaut, mais on ne teste pas une épreuve d'écoute sur une valeur
+ * qu'on n'a pas écrite : un défaut se lit dans le code, pas dans une norme.
+ *
+ * @param opts.rate débit ; 1 par défaut. L'épreuve d'oral descend à 0,95 —
+ *   c'est le débit d'une émission, pas d'une dictée.
+ * @returns `false` si le navigateur n'a pas de synthèse vocale, pour que
+ *   l'appelant puisse le dire à l'élève au lieu de le laisser devant un
+ *   bouton muet.
+ */
+export function speakText(
+  text: string,
+  lang: SpeechLang = "fr",
+  opts?: { rate?: number },
+): boolean {
+  if (!speechAvailable()) return false;
+  if (!text.trim()) return true;
   const synth = window.speechSynthesis;
   synth.cancel();
   const utter = new SpeechSynthesisUtterance(text);
-  utter.rate = 1;
+  utter.rate = opts?.rate ?? 1;
+  utter.volume = 1;
   applyVoice(utter, lang);
   synth.speak(utter);
+  return true;
 }
 
 export function stopSpeak() {
