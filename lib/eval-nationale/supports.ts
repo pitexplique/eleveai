@@ -936,6 +936,50 @@ Alors que faire ? Les spécialistes disent tous la même chose : ce qui calme la
       explanation:
         "Le texte oppose les deux : « ce n'est pas de l'éviter, c'est d'y aller petit à petit ». Quand on entend « ce n'est pas… c'est… », la bonne réponse est toujours dans la seconde partie.",
     },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Quels signes du corps l'émission cite-t-elle quand la peur se déclenche ?",
+      choices: [
+        "le cœur qui bat plus vite, les muscles tendus, la respiration courte",
+        "les yeux qui piquent et la gorge sèche",
+        "des vertiges et une envie de dormir",
+        "de la fièvre et des frissons",
+      ],
+      expected:
+        "le cœur qui bat plus vite, les muscles tendus, la respiration courte",
+      explanation:
+        "Trois signes, énoncés d'affilée. À l'oral, une énumération est une prise pour la mémoire : on retient qu'il y en avait trois, et on les récupère ensemble.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_presenter",
+      text: "L'émission appelle la peur « une alarme ». Pourquoi ce mot convient-il ?",
+      choices: [
+        "Parce qu'elle prévient d'un danger, et qu'elle peut se déclencher à tort.",
+        "Parce qu'elle fait beaucoup de bruit.",
+        "Parce qu'on peut l'éteindre quand on veut.",
+        "Parce qu'elle ne sert qu'aux adultes.",
+      ],
+      expected:
+        "Parce qu'elle prévient d'un danger, et qu'elle peut se déclencher à tort.",
+      explanation:
+        "Une image bien choisie porte les deux moitiés du propos : une alarme protège, et une alarme sonne parfois pour rien. C'est exactement le plan de l'émission — d'abord l'utilité, ensuite le faux déclenchement.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_debat",
+      text: "Sur quoi l'émission s'appuie-t-elle pour affirmer que la peur est utile ?",
+      choices: [
+        "Sans elle, nos ancêtres n'auraient pas survécu longtemps.",
+        "Les médecins la prescrivent à leurs patients.",
+        "Elle permet de mieux dormir la nuit.",
+        "Elle rend les exposés plus faciles à réussir.",
+      ],
+      expected: "Sans elle, nos ancêtres n'auraient pas survécu longtemps.",
+      explanation:
+        "Une affirmation seule ne vaut rien ; celle-ci est adossée à un argument. Repérer sur quoi quelqu'un s'appuie, c'est ce qui permet ensuite d'être d'accord — ou pas — pour de bonnes raisons.",
+    },
   ],
 };
 
@@ -1034,6 +1078,44 @@ Voilà pourquoi la mer est salée. Ce n'est pas parce qu'on y a versé du sel. C
         "Le sel arrive sans arrêt par les fleuves, et rien ne le fait repartir.",
       explanation:
         "Justifier, c'est retrouver les deux raisons qui tiennent ensemble : une entrée permanente, aucune sortie. L'une sans l'autre n'expliquerait rien.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Quand le soleil chauffe la mer, qu'est-ce qui remonte en nuages ?",
+      choices: ["l'eau seulement", "l'eau et le sel", "le sel seulement", "rien du tout"],
+      expected: "l'eau seulement",
+      explanation:
+        "C'est le cœur de l'explication, et il tient en une phrase : « le sel, lui, ne s'évapore pas ». Le mot « lui » sert à marquer l'opposition — tout le reste part, celui-là reste.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Quel chemin le sel suit-il, d'après l'émission ?",
+      choices: [
+        "les roches, puis les rivières, puis les fleuves, puis la mer",
+        "les nuages, puis la pluie, puis la mer",
+        "la mer, puis les fleuves, puis les roches",
+        "le sable des plages, puis la mer",
+      ],
+      expected: "les roches, puis les rivières, puis les fleuves, puis la mer",
+      explanation:
+        "L'émission déroule un trajet dans l'ordre, et l'ordre fait le sens : le sel part du sol et finit dans la mer, jamais l'inverse. À l'oral, suivre un cheminement, c'est retenir un sens de circulation.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_debat",
+      text: "Pourquoi l'émission parle-t-elle des rivières avant d'expliquer la mer ?",
+      choices: [
+        "Pour montrer que ce qui compte, c'est de rester au lieu de passer.",
+        "Pour dire que les rivières sont plus longues que la mer.",
+        "Pour expliquer que l'eau des rivières est meilleure à boire.",
+        "Parce que les rivières contiennent plus de sel que la mer.",
+      ],
+      expected:
+        "Pour montrer que ce qui compte, c'est de rester au lieu de passer.",
+      explanation:
+        "L'émission pose elle-même l'objection — « si les rivières transportent du sel, pourquoi ne sont-elles pas salées ? » — pour y répondre. Un bon raisonnement va au-devant de la question qu'on allait lui poser.",
     },
   ],
 };
@@ -2113,6 +2195,49 @@ C'est pour cela qu'à La Réunion, l'éruption est presque toujours annoncée av
       explanation:
         "La dernière phrase ne s'explique pas toute seule : elle découle du paragraphe d'avant. À l'oral, une conclusion renvoie presque toujours à ce qui vient d'être dit.",
     },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_debat",
+      text: "Pourquoi l'émission affirme-t-elle que ce n'est pas de la fumée ?",
+      choices: [
+        "Parce que la fumée vient de quelque chose qui brûle, et que le volcan ne brûle pas.",
+        "Parce que la fumée est toujours noire.",
+        "Parce qu'on ne sent aucune odeur près du volcan.",
+        "Parce que les scientifiques n'ont rien détecté.",
+      ],
+      expected:
+        "Parce que la fumée vient de quelque chose qui brûle, et que le volcan ne brûle pas.",
+      explanation:
+        "L'émission ne se contente pas de corriger : elle définit d'abord le mot « fumée », puis montre que la définition ne s'applique pas. Pour défaire une idée reçue, il faut souvent commencer par dire ce que le mot veut dire.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_presenter",
+      text: "L'émission parle d'un « panache blanc ». De quoi s'agit-il ?",
+      choices: [
+        "de la colonne de vapeur qui s'élève au-dessus du volcan",
+        "de la couche de neige au sommet",
+        "d'une coulée de lave refroidie",
+        "d'un nuage annonçant la pluie",
+      ],
+      expected: "de la colonne de vapeur qui s'élève au-dessus du volcan",
+      explanation:
+        "Le mot est employé deux fois, et à chaque fois pour désigner ce qu'on voit monter. À l'oral, un mot précis se comprend par la place qu'il occupe : ici, il remplace « ce qu'on voit monter » dès la deuxième phrase.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Les scientifiques surveillent le panache. Pour quelle raison exactement ?",
+      choices: [
+        "pour les gaz qu'il contient, pas pour sa quantité",
+        "pour sa quantité, qui augmente avant une éruption",
+        "pour sa couleur, qui change avec la chaleur",
+        "pour sa hauteur, qu'ils mesurent chaque jour",
+      ],
+      expected: "pour les gaz qu'il contient, pas pour sa quantité",
+      explanation:
+        "L'émission prend soin d'écarter la mauvaise réponse avant de donner la bonne : « pas pour sa quantité, mais pour ce qu'il contient ». Écouter, c'est aussi entendre ce qu'on vient de vous dire d'oublier.",
+    },
   ],
 };
 
@@ -2203,6 +2328,44 @@ Et il y a une chose que les dictionnaires ne font pas : ils ne décident pas. Il
       explanation:
         "La phrase est expliquée juste après : ils inscrivent un mot « parfois des années après que tout le monde l'utilise ». L'explication suit l'affirmation.",
     },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Quelles sont les trois façons de fabriquer un mot nouveau, d'après l'émission ?",
+      choices: [
+        "coller deux mots, ajouter un morceau devant ou derrière, emprunter à une autre langue",
+        "inventer des sons, chanter, écrire un poème",
+        "consulter le dictionnaire, demander à un professeur, voter",
+        "traduire, résumer, expliquer",
+      ],
+      expected:
+        "coller deux mots, ajouter un morceau devant ou derrière, emprunter à une autre langue",
+      explanation:
+        "L'émission annonce « le plus souvent » puis énumère trois procédés. Quand on entend une liste à l'oral, il vaut mieux retenir combien il y avait d'éléments : le compte aide ensuite à ne pas en oublier.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Quel exemple de mot formé en ajoutant un petit morceau devant a été donné ?",
+      choices: ["recommencer", "porte-monnaie", "dictionnaire", "plaisanterie"],
+      expected: "recommencer",
+      explanation:
+        "Attention au piège : « porte-monnaie » est bien un exemple de l'émission, mais il illustre l'autre procédé, celui des deux mots collés. Retenir un exemple, c'est retenir ce qu'il illustre.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_debat",
+      text: "Qu'est-ce qui fait la différence entre une plaisanterie entre amis et un mot de la langue ?",
+      choices: [
+        "Le nombre de gens qui le reprennent et l'emploient.",
+        "La longueur du mot inventé.",
+        "L'âge de la personne qui l'a inventé.",
+        "L'accord d'un professeur de français.",
+      ],
+      expected: "Le nombre de gens qui le reprennent et l'emploient.",
+      explanation:
+        "C'est le point où l'émission s'arrête le plus longtemps : « inventer ne suffit pas ». Un mot n'appartient à personne — il devient réel au moment où d'autres s'en servent.",
+    },
   ],
 };
 
@@ -2292,6 +2455,51 @@ Alors la prochaine fois que tu t'ennuies, tu peux te dire une chose : ce moment 
       expected: "parce que c'est peut-être là qu'on invente quelque chose",
       explanation:
         "La conclusion reprend tout ce qui précède : l'expérience, puis l'explication. Une fin d'émission ne dit presque jamais quelque chose de neuf.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "D'après l'émission, quelle différence y a-t-il entre s'ennuyer et être triste ?",
+      choices: [
+        "S'ennuyer, c'est être sans rien à faire ; ce n'est pas la même chose qu'être triste.",
+        "S'ennuyer, c'est une forme de tristesse plus légère.",
+        "S'ennuyer, c'est être triste sans savoir pourquoi.",
+        "L'émission dit que c'est exactement pareil.",
+      ],
+      expected:
+        "S'ennuyer, c'est être sans rien à faire ; ce n'est pas la même chose qu'être triste.",
+      explanation:
+        "L'émission commence par écarter une confusion — « ce n'est pas être triste » — avant de définir. Beaucoup d'explications débutent ainsi : on dit d'abord ce que le mot n'est pas.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Comment l'expérience racontée était-elle organisée ?",
+      choices: [
+        "Deux groupes d'enfants, l'un avec des jeux et des écrans, l'autre sans rien.",
+        "Un seul groupe d'enfants observé pendant un an.",
+        "Des adultes comparés à des enfants du même quartier.",
+        "Des enfants interrogés sur ce qu'ils préfèrent faire.",
+      ],
+      expected:
+        "Deux groupes d'enfants, l'un avec des jeux et des écrans, l'autre sans rien.",
+      explanation:
+        "Deux groupes qui ne diffèrent que sur un point : c'est ce qui fait une expérience. Sans le second groupe, on n'aurait rien eu à quoi comparer, et le résultat n'aurait rien prouvé.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_debat",
+      text: "Pourquoi le résultat de cette expérience est-il convaincant ?",
+      choices: [
+        "Parce que les deux groupes ont fait la même tâche, et que seuls leurs moments d'avant différaient.",
+        "Parce que beaucoup d'enfants y ont participé.",
+        "Parce que ce sont des chercheurs qui l'ont menée.",
+        "Parce que les enfants ont dit qu'ils préféraient s'ennuyer.",
+      ],
+      expected:
+        "Parce que les deux groupes ont fait la même tâche, et que seuls leurs moments d'avant différaient.",
+      explanation:
+        "Ce n'est ni le nombre d'enfants ni le titre des chercheurs qui rend une expérience solide : c'est qu'une seule chose change entre les deux groupes. Alors, et alors seulement, la différence de résultat s'explique par elle.",
     },
   ],
 };
@@ -2654,6 +2862,50 @@ Cela ne veut pas dire qu'il faut se baigner n'importe où. Cela veut dire que la
       explanation:
         "C'est la dernière phrase, et c'est la conclusion de tout le raisonnement. À l'oral, la fin porte souvent l'idée à retenir.",
     },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Combien de personnes les moustiques tuent-ils chaque année, d'après l'émission ?",
+      choices: [
+        "plusieurs centaines de milliers",
+        "une dizaine",
+        "environ mille",
+        "l'émission ne le dit pas",
+      ],
+      expected: "plusieurs centaines de milliers",
+      explanation:
+        "Deux chiffres circulent dans cette émission, et tout le raisonnement tient dans leur écart. Les confondre, c'est perdre l'argument : une dizaine, ce sont les requins.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_debat",
+      text: "Pourquoi l'émission choisit-elle justement le moustique pour comparer ?",
+      choices: [
+        "Parce qu'il tue beaucoup plus, alors que personne n'en a peur.",
+        "Parce qu'il vit dans l'eau comme le requin.",
+        "Parce qu'il est le seul autre animal dangereux.",
+        "Parce qu'il est facile à observer.",
+      ],
+      expected:
+        "Parce qu'il tue beaucoup plus, alors que personne n'en a peur.",
+      explanation:
+        "Une comparaison n'est jamais neutre : celle-ci est choisie parce qu'elle renverse l'intuition. Le plus dangereux est celui qu'on ne craint pas — c'est ce contraste qui démontre que la peur ne suit pas les chiffres.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_presenter",
+      text: "L'émission dit que notre peur « se règle sur les images ». Que veut dire cette expression ?",
+      choices: [
+        "Ce sont nos représentations, pas les faits, qui commandent notre peur.",
+        "Nous avons peur à cause des photographies dans les journaux.",
+        "Nous ne pouvons avoir peur que de ce que nous voyons.",
+        "Les images du fond de la mer sont effrayantes.",
+      ],
+      expected:
+        "Ce sont nos représentations, pas les faits, qui commandent notre peur.",
+      explanation:
+        "Le mot « image » n'a pas ici son sens de photographie : il désigne ce qu'on se figure. L'émission l'oppose explicitement aux chiffres — « notre peur ne se règle pas sur les chiffres, elle se règle sur les images ».",
+    },
   ],
 };
 
@@ -2748,6 +3000,49 @@ L'explication tient en peu de mots. La fourmi compte ses pas. Avec des pattes pl
       explanation:
         "L'émission ne remplace pas une explication par l'autre : elle en ajoute une seconde. Le résumé doit garder les deux.",
     },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Comment la trace odorante devient-elle plus forte ?",
+      choices: [
+        "quand beaucoup de fourmis passent dessus",
+        "quand il fait très chaud",
+        "quand la nourriture est plus grosse",
+        "quand la pluie tombe",
+      ],
+      expected: "quand beaucoup de fourmis passent dessus",
+      explanation:
+        "« Plus elles sont nombreuses à passer, plus l'odeur se renforce. » C'est une construction en « plus… plus… » : elle relie deux quantités qui augmentent ensemble, et elle porte toute l'information.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Que s'est-il passé pour les fourmis à qui on avait collé des échasses ?",
+      choices: [
+        "Elles ont dépassé leur nid et se sont arrêtées trop loin.",
+        "Elles se sont arrêtées avant d'arriver au nid.",
+        "Elles ont tourné en rond sans avancer.",
+        "Elles sont rentrées exactement comme les autres.",
+      ],
+      expected: "Elles ont dépassé leur nid et se sont arrêtées trop loin.",
+      explanation:
+        "Le sens de l'erreur est le cœur de la démonstration : trop loin, et non trop près. Des pattes plus longues font des pas plus grands — donc, à nombre de pas égal, on va au-delà.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_debat",
+      text: "Pourquoi cette expérience prouve-t-elle que la fourmi compte ses pas ?",
+      choices: [
+        "Parce qu'en changeant seulement la longueur du pas, on décale exactement le point d'arrivée.",
+        "Parce que les fourmis du désert ne sentent aucune odeur.",
+        "Parce que les chercheurs ont vu les fourmis s'arrêter pour compter.",
+        "Parce que les fourmis à échasses marchaient plus vite.",
+      ],
+      expected:
+        "Parce qu'en changeant seulement la longueur du pas, on décale exactement le point d'arrivée.",
+      explanation:
+        "C'est une preuve par la conséquence : si la fourmi comptait autre chose que ses pas, allonger ses pattes n'aurait rien changé. L'erreur produite est la signature de la méthode employée.",
+    },
   ],
 };
 
@@ -2832,6 +3127,49 @@ Autrement dit, ce n'est pas ta mémoire qu'il faut changer. C'est le moment où 
       expected: "il vaut mieux répartir son travail sur plusieurs jours",
       explanation:
         "La formule reprend le paragraphe précédent : le cerveau « compte les retours », pas le temps passé. Une conclusion imagée renvoie à ce qui vient d'être expliqué.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Depuis quand ce phénomène a-t-il été mesuré, d'après l'émission ?",
+      choices: [
+        "depuis plus de cent ans",
+        "depuis l'année dernière",
+        "depuis une dizaine d'années",
+        "l'émission ne le dit pas",
+      ],
+      expected: "depuis plus de cent ans",
+      explanation:
+        "Le détail n'est pas décoratif : il sert à dire que ce n'est pas une nouveauté ni une opinion. Une information ancienne et vérifiée depuis longtemps se conteste moins facilement.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Entre relire dix fois le soir et revoir trois fois à trois jours d'écart, que dit l'émission ?",
+      choices: [
+        "Trois fois à trois jours d'écart sert beaucoup plus.",
+        "Dix fois le soir sert beaucoup plus.",
+        "Les deux méthodes se valent.",
+        "Aucune des deux ne fonctionne.",
+      ],
+      expected: "Trois fois à trois jours d'écart sert beaucoup plus.",
+      explanation:
+        "Le résultat est contre-intuitif : moins de répétitions, mais espacées, valent mieux que davantage d'un coup. L'émission prévient d'ailleurs que « ce n'est pas celui qu'on croit ».",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_debat",
+      text: "Pourquoi l'émission parle-t-elle de la couleur d'une voiture croisée le matin ?",
+      choices: [
+        "Pour montrer qu'oublier est utile, sinon le cerveau garderait tout.",
+        "Pour dire qu'on retient mieux les couleurs que les leçons.",
+        "Pour expliquer que les trajets fatiguent la mémoire.",
+        "Pour donner un exemple de chose qu'il faut réviser.",
+      ],
+      expected:
+        "Pour montrer qu'oublier est utile, sinon le cerveau garderait tout.",
+      explanation:
+        "L'exemple est volontairement dérisoire, et c'est ce qui le rend efficace : personne ne veut se souvenir de cela. Il retourne l'oubli, qu'on prenait pour un défaut, en fonction nécessaire.",
     },
   ],
 };
@@ -2921,6 +3259,49 @@ Une plaque de rue, ce n'est donc pas seulement une adresse. C'est aussi ce qu'un
       expected: "les noms de rues disent ce qu'une ville juge important",
       explanation:
         "La phrase élargit le propos : d'une question pratique — l'adresse — on passe à une question de mémoire. C'est la conclusion du raisonnement.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Dans la commune, qui vote le nom d'une rue ?",
+      choices: [
+        "le conseil municipal",
+        "les habitants de la rue",
+        "le préfet du département",
+        "les services de la poste",
+      ],
+      expected: "le conseil municipal",
+      explanation:
+        "L'émission donne deux niveaux dans la même phrase : la commune décide, et à l'intérieur de la commune, c'est le conseil municipal qui vote. La réponse précise est le second.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "« Rue des Pêcheurs », « rue de la Forge » : de quelle source ces noms viennent-ils ?",
+      choices: [
+        "du métier qu'on exerçait dans la rue",
+        "du paysage qui entourait la rue",
+        "d'une personne qu'on a voulu honorer",
+        "du nom de la commune elle-même",
+      ],
+      expected: "du métier qu'on exerçait dans la rue",
+      explanation:
+        "Trois sources ont été citées, chacune avec ses exemples. Ici, un pêcheur et un forgeron sont des métiers — « rue du Ravin » et « chemin des Manguiers », eux, relevaient du paysage.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_debat",
+      text: "Pourquoi les rues qui portent un nom de personne font-elles parfois débat ?",
+      choices: [
+        "Parce que donner un nom, c'est dire que cette personne compte pour tous.",
+        "Parce que ces noms sont plus difficiles à écrire.",
+        "Parce que les habitants doivent changer d'adresse.",
+        "Parce que les personnes honorées sont souvent inconnues.",
+      ],
+      expected:
+        "Parce que donner un nom, c'est dire que cette personne compte pour tous.",
+      explanation:
+        "L'émission remonte du geste à son sens : une plaque n'est pas seulement pratique, elle engage toute une ville. C'est parce qu'elle affirme quelque chose qu'elle peut être discutée quand le regard change.",
     },
   ],
 };
@@ -3013,6 +3394,50 @@ Cette histoire dit deux choses. Que mentir demande de se représenter ce que pen
         "mentir demande de se représenter ce que pense l'autre, et un mensonge répété se retourne contre son auteur",
       explanation:
         "L'émission annonce elle-même « cette histoire dit deux choses ». Quand un texte annonce un nombre, il faut retrouver les deux.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Que porte le papillon sur ses ailes, d'après l'émission ?",
+      choices: [
+        "deux dessins qui ressemblent à des yeux de hibou",
+        "des taches qui imitent une fleur",
+        "des rayures de couleur vive",
+        "une odeur qui éloigne les oiseaux",
+      ],
+      expected: "deux dessins qui ressemblent à des yeux de hibou",
+      explanation:
+        "Le détail compte parce qu'il montre comment la tromperie fonctionne : ce n'est pas n'importe quel dessin, c'est celui d'un prédateur. Le papillon n'a rien décidé — son espèce porte ce motif depuis toujours.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_ecouter",
+      text: "Que fait l'oiseau cité dans l'émission pour protéger son nid ?",
+      choices: [
+        "Il fait semblant d'avoir une aile cassée pour éloigner le prédateur.",
+        "Il imite le cri d'un rapace.",
+        "Il recouvre son nid de branches.",
+        "Il attaque le prédateur en piqué.",
+      ],
+      expected:
+        "Il fait semblant d'avoir une aile cassée pour éloigner le prédateur.",
+      explanation:
+        "L'oiseau se rend volontairement plus attirant qu'il ne l'est, pour que le danger le suive plutôt que d'aller au nid. C'est une tromperie très élaborée — et pourtant, dit l'émission, ce n'est pas encore un mensonge.",
+    },
+    {
+      notionId: "oral",
+      microId: "cm2_oral_debat",
+      text: "Pourquoi le papillon et l'oiseau ne mentent-ils pas, alors que le capucin, si ?",
+      choices: [
+        "Parce qu'ils ne choisissent pas : ils font ce que leur espèce fait.",
+        "Parce qu'ils sont plus petits que le singe.",
+        "Parce qu'ils ne trompent que des prédateurs, pas les leurs.",
+        "Parce qu'ils ne recommencent jamais deux fois.",
+      ],
+      expected:
+        "Parce qu'ils ne choisissent pas : ils font ce que leur espèce fait.",
+      explanation:
+        "Toute l'émission tient sur cette frontière : tromper, c'est produire un effet ; mentir, c'est vouloir cet effet en sachant ce que l'autre va croire. Le capucin sait que son cri sera pris pour vrai — le papillon ne sait rien.",
     },
   ],
 };
