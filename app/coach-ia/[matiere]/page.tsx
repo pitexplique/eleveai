@@ -376,9 +376,17 @@ export default function CoachIA() {
             arrive en bout de course ; `shrink-0` empêche les pastilles de
             s'écraser au lieu de créer le débordement. Pastilles et espacements
             resserrés au passage, pour que la plupart des écrans n'aient plus
-            du tout à défiler. */}
+            du tout à défiler.
+
+            ET IL FAUT QUE ÇA SE VOIE. La colonne déborde en dessous de ~1065 px
+            de fenêtre, c'est-à-dire sur presque tous les portables : un
+            ascenseur qui n'apparaît qu'au survol (le réglage par défaut de
+            Windows et de macOS) laisse croire qu'il n'y a rien de plus bas —
+            exactement le malentendu qu'on vient de corriger. `scrollbar-color`
+            force un ascenseur permanent, `scrollbar-width:thin` le garde
+            discret : on VOIT qu'il reste des classes plus bas. */}
         <aside
-          className="sticky hidden w-28 shrink-0 overflow-y-auto overscroll-contain border-r border-slate-200 bg-white md:flex md:flex-col md:items-center md:gap-2 md:py-4"
+          className="sticky hidden w-28 shrink-0 overflow-y-auto overscroll-contain border-r border-slate-200 bg-white [scrollbar-color:theme(colors.slate.300)_transparent] [scrollbar-width:thin] md:flex md:flex-col md:items-center md:gap-2 md:py-4"
           style={{
             top: hauteurHeader,
             height: `calc(100dvh - ${hauteurHeader}px)`,
