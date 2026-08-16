@@ -81,6 +81,18 @@ type Contexte = {
   individu: string;
 };
 
+/**
+ * « de » élidé devant une voyelle.
+ *
+ * Le nom des individus vient du réservoir ci-dessous et s'insère dans des
+ * phrases figées : « Combien de {individu} … ». Avec « abonnés », cela
+ * produisait « Combien de abonnés ». Aucun des cinq vérificateurs ne lit la
+ * langue — c'est la lecture à la main qui l'a trouvé.
+ */
+function de(nom: string): string {
+  return /^[aeiouyéèêàâîôûAEIOU]/.test(nom) ? `d'${nom}` : `de ${nom}`;
+}
+
 const CONTEXTES: readonly Contexte[] = [
   {
     sujet: "Contrôle qualité à la réception",
@@ -224,7 +236,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const k = pick(cases);
       return {
         text:
-          `Combien de ${t.ctx.individu} relèvent à la fois de « ${t.ctx.lignes[k.i]} » ` +
+          `Combien ${de(t.ctx.individu)} relèvent à la fois de « ${t.ctx.lignes[k.i]} » ` +
           `et de « ${t.ctx.colonnes[k.j]} » ?`,
         format: "short",
         expected: [String(k.val)],
@@ -271,7 +283,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       return {
         text:
           `Le tableau est donné SANS ses marges. ` +
-          `Combien de ${t.ctx.individu} relèvent de ${libelle} ?`,
+          `Combien ${de(t.ctx.individu)} relèvent de ${libelle} ?`,
         format: "short",
         expected: [String(valeur)],
         comparator: "number_equal",
@@ -352,7 +364,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
           `Une étude porte sur $${t.total}$ ${t.ctx.individu}. ` +
           `$${t.ligne1}$ relèvent de « ${t.ctx.lignes[0]} », et parmi ceux-là $${t.a}$ relèvent de « ${t.ctx.colonnes[0]} ». ` +
           `Par ailleurs, $${t.col1}$ ${t.ctx.individu} au total relèvent de « ${t.ctx.colonnes[0]} ». ` +
-          `Combien de ${t.ctx.individu} relèvent à la fois de « ${t.ctx.lignes[1]} » et de « ${t.ctx.colonnes[1]} » ?`,
+          `Combien ${de(t.ctx.individu)} relèvent à la fois de « ${t.ctx.lignes[1]} » et de « ${t.ctx.colonnes[1]} » ?`,
         format: "short",
         expected: [String(t.d)],
         comparator: "number_equal",
@@ -470,14 +482,20 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
     hint: "Une fréquence conditionnelle appliquée à sa population de référence redonne un effectif.",
     tags: ["stmg", "maths", "donnees", "canvas", "template", "short"],
     generate: () => {
-      // On part d'un pourcentage rond pour que l'effectif retrouvé soit entier.
+      // ⚠️ Un pourcentage rond NE SUFFIT PAS à rendre l'effectif entier : sur
+      // une ligne de 475, 25 % font 118,75 — et la question demande « combien
+      // cela représente-t-il d'abonnés ». Les fractions réduites des taux
+      // employés sont /2, /4 et /5 : une ligne multiple de 20 les absorbe
+      // toutes, donc l'effectif retrouvé est toujours un entier.
       const ctx = pick(CONTEXTES);
-      const ligne1 = randomInt(4, 20) * 25;
-      const ligne2 = randomInt(4, 20) * 25;
+      const ligne1 = randomInt(5, 25) * 20;
+      const ligne2 = randomInt(5, 25) * 20;
       const p1 = pick([20, 25, 40, 50, 60, 75, 80] as const);
       const a = (ligne1 * p1) / 100;
       const b = ligne1 - a;
-      const c = randomInt(2, 15) * 10;
+      // c se tire DANS ligne2 : tiré indépendamment, il la dépassait et le
+      // tableau affichait un effectif négatif.
+      const c = randomInt(1, Math.floor(ligne2 / 10) - 1) * 10;
       const d = ligne2 - c;
       const t: Tableau = {
         ctx,
@@ -495,7 +513,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
         text:
           `Le tableau est incomplet. On sait que, parmi les ${ctx.individu} relevant de « ${ctx.lignes[0]} », ` +
           `$${p1}\\,\\%$ relèvent de « ${ctx.colonnes[0]} ». ` +
-          `Combien cela représente-t-il de ${ctx.individu} ?`,
+          `Combien cela représente-t-il ${de(ctx.individu)} ?`,
         format: "short",
         expected: [String(a)],
         comparator: "number_equal",
@@ -588,7 +606,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const libelle =
         quoi === "ligne1" ? t.ctx.lignes[0] : quoi === "ligne2" ? t.ctx.lignes[1] : quoi === "col1" ? t.ctx.colonnes[0] : t.ctx.colonnes[1];
       return {
-        text: `Combien de ${t.ctx.individu} le filtre « ${libelle} » sélectionne-t-il ?`,
+        text: `Combien ${de(t.ctx.individu)} le filtre « ${libelle} » sélectionne-t-il ?`,
         format: "short",
         expected: [String(eff)],
         comparator: "number_equal",
@@ -623,7 +641,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const valeur = i === 0 ? (j === 0 ? t.a : t.b) : j === 0 ? t.c : t.d;
       return {
         text:
-          `Combien de ${t.ctx.individu} le filtre « ${t.ctx.lignes[i]} » ET « ${t.ctx.colonnes[j]} » sélectionne-t-il ?`,
+          `Combien ${de(t.ctx.individu)} le filtre « ${t.ctx.lignes[i]} » ET « ${t.ctx.colonnes[j]} » sélectionne-t-il ?`,
         format: "short",
         expected: [String(valeur)],
         comparator: "number_equal",
@@ -661,7 +679,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const valeur = ligne + colonne - inter;
       return {
         text:
-          `Combien de ${t.ctx.individu} le filtre « ${t.ctx.lignes[i]} » OU « ${t.ctx.colonnes[j]} » sélectionne-t-il ? ` +
+          `Combien ${de(t.ctx.individu)} le filtre « ${t.ctx.lignes[i]} » OU « ${t.ctx.colonnes[j]} » sélectionne-t-il ? ` +
           `(le « ou » mathématique n'est pas exclusif)`,
         format: "short",
         expected: [String(valeur)],
@@ -698,7 +716,7 @@ export const donneesCroiseesBank: TutorBankItemV4[] = [
       const libelle =
         quoi === "ligne1" ? t.ctx.lignes[0] : quoi === "ligne2" ? t.ctx.lignes[1] : quoi === "col1" ? t.ctx.colonnes[0] : t.ctx.colonnes[1];
       return {
-        text: `Combien de ${t.ctx.individu} le filtre NON « ${libelle} » sélectionne-t-il ?`,
+        text: `Combien ${de(t.ctx.individu)} le filtre NON « ${libelle} » sélectionne-t-il ?`,
         format: "short",
         expected: [String(t.total - eff)],
         comparator: "number_equal",

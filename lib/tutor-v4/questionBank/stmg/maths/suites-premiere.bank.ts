@@ -544,12 +544,15 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           `Une suite est définie pour tout entier $n$ par $u(n) = ${a}n + ${b}$. ` +
           `Explique comment démontrer qu'elle est arithmétique, et donne sa raison.`,
         format: "open",
+        // ⛔ La raison nue (`${a}`, un seul chiffre) ne peut pas être un
+        // mot-clé : `contains_keyword` valide sur la sous-chaîne, et le nombre
+        // FIGURE DÉJÀ dans l'énoncé — recopier « u(n) = 9n + 1 » suffirait à
+        // valider sans avoir rien démontré. La démarche seule est attendue.
         expected: [
           "u(n+1) - u(n)",
           "difference",
           "différence",
           "constante",
-          `${a}`,
         ],
         comparator: "contains_keyword",
         explanation: exp(
@@ -1148,7 +1151,9 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
         format: "open",
         // ⚠️ Pas de mot-clé à un seul chiffre : `contains_keyword` valide sur la
         // sous-chaîne, et « 5 » apparaîtrait dans presque toute réponse.
-        expected: [String(valeur), contexte.unite, "ans", "annees", "années"],
+        // ⛔ Pas de « ans » : `contains_keyword` valide sur la sous-chaîne, et
+        // « ans » est contenu dans « dans ». Toute phrase le contenant passait.
+        expected: [String(valeur), contexte.unite, "annees", "années"],
         comparator: "contains_keyword",
         explanation: exp(
           "Un résultat de calcul ne devient une réponse que replacé dans le contexte : la grandeur, l'unité et le moment.",

@@ -124,14 +124,87 @@ function canvasArbreBernoulli(n: number, p: number, titre: string): CanvasFigure
 
 /* ─────────────────── contextes ─────────────────── */
 
+/**
+ * Une épreuve de Bernoulli et son succès, sous DEUX formes.
+ *
+ * ⚠️ Le succès était stocké comme une proposition toute faite avec son sujet
+ * — « il est hors tolérance » — et cette proposition s'insérait derrière
+ * « la probabilité que », « si » et « pour lesquels ». D'où « la probabilité
+ * que il est hors tolérance » et « si il est hors tolérance », dans les
+ * énoncés les plus lus du domaine.
+ *
+ * · `verbe` : le groupe verbal seul, la phrase fournit son sujet ;
+ * · `qualite` : le succès en groupe qualifiant, qui se colle à un nom
+ *   (« les camemberts hors tolérance ») et évite le « pour lesquels ».
+ */
 const EPREUVES = [
-  { sujet: "une pièce prélevée en sortie de chaîne", succes: "elle est non conforme", nom: "pièces" },
-  { sujet: "un client démarché par téléphone", succes: "il souscrit", nom: "clients" },
-  { sujet: "un colis expédié", succes: "il arrive en retard", nom: "colis" },
-  { sujet: "un camembert contrôlé au poids", succes: "il est hors tolérance", nom: "camemberts" },
-  { sujet: "un conteneur inspecté au port", succes: "la chaîne du froid a été rompue", nom: "conteneurs" },
-  { sujet: "un abonné en fin de contrat", succes: "il renouvelle", nom: "abonnés" },
+  {
+    sujet: "une pièce prélevée en sortie de chaîne",
+    verbe: "est non conforme",
+    qualite: "non conformes",
+    qualiteSing: "non conforme",
+    nom: "pièces",
+    singulier: "pièce",
+    genre: "f",
+  },
+  {
+    sujet: "un client démarché par téléphone",
+    verbe: "souscrit",
+    qualite: "ayant souscrit",
+    qualiteSing: "ayant souscrit",
+    nom: "clients",
+    singulier: "client",
+    genre: "m",
+  },
+  {
+    sujet: "un colis expédié",
+    verbe: "arrive en retard",
+    qualite: "arrivés en retard",
+    qualiteSing: "arrivé en retard",
+    nom: "colis",
+    singulier: "colis",
+    genre: "m",
+  },
+  {
+    sujet: "un camembert contrôlé au poids",
+    verbe: "est hors tolérance",
+    qualite: "hors tolérance",
+    qualiteSing: "hors tolérance",
+    nom: "camemberts",
+    singulier: "camembert",
+    genre: "m",
+  },
+  {
+    sujet: "un conteneur inspecté au port",
+    verbe: "a vu sa chaîne du froid rompue",
+    qualite: "dont la chaîne du froid a été rompue",
+    qualiteSing: "dont la chaîne du froid a été rompue",
+    nom: "conteneurs",
+    singulier: "conteneur",
+    genre: "m",
+  },
+  {
+    sujet: "un abonné en fin de contrat",
+    verbe: "renouvelle",
+    qualite: "ayant renouvelé",
+    qualiteSing: "ayant renouvelé",
+    nom: "abonnés",
+    singulier: "abonné",
+    genre: "m",
+  },
 ] as const;
+
+type Epreuve = (typeof EPREUVES)[number];
+
+/** « s'il … » / « si elle … » — l'élision se fait ici, pas dans l'énoncé. */
+function siSucces(ep: Epreuve): string {
+  return ep.genre === "f" ? `si elle ${ep.verbe}` : `s'il ${ep.verbe}`;
+}
+
+/** « un camembert hors tolérance », « une pièce non conforme ». */
+function unSucces(ep: Epreuve): string {
+  return `${ep.genre === "f" ? "une" : "un"} ${ep.singulier} ${ep.qualiteSing}`;
+}
 
 const PROBAS = [0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.75, 0.8, 0.9] as const;
 
@@ -376,7 +449,9 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     generate: () => {
       const esp = pick([1.4, 2.3, 3.75, 4.2, 5.6, 7.1, 8.45] as const);
       const contexte = pick([
-        { quoi: "le gain d'un client à un jeu promotionnel", unite: "€" },
+        // ⚠️ Unité écrite en toutes lettres : « € » seul, en mot-clé de
+        // `contains_keyword`, serait validé par toute réponse citant un montant.
+        { quoi: "le gain d'un client à un jeu promotionnel", unite: "euros" },
         { quoi: "le nombre de réclamations reçues par jour", unite: "réclamations" },
         { quoi: "le nombre de colis en retard par tournée", unite: "colis" },
         { quoi: "le nombre de pièces non conformes par lot", unite: "pièces" },
@@ -516,9 +591,9 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const p = pick(PROBAS);
       const n = randomInt(3, 40);
       const situation = bernoulli
-        ? `on observe ${ep.sujet} et l'on note $X = 1$ si ${ep.succes} (probabilité $${fr(p)}$), $X = 0$ sinon`
+        ? `on observe ${ep.sujet} et l'on note $X = 1$ ${siSucces(ep)} (probabilité $${fr(p)}$), $X = 0$ sinon`
         : pick([
-            `on observe $${n}$ ${ep.nom} et l'on note $X$ le nombre de ceux pour lesquels ${ep.succes}`,
+            `on observe $${n}$ ${ep.nom} et l'on note $X$ le nombre ${/^[aeiouy]/.test(ep.nom) ? "d'" : "de "}${ep.nom} ${ep.qualite}`,
             `on observe ${ep.sujet} et l'on note $X$ le nombre de jours écoulés depuis sa production, entre $0$ et $${n}$`,
             `on observe ${ep.sujet} et l'on note $X$ sa masse en grammes, comprise entre $${n * 10}$ et $${n * 12}$`,
           ] as const);
@@ -558,7 +633,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const ep = pick(EPREUVES);
       return {
         text:
-          `$X$ suit une loi de Bernoulli : $X = 1$ si ${ep.succes}, avec la probabilité $${fr(p)}$, et $X = 0$ sinon. ` +
+          `$X$ suit une loi de Bernoulli : $X = 1$ ${siSucces(ep)}, avec la probabilité $${fr(p)}$, et $X = 0$ sinon. ` +
           `Que vaut $E(X)$ ?`,
         format: "short",
         expected: [fr(p)],
@@ -882,8 +957,8 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const p = pick(PROBAS);
       const binomiale = Math.random() < 0.5;
       const situation = binomiale
-        ? `on prélève $${n}$ ${ep.nom} AVEC REMISE et l'on compte ceux pour lesquels ${ep.succes}`
-        : `on prélève $${n}$ ${ep.nom} SANS REMISE dans un lot de $${n + randomInt(2, 8)}$ et l'on compte ceux pour lesquels ${ep.succes}`;
+        ? `on prélève $${n}$ ${ep.nom} AVEC REMISE et l'on compte ${ep.nom} ${ep.qualite}`
+        : `on prélève $${n}$ ${ep.nom} SANS REMISE dans un lot de $${n + randomInt(2, 8)}$ et l'on compte ${ep.nom} ${ep.qualite}`;
       return {
         text: `La variable $X$ décrite ci-dessous suit-elle une loi binomiale ?\n\n${situation}, la probabilité étant $${fr(p)}$ à chaque prélèvement.`,
         format: "qcm",
@@ -921,7 +996,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const p = pick(PROBAS);
       return {
         text:
-          `On prélève $${n}$ ${ep.nom} au hasard avec remise. Pour chacun, la probabilité que ${ep.succes} vaut $${fr(p)}$. ` +
+          `On prélève $${n}$ ${ep.nom} au hasard avec remise. Pour chacun, la probabilité d'obtenir ${unSucces(ep)} vaut $${fr(p)}$. ` +
           `$X$ compte les succès. Quels sont les paramètres de la loi binomiale suivie par $X$ ?`,
         format: "qcm",
         choices: makeChoices(`$n = ${n}$ et $p = ${fr(p)}$`, [
@@ -1004,7 +1079,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       return {
         text:
           `On prélève $${n}$ ${ep.nom} SANS REMISE dans un lot de $${lot}$. ` +
-          `$X$ compte ceux pour lesquels ${ep.succes}. Quelle condition de la loi binomiale n'est pas vérifiée ?`,
+          `$X$ compte ${ep.nom} ${ep.qualite}. Quelle condition de la loi binomiale n'est pas vérifiée ?`,
         format: "qcm",
         choices: shuffle([
           "l'indépendance des épreuves",
@@ -1185,9 +1260,15 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     hint: "« Aucun succès » : un seul chemin, celui qui n'a que des échecs.",
     tags: ["stmg", "maths", "probabilites", "template", "short"],
     generate: () => {
-      const n = randomInt(3, 8);
       const p = pick([0.1, 0.2, 0.25, 0.3, 0.4, 0.5] as const);
       const quoi = pick([0, "n"] as const);
+      // ⚠️ Côté $P(X = n)$, la réponse est $p^n$ : sur $\mathcal{B}(6\,;\,0,25)$
+      // elle vaut $0,000244$, donc « $0$ » une fois arrondie au millième — une
+      // question dont la réponse enseigne qu'un évènement possible serait
+      // impossible. On borne donc $n$ pour que $p^n$ reste lisible au millième.
+      const nMaxSucces: Record<number, number> = { 0.1: 3, 0.2: 4, 0.25: 4, 0.3: 5, 0.4: 7, 0.5: 8 };
+      // Côté $P(X = 0)$, la valeur est $(1-p)^n$ : jamais sous $0,003$ ici.
+      const n = quoi === 0 ? randomInt(3, 8) : randomInt(3, nMaxSucces[p]);
       const k = quoi === 0 ? 0 : n;
       const valeur = loiBinomiale(n, p, k);
       return {
@@ -1230,7 +1311,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const ep = pick(EPREUVES);
       return {
         text:
-          `On prélève $${n}$ ${ep.nom} avec remise ; pour chacun, la probabilité que ${ep.succes} vaut $${fr(p)}$. ` +
+          `On prélève $${n}$ ${ep.nom} avec remise ; pour chacun, la probabilité d'obtenir ${unSucces(ep)} vaut $${fr(p)}$. ` +
           `$X$ compte les succès. Calcule $P(X = ${k})$, arrondi au millième.`,
         format: "short",
         expected: [fr(Math.round(valeur * 1000) / 1000)],
@@ -1267,7 +1348,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const ep = pick(EPREUVES);
       return {
         text:
-          `$X$ suit la loi $\\mathcal{B}(${n}\\,;\\,${fr(p)})$ et compte les ${ep.nom} pour lesquels ${ep.succes}. ` +
+          `$X$ suit la loi $\\mathcal{B}(${n}\\,;\\,${fr(p)})$ et compte les ${ep.nom} ${ep.qualite}. ` +
           `Calcule $P(X \\geqslant 1)$, arrondi au millième.`,
         format: "short",
         expected: [fr(Math.round(auMoinsUn * 1000) / 1000)],
@@ -1302,7 +1383,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const ep = pick(EPREUVES);
       return {
         text:
-          `Sur $${n}$ ${ep.nom} prélevés avec remise, la probabilité que ${ep.succes} vaut $${fr(p)}$ à chaque fois. ` +
+          `Sur $${n}$ ${ep.nom} prélevés avec remise, la probabilité d'obtenir ${unSucces(ep)} vaut $${fr(p)}$ à chaque fois. ` +
           `Combien de succès peut-on attendre en moyenne ?`,
         format: "short",
         expected: [fr(n * p)],

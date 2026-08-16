@@ -74,10 +74,47 @@ type Contexte = {
   lignes: [string, string];
   colonnes: [string, string];
   individu: string;
+  /**
+   * Le genre de l'individu.
+   *
+   * ⚠️ Sans lui, `individu.slice(0, -1)` rendait bien le singulier, mais
+   * l'article et le pronom restaient figés au masculin : « on choisit un
+   * pièce », « le commande vient de », « sachant qu'il relève de ». Trois des
+   * cinq contextes sont féminins — pièces, commandes — et la faute tombait
+   * donc plus d'une fois sur deux.
+   */
+  genre: "m" | "f";
   /** Étiquettes courtes pour l'arbre. */
   courtL: [string, string];
   courtC: [string, string];
 };
+
+/** « un » / « une » selon le contexte. */
+function unUne(ctx: Contexte): string {
+  return ctx.genre === "f" ? "une" : "un";
+}
+
+/** « le » / « la », élidé devant une voyelle. */
+function leLa(ctx: Contexte): string {
+  const s = singulier(ctx);
+  if (/^[aeiouyéèêàâîôûh]/i.test(s)) return "l'";
+  return ctx.genre === "f" ? "la " : "le ";
+}
+
+/** « il » / « elle ». */
+function ilElle(ctx: Contexte): string {
+  return ctx.genre === "f" ? "elle" : "il";
+}
+
+/** « s'il » / « si elle » — l'élision se fait ici, pas dans l'énoncé. */
+function siIlElle(ctx: Contexte): string {
+  return ctx.genre === "f" ? "si elle" : "s'il";
+}
+
+/** Le nom de l'individu au singulier. */
+function singulier(ctx: Contexte): string {
+  return ctx.individu.slice(0, -1);
+}
 
 const CONTEXTES: readonly Contexte[] = [
   {
@@ -85,6 +122,7 @@ const CONTEXTES: readonly Contexte[] = [
     lignes: ["Chaîne 1", "Chaîne 2"],
     colonnes: ["Conforme", "Non conforme"],
     individu: "pièces",
+    genre: "f",
     courtL: ["C1", "C2"],
     courtC: ["Conf.", "Non conf."],
   },
@@ -93,6 +131,7 @@ const CONTEXTES: readonly Contexte[] = [
     lignes: ["Fournisseur A", "Fournisseur B"],
     colonnes: ["Lot accepté", "Lot refusé"],
     individu: "lots",
+    genre: "m",
     courtL: ["A", "B"],
     courtC: ["Accepté", "Refusé"],
   },
@@ -101,6 +140,7 @@ const CONTEXTES: readonly Contexte[] = [
     lignes: ["Camion", "Bateau"],
     colonnes: ["Froid tenu", "Froid rompu"],
     individu: "conteneurs",
+    genre: "m",
     courtL: ["Camion", "Bateau"],
     courtC: ["Froid OK", "Froid rompu"],
   },
@@ -109,6 +149,7 @@ const CONTEXTES: readonly Contexte[] = [
     lignes: ["Atelier Nord", "Atelier Sud"],
     colonnes: ["Poids conforme", "Poids hors tolérance"],
     individu: "camemberts",
+    genre: "m",
     courtL: ["Nord", "Sud"],
     courtC: ["Poids OK", "Hors tol."],
   },
@@ -117,6 +158,7 @@ const CONTEXTES: readonly Contexte[] = [
     lignes: ["Commande en ligne", "Commande en magasin"],
     colonnes: ["Livrée à l'heure", "Livrée en retard"],
     individu: "commandes",
+    genre: "f",
     courtL: ["En ligne", "Magasin"],
     courtC: ["À l'heure", "En retard"],
   },
@@ -252,8 +294,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const t = tirerTableau();
       const conditionnelle = Math.random() < 0.5;
       const phrase = conditionnelle
-        ? `on choisit un ${t.ctx.individu.slice(0, -1)} PARMI ceux de « ${t.ctx.lignes[0]} », et l'on regarde s'il est « ${t.ctx.colonnes[1]} »`
-        : `on choisit un ${t.ctx.individu.slice(0, -1)} au hasard dans l'ensemble, et l'on regarde s'il relève à la fois de « ${t.ctx.lignes[0]} » et de « ${t.ctx.colonnes[1]} »`;
+        ? `on choisit ${unUne(t.ctx)} ${singulier(t.ctx)} PARMI ${t.ctx.genre === "f" ? "celles" : "ceux"} de « ${t.ctx.lignes[0]} », et l'on regarde ${siIlElle(t.ctx)} est « ${t.ctx.colonnes[1]} »`
+        : `on choisit ${unUne(t.ctx)} ${singulier(t.ctx)} au hasard dans l'ensemble, et l'on regarde ${siIlElle(t.ctx)} relève à la fois de « ${t.ctx.lignes[0]} » et de « ${t.ctx.colonnes[1]} »`;
       return {
         text: `Dans la situation suivante, de quelle probabilité s'agit-il ?\n\n${phrase}.`,
         format: "qcm",
@@ -296,12 +338,12 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const sens = pick(["LC", "CL"] as const);
       const enonce =
         sens === "LC"
-          ? `la probabilité qu'un ${t.ctx.individu.slice(0, -1)} soit « ${t.ctx.colonnes[1]} », sachant qu'il vient de « ${t.ctx.lignes[0]} »`
-          : `la probabilité qu'un ${t.ctx.individu.slice(0, -1)} vienne de « ${t.ctx.lignes[0]} », sachant qu'il est « ${t.ctx.colonnes[1]} »`;
+          ? `la probabilité qu'${unUne(t.ctx)} ${singulier(t.ctx)} soit « ${t.ctx.colonnes[1]} », sachant qu'${ilElle(t.ctx)} vient de « ${t.ctx.lignes[0]} »`
+          : `la probabilité qu'${unUne(t.ctx)} ${singulier(t.ctx)} vienne de « ${t.ctx.lignes[0]} », sachant qu'${ilElle(t.ctx)} est « ${t.ctx.colonnes[1]} »`;
       return {
         text:
-          `On note $A$ l'évènement « le ${t.ctx.individu.slice(0, -1)} vient de ${t.ctx.lignes[0]} » ` +
-          `et $B$ l'évènement « le ${t.ctx.individu.slice(0, -1)} est ${t.ctx.colonnes[1]} ». ` +
+          `On note $A$ l'évènement « ${leLa(t.ctx)}${singulier(t.ctx)} vient de ${t.ctx.lignes[0]} » ` +
+          `et $B$ l'évènement « ${leLa(t.ctx)}${singulier(t.ctx)} est ${t.ctx.colonnes[1]} ». ` +
           `Comment note-t-on ${enonce} ?`,
         format: "qcm",
         choices: makeChoices(sens === "LC" ? "$P_A(B)$" : "$P_B(A)$", [
@@ -351,8 +393,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const p = num / den;
       return {
         text:
-          `On choisit un ${t.ctx.individu.slice(0, -1)} au hasard. ` +
-          `Sachant qu'il relève de « ${condition} », quelle est la probabilité qu'il relève de « ${cible} » ? ` +
+          `On choisit ${unUne(t.ctx)} ${singulier(t.ctx)} au hasard. ` +
+          `Sachant qu'${ilElle(t.ctx)} relève de « ${condition} », quelle est la probabilité qu'${ilElle(t.ctx)} relève de « ${cible} » ? ` +
           `(arrondi au centième)`,
         format: "short",
         expected: [fr(Math.round(p * 100) / 100)],
@@ -448,7 +490,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const p = t.b / t.ligne1;
       return {
         text:
-          `On note $A$ : « le ${t.ctx.individu.slice(0, -1)} vient de ${t.ctx.lignes[0]} » et ` +
+          `On note $A$ : « ${leLa(t.ctx)}${singulier(t.ctx)} vient de ${t.ctx.lignes[0]} » et ` +
           `$B$ : « il est ${t.ctx.colonnes[1]} ». On a calculé $P_A(B) \\approx ${fr(Math.round(p * 100) / 100)}$. ` +
           `Traduis ce résultat par une phrase, dans le contexte.`,
         format: "open",
@@ -648,7 +690,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       return {
         text:
           `On prélève deux ${ctx.individu} au hasard avec remise. ` +
-          `La probabilité qu'un ${ctx.individu.slice(0, -1)} soit « ${ctx.courtC[1]} » vaut $${fr(p)}$. ` +
+          `La probabilité qu'${unUne(ctx)} ${singulier(ctx)} soit « ${ctx.courtC[1]} » vaut $${fr(p)}$. ` +
           `Quelle est la probabilité que ${cible === "deux" ? "LES DEUX le soient" : "AUCUN ne le soit"} ?`,
         format: "short",
         expected: [fr(Math.round(valeur * 10000) / 10000)],
@@ -959,7 +1001,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const valeur = pBranche * pSuite;
       return {
         text:
-          `D'après l'arbre, quelle est la probabilité qu'un ${ctx.individu.slice(0, -1)} vienne de « ${ctx.courtL[branche]} » ` +
+          `D'après l'arbre, quelle est la probabilité qu'${unUne(ctx)} ${singulier(ctx)} vienne de « ${ctx.courtL[branche]} » ` +
           `ET soit « ${ctx.courtC[0]} » ? (arrondi au millième)`,
         format: "short",
         expected: [fr(Math.round(valeur * 1000) / 1000)],
@@ -998,7 +1040,7 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const total = chemin1 + chemin2;
       return {
         text:
-          `D'après l'arbre, quelle est la probabilité qu'un ${ctx.individu.slice(0, -1)} soit « ${ctx.courtC[0]} », ` +
+          `D'après l'arbre, quelle est la probabilité qu'${unUne(ctx)} ${singulier(ctx)} soit « ${ctx.courtC[0]} », ` +
           `quelle que soit sa provenance ? (arrondi au millième)`,
         format: "short",
         expected: [fr(Math.round(total * 1000) / 1000)],
@@ -1285,12 +1327,12 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const pB = pick(PROBAS);
       const phrase =
         cas === "contraires"
-          ? `$A$ : « le ${ctx.individu.slice(0, -1)} est ${ctx.courtC[0]} », de probabilité $${fr(pA)}$, ` +
+          ? `$A$ : « ${leLa(ctx)}${singulier(ctx)} est ${ctx.courtC[0]} », de probabilité $${fr(pA)}$, ` +
             `et $B$ : « il est ${ctx.courtC[1]} », de probabilité $${fr(Math.round((1 - pA) * 10000) / 10000)}$`
           : cas === "independants"
-            ? `$A$ : « le premier ${ctx.individu.slice(0, -1)} tiré AVEC REMISE est ${ctx.courtC[1]} », de probabilité $${fr(pA)}$, ` +
+            ? `$A$ : « ${leLa(ctx)}premier${ctx.genre === "f" ? "e" : ""} ${singulier(ctx)} tiré${ctx.genre === "f" ? "e" : ""} AVEC REMISE est ${ctx.courtC[1]} », de probabilité $${fr(pA)}$, ` +
               `et $B$ : « le second l'est aussi », de même probabilité $${fr(pA)}$`
-            : `$A$ : « le ${ctx.individu.slice(0, -1)} vient de ${ctx.courtL[0]} », de probabilité $${fr(pA)}$, ` +
+            : `$A$ : « ${leLa(ctx)}${singulier(ctx)} vient de ${ctx.courtL[0]} », de probabilité $${fr(pA)}$, ` +
               `et $B$ : « il est ${ctx.courtC[1]} », de probabilité $${fr(pB)}$`;
       const bonne =
         cas === "contraires"
@@ -1313,10 +1355,10 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           "Incompatibles : ils ne peuvent pas se produire ensemble ($P(A \\cap B) = 0$). Indépendants : la réalisation de l'un ne change pas la probabilité de l'autre. Ces deux propriétés s'excluent quand les probabilités sont non nulles.",
           "On se demande d'abord si les deux évènements peuvent coexister, puis si l'un renseigne sur l'autre.",
           cas === "contraires"
-            ? `Un même ${ctx.individu.slice(0, -1)} ne peut pas être à la fois « ${ctx.courtC[0]} » et « ${ctx.courtC[1]} » : ils sont incompatibles, donc dépendants.`
+            ? `Un même ${singulier(ctx)} ne peut pas être à la fois « ${ctx.courtC[0]} » et « ${ctx.courtC[1]} » : ils sont incompatibles, donc dépendants.`
             : cas === "independants"
               ? "Les deux tirages se font AVEC REMISE : le premier ne modifie pas le stock, donc les évènements sont indépendants."
-              : `Un ${ctx.individu.slice(0, -1)} peut très bien venir de « ${ctx.courtL[0]} » ET être « ${ctx.courtC[1]} » : ils ne sont pas incompatibles. Rien ne garantit non plus l'indépendance : il faudrait la vérifier par un calcul.`,
+              : `${ctx.genre === "f" ? "Une" : "Un"} ${singulier(ctx)} peut très bien venir de « ${ctx.courtL[0]} » ET être « ${ctx.courtC[1]} » : ils ne sont pas incompatibles. Rien ne garantit non plus l'indépendance : il faudrait la vérifier par un calcul.`,
           `Ces évènements sont ${bonne}.`
         ),
         choiceDiagnostics: [

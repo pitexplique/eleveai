@@ -288,9 +288,32 @@ export function buildQuestionPair(args: {
   recommendedStar: StarLevel;
   recentQuestionIds?: string[];
   preferExactStar?: boolean;
+  /**
+   * Autorise une micro qui ne compte qu'UN SEUL item de banque.
+   *
+   * Le mode complet oppose deux questions et a donc besoin de deux items
+   * distincts. Le mode simple, lui, n'en affiche qu'une : rien ne justifie
+   * qu'il exige une paire. Or la règle « au moins deux items » s'appliquait
+   * aux deux, et une classe bâtie sur des GÉNÉRATEURS — un gabarit par micro,
+   * mais 94 questions distinctes en médiane — n'a qu'un item par micro. Elle
+   * passait les cinq vérificateurs au vert et ne démarrait pas dans le coach :
+   * « Aucune paire disponible dans la notion … ».
+   *
+   * Quand l'unique item est un générateur, le second tirage vient donc du même
+   * gabarit — avec d'autres nombres, l'empreinte de contenu garantissant qu'il
+   * ne redonne pas la question déjà servie.
+   */
+  allowSingleItem?: boolean;
 }): TutorQuestionPair {
-  const { bank, notionId, microId, recommendedStar, recentQuestionIds = [], preferExactStar = false } =
-    args;
+  const {
+    bank,
+    notionId,
+    microId,
+    recommendedStar,
+    recentQuestionIds = [],
+    preferExactStar = false,
+    allowSingleItem = false,
+  } = args;
 
   const allForMicro = bank.filter(
     (item) => item.notionId === notionId && item.microId === microId
@@ -324,7 +347,13 @@ export function buildQuestionPair(args: {
     usable = byRecency.slice(0, Math.max(2, byRecency.length - 2));
   }
 
-  if (usable.length < 2) {
+  // Un seul item suffit quand il s'agit d'un GÉNÉRATEUR : les deux tirages en
+  // sortiront avec des nombres différents. Un item figé, lui, ne peut pas se
+  // dédoubler — il redonnerait deux fois la même question.
+  const singleGenerateur =
+    allowSingleItem && usable.length === 1 && usable[0].kind === "template";
+
+  if (usable.length < 2 && !singleGenerateur) {
     throw new Error(
       `Pas assez de questions disponibles pour ${notionId}/${microId} en V4.`
     );
@@ -359,7 +388,12 @@ export function buildQuestionPair(args: {
   const firstItem = pickRandom(source);
   const optionA = toTutorQuestionOption(firstItem, avoidFingerprints);
 
-  const remaining = source.filter((item) => item.id !== firstItem.id);
+  // Avec un générateur unique, on retire dans le MÊME gabarit : `avoidForB`
+  // écarte l'empreinte de l'option A, donc le second tirage porte d'autres
+  // nombres.
+  const remaining = singleGenerateur
+    ? [firstItem]
+    : source.filter((item) => item.id !== firstItem.id);
 
   if (remaining.length === 0) {
     throw new Error(

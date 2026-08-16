@@ -104,6 +104,18 @@ function canvasCourbePoints(
 
 /* ─────────────────── réservoirs de contexte ─────────────────── */
 
+/**
+ * « de » contracté devant une grandeur qui porte déjà son article.
+ *
+ * Les noms ci-dessous s'insèrent dans « Le taux de variation de {grandeur} » :
+ * sans contraction, cela donnait « de le coût de production ».
+ */
+function deNomGrandeur(nom: string): string {
+  if (nom.startsWith("le ")) return `du ${nom.slice(3)}`;
+  if (nom.startsWith("les ")) return `des ${nom.slice(4)}`;
+  return `de ${nom}`;
+}
+
 const GRANDEURS = [
   { nom: "le coût de production", unite: "€", variable: "la quantité produite" },
   { nom: "le chiffre d'affaires", unite: "k€", variable: "le nombre de mois écoulés" },
@@ -462,10 +474,20 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
       const taux = pick([-45, -20, -8, 12, 25, 60, 150] as const);
       return {
         text:
-          `Le taux de variation de ${grandeur.nom} entre ${grandeur.variable} $= ${debut}$ et $= ${fin}$ vaut $${fr(taux)}$. ` +
+          `Le taux de variation ${deNomGrandeur(grandeur.nom)} entre ${grandeur.variable} $= ${debut}$ et $= ${fin}$ vaut $${fr(taux)}$. ` +
           `Interprète ce nombre dans le contexte.`,
         format: "open",
-        expected: ["moyenne", "en moyenne", "par unite", "par unité", grandeur.unite, taux < 0 ? "baisse" : "hausse"],
+        // L'unité n'est retenue comme mot-clé que si elle fait plus de deux
+        // caractères : « € » ou « °C » seraient validés par toute réponse
+        // citant un montant ou une température, sans aucune interprétation.
+        expected: [
+          "moyenne",
+          "en moyenne",
+          "par unite",
+          "par unité",
+          ...(grandeur.unite.length > 2 ? [grandeur.unite] : []),
+          taux < 0 ? "baisse" : "hausse",
+        ],
         comparator: "contains_keyword",
         explanation: exp(
           "Un taux de variation mesure la variation MOYENNE de la grandeur par unité de la variable, sur l'intervalle considéré.",

@@ -489,6 +489,11 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
       const r1 = pick([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5] as const);
       let r2 = pick([-6, -5, -4, -3, -2, 2, 3, 4, 5, 6] as const).valueOf();
       if (r2 === r1) r2 = r1 + 1;
+      // ⛔ Racines OPPOSÉES interdites. Le distracteur ci-dessous est
+      // « $x = -petite$ ou $x = -grande$ » : sur $(x+4)(x-4)$, il devient
+      // « $x = 4$ ou $x = -4$ », c'est-à-dire la bonne réponse écrite dans
+      // l'autre sens. L'élève qui la coche a raison et serait compté faux.
+      if (r2 === -r1) r2 = r1 > 0 ? -r1 - 1 : -r1 + 1;
       const petite = Math.min(r1, r2);
       const grande = Math.max(r1, r2);
       return {

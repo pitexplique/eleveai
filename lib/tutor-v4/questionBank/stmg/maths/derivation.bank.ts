@@ -150,6 +150,18 @@ function canvasCourbePoints(
 
 /* ─────────────────── réservoirs de contexte ─────────────────── */
 
+/**
+ * « de » contracté devant une grandeur qui porte déjà son article.
+ *
+ * Sans lui, le distracteur « la valeur de {grandeur} » donnait « la valeur de
+ * le coût de production » — une faute dans une proposition de QCM.
+ */
+function deNomGrandeur(nom: string): string {
+  if (nom.startsWith("le ")) return `du ${nom.slice(3)}`;
+  if (nom.startsWith("les ")) return `des ${nom.slice(4)}`;
+  return `de ${nom}`;
+}
+
 const PRODUCTIONS = [
   { objet: "des paniers garnis", unite: "paniers" },
   { objet: "des coffrets cadeaux", unite: "coffrets" },
@@ -356,7 +368,7 @@ export const derivationBank: TutorBankItemV4[] = [
         choices: shuffle([
           `${grandeur.instant} à l'instant $${t}$`,
           `${grandeur.moyen} entre $0$ et $${t}$`,
-          `la valeur de ${grandeur.nom} à l'instant $${t}$`,
+          `la valeur ${deNomGrandeur(grandeur.nom)} à l'instant $${t}$`,
           `le nombre de fois où ${grandeur.nom} a changé`,
         ]),
         expected: [`${grandeur.instant} à l'instant $${t}$`],
@@ -369,7 +381,7 @@ export const derivationBank: TutorBankItemV4[] = [
         ),
         choiceDiagnostics: [
           {
-            choice: `la valeur de ${grandeur.nom} à l'instant $${t}$`,
+            choice: `la valeur ${deNomGrandeur(grandeur.nom)} à l'instant $${t}$`,
             cause: "a confondu f'(t) et f(t) : l'un mesure la vitesse, l'autre la valeur",
           },
           {
@@ -495,7 +507,10 @@ export const derivationBank: TutorBankItemV4[] = [
           `Une entreprise produit ${prod.objet}. Son coût total de production, en euros, est $C(x)$ pour $x$ ${prod.unite}. ` +
           `On a calculé $C'(${q}) = ${marginal}$. Explique ce que ce nombre signifie pour l'entreprise.`,
         format: "open",
-        expected: ["marginal", "unite suivante", "unité suivante", "supplementaire", "supplémentaire", String(marginal)],
+        // ⛔ Pas de nombre nu en mot-clé : `contains_keyword` valide sur la
+        // SOUS-CHAÎNE, donc « 8 » accepterait « 18 », « 80 » et « je sais pas 8 ».
+        // Les trois mots de gestion suffisent à reconnaître une explication juste.
+        expected: ["marginal", "unite suivante", "unité suivante", "supplementaire", "supplémentaire"],
         comparator: "contains_keyword",
         explanation: exp(
           "Dans un cadre économique, le nombre dérivé du coût total est le COÛT MARGINAL : le coût approximatif de l'unité supplémentaire.",
@@ -1324,7 +1339,9 @@ export const derivationBank: TutorBankItemV4[] = [
           `Une étude sur la production ${prod.objet} conduit à $x = ${xOpt}$ et à un ${nature} de $${valeur}$ €. ` +
           `Rédige la phrase de conclusion, dans le contexte.`,
         format: "open",
-        expected: [String(xOpt), String(valeur), prod.unite, "euros", "€"],
+        // ⛔ Pas de « € » seul en mot-clé : un caractère, validé par toute
+        // réponse citant un montant. « euros » écrit en toutes lettres reste.
+        expected: [String(xOpt), String(valeur), prod.unite, "euros"],
         comparator: "contains_keyword",
         explanation: exp(
           "Un résultat de calcul ne devient une réponse que replacé dans le contexte : la quantité, la grandeur optimisée, son unité.",

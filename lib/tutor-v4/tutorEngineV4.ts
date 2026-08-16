@@ -326,6 +326,7 @@ function tryBuildPair(args: {
   recommendedStar: StarLevel;
   recentQuestionIds: string[];
   preferExactStar?: boolean;
+  allowSingleItem?: boolean;
 }): TutorQuestionPair | null {
   try {
     return buildQuestionPair(args);
@@ -348,6 +349,7 @@ function findNextAvailableMicroInNotion(args: {
   recommendedStar: StarLevel;
   recentQuestionIds: string[];
   preferExactStar?: boolean;
+  allowSingleItem?: boolean;
 }): { micro: KnowledgeMicroSkill; pair: TutorQuestionPair } | null {
   const {
     knowledge,
@@ -359,6 +361,7 @@ function findNextAvailableMicroInNotion(args: {
     recommendedStar,
     recentQuestionIds,
     preferExactStar,
+    allowSingleItem,
   } = args;
 
   const candidates: KnowledgeMicroSkill[] = [];
@@ -391,6 +394,7 @@ function findNextAvailableMicroInNotion(args: {
       recommendedStar,
       recentQuestionIds,
       preferExactStar,
+      allowSingleItem,
     });
 
     if (pair) {
@@ -442,6 +446,7 @@ export async function startTutorSessionV4(
     recommendedStar,
     recentQuestionIds: [],
     preferExactStar: isSimpleMode,
+    allowSingleItem: isSimpleMode,
   });
 
   let actualMicro = firstMicro;
@@ -457,6 +462,7 @@ export async function startTutorSessionV4(
       recommendedStar,
       recentQuestionIds: [],
       preferExactStar: isSimpleMode,
+    allowSingleItem: isSimpleMode,
     });
 
     if (!fallback) {
@@ -599,6 +605,7 @@ export async function jumpToMicroV4(
     recommendedStar: session.recommendedStar,
     recentQuestionIds: session.recentQuestionIds,
     preferExactStar: isSimpleMode,
+    allowSingleItem: isSimpleMode,
   });
 
   if (!pair) {
@@ -612,6 +619,7 @@ export async function jumpToMicroV4(
       recommendedStar: session.recommendedStar,
       recentQuestionIds: session.recentQuestionIds,
       preferExactStar: isSimpleMode,
+    allowSingleItem: isSimpleMode,
     });
 
     if (!fallback) {
@@ -892,6 +900,7 @@ export async function answerTutorV4(
       recommendedStar: session.recommendedStar,
       recentQuestionIds: session.recentQuestionIds,
       preferExactStar: isSimpleMode,
+    allowSingleItem: isSimpleMode,
     });
 
   // (1) Déjà en remédiation sur un prérequis : faut-il revenir à la cible ?
@@ -1040,6 +1049,7 @@ export async function answerTutorV4(
         recommendedStar: session.recommendedStar,
         recentQuestionIds: session.recentQuestionIds,
         preferExactStar: isSimpleMode,
+    allowSingleItem: isSimpleMode,
       });
 
       if (fallback) {

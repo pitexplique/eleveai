@@ -81,6 +81,22 @@ const ARTICLES = [
   { nom: "un casque audio", unite: "€" },
 ] as const;
 
+/**
+ * « de » contracté devant un nom qui porte déjà son article.
+ *
+ * Les deux réservoirs ci-dessus stockent l'article avec le nom (« le garage
+ * Delmas », « un casque audio ») et ces noms s'insèrent dans des phrases
+ * figées : « la répartition des salariés de {entreprise} », « Le prix de
+ * {article} ». D'où « de le garage Delmas » et « Le prix de un casque audio ».
+ */
+function deNom(nom: string): string {
+  if (nom.startsWith("le ")) return `du ${nom.slice(3)}`;
+  if (nom.startsWith("les ")) return `des ${nom.slice(4)}`;
+  if (nom.startsWith("un ") || nom.startsWith("une ")) return `d'${nom}`;
+  if (nom.startsWith("l'")) return `de ${nom}`;
+  return `de ${nom}`;
+}
+
 const ENTREPRISES = [
   "la boulangerie Vanille",
   "le magasin Cap Sud",
@@ -118,12 +134,12 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
       const entreprise = pick(ENTREPRISES);
       return {
         text:
-          `Le diagramme donne la répartition des salariés de ${entreprise}. ` +
+          `Le diagramme donne la répartition des salariés ${deNom(entreprise)}. ` +
           `Quelle proportion de salariés travaille à temps partiel ?`,
         canvas: {
           kind: "stat_graph",
           graphType: "barres",
-          title: `Salariés de ${entreprise}`,
+          title: `Salariés ${deNom(entreprise)}`,
           data: [
             { label: "Temps partiel", value: partie },
             { label: "Temps plein", value: tout - partie },
@@ -625,7 +641,7 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
       const finale = prix * coef;
       return {
         text:
-          `Le prix de ${article.nom} est de $${prix}$ ${article.unite}. ` +
+          `Le prix ${deNom(article.nom)} est de $${prix}$ ${article.unite}. ` +
           `Il ${hausse ? "augmente" : "diminue"} de $${t}\\,\\%$. Quel est le nouveau prix, en ${article.unite} ?`,
         format: "short",
         expected: [fr(finale)],
@@ -788,13 +804,13 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
       const entreprise = pick(ENTREPRISES);
       return {
         text:
-          `Le graphique donne le chiffre d'affaires de ${entreprise}. ` +
+          `Le graphique donne le chiffre d'affaires ${deNom(entreprise)}. ` +
           `Quel est le taux d'évolution entre l'an dernier et cette année, en pourcentage ? ` +
           `(nombre négatif s'il s'agit d'une baisse)`,
         canvas: {
           kind: "stat_graph",
           graphType: "batons",
-          title: `Chiffre d'affaires de ${entreprise} (k€)`,
+          title: `Chiffre d'affaires ${deNom(entreprise)} (k€)`,
           data: [
             { label: "L'an dernier", value: vi },
             { label: "Cette année", value: vf },

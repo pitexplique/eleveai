@@ -717,7 +717,13 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
     generate: () => {
       const capital = pick([6000, 8000, 9000, 12000, 15000] as const);
       const mois = pick([24, 36, 48, 60] as const);
-      const mensualite = pick([220, 250, 280, 300, 350, 400] as const);
+      // ⚠️ La mensualité se DÉDUIT du capital et de la durée : tirée
+      // indépendamment, elle donnait des crédits à coût nul (15 000 € en
+      // 60 × 250 €) voire NÉGATIF (15 000 € en 24 × 220 € : −9 720 €).
+      // On part du remboursement sans intérêt, on le majore, puis on arrondit
+      // aux 5 € supérieurs — la majoration garantit un coût strictement positif.
+      const majoration = pick([1.05, 1.08, 1.1, 1.12, 1.15, 1.2] as const);
+      const mensualite = Math.ceil((capital * majoration) / mois / 5) * 5;
       const total = mensualite * mois;
       const cout = total - capital;
       return {
