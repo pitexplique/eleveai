@@ -24,6 +24,7 @@
 //    (« PREMIERE-SPE > Maths > Dérivation »), pas le premier select venu.
 
 import type { ProfilId } from "./types";
+import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 
 /** Le nom de la classe côté coach. null = le coach ne couvre pas ce profil. */
 export const CLASSE_COACH: Record<ProfilId, string | null> = {
@@ -185,7 +186,7 @@ export function urlCoachCiblee(
     : null;
 
   return notion
-    ? `/tutor-v4?classe=${classe}&matiere=${matiere}&notion=${notion}&display=simple`
+    ? `/tutor-v4?classe=${classe}&matiere=${matiere}&notion=${notion}&${displayParamForClasse(classe)}`
     : `/coach-ia/${matiere}?classe=${classe}`;
 }
 

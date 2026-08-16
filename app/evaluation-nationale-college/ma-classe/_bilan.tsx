@@ -9,6 +9,7 @@
 // l'ecran et au videoprojecteur, personne ne s'en apercoit avant la reunion.
 
 import { GROUPES, type GroupeMaitrise } from "@/lib/eval-nationale/moteur";
+import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 
 export type BlocBilan = {
   id: string;
@@ -195,11 +196,14 @@ export const CLASSE_SOURCE: Record<string, string> = { "6e": "cm2", "4e": "5e" }
 
 export function lienRemediation(classe: string, matiere: string, sf: SavoirFaire) {
   if (!sf.notionId) return null;
+  // La remédiation renvoie sur la classe SOURCE (une 6e révise du CM2) : c'est
+  // donc elle, et pas la classe de l'élève, qui décide de la vue du tutor.
+  const classeCible = CLASSE_SOURCE[classe] ?? classe;
   return (
-    `/tutor-v4?classe=${encodeURIComponent(CLASSE_SOURCE[classe] ?? classe)}` +
+    `/tutor-v4?classe=${encodeURIComponent(classeCible)}` +
     `&matiere=${encodeURIComponent(matiere)}` +
     `&notion=${encodeURIComponent(sf.notionId)}` +
-    `&microId=${encodeURIComponent(sf.microId)}&display=simple`
+    `&microId=${encodeURIComponent(sf.microId)}&${displayParamForClasse(classeCible)}`
   );
 }
 

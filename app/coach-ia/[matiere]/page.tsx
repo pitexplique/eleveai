@@ -11,6 +11,7 @@ import {
   type Classe,
   type Matiere,
 } from "@/lib/tutor-v4/catalog";
+import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 import FloatingCoach from "@/components/FloatingCoach";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import { useEleve } from "@/context/EleveContext";
@@ -323,7 +324,7 @@ export default function CoachIA() {
 
   function handleClick(notionId: string, microId: string) {
     router.push(
-      `/tutor-v4?classe=${encodeURIComponent(classe)}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}&display=simple`
+      `/tutor-v4?classe=${encodeURIComponent(classe)}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}&${displayParamForClasse(classe)}`
     );
   }
 

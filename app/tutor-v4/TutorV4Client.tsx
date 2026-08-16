@@ -63,6 +63,11 @@ import {
   type Classe,
   type Matiere,
 } from "@/lib/tutor-v4/catalog";
+import {
+  defaultDisplayModeForClasse,
+  displayParamForClasse,
+  type TutorDisplayMode,
+} from "@/lib/tutor-v4/displayMode";
 
 import type {
   HiddenStarState,
@@ -95,7 +100,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 type StartResponse = StartTutorV4Response;
 type AnswerResponse = AnswerTutorV4Response;
-type TutorDisplayMode = "simple" | "complete";
 
 type JumpResponse = {
   pair: TutorQuestionPair;
@@ -388,10 +392,6 @@ function isPrimaryClasse(value: Classe) {
 
 function normalizeDisplayMode(value: string | null): TutorDisplayMode | null {
   return value === "simple" || value === "complete" ? value : null;
-}
-
-function defaultDisplayModeForClasse(value: Classe): TutorDisplayMode {
-  return "simple";
 }
 
 function selectSimpleOption(pair: TutorQuestionPair): TutorQuestionOption {
@@ -1392,7 +1392,7 @@ function handleInputKeyDown(
             classe
           )}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(
             nId
-          )}&microId=${encodeURIComponent(mId)}&display=simple`,
+          )}&microId=${encodeURIComponent(mId)}&${displayParamForClasse(classe)}`,
         }));
       })()
     : [];

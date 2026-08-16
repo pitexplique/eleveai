@@ -17,6 +17,7 @@ import { intentionDeLaChip, matiereDeLaChip } from "./chips";
 import { normaliser } from "./normaliser";
 import { chercherNotionDeClasse } from "./notionsClasse";
 import { CLASSE_COACH, notionCoach, urlCoachCiblee } from "./coach";
+import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 import { MARQUEURS_INTENTION, NOTIONS } from "./lexique";
 import { getProfil, chipsPour, rangNiveaux } from "./profils";
 import { PORTES_ECRITES, RESSOURCES, STATUTS_PUBLIABLES } from "./ressources";
@@ -335,7 +336,7 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
     const classeCoach = CLASSE_COACH[niveau];
     const url =
       r.accepteNotion && notionDuCoach && classeCoach
-        ? `/tutor-v4?classe=${classeCoach}&matiere=${r.accepteNotion}&notion=${notionDuCoach}&display=simple`
+        ? `/tutor-v4?classe=${classeCoach}&matiere=${r.accepteNotion}&notion=${notionDuCoach}&${displayParamForClasse(classeCoach)}`
         : r.accepteNotion
           ? urlCoachCiblee(profil.id, notion?.id ?? null, r.accepteNotion)
           : null;

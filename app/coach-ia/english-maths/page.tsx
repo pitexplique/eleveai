@@ -10,6 +10,7 @@ import {
   notionLabel,
   type NiveauEnglish,
 } from "@/lib/tutor-v4/catalog";
+import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 
 const NIVEAUX: NiveauEnglish[] = ["a1", "a2", "b1", "b2"];
 
@@ -77,7 +78,7 @@ function CoachEnglishInner() {
 
   function handleClick(notionId: string, microId: string) {
     router.push(
-      `/tutor-v4?classe=${encodeURIComponent(niveau)}&matiere=english-maths&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}&display=simple`
+      `/tutor-v4?classe=${encodeURIComponent(niveau)}&matiere=english-maths&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}&${displayParamForClasse(niveau)}`
     );
   }
 

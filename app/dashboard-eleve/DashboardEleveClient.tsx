@@ -8,6 +8,7 @@ import ClassementAvis from "@/components/points/ClassementAvis";
 import BulletinDashboard from "@/components/bulletin/BulletinDashboard";
 import type { Bulletin } from "@/lib/bulletin/types";
 import { prenomFromNom } from "@/lib/prenom";
+import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 
 type EleveSession = {
   acces_id?: string | null;
@@ -680,7 +681,9 @@ export default function DashboardEleveClient() {
                           r.matiere
                         )}&notion=${encodeURIComponent(
                           r.notionId
-                        )}&microId=${encodeURIComponent(r.microId)}&display=simple`}
+                        )}&microId=${encodeURIComponent(
+                          r.microId
+                        )}&${displayParamForClasse(r.classe)}`}
                         className="inline-flex w-fit items-center gap-2 rounded-2xl bg-amber-500 px-4 py-2 text-sm font-black text-white shadow-lg transition hover:bg-amber-400"
                       >
                         🎯 Réviser maintenant
