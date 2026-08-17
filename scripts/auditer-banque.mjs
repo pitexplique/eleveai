@@ -105,8 +105,32 @@ const suspects = tousLesFichiers.filter(
     !/^build[A-Z]/.test(f), // buildCycle2Bank.ts & co : des constructeurs, pas des banques
 );
 
+// ⭐ L'ÉTALON DOIT SE MÉFIER DE LUI-MÊME (Frédéric, 17/08/2026 : « fais
+// attention à tes vérificateurs, qu'ils soient bien étalonnés »).
+//
+// Cet audit LIT LE SOURCE et compte les `microId: "…"` littéraux. Une banque
+// bâtie sur une fabrique à arguments positionnels — `qcm(id, notionId,
+// microId, …)`, la forme de tout le français — n'en contient AUCUN. L'audit
+// annonçait alors « 36 micro-compétences sans aucun item, couverture 63 % »
+// pour une banque qui en couvre 96 sur 96 à l'exécution. Un instrument qui
+// répond zéro parce qu'il ne sait pas lire est pire qu'un instrument absent :
+// on prend sa panne pour une mesure, et on va écrire ce qui existe déjà.
+//
+// On ne tente pas de le rendre plus malin — c'est `auditer-banque-runtime.ts`
+// qui fait ça correctement, en important les modules. Ici on l'oblige à
+// DÉTECTER qu'il est hors de son domaine, et à se taire plutôt que mentir.
+const fichiersLus = [];
+const fichiersMuets = [];
+
 for (const fichier of fichiers) {
   const src = fs.readFileSync(path.join(BANQUES, fichier), "utf8");
+
+  const litteraux = [...src.matchAll(/microId:\s*"([a-z0-9_]+)"/g)];
+  // Un fichier de banque qui déclare des items mais aucun `microId` littéral
+  // est écrit dans une forme que cet audit ne sait pas lire.
+  const aDesItems = /kind:\s*"(fixed|template)"/.test(src);
+  if (aDesItems && litteraux.length === 0) fichiersMuets.push(fichier);
+  else if (litteraux.length > 0) fichiersLus.push(fichier);
 
   // Position de chaque `kind: "..."` pour rattacher un microId à son item :
   // dans nos banques, `kind` précède toujours `microId` dans le même objet.
@@ -115,7 +139,7 @@ for (const fichier of fichiers) {
     kind: m[1],
   }));
 
-  for (const m of src.matchAll(/microId:\s*"([a-z0-9_]+)"/g)) {
+  for (const m of litteraux) {
     let kind = "fixed";
     for (const k of kinds) {
       if (k.index < m.index) kind = k.kind;
@@ -124,6 +148,29 @@ for (const fichier of fichiers) {
     ajouter(m[1], kind, fichier);
     if (!microsDeclares.has(m[1])) microsOrphelins.add(m[1]);
   }
+}
+
+// ─── Le refus de mesurer hors domaine ─────────────────────────────────────────
+
+if (fichiersMuets.length > 0) {
+  console.error(
+    `\n⛔ AUDIT REFUSÉ — cet étalon ne sait pas lire cette banque.\n`,
+  );
+  console.error(
+    `${fichiersMuets.length} fichier(s) déclarent des items sans aucun ` +
+      `\`microId: "…"\` littéral : ils passent le microId en argument de ` +
+      `fonction, ce que cette lecture du source ne voit pas.\n`,
+  );
+  for (const f of fichiersMuets.slice(0, 12)) console.error(`      ${f}`);
+  if (fichiersMuets.length > 12) {
+    console.error(`      … et ${fichiersMuets.length - 12} autre(s)`);
+  }
+  console.error(
+    `\nCompter quand même donnerait un ZÉRO FAUX, et on irait réécrire du ` +
+      `contenu qui existe déjà.\n\nUtilise l'audit à l'exécution :\n` +
+      `      npx tsx scripts/auditer-banque-runtime.ts ${CLASSE}\n`,
+  );
+  process.exit(2);
 }
 
 // ─── Le rapport ───────────────────────────────────────────────────────────────
