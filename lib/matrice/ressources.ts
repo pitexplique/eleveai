@@ -438,18 +438,34 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // donc un adulte tombe sur le bon niveau quel que soit l'enfant ou la
     // classe dont il parle.
     niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof", "parent"],
-    // ⭐ TRANSVERSALE, PAS « FRANÇAIS » (16/08). La déclaration datait du jour
-    // où la dictée ne dictait que du français. Elle sert aujourd'hui 11
-    // matières et tout le Dico CP → Terminale — un élève qui demande du
-    // vocabulaire de maths ou d'histoire ne la voyait jamais, parce que
-    // `moteur.ts` écarte une ressource dont la matière ne correspond pas à
-    // celle demandée. `transversal` est le seul joker qui traverse ce filtre.
-    // ⚠️ Contrepartie assumée : elle peut désormais remonter sur une question
-    // d'anglais, d'espagnol ou d'IA. C'est voulu — elle a des mots dans ces
-    // langues — mais c'est le genre de réglage à revoir si l'accueil devient
-    // bruyant. La notion reste `orthographe` : c'est bien ce qu'on y travaille.
-    matiere: "transversal",
-    notions: ["orthographe"],
+    // ⭐ ELLE RESTE « FRANÇAIS », ET C'EST MESURÉ (16/08). Passée en
+    // `transversal` pour être trouvable au-delà du français, elle a coûté plus
+    // qu'elle ne rapportait : `transversal` est un JOKER, pas une compétence,
+    // donc elle perdait le bonus du spécialiste sur son propre terrain et
+    // sortait du top 3 sur « dictée » et « orthographe » (25/40 au lieu de
+    // 40/40). En prime elle arrivait 1ʳᵉ sur les chips Anglais, Espagnol et IA,
+    // devant les coachs de ces matières — et elle n'a pas un mot d'informatique.
+    // La dictée n'est pas transversale : c'est une ressource DE FRANÇAIS qui
+    // pioche son vocabulaire dans les autres matières. La déclaration doit dire
+    // ça. L'élargissement passe par `notions` (ci-dessous), pas par la matière.
+    matiere: "francais",
+    // ⭐ TOUTES NOTIONS (16/08). C'était ICI le vrai verrou, pas la matière :
+    // `moteur.ts:299` écarte toute ressource qui ne déclare pas la notion lue,
+    // et la dictée n'en déclarait qu'une. « les fractions », « vocabulaire de
+    // maths », « la Révolution » ne la trouvaient donc jamais — alors qu'elle
+    // dicte précisément ces mots-là, via le Dico de la classe.
+    // ⛔ NE PAS remplacer par une liste de notions : elle piocherait dans tout
+    // le Dico (CP → Terminale, 9 matières), la liste serait fausse le jour où
+    // le Dico s'enrichit. `"*"` dit la vérité — et le moteur la range comme il
+    // faut : générique vaut +1, une notion nommée +5, donc la dictée reste
+    // DERRIÈRE le coach sur « les fractions ». Elle devient trouvable, pas
+    // envahissante.
+    // ⛔ GARDER `orthographe` À CÔTÉ DU JOKER, et ce n'est pas une redondance.
+    // Avec `["*"]` seul, mesuré : taper « dictée » ne la trouvait PLUS — elle
+    // perdait le +5 de la notion nommée pour le +1 du générique et sortait du
+    // top 3, cassant le cas principal pour élargir les cas rares. Les deux
+    // ensemble donnent +5 quand on demande l'orthographe, +1 partout ailleurs.
+    notions: ["orthographe", "*"],
     intentions: ["rituel", "entrainer"],
     type: "rituel",
     resultat: "score",

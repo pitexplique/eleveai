@@ -292,6 +292,17 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
       continue;
     }
     if (matiereChip && !r.matiere) continue;
+    // Le joker `transversal` dit « toutes les matières », et c'est presque
+    // toujours faux : une ressource peut être transversale SAUF une. Sans
+    // cette exception, la dictée du jour — qui n'a pas un mot d'informatique —
+    // sortait en TÊTE sur la chip « IA », devant le coach IA.
+    // ⭐ LE SPÉCIALISTE PASSE DEVANT LE GÉNÉRALISTE (Frédéric, 16/08 : « coach
+    // toujours en 1er »). `transversal` est un joker, pas une compétence : une
+    // ressource dont la matière est EXACTEMENT celle demandée doit devancer
+    // celle qui l'attrape par défaut. Sans ce bonus, la dictée du jour passait
+    // devant le coach d'anglais et celui d'espagnol sur leur propre chip —
+    // elle gagnait d'un point, celui de « déjà utilisée en classe ».
+    if (matiereVoulue && r.matiere === matiereVoulue) score += 2;
 
     // ── 4. La notion. Si on en a lu une, on écarte ce qui parle d'autre chose.
     const generique = r.notions.includes("*");
