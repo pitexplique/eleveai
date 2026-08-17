@@ -304,10 +304,19 @@ export default function EntreeMatrice({
   const [resultat, setResultat] = useState<ResultatMatrice | null>(null);
   const [demandeProfil, setDemandeProfil] = useState(false);
   const [plusDOptions, setPlusDOptions] = useState(false);
-  // Jamais affiché ICI — la colonne de gauche est le seul endroit qui montre le
-  // RÉCENT. Cet état existe pour une seule raison : c'est lui qui ÉCRIT dans
-  // localStorage, et il doit donc connaître ce qui s'y trouve déjà.
-  const [, setHistorique] = useState<EntreeHistorique[]>([]);
+  // ⛔ IL Y AVAIT ICI UN ÉTAT `historique` QUE PERSONNE NE LISAIT — un
+  // `const [, setHistorique]`, en écriture seule. Il ne servait qu'à connaître
+  // la liste déjà enregistrée au moment d'y ajouter une demande, et il a coûté
+  // un vrai défaut (17/08/2026) : comme l'écriture se faisait DANS la fonction
+  // de mise à jour, `ecrireHistorique` émettait son signal pendant que React
+  // calculait le nouvel état. La colonne de gauche l'attrapait et appelait son
+  // propre `setHistorique` au milieu du rendu d'un AUTRE composant — d'où
+  // « Cannot update a component while rendering a different component », le
+  // doigt pointé sur ColonneGauche alors que la faute était ici.
+  //
+  // La liste déjà enregistrée, `lireHistorique()` la donne : localStorage est
+  // la source de vérité, et il est toujours à jour. L'état ne servait à rien
+  // qu'à dupliquer ce que le disque savait déjà.
   const champ = useRef<HTMLInputElement>(null);
 
   // Le profil se retient : on ne redemande pas à un élève qui il est chaque
@@ -315,12 +324,6 @@ export default function EntreeMatrice({
   // personne.
   useEffect(() => {
     try {
-      // ⚠️ ON RELIT L'HISTORIQUE AVANT TOUT. Sans ça, la première demande de la
-      // visite repartait d'une liste vide et ÉCRASAIT tout ce qui était déjà
-      // enregistré : le RÉCENT de la colonne se vidait à chaque nouvelle
-      // question. C'est le seul composant qui écrit dans cette clé.
-      setHistorique(lireHistorique());
-
       const p = localStorage.getItem(CLE_PROFIL);
       if (p && PROFILS.some((x) => x.id === p)) {
         const id = p as ProfilId;
@@ -503,14 +506,19 @@ export default function EntreeMatrice({
       if (!vecteur.question && !vecteur.chip) return;
 
       if (vecteur.question) {
-        setHistorique((prec) => {
-          // ⭐ ON ENREGISTRE LA DEMANDE ENTIÈRE, PAS SEULEMENT LA PHRASE
-          // (17/08/2026). Voir la note de EntreeHistorique : sans la classe et
-          // sans les deux boutons allumés, une ligne du RÉCENT ne peut pas être
-          // rejouée — on ne recollait qu'un texte dans un contexte qui avait
-          // changé depuis.
-          const suite: EntreeHistorique[] = [
-            {
+        // ⭐ ON ENREGISTRE LA DEMANDE ENTIÈRE, PAS SEULEMENT LA PHRASE
+        // (17/08/2026). Voir la note de EntreeHistorique : sans la classe et
+        // sans les deux boutons allumés, une ligne du RÉCENT ne peut pas être
+        // rejouée — on ne recollait qu'un texte dans un contexte qui avait
+        // changé depuis.
+        //
+        // ⚠️ EN CLAIR, ET NON DANS UN `setHistorique(prec => …)`. Une fonction
+        // de mise à jour doit être PURE : y écrire sur le disque et y émettre un
+        // signal, c'est prévenir la colonne pendant que React calcule son état,
+        // et la faire se mettre à jour au milieu du rendu d'un autre composant.
+        // React le refusait à voix haute, en pointant la colonne.
+        const suite: EntreeHistorique[] = [
+          {
               question: vecteur.question,
               profil: quiEsTu,
               quand: Date.now(),
@@ -537,16 +545,18 @@ export default function EntreeMatrice({
               // « Mathématiques ». La chip, elle, est composée par l'appelant à
               // partir de ce qu'il vient de cliquer : elle est toujours juste.
               ...boutonsDeLaChip(quiEsTu, chipChoisie, laClasse),
-            },
-            ...prec.filter((e) => e.question !== vecteur.question),
-          ].slice(0, MAX_HISTORIQUE);
-          // Écrire ET prévenir la colonne : les deux gestes sont désormais
-          // inséparables, dans historique.ts. Sans le signal, la demande qu'on
-          // vient de poser n'entrait dans le RÉCENT qu'au changement de page —
-          // `storage` ne se déclenche QUE dans les autres onglets.
-          ecrireHistorique(suite);
-          return suite;
-        });
+          },
+          // ⚠️ `lireHistorique()` ET NON UN ÉTAT. C'est le disque qui fait foi,
+          // et il est à jour : la colonne peut avoir supprimé une ligne depuis,
+          // et un état gardé en mémoire l'aurait fait revenir à la demande
+          // suivante.
+          ...lireHistorique().filter((e) => e.question !== vecteur.question),
+        ].slice(0, MAX_HISTORIQUE);
+        // Écrire ET prévenir la colonne : les deux gestes sont inséparables,
+        // dans historique.ts. Sans le signal, la demande qu'on vient de poser
+        // n'entrait dans le RÉCENT qu'au changement de page — `storage` ne se
+        // déclenche QUE dans les autres onglets.
+        ecrireHistorique(suite);
       }
 
       // Mesure. On envoie le PROFIL et le NOMBRE de résultats, jamais le texte
