@@ -81,6 +81,13 @@ export const MARQUEURS_INTENTION: { intention: Intention; marqueurs: string[] }[
       "cinq minutes", "5 minutes", "10 minutes", "rapidement", "vite fait",
       "un mot", "chaque jour", "tous les jours", "le matin", "court",
       "continuer", "reprendre", "la suite",
+      // ⭐ LE MOT « RITUEL » LUI-MÊME MANQUAIT (16/08). La table nommait
+      // l'intention « rituel » mais ne savait pas la lire quand on l'écrivait :
+      // « un rituel pour le soir » n'accrochait rien et tombait sur le repli.
+      "rituel", "rituels", "routine", "quotidien", "quotidienne", "habitude",
+      // Et le soir manquait alors que le matin y était. C'est pourtant l'heure
+      // du parent — les devoirs se font après l'école, pas avant.
+      "le soir", "chaque soir", "tous les soirs", "avant de dormir", "au coucher",
     ],
   },
   {

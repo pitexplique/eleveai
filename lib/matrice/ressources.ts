@@ -438,7 +438,17 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // donc un adulte tombe sur le bon niveau quel que soit l'enfant ou la
     // classe dont il parle.
     niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof", "parent"],
-    matiere: "francais",
+    // ⭐ TRANSVERSALE, PAS « FRANÇAIS » (16/08). La déclaration datait du jour
+    // où la dictée ne dictait que du français. Elle sert aujourd'hui 11
+    // matières et tout le Dico CP → Terminale — un élève qui demande du
+    // vocabulaire de maths ou d'histoire ne la voyait jamais, parce que
+    // `moteur.ts` écarte une ressource dont la matière ne correspond pas à
+    // celle demandée. `transversal` est le seul joker qui traverse ce filtre.
+    // ⚠️ Contrepartie assumée : elle peut désormais remonter sur une question
+    // d'anglais, d'espagnol ou d'IA. C'est voulu — elle a des mots dans ces
+    // langues — mais c'est le genre de réglage à revoir si l'accueil devient
+    // bruyant. La notion reste `orthographe` : c'est bien ce qu'on y travaille.
+    matiere: "transversal",
     notions: ["orthographe"],
     intentions: ["rituel", "entrainer"],
     type: "rituel",
