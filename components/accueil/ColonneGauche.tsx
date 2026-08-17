@@ -25,9 +25,13 @@ import {
   oublierDemande,
   type EntreeHistorique,
 } from "@/lib/matrice/historique";
-import type { ProfilId } from "@/lib/matrice/types";
 
-const CLE_PROFIL = "eleveai.ia.profil";
+// ⛔ CETTE COLONNE NE LIT PLUS `eleveai.ia.profil` (17/08/2026). Elle en gardait
+// une copie pour écrire la classe sous le nom du compte, et cette clé ne dit pas
+// qui l'on est : elle dit quel bouton on a cliqué en dernier sur l'entrée. Voir
+// `labelClasseCompte` plus bas. La clé existe toujours, elle appartient à
+// EntreeMatrice, et c'est très bien qu'un seul fichier la manipule.
+
 // Replier la colonne est un choix qui doit SURVIVRE à la navigation : quelqu'un
 // qui la ferme veut de la place, pas la refermer à chaque page.
 const CLE_COLONNE = "eleveai.ia.colonne";
@@ -65,7 +69,6 @@ export default function ColonneGauche() {
   const { eleve, logout } = useEleve();
   const router = useRouter();
   const [historique, setHistorique] = useState<EntreeHistorique[]>([]);
-  const [profil, setProfil] = useState<ProfilId | null>(null);
   const [menuOuvert, setMenuOuvert] = useState(false);
   const [tiroirOuvert, setTiroirOuvert] = useState(false);
   const [toutAfficher, setToutAfficher] = useState(false);
@@ -86,8 +89,6 @@ export default function ColonneGauche() {
     window.addEventListener("storage", relire);
 
     try {
-      const p = localStorage.getItem(CLE_PROFIL);
-      if (p && PROFILS.some((x) => x.id === p)) setProfil(p as ProfilId);
       setReplie(localStorage.getItem(CLE_COLONNE) === "repliee");
     } catch {
       /* navigation privée : la colonne vit sans */
@@ -110,7 +111,34 @@ export default function ColonneGauche() {
   }
 
   const initiales = (eleve?.nom ?? "?").trim().slice(0, 2).toUpperCase();
-  const labelProfil = profil ? PROFILS.find((p) => p.id === profil)?.label : null;
+
+  /**
+   * ⭐ LA CLASSE SOUS LE NOM VIENT DU COMPTE, ET DE NULLE PART AILLEURS
+   * (17/08/2026, Frédéric : « sous Arthur il affiche Première alors qu'il est
+   * en 5e »).
+   *
+   * ⛔ ON LISAIT `eleveai.ia.profil` — le DERNIER BOUTON CLIQUÉ sur l'entrée.
+   * C'est un choix de navigation, pas une identité : un 5ᵉ a parfaitement le
+   * droit d'aller regarder ce qui se fait en Première, et ce coup d'œil se
+   * gravait sous son nom jusqu'à ce qu'il clique ailleurs. Le compte, lui,
+   * disait 5ᵉ tout du long.
+   *
+   * C'est exactement le défaut corrigé le 12/08 dans EntreeMatrice — « un
+   * souvenir de clic ne peut pas primer sur ce que dit le compte » — mais la
+   * colonne n'en avait pas profité : elle lisait la même clé, dans son coin.
+   *
+   * ⚠️ `acces_etablissement` dit « premiere-spe » là où les profils disent
+   * « premiere » : sans ce raccord, un lycéen verrait son identifiant brut.
+   * Et si le compte ne sait pas, on écrit « Élève » — jamais une classe
+   * devinée. Même règle que `inferClasseFromCode`, supprimée le 12/08 : deviner
+   * n'était pas une meilleure réponse, seulement une plus confiante.
+   */
+  const labelClasseCompte = useMemo(() => {
+    const c = eleve?.classe;
+    if (!c) return null;
+    const id = c.replace(/-spe$/, "");
+    return PROFILS.find((p) => p.id === id)?.label ?? null;
+  }, [eleve?.classe]);
 
   // ⭐ LES FILTRES DU RÉCENT (07/08). Trente demandes de quatre matières dans
   // une seule liste, c'est un tas : retrouver « la question de conjugaison de
@@ -420,7 +448,7 @@ export default function ColonneGauche() {
                 {eleve.nom || "Mon compte"}
               </span>
               <span className="block truncate text-xs text-slate-500">
-                {labelProfil ?? eleve.classe ?? "Élève"}
+                {labelClasseCompte ?? "Élève"}
               </span>
             </span>
             <span aria-hidden="true" className="text-slate-400">
