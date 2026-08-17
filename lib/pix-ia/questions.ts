@@ -14,6 +14,7 @@ import { d3Questions } from "./questions/d3";
 import { lyceeQuestions } from "./questions/lycee";
 import { d1Gabarits } from "./gabarits/d1";
 import { d2Gabarits } from "./gabarits/d2";
+import { d3Gabarits } from "./gabarits/d3";
 import type { PixGabarit } from "./gabarits/socle";
 
 export type { PixQuestion, PixEvalQuestion, PixGabarit };
@@ -38,7 +39,7 @@ export const PIX_IA_QUESTIONS: PixQuestion[] = [
  * Le coach, lui, les consomme (lib/tutor-v4/questionBank/pix/depuisPixIa.ts) :
  * c'est là qu'ils servent, puisque c'est là qu'on revient plusieurs fois.
  */
-export const PIX_IA_GABARITS: PixGabarit[] = [...d1Gabarits, ...d2Gabarits];
+export const PIX_IA_GABARITS: PixGabarit[] = [...d1Gabarits, ...d2Gabarits, ...d3Gabarits];
 
 export type PixNiveau = "college" | "lycee";
 
