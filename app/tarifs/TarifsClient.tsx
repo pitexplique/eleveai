@@ -47,25 +47,37 @@ const offres = [
     soon: false,
   },
   {
+    // ⛔ OFFRE FAMILLE — PAS ENCORE OUVERTE (17/08/2026).
+    //
+    // Cette carte annonçait « 4,90 € / mois », « prix de lancement bloqué à
+    // VIE » et « résiliation libre » : trois ENGAGEMENTS CONTRACTUELS, sur une
+    // offre dont le tarif n'est pas arrêté et derrière laquelle il n'y a, à ce
+    // jour, aucune structure pour encaisser. Un parent qui écrivait via le
+    // bouton avait déjà, de son point de vue, souscrit à un prix garanti.
+    //
+    // L'offre École, elle, reste ouverte : elle passe par un devis et une
+    // facturation à l'établissement — rien ne s'y déclenche tout seul.
+    //
+    // Pour l'ouvrir : régler le statut (cf. app/formation-ia/page.tsx, même
+    // sujet), fixer le tarif, brancher le paiement — puis repasser `soon` à
+    // false et rendre son prix à la carte.
     nom: "Famille",
     badge: "🏠 Hors cadre scolaire",
     badgeColor: "bg-violet-100 text-violet-800",
-    prix: "4,90 € / mois",
-    soustitre: "ou 49 € / an (2 mois offerts)",
-    description: "Pour les parents qui veulent un accès à la maison, sans passer par l'établissement. Prix de lancement : les premiers abonnés le gardent à vie.",
+    prix: "Bientôt",
+    soustitre: "l'accès à la maison n'est pas encore ouvert",
+    description: "Pour les parents qui veulent un accès à la maison, sans passer par l'établissement. Cette offre se prépare : le tarif n'est pas encore arrêté, et rien n'est proposé à la souscription pour le moment.",
     inclus: [
-      "Prix de lancement bloqué à vie",
       "1 élève, tous les outils débloqués",
       "Coach Maths IA · Coach Français IA",
       "English Maths A1 → B2",
       "Parcours · Calcul rapide · Défis",
-      "Résiliation libre à tout moment",
     ],
-    cta: "Commencer — 4,90 €/mois",
+    cta: "Être prévenu à l'ouverture",
     ctaHref: "/contact",
-    ctaColor: "bg-violet-600 hover:bg-violet-500 text-white",
+    ctaColor: "bg-slate-200 hover:bg-slate-300 text-slate-700",
     highlight: false,
-    soon: false,
+    soon: true,
   },
 ];
 
@@ -108,13 +120,13 @@ const faq = [
     q: "Y a-t-il un contrat à signer ?",
     a: "Pour l'accès établissement, oui — un contrat simple qui précise les conditions d'accès, la protection des données et la durée, dans le cadre du RGPD.",
   },
+  // Les deux questions « famille » qui étaient ici (résiliation en 1 clic,
+  // prix de lancement verrouillé à vie) répondaient sur un abonnement qui
+  // n'existe pas : elles poussaient même à « s'abonner tôt pour verrouiller le
+  // meilleur prix ». Une seule question honnête les remplace.
   {
-    q: "Puis-je résilier à tout moment (offre famille) ?",
-    a: "Oui. L'abonnement mensuel famille se résilie en 1 clic, sans frais ni préavis.",
-  },
-  {
-    q: "Le prix famille va-t-il augmenter ?",
-    a: "4,90 €/mois est un prix de lancement : il augmentera à mesure que la plateforme s'enrichit. Mais les abonnés actuels conservent leur tarif à vie, tant que leur abonnement reste actif. S'abonner tôt, c'est verrouiller le meilleur prix.",
+    q: "L'offre famille est-elle disponible ?",
+    a: "Pas encore. L'accès à la maison, hors cadre scolaire, se prépare : le tarif n'est pas arrêté et aucune souscription n'est ouverte. Écrivez-nous si vous voulez être prévenu le jour où elle ouvre. En attendant, une grande partie du site s'utilise librement, sans compte.",
   },
   {
     q: "Pourquoi EleveAI est moins cher que les autres ?",
@@ -186,15 +198,26 @@ export default function TarifsClient() {
           {offres.map((o) => (
             <div
               key={o.nom}
-              className={`relative flex flex-col rounded-[2rem] border bg-white/90 p-6 shadow-xl backdrop-blur transition hover:-translate-y-1 ${
+              className={`relative flex flex-col rounded-[2rem] border p-6 shadow-xl backdrop-blur transition hover:-translate-y-1 ${
                 o.highlight
-                  ? "border-blue-300 ring-4 ring-blue-100"
-                  : "border-white/70"
+                  ? "border-blue-300 bg-white/90 ring-4 ring-blue-100"
+                  : o.soon
+                    ? "border-dashed border-slate-300 bg-white/60"
+                    : "border-white/70 bg-white/90"
               }`}
             >
               {o.highlight && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-blue-600 px-4 py-1 text-xs font-black text-white shadow">
                   ⭐ Le plus populaire
+                </div>
+              )}
+
+              {/* `soon` était déclaré sur les trois offres depuis toujours et
+                  lu nulle part : le moyen de dire « pas encore » existait, sans
+                  jamais rien changer à l'écran. Il est branché ici. */}
+              {o.soon && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-slate-600 px-4 py-1 text-xs font-black text-white shadow">
+                  ⏳ Bientôt
                 </div>
               )}
 
@@ -205,7 +228,13 @@ export default function TarifsClient() {
               </div>
 
               <h2 className="text-xl font-black text-slate-950">{o.nom}</h2>
-              <p className="mt-1 text-3xl font-black text-blue-700">{o.prix}</p>
+              <p
+                className={`mt-1 text-3xl font-black ${
+                  o.soon ? "text-slate-400" : "text-blue-700"
+                }`}
+              >
+                {o.prix}
+              </p>
               <p className="mt-1 text-sm font-bold text-slate-500">{o.soustitre}</p>
               <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-600">
                 {o.description}

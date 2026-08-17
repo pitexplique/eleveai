@@ -1,9 +1,40 @@
 import type { Metadata } from "next";
 
+// ─────────────────────────────────────────────────────────────────────────────
+// L'IDENTITÉ DE L'ÉDITEUR — le seul bloc à tenir à jour dans ce fichier.
+//
+// Identifier l'éditeur d'un site est une obligation (LCEN, art. 6-III) et elle
+// ne dépend PAS de savoir si le site encaisse quoi que ce soit : elle vaut
+// déjà, gratuit ou pas. Cette page affichait « À compléter » sur les quatre
+// lignes qui comptent, sous un avertissement qu'on s'adressait à soi-même
+// (« vérifier avec un professionnel du droit avant mise en ligne définitive »)
+// — un brouillon parti en production.
+//
+// `nomComplet` est repris de ce que le site publie DÉJÀ partout ailleurs :
+// /tarifs, /besoin-de-vous, /entreprises, et l'auteur des articles du blog
+// (`author` du JSON-LD). Le site n'a jamais été anonyme — seule la page qui
+// sert précisément à identifier l'éditeur l'était. Le rendu reste tolérant au
+// champ vide au cas où, mais il n'y a plus rien à cacher ici.
+//
+// `statut` : à revoir le jour où une structure existe (micro-entreprise,
+// association…). Aujourd'hui le site n'encaisse rien — pas de paiement branché,
+// pas d'offre aux particuliers ouverte — et la ligne le dit telle quelle.
+// L'adresse postale n'est exigible que d'un éditeur professionnel : tant que
+// ce n'est pas le cas, l'e-mail de contact suffit à te rendre joignable.
+// ─────────────────────────────────────────────────────────────────────────────
+const EDITEUR = {
+  nomDuSite: "EleveAI",
+  nomComplet: "Frédéric Lacoste",
+  statut:
+    "Site édité à titre personnel par un enseignant, sans structure commerciale à ce jour.",
+  contact: "academienumerique@gmail.com",
+};
+
 export const metadata: Metadata = {
   title: "Mentions légales",
   description:
     "Mentions légales de la plateforme EleveAI, IA au service des élèves, professeurs et établissements.",
+  alternates: { canonical: "https://www.eleveai.fr/mentions-legales" },
 };
 
 export default function MentionsLegalesPage() {
@@ -12,32 +43,33 @@ export default function MentionsLegalesPage() {
       <div className="mx-auto max-w-3xl">
       <h1 className="mb-6 text-2xl font-semibold">Mentions légales</h1>
 
-      <p className="mb-4 text-sm text-slate-400">
-        Ces informations sont fournies à titre indicatif. Merci de vérifier
-        leur conformité avec un professionnel du droit avant mise en ligne
-        définitive.
-      </p>
-
       <section className="mb-6 space-y-2 text-sm leading-relaxed">
         <h2 className="text-lg font-semibold text-sky-300">
           1. Éditeur du site
         </h2>
         <p>
-          Nom / Raison sociale : <span className="font-medium">EleveAI</span>
+          Nom du site :{" "}
+          <span className="font-medium">{EDITEUR.nomDuSite}</span>
         </p>
         <p>
-          Statut juridique : <span className="italic">À compléter</span>
+          Éditeur et responsable de la publication :{" "}
+          {EDITEUR.nomComplet ? (
+            <span className="font-medium">{EDITEUR.nomComplet}</span>
+          ) : (
+            <span className="italic text-amber-300">
+              en cours de mise à jour — joignable à l’adresse ci-dessous
+            </span>
+          )}
         </p>
-        <p>
-          Siège social : <span className="italic">À compléter</span>
-        </p>
-        <p>
-          Responsable de la publication :{" "}
-          <span className="italic">À compléter</span>
-        </p>
+        <p>{EDITEUR.statut}</p>
         <p>
           Contact :{" "}
-          <span className="italic">adresse e-mail / téléphone à compléter</span>
+          <a
+            href={`mailto:${EDITEUR.contact}`}
+            className="text-sky-300 underline"
+          >
+            {EDITEUR.contact}
+          </a>
         </p>
       </section>
 
@@ -46,6 +78,7 @@ export default function MentionsLegalesPage() {
           2. Hébergeur du site
         </h2>
         <p>Hébergeur : Vercel Inc.</p>
+        <p>440 N Barranca Ave #4133, Covina, CA 91723, États-Unis</p>
         <p>
           Site web :{" "}
           <a
@@ -80,6 +113,23 @@ export default function MentionsLegalesPage() {
           d’omissions. L’utilisation des contenus générés par l’IA reste sous
           la responsabilité des utilisateurs (élèves, professeurs,
           établissements…).
+        </p>
+      </section>
+
+      <section className="mb-6 space-y-2 text-sm leading-relaxed">
+        <h2 className="text-lg font-semibold text-sky-300">
+          5. Données personnelles
+        </h2>
+        <p>
+          Le détail des données collectées, de leur usage et de la façon de les
+          faire rectifier ou supprimer figure dans la{" "}
+          <a
+            href="/politique-confidentialite"
+            className="text-sky-300 underline"
+          >
+            politique de confidentialité
+          </a>
+          .
         </p>
       </section>
       </div>
