@@ -12,8 +12,10 @@ import { d1Questions } from "./questions/d1";
 import { d2Questions } from "./questions/d2";
 import { d3Questions } from "./questions/d3";
 import { lyceeQuestions } from "./questions/lycee";
+import { d1Gabarits } from "./gabarits/d1";
+import type { PixGabarit } from "./gabarits/socle";
 
-export type { PixQuestion, PixEvalQuestion };
+export type { PixQuestion, PixEvalQuestion, PixGabarit };
 export { questionId };
 
 // Banque complète, mappée par microskill (ref. lib/pix-ia/microskills.ts).
@@ -23,6 +25,19 @@ export const PIX_IA_QUESTIONS: PixQuestion[] = [
   ...d3Questions,
   ...lyceeQuestions,
 ];
+
+/**
+ * Les GABARITS — un item qui tire une question différente à chaque fois.
+ *
+ * ⚠️ Ils ne sont PAS dans `PIX_IA_QUESTIONS`, et c'est voulu. L'éval blanche
+ * pose une question par compétence et suit les questions déjà vues par leur
+ * identifiant (`questionId`) : un gabarit n'a pas d'identifiant stable, il en
+ * produit un nouveau à chaque tirage. Les brancher sans y réfléchir ferait
+ * sauter l'anti-répétition de l'éval au lieu de l'améliorer.
+ * Le coach, lui, les consomme (lib/tutor-v4/questionBank/pix/depuisPixIa.ts) :
+ * c'est là qu'ils servent, puisque c'est là qu'on revient plusieurs fois.
+ */
+export const PIX_IA_GABARITS: PixGabarit[] = [...d1Gabarits];
 
 export type PixNiveau = "college" | "lycee";
 

@@ -1,0 +1,160 @@
+// LES GABARITS DU COACH IA — un item, plusieurs questions.
+//
+// POURQUOI (16/08/2026). Les 230 questions Pix sont toutes figées : une
+// question écrite, une question servie. Rapporté aux 95 savoir-faire, cela
+// fait une médiane de DEUX questions chacun. Un coach sert à revenir sans
+// retomber sur la même : à deux, l'élève a tout vu au troisième passage. Et
+// tout ce qu'on veut construire ensuite puise dans la même réserve — le défi
+// du jour le plus vorace de tous.
+//
+// Le reste du dépôt a réglé cela depuis longtemps : un générateur bat dix
+// items figés. Le coach IA n'en avait aucun. Ironie du chantier, les seules
+// bonnes mécaniques étaient dans les banques A1→C1 qu'on remplace —
+// `vraiFauxTemplate` et `scenarioTemplate`. C'est d'elles qu'on garde
+// quelque chose, pas de leurs questions.
+//
+// ⚠️ CE QUI COMPTE, C'EST LA QUESTION, PAS L'HABILLAGE. Un gabarit qui tire
+// « la boulangerie Vanille » puis « le garage Delmas » sur le même
+// raisonnement produit deux textes et UNE question. La clé d'une question,
+// c'est son énoncé ET ses propositions (cf scripts/echantillon-banque.mjs).
+// Les réservoirs ci-dessous changent donc le CAS traité, jamais le décor.
+//
+// ⚠️ QUATRE PROPOSITIONS, JAMAIS DEUX. L'ancien coach IA comptait 49 items en
+// vrai/faux, soit un quart de sa banque à pile ou face. Un élève qui ne sait
+// pas y avait une chance sur deux, et le score ne mesurait plus rien. Les deux
+// helpers d'ici rendent toujours quatre lignes.
+//
+// CONVENTION : `choices[0]` est la bonne réponse, comme partout dans
+// lib/pix-ia. Le mélange a lieu à l'affichage (`shuffle` côté éval,
+// `shuffleChoices` côté coach), jamais ici.
+
+import type { PixQuestion } from "../questionTypes";
+
+/** Un gabarit produit une question différente à chaque tirage. */
+export type PixGabarit = {
+  /** Identifiant stable du GABARIT (pas de la question qu'il tire). */
+  id: string;
+  microskillId: string;
+  generate: () => PixQuestion;
+};
+
+function pick<T>(arr: readonly T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function melanger<T>(arr: readonly T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/**
+ * MISE EN SITUATION — un cas concret, quatre réactions possibles.
+ *
+ * Le cas change à chaque tirage, et avec lui le raisonnement demandé : ce
+ * n'est pas le même exercice reformulé, c'est une autre situation.
+ * Les trois pièges sont écrits AVEC le cas, parce qu'une erreur plausible
+ * dépend de la situation — un piège générique redevient une blague.
+ */
+export type CasSituation = {
+  /** Le cas, tel que l'élève le lit. */
+  cas: string;
+  bonne: string;
+  /** Trois erreurs que des élèves font vraiment, de longueur comparable. */
+  pieges: [string, string, string];
+  pourquoi: string;
+};
+
+export function situation(opts: {
+  id: string;
+  microskillId: string;
+  /** La question posée après le cas. Par défaut : « Que fais-tu ? ». */
+  consigne?: string;
+  pool: CasSituation[];
+}): PixGabarit {
+  return {
+    id: opts.id,
+    microskillId: opts.microskillId,
+    generate: () => {
+      const c = pick(opts.pool);
+      return {
+        microskillId: opts.microskillId,
+        text: `${c.cas}\n\n${opts.consigne ?? "Que fais-tu ?"}`,
+        choices: [c.bonne, ...c.pieges],
+        explanation: c.pourquoi,
+      };
+    },
+  };
+}
+
+/**
+ * CLASSEMENT — à quelle famille ce cas appartient-il ?
+ *
+ * Les quatre propositions sont les MÊMES à chaque tirage : ce sont les
+ * familles du référentiel. Deux conséquences heureuses. La longueur ne
+ * désigne plus rien, puisque les intitulés ne bougent pas ; et l'élève doit
+ * vraiment distinguer les familles entre elles, ce qu'aucune question à
+ * distracteurs jetables ne demande.
+ */
+export function classer(opts: {
+  id: string;
+  microskillId: string;
+  consigne: string;
+  /** Les familles proposées. Il en faut au moins quatre. */
+  familles: string[];
+  pool: { cas: string; famille: string; pourquoi: string }[];
+}): PixGabarit {
+  return {
+    id: opts.id,
+    microskillId: opts.microskillId,
+    generate: () => {
+      const c = pick(opts.pool);
+      /* On garde la bonne famille et trois autres, tirées au hasard parmi les
+         restantes : à plus de quatre familles, en servir six alourdirait la
+         lecture sans rien mesurer de plus. */
+      const autres = melanger(opts.familles.filter((f) => f !== c.famille)).slice(0, 3);
+      return {
+        microskillId: opts.microskillId,
+        text: `${opts.consigne}\n\n« ${c.cas} »`,
+        choices: [c.famille, ...autres],
+        explanation: c.pourquoi,
+      };
+    },
+  };
+}
+
+/**
+ * AFFIRMATION À CORRIGER — une phrase fausse, et ce qui cloche dedans.
+ *
+ * Remplace le vrai/faux : au lieu de demander si la phrase est juste (une
+ * chance sur deux), on demande POURQUOI elle ne l'est pas. Même matière
+ * travaillée, quatre lignes au lieu de deux, et l'élève doit nommer l'erreur
+ * au lieu de la sentir.
+ */
+export function corriger(opts: {
+  id: string;
+  microskillId: string;
+  pool: {
+    affirmation: string;
+    bonne: string;
+    pieges: [string, string, string];
+    pourquoi: string;
+  }[];
+}): PixGabarit {
+  return {
+    id: opts.id,
+    microskillId: opts.microskillId,
+    generate: () => {
+      const c = pick(opts.pool);
+      return {
+        microskillId: opts.microskillId,
+        text: `On lit souvent cette phrase :\n\n« ${c.affirmation} »\n\nQu'est-ce qui ne va pas ?`,
+        choices: [c.bonne, ...c.pieges],
+        explanation: c.pourquoi,
+      };
+    },
+  };
+}

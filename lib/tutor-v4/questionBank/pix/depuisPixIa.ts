@@ -13,7 +13,7 @@
 // toujours la première ligne.
 
 import type { DifficultyLevel, TutorBankItemV4 } from "@/lib/tutor-v4/types";
-import { PIX_IA_QUESTIONS } from "@/lib/pix-ia/questions";
+import { PIX_IA_QUESTIONS, PIX_IA_GABARITS } from "@/lib/pix-ia/questions";
 import { competenceOf, questionId, type PixQuestion } from "@/lib/pix-ia/questionTypes";
 import { pixMicroskill } from "@/lib/pix-ia/microskills";
 import {
@@ -35,6 +35,52 @@ function difficulteDe(q: PixQuestion): DifficultyLevel | null {
 
 /** Les questions Pix du niveau demandé, traduites en items du moteur. */
 export function convertirQuestionsPix(niveau: PixNiveauCoach): TutorBankItemV4[] {
+  return [...convertirFigees(niveau), ...convertirGabarits(niveau)];
+}
+
+/**
+ * Les gabarits, traduits en items `template` du moteur.
+ *
+ * C'est ici que le coach gagne son volume : un gabarit vaut autant de
+ * questions que son réservoir compte de cas. Le moteur tire lui-même à chaque
+ * passage, et son anti-répétition de CONTENU (`avoidFingerprints` dans
+ * questionPairBuilder) évite de reservir le même cas deux fois de suite.
+ */
+function convertirGabarits(niveau: PixNiveauCoach): TutorBankItemV4[] {
+  const paliers = PALIERS_PAR_NIVEAU[niveau];
+
+  return PIX_IA_GABARITS.flatMap((g): TutorBankItemV4[] => {
+    const micro = pixMicroskill(g.microskillId);
+    if (!micro || !paliers.includes(micro.palier)) return [];
+
+    return [
+      {
+        kind: "template",
+        id: g.id,
+        niveau: NIVEAU_TUTOR[niveau],
+        matiere: "ia",
+        notionId: competenceOf(g.microskillId),
+        microId: g.microskillId,
+        difficulty: DIFFICULTE_PAR_PALIER[micro.palier],
+        theme: "neutral",
+        tags: ["pix", "gabarit", niveau, micro.palier, competenceOf(g.microskillId)],
+        generate: () => {
+          const q = g.generate();
+          return {
+            text: q.text,
+            format: "qcm",
+            choices: q.choices,
+            expected: [q.choices[0]],
+            comparator: "mcq_exact",
+            explanation: q.explanation,
+          };
+        },
+      },
+    ];
+  });
+}
+
+function convertirFigees(niveau: PixNiveauCoach): TutorBankItemV4[] {
   const paliers = PALIERS_PAR_NIVEAU[niveau];
 
   return PIX_IA_QUESTIONS.flatMap((q): TutorBankItemV4[] => {
