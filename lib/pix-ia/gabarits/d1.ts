@@ -629,4 +629,856 @@ export const d1Gabarits: PixGabarit[] = [
       },
     ],
   }),
+  // ── 1.4.1 Le « mot suivant le plus probable » ────────────────────────────
+  corriger({
+    id: "g_1_4_1_llm",
+    microskillId: "1.4.1",
+    pool: [
+      {
+        affirmation: "Quand je pose une question à un agent conversationnel, il cherche la réponse sur Internet.",
+        bonne: "il produit sa réponse mot après mot, sans consulter quoi que ce soit — sauf outil ajouté",
+        pieges: [
+          "il cherche dans une base de réponses que ses concepteurs ont préparées",
+          "il cherche sur Internet, mais seulement sur des sites qu'il juge fiables",
+          "il cherche dans les conversations que d'autres utilisateurs ont eues avant",
+        ],
+        pourquoi:
+          "Un modèle de langage prédit la suite la plus probable. Certains services y ajoutent une recherche, mais c'est un outil branché à côté, pas le fonctionnement du modèle.",
+      },
+      {
+        affirmation: "Le modèle décide de toute sa réponse, puis l'écrit d'un seul coup.",
+        bonne: "il l'écrit morceau par morceau, chacun choisi d'après ce qui précède",
+        pieges: [
+          "il l'écrit d'un coup, mais la relit ensuite avant de l'afficher",
+          "il l'écrit phrase par phrase, en vérifiant chaque phrase terminée",
+          "il l'écrit à l'envers, en partant de la conclusion vers le début",
+        ],
+        pourquoi:
+          "Rien n'est décidé à l'avance : chaque morceau dépend de ceux déjà écrits. C'est pour cela que la réponse s'affiche progressivement.",
+      },
+      {
+        affirmation: "Si le modèle choisit le mot le plus probable, il donnera toujours la même réponse.",
+        bonne: "il tire parmi les suites probables : deux essais donnent souvent deux réponses",
+        pieges: [
+          "c'est exact, et c'est pourquoi il faut reformuler pour varier",
+          "c'est exact, sauf si la question contient une faute d'orthographe",
+          "c'est faux : il donne une réponse différente à chaque mot écrit",
+        ],
+        pourquoi:
+          "Le modèle ne prend pas systématiquement le mot le plus probable : il échantillonne. D'où des réponses différentes à question identique.",
+      },
+      {
+        affirmation: "« Le mot le plus probable », cela veut dire « le mot le plus vrai ».",
+        bonne: "probable veut dire fréquent dans les textes vus, ce qui n'a rien à voir avec vrai",
+        pieges: [
+          "probable veut dire vérifié par une source, donc vrai la plupart du temps",
+          "probable veut dire le mot que la majorité des utilisateurs attendent",
+          "probable veut dire correct grammaticalement, donc juste dans le contexte",
+        ],
+        pourquoi:
+          "C'est toute la difficulté : une phrase très plausible peut être entièrement fausse. La probabilité porte sur la forme, pas sur les faits.",
+      },
+      {
+        affirmation: "Un modèle de langage connaît le sens des mots qu'il emploie.",
+        bonne: "il manipule des régularités entre mots, sans que « sens » entre en jeu",
+        pieges: [
+          "il connaît le sens des mots courants, appris dans un dictionnaire intégré",
+          "il connaît le sens, mais seulement dans la langue de son entraînement",
+          "il ne connaît que l'orthographe, et devine le sens à partir du contexte",
+        ],
+        pourquoi:
+          "Le modèle relie des suites de mots à d'autres suites de mots. Cela suffit à produire du texte juste, sans qu'aucune compréhension intervienne.",
+      },
+      {
+        affirmation: "Plus la réponse est longue et détaillée, plus elle est fiable.",
+        bonne: "la longueur ne dit rien de la fiabilité : le modèle sait détailler du faux",
+        pieges: [
+          "c'est exact : détailler oblige le modèle à s'appuyer sur ses données",
+          "c'est exact pour les questions de cours, faux pour l'actualité récente",
+          "c'est l'inverse : les réponses courtes sont toujours les plus sûres",
+        ],
+        pourquoi:
+          "Une réponse détaillée est simplement une suite plus longue de mots probables. C'est même ce qui rend les erreurs convaincantes.",
+      },
+    ],
+  }),
+
+  // ── 1.4.2 Repérer une hallucination simple ───────────────────────────────
+  situation({
+    id: "g_1_4_2_hallucination",
+    microskillId: "1.4.2",
+    consigne: "Quel est le bon réflexe ?",
+    pool: [
+      {
+        cas: "Tu demandes trois sources sur les éruptions du Piton de la Fournaise. L'IA cite un article très précis, avec auteur, revue et année.",
+        bonne: "chercher cette référence dans un catalogue avant de l'utiliser",
+        pieges: [
+          "la citer : une référence aussi précise ne peut pas être inventée",
+          "demander à l'IA de confirmer que la référence existe bien",
+          "la citer en précisant qu'elle a été trouvée grâce à une IA",
+        ],
+        pourquoi:
+          "Les références inventées sont l'hallucination la plus fréquente, et la précision les rend crédibles. Seule une vérification ailleurs tranche.",
+      },
+      {
+        cas: "L'IA t'annonce que la loi sur le numérique a été votée le 12 mars, avec un chiffre de participation.",
+        bonne: "vérifier la date sur un site officiel avant de la reprendre",
+        pieges: [
+          "la reprendre : une date aussi précise vient forcément d'une source",
+          "la reprendre en ajoutant « selon une IA » pour rester honnête",
+          "reformuler la question autrement et garder la date qui revient",
+        ],
+        pourquoi:
+          "Reposer la question ne vérifie rien : le modèle peut répéter la même invention. Il faut sortir de l'outil.",
+      },
+      {
+        cas: "Tu demandes le résumé d'un livre que tu as lu. L'IA invente un personnage qui n'y figure pas.",
+        bonne: "ne pas utiliser ce résumé, et se fier à ta lecture",
+        pieges: [
+          "corriger ce détail et garder le reste, qui semble juste",
+          "signaler l'erreur à l'IA, ce qui corrigera son résumé",
+          "supposer que le personnage existe dans une autre édition",
+        ],
+        pourquoi:
+          "Un résumé qui invente un personnage a pu en inventer d'autres. Une erreur visible signale un texte à ne pas utiliser tel quel.",
+      },
+      {
+        cas: "Pour un exposé, l'IA t'affirme qu'un pays compte 42 millions d'habitants. Le chiffre te semble élevé.",
+        bonne: "comparer avec une source statistique publique avant de le citer",
+        pieges: [
+          "le citer : un chiffre précis est plus fiable qu'un ordre de grandeur",
+          "demander à l'IA d'où vient le chiffre, et citer la source qu'elle donne",
+          "arrondir le chiffre pour éviter d'avoir à le vérifier",
+        ],
+        pourquoi:
+          "La source citée par le modèle peut elle-même être inventée. Le doute se lève auprès d'un organisme, pas auprès de l'outil.",
+      },
+      {
+        cas: "L'IA t'explique une règle de grammaire avec un exemple qui te paraît faux.",
+        bonne: "vérifier la règle dans ton manuel ou auprès de ton professeur",
+        pieges: [
+          "faire confiance à l'IA : la grammaire est un domaine bien documenté",
+          "demander un autre exemple et retenir celui qui te semble juste",
+          "conclure que la règle est fausse et l'écarter complètement",
+        ],
+        pourquoi:
+          "Un domaine bien documenté ne met pas à l'abri : le modèle produit du plausible, pas du vérifié.",
+      },
+      {
+        cas: "Une IA te donne la biographie d'une personne peu connue. Deux dates s'y contredisent.",
+        bonne: "considérer l'ensemble comme incertain et le vérifier ailleurs",
+        pieges: [
+          "garder la date qui te semble la plus vraisemblable des deux",
+          "demander à l'IA laquelle des deux dates est la bonne",
+          "conserver la biographie en retirant simplement les deux dates",
+        ],
+        pourquoi:
+          "Les personnes peu documentées sont là où le modèle invente le plus, faute d'exemples. Une contradiction interne le signale.",
+      },
+    ],
+  }),
+
+  // ── 1.4.3 Les étapes d'entraînement d'un LLM ─────────────────────────────
+  classer({
+    id: "g_1_4_3_etapes_llm",
+    microskillId: "1.4.3",
+    consigne: "À quelle étape de la fabrication d'un modèle de langage cela correspond-il ?",
+    familles: [
+      "le pré-entraînement, sur d'énormes quantités de textes",
+      "l'ajustement, sur des exemples de consignes bien suivies",
+      "l'alignement, à partir de préférences humaines",
+      "l'utilisation, une fois le modèle mis en service",
+    ],
+    pool: [
+      {
+        cas: "Le modèle apprend à prédire la suite de milliards de phrases issues du Web.",
+        famille: "le pré-entraînement, sur d'énormes quantités de textes",
+        pourquoi: "C'est la phase la plus longue et la plus coûteuse : elle donne au modèle sa langue.",
+      },
+      {
+        cas: "On lui montre des milliers de paires « consigne → bonne réponse » rédigées exprès.",
+        famille: "l'ajustement, sur des exemples de consignes bien suivies",
+        pourquoi: "Le modèle apprend à répondre à une demande, et non à continuer un texte.",
+      },
+      {
+        cas: "Des personnes classent deux réponses de la meilleure à la moins bonne, des milliers de fois.",
+        famille: "l'alignement, à partir de préférences humaines",
+        pourquoi: "Ces classements servent à orienter le modèle vers des réponses jugées utiles et sûres.",
+      },
+      {
+        cas: "Un élève pose une question et lit la réponse affichée.",
+        famille: "l'utilisation, une fois le modèle mis en service",
+        pourquoi: "Le modèle applique ce qu'il a appris ; rien ne change dans ses paramètres.",
+      },
+      {
+        cas: "Le modèle acquiert sa grammaire et son vocabulaire en lisant des textes sans consigne.",
+        famille: "le pré-entraînement, sur d'énormes quantités de textes",
+        pourquoi: "Aucune consigne à ce stade : il apprend seulement à continuer du texte.",
+      },
+      {
+        cas: "On apprend au modèle à refuser une demande dangereuse, d'après des jugements humains.",
+        famille: "l'alignement, à partir de préférences humaines",
+        pourquoi: "Le refus n'a rien de spontané : il vient de préférences exprimées par des personnes.",
+      },
+      {
+        cas: "Des rédacteurs écrivent des réponses modèles à des questions typiques.",
+        famille: "l'ajustement, sur des exemples de consignes bien suivies",
+        pourquoi: "Ces réponses modèles servent d'exemples d'un bon comportement face à une consigne.",
+      },
+      {
+        cas: "Le service reçoit un million de questions par jour et y répond.",
+        famille: "l'utilisation, une fois le modèle mis en service",
+        pourquoi: "Sans réentraînement, l'usage ne modifie pas le modèle.",
+      },
+    ],
+  }),
+
+  // ── 1.4.4 Rôle des humains dans l'entraînement ───────────────────────────
+  situation({
+    id: "g_1_4_4_humains",
+    microskillId: "1.4.4",
+    consigne: "Quel rôle des humains cette description montre-t-elle ?",
+    pool: [
+      {
+        cas: "Des milliers de personnes lisent deux réponses d'un modèle et disent laquelle est la meilleure.",
+        bonne: "elles fournissent les préférences qui orientent le modèle vers de bonnes réponses",
+        pieges: [
+          "elles corrigent directement les paramètres que le modèle a mal ajustés",
+          "elles vérifient chaque réponse avant qu'elle ne parvienne à l'utilisateur",
+          "elles rédigent les réponses que le modèle ressortira ensuite telles quelles",
+        ],
+        pourquoi:
+          "Ces classements ne touchent pas aux paramètres à la main : ils servent de signal pour un nouvel entraînement.",
+      },
+      {
+        cas: "Des personnes examinent des textes violents ou choquants pour marquer ce que le modèle doit refuser.",
+        bonne: "elles étiquettent les contenus à écarter, un travail éprouvant et souvent invisible",
+        pieges: [
+          "elles suppriment ces contenus d'Internet pour que le modèle ne les voie pas",
+          "elles programment une règle qui interdit ces contenus au moment de répondre",
+          "elles vérifient a posteriori les réponses signalées par les utilisateurs",
+        ],
+        pourquoi:
+          "C'est le travail des modérateurs et annotateurs : réel, pénible, rarement mentionné quand on parle d'IA.",
+      },
+      {
+        cas: "Une équipe rédige des centaines de réponses modèles à des questions courantes.",
+        bonne: "elle fournit les exemples qui apprennent au modèle à suivre une consigne",
+        pieges: [
+          "elle constitue la base de réponses dans laquelle le modèle ira piocher",
+          "elle écrit la documentation destinée aux futurs utilisateurs du service",
+          "elle teste le modèle en comparant ses réponses aux réponses attendues",
+        ],
+        pourquoi:
+          "Ces exemples servent à l'ajustement : le modèle apprend le comportement, pas les réponses.",
+      },
+      {
+        cas: "Des spécialistes tentent de faire produire au modèle des contenus interdits, pour repérer ses failles.",
+        bonne: "ils cherchent les failles avant la mise en service, pour qu'elles soient corrigées",
+        pieges: [
+          "ils entraînent le modèle à produire ces contenus pour qu'il les reconnaisse",
+          "ils vérifient que le modèle respecte bien la réglementation européenne",
+          "ils mesurent la performance du modèle sur des questions difficiles",
+        ],
+        pourquoi:
+          "Chercher activement à faire échouer le système est une étape de mise au point, pas un entraînement.",
+      },
+      {
+        cas: "Des personnes vérifient et corrigent les étiquettes d'un jeu de données avant l'entraînement.",
+        bonne: "elles préparent les données : un exemple mal étiqueté enseigne une erreur",
+        pieges: [
+          "elles réduisent la taille des données pour accélérer l'entraînement",
+          "elles ajoutent des exemples supplémentaires générés automatiquement",
+          "elles répartissent les données entre entraînement et test du modèle",
+        ],
+        pourquoi:
+          "La qualité des étiquettes conditionne tout ce qui suit : le modèle apprend ce qu'on lui montre, erreurs comprises.",
+      },
+      {
+        cas: "Après la mise en service, une équipe suit les signalements des utilisateurs et prépare une nouvelle version.",
+        bonne: "elle referme la boucle : les retours nourrissent le prochain entraînement",
+        pieges: [
+          "elle corrige le modèle en direct, à chaque signalement reçu",
+          "elle vérifie que les utilisateurs respectent les conditions du service",
+          "elle mesure la fréquentation pour dimensionner les serveurs",
+        ],
+        pourquoi:
+          "Un modèle en service ne change pas tout seul : c'est une nouvelle version, entraînée à nouveau, qui corrige.",
+      },
+    ],
+  }),
+
+  // ── 1.4.5 Sources d'erreur des IA génératives ────────────────────────────
+  classer({
+    id: "g_1_4_5_source_erreur",
+    microskillId: "1.4.5",
+    consigne: "D'où vient l'erreur, dans ce cas ?",
+    familles: [
+      "d'une invention du modèle (hallucination)",
+      "d'une erreur ou d'un biais présent dans ses données",
+      "de la date : le fait est postérieur à son entraînement",
+      "d'une consigne ambiguë, qui autorise plusieurs lectures",
+    ],
+    pool: [
+      {
+        cas: "L'IA cite un article scientifique avec un titre et une revue qui n'existent pas.",
+        famille: "d'une invention du modèle (hallucination)",
+        pourquoi: "Le modèle produit une référence plausible parce qu'elle ressemble à celles qu'il a vues.",
+      },
+      {
+        cas: "Interrogée sur un match joué la semaine dernière, l'IA donne un résultat d'une autre saison.",
+        famille: "de la date : le fait est postérieur à son entraînement",
+        pourquoi: "Sans outil de recherche, un modèle ne sait rien de ce qui suit son entraînement.",
+      },
+      {
+        cas: "Quand on lui demande d'illustrer « un chef d'entreprise », l'IA décrit systématiquement un homme.",
+        famille: "d'une erreur ou d'un biais présent dans ses données",
+        pourquoi: "Le déséquilibre vient des textes d'entraînement, qui reflètent la société.",
+      },
+      {
+        cas: "Tu demandes « un résumé court », et l'IA rend une page entière.",
+        famille: "d'une consigne ambiguë, qui autorise plusieurs lectures",
+        pourquoi: "« Court » n'est pas une mesure. Préciser « en trois phrases » lève l'ambiguïté.",
+      },
+      {
+        cas: "L'IA affirme qu'une ville est la capitale d'un pays, en reprenant une confusion courante.",
+        famille: "d'une erreur ou d'un biais présent dans ses données",
+        pourquoi: "Une erreur répandue dans les textes se retrouve dans le modèle entraîné dessus.",
+      },
+      {
+        cas: "Tu demandes « parle-moi de Mercure », et l'IA te répond sur le métal.",
+        famille: "d'une consigne ambiguë, qui autorise plusieurs lectures",
+        pourquoi: "Le mot a plusieurs sens : la consigne ne dit pas lequel.",
+      },
+      {
+        cas: "L'IA invente le nom d'un maire pour une commune dont elle sait peu de choses.",
+        famille: "d'une invention du modèle (hallucination)",
+        pourquoi: "Là où les exemples manquent, le modèle comble avec ce qui a la bonne forme.",
+      },
+      {
+        cas: "L'IA ignore une loi entrée en vigueur il y a trois mois.",
+        famille: "de la date : le fait est postérieur à son entraînement",
+        pourquoi: "Les connaissances d'un modèle s'arrêtent à la date de ses données.",
+      },
+    ],
+  }),
+
+  // ── 1.5.1 Recommandation personnalisée ou non ────────────────────────────
+  classer({
+    id: "g_1_5_1_perso",
+    microskillId: "1.5.1",
+    consigne: "Cet affichage est-il personnalisé ?",
+    familles: [
+      "personnalisé : il dépend de ce que TU as fait",
+      "non personnalisé : il est le même pour tout le monde",
+      "non personnalisé : il suit un ordre fixe, chronologique ou alphabétique",
+      "non personnalisé : il dépend d'un paiement de l'annonceur",
+    ],
+    pool: [
+      {
+        cas: "La « prochaine vidéo » proposée après celle que tu viens de regarder.",
+        famille: "personnalisé : il dépend de ce que TU as fait",
+        pourquoi: "Elle est calculée sur ton historique et sur celui de personnes aux goûts proches.",
+      },
+      {
+        cas: "Le classement des dix titres les plus écoutés dans ton pays cette semaine.",
+        famille: "non personnalisé : il est le même pour tout le monde",
+        pourquoi: "Ce palmarès est identique pour tous les utilisateurs du pays.",
+      },
+      {
+        cas: "Tes messages, affichés du plus récent au plus ancien.",
+        famille: "non personnalisé : il suit un ordre fixe, chronologique ou alphabétique",
+        pourquoi: "L'ordre est mécanique : aucune préférence n'entre en compte.",
+      },
+      {
+        cas: "L'encart « Sponsorisé » en tête des résultats d'une boutique en ligne.",
+        famille: "non personnalisé : il dépend d'un paiement de l'annonceur",
+        pourquoi: "La place est achetée. Elle peut être ciblée, mais ce qui la décide est le paiement.",
+      },
+      {
+        cas: "La page d'accueil d'une plateforme vidéo qui te propose « parce que tu as regardé… ».",
+        famille: "personnalisé : il dépend de ce que TU as fait",
+        pourquoi: "L'intitulé le dit : la proposition découle de ton historique.",
+      },
+      {
+        cas: "La liste des chapitres d'un manuel scolaire en ligne, dans l'ordre du programme.",
+        famille: "non personnalisé : il suit un ordre fixe, chronologique ou alphabétique",
+        pourquoi: "L'ordre du programme ne dépend d'aucun utilisateur.",
+      },
+      {
+        cas: "Les articles « recommandés pour toi » en bas d'un site d'information.",
+        famille: "personnalisé : il dépend de ce que TU as fait",
+        pourquoi: "Ces suggestions s'appuient sur les articles que tu as déjà consultés.",
+      },
+      {
+        cas: "La météo de ta commune affichée sur la page d'accueil.",
+        famille: "non personnalisé : il est le même pour tout le monde",
+        pourquoi:
+          "Elle dépend de ta localisation, pas de ton comportement : tous les habitants voient la même chose.",
+      },
+    ],
+  }),
+
+  // ── 1.5.2 Cas d'usage courants de la recommandation ──────────────────────
+  classer({
+    id: "g_1_5_2_usages",
+    microskillId: "1.5.2",
+    consigne: "Quelle technique ce service emploie-t-il principalement ?",
+    familles: [
+      "de la recommandation",
+      "de la reconnaissance d'images",
+      "de la reconnaissance vocale",
+      "de la génération de contenu",
+    ],
+    pool: [
+      {
+        cas: "Une plateforme musicale te compose une liste hebdomadaire d'après tes écoutes.",
+        famille: "de la recommandation",
+        pourquoi: "La sélection est calculée sur ton comportement d'écoute.",
+      },
+      {
+        cas: "Une application identifie une plante à partir d'une photo prise au jardin.",
+        famille: "de la reconnaissance d'images",
+        pourquoi: "On analyse une image pour y reconnaître une espèce.",
+      },
+      {
+        cas: "Un téléphone écrit sous ta dictée le message que tu prononces.",
+        famille: "de la reconnaissance vocale",
+        pourquoi: "La parole est transformée en texte.",
+      },
+      {
+        cas: "Un outil produit une illustration à partir d'une phrase que tu écris.",
+        famille: "de la génération de contenu",
+        pourquoi: "L'image n'existait pas : elle est produite.",
+      },
+      {
+        cas: "Une boutique en ligne affiche « les clients ayant acheté ceci ont aussi aimé… ».",
+        famille: "de la recommandation",
+        pourquoi: "C'est du filtrage collaboratif : on s'appuie sur des acheteurs aux goûts proches.",
+      },
+      {
+        cas: "Un service de vidéos sous-titre automatiquement une conférence filmée.",
+        famille: "de la reconnaissance vocale",
+        pourquoi: "Le son est transcrit en texte affiché à l'écran.",
+      },
+      {
+        cas: "Un fil d'actualité met en avant les publications susceptibles de t'intéresser.",
+        famille: "de la recommandation",
+        pourquoi: "L'ordre du fil est calculé à partir de tes interactions passées.",
+      },
+      {
+        cas: "Une caisse automatique reconnaît les fruits posés sur son plateau.",
+        famille: "de la reconnaissance d'images",
+        pourquoi: "La caméra analyse l'image pour identifier le produit.",
+      },
+    ],
+  }),
+
+  // ── 1.5.3 Types de données utilisés par la recommandation ────────────────
+  situation({
+    id: "g_1_5_3_donnees",
+    microskillId: "1.5.3",
+    consigne: "Quelle donnée pèse le plus dans la recommandation ?",
+    pool: [
+      {
+        cas: "Une plateforme vidéo veut savoir quoi te proposer ensuite.",
+        bonne: "le temps que tu passes réellement sur chaque vidéo, et si tu la termines",
+        pieges: [
+          "le nombre total de vidéos disponibles dans la catégorie que tu regardes",
+          "la date de publication des vidéos que la plateforme met en ligne",
+          "les informations que tu as saisies dans ton profil à l'inscription",
+        ],
+        pourquoi:
+          "Les traces d'usage pèsent bien plus lourd que le profil déclaré : ce que tu fais en dit plus que ce que tu annonces.",
+      },
+      {
+        cas: "Une plateforme musicale ajuste tes suggestions.",
+        bonne: "les morceaux que tu réécoutes, et ceux que tu passes avant la fin",
+        pieges: [
+          "les genres musicaux que tu as cochés au moment de créer ton compte",
+          "la popularité générale des morceaux sortis dans les derniers mois",
+          "le nombre d'appareils sur lesquels tu utilises l'application",
+        ],
+        pourquoi: "Passer un morceau est un signal aussi fort que l'écouter en entier — un signal négatif.",
+      },
+      {
+        cas: "Une boutique en ligne veut t'afficher les bons produits.",
+        bonne: "les articles que tu as consultés, mis au panier ou achetés",
+        pieges: [
+          "la moyenne des notes attribuées aux produits par tous les clients",
+          "le prix moyen des articles présents dans le catalogue du site",
+          "les catégories que la boutique cherche à mettre en avant ce mois-ci",
+        ],
+        pourquoi:
+          "Consulter sans acheter est déjà une information : le panier abandonné est l'un des signaux les plus exploités.",
+      },
+      {
+        cas: "Un réseau social ordonne ton fil d'actualité.",
+        bonne: "ce sur quoi tu t'arrêtes, réagis ou commentes, et pendant combien de temps",
+        pieges: [
+          "l'ordre dans lequel tes contacts ont publié leurs messages",
+          "le nombre d'abonnés de chacun des comptes que tu suis",
+          "les centres d'intérêt que tu as déclarés dans tes paramètres",
+        ],
+        pourquoi:
+          "L'arrêt du défilement est mesuré : s'attarder sur une publication suffit à en signaler d'autres du même genre.",
+      },
+      {
+        cas: "Une plateforme veut recommander un film à un nouvel abonné qui n'a encore rien regardé.",
+        bonne: "les goûts d'abonnés au profil proche, faute de traces propres à lui",
+        pieges: [
+          "ses données personnelles : âge, ville et langue de son compte",
+          "les films les plus récents ajoutés au catalogue de la plateforme",
+          "rien : la plateforme attend qu'il regarde un premier film",
+        ],
+        pourquoi:
+          "C'est le démarrage à froid : sans historique, on s'appuie sur des utilisateurs semblables, puis on affine.",
+      },
+      {
+        cas: "Un service de recommandation d'articles de presse affine ses propositions.",
+        bonne: "les articles ouverts, et ceux lus jusqu'au bout plutôt que survolés",
+        pieges: [
+          "le nombre d'articles que le site publie dans chaque rubrique",
+          "l'heure à laquelle tu ouvres habituellement l'application",
+          "la longueur moyenne des articles proposés par la rédaction",
+        ],
+        pourquoi:
+          "Ouvrir et lire ne sont pas la même chose : la durée de lecture distingue l'intérêt réel du simple clic.",
+      },
+    ],
+  }),
+
+  // ── 1.5.4 Le risque d'enfermement (bulle de filtre) ──────────────────────
+  situation({
+    id: "g_1_5_4_bulle",
+    microskillId: "1.5.4",
+    consigne: "Que se passe-t-il, et que faire ?",
+    pool: [
+      {
+        cas: "Depuis un mois, ton fil ne te propose plus que des vidéos sur un seul sujet.",
+        bonne: "c'est une bulle de filtre : aller chercher volontairement d'autres sujets",
+        pieges: [
+          "c'est une panne de l'algorithme : signaler le problème au service",
+          "c'est normal : la plateforme met en avant ce qui marche en ce moment",
+          "c'est un réglage : désactiver les notifications pour en voir moins",
+        ],
+        pourquoi:
+          "La personnalisation se renforce d'elle-même : plus tu regardes, plus on t'en propose, moins tu vois autre chose.",
+      },
+      {
+        cas: "Tous les articles que tu vois sur un débat de société défendent le même point de vue.",
+        bonne: "c'est une chambre d'écho : chercher ce que disent d'autres sources",
+        pieges: [
+          "c'est que tout le monde est d'accord sur la question",
+          "c'est que les autres points de vue ont été retirés par la plateforme",
+          "c'est un hasard : les propositions changeront d'elles-mêmes demain",
+        ],
+        pourquoi:
+          "Ne plus rencontrer de désaccord n'est pas un signe d'unanimité : c'est un signe de filtrage.",
+      },
+      {
+        cas: "Un ami et toi cherchez la même chose au même moment et obtenez des résultats différents.",
+        bonne: "c'est la personnalisation : vos historiques ne sont pas les mêmes",
+        pieges: [
+          "c'est une erreur du moteur, qui devrait donner le même résultat",
+          "c'est que l'un de vous deux est connecté et l'autre non",
+          "c'est que les résultats changent d'une minute à l'autre",
+        ],
+        pourquoi:
+          "Deux personnes ne voient pas le même Internet, et c'est justement ce qui rend la bulle difficile à repérer seul.",
+      },
+      {
+        cas: "Tu veux sortir de l'enfermement algorithmique sans quitter la plateforme.",
+        bonne: "suivre volontairement des sources qui ne te ressemblent pas, et nettoyer ton historique",
+        pieges: [
+          "t'abonner à davantage de comptes dans les sujets que tu suis déjà",
+          "cliquer sur tout ce qui passe pour élargir le champ des propositions",
+          "cesser toute interaction jusqu'à ce que les propositions changent",
+        ],
+        pourquoi:
+          "S'abonner à plus de comptes du même domaine resserre la bulle. Il faut y introduire autre chose, et le faire exprès.",
+      },
+      {
+        cas: "Une vidéo qui t'a mis en colère te vaut aussitôt cinq propositions du même genre.",
+        bonne: "l'algorithme mesure la réaction, pas l'accord : réagir en attire d'autres",
+        pieges: [
+          "l'algorithme s'est trompé sur ce que tu aimes, il se corrigera seul",
+          "l'algorithme cherche à te faire changer d'avis sur ce sujet",
+          "l'algorithme propose ces vidéos à tout le monde en ce moment",
+        ],
+        pourquoi:
+          "Regarder jusqu'au bout parce qu'on n'est pas d'accord est un signal positif pour le système. C'est ce qui rend la colère rentable.",
+      },
+      {
+        cas: "Un adulte te dit qu'il ne voit jamais les contenus dont tu parles avec tes amis.",
+        bonne: "vos algorithmes vous servent deux fils différents, à partir d'usages différents",
+        pieges: [
+          "il n'utilise pas la même application que toi et tes amis",
+          "ces contenus sont réservés à une tranche d'âge par la plateforme",
+          "il a désactivé les recommandations dans ses paramètres",
+        ],
+        pourquoi:
+          "La bulle explique une part des incompréhensions entre générations : chacun croit voir « ce qui se passe ».",
+      },
+    ],
+  }),
+
+  // ── 1.6.1 Définir un robot et ses grandes fonctions ──────────────────────
+  classer({
+    id: "g_1_6_1_fonctions",
+    microskillId: "1.6.1",
+    consigne: "À quelle grande fonction d'un robot cet organe correspond-il ?",
+    familles: [
+      "percevoir",
+      "décider",
+      "agir",
+      "aucune des trois : c'est de l'alimentation ou de la structure",
+    ],
+    pool: [
+      {
+        cas: "Une caméra placée à l'avant du robot.",
+        famille: "percevoir",
+        pourquoi: "La caméra recueille des informations sur l'environnement.",
+      },
+      {
+        cas: "Le programme qui choisit de contourner l'obstacle par la gauche.",
+        famille: "décider",
+        pourquoi: "C'est le traitement : il choisit l'action à partir de ce qui a été perçu.",
+      },
+      {
+        cas: "Le moteur qui fait tourner la roue droite.",
+        famille: "agir",
+        pourquoi: "Un actionneur exécute l'action décidée.",
+      },
+      {
+        cas: "La batterie qui alimente l'ensemble du robot.",
+        famille: "aucune des trois : c'est de l'alimentation ou de la structure",
+        pourquoi: "Indispensable, mais elle ne perçoit rien, ne décide rien et n'agit pas.",
+      },
+      {
+        cas: "Un capteur de distance qui mesure l'écart avec le mur.",
+        famille: "percevoir",
+        pourquoi: "Toute mesure prise sur l'environnement relève de la perception.",
+      },
+      {
+        cas: "La pince qui se referme sur l'objet.",
+        famille: "agir",
+        pourquoi: "La pince est un actionneur : elle modifie le monde.",
+      },
+      {
+        cas: "Le modèle qui reconnaît l'objet et en déduit la prise à employer.",
+        famille: "décider",
+        pourquoi: "Reconnaître pour choisir une action, c'est la partie décision.",
+      },
+      {
+        cas: "Le châssis en aluminium qui porte les composants.",
+        famille: "aucune des trois : c'est de l'alimentation ou de la structure",
+        pourquoi: "La structure soutient l'ensemble, sans participer à la boucle.",
+      },
+    ],
+  }),
+
+  // ── 1.6.2 Exemples de robots utilisant l'IA ──────────────────────────────
+  classer({
+    id: "g_1_6_2_avec_ia",
+    microskillId: "1.6.2",
+    consigne: "Cette machine utilise-t-elle de l'IA ?",
+    familles: [
+      "oui : elle s'adapte à ce qu'elle perçoit",
+      "non : elle répète un geste réglé une fois pour toutes",
+      "non : elle applique une règle simple à un capteur",
+      "non : c'est un appareil piloté à distance par un humain",
+    ],
+    pool: [
+      {
+        cas: "Un aspirateur qui cartographie la pièce et modifie son trajet selon les obstacles.",
+        famille: "oui : elle s'adapte à ce qu'elle perçoit",
+        pourquoi: "La carte est construite en roulant, et le trajet recalculé : le comportement dépend de la perception.",
+      },
+      {
+        cas: "Un bras d'usine qui reproduit exactement la même soudure sur chaque pièce.",
+        famille: "non : elle répète un geste réglé une fois pour toutes",
+        pourquoi: "Le geste est programmé au millimètre. Aucune adaptation, aucune décision.",
+      },
+      {
+        cas: "Une porte de magasin qui s'ouvre quand le détecteur repère un mouvement.",
+        famille: "non : elle applique une règle simple à un capteur",
+        pourquoi: "« Mouvement détecté, alors j'ouvre » est une règle écrite, pas un apprentissage.",
+      },
+      {
+        cas: "Un drone dirigé en direct par une personne avec une télécommande.",
+        famille: "non : c'est un appareil piloté à distance par un humain",
+        pourquoi: "Toutes les décisions viennent du pilote : la machine exécute.",
+      },
+      {
+        cas: "Une voiture qui freine seule quand elle reconnaît un piéton devant elle.",
+        famille: "oui : elle s'adapte à ce qu'elle perçoit",
+        pourquoi: "Reconnaître un piéton dans une image demande un modèle entraîné.",
+      },
+      {
+        cas: "Un radiateur qui se coupe dès que la sonde dépasse 21 °C.",
+        famille: "non : elle applique une règle simple à un capteur",
+        pourquoi: "Un seuil fixe sur une mesure ne fait pas une IA.",
+      },
+      {
+        cas: "Un robot de tri qui reconnaît le matériau des déchets qui défilent devant lui.",
+        famille: "oui : elle s'adapte à ce qu'elle perçoit",
+        pourquoi: "La reconnaissance du matériau sur une image est apprise sur des exemples.",
+      },
+      {
+        cas: "Un bras chirurgical qui reproduit fidèlement les gestes du chirurgien qui le manipule.",
+        famille: "non : c'est un appareil piloté à distance par un humain",
+        pourquoi: "Le robot transmet et stabilise le geste, mais ne décide de rien.",
+      },
+    ],
+  }),
+
+  // ── 1.6.3 Qu'est-ce qu'une IA incarnée ───────────────────────────────────
+  corriger({
+    id: "g_1_6_3_incarnee",
+    microskillId: "1.6.3",
+    pool: [
+      {
+        affirmation: "Une IA incarnée, c'est une IA qui a l'apparence d'un être humain.",
+        bonne: "c'est une IA logée dans un objet physique qui perçoit et agit, quelle que soit sa forme",
+        pieges: [
+          "c'est une IA qui se présente sous la forme d'un personnage animé à l'écran",
+          "c'est une IA capable de tenir une conversation comme le ferait une personne",
+          "c'est une IA installée sur l'appareil de l'utilisateur plutôt que sur un serveur",
+        ],
+        pourquoi:
+          "Un aspirateur autonome est une IA incarnée. L'apparence humaine n'entre pas dans la définition.",
+      },
+      {
+        affirmation: "Un assistant conversationnel sur téléphone est une IA incarnée.",
+        bonne: "il n'agit pas dans le monde physique : il n'y a ni capteur ni actionneur",
+        pieges: [
+          "il l'est, puisqu'il est installé dans un objet que l'on tient en main",
+          "il l'est, puisqu'il perçoit la voix grâce au microphone du téléphone",
+          "il ne l'est pas, parce qu'il fonctionne en réalité sur un serveur distant",
+        ],
+        pourquoi:
+          "Percevoir ne suffit pas : l'incarnation suppose d'agir sur le monde, donc des actionneurs.",
+      },
+      {
+        affirmation: "Un robot avec des capteurs est forcément une IA incarnée.",
+        bonne: "il faut de plus qu'il DÉCIDE à partir de ce qu'il perçoit, pas qu'il applique un seuil",
+        pieges: [
+          "il faut de plus qu'il soit relié à Internet pour accéder à un modèle",
+          "il faut de plus qu'il puisse se déplacer seul dans son environnement",
+          "il faut de plus qu'il apprenne pendant son utilisation, pas avant",
+        ],
+        pourquoi:
+          "Un portail à détecteur a un capteur et un moteur. Sans décision apprise entre les deux, ce n'est pas de l'IA.",
+      },
+      {
+        affirmation: "Ce qui est difficile pour une IA incarnée, c'est de calculer assez vite.",
+        bonne: "le plus dur est l'incertitude du monde : les capteurs se trompent et rien ne se répète",
+        pieges: [
+          "le plus dur est le manque de données d'entraînement pour la robotique",
+          "le plus dur est la consommation d'énergie des moteurs qu'elle pilote",
+          "le plus dur est de faire tenir le modèle dans la mémoire du robot",
+        ],
+        pourquoi:
+          "Une simulation est propre et reproductible. Le réel est bruité, glissant, encombré : c'est là que ça casse.",
+      },
+      {
+        affirmation: "Une IA incarnée apprend en permanence pendant qu'elle travaille.",
+        bonne: "le plus souvent elle applique un modèle déjà entraîné, sans plus rien apprendre",
+        pieges: [
+          "elle apprend, mais seulement lorsqu'elle échoue à accomplir sa tâche",
+          "elle apprend, à condition d'être connectée au serveur du fabricant",
+          "elle n'apprend jamais : un robot ne peut pas être réentraîné",
+        ],
+        pourquoi:
+          "Apprendre en service est risqué : une erreur a des conséquences physiques. L'entraînement se fait avant, souvent en simulation.",
+      },
+      {
+        affirmation: "Puisqu'elle agit dans le monde réel, une IA incarnée est plus autonome qu'un logiciel.",
+        bonne: "agir physiquement ne rend pas autonome : ses objectifs et ses limites restent fixés par des humains",
+        pieges: [
+          "c'est exact, et c'est ce qui rend la robotique plus difficile à encadrer",
+          "c'est exact, mais seulement pour les robots capables de se déplacer",
+          "c'est faux : un robot est toujours moins autonome qu'un logiciel",
+        ],
+        pourquoi:
+          "L'autonomie de mouvement n'est pas l'autonomie de décision. Le but, les règles et l'arrêt d'urgence viennent de personnes.",
+      },
+    ],
+  }),
+
+  // ── 1.6.4 Incertitude du monde réel ──────────────────────────────────────
+  situation({
+    id: "g_1_6_4_imprevu",
+    microskillId: "1.6.4",
+    consigne: "Pourquoi est-ce difficile, et que doit faire le robot ?",
+    pool: [
+      {
+        cas: "Un robot livreur entraîné sur trottoir sec rencontre une flaque et des feuilles mouillées.",
+        bonne: "le réel diffère de l'entraînement : il doit ralentir et réévaluer en avançant",
+        pieges: [
+          "ses capteurs sont en panne : il doit s'arrêter et attendre un technicien",
+          "il lui manque des données : il doit être réentraîné avant de continuer",
+          "la situation est trop rare : il peut l'ignorer et poursuivre son trajet",
+        ],
+        pourquoi:
+          "Aucun entraînement ne couvre tous les cas. La réponse est de percevoir et décider en continu, pas de tout prévoir.",
+      },
+      {
+        cas: "Un aspirateur autonome trouve un objet nouveau au milieu du salon.",
+        bonne: "le monde change entre deux passages : il doit mettre sa carte à jour",
+        pieges: [
+          "sa carte est fausse : il doit recommencer entièrement la cartographie",
+          "il doit suivre le trajet appris et contourner l'objet sans le noter",
+          "il doit s'arrêter, l'objet n'étant pas prévu dans son programme",
+        ],
+        pourquoi:
+          "Une carte figée devient fausse dès qu'on déplace une chaise. La boucle perception-décision doit tourner sans cesse.",
+      },
+      {
+        cas: "Une voiture autonome roule sous une pluie battante qui brouille ses caméras.",
+        bonne: "ses mesures deviennent incertaines : elle doit réduire sa vitesse et sa confiance",
+        pieges: [
+          "elle doit se fier davantage à la carte, puisque les caméras faiblissent",
+          "elle doit poursuivre normalement : les autres capteurs compensent tout",
+          "elle doit s'arrêter immédiatement sur la voie où elle se trouve",
+        ],
+        pourquoi:
+          "Un capteur dégradé ne se remplace pas : il oblige à agir plus prudemment, en tenant compte de l'incertitude.",
+      },
+      {
+        cas: "Un bras robotisé doit saisir des fruits de tailles et de fermetés très variables.",
+        bonne: "aucun geste unique ne convient : il doit adapter sa prise à ce qu'il perçoit",
+        pieges: [
+          "il doit employer la prise la plus douce possible pour tous les fruits",
+          "il doit trier les fruits par taille avant de commencer à les saisir",
+          "il doit répéter le geste appris jusqu'à ce que la prise réussisse",
+        ],
+        pourquoi:
+          "La variabilité est la règle dans le monde réel. Un geste unique casse les fruits mûrs ou lâche les fermes.",
+      },
+      {
+        cas: "Un robot d'accueil, testé dans un couloir vide, se retrouve dans un hall bondé.",
+        bonne: "les personnes bougent de façon imprévisible : il doit prévoir large et réagir vite",
+        pieges: [
+          "il doit demander aux personnes de s'écarter de son passage",
+          "il doit reprendre le trajet appris, les personnes finissant par bouger",
+          "il doit augmenter sa vitesse pour traverser avant que la foule ne bouge",
+        ],
+        pourquoi:
+          "Le mouvement des autres ne se prédit pas exactement. On garde de la marge et on recalcule souvent.",
+      },
+      {
+        cas: "Un drone agricole entraîné en simulation vole pour la première fois par vent latéral.",
+        bonne: "la simulation ne reproduit pas tout : il doit corriger sa trajectoire en continu",
+        pieges: [
+          "la simulation était fausse : il faut la refaire avant tout nouveau vol",
+          "il doit voler plus haut, le vent étant plus faible en altitude",
+          "il doit attendre au sol que le vent tombe complètement",
+        ],
+        pourquoi:
+          "L'écart entre simulation et réel est le problème central de la robotique apprenante. On le comble en corrigeant en vol.",
+      },
+    ],
+  }),
 ];
