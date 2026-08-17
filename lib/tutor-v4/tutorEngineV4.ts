@@ -77,6 +77,33 @@ import type {
 // sur les moins récentes quand le pool est plus petit que la fenêtre).
 const RECENT_QUESTION_WINDOW = 24;
 
+/**
+ * Combien de questions on se rappelle D'UNE SÉANCE À L'AUTRE.
+ *
+ * ⚠️ 17/08/2026 — jusqu'ici, AUCUNE : `recentQuestionIds` repartait vide à
+ * chaque `startTutorSessionV4`, si bien qu'un élève revenu le lendemain pouvait
+ * retomber sur la question de la veille. Un coach sert justement à revenir :
+ * sans mémoire longue, tout le volume d'une banque ne joue qu'à l'intérieur
+ * d'une séance.
+ *
+ * 150 : de quoi couvrir plusieurs passages sur une même notion sans peser sur
+ * ce que le client transporte. Le repli de `buildQuestionPair` (« les moins
+ * récemment posées ») empêche l'impasse quand tout a été vu.
+ */
+const MEMOIRE_LONGUE_MAX = 150;
+
+/**
+ * Ce que le moteur doit éviter de reservir : la mémoire longue d'abord, la
+ * séance en cours ensuite.
+ *
+ * L'ordre compte — `lastSeenIndex` lit la position comme une ancienneté, et le
+ * repli sert les questions les moins récentes en premier. Ce qui vient d'une
+ * séance passée doit donc précéder ce qui vient de celle-ci.
+ */
+function memoireDe(session: TutorSessionV4): string[] {
+  return [...(session.seenQuestionIds ?? []), ...session.recentQuestionIds];
+}
+
 function createDefaultLearnerProfile(): LearnerProfile {
   return {
     preferences: {
@@ -439,12 +466,17 @@ export async function startTutorSessionV4(
   const recommendedDifficulty: DifficultyLevel = isSimpleMode ? 1 : 2;
   const recommendedStar: StarLevel = recommendedDifficulty;
 
+  /* La mémoire des séances précédentes, telle que le client l'a gardée.
+     Bornée ici et pas seulement côté navigateur : une liste transmise par le
+     réseau ne se fait jamais confiance sur sa taille. */
+  const memoireLongue = (input.seenQuestionIds ?? []).slice(-MEMOIRE_LONGUE_MAX);
+
   let pair = tryBuildPair({
     bank,
     notionId: notion.id,
     microId: firstMicro.id,
     recommendedStar,
-    recentQuestionIds: [],
+    recentQuestionIds: memoireLongue,
     preferExactStar: isSimpleMode,
     allowSingleItem: isSimpleMode,
   });
@@ -460,7 +492,7 @@ export async function startTutorSessionV4(
       currentMicroId: firstMicro.id,
       masteryByMicro: mastery.micro,
       recommendedStar,
-      recentQuestionIds: [],
+      recentQuestionIds: memoireLongue,
       preferExactStar: isSimpleMode,
     allowSingleItem: isSimpleMode,
     });
@@ -515,6 +547,7 @@ export async function startTutorSessionV4(
     visibleProgress: createInitialVisibleProgress(),
 
     recentQuestionIds: [currentPair.optionA.id, currentPair.optionB.id],
+    seenQuestionIds: memoireLongue,
     attempts: [],
 
     knowledgePackId: knowledge.id,
@@ -603,7 +636,7 @@ export async function jumpToMicroV4(
     notionId: session.notionFocus,
     microId: targetMicro.id,
     recommendedStar: session.recommendedStar,
-    recentQuestionIds: session.recentQuestionIds,
+    recentQuestionIds: memoireDe(session),
     preferExactStar: isSimpleMode,
     allowSingleItem: isSimpleMode,
   });
@@ -617,7 +650,7 @@ export async function jumpToMicroV4(
       currentMicroId: targetMicro.id,
       masteryByMicro: session.masteryByMicro,
       recommendedStar: session.recommendedStar,
-      recentQuestionIds: session.recentQuestionIds,
+      recentQuestionIds: memoireDe(session),
       preferExactStar: isSimpleMode,
     allowSingleItem: isSimpleMode,
     });
@@ -898,7 +931,7 @@ export async function answerTutorV4(
       notionId,
       microId,
       recommendedStar: session.recommendedStar,
-      recentQuestionIds: session.recentQuestionIds,
+      recentQuestionIds: memoireDe(session),
       preferExactStar: isSimpleMode,
     allowSingleItem: isSimpleMode,
     });
@@ -1047,7 +1080,7 @@ export async function answerTutorV4(
         currentMicroId: session.microFocus,
         masteryByMicro: session.masteryByMicro,
         recommendedStar: session.recommendedStar,
-        recentQuestionIds: session.recentQuestionIds,
+        recentQuestionIds: memoireDe(session),
         preferExactStar: isSimpleMode,
     allowSingleItem: isSimpleMode,
       });

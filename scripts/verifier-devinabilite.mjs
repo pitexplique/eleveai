@@ -62,6 +62,20 @@
 // bonne longueur peut rester idiot. C'est un détecteur de paresse d'écriture,
 // pas un correcteur. Il dit « devinable », il ne dit pas « juste ».
 //
+// ⚠️ ET IL N'EXERCE VOLONTAIREMENT QU'UN SEUL CHEMIN (17/08/2026). Depuis que
+// `generate` accepte un contexte — le moteur lui dit ce qu'il a déjà servi, et
+// un gabarit qui sait choisir tire alors sans remise — il existe deux façons
+// d'appeler un générateur. Ce script n'appelle QUE `generate()` nu, et c'est
+// un choix :
+//   - la grandeur mesurée ici, « la bonne réponse est-elle la plus longue ? »,
+//     ne dépend pas de QUEL cas est tiré, mais de la façon dont chaque cas est
+//     écrit. Sur 120 tirages, le réservoir est couvert de toute façon ;
+//   - cet instrument est ÉTALONNÉ (voir --rr, R&R = 1,4 % de la tolérance).
+//     Changer ce qu'il échantillonne invaliderait cet étalonnage, pour un gain
+//     nul. On ne retouche pas un instrument capable sans nécessité.
+// Le second chemin est contrôlé là où il change quelque chose :
+// scripts/verifier-generateurs.mjs, qui alterne un tirage sur deux.
+//
 // ⚠️ UNE BANQUE NUMÉRIQUE N'EST PAS FAUTIVE. En maths, « 1 234,5 » s'écrit
 // plus long que « 12 » sans que personne l'ait voulu. D'où le double critère,
 // et d'où l'étalon numérique.

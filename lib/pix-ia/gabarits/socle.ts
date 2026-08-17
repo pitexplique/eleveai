@@ -29,26 +29,51 @@
 // `shuffleChoices` côté coach), jamais ici.
 
 import type { PixQuestion } from "../questionTypes";
+import { contentFingerprint } from "@/lib/tutor-v4/fingerprint";
 
 /** Un gabarit produit une question différente à chaque tirage. */
 export type PixGabarit = {
   /** Identifiant stable du GABARIT (pas de la question qu'il tire). */
   id: string;
   microskillId: string;
-  generate: () => PixQuestion;
+  /**
+   * `ctx.eviter` = les empreintes déjà servies récemment. Les trois helpers
+   * d'ici s'en servent pour TIRER SANS REMISE dans leur réservoir : un seul
+   * appel, du neuf garanti tant qu'il reste un cas non vu.
+   */
+  generate: (ctx?: { eviter?: ReadonlySet<string> }) => PixQuestion;
 };
 
 function pick<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function melanger<T>(arr: readonly T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+/**
+ * Tire un cas dont la question n'a pas déjà été servie.
+ *
+ * On construit la question de CHAQUE cas — trois concaténations de chaînes, le
+ * coût est négligeable — on écarte celles dont l'empreinte est déjà connue, et
+ * on tire dans ce qui reste. Quand tout a été vu, on reprend le réservoir
+ * entier : mieux vaut une répétition qu'un écran vide.
+ *
+ * ⚠️ L'empreinte doit être calculée EXACTEMENT comme le fera le moteur, sans
+ * quoi le filtre porterait à côté. D'où l'import de `contentFingerprint`
+ * plutôt qu'une copie locale : deux définitions qui divergent, et le tri ne
+ * trie plus rien.
+ */
+function tirerSansRemise<T>(
+  pool: readonly T[],
+  question: (cas: T) => { text: string; choices: string[] },
+  eviter?: ReadonlySet<string>,
+): T {
+  if (!eviter || eviter.size === 0) return pick(pool);
+
+  const neufs = pool.filter((cas) => {
+    const q = question(cas);
+    return !eviter.has(contentFingerprint(q.text, q.choices));
+  });
+
+  return pick(neufs.length > 0 ? neufs : pool);
 }
 
 /**
@@ -75,15 +100,19 @@ export function situation(opts: {
   consigne?: string;
   pool: CasSituation[];
 }): PixGabarit {
+  const enonce = (c: CasSituation) => ({
+    text: `${c.cas}\n\n${opts.consigne ?? "Que fais-tu ?"}`,
+    choices: [c.bonne, ...c.pieges],
+  });
+
   return {
     id: opts.id,
     microskillId: opts.microskillId,
-    generate: () => {
-      const c = pick(opts.pool);
+    generate: (ctx) => {
+      const c = tirerSansRemise(opts.pool, enonce, ctx?.eviter);
       return {
         microskillId: opts.microskillId,
-        text: `${c.cas}\n\n${opts.consigne ?? "Que fais-tu ?"}`,
-        choices: [c.bonne, ...c.pieges],
+        ...enonce(c),
         explanation: c.pourquoi,
       };
     },
@@ -107,19 +136,40 @@ export function classer(opts: {
   familles: string[];
   pool: { cas: string; famille: string; pourquoi: string }[];
 }): PixGabarit {
+  /* On garde la bonne famille et trois autres. Le choix des trois est
+     DÉTERMINISTE, dérivé du cas lui-même — pas tiré au hasard.
+     ⚠️ Ce n'est pas un détail. Une question a pour empreinte son énoncé plus
+     ses propositions : si les propositions changeaient d'un tirage à l'autre,
+     un même cas produirait plusieurs empreintes, le compteur de vivier
+     annoncerait des questions qui n'en sont pas, et le tirage sans remise ne
+     saurait plus reconnaître ce qui a déjà été servi.
+     À quatre familles, les « autres » sont toujours les trois restantes : cela
+     ne changeait déjà rien. Le jour où une liste en comptera cinq, ce choix
+     déterministe évitera le piège. */
+  const autresDe = (c: { cas: string; famille: string }) => {
+    const restantes = opts.familles.filter((f) => f !== c.famille);
+    if (restantes.length <= 3) return restantes;
+    const depart = [...c.cas].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) >>> 0, 7);
+    return restantes
+      .map((f, i) => ({ f, rang: (depart + i * 2654435761) >>> 0 }))
+      .sort((a, b) => a.rang - b.rang)
+      .slice(0, 3)
+      .map((x) => x.f);
+  };
+
+  const enonce = (c: { cas: string; famille: string }) => ({
+    text: `${opts.consigne}\n\n« ${c.cas} »`,
+    choices: [c.famille, ...autresDe(c)],
+  });
+
   return {
     id: opts.id,
     microskillId: opts.microskillId,
-    generate: () => {
-      const c = pick(opts.pool);
-      /* On garde la bonne famille et trois autres, tirées au hasard parmi les
-         restantes : à plus de quatre familles, en servir six alourdirait la
-         lecture sans rien mesurer de plus. */
-      const autres = melanger(opts.familles.filter((f) => f !== c.famille)).slice(0, 3);
+    generate: (ctx) => {
+      const c = tirerSansRemise(opts.pool, enonce, ctx?.eviter);
       return {
         microskillId: opts.microskillId,
-        text: `${opts.consigne}\n\n« ${c.cas} »`,
-        choices: [c.famille, ...autres],
+        ...enonce(c),
         explanation: c.pourquoi,
       };
     },
@@ -144,15 +194,19 @@ export function corriger(opts: {
     pourquoi: string;
   }[];
 }): PixGabarit {
+  const enonce = (c: { affirmation: string; bonne: string; pieges: [string, string, string] }) => ({
+    text: `On lit souvent cette phrase :\n\n« ${c.affirmation} »\n\nQu'est-ce qui ne va pas ?`,
+    choices: [c.bonne, ...c.pieges],
+  });
+
   return {
     id: opts.id,
     microskillId: opts.microskillId,
-    generate: () => {
-      const c = pick(opts.pool);
+    generate: (ctx) => {
+      const c = tirerSansRemise(opts.pool, enonce, ctx?.eviter);
       return {
         microskillId: opts.microskillId,
-        text: `On lit souvent cette phrase :\n\n« ${c.affirmation} »\n\nQu'est-ce qui ne va pas ?`,
-        choices: [c.bonne, ...c.pieges],
+        ...enonce(c),
         explanation: c.pourquoi,
       };
     },

@@ -63,24 +63,10 @@ import type {
   TutorQuestionPair,
 } from "@/lib/tutor-v4/types";
 
-// Empreinte de CONTENU (texte + choix triés) : sert à ne pas reservir la même
-// question générée, même quand le gabarit varie à chaque tirage. On l'encode
-// dans l'id généré (`__fp<hash>__`) pour qu'elle voyage dans recentQuestionIds
-// sans toucher au moteur ni au type de session.
-function hashString(s: string): string {
-  let h = 0;
-  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
-  return h.toString(36);
-}
-function contentFingerprint(text: string, choices?: string[]): string {
-  const c = choices ? [...choices].sort().join("~") : "";
-  return hashString(`${text}||${c}`);
-}
-const FP_MARKER = /__fp([0-9a-z]+)__/;
-function extractFingerprint(id: string): string | null {
-  const m = id.match(FP_MARKER);
-  return m ? m[1] : null;
-}
+/* L'empreinte de contenu a été sortie d'ici le 17/08/2026 : les gabarits en ont
+   besoin pour tirer ailleurs que dans ce qui a déjà été servi, et la mémoire
+   des questions vues doit voyager jusqu'au navigateur. Voir fingerprint.ts. */
+import { contentFingerprint, extractFingerprint } from "@/lib/tutor-v4/fingerprint";
 
 function materializeBankItem(
   item: TutorBankItemV4,
@@ -135,14 +121,20 @@ function materializeBankItem(
     };
   }
 
-  // Anti-répétition de CONTENU : on retire jusqu'à 10 tirages pour éviter de
-  // reservir une question vue récemment (les gabarits n'ont pas de mémoire du
-  // contenu qu'ils génèrent). Petit pool → on garde le dernier tirage.
-  let generated = item.generate();
+  /* Anti-répétition de CONTENU, en deux temps.
+     1. On DIT au gabarit ce qu'il doit éviter. Celui qui sait choisir dans son
+        réservoir rend du neuf du premier coup.
+     2. Pour les autres — la grande majorité, qui ignorent l'argument — on
+        retire à l'aveugle, jusqu'à dix fois.
+     ⚠️ Le retirage aveugle n'est pas fiable : sur un réservoir de six cas dont
+     cinq déjà vus, dix tirages échouent encore une fois sur six, et coûtent dix
+     appels pour ça. C'est la raison d'être du premier temps. */
+  const eviter = avoidFingerprints;
+  let generated = item.generate({ eviter });
   let fp = contentFingerprint(generated.text, generated.choices);
   if (avoidFingerprints && avoidFingerprints.size > 0) {
     for (let k = 0; k < 10 && avoidFingerprints.has(fp); k++) {
-      generated = item.generate();
+      generated = item.generate({ eviter });
       fp = contentFingerprint(generated.text, generated.choices);
     }
   }
@@ -270,6 +262,41 @@ function pickRandom<T>(items: T[]): T {
   return items[Math.floor(Math.random() * items.length)];
 }
 
+/**
+ * POIDS D'UN GABARIT DANS LE TIRAGE.
+ *
+ * `pickRandom` est uniforme : dans une micro qui compte deux items figés et un
+ * gabarit de dix cas, l'item qui porte dix des douze questions sortait une fois
+ * sur trois. Plus un gabarit était riche, moins on l'exploitait.
+ *
+ * ⚠️ VALEUR PROVISOIRE, À CALER PAR LA MESURE — pas décrétée pour de bon.
+ * Trois est un point de départ prudent : il rétablit l'ordre sans noyer les
+ * items figés, qui portent ailleurs les pièges et les cas remarquables (en
+ * maths, un `fixed` est souvent le contre-exemple qu'on veut absolument
+ * servir). À vérifier avec scripts/mesurer-repetitions.ts, sur plusieurs
+ * classes : le bon réglage est celui qui recule la première répétition sans
+ * faire disparaître les items écrits à la main.
+ *
+ * Effet nul là où tout est du même type — CM1 en maths, presque uniquement des
+ * gabarits — et correctif là où c'est mixte. C'est exactement ce qu'on veut.
+ */
+const POIDS_GABARIT = 3;
+
+function poidsDe(item: TutorBankItemV4): number {
+  return item.kind === "template" ? POIDS_GABARIT : 1;
+}
+
+/** Tirage proportionnel au poids. Uniforme si tous les poids sont égaux. */
+function pickPondere(items: TutorBankItemV4[]): TutorBankItemV4 {
+  const total = items.reduce((s, item) => s + poidsDe(item), 0);
+  let tirage = Math.random() * total;
+  for (const item of items) {
+    tirage -= poidsDe(item);
+    if (tirage <= 0) return item;
+  }
+  return items[items.length - 1];
+}
+
 function isGoodContrast(a: TutorQuestionOption, b: TutorQuestionOption): boolean {
   if (a.id === b.id) return false;
 
@@ -332,7 +359,24 @@ export function buildQuestionPair(args: {
     return -1;
   };
 
-  const filtered = allForMicro.filter((item) => lastSeenIndex(item) === -1);
+  /**
+   * ⚠️ L'EXCLUSION PAR IDENTIFIANT NE VAUT QUE POUR LES ITEMS FIGÉS (17/08/2026).
+   *
+   * Un `fixed` vu une fois est épuisé : il n'a qu'une question, et rien d'autre
+   * ne le protège. L'écarter est juste.
+   *
+   * Un `template`, lui, en a autant que son réservoir compte de cas — et il est
+   * déjà défendu par un critère plus fin, l'empreinte de CONTENU
+   * (`avoidFingerprints`), qui sait ce qui a été servi et pas seulement qui l'a
+   * servi. Or l'id généré commence par l'id du gabarit (`monGabarit__fp…`), si
+   * bien que la comparaison par préfixe écartait le gabarit ENTIER dès la
+   * première variante. Dans une micro à deux items figés et un gabarit de dix
+   * cas, l'item qui porte 83 % de la variété était déclaré « déjà vu » alors
+   * qu'il lui restait neuf questions.
+   */
+  const filtered = allForMicro.filter(
+    (item) => item.kind === "template" || lastSeenIndex(item) === -1
+  );
 
   // Banque trop petite pour éviter toutes les questions récentes : on reprend
   // alors les moins récemment posées, en écartant si possible les plus
@@ -385,7 +429,7 @@ export function buildQuestionPair(args: {
     if (fp) avoidFingerprints.add(fp);
   }
 
-  const firstItem = pickRandom(source);
+  const firstItem = pickPondere(source);
   const optionA = toTutorQuestionOption(firstItem, avoidFingerprints);
 
   // Avec un générateur unique, on retire dans le MÊME gabarit : `avoidForB`
@@ -412,7 +456,7 @@ export function buildQuestionPair(args: {
   const optionB =
     contrasted.length > 0
       ? pickRandom(contrasted)
-      : toTutorQuestionOption(pickRandom(remaining), avoidForB);
+      : toTutorQuestionOption(pickPondere(remaining), avoidForB);
 
   const recommendedDifficulty: DifficultyLevel = recommendedStar;
 

@@ -85,6 +85,13 @@ import { pathToFileURL } from "node:url";
    « Aucun problème ». Voir scripts/lib/alias-loader.mjs. */
 register("./lib/alias-loader.mjs", import.meta.url);
 
+/* ⚠️ LA MÊME EMPREINTE QUE LE MOTEUR, PAS UNE RESSEMBLANCE. Le contexte
+   `eviter` contient des empreintes HACHÉES : y glisser des chaînes brutes
+   n'aurait jamais rien fait correspondre, le tirage sans remise se serait
+   comporté comme un tirage ordinaire, et ce contrôle aurait annoncé une
+   couverture qu'il n'avait pas. On importe donc la fonction du moteur. */
+const { contentFingerprint } = await import("@/lib/tutor-v4/fingerprint");
+
 const ARGS = process.argv.slice(2).filter((a) => !a.startsWith("--"));
 
 const CLASSE = ARGS[0] || "toutes";
@@ -319,16 +326,30 @@ for (const classe of CLASSES) {
       /* Le compte des propositions, rangé PAR BRANCHE : un énoncé dont on a
          gommé les chiffres identifie la branche du gabarit. */
       const taillesParEnonce = new Map();
+      /* ⚠️ 17/08/2026 — LES DEUX CHEMINS, PAS UN SEUL.
+         `generate` accepte désormais un contexte facultatif : le moteur lui dit
+         ce qu'il a déjà servi, et un gabarit qui sait choisir dans son
+         réservoir tire alors SANS REMISE. C'est un autre chemin de code, donc
+         un autre comportement à contrôler. Un vérificateur qui n'appelle
+         jamais `generate({ eviter })` laisserait la moitié du gabarit hors de
+         portée — et dirait « aucun problème » en toute bonne foi.
+         On alterne donc : un tirage sur deux reçoit les empreintes déjà vues,
+         comme en séance. Les générateurs qui ignorent l'argument — la grande
+         majorité — se comportent exactement comme avant. */
+      const dejaVues = new Set();
       for (let i = 0; i < TIRAGES; i++) {
         totalTirages += 1;
         let q;
         try {
-          q = item.generate();
+          q = i % 2 === 0 ? item.generate() : item.generate({ eviter: dejaVues });
         } catch (e) {
           vus.add(`le générateur casse : ${e.message}`);
           break;
         }
         enonces.add(q?.text);
+        /* Ce que le gabarit vient de servir : le prochain tirage « informé »
+           devra l'éviter. Même clé que le moteur — énoncé + choix TRIÉS. */
+        dejaVues.add(contentFingerprint(q?.text ?? "", q?.choices));
         if (Array.isArray(q?.choices)) {
           const cle = empreinteEnonce(q.text);
           if (!taillesParEnonce.has(cle)) taillesParEnonce.set(cle, new Map());

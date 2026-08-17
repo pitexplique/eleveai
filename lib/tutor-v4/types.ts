@@ -316,6 +316,16 @@ export type TutorSessionV4 = {
   hiddenStars: HiddenStarState[];
   visibleProgress: VisibleProgress;
   recentQuestionIds: string[];
+  /**
+   * Les questions vues lors des séances PRÉCÉDENTES, transmises par le client.
+   *
+   * ⚠️ Volontairement séparée de `recentQuestionIds`, qui est rognée à
+   * RECENT_QUESTION_WINDOW à chaque tour : une mémoire longue rangée dans une
+   * liste courte disparaîtrait dès la première réponse. Les deux ne servent
+   * d'ailleurs pas la même chose — l'une est la dynamique d'une séance, l'autre
+   * ce dont l'élève se souvient d'un jour à l'autre.
+   */
+  seenQuestionIds: string[];
   attempts: TurnAttempt[];
   knowledgePackId: string;
   audit: TutorAuditEntryV4[];
@@ -338,6 +348,12 @@ export type StartTutorV4Input = {
   notion: string;
   microId?: string;
   displayMode?: "simple" | "complete";
+  /**
+   * Les questions déjà vues, gardées par le client d'une séance à l'autre
+   * (voir `idPourMemoire` dans fingerprint.ts). Facultatif : sans elles, le
+   * coach se comporte comme avant, il recommence simplement à zéro.
+   */
+  seenQuestionIds?: string[];
 };
 
 export type StartTutorV4Response = {
@@ -484,7 +500,23 @@ export type TutorBankItemTemplateV4 = {
   theme?: QuestionTheme;
   hint?: string;
   tags?: string[];
-  generate: () => TutorGeneratedQuestionV4;
+  /**
+   * Tire une question.
+   *
+   * `ctx.eviter` contient les empreintes (`lib/tutor-v4/fingerprint.ts`) des
+   * questions déjà servies récemment. Un gabarit qui SAIT choisir dans son
+   * réservoir peut s'en servir pour tirer sans remise, et rendre du neuf du
+   * premier coup.
+   *
+   * ⚠️ L'ARGUMENT EST FACULTATIF, ET C'EST VOLONTAIRE. Les 381 générateurs
+   * déjà écrits l'ignorent : une fonction `() => Q` reste assignable ici. Pour
+   * eux, rien ne change — le moteur retire à l'aveugle jusqu'à dix fois, comme
+   * avant. On n'ajoute pas une obligation à trois cents fichiers pour un gain
+   * qui ne concerne que les réservoirs à cas.
+   */
+  generate: (ctx?: {
+    eviter?: ReadonlySet<string>;
+  }) => TutorGeneratedQuestionV4;
 };
 
 export type TutorBankItemV4 =

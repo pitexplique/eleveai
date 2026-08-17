@@ -83,6 +83,10 @@ import type {
 } from "@/lib/tutor-v4/types";
 
 import { getTutorLesson } from "@/lib/tutor-v4/lessons/getTutorLesson";
+import {
+  lireQuestionsVues,
+  retenirQuestionVue,
+} from "@/lib/tutor-v4/memoireQuestions";
 import { LessonPanel } from "@/lib/tutor-v4/lessons/components/LessonPanel";
 import TutorSimpleView from "./TutorSimpleView";
 import {
@@ -913,6 +917,9 @@ function continueAfterExplanation() {
 
     setSelectedOptionId(option.id);
     setCurrentQuestion(option);
+    /* La question est SERVIE : on la retient ici, et pas à la réponse — une
+       question vue puis abandonnée a quand même été vue. */
+    retenirQuestionVue(classe, matiere, option.id);
     setAnswer("");
     resetWrongAnswerFlow();
     closeSuccessBanner();
@@ -958,6 +965,9 @@ function continueAfterExplanation() {
           notion: activeNotion,
           microId: targetMicroId,
           displayMode,
+          /* Ce que cet élève a déjà vu, gardé d'une séance à l'autre : sans
+             cela le coach lui reposerait les questions d'hier. */
+          seenQuestionIds: lireQuestionsVues(classe, matiere),
         }),
       });
 
