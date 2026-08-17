@@ -16,6 +16,7 @@ import { d1Gabarits } from "./gabarits/d1";
 import { d2Gabarits } from "./gabarits/d2";
 import { d3Gabarits } from "./gabarits/d3";
 import { lyceeD1Gabarits } from "./gabarits/lycee-d1";
+import { lyceeD2D3Gabarits } from "./gabarits/lycee-d2-d3";
 import type { PixGabarit } from "./gabarits/socle";
 
 export type { PixQuestion, PixEvalQuestion, PixGabarit };
@@ -45,6 +46,7 @@ export const PIX_IA_GABARITS: PixGabarit[] = [
   ...d2Gabarits,
   ...d3Gabarits,
   ...lyceeD1Gabarits,
+  ...lyceeD2D3Gabarits,
 ];
 
 export type PixNiveau = "college" | "lycee";
