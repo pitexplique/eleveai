@@ -43,18 +43,26 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { track } from "@vercel/analytics";
 import { useEleve } from "@/context/EleveContext";
 import { PROFILS, getProfil } from "@/lib/matrice/profils";
 import { exemplesPour } from "@/lib/matrice/exemples";
-import { CHIPS_VISIBLES, chipsDisponibles, composerChip, matieresDisponibles } from "@/lib/matrice/chips";
+import {
+  CHIPS_VISIBLES,
+  chipsDisponibles,
+  composerChip,
+  matieresDisponibles,
+  partiesDeLaChip,
+} from "@/lib/matrice/chips";
 import { actionsPour, urlAction } from "@/lib/matrice/actions";
 import { afficherConcours } from "@/lib/matrice/concours";
 import { cahiersPour, guidesPour, urlCahierPour, urlGuidePour } from "@/lib/matrice/guides";
 import { chercher, libelleIntention } from "@/lib/matrice/moteur";
 import {
-  CLE_HISTORIQUE,
-  EVENEMENT_HISTORIQUE,
+  EVENEMENT_NOUVELLE_DEMANDE,
+  ecrireHistorique,
+  lireDemande,
   lireHistorique,
   type EntreeHistorique,
 } from "@/lib/matrice/historique";
@@ -122,6 +130,33 @@ const INTITULE_CLASSE: Record<string, string> = {
   parent: "La classe de votre enfant",
   prof: "La classe",
 };
+
+/**
+ * LES DEUX BOUTONS ALLUMÉS, RELUS DANS LA CHIP.
+ *
+ * La chip est composite — « Mathématiques · M'entraîner » — et le vecteur n'a
+ * qu'un champ pour la porter (voir composerChip). Pour enregistrer une demande
+ * rejouable, il faut la re-séparer : d'un côté la matière, de l'autre
+ * l'intention. Le seul juge est la liste des matières réellement disponibles
+ * pour ce profil — c'est elle qui a produit le libellé, c'est elle qui le
+ * reconnaît. Ce qui n'y est pas est une intention.
+ *
+ * ⚠️ On rend des LIBELLÉS et non des identifiants : ce sont eux que les
+ * pastilles comparent pour savoir laquelle se rallume.
+ */
+function boutonsDeLaChip(
+  profil: ProfilId,
+  chip: string | null,
+  classe: ProfilId | null,
+): { matiereLabel: string | null; intention: string | null } {
+  const parties = partiesDeLaChip(chip);
+  if (parties.length === 0) return { matiereLabel: null, intention: null };
+  const matieres = new Set(matieresDisponibles(profil, classe).map((m) => m.label));
+  return {
+    matiereLabel: parties.find((p) => matieres.has(p)) ?? null,
+    intention: parties.find((p) => !matieres.has(p)) ?? null,
+  };
+}
 
 /** Le rôle auquel appartient un profil enregistré. */
 function roleDuProfil(profil: ProfilId): RoleId {
@@ -469,29 +504,47 @@ export default function EntreeMatrice({
 
       if (vecteur.question) {
         setHistorique((prec) => {
-          const suite = [
+          // ⭐ ON ENREGISTRE LA DEMANDE ENTIÈRE, PAS SEULEMENT LA PHRASE
+          // (17/08/2026). Voir la note de EntreeHistorique : sans la classe et
+          // sans les deux boutons allumés, une ligne du RÉCENT ne peut pas être
+          // rejouée — on ne recollait qu'un texte dans un contexte qui avait
+          // changé depuis.
+          const suite: EntreeHistorique[] = [
             {
               question: vecteur.question,
               profil: quiEsTu,
               quand: Date.now(),
-              // ⭐ La matière voyage avec la demande : c'est elle qui fait
+              // La matière voyage avec la demande : c'est elle qui fait
               // exister les filtres du RÉCENT, dans la colonne de gauche.
+              // Depuis le 17/08 elle est renseignée dès que le MOTEUR la
+              // connaît, et non plus seulement quand un bouton a été cliqué.
               matiere: res.lecture.matiere ?? null,
               niveau: getProfil(quiEsTu).label,
+              // ⚠️ `laClasse` et non `classeAdulte` : quand le clic vient
+              // d'arriver, l'état de l'écran a un rendu de retard — c'est
+              // exactement la raison d'être du `forcage`, et l'oublier ici
+              // aurait enregistré la classe d'AVANT le clic.
+              classe: laClasse,
+              // Les BOUTONS, tels qu'ils étaient allumés. Ce que le moteur a
+              // deviné vit dans `matiere`, au-dessus ; ces deux-là ne portent
+              // que des gestes réellement faits.
+              //
+              // ⚠️ ON LES RELIT DANS LA CHIP, PAS DANS L'ÉTAT. Même piège que
+              // pour la classe, et il se serait vu tout de suite : `cliquerMatiere`
+              // appelle `lancer` dans la foulée de `setMatiereChoisie`, si bien
+              // que l'état porte encore la matière PRÉCÉDENTE. On aurait
+              // enregistré « Français » pour une demande faite en cliquant
+              // « Mathématiques ». La chip, elle, est composée par l'appelant à
+              // partir de ce qu'il vient de cliquer : elle est toujours juste.
+              ...boutonsDeLaChip(quiEsTu, chipChoisie, laClasse),
             },
             ...prec.filter((e) => e.question !== vecteur.question),
           ].slice(0, MAX_HISTORIQUE);
-          try {
-            localStorage.setItem(CLE_HISTORIQUE, JSON.stringify(suite));
-            // ⭐ ON PRÉVIENT LA COLONNE. Elle lisait localStorage une seule
-            // fois, à son montage : la demande qu'on venait de poser n'entrait
-            // dans le RÉCENT qu'au changement de page suivant. `storage` ne
-            // suffit pas : il ne se déclenche QUE dans les autres onglets,
-            // jamais dans celui qui écrit.
-            window.dispatchEvent(new Event(EVENEMENT_HISTORIQUE));
-          } catch {
-            /* tant pis */
-          }
+          // Écrire ET prévenir la colonne : les deux gestes sont désormais
+          // inséparables, dans historique.ts. Sans le signal, la demande qu'on
+          // vient de poser n'entrait dans le RÉCENT qu'au changement de page —
+          // `storage` ne se déclenche QUE dans les autres onglets.
+          ecrireHistorique(suite);
           return suite;
         });
       }
@@ -568,6 +621,129 @@ export default function EntreeMatrice({
       /* tant pis */
     }
   }, []);
+
+  /**
+   * ⭐ REJOUER UNE DEMANDE DU RÉCENT (17/08/2026) — l'écran entier, pas la
+   * phrase seule.
+   *
+   * Frédéric : « si on sélectionne ça ne marche pas ». C'était vrai deux fois.
+   * D'abord parce qu'on ne recollait que le texte, en repartant du profil du
+   * jour. Ensuite, et c'est ce qui rendait le clic parfaitement muet, parce que
+   * la lecture de `?q=` vivait dans l'effet de MONTAGE : la colonne pointait
+   * vers `/`, on était déjà sur l'accueil, et le routeur faisait une navigation
+   * douce — même composant, même état, l'effet ne repassait pas. Cliquer une
+   * ligne du RÉCENT ne provoquait donc rien du tout, littéralement.
+   *
+   * ⚠️ ON NE PASSE PAS PAR `lancer`. Rejouer, ce n'est pas redemander : `lancer`
+   * réécrirait la ligne avec un horodatage neuf — elle remonterait en tête de
+   * liste et changerait d'identifiant sous le clic — et renverrait la question
+   * en base une deuxième fois. On refait la recherche, rien de plus.
+   */
+  const rejouer = useCallback(
+    (e: EntreeHistorique) => {
+      // Un rappel est un choix délibéré : il doit gagner sur la classe du
+      // compte, sinon l'effet `classeConnue` ramènerait Arthur en 5ᵉ juste
+      // après qu'il a rouvert sa demande de CM1.
+      choixManuel.current = true;
+
+      const r = roleDuProfil(e.profil);
+      // Chez l'élève la classe EST le profil ; chez un adulte elle est à côté.
+      const laClasse = r === "eleve" ? e.profil : (e.classe ?? null);
+
+      setRole(r);
+      setClasse(laClasse);
+      setQuestion(e.question);
+      setMatiereChoisie(e.matiereLabel ?? null);
+      setIntentionChoisie(e.intention ?? null);
+      setDemandeProfil(false);
+      setPlusDOptions(false);
+
+      memoriser(e.profil);
+      if (r !== "eleve") retenirClasse(laClasse);
+
+      setResultat(
+        chercher({
+          quiEsTu: e.profil,
+          classe: r === "eleve" ? null : laClasse,
+          question: e.question,
+          chip: composerChip(e.matiereLabel ?? null, e.intention ?? null),
+        }),
+      );
+    },
+    [memoriser, retenirClasse],
+  );
+
+  /** Repartir à blanc — la page vide, mais SANS redemander qui l'on est. */
+  const nouvelleDemande = useCallback(() => {
+    setQuestion("");
+    setMatiereChoisie(null);
+    setIntentionChoisie(null);
+    setPlusDOptions(false);
+    setDemandeProfil(false);
+    setResultat(
+      profil ? chercher({ quiEsTu: profil, classe: classeAdulte, question: "", chip: null }) : null,
+    );
+  }, [profil, classeAdulte]);
+
+  /**
+   * L'URL DIT QUELLE DEMANDE EST OUVERTE — comme un fil de conversation.
+   *
+   * `?d=<horodatage>` désigne une ligne du RÉCENT ; une URL nue veut dire
+   * « nouvelle demande ». C'est ce qui rend le bouton Précédent et l'ouverture
+   * dans un nouvel onglet cohérents, au lieu d'un état qui ne vivrait que dans
+   * la mémoire du composant.
+   *
+   * ⚠️ `useSearchParams` ET NON `window.location` : c'est la seule lecture qui
+   * se remette à jour sur une navigation douce, celle qui ne remonte pas le
+   * composant. Tout le défaut d'origine tient dans cette différence.
+   *
+   * ⚠️ ON SORT DÈS QUE L'URL N'A PAS BOUGÉ. Cet effet dépend aussi de deux
+   * fonctions dont l'identité change quand le profil change : sans ce garde-fou,
+   * choisir sa classe aurait rappelé `nouvelleDemande()` et effacé la question
+   * en cours de frappe.
+   */
+  const parametres = useSearchParams();
+  const idDemande = parametres.get("d");
+  const questionUrl = parametres.get("q");
+  const urlPrecedente = useRef<string | null>(null);
+
+  useEffect(() => {
+    const cle = `${idDemande ?? ""}|${questionUrl ?? ""}`;
+    if (urlPrecedente.current === cle) return;
+    const auMontage = urlPrecedente.current === null;
+    urlPrecedente.current = cle;
+
+    if (idDemande) {
+      const e = lireDemande(Number(idDemande));
+      // Une demande supprimée, ou l'URL d'un autre navigateur : le RÉCENT est
+      // local. On ne montre pas d'erreur pour ça — on ouvre l'accueil normal.
+      if (e) rejouer(e);
+      return;
+    }
+
+    // Au montage, l'effet de restauration ci-dessus a déjà lu `?q=` et posé les
+    // portes du niveau. Repasser derrière lui effacerait ce qu'il vient de faire.
+    if (auMontage) return;
+
+    if (questionUrl) {
+      setQuestion(questionUrl);
+      if (profil) {
+        setResultat(
+          chercher({ quiEsTu: profil, classe: classeAdulte, question: questionUrl, chip: null }),
+        );
+      }
+      return;
+    }
+
+    nouvelleDemande();
+  }, [idDemande, questionUrl, rejouer, nouvelleDemande, profil, classeAdulte]);
+
+  // Le même geste quand l'URL, elle, ne change pas — voir EVENEMENT_NOUVELLE_DEMANDE.
+  useEffect(() => {
+    const vider = () => nouvelleDemande();
+    window.addEventListener(EVENEMENT_NOUVELLE_DEMANDE, vider);
+    return () => window.removeEventListener(EVENEMENT_NOUVELLE_DEMANDE, vider);
+  }, [nouvelleDemande]);
 
   function choisirRole(id: RoleId) {
     choixManuel.current = true;

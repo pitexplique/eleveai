@@ -12,14 +12,17 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEleve } from "@/context/EleveContext";
 import { ouvrirEcrireAuProf } from "@/lib/ecrireAuProf";
 import { PROFILS } from "@/lib/matrice/profils";
 import {
   EVENEMENT_HISTORIQUE,
+  EVENEMENT_NOUVELLE_DEMANDE,
   FILTRES_MATIERE,
   correspondAuFiltre,
   lireHistorique,
+  oublierDemande,
   type EntreeHistorique,
 } from "@/lib/matrice/historique";
 import type { ProfilId } from "@/lib/matrice/types";
@@ -60,6 +63,7 @@ function IconePanneau({ className = "" }: { className?: string }) {
 
 export default function ColonneGauche() {
   const { eleve, logout } = useEleve();
+  const router = useRouter();
   const [historique, setHistorique] = useState<EntreeHistorique[]>([]);
   const [profil, setProfil] = useState<ProfilId | null>(null);
   const [menuOuvert, setMenuOuvert] = useState(false);
@@ -129,18 +133,52 @@ export default function ColonneGauche() {
   const listeVisible = toutAfficher ? listeFiltree : listeFiltree.slice(0, VISIBLES);
   const reste = listeFiltree.length - listeVisible.length;
 
-  /** Le libellé lisible d'une matière enregistrée dans l'historique. */
+  /**
+   * Le libellé lisible d'une matière enregistrée dans l'historique.
+   *
+   * ⚠️ LE GARDE-FOU SUR `null` N'EST PAS DÉFENSIF, IL CORRIGE UN AFFICHAGE FAUX.
+   * Le premier filtre de la liste s'appelle « Toutes » et porte `id: null` —
+   * c'est la vue d'ensemble, pas une matière. Une demande sans matière tombait
+   * donc pile dessus, et huit lignes sur dix annonçaient « Toutes · 5e ·
+   * 17 août », comme si « Toutes » était la matière de la demande.
+   */
   const libelleMatiere = (id?: string | null) =>
-    FILTRES_MATIERE.find((f) => f.id === id)?.label ?? null;
+    id == null ? null : (FILTRES_MATIERE.find((f) => f.id === id)?.label ?? null);
+
+  /**
+   * Oublier une demande. Le clic ne doit PAS ouvrir la ligne qu'il supprime :
+   * le bouton est posé À CÔTÉ du lien et non dedans — un bouton dans un lien
+   * n'est pas du HTML valide, et le navigateur suivrait le lien de toute façon.
+   */
+  function supprimer(entree: EntreeHistorique) {
+    oublierDemande(entree.quand);
+    // Si c'est justement celle qu'on est en train de lire, on ne laisse pas
+    // l'écran de droite afficher une demande qui n'existe plus.
+    try {
+      if (new URLSearchParams(window.location.search).get("d") === String(entree.quand)) {
+        router.replace("/accueil");
+      }
+    } catch {
+      /* rien à rattraper : la ligne est déjà partie de la liste */
+    }
+  }
 
   const contenu = (
     <div className="flex min-h-full flex-col">
       <div className="flex-1 px-3 py-4">
         <div className="mb-4 flex items-center gap-1.5">
+          {/* ⚠️ `/accueil` ET NON `/` : la racine ne fait que rediriger ici, et
+              surtout une URL NUE est le signal qui remet l'entrée à blanc.
+              Depuis `/accueil?d=…`, pointer vers `/` ne changeait pas la query
+              de la page finale — la demande précédente restait affichée sous un
+              bouton qui promettait d'en ouvrir une nouvelle. */}
           <Link
-            href="/"
+            href="/accueil"
             prefetch={false}
-            onClick={() => setTiroirOuvert(false)}
+            onClick={() => {
+              setTiroirOuvert(false);
+              window.dispatchEvent(new Event(EVENEMENT_NOUVELLE_DEMANDE));
+            }}
             className="flex min-w-0 flex-1 items-center gap-2 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-800 transition hover:border-slate-500"
           >
             <span aria-hidden="true">+</span> Nouvelle demande
@@ -207,12 +245,20 @@ export default function ColonneGauche() {
                 // fois plus haute pour rien.
                 const contexte = [matiere, h.niveau, jourCourt(h.quand)].filter(Boolean).join(" · ");
                 return (
-                  <li key={`${h.quand}-${h.question}`}>
+                  <li key={h.quand} className="group relative">
+                    {/* ⭐ `?d=<horodatage>` ET NON `?q=<la question>` (17/08).
+                        Le lien ne portait que le texte : on repartait du profil
+                        du jour, sans la classe ni les boutons de l'époque — et
+                        il visait `/`, qui redirige vers `/accueil`, un aller-
+                        retour serveur pour rien. L'horodatage désigne LA
+                        demande, avec tout ce qui l'entourait.
+                        ⚠️ `pr-8` : la place de la croix. Sans elle, les titres
+                        longs passent dessous et on lit du texte à travers. */}
                     <Link
-                      href={`/?q=${encodeURIComponent(h.question)}`}
+                      href={`/accueil?d=${h.quand}`}
                       prefetch={false}
                       onClick={() => setTiroirOuvert(false)}
-                      className="block rounded-lg px-2 py-1.5 transition hover:bg-slate-100"
+                      className="block rounded-lg px-2 py-1.5 pr-8 transition hover:bg-slate-100"
                       title={h.question}
                     >
                       <span className="block truncate text-sm text-slate-600">{h.question}</span>
@@ -220,6 +266,20 @@ export default function ColonneGauche() {
                         <span className="block truncate text-[11px] text-slate-400">{contexte}</span>
                       )}
                     </Link>
+                    {/* ⚠️ VISIBLE D'EMBLÉE SUR TÉLÉPHONE, au survol seulement sur
+                        ordinateur. Un tiroir tactile n'a pas de survol : cachée
+                        derrière `group-hover`, la croix n'y serait jamais
+                        apparue, et supprimer serait resté impossible là où le
+                        geste est le plus courant. */}
+                    <button
+                      type="button"
+                      onClick={() => supprimer(h)}
+                      aria-label={`Supprimer la demande « ${h.question} »`}
+                      title="Supprimer"
+                      className="absolute right-1 top-1.5 rounded-md px-1.5 py-0.5 text-slate-400 transition hover:bg-slate-200 hover:text-slate-700 focus-visible:opacity-100 lg:opacity-0 lg:group-hover:opacity-100"
+                    >
+                      <span aria-hidden="true">✕</span>
+                    </button>
                   </li>
                 );
               })}

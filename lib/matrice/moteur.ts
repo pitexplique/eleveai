@@ -227,7 +227,19 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
     // Le libellé du programme s'affiche tel qu'il est écrit dans le knowledge :
     // c'est le mot que l'élève a sous les yeux dans son cours.
     notionLabel: notion?.label ?? notionProgramme?.label ?? null,
-    matiere: matiereChip,
+    // ⭐ `matiereVoulue` ET NON `matiereChip` (17/08/2026). La lecture ne
+    // rendait que la matière CLIQUÉE, alors que trois lignes plus haut le
+    // moteur en connaissait une quatrième fois sur cinq : celle de la notion,
+    // celle du programme de la classe. Il s'en servait pour choisir les
+    // ressources, puis la jetait en sortant.
+    //
+    // Le seul lecteur de ce champ est le RÉCENT de la colonne de gauche, et ça
+    // se voyait à l'œil nu : « fraction » en CM1, « automatisme » en Première,
+    // « dictee » en 5ᵉ — le moteur avait reconnu les trois notions, et les
+    // trois lignes se rangeaient dans « Autres ». La barre de filtres ne
+    // proposait qu'une matière, celle de l'unique demande faite en cliquant un
+    // bouton. Le tri existait, il n'avait rien à trier.
+    matiere: matiereVoulue,
     motsInconnus: motsInconnus(
       vecteur.question,
       Boolean(notion) || Boolean(matiereChip) || Boolean(notionProgramme),

@@ -218,7 +218,11 @@ export type LectureDemande = {
   intention: Intention | null;
   notionId: string | null;
   notionLabel: string | null;
-  /** Renseignée quand une chip de matière a été cliquée. */
+  /**
+   * La matière de la demande : celle qu'on a cliquée, sinon celle de la notion
+   * reconnue, sinon celle du programme de la classe. `null` seulement quand
+   * personne, ni l'élève ni le moteur, ne sait de quoi il s'agit.
+   */
   matiere: string | null;
   /** Mots de la question qu'aucune notion connue n'a reconnus. */
   motsInconnus: string[];
