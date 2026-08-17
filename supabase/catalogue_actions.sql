@@ -63,7 +63,16 @@ values
   -- ☀️ Rituels quotidiens — le carburant du rendez-vous du matin
   ('defis-du-jour',  'rituel', 'defi',         'maths',       'Défis du jour',    'Un défi maths chaque jour, inspiré de l''actu et de La Réunion.', '/defis-du-jour', 'Tous', 'court', 'quotidien', array['rituel','competition'], 0.70, 0.90, 'actif', true, 30),
   ('calcul-rapide',  'rituel', 'calcul-rapide','maths',       'Calcul rapide',    '5 min d''automatismes.',                        '/calcul-rapide', 'Tous', 'court', 'quotidien', array['rituel','progresser'], 0.75, 0.80, 'actif', true, 31),
-  ('dictee-du-jour', 'rituel', 'dictee',       'transversal', 'Dictée du jour',   'Un mot à écouter et écrire, 5 matières mélangées.', '/dictee-du-jour', 'Tous', 'court', 'quotidien', array['rituel','explorer'], 0.75, 0.70, 'actif', true, 32),
+  -- Deux corrections du 17/08/2026. La description datait du format à UN mot :
+  -- la dictée en sert CINQ depuis le 01/07. Et la matière passe de
+  -- « transversal » à « francais », pour s'aligner sur `lib/matrice/ressources.ts`,
+  -- où la même question a été tranchée le matin même : la dictée n'est pas
+  -- transversale, c'est une ressource de français qui pioche son vocabulaire
+  -- dans les autres matières. (« transversal » reste juste pour la carte au
+  -- trésor, le concours de logo et le cahier de vacances — eux le sont
+  -- vraiment.) ⚠️ Éditer ce .sql ne suffit pas : il faut le ré-exécuter en
+  -- base (upsert par id, l. 112), et /explorer est en ISR 3600 s.
+  ('dictee-du-jour', 'rituel', 'dictee',       'francais',    'Dictée du jour',   'Cinq mots à écouter et à écrire, de cinq matières différentes.', '/dictee-du-jour', 'Tous', 'court', 'quotidien', array['rituel','explorer'], 0.75, 0.70, 'actif', true, 32),
   ('semaine-verbes', 'rituel', 'autre',        'anglais',     'Semaine des verbes','Le vocabulaire anglais de la semaine.',        '/english-maths', 'Collège', 'court', 'hebdo', array['rituel'], 0.60, 0.50, 'actif', true, 33),
 
   -- 📖 Réviser & découvrir — supports et formats d'appoint
