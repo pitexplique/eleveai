@@ -958,4 +958,431 @@ export const lyceeD1Gabarits: PixGabarit[] = [
       },
     ],
   }),
+  // ── 1.1.7 Hybridation symbolique / statistique ───────────────────────────
+  situation({
+    id: "g_l_1_1_7_hybride",
+    microskillId: "1.1.7",
+    consigne: "Quelle architecture répond au besoin, et pourquoi ?",
+    pool: [
+      {
+        cas: "Un assistant doit rédiger des devis dont les totaux doivent être exacts au centime.",
+        bonne: "un modèle appris pour la rédaction, un calculateur exact pour les montants",
+        pieges: [
+          "un modèle appris seul, en lui demandant de vérifier ses calculs",
+          "un programme de règles seul, qui rédigera à partir de modèles de phrases",
+          "deux modèles appris différents, dont on comparera les totaux obtenus",
+        ],
+        pourquoi:
+          "Un modèle de langage estime le plausible. Sur un total, il faut de l'exact : chacun sa tâche.",
+      },
+      {
+        cas: "Un outil d'orientation doit proposer des formations SANS jamais violer les conditions d'accès légales.",
+        bonne: "un modèle appris pour proposer, des règles dures pour filtrer ce qui est interdit",
+        pieges: [
+          "un modèle appris seul, entraîné sur des dossiers respectant la loi",
+          "des règles seules, qui suffiront à établir toutes les propositions",
+          "un modèle appris dont on vérifiera les propositions par sondage",
+        ],
+        pourquoi:
+          "Ce qui doit être GARANTI ne s'apprend pas : on le contraint. L'apprentissage fait le reste.",
+      },
+      {
+        cas: "Un système de maintenance doit expliquer aux techniciens pourquoi il signale une panne.",
+        bonne: "un modèle appris pour détecter, un arbre de règles lisible pour restituer le motif",
+        pieges: [
+          "un modèle appris seul, à qui l'on demandera de rédiger l'explication",
+          "des règles seules, écrites par les techniciens les plus expérimentés",
+          "un modèle appris, dont on publiera les paramètres aux techniciens",
+        ],
+        pourquoi:
+          "Une explication produite par le modèle lui-même est un texte plausible, pas son raisonnement.",
+      },
+      {
+        cas: "Un correcteur doit repérer les fautes ET garantir qu'il n'invente pas de règle de grammaire.",
+        bonne: "un modèle appris pour repérer, une base de règles pour justifier chaque correction",
+        pieges: [
+          "un modèle appris seul, entraîné sur un très grand corpus corrigé",
+          "une base de règles seule, qui couvrira l'ensemble de la langue",
+          "un modèle appris auquel on demande de citer la règle appliquée",
+        ],
+        pourquoi:
+          "Repérer se fait bien par apprentissage ; justifier demande une source vérifiable.",
+      },
+      {
+        cas: "Un service veut proposer des trajets ET prouver que le trajet donné est le plus court.",
+        bonne: "un modèle appris pour anticiper le trafic, un algorithme exact pour le plus court chemin",
+        pieges: [
+          "un modèle appris seul, entraîné sur des millions de trajets réels",
+          "un algorithme exact seul, sans tenir compte des conditions de circulation",
+          "un modèle appris, dont on vérifiera les trajets a posteriori",
+        ],
+        pourquoi:
+          "L'optimalité se démontre, elle ne s'apprend pas. La prévision de trafic, elle, s'apprend.",
+      },
+      {
+        cas: "Une équipe pense qu'un modèle assez grand rendra l'hybridation inutile.",
+        bonne: "la taille n'apporte aucune garantie : ce qui doit être certain demande une méthode exacte",
+        pieges: [
+          "elle a raison : les modèles récents savent déjà calculer correctement",
+          "elle a raison, à condition d'entraîner le modèle sur des exemples de calcul",
+          "elle a tort, mais uniquement pour les domaines soumis à réglementation",
+        ],
+        pourquoi:
+          "Un modèle plus grand se trompe moins souvent — ce qui n'est pas la même chose que ne jamais se tromper.",
+      },
+    ],
+  }),
+
+  // ── 1.5.5 Filtrage collaboratif et par contenu ───────────────────────────
+  classer({
+    id: "g_l_1_5_5_filtrage",
+    microskillId: "1.5.5",
+    consigne: "Quelle technique de recommandation est à l'œuvre ?",
+    familles: [
+      "le filtrage collaboratif : d'après des utilisateurs semblables",
+      "le filtrage par contenu : d'après les caractéristiques des éléments",
+      "une approche hybride : les deux combinées",
+      "aucune des deux : un classement identique pour tous",
+    ],
+    pool: [
+      {
+        cas: "« Les personnes qui ont aimé ce film ont aussi aimé celui-ci. »",
+        famille: "le filtrage collaboratif : d'après des utilisateurs semblables",
+        pourquoi: "On s'appuie sur les goûts d'autres utilisateurs, sans rien savoir du film lui-même.",
+      },
+      {
+        cas: "« Vous avez écouté du jazz des années 1960 : voici d'autres titres du même style. »",
+        famille: "le filtrage par contenu : d'après les caractéristiques des éléments",
+        pourquoi: "On compare des attributs — genre, époque — pas des utilisateurs.",
+      },
+      {
+        cas: "Le service combine vos écoutes, celles d'auditeurs proches et l'analyse audio des morceaux.",
+        famille: "une approche hybride : les deux combinées",
+        pourquoi: "C'est ce que font les grandes plateformes en pratique.",
+      },
+      {
+        cas: "« Les dix titres les plus écoutés en France cette semaine. »",
+        famille: "aucune des deux : un classement identique pour tous",
+        pourquoi: "Un palmarès national ne recommande rien : il classe.",
+      },
+      {
+        cas: "Un nouveau film sans aucune vue est proposé à ceux qui aiment son réalisateur.",
+        famille: "le filtrage par contenu : d'après les caractéristiques des éléments",
+        pourquoi: "C'est justement la parade au démarrage à froid : le contenu, faute d'historique.",
+      },
+      {
+        cas: "Un livre est suggéré parce que des lecteurs au profil proche l'ont acheté.",
+        famille: "le filtrage collaboratif : d'après des utilisateurs semblables",
+        pourquoi: "Aucune analyse du livre : seulement des comportements d'achat.",
+      },
+      {
+        cas: "Le catalogue rangé par ordre alphabétique de titre.",
+        famille: "aucune des deux : un classement identique pour tous",
+        pourquoi: "Un tri mécanique ne dépend d'aucun utilisateur.",
+      },
+      {
+        cas: "Le service pondère la similarité entre utilisateurs par la fraîcheur des contenus.",
+        famille: "une approche hybride : les deux combinées",
+        pourquoi: "Une caractéristique du contenu vient corriger un calcul collaboratif.",
+      },
+    ],
+  }),
+
+  // ── 1.5.6 Démarrage à froid ──────────────────────────────────────────────
+  situation({
+    id: "g_l_1_5_6_froid",
+    microskillId: "1.5.6",
+    consigne: "Comment traiter ce démarrage à froid ?",
+    pool: [
+      {
+        cas: "Un nouvel inscrit n'a encore rien consulté sur la plateforme.",
+        bonne: "proposer des contenus populaires ou demander quelques goûts, puis affiner vite",
+        pieges: [
+          "attendre qu'il consulte de lui-même : toute proposition serait arbitraire",
+          "lui proposer le catalogue complet et le laisser choisir librement",
+          "lui attribuer le profil de l'utilisateur moyen de la plateforme",
+        ],
+        pourquoi:
+          "Ne rien proposer est le pire départ. On accepte une approximation, et on corrige aux premiers signaux.",
+      },
+      {
+        cas: "Un créateur publie sa première vidéo : personne ne l'a vue, donc personne ne la recommande.",
+        bonne: "s'appuyer sur les caractéristiques du contenu, faute d'interactions à exploiter",
+        pieges: [
+          "la mettre en avant d'office : la nouveauté mérite un traitement de faveur",
+          "attendre qu'elle accumule des vues par les abonnés de son auteur",
+          "la recommander aux utilisateurs les plus actifs de la plateforme",
+        ],
+        pourquoi:
+          "C'est le démarrage à froid côté CONTENU, et c'est là que le filtrage par contenu prend le relais.",
+      },
+      {
+        cas: "Une plateforme constate que les nouveaux créateurs percent de moins en moins.",
+        bonne: "le démarrage à froid crée un cercle : sans vues, pas de recommandation, donc pas de vues",
+        pieges: [
+          "les nouveaux créateurs produisent des contenus de moindre qualité",
+          "le catalogue est saturé : il n'y a plus de place pour de nouveaux venus",
+          "les utilisateurs préfèrent naturellement les créateurs qu'ils connaissent",
+        ],
+        pourquoi:
+          "L'effet est structurel, pas moral : le système renforce ce qui a déjà de l'audience.",
+      },
+      {
+        cas: "Un site marchand veut recommander un produit qui vient d'entrer au catalogue.",
+        bonne: "utiliser sa fiche — catégorie, marque, prix — pour le rapprocher de produits connus",
+        pieges: [
+          "attendre les premiers achats pour disposer de données fiables",
+          "le proposer à tous les clients pour accumuler des signaux rapidement",
+          "le placer en tête de catalogue jusqu'à ce qu'il soit acheté",
+        ],
+        pourquoi: "Les attributs du produit sont disponibles dès le premier jour : c'est ce qui reste.",
+      },
+      {
+        cas: "Une plateforme demande à l'inscription de cocher cinq centres d'intérêt.",
+        bonne: "c'est une amorce déclarée, utile au début et vite dépassée par le comportement réel",
+        pieges: [
+          "c'est la meilleure source : l'utilisateur sait mieux que l'algorithme ce qu'il aime",
+          "c'est inutile : les déclarations d'intérêt ne sont jamais exploitées",
+          "c'est une collecte de données personnelles sans rapport avec la recommandation",
+        ],
+        pourquoi:
+          "Le déclaré démarre, l'observé prend le relais — et les deux divergent souvent.",
+      },
+      {
+        cas: "Un service veut mesurer si son traitement du démarrage à froid fonctionne.",
+        bonne: "comparer la qualité des recommandations des premiers jours à celle obtenue plus tard",
+        pieges: [
+          "mesurer le nombre de nouveaux inscrits sur la période concernée",
+          "mesurer la performance globale du système sur tous les utilisateurs",
+          "demander aux nouveaux inscrits s'ils sont satisfaits des propositions",
+        ],
+        pourquoi:
+          "Une moyenne globale noie le problème : il faut mesurer précisément la population concernée.",
+      },
+    ],
+  }),
+
+  // ── 1.5.7 Apprentissage dans la recommandation ──────────────────────────
+  corriger({
+    id: "g_l_1_5_7_appris",
+    microskillId: "1.5.7",
+    pool: [
+      {
+        affirmation: "Un système de recommandation applique des règles écrites par l'équipe produit.",
+        bonne: "il apprend sur les interactions passées : les règles écrites n'en sont qu'un garde-fou",
+        pieges: [
+          "il applique des règles, mais elles sont mises à jour chaque semaine",
+          "il applique des règles écrites par les créateurs de contenu eux-mêmes",
+          "c'est exact : la recommandation est un tri, pas un apprentissage",
+        ],
+        pourquoi:
+          "Le classement est prédit par un modèle. Les règles servent à interdire, pas à décider.",
+      },
+      {
+        affirmation: "Le clic est une bonne étiquette pour entraîner un système de recommandation.",
+        bonne: "il est commode et trompeur : il mesure l'attention attirée, pas la satisfaction",
+        pieges: [
+          "il est excellent : c'est le seul signal réellement objectif disponible",
+          "il est mauvais : seule une note explicite de l'utilisateur vaut quelque chose",
+          "c'est exact, à condition de ne compter que les clics de plus de dix secondes",
+        ],
+        pourquoi:
+          "Un titre racoleur récolte des clics et des déceptions. D'où l'ajout de signaux de durée et d'achèvement.",
+      },
+      {
+        affirmation: "Le modèle apprend une fois pour toutes ce que l'utilisateur aime.",
+        bonne: "les goûts changent, et le modèle est réentraîné régulièrement pour suivre",
+        pieges: [
+          "il apprend une fois, mais ajuste ses poids à chaque interaction en direct",
+          "il apprend une fois par utilisateur, à sa première semaine d'usage",
+          "c'est exact : c'est pourquoi les recommandations finissent par lasser",
+        ],
+        pourquoi:
+          "La dérive des préférences est un problème permanent de ces systèmes.",
+      },
+      {
+        affirmation: "Le système apprend ce que l'utilisateur préfère parmi tout le catalogue.",
+        bonne: "il n'apprend que sur ce qu'il a MONTRÉ : ce qu'il n'a jamais proposé reste invisible",
+        pieges: [
+          "il apprend sur tout le catalogue grâce aux données des autres utilisateurs",
+          "il apprend sur tout le catalogue, qu'il parcourt à intervalles réguliers",
+          "c'est exact, à condition que le catalogue soit entièrement indexé",
+        ],
+        pourquoi:
+          "C'est la boucle de rétroaction : le système ne peut pas apprendre de ce qu'il n'a jamais laissé voir. Il se confirme lui-même.",
+      },
+      {
+        affirmation: "Deux utilisateurs aux mêmes goûts reçoivent les mêmes recommandations.",
+        bonne: "leur historique diffère toujours un peu, et le système apprend sur l'historique",
+        pieges: [
+          "c'est exact : c'est le principe même du filtrage collaboratif",
+          "c'est exact s'ils se sont inscrits à la même période sur le service",
+          "c'est faux : le système introduit volontairement du hasard",
+        ],
+        pourquoi:
+          "Ce n'est pas le goût qui est mesuré, c'est le comportement — et deux comportements ne coïncident jamais.",
+      },
+      {
+        affirmation: "Améliorer un système de recommandation, c'est améliorer sa précision de prédiction.",
+        bonne: "c'est aussi choisir CE QU'ON prédit : la précision sur un mauvais critère aggrave le problème",
+        pieges: [
+          "c'est exact : la précision est la seule mesure objective de qualité",
+          "c'est exact, mais il faut aussi tenir compte du temps de calcul",
+          "c'est faux : seule la satisfaction déclarée des utilisateurs compte",
+        ],
+        pourquoi:
+          "Prédire parfaitement ce qui retiendra l'attention n'est un progrès que si retenir l'attention était le bon objectif.",
+      },
+    ],
+  }),
+
+  // ── 1.5.8 Effets de la recommandation sur les comportements ─────────────
+  situation({
+    id: "g_l_1_5_8_effets",
+    microskillId: "1.5.8",
+    consigne: "Que peut-on conclure, et à quelle condition ?",
+    pool: [
+      {
+        cas: "Une étude montre que les utilisateurs d'une plateforme ont des opinions plus tranchées que la moyenne.",
+        bonne: "on ne sait pas si la plateforme les a radicalisés ou si elle attire déjà ces profils",
+        pieges: [
+          "la plateforme radicalise ses utilisateurs, l'écart mesuré le prouve",
+          "les opinions tranchées sont sans rapport avec l'usage de la plateforme",
+          "l'étude est fausse : une opinion ne se mesure pas statistiquement",
+        ],
+        pourquoi:
+          "Sélection ou effet ? C'est LA difficulté de ce champ, et elle interdit de conclure sur une corrélation.",
+      },
+      {
+        cas: "Une plateforme modifie son algorithme et observe une hausse du temps passé.",
+        bonne: "l'objectif visé est atteint, ce qui ne dit rien de ce que les utilisateurs y gagnent",
+        pieges: [
+          "les utilisateurs sont plus satisfaits, sinon ils ne resteraient pas",
+          "le changement est neutre : le temps passé n'est pas un indicateur",
+          "les contenus proposés sont devenus de meilleure qualité",
+        ],
+        pourquoi:
+          "Rester plus longtemps peut signifier « mieux servi » comme « mieux retenu ». La mesure ne tranche pas.",
+      },
+      {
+        cas: "Des chercheurs veulent établir l'effet réel d'un algorithme sur les opinions.",
+        bonne: "il faut une expérience comparant deux groupes tirés au sort, pas une simple observation",
+        pieges: [
+          "il suffit de comparer les utilisateurs aux non-utilisateurs de la plateforme",
+          "il suffit d'interroger les utilisateurs sur l'évolution de leurs opinions",
+          "il suffit d'analyser les contenus recommandés pour en déduire l'effet",
+        ],
+        pourquoi:
+          "Seule la répartition au hasard sépare l'effet de la sélection. C'est aussi pourquoi ces études sont rares : elles demandent l'accord de la plateforme.",
+      },
+      {
+        cas: "Un utilisateur affirme que l'algorithme ne l'influence pas, il choisit ce qu'il regarde.",
+        bonne: "il choisit dans ce qui lui est proposé : l'influence porte sur l'ensemble des choix offerts",
+        pieges: [
+          "il a raison : le choix final lui appartient entièrement",
+          "il a tort : l'algorithme décide à sa place ce qu'il va regarder",
+          "il a raison s'il a désactivé la personnalisation dans ses réglages",
+        ],
+        pourquoi:
+          "L'influence la plus efficace n'est pas de forcer un choix, c'est de composer la liste où il se fait.",
+      },
+      {
+        cas: "Une plateforme publie que 0,1 % de ses contenus recommandés sont problématiques.",
+        bonne: "à l'échelle de milliards de recommandations, 0,1 % représente un volume considérable",
+        pieges: [
+          "c'est un taux excellent, la plateforme fait donc correctement son travail",
+          "ce chiffre n'a aucun sens : le problème ne se mesure pas en pourcentage",
+          "le taux réel est forcément beaucoup plus élevé que celui annoncé",
+        ],
+        pourquoi:
+          "Un pourcentage minuscule sur une base immense reste énorme. C'est la lecture d'échelle qui manque le plus souvent.",
+      },
+      {
+        cas: "Une classe veut étudier si l'algorithme enferme réellement, avec les moyens du bord.",
+        bonne: "créer plusieurs comptes neufs, les faire regarder différemment, comparer les propositions",
+        pieges: [
+          "comparer les fils d'actualité des élèves de la classe entre eux",
+          "demander à chacun de décrire ce que son algorithme lui propose",
+          "chercher des études publiées et en résumer les conclusions",
+        ],
+        pourquoi:
+          "Des comptes neufs et un protocole comparable, c'est une expérience réelle. Comparer des comptes anciens mélange tout.",
+      },
+    ],
+  }),
+
+  // ── 1.6.5 Percevoir, décider, agir (avancé) ──────────────────────────────
+  situation({
+    id: "g_l_1_6_5_boucle",
+    microskillId: "1.6.5",
+    consigne: "Où se situe la difficulté, et que faut-il faire ?",
+    pool: [
+      {
+        cas: "Un robot doit saisir un objet dont la caméra donne une position à deux centimètres près.",
+        bonne: "agir en tenant compte de l'incertitude : approche lente, contact détecté, correction",
+        pieges: [
+          "améliorer la caméra jusqu'à obtenir une position exacte au millimètre",
+          "calculer la position moyenne sur plusieurs images avant de bouger",
+          "saisir largement l'objet pour compenser l'erreur de position",
+        ],
+        pourquoi:
+          "L'incertitude ne se supprime pas, elle se gère. Une boucle perception-action serrée vaut mieux qu'une mesure parfaite.",
+      },
+      {
+        cas: "Un drone perd le signal de son capteur principal pendant deux secondes.",
+        bonne: "poursuivre sur une estimation, en réduisant sa vitesse et sa confiance",
+        pieges: [
+          "s'arrêter immédiatement en vol jusqu'au retour du signal",
+          "poursuivre normalement : deux secondes sont sans conséquence",
+          "revenir au point de départ dès la perte du signal détectée",
+        ],
+        pourquoi:
+          "Un système réel prévoit la panne de capteur. S'arrêter net est parfois plus dangereux que continuer prudemment.",
+      },
+      {
+        cas: "Un robot entraîné en simulation échoue dès sa première sortie réelle.",
+        bonne: "l'écart simulation-réel est attendu : on l'affronte par des essais réels progressifs",
+        pieges: [
+          "la simulation était mal faite, il faut la refaire plus fidèlement",
+          "il faut réentraîner entièrement le robot sur des données réelles",
+          "il faut renoncer à la simulation, qui ne sert finalement à rien",
+        ],
+        pourquoi:
+          "Aucune simulation ne couvre le réel. Elle sert à dégrossir ; le passage se prépare, il ne se supprime pas.",
+      },
+      {
+        cas: "Une équipe veut accélérer la boucle en calculant les décisions sur un serveur distant.",
+        bonne: "le délai réseau devient un risque : ce qui doit réagir vite se calcule sur la machine",
+        pieges: [
+          "c'est une bonne idée : le serveur dispose de bien plus de puissance",
+          "c'est une bonne idée si la connexion est de très bonne qualité",
+          "c'est sans effet : le temps de calcul domine largement le délai réseau",
+        ],
+        pourquoi:
+          "Une boucle de sécurité qui dépend du réseau n'est plus une boucle de sécurité.",
+      },
+      {
+        cas: "Un robot d'entrepôt fonctionne parfaitement jusqu'à ce qu'on repeigne le sol.",
+        bonne: "sa perception s'appuyait sur un indice fragile : il faut la rendre robuste au changement",
+        pieges: [
+          "il faut repeindre le sol dans la couleur d'origine",
+          "il faut réentraîner le robot chaque fois que l'entrepôt change",
+          "c'est un défaut du capteur, qu'il faut remplacer par un modèle récent",
+        ],
+        pourquoi:
+          "Dépendre d'un détail de l'environnement est une fragilité connue. Repeindre marche une fois ; la robustesse tient dans la durée.",
+      },
+      {
+        cas: "Un fabricant annonce que son robot « décide tout seul ».",
+        bonne: "il exécute une politique apprise dans un cadre fixé par des humains : l'autonomie a des bornes",
+        pieges: [
+          "c'est exact : un robot moderne prend ses décisions sans intervention",
+          "c'est faux : tout robot est piloté à distance par un opérateur",
+          "c'est exact tant qu'il reste dans l'environnement où il a été entraîné",
+        ],
+        pourquoi:
+          "L'objectif, les limites et l'arrêt d'urgence viennent toujours de personnes. « Décider seul » est un raccourci commercial.",
+      },
+    ],
+  }),
 ];
