@@ -267,6 +267,107 @@ function gabarit(
   };
 }
 
+/* ═══════════ LES SECONDS ITEMS (18/08/2026) ═══════════
+   ⛔ POURQUOI. `scripts/verifier-demarrage.ts 3e francais complete` rendait
+   64/69 — mais avec CINQ lignes détournées : les cinq micros de culture
+   littéraire n'ouvraient pas la leur, le moteur servait `3e_culture_genres` à
+   leur place, et rien ne le disait à l'élève. C'est le cas que le script
+   appelle lui-même le plus traître, parce que tout paraît marcher.
+   La cause n'était pas la banque mais son volume : UN item par micro, quand le
+   mode complet en oppose deux.
+
+   ⭐ LA MÉTHODE, éprouvée le même jour sur les 96 micros du français de 2de :
+   le premier item part d'une SITUATION et fait nommer la catégorie ; le second
+   part de la catégorie et demande le SIGNE auquel on la reconnait, ou ce
+   qu'elle demande au lecteur. Ce n'est pas le même exercice retourné — c'est
+   l'autre moitié du savoir, celle qui sert quand on n'a pas de texte sous les
+   yeux.
+   ⚠️ Les réponses sont COURTES et de longueur voisine, à la différence des
+   pools d'au-dessus : sur un item retourné, une bonne réponse développée se
+   coche à la taille. Mesuré trois fois dans la journée. */
+
+const SIGNES_RECIT: readonly string[] = [
+  "l'auteur annonce que c'est bien lui",
+  "on le devine, mais rien ne le dit",
+  "il s'écrit sans connaitre la suite",
+  "il raconte les évènements plus que soi",
+  "il décrit, et ne raconte aucune histoire",
+  "c'est quelqu'un d'autre qui l'écrit",
+];
+
+const CAS_SIGNE_RECIT: readonly Cas[] = [
+  { gauche: "une autobiographie", droite: "l'auteur annonce que c'est bien lui" },
+  { gauche: "un roman autobiographique", droite: "on le devine, mais rien ne le dit" },
+  { gauche: "un journal", droite: "il s'écrit sans connaitre la suite" },
+  { gauche: "des mémoires", droite: "il raconte les évènements plus que soi" },
+  { gauche: "un autoportrait", droite: "il décrit, et ne raconte aucune histoire" },
+  { gauche: "une biographie", droite: "c'est quelqu'un d'autre qui l'écrit" },
+];
+
+const TRAVAUX_LECTEUR: readonly string[] = [
+  "rien : on lui dit ce qu'il faut penser",
+  "voir ses usages comme s'il les découvrait",
+  "retourner ce qu'on lui montre",
+  "reconnaitre les hommes sous les bêtes",
+  "conclure seul, sans qu'on l'y invite",
+];
+
+const CAS_TRAVAIL: readonly Cas[] = [
+  { gauche: "l'argumentation directe", droite: "rien : on lui dit ce qu'il faut penser" },
+  { gauche: "le détour par un regard étranger", droite: "voir ses usages comme s'il les découvrait" },
+  { gauche: "le monde renversé", droite: "retourner ce qu'on lui montre" },
+  { gauche: "l'animal comme masque", droite: "reconnaitre les hommes sous les bêtes" },
+  { gauche: "l'histoire réaliste sans commentaire", droite: "conclure seul, sans qu'on l'y invite" },
+];
+
+const CIBLES_POESIE: readonly string[] = [
+  "sur ce que l'objet devient",
+  "sur les sens, qui se répondent",
+  "sur la façon dont on lit à voix haute",
+  "sur l'ordre des mots dans la phrase",
+  "sur les règles elles-mêmes, retirées",
+];
+
+const CAS_CIBLE: readonly Cas[] = [
+  { gauche: "l'image", droite: "sur ce que l'objet devient" },
+  { gauche: "les correspondances", droite: "sur les sens, qui se répondent" },
+  { gauche: "le rythme", droite: "sur la façon dont on lit à voix haute" },
+  { gauche: "l'inversion", droite: "sur l'ordre des mots dans la phrase" },
+  { gauche: "la forme libérée", droite: "sur les règles elles-mêmes, retirées" },
+];
+
+const QUESTIONS_AGIR: readonly string[] = [
+  "était-il là quand cela s'est passé ?",
+  "les personnages ont-ils existé ?",
+  "a-t-il été écrit pour être lu plus tard ?",
+  "l'auteur risquait-il quelque chose ?",
+  "raconte-t-il ce qu'un autre a vécu ?",
+];
+
+const CAS_QUESTION_AGIR: readonly Cas[] = [
+  { gauche: "un témoignage", droite: "était-il là quand cela s'est passé ?" },
+  { gauche: "une fiction appuyée sur l'histoire", droite: "les personnages ont-ils existé ?" },
+  { gauche: "un document d'archive", droite: "a-t-il été écrit pour être lu plus tard ?" },
+  { gauche: "l'écriture de l'engagement", droite: "l'auteur risquait-il quelque chose ?" },
+  { gauche: "la transmission", droite: "raconte-t-il ce qu'un autre a vécu ?" },
+];
+
+const ECHAPPES: readonly string[] = [
+  "rien encore : on prolonge le présent",
+  "rien, et c'est bien le problème",
+  "le processus, à celui qui l'a lancé",
+  "la créature, à son fabricant",
+  "rien : le récit s'arrête à l'ouverture",
+];
+
+const CAS_ECHAPPE: readonly Cas[] = [
+  { gauche: "l'anticipation", droite: "rien encore : on prolonge le présent" },
+  { gauche: "la dystopie", droite: "rien, et c'est bien le problème" },
+  { gauche: "l'apprenti sorcier", droite: "le processus, à celui qui l'a lancé" },
+  { gauche: "la créature qui échappe", droite: "la créature, à son fabricant" },
+  { gauche: "l'émerveillement", droite: "rien : le récit s'arrête à l'ouverture" },
+];
+
 export const cultureLitteraire3eBank: TutorBankItemV4[] = [
   gabarit(
     "3e_cult_se_raconter_tpl_1",
@@ -326,6 +427,69 @@ export const cultureLitteraire3eBank: TutorBankItemV4[] = [
     "Le progrès y est presque toujours réussi. C'est ce qui vient après qui fait le récit.",
     "Les récits qui interrogent la science reprennent les mêmes figures d'un siècle à l'autre. L'anticipation prolonge une tendance d'aujourd'hui. La dystopie décrit un monde où tout a été amélioré et où l'on étouffe. L'apprenti sorcier réussit son expérience et ne sait plus l'arrêter. La créature fabriquée revient demander des comptes. Et quelques récits, plus rares, s'émerveillent simplement de ce que la science vient d'ouvrir.",
     "Regarde ce qui échappe, et à qui. Si c'est au savant, c'est l'apprenti sorcier. Si c'est la créature elle-même, c'est l'autre figure. Si rien n'échappe et que tout est parfait, méfie-toi : c'est souvent la dystopie.",
+    ["3e", "culture", "progres", "science-fiction", "template"],
+  ),
+
+  /* ══════════════ LES SECONDS ITEMS ══════════════ */
+
+  gabarit(
+    "3e_cult_se_raconter_tpl_2",
+    "3e_cult_se_raconter",
+    CAS_SIGNE_RECIT,
+    SIGNES_RECIT,
+    "À quoi la reconnait-on, sans même avoir le texte sous les yeux ?",
+    2,
+    "Une seule question sépare chaque forme des autres. Cherche laquelle.",
+    "Les formes de l'écriture de soi ne se distinguent pas par leur sujet — c'est toujours une vie — mais par ce qu'elles annoncent. L'autobiographie déclare son pacte : l'auteur, le narrateur et le personnage sont une seule personne. Le roman autobiographique laisse deviner sans rien promettre. Le journal ignore la suite. Les mémoires visent les évènements. L'autoportrait décrit sans raconter. La biographie change d'auteur.",
+    "Pose les questions dans cet ordre : qui écrit ? l'annonce-t-il ? sait-il déjà la fin ? raconte-t-il, ou décrit-il ? La première qui tranche te donne la forme.",
+    ["3e", "culture", "se-raconter", "autobiographie", "template"],
+  ),
+  gabarit(
+    "3e_cult_denoncer_tpl_2",
+    "3e_cult_denoncer",
+    CAS_TRAVAIL,
+    TRAVAUX_LECTEUR,
+    "Que ce moyen demande-t-il au lecteur ?",
+    2,
+    "Plus le détour est grand, plus le lecteur a de travail — et plus il croit la conclusion sienne.",
+    "Dénoncer directement coûte peu au lecteur : on lui dit ce qu'il faut penser. Les détours, eux, lui confient le travail — et c'est leur force, car on résiste mal à une idée qu'on croit avoir eue soi-même. Le regard étranger lui fait redécouvrir ses propres usages ; le monde renversé lui demande de retourner l'image ; l'animal lui demande de reconnaitre les hommes.",
+    "Demande-toi ce que le lecteur doit faire pour comprendre. S'il n'a rien à faire, l'argumentation est directe.",
+    ["3e", "culture", "denoncer", "satire", "argumentation", "template"],
+  ),
+  gabarit(
+    "3e_cult_visions_poetiques_tpl_2",
+    "3e_cult_visions_poetiques",
+    CAS_CIBLE,
+    CIBLES_POESIE,
+    "Sur quoi ce procédé agit-il ?",
+    2,
+    "Chaque procédé travaille sur une matière différente : l'objet, les sens, la voix, l'ordre, la règle.",
+    "Un procédé poétique ne s'ajoute pas au poème : il agit sur quelque chose de précis. L'image travaille sur ce que l'objet devient. Les correspondances travaillent sur les sens, qui s'appellent l'un l'autre. Le rythme travaille sur la voix qui lit. L'inversion travaille sur l'ordre des mots. Et la forme libérée travaille sur les règles elles-mêmes, en les retirant.",
+    "Demande-toi ce qui aurait été différent sans le procédé : l'objet, la sensation, la voix, l'ordre, ou la forme. C'est là qu'il agit.",
+    ["3e", "culture", "poesie", "visions", "template"],
+  ),
+  gabarit(
+    "3e_cult_agir_cite_tpl_2",
+    "3e_cult_agir_cite",
+    CAS_QUESTION_AGIR,
+    QUESTIONS_AGIR,
+    "Quelle question permet de le reconnaitre ?",
+    2,
+    "Une seule question suffit pour chaque statut. Cherche celle qui ne convient qu'à lui.",
+    "Avant de lire un texte sur l'histoire, il faut savoir d'où il vient : c'est cela qui décide de ce qu'on peut en tirer. Le témoignage vient de quelqu'un qui était là. La fiction invente des personnages sans inventer les évènements. L'archive n'a pas été écrite pour nous. L'écriture engagée prend parti, et cela lui coûte parfois. La transmission reprend une histoire vécue par un autre.",
+    "Ne cherche pas le ton du texte : cherche la position de celui qui l'a écrit par rapport aux faits.",
+    ["3e", "culture", "agir-dans-la-cite", "engagement", "template"],
+  ),
+  gabarit(
+    "3e_cult_progres_reves_tpl_2",
+    "3e_cult_progres_reves",
+    CAS_ECHAPPE,
+    ECHAPPES,
+    "Qu'est-ce qui échappe, et à qui ?",
+    2,
+    "Deux figures se ressemblent : dans l'une c'est le processus qui échappe, dans l'autre la créature elle-même.",
+    "Ces récits se classent bien plus sûrement par ce qui échappe que par leur décor. Dans l'anticipation, rien n'échappe encore : on prolonge le présent. Dans la dystopie, rien n'échappe non plus — tout fonctionne, et c'est précisément pour cela qu'on y étouffe. Chez l'apprenti sorcier, le processus échappe au savant. Et la créature fabriquée échappe, elle, à son fabricant, jusqu'à revenir lui demander des comptes.",
+    "Cherche d'abord si quelque chose échappe. Si oui, demande-toi si c'est un processus ou un être : les deux figures ne disent pas la même chose de la science.",
     ["3e", "culture", "progres", "science-fiction", "template"],
   ),
 ];
