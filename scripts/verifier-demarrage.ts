@@ -30,8 +30,22 @@ import { defaultDisplayModeForClasse } from "@/lib/tutor-v4/displayMode";
 const CLASSE = process.argv[2];
 const MATIERE = process.argv[3] ?? "maths";
 
-if (!CLASSE) {
-  console.error("Usage : npx --yes tsx@4 scripts/verifier-demarrage.ts <classe> <matiere>");
+/* ⭐⭐ LE MODE EST UN RÉGLAGE, DONC IL DOIT ÊTRE UN ARGUMENT (18/08/2026).
+   Ce script lisait `defaultDisplayModeForClasse(CLASSE)` en dur. Il a donc
+   annoncé « 90 micros sur 96 ne démarrent pas » en français de 2de, pendant que
+   Frédéric constatait que le coach marchait. Les deux étaient vrais : lui en
+   mode SIMPLE, le script en mode COMPLET — et l'écart entre les deux n'est pas
+   un détail, c'est `allowSingleItem` (tutorEngineV4), qui autorise un gabarit
+   unique à se dédoubler.
+   ⛔ Une mesure qui dépend d'un réglage caché n'est pas une mesure. Le réglage
+   se déclare : `… <classe> <matiere> [simple|complete]`. Sans argument, on garde
+   le mode réel de la classe — c'est ce que voit l'élève par défaut. */
+const MODE_ARG = process.argv[4];
+
+if (!CLASSE || (MODE_ARG && MODE_ARG !== "simple" && MODE_ARG !== "complete")) {
+  console.error(
+    "Usage : npx --yes tsx@4 scripts/verifier-demarrage.ts <classe> <matiere> [simple|complete]"
+  );
   process.exit(1);
 }
 
@@ -39,7 +53,9 @@ if (!CLASSE) {
    de premier niveau n'existe pas. */
 async function main() {
 const knowledge = await loadKnowledgeV4(CLASSE, MATIERE);
-const displayMode = defaultDisplayModeForClasse(CLASSE);
+const displayMode =
+  (MODE_ARG as "simple" | "complete" | undefined) ??
+  defaultDisplayModeForClasse(CLASSE);
 
 const leve: { micro: string; raison: string }[] = [];
 const detourne: { micro: string; servi: string }[] = [];
@@ -69,7 +85,7 @@ for (const micro of knowledge.microSkills) {
 }
 
 const total = knowledge.microSkills.length;
-console.log(`\nDÉMARRAGE · ${CLASSE} · ${MATIERE}`);
+console.log(`\nDÉMARRAGE · ${CLASSE} · ${MATIERE} · mode ${displayMode}`);
 console.log("─".repeat(72));
 console.log(`${knowledge.notions.length} notions · ${total} micro-compétences\n`);
 console.log(`🟢 ${franc}/${total} ouvrent bien la ligne cliquée`);
