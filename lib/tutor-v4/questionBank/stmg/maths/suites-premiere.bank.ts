@@ -944,7 +944,17 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
       const r = pick([20, 25, 30, 50] as const);
       const u0 = pick([200, 400, 500, 1000] as const);
       const termes = geometrique ? termesGeo(u0, q, 5) : termesArith(u0, r, 5);
-      const bonne = geometrique ? `=B2*${fr(q)}` : `=B2+${r}`;
+      // ⛔⛔ UNE FORMULE DE TABLEUR S'ÉCRIT ENTRE ACCENTS GRAVES (18/08/2026).
+      //
+      // Écrite nue, `=$B$2+50` traverse KaTeX, qui prend les deux dollars pour
+      // des délimiteurs mathématiques, rend « B » en italique et AVALE les
+      // dollars. À l'écran, le distracteur devenait `=B2+50` — c'est-à-dire LA
+      // BONNE RÉPONSE, mot pour mot. Deux propositions identiques, dont l'une
+      // était juste : l'élève avait raison une fois sur deux et était compté
+      // faux. Trouvé par `scripts/verifier-latex.ts`, qui mesure le texte RENDU.
+      //
+      // Les accents graves donnent du code en ligne : KaTeX n'y touche pas.
+      const bonne = geometrique ? `\`=B2*${fr(q)}\`` : `\`=B2+${r}\``;
       return {
         text:
           `On veut obtenir au tableur les termes de la suite définie par $u(0) = ${u0}$ et ` +
@@ -952,11 +962,11 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           `La valeur de $u(0)$ est en B2. Quelle formule saisir en B3 pour pouvoir la recopier vers le bas ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
-          geometrique ? `=B2+${fr(q)}` : `=B2*${r}`,
-          geometrique ? `=B3*${fr(q)}` : `=B3+${r}`,
-          geometrique ? `=$B$2*${fr(q)}` : `=$B$2+${r}`,
-          geometrique ? `=B2*${t}` : `=B2+${r}*A3`,
-          geometrique ? `=${fr(q)}` : `=${r}`,
+          geometrique ? `\`=B2+${fr(q)}\`` : `\`=B2*${r}\``,
+          geometrique ? `\`=B3*${fr(q)}\`` : `\`=B3+${r}\``,
+          geometrique ? `\`=$B$2*${fr(q)}\`` : `\`=$B$2+${r}\``,
+          geometrique ? `\`=B2*${t}\`` : `\`=B2+${r}*A3\``,
+          geometrique ? `\`=${fr(q)}\`` : `\`=${r}\``,
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
@@ -964,16 +974,16 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
         explanation: exp(
           "Une relation de récurrence se traduit au tableur par une formule qui référence la cellule immédiatement au-dessus.",
           "On écrit la formule en B3 en pointant B2, sans référence absolue : la recopie décalera automatiquement vers B3, B4, etc.",
-          `${geometrique ? `Multiplier par $${fr(q)}$` : `Ajouter $${r}$`} au terme précédent donne \`${bonne}\`.`,
-          `La formule à saisir est \`${bonne}\`.`
+          `${geometrique ? `Multiplier par $${fr(q)}$` : `Ajouter $${r}$`} au terme précédent donne ${bonne}.`,
+          `La formule à saisir est ${bonne}.`
         ),
         choiceDiagnostics: [
           {
-            choice: geometrique ? `=$B$2*${fr(q)}` : `=$B$2+${r}`,
+            choice: geometrique ? `\`=$B$2*${fr(q)}\`` : `\`=$B$2+${r}\``,
             cause: "a figé la référence : recopiée vers le bas, la formule repartirait toujours de u(0)",
           },
           {
-            choice: geometrique ? `=B3*${fr(q)}` : `=B3+${r}`,
+            choice: geometrique ? `\`=B3*${fr(q)}\`` : `\`=B3+${r}\``,
             cause: "a pointé sa propre cellule : c'est une référence circulaire",
           },
         ],

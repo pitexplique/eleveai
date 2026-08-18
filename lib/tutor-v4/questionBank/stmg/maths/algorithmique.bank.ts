@@ -1150,7 +1150,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const q = fr(1 + t / 100).replace(",", ".");
       const geometrique = Math.random() < 0.5;
       const r = pick([20, 40, 50, 75, 100, 120, 150, 200, 250, 300] as const);
-      const bonne = geometrique ? `=B2*${q}` : `=B2+${r}`;
+      // ⛔⛔ ENTRE ACCENTS GRAVES, TOUJOURS. Nue, la référence `=$B$2+250`
+      // passe dans KaTeX, qui prend les deux dollars pour des délimiteurs et
+      // les avale : le distracteur s'affichait `=B2+250`, identique à la bonne
+      // réponse. Voir le même correctif dans `suites-premiere.bank.ts`, et
+      // `scripts/verifier-latex.ts` qui l'a trouvé.
+      const bonne = geometrique ? `\`=B2*${q}\`` : `\`=B2+${r}\``;
       return {
         text:
           `La cellule B2 contient la valeur initiale. Chaque année, la grandeur ` +
@@ -1158,27 +1163,27 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           `Quelle formule saisir en B3 pour pouvoir la recopier vers le bas ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
-          geometrique ? `=B3*${q}` : `=B3+${r}`,
-          geometrique ? `=$B$2*${q}` : `=$B$2+${r}`,
-          geometrique ? `=B2+${q}` : `=B2*${r}`,
-          geometrique ? `=B2*${t}` : `=B2+${r}*A3`,
-          geometrique ? `B2*${q}` : `B2+${r}`,
+          geometrique ? `\`=B3*${q}\`` : `\`=B3+${r}\``,
+          geometrique ? `\`=$B$2*${q}\`` : `\`=$B$2+${r}\``,
+          geometrique ? `\`=B2+${q}\`` : `\`=B2*${r}\``,
+          geometrique ? `\`=B2*${t}\`` : `\`=B2+${r}*A3\``,
+          geometrique ? `\`B2*${q}\`` : `\`B2+${r}\``,
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
         explanation: exp(
           "Une formule recopiable vers le bas doit référencer la cellule immédiatement au-dessus, en adressage RELATIF : la recopie décalera automatiquement la référence.",
           "On écrit la formule en pensant à ce qu'elle deviendra une ligne plus bas.",
-          `\`${bonne}\` recopiée en B4 devient \`${geometrique ? `=B3*${q}` : `=B3+${r}`}\` : c'est exactement ce qu'on veut.`,
-          `Il faut saisir \`${bonne}\`.`
+          `${bonne} recopiée en B4 devient \`${geometrique ? `=B3*${q}` : `=B3+${r}`}\` : c'est exactement ce qu'on veut.`,
+          `Il faut saisir ${bonne}.`
         ),
         choiceDiagnostics: [
           {
-            choice: geometrique ? `=B3*${q}` : `=B3+${r}`,
+            choice: geometrique ? `\`=B3*${q}\`` : `\`=B3+${r}\``,
             cause: "a pointé sa propre cellule : c'est une référence circulaire",
           },
           {
-            choice: geometrique ? `B2*${q}` : `B2+${r}`,
+            choice: geometrique ? `\`B2*${q}\`` : `\`B2+${r}\``,
             cause: "a oublié le signe = : le tableur afficherait le texte au lieu de calculer",
           },
         ],
@@ -1225,7 +1230,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         expected: [`\`${resultat}\``],
         comparator: "mcq_exact",
         explanation: exp(
-          "Une référence RELATIVE (B2) se décale à la recopie ; une référence ABSOLUE ($B$2) reste figée ; une référence MIXTE ne fige que la partie précédée du $.",
+          "Une référence RELATIVE (B2) se décale à la recopie ; une référence ABSOLUE (`$B$2`) reste figée ; une référence MIXTE ne fige que la partie précédée du `$`.",
           "On regarde chaque référence séparément et l'on applique le décalage aux seules parties non figées.",
           type === "relatif"
             ? `Les deux références sont relatives : elles descendent de ${decalage} ligne(s).`
