@@ -419,6 +419,191 @@ const CAS_PAROLE: readonly Cas[] = [
   { enonce: "« Elle s'assit et justifia sa pause. »", rep: "du discours narrativisé : les paroles sont résumées en un mot, sans être rapportées", raison: "la parole est réduite à un verbe" },
 ];
 
+/* ═══════════ LES TABLES DES SECONDS ITEMS (18/08/2026) ═══════════
+   Les douze premiers items partent d'une situation et font nommer le procédé.
+   Les douze seconds partent du procédé et demandent ce qu'il PRODUIT : la
+   vitesse qu'il donne, ce qu'il permet de savoir, ce qu'on perdrait à le
+   supprimer, l'indice auquel on le reconnait.
+   ⭐ C'est le bon sens de lecture pour un commentaire : nommer ne vaut rien,
+   c'est l'effet qui s'analyse. */
+
+const PROPRES_FORME: readonly string[] = [
+  "une intrigue qui se déploie sur la durée",
+  "des récits qui se passent les uns des autres",
+  "un ordre commandé par le déplacement",
+  "une écriture qui ignore encore la suite",
+];
+
+const CAS_PROPRE_FORME: readonly Cas[] = [
+  { enonce: "Le roman.", rep: "une intrigue qui se déploie sur la durée", raison: "la longueur lui permet de faire évoluer ses personnages" },
+  { enonce: "Le recueil de nouvelles.", rep: "des récits qui se passent les uns des autres", raison: "chaque nouvelle tient seule : on peut les lire dans le désordre" },
+  { enonce: "Le récit de voyage.", rep: "un ordre commandé par le déplacement", raison: "c'est l'itinéraire, non l'intrigue, qui organise le texte" },
+  { enonce: "Le journal.", rep: "une écriture qui ignore encore la suite", raison: "chaque entrée est écrite sans savoir ce qui viendra" },
+];
+
+const GAINS_BRIEVETE: readonly string[] = [
+  "le lecteur est jeté dans l'action aussitôt",
+  "la dernière ligne retourne tout ce qui précède",
+  "chaque personnage compte, faute d'être nombreux",
+  "ce qui n'est pas écrit travaille autant que le texte",
+];
+
+const CAS_GAIN: readonly Cas[] = [
+  { enonce: "La nouvelle entre dans l'action sans préparer le terrain.", rep: "le lecteur est jeté dans l'action aussitôt", raison: "aucune exposition ne retarde l'entrée en matière" },
+  { enonce: "La nouvelle réserve son sens pour la dernière ligne.", rep: "la dernière ligne retourne tout ce qui précède", raison: "la chute oblige à relire ce qu'on croyait avoir compris" },
+  { enonce: "La nouvelle réduit ses personnages au strict nécessaire.", rep: "chaque personnage compte, faute d'être nombreux", raison: "aucun n'est décoratif : la brièveté l'interdit" },
+  { enonce: "La nouvelle laisse hors du texte tout ce qui n'est pas indispensable.", rep: "ce qui n'est pas écrit travaille autant que le texte", raison: "le lecteur comble les vides, et cette part lui revient" },
+];
+
+const GARANTS: readonly string[] = [
+  "l'auteur s'engage à dire le vrai sur lui-même",
+  "un tiers enquête et répond de ce qu'il avance",
+  "l'auteur répond de son époque autant que de lui",
+  "l'auteur assume d'inventer à partir de lui-même",
+];
+
+const CAS_GARANT: readonly Cas[] = [
+  { enonce: "L'autobiographie.", rep: "l'auteur s'engage à dire le vrai sur lui-même", raison: "c'est le pacte autobiographique : auteur, narrateur et personnage ne font qu'un" },
+  { enonce: "La biographie.", rep: "un tiers enquête et répond de ce qu'il avance", raison: "celui qui écrit n'est pas celui dont on raconte la vie" },
+  { enonce: "Les mémoires.", rep: "l'auteur répond de son époque autant que de lui", raison: "la vie personnelle y sert à éclairer une histoire plus large" },
+  { enonce: "L'autofiction.", rep: "l'auteur assume d'inventer à partir de lui-même", raison: "le pacte est déclaré : c'est lui, et ce n'est pas tout à fait lui" },
+];
+
+const TRAITS_EPOQUE: readonly string[] = [
+  "le roman se donne pour un document trouvé",
+  "le roman prétend peindre la société entière",
+  "le récit entre dans la conscience et brouille le temps",
+  "le récit interroge sa propre fabrication",
+];
+
+const CAS_TRAIT_EPOQUE: readonly Cas[] = [
+  { enonce: "Le XVIIIe siècle.", rep: "le roman se donne pour un document trouvé", raison: "lettres et mémoires prétendus authentiques donnent au roman sa caution" },
+  { enonce: "Le XIXe siècle.", rep: "le roman prétend peindre la société entière", raison: "le romancier se veut l'observateur de son temps" },
+  { enonce: "La première moitié du XXe siècle.", rep: "le récit entre dans la conscience et brouille le temps", raison: "la chronologie cède devant le mouvement de la pensée" },
+  { enonce: "La seconde moitié du XXe siècle.", rep: "le récit interroge sa propre fabrication", raison: "le roman se prend lui-même pour objet" },
+];
+
+/* ⭐ LE TEST DE SUPPRESSION, appliqué au détail. C'est la manipulation la plus
+   sûre pour reconnaitre un effet de réel : si l'on retire le détail et que RIEN
+   ne manque au récit — ni indice, ni caractérisation, ni repère —, alors il
+   n'était là que pour faire vrai. */
+const PERTES: readonly string[] = [
+  "rien, sinon l'impression que c'est vrai",
+  "l'annonce discrète de ce qui va suivre",
+  "ce qui nous faisait juger le personnage",
+  "le repère d'époque et de milieu",
+];
+
+const CAS_PERTE: readonly Cas[] = [
+  { enonce: "Un baromètre est posé sur le piano, et l'on n'en reparlera jamais.", rep: "rien, sinon l'impression que c'est vrai", raison: "l'objet ne sert ni l'action ni le portrait : il atteste seulement le monde" },
+  { enonce: "Le narrateur signale une porte mal fermée, dix pages avant la fuite.", rep: "l'annonce discrète de ce qui va suivre", raison: "le détail était un indice semé pour plus tard" },
+  { enonce: "Les manchettes du personnage sont usées, et il les cache d'un geste.", rep: "ce qui nous faisait juger le personnage", raison: "le détail dit la gêne sociale sans que le narrateur ait à la nommer" },
+  { enonce: "Une lampe à pétrole éclaire la pièce, et le train siffle au loin.", rep: "le repère d'époque et de milieu", raison: "le détail date la scène aussi sûrement qu'un millésime" },
+  { enonce: "Le papier peint porte des fleurs jaunes, jamais mentionnées ensuite.", rep: "rien, sinon l'impression que c'est vrai", raison: "c'est l'effet de réel dans sa forme la plus nue" },
+  { enonce: "Le personnage range un couteau dans sa poche, au premier chapitre.", rep: "l'annonce discrète de ce qui va suivre", raison: "l'objet reviendra : le détail prépare" },
+];
+
+const CONCLUSIONS: readonly string[] = [
+  "un jugement moral, sans qu'il soit écrit",
+  "une condition sociale, par ce qu'il possède",
+  "un point de vue, donc partial",
+  "un caractère, déduit de ses actes",
+];
+
+const CAS_CONCLUSION: readonly Cas[] = [
+  { enonce: "Le front est bas, l'œil fuyant, la bouche mauvaise.", rep: "un jugement moral, sans qu'il soit écrit", raison: "le physique porte la condamnation que le narrateur ne prononce pas" },
+  { enonce: "Trois pipes, un fauteuil défoncé, des livres jamais ouverts.", rep: "une condition sociale, par ce qu'il possède", raison: "les objets disent le milieu et les habitudes" },
+  { enonce: "« Il me parut fatigué, et peut-être malhonnête », dit un autre personnage.", rep: "un point de vue, donc partial", raison: "le portrait passe par un regard qui peut se tromper" },
+  { enonce: "Il ramasse le sac, remercie sans regarder, et repart au pas de course.", rep: "un caractère, déduit de ses actes", raison: "aucun adjectif : c'est la conduite qui décrit" },
+];
+
+const SAVOIRS: readonly string[] = [
+  "tout, s'il le décide",
+  "ce qu'il a vécu lui-même",
+  "ce qu'il a vu du dehors",
+  "rien de plus, mais il commente",
+];
+
+const CAS_SAVOIR: readonly Cas[] = [
+  { enonce: "Un narrateur extérieur à l'histoire, qui n'y prend aucune part.", rep: "tout, s'il le décide", raison: "n'étant pas dans l'histoire, rien ne borne ce qu'il peut savoir" },
+  { enonce: "Un narrateur qui est le personnage principal de sa propre histoire.", rep: "ce qu'il a vécu lui-même", raison: "il ne peut rapporter que ce dont il a fait l'expérience" },
+  { enonce: "Un narrateur témoin, présent mais qui raconte la vie d'un autre.", rep: "ce qu'il a vu du dehors", raison: "la conscience de l'autre lui reste fermée" },
+  { enonce: "L'auteur qui interrompt la fiction pour parler en son nom.", rep: "rien de plus, mais il commente", raison: "il sort du récit pour s'adresser au lecteur" },
+];
+
+/* ⚠️ LA QUATRIÈME LIGNE PORTE LA CORRECTION DU 14/08 : ce qui distingue la
+   focalisation zéro de l'interne alternée n'est pas le nombre de consciences,
+   c'est ce que le narrateur sait EN PLUS d'elles. Le libellé le dit ici. */
+const INDICES_FOCALISATION: readonly string[] = [
+  "des perceptions attachées à un seul personnage",
+  "des informations que personne dans l'histoire ne possède",
+  "aucune pensée, seulement des gestes et des paroles",
+  "deux consciences, mais rien de plus qu'elles n'en savent",
+];
+
+const CAS_INDICE: readonly Cas[] = [
+  { enonce: "Une focalisation interne.", rep: "des perceptions attachées à un seul personnage", raison: "on voit, on entend et l'on pense par lui, et par lui seul" },
+  { enonce: "Une focalisation zéro.", rep: "des informations que personne dans l'histoire ne possède", raison: "c'est le seul indice sûr : un savoir qui n'appartient à aucun personnage" },
+  { enonce: "Une focalisation externe.", rep: "aucune pensée, seulement des gestes et des paroles", raison: "le récit se tient à la surface, comme une caméra" },
+  { enonce: "Une focalisation interne portée tour à tour par deux personnages.", rep: "deux consciences, mais rien de plus qu'elles n'en savent", raison: "on change de tête sans jamais dépasser ce que les têtes savent" },
+];
+
+const CHANGEMENTS: readonly string[] = [
+  "on passe de l'interne à la focalisation zéro",
+  "on passe de la focalisation zéro à l'interne",
+  "on passe de l'interne à l'externe",
+  "on reste en interne, et le personnage se détrompe",
+];
+
+const CAS_CHANGEMENT_INV: readonly Cas[] = [
+  { enonce: "Le suspense tombe : le lecteur en sait désormais plus que le personnage.", rep: "on passe de l'interne à la focalisation zéro", raison: "le narrateur s'est mis à savoir ce que le personnage ignore" },
+  { enonce: "Le suspense nait : le lecteur n'en sait pas plus que le personnage.", rep: "on passe de la focalisation zéro à l'interne", raison: "le savoir se resserre sur une seule conscience" },
+  { enonce: "Le personnage devient opaque : on ne voit plus que ses gestes.", rep: "on passe de l'interne à l'externe", raison: "l'accès à la pensée se ferme, et la sympathie s'éloigne" },
+  { enonce: "On découvre que le personnage se trompait sur ce qu'il croyait savoir.", rep: "on reste en interne, et le personnage se détrompe", raison: "la focalisation ne bouge pas : c'est le personnage qui apprend" },
+];
+
+const VITESSES: readonly string[] = [
+  "le récit va infiniment plus vite que l'histoire",
+  "le récit va plus vite que l'histoire",
+  "le récit va à la vitesse de l'histoire",
+  "le récit avance alors que l'histoire s'arrête",
+];
+
+const CAS_VITESSE: readonly Cas[] = [
+  { enonce: "Une ellipse.", rep: "le récit va infiniment plus vite que l'histoire", raison: "des années peuvent passer en zéro ligne" },
+  { enonce: "Un sommaire.", rep: "le récit va plus vite que l'histoire", raison: "une longue durée tient en quelques phrases" },
+  { enonce: "Une scène.", rep: "le récit va à la vitesse de l'histoire", raison: "le dialogue est le cas type : on met à le lire le temps qu'il a duré" },
+  { enonce: "Une pause descriptive.", rep: "le récit avance alors que l'histoire s'arrête", raison: "les pages défilent et l'action ne bouge pas d'un pouce" },
+];
+
+const GAINS_ORDRE: readonly string[] = [
+  "il éclaire le présent par ce qui l'a précédé",
+  "il crée l'attente en annonçant la suite",
+  "il donne la parole à un autre que le narrateur",
+  "il laisse découvrir dans l'ordre où l'on a vécu",
+];
+
+const CAS_GAIN_ORDRE: readonly Cas[] = [
+  { enonce: "Une analepse.", rep: "il éclaire le présent par ce qui l'a précédé", raison: "le retour en arrière explique ce qu'on ne comprenait pas" },
+  { enonce: "Une prolepse.", rep: "il crée l'attente en annonçant la suite", raison: "savoir ce qui vient ne supprime pas l'intérêt : il le déplace" },
+  { enonce: "Un récit dans le récit.", rep: "il donne la parole à un autre que le narrateur", raison: "une seconde voix prend le relais, avec son propre savoir" },
+  { enonce: "Un ordre strictement chronologique.", rep: "il laisse découvrir dans l'ordre où l'on a vécu", raison: "le lecteur avance au même pas que les personnages" },
+];
+
+const RECONNAIT_PAROLE: readonly string[] = [
+  "ni guillemets ni « que », mais la voix du personnage",
+  "des guillemets et un verbe de parole",
+  "une subordonnée introduite par « que »",
+  "un seul mot qui résume ce qui a été dit",
+];
+
+const CAS_RECONNAIT: readonly Cas[] = [
+  { enonce: "Le discours indirect libre.", rep: "ni guillemets ni « que », mais la voix du personnage", raison: "les deux voix se superposent : c'est ce qui le rend difficile à repérer" },
+  { enonce: "Le discours direct.", rep: "des guillemets et un verbe de parole", raison: "les paroles sont données telles quelles" },
+  { enonce: "Le discours indirect.", rep: "une subordonnée introduite par « que »", raison: "les paroles sont subordonnées, donc reformulées" },
+  { enonce: "Le discours narrativisé.", rep: "un seul mot qui résume ce qui a été dit", raison: "« il refusa » tient lieu de toute une conversation" },
+];
+
 export const romanRecitSecondeBank: TutorBankItemV4[] = [
   item("2de_rom_formes_tpl_1", "roman_formes_2de", "2de_rom_formes", 2,
     "Longueur, indépendance des textes, itinéraire, dates : quatre indices pour quatre formes.",
@@ -491,4 +676,78 @@ export const romanRecitSecondeBank: TutorBankItemV4[] = [
     ["seconde", "narration", "template"], "Comment la parole ou la pensée est-elle rapportée ?", CAS_PAROLE, PAROLES,
     "Le discours indirect libre fait entendre deux voix à la fois : le récit garde son temps et sa personne, mais le vocabulaire, les exclamations et les questions sont ceux du personnage. Ni guillemets, ni « que » : c'est ce qui le distingue du direct et de l'indirect.",
     "Cherche les guillemets : s'il y en a, c'est du direct. Cherche le « que » après un verbe de parole : c'est de l'indirect. S'il n'y a ni l'un ni l'autre mais qu'on entend le personnage, c'est de l'indirect libre."),
+
+  /* ══════════════ LES SECONDS ITEMS ══════════════ */
+
+  item("2de_rom_formes_tpl_2", "roman_formes_2de", "2de_rom_formes", 3,
+    "Chaque forme impose une contrainte qu'aucune autre n'a. Cherche celle-là.",
+    ["seconde", "roman", "template"], "Qu'est-ce qui est propre à cette forme ?", CAS_PROPRE_FORME, PROPRES_FORME,
+    "Le programme demande deux œuvres intégrales de forme et de siècle différents. Chaque forme du récit a sa contrainte propre : le roman déploie une intrigue dans la durée ; les nouvelles d'un recueil se passent les unes des autres ; le récit de voyage suit un itinéraire réel ; le journal s'écrit sans connaitre la suite, et c'est ce qui le rend irremplaçable.",
+    "Demande-toi ce que la forme rend possible, et surtout ce qu'elle interdit. C'est l'interdit qui la définit."),
+
+  item("2de_rom_brievete_tpl_2", "roman_formes_2de", "2de_rom_brievete", 3,
+    "La brièveté n'est pas une privation : chaque contrainte donne quelque chose en échange.",
+    ["seconde", "roman", "template"], "Que la nouvelle gagne-t-elle à cette contrainte ?", CAS_GAIN, GAINS_BRIEVETE,
+    "La nouvelle ne raconte pas moins qu'un roman : elle raconte autrement. Entrer sans exposition jette le lecteur dans l'action ; réserver le sens pour la fin oblige à tout relire ; réduire les personnages leur donne à chacun du poids ; et laisser hors du texte l'inutile fait travailler le lecteur autant que l'auteur.",
+    "Pour chaque contrainte, demande-toi ce que le lecteur doit faire à la place. C'est là qu'est le gain."),
+
+  item("2de_rom_biographique_tpl_2", "roman_formes_2de", "2de_rom_biographique", 3,
+    "Un pacte est une promesse. Demande-toi qui la fait, et de quoi il répond.",
+    ["seconde", "roman", "template"], "Sur quoi repose le pacte de lecture ?", CAS_GARANT, GARANTS,
+    "Les récits de vie se distinguent par le contrat passé avec le lecteur. L'autobiographie promet la vérité sur soi. La biographie repose sur l'enquête d'un tiers. Les mémoires engagent l'auteur sur son époque autant que sur lui-même. L'autofiction déclare la part d'invention, et c'est cette déclaration qui la rend honnête.",
+    "Demande-toi qui écrit, de qui l'on parle, et ce que l'auteur s'engage à garantir."),
+
+  item("2de_rom_evolution_tpl_2", "roman_formes_2de", "2de_rom_evolution", 3,
+    "Chaque siècle demande au roman quelque chose que le précédent ne lui demandait pas.",
+    ["seconde", "roman", "template"], "Quel est le trait dominant du roman à ce moment ?", CAS_TRAIT_EPOQUE, TRAITS_EPOQUE,
+    "Le roman du XVIIIe siècle se déguise en document trouvé pour se faire admettre. Celui du XIXe prétend peindre la société entière. La première moitié du XXe entre dans la conscience et brouille la chronologie. La seconde moitié prend le roman lui-même pour objet.",
+    "Demande-toi de quoi le roman a besoin pour être cru à ce moment-là : d'une caution, d'un savoir, d'une conscience, ou de rien."),
+
+  item("2de_rom_effet_de_reel_tpl_2", "roman_formes_2de", "2de_rom_effet_de_reel", 4,
+    "Retire le détail par la pensée, puis relis. Si rien ne manque, tu as ta réponse.",
+    ["seconde", "roman", "template"], "Si l'on supprimait ce détail, que perdrait le récit ?", CAS_PERTE, PERTES,
+    "Un détail de récit peut faire quatre choses : annoncer la suite, caractériser un personnage, situer une époque, ou rien du tout. Ce dernier cas porte un nom — l'effet de réel — et il n'est pas un défaut : c'est précisément parce qu'il ne sert à rien qu'il fait vrai. Le monde, lui, est plein de choses inutiles.",
+    "Applique la suppression : retire le détail et relis. Ce qui manque alors te dit ce que le détail faisait."),
+
+  item("2de_rom_personnage_tpl_2", "roman_formes_2de", "2de_rom_personnage", 3,
+    "Le narrateur ne juge presque jamais lui-même. Demande-toi ce qu'il te laisse conclure.",
+    ["seconde", "roman", "template"], "Que le lecteur en conclut-il ?", CAS_CONCLUSION, CONCLUSIONS,
+    "Un portrait ne dit presque jamais ce qu'il veut faire penser : il laisse conclure. Le physique peut porter un jugement moral que personne n'écrit ; les objets disent la condition ; le regard d'un autre personnage oriente sans qu'on s'en aperçoive ; et la conduite décrit mieux qu'aucun adjectif.",
+    "Cherche d'abord ce que tu penses du personnage, puis remonte à ce qui, dans le texte, te l'a fait penser."),
+
+  item("2de_nar_narrateur_tpl_2", "narration_2de", "2de_nar_narrateur", 3,
+    "La question n'est pas qui parle, mais ce que celui qui parle peut savoir.",
+    ["seconde", "narration", "template"], "Que ce narrateur peut-il savoir ?", CAS_SAVOIR, SAVOIRS,
+    "Le choix du narrateur décide de ce qui pourra être raconté. Un narrateur extérieur n'a aucune limite si l'auteur ne lui en donne pas. Un narrateur personnage ne peut rapporter que sa propre expérience. Un narrateur témoin voit l'autre du dehors, et sa conscience lui reste fermée — c'est là que nait l'énigme.",
+    "Demande-toi ce que ce narrateur ne POURRAIT PAS raconter. Ses limites le définissent mieux que sa position."),
+
+  item("2de_nar_focalisation_tpl_2", "narration_2de", "2de_nar_focalisation", 4,
+    "Un seul indice est sûr : le narrateur sait-il quelque chose que PERSONNE dans l'histoire ne sait ?",
+    ["seconde", "narration", "template"], "À quel indice la reconnait-on ?", CAS_INDICE, INDICES_FOCALISATION,
+    "La focalisation est le filtre par lequel passe l'information. Interne : on ne sait que ce qu'un personnage sait. Zéro : le narrateur sait ce que personne dans l'histoire ne sait. Externe : on ne voit que ce qu'une caméra verrait. Et l'interne peut passer d'un personnage à l'autre sans que le narrateur en sache jamais plus qu'eux — c'est ce qui la sépare de la zéro.",
+    "Ne compte pas les consciences : un récit peut entrer dans deux têtes sans être en focalisation zéro. Cherche un savoir qui n'appartient à AUCUN personnage."),
+
+  item("2de_nar_changer_focalisation_tpl_2", "narration_2de", "2de_nar_changer_focalisation", 4,
+    "Pars de l'effet et remonte au changement. Qui en sait le plus, du lecteur ou du personnage ?",
+    ["seconde", "narration", "template"], "Quel changement de focalisation produit cet effet ?", CAS_CHANGEMENT_INV, CHANGEMENTS,
+    "Changer de focalisation, c'est déplacer l'écart de savoir entre le lecteur et le personnage — et c'est cet écart qui fait le suspense, l'ironie ou la pitié. Quand le lecteur en sait plus, il attend la catastrophe. Quand il en sait autant, il la découvre avec le personnage. Quand il en sait moins, le personnage devient opaque.",
+    "Compare deux savoirs : celui du lecteur et celui du personnage. Le sens du changement est celui de leur écart."),
+
+  item("2de_nar_rythme_tpl_2", "narration_2de", "2de_nar_rythme", 3,
+    "Compare deux durées : le temps que l'action a pris, et le temps qu'on met à la lire.",
+    ["seconde", "narration", "template"], "Quelle vitesse ce procédé donne-t-il au récit ?", CAS_VITESSE, VITESSES,
+    "Le rythme d'un récit se mesure en comparant deux durées : celle de l'histoire racontée et celle du récit qui la raconte. L'ellipse passe une durée en zéro ligne. Le sommaire condense. La scène, souvent dialoguée, se lit à peu près dans le temps qu'elle a duré. La pause descriptive fait avancer les pages pendant que l'action s'arrête.",
+    "Demande-toi combien de temps a duré l'action, puis combien de lignes le récit y consacre. Le rapport des deux est le rythme."),
+
+  item("2de_nar_ordre_tpl_2", "narration_2de", "2de_nar_ordre", 3,
+    "Rompre la chronologie n'est jamais gratuit : demande-toi ce que la rupture apporte au lecteur.",
+    ["seconde", "narration", "template"], "Que le récit gagne-t-il à ce procédé ?", CAS_GAIN_ORDRE, GAINS_ORDRE,
+    "Un récit n'est pas obligé de suivre l'ordre des événements. L'analepse revient en arrière pour éclairer ce qu'on ne comprenait pas. La prolepse annonce la suite, et déplace l'intérêt de « quoi » vers « comment ». Le récit dans le récit installe une seconde voix. L'ordre chronologique, lui, fait avancer le lecteur au pas des personnages.",
+    "Demande-toi ce que le lecteur sait de plus, ou de moins, à cause de ce déplacement."),
+
+  item("2de_nar_discours_indirect_libre_tpl_2", "narration_2de", "2de_nar_discours_indirect_libre", 3,
+    "Deux marques suffisent à trancher : les guillemets, et le « que ». Leur absence à toutes deux est un signe.",
+    ["seconde", "narration", "template"], "À quoi le reconnait-on ?", CAS_RECONNAIT, RECONNAIT_PAROLE,
+    "Quatre façons de rapporter une parole, et elles se reconnaissent à des marques visibles. Le direct a ses guillemets. L'indirect a son « que » après un verbe de parole. Le narrativisé résume tout en un verbe. Le discours indirect libre n'a ni l'un ni l'autre : la voix du personnage passe dans le récit, et c'est cette superposition qui le rend si difficile à repérer.",
+    "Cherche les marques dans l'ordre : guillemets, puis « que », puis verbe résumant. Si aucune n'y est et qu'on entend pourtant le personnage, c'est l'indirect libre."),
 ];
