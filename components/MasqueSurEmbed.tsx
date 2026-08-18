@@ -19,7 +19,7 @@ import { usePathname } from "next/navigation";
 // un dirigeant, puis qu'on lui imprime. Un menu « Élèves · Parents ·
 // Enseignants » au-dessus d'un audit d'hôtel dit exactement le contraire de ce
 // que le document essaie d'établir — et il partirait sur le papier.
-const SANS_HABILLAGE = ["/embed", "/ia", "/audit"];
+const SANS_HABILLAGE = ["/embed", "/ia", "/audit", "/devis"];
 
 export default function MasqueSurEmbed({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
