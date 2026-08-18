@@ -2502,8 +2502,17 @@ export const secondDegreBank: TutorBankItemV4[] = [
       const c = r1 * r2;
       const negatif = randomInt(0, 1) === 1;
       const ecrit = `x^2 ${b >= 0 ? "+ " + b : "- " + -b}x ${c >= 0 ? "+ " + c : "- " + -c}`;
-      const entre = `$]${r1} ; ${r2}[$`;
-      const exterieur = `$]-\\infty ; ${r1}[ \\cup ]${r2} ; +\\infty[$`;
+      // ⚠️ DEUX FORMES POUR DEUX USAGES (18/08/2026). Un choix de QCM s'affiche
+      // seul : il porte ses délimiteurs. La conclusion, elle, les réinjectait
+      // dans `$S = …$` et rendait « $S = $]-2 ; 3[$$ » — deux formules qui se
+      // referment l'une sur l'autre, que KaTeX abandonne. L'élève voyait les
+      // dollars et les `\cup` en clair au moment précis où il cherchait sa
+      // solution. On garde donc la version NUE pour insérer, la version
+      // délimitée pour afficher.
+      const entreNu = `]${r1} ; ${r2}[`;
+      const exterieurNu = `]-\\infty ; ${r1}[ \\cup ]${r2} ; +\\infty[`;
+      const entre = `$${entreNu}$`;
+      const exterieur = `$${exterieurNu}$`;
       return {
         text: `Résous l'inéquation $${ecrit} ${negatif ? "<" : ">"} 0$.`,
         format: "qcm",
@@ -2518,7 +2527,7 @@ export const secondDegreBank: TutorBankItemV4[] = [
           negatif
             ? `On cherche où le trinôme est négatif : c'est entre les racines.`
             : `On cherche où le trinôme est positif : c'est à l'extérieur des racines.`,
-          `$S = ${negatif ? entre : exterieur}$.`
+          `$S = ${negatif ? entreNu : exterieurNu}$.`
         ),
       };
     },

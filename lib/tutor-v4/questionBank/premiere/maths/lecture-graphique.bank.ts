@@ -209,7 +209,14 @@ export const lectureGraphiqueBank: TutorBankItemV4[] = [
         explanation: exp(
           "Un point appartient à la courbe si ses coordonnées vérifient l'équation.",
           "On remplace $x$ par l'abscisse et on calcule l'ordonnée.",
-          `$${a === 1 ? "" : a} \\times (${x})^2 ${b >= 0 ? "+" : "-"} ${Math.abs(b)} \\times (${x}) ${c >= 0 ? "+" : "-"} ${Math.abs(c)} = ${fr(y)}$.`,
+          // ⚠️ LE « × » PART AVEC LE COEFFICIENT 1 (18/08/2026). On écrivait
+          // `$${a} \times (…)` : quand a valait 1, le coefficient disparaissait
+          // et il restait « $ \times … » — un espace collé au dollar ouvrant,
+          // que remark-math refuse de lire comme une formule. L'élève voyait
+          // alors la ligne de calcul en LaTeX brut, une fois sur deux (a vaut 1
+          // ou 2). Et « 1 × » ne s'écrit pas davantage : c'est bien le facteur
+          // entier qu'il faut retirer, pas seulement son chiffre.
+          `$${a === 1 ? "" : `${a} \\times `}(${x})^2 ${b >= 0 ? "+" : "-"} ${Math.abs(b)} \\times (${x}) ${c >= 0 ? "+" : "-"} ${Math.abs(c)} = ${fr(y)}$.`,
           `Le point cherché est $(${x} \\, ; \\, ${fr(y)})$.`
         ),
         choiceDiagnostics: [

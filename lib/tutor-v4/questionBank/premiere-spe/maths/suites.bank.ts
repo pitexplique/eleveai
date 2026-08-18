@@ -3213,12 +3213,18 @@ export const suitesBank: TutorBankItemV4[] = [
     hint: "Pour une suite géométrique de terme positif : $q > 1$ fait exploser, $0 < q < 1$ fait tendre vers $0$.",
     tags: ["premiere", "maths", "suites", "limite", "template"],
     generate: () => {
+      // ⚠️ `q` SANS SES DOLLARS : il est réinjecté dans `$q = …$` (18/08/2026).
+      // La colonne portait ses propres délimiteurs, et l'énoncé donnait
+      // « $q = $0{,}7$$ » — deux formules qui se referment l'une sur l'autre.
+      // KaTeX renonce, et l'élève de première lisait les dollars et les accolades
+      // à l'écran. Une valeur qu'on insère dans une formule s'écrit nue ; celle
+      // qu'on affiche seule (`vers`, `pourquoi`) garde les siens.
       const cas = [
-        { q: "$1{,}2$", vers: "$+\\infty$", pourquoi: "$q > 1$ : les termes grandissent de plus en plus vite" },
-        { q: "$0{,}7$", vers: "$0$", pourquoi: "$0 < q < 1$ : chaque terme est plus petit que le précédent, et l'on s'approche de $0$" },
-        { q: "$3$", vers: "$+\\infty$", pourquoi: "$q > 1$ : la croissance est explosive" },
-        { q: "$0{,}25$", vers: "$0$", pourquoi: "$0 < q < 1$ : les termes sont divisés par $4$ à chaque étape" },
-        { q: "$1$", vers: "son premier terme", pourquoi: "$q = 1$ : tous les termes sont égaux, la suite est constante" },
+        { q: "1{,}2", vers: "$+\\infty$", pourquoi: "$q > 1$ : les termes grandissent de plus en plus vite" },
+        { q: "0{,}7", vers: "$0$", pourquoi: "$0 < q < 1$ : chaque terme est plus petit que le précédent, et l'on s'approche de $0$" },
+        { q: "3", vers: "$+\\infty$", pourquoi: "$q > 1$ : la croissance est explosive" },
+        { q: "0{,}25", vers: "$0$", pourquoi: "$0 < q < 1$ : les termes sont divisés par $4$ à chaque étape" },
+        { q: "1", vers: "son premier terme", pourquoi: "$q = 1$ : tous les termes sont égaux, la suite est constante" },
       ];
       const c = pickOne(cas);
       const autres = ["$+\\infty$", "$0$", "son premier terme", "$-\\infty$"].filter(
