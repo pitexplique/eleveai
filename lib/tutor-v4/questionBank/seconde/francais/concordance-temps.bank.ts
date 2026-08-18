@@ -191,6 +191,133 @@ const RAPPORTE: readonly Transposition[] = [
    la correction.
    ========================================================================== */
 
+/* ═══════════ LES TABLES DES SECONDS ITEMS (18/08/2026) ═══════════
+   Le coach en mode complet oppose deux énoncés : il faut deux items par micro,
+   et d'ANGLES différents. Les cinq premiers items de ce fichier font tous le
+   même geste — on donne la phrase, l'élève choisit ou transpose une forme. Les
+   cinq suivants prennent le chemin inverse : on remonte de la forme au rapport
+   qu'elle marque, on ramène un récit du passé au présent, on retrouve les
+   paroles derrière le discours indirect, on cherche ce qui déclenche un mode.
+   ⚠️ Longueurs de réponses tenues voisines dès l'écriture : sur la banque du
+   verbe, deux items écrits sans cette précaution sortaient à +27 caractères
+   d'avance au contrôle de devinabilité. */
+
+type Rapport = { readonly phrase: string; readonly mot: string; readonly rep: string };
+type Retour = { readonly phrase: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Declencheur = { readonly phrase: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+
+/* 2 bis. LA FORME EST ÉCRITE, LE RAPPORT EST À LIRE (2de_conc_reperes)
+   Le premier item donne le rapport en majuscules et fait choisir la forme.
+   Celui-ci fait l'inverse, et c'est plus difficile : rien n'est annoncé, il faut
+   lire la terminaison pour retrouver l'ordre des actions. */
+const RAPPORTS: readonly string[] = [
+  "antérieure, dans le passé",
+  "simultanée, dans le passé",
+  "postérieure, dans le passé",
+  "antérieure, dans le futur",
+  "simultanée, dans le futur",
+  "postérieure, vue depuis le passé",
+];
+
+const LECTURES_RAPPORT: readonly Rapport[] = [
+  { phrase: "Il ferma la porte. Il avait glissé la clé dans sa poche.", mot: "avait glissé", rep: "antérieure, dans le passé" },
+  { phrase: "Il ferma la porte. Il sifflait dans le couloir.", mot: "sifflait", rep: "simultanée, dans le passé" },
+  { phrase: "Il ferma la porte, puis éteignit la lumière.", mot: "éteignit", rep: "postérieure, dans le passé" },
+  { phrase: "Quand tu arriveras, je serai déjà parti.", mot: "serai parti", rep: "antérieure, dans le futur" },
+  { phrase: "Quand tu arriveras, nous partirons ensemble.", mot: "partirons", rep: "simultanée, dans le futur" },
+  { phrase: "Il annonça qu'il enverrait le dossier.", mot: "enverrait", rep: "postérieure, vue depuis le passé" },
+  { phrase: "Dès que la cloche aura sonné, les élèves sortiront.", mot: "aura sonné", rep: "antérieure, dans le futur" },
+  { phrase: "Elle relut sa copie. Elle avait souligné la consigne.", mot: "avait souligné", rep: "antérieure, dans le passé" },
+  { phrase: "Nous étions dehors. La pluie tombait sans discontinuer.", mot: "tombait", rep: "simultanée, dans le passé" },
+  { phrase: "Lorsque tu liras ces lignes, j'aurai quitté l'ile.", mot: "aurai quitté", rep: "antérieure, dans le futur" },
+  { phrase: "Elle promit qu'elle reviendrait avant la nuit.", mot: "reviendrait", rep: "postérieure, vue depuis le passé" },
+  { phrase: "Il entra, salua, puis s'installa à sa place.", mot: "s'installa", rep: "postérieure, dans le passé" },
+  { phrase: "Le jury délibéra. Les candidats avaient quitté la salle.", mot: "avaient quitté", rep: "antérieure, dans le passé" },
+  { phrase: "Pendant que nous parlerons, ils prépareront la salle.", mot: "prépareront", rep: "simultanée, dans le futur" },
+  { phrase: "Il jura qu'il ne recommencerait plus jamais.", mot: "recommencerait", rep: "postérieure, vue depuis le passé" },
+  { phrase: "La cloche sonna. Les élèves sortirent en silence.", mot: "sortirent", rep: "postérieure, dans le passé" },
+];
+
+/* 3 bis. LE RÉCIT REMONTE AU PRÉSENT (2de_conc_recit_au_passe)
+   ⭐ Le premier item descend du présent vers le passé ; celui-ci remonte. Le
+   sens du trajet compte : à la descente, l'élève applique une règle apprise ; à
+   la remontée, il doit reconnaitre d'abord quel PLAN portait la forme, puisque
+   passé simple et imparfait retombent tous deux sur le présent. */
+const TRANSPOSITIONS_PRESENT: readonly Transposition[] = [
+  { phrase: "Il entra et vit que la salle était vide.", mot: "entra", bonne: "entre", faux: ["entrait", "est entré", "entrera"], raison: "le passé simple du récit retombe sur le présent de narration" },
+  { phrase: "Il entra et vit que la salle était vide.", mot: "était", bonne: "est", faux: ["fut", "a été", "sera"], raison: "l'imparfait d'arrière-plan retombe lui aussi sur le présent" },
+  { phrase: "Elle ouvrit la lettre, puis s'assit sans rien dire.", mot: "s'assit", bonne: "s'assoit", faux: ["s'asseyait", "s'est assise", "s'assiéra"], raison: "action ponctuelle du récit : présent de narration" },
+  { phrase: "Le vent soufflait fort et la mer montait peu à peu.", mot: "montait", bonne: "monte", faux: ["monta", "est montée", "montera"], raison: "le processus qui durait passe au présent" },
+  { phrase: "Il savait qu'on l'attendait dehors.", mot: "attendait", bonne: "attend", faux: ["attendit", "a attendu", "attendra"], raison: "la subordonnée suit la principale, qui est passée au présent" },
+  { phrase: "Elle promit qu'elle reviendrait avant la nuit.", mot: "reviendrait", bonne: "reviendra", faux: ["revient", "revenait", "est revenue"], raison: "le conditionnel de futur dans le passé redevient un futur simple" },
+  { phrase: "Il remarqua que la porte avait été forcée.", mot: "avait été forcée", bonne: "a été forcée", faux: ["fut forcée", "est forcée", "sera forcée"], raison: "le plus-que-parfait, antérieur au récit, redevient passé composé" },
+  { phrase: "Le train ralentit, puis s'arrêta en pleine campagne.", mot: "s'arrêta", bonne: "s'arrête", faux: ["s'arrêtait", "s'est arrêté", "s'arrêtera"], raison: "action ponctuelle : présent de narration" },
+  { phrase: "Personne ne bougeait, car chacun craignait de se tromper.", mot: "craignait", bonne: "craint", faux: ["craignit", "a craint", "craindra"], raison: "l'état qui durait passe au présent" },
+  { phrase: "Le jour se levait quand ils atteignirent le sommet.", mot: "atteignirent", bonne: "atteignent", faux: ["atteignaient", "ont atteint", "atteindront"], raison: "l'événement qui survient passe au présent de narration" },
+  { phrase: "Il comprit enfin ce que son père lui avait expliqué.", mot: "avait expliqué", bonne: "a expliqué", faux: ["expliqua", "explique", "expliquera"], raison: "l'antériorité se marque au présent par le passé composé" },
+  { phrase: "Il ferma le carnet où il notait ses observations.", mot: "notait", bonne: "note", faux: ["nota", "a noté", "notera"], raison: "l'habitude d'arrière-plan passe au présent" },
+];
+
+/* 4 bis. RETROUVER LES PAROLES (2de_conc_discours_rapporte)
+   Le premier item va du direct vers l'indirect. Celui-ci remonte au direct, et
+   c'est le geste du commentaire : sous une parole rapportée, retrouver ce qui a
+   été dit. ⚠️ Les trois leurres ne changent qu'UNE chose chacun — le temps, la
+   personne, ou le repère. L'élève ne peut donc pas éliminer à l'oreille : il
+   doit vérifier les trois. */
+const RETOURS_DIRECT: readonly Retour[] = [
+  { phrase: "Il m'a dit qu'il viendrait le lendemain.", bonne: "« Je viendrai demain. »", faux: ["« Je viendrais demain. »", "« Je viendrai le lendemain. »", "« Il viendra demain. »"], raison: "le conditionnel redevient futur, « le lendemain » redevient « demain », « il » redevient « je »" },
+  { phrase: "Elle a répondu qu'elle était fatiguée.", bonne: "« Je suis fatiguée. »", faux: ["« J'étais fatiguée. »", "« Elle est fatiguée. »", "« Je serai fatiguée. »"], raison: "l'imparfait du discours indirect correspond à un présent dans les paroles" },
+  { phrase: "Il a expliqué qu'il avait tout relu la veille.", bonne: "« J'ai tout relu hier. »", faux: ["« J'avais tout relu hier. »", "« J'ai tout relu la veille. »", "« Il a tout relu hier. »"], raison: "le plus-que-parfait redevient passé composé et « la veille » redevient « hier »" },
+  { phrase: "Elle a demandé où était la salle B12.", bonne: "« Où est la salle B12 ? »", faux: ["« Où était la salle B12 ? »", "« Où sera la salle B12 ? »", "« Où fut la salle B12 ? »"], raison: "l'interrogation indirecte à l'imparfait correspond à un présent" },
+  { phrase: "Il m'a dit de fermer la porte.", bonne: "« Ferme la porte. »", faux: ["« Je ferme la porte. »", "« Tu fermeras la porte. »", "« Il faut fermer la porte. »"], raison: "« de » suivi de l'infinitif rapporte un ordre : c'était un impératif" },
+  { phrase: "Elle a demandé si je venais.", bonne: "« Est-ce que tu viens ? »", faux: ["« Est-ce que je viens ? »", "« Est-ce que tu venais ? »", "« Est-ce qu'il vient ? »"], raison: "« si » rapporte une question totale ; « je » du récit répond à « tu » des paroles" },
+  { phrase: "Il a promis qu'il me rappellerait.", bonne: "« Je te rappellerai. »", faux: ["« Je te rappellerais. »", "« Il me rappellera. »", "« Je te rappelle. »"], raison: "le conditionnel redevient futur, et les personnes s'échangent" },
+  { phrase: "Elle a dit que ce livre était à elle.", bonne: "« Ce livre est à moi. »", faux: ["« Ce livre était à moi. »", "« Ce livre est à elle. »", "« Ce livre sera à moi. »"], raison: "le possessif revient à la première personne, le temps au présent" },
+  { phrase: "Elle a soupiré qu'elle n'y arriverait jamais.", bonne: "« Je n'y arriverai jamais. »", faux: ["« Je n'y arriverais jamais. »", "« Elle n'y arrivera jamais. »", "« Je n'y arrive jamais. »"], raison: "conditionnel du récit, futur dans les paroles" },
+  { phrase: "Il a affirmé qu'il n'avait rien su.", bonne: "« Je ne savais rien. »", faux: ["« Je n'ai rien su. »", "« Il ne savait rien. »", "« Je ne saurai rien. »"], raison: "le plus-que-parfait rapporte ici un imparfait des paroles" },
+];
+
+/* 5 bis. QU'EST-CE QUI IMPOSE LE SUBJONCTIF ? (2de_conc_subjonctif)
+   Le premier item fait choisir le TEMPS du subjonctif. Celui-ci demande sa
+   CAUSE : ce n'est pas le verbe subordonné qui décide de son mode, c'est ce qui
+   l'introduit. ⚠️ Les quatre propositions sont des groupes de la phrase, de
+   longueur voisine — dont le verbe au subjonctif lui-même, qui est l'effet et
+   non la cause. C'est le piège utile. */
+const DECLENCHEURS: readonly Declencheur[] = [
+  { phrase: "Je doute qu'il ait déjà terminé son devoir.", bonne: "je doute que", faux: ["il ait terminé", "déjà terminé", "son devoir"], raison: "un verbe de doute impose le subjonctif dans la subordonnée" },
+  { phrase: "Il faut que chacun rende sa copie avant midi.", bonne: "il faut que", faux: ["chacun rende", "rende sa copie", "avant midi"], raison: "« il faut que » exprime la nécessité : le fait n'est pas réalisé" },
+  { phrase: "Bien qu'il pleuve encore, la sortie est maintenue.", bonne: "bien que", faux: ["il pleuve", "est maintenue", "la sortie"], raison: "les conjonctions de concession appellent le subjonctif" },
+  { phrase: "Je souhaite qu'il vienne demain sans faute.", bonne: "je souhaite que", faux: ["vienne sans faute", "il vienne demain", "demain sans faute"], raison: "un verbe de volonté impose le subjonctif" },
+  { phrase: "Je regrette qu'elle soit partie sans prévenir.", bonne: "je regrette que", faux: ["elle soit partie", "partie sans prévenir", "sans prévenir"], raison: "un verbe de sentiment impose le subjonctif" },
+  { phrase: "Pour qu'il comprenne, répète la consigne lentement.", bonne: "pour que", faux: ["il comprenne", "la consigne", "répète lentement"], raison: "le but s'exprime au subjonctif : il n'est pas encore atteint" },
+  { phrase: "Avant qu'il ne parte, dis-lui la vérité.", bonne: "avant que", faux: ["il ne parte", "dis-lui", "la vérité"], raison: "« avant que » situe l'action dans le non-encore-réalisé" },
+  { phrase: "Il est possible qu'elle réussisse l'examen.", bonne: "il est possible que", faux: ["elle réussisse", "réussisse l'examen", "l'examen"], raison: "une tournure de possibilité impose le subjonctif" },
+  { phrase: "Quoi qu'il arrive, nous resterons ensemble.", bonne: "quoi que", faux: ["il arrive", "nous resterons", "ensemble"], raison: "les tours concessifs en « quoi que » appellent le subjonctif" },
+  { phrase: "Je ne pense pas qu'il ait raison sur ce point.", bonne: "je ne pense pas que", faux: ["il ait raison", "raison sur ce point", "sur ce point"], raison: "un verbe d'opinion à la forme négative fait basculer au subjonctif" },
+  { phrase: "Jusqu'à ce que la nuit tombe, ils attendirent.", bonne: "jusqu'à ce que", faux: ["la nuit tombe", "ils attendirent", "la nuit"], raison: "la limite temporelle non atteinte appelle le subjonctif" },
+];
+
+/* 1 bis. LA CONCORDANCE EST ROMPUE, OÙ ? (2de_conc_principale_subordonnee)
+   Le premier item propose des formes et en fait choisir une. Celui-ci pose une
+   phrase déjà écrite, et fautive : rien ne signale où regarder. C'est le geste
+   de la relecture, celui qui sert vraiment en copie.
+   ⚠️ La faute est TOUJOURS dans la subordonnée, jamais dans la principale : la
+   règle veut que ce soit la principale qui commande. Une table où l'on
+   corrigerait tantôt l'une tantôt l'autre enseignerait le contraire. */
+const RUPTURES: readonly Declencheur[] = [
+  { phrase: "Il croyait que Paul est parti la veille.", bonne: "est parti", faux: ["croyait", "la veille", "Paul"], raison: "après une principale au passé, l'antériorité se marque au plus-que-parfait : « était parti »" },
+  { phrase: "Elle savait qu'il viendra le lendemain.", bonne: "viendra", faux: ["savait", "le lendemain", "il"], raison: "un futur vu depuis le passé se met au conditionnel : « viendrait »" },
+  { phrase: "Je pensais qu'il a raison sur ce point.", bonne: "a", faux: ["pensais", "sur ce point", "raison"], raison: "après une principale au passé, le simultané se met à l'imparfait : « avait »" },
+  { phrase: "Il annonça qu'il partira très bientôt.", bonne: "partira", faux: ["annonça", "très bientôt", "il"], raison: "futur vu depuis le passé : « partirait »" },
+  { phrase: "Nous espérions qu'elle réussira son épreuve.", bonne: "réussira", faux: ["espérions", "son épreuve", "elle"], raison: "futur vu depuis le passé : « réussirait »" },
+  { phrase: "Il ignorait que la salle est déjà fermée.", bonne: "est", faux: ["ignorait", "déjà fermée", "la salle"], raison: "simultané dans le passé : « était »" },
+  { phrase: "Elle raconta qu'elle a vu la mer une fois.", bonne: "a vu", faux: ["raconta", "une fois", "la mer"], raison: "antérieur à un passé : « avait vu »" },
+  { phrase: "Il jura qu'il ne recommencera plus jamais.", bonne: "recommencera", faux: ["jura", "plus jamais", "il"], raison: "futur vu depuis le passé : « recommencerait »" },
+  { phrase: "Je croyais que tu seras là pour l'ouverture.", bonne: "seras", faux: ["croyais", "pour l'ouverture", "tu"], raison: "futur vu depuis le passé : « serais »" },
+  { phrase: "Ils comprirent que le train est déjà passé.", bonne: "est", faux: ["comprirent", "déjà passé", "le train"], raison: "antérieur à un passé : « était »" },
+  { phrase: "Elle sentait que quelque chose va arriver.", bonne: "va", faux: ["sentait", "quelque chose", "arriver"], raison: "futur proche vu depuis le passé : « allait »" },
+];
+
 const SUBJONCTIFS: readonly Trou[] = [
   { phrase: "Je doute qu'il … déjà terminé son devoir.", bonne: "ait", faux: ["a", "avait", "aurait"], raison: "l'action est présentée comme accomplie : subjonctif passé" },
   { phrase: "Je souhaite qu'il … demain sans faute.", bonne: "vienne", faux: ["vient", "viendra", "viendrait"], raison: "l'action est à venir : subjonctif présent" },
@@ -355,6 +482,153 @@ export const concordanceTempsSecondeBank: TutorBankItemV4[] = [
           `Ici, ${c.raison}.`,
           litteraire ? `${c.bonne.charAt(0).toUpperCase()}${c.bonne.slice(1)}.` : `On écrit « ${c.bonne} ».`,
       ),
+      };
+    },
+  },
+
+  /* ══════════════ LES SECONDS ITEMS ══════════════ */
+
+  {
+    kind: "template",
+    id: "2de_conc_principale_subordonnee_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "concordance_temps_2de",
+    microId: "2de_conc_principale_subordonnee",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Repère d'abord le temps de la principale. La faute est toujours du côté de la subordonnée.",
+    tags: ["seconde", "grammaire", "concordance", "relecture", "template"],
+    generate: () => {
+      const c = randomChoice(RUPTURES);
+      return {
+        text: `« ${c.phrase} »\n\nCette phrase ne respecte pas la concordance des temps. Quel élément est fautif ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "La concordance n'est pas une politesse : c'est un rapport. Le verbe de la principale fixe un repère, et la subordonnée se règle sur lui. Quand la principale est au passé, le simultané se met à l'imparfait, l'antérieur au plus-que-parfait, et ce qui devait venir au conditionnel.",
+          "Ne relis pas la phrase d'une traite. Isole la principale, note son temps, puis reviens à la subordonnée et demande-toi si sa forme dit bien le rapport voulu.",
+          `Ici, ${c.raison}.`,
+          `Le mot fautif est « ${c.bonne} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_conc_reperes_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "concordance_temps_2de",
+    microId: "2de_conc_reperes",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Rien n'est annoncé cette fois. La terminaison seule dit dans quel ordre les deux actions se rangent.",
+    tags: ["seconde", "grammaire", "concordance", "repères", "template"],
+    generate: () => {
+      const c = randomChoice(LECTURES_RAPPORT);
+      return {
+        text: `« ${c.phrase} »\n\nQuel rapport la forme « ${c.mot} » marque-t-elle avec l'autre verbe ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.rep, RAPPORTS),
+        expected: [c.rep],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Chaque forme composée porte un rapport d'ordre : le plus-que-parfait dit l'antériorité dans le passé, le futur antérieur l'antériorité dans le futur, l'imparfait la simultanéité passée, le conditionnel présent ce qui devait venir quand on regarde depuis le passé.",
+          "Repère les deux verbes, puis demande-toi lequel se produit en premier. La forme composée est presque toujours celle qui vient avant.",
+          `Ici, « ${c.mot} » situe l'action comme ${c.rep}.`,
+          `L'action est ${c.rep}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_conc_recit_au_passe_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "concordance_temps_2de",
+    microId: "2de_conc_recit_au_passe",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Attention : le passé simple et l'imparfait retombent tous deux sur le présent. Ce n'est pas un aller-retour mécanique.",
+    tags: ["seconde", "grammaire", "concordance", "récit", "template"],
+    generate: () => {
+      const c = randomChoice(TRANSPOSITIONS_PRESENT);
+      return {
+        text: `« ${c.phrase} »\n\nOn récrit ce récit au présent de narration. Que devient « ${c.mot} » ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Le présent de narration rapproche le récit du lecteur : les événements semblent se produire sous ses yeux. Tout le système bascule avec lui — le passé simple et l'imparfait deviennent des présents, le plus-que-parfait devient un passé composé, le conditionnel de futur dans le passé redevient un futur.",
+          "Demande-toi ce que la forme disait : un événement, un décor, une antériorité, un avenir. Puis choisis la forme qui dit la même chose depuis le présent.",
+          `Ici, ${c.raison}.`,
+          `« ${c.mot} » devient « ${c.bonne} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_conc_discours_rapporte_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "concordance_temps_2de",
+    microId: "2de_conc_discours_rapporte",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Trois choses ont bougé quand on a rapporté ces paroles. Vérifie-les une par une : la personne, le temps, le repère.",
+    tags: ["seconde", "grammaire", "concordance", "discours rapporté", "template"],
+    generate: () => {
+      const c = randomChoice(RETOURS_DIRECT);
+      return {
+        text: `« ${c.phrase} »\n\nQuelles ont été les paroles exactes ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Rapporter des paroles déplace trois choses à la fois : les personnes suivent celui qui rapporte, les temps reculent d'un cran quand le verbe introducteur est au passé, et les repères se détachent du moment de la parole. Remonter au discours direct, c'est défaire ces trois déplacements — c'est ce qu'on fait en commentant une citation.",
+          "Traite-les séparément. Qui parlait ? Quel temps correspond à celui du récit ? Et à quel repère renvoie « la veille » ou « le lendemain » ?",
+          `Ici, ${c.raison}.`,
+          `Les paroles étaient : ${c.bonne}`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_conc_subjonctif_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "concordance_temps_2de",
+    microId: "2de_conc_subjonctif",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le verbe au subjonctif est l'effet, pas la cause. Cherche ce qui l'introduit.",
+    tags: ["seconde", "grammaire", "concordance", "subjonctif", "template"],
+    generate: () => {
+      const c = randomChoice(DECLENCHEURS);
+      return {
+        text: `« ${c.phrase} »\n\nQuel élément impose le subjonctif ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Le subjonctif ne se choisit pas : il est commandé. Trois familles le déclenchent — les verbes de volonté, de sentiment et de doute ; les tournures impersonnelles de nécessité ou de possibilité ; et certaines conjonctions, celles du but, de la concession et de la limite temporelle. Le point commun : le fait n'est pas donné comme réalisé.",
+          "Remonte de la subordonnée vers ce qui l'introduit. Si tu remplaces l'introducteur par « il est certain que », le subjonctif tombe — c'est bien lui qui le tenait.",
+          `Ici, ${c.raison}.`,
+          `C'est « ${c.bonne} » qui l'impose.`,
+        ),
       };
     },
   },
