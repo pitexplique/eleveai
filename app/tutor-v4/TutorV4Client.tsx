@@ -2417,10 +2417,11 @@ function WrongAnswerPanel({
             incomplet. */}
         {question.text ? (
           <div className="mx-auto mt-4 max-w-2xl rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left">
-            <div className="mb-1 text-[11px] font-bold uppercase tracking-wide text-slate-400">
-              La question
-            </div>
-            <MarkdownMath className="whitespace-pre-line text-sm font-semibold leading-6 text-slate-700">
+            {/* ⚠️ LISIBLE PAR L'ENFANT, pas une note de bas de page (Frédéric).
+                C'était `text-sm` en gris : la taille qu'on donne à un détail
+                juridique. Un CP doit pouvoir RELIRE sa question — même corps
+                que l'énoncé du tutor, même noir. Ti Margo a maigri pour ça. */}
+            <MarkdownMath className="whitespace-pre-line text-base font-semibold leading-7 text-slate-900 md:text-lg">
               {question.text}
             </MarkdownMath>
           </div>
