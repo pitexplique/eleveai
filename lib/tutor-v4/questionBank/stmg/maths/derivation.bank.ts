@@ -238,6 +238,60 @@ export const derivationBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — CHIFFRER la sécante, au lieu de l'identifier. Le premier item
+    // demande quels points elle joint ; celui-ci demande sa pente. C'est le
+    // taux de variation, et c'est par lui que le BO fait entrer la dérivation :
+    // « la notion de nombre dérivé est introduite à l'aide du taux de
+    // variation ». Une sécante reconnue mais jamais calculée ne mène nulle part.
+    kind: "template",
+    id: "stmg_der_secante_tracer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_secante_tangente",
+    microId: "der_secante_tracer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Coefficient directeur $= \\dfrac{\\text{différence des ordonnées}}{\\text{différence des abscisses}}$, dans le même ordre en haut et en bas.",
+    tags: ["stmg", "maths", "derivation", "canvas", "template", "short"],
+    generate: () => {
+      // On choisit les abscisses pour que la pente tombe sur un entier : la
+      // question porte sur le geste, pas sur un arrondi.
+      const a = pick([1, 2, -1, -2] as const);
+      const b = pick([0, 1, 2, -1, -2, 3] as const);
+      const c = pick([0, 1, -2, 2, -3] as const);
+      const f = (x: number) => a * x * x + b * x + c;
+      const x1 = randomInt(-4, 0);
+      const x2 = x1 + randomInt(2, 5);
+      const pente = (f(x2) - f(x1)) / (x2 - x1);
+      const ord = f(x1) - pente * x1;
+      return {
+        text:
+          `La sécante tracée joint les points de la courbe d'abscisses $${x1}$ et $${x2}$. ` +
+          `Quel est son coefficient directeur ?`,
+        format: "short",
+        expected: [fr(pente)],
+        comparator: "number_equal",
+        canvas: canvasParaboleDroite(
+          a,
+          b,
+          c,
+          { pente, ordonnee: ord, id: "secante" },
+          "Une sécante à la courbe",
+          [{ x: x1 }, { x: x2 }]
+        ),
+        explanation: exp(
+          "Le coefficient directeur d'une sécante est le TAUX DE VARIATION de la fonction entre les deux points : de combien $f$ varie, rapporté à la variation de $x$.",
+          "On lit les deux points sur la courbe, puis on divise la différence des ordonnées par la différence des abscisses — en gardant le même ordre au numérateur et au dénominateur.",
+          `$f(${x1}) = ${fr(f(x1))}$ et $f(${x2}) = ${fr(f(x2))}$. ` +
+            `Donc le taux vaut $\\dfrac{${fr(f(x2))} - ${fr(f(x1))}}{${x2} - (${x1})} = \\dfrac{${fr(f(x2) - f(x1))}}{${x2 - x1}} = ${fr(pente)}$. ` +
+            `⚠️ Inverser l'ordre en haut sans l'inverser en bas donnerait $${fr(-pente)}$ — le signe contraire.`,
+          `Le coefficient directeur de la sécante vaut $${fr(pente)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ der_tangente_limite ═══════════════════ */
 
   {
@@ -301,6 +355,65 @@ export const derivationBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la limite VUE SUR DES NOMBRES. Le premier item demande vers
+    // quoi penche la sécante ; celui-ci donne trois pentes successives, de plus
+    // en plus proches, et fait lire vers quel nombre elles vont.
+    //
+    // ⛔ Le BO l'écrit : « il est recommandé de ne pas donner la définition
+    // formelle de la notion de limite et de s'en tenir à une approche
+    // intuitive à partir d'exemples ». Trois nombres qui se resserrent, c'est
+    // exactement cette approche-là — aucune limite n'est écrite.
+    kind: "template",
+    id: "stmg_der_tangente_limite_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_secante_tangente",
+    microId: "der_tangente_limite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde de quel nombre les trois pentes se rapprochent quand le second point rejoint le premier.",
+    tags: ["stmg", "maths", "derivation", "canvas", "template", "short"],
+    generate: () => {
+      const a = pick([1, 2, -1, -2] as const);
+      const b = pick([0, 1, 2, -2] as const);
+      const c = pick([0, 1, -1] as const);
+      const f = (x: number) => a * x * x + b * x + c;
+      const x0 = randomInt(-3, 3);
+      const penteTan = 2 * a * x0 + b;
+      // Trois écarts qui se resserrent : les pentes valent $2ax_0 + b + ah$.
+      const hs = [1, 0.5, 0.1] as const;
+      const pentes = hs.map((h) => Math.round((2 * a * x0 + b + a * h) * 1000) / 1000);
+      const ordDerniere = f(x0) - pentes[2] * x0;
+      return {
+        text:
+          `On trace des sécantes à la courbe partant du point d'abscisse $${x0}$, ` +
+          `en rapprochant le second point : leurs coefficients directeurs valent successivement ` +
+          `$${fr(pentes[0])}$, puis $${fr(pentes[1])}$, puis $${fr(pentes[2])}$. ` +
+          `Vers quel nombre se dirigent-ils ?`,
+        format: "short",
+        expected: [fr(penteTan)],
+        comparator: "number_equal",
+        canvas: canvasParaboleDroite(
+          a,
+          b,
+          c,
+          { pente: pentes[2], ordonnee: ordDerniere, id: "secante" },
+          `La dernière sécante, presque confondue avec la tangente`,
+          [{ x: x0 }]
+        ),
+        explanation: exp(
+          "Quand le second point se rapproche du premier, la sécante penche de plus en plus vers une position limite : la TANGENTE. Son coefficient directeur est le nombre dérivé.",
+          "On observe la suite des coefficients directeurs et l'on voit vers quel nombre ils se resserrent — sans avoir besoin d'écrire une limite.",
+          `Les écarts entre le second point et le premier valent $1$, puis $0{,}5$, puis $0{,}1$ : ` +
+            `les pentes passent de $${fr(pentes[0])}$ à $${fr(pentes[1])}$ puis $${fr(pentes[2])}$. ` +
+            `Elles se resserrent autour de $${fr(penteTan)}$ — et c'est bien $f'(${x0}) = ${2 * a} \\times ${x0} ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = ${fr(penteTan)}$.`,
+          `Les coefficients directeurs se dirigent vers $${fr(penteTan)}$, le nombre dérivé en $${x0}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ der_tangente_reconnaitre ═══════════════ */
 
   {
@@ -344,6 +457,72 @@ export const derivationBank: TutorBankItemV4[] = [
             : `La droite a pour pente $${fr(pente)}$, alors que la tangente en $${x0}$ aurait pour pente $${fr(2 * a * x0 + b)}$ : elle traverse la courbe.`,
           `C'est ${estTangente ? "la tangente" : "une sécante"}.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — le CRITÈRE, au lieu du cas particulier. Le premier item montre
+    // une droite et demande si c'est la tangente ; celui-ci demande à quoi on
+    // la reconnaît. Un élève peut trancher juste plusieurs fois de suite « au
+    // feeling » sans savoir dire ce qu'il regarde — et se tromper dès que la
+    // courbe change d'allure.
+    kind: "template",
+    id: "stmg_der_tangente_reconnaitre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_secante_tangente",
+    microId: "der_tangente_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une sécante TRAVERSE la courbe en deux points ; une tangente l'ÉPOUSE en un seul, sur tout un voisinage.",
+    tags: ["stmg", "maths", "derivation", "canvas", "template"],
+    generate: () => {
+      const a = pick([1, 2, -1, -2] as const);
+      const b = pick([0, 1, 2, -1, -3] as const);
+      const c = pick([0, 1, -1, 2] as const);
+      const f = (x: number) => a * x * x + b * x + c;
+      const x0 = randomInt(-3, 3);
+      const pente = 2 * a * x0 + b;
+      const ord = f(x0) - pente * x0;
+      const bonne =
+        "elle touche la courbe en un seul point et suit sa direction tout autour de ce point";
+      return {
+        text: `À quoi reconnaît-on que la droite tracée est la TANGENTE à la courbe, et non une sécante ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          "elle coupe la courbe en deux points rapprochés",
+          "elle est horizontale",
+          "elle passe par l'origine du repère",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasParaboleDroite(
+          a,
+          b,
+          c,
+          { pente, ordonnee: ord, id: "tangente" },
+          `Tangente au point d'abscisse ${x0}`,
+          [{ x: x0 }]
+        ),
+        explanation: exp(
+          "Une sécante joint DEUX points de la courbe. Une tangente est la position limite de ces sécantes quand les deux points se rejoignent : elle ne touche plus qu'en un point, et elle épouse la direction de la courbe autour de lui.",
+          "On regarde le contact : deux points d'intersection nets, c'est une sécante ; un seul contact où la droite se confond avec la courbe, c'est la tangente.",
+          `Ici la droite touche la courbe en $x = ${x0}$ et suit sa pente à cet endroit : son coefficient directeur vaut ` +
+            `$f'(${x0}) = ${2 * a} \\times ${x0} ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = ${fr(pente)}$. ` +
+            `Une tangente peut très bien n'être ni horizontale ni passer par l'origine : ces deux traits ne la définissent pas.`,
+          `On la reconnaît à son contact unique, où elle suit la direction de la courbe.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "elle est horizontale",
+            cause: "une tangente n'est horizontale qu'aux extremums : partout ailleurs elle penche",
+          },
+          {
+            choice: "elle coupe la courbe en deux points rapprochés",
+            cause: "c'est la description d'une SÉCANTE — la tangente est ce vers quoi elle tend quand les deux points se rejoignent",
+          },
+        ],
       };
     },
   },
@@ -402,6 +581,60 @@ export const derivationBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — CALCULER le taux moyen, pour sentir ce que l'instantané n'est
+    // pas. Le premier item oppose les deux notions en mots ; celui-ci fait
+    // faire le calcul du taux MOYEN sur un intervalle, et montre en conclusion
+    // que le nombre dérivé en donne une autre valeur. C'est la marche que le BO
+    // impose : « la notion de nombre dérivé est introduite à l'aide du taux de
+    // variation » — d'abord la moyenne, ensuite seulement l'instantané.
+    kind: "template",
+    id: "stmg_der_nd_definition_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_nombre_derive",
+    microId: "der_nd_definition",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Taux moyen $= \\dfrac{f(b) - f(a)}{b - a}$ : c'est la pente de la sécante entre les deux points.",
+    tags: ["stmg", "maths", "derivation", "canvas", "template", "short"],
+    generate: () => {
+      const a = pick([1, 2, -1, -2] as const);
+      const b = pick([0, 2, 4, -2, 3] as const);
+      const c = pick([0, 1, 2, -1] as const);
+      const f = (x: number) => a * x * x + b * x + c;
+      const x1 = randomInt(-4, 1);
+      const x2 = x1 + randomInt(2, 5);
+      const taux = (f(x2) - f(x1)) / (x2 - x1);
+      const ord = f(x1) - taux * x1;
+      const ndDebut = 2 * a * x1 + b;
+      return {
+        text:
+          `Sur cette courbe, quel est le TAUX DE VARIATION MOYEN de $f$ entre $${x1}$ et $${x2}$ ?`,
+        format: "short",
+        expected: [fr(taux)],
+        comparator: "number_equal",
+        canvas: canvasParaboleDroite(
+          a,
+          b,
+          c,
+          { pente: taux, ordonnee: ord, id: "secante" },
+          `Taux moyen entre ${x1} et ${x2}`,
+          [{ x: x1 }, { x: x2 }]
+        ),
+        explanation: exp(
+          "Le taux de variation moyen entre deux valeurs mesure la variation de $f$ rapportée à celle de $x$. Géométriquement, c'est le coefficient directeur de la SÉCANTE qui joint les deux points.",
+          "On calcule $\\dfrac{f(x_2) - f(x_1)}{x_2 - x_1}$ : la différence des ordonnées divisée par celle des abscisses.",
+          `$f(${x1}) = ${fr(f(x1))}$ et $f(${x2}) = ${fr(f(x2))}$, d'où ` +
+            `$\\dfrac{${fr(f(x2))} - ${fr(f(x1))}}{${x2} - (${x1})} = ${fr(taux)}$. ` +
+            `⚠️ Ce nombre est une MOYENNE sur tout l'intervalle. À l'instant $${x1}$ précisément, la variation vaut ` +
+            `$f'(${x1}) = ${fr(ndDebut)}$ — un autre nombre, celui de la tangente et non de la sécante.`,
+          `Le taux de variation moyen vaut $${fr(taux)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ der_nd_geometrique ═══════════════════ */
 
   {
@@ -451,6 +684,78 @@ export const derivationBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — le SIGNE, lu sur la figure. Le premier item nomme ce que
+    // représente le coefficient directeur de la tangente ; celui-ci fait
+    // conclure de son allure. C'est la lecture la plus rentable du chapitre :
+    // avant tout calcul, une tangente qui descend annonce une fonction qui
+    // décroît, donc un bénéfice qui s'effrite.
+    kind: "template",
+    id: "stmg_der_nd_geometrique_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_nombre_derive",
+    microId: "der_nd_geometrique",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une tangente qui MONTE a un coefficient directeur positif ; une tangente qui DESCEND, négatif.",
+    tags: ["stmg", "maths", "derivation", "canvas", "template"],
+    generate: () => {
+      const a = pick([1, 2, -1, -2] as const);
+      const b = pick([0, 2, 4, -2, -4] as const);
+      const c = pick([0, 1, -1, 3] as const);
+      const f = (x: number) => a * x * x + b * x + c;
+      // On écarte le sommet : sur une tangente horizontale, « monte » et
+      // « descend » ne veulent plus rien dire et la question n'aurait pas de
+      // réponse.
+      let x0 = randomInt(-3, 3);
+      for (let essai = 0; essai < 40 && 2 * a * x0 + b === 0; essai++) x0 = randomInt(-3, 3);
+      const nd = 2 * a * x0 + b;
+      const ord = f(x0) - nd * x0;
+      const monte = nd > 0;
+      const bonne = monte
+        ? `$f'(${x0})$ est POSITIF : la courbe monte en ce point`
+        : `$f'(${x0})$ est NÉGATIF : la courbe descend en ce point`;
+      return {
+        text:
+          `La tangente à la courbe au point d'abscisse $${x0}$ est tracée. ` +
+          `Que peut-on dire du nombre dérivé $f'(${x0})$, sans le calculer ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          monte
+            ? `$f'(${x0})$ est négatif : la courbe descend en ce point`
+            : `$f'(${x0})$ est positif : la courbe monte en ce point`,
+          `$f'(${x0})$ est nul : la tangente est horizontale`,
+          `$f'(${x0})$ a le même signe que $f(${x0})$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasParaboleDroite(
+          a,
+          b,
+          c,
+          { pente: nd, ordonnee: ord, id: "tangente" },
+          `Tangente au point d'abscisse ${x0}`,
+          [{ x: x0 }]
+        ),
+        explanation: exp(
+          "Le nombre dérivé est le coefficient directeur de la tangente. Son SIGNE se lit donc directement sur l'inclinaison de la droite, sans aucun calcul.",
+          "On regarde si la tangente monte ou descend en allant vers la droite : elle donne le signe du nombre dérivé, et donc le sens de variation de la fonction en ce point.",
+          `La tangente ${monte ? "monte" : "descend"} : son coefficient directeur est ${monte ? "positif" : "négatif"}. ` +
+            `Le calcul le confirme : $f'(${x0}) = ${2 * a} \\times ${x0} ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = ${fr(nd)}$. ` +
+            `⚠️ Ici $f(${x0}) = ${fr(f(x0))}$ : le signe de $f$ et celui de $f'$ n'ont aucune raison de coïncider.`,
+          bonne.replace(/\$f'\(.*?\)\$ est/, `$f'(${x0})$ est donc`) + "."
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$f'(${x0})$ a le même signe que $f(${x0})$`,
+            cause: "le signe de $f$ dit où est la courbe, celui de $f'$ dit dans quel sens elle va : deux lectures indépendantes",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ der_nd_lire_graphique ═══════════════════ */
 
   {
@@ -494,6 +799,62 @@ export const derivationBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — CALCULER la pente de la tangente à partir de deux de ses
+    // points, au lieu de la lire d'un coup d'œil. Le premier item fait lire
+    // $f'(x_0)$ sur la figure ; celui-ci donne deux points par lesquels la
+    // tangente passe et fait poser le quotient. C'est ce qu'on fait vraiment
+    // devant un graphique de bac, où la pente n'est jamais un entier évident.
+    kind: "template",
+    id: "stmg_der_nd_lire_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_nombre_derive",
+    microId: "der_nd_lire_graphique",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Deux points de la TANGENTE suffisent : sa pente est le nombre dérivé.",
+    tags: ["stmg", "maths", "derivation", "canvas", "template", "short"],
+    generate: () => {
+      const nd = pick([1, 2, 3, 4, 5, -1, -2, -3, -4, -5] as const);
+      const x0 = randomInt(-3, 3);
+      const a = pick([1, -1] as const);
+      const b = nd - 2 * a * x0;
+      const c = pick([0, 1, 2, -1, -2] as const);
+      const f = (x: number) => a * x * x + b * x + c;
+      const ord = f(x0) - nd * x0;
+      const pas = pick([2, 3] as const);
+      const xB = x0 + pas;
+      const yA = f(x0);
+      const yB = nd * xB + ord;
+      return {
+        text:
+          `La tangente à la courbe au point d'abscisse $${x0}$ est tracée. ` +
+          `Elle passe par $(${x0}\\,;\\,${fr(yA)})$ et par $(${xB}\\,;\\,${fr(yB)})$. ` +
+          `Que vaut $f'(${x0})$ ?`,
+        format: "short",
+        expected: [fr(nd)],
+        comparator: "number_equal",
+        canvas: canvasParaboleDroite(
+          a,
+          b,
+          c,
+          { pente: nd, ordonnee: ord, id: "tangente" },
+          `Tangente au point d'abscisse ${x0}`,
+          [{ x: x0 }, { x: xB }]
+        ),
+        explanation: exp(
+          "Le nombre dérivé $f'(x_0)$ est le coefficient directeur de la tangente en $x_0$. Deux points de cette tangente suffisent donc à le calculer.",
+          "On prend les deux points DE LA TANGENTE — pas de la courbe — et l'on divise la différence des ordonnées par celle des abscisses.",
+          `$\\dfrac{${fr(yB)} - ${fr(yA)}}{${xB} - (${x0})} = \\dfrac{${fr(yB - yA)}}{${pas}} = ${fr(nd)}$. ` +
+            `⚠️ Le second point est sur la TANGENTE : la courbe, elle, passe par $(${xB}\\,;\\,${fr(f(xB))})$ — ` +
+            `un autre point, qui donnerait le taux moyen et non le nombre dérivé.`,
+          `$f'(${x0}) = ${fr(nd)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ der_nd_cout_marginal ═══════════════════ */
 
   {
@@ -528,6 +889,89 @@ export const derivationBank: TutorBankItemV4[] = [
             `le coût augmente d'environ $${marginal}$ € par unité supplémentaire produite.`,
           `Par exemple : « Produire la ${q + 1}ᵉ unité coûterait environ ${marginal} € de plus. »`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — DÉCIDER avec le coût marginal, au lieu de l'expliquer. Le
+    // premier item est une ouverte, jugée par mots-clés ; celui-ci pose la
+    // question que se pose vraiment l'entreprise : au prix de vente actuel,
+    // a-t-on intérêt à produire une unité de plus ? La réponse tient à une
+    // comparaison — marginal contre prix — et c'est là que le nombre dérivé
+    // devient un outil de gestion et non un exercice.
+    kind: "template",
+    id: "stmg_der_nd_marginal_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_nombre_derive",
+    microId: "der_nd_cout_marginal",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare ce que l'unité suivante COÛTE à ce qu'elle RAPPORTE.",
+    tags: ["stmg", "maths", "derivation", "gestion", "canvas", "template"],
+    generate: () => {
+      const prod = pick(PRODUCTIONS);
+      const q = pick([20, 40, 50, 80, 100, 120] as const);
+      const marginal = pick([12, 15, 18, 24, 30] as const);
+      // Le prix de vente tombe soit au-dessus, soit en dessous du coût marginal :
+      // les deux cas se produisent, et la décision s'inverse.
+      const rentable = Math.random() < 0.5;
+      const prix = rentable ? marginal + pick([4, 6, 10] as const) : marginal - pick([3, 5, 8] as const);
+      const bonne = rentable
+        ? `oui : ${prod.un} de plus rapporte $${prix}$ € et n'en coûte que $${marginal}$ €`
+        : `non : ${prod.un} de plus coûte $${marginal}$ € et n'en rapporte que $${prix}$ €`;
+      // ⚠️ LE DISTRACTEUR INVERSE L'ATTRIBUTION, PAS LA CONCLUSION. Écrit
+      // « non : … coûte 12 € et n'en rapporte que 16 € », il se contredisait
+      // tout seul — $16$ est plus grand que $12$ — et se laissait écarter sans
+      // rien comprendre. En échangeant les deux nombres, il devient la vraie
+      // erreur : confondre ce qui coûte et ce qui rapporte.
+      const contraire = rentable
+        ? `non : ${prod.un} de plus coûte $${prix}$ € et n'en rapporte que $${marginal}$ €`
+        : `oui : ${prod.un} de plus rapporte $${marginal}$ € et n'en coûte que $${prix}$ €`;
+      // Un coût dont la dérivée en q vaut « marginal » : C(x) = m/(2q) x² + m/2 x.
+      const coef = marginal / (2 * q);
+      const C = (x: number) => coef * x * x + (marginal / 2) * x;
+      return {
+        text:
+          `Une entreprise produit ${prod.objet}. On a calculé $C'(${q}) = ${marginal}$, ` +
+          `où $C$ est le coût total en euros. Chaque ${prod.un.slice(3)} se vend $${prix}$ €. ` +
+          `L'entreprise a-t-elle intérêt à produire ${prod.un} de plus ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          contraire,
+          `on ne peut pas savoir sans connaître le coût TOTAL $C(${q})$`,
+          `oui dans tous les cas : produire plus fait toujours baisser le coût unitaire`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasCourbePoints(C, 0, q * 2, `Coût total en fonction du nombre de ${prod.unite}`, {
+          marques: [q],
+        }),
+        explanation: exp(
+          "Le coût marginal $C'(q)$ est ce que coûte la production d'une unité supplémentaire à partir du niveau $q$. La décision de produire cette unité se prend en le comparant au PRIX auquel elle sera vendue.",
+          "On compare deux nombres et deux seulement : le coût marginal et le prix de vente unitaire. Le coût total, lui, ne dit rien sur l'unité suivante.",
+          `La ${prod.un.slice(3)} suivante coûte $${marginal}$ € et se vend $${prix}$ €. ` +
+            (rentable
+              ? `Elle laisse donc $${prix - marginal}$ € de marge : la produire augmente le bénéfice.`
+              : `Elle fait donc perdre $${marginal - prix}$ € : la produire diminue le bénéfice.`) +
+            ` ⚠️ Le coût TOTAL déjà engagé n'entre pas dans cette décision — il est le même quoi qu'on décide.`,
+          bonne.charAt(0).toUpperCase() + bonne.slice(1) + "."
+        ),
+        choiceDiagnostics: [
+          {
+            choice: contraire,
+            cause: `a échangé les deux nombres : $${marginal}$ € est ce que la production COÛTE, $${prix}$ € ce que la vente RAPPORTE`,
+          },
+          {
+            choice: `on ne peut pas savoir sans connaître le coût TOTAL $C(${q})$`,
+            cause: "le coût total est déjà engagé : seule compte la comparaison entre le coût MARGINAL et le prix",
+          },
+          {
+            choice: `oui dans tous les cas : produire plus fait toujours baisser le coût unitaire`,
+            cause: "faux dès que le coût marginal dépasse le prix — c'est même ce qui fixe la quantité optimale",
+          },
+        ],
       };
     },
   },
