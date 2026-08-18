@@ -36,6 +36,11 @@ import {
   type PixPalier,
 } from "@/lib/pix-ia/referentiel";
 import { PIX_MICROSKILLS } from "@/lib/pix-ia/microskills";
+import {
+  BO_MAISON,
+  microSkillsMaison,
+  notionsMaison,
+} from "@/lib/tutor-v4/knowledge/ia/maison";
 
 /** Les deux portes du coach, calées sur le sélecteur de l'éval blanche. */
 export type PixNiveauCoach = "college" | "lycee";
@@ -61,14 +66,30 @@ export function boIdDuDomaine(domaineId: string): string {
   return `PIX_D${domaineId}`;
 }
 
-/** Les 3 domaines Pix, en groupes de tête du coach. */
-export const bo: KnowledgeBoCompetence[] = PIX_DOMAINES.map((d) => ({
-  boId: boIdDuDomaine(d.id),
-  label: `Domaine ${d.id} · ${d.label}`,
-}));
+/**
+ * Les groupes de tête du coach : les 3 domaines Pix, PUIS la maison.
+ *
+ * ⚠️ 17/08/2026 — le coach n'est plus « le référentiel Pix », il est le contenu
+ * IA d'EleveAI, dont les seize compétences Pix sont une partie. La décision est
+ * de Frédéric : « coach et parcours ensemble, et Pix à part, car après on
+ * pourra intégrer la gestion de projet ». Voir ../maison.ts, qui dit ce que
+ * cette séparation protège.
+ */
+export const bo: KnowledgeBoCompetence[] = [
+  ...PIX_DOMAINES.map((d) => ({
+    boId: boIdDuDomaine(d.id),
+    label: `Domaine ${d.id} · ${d.label}`,
+  })),
+  BO_MAISON,
+];
 
 /** Les savoir-faire du niveau demandé, dans l'ordre du référentiel. */
 export function microSkillsPix(niveau: PixNiveauCoach): MicroSkillSource[] {
+  return [...microSkillsDuReferentiel(niveau), ...microSkillsMaison(niveau)];
+}
+
+/** Les seuls savoir-faire du référentiel Pix, sans la maison. */
+function microSkillsDuReferentiel(niveau: PixNiveauCoach): MicroSkillSource[] {
   const paliers = PALIERS_PAR_NIVEAU[niveau];
   const retenus = PIX_MICROSKILLS.filter((m) => paliers.includes(m.palier));
 
@@ -101,7 +122,12 @@ export function microSkillsPix(niveau: PixNiveauCoach): MicroSkillSource[] {
  * coûte plus cher qu'une ligne absente.
  */
 export function notionsPix(niveau: PixNiveauCoach): NotionSource[] {
-  const micros = microSkillsPix(niveau);
+  return [...notionsDuReferentiel(niveau), ...notionsMaison(niveau)];
+}
+
+/** Les seules compétences du référentiel Pix, sans la maison. */
+function notionsDuReferentiel(niveau: PixNiveauCoach): NotionSource[] {
+  const micros = microSkillsDuReferentiel(niveau);
   const competencesServies = new Set(micros.map((m) => m.notionId));
 
   const retenues = PIX_COMPETENCES.filter((c) => competencesServies.has(c.id));

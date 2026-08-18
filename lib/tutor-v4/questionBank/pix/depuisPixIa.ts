@@ -16,6 +16,7 @@ import type { DifficultyLevel, TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { PIX_IA_QUESTIONS, PIX_IA_GABARITS } from "@/lib/pix-ia/questions";
 import { competenceOf, questionId, type PixQuestion } from "@/lib/pix-ia/questionTypes";
 import { pixMicroskill } from "@/lib/pix-ia/microskills";
+import { GABARITS_MAISON } from "@/lib/tutor-v4/knowledge/ia/maison-gabarits";
 import {
   DIFFICULTE_PAR_PALIER,
   PALIERS_PAR_NIVEAU,
@@ -35,7 +36,53 @@ function difficulteDe(q: PixQuestion): DifficultyLevel | null {
 
 /** Les questions Pix du niveau demandé, traduites en items du moteur. */
 export function convertirQuestionsPix(niveau: PixNiveauCoach): TutorBankItemV4[] {
-  return [...convertirFigees(niveau), ...convertirGabarits(niveau)];
+  return [
+    ...convertirFigees(niveau),
+    ...convertirGabarits(niveau),
+    ...convertirMaison(niveau),
+  ];
+}
+
+/**
+ * Les gabarits MAISON — ce que le coach enseigne et que Pix ne demande pas.
+ *
+ * ⚠️ Ils ne peuvent pas passer par `convertirGabarits` : celui-ci déduit le
+ * palier du savoir-faire via `pixMicroskill`, qui ne connaît que le
+ * référentiel. Un savoir-faire maison y serait introuvable, et l'item écarté
+ * EN SILENCE — la notion se serait affichée dans le coach sans une seule
+ * question. D'où la déclaration explicite du niveau et de la difficulté dans
+ * lib/tutor-v4/knowledge/ia/maison-gabarits.ts.
+ */
+function convertirMaison(niveau: PixNiveauCoach): TutorBankItemV4[] {
+  return GABARITS_MAISON.flatMap((g): TutorBankItemV4[] => {
+    if (!g.niveaux.includes(niveau)) return [];
+    const notionId = g.gabarit.microskillId.split(".").slice(0, 2).join(".");
+
+    return [
+      {
+        kind: "template",
+        id: g.gabarit.id,
+        niveau: NIVEAU_TUTOR[niveau],
+        matiere: "ia",
+        notionId,
+        microId: g.gabarit.microskillId,
+        difficulty: g.difficulty,
+        theme: "neutral",
+        tags: ["maison", "gabarit", niveau, notionId],
+        generate: (ctx) => {
+          const q = g.gabarit.generate(ctx);
+          return {
+            text: q.text,
+            format: "qcm",
+            choices: q.choices,
+            expected: [q.choices[0]],
+            comparator: "mcq_exact",
+            explanation: q.explanation,
+          };
+        },
+      },
+    ];
+  });
 }
 
 /**
@@ -64,8 +111,14 @@ function convertirGabarits(niveau: PixNiveauCoach): TutorBankItemV4[] {
         difficulty: DIFFICULTE_PAR_PALIER[micro.palier],
         theme: "neutral",
         tags: ["pix", "gabarit", niveau, micro.palier, competenceOf(g.microskillId)],
-        generate: () => {
-          const q = g.generate();
+        /* ⚠️ LE CONTEXTE SE TRANSMET, SINON IL NE SERT À RIEN. Ce wrapper
+           s'écrivait `() => g.generate()` : le moteur passait bien `{ eviter }`
+           à l'item, l'item l'ignorait, et le tirage sans remise des réservoirs
+           ne s'appliquait JAMAIS en séance. Le contrôle ne l'avait pas vu — il
+           appelait le gabarit en direct, court-circuitant ce maillon. Un test
+           qui saute un intermédiaire ne teste pas la chaîne. */
+        generate: (ctx) => {
+          const q = g.generate(ctx);
           return {
             text: q.text,
             format: "qcm",

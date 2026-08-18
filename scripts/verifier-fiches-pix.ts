@@ -25,6 +25,8 @@ import {
   verifierFichesPix,
 } from "@/lib/pix-ia/fiches";
 import { loadKnowledgeV4 } from "@/lib/tutor-v4/loaders/loadKnowledgeV4";
+import { PIX_IA_QUESTIONS } from "@/lib/pix-ia/questions";
+import { estMaison } from "@/lib/tutor-v4/knowledge/ia/maison";
 
 function param(lien: string, nom: string): string {
   return new URL(lien, "http://local").searchParams.get(nom) ?? "";
@@ -82,9 +84,24 @@ async function main() {
     console.log(`   ↪ replis assumés vers le collège : ${replis.join(", ")}`);
   }
 
+  /* ─── L'ÉTANCHÉITÉ ────────────────────────────────────────────────────────
+     Le coach sert Pix ET les notions maison ; l'épreuve blanche ne doit servir
+     que Pix. Sans ce contrôle, une notion maison finirait un jour dans l'éval
+     sans que personne ne s'en aperçoive, et l'épreuve cesserait de mesurer ce
+     qu'elle prétend. Voir lib/tutor-v4/knowledge/ia/maison.ts. */
+  const fuites = PIX_IA_QUESTIONS.filter((q) => estMaison(q.microskillId));
+  const maisonAuCoach = (await loadKnowledgeV4("pix-college", "ia")).notions.filter((n) =>
+    estMaison(n.id),
+  );
+  console.log(
+    `\n${fuites.length ? "⛔" : "🟢"} Étanchéité : ${maisonAuCoach.length} notion(s) maison au coach, ` +
+      `${fuites.length} dans l'épreuve blanche` +
+      (fuites.length ? "" : " (aucune, c'est ce qu'on veut)"),
+  );
+
   console.log(`\nExemple : ${coachPourCompetence("2.3", "college")}`);
 
-  if (manques.length || casses.length) {
+  if (manques.length || casses.length || fuites.length) {
     if (manques.length) {
       console.log(`\n⛔ ${manques.length} problème(s) de fiche :`);
       for (const m of manques) console.log(`   ${m.competenceId} — ${m.probleme}`);
