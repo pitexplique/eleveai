@@ -206,19 +206,48 @@ const REFORMULATIONS: readonly Reformulation[] = [
   },
 ];
 
+/* ⛔⛔ TABLE REFAITE LE 18/08/2026 — ELLE COMPTAIT FAUX DES RÉPONSES JUSTES.
+   Signalé sur une photo d'écran : « Léa a fini son travail ___ elle est allée
+   jouer », réponse attendue « alors » — mais « ensuite » va tout aussi bien.
+   Vérifié ensuite ligne à ligne : le défaut touchait SEPT entrées sur douze
+   (les 3 « alors » et les 4 « ensuite »), et non six. « alors » et « ensuite »
+   sont deux mots de succession, et rien dans ces phrases ne les départage.
+   ⛔ « alors » a donc QUITTÉ les propositions. Le BO le nomme, et il reste dans
+   l'explication comme équivalent de « ensuite » — mais un QCM ne peut pas
+   opposer deux mots interchangeables sans compter faux un enfant qui a raison.
+
+   ⭐ SECOND DÉFAUT, INVISIBLE SUR LA PHOTO : « mais » était ajouté aux quatre
+   choix à CHAQUE tirage et n'était JAMAIS la bonne réponse. C'est une ligne
+   morte — le QCM ne jouait donc qu'à trois lignes, 33 % au hasard au lieu de
+   25 %. Il a maintenant ses propres phrases.
+
+   ⚠️ LA RÈGLE QUI EN SORT, et elle vaut pour toute table de connecteurs :
+   les quatre mots proposés doivent s'EXCLURE deux à deux dans chaque phrase.
+   Quatre familles ici, chacune correcte trois fois sur douze : la raison, la
+   suite, le contraire, la condition. */
+const MOTS_LIENS: readonly string[] = ["parce que", "ensuite", "mais", "si"];
+
 const CONNECTEURS: readonly Connecteur[] = [
+  /* LA RAISON — « ensuite », « mais » et « si » ne passent dans aucune. */
   { debut: "Tom a mis son chapeau", suite: "il fait très chaud", mot: "parce que", role: "donner la raison" },
-  { debut: "Léa a fini son travail", suite: "elle est allée jouer", mot: "alors", role: "dire ce qui arrive après" },
-  { debut: "On casse les œufs", suite: "on ajoute le sucre", mot: "ensuite", role: "mettre les étapes dans l'ordre" },
   { debut: "Le chien aboie", suite: "quelqu'un frappe à la porte", mot: "parce que", role: "donner la raison" },
-  { debut: "La cloche a sonné", suite: "les élèves sont sortis", mot: "alors", role: "dire ce qui arrive après" },
   { debut: "Nina a pris son parapluie", suite: "il pleut", mot: "parce que", role: "donner la raison" },
-  { debut: "On lave la mangue", suite: "on la coupe en morceaux", mot: "ensuite", role: "mettre les étapes dans l'ordre" },
-  { debut: "Le bateau est rentré", suite: "la mer était trop forte", mot: "parce que", role: "donner la raison" },
-  { debut: "Tom a fini de ranger", suite: "il est sorti jouer", mot: "alors", role: "dire ce qui arrive après" },
-  { debut: "On creuse un trou", suite: "on pose la graine dedans", mot: "ensuite", role: "mettre les étapes dans l'ordre" },
-  { debut: "Léa a mis ses bottes", suite: "le chemin est plein de boue", mot: "parce que", role: "donner la raison" },
-  { debut: "Le feu est allumé", suite: "papa pose la marmite", mot: "ensuite", role: "mettre les étapes dans l'ordre" },
+
+  /* CE QUI VIENT APRÈS — recettes et suites d'actions. « alors » irait aussi,
+     c'est pourquoi il n'est plus proposé. */
+  { debut: "On casse les œufs", suite: "on ajoute le sucre", mot: "ensuite", role: "dire ce qui vient après" },
+  { debut: "On lave la mangue", suite: "on la coupe en morceaux", mot: "ensuite", role: "dire ce qui vient après" },
+  { debut: "On creuse un trou", suite: "on pose la graine dedans", mot: "ensuite", role: "dire ce qui vient après" },
+
+  /* LE CONTRAIRE DE CE QU'ON ATTEND — les phrases neuves du 18/08. */
+  { debut: "Nina a cherché son crayon partout", suite: "elle ne l'a pas trouvé", mot: "mais", role: "dire le contraire de ce qu'on attendait" },
+  { debut: "Tom a couru très vite", suite: "il est arrivé en retard", mot: "mais", role: "dire le contraire de ce qu'on attendait" },
+  { debut: "Le gâteau était tout petit", suite: "il était délicieux", mot: "mais", role: "dire le contraire de ce qu'on attendait" },
+
+  /* LA CONDITION — le verbe au futur dans le début interdit les trois autres. */
+  { debut: "Tu pourras jouer dehors", suite: "tu ranges tes affaires", mot: "si", role: "dire à quelle condition" },
+  { debut: "On arrivera à l'heure", suite: "on part maintenant", mot: "si", role: "dire à quelle condition" },
+  { debut: "Le gâteau sera réussi", suite: "tu suis bien la recette", mot: "si", role: "dire à quelle condition" },
 ];
 
 const REGISTRES: readonly Registre[] = [
@@ -735,23 +764,22 @@ export const oralEtLecteurBank: TutorBankItemV4[] = [
     microId: "cp_oral_raconter",
     difficulty: 2,
     theme: "neutral",
-    hint: "Quel petit mot relie les deux morceaux : la raison, ou la suite ?",
+    hint: "Lis les deux morceaux, puis demande-toi ce que le second apporte : la raison, la suite, le contraire, ou une condition.",
     tags: ["cp", "oral", "raconter", "template"],
     generate: () => {
       const c = randomChoice(CONNECTEURS);
-      const autres = shuffle([
-        ...new Set(CONNECTEURS.filter((x) => x.mot !== c.mot).map((x) => x.mot)),
-      ]);
+      /* Les trois autres familles, jamais un synonyme de la bonne réponse.
+         `makeChoices` écarte déjà `c.mot` de la liste qu'on lui passe. */
       return {
         text: `Quel petit mot relie ces deux morceaux ?\n\n« ${c.debut} ___ ${c.suite}. »`,
         format: "qcm" as const,
-        choices: makeChoices(c.mot, [...autres, "mais"]),
+        choices: makeChoices(c.mot, MOTS_LIENS),
         expected: [c.mot],
         comparator: "mcq_exact" as const,
         explanation: exp(
-          "Pour raconter, on relie ses idées avec de petits mots : parce que, alors, ensuite.",
-          "Demande-toi ce que fait le second morceau : il donne la raison, ou il vient après ?",
-          `Ici, le second morceau sert à ${c.role} : c'est « ${c.mot} » qu'il faut.`,
+          "Pour raconter, on relie ses idées avec de petits mots. Chacun fait un travail différent : « parce que » donne la raison, « ensuite » dit ce qui vient après, « mais » annonce le contraire de ce qu'on attendait, « si » pose une condition.",
+          "Demande-toi ce que le second morceau apporte au premier, puis choisis le mot qui fait ce travail-là.",
+          `Ici, le second morceau sert à ${c.role} : c'est « ${c.mot} » qu'il faut.${c.mot === "ensuite" ? " (« alors » dirait la même chose — c'est pour cela qu'il n'est pas proposé ici.)" : ""}`,
           `Le mot est « ${c.mot} ».`,
         ),
       };
