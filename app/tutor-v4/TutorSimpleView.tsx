@@ -155,18 +155,33 @@ export default function TutorSimpleView({
     <main className="min-h-screen bg-gradient-to-b from-sky-100 via-cyan-50 to-emerald-100 px-3 py-4 text-slate-950 sm:px-5">
       <div className="mx-auto max-w-6xl">
         <header className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="text-sm font-semibold text-slate-600">
-            {classLabel(classe)} &gt; {matiereLabel(matiere)} &gt; {notionLabel}
-          </div>
-
-          <div className="flex flex-wrap gap-2">
+          {/* ⭐ LE RETOUR AU COACH PASSE À GAUCHE, EN ORANGE (18/08/2026).
+              Frédéric : « en mode simple il n'y a pas la puce retour au coach »,
+              puis « si il y a retour coach mais je le voyais pas ». Elle y
+              était — blanche, quatrième d'une rangée de quatre boutons blancs
+              identiques, à l'autre bout de la ligne. Or « Mode complet »,
+              « Affichage classe » et « Lecture auto » règlent l'affichage et on
+              reste ; celui-ci quitte l'entraînement. Rien ne l'en distinguait.
+              Il prend donc la place et la couleur qu'il a dans le mode complet :
+              premier à gauche, orange. Le même geste au même endroit dans les
+              deux modes — on ne réapprend pas la page en changeant de mode.
+              ⚠️ Aucune ligne ajoutée : il rejoint la ligne du fil d'Ariane, qui
+              se tronque (`truncate`, `min-w-0`) au lieu de passer à la ligne sur
+              téléphone. La page ne bouge pas d'un pixel. */}
+          <div className="flex min-w-0 items-center gap-3">
             <button
               type="button"
               onClick={onBackCoach}
-              className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-700 shadow-sm hover:bg-slate-50"
+              className="shrink-0 rounded-md bg-orange-500 px-3 py-2 text-sm font-black text-white shadow-sm hover:bg-orange-600"
             >
-              Retour Coach
+              ← Retour Coach
             </button>
+            <div className="truncate text-sm font-semibold text-slate-600">
+              {classLabel(classe)} &gt; {matiereLabel(matiere)} &gt; {notionLabel}
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
             <button
               type="button"
               onClick={onSwitchToComplete}
