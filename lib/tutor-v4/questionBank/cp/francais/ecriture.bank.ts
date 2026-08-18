@@ -265,12 +265,12 @@ export const ecritureBank: TutorBankItemV4[] = [
     text: "Pour copier une lettre, qu'est-ce qui compte le plus ?",
     format: "qcm",
     choices: [
-      "la former dans le bon sens, sans lever le crayon",
+      "la former dans le bon sens du tracé",
       "aller le plus vite possible",
-      "appuyer très fort",
-      "la faire très grosse",
+      "appuyer très fort sur le crayon",
+      "la faire aussi grosse que possible",
     ],
-    expected: ["la former dans le bon sens, sans lever le crayon"],
+    expected: ["la former dans le bon sens du tracé"],
     comparator: "mcq_exact",
     hint: "Une lettre se trace toujours par le même chemin.",
     explanation: exp(
@@ -292,8 +292,11 @@ export const ecritureBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Devant quelles lettres est-on obligé de lever le crayon en cursive ?",
     format: "qcm",
-    choices: ["les lettres rondes : a, c, d, g, o, q, x", "toutes les lettres", "aucune", "les lettres hautes : b, l, h"],
-    expected: ["les lettres rondes : a, c, d, g, o, q, x"],
+    /* ⚠️ « g » a été RETIRÉ de la bonne réponse : il est rond ET il descend, il
+       aurait donc convenu aussi au leurre des lettres qui descendent. Deux
+       réponses défendables pour un même item — le défaut du 18/08 au matin. */
+    choices: ["les lettres rondes : a, c, d, o, q", "les lettres hautes : b, l, h, k", "les lettres qui descendent : p, j, y", "toutes les lettres, sans exception"],
+    expected: ["les lettres rondes : a, c, d, o, q"],
     comparator: "mcq_exact",
     hint: "Ce sont celles qui commencent par un petit tour.",
     explanation: exp(
@@ -429,9 +432,9 @@ export const ecritureBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: [
       "prendre le mot par morceaux : mar — gouil — lat",
-      "copier encore plus lentement",
-      "copier une lettre sur deux",
-      "copier le mot à l'envers",
+      "copier encore plus lentement, lettre par lettre",
+      "copier une lettre sur deux, puis compléter",
+      "copier le mot en commençant par la fin",
     ],
     expected: ["prendre le mot par morceaux : mar — gouil — lat"],
     comparator: "mcq_exact",
@@ -774,12 +777,12 @@ export const ecritureBank: TutorBankItemV4[] = [
     text: "Qu'est-ce qu'il faut absolument pour écrire une phrase ?",
     format: "qcm",
     choices: [
-      "quelqu'un qui fait quelque chose, une majuscule et un point",
-      "au moins dix mots",
-      "un adjectif et une virgule",
-      "trois noms",
+      "quelqu'un qui fait quelque chose, et un point",
+      "au moins dix mots, sinon c'est trop court",
+      "un adjectif et une virgule au milieu",
+      "trois noms qui se suivent, sans verbe",
     ],
-    expected: ["quelqu'un qui fait quelque chose, une majuscule et un point"],
+    expected: ["quelqu'un qui fait quelque chose, et un point"],
     comparator: "mcq_exact",
     hint: "Le BO l'appelle les deux marqueurs, et il en manque un troisième : le sens.",
     explanation: exp(
@@ -920,9 +923,9 @@ export const ecritureBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: [
       "que chaque phrase a une majuscule et un point",
-      "que le texte est long",
-      "que l'écriture est jolie",
-      "rien, c'est fini",
+      "que le texte est assez long pour la consigne",
+      "que l'écriture est jolie et bien droite",
+      "rien du tout, puisque c'est déjà fini",
     ],
     expected: ["que chaque phrase a une majuscule et un point"],
     comparator: "mcq_exact",

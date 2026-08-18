@@ -321,12 +321,12 @@ export const conjugaisonBank: TutorBankItemV4[] = [
     text: "« Il chante » et « ils chantent » : entend-on une différence quand on les dit ?",
     format: "qcm",
     choices: [
-      "Non, ça se dit pareil : c'est l'œil qui voit la différence",
-      "Oui, on entend le « nt » à la fin",
-      "Oui, le premier est plus long",
+      "Non, ça se dit pareil : seul l'œil voit",
+      "Oui, on entend bien le « nt » à la fin",
+      "Oui, le premier est un peu plus long",
       "Non, et ça s'écrit pareil aussi",
     ],
-    expected: ["Non, ça se dit pareil : c'est l'œil qui voit la différence"],
+    expected: ["Non, ça se dit pareil : seul l'œil voit"],
     comparator: "mcq_exact",
     hint: "Dis les deux à voix haute, l'un après l'autre.",
     explanation: exp(

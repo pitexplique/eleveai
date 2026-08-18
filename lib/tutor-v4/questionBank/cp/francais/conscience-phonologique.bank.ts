@@ -220,12 +220,12 @@ export const consciencePhonologiqueBank: TutorBankItemV4[] = [
     text: "Léo dit : « margouillat a onze syllabes, parce qu'il a onze lettres. » A-t-il raison ?",
     format: "qcm",
     choices: [
-      "Non : on compte ce qu'on entend, et on entend 3 syllabes",
-      "Oui : une lettre, une syllabe",
-      "Non : il a 11 syllabes mais 3 lettres",
-      "On ne peut pas savoir",
+      "Non : on entend 3 syllabes, pas 11",
+      "Oui : chaque lettre fait une syllabe",
+      "Non : il a 11 syllabes et 3 lettres",
+      "On ne peut pas le savoir sans compter",
     ],
-    expected: ["Non : on compte ce qu'on entend, et on entend 3 syllabes"],
+    expected: ["Non : on entend 3 syllabes, pas 11"],
     comparator: "mcq_exact",
     hint: "Dis le mot à voix haute et frappe dans tes mains.",
     explanation: exp(

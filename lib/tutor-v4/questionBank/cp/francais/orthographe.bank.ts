@@ -540,12 +540,12 @@ export const orthographeBank: TutorBankItemV4[] = [
     text: "« Les chats miaule. » Qu'est-ce qui ne va pas ?",
     format: "qcm",
     choices: [
-      "Le verbe : il faut « miaulent », parce qu'ils sont plusieurs",
-      "Le nom : il faut « chat »",
-      "Le déterminant : il faut « le »",
-      "Rien, la phrase est correcte",
+      "Le verbe : il faut écrire « miaulent »",
+      "Le nom : il faut écrire « le chat »",
+      "Le déterminant : il faut écrire « ce »",
+      "Rien du tout, la phrase est correcte",
     ],
-    expected: ["Le verbe : il faut « miaulent », parce qu'ils sont plusieurs"],
+    expected: ["Le verbe : il faut écrire « miaulent »"],
     comparator: "mcq_exact",
     hint: "Le sujet est au pluriel. Le verbe a-t-il suivi ?",
     explanation: exp(
@@ -639,7 +639,7 @@ export const orthographeBank: TutorBankItemV4[] = [
       return {
         text: `Dans « ${sv.p} », combien de mots ont changé par rapport à « ${sv.s} » ?`,
         format: "qcm" as const,
-        choices: ["3 : le déterminant, le nom et le verbe", "1 : le verbe seulement", "2 : le nom et le verbe", "aucun"],
+        choices: ["3 : le déterminant, le nom et le verbe", "1 : le verbe et lui seulement", "2 : le nom et le verbe seuls", "aucun : rien n'a changé du tout"],
         expected: ["3 : le déterminant, le nom et le verbe"],
         comparator: "mcq_exact" as const,
         explanation: exp(
