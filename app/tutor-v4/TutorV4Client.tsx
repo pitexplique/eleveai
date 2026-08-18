@@ -1009,13 +1009,17 @@ function continueAfterExplanation() {
   // classe, entrait dans le tutor (qui la recevait bien), et revenait en 6e :
   // toute sa navigation était à refaire à chaque aller-retour.
   //
-  // La notion voyage aussi : on revient devant la notion qu'on travaillait,
-  // pas en haut de la liste. Le coach ignore ce paramètre s'il ne le lit pas —
-  // il ne casse rien — mais la classe, elle, le remet d'aplomb.
+  // ⛔ LA CLASSE, ET RIEN D'AUTRE. On a d'abord renvoyé `?notion=` aussi, pour
+  // revenir devant la notion qu'on travaillait. Mauvaise idée : côté coach ce
+  // paramètre ne sélectionne pas une notion, il PRÉ-REMPLIT LA BARRE DE
+  // RECHERCHE (usage venu de l'évaluation blanche, où il vaut « 2.3 »). On y
+  // écrivait donc un identifiant technique — `fractions_rationnelles` — que le
+  // filtre compare aux libellés affichés : il ne matche rien, et la liste des
+  // notions revenait VIDE. Frédéric, 18/08 : « laisse le champ vide au retour ».
   function retourCoach() {
-    const params = new URLSearchParams({ classe });
-    if (notion) params.set("notion", notion);
-    router.push(`/coach-ia/${matiere}?${params.toString()}`);
+    router.push(
+      `/coach-ia/${matiere}?classe=${encodeURIComponent(classe)}`,
+    );
   }
 
   // Notion précédente / suivante (rebouclage), pour enchaîner au clic ou au clavier.
