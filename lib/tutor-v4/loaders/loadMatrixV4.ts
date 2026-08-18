@@ -22,6 +22,7 @@ import { matrix6eFrancais } from "@/lib/tutor-v4/matrix/matrix6eFrancais";
 import { matrix5eFrancais } from "@/lib/tutor-v4/matrix/matrix5eFrancais";
 import { matrix4eFrancais } from "@/lib/tutor-v4/matrix/matrix4eFrancais";
 import { matrix3eFrancais } from "@/lib/tutor-v4/matrix/matrix3eFrancais";
+import { matrixSecondeFrancais } from "@/lib/tutor-v4/matrix/matrixSecondeFrancais";
 
 import { matrixA1English } from "@/lib/tutor-v4/matrix/matrixA1English";
 import { matrixA2English } from "@/lib/tutor-v4/matrix/matrixA2English";
@@ -111,6 +112,11 @@ export async function loadMatrixV4(
   if (classe === "5e" && matiere === "francais") return matrix5eFrancais;
   if (classe === "4e" && matiere === "francais") return matrix4eFrancais;
   if (classe === "3e" && matiere === "francais") return matrix3eFrancais;
+  /* ⛔ CE REGISTRE-CI NE SE REPLIE PAS, IL JETTE — et c'est heureux. Le français
+     de 2de est resté injouable au coach alors que tout le reste était branché :
+     96 micros sur 96 levaient « Matrix V4 introuvable ». Une classe ajoutée à
+     `catalog.ts` et à `loadQuestionBankV4` doit AUSSI passer ici (18/08/2026). */
+  if (classe === "seconde" && matiere === "francais") return matrixSecondeFrancais;
 
   if (classe === "a1" && matiere === "english-maths") return matrixA1English;
   if (classe === "a2" && matiere === "english-maths") return matrixA2English;

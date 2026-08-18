@@ -28,12 +28,22 @@ import {
 
 const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "premiere-spe", "terminale-spe", "stmg", "adulte"];
 /* ⛔ CETTE LISTE DÉCIDE DE CE QU'UN ÉLÈVE PEUT CLIQUER EN FRANÇAIS, et elle est
-   INDÉPENDANTE de `loadQuestionBankV4` : la 2de répondait parfaitement par
-   `?classe=seconde` alors qu'aucune pastille ne la proposait (18/08/2026).
-   Une classe oubliée ici ne casse rien — elle n'existe simplement pas.
-   Les quatre autres listes à ouvrir en même temps sont énumérées en tête de
-   `app/parcours-francais/ParcoursFrancaisClient.tsx`. */
-const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde"];
+   INDÉPENDANTE de `loadQuestionBankV4` : la 2de répond parfaitement par
+   `?classe=seconde` sans qu'aucune pastille ne la propose. Tester par l'URL ne
+   prouve donc RIEN sur la visibilité (18/08/2026).
+
+   ⛔⛔ LA 2de N'Y EST PAS, ET C'EST MESURÉ, PAS PRUDENT.
+   `npx --yes tsx@4 scripts/verifier-demarrage.ts seconde francais` →
+   **90 micros sur 96 lèvent « Aucune paire disponible »**, et 5 autres servent
+   en silence une ligne voisine. La cause n'est pas la banque mais son volume :
+   97 items pour 96 micros, soit UN item par micro. Or la 2de ouvre en mode
+   COMPLET (`defaultDisplayModeForClasse`), qui oppose deux énoncés et exige
+   donc deux items d'angles différents — décision de Frédéric, le 16/08.
+   → Le parcours, lui, est ouvert : il ne prend qu'un item par notion et sert
+     ses 16 notions sans un trou.
+   ⏳ Pour ouvrir cette liste : un SECOND item par micro. Pas une ligne à
+     ajouter ici — une session d'écriture. */
+const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
 const ECONOMIE_CLASSES: Classe[] = ["eco-decouverte", "eco-college", "eco-lycee"];
 const ESPAGNOL_CLASSES: Classe[] = ["a1", "a2", "b1", "b2"];
 /* Le coach IA est adossé au référentiel Pix depuis le 16/08/2026 : deux

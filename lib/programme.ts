@@ -42,7 +42,10 @@ export const PROGRAMME_CLASSES: ProgrammeClasse[] = [
   { slug: "5e",  label: "5e",  enClasse: "en 5e",  matieres: ["maths", "francais"], anglais: "A1 → A2",  espagnol: "A1",       ia: "A1",   cahierSlug: "vers-la-5e", calculRapide: true },
   { slug: "4e",  label: "4e",  enClasse: "en 4e",  matieres: ["maths", "francais"], anglais: "A2",       espagnol: "A1 → A2",  ia: "A2",   cahierSlug: "vers-la-4e", calculRapide: true },
   { slug: "3e",  label: "3e",  enClasse: "en 3e",  matieres: ["maths", "francais"], anglais: "A2 (B1 pour les plus à l'aise)", espagnol: "A2", ia: "A2", cahierSlug: "vers-la-3e", calculRapide: true },
-  { slug: "seconde", label: "Seconde", enClasse: "en seconde", matieres: ["maths"], anglais: "B1", espagnol: "B1", ia: "A2 et plus", cahierSlug: "vers-la-2nde", calculRapide: false },
+  // Français ajouté le 18/08/2026 : 16 notions, 96 micros, BO 2019 modifié par
+  // le JORF de 2020. C'est la seule classe du lycée qui en a — la 1re et la
+  // terminale restent en maths seules tant que leurs banques n'existent pas.
+  { slug: "seconde", label: "Seconde", enClasse: "en seconde", matieres: ["maths", "francais"], anglais: "B1", espagnol: "B1", ia: "A2 et plus", cahierSlug: "vers-la-2nde", calculRapide: false },
   { slug: "premiere", label: "Première (sans spé maths)", enClasse: "en première", matieres: ["maths"], anglais: "B1 → B2", espagnol: "B1", ia: "B1 et plus", cahierSlug: "vers-la-premiere", calculRapide: false },
   { slug: "premiere-spe", label: "Première spé maths", enClasse: "en première", matieres: ["maths"], anglais: "B1 → B2", espagnol: "B1", ia: "B1 et plus", cahierSlug: "vers-la-premiere", calculRapide: false },
   { slug: "terminale-spe", label: "Terminale spé maths", enClasse: "en terminale", matieres: ["maths"], anglais: "B1 → B2", espagnol: "B1 → B2", ia: "B1 et plus", cahierSlug: "vers-la-terminale", calculRapide: true },
@@ -67,6 +70,21 @@ export type ProgrammeMatiere = {
     label: string;
     notions: { id: string; label: string; micros: string[] }[];
   }[];
+};
+
+/**
+ * Les couples classe/matière dont le PROGRAMME est écrit mais dont le COACH ne
+ * démarre pas encore. La page continue de lister les compétences — elles sont
+ * réelles, c'est le moteur SEO — mais son bouton renvoie vers ce qui marche.
+ *
+ * ⛔ Le français de 2de, mesuré le 18/08/2026 : 90 de ses 96 micros lèvent
+ * « Aucune paire disponible » (un seul item par micro, quand le mode complet en
+ * oppose deux). Son parcours, lui, sert ses 16 notions sans un trou.
+ * Contrôle : `npx --yes tsx@4 scripts/verifier-demarrage.ts seconde francais`.
+ * À vider dès qu'un second item par micro sera écrit.
+ */
+const COACH_PAS_PRET: Record<string, string> = {
+  "seconde/francais": "/parcours-francais",
 };
 
 // Le programme d'une matière, groupé BO → notions → micro-compétences.
@@ -95,7 +113,9 @@ export function getProgrammeMatiere(
     return {
       matiere,
       label: matiere === "maths" ? "Mathématiques" : "Français",
-      coachHref: `/coach-ia/${matiere}?classe=${classe.slug}`,
+      coachHref:
+        COACH_PAS_PRET[`${classe.slug}/${matiere}`] ??
+        `/coach-ia/${matiere}?classe=${classe.slug}`,
       nbNotions: pack.notions.length,
       nbMicros: pack.microSkills.length,
       domaines,

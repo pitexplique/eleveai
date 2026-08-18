@@ -7,7 +7,7 @@ const SUBJECT = process.argv[2] || "maths";
 const ROOT = path.resolve(`lib/tutor-v4/knowledge/${SUBJECT}`);
 const LEVELS_BY_SUBJECT = {
   maths: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe"],
-  francais: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"],
+  francais: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde"],
 };
 const LEVELS = LEVELS_BY_SUBJECT[SUBJECT] || LEVELS_BY_SUBJECT.maths;
 

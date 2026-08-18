@@ -18,12 +18,32 @@ import {
 } from "@/components/parcours/ClassBoard";
 import BoutonSignalerQuestion from "@/components/signalement/BoutonSignalerQuestion";
 
-/* ⚠️ LA SECONDE N'EST PAS DANS CETTE LISTE, ET C'EST VOLONTAIRE (14/08/2026).
-   C'est `CLASSES` qui commande l'affichage, pas `classeLabels` : le français de
-   2de est entièrement écrit (16 notions, 96 micros, 97 items) et branché
-   partout, mais rien n'est montré aux élèves tant qu'un échantillon d'items
-   n'a pas été relu à la main. Ajouter "seconde" ici est le dernier geste. */
+/* ⭐ SECONDE OUVERTE LE 18/08/2026. C'est `CLASSES` qui commande l'affichage,
+   pas `classeLabels` — le libellé « Seconde » était là depuis le 14/08 (il
+   fallait bien compiler) et la classe restait pourtant invisible.
+   ⛔ OUVRIR UNE CLASSE EN FRANÇAIS = SIX REGISTRES, PAS UN. Cinq ne lèvent
+   aucune erreur si on les oublie : il manque simplement une pastille, en
+   silence. Le sixième, lui, jette — et c'est le seul qui prévient.
+     1. ici (`CLASSES`) — le sélecteur du parcours ;
+     2. `matieres` de la classe (lib/programme.ts) — la page /programme ;
+     3. + 4. les deux entrées `francais` de lib/matrice/ressources.ts
+        (`coach-francais` et `parcours-francais`) — les encarts d'accueil ;
+     5. `FRANCAIS_READY_CLASSES` (app/coach-ia/[matiere]/page.tsx) — le coach ;
+     6. `loadMatrixV4.ts` — sans matrice, le coach lève sur TOUTES les micros.
+   Tester avec `?classe=seconde` ne prouve RIEN : l'URL court-circuite les cinq
+   premiers. Le contrôle qui dit la vérité est
+   `npx --yes tsx@4 scripts/verifier-demarrage.ts <classe> francais`. */
 const CLASSES: ParcoursClasseFrancais[] = [
+  "cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde",
+];
+
+/* ⛔ LES CLASSES OÙ LE COACH DÉMARRE VRAIMENT — à tenir alignée sur
+   `FRANCAIS_READY_CLASSES`. La 2de en est absente : mesuré le 18/08/2026,
+   90 de ses 96 micros lèvent « Aucune paire disponible », faute d'un second
+   item par micro (le mode complet oppose deux énoncés). Envoyer un élève de
+   2de vers le coach depuis le bilan lui ouvrirait donc une erreur — le bouton
+   ne s'affiche pas pour elle. À rouvrir en même temps que l'autre liste. */
+const COACH_PRET: ParcoursClasseFrancais[] = [
   "cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e",
 ];
 
@@ -164,7 +184,7 @@ export default function ParcoursFrancaisClient() {
             <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">Parcours</p>
             <h1 className="text-2xl font-black text-indigo-600 sm:text-3xl">Français 📚</h1>
             <p className="mt-1 text-sm text-slate-500 font-medium">
-              Diagnostique ta grammaire, ta conjugaison et ton orthographe, du CP à la 3e.
+              Diagnostique ta grammaire, ta conjugaison et ton orthographe, du CP à la seconde.
             </p>
 
             <div className="mt-5">
@@ -423,12 +443,14 @@ export default function ParcoursFrancaisClient() {
           >
             Nouveau parcours
           </button>
-          <Link
-            href={`/coach-ia/francais?classe=${classe}`}
-            className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-black text-white hover:bg-slate-800 transition"
-          >
-            S&apos;entraîner avec le Coach →
-          </Link>
+          {COACH_PRET.includes(classe) && (
+            <Link
+              href={`/coach-ia/francais?classe=${classe}`}
+              className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-black text-white hover:bg-slate-800 transition"
+            >
+              S&apos;entraîner avec le Coach →
+            </Link>
+          )}
         </div>
 
         {saveMessage && (
