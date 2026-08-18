@@ -159,50 +159,59 @@ const MESSAGES: readonly Message[] = [
 ];
 
 const REFORMULATIONS: readonly Reformulation[] = [
+  /* ⚠️ LES LEURRES ONT ÉTÉ RÉÉCRITS LE 18/08/2026, ET LA RAISON VAUT POUR TOUTE
+     TABLE DE REFORMULATION. Une reformulation fidèle est forcément un peu
+     longue — elle redit tout — tandis qu'un leurre faux se dit en cinq mots
+     (« Le margouillat a mangé deux pierres »). Résultat mesuré : +22 caractères
+     d'avance à la bonne réponse, qui se cochait sans lire.
+     ⭐ Le remède rend l'exercice MEILLEUR : au lieu d'absurdités qu'on écarte
+     sans comprendre, les leurres sont maintenant de vraies reformulations qui
+     changent un détail — le lieu, le moment, qui fait quoi. Il faut avoir
+     compris la phrase de départ pour les écarter. */
   {
     phrase: "Le margouillat s'est faufilé entre deux pierres et a disparu.",
     bonne: "Le margouillat est passé entre les pierres et on ne le voit plus.",
-    faux: ["Le margouillat a mangé deux pierres.", "Les pierres ont bougé toutes seules.", "Le margouillat dort sur une pierre."],
+    faux: ["Le margouillat a poussé les pierres et il est resté là.", "Le margouillat est monté sur les pierres et on le voit bien.", "Le margouillat s'est arrêté devant les pierres sans passer."],
   },
   {
     phrase: "Léa a rangé toutes ses affaires avant de partir.",
     bonne: "Léa a tout rangé, puis elle est partie.",
-    faux: ["Léa est partie sans rien ranger.", "Léa range ses affaires demain.", "Léa a rangé les affaires de Tom."],
+    faux: ["Léa est partie, puis elle a tout rangé.", "Léa a rangé une partie de ses affaires.", "Léa a rangé les affaires des autres."],
   },
   {
     phrase: "Papa a mis la marmite sur le feu et l'odeur du cari a rempli la case.",
     bonne: "Papa fait cuire le cari et ça sent bon partout dans la case.",
-    faux: ["Papa a éteint le feu.", "La case sent le gâteau.", "Papa mange le cari dehors."],
+    faux: ["Papa a retiré la marmite du feu et l'odeur est partie.", "Papa fait cuire le cari dehors et la case ne sent rien.", "Papa a posé la marmite froide et personne ne sent rien."],
   },
   {
     phrase: "Le bateau a quitté le port au lever du jour.",
     bonne: "Le bateau est parti tôt le matin.",
-    faux: ["Le bateau est resté au port.", "Le bateau est parti la nuit.", "Le port a fermé."],
+    faux: ["Le bateau est arrivé tôt le matin.", "Le bateau est parti tard le soir.", "Le bateau est resté au port toute la journée."],
   },
   {
     phrase: "Les élèves ont regagné la salle dès que la cloche a retenti.",
     bonne: "Les élèves sont rentrés en classe quand la cloche a sonné.",
-    faux: ["Les élèves sont sortis dans la cour.", "La cloche n'a pas sonné.", "Les élèves sont restés dehors."],
+    faux: ["Les élèves sont sortis de la classe quand la cloche a sonné.", "Les élèves sont rentrés en classe avant que la cloche sonne.", "Les élèves ont attendu longtemps après la sonnerie pour rentrer."],
   },
   {
     phrase: "Le vent s'est levé et les nuages ont recouvert le piton.",
     bonne: "Il y a du vent et on ne voit plus le piton.",
-    faux: ["Le piton a disparu pour toujours.", "Il fait grand soleil sur le piton.", "Le vent a soufflé les nuages au loin."],
+    faux: ["Il y a du vent et on voit le piton très bien.", "Le vent est tombé et les nuages sont partis.", "Il n'y a pas de vent et le piton est caché."],
   },
   {
     phrase: "Tom a réussi son exercice du premier coup.",
     bonne: "Tom a trouvé la réponse tout de suite.",
-    faux: ["Tom a raté son exercice.", "Tom a recommencé plusieurs fois.", "Tom n'a pas fait l'exercice."],
+    faux: ["Tom a trouvé la réponse après plusieurs essais.", "Tom a réussi le premier exercice sur deux.", "Tom a trouvé la réponse tout seul, mais très tard."],
   },
   {
     phrase: "La maitresse a distribué les cahiers avant de commencer la leçon.",
     bonne: "La maitresse a donné les cahiers, puis la leçon a commencé.",
-    faux: ["La leçon a commencé avant les cahiers.", "La maitresse a ramassé les cahiers.", "Il n'y a pas eu de leçon."],
+    faux: ["La maitresse a commencé la leçon, puis elle a donné les cahiers.", "La maitresse a repris les cahiers à la fin de la leçon.", "La maitresse a donné les cahiers pendant toute la leçon."],
   },
   {
     phrase: "Nina a cherché son crayon partout sans le trouver.",
     bonne: "Nina a beaucoup cherché son crayon, mais il reste introuvable.",
-    faux: ["Nina a retrouvé son crayon.", "Nina n'a pas cherché.", "Nina a perdu sa trousse."],
+    faux: ["Nina a peu cherché son crayon, et elle l'a retrouvé vite.", "Nina a beaucoup cherché son crayon, et elle a fini par le voir.", "Nina n'a pas cherché son crayon, elle en a pris un autre."],
   },
 ];
 
@@ -861,12 +870,12 @@ export const oralEtLecteurBank: TutorBankItemV4[] = [
     text: "Un camarade dit quelque chose que tu ne penses pas. Que fais-tu ?",
     format: "qcm",
     choices: [
-      "tu attends qu'il finisse, puis tu dis ce que tu penses",
-      "tu parles en même temps que lui",
-      "tu dis qu'il a tort tout de suite",
-      "tu ne dis rien du tout",
+      "tu attends qu'il finisse, puis tu réponds",
+      "tu parles en même temps que lui, plus fort",
+      "tu lui dis qu'il a tort tout de suite",
+      "tu ne dis rien et tu penses à autre chose",
     ],
-    expected: ["tu attends qu'il finisse, puis tu dis ce que tu penses"],
+    expected: ["tu attends qu'il finisse, puis tu réponds"],
     comparator: "mcq_exact",
     hint: "Un échange, ça se fait à deux — mais pas en même temps.",
     explanation: exp(
@@ -1069,12 +1078,12 @@ export const oralEtLecteurBank: TutorBankItemV4[] = [
     text: "Dans l'histoire, l'ogre dit : « Qui a mangé mon gâteau ? »\n\nComment lis-tu cette phrase ?",
     format: "qcm",
     choices: [
-      "avec une grosse voix en colère, et en montant à la fin",
-      "avec une toute petite voix douce",
-      "en chuchotant",
+      "avec une grosse voix, en montant à la fin",
+      "avec une toute petite voix très douce",
+      "en chuchotant, comme pour un secret",
       "sans changer de voix, comme le reste",
     ],
-    expected: ["avec une grosse voix en colère, et en montant à la fin"],
+    expected: ["avec une grosse voix, en montant à la fin"],
     comparator: "mcq_exact",
     hint: "Deux choses à mettre dans la voix : qui parle, et le signe de la fin.",
     explanation: exp(
@@ -1318,12 +1327,12 @@ export const oralEtLecteurBank: TutorBankItemV4[] = [
     text: "Tu lis 22 mots en une minute, et l'objectif de fin de CP est de 30.\n\nQue fais-tu pour progresser ?",
     format: "qcm",
     choices: [
-      "relire chaque jour un texte court à voix haute, jusqu'à ce qu'il vienne tout seul",
+      "relire chaque jour un texte court à voix haute",
       "lire le plus vite possible, même sans comprendre",
       "sauter les mots difficiles pour gagner du temps",
-      "attendre le CE1 : ça viendra tout seul",
+      "attendre le CE1, où cela viendra tout seul",
     ],
-    expected: ["relire chaque jour un texte court à voix haute, jusqu'à ce qu'il vienne tout seul"],
+    expected: ["relire chaque jour un texte court à voix haute"],
     comparator: "mcq_exact",
     hint: "La vitesse vient de la répétition, pas de la précipitation.",
     explanation: exp(
@@ -1411,12 +1420,12 @@ export const oralEtLecteurBank: TutorBankItemV4[] = [
     text: "Tu es devant l'étagère et tu ne sais pas quoi prendre.\n\nQue fais-tu ?",
     format: "qcm",
     choices: [
-      "tu penses à ce qui t'intéresse, puis tu cherches un livre qui en parle",
-      "tu prends le plus mince pour finir vite",
-      "tu prends le même que ton voisin",
+      "tu cherches un livre qui parle de ce qui t'intéresse",
+      "tu prends le plus mince pour le finir très vite",
+      "tu prends le même livre que ton voisin de table",
       "tu prends celui qui est le plus près de ta main",
     ],
-    expected: ["tu penses à ce qui t'intéresse, puis tu cherches un livre qui en parle"],
+    expected: ["tu cherches un livre qui parle de ce qui t'intéresse"],
     comparator: "mcq_exact",
     hint: "Le choix commence dans ta tête, pas sur l'étagère.",
     explanation: exp(
@@ -1471,12 +1480,12 @@ export const oralEtLecteurBank: TutorBankItemV4[] = [
     text: "Tu viens de finir un livre.\n\nComment fais-tu pour le relier à ce que tu as déjà lu ?",
     format: "qcm",
     choices: [
-      "tu cherches ce qui ressemble à une autre histoire : le personnage, le lieu, ou ce qui arrive",
-      "tu regardes si les deux couvertures ont la même couleur",
-      "tu comptes les pages des deux livres",
-      "tu gardes seulement celui que tu as préféré",
+      "tu cherches ce qui ressemble à une autre histoire",
+      "tu regardes si les deux couvertures se ressemblent",
+      "tu comptes les pages pour voir lequel est le plus long",
+      "tu gardes seulement celui que tu as préféré des deux",
     ],
-    expected: ["tu cherches ce qui ressemble à une autre histoire : le personnage, le lieu, ou ce qui arrive"],
+    expected: ["tu cherches ce qui ressemble à une autre histoire"],
     comparator: "mcq_exact",
     hint: "On relie par ce qui est DANS l'histoire, pas par l'objet.",
     explanation: exp(
