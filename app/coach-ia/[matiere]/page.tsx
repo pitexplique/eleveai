@@ -346,7 +346,13 @@ export default function CoachIA() {
 
   const domaines = useMemo(() => getDomaineMap(classe, matiere), [classe, matiere]);
 
-  const [search, setSearch] = useState("");
+  /* Ouvert DEPUIS l'évaluation blanche : `?notion=2.3` pré-remplit la
+     recherche, donc la liste s'ouvre sur cette compétence.
+     On passe par la recherche existante plutôt que d'ajouter un filtre : c'est
+     le même comportement que l'élève obtiendrait en tapant, il voit le champ
+     rempli, et il peut l'effacer pour revenir à tout. Un filtre invisible
+     l'aurait laissé devant une liste tronquée sans lui dire pourquoi. */
+  const [search, setSearch] = useState(searchParams.get("notion") ?? "");
 
   const totalNotions = notionOptions.length;
   const totalMicros = notionOptions.reduce((sum, notionId) => {

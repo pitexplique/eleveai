@@ -14,6 +14,10 @@ import {
 
 import { getEvalBlanchePixIa, type PixEvalQuestion, type PixNiveau } from "@/lib/pix-ia/questions";
 import { computePixProfile } from "@/lib/pix-ia/score";
+import {
+  coachPourCompetence,
+  ficheDeCompetence,
+} from "@/lib/pix-ia/fiches";
 import { PIX_DOMAINES } from "@/lib/pix-ia/referentiel";
 
 const NIVEAUX: { id: PixNiveau; label: string; desc: string }[] = [
@@ -290,26 +294,59 @@ export default function EvalPixIaClient() {
           </div>
         </div>
 
-        {/* Détail par compétence */}
+        {/* Détail par compétence.
+            LES FRAGILES D'ABORD. Le référentiel range de 1.1 à 3.5 ; un
+            résultat, lui, se lit par ce qu'il reste à faire. Acquises et
+            fragiles mélangées, l'élève relit seize lignes pour retrouver les
+            trois qui le concernent. */}
         <div className="mb-6 space-y-2">
-          {profile?.competences.map((c) => (
-            <div
-              key={c.competenceId}
-              className="flex items-center justify-between rounded-2xl bg-white px-4 py-3 shadow-sm ring-1 ring-slate-200"
-            >
-              <span className="text-sm font-bold text-slate-800">
-                <span className="text-slate-400">{c.competenceId}</span> · {c.label}
-              </span>
-              <span
-                className={[
-                  "rounded-full px-3 py-1 text-xs font-black",
-                  c.correct ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800",
-                ].join(" ")}
-              >
-                {c.correct ? "✅ Acquis" : "❌ À travailler"}
-              </span>
-            </div>
-          ))}
+          {[...(profile?.competences ?? [])]
+            .sort((a, b) => Number(a.correct) - Number(b.correct))
+            .map((c) => {
+              const fiche = ficheDeCompetence(c.competenceId);
+              return (
+                <div
+                  key={c.competenceId}
+                  className="rounded-2xl bg-white px-4 py-3 shadow-sm ring-1 ring-slate-200"
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-sm font-bold text-slate-800">
+                      <span className="text-slate-400">{c.competenceId}</span> · {c.label}
+                    </span>
+                    <span
+                      className={[
+                        "shrink-0 rounded-full px-3 py-1 text-xs font-black",
+                        c.correct ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800",
+                      ].join(" ")}
+                    >
+                      {c.correct ? "✅ Acquis" : "❌ À travailler"}
+                    </span>
+                  </div>
+
+                  {/* Le pont : de « c'est fragile » à « voilà où travailler ».
+                      On l'affiche sur les compétences à travailler — sur une
+                      compétence acquise, ce serait du bruit. */}
+                  {!c.correct && (
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {fiche && (
+                        <Link
+                          href={fiche}
+                          className="rounded-xl bg-slate-100 px-3 py-1.5 text-xs font-black text-slate-700 hover:bg-slate-200 transition"
+                        >
+                          📘 Lire la fiche
+                        </Link>
+                      )}
+                      <Link
+                        href={coachPourCompetence(c.competenceId, niveau)}
+                        className="rounded-xl bg-indigo-600 px-3 py-1.5 text-xs font-black text-white hover:bg-indigo-500 transition"
+                      >
+                        M&apos;entraîner sur {c.competenceId} →
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
         </div>
 
         <div className="flex flex-wrap gap-3 justify-center mb-4">
@@ -331,7 +368,7 @@ export default function EvalPixIaClient() {
             Recommencer
           </button>
           <Link
-            href="/coach-ia/ia"
+            href={coachPourCompetence("", niveau).split("&notion=")[0]}
             className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-black text-white hover:bg-slate-800 transition"
           >
             M&apos;entraîner avec le Coach IA →
