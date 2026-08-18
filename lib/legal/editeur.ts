@@ -59,6 +59,30 @@ export const VENDEUR = {
   mentionTva: "TVA non applicable, article 293 B du code général des impôts",
 };
 
+/* LA SIGNATURE COMMERCIALE — ⚠️ CE N'EST PAS UNE MENTION LÉGALE.
+   Elle vit dans ce fichier parce que /audit et /devis la lisent tous les deux,
+   et qu'une signature recopiée dérive comme un SIREN recopié. Mais elle ne
+   remplace RIEN : sur un devis, le nom juridique et la forme (EI) restent
+   obligatoires — un titre n'a jamais identifié un vendeur.
+   `accroche` sort de /simulateur-epsilon : « activer des epsilons peut
+   engendrer des infinis ». C'est la seule ligne de cette signature que
+   personne d'autre ne peut écrire. */
+export const SIGNATURE = {
+  /* ⛔ VIDE PAR DÉCISION, PAS PAR OUBLI — même règle que le reste du fichier.
+     « Coach IA » a été essayé puis écarté le 18/08/2026, pour deux raisons qui
+     valent d'être gardées : le site publie DÉJÀ un produit de ce nom sur six
+     routes (/coach-ia/maths, /coach-ia/francais…), destiné aux collégiens ; et
+     « coach » annonce qu'on enseigne, alors que le client type ne veut pas
+     apprendre — il veut déléguer.
+     Tant que ce champ est vide, les documents n'affichent aucun titre : mieux
+     vaut pas de ligne qu'une ligne qui vend le mauvais métier.
+     Pistes du même jour : « Conseil · Réalisation · Formation » (le triptyque
+     de ses années de statisticien), ou la phrase qui décrit vraiment le rôle —
+     « je trouve ce que votre affaire perd, et je le corrige ». */
+  titre: "",
+  accroche: "Epsilon engendre l'infini",
+};
+
 export const HEBERGEUR = {
   nom: "Vercel Inc.",
   adresse: "440 N Barranca Ave #4133, Covina, CA 91723, États-Unis",

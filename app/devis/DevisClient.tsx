@@ -3,6 +3,7 @@
 import { useState } from "react";
 import {
   EDITEUR,
+  SIGNATURE,
   VENDEUR,
   identiteProfessionnelleComplete,
 } from "@/lib/legal/editeur";
@@ -139,7 +140,16 @@ export default function DevisClient() {
           <div className="text-sm leading-relaxed">
             <p className="text-2xl font-black leading-none">Devis</p>
             <p className="mt-2 font-bold">{VENDEUR.nomJuridique}</p>
-            <p className="text-slate-600">
+            {SIGNATURE.titre && (
+              <p className="font-semibold text-slate-700">{SIGNATURE.titre}</p>
+            )}
+            <p className="text-xs italic text-slate-400">
+              {SIGNATURE.accroche}
+            </p>
+            {/* ⚠️ La forme juridique reste, sous le titre et non à sa place :
+                « Coach IA » est une accroche, pas une identification de
+                vendeur. Un devis doit porter le nom juridique et la forme. */}
+            <p className="mt-1.5 text-slate-600">
               {VENDEUR.forme} · {VENDEUR.nomCommercial}
             </p>
             {VENDEUR.adresse && <p className="text-slate-600">{VENDEUR.adresse}</p>}

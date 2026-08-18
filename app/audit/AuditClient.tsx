@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { EDITEUR, SIGNATURE } from "@/lib/legal/editeur";
 
 // Les intermédiaires par métier. C'est la même fuite partout — seul le nom du
 // péage change. Garder cette liste courte et vraie : elle sert à choisir vite
@@ -52,8 +53,17 @@ export default function AuditClient() {
         <header className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-slate-900 pb-4">
           <div>
             <h1 className="text-2xl font-black leading-none">Audit express</h1>
-            <p className="mt-1 text-sm font-semibold text-slate-500">
-              Frédéric Lacoste · eleveai.fr
+            <p className="mt-1.5 text-sm font-bold">
+              {EDITEUR.nomComplet}
+              {SIGNATURE.titre && (
+                <span className="font-semibold text-slate-500">
+                  {" "}
+                  · {SIGNATURE.titre}
+                </span>
+              )}
+            </p>
+            <p className="text-xs font-semibold italic text-slate-400">
+              {SIGNATURE.accroche}
             </p>
           </div>
           <div className="flex gap-4 text-sm">
