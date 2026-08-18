@@ -320,6 +320,59 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    kind: "template",
+    id: "stmg_probaC_reconnaitre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_conditionnelle_tableau",
+    microId: "probaC_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche celle qui restreint la population AVANT de compter : « parmi », « sachant que ».",
+    tags: ["stmg", "maths", "probabilites", "canvas", "template"],
+    generate: () => {
+      // ANGLE 2 — TRIER quatre phrases, au lieu de classer la seule proposée.
+      // Le premier item pose une phrase et demande son type ; celui-ci en aligne
+      // quatre dont une seule restreint la population. Reconnaître une
+      // conditionnelle isolée est plus facile que la repérer au milieu d'autres,
+      // et c'est pourtant l'exercice réel devant un énoncé de bac.
+      const t = tirerTableau();
+      const c = t.ctx;
+      const bonne =
+        `Parmi les ${c.individu} venant de « ${c.lignes[0]} », quelle est la part de « ${c.colonnes[1]} » ?`;
+      return {
+        text:
+          `On choisit ${unUne(c)} ${singulier(c)} au hasard. ` +
+          `Une seule de ces quatre questions porte sur une probabilité CONDITIONNELLE. Laquelle ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `Quelle est la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} » ET soit « ${c.colonnes[1]} » ?`,
+          `Quelle est la probabilité qu'${ilElle(c)} soit « ${c.colonnes[1]} » ?`,
+          `Quelle est la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} » OU soit « ${c.colonnes[1]} » ?`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasTableau(t),
+        explanation: exp(
+          "Une probabilité conditionnelle se calcule dans une SOUS-POPULATION : le mot « parmi » — ou « sachant que » — annonce que l'on ne compte plus sur l'ensemble.",
+          "On cherche dans chaque phrase ce qui sert de population de référence. Si elle est restreinte avant le comptage, la probabilité est conditionnelle ; sinon elle porte sur le total.",
+          `« Parmi les ${c.individu} venant de « ${c.lignes[0]} » » restreint à $${t.ligne1}$ ${c.individu} : ` +
+            `la probabilité vaut $\\dfrac{${t.b}}{${t.ligne1}} \\approx ${fr(Math.round((t.b / t.ligne1) * 100) / 100)}$. ` +
+            `Les trois autres se calculent sur les $${t.total}$ ${c.individu} : intersection $\\dfrac{${t.b}}{${t.total}}$, ` +
+            `événement seul $\\dfrac{${t.col2}}{${t.total}}$, union $\\dfrac{${t.ligne1 + t.col2 - t.b}}{${t.total}}$.`,
+          `Seule la question qui commence par « parmi » est conditionnelle.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `Quelle est la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} » ET soit « ${c.colonnes[1]} » ?`,
+            cause: "le ET croise deux caractères, mais il compte toujours sur l'ensemble : c'est une intersection, pas une conditionnelle",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ probaC_notation ═══════════════════ */
 
   {
@@ -368,6 +421,70 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — TRADUIRE la notation en français, au lieu de la produire. Le
+    // premier item part de la phrase et demande l'écriture ; celui-ci part de
+    // l'écriture et demande la phrase. Un élève qui coche $P_A(B)$ sans savoir
+    // le relire perdra le fil dès qu'un énoncé lui donnera la notation toute
+    // faite — ce que fait tout sujet de bac.
+    kind: "template",
+    id: "stmg_probaC_notation_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_conditionnelle_tableau",
+    microId: "probaC_notation",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "L'indice est la population dans laquelle on se place ; ce qui est entre parenthèses est ce qu'on y cherche.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "template"],
+    generate: () => {
+      const t = tirerTableau();
+      const c = t.ctx;
+      const sens = pick(["AB", "BA"] as const);
+      const evtA = `${leLa(c)}${singulier(c)} vient de « ${c.lignes[0]} »`;
+      const evtB = `${leLa(c)}${singulier(c)} est « ${c.colonnes[1]} »`;
+      const notation = sens === "AB" ? "$P_A(B)$" : "$P_B(A)$";
+      const bonne =
+        sens === "AB"
+          ? `la probabilité qu'${ilElle(c)} soit « ${c.colonnes[1]} », PARMI ceux qui viennent de « ${c.lignes[0]} »`
+          : `la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} », PARMI ceux qui sont « ${c.colonnes[1]} »`;
+      const inverse =
+        sens === "AB"
+          ? `la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} », PARMI ceux qui sont « ${c.colonnes[1]} »`
+          : `la probabilité qu'${ilElle(c)} soit « ${c.colonnes[1]} », PARMI ceux qui viennent de « ${c.lignes[0]} »`;
+      return {
+        text:
+          `On note $A$ l'évènement « ${evtA} » et $B$ l'évènement « ${evtB} ». ` +
+          `Que signifie ${notation} ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          inverse,
+          `la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} » ET soit « ${c.colonnes[1]} »`,
+          `la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} » OU soit « ${c.colonnes[1]} »`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasTableau(t),
+        explanation: exp(
+          "Dans l'écriture $P_X(Y)$, la lettre en INDICE désigne la condition — la population dans laquelle on se place — et celle entre parenthèses l'évènement dont on cherche la probabilité.",
+          "On lit l'indice en premier : « parmi les $X$ », puis la parenthèse : « quelle part sont des $Y$ ». Inverser les deux change complètement le nombre.",
+          `${notation} se calcule ici $\\dfrac{${t.b}}{${sens === "AB" ? t.ligne1 : t.col2}} \\approx ` +
+            `${fr(Math.round((t.b / (sens === "AB" ? t.ligne1 : t.col2)) * 100) / 100)}$, ` +
+            `alors que l'écriture inverse donnerait $\\dfrac{${t.b}}{${sens === "AB" ? t.col2 : t.ligne1}} \\approx ` +
+            `${fr(Math.round((t.b / (sens === "AB" ? t.col2 : t.ligne1)) * 100) / 100)}$ : même numérateur, deux nombres différents.`,
+          `${notation} est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          { choice: inverse, cause: "a échangé la condition et l'évènement cherché : l'indice est la CONDITION" },
+          {
+            choice: `la probabilité qu'${ilElle(c)} vienne de « ${c.lignes[0]} » ET soit « ${c.colonnes[1]} »`,
+            cause: `l'intersection se note $P(A \\cap B)$ et se divise par l'effectif TOTAL, soit $${t.total}$`,
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ probaC_calculer_tableau ═══════════════ */
 
   {
@@ -411,6 +528,50 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — le DÉNOMINATEUR, et lui seul. Le premier item fait mener le
+    // calcul complet ; celui-ci s'arrête sur le nombre qui décide de tout. Le
+    // numérateur est toujours la case croisée et ne pose jamais problème : ce
+    // qui se rate, c'est le choix entre l'effectif de la condition et
+    // l'effectif total. Un nombre à saisir, pas de propositions où piocher.
+    kind: "template",
+    id: "stmg_probaC_calculer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_conditionnelle_tableau",
+    microId: "probaC_calculer_tableau",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "$P_A(B) = \\dfrac{\\text{Card}(A \\cap B)}{\\text{Card}(A)}$ : au dénominateur, l'effectif de la CONDITION.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "template", "short"],
+    generate: () => {
+      const t = tirerTableau();
+      const c = t.ctx;
+      const parLigne = Math.random() < 0.5;
+      const i = pick([0, 1] as const);
+      const condition = parLigne ? c.lignes[i] : c.colonnes[i];
+      const denominateur = parLigne ? (i === 0 ? t.ligne1 : t.ligne2) : i === 0 ? t.col1 : t.col2;
+      return {
+        text:
+          `On choisit ${unUne(c)} ${singulier(c)} au hasard, et l'on veut la probabilité d'un évènement ` +
+          `SACHANT qu'${ilElle(c)} relève de « ${condition} ». ` +
+          `Quel effectif faut-il mettre au DÉNOMINATEUR ?`,
+        format: "short",
+        expected: [String(denominateur)],
+        comparator: "number_equal",
+        canvas: canvasTableau(t),
+        explanation: exp(
+          "Conditionner, c'est changer d'univers : on ne travaille plus sur l'ensemble de l'étude, mais sur la seule sous-population donnée par la condition. C'est elle qui passe au dénominateur.",
+          "On repère ce qui suit « sachant que », on lit son effectif marginal dans le tableau, et on l'écrit au dénominateur — le numérateur viendra ensuite de la case croisée.",
+          `La condition « ${condition} » rassemble $${denominateur}$ ${c.individu}, et non les $${t.total}$ de l'étude. ` +
+            `Toutes les probabilités conditionnelles sachant « ${condition} » auront donc $${denominateur}$ au dénominateur — ` +
+            `et leur somme vaudra $1$, puisqu'elles se partagent cette même population.`,
+          `Le dénominateur est $${denominateur}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ probaC_distinguer ═══════════════════ */
 
   {
@@ -425,7 +586,20 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     hint: "Les trois nombres ont le même numérateur, mais trois dénominateurs différents.",
     tags: ["stmg", "maths", "probabilites", "canvas", "piege", "template"],
     generate: () => {
-      const t = tirerTableau();
+      // ⚠️ LES TROIS QUOTIENTS DOIVENT DIFFÉRER À L'ARRONDI (18/08/2026).
+      // Ils partagent le même numérateur, et sur environ 2 % des tirages deux
+      // d'entre eux tombaient sur le même centième : le doublon disparaissait
+      // au tri et l'élève ne voyait plus que trois propositions. C'est tout
+      // l'intérêt de l'item qui s'effondrait — les trois nombres à ne pas
+      // confondre n'étaient plus que deux. Signalé par `verifier-generateurs`.
+      let t = tirerTableau();
+      for (let essai = 0; essai < 60; essai++) {
+        const arrondis = [t.a / t.total, t.a / t.ligne1, t.a / t.col1].map(
+          (x) => Math.round(x * 100) / 100
+        );
+        if (new Set(arrondis).size === 3) break;
+        t = tirerTableau();
+      }
       const quoi = pick(["inter", "PA_B", "PB_A"] as const);
       const inter = t.a / t.total;
       const pAB = t.a / t.ligne1;
@@ -472,6 +646,52 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — l'ÉVÈNEMENT CONTRAIRE, dans la condition. Le premier item
+    // oppose trois quotients de même numérateur ; celui-ci garde la condition
+    // et retourne l'évènement. C'est la confusion jumelle, et la plus utile à
+    // lever : $P_A(\bar B)$ se déduit de $P_A(B)$ par $1 - $, mais
+    // $P_{\bar A}(B)$ ne s'en déduit PAS — même si les deux écritures se
+    // ressemblent à s'y méprendre.
+    kind: "template",
+    id: "stmg_probaC_distinguer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_conditionnelle_distinguer",
+    microId: "probaC_distinguer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Dans une même population de référence, les deux issues se partagent le total : leurs probabilités font $1$.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "piege", "template", "short"],
+    generate: () => {
+      const t = tirerTableau();
+      const c = t.ctx;
+      // Sur la ligne 1 : P_A(B) = a/ligne1 et P_A(non B) = b/ligne1.
+      const pAB = t.a / t.ligne1;
+      const pAnonB = t.b / t.ligne1;
+      return {
+        text:
+          `On note $A$ : « ${leLa(c)}${singulier(c)} vient de « ${c.lignes[0]} » » et ` +
+          `$B$ : « ${ilElle(c)} est « ${c.colonnes[0]} » ». ` +
+          `On a calculé $P_A(B) \\approx ${fr(Math.round(pAB * 100) / 100)}$. ` +
+          `Que vaut $P_A(\\overline{B})$ ? (arrondi au centième)`,
+        format: "short",
+        expected: [fr(Math.round(pAnonB * 100) / 100)],
+        comparator: "number_equal",
+        canvas: canvasTableau(t),
+        explanation: exp(
+          "À condition fixée, les deux issues d'un caractère se partagent toute la population de référence : $P_A(B) + P_A(\\overline{B}) = 1$. La condition, elle, ne bouge pas.",
+          "On retire à $1$ la probabilité connue — ou l'on relit directement le tableau, en gardant le même dénominateur.",
+          `Sur la ligne « ${c.lignes[0] }» : $P_A(B) = \\dfrac{${t.a}}{${t.ligne1}}$ et ` +
+            `$P_A(\\overline{B}) = \\dfrac{${t.b}}{${t.ligne1}} \\approx ${fr(Math.round(pAnonB * 100) / 100)}$ — même dénominateur, et la somme fait bien $1$. ` +
+            `⚠️ Ne pas confondre avec $P_{\\overline{A}}(B) = \\dfrac{${t.c}}{${t.ligne2}} \\approx ${fr(Math.round((t.c / t.ligne2) * 100) / 100)}$, ` +
+            `qui change de POPULATION et ne se déduit d'aucune soustraction.`,
+          `$P_A(\\overline{B}) \\approx ${fr(Math.round(pAnonB * 100) / 100)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ probaC_interpreter_phrase ═══════════════ */
 
   {
@@ -491,7 +711,10 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       return {
         text:
           `On note $A$ : « ${leLa(t.ctx)}${singulier(t.ctx)} vient de ${t.ctx.lignes[0]} » et ` +
-          `$B$ : « il est ${t.ctx.colonnes[1]} ». On a calculé $P_A(B) \\approx ${fr(Math.round(p * 100) / 100)}$. ` +
+          // ⚠️ « il » était figé ici : trois des cinq contextes sont féminins
+          // (« pièces », « commandes ») et rendaient « il est Non conforme ».
+          // Le reste du fichier passe par `ilElle`, cette ligne l'avait oublié.
+          `$B$ : « ${ilElle(t.ctx)} est ${t.ctx.colonnes[1]} ». On a calculé $P_A(B) \\approx ${fr(Math.round(p * 100) / 100)}$. ` +
           `Traduis ce résultat par une phrase, dans le contexte.`,
         format: "open",
         expected: ["parmi", "sachant", t.ctx.lignes[0].toLowerCase(), "environ"],
@@ -504,6 +727,76 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
             `le dénominateur est l'effectif de « ${t.ctx.lignes[0]} », c'est donc la population de référence.`,
           `Par exemple : « Parmi les ${t.ctx.individu} venant de ${t.ctx.lignes[0]}, environ ${fr(Math.round(p * 1000) / 10)} % sont ${t.ctx.colonnes[1].toLowerCase()}. »`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — TRIER les phrases, quand le premier item fait RÉDIGER. La
+    // question ouverte est jugée par mots-clés : elle récompense l'élève qui
+    // écrit, et ne dit rien à celui qui reste devant sa feuille. Ici les quatre
+    // formulations sont posées, et une seule nomme la bonne population.
+    //
+    // Les deux se complètent, comme pour les données croisées : produire d'un
+    // côté, reconnaître de l'autre.
+    kind: "template",
+    id: "stmg_probaC_interpreter_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_conditionnelle_distinguer",
+    microId: "probaC_interpreter_phrase",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Calcule d'abord le quotient, puis lis chaque phrase en cherchant SUR QUI porte le pourcentage.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "piege", "template"],
+    generate: () => {
+      // Les trois pourcentages en jeu doivent différer à l'arrondi : sinon deux
+      // phrases deviennent vraies en même temps.
+      let t = tirerTableau();
+      for (let essai = 0; essai < 60; essai++) {
+        const p = [t.b / t.ligne1, t.b / t.col2, t.col2 / t.total].map(
+          (x) => Math.round(x * 1000) / 10
+        );
+        if (new Set(p).size === 3) break;
+        t = tirerTableau();
+      }
+      const c = t.ctx;
+      const pct = (x: number) => fr(Math.round(x * 1000) / 10);
+      const pLigne = pct(t.b / t.ligne1);
+      const pColonne = pct(t.b / t.col2);
+      const pMarginale = pct(t.col2 / t.total);
+      const bonne =
+        `Parmi les ${c.individu} venant de « ${c.lignes[0]} », environ $${pLigne}\\,\\%$ sont « ${c.colonnes[1]} ».`;
+      const inversee =
+        `Parmi les ${c.individu} « ${c.colonnes[1]} », environ $${pLigne}\\,\\%$ viennent de « ${c.lignes[0]} ».`;
+      const mauvaisNombre =
+        `Parmi les ${c.individu} venant de « ${c.lignes[0]} », environ $${pColonne}\\,\\%$ sont « ${c.colonnes[1]} ».`;
+      const marginale = `Environ $${pLigne}\\,\\%$ de tous les ${c.individu} sont « ${c.colonnes[1]} ».`;
+      return {
+        text:
+          `On a calculé $P_A(B) \\approx ${fr(Math.round((t.b / t.ligne1) * 100) / 100)}$, avec ` +
+          `$A$ : « ${leLa(c)}${singulier(c)} vient de « ${c.lignes[0]} » » et ` +
+          `$B$ : « ${ilElle(c)} est « ${c.colonnes[1]} » ». ` +
+          `Laquelle de ces quatre phrases traduit EXACTEMENT ce résultat ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [inversee, mauvaisNombre, marginale]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasTableau(t),
+        explanation: exp(
+          "Traduire $P_A(B)$, c'est nommer la population de référence : celle de l'indice. La phrase doit commencer par « parmi les $A$ », et le pourcentage porte sur eux seuls.",
+          "On calcule le quotient, puis on lit chaque phrase en cherchant qui suit « parmi » : c'est le dénominateur annoncé.",
+          `$P_A(B) = \\dfrac{${t.b}}{${t.ligne1}} \\approx ${pLigne}\\,\\%$. ` +
+            `En inversant la référence : $\\dfrac{${t.b}}{${t.col2}} \\approx ${pColonne}\\,\\%$. ` +
+            `Et sur l'ensemble de l'étude : $\\dfrac{${t.col2}}{${t.total}} \\approx ${pMarginale}\\,\\%$. ` +
+            `Trois nombres, trois phrases — une seule correspond à $P_A(B)$.`,
+          `Seule la première formulation dit vrai.`
+        ),
+        choiceDiagnostics: [
+          { choice: inversee, cause: `a gardé le bon nombre mais échangé les populations : cette phrase-là annoncerait $${pColonne}\\,\\%$` },
+          { choice: mauvaisNombre, cause: "a divisé par l'effectif de la colonne au lieu de celui de la ligne" },
+          { choice: marginale, cause: "a transformé une probabilité conditionnelle en probabilité sur l'ensemble" },
+        ],
       };
     },
   },
@@ -669,6 +962,60 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — le cas SANS remise. Le premier item décrit l'arbre d'un tirage
+    // avec remise, où les deux niveaux portent les mêmes nombres ; celui-ci
+    // retire la remise et demande ce que ça change. C'est la seule différence
+    // qui fasse basculer d'une répétition d'épreuves indépendantes à un arbre
+    // pondéré par des conditionnelles — et elle tient à trois mots de l'énoncé.
+    kind: "template",
+    id: "stmg_probaI_arbre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_epreuves_independantes",
+    microId: "probaI_arbre_deux_epreuves",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Sans remise, le stock a changé quand on prélève le second : il compte un article de moins, et peut-être un défaut de moins.",
+    tags: ["stmg", "maths", "probabilites", "piege", "template"],
+    generate: () => {
+      const ctx = pick(CONTEXTES);
+      const total = pick([50, 80, 100, 200] as const);
+      const defauts = pick([5, 8, 10, 20] as const);
+      const bonne =
+        "les probabilités du second niveau changent selon la première branche : ce sont des conditionnelles";
+      return {
+        text:
+          `Un stock contient $${total}$ ${ctx.individu}, dont $${defauts}$ « ${ctx.courtC[1]} ». ` +
+          `On en prélève deux SANS remise. Que peut-on dire de l'arbre représentant cette expérience ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          "les probabilités du second niveau sont les mêmes sur les deux branches",
+          "l'arbre n'a qu'un seul niveau, puisqu'on ne remet rien",
+          "les probabilités du second niveau sont toutes égales à celles du premier",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Sans remise, le premier prélèvement modifie le stock : la composition du second tirage dépend de ce qu'on a obtenu au premier. Les probabilités du second niveau sont donc CONDITIONNELLES à la branche empruntée.",
+          "On compte ce qui reste après chaque premier tirage, branche par branche.",
+          `Si le premier est « ${ctx.courtC[1]} », il reste $${defauts - 1}$ défauts sur $${total - 1}$ : ` +
+            `$\\dfrac{${defauts - 1}}{${total - 1}} \\approx ${fr(Math.round(((defauts - 1) / (total - 1)) * 1000) / 1000)}$. ` +
+            `Sinon, il en reste $${defauts}$ sur $${total - 1}$ : ` +
+            `$\\dfrac{${defauts}}{${total - 1}} \\approx ${fr(Math.round((defauts / (total - 1)) * 1000) / 1000)}$. ` +
+            `Deux nombres différents — avec remise, les deux auraient valu $\\dfrac{${defauts}}{${total}}$.`,
+          `Sans remise, le second niveau porte des probabilités conditionnelles, différentes d'une branche à l'autre.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "les probabilités du second niveau sont les mêmes sur les deux branches",
+            cause: "c'est le cas AVEC remise : sans remise, le stock a changé entre les deux prélèvements",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ probaI_produit ═══════════════════ */
 
   {
@@ -703,6 +1050,48 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
             ? `$${fr(p)} \\times ${fr(p)} = ${fr(Math.round(valeur * 10000) / 10000)}$.`
             : `La probabilité de ne pas l'être vaut $1 - ${fr(p)} = ${fr(1 - p)}$, donc $${fr(1 - p)} \\times ${fr(1 - p)} = ${fr(Math.round(valeur * 10000) / 10000)}$.`,
           `La probabilité vaut $${fr(Math.round(valeur * 10000) / 10000)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — EXACTEMENT UN, donc DEUX chemins. Le premier item demande « les
+    // deux » ou « aucun » : un seul chemin, un seul produit. Ici il faut voir
+    // que l'évènement se réalise de deux façons — le défaut au premier tirage,
+    // ou au second — et additionner. C'est le passage du produit à la somme de
+    // produits, celui qui prépare la loi binomiale.
+    kind: "template",
+    id: "stmg_probaI_produit_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_epreuves_independantes",
+    microId: "probaI_produit",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Deux chemins mènent à « exactement un » : oui-puis-non, et non-puis-oui. On les additionne.",
+    tags: ["stmg", "maths", "probabilites", "template", "short"],
+    generate: () => {
+      const ctx = pick(CONTEXTES);
+      const p = pick([0.1, 0.2, 0.25, 0.3, 0.4, 0.5] as const);
+      const valeur = 2 * p * (1 - p);
+      return {
+        text:
+          `On prélève deux ${ctx.individu} au hasard, AVEC remise. ` +
+          `À chaque prélèvement, la probabilité d'obtenir « ${ctx.courtC[1]} » vaut $${fr(p)}$. ` +
+          `Quelle est la probabilité d'en obtenir EXACTEMENT ${unUne(ctx)} ? (arrondi au millième)`,
+        format: "short",
+        expected: [fr(Math.round(valeur * 1000) / 1000)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un évènement qui se réalise de plusieurs façons correspond à plusieurs chemins de l'arbre. On multiplie le long d'un chemin, et l'on additionne les chemins.",
+          "On énumère les chemins qui conviennent, on calcule chacun, puis on fait la somme.",
+          `Chemin 1 — « ${ctx.courtC[1]} » puis pas : $${fr(p)} \\times ${fr(Math.round((1 - p) * 100) / 100)} = ${fr(Math.round(p * (1 - p) * 1000) / 1000)}$. ` +
+            `Chemin 2 — pas puis « ${ctx.courtC[1]} » : le même produit, dans l'autre ordre. ` +
+            `Total : $2 \\times ${fr(Math.round(p * (1 - p) * 1000) / 1000)} = ${fr(Math.round(valeur * 1000) / 1000)}$. ` +
+            `Vérification : $${fr(Math.round(p * p * 1000) / 1000)}$ (les deux) $+ ${fr(Math.round(valeur * 1000) / 1000)}$ (exactement un) ` +
+            `$+ ${fr(Math.round((1 - p) * (1 - p) * 1000) / 1000)}$ (aucun) $= 1$.`,
+          `La probabilité vaut environ $${fr(Math.round(valeur * 1000) / 1000)}$.`
         ),
       };
     },
@@ -743,6 +1132,64 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
             `Au moins un : $1 - ${fr(Math.round(aucun * 10000) / 10000)} \\approx ${fr(Math.round(auMoinsUn * 1000) / 1000)}$.`,
           `La probabilité vaut environ $${fr(Math.round(auMoinsUn * 1000) / 1000)}$.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — POURQUOI on passe par le contraire. Le premier item fait
+    // calculer « au moins un » ; celui-ci demande la raison du détour. Un élève
+    // peut appliquer $1 - (1-p)^n$ des années durant sans savoir qu'il évite
+    // ainsi d'additionner $n$ cas — et il retombera dans le piège dès que
+    // l'énoncé dira « au moins deux ».
+    kind: "template",
+    id: "stmg_probaI_bernoulli_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_epreuves_independantes",
+    microId: "probaI_bernoulli_repetition",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compte le nombre de cas favorables à « au moins un » : il y en a beaucoup. Et son contraire ?",
+    tags: ["stmg", "maths", "probabilites", "template"],
+    generate: () => {
+      const ctx = pick(CONTEXTES);
+      const n = pick([3, 4, 5, 6] as const);
+      const p = pick([0.1, 0.2, 0.25, 0.3] as const);
+      const bonne =
+        `parce que le contraire de « au moins un » est « AUCUN », un seul cas — au lieu des $${n}$ cas à additionner`;
+      return {
+        text:
+          `On prélève $${n}$ ${ctx.individu} au hasard avec remise, la probabilité d'obtenir ` +
+          `« ${ctx.courtC[1] } » valant $${fr(p)}$ à chaque fois. ` +
+          `Pour calculer la probabilité d'en obtenir AU MOINS UN, on écrit $1 - (1 - ${fr(p)})^{${n}}$. Pourquoi ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          "parce que « au moins un » signifie « exactement un »",
+          `parce que $(1 - ${fr(p)})^{${n}}$ est la probabilité d'en obtenir au moins un`,
+          "parce qu'une probabilité ne peut pas se calculer directement quand il y a une remise",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Passer par l'évènement contraire, c'est remplacer une somme de nombreux cas par une seule soustraction : $P(\\text{au moins un}) = 1 - P(\\text{aucun})$.",
+          "On identifie le contraire de l'évènement cherché, on calcule sa probabilité — souvent d'un seul produit — puis on la retire à $1$.",
+          `« Au moins un » couvre $${n}$ situations : exactement un, exactement deux, … jusqu'à $${n}$. ` +
+            `Son contraire n'en couvre qu'une : AUCUN, dont la probabilité est le produit ` +
+            `$(1 - ${fr(p)})^{${n}} = ${fr(Math.round(Math.pow(1 - p, n) * 10000) / 10000)}$. ` +
+            `D'où $1 - ${fr(Math.round(Math.pow(1 - p, n) * 10000) / 10000)} = ${fr(Math.round((1 - Math.pow(1 - p, n)) * 10000) / 10000)}$.`,
+          `On passe par le contraire parce qu'« aucun » est un cas unique, alors qu'« au moins un » en rassemble $${n}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "parce que « au moins un » signifie « exactement un »",
+            cause: "« au moins un » inclut deux, trois… : c'est justement pour cela qu'on ne l'additionne pas cas par cas",
+          },
+          {
+            choice: `parce que $(1 - ${fr(p)})^{${n}}$ est la probabilité d'en obtenir au moins un`,
+            cause: "ce produit est la probabilité de n'en obtenir AUCUN — c'est le contraire, d'où le $1 -$ devant",
+          },
+        ],
       };
     },
   },
@@ -798,6 +1245,49 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
             ? `Avec remise, le stock redevient $${total}$ ${ctx.individu} dont $${defauts}$ défectueux : la probabilité reste $${fr(p)}$ partout.`
             : `Sans remise, après un premier « ${ctx.courtC[1]} » il reste $${defauts - 1}$ défectueux sur $${total - 1}$, soit $${fr(Math.round(((defauts - 1) / (total - 1)) * 10000) / 10000)}$ — au lieu de $${fr(Math.round((defauts / (total - 1)) * 10000) / 10000)}$ dans l'autre cas.`,
           avecRemise ? "Les prélèvements sont indépendants." : "Les prélèvements ne sont pas indépendants."
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — CHIFFRER l'écart, au lieu de le nommer. Le premier item
+    // demande si les deux prélèvements sont indépendants ; celui-ci fait
+    // calculer les deux probabilités, avec et sans remise, sur le même stock.
+    // Tant que la différence reste une phrase, elle s'oublie ; posée en
+    // nombres, elle se voit.
+    kind: "template",
+    id: "stmg_probaI_remise_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_epreuves_independantes",
+    microId: "probaI_avec_sans_remise",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Sans remise, le second tirage se fait dans un stock qui a perdu un article — et un défaut.",
+    tags: ["stmg", "maths", "probabilites", "template", "short"],
+    generate: () => {
+      const ctx = pick(CONTEXTES);
+      const total = pick([20, 25, 40, 50] as const);
+      const defauts = pick([4, 5, 8, 10] as const);
+      const sansRemise = (defauts / total) * ((defauts - 1) / (total - 1));
+      const avecRemise = (defauts / total) * (defauts / total);
+      return {
+        text:
+          `Un stock contient $${total}$ ${ctx.individu}, dont $${defauts}$ « ${ctx.courtC[1]} ». ` +
+          `On en prélève deux SANS remise. ` +
+          `Quelle est la probabilité que les DEUX soient « ${ctx.courtC[1]} » ? (arrondi au millième)`,
+        format: "short",
+        expected: [fr(Math.round(sansRemise * 1000) / 1000)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Sans remise, le second tirage ne se fait plus dans le même stock : sa probabilité est conditionnelle au résultat du premier. On multiplie le long du chemin, avec la probabilité mise à jour.",
+          "On écrit la probabilité du premier tirage, puis celle du second SACHANT que le premier était un défaut — un défaut de moins, un article de moins.",
+          `$\\dfrac{${defauts}}{${total}} \\times \\dfrac{${defauts - 1}}{${total - 1}} = ` +
+            `${fr(Math.round(sansRemise * 10000) / 10000)}$, soit environ $${fr(Math.round(sansRemise * 1000) / 1000)}$. ` +
+            `Avec remise, on aurait trouvé $\\left(\\dfrac{${defauts}}{${total}}\\right)^2 \\approx ${fr(Math.round(avecRemise * 1000) / 1000)}$ : ` +
+            `un peu plus, car le stock n'aurait pas perdu son défaut.`,
+          `La probabilité vaut environ $${fr(Math.round(sansRemise * 1000) / 1000)}$.`
         ),
       };
     },
