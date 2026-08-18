@@ -80,7 +80,14 @@ export const SIGNATURE = {
      de ses années de statisticien), ou la phrase qui décrit vraiment le rôle —
      « je trouve ce que votre affaire perd, et je le corrige ». */
   titre: "",
-  accroche: "Epsilon engendre l'infini",
+  /* La formule sort de /simulateur-epsilon (« activer des epsilons peut
+     engendrer des infinis »). La seconde moitié n'est pas un ornement : seule,
+     la première est belle et opaque — un dirigeant d'hôtel ne sait pas ce
+     qu'est un epsilon. La glose lui rend son sens sans rien lui retirer, et
+     elle décrit le métier au mot près : un domaine cassé en HTTPS, une
+     description qui parle de street art, une salle louée sous son point mort.
+     Trois détails, et l'année change. */
+  accroche: "Epsilon engendre l'infini — ou un détail peut tout changer",
 };
 
 export const HEBERGEUR = {
