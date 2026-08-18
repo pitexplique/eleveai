@@ -178,6 +178,56 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — le RANG et le TERME, qu'on confond toute l'année. Le premier
+    // item porte sur l'écriture ; celui-ci sur ce que chaque nombre DÉSIGNE.
+    // Dans « $u_5 = 23$ », le $5$ est une place dans la file, le $23$ est la
+    // valeur qui s'y trouve. Tant que les deux se mélangent, « à partir de quel
+    // rang dépasse-t-on 1 000 ? » ne veut rien dire.
+    kind: "template",
+    id: "stmg_suite_gen_notation_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_notation",
+    microId: "suite_gen_notation",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "L'indice est une PLACE dans la liste ; ce qui est écrit après le signe $=$ est la VALEUR.",
+    tags: ["stmg", "maths", "suites", "piege", "template"],
+    generate: () => {
+      const contexte = pick(CONTEXTES_ARITH);
+      const n = randomInt(3, 12);
+      const valeur = pick([120, 250, 340, 480, 610, 750, 920] as const);
+      const bonne = `$${n}$ est le RANG, $${valeur}$ est le nombre ${contexte.unite === "€" ? "d'euros" : `de ${contexte.unite}`}`;
+      return {
+        text:
+          `On note $u(n)$ ${contexte.sujet} au bout de $n$ mois, et l'on écrit $u(${n}) = ${valeur}$. ` +
+          `Que désignent les deux nombres ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `$${valeur}$ est le RANG, $${n}$ est le nombre ${contexte.unite === "€" ? "d'euros" : `de ${contexte.unite}`}`,
+          `$${n}$ et $${valeur}$ désignent tous deux des ${contexte.unite === "€" ? "euros" : contexte.unite}`,
+          `$${n}$ est la raison de la suite, $${valeur}$ son premier terme`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une suite range des valeurs dans un ordre : le RANG dit à quelle place on se trouve, le TERME dit ce qu'on y lit. Les deux nombres ne mesurent pas la même chose et ne se comparent jamais.",
+          "On lit l'écriture $u(n) = v$ comme une phrase : « au rang $n$, la valeur est $v$ ». Ce qui est entre parenthèses est la place ; ce qui suit le signe égal est la valeur.",
+          `$u(${n}) = ${valeur}$ se lit : au bout de $${n}$ mois, ${contexte.sujet} vaut $${valeur}$ ${contexte.unite}. ` +
+            `Le rang se compte en mois, le terme en ${contexte.unite === "€" ? "euros" : contexte.unite} : deux unités différentes.`,
+          `$${n}$ est le rang, $${valeur}$ est le terme.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$${valeur}$ est le RANG, $${n}$ est le nombre ${contexte.unite === "€" ? "d'euros" : `de ${contexte.unite}`}`,
+            cause: "a interverti les deux : le rang est TOUJOURS ce qui est entre parenthèses",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ suite_gen_fonctionnelle ═══════════════ */
 
   {
@@ -221,6 +271,63 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
             : `Ici $u(n+1)$ dépend de $u(n)$ : pour obtenir $u(100)$, il faut avoir calculé les 100 termes précédents.`,
           `C'est une définition ${fonctionnelle ? "fonctionnelle" : "par récurrence"}.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — ce que chaque définition PERMET. Le premier item fait nommer le
+    // type ; celui-ci demande sa conséquence pratique : avec une récurrence, on
+    // ne peut pas sauter au rang 20, il faut passer par tous les précédents.
+    // C'est la seule chose qui compte quand on choisit entre les deux — et le
+    // BO le pose ainsi, la définition explicite étant réservée à la terminale.
+    kind: "template",
+    id: "stmg_suite_gen_fonctionnelle_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_notation",
+    microId: "suite_gen_fonctionnelle",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une relation de récurrence relie un terme AU PRÉCÉDENT : pour arriver au rang 20, il faut les avoir tous.",
+    tags: ["stmg", "maths", "suites", "template"],
+    generate: () => {
+      const r = pick([12, 15, 20, 25, 30, 40] as const);
+      const u0 = pick([100, 150, 200, 300] as const);
+      const rang = pick([15, 20, 25, 30] as const);
+      const bonne =
+        `non : il faut calculer tous les termes précédents, l'un après l'autre`;
+      return {
+        text:
+          `Une suite est définie par $u(0) = ${u0}$ et $u(n+1) = u(n) + ${r}$. ` +
+          `Peut-on obtenir $u(${rang})$ directement, sans passer par les autres termes ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `oui : il suffit de remplacer $n$ par $${rang}$ dans la relation`,
+          `oui : $u(${rang})$ vaut $${u0} + ${r}$`,
+          `non : une suite définie par récurrence ne permet jamais d'atteindre le rang $${rang}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une définition PAR RÉCURRENCE donne chaque terme à partir du précédent : elle décrit un pas, pas un saut. Une définition EXPLICITE, elle, donne le terme directement en fonction de $n$ — mais elle n'est pas au programme de première.",
+          "On regarde ce que la relation relie : si elle fait intervenir $u(n)$, il faut connaître $u(n)$ avant d'obtenir $u(n+1)$.",
+          `Pour $u(${rang})$, il faudrait remonter la chaîne : ` +
+            `$u(1) = ${u0 + r}$, $u(2) = ${u0 + 2 * r}$, … jusqu'à $u(${rang}) = ${u0 + rang * r}$. ` +
+            `Un tableur le fait en une recopie ; c'est justement pour cela que le programme l'utilise ici. ` +
+            `L'expression directe $u(n) = ${u0} + ${r}n$ existe, mais elle relève de la classe terminale.`,
+          `Non : il faut parcourir tous les termes, du rang $0$ au rang $${rang}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `oui : il suffit de remplacer $n$ par $${rang}$ dans la relation`,
+            cause: "remplacer $n$ par 20 donne $u(21) = u(20) + r$ : on ne fait que déplacer le problème",
+          },
+          {
+            choice: `non : une suite définie par récurrence ne permet jamais d'atteindre le rang $${rang}$`,
+            cause: "elle le permet très bien — mais en passant par tous les termes intermédiaires",
+          },
+        ],
       };
     },
   },
@@ -276,6 +383,63 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — TRADUIRE la relation en français. Le premier item part de la
+    // situation et fait écrire $u(n+1) = q \times u(n)$ ; celui-ci donne la
+    // relation et demande ce qu'elle raconte. C'est le sens de lecture d'un
+    // sujet de bac, où la relation est fournie et où la première question
+    // demande de l'interpréter — et un coefficient inférieur à 1 y annonce une
+    // BAISSE, ce que beaucoup lisent à l'envers.
+    kind: "template",
+    id: "stmg_suite_gen_recurrence_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_notation",
+    microId: "suite_gen_recurrence",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un coefficient plus grand que $1$ fait augmenter ; plus petit que $1$, il fait diminuer. L'écart à $1$ donne le pourcentage.",
+    tags: ["stmg", "maths", "suites", "piege", "template"],
+    generate: () => {
+      const contexte = pick(CONTEXTES_GEO);
+      const t = pick([2, 4, 5, 8, 10, 12, 15, 20, 25] as const);
+      const hausse = Math.random() < 0.5;
+      const q = hausse ? 1 + t / 100 : 1 - t / 100;
+      const bonne = `${contexte.sujet} ${hausse ? "augmente" : "diminue"} de $${t}\\,\\%$ chaque année`;
+      return {
+        text:
+          `On note $u(n)$ ${contexte.sujet} au bout de $n$ années, et l'on a $u(n+1) = ${fr(q)} \\times u(n)$. ` +
+          `Que dit cette relation ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `${contexte.sujet} ${hausse ? "diminue" : "augmente"} de $${t}\\,\\%$ chaque année`,
+          `${contexte.sujet} ${hausse ? "augmente" : "diminue"} de $${fr(q)}$ ${contexte.unite} chaque année`,
+          `${contexte.sujet} est multiplié par $${t}$ chaque année`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une relation $u(n+1) = q \\times u(n)$ décrit une évolution en POURCENTAGE : $q$ est le coefficient multiplicateur, et le taux se lit dans son écart à $1$.",
+          "On compare $q$ à $1$ : au-dessus, c'est une hausse ; en dessous, une baisse. Puis on convertit l'écart en pourcentage.",
+          `$${fr(q)} ${hausse ? "-" : "="} 1 ${hausse ? "" : "-"} ${hausse ? fr(t / 100) : fr(t / 100)}$, soit $${t}\\,\\%$ ${hausse ? "de plus" : "de moins"} chaque année. ` +
+            `⚠️ Le coefficient MULTIPLIE, il ne s'ajoute pas : la grandeur ne bouge pas de $${fr(q)}$ ${contexte.unite}, ` +
+            `elle est multipliée par $${fr(q)}$ — et l'évolution en euros change donc d'une année sur l'autre.`,
+          `${contexte.sujet.charAt(0).toUpperCase()}${contexte.sujet.slice(1)} ${hausse ? "augmente" : "diminue"} de $${t}\\,\\%$ par an.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `${contexte.sujet} ${hausse ? "augmente" : "diminue"} de $${fr(q)}$ ${contexte.unite} chaque année`,
+            cause: "confond une évolution qui MULTIPLIE avec une évolution qui s'AJOUTE — c'est la différence entre géométrique et arithmétique",
+          },
+          {
+            choice: `${contexte.sujet} ${hausse ? "diminue" : "augmente"} de $${t}\\,\\%$ chaque année`,
+            cause: `a lu le sens à l'envers : $${fr(q)}$ est ${hausse ? "supérieur" : "inférieur"} à $1$`,
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ suite_gen_premiers_termes ═══════════════ */
 
   {
@@ -314,6 +478,50 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — REMONTER la suite. Le premier item descend de $u(0)$ vers
+    // $u(3)$ en ajoutant ; celui-ci part d'un terme connu et fait revenir en
+    // arrière. C'est une soustraction là où l'autre est une addition, et c'est
+    // la question que pose un énoncé qui donne l'état d'aujourd'hui et demande
+    // celui d'il y a trois mois.
+    kind: "template",
+    id: "stmg_suite_gen_premiers_termes_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_notation",
+    microId: "suite_gen_premiers_termes",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Pour remonter d'un rang, on fait l'opération INVERSE : on retire la raison au lieu de l'ajouter.",
+    // ⛔ PAS DE TABLEAU ICI, ET C'EST VOLONTAIRE. `canvasTableau` affiche une
+    // ligne de valeurs : rempli, il donnerait la réponse ; rempli de zéros pour
+    // masquer les termes inconnus, il MENTIRAIT — un terme valant zéro n'est
+    // pas un terme manquant. Le premier item, lui, porte bien son tableau.
+    tags: ["stmg", "maths", "suites", "template", "short"],
+    generate: () => {
+      const u0 = pick([100, 150, 200, 250, 300, 400, 500] as const);
+      const r = pick([-40, -30, -25, -20, 20, 25, 30, 40, 50] as const);
+      const termes = termesArith(u0, r, 5);
+      const rang = pick([3, 4] as const);
+      return {
+        text:
+          `Une suite vérifie $u(n+1) = u(n) ${r >= 0 ? "+" : "-"} ${Math.abs(r)}$, et l'on sait que ` +
+          `$u(${rang}) = ${fr(termes[rang])}$. Que vaut $u(0)$ ?`,
+        format: "short",
+        expected: [fr(u0)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Une relation de récurrence se parcourt dans les deux sens : vers l'avant on applique l'opération, vers l'arrière on applique son inverse.",
+          `On remonte rang par rang en ${r >= 0 ? "retirant" : "ajoutant"} $${Math.abs(r)}$ à chaque pas — autant de fois qu'il y a de rangs à remonter.`,
+          `De $u(${rang})$ à $u(0)$, il y a $${rang}$ pas en arrière : ` +
+            `$${fr(termes[rang])} ${r >= 0 ? "-" : "+"} ${rang} \\times ${Math.abs(r)} = ${fr(u0)}$. ` +
+            `Vérification en redescendant : $${fr(u0)}$, puis $${fr(termes[1])}$, … jusqu'à $${fr(termes[rang])}$.`,
+          `$u(0) = ${fr(u0)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ suite_gen_terme_rang ═══════════════ */
 
   {
@@ -347,6 +555,51 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           "On repère le dernier terme du tableau, puis on multiplie par le coefficient autant de fois qu'il manque de rangs.",
           `$u(${rang - 1}) = ${fr(termes[rang - 1])}$, donc $u(${rang}) = ${fr(termes[rang - 1])} \\times ${fr(q)} = ${fr(termes[rang])}$.`,
           `$u(${rang}) = ${fr(termes[rang])}$ ${contexte.unite}.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — COMPTER LES PAS. Le premier item lit un terme dans un tableau ;
+    // celui-ci demande combien de fois on a multiplié pour l'atteindre. La
+    // réponse est le RANG lui-même, et c'est le décalage le plus coûteux du
+    // chapitre : de $u(0)$ à $u(4)$ il y a quatre pas, pas cinq — l'erreur qui
+    // fait tomber tous les calculs de capital à côté d'une année.
+    kind: "template",
+    id: "stmg_suite_gen_terme_rang_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_notation",
+    microId: "suite_gen_terme_rang",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compte les FLÈCHES entre les colonnes du tableau, pas les colonnes elles-mêmes.",
+    tags: ["stmg", "maths", "suites", "canvas", "piege", "template", "short"],
+    generate: () => {
+      const contexte = pick(CONTEXTES_GEO);
+      const u0 = pick([1000, 1200, 1500, 2000, 2400, 3000] as const);
+      const t = pick([5, 10, 20, 25] as const);
+      const q = 1 + t / 100;
+      const rang = randomInt(3, 5);
+      const termes = termesGeo(u0, q, rang + 1);
+      return {
+        text:
+          `Le tableau donne ${contexte.sujet}, qui est multiplié par $${fr(q)}$ chaque année. ` +
+          `Pour passer de $u(0)$ à $u(${rang})$, combien de fois multiplie-t-on par $${fr(q)}$ ?`,
+        format: "short",
+        expected: [String(rang)],
+        comparator: "number_equal",
+        canvas: canvasTableau(termes, `${contexte.sujet} (${contexte.unite})`),
+        explanation: exp(
+          "Le rang compte les VALEURS, mais la multiplication se fait entre deux valeurs consécutives : d'un rang au suivant, il y a une multiplication. Le nombre de multiplications est donc le nombre de PAS, pas le nombre de colonnes.",
+          "On compte les flèches entre les colonnes du tableau : du rang $0$ au rang $n$, il y en a exactement $n$.",
+          `Le tableau affiche $${rang + 1}$ valeurs — de $u(0)$ à $u(${rang})$ — mais seulement $${rang}$ passages : ` +
+            `$u(0) \\to u(1) \\to \\ldots \\to u(${rang})$. ` +
+            `Vérification : $${u0} \\times ${fr(q)}^{${rang}} = ${fr(termes[rang])}$, ` +
+            `ce qui est bien la dernière valeur du tableau. Avec $${rang + 1}$ multiplications, on trouverait ` +
+            `$${fr(Math.round(u0 * Math.pow(q, rang + 1) * 100) / 100)}$ — une année de trop.`,
+          `On multiplie $${rang}$ fois.`
         ),
       };
     },
@@ -411,6 +664,82 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — JUSTIFIER, pas seulement classer. Le premier item fait
+    // répondre « ni l'une ni l'autre » ; celui-ci demande POURQUOI. Les deux
+    // tests sont différents — différences constantes pour arithmétique,
+    // quotients constants pour géométrique — et il faut les avoir menés tous
+    // les deux pour conclure. Un élève qui n'en fait qu'un se trompera dès
+    // qu'une suite passera le premier.
+    kind: "template",
+    id: "stmg_suite_gen_ni_ni_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_termes",
+    microId: "suite_gen_ni_ni",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Deux tests à mener : les DIFFÉRENCES sont-elles constantes ? les QUOTIENTS le sont-ils ?",
+    tags: ["stmg", "maths", "suites", "canvas", "template"],
+    generate: () => {
+      // ⚠️ LES TERMES SONT DANS L'ÉNONCÉ, PAS SEULEMENT DANS LA FIGURE.
+      // La clé d'une question est « énoncé + propositions » (règle du 17/08) :
+      // avec un texte constant et quatre propositions constantes, ce gabarit
+      // n'aurait servi qu'UNE SEULE question, quel que soit le tirage. En
+      // écrivant les termes, chaque tirage devient un énoncé distinct.
+      const type = pick(["carres", "cumul", "fibonacci"] as const);
+      const d = pick([1, 2, 3, 4] as const);
+      const termes =
+        type === "carres"
+          ? [0, 1, 2, 3, 4].map((k) => (k + d) * (k + d))
+          : type === "cumul"
+            ? [0, 1, 2, 3, 4].map((k) => (((k + d) * (k + d + 1)) / 2))
+            : (() => {
+                const t = [d, d + 1];
+                for (let k = 2; k < 5; k++) t.push(t[k - 1] + t[k - 2]);
+                return t;
+              })();
+      const diffs = termes.slice(1).map((v, k) => v - termes[k]);
+      const quots = termes
+        .slice(1)
+        .map((v, k) => Math.round((v / termes[k]) * 100) / 100);
+      const bonne =
+        "ni les différences ni les quotients de termes consécutifs ne sont constants";
+      return {
+        text:
+          `Les premiers termes d'une suite sont ${termes.map((v) => `$${v}$`).join(", ")}. ` +
+          `Elle n'est ni arithmétique, ni géométrique. Qu'est-ce qui permet de l'affirmer ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          "les différences de termes consécutifs ne sont pas constantes — cela suffit à conclure",
+          "les quotients de termes consécutifs ne sont pas constants — cela suffit à conclure",
+          "ses termes ne sont pas tous positifs",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasTableau(termes, "Premiers termes de la suite"),
+        explanation: exp(
+          "Une suite est arithmétique si les DIFFÉRENCES entre termes consécutifs sont constantes, et géométrique si les QUOTIENTS le sont. Écarter les deux natures demande donc de mener les deux tests.",
+          "On calcule d'abord les différences, puis les quotients. Il faut que les DEUX séries varient pour conclure « ni l'une ni l'autre ».",
+          `Différences : ${diffs.map((v) => `$${v}$`).join(", ")} — elles augmentent, donc pas arithmétique. ` +
+            `Quotients : ${quots.map((v) => `$${fr(v)}$`).join(", ")} — ils diminuent, donc pas géométrique. ` +
+            `Un seul de ces deux constats n'aurait rien prouvé : une suite géométrique a elle aussi des différences non constantes.`,
+          `Les deux tests échouent : la suite n'est ni arithmétique, ni géométrique.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "les différences de termes consécutifs ne sont pas constantes — cela suffit à conclure",
+            cause: "cela écarte seulement le caractère arithmétique : une suite géométrique a, elle aussi, des différences variables",
+          },
+          {
+            choice: "les quotients de termes consécutifs ne sont pas constants — cela suffit à conclure",
+            cause: "cela écarte seulement le caractère géométrique : il reste à tester les différences",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ suite_arith_reconnaitre ═══════════════ */
 
   {
@@ -439,6 +768,51 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           "On calcule la différence entre deux termes consécutifs, et l'on vérifie sur une seconde paire.",
           `$${fr(termes[1])} - ${fr(termes[0])} = ${fr(r)}$, et $${fr(termes[2])} - ${fr(termes[1])} = ${fr(r)}$.`,
           `La raison est $r = ${fr(r)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la raison entre deux termes NON CONSÉCUTIFS. Le premier item
+    // la lit dans un tableau, où il suffit de soustraire deux cases voisines ;
+    // celui-ci ne donne que deux relevés éloignés. Il faut alors diviser
+    // l'écart par le nombre de PAS — et c'est là que le décalage revient :
+    // de $u(2)$ à $u(6)$, il y a quatre pas, pas six.
+    kind: "template",
+    id: "stmg_suite_arith_reconnaitre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_arithmetique",
+    microId: "suite_arith_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "L'écart total se répartit sur le nombre de PAS entre les deux rangs, pas sur les rangs eux-mêmes.",
+    tags: ["stmg", "maths", "suites", "piege", "template", "short"],
+    generate: () => {
+      const r = pick([-15, -12, -8, -5, 4, 6, 7, 9, 11, 14] as const);
+      const u0 = pick([60, 80, 100, 120, 150, 200] as const);
+      const n1 = randomInt(1, 3);
+      const n2 = n1 + randomInt(3, 5);
+      const v1 = u0 + n1 * r;
+      const v2 = u0 + n2 * r;
+      const contexte = pick(CONTEXTES_ARITH);
+      return {
+        text:
+          `${contexte.sujet.charAt(0).toUpperCase()}${contexte.sujet.slice(1)} suit une suite ARITHMÉTIQUE. ` +
+          `On relève $u(${n1}) = ${fr(v1)}$ et $u(${n2}) = ${fr(v2)}$. Quelle est sa raison ?`,
+        format: "short",
+        expected: [fr(r)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Dans une suite arithmétique, on ajoute la même raison à chaque pas. Entre deux rangs éloignés, l'écart total vaut donc la raison multipliée par le nombre de pas.",
+          "On calcule l'écart des valeurs, on compte les pas — la différence des rangs —, et l'on divise l'un par l'autre.",
+          `Écart des valeurs : $${fr(v2)} - ${fr(v1)} = ${fr(v2 - v1)}$. ` +
+            `Nombre de pas : $${n2} - ${n1} = ${n2 - n1}$. ` +
+            `Donc $r = \\dfrac{${fr(v2 - v1)}}{${n2 - n1}} = ${fr(r)}$. ` +
+            `⚠️ Diviser par $${n2}$ au lieu de $${n2 - n1}$ donnerait $${fr(Math.round(((v2 - v1) / n2) * 100) / 100)}$ : ` +
+            `on ne divise pas par le rang d'arrivée, mais par le nombre de pas franchis.`,
+          `La raison vaut $${fr(r)}$.`
         ),
       };
     },
@@ -491,6 +865,70 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — DIAGNOSTIQUER la confusion arithmétique / géométrique. Le
+    // premier item fait écrire la relation ; celui-ci met sous les yeux la
+    // faute qui revient toute l'année : un « de plus » traduit par une
+    // multiplication. Les deux modèles se distinguent à ce mot près, et c'est
+    // toute la différence entre une droite et une exponentielle.
+    kind: "template",
+    id: "stmg_suite_arith_recurrence_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_arithmetique",
+    microId: "suite_arith_recurrence",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« De plus chaque mois » s'AJOUTE. « De plus par mois en pourcentage » se MULTIPLIE. Ici, lequel est-ce ?",
+    tags: ["stmg", "maths", "suites", "piege", "template"],
+    generate: () => {
+      const contexte = pick(CONTEXTES_ARITH);
+      const r = pick([15, 20, 25, 30, 40, 50, 60, 80] as const);
+      const perd = contexte.verbe === "perd";
+      const juste = `$u(n+1) = u(n) ${perd ? "-" : "+"} ${r}$`;
+      const faux = `$u(n+1) = ${r} \\times u(n)$`;
+      const bonne = `une quantité FIXE s'ajoute chaque mois : elle doit être ${perd ? "retranchée" : "ajoutée"}, pas multipliée`;
+      return {
+        text:
+          // ⚠️ « Le nombre d'abonnés GAGNE 15 abonnés » : le réservoir range un
+          // SUJET (« le nombre d'abonnés d'une salle de sport ») et un VERBE
+          // pensé pour l'entreprise, pas pour la grandeur. On garde le sujet et
+          // l'on remplace le verbe par « augmente / diminue de », qui s'accorde
+          // avec une grandeur.
+          `${contexte.sujet.charAt(0).toUpperCase()}${contexte.sujet.slice(1)} ` +
+          `${perd ? "diminue" : "augmente"} de $${r}$ ${contexte.unite} chaque mois. ` +
+          `Un élève traduit cela par « ${faux} ». Où est l'erreur ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `il fallait écrire $u(n+1) = u(n) ${perd ? "+" : "-"} ${r}$`,
+          `il fallait multiplier par $${fr(1 + r / 100)}$ au lieu de $${r}$`,
+          "il n'y a pas d'erreur : les deux écritures sont équivalentes",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une évolution par une quantité FIXE donne une suite ARITHMÉTIQUE : on ajoute (ou retranche) la même valeur à chaque pas. Une évolution en POURCENTAGE donne une suite GÉOMÉTRIQUE : on multiplie par un coefficient.",
+          `On repère l'unité de l'énoncé : des ${contexte.unite} par mois, c'est une addition ; des pour cent par mois, c'est une multiplication.`,
+          `L'énoncé annonce $${r}$ ${contexte.unite} par mois — une quantité, pas un pourcentage. ` +
+            `La bonne traduction est donc ${juste}. ` +
+            `L'écriture proposée multiplierait la grandeur par $${r}$ à chaque mois : partie de $100$, elle atteindrait ` +
+            `$${100 * r}$ dès le premier mois, puis $${100 * r * r}$ au second. Ce n'est pas la situation décrite.`,
+          `Il fallait ${perd ? "retrancher" : "ajouter"} $${r}$, et non multiplier : ${juste}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `il fallait écrire $u(n+1) = u(n) ${perd ? "+" : "-"} ${r}$`,
+            cause: `a bien vu qu'il fallait une addition, mais s'est trompé de sens : la grandeur ${perd ? "diminue" : "augmente"}`,
+          },
+          {
+            choice: "il n'y a pas d'erreur : les deux écritures sont équivalentes",
+            cause: "ajouter et multiplier ne donnent jamais la même suite : l'une est une droite, l'autre une exponentielle",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ suite_arith_variation ═══════════════ */
 
   {
@@ -519,6 +957,64 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           `Ici $r = ${fr(r)}$, qui est ${r > 0 ? "positif" : "négatif"}.`,
           `La suite est ${r > 0 ? "croissante" : "décroissante"}.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — REMONTER du sens de variation à la raison. Le premier item
+    // donne la raison et fait conclure ; celui-ci donne l'observation — la
+    // grandeur baisse — et demande ce qu'on peut en dire. La réponse tient au
+    // SIGNE, et le distracteur « la raison est décroissante » n'est pas une
+    // maladresse : la raison est un nombre FIXE, elle ne varie pas. C'est la
+    // confusion entre la suite et sa raison.
+    kind: "template",
+    id: "stmg_suite_arith_variation_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_arithmetique",
+    microId: "suite_arith_variation",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La raison est un nombre FIXE : elle ne croît ni ne décroît. C'est son SIGNE qui décide du sens de la suite.",
+    tags: ["stmg", "maths", "suites", "piege", "template"],
+    generate: () => {
+      const contexte = pick(CONTEXTES_ARITH);
+      const baisse = Math.random() < 0.5;
+      const u0 = pick([200, 300, 400, 500, 800] as const);
+      const bonne = `sa raison est ${baisse ? "NÉGATIVE" : "POSITIVE"}`;
+      return {
+        text:
+          `${contexte.sujet.charAt(0).toUpperCase()}${contexte.sujet.slice(1)} suit une suite arithmétique de premier terme $${u0}$, ` +
+          `et l'on constate qu'${baisse ? "il diminue" : "il augmente"} mois après mois. Que peut-on en dire ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `sa raison est ${baisse ? "POSITIVE" : "NÉGATIVE"}`,
+          `sa raison est ${baisse ? "décroissante" : "croissante"}`,
+          `son premier terme $${u0}$ est trop ${baisse ? "grand" : "petit"}`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Dans une suite arithmétique, on ajoute la même raison à chaque pas. Le sens de variation ne dépend donc que du SIGNE de cette raison : positive, la suite croît ; négative, elle décroît ; nulle, elle reste constante.",
+          "On regarde le sens observé, et l'on en déduit le signe de la raison — le premier terme n'y change rien.",
+          `La grandeur ${baisse ? "baisse" : "monte"} d'un mois sur l'autre : ce qu'on lui ajoute à chaque pas est donc ` +
+            `${baisse ? "négatif" : "positif"}, autrement dit $r ${baisse ? "<" : ">"} 0$. ` +
+            `⚠️ La raison est un NOMBRE, fixé une fois pour toutes : dire qu'elle « décroît » n'a pas de sens. ` +
+            `Et le premier terme $${u0}$ ne joue aucun rôle : une suite partant de $${u0}$ peut monter ou descendre, ` +
+            `selon le seul signe de $r$.`,
+          `Sa raison est ${baisse ? "négative" : "positive"}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `sa raison est ${baisse ? "décroissante" : "croissante"}`,
+            cause: "confond la SUITE et sa RAISON : la raison est un nombre fixe, elle ne varie pas",
+          },
+          {
+            choice: `son premier terme $${u0}$ est trop ${baisse ? "grand" : "petit"}`,
+            cause: "le premier terme fixe le point de départ, jamais le sens de variation",
+          },
+        ],
       };
     },
   },
@@ -561,6 +1057,45 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           `$u(n+1) - u(n) = \\big(${a}(n+1) + ${b}\\big) - \\big(${a}n + ${b}\\big) = ${a}n + ${a} + ${b} - ${a}n - ${b} = ${a}$. ` +
             `Le résultat ne contient plus $n$ : il est constant.`,
           `La suite est arithmétique de raison $${a}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la raison LUE sur la forme explicite. Le premier item est une
+    // ouverte : il fait rédiger la démonstration $u(n+1) - u(n) = r$. Celui-ci
+    // en donne le résultat d'un coup d'œil : dans $u(n) = an + b$, le
+    // coefficient de $n$ EST la raison. Les deux vont ensemble — l'une prouve,
+    // l'autre reconnaît —, et la seconde est ce qui reste quand on relit sa
+    // copie.
+    kind: "template",
+    id: "stmg_suite_arith_demontrer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_arithmetique",
+    microId: "suite_arith_demontrer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Fais la différence $u(n+1) - u(n)$ : tout ce qui ne dépend pas de $n$ disparaît.",
+    tags: ["stmg", "maths", "suites", "template", "short"],
+    generate: () => {
+      const a = pick([3, 4, 5, 6, 7, 8, 9, 11, -4, -6, -9] as const);
+      const b = pick([1, 2, 5, 10, 12, 20, 25] as const);
+      return {
+        text:
+          `Une suite est définie pour tout entier $n$ par $u(n) = ${a}n + ${b}$. ` +
+          `Elle est arithmétique : quelle est sa raison ?`,
+        format: "short",
+        expected: [fr(a)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Une suite dont le terme s'écrit $u(n) = an + b$ est arithmétique, et sa raison vaut $a$ : c'est ce qu'on ajoute chaque fois que $n$ augmente de $1$.",
+          "On calcule la différence entre deux termes consécutifs : $u(n+1) - u(n)$. Tout ce qui ne dépend pas de $n$ s'élimine, et il ne reste que le coefficient de $n$.",
+          `$u(n+1) = ${a}(n+1) + ${b} = ${a}n + ${a + b}$. ` +
+            `Donc $u(n+1) - u(n) = ${a + b} - ${b} = ${fr(a)}$ : une constante, indépendante de $n$. ` +
+            `⚠️ Le nombre $${b}$ n'est pas la raison : c'est le premier terme, $u(0) = ${b}$.`,
+          `La raison vaut $${fr(a)}$.`
         ),
       };
     },
