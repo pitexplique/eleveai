@@ -1041,6 +1041,58 @@ export const derivationBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — REMONTER de l'équation à la courbe. Le premier item construit
+    // l'équation de la tangente à partir de $f$ ; celui-ci part de l'équation
+    // et redonne $f(x_0)$. Tout tient à une évidence qu'on oublie : la tangente
+    // TOUCHE la courbe, donc en $x_0$ les deux passent par le même point. C'est
+    // la première ligne de tout exercice de bac où l'énoncé fournit la tangente.
+    kind: "template",
+    id: "stmg_der_tg_equation_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_tangente_equation",
+    microId: "der_tg_equation_reduite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "En $x_0$, la tangente et la courbe ont le même point : $f(x_0)$ se lit donc sur l'équation de la tangente.",
+    tags: ["stmg", "maths", "derivation", "canvas", "template", "short"],
+    generate: () => {
+      const a = pick([1, 2, -1, -2] as const);
+      const b = pick([0, 2, 3, -2, -4] as const);
+      const c = pick([0, 1, 2, -1, -3] as const);
+      const x0 = randomInt(-3, 3);
+      const f = (x: number) => a * x * x + b * x + c;
+      const pente = 2 * a * x0 + b;
+      const ord = f(x0) - pente * x0;
+      return {
+        text:
+          `La tangente à la courbe de $f$ au point d'abscisse $${x0}$ a pour équation ` +
+          `$y = ${pente === 1 ? "" : pente === -1 ? "-" : pente}x ${ord >= 0 ? "+" : "-"} ${Math.abs(ord)}$. ` +
+          `Que vaut $f(${x0})$ ?`,
+        format: "short",
+        expected: [fr(f(x0))],
+        comparator: "number_equal",
+        canvas: canvasParaboleDroite(
+          a,
+          b,
+          c,
+          { pente, ordonnee: ord, id: "tangente" },
+          `Tangente au point d'abscisse ${x0}`,
+          [{ x: x0 }]
+        ),
+        explanation: exp(
+          "Une tangente touche la courbe au point de contact : en $x_0$, la fonction et la tangente prennent la MÊME valeur. Autrement dit, $f(x_0)$ s'obtient en remplaçant $x$ par $x_0$ dans l'équation de la tangente.",
+          "On substitue $x_0$ dans l'équation de la droite — c'est un simple calcul, sans avoir besoin de connaître $f$.",
+          `$y = ${pente} \\times ${x0} ${ord >= 0 ? "+" : "-"} ${Math.abs(ord)} = ${fr(f(x0))}$, donc $f(${x0}) = ${fr(f(x0))}$. ` +
+            `Au passage, le coefficient directeur donne l'autre information : $f'(${x0}) = ${fr(pente)}$. ` +
+            `Une équation de tangente porte donc les DEUX nombres à la fois.`,
+          `$f(${x0}) = ${fr(f(x0))}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ der_tg_construire ═══════════════════ */
 
   {
@@ -1098,6 +1150,72 @@ export const derivationBank: TutorBankItemV4[] = [
           {
             choice: `$(${x0 + 1}\\,;\\,${fr(f(x0 + 1))})$`,
             cause: "a pris un second point SUR LA COURBE : on obtiendrait une sécante, pas la tangente",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — le GESTE de tracé, décrit en mots. Le premier item donne
+    // quatre points et fait choisir le bon ; celui-ci demande comment on s'y
+    // prend, à la règle, sur une feuille. C'est ce qu'on fait au tableau et ce
+    // qu'aucun QCM de coordonnées n'apprend : partir du point de contact, et
+    // avancer d'UNE unité en montant — ou en descendant — de $f'(x_0)$.
+    kind: "template",
+    id: "stmg_der_tg_construire_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_tangente_equation",
+    microId: "der_tg_construire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le coefficient directeur se lit « quand j'avance de $1$, je monte de… ».",
+    tags: ["stmg", "maths", "derivation", "canvas", "template"],
+    generate: () => {
+      const a = pick([1, 2, -1, -2] as const);
+      const b = pick([0, 2, 4, -2, -4, 6] as const);
+      const c = pick([0, 1, -1, 2, -2] as const);
+      const f = (x: number) => a * x * x + b * x + c;
+      // On écarte le sommet : « monter de 0 » ne décrit aucun geste.
+      let x0 = randomInt(-3, 3);
+      for (let essai = 0; essai < 40 && 2 * a * x0 + b === 0; essai++) x0 = randomInt(-3, 3);
+      const pente = 2 * a * x0 + b;
+      const monte = pente > 0;
+      const bonne =
+        `placer le point $(${x0}\\,;\\,${fr(f(x0))})$, puis avancer de $1$ vers la droite en ` +
+        `${monte ? "montant" : "descendant"} de $${fr(Math.abs(pente))}$`;
+      return {
+        text:
+          `On sait que $f(${x0}) = ${fr(f(x0))}$ et $f'(${x0}) = ${fr(pente)}$. ` +
+          `Comment tracer la tangente à la règle, sans calculer son équation ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `placer le point $(${x0}\\,;\\,${fr(f(x0))})$, puis avancer de $1$ vers la droite en ` +
+            `${monte ? "descendant" : "montant"} de $${fr(Math.abs(pente))}$`,
+          `placer le point $(${x0}\\,;\\,${fr(pente)})$, puis tracer une droite horizontale`,
+          `placer le point $(${fr(pente)}\\,;\\,${fr(f(x0))})$, puis joindre l'origine du repère`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasParaboleDroite(a, b, c, null, `Courbe de f — la tangente est à tracer`, [
+          { x: x0 },
+        ]),
+        explanation: exp(
+          "Une droite se trace avec deux points. Pour une tangente, le premier est le POINT DE CONTACT $(x_0\\,;\\,f(x_0))$, et le second se déduit du coefficient directeur : il dit de combien on monte quand on avance d'une unité.",
+          "On place le point de contact, on avance d'un carreau vers la droite, on monte (ou descend) du nombre dérivé, et l'on trace la droite passant par les deux.",
+          `Point de contact : $(${x0}\\,;\\,${fr(f(x0))})$. ` +
+            `Comme $f'(${x0}) = ${fr(pente)}$, on avance de $1$ et l'on ${monte ? "monte" : "descend"} de $${fr(Math.abs(pente))}$ : ` +
+            `on arrive en $(${x0 + 1}\\,;\\,${fr(f(x0) + pente)})$. ` +
+            `⚠️ Ce second point est sur la TANGENTE, pas sur la courbe — qui passe, elle, par $(${x0 + 1}\\,;\\,${fr(f(x0 + 1))})$.`,
+          `On part du point de contact et l'on suit la pente $${fr(pente)}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice:
+              `placer le point $(${x0}\\,;\\,${fr(f(x0))})$, puis avancer de $1$ vers la droite en ` +
+              `${monte ? "descendant" : "montant"} de $${fr(Math.abs(pente))}$`,
+            cause: `a pris le bon nombre mais le mauvais sens : $f'(${x0}) = ${fr(pente)}$ est ${monte ? "positif" : "négatif"}`,
           },
         ],
       };
@@ -1523,7 +1641,7 @@ export const derivationBank: TutorBankItemV4[] = [
         `$C'(x) = ${p === 1 ? "" : p}x ${q >= 0 ? "+" : "-"} ${Math.abs(q)}$`;
       return {
         text:
-          `Le coût total de production de $x$ ${prod.unite} est $C(x) = ${fr(a)}x^2 ${b >= 0 ? "+" : "-"} ${Math.abs(b)}x + ${c}$. ` +
+          `Le coût total de production de $x$ ${prod.unite} est $C(x) = ${a === 1 ? "" : fr(a)}x^2 ${b >= 0 ? "+" : "-"} ${Math.abs(b)}x + ${c}$. ` +
           `Quelle est l'expression du coût marginal $C'(x)$ ?`,
         format: "qcm",
         choices: makeChoices(ecrire(derA, b), [
@@ -1578,7 +1696,7 @@ export const derivationBank: TutorBankItemV4[] = [
       const bonne = `produire ${prod.un} de plus coûterait environ $${fr(marginal)}$ €`;
       return {
         text:
-          `Le coût total de production de $x$ ${prod.unite} est $C(x) = ${fr(a)}x^2 + ${b}x + ${c}$, en euros. ` +
+          `Le coût total de production de $x$ ${prod.unite} est $C(x) = ${a === 1 ? "" : fr(a)}x^2 + ${b}x + ${c}$, en euros. ` +
           `On calcule $C'(${x0}) = ${fr(marginal)}$. Que signifie ce nombre ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
@@ -2408,7 +2526,7 @@ export const derivationBank: TutorBankItemV4[] = [
       return {
         text:
           `Le bénéfice, en euros, réalisé pour la vente de $x$ ${prod.unite} est ` +
-          `$B(x) = -${a}x^2 + ${b}x - ${c}$. ` +
+          `$B(x) = -${a === 1 ? "" : a}x^2 + ${b}x - ${c}$. ` +
           `Pour quelle quantité le bénéfice est-il maximal ?`,
         format: "short",
         expected: [String(xOpt)],
@@ -2455,7 +2573,7 @@ export const derivationBank: TutorBankItemV4[] = [
       return {
         text:
           `Le bénéfice, en euros, réalisé pour la vente de $x$ ${prod.unite} est ` +
-          `$B(x) = -${a}x^2 + ${b}x - ${c}$. ` +
+          `$B(x) = -${a === 1 ? "" : a}x^2 + ${b}x - ${c}$. ` +
           `Quel est le bénéfice MAXIMAL, en euros ?`,
         format: "short",
         expected: [String(maxi)],
@@ -2498,7 +2616,7 @@ export const derivationBank: TutorBankItemV4[] = [
       return {
         text:
           `Le coût de fabrication, en euros, de $x$ ${prod.unite} par lot est ` +
-          `$C(x) = ${a}x^2 - ${b}x + ${c}$. ` +
+          `$C(x) = ${a === 1 ? "" : a}x^2 - ${b}x + ${c}$. ` +
           `Pour quelle taille de lot le coût est-il minimal ?`,
         format: "short",
         expected: [String(xOpt)],
@@ -2544,7 +2662,7 @@ export const derivationBank: TutorBankItemV4[] = [
         `$C'$ est NÉGATIVE avant $${xOpt}$ et POSITIVE après : le coût descend puis remonte`;
       return {
         text:
-          `Le coût de production d'un lot de $x$ ${prod.unite} est $C(x) = ${a}x^2 - ${b}x + 500$, en euros. ` +
+          `Le coût de production d'un lot de $x$ ${prod.unite} est $C(x) = ${a === 1 ? "" : a}x^2 - ${b}x + 500$, en euros. ` +
           `On trouve $C'(${xOpt}) = 0$. Comment sait-on qu'il s'agit d'un MINIMUM et non d'un maximum ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
@@ -2695,6 +2813,56 @@ export const derivationBank: TutorBankItemV4[] = [
             cause: "a échangé la quantité et le montant : les unités ne suivent plus",
           },
         ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — CALCULER l'ordonnée, au lieu de vérifier un point. Le premier
+    // item ne laisse que « oui » ou « non » : deux propositions, donc une
+    // chance sur deux au hasard, et un élève peut enchaîner les bonnes réponses
+    // sans jamais poser la substitution. Ici il n'y a rien à cocher — il faut
+    // remplacer $x$ dans l'équation et écrire le résultat.
+    kind: "template",
+    id: "stmg_der_tg_verifier_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_tangente_equation",
+    microId: "der_tg_verifier_point",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Remplace $x$ par l'abscisse demandée dans l'équation de la droite, puis calcule.",
+    tags: ["stmg", "maths", "derivation", "canvas", "template", "short"],
+    generate: () => {
+      const pente = pick([1, 2, 3, -1, -2, -3, 4, -4] as const);
+      const ord = pick([1, 2, 3, -1, -2, -3, 0, 5] as const);
+      const x = randomInt(-4, 5);
+      const y = pente * x + ord;
+      const a = pick([1, -1] as const);
+      const c = pick([0, 1, -1] as const);
+      return {
+        text:
+          `La tangente tracée a pour équation ` +
+          `$y = ${pente === 1 ? "" : pente === -1 ? "-" : pente}x ${ord >= 0 ? "+" : "-"} ${Math.abs(ord)}$. ` +
+          `Quelle est l'ordonnée du point de cette tangente d'abscisse $${x}$ ?`,
+        format: "short",
+        expected: [fr(y)],
+        comparator: "number_equal",
+        canvas: canvasParaboleDroite(
+          a,
+          0,
+          c,
+          { pente, ordonnee: ord, id: "tan" },
+          "La tangente d'équation donnée"
+        ),
+        explanation: exp(
+          "Une équation de droite $y = ax + b$ associe à chaque abscisse une ordonnée, et une seule : il suffit de remplacer $x$ pour l'obtenir.",
+          "On substitue l'abscisse demandée, puis on effectue le calcul en respectant les signes.",
+          `$y = ${pente} \\times ${x} ${ord >= 0 ? "+" : "-"} ${Math.abs(ord)} = ${fr(y)}$. ` +
+            `Le point de la tangente d'abscisse $${x}$ est donc $(${x}\\,;\\,${fr(y)})$. ` +
+            `⚠️ Ce point est sur la TANGENTE : il n'est sur la courbe que si $${x}$ est le point de contact lui-même.`,
+          `L'ordonnée vaut $${fr(y)}$.`
+        ),
       };
     },
   },
