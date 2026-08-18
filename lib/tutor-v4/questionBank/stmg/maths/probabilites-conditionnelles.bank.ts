@@ -116,6 +116,11 @@ function singulier(ctx: Contexte): string {
   return ctx.individu.slice(0, -1);
 }
 
+/** « parmi ceux-là » / « parmi celles-là », selon le genre. */
+function ceuxLa(ctx: Contexte): string {
+  return ctx.genre === "f" ? "celles-là" : "ceux-là";
+}
+
 const CONTEXTES: readonly Contexte[] = [
   {
     sujet: "Production sur deux chaînes",
@@ -1342,6 +1347,60 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — le PREMIER niveau. Le premier item interroge le second, celui
+    // qui porte les conditionnelles ; il reste à savoir ce que porte le
+    // premier. Les deux ne se répondent pas de la même façon, et l'élève qui
+    // croit l'arbre entièrement conditionnel divise là où il ne faut pas.
+    kind: "template",
+    id: "stmg_probaT_construire_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_arbre",
+    microId: "probaT_arbre_construire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Au premier niveau, rien n'est encore connu : aucune condition ne s'applique.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "template"],
+    generate: () => {
+      const ctx = pick(CONTEXTES);
+      const p1 = pick(PROBAS);
+      const pC1 = pick(PROBAS);
+      const pC2 = pick(PROBAS);
+      const bonne = `des probabilités SIMPLES : celles des deux provenances possibles`;
+      return {
+        text: `Que représentent les probabilités portées par le PREMIER niveau de cet arbre ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          "des probabilités conditionnelles, comme au second niveau",
+          "des probabilités d'intersection",
+          "les probabilités que l'on cherche à calculer au bout des chemins",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasArbre(ctx, p1, pC1, pC2, `Arbre pondéré — ${ctx.sujet}`),
+        explanation: exp(
+          "Les branches issues de la RACINE portent des probabilités simples : à ce stade, on ne sait encore rien. Ce sont les branches du second niveau qui sont conditionnelles, puisqu'elles supposent connue la provenance.",
+          "On regarde d'où part la branche : de la racine, la probabilité est simple ; d'un nœud déjà atteint, elle est conditionnelle à ce nœud.",
+          `$P(${ctx.courtL[0]}) = ${fr(p1)}$ : c'est une probabilité simple, et $${fr(p1)} + ${fr(Math.round((1 - p1) * 10000) / 10000)} = 1$. ` +
+            `En revanche $P_{${ctx.courtL[0]}}(${ctx.courtC[0]}) = ${fr(pC1)}$ suppose déjà la provenance connue. ` +
+            `Le produit des deux, $${fr(p1)} \\times ${fr(pC1)} = ${fr(Math.round(p1 * pC1 * 10000) / 10000)}$, donne l'intersection — au BOUT du chemin, pas sur une branche.`,
+          `Le premier niveau porte des probabilités simples ; seul le second est conditionnel.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "des probabilités conditionnelles, comme au second niveau",
+            cause: "à la racine, aucune information n'est encore acquise : il n'y a rien à conditionner",
+          },
+          {
+            choice: "des probabilités d'intersection",
+            cause: "une intersection se lit au BOUT d'un chemin, comme produit des branches — jamais sur une branche seule",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ probaT_arbre_ponderer ═══════════════ */
 
   {
@@ -1371,6 +1430,53 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           "On retire à $1$ la probabilité de l'autre branche partant du même nœud.",
           `$1 - ${fr(p1)} = ${fr(Math.round((1 - p1) * 10000) / 10000)}$.`,
           `La branche porte $${fr(Math.round((1 - p1) * 10000) / 10000)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — pondérer DEPUIS L'ÉNONCÉ, pas depuis l'arbre. Le premier item
+    // complète une branche par la règle « la somme vaut 1 » ; ici le nombre est
+    // dans la phrase, et tout est de savoir où il va. « Parmi celles de la
+    // chaîne 1, 3 % sont non conformes » se pose SUR une branche du second
+    // niveau — pas au bout du chemin, où l'élève le multiplie par erreur.
+    kind: "template",
+    id: "stmg_probaT_ponderer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_arbre",
+    microId: "probaT_arbre_ponderer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une phrase qui commence par « parmi » donne une CONDITIONNELLE : elle se pose telle quelle sur une branche du second niveau.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "piege", "template", "short"],
+    generate: () => {
+      const ctx = pick(CONTEXTES);
+      const p1 = pick(PROBAS);
+      // ⚠️ La branche cherchée ne doit pas porter le même nombre que celle du
+      // premier niveau : sinon l'élève peut recopier au hasard l'un des deux et
+      // tomber juste sans avoir choisi.
+      let pC1 = pick(PROBAS);
+      for (let essai = 0; essai < 20 && pC1 === p1; essai++) pC1 = pick(PROBAS);
+      const pC2 = pick(PROBAS);
+      return {
+        text:
+          `Une étude indique : une proportion $${fr(Math.round(p1 * 100) / 100)}$ des ${ctx.individu} ` +
+          `vient de « ${ctx.courtL[0]} », et PARMI ${ceuxLa(ctx)} une proportion $${fr(pC1)}$ ` +
+          `est « ${ctx.courtC[0]} ». ` +
+          `Quelle probabilité doit porter la branche marquée « ? » ?`,
+        format: "short",
+        expected: [fr(pC1)],
+        comparator: "number_equal",
+        canvas: canvasArbre(ctx, p1, pC1, pC2, `Arbre à pondérer — ${ctx.sujet}`, "pC1"),
+        explanation: exp(
+          "Une branche du second niveau porte une probabilité CONDITIONNELLE : celle de l'évènement sachant la branche déjà empruntée. Une phrase en « parmi » donne exactement cela, et se recopie telle quelle.",
+          "On repère ce qui suit « parmi » — c'est le nœud de départ — puis on pose le nombre annoncé sur la branche qui en sort vers l'évènement cité. Sans multiplier.",
+          `La branche cherchée est $P_{${ctx.courtL[0]}}(${ctx.courtC[0]}) = ${fr(pC1)}$, recopiée depuis l'énoncé. ` +
+            `⚠️ Le produit $${fr(Math.round(p1 * 100) / 100)} \\times ${fr(pC1)} = ${fr(Math.round(p1 * pC1 * 10000) / 10000)}$ ` +
+            `est autre chose : c'est $P(${ctx.courtL[0]} \\cap ${ctx.courtC[0]})$, la valeur du CHEMIN entier, qui se lit au bout.`,
+          `La branche porte $${fr(pC1)}$.`
         ),
       };
     },
@@ -1409,6 +1515,81 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           `La branche manquante part de ${noeud}. L'autre branche issue du même nœud porte ` +
             `$${fr(Math.round((1 - valeur) * 10000) / 10000)}$, donc la manquante vaut $1 - ${fr(Math.round((1 - valeur) * 10000) / 10000)} = ${fr(valeur)}$.`,
           `La probabilité manquante vaut $${fr(valeur)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — CONTRÔLER un arbre, au lieu de le compléter. Le premier item
+    // remplit un trou ; celui-ci met sous les yeux un arbre dont un nœud est
+    // impossible — ses deux branches font plus de 1 — et fait corriger.
+    // Vérifier qu'un arbre tient debout est le premier geste devant un arbre
+    // qu'on n'a pas construit soi-même.
+    kind: "template",
+    id: "stmg_probaT_completer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_arbre",
+    microId: "probaT_arbre_completer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "À chaque nœud, les branches qui en sortent décrivent tous les cas possibles : leur somme vaut exactement $1$.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "piege", "template", "short"],
+    generate: () => {
+      const ctx = pick(CONTEXTES);
+      const p1 = pick(PROBAS);
+      const pC1 = pick(PROBAS);
+      const pC2 = pick(PROBAS);
+      // La seconde branche du nœud « courtL[0] » est FAUSSE : elle porte une
+      // valeur qui ne complète pas pC1 à 1. L'arbre est donc dessiné à la main
+      // ici, `canvasArbre` calculant toujours le complément correct.
+      // ⚠️ La valeur fausse doit dépasser le complément SANS atteindre $1$ :
+      // à $1$ pile, la branche ne serait plus une étourderie mais une
+      // certitude, et le nœud resterait défendable. On choisit donc l'écart
+      // d'abord, et l'on n'accepte que les $p_{C1}$ qui le supportent.
+      const ecart = pick([0.1, 0.15, 0.2, 0.25] as const);
+      let base = pC1;
+      for (let essai = 0; essai < 40 && base <= ecart; essai++) base = pick(PROBAS);
+      const fausse = Math.round((1 - base + ecart) * 100) / 100;
+      const complement = Math.round((1 - base) * 10000) / 10000;
+      return {
+        text:
+          `Sur cet arbre, les deux branches issues de « ${ctx.courtL[0]} » portent $${fr(base)}$ et $${fr(fausse)}$. ` +
+          `C'est impossible. Quelle valeur la seconde devrait-elle porter ?`,
+        format: "short",
+        expected: [fr(complement)],
+        comparator: "number_equal",
+        canvas: {
+          kind: "arbre_proba",
+          titre: `Arbre à vérifier — ${ctx.sujet}`,
+          racineEnfants: [
+            {
+              label: ctx.courtL[0],
+              proba: fr(p1),
+              enfants: [
+                { label: ctx.courtC[0], proba: fr(base) },
+                { label: ctx.courtC[1], proba: fr(fausse) },
+              ],
+            },
+            {
+              label: ctx.courtL[1],
+              proba: fr(Math.round((1 - p1) * 10000) / 10000),
+              enfants: [
+                { label: ctx.courtC[0], proba: fr(pC2) },
+                { label: ctx.courtC[1], proba: fr(Math.round((1 - pC2) * 10000) / 10000) },
+              ],
+            },
+          ],
+        } satisfies CanvasFigure,
+        explanation: exp(
+          "Les branches issues d'un même nœud forment une partition : elles couvrent tous les cas, sans se recouvrir. La somme de leurs probabilités vaut donc exactement $1$ — jamais plus, jamais moins.",
+          "On additionne les branches de chaque nœud pour contrôler l'arbre, puis on corrige celle qui déséquilibre la somme.",
+          `$${fr(base)} + ${fr(fausse)} = ${fr(Math.round((base + fausse) * 100) / 100)}$, ` +
+            `soit $${fr(Math.round((pC1 + fausse - 1) * 100) / 100)}$ de trop. ` +
+            `La seconde branche doit valoir $1 - ${fr(base)} = ${fr(complement)}$. ` +
+            `Le nœud « ${ctx.courtL[1]} », lui, est correct : $${fr(pC2)} + ${fr(Math.round((1 - pC2) * 10000) / 10000)} = 1$.`,
+          `La branche devrait porter $${fr(complement)}$.`
         ),
       };
     },
@@ -1467,6 +1648,65 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — OÙ se place un nombre, plutôt que ce qu'il veut dire. Le
+    // premier item lit une branche et la traduit ; celui-ci part de la phrase
+    // et cherche sa place sur l'arbre. C'est le geste de construction, et il se
+    // rate toujours au même endroit : une conditionnelle posée au bout du
+    // chemin, là où seul un produit a le droit de figurer.
+    kind: "template",
+    id: "stmg_probaT_interpreter_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_arbre",
+    microId: "probaT_arbre_interpreter",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« Parmi les … » désigne un nœud de départ : le nombre se pose sur une branche qui en SORT.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "piege", "template"],
+    generate: () => {
+      const ctx = pick(CONTEXTES);
+      const p1 = pick(PROBAS);
+      const pC1 = pick(PROBAS);
+      const pC2 = pick(PROBAS);
+      const bonne = `sur la branche du SECOND niveau qui va de « ${ctx.courtL[0]} » vers « ${ctx.courtC[1]} »`;
+      return {
+        text:
+          `L'énoncé dit : « parmi les ${ctx.individu} venant de « ${ctx.courtL[0]} », une proportion ` +
+          `$${fr(Math.round((1 - pC1) * 100) / 100)}$ est « ${ctx.courtC[1]} » ». ` +
+          `Où ce nombre se place-t-il sur l'arbre ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `sur la branche du PREMIER niveau menant à « ${ctx.courtL[0]} »`,
+          `au bout du chemin « ${ctx.courtL[0]} » → « ${ctx.courtC[1]} », comme résultat`,
+          `sur la branche du second niveau qui part de « ${ctx.courtL[1]} »`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasArbre(ctx, p1, pC1, pC2, `Arbre pondéré — ${ctx.sujet}`),
+        explanation: exp(
+          "Une phrase en « parmi les $X$ » annonce une probabilité conditionnelle sachant $X$. Elle se place sur une branche ISSUE du nœud $X$, au second niveau.",
+          "On identifie le nœud de départ dans le mot qui suit « parmi », puis la branche qui en sort vers l'évènement cité.",
+          `Le nombre est $P_{${ctx.courtL[0]}}(${ctx.courtC[1]})$ : il part du nœud « ${ctx.courtL[0]} » et va vers « ${ctx.courtC[1]} ». ` +
+            `Au bout de ce chemin figure autre chose : le produit ` +
+            `$${fr(p1)} \\times ${fr(Math.round((1 - pC1) * 100) / 100)} = ${fr(Math.round(p1 * (1 - pC1) * 10000) / 10000)}$, ` +
+            `qui est la probabilité d'intersection.`,
+          `Le nombre se pose sur une branche du second niveau, issue de « ${ctx.courtL[0]} ».`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `au bout du chemin « ${ctx.courtL[0]} » → « ${ctx.courtC[1]} », comme résultat`,
+            cause: "au bout d'un chemin figure le PRODUIT des branches, c'est-à-dire une intersection — pas la conditionnelle elle-même",
+          },
+          {
+            choice: `sur la branche du PREMIER niveau menant à « ${ctx.courtL[0]} »`,
+            cause: "cette branche-là porte la probabilité de la provenance, sans condition",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ probaT_chemin ═══════════════════ */
 
   {
@@ -1507,6 +1747,48 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — REMONTER le chemin. Le premier item multiplie les deux branches
+    // pour obtenir l'intersection ; celui-ci donne l'intersection et une des
+    // branches, et fait retrouver l'autre. C'est une division, et c'est la
+    // formule $P(A \cap B) = P(A) \times P_A(B)$ lue de droite à gauche —
+    // celle dont on se sert quand un énoncé donne le résultat final.
+    kind: "template",
+    id: "stmg_probaT_chemin_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_arbre_calcul",
+    microId: "probaT_chemin",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le bout du chemin est le PRODUIT des deux branches : pour retrouver l'une, on divise par l'autre.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "template", "short"],
+    generate: () => {
+      const ctx = pick(CONTEXTES);
+      const p1 = pick(PROBAS);
+      const pC1 = pick(PROBAS);
+      const pC2 = pick(PROBAS);
+      const chemin = Math.round(p1 * pC1 * 10000) / 10000;
+      return {
+        text:
+          `Sur cet arbre, la branche menant à « ${ctx.courtL[0]} » porte $${fr(p1)}$, et le chemin ` +
+          `« ${ctx.courtL[0]} » → « ${ctx.courtC[0]} » aboutit à $${fr(chemin)}$. ` +
+          `Quelle probabilité porte la seconde branche de ce chemin ? (arrondi au centième)`,
+        format: "short",
+        expected: [fr(Math.round(pC1 * 100) / 100)],
+        comparator: "number_equal",
+        canvas: canvasArbre(ctx, p1, pC1, pC2, `Arbre pondéré — ${ctx.sujet}`, "pC1"),
+        explanation: exp(
+          "La probabilité au bout d'un chemin est le produit des branches parcourues : $P(A \\cap B) = P(A) \\times P_A(B)$. Cette égalité se lit dans les deux sens.",
+          "On divise la valeur du chemin par la branche connue : la branche cherchée en est le quotient.",
+          `$${fr(p1)} \\times \\text{?} = ${fr(chemin)}$, donc $\\text{?} = \\dfrac{${fr(chemin)}}{${fr(p1)}} = ${fr(Math.round(pC1 * 100) / 100)}$. ` +
+            `C'est la conditionnelle $P_{${ctx.courtL[0]}}(${ctx.courtC[0]})$ — et non $${fr(chemin)}$, qui vaut l'intersection.`,
+          `La seconde branche porte $${fr(Math.round(pC1 * 100) / 100)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ probaT_somme_chemins ═══════════════ */
 
   {
@@ -1542,6 +1824,53 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           `Chemin par « ${ctx.courtL[0]} » : $${fr(p1)} \\times ${fr(pC1)} = ${fr(Math.round(chemin1 * 10000) / 10000)}$. ` +
             `Chemin par « ${ctx.courtL[1]} » : $${fr(Math.round((1 - p1) * 10000) / 10000)} \\times ${fr(pC2)} = ${fr(Math.round(chemin2 * 10000) / 10000)}$. ` +
             `Somme : $${fr(Math.round(total * 10000) / 10000)}$.`,
+          `La probabilité vaut environ $${fr(Math.round(total * 1000) / 1000)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — le CONTRAIRE, et la vérification qui va avec. Le premier item
+    // additionne les deux chemins menant à « conforme » ; celui-ci demande la
+    // probabilité contraire, qu'on peut obtenir de DEUX façons — en additionnant
+    // les deux autres chemins, ou en retirant à 1. Les deux doivent donner le
+    // même nombre, et c'est ce contrôle-là qui rattrape un chemin oublié.
+    kind: "template",
+    id: "stmg_probaT_somme_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_arbre_calcul",
+    microId: "probaT_somme_chemins",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Deux routes : additionner les deux chemins qui y mènent, ou retirer à $1$ la probabilité contraire.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "template", "short"],
+    generate: () => {
+      const ctx = pick(CONTEXTES);
+      const p1 = pick(PROBAS);
+      const pC1 = pick(PROBAS);
+      const pC2 = pick(PROBAS);
+      const cheminA = p1 * (1 - pC1);
+      const cheminB = (1 - p1) * (1 - pC2);
+      const total = cheminA + cheminB;
+      const conforme = p1 * pC1 + (1 - p1) * pC2;
+      return {
+        text:
+          `D'après l'arbre, quelle est la probabilité qu'${unUne(ctx)} ${singulier(ctx)} soit ` +
+          `« ${ctx.courtC[1]} », quelle que soit sa provenance ? (arrondi au millième)`,
+        format: "short",
+        expected: [fr(Math.round(total * 1000) / 1000)],
+        comparator: "number_equal",
+        canvas: canvasArbre(ctx, p1, pC1, pC2, `Arbre pondéré — ${ctx.sujet}`),
+        explanation: exp(
+          "Un évènement qui peut survenir par plusieurs provenances se lit sur TOUS les chemins qui y mènent : on multiplie le long de chaque chemin, puis on additionne les chemins.",
+          "On repère les chemins dont l'extrémité porte l'évènement cherché, on calcule chacun, et l'on fait la somme. Puis on vérifie par le contraire.",
+          `Chemin « ${ctx.courtL[0]} » : $${fr(p1)} \\times ${fr(Math.round((1 - pC1) * 10000) / 10000)} = ${fr(Math.round(cheminA * 10000) / 10000)}$. ` +
+            `Chemin « ${ctx.courtL[1]} » : $${fr(Math.round((1 - p1) * 10000) / 10000)} \\times ${fr(Math.round((1 - pC2) * 10000) / 10000)} = ${fr(Math.round(cheminB * 10000) / 10000)}$. ` +
+            `Somme : $${fr(Math.round(total * 1000) / 1000)}$. ` +
+            `Contrôle par le contraire : « ${ctx.courtC[0]} » vaut $${fr(Math.round(conforme * 1000) / 1000)}$, ` +
+            `et $1 - ${fr(Math.round(conforme * 1000) / 1000)}$ redonne bien le même nombre.`,
           `La probabilité vaut environ $${fr(Math.round(total * 1000) / 1000)}$.`
         ),
       };
@@ -1596,6 +1925,73 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — l'erreur d'APPLICATION. Le premier item fait reconnaître la
+    // bonne formule ; celui-ci montre la formule bien connue et mal appliquée :
+    // un chemin multiplié, l'autre recopié tel quel. Choisir la bonne écriture
+    // dans une liste et l'écrire soi-même sans en perdre un morceau sont deux
+    // choses différentes.
+    kind: "template",
+    id: "stmg_probaT_totales_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_arbre_calcul",
+    microId: "probaT_probabilites_totales",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Chaque chemin est un PRODUIT de deux branches. Compte les multiplications : il en faut autant que de chemins.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "piege", "template"],
+    generate: () => {
+      const ctx = pick(CONTEXTES);
+      const p1 = pick(PROBAS);
+      const pC1 = pick(PROBAS);
+      // ⚠️ Deux conditionnelles DIFFÉRENTES : sinon le distracteur « additionner
+      // les deux conditionnelles, $0,75$ et $0,75$ » se lit comme une plaisanterie,
+      // et le nombre cité dans la bonne réponse ne désigne plus une seule branche.
+      let pC2 = pick(PROBAS);
+      for (let essai = 0; essai < 20 && pC2 === pC1; essai++) pC2 = pick(PROBAS);
+      const p2 = Math.round((1 - p1) * 10000) / 10000;
+      const juste = Math.round((p1 * pC1 + p2 * pC2) * 10000) / 10000;
+      const faux = Math.round((p1 + p2 * pC2) * 10000) / 10000;
+      const bonne = `il a oublié de multiplier le premier chemin par sa branche, $${fr(pC1)}$`;
+      return {
+        text:
+          // L'étiquette reste HORS des dollars : « $P(Poids OK)$ » passait en
+          // italique mathématique, espace comprise.
+          `Pour calculer la probabilité d'être « ${ctx.courtC[0]} », un élève écrit : ` +
+          `« $${fr(p1)} + ${fr(p2)} \\times ${fr(pC2)} = ${fr(faux)}$ ». Où est l'erreur ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          "il fallait multiplier les deux chemins l'un par l'autre, au lieu de les additionner",
+          `il fallait additionner les deux conditionnelles, $${fr(pC1)}$ et $${fr(pC2)}$`,
+          "il n'y a pas d'erreur : le calcul est correct",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasArbre(ctx, p1, pC1, pC2, `Arbre pondéré — ${ctx.sujet}`),
+        explanation: exp(
+          "La formule des probabilités totales additionne des CHEMINS, et chaque chemin est le produit de ses deux branches : $P(B) = P(A) \\times P_A(B) + P(\\overline{A}) \\times P_{\\overline{A}}(B)$.",
+          "On compte les multiplications : il en faut une par chemin. Un terme qui n'en porte aucune est un chemin resté à moitié parcouru.",
+          `Le second terme est juste : $${fr(p2)} \\times ${fr(pC2)}$. Le premier, non : $${fr(p1)}$ seul est la probabilité de la PROVENANCE, ` +
+            `pas celle du chemin. Il fallait écrire $${fr(p1)} \\times ${fr(pC1)}$. ` +
+            `Résultat correct : $${fr(Math.round(p1 * pC1 * 10000) / 10000)} + ${fr(Math.round(p2 * pC2 * 10000) / 10000)} = ${fr(juste)}$, ` +
+            `et non $${fr(faux)}$.`,
+          `L'erreur est un chemin laissé sans sa branche conditionnelle : $P(${ctx.courtC[0]}) = ${fr(juste)}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "il n'y a pas d'erreur : le calcul est correct",
+            cause: `le second terme est bien un produit, le premier ne l'est pas — d'où un écart de ${fr(Math.round((faux - juste) * 10000) / 10000)}`,
+          },
+          {
+            choice: `il fallait additionner les deux conditionnelles, $${fr(pC1)}$ et $${fr(pC2)}$`,
+            cause: "additionner deux conditionnelles n'a pas de sens : elles portent sur des populations différentes",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════ probaT_arbre_vers_tableau ═══════════ */
 
   {
@@ -1639,6 +2035,49 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — le pont dans l'AUTRE SENS. Le premier item part de l'arbre et
+    // retrouve les effectifs ; celui-ci part du tableau et demande ce que porte
+    // la branche. Les deux représentations disent la même chose, mais passer de
+    // l'une à l'autre suppose de savoir quel dénominateur va où — et c'est
+    // exactement ce qu'un sujet de bac demande en première question.
+    kind: "template",
+    id: "stmg_probaT_vers_tableau_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_arbre_calcul",
+    microId: "probaT_arbre_vers_tableau",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une branche du second niveau se lit DANS sa ligne : le dénominateur est l'effectif de la provenance, pas le total.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "template", "short"],
+    generate: () => {
+      const t = tirerTableau();
+      const c = t.ctx;
+      const valeur = t.a / t.ligne1;
+      return {
+        text:
+          `Ce tableau porte sur $${t.total}$ ${c.individu}. On veut en construire l'arbre pondéré, ` +
+          `avec la provenance au premier niveau. ` +
+          `Quelle probabilité doit porter la branche allant de « ${c.lignes[0]} » vers « ${c.colonnes[0]} » ? ` +
+          `(arrondi au centième)`,
+        format: "short",
+        expected: [fr(Math.round(valeur * 100) / 100)],
+        comparator: "number_equal",
+        canvas: canvasTableau(t),
+        explanation: exp(
+          "Dans un arbre, une branche du second niveau porte une probabilité CONDITIONNELLE : elle se calcule dans la sous-population de son nœud de départ, pas sur l'ensemble.",
+          "On lit la case croisée pour le numérateur, et l'effectif marginal de la LIGNE de départ pour le dénominateur.",
+          `$P_{${c.lignes[0]}}(${c.colonnes[0]}) = \\dfrac{${t.a}}{${t.ligne1}} \\approx ${fr(Math.round(valeur * 100) / 100)}$. ` +
+            `⚠️ Diviser par le total donnerait $\\dfrac{${t.a}}{${t.total}} \\approx ${fr(Math.round((t.a / t.total) * 100) / 100)}$ : ` +
+            `c'est l'intersection, celle qu'on lit AU BOUT du chemin. ` +
+            `La branche du premier niveau, elle, porte $\\dfrac{${t.ligne1}}{${t.total}} \\approx ${fr(Math.round((t.ligne1 / t.total) * 100) / 100)}$.`,
+          `La branche porte environ $${fr(Math.round(valeur * 100) / 100)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ probaT_indep_definition ═══════════════ */
 
   {
@@ -1677,6 +2116,61 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — l'indépendance DITE AVEC DES CONDITIONNELLES. Le premier item
+    // s'appuie sur $P(A \cap B) = P(A) \times P(B)$ ; celui-ci sur l'autre
+    // visage de la même propriété, $P_A(B) = P(B)$ — le plus parlant : savoir
+    // que $A$ est réalisé n'apprend rien sur $B$. C'est cette écriture-là qu'on
+    // utilise devant un arbre, où les conditionnelles sont déjà écrites.
+    kind: "template",
+    id: "stmg_probaT_indep_def_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_independance",
+    microId: "probaT_indep_definition",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Indépendants veut dire : la condition ne change rien à la probabilité.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "template"],
+    generate: () => {
+      const t = tirerTableauIndependant();
+      const c = t.ctx;
+      const bonne = "$P_A(B) = P(B)$ : savoir que $A$ est réalisé ne change rien à la probabilité de $B$";
+      return {
+        text:
+          `Deux évènements $A$ et $B$ sont indépendants. ` +
+          `Que peut-on en dire de la probabilité conditionnelle $P_A(B)$ ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          "$P_A(B) = P(A)$",
+          "$P_A(B) = 0$ : les deux évènements ne peuvent pas se produire ensemble",
+          "$P_A(B) = P(A) \\times P(B)$",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasTableau(t),
+        explanation: exp(
+          "Deux évènements sont indépendants quand la réalisation de l'un n'apporte aucune information sur l'autre. Cela s'écrit $P_A(B) = P(B)$, ou de façon équivalente $P(A \\cap B) = P(A) \\times P(B)$.",
+          "On calcule la probabilité conditionnelle, puis la probabilité simple : si les deux coïncident, la condition n'a rien changé.",
+          `Sur ce tableau : $P_A(B) = \\dfrac{${t.a}}{${t.ligne1}} = ${fr(Math.round((t.a / t.ligne1) * 1000) / 1000)}$ et ` +
+            `$P(B) = \\dfrac{${t.col1}}{${t.total}} = ${fr(Math.round((t.col1 / t.total) * 1000) / 1000)}$ : les deux sont égales. ` +
+            `⛔ Indépendant n'est pas incompatible : ici $P(A \\cap B) = ${fr(Math.round((t.a / t.total) * 1000) / 1000)}$, qui n'est pas nul.`,
+          `Si $A$ et $B$ sont indépendants, alors $P_A(B) = P(B)$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "$P_A(B) = 0$ : les deux évènements ne peuvent pas se produire ensemble",
+            cause: "c'est la définition d'évènements INCOMPATIBLES — deux notions différentes, souvent confondues",
+          },
+          {
+            choice: "$P_A(B) = P(A) \\times P(B)$",
+            cause: "c'est $P(A \\cap B)$ qui vaut ce produit, pas la probabilité conditionnelle",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ probaT_indep_produit ═══════════════ */
 
   {
@@ -1705,6 +2199,46 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
           "On multiplie les deux probabilités — cette formule n'est valable QUE dans le cas indépendant.",
           `$${fr(pA)} \\times ${fr(pB)} = ${fr(Math.round(pA * pB * 10000) / 10000)}$.`,
           `$P(A \\cap B) = ${fr(Math.round(pA * pB * 10000) / 10000)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — l'indépendance SUPPOSÉE, qui sert à calculer. Le premier item
+    // vérifie une égalité ; celui-ci s'appuie dessus pour retrouver une donnée
+    // manquante. C'est l'usage réel de l'hypothèse d'indépendance : elle ne se
+    // teste pas toujours, elle se pose — et elle donne alors un nombre.
+    kind: "template",
+    id: "stmg_probaT_indep_produit_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_independance",
+    microId: "probaT_indep_produit",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Si $A$ et $B$ sont indépendants, $P(A \\cap B) = P(A) \\times P(B)$ : une division suffit à retrouver la manquante.",
+    tags: ["stmg", "maths", "probabilites", "template", "short"],
+    generate: () => {
+      // On part de la réponse pour que le quotient tombe juste au centième.
+      const pA = pick([0.2, 0.25, 0.4, 0.5, 0.8] as const);
+      const pB = pick([0.1, 0.2, 0.25, 0.3, 0.5, 0.6] as const);
+      const inter = Math.round(pA * pB * 10000) / 10000;
+      return {
+        text:
+          `Deux évènements $A$ et $B$ sont INDÉPENDANTS. On sait que $P(A) = ${fr(pA)}$ et ` +
+          `$P(A \\cap B) = ${fr(inter)}$. Que vaut $P(B)$ ?`,
+        format: "short",
+        expected: [fr(pB)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Quand deux évènements sont indépendants, la probabilité de leur intersection est le produit de leurs probabilités : $P(A \\cap B) = P(A) \\times P(B)$. Cette égalité permet de retrouver l'une des trois quantités à partir des deux autres.",
+          "On isole la probabilité cherchée en divisant l'intersection par la probabilité connue.",
+          `$P(B) = \\dfrac{P(A \\cap B)}{P(A)} = \\dfrac{${fr(inter)}}{${fr(pA)}} = ${fr(pB)}$. ` +
+            `Vérification : $${fr(pA)} \\times ${fr(pB)} = ${fr(inter)}$. ` +
+            `⚠️ Sans l'hypothèse d'indépendance, ce calcul serait faux : $\\dfrac{P(A \\cap B)}{P(A)}$ donnerait $P_A(B)$, ` +
+            `qui ne vaut $P(B)$ que dans ce cas précis.`,
+          `$P(B) = ${fr(pB)}$.`
         ),
       };
     },
@@ -1752,6 +2286,66 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
             ? "Les deux valeurs coïncident : les évènements sont indépendants."
             : "Les deux valeurs diffèrent : les évènements ne sont pas indépendants."
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — CONCLURE, en gestion. Le premier item justifie l'indépendance
+    // par le calcul ; celui-ci part de deux taux égaux lus sur un arbre et
+    // demande ce qu'on en tire. C'est la seule question qui intéresse
+    // l'entreprise : si le taux de rebut est le même partout, changer de chaîne
+    // ne sert à rien — et c'est exactement ce que dit l'indépendance.
+    kind: "template",
+    id: "stmg_probaT_indep_justifier_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "proba_independance",
+    microId: "probaT_indep_justifier",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Deux branches conditionnelles égales : la provenance n'apprend rien sur le résultat.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "template"],
+    generate: () => {
+      const ctx = pick(CONTEXTES);
+      const p1 = pick(PROBAS);
+      // MÊME taux sur les deux provenances : c'est l'indépendance, vue sur l'arbre.
+      const taux = pick([0.05, 0.1, 0.15, 0.2, 0.25] as const);
+      const pC = Math.round((1 - taux) * 100) / 100;
+      const bonne =
+        `« ${ctx.courtC[1]} » est INDÉPENDANT de la provenance : connaître la provenance n'apprend rien`;
+      return {
+        text:
+          `Sur cet arbre, la probabilité d'être « ${ctx.courtC[1]} » vaut $${fr(taux)}$ ` +
+          `depuis « ${ctx.courtL[0]} » COMME depuis « ${ctx.courtL[1]} ». Qu'en conclure ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `les deux provenances fournissent le même NOMBRE de ${ctx.individu}`,
+          `« ${ctx.courtC[1]} » et « ${ctx.courtL[0]} » sont incompatibles`,
+          "on ne peut rien conclure sans connaître l'effectif total",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasArbre(ctx, p1, pC, pC, `Arbre pondéré — ${ctx.sujet}`),
+        explanation: exp(
+          "Quand les deux branches conditionnelles menant à un même évènement portent la MÊME probabilité, la condition n'a aucun effet : $P_A(B) = P_{\\overline{A}}(B) = P(B)$. C'est la définition de l'indépendance.",
+          "On compare les deux branches du second niveau qui mènent au même évènement. Égales, la provenance n'apporte aucune information.",
+          `Les deux valent $${fr(taux)}$. La probabilité totale vaut alors ` +
+            `$${fr(p1)} \\times ${fr(taux)} + ${fr(Math.round((1 - p1) * 10000) / 10000)} \\times ${fr(taux)} = ${fr(taux)}$ : ` +
+            `on retombe sur le même nombre, quelle que soit la répartition entre les deux provenances. ` +
+            `Concrètement : changer de « ${ctx.courtL[0]} » pour « ${ctx.courtL[1]} » ne ferait rien gagner.`,
+          `« ${ctx.courtC[1]} » est indépendant de la provenance.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `les deux provenances fournissent le même NOMBRE de ${ctx.individu}`,
+            cause: `c'est une autre question : ici $P(${ctx.courtL[0]}) = ${fr(p1)}$, les deux provenances n'ont pas le même poids`,
+          },
+          {
+            choice: `« ${ctx.courtC[1]} » et « ${ctx.courtL[0]} » sont incompatibles`,
+            cause: "incompatibles voudrait dire qu'ils ne se produisent jamais ensemble — ici ils se produisent ensemble, et souvent",
+          },
+        ],
       };
     },
   },
