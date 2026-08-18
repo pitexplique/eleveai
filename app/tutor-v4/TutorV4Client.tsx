@@ -100,6 +100,7 @@ import {
 import AudioBoost from "@/components/AudioBoost";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import BoiteAOutils from "@/components/BoiteAOutils";
+import Image from "next/image";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -2347,9 +2348,33 @@ function WrongAnswerPanel({
   return (
     <div className="space-y-4">
       <div className="rounded-[28px] border border-sky-200 bg-[#f5f7fa] p-6 text-center">
-        <h2 className="text-3xl font-light tracking-tight text-sky-500 md:text-4xl">
-          Hmm… pas tout à fait 🤖
-        </h2>
+        {/* ⭐ TI MARGO À LA PLACE DU ROBOT (18/08/2026). Un émoji robot annonçait
+            l'erreur — or ce n'est pas une machine qui accompagne l'élève ici,
+            c'est le margouillat de l'accueil, des cahiers et des vidéos. Le
+            robot reste sur le Coach IA plus bas : celui-là EST une IA, et il
+            doit se dire.
+            « Hmm… pas tout à fait » est parti avec lui : la phrase devient un
+            mensonge quand l'élève a répondu au hasard, et un élève le sent.
+            « Ce n'est pas encore ça » reste vrai dans tous les cas, et le
+            « encore » laisse la porte ouverte — du CP à la Terminale.
+            ⚠️ `ti-margo-112.webp` (4,8 Ko) et non `ti-margo.png` (163 Ko pour
+            un dessin de 56 px), avec `unoptimized` : ce bandeau naît au moment
+            où l'élève se trompe, donc l'image se télécharge à cet instant
+            précis. On lui sert un fichier déjà à la bonne taille, sans passer
+            par l'optimiseur Vercel — le vrai dessin au prix d'un émoji. */}
+        <div className="flex items-center justify-center gap-3">
+          <Image
+            src="/cahier-vacances/ti-margo-112.webp"
+            alt="Ti Margo, le margouillat d'EleveAI"
+            width={90}
+            height={112}
+            unoptimized
+            className="h-12 w-auto md:h-14"
+          />
+          <h2 className="text-3xl font-light tracking-tight text-sky-500 md:text-4xl">
+            Ce n’est pas encore ça
+          </h2>
+        </div>
 
         <div className="mt-5 text-base font-medium text-slate-500">
           La bonne réponse était :
