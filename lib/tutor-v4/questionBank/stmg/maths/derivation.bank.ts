@@ -162,13 +162,22 @@ function deNomGrandeur(nom: string): string {
   return `de ${nom}`;
 }
 
+/**
+ * ⚠️ CHAQUE PRODUCTION PORTE SON GENRE ET SON SINGULIER (18/08/2026).
+ *
+ * `unite.slice(0, -1)` rend bien « table » à partir de « tables », mais
+ * l'article, lui, restait figé : « produire UN table de plus », « chacun des
+ * 40 tables ». Trois des six productions sont féminines. Même famille que les
+ * réservoirs des données croisées et des probabilités, qui portent déjà leur
+ * genre : ne jamais ajouter une production sans le sien.
+ */
 const PRODUCTIONS = [
-  { objet: "des paniers garnis", unite: "paniers" },
-  { objet: "des coffrets cadeaux", unite: "coffrets" },
-  { objet: "des tables basses", unite: "tables" },
-  { objet: "des ruches", unite: "ruches" },
-  { objet: "des paires de sandales", unite: "paires" },
-  { objet: "des sacs isothermes", unite: "sacs" },
+  { objet: "des paniers garnis", unite: "paniers", un: "un panier", chacun: "chacun", genre: "m" },
+  { objet: "des coffrets cadeaux", unite: "coffrets", un: "un coffret", chacun: "chacun", genre: "m" },
+  { objet: "des tables basses", unite: "tables", un: "une table", chacun: "chacune", genre: "f" },
+  { objet: "des ruches", unite: "ruches", un: "une ruche", chacun: "chacune", genre: "f" },
+  { objet: "des paires de sandales", unite: "paires", un: "une paire", chacun: "chacune", genre: "f" },
+  { objet: "des sacs isothermes", unite: "sacs", un: "un sac", chacun: "chacun", genre: "m" },
 ] as const;
 
 export const derivationBank: TutorBankItemV4[] = [
@@ -731,6 +740,55 @@ export const derivationBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — REMONTER de la dérivée à la fonction. Le premier item descend
+    // $kx^2 \to 2kx$ ; celui-ci fait le chemin inverse. C'est le geste qu'on
+    // n'entraîne jamais, et pourtant le seul qui prouve que la règle est
+    // comprise et pas récitée : il faut savoir que le $2$ vient de l'exposant,
+    // et diviser par lui.
+    kind: "template",
+    id: "stmg_der_f_carre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_formules",
+    microId: "der_f_carre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Dériver $kx^2$ donne $2kx$ : le coefficient est DOUBLÉ au passage.",
+    tags: ["stmg", "maths", "derivation", "template"],
+    generate: () => {
+      const k = pick([1, 2, 3, 4, 5, 6, 7, 8, 10, 12, -1, -2, -3, -4, -5] as const);
+      const ecrire = (n: number) => `$f(x) = ${n === 1 ? "" : n === -1 ? "-" : n}x^2$`;
+      return {
+        text:
+          `Une fonction $f$ a pour dérivée $f'(x) = ${2 * k}x$. ` +
+          `Parmi ces quatre expressions, laquelle peut être celle de $f$ ?`,
+        format: "qcm",
+        choices: makeChoices(ecrire(k), [
+          ecrire(2 * k),
+          ecrire(4 * k),
+          `$f(x) = ${2 * k === 1 ? "" : 2 * k === -1 ? "-" : 2 * k}x^3$`,
+        ]),
+        expected: [ecrire(k)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Dériver $x^2$ fait descendre l'exposant devant : $kx^2$ a pour dérivée $2kx$. Le coefficient est donc multiplié par $2$, et l'exposant baisse d'un rang.",
+          "Pour remonter, on fait l'inverse : on divise le coefficient de la dérivée par $2$, et l'on remet l'exposant $2$.",
+          `$f'(x) = ${2 * k}x$, donc le coefficient de $f$ vaut $\\dfrac{${2 * k}}{2} = ${k}$ : ` +
+            `$f(x) = ${k === 1 ? "" : k === -1 ? "-" : k}x^2$. ` +
+            `Vérification : la dérivée de $${k === 1 ? "" : k === -1 ? "-" : k}x^2$ vaut bien $${2 * k}x$.`,
+          `$f(x) = ${k === 1 ? "" : k === -1 ? "-" : k}x^2$ convient.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: ecrire(2 * k),
+            cause: "a recopié le coefficient de la dérivée : il faut le DIVISER par 2, pas le garder",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ der_f_cube ═══════════════════ */
 
   {
@@ -774,6 +832,43 @@ export const derivationBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — un NOMBRE, pas une expression. Le premier item rend $3kx^2$ en
+    // QCM ; celui-ci demande la valeur en un point, en saisie libre. Deux
+    // pièges s'y logent que le QCM masquait : oublier le carré, et oublier que
+    // $(-x)^2$ est positif. Aucune proposition où se rattraper.
+    kind: "template",
+    id: "stmg_der_f_cube_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_formules",
+    microId: "der_f_cube",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Dérive d'abord — l'exposant descend et baisse d'un rang —, remplace ensuite.",
+    tags: ["stmg", "maths", "derivation", "template", "short"],
+    generate: () => {
+      const k = pick([1, 2, 3, 4, 5, 6, 8, 10, -1, -2, -3, -4, -6] as const);
+      const x0 = pick([-3, -2, -1, 1, 2, 3, 4] as const);
+      const valeur = 3 * k * x0 * x0;
+      return {
+        text: `Soit $f(x) = ${k === 1 ? "" : k === -1 ? "-" : k}x^3$. Que vaut $f'(${x0})$ ?`,
+        format: "short",
+        expected: [String(valeur)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La dérivée de $kx^3$ est $3kx^2$ : l'exposant $3$ descend en facteur, et il ne reste qu'un carré.",
+          "On écrit d'abord la dérivée sous forme d'expression, PUIS on y remplace $x$ par la valeur demandée — jamais l'inverse.",
+          `$f'(x) = ${3 * k}x^2$, donc $f'(${x0}) = ${3 * k} \\times (${x0})^2 = ${3 * k} \\times ${x0 * x0} = ${valeur}$. ` +
+            (x0 < 0
+              ? `⚠️ $(${x0})^2 = ${x0 * x0}$, positif : le carré efface le signe de $x$, seul celui de $${3 * k}$ compte.`
+              : `Le carré reste, il ne disparaît pas : $f'$ n'est pas une constante.`),
+          `$f'(${x0}) = ${valeur}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ der_f_kf ═══════════════════ */
 
   {
@@ -801,6 +896,59 @@ export const derivationBank: TutorBankItemV4[] = [
           `$f'(x) = ${k} \\times 1 = ${k}$ pour tout $x$, donc $f'(${x}) = ${k}$.`,
           `$f'(${x}) = ${k}$ — et ce serait la même valeur en tout autre point.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — POURQUOI la dérivée d'une fonction affine ne bouge pas. Le
+    // premier item fait calculer $f'(x)$ pour $kx$ et attend le nombre $k$ ;
+    // celui-ci demande la raison. Elle tient en une image, et c'est l'image qui
+    // fonde tout le chapitre : le nombre dérivé est une PENTE, et la pente
+    // d'une droite est la même partout.
+    kind: "template",
+    id: "stmg_der_f_kf_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_formules",
+    microId: "der_f_kf",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le nombre dérivé est le coefficient directeur de la tangente. Quelle est la tangente à une droite ?",
+    tags: ["stmg", "maths", "derivation", "template"],
+    generate: () => {
+      const k = pick([2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20] as const);
+      const x1 = randomInt(1, 4);
+      const x2 = randomInt(20, 90);
+      const bonne =
+        "la courbe de $f$ est une DROITE : sa pente est la même en tout point, et le nombre dérivé est cette pente";
+      return {
+        text:
+          `Soit $f(x) = ${k}x$. On trouve $f'(${x1}) = ${k}$, et aussi $f'(${x2}) = ${k}$. ` +
+          `Pourquoi le nombre dérivé ne dépend-il pas du point choisi ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          "parce que $f$ ne s'annule jamais",
+          `parce que $${x1}$ et $${x2}$ sont tous les deux positifs`,
+          "c'est une coïncidence : pour d'autres valeurs, on trouverait autre chose",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le nombre dérivé en un point est le coefficient directeur de la TANGENTE en ce point. Pour une fonction affine, la courbe est une droite : elle est sa propre tangente partout.",
+          "On regarde l'allure de la courbe : si elle est droite, sa pente ne change pas, donc le nombre dérivé non plus.",
+          `Entre deux points d'abscisses $${x1}$ et $${x2}$, le taux de variation vaut ` +
+            `$\\dfrac{${k} \\times ${x2} - ${k} \\times ${x1}}{${x2} - ${x1}} = ${k}$ — ` +
+            `et ce serait encore $${k}$ pour n'importe quel autre couple de points. ` +
+            `C'est ce qui distingue une droite d'une parabole, dont la pente change à chaque point.`,
+          `Parce que la courbe de $f$ est une droite : sa pente vaut $${k}$ partout.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "c'est une coïncidence : pour d'autres valeurs, on trouverait autre chose",
+            cause: "non : pour une fonction affine, le nombre dérivé est constant, quel que soit le point",
+          },
+        ],
       };
     },
   },
@@ -844,6 +992,64 @@ export const derivationBank: TutorBankItemV4[] = [
           {
             choice: `$${polynome(0, 0, 2 * a, c)}$`,
             cause: "a gardé le terme constant au lieu de dériver le terme en x",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — le TERME CONSTANT, qui disparaît. Le premier item fait dériver
+    // la somme entière ; celui-ci isole le seul morceau qui se traîne d'un
+    // bout à l'autre du chapitre. Un « $- 7$ » recopié dans la dérivée fausse
+    // ensuite le signe de $f'$, donc les variations, donc l'optimisation : une
+    // étourderie d'un caractère qui se paie trois notions plus loin.
+    kind: "template",
+    id: "stmg_der_f_somme_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_formules",
+    microId: "der_f_somme",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une constante ne varie pas : sa courbe est une droite horizontale, de pente nulle.",
+    tags: ["stmg", "maths", "derivation", "piege", "template"],
+    generate: () => {
+      const a = pick([1, 2, 3, 4, 5, -1, -2, -3] as const);
+      const b = pick([1, 2, 3, 5, 6, 8, -1, -2, -4, -7] as const);
+      const c = pick([2, 4, 5, 9, 11, -3, -6, -8] as const);
+      const juste = polynome(0, 0, 2 * a, b);
+      const faux = polynome(0, 0, 2 * a, b) + (c >= 0 ? ` + ${c}` : ` - ${-c}`);
+      const bonne = `le terme constant $${c >= 0 ? c : `(${c})`}$ DISPARAÎT : sa dérivée est nulle`;
+      return {
+        text:
+          `Un élève dérive $f(x) = ${polynome(0, a, b, c)}$ et écrit « $f'(x) = ${faux}$ ». ` +
+          `Où est l'erreur ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `le terme en $x$ devait disparaître, pas la constante`,
+          `il fallait écrire $${2 * a}x^2$ au lieu de $${2 * a}x$`,
+          "il n'y a pas d'erreur : chaque terme a bien été dérivé",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On dérive une somme terme à terme. Un terme CONSTANT ne varie pas : sa courbe est une droite horizontale, sa pente vaut $0$, et il disparaît de la dérivée.",
+          "On dérive chaque morceau séparément, et l'on vérifie qu'aucune constante n'a survécu au passage.",
+          `$${a === 1 ? "" : a === -1 ? "-" : a}x^2 \\to ${2 * a}x$ ; ` +
+            `$${b >= 0 ? "+" : "-"} ${Math.abs(b)}x \\to ${b >= 0 ? "+" : "-"} ${Math.abs(b)}$ ; ` +
+            `$${c >= 0 ? "+" : "-"} ${Math.abs(c)} \\to 0$. ` +
+            `Donc $f'(x) = ${juste}$, sans le $${c >= 0 ? c : `(${c})`}$.`,
+          `L'erreur est d'avoir gardé la constante : $f'(x) = ${juste}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `le terme en $x$ devait disparaître, pas la constante`,
+            cause: `$${b >= 0 ? "+" : "-"} ${Math.abs(b)}x$ a bien une pente, égale à $${b}$ : c'est la constante qui n'en a pas`,
+          },
+          {
+            choice: "il n'y a pas d'erreur : chaque terme a bien été dérivé",
+            cause: "la constante a été recopiée telle quelle, pas dérivée — sa dérivée vaut zéro",
           },
         ],
       };
@@ -901,6 +1107,66 @@ export const derivationBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — LIRE le coût marginal, au lieu de l'écrire. Le premier item
+    // rend l'expression $C'(x)$ ; celui-ci en donne une valeur et demande ce
+    // qu'elle veut dire dans l'atelier. Le BO le pose noir sur blanc : « dans
+    // un cadre économique, le nombre dérivé est relié au coût marginal ».
+    // Une expression juste dont on ne sait rien dire ne sert à rien.
+    kind: "template",
+    id: "stmg_der_p_degre2_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_polynome",
+    microId: "der_p_degre2",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le coût marginal est le coût de l'unité SUIVANTE : c'est une variation, pas un total.",
+    tags: ["stmg", "maths", "derivation", "gestion", "template"],
+    generate: () => {
+      const a = pick([0.5, 1, 2] as const);
+      const b = pick([4, 6, 8, 10, 12, 15] as const);
+      const c = pick([80, 100, 120, 150, 200] as const);
+      const prod = pick(PRODUCTIONS);
+      const x0 = pick([10, 20, 25, 30, 40, 50] as const);
+      const marginal = Math.round((2 * a * x0 + b) * 100) / 100;
+      const total = Math.round((a * x0 * x0 + b * x0 + c) * 100) / 100;
+      const bonne = `produire ${prod.un} de plus coûterait environ $${fr(marginal)}$ €`;
+      return {
+        text:
+          `Le coût total de production de $x$ ${prod.unite} est $C(x) = ${fr(a)}x^2 + ${b}x + ${c}$, en euros. ` +
+          `On calcule $C'(${x0}) = ${fr(marginal)}$. Que signifie ce nombre ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `produire $${x0}$ ${prod.unite} coûte $${fr(marginal)}$ €`,
+          `${prod.chacun} des $${x0}$ ${prod.unite} a coûté $${fr(marginal)}$ € en moyenne`,
+          `le coût total diminue de $${fr(marginal)}$ € à partir de $${x0}$ ${prod.unite}`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le nombre dérivé mesure une variation instantanée. En gestion, $C'(x)$ est le COÛT MARGINAL : ce que coûte, approximativement, la production d'une unité supplémentaire à partir du niveau $x$.",
+          "On distingue trois nombres qui se ressemblent : le coût TOTAL $C(x)$, le coût MOYEN $\\dfrac{C(x)}{x}$, et le coût MARGINAL $C'(x)$.",
+          `Ici $C(${x0}) = ${fr(total)}$ € au total, soit $${fr(Math.round((total / x0) * 100) / 100)}$ € en moyenne par ${prod.un.slice(3)}. ` +
+            `Mais $C'(${x0}) = ${fr(marginal)}$ € : c'est le coût ${prod.genre === 'f' ? 'de la' : 'du'} ${prod.un.slice(3)} SUIVANT${prod.genre === 'f' ? 'E' : ''}. ` +
+            `Vérification : $C(${x0 + 1}) - C(${x0}) = ${fr(Math.round((a * (x0 + 1) * (x0 + 1) + b * (x0 + 1) + c - total) * 100) / 100)}$ €, ` +
+            `tout proche de $${fr(marginal)}$.`,
+          `$C'(${x0})$ est le coût de l'unité suivante, environ $${fr(marginal)}$ €.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `${prod.chacun} des $${x0}$ ${prod.unite} a coûté $${fr(marginal)}$ € en moyenne`,
+            cause: `c'est le coût MOYEN, qui vaut ici $${fr(Math.round((total / x0) * 100) / 100)}$ € — un autre nombre`,
+          },
+          {
+            choice: `le coût total diminue de $${fr(marginal)}$ € à partir de $${x0}$ ${prod.unite}`,
+            cause: "un coût marginal positif signale que le coût total AUGMENTE, pas qu'il baisse",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ der_p_degre3 ═══════════════════ */
 
   {
@@ -941,6 +1207,67 @@ export const derivationBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — l'exposant qui NE DESCEND PAS. Le premier item fait dériver un
+    // degré 3 en QCM ; celui-ci montre la dérivation faite à moitié — les
+    // coefficients multipliés, les exposants laissés en place. C'est l'erreur
+    // qui se voit le moins à la relecture, parce que le résultat « ressemble »
+    // à une dérivée.
+    kind: "template",
+    id: "stmg_der_p_degre3_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_polynome",
+    microId: "der_p_degre3",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Dériver fait DEUX choses à chaque terme : l'exposant descend en facteur, puis il baisse d'un rang.",
+    tags: ["stmg", "maths", "derivation", "piege", "template"],
+    generate: () => {
+      const a = pick([1, 2, 3, 4, -1, -2, -3] as const);
+      const b = pick([1, 2, 3, 5, 6, -1, -2, -4, -6] as const);
+      const c = pick([1, 2, 4, 5, 7, -3, -5, -9] as const);
+      const d = pick([1, 3, 6, 8, 12, -2, -4, -10] as const);
+      const juste = polynome(0, 3 * a, 2 * b, c);
+      // Coefficients multipliés, exposants laissés tels quels.
+      const faux = polynome(3 * a, 2 * b, c, 0);
+      const bonne = "les exposants n'ont pas baissé d'un rang : ils ont seulement été multipliés devant";
+      return {
+        text:
+          `Un élève dérive $f(x) = ${polynome(a, b, c, d)}$ et écrit « $f'(x) = ${faux}$ ». ` +
+          `Qu'a-t-il oublié ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          "il a oublié de faire disparaître le terme constant",
+          "il a multiplié par les mauvais nombres : il fallait diviser par les exposants",
+          "il n'a rien oublié : cette dérivée est correcte",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Dériver $x^n$ donne $nx^{n-1}$ : l'exposant descend en facteur ET il baisse d'un rang. Les deux gestes vont ensemble ; en oublier un donne une expression du même degré que $f$, ce qui est impossible pour une dérivée de polynôme.",
+          "On dérive terme à terme, en vérifiant que le degré a bien baissé de un.",
+          `$${a === 1 ? "" : a === -1 ? "-" : a}x^3 \\to ${3 * a}x^2$ (et non $${3 * a}x^3$) ; ` +
+            `$${b >= 0 ? "+" : "-"} ${Math.abs(b)}x^2 \\to ${b >= 0 ? "+" : "-"} ${Math.abs(2 * b)}x$ ; ` +
+            `$${c >= 0 ? "+" : "-"} ${Math.abs(c)}x \\to ${c >= 0 ? "+" : "-"} ${Math.abs(c)}$ ; ` +
+            `$${d >= 0 ? "+" : "-"} ${Math.abs(d)} \\to 0$. ` +
+            `Donc $f'(x) = ${juste}$ — un degré 2, pas un degré 3.`,
+          `Il a bien fait descendre les exposants, mais il ne les a pas baissés : $f'(x) = ${juste}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "il n'a rien oublié : cette dérivée est correcte",
+            cause: "la dérivée d'un degré 3 est un degré 2 : ici le $x^3$ est resté, c'est le signe que le geste est incomplet",
+          },
+          {
+            choice: "il a oublié de faire disparaître le terme constant",
+            cause: `la constante $${d}$ a bien disparu — le défaut est ailleurs, dans les exposants`,
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ der_p_nombre_derive ═══════════════════ */
 
   {
@@ -970,6 +1297,48 @@ export const derivationBank: TutorBankItemV4[] = [
           "On dérive d'abord, on substitue ensuite — jamais l'inverse.",
           `$f'(x) = ${polynome(0, 0, 2 * a, b)}$, donc $f'(${x0}) = ${2 * a} \\times (${x0}) ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = ${fr(nd)}$.`,
           `$f'(${x0}) = ${fr(nd)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — RÉSOUDRE $f'(x) = 0$, au lieu de calculer $f'$ en un point
+    // donné. Le premier item évalue la dérivée là où on le lui dit ; celui-ci
+    // cherche OÙ elle s'annule — c'est-à-dire où la tangente est horizontale.
+    // C'est la question qui ouvre l'optimisation, et elle se pose avant de
+    // savoir dresser un tableau de variations.
+    kind: "template",
+    id: "stmg_der_p_nombre_derive_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_polynome",
+    microId: "der_p_nombre_derive",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Écris $f'(x)$, puis résous l'équation $f'(x) = 0$ : c'est une équation du premier degré.",
+    tags: ["stmg", "maths", "derivation", "template", "short"],
+    generate: () => {
+      // On part de la solution pour qu'elle tombe sur un entier : avec
+      // $f'(x) = 2ax + b$, choisir $b = -2a x_0$ place la racine en $x_0$.
+      const a = pick([1, 2, 3, -1, -2] as const);
+      const x0 = randomInt(-4, 6);
+      const b = -2 * a * x0;
+      const c = pick([1, 4, 5, 9, -3, -6] as const);
+      return {
+        text:
+          `Soit $f(x) = ${polynome(0, a, b, c)}$. ` +
+          `Pour quelle valeur de $x$ la tangente à la courbe est-elle HORIZONTALE ?`,
+        format: "short",
+        expected: [String(x0)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Une tangente horizontale a un coefficient directeur nul. Comme ce coefficient est le nombre dérivé, chercher une tangente horizontale revient à résoudre $f'(x) = 0$.",
+          "On écrit la dérivée, on l'égale à zéro, et l'on résout — pour un polynôme du second degré, c'est une équation du premier degré.",
+          `$f'(x) = ${polynome(0, 0, 2 * a, b)}$. ` +
+            `On résout $${2 * a}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = 0$, soit $${2 * a}x = ${-b}$, donc $x = ${x0}$. ` +
+            `En ce point, la parabole atteint son ${a > 0 ? "MINIMUM" : "MAXIMUM"} : la dérivée change de signe en le traversant.`,
+          `La tangente est horizontale en $x = ${x0}$.`
         ),
       };
     },
@@ -1024,6 +1393,73 @@ export const derivationBank: TutorBankItemV4[] = [
             ? "Les deux coïncident : la forme factorisée est exacte."
             : "Les deux diffèrent : la forme factorisée est fausse."
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — SE SERVIR de la forme factorisée. Le premier item ne laisse que
+    // « oui » ou « non » — deux propositions, donc une chance sur deux au
+    // hasard ; celui-ci part de la forme factorisée et demande ce qu'elle
+    // donne : les deux points où la tangente est horizontale. C'est pour cela
+    // qu'on factorise une dérivée, et pas pour le plaisir de la factoriser.
+    kind: "template",
+    id: "stmg_der_p_factorisee_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_polynome",
+    microId: "der_p_forme_factorisee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un produit est nul quand l'un de ses facteurs l'est : $(x - r)$ s'annule en $x = r$, pas en $-r$.",
+    tags: ["stmg", "maths", "derivation", "piege", "template"],
+    generate: () => {
+      // ⛔ RACINES NON OPPOSÉES. Le distracteur « on a recopié les nombres des
+      // parenthèses » propose $-r_1$ et $-r_2$ : si $r_2 = -r_1$, il désigne le
+      // MÊME couple que la bonne réponse, dans l'autre ordre. Deux propositions
+      // justes, l'élève a raison et il est compté faux — la faute des racines
+      // opposées, déjà trouvée à la lecture du 16/08 sur un autre item.
+      let r1 = randomInt(-4, 0);
+      let r2 = r1 + 2 * randomInt(1, 3);
+      for (let essai = 0; essai < 40 && r1 === -r2; essai++) {
+        r1 = randomInt(-4, 0);
+        r2 = r1 + 2 * randomInt(1, 3);
+      }
+      const k = pick([1, 2, 3] as const);
+      const A = 3 * k;
+      const facteur = (r: number) => (r === 0 ? "x" : r > 0 ? `(x - ${r})` : `(x + ${-r})`);
+      const bonne = `en $x = ${r1}$ et en $x = ${r2}$`;
+      return {
+        text:
+          `La dérivée d'une fonction $f$ se factorise en $f'(x) = ${A}${facteur(r1)}${facteur(r2)}$. ` +
+          `En quels points la tangente à la courbe de $f$ est-elle HORIZONTALE ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `en $x = ${-r1}$ et en $x = ${-r2}$`,
+          `en $x = ${A}$ seulement`,
+          "en aucun point : une dérivée ne s'annule jamais",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La tangente est horizontale là où le nombre dérivé est nul. Une dérivée écrite sous forme factorisée donne ces points sans aucun calcul : un produit s'annule quand l'un de ses facteurs s'annule.",
+          "On lit chaque facteur $(x - r)$ et l'on note la valeur $r$ qui l'annule — en faisant attention au signe, qui s'inverse au passage.",
+          `$${facteur(r1)}$ s'annule en $x = ${r1}$, et $${facteur(r2)}$ en $x = ${r2}$. ` +
+            `Le facteur $${A}$, lui, ne s'annule jamais. ` +
+            `Entre $${r1}$ et $${r2}$, les deux parenthèses sont de signes contraires : $f'$ y est négative, donc $f$ décroît. ` +
+            `Ailleurs, $f$ croît.`,
+          `La tangente est horizontale en $x = ${r1}$ et en $x = ${r2}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `en $x = ${-r1}$ et en $x = ${-r2}$`,
+            cause: "a recopié les nombres écrits dans les parenthèses : $(x - 3)$ s'annule en $3$, pas en $-3$",
+          },
+          {
+            choice: "en aucun point : une dérivée ne s'annule jamais",
+            cause: "c'est justement quand elle s'annule que la courbe change de sens — c'est là que se trouvent les extremums",
+          },
+        ],
       };
     },
   },
