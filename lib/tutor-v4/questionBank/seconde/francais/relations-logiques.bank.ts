@@ -247,6 +247,153 @@ const ENCHAINEMENTS: readonly Enchainement[] = [
    fait perdre le fil : le lecteur ne sait plus de qui l'on parle.
    ========================================================================== */
 
+/* ═══════════ LES TABLES DES SECONDS ITEMS (18/08/2026) ═══════════
+   Les sept premiers items de ce fichier font tous CHOISIR UN OUTIL. Les sept
+   suivants changent de geste : convertir une phrase pour attaquer par l'autre
+   bout, mesurer ce qu'une substitution change, reconnaitre une relation parmi
+   quatre phrases, lire ce qu'une comparaison établit, remonter d'un groupe
+   nominal à la subordonnée, anticiper ce qu'un connecteur annonce, repérer la
+   reprise qui laisse le lecteur dans le doute.
+   ⚠️ Longueurs de réponses tenues voisines dès l'écriture. */
+
+type Conversion = { readonly avant: string; readonly veut: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Substitution = { readonly phrase: string; readonly avant: string; readonly apres: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Reconnait = { readonly veut: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Etablit = { readonly phrase: string; readonly rep: string; readonly raison: string };
+type Remonte = { readonly phrase: string; readonly groupe: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Attente = { readonly connecteur: string; readonly rep: string; readonly raison: string };
+
+/* 1 bis. ATTAQUER PAR L'AUTRE BOUT (2de_rl_cause_consequence)
+   ⭐ Cause et conséquence disent le même lien, pris dans les deux sens : ce qui
+   est cause dans une phrase devient point de départ dans l'autre. Convertir
+   l'une en l'autre est le geste que la contraction et l'essai réclament sans
+   arrêt — et c'est plus exigeant que de nommer la relation. */
+const CONVERSIONS: readonly Conversion[] = [
+  { avant: "La route est coupée parce qu'il a beaucoup plu.", veut: "commencer par la pluie", bonne: "Il a beaucoup plu, si bien que la route est coupée.", faux: ["Il a beaucoup plu, bien que la route soit coupée.", "Il a beaucoup plu quand la route a été coupée.", "Il a beaucoup plu, or la route est coupée."], raison: "la cause passe en tête, et « si bien que » introduit alors la conséquence" },
+  { avant: "Le bateau est resté à quai parce que la houle était forte.", veut: "commencer par la houle", bonne: "La houle était forte, si bien que le bateau est resté à quai.", faux: ["La houle était forte, bien que le bateau soit resté à quai.", "La houle était forte quand le bateau est resté à quai.", "La houle était forte, or le bateau est resté à quai."], raison: "on part de la cause et l'on tire la conséquence" },
+  { avant: "La séance a été reportée parce que le professeur était absent.", veut: "commencer par l'absence", bonne: "Le professeur était absent, si bien que la séance a été reportée.", faux: ["Le professeur était absent, bien que la séance soit reportée.", "Le professeur était absent quand la séance a été reportée.", "Le professeur était absent, or la séance a été reportée."], raison: "la conséquence se place après, introduite par « si bien que »" },
+  { avant: "Le vent est tombé, si bien que la mer est redevenue lisse.", veut: "commencer par la mer", bonne: "La mer est redevenue lisse parce que le vent est tombé.", faux: ["La mer est redevenue lisse bien que le vent soit tombé.", "La mer est redevenue lisse quand le vent est tombé.", "La mer est redevenue lisse, or le vent est tombé."], raison: "on part de la conséquence, et « parce que » ramène à la cause" },
+  { avant: "La salle était pleine, si bien que certains sont restés debout.", veut: "commencer par ceux qui sont restés debout", bonne: "Certains sont restés debout parce que la salle était pleine.", faux: ["Certains sont restés debout bien que la salle fût pleine.", "Certains sont restés debout quand la salle fut pleine.", "Certains sont restés debout, or la salle était pleine."], raison: "la conséquence en tête, la cause introduite par « parce que »" },
+  { avant: "Le dossier est complet, donc l'inscription est validée.", veut: "commencer par l'inscription", bonne: "L'inscription est validée puisque le dossier est complet.", faux: ["L'inscription est validée bien que le dossier soit complet.", "L'inscription est validée dès que le dossier est complet.", "L'inscription est validée, or le dossier est complet."], raison: "« puisque » donne la cause comme déjà connue, ce que « donc » supposait" },
+  { avant: "Personne ne bougeait parce que chacun craignait de se tromper.", veut: "commencer par la crainte", bonne: "Chacun craignait de se tromper, si bien que personne ne bougeait.", faux: ["Chacun craignait de se tromper, bien que personne ne bougeât.", "Chacun craignait de se tromper quand personne ne bougeait.", "Chacun craignait de se tromper, or personne ne bougeait."], raison: "la cause en tête appelle une conséquence, non une concession" },
+  { avant: "La fête a été annulée à cause de la pluie.", veut: "commencer par la pluie", bonne: "Il a plu, si bien que la fête a été annulée.", faux: ["Il a plu, bien que la fête ait été annulée.", "Il a plu quand la fête a été annulée.", "Il a plu, or la fête a été annulée."], raison: "le groupe nominal de cause se déplie en proposition, la conséquence suit" },
+];
+
+/* 2 bis. CE QUE LA SUBSTITUTION CHANGE (2de_rl_but_condition)
+   ⛔ But et condition sont les deux relations que les élèves confondent le plus
+   avec la conséquence et le temps. Substituer un outil à un autre le montre
+   sans qu'on ait à l'expliquer : « si » suspend, « quand » tient pour acquis ;
+   « pour que » vise, « si bien que » constate. */
+const SUBSTITUTIONS: readonly Substitution[] = [
+  { phrase: "Si le vent tombe, nous sortirons.", avant: "si", apres: "quand", bonne: "la chute du vent devient certaine : elle n'est plus une condition", faux: ["la chute du vent devient plus incertaine encore", "la sortie devient un simple souhait", "la sortie devient impossible"], raison: "« quand » tient le fait pour acquis et n'en situe que le moment" },
+  { phrase: "Quand le vent tombera, nous sortirons.", avant: "quand", apres: "si", bonne: "la chute du vent devient incertaine : la sortie en dépend", faux: ["la chute du vent devient certaine", "la sortie devient certaine elle aussi", "la sortie devient un ordre"], raison: "« si » suspend le fait, et donc tout ce qui en découle" },
+  { phrase: "Pour que la salle soit rénovée, les cours ont été déplacés.", avant: "pour que", apres: "si bien que", bonne: "la rénovation cesse d'être un but pour devenir un résultat", faux: ["la rénovation cesse d'être un résultat pour devenir un but", "la rénovation devient une condition à remplir", "la rénovation devient un obstacle rencontré"], raison: "le but est visé et peut échouer ; la conséquence, elle, est constatée" },
+  { phrase: "Les cours ont été déplacés, si bien que la salle a été rénovée.", avant: "si bien que", apres: "pour que", bonne: "la rénovation cesse d'être un résultat pour devenir un but", faux: ["la rénovation cesse d'être un but pour devenir un résultat", "la rénovation devient une cause du déplacement", "la rénovation devient une concession"], raison: "« pour que » place l'intention en amont, et le subjonctif suit" },
+  { phrase: "Afin que chacun comprenne, la consigne a été répétée.", avant: "afin que", apres: "parce que", bonne: "la compréhension devient la cause au lieu du but", faux: ["la compréhension devient le but au lieu de la cause", "la compréhension devient une condition", "la compréhension devient incertaine"], raison: "on ne répète plus POUR être compris, mais PARCE QU'on l'était déjà" },
+  { phrase: "Si vous vous inscrivez avant lundi, la place est gardée.", avant: "si", apres: "dès que", bonne: "l'inscription est tenue pour acquise, seule sa date compte", faux: ["l'inscription devient plus incertaine", "la place devient incertaine", "la place cesse d'être gardée"], raison: "« dès que » ne conditionne plus rien : il situe" },
+  { phrase: "Bien que la route soit longue, ils sont partis à pied.", avant: "bien que", apres: "parce que", bonne: "la longueur cesse d'être un obstacle et devient la raison", faux: ["la longueur cesse d'être une raison et devient un obstacle", "la longueur devient une condition du départ", "le départ devient incertain"], raison: "la concession dit « malgré », la cause dit « à cause de » : c'est l'inverse" },
+];
+
+/* 3 bis. RECONNAITRE LA RELATION (2de_rl_opposition_concession)
+   ⛔ LA DISTINCTION QUI COMPTE, ET QU'AUCUN OUTIL NE DONNE À LUI SEUL :
+   l'opposition met deux faits EN REGARD (« ici il pleut, là-bas il fait beau ») ;
+   la concession pose un obstacle QUI N'EMPÊCHE PAS (« bien qu'il ait plu, la
+   fête a eu lieu »). Les quatre phrases de chaque série portent les mêmes
+   éléments : seule la relation change, et chacune est la bonne réponse d'une
+   autre question — aucune ligne morte. */
+const RECONNAIT: readonly Reconnait[] = [
+  { veut: "une concession : un obstacle qui n'empêche pas", bonne: "Bien qu'il ait plu, la fête a eu lieu.", faux: ["Il pleuvait ici, alors qu'il faisait beau sur la côte.", "La fête a été annulée parce qu'il pleuvait.", "Il a plu, si bien que la fête a été annulée."], raison: "la pluie aurait dû empêcher la fête, et ne l'a pas empêchée" },
+  { veut: "une opposition : deux faits mis en regard", bonne: "Il pleuvait ici, alors qu'il faisait beau sur la côte.", faux: ["Bien qu'il ait plu, la fête a eu lieu.", "La fête a été annulée parce qu'il pleuvait.", "Il a plu, si bien que la fête a été annulée."], raison: "les deux faits sont simplement comparés : aucun n'empêche l'autre" },
+  { veut: "une cause", bonne: "La fête a été annulée parce qu'il pleuvait.", faux: ["Bien qu'il ait plu, la fête a eu lieu.", "Il pleuvait ici, alors qu'il faisait beau sur la côte.", "Il a plu, si bien que la fête a été annulée."], raison: "la pluie explique l'annulation, et la phrase part de l'annulation" },
+  { veut: "une conséquence", bonne: "Il a plu, si bien que la fête a été annulée.", faux: ["Bien qu'il ait plu, la fête a eu lieu.", "Il pleuvait ici, alors qu'il faisait beau sur la côte.", "La fête a été annulée parce qu'il pleuvait."], raison: "la phrase part de la pluie et en tire ce qui s'ensuit" },
+  { veut: "une concession : un obstacle qui n'empêche pas", bonne: "Quoique le texte soit court, il est difficile.", faux: ["Ce texte est court, alors que le précédent faisait dix pages.", "Le texte est difficile parce qu'il est très dense.", "Le texte est dense, si bien qu'il décourage les élèves."], raison: "la brièveté aurait dû rendre le texte facile, et ne l'a pas fait" },
+  { veut: "une opposition : deux faits mis en regard", bonne: "Ce texte est court, alors que le précédent faisait dix pages.", faux: ["Quoique le texte soit court, il est difficile.", "Le texte est difficile parce qu'il est très dense.", "Le texte est dense, si bien qu'il décourage les élèves."], raison: "on compare deux textes, sans qu'aucun contrarie l'autre" },
+  { veut: "une cause", bonne: "Le texte est difficile parce qu'il est très dense.", faux: ["Quoique le texte soit court, il est difficile.", "Ce texte est court, alors que le précédent faisait dix pages.", "Le texte est dense, si bien qu'il décourage les élèves."], raison: "la densité explique la difficulté" },
+  { veut: "une conséquence", bonne: "Le texte est dense, si bien qu'il décourage les élèves.", faux: ["Quoique le texte soit court, il est difficile.", "Ce texte est court, alors que le précédent faisait dix pages.", "Le texte est difficile parce qu'il est très dense."], raison: "la phrase part de la densité et en tire l'effet" },
+];
+
+/* 4 bis. CE QUE LA COMPARAISON ÉTABLIT (2de_rl_comparaison)
+   Le premier item choisit l'outil ; celui-ci lit ce que l'outil produit.
+   ⭐ La quatrième ligne — l'analogie — est celle qui compte pour l'analyse
+   littéraire : « tel un fantôme » ne mesure rien, il rapproche. C'est le seuil
+   de la figure de style, et il se franchit ici. */
+const COMPARE_POOL: readonly string[] = [
+  "une supériorité",
+  "une infériorité",
+  "une égalité",
+  "une analogie, sans aucune mesure",
+];
+
+const ETABLIT: readonly Etablit[] = [
+  { phrase: "Il lit plus vite que son frère.", rep: "une supériorité", raison: "« plus … que » place le premier terme au-dessus du second" },
+  { phrase: "Ce texte est moins dense que le précédent.", rep: "une infériorité", raison: "« moins … que » place le premier terme au-dessous" },
+  { phrase: "Elle écrit aussi bien qu'elle parle.", rep: "une égalité", raison: "« aussi … que » met les deux termes au même niveau" },
+  { phrase: "Il avançait tel un homme qui cherche ses mots.", rep: "une analogie, sans aucune mesure", raison: "« tel » rapproche deux réalités sans les classer : on entre dans la figure" },
+  { phrase: "La salle était plus grande que je ne l'imaginais.", rep: "une supériorité", raison: "la réalité dépasse ce qui était attendu" },
+  { phrase: "Ce poème est moins régulier qu'un sonnet.", rep: "une infériorité", raison: "« moins … que » situe en dessous sur l'axe de la régularité" },
+  { phrase: "Le décor est aussi sobre que le texte.", rep: "une égalité", raison: "les deux termes sont donnés pour équivalents" },
+  { phrase: "Le personnage traverse le roman comme une ombre.", rep: "une analogie, sans aucune mesure", raison: "aucune quantité n'est comparée : l'image seule est proposée" },
+  { phrase: "Il parle moins qu'il n'écoute.", rep: "une infériorité", raison: "la parole est placée au-dessous de l'écoute" },
+  { phrase: "Sa réponse fut aussi brève que la question.", rep: "une égalité", raison: "les deux brièvetés sont données pour égales" },
+];
+
+/* 5 bis. REMONTER DU GROUPE À LA SUBORDONNÉE (2de_rl_commuter_gn)
+   Le premier item réduit une subordonnée en groupe nominal ; celui-ci la
+   rétablit. ⚠️ Les distracteurs sont des subordonnées parfaitement correctes
+   qui changent la relation : la cause devient but, la condition devient
+   concession. On ne les écarte donc pas à la grammaire, seulement au sens. */
+const REMONTES: readonly Remonte[] = [
+  { phrase: "Dès le lever du jour, ils partent.", groupe: "dès le lever du jour", bonne: "dès que le jour se lève", faux: ["parce que le jour se lève", "pour que le jour se lève", "bien que le jour se lève"], raison: "le groupe situe dans le temps : la subordonnée doit le situer aussi" },
+  { phrase: "À cause de la houle, le bateau est resté à quai.", groupe: "à cause de la houle", bonne: "parce que la houle était forte", faux: ["dès que la houle a été forte", "pour que la houle soit forte", "bien que la houle soit forte"], raison: "« à cause de » dit la cause" },
+  { phrase: "Malgré la pluie, la fête a eu lieu.", groupe: "malgré la pluie", bonne: "bien qu'il ait plu", faux: ["parce qu'il a plu", "dès qu'il a plu", "pour qu'il pleuve"], raison: "« malgré » concède : l'obstacle n'a pas empêché" },
+  { phrase: "En cas de baisse du vent, nous sortirons.", groupe: "en cas de baisse du vent", bonne: "si le vent tombe", faux: ["dès que le vent tombe", "parce que le vent tombe", "bien que le vent tombe"], raison: "« en cas de » pose une condition, non un moment" },
+  { phrase: "En vue de la rénovation de la salle, les cours ont été déplacés.", groupe: "en vue de la rénovation", bonne: "pour que la salle soit rénovée", faux: ["parce que la salle a été rénovée", "dès que la salle a été rénovée", "bien que la salle soit rénovée"], raison: "« en vue de » dit le but : d'où le subjonctif" },
+  { phrase: "Après la sonnerie, la salle s'est vidée.", groupe: "après la sonnerie", bonne: "après que la cloche eut sonné", faux: ["parce que la cloche a sonné", "pour que la cloche sonne", "bien que la cloche ait sonné"], raison: "le groupe situe dans le temps, sans affirmer de cause" },
+  { phrase: "En raison de l'absence du professeur, la séance a été reportée.", groupe: "en raison de l'absence", bonne: "parce que le professeur était absent", faux: ["dès que le professeur fut absent", "pour que le professeur soit absent", "bien que le professeur soit absent"], raison: "« en raison de » dit la cause" },
+  { phrase: "Malgré sa brièveté, le texte est difficile.", groupe: "malgré sa brièveté", bonne: "quoique le texte soit court", faux: ["parce que le texte est court", "dès que le texte est court", "pour que le texte soit court"], raison: "« malgré » concède" },
+];
+
+/* 6 bis. CE QUE LE CONNECTEUR ANNONCE (2de_rl_connecteur_paragraphe)
+   ⭐ Le premier item choisit le connecteur en voyant les deux paragraphes.
+   Celui-ci ne montre que le connecteur : c'est la lecture réelle, où l'on
+   rencontre « Or » en tête de paragraphe et où l'on sait aussitôt qu'un
+   renversement arrive. Savoir ANTICIPER est ce qui fait lire vite et juste. */
+const ATTENTES_POOL: readonly string[] = [
+  "une explication de ce qui vient d'être affirmé",
+  "un argument de plus, allant dans le même sens",
+  "un cas contraire, mis en regard du premier",
+  "la conclusion tirée de ce qui précède",
+  "un fait qui va renverser ce qu'on admettait",
+  "une nuance qui limite ce qui vient d'être dit",
+];
+
+const ATTENTES: readonly Attente[] = [
+  { connecteur: "En effet", rep: "une explication de ce qui vient d'être affirmé", raison: "« en effet » n'ajoute rien de neuf : il démontre ce qui précède" },
+  { connecteur: "De plus", rep: "un argument de plus, allant dans le même sens", raison: "« de plus » empile un second argument sans changer de camp" },
+  { connecteur: "En revanche", rep: "un cas contraire, mis en regard du premier", raison: "« en revanche » ouvre l'autre versant, sans annuler le premier" },
+  { connecteur: "Ainsi", rep: "la conclusion tirée de ce qui précède", raison: "« ainsi » ferme le raisonnement et en tire la leçon" },
+  { connecteur: "Or", rep: "un fait qui va renverser ce qu'on admettait", raison: "« or » est le mot du retournement : il annonce l'objection décisive" },
+  { connecteur: "Toutefois", rep: "une nuance qui limite ce qui vient d'être dit", raison: "« toutefois » ne renverse pas, il rogne : la thèse tient encore, mais moins" },
+  { connecteur: "En outre", rep: "un argument de plus, allant dans le même sens", raison: "« en outre » est le doublet soutenu de « de plus »" },
+  { connecteur: "Par conséquent", rep: "la conclusion tirée de ce qui précède", raison: "il énonce le résultat du raisonnement mené jusque-là" },
+  { connecteur: "Cependant", rep: "une nuance qui limite ce qui vient d'être dit", raison: "il introduit une réserve sans détruire ce qui précède" },
+  { connecteur: "À l'inverse", rep: "un cas contraire, mis en regard du premier", raison: "il met en regard la situation symétrique" },
+];
+
+/* 7 bis. LA REPRISE QUI LAISSE DANS LE DOUTE (2de_rl_reprises)
+   Le premier item choisit la bonne reprise ; celui-ci fait trouver la mauvaise.
+   ⭐ C'est le geste de la relecture, et il est plus difficile : rien ne signale
+   l'ambigüité, puisque la phrase est parfaitement correcte. Elle est seulement
+   illisible pour qui n'était pas dans la tête de celui qui l'a écrite. */
+const AMBIGUES: readonly Reconnait[] = [
+  { veut: "", bonne: "Paul a rencontré Marc hier. Il lui a parlé de son projet.", faux: ["Paul a rencontré Marc hier. Le premier lui a parlé de son projet.", "Paul a rencontré Marc hier. Ce dernier lui a parlé de son projet.", "Paul a rencontré Marc hier. Marc lui a parlé de son projet."], raison: "« il » peut désigner Paul comme Marc : rien ne tranche" },
+  { veut: "", bonne: "L'élève a rendu son devoir au professeur. Il l'a corrigé le soir même.", faux: ["L'élève a rendu son devoir au professeur. Le professeur l'a corrigé le soir même.", "L'élève a rendu son devoir au professeur. Ce dernier l'a corrigé le soir même.", "L'élève a rendu son devoir au professeur. Celui-ci l'a corrigé le soir même."], raison: "« il » pourrait renvoyer à l'élève, qui n'a pourtant pas corrigé" },
+  { veut: "", bonne: "Zola publie Germinal en 1885. Il paraissait d'abord en feuilleton.", faux: ["Zola publie Germinal en 1885. Le roman paraissait d'abord en feuilleton.", "Zola publie Germinal en 1885. Ce roman paraissait d'abord en feuilleton.", "Zola publie Germinal en 1885. L'œuvre paraissait d'abord en feuilleton."], raison: "« il » renvoie grammaticalement à Zola, ce qui ne veut rien dire" },
+  { veut: "", bonne: "L'article cite le maire et l'opposante. Elle conteste les chiffres.", faux: ["L'article cite le maire et l'opposante. L'opposante conteste les chiffres.", "L'article cite le maire et l'opposante. Cette dernière conteste les chiffres.", "L'article cite le maire et l'opposante. La seconde conteste les chiffres."], raison: "le féminin ne suffit pas : il faudrait savoir que le maire n'est pas une femme" },
+  { veut: "", bonne: "La pièce commence par un monologue et se ferme sur un duo. Il dure dix minutes.", faux: ["La pièce commence par un monologue et se ferme sur un duo. Le monologue dure dix minutes.", "La pièce commence par un monologue et se ferme sur un duo. Le premier dure dix minutes.", "La pièce commence par un monologue et se ferme sur un duo. Ce dernier dure dix minutes."], raison: "« il » convient aux deux termes, qui sont tous deux masculins singuliers" },
+  { veut: "", bonne: "Le recueil rassemble des sonnets et des odes. Ils obéissent à une forme fixe.", faux: ["Le recueil rassemble des sonnets et des odes. Les sonnets obéissent à une forme fixe.", "Le recueil rassemble des sonnets et des odes. Ces derniers obéissent à une forme fixe.", "Le recueil rassemble des sonnets et des odes. Les premiers obéissent à une forme fixe."], raison: "« ils » pourrait désigner les sonnets, les odes, ou les deux ensemble" },
+];
+
 const REPRISES: readonly Reprise[] = [
   { phrase: "Paul a rencontré Marc hier. … lui a parlé de son projet.", bonne: "Le premier", faux: ["Il", "Celui-ci", "Ce dernier"], raison: "« il », « celui-ci » et « ce dernier » désigneraient Marc : seule une reprise par rang lève le doute" },
   { phrase: "Le roman et la nouvelle racontent tous deux. … est plus bref.", bonne: "Le second", faux: ["Il", "Celui-ci", "Ce genre"], raison: "il faut désigner la nouvelle sans ambigüité : la reprise par rang le fait" },
@@ -483,6 +630,211 @@ export const relationsLogiquesSecondeBank: TutorBankItemV4[] = [
           "Compte d'abord les référents possibles. S'il n'y en a qu'un, prends le pronom, en vérifiant genre et nombre. S'il y en a deux, vérifie ce que chaque reprise désignerait pour un lecteur qui ne connait pas la suite.",
           `Ici, ${c.raison}.`,
           `La reprise attendue est « ${c.bonne} ».`,
+        ),
+      };
+    },
+  },
+
+  /* ══════════════ LES SECONDS ITEMS ══════════════ */
+
+  {
+    kind: "template",
+    id: "2de_rl_cause_consequence_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "relations_logiques_2de",
+    microId: "2de_rl_cause_consequence",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Les faits ne changent pas, seul l'ordre change. Ce qui était introduit par « parce que » passe en tête.",
+    tags: ["seconde", "expression", "cause", "conséquence", "template"],
+    generate: () => {
+      const c = randomChoice(CONVERSIONS);
+      return {
+        text: `« ${c.avant} »\n\nOn veut dire la même chose en ${c.veut}.\nQuelle phrase écrire ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Cause et conséquence ne sont pas deux relations mais une seule, prise dans les deux sens. Ce que « parce que » introduit en second, « si bien que » l'annonce en premier. Savoir retourner une phrase ainsi permet de varier ses enchainements sans jamais répéter la même construction — ce que l'essai et la dissertation réclament à chaque paragraphe.",
+          "Repère la cause et la conséquence, puis décide laquelle tu veux annoncer d'abord. Si tu pars de la cause, il te faut « si bien que » ou « donc ». Si tu pars de la conséquence, il te faut « parce que » ou « puisque ».",
+          `Ici, ${c.raison}.`,
+          `On écrit : « ${c.bonne} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_rl_but_condition_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "relations_logiques_2de",
+    microId: "2de_rl_but_condition",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Demande-toi si le fait reste incertain après la substitution, ou s'il est désormais tenu pour acquis.",
+    tags: ["seconde", "expression", "but", "condition", "template"],
+    generate: () => {
+      const c = randomChoice(SUBSTITUTIONS);
+      return {
+        text: `« ${c.phrase} »\n\nOn remplace « ${c.avant} » par « ${c.apres} ». Qu'est-ce que cela change ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Le but et la condition ont en commun de porter sur ce qui n'est pas encore réalisé — d'où le subjonctif après « pour que », d'où l'incertitude après « si ». La conséquence et le temps, au contraire, portent sur de l'acquis. Substituer un outil à l'autre fait donc basculer le fait du possible au certain, ou l'inverse.",
+          "Après la substitution, pose une seule question : ce fait est-il maintenant donné pour sûr ? La réponse suffit à départager les quatre propositions.",
+          `Ici, ${c.raison}.`,
+          `Ce qui change : ${c.bonne}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_rl_opposition_concession_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "relations_logiques_2de",
+    microId: "2de_rl_opposition_concession",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Concession : un obstacle qui aurait dû empêcher, et n'a pas empêché. Opposition : deux faits simplement mis côte à côte.",
+    tags: ["seconde", "expression", "opposition", "concession", "template"],
+    generate: () => {
+      const c = randomChoice(RECONNAIT);
+      return {
+        text: `Laquelle de ces phrases exprime ${c.veut} ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Quatre relations se disputent les mêmes faits, et on les confond parce qu'on les reconnait au mot de liaison plutôt qu'au sens. L'opposition compare deux réalités distinctes. La concession pose un obstacle qui aurait dû produire un effet, et ne l'a pas produit. La cause explique ce qui précède ; la conséquence annonce ce qui suit.",
+          "Pour la concession, vérifie qu'on pourrait dire « et pourtant ». Pour l'opposition, vérifie qu'il y a bien DEUX sujets ou deux lieux comparés.",
+          `Ici, ${c.raison}.`,
+          `C'est : « ${c.bonne} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_rl_comparaison_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "relations_logiques_2de",
+    microId: "2de_rl_comparaison",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Demande-toi si la phrase CLASSE les deux termes, ou si elle se contente de les rapprocher.",
+    tags: ["seconde", "expression", "comparaison", "template"],
+    generate: () => {
+      const c = randomChoice(ETABLIT);
+      return {
+        text: `« ${c.phrase} »\n\nQu'établit cette comparaison ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.rep, COMPARE_POOL),
+        expected: [c.rep],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Comparer, c'est tantôt mesurer, tantôt rapprocher. « Plus que », « moins que », « aussi que » classent : ils placent deux termes sur une même échelle. « Comme » et « tel » ne classent rien : ils proposent une image, et l'on quitte alors la grammaire pour la figure de style — c'est là que commence le commentaire.",
+          "Cherche s'il existe une échelle sur laquelle ranger les deux termes. S'il n'y en a pas, c'est une analogie.",
+          `Ici, ${c.raison}.`,
+          `La comparaison établit ${c.rep}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_rl_commuter_gn_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "relations_logiques_2de",
+    microId: "2de_rl_commuter_gn",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Les quatre subordonnées sont correctes. Une seule garde la relation que la préposition portait.",
+    tags: ["seconde", "expression", "commutation", "template"],
+    generate: () => {
+      const c = randomChoice(REMONTES);
+      return {
+        text: `« ${c.phrase} »\n\nOn développe « ${c.groupe} » en subordonnée. Laquelle convient ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une préposition porte une relation aussi précisément qu'une conjonction : « à cause de » dit la cause, « en vue de » le but, « malgré » la concession, « en cas de » la condition, « dès » le temps. Développer le groupe en subordonnée oblige à nommer cette relation — et c'est le contrôle le plus sûr qu'on l'a bien lue.",
+          "Traduis d'abord la préposition en mots : « à cause de » = « parce que ». Puis vérifie que le mode suit — le but demande le subjonctif, la cause l'indicatif.",
+          `Ici, ${c.raison}.`,
+          `On écrit « ${c.bonne} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_rl_connecteur_paragraphe_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "relations_logiques_2de",
+    microId: "2de_rl_connecteur_paragraphe",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Tu n'as pas le paragraphe, seulement son premier mot. C'est pourtant assez : chaque connecteur promet une chose et une seule.",
+    tags: ["seconde", "expression", "connecteurs", "template"],
+    generate: () => {
+      const c = randomChoice(ATTENTES);
+      return {
+        text: `Un paragraphe s'ouvre par « ${c.connecteur} ».\n\nQu'attend le lecteur ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.rep, ATTENTES_POOL),
+        expected: [c.rep],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Un connecteur en tête de paragraphe est une promesse faite au lecteur : il annonce ce que le paragraphe va faire avant même qu'il le fasse. C'est pourquoi un devoir bien enchainé se lit vite — et pourquoi un connecteur mal choisi désoriente, même si chaque phrase est juste.",
+          "Range-les en familles : « en effet » explique, « de plus » ajoute, « en revanche » oppose, « ainsi » conclut, « or » renverse, « toutefois » nuance. La différence entre renverser et nuancer est celle qui coûte le plus de points.",
+          `Ici, ${c.raison}.`,
+          `Le lecteur attend ${c.rep}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_rl_reprises_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "relations_logiques_2de",
+    microId: "2de_rl_reprises",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Les quatre phrases sont correctes. Cherche celle où deux référents conviendraient au même mot.",
+    tags: ["seconde", "expression", "cohésion", "relecture", "template"],
+    generate: () => {
+      const c = randomChoice(AMBIGUES);
+      return {
+        text: `Dans laquelle de ces suites la reprise laisse-t-elle le lecteur dans le doute ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une reprise ambigüe ne produit aucune faute : la phrase reste correcte, et celui qui l'écrit la comprend parfaitement, puisqu'il sait ce qu'il voulait dire. Le lecteur, lui, hésite entre deux référents — et c'est la première cause de copies illisibles alors que chaque phrase, prise seule, est juste.",
+          "Après chaque pronom, demande-toi combien de mots précédents pourraient convenir en genre et en nombre. S'il y en a deux, il faut nommer ou employer une reprise par rang : « le premier », « ce dernier ».",
+          `Ici, ${c.raison}.`,
+          `La suite ambigüe est : « ${c.bonne} »`,
         ),
       };
     },
