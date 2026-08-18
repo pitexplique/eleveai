@@ -46,6 +46,7 @@ docs/*
 !docs/prompt-francais-cp.md
 !docs/prompt-francais-ce1.md
 !docs/prompt-francais-ce2.md
+!docs/prompt-debiaiser-cycle4.md
 
 # typescript
 *.tsbuildinfo
