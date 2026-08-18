@@ -48,7 +48,6 @@ type TutorSimpleViewProps = {
   onSubmit: () => void;
   onQcmClick: (choice: string) => void;
   onInputKeyDown: (event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  onShowLesson: () => void;
   // Enregistrement de la séance (comme en mode complet) : un élève connecté
   // doit pouvoir sauvegarder son score depuis le mode simple aussi.
   isLoggedIn: boolean;
@@ -111,7 +110,6 @@ export default function TutorSimpleView({
   onSubmit,
   onQcmClick,
   onInputKeyDown,
-  onShowLesson,
   isLoggedIn,
   canSave,
   saving,
@@ -265,16 +263,11 @@ export default function TutorSimpleView({
 
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_120px]">
           <section className="min-h-[520px] rounded-2xl bg-white px-5 py-6 shadow-sm ring-1 ring-slate-200 sm:px-8 lg:px-12">
-            <div className="mb-5 flex justify-center gap-2">
-              <button
-                type="button"
-                onClick={onShowLesson}
-                className="rounded-full bg-sky-100 px-4 py-2 text-sm font-black text-sky-700 hover:bg-sky-200"
-              >
-                J&apos;apprends !
-              </button>
-
-              {learningVideoHref ? (
+            {/* La leçon écrite est retirée le temps d'en revoir le principe :
+                elle se construisait sur les items `fixed`. Reste la vidéo, et
+                le Coach IA quand l'élève se trompe. */}
+            {learningVideoHref ? (
+              <div className="mb-5 flex justify-center gap-2">
                 <a
                   href={learningVideoHref}
                   target="_blank"
@@ -285,8 +278,8 @@ export default function TutorSimpleView({
                 >
                   <Video aria-hidden="true" size={18} strokeWidth={2.5} />
                 </a>
-              ) : null}
-            </div>
+              </div>
+            ) : null}
 
             {wrongAnswerPanelOpen ? (
               wrongAnswerPanel

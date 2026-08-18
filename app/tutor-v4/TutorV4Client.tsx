@@ -82,12 +82,13 @@ import type {
   RevisionFocus,
 } from "@/lib/tutor-v4/types";
 
-import { getTutorLesson } from "@/lib/tutor-v4/lessons/getTutorLesson";
 import {
   lireQuestionsVues,
   retenirQuestionVue,
 } from "@/lib/tutor-v4/memoireQuestions";
-import { LessonPanel } from "@/lib/tutor-v4/lessons/components/LessonPanel";
+// La leçon écrite est retirée du tutor : elle se construisait sur les items
+// `fixed` et rendait mal. En attendant de revoir le principe, l'aide passe par
+// le Coach IA proposé sur l'écran d'erreur (`CoachErrorHelp`).
 import TutorSimpleView from "./TutorSimpleView";
 import {
   ListenButton,
@@ -448,7 +449,6 @@ export default function TutorV4Page() {
   const calculatriceAutorisee = matiere === "maths" && classe !== "premiere";
   const [notion, setNotion] = useState("");
   const [urlInitDone, setUrlInitDone] = useState(false);
-  const [showLesson, setShowLesson] = useState(false);
   const [displayMode, setDisplayMode] = useState<TutorDisplayMode>("simple");
   // Mode « affichage classe » : agrandit énoncé + réponses pour la projection
   // (plus besoin de zoomer le navigateur).
@@ -787,21 +787,6 @@ useEffect(() => {
     if (!notion) return [];
     return notionMicroMap[notion] ?? [];
   }, [notion, notionMicroMap]);
-
-const currentLesson = useMemo(() => {
-  if (!notion) return null;
-
-  return getTutorLesson({
-    classe,
-    matiere,
-    notionId: notion,
-    microId: activeMicroId,
-    notionLabel: notionLabel(notion, classe, matiere),
-    microLabel: activeMicroId
-      ? microLabel(activeMicroId, classe, matiere)
-      : undefined,
-  });
-}, [classe, matiere, notion, activeMicroId]);
 
 useEffect(() => {
   if (displayMode !== "simple") return;
@@ -1384,15 +1369,6 @@ function handleInputKeyDown(
     setSaveMessage("Séance enregistrée ✅");
   }
 
-  const lessonModal =
-    showLesson && currentLesson ? (
-      <div className="fixed inset-0 z-[60] overflow-y-auto bg-black/60 px-3 py-6">
-        <div className="mx-auto max-w-2xl">
-          <LessonPanel lesson={currentLesson} onClose={() => setShowLesson(false)} />
-        </div>
-      </div>
-    ) : null;
-
   // Ressources internes proposées après la réponse de l'IA : on entraîne sur le
   // micro raté + quelques voisins de la même notion (liens vers le tutor ciblé).
   const coachSuggestions = currentQuestion
@@ -1506,14 +1482,12 @@ function handleInputKeyDown(
           onSubmit={() => void submitAnswer()}
           onQcmClick={(choice) => void handleQcmClick(choice)}
           onInputKeyDown={handleInputKeyDown}
-          onShowLesson={() => setShowLesson(true)}
           isLoggedIn={!!eleve}
           canSave={nbTentatives > 0}
           saving={saving}
           saveMessage={saveMessage}
           onSave={() => void enregistrerSeance()}
         />
-        {lessonModal}
         {calculatriceAutorisee && <BoiteAOutils />}
       </>
     );
@@ -1523,25 +1497,6 @@ function handleInputKeyDown(
   <main className="min-h-screen bg-[#f3f4f6] px-2 py-3 sm:px-4 sm:py-6">
     <div className="mx-auto max-w-7xl">
        {remediationBanner}
-       <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
-        <button
-          type="button"
-          onClick={() => setShowLesson(true)}
-          className="rounded-full bg-sky-500 px-5 py-3 text-sm font-black text-white shadow-xl hover:bg-sky-600"
-        >
-          📘 Leçon écrite
-        </button>
-        {showLesson ? (
-        <div className="fixed inset-0 z-[60] overflow-y-auto bg-black/60 px-3 py-6">
-          <div className="mx-auto max-w-2xl">
-            <LessonPanel
-              lesson={currentLesson}
-              onClose={() => setShowLesson(false)}
-            />
-          </div>
-        </div>
-      ) : null}
-      </div>
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
         <div className="space-y-4">
           {/* Contrôles + notion sur une seule ligne pour garder la question
@@ -1565,6 +1520,7 @@ function handleInputKeyDown(
             >
               Mode simple
             </button>
+
 
             <button
               type="button"
