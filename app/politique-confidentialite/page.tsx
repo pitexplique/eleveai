@@ -1,11 +1,36 @@
+// ⚠️ CETTE PAGE DISAIT TROIS CHOSES QU'ELLE NE POUVAIT PAS TENIR (18/08/2026).
+//
+// 1. « Le responsable du traitement est l'éditeur de la plateforme » — c'est
+//    une non-réponse. Le RGPD (art. 13.1.a) demande une IDENTITÉ, et le site
+//    nomme Frédéric partout ailleurs. Même angle mort que les mentions légales.
+// 2. Deux adresses pour exercer les mêmes droits : `contact@eleveai.fr` ici,
+//    `academienumerique@gmail.com` dans les mentions légales. Les trois pages
+//    lisent maintenant `EDITEUR.contact`.
+// 3. ⛔ « 🇪🇺 Données hébergées dans l'UE », en gras dans le résumé, alors que
+//    la page nommait trois lignes plus bas Vercel (société américaine, et sans
+//    `vercel.json` déclarant `regions` les fonctions tournent dans la région
+//    par défaut du projet) et OpenAI (États-Unis). Une promesse que des parents
+//    et des principaux lisent : elle doit être vraie ou ne pas être écrite. Ce
+//    qui la remplace dit le mécanisme réel — chapitre V du RGPD — et la
+//    section 6 nomme, prestataire par prestataire, ce qui part et où.
+//
+// ⏳ La région exacte de Supabase reste à confirmer dans le tableau de bord du
+// projet, et à écrire dans la section 6 le jour où elle est connue.
+
 import type { Metadata } from "next";
 import Link from "next/link";
+import { EDITEUR, PSP, VENTE, cgvEnVigueur } from "@/lib/legal/editeur";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
   description:
     "Comment EleveAI protège les données des élèves, des professeurs et des établissements : données minimales, aucune revente, vos droits (accès, rectification, suppression).",
+  alternates: {
+    canonical: "https://www.eleveai.fr/politique-confidentialite",
+  },
 };
+
+const MAILTO = `mailto:${EDITEUR.contact}`;
 
 const sections = [
   {
@@ -15,13 +40,21 @@ const sections = [
       <>
         <p>
           EleveAI est une plateforme éducative conçue par un enseignant en activité
-          à La Réunion. Le responsable du traitement des données est l&apos;éditeur
-          de la plateforme EleveAI.
+          à La Réunion. Le responsable du traitement des données est{" "}
+          <span className="font-semibold text-slate-50">{EDITEUR.nomComplet}</span>,
+          éditeur de la plateforme EleveAI.
+        </p>
+        <p>
+          Lorsqu&apos;un établissement scolaire ouvre des comptes pour ses élèves,
+          il détermine avec EleveAI les données transmises et la durée de leur
+          conservation : les deux agissent alors chacun dans son rôle, et toute
+          demande peut être adressée indifféremment à l&apos;établissement ou à
+          EleveAI.
         </p>
         <p>
           Pour toute question sur vos données :{" "}
-          <a href="mailto:contact@eleveai.fr" className="font-semibold text-emerald-300 hover:text-emerald-200">
-            contact@eleveai.fr
+          <a href={MAILTO} className="font-semibold text-emerald-300 hover:text-emerald-200">
+            {EDITEUR.contact}
           </a>
         </p>
       </>
@@ -54,6 +87,16 @@ const sections = [
             des questions et des réponses est conservé pour le suivi pédagogique et
             l&apos;amélioration du service.
           </li>
+          {/* Les données de facturation n'existent pas tant que rien ne se vend :
+              on ne déclare pas un traitement qui n'a jamais lieu. */}
+          {VENTE.ouverte && (
+            <li>
+              <span className="font-semibold text-slate-50">Clients d&apos;un abonnement</span> : nom,
+              adresse de facturation et historique des commandes. Les données de carte
+              bancaire sont saisies chez notre prestataire de paiement et ne sont
+              jamais reçues ni conservées par EleveAI.
+            </li>
+          )}
         </ul>
       </>
     ),
@@ -130,12 +173,48 @@ const sections = [
     titre: "6. Où sont stockées les données ?",
     contenu: (
       <>
-        <p>EleveAI s&apos;appuie sur des prestataires techniques reconnus :</p>
+        <p>
+          EleveAI s&apos;appuie sur quatre prestataires techniques. Voici, pour
+          chacun, ce qu&apos;il traite et d&apos;où il le traite :
+        </p>
         <ul className="ml-5 list-disc space-y-2">
-          <li><span className="font-semibold text-slate-50">Vercel</span> — hébergement du site.</li>
-          <li><span className="font-semibold text-slate-50">Supabase</span> — base de données (comptes, résultats).</li>
-          <li><span className="font-semibold text-slate-50">OpenAI</span> — génération des réponses du coach IA et des audios.</li>
+          <li>
+            <span className="font-semibold text-slate-50">Vercel</span> — hébergement du site.
+            Société de droit américain.
+          </li>
+          <li>
+            <span className="font-semibold text-slate-50">Supabase</span> — base de données :
+            comptes, résultats, progression. C&apos;est là que vivent les données des élèves.
+          </li>
+          <li>
+            <span className="font-semibold text-slate-50">OpenAI</span> — génération des réponses
+            du coach IA et des audios. Société de droit américain.
+          </li>
+          <li>
+            <span className="font-semibold text-slate-50">Resend</span> — envoi des courriels
+            (confirmations, lettre d&apos;information).
+          </li>
+          {VENTE.ouverte && (
+            <li>
+              <span className="font-semibold text-slate-50">{PSP.nom}</span> — traitement des
+              paiements par carte. Les coordonnées bancaires sont saisies chez lui et ne
+              transitent pas par EleveAI.
+            </li>
+          )}
         </ul>
+        <p>
+          Certains de ces prestataires sont établis aux États-Unis, ou peuvent y
+          traiter une partie des données. Ces transferts sont encadrés par les
+          garanties prévues au chapitre V du RGPD — clauses contractuelles types
+          de la Commission européenne, et, pour les prestataires américains qui y
+          adhèrent, le cadre de protection des données UE–États-Unis.
+        </p>
+        <p>
+          Aucune donnée d&apos;élève n&apos;est transmise à un prestataire au-delà
+          de ce que son rôle exige : le coach IA reçoit la question et son contexte
+          d&apos;exercice, jamais les codes d&apos;accès, jamais le tableau de bord de
+          la classe.
+        </p>
         <p>
           La mesure d&apos;audience du site (Vercel Analytics) est anonyme et fonctionne sans cookie
           publicitaire. La session élève est conservée localement sur l&apos;appareil (stockage local
@@ -148,11 +227,24 @@ const sections = [
     emoji: "⏳",
     titre: "7. Combien de temps ?",
     contenu: (
-      <p>
-        Les données des élèves sont conservées pendant la durée du contrat avec
-        l&apos;établissement (ou de l&apos;abonnement famille), puis supprimées. Un établissement
-        peut demander à tout moment la suppression des comptes de ses élèves.
-      </p>
+      <>
+        <p>
+          Les données des élèves sont conservées pendant la durée du contrat avec
+          l&apos;établissement (ou de l&apos;abonnement famille), puis supprimées. Un établissement
+          peut demander à tout moment la suppression des comptes de ses élèves.
+        </p>
+        <p>
+          Un compte resté sans aucune connexion pendant deux années scolaires est
+          supprimé, sans qu&apos;il soit besoin de le demander.
+        </p>
+        {VENTE.ouverte && (
+          <p>
+            Une seule catégorie échappe à cette règle : les factures et les pièces
+            comptables, que la loi impose de conserver dix ans (art. L123-22 du code
+            de commerce). Elles ne contiennent aucune donnée d&apos;élève.
+          </p>
+        )}
+      </>
     ),
   },
   {
@@ -166,9 +258,15 @@ const sections = [
           d&apos;opposition et de limitation du traitement de ses données.
         </p>
         <p>
+          Aucune décision produisant des effets juridiques n&apos;est prise
+          automatiquement à partir de ces données : le coach adapte les exercices
+          au niveau de l&apos;élève, il ne l&apos;oriente pas, ne le note pas et ne
+          décide de rien à sa place.
+        </p>
+        <p>
           Pour exercer ces droits, écrivez à{" "}
-          <a href="mailto:contact@eleveai.fr" className="font-semibold text-emerald-300 hover:text-emerald-200">
-            contact@eleveai.fr
+          <a href={MAILTO} className="font-semibold text-emerald-300 hover:text-emerald-200">
+            {EDITEUR.contact}
           </a>{" "}
           — réponse sous 30 jours maximum. Vous pouvez également saisir la CNIL
           (<a href="https://www.cnil.fr" target="_blank" rel="noreferrer" className="font-semibold text-emerald-300 hover:text-emerald-200">cnil.fr</a>).
@@ -220,7 +318,8 @@ export default function PolitiqueConfidentialitePage() {
               <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-200">
                 <li>🔑 Les élèves se connectent avec des codes — sans e-mail ni téléphone.</li>
                 <li>🚫 Aucune donnée vendue, aucune publicité, aucun profilage.</li>
-                <li>🇪🇺 Données hébergées dans l&apos;UE ; droits d&apos;accès, de rectification et de suppression sur simple demande.</li>
+                <li>⚖️ Droits d&apos;accès, de rectification et de suppression sur simple demande, sous 30 jours.</li>
+                <li>🌍 Nos prestataires sont nommés un par un (section 6) ; les transferts hors de l&apos;UE sont encadrés par le RGPD.</li>
                 <li>🗑️ Données supprimées à la fin du contrat avec l&apos;établissement.</li>
               </ul>
             </div>
@@ -243,9 +342,9 @@ export default function PolitiqueConfidentialitePage() {
         {/* Footer */}
         <div className="space-y-3 border-t border-slate-800 pt-8 text-sm leading-7 text-slate-300">
           <p>
-            Dernière mise à jour : juin 2026. Une question, un doute ?{" "}
-            <a href="mailto:contact@eleveai.fr" className="font-semibold text-emerald-300 hover:text-emerald-200">
-              contact@eleveai.fr
+            Dernière mise à jour : août 2026. Une question, un doute ?{" "}
+            <a href={MAILTO} className="font-semibold text-emerald-300 hover:text-emerald-200">
+              {EDITEUR.contact}
             </a>
           </p>
           <p>
@@ -257,6 +356,14 @@ export default function PolitiqueConfidentialitePage() {
             <Link href="/cgu" className="font-semibold text-emerald-300 hover:text-emerald-200">
               conditions générales d&apos;utilisation
             </Link>
+            {cgvEnVigueur && (
+              <>
+                {" · "}
+                <Link href="/cgv" className="font-semibold text-emerald-300 hover:text-emerald-200">
+                  conditions générales de vente
+                </Link>
+              </>
+            )}
           </p>
         </div>
       </section>

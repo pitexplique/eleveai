@@ -19,7 +19,19 @@ export const EDITEUR = {
   nomDuSite: "EleveAI",
   nomComplet: "Frédéric Lacoste",
   directeurPublication: "Frédéric Lacoste",
-  contact: "academienumerique@gmail.com",
+
+  /* ⚠️ UNE SEULE ADRESSE POUR LES TROIS PAGES (18/08/2026). Les mentions
+     légales donnaient `academienumerique@gmail.com`, la politique de
+     confidentialité `contact@eleveai.fr` — deux adresses pour exercer les mêmes
+     droits RGPD. Le site publie déjà la seconde sur /contact, /partenaires,
+     /qui-sommes-nous et /pourquoi-eleveai, et Resend expédie la newsletter
+     depuis elle : c'est celle-là qui fait foi.
+     ⛔ Resend n'expédie que du SORTANT. Que le domaine y soit vérifié ne dit
+     PAS que le courrier ENTRANT arrive : il faut un MX ou une redirection vers
+     la boîte réellement lue. Une page légale qui renvoie vers une adresse
+     morte est pire que deux adresses vivantes — à vérifier en s'écrivant. */
+  contact: "contact@eleveai.fr",
+  contactSecours: "academienumerique@gmail.com",
 
   /* Tant qu'aucune vente n'est ouverte, un éditeur non professionnel n'a pas à
      publier son adresse postale : l'e-mail suffit à le rendre joignable. */
