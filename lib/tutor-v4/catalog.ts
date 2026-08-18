@@ -12,6 +12,11 @@ import { buildKnowledgePremiereMaths } from "@/lib/tutor-v4/knowledge/maths/prem
 import { buildKnowledgePremiereSpeMaths } from "@/lib/tutor-v4/knowledge/maths/premiere-spe/buildKnowledgePremiereSpe";
 import { buildKnowledgeTerminaleSpeMaths } from "@/lib/tutor-v4/knowledge/maths/terminale-spe/buildKnowledgeTerminaleSpe";
 import { buildKnowledgeStmgMaths } from "@/lib/tutor-v4/knowledge/maths/stmg/buildKnowledgeStmg";
+import {
+  ANNEE_PAR_NOTION_STMG,
+  sansMarqueurAnnee,
+  type AnneeStmg,
+} from "@/lib/tutor-v4/knowledge/maths/stmg/annees";
 import { buildKnowledgeAdulteMaths } from "@/lib/tutor-v4/knowledge/maths/adulte/buildKnowledgeAdulte";
 import { buildKnowledgeCpFrancais } from "@/lib/tutor-v4/knowledge/francais/cp/buildKnowledgeCpFrancais";
 import { buildKnowledgeA1English } from "@/lib/tutor-v4/knowledge/english/a1/buildKnowledgeA1English";
@@ -268,6 +273,31 @@ export function getDomaineMap(classe: Classe, matiere: Matiere = "maths") {
 
   return domaines.filter((domaine) => domaine.notions.length > 0);
 }
+
+// =========================
+// ANNÉE À L'INTÉRIEUR D'UNE CLASSE
+// =========================
+// UNE SEULE CLASSE COUVRE PARFOIS DEUX ANNÉES. La STMG est le cas : son
+// programme est écrit comme un cycle terminal de deux ans, et le coach en a
+// fait une classe unique (voir knowledge/maths/stmg/bo.ts). Résultat, cliquer
+// sur STMG servait les soixante-dix notions des deux années d'un bloc.
+//
+// Cette fonction rend la carte notionId → année quand la classe en a une, et
+// `null` quand la question ne se pose pas — une classe = une année. C'est le
+// coach qui décide quoi en faire : ici, deux pastilles « 1re » / « Tle ».
+//
+// ⚠️ `null` n'est pas un repli : c'est « cette classe n'a pas d'années à
+// distinguer ». L'appelant affiche alors la liste entière, comme avant.
+export function getAnneesNotions(
+  classe: Classe,
+  matiere: Matiere = "maths"
+): Record<string, AnneeStmg> | null {
+  if (classe === "stmg" && matiere === "maths") return ANNEE_PAR_NOTION_STMG;
+  return null;
+}
+
+export { sansMarqueurAnnee };
+export type { AnneeStmg };
 
 // =========================
 // ACCÈS PUBLIC AU PACK COMPLET

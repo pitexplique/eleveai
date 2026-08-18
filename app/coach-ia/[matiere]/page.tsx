@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 import {
   getNotionOptions,
   getNotionMicroMap,
   getMicroLabelMap,
   getDomaineMap,
+  getAnneesNotions,
+  sansMarqueurAnnee,
   notionLabel,
   type Classe,
   type Matiere,
@@ -25,7 +27,13 @@ import {
 } from "@/lib/videos/youtubeSearch";
 
 const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "premiere-spe", "terminale-spe", "stmg", "adulte"];
-const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"];
+/* ⛔ CETTE LISTE DÉCIDE DE CE QU'UN ÉLÈVE PEUT CLIQUER EN FRANÇAIS, et elle est
+   INDÉPENDANTE de `loadQuestionBankV4` : la 2de répondait parfaitement par
+   `?classe=seconde` alors qu'aucune pastille ne la proposait (18/08/2026).
+   Une classe oubliée ici ne casse rien — elle n'existe simplement pas.
+   Les quatre autres listes à ouvrir en même temps sont énumérées en tête de
+   `app/parcours-francais/ParcoursFrancaisClient.tsx`. */
+const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde"];
 const ECONOMIE_CLASSES: Classe[] = ["eco-decouverte", "eco-college", "eco-lycee"];
 const ESPAGNOL_CLASSES: Classe[] = ["a1", "a2", "b1", "b2"];
 /* Le coach IA est adossé au référentiel Pix depuis le 16/08/2026 : deux
@@ -81,6 +89,36 @@ function getGroupesForMatiere(matiere: Matiere): { titre: string | null; classes
 
 function normalizeClasse(value: string | null, classes: Classe[], fallback: Classe): Classe {
   return classes.includes(value as Classe) ? (value as Classe) : fallback;
+}
+
+/**
+ * DEUX ANNÉES DANS UNE SEULE CLASSE (18/08/2026).
+ *
+ * La STMG du coach est le cycle terminal entier : première ET terminale. Cliquer
+ * dessus ouvrait donc 86 notions mélangées (57 de première, 29 de terminale) —
+ * un élève de première
+ * tombait sur le logarithme, un élève de terminale cherchait ses arbres de
+ * probabilités entre deux automatismes. Deux classes séparées auraient coupé au
+ * milieu des suites (elles commencent en première et se terminent en terminale) :
+ * on garde une classe, on filtre la liste.
+ *
+ * « Les deux » reste offert, et il n'est pas décoratif : en terminale on
+ * retravaille tout le programme de première. La pastille « Tle » montre ce qui
+ * est NOUVEAU en terminale, pas tout ce qu'on y fait — d'où la phrase sous les
+ * pastilles, qui le dit à l'élève au lieu de le lui laisser deviner.
+ */
+type AnneeFiltre = "premiere" | "terminale" | "cycle";
+
+const ANNEE_CHIPS: { id: AnneeFiltre; label: string }[] = [
+  { id: "premiere", label: "1re STMG" },
+  { id: "terminale", label: "Tle STMG" },
+  { id: "cycle", label: "Les deux" },
+];
+
+function normalizeAnnee(value: string | null): AnneeFiltre {
+  return value === "terminale" || value === "cycle" || value === "premiere"
+    ? value
+    : "premiere";
 }
 
 // youtu.be/ID, youtube.com/watch?v=ID, /embed/ID… → l'identifiant seul, pour
@@ -295,6 +333,48 @@ export default function CoachIA() {
   const notionMicroMap = getNotionMicroMap(classe, matiere);
   const microLabels = getMicroLabelMap(classe, matiere);
 
+  // Année choisie à l'intérieur de la classe (STMG seulement, cf. AnneeFiltre).
+  // `anneesNotions` vaut `null` partout ailleurs : une classe = une année, et
+  // les pastilles n'apparaissent pas.
+  const anneesNotions = useMemo(() => getAnneesNotions(classe, matiere), [classe, matiere]);
+  const [annee, setAnnee] = useState<AnneeFiltre>(() => normalizeAnnee(searchParams.get("annee")));
+  useEffect(() => {
+    setAnnee(normalizeAnnee(searchParams.get("annee")));
+  }, [searchParams]);
+
+  // Une notion que la carte des années ne connaît pas reste VISIBLE dans les
+  // deux : mieux vaut la montrer deux fois que l'escamoter en silence.
+  const gardeNotion = useCallback(
+    (notionId: string) => {
+      if (!anneesNotions || annee === "cycle") return true;
+      const a = anneesNotions[notionId];
+      return a === undefined || a === annee;
+    },
+    [anneesNotions, annee]
+  );
+
+  // Quand l'élève a lui-même choisi son année, le « (Tle) » collé à chaque
+  // libellé n'apprend plus rien : la pastille active le dit déjà.
+  const libelleNotion = useCallback(
+    (notionId: string) => {
+      const brut = notionLabel(notionId, classe, matiere);
+      return anneesNotions && annee !== "cycle" ? sansMarqueurAnnee(brut) : brut;
+    },
+    [anneesNotions, annee, classe, matiere]
+  );
+
+  const comptesAnnee = useMemo(() => {
+    if (!anneesNotions) return null;
+    let premiere = 0;
+    let terminale = 0;
+    for (const notionId of notionOptions) {
+      if ((notionMicroMap[notionId]?.length ?? 0) === 0) continue;
+      if (anneesNotions[notionId] === "terminale") terminale += 1;
+      else premiere += 1;
+    }
+    return { premiere, terminale, cycle: premiere + terminale };
+  }, [anneesNotions, notionOptions, notionMicroMap]);
+
   // Vidéos attachées aux notions (table notion_ressources, gérée depuis
   // /admin/ressources). Clé = notionId du coach → aucune correspondance.
   const [videosParNotion, setVideosParNotion] = useState<
@@ -354,8 +434,11 @@ export default function CoachIA() {
      l'aurait laissé devant une liste tronquée sans lui dire pourquoi. */
   const [search, setSearch] = useState(searchParams.get("notion") ?? "");
 
-  const totalNotions = notionOptions.length;
-  const totalMicros = notionOptions.reduce((sum, notionId) => {
+  // Les deux compteurs comptent CE QUI EST AFFICHÉ : sur « 1re STMG », annoncer
+  // les 86 notions du cycle démentirait la liste juste en dessous.
+  const notionsVisibles = notionOptions.filter(gardeNotion);
+  const totalNotions = notionsVisibles.length;
+  const totalMicros = notionsVisibles.reduce((sum, notionId) => {
     return sum + (notionMicroMap[notionId]?.length ?? 0);
   }, 0);
 
@@ -496,6 +579,51 @@ export default function CoachIA() {
               </div>
             </div>
 
+            {/* Année, à l'intérieur d'une classe qui en couvre deux (STMG). */}
+            {anneesNotions && comptesAnnee ? (
+              <div className="mt-5 rounded-2xl border border-sky-200 bg-sky-50/70 p-4">
+                <p className="text-[11px] font-black uppercase tracking-wide text-sky-700">
+                  Ton année
+                </p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {ANNEE_CHIPS.map((chip) => {
+                    const actif = annee === chip.id;
+                    return (
+                      <button
+                        key={chip.id}
+                        type="button"
+                        onClick={() => setAnnee(chip.id)}
+                        aria-pressed={actif}
+                        className={[
+                          "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold transition",
+                          actif
+                            ? "border-sky-600 bg-sky-600 text-white shadow-sm"
+                            : "border-sky-200 bg-white text-sky-700 hover:bg-sky-100",
+                        ].join(" ")}
+                      >
+                        {chip.label}
+                        <span
+                          className={[
+                            "rounded-full px-2 py-0.5 text-xs font-bold",
+                            actif ? "bg-white/20 text-white" : "bg-sky-100 text-sky-700",
+                          ].join(" ")}
+                        >
+                          {comptesAnnee[chip.id]}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <p className="mt-2 text-xs font-semibold leading-5 text-sky-800/80">
+                  {annee === "terminale"
+                    ? "Ce qui est nouveau en terminale. Le programme de première reste au menu toute l'année : clique sur « Les deux » pour le revoir."
+                    : annee === "premiere"
+                      ? "Le programme de première. Les suites, elles, se terminent en terminale : elles sont sur l'autre pastille."
+                      : "Les deux années du cycle, dans l'ordre du programme."}
+                </p>
+              </div>
+            ) : null}
+
             {/* Barre de recherche */}
             <div className="mt-4 relative">
               <span className="absolute inset-y-0 left-3 flex items-center text-slate-400 pointer-events-none">🔍</span>
@@ -512,10 +640,11 @@ export default function CoachIA() {
           <div className="columns-1 gap-8 lg:columns-2 2xl:columns-3">
             {domaines.map((domaine) => {
               const notionsAvecMicros = domaine.notions
+                .filter(gardeNotion)
                 .map((notionId) => ({ notionId, micros: notionMicroMap[notionId] ?? [] }))
                 .filter((item) => {
                   if (!searchLower) return item.micros.length > 0;
-                  const notionMatch = notionLabel(item.notionId, classe, matiere).toLowerCase().includes(searchLower);
+                  const notionMatch = libelleNotion(item.notionId).toLowerCase().includes(searchLower);
                   const filteredMicros = item.micros.filter((microId) =>
                     (microLabels[microId] || microId).toLowerCase().includes(searchLower)
                   );
@@ -523,7 +652,7 @@ export default function CoachIA() {
                 })
                 .map((item) => {
                   if (!searchLower) return item;
-                  const notionMatch = notionLabel(item.notionId, classe, matiere).toLowerCase().includes(searchLower);
+                  const notionMatch = libelleNotion(item.notionId).toLowerCase().includes(searchLower);
                   return {
                     ...item,
                     micros: notionMatch
@@ -560,7 +689,7 @@ export default function CoachIA() {
                       <article key={notionId}>
                         <div className="mb-2 flex flex-wrap items-center gap-2">
                           <h3 className="text-base font-bold text-slate-800">
-                            {notionLabel(notionId, classe, matiere)}
+                            {libelleNotion(notionId)}
                           </h3>
                           {ficheHref ? (
                             <Link
@@ -665,7 +794,7 @@ export default function CoachIA() {
                                   href={youtubeSearchUrl([
                                     MATIERE_YOUTUBE_LABEL[matiere] ?? matiere,
                                     CLASSE_YOUTUBE_LABEL[classe] ?? classe,
-                                    notionLabel(notionId, classe, matiere),
+                                    libelleNotion(notionId),
                                     microLabels[microId] || "",
                                   ])}
                                   target="_blank"
