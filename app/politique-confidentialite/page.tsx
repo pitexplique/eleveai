@@ -14,8 +14,12 @@
 //    qui la remplace dit le mécanisme réel — chapitre V du RGPD — et la
 //    section 6 nomme, prestataire par prestataire, ce qui part et où.
 //
-// ⏳ La région exacte de Supabase reste à confirmer dans le tableau de bord du
-// projet, et à écrire dans la section 6 le jour où elle est connue.
+// ✅ La promesse européenne n'a pas disparu, elle a été RESSERRÉE sur ce qui est
+// vrai : le projet Supabase tourne dans une région de l'UE (confirmé le
+// 18/08/2026), donc la base qui contient les données des élèves y est. C'est la
+// phrase la plus rassurante de la page, et elle porte désormais sur ce qu'elle
+// décrit vraiment — pas sur « les données » en bloc, dont une partie traverse
+// l'Atlantique dès qu'un élève pose une question au coach.
 
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -184,7 +188,8 @@ const sections = [
           </li>
           <li>
             <span className="font-semibold text-slate-50">Supabase</span> — base de données :
-            comptes, résultats, progression. C&apos;est là que vivent les données des élèves.
+            comptes, résultats, progression. C&apos;est là que vivent les données des élèves,
+            sur une infrastructure située dans l&apos;Union européenne.
           </li>
           <li>
             <span className="font-semibold text-slate-50">OpenAI</span> — génération des réponses
@@ -319,7 +324,7 @@ export default function PolitiqueConfidentialitePage() {
                 <li>🔑 Les élèves se connectent avec des codes — sans e-mail ni téléphone.</li>
                 <li>🚫 Aucune donnée vendue, aucune publicité, aucun profilage.</li>
                 <li>⚖️ Droits d&apos;accès, de rectification et de suppression sur simple demande, sous 30 jours.</li>
-                <li>🌍 Nos prestataires sont nommés un par un (section 6) ; les transferts hors de l&apos;UE sont encadrés par le RGPD.</li>
+                <li>🇪🇺 La base qui contient les données des élèves est hébergée dans l&apos;Union européenne ; les autres prestataires sont nommés un par un (section 6).</li>
                 <li>🗑️ Données supprimées à la fin du contrat avec l&apos;établissement.</li>
               </ul>
             </div>

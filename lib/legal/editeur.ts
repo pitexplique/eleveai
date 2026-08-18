@@ -26,10 +26,11 @@ export const EDITEUR = {
      droits RGPD. Le site publie déjà la seconde sur /contact, /partenaires,
      /qui-sommes-nous et /pourquoi-eleveai, et Resend expédie la newsletter
      depuis elle : c'est celle-là qui fait foi.
-     ⛔ Resend n'expédie que du SORTANT. Que le domaine y soit vérifié ne dit
-     PAS que le courrier ENTRANT arrive : il faut un MX ou une redirection vers
-     la boîte réellement lue. Une page légale qui renvoie vers une adresse
-     morte est pire que deux adresses vivantes — à vérifier en s'écrivant. */
+     ⚠️ Resend n'expédie que du SORTANT : que le domaine y soit vérifié ne dit
+     PAS que le courrier ENTRANT arrive. ✅ Frédéric a confirmé le 18/08/2026
+     qu'il reçoit bien cette boîte. Si la redirection saute un jour, ce sont
+     trois pages légales — dont l'exercice des droits RGPD — qui pointent vers
+     une adresse morte : c'est la ligne à retester après tout changement DNS. */
   contact: "contact@eleveai.fr",
   contactSecours: "academienumerique@gmail.com",
 
