@@ -43,10 +43,10 @@ export default async function AdminDashboardPage() {
             c'est ici leur seule porte. */}
         <section className="grid gap-3 sm:grid-cols-2">
           <Link
-            href="/audit"
+            href="/audit-commission"
             className="block rounded-xl border border-teal-700 bg-teal-900/30 p-4 transition hover:bg-teal-900/50"
           >
-            <p className="font-bold text-teal-300">📋 Audit express</p>
+            <p className="font-bold text-teal-300">📋 Audit — commissions</p>
             <p className="mt-1 text-sm text-slate-400">
               La feuille qu&apos;on remplit devant un dirigeant : il donne ses
               chiffres, la page affiche ce qu&apos;il verse à son intermédiaire.

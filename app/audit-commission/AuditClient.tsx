@@ -52,7 +52,11 @@ export default function AuditClient() {
         {/* ── EN-TÊTE ── */}
         <header className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-slate-900 pb-4">
           <div>
-            <h1 className="text-2xl font-black leading-none">Audit express</h1>
+            {/* Le titre nomme CE QUI EST MESURÉ, pas la marque de l'outil :
+                le document remis au dirigeant doit dire de quoi il parle. */}
+            <h1 className="text-2xl font-black leading-none">
+              Ce que vous versez aux intermédiaires
+            </h1>
             <p className="mt-1.5 text-sm font-bold">
               {EDITEUR.nomComplet}
               {SIGNATURE.titre && (

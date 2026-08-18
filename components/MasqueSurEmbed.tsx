@@ -19,10 +19,18 @@ import { usePathname } from "next/navigation";
 // un dirigeant, puis qu'on lui imprime. Un menu « Élèves · Parents ·
 // Enseignants » au-dessus d'un audit d'hôtel dit exactement le contraire de ce
 // que le document essaie d'établir — et il partirait sur le papier.
-const SANS_HABILLAGE = ["/embed", "/ia", "/audit", "/devis"];
+const SANS_HABILLAGE = ["/embed", "/ia", "/devis"];
+
+// Les générateurs d'audit forment une FAMILLE — /audit-commission aujourd'hui,
+// d'autres ensuite. On les masque par préfixe plutôt qu'un par un : sinon le
+// jour où /audit-visibilite naît, il sortirait avec le menu « Élèves · Parents »
+// au-dessus d'un document remis à un dirigeant, et personne ne penserait à
+// revenir modifier ce fichier.
+const PREFIXES_SANS_HABILLAGE = ["/audit-"];
 
 export default function MasqueSurEmbed({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   if (SANS_HABILLAGE.some((p) => pathname === p || pathname?.startsWith(`${p}/`))) return null;
+  if (PREFIXES_SANS_HABILLAGE.some((p) => pathname?.startsWith(p))) return null;
   return <>{children}</>;
 }
