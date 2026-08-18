@@ -16,18 +16,19 @@ import {
 } from "@/components/parcours/ClassBoard";
 import BoutonSignalerQuestion from "@/components/signalement/BoutonSignalerQuestion";
 
-const NIVEAUX: ParcoursNiveauIa[] = ["a1", "a2", "b1", "b2", "c1"];
+/* Les deux portes du coach IA, calées sur les paliers Pix. C'étaient les cinq
+   niveaux maison A1→C1 : le parcours proposait une troisième façon de nommer
+   ce que le coach et l'évaluation blanche nomment déjà pareil. */
+const NIVEAUX: ParcoursNiveauIa[] = ["college", "lycee"];
 
 const niveauLabels: Record<ParcoursNiveauIa, string> = {
-  a1: "A1", a2: "A2", b1: "B1", b2: "B2", c1: "C1",
+  college: "Collège",
+  lycee: "Lycée",
 };
 
 const niveauColors: Record<ParcoursNiveauIa, { active: string; inactive: string }> = {
-  a1: { active: "border-lime-500 bg-lime-500 text-white",     inactive: "border-slate-200 bg-white text-lime-600 hover:bg-lime-50" },
-  a2: { active: "border-sky-500 bg-sky-500 text-white",       inactive: "border-slate-200 bg-white text-sky-600 hover:bg-sky-50" },
-  b1: { active: "border-violet-500 bg-violet-500 text-white", inactive: "border-slate-200 bg-white text-violet-600 hover:bg-violet-50" },
-  b2: { active: "border-fuchsia-500 bg-fuchsia-500 text-white", inactive: "border-slate-200 bg-white text-fuchsia-600 hover:bg-fuchsia-50" },
-  c1: { active: "border-rose-500 bg-rose-500 text-white",     inactive: "border-slate-200 bg-white text-rose-600 hover:bg-rose-50" },
+  college: { active: "border-sky-500 bg-sky-500 text-white",     inactive: "border-slate-200 bg-white text-sky-600 hover:bg-sky-50" },
+  lycee:   { active: "border-violet-500 bg-violet-500 text-white", inactive: "border-slate-200 bg-white text-violet-600 hover:bg-violet-50" },
 };
 
 const questionCountOptions = [
@@ -73,7 +74,7 @@ export default function ParcoursIaClient() {
   const bilanRef = useRef<HTMLDivElement>(null);
   const { classBoard, toggleClassBoard } = useClassBoard();
 
-  const [niveau, setNiveau] = useState<ParcoursNiveauIa>("a1");
+  const [niveau, setNiveau] = useState<ParcoursNiveauIa>("college");
   const [questionCount, setQuestionCount] = useState<QuestionCount>(10);
   const [started, setStarted] = useState(false);
   const [questions, setQuestions] = useState<ParcoursQuestion[]>([]);
@@ -375,7 +376,7 @@ export default function ParcoursIaClient() {
             Nouveau parcours
           </button>
           <Link
-            href={`/coach-ia/ia?classe=${niveau}`}
+            href={`/coach-ia/ia?classe=pix-${niveau}`}
             className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-black text-white hover:bg-slate-800 transition"
           >
             M&apos;entraîner avec le Coach →

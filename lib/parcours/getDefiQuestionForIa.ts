@@ -2,20 +2,12 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import type { ParcoursNiveauIa, ParcoursQuestion, ParcoursQuestionItem } from "./types";
 import { getIaNotions } from "./getIaNotions";
 
-import { iaA1QuestionBank } from "@/lib/tutor-v4/questionBank/a1/ia";
-import { iaA2QuestionBank } from "@/lib/tutor-v4/questionBank/a2/ia";
-import { iaB1QuestionBank } from "@/lib/tutor-v4/questionBank/b1/ia";
-import { iaB2QuestionBank } from "@/lib/tutor-v4/questionBank/b2/ia";
-import { iaC1QuestionBank } from "@/lib/tutor-v4/questionBank/c1/ia";
+import { iaPixCollegeQuestionBank } from "@/lib/tutor-v4/questionBank/pix-college/ia";
+import { iaPixLyceeQuestionBank } from "@/lib/tutor-v4/questionBank/pix-lycee/ia";
 
+/** La banque du coach, la même exactement : une seule source de contenu. */
 function getBank(niveau: ParcoursNiveauIa): TutorBankItemV4[] {
-  switch (niveau) {
-    case "a1": return iaA1QuestionBank;
-    case "a2": return iaA2QuestionBank;
-    case "b1": return iaB1QuestionBank;
-    case "b2": return iaB2QuestionBank;
-    case "c1": return iaC1QuestionBank;
-  }
+  return niveau === "lycee" ? iaPixLyceeQuestionBank : iaPixCollegeQuestionBank;
 }
 
 // Dans les banques, la bonne réponse est toujours en première position :
@@ -29,18 +21,43 @@ function shuffleChoices(choices: readonly string[]): string[] {
   return arr;
 }
 
+/**
+ * ⚠️ LES GÉNÉRATEURS AUSSI, ET C'EST LE POINT (17/08/2026).
+ *
+ * Cette fonction rendait `null` sur un `template` : le parcours ne servait que
+ * des items figés. Sur les anciennes banques cela se voyait peu — elles en
+ * comptaient une majorité. Sur les banques Pix, ce serait ruineux : les 95
+ * réservoirs portent l'essentiel du volume (868 questions distinctes contre
+ * 325 items figés), et le parcours n'aurait rien vu de tout cela.
+ *
+ * En tirant dans les gabarits, le parcours devient REJOUABLE — et c'est ce qui
+ * le distingue de l'évaluation blanche, qui pioche exprès dans des questions
+ * figées pour rester comparable d'une fois sur l'autre.
+ */
 function toQuestionItem(item: TutorBankItemV4): ParcoursQuestionItem | null {
-  if (item.kind === "template") return null;
+  const q =
+    item.kind === "template"
+      ? item.generate()
+      : {
+          text: item.text,
+          format: item.format,
+          expected: item.expected,
+          choices: item.choices,
+          comparator: item.comparator,
+          explanation: item.explanation,
+        };
+
+  if (!q.text) return null;
 
   return {
-    text: item.text,
-    format: item.format,
-    expected: item.expected,
-    choices: item.choices ? shuffleChoices(item.choices) : item.choices,
-    comparator: item.comparator,
+    text: q.text,
+    format: q.format ?? "qcm",
+    expected: q.expected,
+    choices: q.choices ? shuffleChoices(q.choices) : q.choices,
+    comparator: q.comparator,
     hint: item.hint,
-    explanation: item.explanation,
-    audioSrc: item.audioSrc,
+    explanation: q.explanation,
+    audioSrc: item.kind === "fixed" ? item.audioSrc : undefined,
   };
 }
 
@@ -54,7 +71,7 @@ export function getDefiQuestionsForIa(
 
   for (const notion of notions) {
     const items = bank
-      .filter((item) => item.notionId === notion.id && item.kind === "fixed")
+      .filter((item) => item.notionId === notion.id)
       .sort(() => Math.random() - 0.5);
 
     const item = items[0];

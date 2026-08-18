@@ -23,7 +23,10 @@ export type ParcoursClasse =
 
 export type ParcoursNiveauEnglish = "a1" | "a2" | "b1" | "b2";
 
-export type ParcoursNiveauIa = "a1" | "a2" | "b1" | "b2" | "c1";
+/* Les deux portes du coach IA depuis le 16/08/2026, calées sur les paliers
+   Pix : collège = novice + indépendant, lycée = avancé + expert.
+   ⚠️ C'était "a1" … "c1" — une troisième façon de nommer les mêmes choses. */
+export type ParcoursNiveauIa = "college" | "lycee";
 
 export type ParcoursStatus = "maitrise" | "a_revoir" | "fragile";
 
