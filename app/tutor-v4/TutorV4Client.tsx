@@ -2384,21 +2384,49 @@ function WrongAnswerPanel({
             où l'élève se trompe, donc l'image se télécharge à cet instant
             précis. On lui sert un fichier déjà à la bonne taille, sans passer
             par l'optimiseur Vercel — le vrai dessin au prix d'un émoji. */}
-        <div className="flex items-center justify-center gap-3">
+        <div className="flex items-center justify-center gap-2">
           <Image
             src="/cahier-vacances/ti-margo-112.webp"
             alt="Ti Margo, le margouillat d'EleveAI"
             width={90}
             height={112}
             unoptimized
-            className="h-12 w-auto md:h-14"
+            className="h-9 w-auto md:h-10"
           />
-          <h2 className="text-3xl font-light tracking-tight text-sky-500 md:text-4xl">
+          <h2 className="text-2xl font-light tracking-tight text-sky-500 md:text-3xl">
             Ce n’est pas encore ça
           </h2>
         </div>
 
-        <div className="mt-5 text-base font-medium text-slate-500">
+        {/* ⭐⭐ L'ÉNONCÉ REVIENT SOUS LES YEUX (18/08/2026, idée de Frédéric).
+            Le bandeau remplaçait la question : l'élève lisait « la bonne réponse
+            était : alors » sans plus voir de quoi on parlait, et la correction
+            courte du CP — « Le mot est "alors" » — devenait illisible. C'est le
+            défaut qui a lancé cette session, sur une capture de Langage oral.
+            L'ordre compte : la question, PUIS la réponse. L'inverse demanderait
+            à l'élève de retenir une réponse avant de savoir à quoi elle répond.
+            Ti Margo et le titre ont maigri d'un cran pour lui faire la place —
+            le bandeau ne grandit donc pas, il se réorganise.
+            ⚠️ `whitespace-pre-line` : les énoncés portent leurs propres retours
+            à la ligne (« On te dit :\n« … » »), et sans lui tout se recollait en
+            un seul paragraphe. `MarkdownMath` parce qu'un énoncé de maths
+            contient des formules — sinon on afficherait le LaTeX brut.
+            ⏳ La FIGURE ne revient pas : le canvas se dessine dans la vue
+            parente, ce panneau ne le reçoit pas. Sur une question de géométrie
+            (« quelle est l'aire de ce triangle ? »), le rappel reste donc
+            incomplet. */}
+        {question.text ? (
+          <div className="mx-auto mt-4 max-w-2xl rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left">
+            <div className="mb-1 text-[11px] font-bold uppercase tracking-wide text-slate-400">
+              La question
+            </div>
+            <MarkdownMath className="whitespace-pre-line text-sm font-semibold leading-6 text-slate-700">
+              {question.text}
+            </MarkdownMath>
+          </div>
+        ) : null}
+
+        <div className="mt-4 text-base font-medium text-slate-500">
           La bonne réponse était :
         </div>
         <div className="mt-2 inline-flex min-w-[88px] items-center justify-center rounded-2xl border-2 border-lime-400 bg-white px-5 py-2 text-3xl font-bold text-lime-700 shadow-sm">
