@@ -34,6 +34,38 @@ export default async function AdminDashboardPage() {
           <AdminLogoutButton />
         </header>
 
+        {/* ── LES DEUX OUTILS DE RENDEZ-VOUS ────────────────────────────────
+            En haut, et pas en bas : ils ne se consultent pas depuis un bureau,
+            ils s'ouvrent sur un téléphone en face d'un dirigeant. Tout ce qui
+            demande de faire défiler la page pour être atteint ne sera pas
+            utilisé au moment où il faut.
+            Les deux pages sont en `noindex` et liées nulle part ailleurs :
+            c'est ici leur seule porte. */}
+        <section className="grid gap-3 sm:grid-cols-2">
+          <Link
+            href="/audit"
+            className="block rounded-xl border border-teal-700 bg-teal-900/30 p-4 transition hover:bg-teal-900/50"
+          >
+            <p className="font-bold text-teal-300">📋 Audit express</p>
+            <p className="mt-1 text-sm text-slate-400">
+              La feuille qu&apos;on remplit devant un dirigeant : il donne ses
+              chiffres, la page affiche ce qu&apos;il verse à son intermédiaire.
+              S&apos;imprime en A4.
+            </p>
+          </Link>
+
+          <Link
+            href="/devis"
+            className="block rounded-xl border border-violet-700 bg-violet-900/30 p-4 transition hover:bg-violet-900/50"
+          >
+            <p className="font-bold text-violet-300">🧾 Devis</p>
+            <p className="mt-1 text-sm text-slate-400">
+              Conseil · Réalisation · Formation — la mission choisie remplit le
+              prix et le périmètre. À envoyer le soir même.
+            </p>
+          </Link>
+        </section>
+
         {/* Checklist de maintenance : la routine quotidienne / hebdo à tenir. */}
         <MaintenanceChecklist />
 
