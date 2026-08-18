@@ -3,6 +3,7 @@
 import type { MetadataRoute } from "next";
 import { getAllBlogPosts } from "@/data/blogPosts";
 import { NIVEAUX, motsDeLaClasse } from "@/lib/dico";
+import { cgvEnVigueur } from "@/lib/legal/editeur";
 
 // ⚠️ AVEC LE www : `eleveai.fr` répond 308 vers `www.eleveai.fr`. Sans lui,
 // les 270 lignes de ce fichier désignaient des adresses qui redirigent.
@@ -384,6 +385,11 @@ const ROUTES: RouteConfig[] = [
   { path: "/mentions-legales",           priority: 0.3, changeFrequency: "yearly", lastMod: LASTMOD_LEGAL },
   { path: "/politique-confidentialite",  priority: 0.3, changeFrequency: "yearly", lastMod: LASTMOD_LEGAL },
   { path: "/cgu",                        priority: 0.3, changeFrequency: "yearly", lastMod: LASTMOD_LEGAL },
+  /* Les CGV n'entrent au sitemap que le jour où elles engagent : tant que rien
+     ne se vend, la page se déclare elle-même en `noindex` (voir app/cgv). */
+  ...(cgvEnVigueur
+    ? [{ path: "/cgv", priority: 0.3, changeFrequency: "yearly" as const, lastMod: LASTMOD_LEGAL }]
+    : []),
 ];
 
 // ⛔ LES 62 ADRESSES À « ? » SONT PARTIES (10/08/2026).

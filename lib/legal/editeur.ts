@@ -1,0 +1,114 @@
+// L'IDENTITÉ LÉGALE, ÉCRITE UNE FOIS.
+//
+// POURQUOI CE FICHIER (18/08/2026). Les mentions légales portaient déjà leur
+// propre bloc `EDITEUR`, en haut de leur page. Il en faut maintenant un second
+// jeu d'informations — celui du VENDEUR — et il doit apparaître aux deux
+// endroits : la page qui identifie l'éditeur, et les conditions de vente.
+// Deux copies d'un SIREN, c'est une copie qui vieillit. Elles lisent donc le
+// même objet.
+//
+// ⛔ CE QUI EST VIDE ICI N'EST PAS UN OUBLI DE RÉDACTION : c'est ce que le site
+// ne sait pas encore. Rien de ce qui est vide ne s'affiche « à compléter » en
+// production — la page mentions légales a déjà servi ce brouillon-là. Les pages
+// se lisent au contraire à l'état du bloc : tant que l'identité professionnelle
+// est incomplète, les CGV se présentent comme un texte NON EN VIGUEUR, et le
+// pied de page ne les propose pas.
+
+/** L'éditeur du site, au sens de la LCEN (art. 6-III). */
+export const EDITEUR = {
+  nomDuSite: "EleveAI",
+  nomComplet: "Frédéric Lacoste",
+  directeurPublication: "Frédéric Lacoste",
+  contact: "academienumerique@gmail.com",
+
+  /* Tant qu'aucune vente n'est ouverte, un éditeur non professionnel n'a pas à
+     publier son adresse postale : l'e-mail suffit à le rendre joignable. */
+  statutSansVente:
+    "Site édité à titre personnel par un enseignant, sans structure commerciale à ce jour.",
+};
+
+/* L'ENTREPRISE, QUAND ELLE VEND.
+   ⚠️ En entreprise individuelle, le nom juridique est le nom civil : « Frédéric
+   Lacoste », pas « EleveAI ». « EleveAI » est le nom commercial — c'est lui qui
+   va dans le champ « nom commercial » de Stripe et sur le relevé bancaire du
+   client, pas dans la case « raison sociale ».
+   ⚠️ Le téléphone n'est pas décoratif : la vente à distance à un particulier
+   l'exige (art. L221-5 du code de la consommation), au même titre que l'e-mail. */
+export const VENDEUR = {
+  nomJuridique: "Frédéric Lacoste",
+  nomCommercial: "EleveAI",
+  forme: "Entrepreneur individuel (EI)",
+  siren: "", // 9 chiffres, tel qu'inscrit au répertoire INSEE
+  adresse: "", // adresse de l'entreprise individuelle
+  telephone: "", // exigé dès la première vente à distance à un consommateur
+  /* Franchise en base : pas de TVA collectée, donc prix TTC = prix HT, et cette
+     mention sur chaque facture. ⛔ Ne pas activer Stripe Tax tant qu'elle vaut. */
+  mentionTva: "TVA non applicable, article 293 B du code général des impôts",
+};
+
+export const HEBERGEUR = {
+  nom: "Vercel Inc.",
+  adresse: "440 N Barranca Ave #4133, Covina, CA 91723, États-Unis",
+  site: "https://vercel.com",
+};
+
+/* LE PRESTATAIRE DE PAIEMENT. Le site ne voit jamais un numéro de carte : le
+   paiement se déroule chez Stripe, qui est l'entité européenne du groupe pour
+   les clients de l'Union. */
+export const PSP = {
+  nom: "Stripe Payments Europe, Limited",
+  adresse: "The One Building, 1 Grand Canal Street Lower, Dublin 2, Irlande",
+};
+
+/* LE MÉDIATEUR DE LA CONSOMMATION.
+   ⛔ Obligatoire dès la première vente à un CONSOMMATEUR (art. L612-1 du code
+   de la consommation) : tout professionnel doit adhérer, à ses frais, à un
+   médiateur agréé, et en publier les coordonnées sur son site et dans ses CGV.
+   Le défaut d'adhésion est sanctionné par une amende administrative (art.
+   L641-1 : 15 000 € pour une personne physique). C'est l'obligation que presque
+   tout le monde oublie, et la seule de cette liste qui coûte un abonnement.
+   Vendre aux établissements et aux coopératives ne la déclenche pas — vendre
+   aux familles, si. */
+export const MEDIATEUR: { nom: string; site: string; adresse: string } | null =
+  null;
+
+/* L'ÉTAT DE LA VENTE.
+   `ouverte` reste à false tant que le tunnel de paiement n'encaisse pas en
+   réel : Stripe en mode test ne vend rien. Le jour où il encaisse, cette ligne
+   passe à true ET les champs manquants ci-dessus doivent être remplis — sans
+   quoi `cgvEnVigueur` refusera de présenter les CGV comme applicables. */
+export const VENTE = {
+  ouverte: false,
+  /** Date d'entrée en vigueur de la version publiée des CGV (JJ/MM/AAAA). */
+  dateEntreeEnVigueur: "",
+  /** Une vente ouverte aux particuliers, et pas seulement aux établissements. */
+  ouverteAuxParticuliers: false,
+};
+
+/** Ce qu'un éditeur professionnel doit publier : identité, siège, joignabilité. */
+export const identiteProfessionnelleComplete: boolean = Boolean(
+  VENDEUR.siren && VENDEUR.adresse
+);
+
+/* Les CGV ne sont « en vigueur » que quand elles sont complètes ET que quelque
+   chose se vend. Il manque une pièce ? Le texte s'affiche en projet, personne
+   n'est censé y avoir souscrit, et il ne part pas dans l'index de Google. */
+export const cgvEnVigueur: boolean = Boolean(
+  VENTE.ouverte &&
+    VENTE.dateEntreeEnVigueur &&
+    identiteProfessionnelleComplete &&
+    (!VENTE.ouverteAuxParticuliers || (MEDIATEUR !== null && VENDEUR.telephone))
+);
+
+/** Ce qui reste à renseigner avant d'encaisser — lu par la page en mode projet. */
+export function piecesManquantes(): string[] {
+  const manque: string[] = [];
+  if (!VENDEUR.siren) manque.push("le numéro SIREN de l'entreprise individuelle");
+  if (!VENDEUR.adresse) manque.push("l'adresse de l'entreprise individuelle");
+  if (!VENDEUR.telephone)
+    manque.push("un numéro de téléphone joignable par les clients");
+  if (MEDIATEUR === null)
+    manque.push("l'adhésion à un médiateur de la consommation agréé");
+  if (!VENTE.dateEntreeEnVigueur) manque.push("la date d'entrée en vigueur");
+  return manque;
+}

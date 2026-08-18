@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import {
+  EDITEUR,
+  HEBERGEUR,
+  VENDEUR,
+  cgvEnVigueur,
+  identiteProfessionnelleComplete,
+} from "@/lib/legal/editeur";
 
 // ─────────────────────────────────────────────────────────────────────────────
-// L'IDENTITÉ DE L'ÉDITEUR — le seul bloc à tenir à jour dans ce fichier.
+// L'IDENTITÉ DE L'ÉDITEUR.
 //
 // Identifier l'éditeur d'un site est une obligation (LCEN, art. 6-III) et elle
 // ne dépend PAS de savoir si le site encaisse quoi que ce soit : elle vaut
@@ -13,22 +21,18 @@ import type { Metadata } from "next";
 // `nomComplet` est repris de ce que le site publie DÉJÀ partout ailleurs :
 // /tarifs, /besoin-de-vous, /entreprises, et l'auteur des articles du blog
 // (`author` du JSON-LD). Le site n'a jamais été anonyme — seule la page qui
-// sert précisément à identifier l'éditeur l'était. Le rendu reste tolérant au
-// champ vide au cas où, mais il n'y a plus rien à cacher ici.
+// sert précisément à identifier l'éditeur l'était.
 //
-// `statut` : à revoir le jour où une structure existe (micro-entreprise,
-// association…). Aujourd'hui le site n'encaisse rien — pas de paiement branché,
-// pas d'offre aux particuliers ouverte — et la ligne le dit telle quelle.
-// L'adresse postale n'est exigible que d'un éditeur professionnel : tant que
-// ce n'est pas le cas, l'e-mail de contact suffit à te rendre joignable.
+// ⚠️ LE BLOC N'EST PLUS ICI (18/08/2026). Il a déménagé dans
+// `lib/legal/editeur.ts`, parce que les CGV ont besoin exactement des mêmes
+// informations et qu'un SIREN recopié est un SIREN qui vieillit. La section 1
+// ci-dessous a maintenant deux états : tant qu'aucune entreprise n'est
+// immatriculée, elle dit la vérité d'aujourd'hui (un enseignant, à titre
+// personnel, joignable par courriel) ; dès que le SIREN et l'adresse sont
+// renseignés, elle passe aux mentions exigées d'un éditeur professionnel.
+// L'adresse postale n'est exigible que de ce dernier : tant que ce n'est pas
+// le cas, l'e-mail de contact suffit à te rendre joignable.
 // ─────────────────────────────────────────────────────────────────────────────
-const EDITEUR = {
-  nomDuSite: "EleveAI",
-  nomComplet: "Frédéric Lacoste",
-  statut:
-    "Site édité à titre personnel par un enseignant, sans structure commerciale à ce jour.",
-  contact: "academienumerique@gmail.com",
-};
 
 export const metadata: Metadata = {
   title: "Mentions légales",
@@ -61,7 +65,22 @@ export default function MentionsLegalesPage() {
             </span>
           )}
         </p>
-        <p>{EDITEUR.statut}</p>
+
+        {identiteProfessionnelleComplete ? (
+          <>
+            <p>
+              {VENDEUR.forme}, exerçant sous le nom commercial{" "}
+              {VENDEUR.nomCommercial}.
+            </p>
+            <p>Adresse : {VENDEUR.adresse}</p>
+            <p>SIREN : {VENDEUR.siren}</p>
+            {VENDEUR.telephone && <p>Téléphone : {VENDEUR.telephone}</p>}
+            <p>{VENDEUR.mentionTva}</p>
+          </>
+        ) : (
+          <p>{EDITEUR.statutSansVente}</p>
+        )}
+
         <p>
           Contact :{" "}
           <a
@@ -77,17 +96,17 @@ export default function MentionsLegalesPage() {
         <h2 className="text-lg font-semibold text-sky-300">
           2. Hébergeur du site
         </h2>
-        <p>Hébergeur : Vercel Inc.</p>
-        <p>440 N Barranca Ave #4133, Covina, CA 91723, États-Unis</p>
+        <p>Hébergeur : {HEBERGEUR.nom}</p>
+        <p>{HEBERGEUR.adresse}</p>
         <p>
           Site web :{" "}
           <a
-            href="https://vercel.com"
+            href={HEBERGEUR.site}
             target="_blank"
             rel="noreferrer"
             className="text-sky-300 underline"
           >
-            vercel.com
+            {HEBERGEUR.site.replace("https://", "")}
           </a>
         </p>
       </section>
@@ -132,6 +151,26 @@ export default function MentionsLegalesPage() {
           .
         </p>
       </section>
+
+      {cgvEnVigueur && (
+        <section className="mb-6 space-y-2 text-sm leading-relaxed">
+          <h2 className="text-lg font-semibold text-sky-300">
+            6. Conditions de vente
+          </h2>
+          <p>
+            Les offres payantes, leurs prix, la durée des abonnements, le droit
+            de rétractation et les modalités de réclamation figurent dans les{" "}
+            <Link
+              prefetch={false}
+              href="/cgv"
+              className="text-sky-300 underline"
+            >
+              conditions générales de vente
+            </Link>
+            .
+          </p>
+        </section>
+      )}
       </div>
     </main>
   );

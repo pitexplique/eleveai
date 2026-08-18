@@ -14,6 +14,7 @@
 // déploiement — donc par visiteur qui déroule la page, pas par clic.
 import Link from "next/link";
 import Image from "next/image";
+import { cgvEnVigueur } from "@/lib/legal/editeur";
 
 const outils = [
   { label: "Coach English IA", href: "/coach-ia/english-maths" },
@@ -91,10 +92,15 @@ const infos = [
   { label: "Contact", href: "/contact" },
 ];
 
+/* ⚠️ LES CGV N'APPARAISSENT QUE QUAND ELLES ENGAGENT (18/08/2026). Un lien
+   « CGV » en pied de page dit au visiteur que quelque chose se vend. Tant que
+   `cgvEnVigueur` est faux — rien d'immatriculé, ou aucun encaissement réel —
+   la page existe à l'état de projet mais ne se propose pas d'elle-même. */
 const legal = [
   { label: "Mentions légales", href: "/mentions-legales" },
   { label: "Politique de confidentialité", href: "/politique-confidentialite" },
   { label: "CGU", href: "/cgu" },
+  ...(cgvEnVigueur ? [{ label: "CGV", href: "/cgv" }] : []),
 ];
 
 const englishNiveaux = [

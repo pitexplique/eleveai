@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { cgvEnVigueur } from "@/lib/legal/editeur";
 
 export const metadata: Metadata = {
   title: "Conditions générales d’utilisation",
@@ -88,6 +90,26 @@ export default function CguPage() {
           vigueur est celle qui est publiée sur cette page.
         </p>
       </section>
+
+      {/* Ces CGU régissent l'USAGE du site, gratuit compris. Ce qui relève de
+          l'achat — prix, durée, rétractation, réclamation — est un autre texte,
+          et il n'est annoncé que le jour où il engage réellement. */}
+      {cgvEnVigueur && (
+        <section className="mb-6 space-y-2 text-sm leading-relaxed">
+          <h2 className="text-lg font-semibold text-sky-300">
+            8. Offres payantes
+          </h2>
+          <p>
+            Les présentes CGU régissent l’utilisation de la plateforme. Les
+            conditions applicables aux abonnements payants — offres, prix,
+            durée, paiement, rétractation et réclamations — figurent dans les{" "}
+            <Link prefetch={false} href="/cgv" className="text-sky-300 underline">
+              conditions générales de vente
+            </Link>
+            .
+          </p>
+        </section>
+      )}
     </main>
   );
 }
