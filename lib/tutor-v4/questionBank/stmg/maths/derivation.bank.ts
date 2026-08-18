@@ -1144,6 +1144,18 @@ export const derivationBank: TutorBankItemV4[] = [
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
+        // ⭐ LA COURBE DE COÛT, avec le point de production marqué. La question
+        // porte sur l'INTERPRÉTATION, pas sur une lecture : la figure ne donne
+        // donc aucune réponse, elle montre seulement ce dont on parle — une
+        // courbe qui monte de plus en plus vite, et un point où l'on mesure sa
+        // pente.
+        canvas: canvasCourbePoints(
+          (x) => a * x * x + b * x + c,
+          0,
+          x0 * 2,
+          `Coût total en fonction du nombre de ${prod.unite}`,
+          { marques: [x0] }
+        ),
         explanation: exp(
           "Le nombre dérivé mesure une variation instantanée. En gestion, $C'(x)$ est le COÛT MARGINAL : ce que coûte, approximativement, la production d'une unité supplémentaire à partir du niveau $x$.",
           "On distingue trois nombres qui se ressemblent : le coût TOTAL $C(x)$, le coût MOYEN $\\dfrac{C(x)}{x}$, et le coût MARGINAL $C'(x)$.",
@@ -1441,6 +1453,22 @@ export const derivationBank: TutorBankItemV4[] = [
         ]),
         expected: [bonne],
         comparator: "mcq_exact",
+        // ⭐ LA COURBE DE $f$, avec ses deux paliers marqués. On remonte de
+        // $f'$ à $f$ en primitivant terme à terme — $f'(x) = 3k(x-r_1)(x-r_2)$
+        // développée donne $3kx^2 - 3k(r_1+r_2)x + 3k r_1 r_2$, dont une
+        // primitive est $kx^3 - \frac{3k}{2}(r_1+r_2)x^2 + 3k r_1 r_2 x$.
+        // Sans la figure, « tangente horizontale » reste un mot ; avec elle,
+        // l'élève voit les deux endroits où la courbe s'aplatit.
+        canvas: canvasCourbePoints(
+          (x) =>
+            k * x * x * x -
+            ((3 * k) / 2) * (r1 + r2) * x * x +
+            3 * k * r1 * r2 * x,
+          Math.min(r1, r2) - 2,
+          Math.max(r1, r2) + 2,
+          "Courbe de f : deux paliers",
+          { marques: [r1, r2] }
+        ),
         explanation: exp(
           "La tangente est horizontale là où le nombre dérivé est nul. Une dérivée écrite sous forme factorisée donne ces points sans aucun calcul : un produit s'annule quand l'un de ses facteurs s'annule.",
           "On lit chaque facteur $(x - r)$ et l'on note la valeur $r$ qui l'annule — en faisant attention au signe, qui s'inverse au passage.",
@@ -1511,6 +1539,60 @@ export const derivationBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — le signe SERT à décider. Le premier item demande le signe de
+    // $f'$ sur une expression nue ; celui-ci le fait servir : jusqu'à quelle
+    // quantité le bénéfice augmente-t-il encore ? C'est la même inéquation,
+    // et c'est la raison pour laquelle le programme fait étudier des signes de
+    // dérivées — le BO cite les « problèmes d'optimisation » comme usage
+    // principal du chapitre.
+    kind: "template",
+    id: "stmg_der_v_signe_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_variations",
+    microId: "der_v_signe_derivee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Tant que $B'(x)$ reste positive, le bénéfice augmente encore. Cherche où elle s'annule.",
+    tags: ["stmg", "maths", "derivation", "gestion", "template", "short"],
+    generate: () => {
+      const prod = pick(PRODUCTIONS);
+      const a = pick([2, 3, 4, 5, 6] as const);
+      const xOpt = pick([10, 15, 20, 25, 30, 40] as const);
+      // $B'(x) = -2a x + 2a x_{opt}$ s'annule en $x_{opt}$ et change de signe.
+      const pente = 2 * a;
+      const ordonnee = 2 * a * xOpt;
+      return {
+        text:
+          `Le bénéfice tiré de la vente de $x$ ${prod.unite} a pour dérivée ` +
+          `$B'(x) = -${pente}x + ${ordonnee}$. ` +
+          `Jusqu'à combien de ${prod.unite} le bénéfice AUGMENTE-t-il encore ?`,
+        format: "short",
+        expected: [String(xOpt)],
+        comparator: "number_equal",
+        // ⭐ LA DROITE DE B' EST TRACÉE. Le BO veut ce chapitre graphique, et
+        // ici la figure ne donne pas la réponse : elle montre POURQUOI il y a
+        // une réponse — la dérivée traverse l'axe une fois, et une seule.
+        canvas: canvasCourbePoints(
+          (x) => -pente * x + ordonnee,
+          0,
+          xOpt * 2,
+          `Dérivée du bénéfice : B'(x)`,
+          { marques: [xOpt] }
+        ),
+        explanation: exp(
+          "Une fonction croît là où sa dérivée est positive, et décroît là où elle est négative. Le point de bascule est celui où la dérivée s'annule.",
+          "On résout $B'(x) > 0$, ce qui donne l'intervalle de croissance. Comme le coefficient devant $x$ est négatif, l'inégalité se retourne à la division.",
+          `$-${pente}x + ${ordonnee} > 0$ donne $${pente}x < ${ordonnee}$, donc $x < ${xOpt}$. ` +
+            `Le bénéfice augmente jusqu'à $${xOpt}$ ${prod.unite}, puis il diminue : ` +
+            `au-delà, $B'(x)$ devient négative — chaque ${prod.un.slice(3)} supplémentaire rapporte moins qu'${prod.genre === "f" ? "elle" : "il"} ne coûte.`,
+          `Le bénéfice augmente jusqu'à $${xOpt}$ ${prod.unite}.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ der_v_lien_signe ═══════════════════ */
 
   {
@@ -1557,6 +1639,85 @@ export const derivationBank: TutorBankItemV4[] = [
               ? `$f$ est positive sur $[${borneG}\\,;\\,${borneD}]$`
               : `$f$ est négative sur $[${borneG}\\,;\\,${borneD}]$`,
             cause: "a transféré le signe de f' à f : le signe de la dérivée renseigne sur les VARIATIONS, pas sur le signe de la fonction",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — le signe de $f$ N'EST PAS celui de $f'$. Le premier item relie
+    // le signe de la dérivée au sens de variation ; celui-ci met les deux
+    // signes en conflit — une fonction négative dont la dérivée est positive —
+    // et demande ce qu'elle fait. C'est la confusion la plus tenace du
+    // chapitre : une entreprise qui perd de l'argent peut très bien être en
+    // train de redresser la barre.
+    kind: "template",
+    id: "stmg_der_v_lien_signe_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_variations",
+    microId: "der_v_lien_signe",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le signe de $f$ dit OÙ SE TROUVE la courbe ; le signe de $f'$ dit dans quel SENS elle va.",
+    tags: ["stmg", "maths", "derivation", "piege", "template"],
+    generate: () => {
+      const negative = Math.random() < 0.5;
+      const borneG = randomInt(-6, 1);
+      const borneD = borneG + randomInt(2, 6);
+      // ⭐ LA COURBE EST TRACÉE, et c'est elle qui règle la question. Une
+      // fonction sous l'axe qui monte vers lui : dit en mots, c'est abstrait ;
+      // vu une fois, ça ne se réoublie pas. La droite affine ci-dessous est
+      // négative et croissante sur l'intervalle (ou l'inverse), par
+      // construction — sa pente et son ordonnée sont calées sur les bornes.
+      const pente = negative ? 1 : -1;
+      const ordonnee = negative ? -(borneD + 2) : borneD + 2;
+      const signeF = negative ? "NÉGATIVE" : "POSITIVE";
+      const signeFprime = negative ? "POSITIVE" : "NÉGATIVE";
+      const bonne = negative
+        ? "elle CROÎT, tout en restant en dessous de l'axe des abscisses"
+        : "elle DÉCROÎT, tout en restant au-dessus de l'axe des abscisses";
+      return {
+        text:
+          `Sur l'intervalle $]${borneG}\\,;\\,${borneD}[$, une fonction $f$ est ${signeF}, ` +
+          `et sa dérivée $f'$ est ${signeFprime}. Que fait la courbe de $f$ sur cet intervalle ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          negative
+            ? "elle décroît, puisqu'elle est négative"
+            : "elle croît, puisqu'elle est positive",
+          "c'est impossible : $f$ et $f'$ ont toujours le même signe",
+          "elle reste constante",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasCourbePoints(
+          (x) => pente * x + ordonnee,
+          borneG,
+          borneD,
+          `Courbe de f sur [${borneG} ; ${borneD}]`
+        ),
+        explanation: exp(
+          "Le signe de $f$ et celui de $f'$ répondent à deux questions différentes. $f(x) > 0$ dit que la courbe est AU-DESSUS de l'axe ; $f'(x) > 0$ dit qu'elle MONTE. Rien n'oblige les deux à coïncider.",
+          "On sépare les deux lectures : d'abord la position par rapport à l'axe, ensuite le sens de variation.",
+          negative
+            ? `Ici $f$ est négative : la courbe est sous l'axe. Mais $f'$ est positive : elle monte. ` +
+              `Elle remonte donc vers l'axe sans l'avoir encore atteint — le cas d'une entreprise déficitaire dont les pertes se réduisent.`
+            : `Ici $f$ est positive : la courbe est au-dessus de l'axe. Mais $f'$ est négative : elle descend. ` +
+              `Elle redescend donc vers l'axe sans l'avoir encore atteint — le cas d'un bénéfice encore positif, mais qui s'effrite.`,
+          bonne.charAt(0).toUpperCase() + bonne.slice(1) + "."
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "c'est impossible : $f$ et $f'$ ont toujours le même signe",
+            cause: "les deux signes sont indépendants : l'un donne la position de la courbe, l'autre son sens",
+          },
+          {
+            choice: negative
+              ? "elle décroît, puisqu'elle est négative"
+              : "elle croît, puisqu'elle est positive",
+            cause: "a lu le signe de $f$ pour conclure sur le sens : c'est le signe de $f'$ qui décide du sens",
           },
         ],
       };
@@ -1627,6 +1788,55 @@ export const derivationBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — DRESSER le tableau, au lieu de le lire. Le premier item affiche
+    // le tableau de signes et fait conclure ; celui-ci ne donne que
+    // l'expression et demande où placer la barre — l'abscisse où $f'$ s'annule
+    // et où le sens s'inverse. C'est la première ligne du tableau, celle sans
+    // laquelle les deux autres ne peuvent pas s'écrire.
+    kind: "template",
+    id: "stmg_der_v_tableau_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_variations",
+    microId: "der_v_tableau",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La barre du tableau se place là où $f'$ s'annule : résous $f'(x) = 0$.",
+    // ⛔ PAS DE FIGURE ICI, ET C'EST VOLONTAIRE. Tracer la parabole donnerait
+    // l'abscisse du sommet à la lecture, et l'item deviendrait un doublon de
+    // `der_nd_lire_graphique`. Ce qu'on travaille ici, c'est le CALCUL qui
+    // permet de dresser le tableau quand aucune courbe n'est fournie — le cas
+    // d'un sujet de bac. Même raison pour `der_p_nombre_derive_tpl_2`.
+    tags: ["stmg", "maths", "derivation", "template", "short"],
+    generate: () => {
+      const a = pick([1, 2, 3, -1, -2, -3] as const);
+      const racine = randomInt(-3, 5);
+      const b = -2 * a * racine;
+      const c = pick([0, 1, 2, -2, 5, -4] as const);
+      const borneG = racine - randomInt(2, 4);
+      const borneD = racine + randomInt(2, 4);
+      return {
+        text:
+          `On veut dresser le tableau de variations de $f(x) = ${polynome(0, a, b, c)}$ ` +
+          `sur $[${borneG}\\,;\\,${borneD}]$. ` +
+          `À quelle abscisse faut-il placer la barre qui sépare les deux sens de variation ?`,
+        format: "short",
+        expected: [String(racine)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un tableau de variations se sépare aux abscisses où la dérivée s'annule : ce sont les seuls points où le sens peut changer.",
+          "On dérive, on résout $f'(x) = 0$, et l'on porte la solution comme colonne de séparation. Les deux sens se déduisent ensuite du signe de $f'$ de part et d'autre.",
+          `$f'(x) = ${polynome(0, 0, 2 * a, b)}$. On résout $${2 * a}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = 0$, ` +
+            `d'où $x = ${racine}$. ` +
+            `Comme $a = ${a}$ est ${a > 0 ? "positif" : "négatif"}, $f'$ est ${a > 0 ? "négative avant et positive après" : "positive avant et négative après"} : ` +
+            `$f$ ${a > 0 ? "décroît puis croît, avec un MINIMUM" : "croît puis décroît, avec un MAXIMUM"} en $x = ${racine}$.`,
+          `La barre se place en $x = ${racine}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ der_v_extremum ═══════════════════ */
 
   {
@@ -1661,6 +1871,71 @@ export const derivationBank: TutorBankItemV4[] = [
             `L'extremum vaut alors $f(${racine}) = ${fr(f(racine))}$.`,
           `Le ${a > 0 ? "minimum" : "maximum"} de $f$ vaut $${fr(f(racine))}$, atteint en $x = ${racine}$.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — $f'(x_0) = 0$ NE SUFFIT PAS. Le premier item calcule la valeur
+    // de l'extremum ; celui-ci interroge la condition elle-même. Un élève
+    // apprend « la dérivée s'annule, donc c'est un extremum » et l'applique
+    // sans jamais vérifier le CHANGEMENT DE SIGNE — qui est la vraie condition,
+    // et la seule qui distingue un sommet d'un simple palier.
+    kind: "template",
+    id: "stmg_der_v_extremum_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_variations",
+    microId: "der_v_extremum",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une dérivée qui s'annule SANS changer de signe donne un palier, pas un sommet.",
+    tags: ["stmg", "maths", "derivation", "piege", "template"],
+    generate: () => {
+      const x0 = randomInt(-3, 5);
+      const bonne =
+        `il faut vérifier que $f'$ CHANGE DE SIGNE en $${x0}$ : s'annuler ne suffit pas`;
+      return {
+        text:
+          `Un élève affirme : « $f'(${x0}) = 0$, donc $f$ admet un extremum en $${x0}$. » ` +
+          `Que faut-il lui répondre ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `c'est juste : une dérivée qui s'annule donne toujours un extremum`,
+          `il faut aussi que $f(${x0})$ soit nul`,
+          `il faut d'abord vérifier que $f$ est positive en $${x0}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        // ⭐ LE CONTRE-EXEMPLE EST TRACÉ. $x \mapsto x^3$ a une tangente
+        // horizontale en zéro et ne s'y retourne pas : c'est la seule chose à
+        // voir, et une phrase ne la fait pas voir. La courbe est décalée en
+        // $x_0$ pour coller à l'énoncé.
+        canvas: canvasCourbePoints(
+          (x) => Math.pow(x - x0, 3),
+          x0 - 3,
+          x0 + 3,
+          `Un exemple : une courbe à tangente horizontale en ${x0}, sans extremum`,
+          { marques: [x0] }
+        ),
+        explanation: exp(
+          "Un extremum se produit là où la fonction cesse de monter pour descendre — ou l'inverse. La dérivée y est nulle, mais cela ne suffit pas : il faut qu'elle CHANGE DE SIGNE en ce point.",
+          "On dresse le tableau de signes de $f'$ autour du point, et l'on regarde si le signe s'inverse de part et d'autre.",
+          `Contre-exemple : pour $f(x) = x^3$, on a $f'(x) = 3x^2$, donc $f'(0) = 0$. ` +
+            `Mais $3x^2$ reste positive de chaque côté de zéro : la fonction continue de croître, et il n'y a AUCUN extremum en $0$ — ` +
+            `seulement un palier, une tangente horizontale traversée sans changer de sens.`,
+          `La dérivée doit s'annuler ET changer de signe.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `c'est juste : une dérivée qui s'annule donne toujours un extremum`,
+            cause: "$f(x) = x^3$ le contredit : $f'(0) = 0$ et pourtant la fonction ne cesse jamais de croître",
+          },
+          {
+            choice: `il faut aussi que $f(${x0})$ soit nul`,
+            cause: "la valeur de $f$ n'a rien à voir : un maximum peut valoir n'importe quel nombre",
+          },
+        ],
       };
     },
   },
@@ -1709,6 +1984,53 @@ export const derivationBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — COMBIEN, et non plus POUR COMBIEN. Le premier item donne la
+    // quantité qui maximise le bénéfice ; celui-ci demande le bénéfice
+    // lui-même. Deux nombres tout à fait différents, et l'élève s'arrête
+    // presque toujours au premier : il a trouvé $x_{opt}$ et croit avoir fini,
+    // alors que la question du chef d'entreprise est « ça rapporte combien ? ».
+    kind: "template",
+    id: "stmg_der_o_benefice_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_optimisation",
+    microId: "der_o_benefice",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Trouve d'abord la quantité qui annule $B'$, puis REMPLACE-la dans $B$ — pas dans $B'$.",
+    tags: ["stmg", "maths", "derivation", "gestion", "canvas", "template", "short"],
+    generate: () => {
+      const prod = pick(PRODUCTIONS);
+      const a = pick([1, 2, 4, 5] as const);
+      const xOpt = pick([10, 15, 20, 25, 30, 40] as const);
+      const b = 2 * a * xOpt;
+      const c = pick([100, 200, 400, 500, 800] as const);
+      const B = (x: number) => -a * x * x + b * x - c;
+      const maxi = B(xOpt);
+      return {
+        text:
+          `Le bénéfice, en euros, réalisé pour la vente de $x$ ${prod.unite} est ` +
+          `$B(x) = -${a}x^2 + ${b}x - ${c}$. ` +
+          `Quel est le bénéfice MAXIMAL, en euros ?`,
+        format: "short",
+        expected: [String(maxi)],
+        comparator: "number_equal",
+        canvas: canvasCourbePoints(B, 0, xOpt * 2, `Bénéfice en fonction de la quantité vendue`, {
+          marques: [xOpt],
+        }),
+        explanation: exp(
+          "Optimiser se fait en deux temps : on cherche d'abord OÙ l'extremum se produit — l'abscisse qui annule la dérivée —, puis COMBIEN il vaut, en remplaçant cette abscisse dans la fonction de départ.",
+          "On dérive, on résout $B'(x) = 0$ pour obtenir la quantité, puis on calcule $B$ de cette quantité. C'est bien dans $B$ qu'on remplace, jamais dans $B'$ — qui vaut zéro à cet endroit.",
+          `$B'(x) = -${2 * a}x + ${b}$ s'annule pour $x = ${xOpt}$ ${prod.unite}. ` +
+            `Le bénéfice maximal vaut alors $B(${xOpt}) = -${a} \\times ${xOpt * xOpt} + ${b} \\times ${xOpt} - ${c} = ${maxi}$ €. ` +
+            `⚠️ $${xOpt}$ est une QUANTITÉ, $${maxi}$ est un MONTANT : les deux ne se confondent pas.`,
+          `Le bénéfice maximal est de $${maxi}$ €, atteint pour $${xOpt}$ ${prod.unite}.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ der_o_cout ═══════════════════ */
 
   {
@@ -1752,6 +2074,73 @@ export const derivationBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — MINIMUM ou MAXIMUM ? Le premier item trouve la taille de lot
+    // qui minimise le coût ; celui-ci demande comment on SAIT que c'est un
+    // minimum. La dérivée s'annule dans les deux cas — c'est le signe du
+    // coefficient dominant, ou le sens du changement de signe de $C'$, qui
+    // tranche. Sans cette étape, on annonce un coût minimal là où il est
+    // maximal, et la décision de gestion s'inverse.
+    kind: "template",
+    id: "stmg_der_o_cout_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_optimisation",
+    microId: "der_o_cout",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde le signe de $C'$ AVANT et APRÈS le point : négatif puis positif, la courbe descend puis remonte.",
+    tags: ["stmg", "maths", "derivation", "gestion", "piege", "template"],
+    generate: () => {
+      const prod = pick(PRODUCTIONS);
+      const a = pick([1, 2, 3, 5] as const);
+      const xOpt = pick([8, 12, 16, 20, 24, 30] as const);
+      const b = 2 * a * xOpt;
+      const bonne =
+        `$C'$ est NÉGATIVE avant $${xOpt}$ et POSITIVE après : le coût descend puis remonte`;
+      return {
+        text:
+          `Le coût de production d'un lot de $x$ ${prod.unite} est $C(x) = ${a}x^2 - ${b}x + 500$, en euros. ` +
+          `On trouve $C'(${xOpt}) = 0$. Comment sait-on qu'il s'agit d'un MINIMUM et non d'un maximum ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `parce que $C(${xOpt})$ est le plus petit nombre de l'énoncé`,
+          `parce que $C'(${xOpt}) = 0$ : une dérivée nulle annonce toujours un minimum`,
+          `parce que le coût ne peut pas être négatif`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        // ⭐ La courbe du coût, avec son creux marqué : le minimum se VOIT, et
+        // la question porte sur la justification, pas sur la lecture.
+        canvas: canvasCourbePoints(
+          (x) => a * x * x - b * x + 500,
+          0,
+          xOpt * 2,
+          "Coût en fonction de la taille du lot",
+          { marques: [xOpt] }
+        ),
+        explanation: exp(
+          "Une dérivée nulle signale un extremum, mais ne dit pas lequel. C'est le SENS du changement de signe de la dérivée qui distingue un minimum d'un maximum : négatif puis positif pour un minimum, positif puis négatif pour un maximum.",
+          "On étudie le signe de $C'$ de part et d'autre du point, ou l'on regarde le coefficient de $x^2$ : positif, la parabole est tournée vers le haut, donc creuse un minimum.",
+          `$C'(x) = ${2 * a}x - ${b}$. Pour $x < ${xOpt}$, elle est négative — le coût baisse. ` +
+            `Pour $x > ${xOpt}$, elle est positive — le coût remonte. Le point $${xOpt}$ est donc bien le creux. ` +
+            `Le coefficient de $x^2$, $${a}$, est positif : la parabole s'ouvre vers le haut, ce qui confirme le minimum.`,
+          `C'est un minimum parce que $C'$ passe du négatif au positif en $${xOpt}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `parce que $C'(${xOpt}) = 0$ : une dérivée nulle annonce toujours un minimum`,
+            cause: "une dérivée nulle annonce un extremum sans dire lequel — un maximum l'annule tout autant",
+          },
+          {
+            choice: `parce que le coût ne peut pas être négatif`,
+            cause: "le signe du coût n'a rien à voir avec le sens de ses variations",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ der_o_conclure ═══════════════════ */
 
   {
@@ -1786,6 +2175,82 @@ export const derivationBank: TutorBankItemV4[] = [
             `Les confondre est l'erreur la plus fréquente en fin de problème.`,
           `Par exemple : « Pour ${xOpt} ${prod.unite}, on obtient un ${nature} de ${valeur} €. »`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — TRIER les conclusions, quand le premier item fait RÉDIGER.
+    // L'ouverte est jugée par mots-clés : elle récompense celui qui écrit, et
+    // laisse démuni celui qui ne sait pas par où commencer. Ici les quatre
+    // phrases sont posées, et trois échouent chacune sur un point précis :
+    // l'unité oubliée, la quantité prise pour le montant, l'extremum inversé.
+    kind: "template",
+    id: "stmg_der_o_conclure_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_optimisation",
+    microId: "der_o_conclure",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une conclusion nomme trois choses : la quantité, ce qu'on optimise, et l'unité de chacune.",
+    tags: ["stmg", "maths", "derivation", "gestion", "template"],
+    generate: () => {
+      const prod = pick(PRODUCTIONS);
+      const xOpt = pick([12, 18, 25, 30, 45, 60, 75] as const);
+      const valeur = pick([420, 680, 950, 1250, 1840, 2300] as const);
+      const maxi = Math.random() < 0.5;
+      // ⭐ LA COURBE DE L'ÉTUDE, avec son sommet ou son creux marqué. Elle ne
+      // souffle aucune des quatre phrases — la question porte sur la FORMULATION
+      // —, mais elle rappelle ce que les deux nombres désignent : une quantité
+      // en abscisse, un montant en ordonnée. C'est justement ce que la mauvaise
+      // conclusion intervertit.
+      const courbe = (x: number) =>
+        maxi
+          ? valeur - Math.pow(x - xOpt, 2) * (valeur / (xOpt * xOpt))
+          : valeur + Math.pow(x - xOpt, 2) * (valeur / (xOpt * xOpt));
+      const nature = maxi ? "bénéfice maximal" : "coût minimal";
+      const verbe = maxi ? "maximal" : "minimal";
+      const contraire = maxi ? "minimal" : "maximal";
+      const bonne =
+        `Pour $${xOpt}$ ${prod.unite}, le ${maxi ? "bénéfice" : "coût"} est ${verbe} et vaut $${valeur}$ euros.`;
+      return {
+        text:
+          `Une étude sur la production ${prod.objet} conduit à $x = ${xOpt}$ et à un ${nature} de $${valeur}$ €. ` +
+          `Laquelle de ces quatre conclusions est correcte ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `Pour $${valeur}$ ${prod.unite}, le ${maxi ? "bénéfice" : "coût"} est ${verbe} et vaut $${xOpt}$ euros.`,
+          `Pour $${xOpt}$ ${prod.unite}, le ${maxi ? "bénéfice" : "coût"} est ${contraire} et vaut $${valeur}$ euros.`,
+          `Le résultat de l'étude est $${xOpt}$ et $${valeur}$.`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasCourbePoints(
+          courbe,
+          0,
+          xOpt * 2,
+          `${maxi ? "Bénéfice" : "Coût"} en fonction du nombre de ${prod.unite}`,
+          { marques: [xOpt] }
+        ),
+        explanation: exp(
+          "Une conclusion de problème d'optimisation répond à la question posée, en langage ordinaire : elle donne la quantité optimale avec SON unité, la grandeur optimisée avec la sienne, et précise s'il s'agit d'un maximum ou d'un minimum.",
+          "On vérifie les trois points l'un après l'autre : la quantité et son unité, le montant et la sienne, puis la nature de l'extremum.",
+          `Ici $x = ${xOpt}$ est une QUANTITÉ, en ${prod.unite} ; $${valeur}$ est un MONTANT, en euros. ` +
+            `Les échanger donne une phrase qui n'a plus de sens — $${valeur}$ ${prod.unite} produits pour $${xOpt}$ euros. ` +
+            `Et annoncer un ${contraire} là où l'étude trouve un ${verbe} inverse complètement la décision de gestion.`,
+          `« ${bonne} »`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `Le résultat de l'étude est $${xOpt}$ et $${valeur}$.`,
+            cause: "deux nombres sans unité ni grandeur : cette phrase ne dit pas de quoi elle parle",
+          },
+          {
+            choice: `Pour $${valeur}$ ${prod.unite}, le ${maxi ? "bénéfice" : "coût"} est ${verbe} et vaut $${xOpt}$ euros.`,
+            cause: "a échangé la quantité et le montant : les unités ne suivent plus",
+          },
+        ],
       };
     },
   },
