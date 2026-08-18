@@ -1000,6 +1000,24 @@ function continueAfterExplanation() {
     void startSession(undefined, notionId);
   }
 
+  // ⭐ LE RETOUR AU COACH RAMÈNE LA CLASSE (18/08/2026, signalé par Frédéric).
+  //
+  // Le bouton renvoyait vers `/coach-ia/<matiere>` tout court. Le coach, lui,
+  // lit la classe dans `?classe=`, puis dans le compte de l'élève connecté,
+  // puis retombe sur son repli — la 6e en maths, le CP en français. Un
+  // professeur qui n'est pas connecté en tant qu'élève partait donc de sa
+  // classe, entrait dans le tutor (qui la recevait bien), et revenait en 6e :
+  // toute sa navigation était à refaire à chaque aller-retour.
+  //
+  // La notion voyage aussi : on revient devant la notion qu'on travaillait,
+  // pas en haut de la liste. Le coach ignore ce paramètre s'il ne le lit pas —
+  // il ne casse rien — mais la classe, elle, le remet d'aplomb.
+  function retourCoach() {
+    const params = new URLSearchParams({ classe });
+    if (notion) params.set("notion", notion);
+    router.push(`/coach-ia/${matiere}?${params.toString()}`);
+  }
+
   // Notion précédente / suivante (rebouclage), pour enchaîner au clic ou au clavier.
   function shiftNotion(delta: number) {
     if (busy || !notionOptions.length) return;
@@ -1477,7 +1495,7 @@ function handleInputKeyDown(
           onPrevNotion={() => shiftNotion(-1)}
           onNextNotion={() => shiftNotion(1)}
           renderCanvas={(question) => renderCanvas(question.canvas)}
-          onBackCoach={() => router.push(`/coach-ia/${matiere}`)}
+          onBackCoach={retourCoach}
           onSwitchToComplete={() => setDisplayMode("complete")}
           onStart={() => void startSession(activeMicroId ?? undefined)}
           onSubmit={() => void submitAnswer()}
@@ -1504,7 +1522,7 @@ function handleInputKeyDown(
               dans l'écran sans avoir à scroller. */}
           <section className="flex flex-col gap-2 sm:flex-row sm:items-center">
             <button
-              onClick={() => router.push(`/coach-ia/${matiere}`)}
+              onClick={retourCoach}
               className="flex items-center justify-center rounded-2xl bg-orange-500 px-4 py-2.5 text-sm font-black text-white shadow hover:bg-orange-600"
             >
               ← Retour Coach

@@ -460,6 +460,28 @@ export default function CoachIA() {
     );
   }
 
+  // ⭐ LA CLASSE CHOISIE S'ÉCRIT DANS L'ADRESSE (18/08/2026).
+  //
+  // Les pastilles ne faisaient que `setClasse` : la classe ne vivait que dans
+  // la mémoire de la page. Elle était donc perdue à chaque rechargement, à
+  // chaque retour du navigateur, et à chaque retour depuis le tutor — le coach
+  // repartait de son repli (6e en maths, CP en français). Le tutor renvoie
+  // maintenant `?classe=`, mais il ne peut le faire que si la classe a été
+  // écrite quelque part : c'est ici.
+  //
+  // `replace` et non `push` : choisir une classe n'est pas une étape de
+  // navigation, et sinon le bouton « retour » du navigateur devrait remonter
+  // une à une toutes les pastilles essayées. On repart des paramètres existants
+  // pour ne pas effacer `annee` (le filtre STMG) ni les UTM d'une campagne.
+  function choisirClasse(item: Classe) {
+    setClasse(item);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("classe", item);
+    router.replace(`/coach-ia/${matiere}?${params.toString()}`, {
+      scroll: false,
+    });
+  }
+
   return (
     <main className="min-h-screen bg-[#f5f8ef] text-slate-800">
       <div className="flex min-h-screen">
@@ -505,7 +527,7 @@ export default function CoachIA() {
                 <button
                   key={item}
                   type="button"
-                  onClick={() => setClasse(item)}
+                  onClick={() => choisirClasse(item)}
                   className={[
                     "flex shrink-0 items-center justify-center border text-center font-bold transition",
                     getClasseButtonSize(item),
@@ -534,7 +556,7 @@ export default function CoachIA() {
                     <button
                       key={item}
                       type="button"
-                      onClick={() => setClasse(item)}
+                      onClick={() => choisirClasse(item)}
                       className={[
                         "rounded-full border px-4 py-2 text-sm font-bold transition",
                         getClasseBadgeColor(item, classe === item),
