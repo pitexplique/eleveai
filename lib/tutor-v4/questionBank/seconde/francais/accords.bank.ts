@@ -35,6 +35,15 @@
 // pipeline mélange. Écrire [bonne, piège, piège, piège] est correct.
 // ⚠️ Tables typées à la main, jamais en `as const`.
 
+// ══ LES SECONDS ITEMS (18/08/2026) ══
+// Le coach en mode COMPLET oppose deux énoncés : sans un second item par micro,
+// il lève « Aucune paire disponible » — mesuré, 96/96 en mode simple mais 1/96
+// en mode complet (`scripts/verifier-demarrage.ts seconde francais complete`).
+// ⭐ Un second item n'est pas le même exercice avec d'autres valeurs. Le premier
+// va de la FORME au SENS ou fait CHOISIR une forme ; le second part du SENS, ou
+// demande une des manipulations que le programme nomme au III — commutation,
+// déplacement, suppression, pronominalisation.
+
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 function randomChoice<T>(items: readonly T[]): T {
@@ -414,6 +423,150 @@ const PRONOMINALISATIONS: readonly Pronominalisation[] = [
 
 const TOUS_PRONOMS: readonly string[] = ["l'", "les", "lui", "leur", "en", "y"];
 
+/* ═══════════ LES TABLES DES SECONDS ITEMS ═══════════ */
+
+type Intention = { readonly gn: string; readonly veut: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Commande = { readonly phrase: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Faute = { readonly phrase: string; readonly bonne: string; readonly faux: readonly string[]; readonly correct: string; readonly raison: string };
+type Deplace = { readonly depart: string; readonly arrivee: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Graphie = { readonly phrase: string; readonly veut: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Commute = { readonly phrase: string; readonly groupe: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+
+/* 1 bis. L'INTENTION EST DONNÉE, L'ÉCRITURE EST À CHOISIR (2de_acc_commande_gn)
+   Le premier item lit une marque déjà écrite. Celui-ci part du sens voulu : le
+   même groupe nominal s'écrit de deux façons selon ce qu'on veut dire, et c'est
+   exactement ce que le programme appelle enrichir plutôt qu'introduire.
+   ⭐ Les entrées vont par PAIRES — même groupe, une fois le noyau, une fois le
+   complément. Une table où l'accord se ferait toujours sur le complément
+   apprendrait une fausse règle. */
+const INTENTIONS: readonly Intention[] = [
+  { gn: "une boite de chocolats … en Suisse", veut: "ce sont les CHOCOLATS qui viennent de Suisse", bonne: "fabriqués", faux: ["fabriquée", "fabriqué", "fabriquées"], raison: "l'accord au masculin pluriel renvoie à « chocolats »" },
+  { gn: "une boite de chocolats … en Suisse", veut: "c'est la BOITE qui a été faite en Suisse", bonne: "fabriquée", faux: ["fabriqués", "fabriqué", "fabriquées"], raison: "le féminin singulier renvoie à « boite », le noyau du groupe" },
+  { gn: "un groupe de touristes … dans la ville", veut: "ce sont les TOURISTES qui se sont égarés", bonne: "perdus", faux: ["perdu", "perdue", "perdues"], raison: "le masculin pluriel renvoie à « touristes »" },
+  { gn: "un groupe de touristes … dans la ville", veut: "c'est le GROUPE entier qui s'est égaré", bonne: "perdu", faux: ["perdus", "perdue", "perdues"], raison: "le masculin singulier renvoie à « groupe », le noyau" },
+  { gn: "une série de photographies … au petit matin", veut: "ce sont les PHOTOGRAPHIES qui ont été faites au petit matin", bonne: "prises", faux: ["prise", "pris", "prisent"], raison: "le féminin pluriel renvoie à « photographies »" },
+  { gn: "une série de photographies … dans les années trente", veut: "c'est la SÉRIE qui date des années trente", bonne: "commencée", faux: ["commencées", "commencé", "commencés"], raison: "le féminin singulier renvoie à « série »" },
+  { gn: "un panier de fruits … du jardin", veut: "ce sont les FRUITS qui viennent du jardin", bonne: "cueillis", faux: ["cueilli", "cueillie", "cueillies"], raison: "le masculin pluriel renvoie à « fruits »" },
+  { gn: "un panier de fruits … à la main", veut: "c'est le PANIER qui a été fait à la main", bonne: "tressé", faux: ["tressés", "tressée", "tressées"], raison: "le masculin singulier renvoie à « panier »" },
+  { gn: "un tas de feuilles … depuis l'automne", veut: "ce sont les FEUILLES qui sont sèches", bonne: "mortes", faux: ["mort", "morte", "morts"], raison: "le féminin pluriel renvoie à « feuilles »" },
+  { gn: "une collection de timbres … par un spécialiste", veut: "ce sont les TIMBRES qui ont été authentifiés", bonne: "expertisés", faux: ["expertisée", "expertisé", "expertisées"], raison: "le masculin pluriel renvoie à « timbres »" },
+  { gn: "une collection de timbres … à sa fille", veut: "c'est la COLLECTION qui a été transmise", bonne: "léguée", faux: ["légués", "légué", "léguées"], raison: "le féminin singulier renvoie à « collection »" },
+  { gn: "un bouquet de fleurs … la veille", veut: "ce sont les FLEURS qui ont été coupées la veille", bonne: "coupées", faux: ["coupé", "coupée", "coupés"], raison: "le féminin pluriel renvoie à « fleurs »" },
+  { gn: "une pile de livres … par ordre alphabétique", veut: "ce sont les LIVRES qui ont été rangés dans cet ordre", bonne: "classés", faux: ["classée", "classé", "classées"], raison: "le masculin pluriel renvoie à « livres »" },
+  { gn: "une pile de livres … contre le mur", veut: "c'est la PILE qui est appuyée au mur", bonne: "posée", faux: ["posés", "posé", "posées"], raison: "le féminin singulier renvoie à « pile »" },
+  { gn: "un ensemble de règles … aux élèves", veut: "ce sont les RÈGLES qui ont été expliquées", bonne: "présentées", faux: ["présenté", "présentée", "présentés"], raison: "le féminin pluriel renvoie à « règles »" },
+  { gn: "un ensemble de règles … en trois parties", veut: "c'est l'ENSEMBLE qui est divisé en trois", bonne: "organisé", faux: ["organisés", "organisée", "organisées"], raison: "le masculin singulier renvoie à « ensemble »" },
+];
+
+/* 2 bis. QUEL MOT COMMANDE L'ACCORD ? (2de_acc_sujet_ecran)
+   Le premier item fait choisir la forme du verbe. Celui-ci demande la cause
+   plutôt que l'effet : quel mot, dans une phrase où plusieurs noms se pressent
+   devant le verbe, commande vraiment l'accord. C'est la suppression — l'une des
+   manipulations nommées au III — appliquée aux écrans. */
+const COMMANDES: readonly Commande[] = [
+  { phrase: "La liste des candidats retenus pour l'épreuve sera affichée demain.", bonne: "liste", faux: ["candidats", "épreuve", "retenus"], raison: "supprime « des candidats retenus pour l'épreuve » : « la liste sera affichée » tient debout" },
+  { phrase: "Le bruit des vagues qui se brisent sur les rochers berçait la maison.", bonne: "bruit", faux: ["vagues", "rochers", "maison"], raison: "c'est le bruit qui berce, pas les vagues ; le reste ne fait que le préciser" },
+  { phrase: "Les élèves de cette classe, malgré la fatigue, ont tenu jusqu'au bout.", bonne: "élèves", faux: ["classe", "fatigue", "bout"], raison: "« malgré la fatigue » est un écran détaché, entre virgules : on peut l'ôter" },
+  { phrase: "L'ensemble des documents transmis par les familles a été vérifié.", bonne: "ensemble", faux: ["documents", "familles", "vérifié"], raison: "le noyau du groupe sujet est « ensemble » ; « des documents » le complète" },
+  { phrase: "Le choix de ces deux poèmes du seizième siècle surprend le lecteur.", bonne: "choix", faux: ["poèmes", "siècle", "lecteur"], raison: "ce qui surprend, c'est le choix — les poèmes ne font que dire lequel" },
+  { phrase: "La qualité des arguments avancés par les deux camps reste inégale.", bonne: "qualité", faux: ["arguments", "camps", "inégale"], raison: "supprime les compléments : « la qualité reste inégale »" },
+  { phrase: "Le nombre exact des victimes de cette éruption demeure inconnu.", bonne: "nombre", faux: ["victimes", "éruption", "exact"], raison: "« exact » qualifie le nombre, il ne commande rien" },
+  { phrase: "Les images de ce documentaire tourné à La Réunion ont marqué le public.", bonne: "images", faux: ["documentaire", "Réunion", "public"], raison: "ce sont les images qui ont marqué ; le participe « tourné » se rapporte au documentaire" },
+  { phrase: "L'usage de ces tournures dans les journaux du siècle dernier étonne aujourd'hui.", bonne: "usage", faux: ["tournures", "journaux", "siècle"], raison: "le noyau est « usage » : tout le reste le précise" },
+  { phrase: "La lecture des trois pièces inscrites au programme demande du temps.", bonne: "lecture", faux: ["pièces", "programme", "temps"], raison: "supprime « des trois pièces inscrites au programme » et la phrase reste entière" },
+  { phrase: "Le récit de ces journées passées en mer occupe le premier chapitre.", bonne: "récit", faux: ["journées", "mer", "chapitre"], raison: "c'est le récit qui occupe le chapitre, non les journées" },
+  { phrase: "Les conséquences de cette décision prise en janvier apparaissent seulement maintenant.", bonne: "conséquences", faux: ["décision", "janvier", "maintenant"], raison: "le pluriel du verbe suit « conséquences », noyau du groupe sujet" },
+  { phrase: "Le sens de ces deux vers, très discuté par les commentateurs, reste ouvert.", bonne: "sens", faux: ["vers", "commentateurs", "discuté"], raison: "l'apposition entre virgules est un écran : on l'ôte pour entendre l'accord" },
+  { phrase: "Les portraits de cette famille peints au dix-septième siècle ont disparu.", bonne: "portraits", faux: ["famille", "siècle", "peints"], raison: "ce sont les portraits qui ont disparu ; « peints » s'accorde avec eux, il ne commande pas" },
+];
+
+/* 3 bis. TROUVER LA FAUTE (2de_acc_sujet_difficile)
+   Le premier item propose des formes et en fait choisir une. Celui-ci fait
+   l'inverse : la phrase est écrite, et elle est fautive. Repérer vaut plus que
+   choisir — c'est le geste de la relecture.
+   ⛔ Aucun cas où l'usage hésite : ni « c'est / ce sont eux », ni « un grand
+   nombre de », ni « ainsi que », ni « ni l'un ni l'autre ». On ne demande pas
+   à un élève de trancher là où les grammairiens ne tranchent pas. */
+const FAUTES: readonly Faute[] = [
+  { phrase: "Ainsi disparaissait les dernières traces du village.", bonne: "disparaissait", correct: "disparaissaient", faux: ["traces", "dernières", "village"], raison: "le sujet « les dernières traces » est placé après le verbe, mais il commande quand même" },
+  { phrase: "Sur la table traînait des papiers et des crayons.", bonne: "traînait", correct: "traînaient", faux: ["table", "papiers", "crayons"], raison: "le sujet inversé est double : « des papiers et des crayons »" },
+  { phrase: "Toi et moi partiront demain matin.", bonne: "partiront", correct: "partirons", faux: ["Toi", "moi", "demain"], raison: "« toi et moi » équivaut à « nous » : la première personne l'emporte" },
+  { phrase: "Ton frère et toi arriveront les premiers.", bonne: "arriveront", correct: "arriverez", faux: ["frère", "toi", "premiers"], raison: "« ton frère et toi » équivaut à « vous » : la deuxième personne l'emporte sur la troisième" },
+  { phrase: "Toi qui sait tout, explique-nous cette page.", bonne: "sait", correct: "sais", faux: ["Toi", "tout", "page"], raison: "dans la relative, le verbe s'accorde avec l'antécédent de « qui » — ici « toi », deuxième personne" },
+  { phrase: "C'est moi qui a écrit cette lettre.", bonne: "a", correct: "ai", faux: ["moi", "écrit", "lettre"], raison: "l'antécédent de « qui » est « moi » : le verbe se met à la première personne" },
+  { phrase: "Restait les deux dernières places du fond.", bonne: "Restait", correct: "Restaient", faux: ["places", "dernières", "fond"], raison: "le sujet « les deux dernières places » suit le verbe, l'accord ne change pas pour autant" },
+  { phrase: "Les gens qui vient ici ne repartent jamais.", bonne: "vient", correct: "viennent", faux: ["gens", "repartent", "jamais"], raison: "l'antécédent de « qui » est « les gens » : troisième personne du pluriel" },
+  { phrase: "Combien d'élèves a répondu à cette question ?", bonne: "a", correct: "ont", faux: ["élèves", "répondu", "question"], raison: "le sujet réel est « d'élèves » : c'est lui qui commande, non l'adverbe « combien »" },
+  { phrase: "Les uns et les autres se félicitait du résultat.", bonne: "félicitait", correct: "félicitaient", faux: ["uns", "autres", "résultat"], raison: "deux sujets coordonnés font un pluriel" },
+  { phrase: "Peu de spectateurs a compris la fin de la pièce.", bonne: "a", correct: "ont", faux: ["spectateurs", "compris", "pièce"], raison: "après « peu de », c'est le nom complément qui commande l'accord" },
+  { phrase: "Nous qui a tant attendu, nous ne dirons rien.", bonne: "a", correct: "avons", faux: ["Nous", "attendu", "rien"], raison: "l'antécédent de « qui » est « nous » : première personne du pluriel" },
+];
+
+/* 4 bis. DÉPLACER LE COMPLÉMENT (2de_acc_participe_place)
+   ⭐ Le déplacement est nommé au III parmi les manipulations. Il fait apparaitre
+   la règle au lieu de la réciter : le même participe s'accorde ou non selon que
+   le complément direct passe devant lui ou derrière.
+   ⭐ Les entrées vont dans LES DEUX SENS. Dans un seul, l'élève apprendrait
+   « quand on déplace, l'accord tombe » — ce qui n'est vrai que d'un côté. */
+const DEPLACES: readonly Deplace[] = [
+  { depart: "Les lettres qu'il a écrites sont parties.", arrivee: "Il a écrit les lettres.", bonne: "écrit", faux: ["écrits", "écrite", "écrites"], raison: "le complément direct passe APRÈS le participe : plus rien ne commande l'accord" },
+  { depart: "Il a écrit les lettres.", arrivee: "les lettres qu'il a …", bonne: "écrites", faux: ["écrit", "écrits", "écrite"], raison: "le complément direct passe AVANT : le participe s'accorde avec lui" },
+  { depart: "La maison qu'elle a vendue était petite.", arrivee: "Elle a vendu la maison.", bonne: "vendu", faux: ["vendus", "vendue", "vendues"], raison: "complément placé après : le participe reste invariable" },
+  { depart: "Elle a vendu la maison.", arrivee: "la maison qu'elle a …", bonne: "vendue", faux: ["vendu", "vendus", "vendues"], raison: "complément placé avant : accord au féminin singulier" },
+  { depart: "Les photos que j'ai prises sont floues.", arrivee: "J'ai pris les photos.", bonne: "pris", faux: ["prise", "prises", "prisent"], raison: "le complément suit le participe : aucun accord" },
+  { depart: "J'ai pris les photos.", arrivee: "les photos que j'ai …", bonne: "prises", faux: ["pris", "prise", "prisent"], raison: "le complément précède : accord au féminin pluriel" },
+  { depart: "Les erreurs qu'ils ont commises sont réparables.", arrivee: "Ils ont commis les erreurs.", bonne: "commis", faux: ["commise", "commises", "commit"], raison: "complément après : le participe ne bouge pas" },
+  { depart: "Ils ont commis les erreurs.", arrivee: "les erreurs qu'ils ont …", bonne: "commises", faux: ["commis", "commise", "commit"], raison: "complément avant : accord au féminin pluriel" },
+  { depart: "La lettre que j'ai reçue ce matin m'a surpris.", arrivee: "J'ai reçu la lettre ce matin.", bonne: "reçu", faux: ["reçus", "reçue", "reçues"], raison: "complément après : pas d'accord" },
+  { depart: "Elle a lu tous les livres.", arrivee: "tous les livres qu'elle a …", bonne: "lus", faux: ["lu", "lue", "lues"], raison: "complément avant : accord au masculin pluriel" },
+  { depart: "Les fleurs que nous avons cueillies ont fané.", arrivee: "Nous avons cueilli les fleurs.", bonne: "cueilli", faux: ["cueillis", "cueillie", "cueillies"], raison: "complément après : le participe reste tel quel" },
+  { depart: "Ils ont prononcé ces paroles.", arrivee: "ces paroles qu'ils ont …", bonne: "prononcées", faux: ["prononcé", "prononcés", "prononcée"], raison: "complément avant : accord au féminin pluriel" },
+  { depart: "Les décisions qu'il a prises engagent tout le monde.", arrivee: "Il a pris les décisions.", bonne: "pris", faux: ["prise", "prises", "prit"], raison: "complément après : aucun accord" },
+  { depart: "Nous avons oublié les clés.", arrivee: "les clés que nous avons …", bonne: "oubliées", faux: ["oublié", "oubliés", "oubliée"], raison: "complément avant : accord au féminin pluriel" },
+];
+
+/* 5 bis. L'INTENTION COMMANDE LA GRAPHIE (2de_acc_homophone)
+   Le premier item pose la phrase et fait choisir la graphie. Celui-ci donne
+   d'abord ce qu'on VEUT DIRE : c'est le sens qui tranche entre deux formes qui
+   se prononcent pareil, jamais l'oreille. */
+const GRAPHIES: readonly Graphie[] = [
+  { phrase: "… livres sont à moi.", veut: "je désigne des livres qui sont posés là", bonne: "Ces", faux: ["Ses", "C'est", "S'est"], raison: "« ces » montre : on peut ajouter « -là » — « ces livres-là »" },
+  { phrase: "Il a rangé … livres avec soin.", veut: "je dis que les livres appartiennent à Paul", bonne: "ses", faux: ["ces", "c'est", "s'est"], raison: "« ses » possède : on peut dire « les siens »" },
+  { phrase: "Il … trompé de chemin.", veut: "je dis qu'il a fait une erreur, lui-même", bonne: "s'est", faux: ["c'est", "ses", "ces"], raison: "« s'est » contient le pronom réfléchi : il se trompe lui-même" },
+  { phrase: "… la meilleure solution.", veut: "je désigne la solution dont je viens de parler", bonne: "C'est", faux: ["S'est", "Ces", "Ses"], raison: "« c'est » présente : on peut remplacer par « cela est »" },
+  { phrase: "… eux qui décident.", veut: "je désigne les personnes qui décident", bonne: "Ce sont", faux: ["Se sont", "C'est", "S'est"], raison: "« ce sont » présente au pluriel ; « se sont » demanderait un verbe pronominal derrière" },
+  { phrase: "Ils … amusés toute la soirée.", veut: "je dis qu'ils se sont amusés eux-mêmes", bonne: "se sont", faux: ["ce sont", "c'est", "s'est"], raison: "le verbe est pronominal : « s'amuser » garde son pronom réfléchi" },
+  { phrase: "Je ne sais pas … heure il est.", veut: "je pose une question sur l'heure", bonne: "quelle", faux: ["qu'elle", "quel", "quels"], raison: "« quelle » accompagne le nom « heure », féminin singulier" },
+  { phrase: "Je ne sais pas … viendra demain.", veut: "je parle d'une personne, elle", bonne: "qu'elle", faux: ["quelle", "quel", "quels"], raison: "« qu'elle » contient le pronom « elle » : on peut dire « qu'il »" },
+  { phrase: "Le professeur … a rendu les copies.", veut: "je parle de plusieurs élèves, à qui il rend les copies", bonne: "leur", faux: ["leurs", "l'heure", "leures"], raison: "« leur » pronom, mis pour « à eux », ne prend jamais de s" },
+  { phrase: "Ils ont oublié … cahiers à la maison.", veut: "je parle des cahiers qui leur appartiennent, plusieurs", bonne: "leurs", faux: ["leur", "l'heure", "leures"], raison: "« leurs » déterminant s'accorde avec le nom qu'il accompagne" },
+  { phrase: "Les élèves … terminé l'exercice.", veut: "je dis qu'ils l'ont fini", bonne: "ont", faux: ["on", "onts", "hont"], raison: "« ont » est le verbe avoir : on peut dire « avaient »" },
+  { phrase: "… ne sait jamais ce qui va se passer.", veut: "je parle des gens en général", bonne: "On", faux: ["Ont", "Onts", "Hont"], raison: "« on » est un pronom sujet : on peut dire « il »" },
+  { phrase: "Elle est allée … se trouvait la source.", veut: "j'indique le lieu", bonne: "où", faux: ["ou", "oux", "hou"], raison: "« où » avec accent marque le lieu ; « ou » relierait deux possibilités" },
+  { phrase: "Tu prendras le train … le bus.", veut: "je propose deux possibilités entre lesquelles choisir", bonne: "ou", faux: ["où", "oux", "hou"], raison: "« ou » sans accent équivaut à « ou bien »" },
+];
+
+/* 6 bis. COMMUTER SANS CHANGER LA FONCTION (2de_acc_classe_fonction)
+   Le premier item pronominalise. Celui-ci commute : on remplace le groupe par
+   un autre, et un seul occupe la MÊME place dans la phrase. Le programme nomme
+   la commutation en tête des manipulations, et son IV en fait un exercice.
+   ⚠️ Les distracteurs sont des groupes parfaitement corrects — ils ont
+   seulement une AUTRE fonction. On ne les écarte donc pas à l'oreille. */
+const COMMUTES: readonly Commute[] = [
+  { phrase: "Les élèves écoutent le professeur.", groupe: "le professeur", bonne: "la consigne", faux: ["attentivement", "en silence", "au professeur"], raison: "« le professeur » est complément direct : seul un autre complément direct tient la place" },
+  { phrase: "Elle parle de son voyage.", groupe: "de son voyage", bonne: "de ses projets", faux: ["son voyage", "longuement", "hier"], raison: "le complément est introduit par « de » : le remplaçant doit l'être aussi" },
+  { phrase: "Il est devenu médecin.", groupe: "médecin", bonne: "célèbre", faux: ["un livre", "à Paris", "hier"], raison: "« médecin » est attribut du sujet : un adjectif peut occuper la même place" },
+  { phrase: "Nous partirons demain.", groupe: "demain", bonne: "à l'aube", faux: ["contents", "le train", "de joie"], raison: "« demain » indique le temps : seul un autre repère de temps tient la place" },
+  { phrase: "Elle habite à Saint-Denis.", groupe: "à Saint-Denis", bonne: "en ville", faux: ["depuis un an", "sa maison", "heureuse"], raison: "le groupe indique le lieu ; « depuis un an » indiquerait le temps" },
+  { phrase: "Je pense à mon avenir.", groupe: "à mon avenir", bonne: "à mes études", faux: ["mon avenir", "souvent", "avec inquiétude"], raison: "le complément est introduit par « à » : le retirer changerait la construction" },
+  { phrase: "Il a acheté une maison ancienne.", groupe: "ancienne", bonne: "en pierre", faux: ["hier", "cher", "une maison"], raison: "« ancienne » qualifie le nom « maison » : un complément du nom fait le même travail" },
+  { phrase: "Le vent souffle violemment.", groupe: "violemment", bonne: "avec force", faux: ["le vent", "violent", "la nuit"], raison: "l'adverbe dit la manière ; « violent » qualifierait le nom, ce n'est pas la même place" },
+  { phrase: "Ils ont trouvé la réponse.", groupe: "la réponse", bonne: "une solution", faux: ["rapidement", "à la réponse", "ensemble"], raison: "complément direct : ni préposition, ni adverbe" },
+  { phrase: "Cette pièce se joue depuis trois mois.", groupe: "depuis trois mois", bonne: "sans interruption", faux: ["trois mois", "au théâtre", "cette pièce"], raison: "le groupe complète la phrase entière ; « trois mois » seul n'a pas la même construction" },
+  { phrase: "Le narrateur paraît sincère.", groupe: "sincère", bonne: "troublé", faux: ["un menteur", "souvent", "au lecteur"], raison: "attribut du sujet : un adjectif seul convient" },
+  { phrase: "Elle écrit à sa sœur.", groupe: "à sa sœur", bonne: "à ses parents", faux: ["sa sœur", "une lettre", "chaque semaine"], raison: "complément indirect : « une lettre » serait un complément direct" },
+];
+
 export const accordsSecondeBank: TutorBankItemV4[] = [
   /* =========================================================
      2DE_ACC_COMMANDE_GN
@@ -607,6 +760,182 @@ export const accordsSecondeBank: TutorBankItemV4[] = [
           "Remplace, puis relis la phrase à voix basse. Une seule des formes tient debout.",
           `Ici, « ${c.groupe} » est ${c.fonction} : il se remplace par « ${c.pronom} ».`,
           `C'est « ${c.pronom} ».`,
+        ),
+      };
+    },
+  },
+
+  /* ══════════════ LES SECONDS ITEMS ══════════════ */
+
+  {
+    kind: "template",
+    id: "2de_acc_commande_gn_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "accords_2de",
+    microId: "2de_acc_commande_gn",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche d'abord de QUI ou de QUOI on parle. La marque suit, elle ne précède pas.",
+    tags: ["seconde", "grammaire", "accords", "groupe nominal", "template"],
+    generate: () => {
+      const c = randomChoice(INTENTIONS);
+      return {
+        text: `« ${c.gn} »\n\nOn veut dire que ${c.veut}.\nComment écrire le mot manquant ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Dans un groupe nominal étendu, deux noms peuvent recevoir l'accord : le noyau et son complément. Les deux écritures sont correctes — elles ne disent simplement pas la même chose. L'accord n'est donc pas une décoration : c'est lui qui désigne de quoi on parle.",
+          "Pose la question « qui est-ce qui l'est ? ». Le nom qui répond donne le genre et le nombre ; recopie sa marque.",
+          `Ici, ${c.raison}.`,
+          `On écrit « ${c.bonne} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_acc_sujet_ecran_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "accords_2de",
+    microId: "2de_acc_sujet_ecran",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Supprime tout ce qui peut s'enlever sans casser la phrase. Le mot qui reste devant le verbe commande.",
+    tags: ["seconde", "grammaire", "accords", "sujet", "suppression", "template"],
+    generate: () => {
+      const c = randomChoice(COMMANDES);
+      return {
+        text: `« ${c.phrase} »\n\nQuel mot commande l'accord du verbe ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Entre le sujet et son verbe, la langue glisse volontiers des compléments, des relatives, des appositions. Ces écrans portent souvent un nombre différent de celui du sujet, et c'est là que l'accord se perd. Le noyau du groupe sujet, lui, ne change pas.",
+          "Applique la suppression : ôte tout ce qui peut disparaitre sans que la phrase s'écroule. Ce qui résiste devant le verbe est le noyau.",
+          `Ici, ${c.raison}.`,
+          `C'est « ${c.bonne} » qui commande.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_acc_sujet_difficile_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "accords_2de",
+    microId: "2de_acc_sujet_difficile",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Cherche le verbe d'abord, puis demande-lui qui fait l'action — même si la réponse est derrière lui.",
+    tags: ["seconde", "grammaire", "accords", "relecture", "template"],
+    generate: () => {
+      const c = randomChoice(FAUTES);
+      return {
+        text: `« ${c.phrase} »\n\nCette phrase contient une faute d'accord. Quel mot est mal écrit ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Repérer une faute est plus difficile que choisir entre deux formes : rien ne signale où regarder. Les sujets qui trompent sont toujours les mêmes — sujet placé après le verbe, sujets coordonnés de personnes différentes, antécédent de « qui », quantité suivie d'un complément.",
+          "Pointe chaque verbe, puis pose-lui la question « qui est-ce qui ? ». Compare la réponse à la terminaison écrite.",
+          `Ici, ${c.raison}.`,
+          `Il faut écrire « ${c.correct} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_acc_participe_place_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "accords_2de",
+    microId: "2de_acc_participe_place",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Regarde uniquement où se trouve le complément direct par rapport au participe. Rien d'autre ne compte.",
+    tags: ["seconde", "grammaire", "accords", "participe", "déplacement", "template"],
+    generate: () => {
+      const c = randomChoice(DEPLACES);
+      return {
+        text: `« ${c.depart} »\n\nOn récrit la phrase ainsi : « ${c.arrivee} »\nComment s'écrit le participe ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Avec l'auxiliaire avoir, le participe passé ne s'accorde jamais avec le sujet. Il s'accorde avec le complément direct, et à une seule condition : que ce complément soit placé AVANT lui. Déplacer le complément fait donc apparaitre ou disparaitre l'accord, sans qu'aucun autre mot ne bouge.",
+          "Repère le complément direct, puis regarde s'il est à gauche ou à droite du participe. À gauche : accord. À droite : rien.",
+          `Ici, ${c.raison}.`,
+          `On écrit « ${c.bonne} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_acc_homophone_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "accords_2de",
+    microId: "2de_acc_homophone",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "L'oreille ne sert à rien ici : les formes se prononcent pareil. C'est le sens annoncé qui décide.",
+    tags: ["seconde", "grammaire", "accords", "homophones", "template"],
+    generate: () => {
+      const c = randomChoice(GRAPHIES);
+      return {
+        text: `« ${c.phrase} »\n\nOn veut dire : ${c.veut}.\nQuelle graphie écrire ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Deux homophones ne se distinguent que par ce qu'ils FONT dans la phrase. Partir du sens voulu supprime le doute : on ne cherche plus quelle forme sonne juste, mais laquelle dit ce qu'on a décidé de dire.",
+          "Remplace par une formule qui, elle, ne s'écrit que d'une façon : « ces » par « ces …-là », « ses » par « les siens », « c'est » par « cela est », « leur » par « à eux », « où » par « à quel endroit ».",
+          `Ici, ${c.raison}.`,
+          `On écrit « ${c.bonne} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_acc_classe_fonction_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "accords_2de",
+    microId: "2de_acc_classe_fonction",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les quatre groupes sont corrects en français. Un seul tient exactement la même place dans la phrase.",
+    tags: ["seconde", "grammaire", "fonctions", "commutation", "template"],
+    generate: () => {
+      const c = randomChoice(COMMUTES);
+      return {
+        text: `« ${c.phrase} »\n\nPar lequel de ces groupes peut-on remplacer « ${c.groupe} » sans changer sa fonction ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Commuter, c'est remplacer un groupe par un autre à la même place. Si la phrase reste construite pareil, les deux groupes ont la même fonction — et l'on n'a eu besoin d'aucune étiquette pour le savoir. Le programme met cette manipulation en tête de celles qu'il attend au lycée.",
+          "Vérifie deux choses : la préposition (« à », « de », ou rien) doit être la même, et le groupe doit répondre à la même question posée au verbe.",
+          `Ici, ${c.raison}.`,
+          `On peut écrire « ${c.bonne} ».`,
         ),
       };
     },
