@@ -346,6 +346,120 @@ const RUPTURES: readonly AvecFaux[] = [
   { enonce: "Ce que le classicisme oppose à la préciosité, en un mot ?", bonne: "le naturel", faux: ["l'interdiction d'écrire sur le sentiment amoureux", "le retour à la poésie chantée des troubadours", "le rejet de toute référence à l'Antiquité"], raison: "au mot cherché, le classicisme oppose le naturel" },
 ];
 
+/* ═══════════ LES TABLES DES SECONDS ITEMS (18/08/2026) ═══════════
+   ⛔⛔ UN PIÈGE ÉCARTÉ DÈS LA CONCEPTION. Le retournement naturel du premier
+   item de métrique serait « lequel de ces vers est un alexandrin ? ». Il est
+   INTERDIT ici : un alexandrin est plus long qu'un octosyllabe, donc la bonne
+   réponse se cocherait à la règle sans compter une seule syllabe. Le contrôle
+   de devinabilité l'aurait signalé, mais il valait mieux ne pas l'écrire.
+   → Les seconds items de la métrique portent donc sur les NOMS et la césure,
+     dont les réponses tiennent en deux mots et s'égalisent d'elles-mêmes.
+
+   ⛔ SECOND PIÈGE, celui-là déjà payé le 14/08 : ne JAMAIS demander « de quel
+   mouvement s'agit-il ? » dans une micro qui porte le nom du mouvement — la
+   réponse est dans le titre de la ligne cliquée. Les quatre micros de
+   mouvements demandent donc le trait INTRUS, ce qui exige de connaitre les
+   quatre écoles au lieu d'une.
+   ⛔ Rien du XIXe siècle : l'objet d'étude de 2de s'arrête au XVIIIe. */
+
+type Deux = { readonly question: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+
+/* 1 bis. NOMMER LE VERS, TROUVER LA CÉSURE (2de_poe_metre) */
+const METRE_NOMS: readonly Deux[] = [
+  { question: "Comment appelle-t-on un vers de douze syllabes ?", bonne: "un alexandrin", faux: ["un décasyllabe", "un octosyllabe", "un hexasyllabe"], raison: "c'est le vers le plus employé de la poésie française classique" },
+  { question: "Comment appelle-t-on un vers de dix syllabes ?", bonne: "un décasyllabe", faux: ["un alexandrin", "un octosyllabe", "un heptasyllabe"], raison: "le décasyllabe domine avant que l'alexandrin ne s'impose" },
+  { question: "Comment appelle-t-on un vers de huit syllabes ?", bonne: "un octosyllabe", faux: ["un décasyllabe", "un hexasyllabe", "un heptasyllabe"], raison: "l'octosyllabe est le vers des formes brèves médiévales" },
+  { question: "Comment appelle-t-on un vers de sept syllabes ?", bonne: "un heptasyllabe", faux: ["un hexasyllabe", "un octosyllabe", "un décasyllabe"], raison: "vers impair, plus rare, au balancement particulier" },
+  { question: "Comment appelle-t-on un vers de six syllabes ?", bonne: "un hexasyllabe", faux: ["un heptasyllabe", "un octosyllabe", "un décasyllabe"], raison: "c'est aussi la moitié d'un alexandrin" },
+  { question: "Après quelle syllabe l'alexandrin classique se coupe-t-il ?", bonne: "après la sixième", faux: ["après la quatrième", "après la cinquième", "après la huitième"], raison: "la césure partage l'alexandrin en deux moitiés égales" },
+  { question: "Comment nomme-t-on chacune des deux moitiés d'un alexandrin ?", bonne: "un hémistiche", faux: ["un quatrain", "un tercet", "un envoi"], raison: "les deux hémistiches se répondent de part et d'autre de la césure" },
+  { question: "Où tombe la césure du décasyllabe le plus courant ?", bonne: "après la quatrième", faux: ["après la cinquième", "après la sixième", "après la troisième"], raison: "le décasyllabe se coupe le plus souvent en quatre puis six" },
+];
+
+/* 2 bis. LE SCHÉMA ET LA QUALITÉ DE LA RIME (2de_poe_rimes) */
+const RIMES_SCHEMAS: readonly Deux[] = [
+  { question: "À quoi correspond le schéma ABAB ?", bonne: "des rimes croisées", faux: ["des rimes suivies", "des rimes embrassées", "des rimes redoublées"], raison: "les sons alternent d'un vers à l'autre" },
+  { question: "À quoi correspond le schéma AABB ?", bonne: "des rimes suivies", faux: ["des rimes croisées", "des rimes embrassées", "des rimes redoublées"], raison: "les vers riment deux à deux, dans l'ordre" },
+  { question: "À quoi correspond le schéma ABBA ?", bonne: "des rimes embrassées", faux: ["des rimes croisées", "des rimes suivies", "des rimes redoublées"], raison: "les deux vers du milieu sont enfermés par les deux autres" },
+  { question: "À quoi correspond le schéma AAAA ?", bonne: "des rimes redoublées", faux: ["des rimes croisées", "des rimes suivies", "des rimes embrassées"], raison: "la même rime revient aux quatre vers" },
+  { question: "Combien de sons communs faut-il pour une rime riche ?", bonne: "trois", faux: ["un", "deux", "quatre"], raison: "un seul son fait une rime pauvre, deux une rime suffisante" },
+  { question: "Combien de sons communs suffisent pour une rime suffisante ?", bonne: "deux", faux: ["un", "trois", "quatre"], raison: "en dessous, la rime est dite pauvre" },
+  { question: "« ombre » et « sombre » : quelle rime est-ce ?", bonne: "une rime riche", faux: ["une rime pauvre", "une rime suffisante", "une rime intérieure"], raison: "trois sons communs se prononcent à la fin des deux mots" },
+  { question: "« ami » et « fini » : quelle rime est-ce ?", bonne: "une rime pauvre", faux: ["une rime riche", "une rime suffisante", "une rime intérieure"], raison: "un seul son est commun aux deux mots" },
+];
+
+/* 3 bis. CE QUE LE FAIT DE RYTHME PRODUIT (2de_poe_rythme)
+   Le premier item nomme le fait à partir d'un exemple ; celui-ci part du nom et
+   demande l'EFFET — la seule chose qui compte dans un commentaire. */
+const RYTHME_EFFETS: readonly Deux[] = [
+  { question: "Que produit un enjambement ?", bonne: "le sens continue là où le vers s'arrête", faux: ["le sens s'arrête juste avec le vers", "le vers perd une de ses syllabes", "la rime se déplace vers le milieu"], raison: "la phrase déborde la mesure, et l'oreille attend une pause qui ne vient pas" },
+  { question: "Que produit un rejet ?", bonne: "un mot bref se trouve mis en relief", faux: ["un mot bref se trouve effacé du vers", "les deux moitiés du vers se répondent", "la rime devient plus riche qu'avant"], raison: "isolé au début du vers, le mot reçoit tout l'accent" },
+  { question: "Que produit un contre-rejet ?", bonne: "un mot bref annonce en fin de vers ce qui suit", faux: ["un mot bref referme ce qui précède", "le vers se coupe en deux moitiés égales", "la phrase s'arrête juste avec le vers"], raison: "jeté à la fin, il ouvre la phrase du vers suivant" },
+  { question: "Que produit une césure fortement marquée ?", bonne: "le vers se partage en deux moitiés qui se répondent", faux: ["le sens déborde sur le vers suivant", "un mot bref se trouve mis en relief", "la rime revient plus tôt que prévu"], raison: "la coupe crée un balancement, souvent une opposition" },
+];
+
+/* 4 bis. CE QUE L'EFFET SONORE RÉPÈTE (2de_poe_sonorites)
+   ⭐ Les vers cités sont ceux qu'autorise l'objet d'étude : Racine, Du Bellay,
+   Labé. Rien du XIXe. */
+const SONS_QUOI: readonly Deux[] = [
+  { question: "Une allitération répète quoi ?", bonne: "une consonne", faux: ["une voyelle", "un mot entier", "une syllabe complète"], raison: "c'est la consonne qui revient et qui se fait entendre" },
+  { question: "Une assonance répète quoi ?", bonne: "une voyelle", faux: ["une consonne", "un mot entier", "une syllabe complète"], raison: "c'est la voyelle qui revient d'un mot à l'autre" },
+  { question: "Deux mots presque semblables rapprochés, comment cela s'appelle-t-il ?", bonne: "une paronomase", faux: ["une allitération", "une assonance", "une harmonie imitative"], raison: "leur ressemblance sonore fait se frotter leurs sens" },
+  { question: "Des sons qui imitent ce que le vers décrit, comment cela s'appelle-t-il ?", bonne: "une harmonie imitative", faux: ["une allitération", "une assonance", "une paronomase"], raison: "le son se met au service de ce qui est dit" },
+  { question: "« Pour qui sont ces serpents qui sifflent sur vos têtes ? » (Racine) — quel son revient ?", bonne: "le son [s]", faux: ["le son [r]", "le son [p]", "le son [t]"], raison: "les sifflantes se répètent et font entendre les serpents" },
+  { question: "« Je vis, je meurs ; je me brûle et me noie » (Labé) — quel son revient ?", bonne: "le son [m]", faux: ["le son [v]", "le son [b]", "le son [n]"], raison: "la consonne de « meurs », « me » et « me » scande tout le vers" },
+];
+
+/* 5 bis. LES FAITS DES FORMES FIXES (2de_poe_formes_fixes) */
+const FORMES_FAITS: readonly Deux[] = [
+  { question: "Combien de vers compte un sonnet ?", bonne: "quatorze", faux: ["douze", "seize", "dix"], raison: "deux quatrains et deux tercets font quatorze vers" },
+  { question: "Comment les vers d'un sonnet se répartissent-ils ?", bonne: "deux quatrains, puis deux tercets", faux: ["deux tercets, puis deux quatrains", "trois quatrains et un distique", "quatre tercets et un vers seul"], raison: "les huit premiers vers posent, les six derniers retournent" },
+  { question: "D'où le sonnet est-il venu en français ?", bonne: "d'Italie", faux: ["d'Espagne", "d'Angleterre", "d'Allemagne"], raison: "la Pléiade l'acclimate en français au XVIe siècle" },
+  { question: "Qu'est-ce qui clôt une ballade ?", bonne: "un envoi plus court", faux: ["un tercet final", "un distique isolé", "un quatrain répété"], raison: "l'envoi s'adresse souvent au prince ou au destinataire" },
+  { question: "Qu'est-ce qui revient dans un rondeau ?", bonne: "le premier mot ou le premier vers", faux: ["le dernier vers de chaque strophe", "la même rime à tous les vers", "un envoi placé à la fin"], raison: "le retour du début lui donne sa forme circulaire" },
+  { question: "Qu'est-ce qui caractérise une ode ?", bonne: "des strophes régulières et un destinataire", faux: ["quatorze vers en deux ensembles", "un refrain qui revient à chaque strophe", "un envoi plus court à la fin"], raison: "l'ode est un poème lyrique adressé à quelqu'un ou à quelque chose" },
+];
+
+/* 6 bis. COMPARAISON, MÉTAPHORE, ET LES AUTRES (2de_poe_images)
+   ⭐ La distinction qui décide de tout : l'OUTIL de comparaison. Sans lui, le
+   rapprochement est direct — c'est une métaphore. */
+const FIGURES: readonly Deux[] = [
+  { question: "« Sa chevelure est un fleuve »", bonne: "une métaphore", faux: ["une comparaison", "une personnification", "une antithèse"], raison: "les deux termes sont rapprochés sans aucun outil de comparaison" },
+  { question: "« Sa chevelure est comme un fleuve »", bonne: "une comparaison", faux: ["une métaphore", "une personnification", "une antithèse"], raison: "« comme » est l'outil qui signale la comparaison" },
+  { question: "« Le vent se plaint dans les branches »", bonne: "une personnification", faux: ["une métaphore", "une comparaison", "une antithèse"], raison: "un être inanimé reçoit une conduite humaine" },
+  { question: "« Je meurs de soif auprès de la fontaine » (Villon)", bonne: "une antithèse", faux: ["une métaphore", "une comparaison", "une personnification"], raison: "deux termes contraires sont réunis dans le même vers" },
+  { question: "« Ce port est un abri, tel un manteau posé »", bonne: "une comparaison", faux: ["une métaphore", "une personnification", "une antithèse"], raison: "« tel » est un outil de comparaison au même titre que « comme »" },
+  { question: "« La mer déchire ses draps de sel »", bonne: "une métaphore", faux: ["une comparaison", "une antithèse", "une hyperbole"], raison: "l'image est posée sans outil, et l'on doit la déplier soi-même" },
+  { question: "« La nuit veille sur les toits »", bonne: "une personnification", faux: ["une comparaison", "une antithèse", "une hyperbole"], raison: "la nuit reçoit un verbe qui suppose une conscience" },
+  { question: "« Un silence assourdissant »", bonne: "une antithèse", faux: ["une métaphore", "une comparaison", "une personnification"], raison: "les deux mots se contredisent, et c'est de là que nait l'effet" },
+];
+
+/* 11 bis. QUEL MOUVEMENT POUR CETTE PÉRIODE ? (2de_poehist_siecle)
+   ⚠️ Cette micro-là ne porte AUCUN nom de mouvement dans son intitulé : on peut
+   donc demander le mouvement sans que la réponse soit dans le titre. */
+const PERIODES: readonly Deux[] = [
+  { question: "Quel mouvement appartient au Moyen Âge ?", bonne: "la fin'amor", faux: ["l'Humanisme", "la préciosité", "le classicisme"], raison: "les troubadours écrivent à partir du XIIe siècle" },
+  { question: "Quel mouvement appartient au XVIe siècle ?", bonne: "l'Humanisme", faux: ["la fin'amor", "la préciosité", "le classicisme"], raison: "l'Humanisme et la Pléiade sont du XVIe siècle" },
+  { question: "Quel mouvement occupe la première moitié du XVIIe siècle ?", bonne: "la préciosité", faux: ["la fin'amor", "l'Humanisme", "les Lumières"], raison: "les salons précieux précèdent l'installation du classicisme" },
+  { question: "Quel mouvement s'impose dans la seconde moitié du XVIIe siècle ?", bonne: "le classicisme", faux: ["la fin'amor", "l'Humanisme", "les Lumières"], raison: "le classicisme succède à la préciosité et la combat" },
+  { question: "Quel mouvement appartient au XVIIIe siècle ?", bonne: "les Lumières", faux: ["la fin'amor", "l'Humanisme", "la préciosité"], raison: "les Lumières closent l'objet d'étude de seconde" },
+  { question: "Lequel de ces mouvements est le plus ancien ?", bonne: "la fin'amor", faux: ["l'Humanisme", "la préciosité", "le classicisme"], raison: "elle ouvre la période, dès le XIIe siècle" },
+  { question: "Lequel de ces mouvements est le plus récent ?", bonne: "les Lumières", faux: ["la fin'amor", "l'Humanisme", "la préciosité"], raison: "elles ferment la période étudiée en seconde" },
+];
+
+/* 12 bis. ENTRE QUELS DEUX MOMENTS ? (2de_poehist_continuite_rupture)
+   Le premier item donne le passage et demande ce qui change ; celui-ci donne le
+   changement et demande entre quels moments il se produit. C'est la lecture
+   qu'un élève doit savoir faire devant deux textes qu'on lui met côte à côte. */
+const PASSAGES: readonly Deux[] = [
+  { question: "Le poème cesse d'être chanté pour devenir un texte lu.", bonne: "de la fin'amor à la Pléiade", faux: ["de la préciosité au classicisme", "du classicisme aux Lumières", "de l'Humanisme au classicisme"], raison: "le lien à la musique se défait quand le poème devient écrit" },
+  { question: "La recherche du mot rare devient un défaut, au nom du naturel.", bonne: "de la préciosité au classicisme", faux: ["de la fin'amor à la Pléiade", "du classicisme aux Lumières", "de l'Humanisme au classicisme"], raison: "le classicisme retourne contre la préciosité ce qu'elle tenait pour une qualité" },
+  { question: "L'imitation des Anciens devient une règle au lieu d'une découverte.", bonne: "de l'Humanisme au classicisme", faux: ["de la fin'amor à la Pléiade", "de la préciosité au classicisme", "du classicisme aux Lumières"], raison: "l'Antiquité reste la référence, mais son statut change du tout au tout" },
+  { question: "La poésie se met au service de l'examen critique et des idées.", bonne: "du classicisme aux Lumières", faux: ["de la fin'amor à la Pléiade", "de la préciosité au classicisme", "de l'Humanisme au classicisme"], raison: "le siècle des Lumières oriente les lettres vers la critique et le savoir" },
+  { question: "L'enrichissement de la langue cède la place à son épuration.", bonne: "de l'Humanisme au classicisme", faux: ["de la fin'amor à la Pléiade", "du classicisme aux Lumières", "de la préciosité à la Pléiade"], raison: "au siècle qui forge des mots succède celui qui les retranche" },
+  { question: "Le sonnet, venu d'Italie, s'installe dans la langue française.", bonne: "de la fin'amor à la Pléiade", faux: ["de la préciosité au classicisme", "du classicisme aux Lumières", "de l'Humanisme au classicisme"], raison: "la Pléiade naturalise le sonnet au milieu du XVIe siècle" },
+];
+
 export const poesieSecondeBank: TutorBankItemV4[] = [
   {
     kind: "template", id: "2de_poe_metre_tpl_1", niveau: "seconde", matiere: "francais",
@@ -573,6 +687,256 @@ export const poesieSecondeBank: TutorBankItemV4[] = [
           "Sépare toujours deux questions : qu'est-ce que le nouveau mouvement conserve, et qu'est-ce qu'il refuse ? Une réponse qui affirme une disparition totale est presque toujours fausse.",
           `Ici, ${c.raison}.`,
           `La réponse est : ${c.bonne}.`,
+        ),
+      };
+    },
+  },
+
+  /* ══════════════ LES SECONDS ITEMS ══════════════ */
+
+  {
+    kind: "template", id: "2de_poe_metre_tpl_2", niveau: "seconde", matiere: "francais",
+    notionId: "poesie_formes_2de", microId: "2de_poe_metre", difficulty: 2, theme: "neutral",
+    hint: "Le nom du vers se déduit du nombre : hexa- pour six, hepta- pour sept, octo- pour huit, déca- pour dix.",
+    tags: ["seconde", "poésie", "métrique", "template"],
+    generate: () => {
+      const c = randomChoice(METRE_NOMS);
+      return {
+        text: c.question,
+        format: "qcm" as const, choices: makeChoices(c.bonne, c.faux), expected: [c.bonne], comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Un vers français se définit par son nombre de syllabes, et chaque nombre porte un nom bâti sur le grec. Les vers longs se coupent en outre par une césure : l'alexandrin après la sixième syllabe, le décasyllabe le plus souvent après la quatrième. Chaque moitié s'appelle un hémistiche.",
+          "Retiens les préfixes grecs — hexa six, hepta sept, octo huit, déca dix — et l'exception : le vers de douze syllabes porte un nom propre, l'alexandrin.",
+          `Ici, ${c.raison}.`,
+          `La réponse est : ${c.bonne}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template", id: "2de_poe_rimes_tpl_2", niveau: "seconde", matiere: "francais",
+    notionId: "poesie_formes_2de", microId: "2de_poe_rimes", difficulty: 3, theme: "neutral",
+    hint: "Pour la qualité d'une rime, on compte les sons communs — pas les lettres.",
+    tags: ["seconde", "poésie", "rimes", "template"],
+    generate: () => {
+      const c = randomChoice(RIMES_SCHEMAS);
+      return {
+        text: c.question,
+        format: "qcm" as const, choices: makeChoices(c.bonne, c.faux), expected: [c.bonne], comparator: "mcq_exact" as const,
+        explanation: exp(
+          "La rime se décrit de deux façons. Sa DISPOSITION dit dans quel ordre les sons reviennent : suivies en AABB, croisées en ABAB, embrassées en ABBA. Sa QUALITÉ dit combien de sons les deux mots ont en commun : un seul fait une rime pauvre, deux une rime suffisante, trois ou plus une rime riche.",
+          "Note les sons à la fin de chaque vers avec des lettres, puis relis la suite obtenue. Pour la qualité, prononce les deux mots et compte les sons partagés en remontant depuis la fin.",
+          `Ici, ${c.raison}.`,
+          `La réponse est : ${c.bonne}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template", id: "2de_poe_rythme_tpl_2", niveau: "seconde", matiere: "francais",
+    notionId: "poesie_formes_2de", microId: "2de_poe_rythme", difficulty: 3, theme: "neutral",
+    hint: "Ne cherche pas la définition : cherche ce que le lecteur ressent en arrivant au bout du vers.",
+    tags: ["seconde", "poésie", "rythme", "template"],
+    generate: () => {
+      const c = randomChoice(RYTHME_EFFETS);
+      return {
+        text: c.question,
+        format: "qcm" as const, choices: makeChoices(c.bonne, c.faux), expected: [c.bonne], comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Le vers impose une mesure, la phrase suit la sienne, et le rythme nait de leur désaccord. Quand la phrase déborde, c'est un enjambement. Quand un mot bref se retrouve seul au début du vers suivant, c'est un rejet, et cette solitude le met en relief. Quand il est jeté à la fin en avance sur sa phrase, c'est un contre-rejet.",
+          "Dans un commentaire, ne t'arrête jamais au nom du procédé : dis ce qu'il fait entendre. C'est l'effet qui s'analyse, pas l'étiquette.",
+          `Ici, ${c.raison}.`,
+          `La réponse est : ${c.bonne}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template", id: "2de_poe_sonorites_tpl_2", niveau: "seconde", matiere: "francais",
+    notionId: "poesie_formes_2de", microId: "2de_poe_sonorites", difficulty: 2, theme: "neutral",
+    hint: "Consonne ou voyelle : c'est là toute la différence entre les deux mots les plus employés.",
+    tags: ["seconde", "poésie", "sonorités", "template"],
+    generate: () => {
+      const c = randomChoice(SONS_QUOI);
+      return {
+        text: c.question,
+        format: "qcm" as const, choices: makeChoices(c.bonne, c.faux), expected: [c.bonne], comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Deux mots suffisent à décrire la plupart des retours sonores, et on les confond sans cesse : l'allitération répète une CONSONNE, l'assonance répète une VOYELLE. S'y ajoutent la paronomase, qui rapproche deux mots presque semblables, et l'harmonie imitative, où les sons imitent ce qu'ils décrivent.",
+          "Prononce le vers à voix basse et repère le son qui revient. Demande-toi ensuite si c'est une consonne ou une voyelle : le nom suit tout seul.",
+          `Ici, ${c.raison}.`,
+          `La réponse est : ${c.bonne}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template", id: "2de_poe_formes_fixes_tpl_2", niveau: "seconde", matiere: "francais",
+    notionId: "poesie_formes_2de", microId: "2de_poe_formes_fixes", difficulty: 2, theme: "neutral",
+    hint: "Une forme fixe se reconnait à trois choses : le nombre de vers, leur groupement, et ce qui revient.",
+    tags: ["seconde", "poésie", "formes fixes", "template"],
+    generate: () => {
+      const c = randomChoice(FORMES_FAITS);
+      return {
+        text: c.question,
+        format: "qcm" as const, choices: makeChoices(c.bonne, c.faux), expected: [c.bonne], comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une forme fixe est un contrat : le poète accepte des contraintes de nombre et de retour, et son mérite se juge à ce qu'il en fait. Le sonnet compte quatorze vers en deux quatrains puis deux tercets, et vient d'Italie. La ballade se ferme sur un envoi plus court. Le rondeau fait revenir son début. L'ode déroule des strophes régulières vers un destinataire.",
+          "Compte d'abord les vers, puis regarde comment ils sont groupés, puis cherche ce qui revient. Trois observations suffisent à nommer la forme.",
+          `Ici, ${c.raison}.`,
+          `La réponse est : ${c.bonne}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template", id: "2de_poe_images_tpl_2", niveau: "seconde", matiere: "francais",
+    notionId: "poesie_formes_2de", microId: "2de_poe_images", difficulty: 3, theme: "neutral",
+    hint: "Cherche d'abord s'il y a un outil : « comme », « tel », « pareil à ». Sa présence décide de tout.",
+    tags: ["seconde", "poésie", "figures", "template"],
+    generate: () => {
+      const c = randomChoice(FIGURES);
+      return {
+        text: `« ${c.question} »\n\nDe quelle figure s'agit-il ?`,
+        format: "qcm" as const, choices: makeChoices(c.bonne, c.faux), expected: [c.bonne], comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Comparaison et métaphore rapprochent toutes deux deux réalités ; seule la comparaison le dit, au moyen d'un outil — « comme », « tel », « pareil à », « semblable à ». La métaphore s'en passe et pose l'image directement, ce qui la rend plus dense et plus difficile. La personnification prête une conduite humaine à ce qui n'en a pas ; l'antithèse réunit deux contraires.",
+          "Cherche l'outil de comparaison. S'il est là, c'est une comparaison. S'il n'y est pas, demande-toi si l'on prête une vie à un objet, ou si deux contraires se heurtent.",
+          `Ici, ${c.raison}.`,
+          `C'est ${c.bonne}.`,
+        ),
+      };
+    },
+  },
+
+  /* ⛔ LES QUATRE MOUVEMENTS : ON DEMANDE L'INTRUS, JAMAIS LE NOM.
+     La micro s'appelle « 2de_poehist_finamor » : demander « de quel mouvement
+     s'agit-il ? » donnerait la réponse dans le titre de la ligne cliquée. En
+     cherchant le trait ÉTRANGER, l'élève doit connaitre les quatre écoles. */
+  {
+    kind: "template", id: "2de_poehist_finamor_tpl_2", niveau: "seconde", matiere: "francais",
+    notionId: "poesie_histoire_2de", microId: "2de_poehist_finamor", difficulty: 4, theme: "neutral",
+    hint: "Trois de ces traits vont ensemble. Le quatrième vient d'une autre école — laquelle ?",
+    tags: ["seconde", "poésie", "fin'amor", "template"],
+    generate: () => {
+      const intrus = randomChoice(traitsHors("finamor"));
+      return {
+        text: `Lequel de ces traits n'appartient PAS à la fin'amor des troubadours ?`,
+        format: "qcm" as const, choices: makeChoices(intrus, shuffle(traitsDe("finamor")).slice(0, 3)),
+        expected: [intrus], comparator: "mcq_exact" as const,
+        explanation: exp(
+          "La fin'amor des troubadours tient en quelques traits solidaires : le poète sert une dame inaccessible comme un vassal sert son seigneur, l'amour vaut par l'attente plutôt que par la possession, le secret est un devoir, l'indignité de l'amant fait son mérite, et le poème se chante.",
+          "Repère d'abord ce que trois des quatre traits ont en commun. Le quatrième, isolé, appartient à une autre école — Humanisme, préciosité ou classicisme.",
+          `Le trait étranger est : « ${intrus} »`,
+          `C'est celui-là qui vient d'ailleurs.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template", id: "2de_poehist_humanisme_pleiade_tpl_2", niveau: "seconde", matiere: "francais",
+    notionId: "poesie_histoire_2de", microId: "2de_poehist_humanisme_pleiade", difficulty: 4, theme: "neutral",
+    hint: "Le XVIe siècle veut enrichir : la langue, les formes, l'homme. Cherche le trait qui ne veut pas enrichir.",
+    tags: ["seconde", "poésie", "humanisme", "Pléiade", "template"],
+    generate: () => {
+      const intrus = randomChoice(traitsHors("humanisme"));
+      return {
+        text: `Lequel de ces traits n'appartient PAS à l'Humanisme et à la Pléiade ?`,
+        format: "qcm" as const, choices: makeChoices(intrus, shuffle(traitsDe("humanisme")).slice(0, 3)),
+        expected: [intrus], comparator: "mcq_exact" as const,
+        explanation: exp(
+          "L'Humanisme et la Pléiade partagent un même élan : relire les Anciens dans leur langue, hausser le français au niveau du latin et du grec, importer d'Italie des formes neuves — le sonnet d'abord —, forger des mots pour dire ce que la langue taisait, et placer la formation de l'homme au centre.",
+          "Le siècle enrichit. Un trait qui retranche, qui épure ou qui interdit vient forcément d'ailleurs — le plus souvent du classicisme.",
+          `Le trait étranger est : « ${intrus} »`,
+          `C'est celui-là qui vient d'ailleurs.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template", id: "2de_poehist_preciosite_tpl_2", niveau: "seconde", matiere: "francais",
+    notionId: "poesie_histoire_2de", microId: "2de_poehist_preciosite", difficulty: 4, theme: "neutral",
+    hint: "La préciosité cherche le détour et le rare. Le trait qui réclame le simple et le clair n'est pas d'elle.",
+    tags: ["seconde", "poésie", "préciosité", "template"],
+    generate: () => {
+      const intrus = randomChoice(traitsHors("preciosite"));
+      return {
+        text: `Lequel de ces traits n'appartient PAS à la préciosité ?`,
+        format: "qcm" as const, choices: makeChoices(intrus, shuffle(traitsDe("preciosite")).slice(0, 3)),
+        expected: [intrus], comparator: "mcq_exact" as const,
+        explanation: exp(
+          "La préciosité se reconnait à quatre gestes : éviter le mot commun au profit de l'expression rare, nommer les choses par des détours, faire de la poésie une affaire de salon où l'esprit vaut le sentiment, et raffiner la langue comme on raffine les manières.",
+          "Attention au voisinage : le classicisme lui succède et la combat point par point. Un trait qui exige la clarté, la mesure ou le naturel est classique, jamais précieux.",
+          `Le trait étranger est : « ${intrus} »`,
+          `C'est celui-là qui vient d'ailleurs.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template", id: "2de_poehist_classicisme_tpl_2", niveau: "seconde", matiere: "francais",
+    notionId: "poesie_histoire_2de", microId: "2de_poehist_classicisme", difficulty: 4, theme: "neutral",
+    hint: "Le classicisme règle et mesure. Le trait qui cherche la rareté ou la nouveauté vient d'ailleurs.",
+    tags: ["seconde", "poésie", "classicisme", "template"],
+    generate: () => {
+      const intrus = randomChoice(traitsHors("classicisme"));
+      return {
+        text: `Lequel de ces traits n'appartient PAS au classicisme ?`,
+        format: "qcm" as const, choices: makeChoices(intrus, shuffle(traitsDe("classicisme")).slice(0, 3)),
+        expected: [intrus], comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Le classicisme exige la clarté et la mesure, tient l'obscurité pour un défaut, fait de l'imitation des Anciens une règle, soumet l'art à la raison en lui demandant de plaire et d'instruire, et tient le beau pour universel. Il se défie du mot trop cherché, qu'il attribue au siècle précédent.",
+          "Demande-toi si le trait ajoute ou retranche. Le classicisme retranche : ce qui veut enrichir la langue ou cultiver le rare appartient à l'Humanisme ou à la préciosité.",
+          `Le trait étranger est : « ${intrus} »`,
+          `C'est celui-là qui vient d'ailleurs.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template", id: "2de_poehist_siecle_tpl_2", niveau: "seconde", matiere: "francais",
+    notionId: "poesie_histoire_2de", microId: "2de_poehist_siecle", difficulty: 2, theme: "neutral",
+    hint: "Quatre repères suffisent : Moyen Âge, XVIe, XVIIe, XVIIIe. Le XVIIe en porte deux, l'un après l'autre.",
+    tags: ["seconde", "poésie", "histoire littéraire", "template"],
+    generate: () => {
+      const c = randomChoice(PERIODES);
+      return {
+        text: c.question,
+        format: "qcm" as const, choices: makeChoices(c.bonne, c.faux), expected: [c.bonne], comparator: "mcq_exact" as const,
+        explanation: exp(
+          "L'objet d'étude couvre quatre moments, et il s'arrête au XVIIIe siècle : la fin'amor au Moyen Âge, l'Humanisme et la Pléiade au XVIe, la préciosité puis le classicisme au XVIIe, les Lumières au XVIIIe. Le XIXe siècle appartient au programme de première.",
+          "Retiens que le XVIIe porte deux mouvements successifs, et qu'ils s'opposent : la préciosité d'abord, le classicisme qui la combat ensuite.",
+          `Ici, ${c.raison}.`,
+          `C'est ${c.bonne}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template", id: "2de_poehist_continuite_rupture_tpl_2", niveau: "seconde", matiere: "francais",
+    notionId: "poesie_histoire_2de", microId: "2de_poehist_continuite_rupture", difficulty: 4, theme: "neutral",
+    hint: "Demande-toi quel siècle a pu vouloir cela, puis lequel le précédait.",
+    tags: ["seconde", "poésie", "histoire littéraire", "template"],
+    generate: () => {
+      const c = randomChoice(PASSAGES);
+      return {
+        text: `« ${c.question} »\n\nEntre quels deux moments ce changement se produit-il ?`,
+        format: "qcm" as const, choices: makeChoices(c.bonne, c.faux), expected: [c.bonne], comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Reconnaitre un changement, c'est savoir de quoi l'on vient et où l'on va. Chaque passage a sa signature : la fin du chant entre le Moyen Âge et le XVIe, l'épuration de la langue entre le XVIe et le XVIIe, le naturel opposé au rare entre préciosité et classicisme, la mise du savoir au premier plan entre classicisme et Lumières.",
+          "Situe d'abord le mouvement qui a VOULU ce changement, puis cherche celui qu'il combattait. Un changement se lit toujours contre quelque chose.",
+          `Ici, ${c.raison}.`,
+          `Cela se produit ${c.bonne}.`,
         ),
       };
     },
