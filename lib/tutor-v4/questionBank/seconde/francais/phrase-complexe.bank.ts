@@ -336,6 +336,119 @@ const EXPLICITATIONS: readonly Explicite[] = [
    devient de la lecture.
    ========================================================================== */
 
+/* ═══════════ LES TABLES DES SECONDS ITEMS (18/08/2026) ═══════════
+   Six angles, tous inverses de ceux d'au-dessus. Les six premiers items partent
+   d'une phrase écrite et en font tirer le sens ; ceux-ci partent du sens voulu
+   et font produire ou reconnaitre la forme qui le porte.
+   ⚠️ Longueurs de réponses tenues voisines dès l'écriture. */
+
+type Suggere = { readonly veut: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Liaison = { readonly phrase: string; readonly veut: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Objectif = { readonly avant: string; readonly veut: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Gain = { readonly phrase: string; readonly outil: string; readonly rep: string };
+
+/* 1 bis. QUELLE JUXTAPOSITION SUGGÈRE CE RAPPORT ? (2de_pc_juxtaposition_sens)
+   ⛔ Les quatre phrases sont TOUTES juxtaposées, sans le moindre mot de liaison.
+   L'élève ne peut donc pas répondre en lisant un connecteur : il doit se
+   demander, pour chacune, quel lien le sens impose. */
+const SUGGERES: readonly Suggere[] = [
+  { veut: "suggérer une cause, sans l'écrire", bonne: "Personne ne bougeait : chacun craignait de se tromper.", faux: ["Le vent tomba : la mer redevint lisse.", "Il travaille beaucoup ; ses résultats restent moyens.", "La cloche sonna ; les élèves sortirent."], raison: "la crainte explique l'immobilité : on pourrait intercaler « parce que »" },
+  { veut: "suggérer une conséquence, sans l'écrire", bonne: "Le vent tomba : la mer redevint lisse.", faux: ["Personne ne bougeait : chacun craignait de se tromper.", "Il travaille beaucoup ; ses résultats restent moyens.", "La cloche sonna ; les élèves sortirent."], raison: "le calme de la mer découle de la chute du vent : on pourrait intercaler « si bien que »" },
+  { veut: "suggérer une opposition, sans l'écrire", bonne: "Il travaille beaucoup ; ses résultats restent moyens.", faux: ["Personne ne bougeait : chacun craignait de se tromper.", "Le vent tomba : la mer redevint lisse.", "La cloche sonna ; les élèves sortirent."], raison: "le second fait déçoit l'attente créée par le premier : on pourrait intercaler « pourtant »" },
+  { veut: "suggérer une simple succession dans le temps", bonne: "La cloche sonna ; les élèves sortirent.", faux: ["Personne ne bougeait : chacun craignait de se tromper.", "Le vent tomba : la mer redevint lisse.", "Il travaille beaucoup ; ses résultats restent moyens."], raison: "rien n'indique que la cloche CAUSE la sortie : seul l'ordre est donné" },
+  { veut: "suggérer une cause, sans l'écrire", bonne: "Elle ne répond pas : son téléphone est éteint.", faux: ["La salle était pleine ; nous sommes restés debout.", "Il avait tout prévu ; rien ne se passa comme prévu.", "Il rangea ses affaires ; il sortit sans un mot."], raison: "le téléphone éteint explique l'absence de réponse" },
+  { veut: "suggérer une conséquence, sans l'écrire", bonne: "La salle était pleine ; nous sommes restés debout.", faux: ["Elle ne répond pas : son téléphone est éteint.", "Il avait tout prévu ; rien ne se passa comme prévu.", "Il rangea ses affaires ; il sortit sans un mot."], raison: "rester debout découle de la salle pleine" },
+  { veut: "suggérer une opposition, sans l'écrire", bonne: "Il avait tout prévu ; rien ne se passa comme prévu.", faux: ["Elle ne répond pas : son téléphone est éteint.", "La salle était pleine ; nous sommes restés debout.", "Il rangea ses affaires ; il sortit sans un mot."], raison: "le second fait contredit le premier" },
+  { veut: "suggérer une simple succession dans le temps", bonne: "Il rangea ses affaires ; il sortit sans un mot.", faux: ["Elle ne répond pas : son téléphone est éteint.", "La salle était pleine ; nous sommes restés debout.", "Il avait tout prévu ; rien ne se passa comme prévu."], raison: "les deux gestes se suivent, sans qu'aucun n'explique l'autre" },
+];
+
+/* 2 bis. LE COORDONNANT QUI DIT CE RAPPORT (2de_pc_coordonnant_sens)
+   Le premier item lit le rapport dans le mot ; celui-ci choisit le mot pour le
+   rapport. ⛔ Les quatre propositions sont des COORDONNANTS, jamais des
+   subordonnants : c'est ce qui sépare cette micro de « rendre explicite ». */
+const LIAISONS: readonly Liaison[] = [
+  { phrase: "Il a beaucoup insisté, … elle a refusé.", veut: "marquer l'opposition", bonne: "mais", faux: ["car", "donc", "et"], raison: "« mais » oppose le second fait au premier" },
+  { phrase: "Nous sommes rentrés, … il pleuvait à verse.", veut: "donner la cause après coup", bonne: "car", faux: ["mais", "donc", "or"], raison: "« car » justifie ce qui vient d'être dit ; il ne peut jamais ouvrir la phrase" },
+  { phrase: "Le vent est tombé, … la mer est redevenue lisse.", veut: "marquer la conséquence", bonne: "donc", faux: ["car", "mais", "or"], raison: "« donc » tire une suite de ce qui précède" },
+  { phrase: "Il jurait ne rien savoir ; … on l'avait vu sur place.", veut: "introduire un fait qui contredit le précédent", bonne: "or", faux: ["donc", "car", "et"], raison: "« or » introduit l'élément qui fait basculer le raisonnement" },
+  { phrase: "Tu prendras le train … le bus.", veut: "proposer un choix entre deux possibilités", bonne: "ou", faux: ["et", "ni", "car"], raison: "« ou » ouvre l'alternative sans trancher" },
+  { phrase: "Il ferma le carnet … se leva sans un mot.", veut: "ajouter simplement un second fait", bonne: "et", faux: ["mais", "car", "or"], raison: "« et » additionne sans rien qualifier" },
+  { phrase: "La mer était agitée, … le bateau est sorti.", veut: "marquer l'opposition", bonne: "mais", faux: ["donc", "car", "et"], raison: "le second fait va contre ce que le premier laissait attendre" },
+  { phrase: "Le dossier est incomplet, … il sera refusé.", veut: "marquer la conséquence", bonne: "donc", faux: ["mais", "car", "or"], raison: "le refus découle de l'état du dossier" },
+  { phrase: "Elle n'a pas répondu, … elle avait bien reçu le message.", veut: "introduire un fait qui contredit le précédent", bonne: "or", faux: ["donc", "et", "ou"], raison: "« or » apporte l'information qui change la lecture du premier fait" },
+];
+
+/* 3 bis. QUELLE PHRASE MET CE FAIT AU PREMIER PLAN ? (2de_pc_subordination_plan)
+   ⭐ Les quatre propositions portent LES MÊMES FAITS. Seule change la
+   construction — et avec elle, ce que la phrase donne comme information
+   principale. Une des quatre les met sur le même plan : c'est le cas où aucun
+   des deux n'est mis en avant, et il vaut d'être reconnu. */
+const PREMIERS_PLANS: readonly Suggere[] = [
+  { veut: "le fait que nous sommes rentrés", bonne: "Comme il pleuvait, nous sommes rentrés.", faux: ["Il pleuvait, si bien que nous sommes rentrés.", "Il pleuvait quand nous sommes rentrés.", "Il pleuvait et nous sommes rentrés."], raison: "la proposition qui peut tenir seule porte le premier plan : c'est « nous sommes rentrés »" },
+  { veut: "le fait qu'il pleuvait", bonne: "Il pleuvait, si bien que nous sommes rentrés.", faux: ["Comme il pleuvait, nous sommes rentrés.", "Nous sommes rentrés parce qu'il pleuvait.", "Puisqu'il pleuvait, nous sommes rentrés."], raison: "ici c'est « il pleuvait » qui est la principale, la suite en découle" },
+  { veut: "le fait que nous sommes restés debout", bonne: "Comme la salle était pleine, nous sommes restés debout.", faux: ["La salle était pleine, si bien que nous sommes restés debout.", "La salle était pleine quand nous sommes restés debout.", "La salle était pleine et nous sommes restés debout."], raison: "la subordonnée en « comme » rejette la salle pleine à l'arrière-plan" },
+  { veut: "le fait que la salle était pleine", bonne: "La salle était pleine, si bien que nous sommes restés debout.", faux: ["Comme la salle était pleine, nous sommes restés debout.", "Nous sommes restés debout parce que la salle était pleine.", "Puisque la salle était pleine, nous sommes restés debout."], raison: "« si bien que » subordonne la conséquence : la principale est ce qui précède" },
+  { veut: "le fait que les résultats furent affichés", bonne: "Une fois que le jury eut délibéré, les résultats furent affichés.", faux: ["Le jury délibéra, puis les résultats furent affichés.", "Le jury délibéra si bien que les résultats furent affichés.", "Le jury délibéra et les résultats furent affichés."], raison: "seule la première construction rejette la délibération à l'arrière-plan" },
+  { veut: "les deux faits, sans en mettre aucun en avant", bonne: "Le jury délibéra et les résultats furent affichés.", faux: ["Une fois que le jury eut délibéré, les résultats furent affichés.", "Comme le jury avait délibéré, les résultats furent affichés.", "Les résultats furent affichés dès que le jury eut délibéré."], raison: "la coordination laisse les deux propositions sur le même plan : aucune ne commande l'autre" },
+];
+
+/* 4 bis. QUELLE RÉÉCRITURE PRODUIT CET ÉCART ? (2de_pc_commuter_liens)
+   Le premier item donne les deux phrases et fait nommer l'écart. Celui-ci donne
+   la phrase et l'écart voulu, et fait produire la réécriture. C'est le même
+   geste, pris par l'autre bout — et c'est le plus proche de l'exercice réel,
+   où l'on récrit pour obtenir un effet décidé d'avance. */
+const OBJECTIFS: readonly Objectif[] = [
+  { avant: "Il pleuvait à verse : nous sommes rentrés.", veut: "rendre explicite le rapport que la juxtaposition laissait deviner", bonne: "Comme il pleuvait à verse, nous sommes rentrés.", faux: ["Il pleuvait à verse et nous sommes rentrés.", "Il pleuvait à verse ; nous sommes rentrés.", "Il pleuvait à verse, nous sommes rentrés."], raison: "seul « comme » nomme la cause ; les autres se contentent de rapprocher les faits" },
+  { avant: "Il pleuvait, et nous sommes rentrés.", veut: "hiérarchiser deux faits qui étaient sur le même plan", bonne: "Parce qu'il pleuvait, nous sommes rentrés.", faux: ["Il pleuvait, donc nous sommes rentrés.", "Il pleuvait ; nous sommes rentrés.", "Il pleuvait, or nous sommes rentrés."], raison: "la subordination crée la hiérarchie ; « donc » et « or » restent des coordonnants" },
+  { avant: "Comme il pleuvait, nous sommes rentrés.", veut: "remettre les deux faits sur le même plan", bonne: "Il pleuvait, donc nous sommes rentrés.", faux: ["Puisqu'il pleuvait, nous sommes rentrés.", "Nous sommes rentrés parce qu'il pleuvait.", "Il pleuvait si bien que nous sommes rentrés."], raison: "les trois autres restent subordonnées : elles ne font que déplacer la hiérarchie" },
+  { avant: "Puisque la mer était calme, ils sont sortis.", veut: "transformer la cause en simple succession dans le temps", bonne: "Quand la mer fut calme, ils sont sortis.", faux: ["Comme la mer était calme, ils sont sortis.", "La mer était calme, donc ils sont sortis.", "La mer étant calme, ils sont sortis."], raison: "« quand » ne dit que l'ordre ; les trois autres affirment encore la cause" },
+  { avant: "Comme tu pars maintenant, tu arriveras avant la nuit.", veut: "faire du premier fait une hypothèse au lieu d'un fait établi", bonne: "Si tu pars maintenant, tu arriveras avant la nuit.", faux: ["Puisque tu pars maintenant, tu arriveras avant la nuit.", "Tu pars maintenant, donc tu arriveras avant la nuit.", "Dès que tu pars, tu arrives avant la nuit."], raison: "« si » suspend le départ ; « puisque » et « donc » le donnent pour acquis" },
+  { avant: "La cloche sonna ; les élèves sortirent.", veut: "hiérarchiser deux faits qui étaient sur le même plan", bonne: "Quand la cloche sonna, les élèves sortirent.", faux: ["La cloche sonna, puis les élèves sortirent.", "La cloche sonna et les élèves sortirent.", "La cloche sonna, les élèves sortirent."], raison: "seule la subordonnée temporelle rejette la sonnerie à l'arrière-plan" },
+];
+
+/* 5 bis. CE QU'ON AFFIRME EN EXPLICITANT (2de_pc_expliciter_implicite)
+   Le premier item choisit le mot ; celui-ci mesure ce que le mot ENGAGE. ⭐ Une
+   juxtaposition ne coûte rien : le lecteur devine, et l'auteur ne signe pas.
+   Dès qu'on écrit le connecteur, on prend le lien à sa charge — et l'on peut
+   se tromper. C'est ce que le programme appelle rendre compte de
+   l'interprétation avec précision.
+   ⛔ Le pool sert quatre affirmations différentes, chacune correcte ailleurs :
+   aucune ligne morte. */
+const GAINS_POOL: readonly string[] = [
+  "que le premier fait est la cause du second",
+  "que le second fait découle du premier",
+  "que le second fait va contre ce qu'on attendait",
+  "que les deux faits se suivent, sans dire pourquoi",
+];
+
+const GAINS: readonly Gain[] = [
+  { phrase: "Personne ne bougeait : chacun craignait de se tromper.", outil: "parce que", rep: "que le premier fait est la cause du second" },
+  { phrase: "Le vent tomba : la mer redevint lisse.", outil: "si bien que", rep: "que le second fait découle du premier" },
+  { phrase: "Il travaille beaucoup ; ses résultats restent moyens.", outil: "alors que", rep: "que le second fait va contre ce qu'on attendait" },
+  { phrase: "La cloche sonna ; les élèves sortirent.", outil: "quand", rep: "que les deux faits se suivent, sans dire pourquoi" },
+  { phrase: "Elle ne répond pas : son téléphone est éteint.", outil: "parce que", rep: "que le premier fait est la cause du second" },
+  { phrase: "La salle était pleine ; nous sommes restés debout.", outil: "si bien que", rep: "que le second fait découle du premier" },
+  { phrase: "Il avait tout prévu ; rien ne se passa comme prévu.", outil: "alors que", rep: "que le second fait va contre ce qu'on attendait" },
+  { phrase: "Il rangea ses affaires ; il sortit sans un mot.", outil: "quand", rep: "que les deux faits se suivent, sans dire pourquoi" },
+  { phrase: "Le jury avait délibéré ; les résultats furent affichés.", outil: "dès que", rep: "que les deux faits se suivent, sans dire pourquoi" },
+  { phrase: "La mer était agitée ; le bateau resta au port.", outil: "si bien que", rep: "que le second fait découle du premier" },
+];
+
+/* 6 bis. QUELLE PHRASE DIT EXACTEMENT CELA ? (2de_pc_interpreter_texte)
+   ⭐ Les quatre phrases portent LES MÊMES FAITS et ne diffèrent que par le lien.
+   C'est la démonstration la plus nette de ce que le programme demande : le sens
+   d'un texte tient au rapport entre les propositions, pas aux propositions. */
+const LECTURES_UNIQUES: readonly Suggere[] = [
+  { veut: "c'est parce qu'il avait compris qu'il s'est tu", bonne: "Il n'a pas répondu parce qu'il avait compris.", faux: ["Il n'a pas répondu bien qu'il eût compris.", "Il n'a pas répondu avant d'avoir compris.", "Il n'a pas répondu ; il avait compris."], raison: "seul « parce que » affirme que la compréhension explique le silence" },
+  { veut: "il avait compris, et il s'est tu malgré cela", bonne: "Il n'a pas répondu bien qu'il eût compris.", faux: ["Il n'a pas répondu parce qu'il avait compris.", "Il n'a pas répondu avant d'avoir compris.", "Il n'a pas répondu ; il avait compris."], raison: "« bien que » marque que le second fait ne suffit pas à changer le premier" },
+  { veut: "il a attendu d'avoir compris pour parler", bonne: "Il n'a pas répondu avant d'avoir compris.", faux: ["Il n'a pas répondu parce qu'il avait compris.", "Il n'a pas répondu bien qu'il eût compris.", "Il n'a pas répondu ; il avait compris."], raison: "« avant de » ne dit qu'un ordre : le silence précède la compréhension" },
+  { veut: "les deux faits sont posés, sans qu'aucun lien soit affirmé", bonne: "Il n'a pas répondu ; il avait compris.", faux: ["Il n'a pas répondu parce qu'il avait compris.", "Il n'a pas répondu bien qu'il eût compris.", "Il n'a pas répondu avant d'avoir compris."], raison: "la juxtaposition laisse le lecteur libre — et c'est un choix d'écriture, pas un oubli" },
+  { veut: "la pluie explique qu'ils soient sortis", bonne: "Ils sont sortis parce qu'il pleuvait.", faux: ["Ils sont sortis bien qu'il pleuvait.", "Ils sont sortis quand il pleuvait.", "Ils sont sortis ; il pleuvait."], raison: "« parce que » fait de la pluie la raison de la sortie" },
+  { veut: "ils sont sortis malgré la pluie", bonne: "Ils sont sortis bien qu'il pleuvait.", faux: ["Ils sont sortis parce qu'il pleuvait.", "Ils sont sortis quand il pleuvait.", "Ils sont sortis ; il pleuvait."], raison: "« bien que » marque que la pluie n'a pas empêché la sortie" },
+  { veut: "leur sortie a eu lieu pendant la pluie, sans qu'on dise pourquoi", bonne: "Ils sont sortis quand il pleuvait.", faux: ["Ils sont sortis parce qu'il pleuvait.", "Ils sont sortis bien qu'il pleuvait.", "Ils sont sortis ; il pleuvait."], raison: "« quand » situe dans le temps et n'explique rien" },
+  { veut: "les deux faits sont donnés côte à côte, à charge de lecture", bonne: "Ils sont sortis ; il pleuvait.", faux: ["Ils sont sortis parce qu'il pleuvait.", "Ils sont sortis bien qu'il pleuvait.", "Ils sont sortis quand il pleuvait."], raison: "rien n'est affirmé : le lien reste au lecteur" },
+];
+
 const INTERPRETATIONS: readonly Interpretation[] = [
   {
     phrase: "Il a démissionné parce que le rapport a été publié.",
@@ -681,6 +794,182 @@ export const phraseComplexeSecondeBank: TutorBankItemV4[] = [
           "Repère le mot qui lie, puis demande-toi ce qu'il autorise à affirmer. Ne complète jamais avec ce que la phrase ne dit pas.",
           `Ici, ${c.raison}.`,
           `Il faut comprendre que ${c.rep}.`,
+        ),
+      };
+    },
+  },
+
+  /* ══════════════ LES SECONDS ITEMS ══════════════ */
+
+  {
+    kind: "template",
+    id: "2de_pc_juxtaposition_sens_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "phrase_complexe_2de",
+    microId: "2de_pc_juxtaposition_sens",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Aucune des quatre ne porte de mot de liaison. Essaie d'intercaler le lien demandé dans chacune.",
+    tags: ["seconde", "grammaire", "phrase complexe", "juxtaposition", "template"],
+    generate: () => {
+      const c = randomChoice(SUGGERES);
+      return {
+        text: `Dans laquelle de ces phrases la juxtaposition sert-elle à ${c.veut} ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Juxtaposer, c'est poser deux propositions côte à côte sans rien dire de leur rapport. Le lien n'a pourtant pas disparu : il est laissé au lecteur, qui le reconstitue à partir du sens. Deux points, point-virgule ou virgule ne changent rien à la construction — seulement au souffle.",
+          "Intercale mentalement le mot qui dirait le rapport demandé. S'il passe sans forcer, c'est la bonne phrase ; s'il faut tordre le sens, c'en est une autre.",
+          `Ici, ${c.raison}.`,
+          `C'est : « ${c.bonne} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_pc_coordonnant_sens_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "phrase_complexe_2de",
+    microId: "2de_pc_coordonnant_sens",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les quatre mots sont des coordonnants : ils laissent les deux propositions sur le même plan. Reste à savoir ce que chacun ajoute.",
+    tags: ["seconde", "grammaire", "phrase complexe", "coordination", "template"],
+    generate: () => {
+      const c = randomChoice(LIAISONS);
+      return {
+        text: `« ${c.phrase} »\n\nOn veut ${c.veut}. Quel mot de liaison écrire ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Les coordonnants relient deux propositions sans en subordonner aucune, mais ils ne sont pas interchangeables : « et » ajoute, « mais » oppose, « car » justifie, « donc » conclut, « or » introduit le fait qui fait basculer, « ou » ouvre un choix, « ni » nie les deux termes.",
+          "Demande-toi ce que le second fait FAIT au premier : il s'y ajoute, il le contredit, il l'explique, il en découle. Le mot suit.",
+          `Ici, ${c.raison}.`,
+          `On écrit « ${c.bonne} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_pc_subordination_plan_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "phrase_complexe_2de",
+    microId: "2de_pc_subordination_plan",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Les quatre phrases disent les mêmes faits. Cherche à chaque fois la proposition qui pourrait tenir seule.",
+    tags: ["seconde", "grammaire", "phrase complexe", "subordination", "template"],
+    generate: () => {
+      const c = randomChoice(PREMIERS_PLANS);
+      return {
+        text: `Quelle phrase met au premier plan ${c.veut} ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Subordonner, ce n'est pas seulement relier : c'est décider ce qui compte. La proposition principale porte l'information que la phrase avance ; la subordonnée l'éclaire, l'explique ou la situe. Deux phrases faites des mêmes faits n'avancent donc pas la même chose selon laquelle est subordonnée à l'autre.",
+          "Retire la subordonnée. Ce qui reste et tient debout tout seul, c'est le premier plan. Si rien ne peut être retiré, les deux faits sont coordonnés — donc à égalité.",
+          `Ici, ${c.raison}.`,
+          `C'est : « ${c.bonne} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_pc_commuter_liens_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "phrase_complexe_2de",
+    microId: "2de_pc_commuter_liens",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Les quatre réécritures sont correctes en français. Une seule produit l'effet demandé.",
+    tags: ["seconde", "grammaire", "phrase complexe", "commutation", "template"],
+    generate: () => {
+      const c = randomChoice(OBJECTIFS);
+      return {
+        text: `Phrase de départ : « ${c.avant} »\n\nOn veut ${c.veut}.\nQuelle réécriture choisir ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Récrire pour obtenir un effet décidé d'avance, c'est le geste de l'écriture même — et l'exercice que le programme nomme au IV. Trois leviers seulement : passer de la juxtaposition à la coordination, de la coordination à la subordination, ou changer de subordonnant pour changer le rapport affirmé.",
+          "Demande-toi ce que l'effet réclame : nommer un lien tu, hiérarchiser, remettre à égalité, ou suspendre la certitude. Puis vérifie que la réécriture fait cela, et seulement cela.",
+          `Ici, ${c.raison}.`,
+          `La réécriture est : « ${c.bonne} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_pc_expliciter_implicite_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "phrase_complexe_2de",
+    microId: "2de_pc_expliciter_implicite",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La juxtaposition ne signait rien. Demande-toi ce que le connecteur oblige désormais l'auteur à assumer.",
+    tags: ["seconde", "grammaire", "phrase complexe", "implicite", "template"],
+    generate: () => {
+      const c = randomChoice(GAINS);
+      return {
+        text: `« ${c.phrase} »\n\nOn remplace la ponctuation par « ${c.outil} ». Qu'affirme-t-on désormais ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.rep, GAINS_POOL),
+        expected: [c.rep],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une juxtaposition n'engage personne : le lecteur devine, et l'auteur ne signe rien. Écrire le connecteur revient à prendre le lien à sa charge — donc à pouvoir se tromper. C'est ce que le programme appelle rendre compte avec précision de l'interprétation d'un texte : nommer le rapport, c'est l'assumer.",
+          "Compare ce que la phrase permettait de conclure avant, et ce qu'elle affirme après. La différence, c'est exactement ce que le connecteur ajoute.",
+          `Avec « ${c.outil} », on affirme ${c.rep}.`,
+          `On affirme ${c.rep}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_pc_interpreter_texte_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "phrase_complexe_2de",
+    microId: "2de_pc_interpreter_texte",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Les quatre phrases contiennent exactement les mêmes faits. Seul le mot de liaison change — donc seul lui décide.",
+    tags: ["seconde", "grammaire", "phrase complexe", "interprétation", "template"],
+    generate: () => {
+      const c = randomChoice(LECTURES_UNIQUES);
+      return {
+        text: `Quelle phrase dit exactement que ${c.veut} ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Quatre phrases, les mêmes faits, quatre sens différents : la démonstration tient en un coup d'œil. Le sens d'un texte ne se trouve pas dans les informations qu'il contient, mais dans les rapports qu'il établit entre elles — et c'est pourquoi la grammaire de la phrase complexe est un outil de lecture avant d'être une leçon.",
+          "Élimine par ce que chaque lien INTERDIT de conclure. « Quand » n'explique jamais rien ; « bien que » suppose une attente déçue ; la juxtaposition n'affirme aucun lien.",
+          `Ici, ${c.raison}.`,
+          `C'est : « ${c.bonne} »`,
         ),
       };
     },
