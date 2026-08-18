@@ -407,6 +407,178 @@ const CAS_AJOUT: readonly Cas[] = [
   { enonce: "La lettre dont on parle est lue à voix haute par un acteur en fond de plateau.", rep: "elle montre ce que le texte se contentait de faire raconter", raison: "ce qui était rapporté devient scène" },
 ];
 
+/* ═══════════ LES TABLES DES SECONDS ITEMS ═══════════
+   Toutes les réponses sont de longueur voisine à l'intérieur d'un même pool :
+   c'est la condition pour qu'un QCM se joue au sens et non à la règle. */
+
+const FINS: readonly string[] = [
+  "la mort, ou une chute sans retour",
+  "un mariage, ou un ordre rétabli",
+  "une fin mêlée, qui ne choisit pas",
+  "le trompeur trompé, et l'on en reste là",
+];
+
+const CAS_FIN: readonly Cas[] = [
+  { enonce: "La tragédie.", rep: "la mort, ou une chute sans retour", raison: "le personnage court à une fin qu'il ne peut pas éviter" },
+  { enonce: "La comédie.", rep: "un mariage, ou un ordre rétabli", raison: "les travers sont corrigés et la société se referme" },
+  { enonce: "Le drame.", rep: "une fin mêlée, qui ne choisit pas", raison: "le rire et le grave s'y tiennent jusqu'au bout" },
+  { enonce: "La farce.", rep: "le trompeur trompé, et l'on en reste là", raison: "la ruse retournée suffit : aucune leçon n'est réclamée" },
+];
+
+const APPRENDS: readonly string[] = [
+  "qui sont les personnages et ce qui les lie",
+  "ce qui va empêcher que tout aille bien",
+  "que la situation n'était pas celle qu'il croyait",
+  "ce que deviennent ceux qui restent",
+];
+
+const CAS_APPREND: readonly Cas[] = [
+  { enonce: "L'exposition.", rep: "qui sont les personnages et ce qui les lie", raison: "elle informe sans que l'action paraisse s'arrêter" },
+  { enonce: "Le nœud.", rep: "ce qui va empêcher que tout aille bien", raison: "l'obstacle apparait, et l'action s'enclenche vraiment" },
+  { enonce: "Les péripéties.", rep: "que la situation n'était pas celle qu'il croyait", raison: "chaque retournement défait ce que le spectateur tenait pour acquis" },
+  { enonce: "Le dénouement.", rep: "ce que deviennent ceux qui restent", raison: "les fils se dénouent et la situation se fixe" },
+];
+
+const CONFLITS: readonly string[] = [
+  "un affrontement où chacun a des alliés",
+  "une solitude, qui rend la chute probable",
+  "un conflit qui se déplace sans cesse",
+  "une rivalité que la ressemblance aiguise",
+];
+
+const CAS_CONFLIT: readonly Cas[] = [
+  { enonce: "Deux camps s'opposent, et chacun appartient clairement à l'un des deux.", rep: "un affrontement où chacun a des alliés", raison: "la ligne de partage est nette, et le conflit collectif" },
+  { enonce: "Un personnage isolé fait face à tous les autres.", rep: "une solitude, qui rend la chute probable", raison: "sans allié, le personnage ne peut compter que sur lui" },
+  { enonce: "Un personnage sert d'intermédiaire et passe d'un camp à l'autre.", rep: "un conflit qui se déplace sans cesse", raison: "sa position mobile empêche le conflit de se fixer" },
+  { enonce: "Deux personnages se ressemblent, et cette ressemblance les oppose.", rep: "une rivalité que la ressemblance aiguise", raison: "rien ne les sépare, sinon ce qu'ils se disputent" },
+];
+
+const PERMETS: readonly string[] = [
+  "informer le public sans arrêter l'action",
+  "lui faire savoir ce qu'un personnage ignore",
+  "faire rire de ce qu'un personnage prend au sérieux",
+  "donner à une phrase deux sens à la fois",
+];
+
+const CAS_PERMET: readonly Cas[] = [
+  { enonce: "Un personnage raconte à un autre ce que celui-ci sait déjà.", rep: "informer le public sans arrêter l'action", raison: "l'exposition passe par une réplique qui a l'air d'être pour la scène" },
+  { enonce: "Le public a vu le messager mentir ; le roi ne l'a pas vu.", rep: "lui faire savoir ce qu'un personnage ignore", raison: "l'écart de savoir crée l'attente, et parfois l'ironie tragique" },
+  { enonce: "Le personnage s'inquiète d'un danger que le public sait inexistant.", rep: "faire rire de ce qu'un personnage prend au sérieux", raison: "le décalage entre les deux savoirs produit le comique" },
+  { enonce: "Une réplique innocente pour la scène en dit long pour la salle.", rep: "donner à une phrase deux sens à la fois", raison: "la double énonciation permet au texte de parler deux fois" },
+];
+
+const EFFETS_REP: readonly string[] = [
+  "le temps s'arrête, et l'on écoute un seul",
+  "le rythme s'emballe et le conflit s'aiguise",
+  "une pensée se déplie devant le public",
+  "le public devient complice contre la scène",
+];
+
+const CAS_EFFET_REP: readonly Cas[] = [
+  { enonce: "Une tirade.", rep: "le temps s'arrête, et l'on écoute un seul", raison: "la longue réplique suspend l'échange au profit d'une voix" },
+  { enonce: "Une stichomythie.", rep: "le rythme s'emballe et le conflit s'aiguise", raison: "des répliques d'un vers accélèrent l'affrontement" },
+  { enonce: "Un monologue.", rep: "une pensée se déplie devant le public", raison: "seul en scène, le personnage donne à entendre ce qu'il pense" },
+  { enonce: "Un aparté.", rep: "le public devient complice contre la scène", raison: "quelques mots que les autres personnages sont censés ne pas entendre" },
+];
+
+const ATTENDS: readonly string[] = [
+  "qu'il craigne pour qui ne peut être sauvé",
+  "qu'il rie sans avoir rien à redouter",
+  "qu'il s'émeuve et prenne part à la douleur",
+  "qu'il entende autre chose que ce qui est dit",
+];
+
+const CAS_ATTEND: readonly Cas[] = [
+  { enonce: "La tonalité tragique.", rep: "qu'il craigne pour qui ne peut être sauvé", raison: "la menace pèse et rien ne semble pouvoir l'écarter" },
+  { enonce: "La tonalité comique.", rep: "qu'il rie sans avoir rien à redouter", raison: "le décalage fait rire parce que rien de grave n'est en jeu" },
+  { enonce: "La tonalité pathétique.", rep: "qu'il s'émeuve et prenne part à la douleur", raison: "la souffrance est montrée pour émouvoir, non pour effrayer" },
+  { enonce: "La tonalité ironique.", rep: "qu'il entende autre chose que ce qui est dit", raison: "le dit et le pensé ne coïncident pas, et le public doit faire l'écart" },
+];
+
+const PERTES_DIDA: readonly string[] = [
+  "le geste que l'action réclamait",
+  "le ton qui donnait son sens à la réplique",
+  "l'espace où la scène devait se tenir",
+  "la contradiction d'où naissait le sens",
+];
+
+const CAS_PERTE_DIDA: readonly Cas[] = [
+  { enonce: "« Il lui tourne le dos et sort sans refermer. »", rep: "le geste que l'action réclamait", raison: "sans ce geste, la rupture entre les personnages ne se voit plus" },
+  { enonce: "« D'une voix très douce. »", rep: "le ton qui donnait son sens à la réplique", raison: "la même phrase dite durement dirait le contraire" },
+  { enonce: "« Une chambre nue, une seule fenêtre condamnée. »", rep: "l'espace où la scène devait se tenir", raison: "le décor est posé avant que quiconque parle, et il pèse sur tout" },
+  { enonce: "« En riant » — alors qu'il annonce une mort.", rep: "la contradiction d'où naissait le sens", raison: "c'est l'écart entre le ton et les mots qui fait toute la scène" },
+];
+
+const POUVOIRS: readonly string[] = [
+  "installer un rapport au monde avant qu'on parle",
+  "dire le rang et l'époque d'un seul regard",
+  "cacher et montrer dans le même instant",
+  "faire exister ce qui n'est pas sur le plateau",
+];
+
+const CAS_POUVOIR: readonly Cas[] = [
+  { enonce: "Le décor.", rep: "installer un rapport au monde avant qu'on parle", raison: "il est là au lever du rideau, et il a déjà tout dit" },
+  { enonce: "Le costume.", rep: "dire le rang et l'époque d'un seul regard", raison: "aucune réplique n'est nécessaire pour situer le personnage" },
+  { enonce: "La lumière.", rep: "cacher et montrer dans le même instant", raison: "elle isole un visage et efface le reste, sans rien déplacer" },
+  { enonce: "Le son.", rep: "faire exister ce qui n'est pas sur le plateau", raison: "la ville, l'orage ou la foule tiennent dans un haut-parleur" },
+];
+
+const IMPOSES: readonly string[] = [
+  "de prendre le parti du personnage",
+  "de se méfier de ce même personnage",
+  "de voir un individu face à un groupe",
+  "de rire d'un moment qu'il pouvait craindre",
+];
+
+const CAS_IMPOSE: readonly Cas[] = [
+  { enonce: "L'acteur joue la scène en tremblant, la voix basse.", rep: "de prendre le parti du personnage", raison: "la fragilité montrée appelle la sympathie" },
+  { enonce: "L'acteur la joue en souriant, sans jamais cligner des yeux.", rep: "de se méfier de ce même personnage", raison: "le calme excessif rend la maitrise inquiétante" },
+  { enonce: "Les autres personnages forment un mur immobile derrière lui.", rep: "de voir un individu face à un groupe", raison: "la disposition transforme un dialogue en affrontement collectif" },
+  { enonce: "La scène est jouée sur un rythme rapide, avec des chutes de corps.", rep: "de rire d'un moment qu'il pouvait craindre", raison: "le rythme et le corps font basculer la scène vers la farce" },
+];
+
+const QUESTIONS_NOTE: readonly string[] = [
+  "que voulons-nous faire entendre ?",
+  "avec quels moyens concrets ?",
+  "en quoi nous distinguons-nous des autres ?",
+  "à qui nous adressons-nous ?",
+];
+
+const CAS_QUESTION: readonly Cas[] = [
+  { enonce: "« Nous voulons montrer une famille qui ne s'écoute plus. »", rep: "que voulons-nous faire entendre ?", raison: "c'est le parti pris de lecture, avant tout moyen" },
+  { enonce: "« Un plateau nu, deux chaises, une lumière rasante. »", rep: "avec quels moyens concrets ?", raison: "espace, lumière, costume et son sont les outils de la réalisation" },
+  { enonce: "« Là où les mises en scène récentes accentuaient le comique… »", rep: "en quoi nous distinguons-nous des autres ?", raison: "la note se situe dans une histoire des représentations" },
+  { enonce: "« Le spectacle s'adresse d'abord à des spectateurs de quinze ans. »", rep: "à qui nous adressons-nous ?", raison: "le public visé engage tous les autres choix" },
+];
+
+const CHANGES_ESPACE: readonly string[] = [
+  "il oublie les autres spectateurs",
+  "il voit d'autres spectateurs réagir en face",
+  "il ne peut jamais tout voir à la fois",
+  "il ne sait plus où commence la fiction",
+];
+
+const CAS_CHANGE_ESPACE: readonly Cas[] = [
+  { enonce: "Une scène frontale.", rep: "il oublie les autres spectateurs", raison: "tous regardent du même côté, comme devant un tableau" },
+  { enonce: "Un dispositif bifrontal.", rep: "il voit d'autres spectateurs réagir en face", raison: "la salle se regarde elle-même autant qu'elle regarde la pièce" },
+  { enonce: "Un théâtre en rond.", rep: "il ne peut jamais tout voir à la fois", raison: "un acteur tourné vers l'un tourne le dos à l'autre" },
+  { enonce: "Un jeu hors du théâtre, dans un lieu ordinaire.", rep: "il ne sait plus où commence la fiction", raison: "aucun cadre ne sépare plus le jeu de ce qui l'entoure" },
+];
+
+const OUVERTS: readonly string[] = [
+  "une ambigüité qu'il ne tranchait pas",
+  "un corps et un âge non précisés",
+  "une durée que rien ne notait",
+  "un événement seulement raconté",
+];
+
+const CAS_OUVERT: readonly Cas[] = [
+  { enonce: "La mise en scène fait dire la réplique sur un ton nettement moqueur.", rep: "une ambigüité qu'il ne tranchait pas", raison: "rien dans le texte ne disait si le personnage était sincère" },
+  { enonce: "Le rôle est confié à une actrice de soixante-dix ans.", rep: "un corps et un âge non précisés", raison: "le texte ne donnait ni âge ni apparence" },
+  { enonce: "Un silence de vingt secondes précède la réponse.", rep: "une durée que rien ne notait", raison: "le texte n'écrit pas le temps qui passe entre deux répliques" },
+  { enonce: "La bataille, que le messager rapportait, est jouée sur le plateau.", rep: "un événement seulement raconté", raison: "le récit devient action, ce que le texte n'imposait pas" },
+];
+
 export const theatreSecondeBank: TutorBankItemV4[] = [
   item("2de_th_genres_tpl_1", "theatre_texte_2de", "2de_th_genres", 2,
     "Trois questions : quel rang social ? quelle fin ? quel ton ?",
@@ -479,4 +651,85 @@ export const theatreSecondeBank: TutorBankItemV4[] = [
     ["seconde", "théâtre", "mise en scène", "template"], "Qu'est-ce que la scène ajoute au texte ?", CAS_AJOUT, AJOUTS,
     "Monter une pièce, c'est décider de tout ce que le texte laisse ouvert : l'âge et le corps des personnages, la durée des silences, la sincérité d'une réplique, et parfois montrer ce que le texte se contentait de faire raconter. Aucune de ces décisions n'est écrite.",
     "Repère d'abord ce que le texte laisse indéterminé, puis ce que la représentation a tranché à sa place."),
+
+  /* ══════════════ LES SECONDS ITEMS (18/08/2026) ══════════════
+     Les douze premiers items partent d'une situation et font nommer la notion.
+     Les douze seconds partent de la notion et demandent ce qu'elle FAIT au
+     spectateur — ce qu'il apprend, ce qu'il attend, ce qu'il perd, ce qu'il ne
+     peut plus voir. C'est ce que le programme demande : « l'étude du théâtre
+     suppose que soient prises en compte les questions de représentation et de
+     mise en scène ». Un genre ne se juge pas sur la page, il se joue devant
+     quelqu'un. */
+
+  item("2de_th_genres_tpl_2", "theatre_texte_2de", "2de_th_genres", 3,
+    "Un genre se reconnait à sa fin autant qu'à son ton : demande-toi comment cela peut se terminer.",
+    ["seconde", "théâtre", "template"], "Quel dénouement ce genre appelle-t-il ?", CAS_FIN, FINS,
+    "Chaque genre passe un contrat avec le spectateur, et ce contrat porte sur la fin. La tragédie ne peut aboutir qu'à la mort ou à une chute sans retour. La comédie rétablit l'ordre, souvent par un mariage. Le drame mêle les deux et refuse de choisir. La farce se contente du trompeur trompé, et s'arrête là.",
+    "Demande-toi ce que le spectateur redoute ou espère dès les premières scènes. C'est déjà le genre qui parle."),
+
+  item("2de_th_action_tpl_2", "theatre_texte_2de", "2de_th_action", 3,
+    "Chaque étape apprend au spectateur quelque chose qu'il ignorait encore.",
+    ["seconde", "théâtre", "template"], "Que le spectateur apprend-il à cette étape ?", CAS_APPREND, APPRENDS,
+    "La construction d'une pièce se lit du côté du spectateur : l'exposition lui apprend qui sont les personnages et ce qui les lie ; le nœud lui montre ce qui empêchera que tout aille bien ; les péripéties lui font découvrir que la situation n'était pas celle qu'il croyait ; le dénouement lui dit ce que deviennent ceux qui restent.",
+    "Place-toi dans la salle et demande-toi ce que tu sais de plus à la fin de la scène qu'au début."),
+
+  item("2de_th_systeme_personnages_tpl_2", "theatre_texte_2de", "2de_th_systeme_personnages", 4,
+    "La façon dont les personnages se rangent décide de la forme que prendra le conflit.",
+    ["seconde", "théâtre", "template"], "Quel type de conflit ce système produit-il ?", CAS_CONFLIT, CONFLITS,
+    "Un système de personnages n'est pas une liste : c'est une disposition, et elle commande le conflit. Deux camps produisent un affrontement où chacun a des alliés. Un personnage seul contre tous produit une solitude, et souvent une chute. Un intermédiaire fait glisser le conflit sans cesse. Deux semblables produisent la rivalité la plus vive, parce que rien ne les sépare vraiment.",
+    "Dessine les personnages et relie ceux qui vont ensemble. La figure obtenue te donne la nature du conflit."),
+
+  item("2de_th_double_enonciation_tpl_2", "theatre_texte_2de", "2de_th_double_enonciation", 4,
+    "Le public entend tout. Demande-toi ce que cela permet à l'auteur de faire.",
+    ["seconde", "théâtre", "template"], "Que la double énonciation permet-elle ici ?", CAS_PERMET, PERMETS,
+    "Au théâtre, chaque réplique est adressée deux fois : au personnage qui l'entend, et au public qui l'écoute. De cet écart naissent presque tous les effets du genre — informer le spectateur sans que l'action s'arrête, lui faire savoir ce qu'un personnage ignore, faire rire de ce qu'un autre prend au sérieux, ou donner à une phrase deux sens à la fois.",
+    "Demande-toi ce que le public sait, et ce que le personnage sait. L'écart entre les deux est l'effet cherché."),
+
+  item("2de_th_formes_repliques_tpl_2", "theatre_texte_2de", "2de_th_formes_repliques", 3,
+    "Ne nomme pas la forme : dis ce qu'elle fait au rythme et au spectateur.",
+    ["seconde", "théâtre", "template"], "Quel effet cette forme produit-elle ?", CAS_EFFET_REP, EFFETS_REP,
+    "La longueur des répliques est un instrument de rythme. La tirade suspend le temps et impose une seule voix. La stichomythie emballe l'échange et aiguise le conflit. Le monologue déplie une pensée devant le public. L'aparté prend le spectateur à témoin et le rend complice contre la scène.",
+    "Lis à voix haute et écoute la vitesse. Puis demande-toi de quel côté le spectateur se trouve placé."),
+
+  item("2de_th_tonalite_tpl_2", "theatre_texte_2de", "2de_th_tonalite", 3,
+    "Une tonalité se définit par ce qu'elle demande au spectateur d'éprouver.",
+    ["seconde", "théâtre", "template"], "Qu'attend-on du spectateur ?", CAS_ATTEND, ATTENDS,
+    "Une tonalité n'est pas une couleur mais une demande faite au spectateur. Le tragique lui demande de craindre pour quelqu'un qu'il ne peut pas sauver. Le comique lui permet de rire sans rien redouter. Le pathétique le fait prendre part à une souffrance. L'ironique lui demande d'entendre autre chose que ce qui est dit.",
+    "Demande-toi ce que tu ressens, puis ce que le texte a fait pour l'obtenir. La tonalité est ce travail-là."),
+
+  item("2de_thr_didascalies_tpl_2", "theatre_representation_2de", "2de_thr_didascalies", 4,
+    "Imagine un metteur en scène qui l'ignore. Qu'est-ce qui manquerait alors à la scène ?",
+    ["seconde", "théâtre", "mise en scène", "template"], "Que perd-on si le metteur en scène ne la suit pas ?", CAS_PERTE_DIDA, PERTES_DIDA,
+    "Les didascalies sont du texte d'auteur, mais elles ne se disent pas : elles se font. Certaines imposent un geste que l'action réclame, d'autres un ton sans lequel la réplique change de sens, d'autres un espace. Et quelques-unes contredisent la réplique — c'est alors de la contradiction elle-même que nait le sens, et il faut la jouer.",
+    "Retire la didascalie par la pensée et rejoue la scène. Ce qui devient incompréhensible te dit ce qu'elle portait."),
+
+  item("2de_thr_elements_tpl_2", "theatre_representation_2de", "2de_thr_elements", 3,
+    "Chaque élément de la scène peut faire une chose que les trois autres ne peuvent pas.",
+    ["seconde", "théâtre", "mise en scène", "template"], "Que cet élément peut-il faire, que les autres ne font pas ?", CAS_POUVOIR, POUVOIRS,
+    "Le plateau parle avant les acteurs. Le décor installe un rapport au monde dès l'ouverture du rideau. Le costume dit le rang et l'époque d'un seul regard. La lumière cache et montre dans le même instant. Le son, lui, fait exister ce qui n'est pas sur le plateau — la ville au-dehors, l'orage, la foule.",
+    "Demande-toi ce qui serait impossible à dire autrement. C'est le propre de l'élément."),
+
+  item("2de_thr_deux_mises_en_scene_tpl_2", "theatre_representation_2de", "2de_thr_deux_mises_en_scene", 4,
+    "Un choix de mise en scène n'est jamais neutre : il place le spectateur quelque part.",
+    ["seconde", "théâtre", "mise en scène", "template"], "Que ce choix impose-t-il au spectateur ?", CAS_IMPOSE, IMPOSES,
+    "Comparer deux mises en scène n'est pas dire laquelle est fidèle : le texte n'impose pas de solution unique, et c'est ce qui rend la comparaison intéressante. Chaque choix — un ton, un âge, une disposition, un rythme — place le spectateur quelque part, et le place ailleurs que l'autre mise en scène.",
+    "Ne demande pas laquelle a raison. Demande où chacune te met, et ce qu'elle te fait éprouver depuis cette place."),
+
+  item("2de_thr_note_intention_tpl_2", "theatre_representation_2de", "2de_thr_note_intention", 3,
+    "Une note d'intention répond à quatre questions, et chaque partie n'en traite qu'une.",
+    ["seconde", "théâtre", "mise en scène", "template"], "À quelle question cette partie répond-elle ?", CAS_QUESTION, QUESTIONS_NOTE,
+    "La note d'intention est un écrit d'appropriation que le programme nomme explicitement. Elle répond à quatre questions distinctes : ce que la mise en scène veut faire entendre, avec quels moyens concrets, en quoi elle se distingue des autres, et à qui elle s'adresse. Confondre ces quatre plans est le défaut le plus courant.",
+    "Pour chaque phrase, demande-toi si elle parle d'une intention, d'un moyen, d'une comparaison ou d'un public."),
+
+  item("2de_thr_espace_tpl_2", "theatre_representation_2de", "2de_thr_espace", 4,
+    "Le dispositif décide de ce que le spectateur voit — et de ce qu'il ne peut plus ignorer.",
+    ["seconde", "théâtre", "mise en scène", "template"], "Que ce dispositif change-t-il pour le spectateur ?", CAS_CHANGE_ESPACE, CHANGES_ESPACE,
+    "La forme de la salle est déjà une mise en scène. La scène frontale isole chaque spectateur devant un tableau. Le bifrontal lui montre d'autres spectateurs en face, qui réagissent. Le théâtre en rond l'empêche de tout voir en même temps, et lui rappelle qu'il choisit. Jouer hors du théâtre brouille la frontière même de la fiction.",
+    "Demande-toi ce que le spectateur voit EN PLUS de la scène, et ce qu'il ne peut plus voir du tout."),
+
+  item("2de_thr_texte_et_scene_tpl_2", "theatre_representation_2de", "2de_thr_texte_et_scene", 4,
+    "Pars de ce que la scène a décidé, et remonte à ce que le texte n'avait pas écrit.",
+    ["seconde", "théâtre", "mise en scène", "template"], "Que le texte laissait-il ouvert ?", CAS_OUVERT, OUVERTS,
+    "Un texte de théâtre est incomplet par nature, et ce n'est pas un défaut : c'est ce qui permet qu'on le rejoue. Il laisse ouverts l'âge et le corps des personnages, la durée des silences, la sincérité d'une réplique, et parfois il se contente de faire raconter ce qu'une mise en scène choisira de montrer.",
+    "Relis la réplique en te demandant ce qu'elle n'a PAS précisé. Tout ce qui manque a dû être décidé par quelqu'un."),
 ];

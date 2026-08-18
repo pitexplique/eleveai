@@ -84,7 +84,10 @@ export type ProgrammeMatiere = {
  * À vider dès qu'un second item par micro sera écrit.
  */
 const COACH_PAS_PRET: Record<string, string> = {
-  "seconde/francais": "/parcours-francais",
+  /* ✅ VIDE DEPUIS LE 18/08/2026. « seconde/francais » y figurait le matin :
+     90 de ses 96 micros levaient faute d'un second item. Les 96 seconds items
+     ont été écrits, la mesure rend 96/96 en mode complet, le renvoi n'a plus
+     lieu d'être. Garder la table : la STMG et la 1re sans spé passeront par là. */
 };
 
 // Le programme d'une matière, groupé BO → notions → micro-compétences.

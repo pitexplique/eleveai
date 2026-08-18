@@ -118,12 +118,11 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "Le coach français",
     promesse: "Repérer l'erreur d'abord, corriger ensuite.",
     url: "/coach-ia/francais",
-    /* ⛔ PAS « seconde » ICI, ET C'EST MESURÉ (18/08/2026). Ses banques
-       existent, mais 90 de ses 96 micros lèvent « Aucune paire disponible » au
-       coach : un seul item par micro, quand le mode complet en oppose deux.
-       Le PARCOURS de 2de, lui, marche et il est déclaré plus bas.
-       Contrôle : `scripts/verifier-demarrage.ts seconde francais`. */
-    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e"],
+    /* ✅ « seconde » ajoutée le 18/08/2026, une fois ses 96 seconds items
+       écrits : `scripts/verifier-demarrage.ts seconde francais complete` rend
+       96/96. Le matin, la même commande en donnait 90 qui levaient.
+       ⛔ Elle s'arrête là : la 1re n'a pas de banque de français. */
+    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde"],
     matiere: "francais",
     notions: ["conjugaison", "grammaire", "orthographe", "lecture", "vocabulaire"],
     intentions: ["comprendre", "entrainer", "corriger", "preparer"],

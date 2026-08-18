@@ -38,13 +38,13 @@ const CLASSES: ParcoursClasseFrancais[] = [
 ];
 
 /* ⛔ LES CLASSES OÙ LE COACH DÉMARRE VRAIMENT — à tenir alignée sur
-   `FRANCAIS_READY_CLASSES`. La 2de en est absente : mesuré le 18/08/2026,
-   90 de ses 96 micros lèvent « Aucune paire disponible », faute d'un second
-   item par micro (le mode complet oppose deux énoncés). Envoyer un élève de
-   2de vers le coach depuis le bilan lui ouvrirait donc une erreur — le bouton
-   ne s'affiche pas pour elle. À rouvrir en même temps que l'autre liste. */
+   `FRANCAIS_READY_CLASSES` (app/coach-ia/[matiere]/page.tsx). Le bouton du
+   bilan renvoie vers le coach : une classe listée ici mais injouable là-bas
+   ouvrirait une erreur à l'élève.
+   ✅ La 2de y est entrée le 18/08/2026, après l'écriture de ses 96 seconds
+   items — mesuré 96/96 en mode complet. */
 const COACH_PRET: ParcoursClasseFrancais[] = [
-  "cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e",
+  "cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde",
 ];
 
 const classeLabels: Record<ParcoursClasseFrancais, string> = {
