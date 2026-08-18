@@ -284,6 +284,104 @@ const COMMUTATIONS: readonly Commutation[] = [
    ⭐ Les cas vont par paires : même phrase, avec et sans virgules.
    ========================================================================== */
 
+/* ═══════════ LES TABLES DES SECONDS ITEMS (18/08/2026) ═══════════
+   ⚠️ `2de_rel_dont` en avait DÉJÀ deux (tpl_1 et tpl_2) : c'est la seule micro
+   du fichier qui démarrait en mode complet, et c'est elle qui servait de repli
+   aux cinq autres. Les cinq tables ci-dessous complètent les cinq restantes.
+   ⚠️ Longueurs de réponses tenues voisines dès l'écriture. */
+
+type Gouverne = { readonly phrase: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Choix = { readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Deux = { readonly phrase: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Developpe = { readonly expansion: string; readonly verbe: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Ponctue = { readonly veut: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+
+/* 2 bis. QUI COMMANDE LA PRÉPOSITION ? (2de_rel_auquel_duquel)
+   ⭐ Le premier item fait choisir la forme ; celui-ci cherche sa CAUSE. « auquel »
+   ou « duquel » ne se devine pas à l'oreille : la préposition vient de la
+   construction d'un verbe ou d'un nom de la phrase, et c'est elle qu'il faut
+   savoir repérer. Un élève qui trouve le mot gouverneur ne se trompe plus. */
+const GOUVERNES: readonly Gouverne[] = [
+  { phrase: "Le projet sur lequel il travaille avance bien.", bonne: "travaille", faux: ["projet", "avance", "bien"], raison: "on travaille SUR quelque chose : le verbe impose « sur »" },
+  { phrase: "La question à laquelle il n'a pas répondu reste ouverte.", bonne: "répondu", faux: ["question", "reste", "ouverte"], raison: "on répond À quelque chose : le verbe impose « à »" },
+  { phrase: "Le carnet dans lequel je notais tout a disparu.", bonne: "notais", faux: ["carnet", "disparu", "tout"], raison: "on note DANS un carnet : le verbe impose « dans »" },
+  { phrase: "Les personnes auxquelles elle fait confiance sont rares.", bonne: "confiance", faux: ["personnes", "rares", "elle"], raison: "on fait confiance À quelqu'un : c'est le nom « confiance » qui appelle « à »" },
+  { phrase: "Le sujet dont il se souvient le mieux est ancien.", bonne: "souvient", faux: ["sujet", "ancien", "mieux"], raison: "on se souvient DE quelque chose : le verbe impose « de »" },
+  { phrase: "La table sous laquelle il s'était caché était lourde.", bonne: "caché", faux: ["table", "lourde", "était"], raison: "on se cache SOUS : le verbe impose « sous »" },
+  { phrase: "Le collègue avec qui il partage son bureau part demain.", bonne: "partage", faux: ["collègue", "bureau", "demain"], raison: "on partage AVEC quelqu'un : le verbe impose « avec »" },
+  { phrase: "Le livre dont il a besoin est épuisé depuis un an.", bonne: "besoin", faux: ["livre", "épuisé", "an"], raison: "on a besoin DE : c'est le nom « besoin » qui appelle « de »" },
+  { phrase: "L'idée à laquelle il tient le plus est très simple.", bonne: "tient", faux: ["idée", "simple", "plus"], raison: "on tient À une idée : le verbe impose « à »" },
+  { phrase: "L'outil avec lequel il grave le bois est ancien.", bonne: "grave", faux: ["outil", "bois", "ancien"], raison: "on grave AVEC un outil : le verbe impose « avec »" },
+];
+
+/* 3 bis. OÙ « QUE » EST-IL RELATIF ? (2de_rel_vs_conjonctive)
+   ⛔ Les quatre phrases portent le mot « que ». Une seule fois il remplace un
+   nom et occupe une fonction dans sa proposition — c'est le pronom relatif.
+   Les trois autres fois, il ne remplace rien : il ne fait qu'introduire, et
+   c'est la conjonction. Le programme demande exactement cette distinction. */
+const OU_RELATIF: readonly Choix[] = [
+  { bonne: "Le livre que j'ai lu m'a bouleversé.", faux: ["Je crois que tu as raison.", "Il faut que chacun rende sa copie.", "Elle affirme qu'elle n'a rien vu."], raison: "« que » remplace « le livre » et en est le complément direct : on a lu QUOI ?" },
+  { bonne: "Le chemin que nous avons pris descend à la mer.", faux: ["Je sais que la salle est fermée.", "Il espère que tout ira bien.", "Il faut que tu viennes demain."], raison: "« que » remplace « le chemin » et complète « avons pris »" },
+  { bonne: "La décision qu'ils ont prise engage tout le monde.", faux: ["Elle pense que c'est trop tard.", "Nous voulons que cela cesse.", "Il semble que tout aille bien."], raison: "« que » remplace « la décision » : d'où l'accord du participe « prise »" },
+  { bonne: "Les paroles qu'il a prononcées sont restées.", faux: ["On dit que le texte est de sa main.", "Je doute qu'il ait compris.", "Il craint que la pluie ne revienne."], raison: "« que » remplace « les paroles » et commande l'accord de « prononcées »" },
+  { bonne: "L'année que nous avons passée là-bas fut la plus belle.", faux: ["Je vois bien que tu hésites.", "Il souhaite que nous restions.", "Il est possible que ce soit vrai."], raison: "« que » remplace « l'année » et occupe une fonction dans la subordonnée" },
+  { bonne: "Le témoin que la police a entendu s'est rétracté.", faux: ["Il jure qu'il n'a rien vu.", "Il faudrait que quelqu'un parle.", "Elle regrette que ce soit fini."], raison: "« que » remplace « le témoin » : la police a entendu QUI ?" },
+];
+
+/* 4 bis. DÉFAIRE LA RELATIVE (2de_rel_relativisation)
+   Le premier item fond deux phrases en une. Celui-ci les sépare. ⭐ Le trajet
+   inverse est le plus formateur : pour retrouver les deux phrases, il faut
+   d'abord savoir quelle fonction le pronom occupait — et c'est justement ce
+   qu'on ne peut pas deviner. */
+const DEFAITS: readonly Deux[] = [
+  { phrase: "Le carnet dans lequel je notais mes observations a disparu.", bonne: "Le carnet a disparu. Je notais mes observations dans ce carnet.", faux: ["Le carnet a disparu. Ce carnet notait mes observations.", "Le carnet a disparu. J'ai noté ce carnet.", "Le carnet a disparu. Mes observations notaient ce carnet."], raison: "« dans lequel » remplace « dans ce carnet », complément de lieu" },
+  { phrase: "Le roman dont tout le monde parle vient de sortir.", bonne: "Le roman vient de sortir. Tout le monde parle de ce roman.", faux: ["Le roman vient de sortir. Ce roman parle de tout le monde.", "Le roman vient de sortir. Tout le monde parle à ce roman.", "Le roman vient de sortir. Tout le monde parle ce roman."], raison: "« dont » remplace « de ce roman » : parler DE" },
+  { phrase: "La route qui mène au port est fermée.", bonne: "La route est fermée. Cette route mène au port.", faux: ["La route est fermée. Le port mène à cette route.", "La route est fermée. On mène cette route au port.", "La route est fermée. Cette route est menée au port."], raison: "« qui » remplace « cette route », sujet du verbe mener" },
+  { phrase: "L'élève dont le père enseigne ici a déménagé.", bonne: "L'élève a déménagé. Le père de cet élève enseigne ici.", faux: ["L'élève a déménagé. Cet élève enseigne à son père.", "L'élève a déménagé. Le père enseigne cet élève.", "L'élève a déménagé. Cet élève est le père d'ici."], raison: "« dont » remplace « de cet élève », complément du nom « père »" },
+  { phrase: "Le village où mon père est né a disparu.", bonne: "Le village a disparu. Mon père est né dans ce village.", faux: ["Le village a disparu. Ce village est né de mon père.", "Le village a disparu. Mon père a fait naitre ce village.", "Le village a disparu. Mon père est né de ce village."], raison: "« où » remplace « dans ce village », complément de lieu" },
+  { phrase: "La question à laquelle il n'a pas répondu reste ouverte.", bonne: "La question reste ouverte. Il n'a pas répondu à cette question.", faux: ["La question reste ouverte. Cette question n'a pas répondu.", "La question reste ouverte. Il n'a pas répondu de cette question.", "La question reste ouverte. Il n'a pas répondu cette question."], raison: "« à laquelle » remplace « à cette question » : répondre À" },
+  { phrase: "Le projet sur lequel il travaille avance bien.", bonne: "Le projet avance bien. Il travaille sur ce projet.", faux: ["Le projet avance bien. Ce projet travaille sur lui.", "Le projet avance bien. Il travaille ce projet.", "Le projet avance bien. Il travaille avec ce projet."], raison: "« sur lequel » remplace « sur ce projet » : travailler SUR" },
+  { phrase: "Les outils dont j'ai besoin sont restés au garage.", bonne: "Les outils sont restés au garage. J'ai besoin de ces outils.", faux: ["Les outils sont restés au garage. Ces outils ont besoin de moi.", "Les outils sont restés au garage. J'ai besoin à ces outils.", "Les outils sont restés au garage. J'ai ces outils en besoin."], raison: "« dont » remplace « de ces outils » : avoir besoin DE" },
+];
+
+/* 5 bis. DÉVELOPPER L'EXPANSION EN RELATIVE (2de_rel_commuter_expansion)
+   Le premier item réduit une relative ; celui-ci la rétablit.
+   ⚠️ MÊME PRÉCAUTION QU'EN HAUT, PRISE PAR L'AUTRE BOUT : une expansion se
+   développe souvent de deux façons correctes (« le train de six heures » peut
+   partir ou être pris à six heures). Le VERBE À EMPLOYER est donc nommé dans la
+   question — sans quoi l'item aurait deux bonnes réponses.
+   ⭐ Les distracteurs sont alors des relatives bâties sur le même verbe mais à
+   la mauvaise voix, au mauvais temps ou avec le mauvais pronom : on ne les
+   écarte plus à l'oreille. */
+const DEVELOPPES: readonly Developpe[] = [
+  { expansion: "le train de six heures", verbe: "partir", bonne: "le train qui part à six heures", faux: ["le train qui est parti à six heures", "le train dont on part à six heures", "le train que l'on part à six heures"], raison: "« qui » est sujet du verbe partir, au présent comme dans l'expansion" },
+  { expansion: "les élèves travaillant en silence", verbe: "travailler", bonne: "les élèves qui travaillent en silence", faux: ["les élèves qui ont travaillé en silence", "les élèves que l'on fait travailler en silence", "les élèves dont le travail est silencieux"], raison: "le participe présent correspond à une relative active au présent" },
+  { expansion: "le livre publié en 2019", verbe: "publier", bonne: "le livre qui a été publié en 2019", faux: ["le livre qui a publié en 2019", "le livre qui publie en 2019", "le livre dont on publie en 2019"], raison: "le participe passé épithète correspond à une relative au PASSIF" },
+  { expansion: "la maison de mes grands-parents", verbe: "appartenir", bonne: "la maison qui appartient à mes grands-parents", faux: ["la maison dont mes grands-parents appartiennent", "la maison que mes grands-parents appartiennent", "la maison où appartiennent mes grands-parents"], raison: "« appartenir » se construit avec à, et la maison en est le sujet" },
+  { expansion: "les volets repeints cet été", verbe: "repeindre", bonne: "les volets qui ont été repeints cet été", faux: ["les volets qui ont repeint cet été", "les volets qui repeignent cet été", "les volets dont on a repeint cet été"], raison: "le participe passé épithète correspond à une relative au passif" },
+  { expansion: "le carnet du capitaine", verbe: "appartenir", bonne: "le carnet qui appartient au capitaine", faux: ["le carnet dont le capitaine appartient", "le carnet que le capitaine appartient", "le carnet où le capitaine appartient"], raison: "le complément du nom en « de » se développe ici par « appartenir à »" },
+  { expansion: "des nuages annonçant l'orage", verbe: "annoncer", bonne: "des nuages qui annoncent l'orage", faux: ["des nuages qui sont annoncés par l'orage", "des nuages qu'annonce l'orage", "des nuages dont l'orage est annoncé"], raison: "le participe présent est ACTIF : ce sont les nuages qui annoncent" },
+  { expansion: "la lettre écrite par sa mère", verbe: "écrire", bonne: "la lettre qui a été écrite par sa mère", faux: ["la lettre qui a écrit sa mère", "la lettre qu'écrit sa mère", "la lettre dont sa mère a écrit"], raison: "le complément d'agent « par sa mère » signale le passif" },
+  { expansion: "la route du port", verbe: "mener", bonne: "la route qui mène au port", faux: ["la route dont le port mène", "la route que le port mène", "la route où mène le port"], raison: "« la route » est sujet du verbe mener, le port en est le terme" },
+  { expansion: "les candidats en attente", verbe: "attendre", bonne: "les candidats qui attendent", faux: ["les candidats qui sont attendus", "les candidats qu'on attend", "les candidats dont on attend"], raison: "ce sont les candidats qui attendent : la relative est active" },
+];
+
+/* 6 bis. QUELLE PHRASE DIT CELA ? (2de_rel_virgule_sens)
+   Le premier item lit le sens d'une ponctuation donnée ; celui-ci part du sens
+   voulu. ⛔ Les quatre propositions sont TOUTES correctes en français — sans
+   virgules, entre virgules, en relative détachée après le verbe, en participiale.
+   Trois d'entre elles disent la même chose (la totalité), une seule trie. C'est
+   voulu : l'élève doit voir que la restriction est l'exception, et qu'elle tient
+   à deux virgules absentes. */
+const PONCTUES: readonly Ponctue[] = [
+  { veut: "que seuls certains élèves avaient révisé, et que ce sont eux qui ont réussi", bonne: "Les élèves qui avaient révisé ont réussi.", faux: ["Les élèves, qui avaient révisé, ont réussi.", "Les élèves ont réussi, qui avaient révisé.", "Les élèves, ayant révisé, ont réussi."], raison: "sans virgules, la relative trie : elle ne désigne qu'une partie du groupe" },
+  { veut: "que tous les élèves avaient révisé, et que tous ont réussi", bonne: "Les élèves, qui avaient révisé, ont réussi.", faux: ["Les élèves qui avaient révisé ont réussi.", "Seuls les élèves qui avaient révisé ont réussi.", "Les élèves qui avaient révisé sont les seuls à réussir."], raison: "entre virgules, la relative ajoute un renseignement sur la totalité" },
+  { veut: "que seuls certains passagers portaient un gilet, et que ce sont eux qui ont survécu", bonne: "Les passagers qui portaient un gilet ont survécu.", faux: ["Les passagers, qui portaient un gilet, ont survécu.", "Les passagers ont survécu, qui portaient un gilet.", "Les passagers, portant un gilet, ont survécu."], raison: "sans virgules, la relative restreint : les autres passagers n'ont pas survécu" },
+  { veut: "que tous les passagers portaient un gilet, et que tous ont survécu", bonne: "Les passagers, qui portaient un gilet, ont survécu.", faux: ["Les passagers qui portaient un gilet ont survécu.", "Seuls les passagers qui portaient un gilet ont survécu.", "Les passagers qui portaient un gilet furent les seuls à survivre."], raison: "entre virgules, la relative renseigne sur la totalité du groupe" },
+  { veut: "que seuls certains témoins avaient tout vu, et que ce sont eux qui ont parlé", bonne: "Les témoins qui avaient tout vu ont parlé.", faux: ["Les témoins, qui avaient tout vu, ont parlé.", "Les témoins ont parlé, qui avaient tout vu.", "Les témoins, ayant tout vu, ont parlé."], raison: "sans virgules, la relative distingue une partie du groupe" },
+  { veut: "que tous les témoins avaient tout vu, et que tous ont parlé", bonne: "Les témoins, qui avaient tout vu, ont parlé.", faux: ["Les témoins qui avaient tout vu ont parlé.", "Seuls les témoins qui avaient tout vu ont parlé.", "Les témoins qui avaient tout vu furent les seuls à parler."], raison: "entre virgules, la relative n'exclut personne" },
+];
+
 const VIRGULES: readonly Virgule[] = [
   {
     phrase: "Les élèves qui avaient révisé ont réussi.",
@@ -582,6 +680,153 @@ export const relativesSecondeBank: TutorBankItemV4[] = [
           "Essaie de supprimer la relative. Si la phrase désigne encore le même monde, la relative était détachée. Si l'on ne sait plus de qui l'on parle, elle triait.",
           `Ici, ${c.raison}.`,
           `La phrase dit que ${c.rep}.`,
+        ),
+      };
+    },
+  },
+
+  /* ══════════════ LES SECONDS ITEMS ══════════════ */
+
+  {
+    kind: "template",
+    id: "2de_rel_auquel_duquel_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "relatives_2de",
+    microId: "2de_rel_auquel_duquel",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Refais la phrase simple : « il travaille … ce projet ». Le mot qui réclame une préposition est celui-là.",
+    tags: ["seconde", "grammaire", "relatives", "template"],
+    generate: () => {
+      const c = randomChoice(GOUVERNES);
+      return {
+        text: `« ${c.phrase} »\n\nQuel mot impose la préposition contenue dans le pronom relatif ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "« auquel », « duquel », « sur lequel » sont des pronoms composés : une préposition soudée à un pronom. Cette préposition ne vient jamais de l'antécédent — elle vient de la construction d'un verbe ou d'un nom de la subordonnée. On répond À, on se souvient DE, on a besoin DE, on travaille SUR.",
+          "Défais la relative en deux phrases : « … et il travaille SUR ce projet ». Le mot dont dépend cette préposition est celui qui commande.",
+          `Ici, ${c.raison}.`,
+          `C'est « ${c.bonne} » qui l'impose.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_rel_vs_conjonctive_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "relatives_2de",
+    microId: "2de_rel_vs_conjonctive",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Demande-toi si « que » remplace un mot déjà écrit. S'il ne remplace rien, ce n'est pas un pronom.",
+    tags: ["seconde", "grammaire", "relatives", "conjonctive", "template"],
+    generate: () => {
+      const c = randomChoice(OU_RELATIF);
+      return {
+        text: `Dans laquelle de ces phrases « que » est-il un pronom relatif ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Le programme demande de distinguer les relatives des conjonctives, et le même mot « que » sert aux deux. Le pronom relatif REMPLACE un nom déjà écrit et occupe une fonction dans sa proposition ; la conjonction ne remplace rien, elle ne fait qu'introduire une subordonnée complément du verbe.",
+          "Deux vérifications rapides : le mot a-t-il un antécédent juste avant ? et peut-on lui poser une question comme « on a lu quoi ? ». Si oui aux deux, c'est un relatif.",
+          `Ici, ${c.raison}.`,
+          `C'est : « ${c.bonne} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_rel_relativisation_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "relatives_2de",
+    microId: "2de_rel_relativisation",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Cherche d'abord ce que le pronom remplaçait, préposition comprise. Puis remets ce groupe à sa place.",
+    tags: ["seconde", "grammaire", "relatives", "relativisation", "template"],
+    generate: () => {
+      const c = randomChoice(DEFAITS);
+      return {
+        text: `« ${c.phrase} »\n\nQuelles étaient les deux phrases indépendantes de départ ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Relativiser, c'est fondre deux phrases en une en remplaçant le groupe répété par un pronom. Défaire l'opération oblige à retrouver ce groupe entier — préposition comprise —, et donc la fonction qu'il occupait. C'est le contrôle le plus sûr : si les deux phrases obtenues sont correctes, le pronom était le bon.",
+          "Repère le pronom, puis demande-toi par quoi le remplacer pour reconstituer une phrase complète : « ce roman », « de ce roman », « dans ce carnet ».",
+          `Ici, ${c.raison}.`,
+          `Les deux phrases étaient : « ${c.bonne} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_rel_commuter_expansion_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "relatives_2de",
+    microId: "2de_rel_commuter_expansion",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Demande-toi qui fait l'action. Si le nom la subit, la relative doit être au passif.",
+    tags: ["seconde", "grammaire", "relatives", "commutation", "template"],
+    generate: () => {
+      const c = randomChoice(DEVELOPPES);
+      return {
+        text: `« ${c.expansion} »\n\nDéveloppe cette expansion en relative, avec le verbe « ${c.verbe} ».\nQuelle forme obtient-on ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Adjectif, participe et complément du nom disent en peu de mots ce qu'une relative dit au long. Développer, c'est refaire le chemin en sens inverse — et l'on découvre alors ce que la forme brève avait tu : qui fait l'action. Un participe présent est actif, un participe passé épithète est presque toujours passif.",
+          "Pose la question « qui fait quoi ? ». Si le nom fait l'action, la relative est active ; s'il la subit, elle passe au passif, avec l'auxiliaire être.",
+          `Ici, ${c.raison}.`,
+          `On obtient : « ${c.bonne} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_rel_virgule_sens_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "relatives_2de",
+    microId: "2de_rel_virgule_sens",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Les quatre phrases sont correctes. Trois parlent de tout le groupe, une seule n'en désigne qu'une partie.",
+    tags: ["seconde", "grammaire", "relatives", "ponctuation", "template"],
+    generate: () => {
+      const c = randomChoice(PONCTUES);
+      return {
+        text: `On veut dire ${c.veut}.\nQuelle phrase écrire ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Deux virgules changent le nombre de personnes dont on parle. Sans elles, la relative trie : elle désigne une partie du groupe, et le reste est exclu. Avec elles, elle ajoute un renseignement qui vaut pour tous. C'est la même phrase, aux mêmes mots, et ce n'est pas le même monde.",
+          "Supprime la relative par la pensée. Si tu sais encore de qui l'on parle, elle était détachée et concernait tout le monde. Si tu ne le sais plus, c'est qu'elle triait.",
+          `Ici, ${c.raison}.`,
+          `On écrit : « ${c.bonne} »`,
         ),
       };
     },
