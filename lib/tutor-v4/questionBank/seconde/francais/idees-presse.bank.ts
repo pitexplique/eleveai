@@ -380,6 +380,201 @@ const CAS_IMAGE: readonly Cas[] = [
   { enonce: "Une même photographie illustre deux articles de sens contraire, avec deux textes différents.", rep: "la légende : elle oriente la lecture de ce que l'on croit voir seul", raison: "le texte fait basculer l'image" },
 ];
 
+/* ═══════════ LES TABLES DES SECONDS ITEMS (18/08/2026) ═══════════
+   Les douze premiers items de ce fichier partent d'une SITUATION et font nommer
+   la catégorie. Les douze seconds font le trajet inverse : ils partent de la
+   catégorie et demandent ce qui la définit, le moyen qu'elle emploie, ou le
+   geste qu'elle réclame.
+   ⚠️ Le retournement littéral — « quelle situation illustre ceci ? » — a été
+   ÉCARTÉ : les situations sont des phrases longues et inégales, la bonne
+   réponse se serait cochée à la taille. Toutes les réponses ci-dessous sont
+   des groupes courts, de longueur voisine.
+   ⭐ Chaque pool sert plusieurs entrées : aucune ligne n'est morte. */
+
+/* Le test du présupposé, appliqué : on nie la phrase et l'on regarde ce qui
+   survit. ⚠️ Les quatre réponses sont courtes et de même facture — sans quoi
+   la nuance (« il fumait avant » contre « il fume encore ») se cocherait à la
+   taille plutôt qu'au raisonnement. */
+const PRESUPPOSES_NIER: readonly CasFaux[] = [
+  { enonce: "« Paul a cessé de fumer. »", bonne: "il fumait auparavant", faux: ["il fume encore aujourd'hui", "il n'a jamais fumé", "il va bientôt reprendre"], raison: "« cesser de » suppose que l'action avait lieu ; le nier ne l'efface pas" },
+  { enonce: "« Le maire a enfin tenu sa promesse. »", bonne: "il avait tardé à la tenir", faux: ["il n'avait rien promis du tout", "il l'a tenue aussitôt promise", "il refuse encore de la tenir"], raison: "« enfin » suppose une attente, et l'attente survit à la négation" },
+  { enonce: "« Qui a saboté le projet ? »", bonne: "le projet a été saboté", faux: ["le projet a parfaitement réussi", "personne n'a touché au projet", "le projet n'a jamais existé"], raison: "la question porte sur l'auteur, jamais sur le fait : il est donné d'avance" },
+  { enonce: "« La réforme continue de diviser. »", bonne: "elle divisait déjà avant", faux: ["elle divise pour la première fois", "elle n'a jamais divisé personne", "elle réunit tout le monde"], raison: "« continuer de » suppose un état antérieur" },
+  { enonce: "« Il a recommencé à travailler. »", bonne: "il s'était arrêté de travailler", faux: ["il n'avait jamais travaillé", "il travaille sans interruption", "il va cesser de travailler"], raison: "« recommencer » suppose un arrêt, que la négation ne supprime pas" },
+  { enonce: "« Depuis quand tolère-t-on ces retards ? »", bonne: "les retards sont tolérés", faux: ["les retards sont tous sanctionnés", "il n'y a jamais eu de retard", "les retards ont enfin cessé"], raison: "la question porte sur la durée, et fait passer la tolérance pour acquise" },
+];
+
+const MOYENS: readonly string[] = [
+  "des preuves et un raisonnement",
+  "l'émotion et l'image frappante",
+  "le rire porté sur un travers",
+  "aucun : le texte informe seulement",
+];
+
+const CAS_MOYEN: readonly Cas[] = [
+  { enonce: "Convaincre.", rep: "des preuves et un raisonnement", raison: "convaincre s'adresse à la raison, et se vérifie" },
+  { enonce: "Persuader.", rep: "l'émotion et l'image frappante", raison: "persuader passe par le sentiment, non par la démonstration" },
+  { enonce: "Manier l'ironie.", rep: "le rire porté sur un travers", raison: "on dit le contraire de ce qu'on pense pour rendre un travers insupportable" },
+  { enonce: "Exposer sans prendre parti.", rep: "aucun : le texte informe seulement", raison: "l'exposé neutre ne cherche rien du lecteur" },
+];
+
+const TEMPS_DISCOURS: readonly string[] = [
+  "le présent d'une cérémonie",
+  "le passé d'un fait",
+  "l'avenir d'une décision",
+  "aucun temps en particulier",
+];
+
+const CAS_TEMPS: readonly Cas[] = [
+  { enonce: "Le discours épidictique loue ou blâme.", rep: "le présent d'une cérémonie", raison: "on célèbre ou l'on condamne devant une assemblée réunie" },
+  { enonce: "Le discours judiciaire accuse ou défend.", rep: "le passé d'un fait", raison: "le tribunal juge ce qui a déjà eu lieu" },
+  { enonce: "Le discours délibératif conseille ou déconseille.", rep: "l'avenir d'une décision", raison: "on délibère sur ce qui n'est pas encore fait" },
+  { enonce: "Un texte qui se contente d'exposer.", rep: "aucun temps en particulier", raison: "il n'appartient à aucun des trois genres du discours" },
+  { enonce: "Un éloge funèbre prononcé devant l'assistance.", rep: "le présent d'une cérémonie", raison: "l'éloge est le cas type de l'épidictique" },
+  { enonce: "Une plaidoirie qui revient sur la nuit des faits.", rep: "le passé d'un fait", raison: "elle discute ce qui s'est passé" },
+  { enonce: "Un discours qui demande un vote pour demain.", rep: "l'avenir d'une décision", raison: "il vise une décision à prendre" },
+];
+
+const PROPRES: readonly string[] = [
+  "il démontre par une histoire inventée",
+  "il avance en son nom propre",
+  "il s'adresse à ceux qui doivent juger",
+  "il suit l'actualité du jour",
+];
+
+const CAS_PROPRE: readonly Cas[] = [
+  { enonce: "L'apologue.", rep: "il démontre par une histoire inventée", raison: "la fable et le conte philosophique argumentent indirectement" },
+  { enonce: "L'essai.", rep: "il avance en son nom propre", raison: "l'auteur y engage sa parole, sans se cacher derrière un récit" },
+  { enonce: "La plaidoirie.", rep: "il s'adresse à ceux qui doivent juger", raison: "elle vise une décision de justice" },
+  { enonce: "L'article de presse.", rep: "il suit l'actualité du jour", raison: "il naît d'un événement et se périme avec lui" },
+];
+
+const MANOEUVRES_DEF: readonly string[] = [
+  "accorder un point à l'adversaire",
+  "attaquer l'argument de l'adversaire",
+  "appuyer sa thèse d'un exemple neuf",
+  "éviter la question et en poser une autre",
+];
+
+const CAS_MANOEUVRE_DEF: readonly Cas[] = [
+  { enonce: "La concession.", rep: "accorder un point à l'adversaire", raison: "on lui donne raison sur un point pour être cru sur le reste" },
+  { enonce: "La réfutation.", rep: "attaquer l'argument de l'adversaire", raison: "on montre que son raisonnement ne tient pas" },
+  { enonce: "La confirmation.", rep: "appuyer sa thèse d'un exemple neuf", raison: "on renforce sa propre position sans parler de l'adversaire" },
+  { enonce: "L'esquive.", rep: "éviter la question et en poser une autre", raison: "elle donne l'apparence d'une réponse sans en être une" },
+];
+
+const MOTS_ORDRE: readonly string[] = [
+  "instruire les hommes par l'examen",
+  "revenir aux textes anciens eux-mêmes",
+  "soumettre l'art à la raison et à la règle",
+  "chercher le rare contre le mot commun",
+];
+
+const CAS_MOT_ORDRE: readonly Cas[] = [
+  { enonce: "Les Lumières.", rep: "instruire les hommes par l'examen", raison: "le siècle veut éclairer, et tient l'examen pour la voie du progrès" },
+  { enonce: "L'Humanisme.", rep: "revenir aux textes anciens eux-mêmes", raison: "on relit les Anciens dans leur langue, sans intermédiaire" },
+  { enonce: "Le classicisme.", rep: "soumettre l'art à la raison et à la règle", raison: "la clarté et la mesure y sont des exigences" },
+  { enonce: "La préciosité.", rep: "chercher le rare contre le mot commun", raison: "l'expression choisie y vaut preuve d'esprit" },
+];
+
+const SIGNES_PRESSE: readonly string[] = [
+  "il engage la position de la rédaction",
+  "il rapporte ce que le journaliste a vu",
+  "il donne l'information en quelques lignes",
+  "il laisse parler quelqu'un d'autre",
+];
+
+const CAS_SIGNE: readonly Cas[] = [
+  { enonce: "L'éditorial.", rep: "il engage la position de la rédaction", raison: "il est signé et assume un point de vue" },
+  { enonce: "Le reportage.", rep: "il rapporte ce que le journaliste a vu", raison: "il vaut par la présence sur les lieux" },
+  { enonce: "La brève.", rep: "il donne l'information en quelques lignes", raison: "elle informe sans développer" },
+  { enonce: "L'interview.", rep: "il laisse parler quelqu'un d'autre", raison: "le journaliste s'efface derrière son invité" },
+];
+
+const NATURES: readonly string[] = [
+  "un fait, qui se vérifie",
+  "un jugement, qui s'apprécie",
+  "une opinion rapportée d'un tiers",
+  "une prévision, encore invérifiable",
+];
+
+const CAS_NATURE: readonly Cas[] = [
+  { enonce: "« La salle a été inaugurée jeudi. »", rep: "un fait, qui se vérifie", raison: "la date et l'événement se contrôlent" },
+  { enonce: "« Cette inauguration était une réussite. »", rep: "un jugement, qui s'apprécie", raison: "aucun contrôle ne peut trancher entre réussite et échec" },
+  { enonce: "« Selon le maire, la salle manquait depuis dix ans. »", rep: "une opinion rapportée d'un tiers", raison: "le journal rapporte sans prendre à son compte" },
+  { enonce: "« La fréquentation devrait doubler l'an prochain. »", rep: "une prévision, encore invérifiable", raison: "elle porte sur ce qui n'a pas eu lieu" },
+  { enonce: "« Le budget s'élève à trois cent mille euros. »", rep: "un fait, qui se vérifie", raison: "un chiffre se contrôle sur pièces" },
+  { enonce: "« Ce budget est beaucoup trop élevé. »", rep: "un jugement, qui s'apprécie", raison: "« trop » suppose une norme qui n'est pas dite" },
+  { enonce: "« D'après l'opposition, le chantier a pris du retard. »", rep: "une opinion rapportée d'un tiers", raison: "la source est nommée, l'affirmation ne l'engage pas" },
+  { enonce: "« Les travaux seront terminés avant l'été. »", rep: "une prévision, encore invérifiable", raison: "rien ne permet encore de la contrôler" },
+];
+
+const PROCEDES_TITRE: readonly string[] = [
+  "une question qui suppose le problème posé",
+  "un chiffre coupé de ce qui l'explique",
+  "des guillemets qui mettent à distance",
+  "un conditionnel qui n'engage personne",
+];
+
+const CAS_PROCEDE: readonly Cas[] = [
+  { enonce: "« Faut-il interdire les téléphones au collège ? »", rep: "une question qui suppose le problème posé", raison: "le titre pose comme acquis qu'un problème existe" },
+  { enonce: "« Trois cents signalements en un an »", rep: "un chiffre coupé de ce qui l'explique", raison: "sans point de comparaison, le nombre ne dit rien" },
+  { enonce: "« Une réforme “historique” »", rep: "des guillemets qui mettent à distance", raison: "le journal cite le mot sans le reprendre à son compte" },
+  { enonce: "« Le rapport évoquerait des manquements »", rep: "un conditionnel qui n'engage personne", raison: "l'information est donnée sans être garantie" },
+  { enonce: "« Jusqu'à quand tolérera-t-on cette situation ? »", rep: "une question qui suppose le problème posé", raison: "la question présuppose qu'il y a lieu de ne plus tolérer" },
+  { enonce: "« Deux fois plus qu'en janvier »", rep: "un chiffre coupé de ce qui l'explique", raison: "on ignore le nombre de départ, donc l'ampleur réelle" },
+  { enonce: "« Un accord “équilibré”, selon les signataires »", rep: "des guillemets qui mettent à distance", raison: "les guillemets renvoient le mot à celui qui l'emploie" },
+  { enonce: "« Le chantier aurait coûté le double »", rep: "un conditionnel qui n'engage personne", raison: "le conditionnel signale une information non vérifiée" },
+];
+
+const GESTES_VERIF: readonly string[] = [
+  "remonter au document d'origine",
+  "chercher qui a publié, et quand",
+  "comparer avec un second média",
+  "rien : l'information est déjà de première main",
+];
+
+const CAS_GESTE: readonly Cas[] = [
+  { enonce: "Un article qui cite un autre article, lui-même sans source.", rep: "remonter au document d'origine", raison: "la chaine des reprises doit être remontée jusqu'au premier maillon" },
+  { enonce: "Une capture d'écran partagée sans date ni nom.", rep: "chercher qui a publié, et quand", raison: "sans auteur ni date, rien ne peut être évalué" },
+  { enonce: "Une information seule, qu'aucun autre journal ne donne.", rep: "comparer avec un second média", raison: "une information isolée demande un recoupement" },
+  { enonce: "Le rapport officiel lui-même, consulté en entier.", rep: "rien : l'information est déjà de première main", raison: "on tient la source, non son écho" },
+  { enonce: "Un fil qui résume « ce que dit une étude » sans la nommer.", rep: "remonter au document d'origine", raison: "tant que l'étude n'est pas identifiée, le résumé ne vaut rien" },
+  { enonce: "Un compte anonyme qui annonce une décision imminente.", rep: "chercher qui a publié, et quand", raison: "l'anonymat interdit d'attribuer la moindre responsabilité" },
+];
+
+const SUPPORTS_SUITE: readonly string[] = [
+  "le journal imprimé",
+  "la radio",
+  "la télévision",
+  "le fil en ligne",
+];
+
+const CAS_SUITE: readonly Cas[] = [
+  { enonce: "Le premier support de presse de masse, au XIXe siècle.", rep: "le journal imprimé", raison: "le quotidien bon marché met le récit à la portée de tous" },
+  { enonce: "Le support qui, dans les années vingt, apporte la voix.", rep: "la radio", raison: "l'information cesse d'attendre l'imprimerie" },
+  { enonce: "Le support qui, après-guerre, apporte l'image animée.", rep: "la télévision", raison: "le journal télévisé devient le rendez-vous du soir" },
+  { enonce: "Le support où l'information se corrige après publication.", rep: "le fil en ligne", raison: "la publication continue remplace l'édition figée" },
+  { enonce: "Le support dont l'édition est arrêtée une fois pour toutes.", rep: "le journal imprimé", raison: "une fois tiré, il ne se corrige plus" },
+  { enonce: "Le support qui a permis d'informer sans savoir lire.", rep: "la radio", raison: "la voix touche ceux que l'imprimé laissait de côté" },
+];
+
+const VERIFS_IMAGE: readonly string[] = [
+  "ce que le cadre a laissé dehors",
+  "d'où regardait le photographe",
+  "à quel instant il a déclenché",
+  "ce que la légende fait voir",
+];
+
+const CAS_VERIF_IMAGE: readonly Cas[] = [
+  { enonce: "Une foule paraît immense, mais nul ne sait où elle s'arrête.", rep: "ce que le cadre a laissé dehors", raison: "le cadrage décide de ce qui existe pour le lecteur" },
+  { enonce: "Un orateur est vu d'en bas, et parait dominer l'assemblée.", rep: "d'où regardait le photographe", raison: "la contre-plongée grandit le sujet" },
+  { enonce: "Un visage est saisi entre deux mots, l'air hagard.", rep: "à quel instant il a déclenché", raison: "un instant isolé ne dit rien de la durée" },
+  { enonce: "La même photographie illustre deux articles de sens contraire.", rep: "ce que la légende fait voir", raison: "le texte fait basculer ce que l'on croyait voir seul" },
+  { enonce: "Un stade paraît vide, sur un cliché pris avant l'ouverture.", rep: "à quel instant il a déclenché", raison: "l'heure du déclenchement fait toute l'image" },
+  { enonce: "Un manifestant semble seul face aux forces de l'ordre.", rep: "ce que le cadre a laissé dehors", raison: "le hors-champ contient peut-être des centaines de personnes" },
+];
+
 function item(
   id: string, notionId: string, microId: string, difficulty: TutorBankItemV4["difficulty"], hint: string,
   tags: readonly string[], question: string, table: readonly Cas[], pool: readonly string[],
@@ -496,4 +691,78 @@ export const ideesPresseSecondeBank: TutorBankItemV4[] = [
     ["seconde", "presse", "template"], "Qu'est-ce qui oriente la lecture de cette image ?", CAS_IMAGE, IMAGES_PRESSE,
     "Une image de presse résulte de quatre décisions au moins : ce qu'on garde dans le cadre, d'où l'on regarde, à quel instant on déclenche, et ce que la légende en dit. Aucune de ces décisions n'est neutre, et aucune ne se voit sur l'image elle-même.",
     "Demande-toi d'abord ce qui manque hors du cadre, puis où se tenait celui qui a pris la photographie."),
+
+  /* ══════════════ LES SECONDS ITEMS ══════════════ */
+
+  item("2de_arg_these_visee_tpl_2", "argumentation_2de", "2de_arg_these_visee", 3,
+    "Une visée se reconnait au moyen qu'elle emploie. Demande-toi ce que l'auteur met en avant.",
+    ["seconde", "argumentation", "template"], "Quel moyen cette visée emploie-t-elle ?", CAS_MOYEN, MOYENS,
+    "Convaincre et persuader ne sont pas deux mots pour la même chose. Convaincre s'adresse à la raison et procède par preuves : on peut vérifier. Persuader s'adresse au sentiment et procède par images : on adhère sans pouvoir contrôler. L'ironie emprunte une troisième voie, le rire. Et l'exposé neutre ne cherche rien du lecteur.",
+    "Regarde ce que l'auteur met en avant : un chiffre, une scène, une pointe, ou rien du tout. Le moyen employé désigne la visée."),
+
+  itemFaux("2de_arg_presuppose_tpl_2", "argumentation_2de", "2de_arg_presuppose", 4,
+    "Nie la phrase, puis relis-la. Ce qui résiste à la négation était présupposé.",
+    ["seconde", "argumentation", "template"], "Que reste-t-il vrai même si l'on nie cette phrase ?", PRESUPPOSES_NIER,
+    "Le test du présupposé est mécanique, et c'est ce qui le rend sûr : on met la phrase à la forme négative, et l'on regarde ce qui survit. Ce qui reste debout n'était pas affirmé, donc pas discutable — il était glissé sous l'affirmation. C'est ainsi qu'un titre fait admettre ce qu'il n'a jamais écrit.",
+    "Écris la phrase au négatif, puis demande-toi ce qu'il faut encore admettre pour qu'elle garde un sens."),
+
+  item("2de_arg_genres_discours_tpl_2", "argumentation_2de", "2de_arg_genres_discours", 3,
+    "Chacun des trois genres regarde un temps différent : la cérémonie, le procès, la décision.",
+    ["seconde", "argumentation", "template"], "Sur quel temps ce genre porte-t-il ?", CAS_TEMPS, TEMPS_DISCOURS,
+    "Les trois genres du discours que nomme le programme se distinguent par le temps qu'ils visent. L'épidictique loue ou blâme dans le présent d'une cérémonie ; le judiciaire accuse ou défend à propos de faits passés ; le délibératif conseille en vue d'une décision à venir. Cette classification vient de l'Antiquité et sert encore.",
+    "Ne cherche pas le ton, cherche le temps : ce qui se célèbre maintenant, ce qui s'est produit, ou ce qui reste à décider."),
+
+  item("2de_arg_formes_tpl_2", "argumentation_2de", "2de_arg_formes", 3,
+    "Chaque forme a un propre, et un seul. Cherche ce qu'elle est seule à faire.",
+    ["seconde", "argumentation", "template"], "Quel est le propre de cette forme ?", CAS_PROPRE, PROPRES,
+    "L'argumentation est dite directe quand l'auteur avance sa thèse en son nom — c'est l'essai. Elle est indirecte quand une histoire inventée porte la démonstration à sa place : c'est l'apologue, fable ou conte philosophique. La plaidoirie, elle, vise une décision de justice ; l'article naît d'un événement et se périme avec lui.",
+    "Demande-toi si le texte raconte pour démontrer, s'il parle en son nom, s'il s'adresse à des juges, ou s'il suit l'actualité."),
+
+  item("2de_arg_concession_refutation_tpl_2", "argumentation_2de", "2de_arg_concession_refutation", 3,
+    "Concéder n'est pas céder : c'est accorder un point pour être cru sur le reste.",
+    ["seconde", "argumentation", "template"], "En quoi consiste cette manœuvre ?", CAS_MANOEUVRE_DEF, MANOEUVRES_DEF,
+    "Discuter une opinion demande de la reprendre avant de la combattre. Concéder, c'est accorder un point à l'adversaire — non par faiblesse, mais parce qu'un lecteur croit davantage celui qui ne prétend pas avoir raison sur tout. Réfuter, c'est montrer que son argument ne tient pas. Confirmer, c'est appuyer sa propre thèse. Esquiver, c'est feindre de répondre.",
+    "Regarde ce que l'auteur fait de l'argument adverse : il l'accorde, il l'attaque, il l'ignore, ou il le remplace par un autre."),
+
+  item("2de_arg_courant_pensee_tpl_2", "argumentation_2de", "2de_arg_courant_pensee", 3,
+    "Chaque courant tient en une phrase. Cherche celle qui pourrait être sa devise.",
+    ["seconde", "argumentation", "template"], "Quel est le mot d'ordre de ce courant ?", CAS_MOT_ORDRE, MOTS_ORDRE,
+    "Inscrire un texte dans un courant de pensée, c'est retrouver ce qu'il tient pour évident. L'Humanisme revient aux textes anciens eux-mêmes ; le classicisme soumet l'art à la raison et à la règle ; la préciosité cherche le rare contre le mot commun ; les Lumières veulent instruire les hommes par l'examen.",
+    "Cherche ce que le texte n'a pas besoin de justifier : c'est là que le courant se trahit."),
+
+  item("2de_pres_genres_tpl_2", "presse_medias_2de", "2de_pres_genres", 3,
+    "Un genre de presse se reconnait à ce qu'il engage : la rédaction, le témoin, ou personne.",
+    ["seconde", "presse", "template"], "À quoi reconnait-on ce genre ?", CAS_SIGNE, SIGNES_PRESSE,
+    "Les genres de presse ne se distinguent pas par leur sujet, qui peut être le même, mais par ce qu'ils engagent. L'éditorial engage la rédaction et assume une position. Le reportage vaut par la présence du journaliste sur les lieux. La brève informe sans développer. L'interview laisse parler un autre, et le journaliste s'efface.",
+    "Demande-toi qui parle et qui répond de ce qui est dit. C'est ce partage qui nomme le genre."),
+
+  item("2de_pres_fait_jugement_tpl_2", "presse_medias_2de", "2de_pres_fait_jugement", 3,
+    "Un fait se vérifie, un jugement s'apprécie. Une prévision ne se vérifie pas encore.",
+    ["seconde", "presse", "template"], "De quelle nature est cet énoncé ?", CAS_NATURE, NATURES,
+    "Séparer le fait du jugement est le premier geste de lecture d'un article — et il ne suffit pas de deux catégories. Une opinion rapportée d'un tiers n'engage pas le journal, mais elle n'est pas un fait pour autant. Une prévision porte sur ce qui n'a pas eu lieu : elle ne pourra être contrôlée que plus tard.",
+    "Pose une seule question : puis-je vérifier cela aujourd'hui, et par quel moyen ? Si aucun moyen n'existe, ce n'est pas un fait."),
+
+  item("2de_pres_titre_presuppose_tpl_2", "presse_medias_2de", "2de_pres_titre_presuppose", 4,
+    "Un titre dispose de peu de signes. Chacun de ces procédés lui permet d'en dire plus qu'il n'en écrit.",
+    ["seconde", "presse", "template"], "Quel procédé ce titre emploie-t-il ?", CAS_PROCEDE, PROCEDES_TITRE,
+    "Un titre doit tenir en quelques mots, et quatre procédés lui permettent de suggérer sans affirmer : la question, qui pose le problème comme acquis ; le chiffre isolé, qu'aucune comparaison n'éclaire ; les guillemets, qui citent un mot sans le reprendre à son compte ; le conditionnel, qui rapporte sans garantir.",
+    "Demande-toi ce que le titre affirmerait s'il fallait le prouver. La différence entre ce qu'il suggère et ce qu'il affirme est le procédé."),
+
+  item("2de_pres_sources_tpl_2", "presse_medias_2de", "2de_pres_sources", 4,
+    "À chaque défaut de source son geste : remonter, identifier, recouper — ou rien, quand on tient l'original.",
+    ["seconde", "presse", "template"], "Quel geste de vérification s'impose ?", CAS_GESTE, GESTES_VERIF,
+    "Vérifier n'est pas douter de tout : c'est savoir quel geste chaque situation réclame. Une information reprise demande qu'on remonte au document d'origine. Une publication sans auteur ni date demande qu'on identifie qui parle et quand. Une information isolée demande un recoupement. Et quand on tient la source elle-même, il n'y a plus rien à faire.",
+    "Cherche d'abord ce qui manque : l'origine, l'auteur, ou la confirmation. Le manque désigne le geste."),
+
+  item("2de_pres_supports_histoire_tpl_2", "presse_medias_2de", "2de_pres_supports_histoire", 3,
+    "Chaque support a apporté quelque chose que le précédent ne pouvait pas donner.",
+    ["seconde", "presse", "template"], "De quel support s'agit-il ?", CAS_SUITE, SUPPORTS_SUITE,
+    "L'histoire des supports est celle de ce qu'ils ajoutent. Le journal imprimé du XIXe siècle met le récit à la portée de tous les budgets, mais son édition est figée une fois tirée. La radio apporte la voix, et informe ceux qui ne lisent pas. La télévision apporte l'image animée. Le fil en ligne apporte la correction après publication — et le doute qui va avec.",
+    "Demande-toi ce que le support permet que le précédent interdisait, et ce qu'il perd au passage."),
+
+  item("2de_pres_image_tpl_2", "presse_medias_2de", "2de_pres_image", 4,
+    "Quatre décisions se prennent avant qu'une photographie existe. Cherche laquelle explique l'effet décrit.",
+    ["seconde", "presse", "template"], "Que faut-il vérifier en premier ?", CAS_VERIF_IMAGE, VERIFS_IMAGE,
+    "Une photographie de presse ne ment pas : elle choisit. Quatre décisions la précèdent — ce qu'on garde dans le cadre, d'où l'on regarde, à quel instant on déclenche, ce que la légende en dit. Aucune ne se voit sur l'image, et chacune peut renverser ce qu'elle paraît montrer.",
+    "Nomme d'abord l'effet produit sur toi, puis demande-toi laquelle des quatre décisions a pu le produire."),
 ];
