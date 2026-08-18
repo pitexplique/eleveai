@@ -239,6 +239,110 @@ const EXERCICES: readonly Copie[] = [
    place. C'est mécanique, donc vérifiable.
    ========================================================================== */
 
+/* ═══════════ LES TABLES DES SECONDS ITEMS (18/08/2026) ═══════════
+   Les six premiers items montrent une phrase de copie et demandent CE QU'ELLE
+   FAIT. Les six suivants partent du geste attendu et font choisir la phrase, ou
+   demandent une chose que l'exercice réclame vraiment : une problématique, un
+   nombre de mots, une contrainte, une insertion fautive.
+   ⚠️ Longueurs de réponses tenues voisines dès l'écriture. */
+
+type Fait = { readonly veut: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Probleme = { readonly sujet: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Compte = { readonly enonce: string; readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+type Contrainte = { readonly contrainte: string; readonly rep: string; readonly raison: string };
+type Fautive = { readonly bonne: string; readonly faux: readonly string[]; readonly raison: string };
+
+/* 1 bis. QUELLE PHRASE FAIT CE GESTE ? (2de_meth_commentaire)
+   ⛔ Les quatre phrases portent sur LE MÊME texte, et chacune est la bonne
+   réponse d'une autre question : aucune ligne morte. La paraphrase est la plus
+   difficile à écarter, parce qu'elle est vraie — elle ne dit simplement rien
+   que le texte n'ait déjà dit. */
+const FAITS_COMMENTAIRE: readonly Fait[] = [
+  { veut: "de l'analyse : nommer un procédé et dire ce qu'il produit", bonne: "La reprise du mot « mignonne » presse la destinataire, comme si le temps manquait déjà.", faux: ["Le poète dit à la jeune fille d'aller voir la rose.", "Ce poème est très beau et vraiment touchant.", "Ronsard est né en 1524 dans le Vendômois."], raison: "elle nomme la reprise ET dit l'effet produit : c'est la seule à faire les deux" },
+  { veut: "de la paraphrase : redire le texte sans rien y ajouter", bonne: "Le poète dit à la jeune fille d'aller voir la rose.", faux: ["La reprise du mot « mignonne » presse la destinataire, comme si le temps manquait déjà.", "Ce poème est très beau et vraiment touchant.", "Ronsard est né en 1524 dans le Vendômois."], raison: "elle est exacte, et c'est bien le problème : elle n'apprend rien au lecteur" },
+  { veut: "un avis personnel avancé sans preuve prise dans le texte", bonne: "Ce poème est très beau et vraiment touchant.", faux: ["La reprise du mot « mignonne » presse la destinataire, comme si le temps manquait déjà.", "Le poète dit à la jeune fille d'aller voir la rose.", "Ronsard est né en 1524 dans le Vendômois."], raison: "rien dans le texte ne vient appuyer le jugement" },
+  { veut: "un renseignement sur l'auteur, extérieur au texte", bonne: "Ronsard est né en 1524 dans le Vendômois.", faux: ["La reprise du mot « mignonne » presse la destinataire, comme si le temps manquait déjà.", "Le poète dit à la jeune fille d'aller voir la rose.", "Ce poème est très beau et vraiment touchant."], raison: "la biographie peut éclairer, mais elle ne commente pas le texte" },
+  { veut: "de l'analyse : nommer un procédé et dire ce qu'il produit", bonne: "Les répliques raccourcissent de page en page, et la dispute s'accélère avec elles.", faux: ["Les deux personnages se disputent, puis l'un d'eux s'en va.", "Cette scène est vraiment très réussie.", "Molière dirigeait lui-même sa troupe."], raison: "elle relève une forme — la longueur des répliques — et en tire un effet" },
+  { veut: "de la paraphrase : redire le texte sans rien y ajouter", bonne: "Les deux personnages se disputent, puis l'un d'eux s'en va.", faux: ["Les répliques raccourcissent de page en page, et la dispute s'accélère avec elles.", "Cette scène est vraiment très réussie.", "Molière dirigeait lui-même sa troupe."], raison: "elle raconte la scène : le correcteur l'a lue aussi" },
+  { veut: "un avis personnel avancé sans preuve prise dans le texte", bonne: "Cette scène est vraiment très réussie.", faux: ["Les répliques raccourcissent de page en page, et la dispute s'accélère avec elles.", "Les deux personnages se disputent, puis l'un d'eux s'en va.", "Molière dirigeait lui-même sa troupe."], raison: "aucun élément du texte ne soutient l'éloge" },
+  { veut: "un renseignement sur l'auteur, extérieur au texte", bonne: "Molière dirigeait lui-même sa troupe.", faux: ["Les répliques raccourcissent de page en page, et la dispute s'accélère avec elles.", "Les deux personnages se disputent, puis l'un d'eux s'en va.", "Cette scène est vraiment très réussie."], raison: "le fait est exact, mais il ne dit rien de la scène étudiée" },
+];
+
+/* 2 bis. DU SUJET À LA PROBLÉMATIQUE (2de_meth_dissertation)
+   ⭐ Le geste qui décide de tout un devoir, et le plus mal fait : la
+   problématique n'est ni le sujet recopié, ni une réponse donnée d'avance, ni
+   une question voisine plus commode. Elle ouvre la tension que le sujet
+   contient — et c'est elle qui rend un plan possible. */
+/* ⚠️ LONGUEURS ÉGALISÉES APRÈS MESURE (+45 caractères d'avance à la première
+   écriture, de loin le pire item de la classe). Une problématique s'écrit
+   naturellement long, un leurre du type « Qu'est-ce qu'un roman ? » naturellement
+   court : la bonne réponse se cochait à la taille. Les trois leurres sont donc
+   développés jusqu'à la même longueur — et ils y gagnent, car un élève écrit
+   rarement « Qu'est-ce qu'un roman ? ». Il écrit une vraie question, mais qui
+   n'est pas celle du sujet. C'est ce piège-là qu'il fallait poser. */
+const PROBLEMATIQUES: readonly Probleme[] = [
+  { sujet: "Le roman doit-il représenter le réel ?", bonne: "Le roman doit-il copier le monde, ou peut-il en inventer un autre ?", faux: ["Le roman a-t-il pour devoir de représenter le réel tel qu'il est ?", "Le roman doit représenter le réel, car c'est là sa fonction première.", "Quelles grandes formes le roman a-t-il prises au fil des siècles ?"], raison: "elle ouvre la tension entre copier et inventer, sans trancher ; la deuxième ne fait que redire le sujet, la troisième y répond déjà, la quatrième change de question" },
+  { sujet: "La poésie sert-elle à dire l'amour ?", bonne: "L'amour est-il le seul objet que la poésie sache dire, ou un parmi d'autres ?", faux: ["La poésie a-t-elle pour vocation de dire l'amour et les sentiments ?", "La poésie ne sert pas qu'à dire l'amour, elle dit aussi le monde.", "Quelles formes fixes les poètes ont-ils employées depuis le Moyen Âge ?"], raison: "elle déplace le oui-non vers un « seulement ? », qui se discute vraiment" },
+  { sujet: "Le théâtre est-il fait pour être lu ou pour être joué ?", bonne: "Que perd un texte de théâtre lu sur la page, et que lui ajoute la scène ?", faux: ["Le théâtre est-il destiné à la lecture ou bien à la représentation ?", "Le théâtre est fait pour être joué, puisqu'il est écrit pour la scène.", "Comment un metteur en scène choisit-il les décors d'une pièce classique ?"], raison: "elle transforme l'alternative en question de gain et de perte, donc discutable" },
+  { sujet: "La littérature d'idées doit-elle plaire pour convaincre ?", bonne: "Le plaisir du lecteur sert-il l'argumentation, ou la déguise-t-il ?", faux: ["La littérature d'idées a-t-elle besoin de plaire pour emporter l'adhésion ?", "Il faut plaire pour convaincre, car un lecteur ennuyé n'écoute plus.", "Quels sont les grands genres de la littérature d'idées au XVIIIe siècle ?"], raison: "elle oppose deux lectures possibles du même moyen, sans en choisir une" },
+  { sujet: "Faut-il préférer les héros aux personnages ordinaires ?", bonne: "Un personnage ordinaire nous touche-t-il moins qu'un héros, ou davantage ?", faux: ["Vaut-il mieux mettre en scène des héros que des personnages ordinaires ?", "Il faut préférer les personnages ordinaires, plus proches du lecteur.", "Quelles qualités définissent un héros dans les récits les plus anciens ?"], raison: "elle garde les deux termes du sujet et ouvre la comparaison dans les deux sens" },
+];
+
+/* 3 bis. LE COMPTE DE LA CONTRACTION (2de_meth_contraction)
+   ⚠️ La contraction se fait AU QUART du texte, avec une tolérance de 10 % en
+   plus ou en moins. Hors de ces bornes, la copie est sanctionnée quel que soit
+   son contenu — c'est la seule règle de l'exercice qui se vérifie à la
+   calculatrice, et beaucoup d'élèves la découvrent le jour de l'épreuve. */
+const COMPTES: readonly Compte[] = [
+  { enonce: "Un texte de 800 mots, contraction au quart, tolérance de 10 %.", bonne: "entre 180 et 220 mots", faux: ["entre 190 et 210 mots", "entre 200 et 240 mots", "exactement 200 mots"], raison: "800 ÷ 4 = 200, et 10 % de 200 font 20 : de 180 à 220" },
+  { enonce: "Un texte de 600 mots, contraction au quart, tolérance de 10 %.", bonne: "entre 135 et 165 mots", faux: ["entre 140 et 160 mots", "entre 150 et 180 mots", "exactement 150 mots"], raison: "600 ÷ 4 = 150, et 10 % de 150 font 15 : de 135 à 165" },
+  { enonce: "Un texte de 1000 mots, contraction au quart, tolérance de 10 %.", bonne: "entre 225 et 275 mots", faux: ["entre 240 et 260 mots", "entre 250 et 300 mots", "exactement 250 mots"], raison: "1000 ÷ 4 = 250, et 10 % de 250 font 25 : de 225 à 275" },
+  { enonce: "Un texte de 480 mots, contraction au quart, tolérance de 10 %.", bonne: "entre 108 et 132 mots", faux: ["entre 110 et 130 mots", "entre 120 et 144 mots", "exactement 120 mots"], raison: "480 ÷ 4 = 120, et 10 % de 120 font 12 : de 108 à 132" },
+  { enonce: "Un texte de 720 mots, contraction au quart, tolérance de 10 %.", bonne: "entre 162 et 198 mots", faux: ["entre 170 et 190 mots", "entre 180 et 216 mots", "exactement 180 mots"], raison: "720 ÷ 4 = 180, et 10 % de 180 font 18 : de 162 à 198" },
+  { enonce: "Un texte de 1200 mots, contraction au quart, tolérance de 10 %.", bonne: "entre 270 et 330 mots", faux: ["entre 280 et 320 mots", "entre 300 et 360 mots", "exactement 300 mots"], raison: "1200 ÷ 4 = 300, et 10 % de 300 font 30 : de 270 à 330" },
+];
+
+/* 4 bis. QUELLE PHRASE FAIT CE GESTE ? (2de_meth_essai)
+   ⭐ L'essai est le seul exercice où le « je » est attendu — mais un avis n'y
+   suffit pas : il doit s'appuyer sur des lectures. Les quatre phrases répondent
+   au même sujet, et chacune est la bonne réponse d'une autre question. */
+const FAITS_ESSAI: readonly Fait[] = [
+  { veut: "ce qu'attend un essai : un avis personnel, argumenté et appuyé sur des lectures", bonne: "Les premières pages m'ont rebuté ; c'est leur lenteur même qui m'a appris à lire autrement.", faux: ["Je pense que les œuvres difficiles ne servent vraiment à rien.", "Le texte de départ explique que la difficulté décourage les lecteurs.", "La difficulté est, selon les critiques, formatrice pour le goût."], raison: "un « je » qui s'engage, une expérience de lecture, et une raison qui en sort" },
+  { veut: "un avis personnel, mais avancé sans le moindre argument", bonne: "Je pense que les œuvres difficiles ne servent vraiment à rien.", faux: ["Les premières pages m'ont rebuté ; c'est leur lenteur même qui m'a appris à lire autrement.", "Le texte de départ explique que la difficulté décourage les lecteurs.", "La difficulté est, selon les critiques, formatrice pour le goût."], raison: "l'avis est net, et rien ne vient l'appuyer" },
+  { veut: "un résumé du texte de départ, alors que l'essai doit s'en détacher", bonne: "Le texte de départ explique que la difficulté décourage les lecteurs.", faux: ["Les premières pages m'ont rebuté ; c'est leur lenteur même qui m'a appris à lire autrement.", "Je pense que les œuvres difficiles ne servent vraiment à rien.", "La difficulté est, selon les critiques, formatrice pour le goût."], raison: "l'essai suit la contraction : il ne la recommence pas" },
+  { veut: "une leçon récitée, sans que l'auteur de la copie s'engage", bonne: "La difficulté est, selon les critiques, formatrice pour le goût.", faux: ["Les premières pages m'ont rebuté ; c'est leur lenteur même qui m'a appris à lire autrement.", "Je pense que les œuvres difficiles ne servent vraiment à rien.", "Le texte de départ explique que la difficulté décourage les lecteurs."], raison: "« selon les critiques » met la copie à l'abri : personne ne parle" },
+];
+
+/* 5 bis. À QUEL EXERCICE CETTE CONTRAINTE APPARTIENT-ELLE ? (2de_meth_explication)
+   Le premier item reconnait l'exercice à ce qu'il fait ; celui-ci part de la
+   règle. ⚠️ Ce sont les contraintes qui distinguent vraiment ces exercices —
+   pas leur sujet, qui peut être le même. */
+const CONTRAINTES: readonly Contrainte[] = [
+  { contrainte: "suivre le texte ligne à ligne, du début à la fin", rep: "l'explication de texte, qui suit le texte dans son ordre", raison: "c'est sa définition même : le mouvement du texte commande le plan" },
+  { contrainte: "regrouper les remarques par axes, quitte à revenir en arrière", rep: "le commentaire, qui quitte l'ordre du texte pour regrouper en axes", raison: "le commentaire organise, l'explication suit" },
+  { contrainte: "ne donner aucun avis et n'interpréter à aucun moment", rep: "la contraction, qui réduit le texte sans l'interpréter", raison: "la contraction restitue le raisonnement de l'auteur, jamais le sien" },
+  { contrainte: "partir d'une question, et non d'un texte unique", rep: "la dissertation, qui discute une question sans partir d'un texte unique", raison: "la dissertation convoque plusieurs œuvres pour discuter un problème" },
+  { contrainte: "conserver le système d'énonciation de l'auteur", rep: "la contraction, qui réduit le texte sans l'interpréter", raison: "on ne passe pas au « l'auteur dit que » : on reste dans sa voix" },
+  { contrainte: "citer le texte à chaque étape de l'avancée", rep: "l'explication de texte, qui suit le texte dans son ordre", raison: "l'explication s'appuie sur chaque passage à mesure qu'elle avance" },
+  { contrainte: "construire des parties qui se répondent autour d'un problème", rep: "la dissertation, qui discute une question sans partir d'un texte unique", raison: "le plan de dissertation organise une discussion, non une lecture" },
+  { contrainte: "choisir soi-même les axes selon ce que le texte offre", rep: "le commentaire, qui quitte l'ordre du texte pour regrouper en axes", raison: "les axes ne sont pas donnés : c'est le lecteur qui les dégage" },
+];
+
+/* 6 bis. L'INSERTION FAUTIVE (2de_meth_citation)
+   Le premier item choisit l'insertion correcte ; celui-ci fait trouver la
+   fautive. ⛔ La faute est toujours la même, et c'est la plus fréquente en
+   copie : une citation à la première personne raccrochée par « que », sans que
+   les personnes se raccordent. « Le poète dit que je suis las » n'a pas de sens.
+   Les trois autres insertions sont correctes, chacune par un procédé différent :
+   le raccord grammatical, le deux-points, ou la citation fondue. */
+const FAUTIVES: readonly Fautive[] = [
+  { bonne: "Le poète dit que « je suis las ».", faux: ["Le poète écrit qu'il est « las ».", "Le poète s'exclame : « Je suis las ».", "Le poète dit sa lassitude : « Je suis las »."], raison: "« que » annonce une subordonnée à la troisième personne, mais la citation dit « je »" },
+  { bonne: "Le narrateur explique que « j'avais froid ».", faux: ["Le narrateur explique qu'il « avait froid ».", "Le narrateur note : « J'avais froid ».", "Le narrateur dit son inconfort : « J'avais froid »."], raison: "les personnes ne se raccordent pas de part et d'autre de « que »" },
+  { bonne: "Elle répond que « je ne viendrai pas ».", faux: ["Elle répond qu'elle « ne viendra pas ».", "Elle répond : « Je ne viendrai pas ».", "Elle refuse net : « Je ne viendrai pas »."], raison: "après « que », il faut adapter la personne ou passer au deux-points" },
+  { bonne: "L'auteur affirme que « il faut cultiver notre jardin ».", faux: ["L'auteur conclut : « Il faut cultiver notre jardin ».", "L'auteur invite à « cultiver notre jardin ».", "L'auteur affirme qu'il faut « cultiver notre jardin »."], raison: "« que il » ne se dit pas : la citation doit être coupée ou détachée" },
+  { bonne: "Le personnage avoue que « je n'ai rien compris ».", faux: ["Le personnage avoue qu'il n'a « rien compris ».", "Le personnage avoue : « Je n'ai rien compris ».", "Le personnage reconnait son échec : « Je n'ai rien compris »."], raison: "la première personne de la citation jure avec la troisième de l'annonce" },
+];
+
 const CITATIONS: readonly Choix[] = [
   {
     enonce: "Texte : « Je ne reviendrai plus. » — On veut l'insérer dans une phrase d'analyse.",
@@ -508,6 +612,182 @@ export const methodeExercicesSecondeBank: TutorBankItemV4[] = [
           "Lis la phrase à voix basse en oubliant les guillemets. Si elle ne tient pas debout, l'insertion est fautive.",
           `Ici, ${c.raison}.`,
           `La forme correcte est : ${c.bonne}`,
+        ),
+      };
+    },
+  },
+
+  /* ══════════════ LES SECONDS ITEMS ══════════════ */
+
+  {
+    kind: "template",
+    id: "2de_meth_commentaire_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "exercices_methode_2de",
+    microId: "2de_meth_commentaire",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Les quatre phrases sont vraies. Cherche la seule qui apprenne quelque chose à qui a déjà lu le texte.",
+    tags: ["seconde", "méthode", "commentaire", "template"],
+    generate: () => {
+      const c = randomChoice(FAITS_COMMENTAIRE);
+      return {
+        text: `Quelle phrase fait ${c.veut} ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Commenter, c'est relier une forme à un effet. Trois faux amis rôdent autour : la paraphrase, qui redit le texte sans rien ajouter ; le jugement de goût, qui affirme sans preuve ; le renseignement biographique, qui parle de l'auteur et non du texte. Aucun n'est faux — ils sont seulement hors du travail demandé.",
+          "Pose la question du correcteur : « qu'est-ce que j'apprends que je ne savais pas en lisant le texte ? ». Seule l'analyse y répond.",
+          `Ici, ${c.raison}.`,
+          `C'est : « ${c.bonne} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_meth_dissertation_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "exercices_methode_2de",
+    microId: "2de_meth_dissertation",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une problématique n'est ni le sujet recopié, ni la réponse. Elle doit rendre les deux camps défendables.",
+    tags: ["seconde", "méthode", "dissertation", "template"],
+    generate: () => {
+      const c = randomChoice(PROBLEMATIQUES);
+      return {
+        text: `Sujet : « ${c.sujet} »\n\nQuelle formulation est une problématique ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "La problématique tient tout le devoir : elle transforme le sujet en tension, de sorte qu'un plan devienne possible. Elle échoue de trois façons — recopier le sujet, ce qui n'ouvre rien ; y répondre d'emblée, ce qui ferme la discussion ; ou glisser vers une question voisine, plus commode et hors sujet.",
+          "Vérifie qu'on peut défendre les deux camps après l'avoir lue. Si une réponse s'impose déjà, ce n'est pas une problématique.",
+          `Ici, ${c.raison}.`,
+          `C'est : « ${c.bonne} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_meth_contraction_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "exercices_methode_2de",
+    microId: "2de_meth_contraction",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Divise par quatre, puis prends 10 % du résultat — en plus et en moins.",
+    tags: ["seconde", "méthode", "contraction", "template"],
+    generate: () => {
+      const c = randomChoice(COMPTES);
+      return {
+        text: `${c.enonce}\n\nQuel nombre de mots est accepté ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "La contraction se fait au quart du texte, avec une tolérance de dix pour cent en plus ou en moins. C'est la seule règle de l'exercice qui se vérifie sans lire : hors des bornes, la copie est sanctionnée quelle que soit sa qualité. Le nombre de mots s'indique d'ailleurs en fin de copie.",
+          "Deux calculs, pas un : divise le total par quatre pour obtenir la cible, puis prends le dixième de cette cible pour obtenir la marge de part et d'autre.",
+          `Ici, ${c.raison}.`,
+          `On accepte ${c.bonne}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_meth_essai_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "exercices_methode_2de",
+    microId: "2de_meth_essai",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "L'essai attend un « je », mais un « je » qui apporte quelque chose. Cherche celui qui donne une raison.",
+    tags: ["seconde", "méthode", "essai", "template"],
+    generate: () => {
+      const c = randomChoice(FAITS_ESSAI);
+      return {
+        text: `Quelle phrase est ${c.veut} ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "L'essai suit la contraction et s'en détache : il ne résume plus, il discute. C'est le seul exercice où le « je » est attendu — mais un avis n'y suffit pas. Il faut une raison, et de préférence une lecture ou une expérience qui la porte. À l'inverse, une leçon récitée à la troisième personne n'engage personne : elle rate l'exercice par l'autre bout.",
+          "Cherche deux choses dans chaque phrase : quelqu'un parle-t-il en son nom ? et donne-t-il de quoi le suivre ? Il faut les deux.",
+          `Ici, ${c.raison}.`,
+          `C'est : « ${c.bonne} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_meth_explication_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "exercices_methode_2de",
+    microId: "2de_meth_explication",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Ce sont les contraintes qui distinguent ces exercices, pas leur sujet — qui peut être le même.",
+    tags: ["seconde", "méthode", "exercices", "template"],
+    generate: () => {
+      const c = randomChoice(CONTRAINTES);
+      return {
+        text: `« ${c.contrainte} »\n\nÀ quel exercice cette contrainte appartient-elle ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.rep, DEUX_EXERCICES),
+        expected: [c.rep],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Quatre exercices peuvent porter sur le même texte et ne demandent pourtant pas le même travail. L'explication suit l'ordre du texte ; le commentaire le quitte pour regrouper en axes ; la contraction restitue sans interpréter et garde la voix de l'auteur ; la dissertation part d'une question et convoque plusieurs œuvres.",
+          "Demande-toi ce que la contrainte interdit. Interdire d'interpréter désigne la contraction ; interdire de partir d'un texte unique désigne la dissertation.",
+          `Ici, ${c.raison}.`,
+          `C'est ${c.rep}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "2de_meth_citation_tpl_2",
+    niveau: "seconde",
+    matiere: "francais",
+    notionId: "exercices_methode_2de",
+    microId: "2de_meth_citation",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Lis chaque phrase à voix basse en oubliant les guillemets. Une seule ne tient pas debout.",
+    tags: ["seconde", "méthode", "citation", "template"],
+    generate: () => {
+      const c = randomChoice(FAUTIVES);
+      return {
+        text: `Laquelle de ces insertions de citation est fautive ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.bonne, c.faux),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une citation se coud dans la phrase qui l'accueille, et la faute la plus fréquente en copie est toujours la même : raccrocher par « que » une citation restée à la première personne. Trois insertions correctes existent — adapter la personne hors des guillemets, détacher par un deux-points, ou fondre quelques mots dans sa propre phrase.",
+          "Efface les guillemets et relis. Si les personnes ne se raccordent plus, l'insertion est fautive.",
+          `Ici, ${c.raison}.`,
+          `L'insertion fautive est : ${c.bonne}`,
         ),
       };
     },
