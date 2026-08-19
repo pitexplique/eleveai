@@ -50,12 +50,22 @@ export const EDITEUR = {
 export const VENDEUR = {
   nomJuridique: "Frédéric Lacoste",
   nomCommercial: "EleveAI",
-  forme: "Entrepreneur individuel (EI)",
-  siren: "", // 9 chiffres, tel qu'inscrit au répertoire INSEE
-  adresse: "", // adresse de l'entreprise individuelle
-  telephone: "", // exigé dès la première vente à distance à un consommateur
+  forme: "Entrepreneur individuel — micro-entrepreneur",
+  siren: "399856558", // répertoire INSEE ; compte actif depuis le 16/04/2023
+  /* ⚠️ L'ADRESSE PROFESSIONNELLE, PAS CELLE DU DOMICILE. L'Urssaf en connaît
+     deux ; c'est l'adresse d'établissement qui se publie, et elle seule. */
+  adresse: "249 avenue du Général de Gaulle, 97410 Saint-Pierre, La Réunion",
+  /* Exigé dès la première vente à distance à un consommateur.
+     ⚠️ Écrit en international : à La Réunion l'indicatif +262 REMPLACE le 0
+     initial, il ne s'y ajoute pas. « +262 0692… » ne se compose depuis nulle
+     part. En local, ce même numéro se forme 0692 74 29 58. */
+  telephone: "+262 692 74 29 58",
   /* Franchise en base : pas de TVA collectée, donc prix TTC = prix HT, et cette
-     mention sur chaque facture. ⛔ Ne pas activer Stripe Tax tant qu'elle vaut. */
+     mention sur chaque facture. ⛔ Ne pas activer Stripe Tax tant qu'elle vaut.
+     ⚠️ Elle ne vaut que sous le seuil de chiffre d'affaires du régime micro, et
+     ce seuil bouge d'une loi de finances à l'autre. Le jour où il est franchi,
+     ce n'est pas une ligne de code qui change : /cgv et /mentions-legales
+     affichent toutes deux cette phrase, et elles deviennent fausses ensemble. */
   mentionTva: "TVA non applicable, article 293 B du code général des impôts",
 };
 
