@@ -323,6 +323,11 @@ export default function FicheCoursClient({
                   <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
                     {p.texte}
                   </p>
+                  {/* ⭐ LE SCHÉMA DE LA PROPRIÉTÉ (19/08). Trois pavés de texte
+                      côte à côte, c'est le bloc qu'un élève survole — un dessin
+                      par propriété lui donne une raison de s'arrêter. Optionnel :
+                      les fiches écrites avant n'en ont pas et ne changent pas. */}
+                  {p.schema && <div className="mt-3">{p.schema}</div>}
                 </div>
               ))}
             </div>

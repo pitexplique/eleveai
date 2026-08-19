@@ -194,6 +194,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les nombres relatifs",
     resume: "Lire, placer et comparer les relatifs ; signe, opposé et valeur absolue.",
   },
+  "maths/5e/relatif-operation": {
+    titre: "Les opérations sur les nombres relatifs",
+    resume: "Additionner et soustraire des relatifs ; règles de signes et distances à 0.",
+  },
   "maths/5e/litteral-calcul": {
     titre: "Le calcul littéral",
     resume: "Comprendre, traduire, substituer et réduire une expression avec des lettres.",

@@ -7,7 +7,17 @@
 import type { ReactNode } from "react";
 
 export type FicheIdentite = { label: string; valeur: string };
-export type FichePropriete = { titre: string; texte: string };
+/**
+ * UNE PROPRIÉTÉ SE DESSINE AUSSI (Frédéric, 19/08/2026 : « inclure sur chaque
+ * définition et propriété un graphique ou schéma »).
+ *
+ * REGLES.md demandait déjà un visuel par micro-compétence, mais les visuels
+ * allaient à la figure de référence et aux exemples : les propriétés, elles,
+ * restaient trois pavés de texte côte à côte — c'est-à-dire l'endroit du cours
+ * qu'un élève survole. `schema` est optionnel pour ne rien casser des 81 fiches
+ * écrites avant lui ; sur les nouvelles, il se remplit.
+ */
+export type FichePropriete = { titre: string; texte: string; schema?: ReactNode };
 export type FicheMethode = { titre: string; texte: string };
 export type FicheUsage = { titre: string; detail: string };
 export type FicheExemple = {
