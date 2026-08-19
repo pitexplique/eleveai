@@ -138,20 +138,31 @@ export default function DevisClient() {
         {/* ── EN-TÊTE ── */}
         <header className="flex flex-wrap items-start justify-between gap-6 border-b-2 border-slate-900 pb-4">
           <div className="text-sm leading-relaxed">
-            <p className="text-2xl font-black leading-none">Devis</p>
-            <p className="mt-2 font-bold">{VENDEUR.nomJuridique}</p>
+            {/* ⚠️ DEUX CHOSES SE DISPUTENT CETTE PLACE, ET ELLES NE JOUENT PAS
+                le même rôle. Le NOM COMMERCIAL est ce dont le client se
+                souvient : il domine, c'est sa fonction. Le NOM CIVIL identifie
+                le vendeur — sans lui, un comptable qui rapproche la facture du
+                répertoire INSEE ne trouve personne, et met le document de côté
+                avant de payer. Aucun des deux ne peut prendre la place de
+                l'autre : le premier vend, le second engage. */}
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
+              Devis
+            </p>
+            <p className="mt-1 text-3xl font-black leading-none">
+              {VENDEUR.nomCommercial}
+            </p>
             {SIGNATURE.titre && (
-              <p className="font-semibold text-slate-700">{SIGNATURE.titre}</p>
+              <p className="mt-1 font-semibold text-slate-700">
+                {SIGNATURE.titre}
+              </p>
             )}
             <p className="text-xs italic text-slate-400">
               {SIGNATURE.accroche}
             </p>
-            {/* ⚠️ La forme juridique reste, sous le titre et non à sa place :
-                « Coach IA » est une accroche, pas une identification de
-                vendeur. Un devis doit porter le nom juridique et la forme. */}
-            <p className="mt-1.5 text-slate-600">
-              {VENDEUR.forme} · {VENDEUR.nomCommercial}
+            <p className="mt-2 font-bold text-slate-700">
+              {VENDEUR.denominationEI}
             </p>
+            <p className="text-slate-600">{VENDEUR.forme}</p>
             {VENDEUR.adresse && <p className="text-slate-600">{VENDEUR.adresse}</p>}
             {VENDEUR.siren && (
               <p className="text-slate-600">SIREN {VENDEUR.siren}</p>
@@ -330,7 +341,9 @@ export default function DevisClient() {
         <section className="mt-8 flex flex-wrap gap-8 border-t border-slate-200 pt-5 text-xs">
           <div className="min-w-[7rem] flex-1">
             <p className="font-black">Le prestataire</p>
-            <p className="mt-1 text-slate-500">{VENDEUR.nomJuridique}</p>
+            {/* Sous une signature, c'est la personne qui s'engage — jamais la
+                marque : c'est une main qui signe, pas un nom commercial. */}
+            <p className="mt-1 text-slate-500">{VENDEUR.denominationEI}</p>
             <div className="mt-10 border-t border-slate-300" />
           </div>
           <div className="min-w-[7rem] flex-1">

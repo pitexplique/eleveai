@@ -50,6 +50,15 @@ export const EDITEUR = {
 export const VENDEUR = {
   nomJuridique: "Frédéric Lacoste",
   nomCommercial: "EleveAI",
+  /* ⚠️ LA DÉNOMINATION DU STATUT EI — obligation, pas ornement. Depuis la loi
+     du 14/02/2022 (art. R526-27 du code de commerce), un entrepreneur
+     individuel doit faire figurer sur ses documents professionnels son nom
+     précédé ou suivi IMMÉDIATEMENT de « EI » ou « entrepreneur individuel ».
+     Accolé au nom, donc — pas relégué sur la ligne d'en dessous.
+     C'est cette chaîne-là qui identifie le vendeur sur un devis ou une
+     facture. `nomCommercial` peut la dominer en gros caractères, c'est même
+     le sens d'un nom commercial : il ne la remplace jamais. */
+  denominationEI: "Frédéric Lacoste EI",
   forme: "Entrepreneur individuel — micro-entrepreneur",
   siren: "399856558", // répertoire INSEE ; compte actif depuis le 16/04/2023
   /* ⚠️ L'ADRESSE PROFESSIONNELLE, PAS CELLE DU DOMICILE. L'Urssaf en connaît

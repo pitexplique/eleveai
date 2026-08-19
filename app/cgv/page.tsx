@@ -122,8 +122,8 @@ export default function CgvPage() {
           {VENDEUR.siren ? (
             <>
               <p>
-                {VENDEUR.nomJuridique} — {VENDEUR.forme}, exerçant sous le nom
-                commercial {VENDEUR.nomCommercial}.
+                {VENDEUR.denominationEI}, {VENDEUR.forme}, exerçant sous le
+                nom commercial {VENDEUR.nomCommercial}.
               </p>
               <p>{VENDEUR.adresse}</p>
               <p>SIREN : {VENDEUR.siren}</p>

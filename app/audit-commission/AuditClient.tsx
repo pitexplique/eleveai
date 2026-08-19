@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { EDITEUR, SIGNATURE } from "@/lib/legal/editeur";
+import { SIGNATURE, VENDEUR } from "@/lib/legal/editeur";
 
 // Les intermédiaires par métier. C'est la même fuite partout — seul le nom du
 // péage change. Garder cette liste courte et vraie : elle sert à choisir vite
@@ -57,8 +57,16 @@ export default function AuditClient() {
             <h1 className="text-2xl font-black leading-none">
               Ce que vous versez aux intermédiaires
             </h1>
-            <p className="mt-1.5 text-sm font-bold">
-              {EDITEUR.nomComplet}
+            {/* Le nom commercial porte le document, le nom civil l'identifie —
+                ce diagnostic est gratuit et n'engage aucun paiement, mais il
+                précède un devis : le dirigeant doit retrouver le même vendeur
+                sur les deux papiers. */}
+            <p className="mt-1.5 text-sm font-black">
+              {VENDEUR.nomCommercial}
+              <span className="font-semibold text-slate-500">
+                {" "}
+                · {VENDEUR.denominationEI}
+              </span>
               {SIGNATURE.titre && (
                 <span className="font-semibold text-slate-500">
                   {" "}

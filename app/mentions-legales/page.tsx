@@ -68,9 +68,10 @@ export default function MentionsLegalesPage() {
 
         {identiteProfessionnelleComplete ? (
           <>
+            {/* « EI » accolé au nom : art. R526-27 du code de commerce. */}
             <p>
-              {VENDEUR.forme}, exerçant sous le nom commercial{" "}
-              {VENDEUR.nomCommercial}.
+              {VENDEUR.denominationEI}, {VENDEUR.forme}, exerçant sous le nom
+              commercial {VENDEUR.nomCommercial}.
             </p>
             <p>Adresse : {VENDEUR.adresse}</p>
             <p>SIREN : {VENDEUR.siren}</p>
