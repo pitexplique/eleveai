@@ -797,6 +797,60 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — ÉCRIRE la somme en $\Sigma$, au lieu de la calculer. Le premier
+    // item déroule le symbole et fait additionner ; celui-ci part de la somme
+    // écrite en toutes lettres et demande sa notation. Les deux bornes sont ce
+    // qui se rate : celle du bas dit où l'on commence, celle du haut où l'on
+    // s'arrête — et l'on s'arrête EN INCLUANT.
+    kind: "template",
+    id: "stmg_suiteT_somme_notation_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_somme",
+    microId: "suiteT_somme_notation",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La borne du BAS est le premier indice, celle du HAUT le dernier — inclus.",
+    tags: ["stmg", "maths", "suites", "template"],
+    generate: () => {
+      const debut = pick([1, 2, 3] as const);
+      const fin = debut + randomInt(3, 6);
+      const bonne = `$\\sum_{k=${debut}}^{${fin}} k$`;
+      const somme = Array.from({ length: fin - debut + 1 }, (_, i) => debut + i);
+      return {
+        text:
+          `Comment note-t-on la somme $${somme.join(" + ")}$ à l'aide du symbole $\\Sigma$ ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `$\\sum_{k=${debut}}^{${fin - 1}} k$`,
+          `$\\sum_{k=${fin}}^{${debut}} k$`,
+          `$\\sum_{k=${debut}}^{${fin}} k^2$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le symbole $\\Sigma$ résume une addition : sous le signe, l'indice et sa valeur de DÉPART ; au-dessus, sa valeur d'ARRIVÉE, incluse ; à droite, le terme à additionner.",
+          "On repère le premier et le dernier terme de la somme, puis ce qui change de l'un à l'autre.",
+          `La somme va de $${debut}$ à $${fin}$ par pas de $1$, et chaque terme est l'indice lui-même : ` +
+            `elle s'écrit donc $\\sum_{k=${debut}}^{${fin}} k$, et compte $${fin - debut + 1}$ termes. ` +
+            `⚠️ S'arrêter à $${fin - 1}$ en oublierait un — la borne du haut est INCLUSE.`,
+          `La notation est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$\\sum_{k=${debut}}^{${fin - 1}} k$`,
+            cause: `a exclu la dernière valeur : il manquerait le terme $${fin}$`,
+          },
+          {
+            choice: `$\\sum_{k=${fin}}^{${debut}} k$`,
+            cause: "a interverti les bornes : celle du bas est le départ, celle du haut l'arrivée",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ suiteT_somme_arithmetique ═══════════════ */
 
   {
@@ -829,6 +883,46 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
           `Il y a $${nbTermes}$ termes, le premier vaut $${fr(termes[0])}$ et le dernier $${fr(termes[dernier])}$ : ` +
             `$S = ${nbTermes} \\times \\dfrac{${fr(termes[0])} + ${fr(termes[dernier])}}{2} = ${fr(somme)}$.`,
           `La somme vaut $${fr(somme)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — COMBIEN DE TERMES, et rien d'autre. Le premier item calcule la
+    // somme entière ; celui-ci isole le facteur qui la fait rater. La formule
+    // demande le NOMBRE de termes, et de $u(0)$ à $u(n)$ il y en a $n+1$ : un de
+    // plus que le rang. C'est le décalage qui fausse toutes les sommes, et il ne
+    // se voit pas dans un résultat — il donne juste un nombre plausible.
+    kind: "template",
+    id: "stmg_suiteT_somme_arithmetique_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_somme",
+    microId: "suiteT_somme_arithmetique",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "On compte les termes, pas les pas : $u(0)$ compte pour un.",
+    tags: ["stmg", "maths", "suites", "piege", "template", "short"],
+    generate: () => {
+      const dernier = randomInt(5, 14);
+      const depart = pick([0, 1] as const);
+      const nbTermes = dernier - depart + 1;
+      return {
+        text:
+          `Pour appliquer la formule de la somme, il faut connaître le NOMBRE de termes. ` +
+          `Combien y a-t-il de termes dans $u(${depart}) + u(${depart + 1}) + \\dots + u(${dernier})$ ?`,
+        format: "short",
+        expected: [String(nbTermes)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le nombre de termes d'une somme allant du rang $p$ au rang $n$ vaut $n - p + 1$. Le « $+1$ » vient de ce que les deux extrémités sont INCLUSES.",
+          "On soustrait les deux rangs — cela donne le nombre de PAS — puis on ajoute $1$ pour compter le terme de départ.",
+          `De $${depart}$ à $${dernier}$ : $${dernier} - ${depart} = ${dernier - depart}$ pas, donc $${dernier - depart} + 1 = ${nbTermes}$ termes. ` +
+            `⚠️ Répondre $${dernier - depart}$ est l'erreur classique${depart === 0 ? `, et répondre $${dernier}$ en est une autre : $u(0)$ compte pour un terme` : ""}. ` +
+            `Dans la formule $\\text{nombre de termes} \\times \\dfrac{\\text{premier} + \\text{dernier}}{2}$, ` +
+            `un terme oublié fausse tout le résultat sans que rien ne le signale.`,
+          `Il y a $${nbTermes}$ termes.`
         ),
       };
     },
@@ -868,6 +962,67 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
             `Vérification par addition directe : $${termes.map((v) => fr(v)).join(" + ")} = ${fr(somme)}$.`,
           `La somme vaut $${fr(somme)}$.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — LA BONNE FORMULE. Le premier item calcule une somme géométrique ;
+    // celui-ci met sous les yeux un élève qui lui applique la formule
+    // ARITHMÉTIQUE. Les deux existent, se ressemblent dans l'énoncé, et rien
+    // dans le résultat ne dit qu'on s'est trompé de famille : le nombre sort,
+    // simplement il est faux.
+    kind: "template",
+    id: "stmg_suiteT_somme_geometrique_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_somme",
+    microId: "suiteT_somme_geometrique",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La demi-somme des extrêmes ne vaut que si l'on AJOUTE toujours la même chose : ici on MULTIPLIE.",
+    tags: ["stmg", "maths", "suites", "piege", "template"],
+    generate: () => {
+      const u0 = pick([2, 3, 4, 5, 6, 10] as const);
+      const q = pick([2, 3] as const);
+      const dernier = randomInt(3, 6);
+      const nbTermes = dernier + 1;
+      const termes = termesGeo(u0, q, nbTermes);
+      const juste = u0 * ((Math.pow(q, nbTermes) - 1) / (q - 1));
+      const faux = (nbTermes * (termes[0] + termes[dernier])) / 2;
+      const bonne = `il a utilisé la formule des suites ARITHMÉTIQUES ; ici la suite est géométrique`;
+      return {
+        text:
+          `Pour calculer $u(0) + \\dots + u(${dernier})$ d'une suite géométrique de premier terme $${u0}$ ` +
+          `et de raison $${q}$, un élève écrit $${nbTermes} \\times \\dfrac{${fr(termes[0])} + ${fr(termes[dernier])}}{2} = ${fr(faux)}$. ` +
+          `Où est l'erreur ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `il s'est trompé dans le nombre de termes : il y en a $${dernier}$`,
+          `il fallait diviser par $${q}$ au lieu de $2$`,
+          `il n'y a pas d'erreur : la formule marche pour toutes les suites`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Chaque famille a sa formule. Pour une suite ARITHMÉTIQUE : nombre de termes $\\times$ demi-somme des extrêmes. Pour une suite GÉOMÉTRIQUE : $u_0 \\times \\dfrac{1 - q^{\\,\\text{nb termes}}}{1 - q}$.",
+          "On identifie d'abord la nature de la suite, ENSUITE seulement on choisit la formule.",
+          `Formule géométrique : $${u0} \\times \\dfrac{${q}^{${nbTermes}} - 1}{${q} - 1} = ${fr(juste)}$. ` +
+            `La formule arithmétique donnait $${fr(faux)}$ — un écart de $${fr(Math.round((faux - juste) * 100) / 100)}$. ` +
+            `Elle suppose que l'écart entre deux termes reste constant ; ici il double à chaque rang, ` +
+            `si bien que la demi-somme des extrêmes ne représente plus la moyenne des termes.`,
+          `L'erreur est d'avoir appliqué la formule arithmétique : la somme vaut $${fr(juste)}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `il n'y a pas d'erreur : la formule marche pour toutes les suites`,
+            cause: `elle ne vaut que si l'on ajoute toujours la même chose — ici les termes sont multipliés par $${q}$`,
+          },
+          {
+            choice: `il s'est trompé dans le nombre de termes : il y en a $${dernier}$`,
+            cause: `le nombre de termes est bien $${nbTermes}$ : de $u(0)$ à $u(${dernier})$, les deux bornes sont incluses`,
+          },
+        ],
       };
     },
   },
@@ -932,6 +1087,58 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — DEUX questions sur la même situation. Le premier item classe
+    // une situation ; celui-ci pose le placement une bonne fois et demande
+    // laquelle des deux questions réclame une SOMME. C'est le tri qu'un sujet
+    // de bac impose vraiment : les deux questions se suivent, sur les mêmes
+    // données, et seule la seconde cumule.
+    kind: "template",
+    id: "stmg_suiteT_somme_reconnaitre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_somme_situations",
+    microId: "suiteT_somme_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« Combien à la fin de la 8ᵉ année » : un terme. « Combien AU TOTAL sur les 8 années » : une somme.",
+    tags: ["stmg", "maths", "suites", "template"],
+    generate: () => {
+      const placement = pick(PLACEMENTS);
+      const montant = pick([500, 800, 1000, 1200, 2000] as const);
+      const duree = pick([4, 5, 6, 8, 10] as const);
+      const bonne = `« Combien a-t-on versé AU TOTAL au bout de $${duree}$ ans ? »`;
+      return {
+        text:
+          `Sur ${placement}, on verse $${eur(montant)}$ au début de chaque année pendant $${duree}$ ans. ` +
+          `Laquelle de ces questions demande le calcul d'une SOMME de termes ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `« Combien vaut le versement de la $${duree}$ᵉ année ? »`,
+          `« Au bout de combien d'années le versement annuel dépasse-t-il $${eur(montant * 2)}$ ? »`,
+          `« Quel est le taux d'évolution d'un versement à l'autre ? »`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un TERME répond à « combien à telle date » ; une SOMME répond à « combien en tout depuis le début ». Le mot qui les sépare est « au total », ou « cumulé ».",
+          "On se demande si la réponse tient en une valeur relevée à une date, ou s'il faut additionner toutes les valeurs.",
+          `« Au total au bout de $${duree}$ ans » cumule les $${duree}$ versements : c'est une somme, ` +
+            `qui vaut ici $${duree} \\times ${eur(montant)} = ${eur(montant * duree)}$ de versements. ` +
+            `Les trois autres questions portent sur UNE valeur : un versement précis, un rang de dépassement, un taux. ` +
+            `⚠️ La valeur ACQUISE, elle, serait encore autre chose : la somme des versements PLUS les intérêts de chacun.`,
+          `C'est la question qui demande le total versé.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `« Combien vaut le versement de la $${duree}$ᵉ année ? »`,
+            cause: "porte sur UN terme, celui de rang donné — aucun cumul",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ suiteT_somme_versements ═══════════════ */
 
   {
@@ -981,6 +1188,53 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — CE QUE LES INTÉRÊTS ONT RAPPORTÉ. Le premier item calcule la
+    // valeur acquise ; celui-ci la compare à ce qu'on a réellement sorti de sa
+    // poche. La différence est le gain — et c'est le seul chiffre qui intéresse
+    // l'épargnant. Le total versé est une simple multiplication, la valeur
+    // acquise une somme géométrique : les confondre efface tout le gain.
+    kind: "template",
+    id: "stmg_suiteT_somme_versements_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_somme_situations",
+    microId: "suiteT_somme_versements",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Gain $=$ valeur acquise $-$ total versé. Le total versé, c'est le versement multiplié par le nombre d'années.",
+    tags: ["stmg", "maths", "suites", "template", "short"],
+    generate: () => {
+      const placement = pick(PLACEMENTS);
+      const versement = pick([500, 800, 1000, 1200, 2000] as const);
+      const t = pick([2, 3, 4, 5] as const);
+      const q = 1 + t / 100;
+      const n = randomInt(3, 6);
+      const acquise = versement * q * ((Math.pow(q, n) - 1) / (q - 1));
+      const verse = versement * n;
+      const gain = Math.round(acquise) - verse;
+      return {
+        text:
+          `Sur ${placement} rémunéré à $${t}\\,\\%$ par an, on verse $${eur(versement)}$ au début de chaque année ` +
+          `pendant $${n}$ ans. La valeur acquise à la fin vaut $${eur(Math.round(acquise))}$. ` +
+          `Combien les intérêts ont-ils rapporté, en euros ?`,
+        format: "short",
+        expected: [String(gain)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La valeur acquise rassemble deux choses : l'argent qu'on a versé, et les intérêts que chaque versement a produits jusqu'à la fin. Le gain est donc la valeur acquise diminuée du total versé.",
+          "On calcule d'abord le total versé — une simple multiplication —, puis on le retranche à la valeur acquise.",
+          `Total versé : $${n} \\times ${eur(versement)} = ${eur(verse)}$. ` +
+            `Valeur acquise : $${eur(Math.round(acquise))}$. ` +
+            `Gain : $${eur(Math.round(acquise))} - ${eur(verse)} = ${eur(gain)}$. ` +
+            `Chaque versement n'a pas travaillé le même temps : le premier a produit des intérêts pendant $${n}$ ans, ` +
+            `le dernier pendant un an seulement. C'est ce qui fait de la valeur acquise une SOMME, et non un simple produit.`,
+          `Les intérêts ont rapporté $${eur(gain)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ suiteT_somme_emprunt ═══════════════ */
   //
   // Le remboursement par mensualités constantes est un CONTEXTE, pas un contenu
@@ -1023,6 +1277,48 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
           `Total remboursé : $${mois} \\times ${mensualite} = ${fr(total)}$ €. ` +
             `Coût du crédit : $${fr(total)} - ${capital} = ${fr(cout)}$ €.`,
           `Le crédit coûte $${fr(cout)}$ €.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la MENSUALITÉ retrouvée depuis le coût. Le premier item calcule
+    // le coût du crédit à partir des mensualités ; celui-ci fait le chemin
+    // inverse. C'est la question qu'on pose à un conseiller — « pour un coût
+    // total de tant sur tant de mois, combien je paie par mois ? » — et elle
+    // sépare bien le TOTAL remboursé du capital emprunté.
+    kind: "template",
+    id: "stmg_suiteT_somme_emprunt_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_somme_situations",
+    microId: "suiteT_somme_emprunt",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Total remboursé $=$ capital $+$ coût du crédit. La mensualité, c'est ce total divisé par le nombre de mois.",
+    tags: ["stmg", "maths", "suites", "template", "short"],
+    generate: () => {
+      const mois = pick([24, 36, 48, 60] as const);
+      const mensualite = pick([150, 180, 200, 240, 250, 300] as const);
+      const total = mensualite * mois;
+      const cout = pick([600, 900, 1200, 1500] as const);
+      const capital = total - cout;
+      return {
+        text:
+          `Un crédit de $${eur(capital)}$ est remboursé en $${mois}$ mensualités égales, ` +
+          `et le coût du crédit s'élève à $${eur(cout)}$. Quelle est la mensualité, en euros ?`,
+        format: "short",
+        expected: [String(mensualite)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le TOTAL remboursé est la somme de toutes les mensualités. Il se compose du capital emprunté et du coût du crédit — ce que la banque prélève en plus.",
+          "On additionne le capital et le coût pour obtenir le total remboursé, puis on le divise par le nombre de mensualités.",
+          `Total remboursé : $${eur(capital)} + ${eur(cout)} = ${eur(total)}$. ` +
+            `Mensualité : $\\dfrac{${total}}{${mois}} = ${eur(mensualite)}$. ` +
+            `⚠️ Diviser le seul capital par $${mois}$ donnerait $${eur(Math.round((capital / mois) * 100) / 100)}$ : ` +
+            `on oublierait le coût du crédit, qui est précisément ce qui distingue un emprunt d'un simple étalement.`,
+          `La mensualité est de $${eur(mensualite)}$.`
         ),
       };
     },
@@ -1077,6 +1373,67 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
             `À l'année $${n}$ : A vaut $${eur(A[n])}$ k€ et B vaut $${eur(B[n])}$ k€.`,
           `L'enseigne B dépasse l'enseigne A au bout de $${n}$ ans.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — QUI GAGNE À LA FIN, sans calculer. Le premier item cherche le
+    // rang où le second placement dépasse le premier ; celui-ci demande, à long
+    // terme, lequel l'emporte. La réponse ne dépend QUE de la raison : un
+    // capital de départ deux fois plus gros ne pèse rien devant un taux
+    // supérieur, dès qu'on laisse assez d'années.
+    kind: "template",
+    id: "stmg_suiteT_comparer_geometriques_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_comparer",
+    microId: "suiteT_comparer_geometriques",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le capital de départ donne une avance FIXE ; la raison, elle, agit à chaque année.",
+    tags: ["stmg", "maths", "suites", "piege", "template"],
+    generate: () => {
+      const aA = pick([2000, 2400, 2500] as const);
+      const tA = pick([1, 2] as const);
+      const aB = pick([1000, 1100, 1200] as const);
+      const tB = pick([15, 20, 25] as const);
+      const A = termesGeo(aA, 1 + tA / 100, 40);
+      const B = termesGeo(aB, 1 + tB / 100, 40);
+      const croisement = B.findIndex((v, k) => v > A[k]);
+      const bonne = `le placement $B$, parce que sa raison est plus grande`;
+      return {
+        text:
+          `Placement $A$ : $${eur(aA)}$ à $${tA}\\,\\%$ par an. ` +
+          `Placement $B$ : $${eur(aB)}$ à $${tB}\\,\\%$ par an. ` +
+          `Sur une très longue durée, lequel finit par l'emporter ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `le placement $A$, parce qu'il part de plus haut`,
+          `ils restent toujours dans le même ordre qu'au départ`,
+          `on ne peut pas le savoir sans fixer la durée`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Deux suites géométriques à termes positifs finissent toujours par se classer selon leur RAISON : celle qui multiplie le plus vite dépasse l'autre, quel que soit son retard de départ.",
+          "On compare les raisons, pas les premiers termes : l'avance initiale est fixe, l'écart de raison se compose année après année.",
+          `$A$ part avec $${eur(aA - aB)}$ d'avance, mais gagne seulement $${tA}\\,\\%$ par an contre $${tB}\\,\\%$ pour $B$. ` +
+            `Le croisement se produit au bout de $${croisement}$ ans, et l'écart ne cesse ensuite de se creuser : ` +
+            `au rang $${croisement + 10}$, $A$ vaut $${eur(Math.round(A[croisement + 10]))}$ contre $${eur(Math.round(B[croisement + 10]))}$ pour $B$. ` +
+            `⚠️ Sur les toutes premières années, $A$ est bel et bien devant — c'est ce qui rend le piège efficace.`,
+          `C'est $B$ qui l'emporte : à long terme, seule la raison compte.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `le placement $A$, parce qu'il part de plus haut`,
+            cause: "l'avance de départ est une somme FIXE ; l'écart de raison, lui, se multiplie chaque année",
+          },
+          {
+            choice: `ils restent toujours dans le même ordre qu'au départ`,
+            cause: `l'ordre bascule au bout de $${croisement}$ ans, et ne revient jamais`,
+          },
+        ],
       };
     },
   },
