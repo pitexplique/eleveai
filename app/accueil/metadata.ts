@@ -30,7 +30,7 @@ const TITRE = "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac";
 // dans la troisième, qui porte l'accord de « conçues ».
 // 143 signes ; Google coupe autour de 155.
 const PROMESSE =
-  "EleveAI propose ce qui correspond. Dire qui on est et ce qu'on cherche suffit. Des ressources conçues, sélectionnées et vérifiées. Du CP au Bac.";
+  "EleveAI propose ce qui correspond. Une classe, une question, c'est tout. Des ressources conçues, sélectionnées et vérifiées. Du CP au Bac.";
 
 export const metadata: Metadata = {
   // ⭐ `absolute` ET NON une simple chaîne. Le layout applique le gabarit

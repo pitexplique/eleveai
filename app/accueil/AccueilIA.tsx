@@ -131,9 +131,16 @@ export default function AccueilIA() {
                 imposé la coupure ET laissé les replis se faire n'importe où
                 autour d'elle. */}
             <h1 className="text-lg font-semibold leading-snug text-slate-900 sm:text-xl">
-              <span className="block">
-                Dire qui on est et ce qu&rsquo;on cherche suffit
-              </span>
+              {/* ⭐ SIMPLIFIÉE LE 19/08 (Frédéric : « trop compliqué à lire »).
+                  Elle disait « Dire qui on est et ce qu'on cherche suffit » :
+                  un infinitif en sujet, deux propositions coordonnées, et le
+                  verbe principal tout à la fin. On ne sait ce qu'on lit qu'au
+                  dernier mot — sur un premier écran, c'est une phrase qu'on
+                  saute.
+                  Trois groupes courts à la place, dans l'ordre où la page les
+                  demande : la classe, la question, et la promesse que ça
+                  s'arrête là. Rien à décoder, et l'information est la même. */}
+              <span className="block">Une classe, une question, c&rsquo;est tout</span>
               {/* ⭐ LA SECONDE LIGNE DESCEND D'UN CRAN (Frédéric, 19/08 : « il y
                   a trop à lire, et la seconde phrase doit avoir une police plus
                   basse »). Deux lignes de même taille, c'est deux titres : l'œil
