@@ -1636,13 +1636,13 @@ function voc_contexte(level: Cycle4Level): QcmItem[] {
       {
         text: "Dans « Le sentier serpentait entre les arbres », que veut dire « serpentait » ?",
         correct: "faisait des courbes, des virages",
-        wrongs: ["montait tout droit", "descendait très vite", "s'arrêtait net"],
+        wrongs: ["montait droit vers le sommet", "descendait à pic vers le bas", "s'interrompait brusquement"],
         methode: "Le contexte (un sentier entre les arbres) éclaire le mot.",
       },
       {
         text: "Dans « Il resta impassible malgré les cris », « impassible » veut dire...",
         correct: "sans montrer d'émotion",
-        wrongs: ["très agité", "terrifié", "hilare"],
+        wrongs: ["très agité et nerveux", "franchement terrifié", "au bord du fou rire"],
         methode: "On infère le sens grâce au contraste avec « les cris ».",
       },
       {
@@ -1669,7 +1669,7 @@ function voc_contexte(level: Cycle4Level): QcmItem[] {
         {
           text: "Dans « Le chevalier, intrépide, fonça sur le dragon », « intrépide » veut dire...",
           correct: "qui n'a pas peur",
-          wrongs: ["très prudent", "endormi", "malade"],
+          wrongs: ["prudent à l'excès", "profondément endormi", "gravement malade"],
           methode: "On devine le sens grâce à l'action (foncer sur le dragon).",
         },
         {
@@ -1683,13 +1683,13 @@ function voc_contexte(level: Cycle4Level): QcmItem[] {
         {
           text: "Dans « Il affichait une mine hautaine et méprisante », « hautaine » veut dire...",
           correct: "qui se croit supérieur aux autres",
-          wrongs: ["très joyeuse", "timide et effacée", "amicale"],
+          wrongs: ["franchement joyeuse et souriante", "timide et vraiment très effacée", "amicale et pleine de chaleur"],
           methode: "Le contexte « méprisante » oriente le sens.",
         },
         {
           text: "Dans « Sa fortune était un mirage, elle s'évanouit en un jour », « mirage » désigne...",
           correct: "une illusion trompeuse",
-          wrongs: ["une somme réelle", "un objet solide", "un lieu précis"],
+          wrongs: ["une somme bien réelle", "un objet parfaitement solide", "un lieu tout à fait précis"],
           methode: "Le contexte (elle « s'évanouit ») montre qu'il s'agit d'une illusion.",
         },
         {
@@ -1708,14 +1708,14 @@ function voc_contexte(level: Cycle4Level): QcmItem[] {
         },
         {
           text: "Dans « Ce discours prône la tolérance entre les peuples », « prône » veut dire...",
-          correct: "recommande, défend avec force",
-          wrongs: ["interdit", "ignore", "moque"],
+          correct: "recommande avec force",
+          wrongs: ["interdit et condamne", "ignore complètement", "tourne en dérision"],
           methode: "Le sens se déduit du thème défendu (la tolérance).",
         },
         {
           text: "Dans « Sa lutte fut opiniâtre, il ne renonça jamais », « opiniâtre » veut dire...",
           correct: "acharnée, tenace",
-          wrongs: ["molle", "brève", "joyeuse"],
+          wrongs: ["molle et hésitante", "brève et sans suite", "joyeuse et légère"],
           methode: "Le contexte « il ne renonça jamais » donne le sens.",
         },
       ],
@@ -1816,7 +1816,7 @@ function voc_formation(level: Cycle4Level): QcmItem[] {
       {
         text: "Le suffixe « -eur » dans « nageur » sert à désigner...",
         correct: "la personne qui fait l'action",
-        wrongs: ["le contraire du mot", "un lieu", "un petit objet"],
+        wrongs: ["le contraire du mot de base", "le lieu où l'action se fait", "l'action elle-même, en nom"],
         methode: "Le suffixe « -eur » forme un nom d'agent (celui qui agit).",
       },
       {
@@ -1828,7 +1828,7 @@ function voc_formation(level: Cycle4Level): QcmItem[] {
       {
         text: "Dans le mot « déplacer », le préfixe « dé- » marque...",
         correct: "le contraire ou l'éloignement",
-        wrongs: ["la répétition", "la personne", "le lieu"],
+        wrongs: ["la répétition de l'action", "la personne qui fait l'action", "le lieu où l'on se trouve"],
         methode: "« dé- » inverse ou éloigne (dé-faire, dé-placer).",
       },
       {
@@ -1840,13 +1840,13 @@ function voc_formation(level: Cycle4Level): QcmItem[] {
       {
         text: "Le suffixe « -able » dans « lavable » signifie...",
         correct: "qui peut être fait",
-        wrongs: ["le contraire", "un lieu", "une personne"],
+        wrongs: ["qui a déjà été fait", "qui fait l'action", "le lieu de l'action"],
         methode: "« -able » veut dire « qui peut être » (lavable = qui peut être lavé).",
       },
       {
         text: "Le suffixe « -iste » dans « journaliste » désigne...",
         correct: "une personne qui exerce un métier",
-        wrongs: ["un lieu", "une action passée", "un petit objet"],
+        wrongs: ["le lieu où l'on exerce un métier", "une action qui est déjà terminée", "un objet de très petite taille"],
         methode: "« -iste » forme des noms de métier ou de partisan.",
       },
     ],
@@ -1855,7 +1855,7 @@ function voc_formation(level: Cycle4Level): QcmItem[] {
         {
           text: "Le suffixe « -tion » dans « libération » sert à former...",
           correct: "un nom qui désigne une action ou son résultat",
-          wrongs: ["un verbe à l'infinitif", "un adjectif de couleur", "un adverbe de lieu"],
+          wrongs: ["un verbe à l'infinitif formé sur un nom", "un adjectif qui exprime une qualité durable", "un adverbe qui indique la manière d'agir"],
           methode: "Le suffixe « -tion » transforme un verbe en nom d'action.",
         },
       ],
@@ -1863,7 +1863,7 @@ function voc_formation(level: Cycle4Level): QcmItem[] {
         {
           text: "Le préfixe « anti- » dans « antiesclavagiste » signifie...",
           correct: "contre, opposé à",
-          wrongs: ["après", "avec", "petit"],
+          wrongs: ["après, à la suite", "avec, en compagnie", "petit, réduit"],
           methode: "« anti- » marque l'opposition (contre quelque chose).",
         },
       ],
@@ -1878,31 +1878,35 @@ function voc_reemploi(level: Cycle4Level): QcmItem[] {
       {
         text: "Quelle phrase emploie correctement l'adverbe « fièrement » ?",
         correct: "Le champion brandit fièrement sa médaille.",
-        wrongs: ["Le fièrement est posé sur la table.", "Il mange un fièrement.", "Fièrement bleu la maison."],
+        // Les leurres ne sont plus des phrases absurdes (« Il mange un
+        // fièrement. ») mais la faute que l'élève commet vraiment : employer
+        // l'adverbe comme un adjectif, puis comme un nom. Même longueur, et
+        // il faut connaître la classe du mot pour trancher.
+        wrongs: ["Le champion est très fièrement de sa médaille.", "Le champion a montré un grand fièrement.", "Le fièrement du champion était visible."],
         methode: "L'adverbe accompagne un verbe et garde du sens dans la phrase.",
       },
       {
         text: "Quelle phrase emploie correctement l'adjectif « courageux » ?",
         correct: "Le pompier courageux entra dans les flammes.",
-        wrongs: ["Le courageux roule vite.", "Il boit un courageux.", "Courageux la porte s'ouvre."],
+        wrongs: ["Le pompier montra un grand courageux ce jour-là.", "Le pompier agit très courageux dans les flammes.", "Le courageux du pompier a sauvé deux personnes."],
         methode: "L'adjectif qualifie un nom et convient au sens.",
       },
       {
         text: "Quelle phrase emploie correctement le verbe « affronter » ?",
         correct: "Le héros doit affronter mille dangers.",
-        wrongs: ["Il affronte sur la table.", "Un affronter dans le tiroir.", "Affronter bleu la maison."],
+        wrongs: ["Le héros a montré un grand affronter.", "Le héros marcha affronter vers la porte.", "L'affronter du héros impressionna la foule."],
         methode: "On réemploie le verbe dans une phrase qui a du sens.",
       },
       {
         text: "Quelle phrase emploie correctement le nom « épreuve » ?",
         correct: "Il a surmonté cette épreuve avec courage.",
-        wrongs: ["Il épreuve la porte.", "Une épreuve bleue mange.", "Épreuve vite le mur."],
+        wrongs: ["Il a épreuve ce moment avec beaucoup de courage.", "Il marcha épreuve jusqu'au bout du chemin.", "Il s'est senti très épreuve toute la journée."],
         methode: "Le nom s'emploie dans une phrase qui a du sens.",
       },
       {
         text: "Quelle phrase emploie correctement l'adverbe « prudemment » ?",
         correct: "Elle traversa la rue prudemment.",
-        wrongs: ["Le prudemment est cassé.", "Il boit un prudemment.", "Prudemment rouge la maison."],
+        wrongs: ["Elle est très prudemment ce matin.", "Elle a montré un grand prudemment.", "Le prudemment d'Élise m'a rassuré."],
         methode: "L'adverbe accompagne un verbe.",
       },
     ],
@@ -1911,7 +1915,7 @@ function voc_reemploi(level: Cycle4Level): QcmItem[] {
         {
           text: "Quelle phrase emploie correctement l'adjectif « méprisant » ?",
           correct: "Il lança un regard méprisant à son adversaire.",
-          wrongs: ["Le méprisant roule sur la route.", "Il boit un méprisant.", "Méprisant vite la porte."],
+          wrongs: ["Il lança un grand méprisant à son adversaire.", "Il s'adressa très méprisant à son adversaire.", "Le méprisant de cet homme choqua l'assemblée."],
           methode: "L'adjectif qualifie un nom et convient au sens de la phrase.",
         },
       ],
@@ -1919,7 +1923,7 @@ function voc_reemploi(level: Cycle4Level): QcmItem[] {
         {
           text: "Quelle phrase emploie correctement le nom « injustice » ?",
           correct: "Le texte dénonce l'injustice faite aux plus faibles.",
-          wrongs: ["Il court injustice le matin.", "L'injustice bleue mange une pomme.", "Injustice sur la table."],
+          wrongs: ["Le texte injustice les plus faibles de la société.", "Ce comportement me paraît vraiment très injustice.", "Il a parlé injustice pendant toute la réunion."],
           methode: "On réemploie le mot dans une phrase qui a du sens.",
         },
       ],
@@ -1982,9 +1986,9 @@ function gram_constituants(level: Cycle4Level): QcmItem[] {
         text: "« Le chat dort sur le mur tiède. » Pourquoi est-ce une phrase simple ?",
         correct: "elle ne contient qu'un seul verbe conjugué",
         wrongs: [
-          "elle est courte",
+          "elle est courte et facile à lire d'un trait",
           "elle ne contient aucun complément",
-          "elle se termine par un point",
+          "elle se termine par un point simple",
         ],
         methode:
           "C'est le nombre de verbes conjugués qui décide, jamais la longueur.",
@@ -1993,9 +1997,9 @@ function gram_constituants(level: Cycle4Level): QcmItem[] {
         text: "« Quand la pluie s'arrêta, les enfants sortirent. » Pourquoi est-ce une phrase complexe ?",
         correct: "elle contient deux verbes conjugués",
         wrongs: [
-          "elle est longue",
-          "elle commence par « Quand »",
-          "elle contient une virgule",
+          "elle est longue et bien remplie",
+          "elle commence par le mot « Quand »",
+          "elle contient une virgule au milieu",
         ],
         methode:
           "« s'arrêta » et « sortirent » : deux verbes conjugués, donc deux propositions.",
@@ -2012,7 +2016,7 @@ function gram_constituants(level: Cycle4Level): QcmItem[] {
         {
           text: "Dans « Le soleil brillait ; les oiseaux chantaient », les propositions sont...",
           correct: "juxtaposées (séparées par un point-virgule)",
-          wrongs: ["coordonnées par « et »", "subordonnées", "réduites à une seule"],
+          wrongs: ["coordonnées par la conjonction « et »", "subordonnées l'une à l'autre par « que »", "réduites à une seule et même proposition"],
           methode: "La juxtaposition relie les propositions par une ponctuation.",
         },
         {
@@ -2032,13 +2036,13 @@ function gram_constituants(level: Cycle4Level): QcmItem[] {
         {
           text: "Dans « Le livre que je lis est passionnant », « que je lis » est...",
           correct: "une proposition subordonnée relative",
-          wrongs: ["une proposition principale", "un complément circonstanciel", "un groupe adjectival"],
+          wrongs: ["une proposition principale unique", "un complément circonstanciel de temps", "un groupe adjectival détaché"],
           methode: "La relative, introduite par un pronom relatif, complète un nom.",
         },
         {
           text: "Dans « La maison où j'ai grandi a été vendue », « où j'ai grandi » est...",
           correct: "une proposition subordonnée relative",
-          wrongs: ["une proposition principale", "une subordonnée de temps", "un groupe nominal"],
+          wrongs: ["une proposition principale unique", "une subordonnée circonstancielle de temps", "un groupe nominal complément"],
           methode: "« où » est ici un pronom relatif qui introduit une relative.",
         },
       ],
@@ -2046,7 +2050,7 @@ function gram_constituants(level: Cycle4Level): QcmItem[] {
         {
           text: "Dans « Bien qu'il soit tard, il continue de travailler », la subordonnée exprime...",
           correct: "l'opposition ou la concession",
-          wrongs: ["la cause", "le but", "la comparaison"],
+          wrongs: ["la cause ou la justification", "le but que l'on poursuit", "la comparaison entre deux faits"],
           methode: "En 3e, on reconnaît les subordonnées circonstancielles et leur sens.",
         },
         {
@@ -2100,13 +2104,13 @@ function gram_fonctions(level: Cycle4Level): QcmItem[] {
         {
           text: "Dans « Elle offre un cadeau à son frère », quelle est la fonction de « à son frère » ?",
           correct: "complément d'objet indirect (COI)",
-          wrongs: ["complément d'objet direct", "sujet", "complément circonstanciel de lieu"],
+          wrongs: ["complément d'objet direct (COD)", "complément circonstanciel de lieu", "complément du nom « cadeau »"],
           methode: "Le COI répond à « à qui ? » et se construit avec une préposition.",
         },
         {
           text: "Dans « Les témoins racontent leur histoire avec émotion », quelle est la fonction de « Les témoins » ?",
           correct: "sujet du verbe « racontent »",
-          wrongs: ["complément d'objet", "complément de phrase", "adjectif"],
+          wrongs: ["complément d'objet direct", "complément circonstanciel", "apposition détachée"],
           methode: "On identifie le sujet en posant « qui est-ce qui raconte ? ».",
         },
       ],
@@ -2114,7 +2118,7 @@ function gram_fonctions(level: Cycle4Level): QcmItem[] {
         {
           text: "Dans « la maison de mes grands-parents », quelle est la fonction de « de mes grands-parents » ?",
           correct: "complément du nom « maison »",
-          wrongs: ["sujet", "complément d'objet direct", "attribut du sujet"],
+          wrongs: ["complément d'objet direct", "attribut du sujet « maison »", "complément circonstanciel"],
           methode: "En 4e, on étudie les expansions du nom (dont le complément du nom).",
         },
         {
@@ -2134,7 +2138,7 @@ function gram_fonctions(level: Cycle4Level): QcmItem[] {
         {
           text: "Dans « Il obtint ce poste parce qu'il travaillait dur », quelle est la fonction de « parce qu'il travaillait dur » ?",
           correct: "complément circonstanciel de cause",
-          wrongs: ["complément d'objet direct", "sujet", "attribut"],
+          wrongs: ["complément circonstanciel de temps", "complément circonstanciel de but", "complément d'objet direct du verbe"],
           methode: "« parce que » introduit une subordonnée de cause.",
         },
       ],
@@ -2231,7 +2235,7 @@ function gram_oral_ecrit(level: Cycle4Level): QcmItem[] {
       {
         text: "Quelle phrase relève d'un usage soigné de l'écrit ?",
         correct: "Je ne comprends pas cette consigne.",
-        wrongs: ["Je comprends pas.", "J'comprends rien.", "Comprends pas là."],
+        wrongs: ["Je comprends pas cette consigne.", "J'comprends rien à cette consigne.", "Cette consigne, j'y comprends rien."],
         methode: "À l'écrit, la négation « ne... pas » n'est pas supprimée.",
       },
       {
@@ -2249,7 +2253,7 @@ function gram_oral_ecrit(level: Cycle4Level): QcmItem[] {
       {
         text: "Quelle phrase relève de l'écrit soigné ?",
         correct: "Cela ne me dérange pas du tout.",
-        wrongs: ["Ça me dérange pas.", "Ça m'dérange pas.", "Pas grave, ça va."],
+        wrongs: ["Ça me dérange pas du tout, hein.", "Ça m'dérange pas plus que ça.", "Pas grave, ça va aller comme ça."],
         methode: "L'écrit soigné évite « ça » relâché et rétablit la négation.",
       },
     ],
@@ -2266,7 +2270,7 @@ function gram_oral_ecrit(level: Cycle4Level): QcmItem[] {
         {
           text: "Dans un débat écrit argumenté, on préfère la formule...",
           correct: "« Il me semble que cette idée est contestable. »",
-          wrongs: ["« C'est nul, ton truc. »", "« N'importe quoi. »", "« Bof, on verra. »"],
+          wrongs: ["« Cette idée, c'est vraiment n'importe quoi. »", "« Je trouve que c'est nul, franchement, moi. »", "« Bof, on verra bien ce que ça donnera. »"],
           methode: "L'écrit argumenté choisit un registre courant à soutenu, poli et précis.",
         },
       ],
@@ -2285,7 +2289,7 @@ function discours_registres(level: Cycle4Level): QcmItem[] {
       {
         text: "Quelle phrase relève du registre soutenu ?",
         correct: "Je vous prie de bien vouloir patienter un instant.",
-        wrongs: ["Attends deux secondes.", "Bouge pas.", "Patiente, c'est bon."],
+        wrongs: ["Attends deux secondes, je reviens tout de suite.", "Patiente un petit peu, ça va être bon là.", "Bouge pas d'ici, j'en ai pour une minute."],
         methode: "Le registre soutenu emploie un vocabulaire choisi et des tournures polies.",
       },
       {
@@ -2297,7 +2301,7 @@ function discours_registres(level: Cycle4Level): QcmItem[] {
       {
         text: "Le registre courant est celui que l'on emploie...",
         correct: "dans la vie de tous les jours, poliment",
-        wrongs: ["seulement en poésie", "uniquement entre amis très proches", "dans les textes de loi"],
+        wrongs: ["seulement dans les poèmes et les romans", "uniquement entre amis très proches", "dans les textes de loi et les contrats"],
         methode: "Le registre courant est neutre : ni relâché, ni très soutenu.",
       },
       {
@@ -2315,7 +2319,7 @@ function discours_registres(level: Cycle4Level): QcmItem[] {
       {
         text: "Adapter son registre, c'est choisir son langage selon...",
         correct: "la personne à qui l'on parle et la situation",
-        wrongs: ["la couleur de ses vêtements", "l'heure exacte", "le nombre de mots"],
+        wrongs: ["le nombre de personnes qui vous écoutent", "l'humeur dans laquelle on se trouve ce jour-là", "la longueur du texte que l'on doit écrire"],
         methode: "On adapte le registre à l'interlocuteur et au contexte.",
       },
     ],
@@ -2324,7 +2328,7 @@ function discours_registres(level: Cycle4Level): QcmItem[] {
         {
           text: "Pour transformer « File-moi ça ! » en registre soutenu, on écrit...",
           correct: "Pourriez-vous me donner cela ?",
-          wrongs: ["Donne ça vite.", "Passe-moi le truc.", "File, allez !"],
+          wrongs: ["Donne-moi ça tout de suite.", "Passe-moi le truc, s'il te plaît.", "Tu peux me filer ça, steuplé ?"],
           methode: "On passe du familier au soutenu en changeant vocabulaire et tournure.",
         },
       ],
@@ -2332,7 +2336,7 @@ function discours_registres(level: Cycle4Level): QcmItem[] {
         {
           text: "Un discours qui veut convaincre un large public choisit le plus souvent un registre...",
           correct: "courant à soutenu, clair et digne",
-          wrongs: ["familier et relâché", "argotique", "incompréhensible"],
+          wrongs: ["familier et volontairement relâché", "argotique, pour faire complice", "technique et très spécialisé"],
           methode: "Le registre s'adapte à la situation : un discours public reste soigné.",
         },
       ],
@@ -2347,7 +2351,10 @@ function discours_rapportees(level: Cycle4Level): QcmItem[] {
       {
         text: "Quelle phrase contient des paroles rapportées DIRECTEMENT ?",
         correct: "Elle murmura : « Je reviendrai demain. »",
-        wrongs: ["Elle dit qu'elle reviendrait.", "Elle reviendra demain.", "Demain, elle revient."],
+        // ⛔ Écarté : « Demain, elle reviendra, avait-elle promis. » — une incise
+        // sans guillemets reste du discours DIRECT. Ce serait une seconde
+        // réponse défendable, et aucun vérificateur ne le verrait.
+        wrongs: ["Elle dit qu'elle reviendrait le lendemain.", "Elle annonça son retour pour demain.", "Elle fit savoir qu'elle reviendrait."],
         methode: "Le discours direct cite les paroles entre guillemets, telles quelles.",
       },
       {
@@ -2359,11 +2366,11 @@ function discours_rapportees(level: Cycle4Level): QcmItem[] {
       {
         // Définition réécrite en reconnaissance (01/08).
         text: "« Elle murmura : “Je n'ai rien vu.” » À quoi reconnaît-on ici le discours direct ?",
-        correct: "aux deux points et aux guillemets qui encadrent les paroles",
+        correct: "aux deux points et aux guillemets autour des paroles",
         wrongs: [
-          "au verbe conjugué au passé simple",
-          "à la brièveté de la phrase",
-          "à la présence d'une négation",
+          "au verbe au passé simple placé juste avant les paroles",
+          "à la brièveté de la phrase qui est rapportée",
+          "à la présence d'une négation à l'intérieur des paroles",
         ],
         methode:
           "Le discours direct rapporte les mots tels qu'ils ont été dits : la ponctuation le montre.",
@@ -2377,7 +2384,7 @@ function discours_rapportees(level: Cycle4Level): QcmItem[] {
       {
         text: "« Elle demanda si nous venions. » Ces paroles sont...",
         correct: "au discours indirect (une question rapportée)",
-        wrongs: ["au discours direct", "sans rapport de paroles", "un ordre à l'impératif"],
+        wrongs: ["au discours direct, mais sans les guillemets", "sans aucun rapport de paroles rapportées", "un ordre donné à l'impératif présent"],
         methode: "La question rapportée sans guillemets est du discours indirect.",
       },
     ],
@@ -2415,7 +2422,7 @@ function discours_argumentatif(level: Cycle4Level): QcmItem[] {
       {
         text: "Dans un texte argumentatif, la « thèse » est...",
         correct: "l'opinion principale que l'auteur défend",
-        wrongs: ["un exemple précis", "une simple description", "la date de rédaction"],
+        wrongs: ["un exemple précis tiré de la réalité", "une simple description du sujet traité", "la conclusion qui termine le texte"],
         methode: "La thèse est le point de vue soutenu ; les arguments la justifient.",
       },
       {
@@ -2427,7 +2434,7 @@ function discours_argumentatif(level: Cycle4Level): QcmItem[] {
       {
         text: "Dans une argumentation, un exemple sert à...",
         correct: "illustrer et rendre concret un argument",
-        wrongs: ["contredire la thèse", "remplacer la conclusion", "compter les lignes"],
+        wrongs: ["contredire la thèse défendue par l'auteur", "remplacer la conclusion générale du texte", "énoncer la thèse principale du texte"],
         methode: "L'exemple appuie l'argument en le rendant concret.",
       },
       {
@@ -2439,7 +2446,7 @@ function discours_argumentatif(level: Cycle4Level): QcmItem[] {
       {
         text: "Le connecteur « car » sert à introduire...",
         correct: "une cause (une raison)",
-        wrongs: ["une conséquence", "un exemple", "une opposition"],
+        wrongs: ["une conséquence logique", "un exemple illustratif", "une opposition marquée"],
         methode: "« car » donne la raison qui soutient l'argument.",
       },
     ],
@@ -2455,14 +2462,17 @@ function discours_argumentatif(level: Cycle4Level): QcmItem[] {
       "3e": [
         {
           text: "Dans un discours engagé, la question rhétorique (« Qui oserait accepter cela ? ») sert à...",
-          correct: "faire réagir et emporter l'adhésion sans attendre de réponse",
-          wrongs: ["demander une vraie information", "changer de sujet", "donner une consigne"],
+          correct: "faire réagir et emporter l'adhésion, sans vraie réponse",
+          wrongs: ["demander une véritable information à celui qui écoute", "changer de sujet pour relancer un discours qui traîne", "donner une consigne très claire à tout l'auditoire"],
           methode: "La question rhétorique est un procédé qui renforce l'argumentation.",
         },
         {
           text: "Pour réfuter la thèse adverse, on peut employer...",
-          correct: "un argument opposé introduit par « pourtant » ou « au contraire »",
-          wrongs: ["un simple « et »", "aucun connecteur", "une répétition du même mot"],
+          correct: "un argument opposé, introduit par « pourtant » ou « au contraire »",
+          // Les quatre lignes sont désormais quatre FAMILLES de connecteurs :
+          // opposition, addition, illustration, conclusion. Il faut connaître
+          // la valeur du connecteur, plus seulement repérer la ligne remplie.
+          wrongs: ["un argument de plus, introduit par « et » ou « de plus »", "un exemple concret, introduit par « par exemple » ou « ainsi »", "une conclusion, introduite par « donc » ou « en résumé »"],
           methode: "On réfute en opposant un argument à celui de l'adversaire.",
         },
       ],
@@ -2810,11 +2820,11 @@ function gram_ponctuation(_level: Cycle4Level): QcmItem[] {
   return [
     {
       text: "« Mon oncle, qui vit à Cilaos, arrive demain. »\n\nQue font les deux virgules ?",
-      correct: "elles détachent un groupe qui donne une précision sur l'oncle",
+      correct: "elles détachent un groupe qui précise qui est l'oncle",
       wrongs: [
-        "elles séparent deux actions successives",
-        "elles marquent une pause pour respirer",
-        "elles annoncent une énumération",
+        "elles séparent deux actions qui se suivent",
+        "elles marquent une pause pour reprendre son souffle",
+        "elles annoncent une énumération de plusieurs noms",
       ],
       methode:
         "Retire le groupe encadré : la phrase tient encore debout. C'est le signe d'un détachement.",
@@ -2865,11 +2875,11 @@ function gram_ponctuation(_level: Cycle4Level): QcmItem[] {
     },
     {
       text: "« Tu viens ? »\n\nQue nous apprend le point d'interrogation sur cette phrase ?",
-      correct: "qu'elle est une question, alors que sa forme ressemble à une affirmation",
+      correct: "qu'elle est une question, malgré sa forme d'affirmation",
       wrongs: [
-        "qu'elle exprime la surprise",
-        "qu'elle donne un ordre",
-        "qu'elle est incomplète",
+        "qu'elle exprime la surprise devant cette nouvelle",
+        "qu'elle donne un ordre sur un ton volontairement adouci",
+        "qu'elle est incomplète et qu'il y manque un mot",
       ],
       methode:
         "Sans le signe, « Tu viens » serait une déclaration. Ici la ponctuation change le type de la phrase à elle seule.",
@@ -2927,9 +2937,9 @@ function gram_types_formes(_level: Cycle4Level): QcmItem[] {
       text: "« Comme il court vite ! »\n\nQu'exprime cette phrase ?",
       correct: "l'admiration ou la surprise, par une exclamation",
       wrongs: [
-        "une question sur sa vitesse",
-        "un ordre de courir",
-        "une simple constatation neutre",
+        "une question posée sur sa vitesse réelle",
+        "un ordre de courir bien plus vite que cela",
+        "une simple constatation, sans aucune émotion",
       ],
       methode:
         "« Comme » suivi d'un point d'exclamation n'introduit pas une comparaison : il exprime l'intensité.",
@@ -3053,9 +3063,9 @@ function gram_juxta_coord(_level: Cycle4Level): QcmItem[] {
       text: "« Prends ton imperméable ou tu seras trempé. »\n\nQuel rapport « ou » établit-il ici ?",
       correct: "une alternative dont la seconde branche est une menace",
       wrongs: [
-        "une addition de deux conseils",
-        "une opposition entre deux avis",
-        "une cause",
+        "une addition de deux conseils donnés à la suite",
+        "une opposition entre deux avis parfaitement contraires",
+        "une cause : la pluie expliquerait alors le conseil",
       ],
       methode:
         "« Ou » n'offre pas toujours un vrai choix : ici la seconde possibilité sert à convaincre.",
@@ -3066,7 +3076,7 @@ function gram_juxta_coord(_level: Cycle4Level): QcmItem[] {
       wrongs: [
         "elle marque une opposition entre les trois actions",
         "elle indique que les actions sont simultanées",
-        "elle montre une hésitation",
+        "elle montre l'hésitation de celui qui agit",
       ],
       methode:
         "Trois propositions de même construction, sans liaison : le rythme lui-même produit le sens.",
@@ -3086,7 +3096,7 @@ function gram_coordonnants(_level: Cycle4Level): QcmItem[] {
     {
       text: "« Il pleut, or le match est maintenu. »\n\nQuel rapport « or » établit-il ?",
       correct: "une opposition, en introduisant un fait inattendu",
-      wrongs: ["une cause", "une conséquence", "une addition"],
+      wrongs: ["une cause, en donnant la raison de ce qui précède", "une conséquence, en tirant ce qui en découle", "une addition, en ajoutant un fait de même sens"],
       methode:
         "« Or » signale un élément qui contrarie ce qu'on attendait. Il est plus fort que « et », moins net que « mais ».",
     },
@@ -3101,9 +3111,9 @@ function gram_coordonnants(_level: Cycle4Level): QcmItem[] {
       text: "« Il n'a ni téléphoné ni écrit. »\n\nQue fait « ni… ni » ?",
       correct: "il coordonne deux éléments en les niant tous les deux",
       wrongs: [
-        "il exprime un choix entre deux actions",
-        "il oppose deux comportements",
-        "il indique une conséquence",
+        "il exprime un choix à faire entre deux actions",
+        "il oppose deux comportements l'un à l'autre",
+        "il indique la conséquence de ce qui vient d'être dit",
       ],
       methode:
         "« Ni » est le « et » de la phrase négative : il additionne des absences.",
@@ -3119,9 +3129,9 @@ function gram_coordonnants(_level: Cycle4Level): QcmItem[] {
       text: "« Le colis est arrivé, donc la commande est complète. »\n\nSi l'on remplace « donc » par « car », que devient la phrase ?",
       correct: "le rapport s'inverse : la cause devient la conséquence",
       wrongs: [
-        "la phrase garde exactement le même sens",
-        "la phrase devient interrogative",
-        "la phrase devient négative",
+        "la phrase garde exactement le même sens qu'avant",
+        "la phrase devient interrogative et attend une réponse",
+        "la phrase devient négative et nie le fait annoncé",
       ],
       methode:
         "Le coordonnant ne décore pas : changer de mot change ce que la phrase affirme.",
@@ -3142,9 +3152,9 @@ function gram_gn_etendu(_level: Cycle4Level): QcmItem[] {
       text: "« un chemin bordé de filaos »\n\nQuelle expansion complète le nom ?",
       correct: "« bordé de filaos », un participe employé comme adjectif",
       wrongs: [
-        "« un », le déterminant",
-        "« de filaos » seulement",
-        "il n'y a pas d'expansion",
+        "« un », le déterminant qui introduit tout le groupe",
+        "« de filaos » seulement, qui est complément du nom",
+        "il n'y a aucune expansion dans ce groupe nominal",
       ],
       methode:
         "L'expansion est tout ce qui s'ajoute au noyau. Ici elle est construite autour d'un participe passé.",
@@ -3186,9 +3196,9 @@ function gram_gn_etendu(_level: Cycle4Level): QcmItem[] {
       text: "« un vieux volcan endormi depuis des siècles »\n\nCombien d'expansions le nom reçoit-il ?",
       correct: "trois : « vieux », « endormi », « depuis des siècles »",
       wrongs: [
-        "une seule : « vieux »",
-        "deux : « vieux » et « endormi »",
-        "aucune",
+        "une seule : « vieux », qui est placé avant le nom",
+        "deux : « vieux » et « endormi », les deux adjectifs",
+        "aucune : le nom « volcan » est employé tout seul",
       ],
       methode:
         "Chaque groupe supprimable sans détruire la phrase compte pour une expansion.",
@@ -3216,9 +3226,9 @@ function gram_prepositions(_level: Cycle4Level): QcmItem[] {
       text: "« Je crois qu'il viendra. »\n\nQuel est le rôle de « que » ici ?",
       correct: "il subordonne : il rattache une proposition à une autre",
       wrongs: [
-        "il coordonne deux propositions de même niveau",
-        "il introduit un groupe nominal",
-        "c'est un adverbe d'intensité",
+        "il coordonne deux propositions placées au même niveau",
+        "il introduit un groupe nominal complément du verbe",
+        "c'est un adverbe d'intensité qui renforce le verbe",
       ],
       methode:
         "Un mot subordonnant crée une dépendance : la proposition qu'il introduit ne peut pas vivre seule.",
@@ -3228,8 +3238,8 @@ function gram_prepositions(_level: Cycle4Level): QcmItem[] {
       correct: "une préposition, car un groupe la suit",
       wrongs: [
         "un adverbe, car elle indique un lieu",
-        "une conjonction",
-        "un déterminant",
+        "une conjonction, car elle relie deux mots",
+        "un déterminant, car elle précède un nom",
       ],
       methode:
         "Certains mots changent de classe selon l'emploi : « il est passé devant » sans suite serait un adverbe.",
@@ -3238,9 +3248,9 @@ function gram_prepositions(_level: Cycle4Level): QcmItem[] {
       text: "« Il travaille pour réussir. »\n\nQue fait « pour » ?",
       correct: "il introduit un groupe qui exprime le but",
       wrongs: [
-        "il coordonne deux verbes",
-        "il exprime la cause",
-        "il remplace un pronom",
+        "il coordonne deux verbes de la phrase",
+        "il exprime la cause de cette action",
+        "il remplace un pronom personnel complément",
       ],
       methode:
         "La préposition apporte le rapport de sens : « pour » le but, « à cause de » la cause, « malgré » l'opposition.",
@@ -3290,9 +3300,9 @@ function gram_determinant_pronom(_level: Cycle4Level): QcmItem[] {
       text: "Dans « Quel livre lis-tu ? » et « Quel est ton avis ? », le mot « quel » est-il de la même classe ?",
       correct: "non : déterminant dans la première, pronom dans la seconde",
       wrongs: [
-        "oui, déterminant dans les deux",
-        "oui, pronom dans les deux",
-        "non : adverbe puis déterminant",
+        "oui : déterminant dans l'une comme dans l'autre phrase",
+        "oui : pronom interrogatif dans les deux phrases",
+        "non : adverbe dans la première, déterminant dans la seconde",
       ],
       methode:
         "Un même mot change de classe selon qu'un nom le suit ou non. C'est l'emploi qui décide.",
@@ -3302,8 +3312,8 @@ function gram_determinant_pronom(_level: Cycle4Level): QcmItem[] {
       correct: "un pronom, car il ne s'appuie sur aucun nom exprimé",
       wrongs: [
         "un déterminant, comme dans la première phrase",
-        "un adverbe de quantité",
-        "un adjectif",
+        "un adverbe de quantité placé devant le verbe",
+        "un adjectif qualificatif employé sans son nom",
       ],
       methode:
         "Le test est toujours le même : cherche le nom. S'il n'y en a pas, le mot le remplace.",
@@ -3489,7 +3499,7 @@ function gram_reprise_nominale(_level: Cycle4Level): QcmItem[] {
     {
       text: "« Les élèves ont préparé une exposition sur les baleines. Le travail a duré trois semaines. »\n\nQue désigne « Le travail » ?",
       correct: "la préparation de l'exposition",
-      wrongs: ["les élèves", "les baleines", "les trois semaines"],
+      wrongs: ["les élèves de la classe", "les baleines du panneau", "les trois semaines écoulées"],
       methode:
         "Une reprise peut désigner une ACTION déjà racontée, pas seulement une chose.",
     },
@@ -3741,11 +3751,11 @@ function orth_participe_etre(_level: Cycle4Level): QcmItem[] {
     },
     {
       text: "Pourquoi écrit-on « Les fleurs sont fanées » avec un -s ?",
-      correct: "parce que le participe s'accorde avec le sujet « les fleurs »",
+      correct: "parce que le participe s'accorde avec « les fleurs »",
       wrongs: [
-        "parce que le verbe est au passé",
-        "parce que « fanées » est un adjectif",
-        "parce qu'il y a plusieurs verbes",
+        "parce que le verbe est conjugué à un temps du passé",
+        "parce que « fanées » est un adjectif qualificatif",
+        "parce que la phrase contient plusieurs verbes",
       ],
       methode:
         "Avec « être », on cherche le sujet, jamais le complément. La question est « qui est fané ? ».",
@@ -3792,9 +3802,9 @@ function orth_participe_avoir(_level: Cycle4Level): QcmItem[] {
     },
     {
       text: "Pourquoi écrit-on « Elle a mangé des mangues » sans accord ?",
-      correct: "parce que le COD « des mangues » est placé après le participe",
+      correct: "parce que le COD « des mangues » est placé après",
       wrongs: [
-        "parce que le sujet est féminin singulier",
+        "parce que le sujet est au féminin singulier",
         "parce que « manger » ne s'accorde jamais",
         "parce que « des » est un article indéfini",
       ],
@@ -3829,11 +3839,11 @@ function orth_cod_coi_antepose(_level: Cycle4Level): QcmItem[] {
     },
     {
       text: "Pourquoi n'écrit-on pas « Je leur ai parlées » ?",
-      correct: "parce que « leur » est un COI, et qu'un COI n'entraîne pas d'accord",
+      correct: "parce que « leur » est un COI, et le COI n'accorde pas",
       wrongs: [
-        "parce que « parler » est un verbe d'état",
-        "parce que le sujet est masculin",
-        "parce que le participe suit l'auxiliaire",
+        "parce que « parler » est un verbe d'état, pas d'action",
+        "parce que le sujet « je » est ici au masculin",
+        "parce que le participe est placé après l'auxiliaire",
       ],
       methode:
         "Le test : peut-on dire « parler quelqu'un » ? Non — on parle À quelqu'un. Donc COI, donc pas d'accord.",
@@ -3854,11 +3864,11 @@ function orth_cod_coi_antepose(_level: Cycle4Level): QcmItem[] {
     },
     {
       text: "Dans « Les nouvelles que je leur ai annoncées », avec quoi le participe s'accorde-t-il ?",
-      correct: "avec « que », qui reprend « les nouvelles » et qui est COD",
+      correct: "avec « que », qui reprend « les nouvelles » et est COD",
       wrongs: [
-        "avec « leur », qui est placé avant",
-        "avec « je », le sujet",
-        "avec rien : il reste invariable",
+        "avec « leur », qui est bien placé avant le participe",
+        "avec « je », qui est le sujet de la proposition",
+        "avec rien du tout : le participe reste invariable",
       ],
       methode:
         "Quand un COD et un COI précèdent tous deux le verbe, seul le COD compte.",
