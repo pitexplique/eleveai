@@ -125,8 +125,8 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_voix_expressive",
     2,
     "Dans un monologue chargé d'émotion, les silences servent à...",
-    ["remplir le temps imparti à la lecture", "faire ressentir l'émotion et laisser le sens résonner", "masquer un oubli sans que cela s'entende", "reprendre son souffle avant la suite"],
-    "faire ressentir l'émotion et laisser le sens résonner",
+    ["remplir le temps qui est imparti à la lecture", "faire ressentir l'émotion et laisser résonner le sens", "masquer un oubli sans que personne ne l'entende", "reprendre son souffle avant de dire la suite"],
+    "faire ressentir l'émotion et laisser résonner le sens",
     "Les silences et les pauses donnent leur force aux moments d'émotion."
   ),
   qcm(
@@ -145,8 +145,8 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_voix_reciter",
     3,
     "Pour dire un texte engagé de façon convaincante, il faut...",
-    ["lire tout le texte sur un ton parfaitement égal", "varier le rythme et appuyer les mots qui portent le message", "réciter aussi vite que la diction le permet", "chuchoter d'un bout à l'autre, sans rien appuyer"],
-    "varier le rythme et appuyer les mots qui portent le message",
+    ["lire tout le texte sur un ton parfaitement égal", "varier le rythme et appuyer les mots qui portent", "réciter aussi vite que la diction peut le permettre", "chuchoter d'un bout à l'autre, sans rien appuyer"],
+    "varier le rythme et appuyer les mots qui portent",
     "On sert le message en variant le rythme et en soulignant les mots forts."
   ),
 
@@ -239,8 +239,8 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_ecrit_reflexion",
     3,
     "Pour réfuter la thèse adverse dans un texte argumenté, on emploie...",
-    ["un argument de plus, avec « et » ou « de plus »", "un argument opposé introduit par « pourtant » ou « au contraire »", "un exemple concret, avec « par exemple » ou « ainsi »", "une conclusion, avec « donc » ou « en résumé »"],
-    "un argument opposé introduit par « pourtant » ou « au contraire »",
+    ["un argument de plus, avec « et » ou bien « de plus »", "un argument opposé, avec « pourtant » ou « au contraire »", "un exemple concret, avec « par exemple » ou « ainsi »", "une conclusion, avec « donc » ou bien « en résumé »"],
+    "un argument opposé, avec « pourtant » ou « au contraire »",
     "On réfute en opposant un argument à celui de l'adversaire."
   ),
   qcm(
@@ -249,8 +249,8 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_ecrit_reviser",
     2,
     "Pour relire un texte argumenté, tu vérifies surtout...",
-    ["le nombre exact de lignes que compte le texte", "l'enchaînement des arguments et les connecteurs logiques", "la richesse du vocabulaire employé partout", "la longueur de chacune des phrases écrites"],
-    "l'enchaînement des arguments et les connecteurs logiques",
+    ["le nombre exact de lignes que compte le texte", "l'enchaînement des arguments et les connecteurs", "la richesse du vocabulaire employé un peu partout", "la longueur de chacune des phrases que tu écris"],
+    "l'enchaînement des arguments et les connecteurs",
     "Relire un texte argumenté, c'est vérifier la logique et les liens entre les idées."
   ),
 
@@ -477,7 +477,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_discours_argumentatif",
     3,
     "Pour réfuter la thèse adverse, on emploie surtout...",
-    ["un argument de plus, avec « et » ou « de plus »", "un argument opposé avec « au contraire » ou « pourtant »", "un exemple concret, avec « par exemple » ou « ainsi »", "une conclusion, avec « donc » ou « en résumé »"],
+    ["un argument de plus, avec « et » ou bien « de plus »", "un argument opposé avec « au contraire » ou « pourtant »", "un exemple concret, avec « par exemple » ou « ainsi »", "une conclusion, avec « donc » ou bien « en résumé »"],
     "un argument opposé avec « au contraire » ou « pourtant »",
     "On réfute en opposant un argument à celui de l'adversaire, avec un connecteur d'opposition."
   ),

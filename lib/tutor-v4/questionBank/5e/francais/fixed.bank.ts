@@ -305,8 +305,8 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_oral_jouer",
     2,
     "Pour bien jouer une scène de comédie, il faut...",
-    ["lire le texte d'une voix neutre et bien posée", "mettre le ton et exagérer les gestes pour faire rire", "jouer avec beaucoup de retenue et de finesse", "dire le texte très vite pour l'effet comique"],
-    "mettre le ton et exagérer les gestes pour faire rire",
+    ["lire le texte d'une voix neutre et bien posée", "mettre le ton et exagérer les gestes", "jouer avec beaucoup de retenue et de finesse", "dire le texte très vite pour l'effet comique"],
+    "mettre le ton et exagérer les gestes",
     "La comédie se joue par le ton et l'exagération des gestes."
   ),
   qcm(

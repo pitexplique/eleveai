@@ -441,9 +441,13 @@ export const anaphore5eBank: TutorBankItemV4[] = [
         choices: makeChoices(
           `d'une seule : « ${r.groupe} » reprend ${r.designe}`,
           [
-            `de deux : « ${r.groupe} » est un nouvel élément`,
-            "de trois éléments différents",
-            "le texte ne permet pas de le dire",
+            // ⚠️ La bonne réponse porte `r.designe`, le leurre ne le portait
+            // pas : elle était plus longue À CHAQUE TIRAGE, quel que soit le
+            // cas tiré. Le défaut était dans le GABARIT, pas dans les données.
+            // Les deux lignes sont maintenant la même phrase et sa négation.
+            `de deux : « ${r.groupe} » ne reprend pas ${r.designe}`,
+            "de trois éléments tout à fait différents",
+            "le texte ne permet pas du tout de le dire",
           ],
         ),
         expected: [`d'une seule : « ${r.groupe} » reprend ${r.designe}`],

@@ -362,12 +362,12 @@ export const cultureLitteraire5eBank: TutorBankItemV4[] = [
     text: "Pourquoi les fables mettent-elles en scène des animaux plutôt que des personnes ?",
     format: "qcm",
     choices: [
-      "parce qu'on accepte d'un animal une leçon qu'on refuserait d'un semblable",
-      "parce que les animaux sont plus faciles à dessiner",
+      "parce qu'on accepte d'un animal une leçon qu'on refuserait ailleurs",
+      "parce que les animaux sont bien plus faciles à dessiner",
       "parce que les fables s'adressent uniquement aux jeunes enfants",
       "parce qu'il était interdit d'écrire sur les personnes",
     ],
-    expected: ["parce qu'on accepte d'un animal une leçon qu'on refuserait d'un semblable"],
+    expected: ["parce qu'on accepte d'un animal une leçon qu'on refuserait ailleurs"],
     comparator: "mcq_exact",
     hint: "Pense à ce que tu ressens quand quelqu'un te fait la morale directement.",
     explanation: exp(
