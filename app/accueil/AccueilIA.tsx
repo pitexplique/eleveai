@@ -134,12 +134,21 @@ export default function AccueilIA() {
               <span className="block">
                 Dire qui on est et ce qu&rsquo;on cherche suffit
               </span>
-              <span className="block">
-                EleveAI propose les ressources qui correspondent
+              {/* ⭐ LA SECONDE LIGNE DESCEND D'UN CRAN (Frédéric, 19/08 : « il y
+                  a trop à lire, et la seconde phrase doit avoir une police plus
+                  basse »). Deux lignes de même taille, c'est deux titres : l'œil
+                  ne sait pas laquelle lire en premier et les lit toutes les
+                  deux. Une seule porte la question, l'autre y répond — la
+                  hiérarchie de tailles dit lequel est lequel.
+                  ⚠️ « ce qui correspond » et non « les ressources qui
+                  correspondent » : c'est la ligne du dessous qui reprend le mot
+                  « ressources », et elle porte donc l'accord de « Conçues ». */}
+              <span className="block text-base font-medium text-slate-700 sm:text-lg">
+                EleveAI propose ce qui correspond
               </span>
             </h1>
             <p className="mt-1 text-xs text-slate-500">
-              Conçues, sélectionnées et vérifiées — à La Réunion
+              Des ressources conçues, sélectionnées et vérifiées — à La Réunion
             </p>
           </header>
 
