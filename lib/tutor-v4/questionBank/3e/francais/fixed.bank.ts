@@ -53,7 +53,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_comp_sens_global",
     1,
     "Lis : « Tant qu'un seul enfant sera privé d'école, notre combat ne sera pas terminé. » Quel est le sens de cette phrase ?",
-    ["une information sur les horaires de l'école", "un appel à défendre le droit à l'éducation", "une critique des enfants", "une description d'un bâtiment"],
+    ["un constat que le combat est enfin gagné", "un appel à défendre le droit à l'éducation", "une critique des enseignants trop exigeants", "un rappel des règles de l'école obligatoire"],
     "un appel à défendre le droit à l'éducation",
     "En 3e, on lit des textes engagés : on dégage la thèse (ici, défendre l'éducation)."
   ),
@@ -63,7 +63,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_comp_indices",
     2,
     "Lis : « Le discours parlait de paix, mais les usines fabriquaient des armes. » Quel indice révèle la contradiction dénoncée ?",
-    ["le mot paix", "les usines qui fabriquent des armes", "la longueur du discours", "la date du discours"],
+    ["le mot « paix » employé dans le discours", "les usines qui fabriquent des armes", "la longueur inhabituelle du discours", "le lieu où le discours a été prononcé"],
     "les usines qui fabriquent des armes",
     "L'indice contredit le discours officiel : le geste (fabriquer des armes) dément la parole (la paix)."
   ),
@@ -73,7 +73,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_comp_implicite",
     3,
     "Lis : « On lui avait tout promis. On ne lui donna rien. » Que dénonce cette opposition sèche ?",
-    ["un simple oubli sans importance", "une injustice ou une trahison", "une scène joyeuse", "une liste de courses"],
+    ["un simple oubli, sans réelle importance", "une injustice ou une trahison", "le récit neutre d'un fait ordinaire", "l'annonce d'une promesse enfin tenue"],
     "une injustice ou une trahison",
     "Le contraste souligne l'injustice : c'est l'implicite d'un texte engagé."
   ),
@@ -83,8 +83,8 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_comp_apprecier",
     2,
     "Quelle appréciation d'un poème engagé est la plus nuancée ?",
-    ["C'est triste.", "Le poème m'a touché : ses images fortes dénoncent la guerre sans crier.", "Je n'ai pas compté les vers.", "C'est un poème ancien."],
-    "Le poème m'a touché : ses images fortes dénoncent la guerre sans crier.",
+    ["Le poème m'a touché, il est vraiment très triste et très beau.", "Le poème m'a touché : ses images dénoncent la guerre sans crier.", "Le poème m'a touché car la guerre est toujours un sujet terrible.", "Le poème m'a touché, il parle de la guerre en seulement douze vers."],
+    "Le poème m'a touché : ses images dénoncent la guerre sans crier.",
     "On formule un jugement nuancé, appuyé sur les procédés du texte (les images fortes)."
   ),
   qcm(
@@ -93,7 +93,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_comp_sens_global",
     2,
     "Lis : « Je me souviens du silence, ce matin-là, quand nous avons compris que tout allait changer. » Dans un témoignage, cette phrase...",
-    ["décrit une journée ordinaire", "annonce un événement grave vécu par le narrateur", "donne une consigne de sécurité", "explique une règle de jeu"],
+    ["décrit une matinée calme et sans rien de notable", "annonce un événement grave vécu par le narrateur", "exprime le regret d'un souvenir devenu trop flou", "annonce une bonne nouvelle attendue de tous"],
     "annonce un événement grave vécu par le narrateur",
     "On perçoit l'implicite : le « silence » et « tout allait changer » pèsent lourd."
   ),
@@ -105,7 +105,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_voix_preparer",
     1,
     "Pour préparer la lecture d'un poème engagé, le meilleur repérage est...",
-    ["le nombre de strophes seulement", "les images fortes et le rythme des vers à faire entendre", "la taille de la police", "la couleur du papier"],
+    ["le nombre de strophes et la longueur exacte des vers", "les images fortes et le rythme des vers à faire entendre", "la date de publication et le contexte historique", "les mots rares dont il faudra donner le sens exact"],
     "les images fortes et le rythme des vers à faire entendre",
     "On met en voix ce qui porte le sens : images, répétitions et rythme du texte engagé."
   ),
@@ -115,7 +115,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_voix_expressive",
     2,
     "Pour rendre puissant un poème de révolte, la lecture doit surtout...",
-    ["lire vite et sans pause", "marteler le rythme et mettre en relief les mots forts", "réciter d'une voix monotone", "murmurer du début à la fin"],
+    ["lire très vite pour donner l'impression d'urgence", "marteler le rythme et mettre en relief les mots forts", "réciter d'une voix égale, sans jamais rien varier", "murmurer du début à la fin pour mieux émouvoir"],
     "marteler le rythme et mettre en relief les mots forts",
     "Le rythme et les accents d'intensité portent la force du texte engagé."
   ),
@@ -125,7 +125,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_voix_expressive",
     2,
     "Dans un monologue chargé d'émotion, les silences servent à...",
-    ["remplir le temps", "faire ressentir l'émotion et laisser le sens résonner", "cacher un oubli", "aller plus vite"],
+    ["remplir le temps imparti à la lecture", "faire ressentir l'émotion et laisser le sens résonner", "masquer un oubli sans que cela s'entende", "reprendre son souffle avant la suite"],
     "faire ressentir l'émotion et laisser le sens résonner",
     "Les silences et les pauses donnent leur force aux moments d'émotion."
   ),
@@ -135,7 +135,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_voix_reciter",
     2,
     "Pour réciter un poème en vers libres, le récitant suit surtout...",
-    ["une rime à chaque fin de vers", "le sens et les images plutôt qu'une rime régulière", "le nombre de syllabes compté à voix haute", "aucune règle"],
+    ["une rime à la fin de chacun des vers libres", "le sens et les images plutôt qu'une rime régulière", "le nombre de syllabes compté à voix haute", "un rythme parfaitement égal d'un vers à l'autre"],
     "le sens et les images plutôt qu'une rime régulière",
     "En vers libres, c'est le sens et les images qui guident la voix."
   ),
@@ -145,7 +145,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_voix_reciter",
     3,
     "Pour dire un texte engagé de façon convaincante, il faut...",
-    ["lire tout sur le même ton", "varier le rythme et appuyer les mots qui portent le message", "réciter le plus vite possible", "chuchoter sans expression"],
+    ["lire tout le texte sur un ton parfaitement égal", "varier le rythme et appuyer les mots qui portent le message", "réciter aussi vite que la diction le permet", "chuchoter d'un bout à l'autre, sans rien appuyer"],
     "varier le rythme et appuyer les mots qui portent le message",
     "On sert le message en variant le rythme et en soulignant les mots forts."
   ),
@@ -157,7 +157,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_culture_genres",
     1,
     "Un texte où l'auteur raconte sa propre vie à la première personne est...",
-    ["un roman de science-fiction", "un récit autobiographique", "une comédie", "un manuel scolaire"],
+    ["un roman de science-fiction", "un récit autobiographique", "une comédie de caractère", "un manuel scolaire"],
     "un récit autobiographique",
     "Dans l'autobiographie, l'auteur, le narrateur et le personnage ne font qu'un."
   ),
@@ -167,7 +167,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_culture_genres",
     2,
     "Un poème qui dénonce la guerre ou l'injustice est un poème...",
-    ["de circonstance joyeuse", "engagé", "purement décoratif", "sans aucun sens"],
+    ["lyrique", "engagé", "descriptif", "de circonstance"],
     "engagé",
     "La poésie engagée met les mots au service d'une cause."
   ),
@@ -177,7 +177,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_culture_contexte",
     2,
     "La poésie de la Résistance a surtout été écrite pendant...",
-    ["l'Antiquité", "la Seconde Guerre mondiale", "le Moyen Âge", "la préhistoire"],
+    ["les guerres de la Révolution", "la Seconde Guerre mondiale", "la guerre de Cent Ans", "la Première Guerre mondiale"],
     "la Seconde Guerre mondiale",
     "On situe la poésie engagée dans son contexte historique (la Résistance)."
   ),
@@ -187,7 +187,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_culture_reseau",
     3,
     "Rapprocher un poème engagé d'une affiche militante sur le même combat, c'est...",
-    ["résumer le poème", "mettre deux œuvres en réseau", "corriger l'affiche", "compter les vers"],
+    ["résumer chacune des deux œuvres", "mettre deux œuvres en réseau", "corriger l'orthographe de l'affiche", "compter les vers de chaque poème"],
     "mettre deux œuvres en réseau",
     "On relie des œuvres engagées de formes différentes autour d'une même cause."
   ),
@@ -197,7 +197,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_culture_trace",
     2,
     "Après une lecture engagée, une trace utile dans ton carnet est...",
-    ["la marque du stylo utilisé", "la cause défendue et l'effet que le texte a produit sur toi", "le nombre de virgules", "l'heure de la lecture"],
+    ["les procédés de style relevés un à un dans le texte", "la cause défendue et l'effet que le texte a produit sur toi", "la biographie de l'auteur et la liste de ses œuvres", "le résumé le plus neutre possible de ce que dit le texte"],
     "la cause défendue et l'effet que le texte a produit sur toi",
     "On garde le sens du combat du texte et sa résonance personnelle."
   ),
@@ -209,7 +209,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_ecrit_notes",
     1,
     "Pour préparer un écrit de réflexion au brevet, un bon brouillon...",
-    ["est déjà le texte au propre", "liste les idées et les exemples avant de rédiger", "n'existe pas", "se limite au titre"],
+    ["contient déjà tout le texte rédigé au propre", "liste les idées et les exemples avant de rédiger", "recopie le sujet et l'ensemble des documents", "se limite à un plan de deux ou trois titres"],
     "liste les idées et les exemples avant de rédiger",
     "Le brouillon organise la pensée avant la rédaction."
   ),
@@ -219,7 +219,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_ecrit_invention",
     2,
     "Pour écrire un texte autobiographique, on emploie surtout...",
-    ["la troisième personne d'un inconnu", "la première personne et le temps du passé", "seulement le futur", "aucun pronom"],
+    ["la troisième personne et le temps présent", "la première personne et le temps du passé", "la deuxième personne et le futur simple", "la première personne et le futur proche"],
     "la première personne et le temps du passé",
     "Le récit de soi se dit à la première personne, au passé."
   ),
@@ -229,7 +229,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_ecrit_reflexion",
     2,
     "Pour convaincre dans un texte argumenté, on renforce sa thèse avec...",
-    ["des affirmations répétées", "des arguments appuyés sur des exemples précis", "des questions sans réponse", "aucun exemple"],
+    ["des affirmations répétées avec force", "des arguments appuyés sur des exemples précis", "des questions posées sans jamais y répondre", "des exemples donnés sans l'idée qu'ils illustrent"],
     "des arguments appuyés sur des exemples précis",
     "Un argument devient solide quand un exemple concret l'illustre."
   ),
@@ -239,7 +239,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_ecrit_reflexion",
     3,
     "Pour réfuter la thèse adverse dans un texte argumenté, on emploie...",
-    ["un simple « et »", "un argument opposé introduit par « pourtant » ou « au contraire »", "aucun connecteur", "une répétition du même mot"],
+    ["un argument de plus, avec « et » ou « de plus »", "un argument opposé introduit par « pourtant » ou « au contraire »", "un exemple concret, avec « par exemple » ou « ainsi »", "une conclusion, avec « donc » ou « en résumé »"],
     "un argument opposé introduit par « pourtant » ou « au contraire »",
     "On réfute en opposant un argument à celui de l'adversaire."
   ),
@@ -249,7 +249,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_ecrit_reviser",
     2,
     "Pour relire un texte argumenté, tu vérifies surtout...",
-    ["la couleur du stylo", "l'enchaînement des arguments et les connecteurs logiques", "le nombre exact de lignes", "la taille du cahier"],
+    ["le nombre exact de lignes que compte le texte", "l'enchaînement des arguments et les connecteurs logiques", "la richesse du vocabulaire employé partout", "la longueur de chacune des phrases écrites"],
     "l'enchaînement des arguments et les connecteurs logiques",
     "Relire un texte argumenté, c'est vérifier la logique et les liens entre les idées."
   ),
@@ -261,7 +261,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_oral_ecouter",
     1,
     "Pour rendre compte d'un exposé que tu viens d'écouter, tu gardes surtout...",
-    ["le nombre de mots employés", "la thèse défendue et les arguments clés", "la taille de l'orateur", "l'heure de la fin"],
+    ["le plan annoncé et le nombre de parties", "la thèse défendue et les arguments clés", "les exemples cités, sans les arguments", "la conclusion seule, qui résume tout"],
     "la thèse défendue et les arguments clés",
     "On retient l'essentiel du propos : sa thèse et ses arguments."
   ),
@@ -271,7 +271,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_oral_presenter",
     2,
     "Pour présenter un objet d'étude à l'oral du brevet, un bon appui est...",
-    ["un texte lu mot à mot sans lever les yeux", "un support clair et des exemples précis", "aucune préparation", "une lecture très rapide"],
+    ["un texte lu mot à mot, sans lever les yeux", "un support clair et des exemples précis", "un diaporama qui reprend tout le propos", "une liste de dates apprise par cœur"],
     "un support clair et des exemples précis",
     "À l'oral, on s'appuie sur un support clair et des exemples pour convaincre."
   ),
@@ -281,7 +281,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_oral_argumenter",
     2,
     "Pour rendre un argument plus fort à l'oral, tu peux...",
-    ["répéter la même phrase trois fois", "l'appuyer sur un exemple précis et vérifiable", "parler très vite", "affirmer sans preuve"],
+    ["le répéter plusieurs fois avec insistance", "l'appuyer sur un exemple précis et vérifiable", "l'appuyer sur ce que pense la grande majorité", "le dire d'une voix plus forte que les autres"],
     "l'appuyer sur un exemple précis et vérifiable",
     "Un exemple concret et vérifiable renforce l'argument."
   ),
@@ -291,7 +291,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_oral_jouer",
     2,
     "Pour jouer un monologue chargé d'émotion, l'acteur doit surtout...",
-    ["débiter tout à la même vitesse", "varier le rythme et les silences pour porter l'émotion", "rire sans raison", "lire mécaniquement"],
+    ["dire tout le monologue sur un rythme parfaitement égal", "varier le rythme et les silences pour porter l'émotion", "parler de plus en plus fort jusqu'à la toute fin", "multiplier les gestes pour bien occuper la scène"],
     "varier le rythme et les silences pour porter l'émotion",
     "Les silences et le rythme donnent sa force à un monologue."
   ),
@@ -301,7 +301,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_oral_argumenter",
     3,
     "Dans un débat, pour réfuter l'avis contraire, tu peux...",
-    ["hausser le ton", "opposer un argument avec « au contraire » ou « pourtant »", "te moquer de l'autre", "changer de sujet"],
+    ["répéter ton avis avec beaucoup plus de fermeté", "opposer un argument avec « au contraire » ou « pourtant »", "lui donner entièrement raison pour éviter le désaccord", "relever une faute de langue dans ce qu'il vient de dire"],
     "opposer un argument avec « au contraire » ou « pourtant »",
     "On réfute en opposant un argument, avec un connecteur d'opposition, sans agressivité."
   ),
@@ -313,7 +313,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_voc_contexte",
     2,
     "Dans « L'orateur dénonça avec véhémence l'injustice », « véhémence » veut dire...",
-    ["une grande douceur", "une force passionnée", "une totale indifférence", "un profond silence"],
+    ["une très grande douceur", "une force passionnée", "une totale indifférence", "un profond silence"],
     "une force passionnée",
     "Le contexte « dénonça » indique une parole forte et passionnée."
   ),
@@ -333,7 +333,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_voc_formation",
     2,
     "Le préfixe « anti- » dans « antiesclavagiste » signifie...",
-    ["après", "contre, opposé à", "avec", "petit"],
+    ["après, à la suite", "contre, opposé à", "avec, en compagnie", "petit, réduit"],
     "contre, opposé à",
     "Le préfixe « anti- » marque l'opposition : un antiesclavagiste lutte contre l'esclavage."
   ),
@@ -343,7 +343,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_voc_reemploi",
     2,
     "Quelle phrase emploie correctement le nom « injustice » ?",
-    ["Il court injustice le matin.", "Le texte dénonce l'injustice faite aux plus faibles.", "L'injustice bleue mange une pomme.", "Injustice sur la table."],
+    ["Le texte injustice les plus faibles de la société.", "Le texte dénonce l'injustice faite aux plus faibles.", "Ce comportement me paraît vraiment très injustice.", "Il a parlé injustice pendant toute la réunion."],
     "Le texte dénonce l'injustice faite aux plus faibles.",
     "On réemploie le mot dans une phrase qui a du sens."
   ),
@@ -353,7 +353,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_voc_contexte",
     3,
     "Dans « Sa lutte fut opiniâtre, il ne renonça jamais », « opiniâtre » veut dire...",
-    ["molle", "acharnée, tenace", "brève", "joyeuse"],
+    ["molle et hésitante", "acharnée, tenace", "brève et sans suite", "joyeuse et légère"],
     "acharnée, tenace",
     "Le contexte « il ne renonça jamais » donne le sens : opiniâtre = tenace."
   ),
@@ -375,7 +375,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_gram_constituants",
     1,
     "Dans « Bien qu'il soit tard, il continue de travailler », la subordonnée exprime...",
-    ["la cause", "l'opposition (la concession)", "le but", "la comparaison"],
+    ["la cause ou la justification", "l'opposition (la concession)", "le but que l'on poursuit", "la comparaison entre deux faits"],
     "l'opposition (la concession)",
     "« Bien que » introduit une subordonnée de concession (une opposition)."
   ),
@@ -395,7 +395,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_gram_fonctions",
     2,
     "Dans « Le coupable fut arrêté par la police », quel est le complément d'agent ?",
-    ["le coupable", "par la police", "fut arrêté", "il n'y en a pas"],
+    ["le coupable arrêté", "par la police", "fut arrêté hier", "il n'y en a aucun"],
     "par la police",
     "À la voix passive, le complément d'agent (introduit par « par ») fait réellement l'action."
   ),
@@ -405,7 +405,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_gram_fonctions",
     2,
     "Dans « Il obtint ce poste parce qu'il travaillait dur », quelle est la fonction de « parce qu'il travaillait dur » ?",
-    ["complément d'objet direct", "complément circonstanciel de cause", "sujet", "attribut du sujet"],
+    ["complément circonstanciel de temps", "complément circonstanciel de cause", "complément circonstanciel de but", "complément d'objet direct du verbe"],
     "complément circonstanciel de cause",
     "« parce que » introduit une subordonnée circonstancielle de cause."
   ),
@@ -425,7 +425,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_gram_oral_ecrit",
     2,
     "Dans un débat écrit argumenté, on préfère la formule...",
-    ["« C'est nul, ton truc. »", "« Il me semble que cette idée est contestable. »", "« N'importe quoi. »", "« Bof, on verra. »"],
+    ["« Cette idée, c'est vraiment n'importe quoi. »", "« Il me semble que cette idée est contestable. »", "« Je trouve que c'est nul, franchement, moi. »", "« Bof, on verra bien ce que ça donnera. »"],
     "« Il me semble que cette idée est contestable. »",
     "L'écrit argumenté choisit un registre courant à soutenu, poli et précis."
   ),
@@ -437,7 +437,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_discours_registres",
     1,
     "Un discours qui veut convaincre un large public choisit le plus souvent un registre...",
-    ["familier et relâché", "courant à soutenu, clair et digne", "argotique", "incompréhensible"],
+    ["familier et volontairement relâché", "courant à soutenu, clair et digne", "argotique, pour faire complice", "technique et très spécialisé"],
     "courant à soutenu, clair et digne",
     "Le registre s'adapte à la situation : un discours public reste soigné."
   ),
@@ -447,7 +447,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_discours_registres",
     2,
     "Adapter son registre, c'est choisir son langage selon...",
-    ["la couleur de ses vêtements", "la personne à qui l'on parle et la situation", "l'heure exacte", "le nombre de mots"],
+    ["le nombre de personnes qui vous écoutent", "la personne à qui l'on parle et la situation", "l'humeur dans laquelle on se trouve ce jour-là", "la longueur du texte que l'on doit écrire"],
     "la personne à qui l'on parle et la situation",
     "On adapte le registre à l'interlocuteur et au contexte."
   ),
@@ -457,7 +457,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_discours_rapportees",
     2,
     "Dans « Elle hésitait : partirait-elle vraiment ? », les pensées sont rapportées...",
-    ["au discours direct avec guillemets", "au discours indirect libre", "sans aucune parole", "sous forme de dialogue"],
+    ["au discours direct, avec ses guillemets", "au discours indirect libre", "au discours indirect, avec un « que »", "sous forme de dialogue à deux voix"],
     "au discours indirect libre",
     "Le discours indirect libre mêle la voix du personnage au récit, sans « qu' » ni guillemets."
   ),
@@ -467,8 +467,8 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_discours_argumentatif",
     2,
     "Dans un discours engagé, la question rhétorique (« Qui oserait accepter cela ? ») sert à...",
-    ["demander une vraie information", "faire réagir et emporter l'adhésion sans attendre de réponse", "changer de sujet", "donner une consigne"],
-    "faire réagir et emporter l'adhésion sans attendre de réponse",
+    ["demander une véritable information à celui qui écoute", "faire réagir et emporter l'adhésion, sans vraie réponse", "changer de sujet pour relancer un discours qui traîne", "donner une consigne très claire à tout l'auditoire"],
+    "faire réagir et emporter l'adhésion, sans vraie réponse",
     "La question rhétorique est un procédé qui renforce l'argumentation."
   ),
   qcm(
@@ -477,7 +477,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_discours_argumentatif",
     3,
     "Pour réfuter la thèse adverse, on emploie surtout...",
-    ["un simple « et »", "un argument opposé avec « au contraire » ou « pourtant »", "aucun connecteur", "une répétition du même mot"],
+    ["un argument de plus, avec « et » ou « de plus »", "un argument opposé avec « au contraire » ou « pourtant »", "un exemple concret, avec « par exemple » ou « ainsi »", "une conclusion, avec « donc » ou « en résumé »"],
     "un argument opposé avec « au contraire » ou « pourtant »",
     "On réfute en opposant un argument à celui de l'adversaire, avec un connecteur d'opposition."
   ),
@@ -529,7 +529,7 @@ export const francais3eFixedBank: TutorBankItemFixedV4[] = [
     "3e_conj_employer",
     3,
     "Après « Il est essentiel que... », on emploie...",
-    ["l'indicatif futur", "le subjonctif", "le conditionnel", "l'impératif"],
+    ["l'indicatif futur", "le subjonctif", "le conditionnel présent", "l'impératif présent"],
     "le subjonctif",
     "Une nécessité (« il est essentiel que ») commande le subjonctif."
   ),

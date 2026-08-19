@@ -53,7 +53,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_comp_sens_global",
     1,
     "Lis : « Derrière ses habits élégants, l'homme cachait un cœur dur et calculateur. » Que cherche à montrer l'auteur ?",
-    ["une scène de bal", "le contraste entre l'apparence et la vraie nature", "la mode de l'époque", "un simple costume"],
+    ["l'importance du costume dans la bonne société", "le contraste entre l'apparence et la vraie nature", "la lente transformation morale du personnage", "la réussite sociale obtenue par le seul travail"],
     "le contraste entre l'apparence et la vraie nature",
     "En 4e, on interroge le jugement : l'apparence trompeuse cache la vraie nature du personnage."
   ),
@@ -63,7 +63,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_comp_indices",
     2,
     "Lis : « Il parlait de générosité, mais comptait chaque pièce avant de la donner. » Quel indice révèle son hypocrisie ?",
-    ["il parle de générosité", "il compte chaque pièce avant de donner", "il possède des pièces", "il est présent dans la scène"],
+    ["il prononce lui-même le mot de générosité", "il compte chaque pièce avant de donner", "il possède assez d'argent pour donner", "il finit malgré tout par donner sa pièce"],
     "il compte chaque pièce avant de donner",
     "L'indice contredit les paroles : le geste (compter) dément le discours (la générosité)."
   ),
@@ -73,7 +73,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_comp_implicite",
     3,
     "Lis : « — Quel beau travail, dit-il en repoussant la copie du bout des doigts. » Que comprend-on de son avis réel ?",
-    ["il est sincèrement admiratif", "il pense en fait le contraire (ironie)", "il n'a pas lu la copie", "il félicite chaleureusement"],
+    ["il admire sincèrement le travail rendu", "il pense en fait le contraire (ironie)", "il n'a pas eu le temps de lire la copie", "il hésite encore à donner son avis"],
     "il pense en fait le contraire (ironie)",
     "Le ton et le geste (repousser du bout des doigts) contredisent les mots : c'est de l'ironie."
   ),
@@ -83,7 +83,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_comp_apprecier",
     2,
     "Dans un débat sur un roman réaliste, quelle appréciation est la plus argumentée ?",
-    ["Je n'aime pas, c'est tout.", "Le personnage m'a semblé cruel, car il trahit son ami pour de l'argent.", "C'est vieux.", "Il y a beaucoup de mots."],
+    ["Le personnage m'a semblé cruel, je l'ai détesté dès le début du livre.", "Le personnage m'a semblé cruel, car il trahit son ami pour de l'argent.", "Le personnage m'a semblé cruel, comme souvent dans les romans du XIXe.", "Le personnage m'a semblé cruel car ce roman est un roman réaliste."],
     "Le personnage m'a semblé cruel, car il trahit son ami pour de l'argent.",
     "Un jugement nuancé s'appuie sur un acte précis du personnage."
   ),
@@ -93,8 +93,8 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_comp_sens_global",
     2,
     "Lis : « La ville grondait de fumée et de bruit ; les ouvriers y entraient avant l'aube. » Ce passage d'un roman du XIXe siècle évoque surtout...",
-    ["une fête foraine", "la dureté du monde du travail à l'époque industrielle", "un paysage de vacances", "un jour de neige tranquille"],
-    "la dureté du monde du travail à l'époque industrielle",
+    ["la beauté nouvelle des machines et des usines", "la dureté du travail à l'époque industrielle", "le réveil joyeux d'une ville qui s'anime", "les progrès apportés par l'industrie naissante"],
+    "la dureté du travail à l'époque industrielle",
     "Le roman réaliste peint la société : ici, la dureté du travail industriel."
   ),
 
@@ -105,8 +105,8 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_voix_preparer",
     1,
     "Avant de lire à voix haute une tirade de théâtre, il faut surtout...",
-    ["apprendre le nom du décorateur", "comprendre l'émotion du personnage et repérer les phrases fortes", "compter les répliques des autres", "chercher la date d'impression"],
-    "comprendre l'émotion du personnage et repérer les phrases fortes",
+    ["compter les vers et vérifier la longueur de chaque réplique", "comprendre l'émotion du personnage et les phrases fortes", "apprendre la tirade entière par cœur avant de la comprendre", "chercher qui jouait ce rôle lors de la création de la pièce"],
+    "comprendre l'émotion du personnage et les phrases fortes",
     "Au théâtre, la mise en voix sert l'émotion du personnage : on la prépare."
   ),
   qcm(
@@ -115,7 +115,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_voix_expressive",
     2,
     "Pour lire une réplique où un personnage feint la politesse tout en méprisant l'autre, il faut...",
-    ["lire d'une voix neutre et rapide", "faire entendre l'ironie par le ton", "crier chaque mot", "murmurer sans expression"],
+    ["lire d'une voix neutre et très rapide", "faire entendre l'ironie par le ton", "prendre un ton franchement chaleureux", "souligner chaque mot avec insistance"],
     "faire entendre l'ironie par le ton",
     "Le ton peut faire entendre le double sens : ici, l'ironie de la fausse politesse."
   ),
@@ -135,7 +135,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_voix_reciter",
     2,
     "Pour réciter une tirade avec conviction, il faut...",
-    ["dire tout sur le même ton", "varier le rythme selon les émotions du personnage", "réciter le plus vite possible", "chuchoter du début à la fin"],
+    ["garder un rythme régulier du début à la fin", "varier le rythme selon les émotions du personnage", "réciter en regardant toujours le même point", "accélérer régulièrement jusqu'à la dernière phrase"],
     "varier le rythme selon les émotions du personnage",
     "La récitation d'un texte de théâtre suit les émotions du rôle : le rythme varie."
   ),
@@ -145,7 +145,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_voix_reciter",
     3,
     "Si tu oublies un vers en récitant un poème devant la classe, le mieux est de...",
-    ["t'arrêter et abandonner", "faire une courte pause, te reprendre et continuer", "inventer n'importe quoi", "parler très vite pour cacher l'oubli"],
+    ["revenir au tout début du texte pour te relancer", "faire une courte pause, te reprendre et continuer", "inventer une phrase proche pour combler le trou", "parler très vite pour cacher l'oubli à la classe"],
     "faire une courte pause, te reprendre et continuer",
     "Un oubli se gère par une courte pause maîtrisée : on se reprend et on continue."
   ),
@@ -187,7 +187,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_culture_reseau",
     3,
     "Rapprocher un roman sur la misère ouvrière d'un tableau du XIXe montrant des ouvriers, c'est...",
-    ["résumer le roman", "mettre deux œuvres en réseau", "corriger le tableau", "compter les personnages"],
+    ["résumer chacune des deux œuvres", "mettre deux œuvres en réseau", "corriger l'orthographe des noms", "compter les personnages cités"],
     "mettre deux œuvres en réseau",
     "On met en réseau un texte et une œuvre d'art de la même époque et du même thème."
   ),
@@ -197,7 +197,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_culture_trace",
     2,
     "Dans ton carnet de lecture de 4e, pour comparer deux personnages de romans, tu notes surtout...",
-    ["la longueur de leur nom", "leurs actes, leurs valeurs et ce qu'ils révèlent", "la date d'impression", "le poids du livre"],
+    ["leur âge, leur métier et leur lieu de naissance", "leurs actes, leurs valeurs et ce qu'ils révèlent", "le nombre de fois où chacun apparaît dans l'œuvre", "la longueur des répliques que l'auteur leur donne"],
     "leurs actes, leurs valeurs et ce qu'ils révèlent",
     "On compare les personnages sur ce qui compte : leurs choix et leurs valeurs."
   ),
@@ -209,7 +209,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_ecrit_notes",
     1,
     "Écrire pour retenir une leçon, c'est surtout...",
-    ["recopier tout le manuel mot à mot", "reformuler l'essentiel avec ses propres mots", "n'écrire que la date", "dessiner la couverture"],
+    ["recopier la leçon entière, mot pour mot", "reformuler l'essentiel avec ses propres mots", "surligner les passages importants du cours", "apprendre la leçon par cœur sans comprendre"],
     "reformuler l'essentiel avec ses propres mots",
     "Écrire pour apprendre, c'est reformuler l'essentiel, pas tout recopier."
   ),
@@ -219,7 +219,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_ecrit_invention",
     2,
     "Pour écrire un récit fantastique, le procédé le plus adapté est...",
-    ["tout expliquer dès la première ligne", "installer le doute entre explication réelle et surnaturelle", "ne mettre aucun mystère", "donner la fin d'abord"],
+    ["expliquer tout le mystère dès la première ligne du récit", "installer le doute entre explication réelle et surnaturelle", "montrer un monstre parfaitement visible dès le début", "annoncer d'emblée la fin surnaturelle dans le titre"],
     "installer le doute entre explication réelle et surnaturelle",
     "Le fantastique repose sur l'hésitation entre le réel et le surnaturel."
   ),
@@ -229,7 +229,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_ecrit_reflexion",
     2,
     "Pour défendre une opinion dans un paragraphe argumenté, l'ordre le plus clair est...",
-    ["un exemple seul, sans idée", "thèse, puis argument, puis exemple qui l'illustre", "l'opinion répétée trois fois", "des questions sans réponse"],
+    ["exemple, puis thèse, puis un second exemple", "thèse, puis argument, puis exemple qui l'illustre", "argument, puis thèse contraire, puis conclusion", "thèse, puis thèse répétée, puis thèse résumée"],
     "thèse, puis argument, puis exemple qui l'illustre",
     "On argumente en enchaînant thèse, argument et exemple."
   ),
@@ -239,7 +239,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_ecrit_reviser",
     2,
     "Pour vérifier l'accord d'un participe passé employé avec « avoir », tu regardes...",
-    ["la couleur de l'encre", "si un complément d'objet direct est placé avant le verbe", "le nombre de lignes", "la marge de droite"],
+    ["si le sujet du verbe est bien au singulier ou au pluriel", "si un complément d'objet direct est placé avant le verbe", "si le complément d'objet direct est placé après le verbe", "si l'auxiliaire employé est « être » ou bien « avoir »"],
     "si un complément d'objet direct est placé avant le verbe",
     "Avec « avoir », le participe s'accorde avec le COD placé avant le verbe."
   ),
@@ -249,7 +249,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_ecrit_reflexion",
     3,
     "Pour répondre à une objection dans un texte argumenté, on emploie...",
-    ["un connecteur d'addition comme « et »", "un connecteur d'opposition comme « cependant »", "aucun connecteur", "seulement « donc »"],
+    ["un connecteur d'addition comme « et » ou « de plus »", "un connecteur d'opposition comme « cependant »", "un connecteur de cause comme « car » ou « parce que »", "un connecteur de conséquence comme « donc »"],
     "un connecteur d'opposition comme « cependant »",
     "On nuance en tenant compte de l'avis contraire : les connecteurs d'opposition (cependant, pourtant)."
   ),
@@ -261,7 +261,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_oral_ecouter",
     1,
     "En écoutant un débat, prendre des notes utiles, c'est noter...",
-    ["chaque mot dit", "les arguments principaux de chaque intervenant", "la couleur des vêtements", "l'heure exacte"],
+    ["chaque phrase dite, dans l'ordre du débat", "les arguments principaux de chaque intervenant", "le nom et le rôle de tous les intervenants", "les moments où le ton est monté d'un cran"],
     "les arguments principaux de chaque intervenant",
     "On garde la trace des arguments, pas de tout le discours."
   ),
@@ -271,7 +271,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_oral_presenter",
     2,
     "Pour présenter clairement un exposé devant la classe, il vaut mieux...",
-    ["lire tête baissée à toute vitesse", "parler fort, articuler et suivre un plan", "chuchoter", "improviser sans aucune idée"],
+    ["lire ses notes mot à mot, tête baissée", "parler fort, articuler et suivre un plan", "apprendre son texte par cœur en entier", "parler vite pour tenir dans le temps"],
     "parler fort, articuler et suivre un plan",
     "Une présentation claire est audible, articulée et organisée par un plan."
   ),
@@ -281,7 +281,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_oral_argumenter",
     2,
     "Quand un camarade défend l'avis contraire, la meilleure réponse est de...",
-    ["se moquer de lui", "reconnaître son point, puis répondre avec un argument", "hausser le ton", "refuser de l'écouter"],
+    ["répéter ton avis avec beaucoup plus de fermeté", "reconnaître son point, puis répondre avec un argument", "lui donner entièrement raison pour éviter le désaccord", "relever une faute de langue dans ce qu'il vient de dire"],
     "reconnaître son point, puis répondre avec un argument",
     "On argumente en tenant compte de l'avis adverse, sans agressivité."
   ),
@@ -291,7 +291,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_oral_jouer",
     2,
     "Pour interpréter une réplique ironique au théâtre, le comédien doit...",
-    ["dire la réplique sans nuance", "faire entendre le contraire de ce que disent les mots", "crier la phrase", "l'oublier"],
+    ["dire la réplique exactement comme elle est écrite", "faire entendre le contraire de ce que disent les mots", "appuyer très fort sur chacun des mots prononcés", "accompagner la phrase d'un très large sourire"],
     "faire entendre le contraire de ce que disent les mots",
     "L'ironie se joue par un décalage entre les mots et le ton."
   ),
@@ -301,7 +301,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_oral_argumenter",
     3,
     "Pour rendre ton argument plus solide à l'oral, tu peux...",
-    ["répéter la même phrase trois fois", "l'appuyer sur un exemple précis", "parler plus fort que les autres", "affirmer sans preuve"],
+    ["répéter la même phrase plusieurs fois de suite", "l'appuyer sur un exemple précis", "t'appuyer sur ce que pense la grande majorité", "le dire d'une voix plus forte que les autres"],
     "l'appuyer sur un exemple précis",
     "Un exemple concret renforce l'argument."
   ),
@@ -313,7 +313,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_voc_contexte",
     2,
     "Dans « Il affichait une mine hautaine et méprisante », « hautaine » veut dire...",
-    ["très joyeuse", "qui se croit supérieure aux autres", "timide et effacée", "amicale"],
+    ["franchement joyeuse et souriante", "qui se croit supérieure aux autres", "timide et vraiment très effacée", "amicale et pleine de chaleur"],
     "qui se croit supérieure aux autres",
     "Le contexte « méprisante » oriente le sens : « hautaine » = qui se croit supérieure."
   ),
@@ -333,7 +333,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_voc_formation",
     2,
     "Le suffixe « -tion » dans « libération » sert à former...",
-    ["un verbe à l'infinitif", "un nom qui désigne une action ou son résultat", "un adjectif de couleur", "un adverbe de lieu"],
+    ["un verbe à l'infinitif formé sur un nom", "un nom qui désigne une action ou son résultat", "un adjectif qui exprime une qualité durable", "un adverbe qui indique la manière d'agir"],
     "un nom qui désigne une action ou son résultat",
     "Le suffixe « -tion » transforme un verbe en nom d'action : libérer → libération."
   ),
@@ -343,7 +343,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_voc_reemploi",
     2,
     "Quelle phrase emploie correctement l'adjectif « méprisant » ?",
-    ["Le méprisant roule sur la route.", "Il lança un regard méprisant à son adversaire.", "Il boit un méprisant.", "Méprisant vite la porte."],
+    ["Il lança un grand méprisant à son adversaire.", "Il lança un regard méprisant à son adversaire.", "Il s'adressa très méprisant à son adversaire.", "Le méprisant de cet homme choqua l'assemblée."],
     "Il lança un regard méprisant à son adversaire.",
     "L'adjectif qualifie un nom (un regard) et convient au sens de la phrase."
   ),
@@ -375,7 +375,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_gram_constituants",
     1,
     "Dans « Le livre que je lis est passionnant », « que je lis » est...",
-    ["une proposition principale", "une proposition subordonnée relative", "un complément circonstanciel", "un groupe adjectival"],
+    ["une proposition principale unique", "une proposition subordonnée relative", "un complément circonstanciel de temps", "un groupe adjectival détaché"],
     "une proposition subordonnée relative",
     "La relative, introduite par le pronom relatif « que », complète le nom « livre »."
   ),
@@ -395,7 +395,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_gram_fonctions",
     2,
     "Dans « la maison de mes grands-parents », quelle est la fonction de « de mes grands-parents » ?",
-    ["sujet", "complément du nom « maison »", "complément d'objet direct", "attribut du sujet"],
+    ["complément circonstanciel de lieu", "complément du nom « maison »", "complément d'objet direct", "attribut du sujet « maison »"],
     "complément du nom « maison »",
     "En 4e, on étudie les expansions du nom, dont le complément du nom."
   ),
@@ -437,7 +437,7 @@ export const francais4eFixedBank: TutorBankItemFixedV4[] = [
     "4e_discours_registres",
     1,
     "Pour transformer « File-moi ça ! » en registre soutenu, on écrit...",
-    ["Donne ça vite.", "Pourriez-vous me donner cela ?", "Passe-moi le truc.", "File, allez !"],
+    ["Donne-moi ça tout de suite.", "Pourriez-vous me donner cela ?", "Passe-moi le truc, s'il te plaît.", "Tu peux me filer ça, steuplé ?"],
     "Pourriez-vous me donner cela ?",
     "On passe du familier au soutenu en changeant le vocabulaire et la tournure."
   ),

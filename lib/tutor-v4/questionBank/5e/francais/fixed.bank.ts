@@ -59,7 +59,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_comp_sens_global",
     1,
     "Lis : « Parti de son village, Aliocha marcha des jours entiers pour voir enfin la mer. » De quoi parle surtout ce passage ?",
-    ["d'un repas de fête", "d'un long voyage vers un but", "d'un cours de sport", "d'une dispute"],
+    ["d'un repas de fête au village", "d'un long voyage vers un but", "d'un entraînement sportif", "d'une dispute de famille"],
     "d'un long voyage vers un but",
     "Le sens global : Aliocha traverse le pays pour atteindre la mer — c'est le récit d'un voyage."
   ),
@@ -69,7 +69,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_comp_indices",
     2,
     "Lis : « Les braises rougeoyaient encore et une couverture traînait par terre. » Quel indice montre que quelqu'un a dormi là récemment ?",
-    ["la couleur du sol", "les braises encore rouges et la couverture", "le nombre de bûches", "la taille de la pièce"],
+    ["la couleur du sol sous la couverture", "les braises encore rouges et la couverture", "le nombre de bûches encore entassées", "la taille de la pièce et sa forme carrée"],
     "les braises encore rouges et la couverture",
     "On relève les indices précis : des braises encore chaudes et une couverture signalent une présence récente."
   ),
@@ -89,8 +89,10 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_comp_apprecier",
     2,
     "Quelle phrase donne un avis de lecteur JUSTIFIÉ sur un récit d'aventure ?",
-    ["Ce récit existe.", "J'ai aimé ce récit car le héros ne renonce jamais malgré les dangers.", "Il a douze chapitres.", "C'est un récit."],
-    "J'ai aimé ce récit car le héros ne renonce jamais malgré les dangers.",
+    // Les trois leurres sont de VRAIS avis, chacun fautif pour une raison
+    // différente : sans raison, raison prise hors du texte, fait et non raison.
+    ["J'ai aimé ce récit, il est vraiment très bien écrit.", "J'ai aimé ce récit car le héros ne renonce jamais.", "J'ai aimé ce récit car un ami me l'a conseillé.", "J'ai aimé ce récit, il compte douze chapitres."],
+    "J'ai aimé ce récit car le héros ne renonce jamais.",
     "Une appréciation fondée donne un avis ET une raison tirée du texte."
   ),
   qcm(
@@ -99,7 +101,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_comp_sens_global",
     2,
     "Lis : « Sous ses airs de mendiant, l'inconnu semblait tout observer avec attention. » Quelle impression se dégage ?",
-    ["une scène très drôle", "un personnage mystérieux, pas si simple", "un personnage sans importance", "une leçon de calcul"],
+    ["un personnage franchement drôle et bavard", "un personnage mystérieux, pas si simple", "un personnage sans aucune importance", "un simple mendiant, sans rien de plus"],
     "un personnage mystérieux, pas si simple",
     "Le contraste entre l'apparence (mendiant) et l'attention aiguë crée un personnage mystérieux."
   ),
@@ -111,7 +113,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_voix_preparer",
     1,
     "Avant de lire à voix haute un dialogue de récit, il est utile de repérer d'abord...",
-    ["le prix du livre", "les répliques de chaque personnage", "le nom de l'imprimeur", "le nombre de pages"],
+    ["le nombre de pages du dialogue", "les répliques de chaque personnage", "le nom de l'auteur de ce récit", "les mots dont le sens est obscur"],
     "les répliques de chaque personnage",
     "On prépare la mise en voix d'un dialogue en repérant qui parle, pour varier les voix."
   ),
@@ -121,7 +123,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_voix_expressive",
     2,
     "Pour lire « — Fuyez ! » hurla le guetteur, comment mettre le ton ?",
-    ["en chuchotant doucement", "en haussant fortement la voix, comme un cri d'alerte", "d'une voix plate", "en riant"],
+    ["en chuchotant doucement, comme pour livrer un secret", "en haussant fortement la voix, comme un cri d'alerte", "d'une voix plate, sans jamais changer de ton", "en accélérant le débit, sans jamais hausser le ton"],
     "en haussant fortement la voix, comme un cri d'alerte",
     "Le point d'exclamation et « hurla » demandent une voix forte, comme une alerte."
   ),
@@ -131,7 +133,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_voix_expressive",
     2,
     "À la virgule, dans une lecture à voix haute, on marque...",
-    ["un arrêt long et complet", "une courte pause, sans s'arrêter comme à un point", "une accélération soudaine", "un cri"],
+    ["un arrêt aussi long et aussi net qu'à un point", "une courte pause, sans s'arrêter comme à un point", "une accélération soudaine pour relancer la phrase", "une montée de la voix, comme à une question"],
     "une courte pause, sans s'arrêter comme à un point",
     "La virgule appelle une brève respiration, plus courte que l'arrêt du point."
   ),
@@ -141,7 +143,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_voix_reciter",
     2,
     "Pour bien réciter une fable, on marque une petite pause...",
-    ["au milieu de chaque mot", "à la fin de chaque vers", "seulement à la toute fin", "jamais"],
+    ["au milieu de chaque mot", "à la fin de chaque vers", "seulement à la toute fin", "jamais, d'un bout à l'autre"],
     "à la fin de chaque vers",
     "En poésie, la fin de vers demande une brève pause, sans casser le sens de la phrase."
   ),
@@ -151,7 +153,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_voix_reciter",
     3,
     "Si tu perds le fil en récitant devant la classe, le mieux est de...",
-    ["t'enfuir de la salle", "faire une courte pause, respirer et reprendre calmement", "parler très vite pour cacher l'oubli", "abandonner"],
+    ["revenir au tout début du texte pour pouvoir te relancer", "faire une courte pause, respirer et reprendre calmement", "parler très vite pour cacher l'oubli à la classe", "inventer une phrase proche pour combler ce trou"],
     "faire une courte pause, respirer et reprendre calmement",
     "En récitation, un oubli se gère par une courte pause maîtrisée : on respire et on reprend."
   ),
@@ -166,7 +168,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     // définition et demander le nom, c'était permettre de répondre sans avoir
     // jamais ouvert un livre.
     "« Le heaume lacé, il attendit le signal. Au premier choc, les deux lances volèrent en éclats. » De quel genre relève ce texte ?",
-    ["un roman policier", "un roman de chevalerie", "un documentaire", "une recette"],
+    ["un roman policier moderne", "un roman de chevalerie", "un documentaire historique", "un article d'encyclopédie"],
     "un roman de chevalerie",
     "Le heaume, la lance, le signal du combat : c'est le décor du récit de chevalerie, celui qu'on découvre en 5e."
   ),
@@ -199,7 +201,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_culture_reseau",
     3,
     "Retrouver le thème du voyage à la fois dans l'Odyssée et dans les aventures de Sindbad, c'est...",
-    ["résumer un seul livre", "mettre deux œuvres en réseau", "corriger l'orthographe", "compter les personnages"],
+    ["résumer un seul de ces livres", "mettre deux œuvres en réseau", "corriger l'orthographe des noms", "compter les personnages cités"],
     "mettre deux œuvres en réseau",
     "Rapprocher deux récits qui partagent un même thème, c'est les mettre en réseau."
   ),
@@ -209,7 +211,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_culture_trace",
     1,
     "Pour garder une trace de tes lectures de l'année, tu peux tenir...",
-    ["un cahier de mathématiques", "un carnet de lecture avec titres, extraits et avis", "une liste de courses", "rien du tout"],
+    ["un classeur où ranger les résumés faits en classe", "un carnet de lecture avec titres, extraits et avis", "une simple liste des livres lus dans l'année", "un cahier de citations recopiées sans avis"],
     "un carnet de lecture avec titres, extraits et avis",
     "Le carnet de lecture garde la mémoire de chaque œuvre : titre, extrait et avis."
   ),
@@ -221,7 +223,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_ecrit_notes",
     1,
     "Écrire pour retenir une leçon, c'est surtout...",
-    ["recopier tout le manuel mot à mot", "reformuler l'essentiel avec ses propres mots", "n'écrire que la date", "dessiner la couverture"],
+    ["recopier la leçon entière, mot pour mot", "reformuler l'essentiel avec ses propres mots", "surligner les passages importants du cours", "apprendre la leçon par cœur sans comprendre"],
     "reformuler l'essentiel avec ses propres mots",
     "Écrire pour apprendre, c'est reformuler l'essentiel, pas tout recopier."
   ),
@@ -231,7 +233,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_ecrit_invention",
     2,
     "Pour écrire un récit d'aventure cohérent, il faut au moins...",
-    ["une simple liste de mots", "un héros, un obstacle à surmonter et une fin", "beaucoup de fautes", "aucun personnage"],
+    ["un héros, un décor et beaucoup de dialogue", "un héros, un obstacle à surmonter et une fin", "un titre, un narrateur et une belle phrase", "une morale, un exemple et une conclusion"],
     "un héros, un obstacle à surmonter et une fin",
     "Un récit cohérent a un personnage, un problème (des péripéties) et un dénouement."
   ),
@@ -241,7 +243,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_ecrit_invention",
     2,
     "Pour rendre une description vivante dans un récit, on emploie surtout...",
-    ["des chiffres au hasard", "des détails précis qui font voir la scène", "aucun adjectif", "une liste de prix"],
+    ["beaucoup d'adjectifs, le plus possible", "des détails précis qui font voir la scène", "des comparaisons prises un peu partout", "la liste de tout ce qui se trouve là"],
     "des détails précis qui font voir la scène",
     "Une description forte s'appuie sur des détails précis (couleurs, sensations)."
   ),
@@ -251,7 +253,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_ecrit_reflexion",
     2,
     "Pour répondre à « Ce personnage est-il courageux ? », un bon paragraphe donne...",
-    ["seulement « oui »", "un avis, une raison et un exemple tiré du texte", "le résumé complet du livre", "le prix du livre"],
+    ["un avis répété de trois manières différentes", "un avis, une raison et un exemple tiré du texte", "le résumé complet du livre, chapitre par chapitre", "l'avis exprimé par les autres élèves de la classe"],
     "un avis, une raison et un exemple tiré du texte",
     "Un paragraphe de réflexion donne un avis, une raison et un exemple précis."
   ),
@@ -261,8 +263,8 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_ecrit_reviser",
     3,
     "Réviser son texte, c'est surtout...",
-    ["le recopier sans le lire", "le relire pour corriger les fautes et améliorer les phrases", "compter les lignes", "changer de cahier"],
-    "le relire pour corriger les fautes et améliorer les phrases",
+    ["le recopier au propre sans en changer un mot", "le relire pour corriger les fautes et les phrases", "vérifier uniquement l'orthographe des mots", "l'allonger pour qu'il fasse plus de lignes"],
+    "le relire pour corriger les fautes et les phrases",
     "Réviser, c'est relire pour corriger et enrichir : on améliore le texte."
   ),
 
@@ -273,7 +275,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_oral_ecouter",
     1,
     "Pour bien comprendre un exposé, il faut...",
-    ["écouter attentivement et repérer les idées importantes", "parler avec son voisin", "penser à autre chose", "regarder par la fenêtre"],
+    ["écouter attentivement et repérer les idées importantes", "noter chaque phrase prononcée par l'orateur, entière", "préparer sa propre question pendant qu'il parle", "juger tout de suite si l'orateur parle bien ou mal"],
     "écouter attentivement et repérer les idées importantes",
     "Écouter pour comprendre, c'est se concentrer et retenir les idées principales."
   ),
@@ -283,7 +285,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_oral_presenter",
     2,
     "Pour présenter clairement un exposé devant la classe, il vaut mieux...",
-    ["lire tête baissée à toute vitesse", "parler fort, articuler et suivre un plan", "chuchoter", "improviser sans aucune idée"],
+    ["lire ses notes mot à mot, tête baissée", "parler fort, articuler et suivre un plan", "apprendre son texte par cœur en entier", "parler vite pour tenir dans le temps"],
     "parler fort, articuler et suivre un plan",
     "Une présentation claire est audible, articulée et organisée par un plan."
   ),
@@ -293,7 +295,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_oral_argumenter",
     2,
     "Pour défendre ton avis dans un débat, tu dois...",
-    ["parler plus fort que les autres", "donner ton avis ET une raison qui l'explique", "répéter « parce que » sans expliquer", "changer d'avis sans cesse"],
+    ["parler plus fort que tous les autres élèves", "donner ton avis ET une raison qui l'explique", "répéter « parce que » sans jamais expliquer", "changer d'avis à chacune de tes phrases"],
     "donner ton avis ET une raison qui l'explique",
     "Justifier, c'est appuyer son avis sur une raison claire."
   ),
@@ -303,7 +305,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_oral_jouer",
     2,
     "Pour bien jouer une scène de comédie, il faut...",
-    ["lire d'une voix plate, sans bouger", "mettre le ton et exagérer les gestes pour faire rire", "parler très bas", "tourner le dos au public"],
+    ["lire le texte d'une voix neutre et bien posée", "mettre le ton et exagérer les gestes pour faire rire", "jouer avec beaucoup de retenue et de finesse", "dire le texte très vite pour l'effet comique"],
     "mettre le ton et exagérer les gestes pour faire rire",
     "La comédie se joue par le ton et l'exagération des gestes."
   ),
@@ -313,7 +315,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_oral_argumenter",
     3,
     "Dans un débat, quand quelqu'un défend l'avis contraire, tu dois...",
-    ["hausser le ton pour avoir raison", "l'écouter, puis répondre calmement avec un argument", "te moquer de lui", "refuser de parler"],
+    ["répéter ton avis avec beaucoup plus de fermeté", "l'écouter, puis répondre calmement avec un argument", "lui donner raison pour éviter le désaccord", "relever une faute de langue dans sa phrase"],
     "l'écouter, puis répondre calmement avec un argument",
     "Interagir dans un débat, c'est écouter l'autre et répondre par un argument, sans agressivité."
   ),
@@ -325,7 +327,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_voc_contexte",
     2,
     "Dans « Le chevalier, intrépide, fonça sur l'ennemi », que veut dire « intrépide » ?",
-    ["très prudent", "qui n'a pas peur", "endormi", "malade"],
+    ["prudent à l'excès", "qui n'a pas peur", "profondément endormi", "gravement malade"],
     "qui n'a pas peur",
     "Le contexte (foncer sur l'ennemi) montre qu'« intrépide » veut dire sans peur."
   ),
@@ -345,7 +347,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_voc_formation",
     2,
     "Dans le mot « déloyal », que marque le préfixe « dé- » ?",
-    ["la répétition", "le contraire (pas loyal)", "un lieu", "un petit objet"],
+    ["la répétition de l'action", "le contraire (pas loyal)", "le lieu où l'on se trouve", "un objet de petite taille"],
     "le contraire (pas loyal)",
     "Le préfixe « dé- » inverse le sens : « déloyal » = qui n'est pas loyal."
   ),
@@ -355,7 +357,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_voc_formation",
     3,
     "Le suffixe « -eur » dans « menteur » sert à désigner...",
-    ["le contraire du mot", "la personne qui fait l'action", "un lieu", "un petit objet"],
+    ["le contraire du mot de base", "la personne qui fait l'action", "le lieu où l'action se fait", "l'action elle-même, en nom"],
     "la personne qui fait l'action",
     "Le suffixe « -eur » forme un nom de personne : mentir → menteur."
   ),
@@ -365,7 +367,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_voc_reemploi",
     2,
     "Quelle phrase emploie correctement le mot « vaillamment » ?",
-    ["Le vaillamment est sur la table.", "Le chevalier combattit vaillamment jusqu'au bout.", "Il mange un vaillamment.", "Vaillamment bleu la maison."],
+    ["Le chevalier était très vaillamment ce jour-là.", "Le chevalier combattit vaillamment jusqu'au bout.", "Le chevalier montra un grand vaillamment.", "Le vaillamment du chevalier impressionna tous."],
     "Le chevalier combattit vaillamment jusqu'au bout.",
     "« vaillamment » est un adverbe : il accompagne un verbe (combattit) et a du sens."
   ),
@@ -397,7 +399,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_gram_constituants",
     2,
     "Dans « Il pleuvait, donc nous sommes restés à l'abri », les deux propositions sont reliées par...",
-    ["une subordination", "la coordination (« donc »)", "une juxtaposition sans mot", "rien du tout"],
+    ["une subordination par « que »", "la coordination (« donc »)", "une juxtaposition sans mot", "une seule et même proposition"],
     "la coordination (« donc »)",
     "« donc » est une conjonction de coordination qui relie les deux propositions."
   ),
@@ -407,7 +409,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_gram_fonctions",
     2,
     "Dans « Elle offre un livre à son ami », quelle est la fonction de « à son ami » ?",
-    ["complément d'objet direct", "complément d'objet indirect (COI)", "sujet", "complément circonstanciel de lieu"],
+    ["complément d'objet direct (COD)", "complément d'objet indirect (COI)", "complément du nom « livre »", "complément circonstanciel de lieu"],
     "complément d'objet indirect (COI)",
     "Le COI répond à « à qui ? » et se construit avec une préposition : « à son ami »."
   ),
@@ -463,7 +465,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_discours_registres",
     2,
     "Quelle phrase relève du registre soutenu ?",
-    ["Désolé, hein.", "Je vous prie de bien vouloir m'excuser.", "Bouge pas.", "C'est bon, oublie."],
+    ["Désolé, hein, je ne l'ai pas fait exprès.", "Je vous prie de bien vouloir m'excuser.", "Excuse-moi, j'ai vraiment pas fait exprès.", "C'est bon, oublie, on n'en parle plus."],
     "Je vous prie de bien vouloir m'excuser.",
     "Le registre soutenu emploie un vocabulaire choisi et des tournures polies."
   ),
@@ -493,7 +495,7 @@ export const francais5eFixedBank: TutorBankItemFixedV4[] = [
     "5e_discours_argumentatif",
     2,
     "Dans « Il faut protéger la forêt, car elle abrite mille espèces », quel est l'argument ?",
-    ["il faut protéger la forêt", "elle abrite mille espèces", "la forêt est jolie", "on aime s'y promener"],
+    ["il faut protéger la forêt", "elle abrite mille espèces", "la forêt est belle en toute saison", "on aime beaucoup s'y promener"],
     "elle abrite mille espèces",
     "L'argument est la raison donnée (« car... ») pour soutenir la thèse."
   ),
