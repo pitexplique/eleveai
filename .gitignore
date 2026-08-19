@@ -32,6 +32,12 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# ⚠️ SEULE EXCEPTION : le fichier d'exemple, qui ne contient QUE des noms de
+# variables et aucune valeur. Il est suivi exprès — sans lui, la liste de ce
+# que le site attend n'existe que dans un .env.local qui, lui, ne quitte
+# jamais cette machine. ⛔ Ne jamais y coller une vraie valeur : un secret
+# poussé une fois reste dans l'historique et doit être révoqué, pas effacé.
+!.env.example
 
 # vercel
 .vercel
