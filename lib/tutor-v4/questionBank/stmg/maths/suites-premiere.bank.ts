@@ -1705,6 +1705,65 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — POURQUOI des points, et pas une courbe. Le premier item fait
+    // lire les coordonnées d'un point ; celui-ci demande si l'on a le droit de
+    // les relier. La réponse tient à la nature même d'une suite : elle n'est
+    // définie qu'aux rangs ENTIERS. Il n'existe pas de $u(2{,}5)$ — le tracé
+    // continu inventerait des valeurs qui n'existent pas.
+    kind: "template",
+    id: "stmg_suite_rep_nuage_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_representation",
+    microId: "suite_rep_nuage",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Existe-t-il un terme de rang $2{,}5$ ? Le rang d'une suite est un nombre ENTIER.",
+    tags: ["stmg", "maths", "suites", "canvas", "piege", "template"],
+    generate: () => {
+      const u0 = pick([20, 40, 60, 100, 150] as const);
+      const r = pick([10, 15, 20, 25, 30, -10, -15] as const);
+      const termes = termesArith(u0, r, 7);
+      const rang = randomInt(2, 4);
+      const bonne =
+        "non : une suite n'a de valeur qu'aux rangs ENTIERS, le tracé inventerait des termes qui n'existent pas";
+      return {
+        text:
+          `Les termes de cette suite sont représentés par des POINTS isolés. ` +
+          `Peut-on les relier par une courbe continue ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          "oui : cela rend la tendance plus lisible, et ne change rien aux valeurs",
+          "oui, à condition que la suite soit arithmétique",
+          "non : c'est interdit parce que les points ne sont pas alignés",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasNuage(termes, "Représentation des termes de la suite", { x: rang }),
+        explanation: exp(
+          "Une suite associe une valeur à chaque ENTIER $n$ : son domaine est $0$, $1$, $2$, … Elle ne dit rien entre deux rangs, et c'est pour cela qu'on la représente par des points détachés.",
+          "On se demande si la valeur intermédiaire aurait un sens : entre le rang $2$ et le rang $3$, y a-t-il un rang $2{,}5$ ?",
+          `Le point mis en évidence est celui de rang $${rang}$, de valeur $${fr(termes[rang])}$. ` +
+            `Relier les points ferait lire, au rang $${rang}{,}5$, une valeur de $${fr(Math.round((termes[rang] + termes[rang + 1]) / 2 * 100) / 100)}$ — ` +
+            `or ce rang n'existe pas : on ne compte pas deux mois et demi de relevés mensuels. ` +
+            `Une ligne pointillée est parfois tracée pour guider l'œil, mais elle ne fait pas partie de la suite.`,
+          `Non : la suite n'existe qu'aux rangs entiers.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "oui : cela rend la tendance plus lisible, et ne change rien aux valeurs",
+            cause: "cela ajoute des valeurs entre les rangs, qui n'ont aucune existence : la suite n'est définie que sur les entiers",
+          },
+          {
+            choice: "non : c'est interdit parce que les points ne sont pas alignés",
+            cause: "même parfaitement alignés — cas d'une suite arithmétique — les points ne se relient pas : la raison est le domaine, pas l'alignement",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ suite_rep_lire ═══════════════════ */
 
   {
@@ -1734,6 +1793,51 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           "On repère le rang demandé sur l'axe horizontal, on monte jusqu'au point, puis on lit à gauche.",
           `Au rang $${rang}$, le point est à la hauteur $${fr(termes[rang])}$.`,
           `$u(${rang}) = ${fr(termes[rang])}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la lecture À L'ENVERS. Le premier item donne le rang et fait
+    // lire la valeur ; celui-ci donne la valeur et fait chercher le rang. C'est
+    // la lecture d'un objectif — « à partir de quand aurons-nous atteint ce
+    // chiffre ? » — et elle prépare directement les problèmes de seuil.
+    kind: "template",
+    id: "stmg_suite_rep_lire_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_representation",
+    microId: "suite_rep_lire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "On part de l'axe VERTICAL : on repère la valeur, on va jusqu'au point, puis on descend lire son rang.",
+    tags: ["stmg", "maths", "suites", "canvas", "template", "short"],
+    generate: () => {
+      const u0 = pick([30, 50, 80, 120] as const);
+      const q = pick([1.2, 1.25, 1.5, 0.8] as const);
+      // Les valeurs doivent être deux à deux distinctes : sinon la valeur
+      // cherchée désigne deux points, et la question a deux réponses.
+      let termes = termesGeo(u0, q, 7).map((v) => Math.round(v));
+      for (let essai = 0; essai < 20; essai++) {
+        if (new Set(termes).size === termes.length) break;
+        termes = termesGeo(pick([30, 50, 80, 120] as const), q, 7).map((v) => Math.round(v));
+      }
+      const rang = randomInt(1, 6);
+      return {
+        text:
+          `Sur ce graphique, pour quel RANG la suite prend-elle la valeur $${fr(termes[rang])}$ ?`,
+        format: "short",
+        expected: [String(rang)],
+        comparator: "number_equal",
+        canvas: canvasNuage(termes, "Termes de la suite", { y: termes[rang] }),
+        explanation: exp(
+          "Un point du graphique se lit dans les deux sens : son abscisse donne le rang, son ordonnée la valeur du terme. Rien n'oblige à entrer par le rang.",
+          "On repère la valeur sur l'axe vertical, on avance horizontalement jusqu'au point, puis on descend lire son rang sur l'axe horizontal.",
+          `La hauteur $${fr(termes[rang])}$ n'est atteinte que par un seul point, celui de rang $${rang}$ : ` +
+            `c'est donc $u(${rang}) = ${fr(termes[rang])}$. ` +
+            `${q > 1 ? "La suite étant croissante" : "La suite étant décroissante"}, chaque valeur ne correspond qu'à un rang.`,
+          `C'est le rang $${rang}$.`
         ),
       };
     },
@@ -1785,6 +1889,70 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           {
             choice: "on ne peut rien conjecturer à partir d'un graphique",
             cause: "le programme demande précisément de CONJECTURER la nature à partir de la représentation",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — ce qu'une représentation NE PROUVE PAS. Le premier item fait
+    // conjecturer la nature de la suite ; celui-ci demande si le graphique
+    // suffit à l'établir. Il ne suffit pas : le mot du programme est
+    // « conjecturer », et démontrer réclame le quotient ou la différence. C'est
+    // l'esprit critique que le BO demande, appliqué à une image.
+    kind: "template",
+    id: "stmg_suite_rep_conjecturer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_representation",
+    microId: "suite_rep_conjecturer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un graphique se lit à l'œil, et l'œil ne distingue pas deux suites très proches sur sept points.",
+    tags: ["stmg", "maths", "suites", "canvas", "piege", "template"],
+    generate: () => {
+      const arithmetique = Math.random() < 0.5;
+      const u0 = pick([40, 60, 80, 100] as const);
+      const termes = arithmetique
+        ? termesArith(u0, pick([15, 20, 25, 30] as const), 7)
+        : termesGeo(u0, pick([1.2, 1.25, 1.3] as const), 7).map((v) => Math.round(v));
+      const nature = arithmetique ? "arithmétique" : "géométrique";
+      const bonne = `non : le graphique permet de CONJECTURER, il faut ensuite le démontrer par le calcul`;
+      return {
+        text:
+          `En regardant cette représentation, on pense que la suite est ${nature}. ` +
+          `Le graphique suffit-il à l'affirmer ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `oui : l'allure des points ne laisse aucun doute`,
+          `oui, à condition qu'il y ait au moins sept points`,
+          `non : un graphique ne sert jamais à rien en mathématiques`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasNuage(termes, "Représentation des termes de la suite"),
+        explanation: exp(
+          "Une représentation graphique SUGGÈRE une nature — c'est le mot « conjecturer » du programme. Elle ne la démontre pas : la preuve passe par la différence (arithmétique) ou par le quotient (géométrique) de deux termes consécutifs.",
+          "On lit l'allure pour formuler une hypothèse, puis on la vérifie par le calcul sur les termes.",
+          arithmetique
+            ? `Ici les points paraissent alignés, ce qui fait penser à une suite arithmétique. ` +
+              `Le calcul le confirme : $${fr(termes[1])} - ${fr(termes[0])} = ${fr(termes[1] - termes[0])}$, ` +
+              `et l'écart reste le même ensuite. Mais sur sept points, une suite géométrique de raison proche de $1$ ` +
+              `donnerait presque la même image — l'œil ne les distinguerait pas.`
+            : `Ici les points s'écartent de plus en plus, ce qui fait penser à une suite géométrique. ` +
+              `Le calcul le confirme : $\\dfrac{${fr(termes[1])}}{${fr(termes[0])}} = ${fr(Math.round((termes[1] / termes[0]) * 100) / 100)}$, ` +
+              `et le quotient reste le même ensuite. Sans ce calcul, l'image seule ne prouve rien.`,
+          `Non : le graphique fait conjecturer, le calcul démontre.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `oui : l'allure des points ne laisse aucun doute`,
+            cause: "sur quelques points, deux suites de natures différentes peuvent donner presque la même image",
+          },
+          {
+            choice: `non : un graphique ne sert jamais à rien en mathématiques`,
+            cause: "il sert beaucoup : il fait voir la tendance et suggère quoi démontrer — il ne remplace simplement pas la preuve",
           },
         ],
       };
@@ -1852,6 +2020,74 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           {
             choice: geometrique ? `\`=B3*${fr(q)}\`` : `\`=B3+${r}\``,
             cause: "a pointé sa propre cellule : c'est une référence circulaire",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — LA RECOPIE, qui est tout le sujet du tableur. Le premier item
+    // fait choisir la formule à saisir en B3 ; celui-ci demande ce qu'elle
+    // devient une ligne plus bas. C'est le geste qui produit la colonne entière,
+    // et l'adressage RELATIF est ce qui le rend possible : la référence descend
+    // avec la formule.
+    //
+    // ⛔ Formules ENTRE ACCENTS GRAVES, comme partout ailleurs : nue, `=$B$2`
+    // se ferait avaler ses dollars par KaTeX (correctif `aec1c53f`).
+    kind: "template",
+    id: "stmg_suite_rep_tableur_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_representation",
+    microId: "suite_rep_tableur",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une référence relative descend avec la formule : chaque ligne pointe celle juste au-dessus d'elle.",
+    tags: ["stmg", "maths", "suites", "tableur", "canvas", "template"],
+    generate: () => {
+      const geometrique = Math.random() < 0.5;
+      const t = pick([5, 10, 20, 25] as const);
+      const q = 1 + t / 100;
+      const r = pick([20, 25, 30, 50] as const);
+      const u0 = pick([200, 400, 500, 1000] as const);
+      const termes = geometrique ? termesGeo(u0, q, 5) : termesArith(u0, r, 5);
+      const saisie = geometrique ? `\`=B2*${fr(q)}\`` : `\`=B2+${r}\``;
+      const bonne = geometrique ? `\`=B3*${fr(q)}\`` : `\`=B3+${r}\``;
+      return {
+        text:
+          `La formule ${saisie} est saisie en B3, puis recopiée vers le bas en B4. ` +
+          `Que contient alors B4 ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          saisie,
+          geometrique ? `\`=B4*${fr(q)}\`` : `\`=B4+${r}\``,
+          geometrique ? `\`=$B$2*${fr(q)}\`` : `\`=$B$2+${r}\``,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasTableau(termes.slice(0, 4), "La colonne obtenue par recopie"),
+        explanation: exp(
+          "Une référence RELATIVE se décale avec la formule : recopiée d'une ligne vers le bas, elle pointe une ligne plus bas. C'est ce qui permet d'obtenir toute la colonne d'un seul geste.",
+          "On descend la formule d'une ligne et l'on descend chaque référence relative d'autant.",
+          `${saisie} en B3 devient ${bonne} en B4 : la formule continue de pointer la cellule juste au-dessus d'elle. ` +
+            `⚠️ ${geometrique ? `\`=B4*${fr(q)}\`` : `\`=B4+${r}\``} pointerait sa PROPRE cellule — une référence circulaire, que le tableur refuse. ` +
+            `Et ${geometrique ? `\`=$B$2*${fr(q)}\`` : `\`=$B$2+${r}\``} resterait figée sur le premier terme : ` +
+            `toute la colonne repartirait de $u(0)$.`,
+          `B4 contient ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: saisie,
+            cause: "la recopie ne laisse pas la formule inchangée : c'est justement son intérêt",
+          },
+          {
+            choice: geometrique ? `\`=B4*${fr(q)}\`` : `\`=B4+${r}\``,
+            cause: "la formule pointerait sa propre cellule : le tableur signale une référence circulaire",
+          },
+          {
+            choice: geometrique ? `\`=$B$2*${fr(q)}\`` : `\`=$B$2+${r}\``,
+            cause: "les dollars figent la référence : chaque ligne repartirait du premier terme",
           },
         ],
       };
