@@ -71,10 +71,32 @@ export const STATUTS_PUBLIABLES: StatutRessource[] = ["validee", "testee_eleves"
  */
 const PORTES_ELEVE_DES_LA_6E = ["type:coach", "*", "photo-cours"];
 
+/**
+ * ⭐ LE CYCLE 3 — CM1 et CM2 (Frédéric, 19/08/2026 : « remets coach maths,
+ * coach français, dictée du jour », puis « oui » pour le CM1).
+ *
+ * Trois identifiants, aucun « * » : au primaire on ne laisse pas une case au
+ * hasard du score. Et pas de `type:coach` non plus — à cet âge il n'y a que
+ * deux coachs ouverts, maths et français, et ils doivent sortir TOUS LES DEUX.
+ * Le joker n'en aurait donné qu'un.
+ *
+ * Pourquoi une liste écrite alors que la règle dit de laisser faire le score :
+ * parce qu'au score la 3ᵉ carte est « Les parcours ». La dictée du jour a
+ * exactement le même score (7, comme les deux coachs) et arrive après — c'est
+ * l'ORDRE DU FICHIER qui la sortait, pas un jugement. Or c'est un rituel de
+ * cinq minutes qu'un élève de cet âge fait seul, tous les jours : c'est la
+ * bonne troisième porte du primaire.
+ *
+ * ⛔ Rien avant le CM1. Le CE2 et en dessous n'ont ni parcours ni dico ; leur
+ * inventaire est si court que le score dit déjà la même chose qu'une liste, et
+ * une liste de plus serait une chose de plus à tenir à jour pour rien.
+ */
+const PORTES_ELEVE_CYCLE_3 = ["coach-maths", "coach-francais", "dictee-du-jour"];
+
 export const PORTES_ECRITES: Partial<Record<ProfilId, string[]>> = {
   parent: ["espace-parents", "coach-maths", "photo-cours"],
-  // ⛔ Rien avant la 6ᵉ : « photo-cours » n'est pas ouverte au primaire, et
-  // sans elle ces listes ne diraient rien de plus que le score.
+  cm1: PORTES_ELEVE_CYCLE_3,
+  cm2: PORTES_ELEVE_CYCLE_3,
   "6e": PORTES_ELEVE_DES_LA_6E,
   "5e": PORTES_ELEVE_DES_LA_6E,
   "4e": PORTES_ELEVE_DES_LA_6E,
@@ -537,7 +559,12 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "Évaluation nationale 6e — maths",
     promesse: "Au rythme réel de l'épreuve : une minute par question.",
     url: "/evaluation-nationale-college/6e-maths",
-    niveaux: ["6e", "cm2"],
+    // ⛔ « cm2 » RETIRÉ le 19/08/2026 (Frédéric : « pour cm2 il n'y a pas
+    // d'évaluations nationales »). L'épreuve se passe EN 6ᵉ ; la déclarer au CM2
+    // la faisait entrer dans son inventaire, et le rendez-vous d'août la posait
+    // alors en tête de son écran. Même retrait dans lib/matrice/saison.ts —
+    // les deux allaient ensemble.
+    niveaux: ["6e"],
     matiere: "maths",
     notions: ["*"],
     intentions: ["preparer"],
@@ -550,7 +577,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
     titre: "Évaluation nationale 6e — français",
     promesse: "Au rythme réel de l'épreuve : une minute par question.",
     url: "/evaluation-nationale-college/6e-francais",
-    niveaux: ["6e", "cm2"],
+    // ⛔ « cm2 » retiré le 19/08/2026 — voir la note sur `eval-nat-6e-maths`.
+    niveaux: ["6e"],
     matiere: "francais",
     notions: ["*"],
     intentions: ["preparer"],

@@ -48,9 +48,16 @@ export const RENDEZ_VOUS: RendezVous[] = [
     // Août ET septembre : l'épreuve tombe en septembre, mais c'est en août
     // qu'on peut encore y faire quelque chose. Proposer le jour J ne sert plus.
     mois: [8, 9],
-    // ⚠️ Le CM2 aussi : un élève qui entre en 6ᵉ garde souvent « CM2 » dans son
-    // profil jusqu'à la rentrée, et c'est LUI que l'épreuve attend.
-    niveaux: ["6e", "cm2"],
+    // ⛔ LE CM2 EN EST RETIRÉ (Frédéric, 19/08/2026 : « pour cm2 il n'y a pas
+    // d'évaluations nationales »). Le fichier pariait qu'un élève entrant en 6ᵉ
+    // garde « CM2 » dans son profil jusqu'à la rentrée. Mais celui qui a coché
+    // CM2 est d'abord un CM2 : il n'a pas d'épreuve à préparer, et en août ce
+    // pari lui prenait DEUX des trois cartes de son écran d'accueil (+6 chacune,
+    // devant le coach à 7). On ne recouvre pas une classe entière d'un rendez-
+    // vous qui n'est pas le sien pour rattraper ceux qui n'ont pas encore changé
+    // de profil. Voir PORTES_ECRITES["cm2"] dans ressources.ts pour ce qui
+    // reprend la place.
+    niveaux: ["6e"],
     ressources: ["eval-nat-6e-maths", "eval-nat-6e-francais", "eval-nationales-hub"],
     label: "Évaluation nationale",
     href: "/evaluation-nationale-college",
