@@ -900,7 +900,23 @@ export default function EntreeMatrice({
       }
     >
       {/* ── 1. Qui es-tu ? ──────────────────────────────────────────────── */}
-      <Etape intitule="Qui es-tu ?" surAccueil={surAccueil}>
+      {/* ⭐ L'INTITULÉ EST VIDE DEPUIS LE 19/08, ET C'EST VOULU.
+          Le titre de l'accueil pose désormais la question lui-même — « Qui
+          es-tu ? Que cherches-tu aujourd'hui ? » — et l'écrire une seconde fois
+          cinq centimètres plus bas, c'est le piège déjà noté le 07/08 à propos
+          des portes d'audience : on demande deux fois, et le visiteur se
+          demande si ce sont deux questions différentes.
+          Les quatre pastilles (Élève · Parent · Enseignant · Chef
+          d'établissement) se lisent seules — aucune étiquette n'est nécessaire
+          pour comprendre ce qu'on demande là.
+          ⚠️ ON GARDE L'ÉTAPE ET SA CHAÎNE VIDE plutôt que de sortir la rangée
+          du composant : `Etape` réserve une colonne de largeur FIXE (sm:w-32),
+          et c'est elle qui aligne les pastilles avec celles de « Ta classe » et
+          « Ta matière » en dessous. Sans elle, la première rangée partirait
+          128 px à gauche des deux autres.
+          ⚠️ L'`aria-label` du groupe, lui, RESTE : un lecteur d'écran qui
+          arrive sur ces boutons n'a pas le titre sous les yeux. */}
+      <Etape intitule="" surAccueil={surAccueil}>
         <div className="rangee-defilante gap-1.5 sm:gap-2" role="group" aria-label="Qui es-tu ?">
           {ROLES.map((r) => {
             const actif = role === r.id;
@@ -997,19 +1013,27 @@ export default function EntreeMatrice({
           est lui-même centré. Son milieu est alors exactement celui de la page.
 
           Le filet marque en même temps la bascule : au-dessus on dit QUI on
-          est, en dessous ce qu'on CHERCHE. */}
+          est, en dessous ce qu'on CHERCHE.
+
+          ⭐ L'INTITULÉ CENTRÉ A ÉTÉ RETIRÉ LE 19/08. Il disait « Que veux-tu
+          faire aujourd'hui ? » — et la même question était posée DEUX AUTRES
+          FOIS sur le même écran : par le titre de l'accueil, qui la reprend mot
+          pour mot depuis ce matin, et par le placeholder du champ, « Écris ta
+          question ou explique ce qui coince… », qui est le plus utile des trois
+          puisqu'il donne un exemple de ce qu'on peut taper.
+          Le filet reste, muet : la bascule se voit sans qu'on la commente, et
+          c'est justement ce que le titre vient d'annoncer.
+          ⚠️ Le `aria-label` du <section> porte toujours la question (voir plus
+          haut) — c'est lui qui la dit aux lecteurs d'écran, pas ce texte.
+          ⚠️ Cette suppression fait perdre le SEUL endroit où la version
+          vouvoyée sortait pour le parent, le prof et la direction. Rien n'est
+          cassé : le placeholder et les libellés du champ gardent leur variante
+          (voir `tutoie` plus bas). */}
       <div
         className={`mt-6 border-t pt-6 ${
           surAccueil ? "border-[#1d1c16]/12" : "border-slate-200"
         }`}
       >
-        <p
-          className={`mb-2.5 text-center text-[13px] font-medium ${
-            surAccueil ? "text-[#1d1c16]/70" : "text-slate-500"
-          }`}
-        >
-          {tutoie ? "Que veux-tu faire aujourd'hui ?" : "Que voulez-vous faire aujourd'hui ?"}
-        </p>
 
         <form
           onSubmit={(e) => {
