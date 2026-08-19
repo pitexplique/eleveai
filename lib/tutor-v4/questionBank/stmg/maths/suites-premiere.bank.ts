@@ -2557,6 +2557,51 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — le seuil DANS L'AUTRE SENS. Le premier item cherche quand la
+    // suite DÉPASSE un seuil ; celui-ci quand elle passe EN DESSOUS. Le
+    // programme cite les deux — un stock qui s'épuise, une valeur qui se
+    // déprécie — et l'inégalité change de sens, ce qui suffit à égarer un élève
+    // qui a appris « le premier rang où c'est plus grand ».
+    kind: "template",
+    id: "stmg_suite_seuil_tableau_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_seuil",
+    microId: "suite_seuil_tableau",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Ici la suite DESCEND : on cherche le premier rang où le terme est INFÉRIEUR au seuil.",
+    tags: ["stmg", "maths", "suites", "canvas", "piege", "template", "short"],
+    generate: () => {
+      const contexte = pick(CONTEXTES_GEO);
+      const u0 = pick([2000, 3000, 4000, 5000] as const);
+      const q = pick([0.7, 0.75, 0.8] as const);
+      const termes = termesGeo(u0, q, 8).map((v) => Math.round(v));
+      const rang = randomInt(2, 6);
+      // Le seuil se place ENTRE deux termes consécutifs : le rang cherché est
+      // alors unique, et aucune valeur ne tombe pile dessus.
+      const seuil = Math.round((termes[rang - 1] + termes[rang]) / 2);
+      return {
+        text:
+          `Le tableau donne ${contexte.sujet} année après année. ` +
+          `À partir de quel rang les valeurs passent-elles SOUS $${seuil}$ ${contexte.unite} ?`,
+        format: "short",
+        expected: [String(rang)],
+        comparator: "number_equal",
+        canvas: canvasTableau(termes, `${contexte.sujet} (${contexte.unite})`),
+        explanation: exp(
+          "Un problème de seuil cherche le PREMIER rang à partir duquel une condition est vérifiée. Selon que la suite monte ou descend, la condition s'écrit « $u(n) >$ seuil » ou « $u(n) <$ seuil ».",
+          "On parcourt le tableau de gauche à droite et l'on s'arrête au premier terme qui vérifie la condition — ici, le premier qui descend sous le seuil.",
+          `Au rang $${rang - 1}$, la valeur est $${fr(termes[rang - 1])}$ : encore au-dessus de $${seuil}$. ` +
+            `Au rang $${rang}$, elle vaut $${fr(termes[rang])}$ : cette fois en dessous. ` +
+            `Le rang cherché est donc $${rang}$ — le PREMIER qui vérifie la condition, et pas le dernier qui ne la vérifiait pas.`,
+          `C'est à partir du rang $${rang}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ suite_seuil_graphique ═══════════════════ */
 
   {
@@ -2587,6 +2632,55 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           "On suit l'horizontale et on repère où les points passent au-dessus.",
           `Le point de rang $${rang - 1}$ est sous la ligne ($${fr(termes[rang - 1])}$), celui de rang $${rang}$ est au-dessus ($${fr(termes[rang])}$).`,
           `Le seuil est franchi à partir du rang $${rang}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — DE COMBIEN on dépasse, pas à partir de quand. Le premier item
+    // lit le rang de franchissement ; celui-ci demande la marge à un rang donné.
+    // C'est la question qui suit toujours dans un sujet — « l'objectif est-il
+    // atteint, et avec quelle avance ? » — et elle oblige à lire DEUX valeurs
+    // sur le graphique, pas une.
+    kind: "template",
+    id: "stmg_suite_seuil_graphique_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_seuil",
+    microId: "suite_seuil_graphique",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Lis la valeur du terme, lis le seuil, et fais la différence.",
+    tags: ["stmg", "maths", "suites", "canvas", "template", "short"],
+    generate: () => {
+      const u0 = pick([40, 60, 80, 120] as const);
+      const r = pick([25, 30, 40, 50] as const);
+      const termes = termesArith(u0, r, 8);
+      // ⛔ LA MARGE SE CHOISIT D'ABORD, LE SEUIL S'EN DÉDUIT. En tirant le seuil
+      // dans une liste fixe, aucun terme ne le dépassait sur certaines suites :
+      // le repli tombait sur le dernier rang et la « marge » devenait NÉGATIVE,
+      // sous une question qui dit « dépasse ». Ici l'écart est posé, donc
+      // toujours positif et lisible.
+      const rang = randomInt(4, 7);
+      const marge = pick([15, 20, 25, 30] as const);
+      const seuil = termes[rang] - marge;
+      return {
+        text:
+          `Le seuil $${seuil}$ est tracé sur ce graphique. ` +
+          `De combien le terme de rang $${rang}$ dépasse-t-il ce seuil ?`,
+        format: "short",
+        expected: [fr(marge)],
+        comparator: "number_equal",
+        canvas: canvasNuage(termes, `Termes de la suite et seuil ${seuil}`, { y: seuil }),
+        explanation: exp(
+          "Un seuil se lit sur l'axe vertical : la marge d'un terme, c'est l'écart entre sa hauteur et cette ligne.",
+          "On lit l'ordonnée du point de rang demandé, on lit le seuil, et l'on soustrait.",
+          `Le terme de rang $${rang}$ vaut $${fr(termes[rang])}$, et le seuil $${seuil}$ : ` +
+            `l'écart est $${fr(termes[rang])} - ${seuil} = ${fr(marge)}$. ` +
+            `⚠️ Ne pas confondre avec le RANG de franchissement : le seuil est franchi dès le rang ` +
+            `$${termes.findIndex((v) => v > seuil)}$, mais la question porte ici sur une hauteur, pas sur un rang.`,
+          `Le terme dépasse le seuil de $${fr(marge)}$.`
         ),
       };
     },
@@ -2630,6 +2724,76 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           `Avec le coefficient $${fr(q)}$, la valeur dépasse $${cible}$ au bout de $${n}$ ${n > 1 ? "années" : "année"}.`,
           `Le seuil est franchi au bout de $${n}$ ${n > 1 ? "années" : "année"}.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — L'ALGORITHME de seuil, qui est au programme et qui tombe au
+    // bac. Le premier item trouve le rang à la main ; celui-ci demande ce qu'on
+    // écrit dans la boucle pour le faire trouver à la machine. Tout se joue sur
+    // la condition du « tant que » : elle exprime ce qu'on n'a PAS ENCORE
+    // atteint, et c'est le contraire de ce que l'élève a en tête.
+    kind: "template",
+    id: "stmg_suite_seuil_rang_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_seuil",
+    microId: "suite_seuil_rang",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« Tant que » dit ce qui fait CONTINUER la boucle : on continue tant que l'objectif n'est PAS atteint.",
+    tags: ["stmg", "maths", "suites", "algorithmique", "piege", "template"],
+    generate: () => {
+      // ⛔ SEULS LES CONTEXTES QUI PEUVENT CROÎTRE. `CONTEXTES_GEO` contient
+      // « la valeur d'un véhicule de société » et « le stock d'invendus » : les
+      // faire AUGMENTER de 20 % par an n'a aucun sens en gestion. On tire donc
+      // dans un sous-ensemble, et l'on écrit « qui vaut » plutôt que « parti
+      // de » — le participe s'accorderait avec le sujet, féminin une fois sur
+      // deux.
+      const contexte = pick([
+        { sujet: "un capital placé", unite: "€" },
+        { sujet: "le chiffre d'affaires d'une enseigne", unite: "k€" },
+        { sujet: "le nombre d'abonnés d'une plateforme", unite: "abonnés" },
+      ] as const);
+      const u0 = pick([1000, 1500, 2000, 3000] as const);
+      const t = pick([10, 20, 25] as const);
+      const q = 1 + t / 100;
+      const cible = Math.round(u0 * pick([1.5, 2] as const));
+      const bonne = `\`Tant que u < ${cible}\``;
+      return {
+        text:
+          `On veut trouver par un algorithme au bout de combien d'années ${contexte.sujet}, ` +
+          `qui vaut $${u0}$ ${contexte.unite} aujourd'hui et augmente de $${t}\\,\\%$ par an, dépasse $${cible}$ ${contexte.unite}. ` +
+          `L'algorithme initialise \`u ← ${u0}\` et \`n ← 0\`, puis répète \`u ← u * ${fr(q)}\` et \`n ← n + 1\`. ` +
+          `Quelle condition écrire dans le « tant que » ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `\`Tant que u > ${cible}\``,
+          `\`Tant que n < ${cible}\``,
+          `\`Tant que u = ${cible}\``,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une boucle « tant que » continue AUSSI LONGTEMPS que sa condition est vraie, et s'arrête dès qu'elle devient fausse. La condition décrit donc l'état où l'on n'a pas encore atteint l'objectif.",
+          "On se demande : tant que quoi, faut-il continuer à multiplier ? Tant que la valeur reste EN DESSOUS de la cible.",
+          `On veut s'arrêter dès que $u$ dépasse $${cible}$ : la boucle doit donc tourner tant que $u$ lui est INFÉRIEUR. ` +
+            `⚠️ \`Tant que u > ${cible}\` ne s'exécuterait pas une seule fois, puisque $u$ vaut $${u0}$ au départ — ` +
+            `l'algorithme rendrait $n = 0$. ` +
+            `Et \`Tant que n < ${cible}\` compterait $${cible}$ tours : on testerait le rang, pas la valeur.`,
+          `La condition est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `\`Tant que u > ${cible}\``,
+            cause: `la boucle ne démarrerait pas : $u$ vaut $${u0}$ au départ, donc la condition est fausse dès le premier test`,
+          },
+          {
+            choice: `\`Tant que n < ${cible}\``,
+            cause: "teste le RANG au lieu de la VALEUR : la boucle tournerait un nombre fixe de fois, sans regarder la cible",
+          },
+        ],
       };
     },
   },
@@ -2683,6 +2847,55 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           `À l'année $${n - 1}$ : A vaut $${fr(A[n - 1])}$ et B vaut $${fr(B[n - 1])}$. ` +
             `À l'année $${n}$ : A vaut $${fr(A[n])}$ et B vaut $${fr(B[n])}$.`,
           `L'offre B dépasse l'offre A à partir de l'année $${n}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — AVANT le croisement. Le premier item cherche le rang où la
+    // suite géométrique passe devant ; celui-ci demande la dernière année où
+    // l'arithmétique tient encore la tête. C'est le même tableau lu à l'envers,
+    // et c'est la question du décideur : « combien de temps me reste-t-il ? »
+    //
+    // ⚠️ La réponse est le rang précédent le croisement — un décalage de un,
+    // exactement celui que le premier item ne fait pas travailler.
+    kind: "template",
+    id: "stmg_suite_seuil_croisement_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_seuil",
+    microId: "suite_seuil_croisement",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche le croisement, puis recule d'un rang : c'est le dernier où l'ordre n'a pas encore basculé.",
+    tags: ["stmg", "maths", "suites", "canvas", "piege", "template", "short"],
+    generate: () => {
+      const a0 = pick([1200, 1400, 1500] as const);
+      const r = pick([80, 100, 120] as const);
+      const b0 = pick([700, 800, 900] as const);
+      const q = pick([1.4, 1.5, 1.6] as const);
+      const A = termesArith(a0, r, 8);
+      const B = termesGeo(b0, q, 8).map((v) => Math.round(v));
+      const croisement = B.findIndex((v, k) => v > A[k]);
+      const dernier = croisement - 1;
+      return {
+        text:
+          `Deux investissements : $A$ part de $${a0}$ € et gagne $${r}$ € par an ; ` +
+          `$B$ part de $${b0}$ € et augmente de $${Math.round((q - 1) * 100)}\\,\\%$ par an. ` +
+          `Quel est le DERNIER rang où $A$ est encore devant $B$ ?`,
+        format: "short",
+        expected: [String(dernier)],
+        comparator: "number_equal",
+        canvas: canvasTableau(A.slice(0, croisement + 2), "Investissement A (€)"),
+        explanation: exp(
+          "Deux suites de natures différentes se croisent une fois : l'arithmétique mène au départ, la géométrique finit par la dépasser. Le croisement sépare deux périodes.",
+          "On compare les deux termes rang par rang, on note le premier rang où l'ordre bascule, puis on recule d'un cran.",
+          `Au rang $${dernier}$ : $A = ${fr(A[dernier])}$ € contre $B = ${fr(B[dernier])}$ € — $A$ est encore devant. ` +
+            `Au rang $${croisement}$ : $A = ${fr(A[croisement])}$ € contre $B = ${fr(B[croisement])}$ € — $B$ est passé devant. ` +
+            `Le dernier rang favorable à $A$ est donc $${dernier}$, et non $${croisement}$ : ` +
+            `celui-là est le PREMIER où $A$ a perdu l'avantage.`,
+          `$A$ reste devant jusqu'au rang $${dernier}$.`
         ),
       };
     },
