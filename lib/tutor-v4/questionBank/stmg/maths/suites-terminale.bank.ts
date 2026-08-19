@@ -153,6 +153,46 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — À QUOI SERT la forme explicite. Le premier item la fait
+    // écrire ; celui-ci s'en sert pour SAUTER au rang 25 sans passer par les
+    // vingt-quatre précédents. C'est la raison même pour laquelle le programme
+    // l'introduit en terminale — en première, il fallait dérouler la récurrence
+    // ligne à ligne, et le tableur y suppléait.
+    kind: "template",
+    id: "stmg_suiteT_arith_explicite_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_terme_general",
+    microId: "suiteT_arith_explicite",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "On remplace $n$ par le rang demandé : aucun terme intermédiaire n'est nécessaire.",
+    tags: ["stmg", "maths", "suites", "template", "short"],
+    generate: () => {
+      const u0 = pick([12, 25, 40, 60, 80, 100, 150, 200] as const);
+      const r = pick([-25, -15, -8, -5, 4, 7, 12, 18, 30, 45] as const);
+      const n = pick([15, 20, 24, 30, 40] as const);
+      const valeur = r * n + u0;
+      return {
+        text:
+          `Une suite arithmétique a pour terme général $u(n) = ${r}n ${u0 >= 0 ? "+" : "-"} ${Math.abs(u0)}$. ` +
+          `Que vaut $u(${n})$ ?`,
+        format: "short",
+        expected: [fr(valeur)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le terme général donne chaque terme DIRECTEMENT en fonction de son rang : il suffit d'y remplacer $n$. C'est ce qui distingue une définition explicite d'une définition par récurrence.",
+          "On substitue le rang demandé, puis on calcule en respectant les signes.",
+          `$u(${n}) = ${r} \\times ${n} ${u0 >= 0 ? "+" : "-"} ${Math.abs(u0)} = ${fr(r * n)} ${u0 >= 0 ? "+" : "-"} ${Math.abs(u0)} = ${fr(valeur)}$. ` +
+            `Par récurrence, il aurait fallu ${n} additions successives depuis $u(0) = ${u0}$ : ` +
+            `le résultat est le même, le chemin est bien plus long.`,
+          `$u(${n}) = ${fr(valeur)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ suiteT_geo_explicite ═══════════════ */
 
   {
@@ -271,6 +311,48 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — REMONTER au premier terme. Le premier item lit la raison dans
+    // un tableau ; celui-ci donne un terme lointain et la raison, et fait
+    // retrouver $u(0)$. Avec la forme explicite $u(n) = u_0 \times q^n$, c'est
+    // une division par $q^n$ — le geste que réclame tout énoncé qui part de la
+    // situation d'aujourd'hui pour remonter à celle du départ.
+    kind: "template",
+    id: "stmg_suiteT_raison_modele_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_terme_general",
+    microId: "suiteT_raison_modele",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "De $u(n) = u_0 \\times q^n$ on tire $u_0 = \\dfrac{u(n)}{q^n}$.",
+    tags: ["stmg", "maths", "suites", "template", "short"],
+    generate: () => {
+      const grandeur = pick(GRANDEURS_GEO);
+      const u0 = pick([100, 200, 400, 800, 1000] as const);
+      const q = pick([1.5, 2, 3, 0.5] as const);
+      const n = randomInt(3, 5);
+      const valeur = Math.round(u0 * Math.pow(q, n));
+      return {
+        text:
+          `${grandeur.sujet.charAt(0).toUpperCase()}${grandeur.sujet.slice(1)} suit une suite géométrique ` +
+          `de raison $${fr(q)}$. Au bout de $${n}$ ans, il vaut $${valeur}$ ${grandeur.unite}. ` +
+          `Quelle était sa valeur au départ ?`,
+        format: "short",
+        expected: [fr(u0)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le terme général d'une suite géométrique s'écrit $u(n) = u_0 \\times q^n$. Cette égalité se lit dans les deux sens : elle donne $u(n)$ à partir de $u_0$, et $u_0$ à partir de $u(n)$.",
+          "On divise la valeur connue par la raison élevée à la puissance du rang.",
+          `$u_0 = \\dfrac{${valeur}}{${fr(q)}^{${n}}} = \\dfrac{${valeur}}{${fr(Math.round(Math.pow(q, n) * 10000) / 10000)}} = ${fr(u0)}$. ` +
+            `⚠️ Diviser par $${fr(q)} \\times ${n}$ au lieu de $${fr(q)}^{${n}}$ donnerait ` +
+            `$${fr(Math.round((valeur / (q * n)) * 100) / 100)}$ : une raison géométrique se compose par PUISSANCES, pas par produits.`,
+          `La valeur de départ était $${fr(u0)}$ ${grandeur.unite}.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ suiteT_trois_termes ═══════════════ */
 
   {
@@ -331,6 +413,63 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — le TEST à mener, pas la conclusion. Le premier item classe
+    // trois nombres ; celui-ci demande comment on s'y prend. Les deux tests
+    // n'ont pas la même forme — une DIFFÉRENCE d'un côté, un QUOTIENT de
+    // l'autre — et il faut les mener tous les deux avant de dire « ni l'un ni
+    // l'autre ».
+    kind: "template",
+    id: "stmg_suiteT_trois_termes_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_terme_general",
+    microId: "suiteT_trois_termes",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Arithmétique : on compare $b - a$ et $c - b$. Géométrique : on compare $\\dfrac{b}{a}$ et $\\dfrac{c}{b}$.",
+    tags: ["stmg", "maths", "suites", "template"],
+    generate: () => {
+      const q = pick([2, 3, 4] as const);
+      const a = pick([3, 4, 5, 6, 8] as const);
+      const b = a * q;
+      const c = b * q;
+      const bonne = `comparer $\\dfrac{${b}}{${a}}$ et $\\dfrac{${c}}{${b}}$`;
+      return {
+        text:
+          `Pour savoir si $${a}$, $${b}$ et $${c}$ sont trois termes consécutifs d'une suite GÉOMÉTRIQUE, ` +
+          `quel test faut-il mener ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `comparer $${b} - ${a}$ et $${c} - ${b}$`,
+          `vérifier que $${b}$ est la demi-somme de $${a}$ et $${c}$`,
+          `vérifier que les trois nombres sont positifs`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Trois nombres sont consécutifs dans une suite géométrique quand le QUOTIENT du deuxième par le premier égale celui du troisième par le deuxième. Dans une suite arithmétique, c'est la DIFFÉRENCE qui se conserve.",
+          "On forme les deux quotients et l'on regarde s'ils coïncident. Le test des différences, lui, répondrait à une autre question.",
+          `$\\dfrac{${b}}{${a}} = ${fr(q)}$ et $\\dfrac{${c}}{${b}} = ${fr(q)}$ : les deux quotients sont égaux, ` +
+            `les trois nombres sont bien géométriques de raison $${fr(q)}$. ` +
+            `Le test des différences donnerait $${b - a}$ puis $${c - b}$ — deux nombres différents, ` +
+            `ce qui montre seulement qu'ils ne sont PAS arithmétiques.`,
+          `On compare les deux quotients.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `comparer $${b} - ${a}$ et $${c} - ${b}$`,
+            cause: "c'est le test d'une suite ARITHMÉTIQUE : il répond à une autre question",
+          },
+          {
+            choice: `vérifier que $${b}$ est la demi-somme de $${a}$ et $${c}$`,
+            cause: "la demi-somme caractérise la moyenne ARITHMÉTIQUE ; pour une géométrique, c'est la racine du produit",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════ suiteT_moyenne_arithmetique ═══════════ */
 
   {
@@ -357,6 +496,46 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
           "On additionne les deux nombres et l'on divise par $2$.",
           `$\\dfrac{${a} + ${b}}{2} = \\dfrac{${a + b}}{2} = ${fr((a + b) / 2)}$.`,
           `La moyenne arithmétique est $${fr((a + b) / 2)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — retrouver l'EXTRÉMITÉ, pas le milieu. Le premier item calcule
+    // la moyenne de deux nombres ; celui-ci donne la moyenne et l'un des deux,
+    // et fait chercher l'autre. C'est une équation, et c'est la question que
+    // pose un objectif : « pour que la moyenne atteigne ce chiffre, combien
+    // faut-il réaliser ce mois-ci ? »
+    kind: "template",
+    id: "stmg_suiteT_moyenne_arithmetique_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_moyennes",
+    microId: "suiteT_moyenne_arithmetique",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Si $m$ est la demi-somme de $a$ et $b$, alors $a + b = 2m$.",
+    tags: ["stmg", "maths", "suites", "template", "short"],
+    generate: () => {
+      const a = pick([12, 18, 24, 30, 42, 56, 64, 80] as const);
+      const b = a + 2 * randomInt(3, 25);
+      const m = (a + b) / 2;
+      return {
+        text:
+          `La moyenne arithmétique de $${a}$ et d'un second nombre vaut $${fr(m)}$. ` +
+          `Quel est ce second nombre ?`,
+        format: "short",
+        expected: [fr(b)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La moyenne arithmétique de deux nombres est leur demi-somme : $m = \\dfrac{a + b}{2}$. Cette égalité se résout comme une équation dès que deux des trois nombres sont connus.",
+          "On multiplie la moyenne par $2$ pour obtenir la somme, puis on retranche le nombre connu.",
+          `$a + b = 2m = 2 \\times ${fr(m)} = ${fr(2 * m)}$, donc $b = ${fr(2 * m)} - ${a} = ${fr(b)}$. ` +
+            `Vérification : $\\dfrac{${a} + ${fr(b)}}{2} = ${fr(m)}$. ` +
+            `⚠️ L'erreur courante est de retrancher $${a}$ à la MOYENNE au lieu de le retrancher à la SOMME : ` +
+            `on trouverait $${fr(m - a)}$ au lieu de $${fr(b)}$.`,
+          `Le second nombre est $${fr(b)}$.`
         ),
       };
     },
@@ -398,6 +577,65 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
             `(La moyenne arithmétique vaudrait $${fr((a + b) / 2)}$, ce n'est pas la même chose.)`,
           `La moyenne géométrique est $${fr(m)}$.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — POURQUOI la racine, et pas la demi-somme. Le premier item fait
+    // calculer la moyenne géométrique ; celui-ci demande la raison de cette
+    // formule. Elle tient à ce qu'on veut conserver : la moyenne arithmétique
+    // garde la SOMME, la géométrique garde le PRODUIT — donc le coefficient
+    // multiplicateur, donc le taux d'évolution. C'est ce qui la rend juste en
+    // gestion, là où la demi-somme se trompe.
+    kind: "template",
+    id: "stmg_suiteT_moyenne_geometrique_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_moyennes",
+    microId: "suiteT_moyenne_geometrique",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un taux d'évolution se compose en MULTIPLIANT : la moyenne qui lui convient doit conserver le produit.",
+    tags: ["stmg", "maths", "suites", "piege", "template"],
+    generate: () => {
+      const k = pick([1, 2, 3, 5] as const);
+      const p = pick([1, 2, 3] as const);
+      const qq = pick([4, 5, 6, 7] as const);
+      const a = k * p * p;
+      const b = k * qq * qq;
+      const geo = k * p * qq;
+      const arith = (a + b) / 2;
+      const bonne =
+        "parce qu'elle conserve le PRODUIT des deux nombres : deux évolutions successives se multiplient";
+      return {
+        text:
+          `La moyenne géométrique de $${a}$ et $${b}$ vaut $${fr(geo)}$, alors que leur moyenne arithmétique ` +
+          `vaut $${fr(arith)}$. Pourquoi utilise-t-on la première pour des taux d'évolution ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          "parce qu'elle donne toujours un nombre plus petit, donc plus prudent",
+          "parce que la moyenne arithmétique ne s'applique qu'aux nombres négatifs",
+          "parce qu'elle est plus simple à calculer",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La moyenne arithmétique conserve la SOMME : deux fois $m$ font $a + b$. La moyenne géométrique conserve le PRODUIT : $m^2 = a \\times b$. Or des évolutions successives se composent en se MULTIPLIANT — c'est donc la seconde qui convient.",
+          "On se demande ce que l'on veut retrouver en appliquant deux fois la moyenne : la même somme, ou le même produit.",
+          `$${fr(geo)} \\times ${fr(geo)} = ${fr(geo * geo)} = ${a} \\times ${b}$ : le produit est conservé. ` +
+            `Avec la moyenne arithmétique, $${fr(arith)} \\times ${fr(arith)} = ${fr(arith * arith)}$, ` +
+            `soit ${fr(Math.round((arith * arith - a * b) * 100) / 100)} de trop — appliquée deux fois, elle ne redonnerait pas ` +
+            `l'évolution globale. C'est aussi pourquoi la moyenne géométrique est toujours inférieure à l'arithmétique, ` +
+            `mais ce n'est pas une question de prudence : c'est une conséquence, pas la raison.`,
+          `Parce qu'elle conserve le produit, et que les taux se composent par multiplication.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "parce qu'elle donne toujours un nombre plus petit, donc plus prudent",
+            cause: "elle est en effet toujours plus petite, mais c'est une conséquence de la formule — pas la raison de son emploi",
+          },
+        ],
       };
     },
   },
@@ -465,6 +703,52 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
               : "a pris la moyenne géométrique alors que la suite demandée est arithmétique",
           },
         ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — intercaler EN GESTION, avec des euros. Le premier item choisit
+    // entre les deux moyennes sur des nombres nus ; celui-ci pose la situation
+    // qui les départage : un capital passe de A à C en deux ans, quelle valeur
+    // à mi-parcours si la hausse est la même chaque année ? La demi-somme
+    // donnerait un montant faux, et l'écart se lit en euros.
+    kind: "template",
+    id: "stmg_suiteT_moyenne_intercaler_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_moyennes",
+    microId: "suiteT_moyenne_intercaler",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« Le même pourcentage chaque année » : c'est une suite géométrique, donc la moyenne géométrique.",
+    tags: ["stmg", "maths", "suites", "template", "short"],
+    generate: () => {
+      // On part du coefficient : les trois montants tombent alors juste, et la
+      // moyenne géométrique est exactement le terme du milieu.
+      const placement = pick(PLACEMENTS);
+      const u0 = pick([1000, 2000, 2500, 4000, 5000] as const);
+      const q = pick([1.1, 1.2, 1.25, 1.5] as const);
+      const u1 = Math.round(u0 * q * 100) / 100;
+      const u2 = Math.round(u0 * q * q * 100) / 100;
+      const demiSomme = Math.round(((u0 + u2) / 2) * 100) / 100;
+      return {
+        text:
+          `Sur ${placement}, un capital passe de $${eur(u0)}$ à $${eur(u2)}$ en deux ans, ` +
+          `avec le MÊME pourcentage d'augmentation chaque année. ` +
+          `Quel était le capital au bout d'un an, en euros ?`,
+        format: "short",
+        expected: [fr(u1)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Quand le même pourcentage s'applique chaque année, les montants forment une suite GÉOMÉTRIQUE. Le terme du milieu est alors la moyenne géométrique des deux autres : $u_1 = \\sqrt{u_0 \\times u_2}$.",
+          "On multiplie les deux montants connus et l'on prend la racine carrée — surtout pas la demi-somme, qui suppose une progression par ajouts égaux.",
+          `$\\sqrt{${fr(u0)} \\times ${fr(u2)}} = \\sqrt{${fr(Math.round(u0 * u2 * 100) / 100)}} = ${fr(u1)}$ €. ` +
+            `Vérification : le coefficient annuel vaut $${fr(q)}$, appliqué deux fois il donne bien $${eur(u2)}$. ` +
+            `⚠️ La demi-somme donnerait $${eur(demiSomme)}$ — soit $${eur(Math.round((demiSomme - u1) * 100) / 100)}$ de trop : ` +
+            `elle décrit une progression par ajouts égaux, pas par pourcentage.`,
+          `Le capital valait $${eur(u1)}$ au bout d'un an.`
+        ),
       };
     },
   },
