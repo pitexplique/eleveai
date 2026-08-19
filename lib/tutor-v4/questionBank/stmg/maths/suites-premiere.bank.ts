@@ -1134,6 +1134,65 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — le SENS du quotient. Le premier item fait calculer la raison
+    // dans un tableau, où l'on divise deux cases voisines sans trop réfléchir ;
+    // celui-ci demande QUEL quotient. Diviser le précédent par le suivant donne
+    // l'inverse — un nombre parfaitement plausible, et faux. C'est la même
+    // faute que le taux de variation posé à l'envers en dérivation.
+    kind: "template",
+    id: "stmg_suite_geo_reconnaitre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_geometrique",
+    microId: "suite_geo_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La raison est le nombre par lequel on MULTIPLIE : c'est donc le terme suivant divisé par le précédent.",
+    tags: ["stmg", "maths", "suites", "canvas", "piege", "template"],
+    generate: () => {
+      const u0 = pick([16, 24, 32, 48, 64, 80, 100, 128] as const);
+      const q = pick([0.5, 1.5, 2, 2.5, 0.25] as const);
+      const termes = termesGeo(u0, q, 5);
+      const k = randomInt(1, 3);
+      const bonne = `$\\dfrac{${fr(termes[k])}}{${fr(termes[k - 1])}}$`;
+      return {
+        text:
+          `Le tableau donne les premiers termes d'une suite géométrique. ` +
+          `Quel calcul donne sa raison ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `$\\dfrac{${fr(termes[k - 1])}}{${fr(termes[k])}}$`,
+          `$${fr(termes[k])} - ${fr(termes[k - 1])}$`,
+          `$${fr(termes[k])} \\times ${fr(termes[k - 1])}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasTableau(termes, "Premiers termes de la suite"),
+        explanation: exp(
+          "Dans une suite géométrique, chaque terme s'obtient en multipliant le précédent par la raison : $u(n+1) = q \\times u(n)$. La raison est donc le terme SUIVANT divisé par le PRÉCÉDENT.",
+          "On choisit deux termes consécutifs et l'on divise celui de droite par celui de gauche. L'ordre compte : l'inverse donnerait un autre nombre, tout aussi crédible.",
+          `$\\dfrac{${fr(termes[k])}}{${fr(termes[k - 1])}} = ${fr(q)}$, et ce quotient est le même d'un rang à l'autre : ` +
+            `c'est ce qui fait de la suite une suite géométrique. ` +
+            `⚠️ À l'envers, on obtiendrait $${fr(Math.round((1 / q) * 10000) / 10000)}$ — ` +
+            `un nombre qui ${q > 1 ? "annoncerait une baisse là où la suite monte" : "annoncerait une hausse là où la suite descend"}. ` +
+            `Et la DIFFÉRENCE, elle, ne serait constante que pour une suite arithmétique.`,
+          `La raison se calcule par $\\dfrac{${fr(termes[k])}}{${fr(termes[k - 1])}}$, soit $${fr(q)}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$\\dfrac{${fr(termes[k - 1])}}{${fr(termes[k])}}$`,
+            cause: `a divisé dans le mauvais sens : cela donne $${fr(Math.round((1 / q) * 10000) / 10000)}$, l'inverse de la raison`,
+          },
+          {
+            choice: `$${fr(termes[k])} - ${fr(termes[k - 1])}$`,
+            cause: "la différence caractérise une suite ARITHMÉTIQUE ; ici les termes se multiplient",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ suite_geo_recurrence ═══════════════ */
 
   {
@@ -1163,6 +1222,49 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           "On calcule $u(1)$, puis $u(2)$ — on multiplie deux fois, on ne multiplie pas par $2q$.",
           `$u(1) = ${u0} \\times ${fr(q)} = ${fr(termes[1])}$, puis $u(2) = ${fr(termes[1])} \\times ${fr(q)} = ${fr(termes[2])}$.`,
           `$u(2) = ${fr(termes[2])}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — REMONTER une suite géométrique. Le premier item descend en
+    // multipliant ; celui-ci part d'un terme connu et revient en arrière, donc
+    // DIVISE. C'est la question d'un énoncé qui donne le capital d'aujourd'hui
+    // et demande celui du départ — et l'élève qui multiplie au lieu de diviser
+    // s'éloigne au lieu de revenir.
+    kind: "template",
+    id: "stmg_suite_geo_recurrence_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_geometrique",
+    microId: "suite_geo_recurrence",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Multiplier fait avancer ; pour revenir en arrière, on DIVISE — autant de fois qu'il y a de rangs à remonter.",
+    tags: ["stmg", "maths", "suites", "template", "short"],
+    generate: () => {
+      // On part du premier terme pour que la remontée tombe juste : les raisons
+      // choisies redonnent des valeurs entières après division.
+      const u0 = pick([80, 100, 160, 200, 400, 800] as const);
+      const q = pick([1.5, 2, 2.5, 0.5] as const);
+      const rang = pick([2, 3] as const);
+      const termes = termesGeo(u0, q, rang + 1);
+      return {
+        text:
+          `Une suite géométrique de raison $q = ${fr(q)}$ vérifie $u(${rang}) = ${fr(termes[rang])}$. ` +
+          `Que vaut $u(0)$ ?`,
+        format: "short",
+        expected: [fr(u0)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Chaque pas vers l'avant multiplie par $q$ ; chaque pas en arrière divise donc par $q$. Remonter de $n$ rangs revient à diviser $n$ fois.",
+          "On compte les rangs à remonter, et l'on divise par la raison autant de fois — ou, ce qui revient au même, par $q$ élevé à cette puissance.",
+          `De $u(${rang})$ à $u(0)$, il y a $${rang}$ pas en arrière : ` +
+            `$\\dfrac{${fr(termes[rang])}}{${fr(q)}^{${rang}}} = \\dfrac{${fr(termes[rang])}}{${fr(Math.round(Math.pow(q, rang) * 10000) / 10000)}} = ${fr(u0)}$. ` +
+            `⚠️ Multiplier au lieu de diviser donnerait $${fr(Math.round(termes[rang] * Math.pow(q, rang) * 100) / 100)}$ : ` +
+            `on s'éloignerait du départ au lieu d'y revenir.`,
+          `$u(0) = ${fr(u0)}$.`
         ),
       };
     },
@@ -1200,6 +1302,65 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
             `$\\dfrac{u(n+1)}{u(n)} = ${fr(q)}$ pour tout $n$.`,
           `La suite est géométrique de raison $q = ${fr(q)}$.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — TRIER les méthodes, quand le premier item fait rédiger. La
+    // question ouverte récompense l'élève qui écrit la démonstration ; celui-ci
+    // met les quatre façons de s'y prendre côte à côte. Deux pièges y logent :
+    // le test de la DIFFÉRENCE, qui prouverait autre chose, et le contrôle sur
+    // « les trois premiers termes », qui ne prouve rien du tout.
+    kind: "template",
+    id: "stmg_suite_geo_demontrer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_geometrique",
+    microId: "suite_geo_demontrer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Démontrer, c'est valable pour TOUT $n$ : un calcul sur les premiers termes ne fait que suggérer.",
+    tags: ["stmg", "maths", "suites", "piege", "template"],
+    generate: () => {
+      const contexte = pick(CONTEXTES_GEO);
+      const t = pick([4, 5, 8, 10, 15, 20, 25, 30] as const);
+      const hausse = Math.random() < 0.5;
+      const q = 1 + (hausse ? t : -t) / 100;
+      const bonne =
+        `calculer le quotient $\\dfrac{u(n+1)}{u(n)}$ pour tout $n$, et montrer qu'il vaut toujours $${fr(q)}$`;
+      return {
+        text:
+          `${contexte.sujet.charAt(0).toUpperCase()}${contexte.sujet.slice(1)} ` +
+          `${hausse ? "augmente" : "diminue"} de $${t}\\,\\%$ chaque année. ` +
+          `Comment démontrer que la suite $u$ correspondante est géométrique ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `calculer la différence $u(n+1) - u(n)$ et montrer qu'elle est constante`,
+          `vérifier sur les trois premiers termes que le quotient vaut $${fr(q)}$`,
+          `montrer que la suite est croissante`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une suite est géométrique lorsque le QUOTIENT de deux termes consécutifs est constant. Le démontrer suppose de l'établir pour tout entier $n$, pas seulement sur les premiers termes.",
+          "On écrit $u(n+1)$ en fonction de $u(n)$ à partir de la situation, on forme le quotient, et l'on constate qu'il ne dépend pas de $n$.",
+          `Une ${hausse ? "hausse" : "baisse"} de $${t}\\,\\%$ multiplie par $${fr(q)}$ : ` +
+            `$u(n+1) = ${fr(q)} \\times u(n)$, donc $\\dfrac{u(n+1)}{u(n)} = ${fr(q)}$ quel que soit $n$. ` +
+            `⚠️ La DIFFÉRENCE, elle, n'est pas constante ici : elle vaut $${fr(Math.round((q - 1) * 100) / 100)} \\times u(n)$, ` +
+            `donc elle grandit avec $u(n)$. Et un contrôle sur trois termes ne serait qu'une vérification, pas une preuve.`,
+          `On montre que le quotient $\\dfrac{u(n+1)}{u(n)}$ vaut $${fr(q)}$ pour tout $n$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `calculer la différence $u(n+1) - u(n)$ et montrer qu'elle est constante`,
+            cause: "c'est le test d'une suite ARITHMÉTIQUE — et ici la différence n'est justement pas constante",
+          },
+          {
+            choice: `vérifier sur les trois premiers termes que le quotient vaut $${fr(q)}$`,
+            cause: "trois termes ne démontrent rien : une suite peut coïncider au départ et changer ensuite",
+          },
+        ],
       };
     },
   },
@@ -1249,6 +1410,69 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — DEUX années, et le piège des taux qu'on additionne. Le premier
+    // item traduit une raison en une évolution annuelle ; celui-ci demande
+    // l'évolution sur DEUX ans. Doubler le taux est faux, et l'écart n'est pas
+    // une subtilité : sur $+20\,\%$ deux fois, on n'obtient pas $+40$ mais
+    // $+44\,\%$. C'est le lien direct avec les évolutions successives du
+    // domaine des automatismes.
+    kind: "template",
+    id: "stmg_suite_geo_taux_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_geo_evolution",
+    microId: "suite_geo_taux",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les coefficients se MULTIPLIENT d'une année sur l'autre ; les pourcentages, eux, ne s'additionnent pas.",
+    tags: ["stmg", "maths", "suites", "piege", "template"],
+    generate: () => {
+      const t = pick([5, 8, 10, 15, 20, 25, 30] as const);
+      const hausse = Math.random() < 0.5;
+      const q = 1 + (hausse ? t : -t) / 100;
+      const q2 = Math.round(q * q * 10000) / 10000;
+      const global = Math.round((q2 - 1) * 10000) / 100;
+      const naif = hausse ? 2 * t : -2 * t;
+      const bonne = `une ${hausse ? "hausse" : "baisse"} de $${fr(Math.abs(global))}\\,\\%$`;
+      return {
+        text:
+          `Une suite géométrique a pour raison $q = ${fr(q)}$, ce qui correspond à une ` +
+          `${hausse ? "hausse" : "baisse"} de $${t}\\,\\%$ par an. ` +
+          `À quelle évolution correspond le passage de $u(0)$ à $u(2)$, soit DEUX années ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `une ${hausse ? "hausse" : "baisse"} de $${Math.abs(naif)}\\,\\%$`,
+          `une ${hausse ? "hausse" : "baisse"} de $${t}\\,\\%$, comme chaque année`,
+          `une ${hausse ? "baisse" : "hausse"} de $${fr(Math.abs(global))}\\,\\%$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Sur plusieurs périodes, ce sont les COEFFICIENTS MULTIPLICATEURS qui se multiplient entre eux — jamais les pourcentages qui s'additionnent.",
+          "On élève le coefficient à la puissance du nombre d'années, puis on retire $1$ pour lire le taux global en pourcentage.",
+          `$${fr(q)}^2 = ${fr(q2)}$, donc l'évolution globale vaut $${fr(q2)} - 1 = ${fr(Math.round((q2 - 1) * 10000) / 10000)}$, ` +
+            `soit ${hausse ? "+" : "−"}$${fr(Math.abs(global))}\\,\\%$. ` +
+            `⚠️ Doubler le taux donnerait ${hausse ? "+" : "−"}$${Math.abs(naif)}\\,\\%$ : ` +
+            `${hausse
+              ? `c'est MOINS que la réalité, car la seconde hausse porte sur un montant déjà augmenté`
+              : `c'est PLUS que la réalité, car la seconde baisse porte sur un montant déjà réduit`}.`,
+          `Sur deux ans, l'évolution est une ${hausse ? "hausse" : "baisse"} de $${fr(Math.abs(global))}\\,\\%$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `une ${hausse ? "hausse" : "baisse"} de $${Math.abs(naif)}\\,\\%$`,
+            cause: "a additionné les pourcentages : seuls les coefficients multiplicateurs se composent",
+          },
+          {
+            choice: `une ${hausse ? "hausse" : "baisse"} de $${t}\\,\\%$, comme chaque année`,
+            cause: "le taux annuel ne devient pas le taux global : deux années d'évolution s'accumulent",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════ suite_geo_raison_depuis_taux ═══════════ */
 
   {
@@ -1279,6 +1503,51 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           "On traduit le pourcentage en décimal et on l'ajoute ou le retranche à $1$.",
           `$q = 1 ${hausse ? "+" : "-"} ${fr(t / 100)} = ${fr(q)}$.`,
           `La raison est $q = ${fr(q)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — retrouver le TAUX à partir de deux relevés. Le premier item
+    // part du taux et donne la raison ; celui-ci part de deux valeurs et
+    // remonte au taux. Deux étapes s'y enchaînent — le quotient, puis l'écart à
+    // $1$ converti en pourcentage — et c'est la question qu'un tableau de bord
+    // pose vraiment : « de combien avons-nous progressé ? »
+    kind: "template",
+    id: "stmg_suite_geo_raison_depuis_taux_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_geo_evolution",
+    microId: "suite_geo_raison_depuis_taux",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "D'abord le quotient des deux valeurs, ensuite son écart à $1$ — et l'on multiplie par $100$.",
+    tags: ["stmg", "maths", "suites", "template", "short"],
+    generate: () => {
+      const contexte = pick(CONTEXTES_GEO);
+      const t = pick([5, 10, 15, 20, 25, 40, 50] as const);
+      const hausse = Math.random() < 0.5;
+      const q = 1 + (hausse ? t : -t) / 100;
+      // Le premier terme est choisi pour que la seconde valeur tombe juste.
+      const u0 = pick([200, 400, 800, 1000, 2000] as const);
+      const u1 = Math.round(u0 * q * 100) / 100;
+      return {
+        text:
+          `${contexte.sujet.charAt(0).toUpperCase()}${contexte.sujet.slice(1)} passe de ` +
+          `$${fr(u0)}$ à $${fr(u1)}$ ${contexte.unite} en un an. ` +
+          `Quel est le taux d'évolution, en pourcentage ? (un nombre négatif s'il s'agit d'une baisse)`,
+        format: "short",
+        expected: [fr(hausse ? t : -t)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le coefficient multiplicateur est le quotient de la valeur finale par la valeur initiale. Le taux d'évolution en découle : c'est l'écart de ce coefficient à $1$, exprimé en pourcentage.",
+          "On divise l'arrivée par le départ, on retire $1$, puis on multiplie par $100$. Le signe du résultat dit s'il s'agit d'une hausse ou d'une baisse.",
+          `$q = \\dfrac{${fr(u1)}}{${fr(u0)}} = ${fr(q)}$, puis $${fr(q)} - 1 = ${fr(Math.round((q - 1) * 10000) / 10000)}$, ` +
+            `soit $${fr(hausse ? t : -t)}\\,\\%$. ` +
+            `⚠️ La DIFFÉRENCE $${fr(u1)} - ${fr(u0)} = ${fr(Math.round((u1 - u0) * 100) / 100)}$ ${contexte.unite} ` +
+            `est une variation absolue : elle ne se lit pas en pourcentage sans être rapportée au départ.`,
+          `Le taux d'évolution est de $${fr(hausse ? t : -t)}\\,\\%$.`
         ),
       };
     },
@@ -1318,6 +1587,69 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           {
             choice: q > 1 ? "décroissante" : "croissante",
             cause: "a comparé la raison à 0 au lieu de la comparer à 1",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — REMONTER du sens de variation à la raison, avec l'encadrement
+    // qui va avec. Le premier item donne $q$ et fait conclure ; celui-ci part
+    // de l'observation et demande ce qu'on sait de $q$. La réponse n'est pas
+    // « négative » — le BO impose des suites géométriques à TERMES STRICTEMENT
+    // POSITIFS, donc une raison positive : une suite qui décroît a une raison
+    // COMPRISE ENTRE 0 ET 1. C'est le contresens le plus naturel du chapitre,
+    // par transport de ce qu'on vient d'apprendre sur les suites arithmétiques.
+    kind: "template",
+    id: "stmg_suite_geo_variation_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_geometrique",
+    microId: "suite_geo_variation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Multiplier par un nombre entre $0$ et $1$ fait DIMINUER, sans jamais rendre les termes négatifs.",
+    tags: ["stmg", "maths", "suites", "piege", "template"],
+    generate: () => {
+      const contexte = pick(CONTEXTES_GEO);
+      const baisse = Math.random() < 0.5;
+      const u0 = pick([200, 400, 500, 1000, 2000] as const);
+      const bonne = baisse
+        ? "sa raison est comprise entre $0$ et $1$"
+        : "sa raison est supérieure à $1$";
+      return {
+        text:
+          `${contexte.sujet.charAt(0).toUpperCase()}${contexte.sujet.slice(1)} suit une suite géométrique ` +
+          `de premier terme $${u0}$, à termes tous positifs, et l'on constate qu'${baisse ? "il diminue" : "il augmente"} ` +
+          `d'année en année. Que peut-on dire de sa raison ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          baisse ? "sa raison est négative" : "sa raison est comprise entre $0$ et $1$",
+          baisse ? "sa raison est supérieure à $1$" : "sa raison est négative",
+          "sa raison vaut exactement $1$",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Dans une suite géométrique à termes positifs, la raison est positive, et c'est sa position par rapport à $1$ qui décide du sens : au-dessus de $1$ la suite croît, entre $0$ et $1$ elle décroît, et égale à $1$ elle est constante.",
+          "On se demande par quel nombre il faut multiplier pour obtenir moins — ou plus — sans jamais changer de signe.",
+          baisse
+            ? `Multiplier par $0{,}8$ fait passer $${u0}$ à $${u0 * 0.8}$ : la suite décroît, et tous les termes restent positifs. ` +
+              `⛔ Une raison NÉGATIVE ferait alterner les signes — $${u0}$, puis $-${u0}$, puis $+${u0}$ — ` +
+              `ce que le programme exclut : les suites géométriques y sont à termes strictement positifs.`
+            : `Multiplier par $1{,}2$ fait passer $${u0}$ à $${u0 * 1.2}$ : la suite croît. ` +
+              `Une raison entre $0$ et $1$ la ferait au contraire décroître, et une raison égale à $1$ la laisserait immobile.`,
+          bonne.charAt(0).toUpperCase() + bonne.slice(1) + "."
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "sa raison est négative",
+            cause: "transporte la règle des suites ARITHMÉTIQUES, où le signe de la raison décide du sens — ici c'est la position par rapport à $1$",
+          },
+          {
+            choice: "sa raison vaut exactement $1$",
+            cause: "une raison de $1$ laisse la suite constante : elle ne monterait ni ne descendrait",
           },
         ],
       };
