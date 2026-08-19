@@ -284,6 +284,63 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
   "ia/enjeux/enjeux-culturels-societaux": { titre: "Enjeux culturels et sociétaux de l'IA" },
 };
 
+// =========================
+// LES NOTIONS QUI REVIENNENT D'UN NIVEAU À L'AUTRE
+// =========================
+// Une même notion est enseignée sur deux ans : Pythagore se découvre en 4e et
+// se réutilise en 3e, Thalès se découvre en 4e mais sa fiche a été écrite en
+// 3e. Le lookup du registre est strict — (matière, classe, notion) — donc
+// l'élève de 3e qui cliquait « Pythagore » dans le coach ne trouvait RIEN,
+// alors que la fiche existait, écrite et payée, rangée sous « 4e ». Dix-sept
+// notions du collège étaient dans ce cas au 19/08/2026.
+//
+// ⛔ CHAQUE LIGNE EST ÉCRITE À LA MAIN, JAMAIS DÉDUITE. Un alias automatique
+// « si absent, prends le niveau d'en dessous » servirait la fiche 6e des aires
+// à un élève de 3e — or la 3e y ajoute le disque et l'effet d'un agrandissement.
+// Ce serait le repli silencieux du catalogue, en pire : muet ET faux.
+//
+// N'entre ici qu'une notion dont la fiche existante couvre les micro-compétences
+// du niveau demandé. Les dix autres cas (algorithmique 4e/3e, fractions 4e,
+// proportionnalité 4e/3e, calcul littéral 3e, aires 4e/3e, périmètres 3e,
+// volumes 3e) ne sont PAS des alias : le niveau y ajoute du contenu neuf, ils
+// attendent une vraie fiche.
+//
+// Clé = ce que demande le coach ; valeur = la fiche réellement servie.
+export const FICHES_ALIAS: Record<string, string> = {
+  // La fiche 3e couvre les 7 micros de 4e sauf « vérifier une égalité de rapports ».
+  "maths/4e/thales-theoreme": "maths/3e/thales-theoreme",
+  // La fiche 4e (8 micros) est un sur-ensemble des 6 micros de 3e.
+  "maths/3e/pythagore-theoreme": "maths/4e/pythagore-theoreme",
+  // La fiche 4e (10 micros) couvre les 8 de la 3e (effectif et fréquence y sont séparés).
+  "maths/3e/stat-statistique": "maths/4e/stat-statistique",
+  // ⚠️ Couvre 7 micros sur 8 : l'expérience à DEUX épreuves (l'arbre) manque,
+  // et c'est ce qui tombe au brevet. Alias provisoire — à remplacer par une
+  // vraie fiche 3e dès que le lot 3e est écrit.
+  "maths/3e/proba-experience": "maths/4e/proba-experience",
+  // La fiche 5e couvre pavé, prisme, cylindre et unités ; la 4e n'ajoute que
+  // le lien « aire de base × hauteur ».
+  "maths/4e/volume-solide": "maths/5e/volume-solide",
+  // Triangles usuels, somme des angles, inégalité triangulaire, construction :
+  // la fiche 5e les a tous.
+  "maths/3e/triangle-figure": "maths/5e/triangle-figure",
+  // Périmètres du carré, du rectangle, d'une figure, résolution de problème :
+  // la fiche 6e les couvre ; la 4e n'ajoute que le triangle.
+  "maths/4e/aire-perimetre": "maths/6e/aire-perimetre",
+};
+
+/** La classe où la fiche est réellement rangée, quand elle diffère de celle
+ *  demandée — pour l'afficher à l'élève (« Fiche · 4e ») plutôt que de lui
+ *  ouvrir en silence le cours d'une autre année. `null` si pas d'alias. */
+export function ficheClasseSource(
+  matiere: string,
+  classe: string,
+  notion: string
+): string | null {
+  const cle = `${matiere}/${classe.toLowerCase()}/${notion.toLowerCase().replace(/_/g, "-")}`;
+  const cible = FICHES_ALIAS[cle];
+  return cible ? cible.split("/")[1] : null;
+}
+
 export function hrefFiche(matiere: string, classe: string, notion: string) {
   return `/fiches-cours/${matiere}/${classe}/${notion}`;
 }
@@ -353,5 +410,11 @@ export function ficheHrefPourCoach(
   classe: string,
   coachNotionId: string
 ): string | null {
-  return ficheHrefSiExiste(matiere, classe, coachNotionId);
+  const direct = ficheHrefSiExiste(matiere, classe, coachNotionId);
+  if (direct) return direct;
+  // Sinon, la notion revient peut-être d'une autre année : voir FICHES_ALIAS
+  // (table écrite à la main, une ligne par cas justifié).
+  const cle = `${matiere}/${classe.toLowerCase()}/${coachNotionId.toLowerCase().replace(/_/g, "-")}`;
+  const cible = FICHES_ALIAS[cle];
+  return cible && FICHES_REGISTRE[cible] ? `/fiches-cours/${cible}` : null;
 }

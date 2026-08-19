@@ -19,7 +19,7 @@ import BoiteAOutils from "@/components/BoiteAOutils";
 import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
 import { BookOpen, CirclePlay, Play } from "lucide-react";
-import { ficheHrefPourCoach } from "@/lib/fiches/registre";
+import { ficheClasseSource, ficheHrefPourCoach } from "@/lib/fiches/registre";
 import {
   youtubeSearchUrl,
   CLASSE_YOUTUBE_LABEL,
@@ -714,6 +714,11 @@ export default function CoachIA() {
                   <div className="space-y-5">
                     {notionsAvecMicros.map(({ notionId, micros }) => {
                       const ficheHref = ficheHrefPourCoach(matiere, classe, notionId);
+                      // Quand la fiche vient d'une autre année (Pythagore
+                      // s'écrit en 4e et se révise en 3e), on l'ANNONCE : un
+                      // élève qui ouvre un cours daté d'un autre niveau sans
+                      // prévenance croit à une erreur.
+                      const ficheAutreClasse = ficheClasseSource(matiere, classe, notionId);
                       const videos = videosParNotion[notionId] ?? [];
                       return (
                       <article key={notionId}>
@@ -728,7 +733,7 @@ export default function CoachIA() {
                               title="Lire la fiche de cours de cette notion"
                             >
                               <BookOpen className="h-3.5 w-3.5" />
-                              Fiche
+                              {ficheAutreClasse ? `Fiche · ${ficheAutreClasse}` : "Fiche"}
                             </Link>
                           ) : null}
                           {videos.length ? (() => {
