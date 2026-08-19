@@ -144,8 +144,14 @@ export const VENTE = {
   ouverte: false,
   /** Date d'entrée en vigueur de la version publiée des CGV (JJ/MM/AAAA). */
   dateEntreeEnVigueur: "",
-  /** Une vente ouverte aux particuliers, et pas seulement aux établissements. */
-  ouverteAuxParticuliers: false,
+  /** Une vente ouverte aux particuliers, et pas seulement aux établissements.
+      ✅ DÉCIDÉ LE 19/08/2026 : oui — missions sur devis aux professionnels ET
+      abonnement aux familles. Ce `true` est posé AVANT l'ouverture, et c'est
+      volontaire : il agit comme un cliquet. Tant que `MEDIATEUR` est null,
+      `cgvEnVigueur` refusera de passer, même si quelqu'un met `ouverte` à true
+      par enthousiasme un soir. L'oubli du médiateur coûte 15 000 € ; il ne
+      doit pas dépendre de la mémoire de celui qui déploie. */
+  ouverteAuxParticuliers: true,
 };
 
 /** Ce qu'un éditeur professionnel doit publier : identité, siège, joignabilité. */

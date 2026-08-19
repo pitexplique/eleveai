@@ -300,18 +300,34 @@ export default function CgvPage() {
             de la demande, par le même moyen de paiement que celui utilisé lors
             de la commande.
           </p>
+          {/* ⛔ CET ARTICLE PROMET PLUS QUE LA LOI, ET C'EST VOULU (19/08/2026).
+              La loi autorise le vendeur d'un contenu numérique à faire RENONCER
+              le consommateur à sa rétractation en échange d'un accès immédiat
+              (art. L221-28, 13°) : c'est ce que faisait la version précédente
+              de cet article. Frédéric a tranché l'inverse — « si pas content au
+              bout de 14 jours, on rembourse ». Une famille qui ouvre le coach
+              le soir même garde donc ses quatorze jours entiers.
+              ⚠️ Écrit ici, ce n'est plus un geste commercial mais un engagement
+              OPPOSABLE : on ne peut plus le retirer à une famille qui a
+              commandé sous cette version. Ne jamais l'affaiblir sans changer la
+              date d'entrée en vigueur des CGV.
+              ⚠️ Stripe ne restitue pas sa commission sur un remboursement :
+              chaque rétractation coûte la part fixe + le pourcentage. À
+              quelques euros d'abonnement, c'est négligeable — mais ce n'est pas
+              zéro, et ça se déduit du CA déclaré à l'Urssaf. */}
           <p className="rounded-lg border border-slate-700 bg-slate-900/50 p-3">
             <span className="font-semibold text-slate-100">
-              Renonciation en cas d’accès immédiat.
+              Accès immédiat, sans renonciation.
             </span>{" "}
-            Le Service étant un contenu numérique fourni sans support matériel,
-            le Consommateur qui demande à y accéder avant la fin du délai de
-            quatorze jours est invité à donner son accord exprès à cette
-            exécution immédiate et à reconnaître qu’il perd de ce fait son droit
-            de rétractation (art. L221-28, 13° du code de la consommation).
-            Cette double confirmation est recueillie explicitement au moment de
-            la commande. À défaut, le droit de rétractation reste entier et
-            l’accès n’est ouvert qu’au terme du délai.
+            Le Service est un contenu numérique fourni sans support matériel :
+            la loi permettrait de subordonner son ouverture immédiate à la
+            renonciation du Consommateur à son droit de rétractation (art.
+            L221-28, 13° du code de la consommation). {VENDEUR.nomCommercial} ne
+            le demande pas. L’accès est ouvert dès la commande et le délai de
+            quatorze jours court en entier. Si, dans ce délai, le Consommateur
+            n’est pas satisfait, l’intégralité des sommes versées lui est
+            remboursée — sans motif à donner, et sans que l’usage déjà fait du
+            Service y change quoi que ce soit.
           </p>
           <p>
             Cet article ne s’applique pas aux Professionnels, qui ne bénéficient
@@ -441,13 +457,15 @@ export default function CgvPage() {
 
         <Article titre="15. Formulaire type de rétractation">
           <p>
-            À compléter et renvoyer uniquement si le Consommateur souhaite se
-            rétracter du contrat, et sous réserve qu’il n’ait pas renoncé à ce
-            droit dans les conditions de l’article 9.
+            À compléter et renvoyer si le Consommateur souhaite se rétracter du
+            contrat. Aucune renonciation n’est demandée à l’ouverture du Service
+            (article 9) : ce formulaire reste donc utilisable pendant les
+            quatorze jours, y compris par un Consommateur qui s’est déjà servi
+            du Service. Un simple message à {EDITEUR.contact} suffit également.
           </p>
           <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-4 text-sm italic leading-relaxed text-slate-300">
             <p>
-              À l’attention de {VENDEUR.nomJuridique}
+              À l’attention de {VENDEUR.denominationEI}
               {VENDEUR.adresse ? `, ${VENDEUR.adresse}` : ""} —{" "}
               {EDITEUR.contact} :
             </p>
