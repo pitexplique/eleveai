@@ -34,14 +34,19 @@ export default async function AdminDashboardPage() {
           <AdminLogoutButton />
         </header>
 
-        {/* ── LES DEUX OUTILS DE RENDEZ-VOUS ────────────────────────────────
+        {/* ── LES TROIS OUTILS DE LA MISSION ────────────────────────────────
             En haut, et pas en bas : ils ne se consultent pas depuis un bureau,
             ils s'ouvrent sur un téléphone en face d'un dirigeant. Tout ce qui
             demande de faire défiler la page pour être atteint ne sera pas
             utilisé au moment où il faut.
-            Les deux pages sont en `noindex` et liées nulle part ailleurs :
+            Ils sont dans l'ordre d'une mission, et cet ordre est le message :
+            l'audit fait dire oui, le devis transforme le oui en engagement, la
+            facture transforme l'engagement en argent. Les deux premiers
+            existaient sans le troisième — une mission qu'on n'a jamais facturée
+            reste un service rendu.
+            Les trois pages sont en `noindex` et liées nulle part ailleurs :
             c'est ici leur seule porte. */}
-        <section className="grid gap-3 sm:grid-cols-2">
+        <section className="grid gap-3 sm:grid-cols-3">
           <Link
             href="/audit-commission"
             className="block rounded-xl border border-teal-700 bg-teal-900/30 p-4 transition hover:bg-teal-900/50"
@@ -62,6 +67,18 @@ export default async function AdminDashboardPage() {
             <p className="mt-1 text-sm text-slate-400">
               Conseil · Réalisation · Formation — la mission choisie remplit le
               prix et le périmètre. À envoyer le soir même.
+            </p>
+          </Link>
+
+          <Link
+            href="/facture"
+            className="block rounded-xl border border-amber-700 bg-amber-900/30 p-4 transition hover:bg-amber-900/50"
+          >
+            <p className="font-bold text-amber-300">💶 Facture</p>
+            <p className="mt-1 text-sm text-slate-400">
+              Professionnel ou particulier : les mentions changent avec le
+              destinataire. Numérotation continue, et la recette se reporte au
+              livre des recettes.
             </p>
           </Link>
         </section>
