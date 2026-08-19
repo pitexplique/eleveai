@@ -131,16 +131,24 @@ export default function AccueilIA() {
                 imposé la coupure ET laissé les replis se faire n'importe où
                 autour d'elle. */}
             <h1 className="text-lg font-semibold leading-snug text-slate-900 sm:text-xl">
-              {/* ⭐ SIMPLIFIÉE LE 19/08 (Frédéric : « trop compliqué à lire »).
-                  Elle disait « Dire qui on est et ce qu'on cherche suffit » :
-                  un infinitif en sujet, deux propositions coordonnées, et le
-                  verbe principal tout à la fin. On ne sait ce qu'on lit qu'au
-                  dernier mot — sur un premier écran, c'est une phrase qu'on
-                  saute.
-                  Trois groupes courts à la place, dans l'ordre où la page les
-                  demande : la classe, la question, et la promesse que ça
-                  s'arrête là. Rien à décoder, et l'information est la même. */}
-              <span className="block">Une classe, une question, c&rsquo;est tout</span>
+              {/* ⭐ LES DEUX QUESTIONS, POSÉES TELLES QUELLES (Frédéric, 19/08).
+                  Trois formulations ont précédé, chacune plus courte que la
+                  précédente, et celle-ci est la plus courte possible : ce sont
+                  littéralement les deux questions que la page pose. Rien à
+                  décoder, aucun verbe rejeté à la fin.
+                  ⚠️ ELLE TUTOIE, ET C'EST COHÉRENT ICI — la rangée du dessous
+                  écrit « Qui es-tu ? » en dur pour tout le monde, chef
+                  d'établissement compris (EntreeMatrice.tsx). Le titre ne crée
+                  donc pas d'incohérence, il en épouse une qui existe déjà.
+                  ⚠️ EN REVANCHE IL RÉPÈTE mot pour mot l'intitulé de la rangée,
+                  cinq centimètres plus bas — le même piège que la note des
+                  AUDIENCE_DOORS du 07/08 (« au singulier, la rangée demandait
+                  qui es-tu ? une deuxième fois »). À trancher : ou le titre
+                  porte la question et la rangée perd son intitulé, ou
+                  l'inverse. */}
+              <span className="block">
+                Qui es-tu ? Que cherches-tu aujourd&rsquo;hui ?
+              </span>
               {/* ⭐ LA SECONDE LIGNE DESCEND D'UN CRAN (Frédéric, 19/08 : « il y
                   a trop à lire, et la seconde phrase doit avoir une police plus
                   basse »). Deux lignes de même taille, c'est deux titres : l'œil
