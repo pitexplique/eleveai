@@ -116,6 +116,20 @@ function deNomGrandeur(nom: string): string {
   return `de ${nom}`;
 }
 
+/**
+ * « de » contracté devant une variable qui porte déjà son article.
+ *
+ * ⚠️ « par unité de ${grandeur.variable} » donnait « par unité DE LE nombre de
+ * jours » — deux des quatre variables commencent par « le ». Trouvé le
+ * 19/08/2026 par un balayage des énoncés rendus, pas à la relecture.
+ */
+function deVariable(variable: string): string {
+  if (variable.startsWith("le ")) return `du ${variable.slice(3)}`;
+  if (variable.startsWith("la ")) return `de la ${variable.slice(3)}`;
+  if (variable.startsWith("les ")) return `des ${variable.slice(4)}`;
+  return `de ${variable}`;
+}
+
 const GRANDEURS = [
   { nom: "le coût de production", unite: "€", variable: "la quantité produite" },
   { nom: "le chiffre d'affaires", unite: "k€", variable: "le nombre de mois écoulés" },
@@ -493,7 +507,7 @@ export const fonctionsRepresentationBank: TutorBankItemV4[] = [
           "Un taux de variation mesure la variation MOYENNE de la grandeur par unité de la variable, sur l'intervalle considéré.",
           "On donne l'unité du résultat : celle de la grandeur, divisée par celle de la variable.",
           `Ici le taux vaut $${fr(taux)}$ : sur cet intervalle, ${grandeur.nom} ${taux < 0 ? "baisse" : "augmente"} ` +
-            `en moyenne de $${fr(Math.abs(taux))}$ ${grandeur.unite} par unité de ${grandeur.variable}.`,
+            `en moyenne de $${fr(Math.abs(taux))}$ ${grandeur.unite} par unité ${deVariable(grandeur.variable)}.`,
           `Par exemple : « Entre ${debut} et ${fin}, ${grandeur.nom} ${taux < 0 ? "diminue" : "augmente"} en moyenne de ${fr(Math.abs(taux))} ${grandeur.unite} par unité. »`
         ),
       };

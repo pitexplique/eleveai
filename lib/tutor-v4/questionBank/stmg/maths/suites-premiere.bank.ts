@@ -123,6 +123,23 @@ const CONTEXTES_ARITH = [
   { sujet: "le nombre de tickets restants", unite: "tickets", verbe: "perd" },
 ] as const;
 
+/**
+ * « de » contracté devant un sujet qui porte déjà son article.
+ *
+ * ⚠️ Sans lui, « une modélisation de ${sujet} » donnait « une modélisation DE LE
+ * stock d'invendus ». Les cinq sujets commencent par « le », « la » ou « un » :
+ * la faute tombait donc une fois sur deux. Même besoin que `deNomGrandeur` dans
+ * `derivation.bank.ts` — ne pas insérer un sujet derrière « de » sans passer par
+ * cette fonction.
+ */
+function duSujet(sujet: string): string {
+  if (sujet.startsWith("le ")) return `du ${sujet.slice(3)}`;
+  if (sujet.startsWith("la ")) return `de la ${sujet.slice(3)}`;
+  if (sujet.startsWith("les ")) return `des ${sujet.slice(4)}`;
+  if (/^[aeiouyéèêàâîôû]/i.test(sujet)) return `d'${sujet}`;
+  return `de ${sujet}`;
+}
+
 const CONTEXTES_GEO = [
   { sujet: "un capital placé", unite: "€" },
   { sujet: "le chiffre d'affaires d'une enseigne", unite: "k€" },
@@ -2151,6 +2168,83 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la CONSÉQUENCE des deux modèles, pas leur nom. Le premier item
+    // fait classer une situation ; celui-ci met les deux modèles en concurrence
+    // sur la durée. C'est la seule chose qui intéresse celui qui place son
+    // argent — et l'exponentielle finit toujours par passer devant, même quand
+    // elle démarre plus lentement.
+    kind: "template",
+    id: "stmg_suite_mod_reconnaitre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_modeliser",
+    microId: "suite_mod_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Calcule les deux au bout de la durée annoncée : un pourcentage porte à chaque fois sur un montant plus gros.",
+    tags: ["stmg", "maths", "suites", "template"],
+    generate: () => {
+      // ⛔ LA BONNE RÉPONSE DOIT ÊTRE VRAIE À CHAQUE TIRAGE. Le versement fixe
+      // doit partir DEVANT — sinon la situation n'a plus d'intérêt — et rester
+      // DERRIÈRE à l'échéance, sinon c'est lui qui gagne et la réponse attendue
+      // devient fausse. Avec $1000$ €, $4\,\%$, $15$ ans et $70$ € par an, le
+      // fixe atteint $2050$ € contre $1801$ € : la réponse annoncée était fausse
+      // dans ce cas-là. Le garde-fou vérifie les deux conditions.
+      let capital = 2000;
+      let t: number = 5;
+      let annees: number = 20;
+      let fixe = 120;
+      let lineaire = 0;
+      let expo = 0;
+      for (let essai = 0; essai < 80; essai++) {
+        capital = pick([1000, 2000, 4000, 5000] as const);
+        t = pick([4, 5, 6] as const);
+        annees = pick([15, 20, 25] as const);
+        fixe = Math.round((capital * t) / 100) + pick([10, 20, 30] as const);
+        lineaire = capital + fixe * annees;
+        expo = Math.round(capital * Math.pow(1 + t / 100, annees));
+        const partDevant = fixe > Math.round((capital * t) / 100);
+        const finitDerriere = expo > lineaire;
+        if (partDevant && finitDerriere) break;
+      }
+      const bonne = `le placement à $${t}\\,\\%$, qui atteint environ $${expo}$ €`;
+      return {
+        text:
+          `On dispose de $${capital}$ €. Deux placements : l'un ajoute $${fixe}$ € chaque année, ` +
+          `l'autre augmente de $${t}\\,\\%$ chaque année. ` +
+          `Au bout de $${annees}$ ans, lequel a le plus rapporté ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `le placement à $${fixe}$ € par an, qui atteint $${lineaire}$ €`,
+          `les deux donnent le même montant, puisque $${t}\\,\\%$ de $${capital}$ font $${Math.round((capital * t) / 100)}$ €`,
+          "on ne peut pas comparer : l'un est en euros, l'autre en pourcentage",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un versement FIXE fait croître le capital d'une suite arithmétique : la même somme chaque année. Un POURCENTAGE le fait croître d'une suite géométrique : la somme ajoutée grandit avec le capital.",
+          "On calcule les deux à l'échéance : $c + f \\times n$ d'un côté, $c \\times (1 + t/100)^n$ de l'autre.",
+          `Placement fixe : $${capital} + ${fixe} \\times ${annees} = ${lineaire}$ €. ` +
+            `Placement à $${t}\\,\\%$ : $${capital} \\times ${fr(Math.round(Math.pow(1 + t / 100, annees) * 10000) / 10000)} \\approx ${expo}$ €. ` +
+            `Pourtant, la première année, le fixe rapporte $${fixe}$ € contre seulement $${Math.round((capital * t) / 100)}$ € pour le pourcentage : ` +
+            `il part DEVANT, et se fait rattraper parce que l'autre porte chaque année sur un montant plus gros.`,
+          `C'est le placement à $${t}\\,\\%$, avec environ $${expo}$ € contre $${lineaire}$ €.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `le placement à $${fixe}$ € par an, qui atteint $${lineaire}$ €`,
+            cause: "a comparé les PREMIÈRES années, où le versement fixe est effectivement devant : sur la durée, l'exponentielle le dépasse",
+          },
+          {
+            choice: "on ne peut pas comparer : l'un est en euros, l'autre en pourcentage",
+            cause: "on compare très bien : il suffit de calculer les deux montants finaux, tous deux en euros",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ suite_mod_choisir ═══════════════════ */
 
   {
@@ -2203,6 +2297,48 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — le RANG DE DÉPART, qui décale tout. Le premier item choisit la
+    // relation ; celui-ci demande à quelle année correspond un rang. C'est le
+    // décalage le plus coûteux d'un sujet de bac : si $u(0)$ est l'année 2024,
+    // alors 2030 est le rang 6, pas 2030 ni 7. Une modélisation juste avec un
+    // rang décalé donne une réponse fausse d'une année entière.
+    kind: "template",
+    id: "stmg_suite_mod_choisir_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_modeliser",
+    microId: "suite_mod_choisir",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le rang compte les ANNÉES ÉCOULÉES depuis celle de $u(0)$ : c'est une différence, pas une année.",
+    tags: ["stmg", "maths", "suites", "piege", "template", "short"],
+    generate: () => {
+      const contexte = pick(CONTEXTES_GEO);
+      const anneeZero = pick([2020, 2021, 2022, 2023, 2024] as const);
+      const ecart = randomInt(3, 9);
+      const anneeCible = anneeZero + ecart;
+      return {
+        text:
+          `On note $u(n)$ ${contexte.sujet} pour l'année $${anneeZero} + n$, ` +
+          `si bien que $u(0)$ correspond à $${anneeZero}$. ` +
+          `Quel rang $n$ faut-il prendre pour l'année $${anneeCible}$ ?`,
+        format: "short",
+        expected: [String(ecart)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le rang d'une suite ne compte pas les années : il compte les PAS écoulés depuis le rang $0$. C'est une différence entre deux années, pas une année.",
+          "On retranche l'année de référence — celle de $u(0)$ — à l'année cherchée.",
+          `$${anneeCible} - ${anneeZero} = ${ecart}$, donc l'année $${anneeCible}$ correspond au rang $${ecart}$. ` +
+            `⚠️ Prendre $n = ${anneeCible}$ ferait calculer $${anneeCible}$ pas d'évolution au lieu de $${ecart}$. ` +
+            `Et compter $${ecart + 1}$ — « il y a ${ecart + 1} années de $${anneeZero}$ à $${anneeCible}$ inclus » — ` +
+            `décalerait la réponse d'un an : $u(0)$ est l'année de départ, pas la première évolution.`,
+          `Il faut prendre $n = ${ecart}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ suite_mod_capital ═══════════════════ */
 
   {
@@ -2235,6 +2371,55 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           `$u(1) = ${fr(Math.round(termes[1] * 100) / 100)}$ ; $u(2) = ${fr(Math.round(termes[2] * 100) / 100)}$ ; ` +
             `$u(3) = ${fr(Math.round(termes[3] * 100) / 100)}$.`,
           `Au bout de 3 ans, le capital vaut environ $${fr(Math.round(termes[3]))}$ €.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — INTÉRÊTS SIMPLES contre INTÉRÊTS COMPOSÉS, chiffrés. Le premier
+    // item calcule un capital placé à intérêts composés ; celui-ci fait mesurer
+    // l'ÉCART avec le placement à intérêts simples. C'est la différence entre
+    // une suite arithmétique et une suite géométrique, vue sur un relevé de
+    // banque — et le mot « composés » veut dire que les intérêts rapportent à
+    // leur tour.
+    kind: "template",
+    id: "stmg_suite_mod_capital_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_modeliser",
+    microId: "suite_mod_capital",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Intérêts SIMPLES : le même montant chaque année. COMPOSÉS : le pourcentage porte aussi sur les intérêts déjà acquis.",
+    tags: ["stmg", "maths", "suites", "canvas", "template", "short"],
+    generate: () => {
+      const capital = pick([1000, 2000, 2500, 4000, 5000] as const);
+      const t = pick([4, 5, 10, 20] as const);
+      const annees = pick([2, 3, 4] as const);
+      const q = 1 + t / 100;
+      const composes = Math.round(capital * Math.pow(q, annees) * 100) / 100;
+      const simples = capital + (capital * t * annees) / 100;
+      const ecart = Math.round((composes - simples) * 100) / 100;
+      const termes = termesGeo(capital, q, annees + 1).map((v) => Math.round(v * 100) / 100);
+      return {
+        text:
+          `Un capital de $${capital}$ € est placé à $${t}\\,\\%$ par an pendant $${annees}$ ans. ` +
+          `De combien le placement à intérêts COMPOSÉS rapporte-t-il de plus que le même placement ` +
+          `à intérêts SIMPLES ? (en euros, arrondi au centime)`,
+        format: "short",
+        expected: [fr(ecart)],
+        comparator: "number_equal",
+        canvas: canvasTableau(termes, `Capital à intérêts composés (€)`),
+        explanation: exp(
+          "À intérêts SIMPLES, le pourcentage porte chaque année sur le capital INITIAL : la même somme s'ajoute, c'est une suite arithmétique. À intérêts COMPOSÉS, il porte sur le capital ACQUIS : les intérêts rapportent à leur tour, c'est une suite géométrique.",
+          "On calcule les deux montants finaux, puis on prend leur différence.",
+          `Intérêts simples : $${capital} + ${annees} \\times ${fr((capital * t) / 100)} = ${fr(simples)}$ €. ` +
+            `Intérêts composés : $${capital} \\times ${fr(q)}^{${annees}} = ${fr(composes)}$ €. ` +
+            `Écart : $${fr(composes)} - ${fr(simples)} = ${fr(ecart)}$ €. ` +
+            `Cet écart vient uniquement des intérêts qui ont eux-mêmes produit des intérêts — sur $${annees}$ ans il reste modeste, ` +
+            `sur vingt ans il devient l'essentiel du gain.`,
+          `Le placement à intérêts composés rapporte $${fr(ecart)}$ € de plus.`
         ),
       };
     },
@@ -2274,6 +2459,65 @@ export const suitesPremiereBank: TutorBankItemV4[] = [
           `$u(${rang})$ désigne la valeur au bout de $${rang}$ années, et elle vaut $${valeur}$.`,
           `Par exemple : « Au bout de ${rang} ans, ${contexte.sujet} vaudra environ ${valeur} ${contexte.unite}. »`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — TRIER les conclusions, quand le premier item fait rédiger.
+    // L'ouverte est jugée par mots-clés : elle récompense celui qui écrit et ne
+    // dit rien à celui qui reste bloqué. Ici les quatre phrases sont posées, et
+    // trois échouent chacune sur un point précis : le rang pris pour une année,
+    // l'unité oubliée, et la valeur donnée sans le moment.
+    kind: "template",
+    id: "stmg_suite_mod_conclure_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_modeliser",
+    microId: "suite_mod_conclure",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une conclusion dit TROIS choses : quand, combien, et dans quelle unité.",
+    tags: ["stmg", "maths", "suites", "template"],
+    generate: () => {
+      const contexte = pick(CONTEXTES_GEO);
+      const anneeZero = pick([2022, 2023, 2024] as const);
+      const rang = randomInt(3, 8);
+      const valeur = pick([1250, 1830, 2460, 3120, 4570, 6890] as const);
+      const bonne =
+        `Au bout de $${rang}$ ans, soit en $${anneeZero + rang}$, ${contexte.sujet} atteindra environ $${valeur}$ ${contexte.unite}.`;
+      return {
+        text:
+          `Une modélisation ${duSujet(contexte.sujet)} donne $u(${rang}) \\approx ${valeur}$, ` +
+          `avec $u(0)$ pour l'année $${anneeZero}$. ` +
+          `Laquelle de ces quatre conclusions est correcte ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `Au bout de $${anneeZero + rang}$ ans, ${contexte.sujet} atteindra environ $${valeur}$ ${contexte.unite}.`,
+          `Au bout de $${rang}$ ans, ${contexte.sujet} atteindra environ $${valeur}$.`,
+          `${contexte.sujet.charAt(0).toUpperCase()}${contexte.sujet.slice(1)} atteindra $${valeur}$ ${contexte.unite}.`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une conclusion de modélisation répond en langage ordinaire : elle dit QUAND — le rang, traduit en année —, COMBIEN, et dans QUELLE UNITÉ. Le mot « environ » y a sa place : un modèle estime, il ne mesure pas.",
+          "On vérifie les trois points l'un après l'autre, en se rappelant que le rang n'est pas une année.",
+          `Le rang $${rang}$ correspond à l'année $${anneeZero} + ${rang} = ${anneeZero + rang}$. ` +
+            `Annoncer « au bout de $${anneeZero + rang}$ ans » confondrait le rang et l'année — ` +
+            `cela ferait $${anneeZero + rang}$ ans d'évolution au lieu de $${rang}$. ` +
+            `Une valeur sans unité ne dit pas de quoi on parle, et une valeur sans date ne dit pas quand.`,
+          `« ${bonne} »`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `Au bout de $${anneeZero + rang}$ ans, ${contexte.sujet} atteindra environ $${valeur}$ ${contexte.unite}.`,
+            cause: `a pris l'ANNÉE pour une DURÉE : $${anneeZero + rang}$ est une année, la durée est $${rang}$ ans`,
+          },
+          {
+            choice: `${contexte.sujet.charAt(0).toUpperCase()}${contexte.sujet.slice(1)} atteindra $${valeur}$ ${contexte.unite}.`,
+            cause: "une prévision sans date ne se vérifie pas : il manque le moment",
+          },
+        ],
       };
     },
   },

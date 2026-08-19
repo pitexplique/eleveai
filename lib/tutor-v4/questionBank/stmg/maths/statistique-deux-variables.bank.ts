@@ -73,6 +73,22 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
 
 /* ─────────────────── contextes ─────────────────── */
 
+/**
+ * « de » contracté devant un sujet qui porte déjà son article.
+ *
+ * ⚠️ « Voici les relevés de ${serie.sujet} » donnait « les relevés DE LE
+ * rendement au mètre carré ». Sur six sujets, cinq commencent par « l' » ou
+ * « la » et passaient — le sixième non. Ne pas insérer un sujet derrière « de »
+ * sans passer par cette fonction.
+ */
+function duSujet(sujet: string): string {
+  if (sujet.startsWith("le ")) return `du ${sujet.slice(3)}`;
+  if (sujet.startsWith("la ")) return `de la ${sujet.slice(3)}`;
+  if (sujet.startsWith("les ")) return `des ${sujet.slice(4)}`;
+  if (sujet.startsWith("l'")) return `de ${sujet}`;
+  return `de ${sujet}`;
+}
+
 const SERIES = [
   { x: "Rang de l'année", y: "Chiffre d'affaires", unite: "k€", sujet: "l'évolution du chiffre d'affaires" },
   { x: "Dépense publicitaire (k€)", y: "Ventes", unite: "milliers d'articles", sujet: "l'effet de la publicité sur les ventes" },
@@ -238,7 +254,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
         .join(" ; ");
       return {
         text:
-          `Voici les relevés de ${nuage.serie.sujet} — ${nuage.serie.x}, puis ${nuage.serie.y} : ` +
+          `Voici les relevés ${duSujet(nuage.serie.sujet)} — ${nuage.serie.x}, puis ${nuage.serie.y} : ` +
           `${releves}. ` +
           `Un point a été mal reporté sur le nuage. Pour quelle valeur de « ${nuage.serie.x} » ?`,
         format: "short",
@@ -531,7 +547,7 @@ export const statistiqueDeuxVariablesBank: TutorBankItemV4[] = [
         : "les écarts grossissent d'un relevé à l'autre : un ajustement affine ne convient pas";
       return {
         text:
-          `Voici les relevés de ${serie.sujet}. Les écarts entre deux relevés consécutifs valent ` +
+          `Voici les relevés ${duSujet(serie.sujet)}. Les écarts entre deux relevés consécutifs valent ` +
           `${ecarts.map((e) => `$${e}$`).join(", ")}. Qu'en conclure ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
