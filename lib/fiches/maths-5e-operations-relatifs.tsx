@@ -32,6 +32,14 @@ import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 // exercices du coach. Ici elle sert à MONTRER LE DÉPLACEMENT : on marque le
 // départ, les étapes et l'arrivée — ajouter, c'est aller à droite ; enlever,
 // c'est aller à gauche.
+//
+// ⭐ `size: 360 × 90`, ET C'EST L'ÉTALON DU COACH DE SECONDE (Frédéric, 19/08 :
+// « coach seconde utilise bien les canvas »). Sa banque reels-intervalles.bank.ts
+// définit un helper `droiteGraduee()` en tête de fichier qui impose cette
+// taille : PLUS LARGE et DEUX FOIS PLUS PLATE que le défaut du composant
+// (320 × 120). Une droite graduée n'a rien à montrer en hauteur — les 120 px du
+// défaut sont du vide au-dessus et en dessous du trait, et dans une carte de
+// propriété sur trois colonnes, ce vide mange la place des graduations.
 function droite(
   points: { value: number; label: string; color?: string }[],
   min: number,
@@ -52,6 +60,7 @@ function droite(
           showPointLabels: true,
           showZero: true,
         },
+        size: { width: 360, height: 90 },
       }}
     />
   );
