@@ -120,9 +120,23 @@ export default function AccueilIA() {
               priority
               className="mx-auto mb-2 h-14 w-auto sm:h-16"
             />
+            {/* ⭐ DEUX LIGNES, ET PAS DE DEUX-POINTS (Frédéric, 19/08).
+                Les deux-points faisaient de la première moitié l'annonce de la
+                seconde, alors que ce sont deux phrases : l'une dit ce qu'on
+                demande, l'autre ce qu'on rend. Et le retour à la ligne tombait
+                où la largeur voulait — « suffit : EleveAI propose » se
+                retrouvait au milieu d'une ligne, les deux idées collées.
+                ⚠️ Deux `block` et non un `<br>` : sur téléphone chaque moitié
+                se replie normalement dans sa propre boîte. Un `<br>` aurait
+                imposé la coupure ET laissé les replis se faire n'importe où
+                autour d'elle. */}
             <h1 className="text-lg font-semibold leading-snug text-slate-900 sm:text-xl">
-              Dire qui on est et ce qu&rsquo;on cherche suffit : EleveAI propose
-              les ressources qui correspondent
+              <span className="block">
+                Dire qui on est et ce qu&rsquo;on cherche suffit
+              </span>
+              <span className="block">
+                EleveAI propose les ressources qui correspondent
+              </span>
             </h1>
             <p className="mt-1 text-xs text-slate-500">
               Conçues, sélectionnées et vérifiées — à La Réunion

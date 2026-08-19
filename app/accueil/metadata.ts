@@ -24,9 +24,11 @@ const TITRE = "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac";
 // ⚠️ ELLE SUIT LE <h1>, MOT POUR MOT OU PRESQUE, et ce n'est pas du zèle :
 // c'est la leçon du 08/08 écrite plus bas — une description qui ne colle pas
 // au texte visible se fait remplacer par les libellés des pastilles.
-// 145 signes ; Google coupe autour de 155.
+// Les deux-points sont tombés avec ceux du titre le 19/08 : ce sont deux
+// phrases, l'une dit ce qu'on demande, l'autre ce qu'on rend.
+// 144 signes ; Google coupe autour de 155.
 const PROMESSE =
-  "EleveAI propose les ressources qui correspondent : dire qui on est et ce qu'on cherche suffit. Conçues, sélectionnées et vérifiées. Du CP au Bac.";
+  "EleveAI propose les ressources qui correspondent. Dire qui on est et ce qu'on cherche suffit. Conçues, sélectionnées et vérifiées. Du CP au Bac.";
 
 export const metadata: Metadata = {
   // ⭐ `absolute` ET NON une simple chaîne. Le layout applique le gabarit
