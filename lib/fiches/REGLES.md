@@ -32,6 +32,47 @@ C'est un enfant qui lit. Règle de Frédéric (13/07), renforcée :
 - Nuance technique gardée : *canvas ≠ micro* — un dessin peut couvrir plusieurs micros —
   mais on préfère désormais **plus** de dessins.
 
+### 2 bis. Le calibrage validé le 19/08/2026
+
+Arrêté sur la fiche pilote `maths-5e-operations-relatifs.tsx`, relue et validée par
+Frédéric (« excellent sur la structure, rien à changer »). **Les fiches suivantes se
+calent dessus.**
+
+1. **Un dessin sur CHAQUE définition ET CHAQUE propriété.** Pas seulement sur la figure
+   de référence et les exemples. `FichePropriete` porte un champ `schema?: ReactNode`
+   rendu par `FicheCoursClient` (ajouté le 19/08, optionnel : les fiches antérieures ne
+   bougent pas). Les propriétés étaient le seul bloc du cours sans visuel — trois pavés
+   de texte côte à côte, donc le bloc qu'on survole.
+2. **Le canvas se choisit pour ce qu'il MONTRE, pas par habitude.** Deux propriétés
+   voisines ne doivent pas porter la même image. Contre-exemple vécu : les quatre
+   propriétés des relatifs portaient la même droite graduée avec deux pastilles — vu par
+   un élève de 5e, quatre règles identiques où rien ne bouge. `number_line` dessine des
+   points, **pas des sauts**. Les distances à 0 sont des longueurs → `schema_barre` (deux
+   longueurs bout à bout, ça se voit). D'où : la barre pour les règles de calcul, la
+   droite pour les règles de position.
+3. **Les exemples parlent du monde de l'élève, à son âge.** Collège → score, vies,
+   manches, sport, skate. Primaire → billes, goûter, cour de récré. Un élève de 5e compte
+   des points bien avant de compter des euros. ⭐ Les thèmes existent déjà dans le
+   moteur : `algebre` et `suite` acceptent `theme: "jeu_video" | "surf" | "requin" |
+   "margouillat" | "pieces" | "eau" | "dechet" | "tresor" | "pi"`, icônes comprises.
+4. **La `size` du canvas se choisit, elle ne se subit pas.** L'étalon est la banque de
+   seconde (`reels-intervalles.bank.ts`) : un helper en tête de fichier, `display` fixés
+   une fois, une couleur porteuse de sens par point, et `size: 360 × 90` pour une droite
+   graduée — deux fois plus plate que le défaut du composant (320 × 120), parce qu'une
+   droite n'a rien à montrer en hauteur. Pour un canvas à plus de trois réglages, copier
+   le helper à options de `3e/maths/thales.bank.ts` (labels par défaut fusionnés avec
+   ceux de l'appelant).
+5. **Les nombres sont ceux de la banque, sans exception.** L'élève qui a lu la fiche doit
+   retrouver ses propres exemples dans le coach.
+6. **On ne promet rien qui n'existe pas.** Le bloc vidéo ne s'affiche plus que si une
+   vidéo est réellement enregistrée pour la notion (`VideoNotion`, 19/08) — plus de repli
+   vers la chaîne. Une fiche imprimée et distribuée en classe ne renvoie pas vers du vide.
+
+⛔ **Deux pièges de canvas à connaître** (le reste est dans `types_canvas.ts`) :
+`SuiteCanvas` imprime « Suite » en titre **en dur** et étiquette ses cases « terme 1,
+terme 2 » — ses flèches sont donc inutilisables ailleurs que sur une vraie suite ;
+`fonctionGraphique` est le seul `kind` en camelCase.
+
 ## 3. Les canvas (au lieu de SVG dessinés à la main)
 
 Via `CanvasRenderer` (types dans `lib/tutor-v4/types_canvas.ts`) — les MÊMES dessins que
