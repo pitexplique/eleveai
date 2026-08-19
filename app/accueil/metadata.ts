@@ -14,6 +14,20 @@ const HERO = "/images/accueil-eleveai-reunion.webp";
 // Le titre tel qu'il doit apparaître dans Google, au caractère près.
 const TITRE = "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac";
 
+// ⭐ LA PROMESSE, ÉCRITE UNE FOIS (19/08). Elle était recopiée à la main sur
+// trois surfaces — meta, OpenGraph, Twitter — et la troisième avait déjà
+// divergé : Twitter annonçait « EleveAI cherche parmi des ressources relues
+// par un enseignant », soit une quatrième formulation d'un engagement que la
+// note d'en dessous demande justement de n'écrire qu'une fois. Une constante
+// rend la divergence impossible plutôt qu'improbable.
+//
+// ⚠️ ELLE SUIT LE <h1>, MOT POUR MOT OU PRESQUE, et ce n'est pas du zèle :
+// c'est la leçon du 08/08 écrite plus bas — une description qui ne colle pas
+// au texte visible se fait remplacer par les libellés des pastilles.
+// 145 signes ; Google coupe autour de 155.
+const PROMESSE =
+  "EleveAI propose les ressources qui correspondent : dire qui on est et ce qu'on cherche suffit. Conçues, sélectionnées et vérifiées. Du CP au Bac.";
+
 export const metadata: Metadata = {
   // ⭐ `absolute` ET NON une simple chaîne. Le layout applique le gabarit
   // « %s — EleveAI » à tout titre de page ; ce titre-ci commençant déjà par
@@ -42,12 +56,15 @@ export const metadata: Metadata = {
   //
   // La forme suit ChatGPT, Claude et IXL, comparés le 08/08 : « Use ChatGPT
   // to… », « Claude is… », « IXL is… ». Les trois mettent LA MARQUE DANS LES
-  // TROIS PREMIERS MOTS, puis un verbe, puis du concret. Ici : « EleveAI te
-  // propose… ». La phrase d'action — « Dis qui tu es et ce que tu cherches » —
+  // TROIS PREMIERS MOTS, puis un verbe, puis du concret. Ici : « EleveAI
+  // propose… ». La phrase d'action — « dire qui on est et ce qu'on cherche » —
   // vient en deuxième, parce qu'elle ne veut rien dire tant qu'on n'a pas dit
-  // de qui elle vient. 143 signes : Google coupe autour de 155.
-  description:
-    "EleveAI te propose des ressources pédagogiques conçues, sélectionnées et vérifiées. Dis qui tu es et ce que tu cherches. Du CP au Bac, gratuit.",
+  // de qui elle vient.
+  //
+  // ⚠️ « gratuit » est parti le 19/08 pour tenir sous la coupe : le TITRE dit
+  // déjà « gratuits », et il est lu en premier. Un mot qui paie deux fois dans
+  // le même résultat de recherche ne paie qu'une.
+  description: PROMESSE,
 
   // ⭐ La SEULE canonique du site posée à la main, et elle est légitime :
   // la racine `/` répond 308 vers `/accueil`, donc deux adresses mènent
@@ -71,11 +88,11 @@ export const metadata: Metadata = {
 
   openGraph: {
     title: TITRE,
-    // Même promesse, au mot près. Trois formulations du même engagement sur
-    // trois surfaces, c'est l'engagement qu'on cesse de croire — et celle-ci
-    // est lue quand quelqu'un PARTAGE le lien, donc quand il en répond.
-    description:
-      "EleveAI te propose des ressources pédagogiques conçues, sélectionnées et vérifiées. Dis qui tu es et ce que tu cherches. Du CP au Bac, gratuit.",
+    // Même promesse, au mot près — désormais garanti par la constante et non
+    // par la vigilance. Trois formulations du même engagement sur trois
+    // surfaces, c'est l'engagement qu'on cesse de croire — et celle-ci est lue
+    // quand quelqu'un PARTAGE le lien, donc quand il en répond.
+    description: PROMESSE,
     url: "/accueil",
     type: "website",
     siteName: "EleveAI",
@@ -85,7 +102,7 @@ export const metadata: Metadata = {
         url: HERO,
         width: 1680,
         height: 945,
-        alt: "EleveAI — l'entrée du site : dis qui tu es et ce que tu cherches",
+        alt: "EleveAI — l'entrée du site : dire qui on est et ce qu'on cherche",
       },
     ],
   },
@@ -93,8 +110,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: TITRE,
-    description:
-      "Dis qui tu es et ce que tu veux faire aujourd'hui : EleveAI cherche parmi des ressources relues par un enseignant celles qui peuvent vraiment t'aider.",
+    description: PROMESSE,
     images: [HERO],
   },
 };

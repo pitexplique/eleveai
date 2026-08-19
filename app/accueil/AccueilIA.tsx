@@ -77,7 +77,32 @@ export default function AccueilIA() {
               les vidéos et les pages du réel sont CHOISIES ailleurs. Le verbe
               qui manquait, c'était le premier.
               L'origine reste, en petit, APRÈS la promesse : La Réunion est une
-              bonne histoire, pas un bon mot-clé. */}
+              bonne histoire, pas un bon mot-clé.
+
+              ⭐ RÉÉCRIT LE 19/08 — deux défauts, et le second est le vrai.
+              1. « TE propose » tutoyait trois profils sur quatre. profils.ts
+                 pose `tutoie: false` pour parent, prof et direction, et tout
+                 le reste de l'écran obéit (« Ta matière » / « La matière »,
+                 « Que veux-tu » / « Que voulez-vous »). Ce titre était le seul
+                 texte de la page à l'ignorer : il tutoyait le chef
+                 d'établissement que la rangée du dessous vient d'inviter.
+                 La sortie est celle qu'impose déjà le champ `promesse` dans
+                 types.ts — ni tu ni vous, « on » et l'impersonnel — parce que
+                 c'est UN texte lu par un CP tutoyé partout ailleurs ET par le
+                 parent assis à côté de lui.
+              2. « des ressources pédagogiques » annonçait un CATALOGUE, alors
+                 que la refonte du 06/08 a justement retiré le catalogue de
+                 l'accueil. Ce que fait l'écran d'en dessous, c'est ouvrir le
+                 coach SUR la notion (coach.ts → ?classe=&matiere=&notion=).
+                 Le titre sous-vendait la page d'un cran : il décrivait
+                 /explorer, pas la porte.
+              Le nouveau titre nomme donc les deux questions que la page pose
+              vraiment — qui on est, ce qu'on cherche — et dans cet ordre,
+              parce que c'est l'ordre où elles sont demandées.
+              ⚠️ Les trois verbes de Frédéric n'ont pas disparu : ils passent
+              dans la ligne du dessous, où « Conçues » s'accorde maintenant
+              avec « les ressources » du titre. La Réunion y reste, en petit et
+              après — inchangé. */}
           <header className="mb-6 text-center">
             {/* ⭐ TI MARGO RESTE. Il est parti avec la manchette lors de la
                 refonte — il était dans le titre du journal. Or il n'appartient
@@ -96,10 +121,12 @@ export default function AccueilIA() {
               className="mx-auto mb-2 h-14 w-auto sm:h-16"
             />
             <h1 className="text-lg font-semibold leading-snug text-slate-900 sm:text-xl">
-              EleveAI te propose des ressources pédagogiques conçues,
-              sélectionnées et vérifiées
+              Dire qui on est et ce qu&rsquo;on cherche suffit : EleveAI propose
+              les ressources qui correspondent
             </h1>
-            <p className="mt-1 text-xs text-slate-500">Conçue à La Réunion</p>
+            <p className="mt-1 text-xs text-slate-500">
+              Conçues, sélectionnées et vérifiées — à La Réunion
+            </p>
           </header>
 
           <Suspense fallback={<div className="h-64" aria-hidden="true" />}>
