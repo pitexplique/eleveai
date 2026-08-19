@@ -584,6 +584,30 @@ export default function Header() {
                 La liberté d&apos;apprendre
               </span>
             </div>
+
+            {/* ⭐ TI MARGO DANS LE HAUT DE PAGE (Frédéric, 19/08). Il ne vivait
+                que sur l'accueil, au-dessus du titre — c'est-à-dire nulle part
+                dès qu'on entre dans une fiche, un coach ou un cahier. Or c'est
+                la figure d'EleveAI : celle des vidéos, des cahiers et des
+                fiches. Le haut de page est le seul endroit qui suit l'élève
+                partout.
+                ⚠️ MÊME VISIBILITÉ QUE LA BASELINE (`hidden xl:block`), et ce
+                n'est pas une économie de place : il est là POUR elle, posé à
+                son côté. Sous 1280 px la baseline disparaît, et un margouillat
+                seul à côté de « EleveAI » n'accompagnerait plus rien.
+                ⚠️ `h-9` : un cran sous le logo (h-10). La marque reste la
+                marque ; lui l'escorte, il ne la double pas.
+                ⚠️ `alt=""` : le nom du site est déjà écrit à deux centimètres.
+                Le faire annoncer une seconde fois par un lecteur d'écran
+                n'ajoute rien — c'est une image d'accompagnement. */}
+            <Image
+              src="/cahier-vacances/ti-margo.png"
+              alt=""
+              width={1122}
+              height={1402}
+              sizes="30px"
+              className="hidden h-9 w-auto shrink-0 xl:block"
+            />
           </Link>
 
           {/* ── LA PORTE DE RETOUR ────────────────────────────────────────
