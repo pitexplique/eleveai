@@ -591,12 +591,17 @@ export default function Header() {
                 la figure d'EleveAI : celle des vidéos, des cahiers et des
                 fiches. Le haut de page est le seul endroit qui suit l'élève
                 partout.
-                ⚠️ MÊME VISIBILITÉ QUE LA BASELINE (`hidden xl:block`), et ce
-                n'est pas une économie de place : il est là POUR elle, posé à
-                son côté. Sous 1280 px la baseline disparaît, et un margouillat
-                seul à côté de « EleveAI » n'accompagnerait plus rien.
-                ⚠️ `h-9` : un cran sous le logo (h-10). La marque reste la
-                marque ; lui l'escorte, il ne la double pas.
+                ⚠️ `lg:block` ET NON `xl:block`, ET `h-11` ET NON `h-9`
+                (19/08, deuxième passe — Frédéric : « je ne vois pas le
+                margouillat »). Il était bien là, mesuré à 29 × 36 px sur la
+                page servie : simplement trop petit à côté d'un logo de 72 px,
+                et invisible sous 1280 px.
+                La première version le calait sur la baseline, par cohérence —
+                mais une figure qu'on ne remarque pas ne tient aucun rôle. Il
+                gagne donc un cran de taille (h-11, au-dessus du logo en h-10 :
+                c'est un dessin, pas un bloc, il a besoin de plus de hauteur
+                pour peser autant) et descend d'un palier de largeur, où la
+                place existe encore.
                 ⚠️ `alt=""` : le nom du site est déjà écrit à deux centimètres.
                 Le faire annoncer une seconde fois par un lecteur d'écran
                 n'ajoute rien — c'est une image d'accompagnement. */}
@@ -605,8 +610,8 @@ export default function Header() {
               alt=""
               width={1122}
               height={1402}
-              sizes="30px"
-              className="hidden h-9 w-auto shrink-0 xl:block"
+              sizes="36px"
+              className="hidden h-11 w-auto shrink-0 lg:block"
             />
           </Link>
 
