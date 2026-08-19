@@ -66,9 +66,30 @@ import {
   lireHistorique,
   type EntreeHistorique,
 } from "@/lib/matrice/historique";
+import { memoriserAudience, type Audience } from "@/lib/useAudience";
 import type { ProfilId, ResultatMatrice } from "@/lib/matrice/types";
 
 const CLE_PROFIL = "eleveai.ia.profil";
+
+/**
+ * LE RÔLE CLIQUÉ ICI → LA PORTE ALLUMÉE DANS LE HEADER (19/08/2026).
+ *
+ * Les deux vivaient chacun leur souvenir : le header ne connaissait que les
+ * VISITES (/parents, /espace-profs, /espace-ecoles), cette rangée ne connaissait
+ * que les CLICS. Un visiteur passé une fois par /parents gardait donc « 👪
+ * Parents » allumé en haut pendant qu'il cliquait « Élève » ici. Voir la note
+ * de lib/useAudience.ts.
+ *
+ * ⚠️ Le vocabulaire diffère des deux côtés — `prof` ici, `enseignant` là-bas ;
+ * `direction` ici, `etablissement` là-bas. La traduction est cette table, et
+ * elle est le seul endroit où elle existe.
+ */
+const AUDIENCE_DU_ROLE: Record<string, Audience> = {
+  eleve: "eleve",
+  parent: "parent",
+  prof: "enseignant",
+  direction: "etablissement",
+};
 /**
  * LA CLASSE D'UN ADULTE, retenue à part.
  *
@@ -616,6 +637,9 @@ export default function EntreeMatrice({
       } catch {
         /* tant pis */
       }
+      // ⭐ … ET LE HEADER AVEC (19/08). `roleDuProfil` ramène les douze classes
+      // à « eleve » : dire « CM2 », c'est dire qu'on est un élève.
+      memoriserAudience(AUDIENCE_DU_ROLE[roleDuProfil(id)]);
       track("ia_profil", { profil: id, ou: variante });
       onProfil?.(id);
     },
