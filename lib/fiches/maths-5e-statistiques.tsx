@@ -47,6 +47,60 @@ const dechetsData = [
   { label: "Papier", value: 10 },
 ];
 
+// Le TABLEAU brut, avant tout dessin : un effectif se compte dans un tableau,
+// il se compare dans un graphique. Deux moments, deux canvas.
+const tableauEffectifs = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Le sport préféré de la classe",
+      headers: ["Sport", "Effectif"],
+      rows: [
+        { label: "Foot", values: ["12"] },
+        { label: "Basket", values: ["8"] },
+        { label: "Natation", values: ["5"] },
+        { label: "Dessin", values: ["7"] },
+        { label: "Total", values: ["32"] },
+      ],
+      highlight: { row: 4 },
+      display: { striped: true },
+    }}
+  />
+);
+
+// Une frequence, c'est une PART d'un total : elle se prend, elle ne se compare
+// pas. Les parts du schema en barres sont a l'echelle depuis le 20/08.
+const frequence = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      title: "10 élèves sur 25",
+      total: "25 élèves",
+      parts: [
+        { label: "viennent à vélo", value: "10" },
+        { label: "les autres", value: "15" },
+      ],
+      questionLabel: "10 ÷ 25 = 0,4, soit 40 %",
+      size: { width: 320, height: 175 },
+    }}
+  />
+);
+
+// Deux graphiques pour les MEMES donnees, l'un sous l'autre (§ 2 ter) : c'est
+// la seule facon de montrer qu'on ne choisit pas au hasard.
+const duo = (haut: React.ReactNode, hautLabel: string, bas: React.ReactNode, basLabel: string) => (
+  <div className="space-y-2">
+    <div>
+      {haut}
+      <p className="mt-1 text-center text-xs font-black text-slate-700">{hautLabel}</p>
+    </div>
+    <div>
+      {bas}
+      <p className="mt-1 text-center text-xs font-black text-slate-700">{basLabel}</p>
+    </div>
+  </div>
+);
+
 const pieges = [
   "Confondre la somme et la moyenne : 10 + 12 + 14 = 36, mais la moyenne est 36 ÷ 3 = 12.",
   "Oublier de diviser par le nombre de valeurs quand on calcule une moyenne.",
@@ -80,22 +134,43 @@ export const ficheStatistiques5e: FicheCoursData = {
     schema: graphe("barres", sportData, 0),
     legende: "Diagramme en barres : la hauteur d'une barre est l'effectif. La plus haute (Foot) est la catégorie la plus fréquente.",
   },
+  // Un dessin sous chaque propriete (REGLES.md § 2 bis), et QUATRE canvas
+  // differents : le tableau ou l'effectif se compte, la barre ou la frequence se
+  // preleve, les batons ou la moyenne s'equilibre, et le duo barres/camembert
+  // pour la propriete qui parle justement de CHOISIR un graphique.
   proprietes: [
     {
       titre: "L'effectif",
       texte: "C'est le nombre de fois qu'une valeur apparaît. Le total est la somme des effectifs.",
+      schema: tableauEffectifs,
     },
     {
       titre: "La fréquence",
       texte: "Effectif ÷ total : un nombre entre 0 et 1 (×100 pour un pourcentage).",
+      schema: frequence,
     },
     {
       titre: "La moyenne",
       texte: "Somme des valeurs ÷ nombre de valeurs.",
+      schema: graphe(
+        "batons",
+        [
+          { label: "Note 1", value: 10 },
+          { label: "Note 2", value: 12 },
+          { label: "Note 3", value: 14 },
+        ],
+        1
+      ),
     },
     {
       titre: "Le bon graphique",
       texte: "Barres/bâtons pour comparer des catégories ; camembert pour une répartition d'un total.",
+      schema: duo(
+        graphe("barres", sportData, 0),
+        "barres : comparer des catégories",
+        graphe("camembert", sportData),
+        "camembert : répartir un total"
+      ),
     },
   ],
   reel: {
@@ -106,20 +181,59 @@ export const ficheStatistiques5e: FicheCoursData = {
     texte:
       "Le mot « statistique » vient de « État » : au départ, il s'agissait de compter la population et les richesses d'un pays. Les premiers grands recensements datent de l'Antiquité (Égypte, Chine, Rome).",
   },
+  // Les trois temps du travail statistique : compter, representer, resumer —
+  // et chacun a son dessin, dans cet ordre.
   methode: [
-    { titre: "Je compte", texte: "Je relève l'effectif de chaque catégorie et je fais le total." },
-    { titre: "Je représente", texte: "Tableau, puis diagramme en barres pour comparer d'un coup d'œil." },
-    { titre: "Je résume", texte: "Je calcule l'indicateur demandé : fréquence ou moyenne." },
+    { titre: "Je compte", texte: "Je relève l'effectif de chaque catégorie et je fais le total.", schema: tableauEffectifs },
+    { titre: "Je représente", texte: "Tableau, puis diagramme en barres pour comparer d'un coup d'œil.", schema: graphe("barres", sportData) },
+    { titre: "Je résume", texte: "Je calcule l'indicateur demandé : fréquence ou moyenne.", schema: frequence },
   ],
   usages: [
-    { titre: "Comparer des catégories", detail: "Diagramme en barres : la barre la plus haute a le plus grand effectif." },
-    { titre: "Voir une répartition", detail: "Diagramme circulaire (camembert) : des parts d'un même total." },
-    { titre: "Résumer par un nombre", detail: "La moyenne donne une valeur « centrale » de la série." },
+    {
+      titre: "Comparer des catégories",
+      detail: "Diagramme en barres : la barre la plus haute a le plus grand effectif.",
+      schema: graphe("barres", dechetsData, 0),
+    },
+    {
+      titre: "Voir une répartition",
+      detail: "Diagramme circulaire (camembert) : des parts d'un même total.",
+      schema: graphe("camembert", dechetsData),
+    },
+    {
+      titre: "Résumer par un nombre",
+      detail: "La moyenne donne une valeur « centrale » de la série.",
+      schema: graphe(
+        "batons",
+        [
+          { label: "Lun", value: 8 },
+          { label: "Mar", value: 12 },
+          { label: "Mer", value: 10 },
+        ],
+        1
+      ),
+    },
   ],
   exemples: [
     {
       titre: "Lire un tableau",
       donnees: "Enquête : Foot 8, Basket 6, Natation 4.",
+      schema: (
+        <CanvasRenderer
+          figure={{
+            kind: "tableau_donnees",
+            title: "L'enquête",
+            headers: ["Sport", "Effectif"],
+            rows: [
+              { label: "Foot", values: ["8"] },
+              { label: "Basket", values: ["6"] },
+              { label: "Natation", values: ["4"] },
+              { label: "Total", values: ["18"] },
+            ],
+            highlight: { row: 3 },
+            display: { striped: true },
+          }}
+        />
+      ),
       question: "Quel est l'effectif du basket ? Et l'effectif total ?",
       solution:
         "L'effectif du basket se lit directement : 6. Le total est 8 + 6 + 4 = 18 élèves.",
@@ -135,6 +249,7 @@ export const ficheStatistiques5e: FicheCoursData = {
     {
       titre: "Calculer une fréquence",
       donnees: "Dans une classe de 25 élèves, 10 viennent à vélo.",
+      schema: frequence,
       question: "Quelle est la fréquence des élèves à vélo ?",
       solution:
         "Fréquence = effectif ÷ total = 10 ÷ 25 = 0,4, soit 40 %.",
@@ -142,6 +257,15 @@ export const ficheStatistiques5e: FicheCoursData = {
     {
       titre: "Calculer une moyenne",
       donnees: "Les notes 10 ; 12 ; 14.",
+      schema: graphe(
+        "batons",
+        [
+          { label: "Note 1", value: 10 },
+          { label: "Note 2", value: 12 },
+          { label: "Note 3", value: 14 },
+        ],
+        1
+      ),
       question: "Quelle est la moyenne ?",
       solution:
         "Moyenne = (10 + 12 + 14) ÷ 3 = 36 ÷ 3 = 12.",
