@@ -1057,7 +1057,15 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // les chips »).
     id: "photo-cours",
     titre: "Photographier un cours",
-    promesse: "Photographiez la page du cahier : elle devient des exercices à faire ensemble.",
+    // ⛔ ELLE VOUVOYAIT, SEULE DE TOUTES LES PROMESSES (corrigé le 20/08/2026).
+    // « Photographiez la page du cahier » sortait tel quel sur la carte d'un
+    // élève de 3ᵉ, au milieu d'un écran qui le tutoie de bout en bout — la
+    // seule phrase vouvoyée de la page. C'est exactement ce que la note de
+    // `promesse` (types.ts) interdit : ce texte est lu par l'élève ET par le
+    // parent, donc il ne choisit aucun camp. L'impersonnel les prend tous les
+    // deux, et « ensemble » disparaît avec le vous : un élève de Terminale ne
+    // photographie pas son cahier « ensemble ».
+    promesse: "Une photo de la page du cahier, et elle devient des exercices à faire.",
     url: "/photo-cours",
     niveaux: ["6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "parent"],
     matiere: "transversal",
