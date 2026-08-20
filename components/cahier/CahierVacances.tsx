@@ -355,18 +355,21 @@ export default function CahierVacances({
                 le cahier crédible — mais de finir la phrase : ça a été écrit
                 pour eux, ça vous est donné aussi. L'histoire reste vraie, le
                 lecteur cesse d'être spectateur.
-                ⚠️ « ET POUR TOI » ICI, « ET POUR VOUS » SUR LES DEUX AUTRES
-                CAHIERS, et la dissymétrie est voulue : chaque ligne reste dans
-                la voix de sa page. Celle-ci tutoie l'enfant d'un bout à l'autre
-                — « à ton rythme », « Le savais-tu ? », « Continue chaque jour,
-                tu vas y arriver ! » : un « pour vous » détonnerait à trois
-                lignes d'un « tu ». Le cahier des petits, lui, parle à l'adulte
-                qui accompagne (« à faire avec votre enfant »), et celui des
-                parents vouvoie partout.
-                ⛔ Ne pas « uniformiser » les trois lignes : la phrase identique
-                partout, c'était la version du matin, et elle sonnait faux ici.
-                Ce qui doit être identique, c'est la SIGNATURE (« Frédéric
-                Lacoste, enseignant à La Réunion ») — pas le pronom qui suit. */}
+                ⚠️ « ET POUR TOI », SUR LES TROIS CAHIERS (Frédéric : « on garde
+                le "et pour toi", dans le style de "que veux-tu faire
+                aujourd'hui ?" »). Une première version accordait le pronom au
+                registre de chaque page — « toi » ici, « vous » sur les cahiers
+                des petits et des parents, qui s'adressent à l'adulte. Arbitrage
+                inverse, et il est plus haut que la page : LE SITE TUTOIE TOUT LE
+                MONDE. L'accueil demande « Qui es-tu ? Que cherches-tu
+                aujourd'hui ? » à tous ses visiteurs, chef d'établissement
+                compris (voir la note du <h1> dans AccueilIA.tsx). Une signature
+                qui vouvoie sur un cahier, quand la porte d'entrée tutoie,
+                changerait de personne en cours de route.
+                ⚠️ Le prix est visible sur le cahier des parents, dont le reste
+                de la page vouvoie (« votre enfant », « vous l'essayez ») : la
+                ligne y détonne un peu. C'est assumé — le tutoiement d'EleveAI
+                est une décision de marque, pas un oubli. */}
             <p className="mt-2 text-sm font-bold italic text-slate-500">
               Conçu par Frédéric Lacoste, enseignant à La Réunion, pour ses élèves — et pour toi.
             </p>

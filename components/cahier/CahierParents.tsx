@@ -142,8 +142,12 @@ export default function CahierParents({
             </div>
             <p className="mt-2 text-sm font-bold italic text-slate-500">
               {/* Signée comme les deux autres cahiers (20/08/2026) — voir la
-                  note complète dans CahierVacances.tsx. */}
-              Conçu par Frédéric Lacoste, enseignant à La Réunion, pour ses élèves — et pour vous.
+                  note complète dans CahierVacances.tsx.
+                  ⚠️ C'est ici que le tutoiement se remarque le plus : le reste
+                  de la page vouvoie le parent (« votre enfant », « vous
+                  l'essayez »). Assumé — le site tutoie tout le monde dès sa
+                  porte d'entrée, et la signature reste la même partout. */}
+              Conçu par Frédéric Lacoste, enseignant à La Réunion, pour ses élèves — et pour toi.
             </p>
             <p className="mt-1 text-base font-black text-teal-600">
               « Nou la fé&nbsp;! » 🌺
