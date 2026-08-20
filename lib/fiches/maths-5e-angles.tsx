@@ -37,6 +37,30 @@ const angle = (
   />
 );
 
+// Plusieurs angles côte à côte, chacun sous son nom : pour une propriété qui
+// parle de familles, un seul dessin ne montre rien — c'est la COMPARAISON qui
+// est la propriété.
+const rangee = (items: { deg: number; nom: string }[]) => (
+  <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+    {items.map((it) => (
+      <div key={it.nom}>
+        <CanvasRenderer
+          figure={{
+            kind: "angle",
+            size: { width: 150, height: 120 },
+            angle: {
+              angleDeg: it.deg,
+              labels: { vertex: "", left: "", right: "", angle: `${it.deg}°` },
+              display: { showLabels: false, showMeasure: true, showArc: true },
+            },
+          }}
+        />
+        <p className="mt-1 text-center text-xs font-black text-slate-700">{it.nom}</p>
+      </div>
+    ))}
+  </div>
+);
+
 const pieges = [
   "Mal placer le centre du rapporteur : il doit être pile sur le sommet, sinon la mesure est fausse.",
   "Lire la mauvaise graduation : le rapporteur a deux séries de nombres, on part du 0 aligné sur un côté.",
@@ -70,22 +94,41 @@ export const ficheAngles5e: FicheCoursData = {
     schema: angle(60),
     legende: "L'angle AOB de sommet O : son ouverture mesure 60°.",
   },
+  // Un dessin sous CHAQUE propriété (calibrage du 19/08, REGLES.md § 2 bis), et
+  // quatre dessins qui montrent quatre choses différentes : où est le sommet,
+  // les quatre familles côte à côte, la mesure qu'on cherche, l'ouverture qu'on
+  // compare à l'angle droit. Quatre fois le même angle, ce serait quatre règles
+  // identiques aux yeux d'un élève de 5e.
   proprietes: [
     {
       titre: "Le sommet",
       texte: "C'est le point où les deux côtés se rejoignent (le O de AOB).",
+      schema: angle(40, { showMeasure: false }),
     },
     {
       titre: "Les 4 types",
       texte: "Aigu (< 90°), droit (= 90°), obtus (entre 90° et 180°), plat (= 180°).",
+      schema: rangee([
+        { deg: 40, nom: "aigu" },
+        { deg: 90, nom: "droit" },
+        { deg: 130, nom: "obtus" },
+        { deg: 180, nom: "plat" },
+      ]),
     },
     {
       titre: "Le rapporteur",
       texte: "Centre sur le sommet, le 0 aligné sur un côté, on lit la graduation sur l'autre côté.",
+      schema: angle(35, { showMeasure: false, placeholder: "?" }),
     },
     {
       titre: "Estimer",
       texte: "Sans mesurer : plus petit que l'angle droit → aigu ; plus grand → obtus.",
+      // Un 125° tout seul ne montre rien : « plus ouvert » n'a de sens que
+      // CONTRE quelque chose. Le repère est dessiné à côté de l'angle à juger.
+      schema: rangee([
+        { deg: 90, nom: "le repère" },
+        { deg: 125, nom: "plus ouvert → obtus" },
+      ]),
     },
   ],
   reel: {
