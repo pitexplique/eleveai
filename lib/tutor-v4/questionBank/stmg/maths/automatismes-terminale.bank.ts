@@ -155,6 +155,41 @@ export const automatismesTerminaleBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — TRIER quatre situations. Le premier item pose une situation et
+    // demande sa nature ; ici les quatre sont géométriques sauf une, et c'est
+    // l'INTRUS qu'il faut voir. Un élève qui répond « géométrique » par réflexe
+    // se trompe une fois sur quatre au lieu d'une fois sur deux.
+    kind: "template",
+    id: "stmg_autoT_geo_reconnaitre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_terminale_reconnaitre",
+    microId: "autoT_suite_geo_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche celle où l'on AJOUTE toujours la même quantité, au lieu de multiplier par le même coefficient.",
+    tags: ["stmg", "maths", "automatismes", "suites", "template"],
+    generate: () => {
+      const intrus = pick(SITUATIONS_ARITHMETIQUES);
+      const geo = shuffle(SITUATIONS_GEOMETRIQUES.map((s) => s.phrase)).slice(0, 3);
+      return {
+        text: `Laquelle de ces quatre situations ne se modélise PAS par une suite géométrique ?`,
+        format: "qcm",
+        choices: shuffle([intrus, ...geo]),
+        expected: [intrus],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une suite géométrique traduit une évolution en POURCENTAGE, répétée à chaque étape : on multiplie toujours par le même coefficient.",
+          "On regarde ce que l'énoncé répète : un pourcentage, ou une quantité fixe exprimée dans l'unité de la grandeur.",
+          `Les trois autres situations donnent un pourcentage. Celle-ci donne une quantité fixe — ${intrus} — ` +
+            `qui s'ajoute à chaque étape : c'est une suite arithmétique.`,
+          `La situation qui n'est pas géométrique est : ${intrus}.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ autoT_suite_geo_raison ═══════════════ */
 
   {
@@ -182,6 +217,59 @@ export const automatismesTerminaleBank: TutorBankItemV4[] = [
           `Le taux vaut $${fr(situation.taux)}\\,\\%$, donc $q = 1 ${situation.taux >= 0 ? "+" : "-"} ${fr(Math.abs(situation.taux) / 100)} = ${fr(q)}$.`,
           `La raison est $q = ${fr(q)}$.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la raison EST DONNÉE, le taux est cherché. Le premier item va
+    // du pourcentage au coefficient ; celui-ci remonte, et c'est le sens dans
+    // lequel travaille un gestionnaire : la calculatrice affiche $0,92$, il
+    // faut savoir dire « une baisse de 8 % ».
+    // ⚠️ En QCM et non en saisie libre : à « quel taux ? », l'élève qui pense
+    // « une baisse de 8 % » écrit tantôt $-8$, tantôt $8$ — deux écritures
+    // justes que la machine départagerait à tort.
+    kind: "template",
+    id: "stmg_autoT_geo_raison_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_terminale_reconnaitre",
+    microId: "autoT_suite_geo_raison",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une raison inférieure à $1$ signe une baisse ; l'écart à $1$ donne le pourcentage.",
+    tags: ["stmg", "maths", "automatismes", "suites", "template"],
+    generate: () => {
+      const situation = pick(SITUATIONS_GEOMETRIQUES);
+      const q = 1 + situation.taux / 100;
+      const hausse = situation.taux > 0;
+      const ampleur = fr(Math.abs(situation.taux));
+      const bonne = `${hausse ? "une hausse" : "une baisse"} de $${ampleur}\\,\\%$`;
+      return {
+        text:
+          `Une suite géométrique de raison $q = ${fr(q)}$ modélise une évolution. ` +
+          `Quelle évolution représente-t-elle ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `${hausse ? "une baisse" : "une hausse"} de $${ampleur}\\,\\%$`,
+          `${hausse ? "une hausse" : "une baisse"} de $${fr(q * 100)}\\,\\%$`,
+          `${hausse ? "une hausse" : "une baisse"} de $${fr(q)}\\,\\%$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le coefficient multiplicateur d'une évolution au taux $t$ vaut $q = 1 + \\dfrac{t}{100}$ : au-dessus de $1$ c'est une hausse, en dessous une baisse.",
+          "On calcule l'écart entre la raison et $1$, puis on le lit en pourcentage.",
+          `$${fr(q)} - 1 = ${fr(situation.taux / 100)}$, soit $${fr(situation.taux)}\\,\\%$.`,
+          `La raison $q = ${fr(q)}$ traduit ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `${hausse ? "une hausse" : "une baisse"} de $${fr(q * 100)}\\,\\%$`,
+            cause: "a lu la raison comme un pourcentage, sans retrancher le $1$",
+          },
+        ],
       };
     },
   },
@@ -231,6 +319,59 @@ export const automatismesTerminaleBank: TutorBankItemV4[] = [
           {
             choice: valeur > 0 ? "négatif" : "positif",
             cause: "a inversé : c'est le signe de $a$ qui vaut à l'extérieur des racines",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — l'ENSEMBLE des $x$, au lieu du signe en un point. Le premier
+    // item place une valeur et demande un signe ; celui-ci part du signe et
+    // demande où il règne. C'est la même image mentale, parcourue dans l'autre
+    // sens — et cette fois le signe de $a$ change la réponse du tout au tout.
+    // ⚠️ Toujours sans figure : la tracer, c'est supprimer l'image mentale que
+    // le BO demande justement de se faire. L'exception est déclarée dans
+    // scripts/verifier-canvas.mjs.
+    kind: "template",
+    id: "stmg_autoT_signe_mental_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_terminale_reconnaitre",
+    microId: "autoT_signe_image_mentale",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "À l'extérieur des racines, l'expression est du signe de $a$ ; entre les racines, du signe contraire.",
+    tags: ["stmg", "maths", "automatismes", "signes", "sans-figure", "template"],
+    generate: () => {
+      const r1 = randomInt(-5, 2);
+      const r2 = r1 + randomInt(2, 6);
+      const a = pick([1, 2, 3, -1, -2, -3] as const);
+      const cherche = pick(["positive", "négative"] as const);
+      const ecrire = (r: number) => (r === 0 ? "x" : r > 0 ? `(x - ${r})` : `(x + ${-r})`);
+      const expression = `$${a === 1 ? "" : a === -1 ? "-" : a}${ecrire(r1)}${ecrire(r2)}$`;
+      const entre = `$]${r1}\\,;\\,${r2}[$`;
+      const dehors = `$]-\\infty\\,;\\,${r1}[ \\cup ]${r2}\\,;\\,+\\infty[$`;
+      // À l'extérieur des racines, le produit est du signe de $a$.
+      const signeDehors = a > 0 ? "positive" : "négative";
+      const bonne = cherche === signeDehors ? dehors : entre;
+      return {
+        text: `Sans rien tracer : sur quel ensemble l'expression ${expression} est-elle strictement ${cherche} ?`,
+        format: "qcm",
+        choices: shuffle([entre, dehors, `$]-\\infty\\,;\\,${r1}[$`, `$]${r2}\\,;\\,+\\infty[$`]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une expression factorisée du second degré s'annule en ses deux racines. Elle est du signe de $a$ à l'EXTÉRIEUR de ces racines, et du signe contraire ENTRE elles.",
+          "On se représente la parabole : ses racines, puis son orientation, donnée par le signe de $a$.",
+          `Les racines sont $${r1}$ et $${r2}$, et $a = ${a}$ : la parabole est tournée vers ${a > 0 ? "le haut" : "le bas"}, ` +
+            `donc l'expression est ${signeDehors} à l'extérieur des racines et ${signeDehors === "positive" ? "négative" : "positive"} entre elles.`,
+          `L'expression est strictement ${cherche} sur ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$]${r2}\\,;\\,+\\infty[$`,
+            cause: "n'a gardé qu'un seul des deux morceaux extérieurs",
           },
         ],
       };
@@ -288,6 +429,62 @@ export const automatismesTerminaleBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — DIAGNOSTIQUER une dérivée fausse. Le premier item fait dériver
+    // et compte juste ou faux ; celui-ci montre un calcul raté et demande de
+    // dire OÙ il a dérapé. Les deux fautes mises en scène sont celles que
+    // relève le premier item dans ses diagnostics : la constante recopiée, et
+    // le terme en $x$ emporté avec elle.
+    kind: "template",
+    id: "stmg_autoT_derivee_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_terminale_derivee",
+    microId: "autoT_derivee_polynome",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Dérive toi-même, terme par terme, puis compare ligne à ligne avec ce qu'a écrit l'élève.",
+    tags: ["stmg", "maths", "automatismes", "derivation", "diagnostic", "template"],
+    generate: () => {
+      const a = pick([1, 2, 3, 4, -1, -2, -3] as const);
+      const b = pick([1, 2, 3, 5, -1, -2, -4, -6] as const);
+      const c = pick([1, 2, 4, 5, -3, -5, -7] as const);
+      const d = pick([1, 3, 6, 8, -2, -4, -9] as const);
+      const garde = Math.random() < 0.5;
+      // Deux mises en scène, deux causes : l'une garde la constante — écrite à
+      // part pour qu'elle reste VISIBLE, et non fondue dans le terme constant —,
+      // l'autre efface le terme en x en même temps que la constante.
+      const ecriteParEleve = garde
+        ? `${polynome(0, 3 * a, 2 * b, c)} ${d >= 0 ? "+" : "-"} ${Math.abs(d)}`
+        : polynome(0, 3 * a, 2 * b, 0);
+      const causeGarde = "il a recopié la constante au lieu de la faire disparaître";
+      const causeEfface = "il a supprimé le terme en $x$ en même temps que la constante";
+      return {
+        text:
+          `Soit $f(x) = ${polynome(a, b, c, d)}$. ` +
+          `Un élève écrit $f'(x) = ${ecriteParEleve}$. Quelle erreur a-t-il commise ?`,
+        format: "qcm",
+        choices: shuffle([
+          causeGarde,
+          causeEfface,
+          "il a oublié de faire descendre les exposants en facteur",
+          "il n'a commis aucune erreur : cette dérivée est juste",
+        ]),
+        expected: [garde ? causeGarde : causeEfface],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Dériver un polynôme, c'est dériver chaque terme : $(x^n)' = nx^{n-1}$, $(kx)' = k$ et la dérivée d'une constante est NULLE.",
+          "On écrit la dérivée juste, puis on la compare terme à terme à celle de l'élève.",
+          `La dérivée correcte est $f'(x) = ${polynome(0, 3 * a, 2 * b, c)}$. ` +
+            (garde
+              ? `L'élève a bien dérivé les trois premiers termes, mais il a recopié le $${d}$ : une constante disparaît.`
+              : `L'élève a bien fait disparaître le $${d}$, mais il a emporté avec lui le terme $${c}x$, dont la dérivée vaut $${c}$.`),
+          `L'erreur : ${garde ? causeGarde : causeEfface}.`
+        ),
+      };
+    },
+  },
+
   /* ═══════ autoT_coefficient_tangente_derivee ═══════ */
 
   {
@@ -334,6 +531,53 @@ export const automatismesTerminaleBank: TutorBankItemV4[] = [
           "On calcule d'abord l'expression de $f'$, puis on y remplace $x$ par l'abscisse du point.",
           `$f'(x) = ${polynome(0, 0, 2 * a, b)}$, donc $f'(${x0}) = ${2 * a} \\times ${x0} ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = ${fr(derivee)}$.`,
           `Le coefficient directeur de la tangente vaut $${fr(derivee)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la tangente HORIZONTALE, donc $f'(x) = 0$. Le premier item
+    // calcule $f'$ en un point donné ; celui-ci donne le coefficient — zéro —
+    // et cherche le point. C'est le geste de l'extremum, celui qui sert dans
+    // tous les sujets : où le bénéfice est-il maximal ?
+    // ⚠️ Sans figure, et c'est voulu : la courbe montrerait le sommet, et il
+    // n'y aurait plus rien à dériver. Le premier item, lui, porte sa figure.
+    // ⛔ On résout $f'(x) = 0$, jamais par la forme canonique — hors programme
+    // dans la voie technologique.
+    kind: "template",
+    id: "stmg_autoT_tangente_derivee_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_terminale_derivee",
+    microId: "autoT_coefficient_tangente_derivee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une tangente horizontale a un coefficient directeur nul : cherche où $f'(x) = 0$.",
+    tags: ["stmg", "maths", "automatismes", "derivation", "template", "short"],
+    generate: () => {
+      const a = pick([1, 2, -1, -2] as const);
+      // ⛔ Le sommet n'est jamais en $0$ : sinon $b = 0$ et l'équation
+      // s'afficherait « $2ax + 0 = 0$ ».
+      const sommet = pick([-3, -2, -1, 1, 2, 3] as const);
+      // On part du sommet voulu : $b = -2a x_0$ donne une racine ENTIÈRE à
+      // $f'(x) = 0$, donc une réponse que l'élève peut écrire sans arrondir.
+      const b = -2 * a * sommet;
+      const c = pick([0, 1, 2, -1, -3, 4] as const);
+      return {
+        text:
+          `Soit $f(x) = ${polynome(0, a, b, c)}$. ` +
+          `En quel point la tangente à la courbe de $f$ est-elle horizontale ? ` +
+          `Donne l'abscisse de ce point.`,
+        format: "short",
+        expected: [fr(sommet)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le coefficient directeur de la tangente au point d'abscisse $x$ vaut $f'(x)$. Une tangente horizontale a un coefficient directeur nul.",
+          "On dérive, puis on résout l'équation $f'(x) = 0$.",
+          `$f'(x) = ${polynome(0, 0, 2 * a, b)}$. ` +
+            `L'équation $${2 * a}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = 0$ donne $x = ${fr(sommet)}$.`,
+          `La tangente est horizontale au point d'abscisse $${fr(sommet)}$ — c'est là que $f$ atteint son ${a > 0 ? "minimum" : "maximum"}.`
         ),
       };
     },
@@ -388,6 +632,80 @@ export const automatismesTerminaleBank: TutorBankItemV4[] = [
           `En avançant de $1$, la tangente ${pente > 0 ? "monte" : "descend"} de $${Math.abs(pente)}$ : son coefficient directeur vaut $${fr(pente)}$.`,
           `Le coefficient directeur de la tangente est $${fr(pente)}$.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — ce que la pente VEUT DIRE. Le premier item demande le nombre ;
+    // celui-ci ne demande que son signe, et ce qu'il dit de la fonction. C'est
+    // exactement le lien que le BO signale comme automatisme de terminale :
+    // « le lien entre le signe de la dérivée et le sens de variation ». Lire la
+    // pente sans savoir la lire est un calcul ; savoir ce qu'elle annonce est
+    // l'automatisme.
+    kind: "template",
+    id: "stmg_autoT_tangente_graphique_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_terminale_derivee",
+    microId: "autoT_coefficient_tangente_graphique",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une tangente qui descend annonce une courbe qui descend : le signe de $f'$ donne le sens de variation.",
+    tags: ["stmg", "maths", "automatismes", "derivation", "canvas", "variations", "template"],
+    generate: () => {
+      // ⛔ Pente jamais nulle : sinon la proposition « $f'$ est nul, $f$ admet
+      // un extremum » deviendrait vraie elle aussi.
+      const pente = pick([1, 2, 3, 4, -1, -2, -3, -4] as const);
+      const x0 = randomInt(-2, 2);
+      const a = pick([1, -1] as const);
+      const b = pente - 2 * a * x0;
+      const c = pick([0, 1, -1, 2] as const);
+      const y0 = a * x0 * x0 + b * x0 + c;
+      const monte = pente > 0;
+      const bonne = monte
+        ? "$f'$ est positif au point marqué : $f$ y est croissante"
+        : "$f'$ est négatif au point marqué : $f$ y est décroissante";
+      return {
+        text:
+          `La droite tracée est la tangente à la courbe de $f$ au point marqué. ` +
+          `Que peut-on en déduire ?`,
+        format: "qcm",
+        choices: shuffle([
+          "$f'$ est positif au point marqué : $f$ y est croissante",
+          "$f'$ est négatif au point marqué : $f$ y est décroissante",
+          "$f'$ est nul au point marqué : $f$ y atteint un extremum",
+          "le signe de $f'$ ne se lit pas sur une figure",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: {
+          kind: "fonctionGraphique",
+          titre: "Une courbe et sa tangente au point marqué",
+          xmin: -5,
+          xmax: 5,
+          ymin: -14,
+          ymax: 14,
+          grille: true,
+          courbes: [
+            { id: "f", type: "quadratique", a, b, c },
+            { id: "t", type: "affine", a: pente, b: y0 - pente * x0 },
+          ],
+          misesEnEvidence: [{ point: { x: x0, y: y0, label: "point de contact" } }],
+        } satisfies CanvasFigure,
+        explanation: exp(
+          "Le nombre dérivé $f'(x_0)$ est le coefficient directeur de la tangente au point d'abscisse $x_0$ : son SIGNE donne le sens de variation de $f$ autour de ce point.",
+          "On regarde si la tangente monte ou descend quand on la parcourt de gauche à droite.",
+          `La tangente ${monte ? "monte" : "descend"} : son coefficient directeur vaut $${fr(pente)}$, ` +
+            `qui est ${monte ? "positif" : "négatif"}. Il ne s'annule pas, donc il n'y a pas d'extremum ici.`,
+          bonne
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "$f'$ est nul au point marqué : $f$ y atteint un extremum",
+            cause: "a confondu « tangente tracée » et « tangente horizontale »",
+          },
+        ],
       };
     },
   },
