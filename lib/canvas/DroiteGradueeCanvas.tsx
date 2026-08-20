@@ -56,7 +56,6 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
 
   const leftPad = 28;
   const rightPad = 28;
-  const axisY = Math.round(height / 2);
 
   const showTicks = figure.display?.showTicks ?? true;
   const showValues = figure.display?.showValues ?? true;
@@ -76,10 +75,54 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
   const axisStartX = valueToX(min, min, max, leftPad, rightPad, width);
   const axisEndX = valueToX(max, min, max, leftPad, rightPad, width);
 
+  // ─── La place au-dessus de l'axe ────────────────────────────────────────────
+  // ⛔ L'AXE NE SE CENTRE PAS (Frédéric, 20/08/2026, en relisant la fiche des
+  // opérations sur les relatifs). Une étiquette de point se dessine 52 px
+  // au-dessus de l'axe ; sur une droite plate — 360 × 90, l'étalon de seconde —
+  // l'axe centré tombait à 45, donc « départ » et « arrivée » se dessinaient à
+  // −7 : HORS du cadre, coupés en haut. L'axe descend maintenant autant qu'il
+  // faut pour que les étiquettes tiennent.
+  //
+  // Et quand deux étiquettes se chevauchent — « départ −5 » et « arrivée −3 »
+  // sur des points voisins, elles s'écrasaient l'une sur l'autre et se lisaient
+  // « départ·arrivée −3 » — la seconde monte d'un cran. Le dessin gagne alors en
+  // hauteur plutôt que de mentir sur ce qu'il montre.
+  const LARGEUR_CAR = 8; // fontSize 14, fontWeight 900
+  const CRAN = 22; // un étage d'étiquettes
+  const BAS = 32; // les nombres de la graduation, dessinés à axisY + 26
+
+  const etiquettes = showPoints && showPointLabels
+    ? points
+        .filter((pt) => pt.label)
+        .map((pt) => {
+          const x = valueToX(clamp(pt.value, min, max), min, max, leftPad, rightPad, width);
+          const demiLargeur = (String(pt.label).length * LARGEUR_CAR) / 2 + 5;
+          return { x, gauche: x - demiLargeur, droite: x + demiLargeur };
+        })
+        .sort((a, b) => a.gauche - b.gauche)
+    : [];
+
+  // Un étage par étiquette : on prend le premier où elle ne touche personne.
+  const finDEtage: number[] = [];
+  const etageParX = new Map<number, number>();
+  for (const e of etiquettes) {
+    let etage = 0;
+    while (finDEtage[etage] !== undefined && e.gauche < finDEtage[etage]) etage += 1;
+    finDEtage[etage] = e.droite;
+    etageParX.set(e.x, etage);
+  }
+  const etages = Math.max(finDEtage.length, 1);
+
+  // Le fond blanc d'une étiquette commence 52 px au-dessus de l'axe : il faut
+  // donc 56 pour l'étage du bas, plus un cran par étage supplémentaire.
+  const hautNecessaire = 56 + CRAN * (etages - 1);
+  const axisY = Math.max(Math.round(height / 2), hautNecessaire);
+  const hauteurTotale = Math.max(height, axisY + BAS);
+
   return (
     <div className="mx-auto w-full max-w-[320px] rounded-xl border border-slate-200 bg-white p-2 shadow-sm">
       <svg
-        viewBox={`0 0 ${width} ${height}`}
+        viewBox={`0 0 ${width} ${hauteurTotale}`}
         className="block h-auto w-full"
         aria-label="Droite graduée"
       >
@@ -179,19 +222,36 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
                 <circle cx={x} cy={axisY - 24} r={5} fill={pointColor} />
 
                 {showPointLabels && pt.label ? (
+                  (() => {
+                    // L'étage calculé plus haut, et un fond blanc à la MESURE du
+                    // texte : à 32 px fixes il ne couvrait que le milieu de
+                    // « départ −5 », et les mots voisins se touchaient quand même.
+                    const haut = axisY - 52 - CRAN * (etageParX.get(x) ?? 0);
+                    const largeur = String(pt.label).length * LARGEUR_CAR + 10;
+                    return (
                   <>
                     <rect
-                      x={x - 16}
-                      y={axisY - 52}
-                      width={32}
+                      x={x - largeur / 2}
+                      y={haut}
+                      width={largeur}
                       height={20}
                       rx={5}
                       fill="white"
                       opacity={0.95}
                     />
+                    <line
+                      x1={x}
+                      y1={haut + 20}
+                      x2={x}
+                      y2={axisY - 26}
+                      stroke={pointColor}
+                      strokeWidth={1.2}
+                      strokeDasharray="2 2"
+                      opacity={0.55}
+                    />
                     <text
                       x={x}
-                      y={axisY - 38}
+                      y={haut + 14}
                       textAnchor="middle"
                       fontSize="14"
                       fontWeight="900"
@@ -203,6 +263,8 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
                       {pt.label}
                     </text>
                   </>
+                    );
+                  })()
                 ) : null}
               </g>
             );
