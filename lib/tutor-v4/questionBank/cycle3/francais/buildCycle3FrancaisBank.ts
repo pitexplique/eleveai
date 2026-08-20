@@ -1953,7 +1953,11 @@ const CC_SORTES: QcmItem[] = [
   {
     text: "Peut-on déplacer un complément circonstanciel dans la phrase ?",
     correct: "Oui : c'est justement ce qui le distingue du complément d'objet",
-    wrongs: ["Non, jamais", "Seulement s'il est court", "Seulement à la fin"],
+    wrongs: [
+      "Non : comme le complément d'objet, il reste collé au verbe",
+      "Oui, mais seulement s'il tient en un ou deux mots très courts",
+      "Oui, mais seulement vers la fin, jamais en tête de la phrase",
+    ],
     methode: "« Hier, il pleuvait. » / « Il pleuvait hier. » Les deux tiennent debout.",
   },
   {
@@ -1972,9 +1976,9 @@ const CC_SORTES: QcmItem[] = [
     text: "Comment vérifier qu'un groupe est bien un complément circonstanciel ?",
     correct: "On essaie de le déplacer ou de le supprimer : la phrase tient encore",
     wrongs: [
-      "On regarde s'il est au pluriel",
-      "On regarde s'il suit le verbe",
-      "On compte ses mots",
+      "On regarde s'il suit le verbe : le circonstanciel est toujours après",
+      "On remplace le groupe par un pronom : si cela marche, c'en est un",
+      "On vérifie qu'il commence par une préposition comme « à » ou « de »",
     ],
     methode: "Le complément d'objet, lui, ne supporte ni l'un ni l'autre.",
   },
@@ -2289,10 +2293,12 @@ const PARTICIPE_PASSE: QcmItem[] = [
   {
     text: "Comment savoir s'il faut accorder un participe passé ?",
     correct: "On cherche l'auxiliaire : être → avec le sujet ; avoir → avec le COD s'il est avant",
+    // ⭐ Le premier leurre INVERSE les deux auxiliaires : il faut savoir dans
+    // quel sens va la règle, et non seulement qu'elle existe.
     wrongs: [
-      "On accorde toujours",
-      "On n'accorde jamais avec « avoir »",
-      "On regarde la fin de la phrase",
+      "On cherche l'auxiliaire : avoir → avec le sujet ; être → avec le COD placé avant",
+      "On regarde le sujet de la phrase, quel que soit l'auxiliaire employé devant",
+      "On accorde dès qu'un nom au pluriel se trouve quelque part dans la phrase",
     ],
     methode: "Deux questions, dans cet ordre : quel auxiliaire ? et le complément est-il devant ?",
   },
@@ -2687,10 +2693,12 @@ const CONJONCTIONS_ROLE: QcmItem[] = [
   {
     text: "Quelle est la différence entre une conjonction de coordination et une conjonction de subordination ?",
     correct: "La coordination met les propositions à égalité ; la subordination en soumet une à l'autre",
+    // ⭐ Le premier leurre INVERSE la règle : la connaitre, c'est savoir dans
+    // quel sens elle va.
     wrongs: [
-      "Il n'y en a aucune",
-      "La coordination s'emploie à l'oral, la subordination à l'écrit",
-      "La coordination est invariable, l'autre s'accorde",
+      "La subordination met les propositions à égalité ; la coordination en soumet une",
+      "La coordination s'emploie à l'oral, la subordination seulement à l'écrit soigné",
+      "La coordination relie deux mots, la subordination relie deux phrases entières",
     ],
     methode: "Égalité d'un côté, dépendance de l'autre.",
   },
@@ -2894,9 +2902,9 @@ const MANIPULATIONS: QcmItem[] = [
     text: "« Hier, les enfants ont ramassé des letchis. » Que donne le déplacement de « Hier » ?",
     correct: "« Les enfants ont ramassé des letchis hier. » — la phrase tient debout",
     wrongs: [
-      "la phrase devient fausse",
-      "le verbe change de temps",
-      "le sujet change",
+      "« Les enfants hier ont ramassé des letchis. » — le sens en est changé",
+      "« Hier ont ramassé les enfants des letchis. » — le sujet passe après",
+      "« Les enfants ramassent des letchis hier. » — le verbe change de temps",
     ],
     methode: "Le déplacement réussi prouve que le groupe est circonstanciel.",
   },
@@ -2920,9 +2928,9 @@ const MANIPULATIONS: QcmItem[] = [
     text: "« Le pêcheur répare son filet. » Que donne l'encadrement par « c'est … qui » ?",
     correct: "« C'est le pêcheur qui répare son filet. » — « le pêcheur » est bien le sujet",
     wrongs: [
-      "la phrase devient une question",
-      "le verbe change de personne",
-      "rien du tout",
+      "« C'est son filet que le pêcheur répare. » — « son filet » est donc le sujet",
+      "« C'est réparer que le pêcheur fait à son filet. » — le verbe devient sujet",
+      "« Est-ce le pêcheur qui répare son filet ? » — la phrase devient une question",
     ],
     methode: "Si l'encadrement marche, le groupe est sujet.",
   },
@@ -2976,9 +2984,9 @@ const MANIPULATIONS: QcmItem[] = [
     text: "Que prouve-t-on en supprimant un groupe sans casser la phrase ?",
     correct: "que ce groupe est facultatif : c'est un complément circonstanciel",
     wrongs: [
-      "qu'il est le sujet",
-      "qu'il est le verbe",
-      "qu'il est un complément d'objet",
+      "qu'il est le sujet : sans lui, on ne sait plus qui fait l'action",
+      "qu'il est un complément d'objet, celui qui complète le verbe",
+      "qu'il est mal placé, et qu'il faudrait le mettre en tête de phrase",
     ],
     methode: "Sujet, verbe et complément d'objet ne se suppriment pas.",
   },
@@ -3168,9 +3176,9 @@ const DISCOURS_RECIT: QcmItem[] = [
     text: "Un même fait peut-il se raconter avec les deux séries de temps ?",
     correct: "Oui : « il est parti » ou « il partit », selon d'où l'on parle",
     wrongs: [
-      "Non, jamais",
-      "Seulement au pluriel",
-      "Seulement dans les poèmes",
+      "Non : chaque fait appelle une série de temps et une seule",
+      "Oui, mais seulement si le fait se répète plusieurs fois",
+      "Oui, mais seulement dans les poèmes et les textes anciens",
     ],
     methode: "Le fait ne change pas ; c'est le point de vue qui change.",
   },
@@ -3970,8 +3978,16 @@ const RADICAL_VARIATIONS: QcmItem[] = [
 const HEROS: QcmItem[] = [
   {
     text: "Qu'est-ce qui fait d'un personnage une héroïne ou un héros ?",
-    correct: "Il affronte une épreuve plus grande que lui, et ce qu'il choisit de faire nous apprend quelque chose",
-    wrongs: ["Il est toujours le plus fort", "Il gagne toujours à la fin", "Il a des pouvoirs magiques"],
+    correct: "Il affronte une épreuve plus grande que lui, et son choix nous apprend quelque chose",
+    // Les trois leurres sont de VRAIES définitions du héros, chacune fausse
+    // pour une raison différente : la force, la constance, la victoire. Avant,
+    // c'étaient trois bribes de vingt-six signes contre une phrase de cent :
+    // la bonne réponse se cochait à sa seule longueur (+73 car.).
+    wrongs: [
+      "Il possède une force ou un pouvoir que les autres personnages n'ont pas du tout",
+      "Il traverse tout le récit sans jamais douter ni changer d'avis une seule fois",
+      "Il finit toujours par gagner, et c'est sa victoire qui fait de lui un héros",
+    ],
     methode: "Ce n'est pas la force qui fait le héros, c'est l'épreuve et le choix.",
   },
   {
@@ -4055,11 +4071,13 @@ const MERVEILLEUX: QcmItem[] = [
   },
   {
     text: "Quelle est la différence entre le merveilleux et l'étrange ?",
-    correct: "Dans le merveilleux la magie est admise ; dans l'étrange elle inquiète et reste sans explication",
+    correct: "Dans le merveilleux la magie va de soi ; dans l'étrange elle inquiète et reste inexpliquée",
+    // ⭐ Le premier leurre est l'INVERSION de la bonne réponse : c'est le piège
+    // le plus instructif, car il oblige à savoir dans quel sens va la règle.
     wrongs: [
-      "Il n'y en a aucune",
-      "Le merveilleux est plus long",
-      "L'étrange s'écrit toujours en vers",
+      "Dans le merveilleux la magie inquiète ; dans l'étrange elle est admise sans surprise",
+      "Dans le merveilleux le héros est un enfant ; dans l'étrange c'est toujours un adulte",
+      "Dans le merveilleux l'histoire est ancienne ; dans l'étrange elle est contemporaine",
     ],
     methode: "L'un rassure et enchante, l'autre trouble et laisse un doute.",
   },
@@ -4105,9 +4123,9 @@ const MERVEILLEUX: QcmItem[] = [
     text: "Où et quand se passent la plupart des contes merveilleux ?",
     correct: "dans un lieu et un temps qu'on ne peut pas situer : « Il était une fois… »",
     wrongs: [
-      "dans une ville précise et datée",
-      "toujours à l'école",
-      "toujours dans le futur",
+      "dans une ville et à une date précises, que le texte nomme au début",
+      "toujours au Moyen Âge, l'époque des châteaux et des chevaliers",
+      "dans un futur lointain, quand la magie sera revenue sur la terre",
     ],
     methode: "L'imprécision est voulue : elle rend le conte transportable partout.",
   },
@@ -4136,7 +4154,11 @@ const MERVEILLEUX: QcmItem[] = [
   {
     text: "Que développe surtout la lecture de récits merveilleux ?",
     correct: "l'imagination ET l'esprit critique : on sait que c'est inventé",
-    wrongs: ["la vitesse de lecture", "l'orthographe", "le calcul mental"],
+    wrongs: [
+      "l'imagination seule : on croit un moment à ce qui est raconté",
+      "la connaissance du passé : on apprend comment vivaient les gens",
+      "le vocabulaire ancien, qu'on ne rencontre plus nulle part ailleurs",
+    ],
     methode: "Savoir qu'on lit une fiction fait partie de l'exercice.",
   },
 ];
@@ -4157,7 +4179,11 @@ const AUTRES_VIES: QcmItem[] = [
   {
     text: "Qu'apporte la lecture d'un récit qui se passe loin de chez soi ?",
     correct: "on découvre d'autres façons de vivre, et on comprend mieux la sienne",
-    wrongs: ["rien de particulier", "seulement du vocabulaire", "seulement des noms de lieux"],
+    wrongs: [
+      "on découvre d'autres façons de vivre, et on oublie un peu la sienne",
+      "on apprend des noms de pays et de villes qu'on ne connaissait pas",
+      "on enrichit son vocabulaire avec des mots venus d'ailleurs",
+    ],
     methode: "S'immerger dans un univers étranger, dit le BO, développe l'empathie.",
   },
   {
@@ -4252,7 +4278,11 @@ const MORALE: QcmItem[] = [
   {
     text: "Une valeur, dans un récit, c'est…",
     correct: "ce à quoi les personnages tiennent : justice, tolérance, liberté",
-    wrongs: ["le prix du livre", "le nombre de pages", "le nom de l'auteur"],
+    wrongs: [
+      "ce que le récit coute au lecteur : son temps, son attention",
+      "ce que vaut le livre pour un libraire ou un collectionneur",
+      "la leçon écrite à la fin, que l'auteur adresse au lecteur",
+    ],
     methode: "Le BO cite justice, tolérance, liberté, respect des différences.",
   },
   {
@@ -4311,7 +4341,11 @@ const POESIE: QcmItem[] = [
   {
     text: "À quoi reconnait-on un poème du premier coup d'œil ?",
     correct: "à sa forme sur la page : des vers, des strophes, des blancs",
-    wrongs: ["à sa longueur", "à son titre", "à ses guillemets"],
+    wrongs: [
+      "à ses rimes, qu'on entend dès qu'on le lit à voix haute",
+      "à sa longueur : un poème tient toujours sur une seule page",
+      "à son titre, écrit en plus gros et souvent au singulier",
+    ],
     methode: "La forme se voit avant que la lecture ne commence.",
   },
   {
@@ -4353,13 +4387,21 @@ const POESIE: QcmItem[] = [
   {
     text: "Une strophe, c'est…",
     correct: "un groupe de vers séparé des autres par une ligne blanche",
-    wrongs: ["une phrase", "un paragraphe de roman", "un titre"],
+    wrongs: [
+      "une ligne du poème, qui s'arrête avant la fin de la phrase",
+      "un paragraphe, tel qu'on en trouve dans un roman en prose",
+      "un groupe de vers qui riment tous ensemble, deux par deux",
+    ],
     methode: "C'est le paragraphe du poème.",
   },
   {
     text: "Que veut dire « savourer le goût des mots » ?",
     correct: "prendre plaisir à leur son, à leur rythme, à ce qu'ils évoquent",
-    wrongs: ["apprendre leur définition", "les compter", "les classer par ordre alphabétique"],
+    wrongs: [
+      "apprendre leur définition exacte, telle que la donne un dictionnaire",
+      "en collectionner le plus possible, pour enrichir son vocabulaire",
+      "choisir toujours le mot le plus rare, celui qui fait le plus d'effet",
+    ],
     methode: "C'est le titre de cette entrée du programme.",
   },
   {
@@ -4371,7 +4413,11 @@ const POESIE: QcmItem[] = [
   {
     text: "Écrire un poème « à la manière de », c'est…",
     correct: "reprendre sa forme ou son procédé pour en faire un à soi",
-    wrongs: ["le recopier", "le traduire", "le résumer"],
+    wrongs: [
+      "le recopier en changeant seulement quelques mots par des synonymes",
+      "le raconter en prose, sans les vers, pour qu'il soit plus clair",
+      "en écrire un autre sur le même sujet, avec une forme différente",
+    ],
     methode: "On emprunte le moule, pas les mots.",
   },
   {
@@ -4484,16 +4530,20 @@ const ORIGINES: QcmItem[] = [
     text: "Qu'est-ce qu'un récit des origines ?",
     correct: "un récit qui explique comment le monde, les hommes ou une chose sont apparus",
     wrongs: [
-      "un récit qui se passe au début du livre",
-      "la première page d'un roman",
-      "la biographie de l'auteur",
+      "un récit qui raconte les premiers jours de la vie d'un personnage",
+      "un récit placé au début d'un livre, avant que l'histoire commence",
+      "un récit qui dit d'où vient l'auteur et comment il s'est mis à écrire",
     ],
     methode: "Il répond à un « d'où cela vient-il ? ».",
   },
   {
     text: "Un mythe étiologique explique…",
     correct: "l'origine d'un phénomène : pourquoi la mer est salée, pourquoi l'araignée tisse",
-    wrongs: ["la fin du monde", "les règles de grammaire", "la vie de l'auteur"],
+    wrongs: [
+      "la fin du monde : comment tout s'achèvera, et ce qu'il en restera après",
+      "la vie d'un héros : sa naissance, ses exploits et sa mort glorieuse",
+      "les règles d'une cité : ce qui y est permis, ce qui y est interdit",
+    ],
     methode: "Étiologie : la recherche des causes.",
   },
   {
@@ -4521,7 +4571,11 @@ const ORIGINES: QcmItem[] = [
   {
     text: "Pourquoi trouve-t-on des récits des origines dans toutes les cultures ?",
     correct: "Parce que toutes les sociétés cherchent à expliquer d'où elles viennent",
-    wrongs: ["Parce qu'ils sont faciles à écrire", "Par hasard", "Parce qu'ils sont courts"],
+    wrongs: [
+      "Parce qu'un même récit s'est transmis d'un peuple à l'autre en voyageant",
+      "Parce que ces récits sont courts et se retiennent sans avoir à les écrire",
+      "Parce que les savants les ont recopiés dans tous les pays du monde",
+    ],
     methode: "C'est ce que le BO appelle un questionnement universel.",
   },
   {
@@ -4551,16 +4605,20 @@ const ORIGINES: QcmItem[] = [
   {
     text: "Que gagne-t-on à comparer deux récits des origines ?",
     correct: "on voit ce que deux cultures partagent et ce qui les sépare",
-    wrongs: ["rien", "du temps", "la correction des fautes"],
+    wrongs: [
+      "on découvre laquelle des deux cultures dit vrai sur les origines",
+      "on retrouve le récit le plus ancien, dont l'autre a été copié",
+      "on gagne du temps : les deux racontent au fond la même histoire",
+    ],
     methode: "Le BO parle de mythes « issus de différents continents et traditions ».",
   },
   {
     text: "Les valeurs portées par un mythe…",
     correct: "se lisent dans ce que font les personnages et dans ce qui leur arrive",
     wrongs: [
-      "sont toujours écrites à la fin",
-      "sont données par le titre",
-      "n'existent pas",
+      "se lisent dans la morale écrite à la fin, comme dans une fable",
+      "se devinent au titre, qui annonce d'avance ce qu'il faut penser",
+      "se trouvent dans les paroles du personnage le plus sage du récit",
     ],
     methode: "Le mythe montre ; il n'explique presque jamais.",
   },
@@ -4570,7 +4628,11 @@ const THEATRE: QcmItem[] = [
   {
     text: "Une didascalie, c'est…",
     correct: "une indication de jeu ou de mise en scène, écrite par l'auteur",
-    wrongs: ["une réplique", "le titre d'une scène", "un poème"],
+    wrongs: [
+      "une réplique dite tout bas, que les autres personnages n'entendent pas",
+      "le titre d'une scène, qui annonce ce qui va s'y passer",
+      "la liste des personnages, donnée au début de la pièce",
+    ],
     methode: "Elle n'est pas dite sur scène : elle est jouée.",
   },
   {
@@ -4588,7 +4650,11 @@ const THEATRE: QcmItem[] = [
   {
     text: "Un quiproquo, c'est…",
     correct: "un malentendu : un personnage croit une chose, le public en sait une autre",
-    wrongs: ["une longue réplique", "un changement de décor", "une rime"],
+    wrongs: [
+      "un aparté : un personnage parle au public sans que les autres l'entendent",
+      "un coup de théâtre : un événement soudain qui renverse toute la situation",
+      "une tirade : une longue réplique dite d'un trait par un seul personnage",
+    ],
     methode: "Le public en sait plus : c'est de là que vient le rire.",
   },
   {
@@ -4610,7 +4676,11 @@ const THEATRE: QcmItem[] = [
   {
     text: "Au théâtre, le masque sert à…",
     correct: "cacher qui l'on est pour jouer un autre — et parfois dire plus vrai",
-    wrongs: ["protéger le visage", "changer de voix seulement", "indiquer l'acte"],
+    wrongs: [
+      "protéger le visage de l'acteur pendant les scènes de combat",
+      "porter la voix plus loin, jusqu'au dernier rang de la salle",
+      "montrer au public à quel acte de la pièce on est arrivé",
+    ],
     methode: "« Se masquer, jouer, déjouer » : l'illusion et la vérité vont ensemble.",
   },
   {
@@ -4628,7 +4698,11 @@ const THEATRE: QcmItem[] = [
   {
     text: "L'illusion théâtrale, c'est…",
     correct: "le fait d'accepter, le temps de la pièce, que ce qu'on voit est vrai",
-    wrongs: ["un tour de magie", "un décor peint", "une erreur de l'auteur"],
+    wrongs: [
+      "le fait d'oublier tout à fait qu'on se trouve dans une salle",
+      "le décor peint qui fait croire à un vrai palais ou à une forêt",
+      "le moment où un personnage trompe un autre par un déguisement",
+    ],
     methode: "Le BO parle du rapport entre « l'illusion et le réel ».",
   },
   {
@@ -4663,7 +4737,11 @@ const AVENTURE: QcmItem[] = [
   {
     text: "Un récit d'aventure commence souvent par…",
     correct: "une situation d'équilibre, rompue par un élément déclencheur",
-    wrongs: ["la morale", "le dénouement", "le portrait complet du héros"],
+    wrongs: [
+      "un danger immédiat, dès la première ligne, avant toute présentation",
+      "le portrait complet du héros, de sa naissance jusqu'à son départ",
+      "l'annonce de ce qui va arriver, pour donner envie de continuer",
+    ],
     methode: "Quelque chose doit se casser pour que le récit parte.",
   },
   {
@@ -4691,7 +4769,11 @@ const AVENTURE: QcmItem[] = [
   {
     text: "Le suspense, c'est…",
     correct: "l'attente créée chez le lecteur quand il ignore ce qui va arriver",
-    wrongs: ["la description du décor", "la fin de l'histoire", "la morale"],
+    wrongs: [
+      "la surprise que produit la fin quand elle arrive sans prévenir",
+      "la peur qu'inspire un personnage dès sa première apparition",
+      "le moment où l'auteur explique enfin tout ce qu'on ignorait",
+    ],
     methode: "Il se fabrique : l'auteur retient l'information.",
   },
   {
@@ -4713,7 +4795,11 @@ const AVENTURE: QcmItem[] = [
   {
     text: "Un récit de voyage, c'est…",
     correct: "un texte qui raconte la découverte, réelle ou imaginée, d'un ailleurs",
-    wrongs: ["une carte", "un guide touristique", "un horaire de train"],
+    wrongs: [
+      "un guide touristique : il décrit un pays et conseille quoi y visiter",
+      "un documentaire : il donne des informations vraies sur une région",
+      "une carte commentée : elle situe les lieux et nomme les distances",
+    ],
     methode: "Ce qui compte, c'est le récit de la découverte.",
   },
   {
@@ -4744,7 +4830,11 @@ const MONSTRES: QcmItem[] = [
   {
     text: "Qu'est-ce qui fait un monstre en littérature ?",
     correct: "une part d'humain et une part qui fait peur, tenues ensemble",
-    wrongs: ["sa taille", "ses dents", "son nom"],
+    wrongs: [
+      "une taille et une force que rien ni personne ne peut arrêter",
+      "une laideur si grande qu'elle suffit à le faire reconnaitre",
+      "une méchanceté entière, sans le moindre reste d'humanité",
+    ],
     methode: "Le BO parle de « la part d'humanité d'un personnage monstrueux ».",
   },
   {
@@ -4768,7 +4858,11 @@ const MONSTRES: QcmItem[] = [
   {
     text: "Que veut dire « expérience de l'autre, expérience de soi » ?",
     correct: "en rencontrant le monstre, on découvre aussi quelque chose sur soi",
-    wrongs: ["on rencontre un ami", "on voyage", "on change de livre"],
+    wrongs: [
+      "en rencontrant l'autre, on oublie un moment qui l'on est soi-même",
+      "en lisant plusieurs récits, on finit par se connaitre un peu mieux",
+      "en voyageant au loin, on apprend comment vivent les autres peuples",
+    ],
     methode: "C'est le sous-titre même de cette entrée.",
   },
   {
@@ -4796,7 +4890,11 @@ const MONSTRES: QcmItem[] = [
   {
     text: "Qu'est-ce qui distingue un monstre d'un simple méchant ?",
     correct: "le monstre trouble : on ne sait pas toujours s'il faut le craindre ou le plaindre",
-    wrongs: ["sa taille", "le nombre de ses apparitions", "son nom"],
+    wrongs: [
+      "le méchant trouble : on hésite entre le craindre et le plaindre, pas le monstre",
+      "le monstre agit toujours seul, alors que le méchant a toujours des complices",
+      "le monstre appartient toujours au merveilleux, le méchant au récit réaliste",
+    ],
     methode: "Le méchant est clair ; le monstre ne l'est pas.",
   },
   {
@@ -4868,7 +4966,11 @@ const FLUENCE_130: QcmItem[] = [
   {
     text: "Un groupe syntaxique, c'est…",
     correct: "un groupe de mots qui va ensemble et qu'on lit d'un seul souffle",
-    wrongs: ["une phrase entière", "un paragraphe", "une syllabe"],
+    wrongs: [
+      "une phrase entière, du premier mot jusqu'au point de la fin",
+      "un paragraphe, c'est-à-dire tout ce qui tient entre deux alinéas",
+      "une syllabe, le petit morceau qu'on prononce d'une seule voix",
+    ],
     methode: "Le BO demande de « prendre en compte les groupes syntaxiques ».",
   },
   {
@@ -4971,7 +5073,11 @@ const DOCUMENTS: QcmItem[] = [
   {
     text: "À quoi sert un schéma ?",
     correct: "à montrer d'un coup d'œil une organisation ou un fonctionnement",
-    wrongs: ["à faire joli", "à remplacer les mots", "à allonger le document"],
+    wrongs: [
+      "à remplacer le texte, pour qu'on n'ait plus besoin de le lire",
+      "à illustrer le document, comme le ferait une photographie",
+      "à donner des chiffres exacts, plus précis que dans le texte",
+    ],
     methode: "Il dit en une image ce qui prendrait un paragraphe.",
   },
   {
@@ -5000,9 +5106,9 @@ const DOCUMENTS: QcmItem[] = [
     text: "Un tableau de chiffres se lit…",
     correct: "en repérant d'abord ce que disent ses lignes et ses colonnes",
     wrongs: [
-      "de gauche à droite comme un texte",
-      "en commençant par le bas",
-      "sans en tenir compte",
+      "de gauche à droite et ligne après ligne, comme on lit un texte",
+      "en commençant par la case du bas, la plus récente des deux",
+      "en cherchant le plus grand nombre, qui donne la réponse",
     ],
     methode: "Sans les entêtes, un nombre ne veut rien dire.",
   },
@@ -5010,9 +5116,9 @@ const DOCUMENTS: QcmItem[] = [
     text: "Croiser deux documents, c'est…",
     correct: "combiner leurs informations pour répondre à une question qu'aucun ne résout seul",
     wrongs: [
-      "les lire l'un après l'autre",
-      "comparer leur longueur",
-      "n'en garder qu'un",
+      "les lire l'un après l'autre, puis retenir celui qui semble le plus clair",
+      "comparer leur longueur et garder celui qui donne le plus de détails",
+      "vérifier qu'ils disent la même chose, et écarter celui qui dépasse",
     ],
     methode: "Le BO parle d'informations « combinées pour donner un sens global ».",
   },
@@ -5022,7 +5128,11 @@ const IMAGE: QcmItem[] = [
   {
     text: "Qu'est-ce qu'une image fixe ?",
     correct: "une image qui ne bouge pas : photo, tableau, dessin, affiche",
-    wrongs: ["un film", "une animation", "un enregistrement sonore"],
+    wrongs: [
+      "une image qui défile : film, dessin animé, publicité télévisée",
+      "une image sans personne dedans : un paysage, un objet posé",
+      "une image imprimée, par opposition à celle d'un écran",
+    ],
     methode: "Fixe s'oppose à animée.",
   },
   {
@@ -5034,23 +5144,31 @@ const IMAGE: QcmItem[] = [
   {
     text: "Le cadrage d'une photographie, c'est…",
     correct: "le choix de ce qu'on montre et de ce qu'on laisse dehors",
-    wrongs: ["sa taille d'impression", "ses couleurs", "sa date"],
+    wrongs: [
+      "le format du tirage : carré, rectangulaire, en hauteur ou en largeur",
+      "la distance à laquelle on se place du sujet photographié",
+      "l'endroit d'où l'on prend la photo : en haut, en bas, de côté",
+    ],
     methode: "Ce qui est hors du cadre a été écarté par quelqu'un.",
   },
   {
     text: "Pourquoi dit-on qu'une image est un choix ?",
     correct: "parce que quelqu'un a décidé de ce qu'on voit et de ce qu'on ne voit pas",
     wrongs: [
-      "parce qu'elle est en couleur",
-      "parce qu'elle est ancienne",
-      "parce qu'elle porte une légende",
+      "parce que celui qui la regarde y voit ce qu'il a envie d'y voir",
+      "parce qu'on peut la recadrer ou la retoucher après l'avoir prise",
+      "parce que sa légende oriente déjà la façon de la comprendre",
     ],
     methode: "Une image n'est jamais neutre : c'est le premier réflexe à prendre.",
   },
   {
     text: "Que regarde-t-on en premier dans une image ?",
     correct: "ce qui attire l'œil : la lumière, une couleur vive, un personnage au centre",
-    wrongs: ["le coin en bas à droite", "le cadre", "la légende seule"],
+    wrongs: [
+      "le coin en bas à droite, là où le regard finit toujours sa course",
+      "la légende, qui dit d'avance ce qu'il faut voir dans l'image",
+      "le bord du cadre, puis on remonte lentement vers le milieu",
+    ],
     methode: "Le regard est guidé : reste à comprendre par quoi.",
   },
   {
@@ -5073,9 +5191,9 @@ const IMAGE: QcmItem[] = [
     text: "Interpréter une image, c'est…",
     correct: "dire ce qu'elle montre, puis ce qu'elle suggère, en s'appuyant sur ce qu'on voit",
     wrongs: [
-      "inventer librement une histoire",
-      "la décrire élément par élément et s'arrêter là",
-      "en donner le prix",
+      "inventer librement l'histoire qu'elle aurait pu raconter avant",
+      "la décrire élément par élément, puis s'arrêter là sans conclure",
+      "chercher qui l'a prise, quand, et avec quel appareil photo",
     ],
     methode: "Décrire d'abord, interpréter ensuite — jamais l'inverse.",
   },
@@ -5130,22 +5248,30 @@ const ECRIRE_MAIN: QcmItem[] = [
     text: "Quelle est la meilleure méthode de copie ?",
     correct: "lire un groupe de mots, le garder en tête, l'écrire sans regarder, vérifier",
     wrongs: [
-      "copier lettre par lettre",
-      "copier mot par mot",
-      "copier sans jamais relire",
+      "lire une lettre, l'écrire, en lire une autre, et ainsi jusqu'au bout",
+      "lire toute la phrase, l'écrire d'un trait, puis passer à la suivante",
+      "regarder le modèle à chaque mot écrit, pour ne jamais se tromper",
     ],
     methode: "C'est la taille du morceau gardé en tête qui fait la différence.",
   },
   {
     text: "Pourquoi la copie reste-t-elle importante au cycle 3 ?",
     correct: "parce qu'elle entraine le geste et fixe l'orthographe des mots",
-    wrongs: ["pour occuper le temps", "pour remplir le cahier", "pour la note"],
+    wrongs: [
+      "parce qu'elle oblige à relire le texte plusieurs fois de suite",
+      "parce qu'elle laisse une trace propre dans le cahier de l'élève",
+      "parce qu'elle apprend à écrire vite, ce qui servira au collège",
+    ],
     methode: "Le BO dit que « la maîtrise de l'écriture cursive reste importante ».",
   },
   {
     text: "Quelle est l'erreur de copie la plus fréquente ?",
     correct: "un mot sauté ou doublé au moment où l'on relève les yeux",
-    wrongs: ["une faute d'accord", "une majuscule oubliée", "une rature"],
+    wrongs: [
+      "une faute d'accord, parce qu'on copie sans penser au sens",
+      "une majuscule oubliée en début de phrase, faute d'y regarder",
+      "une lettre mal formée, quand la main va plus vite que l'œil",
+    ],
     methode: "C'est une erreur de repérage, pas d'inattention.",
   },
   {
@@ -5186,16 +5312,20 @@ const ECRIRE_MAIN: QcmItem[] = [
     text: "Que vérifie-t-on en relisant une copie ?",
     correct: "les mots oubliés ou doublés, puis les accents, puis la ponctuation",
     wrongs: [
-      "seulement les majuscules",
-      "seulement la longueur",
-      "rien : on a déjà copié",
+      "les accords, puis les temps des verbes, puis le sens des phrases",
+      "les majuscules et les points, puisque le reste est déjà copié",
+      "la longueur : on compte les lignes du modèle et celles de la copie",
     ],
     methode: "Une chose à la fois, dans cet ordre.",
   },
   {
     text: "Écrire à la main « de manière fluide », cela veut dire…",
     correct: "sans y penser, pour garder sa tête libre pour ce qu'on écrit",
-    wrongs: ["très vite", "en gros caractères", "sans lever le stylo"],
+    wrongs: [
+      "le plus vite possible, pour finir avant les autres élèves",
+      "sans jamais lever le stylo, en attachant toutes les lettres",
+      "avec une écriture régulière et penchée, toujours de la même taille",
+    ],
     methode: "Un geste automatisé libère l'attention pour le contenu.",
   },
 ];
