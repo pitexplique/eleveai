@@ -68,6 +68,26 @@ calent dessus.**
    vidéo est réellement enregistrée pour la notion (`VideoNotion`, 19/08) — plus de repli
    vers la chaîne. Une fiche imprimée et distribuée en classe ne renvoie pas vers du vide.
 
+### 2 ter. « Toujours une visualisation humaine » (Frédéric, 20/08/2026)
+
+Un dessin juste n'est pas un dessin lisible. Trois retours en une matinée, tous
+sur la même chose : le calcul était bon, l'élève ne voyait rien.
+
+- **Dans une carte, on EMPILE, on ne juxtapose pas.** Une carte de propriété vit
+  sur trois colonnes, ~250 px : trois barres côte à côte y reçoivent 80 px
+  chacune. Empilées, chacune prend toute la largeur. Au-delà de deux dessins,
+  passer en 2 × 2 plutôt qu'en ligne.
+- **Aucune légende ne doit en toucher une autre.** Calculer la place réellement
+  occupée (≈ 7 px par caractère à `fontSize` 15) avant de poser deux textes sous
+  la même figure. Si ça ne tient pas, une légende passe **au-dessus**, avec une
+  flèche — c'est ce qui a sauvé l'anatomie de `3x + 2`.
+- **Le cadre se serre sur le dessin.** Un `viewBox` fixe laisse le sujet occuper
+  un quart de son cadre : à largeur égale, un cadre ajusté double la taille du
+  trait (fait sur `AngleCanvas`).
+- **Vérifier en RENDANT, pas en lisant le code** : `renderToStaticMarkup` donne
+  les coordonnées réelles, donc les chevauchements et les débordements. C'est
+  ainsi qu'on a vu qu'un pavé 4 × 3 × 2 sortait de son cadre en silence.
+
 ⛔ **Deux pièges de canvas à connaître** (le reste est dans `types_canvas.ts`) :
 `SuiteCanvas` imprime « Suite » en titre **en dur** et étiquette ses cases « terme 1,
 terme 2 » — ses flèches sont donc inutilisables ailleurs que sur une vraie suite ;
