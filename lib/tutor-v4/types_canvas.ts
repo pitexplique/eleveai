@@ -1344,7 +1344,112 @@ export type Repere3dCanvasData = {
   size?: { width?: number; height?: number };
 };
 
+// ============================================================
+// La phrase analysée — LE canvas du français (20/08/2026)
+// ============================================================
+//
+// Les vingt-huit canvas précédents sont tous mathématiques. Ouvrir le français
+// demandait de trouver ce qui, dans cette matière, JOUE LE RÔLE de la droite
+// graduée : un objet unique, dessiné toujours pareil, sur lequel toutes les
+// notions viennent se poser. C'est la PHRASE SEGMENTÉE — les mots en étiquettes,
+// les groupes sous un crochet, et des flèches par-dessus.
+//
+// Ce qu'elle montre, et que le texte ne montre pas :
+// - la phrase se DÉCOUPE en groupes (et pas mot à mot) ;
+// - un mot a une nature (au-dessus, en gris) ET une fonction (en dessous, en
+//   couleur) — les deux lignes se lisent d'un coup d'œil, ce que trois pavés de
+//   texte n'obtiennent jamais ;
+// - un accord est un TRAIT ENTRE DEUX MOTS, pas une règle abstraite ;
+// - une manipulation (déplacer, supprimer, remplacer) est un GESTE : le groupe
+//   part en fantôme ailleurs, ou se barre.
+//
+// ⭐ LA COULEUR PORTE LA FONCTION, DANS TOUTE LA MATIÈRE (l'équivalent du
+// « une couleur porteuse de sens par point » de la 2de) : le sujet est bleu
+// partout, le verbe rouge partout, le complément d'objet vert, le
+// circonstanciel orange, l'attribut violet. Un élève qui a lu une fiche
+// reconnaît les couleurs dans toutes les autres — d'où `COULEURS_FONCTION`
+// déduites du label dans `PhraseCanvas.tsx`, sans que la fiche ait à les écrire.
+//
+// ⛔ PAS POUR : un texte de plusieurs phrases (les reprises d'un paragraphe
+// entier), ni un tableau de conjugaison. Une phrase, dessinée en une ligne.
+
+export type PhraseCanvasMot = {
+  /** Le mot, tel qu'il s'écrit. La ponctuation finale est un « mot » comme
+   *  les autres : c'est ainsi qu'elle se montre du doigt. */
+  texte: string;
+  /** La NATURE (classe grammaticale), affichée au-dessus en gris : « nom »,
+   *  « déterminant », « verbe », « adjectif », « préposition ». */
+  nature?: string;
+  /** Le mot dont on parle : étiquette pleine, contour épais. */
+  focus?: boolean;
+  /** Le mot est barré — la manipulation « je supprime » (un CC se supprime,
+   *  un COD non). */
+  barre?: boolean;
+  /** Force la couleur de l'étiquette (sinon : celle du groupe qui la porte). */
+  color?: string;
+};
+
+export type PhraseCanvasGroupe = {
+  /** Indices des mots couverts, bornes comprises : [premier, dernier]. */
+  mots: [number, number];
+  /** La FONCTION, écrite sous le crochet : « sujet », « COD », « CC de temps »,
+   *  « attribut du sujet ». La couleur s'en déduit. */
+  label: string;
+  color?: string;
+  /** Le groupe se redessine en fantôme à un autre endroit de la phrase, avec
+   *  une flèche : la mobilité du complément circonstanciel. */
+  deplacable?: boolean;
+};
+
+export type PhraseCanvasLien = {
+  /** Indices des deux mots reliés. */
+  de: number;
+  vers: number;
+  /** Ce que le lien impose ou demande : « pluriel », « à qui ? », « = ». */
+  label?: string;
+  /**
+   * - `accord`   : arc plein AU-DESSUS (déterminant → nom, sujet → verbe) ;
+   * - `question` : arc AU-DESSUS étiqueté d'une question (« quoi ? », « à qui ? ») ;
+   * - `reprise`  : arc pointillé EN DESSOUS, du pronom vers ce qu'il remplace.
+   */
+  type?: "accord" | "question" | "reprise";
+};
+
+export type PhraseCanvasData = {
+  kind: "phrase";
+  titre?: string;
+  mots: PhraseCanvasMot[];
+  groupes?: PhraseCanvasGroupe[];
+  liens?: PhraseCanvasLien[];
+  /** Phrase courte sous le dessin (la consigne, la remarque). */
+  legende?: string;
+  display?: {
+    /** Ligne des natures au-dessus des mots (défaut : vrai s'il y en a). */
+    showNatures?: boolean;
+    /** Crochets + étiquettes de fonction (défaut : vrai s'il y a des groupes). */
+    showGroupes?: boolean;
+  };
+  /**
+   * ⭐ LA LARGEUR OÙ LA PHRASE PASSE À LA LIGNE (défaut : 300).
+   *
+   * C'est le réglage qui décide de la lisibilité sur téléphone, et il se calcule.
+   * Mesuré sur la fiche réelle en 375 px de large : le bloc qui reçoit un dessin
+   * ne fait que 226 px une fois les marges de carte enlevées. Un SVG se met à
+   * l'échelle de son bloc — une phrase dessinée sur 466 px y arrive donc à
+   * 226/466, et ses mots écrits en 16 px s'affichent en 7,8 px.
+   *
+   * À 300, le rapport est de 0,75 : les mots restent à 12 px sur un téléphone,
+   * et la phrase se plie en deux lignes plutôt que de rapetisser. Une phrase
+   * longue perd de la hauteur, jamais de la taille de police.
+   */
+  largeurMax?: number;
+  /** La hauteur se CALCULE d'après les bandes réellement dessinées ; ne la
+   *  forcer que pour une raison précise. La largeur, elle, se règle. */
+  size?: { width?: number; height?: number };
+};
+
 export type CanvasFigure =
+  | PhraseCanvasData
   | TriangleCanvasData
   | QuadrilatereCanvasData
   | FigureLibreCanvasData

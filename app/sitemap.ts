@@ -32,6 +32,8 @@ const LASTMOD_JEUX    = new Date("2026-07-05");
 const LASTMOD_FICHES  = new Date("2026-07-11");
 // 12/07 : les 16 fiches IA refaites « en blocs » (fiche + flashcards + composeur)
 const LASTMOD_FICHES_IA = new Date("2026-07-12");
+// Le français entre dans les fiches de cours (première fiche : la grammaire du CM2).
+const LASTMOD_FICHES_FR = new Date("2026-08-20");
 // 25/07 : lancement des kits de survie lycée (Première spé maths en premier)
 const LASTMOD_KIT = new Date("2026-07-28");
 const LASTMOD_AUDIENCES = new Date("2026-07-05");
@@ -100,6 +102,8 @@ const ROUTES: RouteConfig[] = [
   // ── FICHES DE COURS ────────────────────────────────────────────────────────
   { path: "/fiches-cours",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/fiches-cours/maths", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
+  { path: "/fiches-cours/francais", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/cm2/grammaire-orthographe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   // Fiches maths — refaites « en blocs » le 11/07, + les fiches 6e créées
   // le 12/07 (une par banque du coach) : fiche + flashcards + composeur.
   { path: "/fiches-cours/maths/6e/entier-nombre",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },

@@ -88,6 +88,25 @@ sur la même chose : le calcul était bon, l'élève ne voyait rien.
   les coordonnées réelles, donc les chevauchements et les débordements. C'est
   ainsi qu'on a vu qu'un pavé 4 × 3 × 2 sortait de son cadre en silence.
 
+### 2 quater. Le contrôle avant de committer (20/08/2026)
+
+Frédéric : « à chaque fois je dois tout vérifier fiche par fiche, car parfois de
+petites erreurs. » Ces erreurs-là ne se voient pas dans le code — elles se mesurent.
+Deux outils, à passer sur CHAQUE fiche :
+
+1. **`node scripts/apercu-canvas.mjs <figures.json> <sortie.html>`** — rend les dessins
+   hors du site (jiti + `renderToStaticMarkup`) dans les trois largeurs réelles d'un
+   bloc : **250 px** (carte de propriété sur trois colonnes), **340 px** (téléphone),
+   **400 px** (exemple sur ordinateur). Il affiche, et refuse sous 11 px, **la taille
+   finale des lettres** une fois le dessin mis à l'échelle de son bloc.
+2. **La page ouverte, la fenêtre en 375 px**, puis dans la console :
+   pour chaque `svg`, `police × largeurAffichée ÷ largeurViewBox`. C'est ainsi qu'on a
+   découvert que le bloc d'un dessin ne fait que **226 px** sur un téléphone — et que la
+   moitié des dessins de la première fiche de français y étaient sous 10 px.
+
+⛔ **Deux blocs côte à côte, jamais sans écart ni sans retour à la ligne.** Dans une
+carte, on empile (§ 2 ter) ; dans un aperçu, `gap` explicite et `flex-wrap`.
+
 ⛔ **Deux pièges de canvas à connaître** (le reste est dans `types_canvas.ts`) :
 `SuiteCanvas` imprime « Suite » en titre **en dur** et étiquette ses cases « terme 1,
 terme 2 » — ses flèches sont donc inutilisables ailleurs que sur une vraie suite ;
@@ -113,6 +132,25 @@ Déjà utilisés :
 - `triangle`, `quadrilatere`, `angle`, `cercle`, `droites`, `reperage`,
   `figure_libre` (aires/périmètres sur quadrillage), `solide_3d` / `section_solide`,
   `transformation` (symétrie), `stat_graph`, `probabilites`, `scratch` (algo).
+
+## 3 bis. Le français (depuis le 20/08/2026)
+
+La matière s'ouvre avec `francais-cm2-grammaire-orthographe.tsx`, calée sur le modèle
+5e. Trois choses la distinguent :
+
+- **Un seul canvas porte la matière** : `phrase` (voir le CATALOGUE). On dessine la
+  phrase, pas des schémas décoratifs.
+- **Les phrases viennent de la banque** comme les nombres en maths — le cycle 3 est
+  généré (`questionBank/cycle3/francais/buildCycle3FrancaisBank.ts`), les micros sont
+  dans `knowledge/francais/<classe>/microSkills.ts`.
+- **Ça sert aussi au CRPE.** Même programme, et surtout même méthode : le concours
+  attend les manipulations syntaxiques (poser la question au verbe, déplacer,
+  supprimer, remplacer), pas des définitions récitées. Ce sont les trois réflexes du
+  bloc `methode`, et c'est précisément ce que le canvas `phrase` sait montrer.
+
+Les encarts de la page de garde (la dictée du jour…) vivent dans
+`components/fiches/EncartsFiche.tsx` — une entrée par encart, filtrée par matière :
+on n'ouvre plus `FicheCoursClient` pour changer un lien.
 
 ## 4. L'anatomie d'une fiche (`FicheCoursData`)
 
@@ -158,3 +196,7 @@ Les blocs, dans l'ordre canonique :
 - [ ] Mêmes exemples/nombres que la banque et la vidéo
 - [ ] `slides[]` pour le mode classe
 - [ ] Page mince + registre + sitemap + typecheck OK
+- [ ] **Lisible en 375 px** : aucun texte de dessin sous 11 px une fois à l'échelle
+      (§ 2 quater) — c'est le contrôle qui attrape les « petites erreurs »
+- [ ] Zéro erreur console **dans un onglet neuf** (le tampon d'un onglet déjà ouvert
+      garde les erreurs d'avant le correctif et fait croire à une régression)

@@ -274,6 +274,15 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "La dérivation",
     resume: "Taux de variation, nombre dérivé, dérivées usuelles et équation de la tangente.",
   },
+  // ─── Français ───────────────────────────────────────────────────────────────
+  // La matière s'ouvre au cycle 3 : c'est le programme du CM2, et c'est aussi
+  // celui sur lequel porte l'écrit de français du CRPE.
+  "francais/cm2/grammaire-orthographe": {
+    titre: "Analyser une phrase : nature, fonction, accords",
+    resume:
+      "Sujet, verbe, compléments, attribut, groupe nominal et accords — chaque règle dessinée sur la phrase.",
+  },
+
   "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
   "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
   "ia/fondements/modeles-apprentissage": { titre: "Les modèles d'apprentissage" },
@@ -347,6 +356,19 @@ export function ficheClasseSource(
   const cle = `${matiere}/${classe.toLowerCase()}/${notion.toLowerCase().replace(/_/g, "-")}`;
   const cible = FICHES_ALIAS[cle];
   return cible ? cible.split("/")[1] : null;
+}
+
+/** Le niveau tel qu'on l'ÉCRIT, à partir du slug tel qu'on le range.
+ *  « cm2 » est un slug d'URL ; sur une fiche imprimée et distribuée en classe,
+ *  il s'écrit « CM2 ». Les niveaux du collège (« 5e ») s'écrivent déjà comme
+ *  leur slug — c'est ce qui avait laissé passer le « cm2 » en bas de page. */
+export function libelleClasse(classe: string) {
+  const c = classe.toLowerCase();
+  const table: Record<string, string> = {
+    cp: "CP", ce1: "CE1", ce2: "CE2", cm1: "CM1", cm2: "CM2",
+    seconde: "2nde", "premiere-spe": "1re spé", "terminale-spe": "Tale spé",
+  };
+  return table[c] ?? classe;
 }
 
 export function hrefFiche(matiere: string, classe: string, notion: string) {

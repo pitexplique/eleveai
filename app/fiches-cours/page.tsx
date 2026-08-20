@@ -19,6 +19,14 @@ const matieres = [
     emoji: "🧮",
   },
   {
+    href: "/fiches-cours/francais",
+    titre: "Français",
+    resume: "Nature et fonction, compléments, accords — la grammaire dessinée sur la phrase.",
+    accent: "from-violet-500 to-fuchsia-600",
+    ring: "hover:border-violet-300 hover:shadow-violet-200/40",
+    emoji: "✍️",
+  },
+  {
     href: "/fiches-cours/ia",
     titre: "Intelligence artificielle",
     resume: "Comprendre, utiliser et questionner l'IA — par domaine du référentiel Pix.",

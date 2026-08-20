@@ -78,6 +78,38 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 |---|---|---|
 | `scratch` | Des blocs d'instructions empilés, à la Scratch | Un tableau d'exécution |
 
+## Français
+
+| `kind` | Ce qu'il montre | ⛔ Pas pour |
+|---|---|---|
+| `phrase` | **Le canvas du français** : les mots en étiquettes, les groupes sous un crochet coloré, la nature au-dessus, les flèches d'accord, de question et de reprise par-dessus | Un texte de plusieurs phrases (les reprises d'un paragraphe), un tableau de conjugaison |
+
+C'est à la grammaire ce que `number_line` est aux nombres : **un seul objet, dessiné
+toujours pareil, sur lequel toutes les notions viennent se poser**. Avant d'en écrire un
+autre, vérifier que celui-ci ne suffit pas — il porte déjà six façons de montrer :
+
+| Ce qu'on veut montrer | Comment | Rendu |
+|---|---|---|
+| Le découpage en groupes | `groupes: [{ mots: [0,1], label: "sujet" }]` | crochet coloré + étiquette de fonction |
+| La question qui trouve une fonction | `liens: [{ de: verbe, vers: mot, label: "à qui ?", type: "question" }]` | arc violet au-dessus, fléché |
+| Un accord | `type: "accord"` (`label: "pluriel"`, `"-ent"`, `"="`) | arc noir au-dessus, du mot chef vers le mot accordé |
+| Une reprise (pronom → GN) | `type: "reprise"` | arc bleu **pointillé sous** la phrase |
+| La mobilité d'un groupe | `deplacable: true` | le groupe redessiné en fantôme à l'autre bout, avec sa flèche |
+| La suppression | `mots: [{ texte: "ce", barre: true }]` | l'étiquette barrée en rouge |
+| Nature ≠ fonction | `mots: [{ texte: "chat", nature: "nom" }]` + un `groupe` | la nature en gris au-dessus, la fonction en couleur en dessous |
+
+⭐ **La couleur porte la fonction dans toute la matière** — sujet bleu, verbe rouge, objet
+vert, circonstanciel orange, attribut violet, expansion du nom rose. Elle se déduit du
+`label` : une fiche écrit `label: "sujet"`, jamais une couleur. Deux fiches ne peuvent
+donc pas diverger. ⚠️ L'ordre des tests compte : « attribut du sujet » contient « sujet ».
+
+⛔ **Le réglage qui décide de tout : `largeurMax` (270 par défaut).** Le bloc qui reçoit un
+dessin mesure **226 px sur un téléphone de 375** — mesuré sur la fiche, pas estimé. Un SVG
+se met à l'échelle de son bloc : dessiné sur 466 px, il y écrit ses mots en 7,8 px. À 270,
+le rapport est de 0,84 et les mots restent à 13 px : **la phrase se plie en deux lignes
+plutôt que de rapetisser**. Le canvas coupe **entre les groupes**, jamais dedans — sinon
+crochet orphelin, étiquette sous un demi-groupe et flèches en diagonale.
+
 ---
 
 ⚠️ **Un canvas obligatoire** dès que l'intitulé d'une micro décrit un geste graphique

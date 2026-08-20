@@ -33,6 +33,7 @@ import MasseCanvas from "./MasseCanvas";
 import ContenanceCanvas from "./ContenanceCanvas";
 import EchelleCanvas from "./EchelleCanvas";
 import SchemaBarreCanvas from "./SchemaBarreCanvas";
+import PhraseCanvas from "./PhraseCanvas";
 
 
 type Props = {
@@ -135,6 +136,10 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "number_line":
     return <DroiteGradueeCanvas figure={figure} />;
+
+    // Le premier canvas non mathématique : la phrase analysée (français).
+    case "phrase":
+      return <PhraseCanvas figure={figure} />;
 
     default:
       return null;

@@ -36,6 +36,8 @@ import { useEleve } from "@/context/EleveContext";
 import ModeClasse, { type ClasseSlide } from "@/components/fiches/ModeClasse";
 import Flashcards from "@/components/fiches/Flashcards";
 import VideoNotion from "@/components/fiches/VideoNotion";
+import EncartsFiche from "@/components/fiches/EncartsFiche";
+import { libelleClasse } from "@/lib/fiches/registre";
 import {
   ORDRE_CANONIQUE,
   RUBRIQUES_LABELS,
@@ -560,7 +562,7 @@ export default function FicheCoursClient({
             <ChevronRight className="h-4 w-4 text-slate-400" />
             <span>{fiche.matiereLabel}</span>
             <ChevronRight className="h-4 w-4 text-slate-400" />
-            <span>{fiche.classe}</span>
+            <span>{libelleClasse(fiche.classe)}</span>
             <ChevronRight className="h-4 w-4 text-slate-400" />
             <span className="text-slate-900">{fiche.titre}</span>
           </nav>
@@ -580,7 +582,7 @@ export default function FicheCoursClient({
               </button>
             )}
             {slides.length > 0 && (
-              <ModeClasse sousTitre={`${fiche.titre} - ${fiche.classe}`} slides={slides} />
+              <ModeClasse sousTitre={`${fiche.titre} - ${libelleClasse(fiche.classe)}`} slides={slides} />
             )}
             <button
               type="button"
@@ -733,6 +735,8 @@ export default function FicheCoursClient({
                 classe={fiche.classe}
                 notion={fiche.notion}
               />
+
+              <EncartsFiche matiere={fiche.matiere} classe={fiche.classe} />
             </header>
 
             {rubriquesVisibles.map((id) => (
@@ -761,7 +765,7 @@ export default function FicheCoursClient({
             <footer className="mt-8 flex items-center justify-between border-t border-slate-200 pt-5 text-xs text-slate-500 print:mt-6">
               <span>eleveai.fr - Fiche de cours</span>
               <span>
-                {fiche.titre} - {fiche.classe}
+                {fiche.titre} - {libelleClasse(fiche.classe)}
               </span>
             </footer>
           </section>

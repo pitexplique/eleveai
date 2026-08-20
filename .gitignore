@@ -62,3 +62,7 @@ node_modules
 # manim : les rendus et caches restent en local (les videos vivent sur YouTube)
 manim/**/media/
 __pycache__/
+
+# Aperçus de canvas rendus hors du site (scripts/apercu-canvas.mjs)
+.apercu/
+apercu-canvas.html

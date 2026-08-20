@@ -65,7 +65,11 @@ export type {
   ArbreProbabilitesCanvasData,
   Repere3dPoint,
   Repere3dSegment,
-  Repere3dCanvasData
+  Repere3dCanvasData,
+  PhraseCanvasMot,
+  PhraseCanvasGroupe,
+  PhraseCanvasLien,
+  PhraseCanvasData
 } from "./types_canvas";
 
 import type { CanvasFigure } from "./types_canvas";
