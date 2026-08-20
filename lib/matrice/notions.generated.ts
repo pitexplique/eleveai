@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 678 notions, 40 paquets.
+// 685 notions, 40 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -3244,30 +3244,51 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "prerequis": []
       },
       {
-        "id": "comprehension_textes_documents",
-        "label": "Comprendre des textes et documents complexes",
+        "id": "comprehension_textes",
+        "label": "Comprendre un texte long",
         "prerequis": [
           "fluence_lecture"
+        ]
+      },
+      {
+        "id": "comprehension_documents",
+        "label": "Lire un document composite",
+        "prerequis": [
+          "comprehension_textes"
         ]
       },
       {
         "id": "lecture_oeuvres",
         "label": "Lire une œuvre et construire une culture littéraire",
         "prerequis": [
-          "comprehension_textes_documents"
+          "comprehension_textes"
         ]
       },
       {
-        "id": "culture_litteraire",
-        "label": "Culture littéraire et artistique",
+        "id": "culture_personnages",
+        "label": "Héros, merveilleux et autres vies",
         "prerequis": [
           "lecture_oeuvres"
         ]
       },
       {
-        "id": "ecriture",
-        "label": "Produire, organiser et réviser des écrits",
+        "id": "culture_soi_et_les_autres",
+        "label": "Morale, poésie et rapport aux autres",
+        "prerequis": [
+          "culture_personnages"
+        ]
+      },
+      {
+        "id": "ecriture_preparer",
+        "label": "Copier, prendre des notes et organiser ses idées",
         "prerequis": []
+      },
+      {
+        "id": "ecriture_produire",
+        "label": "Produire un texte et le réviser",
+        "prerequis": [
+          "ecriture_preparer"
+        ]
       },
       {
         "id": "oral",
@@ -3275,10 +3296,24 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "prerequis": []
       },
       {
-        "id": "vocabulaire",
-        "label": "Vocabulaire, nuances et orthographe lexicale",
+        "id": "vocabulaire_sens",
+        "label": "Le sens des mots : contexte, sens multiples, sens figuré",
         "prerequis": [
-          "comprehension_textes_documents"
+          "comprehension_textes"
+        ]
+      },
+      {
+        "id": "vocabulaire_formation",
+        "label": "La formation des mots : familles, racines, composition",
+        "prerequis": [
+          "vocabulaire_sens"
+        ]
+      },
+      {
+        "id": "vocabulaire_emploi",
+        "label": "Employer et écrire le mot juste",
+        "prerequis": [
+          "vocabulaire_sens"
         ]
       },
       {
@@ -3290,7 +3325,14 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "grammaire_complements",
-        "label": "Les compléments et le groupe nominal",
+        "label": "Les compléments du verbe",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "grammaire_groupe_nominal",
+        "label": "Le groupe nominal et ses expansions",
         "prerequis": [
           "grammaire_phrase"
         ]
@@ -3299,7 +3341,8 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "id": "grammaire_accords",
         "label": "Les accords et les homophones",
         "prerequis": [
-          "grammaire_complements"
+          "grammaire_complements",
+          "grammaire_groupe_nominal"
         ]
       },
       {
@@ -3310,10 +3353,17 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
-        "id": "conjugaison",
-        "label": "Conjugaison et valeur des temps",
+        "id": "conjugaison_temps_simples",
+        "label": "Conjuguer aux temps simples",
         "prerequis": [
           "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "conjugaison_recit",
+        "label": "Les temps du récit et leur valeur",
+        "prerequis": [
+          "conjugaison_temps_simples"
         ]
       }
     ],

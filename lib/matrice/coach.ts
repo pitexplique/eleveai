@@ -136,12 +136,16 @@ export const NOTION_COACH_MATHS: TableNotions = {
 // par une autre structure. On ne cible donc que CP→CM2, et on laisse le coach
 // s'ouvrir normalement ailleurs.
 export const NOTION_COACH_FRANCAIS: TableNotions = {
+  /* ⚠️ LE CM2 A REDÉCOUPÉ SES NOTIONS LE 20/08/2026 (dix devenues dix-neuf).
+     Chaque entrée de la matrice ouvre donc sur la PREMIÈRE notion de la suite
+     — celle par où l'on commence : la grammaire par la phrase, l'orthographe
+     par les accords, la conjugaison par les temps simples, le vocabulaire par
+     le sens des mots. Un id qui n'existe plus n'aurait rien cassé de visible :
+     le coach se serait simplement ouvert au mauvais endroit. */
   conjugaison: {
-    ce1: "conjugaison", ce2: "conjugaison", cm1: "conjugaison", cm2: "conjugaison",
+    ce1: "conjugaison", ce2: "conjugaison", cm1: "conjugaison",
+    cm2: "conjugaison_temps_simples",
   },
-  // ⚠️ Le CM2 a coupé « grammaire_orthographe » en trois le 20/08/2026. La
-  // grammaire y entre donc par la phrase, et l'orthographe par les accords —
-  // deux portes distinctes, là où les deux menaient au même endroit.
   grammaire: {
     cp: "grammaire_phrase", ce1: "grammaire_phrase", ce2: "grammaire_phrase",
     cm1: "grammaire_orthographe", cm2: "grammaire_phrase",
@@ -153,11 +157,11 @@ export const NOTION_COACH_FRANCAIS: TableNotions = {
   lecture: {
     cp: "comprehension_lecture", ce1: "comprehension_lecture",
     ce2: "comprehension_lecture", cm1: "comprehension_textes_documents",
-    cm2: "comprehension_textes_documents",
+    cm2: "comprehension_textes",
   },
   vocabulaire: {
     cp: "vocabulaire", ce1: "vocabulaire", ce2: "vocabulaire",
-    cm1: "vocabulaire", cm2: "vocabulaire",
+    cm1: "vocabulaire", cm2: "vocabulaire_sens",
   },
 };
 

@@ -361,6 +361,7 @@ export const FICHES_ALIAS: Record<string, string> = {
      compléments. Elles s'effacent dès que les trois fiches sont écrites. */
   "francais/cm2/grammaire-phrase": "francais/cm2/grammaire-orthographe",
   "francais/cm2/grammaire-complements": "francais/cm2/grammaire-orthographe",
+  "francais/cm2/grammaire-groupe-nominal": "francais/cm2/grammaire-orthographe",
   "francais/cm2/grammaire-accords": "francais/cm2/grammaire-orthographe",
 };
 

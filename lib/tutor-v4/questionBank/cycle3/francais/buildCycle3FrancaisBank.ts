@@ -5819,6 +5819,11 @@ const CONJ_VALEUR_TEMPS: QcmItem[] = [
  *  branche pour la notion : les neuf gabarits du CM2 tombaient sur le défaut
  *  `qcm(LECTURE)` et servaient des questions de compréhension de lecture. */
 function phraseComplexeQuestion(microId: string): Generated {
+  // Le défi balaie les trois compétences de la notion : compter les
+  // propositions, nommer le lien, choisir le pronom relatif.
+  if (microId.includes("complexe_defi")) {
+    return qcm(auHasard([PROPOSITION, ARTICULATION, PRONOM_RELATIF, CONJONCTIONS_ROLE]));
+  }
   if (microId.includes("relatif")) return qcm(PRONOM_RELATIF);
   if (microId.includes("conjonctions")) return qcm(CONJONCTIONS_ROLE);
   if (microId.includes("coordination") || microId.includes("articulation")) {
@@ -5829,6 +5834,23 @@ function phraseComplexeQuestion(microId: string): Generated {
 }
 
 function conjugaisonQuestion(microId: string): Generated {
+  /* ─── LES DEUX DÉFIS DE CONJUGAISON (CM2, 20/08/2026) ─────────────────────
+     ⚠️ En tête : « cm2_conj_recit_defi » contient « recit », et la branche
+     « discours_recit » juste en dessous le servirait depuis le pool de la 6e
+     sur le discours rapporté — un sujet que le CM2 ne traite pas. */
+  if (microId.includes("conj_simples_defi")) {
+    const r = Math.random();
+    if (r < 0.3) return fromConjItem(generateConjugationItem("present"));
+    if (r < 0.55) return fromConjItem(generateConjugationItem("imparfait"));
+    if (r < 0.8) return fromConjItem(generateConjugationItem("futur"));
+    return fromConjItem(generateInfinitifItem());
+  }
+  if (microId.includes("conj_recit_defi")) {
+    return qcm(
+      auHasard([CONJ_PASSE_COMPOSE, CONJ_PASSE_SIMPLE, CONJ_PLUS_QUE_PARFAIT, CONJ_VALEUR_TEMPS])
+    );
+  }
+
   /* 6e, ajoutées le 11/08/2026. Elles passent AVANT la branche générique du
      collège (identifier / composer / employer), qui ferait tourner les temps
      déjà connus au lieu de servir les deux modes que le BO ajoute en 6e. */
@@ -5907,7 +5929,10 @@ function grammaireQuestion(microId: string): Generated {
     );
   }
   if (microId.includes("gram_complements_defi")) {
-    return qcm(auHasard([COMPLEMENTS, COD_COI, CC_SORTES, ATTRIBUT, GN, COMPLEMENT_NOM]));
+    return qcm(auHasard([COMPLEMENTS, COD_COI, CC_SORTES, ATTRIBUT]));
+  }
+  if (microId.includes("gram_gn_defi")) {
+    return qcm(auHasard([GN, COMPLEMENT_NOM, GN_EPITHETE, PREPOSITIONS]));
   }
   if (microId.includes("orth_accords_defi")) {
     // Les accords ont deux moteurs paramétriques en plus de leurs pools : le
@@ -5976,6 +6001,30 @@ function grammaireQuestion(microId: string): Generated {
 }
 
 function vocabulaireQuestion(microId: string): Generated {
+  /* ─── LES TROIS DÉFIS DU VOCABULAIRE (CM2, 20/08/2026) ────────────────────
+     En tête, comme ceux de la grammaire : « cm2_voc_formation_defi » contient
+     « formation » et serait servi depuis le seul pool des familles de mots,
+     alors qu'un défi doit balayer TOUTE sa notion — racines et composition
+     comprises. */
+  if (microId.includes("voc_sens_defi")) {
+    const tire = Math.random();
+    if (tire < 0.3) return qcm(VOC_CONTEXTE);
+    if (tire < 0.55) return qcm(VOC_POLYSEMIE);
+    if (tire < 0.8) return qcm(SENS_FIGURE);
+    return qcm(VOC_SYN_ANT);
+  }
+  if (microId.includes("voc_formation_defi")) {
+    const tire = Math.random();
+    if (tire < 0.3) return fromConjItem(generateVocabularyItem("famille"));
+    if (tire < 0.5) return qcm(VOC_FAMILLE);
+    if (tire < 0.7) return qcm(RACINES);
+    if (tire < 0.85) return qcm(COMPOSITION);
+    return qcm(HOMONYMIE);
+  }
+  if (microId.includes("voc_emploi_defi")) {
+    return qcm(auHasard([NIVEAU_LANGUE, VOC_REEMPLOI, VOC_ORTH]));
+  }
+
   // 6e : "relations" (synonymie/antonymie/champ lexical/famille) et "formation"
   // (prefixes/suffixes/familles) -> pools existants VOC_SYN_ANT / VOC_FAMILLE.
   if (microId.includes("relations")) {
