@@ -48,7 +48,40 @@ export default function SchemaBarreCanvas({ figure }: Props) {
   const labelY = barY + barHeight + 24;
 
   const partCount = Math.max(1, parts.length);
-  const partWidth = barWidth / partCount;
+
+  // ⛔ DES PARTS À LA MESURE DE LEUR VALEUR (20/08/2026). Elles se partageaient
+  // la barre en tranches ÉGALES : « 4 » et « 3 » posés bout à bout pour montrer
+  // que les distances à 0 s'additionnent apparaissaient comme deux blocs de même
+  // largeur. Le schéma disait donc 4 = 3, sous une propriété qui parle de
+  // longueurs. Un dessin qui contredit son texte est pire que pas de dessin.
+  //
+  // Le proportionnel ne s'applique que si TOUTES les parts portent un nombre :
+  // dès qu'il y en a une inconnue, il n'y a rien à mettre à l'échelle et on
+  // revient aux tranches égales (c'est le cas « il manque combien ? »).
+  const valeurs = parts.map((p) =>
+    p.unknown ? NaN : Number(String(p.value ?? "").replace(",", ".").replace(/[^\d.-]/g, ""))
+  );
+  const proportionnel =
+    valeurs.length > 1 && valeurs.every((v) => Number.isFinite(v) && v > 0);
+  const sommeValeurs = proportionnel ? valeurs.reduce((a, b) => a + b, 0) : 0;
+
+  // Une part très petite deviendrait illisible : plancher à 12 % de la barre,
+  // le reste se répartit sur les autres.
+  const largeurs = (() => {
+    if (!proportionnel) return parts.map(() => barWidth / partCount);
+    const mini = barWidth * 0.12;
+    const brutes = valeurs.map((v) => (v / sommeValeurs) * barWidth);
+    const manque = brutes.reduce((acc, l) => acc + Math.max(0, mini - l), 0);
+    const surplusTotal = brutes.reduce((acc, l) => acc + Math.max(0, l - mini), 0);
+    return brutes.map((l) =>
+      l < mini ? mini : l - (surplusTotal ? (manque * (l - mini)) / surplusTotal : 0)
+    );
+  })();
+
+  const departs = largeurs.reduce<number[]>(
+    (acc, l, i) => [...acc, i === 0 ? 0 : acc[i - 1] + largeurs[i - 1]],
+    []
+  );
 
   return (
     <div className="mx-auto w-full max-w-[360px] rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
@@ -127,7 +160,8 @@ export default function SchemaBarreCanvas({ figure }: Props) {
         ) : null}
 
         {parts.map((part, index) => {
-          const x = barX + index * partWidth;
+          const partWidth = largeurs[index];
+          const x = barX + departs[index];
           const fill = part.unknown ? "#fee2e2" : getColor(index, part.color);
           const stroke = part.unknown ? "#dc2626" : "#334155";
 
