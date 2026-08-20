@@ -39,6 +39,46 @@ const tableau = (
   />
 );
 
+// Deux tableaux l'un SOUS l'autre (§ 2 ter : dans une carte, on empile) : pour
+// « reconnaitre », il faut voir ce qui n'en est pas. Le canvas n'affiche aucun
+// coefficient de lui-meme, on peut donc lui confier un tableau non
+// proportionnel sans qu'il mente.
+const duoTableaux = (
+  haut: React.ReactNode,
+  hautLabel: string,
+  bas: React.ReactNode,
+  basLabel: string
+) => (
+  <div className="space-y-2">
+    <div>
+      {haut}
+      <p className="mt-1 text-center text-xs font-black text-emerald-700">{hautLabel}</p>
+    </div>
+    <div>
+      {bas}
+      <p className="mt-1 text-center text-xs font-black text-rose-700">{basLabel}</p>
+    </div>
+  </div>
+);
+
+// Un pourcentage PRELEVE sur un tout : les parts sont a l'echelle depuis le
+// 20/08, donc 60 sur 200 se voit vraiment comme un petit tiers.
+const part = (titre: string, total: string, pris: string, reste: string, question: string) => (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      title: titre,
+      total,
+      parts: [
+        { label: "on prend", value: pris },
+        { label: "le reste", value: reste },
+      ],
+      questionLabel: question,
+      size: { width: 320, height: 175 },
+    }}
+  />
+);
+
 const pieges = [
   "Croire qu'ajouter le même nombre suffit : proportionnel = on MULTIPLIE par le même nombre.",
   "Oublier de revenir à l'unité (le prix de 1) avant de multiplier.",
@@ -79,22 +119,54 @@ export const ficheProportionnalite5e: FicheCoursData = {
     ),
     legende: "De la 1re à la 3e colonne : ×3 pour les cahiers ET pour le prix. Coefficient : ×3 (le prix d'un cahier).",
   },
+  // Un dessin sous chaque propriete (REGLES.md § 2 bis), et deux natures de
+  // dessin : le TABLEAU quand on compare des colonnes entre elles, la BARRE
+  // quand on prend une part d'un tout. Quatre tableaux d'affilee, ce serait
+  // quatre fois la meme image.
   proprietes: [
     {
       titre: "On reconnaît",
       texte: "Chaque colonne s'obtient en multipliant par le même coefficient. Doubler l'un double l'autre.",
+      // Reconnaitre, c'est distinguer : le contre-exemple est dans le dessin.
+      schema: duoTableaux(
+        tableau([[2, 4, 8], [6, 12, 24]], ["Sachets", "Bonbons"]),
+        "×3 partout : proportionnel",
+        tableau([[2, 4, 8], [6, 9, 14]], ["Âge", "Taille (dm)"]),
+        "ni ×, ni + constant : non proportionnel"
+      ),
     },
     {
       titre: "Le coefficient",
       texte: "C'est la valeur pour 1 : 4 stylos coûtent 20 €, donc le coefficient est 20 ÷ 4 = 5.",
+      schema: tableau(
+        [[1, 4, 8], [5, 20, 40]],
+        ["Stylos", "Prix (€)"],
+        [[0, 0], [1, 0]]
+      ),
     },
     {
       titre: "Le pourcentage",
       texte: "Prendre p % = multiplier par p/100 : 30 % = ×0,3.",
+      schema: part("30 % de 200 élèves", "200 élèves", "60", "140", "0,3 × 200 = 60"),
     },
     {
       titre: "Hausse ou baisse",
       texte: "+20 % → ×1,2 ; −15 % → ×0,85 (on part de 1).",
+      schema: (
+        <CanvasRenderer
+          figure={{
+            kind: "schema_barre",
+            title: "Un prix de 100 € augmenté de 20 %",
+            total: "120 € après la hausse",
+            parts: [
+              { label: "prix de départ", value: "100" },
+              { label: "la hausse", value: "20" },
+            ],
+            questionLabel: "100 × 1,2 = 120 — on ajoute, donc on part de 1.",
+            size: { width: 320, height: 175 },
+          }}
+        />
+      ),
     },
   ],
   reel: {
@@ -106,14 +178,38 @@ export const ficheProportionnalite5e: FicheCoursData = {
       "La « règle de trois » (retrouver une 4ᵉ valeur à partir de trois) est enseignée depuis l'Antiquité, en Inde et en Chine il y a plus de 2000 ans. C'était l'outil de base des marchands avant les calculatrices.",
   },
   methode: [
-    { titre: "Je reviens à l'unité", texte: "Je calcule la valeur de 1, puis je multiplie par la quantité voulue." },
-    { titre: "J'utilise le coefficient", texte: "Prix = quantité × coefficient (le prix d'un objet)." },
-    { titre: "Je vérifie", texte: "Le rapport prix ÷ quantité doit être le même dans chaque colonne." },
+    {
+      titre: "Je reviens à l'unité",
+      texte: "Je calcule la valeur de 1, puis je multiplie par la quantité voulue.",
+      schema: tableau([[3, 1, 8], ["7,50", "2,50", 20]], ["Kilos", "Prix (€)"], [[0, 1], [1, 1]]),
+    },
+    {
+      titre: "J'utilise le coefficient",
+      texte: "Prix = quantité × coefficient (le prix d'un objet).",
+      schema: tableau([[1, 5, 12], ["2,50", "12,50", 30]], ["Kilos", "Prix (€)"]),
+    },
+    {
+      titre: "Je vérifie",
+      texte: "Le rapport prix ÷ quantité doit être le même dans chaque colonne.",
+      schema: tableau([[3, 8], ["7,50", 20]], ["Kilos", "Prix (€)"], [[1, 0], [1, 1]]),
+    },
   ],
   usages: [
-    { titre: "Prix et quantités", detail: "3 kg coûtent 7,50 € → 1 kg coûte 2,50 € → 8 kg coûtent 20 €." },
-    { titre: "Ratio / mélange", detail: "Sirop:eau = 1:4 → 3 doses de sirop → 12 doses d'eau." },
-    { titre: "Pourcentages", detail: "30 % des 200 élèves → 0,3 × 200 = 60 élèves." },
+    {
+      titre: "Prix et quantités",
+      detail: "3 kg coûtent 7,50 € → 1 kg coûte 2,50 € → 8 kg coûtent 20 €.",
+      schema: tableau([[3, 1, 8], ["7,50", "2,50", 20]], ["Kilos", "Prix (€)"]),
+    },
+    {
+      titre: "Ratio / mélange",
+      detail: "Sirop:eau = 1:4 → 3 doses de sirop → 12 doses d'eau.",
+      schema: tableau([[1, 3, 5], [4, 12, 20]], ["Sirop", "Eau"]),
+    },
+    {
+      titre: "Pourcentages",
+      detail: "30 % des 200 élèves → 0,3 × 200 = 60 élèves.",
+      schema: part("30 % de 200 élèves", "200 élèves", "60", "140", "0,3 × 200 = 60"),
+    },
   ],
   exemples: [
     {
@@ -148,6 +244,7 @@ export const ficheProportionnalite5e: FicheCoursData = {
     {
       titre: "Un pourcentage",
       donnees: "Dans un collège de 200 élèves, 30 % viennent à vélo.",
+      schema: part("30 % de 200 élèves", "200 élèves", "60", "140", "0,3 × 200 = 60 élèves à vélo"),
       question: "Combien d'élèves cela fait-il ?",
       solution:
         "30 % = ×0,3. Donc 0,3 × 200 = 60 élèves viennent à vélo.",
@@ -155,6 +252,21 @@ export const ficheProportionnalite5e: FicheCoursData = {
     {
       titre: "Une hausse",
       donnees: "Un prix de 50 € augmente de 20 %.",
+      schema: (
+        <CanvasRenderer
+          figure={{
+            kind: "schema_barre",
+            title: "50 € augmenté de 20 %",
+            total: "60 € après la hausse",
+            parts: [
+              { label: "prix de départ", value: "50" },
+              { label: "la hausse", value: "10" },
+            ],
+            questionLabel: "50 × 1,2 = 60",
+            size: { width: 320, height: 175 },
+          }}
+        />
+      ),
       question: "Quel est le nouveau prix ?",
       solution:
         "Une hausse de 20 % correspond au coefficient ×1,2. Donc 50 × 1,2 = 60 €.",
