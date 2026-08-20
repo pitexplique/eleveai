@@ -324,8 +324,28 @@ export default function CahierVacances({
                 ✅ Conforme aux programmes
               </span>
             </div>
+            {/* ⭐ LA LIGNE EST SIGNÉE (20/08/2026, Frédéric : « mets sur les
+                cahiers de vacances mon nom ! »). Elle disait « conçu à La
+                Réunion par un professeur, pour ses élèves » — vrai, mais
+                anonyme : « un professeur » ne désigne personne, et c'est le
+                défaut relevé le matin même sur le badge d'accueil, qui porte
+                désormais la même signature.
+                ⭐ ET C'EST ICI QU'ELLE VAUT LE PLUS, plus que sur l'accueil : un
+                cahier s'imprime, traîne sur une table, passe d'un parent à
+                l'autre pendant l'été. C'est le seul objet du site qui circule
+                hors du site — et il circulait sans nom.
+                ⚠️ « Enseignant » et non « professeur » : Frédéric est
+                contractuel. Les deux se défendent (« professeur contractuel »
+                est l'intitulé officiel), mais un seul mot partout vaut mieux,
+                et c'est celui des mentions légales.
+                ⚠️ « À La Réunion » reste malgré le badge « 100 % Réunion » juste
+                au-dessus : ce badge parle du CONTENU (les exercices se passent
+                ici), cette ligne parle de la PERSONNE. Ce n'est pas la même
+                information, et la redite est le prix d'une signature complète —
+                la même, mot pour mot, que sur l'accueil. C'est en la répétant
+                à l'identique qu'un nom finit par valoir quelque chose. */}
             <p className="mt-2 text-sm font-bold italic text-slate-500">
-              Conçu à La Réunion par un professeur, pour ses élèves.
+              Conçu par Frédéric Lacoste, enseignant à La Réunion, pour ses élèves.
             </p>
             <p className="mt-1 text-base font-black text-teal-600">
               « Nou la fé&nbsp;! » 🌺

@@ -368,7 +368,9 @@ export default function CahierPetits({
               </span>
             </div>
             <p className="mt-2 text-sm font-bold italic text-slate-500">
-              Conçu à La Réunion par un professeur, pour ses élèves.
+              {/* Signée comme les deux autres cahiers (20/08/2026) — voir la
+                  note complète dans CahierVacances.tsx. */}
+              Conçu par Frédéric Lacoste, enseignant à La Réunion, pour ses élèves.
             </p>
             <p className="mt-1 text-base font-black text-teal-600">
               « Nou la fé&nbsp;! » 🌺
