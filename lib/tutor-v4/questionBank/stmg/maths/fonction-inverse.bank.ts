@@ -129,6 +129,44 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — RETROUVER $k$ depuis un point. Le premier item lit une ordonnée
+    // sur une hyperbole donnée ; celui-ci part d'un point et cherche la
+    // fonction. C'est l'« exploiter » du libellé : sur une hyperbole, le produit
+    // des coordonnées est constant, et ce produit EST le coefficient.
+    // ⚠️ Sans figure : la courbe porterait son titre — donc $k$ — et il n'y
+    // aurait plus rien à chercher.
+    kind: "template",
+    id: "stmg_inv_courbe_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_inverse",
+    microId: "fctT_inverse_courbe",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Sur la courbe de $x \\mapsto \\dfrac{k}{x}$, le produit $x \\times y$ vaut $k$ en tout point.",
+    tags: ["stmg", "maths", "fonctions", "inverse", "template", "short"],
+    generate: () => {
+      const x0 = pick([2, 3, 4, 5, 6, 8] as const);
+      const y0 = pick([2, 3, 4, 5, 6, 9] as const);
+      const k = x0 * y0;
+      return {
+        text:
+          `Une hyperbole représente une fonction de la forme $f(x) = \\dfrac{k}{x}$. ` +
+          `Elle passe par le point $A(${x0}\\,;\\,${y0})$. Que vaut $k$ ?`,
+        format: "short",
+        expected: [String(k)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un point appartient à la courbe de $f$ si ses coordonnées vérifient $y = \\dfrac{k}{x}$, ce qui s'écrit aussi $x \\times y = k$ : sur une hyperbole, le produit des coordonnées est CONSTANT.",
+          "On multiplie les deux coordonnées du point connu.",
+          `$${y0} = \\dfrac{k}{${x0}}$ donne $k = ${x0} \\times ${y0} = ${k}$.`,
+          `La fonction est $f(x) = \\dfrac{${k}}{x}$ — et tout autre point de sa courbe aura lui aussi un produit de coordonnées égal à $${k}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ fctT_inverse_bornes ═══════════════ */
 
   {
@@ -185,6 +223,56 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — DIAGNOSTIQUER le « ça finit par valoir zéro ». Le premier item
+    // fait choisir la bonne description ; celui-ci met en scène la phrase que
+    // les élèves prononcent vraiment, et demande pourquoi elle est fausse. Le
+    // BO ne veut pas de définition d'asymptote : il veut exactement cette
+    // distinction-là, s'approcher sans atteindre.
+    kind: "template",
+    id: "stmg_inv_bornes_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_inverse",
+    microId: "fctT_inverse_bornes",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un quotient est nul seulement si son NUMÉRATEUR est nul. Ici il ne l'est jamais.",
+    tags: ["stmg", "maths", "fonctions", "inverse", "diagnostic", "template"],
+    generate: () => {
+      const k = pick([1, 2, 5, 10, 20, 50] as const);
+      const bonne = `il se trompe : $\\dfrac{${k}}{x}$ n'est jamais nul, car son numérateur ne l'est pas`;
+      return {
+        text:
+          `Soit $f(x) = \\dfrac{${k}}{x}$ sur $]0\\,;\\,+\\infty[$. ` +
+          `Un élève affirme : « quand $x$ devient très grand, $f(x)$ finit par valoir $0$ ». ` +
+          `Qu'en penses-tu ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          "il a raison : au-delà d'une certaine valeur de $x$, le résultat est nul",
+          `il se trompe : quand $x$ devient très grand, $f(x)$ devient de plus en plus grande`,
+          `il se trompe : quand $x$ devient très grand, $f(x)$ se rapproche de $${k}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un quotient est nul si, et seulement si, son numérateur est nul. La fonction inverse ne s'annule donc jamais : sa courbe s'approche de l'axe des abscisses sans jamais le toucher.",
+          "On essaie des valeurs de plus en plus grandes et l'on regarde ce que devient le résultat — aucune définition formelle n'est attendue.",
+          `$f(1000) = ${fr(k / 1000)}$, $f(1\\,000\\,000) = ${fr(k / 1000000)}$ : c'est de plus en plus petit, mais toujours strictement positif. ` +
+            `Aussi grand que soit $x$, $\\dfrac{${k}}{x}$ reste au-dessus de zéro.`,
+          `L'élève a tort : $f(x)$ se rapproche de $0$ sans jamais l'atteindre.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "il a raison : au-delà d'une certaine valeur de $x$, le résultat est nul",
+            cause: "confond « devenir très petit » et « devenir nul » — la calculatrice, qui affiche $0$, entretient l'erreur",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ fctT_inverse_cout_moyen ═══════════════ */
 
   {
@@ -225,6 +313,51 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la QUANTITÉ, pas le coût. Le premier item calcule un coût moyen
+    // pour une production donnée ; celui-ci renverse la question : à partir de
+    // combien d'articles la charge fixe est-elle assez diluée pour tenir
+    // l'objectif ? C'est la question que pose un gestionnaire, et elle mène à
+    // une équation où l'inconnue est au dénominateur.
+    // ⚠️ Sans figure : la courbe du coût moyen donnerait la réponse par lecture
+    // graphique, alors qu'on veut l'équation. Le premier item porte la sienne.
+    kind: "template",
+    id: "stmg_inv_cout_moyen_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_inverse",
+    microId: "fctT_inverse_cout_moyen",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Écris le coût moyen $a + \\dfrac{b}{x}$, pose-le égal à l'objectif, puis isole $x$.",
+    tags: ["stmg", "maths", "fonctions", "inverse", "gestion", "template", "short"],
+    generate: () => {
+      const unitaire = pick([4, 5, 8, 10, 12] as const);
+      // On part de la quantité cherchée : la charge fixe s'en déduit, et
+      // l'objectif tombe alors sur un nombre entier.
+      const quantite = pick([50, 100, 200, 250, 400, 500] as const);
+      const ecartObjectif = pick([2, 3, 4, 5, 6] as const);
+      const fixe = ecartObjectif * quantite;
+      const objectif = unitaire + ecartObjectif;
+      return {
+        text:
+          `Le coût total de production de $x$ articles est $C(x) = ${unitaire}x + ${fixe}$ (en euros). ` +
+          `L'entreprise vise un coût moyen de $${objectif}$ € par article. ` +
+          `Combien d'articles doit-elle produire pour l'atteindre exactement ?`,
+        format: "short",
+        expected: [String(quantite)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le coût moyen vaut $\\dfrac{C(x)}{x} = a + \\dfrac{b}{x}$ : la part variable ne bouge pas, seule la charge fixe se dilue quand la production augmente.",
+          "On écrit l'équation du coût moyen égal à l'objectif, on isole le terme en $\\dfrac{1}{x}$, puis on retourne le quotient.",
+          `Coût moyen : $${unitaire} + \\dfrac{${fixe}}{x} = ${objectif}$, donc $\\dfrac{${fixe}}{x} = ${ecartObjectif}$, ` +
+            `et $x = \\dfrac{${fixe}}{${ecartObjectif}} = ${quantite}$.`,
+          `Il faut produire $${quantite}$ articles. Au-delà, le coût moyen continue de baisser — mais il ne descendra jamais sous $${unitaire}$ €, le coût de chaque article.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ fctT_inverse_derivee ═══════════════ */
 
   {
@@ -240,12 +373,17 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
     tags: ["stmg", "maths", "fonctions", "inverse", "derivation", "template"],
     generate: () => {
       const k = pick([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 18, 20, 24, 25, 30] as const);
+      // ⚠️ Le piège « coefficient passé au dénominateur » s'écrivait
+      // « $-\dfrac{1}{1x^2}$ » quand $k = 1$. Personne n'écrit « $1x$ », et une
+      // proposition mal écrite s'élimine sans faire de maths. Dans ce cas-là on
+      // prend l'autre erreur classique : l'exposant.
+      const coefAuDenominateur = k === 1 ? `$-\\dfrac{1}{x^3}$` : `$-\\dfrac{1}{${k}x^2}$`;
       return {
         text: `Soit $f(x) = \\dfrac{${k}}{x}$ sur $]0\\,;\\,+\\infty[$. Quelle est l'expression de $f'(x)$ ?`,
         format: "qcm",
         choices: makeChoices(`$-\\dfrac{${k}}{x^2}$`, [
           `$\\dfrac{${k}}{x^2}$`,
-          `$-\\dfrac{1}{${k}x^2}$`,
+          coefAuDenominateur,
           `$-\\dfrac{${k}}{x}$`,
           `$\\dfrac{${k}}{2x}$`,
           `$-${k}x$`,
@@ -264,6 +402,43 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
             cause: "a oublié le signe moins de la dérivée de l'inverse",
           },
         ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — le NOMBRE dérivé, pas la formule. Le premier item choisit
+    // l'expression de $f'$ parmi quatre ; celui-ci demande sa valeur en un
+    // point, ce qui oblige à élever au carré AVANT de diviser — l'erreur
+    // classique étant de calculer $-\frac{k}{x}$, ou d'oublier le signe une
+    // fois le nombre écrit.
+    kind: "template",
+    id: "stmg_inv_derivee_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_inverse_derivee",
+    microId: "fctT_inverse_derivee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$f'(x) = -\\dfrac{k}{x^2}$ : on remplace $x$, on élève au carré, puis on divise — et le résultat est négatif.",
+    tags: ["stmg", "maths", "fonctions", "inverse", "derivation", "template", "short"],
+    generate: () => {
+      // $k$ est un multiple de $x_0^2$ : le nombre dérivé tombe alors sur un
+      // entier, et l'élève n'a pas d'arrondi à décider.
+      const x0 = pick([1, 2, 3, 5] as const);
+      const k = x0 * x0 * pick([1, 2, 3, 4, 6] as const);
+      const derivee = -k / (x0 * x0);
+      return {
+        text: `Soit $f(x) = \\dfrac{${k}}{x}$ sur $]0\\,;\\,+\\infty[$. Que vaut $f'(${x0})$ ?`,
+        format: "short",
+        expected: [fr(derivee)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La dérivée de $\\dfrac{k}{x}$ est $-\\dfrac{k}{x^2}$ : elle est strictement négative pour tout $x$ non nul, puisque $x^2$ l'est toujours.",
+          "On écrit d'abord l'expression de $f'$, puis on y remplace $x$ — le carré porte sur $x$, pas sur le quotient.",
+          `$f'(x) = -\\dfrac{${k}}{x^2}$, donc $f'(${x0}) = -\\dfrac{${k}}{${x0}^2} = -\\dfrac{${k}}{${x0 * x0}} = ${fr(derivee)}$.`,
+          `$f'(${x0}) = ${fr(derivee)}$ : la tangente en ce point descend, ce qui confirme que $f$ décroît.`
+        ),
       };
     },
   },
@@ -314,6 +489,61 @@ export const fonctionInverseBank: TutorBankItemV4[] = [
           {
             choice: decroit ? "croissante" : "décroissante",
             cause: "a appliqué le sens de variation de 1/x sans regarder le signe du numérateur",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — le piège du « décroissante sur $\mathbb{R}^*$ ». Le premier
+    // item demande le sens sur UN intervalle ; celui-ci fait comparer deux
+    // images situées de part et d'autre de zéro, et la fonction y remonte : le
+    // plus petit nombre a la plus petite image. Le mot « décroissante » ne vaut
+    // que sur chacun des deux intervalles, jamais sur leur réunion — c'est la
+    // précision que le libellé demande explicitement.
+    kind: "template",
+    id: "stmg_inv_variations_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_inverse_derivee",
+    microId: "fctT_inverse_variations",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde d'abord les SIGNES : un quotient de deux nombres de signes contraires est négatif.",
+    tags: ["stmg", "maths", "fonctions", "inverse", "derivation", "template"],
+    generate: () => {
+      const k = pick([2, 3, 4, 6, 8, 12] as const);
+      const negatif = -pick([1, 2, 3, 4, 6] as const);
+      const positif = pick([1, 2, 3, 4, 6] as const);
+      const bonne = `$f(${negatif}) < f(${positif})$`;
+      return {
+        text:
+          `Soit $f(x) = \\dfrac{${k}}{x}$. Sans calculer, compare $f(${negatif})$ et $f(${positif})$.`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `$f(${negatif}) > f(${positif})$`,
+          `$f(${negatif}) = f(${positif})$`,
+          // ⚠️ Ce piège dit une chose cohérente et fausse. Un distracteur qui se
+          // contredit tout seul — « on ne peut pas comparer, donc l'ordre est
+          // inversé » — s'écarte sans faire de maths.
+          `on ne peut pas les comparer : $${negatif}$ et $${positif}$ ne sont pas dans le même intervalle`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La fonction inverse est décroissante sur $]-\\infty\\,;\\,0[$ ET sur $]0\\,;\\,+\\infty[$, mais PAS sur la réunion des deux : entre les deux branches, elle saute de très bas à très haut.",
+          "Quand les deux nombres sont de part et d'autre de zéro, on ne compare pas par la monotonie mais par les SIGNES des images.",
+          `$f(${negatif}) = \\dfrac{${k}}{${negatif}} = ${fr(k / negatif)}$, qui est négatif, ` +
+            `et $f(${positif}) = \\dfrac{${k}}{${positif}} = ${fr(k / positif)}$, qui est positif.`,
+          `On a ${bonne}, alors que $${negatif} < ${positif}$ : l'ordre est CONSERVÉ ici, ` +
+            `ce qui montre bien que $f$ n'est pas décroissante sur tout son ensemble de définition.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "on ne peut pas comparer : $f$ est décroissante, donc l'ordre est inversé",
+            cause: "a appliqué la décroissance à deux nombres qui ne sont pas dans le même intervalle",
           },
         ],
       };
