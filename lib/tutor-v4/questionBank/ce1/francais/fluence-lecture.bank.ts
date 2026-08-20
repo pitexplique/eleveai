@@ -795,4 +795,109 @@ export const fluenceLectureBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "fluence", "defi", "methode", "qcm"],
   },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LES SECONDS ITEMS (20/08/2026)
+     ---------------------------------------------------------------------
+     Trois micros portaient UN SEUL item : la ligne cliquée ouvrait celle du
+     voisin. Chacun prend le chemin INVERSE de son premier.
+     ⛔ Un montage écarté pour « groupes de souffle » : faire COMPTER les
+     groupes. Mesuré sur la table — les douze phrases en ont exactement trois,
+     la réponse aurait été constante et se retenait en un tirage. On demande
+     donc où tombe la PREMIÈRE barre, ce qui varie à chaque ligne.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  {
+    kind: "template",
+    id: "ce1_flue_cgp_complexes_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "fluence_lecture",
+    microId: "ce1_flue_cgp_complexes",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Il a lu le début et s'est arrêté. Va jusqu'au bout du mot.",
+    tags: ["ce1", "fluence", "cgp", "template"],
+    generate: () => {
+      const m = randomChoice(MOTS_NOUVEAUX);
+      const autres = shuffle(MOTS_NOUVEAUX.filter((x) => x.mot !== m.mot))
+        .slice(0, 3)
+        .map((x) => x.mot);
+      return {
+        text: `Un élève commence à lire, dit « ${m.piege}… » et s'arrête.\n\nQuel mot était écrit ?`,
+        format: "qcm" as const,
+        choices: makeChoices(m.mot, autres),
+        expected: [m.mot],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "L'erreur la plus fréquente en lecture n'est pas de mal déchiffrer : c'est de deviner sur le début et de s'arrêter avant la fin.",
+          "Le premier exercice demandait comment découper le mot. Celui-ci part de l'erreur : reprends le début lu, et cherche le mot entier qui commence ainsi.",
+          `« ${m.piege} » n'est que le début de « ${m.mot} » (${m.decoupe}) : ${m.pourquoi}.`,
+          `Le mot était « ${m.mot} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_flue_groupes_souffle_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "fluence_lecture",
+    microId: "ce1_flue_groupes_souffle",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On respire après un paquet de mots qui tient debout tout seul.",
+    tags: ["ce1", "fluence", "souffle", "template"],
+    generate: () => {
+      const g = randomChoice(SOUFFLES);
+      const debut = (v: string) => v.split(" / ")[0].trim();
+      const bon = debut(g.bon);
+      const autres = g.mauvais.map(debut).filter((d) => d !== bon);
+      return {
+        text: `Tu lis cette phrase à voix haute :\n\n« ${g.phrase} »\n\nAprès quels mots respires-tu la première fois ?`,
+        format: "qcm" as const,
+        choices: makeChoices(bon, autres),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "On respire APRÈS un groupe de mots qui va ensemble, jamais au milieu. Le premier groupe dit en général de qui ou de quoi on parle.",
+          "Le premier exercice demandait de choisir le découpage entier. Celui-ci ne demande que la première barre : lis à voix basse et arrête-toi là où la phrase tient encore debout.",
+          `« ${g.bon} » : on respire après « ${bon} ». Couper avant casse le groupe en deux.`,
+          `On respire après « ${bon} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_flue_expressive_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "fluence_lecture",
+    microId: "ce1_flue_expressive",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Ce que fait la voix est décrit. Cherche le signe qui le commande.",
+    tags: ["ce1", "fluence", "expressive", "template"],
+    generate: () => {
+      const s = randomChoice(SIGNES);
+      const autres = SIGNES.filter((x) => x.signe !== s.signe).map((x) => x.nom);
+      return {
+        text: `En lisant à voix haute, ${s.voix}.\n\nQuel signe de ponctuation commande cela ?`,
+        format: "qcm" as const,
+        choices: makeChoices(s.nom, autres),
+        expected: [s.nom],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Chaque signe de ponctuation donne un ordre à la voix. Les connaitre, c'est lire une phrase sans l'avoir préparée.",
+          "Le premier exercice partait de la phrase pour trouver ce que fait la voix. Celui-ci fait l'inverse : la voix est décrite, retrouve le signe.",
+          `Quand ${s.voix}, c'est ${s.nom} qui l'a demandé.`,
+          `C'est ${s.nom}.`,
+        ),
+      };
+    },
+  },
 ];

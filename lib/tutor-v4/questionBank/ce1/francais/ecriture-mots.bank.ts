@@ -666,4 +666,96 @@ export const ecritureMotsBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "dictee", "defi", "piege", "qcm"],
   },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LES SECONDS ITEMS (20/08/2026)
+     ---------------------------------------------------------------------
+     Deux micros portaient UN SEUL item : la ligne cliquée ouvrait celle du
+     voisin. Chacun prend le chemin INVERSE de son premier.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  {
+    kind: "template",
+    id: "ce1_dict_accord_gn_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "ecriture_mots",
+    microId: "ce1_dict_accord_gn",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Deux marques à poser : une sur le nom, une sur l'adjectif. Laquelle manque ?",
+    tags: ["ce1", "dictee", "accord", "template"],
+    generate: () => {
+      const g = randomChoice(GROUPES);
+      /* rates[0] = le nom n'a pas sa marque ; rates[1] = l'adjectif ne l'a pas.
+         Le singulier n'en porte aucune, le pluriel les porte toutes les deux. */
+      const cas = randomChoice(["nom", "adjectif", "deux", "aucune"] as const);
+      const ecrit =
+        cas === "nom"
+          ? g.rates[0]
+          : cas === "adjectif"
+            ? g.rates[1]
+            : cas === "deux"
+              ? g.singulier
+              : g.pluriel;
+      const bon =
+        cas === "nom"
+          ? "la marque du pluriel sur le nom"
+          : cas === "adjectif"
+            ? "la marque du pluriel sur l'adjectif"
+            : cas === "deux"
+              ? "les deux marques à la fois"
+              : "rien : le groupe est déjà juste";
+      return {
+        text: `On voulait écrire ce groupe au pluriel, et un élève a écrit : « ${ecrit} »\n\nQu'est-ce qui manque ?`,
+        format: "qcm" as const,
+        choices: shuffle([
+          "la marque du pluriel sur le nom",
+          "la marque du pluriel sur l'adjectif",
+          "les deux marques à la fois",
+          "rien : le groupe est déjà juste",
+        ]),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Dans un groupe nominal au pluriel, la marque se pose DEUX fois : sur le nom et sur l'adjectif. Oublier l'une des deux suffit à faire tomber le groupe.",
+          "Le premier exercice demandait d'écrire le pluriel. Celui-ci part d'un groupe déjà écrit : regarde la fin du nom, puis la fin de l'adjectif, séparément.",
+          `On attendait « ${g.pluriel} ». Ici, ${bon === "rien : le groupe est déjà juste" ? "tout y est" : `il manque ${bon}`}.`,
+          `${bon.charAt(0).toUpperCase()}${bon.slice(1)}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_dict_texte_court_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "ecriture_mots",
+    microId: "ce1_dict_texte_court",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La phrase est fautive. Cherche celle qui la corrige exactement.",
+    tags: ["ce1", "dictee", "template"],
+    generate: () => {
+      const p = randomChoice(PHRASES);
+      const autres = shuffle(PHRASES.filter((x) => x.juste !== p.juste))
+        .slice(0, 3)
+        .map((x) => x.juste);
+      return {
+        text: `Un élève a écrit sous la dictée : « ${p.fautive} »\n\nQuelle est la phrase correcte ?`,
+        format: "qcm" as const,
+        choices: makeChoices(p.juste, autres),
+        expected: [p.juste],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Se relire après une dictée, ce n'est pas seulement repérer la faute : c'est savoir écrire la phrase juste.",
+          "Le premier exercice demandait dans quelle phrase se trouvait la faute. Celui-ci va jusqu'au bout : corrige-la.",
+          `« ${p.fautive} » → « ${p.juste} » : ${p.regle}.`,
+          `La phrase correcte est « ${p.juste} »`,
+        ),
+      };
+    },
+  },
 ];

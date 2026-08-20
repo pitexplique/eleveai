@@ -494,4 +494,119 @@ export const copieFluenteBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "copie", "mise-en-page", "methode", "qcm"],
   },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LES SECONDS ITEMS (20/08/2026)
+     ---------------------------------------------------------------------
+     Trois micros portaient UN SEUL item : la ligne cliquée ouvrait celle du
+     voisin. Chacun prend le chemin INVERSE de son premier.
+     ⚠️ `ce1_copie_mot_tpl_1` ne propose que « oui » ou « non » — une chance
+     sur deux au hasard. Son second item en propose quatre.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  {
+    kind: "template",
+    id: "ce1_copie_mot_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "copie_fluente",
+    microId: "ce1_copie_mot",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La copie contient une erreur. Cherche le modèle dont elle vient.",
+    tags: ["ce1", "copie", "template"],
+    generate: () => {
+      const c = randomChoice(COPIES);
+      const autres = shuffle(COPIES.filter((x) => x.modele !== c.modele))
+        .slice(0, 3)
+        .map((x) => x.modele);
+      return {
+        text: `Un élève a copié : « ${c.copie} »\n\nQuel modèle avait-il sous les yeux ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.modele, autres),
+        expected: [c.modele],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Copier, c'est écrire exactement ce qui est écrit. Une copie fautive garde presque tout du modèle : c'est ce « presque » qu'il faut voir.",
+          "Le premier exercice demandait si la copie était exacte. Celui-ci part de la copie : compare-la mot à mot aux quatre modèles, et garde celui dont elle est le plus proche.",
+          `« ${c.copie} » vient de « ${c.modele} » : ${c.erreur}.`,
+          `Le modèle était « ${c.modele} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_copie_phrase_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "copie_fluente",
+    microId: "ce1_copie_phrase",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "L'erreur est nommée. Cherche le couple qui la montre.",
+    tags: ["ce1", "copie", "template"],
+    generate: () => {
+      const c = randomChoice(COPIES);
+      const couple = (x: Copie) => `« ${x.modele} » → « ${x.copie} »`;
+      /* ⛔ Les leurres viennent de lignes dont l'erreur est DIFFÉRENTE : sinon
+         deux couples illustreraient la même erreur, et l'élève qui coche le
+         second serait compté faux. */
+      const autres = shuffle(COPIES.filter((x) => x.erreur !== c.erreur))
+        .slice(0, 3)
+        .map(couple);
+      return {
+        text: `Dans l'un de ces couples, ${c.erreur}.\n\nLequel ?`,
+        format: "qcm" as const,
+        choices: makeChoices(couple(c), autres),
+        expected: [couple(c)],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Les erreurs de copie sont toujours les mêmes : un mot sauté, un accent, une majuscule, un point, une lettre finale. Les reconnaitre, c'est savoir où regarder en se relisant.",
+          "Le premier exercice partait du couple pour nommer l'erreur. Celui-ci fait l'inverse : l'erreur est nommée, cherche le couple où elle se voit.",
+          `${couple(c)} : ${c.erreur}.`,
+          `C'est ${couple(c)}`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_copie_paragraphe_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "copie_fluente",
+    microId: "ce1_copie_paragraphe",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une des deux phrases est parfaitement copiée. Laquelle ?",
+    tags: ["ce1", "copie", "template"],
+    generate: () => {
+      const a = randomChoice(COPIES);
+      const b = randomChoice(COPIES.filter((x) => x.modele !== a.modele));
+      const premiereFausse = Math.random() < 0.5;
+      const modele = `${a.modele} ${b.modele}`;
+      const copie = premiereFausse ? `${a.copie} ${b.modele}` : `${a.modele} ${b.copie}`;
+      const exacte = premiereFausse ? b.modele : a.modele;
+      const fautive = premiereFausse ? a.copie : b.copie;
+      const autres = shuffle(COPIES.filter((x) => x.modele !== a.modele && x.modele !== b.modele))
+        .slice(0, 2)
+        .map((x) => x.modele);
+      return {
+        text: `Modèle :\n« ${modele} »\n\nCopie :\n« ${copie} »\n\nQuelle phrase a été copiée SANS erreur ?`,
+        format: "qcm" as const,
+        choices: shuffle([exacte, fautive, ...autres]),
+        expected: [exacte],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Quand on copie plusieurs phrases, l'erreur ne se répartit pas : elle se loge dans une seule. La trouver suppose de vérifier chaque phrase séparément.",
+          "Le premier exercice demandait où était l'erreur. Celui-ci demande l'inverse : quelle phrase est intacte. Compare-les une à une au modèle.",
+          `« ${exacte} » est copiée mot pour mot. L'autre porte une erreur : ${premiereFausse ? a.erreur : b.erreur}.`,
+          `La phrase exacte est « ${exacte} »`,
+        ),
+      };
+    },
+  },
 ];

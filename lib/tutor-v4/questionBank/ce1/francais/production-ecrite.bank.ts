@@ -884,4 +884,144 @@ export const productionEcriteBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "production", "defi", "piege", "qcm"],
   },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LES SECONDS ITEMS (20/08/2026)
+     ---------------------------------------------------------------------
+     Quatre micros portaient UN SEUL item : la ligne cliquée ouvrait celle du
+     voisin. Chacun prend le chemin INVERSE de son premier.
+     ⛔ Un montage écarté pour « décrire » : étiqueter les trois leurres de
+     DESCRIPTIONS par le défaut qu'ils portent (raconter / donner un avis /
+     répéter le sujet). Relu ligne à ligne — les trois ne sont PAS dans le
+     même ordre d'une entrée à l'autre, et un étiquetage par indice aurait
+     nommé le mauvais défaut une fois sur trois. On inverse autrement : la
+     description est donnée, on cherche son sujet.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  {
+    kind: "template",
+    id: "ce1_prod_transformer_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "production_ecrite",
+    microId: "ce1_prod_transformer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare les deux phrases : qu'est-ce qui a changé ?",
+    tags: ["ce1", "production", "transformer", "template"],
+    generate: () => {
+      const t = randomChoice(TRANSFORMATIONS);
+      const autres = shuffle(TRANSFORMATIONS.filter((x) => x.consigne !== t.consigne))
+        .slice(0, 3)
+        .map((x) => x.consigne);
+      return {
+        text: `On a transformé cette phrase :\n\n« ${t.modele} »\ndevient\n« ${t.transformee} »\n\nQuelle consigne a-t-on suivie ?`,
+        format: "qcm" as const,
+        choices: makeChoices(t.consigne, autres),
+        expected: [t.consigne],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Transformer une phrase, c'est changer une chose et accorder tout le reste. Savoir lire ce qui a changé, c'est comprendre ce qu'on demande.",
+          "Le premier exercice partait de la consigne pour écrire la phrase. Celui-ci fait l'inverse : compare les deux phrases mot à mot, et nomme ce qui a bougé.",
+          `« ${t.modele} » → « ${t.transformee} » : c'est bien ${t.consigne}.`,
+          `La consigne était : ${t.consigne}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_prod_suite_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "production_ecrite",
+    microId: "ce1_prod_suite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cette phrase continue une histoire. Laquelle ?",
+    tags: ["ce1", "production", "suite", "template"],
+    generate: () => {
+      const s = randomChoice(SUITES);
+      const debutDe = (x: Suite) => `${x.debut.split(". ")[0]}.`;
+      const autres = shuffle(SUITES.filter((x) => x.debut !== s.debut))
+        .slice(0, 3)
+        .map(debutDe);
+      return {
+        text: `Une histoire continue par cette phrase :\n\n« ${s.bonne} »\n\nPar quel début a-t-elle commencé ?`,
+        format: "qcm" as const,
+        choices: makeChoices(debutDe(s), autres),
+        expected: [debutDe(s)],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une suite ne se pose pas n'importe où : elle reprend les personnages, le lieu et le moment de ce qui précède. C'est à cela qu'on la reconnait.",
+          "Le premier exercice partait du début pour choisir la suite. Celui-ci fait l'inverse : regarde de qui et de quoi parle la phrase, puis cherche l'histoire où cela existe déjà.",
+          `« ${s.bonne} » continue : « ${debutDe(s)} »`,
+          `Elle a commencé par « ${debutDe(s)} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_prod_description_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "production_ecrite",
+    microId: "ce1_prod_description",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une bonne description fait voir. Qu'est-ce qu'on voit ici ?",
+    tags: ["ce1", "production", "description", "template"],
+    generate: () => {
+      const d = randomChoice(DESCRIPTIONS);
+      const autres = shuffle(DESCRIPTIONS.filter((x) => x.sujet !== d.sujet))
+        .slice(0, 3)
+        .map((x) => x.sujet);
+      return {
+        text: `Un élève écrit : « ${d.bonne} »\n\nQu'est-ce qu'il décrit ?`,
+        format: "qcm" as const,
+        choices: makeChoices(d.sujet, autres),
+        expected: [d.sujet],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une description réussie fait voir la chose sans avoir à la nommer : la taille, la couleur, la forme, ce qu'elle fait. Si on devine le sujet en la lisant, c'est qu'elle est réussie.",
+          "Le premier exercice partait du sujet pour choisir la bonne description. Celui-ci fait l'inverse : lis les détails et demande-toi ce qu'ils font voir.",
+          `« ${d.bonne} » décrit ${d.sujet}.`,
+          `Il décrit ${d.sujet}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_prod_reviser_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "production_ecrite",
+    microId: "ce1_prod_reviser",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le geste est décrit. Cherche ce qu'il permet de vérifier.",
+    tags: ["ce1", "production", "reviser", "template"],
+    generate: () => {
+      const r = randomChoice(RELECTURES);
+      const autres = RELECTURES.filter((x) => x.quoi !== r.quoi).map((x) => x.quoi);
+      return {
+        text: `En te relisant, tu fais ceci : ${r.comment}.\n\nQu'est-ce que tu vérifies ?`,
+        format: "qcm" as const,
+        choices: makeChoices(r.quoi, autres),
+        expected: [r.quoi],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Se relire n'est pas relire au hasard : à chaque chose à vérifier correspond un geste précis. Douze gestes, douze contrôles.",
+          "Le premier exercice partait de ce qu'on vérifie pour trouver le geste. Celui-ci fait l'inverse : le geste est décrit, retrouve ce qu'il contrôle.",
+          `${r.comment.charAt(0).toUpperCase()}${r.comment.slice(1)} : c'est ainsi qu'on vérifie ${r.quoi}.`,
+          `Tu vérifies ${r.quoi}.`,
+        ),
+      };
+    },
+  },
 ];

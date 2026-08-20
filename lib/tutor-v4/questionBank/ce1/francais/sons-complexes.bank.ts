@@ -606,4 +606,45 @@ export const sonsComplexesBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "sons", "defi", "piege", "qcm"],
   },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LE SECOND ITEM (20/08/2026)
+     ---------------------------------------------------------------------
+     `ce1_sons_double_cons` portait UN SEUL item : la ligne cliquée ouvrait
+     `ce1_sons_proches`. Celui-ci prend le chemin inverse — la consonne double
+     est donnée, on cherche le mot qui la porte.
+     ═══════════════════════════════════════════════════════════════════════ */
+  {
+    kind: "template",
+    id: "ce1_sons_double_cons_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "sons_complexes",
+    microId: "ce1_sons_double_cons",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Cherche le mot où cette lettre est écrite deux fois de suite.",
+    tags: ["ce1", "sons", "doubles", "template"],
+    generate: () => {
+      const m = randomChoice(DOUBLES);
+      /* Les leurres portent une AUTRE consonne double : chacun est donc un vrai
+         mot à consonne double, mais un seul répond à la lettre demandée. */
+      const autres = shuffle(DOUBLES.filter((x) => x.graphie !== m.graphie))
+        .slice(0, 3)
+        .map((x) => x.mot);
+      return {
+        text: `Dans lequel de ces mots la consonne « ${m.graphie} » est-elle doublée ?`,
+        format: "qcm" as const,
+        choices: makeChoices(m.mot, autres),
+        expected: [m.mot],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une consonne double s'écrit deux fois et ne se prononce qu'une. Savoir laquelle est doublée dans un mot, c'est savoir l'écrire.",
+          "Le premier exercice partait du mot pour trouver la consonne. Celui-ci fait l'inverse : la consonne est donnée, cherche le mot où elle apparait deux fois de suite.",
+          `« ${m.mot} » porte « ${m.graphie} ». Les trois autres mots ont bien une consonne double, mais ce n'est pas celle-là.`,
+          `C'est « ${m.mot} ».`,
+        ),
+      };
+    },
+  },
 ];
