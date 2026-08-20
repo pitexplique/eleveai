@@ -283,6 +283,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "Sujet, verbe, compléments, attribut, groupe nominal et accords — chaque règle dessinée sur la phrase.",
   },
 
+  "francais/cm2/grammaire-phrase": {
+    titre: "La phrase : sujet, verbe, nature et fonction",
+    resume:
+      "Trouver le verbe conjugué, poser « qui est-ce qui ? », reconnaître un sujet inversé et distinguer nature et fonction.",
+  },
   "francais/cm2/phrase-complexe": {
     titre: "La phrase complexe",
     resume:
@@ -359,7 +364,7 @@ export const FICHES_ALIAS: Record<string, string> = {
      une fiche d'une autre année, c'est UNE fiche pour trois notions, et
      l'élève qui vient des accords y trouve aussi la phrase et les
      compléments. Elles s'effacent dès que les trois fiches sont écrites. */
-  "francais/cm2/grammaire-phrase": "francais/cm2/grammaire-orthographe",
+  // (« grammaire-phrase » a désormais SA fiche : plus d'alias pour elle.)
   "francais/cm2/grammaire-complements": "francais/cm2/grammaire-orthographe",
   "francais/cm2/grammaire-groupe-nominal": "francais/cm2/grammaire-orthographe",
   "francais/cm2/grammaire-accords": "francais/cm2/grammaire-orthographe",
