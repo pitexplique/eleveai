@@ -349,6 +349,19 @@ export const FICHES_ALIAS: Record<string, string> = {
   // Périmètres du carré, du rectangle, d'une figure, résolution de problème :
   // la fiche 6e les couvre ; la 4e n'ajoute que le triangle.
   "maths/4e/aire-perimetre": "maths/6e/aire-perimetre",
+
+  /* ⏳ PROVISOIRE — LE TEMPS D'ÉCRIRE LES TROIS FICHES (20/08/2026).
+     La grammaire du CM2 a été coupée en trois notions le 20/08. La fiche
+     existante porte encore le nom de l'ancienne, `grammaire-orthographe` :
+     le coach ne la reconnaissait donc plus sur aucune des trois, et le badge
+     « Fiche » avait disparu d'un cours qui existe pourtant.
+     Ces trois lignes ne sont pas des alias au sens habituel — ce n'est pas
+     une fiche d'une autre année, c'est UNE fiche pour trois notions, et
+     l'élève qui vient des accords y trouve aussi la phrase et les
+     compléments. Elles s'effacent dès que les trois fiches sont écrites. */
+  "francais/cm2/grammaire-phrase": "francais/cm2/grammaire-orthographe",
+  "francais/cm2/grammaire-complements": "francais/cm2/grammaire-orthographe",
+  "francais/cm2/grammaire-accords": "francais/cm2/grammaire-orthographe",
 };
 
 /** La classe où la fiche est réellement rangée, quand elle diffère de celle
@@ -361,7 +374,13 @@ export function ficheClasseSource(
 ): string | null {
   const cle = `${matiere}/${classe.toLowerCase()}/${notion.toLowerCase().replace(/_/g, "-")}`;
   const cible = FICHES_ALIAS[cle];
-  return cible ? cible.split("/")[1] : null;
+  if (!cible) return null;
+  // ⛔ UN ALIAS DANS LA MÊME CLASSE N'EST PAS « UNE AUTRE ANNÉE ». Depuis que
+  // trois notions du CM2 pointent vers une même fiche de CM2, cette fonction
+  // renvoyait « cm2 » à un élève de CM2 : le coach lui annonçait un cours
+  // d'un autre niveau qui était le sien. On ne prévient que d'un vrai écart.
+  const classeCible = cible.split("/")[1];
+  return classeCible === classe.toLowerCase() ? null : classeCible;
 }
 
 /** Le niveau tel qu'on l'ÉCRIT, à partir du slug tel qu'on le range.
