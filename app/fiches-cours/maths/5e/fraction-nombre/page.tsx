@@ -11,7 +11,7 @@ import {
 export const metadata: Metadata = {
   title: "Les fractions — fiche de cours 5e",
   description:
-    "Définition, propriétés, exemples corrigés et exercices : la fiche de cours complète des fractions en 5e (simplifier, comparer, additionner, multiplier, diviser, inverse, opposé), à lire, imprimer ou réviser en flashcards.",
+    "Définition, propriétés dessinées, exemples corrigés et exercices : la fiche de cours des fractions en 5e — fractions égales, simplifier, comparer, nombre rationnel et opposé — à lire, imprimer ou réviser en flashcards.",
 };
 
 export default function FractionsCinquiemePage() {

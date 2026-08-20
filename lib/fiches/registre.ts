@@ -244,7 +244,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
   },
   "maths/5e/fraction-nombre": {
     titre: "Les fractions",
-    resume: "Simplifier, comparer et calculer (addition, produit, division, inverse, opposé).",
+    resume: "Reconnaître des fractions égales, simplifier, comparer, et l'opposé.",
+  },
+  "maths/5e/fraction-calcul": {
+    titre: "Calculer avec les fractions",
+    resume: "Additionner, soustraire, multiplier, et prendre une fraction d'une quantité.",
   },
   "maths/4e/pythagore-theoreme": {
     titre: "Le théorème de Pythagore",

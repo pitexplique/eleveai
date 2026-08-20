@@ -2,21 +2,27 @@
 // Fiche « en blocs » alignée sur la banque du coach
 // lib/tutor-v4/questionBank/5e/maths/fractions.bank.ts (notionId fraction_nombre).
 // Remplace l'ancienne fiche « addition » (maths-5e-fractions-addition.tsx) : ici
-// TOUTE la notion 5e (égalité, simplification, comparaison, 4 opérations, inverse,
-// opposé), dessinée par les canvas « fraction » du coach.
+// la notion `fraction_nombre` : égalité, simplification, comparaison, rationnel,
+// opposé — dessinée par les canvas « fraction » du coach. Les CALCULS sont dans
+// la fiche voisine, maths-5e-fraction-calcul.tsx.
 //
 // Micro-compétences couvertes :
 // - fraction_egale        → définition + figure (1/2 = 2/4), exemple « Fractions égales », propriété
 // - fraction_simplifier   → propriété « Simplifier », exemple « Simplifier » (6/8 = 3/4), entraînement 1
 // - fraction_rationnel    → identité + définition (quotient de deux entiers, -2/3)
 // - fraction_comparer     → exemple « Comparer » (1/2 vs 3/4), méthode, entraînement 2
-// - fraction_additionner  → exemple « Additionner » (1/2 + 1/3 = 5/6), usages, entraînement 3
-// - fraction_multiplier   → exemple « Multiplier » (2/3 × 3/4 = 1/2)
-// - fraction_quantite     → exemple « Fraction d'une quantité » (3/4 de 20 = 15)
-// - fraction_diviser      → exemple « Diviser » (2/3 ÷ 4/5), propriété inverse
-// - fraction_inverse      → propriété « L'inverse », entraînement 4
-// - fraction_oppose       → propriété « L'opposé »
-// - fraction_defi         → pièges + défi dessiné (3/4 + 1/6 = 11/12)
+// - fraction_oppose       → propriété « L'opposé », exemple « L'opposé »
+// - fraction_defi         → pièges + défi
+//
+// ⛔ CE QUI N'EST PAS ICI, ET POURQUOI (20/08/2026).
+// · Les CALCULS (additionner, multiplier, fraction d'une quantité) appartiennent
+//   à la notion voisine `fraction_calcul` et vivent dans
+//   `maths-5e-fraction-calcul.tsx`. La banque a été coupée en deux — reconnaître
+//   une fraction d'un côté, calculer avec de l'autre — et la fiche ne l'avait
+//   pas suivi. Frédéric l'a vu : « le calcul n'apparaît pas sur la fiche ».
+// · L'INVERSE et la DIVISION ont quitté la 5e le 04/08/2026 : les repères
+//   annuels les placent en 4e, où ils existent déjà. Ils étaient encore ici en
+//   propriété et en exemple — hors programme. Retirés.
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
@@ -47,9 +53,9 @@ const compare = (a: [number, number], b: [number, number]) => (
   />
 );
 
-// La droite graduee, pour les deux proprietes qui ne parlent PAS de partage :
-// l'oppose est symetrique autour de 0, l'inverse s'echange autour de 1. Deux
-// dessins jumeaux dont le contraste EST la lecon.
+// La droite graduee, pour la propriete qui ne parle PAS de partage : l'oppose
+// n'est pas une part coloriee, c'est une POSITION — de l'autre cote de 0, a la
+// meme distance.
 const droite = (
   min: number,
   max: number,
@@ -62,15 +68,15 @@ const droite = (
 );
 
 const pieges = [
-  "Additionner les dénominateurs : 1/2 + 1/3 ne fait pas 2/5. On met au même dénominateur d'abord.",
+  "Comparer les numérateurs sans regarder les dénominateurs : 2/3 n'est pas plus petit que 3/5 parce que 2 < 3.",
   "Croire que 1/5 est plus grand que 1/3 : plus on partage, plus les parts sont petites (1/3 > 1/5).",
-  "Oublier de simplifier le résultat à la fin (6/12 s'écrit 1/2).",
+  "Laisser une fraction non simplifiée : 6/12 s'écrit 1/2.",
 ];
 
 const aRetenir = [
   "On multiplie/divise en haut ET en bas par le même nombre → fraction égale (ou simplifiée).",
-  "Additionner/soustraire : même dénominateur d'abord, puis on ne touche qu'aux numérateurs.",
-  "Multiplier : haut × haut, bas × bas. Diviser : on multiplie par l'inverse.",
+  "Pour comparer, on redécoupe en parts de même taille : à dénominateurs égaux, le plus grand numérateur gagne.",
+  "L'opposé change seulement le signe : 3/5 et −3/5 sont de part et d'autre de 0, à la même distance.",
 ];
 
 export const ficheFractions5e: FicheCoursData = {
@@ -82,7 +88,7 @@ export const ficheFractions5e: FicheCoursData = {
   accroche:
     "Une fraction, c'est un partage : 3/4, c'est 3 parts sur 4. En 5e, on apprend à les simplifier, les comparer et calculer avec.",
   identite: [
-    { label: "Mots clés", valeur: "Numérateur, dénominateur, simplifier, inverse, opposé" },
+    { label: "Mots clés", valeur: "Numérateur, dénominateur, simplifier, comparer, opposé" },
     { label: "Le secret", valeur: "En haut et en bas par le même nombre" },
     { label: "Outil", valeur: "Un tout partagé en parts égales (disque, barre)" },
   ],
@@ -97,9 +103,8 @@ export const ficheFractions5e: FicheCoursData = {
   // Un dessin sous chaque propriete (REGLES.md § 2 bis). Les deux premieres
   // parlent de PARTAGE : deux fractions coloriees cote a cote, meme surface,
   // pas le meme nombre de parts. Les deux dernieres ne parlent pas de partage
-  // du tout — l'oppose et l'inverse sont des POSITIONS : la droite graduee, et
-  // leur contraste se lit d'un coup d'oeil (symetrique autour de 0 pour l'un,
-  // echange autour de 1 pour l'autre).
+  // du tout : l'oppose est une POSITION, pas une part coloriee — de l'autre cote
+  // de 0, a la meme distance. C'est la droite graduee.
   proprietes: [
     {
       titre: "Fractions égales",
@@ -112,12 +117,9 @@ export const ficheFractions5e: FicheCoursData = {
       schema: compare([6, 8], [3, 4]),
     },
     {
-      titre: "L'inverse",
-      texte: "On échange numérateur et dénominateur : l'inverse de 2/3 est 3/2.",
-      schema: droite(0, 2, 0.5, [
-        { value: 2 / 3, label: "2/3" },
-        { value: 1.5, label: "3/2", color: "#16a34a" },
-      ]),
+      titre: "Comparer",
+      texte: "À dénominateurs égaux, le plus grand numérateur gagne ; sinon on redécoupe d'abord.",
+      schema: compare([1, 2], [3, 4]),
     },
     {
       titre: "L'opposé",
@@ -155,24 +157,24 @@ export const ficheFractions5e: FicheCoursData = {
       schema: compare([6, 12], [1, 2]),
     },
   ],
+  // Les trois GESTES de cette notion — reconnaître, simplifier, comparer.
+  // Additionner, multiplier et diviser n'y sont plus : ce sont ceux de la fiche
+  // voisine, « Calculer avec les fractions ».
   usages: [
     {
-      titre: "Additionner / soustraire",
-      detail: "Même dénominateur, puis on additionne (ou soustrait) les numérateurs.",
-      schema: barre(5, 6),
+      titre: "Reconnaître des fractions égales",
+      detail: "Deux écritures différentes peuvent colorier exactement la même part.",
+      schema: compare([2, 6], [1, 3]),
     },
     {
-      titre: "Multiplier",
-      detail: "Numérateurs entre eux, dénominateurs entre eux, puis on simplifie.",
-      schema: disque(1, 2),
+      titre: "Simplifier",
+      detail: "On divise haut et bas par un diviseur commun, la part ne change pas.",
+      schema: compare([8, 12], [2, 3]),
     },
     {
-      titre: "Diviser",
-      detail: "Diviser par une fraction = multiplier par son inverse.",
-      schema: droite(0, 2, 0.5, [
-        { value: 0.8, label: "4/5" },
-        { value: 1.25, label: "5/4", color: "#16a34a" },
-      ]),
+      titre: "Comparer",
+      detail: "On redécoupe en parts de même taille, puis on compare les numérateurs.",
+      schema: compare([2, 3], [3, 5]),
     },
   ],
   exemples: [
@@ -201,42 +203,24 @@ export const ficheFractions5e: FicheCoursData = {
         "On met au même dénominateur : 1/2 = 2/4. Comme 3/4 > 2/4, on a 3/4 > 1/2.",
     },
     {
-      titre: "Additionner",
-      donnees: "Le calcul 1/2 + 1/3.",
-      question: "Quel est le résultat ?",
-      schema: barre(5, 6),
-      solution:
-        "Même dénominateur (6) : 1/2 = 3/6 et 1/3 = 2/6. Donc 1/2 + 1/3 = 3/6 + 2/6 = 5/6.",
-    },
-    {
-      titre: "Multiplier",
-      donnees: "Le calcul 2/3 × 3/4.",
-      question: "Quel est le résultat ?",
-      // Le resultat brut et sa forme simplifiee : c'est la simplification
-      // finale qu'on oublie, pas la multiplication.
-      schema: compare([6, 12], [1, 2]),
-      solution:
-        "Haut × haut, bas × bas : 2/3 × 3/4 = 6/12. On simplifie : 6/12 = 1/2.",
-    },
-    {
-      titre: "Fraction d'une quantité",
-      donnees: "On cherche 3/4 de 20.",
-      question: "Combien cela fait-il ?",
-      schema: barre(3, 4),
-      solution:
-        "Une part : 20 ÷ 4 = 5. Puis 3 parts : 3 × 5 = 15. Donc 3/4 de 20 = 15.",
-    },
-    {
-      titre: "Diviser",
-      donnees: "Le calcul 2/3 ÷ 4/5.",
-      question: "Quel est le résultat ?",
-      // L'inverse de 4/5, la ou il se voit : de l'autre cote de 1.
-      schema: droite(0, 2, 0.5, [
-        { value: 0.8, label: "4/5" },
-        { value: 1.25, label: "5/4", color: "#16a34a" },
+      titre: "L'opposé",
+      donnees: "La fraction 3/5.",
+      question: "Quel est son opposé, et où se place-t-il ?",
+      // L'oppose est une POSITION : de l'autre cote de 0, a la meme distance.
+      schema: droite(-1, 1, 0.5, [
+        { value: -0.6, label: "−3/5", color: "#dc2626" },
+        { value: 0.6, label: "3/5" },
       ]),
       solution:
-        "Diviser, c'est multiplier par l'inverse : 2/3 ÷ 4/5 = 2/3 × 5/4 = 10/12 = 5/6.",
+        "On change seulement le signe : l'opposé de 3/5 est −3/5. Sur la droite graduée, il est de l'autre côté de 0, à la même distance — et leur somme fait 0.",
+    },
+    {
+      titre: "Un nombre rationnel",
+      donnees: "Les écritures 0,75 · 3/4 · 6/8.",
+      question: "Désignent-elles le même nombre ?",
+      schema: compare([3, 4], [6, 8]),
+      solution:
+        "Oui : 6/8 se simplifie en 3/4, et 3/4 vaut 0,75. Un même nombre rationnel a plusieurs écritures — c'est la fraction la plus simple qu'on donne en réponse.",
     },
   ],
   pieges,
@@ -255,8 +239,8 @@ export const ficheFractions5e: FicheCoursData = {
       correction: "2/3 = 4/6, donc 2/3 + 1/6 = 4/6 + 1/6 = 5/6.",
     },
     {
-      question: "Quel est l'inverse de 4/9 ? Et son opposé ?",
-      correction: "L'inverse de 4/9 est 9/4 (on retourne la fraction). Son opposé est -4/9 (on change le signe).",
+      question: "Quel est l'opposé de 4/9 ? Où se place-t-il par rapport à 0 ?",
+      correction: "Son opposé est −4/9 : on change seulement le signe. Sur la droite graduée, il est de l'autre côté de 0, à la même distance — leur somme fait 0.",
     },
     {
       question: "À La Réunion, Enzo mange 3/4 d'un gâteau le midi puis 1/6 le soir. Combien en tout ?",
@@ -333,19 +317,19 @@ export const slidesFractions5e: ClasseSlide[] = [
     },
   },
   {
-    titre: "Multiplier & diviser",
+    titre: "Comparer & opposé",
     badge: "Deux réflexes",
     section: {
       type: "duo",
       gauche: {
         variante: "info",
-        titre: "Multiplier",
-        contenu: "Haut × haut, bas × bas : 2/3 × 3/4 = 6/12 = 1/2.",
+        titre: "Comparer",
+        contenu: "On redécoupe en parts de même taille : 1/2 = 2/4, et 3/4 > 2/4 donc 3/4 > 1/2.",
       },
       droite: {
         variante: "ok",
-        titre: "Diviser",
-        contenu: "On multiplie par l'inverse : 2/3 ÷ 4/5 = 2/3 × 5/4 = 5/6.",
+        titre: "L'opposé",
+        contenu: "On change seulement le signe : 3/5 et −3/5 encadrent 0, à la même distance.",
       },
     },
   },
