@@ -369,8 +369,12 @@ export default function CahierPetits({
             </div>
             <p className="mt-2 text-sm font-bold italic text-slate-500">
               {/* Signée comme les deux autres cahiers (20/08/2026) — voir la
-                  note complète dans CahierVacances.tsx. */}
-              Conçu par Frédéric Lacoste, enseignant à La Réunion, pour ses élèves.
+                  note complète dans CahierVacances.tsx.
+                  ⚠️ « Et pour vous » et non « et pour toi » : la couverture de
+                  ce cahier-ci parle à l'adulte qui accompagne (« une page par
+                  jour, à faire avec votre enfant », quelques lignes plus bas),
+                  même si les pages tutoient l'enfant. */}
+              Conçu par Frédéric Lacoste, enseignant à La Réunion, pour ses élèves — et pour vous.
             </p>
             <p className="mt-1 text-base font-black text-teal-600">
               « Nou la fé&nbsp;! » 🌺

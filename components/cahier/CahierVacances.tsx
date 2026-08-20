@@ -343,9 +343,32 @@ export default function CahierVacances({
                 ici), cette ligne parle de la PERSONNE. Ce n'est pas la même
                 information, et la redite est le prix d'une signature complète —
                 la même, mot pour mot, que sur l'accueil. C'est en la répétant
-                à l'identique qu'un nom finit par valoir quelque chose. */}
+                à l'identique qu'un nom finit par valoir quelque chose.
+                ⭐ « — ET POUR VOUS » A ÉTÉ AJOUTÉ DANS LA FOULÉE (Frédéric, même
+                jour), et ce n'est pas de la politesse. Sans cette moitié, la
+                phrase se refermait : « SES élèves », ce sont ceux d'un
+                enseignant de La Réunion — et 86 % des visiteurs sont ailleurs.
+                Un parent de métropole lisait qu'il tenait le cahier fait pour la
+                classe de quelqu'un d'autre : vrai, et excluant. Même piège que
+                le badge d'accueil du matin, à un mot près.
+                La solution n'est pas d'effacer l'origine — c'est elle qui rend
+                le cahier crédible — mais de finir la phrase : ça a été écrit
+                pour eux, ça vous est donné aussi. L'histoire reste vraie, le
+                lecteur cesse d'être spectateur.
+                ⚠️ « ET POUR TOI » ICI, « ET POUR VOUS » SUR LES DEUX AUTRES
+                CAHIERS, et la dissymétrie est voulue : chaque ligne reste dans
+                la voix de sa page. Celle-ci tutoie l'enfant d'un bout à l'autre
+                — « à ton rythme », « Le savais-tu ? », « Continue chaque jour,
+                tu vas y arriver ! » : un « pour vous » détonnerait à trois
+                lignes d'un « tu ». Le cahier des petits, lui, parle à l'adulte
+                qui accompagne (« à faire avec votre enfant »), et celui des
+                parents vouvoie partout.
+                ⛔ Ne pas « uniformiser » les trois lignes : la phrase identique
+                partout, c'était la version du matin, et elle sonnait faux ici.
+                Ce qui doit être identique, c'est la SIGNATURE (« Frédéric
+                Lacoste, enseignant à La Réunion ») — pas le pronom qui suit. */}
             <p className="mt-2 text-sm font-bold italic text-slate-500">
-              Conçu par Frédéric Lacoste, enseignant à La Réunion, pour ses élèves.
+              Conçu par Frédéric Lacoste, enseignant à La Réunion, pour ses élèves — et pour toi.
             </p>
             <p className="mt-1 text-base font-black text-teal-600">
               « Nou la fé&nbsp;! » 🌺
