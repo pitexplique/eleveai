@@ -18,7 +18,7 @@ type P = { x: number; y: number };
 
 const transfo = (
   source: { label: string; points: P[] },
-  image: { label: string; points: P[] },
+  image: { label: string; points: P[] } | null,
   center: { point: P; label: string },
   grid: { rows: number; cols: number } = { rows: 8, cols: 8 }
 ) => (
@@ -28,10 +28,44 @@ const transfo = (
       transformation: "symetrie_centrale",
       grid,
       source,
-      image,
+      ...(image ? { image } : {}),
       center,
+      display: { showDashedLinks: true },
     }}
   />
+);
+
+// Le MIROIR, pour la seule propriété qui parle de ce que la symétrie centrale
+// n'est PAS. Deux dessins côte à côte : un axe contre un centre.
+const axiale = (
+  source: { label: string; points: P[] },
+  image: { label: string; points: P[] },
+  x: number
+) => (
+  <CanvasRenderer
+    figure={{
+      kind: "transformation",
+      transformation: "symetrie_axiale",
+      grid: { rows: 8, cols: 8 },
+      source,
+      image,
+      axis: { type: "vertical", x, label: "(d)" },
+      display: { showDashedLinks: true },
+    }}
+  />
+);
+
+const duo = (gauche: React.ReactNode, gLabel: string, droite: React.ReactNode, dLabel: string) => (
+  <div className="grid grid-cols-2 items-end gap-2">
+    <div>
+      {gauche}
+      <p className="mt-1 text-center text-xs font-black text-slate-700">{gLabel}</p>
+    </div>
+    <div>
+      {droite}
+      <p className="mt-1 text-center text-xs font-black text-slate-700">{dLabel}</p>
+    </div>
+  </div>
 );
 
 const figTriangle = transfo(
@@ -79,22 +113,56 @@ export const ficheSymetrieCentrale5e: FicheCoursData = {
     schema: figTriangle,
     legende: "La figure F et son image F' par la symétrie centrale de centre O (demi-tour autour de O).",
   },
+  // Un dessin sous chaque propriété (REGLES.md § 2 bis), et quatre dessins qui
+  // ne montrent pas la même chose : l'alignement A-O-A', une figure entière qui
+  // se conserve, deux droites parallèles, et — pour la dernière — le miroir
+  // qu'on met À CÔTÉ du demi-tour, parce qu'une propriété qui dit « ce n'est
+  // pas ça » a besoin du « ça ».
   proprietes: [
     {
       titre: "Le centre",
       texte: "O est le milieu de [AA'] : A, O et A' sont alignés et OA = OA'.",
+      schema: transfo(
+        { label: "A", points: [{ x: 2, y: 2 }] },
+        { label: "A'", points: [{ x: 6, y: 6 }] },
+        { point: { x: 4, y: 4 }, label: "O" }
+      ),
     },
     {
       titre: "Conserve tout",
       texte: "Les longueurs, les angles et les aires sont conservés (figure identique, retournée).",
+      schema: transfo(
+        { label: "ABCD", points: [{ x: 1, y: 2 }, { x: 3, y: 2 }, { x: 3, y: 3 }, { x: 1, y: 4 }] },
+        { label: "A'B'C'D'", points: [{ x: 7, y: 6 }, { x: 5, y: 6 }, { x: 5, y: 5 }, { x: 7, y: 4 }] },
+        { point: { x: 4, y: 4 }, label: "O" }
+      ),
     },
     {
       titre: "Droites parallèles",
       texte: "L'image d'une droite est une droite parallèle à la première.",
+      schema: transfo(
+        { label: "(d)", points: [{ x: 1, y: 5 }, { x: 3, y: 6 }] },
+        { label: "(d')", points: [{ x: 7, y: 3 }, { x: 5, y: 2 }] },
+        { point: { x: 4, y: 4 }, label: "O" }
+      ),
     },
     {
       titre: "≠ symétrie axiale",
       texte: "Pas de miroir ni d'axe : un centre et un demi-tour (la figure est retournée, pas réfléchie).",
+      schema: duo(
+        axiale(
+          { label: "F", points: [{ x: 1, y: 2 }, { x: 3, y: 2 }, { x: 1, y: 5 }] },
+          { label: "F'", points: [{ x: 7, y: 2 }, { x: 5, y: 2 }, { x: 7, y: 5 }] },
+          4
+        ),
+        "axiale : un miroir",
+        transfo(
+          { label: "F", points: [{ x: 1, y: 2 }, { x: 3, y: 2 }, { x: 1, y: 5 }] },
+          { label: "F'", points: [{ x: 7, y: 6 }, { x: 5, y: 6 }, { x: 7, y: 3 }] },
+          { point: { x: 4, y: 4 }, label: "O" }
+        ),
+        "centrale : un demi-tour"
+      ),
     },
   ],
   reel: {
@@ -105,15 +173,61 @@ export const ficheSymetrieCentrale5e: FicheCoursData = {
     texte:
       "La symétrie centrale est un cas particulier de rotation (180°). L'étude des transformations qui « conservent » les figures a donné naissance, au XIXᵉ siècle, à une branche entière des maths : la théorie des groupes.",
   },
+  // Les trois gestes de la construction, dans l'ordre : le point seul avec son
+  // centre, puis l'image reportée, puis la figure entière.
   methode: [
-    { titre: "Je relie au centre", texte: "Je trace la demi-droite qui part du point A et passe par le centre O." },
-    { titre: "Je reporte la distance", texte: "De l'autre côté de O, je place A' tel que OA' = OA (au compas)." },
-    { titre: "Je recommence", texte: "Pour chaque sommet de la figure, puis je relie les images." },
+    {
+      titre: "Je relie au centre",
+      texte: "Je trace la demi-droite qui part du point A et passe par le centre O.",
+      schema: transfo({ label: "A", points: [{ x: 2, y: 3 }] }, null, { point: { x: 4, y: 4 }, label: "O" }),
+    },
+    {
+      titre: "Je reporte la distance",
+      texte: "De l'autre côté de O, je place A' tel que OA' = OA (au compas).",
+      schema: transfo(
+        { label: "A", points: [{ x: 2, y: 3 }] },
+        { label: "A'", points: [{ x: 6, y: 5 }] },
+        { point: { x: 4, y: 4 }, label: "O" }
+      ),
+    },
+    {
+      titre: "Je recommence",
+      texte: "Pour chaque sommet de la figure, puis je relie les images.",
+      schema: transfo(
+        { label: "F", points: [{ x: 1, y: 3 }, { x: 3, y: 2 }, { x: 2, y: 5 }] },
+        { label: "F'", points: [{ x: 7, y: 5 }, { x: 5, y: 6 }, { x: 6, y: 3 }] },
+        { point: { x: 4, y: 4 }, label: "O" }
+      ),
+    },
   ],
   usages: [
-    { titre: "Image d'un point", detail: "A' est le symétrique de A : O est le milieu de [AA']." },
-    { titre: "Image d'une figure", detail: "On construit l'image de chaque sommet, puis on relie." },
-    { titre: "Reconnaître", detail: "On vérifie que O est le milieu entre chaque point et son image." },
+    {
+      titre: "Image d'un point",
+      detail: "A' est le symétrique de A : O est le milieu de [AA'].",
+      schema: transfo(
+        { label: "M", points: [{ x: 3, y: 1 }] },
+        { label: "M'", points: [{ x: 5, y: 7 }] },
+        { point: { x: 4, y: 4 }, label: "O" }
+      ),
+    },
+    {
+      titre: "Image d'une figure",
+      detail: "On construit l'image de chaque sommet, puis on relie.",
+      schema: transfo(
+        { label: "F", points: [{ x: 1, y: 1 }, { x: 3, y: 1 }, { x: 3, y: 3 }] },
+        { label: "F'", points: [{ x: 7, y: 7 }, { x: 5, y: 7 }, { x: 5, y: 5 }] },
+        { point: { x: 4, y: 4 }, label: "O" }
+      ),
+    },
+    {
+      titre: "Reconnaître",
+      detail: "On vérifie que O est le milieu entre chaque point et son image.",
+      schema: transfo(
+        { label: "B", points: [{ x: 2, y: 6 }] },
+        { label: "B'", points: [{ x: 6, y: 2 }] },
+        { point: { x: 4, y: 4 }, label: "O" }
+      ),
+    },
   ],
   exemples: [
     {
@@ -136,6 +250,13 @@ export const ficheSymetrieCentrale5e: FicheCoursData = {
       titre: "Une propriété",
       donnees: "Un segment de 5 cm et son image.",
       question: "Combien mesure l'image ?",
+      // Le seul exemple qui n'avait pas de figure : un segment et son image,
+      // même longueur, de l'autre côté de O.
+      schema: transfo(
+        { label: "[MN] : 5 cm", points: [{ x: 1, y: 6 }, { x: 3, y: 3 }] },
+        { label: "[M'N'] : ?", points: [{ x: 7, y: 2 }, { x: 5, y: 5 }] },
+        { point: { x: 4, y: 4 }, label: "O" }
+      ),
       solution:
         "La symétrie centrale conserve les longueurs : l'image mesure aussi 5 cm.",
     },
