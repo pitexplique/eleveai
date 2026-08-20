@@ -264,6 +264,55 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — du FRANÇAIS vers le symbole. Le premier item traduit
+    // $P(X \leqslant a)$ en phrase ; celui-ci fait le chemin inverse, qui est
+    // celui du sujet de bac : l'énoncé dit « au moins », « plus de », « au
+    // plus », et l'élève doit choisir le bon symbole. C'est là que se perd la
+    // moitié des points.
+    // ⚠️ Sans figure : la loi n'apporte rien ici, on ne calcule pas.
+    kind: "template",
+    id: "stmg_va_ecritures_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_loi_probabilite",
+    microId: "va_ecritures",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« Au moins $a$ » laisse $a$ dedans ; « plus de $a$ » le laisse dehors.",
+    tags: ["stmg", "maths", "probabilites", "template"],
+    generate: () => {
+      const a = pick([3, 5, 8, 10, 12, 20] as const);
+      const cas = pick([
+        { phrase: `gagner au moins $${a}$ €`, ecriture: `$P(X \\geqslant ${a})$` },
+        { phrase: `gagner plus de $${a}$ €`, ecriture: `$P(X > ${a})$` },
+        { phrase: `gagner au plus $${a}$ €`, ecriture: `$P(X \\leqslant ${a})$` },
+        { phrase: `gagner exactement $${a}$ €`, ecriture: `$P(X = ${a})$` },
+      ] as const);
+      return {
+        text:
+          `$X$ désigne le gain, en euros, d'un client à un jeu promotionnel. ` +
+          `Quelle écriture traduit « ${cas.phrase} » ?`,
+        format: "qcm",
+        choices: shuffle([
+          `$P(X \\geqslant ${a})$`,
+          `$P(X > ${a})$`,
+          `$P(X \\leqslant ${a})$`,
+          `$P(X = ${a})$`,
+        ]),
+        expected: [cas.ecriture],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Les quatre écritures ne disent pas la même chose : $\\{X = a\\}$ ne retient qu'une valeur, $\\{X \\leqslant a\\}$ et $\\{X \\geqslant a\\}$ incluent $a$, tandis que $\\{X > a\\}$ l'exclut.",
+          "On repère deux choses dans la phrase : le SENS — au-dessus ou en dessous — et si la valeur elle-même est comprise.",
+          `« ${cas.phrase} » se traduit par ${cas.ecriture}. ` +
+            `Attention : « au moins $${a}$ » garde $${a}$, alors que « plus de $${a}$ » commence au-dessus.`,
+          `L'écriture correcte est ${cas.ecriture}.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ va_calculer_probabilites ═══════════════ */
 
   {
@@ -297,6 +346,50 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           "On repère les colonnes concernées, puis on additionne leurs probabilités.",
           `$${probas.slice(0, i + 1).map((p) => fr(p)).join(" + ")} = ${fr(Math.round(cumul * 100) / 100)}$.`,
           `$P(X \\leqslant ${valeurs[i]}) = ${fr(Math.round(cumul * 100) / 100)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — l'évènement CONTRAIRE. Le premier item additionne des colonnes
+    // pour $P(X \leqslant a)$ ; celui-ci demande $P(X > a)$, qu'on obtient en
+    // une soustraction au lieu de trois additions. Reconnaître le contraire est
+    // le réflexe qui fait gagner du temps — et qui sert ensuite pour
+    // « au moins un » en binomiale.
+    kind: "template",
+    id: "stmg_va_calculer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_loi_probabilite",
+    microId: "va_calculer_probabilites",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$\\{X > a\\}$ est le contraire de $\\{X \\leqslant a\\}$ : leurs probabilités s'additionnent pour faire $1$.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "template", "short"],
+    generate: () => {
+      const valeurs = shuffle([0, 1, 2, 5, 10, 20]).slice(0, 4).sort((x, y) => x - y);
+      const brut = valeurs.map(() => randomInt(1, 8));
+      const somme = brut.reduce((s, v) => s + v, 0);
+      const probas = brut.map((v) => Math.round((v / somme) * 100) / 100);
+      probas[probas.length - 1] = Math.round((1 - probas.slice(0, -1).reduce((s, v) => s + v, 0)) * 100) / 100;
+      // On s'arrête avant la dernière valeur : sinon $P(X > a)$ vaudrait $0$.
+      const i = randomInt(0, valeurs.length - 2);
+      const cumul = probas.slice(0, i + 1).reduce((s, v) => s + v, 0);
+      const reste = Math.round((1 - cumul) * 100) / 100;
+      return {
+        text: `D'après la loi de probabilité, calcule $P(X > ${valeurs[i]})$.`,
+        format: "short",
+        expected: [fr(reste)],
+        comparator: "number_equal",
+        canvas: canvasLoi(valeurs, probas, "Loi de probabilité de X"),
+        explanation: exp(
+          "Deux évènements contraires ont des probabilités de somme $1$ : $P(X > a) = 1 - P(X \\leqslant a)$.",
+          "On peut additionner les colonnes situées au-dessus de $a$, ou — plus court — additionner celles du dessous et retrancher le total à $1$.",
+          `$P(X \\leqslant ${valeurs[i]}) = ${probas.slice(0, i + 1).map((p) => fr(p)).join(" + ")} = ${fr(Math.round(cumul * 100) / 100)}$, ` +
+            `donc $P(X > ${valeurs[i]}) = 1 - ${fr(Math.round(cumul * 100) / 100)} = ${fr(reste)}$. ` +
+            `Vérification par les colonnes du dessus : $${probas.slice(i + 1).map((p) => fr(p)).join(" + ")} = ${fr(reste)}$.`,
+          `$P(X > ${valeurs[i]}) = ${fr(reste)}$.`
         ),
       };
     },
@@ -340,6 +433,51 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           "On divise l'effectif de la valeur par l'effectif total.",
           `$\\dfrac{${effectifs[i]}}{${total}} \\approx ${fr(Math.round(p * 100) / 100)}$.`,
           `$P(X = ${valeurs[i]}) \\approx ${fr(Math.round(p * 100) / 100)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la loi DRESSÉE depuis une composition, pas depuis des
+    // fréquences observées. Le premier item divise un effectif par un total ;
+    // ici il faut d'abord voir combien d'issues donnent la même valeur — deux
+    // boules différentes peuvent porter le même gain. C'est le dénombrement qui
+    // précède la loi.
+    // ⚠️ Sans figure : le tableau à construire EST la réponse ; l'afficher
+    // reviendrait à la donner.
+    kind: "template",
+    id: "stmg_va_dresser_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_loi_probabilite",
+    microId: "va_dresser_loi",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regroupe d'abord toutes les boules qui portent le même gain, puis divise par le total.",
+    tags: ["stmg", "maths", "probabilites", "template", "short"],
+    generate: () => {
+      const gain = pick([2, 5, 10] as const);
+      const nbGain = randomInt(2, 5);
+      const nbAutre = randomInt(3, 8);
+      const nbRien = randomInt(5, 12);
+      const total = nbGain + nbAutre + nbRien;
+      const p = nbGain / total;
+      return {
+        text:
+          `Une urne contient $${total}$ jetons : $${nbGain}$ portent la mention « $${gain}$ € », ` +
+          `$${nbAutre}$ portent « $${gain * 2}$ € » et les $${nbRien}$ autres ne rapportent rien. ` +
+          `On tire un jeton au hasard et l'on note $X$ le gain obtenu. ` +
+          `Que vaut $P(X = ${gain})$ ? (arrondi au centième)`,
+        format: "short",
+        expected: [fr(Math.round(p * 100) / 100)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Dresser une loi de probabilité, c'est associer à chaque valeur possible la probabilité de l'obtenir : en situation d'équiprobabilité, c'est le nombre d'issues favorables divisé par le nombre total d'issues.",
+          "On repère combien de jetons donnent EXACTEMENT la valeur demandée, puis on divise par l'effectif total.",
+          `$${nbGain}$ jetons sur $${total}$ portent « $${gain}$ € », donc $P(X = ${gain}) = \\dfrac{${nbGain}}{${total}} \\approx ${fr(Math.round(p * 100) / 100)}$. ` +
+            `La loi complète comporte trois valeurs : $0$, $${gain}$ et $${gain * 2}$.`,
+          `$P(X = ${gain}) \\approx ${fr(Math.round(p * 100) / 100)}$.`
         ),
       };
     },
@@ -396,6 +534,70 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — JUGER un tableau, au lieu de le compléter. Le premier item
+    // trouve la case manquante ; celui-ci demande si le tableau proposé est une
+    // loi de probabilité — et la moitié du temps il ne l'est pas. La règle
+    // « somme égale à $1$ » ne sert que si l'on pense à la vérifier.
+    kind: "template",
+    id: "stmg_va_somme_un_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_loi_probabilite",
+    microId: "va_somme_un",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Additionne toutes les probabilités : le total doit faire exactement $1$.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "template"],
+    generate: () => {
+      const valeurs = [0, 1, 2, 3];
+      const p0 = Math.round(randomInt(15, 35) / 100 * 100) / 100;
+      const p1 = Math.round(randomInt(15, 30) / 100 * 100) / 100;
+      const p2 = Math.round(randomInt(10, 25) / 100 * 100) / 100;
+      const correcte = Math.random() < 0.5;
+      const p3 = correcte
+        ? Math.round((1 - p0 - p1 - p2) * 100) / 100
+        : Math.round((1 - p0 - p1 - p2) * 100) / 100 + pick([0.05, 0.1, -0.05, -0.1] as const);
+      const probas = [p0, p1, p2, Math.round(p3 * 100) / 100];
+      const total = Math.round(probas.reduce((s, v) => s + v, 0) * 100) / 100;
+      // ⛔ Quand le tableau est correct, le total VAUT $1$ : la proposition
+      // « non : la somme vaut … » s'écrirait alors « la somme vaut 1, et non
+      // 1 ». On lui donne un total faux, plausible.
+      const totalAffiche = correcte ? Math.round((total + pick([0.05, 0.1, -0.05] as const)) * 100) / 100 : total;
+      const bonne = correcte
+        ? "oui : la somme des probabilités vaut bien $1$"
+        : `non : la somme vaut $${fr(total)}$, et non $1$`;
+      return {
+        text: "Le tableau ci-dessous est-il une loi de probabilité ?",
+        format: "qcm",
+        choices: shuffle([
+          "oui : la somme des probabilités vaut bien $1$",
+          `non : la somme vaut $${fr(totalAffiche)}$, et non $1$`,
+          "non : une loi de probabilité doit avoir des probabilités toutes égales",
+          "on ne peut pas le dire sans connaître la situation",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasLoi(valeurs, probas, "Tableau proposé"),
+        explanation: exp(
+          "Les valeurs d'une variable aléatoire couvrent toutes les issues possibles : leurs probabilités forment donc une somme égale à $1$, ni plus ni moins.",
+          "On additionne toutes les cases de la ligne, et l'on compare le total à $1$.",
+          `$${probas.map((p) => fr(p)).join(" + ")} = ${fr(total)}$. ` +
+            (correcte
+              ? `Le total fait exactement $1$ : c'est bien une loi de probabilité.`
+              : `Le total ne fait pas $1$ : ce tableau ne peut pas décrire une loi de probabilité.`),
+          bonne
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "non : une loi de probabilité doit avoir des probabilités toutes égales",
+            cause: "confond loi de probabilité et équiprobabilité : les valeurs peuvent très bien avoir des chances différentes",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ va_esp_calculer ═══════════════════ */
 
   {
@@ -428,6 +630,44 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           "On multiplie chaque valeur par sa probabilité, puis on additionne les produits.",
           `$${valeurs.map((v, k) => `${v} \\times ${fr(probas[k])}`).join(" + ")} = ${fr(Math.round(esp * 100) / 100)}$.`,
           `$E(X) \\approx ${fr(Math.round(esp * 100) / 100)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — FIXER la mise, au lieu de calculer l'espérance. Le premier item
+    // additionne des produits ; celui-ci part de l'espérance voulue — zéro — et
+    // cherche le nombre qui l'y amène. C'est le calcul de l'organisateur du
+    // jeu, ou de l'assureur : combien faut-il faire payer pour ne rien perdre ?
+    // ⚠️ Sans figure : la loi du gain net dépend justement de la mise cherchée.
+    kind: "template",
+    id: "stmg_va_esp_calculer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_esperance",
+    microId: "va_esp_calculer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Calcule d'abord ce que le jeu rapporte en moyenne AVANT la mise, puis fais payer exactement cela.",
+    tags: ["stmg", "maths", "probabilites", "gestion", "template", "short"],
+    generate: () => {
+      const gain = pick([20, 30, 40, 50, 60, 100] as const);
+      const p = pick([0.05, 0.1, 0.2, 0.25, 0.4, 0.5] as const);
+      const mise = Math.round(gain * p * 100) / 100;
+      return {
+        text:
+          `Un organisateur propose un jeu : le joueur gagne $${gain}$ € avec la probabilité $${fr(p)}$, et rien sinon. ` +
+          `Quelle mise doit-il demander pour que le jeu soit équitable, c'est-à-dire d'espérance nulle ?`,
+        format: "short",
+        expected: [fr(mise)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un jeu est équitable quand l'espérance du gain ALGÉBRIQUE — gain reçu moins mise payée — est nulle. La mise équitable est donc exactement l'espérance du gain brut.",
+          "On calcule l'espérance du gain avant déduction de la mise, puis on l'égale à la mise.",
+          `Espérance du gain brut : $${gain} \\times ${fr(p)} = ${fr(mise)}$ €. ` +
+            `Avec une mise $m$, l'espérance nette vaut $${fr(mise)} - m$, qui s'annule pour $m = ${fr(mise)}$ €.`,
+          `La mise équitable est de $${fr(mise)}$ € — au-dessus, l'organisateur gagne en moyenne ; en dessous, il perd.`
         ),
       };
     },
@@ -474,6 +714,65 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la même interprétation, SÉCURISÉE par un QCM. Le premier item
+    // est ouvert et validé par mots-clés : « en moyenne » suffit à passer, et
+    // une bonne phrase sans ce mot échoue. Ici les quatre lectures possibles
+    // sont posées côte à côte, dont les deux fausses les plus répandues —
+    // « c'est ce qu'on obtiendra » et « c'est la valeur la plus probable ».
+    kind: "template",
+    id: "stmg_va_esp_interpreter_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_esperance",
+    microId: "va_esp_interpreter",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "L'espérance est une moyenne SUR UN GRAND NOMBRE de répétitions — elle n'annonce rien pour la prochaine.",
+    tags: ["stmg", "maths", "probabilites", "template"],
+    generate: () => {
+      const esp = pick([1.4, 2.3, 3.75, 4.2, 5.6, 7.1, 8.45] as const);
+      const contexte = pick([
+        { quoi: "le gain d'un client à un jeu promotionnel", unite: "euros" },
+        { quoi: "le nombre de réclamations reçues par jour", unite: "réclamations" },
+        { quoi: "le nombre de colis en retard par tournée", unite: "colis" },
+        { quoi: "le nombre de pièces non conformes par lot", unite: "pièces" },
+      ] as const);
+      const bonne = `sur un grand nombre d'observations, la moyenne se rapproche de $${fr(esp)}$ ${contexte.unite}`;
+      return {
+        text:
+          `On note $X$ ${contexte.quoi}, et l'on a calculé $E(X) = ${fr(esp)}$. ` +
+          `Laquelle de ces lectures est correcte ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `la prochaine observation vaudra $${fr(esp)}$ ${contexte.unite}`,
+          `$${fr(esp)}$ est la valeur la plus probable`,
+          `la moitié des observations dépassent $${fr(esp)}$ ${contexte.unite}`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'espérance est la valeur MOYENNE obtenue sur un grand nombre de répétitions. Ce n'est ni une prévision pour la prochaine observation, ni la valeur la plus probable, ni une médiane.",
+          "On se demande ce que l'on pourrait vérifier : seule la moyenne à long terme est vérifiable.",
+          `$E(X) = ${fr(esp)}$ n'est même pas forcément une valeur possible — on ne reçoit jamais $${fr(esp)}$ ${contexte.unite} sur une observation isolée. ` +
+            `Mais si l'on observe des milliers de fois, la moyenne s'en approche.`,
+          bonne
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$${fr(esp)}$ est la valeur la plus probable`,
+            cause: "confond l'espérance avec le mode : l'espérance peut n'être atteinte par aucune issue",
+          },
+          {
+            choice: `la moitié des observations dépassent $${fr(esp)}$ ${contexte.unite}`,
+            cause: "c'est la définition de la médiane, pas celle de l'espérance",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ va_esp_jeu_equitable ═══════════════════ */
 
   {
@@ -512,6 +811,59 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           {
             choice: "on ne peut pas le savoir",
             cause: "l'espérance suffit à trancher : c'est même sa raison d'être ici",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — DIAGNOSTIQUER « équitable = une chance sur deux ». Le premier
+    // item fait rendre un verdict ; celui-ci met en scène la confusion qui le
+    // précède : l'équité d'un jeu ne se lit pas sur les CHANCES de gagner, mais
+    // sur l'espérance du gain. Un jeu où l'on gagne une fois sur deux peut être
+    // très défavorable, et l'inverse aussi.
+    kind: "template",
+    id: "stmg_va_esp_equitable_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_esperance",
+    microId: "va_esp_jeu_equitable",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Calcule l'espérance du gain net : une chance sur deux ne dit rien tant qu'on ne connaît pas les montants.",
+    tags: ["stmg", "maths", "probabilites", "diagnostic", "template"],
+    generate: () => {
+      const mise = pick([5, 8, 10, 20] as const);
+      // Gain différent du double de la mise : avec $2m$, le jeu serait
+      // réellement équitable et l'élève aurait raison par accident.
+      const gain = pick([6, 12, 15, 25, 30, 40].filter((g) => g !== 2 * mise));
+      const esp = gain * 0.5 - mise;
+      const bonne = `il se trompe : l'espérance vaut $${fr(Math.round(esp * 100) / 100)}$ €, le jeu est ${esp > 0 ? "favorable au joueur" : "défavorable au joueur"}`;
+      return {
+        text:
+          `Un jeu coûte $${mise}$ € la partie. Une fois sur deux, le joueur reçoit $${gain}$ € ; sinon il ne reçoit rien. ` +
+          `Un élève conclut : « le jeu est équitable, puisqu'on gagne une fois sur deux ». Qu'en penses-tu ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          "il a raison : une chance sur deux de gagner suffit à rendre un jeu équitable",
+          "il se trompe : un jeu n'est jamais équitable dès qu'il y a une mise",
+          "on ne peut pas conclure sans connaître le nombre de parties jouées",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un jeu est équitable lorsque l'espérance du gain ALGÉBRIQUE est nulle. La probabilité de gagner n'y suffit pas : tout dépend aussi des MONTANTS en jeu.",
+          "On dresse la loi du gain net — mise déduite dans les deux cas — puis on calcule son espérance.",
+          `$E(X) = (${gain} - ${mise}) \\times 0{,}5 + (-${mise}) \\times 0{,}5 = ${fr(Math.round(esp * 100) / 100)}$ €. ` +
+            `Le jeu serait équitable si le gain valait $2 \\times ${mise} = ${2 * mise}$ €.`,
+          bonne
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "il a raison : une chance sur deux de gagner suffit à rendre un jeu équitable",
+            cause: "regarde les chances au lieu des montants : l'équité se juge sur l'espérance",
           },
         ],
       };
@@ -569,6 +921,74 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — le CERTAIN contre l'ALÉATOIRE. Le premier item compare deux
+    // options risquées ; celui-ci oppose un gain sûr à une espérance. La règle
+    // ne change pas — on compare les espérances, celle d'un montant certain
+    // étant ce montant —, mais l'élève doit voir qu'un gain garanti se compare
+    // à une moyenne.
+    kind: "template",
+    id: "stmg_va_esp_decision_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_esperance",
+    microId: "va_esp_decision",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "L'espérance d'un montant certain est ce montant lui-même : on peut donc les comparer.",
+    tags: ["stmg", "maths", "probabilites", "gestion", "canvas", "template"],
+    generate: () => {
+      const gain = pick([400, 500, 600, 800, 1000] as const);
+      const p = pick([0.2, 0.25, 0.3, 0.4, 0.5] as const);
+      const esperance = Math.round(gain * p * 100) / 100;
+      // Le contrat certain est écarté de l'espérance d'au moins 10 % : sans
+      // cela, le choix se jouerait sur des centimes et deviendrait arbitraire.
+      const certain = Math.round(esperance * pick([0.7, 0.8, 1.2, 1.4] as const));
+      const bonne =
+        certain > esperance
+          ? `le contrat garanti, dont l'espérance est plus grande`
+          : `le contrat aléatoire, dont l'espérance est plus grande`;
+      return {
+        text:
+          `Un commercial hésite entre deux contrats. ` +
+          `Le premier lui rapporte $${certain}$ € à coup sûr. ` +
+          `Le second lui rapporte $${gain}$ € si le client signe — ce qui arrive avec la probabilité $${fr(p)}$ — et rien sinon. ` +
+          `Lequel est le plus rentable en moyenne ?`,
+        format: "qcm",
+        choices: shuffle([
+          "le contrat garanti, dont l'espérance est plus grande",
+          "le contrat aléatoire, dont l'espérance est plus grande",
+          "le contrat aléatoire, parce que son gain possible est plus élevé",
+          "on ne peut pas comparer un gain certain et un gain aléatoire",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: {
+          kind: "tableau_donnees",
+          title: "Les deux contrats",
+          headers: ["", "Gain possible (€)", "Probabilité", "Espérance (€)"],
+          rows: [
+            { label: "Garanti", values: [String(certain), "1", String(certain)] },
+            { label: "Aléatoire", values: [String(gain), fr(p), fr(esperance)] },
+          ],
+        } satisfies CanvasFigure,
+        explanation: exp(
+          "Comparer deux options, c'est comparer leurs espérances. Un montant CERTAIN est un cas particulier : sa probabilité vaut $1$, donc son espérance est ce montant lui-même.",
+          "On calcule l'espérance du contrat aléatoire, puis on la compare directement au montant garanti.",
+          `Contrat aléatoire : $${gain} \\times ${fr(p)} = ${fr(esperance)}$ €. Contrat garanti : $${certain}$ €. ` +
+            `Le gain POSSIBLE du second est pourtant bien plus élevé — ce n'est pas ce qui décide.`,
+          `C'est ${bonne.split(",")[0]} qui rapporte le plus en moyenne.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "le contrat aléatoire, parce que son gain possible est plus élevé",
+            cause: "compare les gains maximaux au lieu des espérances",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ va_bern_reconnaitre ═══════════════════ */
 
   {
@@ -615,6 +1035,48 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — TRIER quatre situations. Le premier item répond par oui ou par
+    // non : une pièce lancée en l'air réussit la moitié du temps. Ici trois
+    // situations comptent, mesurent ou classent, et une seule ne connaît que
+    // deux issues.
+    kind: "template",
+    id: "stmg_va_bern_reconnaitre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_bernoulli",
+    microId: "va_bern_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche celle où la variable ne peut prendre QUE deux valeurs : $1$ ou $0$.",
+    tags: ["stmg", "maths", "probabilites", "template"],
+    generate: () => {
+      const ep = pick(EPREUVES);
+      const p = pick(PROBAS);
+      const n = randomInt(10, 40);
+      const bonne = `on observe ${ep.sujet} et l'on note $X = 1$ ${siSucces(ep)}, $X = 0$ sinon`;
+      return {
+        text: `Laquelle de ces quatre situations relève d'une loi de Bernoulli ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `on observe $${n}$ ${ep.nom} et l'on note $X$ le nombre ${/^[aeiouy]/.test(ep.nom) ? "d'" : "de "}${ep.nom} ${ep.qualite}`,
+          `on observe ${ep.sujet} et l'on note $X$ sa masse en grammes`,
+          `on observe ${ep.sujet} et l'on note $X$ le nombre de jours écoulés depuis sa production`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une loi de Bernoulli modélise une expérience à DEUX issues seulement, succès et échec, codées $1$ et $0$. Son unique paramètre est la probabilité de succès.",
+          "On compte les valeurs possibles de chaque variable : deux, et deux seulement.",
+          `La première situation ne connaît que deux issues (probabilité $${fr(p)}$ de succès). ` +
+            `Les trois autres décrivent un comptage, une masse ou une durée : leur variable prend de nombreuses valeurs.`,
+          `La situation de Bernoulli est celle où l'on note $X = 1$ ${siSucces(ep)} et $X = 0$ sinon.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ va_bern_esperance ═══════════════════ */
 
   {
@@ -645,6 +1107,57 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           `$E(X) = 0 \\times ${fr(Math.round((1 - p) * 100) / 100)} + 1 \\times ${fr(p)} = ${fr(p)}$.`,
           `$E(X) = ${fr(p)}$.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — DIAGNOSTIQUER « deux issues, donc une chance sur deux ». Le
+    // premier item fait appliquer $E(X) = p$ ; celui-ci met en scène l'erreur
+    // qui vient d'ailleurs : croire que deux issues signifient des chances
+    // égales. Elle survit longtemps parce que le premier exemple rencontré est
+    // toujours une pièce de monnaie.
+    kind: "template",
+    id: "stmg_va_bern_esperance_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_bernoulli",
+    microId: "va_bern_esperance",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Deux issues ne veulent pas dire deux chances égales : l'espérance vaut $p$, pas $0{,}5$.",
+    tags: ["stmg", "maths", "probabilites", "diagnostic", "template"],
+    generate: () => {
+      // ⛔ $p \neq 0,5$ : sinon l'élève aurait raison par accident.
+      const p = pick([0.1, 0.2, 0.25, 0.3, 0.4, 0.6, 0.7, 0.75, 0.8, 0.9] as const);
+      const ep = pick(EPREUVES);
+      const bonne = `il se trompe : $E(X) = p = ${fr(p)}$`;
+      return {
+        text:
+          `$X$ suit une loi de Bernoulli : $X = 1$ ${siSucces(ep)}, avec la probabilité $${fr(p)}$, et $X = 0$ sinon. ` +
+          `Un élève affirme que $E(X) = 0{,}5$, « puisqu'il n'y a que deux issues ». Qu'en penses-tu ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          "il a raison : avec deux issues, la moyenne est toujours au milieu",
+          `il se trompe : $E(X) = ${fr(Math.round((1 - p) * 100) / 100)}$, la probabilité d'échec`,
+          "il se trompe : une loi de Bernoulli n'a pas d'espérance",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour une loi de Bernoulli de paramètre $p$, l'espérance vaut exactement $p$. Deux issues ne signifient pas deux chances égales : c'est le cas particulier de la pièce équilibrée.",
+          "On applique la définition de l'espérance à une variable qui ne prend que les valeurs $0$ et $1$.",
+          `$E(X) = 0 \\times ${fr(Math.round((1 - p) * 100) / 100)} + 1 \\times ${fr(p)} = ${fr(p)}$. ` +
+            `La valeur $0{,}5$ ne sortirait que si $p$ valait $0{,}5$.`,
+          bonne
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "il a raison : avec deux issues, la moyenne est toujours au milieu",
+            cause: "confond « deux issues » et « deux issues équiprobables »",
+          },
+        ],
       };
     },
   },
@@ -683,6 +1196,45 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           "On associe le succès à l'intervalle $[0\\,;\\,p[$, dont la longueur vaut exactement $p$.",
           `La probabilité que $r$ tombe dans $[0\\,;\\,${fr(p)}[$ vaut $${fr(p)}$ : c'est bien le paramètre voulu.`,
           `Le succès correspond à la condition $r < ${fr(p)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — $N$ et $n$, les deux nombres qu'on confond. Le premier item
+    // règle la condition de succès d'UN tirage ; celui-ci demande combien de
+    // tirages la simulation entière demande. Le libellé du programme dit
+    // « simuler $N$ échantillons de taille $n$ » : ce sont deux compteurs
+    // emboîtés, et l'élève qui n'en voit qu'un ne sait pas lire l'algorithme.
+    kind: "template",
+    id: "stmg_va_bern_simuler_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_bernoulli",
+    microId: "va_bern_simuler",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Chaque échantillon demande $n$ tirages, et il y a $N$ échantillons.",
+    tags: ["stmg", "maths", "probabilites", "algorithmique", "template", "short"],
+    generate: () => {
+      const N = pick([100, 200, 500, 1000] as const);
+      const n = pick([10, 20, 25, 50] as const);
+      const p = pick(PROBAS);
+      return {
+        text:
+          `On veut simuler $${N}$ échantillons de taille $${n}$ d'une loi de Bernoulli de paramètre $${fr(p)}$. ` +
+          `Combien de nombres aléatoires l'algorithme doit-il tirer au total ?`,
+        format: "short",
+        expected: [String(N * n)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Simuler $N$ échantillons de taille $n$, c'est répéter $N$ fois une expérience qui demande elle-même $n$ tirages : les deux boucles s'emboîtent.",
+          "On multiplie le nombre d'échantillons par la taille de chacun.",
+          `$${N} \\times ${n} = ${N * n}$ tirages. ` +
+            `Chaque échantillon donne UNE fréquence observée : on obtient donc $${N}$ fréquences, ` +
+            `et c'est leur dispersion qui montre la fluctuation d'échantillonnage.`,
+          `L'algorithme tire $${N * n}$ nombres aléatoires, et produit $${N}$ fréquences.`
         ),
       };
     },
@@ -727,6 +1279,65 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           `$${eff[1]} + ${eff[2]} = ${centre}$ échantillons sur $${total}$, soit environ $${fr(Math.round((centre / total) * 1000) / 10)}\\,\\%$.`,
           `$${centre}$ échantillons sont à moins de $0{,}1$ de $${fr(p)}$.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — LIRE la forme, pas un effectif. Le premier item fait additionner
+    // deux barres ; celui-ci demande ce que l'histogramme MONTRE : les
+    // fréquences se massent autour de $p$ sans s'y confondre. C'est la seule
+    // chose que le programme demande de voir sur ces simulations.
+    kind: "template",
+    id: "stmg_va_bern_representer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_bernoulli",
+    microId: "va_bern_representer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde où sont les barres les plus hautes, et ce qu'il reste sur les côtés.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "template"],
+    generate: () => {
+      const p = pick([0.2, 0.3, 0.4, 0.5, 0.6, 0.7] as const);
+      const tranches = ["< p − 0,1", "p − 0,1 à p", "p à p + 0,1", "> p + 0,1"];
+      const eff = [randomInt(15, 50), randomInt(140, 230), randomInt(140, 230), randomInt(15, 50)];
+      const total = eff.reduce((s, v) => s + v, 0);
+      const bonne = `la plupart des fréquences observées sont proches de $${fr(p)}$, mais très peu valent exactement $${fr(p)}$`;
+      return {
+        text:
+          `On a simulé $${total}$ échantillons d'une loi de Bernoulli de paramètre $${fr(p)}$ ` +
+          `et représenté les fréquences observées. Que montre cet histogramme ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `toutes les fréquences observées valent $${fr(p)}$`,
+          `les fréquences observées sont réparties au hasard, sans zone privilégiée`,
+          `la proportion réelle de la population n'est pas $${fr(p)}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: {
+          kind: "stat_graph",
+          graphType: "barres",
+          title: `Fréquences observées sur ${total} échantillons (p = ${fr(p)})`,
+          data: tranches.map((label, k) => ({ label, value: eff[k] })),
+          display: { showValues: true, showLabels: true },
+        } satisfies CanvasFigure,
+        explanation: exp(
+          "Représenter les fréquences observées permet de VOIR la fluctuation d'échantillonnage : elles se concentrent autour de la proportion du modèle, sans lui être égales.",
+          "On compare la hauteur des deux tranches centrales à celle des deux tranches extrêmes.",
+          `Les tranches encadrant $${fr(p)}$ rassemblent $${eff[1] + eff[2]}$ échantillons sur $${total}$, ` +
+            `soit environ $${fr(Math.round(((eff[1] + eff[2]) / total) * 1000) / 10)}\\,\\%$. ` +
+            `Il en reste tout de même $${eff[0] + eff[3]}$ à plus de $0{,}1$ de $${fr(p)}$ : l'écart n'est jamais nul.`,
+          bonne
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `toutes les fréquences observées valent $${fr(p)}$`,
+            cause: "attend du hasard une régularité parfaite : c'est exactement ce que l'histogramme dément",
+          },
+        ],
       };
     },
   },
@@ -789,6 +1400,53 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — l'effet de la TAILLE sur la fluctuation. Le premier item
+    // constate l'écart entre deux échantillons ; celui-ci demande lequel de
+    // deux dispositifs fluctue le moins. C'est le seul levier dont dispose un
+    // sondeur, et il se lit sur la même figure : plus l'échantillon est grand,
+    // plus les fréquences se resserrent.
+    kind: "template",
+    id: "stmg_va_ech_fluctuation_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_echantillonnage",
+    microId: "va_ech_fluctuation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Sur un très petit échantillon, une seule observation change beaucoup la fréquence.",
+    tags: ["stmg", "maths", "probabilites", "template"],
+    generate: () => {
+      const p = pick([0.2, 0.3, 0.4, 0.5, 0.6] as const);
+      const petit = pick([20, 25, 40, 50] as const);
+      const grand = petit * pick([10, 20, 25] as const);
+      const bonne = `celui de taille $${grand}$ : plus l'échantillon est grand, moins les fréquences fluctuent`;
+      return {
+        text:
+          `On prélève des échantillons dans une population où la proportion vaut $${fr(p)}$, ` +
+          `les uns de taille $${petit}$, les autres de taille $${grand}$. ` +
+          `Pour lesquels les fréquences observées seront-elles les plus PROCHES de $${fr(p)}$ ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `celui de taille $${petit}$ : moins d'observations, donc moins d'écarts possibles`,
+          `les deux fluctuent autant : la taille ne change rien`,
+          `on ne peut pas le prévoir : le hasard ne suit aucune règle`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La fluctuation d'échantillonnage diminue quand la taille augmente : l'écart-type des fréquences observées est de l'ordre de $\\dfrac{1}{\\sqrt{n}}$.",
+          "On compare les deux tailles : c'est la plus grande qui resserre les fréquences autour de la proportion du modèle.",
+          `Pour $n = ${petit}$ : $\\dfrac{1}{\\sqrt{${petit}}} \\approx ${fr(Math.round((1 / Math.sqrt(petit)) * 1000) / 1000)}$. ` +
+            `Pour $n = ${grand}$ : $\\dfrac{1}{\\sqrt{${grand}}} \\approx ${fr(Math.round((1 / Math.sqrt(grand)) * 1000) / 1000)}$. ` +
+            `Sur un échantillon de $${petit}$, une seule observation de plus fait bouger la fréquence de $${fr(Math.round((100 / petit) * 10) / 10)}$ points.`,
+          `Ce sont les échantillons de taille $${grand}$ qui donnent les fréquences les plus proches de $${fr(p)}$ — sans jamais l'atteindre exactement.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ va_ech_distance ═══════════════════ */
 
   {
@@ -820,6 +1478,60 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           `$\\sqrt{${n}} = ${fr(Math.sqrt(n))}$, donc $\\dfrac{1}{\\sqrt{${n}}} \\approx ${fr(Math.round(ordre * 1000) / 1000)}$.`,
           `L'écart-type est de l'ordre de $${fr(Math.round(ordre * 1000) / 1000)}$.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — l'INTERVALLE attendu, pas le seul écart-type. Le premier item
+    // calcule $\frac{1}{\sqrt{n}}$ ; celui-ci s'en sert pour dire où l'on
+    // attend les fréquences. C'est la forme sous laquelle la notion revient
+    // ensuite — un intervalle autour de $p$ —, et elle demande d'ajouter ET de
+    // retrancher.
+    kind: "template",
+    id: "stmg_va_ech_distance_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_echantillonnage",
+    microId: "va_ech_distance",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On part de $p$, et l'on s'écarte de $\\frac{1}{\\sqrt{n}}$ des deux côtés.",
+    tags: ["stmg", "maths", "probabilites", "template"],
+    generate: () => {
+      const p = pick([0.2, 0.3, 0.4, 0.5, 0.6] as const);
+      const n = pick([25, 100, 400, 625, 2500] as const);
+      const s = 1 / Math.sqrt(n);
+      const bas = Math.round((p - s) * 1000) / 1000;
+      const haut = Math.round((p + s) * 1000) / 1000;
+      const bonne = `$[${fr(bas)}\\,;\\,${fr(haut)}]$`;
+      return {
+        text:
+          `Dans un modèle de proportion $${fr(p)}$, on prélève des échantillons de taille $${n}$. ` +
+          `L'écart-type des fréquences observées est de l'ordre de $\\dfrac{1}{\\sqrt{${n}}}$. ` +
+          `Dans quel intervalle attend-on la plupart des fréquences observées, à un écart-type près ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `$[${fr(p)}\\,;\\,${fr(haut)}]$`,
+          `$[${fr(Math.round((p - 2 * s) * 1000) / 1000)}\\,;\\,${fr(Math.round((p + 2 * s) * 1000) / 1000)}]$`,
+          `$[0\\,;\\,${fr(p)}]$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La distance d'une fréquence observée à la proportion $p$ du modèle se mesure en écarts-types, dont l'ordre de grandeur est $\\dfrac{1}{\\sqrt{n}}$. À un écart-type près, on attend les fréquences dans $\\left[p - \\dfrac{1}{\\sqrt{n}}\\,;\\,p + \\dfrac{1}{\\sqrt{n}}\\right]$.",
+          "On calcule l'écart-type, puis on l'ajoute et on le retranche à $p$ — l'intervalle est SYMÉTRIQUE autour de $p$.",
+          `$\\dfrac{1}{\\sqrt{${n}}} = ${fr(Math.round(s * 1000) / 1000)}$, donc l'intervalle va de ` +
+            `$${fr(p)} - ${fr(Math.round(s * 1000) / 1000)} = ${fr(bas)}$ à $${fr(p)} + ${fr(Math.round(s * 1000) / 1000)} = ${fr(haut)}$.`,
+          `On attend la plupart des fréquences dans ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$[${fr(p)}\\,;\\,${fr(haut)}]$`,
+            cause: "n'a regardé qu'un côté : les fréquences fluctuent aussi EN DESSOUS de $p$",
+          },
+        ],
       };
     },
   },
