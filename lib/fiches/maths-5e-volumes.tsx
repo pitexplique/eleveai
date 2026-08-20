@@ -77,6 +77,59 @@ const cylindre = (aireBase: number, hauteur: number, labels: Record<string, stri
   />
 );
 
+// Un cube isole, pour la propriete des unites : c'est le cube de 1 dm de cote
+// qui vaut 1 L — le lien litre/volume ne se raconte pas, il se regarde.
+const cube = (coteLabel: string, volumeLabel: string) => (
+  // ⚠️ Le canvas dessine les COTES, pas le volume : le label `volume` n'est
+  // jamais rendu. L'egalite se pose donc sous la figure.
+  <div>
+    <CanvasRenderer
+      figure={{
+        kind: "solide_3d",
+        solide: "cube",
+        dimensions: { cote: 1 },
+        labels: { cote: coteLabel },
+        display: { showLabels: true, showDimensions: true },
+      }}
+    />
+    <p className="mt-1 text-center text-xs font-black text-slate-700">{volumeLabel}</p>
+  </div>
+);
+
+// Deux solides cote a cote : la propriete « prisme ET cylindre » dit que c'est
+// LA MEME idee sur deux formes. Un seul dessin le dirait a moitie.
+const duo = (gauche: React.ReactNode, gLabel: string, droite: React.ReactNode, dLabel: string) => (
+  <div className="grid grid-cols-2 items-end gap-2">
+    <div>
+      {gauche}
+      <p className="mt-1 text-center text-xs font-black text-slate-700">{gLabel}</p>
+    </div>
+    <div>
+      {droite}
+      <p className="mt-1 text-center text-xs font-black text-slate-700">{dLabel}</p>
+    </div>
+  </div>
+);
+
+// Un escalier de cubes : pour COMPTER, il faut une forme qui ne se calcule pas
+// d'un coup de L x l x h.
+const escalier = (
+  <CanvasRenderer
+    figure={{
+      kind: "solide_3d",
+      solide: "assemblage_cubes",
+      cubes: [
+        { x: 0, y: 0, z: 0 }, { x: 1, y: 0, z: 0 }, { x: 2, y: 0, z: 0 },
+        { x: 0, y: 1, z: 0 }, { x: 1, y: 1, z: 0 }, { x: 2, y: 1, z: 0 },
+        { x: 0, y: 0, z: 1 }, { x: 1, y: 0, z: 1 },
+        { x: 0, y: 1, z: 1 }, { x: 1, y: 1, z: 1 },
+        { x: 0, y: 0, z: 2 }, { x: 0, y: 1, z: 2 },
+      ],
+      display: { showLabels: true },
+    }}
+  />
+);
+
 const pieges = [
   "Confondre cm² (une aire, plate) et cm³ (un volume, en 3 dimensions).",
   "Additionner les dimensions d'un pavé : on les MULTIPLIE (5 × 4 × 3, pas 5 + 4 + 3).",
@@ -110,22 +163,35 @@ export const ficheVolumes5e: FicheCoursData = {
     schema: assemblage(4, 3, 2),
     legende: "Un pavé de 4 × 3 × 2 : il contient 24 cubes-unité, donc son volume est 24 cm³.",
   },
+  // Un dessin sous chaque propriete (REGLES.md § 2 bis), et quatre dessins qui
+  // ne se ressemblent pas : les trois dimensions d'un pave, DEUX solides cote a
+  // cote pour la meme idee, le cube de 1 dm qui vaut 1 L, et un escalier qu'on
+  // ne peut compter qu'a la main.
   proprietes: [
     {
       titre: "Le pavé droit",
       texte: "Volume = Longueur × largeur × hauteur (on multiplie les 3 dimensions).",
+      schema: pave(5, 4, 3, { longueur: "5 cm", largeur: "4 cm", hauteur: "3 cm" }),
     },
     {
       titre: "Prisme & cylindre",
       texte: "Volume = aire de base × hauteur (une base identique empilée sur une hauteur).",
+      schema: duo(
+        prisme(12, 5, { aireBase: "aire de base", hauteur: "hauteur" }),
+        "prisme",
+        cylindre(12, 5, { aireBase: "aire de base", hauteur: "hauteur" }),
+        "cylindre"
+      ),
     },
     {
       titre: "Les unités",
       texte: "1 L = 1 dm³ = 1000 cm³. Un volume est en cm³, m³ (jamais en cm²).",
+      schema: cube("1 dm", "1 dm³ = 1 L = 1000 cm³"),
     },
     {
       titre: "Compter les cubes",
       texte: "Sur un assemblage : nombre de cubes × volume d'un cube.",
+      schema: escalier,
     },
   ],
   reel: {
@@ -143,14 +209,38 @@ export const ficheVolumes5e: FicheCoursData = {
     schema: pave(6, 4, 3, { longueur: "6 cm", largeur: "4 cm", hauteur: "3 cm", aireBase: "24 cm²" }),
   },
   methode: [
-    { titre: "Je reconnais le solide", texte: "Pavé, prisme ou cylindre : chacun a sa formule." },
-    { titre: "Je calcule l'aire de base", texte: "Puis je la multiplie par la hauteur (sauf le pavé : L × l × h direct)." },
-    { titre: "Je convertis si besoin", texte: "En litres : 1 L = 1 dm³ = 1000 cm³." },
+    {
+      titre: "Je reconnais le solide",
+      texte: "Pavé, prisme ou cylindre : chacun a sa formule.",
+      schema: duo(pave(4, 3, 2, { longueur: "L", largeur: "l", hauteur: "h" }), "pavé", escalier, "assemblage"),
+    },
+    {
+      titre: "Je calcule l'aire de base",
+      texte: "Puis je la multiplie par la hauteur (sauf le pavé : L × l × h direct).",
+      schema: prisme(15, 4, { aireBase: "15 cm²", hauteur: "4 cm" }),
+    },
+    {
+      titre: "Je convertis si besoin",
+      texte: "En litres : 1 L = 1 dm³ = 1000 cm³.",
+      schema: cube("1 dm", "1 L"),
+    },
   ],
   usages: [
-    { titre: "Pavé droit", detail: "Longueur × largeur × hauteur." },
-    { titre: "Prisme droit", detail: "Aire de base × hauteur." },
-    { titre: "Cylindre", detail: "Aire de base (un disque) × hauteur." },
+    {
+      titre: "Pavé droit",
+      detail: "Longueur × largeur × hauteur.",
+      schema: pave(7, 3, 2, { longueur: "7 cm", largeur: "3 cm", hauteur: "2 cm" }),
+    },
+    {
+      titre: "Prisme droit",
+      detail: "Aire de base × hauteur.",
+      schema: prisme(20, 6, { aireBase: "20 cm²", hauteur: "6 cm" }),
+    },
+    {
+      titre: "Cylindre",
+      detail: "Aire de base (un disque) × hauteur.",
+      schema: cylindre(28, 5, { aireBase: "28 cm²", hauteur: "5 cm" }),
+    },
   ],
   exemples: [
     {
