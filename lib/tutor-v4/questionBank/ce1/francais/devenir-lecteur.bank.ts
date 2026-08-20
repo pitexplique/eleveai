@@ -434,6 +434,156 @@ const RESEAU: readonly Reseau[] = [
    « écrire à propos de ses lectures »
    ========================================================================== */
 
+/* =============================================================================
+   LES SECONDS ITEMS (20/08/2026)
+   ---------------------------------------------------------------------------
+   Cinq micros de cette notion portaient UN SEUL item : le coach en mode complet
+   ouvrait la ligne du voisin (ce1_lect_conte) au lieu de celle qu'on avait
+   cliquée. Chaque table ci-dessous sert un second item qui prend le chemin
+   INVERSE du premier, et rejoue un jeu de choix FIXE — à choix fixe, la
+   longueur ne peut pas trahir la bonne réponse.
+
+   ⛔ CE QUI A ÉTÉ ÉCARTÉ, ET POURQUOI. Pour la mise en réseau, le montage
+   naturel était : donner le lien et la première lecture, faire choisir la
+   seconde parmi les `b` des autres lignes. Vérifié à la main sur les douze
+   lignes de RESEAU : « on obtient par la ruse » et « la douceur obtient ce que
+   la force n'obtient pas » se recouvrent, comme « le plus petit résout » et
+   « quelque chose de minuscule devient grand ». Deux réponses défendables, et
+   aucun instrument pour le voir. D'où RESEAU_BIS, écrit exprès, où chaque
+   leurre ne partage qu'un DÉTAIL avec la lecture de départ.
+   ========================================================================== */
+
+/** 1 bis. Les outils du livre : le premier item demande le geste, celui-ci
+ *  demande à quoi sert l'outil. */
+const OUTILS: readonly { readonly outil: string; readonly sert: string }[] = [
+  { outil: "le marque-page", sert: "à retrouver la page où l'on s'est arrêté" },
+  { outil: "la table des matières", sert: "à savoir où commence chaque chapitre" },
+  { outil: "la quatrième de couverture", sert: "à savoir de quoi parle le livre avant de l'ouvrir" },
+  { outil: "la couverture", sert: "à lire le titre et le nom de l'auteur" },
+  { outil: "le titre du chapitre", sert: "à se rappeler ce qui se passait dans ce passage" },
+];
+
+const TOUS_SERTS: readonly string[] = OUTILS.map((o) => o.sert);
+
+/** 2 bis. Emprunter : le premier item demande le geste, celui-ci demande la
+ *  raison. Quatre raisons FIXES, qui s'excluent deux à deux. */
+type RaisonEmprunt = "essayer" | "ajouter" | "soi" | "fil";
+
+const RAISONS_EMPRUNT: Record<RaisonEmprunt, string> = {
+  essayer: "on ne sait pas si on aime avant d'essayer",
+  ajouter: "on garde ce qu'on aime, et on ajoute à côté",
+  soi: "chacun ses gouts : on juge par soi-même",
+  fil: "un livre aimé en amène toujours un autre",
+};
+
+const TOUTES_RAISONS: readonly string[] = Object.values(RAISONS_EMPRUNT);
+
+const GESTES_EMPRUNT: readonly { readonly geste: string; readonly raison: RaisonEmprunt }[] = [
+  { geste: "essayer une pièce de théâtre alors qu'on n'en a jamais lu", raison: "essayer" },
+  { geste: "prendre un documentaire quand on ne lit que des romans", raison: "essayer" },
+  { geste: "garder son genre préféré et en ajouter un nouveau à côté", raison: "ajouter" },
+  { geste: "reprendre un auteur qu'on a aimé, avec un autre de ses titres", raison: "fil" },
+  { geste: "chercher un livre sur le même sujet que celui qu'on a adoré", raison: "fil" },
+  { geste: "emprunter un livre qu'un camarade a trouvé nul", raison: "soi" },
+  { geste: "ne pas rendre un livre juste parce qu'un autre l'a critiqué", raison: "soi" },
+  { geste: "prendre deux livres : un sûr, et un qu'on ne connait pas", raison: "ajouter" },
+];
+
+/** 3 bis. Le réseau à l'envers : le lien est donné, on cherche la lecture qui
+ *  le rejoint. ⚠️ Chaque leurre ne partage qu'un DÉTAIL — un animal, un lieu,
+ *  un objet — jamais ce que l'histoire raconte. */
+const RESEAU_BIS: readonly { readonly lien: string; readonly bon: string; readonly faux: readonly string[] }[] = [
+  {
+    lien: "le plus petit réussit là où le plus grand échoue",
+    bon: "une fourmi déplace la miette que l'oiseau n'attrapait pas",
+    faux: [
+      "un oiseau raconte son voyage au-dessus de la mer",
+      "une souris visite le grenier d'une vieille maison",
+      "un lion dort tout l'après-midi sous un arbre",
+    ],
+  },
+  {
+    lien: "le mensonge finit par couter à celui qui ment",
+    bon: "un garçon invente une excuse, et on ne le croit plus le jour où c'est vrai",
+    faux: [
+      "un berger compte ses moutons au coucher du soleil",
+      "un loup traverse la forêt sans rencontrer personne",
+      "une fillette casse un vase et le recolle en cachette",
+    ],
+  },
+  {
+    lien: "on perd ce qu'on avait en voulant toujours plus",
+    bon: "une joueuse mise tous ses jetons pour en gagner plus, et repart sans rien",
+    faux: [
+      "un chien nage dans la rivière pour se rafraichir",
+      "un enfant fabrique un cerf-volant avec son grand-père",
+      "un pêcheur remonte son filet plein de poissons",
+    ],
+  },
+  {
+    lien: "un objet reçu en chemin sauve au pire moment",
+    bon: "une voyageuse garde l'allumette offerte au départ, et s'en sert dans le noir",
+    faux: [
+      "un héros reçoit un cadeau pour son anniversaire",
+      "une héroïne perd son collier dans la rivière",
+      "un marchand vend des noisettes sur le marché",
+    ],
+  },
+  {
+    lien: "on interdit une chose, et c'est justement elle qui arrive",
+    bon: "on défend à un enfant d'ouvrir la boite, et il l'ouvre le soir même",
+    faux: [
+      "une porte grince chaque fois qu'on la pousse",
+      "un enfant obéit à sa mère et range sa chambre",
+      "une héroïne compte les portes du long couloir",
+    ],
+  },
+  {
+    lien: "celui qui avance sans s'arrêter passe devant celui qui va vite",
+    bon: "une élève révise dix minutes chaque soir et dépasse celui qui attend la veille",
+    faux: [
+      "un lièvre traverse le champ en quelques bonds",
+      "une tortue se chauffe au soleil près de l'étang",
+      "un coureur gagne la course en partant très vite",
+    ],
+  },
+];
+
+/** 4 bis. Présenter : le premier item demande le geste, celui-ci montre une
+ *  présentation et demande ce qui ne va pas. Quatre défauts FIXES. */
+type DefautPresentation = "pourquoi" | "identite" | "fin" | "aucun";
+
+const DEFAUTS_PRESENTATION: Record<DefautPresentation, string> = {
+  pourquoi: "il ne dit pas pourquoi il a aimé",
+  identite: "il ne donne ni titre ni auteur",
+  fin: "il raconte la fin de l'histoire",
+  aucun: "rien, la présentation est bonne",
+};
+
+const TOUS_DEFAUTS: readonly string[] = Object.values(DEFAUTS_PRESENTATION);
+
+const PRESENTATIONS: readonly { readonly dite: string; readonly defaut: DefautPresentation }[] = [
+  { dite: "« Le Petit Poucet, de Charles Perrault. J'ai bien aimé. »", defaut: "pourquoi" },
+  { dite: "« J'ai adoré ce livre parce que le héros ne se décourage jamais. »", defaut: "identite" },
+  { dite: "« Le Vilain Petit Canard, d'Andersen. J'ai aimé la fin : il devient un cygne. »", defaut: "fin" },
+  { dite: "« Poil de Carotte, de Jules Renard. J'ai aimé parce qu'on comprend ce qu'il ressent. »", defaut: "aucun" },
+  { dite: "« C'était super, je le conseille à tout le monde. »", defaut: "identite" },
+  { dite: "« Les Trois Brigands, de Tomi Ungerer. J'ai bien aimé, c'est tout. »", defaut: "pourquoi" },
+  { dite: "« Le Chat botté, de Perrault. À la fin, le chat gagne le château pour son maitre. »", defaut: "fin" },
+  { dite: "« Yakouba, de Thierry Dedieu. J'ai aimé parce qu'il choisit le plus difficile. »", defaut: "aucun" },
+];
+
+/** 5 bis. Le défi à l'envers : la sorte de texte est donnée, on cherche ce
+ *  qu'elle porte toujours. */
+const SORTES: readonly { readonly sorte: string; readonly marque: string }[] = [
+  { sorte: "une fable", marque: "des personnages, souvent des animaux, et une leçon à la fin" },
+  { sorte: "un conte", marque: "une formule au début, des épreuves, et une fin heureuse" },
+  { sorte: "un documentaire", marque: "des informations vraies, sans personnage ni leçon" },
+  { sorte: "un poème", marque: "des vers, des sons qui se répondent, et des images" },
+];
+
+const TOUTES_MARQUES: readonly string[] = SORTES.map((s) => s.marque);
+
 const PRESENTER: readonly Situation[] = [
   {
     situation: "Tu présentes un livre à la classe. Par quoi commences-tu ?",
@@ -794,6 +944,158 @@ export const devenirLecteurBank: TutorBankItemV4[] = [
           "Trouve d'abord la sorte de texte, puis la leçon. Une réponse dont un seul des deux morceaux est faux reste fausse.",
           `Ici, c'est une fable — dix lignes, des personnages qui valent pour tout le monde, une leçon à la fin. Et sa morale : ${f.morale}.`,
           `${bon.charAt(0).toUpperCase()}${bon.slice(1)}.`,
+        ),
+      };
+    },
+  },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LES SECONDS ITEMS — un par micro, sans quoi la ligne cliquée ouvre celle
+     du voisin. Chacun prend le chemin INVERSE de son premier.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  {
+    kind: "template",
+    id: "ce1_lect_oeuvre_complete_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "ce1_lect_oeuvre_complete",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "L'outil est nommé. Cherche le travail qu'il fait.",
+    tags: ["ce1", "devenir-lecteur", "oeuvre-complete", "template"],
+    generate: () => {
+      const o = randomChoice(OUTILS);
+      return {
+        text: `Dans un livre, à quoi sert ${o.outil} ?`,
+        format: "qcm" as const,
+        choices: makeChoices(o.sert, TOUS_SERTS),
+        expected: [o.sert],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Un livre entier se lit en plusieurs fois. Il donne pour cela cinq outils, et chacun fait un travail précis.",
+          "Le premier exercice partait de la situation pour trouver le geste. Celui-ci part de l'outil : demande-toi ce qu'il te permet de retrouver.",
+          `${o.outil.charAt(0).toUpperCase()}${o.outil.slice(1)} sert ${o.sert}.`,
+          `Il sert ${o.sert}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_lect_emprunter_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "ce1_lect_emprunter",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le geste est donné. Cherche ce qu'il apporte au lecteur.",
+    tags: ["ce1", "devenir-lecteur", "emprunter", "template"],
+    generate: () => {
+      const g = randomChoice(GESTES_EMPRUNT);
+      const bon = RAISONS_EMPRUNT[g.raison];
+      return {
+        text: `À la bibliothèque, un lecteur décide de ${g.geste}.\n\nPourquoi est-ce une bonne idée ?`,
+        format: "qcm" as const,
+        choices: makeChoices(bon, TOUTES_RAISONS),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Choisir ses livres soi-même s'apprend. Quatre raisons guident ce choix : essayer ce qu'on ne connait pas, ajouter sans renoncer, juger par soi-même, et suivre le fil d'un livre aimé.",
+          "Le premier exercice demandait quoi faire. Celui-ci demande POURQUOI : c'est la raison qui se garde, pas le geste.",
+          `${g.geste.charAt(0).toUpperCase()}${g.geste.slice(1)} : ${bon}.`,
+          `Parce que ${bon}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_lect_reseau_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "ce1_lect_reseau",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Trois de ces lectures partagent seulement un détail. Une seule raconte la même chose.",
+    tags: ["ce1", "devenir-lecteur", "reseau", "template"],
+    generate: () => {
+      const r = randomChoice(RESEAU_BIS);
+      return {
+        text: `Un réseau de lectures est fait de livres dont on peut dire : « ${r.lien} »\n\nLaquelle de ces lectures rejoint ce réseau ?`,
+        format: "qcm" as const,
+        choices: makeChoices(r.bon, r.faux),
+        expected: [r.bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Un réseau relie des lectures par ce qu'elles RACONTENT, jamais par un détail commun. Un animal, un lieu ou un objet partagés ne suffisent pas.",
+          "Le premier exercice partait de deux lectures pour trouver le lien. Celui-ci part du lien : essaie-le sur chaque proposition, et garde celle où il est vrai jusqu'au bout.",
+          `Ici : ${r.bon}. Les trois autres ne partagent qu'un détail avec le réseau.`,
+          `C'est : ${r.bon}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_lect_presenter_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "ce1_lect_presenter",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une bonne présentation a trois morceaux : le titre, l'auteur, et pourquoi on a aimé — sans la fin.",
+    tags: ["ce1", "devenir-lecteur", "presenter", "template"],
+    generate: () => {
+      const p = randomChoice(PRESENTATIONS);
+      const bon = DEFAUTS_PRESENTATION[p.defaut];
+      return {
+        text: `Un élève présente un livre à la classe :\n\n${p.dite}\n\nQu'est-ce qui ne va pas ?`,
+        format: "qcm" as const,
+        choices: makeChoices(bon, TOUS_DEFAUTS),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une présentation donne le titre et l'auteur, dit ce qu'on a pensé ET pourquoi, et s'arrête avant la fin de l'histoire.",
+          "Le premier exercice demandait comment présenter. Celui-ci part d'une présentation déjà faite : vérifie les trois morceaux, puis regarde si la fin a été vendue.",
+          `${p.dite} → ${bon}.`,
+          `${bon.charAt(0).toUpperCase()}${bon.slice(1)}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_lect_defi_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "ce1_lect_defi",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La sorte de texte est donnée. Cherche ce qu'elle porte toujours.",
+    tags: ["ce1", "devenir-lecteur", "defi", "template"],
+    generate: () => {
+      const s = randomChoice(SORTES);
+      return {
+        text: `Tu ouvres ${s.sorte}.\n\nQu'y trouves-tu à coup sûr ?`,
+        format: "qcm" as const,
+        choices: makeChoices(s.marque, TOUTES_MARQUES),
+        expected: [s.marque],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Chaque sorte de texte porte ses pièces : la fable ses animaux et sa leçon, le conte sa formule et ses épreuves, le documentaire ses informations vraies, le poème ses vers et ses images.",
+          "Le premier défi partait du texte et demandait sa sorte ET sa leçon. Celui-ci donne la sorte : il ne reste qu'à dire ce qu'elle contient toujours.",
+          `Dans ${s.sorte}, on trouve ${s.marque}.`,
+          `On y trouve ${s.marque}.`,
         ),
       };
     },

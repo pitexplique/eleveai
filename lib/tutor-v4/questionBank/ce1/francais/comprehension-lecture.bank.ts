@@ -1091,4 +1091,179 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
     ),
     tags: ["ce1", "comprehension", "defi", "piege", "qcm"],
   },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LES SECONDS ITEMS (20/08/2026)
+     ---------------------------------------------------------------------
+     Cinq micros portaient UN SEUL item : la ligne cliquée ouvrait celle du
+     voisin (ce1_comp_question, ce1_comp_anaphore, ce1_comp_defi). Chacun de
+     ces seconds items prend le chemin INVERSE de son premier, et se sert des
+     champs que la table TEXTES porte déjà — aucun contenu n'a été inventé.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  {
+    kind: "template",
+    id: "ce1_comp_personnages_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "comprehension_lecture",
+    microId: "ce1_comp_personnages",
+    difficulty: 2,
+    theme: "reunion",
+    hint: "La question n'est pas QUI, mais COMMENT on le sait.",
+    tags: ["ce1", "comprehension", "personnages", "template"],
+    generate: () => {
+      const t = randomChoice(TEXTES);
+      const bon = "parce qu'on en parle du début à la fin";
+      return {
+        text: avecTexte(
+          t,
+          `Le personnage principal de ce texte est ${t.personnage}.\n\nComment le sait-on ?`,
+        ),
+        format: "qcm" as const,
+        choices: shuffle([
+          bon,
+          "parce que son nom est écrit en premier",
+          "parce que son nom est le plus court",
+          "parce qu'il est le seul à avoir un nom",
+        ]),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Le personnage principal n'est pas celui qui arrive le premier ni celui qui a le nom le plus joli : c'est celui dont il est question tout au long du texte.",
+          "Le premier exercice demandait QUI. Celui-ci demande COMMENT on le sait : suis le nom et ses reprises (« il », « elle », « son ») de la première à la dernière phrase.",
+          `Ici, ${t.personnage} est présent du début à la fin — c'est ce qui en fait le personnage principal.`,
+          `${bon.charAt(0).toUpperCase()}${bon.slice(1)}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_comp_justifier_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "comprehension_lecture",
+    microId: "ce1_comp_justifier",
+    difficulty: 3,
+    theme: "reunion",
+    hint: "La preuve est donnée. Cherche la question à laquelle elle répond.",
+    tags: ["ce1", "comprehension", "justifier", "template"],
+    generate: () => {
+      const t = randomChoice(TEXTES);
+      const autres = shuffle(TEXTES.filter((x) => x.titre !== t.titre))
+        .slice(0, 3)
+        .map((x) => x.justification.question);
+      return {
+        text: avecTexte(
+          t,
+          `Dans le texte, on lit : « ${t.justification.preuve} »\n\nÀ quelle question cette phrase répond-elle ?`,
+        ),
+        format: "qcm" as const,
+        choices: makeChoices(t.justification.question, autres),
+        expected: [t.justification.question],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une phrase du texte ne prouve pas n'importe quoi : elle répond à UNE question précise. Savoir laquelle, c'est savoir justifier.",
+          "Le premier exercice partait de la question pour trouver la preuve. Celui-ci fait l'inverse : lis la phrase, et demande-toi ce qu'elle t'apprend exactement.",
+          `« ${t.justification.preuve} » répond à : ${t.justification.question}`,
+          `Elle répond à : ${t.justification.question}`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_comp_mot_inconnu_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "comprehension_lecture",
+    microId: "ce1_comp_mot_inconnu",
+    difficulty: 3,
+    theme: "reunion",
+    hint: "Le sens est donné. Retrouve le mot du texte qui le porte.",
+    tags: ["ce1", "comprehension", "mot-inconnu", "template"],
+    generate: () => {
+      const t = randomChoice(TEXTES);
+      const autres = shuffle(TEXTES.filter((x) => x.titre !== t.titre))
+        .slice(0, 3)
+        .map((x) => x.motInconnu.mot);
+      return {
+        text: avecTexte(t, `Quel mot de ce texte veut dire « ${t.motInconnu.sens} » ?`),
+        format: "qcm" as const,
+        choices: makeChoices(t.motInconnu.mot, autres),
+        expected: [t.motInconnu.mot],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Comprendre un mot rare, c'est le relier à ce qu'il désigne — et savoir le retrouver dans le texte quand on en a besoin.",
+          "Le premier exercice partait du mot pour trouver son sens. Celui-ci fait l'inverse : le sens est donné, cherche dans le texte le mot qui lui correspond. Un seul des quatre y figure.",
+          `Dans ce texte, « ${t.motInconnu.mot} » veut dire ${t.motInconnu.sens}. Les trois autres mots ne sont pas dans le texte.`,
+          `C'est « ${t.motInconnu.mot} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_comp_titre_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "comprehension_lecture",
+    microId: "ce1_comp_titre",
+    difficulty: 3,
+    theme: "reunion",
+    hint: "Un titre annonce. Devine ce que le texte va raconter.",
+    tags: ["ce1", "comprehension", "titre", "template"],
+    generate: () => {
+      const t = randomChoice(TEXTES);
+      const autres = shuffle(TEXTES.filter((x) => x.titre !== t.titre))
+        .slice(0, 3)
+        .map((x) => x.resume);
+      return {
+        text: `Dans un livre, tu trouves un texte intitulé « ${t.titre} ».\n\nDe quoi va-t-il parler ?`,
+        format: "qcm" as const,
+        choices: makeChoices(t.resume, autres),
+        expected: [t.resume],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Un titre annonce le texte en entier. Il sert avant la lecture : il dit ce qu'on va trouver.",
+          "Le premier exercice partait du texte pour choisir le titre. Celui-ci fait l'inverse : pars du titre, et demande-toi ce qu'il promet.",
+          `« ${t.titre} » annonce : ${t.resume}`,
+          `Il va parler de cela : ${t.resume}`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_comp_resumer_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "comprehension_lecture",
+    microId: "ce1_comp_resumer",
+    difficulty: 3,
+    theme: "reunion",
+    hint: "Le résumé est donné. Cherche le titre qui va avec.",
+    tags: ["ce1", "comprehension", "resumer", "template"],
+    generate: () => {
+      const t = randomChoice(TEXTES);
+      return {
+        text: `Voici le résumé d'un texte :\n\n« ${t.resume} »\n\nQuel titre lui convient ?`,
+        format: "qcm" as const,
+        choices: makeChoices(t.titre, t.titresFaux),
+        expected: [t.titre],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Un résumé et un titre disent la même chose, l'un en une phrase, l'autre en quelques mots. Passer de l'un à l'autre, c'est tenir l'essentiel.",
+          "Le premier exercice partait du texte pour choisir le résumé. Celui-ci part du résumé : cherche le titre qui couvre tout ce qu'il dit, sans rien ajouter.",
+          `« ${t.resume} » → « ${t.titre} »`,
+          `Le titre est « ${t.titre} ».`,
+        ),
+      };
+    },
+  },
 ];
