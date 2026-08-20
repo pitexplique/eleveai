@@ -604,15 +604,26 @@ export default function Header() {
                 place existe encore.
                 ⚠️ `alt=""` : le nom du site est déjà écrit à deux centimètres.
                 Le faire annoncer une seconde fois par un lecteur d'écran
-                n'ajoute rien — c'est une image d'accompagnement. */}
-            <Image
-              src="/cahier-vacances/ti-margo.png"
-              alt=""
-              width={1122}
-              height={1402}
-              sizes="36px"
-              className="hidden h-11 w-auto shrink-0 lg:block"
-            />
+                n'ajoute rien — c'est une image d'accompagnement.
+                ⛔ MAIS PAS SUR L'ACCUEIL (`!paper`, 20/08 — Frédéric : « il y a
+                deux margouillats »). L'accueil a le sien, en grand, au-dessus du
+                titre (app/accueil/AccueilIA.tsx) : celui du header tombait à
+                quelques centimètres, et deux fois la même figure sur un écran,
+                ce n'est plus une mascotte, c'est un défaut d'impression.
+                Même raison et même condition que le 🏠 juste en dessous : ce
+                que la page dit déjà, le haut de page ne le répète pas. Ti Margo
+                garde son rôle — suivre l'élève PARTOUT AILLEURS, là où l'accueil
+                ne l'accompagne plus. */}
+            {!paper && (
+              <Image
+                src="/cahier-vacances/ti-margo.png"
+                alt=""
+                width={1122}
+                height={1402}
+                sizes="36px"
+                className="hidden h-11 w-auto shrink-0 lg:block"
+              />
+            )}
           </Link>
 
           {/* ── LA PORTE DE RETOUR ────────────────────────────────────────
