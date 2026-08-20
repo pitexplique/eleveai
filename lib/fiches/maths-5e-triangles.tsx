@@ -26,6 +26,7 @@ const tri = (
     equalSides?: [Side, Side][];
     rightAngleAt?: Pt;
     showAngles?: boolean;
+    sideLabels?: Partial<Record<Side, string>>;
   } = {}
 ) => (
   <CanvasRenderer
@@ -41,6 +42,7 @@ const tri = (
       },
       labels: opts.labels,
       angleLabels: opts.angleLabels,
+      sideLabels: opts.sideLabels,
       marks: {
         rightAngleAt: opts.rightAngleAt,
         equalSides: opts.equalSides,
@@ -52,6 +54,21 @@ const tri = (
 const P_ABC: Pts = { A: { x: 40, y: 180 }, B: { x: 245, y: 180 }, C: { x: 150, y: 40 } };
 const P_ISO: Pts = { A: { x: 40, y: 180 }, B: { x: 150, y: 40 }, C: { x: 260, y: 180 } };
 const P_RECT: Pts = { A: { x: 45, y: 180 }, B: { x: 45, y: 55 }, C: { x: 245, y: 180 } };
+// Un vrai equilateral : base de 200, hauteur 200 x racine(3)/2 ≈ 173.
+const P_EQUI: Pts = { A: { x: 45, y: 190 }, B: { x: 245, y: 190 }, C: { x: 145, y: 17 } };
+
+// L'inegalite triangulaire parle de LONGUEURS qui se comparent : c'est le
+// schema en barres, pas un triangle de plus (lib/canvas/CATALOGUE.md). Les
+// parts sont a la mesure de leur valeur depuis le 20/08.
+const barre = (
+  total: string,
+  parts: { label: string; value: string }[],
+  questionLabel: string
+) => (
+  <CanvasRenderer
+    figure={{ kind: "schema_barre", total, parts, questionLabel, size: { width: 320, height: 175 } }}
+  />
+);
 
 const pieges = [
   "Croire qu'un triangle avec deux angles droits existe : 90° + 90° = 180°, il ne resterait rien pour le 3ᵉ angle.",
@@ -86,22 +103,40 @@ export const ficheTriangles5e: FicheCoursData = {
     schema: tri(P_ABC, { labels: { A: "A", B: "B", C: "C" } }),
     legende: "Le triangle ABC : 3 sommets (A, B, C), 3 côtés (AB, BC, CA).",
   },
+  // Un dessin sous CHAQUE propriete (REGLES.md § 2 bis), et quatre dessins qui
+  // montrent quatre choses : le codage de deux cotes egaux, les trois cotes et
+  // les 60°, le petit carre de l'angle droit, et — pour l'inegalite — des
+  // LONGUEURS qui se comparent, donc une barre, pas un triangle de plus.
   proprietes: [
     {
       titre: "Isocèle",
       texte: "Deux côtés de même longueur (codés par la même marque).",
+      schema: tri(P_ISO, { labels: { A: "A", B: "B", C: "C" }, equalSides: [["AB", "BC"]] }),
     },
     {
       titre: "Équilatéral",
       texte: "Trois côtés de même longueur (et trois angles de 60°).",
+      schema: tri(P_EQUI, {
+        showAngles: true,
+        angleLabels: { A: "60°", B: "60°", C: "60°" },
+      }),
     },
     {
       titre: "Rectangle",
       texte: "Un angle droit (90°), repéré par un petit carré au sommet.",
+      schema: tri(P_RECT, { labels: { A: "A", B: "B", C: "C" }, rightAngleAt: "A" }),
     },
     {
       titre: "L'inégalité triangulaire",
       texte: "Le plus grand côté doit être plus petit que la somme des deux autres.",
+      schema: barre(
+        "le plus grand côté : 8 cm",
+        [
+          { label: "2 + 3", value: "5" },
+          { label: "il manque 3", value: "3" },
+        ],
+        "2 + 3 = 5, plus court que 8 : le triangle ne se ferme pas."
+      ),
     },
   ],
   reel: {
@@ -119,14 +154,60 @@ export const ficheTriangles5e: FicheCoursData = {
     schema: tri(P_ABC, { showAngles: true, angleLabels: { A: "50°", B: "60°", C: "?" } }),
   },
   methode: [
-    { titre: "Je vérifie l'inégalité", texte: "Le plus grand côté doit être < somme des deux autres." },
-    { titre: "Je construis au compas", texte: "Je trace un côté, puis je reporte les deux autres longueurs au compas." },
-    { titre: "Je calcule un angle", texte: "180° − (les deux angles connus) = l'angle manquant." },
+    {
+      titre: "Je vérifie l'inégalité",
+      texte: "Le plus grand côté doit être < somme des deux autres.",
+      schema: barre(
+        "le plus grand côté : 7 cm",
+        [
+          { label: "4", value: "4" },
+          { label: "5", value: "5" },
+        ],
+        "4 + 5 = 9, plus long que 7 : le triangle se ferme."
+      ),
+    },
+    {
+      titre: "Je construis au compas",
+      texte: "Je trace un côté, puis je reporte les deux autres longueurs au compas.",
+      schema: tri(P_ABC, { sideLabels: { AB: "7 cm", BC: "5 cm", CA: "4 cm" } }),
+    },
+    {
+      titre: "Je calcule un angle",
+      texte: "180° − (les deux angles connus) = l'angle manquant.",
+      schema: tri(P_ABC, { showAngles: true, angleLabels: { A: "35°", B: "85°", C: "?" } }),
+    },
   ],
   usages: [
-    { titre: "Classer", detail: "Selon les côtés (isocèle, équilatéral) ou un angle droit (rectangle)." },
-    { titre: "Construire", detail: "Avec 3 longueurs : règle + compas, après avoir vérifié l'inégalité." },
-    { titre: "Calculer", detail: "Un angle manquant grâce à la somme = 180°." },
+    {
+      titre: "Classer",
+      detail: "Selon les côtés (isocèle, équilatéral) ou un angle droit (rectangle).",
+      // Classer, c'est COMPARER : les trois familles côte à côte, pas un
+      // triangle isolé.
+      schema: (
+        <div className="grid grid-cols-3 items-end gap-2">
+          {[
+            { pts: P_ISO, nom: "isocèle", opts: { equalSides: [["AB", "BC"]] as [Side, Side][] } },
+            { pts: P_EQUI, nom: "équilatéral", opts: { showAngles: true, angleLabels: { A: "60°", B: "60°", C: "60°" } } },
+            { pts: P_RECT, nom: "rectangle", opts: { rightAngleAt: "A" as Pt } },
+          ].map((t) => (
+            <div key={t.nom}>
+              {tri(t.pts, t.opts)}
+              <p className="mt-1 text-center text-xs font-black text-slate-700">{t.nom}</p>
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      titre: "Construire",
+      detail: "Avec 3 longueurs : règle + compas, après avoir vérifié l'inégalité.",
+      schema: tri(P_ISO, { sideLabels: { AB: "6 cm", BC: "6 cm", CA: "4 cm" } }),
+    },
+    {
+      titre: "Calculer",
+      detail: "Un angle manquant grâce à la somme = 180°.",
+      schema: tri(P_ABC, { showAngles: true, angleLabels: { A: "40°", B: "70°", C: "?" } }),
+    },
   ],
   exemples: [
     {
@@ -149,6 +230,15 @@ export const ficheTriangles5e: FicheCoursData = {
       titre: "Peut-on le construire ?",
       donnees: "Trois longueurs : 2 cm, 3 cm et 8 cm.",
       question: "Ce triangle est-il constructible ?",
+      schema: barre(
+        "le plus grand côté : 8 cm",
+        [
+          { label: "2", value: "2" },
+          { label: "3", value: "3" },
+          { label: "il manque", value: "3" },
+        ],
+        "2 + 3 = 5 : les deux petits côtés n'atteignent pas 8."
+      ),
       solution:
         "On compare le plus grand côté (8) à la somme des deux autres : 2 + 3 = 5. Comme 5 < 8, non : ce triangle est impossible. (Avec 4, 5 et 7 : 4 + 5 = 9 > 7 → oui.)",
     },
