@@ -72,6 +72,43 @@ const MARCHANDISES = [
   { nom: "un sac de café vert", unite: "kg" },
 ] as const;
 
+/** Fractions de référence : celles qu'un élève doit situer sans calculer. */
+const FRACTIONS_REPERES = [
+  { n: 1, d: 2 },
+  { n: 1, d: 3 },
+  { n: 3, d: 5 },
+  { n: 2, d: 3 },
+  { n: 3, d: 4 },
+] as const;
+
+/** Réservoir de comparaison : toutes ces fractions ont des valeurs DEUX À DEUX
+ *  distinctes, sinon deux propositions désigneraient le même nombre et l'élève
+ *  aurait raison en étant compté faux. */
+const FRACTIONS_A_SITUER = [
+  { n: 1, d: 5 },
+  { n: 1, d: 4 },
+  { n: 2, d: 7 },
+  { n: 1, d: 3 },
+  { n: 3, d: 8 },
+  { n: 2, d: 5 },
+  { n: 3, d: 7 },
+  { n: 4, d: 9 },
+  { n: 1, d: 2 },
+  { n: 5, d: 9 },
+  { n: 4, d: 7 },
+  { n: 3, d: 5 },
+  { n: 5, d: 8 },
+  { n: 2, d: 3 },
+  { n: 7, d: 10 },
+  { n: 5, d: 7 },
+  { n: 3, d: 4 },
+  { n: 7, d: 9 },
+  { n: 4, d: 5 },
+  { n: 5, d: 6 },
+  { n: 7, d: 8 },
+  { n: 9, d: 10 },
+] as const;
+
 export const automatismesCalculBank: TutorBankItemV4[] = [
   /* ═══════════════ auto_num_fractions_operations ═══════════════ */
 
@@ -214,6 +251,53 @@ export const automatismesCalculBank: TutorBankItemV4[] = [
             cause: "n'a pas pensé à réduire au même dénominateur",
           },
         ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — TRIER quatre fractions autour d'un repère, au lieu d'en
+    // comparer deux. Le premier item met deux fractions face à face ; celui-ci
+    // demande de SITUER, ce qui est le geste réel de l'automatisme : savoir si
+    // une part dépasse la moitié sans poser de division.
+    // ⚠️ Aucune figure : une bande graduée donnerait la réponse à l'œil et
+    // remplacerait la comparaison par une lecture.
+    kind: "template",
+    id: "stmg_num_fractions_comparer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_fractions_puissances",
+    microId: "auto_num_fractions_comparer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compare chaque fraction au repère, une par une : le numérateur vaut-il plus ou moins que la part attendue ?",
+    tags: ["stmg", "maths", "calcul", "fractions", "template"],
+    generate: () => {
+      const repere = pick(FRACTIONS_REPERES);
+      const vRepere = repere.n / repere.d;
+      // La marge de 0,05 écarte les fractions trop proches du repère : sans
+      // elle, l'item demanderait un calcul écrit, plus un automatisme.
+      const dessous = FRACTIONS_A_SITUER.filter((f) => vRepere - f.n / f.d >= 0.05);
+      const dessus = FRACTIONS_A_SITUER.filter((f) => f.n / f.d - vRepere >= 0.05);
+      const petite = pick(dessous);
+      const quatre = shuffle([petite, ...shuffle(dessus).slice(0, 3)]);
+      const ecrire = (f: { n: number; d: number }) => `$\\dfrac{${f.n}}{${f.d}}$`;
+      const decimal = (f: { n: number; d: number }) => fr(Math.round((f.n / f.d) * 1000) / 1000);
+      return {
+        text:
+          `Parmi ces quatre fractions, une seule est INFÉRIEURE à $\\dfrac{${repere.n}}{${repere.d}}$. ` +
+          `Laquelle ?`,
+        format: "qcm",
+        choices: quatre.map(ecrire),
+        expected: [ecrire(petite)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          `Situer une fraction par rapport à un repère, c'est comparer deux quotients : $\\dfrac{${repere.n}}{${repere.d}} = ${decimal(repere)}$.`,
+          "On calcule mentalement chaque quotient, ou on ramène chaque fraction au même dénominateur que le repère.",
+          quatre.map((f) => `${ecrire(f)} $= ${decimal(f)}$`).join(" · ") +
+            `. Une seule est plus petite que $${decimal(repere)}$.`,
+          `La fraction inférieure à $\\dfrac{${repere.n}}{${repere.d}}$ est ${ecrire(petite)}.`
+        ),
       };
     },
   },
@@ -492,6 +576,72 @@ export const automatismesCalculBank: TutorBankItemV4[] = [
           {
             choice: `environ $${ordre * 10}$ €`,
             cause: "s'est trompé d'un rang dans le nombre de zéros",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — le geste À L'ENVERS. Le premier item estime un produit ; ici
+    // le produit est donné et c'est un FACTEUR qu'on cherche : l'ordre de
+    // grandeur passe par une division. C'est le calcul que fait un gestionnaire
+    // qui lit un chiffre d'affaires et veut savoir combien d'articles il
+    // représente.
+    // ⚠️ Aucune figure : il n'y a rien à voir, seulement deux nombres à
+    // arrondir de tête.
+    kind: "template",
+    id: "stmg_num_ordre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_ordres_unites",
+    microId: "auto_num_ordre_grandeur",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Arrondis les deux nombres, puis divise : le nombre d'articles n'est pas un produit.",
+    tags: ["stmg", "maths", "calcul", "ordre-de-grandeur", "template"],
+    generate: () => {
+      const prixRond = pick([20, 40, 50, 80] as const);
+      const qteRonde = pick([200, 300, 400, 500, 800] as const);
+      // Les nombres affichés sont les VRAIS nombres de la situation : le
+      // chiffre d'affaires est le produit exact, pas une valeur inventée à
+      // côté du résultat attendu. L'écart au prix rond reste petit devant le
+      // prix lui-même, sinon l'arrondi ne serait plus celui-là.
+      const prixAffiche = prixRond + (prixRond <= 20 ? pick([-1, 1] as const) : pick([-3, -2, 2, 3] as const));
+      const qteReelle = qteRonde + pick([-7, -3, 4, 9] as const);
+      const chiffreAffaires = prixAffiche * qteReelle;
+      return {
+        text:
+          `Le chiffre d'affaires du mois s'élève à $${chiffreAffaires}$ €. ` +
+          `Chaque article est vendu $${prixAffiche}$ €. ` +
+          `Quel est l'ordre de grandeur du nombre d'articles vendus ?`,
+        format: "qcm",
+        choices: makeChoices(`environ $${qteRonde}$ articles`, [
+          `environ $${qteRonde * 10}$ articles`,
+          `environ $${qteRonde / 10}$ articles`,
+          `environ $${prixRond}$ articles`,
+          `environ $${qteRonde * 100}$ articles`,
+          `environ $${prixRond * 10}$ articles`,
+        ]),
+        expected: [`environ $${qteRonde}$ articles`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un ordre de grandeur s'obtient en remplaçant chaque nombre par une valeur ronde proche, puis en menant le calcul de tête.",
+          "Le chiffre d'affaires est le produit du prix par la quantité : pour retrouver la quantité, on DIVISE.",
+          `On arrondit le prix : $${prixAffiche} \\approx ${prixRond}$ €. ` +
+            `Avec $${qteRonde}$ articles, le chiffre d'affaires serait d'environ $${prixRond} \\times ${qteRonde} = ${prixRond * qteRonde}$ € : ` +
+            `c'est bien l'ordre de grandeur de $${chiffreAffaires}$ €. ` +
+            `Avec dix fois plus d'articles il atteindrait $${prixRond * qteRonde * 10}$ €, avec dix fois moins seulement $${prixRond * (qteRonde / 10)}$ € — ni l'un ni l'autre ne correspond.`,
+          `L'entreprise a vendu environ $${qteRonde}$ articles.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `environ $${qteRonde / 10}$ articles`,
+            cause: "s'est trompé d'un rang en divisant",
+          },
+          {
+            choice: `environ $${prixRond}$ articles`,
+            cause: "a repris le prix unitaire au lieu de chercher la quantité",
           },
         ],
       };
