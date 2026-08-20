@@ -1534,4 +1534,289 @@ export const oralEtLecteurBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LES SECONDS ITEMS (20/08/2026)
+     ---------------------------------------------------------------------
+     Huit micros de ce fichier portaient UN SEUL item : le coach en mode
+     complet oppose deux énoncés, et sous deux items la ligne cliquée ouvrait
+     celle du voisin, sans rien signaler. Mesuré : cp/francais rendait 78/96.
+     ⭐ Un second item se fabrique par CONTRASTE. Chacun prend ici le chemin
+     inverse de son premier.
+     ⚠️ Le `notionId` de chaque item est RECOPIÉ sur son voisin, jamais deviné :
+     au CP la notion s'appelle `copie`, au CE1 `copie_fluente`. Deux items dont
+     un seul est bien rangé valent un seul item, et la ligne se détourne quand
+     même.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  {
+    kind: "template",
+    id: "cp_oral_ecouter_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "langage_oral",
+    microId: "cp_oral_ecouter",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Ce qu'il fallait retenir est donné. Cherche le message d'où cela vient.",
+    tags: ["cp", "oral", "ecouter", "template"],
+    generate: () => {
+      const m = randomChoice(MESSAGES);
+      const debutDe = (x: Message) => `${x.texte.split(". ")[0]}.`;
+      const autres = shuffle(MESSAGES.filter((x) => x.texte !== m.texte))
+        .slice(0, 3)
+        .map(debutDe);
+      return {
+        text: `Tu as retenu ceci : « ${m.info} »\n\nQuel message t'a-t-on lu ?`,
+        format: "qcm" as const,
+        choices: makeChoices(debutDe(m), autres),
+        expected: [debutDe(m)],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Écouter pour comprendre, c'est relier ce qu'on retient à ce qui a été dit. Si on ne retrouve plus d'où vient l'information, c'est qu'on ne l'a pas vraiment écoutée.",
+          "Le premier exercice partait du message pour trouver ce qu'il fallait retenir. Celui-ci fait l'inverse : pars de ce que tu as retenu, et cherche le message qui le disait.",
+          `« ${m.info} » vient de : « ${debutDe(m)} »`,
+          `C'est ce message : « ${debutDe(m)} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_oral_reformuler_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "langage_oral",
+    microId: "cp_oral_reformuler",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La reformulation est donnée. Cherche la phrase qu'elle redit.",
+    tags: ["cp", "oral", "reformuler", "template"],
+    generate: () => {
+      const r = randomChoice(REFORMULATIONS);
+      const autres = shuffle(REFORMULATIONS.filter((x) => x.phrase !== r.phrase))
+        .slice(0, 3)
+        .map((x) => x.phrase);
+      return {
+        text: `Un élève redit une phrase avec ses mots :\n\n« ${r.bonne} »\n\nQuelle phrase avait-il entendue ?`,
+        format: "qcm" as const,
+        choices: makeChoices(r.phrase, autres),
+        expected: [r.phrase],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Reformuler, c'est redire la même chose autrement. Les mots changent, ce qui est dit ne change pas — c'est à cela qu'on retrouve la phrase de départ.",
+          "Le premier exercice partait de la phrase pour choisir la reformulation. Celui-ci fait l'inverse : lis la reformulation, et cherche la phrase qui dit exactement la même chose.",
+          `« ${r.bonne} » redit : « ${r.phrase} »`,
+          `Il avait entendu : « ${r.phrase} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_oral_niveau_langue_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "langage_oral",
+    microId: "cp_oral_niveau_langue",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La phrase de la classe est donnée. Comment la dirait-on dans la cour ?",
+    tags: ["cp", "oral", "registre", "template"],
+    generate: () => {
+      const r = randomChoice(REGISTRES);
+      const autres = shuffle(REGISTRES.filter((x) => x.cour !== r.cour))
+        .slice(0, 3)
+        .map((x) => x.cour);
+      return {
+        text: `À la maitresse, on dit : « ${r.classe} »\n\nComment le dit-on entre copains, dans la cour ?`,
+        format: "qcm" as const,
+        choices: makeChoices(r.cour, autres),
+        expected: [r.cour],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "On ne parle pas de la même façon à un copain et à la maitresse. Les deux façons sont bonnes — chacune à sa place.",
+          "Le premier exercice allait de la cour vers la classe. Celui-ci fait le chemin inverse : cherche la façon rapide, celle qu'on emploie entre copains.",
+          `« ${r.classe} » se dit « ${r.cour} » dans la cour.`,
+          `On dit : « ${r.cour} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_voix_ponctuation_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "lecture_voix_haute",
+    microId: "cp_voix_ponctuation",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Ce que fait la voix est décrit. Cherche la phrase qui la fait faire cela.",
+    tags: ["cp", "voix", "ponctuation", "template"],
+    generate: () => {
+      const p = randomChoice(PHRASES_VOIX);
+      /* Les leurres portent un AUTRE signe : une seule phrase fait faire cela
+         à la voix. */
+      const autres = shuffle(PHRASES_VOIX.filter((x) => x.signe !== p.signe))
+        .slice(0, 3)
+        .map((x) => x.phrase);
+      return {
+        text: `En lisant à voix haute, ${p.voix}.\n\nLaquelle de ces phrases lis-tu ?`,
+        format: "qcm" as const,
+        choices: makeChoices(p.phrase, autres),
+        expected: [p.phrase],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Le signe de la fin commande la voix : le point la fait descendre, le point d'interrogation la fait monter, le point d'exclamation lui donne de la force.",
+          "Le premier exercice partait de la phrase pour dire ce que fait la voix. Celui-ci fait l'inverse : regarde le dernier signe de chaque phrase.",
+          `« ${p.phrase} » finit par ${p.signe} : ${p.voix}.`,
+          `C'est « ${p.phrase} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_voix_groupes_mots_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "lecture_voix_haute",
+    microId: "cp_voix_groupes_mots",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "On respire après un paquet de mots qui va ensemble.",
+    tags: ["cp", "voix", "groupes", "template"],
+    generate: () => {
+      const g = randomChoice(GROUPES);
+      const debut = (v: string) => v.split(" / ")[0].trim();
+      const bon = debut(g.decoupe);
+      /* On écarte le leurre « (sans respirer) », qui ne porte pas de barre :
+         son « premier groupe » serait la phrase entière. */
+      const autres = g.faux
+        .filter((f) => f.includes(" / "))
+        .map(debut)
+        .filter((d) => d !== bon);
+      return {
+        text: `Tu lis cette phrase à voix haute :\n\n« ${g.phrase} »\n\nAprès quels mots respires-tu la première fois ?`,
+        format: "qcm" as const,
+        choices: makeChoices(bon, [...autres, g.phrase.replace(/\.$/, "")]),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "On respire APRÈS un paquet de mots qui va ensemble, jamais au milieu. Le premier paquet dit de qui ou de quoi on parle.",
+          "Le premier exercice demandait le découpage entier. Celui-ci ne demande que la première pause : lis tout bas et arrête-toi là où la phrase tient encore debout.",
+          `« ${g.decoupe} » : on respire après « ${bon} ».`,
+          `On respire après « ${bon} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_lect_types_personnages_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "cp_lect_types_personnages",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le personnage est nommé. Cherche à quoi on le reconnait.",
+    tags: ["cp", "devenir-lecteur", "personnages", "template"],
+    generate: () => {
+      const p = randomChoice(PERSONNAGES);
+      const autres = shuffle(PERSONNAGES.filter((x) => x.type !== p.type))
+        .slice(0, 3)
+        .map((x) => x.indices);
+      return {
+        text: `Dans une histoire, tu rencontres ${p.type}.\n\nÀ quoi le reconnais-tu ?`,
+        format: "qcm" as const,
+        choices: makeChoices(p.indices, autres),
+        expected: [p.indices],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Les personnages des histoires reviennent d'un livre à l'autre, et chacun a ses signes : ce qu'il porte, ce qu'il fait, où il vit.",
+          "Le premier exercice partait des signes pour nommer le personnage. Celui-ci fait l'inverse : le personnage est donné, retrouve ses signes.",
+          `${p.type.charAt(0).toUpperCase()}${p.type.slice(1)} : ${p.indices}.`,
+          `${p.indices.charAt(0).toUpperCase()}${p.indices.slice(1)}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_lect_sortes_de_livres_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "cp_lect_sortes_de_livres",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La sorte de livre est donnée. Cherche ce qu'on y voit.",
+    tags: ["cp", "devenir-lecteur", "sortes", "template"],
+    generate: () => {
+      const s = randomChoice(SORTES_LIVRES);
+      /* ⛔ Chaque sorte porte DEUX indices dans la table : les leurres doivent
+         venir d'une AUTRE sorte, sinon le second indice de la même sorte serait
+         servi comme piège alors qu'il est juste. */
+      const autres = shuffle(SORTES_LIVRES.filter((x) => x.sorte !== s.sorte))
+        .slice(0, 3)
+        .map((x) => x.indice);
+      return {
+        text: `Tu ouvres ${s.sorte}.\n\nQu'est-ce que tu y vois ?`,
+        format: "qcm" as const,
+        choices: makeChoices(s.indice, autres),
+        expected: [s.indice],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Chaque sorte de livre se reconnait à ce qu'on y voit : les grandes images de l'album, les vers du poème, les noms devant les phrases au théâtre, les photos du documentaire.",
+          "Le premier exercice partait de ce qu'on voit pour nommer la sorte. Celui-ci fait l'inverse : la sorte est donnée, retrouve ce qu'on y trouve.",
+          `Dans ${s.sorte}, ${s.indice}.`,
+          `${s.indice.charAt(0).toUpperCase()}${s.indice.slice(1)}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_lect_lieux_lecture_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "cp_lect_lieux_lecture",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le bon geste est donné. Dans quel moment le fait-on ?",
+    tags: ["cp", "devenir-lecteur", "lieux", "template"],
+    generate: () => {
+      /* On ne garde que les lignes dont la situation est une SCÈNE : celles qui
+         posent déjà une question (« Comment appelle-t-on… ? ») ne peuvent pas
+         servir de proposition ici. */
+      const scenes = LIEUX.filter((x) => !x.situation.endsWith("?"));
+      const l = randomChoice(scenes);
+      const autres = shuffle(scenes.filter((x) => x.situation !== l.situation))
+        .slice(0, 3)
+        .map((x) => x.situation);
+      return {
+        text: `À la bibliothèque, le bon geste est : ${l.bon}.\n\nDans quel moment ?`,
+        format: "qcm" as const,
+        choices: makeChoices(l.situation, autres),
+        expected: [l.situation],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une bibliothèque marche parce que chacun y fait le geste qu'il faut, au moment où il faut : enregistrer, rapporter, demander de l'aide.",
+          "Le premier exercice partait du moment pour trouver le geste. Celui-ci fait l'inverse : le geste est donné, cherche quand il sert.",
+          `${l.situation} → ${l.bon}.`,
+          `C'est ce moment : ${l.situation}`,
+        ),
+      };
+    },
+  },
 ];

@@ -206,6 +206,24 @@ const PHRASES_DICTEE: readonly string[] = [
   "Les oiseaux chantent le matin.",
 ];
 
+/* Les histoires en trois temps. ⚠️ Sorties du corps de `cp_prod_texte_court_tpl_1`
+   le 20/08/2026 : son second item en a besoin lui aussi, et une table déclarée
+   dans un `generate()` n'est visible de personne d'autre. */
+const HISTOIRES: readonly (readonly string[])[] = [
+  ["Tom prend son panier.", "Il ramasse des letchis.", "Le panier est plein."],
+  ["Léa met ses bottes.", "Elle sort sous la pluie.", "Ses bottes sont pleines d'eau."],
+  ["Papa allume le feu.", "Il pose la marmite dessus.", "Le cari est prêt."],
+  ["Le bateau quitte le port.", "Il glisse sur le lagon.", "Le pêcheur jette son filet."],
+  ["La cloche sonne.", "Les élèves rangent leurs cahiers.", "La cour se remplit."],
+  ["Nina cueille une mangue.", "Elle la lave sous le robinet.", "Elle la mange sur la terrasse."],
+  ["Le vent se lève.", "Les nuages cachent le piton.", "La pluie se met à tomber."],
+  ["Yann prépare son filet.", "Il part vers le lagon.", "Il revient avec trois poissons."],
+  ["La maitresse distribue les cahiers.", "Les élèves écrivent la date.", "La leçon commence."],
+  ["Le chien entend un bruit.", "Il gratte à la porte.", "Papa vient lui ouvrir."],
+  ["Léa ouvre son livre.", "Elle lit trois pages.", "Elle referme le livre et s'endort."],
+  ["Le facteur arrive.", "Il pose une lettre dans la boite.", "Mamie sourit en la lisant."],
+];
+
 const LEGENDES: readonly Legende[] = [
   {
     image: "un chien qui court dans un jardin",
@@ -1111,21 +1129,7 @@ export const ecritureBank: TutorBankItemV4[] = [
     hint: "Cherche l'ordre où l'histoire se comprend du début à la fin.",
     tags: ["cp", "ecriture", "production", "template"],
     generate: () => {
-      const histoires: readonly (readonly string[])[] = [
-        ["Tom prend son panier.", "Il ramasse des letchis.", "Le panier est plein."],
-        ["Léa met ses bottes.", "Elle sort sous la pluie.", "Ses bottes sont pleines d'eau."],
-        ["Papa allume le feu.", "Il pose la marmite dessus.", "Le cari est prêt."],
-        ["Le bateau quitte le port.", "Il glisse sur le lagon.", "Le pêcheur jette son filet."],
-        ["La cloche sonne.", "Les élèves rangent leurs cahiers.", "La cour se remplit."],
-        ["Nina cueille une mangue.", "Elle la lave sous le robinet.", "Elle la mange sur la terrasse."],
-        ["Le vent se lève.", "Les nuages cachent le piton.", "La pluie se met à tomber."],
-        ["Yann prépare son filet.", "Il part vers le lagon.", "Il revient avec trois poissons."],
-        ["La maitresse distribue les cahiers.", "Les élèves écrivent la date.", "La leçon commence."],
-        ["Le chien entend un bruit.", "Il gratte à la porte.", "Papa vient lui ouvrir."],
-        ["Léa ouvre son livre.", "Elle lit trois pages.", "Elle referme le livre et s'endort."],
-        ["Le facteur arrive.", "Il pose une lettre dans la boite.", "Mamie sourit en la lisant."],
-      ];
-      const h = randomChoice(histoires);
+      const h = randomChoice(HISTOIRES);
       const bon = h.join(" ");
       const faux = [
         [h[2], h[0], h[1]].join(" "),
@@ -1212,6 +1216,174 @@ export const ecritureBank: TutorBankItemV4[] = [
           "Regarde la première lettre, puis le dernier signe, avant de relire pour le sens.",
           `Il fallait écrire « ${l.bonne} »`,
           `Il manque ${quoi}.`,
+        ),
+      };
+    },
+  },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LES SECONDS ITEMS DE LA COPIE ET DE LA PRODUCTION (20/08/2026)
+     ---------------------------------------------------------------------
+     Cinq micros portaient UN SEUL item : la ligne cliquée ouvrait celle du
+     voisin. Chacun prend le chemin INVERSE de son premier.
+     ⚠️ `notionId` RECOPIÉ sur l'item voisin : ici « copie » et
+     « production_ecrite ». Au CE1 la même notion s'appelle « copie_fluente » —
+     deviner coûte une ligne qui se détourne quand même.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  {
+    kind: "template",
+    id: "cp_copie_mot_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "copie",
+    microId: "cp_copie_mot",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La copie contient une erreur. Cherche le mot qu'il fallait écrire.",
+    tags: ["cp", "ecriture", "copie", "template"],
+    generate: () => {
+      const m = randomChoice(MOTS_COPIE);
+      const errone = randomChoice(m.faux);
+      const autres = shuffle(MOTS_COPIE.filter((x) => x.mot !== m.mot))
+        .slice(0, 3)
+        .map((x) => x.mot);
+      return {
+        text: `Un élève a copié « ${errone} ».\n\nQuel mot devait-il copier ?`,
+        format: "qcm" as const,
+        choices: makeChoices(m.mot, autres),
+        expected: [m.mot],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une copie ratée garde presque toutes les lettres du modèle : c'est ce « presque » qu'il faut voir.",
+          "Le premier exercice demandait quelle copie était exacte. Celui-ci part de la copie ratée : compare-la aux quatre mots, lettre par lettre.",
+          `« ${errone} » vient de « ${m.mot} » : une lettre a bougé.`,
+          `Le mot était « ${m.mot} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_copie_phrase_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "copie",
+    microId: "cp_copie_phrase",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Il manque un mot à cette copie. Cherche la phrase entière.",
+    tags: ["cp", "ecriture", "copie", "template"],
+    generate: () => {
+      const p = randomChoice(PHRASES_COPIE);
+      const autres = shuffle(PHRASES_COPIE.filter((x) => x.modele !== p.modele))
+        .slice(0, 3)
+        .map((x) => x.modele);
+      return {
+        text: `Un élève a copié : « ${p.oubli} »\n\nQuel modèle avait-il sous les yeux ?`,
+        format: "qcm" as const,
+        choices: makeChoices(p.modele, autres),
+        expected: [p.modele],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Quand on copie une phrase, l'erreur la plus fréquente est le mot sauté : la copie se lit presque bien, et pourtant il manque quelque chose.",
+          "Le premier exercice demandait ce qui avait été oublié. Celui-ci part de la copie : cherche le modèle dont elle est le plus proche, puis vois ce qui a disparu.",
+          `« ${p.oubli} » vient de « ${p.modele} » : il manque ${p.quoi}.`,
+          `Le modèle était « ${p.modele} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_prod_legende_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "production_ecrite",
+    microId: "cp_prod_legende",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La légende est écrite. Cherche le dessin qu'elle va sous.",
+    tags: ["cp", "ecriture", "production", "template"],
+    generate: () => {
+      const l = randomChoice(LEGENDES);
+      const autres = shuffle(LEGENDES.filter((x) => x.image !== l.image))
+        .slice(0, 3)
+        .map((x) => x.image);
+      return {
+        text: `Sous un dessin, on a écrit : « ${l.bonne} »\n\nQue montre ce dessin ?`,
+        format: "qcm" as const,
+        choices: makeChoices(l.image, autres),
+        expected: [l.image],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une légende dit ce qu'on voit sur le dessin — tout ce qu'on voit, et rien d'autre. Bien écrite, elle suffit à imaginer l'image.",
+          "Le premier exercice partait du dessin pour écrire la légende. Celui-ci fait l'inverse : lis la légende et demande-toi ce qu'elle fait voir.",
+          `« ${l.bonne} » va sous un dessin où l'on voit ${l.image}.`,
+          `Le dessin montre ${l.image}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_prod_reponse_question_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "production_ecrite",
+    microId: "cp_prod_reponse_question",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La réponse est écrite en entier. Cherche la question posée.",
+    tags: ["cp", "ecriture", "production", "template"],
+    generate: () => {
+      const r = randomChoice(REPONSES);
+      const autres = shuffle(REPONSES.filter((x) => x.question !== r.question))
+        .slice(0, 3)
+        .map((x) => x.question);
+      return {
+        text: `Un élève a écrit : « ${r.bonne} »\n\nÀ quelle question répondait-il ?`,
+        format: "qcm" as const,
+        choices: makeChoices(r.question, autres),
+        expected: [r.question],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une réponse écrite en phrase entière reprend les mots de la question. C'est ce qui permet de la comprendre même sans avoir la question sous les yeux.",
+          "Le premier exercice partait de la question pour bien écrire la réponse. Celui-ci fait l'inverse : lis la réponse, et retrouve ce qu'on avait demandé.",
+          `« ${r.bonne} » répond à : « ${r.question} »`,
+          `La question était : « ${r.question} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_prod_texte_court_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "production_ecrite",
+    microId: "cp_prod_texte_court",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche ce qui doit arriver en premier, avant tout le reste.",
+    tags: ["cp", "ecriture", "production", "template"],
+    generate: () => {
+      const h = randomChoice(HISTOIRES);
+      return {
+        text: `Voici les phrases d'une histoire, mal rangées :\n\n${shuffle([...h]).map((p) => `— ${p}`).join("\n")}\n\nPar laquelle l'histoire commence-t-elle ?`,
+        format: "qcm" as const,
+        choices: shuffle([...h]),
+        expected: [h[0]],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Dans un texte, les phrases se suivent dans l'ordre où les choses arrivent. La première est celle qui ne dépend d'aucune autre.",
+          "Le premier exercice demandait de ranger tout le texte. Celui-ci ne demande que le début : cherche la phrase qui peut se dire sans que rien ne se soit encore passé.",
+          `${h[0]} — puis — ${h[1]} — puis — ${h[2]}.`,
+          `L'histoire commence par « ${h[0]} »`,
         ),
       };
     },

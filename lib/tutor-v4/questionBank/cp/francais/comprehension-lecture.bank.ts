@@ -762,4 +762,107 @@ export const comprehensionLectureBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LES SECONDS ITEMS (20/08/2026)
+     ---------------------------------------------------------------------
+     Trois micros portaient UN SEUL item : la ligne cliquée ouvrait celle du
+     voisin. Chacun prend le chemin INVERSE de son premier, et se sert des
+     champs que la table TEXTES porte déjà.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  {
+    kind: "template",
+    id: "cp_comp_personnage_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "comprehension_lecture",
+    microId: "cp_comp_personnage",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le personnage est nommé. Cherche où il se trouve.",
+    tags: ["cp", "comprehension", "personnage", "template"],
+    generate: () => {
+      const t = randomChoice(TEXTES);
+      const autres = shuffle(LIEUX_FAUX.filter((l) => l !== t.lieu)).slice(0, 3);
+      return {
+        text: `Lis ce texte :\n« ${t.texte} »\n\nOù se passe cette histoire ?`,
+        format: "qcm" as const,
+        choices: makeChoices(t.lieu, autres),
+        expected: [t.lieu],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Comprendre une histoire, c'est savoir DE QUI on parle et OÙ cela se passe. Les deux se trouvent dans le texte, pas dans sa tête.",
+          "Le premier exercice demandait de qui on parle. Celui-ci demande où : cherche le mot qui dit l'endroit.",
+          `Ici, ${t.personnage} est ${t.lieu}.`,
+          `Cela se passe ${t.lieu}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_comp_justifier_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "comprehension_lecture",
+    microId: "cp_comp_justifier",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La phrase du texte est donnée. Cherche la question à laquelle elle répond.",
+    tags: ["cp", "comprehension", "justifier", "template"],
+    generate: () => {
+      const t = randomChoice(TEXTES);
+      const autres = shuffle(TEXTES.filter((x) => x.texte !== t.texte))
+        .slice(0, 3)
+        .map((x) => x.justification.question);
+      return {
+        text: `Lis ce texte :\n« ${t.texte} »\n\nDans le texte, on lit : « ${t.justification.preuve} »\nÀ quelle question cette phrase répond-elle ?`,
+        format: "qcm" as const,
+        choices: makeChoices(t.justification.question, autres),
+        expected: [t.justification.question],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une phrase du texte ne prouve pas n'importe quoi : elle répond à une question précise. Savoir laquelle, c'est savoir se servir du texte.",
+          "Le premier exercice partait de la question pour trouver la phrase. Celui-ci fait l'inverse : lis la phrase, et demande-toi ce qu'elle apprend.",
+          `« ${t.justification.preuve} » répond à : ${t.justification.question}`,
+          `Elle répond à : ${t.justification.question}`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_comp_reformuler_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "comprehension_lecture",
+    microId: "cp_comp_reformuler",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le résumé est donné. Cherche le texte qu'il raconte.",
+    tags: ["cp", "comprehension", "reformuler", "template"],
+    generate: () => {
+      const t = randomChoice(TEXTES);
+      const debutDe = (x: Texte) => `${x.texte.split(". ")[0]}.`;
+      const autres = shuffle(TEXTES.filter((x) => x.texte !== t.texte))
+        .slice(0, 3)
+        .map(debutDe);
+      return {
+        text: `Un élève raconte une histoire ainsi :\n\n« ${t.resume} »\n\nPar quelle phrase cette histoire commençait-elle ?`,
+        format: "qcm" as const,
+        choices: makeChoices(debutDe(t), autres),
+        expected: [debutDe(t)],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Raconter un texte avec ses mots, c'est en garder l'essentiel. Si le résumé est fidèle, on doit pouvoir retrouver l'histoire d'où il vient.",
+          "Le premier exercice partait du texte pour choisir le bon résumé. Celui-ci fait l'inverse : lis le résumé, et cherche l'histoire qui commence comme il faut.",
+          `« ${t.resume} » raconte l'histoire qui commence par « ${debutDe(t)} »`,
+          `Elle commençait par « ${debutDe(t)} »`,
+        ),
+      };
+    },
+  },
 ];

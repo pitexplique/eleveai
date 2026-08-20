@@ -976,4 +976,43 @@ export const grammairePhraseBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LE SECOND ITEM (20/08/2026)
+     ---------------------------------------------------------------------
+     `cp_gram_ordonner_phrase` portait UN SEUL item : la ligne cliquée ouvrait
+     `cp_gram_phrase_reconnaitre`. Celui-ci resserre sur le PREMIER mot au lieu
+     de demander la phrase entière — l'élève qui ne sait pas encore tout ranger
+     peut déjà savoir par où l'on commence.
+     ═══════════════════════════════════════════════════════════════════════ */
+  {
+    kind: "template",
+    id: "cp_gram_ordonner_phrase_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "grammaire_phrase",
+    microId: "cp_gram_ordonner_phrase",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une phrase commence par une majuscule. Cherche ce mot-là.",
+    tags: ["cp", "grammaire", "ordonner", "template"],
+    generate: () => {
+      const p = randomChoice(PHRASES);
+      const mots = p.phrase.replace(/\.$/, "").split(" ");
+      const premier = mots[0];
+      return {
+        text: `Ces mots forment une phrase, mais ils sont mal rangés :\n\n${shuffle(mots).map((m) => `« ${m} »`).join(", ")}\n\nQuel mot se place en premier ?`,
+        format: "qcm" as const,
+        choices: shuffle(mots),
+        expected: [premier],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une phrase se range dans un ordre : d'abord de qui on parle, ensuite ce qu'il fait. Et le premier mot porte la majuscule.",
+          "Le premier exercice demandait de ranger toute la phrase. Celui-ci ne demande que le début : cherche le mot qui commence par une majuscule.",
+          `La phrase est « ${p.phrase} » : elle commence par « ${premier} ».`,
+          `Le premier mot est « ${premier} ».`,
+        ),
+      };
+    },
+  },
 ];

@@ -822,4 +822,45 @@ export const vocabulaireBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LE SECOND ITEM (20/08/2026)
+     ---------------------------------------------------------------------
+     `cp_voc_synonyme` portait UN SEUL item : la ligne cliquée ouvrait
+     `cp_voc_antonyme`. Le premier cherche le synonyme d'un mot ; celui-ci
+     demande de reconnaitre un COUPLE de synonymes parmi des couples de
+     contraires — c'est la distinction elle-même qui est en jeu.
+     ⚠️ Un couple de SYNONYMES contre trois couples d'ANTONYMES : les quatre
+     lignes ont la même forme, seule leur relation les sépare.
+     ═══════════════════════════════════════════════════════════════════════ */
+  {
+    kind: "template",
+    id: "cp_voc_synonyme_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "vocabulaire",
+    microId: "cp_voc_synonyme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Dans trois de ces couples, les deux mots se contredisent.",
+    tags: ["cp", "vocabulaire", "synonyme", "template"],
+    generate: () => {
+      const s = randomChoice(SYNONYMES);
+      const couple = (p: { a: string; b: string }) => `« ${p.a} » et « ${p.b} »`;
+      const autres = shuffle([...ANTONYMES]).slice(0, 3).map(couple);
+      return {
+        text: `Dans quel couple les deux mots veulent-ils dire à peu près la même chose ?`,
+        format: "qcm" as const,
+        choices: makeChoices(couple(s), autres),
+        expected: [couple(s)],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Deux mots synonymes veulent dire à peu près la même chose. Deux mots contraires disent l'inverse l'un de l'autre. Il faut savoir les distinguer, sinon on remplace un mot par son contraire.",
+          "Le premier exercice cherchait le synonyme d'un mot. Celui-ci demande de trier : essaie de remplacer un mot par l'autre dans une phrase. Si la phrase dit le contraire, ce ne sont pas des synonymes.",
+          `${couple(s)} : on peut dire l'un pour l'autre. Dans les trois autres couples, les mots se contredisent.`,
+          `C'est ${couple(s)}.`,
+        ),
+      };
+    },
+  },
 ];
