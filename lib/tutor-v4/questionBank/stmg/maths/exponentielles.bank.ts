@@ -162,6 +162,64 @@ export const exponentiellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — reconnaître l'exponentielle DANS UNE SITUATION. Le premier item
+    // trie quatre écritures, ce qui est un exercice de forme ; celui-ci part
+    // d'une phrase de gestion — « augmente de $4\,\%$ par an » — et demande la
+    // fonction. C'est le geste que le BO met en avant : modéliser une évolution
+    // relative constante.
+    kind: "template",
+    id: "stmg_expo_reconnaitre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_definition",
+    microId: "expoT_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un pourcentage répété donne un coefficient multiplicateur, et ce coefficient devient la BASE.",
+    tags: ["stmg", "maths", "exponentielle", "gestion", "template"],
+    generate: () => {
+      const evo = pick(EVOLUTIONS);
+      const v0 = pick([200, 500, 800, 1000, 1500, 2000] as const);
+      const t = pick([2, 3, 4, 5, 8, 10, 12, 15] as const);
+      const hausse = Math.random() < 0.5;
+      const q = 1 + (hausse ? t : -t) / 100;
+      const bonne = `$f(x) = ${v0} \\times ${fr(q)}^x$`;
+      return {
+        text:
+          `${evo.sujet.charAt(0).toUpperCase()}${evo.sujet.slice(1)} vaut $${v0}$ ${evo.unite} aujourd'hui ` +
+          `et ${hausse ? "augmente" : "diminue"} de $${t}\\,\\%$ par an. ` +
+          `Quelle fonction modélise sa valeur au bout de $x$ années ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `$f(x) = ${v0} \\times ${fr(1 - (hausse ? t : -t) / 100)}^x$`,
+          `$f(x) = ${v0} \\times ${fr(t / 100)}^x$`,
+          `$f(x) = ${v0} ${hausse ? "+" : "-"} ${t}x$`,
+          `$f(x) = ${v0} \\times x^{${fr(q)}}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une évolution en pourcentage RÉPÉTÉE se modélise par une fonction exponentielle : la valeur initiale multiplie une puissance du coefficient multiplicateur, et la variable est à l'exposant.",
+          "On traduit le pourcentage en coefficient, puis on place ce coefficient en base et la durée en exposant.",
+          `${hausse ? "Une hausse" : "Une baisse"} de $${t}\\,\\%$ donne le coefficient $1 ${hausse ? "+" : "-"} ${fr(t / 100)} = ${fr(q)}$, ` +
+            `donc $f(x) = ${v0} \\times ${fr(q)}^x$.`,
+          `La fonction est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$f(x) = ${v0} ${hausse ? "+" : "-"} ${t}x$`,
+            cause: "a modélisé par une fonction affine : ce serait une évolution de $" + t + "$ unités par an, pas de " + t + " %",
+          },
+          {
+            choice: `$f(x) = ${v0} \\times x^{${fr(q)}}$`,
+            cause: "a interverti la base et l'exposant",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ expoT_prolongement ═══════════════════ */
 
   {
@@ -202,6 +260,60 @@ export const exponentiellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — À QUOI SERT le prolongement. Le premier item calcule une valeur
+    // à une date non entière ; celui-ci demande de dire POURQUOI la fonction
+    // apporte quelque chose que la suite ne donne pas. C'est la phrase du BO —
+    // « le passage du discret au continu » — transformée en question.
+    // ⚠️ Sans figure : le nuage et la courbe sont dans le premier item ; ici on
+    // demande ce qu'ils signifient, pas ce qu'on y lit.
+    kind: "template",
+    id: "stmg_expo_prolongement_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_definition",
+    microId: "expoT_prolongement",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une suite ne donne des valeurs qu'aux rangs entiers : $u(2)$, $u(3)$… mais rien entre les deux.",
+    tags: ["stmg", "maths", "exponentielle", "suites", "template"],
+    generate: () => {
+      const evo = pick(EVOLUTIONS);
+      const t = pick([5, 8, 10, 15, 20, 25] as const);
+      const mois = pick([6, 9, 18, 30] as const);
+      const bonne = `elle donne aussi la valeur à des dates intermédiaires, comme au bout de $${mois}$ mois`;
+      return {
+        text:
+          `${evo.sujet.charAt(0).toUpperCase()}${evo.sujet.slice(1)} augmente de $${t}\\,\\%$ par an. ` +
+          `On peut le modéliser par une suite géométrique, ou par la fonction exponentielle qui la prolonge. ` +
+          `Qu'apporte la fonction que la suite ne donnait pas ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          "elle donne la valeur au bout de $3$ ans, ce que la suite ne permettait pas",
+          "elle change le taux d'évolution en le rendant continu",
+          "elle permet des valeurs négatives, contrairement à la suite",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une suite n'a de valeurs qu'aux rangs ENTIERS. La fonction exponentielle passe par tous ces points et remplit les intervalles : elle donne un sens à une durée quelconque.",
+          "On se demande ce que l'on peut demander à l'une et pas à l'autre : une durée non entière.",
+          `Au bout de $${mois}$ mois, soit $${fr(mois / 12)}$ année(s), la suite ne dit rien — il n'y a pas de terme de rang $${fr(mois / 12)}$. ` +
+            `La fonction, elle, calcule $${fr(1 + t / 100)}^{${fr(mois / 12)}}$. En revanche, au bout de $3$ ans, les deux répondent la même chose : ` +
+            `la courbe passe exactement par les points de la suite.`,
+          bonne
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "elle donne la valeur au bout de $3$ ans, ce que la suite ne permettait pas",
+            cause: "aux rangs entiers, la suite et la fonction donnent exactement la même valeur",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ expoT_calculer_image ═══════════════════ */
 
   {
@@ -228,6 +340,41 @@ export const exponentiellesBank: TutorBankItemV4[] = [
           "On multiplie la base par elle-même autant de fois que l'indique l'exposant.",
           `$${fr(a)}^{${x}} = ${Array.from({ length: x }, () => fr(a)).join(" \\times ")} = ${fr(Math.pow(a, x))}$.`,
           `$f(${x}) = ${fr(Math.pow(a, x))}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — l'EXPOSANT cherché, pas l'image. Le premier item calcule
+    // $a^x$ ; celui-ci donne le résultat et demande l'exposant. On y répond par
+    // essais — le logarithme n'est pas encore là —, et c'est justement ce
+    // tâtonnement qui prépare sa nécessité.
+    kind: "template",
+    id: "stmg_expo_image_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_definition",
+    microId: "expoT_calculer_image",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Multiplie la base par elle-même en comptant les étapes, jusqu'à tomber sur le résultat.",
+    tags: ["stmg", "maths", "exponentielle", "template", "short"],
+    generate: () => {
+      const a = pick([2, 3, 4, 5, 10] as const);
+      const x = randomInt(2, a === 2 ? 8 : a === 3 ? 5 : 4);
+      const image = Math.pow(a, x);
+      return {
+        text: `Soit $f(x) = ${a}^x$. Pour quelle valeur de $x$ a-t-on $f(x) = ${image}$ ?`,
+        format: "short",
+        expected: [String(x)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Résoudre $a^x = b$, c'est chercher combien de fois il faut multiplier $a$ par lui-même pour atteindre $b$. Quand la réponse est entière, elle se trouve par essais.",
+          "On dresse la liste des puissances de la base jusqu'à rencontrer le nombre cherché.",
+          `${Array.from({ length: x }, (_, i) => `$${a}^{${i + 1}} = ${fr(Math.pow(a, i + 1))}$`).join(" ; ")}. ` +
+            `On atteint $${image}$ au rang $${x}$.`,
+          `$x = ${x}$, car $${a}^{${x}} = ${image}$.`
         ),
       };
     },
@@ -278,6 +425,61 @@ export const exponentiellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — l'exposant négatif REMONTE LE TEMPS. Le premier item calcule
+    // $a^{-x}$ ; celui-ci lui donne son sens en gestion : dans un modèle où $x$
+    // compte les années écoulées, $f(-2)$ est la valeur d'il y a deux ans. Un
+    // élève qui sait calculer sans savoir cela ne reconnaîtra jamais la
+    // question au bac.
+    kind: "template",
+    id: "stmg_expo_negatif_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_definition",
+    microId: "expoT_exposant_negatif",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Si $x$ compte les années À PARTIR d'aujourd'hui, que peut bien désigner $x = -2$ ?",
+    tags: ["stmg", "maths", "exponentielle", "gestion", "template"],
+    generate: () => {
+      const evo = pick(EVOLUTIONS);
+      const v0 = pick([400, 500, 800, 1000, 2000] as const);
+      const t = pick([5, 10, 20, 25] as const);
+      const q = 1 + t / 100;
+      const recul = pick([2, 3] as const);
+      const valeur = v0 / Math.pow(q, recul);
+      const bonne = `la valeur d'il y a $${recul}$ ans, soit environ $${fr(Math.round(valeur))}$ ${evo.unite}`;
+      return {
+        text:
+          `${evo.sujet.charAt(0).toUpperCase()}${evo.sujet.slice(1)} vaut $${v0}$ ${evo.unite} aujourd'hui ` +
+          `et augmente de $${t}\\,\\%$ par an. On le modélise par $f(x) = ${v0} \\times ${fr(q)}^x$, ` +
+          `où $x$ compte les années à partir d'aujourd'hui. Que représente $f(-${recul})$ ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `la valeur dans $${recul}$ ans, soit environ $${fr(Math.round(v0 * Math.pow(q, recul)))}$ ${evo.unite}`,
+          `une valeur négative : le modèle n'a plus de sens`,
+          `la baisse totale sur $${recul}$ ans`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un exposant négatif désigne l'inverse : $a^{-x} = \\dfrac{1}{a^{x}}$. Dans un modèle où $x$ compte les années écoulées, un exposant négatif fait donc remonter le temps — et le résultat reste strictement positif.",
+          "On calcule l'image, puis on la lit dans la situation.",
+          `$f(-${recul}) = ${v0} \\times ${fr(q)}^{-${recul}} = \\dfrac{${v0}}{${fr(Math.round(Math.pow(q, recul) * 100000) / 100000)}} \\approx ${fr(Math.round(valeur))}$ ${evo.unite}. ` +
+            `On vérifie : en appliquant $${t}\\,\\%$ de hausse pendant $${recul}$ ans à cette valeur, on retombe sur $${v0}$.`,
+          `$f(-${recul})$ donne la valeur d'il y a $${recul}$ ans : environ $${fr(Math.round(valeur))}$ ${evo.unite}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `une valeur négative : le modèle n'a plus de sens`,
+            cause: "un exposant négatif donne l'INVERSE, pas un résultat négatif : une exponentielle est toujours strictement positive",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ expoT_sens_selon_a ═══════════════════ */
 
   {
@@ -313,6 +515,48 @@ export const exponentiellesBank: TutorBankItemV4[] = [
             cause: "a comparé la base à 0 au lieu de la comparer à 1",
           },
         ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — TRIER les bases. Le premier item donne une base et demande le
+    // sens ; celui-ci donne le sens et fait chercher la base parmi quatre. Le
+    // critère est le même, mais l'élève qui a retenu « plus petit que 1 = ça
+    // descend » sans savoir où est $1$ se trahit : trois des quatre bases sont
+    // du mauvais côté.
+    // ⚠️ Sans figure : la courbe donnerait le sens, et il n'y aurait plus rien
+    // à décider. Le premier item porte la sienne.
+    kind: "template",
+    id: "stmg_expo_sens_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_variations",
+    microId: "expoT_sens_selon_a",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le seuil est $1$, pas $0$ : une base de $0,95$ fait décroître, une base de $1,05$ fait croître.",
+    tags: ["stmg", "maths", "exponentielle", "template"],
+    generate: () => {
+      const decroissante = Math.random() < 0.5;
+      const petites = [0.4, 0.5, 0.65, 0.75, 0.8, 0.9, 0.95, 0.98];
+      const grandes = [1.02, 1.05, 1.15, 1.3, 1.5, 2, 2.5, 4];
+      const bonneBase = pick(decroissante ? petites : grandes);
+      const autres = shuffle(decroissante ? grandes : petites).slice(0, 3);
+      const ecrire = (base: number) => `$f(x) = ${fr(base)}^x$`;
+      return {
+        text: `Parmi ces quatre fonctions, laquelle est ${decroissante ? "DÉCROISSANTE" : "CROISSANTE"} ?`,
+        format: "qcm",
+        choices: shuffle([bonneBase, ...autres].map(ecrire)),
+        expected: [ecrire(bonneBase)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une fonction exponentielle $x \\mapsto a^x$ est croissante si $a > 1$ et décroissante si $0 < a < 1$ : le seuil est $1$, jamais $0$.",
+          "On compare chaque base à $1$ — exactement comme on compare la raison d'une suite géométrique.",
+          `Ici $${fr(bonneBase)}$ est ${decroissante ? "inférieur" : "supérieur"} à $1$ : la fonction ${decroissante ? "décroît" : "croît"}. ` +
+            `Les trois autres bases sont ${decroissante ? "supérieures" : "inférieures"} à $1$.`,
+          `La fonction ${decroissante ? "décroissante" : "croissante"} est ${ecrire(bonneBase)}.`
+        ),
       };
     },
   },
@@ -366,6 +610,60 @@ export const exponentiellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — le POINT COMMUN à toutes ces courbes. Le premier item lit
+    // l'allure pour retrouver la base ; celui-ci demande ce qui ne change
+    // JAMAIS, quelle que soit la base : le passage par $(0\,;\,1)$ et le fait
+    // de rester au-dessus de l'axe. Deux repères qui permettent d'éliminer une
+    // courbe fausse en une seconde.
+    kind: "template",
+    id: "stmg_expo_allure_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_variations",
+    microId: "expoT_allure",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Que vaut $a^0$, quelle que soit la base $a$ ?",
+    tags: ["stmg", "maths", "exponentielle", "canvas", "template"],
+    generate: () => {
+      const a = pick([1.3, 1.5, 2, 3, 0.4, 0.6, 0.8] as const);
+      const bonne = "elle passe par le point $(0\\,;\\,1)$ et reste au-dessus de l'axe des abscisses";
+      return {
+        text:
+          `La courbe tracée est celle d'une fonction $x \\mapsto a^x$. ` +
+          `Quelle propriété est vraie pour TOUTE fonction de cette forme, quelle que soit la base $a$ ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          "elle passe par l'origine du repère",
+          "elle finit par couper l'axe des abscisses",
+          "elle est croissante",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasExponentielle(1, a, 8, "Courbe d'une fonction exponentielle", { avecNuage: false, xmin: -3 }),
+        explanation: exp(
+          "Pour toute base $a > 0$, on a $a^0 = 1$ : toutes les courbes exponentielles passent par $(0\\,;\\,1)$. Et une puissance de base strictement positive ne s'annule jamais : la courbe reste au-dessus de l'axe des abscisses.",
+          "On teste la valeur en $0$, puis on regarde le signe des images.",
+          `Ici $a = ${fr(a)}$ et $f(0) = ${fr(a)}^0 = 1$. La courbe ${a > 1 ? "monte" : "descend"}, ` +
+            `mais elle ne touchera jamais l'axe : $f(x)$ reste strictement positif.`,
+          bonne
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "elle est croissante",
+            cause: "c'est vrai seulement si la base dépasse $1$ ; l'énoncé demande ce qui vaut pour TOUTE base",
+          },
+          {
+            choice: "elle passe par l'origine du repère",
+            cause: "en $0$, l'image vaut $1$ et non $0$ : la courbe passe au-dessus de l'origine",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ expoT_role_k ═══════════════════ */
 
   {
@@ -401,6 +699,58 @@ export const exponentiellesBank: TutorBankItemV4[] = [
           {
             choice: croissante ? "décroissante" : "croissante",
             cause: "n'a pas tenu compte du signe de k, qui retourne la courbe",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — ce que $k$ REPRÉSENTE, et non ce qu'il fait au sens de
+    // variation. Le premier item regarde son signe ; celui-ci le lit dans la
+    // situation : $k$ est la valeur de départ, celle du jour $0$. C'est le
+    // premier nombre qu'on écrit quand on modélise, et le dernier qu'on
+    // interroge.
+    kind: "template",
+    id: "stmg_expo_role_k_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_variations",
+    microId: "expoT_role_k",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Calcule $f(0)$ : la base élevée à la puissance zéro vaut $1$.",
+    tags: ["stmg", "maths", "exponentielle", "gestion", "template"],
+    generate: () => {
+      const evo = pick(EVOLUTIONS);
+      const k = pick([250, 400, 600, 1200, 1500, 3000] as const);
+      const t = pick([4, 5, 8, 10, 15] as const);
+      const q = 1 + t / 100;
+      const bonne = `la valeur de départ, au temps $x = 0$`;
+      return {
+        text:
+          `${evo.sujet.charAt(0).toUpperCase()}${evo.sujet.slice(1)} est modélisé par $f(x) = ${k} \\times ${fr(q)}^x$, ` +
+          `où $x$ compte les années. Que représente le nombre $${k}$ ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `le taux d'évolution annuel`,
+          `la valeur au bout d'un an`,
+          `le nombre d'années de la période étudiée`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Dans $f(x) = k\\,a^x$, le coefficient $k$ est la valeur initiale : puisque $a^0 = 1$, on a $f(0) = k$. La base $a$, elle, porte le taux d'évolution.",
+          "On calcule $f(0)$ pour identifier $k$, puis $f(1)$ pour voir ce que fait la base.",
+          `$f(0) = ${k} \\times ${fr(q)}^0 = ${k} \\times 1 = ${k}$ : c'est bien la valeur de départ. ` +
+            `Et $f(1) = ${k} \\times ${fr(q)} = ${fr(k * q)}$, soit $${t}\\,\\%$ de plus.`,
+          `Le nombre $${k}$ est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `la valeur au bout d'un an`,
+            cause: "la valeur au bout d'un an est $f(1)$, qui vaut $k$ multiplié par la base",
           },
         ],
       };
@@ -453,6 +803,57 @@ export const exponentiellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — ÉCRIRE la fonction qui prolonge une suite donnée. Le premier
+    // item compare les sens de variation ; celui-ci demande le passage d'une
+    // écriture à l'autre, qui est le geste concret : la raison devient la base,
+    // le premier terme devient le coefficient, le rang devient la variable.
+    kind: "template",
+    id: "stmg_expo_lien_suite_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_variations",
+    microId: "expoT_lien_suite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le terme général $u(n) = u_0 q^n$ devient $f(x) = u_0 q^x$ : seul le nom de la variable change.",
+    tags: ["stmg", "maths", "exponentielle", "suites", "template"],
+    generate: () => {
+      const u0 = pick([50, 120, 300, 640, 900] as const);
+      const t = pick([10, 15, 20, 25, 40] as const);
+      const baisse = Math.random() < 0.5;
+      const q = 1 + (baisse ? -t : t) / 100;
+      const bonne = `$f(x) = ${u0} \\times ${fr(q)}^x$`;
+      return {
+        text:
+          `Une suite géométrique a pour terme général $u(n) = ${u0} \\times ${fr(q)}^n$. ` +
+          `Quelle fonction exponentielle la prolonge ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `$f(x) = ${u0} \\times x^{${fr(q)}}$`,
+          `$f(x) = ${u0} \\times ${fr(q)} \\times x$`,
+          `$f(x) = ${fr(q)} \\times ${u0}^x$`,
+          `$f(x) = ${u0} + ${fr(q)}^x$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une suite géométrique $u(n) = u_0 q^n$ n'est définie qu'aux rangs entiers. La fonction $f(x) = u_0 q^x$, elle, accepte tout réel $x$ : c'est la même écriture, avec une variable continue.",
+          "On recopie le premier terme comme coefficient, la raison comme base, et l'on remplace le rang $n$ par la variable $x$.",
+          `$u(n) = ${u0} \\times ${fr(q)}^n$ devient $f(x) = ${u0} \\times ${fr(q)}^x$. ` +
+            `Aux rangs entiers, les deux donnent la même valeur : $u(3) = f(3) = ${fr(Math.round(u0 * Math.pow(q, 3) * 100) / 100)}$.`,
+          `La fonction qui prolonge la suite est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$f(x) = ${fr(q)} \\times ${u0}^x$`,
+            cause: "a interverti le premier terme et la raison : c'est la RAISON qui devient la base",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ expoT_somme_exposants ═══════════════════ */
 
   {
@@ -498,6 +899,42 @@ export const exponentiellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — l'exposant MANQUANT. Le premier item applique la règle de
+    // gauche à droite ; celui-ci la remonte : le produit est connu, un facteur
+    // aussi. C'est une soustraction, et l'élève qui a retenu « on additionne »
+    // sans comprendre pourquoi additionne encore.
+    kind: "template",
+    id: "stmg_expo_somme_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_proprietes",
+    microId: "expoT_somme_exposants",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les exposants s'additionnent : celui qui manque est la DIFFÉRENCE entre le total et celui qu'on connaît.",
+    tags: ["stmg", "maths", "exponentielle", "template", "short"],
+    generate: () => {
+      const a = pick([1.05, 1.2, 1.5, 2, 3, 5, 0.8] as const);
+      const total = randomInt(8, 20);
+      const connu = randomInt(2, total - 2);
+      return {
+        text:
+          `Complète : $${fr(a)}^{${connu}} \\times ${fr(a)}^{\\square} = ${fr(a)}^{${total}}$. ` +
+          `Quel exposant manque ?`,
+        format: "short",
+        expected: [String(total - connu)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un produit de deux puissances de même base garde la base et ADDITIONNE les exposants : $a^x \\times a^y = a^{x+y}$.",
+          "On écrit l'égalité des exposants, puis on isole celui qui manque par soustraction.",
+          `$${connu} + \\square = ${total}$, donc $\\square = ${total} - ${connu} = ${total - connu}$.`,
+          `L'exposant manquant est $${total - connu}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ expoT_difference_exposants ═══════════════ */
 
   {
@@ -520,7 +957,7 @@ export const exponentiellesBank: TutorBankItemV4[] = [
         format: "qcm",
         choices: makeChoices(`$${fr(a)}^{${m - n}}$`, [
           `$${fr(a)}^{${m + n}}$`,
-          `$${fr(a)}^{${Math.round((m / n) * 100) / 100}}$`,
+          `$${fr(a)}^{${fr(Math.round((m / n) * 100) / 100)}}$`,
           `$${fr(a)}^{${n - m}}$`,
           `$${fr(a)}^{${m}}$`,
           `$${fr(a)}^{${m - n - 1}}$`,
@@ -535,10 +972,59 @@ export const exponentiellesBank: TutorBankItemV4[] = [
         ),
         choiceDiagnostics: [
           {
-            choice: `$${fr(a)}^{${Math.round((m / n) * 100) / 100}}$`,
+            choice: `$${fr(a)}^{${fr(Math.round((m / n) * 100) / 100)}}$`,
             cause: "a divisé les exposants au lieu de les soustraire",
           },
         ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — DIAGNOSTIQUER la division des exposants. Le premier item fait
+    // appliquer la règle ; celui-ci montre l'erreur qui lui ressemble le plus —
+    // « un quotient, donc je divise les exposants » — et demande de la nommer.
+    // Elle produit parfois le bon résultat par accident, ce qui la rend
+    // tenace : $a^{4}/a^{2}$ donne $a^{2}$ des deux façons.
+    kind: "template",
+    id: "stmg_expo_difference_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_proprietes",
+    microId: "expoT_difference_exposants",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un quotient de puissances SOUSTRAIT les exposants : la division porte sur les puissances, pas sur les exposants.",
+    tags: ["stmg", "maths", "exponentielle", "diagnostic", "template"],
+    generate: () => {
+      const a = pick([1.1, 1.25, 1.5, 2, 3, 4, 0.9] as const);
+      // ⛔ On évite $m = 2n$ : dans ce cas la division des exposants donne le
+      // même résultat que leur soustraction, et l'erreur devient invisible.
+      const n = randomInt(2, 4);
+      const mBrut = randomInt(6, 12);
+      const m = mBrut === 2 * n ? mBrut + 1 : mBrut;
+      const faux = m / n;
+      const bonne = "il a divisé les exposants au lieu de les soustraire";
+      return {
+        text:
+          `Un élève simplifie $\\dfrac{${fr(a)}^{${m}}}{${fr(a)}^{${n}}}$ et écrit $${fr(a)}^{${fr(Math.round(faux * 100) / 100)}}$. ` +
+          `Quelle erreur a-t-il commise ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          "il a additionné les exposants au lieu de les soustraire",
+          "il a divisé les bases entre elles",
+          "il n'a commis aucune erreur : cette écriture est correcte",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour un quotient de deux puissances de même base : $\\dfrac{a^x}{a^y} = a^{x-y}$. La division se lit sur les PUISSANCES ; sur les exposants, elle devient une soustraction.",
+          "On applique la règle, puis on compare au résultat de l'élève.",
+          `Le bon calcul donne $${fr(a)}^{${m} - ${n}} = ${fr(a)}^{${m - n}}$. ` +
+            `L'élève a écrit $${fr(a)}^{${fr(Math.round(faux * 100) / 100)}}$, c'est-à-dire $${fr(a)}^{${m} \\div ${n}}$.`,
+          `L'erreur : ${bonne}.`
+        ),
       };
     },
   },
@@ -588,6 +1074,44 @@ export const exponentiellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — l'exposant INTÉRIEUR, cherché. Le premier item calcule le
+    // produit des deux exposants ; ici le résultat est donné et l'un des deux
+    // manque : on divise. C'est le calcul qui sert à passer d'un taux sur
+    // plusieurs périodes à un taux par période.
+    kind: "template",
+    id: "stmg_expo_puissance_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_proprietes",
+    microId: "expoT_puissance_exposant",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les exposants se multiplient : celui qui manque est le QUOTIENT du total par celui qu'on connaît.",
+    tags: ["stmg", "maths", "exponentielle", "template", "short"],
+    generate: () => {
+      const a = pick([1.05, 1.2, 1.5, 2, 3, 0.8] as const);
+      const interieur = randomInt(2, 6);
+      const n = randomInt(2, 5);
+      const total = interieur * n;
+      return {
+        text:
+          `On sait que $\\left(${fr(a)}^{x}\\right)^{${n}} = ${fr(a)}^{${total}}$. ` +
+          `Que vaut $x$ ?`,
+        format: "short",
+        expected: [String(interieur)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Élever une puissance à une puissance MULTIPLIE les exposants : $\\left(a^{x}\\right)^{n} = a^{nx}$.",
+          "On écrit l'égalité des exposants, puis on isole l'inconnue par une division.",
+          `$${n}x = ${total}$, donc $x = \\dfrac{${total}}{${n}} = ${interieur}$. ` +
+            `Vérification : $\\left(${fr(a)}^{${interieur}}\\right)^{${n}} = ${fr(a)}^{${total}}$.`,
+          `$x = ${interieur}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ expoT_transformer ═══════════════════ */
 
   {
@@ -630,6 +1154,58 @@ export const exponentiellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — le LITTÉRAL, l'autre moitié du libellé. Le premier item
+    // simplifie des exposants numériques ; ici l'un d'eux contient $x$, et la
+    // seule façon d'aboutir est d'appliquer les règles — pas de calculer. Le
+    // $x$ disparaît, ce qui surprend et se démontre en une ligne.
+    kind: "template",
+    id: "stmg_expo_transformer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_proprietes",
+    microId: "expoT_transformer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Additionne d'abord les exposants du numérateur, puis retranche celui du dénominateur : les $x$ se simplifient.",
+    tags: ["stmg", "maths", "exponentielle", "litteral", "template"],
+    generate: () => {
+      const a = pick([1.05, 1.1, 1.2, 1.5, 2, 3, 0.9] as const);
+      const m = randomInt(2, 6);
+      // ⛔ Exposants différents : sinon le résultat serait $a^0$, et la question
+      // se réduirait à « que vaut une puissance nulle », qui est une autre
+      // micro-compétence.
+      const pBrut = randomInt(1, 4);
+      const p = pBrut === m ? m - 1 : pBrut;
+      const resultat = m - p;
+      return {
+        text: `Simplifie $\\dfrac{${fr(a)}^{x+${m}}}{${fr(a)}^{x+${p}}}$.`,
+        format: "qcm",
+        choices: makeChoices(`$${fr(a)}^{${resultat}}$`, [
+          `$${fr(a)}^{2x+${m + p}}$`,
+          `$${fr(a)}^{x+${resultat}}$`,
+          `$${fr(a)}^{${m}}$`,
+          `$${fr(a)}^{${resultat}x}$`,
+        ]),
+        expected: [`$${fr(a)}^{${resultat}}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Les propriétés algébriques valent pour des exposants quelconques, y compris littéraux : $\\dfrac{a^{u}}{a^{v}} = a^{u-v}$.",
+          "On soustrait les deux exposants sans rien calculer d'autre, puis on réduit l'expression obtenue.",
+          `$\\dfrac{${fr(a)}^{x+${m}}}{${fr(a)}^{x+${p}}} = ${fr(a)}^{(x+${m}) - (x+${p})} = ${fr(a)}^{x - x + ${m} - ${p}} = ${fr(a)}^{${resultat}}$. ` +
+            `Les deux $x$ se compensent : le résultat ne dépend plus de $x$.`,
+          `L'expression vaut $${fr(a)}^{${resultat}}$, quel que soit $x$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$${fr(a)}^{x+${resultat}}$`,
+            cause: "n'a soustrait que les nombres et a gardé un $x$ : les deux $x$ se simplifient aussi",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ expoT_exposant_un_sur_n ═══════════════ */
 
   {
@@ -658,6 +1234,62 @@ export const exponentiellesBank: TutorBankItemV4[] = [
           `$${base}^{${n}} = ${c}$, donc $${c}^{\\frac{1}{${n}}} = ${base}$.`,
           `$${c}^{\\frac{1}{${n}}} = ${base}$.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la NOTATION, pas le nombre. Le premier item calcule une racine
+    // qui tombe juste ; celui-ci part d'une phrase — « quel nombre, élevé à la
+    // puissance 5, donne 32 ? » — et demande comment on l'ÉCRIT avec un
+    // exposant. C'est ce dont on a besoin pour poser un taux moyen : on écrit
+    // l'expression avant de la faire calculer par la machine.
+    kind: "template",
+    id: "stmg_expo_un_sur_n_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_taux_moyen",
+    microId: "expoT_exposant_un_sur_n",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Chercher la racine $n$-ième, c'est élever à la puissance $\\dfrac{1}{n}$ — surtout pas diviser par $n$.",
+    tags: ["stmg", "maths", "exponentielle", "template"],
+    generate: () => {
+      // ⛔ Un nombre qui n'est pas une puissance parfaite : la question porte
+      // sur l'écriture, et un résultat rond ferait basculer vers le calcul.
+      const c = pick([7, 12, 20, 30, 45, 60, 90, 150] as const);
+      const n = pick([3, 4, 5, 6] as const);
+      const bonne = `$${c}^{\\frac{1}{${n}}}$`;
+      return {
+        text:
+          `Quel nombre, élevé à la puissance $${n}$, donne $${c}$ ? ` +
+          `Choisis la bonne écriture de ce nombre.`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `$${c}^{${n}}$`,
+          `$\\dfrac{${c}}{${n}}$`,
+          // ⛔ Pas de « $c \times \frac{1}{n}$ » ici : ce serait le MÊME nombre
+          // que $\frac{c}{n}$, écrit autrement — deux propositions justes ou
+          // fausses ensemble ne départagent rien.
+          `$\\sqrt{${c}}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'exposant $\\dfrac{1}{n}$ désigne la racine $n$-ième d'un réel positif : $c^{\\frac{1}{n}}$ est l'unique nombre positif dont la puissance $n$-ième vaut $c$.",
+          "On écrit l'exposant fractionnaire ; la valeur décimale, elle, se demande à la calculatrice.",
+          `$\\left(${c}^{\\frac{1}{${n}}}\\right)^{${n}} = ${c}^{\\frac{${n}}{${n}}} = ${c}$. ` +
+            `À la calculatrice, $${c}^{\\frac{1}{${n}}} \\approx ${fr(Math.round(Math.pow(c, 1 / n) * 1000) / 1000)}$ — ` +
+            `alors que $\\dfrac{${c}}{${n}} = ${fr(Math.round((c / n) * 1000) / 1000)}$, qui n'a rien à voir.`,
+          `Le nombre cherché s'écrit ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$\\dfrac{${c}}{${n}}$`,
+            cause: "a divisé par $n$ : l'exposant $\\frac{1}{n}$ n'est pas un facteur",
+          },
+        ],
       };
     },
   },
@@ -695,6 +1327,48 @@ export const exponentiellesBank: TutorBankItemV4[] = [
           `$q_{\\text{moyen}} = ${fr(Math.round(global * 10000) / 10000)}^{\\frac{1}{${n}}} \\approx ${fr(qMoyen)}$, ` +
             `donc $t = ${fr(qMoyen)} - 1 = ${fr(tMoyen / 100)}$, soit $${fr(tMoyen)}\\,\\%$.`,
           `Le taux annuel moyen est d'environ $${fr(tMoyen)}\\,\\%$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — depuis DEUX VALEURS, pas depuis le coefficient. Le premier item
+    // offre le coefficient global tout prêt ; ici il n'y a que le point de
+    // départ et le point d'arrivée, et il faut fabriquer le coefficient avant
+    // de prendre la racine. C'est l'ordre exact des questions du bac.
+    kind: "template",
+    id: "stmg_expo_taux_moyen_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_taux_moyen",
+    microId: "expoT_taux_moyen_calculer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Coefficient global $= \\dfrac{\\text{valeur finale}}{\\text{valeur initiale}}$, puis racine $n$-ième, puis on retire $1$.",
+    tags: ["stmg", "maths", "exponentielle", "gestion", "template", "short"],
+    generate: () => {
+      const evo = pick(EVOLUTIONS);
+      const vi = pick([200, 250, 400, 500, 800] as const);
+      const facteur = pick([1.5, 2, 2.5, 3, 0.5, 0.75, 0.8] as const);
+      const vf = vi * facteur;
+      const n = pick([3, 4, 5, 6, 8, 10] as const);
+      const qMoyen = Math.pow(facteur, 1 / n);
+      const taux = (qMoyen - 1) * 100;
+      return {
+        text:
+          `${evo.sujet.charAt(0).toUpperCase()}${evo.sujet.slice(1)} est passé de $${fr(vi)}$ à $${fr(vf)}$ ${evo.unite} en $${n}$ ans. ` +
+          `Quel est le taux d'évolution annuel MOYEN, en pourcentage arrondi au dixième ?`,
+        format: "short",
+        expected: [fr(Math.round(taux * 10) / 10)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le taux moyen est celui qui, appliqué chaque année, mènerait de la valeur initiale à la valeur finale. Son coefficient est la racine $n$-ième du coefficient global.",
+          "On calcule d'abord le coefficient global — le quotient de la valeur finale par la valeur initiale —, puis sa racine $n$-ième, et l'on retire $1$.",
+          `Coefficient global : $\\dfrac{${fr(vf)}}{${fr(vi)}} = ${fr(facteur)}$. ` +
+            `Coefficient moyen : $${fr(facteur)}^{\\frac{1}{${n}}} \\approx ${fr(Math.round(qMoyen * 100000) / 100000)}$. ` +
+            `Taux moyen : $${fr(Math.round(qMoyen * 100000) / 100000)} - 1 \\approx ${fr(Math.round(taux * 10) / 10 / 100)}$, soit $${fr(Math.round(taux * 10) / 10)}\\,\\%$.`,
+          `Le taux annuel moyen est d'environ $${fr(Math.round(taux * 10) / 10)}\\,\\%$ — ${taux > 0 ? "une hausse" : "une baisse"} régulière qui aurait donné le même résultat final.`
         ),
       };
     },
@@ -823,6 +1497,60 @@ export const exponentiellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — DIAGNOSTIQUER le taux moyen multiplié par $n$. Le premier item
+    // calcule le taux global ; celui-ci met en scène l'élève qui multiplie le
+    // taux moyen par le nombre d'années. L'écart est petit sur deux ans et
+    // énorme sur dix : c'est ce que montre le calcul, et c'est pour cela que
+    // l'erreur passe inaperçue en classe.
+    kind: "template",
+    id: "stmg_expo_taux_global_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_taux_equivalent",
+    microId: "expoT_taux_moyen_global",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les taux ne s'additionnent pas d'une année sur l'autre : ce sont les coefficients qui se multiplient.",
+    tags: ["stmg", "maths", "exponentielle", "gestion", "diagnostic", "template"],
+    generate: () => {
+      const tMoyen = pick([3, 4, 5, 6, 8, 10, 12] as const);
+      const n = pick([4, 5, 6, 8, 10] as const);
+      const global = (Math.pow(1 + tMoyen / 100, n) - 1) * 100;
+      const naif = tMoyen * n;
+      const bonne = `il se trompe : le taux global vaut environ $${fr(Math.round(global * 10) / 10)}\\,\\%$`;
+      return {
+        text:
+          `Une grandeur évolue au taux annuel moyen de $${tMoyen}\\,\\%$ pendant $${n}$ ans. ` +
+          `Un élève annonce un taux global de $${naif}\\,\\%$, « puisque $${tMoyen} \\times ${n} = ${naif}$ ». ` +
+          `Qu'en penses-tu ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `il a raison : les taux annuels s'additionnent sur la période`,
+          `il se trompe : le taux global vaut exactement $${tMoyen}\\,\\%$, il ne change pas`,
+          `il se trompe : le taux global vaut environ $${fr(Math.round((global / 2) * 10) / 10)}\\,\\%$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Sur plusieurs périodes, ce sont les COEFFICIENTS qui se multiplient : le coefficient global vaut $q^n$, et non $1 + n\\,\\dfrac{t}{100}$.",
+          "On élève le coefficient annuel à la puissance $n$, puis on retire $1$.",
+          `$${fr(1 + tMoyen / 100)}^{${n}} \\approx ${fr(Math.round(Math.pow(1 + tMoyen / 100, n) * 10000) / 10000)}$, ` +
+            `soit un taux global d'environ $${fr(Math.round(global * 10) / 10)}\\,\\%$ — et non $${naif}\\,\\%$. ` +
+            `L'écart vient des intérêts qui s'appliquent, chaque année, à ce que les années précédentes ont déjà ajouté.`,
+          `Le taux global est d'environ $${fr(Math.round(global * 10) / 10)}\\,\\%$, plus GRAND que la simple multiplication.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `il a raison : les taux annuels s'additionnent sur la période`,
+            cause: "a additionné les taux au lieu de composer les coefficients",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ expoT_taux_mensuel_annuel ═══════════════ */
 
   {
@@ -859,6 +1587,45 @@ export const exponentiellesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — du MOIS vers l'ANNÉE. Le premier item descend de l'année au
+    // mois ; celui-ci remonte, et c'est la question que pose un crédit à la
+    // consommation : « $1\,\%$ par mois », cela fait combien par an ? Pas
+    // $12\,\%$ — et l'écart est ce qui distingue un TAEG d'un taux affiché.
+    kind: "template",
+    id: "stmg_expo_mensuel_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_taux_equivalent",
+    microId: "expoT_taux_mensuel_annuel",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Douze mois de suite, c'est le coefficient mensuel élevé à la puissance $12$.",
+    tags: ["stmg", "maths", "exponentielle", "gestion", "template", "short"],
+    generate: () => {
+      const mensuel = pick([0.5, 0.8, 1, 1.2, 1.5, 2] as const);
+      const periodes = pick([12, 4, 2] as const);
+      const nom = periodes === 12 ? "mensuel" : periodes === 4 ? "trimestriel" : "semestriel";
+      const annuel = (Math.pow(1 + mensuel / 100, periodes) - 1) * 100;
+      return {
+        text:
+          `Un crédit est facturé au taux ${nom} de $${fr(mensuel)}\\,\\%$. ` +
+          `Quel est le taux ANNUEL équivalent, en pourcentage arrondi au centième ?`,
+        format: "short",
+        expected: [fr(Math.round(annuel * 100) / 100)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le taux annuel équivalent est celui qui produit, en une fois, la même évolution que les $n$ périodes enchaînées : son coefficient vaut $\\left(1 + \\dfrac{t}{100}\\right)^{n}$.",
+          "On élève le coefficient de la période à la puissance du nombre de périodes dans l'année, puis on retire $1$.",
+          `$${fr(1 + mensuel / 100)}^{${periodes}} \\approx ${fr(Math.round(Math.pow(1 + mensuel / 100, periodes) * 100000) / 100000)}$, ` +
+            `soit $${fr(Math.round(annuel * 100) / 100)}\\,\\%$ par an — ` +
+            `alors que la simple multiplication donnerait $${fr(mensuel)} \\times ${periodes} = ${fr(Math.round(mensuel * periodes * 100) / 100)}\\,\\%$.`,
+          `Le taux annuel équivalent est d'environ $${fr(Math.round(annuel * 100) / 100)}\\,\\%$ : toujours PLUS que la multiplication, parce que les intérêts s'ajoutent au capital à chaque période.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ expoT_taux_moyen_interpreter ═══════════════ */
 
   {
@@ -890,6 +1657,60 @@ export const exponentiellesBank: TutorBankItemV4[] = [
             `certaines années ont pu être bien meilleures, d'autres mauvaises. Le taux moyen résume seulement le résultat final.`,
           `Par exemple : « Tout se passe comme si ${evo.sujet} avait ${t > 0 ? "augmenté" : "diminué"} de ${fr(Math.abs(t))} % chaque année pendant ${n} ans — mais ce n'est pas l'évolution réelle année par année. »`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la même interprétation, mais SÉCURISÉE par un QCM. Le premier
+    // item est une question ouverte validée par mots-clés : un élève qui écrit
+    // la bonne phrase sans le mot « moyen » échoue, un autre qui recopie
+    // « en moyenne » sans rien comprendre passe. Ici les quatre lectures sont
+    // posées côte à côte, et c'est le sens qui départage.
+    kind: "template",
+    id: "stmg_expo_taux_interpreter_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "expo_taux_equivalent",
+    microId: "expoT_taux_moyen_interpreter",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un taux moyen décrit un scénario RÉGULIER fictif, qui donnerait le même résultat final.",
+    tags: ["stmg", "maths", "exponentielle", "gestion", "template"],
+    generate: () => {
+      const evo = pick(EVOLUTIONS);
+      const t = pick([2.5, 3.4, 4.8, 6.2, 7.5, 11.3] as const);
+      const n = pick([4, 5, 6, 8, 10] as const);
+      const bonne =
+        `tout se passe comme si la hausse avait été de $${fr(t)}\\,\\%$ chaque année : le résultat final est le même`;
+      return {
+        text:
+          `Sur $${n}$ ans, ${evo.sujet} a évolué au taux annuel moyen de $${fr(t)}\\,\\%$. ` +
+          `Laquelle de ces lectures est correcte ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `la hausse a été d'exactement $${fr(t)}\\,\\%$ chaque année`,
+          `la hausse totale sur les $${n}$ ans est de $${fr(t)}\\,\\%$`,
+          `la hausse totale sur les $${n}$ ans est de $${fr(Math.round(t * n * 10) / 10)}\\,\\%$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le taux moyen est le taux CONSTANT qui, appliqué à chaque période, aurait produit la même évolution globale. Il résume le résultat, pas le chemin.",
+          "On distingue trois choses : l'évolution réelle année par année, le scénario régulier équivalent, et l'évolution globale.",
+          `Le taux global vaut $\\left(${fr(1 + t / 100)}\\right)^{${n}} - 1 \\approx ` +
+            `${fr(Math.round((Math.pow(1 + t / 100, n) - 1) * 1000) / 10)}\\,\\%$ : ce n'est ni $${fr(t)}\\,\\%$, ` +
+            `ni $${fr(Math.round(t * n * 10) / 10)}\\,\\%$. ` +
+            `Et rien ne dit que chaque année a fait exactement $${fr(t)}\\,\\%$ : certaines ont pu être bien meilleures.`,
+          `La lecture correcte : ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `la hausse a été d'exactement $${fr(t)}\\,\\%$ chaque année`,
+            cause: "le taux moyen ne décrit pas l'évolution réelle : il décrit un scénario régulier qui aurait le même effet total",
+          },
+        ],
       };
     },
   },

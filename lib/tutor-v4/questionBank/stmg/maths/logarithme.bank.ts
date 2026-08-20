@@ -183,6 +183,53 @@ export const logarithmeBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — ENCADRER sans calculer. Le premier item demande de quelle
+    // équation $\log(b)$ est la solution ; celui-ci s'en sert : puisque
+    // $10^2 = 100$ et $10^3 = 1000$, le logarithme d'un nombre à trois chiffres
+    // est forcément entre $2$ et $3$. C'est la lecture qui rend le logarithme
+    // utile avant même la calculatrice.
+    kind: "template",
+    id: "stmg_log_definition_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "log_definition",
+    microId: "logT_definition",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Entre quelles puissances de $10$ se trouve ce nombre ?",
+    tags: ["stmg", "maths", "logarithme", "template"],
+    generate: () => {
+      // ⛔ $n$ commence à $2$ : avec $n = 1$, la proposition « entre $0$ et $1$ »
+      // serait identique à « entre $n-1$ et $n$ », et le QCM perdait une ligne.
+      const n = pick([2, 3, 4, 5, 6] as const);
+      // Un nombre strictement compris entre deux puissances de dix
+      // consécutives : l'encadrement du logarithme est alors strict, donc sans
+      // ambiguïté.
+      const b = Math.round(Math.pow(10, n) * pick([1.4, 2, 3.5, 5, 7.2, 8.6] as const));
+      const bonne = `entre $${n}$ et $${n + 1}$`;
+      return {
+        text: `Sans calculatrice, entre quels entiers consécutifs se situe $\\log(${fr(b)})$ ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `entre $${n - 1}$ et $${n}$`,
+          `entre $${n + 1}$ et $${n + 2}$`,
+          `entre $0$ et $1$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le logarithme décimal de $b$ est l'exposant à donner à $10$ pour obtenir $b$. Comme il est croissant, encadrer $b$ entre deux puissances de dix encadre $\\log(b)$ entre leurs exposants.",
+          "On cherche les deux puissances de dix qui encadrent le nombre, puis on lit leurs exposants.",
+          `$10^{${n}} = ${fr(Math.pow(10, n))}$ et $10^{${n + 1}} = ${fr(Math.pow(10, n + 1))}$. ` +
+            `Comme $${fr(Math.pow(10, n))} < ${fr(b)} < ${fr(Math.pow(10, n + 1))}$, on a $${n} < \\log(${fr(b)}) < ${n + 1}$.`,
+          `$\\log(${fr(b)})$ se situe ${bonne} — c'est d'ailleurs pourquoi $${fr(b)}$ s'écrit avec $${n + 1}$ chiffres.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ logT_valeurs_remarquables ═══════════════ */
 
   {
@@ -209,6 +256,39 @@ export const logarithmeBank: TutorBankItemV4[] = [
           "On écrit le nombre comme une puissance de $10$, puis on lit l'exposant.",
           `$${fr(b)} = 10^{${n}}$, donc $\\log(${fr(b)}) = ${n}$.`,
           `$\\log(${fr(b)}) = ${n}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — le geste À L'ENVERS. Le premier item part du nombre et rend
+    // l'exposant ; celui-ci part de l'exposant et rend le nombre. C'est
+    // exactement l'équation $10^x = b$ de la définition, lue dans l'autre sens,
+    // et c'est ce qu'on fait quand on « défait » un logarithme dans un calcul.
+    kind: "template",
+    id: "stmg_log_valeurs_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "log_definition",
+    microId: "logT_valeurs_remarquables",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Si $\\log(x) = n$, alors $x = 10^n$ : le logarithme et la puissance de dix se défont l'un l'autre.",
+    tags: ["stmg", "maths", "logarithme", "template", "short"],
+    generate: () => {
+      const n = pick([1, 2, 3, 4, 5, 6, 0, -1, -2, -3] as const);
+      const x = Math.pow(10, n);
+      return {
+        text: `On sait que $\\log(x) = ${n}$. Que vaut $x$ ?`,
+        format: "short",
+        expected: [fr(x)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Par définition, $\\log(x) = n$ signifie exactement $10^n = x$ : le logarithme décimal rend l'exposant, et la puissance de dix rend le nombre.",
+          "On écrit $10$ à la puissance de la valeur donnée.",
+          `$\\log(x) = ${n}$ donne $x = 10^{${n}} = ${fr(x)}$.`,
+          `$x = ${fr(x)}$.`
         ),
       };
     },
@@ -271,6 +351,54 @@ export const logarithmeBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la croissance MISE AU TRAVAIL. Le premier item la nomme et
+    // compare deux logarithmes ; celui-ci s'en sert pour résoudre : puisque
+    // $\log$ conserve l'ordre, $\log(x) > 2$ équivaut à $x > 100$. C'est le
+    // même argument, mais rendu à ce qu'il sert.
+    // ⚠️ Sans figure : la courbe du premier item donnerait le seuil à l'œil.
+    kind: "template",
+    id: "stmg_log_sens_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "log_definition",
+    microId: "logT_sens_variation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Applique la puissance de dix aux deux membres : la croissance conserve le sens de l'inégalité.",
+    tags: ["stmg", "maths", "logarithme", "template"],
+    generate: () => {
+      const n = pick([1, 2, 3, 4, 5] as const);
+      const seuil = Math.pow(10, n);
+      const bonne = `$x > ${fr(seuil)}$`;
+      return {
+        text: `Résous l'inéquation $\\log(x) > ${n}$, d'inconnue $x$ strictement positive.`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `$x > ${n}$`,
+          `$x < ${fr(seuil)}$`,
+          `$x > ${fr(seuil * 10)}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La fonction logarithme décimal est strictement croissante : elle conserve l'ordre. Donc $\\log(x) > n$ équivaut à $x > 10^{n}$.",
+          "On applique la puissance de dix aux deux membres — le sens de l'inégalité ne change pas, puisque la fonction est croissante.",
+          `$\\log(x) > ${n}$ et $\\log(${fr(seuil)}) = ${n}$ : comme $\\log$ conserve l'ordre, ` +
+            `l'inéquation équivaut à $x > ${fr(seuil)}$.`,
+          `L'ensemble des solutions est $]${fr(seuil)}\\,;\\,+\\infty[$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$x > ${n}$`,
+            cause: "a comparé $x$ au logarithme lui-même : il faut repasser par la puissance de dix",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ logT_produit ═══════════════════ */
 
   {
@@ -315,6 +443,67 @@ export const logarithmeBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la propriété qui CALCULE. Le premier item choisit la bonne
+    // identité parmi quatre ; celui-ci la fait servir : la table ne donne pas
+    // $\log(15)$, mais elle donne $\log(3)$ et $\log(5)$. C'est l'usage
+    // historique du logarithme — remplacer une multiplication par une addition.
+    // ⚠️ Réponse demandée au MILLIÈME : au dix-millième, la somme des valeurs
+    // arrondies de la table et le vrai logarithme peuvent différer d'une unité
+    // sur le dernier chiffre, et l'élève serait compté faux pour un calcul juste.
+    kind: "template",
+    id: "stmg_log_produit_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "log_proprietes",
+    microId: "logT_produit",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Décompose le nombre en produit de deux facteurs présents dans la table, puis additionne leurs logarithmes.",
+    tags: ["stmg", "maths", "logarithme", "canvas", "template", "short"],
+    generate: () => {
+      // On ne garde que les paires pour lesquelles la somme des valeurs
+      // ARRONDIES de la table donne, au millième, le même résultat que le vrai
+      // logarithme du produit.
+      // ⛔ Pas de $2 \times 3$ : le tableau donne $\log(6)$ directement, et
+      // l'énoncé promet le contraire.
+      const paires = ([
+        [2, 5],
+        [3, 5],
+        [2, 7],
+        [3, 4],
+        [5, 6],
+        [4, 5],
+        [3, 7],
+        [2, 11],
+        [3, 11],
+      ] as const).filter(([u, v]) => {
+        const somme =
+          Math.round(Math.log10(u) * 10000) / 10000 + Math.round(Math.log10(v) * 10000) / 10000;
+        return Math.round(somme * 1000) / 1000 === Math.round(Math.log10(u * v) * 1000) / 1000;
+      });
+      const [a, b] = pick(paires);
+      const produit = a * b;
+      const resultat = Math.round(Math.log10(produit) * 1000) / 1000;
+      return {
+        text:
+          `À l'aide du tableau, calcule $\\log(${produit})$, arrondi au millième. ` +
+          `Le tableau ne donne pas directement $\\log(${produit})$ : décompose.`,
+        format: "short",
+        expected: [fr(resultat)],
+        comparator: "number_equal",
+        canvas: canvasTableLog([2, 3, 4, 5, 6, 7, 11], "Table de logarithmes décimaux"),
+        explanation: exp(
+          "$\\log(ab) = \\log(a) + \\log(b)$ : le logarithme transforme un produit en somme. C'est ce qui permet de calculer le logarithme d'un nombre absent de la table.",
+          "On écrit le nombre comme un produit de deux nombres de la table, puis on additionne leurs logarithmes.",
+          `$${produit} = ${a} \\times ${b}$, donc $\\log(${produit}) = \\log(${a}) + \\log(${b}) \\approx ` +
+            `${fr(Math.round(Math.log10(a) * 10000) / 10000)} + ${fr(Math.round(Math.log10(b) * 10000) / 10000)} \\approx ${fr(resultat)}$.`,
+          `$\\log(${produit}) \\approx ${fr(resultat)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ logT_quotient ═══════════════════ */
 
   {
@@ -343,6 +532,62 @@ export const logarithmeBank: TutorBankItemV4[] = [
           "On applique la propriété du quotient, puis on utilise $\\log(10^k) = k$.",
           `$\\log(${fr(num)}) - \\log(${fr(den)}) = ${m} - ${n} = ${m - n}$.`,
           `Le résultat vaut $${m - n}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — DIAGNOSTIQUER le quotient devenu quotient. Le premier item
+    // applique la règle sur des puissances de dix, où tout tombe rond ; celui-ci
+    // met en scène l'erreur jumelle de celle du produit : transformer
+    // $\log\left(\frac{a}{b}\right)$ en $\frac{\log a}{\log b}$. Les deux
+    // écritures se ressemblent, et une seule est vraie.
+    kind: "template",
+    id: "stmg_log_quotient_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "log_proprietes",
+    microId: "logT_quotient",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le logarithme transforme les quotients en DIFFÉRENCES, pas en quotients.",
+    tags: ["stmg", "maths", "logarithme", "diagnostic", "template"],
+    generate: () => {
+      // ⛔ La paire $(10\,000\,;\,100)$ est écartée : la division des exposants
+      // y donne le MÊME nombre que leur soustraction ($4 \div 2 = 4 - 2$), et
+      // l'erreur mise en scène produirait le bon résultat.
+      const [a, b] = pick([
+        [100, 10],
+        [1000, 10],
+        [1000, 100],
+        [10000, 10],
+        [100000, 100],
+      ] as const);
+      const vrai = Math.log10(a) - Math.log10(b);
+      const faux = Math.log10(a) / Math.log10(b);
+      const bonne = "il a transformé le quotient en quotient : il fallait une DIFFÉRENCE";
+      return {
+        text:
+          `Un élève calcule $\\log\\left(\\dfrac{${fr(a)}}{${fr(b)}}\\right)$ et écrit ` +
+          `$\\dfrac{\\log(${fr(a)})}{\\log(${fr(b)})} = ${fr(faux)}$. ` +
+          `Quelle erreur a-t-il commise ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          "il a oublié que le logarithme d'un quotient n'existe pas",
+          "il s'est trompé dans la valeur de $\\log(10)$",
+          "il n'a commis aucune erreur : les deux écritures sont égales",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "$\\log\\left(\\dfrac{a}{b}\\right) = \\log(a) - \\log(b)$ : le logarithme abaisse d'un cran chaque opération — le produit devient somme, le quotient devient différence.",
+          "On calcule les deux écritures et on les compare : elles ne donnent pas le même nombre.",
+          `Le bon calcul : $\\log(${fr(a)}) - \\log(${fr(b)}) = ${fr(Math.log10(a))} - ${fr(Math.log10(b))} = ${fr(vrai)}$, ` +
+            `et l'on vérifie que $\\dfrac{${fr(a)}}{${fr(b)}} = ${fr(a / b)} = 10^{${fr(vrai)}}$. ` +
+            `L'élève, lui, a obtenu $${fr(faux)}$.`,
+          `L'erreur : ${bonne}.`
         ),
       };
     },
@@ -392,6 +637,56 @@ export const logarithmeBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la règle REMONTÉE. Le premier item fait descendre l'exposant ;
+    // celui-ci le fait remonter : un facteur devant un logarithme redevient un
+    // exposant. C'est le geste qu'on doit faire pour reconnaître qu'une somme
+    // de logarithmes est encore un logarithme — et pour vérifier une solution.
+    kind: "template",
+    id: "stmg_log_puissance_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "log_proprietes",
+    microId: "logT_puissance",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un facteur devant $\\log$ remonte en exposant : $n\\log(a) = \\log(a^n)$.",
+    tags: ["stmg", "maths", "logarithme", "template"],
+    generate: () => {
+      const a = pick([2, 3, 5, 7] as const);
+      const n = randomInt(2, 5);
+      const valeur = Math.pow(a, n);
+      const bonne = `$x = ${valeur}$`;
+      // ⛔ Les pièges se calculent puis se DÉDOUBLONNENT : $2^4$ et $4^2$ font
+      // le même nombre, et $2 \times 2$ vaut $2^2$. Sans ce tri, le QCM tombait
+      // à deux propositions une fois sur quinze. Les deux derniers candidats
+      // sont là pour compléter quand les autres s'effondrent.
+      const pieges = Array.from(new Set([n * a, a + n, Math.pow(n, a), a, valeur + 1, valeur - 1]))
+        .filter((v) => v !== valeur)
+        .slice(0, 3);
+      return {
+        text: `On sait que $\\log(x) = ${n}\\log(${a})$. Que vaut $x$ ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, pieges.map((v) => `$x = ${v}$`)),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "$n\\log(a) = \\log(a^n)$ : un facteur devant un logarithme est un exposant qui a été descendu. On peut donc le faire remonter.",
+          "On réécrit le membre de droite comme un seul logarithme, puis on identifie les deux nombres — la fonction logarithme ne prend jamais deux fois la même valeur.",
+          `$${n}\\log(${a}) = \\log\\left(${a}^{${n}}\\right) = \\log(${valeur})$. ` +
+            `Donc $\\log(x) = \\log(${valeur})$, d'où $x = ${valeur}$.`,
+          `$x = ${valeur}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$x = ${n * a}$`,
+            cause: "a multiplié le facteur par le nombre : le facteur est un EXPOSANT, pas un coefficient",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ logT_inverse ═══════════════════ */
 
   {
@@ -418,6 +713,45 @@ export const logarithmeBank: TutorBankItemV4[] = [
           "On applique la règle du quotient : $\\log(1) - \\log(b) = 0 - \\log(b)$.",
           `$\\log\\left(\\dfrac{1}{${fr(b)}}\\right) = -\\log(${fr(b)}) = ${-n}$.`,
           `Le résultat vaut $${-n}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — un nombre qui n'est PAS une puissance de dix. Le premier item
+    // travaille sur $\frac{1}{10^n}$, où le résultat tombe rond et où l'on peut
+    // réussir sans la règle ; ici il faut vraiment appliquer
+    // $\log\left(\frac{1}{b}\right) = -\log(b)$, avec une valeur lue dans la
+    // table. Le signe moins devient le seul enjeu.
+    kind: "template",
+    id: "stmg_log_inverse_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "log_proprietes",
+    microId: "logT_inverse",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$\\dfrac{1}{b}$ a pour logarithme l'OPPOSÉ de celui de $b$.",
+    tags: ["stmg", "maths", "logarithme", "canvas", "template", "short"],
+    generate: () => {
+      const b = pick([2, 4, 5, 8, 20, 25, 50] as const);
+      const inverse = 1 / b;
+      const resultat = Math.round(-Math.log10(b) * 1000) / 1000;
+      return {
+        text:
+          `À l'aide du tableau, calcule $\\log(${fr(inverse)})$, arrondi au millième. ` +
+          `On remarquera que $${fr(inverse)} = \\dfrac{1}{${b}}$.`,
+        format: "short",
+        expected: [fr(resultat)],
+        comparator: "number_equal",
+        canvas: canvasTableLog([2, 4, 5, 8, 20, 25, 50], "Table de logarithmes décimaux"),
+        explanation: exp(
+          "$\\log\\left(\\dfrac{1}{b}\\right) = -\\log(b)$ : passer à l'inverse change le signe du logarithme. Un nombre plus petit que $1$ a donc toujours un logarithme NÉGATIF.",
+          "On lit $\\log(b)$ dans la table, puis on change son signe.",
+          `$\\log(${b}) \\approx ${fr(Math.round(Math.log10(b) * 10000) / 10000)}$, ` +
+            `donc $\\log\\left(\\dfrac{1}{${b}}\\right) \\approx ${fr(resultat)}$.`,
+          `$\\log(${fr(inverse)}) \\approx ${fr(resultat)}$ — négatif, comme pour tout nombre compris entre $0$ et $1$.`
         ),
       };
     },
@@ -459,6 +793,57 @@ export const logarithmeBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — ÉCRIRE la solution avant de la calculer. Le premier item rend
+    // un nombre arrondi ; celui-ci demande la forme exacte, $\frac{\log b}{\log
+    // a}$, qui est ce qu'un correcteur attend AVANT la valeur. Le piège est le
+    // sens du quotient : $\frac{\log a}{\log b}$ se ressemble et ne vaut rien.
+    // ⚠️ Sans table de logarithmes : il n'y a rien à calculer ici, et la table
+    // pousserait justement à le faire.
+    kind: "template",
+    id: "stmg_log_resoudre_expo_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "log_equations",
+    microId: "logT_resoudre_exponentielle",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On applique $\\log$ des deux côtés : $x\\log(a) = \\log(b)$, puis on divise par $\\log(a)$.",
+    tags: ["stmg", "maths", "logarithme", "template"],
+    generate: () => {
+      const a = pick([1.05, 1.1, 1.2, 1.5, 2, 3] as const);
+      // ⛔ $b$ ne doit pas valoir $a$ : sinon le piège du quotient renversé
+      // s'écrit exactement comme la bonne réponse.
+      const b = pick([2, 5, 20, 50, 100, 500].filter((v) => v !== a));
+      const bonne = `$x = \\dfrac{\\log(${b})}{\\log(${fr(a)})}$`;
+      return {
+        text: `Quelle est l'écriture EXACTE de la solution de l'équation $${fr(a)}^x = ${b}$ ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `$x = \\dfrac{\\log(${fr(a)})}{\\log(${b})}$`,
+          `$x = \\log\\left(\\dfrac{${b}}{${fr(a)}}\\right)$`,
+          `$x = \\log(${b}) - \\log(${fr(a)})$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour résoudre $a^x = b$, on applique le logarithme décimal aux deux membres : $\\log(a^x) = \\log(b)$, soit $x\\log(a) = \\log(b)$, donc $x = \\dfrac{\\log(b)}{\\log(a)}$.",
+          "On fait descendre l'exposant, puis on divise par le logarithme de la BASE — celui qui multipliait $x$.",
+          `$${fr(a)}^x = ${b}$ donne $x\\log(${fr(a)}) = \\log(${b})$, donc $x = \\dfrac{\\log(${b})}{\\log(${fr(a)})} \\approx ` +
+            `${fr(Math.round((Math.log10(b) / Math.log10(a)) * 100) / 100)}$.`,
+          `L'écriture exacte est ${bonne} — la valeur décimale ne vient qu'après.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$x = \\log(${b}) - \\log(${fr(a)})$`,
+            cause: "a transformé le quotient en différence : ici le quotient porte sur les LOGARITHMES, il ne se simplifie pas",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════ logT_resoudre_puissance ═══════════ */
 
   {
@@ -488,6 +873,72 @@ export const logarithmeBank: TutorBankItemV4[] = [
           `$x = ${b}^{\\frac{1}{${a}}} = ${x}$, et l'on vérifie : $${x}^{${a}} = ${b}$.`,
           `La solution est $x = ${x}$.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — RECONNAÎTRE laquelle des deux équations on a sous les yeux. Le
+    // premier item résout $x^a = b$ ; celui-ci demande de TRIER : quand
+    // l'inconnue est en base, une racine suffit ; quand elle est en exposant,
+    // il faut le logarithme. C'est la confusion centrale du chapitre, et elle
+    // ne se voit qu'en mettant les deux côte à côte.
+    kind: "template",
+    id: "stmg_log_resoudre_puissance_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "log_equations",
+    microId: "logT_resoudre_puissance",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde OÙ est l'inconnue : en base, on prend une racine ; en exposant, il faut le logarithme.",
+    tags: ["stmg", "maths", "logarithme", "template"],
+    generate: () => {
+      const x = pick([2, 3, 4, 5, 6, 10] as const);
+      const a = pick([3, 4, 5] as const);
+      const b = Math.pow(x, a);
+      // ⛔⛔ La base des fausses équations ne doit pas rendre $b$ comme puissance
+      // ENTIÈRE : « $2^x = 16$ » se résout de tête, sans logarithme, et il y
+      // aurait alors deux bonnes réponses. On écarte donc toute base dont $b$
+      // est une puissance.
+      const bases = pick(
+        [2, 3, 5, 1.05, 1.2].filter((v) => {
+          const k = Math.log(b) / Math.log(v);
+          return Math.abs(k - Math.round(k)) > 1e-9;
+        })
+      );
+      // La cible des fausses équations ne doit pas valoir $b$, sinon deux
+      // propositions s'écriraient pareil.
+      const cibles = pick([50, 200, 1000].filter((v) => v !== b));
+      const bonne = `$x^{${a}} = ${b}$`;
+      return {
+        text: `Parmi ces quatre équations, laquelle se résout SANS logarithme ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `$${fr(bases)}^x = ${cibles}$`,
+          `$${fr(bases)}^x = ${b}$`,
+          // ⛔ Le « $x$ » de la quatrième équation est la LETTRE, pas la valeur
+          // de la solution : en interpolant `${x}`, on écrivait « $10^x =
+          // 1000$ », qui se résout de tête — deux bonnes réponses au lieu d'une.
+          `$x^x = ${cibles}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Quand l'inconnue est en BASE — équation $x^a = b$ —, la solution positive est $b^{\\frac{1}{a}}$ : une racine suffit. Quand elle est en EXPOSANT — équation $a^x = b$ —, il faut le logarithme pour la faire descendre.",
+          "On repère la place de $x$ dans chaque équation avant de choisir l'outil.",
+          `Dans $x^{${a}} = ${b}$, l'inconnue est en base : $x = ${b}^{\\frac{1}{${a}}} = ${x}$. ` +
+            `Dans les autres, $x$ est en exposant — et dans $x^x = ${cibles}$, elle est aux deux places à la fois, ` +
+            `ce qui dépasse le programme.`,
+          `L'équation qui se résout sans logarithme est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$${fr(bases)}^x = ${b}$`,
+            cause: "l'inconnue est ici en exposant : c'est le cas qui réclame le logarithme",
+          },
+        ],
       };
     },
   },
@@ -526,6 +977,50 @@ export const logarithmeBank: TutorBankItemV4[] = [
           "On calcule le seuil réel, puis on prend le premier entier strictement au-dessus — la courbe permet de vérifier.",
           `$n > \\dfrac{\\log(${b})}{\\log(${fr(a)})} \\approx ${fr(Math.round(seuil * 100) / 100)}$, donc le plus petit entier convenable est $${n}$.`,
           `Le plus petit entier est $n = ${n}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la base est PLUS PETITE QUE 1, et l'inégalité se retourne. Le
+    // premier item travaille une croissance ; ici la grandeur décroît, donc
+    // $\log(a)$ est négatif, et diviser par lui CHANGE le sens de l'inégalité.
+    // C'est le seul endroit du domaine où cela arrive, et c'est là que se perd
+    // un élève qui applique la méthode par cœur.
+    // ⚠️ Sans figure : le premier item porte la sienne, et une courbe
+    // décroissante rendrait le seuil lisible sans jamais poser l'inégalité.
+    kind: "template",
+    id: "stmg_log_inequation_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "log_equations",
+    microId: "logT_inequation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$\\log$ d'un nombre inférieur à $1$ est NÉGATIF : en divisant par lui, l'inégalité change de sens.",
+    tags: ["stmg", "maths", "logarithme", "gestion", "template", "short"],
+    generate: () => {
+      const t = pick([5, 10, 15, 20, 25, 30] as const);
+      const a = 1 - t / 100;
+      const cible = pick([0.5, 0.25, 0.2, 0.1] as const);
+      const seuil = Math.log10(cible) / Math.log10(a);
+      const n = Math.floor(seuil) + 1;
+      return {
+        text:
+          `Un stock diminue de $${t}\\,\\%$ par an. ` +
+          `Au bout de combien d'années ENTIÈRES sera-t-il inférieur à $${fr(cible * 100)}\\,\\%$ de sa valeur d'aujourd'hui ?`,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Résoudre $a^n < c$ avec $0 < a < 1$ passe par le logarithme, mais $\\log(a)$ est alors NÉGATIF : en divisant les deux membres par lui, le sens de l'inégalité s'inverse et l'on obtient $n > \\dfrac{\\log(c)}{\\log(a)}$.",
+          "On applique le logarithme, on fait descendre l'exposant, puis on divise — en retournant l'inégalité, puisque le diviseur est négatif.",
+          `$${fr(a)}^n < ${fr(cible)}$ donne $n\\log(${fr(a)}) < \\log(${fr(cible)})$. ` +
+            `Or $\\log(${fr(a)}) \\approx ${fr(Math.round(Math.log10(a) * 10000) / 10000)}$, qui est négatif : ` +
+            `on obtient donc $n > \\dfrac{${fr(Math.round(Math.log10(cible) * 10000) / 10000)}}{${fr(Math.round(Math.log10(a) * 10000) / 10000)}} \\approx ${fr(Math.round(seuil * 100) / 100)}$, ` +
+            `d'où $n = ${n}$.`,
+          `Il faut $${n}$ années pour que le stock passe sous $${fr(cible * 100)}\\,\\%$ de sa valeur.`
         ),
       };
     },
@@ -575,6 +1070,53 @@ export const logarithmeBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la DURÉE D'UN REMBOURSEMENT, où la cible n'est plus un multiple
+    // du départ mais une somme à atteindre. Le premier item cherche un seuil de
+    // capitalisation ; celui-ci part d'un versement annuel et demande combien
+    // d'annuités il faut — c'est le mot même du libellé, et la question la plus
+    // fréquente en gestion.
+    // ⚠️ Sans figure : le premier item porte déjà la courbe et son seuil.
+    kind: "template",
+    id: "stmg_log_annuites_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "log_applications",
+    microId: "logT_nombre_annuites",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Écris l'inéquation $q^n > \\dfrac{\\text{objectif}}{\\text{départ}}$, puis applique le logarithme.",
+    tags: ["stmg", "maths", "logarithme", "gestion", "template", "short"],
+    generate: () => {
+      const placement = pick(PLACEMENTS);
+      const depart = pick([800, 1200, 1600, 3000, 5000] as const);
+      const t = pick([2, 3, 4, 6, 7, 9] as const);
+      const q = 1 + t / 100;
+      // L'objectif est un montant rond, pas un multiple du départ : l'élève doit
+      // former lui-même le quotient.
+      const objectif = Math.ceil((depart * pick([1.4, 1.8, 2.2, 2.6] as const)) / 100) * 100;
+      const seuil = Math.log10(objectif / depart) / Math.log10(q);
+      const n = Math.floor(seuil) + 1;
+      return {
+        text:
+          `${placement.sujet.charAt(0).toUpperCase()}${placement.sujet.slice(1)} vaut aujourd'hui $${depart}$ ${placement.unite} ` +
+          `et progresse de $${t}\\,\\%$ par an. ` +
+          `Combien d'années entières faut-il attendre pour atteindre $${objectif}$ ${placement.unite} ?`,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Chercher un nombre d'annuités revient à résoudre $u_0 q^n \\geqslant C$, c'est-à-dire $q^n \\geqslant \\dfrac{C}{u_0}$ : on applique le logarithme décimal et l'on fait descendre $n$.",
+          "On forme d'abord le quotient objectif sur départ, puis on divise son logarithme par celui du coefficient, et l'on prend l'entier supérieur.",
+          `$\\dfrac{${objectif}}{${depart}} \\approx ${fr(Math.round((objectif / depart) * 10000) / 10000)}$, ` +
+            `donc $n \\geqslant \\dfrac{\\log\\left(${fr(Math.round((objectif / depart) * 10000) / 10000)}\\right)}{\\log(${fr(q)})} \\approx ${fr(Math.round(seuil * 100) / 100)}$. ` +
+            `Une année entamée ne compte pas : il faut $${n}$ années complètes.`,
+          `Au bout de $${n}$ années, l'objectif de $${objectif}$ ${placement.unite} est atteint.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ logT_temps_doublement ═══════════════════ */
 
   {
@@ -608,6 +1150,45 @@ export const logarithmeBank: TutorBankItemV4[] = [
           "On remarque que la valeur de départ n'intervient pas : le temps de doublement ne dépend que du taux.",
           `$x = \\dfrac{\\log(2)}{\\log(${fr(q)})} \\approx \\dfrac{0{,}301}{${fr(Math.round(Math.log10(q) * 100000) / 100000)}} \\approx ${fr(Math.round(doublement * 10) / 10)}$ années.`,
           `La grandeur double au bout d'environ $${fr(Math.round(doublement * 10) / 10)}$ années.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la DEMI-VIE, l'autre moitié du libellé. Le premier item fait
+    // doubler ; celui-ci fait diminuer de moitié, et l'on résout $q^x = 0,5$
+    // avec $q < 1$. Les deux logarithmes sont négatifs, leur quotient est
+    // positif : c'est le seul calcul du domaine où deux signes moins se
+    // compensent, et il déroute.
+    // ⚠️ Sans figure : le premier item porte la courbe et son seuil.
+    kind: "template",
+    id: "stmg_log_doublement_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "log_applications",
+    microId: "logT_temps_doublement",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On résout $q^x = 0{,}5$ : les deux logarithmes sont négatifs, mais leur quotient est bien positif.",
+    tags: ["stmg", "maths", "logarithme", "template", "short"],
+    generate: () => {
+      const t = pick([2, 3, 4, 5, 6, 8, 10, 12, 15, 20] as const);
+      const q = 1 - t / 100;
+      const demiVie = Math.log10(0.5) / Math.log10(q);
+      return {
+        text:
+          `Une substance perd $${t}\\,\\%$ de sa masse chaque année. ` +
+          `Au bout de combien d'années sa masse aura-t-elle diminué de MOITIÉ ? ` +
+          `Donne le résultat arrondi au dixième.`,
+        format: "short",
+        expected: [fr(Math.round(demiVie * 10) / 10)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La demi-vie est la durée $x$ au bout de laquelle le coefficient cumulé vaut $0{,}5$ : on résout $q^x = 0{,}5$, donc $x = \\dfrac{\\log(0{,}5)}{\\log(q)}$. Comme pour le temps de doublement, la valeur de départ n'intervient pas.",
+          "On applique le logarithme, on fait descendre l'exposant, puis on divise — les deux logarithmes sont négatifs, le résultat est positif.",
+          `$x = \\dfrac{\\log(0{,}5)}{\\log(${fr(q)})} \\approx \\dfrac{-0{,}301}{${fr(Math.round(Math.log10(q) * 100000) / 100000)}} \\approx ${fr(Math.round(demiVie * 10) / 10)}$ années.`,
+          `La masse est réduite de moitié au bout d'environ $${fr(Math.round(demiVie * 10) / 10)}$ années.`
         ),
       };
     },
@@ -653,6 +1234,58 @@ export const logarithmeBank: TutorBankItemV4[] = [
             `donc le nombre de chiffres vaut $${Math.floor(logN)} + 1 = ${chiffres}$.`,
           `$${a}^{${n}}$ s'écrit avec $${chiffres}$ chiffres.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — l'ORDRE DE GRANDEUR, l'autre moitié du libellé. Le premier item
+    // compte les chiffres ; celui-ci part d'un logarithme déjà calculé et
+    // demande à quelle puissance de dix le nombre ressemble. C'est la lecture
+    // qu'on fait d'un résultat de calculatrice affiché en notation
+    // scientifique, et elle ne demande aucun calcul — seulement la partie
+    // entière.
+    kind: "template",
+    id: "stmg_log_chiffres_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "log_applications",
+    microId: "logT_nombre_de_chiffres",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La partie entière de $\\log(N)$ donne l'exposant de la puissance de dix qui encadre $N$.",
+    tags: ["stmg", "maths", "logarithme", "template"],
+    generate: () => {
+      const entiere = pick([5, 7, 9, 11, 14, 17, 21] as const);
+      const decimale = pick([0.12, 0.28, 0.44, 0.61, 0.79, 0.93] as const);
+      const logN = entiere + decimale;
+      const bonne = `entre $10^{${entiere}}$ et $10^{${entiere + 1}}$`;
+      return {
+        text:
+          `Un calcul donne $\\log(N) \\approx ${fr(logN)}$, où $N$ est un entier. ` +
+          `Quel est l'ordre de grandeur de $N$ ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `entre $10^{${entiere - 1}}$ et $10^{${entiere}}$`,
+          `entre $10^{${entiere + 1}}$ et $10^{${entiere + 2}}$`,
+          `environ $${fr(logN)}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Si $\\log(N) = k + d$ avec $k$ entier et $0 \\leqslant d < 1$, alors $10^{k} \\leqslant N < 10^{k+1}$ : la PARTIE ENTIÈRE du logarithme donne l'ordre de grandeur, et le nombre de chiffres vaut $k + 1$.",
+          "On sépare la partie entière du logarithme de sa partie décimale, et l'on ne garde que la première.",
+          `$\\log(N) \\approx ${fr(logN)}$ : la partie entière vaut $${entiere}$, donc $10^{${entiere}} \\leqslant N < 10^{${entiere + 1}}$. ` +
+            `Au passage, $N$ s'écrit avec $${entiere + 1}$ chiffres.`,
+          `$N$ est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `environ $${fr(logN)}$`,
+            cause: "a confondu le nombre et son logarithme : $\\log(N)$ est un EXPOSANT, pas une valeur approchée de $N$",
+          },
+        ],
       };
     },
   },
