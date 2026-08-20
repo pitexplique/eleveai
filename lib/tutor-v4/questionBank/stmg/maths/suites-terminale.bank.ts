@@ -1582,6 +1582,66 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la NATURE des deux placements, pas leur écart. Le premier item
+    // chiffre la différence ; celui-ci nomme ce qui la produit : à intérêts
+    // simples, on ajoute chaque année la même somme — une suite ARITHMÉTIQUE ;
+    // à intérêts composés, on multiplie par le même coefficient — une suite
+    // GÉOMÉTRIQUE. Tout le chapitre tient dans cette phrase, et c'est elle qui
+    // explique pourquoi l'écart se creuse au lieu de rester stable.
+    kind: "template",
+    id: "stmg_suiteT_interets_simples_composes_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_comparer",
+    microId: "suiteT_interets_simples_composes",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le même montant ajouté chaque année, ou le même coefficient appliqué chaque année : deux familles de suites.",
+    tags: ["stmg", "maths", "suites", "template"],
+    generate: () => {
+      const capital = pick([2000, 3000, 4000, 5000, 10000] as const);
+      const t = pick([3, 4, 5, 8, 10] as const);
+      const interetAnnuel = (capital * t) / 100;
+      const bonne =
+        "les intérêts SIMPLES forment une suite arithmétique, les COMPOSÉS une suite géométrique";
+      return {
+        text:
+          `Un capital de $${eur(capital)}$ est placé à $${t}\\,\\%$ par an. ` +
+          `Quelle est la nature des suites décrivant sa valeur, selon que les intérêts sont simples ou composés ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          "les intérêts SIMPLES forment une suite géométrique, les COMPOSÉS une suite arithmétique",
+          "les deux forment des suites géométriques, de raisons différentes",
+          "les deux forment des suites arithmétiques, de raisons différentes",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "À intérêts SIMPLES, le pourcentage porte toujours sur le capital de départ : la même somme s'ajoute chaque année, donc la suite est ARITHMÉTIQUE. À intérêts COMPOSÉS, il porte sur le capital acquis : on multiplie par le même coefficient, donc la suite est GÉOMÉTRIQUE.",
+          "On se demande ce qui se répète à l'identique : une somme ajoutée, ou un coefficient appliqué.",
+          `Simples : on ajoute $${eur(interetAnnuel)}$ chaque année — raison $r = ${fr(interetAnnuel)}$. ` +
+            `Composés : on multiplie par $${fr(1 + t / 100)}$ chaque année — raison $q = ${fr(1 + t / 100)}$. ` +
+            `C'est pour cela que l'écart entre les deux ne cesse de grandir : l'un progresse en ligne droite, ` +
+            `l'autre s'accélère. Au bout de $10$ ans, les simples donnent $${eur(capital + 10 * interetAnnuel)}$ ` +
+            `contre $${eur(Math.round(capital * Math.pow(1 + t / 100, 10)))}$ pour les composés.`,
+          `Simples : arithmétique. Composés : géométrique.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "les deux forment des suites géométriques, de raisons différentes",
+            cause: "les intérêts simples n'ont pas de coefficient multiplicateur constant : ils ajoutent toujours la même somme",
+          },
+          {
+            choice:
+              "les intérêts SIMPLES forment une suite géométrique, les COMPOSÉS une suite arithmétique",
+            cause: "c'est l'inverse : « composés » veut dire que les intérêts produisent eux-mêmes des intérêts, donc une multiplication",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════ suiteT_taux_equivalent_proportionnel ═══════ */
 
   {
@@ -1628,6 +1688,70 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
           {
             choice: `$${fr(Math.round(equivalent * 1000) / 1000)}\\,\\%$`,
             cause: "a donné le taux ÉQUIVALENT, qui répond à une autre question",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — l'ÉPREUVE des douze mois. Le premier item demande le taux
+    // PROPORTIONNEL, celui qu'on obtient en divisant. Celui-ci met les deux
+    // taux à l'épreuve : appliqué à chaque période, lequel redonne EXACTEMENT
+    // le taux annuel annoncé ? Le proportionnel dépasse toujours un peu — c'est
+    // pour cela que le taux équivalent existe, et que les banques affichent les
+    // deux sans les confondre.
+    kind: "template",
+    id: "stmg_suiteT_taux_equivalent_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "suite_comparer",
+    microId: "suiteT_taux_equivalent_proportionnel",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Appliquer un taux périodique $k$ fois, c'est élever son coefficient à la puissance $k$ — pas le multiplier par $k$.",
+    tags: ["stmg", "maths", "suites", "piege", "template"],
+    generate: () => {
+      const annuel = pick([4, 6, 8, 12, 24] as const);
+      const periodes = pick([2, 3, 4, 6, 12] as const);
+      const proportionnel = annuel / periodes;
+      const equivalent = (Math.pow(1 + annuel / 100, 1 / periodes) - 1) * 100;
+      // Ce que donne réellement le taux proportionnel appliqué à chaque période.
+      const cumulProportionnel = (Math.pow(1 + proportionnel / 100, periodes) - 1) * 100;
+      const nomPeriode =
+        periodes === 12 ? "mensuel" : periodes === 4 ? "trimestriel" : periodes === 2 ? "semestriel" : "périodique";
+      const bonne = `le taux ÉQUIVALENT, soit environ $${fr(Math.round(equivalent * 100) / 100)}\\,\\%$`;
+      return {
+        text:
+          `Un placement rapporte $${annuel}\\,\\%$ par an. ` +
+          `Lequel de ces deux taux ${nomPeriode}s, appliqué à chacune des $${periodes}$ périodes de l'année, ` +
+          `redonne EXACTEMENT $${annuel}\\,\\%$ sur l'année ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `le taux PROPORTIONNEL, soit $${fr(proportionnel)}\\,\\%$`,
+          `les deux : ils donnent le même résultat sur l'année`,
+          `aucun des deux : il faudrait $${fr(annuel)}\\,\\%$ à chaque période`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le taux PROPORTIONNEL se divise ($t \\div k$) : il est commode, mais appliqué $k$ fois il dépasse le taux annuel. Le taux ÉQUIVALENT est celui qui, appliqué $k$ fois, redonne exactement le coefficient annuel.",
+          "On élève le coefficient périodique à la puissance du nombre de périodes, et l'on compare au coefficient annuel.",
+          `Proportionnel : $\\left(1 + ${fr(proportionnel / 100)}\\right)^{${periodes}} = ${fr(Math.round((1 + proportionnel / 100) ** periodes * 10000) / 10000)}$, ` +
+            `soit $${fr(Math.round(cumulProportionnel * 100) / 100)}\\,\\%$ — au-dessus des $${annuel}\\,\\%$ annoncés. ` +
+            `Équivalent : $${fr(Math.round(equivalent * 100) / 100)}\\,\\%$, dont le coefficient élevé à la puissance $${periodes}$ ` +
+            `redonne exactement $${fr(1 + annuel / 100)}$. ` +
+            `L'écart vient de ce que les intérêts de chaque période produisent à leur tour des intérêts.`,
+          `C'est le taux équivalent, environ $${fr(Math.round(equivalent * 100) / 100)}\\,\\%$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `le taux PROPORTIONNEL, soit $${fr(proportionnel)}\\,\\%$`,
+            cause: `appliqué $${periodes}$ fois, il donne $${fr(Math.round(cumulProportionnel * 100) / 100)}\\,\\%$ : un peu plus que le taux annuel`,
+          },
+          {
+            choice: `les deux : ils donnent le même résultat sur l'année`,
+            cause: "ils coïncideraient si les taux s'additionnaient — mais ils se composent en se multipliant",
           },
         ],
       };
