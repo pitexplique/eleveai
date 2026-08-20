@@ -876,6 +876,20 @@ function drawAssemblageCubes({
 
   const maxZ = Math.max(...cubes.map((c) => c.z));
 
+  // ⛔ LE COMPTE NE S'ECRIT PAS SUR LE SOLIDE (Frederic, 20/08, capture a
+  // l'appui : « 24 cubes unités » etait pose au milieu du pave, blanc sur bleu,
+  // en travers des aretes). Il etait fixe a (170, 232) en dur — donc au hasard
+  // de la taille de l'assemblage. On calcule la boite reellement occupee par
+  // les cubes projetes et on pose l'etiquette DESSOUS, centree.
+  const dxIso = 0.85 * s;
+  const dyIso = 0.48 * s;
+  const projetes = cubes.map((c) => ({
+    x: origin.x + (c.x - c.y) * dxIso,
+    bas: origin.y + (c.x + c.y) * dyIso - c.z * s + dyIso,
+  }));
+  const labelX = (Math.min(...projetes.map((p) => p.x)) + Math.max(...projetes.map((p) => p.x))) / 2;
+  const labelY = Math.max(...projetes.map((p) => p.bas)) + 26;
+
   return (
     <>
       {sorted.map((cell) =>
@@ -889,7 +903,7 @@ function drawAssemblageCubes({
       )}
 
       {showLabels ? (
-        <Label x={170} y={232} color="#1e40af">
+        <Label x={labelX} y={labelY} color="#1e40af">
           {cubes.length} cubes unités
         </Label>
       ) : null}
@@ -901,7 +915,21 @@ export default function Solide3DCanvas({ figure }: Props) {
   if (!isSolide3D(figure)) return null;
 
   const width = figure.size?.width ?? 340;
-  const height = figure.size?.height ?? 250;
+
+  // ⚠️ UN ASSEMBLAGE DEBORDAIT DE SON CADRE. Les petits cubes sont projetes
+  // depuis une origine fixe (160, 170) avec un pas de 32 px : un pave 4 x 3 x 2
+  // descend jusqu'a y = 278, pour une hauteur de 250. Le bas du solide ET son
+  // etiquette sortaient donc du viewBox, en silence. La hauteur par defaut suit
+  // maintenant l'encombrement reel de l'assemblage (le reste des solides garde
+  // ses 250).
+  const hauteurAssemblage = (() => {
+    if (figure.solide !== "assemblage_cubes" || !figure.cubes?.length) return null;
+    const bas = Math.max(
+      ...figure.cubes.map((c) => 170 + (c.x + c.y) * 0.48 * 32 - c.z * 32 + 0.48 * 32)
+    );
+    return Math.ceil(bas + 40);
+  })();
+  const height = figure.size?.height ?? Math.max(250, hauteurAssemblage ?? 0);
 
   const colors = {
     ...DEFAULT_COLORS,
