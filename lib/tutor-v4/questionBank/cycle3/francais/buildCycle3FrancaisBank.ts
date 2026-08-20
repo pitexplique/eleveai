@@ -102,6 +102,12 @@ function qcm(pool: readonly QcmItem[]): Generated {
   return asQcm(pick(pool));
 }
 
+/** Un pool au hasard parmi plusieurs — ce dont un DÉFI a besoin : il balaie
+ *  toute sa notion au lieu de rester sur une seule compétence. */
+function auHasard(pools: readonly (readonly QcmItem[])[]): readonly QcmItem[] {
+  return pools[Math.floor(Math.random() * pools.length)];
+}
+
 function short(pool: readonly ShortItem[]): Generated {
   return asShort(pick(pool));
 }
@@ -5886,6 +5892,33 @@ function grammaireQuestion(microId: string): Generated {
      — « gn_epithete » avant « epithete » : au CM1 c'est le groupe nominal et
        son noyau ; le complément du nom, qu'oppose le pool du CM2, n'arrive
        qu'au CM2. */
+  /* ─── LES DÉFIS DES TROIS NOTIONS DE GRAMMAIRE (CM2, 20/08/2026) ──────────
+     Un défi n'a pas de pool à lui : il PARCOURT sa notion, et c'est justement
+     ce qui en fait un défi plutôt qu'une question de plus — l'élève ne sait
+     pas laquelle des cinq ou six compétences va tomber.
+     ⚠️ CES BRANCHES PASSENT EN PREMIER, comme les neuf du BO juste en dessous :
+     l'aiguillage se fait par sous-chaîne. « cm2_gram_complements_defi »
+     contient « complement » et serait servi comme un complément ordinaire ;
+     « cm2_gram_phrase_defi » ne serait attrapé par rien et tomberait sur le
+     `return qcm(SUJET_VERBE)` final. */
+  if (microId.includes("gram_phrase_defi")) {
+    return qcm(
+      auHasard([PHRASE_SIMPLE, SUJET_VERBE, SUJET_INVERSE, NATURE_FONCTION, PREPOSITIONS])
+    );
+  }
+  if (microId.includes("gram_complements_defi")) {
+    return qcm(auHasard([COMPLEMENTS, COD_COI, CC_SORTES, ATTRIBUT, GN, COMPLEMENT_NOM]));
+  }
+  if (microId.includes("orth_accords_defi")) {
+    // Les accords ont deux moteurs paramétriques en plus de leurs pools : le
+    // défi pioche dans les deux, sinon il tournerait sur les mêmes phrases.
+    const tire = Math.random();
+    if (tire < 0.25) return fromConjItem(generateAgreementItem());
+    if (tire < 0.5) return fromConjItem(generateSubjectVerbItem());
+    if (tire < 0.7) return fromConjItem(generateHomophoneItem());
+    return qcm(auHasard([ACCORD_ATTRIBUT, PARTICIPE_PASSE, HOMOPHONES, ACCORD_SUJET_VERBE]));
+  }
+
   if (microId.includes("participe_passe_etre")) return qcm(PARTICIPE_PASSE_ETRE);
   if (microId.includes("gn_epithete")) return qcm(GN_EPITHETE);
   if (microId.includes("participe_passe")) return qcm(PARTICIPE_PASSE);

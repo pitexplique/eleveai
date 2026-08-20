@@ -111,24 +111,53 @@ export const microSkills: MicroSkillSource[] = [
   { id: "cm2_voc_composition", label: "Comprendre un mot formé par composition", notionId: "vocabulaire", prerequis: ["cm2_voc_famille_prefixe_suffixe"] },
   { id: "cm2_voc_homonymie", label: "Distinguer des homonymes", notionId: "vocabulaire", prerequis: ["cm2_voc_polysemie"] },
 
-  // Grammaire et orthographe grammaticale
-  { id: "cm2_gram_phrase_simple", label: "Analyser les constituants d'une phrase simple", notionId: "grammaire_orthographe", prerequis: ["cm2_flue_unites_syntaxiques"] },
-  { id: "cm2_gram_sujet_verbe", label: "Identifier sujet, verbe et compléments", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_phrase_simple"] },
-  { id: "cm2_gram_gn", label: "Analyser le groupe nominal et ses expansions", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_sujet_verbe"] },
-  { id: "cm2_gram_complements", label: "Distinguer compléments de verbe et compléments circonstanciels", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_sujet_verbe"] },
-  // ⚠️ Les six qui suivent manquaient. Le BO les nomme une par une au CM2.
-  { id: "cm2_gram_nature_fonction", label: "Distinguer la nature d'un mot et sa fonction", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_phrase_simple"] },
-  { id: "cm2_gram_prepositions", label: "Identifier prépositions et conjonctions de subordination", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_nature_fonction"] },
-  { id: "cm2_gram_sujet_inverse", label: "Identifier un sujet inversé", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_sujet_verbe"] },
-  { id: "cm2_gram_cod_coi", label: "Différencier complément d'objet direct et indirect", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_complements"] },
-  { id: "cm2_gram_cc_sortes", label: "Différencier les compléments circonstanciels de temps, de lieu et de cause", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_complements"] },
-  { id: "cm2_gram_attribut", label: "Différencier l'attribut du sujet et le complément d'objet", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_cod_coi"] },
-  { id: "cm2_gram_complement_nom", label: "Repérer le complément du nom et le distinguer de l'épithète", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_gn"] },
-  { id: "cm2_orth_accord_gn", label: "Accorder le groupe nominal avec expansions", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_gn"] },
-  { id: "cm2_orth_sujet_verbe", label: "Accorder le verbe avec un sujet éloigné ou inversé simple", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_sujet_verbe"] },
-  { id: "cm2_orth_attribut", label: "Accorder l'attribut avec le sujet", notionId: "grammaire_orthographe", prerequis: ["cm2_gram_attribut", "cm2_orth_sujet_verbe"] },
-  { id: "cm2_orth_participe_passe", label: "Accorder le participe passé avec être, et avec le COD pour avoir", notionId: "grammaire_orthographe", prerequis: ["cm2_orth_sujet_verbe"] },
-  { id: "cm2_orth_homophones", label: "Choisir des homophones grammaticaux courants", notionId: "grammaire_orthographe", prerequis: ["cm2_orth_sujet_verbe"] },
+  /* ─── LES SEIZE MICROS DE GRAMMAIRE, EN TROIS NOTIONS (20/08/2026) ─────────
+     Frédéric : « 16 micros c'est 3 fiches, il faut découper en trois », et
+     « 5 micros max plus défis, 7 max » — c'est le format du coach de maths
+     CM2, où chaque notion tient en 4 à 6 micros et se termine par son défi.
+     Une notion à seize micros ne donne pas une fiche honnête : la première
+     fiche de français en citait certains sans les traiter (« prépositions »
+     n'y avait qu'un piège, « sujet inversé » qu'un exemple).
+
+     Le découpage suit LES PRÉREQUIS DÉJÀ ÉCRITS, il ne les invente pas :
+       • `grammaire_phrase`      — le squelette. On cherche le verbe, son sujet,
+         et on se donne le vocabulaire pour en parler. La préposition y est
+         parce que son prérequis déclaré est `nature_fonction` : l'identifier,
+         c'est un travail de NATURE, pas de fonction.
+       • `grammaire_complements` — tout ce qui complète : le verbe (objet,
+         circonstanciel, attribut) et le nom (groupe nominal, complément du
+         nom). Les six ont leurs prérequis à l'intérieur du groupe.
+       • `grammaire_accords`     — exactement les cinq micros `orth_` : on
+         n'identifie plus, on écrit sans faute. C'est aussi, telle quelle, une
+         rubrique de l'écrit du CRPE.
+     Un prérequis peut traverser les trois notions (l'accord du verbe suppose
+     qu'on sache trouver le sujet) : c'est déjà le cas ailleurs, et c'est ce
+     qui donne l'ordre des fiches. */
+
+  // Grammaire — la phrase (5 micros + 1 défi)
+  { id: "cm2_gram_phrase_simple", label: "Analyser les constituants d'une phrase simple", notionId: "grammaire_phrase", prerequis: ["cm2_flue_unites_syntaxiques"] },
+  { id: "cm2_gram_sujet_verbe", label: "Identifier sujet, verbe et compléments", notionId: "grammaire_phrase", prerequis: ["cm2_gram_phrase_simple"] },
+  { id: "cm2_gram_nature_fonction", label: "Distinguer la nature d'un mot et sa fonction", notionId: "grammaire_phrase", prerequis: ["cm2_gram_phrase_simple"] },
+  { id: "cm2_gram_sujet_inverse", label: "Identifier un sujet inversé", notionId: "grammaire_phrase", prerequis: ["cm2_gram_sujet_verbe"] },
+  { id: "cm2_gram_prepositions", label: "Identifier prépositions et conjonctions de subordination", notionId: "grammaire_phrase", prerequis: ["cm2_gram_nature_fonction"] },
+  { id: "cm2_gram_phrase_defi", label: "Résoudre un défi d'analyse de la phrase", notionId: "grammaire_phrase", prerequis: ["cm2_gram_sujet_inverse", "cm2_gram_nature_fonction"] },
+
+  // Grammaire — les compléments et le groupe nominal (6 micros + 1 défi)
+  { id: "cm2_gram_complements", label: "Distinguer compléments de verbe et compléments circonstanciels", notionId: "grammaire_complements", prerequis: ["cm2_gram_sujet_verbe"] },
+  { id: "cm2_gram_cod_coi", label: "Différencier complément d'objet direct et indirect", notionId: "grammaire_complements", prerequis: ["cm2_gram_complements"] },
+  { id: "cm2_gram_cc_sortes", label: "Différencier les compléments circonstanciels de temps, de lieu et de cause", notionId: "grammaire_complements", prerequis: ["cm2_gram_complements"] },
+  { id: "cm2_gram_attribut", label: "Différencier l'attribut du sujet et le complément d'objet", notionId: "grammaire_complements", prerequis: ["cm2_gram_cod_coi"] },
+  { id: "cm2_gram_gn", label: "Analyser le groupe nominal et ses expansions", notionId: "grammaire_complements", prerequis: ["cm2_gram_sujet_verbe"] },
+  { id: "cm2_gram_complement_nom", label: "Repérer le complément du nom et le distinguer de l'épithète", notionId: "grammaire_complements", prerequis: ["cm2_gram_gn"] },
+  { id: "cm2_gram_complements_defi", label: "Résoudre un défi sur les compléments", notionId: "grammaire_complements", prerequis: ["cm2_gram_attribut", "cm2_gram_complement_nom"] },
+
+  // Grammaire — les accords et les homophones (5 micros + 1 défi)
+  { id: "cm2_orth_accord_gn", label: "Accorder le groupe nominal avec expansions", notionId: "grammaire_accords", prerequis: ["cm2_gram_gn"] },
+  { id: "cm2_orth_sujet_verbe", label: "Accorder le verbe avec un sujet éloigné ou inversé simple", notionId: "grammaire_accords", prerequis: ["cm2_gram_sujet_verbe"] },
+  { id: "cm2_orth_attribut", label: "Accorder l'attribut avec le sujet", notionId: "grammaire_accords", prerequis: ["cm2_gram_attribut", "cm2_orth_sujet_verbe"] },
+  { id: "cm2_orth_participe_passe", label: "Accorder le participe passé avec être, et avec le COD pour avoir", notionId: "grammaire_accords", prerequis: ["cm2_orth_sujet_verbe"] },
+  { id: "cm2_orth_homophones", label: "Choisir des homophones grammaticaux courants", notionId: "grammaire_accords", prerequis: ["cm2_orth_sujet_verbe"] },
+  { id: "cm2_orth_accords_defi", label: "Résoudre un défi d'accords", notionId: "grammaire_accords", prerequis: ["cm2_orth_participe_passe", "cm2_orth_homophones"] },
 
   // Phrase complexe
   { id: "cm2_complexe_propositions", label: "Repérer deux propositions dans une phrase complexe", notionId: "phrase_complexe", prerequis: ["cm2_gram_phrase_simple"] },

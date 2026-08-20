@@ -139,13 +139,16 @@ export const NOTION_COACH_FRANCAIS: TableNotions = {
   conjugaison: {
     ce1: "conjugaison", ce2: "conjugaison", cm1: "conjugaison", cm2: "conjugaison",
   },
+  // ⚠️ Le CM2 a coupé « grammaire_orthographe » en trois le 20/08/2026. La
+  // grammaire y entre donc par la phrase, et l'orthographe par les accords —
+  // deux portes distinctes, là où les deux menaient au même endroit.
   grammaire: {
     cp: "grammaire_phrase", ce1: "grammaire_phrase", ce2: "grammaire_phrase",
-    cm1: "grammaire_orthographe", cm2: "grammaire_orthographe",
+    cm1: "grammaire_orthographe", cm2: "grammaire_phrase",
   },
   orthographe: {
     cp: "orthographe", ce1: "orthographe", ce2: "orthographe",
-    cm1: "grammaire_orthographe", cm2: "grammaire_orthographe",
+    cm1: "grammaire_orthographe", cm2: "grammaire_accords",
   },
   lecture: {
     cp: "comprehension_lecture", ce1: "comprehension_lecture",

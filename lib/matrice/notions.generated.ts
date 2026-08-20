@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 499 notions, 36 paquets.
+// 678 notions, 40 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -390,6 +390,11 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "prerequis": [
           "triangle_figure"
         ]
+      },
+      {
+        "id": "grandeur_conversion",
+        "label": "Conversions et durées",
+        "prerequis": []
       },
       {
         "id": "volume_solide",
@@ -1362,6 +1367,403 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       }
     ],
+    "premiere": [
+      {
+        "id": "auto_comparer",
+        "label": "Comparer deux nombres",
+        "prerequis": []
+      },
+      {
+        "id": "auto_fractions_puissances",
+        "label": "Fractions, puissances et écritures",
+        "prerequis": []
+      },
+      {
+        "id": "auto_ordres_unites",
+        "label": "Ordre de grandeur et unités",
+        "prerequis": [
+          "auto_fractions_puissances"
+        ]
+      },
+      {
+        "id": "auto_developper_factoriser",
+        "label": "Développer et factoriser",
+        "prerequis": []
+      },
+      {
+        "id": "auto_equations",
+        "label": "Équations et inéquations",
+        "prerequis": [
+          "auto_developper_factoriser"
+        ]
+      },
+      {
+        "id": "auto_signe_expression",
+        "label": "Signe d'une expression",
+        "prerequis": [
+          "auto_equations"
+        ]
+      },
+      {
+        "id": "auto_formules",
+        "label": "Formules littérales",
+        "prerequis": [
+          "auto_equations"
+        ]
+      },
+      {
+        "id": "auto_proportion",
+        "label": "Proportions",
+        "prerequis": [
+          "auto_fractions_puissances"
+        ]
+      },
+      {
+        "id": "auto_partie_tout",
+        "label": "Partie et tout",
+        "prerequis": [
+          "auto_proportion"
+        ]
+      },
+      {
+        "id": "auto_coefficient_multiplicateur",
+        "label": "Coefficient multiplicateur",
+        "prerequis": [
+          "auto_proportion"
+        ]
+      },
+      {
+        "id": "auto_taux_evolution",
+        "label": "Taux d'évolution",
+        "prerequis": [
+          "auto_coefficient_multiplicateur"
+        ]
+      },
+      {
+        "id": "auto_lecture_graphique",
+        "label": "Lire un graphique",
+        "prerequis": []
+      },
+      {
+        "id": "auto_resolution_graphique",
+        "label": "Résoudre graphiquement",
+        "prerequis": [
+          "auto_lecture_graphique"
+        ]
+      },
+      {
+        "id": "auto_droites",
+        "label": "Droites et coefficient directeur",
+        "prerequis": [
+          "auto_lecture_graphique"
+        ]
+      },
+      {
+        "id": "auto_lire_statistiques",
+        "label": "Lire des statistiques",
+        "prerequis": [
+          "auto_lecture_graphique"
+        ]
+      },
+      {
+        "id": "auto_indicateurs",
+        "label": "Moyenne, médiane, quartiles",
+        "prerequis": [
+          "auto_lire_statistiques"
+        ]
+      },
+      {
+        "id": "auto_proba_base",
+        "label": "Probabilités : les bases",
+        "prerequis": [
+          "auto_proportion"
+        ]
+      },
+      {
+        "id": "auto_proba_lecture",
+        "label": "Probabilités : lire un tableau, un arbre",
+        "prerequis": [
+          "auto_proba_base"
+        ]
+      },
+      {
+        "id": "info_tableau_croise",
+        "label": "Tableau croisé : lire et compléter",
+        "prerequis": []
+      },
+      {
+        "id": "info_frequences",
+        "label": "Fréquences marginales et conditionnelles",
+        "prerequis": [
+          "info_tableau_croise",
+          "auto_proportion"
+        ]
+      },
+      {
+        "id": "info_representations_croisees",
+        "label": "Représenter deux caractères",
+        "prerequis": [
+          "info_tableau_croise"
+        ]
+      },
+      {
+        "id": "info_nuage",
+        "label": "Nuage de points",
+        "prerequis": [
+          "auto_lecture_graphique"
+        ]
+      },
+      {
+        "id": "info_point_moyen",
+        "label": "Point moyen",
+        "prerequis": [
+          "info_nuage"
+        ]
+      },
+      {
+        "id": "info_ajustement_affine",
+        "label": "Ajustement affine",
+        "prerequis": [
+          "info_nuage",
+          "auto_droites"
+        ]
+      },
+      {
+        "id": "info_interpoler_extrapoler",
+        "label": "Interpoler et extrapoler",
+        "prerequis": [
+          "info_ajustement_affine"
+        ]
+      },
+      {
+        "id": "info_tableur",
+        "label": "Tableur",
+        "prerequis": []
+      },
+      {
+        "id": "info_filtre_donnees",
+        "label": "Filtrer des données (ET, OU, NON)",
+        "prerequis": [
+          "info_tableur",
+          "info_tableau_croise"
+        ]
+      },
+      {
+        "id": "alea_conditionnelle",
+        "label": "Probabilité conditionnelle : reconnaître",
+        "prerequis": [
+          "auto_proba_lecture",
+          "info_frequences"
+        ]
+      },
+      {
+        "id": "alea_conditionnelle_calcul",
+        "label": "Probabilité conditionnelle : calculer",
+        "prerequis": [
+          "alea_conditionnelle"
+        ]
+      },
+      {
+        "id": "alea_arbre",
+        "label": "Arbre pondéré : lire et construire",
+        "prerequis": [
+          "alea_conditionnelle"
+        ]
+      },
+      {
+        "id": "alea_arbre_calcul",
+        "label": "Arbre pondéré : calculer",
+        "prerequis": [
+          "alea_arbre"
+        ]
+      },
+      {
+        "id": "alea_independance",
+        "label": "Indépendance de deux évènements",
+        "prerequis": [
+          "alea_conditionnelle_calcul"
+        ]
+      },
+      {
+        "id": "alea_bernoulli",
+        "label": "Épreuves de Bernoulli : reconnaître",
+        "prerequis": [
+          "alea_independance"
+        ]
+      },
+      {
+        "id": "alea_bernoulli_calcul",
+        "label": "Répétition d'épreuves : calculer",
+        "prerequis": [
+          "alea_bernoulli",
+          "alea_arbre_calcul"
+        ]
+      },
+      {
+        "id": "lin_suite_arithmetique",
+        "label": "Suite arithmétique : reconnaître",
+        "prerequis": []
+      },
+      {
+        "id": "lin_suite_terme_general",
+        "label": "Suite arithmétique : terme général",
+        "prerequis": [
+          "lin_suite_arithmetique"
+        ]
+      },
+      {
+        "id": "lin_affine",
+        "label": "Fonction affine",
+        "prerequis": [
+          "auto_droites"
+        ]
+      },
+      {
+        "id": "lin_affine_lecture",
+        "label": "Fonction affine : lire et exploiter",
+        "prerequis": [
+          "lin_affine"
+        ]
+      },
+      {
+        "id": "lin_modeliser",
+        "label": "Modéliser une croissance linéaire",
+        "prerequis": [
+          "lin_suite_terme_general",
+          "lin_affine"
+        ]
+      },
+      {
+        "id": "lin_seuil",
+        "label": "Problème de seuil : croissance linéaire",
+        "prerequis": [
+          "lin_modeliser"
+        ]
+      },
+      {
+        "id": "quad_parabole",
+        "label": "Parabole et expression de degré 2",
+        "prerequis": [
+          "auto_lecture_graphique"
+        ]
+      },
+      {
+        "id": "quad_sommet_axe",
+        "label": "Parabole : sommet et axe de symétrie",
+        "prerequis": [
+          "quad_parabole"
+        ]
+      },
+      {
+        "id": "quad_variations",
+        "label": "Parabole : variations et extremum",
+        "prerequis": [
+          "quad_sommet_axe"
+        ]
+      },
+      {
+        "id": "quad_racines_signe",
+        "label": "Racines et signe par la forme factorisée",
+        "prerequis": [
+          "quad_parabole",
+          "auto_signe_expression"
+        ]
+      },
+      {
+        "id": "expo_suite_geometrique",
+        "label": "Suite géométrique : reconnaître",
+        "prerequis": [
+          "auto_coefficient_multiplicateur"
+        ]
+      },
+      {
+        "id": "expo_suite_terme_general",
+        "label": "Suite géométrique : terme général",
+        "prerequis": [
+          "expo_suite_geometrique"
+        ]
+      },
+      {
+        "id": "expo_fonction",
+        "label": "Fonction exponentielle x ↦ a^x",
+        "prerequis": [
+          "expo_suite_geometrique"
+        ]
+      },
+      {
+        "id": "expo_fonction_lecture",
+        "label": "Fonction exponentielle : variations et courbe",
+        "prerequis": [
+          "expo_fonction"
+        ]
+      },
+      {
+        "id": "expo_taux_moyen",
+        "label": "Taux d'évolution moyen",
+        "prerequis": [
+          "expo_suite_geometrique",
+          "auto_taux_evolution"
+        ]
+      },
+      {
+        "id": "expo_modeliser",
+        "label": "Modéliser une évolution exponentielle",
+        "prerequis": [
+          "expo_suite_terme_general"
+        ]
+      },
+      {
+        "id": "expo_seuil",
+        "label": "Problème de seuil : croissance exponentielle",
+        "prerequis": [
+          "expo_modeliser"
+        ]
+      },
+      {
+        "id": "der_graphique",
+        "label": "Dérivée — lire un graphique",
+        "prerequis": [
+          "auto_lecture_graphique"
+        ]
+      },
+      {
+        "id": "der_nombre_derive",
+        "label": "Dérivée — nombre dérivé et tangente",
+        "prerequis": [
+          "der_graphique",
+          "auto_droites"
+        ]
+      },
+      {
+        "id": "der_formules",
+        "label": "Dérivée — les formules de base",
+        "prerequis": [
+          "der_nombre_derive"
+        ]
+      },
+      {
+        "id": "der_polynome",
+        "label": "Dérivée — polynômes",
+        "prerequis": [
+          "der_formules"
+        ]
+      },
+      {
+        "id": "der_signe",
+        "label": "Dérivée — signe",
+        "prerequis": [
+          "der_polynome",
+          "auto_signe_expression"
+        ]
+      },
+      {
+        "id": "der_variations",
+        "label": "Dérivée — tableau de variations",
+        "prerequis": [
+          "der_signe"
+        ]
+      }
+    ],
     "premiere-spe": [
       {
         "id": "suites",
@@ -1582,6 +1984,602 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "id": "logique_ensembles",
         "label": "Vocabulaire ensembliste et logique",
         "prerequis": []
+      }
+    ],
+    "stmg": [
+      {
+        "id": "auto_proportion",
+        "label": "Proportions et pourcentages",
+        "prerequis": []
+      },
+      {
+        "id": "auto_evo_coefficient",
+        "label": "Coefficient multiplicateur",
+        "prerequis": [
+          "auto_proportion"
+        ]
+      },
+      {
+        "id": "auto_evo_taux",
+        "label": "Calculer un taux d'évolution",
+        "prerequis": [
+          "auto_evo_coefficient"
+        ]
+      },
+      {
+        "id": "auto_evo_enchainees",
+        "label": "Évolutions successives et réciproque",
+        "prerequis": [
+          "auto_evo_taux"
+        ]
+      },
+      {
+        "id": "auto_indice",
+        "label": "Indice base 100",
+        "prerequis": [
+          "auto_evo_taux"
+        ]
+      },
+      {
+        "id": "auto_fractions_puissances",
+        "label": "Fractions, puissances et écritures",
+        "prerequis": []
+      },
+      {
+        "id": "auto_ordres_unites",
+        "label": "Ordre de grandeur et conversions",
+        "prerequis": [
+          "auto_fractions_puissances"
+        ]
+      },
+      {
+        "id": "auto_developper_factoriser",
+        "label": "Développer, factoriser, réduire",
+        "prerequis": []
+      },
+      {
+        "id": "auto_equations",
+        "label": "Équations et inéquations",
+        "prerequis": [
+          "auto_developper_factoriser"
+        ]
+      },
+      {
+        "id": "auto_signes",
+        "label": "Signe d'une expression",
+        "prerequis": [
+          "auto_equations"
+        ]
+      },
+      {
+        "id": "auto_formules",
+        "label": "Formules et calcul littéral",
+        "prerequis": [
+          "auto_equations"
+        ]
+      },
+      {
+        "id": "auto_lecture_graphique",
+        "label": "Lire une courbe",
+        "prerequis": []
+      },
+      {
+        "id": "auto_resolution_graphique",
+        "label": "Résoudre graphiquement",
+        "prerequis": [
+          "auto_lecture_graphique"
+        ]
+      },
+      {
+        "id": "auto_droites",
+        "label": "Droites et coefficient directeur",
+        "prerequis": [
+          "auto_lecture_graphique"
+        ]
+      },
+      {
+        "id": "auto_donnees_graphiques",
+        "label": "Lire des données chiffrées",
+        "prerequis": []
+      },
+      {
+        "id": "auto_terminale_reconnaitre",
+        "label": "Automatismes de terminale — reconnaître (Tle)",
+        "prerequis": [
+          "auto_signes"
+        ]
+      },
+      {
+        "id": "auto_terminale_derivee",
+        "label": "Automatismes de terminale — dérivée et tangente (Tle)",
+        "prerequis": [
+          "auto_droites"
+        ]
+      },
+      {
+        "id": "suite_notation",
+        "label": "Suite : notation et modes de génération",
+        "prerequis": []
+      },
+      {
+        "id": "suite_termes",
+        "label": "Suite : calculer des termes",
+        "prerequis": [
+          "suite_notation"
+        ]
+      },
+      {
+        "id": "suite_arithmetique",
+        "label": "Suite arithmétique : reconnaître",
+        "prerequis": [
+          "suite_termes"
+        ]
+      },
+      {
+        "id": "suite_geometrique",
+        "label": "Suite géométrique : reconnaître",
+        "prerequis": [
+          "suite_termes"
+        ]
+      },
+      {
+        "id": "suite_geo_evolution",
+        "label": "Suite géométrique et taux d'évolution",
+        "prerequis": [
+          "suite_geometrique",
+          "auto_evo_coefficient"
+        ]
+      },
+      {
+        "id": "suite_representation",
+        "label": "Représenter les termes d'une suite",
+        "prerequis": [
+          "suite_termes"
+        ]
+      },
+      {
+        "id": "suite_modeliser",
+        "label": "Modéliser par une suite",
+        "prerequis": [
+          "suite_arithmetique",
+          "suite_geometrique"
+        ]
+      },
+      {
+        "id": "suite_seuil",
+        "label": "Problème de seuil",
+        "prerequis": [
+          "suite_modeliser"
+        ]
+      },
+      {
+        "id": "suite_terme_general",
+        "label": "Terme général d'une suite (Tle)",
+        "prerequis": [
+          "suite_arithmetique",
+          "suite_geometrique"
+        ]
+      },
+      {
+        "id": "suite_moyennes",
+        "label": "Moyenne arithmétique et géométrique (Tle)",
+        "prerequis": [
+          "suite_terme_general"
+        ]
+      },
+      {
+        "id": "suite_somme",
+        "label": "Somme des n premiers termes (Tle)",
+        "prerequis": [
+          "suite_terme_general"
+        ]
+      },
+      {
+        "id": "suite_somme_situations",
+        "label": "Sommes : emprunts et placements (Tle)",
+        "prerequis": [
+          "suite_somme"
+        ]
+      },
+      {
+        "id": "suite_comparer",
+        "label": "Comparer deux suites (Tle)",
+        "prerequis": [
+          "suite_terme_general"
+        ]
+      },
+      {
+        "id": "fct_representation",
+        "label": "Fonction : représenter et noter",
+        "prerequis": [
+          "auto_lecture_graphique"
+        ]
+      },
+      {
+        "id": "fct_taux_variation",
+        "label": "Taux de variation et sécante",
+        "prerequis": [
+          "fct_representation",
+          "auto_droites"
+        ]
+      },
+      {
+        "id": "fct_monotonie",
+        "label": "Fonction monotone sur un intervalle",
+        "prerequis": [
+          "fct_taux_variation"
+        ]
+      },
+      {
+        "id": "fct_degre2_courbe",
+        "label": "Degré 2 : la parabole",
+        "prerequis": [
+          "fct_representation"
+        ]
+      },
+      {
+        "id": "fct_degre2_symetrie",
+        "label": "Degré 2 : axe de symétrie et extremum",
+        "prerequis": [
+          "fct_degre2_courbe"
+        ]
+      },
+      {
+        "id": "fct_degre2_factorisee",
+        "label": "Degré 2 : racines et signe (forme factorisée)",
+        "prerequis": [
+          "fct_degre2_courbe",
+          "auto_signes"
+        ]
+      },
+      {
+        "id": "fct_degre2_factoriser",
+        "label": "Degré 2 : factoriser connaissant une racine",
+        "prerequis": [
+          "fct_degre2_factorisee"
+        ]
+      },
+      {
+        "id": "fct_degre3",
+        "label": "Degré 3 : courbe, racines et signe",
+        "prerequis": [
+          "fct_degre2_factorisee"
+        ]
+      },
+      {
+        "id": "fct_equations_puissance",
+        "label": "Résoudre x² = c et x³ = c",
+        "prerequis": [
+          "auto_equations"
+        ]
+      },
+      {
+        "id": "fct_inverse",
+        "label": "Fonction inverse (Tle)",
+        "prerequis": [
+          "fct_representation"
+        ]
+      },
+      {
+        "id": "fct_inverse_derivee",
+        "label": "Fonction inverse : dérivée et variations (Tle)",
+        "prerequis": [
+          "fct_inverse"
+        ]
+      },
+      {
+        "id": "der_secante_tangente",
+        "label": "Dérivée — sécantes et tangente",
+        "prerequis": [
+          "fct_taux_variation"
+        ]
+      },
+      {
+        "id": "der_nombre_derive",
+        "label": "Dérivée — nombre dérivé",
+        "prerequis": [
+          "der_secante_tangente"
+        ]
+      },
+      {
+        "id": "der_tangente_equation",
+        "label": "Dérivée — équation de la tangente",
+        "prerequis": [
+          "der_nombre_derive",
+          "auto_droites"
+        ]
+      },
+      {
+        "id": "der_formules",
+        "label": "Dérivée — les formules de base",
+        "prerequis": [
+          "der_nombre_derive"
+        ]
+      },
+      {
+        "id": "der_polynome",
+        "label": "Dérivée — polynômes de degré ≤ 3",
+        "prerequis": [
+          "der_formules"
+        ]
+      },
+      {
+        "id": "der_variations",
+        "label": "Dérivée — signe et tableau de variations",
+        "prerequis": [
+          "der_polynome",
+          "auto_signes"
+        ]
+      },
+      {
+        "id": "der_optimisation",
+        "label": "Dérivée — problème d'optimisation",
+        "prerequis": [
+          "der_variations"
+        ]
+      },
+      {
+        "id": "expo_definition",
+        "label": "Fonction x ↦ aˣ : définition (Tle)",
+        "prerequis": [
+          "suite_geometrique"
+        ]
+      },
+      {
+        "id": "expo_variations",
+        "label": "Fonction x ↦ kaˣ : variations et allure (Tle)",
+        "prerequis": [
+          "expo_definition"
+        ]
+      },
+      {
+        "id": "expo_proprietes",
+        "label": "Propriétés algébriques de aˣ (Tle)",
+        "prerequis": [
+          "expo_definition",
+          "auto_fractions_puissances"
+        ]
+      },
+      {
+        "id": "expo_taux_moyen",
+        "label": "Taux d'évolution moyen (Tle)",
+        "prerequis": [
+          "expo_proprietes",
+          "auto_evo_enchainees"
+        ]
+      },
+      {
+        "id": "expo_taux_equivalent",
+        "label": "Taux équivalent sur une autre période (Tle)",
+        "prerequis": [
+          "expo_taux_moyen"
+        ]
+      },
+      {
+        "id": "log_definition",
+        "label": "Logarithme décimal : définition (Tle)",
+        "prerequis": [
+          "expo_definition"
+        ]
+      },
+      {
+        "id": "log_proprietes",
+        "label": "Propriétés algébriques de log (Tle)",
+        "prerequis": [
+          "log_definition"
+        ]
+      },
+      {
+        "id": "log_equations",
+        "label": "Résoudre aˣ = b avec le logarithme (Tle)",
+        "prerequis": [
+          "log_proprietes"
+        ]
+      },
+      {
+        "id": "log_applications",
+        "label": "Logarithme : durées et ordres de grandeur (Tle)",
+        "prerequis": [
+          "log_equations"
+        ]
+      },
+      {
+        "id": "donnees_tableau_croise",
+        "label": "Tableau croisé d'effectifs",
+        "prerequis": []
+      },
+      {
+        "id": "donnees_frequences",
+        "label": "Fréquences marginales et conditionnelles",
+        "prerequis": [
+          "donnees_tableau_croise",
+          "auto_proportion"
+        ]
+      },
+      {
+        "id": "donnees_filtres",
+        "label": "Filtrer des données (ET, OU, NON)",
+        "prerequis": [
+          "donnees_tableau_croise"
+        ]
+      },
+      {
+        "id": "stat_nuage",
+        "label": "Nuage de points (Tle)",
+        "prerequis": [
+          "auto_lecture_graphique"
+        ]
+      },
+      {
+        "id": "stat_ajustement",
+        "label": "Ajustement affine (Tle)",
+        "prerequis": [
+          "stat_nuage",
+          "auto_droites"
+        ]
+      },
+      {
+        "id": "stat_interpoler",
+        "label": "Interpoler et extrapoler (Tle)",
+        "prerequis": [
+          "stat_ajustement"
+        ]
+      },
+      {
+        "id": "stat_moindres_carres",
+        "label": "Méthode des moindres carrés (Tle)",
+        "prerequis": [
+          "stat_ajustement"
+        ]
+      },
+      {
+        "id": "stat_changement_variable",
+        "label": "Changement de variable pour linéariser (Tle)",
+        "prerequis": [
+          "stat_ajustement"
+        ]
+      },
+      {
+        "id": "proba_conditionnelle_tableau",
+        "label": "Probabilité conditionnelle sur un tableau",
+        "prerequis": [
+          "donnees_frequences"
+        ]
+      },
+      {
+        "id": "proba_conditionnelle_distinguer",
+        "label": "Ne pas confondre les probabilités conditionnelles",
+        "prerequis": [
+          "proba_conditionnelle_tableau"
+        ]
+      },
+      {
+        "id": "proba_epreuves_independantes",
+        "label": "Deux épreuves indépendantes",
+        "prerequis": [
+          "proba_conditionnelle_tableau"
+        ]
+      },
+      {
+        "id": "proba_arbre",
+        "label": "Arbre de probabilités : construire (Tle)",
+        "prerequis": [
+          "proba_conditionnelle_tableau"
+        ]
+      },
+      {
+        "id": "proba_arbre_calcul",
+        "label": "Arbre : chemins et probabilités totales (Tle)",
+        "prerequis": [
+          "proba_arbre"
+        ]
+      },
+      {
+        "id": "proba_independance",
+        "label": "Indépendance de deux événements (Tle)",
+        "prerequis": [
+          "proba_arbre_calcul"
+        ]
+      },
+      {
+        "id": "va_loi_probabilite",
+        "label": "Variable aléatoire : loi de probabilité",
+        "prerequis": [
+          "proba_epreuves_independantes"
+        ]
+      },
+      {
+        "id": "va_esperance",
+        "label": "Espérance d'une variable aléatoire",
+        "prerequis": [
+          "va_loi_probabilite"
+        ]
+      },
+      {
+        "id": "va_bernoulli",
+        "label": "Loi de Bernoulli",
+        "prerequis": [
+          "va_loi_probabilite"
+        ]
+      },
+      {
+        "id": "va_echantillonnage",
+        "label": "Fluctuation d'échantillonnage",
+        "prerequis": [
+          "va_bernoulli"
+        ]
+      },
+      {
+        "id": "va_binomiale_reconnaitre",
+        "label": "Loi binomiale : reconnaître (Tle)",
+        "prerequis": [
+          "va_bernoulli",
+          "proba_arbre_calcul"
+        ]
+      },
+      {
+        "id": "va_binomiale_coefficients",
+        "label": "Coefficients binomiaux et triangle de Pascal (Tle)",
+        "prerequis": [
+          "va_binomiale_reconnaitre"
+        ]
+      },
+      {
+        "id": "va_binomiale_calcul",
+        "label": "Loi binomiale : calculer (Tle)",
+        "prerequis": [
+          "va_binomiale_coefficients"
+        ]
+      },
+      {
+        "id": "algo_variables",
+        "label": "Variables, compteur et accumulateur",
+        "prerequis": []
+      },
+      {
+        "id": "algo_boucles",
+        "label": "Boucles et instruction conditionnelle",
+        "prerequis": [
+          "algo_variables"
+        ]
+      },
+      {
+        "id": "algo_listes",
+        "label": "Listes",
+        "prerequis": [
+          "algo_boucles"
+        ]
+      },
+      {
+        "id": "algo_fonctions",
+        "label": "Fonctions en Python",
+        "prerequis": [
+          "algo_variables"
+        ]
+      },
+      {
+        "id": "tableur_formules",
+        "label": "Tableur : écrire une formule",
+        "prerequis": []
+      },
+      {
+        "id": "tableur_recopie",
+        "label": "Tableur : recopier et exploiter",
+        "prerequis": [
+          "tableur_formules"
+        ]
+      },
+      {
+        "id": "logique_connecteurs",
+        "label": "Logique : et, ou, non",
+        "prerequis": []
+      },
+      {
+        "id": "logique_raisonnement",
+        "label": "Contre-exemple et réciproque",
+        "prerequis": [
+          "logique_connecteurs"
+        ]
       }
     ],
     "terminale-spe": [
@@ -2284,24 +3282,38 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
-        "id": "grammaire_orthographe",
-        "label": "Phrase, groupes, accords et homophones",
+        "id": "grammaire_phrase",
+        "label": "La phrase : sujet, verbe, nature et fonction",
         "prerequis": [
           "fluence_lecture"
+        ]
+      },
+      {
+        "id": "grammaire_complements",
+        "label": "Les compléments et le groupe nominal",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "grammaire_accords",
+        "label": "Les accords et les homophones",
+        "prerequis": [
+          "grammaire_complements"
         ]
       },
       {
         "id": "phrase_complexe",
         "label": "Se repérer dans la phrase complexe",
         "prerequis": [
-          "grammaire_orthographe"
+          "grammaire_phrase"
         ]
       },
       {
         "id": "conjugaison",
         "label": "Conjugaison et valeur des temps",
         "prerequis": [
-          "grammaire_orthographe"
+          "grammaire_phrase"
         ]
       }
     ],
@@ -3285,6 +4297,225 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "prerequis": [
           "ia_c1_conception_responsable"
         ]
+      }
+    ],
+    "pix-college": [
+      {
+        "id": "1.1",
+        "label": "1.1 · Définir l'IA, son histoire et sa construction",
+        "prerequis": []
+      },
+      {
+        "id": "1.2",
+        "label": "1.2 · Expliquer l'apprentissage automatique",
+        "prerequis": [
+          "1.1"
+        ]
+      },
+      {
+        "id": "1.3",
+        "label": "1.3 · Citer les modèles d'apprentissage automatique",
+        "prerequis": [
+          "1.2"
+        ]
+      },
+      {
+        "id": "1.4",
+        "label": "1.4 · Entraînement des grands modèles de langage",
+        "prerequis": [
+          "1.3"
+        ]
+      },
+      {
+        "id": "1.5",
+        "label": "1.5 · Algorithmes de recommandation",
+        "prerequis": [
+          "1.4"
+        ]
+      },
+      {
+        "id": "1.6",
+        "label": "1.6 · IA incarnée et robotique",
+        "prerequis": [
+          "1.5"
+        ]
+      },
+      {
+        "id": "2.1",
+        "label": "2.1 · Familles de tâches réalisées par l'IA",
+        "prerequis": []
+      },
+      {
+        "id": "2.2",
+        "label": "2.2 · Utiliser un logiciel d'IA générative",
+        "prerequis": [
+          "2.1"
+        ]
+      },
+      {
+        "id": "2.3",
+        "label": "2.3 · Évaluer l'information à l'heure des IA",
+        "prerequis": [
+          "2.2"
+        ]
+      },
+      {
+        "id": "2.4",
+        "label": "2.4 · Utiliser les services de recommandation",
+        "prerequis": [
+          "2.3"
+        ]
+      },
+      {
+        "id": "2.5",
+        "label": "2.5 · Utiliser l'IA dans son organisation",
+        "prerequis": [
+          "2.4"
+        ]
+      },
+      {
+        "id": "3.1",
+        "label": "3.1 · Empreinte environnementale de l'IA",
+        "prerequis": []
+      },
+      {
+        "id": "3.2",
+        "label": "3.2 · Gouvernance des systèmes d'IA",
+        "prerequis": [
+          "3.1"
+        ]
+      },
+      {
+        "id": "3.3",
+        "label": "3.3 · Enjeux éthiques et de transparence",
+        "prerequis": [
+          "3.2"
+        ]
+      },
+      {
+        "id": "3.4",
+        "label": "3.4 · Conséquences sur l'emploi et la formation",
+        "prerequis": [
+          "3.3"
+        ]
+      },
+      {
+        "id": "3.5",
+        "label": "3.5 · Enjeux culturels et sociétaux",
+        "prerequis": [
+          "3.4"
+        ]
+      },
+      {
+        "id": "m.1",
+        "label": "m.1 · Travailler honnêtement avec l'IA",
+        "prerequis": []
+      }
+    ],
+    "pix-lycee": [
+      {
+        "id": "1.1",
+        "label": "1.1 · Définir l'IA, son histoire et sa construction",
+        "prerequis": []
+      },
+      {
+        "id": "1.2",
+        "label": "1.2 · Expliquer l'apprentissage automatique",
+        "prerequis": [
+          "1.1"
+        ]
+      },
+      {
+        "id": "1.3",
+        "label": "1.3 · Citer les modèles d'apprentissage automatique",
+        "prerequis": [
+          "1.2"
+        ]
+      },
+      {
+        "id": "1.4",
+        "label": "1.4 · Entraînement des grands modèles de langage",
+        "prerequis": [
+          "1.3"
+        ]
+      },
+      {
+        "id": "1.5",
+        "label": "1.5 · Algorithmes de recommandation",
+        "prerequis": [
+          "1.4"
+        ]
+      },
+      {
+        "id": "1.6",
+        "label": "1.6 · IA incarnée et robotique",
+        "prerequis": [
+          "1.5"
+        ]
+      },
+      {
+        "id": "2.1",
+        "label": "2.1 · Familles de tâches réalisées par l'IA",
+        "prerequis": []
+      },
+      {
+        "id": "2.2",
+        "label": "2.2 · Utiliser un logiciel d'IA générative",
+        "prerequis": [
+          "2.1"
+        ]
+      },
+      {
+        "id": "2.3",
+        "label": "2.3 · Évaluer l'information à l'heure des IA",
+        "prerequis": [
+          "2.2"
+        ]
+      },
+      {
+        "id": "2.4",
+        "label": "2.4 · Utiliser les services de recommandation",
+        "prerequis": [
+          "2.3"
+        ]
+      },
+      {
+        "id": "2.5",
+        "label": "2.5 · Utiliser l'IA dans son organisation",
+        "prerequis": [
+          "2.4"
+        ]
+      },
+      {
+        "id": "3.1",
+        "label": "3.1 · Empreinte environnementale de l'IA",
+        "prerequis": []
+      },
+      {
+        "id": "3.2",
+        "label": "3.2 · Gouvernance des systèmes d'IA",
+        "prerequis": [
+          "3.1"
+        ]
+      },
+      {
+        "id": "3.3",
+        "label": "3.3 · Enjeux éthiques et de transparence",
+        "prerequis": [
+          "3.2"
+        ]
+      },
+      {
+        "id": "3.5",
+        "label": "3.5 · Enjeux culturels et sociétaux",
+        "prerequis": [
+          "3.3"
+        ]
+      },
+      {
+        "id": "m.1",
+        "label": "m.1 · Travailler honnêtement avec l'IA",
+        "prerequis": []
       }
     ]
   }

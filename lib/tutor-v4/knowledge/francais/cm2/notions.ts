@@ -58,25 +58,45 @@ export const notions: NotionSource[] = [
     prerequis: ["comprehension_textes_documents"],
     levels: [1, 2, 3],
   },
+  /* ⚠️ « grammaire_orthographe » A ÉTÉ COUPÉE EN TROIS le 20/08/2026. Elle
+     portait seize micro-compétences, là où le coach de maths CM2 en tient
+     quatre à six par notion, défi compris. Une notion à seize micros ne donne
+     pas une fiche : elle donne une liste. Les trois notions ci-dessous se
+     suivent — on identifie la phrase, puis ce qui la complète, puis on
+     l'écrit sans faute — et chacune porte UNE fiche de cours. */
   {
-    id: "grammaire_orthographe",
-    label: "Phrase, groupes, accords et homophones",
+    id: "grammaire_phrase",
+    label: "La phrase : sujet, verbe, nature et fonction",
     boId: "BOCM2FG1",
     prerequis: ["fluence_lecture"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "grammaire_complements",
+    label: "Les compléments et le groupe nominal",
+    boId: "BOCM2FG1",
+    prerequis: ["grammaire_phrase"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "grammaire_accords",
+    label: "Les accords et les homophones",
+    boId: "BOCM2FG1",
+    prerequis: ["grammaire_complements"],
     levels: [1, 2, 3],
   },
   {
     id: "phrase_complexe",
     label: "Se repérer dans la phrase complexe",
     boId: "BOCM2FG1",
-    prerequis: ["grammaire_orthographe"],
+    prerequis: ["grammaire_phrase"],
     levels: [2, 3],
   },
   {
     id: "conjugaison",
     label: "Conjugaison et valeur des temps",
     boId: "BOCM2FG1",
-    prerequis: ["grammaire_orthographe"],
+    prerequis: ["grammaire_phrase"],
     levels: [1, 2, 3],
   },
 ];
