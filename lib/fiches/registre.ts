@@ -283,6 +283,12 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "Sujet, verbe, compléments, attribut, groupe nominal et accords — chaque règle dessinée sur la phrase.",
   },
 
+  "francais/cm2/phrase-complexe": {
+    titre: "La phrase complexe",
+    resume:
+      "Compter les propositions, distinguer juxtaposition, coordination et subordination, choisir qui, que, où.",
+  },
+
   "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
   "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
   "ia/fondements/modeles-apprentissage": { titre: "Les modèles d'apprentissage" },

@@ -42,6 +42,14 @@ const PALETTE = {
   orange: { fill: "#fef3c7", stroke: "#d97706", text: "#b45309" },
   violet: { fill: "#ede9fe", stroke: "#7c3aed", text: "#6d28d9" },
   rose: { fill: "#fce7f3", stroke: "#db2777", text: "#be185d" },
+  // Les propositions d'une phrase complexe : deux teintes de même force, parce
+  // qu'une coordination met justement les deux propositions à ÉGALITÉ. Elles ne
+  // reprennent aucune couleur de fonction — une proposition n'est pas une
+  // fonction, c'est un morceau de phrase.
+  indigo: { fill: "#e0e7ff", stroke: "#4f46e5", text: "#4338ca" },
+  sarcelle: { fill: "#ccfbf1", stroke: "#0d9488", text: "#0f766e" },
+  // Les petits mots outils qui relient : et, mais, quand, parce que, qui, que, où.
+  outil: { fill: "#e2e8f0", stroke: "#475569", text: "#334155" },
   neutre: { fill: "#f1f5f9", stroke: "#94a3b8", text: "#475569" },
 } as const;
 
@@ -52,6 +60,14 @@ function couleurFonction(label: string) {
     .toLowerCase()
     .normalize("NFD")
     .replace(/[̀-ͯ]/g, "");
+  // Une proposition se numérote (« proposition 1 ») : le chiffre choisit la
+  // teinte, pour que deux propositions voisines ne soient pas le même bloc.
+  if (l.includes("proposition")) {
+    return /2|subordonn/.test(l) ? PALETTE.sarcelle : PALETTE.indigo;
+  }
+  if (/coordination|subordination|conjonction|relatif|liaison/.test(l)) {
+    return PALETTE.outil;
+  }
   if (l.includes("attribut")) return PALETTE.violet;
   if (l.includes("circonstanciel") || l.startsWith("cc")) return PALETTE.orange;
   if (l.includes("objet") || l.includes("cod") || l.includes("coi")) return PALETTE.vert;
@@ -89,11 +105,12 @@ const PAS_ARC = 22;
 // « remplace » et l'arc se disputaient les mêmes pixels).
 const PAS_ARC_BAS = 30;
 const ESPACE_LIGNES = 10;
-// 270, et le nombre se déduit : le bloc d'un dessin mesure 226 px sur un
-// téléphone de 375, donc un dessin de 270 px s'y affiche à 226/270 = 0,84, et
-// les mots écrits en 16 px arrivent à 13,4. Au-dessus de 300, on repasse sous
-// les 12 px et la phrase redevient illisible en poche.
-const LARGEUR_MAX_DEFAUT = 270;
+// 250, et le nombre se déduit du bloc le PLUS ÉTROIT, pas du bloc moyen : sur un
+// téléphone de 375, un dessin posé dans une carte de méthode ne reçoit que
+// 201 px (226 dans une carte de propriété). Un dessin de 250 px s'y affiche donc
+// à 201/250 = 0,80, et les mots écrits en 15 px arrivent à 12. À 270, la carte
+// la plus serrée retombait à 10,9.
+const LARGEUR_MAX_DEFAUT = 250;
 
 // Un signe de ponctuation ne commence jamais une ligne : il reste collé au mot
 // qu'il suit, comme dans un texte imprimé.
@@ -136,24 +153,84 @@ export default function PhraseCanvas({ figure }: Props) {
     const g = groupes.findIndex((gr) => i >= gr.mots[0] && i <= gr.mots[1]);
     uniteDe[i] = g;
   });
-  const unites: number[][] = [];
+  const unitesBrutes: number[][] = [];
   mots.forEach((_, i) => {
-    const precedent = unites[unites.length - 1];
+    const precedent = unitesBrutes[unitesBrutes.length - 1];
     const memeGroupe =
       precedent !== undefined &&
       uniteDe[i] >= 0 &&
       uniteDe[i] === uniteDe[precedent[precedent.length - 1]];
     if (memeGroupe) precedent.push(i);
-    else unites.push([i]);
+    else unitesBrutes.push([i]);
+  });
+
+  // ⛔ UN GROUPE PLUS LONG QU'UNE LIGNE SE COUPE QUAND MÊME (constaté au rendu,
+  // 20/08). « Le vent souffle sur le lagon. » porte un seul groupe — « une seule
+  // proposition » — qui couvre toute la phrase : insécable, il tenait sur une
+  // ligne de 380 px et s'affichait à 9 px sur un téléphone. Ne pas couper est
+  // une préférence, pas une règle : quand l'unité ne rentre nulle part, on la
+  // coupe au mot.
+  const unites: number[][] = [];
+  unitesBrutes.forEach((unite) => {
+    const largeur = unite.reduce(
+      (s, i, k) => s + largeurs[i] + (k ? GAP_MOT : 0),
+      0
+    );
+    if (largeur <= largeurUtile) {
+      unites.push(unite);
+      return;
+    }
+    let morceau: number[] = [];
+    let occupe = 0;
+    unite.forEach((i) => {
+      const ajout = morceau.length ? GAP_MOT + largeurs[i] : largeurs[i];
+      if (morceau.length && occupe + ajout > largeurUtile) {
+        unites.push(morceau);
+        morceau = [i];
+        occupe = largeurs[i];
+      } else {
+        morceau.push(i);
+        occupe += ajout;
+      }
+    });
+    if (morceau.length) unites.push(morceau);
+  });
+
+  // ⛔ DEUX MOTS RELIÉS PAR UNE FLÈCHE RESTENT SUR LA MÊME LIGNE (Frédéric,
+  // 20/08 : « beaucoup de flèches sont inversées »). Sur « Sur le piton souffle
+  // un vent froid », la coupure tombait entre « souffle » et « un vent froid » :
+  // la flèche « qui est-ce qui ? » devenait une diagonale qui traversait le
+  // dessin, sa pointe passait derrière l'étiquette du mot et son texte se posait
+  // sur « CC de lieu ». À l'écran, elle semblait partir à l'envers. On colle
+  // donc les unités reliées AVANT de plier la phrase, tant qu'elles tiennent
+  // ensemble sur une ligne.
+  const largeurUnite = (u: number[]) =>
+    u.reduce((s, i, k) => s + largeurs[i] + (k ? GAP_MOT : 0), 0);
+  const unitesCollees: number[][] = [];
+  unites.forEach((unite) => {
+    const precedente = unitesCollees[unitesCollees.length - 1];
+    const relieeAuPrecedent =
+      precedente !== undefined &&
+      liens.some(
+        (l) =>
+          (precedente.includes(l.de) && unite.includes(l.vers)) ||
+          (precedente.includes(l.vers) && unite.includes(l.de))
+      );
+    if (
+      relieeAuPrecedent &&
+      largeurUnite(precedente) + GAP_MOT + largeurUnite(unite) <= largeurUtile
+    ) {
+      precedente.push(...unite);
+    } else {
+      unitesCollees.push([...unite]);
+    }
   });
 
   const lignes: number[][] = [];
   {
     let courante: number[] = [];
     let occupee = 0;
-    const largeurUnite = (u: number[]) =>
-      u.reduce((s, i, k) => s + largeurs[i] + (k ? GAP_MOT : 0), 0);
-    unites.forEach((unite) => {
+    unitesCollees.forEach((unite) => {
       const l = largeurUnite(unite);
       const ajout = courante.length ? GAP_MOT + l : l;
       const ponctuation = unite.every((i) => estPonctuation(mots[i].texte));
@@ -408,55 +485,6 @@ export default function PhraseCanvas({ figure }: Props) {
           );
         })}
 
-        {/* Un lien dont les deux mots sont tombés sur des lignes différentes ne
-            peut pas s'arrondir : il se tend en trait droit d'un mot à l'autre. */}
-        {liensTraversants.map((lien, i) => {
-          const x1 = centre(lien.de);
-          const x2 = centre(lien.vers);
-          const y1 = yMotsDe[ligneDe[lien.de]] + H_MOT / 2;
-          const y2 = yMotsDe[ligneDe[lien.vers]] + H_MOT / 2;
-          const couleur = lien.type === "reprise" ? "#0ea5e9" : "#0f172a";
-          const largeurLabel = lien.label ? largeurTexte(lien.label, FONT_LIEN) + 10 : 0;
-          return (
-            <g key={`t-${i}`}>
-              <line
-                x1={x1}
-                y1={y1}
-                x2={x2}
-                y2={y2}
-                stroke={couleur}
-                strokeWidth={1.6}
-                strokeDasharray="5 4"
-                markerEnd={
-                  lien.type === "reprise" ? "url(#pointe-bleue)" : "url(#pointe-noire)"
-                }
-              />
-              {lien.label ? (
-                <>
-                  <rect
-                    x={(x1 + x2) / 2 - largeurLabel / 2}
-                    y={(y1 + y2) / 2 - 8}
-                    width={largeurLabel}
-                    height={15}
-                    rx={5}
-                    fill="white"
-                  />
-                  <text
-                    x={(x1 + x2) / 2}
-                    y={(y1 + y2) / 2 + 3}
-                    textAnchor="middle"
-                    fontSize={FONT_LIEN}
-                    fontWeight="800"
-                    fill={couleur}
-                  >
-                    {lien.label}
-                  </text>
-                </>
-              ) : null}
-            </g>
-          );
-        })}
-
         {/* La nature, au-dessus, en gris : elle ne doit jamais peser autant que
             la fonction — c'est la distinction que la fiche vient enseigner. */}
         {showNatures
@@ -565,6 +593,73 @@ export default function PhraseCanvas({ figure }: Props) {
               })
             )
           : null}
+
+        {/* ⛔ UN LIEN QUI CHANGE DE LIGNE SE DESSINE EN DERNIER, PAR-DESSUS
+            (Frédéric, 20/08 : « beaucoup de flèches sont inversées »). Tracé
+            avant les mots, son départ et sa pointe passaient DERRIÈRE les
+            étiquettes : il ne restait qu'un tronçon de pointillé au milieu du
+            dessin, qu'on lisait à l'envers. Il garde aussi sa couleur — une
+            question reste violette même à cheval sur deux lignes — et son texte
+            se pose au tiers du trajet, hors de la bande des fonctions. */}
+        {liensTraversants.map((lien, i) => {
+          const x1 = centre(lien.de);
+          const x2 = centre(lien.vers);
+          const y1 = yMotsDe[ligneDe[lien.de]] + H_MOT / 2;
+          const y2 = yMotsDe[ligneDe[lien.vers]] + H_MOT / 2;
+          const couleur =
+            lien.type === "reprise"
+              ? "#0ea5e9"
+              : lien.type === "question"
+                ? "#7c3aed"
+                : "#0f172a";
+          const pointe =
+            lien.type === "reprise"
+              ? "url(#pointe-bleue)"
+              : lien.type === "question"
+                ? "url(#pointe-violette)"
+                : "url(#pointe-noire)";
+          const largeurLabel = lien.label ? largeurTexte(lien.label, FONT_LIEN) + 10 : 0;
+          const xLabel = x1 + (x2 - x1) * 0.32;
+          const yLabel = y1 + (y2 - y1) * 0.32;
+          return (
+            <g key={`t-${i}`}>
+              <line
+                x1={x1}
+                y1={y1}
+                x2={x2}
+                y2={y2}
+                stroke={couleur}
+                strokeWidth={1.8}
+                strokeDasharray="5 4"
+                markerEnd={pointe}
+              />
+              {lien.label ? (
+                <>
+                  <rect
+                    x={xLabel - largeurLabel / 2}
+                    y={yLabel - 8}
+                    width={largeurLabel}
+                    height={15}
+                    rx={5}
+                    fill="white"
+                    stroke={couleur}
+                    strokeWidth={0.8}
+                  />
+                  <text
+                    x={xLabel}
+                    y={yLabel + 3}
+                    textAnchor="middle"
+                    fontSize={FONT_LIEN}
+                    fontWeight="800"
+                    fill={couleur}
+                  >
+                    {lien.label}
+                  </text>
+                </>
+              ) : null}
+            </g>
+          );
+        })}
 
         {/* Les reprises, en pointillé sous la phrase : le pronom montre du
             doigt ce qu'il remplace. L'étiquette se pose SOUS le creux de l'arc
