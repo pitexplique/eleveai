@@ -163,10 +163,29 @@ const CONNECTEURS_ORAL: readonly { readonly mot: string; readonly role: string }
 
 /* ── Accord et désaccord ─────────────────────────────────────────────────── */
 
+/** `faute` : ce qui manque à la MAUVAISE réponse, rangé dans l'une des quatre
+ *  catégories de FAUTES ci-dessous.
+ *  ⛔ Quatre catégories, et pas un libellé par ligne : écrits ligne par ligne,
+ *  « elle attaque la personne au lieu de l'idée » et « elle vise la personne,
+ *  pas une idée précise » seraient vrais tous les deux de la même phrase, et
+ *  l'élève qui coche le second serait compté faux. Les catégories, elles,
+ *  s'excluent deux à deux. */
+type Faute = "raison" | "personne" | "rien" | "arret";
+
+const FAUTES: Record<Faute, string> = {
+  raison: "elle ne donne aucune raison",
+  personne: "elle s'en prend à la personne",
+  rien: "elle n'ajoute rien de nouveau",
+  arret: "elle arrête la discussion",
+};
+
+const TOUTES_FAUTES: readonly string[] = Object.values(FAUTES);
+
 type PriseDeParole = {
   readonly bonne: string;
   readonly mauvaise: string;
   readonly pourquoi: string;
+  readonly faute: Faute;
 };
 
 const DESACCORDS: readonly PriseDeParole[] = [
@@ -174,51 +193,61 @@ const DESACCORDS: readonly PriseDeParole[] = [
     bonne: "Je ne suis pas d'accord, parce que le texte dit le contraire à la troisième ligne.",
     mauvaise: "C'est faux.",
     pourquoi: "la première dit POURQUOI, et on peut lui répondre ; la seconde ferme la discussion",
+    faute: "raison",
   },
   {
     bonne: "Je pense autrement, parce que j'ai déjà vu un margouillat sortir en plein jour.",
     mauvaise: "N'importe quoi.",
     pourquoi: "la première apporte une preuve, la seconde attaque la personne",
+    faute: "personne",
   },
   {
     bonne: "Je suis d'accord avec toi, et j'ajoute que le texte le dit aussi à la fin.",
     mauvaise: "Oui.",
     pourquoi: "la première explique ce qu'elle ajoute, la seconde n'apprend rien à personne",
+    faute: "rien",
   },
   {
     bonne: "Je ne suis pas sûr, parce que le texte ne le dit nulle part.",
     mauvaise: "Tu te trompes toujours.",
     pourquoi: "la première parle du TEXTE, la seconde parle de la personne",
+    faute: "personne",
   },
   {
     bonne: "Je suis d'accord sur le début, mais pas sur la fin, parce que l'histoire se passe la nuit.",
     mauvaise: "Non, pas du tout.",
     pourquoi: "la première dit sur quoi porte le désaccord, la seconde rejette tout en bloc",
+    faute: "raison",
   },
   {
     bonne: "Je ne comprends pas la même chose, parce que le texte parle du matin, pas du soir.",
     mauvaise: "Tu n'as rien écouté.",
     pourquoi: "la première montre où elle a lu, la seconde accuse",
+    faute: "personne",
   },
   {
     bonne: "Peut-être, mais je voudrais vérifier dans le texte avant de dire oui.",
     mauvaise: "Si tu le dis.",
     pourquoi: "la première propose de chercher, la seconde abandonne la discussion",
+    faute: "arret",
   },
   {
     bonne: "Je suis d'accord, parce que j'ai vu la même chose sur le sentier l'an dernier.",
     mauvaise: "Moi aussi.",
     pourquoi: "la première apporte quelque chose de nouveau, la seconde n'ajoute rien",
+    faute: "rien",
   },
   {
     bonne: "Je ne suis pas d'accord avec la fin, parce que le margouillat chasse la nuit.",
     mauvaise: "Tu dis toujours n'importe quoi.",
     pourquoi: "la première vise une idée précise, la seconde vise la personne",
+    faute: "personne",
   },
   {
     bonne: "J'hésite, parce que le texte ne donne pas la réponse : il faudrait chercher ailleurs.",
     mauvaise: "On s'en fiche.",
     pourquoi: "la première reconnait ce qu'on ne sait pas encore, la seconde arrête tout",
+    faute: "arret",
   },
 ];
 
@@ -748,6 +777,194 @@ export const langageOralBank: TutorBankItemV4[] = [
       "On dit qu'on n'est pas d'accord, et on ajoute POURQUOI.",
     ),
     tags: ["ce1", "oral", "defi", "methode", "qcm"],
+  },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LES SECONDS ITEMS (20/08/2026)
+     ---------------------------------------------------------------------
+     Cinq micros de cette notion portaient UN SEUL item. Le coach en mode
+     complet oppose deux énoncés : sous deux items, la ligne cliquée ouvrait
+     sur une AUTRE ligne (repli silencieux) — l'élève croyait travailler
+     « reformuler » et travaillait « écouter ». Mesuré : ce1/francais rendait
+     97/125 lignes franches.
+     ⭐ Un second item se fabrique par CONTRASTE, pas en changeant les valeurs.
+     Chacun prend ici le chemin inverse de son premier.
+     ⚠️ Deux des premiers items ne proposent que DEUX choix (expliquer,
+     registre) : une chance sur deux au hasard. Les seconds en proposent
+     quatre, ce qui resserre aussi la mesure de ces deux micros.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  {
+    kind: "template",
+    id: "ce1_oral_classer_infos_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "langage_oral",
+    microId: "ce1_oral_classer_infos",
+    difficulty: 3,
+    theme: "reunion",
+    hint: "Trois de ces phrases ont été dites. Une non.",
+    tags: ["ce1", "oral", "classer", "template"],
+    generate: () => {
+      const e = randomChoice(ECOUTES);
+      const autre = randomChoice(ECOUTES.filter((x) => x.texte !== e.texte));
+      const intrus = randomChoice(autre.ordre);
+      return {
+        text: `On te dit ceci :\n\n« ${e.texte} »\n\nLaquelle de ces informations n'a PAS été dite ?`,
+        format: "qcm" as const,
+        choices: shuffle([intrus, ...e.ordre]),
+        expected: [intrus],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Classer ce qu'on entend, c'est aussi savoir ce qui N'A PAS été dit. Une information qui n'y était pas ne doit pas se glisser dans ce qu'on retient.",
+          "Le premier exercice demandait de remettre en ordre. Celui-ci demande de trier : reprends le texte phrase par phrase et coche celle qu'on n'y retrouve pas.",
+          `Le texte disait : ${e.ordre.join(" ")} Il ne disait rien de « ${intrus} »`,
+          `L'information en trop est : « ${intrus} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_oral_reformuler_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "langage_oral",
+    microId: "ce1_oral_reformuler",
+    difficulty: 3,
+    theme: "reunion",
+    hint: "Compare la reformulation au texte : ajoute-t-elle, oublie-t-elle, ou mélange-t-elle ?",
+    tags: ["ce1", "oral", "reformuler", "template"],
+    generate: () => {
+      const e = randomChoice(ECOUTES);
+      const autre = randomChoice(ECOUTES.filter((x) => x.texte !== e.texte));
+      const genre = randomChoice(["ajoute", "oublie", "ordre", "juste"] as const);
+      const dite =
+        genre === "ajoute"
+          ? `${e.ordre.join(" ")} ${randomChoice(autre.ordre)}`
+          : genre === "oublie"
+            ? `${e.ordre[0]} ${e.ordre[2]}`
+            : genre === "ordre"
+              ? `${e.ordre[2]} ${e.ordre[0]} ${e.ordre[1]}`
+              : e.ordre.join(" ");
+      const bon =
+        genre === "ajoute"
+          ? "elle ajoute une chose qui n'a pas été dite"
+          : genre === "oublie"
+            ? "elle oublie une des informations dites"
+            : genre === "ordre"
+              ? "elle change l'ordre des informations"
+              : "rien : elle est juste et complète";
+      return {
+        text: `On t'a dit :\n\n« ${e.texte} »\n\nUn élève reformule : « ${dite} »\n\nQu'est-ce qui cloche dans sa reformulation ?`,
+        format: "qcm" as const,
+        choices: shuffle([
+          "elle ajoute une chose qui n'a pas été dite",
+          "elle oublie une des informations dites",
+          "elle change l'ordre des informations",
+          "rien : elle est juste et complète",
+        ]),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une reformulation fidèle garde TOUT ce qui a été dit, RIEN de plus, et dans l'ordre. Trois façons de se tromper, donc — et une seule de réussir.",
+          "Le premier exercice demandait de choisir la bonne reformulation. Celui-ci demande de NOMMER la faute : compte les informations, puis vérifie leur ordre.",
+          `Le texte disait, dans l'ordre : ${e.ordre.join(" ")}`,
+          `${bon.charAt(0).toUpperCase()}${bon.slice(1)}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_oral_raconter_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "langage_oral",
+    microId: "ce1_oral_raconter",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La raison est donnée. Cherche le conseil qui va avec.",
+    tags: ["ce1", "oral", "raconter", "template"],
+    generate: () => {
+      const c = randomChoice(CONSEILS_RACONTER);
+      const autres = CONSEILS_RACONTER.filter((x) => x.conseil !== c.conseil).map((x) => x.conseil);
+      return {
+        text: `Quand tu racontes, il y a une règle parce que ${c.pourquoi}.\n\nQuelle est cette règle ?`,
+        format: "qcm" as const,
+        choices: makeChoices(c.conseil, autres),
+        expected: [c.conseil],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Chaque conseil pour raconter répond à une difficulté précise de celui qui écoute.",
+          "Le premier exercice partait du conseil pour trouver sa raison. Celui-ci fait l'inverse : la raison est donnée, retrouve le conseil.",
+          `Parce que ${c.pourquoi}, il faut ${c.conseil}.`,
+          `Il faut ${c.conseil}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_oral_expliquer_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "langage_oral",
+    microId: "ce1_oral_expliquer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Quatre façons de rater une réponse. Laquelle est celle-ci ?",
+    tags: ["ce1", "oral", "expliquer", "template"],
+    generate: () => {
+      const d = randomChoice(DESACCORDS);
+      const bon = FAUTES[d.faute];
+      return {
+        text: `Un camarade donne son avis. Un élève lui répond : « ${d.mauvaise} »\n\nQu'est-ce qu'on peut reprocher à cette réponse ?`,
+        format: "qcm" as const,
+        choices: makeChoices(bon, TOUTES_FAUTES),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une réponse rate de quatre façons : elle ne donne aucune raison, elle s'en prend à la personne, elle n'ajoute rien, ou elle arrête la discussion.",
+          "Le premier exercice demandait de choisir la bonne réponse. Celui-ci demande de dire ce qui manque à la mauvaise — c'est ce qui permet de la réparer.",
+          `« ${d.mauvaise} » : ${bon}. On aurait pu dire : « ${d.bonne} »`,
+          `${bon.charAt(0).toUpperCase()}${bon.slice(1)}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce1_oral_registre_tpl_2",
+    niveau: "ce1",
+    matiere: "francais",
+    notionId: "langage_oral",
+    microId: "ce1_oral_registre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cette phrase convient à une seule de ces quatre situations.",
+    tags: ["ce1", "oral", "registre", "template"],
+    generate: () => {
+      const s = randomChoice(SITUATIONS);
+      const autres = SITUATIONS.filter((x) => x.situation !== s.situation).map((x) => x.situation);
+      return {
+        text: `Quelqu'un dit : « ${s.bonne} »\n\nDans quelle situation est-il ?`,
+        format: "qcm" as const,
+        choices: makeChoices(s.situation, autres),
+        expected: [s.situation],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Le niveau de langue dit à qui l'on parle. En l'entendant, on devine la situation : un copain, une directrice, un inconnu au téléphone.",
+          "Le premier exercice partait de la situation pour choisir la phrase. Celui-ci fait l'inverse : écoute la phrase, et demande-toi à qui elle s'adresse.",
+          `« ${s.bonne} » convient quand ${s.situation}.`,
+          `C'est quand ${s.situation}.`,
+        ),
+      };
+    },
   },
 ];
 
