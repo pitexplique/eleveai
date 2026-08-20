@@ -670,6 +670,260 @@ const AUTONOMIE: readonly Situation[] = [
   },
 ];
 
+/* =============================================================================
+   LES SECONDS ITEMS (20/08/2026)
+   ---------------------------------------------------------------------------
+   POURQUOI. Les huit micros de cette notion portaient UN SEUL item chacune. En
+   mode complet, le moteur oppose deux énoncés : il levait « Aucune paire
+   disponible dans la notion devenir_lecteur » et les huit lignes, pourtant
+   affichées au coach, ouvraient sur une erreur. Mesuré au contrôle de
+   démarrage : ce2/francais rendait 120/128 avec 8 lignes mortes.
+
+   ⭐ UN SECOND ITEM NE SE FABRIQUE PAS EN CHANGEANT LES VALEURS — le moteur
+   veut un CONTRASTE (méthode écrite en 2de, seconde/francais/verbe-valeurs).
+   Chacun de ceux-ci prend donc le chemin INVERSE du premier :
+     autonomie   le 1er donne la difficulté et demande le geste ;
+                 celui-ci donne le geste et demande à quoi il sert.
+     genres      le 1er va de l'extrait au genre ; celui-ci va du genre à la
+                 QUESTION que ce genre pose au lecteur.
+     personnages le 1er va des indices au rôle ; celui-ci va du rôle aux indices.
+     réseau      le 1er choisit le livre ; celui-ci juge la RAISON et dit sur
+                 quoi elle repose.
+     expérience  le 1er demande quoi faire ; celui-ci montre un lecteur qui se
+                 trompe et demande ce qu'il oublie.
+     carnet      le 1er demande quoi écrire ; celui-ci montre une page écrite
+                 et demande ce qui lui manque.
+     lieux       le 1er va de la situation au métier ; celui-ci va du métier au
+                 geste.
+     défi        le 1er va de l'extrait au genre + attente ; celui-ci va du
+                 genre à l'attente seule.
+
+   ⚠️ LONGUEURS ÉQUILIBRÉES, ET C'EST MESURÉ. Ce fichier sortait à 68 % / +22,8
+   caractères au contrôle de devinabilité — la bonne réponse s'y cochait à sa
+   seule longueur. Les tables ci-dessous sont écrites à longueur voisine, et
+   quatre d'entre elles rejouent un jeu de choix FIXE (les cinq questions de
+   genre, les quatre sortes de liens, les sept métiers) : à choix fixe, la
+   longueur ne peut plus trahir la bonne réponse, quel que soit le tirage.
+   ========================================================================== */
+
+type Geste = { readonly geste: string; readonly bon: string; readonly faux: readonly string[] };
+
+/* 1 bis. AUTONOMIE — on donne le geste, l'élève dit à quoi il sert. */
+const AUTONOMIE_BIS: readonly Geste[] = [
+  {
+    geste: "finir la phrase avant de chercher un mot inconnu",
+    bon: "la suite de la phrase explique souvent le mot",
+    faux: [
+      "le dictionnaire donne toujours un sens faux",
+      "on n'a pas le droit d'ouvrir un dictionnaire",
+      "les mots rares ne comptent pas dans l'histoire",
+    ],
+  },
+  {
+    geste: "se fixer quelques pages à lire chaque soir",
+    bon: "on avance sûrement, même quand le livre est long",
+    faux: [
+      "on retient mieux en lisant toujours au même endroit",
+      "on finit avant les autres élèves de la classe",
+      "on peut sauter les chapitres les moins utiles",
+    ],
+  },
+  {
+    geste: "se donner trente pages avant de décider d'arrêter",
+    bon: "beaucoup de livres démarrent lentement au début",
+    faux: [
+      "les trente premières pages sont les plus faciles",
+      "un livre se juge à son premier chapitre",
+      "trente pages suffisent à connaitre la fin",
+    ],
+  },
+  {
+    geste: "revenir en arrière quand on n'a rien retenu",
+    bon: "on ne comprend pas la suite sans le passage sauté",
+    faux: [
+      "relire fait gagner du temps sur la fin du livre",
+      "un lecteur rapide ne revient jamais en arrière",
+      "on doit relire chaque page exactement deux fois",
+    ],
+  },
+  {
+    geste: "raconter en trois phrases sans regarder le livre",
+    bon: "c'est ainsi qu'on vérifie qu'on a compris",
+    faux: [
+      "c'est ainsi qu'on retient le nom des personnages",
+      "c'est ainsi qu'on lit deux fois plus vite",
+      "c'est ainsi qu'on prépare le résumé à rendre",
+    ],
+  },
+  {
+    geste: "lire à voix basse un passage difficile",
+    bon: "entendre la phrase aide à la démêler",
+    faux: [
+      "lire tout haut fait retenir par cœur",
+      "on lit toujours plus vite à voix basse",
+      "la voix remplace la ponctuation du texte",
+    ],
+  },
+];
+
+/* 2 bis. GENRES — on donne le genre, l'élève dit la QUESTION qu'il pose.
+   ⚠️ Choix FIXE : les cinq questions servent d'énoncé ET de leurres, donc la
+   longueur ne distingue rien. Elles tiennent toutes entre 33 et 38 signes. */
+const QUESTION_GENRE: Record<Genre, string> = {
+  policier: "qui a fait cela, et comment le savoir ?",
+  aventure: "y arrivera-t-il, et à quel prix ?",
+  fantastique: "ce que je vois est-il bien réel ?",
+  historique: "comment vivait-on à cette époque ?",
+  quotidien: "comment fait-on avec ce qui arrive ?",
+};
+
+const TOUTES_QUESTIONS: readonly string[] = Object.values(QUESTION_GENRE);
+
+/* 4 bis. RÉSEAU — on donne la RAISON, l'élève dit sur quoi elle repose.
+   Les raisons sont reprises telles quelles des lignes de RESEAU ci-dessus :
+   c'est le même matériau, lu dans l'autre sens. */
+type Lien = "vrai" | "decor" | "sujet" | "taille";
+const SUR_QUOI: Record<Lien, string> = {
+  vrai: "sur ce que les deux livres font au lecteur",
+  decor: "sur le décor où se passe l'histoire",
+  sujet: "sur le sujet dont les deux parlent",
+  taille: "sur la longueur ou le nombre de pages",
+};
+const TOUS_LIENS: readonly string[] = Object.values(SUR_QUOI);
+
+const RAISONS: readonly { readonly raison: string; readonly lien: Lien }[] = [
+  { raison: "parce que les deux montrent comment on juge trop vite", lien: "vrai" },
+  { raison: "parce que les deux jouent avec ce que le lecteur croit savoir", lien: "vrai" },
+  { raison: "parce que les deux racontent ce que coute un départ", lien: "vrai" },
+  { raison: "parce que les deux montrent la même arme : les mots", lien: "vrai" },
+  { raison: "parce que les deux montrent ce que coute le silence", lien: "vrai" },
+  { raison: "parce que le décor est le même", lien: "decor" },
+  { raison: "parce que le lieu est le même", lien: "decor" },
+  { raison: "parce que la saison est la même", lien: "decor" },
+  { raison: "parce qu'il y est aussi question de voisins", lien: "sujet" },
+  { raison: "parce qu'il parle du même sujet", lien: "sujet" },
+  { raison: "parce que c'est le même délit", lien: "sujet" },
+  { raison: "parce qu'il vient du même endroit", lien: "sujet" },
+  { raison: "parce qu'il se lit en autant de soirs", lien: "taille" },
+  { raison: "parce qu'il a autant de vers", lien: "taille" },
+  { raison: "parce qu'elle est aussi courte", lien: "taille" },
+];
+
+/* 5 bis. EXPÉRIENCE — on montre un lecteur qui se trompe, l'élève dit ce qu'il
+   oublie. Le premier item demandait le bon geste ; celui-ci nomme le manque. */
+const OUBLIS: readonly Geste[] = [
+  {
+    geste: "Il décide que le personnage ressent exactement ce que lui a ressenti.",
+    bon: "il oublie d'aller voir ce que le texte dit",
+    faux: [
+      "il oublie de raconter sa propre histoire",
+      "il oublie de choisir un livre plus facile",
+      "il oublie de demander l'avis d'un adulte",
+    ],
+  },
+  {
+    geste: "Il arrête le livre parce qu'il ne connait pas du tout le pays.",
+    bon: "il oublie qu'on comprend sans avoir vécu",
+    faux: [
+      "il oublie de chercher le pays sur une carte",
+      "il oublie de lire d'abord le résumé du dos",
+      "il oublie que le livre est peut-être traduit",
+    ],
+  },
+  {
+    geste: "Il trouve le geste du personnage injuste et cesse de le suivre.",
+    bon: "il oublie de chercher ce qui explique son geste",
+    faux: [
+      "il oublie de noter son avis dans le carnet",
+      "il oublie que le héros a toujours raison",
+      "il oublie de compter les personnages du livre",
+    ],
+  },
+  {
+    geste: "Une scène le fait rire, personne d'autre ne rit, et il se tait.",
+    bon: "il oublie que son avis mérite d'être expliqué",
+    faux: [
+      "il oublie de rire moins fort que les autres",
+      "il oublie de relire la scène une deuxième fois",
+      "il oublie de vérifier si la scène est drôle",
+    ],
+  },
+  {
+    geste: "Le personnage se met en colère ; lui aurait pleuré, donc il dit que l'auteur s'est trompé.",
+    bon: "il oublie que la différence lui apprend beaucoup",
+    faux: [
+      "il oublie que l'auteur écrit ce qu'il veut",
+      "il oublie de relire le passage plus lentement",
+      "il oublie de comparer avec un autre livre",
+    ],
+  },
+];
+
+/* 6 bis. CARNET — on montre une page écrite, l'élève dit ce qui lui manque. */
+const PAGES: readonly Geste[] = [
+  {
+    geste: "« Le livre de la jungle. Super. »",
+    bon: "un moment du livre qui explique cet avis",
+    faux: [
+      "le nombre exact de pages que compte le livre",
+      "le prix auquel ce livre a été acheté en librairie",
+      "le nom de la personne qui l'a conseillé",
+    ],
+  },
+  {
+    geste: "« J'ai tout aimé. Note : 9 sur 10. »",
+    bon: "ce que le livre a fait, et pourquoi",
+    faux: [
+      "une note plus précise, sur vingt",
+      "le résumé complet de l'histoire",
+      "la liste de tous les personnages",
+    ],
+  },
+  {
+    geste: "« Trois pages recopiées du chapitre 4. »",
+    bon: "l'avis du lecteur sur ce qu'il a recopié",
+    faux: [
+      "le numéro de la page de chaque phrase",
+      "la suite du chapitre, recopiée aussi",
+      "le nom de l'éditeur qui a publié le livre",
+    ],
+  },
+  {
+    geste: "« Livre abandonné page 30. »",
+    bon: "pourquoi il l'a arrêté, et s'il y reviendra",
+    faux: [
+      "le nombre de pages qu'il restait à lire",
+      "le titre d'un autre livre à lire à la place",
+      "l'endroit exact où il a rangé le livre",
+    ],
+  },
+  {
+    geste: "« Ce livre m'a fait penser à un autre. »",
+    bon: "lequel, et ce qui relie les deux livres",
+    faux: [
+      "à quelle date il a lu l'autre livre",
+      "combien de livres il a lus cette année",
+      "si l'autre livre était plus facile",
+    ],
+  },
+];
+
+/* 7 bis. LIEUX — on donne le métier, l'élève dit le geste.
+   ⚠️ Choix FIXE : les sept gestes servent d'énoncé ET de leurres. */
+const METIERS: readonly { readonly metier: string; readonly geste: string }[] = [
+  { metier: "l'auteur", geste: "il écrit le texte, et c'est de lui que tout part" },
+  { metier: "l'illustrateur", geste: "il dessine les images qui accompagnent le texte" },
+  { metier: "le traducteur", geste: "il fait passer le livre d'une langue à une autre" },
+  { metier: "l'éditeur", geste: "il choisit de publier le livre et travaille le texte" },
+  { metier: "l'imprimeur", geste: "il fabrique les milliers d'exemplaires du livre" },
+  { metier: "le libraire", geste: "il achète des livres pour son magasin et les vend" },
+  { metier: "le bibliothécaire", geste: "il choisit les livres d'une bibliothèque et les prête" },
+];
+
+const TOUS_GESTES: readonly string[] = METIERS.map((m) => m.geste);
+
+const TOUTES_ATTENTES: readonly string[] = Object.values(ATTENDU);
+
 export const devenirLecteurBank: TutorBankItemV4[] = [
   /* =========================================================
      CE2_LECT_AUTONOMIE
@@ -934,6 +1188,251 @@ export const devenirLecteurBank: TutorBankItemV4[] = [
           "Reconnaitre un genre sert à quelque chose : il annonce ce qui va venir. Un policier fait attendre un enquêteur, une aventure un guide, un fantastique un double, un récit historique un témoin, un récit du quotidien un confident.",
           "Trouve le genre, puis vérifie l'attente. Une réponse dont un seul des deux morceaux est faux reste fausse.",
           `Ici : ${e.marque} — donc ${LABEL_GENRE[e.genre]}. Et ${ATTENDU[e.genre]}.`,
+          `${bon.charAt(0).toUpperCase()}${bon.slice(1)}.`,
+        ),
+      };
+    },
+  },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LES SECONDS ITEMS — un par micro, sans quoi la notion ne démarre pas.
+     Chacun prend le chemin INVERSE de son premier (voir l'en-tête des tables).
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  {
+    kind: "template",
+    id: "ce2_lect_autonomie_tpl_2",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "ce2_lect_autonomie",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le geste est donné. Cherche la difficulté qu'il fait disparaitre.",
+    tags: ["ce2", "devenir-lecteur", "autonomie", "template"],
+    generate: () => {
+      const g = randomChoice(AUTONOMIE_BIS);
+      return {
+        text: `Un lecteur qui lit seul prend l'habitude suivante : ${g.geste}.\n\nPourquoi est-ce utile ?`,
+        format: "qcm" as const,
+        choices: makeChoices(g.bon, g.faux),
+        expected: [g.bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Lire en autonomie, ce n'est pas lire sans méthode : c'est avoir quelques gestes prêts, et savoir à quoi chacun sert.",
+          "Ne te demande pas si le geste est poli ou sérieux : demande-toi quelle difficulté il fait disparaitre.",
+          `${g.geste.charAt(0).toUpperCase()}${g.geste.slice(1)} : ${g.bon}.`,
+          `${g.bon.charAt(0).toUpperCase()}${g.bon.slice(1)}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_lect_genres_recit_tpl_2",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "ce2_lect_genres_recit",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Chaque genre pose sa question au lecteur. Laquelle celui-ci pose-t-il ?",
+    tags: ["ce2", "devenir-lecteur", "genres", "template"],
+    generate: () => {
+      const genre = randomChoice(Object.keys(QUESTION_GENRE) as Genre[]);
+      const bon = QUESTION_GENRE[genre];
+      return {
+        text: `Tu ouvres ${LABEL_GENRE[genre]}.\n\nQuelle question ce récit va-t-il te poser ?`,
+        format: "qcm" as const,
+        choices: makeChoices(bon, TOUTES_QUESTIONS),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Un genre ne se définit pas par son sujet mais par la question qu'il pose au lecteur, et qui le tient jusqu'au bout.",
+          "Le premier exercice partait de l'extrait pour trouver le genre. Celui-ci fait l'inverse : le genre est donné, retrouve sa question.",
+          `Dans ${LABEL_GENRE[genre]}, on se demande : « ${bon} »`,
+          `« ${bon} »`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_lect_personnages_types_tpl_2",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "ce2_lect_personnages_types",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le rôle est nommé. Cherche ce qui le fait reconnaitre dans le récit.",
+    tags: ["ce2", "devenir-lecteur", "personnages-types", "template"],
+    generate: () => {
+      const p = randomChoice(TYPES_PERSO);
+      /* ⛔ Les leurres viennent d'entrées d'un AUTRE type. Quatre rôles
+         apparaissent deux fois dans TYPES_PERSO (l'enquêteur, le maitre, le
+         traitre, le héros malgré lui) : sans ce filtre, la seconde entrée du
+         même rôle serait servie comme piège alors qu'elle est juste. */
+      const faux = TYPES_PERSO.filter((t) => t.type !== p.type).map((t) => t.indices);
+      return {
+        text: `Dans un récit, tu rencontres ${p.type}.\n\nÀ quoi le reconnais-tu ?`,
+        format: "qcm" as const,
+        choices: makeChoices(p.indices, faux),
+        expected: [p.indices],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Les personnages-types se répètent d'un livre à l'autre. Chacun se reconnait à ce qu'il FAIT pour l'histoire, pas à son allure.",
+          "Le premier exercice partait des indices pour nommer le rôle. Celui-ci fait l'inverse : le rôle est donné, retrouve ses indices.",
+          `${p.type.charAt(0).toUpperCase()}${p.type.slice(1)} : ${p.indices}.`,
+          `${p.indices.charAt(0).toUpperCase()}${p.indices.slice(1)}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_lect_reseau_tpl_2",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "ce2_lect_reseau",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une seule de ces quatre sortes de liens fait vraiment un réseau.",
+    tags: ["ce2", "devenir-lecteur", "reseau", "template"],
+    generate: () => {
+      const r = randomChoice(RAISONS);
+      const bon = SUR_QUOI[r.lien];
+      return {
+        text: `On te propose de relier deux livres « ${r.raison} ».\n\nSur quoi ce lien repose-t-il ?`,
+        format: "qcm" as const,
+        choices: makeChoices(bon, TOUS_LIENS),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Un réseau relie deux livres par ce qu'ils font au lecteur : la même question posée, le même retournement, la même leçon. Le décor, le sujet ou la longueur ne sont pas des liens de lecture.",
+          "Lis la raison jusqu'au bout et demande-toi ce qu'elle compare. Si elle compare un lieu, une saison ou un nombre de pages, elle ne tient pas.",
+          `« ${r.raison} » repose ${bon}.`,
+          `Ce lien repose ${bon}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_lect_experience_tpl_2",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "ce2_lect_experience",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Ce lecteur se sert de sa vie. Qu'est-ce qu'il ne fait pas ?",
+    tags: ["ce2", "devenir-lecteur", "experience", "template"],
+    generate: () => {
+      const o = randomChoice(OUBLIS);
+      return {
+        text: `${o.geste}\n\nQu'est-ce que ce lecteur oublie ?`,
+        format: "qcm" as const,
+        choices: makeChoices(o.bon, o.faux),
+        expected: [o.bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Ce qu'on a vécu ouvre le livre, mais ne le remplace pas. Le lecteur qui s'arrête à son expérience ne lit plus que lui-même.",
+          "Le premier exercice demandait le bon geste. Celui-ci montre un lecteur qui se trompe : nomme ce qui lui manque, et tu tiens la règle.",
+          `${o.geste} → ${o.bon}.`,
+          `${o.bon.charAt(0).toUpperCase()}${o.bon.slice(1)}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_lect_carnet_tpl_2",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "ce2_lect_carnet",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La page existe déjà. Cherche ce qu'on ne pourra pas y retrouver plus tard.",
+    tags: ["ce2", "devenir-lecteur", "carnet", "template"],
+    generate: () => {
+      const p = randomChoice(PAGES);
+      return {
+        text: `Voici une page de carnet de lecteur : ${p.geste}\n\nQu'est-ce qui lui manque le plus ?`,
+        format: "qcm" as const,
+        choices: makeChoices(p.bon, p.faux),
+        expected: [p.bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une page de carnet est utile si, un an plus tard, elle dit encore quelque chose. Un titre et un mot d'avis ne suffisent pas : il faut la raison.",
+          "Le premier exercice demandait quoi écrire. Celui-ci part d'une page déjà écrite : demande-toi ce que tu ne pourrais pas y retrouver dans six mois.",
+          `${p.geste} → il manque ${p.bon}.`,
+          `Il manque ${p.bon}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_lect_lieux_acteurs_tpl_2",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "ce2_lect_lieux_acteurs",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le métier est nommé. Cherche son geste dans le chemin du livre.",
+    tags: ["ce2", "devenir-lecteur", "lieux", "metiers", "template"],
+    generate: () => {
+      const m = randomChoice(METIERS);
+      return {
+        text: `Que fait ${m.metier} ?`,
+        format: "qcm" as const,
+        choices: makeChoices(m.geste, TOUS_GESTES),
+        expected: [m.geste],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Sept métiers se passent le livre avant qu'il arrive dans tes mains : l'auteur, l'illustrateur, le traducteur, l'éditeur, l'imprimeur, le libraire, le bibliothécaire.",
+          "Le premier exercice partait de la situation pour nommer le métier. Celui-ci fait l'inverse : le métier est donné, retrouve son geste.",
+          `${m.metier.charAt(0).toUpperCase()}${m.metier.slice(1)} : ${m.geste}.`,
+          `${m.geste.charAt(0).toUpperCase()}${m.geste.slice(1)}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_lect_defi_tpl_2",
+    niveau: "ce2",
+    matiere: "francais",
+    notionId: "devenir_lecteur",
+    microId: "ce2_lect_defi",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le genre est donné. Quel personnage fait-il attendre ?",
+    tags: ["ce2", "devenir-lecteur", "defi", "template"],
+    generate: () => {
+      const genre = randomChoice(Object.keys(ATTENDU) as Genre[]);
+      const bon = ATTENDU[genre];
+      return {
+        text: `Tu commences ${LABEL_GENRE[genre]}.\n\nQuel personnage t'attends-tu à rencontrer ?`,
+        format: "qcm" as const,
+        choices: makeChoices(bon, TOUTES_ATTENTES),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Reconnaitre un genre sert à prévoir : chaque genre fait attendre un personnage. Le policier un enquêteur, l'aventure un guide, le fantastique un double, l'historique un témoin, le quotidien un confident.",
+          "Le premier défi partait de l'extrait et demandait le genre ET l'attente. Celui-ci donne le genre : il ne reste que l'attente à trouver.",
+          `Dans ${LABEL_GENRE[genre]}, ${bon}.`,
           `${bon.charAt(0).toUpperCase()}${bon.slice(1)}.`,
         ),
       };

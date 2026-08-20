@@ -61,7 +61,15 @@ Conclusion : ${conclusion}`;
 
 type MotCopie = { readonly mot: string; readonly faux: readonly string[] };
 type MotDictee = { readonly mot: string; readonly indice: string; readonly faux: readonly string[] };
-type MotMuet = { readonly mot: string; readonly lettre: string; readonly famille: string };
+/** `leurres` : des mots qui RESSEMBLENT au mot de la même famille sans en être
+ *  — et où la lettre finale ne se réveille donc pas. Voir le commentaire de
+ *  MOTS_MUETS : sans eux, le défi avait quatre bonnes réponses. */
+type MotMuet = {
+  readonly mot: string;
+  readonly lettre: string;
+  readonly famille: string;
+  readonly leurres: readonly string[];
+};
 type PhraseCopie = { readonly modele: string; readonly oubli: string; readonly quoi: string };
 type Legende = { readonly image: string; readonly bonne: string; readonly faux: readonly string[] };
 type ReponseQ = { readonly question: string; readonly bonne: string; readonly faux: readonly string[] };
@@ -109,21 +117,76 @@ const MOTS_DICTEE: readonly MotDictee[] = [
   { mot: "marmite", indice: "on y fait cuire le cari", faux: ["marmit", "marmitte", "marmithe"] },
 ];
 
+/* ⛔ LES `leurres` NE SONT PAS DÉCORATIFS (20/08/2026). Le défi de cette notion
+   servait comme pièges les couples des AUTRES lignes — « chat → chaton » contre
+   « grand → grande », « petit → petite »… Or ces quatre couples montrent tous
+   parfaitement comment retrouver une lettre muette : l'item avait QUATRE bonnes
+   réponses et ne pouvait pas être résolu. Aucun des vérificateurs ne le voit
+   (ils disent « unique », pas « juste »).
+   Chaque ligne porte donc trois mots qui commencent pareil et ne sont PAS de la
+   même famille : dire « chapeau » ne réveille aucun « t » à la fin de « chat ».
+   ⚠️ Vérifié un par un : aucun leurre ne contient le son de la lettre cherchée. */
 const MOTS_MUETS: readonly MotMuet[] = [
-  { mot: "chat", lettre: "t", famille: "chaton" },
-  { mot: "grand", lettre: "d", famille: "grande" },
-  { mot: "petit", lettre: "t", famille: "petite" },
-  { mot: "gros", lettre: "s", famille: "grosse" },
-  { mot: "vert", lettre: "t", famille: "verte" },
-  { mot: "lait", lettre: "t", famille: "laitier" },
-  { mot: "blanc", lettre: "c", famille: "blanche" },
-  { mot: "chant", lettre: "t", famille: "chanter" },
-  { mot: "froid", lettre: "d", famille: "froide" },
-  { mot: "long", lettre: "g", famille: "longue" },
-  { mot: "dent", lettre: "t", famille: "dentiste" },
-  { mot: "saut", lettre: "t", famille: "sauter" },
-  { mot: "plat", lettre: "t", famille: "plate" },
-  { mot: "bond", lettre: "d", famille: "bondir" },
+  { mot: "chat", lettre: "t", famille: "chaton", leurres: ["chapeau", "chacun", "chausson"] },
+  { mot: "grand", lettre: "d", famille: "grande", leurres: ["grange", "gramme", "grappe"] },
+  { mot: "petit", lettre: "t", famille: "petite", leurres: ["peluche", "pelouse", "pinceau"] },
+  { mot: "gros", lettre: "s", famille: "grosse", leurres: ["grotte", "gronder", "grogner"] },
+  { mot: "vert", lettre: "t", famille: "verte", leurres: ["verre", "verser", "vernis"] },
+  { mot: "lait", lettre: "t", famille: "laitier", leurres: ["laisser", "laine", "laurier"] },
+  { mot: "blanc", lettre: "c", famille: "blanche", leurres: ["blouson", "blague", "bleuet"] },
+  { mot: "chant", lettre: "t", famille: "chanter", leurres: ["chandail", "chance", "chambre"] },
+  { mot: "froid", lettre: "d", famille: "froide", leurres: ["frotter", "fromage", "froisser"] },
+  { mot: "long", lettre: "g", famille: "longue", leurres: ["longtemps", "lourd", "louche"] },
+  { mot: "dent", lettre: "t", famille: "dentiste", leurres: ["dedans", "demain", "dessin"] },
+  { mot: "saut", lettre: "t", famille: "sauter", leurres: ["sauce", "saucisse", "saumon"] },
+  { mot: "plat", lettre: "t", famille: "plate", leurres: ["plage", "placard", "plaisir"] },
+  { mot: "bond", lettre: "d", famille: "bondir", leurres: ["bonbon", "bonnet", "bonjour"] },
+];
+
+/* ═══════════ LES SECONDS ITEMS DE LA DICTÉE (20/08/2026) ═══════════
+   Les cinq micros `cp_dict_*` portaient UN SEUL item chacune. En mode complet
+   le moteur oppose deux énoncés : il levait « Aucune paire disponible dans la
+   notion ecriture_mots » et les cinq lignes, pourtant affichées au coach,
+   ouvraient sur une erreur. Mesuré : cp/francais rendait 73/96.
+   ⭐ Un second item se fabrique par CONTRASTE, pas en changeant les valeurs.
+   Chacun prend ici le chemin inverse du premier. */
+
+/** Le son d'abord, la graphie ensuite : c'est le geste même de la dictée.
+ *  Les quatre propositions sont des graphies nues, donc de longueur voisine —
+ *  la bonne réponse ne peut pas se repérer à sa taille. */
+type SonEcrit = {
+  readonly mot: string;
+  readonly son: string;
+  readonly ou: string;
+  readonly bon: string;
+  readonly faux: readonly string[];
+};
+
+const SONS_ECRITS: readonly SonEcrit[] = [
+  { mot: "bateau", son: "[o]", ou: "à la fin", bon: "eau", faux: ["o", "au", "ot"] },
+  { mot: "chapeau", son: "[o]", ou: "à la fin", bon: "eau", faux: ["o", "au", "ot"] },
+  { mot: "gâteau", son: "[o]", ou: "à la fin", bon: "eau", faux: ["o", "au", "ot"] },
+  { mot: "oiseau", son: "[o]", ou: "à la fin", bon: "eau", faux: ["o", "au", "ot"] },
+  { mot: "vélo", son: "[o]", ou: "à la fin", bon: "o", faux: ["eau", "au", "ot"] },
+  { mot: "jardin", son: "[in]", ou: "à la fin", bon: "in", faux: ["ain", "ein", "im"] },
+  { mot: "lapin", son: "[in]", ou: "à la fin", bon: "in", faux: ["ain", "ein", "im"] },
+  { mot: "poisson", son: "[s]", ou: "au milieu", bon: "ss", faux: ["s", "c", "ç"] },
+  { mot: "maison", son: "[z]", ou: "au milieu", bon: "s", faux: ["z", "ss", "x"] },
+];
+
+/** Le mot courant DANS une phrase : c'est là qu'on l'écrit vraiment. Les
+ *  écritures fausses sont celles de MOTS_DICTEE, reprises telles quelles. */
+type PhraseMot = { readonly phrase: string; readonly mot: string; readonly faux: readonly string[] };
+
+const PHRASES_MOT: readonly PhraseMot[] = [
+  { phrase: "Le chat dort sur le ___.", mot: "tapis", faux: ["tapi", "tappis", "tapisse"] },
+  { phrase: "Léa met son ___ pour sortir.", mot: "chapeau", faux: ["chapo", "chapau", "chappeau"] },
+  { phrase: "Nous rentrons à la ___.", mot: "maison", faux: ["maizon", "méson", "maisson"] },
+  { phrase: "Un ___ chante dans l'arbre.", mot: "oiseau", faux: ["oizeau", "oiso", "oisso"] },
+  { phrase: "Papa prépare un ___ pour la fête.", mot: "gâteau", faux: ["gateau", "gato", "gâtau"] },
+  { phrase: "Le ___ nage dans le lagon.", mot: "poisson", faux: ["poison", "poisonn", "poissson"] },
+  { phrase: "Tom range son ___ dans la cour.", mot: "vélo", faux: ["velo", "vélau", "vélot"] },
+  { phrase: "Une ___ pousse dans le jardin.", mot: "fleur", faux: ["fleure", "flur", "fleurr"] },
 ];
 
 const PHRASES_DICTEE: readonly string[] = [
@@ -712,19 +775,197 @@ export const ecritureBank: TutorBankItemV4[] = [
     tags: ["cp", "ecriture", "dictee", "defi", "template"],
     generate: () => {
       const m = randomChoice(MOTS_MUETS);
-      const autres = shuffle(MOTS_MUETS.filter((x) => x.mot !== m.mot).map((x) => `${x.mot} → ${x.famille}`)).slice(0, 3);
+      /* ⛔ Les pièges sont des couples QUI NE MARCHENT PAS, formés sur le MÊME
+         mot. Avant le 20/08/2026, c'étaient les couples des autres lignes —
+         tous justes : l'item avait quatre bonnes réponses. */
       const bon = `${m.mot} → ${m.famille}`;
+      const faux = m.leurres.map((l) => `${m.mot} → ${l}`);
       return {
-        text: `Quel couple montre bien comment retrouver une lettre finale muette ?`,
+        text: `Quel couple fait entendre la lettre muette de « ${m.mot} » ?`,
         format: "qcm" as const,
-        choices: makeChoices(bon, autres),
+        choices: makeChoices(bon, faux),
         expected: [bon],
         comparator: "mcq_exact" as const,
         explanation: exp(
-          "Un mot de la même famille fait entendre la lettre que le mot court cache.",
-          "Dans chaque couple, dis le second mot et écoute la consonne qui apparait.",
-          `${m.mot} → ${m.famille} : le « ${m.lettre} » s'entend dans le second.`,
+          "Un mot de la même famille fait entendre la lettre que le mot court cache. Un mot qui commence pareil ne suffit pas : il faut la même famille.",
+          "Dis le second mot du couple à voix haute et écoute la fin du premier : la lettre doit se réveiller.",
+          `${m.mot} → ${m.famille} : on entend le « ${m.lettre} ». Dans ${m.leurres[0]}, on ne l'entend pas — ce mot n'est pas de la famille de « ${m.mot} ».`,
           `Le couple est « ${bon} ».`,
+        ),
+      };
+    },
+  },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LES SECONDS ITEMS DE LA DICTÉE — un par micro, sans quoi elle ne démarre
+     pas. Chacun prend le chemin INVERSE de son premier.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  {
+    kind: "template",
+    id: "cp_dict_son_simple_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "ecriture_mots",
+    microId: "cp_dict_son_simple",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le son est donné. Cherche les lettres qui l'écrivent DANS CE MOT.",
+    tags: ["cp", "ecriture", "dictee", "template"],
+    generate: () => {
+      const s = randomChoice(SONS_ECRITS);
+      return {
+        text: `On te dicte « ${s.mot} ». ${s.ou.charAt(0).toUpperCase()}${s.ou.slice(1)}, on entend le son ${s.son}.\n\nAvec quelles lettres l'écris-tu ici ?`,
+        format: "qcm" as const,
+        choices: makeChoices(s.bon, s.faux),
+        expected: [s.bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Un même son s'écrit de plusieurs façons. C'est le mot qui décide, pas le son tout seul.",
+          "Le premier exercice partait du sens du mot. Celui-ci part du SON : écoute-le, puis revois le mot écrit.",
+          `Dans « ${s.mot} », le son ${s.son} s'écrit « ${s.bon} ».`,
+          `On écrit « ${s.bon} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_dict_mot_courant_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "ecriture_mots",
+    microId: "cp_dict_mot_courant",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le mot est dans une phrase. Écris-le comme tu l'as appris.",
+    tags: ["cp", "ecriture", "dictee", "template"],
+    generate: () => {
+      const p = randomChoice(PHRASES_MOT);
+      return {
+        text: `On te dicte : « ${p.phrase.replace("___", "…")} »\n\nComment écris-tu le mot qui manque ?`,
+        format: "qcm" as const,
+        choices: makeChoices(p.mot, p.faux),
+        expected: [p.mot],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Un mot courant ne s'écrit pas dans le vide : on l'écrit dans une phrase, et c'est là qu'il faut le reconnaitre.",
+          "Le premier exercice corrigeait un mot isolé. Celui-ci le remet dans la phrase : dis la phrase en entier, puis revois le mot dans ton cahier.",
+          `On écrit « ${p.phrase.replace("___", p.mot)} »`,
+          `Le mot s'écrit « ${p.mot} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_dict_lettres_muettes_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "ecriture_mots",
+    microId: "cp_dict_lettres_muettes",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le mot de la famille est donné. Quel mot court cache cette lettre ?",
+    tags: ["cp", "ecriture", "dictee", "template"],
+    generate: () => {
+      const m = randomChoice(MOTS_MUETS);
+      const faux = shuffle(MOTS_MUETS.filter((x) => x.mot !== m.mot).map((x) => x.mot)).slice(0, 3);
+      return {
+        text: `Tu dis « ${m.famille} » et tu entends un « ${m.lettre} ».\n\nQuel mot s'écrit donc avec un « ${m.lettre} » qu'on n'entend pas ?`,
+        format: "qcm" as const,
+        choices: makeChoices(m.mot, faux),
+        expected: [m.mot],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "La lettre muette d'un mot court se retrouve dans un mot de sa famille, où elle se met à parler.",
+          "Le premier exercice partait du mot court pour trouver sa lettre. Celui-ci fait l'inverse : le mot de la famille est donné, retrouve le mot court.",
+          `« ${m.famille} » vient de « ${m.mot} » : on écrit donc « ${m.mot} » avec un « ${m.lettre} » à la fin.`,
+          `C'est « ${m.mot} ».`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_dict_phrase_simple_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "ecriture_mots",
+    microId: "cp_dict_phrase_simple",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde le tout début et la toute fin de la phrase.",
+    tags: ["cp", "ecriture", "dictee", "template"],
+    generate: () => {
+      const p = randomChoice(PHRASES_DICTEE);
+      const genre = randomChoice(["maj", "point", "deux", "rien"] as const);
+      const sansMaj = p.charAt(0).toLowerCase() + p.slice(1);
+      const ecrite =
+        genre === "maj"
+          ? sansMaj
+          : genre === "point"
+            ? p.slice(0, -1)
+            : genre === "deux"
+              ? sansMaj.slice(0, -1)
+              : p;
+      const bon =
+        genre === "maj"
+          ? "la majuscule au début"
+          : genre === "point"
+            ? "le point à la fin"
+            : genre === "deux"
+              ? "la majuscule et le point"
+              : "rien, elle est correcte";
+      return {
+        text: `Un élève a écrit sous la dictée : « ${ecrite} »\n\nQu'est-ce qui manque ?`,
+        format: "qcm" as const,
+        choices: shuffle([
+          "la majuscule au début",
+          "le point à la fin",
+          "la majuscule et le point",
+          "rien, elle est correcte",
+        ]),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une phrase dictée s'écrit entre deux bornes qu'on n'entend pas : la majuscule au début, le point à la fin.",
+          "Le premier exercice demandait de choisir la bonne écriture. Celui-ci demande de NOMMER ce qui manque : regarde la première lettre, puis le dernier signe.",
+          `Il fallait écrire « ${p} »`,
+          `Ce qui manque : ${bon}.`,
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "cp_dict_defi_tpl_2",
+    niveau: "cp",
+    matiere: "francais",
+    notionId: "ecriture_mots",
+    microId: "cp_dict_defi",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Dis le mot de la famille à voix haute et écoute la consonne qui apparait.",
+    tags: ["cp", "ecriture", "dictee", "defi", "template"],
+    generate: () => {
+      const m = randomChoice(MOTS_MUETS);
+      const faux = ["t", "d", "s", "c", "g"].filter((l) => l !== m.lettre).slice(0, 3);
+      return {
+        text: `Tu dis « ${m.famille} ».\n\nQuelle lettre cela te fait-il écrire à la fin de « ${m.mot} » ?`,
+        format: "qcm" as const,
+        choices: makeChoices(m.lettre, faux),
+        expected: [m.lettre],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Le mot de la famille sert à une chose précise : il dit QUELLE lettre écrire à la fin du mot court.",
+          "Le premier défi demandait quel couple fonctionne. Celui-ci va jusqu'au bout : le couple est donné, dis la lettre.",
+          `Dans « ${m.famille} », on entend le « ${m.lettre} » : on écrit donc « ${m.mot} ».`,
+          `La lettre est « ${m.lettre} ».`,
         ),
       };
     },
