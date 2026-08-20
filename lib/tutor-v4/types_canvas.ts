@@ -37,6 +37,21 @@ export type TriangleCanvasData = {
     equalSides?: Array<[TriangleCanvasSideLabel, TriangleCanvasSideLabel]>;
     equalAngles?: Array<[TriangleCanvasPointLabel, TriangleCanvasPointLabel]>;
   };
+  /**
+   * LA HAUTEUR, tracée depuis un sommet jusqu'à son pied sur le côté opposé
+   * (projection orthogonale), en pointillés, avec la marque d'angle droit.
+   *
+   * ⛔ Sans elle, « la hauteur est perpendiculaire à la base » restait du texte
+   * sous un triangle qui n'en montrait aucune — alors que c'est LA difficulté
+   * de l'aire au collège : l'élève prend le côté oblique. Le pied peut tomber
+   * hors du segment (triangle obtusangle) : le côté est alors prolongé en
+   * pointillés, ce qui est justement le cas que personne ne dessine.
+   */
+  height?: {
+    fromVertex: TriangleCanvasPointLabel;
+    label?: string;
+    baseLabel?: string;
+  };
 };
 
 export type ThalesCanvasPointLabel = "A" | "B" | "C" | "M" | "N";
@@ -94,6 +109,17 @@ export type QuadrilatereCanvasData = {
     equalSides?: Array<[QuadrilatereCanvasSideLabel, QuadrilatereCanvasSideLabel]>;
     equalAngles?: Array<[QuadrilatereCanvasPointLabel, QuadrilatereCanvasPointLabel]>;
     parallelSides?: Array<[QuadrilatereCanvasSideLabel, QuadrilatereCanvasSideLabel]>;
+  };
+  /**
+   * LA HAUTEUR d'un parallélogramme : du sommet indiqué, perpendiculairement
+   * à la base `onSide`, en pointillés et avec la marque d'angle droit. Même
+   * raison qu'au triangle — « aire = base × hauteur » ne veut rien dire tant
+   * que la hauteur n'est pas SUR le dessin, et l'élève prend le côté oblique.
+   */
+  height?: {
+    fromVertex: QuadrilatereCanvasPointLabel;
+    onSide: QuadrilatereCanvasSideLabel;
+    label?: string;
   };
 };
 

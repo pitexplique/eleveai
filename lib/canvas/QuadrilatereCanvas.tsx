@@ -215,6 +215,43 @@ export default function QuadrilatereCanvas({ figure }: Props) {
   const C = figure.points.C;
   const D = figure.points.D;
 
+  // ─── La hauteur du parallélogramme ──────────────────────────────────────────
+  // Projection orthogonale du sommet sur la droite qui porte la base : même
+  // calcul qu'au triangle, même raison d'être — « base × hauteur » ne veut rien
+  // dire tant que la hauteur n'est pas tracée sur la figure.
+  const hauteurQuad = (() => {
+    const h = figure.height;
+    if (!h) return null;
+    const pt = (n: string) => (n === "A" ? A : n === "B" ? B : n === "C" ? C : D);
+    const P = pt(h.fromVertex);
+    const Q = pt(h.onSide[0]);
+    const R = pt(h.onSide[1]);
+    const dx = R.x - Q.x;
+    const dy = R.y - Q.y;
+    const len2 = dx * dx + dy * dy || 1;
+    const t = ((P.x - Q.x) * dx + (P.y - Q.y) * dy) / len2;
+    const pied = { x: Q.x + t * dx, y: Q.y + t * dy };
+    const norme = Math.hypot(dx, dy) || 1;
+    const ux = dx / norme;
+    const uy = dy / norme;
+    const vers = Math.hypot(P.x - pied.x, P.y - pied.y) || 1;
+    const vx = (P.x - pied.x) / vers;
+    const vy = (P.y - pied.y) / vers;
+    const c = 11;
+    const sens = t > 0.5 ? -1 : 1;
+    return {
+      P,
+      pied,
+      label: h.label,
+      carre: [
+        { x: pied.x + sens * c * ux, y: pied.y + sens * c * uy },
+        { x: pied.x + sens * c * ux + c * vx, y: pied.y + sens * c * uy + c * vy },
+        { x: pied.x + c * vx, y: pied.y + c * vy },
+      ],
+      prolonge: t < 0 || t > 1 ? [t < 0 ? Q : R, pied] : null,
+    };
+  })();
+
   const showPoints = figure.display?.showPoints ?? true;
   const showLabels = figure.display?.showLabels ?? true;
   const showSides = figure.display?.showSides ?? true;
@@ -273,6 +310,52 @@ export default function QuadrilatereCanvas({ figure }: Props) {
           stroke="#0f172a"
           strokeWidth={2.8}
         />
+
+        {hauteurQuad ? (
+          <g>
+            {hauteurQuad.prolonge ? (
+              <line
+                x1={hauteurQuad.prolonge[0].x}
+                y1={hauteurQuad.prolonge[0].y}
+                x2={hauteurQuad.prolonge[1].x}
+                y2={hauteurQuad.prolonge[1].y}
+                stroke="#94a3b8"
+                strokeWidth={1.6}
+                strokeDasharray="4 3"
+              />
+            ) : null}
+            <line
+              x1={hauteurQuad.P.x}
+              y1={hauteurQuad.P.y}
+              x2={hauteurQuad.pied.x}
+              y2={hauteurQuad.pied.y}
+              stroke="#7c3aed"
+              strokeWidth={2.6}
+              strokeDasharray="6 4"
+              strokeLinecap="round"
+            />
+            <polyline
+              points={hauteurQuad.carre.map((p) => `${p.x},${p.y}`).join(" ")}
+              fill="none"
+              stroke="#7c3aed"
+              strokeWidth={2}
+            />
+            {hauteurQuad.label ? (
+              <text
+                x={(hauteurQuad.P.x + hauteurQuad.pied.x) / 2 + 8}
+                y={(hauteurQuad.P.y + hauteurQuad.pied.y) / 2}
+                fontSize="13"
+                fontWeight="900"
+                fill="#7c3aed"
+                stroke="white"
+                strokeWidth="3"
+                paintOrder="stroke"
+              >
+                {hauteurQuad.label}
+              </text>
+            ) : null}
+          </g>
+        ) : null}
 
         {showDiagonals && (
           <>

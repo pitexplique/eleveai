@@ -15,15 +15,29 @@ import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 
-const triAire = (baseLabel: string, hauteurLabel?: string) => (
+type P = { x: number; y: number };
+
+// ⚠️ LA HAUTEUR SE DESSINE (20/08). Le helper acceptait deja un `hauteurLabel`
+// — et ne s'en servait pas : la fiche montrait des triangles SANS hauteur sous
+// une propriete qui dit « la hauteur est perpendiculaire a la base ». C'est
+// pourtant l'erreur n°1 de l'eleve : prendre le cote oblique. Le canvas sait
+// desormais tracer la hauteur (`height`), pointilles + marque d'angle droit.
+const triAire = (
+  baseLabel: string,
+  hauteurLabel?: string,
+  opts: { points?: { A: P; B: P; C: P }; sommet?: "A" | "B" | "C" } = {}
+) => (
   <CanvasRenderer
     figure={{
       kind: "triangle",
       size: { width: 280, height: 240 },
-      points: { A: { x: 40, y: 190 }, B: { x: 230, y: 190 }, C: { x: 135, y: 55 } },
+      points: opts.points ?? { A: { x: 40, y: 190 }, B: { x: 230, y: 190 }, C: { x: 135, y: 55 } },
       labels: { A: "A", B: "B", C: "C" },
       sideLabels: baseLabel ? { AB: baseLabel } : undefined,
       display: { showPoints: true, showLabels: true, showSides: true, showAngles: false },
+      ...(hauteurLabel
+        ? { height: { fromVertex: opts.sommet ?? "C", label: hauteurLabel } }
+        : {}),
     }}
   />
 );
@@ -35,7 +49,8 @@ const parallelo = (baseLabel: string, hauteurLabel: string) => (
       size: { width: 300, height: 240 },
       points: { A: { x: 45, y: 185 }, B: { x: 220, y: 185 }, C: { x: 255, y: 65 }, D: { x: 80, y: 65 } },
       labels: { A: "A", B: "B", C: "C", D: "D" },
-      sideLabels: { AB: baseLabel, AD: hauteurLabel },
+      sideLabels: { AB: baseLabel },
+      height: { fromVertex: "D", onSide: "AB", label: hauteurLabel },
       display: { showPoints: true, showLabels: true, showSides: true, showAngles: false, showDiagonals: false },
       marks: { parallelSides: [["AB", "CD"], ["AD", "BC"]] },
     }}
@@ -86,25 +101,37 @@ export const ficheAires5e: FicheCoursData = {
       "L'aire d'une figure est la mesure de sa surface : le nombre de carrés-unité qu'elle contient. Elle s'exprime en unités carrées (cm², m²...). Pour les figures usuelles, on utilise des formules qui reposent sur une base et la hauteur associée (perpendiculaire à cette base).",
   },
   figure: {
-    schema: triAire("base"),
+    schema: triAire("base", "hauteur"),
     legende: "Le triangle : aire = base × hauteur ÷ 2 (la hauteur tombe perpendiculairement sur la base).",
   },
+  // Un dessin sous chaque propriete (REGLES.md § 2 bis). La quatrieme porte le
+  // cas que personne ne dessine : un triangle OBTUSANGLE, dont la hauteur tombe
+  // en dehors du cote. C'est la que l'eleve prend le cote oblique — et un
+  // triangle bien sage ne le lui apprendrait jamais.
   proprietes: [
     {
       titre: "L'unité",
       texte: "Une aire se mesure en carrés-unité : cm², m², km². (Le périmètre, lui, est en cm.)",
+      schema: figLibre(3, 4, ([] as [number, number][]).concat(
+        ...Array.from({ length: 3 }, (_, r) => Array.from({ length: 4 }, (_, c) => [r, c] as [number, number]))
+      )),
     },
     {
       titre: "Le triangle",
       texte: "Aire = base × hauteur ÷ 2 (un triangle est la moitié d'un parallélogramme).",
+      schema: triAire("base", "hauteur"),
     },
     {
       titre: "Le parallélogramme",
       texte: "Aire = base × hauteur (on ne divise PAS par 2).",
+      schema: parallelo("base", "hauteur"),
     },
     {
       titre: "La hauteur",
       texte: "Toujours perpendiculaire à la base choisie (pas un côté oblique).",
+      schema: triAire("base", "hauteur", {
+        points: { A: { x: 45, y: 190 }, B: { x: 145, y: 190 }, C: { x: 245, y: 60 } },
+      }),
     },
   ],
   reel: {
@@ -119,24 +146,56 @@ export const ficheAires5e: FicheCoursData = {
     contexte: "L'aire d'un triangle",
     expression: "aire = base × hauteur ÷ 2",
     legende: "Exemple : base 8 cm, hauteur 5 cm → 8 × 5 ÷ 2 = 20 cm².",
-    schema: triAire("8 cm"),
+    schema: triAire("8 cm", "5 cm"),
   },
   methode: [
-    { titre: "Je repère base et hauteur", texte: "La hauteur est perpendiculaire à la base choisie." },
-    { titre: "J'applique la formule", texte: "Triangle : base × hauteur ÷ 2 ; parallélogramme : base × hauteur." },
-    { titre: "Je décompose si besoin", texte: "Une figure compliquée se découpe en rectangles et triangles." },
+    {
+      titre: "Je repère base et hauteur",
+      texte: "La hauteur est perpendiculaire à la base choisie.",
+      // La MEME figure, mais la base prise sur un autre cote : c'est le choix
+      // de la base qui commande la hauteur, pas l'inverse.
+      schema: triAire("", "hauteur depuis A", { sommet: "A" }),
+    },
+    {
+      titre: "J'applique la formule",
+      texte: "Triangle : base × hauteur ÷ 2 ; parallélogramme : base × hauteur.",
+      schema: parallelo("7 cm", "3 cm"),
+    },
+    {
+      titre: "Je décompose si besoin",
+      texte: "Une figure compliquée se découpe en rectangles et triangles.",
+      schema: figLibre(3, 4, figureL),
+    },
   ],
   usages: [
-    { titre: "Triangle", detail: "base × hauteur ÷ 2." },
-    { titre: "Parallélogramme", detail: "base × hauteur." },
-    { titre: "Figure composée", detail: "On découpe, on calcule chaque morceau, on additionne." },
+    {
+      titre: "Triangle",
+      detail: "base × hauteur ÷ 2.",
+      schema: triAire("10 cm", "6 cm"),
+    },
+    {
+      titre: "Parallélogramme",
+      detail: "base × hauteur.",
+      schema: parallelo("9 cm", "5 cm"),
+    },
+    {
+      titre: "Figure composée",
+      detail: "On découpe, on calcule chaque morceau, on additionne.",
+      schema: figLibre(4, 5, ([] as [number, number][]).concat(
+        ...Array.from({ length: 4 }, (_, r) =>
+          Array.from({ length: 5 }, (_, c) => [r, c] as [number, number]).filter(
+            ([rr, cc]) => !(rr < 2 && cc >= 3)
+          )
+        )
+      )),
+    },
   ],
   exemples: [
     {
       titre: "Aire d'un triangle",
       donnees: "Un triangle de base 8 cm et de hauteur 5 cm.",
       question: "Quelle est son aire ?",
-      schema: triAire("8 cm"),
+      schema: triAire("8 cm", "5 cm"),
       solution:
         "aire = base × hauteur ÷ 2 = 8 × 5 ÷ 2 = 40 ÷ 2 = 20 cm².",
     },
