@@ -106,6 +106,28 @@ const ENTREPRISES = [
   "le garage Delmas",
 ] as const;
 
+/** Phrases où un pourcentage dit tantôt une PART, tantôt une ÉVOLUTION.
+ *  Rangées ici — et non dans un générateur — parce que deux items s'en
+ *  servent : l'un fait juger une phrase, l'autre fait trouver l'intruse. */
+const PHRASES_POURCENTAGE = [
+  { phrase: "$32\\,\\%$ des clients de l'enseigne ont moins de 30 ans", reponse: "une proportion" },
+  { phrase: "les ventes ont progressé de $32\\,\\%$ en un an", reponse: "une évolution" },
+  { phrase: "le taux de TVA appliqué est de $20\\,\\%$", reponse: "une proportion" },
+  { phrase: "le prix du carburant a baissé de $12\\,\\%$ depuis janvier", reponse: "une évolution" },
+  { phrase: "la part de marché de l'entreprise est de $18\\,\\%$", reponse: "une proportion" },
+  { phrase: "le nombre d'adhérents a augmenté de $18\\,\\%$", reponse: "une évolution" },
+  { phrase: "$45\\,\\%$ du stock est constitué de pièces importées", reponse: "une proportion" },
+  { phrase: "le chiffre d'affaires a chuté de $45\\,\\%$ au dernier trimestre", reponse: "une évolution" },
+  { phrase: "$62\\,\\%$ des commandes sont livrées en moins de 48 heures", reponse: "une proportion" },
+  { phrase: "les délais de livraison se sont allongés de $62\\,\\%$ en six mois", reponse: "une évolution" },
+  { phrase: "le taux de marge de l'entreprise s'élève à $28\\,\\%$", reponse: "une proportion" },
+  { phrase: "la marge a progressé de $28\\,\\%$ par rapport à l'an dernier", reponse: "une évolution" },
+  { phrase: "$7\\,\\%$ des articles du stock sont invendus", reponse: "une proportion" },
+  { phrase: "le stock d'invendus a fondu de $7\\,\\%$ ce mois-ci", reponse: "une évolution" },
+  { phrase: "le taux de rendement du placement est de $3\\,\\%$", reponse: "une proportion" },
+  { phrase: "le nombre de réclamations a reculé de $3\\,\\%$ en un an", reponse: "une évolution" },
+] as const;
+
 const GRANDEURS = [
   { nom: "le chiffre d'affaires", unite: "k€" },
   { nom: "le nombre de commandes", unite: "" },
@@ -656,6 +678,63 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — RECONNAÎTRE le calcul, sans le faire. Le premier item demande
+    // le résultat ; celui-ci demande l'opération, ce qui est l'automatisme
+    // lui-même : « + 15 % » doit appeler « × 1,15 » sans réflexion. Un élève
+    // peut trouver le bon nombre en tâtonnant ; il ne peut pas choisir la
+    // bonne écriture par hasard.
+    kind: "template",
+    id: "stmg_evo_finale_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_evo_coefficient",
+    microId: "auto_evo_valeur_finale",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le coefficient d'une hausse de $t\\,\\%$ vaut $1 + \\dfrac{t}{100}$ ; celui d'une baisse, $1 - \\dfrac{t}{100}$.",
+    tags: ["stmg", "maths", "evolutions", "template"],
+    generate: () => {
+      const article = pick(ARTICLES);
+      const prix = pick([40, 60, 80, 120, 200, 240, 400] as const);
+      const t = pick(TAUX_MENTAUX);
+      const hausse = Math.random() < 0.5;
+      const coef = hausse ? 1 + t / 100 : 1 - t / 100;
+      const bon = `$${prix} \\times ${fr(coef)}$`;
+      return {
+        text:
+          `Le prix ${deNom(article.nom)} est de $${prix}$ ${article.unite}. ` +
+          `Il ${hausse ? "augmente" : "diminue"} de $${t}\\,\\%$. ` +
+          `Quel calcul donne le nouveau prix ?`,
+        format: "qcm",
+        choices: makeChoices(bon, [
+          `$${prix} \\times ${fr(t / 100)}$`,
+          `$${prix} ${hausse ? "+" : "-"} ${t}$`,
+          `$${prix} \\times ${fr(hausse ? 1 - t / 100 : 1 + t / 100)}$`,
+          `$${prix} \\div ${fr(coef)}$`,
+        ]),
+        expected: [bon],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Appliquer une évolution, c'est multiplier par le coefficient multiplicateur — jamais ajouter le pourcentage au prix.",
+          `On traduit « ${hausse ? "augmente" : "diminue"} de $${t}\\,\\%$ » par le coefficient $1 ${hausse ? "+" : "-"} \\dfrac{${t}}{100} = ${fr(coef)}$.`,
+          `Le calcul est donc $${prix} \\times ${fr(coef)} = ${fr(prix * coef)}$ ${article.unite}.`,
+          `Le bon calcul est ${bon}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$${prix} \\times ${fr(t / 100)}$`,
+            cause: "a calculé la variation seule, sans la valeur de départ",
+          },
+          {
+            choice: `$${prix} ${hausse ? "+" : "-"} ${t}$`,
+            cause: "a traité le pourcentage comme une quantité en euros",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════════ auto_evo_valeur_initiale ═══════════════════════ */
 
   {
@@ -784,6 +863,74 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — À QUOI SERT la distinction. Le premier item fait choisir entre
+    // deux nombres sur une seule entreprise ; ici deux entreprises s'opposent,
+    // et celle qui gagne le plus d'euros n'est PAS celle qui progresse le plus
+    // vite. Sans cet écart, « absolu » et « relatif » restent deux mots.
+    kind: "template",
+    id: "stmg_evo_absolue_relative_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_evo_taux",
+    microId: "auto_evo_absolue_relative",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une progression en pourcentage se rapporte à la taille de départ : $+50$ sur $200$ pèse plus que $+80$ sur $800$.",
+    tags: ["stmg", "maths", "evolutions", "canvas", "template"],
+    generate: () => {
+      const [petite, grande] = shuffle(ENTREPRISES).slice(0, 2);
+      // La petite progresse MOINS en euros et PLUS en pourcentage : c'est tout
+      // le sujet de l'item. Les taux sont choisis pour que ce soit toujours
+      // vrai, et jamais serré.
+      // ⛔ On part des GAINS, pas des chiffres d'affaires : en tirant les bases
+      // et les taux séparément, la petite entreprise pouvait gagner plus
+      // d'euros que la grande — et le piège de l'item tombait.
+      const tPetite = pick([20, 25, 50] as const);
+      const tGrande = pick([5, 10] as const);
+      const gainPetite = pick([20, 30, 40, 50] as const);
+      const gainGrande = gainPetite * pick([2, 3] as const);
+      const basePetite = (gainPetite * 100) / tPetite;
+      const baseGrande = (gainGrande * 100) / tGrande;
+      return {
+        text:
+          `Le tableau donne le chiffre d'affaires de deux entreprises, en k€, sur deux années. ` +
+          `Laquelle a connu la plus forte progression en POURCENTAGE ?`,
+        format: "qcm",
+        choices: shuffle([
+          petite,
+          grande,
+          "les deux ont progressé du même pourcentage",
+          "on ne peut pas comparer des entreprises de tailles différentes",
+        ]),
+        expected: [petite],
+        comparator: "mcq_exact",
+        canvas: {
+          kind: "tableau_donnees",
+          title: "Chiffre d'affaires (k€)",
+          headers: ["L'an dernier", "Cette année"],
+          rows: [
+            { label: petite, values: [basePetite, basePetite + gainPetite] },
+            { label: grande, values: [baseGrande, baseGrande + gainGrande] },
+          ],
+        } satisfies CanvasFigure,
+        explanation: exp(
+          "La variation absolue est une différence, dans l'unité de la grandeur ; la variation relative rapporte cette différence à la valeur de DÉPART, et s'exprime en pourcentage.",
+          "On calcule les deux différences, puis on divise chacune par sa valeur initiale.",
+          `${grande} gagne $${fr(gainGrande)}$ k€, soit $\\dfrac{${fr(gainGrande)}}{${baseGrande}} = ${fr(tGrande)}\\,\\%$. ` +
+            `${petite} ne gagne que $${fr(gainPetite)}$ k€, mais sur une base plus petite : $\\dfrac{${fr(gainPetite)}}{${basePetite}} = ${fr(tPetite)}\\,\\%$.`,
+          `En euros, c'est ${grande} qui gagne le plus ; en pourcentage, c'est ${petite}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: grande,
+            cause: "a comparé les variations ABSOLUES, en euros, au lieu des variations relatives",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════════ auto_evo_calculer_taux ═══════════════════════ */
 
   {
@@ -894,48 +1041,7 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
     hint: "Un pourcentage qui décrit une PART se compare au tout ; un pourcentage qui décrit une ÉVOLUTION compare deux dates.",
     tags: ["stmg", "maths", "evolutions", "template"],
     generate: () => {
-      const cas = pick([
-        {
-          phrase: "$32\\,\\%$ des clients de l'enseigne ont moins de 30 ans",
-          reponse: "une proportion",
-        },
-        {
-          phrase: "les ventes ont progressé de $32\\,\\%$ en un an",
-          reponse: "une évolution",
-        },
-        {
-          phrase: "le taux de TVA appliqué est de $20\\,\\%$",
-          reponse: "une proportion",
-        },
-        {
-          phrase: "le prix du carburant a baissé de $12\\,\\%$ depuis janvier",
-          reponse: "une évolution",
-        },
-        {
-          phrase: "la part de marché de l'entreprise est de $18\\,\\%$",
-          reponse: "une proportion",
-        },
-        {
-          phrase: "le nombre d'adhérents a augmenté de $18\\,\\%$",
-          reponse: "une évolution",
-        },
-        {
-          phrase: "$45\\,\\%$ du stock est constitué de pièces importées",
-          reponse: "une proportion",
-        },
-        {
-          phrase: "le chiffre d'affaires a chuté de $45\\,\\%$ au dernier trimestre",
-          reponse: "une évolution",
-        },
-        { phrase: "$62\\,\\%$ des commandes sont livrées en moins de 48 heures", reponse: "une proportion" },
-        { phrase: "les délais de livraison se sont allongés de $62\\,\\%$ en six mois", reponse: "une évolution" },
-        { phrase: "le taux de marge de l'entreprise s'élève à $28\\,\\%$", reponse: "une proportion" },
-        { phrase: "la marge a progressé de $28\\,\\%$ par rapport à l'an dernier", reponse: "une évolution" },
-        { phrase: "$7\\,\\%$ des articles du stock sont invendus", reponse: "une proportion" },
-        { phrase: "le stock d'invendus a fondu de $7\\,\\%$ ce mois-ci", reponse: "une évolution" },
-        { phrase: "le taux de rendement du placement est de $3\\,\\%$", reponse: "une proportion" },
-        { phrase: "le nombre de réclamations a reculé de $3\\,\\%$ en un an", reponse: "une évolution" },
-      ] as const);
+      const cas = pick(PHRASES_POURCENTAGE);
       return {
         text: `Dans la phrase suivante, le pourcentage exprime-t-il une proportion ou une évolution ?\n\n« ${cas.phrase} »`,
         format: "qcm",
@@ -947,6 +1053,47 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
           "On cherche s'il y a un « de … à … », un « en un an », un « depuis » : c'est la marque d'une évolution.",
           `Ici, la phrase ${cas.reponse === "une évolution" ? "compare deux dates" : "compare une partie à un ensemble"}.`,
           `Ce pourcentage exprime ${cas.reponse}.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — TRIER quatre phrases. Le premier item en juge une seule, entre
+    // deux réponses : une pièce lancée en l'air en réussit la moitié. Ici il
+    // faut lire les quatre et voir laquelle sort du lot — et l'intruse tombe
+    // tantôt du côté de la proportion, tantôt du côté de l'évolution.
+    kind: "template",
+    id: "stmg_evo_nature_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_evo_taux",
+    microId: "auto_evo_nature_pourcentage",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche les marques du temps : « en un an », « depuis », « par rapport à ». Elles signent une évolution.",
+    tags: ["stmg", "maths", "evolutions", "template"],
+    generate: () => {
+      const chercheEvolution = Math.random() < 0.5;
+      const cherchee = chercheEvolution ? "une évolution" : "une proportion";
+      const autre = chercheEvolution ? "une proportion" : "une évolution";
+      const intruse = pick(PHRASES_POURCENTAGE.filter((p) => p.reponse === cherchee)).phrase;
+      const trois = shuffle(PHRASES_POURCENTAGE.filter((p) => p.reponse === autre).map((p) => p.phrase)).slice(0, 3);
+      return {
+        text:
+          `Dans trois de ces phrases, le pourcentage exprime ${autre}. ` +
+          `Dans laquelle exprime-t-il ${cherchee} ?`,
+        format: "qcm",
+        choices: shuffle([intruse, ...trois]),
+        expected: [intruse],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une proportion compare une partie à un tout, à un instant donné. Une évolution compare deux valeurs d'une même grandeur à deux dates.",
+          "On cherche dans chaque phrase une marque du temps — « en un an », « depuis », « par rapport à l'an dernier » : elle signe une évolution.",
+          chercheEvolution
+            ? `« ${intruse} » compare deux dates. Les trois autres décrivent une part d'un ensemble, à un instant donné.`
+            : `« ${intruse} » compare une partie à un ensemble, sans référence à une autre date. Les trois autres comparent deux dates.`,
+          `La phrase cherchée est : « ${intruse} ».`
         ),
       };
     },
@@ -984,6 +1131,51 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
           "On écrit chaque coefficient, puis on les multiplie — on n'additionne jamais les taux.",
           `$${fr(k1)} \\times ${fr(k2)} = ${fr(global)}$.`,
           `Le coefficient global vaut $${fr(global)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la chaîne REMONTÉE. Le premier item multiplie deux coefficients
+    // connus ; ici le produit est donné, l'un des deux facteurs aussi, et c'est
+    // l'autre qu'on cherche. On divise donc, et l'élève qui croit que les taux
+    // s'additionnent se trahit immédiatement.
+    kind: "template",
+    id: "stmg_evo_chaine_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_evo_enchainees",
+    microId: "auto_evo_chaine_coefficients",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les coefficients se multiplient : pour retrouver le second, on DIVISE le coefficient global par le premier.",
+    tags: ["stmg", "maths", "evolutions", "template", "short"],
+    generate: () => {
+      const t1 = pick([10, 20, 25, 50] as const);
+      const t2 = pick([10, 20, 25, 50] as const);
+      const hausse1 = Math.random() < 0.5;
+      const hausse2 = Math.random() < 0.5;
+      const k1 = hausse1 ? 1 + t1 / 100 : 1 - t1 / 100;
+      const k2 = hausse2 ? 1 + t2 / 100 : 1 - t2 / 100;
+      // fr() arrondit à quatre décimales ; ces coefficients-là tombent juste,
+      // le produit reste un décimal court et la division se fait de tête.
+      const global = Math.round(k1 * k2 * 10000) / 10000;
+      return {
+        text:
+          `Un prix subit deux évolutions successives. La première est une ${hausse1 ? "hausse" : "baisse"} ` +
+          `de $${t1}\\,\\%$, et le coefficient multiplicateur GLOBAL vaut $${fr(global)}$. ` +
+          `Quel est le coefficient de la seconde évolution ?`,
+        format: "short",
+        expected: [fr(k2)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le coefficient global d'évolutions successives est le PRODUIT des coefficients : $k_{\\text{global}} = k_1 \\times k_2$.",
+          "On écrit le premier coefficient, puis on divise le coefficient global par lui.",
+          `La ${hausse1 ? "hausse" : "baisse"} de $${t1}\\,\\%$ donne $k_1 = ${fr(k1)}$. ` +
+            `Donc $k_2 = \\dfrac{${fr(global)}}{${fr(k1)}} = ${fr(k2)}$, ` +
+            `c'est-à-dire une ${hausse2 ? "hausse" : "baisse"} de $${t2}\\,\\%$.`,
+          `Le coefficient de la seconde évolution vaut $${fr(k2)}$.`
         ),
       };
     },
@@ -1328,6 +1520,59 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — de l'ÉVOLUTION vers l'indice. Le premier item lit un indice et
+    // le traduit en pourcentage ; celui-ci fait le chemin inverse, celui du
+    // journaliste qui doit fabriquer la base 100. Le piège est le même dans les
+    // deux sens : confondre l'indice et l'écart à 100.
+    kind: "template",
+    id: "stmg_indice_interpreter_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_indice",
+    microId: "auto_indice_interpreter",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "L'année de référence vaut $100$ : une hausse de $t\\,\\%$ donne l'indice $100 + t$.",
+    tags: ["stmg", "maths", "indices", "template"],
+    generate: () => {
+      const annee = pick([2015, 2018, 2020, 2021] as const);
+      const grandeur = pick(GRANDEURS);
+      const t = pick([-30, -25, -20, -8, -5, 5, 8, 15, 20, 35] as const);
+      const indice = 100 + t;
+      return {
+        text:
+          `Depuis ${annee}, ${grandeur.nom} a ${t > 0 ? "augmenté" : "diminué"} de $${Math.abs(t)}\\,\\%$. ` +
+          `Quel est son indice aujourd'hui, en base $100$ en ${annee} ?`,
+        format: "qcm",
+        choices: makeChoices(`$${indice}$`, [
+          `$${100 - t}$`,
+          `$${Math.abs(t)}$`,
+          `$${fr(1 + t / 100)}$`,
+          `$${100 + Math.abs(t) * 2}$`,
+        ]),
+        expected: [`$${indice}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un indice de base $100$ ramène l'année de référence à $100$ : l'écart à $100$ est exactement le taux d'évolution, en pourcentage.",
+          "On ajoute le taux à $100$, en respectant son signe.",
+          `$100 ${t > 0 ? "+" : "-"} ${Math.abs(t)} = ${indice}$.`,
+          `L'indice vaut $${indice}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$${Math.abs(t)}$`,
+            cause: "a donné le taux d'évolution au lieu de l'indice : il manque la base $100$",
+          },
+          {
+            choice: `$${fr(1 + t / 100)}$`,
+            cause: "a donné le coefficient multiplicateur ; l'indice est cent fois plus grand",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════════ auto_indice_calculer ═══════════════════════ */
 
   {
@@ -1358,6 +1603,45 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
           "On divise la valeur de l'année étudiée par celle de l'année de référence, puis on multiplie par $100$.",
           `$\\dfrac{${fr(v)}}{${vRef}} \\times 100 = ${fr(v / vRef)} \\times 100 = ${fr(indice)}$.`,
           `L'indice de cette année vaut $${fr(indice)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — l'indice SERT à retrouver une valeur. Le premier item fabrique
+    // l'indice à partir de deux valeurs, en divisant ; celui-ci part de
+    // l'indice publié et remonte à des euros, en multipliant. C'est le sens
+    // dans lequel on lit un indice INSEE : la base est connue, l'indice est
+    // donné, la valeur de l'année se calcule.
+    kind: "template",
+    id: "stmg_indice_calculer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_indice",
+    microId: "auto_indice_calculer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$I = \\dfrac{V}{V_{\\text{réf}}} \\times 100$ : pour retrouver $V$, on multiplie la référence par $\\dfrac{I}{100}$.",
+    tags: ["stmg", "maths", "indices", "template", "short"],
+    generate: () => {
+      const vRef = pick([200, 250, 400, 500, 800] as const);
+      const t = pick([-25, -20, -10, 5, 10, 20, 25, 50] as const);
+      const indice = 100 + t;
+      const v = (vRef * indice) / 100;
+      return {
+        text:
+          `Le chiffre d'affaires d'une entreprise était de $${vRef}$ k€ l'année de référence. ` +
+          `Cette année, son indice vaut $${indice}$, en base $100$ l'année de référence. ` +
+          `Quel est son chiffre d'affaires cette année, en k€ ?`,
+        format: "short",
+        expected: [fr(v)],
+        comparator: "number_equal",
+        explanation: exp(
+          "L'indice d'une valeur $V$ en base $100$ vaut $I = \\dfrac{V}{V_{\\text{réf}}} \\times 100$ : l'indice et la valeur sont proportionnels.",
+          "On divise l'indice par $100$ pour obtenir le coefficient multiplicateur, puis on l'applique à la valeur de référence.",
+          `$\\dfrac{${indice}}{100} = ${fr(indice / 100)}$, puis $${vRef} \\times ${fr(indice / 100)} = ${fr(v)}$.`,
+          `Le chiffre d'affaires de cette année est de $${fr(v)}$ k€ — soit $${fr(Math.abs(t))}\\,\\%$ ${t > 0 ? "de plus" : "de moins"} que l'année de référence.`
         ),
       };
     },
