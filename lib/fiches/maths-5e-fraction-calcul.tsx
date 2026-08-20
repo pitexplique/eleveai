@@ -40,20 +40,26 @@ const barre = (n: number, d: number) => (
 // ⭐ LE CALCUL SE DESSINE EN ENTIER (demande de Frédéric, 20/08 : « mets un
 // exemple chiffré avec de vraies fractions, pas 1/2 en visuel »). Montrer le
 // seul résultat — un demi-disque sous « Multiplier » — ne montre rien du tout :
-// ce qu'on veut voir, ce sont les DEUX opérandes, l'opération, et ce qui en
-// sort. Trois barres et deux signes.
+// ce qu'on veut voir, ce sont les DEUX opérandes, l'opération, et ce qui en sort.
+//
+// ⛔ ET ÇA S'EMPILE, ÇA NE S'ALIGNE PAS. Première version : les trois barres
+// côte à côte. Dans une carte de propriété sur trois colonnes, chacune recevait
+// un tiers de 250 px — Frédéric, capture à l'appui : « on voit rien ». Les
+// numérateurs étaient illisibles. Empilées, les trois barres prennent chacune
+// TOUTE la largeur de la carte, et le calcul se lit de haut en bas comme au
+// tableau.
 const operation = (
   a: [number, number],
   signe: string,
   b: [number, number],
   resultat: [number, number]
 ) => (
-  <div className="flex items-center justify-center gap-1">
-    <div className="min-w-0 flex-1">{barre(a[0], a[1])}</div>
-    <span className="shrink-0 text-lg font-black text-slate-700">{signe}</span>
-    <div className="min-w-0 flex-1">{barre(b[0], b[1])}</div>
-    <span className="shrink-0 text-lg font-black text-slate-700">=</span>
-    <div className="min-w-0 flex-1">{barre(resultat[0], resultat[1])}</div>
+  <div className="space-y-0.5">
+    {barre(a[0], a[1])}
+    <p className="text-center text-xl font-black leading-none text-slate-700">{signe}</p>
+    {barre(b[0], b[1])}
+    <p className="text-center text-xl font-black leading-none text-slate-700">=</p>
+    {barre(resultat[0], resultat[1])}
   </div>
 );
 

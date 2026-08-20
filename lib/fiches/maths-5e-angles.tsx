@@ -49,10 +49,13 @@ const angle = (
 // parle de familles, un seul dessin ne montre rien — c'est la COMPARAISON qui
 // est la propriété.
 const rangee = (items: { deg: number; nom: string }[]) => (
+  // ⛔ DEUX COLONNES, PAS QUATRE. Dans une carte de propriété sur trois colonnes,
+  // quatre dessins en ligne reçoivent 60 px chacun — « on voit rien » (Frédéric,
+  // 20/08, sur le même défaut ailleurs). En 2 x 2 ils doublent de taille.
   // `items-end` : depuis que le cadre se serre sur le dessin, un angle plat est
   // large et bas quand un angle droit est carré — sans cet alignement, leurs
   // noms ne seraient plus sur la même ligne.
-  <div className="grid grid-cols-2 items-end gap-2 sm:grid-cols-4">
+  <div className="grid grid-cols-2 items-end gap-2">
     {items.map((it) => (
       <div key={it.nom}>
         <CanvasRenderer

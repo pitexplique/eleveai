@@ -56,7 +56,11 @@ const axiale = (
 );
 
 const duo = (gauche: React.ReactNode, gLabel: string, droite: React.ReactNode, dLabel: string) => (
-  <div className="grid grid-cols-2 items-end gap-2">
+  // ⛔ EMPILE, PAS COTE A COTE. Dans une carte de propriete sur trois colonnes,
+  // deux dessins en vis-a-vis recoivent 120 px chacun et deviennent illisibles
+  // (Frederic, 20/08 : « on voit rien »). L'un sous l'autre, chacun prend toute
+  // la largeur — et la comparaison se lit tout aussi bien.
+  <div className="space-y-2">
     <div>
       {gauche}
       <p className="mt-1 text-center text-xs font-black text-slate-700">{gLabel}</p>

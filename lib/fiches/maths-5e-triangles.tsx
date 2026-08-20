@@ -184,7 +184,7 @@ export const ficheTriangles5e: FicheCoursData = {
       // Classer, c'est COMPARER : les trois familles côte à côte, pas un
       // triangle isolé.
       schema: (
-        <div className="grid grid-cols-3 items-end gap-2">
+        <div className="grid grid-cols-2 items-end gap-2">
           {[
             { pts: P_ISO, nom: "isocèle", opts: { equalSides: [["AB", "BC"]] as [Side, Side][] } },
             { pts: P_EQUI, nom: "équilatéral", opts: { showAngles: true, angleLabels: { A: "60°", B: "60°", C: "60°" } } },
