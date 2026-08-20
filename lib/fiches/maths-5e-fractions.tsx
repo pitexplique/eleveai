@@ -47,6 +47,20 @@ const compare = (a: [number, number], b: [number, number]) => (
   />
 );
 
+// La droite graduee, pour les deux proprietes qui ne parlent PAS de partage :
+// l'oppose est symetrique autour de 0, l'inverse s'echange autour de 1. Deux
+// dessins jumeaux dont le contraste EST la lecon.
+const droite = (
+  min: number,
+  max: number,
+  step: number,
+  points: { value: number; label: string; color?: string }[]
+) => (
+  <CanvasRenderer
+    figure={{ kind: "number_line", size: { width: 340, height: 90 }, min, max, step, points }}
+  />
+);
+
 const pieges = [
   "Additionner les dénominateurs : 1/2 + 1/3 ne fait pas 2/5. On met au même dénominateur d'abord.",
   "Croire que 1/5 est plus grand que 1/3 : plus on partage, plus les parts sont petites (1/3 > 1/5).",
@@ -80,22 +94,38 @@ export const ficheFractions5e: FicheCoursData = {
     schema: compare([1, 2], [2, 4]),
     legende: "1/2 et 2/4 colorient la même part du tout : ce sont deux fractions égales.",
   },
+  // Un dessin sous chaque propriete (REGLES.md § 2 bis). Les deux premieres
+  // parlent de PARTAGE : deux fractions coloriees cote a cote, meme surface,
+  // pas le meme nombre de parts. Les deux dernieres ne parlent pas de partage
+  // du tout — l'oppose et l'inverse sont des POSITIONS : la droite graduee, et
+  // leur contraste se lit d'un coup d'oeil (symetrique autour de 0 pour l'un,
+  // echange autour de 1 pour l'autre).
   proprietes: [
     {
       titre: "Fractions égales",
       texte: "On multiplie (ou divise) le haut ET le bas par le même nombre : 1/2 = 2/4 = 3/6.",
+      schema: compare([1, 2], [3, 6]),
     },
     {
       titre: "Simplifier",
       texte: "On divise le haut et le bas par un diviseur commun : 6/8 = 3/4.",
+      schema: compare([6, 8], [3, 4]),
     },
     {
       titre: "L'inverse",
       texte: "On échange numérateur et dénominateur : l'inverse de 2/3 est 3/2.",
+      schema: droite(0, 2, 0.5, [
+        { value: 2 / 3, label: "2/3" },
+        { value: 1.5, label: "3/2", color: "#16a34a" },
+      ]),
     },
     {
       titre: "L'opposé",
       texte: "On change seulement le signe : l'opposé de 3/5 est -3/5 (leur somme fait 0).",
+      schema: droite(-1, 1, 0.5, [
+        { value: -0.6, label: "−3/5", color: "#dc2626" },
+        { value: 0.6, label: "3/5" },
+      ]),
     },
   ],
   reel: {
@@ -107,14 +137,43 @@ export const ficheFractions5e: FicheCoursData = {
       "Il y a près de 4000 ans, les Égyptiens n'utilisaient presque que des fractions « unitaires » (1/2, 1/3, 1/4). La barre de fraction, elle, nous vient des mathématiciens arabes et indiens du Moyen Âge.",
   },
   methode: [
-    { titre: "Je simplifie", texte: "Un diviseur commun en haut et en bas rend la fraction plus simple." },
-    { titre: "Je mets au même dénominateur", texte: "Pour comparer, additionner ou soustraire." },
-    { titre: "Je calcule puis simplifie", texte: "Et je vérifie que le résultat est sous sa forme la plus simple." },
+    {
+      titre: "Je simplifie",
+      texte: "Un diviseur commun en haut et en bas rend la fraction plus simple.",
+      schema: compare([4, 12], [1, 3]),
+    },
+    {
+      titre: "Je mets au même dénominateur",
+      texte: "Pour comparer, additionner ou soustraire.",
+      // 1/2 et 1/3 redecoupes en sixiemes : c'est le REDECOUPAGE qu'on montre,
+      // pas le resultat.
+      schema: compare([3, 6], [2, 6]),
+    },
+    {
+      titre: "Je calcule puis simplifie",
+      texte: "Et je vérifie que le résultat est sous sa forme la plus simple.",
+      schema: compare([6, 12], [1, 2]),
+    },
   ],
   usages: [
-    { titre: "Additionner / soustraire", detail: "Même dénominateur, puis on additionne (ou soustrait) les numérateurs." },
-    { titre: "Multiplier", detail: "Numérateurs entre eux, dénominateurs entre eux, puis on simplifie." },
-    { titre: "Diviser", detail: "Diviser par une fraction = multiplier par son inverse." },
+    {
+      titre: "Additionner / soustraire",
+      detail: "Même dénominateur, puis on additionne (ou soustrait) les numérateurs.",
+      schema: barre(5, 6),
+    },
+    {
+      titre: "Multiplier",
+      detail: "Numérateurs entre eux, dénominateurs entre eux, puis on simplifie.",
+      schema: disque(1, 2),
+    },
+    {
+      titre: "Diviser",
+      detail: "Diviser par une fraction = multiplier par son inverse.",
+      schema: droite(0, 2, 0.5, [
+        { value: 0.8, label: "4/5" },
+        { value: 1.25, label: "5/4", color: "#16a34a" },
+      ]),
+    },
   ],
   exemples: [
     {
@@ -153,6 +212,9 @@ export const ficheFractions5e: FicheCoursData = {
       titre: "Multiplier",
       donnees: "Le calcul 2/3 × 3/4.",
       question: "Quel est le résultat ?",
+      // Le resultat brut et sa forme simplifiee : c'est la simplification
+      // finale qu'on oublie, pas la multiplication.
+      schema: compare([6, 12], [1, 2]),
       solution:
         "Haut × haut, bas × bas : 2/3 × 3/4 = 6/12. On simplifie : 6/12 = 1/2.",
     },
@@ -168,6 +230,11 @@ export const ficheFractions5e: FicheCoursData = {
       titre: "Diviser",
       donnees: "Le calcul 2/3 ÷ 4/5.",
       question: "Quel est le résultat ?",
+      // L'inverse de 4/5, la ou il se voit : de l'autre cote de 1.
+      schema: droite(0, 2, 0.5, [
+        { value: 0.8, label: "4/5" },
+        { value: 1.25, label: "5/4", color: "#16a34a" },
+      ]),
       solution:
         "Diviser, c'est multiplier par l'inverse : 2/3 ÷ 4/5 = 2/3 × 5/4 = 10/12 = 5/6.",
     },
