@@ -147,6 +147,37 @@ export default function AccueilIA() {
                 (« conçu à La Réunion par un professeur, pour ses élèves ») :
                 là, le document qu'on tient a une histoire, et l'origine EST le
                 sujet. Ici, elle ne l'est pas.
+                ⭐ ET FINALEMENT LE BADGE EST SIGNÉ (20/08, troisième passe).
+                Deux objections de Frédéric, dans cet ordre, et la seconde annule
+                la première :
+                  1. « Conçu par un enseignant, il est tout seul ! » — le
+                     singulier ne rassurait pas, il inquiétait : un site qu'une
+                     personne peut arrêter.
+                  2. « Quoi que, Yvan Monka a fait tout ça tout seul, et bien
+                     d'autres ! » — exact, et ça retourne le diagnostic. Monka,
+                     M. Mathieu, Hedacademy : dans la pédagogie française,
+                     l'enseignant isolé n'est pas une faiblesse, c'est un genre,
+                     et c'est même le format le plus fiable du paysage.
+                Ce qui sonnait petit n'était donc pas d'ÊTRE seul, c'était d'être
+                ANONYME. « Un enseignant », article indéfini, ne désigne
+                personne. Monka n'est pas « un enseignant » : il est Yvan Monka —
+                un nom, quelqu'un qui répond de ce qu'il écrit.
+                ⛔ TOUJOURS PAS DE PLURIEL (l'interdit du 20/08 tient) : on ne
+                remplit pas le vide avec une équipe qui n'existe pas. On le
+                remplit avec le nom de la personne qui écrit vraiment — déjà
+                public, directeur de publication dans les mentions légales
+                (lib/legal/editeur.ts). Le badge ne révèle rien, il déplace
+                simplement la signature là où on la lit.
+                ⚠️ CE QUE ÇA ACHÈTE, ET CE QUE ÇA N'ACHÈTE PAS. Un nom inconnu
+                n'apporte aucune notoriété — il apporte une RESPONSABILITÉ : ce
+                site a un auteur identifiable. La notoriété, elle, se construit
+                en répétant le même nom partout pendant des années. Ce badge n'a
+                donc de sens que si le nom revient ailleurs (page « pourquoi »,
+                fiches, vidéos). S'il devait rester seul ici, il redeviendrait
+                décoratif — et « testé en classe » serait alors plus utile.
+                ⚠️ L'île reste dans le badge, mais en fin de phrase et rattachée
+                à la personne (« enseignant à La Réunion ») : c'est là où il
+                enseigne, plus une étiquette posée sur le site.
                 ⚠️ LES TROIS VERBES DE FRÉDÉRIC RESTENT en dessous, ils n'ont
                 pas été absorbés ici : « conçues, sélectionnées et vérifiées »
                 dit ce que sont les ressources, le badge dit d'où elles
@@ -166,7 +197,7 @@ export default function AccueilIA() {
                 >
                   <path d="M20 6 9 17l-5-5" />
                 </svg>
-                Conçu par un enseignant, à La Réunion
+                Frédéric Lacoste, enseignant à La Réunion
               </span>
             </p>
             {/* ⭐ DEUX LIGNES, ET PAS DE DEUX-POINTS (Frédéric, 19/08).
