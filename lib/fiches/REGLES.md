@@ -78,6 +78,12 @@ terme 2 » — ses flèches sont donc inutilisables ailleurs que sur une vraie s
 Via `CanvasRenderer` (types dans `lib/tutor-v4/types_canvas.ts`) — les MÊMES dessins que
 dans les exercices du coach.
 
+⭐ **Ce que chaque canvas montre, et ce pour quoi il ne sert pas :
+[`lib/canvas/CATALOGUE.md`](../canvas/CATALOGUE.md)** — les trente `kind` en un tableau,
+avec les étalons (la seconde pour la `size`, la 3e pour les helpers à options) et les
+deux pièges (`suite` imprime son titre en dur, `fonctionGraphique` est le seul en
+camelCase). À lire AVANT de choisir un dessin, pour ne pas relire 1 300 lignes de types.
+
 Déjà utilisés :
 - `tableau_donnees` (tableau de numération), `number_line` (droite graduée),
   `calcul_pose` (virgules alignées), `fraction` (barre/disque/grille/comparaison),
