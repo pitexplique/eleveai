@@ -302,13 +302,21 @@ const DOCUMENT: QcmItem[] = [
   {
     text: "Sur une affiche : Spectacle samedi 14 juin à 18h, salle des fêtes.\n\nQuelle information manque si on veut venir ?",
     correct: "rien : on a le jour, l'heure et le lieu",
-    wrongs: ["le jour", "l'heure", "le lieu"],
+    wrongs: [
+      "le jour : « samedi » ne dit pas de quelle semaine",
+      "l'heure : « 18h » ne dit pas quand cela se termine",
+      "le lieu : « salle des fêtes » ne dit pas dans quelle ville",
+    ],
     methode: "On vérifie quelles informations utiles sont présentes.",
   },
   {
     text: "Dans un sommaire : 'Les insectes ........ page 12'.\n\nÀ quoi sert ce sommaire ?",
     correct: "trouver rapidement une page",
-    wrongs: ["raconter une histoire", "donner son avis", "décrire un personnage"],
+    wrongs: [
+      "savoir combien de pages compte le livre",
+      "connaitre l'ordre dans lequel il faut lire",
+      "vérifier qu'aucune page ne manque au livre",
+    ],
     methode: "Le sommaire aide à se repérer dans un livre documentaire.",
   },
   {
@@ -2769,7 +2777,11 @@ const CONJONCTIONS_ROLE: QcmItem[] = [
   {
     text: "Combien y a-t-il de conjonctions de coordination ?",
     correct: "sept : mais, ou, et, donc, or, ni, car",
-    wrongs: ["cinq", "trois", "dix"],
+    wrongs: [
+      "sept : mais, ou, et, donc, or, ni, que",
+      "cinq : mais, ou, et, donc, car",
+      "neuf : les sept, plus quand et comme",
+    ],
     methode: "Une liste fermée, qu'on apprend une fois pour toutes.",
   },
   {
@@ -2841,9 +2853,9 @@ const PRONOM_ANTECEDENT: QcmItem[] = [
     text: "Comment vérifier qu'on a trouvé le bon antécédent ?",
     correct: "On remplace le pronom par le nom : la phrase doit tenir debout",
     wrongs: [
-      "On prend le nom le plus proche",
-      "On prend le sujet de la phrase",
-      "On regarde la ponctuation",
+      "On prend le nom le plus proche du pronom, juste avant lui",
+      "On prend le sujet de la phrase : c'est presque toujours lui",
+      "On vérifie que le nom a le même genre et le même nombre",
     ],
     methode: "Le nom le plus proche n'est pas toujours le bon.",
   },
@@ -3250,7 +3262,13 @@ const TYPES_PHRASES: QcmItem[] = [
   {
     text: "Combien y a-t-il de types de phrases ?",
     correct: "trois : déclaratif, interrogatif, impératif",
-    wrongs: ["deux", "quatre", "cinq"],
+    // ⛔ Le piège de la notion : « exclamatif » est une FORME, pas un type.
+    // Le leurre le nomme, au lieu de proposer un chiffre nu.
+    wrongs: [
+      "quatre : déclaratif, interrogatif, impératif, exclamatif",
+      "deux : déclaratif et interrogatif, les seuls vrais types",
+      "cinq : les trois types, plus l'exclamatif et le négatif",
+    ],
     methode: "L'exclamation et la négation sont des FORMES, pas des types.",
   },
   {
@@ -3639,9 +3657,9 @@ const GN_EPITHETE: QcmItem[] = [
     text: "Le nom noyau, c'est…",
     correct: "le nom principal du groupe, celui qui commande l'accord",
     wrongs: [
-      "le premier mot du groupe",
-      "le mot le plus long",
-      "l'adjectif du groupe",
+      "le premier mot du groupe, celui qui ouvre et donne le ton",
+      "le déterminant, puisque c'est lui qui porte le genre et le nombre",
+      "l'adjectif, celui qui apporte au groupe son sens le plus précis",
     ],
     methode: "Déterminant et adjectif s'accordent avec lui.",
   },
@@ -3699,9 +3717,9 @@ const GN_EPITHETE: QcmItem[] = [
     text: "Comment trouver le nom noyau d'un groupe nominal ?",
     correct: "On enlève les adjectifs : le nom qui reste est le noyau",
     wrongs: [
-      "On prend le premier mot",
-      "On prend le dernier mot",
-      "On compte les lettres",
+      "On prend le premier mot du groupe, celui qui vient en tête",
+      "On prend le dernier mot, celui qui ferme le groupe nominal",
+      "On garde le mot le plus long : c'est lui qui porte le sens",
     ],
     methode: "Ce qui ne peut pas partir sans casser le groupe, c'est le noyau.",
   },
@@ -4135,9 +4153,9 @@ const MERVEILLEUX: QcmItem[] = [
     text: "Le merveilleux permet d'explorer des thèmes universels comme…",
     correct: "la peur, le désir d'évasion, la curiosité pour l'inexplicable",
     wrongs: [
-      "les règles d'accord",
-      "les tables de multiplication",
-      "la lecture de documents composites",
+      "la vie quotidienne, le travail, les difficultés d'une famille",
+      "l'histoire réelle : les guerres, les rois, les grandes dates",
+      "les sciences : d'où viennent la pluie, le vent, les volcans",
     ],
     methode: "Le BO nomme ces trois-là pour cette entrée.",
   },
@@ -4167,9 +4185,9 @@ const MERVEILLEUX: QcmItem[] = [
     text: "Qu'est-ce qu'un objet magique dans un conte ?",
     correct: "un objet qui donne un pouvoir et fait avancer l'histoire",
     wrongs: [
-      "un objet décoratif",
-      "un objet du quotidien sans rôle",
-      "le titre du conte",
+      "un objet rare et précieux, que le héros cherche tout au long",
+      "un objet du quotidien, décrit avec beaucoup de précision",
+      "un objet qui appartient au méchant et qu'il faut lui reprendre",
     ],
     methode: "S'il ne change rien à l'histoire, ce n'est pas un objet magique.",
   },
@@ -4195,13 +4213,21 @@ const AUTRES_VIES: QcmItem[] = [
   {
     text: "Que veut dire « vivre d'autres vies » en lisant ?",
     correct: "se projeter dans une existence qui n'est pas la sienne",
-    wrongs: ["lire plusieurs livres à la fois", "changer de nom", "relire le même livre"],
+    wrongs: [
+      "oublier un moment la sienne, le temps que dure la lecture",
+      "lire beaucoup de livres, pour accumuler beaucoup d'histoires",
+      "choisir des personnages qui vivent comme on aimerait vivre",
+    ],
     methode: "C'est le titre même de cette entrée du programme.",
   },
   {
     text: "Un récit de vie raconte…",
     correct: "l'existence d'une personne, réelle ou imaginée",
-    wrongs: ["une recette", "une règle de grammaire", "un mode d'emploi"],
+    wrongs: [
+      "une journée entière, heure par heure, dans le détail",
+      "les événements d'une époque, vus par ceux qui les vivaient",
+      "la vie d'un peuple, de ses origines jusqu'à aujourd'hui",
+    ],
     methode: "Le BO parle de « récits de vie offerts par la littérature de jeunesse ».",
   },
   {
@@ -4286,13 +4312,21 @@ const MORALE: QcmItem[] = [
   {
     text: "À la fin d'une fable, la morale…",
     correct: "dit la leçon que l'histoire veut faire comprendre",
-    wrongs: ["raconte la suite", "présente l'auteur", "donne le titre"],
+    wrongs: [
+      "résume l'histoire en deux vers, pour qu'on la retienne",
+      "annonce ce qui arrivera aux personnages après la fable",
+      "nomme celui des deux animaux qui avait raison au départ",
+    ],
     methode: "Elle condense en une phrase ce que le récit a montré.",
   },
   {
     text: "La morale d'une fable est-elle toujours écrite ?",
     correct: "Non : parfois il faut la déduire soi-même",
-    wrongs: ["Oui, toujours", "Jamais", "Seulement chez La Fontaine"],
+    wrongs: [
+      "Oui : une fable sans morale écrite n'est pas une fable",
+      "Non : elle n'est jamais écrite, on la devine toujours",
+      "Oui, mais seulement quand les personnages sont des animaux",
+    ],
     methode: "Une morale implicite se cherche dans ce qui arrive aux personnages.",
   },
   {
@@ -4355,9 +4389,9 @@ const MORALE: QcmItem[] = [
     text: "L'esprit critique du lecteur, c'est…",
     correct: "sa capacité à se faire un avis en s'appuyant sur le texte",
     wrongs: [
-      "sa capacité à tout critiquer",
-      "sa vitesse de lecture",
-      "sa mémoire des personnages",
+      "sa capacité à trouver ce qui ne va pas dans n'importe quel texte",
+      "sa capacité à juger un livre dès les premières pages lues",
+      "sa capacité à retenir tout ce que le texte affirme, sans oublier",
     ],
     methode: "Un avis sans appui sur le texte n'est pas un avis de lecteur.",
   },
@@ -4393,13 +4427,21 @@ const POESIE: QcmItem[] = [
   {
     text: "Qu'est-ce qu'une image poétique ?",
     correct: "une façon de dire une chose en en montrant une autre",
-    wrongs: ["un dessin dans le livre", "une photographie", "une lettre majuscule"],
+    wrongs: [
+      "une description si précise qu'on voit la scène en lisant",
+      "un dessin placé en regard du poème, pour l'accompagner",
+      "un mot choisi pour son son plutôt que pour son sens",
+    ],
     methode: "Le BO dit que la force de la poésie réside dans ses images.",
   },
   {
     text: "Dans « la mer était un drap froissé », que fait le poète ?",
     correct: "il compare la mer à un drap : c'est une image",
-    wrongs: ["il décrit un lit", "il fait une erreur", "il donne une définition"],
+    wrongs: [
+      "il décrit la mer telle qu'elle est vraiment ce jour-là",
+      "il se trompe de mot : un drap n'a rien à voir avec la mer",
+      "il donne la définition de la mer, en termes de tissu",
+    ],
     methode: "L'image rapproche deux choses qu'on n'aurait pas rapprochées.",
   },
   {
@@ -4417,7 +4459,11 @@ const POESIE: QcmItem[] = [
   {
     text: "Le poète peut-il inventer des mots ou bousculer la grammaire ?",
     correct: "Oui : il joue avec la langue en connaissant la règle",
-    wrongs: ["Non, jamais", "Seulement en prose", "Seulement s'il est célèbre"],
+    wrongs: [
+      "Non : la poésie suit la grammaire plus strictement encore",
+      "Oui, mais seulement pour faire tomber la rime au bon endroit",
+      "Oui, à condition de prévenir le lecteur dans une note",
+    ],
     methode: "Le BO dit que l'élève « mesure les écarts à la norme » et en joue.",
   },
   {
@@ -4614,9 +4660,9 @@ const ORIGINES: QcmItem[] = [
     text: "Un texte fondateur, c'est…",
     correct: "un récit ancien sur lequel une culture s'est construite",
     wrongs: [
-      "le premier livre écrit par un auteur",
-      "un texte de loi",
-      "un manuel scolaire",
+      "le premier livre qu'un auteur a écrit dans toute sa carrière",
+      "un texte de loi, qui fonde les règles communes d'un pays",
+      "le texte placé au début d'un recueil, et qui annonce les autres",
     ],
     methode: "Il fonde une culture, pas une œuvre.",
   },
@@ -4645,19 +4691,31 @@ const ORIGINES: QcmItem[] = [
   {
     text: "Un symbole, dans un mythe, c'est…",
     correct: "une image concrète qui porte une idée plus large",
-    wrongs: ["un signe de ponctuation", "un titre", "un nom propre"],
+    wrongs: [
+      "un personnage inventé pour représenter un peuple entier",
+      "un objet rare que le héros reçoit avant de partir",
+      "un mot répété plusieurs fois pour qu'on le remarque",
+    ],
     methode: "Le feu de Prométhée n'est pas seulement du feu.",
   },
   {
     text: "Que veut dire « recréer le monde » dans une production d'élève ?",
     correct: "écrire à son tour un récit qui explique une origine",
-    wrongs: ["recopier un mythe", "traduire un texte ancien", "résumer un roman"],
+    wrongs: [
+      "réécrire un mythe connu en changeant les noms des personnages",
+      "imaginer à quoi ressemblerait le monde s'il était à refaire",
+      "raconter la fin du monde plutôt que son commencement",
+    ],
     methode: "Le BO attend des « productions écrites et créatives ».",
   },
   {
     text: "Les mythes se sont d'abord transmis…",
     correct: "à l'oral, avant d'être écrits",
-    wrongs: ["par écrit seulement", "par le théâtre", "par la peinture"],
+    wrongs: [
+      "par écrit d'abord, puis récités de mémoire",
+      "par le théâtre, joué sur les places publiques",
+      "par la peinture, sur les murs et les poteries",
+    ],
     methode: "C'est pourquoi il en existe plusieurs versions.",
   },
   {
@@ -5304,13 +5362,21 @@ const IMAGE: QcmItem[] = [
   {
     text: "Une illustration dans un roman sert à…",
     correct: "prolonger ou éclairer le texte, pas à le remplacer",
-    wrongs: ["remplacer le texte", "occuper la page", "donner la morale"],
+    wrongs: [
+      "montrer ce que le texte décrit, pour éviter d'avoir à l'imaginer",
+      "aérer la page et reposer le lecteur entre deux chapitres",
+      "résumer le passage en une image, pour ceux qui lisent vite",
+    ],
     methode: "Elle dialogue avec le texte.",
   },
   {
     text: "Que dit la lumière dans une image ?",
     correct: "elle oriente le regard et donne une atmosphère",
-    wrongs: ["rien", "l'heure exacte de la prise de vue", "le nom de l'auteur"],
+    wrongs: [
+      "elle indique l'heure et la saison de la prise de vue",
+      "elle sert à rendre l'image nette et bien lisible",
+      "elle montre d'où le photographe se tenait pour la prendre",
+    ],
     methode: "Sombre ou éclatante, elle installe un climat avant tout mot.",
   },
   {
