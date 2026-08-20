@@ -130,6 +130,23 @@ export default function AccueilIA() {
                 Le pluriel laisserait entendre une équipe pédagogique qui
                 n'existe pas — c'est une personne, et le dire est justement ce
                 qui rend la phrase vérifiable.
+                ⭐ ET L'ENSEIGNANT PASSE DEVANT L'ÎLE (20/08, deuxième passe).
+                Le badge disait « Conçu à La Réunion par un enseignant » : le
+                lieu d'abord, la personne ensuite. Or 86 % des inscrits sont de
+                métropole, et c'est le premier texte de la page — avant le
+                titre. Un parent de Lille qui lit « La Réunion » en tête risque
+                de se poser une question qu'il n'avait pas : « c'est régional,
+                ça suit le programme de chez moi ? » Exactement le piège des
+                quatre portes d'audience retirées du header le matin même : ne
+                jamais laisser quelqu'un se demander s'il est au bon endroit.
+                « Par un enseignant » est la moitié qui porte — c'est la seule
+                chose qu'un produit financé ne peut pas recopier, et elle est
+                vraie partout. L'île reste, en second : une texture, pas une
+                adresse où il faudrait habiter.
+                ⚠️ Les cahiers et le kit de survie gardent leur ordre à eux
+                (« conçu à La Réunion par un professeur, pour ses élèves ») :
+                là, le document qu'on tient a une histoire, et l'origine EST le
+                sujet. Ici, elle ne l'est pas.
                 ⚠️ LES TROIS VERBES DE FRÉDÉRIC RESTENT en dessous, ils n'ont
                 pas été absorbés ici : « conçues, sélectionnées et vérifiées »
                 dit ce que sont les ressources, le badge dit d'où elles
@@ -149,7 +166,7 @@ export default function AccueilIA() {
                 >
                   <path d="M20 6 9 17l-5-5" />
                 </svg>
-                Conçu à La Réunion par un enseignant
+                Conçu par un enseignant, à La Réunion
               </span>
             </p>
             {/* ⭐ DEUX LIGNES, ET PAS DE DEUX-POINTS (Frédéric, 19/08).
