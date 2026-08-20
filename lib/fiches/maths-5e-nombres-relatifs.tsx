@@ -44,6 +44,26 @@ function droite(
   );
 }
 
+// La distance a 0 n'est pas une position, c'est une LONGUEUR : elle se met bout
+// a bout, donc c'est le schema en barres (lib/canvas/CATALOGUE.md). C'est aussi
+// ce que dit le calibrage du 19/08 — number_line dessine des points, pas des
+// ecarts. Les parts sont a l'echelle de leur valeur depuis le 20/08.
+const distances = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      title: "La distance à 0",
+      total: "de −5 à +5 : 10 unités",
+      parts: [
+        { label: "|−5| = 5", value: "5" },
+        { label: "|+5| = 5", value: "5" },
+      ],
+      questionLabel: "Deux nombres opposés sont à la même distance de 0.",
+      size: { width: 320, height: 175 },
+    }}
+  />
+);
+
 const VERT = "#16a34a";
 const ROUGE = "#dc2626";
 const BLEU = "#2563eb";
@@ -84,22 +104,40 @@ export const ficheNombresRelatifs5e: FicheCoursData = {
     ]),
     legende: "À gauche de 0 : les négatifs. À droite de 0 : les positifs.",
   },
+  // Un dessin sous chaque propriete (REGLES.md § 2 bis). Trois d'entre elles
+  // parlent de POSITION — c'est la droite graduee, avec des nombres differents a
+  // chaque fois. La quatrieme parle de DISTANCE : une distance se met bout a
+  // bout, elle se dessine en barres. Quatre fois la meme droite, ce serait
+  // quatre regles identiques aux yeux d'un eleve de 5e.
   proprietes: [
     {
       titre: "Le signe",
       texte: "Au-dessus / à droite de 0 → positif (+). En dessous / à gauche de 0 → négatif (−).",
+      schema: droite([
+        { value: -4, label: "−4", color: ROUGE },
+        { value: 3, label: "+3", color: BLEU },
+      ]),
     },
     {
       titre: "Comparer",
       texte: "Le plus grand est le plus à droite. Un positif est toujours plus grand qu'un négatif.",
+      schema: droite([
+        { value: -1, label: "−1", color: ROUGE },
+        { value: 6, label: "+6 gagne", color: VERT },
+      ], -5, 8),
     },
     {
       titre: "L'opposé",
       texte: "On change seulement le signe : l'opposé de −5 est +5. Ils sont symétriques par rapport à 0.",
+      schema: droite([
+        { value: -5, label: "−5", color: ROUGE },
+        { value: 5, label: "+5", color: VERT },
+      ], -6, 6),
     },
     {
       titre: "La valeur absolue",
       texte: "C'est la distance à 0, donc toujours positive : la valeur absolue de −5 comme de +5 vaut 5.",
+      schema: distances,
     },
   ],
   reel: {
@@ -110,15 +148,63 @@ export const ficheNombresRelatifs5e: FicheCoursData = {
     texte:
       "Les nombres négatifs ont mis des siècles à être acceptés : au XVIᵉ siècle en Europe, on les appelait encore « nombres absurdes ». Ce sont les marchands et les comptables (des dettes = du négatif) qui les ont imposés.",
   },
+  // Les trois gestes, dans l'ordre : le signe (de quel cote de 0 ?), la distance
+  // (combien d'unites ?), puis placer et comparer.
   methode: [
-    { titre: "Je repère le signe", texte: "+ ou − : le nombre est-il à droite ou à gauche de 0 ?" },
-    { titre: "Je mesure la distance à 0", texte: "C'est sa valeur absolue : de combien d'unités je m'éloigne de 0." },
-    { titre: "Je place / je compare", texte: "Sur la droite graduée : le plus à droite est le plus grand." },
+    {
+      titre: "Je repère le signe",
+      texte: "+ ou − : le nombre est-il à droite ou à gauche de 0 ?",
+      schema: droite([{ value: -4, label: "à gauche de 0", color: ROUGE }]),
+    },
+    {
+      titre: "Je mesure la distance à 0",
+      texte: "C'est sa valeur absolue : de combien d'unités je m'éloigne de 0.",
+      schema: (
+        <CanvasRenderer
+          figure={{
+            kind: "schema_barre",
+            total: "4 unités",
+            parts: [{ label: "de −4 à 0", value: "4" }],
+            questionLabel: "La distance ne porte pas de signe : elle vaut 4.",
+            size: { width: 320, height: 165 },
+          }}
+        />
+      ),
+    },
+    {
+      titre: "Je place / je compare",
+      texte: "Sur la droite graduée : le plus à droite est le plus grand.",
+      schema: droite([
+        { value: -3, label: "−3", color: ROUGE },
+        { value: 2, label: "+2", color: VERT },
+      ]),
+    },
   ],
   usages: [
-    { titre: "Température", detail: "Au-dessus de 0 : positif. En dessous : négatif (−3 °C)." },
-    { titre: "Altitude / niveau", detail: "Au-dessus de la mer : positif. En dessous : négatif." },
-    { titre: "Argent", detail: "On reçoit : +. On dépense ou on doit : −." },
+    {
+      titre: "Température",
+      detail: "Au-dessus de 0 : positif. En dessous : négatif (−3 °C).",
+      schema: droite([
+        { value: -3, label: "−3 °C", color: ROUGE },
+        { value: 4, label: "+4 °C", color: BLEU },
+      ]),
+    },
+    {
+      titre: "Altitude / niveau",
+      detail: "Au-dessus de la mer : positif. En dessous : négatif.",
+      schema: droite([
+        { value: -2, label: "−2 m", color: ROUGE },
+        { value: 5, label: "+5 m", color: VERT },
+      ], -6, 6),
+    },
+    {
+      titre: "Argent",
+      detail: "On reçoit : +. On dépense ou on doit : −.",
+      schema: droite([
+        { value: -3, label: "je dois 3 €", color: ROUGE },
+        { value: 5, label: "j'ai 5 €", color: VERT },
+      ], -6, 6),
+    },
   ],
   exemples: [
     {
