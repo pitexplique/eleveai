@@ -158,7 +158,14 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
     tags: ["stmg", "maths", "fonctions", "degre2", "canvas", "template"],
     generate: () => {
       const r1 = randomInt(-4, 0);
-      const r2 = r1 + randomInt(2, 5);
+      // ⛔⛔ Racines OPPOSÉES interdites. Avec $-2$ et $2$, le piège
+      // « racines recopiées sans changer de signe » redonne le MÊME polynôme,
+      // écrit dans l'autre ordre : $(x+2)(x-2)$ et $(x-2)(x+2)$ étaient
+      // proposés ensemble, et l'élève qui prenait le second avait raison tout
+      // en étant compté faux. Même famille que le $x = 4$ ou $x = -4$ du
+      // 16/08.
+      const r2brut = r1 + randomInt(2, 5);
+      const r2 = r2brut === -r1 ? r2brut + 1 : r2brut;
       const a = pick([1, 2, -1, -2] as const);
       const B = -a * (r1 + r2);
       const C = a * r1 * r2;
@@ -186,6 +193,65 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
           {
             choice: ecrire(a, -r1, -r2),
             cause: "a recopié les racines sans changer leur signe dans les facteurs",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — de l'EXPRESSION vers la courbe. Le premier item part du dessin
+    // et cherche la formule ; celui-ci part de la formule et demande à quoi
+    // ressemble le dessin, sans le montrer. C'est l'autre sens de
+    // l'association, et le seul qui serve quand on n'a pas de graphique sous
+    // les yeux — en devoir, par exemple.
+    // ⚠️ Pas de figure ici, volontairement : la tracer répondrait à la
+    // question. Le premier item, lui, porte la sienne.
+    kind: "template",
+    id: "stmg_d2_associer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre2_courbe",
+    microId: "fct_d2_associer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les racines se lisent dans les parenthèses — attention aux signes — et l'orientation dans le coefficient devant.",
+    tags: ["stmg", "maths", "fonctions", "degre2", "template"],
+    generate: () => {
+      const r1 = randomInt(-4, 0);
+      // ⛔ Racines opposées interdites, pour la même raison que dans le premier
+      // item : « coupe l'axe en $-2$ et $2$ » et « en $2$ et $-2$ » décrivent
+      // la même courbe.
+      const r2brut = r1 + randomInt(2, 5);
+      const r2 = r2brut === -r1 ? r2brut + 1 : r2brut;
+      const a = pick([1, 2, -1, -2] as const);
+      const decrire = (s1: number, s2: number, vers: string) =>
+        `elle coupe l'axe des abscisses en $${s1}$ et $${s2}$, et elle est tournée vers ${vers}`;
+      const bonne = decrire(r1, r2, a > 0 ? "le haut" : "le bas");
+      return {
+        text:
+          `Soit $f(x) = ${coef(a)}${facteur(r1)}${facteur(r2)}$. ` +
+          `Que peut-on dire de sa courbe, sans la tracer ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          decrire(r1, r2, a > 0 ? "le bas" : "le haut"),
+          decrire(-r1, -r2, a > 0 ? "le haut" : "le bas"),
+          "elle ne coupe pas l'axe des abscisses",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Dans $a(x - x_1)(x - x_2)$, les nombres $x_1$ et $x_2$ sont les racines — donc les abscisses des points où la courbe coupe l'axe — et le signe de $a$ donne l'orientation.",
+          "On annule chaque parenthèse pour trouver les racines, puis on regarde le signe du coefficient de tête.",
+          `$${facteur(r1)} = 0$ donne $x = ${r1}$, et $${facteur(r2)} = 0$ donne $x = ${r2}$. ` +
+            `Comme $a = ${a}$ est ${a > 0 ? "positif" : "négatif"}, la parabole est tournée vers ${a > 0 ? "le haut" : "le bas"}.`,
+          `La courbe ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: decrire(-r1, -r2, a > 0 ? "le haut" : "le bas"),
+            cause: "a recopié les nombres écrits dans les parenthèses sans changer leur signe",
           },
         ],
       };
@@ -240,6 +306,50 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — l'OUVERTURE, l'autre moitié du libellé. Le premier item ne
+    // demande que le signe de $a$ ; celui-ci fait comparer quatre coefficients
+    // et demande laquelle des paraboles est la plus resserrée. Le signe ne sert
+    // à rien ici : c'est $|a|$ qui décide, et c'est ce qu'on oublie.
+    // ⚠️ Sans figure : quatre paraboles dans un même repère seraient
+    // illisibles, et une seule ne permettrait aucune comparaison.
+    kind: "template",
+    id: "stmg_d2_role_a_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre2_courbe",
+    microId: "fct_d2_role_a",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Plus $|a|$ est GRAND, plus les branches montent vite : la parabole est resserrée.",
+    tags: ["stmg", "maths", "fonctions", "degre2", "template"],
+    generate: () => {
+      // Quatre coefficients de valeurs absolues DEUX À DEUX distinctes : sans
+      // cela, deux paraboles auraient la même ouverture et la question n'aurait
+      // plus de réponse unique.
+      const amplitudes = shuffle([0.2, 0.5, 1, 1.5, 2, 3, 5]).slice(0, 4);
+      const coefficients = amplitudes.map((v) => (Math.random() < 0.5 ? v : -v));
+      const laPlusGrande = coefficients.reduce((m, v) => (Math.abs(v) > Math.abs(m) ? v : m));
+      // `coef()` ne sait écrire que des entiers ; ici les coefficients sont
+      // décimaux, et « $1x^2$ » ne s'écrit pas.
+      const ecrire = (k: number) => `$f(x) = ${k === 1 ? "" : k === -1 ? "-" : fr(k)}x^2$`;
+      return {
+        text: `Parmi ces quatre fonctions, laquelle a la parabole la plus RESSERRÉE ?`,
+        format: "qcm",
+        choices: shuffle(coefficients.map(ecrire)),
+        expected: [ecrire(laPlusGrande)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le coefficient $a$ commande deux choses : son SIGNE donne l'orientation de la parabole, sa VALEUR ABSOLUE son ouverture. Plus $|a|$ est grand, plus la parabole est resserrée.",
+          "On compare les valeurs absolues, sans tenir compte des signes.",
+          `Les valeurs absolues sont ${coefficients.map((v) => `$${fr(Math.abs(v))}$`).join(", ")} : ` +
+            `la plus grande est $${fr(Math.abs(laPlusGrande))}$.`,
+          `La parabole la plus resserrée est celle de ${ecrire(laPlusGrande)}.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ fct_d2_translation ═══════════════════ */
 
   {
@@ -290,6 +400,58 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la translation est DÉCRITE, l'expression est cherchée. Le
+    // premier item lit l'effet d'un $+b$ ; celui-ci part du déplacement voulu
+    // et demande la formule. Le piège est le signe : « vers le bas » s'écrit
+    // avec un moins, et c'est là que la moitié de la classe se trompe.
+    kind: "template",
+    id: "stmg_d2_translation_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre2_courbe",
+    microId: "fct_d2_translation",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Monter, c'est ajouter ; descendre, c'est retrancher.",
+    tags: ["stmg", "maths", "fonctions", "degre2", "template"],
+    generate: () => {
+      const a = pick([1, 2, 3, -1, -2] as const);
+      const d = pick([2, 3, 4, 5, 6] as const);
+      const versLeHaut = Math.random() < 0.5;
+      const ecrire = (k: number, c: number) =>
+        c === 0 ? `$f(x) = ${coef(k)}x^2$` : `$f(x) = ${coef(k)}x^2 ${c >= 0 ? "+" : "-"} ${Math.abs(c)}$`;
+      const bonne = ecrire(a, versLeHaut ? d : -d);
+      return {
+        text:
+          `On translate la courbe de $g(x) = ${coef(a)}x^2$ de $${d}$ unités vers le ${versLeHaut ? "haut" : "bas"}. ` +
+          `Quelle est l'expression de la fonction $f$ obtenue ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          ecrire(a, versLeHaut ? -d : d),
+          `$f(x) = ${coef(a)}(x ${versLeHaut ? "+" : "-"} ${d})^2$`,
+          ecrire(a * d, 0),
+          ecrire(a, versLeHaut ? d * 2 : -d * 2),
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Ajouter une constante à l'expression d'une fonction ajoute cette constante à toutes les ordonnées : la courbe se déplace verticalement, sans changer de forme.",
+          "On ajoute le déplacement s'il va vers le haut, on le retranche s'il va vers le bas.",
+          `Translater de $${d}$ vers le ${versLeHaut ? "haut" : "bas"} revient à ${versLeHaut ? "ajouter" : "retrancher"} $${d}$ : ` +
+            `$f(x) = ${coef(a)}x^2 ${versLeHaut ? "+" : "-"} ${d}$.`,
+          `L'expression obtenue est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$f(x) = ${coef(a)}(x ${versLeHaut ? "+" : "-"} ${d})^2$`,
+            cause: "a placé le déplacement DANS le carré, ce qui déplace la courbe horizontalement",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ fct_d2_axe_symetrie ═══════════════════ */
 
   {
@@ -328,6 +490,48 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — l'axe trouvé par DEUX IMAGES ÉGALES, sans racine ni courbe. Le
+    // premier item passe par les racines ; ici il n'y en a pas de données, et
+    // c'est la symétrie elle-même qui parle : deux antécédents d'une même image
+    // sont à égale distance de l'axe. C'est la route qu'ouvrent les sujets de
+    // bac quand la forme factorisée n'est pas donnée.
+    // ⚠️ Sans figure : la parabole montrerait son sommet, et il n'y aurait plus
+    // rien à déduire.
+    kind: "template",
+    id: "stmg_d2_axe_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre2_symetrie",
+    microId: "fct_d2_axe_symetrie",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Deux nombres qui ont la même image encadrent l'axe : il passe à leur milieu.",
+    tags: ["stmg", "maths", "fonctions", "degre2", "template", "short"],
+    generate: () => {
+      const axe = randomInt(-3, 4);
+      const d = randomInt(1, 4);
+      const x1 = axe - d;
+      const x2 = axe + d;
+      const image = pick([-6, -2, 3, 5, 8, 12] as const);
+      return {
+        text:
+          `Une parabole représente une fonction $f$ du second degré. ` +
+          `On sait que $f(${x1}) = ${image}$ et $f(${x2}) = ${image}$. ` +
+          `Quelle est l'abscisse de son axe de symétrie ?`,
+        format: "short",
+        expected: [fr(axe)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Une parabole est symétrique par rapport à la droite verticale passant par son sommet : deux nombres qui ont la même image sont donc symétriques par rapport à cet axe.",
+          "On calcule le milieu des deux antécédents.",
+          `$\\dfrac{${x1} + ${x2}}{2} = \\dfrac{${x1 + x2}}{2} = ${fr(axe)}$.`,
+          `L'axe de symétrie a pour équation $x = ${fr(axe)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ fct_d2_extremum ═══════════════════ */
 
   {
@@ -360,6 +564,48 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
           `Axe : $x = \\dfrac{${r1} + ${r2}}{2} = ${fr(axe)}$. ` +
             `Image : $f(${fr(axe)}) = ${coef(a)}(${fr(axe)} - (${r1}))(${fr(axe)} - (${r2})) = ${fr(extremum)}$.`,
           `Le ${a > 0 ? "minimum" : "maximum"} de $f$ vaut $${fr(extremum)}$, atteint en $x = ${fr(axe)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — OÙ, et non COMBIEN. Le premier item calcule la valeur de
+    // l'extremum ; celui-ci demande la quantité qui le réalise, dans une
+    // situation de gestion. C'est la question du sujet de bac — « pour quelle
+    // production le bénéfice est-il maximal ? » —, et elle se répond sans
+    // calculer le bénéfice lui-même.
+    kind: "template",
+    id: "stmg_d2_extremum_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre2_symetrie",
+    microId: "fct_d2_extremum",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le maximum d'une parabole tournée vers le bas est atteint sur son axe de symétrie, au milieu des deux racines.",
+    tags: ["stmg", "maths", "fonctions", "degre2", "gestion", "template", "short"],
+    generate: () => {
+      // Deux seuils de rentabilité pairs entre eux : leur milieu est entier,
+      // donc la quantité optimale est un nombre d'articles, pas une fraction.
+      const seuilBas = pick([10, 20, 30, 40] as const);
+      const seuilHaut = seuilBas + 2 * pick([10, 15, 20, 25, 30] as const);
+      const optimum = (seuilBas + seuilHaut) / 2;
+      const a = pick([-1, -2, -0.5] as const);
+      return {
+        text:
+          `Le bénéfice d'une entreprise, en euros, pour $x$ articles vendus, est ` +
+          `$B(x) = ${a === -1 ? "-" : fr(a)}(x - ${seuilBas})(x - ${seuilHaut})$. ` +
+          `Pour quelle quantité vendue le bénéfice est-il maximal ?`,
+        format: "short",
+        expected: [fr(optimum)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Une parabole tournée vers le bas atteint son MAXIMUM au sommet, c'est-à-dire sur son axe de symétrie — lequel passe au milieu des deux racines.",
+          "On calcule la demi-somme des deux racines ; le coefficient $a$ ne sert qu'à savoir qu'il s'agit bien d'un maximum.",
+          `Les racines sont $${seuilBas}$ et $${seuilHaut}$ : ce sont les quantités où le bénéfice s'annule. ` +
+            `Le sommet est en $\\dfrac{${seuilBas} + ${seuilHaut}}{2} = ${fr(optimum)}$, et $a = ${fr(a)}$ est négatif, donc c'est bien un maximum.`,
+          `Le bénéfice est maximal pour $${fr(optimum)}$ articles vendus — il vaut alors $${fr(a * (optimum - seuilBas) * (optimum - seuilHaut))}$ €.`
         ),
       };
     },
@@ -407,6 +653,46 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — l'autre ANTÉCÉDENT, pas l'autre image. Le premier item donne
+    // une abscisse et demande l'image de sa symétrique ; celui-ci donne une
+    // image et demande quel AUTRE nombre la partage. La symétrie sert dans les
+    // deux sens, et le second est celui qu'on ne travaille jamais.
+    kind: "template",
+    id: "stmg_d2_symetrie_images_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre2_symetrie",
+    microId: "fct_d2_symetrie_images",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "L'axe est au milieu : l'autre antécédent est aussi loin de l'axe, mais de l'autre côté.",
+    tags: ["stmg", "maths", "fonctions", "degre2", "template", "short"],
+    generate: () => {
+      const axe = randomInt(-2, 4);
+      const d = randomInt(1, 4);
+      const connu = axe - d;
+      const cherche = axe + d;
+      const image = pick([-8, -3, 2, 6, 9, 14] as const);
+      return {
+        text:
+          `Une parabole a pour axe de symétrie la droite d'équation $x = ${fr(axe)}$, ` +
+          `et l'on sait que $f(${connu}) = ${image}$. ` +
+          `Quel AUTRE nombre a également $${image}$ pour image par $f$ ?`,
+        format: "short",
+        expected: [fr(cherche)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Sur une parabole, deux nombres symétriques par rapport à l'axe ont la même image : à toute image atteinte hors du sommet correspondent donc DEUX antécédents.",
+          "On mesure la distance de l'antécédent connu à l'axe, puis on reporte cette distance de l'autre côté.",
+          `$${connu}$ est à la distance $${fr(axe - connu)}$ de l'axe $x = ${fr(axe)}$. ` +
+            `De l'autre côté : $${fr(axe)} + ${fr(d)} = ${fr(cherche)}$.`,
+          `L'autre antécédent de $${image}$ est $${fr(cherche)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════ fct_d2_racines_factorisee ═══════════ */
 
   {
@@ -424,6 +710,10 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
       const r1 = pick([-5, -4, -3, -2, -1, 1, 2, 3, 4] as const);
       let r2 = pick([-6, -4, -2, 2, 3, 5, 6, 7] as const).valueOf();
       if (r2 === r1) r2 = r1 + 1;
+      // ⛔⛔ Racines OPPOSÉES interdites : le piège « racines recopiées sans
+      // changer de signe » proposerait alors « $2$ et $-2$ » à côté de
+      // « $-2$ et $2$ » — le même couple, écrit dans l'autre sens.
+      if (r2 === -r1) r2 = r2 + 1;
       const a = pick([1, 2, 3, -1, -2] as const);
       const petite = Math.min(r1, r2);
       const grande = Math.max(r1, r2);
@@ -451,6 +741,56 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
             cause: "a lu le nombre écrit dans la parenthèse sans changer son signe",
           },
         ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la RÈGLE ISOLÉE : le produit nul ne vaut que pour ZÉRO. Le
+    // premier item fait annuler des facteurs ; celui-ci met en scène l'élève
+    // qui applique la même recette à un produit égal à $12$. C'est l'erreur qui
+    // survit le plus longtemps, parce qu'elle marche une fois sur deux au
+    // hasard et qu'on ne la corrige jamais explicitement.
+    kind: "template",
+    id: "stmg_d2_racines_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre2_factorisee",
+    microId: "fct_d2_racines_factorisee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un produit vaut $12$ de mille façons : $2 \\times 6$, $4 \\times 3$, $24 \\times 0,5$… mais il ne vaut $0$ que si un facteur est nul.",
+    tags: ["stmg", "maths", "fonctions", "degre2", "diagnostic", "template"],
+    generate: () => {
+      const r1 = pick([-5, -3, -2, 1, 2, 4] as const);
+      // ⛔ Une racine nulle donnerait le facteur « x », dont le retrait des
+      // parenthèses ne laisse rien : la phrase de l'élève serait vide.
+      const r2brut = r1 + pick([2, 3, 5] as const);
+      const r2 = r2brut === 0 ? r1 + 6 : r2brut;
+      const k = pick([6, 8, 10, 12] as const);
+      const bonne = "il se trompe : cette règle ne vaut que si le produit est NUL";
+      return {
+        text:
+          `Un élève doit résoudre $${facteur(r1)}${facteur(r2)} = ${k}$. ` +
+          `Il écrit : « $${facteur(r1).slice(1, -1)} = ${k}$ ou $${facteur(r2).slice(1, -1)} = ${k}$ ». ` +
+          `Qu'en penses-tu ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `il a raison : un produit vaut $${k}$ dès que l'un de ses facteurs vaut $${k}$`,
+          "il se trompe : il fallait écrire « et » à la place de « ou »",
+          "il a raison, mais il a oublié de vérifier ses deux solutions",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un produit de facteurs est nul si, et seulement si, l'un au moins de ses facteurs est nul. Cette propriété est propre à ZÉRO : elle ne se transpose à aucun autre nombre.",
+          "Devant une équation produit, on regarde d'abord ce qu'il y a à droite du signe égal.",
+          `$${k}$ s'écrit de beaucoup de façons : $1 \\times ${k}$, $2 \\times ${k / 2}$, et une infinité d'autres avec des décimaux. ` +
+            `Rien n'oblige donc $${facteur(r1).slice(1, -1)}$ à valoir $${k}$. ` +
+            `Pour résoudre, il faudrait tout ramener à zéro : $${facteur(r1)}${facteur(r2)} - ${k} = 0$.`,
+          bonne
+        ),
       };
     },
   },
@@ -499,6 +839,72 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
           `Les racines sont $${r1}$ et $${r2}$, et $a = ${a}$ est ${a > 0 ? "positif : la parabole plonge sous l'axe entre les racines" : "négatif : la parabole passe au-dessus de l'axe entre les racines"}.`,
           `$f$ est ${bonne}.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — UNE LIGNE du tableau, pas le résultat final. Le premier item
+    // donne le signe du produit ; celui-ci descend d'un cran et demande le
+    // signe d'un SEUL facteur sur un intervalle. C'est la ligne qu'on remplit
+    // en premier au brouillon, et celle qu'un élève saute en récitant « du
+    // signe de a à l'extérieur ».
+    // ⚠️ Sans figure : la parabole donnerait le signe du produit, pas celui du
+    // facteur — elle ne répondrait pas à la question posée.
+    kind: "template",
+    id: "stmg_d2_signe_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre2_factorisee",
+    microId: "fct_d2_signe_tableau",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un facteur $x - r$ est négatif AVANT $r$ et positif après : il ne change de signe qu'une fois.",
+    tags: ["stmg", "maths", "fonctions", "degre2", "template"],
+    generate: () => {
+      const r1 = randomInt(-4, 0);
+      const r2 = r1 + randomInt(2, 5);
+      const a = pick([1, 2, -1, -2] as const);
+      const premier = Math.random() < 0.5;
+      const racineDuFacteur = premier ? r1 : r2;
+      // Trois zones possibles ; le signe du facteur choisi dépend de celle où
+      // l'on se place.
+      const zone = pick(["gauche", "milieu", "droite"] as const);
+      const intervalle =
+        zone === "gauche"
+          ? `$]-\\infty\\,;\\,${r1}[$`
+          : zone === "milieu"
+            ? `$]${r1}\\,;\\,${r2}[$`
+            : `$]${r2}\\,;\\,+\\infty[$`;
+      const temoin = zone === "gauche" ? r1 - 1 : zone === "milieu" ? (r1 + r2) / 2 : r2 + 1;
+      const signe = temoin - racineDuFacteur > 0 ? "positif" : "négatif";
+      return {
+        text:
+          `On dresse le tableau de signes de $f(x) = ${coef(a)}${facteur(r1)}${facteur(r2)}$. ` +
+          `Sur ${intervalle}, quel est le signe du seul facteur $${facteur(racineDuFacteur)}$ ?`,
+        format: "qcm",
+        choices: shuffle([
+          "positif",
+          "négatif",
+          "nul",
+          "il change de signe sur cet intervalle",
+        ]),
+        expected: [signe],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un tableau de signes se construit ligne par ligne : chaque facteur du premier degré $x - r$ est négatif avant $r$, nul en $r$, positif après. Le signe du produit s'obtient ensuite en multipliant les lignes.",
+          "On compare l'intervalle à la racine DU FACTEUR étudié, pas aux deux racines à la fois.",
+          `Le facteur $${facteur(racineDuFacteur)}$ s'annule en $${racineDuFacteur}$. ` +
+            `Sur ${intervalle}, prenons $x = ${fr(temoin)}$ : $${fr(temoin)} - (${racineDuFacteur}) = ${fr(temoin - racineDuFacteur)}$, ` +
+            `qui est ${signe}.`,
+          `Sur ${intervalle}, le facteur $${facteur(racineDuFacteur)}$ est ${signe}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "il change de signe sur cet intervalle",
+            cause: "un facteur du premier degré ne change de signe qu'en sa racine, qui n'est pas dans cet intervalle ouvert",
+          },
+        ],
       };
     },
   },
@@ -552,6 +958,65 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — l'inéquation POSÉE PAR LA SITUATION. Le premier item la donne
+    // toute écrite ; ici elle est cachée dans une phrase de gestion — « à
+    // partir de quand l'entreprise est-elle bénéficiaire ? » — et l'élève doit
+    // reconnaître qu'on lui demande $B(x) > 0$. C'est la seule forme sous
+    // laquelle elle tombe au bac.
+    kind: "template",
+    id: "stmg_d2_inequation_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre2_factorisee",
+    microId: "fct_d2_inequation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« Être bénéficiaire » signifie $B(x) > 0$ : cherche où la parabole est au-dessus de l'axe.",
+    tags: ["stmg", "maths", "fonctions", "degre2", "gestion", "canvas", "template"],
+    generate: () => {
+      const seuilBas = pick([10, 20, 30, 40] as const);
+      const seuilHaut = seuilBas + pick([20, 30, 40, 50, 60] as const);
+      const a = pick([-1, -2] as const);
+      const bonne = `pour $x$ compris entre $${seuilBas}$ et $${seuilHaut}$`;
+      return {
+        text:
+          `Le bénéfice d'une entreprise, en euros, pour $x$ articles vendus, est ` +
+          `$B(x) = ${a === -1 ? "-" : a}(x - ${seuilBas})(x - ${seuilHaut})$. ` +
+          `Pour quelles quantités l'entreprise est-elle bénéficiaire ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `pour $x$ inférieur à $${seuilBas}$ ou supérieur à $${seuilHaut}$`,
+          `pour $x$ supérieur à $${seuilHaut}$`,
+          "pour toutes les quantités",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: canvasCourbePoints(
+          (x: number) => a * (x - seuilBas) * (x - seuilHaut),
+          0,
+          seuilHaut + 20,
+          "Bénéfice en fonction de la quantité vendue",
+          { pas: (seuilHaut + 20) / 60, marques: [seuilBas, seuilHaut] }
+        ),
+        explanation: exp(
+          "Être bénéficiaire, c'est avoir un bénéfice STRICTEMENT POSITIF : la question revient à résoudre $B(x) > 0$.",
+          "On repère les racines — les seuils où le bénéfice s'annule — puis on regarde de quel côté la parabole est au-dessus de l'axe.",
+          `$B$ s'annule en $${seuilBas}$ et $${seuilHaut}$. Le coefficient $${a}$ est négatif, ` +
+            `donc la parabole est tournée vers le bas : elle est au-dessus de l'axe ENTRE les deux racines.`,
+          `L'entreprise est bénéficiaire ${bonne} — en dessous de $${seuilBas}$ articles, les charges ne sont pas couvertes ; au-delà de $${seuilHaut}$, elle vend à perte.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `pour $x$ inférieur à $${seuilBas}$ ou supérieur à $${seuilHaut}$`,
+            cause: "a pris l'extérieur des racines, ce qui vaudrait pour une parabole tournée vers le haut",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ fct_d2_verifier_racine ═══════════════ */
 
   {
@@ -588,6 +1053,55 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
           image === 0
             ? `Comme $f(${candidat}) = 0$, oui : $${candidat}$ est une racine.`
             : `Comme $f(${candidat}) = ${fr(image)} \\neq 0$, non : $${candidat}$ n'est pas une racine.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — TROUVER la racine parmi quatre, au lieu d'en valider une. Le
+    // premier item répond par oui ou par non : une pièce lancée en l'air
+    // réussit la moitié du temps. Ici il faut mener le calcul jusqu'à quatre
+    // fois, et une seule valeur annule le polynôme.
+    kind: "template",
+    id: "stmg_d2_verifier_racine_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre2_factoriser",
+    microId: "fct_d2_verifier_racine",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Remplace $x$ par chaque nombre proposé : celui qui donne $0$ est la racine.",
+    tags: ["stmg", "maths", "fonctions", "degre2", "template"],
+    generate: () => {
+      const r1 = pick([-4, -3, -2, -1, 1, 2, 3, 4, 5] as const);
+      const r2 = r1 + pick([1, 2, 3, 4] as const);
+      const a = pick([1, 2, -1] as const);
+      const B = -a * (r1 + r2);
+      const C = a * r1 * r2;
+      const f = (x: number) => a * x * x + B * x + C;
+      // Trois intrus qui ne sont racines ni l'un ni l'autre : on les prend
+      // autour des racines, puis on écarte tout ce qui annulerait $f$.
+      // ⛔ Le `Set` est indispensable : quand les deux racines se suivent, deux
+      // candidats de la liste tombent sur le MÊME nombre et le QCM affichait
+      // deux fois la même proposition.
+      const intrus = shuffle(
+        Array.from(new Set([r1 - 1, r1 + 1, r2 + 1, r2 - 1, r1 - 2, r2 + 2, r1 + 3]))
+      )
+        .filter((v) => f(v) !== 0)
+        .slice(0, 3);
+      return {
+        text: `Parmi ces quatre nombres, lequel est une racine de $f(x) = ${trinome(a, B, C)}$ ?`,
+        format: "qcm",
+        choices: shuffle([`$${r1}$`, ...intrus.map((v) => `$${v}$`)]),
+        expected: [`$${r1}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un nombre est racine d'un polynôme lorsque son image vaut $0$. Chercher une racine « évidente » se fait par essais — le discriminant n'est pas au programme.",
+          "On remplace $x$ par chaque candidat et l'on calcule, en s'arrêtant dès qu'on trouve $0$.",
+          `$f(${r1}) = ${a} \\times (${r1})^2 + (${B}) \\times (${r1}) + (${C}) = 0$. ` +
+            `Les trois autres donnent respectivement $${intrus.map((v) => fr(f(v))).join("$, $")}$.`,
+          `La racine est $${r1}$.`
         ),
       };
     },
@@ -639,6 +1153,47 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — LA SECONDE RACINE, seule. Le premier item demande la forme
+    // factorisée complète, et l'élève peut la reconnaître parmi quatre sans
+    // rien chercher. Ici il n'y a rien à reconnaître : il faut passer par le
+    // produit des racines, $x_1 x_2 = \frac{c}{a}$, qui est la méthode que le
+    // programme prescrit à la place du discriminant.
+    kind: "template",
+    id: "stmg_d2_factoriser_connue_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre2_factoriser",
+    microId: "fct_d2_factoriser_racine_connue",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le produit des deux racines vaut $\\dfrac{c}{a}$ : divise, puis cherche par quoi multiplier la racine connue.",
+    tags: ["stmg", "maths", "fonctions", "degre2", "template", "short"],
+    generate: () => {
+      const r1 = pick([-4, -3, -2, -1, 1, 2, 3, 4] as const);
+      const r2brut = pick([-5, -3, -1, 2, 4, 5, 6] as const);
+      const r2 = r2brut === r1 ? r1 + 1 : r2brut;
+      const a = pick([1, 2, -1] as const);
+      const B = -a * (r1 + r2);
+      const C = a * r1 * r2;
+      return {
+        text:
+          `On sait que $${r1}$ est une racine de $f(x) = ${trinome(a, B, C)}$. ` +
+          `Quelle est son AUTRE racine ?`,
+        format: "short",
+        expected: [fr(r2)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Pour $f(x) = ax^2 + bx + c$ de racines $x_1$ et $x_2$, on a $f(x) = a(x - x_1)(x - x_2)$ : en développant, le terme constant vaut $a\\,x_1x_2$, donc $x_1 x_2 = \\dfrac{c}{a}$.",
+          "On divise le terme constant par le coefficient de $x^2$, puis on divise le résultat par la racine connue.",
+          `$\\dfrac{c}{a} = \\dfrac{${C}}{${a}} = ${fr(C / a)}$, donc $${r1} \\times x_2 = ${fr(C / a)}$ et $x_2 = ${fr(r2)}$. ` +
+            `Vérification par la somme : $${r1} + ${r2} = ${r1 + r2}$, et $-\\dfrac{b}{a} = -\\dfrac{${B}}{${a}} = ${fr(-B / a)}$.`,
+          `L'autre racine est $${fr(r2)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════ fct_d2_verifier_developpee ═══════════ */
 
   {
@@ -677,6 +1232,61 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
             ? "Les deux expressions coïncident : l'égalité est exacte."
             : `Le coefficient de $x$ diffère ($${B}$ contre $${Bp}$) : l'égalité est fausse.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — DÉVELOPPER, au lieu de vérifier. Le premier item propose une
+    // égalité à valider par oui ou par non ; celui-ci demande le résultat, et
+    // les quatre propositions se distinguent par le seul terme que la double
+    // distributivité fait rater : celui en $x$.
+    kind: "template",
+    id: "stmg_d2_verifier_dev_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre2_factoriser",
+    microId: "fct_d2_verifier_developpee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le terme en $x$ vient de DEUX produits qu'il faut additionner, pas d'un seul.",
+    tags: ["stmg", "maths", "fonctions", "degre2", "template"],
+    generate: () => {
+      const r1 = pick([-4, -3, -2, -1, 1, 2, 3] as const);
+      const r2 = r1 + pick([1, 2, 3, 4] as const);
+      const a = pick([1, 2, -1] as const);
+      const B = -a * (r1 + r2);
+      const C = a * r1 * r2;
+      return {
+        text: `Développe $${coef(a)}${facteur(r1)}${facteur(r2)}$.`,
+        format: "qcm",
+        choices: makeChoices(`$${trinome(a, B, C)}$`, [
+          `$${trinome(a, -B, C)}$`,
+          `$${trinome(a, B, -C)}$`,
+          // Le développement mené SANS le coefficient de tête. Quand $a = 1$,
+          // c'est la bonne réponse : le doublon est alors écarté au tri.
+          `$${trinome(1, -(r1 + r2), r1 * r2)}$`,
+          `$${trinome(a, B, C + 1)}$`,
+          // Cinquième piège de réserve : la somme et le produit échangés. Sans
+          // lui, le QCM tombait à trois lignes une fois sur trois — quand
+          // $a = 1$, le développement « sans le coefficient » est le bon.
+          `$${trinome(a, C, B)}$`,
+        ]),
+        expected: [`$${trinome(a, B, C)}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Développer un produit de deux facteurs du premier degré, c'est multiplier chaque terme du premier par chaque terme du second : $(x - x_1)(x - x_2) = x^2 - (x_1 + x_2)x + x_1x_2$.",
+          "On calcule d'abord la somme des racines — elle donne le terme en $x$, changé de signe — puis leur produit, qui donne le terme constant. Le coefficient $a$ multiplie ensuite le tout.",
+          `Somme : $${r1} + ${r2} = ${r1 + r2}$ ; produit : $${r1} \\times ${r2} = ${r1 * r2}$. ` +
+            `Avec $a = ${a}$ : $${trinome(a, B, C)}$.`,
+          `Le développement est $${trinome(a, B, C)}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$${trinome(a, -B, C)}$`,
+            cause: "a oublié que la somme des racines change de signe dans le développement",
+          },
+        ],
       };
     },
   },
@@ -730,6 +1340,48 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la SYMÉTRIE du cube. Le premier item associe une courbe à son
+    // expression ; celui-ci fait fonctionner ce que la courbe montre sans le
+    // dire : $x \mapsto ax^3$ envoie deux opposés sur deux opposés. C'est ce
+    // qui distingue sa courbe de celle d'une parabole, où les deux images
+    // seraient ÉGALES.
+    // ⚠️ Sans figure : la courbe donnerait l'image à lire. Le premier item
+    // porte la sienne.
+    kind: "template",
+    id: "stmg_d3_courbes_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre3",
+    microId: "fct_d3_courbes",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le cube d'un nombre négatif est négatif : $(-2)^3 = -8$, alors que $(-2)^2 = 4$.",
+    tags: ["stmg", "maths", "fonctions", "degre3", "template", "short"],
+    generate: () => {
+      const a = pick([1, 2, 3, -1, -2] as const);
+      const x = pick([2, 3, 4, 5] as const);
+      const image = a * x * x * x;
+      return {
+        text:
+          `Soit $f(x) = ${coef(a)}x^3$. On sait que $f(${x}) = ${image}$. ` +
+          `Que vaut $f(${-x})$ ?`,
+        format: "short",
+        expected: [fr(-image)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le cube conserve le signe : $(-x)^3 = -x^3$. La courbe de $x \\mapsto ax^3$ est donc symétrique par rapport à l'ORIGINE, et deux nombres opposés ont des images opposées.",
+          "On remplace $x$ par son opposé, ou l'on utilise directement la symétrie.",
+          // ⚠️ Juxtaposition et non « \times » : avec $a = 1$, `coef` rend une
+          // chaîne vide et la ligne commençait par un signe de multiplication.
+          `$f(${-x}) = ${coef(a)}(${-x})^3 = ${coef(a)}(${-(x * x * x)}) = ${fr(-image)}$. ` +
+            `Avec un carré, la réponse aurait été $${fr(image)}$ : c'est là toute la différence entre les deux courbes.`,
+          `$f(${-x}) = ${fr(-image)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ fct_d3_racines ═══════════════════ */
 
   {
@@ -746,7 +1398,11 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
     generate: () => {
       const r1 = randomInt(-5, -2);
       const r2 = r1 + randomInt(1, 3);
-      const r3 = r2 + randomInt(1, 3);
+      // ⛔ Triplet SYMÉTRIQUE interdit : avec $-2$, $0$ et $2$, le piège
+      // « racines recopiées sans changer de signe » redonne les trois mêmes
+      // racines, dans l'autre ordre.
+      const r3brut = r2 + randomInt(1, 3);
+      const r3 = r2 === 0 && r3brut === -r1 ? r3brut + 1 : r3brut;
       const a = pick([1, 2, -1] as const);
       return {
         text: `Quelles sont les racines de $f(x) = ${coef(a)}${facteur(r1)}${facteur(r2)}${facteur(r3)}$ ?`,
@@ -754,7 +1410,11 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
         choices: makeChoices(`$${r1}$, $${r2}$ et $${r3}$`, [
           `$${-r1}$, $${-r2}$ et $${-r3}$`,
           `$${r1}$ et $${r3}$ seulement`,
-          `$${a}$, $${r1}$ et $${r2}$`,
+          // ⚠️ Ce piège écrivait le coefficient de tête à la place d'une
+          // racine : quand ce coefficient valait justement l'une des racines,
+          // la proposition affichait « $1$, $-2$ et $1$ » — un nombre répété,
+          // qu'on écarte à l'œil sans faire de maths.
+          `$${r1}$, $${r2}$ et $${r3 + 1}$`,
           `$${r1 + r2 + r3}$`,
           `$${r1 * r2 * r3}$`,
         ]),
@@ -767,6 +1427,62 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
             `$${facteur(r3)} = 0 \\Rightarrow x = ${r3}$.`,
           `Les racines sont $${r1}$, $${r2}$ et $${r3}$.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — ÉCRIRE le polynôme à partir de ses racines. Le premier item lit
+    // les racines dans une forme donnée ; celui-ci la fabrique. C'est le geste
+    // du modélisateur : on connaît les trois valeurs où la grandeur s'annule,
+    // on écrit la fonction.
+    kind: "template",
+    id: "stmg_d3_racines_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre3",
+    microId: "fct_d3_racines",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une racine $r$ donne le facteur $(x - r)$ : attention au signe quand $r$ est négatif.",
+    tags: ["stmg", "maths", "fonctions", "degre3", "template"],
+    generate: () => {
+      const r1 = randomInt(-5, -2);
+      const r2 = r1 + randomInt(1, 3);
+      // ⛔ Triplet SYMÉTRIQUE interdit : avec $-2$, $0$ et $2$, le piège
+      // « racines recopiées sans changer de signe » redonne les trois mêmes
+      // racines, dans l'autre ordre.
+      const r3brut = r2 + randomInt(1, 3);
+      const r3 = r2 === 0 && r3brut === -r1 ? r3brut + 1 : r3brut;
+      const a = pick([1, 2, 3, -1, -2] as const);
+      const ecrire = (k: number, s1: number, s2: number, s3: number) =>
+        `$${coef(k)}${facteur(s1)}${facteur(s2)}${facteur(s3)}$`;
+      return {
+        text:
+          `Un polynôme de degré 3 a pour racines $${r1}$, $${r2}$ et $${r3}$, ` +
+          `et son coefficient de tête vaut $${a}$. Quelle est sa forme factorisée ?`,
+        format: "qcm",
+        choices: makeChoices(ecrire(a, r1, r2, r3), [
+          ecrire(a, -r1, -r2, -r3),
+          ecrire(-a, r1, r2, r3),
+          ecrire(1, r1, r2, r3),
+          ecrire(a, r1, r2, r3 + 1),
+        ]),
+        expected: [ecrire(a, r1, r2, r3)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un polynôme de degré 3 de racines $x_1$, $x_2$, $x_3$ et de coefficient de tête $a$ s'écrit $a(x - x_1)(x - x_2)(x - x_3)$.",
+          "On écrit un facteur par racine, en RETRANCHANT la racine — donc en ajoutant sa valeur absolue si elle est négative.",
+          `La racine $${r1}$ donne le facteur $${facteur(r1)}$, et non $(x ${r1 < 0 ? "-" : "+"} ${Math.abs(r1)})$. ` +
+            `De même pour les deux autres, et le coefficient $${a}$ se place devant.`,
+          `La forme factorisée est ${ecrire(a, r1, r2, r3)}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: ecrire(a, -r1, -r2, -r3),
+            cause: "a recopié les racines dans les parenthèses sans changer leur signe",
+          },
+        ],
       };
     },
   },
@@ -826,6 +1542,69 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — TOUT l'ensemble des solutions, en une fois. Le premier item
+    // désigne un intervalle et demande son signe ; celui-ci demande où $f$ est
+    // positive, ce qui oblige à parcourir les quatre zones et à en retenir
+    // DEUX, non contiguës. Un élève qui n'a pas compris l'alternance en donne
+    // une seule.
+    // ⛔ Compter les intervalles positifs ne ferait pas un item : avec trois
+    // racines simples, la réponse serait toujours « deux ».
+    // ⚠️ Sans figure : la courbe donnerait la réponse à l'œil, et l'alternance
+    // — le seul objet de la question — ne servirait plus.
+    kind: "template",
+    id: "stmg_d3_signe_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre3",
+    microId: "fct_d3_signe",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Trois racines découpent la droite en quatre intervalles, et les signes alternent : la réponse en compte deux.",
+    tags: ["stmg", "maths", "fonctions", "degre3", "template"],
+    generate: () => {
+      const r1 = randomInt(-5, -3);
+      const r2 = r1 + randomInt(2, 3);
+      const r3 = r2 + randomInt(2, 3);
+      const a = pick([1, 2, -1, -2] as const);
+      const positif = a > 0
+        ? `$]${r1}\\,;\\,${r2}[ \\cup ]${r3}\\,;\\,+\\infty[$`
+        : `$]-\\infty\\,;\\,${r1}[ \\cup ]${r2}\\,;\\,${r3}[$`;
+      const negatif = a > 0
+        ? `$]-\\infty\\,;\\,${r1}[ \\cup ]${r2}\\,;\\,${r3}[$`
+        : `$]${r1}\\,;\\,${r2}[ \\cup ]${r3}\\,;\\,+\\infty[$`;
+      return {
+        text:
+          `Soit $f(x) = ${coef(a)}${facteur(r1)}${facteur(r2)}${facteur(r3)}$. ` +
+          `Sur quel ensemble $f$ est-elle strictement positive ?`,
+        format: "qcm",
+        choices: shuffle([
+          positif,
+          negatif,
+          `$]${r3}\\,;\\,+\\infty[$`,
+          `$]${r1}\\,;\\,${r3}[$`,
+        ]),
+        expected: [positif],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un polynôme donné sous forme factorisée change de signe à chacune de ses racines simples : d'un intervalle au suivant, le signe s'inverse. Trois racines donnent donc quatre zones, deux positives et deux négatives.",
+          "On détermine le signe sur l'intervalle le plus à droite — c'est celui de $a$ —, puis on alterne en revenant vers la gauche.",
+          `Ici $a = ${a}$ : à droite de $${r3}$, $f$ est ${a > 0 ? "positive" : "négative"} ; ` +
+            `sur $]${r2}\\,;\\,${r3}[$ elle est ${a > 0 ? "négative" : "positive"} ; ` +
+            `sur $]${r1}\\,;\\,${r2}[$, ${a > 0 ? "positive" : "négative"} ; ` +
+            `et avant $${r1}$, ${a > 0 ? "négative" : "positive"}.`,
+          `$f$ est strictement positive sur ${positif}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$]${r3}\\,;\\,+\\infty[$`,
+            cause: "n'a retenu qu'une seule des deux zones positives",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════ fct_d3_verifier_racine ═══════════ */
 
   {
@@ -865,6 +1644,49 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — TROUVER l'intrus. Le premier item fait calculer une image et
+    // laisse l'élève conclure ; celui-ci pose trois racines et un imposteur, et
+    // demande lequel n'annule pas le produit. On ne peut y répondre qu'en
+    // regardant les trois parenthèses, ce qui est exactement ce qu'on veut
+    // qu'il fasse.
+    kind: "template",
+    id: "stmg_d3_verifier_racine_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_degre3",
+    microId: "fct_d3_verifier_racine",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une racine annule l'une des parenthèses : regarde ce que chaque nombre y produit.",
+    tags: ["stmg", "maths", "fonctions", "degre3", "template"],
+    generate: () => {
+      const r1 = randomInt(-4, -1);
+      const r2 = r1 + randomInt(1, 3);
+      const r3 = r2 + randomInt(1, 3);
+      const a = pick([1, 2, -1] as const);
+      // L'intrus est pris hors des trois racines, et l'on vérifie qu'il ne
+      // tombe sur aucune d'elles.
+      const intrus = pick([r1 - 1, r2 + 1, r3 + 1, r3 + 2, r1 - 2].filter((v) => v !== r1 && v !== r2 && v !== r3));
+      return {
+        text:
+          `Soit $f(x) = ${coef(a)}${facteur(r1)}${facteur(r2)}${facteur(r3)}$. ` +
+          `Parmi ces quatre nombres, lequel n'est PAS une racine de $f$ ?`,
+        format: "qcm",
+        choices: shuffle([`$${r1}$`, `$${r2}$`, `$${r3}$`, `$${intrus}$`]),
+        expected: [`$${intrus}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un produit est nul si, et seulement si, l'un de ses facteurs est nul : les racines d'une forme factorisée sont exactement les nombres qui annulent une parenthèse.",
+          "On regarde, pour chaque nombre, si l'une des trois parenthèses s'annule.",
+          `$${r1}$, $${r2}$ et $${r3}$ annulent chacun une parenthèse. ` +
+            `Pour $${intrus}$, aucune ne s'annule : $f(${intrus}) = ${fr(a * (intrus - r1) * (intrus - r2) * (intrus - r3))}$.`,
+          `Le nombre qui n'est pas racine est $${intrus}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ fct_eq_carre ═══════════════════ */
 
   {
@@ -898,6 +1720,52 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — les DEUX solutions, hors de tout contexte. Le premier item est
+    // une aire : la solution négative n'a pas de sens et l'élève l'écarte sans
+    // même l'avoir vue. Ici il n'y a plus de local à mesurer, et l'équation
+    // $x^2 = c$ rend bien deux nombres opposés. Les deux items disent ensemble
+    // ce que le programme demande : résoudre, PUIS regarder la situation.
+    kind: "template",
+    id: "stmg_eq_carre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_equations_puissance",
+    microId: "fct_eq_carre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Deux nombres opposés ont le même carré : ne garde pas seulement le positif.",
+    tags: ["stmg", "maths", "fonctions", "equations", "template"],
+    generate: () => {
+      const n = randomInt(3, 15);
+      const c = n * n;
+      return {
+        text: `Résous l'équation $x^2 = ${c}$.`,
+        format: "qcm",
+        choices: makeChoices(`$x = ${n}$ ou $x = -${n}$`, [
+          `$x = ${n}$`,
+          `$x = ${fr(c / 2)}$`,
+          `$x = ${c}$ ou $x = -${c}$`,
+          `il n'y a pas de solution`,
+        ]),
+        expected: [`$x = ${n}$ ou $x = -${n}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour $c > 0$, l'équation $x^2 = c$ admet DEUX solutions opposées : $\\sqrt{c}$ et $-\\sqrt{c}$. Elle n'en a aucune si $c < 0$, et une seule si $c = 0$.",
+          "On cherche le nombre positif dont le carré vaut $c$, puis on n'oublie pas son opposé.",
+          `$${n}^2 = ${c}$ et $(-${n})^2 = ${c}$ : les deux conviennent.`,
+          `Les solutions sont $${n}$ et $-${n}$. Dans un problème de longueur, seule la positive serait retenue — mais l'équation, elle, en a bien deux.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$x = ${n}$`,
+            cause: "n'a gardé que la solution positive alors qu'aucun contexte ne l'y oblige",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ fct_eq_cube ═══════════════════ */
 
   {
@@ -925,6 +1793,55 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
           `$${arete}^3 = ${arete} \\times ${arete} \\times ${arete} = ${volume}$.`,
           `L'arête mesure $${arete}$ cm.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — DIAGNOSTIQUER la solution en trop. Le premier item fait
+    // calculer une arête ; celui-ci met en scène l'élève qui applique au cube
+    // la règle du carré et ajoute une solution négative. C'est l'erreur que
+    // produit mécaniquement l'enchaînement des deux leçons.
+    kind: "template",
+    id: "stmg_eq_cube_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_equations_puissance",
+    microId: "fct_eq_cube",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Calcule $(-n)^3$ : le cube d'un nombre négatif est négatif.",
+    tags: ["stmg", "maths", "fonctions", "equations", "diagnostic", "template"],
+    generate: () => {
+      const n = randomInt(2, 10);
+      const c = n * n * n;
+      const bonne = `il se trompe : $(-${n})^3 = ${-c}$, et non $${c}$`;
+      return {
+        text:
+          `Un élève résout $x^3 = ${c}$ et répond : « $x = ${n}$ ou $x = -${n}$ ». ` +
+          `Qu'en penses-tu ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `il a raison : comme pour $x^2$, il y a deux solutions opposées`,
+          `il se trompe : l'équation $x^3 = ${c}$ n'a aucune solution`,
+          `il se trompe : la seule solution est $${fr(c / 3)}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le cube conserve le signe : $(-x)^3 = -x^3$. L'équation $x^3 = c$ n'admet donc qu'UNE seule solution réelle, quel que soit le signe de $c$ — contrairement à $x^2 = c$, qui en a deux quand $c > 0$.",
+          "On teste la solution négative proposée en l'élevant au cube.",
+          `$${n}^3 = ${c}$ : cette solution convient. Mais $(-${n})^3 = -${n} \\times -${n} \\times -${n} = ${-c}$, ` +
+            `qui n'est pas $${c}$ : la seconde solution est fausse.`,
+          `La seule solution est $${n}$ : $(-${n})^3$ vaut $${-c}$, et non $${c}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `il a raison : comme pour $x^2$, il y a deux solutions opposées`,
+            cause: "a transposé au cube une règle qui ne vaut que pour le carré",
+          },
+        ],
       };
     },
   },
@@ -971,6 +1888,56 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
           {
             choice: `$${fr(Math.round(Math.sqrt(c) * 100) / 100)}$`,
             cause: "a pris la racine carrée au lieu de la racine cubique",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — ÉCRIRE la solution qu'on ne sait pas calculer. Le premier item
+    // tombe sur un cube parfait et la racine cubique se devine ; ici le nombre
+    // n'en est pas un, et il ne reste que la NOTATION — ce que demande le
+    // libellé. C'est aussi ce qu'attend un correcteur : une valeur exacte, pas
+    // un arrondi de calculatrice.
+    kind: "template",
+    id: "stmg_eq_racine_cubique_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_equations_puissance",
+    microId: "fct_eq_racine_cubique",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La racine cubique de $c$ est le nombre dont le CUBE vaut $c$ : elle s'écrit $\\sqrt[3]{c}$.",
+    tags: ["stmg", "maths", "fonctions", "equations", "template"],
+    generate: () => {
+      // ⛔ Jamais un cube parfait : la question porte sur l'ÉCRITURE de la
+      // solution, et un nombre rond ferait basculer l'élève vers le calcul.
+      const c = pick([5, 7, 12, 20, 30, 50, 90, 150, 200, 500] as const);
+      const bonne = `$x = \\sqrt[3]{${c}}$`;
+      return {
+        text: `Quelle est la solution exacte de l'équation $x^3 = ${c}$ ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `$x = \\sqrt{${c}}$`,
+          `$x = ${c}^3$`,
+          `$x = \\dfrac{${c}}{3}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La racine cubique d'un réel positif $c$ est l'unique nombre dont le cube vaut $c$. On la note $\\sqrt[3]{c}$, ou encore $c^{\\frac{1}{3}}$ : les deux écritures désignent le même nombre.",
+          "On reconnaît l'équation $x^3 = c$ et l'on écrit sa solution avec la notation, sans chercher de valeur décimale.",
+          `$${c}$ n'est pas le cube d'un entier : la solution ne s'écrit pas simplement. ` +
+            `À la calculatrice, $\\sqrt[3]{${c}} \\approx ${fr(Math.round(Math.cbrt(c) * 100) / 100)}$, ` +
+            `mais la valeur EXACTE demandée est $\\sqrt[3]{${c}}$.`,
+          `La solution exacte est $\\sqrt[3]{${c}}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$x = \\dfrac{${c}}{3}$`,
+            cause: "a divisé par 3 : l'exposant $3$ n'est pas un facteur",
           },
         ],
       };
