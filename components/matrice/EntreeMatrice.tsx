@@ -288,7 +288,26 @@ export default function EntreeMatrice({
     return (CLASSES.find((p) => p.id === id)?.id as ProfilId | undefined) ?? null;
   }, [eleve?.classe]);
 
-  const [role, setRole] = useState<RoleId | null>(null);
+  /**
+   * ⭐ « ÉLÈVE » EST ALLUMÉ D'ENTRÉE (Frédéric, 20/08/2026).
+   *
+   * La rangée des rôles partait vide, et les deux rangées suivantes — la classe,
+   * la matière — n'existaient donc pas tant qu'on n'avait pas cliqué. Le premier
+   * écran ne montrait qu'une question et quatre pastilles : il fallait un clic
+   * pour découvrir qu'on pouvait dire sa classe. Neuf visiteurs sur dix sont des
+   * élèves, et c'est déjà le défaut de tout le reste du site (voir
+   * `useAudience` : « Défaut : espace élève (= tout le monde) »).
+   *
+   * ⛔ ET ÇA NE PRÉSÉLECTIONNE AUCUNE CLASSE. La distinction est toute la
+   * nuance : dire « tu es sans doute un élève » est vrai de presque tout le
+   * monde et se corrige d'un clic ; dire « tu es sans doute en 6ᵉ » est faux de
+   * onze douzièmes des élèves — c'était l'ancien défaut technique, qui montrait
+   * le monde d'un sixième à un lycéen avant son premier geste. `classe` part
+   * donc toujours de `null`, et le moteur ne répond rien avant qu'elle soit
+   * dite. Même règle pour la matière : une matière allumée d'office serait un
+   * filtre que personne n'a demandé.
+   */
+  const [role, setRole] = useState<RoleId | null>("eleve");
   const [classe, setClasse] = useState<ProfilId | null>(null);
 
   // Un clic fait DANS CETTE VISITE : il gagne sur tout le reste, y compris sur
@@ -453,8 +472,76 @@ export default function EntreeMatrice({
    * pas estimé — et une rangée qui déborde annule tout le travail de
    * compactage. On garde donc trois chips quand il y en a trois derrière.
    */
-  const raccourcis =
-    (concours.length > 0 ? 1 : 0) + (guides.length > 0 ? 1 : 0) + (cahiers.length > 0 ? 1 : 0);
+  /**
+   * ⛔ « LES MATHS EN VRAI » NE SE COMPTAIT PAS (corrigé le 20/08/2026).
+   *
+   * Elle est arrivée dans la rangée le 12/08, à la place laissée par la
+   * pastille « Photographier un cours » — et elle est arrivée SEULE, sans
+   * entrer dans `raccourcis`. La règle « chaque pastille prend la place d'une
+   * chip » ne la voyait donc pas : du CM1 à la Terminale, la rangée montait à
+   * trois chips PLUS quatre pastilles PLUS « Plus d'options », c'est-à-dire les
+   * huit éléments que la note d'en dessous dit de ne jamais atteindre.
+   * C'est ce que l'audit du 20/08 a constaté de l'extérieur — « 6 boutons +
+   * Plus d'options (3) » — sans pouvoir en nommer la cause.
+   */
+  const mathsEnVrai =
+    !!profil &&
+    ["cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"].includes(profil);
+
+  /**
+   * LES RACCOURCIS, EN LISTE ORDONNÉE ET NON PLUS EN COMPTEUR (20/08/2026).
+   *
+   * Ils étaient quatre `&&` posés à la suite dans le JSX, donc quatre pastilles
+   * qui s'affichaient toutes ou rien : le compteur `raccourcis` servait à
+   * retirer des CHIPS pour leur faire de la place, mais eux-mêmes n'entraient
+   * jamais sous le pli. Avec le plancher de trois chips, la rangée montait
+   * mécaniquement à sept éléments — mesuré à l'écran le 20/08, « M'entraîner »
+   * rogné à gauche et « Autres options » coupé à droite.
+   * En liste, ils obéissent au même budget que les chips.
+   *
+   * ⚠️ L'ORDRE EST CELUI DU 07/08, à une place près : le concours d'abord (il a
+   * une DATE et il expire), puis le guide, puis les cahiers. « Les maths en
+   * vrai » passe en dernier — c'est la seule des quatre qui ne soit pas
+   * attachée à la scolarité de la personne (son concours, son guide, son
+   * cahier), et c'est celle qui s'était ajoutée sans budget.
+   */
+  const raccourcis = useMemo(() => {
+    const l: { cle: string; href: string; label: string; evenement: string; couleur?: string }[] = [];
+    if (concours.length > 0)
+      l.push({
+        cle: "concours",
+        href: `${concours[0].href}?from=ia`,
+        label: "🏆 Concours",
+        evenement: "ia_concours",
+        // La SEULE pastille encore colorée, et pour une raison qui se dit en un
+        // mot : elle expire. Le guide et les cahiers, eux, sont là toute l'année.
+        couleur: surAccueil
+          ? "border-2 border-[#a34c07] bg-[#a34c07]/10 text-[#a34c07] hover:bg-[#a34c07]/20"
+          : "border border-amber-500 bg-amber-50 text-amber-900 hover:bg-amber-100",
+      });
+    if (guides.length > 0)
+      l.push({
+        cle: "guide",
+        href: `${hrefGuide}${hrefGuide.includes("?") ? "&" : "?"}from=ia`,
+        label: "🆘 Guide",
+        evenement: "ia_guide",
+      });
+    if (cahiers.length > 0)
+      l.push({
+        cle: "cahiers",
+        href: `${urlCahierPour(profil)}?from=ia`,
+        label: "📒 Cahiers",
+        evenement: "ia_cahier",
+      });
+    if (mathsEnVrai)
+      l.push({
+        cle: "maths-974",
+        href: "/maths-974?from=ia",
+        label: "Les maths en vrai",
+        evenement: "ia_maths_reel",
+      });
+    return l;
+  }, [concours, guides, cahiers, mathsEnVrai, hrefGuide, profil, surAccueil]);
 
   // ⭐ LA PASTILLE CONCOURS S'INSÈRE EN 5ᵉ POSITION (Frédéric, 07/08 : « le
   // concours arrive en 5ᵉ position ! »). L'ordre de la rangée suit les outils :
@@ -479,11 +566,29 @@ export default function EntreeMatrice({
   const MINIMUM_CHIPS = 3;
   const chips = useMemo(() => {
     if (plusDOptions) return toutesLesChips;
-    return toutesLesChips.slice(0, Math.max(MINIMUM_CHIPS, CHIPS_VISIBLES - raccourcis));
-  }, [toutesLesChips, plusDOptions, raccourcis]);
+    return toutesLesChips.slice(0, Math.max(MINIMUM_CHIPS, CHIPS_VISIBLES - raccourcis.length));
+  }, [toutesLesChips, plusDOptions, raccourcis.length]);
 
-  /** Combien restent derrière « Plus d'options ». */
-  const restantes = toutesLesChips.length - chips.length;
+  /**
+   * ⭐ LE BUDGET EST COMMUN AUX CHIPS ET AUX RACCOURCIS (20/08/2026).
+   *
+   * `CHIPS_VISIBLES` disait « cinq pastilles tiennent sur une ligne
+   * d'ordinateur » — mais il ne comptait que les chips, et les raccourcis
+   * s'ajoutaient par-dessus. Cinq voulait donc dire cinq, six, sept ou huit
+   * selon la classe. Le budget porte maintenant sur TOUT ce qui est rond dans
+   * cette rangée ; le bouton « Autres options » vient après, et lui seul.
+   *
+   * ⚠️ Les chips servent en premier (plancher de trois) : c'est la rangée qui
+   * dit ce qu'on peut FAIRE. Les raccourcis prennent ce qui reste.
+   */
+  const raccourcisVisibles = useMemo(
+    () => (plusDOptions ? raccourcis : raccourcis.slice(0, Math.max(0, CHIPS_VISIBLES - chips.length))),
+    [raccourcis, chips.length, plusDOptions],
+  );
+
+  /** Combien restent derrière « Autres options » — chips ET raccourcis. */
+  const restantes =
+    toutesLesChips.length - chips.length + (raccourcis.length - raccourcisVisibles.length);
 
   /** Les actions ÉCRITES du professeur et du chef d'établissement. */
   const actions = useMemo(() => (profil ? actionsPour(profil) : []), [profil]);
@@ -892,7 +997,14 @@ export default function EntreeMatrice({
 
   return (
     <section
-      aria-label="Que veux-tu faire aujourd'hui ?"
+      // ⚠️ CE NOM ACCESSIBLE TUTOYAIT EN DUR (corrigé le 20/08/2026). Depuis
+      // que l'intitulé visible du champ a été retiré (19/08), c'est LUI que le
+      // lecteur d'écran annonce en entrant dans le bloc — donc le seul endroit
+      // où un enseignant entendait « Que veux-tu faire aujourd'hui ? ». Un texte
+      // invisible reste un texte : il suit `tutoie` comme les autres.
+      aria-label={
+        tutoie ? "Que veux-tu faire aujourd'hui ?" : "Que voulez-vous faire aujourd'hui ?"
+      }
       className={
         surAccueil
           ? "mx-auto mb-4 w-full min-w-0 max-w-6xl border-2 border-[#1d1c16] bg-white/60 px-4 py-4 sm:px-6"
@@ -1137,118 +1249,41 @@ export default function EntreeMatrice({
               );
             })}
 
-            {/* ⭐ LES MATHS EN VRAI — cette place a d'abord été celle de
-                « Photographier un cours », le 12/08, quand la chip « Préparer
-                un contrôle » a été retirée aux élèves (voir chips.ts).
-                Elle a tenu deux heures : la photo est devenue une CARTE le
-                même soir, en troisième position, et l'outil se retrouvait
-                DEUX FOIS sur le même écran, à dix centimètres près. Frédéric
-                a tranché — « garde la carte et enlève la pastille » — et la
-                place revient au réel de l'île.
-                🔑 Ce qu'on retient : une carte porte un titre, une promesse et
-                un pictogramme ; une pastille porte un mot. Quand les deux
-                mènent au même endroit, c'est la pastille qui s'efface.
+            {/* ⭐ LES RACCOURCIS — concours, guide, cahiers, maths en vrai.
+                Ils ne filtrent rien : ils OUVRENT une page. C'est ce qui les
+                sépare des chips, et c'est pourquoi ils ne peuvent pas venir de
+                `chipsDisponibles`. Leur liste et leur ordre se calculent en
+                tête de composant (`raccourcis`).
 
-                ⚠️ CM1 ET CM2 COMPRIS, contrairement à la photo : les maths en
-                vrai ne demandent ni compte, ni téléphone, ni lecture d'adulte.
-                Ce sont les niveaux de la ressource elle-même — au-dessous,
-                elle n'existe pas. Le parent, lui, n'en a pas : il a sa carte.
+                🔑 CE QU'ON RETIENT DU 12/08, et qui vaut toujours : une carte
+                porte un titre, une promesse et un pictogramme ; une pastille
+                porte un mot. Quand les deux mènent au même endroit, c'est la
+                pastille qui s'efface — c'est comme ça que « Photographier un
+                cours » a quitté cette rangée pour devenir une carte.
 
-                ⚠️ POUR UN ÉLÈVE, `profil` EST SA CLASSE — elle vaut `null`
-                tant qu'il ne l'a pas choisie, et la pastille n'apparaît donc
-                qu'après. C'est déjà le cas de « Guide de survie »
-                (`guidesPour` renvoie une liste vide sans classe). */}
-            {profil &&
-              [
-                "cm1",
-                "cm2",
-                "6e",
-                "5e",
-                "4e",
-                "3e",
-                "seconde",
-                "premiere",
-                "terminale",
-              ].includes(profil) && (
-                <Link
-                  href="/maths-974?from=ia"
-                  prefetch={false}
-                  onClick={() => track("ia_maths_reel", { profil })}
-                  className={`rounded-full px-3 py-1.5 text-[13px] transition ${
-                    surAccueil
-                      ? "border-2 border-[#1d1c16]/25 bg-white/70 text-[#1d1c16]/80 hover:border-[#1d1c16]/60"
-                      : "border border-slate-300 bg-white text-slate-600 hover:border-slate-500"
-                  }`}
-                >
-                  Les maths en vrai
-                </Link>
-              )}
+                ⚠️ ILS PASSENT SOUS « AUTRES OPTIONS » COMME LES CHIPS depuis le
+                20/08 : ils étaient quatre `&&` empilés, qui s'ajoutaient à une
+                rangée déjà pleine au lieu d'y prendre place.
 
-            {/* ⭐ CONCOURS À VENIR — Terminale + Mathématiques, et rien d'autre.
-                Une pastille, pas une carte : elle ouvre `/concours-avenir`, qui
-                existe depuis des mois avec ses dix épreuves blanches. J'avais
-                écrit une page `/concours` pour porter les dates — Frédéric l'a
-                écartée le 07/08, et il a raison : deux pages pour un concours,
-                c'est celle qui a le contenu qu'on finit par ne plus mettre à
-                jour.
-                S'il ne reste aucun concours ouvert, `afficherConcours` renvoie
-                une liste vide et cette pastille n'existe pas — pas de rubrique
-                vide. */}
-            {concours.length > 0 && (
+                ⚠️ POUR UN ÉLÈVE, `profil` EST SA CLASSE — elle vaut `null` tant
+                qu'il ne l'a pas choisie, et aucun raccourci n'apparaît donc
+                avant. C'est vrai des quatre, par construction. */}
+            {raccourcisVisibles.map((rc) => (
               <Link
-                href={`${concours[0].href}?from=ia`}
+                key={rc.cle}
+                href={rc.href}
                 prefetch={false}
-                onClick={() => track("ia_concours", { profil: profil ?? "inconnu" })}
-                className={`rounded-full px-3 py-1.5 text-[13px] font-medium transition ${
-                  surAccueil
-                    ? "border-2 border-[#a34c07] bg-[#a34c07]/10 text-[#a34c07] hover:bg-[#a34c07]/20"
-                    : "border border-amber-500 bg-amber-50 text-amber-900 hover:bg-amber-100"
+                onClick={() => track(rc.evenement, { profil: profil ?? "inconnu" })}
+                className={`rounded-full px-3 py-1.5 text-[13px] transition ${
+                  rc.couleur ??
+                  (surAccueil
+                    ? "border-2 border-[#1d1c16]/25 bg-white/70 text-[#1d1c16]/80 hover:border-[#1d1c16]/60"
+                    : "border border-slate-300 bg-white text-slate-600 hover:border-slate-500")
                 }`}
               >
-                🏆 Concours
+                {rc.label}
               </Link>
-            )}
-
-            {/* ⭐ LE GUIDE DE SURVIE — celui de SA classe quand il n'y en a
-                qu'un, le sommaire filtré sur sa classe quand elle en a
-                plusieurs (`?niveau=`). Absent au CP, au CE1 et au CE2 : ils
-                n'en ont aucun, et une pastille qui mène à dix-neuf cartes dont
-                aucune n'est la sienne, c'est pire que pas de pastille. */}
-            {guides.length > 0 && (
-              <Link
-                href={`${hrefGuide}${hrefGuide.includes("?") ? "&" : "?"}from=ia`}
-                prefetch={false}
-                onClick={() => track("ia_guide", { profil: profil ?? "inconnu" })}
-                className={`rounded-full px-3 py-1.5 text-[13px] font-medium transition ${
-                  surAccueil
-                    ? "border-2 border-[#3f6b0c] bg-[#3f6b0c]/10 text-[#3f6b0c] hover:bg-[#3f6b0c]/20"
-                    : "border border-lime-600 bg-lime-50 text-lime-900 hover:bg-lime-100"
-                }`}
-              >
-                🆘 Guide
-              </Link>
-            )}
-
-            {/* ⭐ LES CAHIERS DE VACANCES — c'est par eux que la plupart des
-                visiteurs arrivent sur le site, et ils n'avaient aucune porte
-                depuis l'entrée. Un élève en a presque toujours deux : celui
-                qu'il finit et celui qui l'attend. On ouvre donc le sommaire
-                plutôt que de choisir à sa place s'il révise l'année écoulée ou
-                prépare la suivante. */}
-            {cahiers.length > 0 && (
-              <Link
-                href={`${urlCahierPour(profil)}?from=ia`}
-                prefetch={false}
-                onClick={() => track("ia_cahier", { profil: profil ?? "inconnu" })}
-                className={`rounded-full px-3 py-1.5 text-[13px] font-medium transition ${
-                  surAccueil
-                    ? "border-2 border-[#0e7490]/50 bg-[#0e7490]/10 text-[#0e7490] hover:bg-[#0e7490]/20"
-                    : "border border-sky-500 bg-sky-50 text-sky-900 hover:bg-sky-100"
-                }`}
-              >
-                📒 Cahiers
-              </Link>
-            )}
+            ))}
 
             {(restantes > 0 || plusDOptions) && (
               <button
@@ -1258,7 +1293,14 @@ export default function EntreeMatrice({
                   surAccueil ? "text-[#1d1c16]/60 hover:text-[#1d1c16]" : "text-slate-500 hover:text-slate-800"
                 }`}
               >
-                {plusDOptions ? "Moins d'options" : `Plus d'options (${restantes})`}
+                {/* ⚠️ « AUTRES OPTIONS », SANS LE COMPTE (20/08/2026). Le
+                    « (3) » chiffrait ce qu'on cache, pas ce qu'on ouvre : il se
+                    lisait comme un badge de notification — trois choses en
+                    attente — alors que ces trois-là sont précisément celles
+                    qu'on a jugées moins utiles ici. Et le nombre changeait à
+                    chaque clic de matière, ce qui faisait bouger la largeur du
+                    bouton sous le doigt. */}
+                {plusDOptions ? "Moins d'options" : "Autres options"}
               </button>
             )}
           </div>
@@ -1287,7 +1329,7 @@ export default function EntreeMatrice({
       {/* Une barre vide, c'est la page blanche. On souffle trois départs —
           mais seulement tant qu'il n'y a rien d'autre à lire à cet endroit. */}
       {!resultat && !demandeProfil && exemples.length > 0 && (
-        <p className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs text-[#1d1c16]/60">
+        <p className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs text-[#1d1c16]/70">
           <span>Par exemple :</span>
           {exemples.map((ex) => (
             <button
@@ -1316,7 +1358,7 @@ export default function EntreeMatrice({
               de classe, « je n'ai pas bien compris la demande » reprocherait un
               silence. On annonce alors ce que c'est — un point de départ. */}
           {!resultat.lecture.notionId && !resultat.lecture.intention && !matiereChoisie ? (
-            <p className="mb-2.5 text-center text-xs text-[#1d1c16]/55">
+            <p className="mb-2.5 text-center text-xs text-[#1d1c16]/65">
               {question.trim()
                 ? "Je n'ai pas bien compris la demande — voici par où "
                 : "Par où "}
@@ -1324,7 +1366,7 @@ export default function EntreeMatrice({
               <span className="text-[#1d1c16]">{labelClasseAdulte ?? p.label}</span>.
             </p>
           ) : (
-            <p className="mb-2.5 text-center text-xs text-[#1d1c16]/55">
+            <p className="mb-2.5 text-center text-xs text-[#1d1c16]/65">
               Ce que j&apos;ai compris :{" "}
               <span className="text-[#1d1c16]">
                 {[
@@ -1367,12 +1409,20 @@ export default function EntreeMatrice({
                 Je n&apos;ai rien de vérifié à {p.tutoie ? "te" : "vous"} proposer là-dessus pour{" "}
                 {p.label}.
               </p>
+              {/* ⚠️ CES DEUX VERBES TUTOYAIENT TOUT LE MONDE (corrigé le
+                  20/08/2026). Le paragraphe juste au-dessus dit bien « vous
+                  proposer » à un parent — et deux lignes plus bas on lui
+                  répondait « Essaie de le dire autrement ». C'était le dernier
+                  texte de l'écran à ignorer `p.tutoie`, et il tombait au pire
+                  moment : celui où l'on vient de ne rien trouver. */}
               <p className="mt-2 text-sm text-[#1d1c16]/70">
                 C&apos;est noté — c&apos;est comme ça qu&apos;on sait quoi construire ensuite.
-                Essaie de le dire autrement, ou choisis une entrée ci-dessus.
+                {p.tutoie
+                  ? " Essaie de le dire autrement, ou choisis une entrée ci-dessus."
+                  : " Essayez de le dire autrement, ou choisissez une entrée ci-dessus."}
               </p>
               {resultat.lecture.motsInconnus.length > 0 && (
-                <p className="mt-2 text-xs text-[#1d1c16]/45">
+                <p className="mt-2 text-xs text-[#1d1c16]/70">
                   Mots que je n&apos;ai pas reconnus : {resultat.lecture.motsInconnus.join(", ")}
                 </p>
               )}
@@ -1402,7 +1452,14 @@ export default function EntreeMatrice({
                     // personne n'ouvre.
                     prefetch={false}
                     onClick={() => track("ia_ressource", { id: r.ressource.id, rang: i + 1, profil: p.id })}
-                    className={`block h-full border-2 bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16] ${
+                    // ⭐ COLONNE FLEX, ET NON UN SIMPLE `block` (20/08/2026).
+                    // Les trois cartes sont d'égale hauteur (grille), donc la
+                    // plus courte creusait un vide en bas pendant que sa voisine
+                    // était pleine — et la ligne de raison flottait à une
+                    // hauteur différente sur chaque carte. En colonne, c'est la
+                    // PROMESSE qui prend le mou (`flex-1`) et la raison qui se
+                    // pose au même endroit sur les trois.
+                    className={`flex h-full flex-col border-2 bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16] ${
                       i === 0 ? "border-[#0e7490]" : "border-[#1d1c16]/30"
                     }`}
                   >
@@ -1415,26 +1472,76 @@ export default function EntreeMatrice({
                         côte à côte se neutraliseraient, et la carte perdrait
                         la place de sa promesse. `aria-hidden` — le titre dit
                         déjà tout à qui n'y voit pas. */}
-                    {r.ressource.icone === "camera" && (
-                      <div className="mb-2 flex h-14 items-center justify-center rounded border border-[#1d1c16]/10 bg-[#1d1c16]/[0.04]">
-                        <svg
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          aria-hidden="true"
-                          className="h-7 w-7 text-[#1d1c16]/40"
-                        >
-                          <path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.2a1.5 1.5 0 0 0 1.3-.75l.7-1.2A1.5 1.5 0 0 1 10 4.3h4a1.5 1.5 0 0 1 1.3.75l.7 1.2A1.5 1.5 0 0 0 17.3 7h2.2A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z" />
-                          <circle cx="12" cy="13" r="3.4" />
-                        </svg>
-                      </div>
-                    )}
-                    <div className="flex items-start justify-between gap-2">
-                      <p className="font-bold text-[#1d1c16]">{r.ressource.titre}</p>
+                    {/* ⚠️ UNE PASTILLE, PLUS UNE BANDE (20/08/2026). Le
+                        pictogramme vivait dans un rectangle pleine largeur de
+                        56 px de haut, bordé et grisé, avec une petite icône
+                        pâle au milieu : la forme exacte d'une image qui n'a pas
+                        chargé. Sur la seule carte censée dire « il y a une
+                        photo à prendre », l'écran répondait « il manque une
+                        photo ». Même icône, même intention, dans une pastille
+                        de 38 px qui ne peut pas se lire comme un cadre vide. */}
+                    {/* ⭐ LE BADGE MONTE SUR LA LIGNE DU PICTOGRAMME (20/08/2026),
+                        IL NE PARTAGE PLUS SA LIGNE AVEC LE TITRE.
+                        Un badge `shrink-0 whitespace-nowrap` posé à droite du
+                        titre lui prenait 110 px inamovibles : dans une colonne
+                        de tiers d'écran, « Le coach maths » se cassait en TROIS
+                        lignes et « Photographier un cours » aussi. Le titre a
+                        maintenant toute la largeur, et il tient sur une ligne
+                        dès que la place existe.
+                        ⚠️ `h-9` MÊME SANS PICTOGRAMME : cette ligne est la même
+                        sur les trois cartes, donc les trois titres commencent à
+                        la même hauteur. Sans hauteur fixe, la carte à l'appareil
+                        photo décalait son titre de 16 px vers le bas. */}
+                    <div className="mb-2 flex h-9 items-center justify-between gap-2">
+                      {/* ⭐ LE PICTOGRAMME DU GESTE (Frédéric, 12/08 : « comme
+                          sur Le Bon Coin »). Un appareil photo dit « il y a une
+                          photo à prendre » avant qu'on ait lu le titre — et
+                          « photographier » est le seul geste PHYSIQUE de toute
+                          la rangée, donc le seul qui gagne à être dessiné.
+                          ⚠️ UNE PASTILLE, PLUS UNE BANDE (20/08). Il vivait dans
+                          un rectangle pleine largeur de 56 px de haut, bordé et
+                          grisé, avec une petite icône pâle au milieu : la forme
+                          exacte d'une image qui n'a pas chargé. Sur la seule
+                          carte censée dire « il y a une photo à prendre »,
+                          l'écran répondait « il manque une photo ».
+                          ⚠️ Discret et sur une seule carte : trois vignettes
+                          côte à côte se neutraliseraient. `aria-hidden` — le
+                          titre dit déjà tout à qui n'y voit pas. */}
+                      {r.ressource.icone === "camera" ? (
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0e7490]/10">
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.7"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            aria-hidden="true"
+                            className="h-5 w-5 text-[#0e7490]"
+                          >
+                            <path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.2a1.5 1.5 0 0 0 1.3-.75l.7-1.2A1.5 1.5 0 0 1 10 4.3h4a1.5 1.5 0 0 1 1.3.75l.7 1.2A1.5 1.5 0 0 0 17.3 7h2.2A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z" />
+                            <circle cx="12" cy="13" r="3.4" />
+                          </svg>
+                        </span>
+                      ) : (
+                        <span aria-hidden="true" />
+                      )}
+                      {/* ⭐ LES DEUX BADGES RESTENT, MAIS ILS SE DISENT
+                          (20/08/2026). Un audit demandait d'en choisir UN, au
+                          motif que deux mots pour une idée sèment le doute. Ce
+                          ne sont pas deux mots pour une idée : « vérifiée » veut
+                          dire qu'un enseignant l'a relue, « testée en classe »
+                          qu'elle est en plus passée devant des élèves. La
+                          seconde contient la première, elle ne la répète pas —
+                          et c'est exactement la promesse du site.
+                          Ce qui manquait, c'est que la différence n'était écrite
+                          NULLE PART : le `title` la dit à qui s'arrête dessus. */}
                       <span
+                        title={
+                          r.ressource.statut === "testee_eleves"
+                            ? "Relue par un enseignant, et déjà utilisée avec des élèves."
+                            : "Relue par un enseignant avant d'être publiée."
+                        }
                         className={`shrink-0 whitespace-nowrap px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
                           r.ressource.statut === "testee_eleves"
                             ? "bg-[#3f6b0c]/12 text-[#3f6b0c]"
@@ -1444,15 +1551,32 @@ export default function EntreeMatrice({
                         {r.ressource.statut === "testee_eleves" ? "testée en classe" : "vérifiée"}
                       </span>
                     </div>
-                    <p className="mt-1 text-sm text-[#1d1c16]/75">{r.ressource.promesse}</p>
-                    <p className="mt-1.5 text-xs text-[#1d1c16]/50">
-                      {r.ciblee && resultat.lecture.notionLabel ? (
-                        <span className="text-[#0e7490]">
-                          s&apos;ouvre sur {resultat.lecture.notionLabel} —{" "}
-                        </span>
-                      ) : null}
-                      {r.raison}
-                    </p>
+                    {/* Le titre a la ligne pour lui seul — voir la note du bloc
+                        au-dessus. `text-balance` pour que, s'il doit tout de
+                        même passer à deux lignes sur téléphone, la coupure
+                        tombe au milieu et non après le premier mot. */}
+                    <p className="text-balance font-bold text-[#1d1c16]">{r.ressource.titre}</p>
+                    {/* `flex-1` : c'est la promesse qui absorbe la différence de
+                        hauteur entre les trois cartes, pas un vide en bas. */}
+                    <p className="mt-1 flex-1 text-sm text-[#1d1c16]/75">{r.ressource.promesse}</p>
+                    {/* ⚠️ LA LIGNE N'EXISTE QUE S'IL Y A QUELQUE CHOSE À Y
+                        METTRE. Depuis que `raisonner` ne réécrit plus le niveau
+                        sous chaque carte (moteur.ts, 20/08), `r.raison` peut
+                        être vide — un <p> vide laisserait une ligne blanche
+                        sous la promesse, ce qu'on vient justement de retirer.
+                        ⚠️ `/65` et non `/50` : #1d1c16 à 50 % sur blanc, c'est
+                        3,4:1, sous le seuil AA. À 65 % on est à 5,3:1. */}
+                    {(r.raison || (r.ciblee && resultat.lecture.notionLabel)) && (
+                      <p className="mt-1.5 text-xs text-[#1d1c16]/65">
+                        {r.ciblee && resultat.lecture.notionLabel ? (
+                          <span className="text-[#0e7490]">
+                            s&apos;ouvre sur {resultat.lecture.notionLabel}
+                            {r.raison ? " — " : ""}
+                          </span>
+                        ) : null}
+                        {r.raison}
+                      </p>
+                    )}
                   </Link>
                 </li>
               ))}

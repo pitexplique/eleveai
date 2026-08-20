@@ -29,7 +29,6 @@ import type {
   LectureDemande,
   Recommandation,
   ResultatMatrice,
-  RessourceEleveAI,
   VecteurEntree,
 } from "./types";
 
@@ -154,7 +153,6 @@ export function libelleIntention(i: Intention): string {
 }
 
 function raisonner(
-  r: RessourceEleveAI,
   rangNiveau: number,
   notionOk: boolean,
   intentionOk: boolean,
@@ -171,15 +169,31 @@ function raisonner(
   const bouts: string[] = [];
   if (notionOk) bouts.push("sur la notion demandée");
   if (intentionOk && intention) bouts.push(`pour ${LIBELLE_INTENTION[intention]}`);
-  // On ne dit « à ton niveau » qu'à un élève : un parent n'a pas de niveau.
-  if (eleve && rangNiveau === 0) bouts.push("à ton niveau");
-  else if (eleve && rangNiveau > 0) bouts.push("au niveau juste en dessous");
-  // Un adulte, lui, a le niveau de la classe qu'il a dite — et le nommer est la
-  // seule façon de lui montrer qu'on l'a entendu.
-  else if (libelleClasse && rangNiveau === 0) bouts.push(`au niveau ${libelleClasse}`);
-  else if (libelleClasse && rangNiveau > 0) bouts.push("au niveau juste en dessous");
-  if (r.testeeAvec) bouts.push("déjà utilisée en classe");
-  return bouts.length ? bouts.join(", ") : "disponible pour ce profil";
+
+  // ⛔ « À TON NIVEAU » NE SORT PLUS QUAND LE NIVEAU EST LE BON (20/08/2026).
+  //
+  // Cette phrase s'écrivait sous LES TROIS cartes à la fois — et le niveau est
+  // un filtre DUR : aucune ressource ne remonte s'il ne colle pas. Une mention
+  // vraie sur tout ce qu'on affiche ne distingue rien ; elle occupe la seule
+  // ligne où une carte avait quelque chose à dire pour elle-même. L'en-tête la
+  // porte déjà, une fois : « Par où tu peux commencer en Terminale », ou
+  // « Ce que j'ai compris : Terminale · … ».
+  //
+  // ⚠️ « AU NIVEAU JUSTE EN DESSOUS », ELLE, RESTE. Celle-là n'est PAS dans
+  // l'en-tête et n'est pas vraie de toutes les cartes : c'est un avertissement
+  // — la ressource ne vient pas de l'année en cours. La retirer avec l'autre
+  // reviendrait à faire passer un contenu de 4ᵉ pour un contenu de 3ᵉ.
+  if (rangNiveau > 0 && (eleve || libelleClasse)) bouts.push("au niveau juste en dessous");
+
+  // ⛔ ET « DÉJÀ UTILISÉE EN CLASSE » NON PLUS : c'est mot pour mot le badge
+  // « testée en classe » posé trois centimètres au-dessus, sur la MÊME carte.
+  // Deux fois la même preuve ne fait pas une preuve plus solide — elle fait
+  // douter qu'on parle de la même chose.
+
+  // ⚠️ CHAÎNE VIDE ET NON « disponible pour ce profil ». Ce repli ne disait rien
+  // que la carte ne dise déjà (elle est affichée, donc elle est disponible) ;
+  // la carte n'affiche simplement pas la ligne quand il n'y a rien à y mettre.
+  return bouts.join(", ");
 }
 
 export function chercher(vecteur: VecteurEntree): ResultatMatrice {
@@ -371,20 +385,23 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
       ressource: r,
       score,
       // Quand c'est le calendrier qui la fait remonter, on le DIT. Sinon la
-      // raison affichée (« à ton niveau ») ne colle pas à la place occupée, et
-      // c'est exactement le genre de décalage qui fait passer une
-      // recommandation pour un hasard.
-      raison: deSaison
-        ? `c'est la saison — ${raisonner(r, rangNiveau, notionOk, intentionOk, intention, profil.groupe === "eleve", parLaClasse ? (profilClasse?.label ?? null) : null)}`
-        : raisonner(
-            r,
-            rangNiveau,
-            notionOk,
-            intentionOk,
-            intention,
-            profil.groupe === "eleve",
-            parLaClasse ? (profilClasse?.label ?? null) : null,
-          ),
+      // raison affichée ne colle pas à la place occupée, et c'est exactement le
+      // genre de décalage qui fait passer une recommandation pour un hasard.
+      //
+      // ⚠️ ON ASSEMBLE, ON NE CONCATÈNE PLUS (20/08/2026). Depuis que
+      // `raisonner` peut rendre une chaîne vide — le niveau juste ne s'écrit
+      // plus, l'en-tête le porte — un gabarit « c'est la saison — ${…} »
+      // laissait un tiret cadratin suspendu dans le vide sous la carte.
+      raison: [deSaison ? "c'est la saison" : null, raisonner(
+        rangNiveau,
+        notionOk,
+        intentionOk,
+        intention,
+        profil.groupe === "eleve",
+        parLaClasse ? (profilClasse?.label ?? null) : null,
+      ) || null]
+        .filter(Boolean)
+        .join(" — "),
       url: url ?? r.url,
       ciblee: viseNotion,
     });
