@@ -44,21 +44,33 @@ const modelise = (
 );
 
 // L'anatomie d'une expression : coefficient, partie littérale, terme constant.
+//
+// ⛔ « COEFFICIENT » ET « LETTRE » SE CHEVAUCHAIENT (Frédéric, 20/08, capture à
+// l'appui : on lisait « coefficielettrent »). Les deux légendes partaient sous
+// l'expression, à 26 px l'une de l'autre, pour des mots de 75 et 40 px. Sa
+// consigne, appliquée : les deux légendes du BAS restent en bas — coefficient
+// et terme constant, qui ont la place — et la LETTRE passe au-dessus, avec une
+// flèche qui descend sur elle.
 const anatomie = (
-  <svg viewBox="0 0 320 150" className="h-auto w-full" role="img" aria-label="Anatomie de l'expression 3x + 2">
-    <text x="60" y="70" fill="#2563eb" fontSize="46" fontWeight="800">3</text>
-    <text x="92" y="70" fill="#0f172a" fontSize="46" fontWeight="800">x</text>
-    <text x="132" y="70" fill="#0f172a" fontSize="46" fontWeight="800">+</text>
-    <text x="176" y="70" fill="#16a34a" fontSize="46" fontWeight="800">2</text>
-    <text x="40" y="110" fill="#2563eb" fontSize="15" fontWeight="700">coefficient</text>
-    <text x="86" y="110" fill="#0f172a" fontSize="15" fontWeight="700">lettre</text>
-    <text x="150" y="130" fill="#16a34a" fontSize="15" fontWeight="700">terme constant</text>
-    <line x1="66" y1="80" x2="66" y2="98" stroke="#2563eb" strokeWidth="2" />
-    <line x1="100" y1="80" x2="100" y2="98" stroke="#0f172a" strokeWidth="2" />
-    <line x1="186" y1="80" x2="186" y2="118" stroke="#16a34a" strokeWidth="2" />
+  <svg viewBox="0 0 320 180" className="h-auto w-full" role="img" aria-label="Anatomie de l'expression 3x + 2">
+    {/* La lettre, annoncée par le haut */}
+    <text x="100" y="30" fill="#0f172a" fontSize="15" fontWeight="700" textAnchor="middle">lettre</text>
+    <line x1="100" y1="38" x2="100" y2="68" stroke="#0f172a" strokeWidth="2" />
+    <polyline points="94,60 100,70 106,60" fill="none" stroke="#0f172a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+
+    {/* L'expression */}
+    <text x="60" y="118" fill="#2563eb" fontSize="46" fontWeight="800">3</text>
+    <text x="92" y="118" fill="#0f172a" fontSize="46" fontWeight="800">x</text>
+    <text x="132" y="118" fill="#0f172a" fontSize="46" fontWeight="800">+</text>
+    <text x="176" y="118" fill="#16a34a" fontSize="46" fontWeight="800">2</text>
+
+    {/* Les deux légendes du bas, chacune sous SON terme */}
+    <line x1="70" y1="128" x2="70" y2="146" stroke="#2563eb" strokeWidth="2" />
+    <text x="70" y="164" fill="#2563eb" fontSize="15" fontWeight="700" textAnchor="middle">coefficient</text>
+    <line x1="186" y1="128" x2="186" y2="146" stroke="#16a34a" strokeWidth="2" />
+    <text x="216" y="164" fill="#16a34a" fontSize="15" fontWeight="700" textAnchor="middle">terme constant</text>
   </svg>
 );
-
 // Termes semblables : 3 boîtes « x » + 2 boîtes « x » se regroupent en 5 « x ».
 const Boite = ({ x, color }: { x: number; color: string }) => (
   <g>
