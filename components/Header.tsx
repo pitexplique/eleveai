@@ -7,7 +7,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Menu, X, GraduationCap, LogOut, ChevronDown } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
 import { createClient } from "@/lib/supabase/client";
-import { useAudience, type Audience } from "@/lib/useAudience";
 import { ouvrirEcrireAuProf } from "@/lib/ecrireAuProf";
 import { urlGuidePour } from "@/lib/matrice/guides";
 import { PROFILS } from "@/lib/matrice/profils";
@@ -267,22 +266,24 @@ function MobileSection({
   );
 }
 
-// Les 4 portes d'audience — affichées quand l'élève n'est pas connecté (barre
-// déconnectée) ; un élève connecté voit ses matières à la place.
-// « Élève » → /espace-eleves (25/07) : même destination que les sitelinks
-// Google/Bing — la vitrine curée. Le catalogue /explorer reste à un clic
-// (hero + fin de page d'espace-eleves, et menu de l'élève connecté).
+// ⛔ LES QUATRE PORTES D'AUDIENCE SONT PARTIES DU HEADER (20/08, Frédéric).
+// La barre déconnectée portait « 🎓 Élèves · 👪 Parents · 🍎 Enseignants ·
+// 🏫 Établissements ». Deux raisons de les retirer, et la seconde est la vraie :
 //
-// ⭐ AU PLURIEL DEPUIS LE 07/08 (« Élèves », « Parents »…). Ce ne sont pas des
-// étiquettes qu'on se colle en arrivant — ce sont des rayons. Au singulier, la
-// rangée demandait « qui es-tu ? » une deuxième fois, à deux centimètres de
-// l'endroit où la page le demande déjà.
-const AUDIENCE_DOORS: { space: Audience; emoji: string; label: string; href: string }[] = [
-  { space: "eleve", emoji: "🎓", label: "Élèves", href: "/espace-eleves" },
-  { space: "parent", emoji: "👪", label: "Parents", href: "/parents" },
-  { space: "enseignant", emoji: "🍎", label: "Enseignants", href: "/espace-profs" },
-  { space: "etablissement", emoji: "🏫", label: "Établissements", href: "/espace-ecoles" },
-];
+//   1. Elles posaient « qui es-tu ? » à deux centimètres de l'accueil, qui
+//      pose déjà la question — et mieux, parce qu'il enchaîne sur la classe.
+//   2. ⚠️ SURTOUT : les visiter ÉTIQUETTE. `useAudience` mémorise l'espace au
+//      simple passage sur /parents ou /espace-ecoles (lib/useAudience.ts, effet
+//      `fromRoute`). Un clic curieux sur « Parents », et le visiteur restait
+//      parent pour toujours — pastille allumée sur l'accueil et dans son
+//      espace, pendant qu'il cliquait « Élève » au milieu de l'écran. Une porte
+//      qu'on pousse pour voir ne devrait pas décider de qui on est.
+//
+// Les quatre espaces restent dans le pied de page (components/Footer.tsx,
+// bloc `espaces`), là où l'on va quand on les cherche vraiment — et ils gardent
+// leurs sitelinks Google/Bing, rien n'est désindexé.
+// Pour les remettre : cette liste + la branche `else` de la ZONE 2 et celle du
+// menu mobile, plus `useAudience` dans les imports.
 
 // ─── Le menu d'un élève CONNECTÉ ─────────────────────────────────────────────
 //
@@ -465,7 +466,6 @@ export default function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const { eleve, logout } = useEleve();
-  const { space } = useAudience();
   const supabase = createClient();
 
   // Variante « papier » : sur l'accueil-journal, le header devient la tranche
@@ -689,27 +689,16 @@ export default function Header() {
               </Link>
               <MatieresMenu pathname={pathname} paper={paper} />
             </>
-          ) : (
-            AUDIENCE_DOORS.map((d) => (
-              <Link
-                prefetch={false}
-                key={d.space}
-                href={d.href}
-                className={[
-                  "inline-flex items-center gap-1.5 rounded-full px-2.5 py-2 text-sm font-black transition xl:px-3",
-                  paper
-                    ? d.space === space
-                      ? "bg-teal-700 text-white shadow"
-                      : "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10 hover:text-[#1d1c16]"
-                    : d.space === space
-                      ? "bg-white text-[#041B33] shadow-lg"
-                      : "text-white/85 hover:bg-white/15 hover:text-white",
-                ].join(" ")}
-              >
-                <span>{d.emoji}</span> {d.label}
-              </Link>
-            ))
-          )}
+          ) : null}
+          {/* ⛔ ET RIEN POUR LES AUTRES — le centre reste vide quand on n'est
+              pas un élève connecté, et c'est voulu (20/08, Frédéric).
+              La tentation était d'y remettre le menu « Matières » pour combler
+              le trou laissé par les portes d'audience. Non : sur l'accueil, les
+              matières s'étalent DÉJÀ en pleine page, juste en dessous, en grand
+              et en couleurs. Un menu déroulant qui répète la page qu'on est en
+              train de regarder, c'est le doublon qu'on vient d'enlever, avec un
+              autre chapeau. Le haut de page ne garde que ce que la page ne dit
+              pas : la marque, le retour, et l'entrée dans son compte. */}
         </div>
 
         {/* ── ZONE 3 : LE COMPTE, complètement à droite ─────────────────── */}
@@ -789,10 +778,20 @@ export default function Header() {
 
           {/* Mobile — bouton hamburger */}
           <div className="flex items-center gap-2 lg:hidden">
+            {/* ⭐ « INSCRIPTION » ET NON PLUS « CONNEXION » (20/08). Le mot
+                « Connexion » était écrit DEUX FOIS sur le même écran : ici en
+                pastille pleine, et à nouveau dans le tiroir juste en dessous.
+                Deux boutons identiques ne se lisent pas comme un rappel, ils se
+                lisent comme deux destinations différentes.
+                La barre garde donc L'ACTION — et c'est celle du nouveau venu,
+                qui ne cherche pas « connexion » puisqu'il n'a pas de compte. Le
+                tiroir garde « Connexion », pour celui qui revient et qui, lui,
+                sait ce qu'il cherche. Même flux au bout des deux : le
+                formulaire reconnaît tout seul un compte existant. */}
             {!eleve && (
               <Link
                 prefetch={false}
-                href="/auth/signin?mode=eleve"
+                href="/auth/signin?mode=eleve&inscription=1"
                 className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-black shadow-lg ${
                   paper
                     ? "bg-teal-700 text-white"
@@ -800,7 +799,7 @@ export default function Header() {
                 }`}
               >
                 <GraduationCap className="h-4 w-4" />
-                Connexion
+                Inscription
               </Link>
             )}
             <button
@@ -896,32 +895,21 @@ export default function Header() {
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-2 gap-2">
-                <Link
-                  prefetch={false}
-                  href="/auth/signin?mode=eleve"
-                  onClick={() => setMobileOpen(false)}
-                  className={`flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-black ${
-                    paper
-                      ? "border-[#1d1c16]/25 bg-white/60 text-[#1d1c16]"
-                      : "border-white/15 bg-white/5 text-white"
-                  }`}
-                >
-                  Connexion
-                </Link>
-                <Link
-                  prefetch={false}
-                  href="/auth/signin?mode=eleve&inscription=1"
-                  onClick={() => setMobileOpen(false)}
-                  className={`flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-black shadow ${
-                    paper
-                      ? "bg-teal-700 text-white"
-                      : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
-                  }`}
-                >
-                  Inscription
-                </Link>
-              </div>
+              /* Une seule porte ici : « Inscription » est déjà en pastille dans
+                 la barre, deux centimètres plus haut et toujours visible, elle.
+                 Celle-ci est pour qui revient. */
+              <Link
+                prefetch={false}
+                href="/auth/signin?mode=eleve"
+                onClick={() => setMobileOpen(false)}
+                className={`flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-black ${
+                  paper
+                    ? "border-[#1d1c16]/25 bg-white/60 text-[#1d1c16]"
+                    : "border-white/15 bg-white/5 text-white"
+                }`}
+              >
+                Connexion
+              </Link>
             )}
 
             {eleve && !isStaff ? (
@@ -950,31 +938,11 @@ export default function Header() {
                 <MobileSection title="Espagnol" accent="text-red-300"    items={NAV_ESPAGNOL} pathname={pathname} paper={paper} />
                 <MobileSection title="IA"       accent="text-cyan-300"   items={NAV_IA}       pathname={pathname} paper={paper} />
               </div>
-            ) : (
-              /* Sinon → les 4 portes d'audience */
-              <div className={`grid grid-cols-2 gap-2 border-t pt-4 ${paper ? "border-[#1d1c16]/15" : "border-white/10"}`}>
-                {AUDIENCE_DOORS.map((d) => (
-                  <Link
-                    prefetch={false}
-                    key={d.space}
-                    href={d.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={[
-                      "flex items-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-bold transition",
-                      paper
-                        ? d.space === space
-                          ? "border-[#1d1c16]/40 bg-[#1d1c16]/10 text-[#1d1c16]"
-                          : "border-[#1d1c16]/15 bg-[#1d1c16]/5 text-[#1d1c16]/80"
-                        : d.space === space
-                          ? "border-white/40 bg-white/15 text-white"
-                          : "border-white/10 bg-white/5 text-white/80",
-                    ].join(" ")}
-                  >
-                    <span className="text-base">{d.emoji}</span> {d.label}
-                  </Link>
-                ))}
-              </div>
-            )}
+            ) : null}
+            {/* Même règle qu'au centre de la barre : pas de rayon de matières
+                ici pour un visiteur. Sur téléphone la page les déroule en pleine
+                largeur dès le premier scroll — le tiroir n'a pas à les répéter.
+                Il ne porte plus que le retour à l'accueil et la connexion. */}
           </div>
         </div>
       )}
