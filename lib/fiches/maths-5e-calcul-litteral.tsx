@@ -13,6 +13,35 @@
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+// ⭐ LE CANVAS `algebre` DU COACH, enfin utilisé ici. Il montre des groupes
+// CACHÉS (l'inconnue, dont on ne voit pas le contenu) à côté d'objets VISIBLES
+// (les nombres qu'on connaît), puis l'écriture algébrique qui en sort. C'est
+// exactement le geste du calcul littéral, et le thème « jeu vidéo » parle à un
+// élève de 5e — le calibrage du 19/08 le dit : score, vies, manches, avant les
+// euros.
+const modelise = (
+  titre: string,
+  groupesCaches: number,
+  objetsVisibles: number,
+  expression: string,
+  phrase: string
+) => (
+  <CanvasRenderer
+    figure={{
+      kind: "algebre",
+      theme: "jeu_video",
+      titre,
+      groupesCaches,
+      objetsVisibles,
+      symbole: "x",
+      expression,
+      phrase,
+      display: { showConcret: true, showExpression: true, showPhrase: true, showLabels: true },
+    }}
+  />
+);
 
 // L'anatomie d'une expression : coefficient, partie littérale, terme constant.
 const anatomie = (
@@ -79,22 +108,49 @@ export const ficheCalculLitteral5e: FicheCoursData = {
     schema: anatomie,
     legende: "Dans 3x + 2 : 3 est le coefficient, x la lettre, 2 le terme constant.",
   },
+  // Un dessin sous chaque propriété (REGLES.md § 2 bis). Trois d'entre elles se
+  // MODÉLISENT — des coffres dont on ignore le contenu, des pièces qu'on
+  // compte : le canvas `algebre` montre le passage du concret à l'écriture. La
+  // troisième, « Réduire », est un regroupement d'objets identiques : elle garde
+  // son dessin de boîtes, où l'on voit 3 x et 2 x devenir 5 x.
   proprietes: [
     {
       titre: "Le signe × disparaît",
       texte: "3 × x s'écrit 3x, et a × b s'écrit ab.",
+      schema: modelise(
+        "3 coffres identiques",
+        3,
+        0,
+        "3x",
+        "Trois coffres au même contenu : on écrit 3x, pas 3 × x."
+      ),
     },
     {
       titre: "Substituer",
       texte: "Remplacer la lettre par un nombre, puis calculer : pour x = 5, x + 3 = 8.",
+      schema: modelise(
+        "1 coffre ouvert : x = 5",
+        1,
+        3,
+        "x + 3 = 8",
+        "Le coffre contenait 5 : 5 + 3 = 8."
+      ),
     },
     {
       titre: "Réduire",
       texte: "Regrouper les termes semblables (même lettre) : 3x + 2x = 5x.",
+      schema: reduction,
     },
     {
       titre: "Termes non semblables",
       texte: "3x et 2 ne se regroupent pas : 3x + 2 reste 3x + 2.",
+      schema: modelise(
+        "3 coffres et 2 pièces",
+        3,
+        2,
+        "3x + 2",
+        "Les coffres sont inconnus, les pièces sont connues : on ne peut pas les mélanger."
+      ),
     },
   ],
   reel: {
@@ -106,14 +162,56 @@ export const ficheCalculLitteral5e: FicheCoursData = {
       "Utiliser des lettres pour les nombres est une idée du mathématicien français François Viète, à la fin du XVIᵉ siècle. Avant lui, tout s'écrivait en toutes lettres, ce qui rendait les calculs très longs.",
   },
   methode: [
-    { titre: "Je lis l'expression", texte: "Coefficient, lettre, terme constant : je repère chaque partie." },
-    { titre: "Je réduis", texte: "Je regroupe les termes semblables (même lettre) en additionnant les coefficients." },
-    { titre: "Je substitue", texte: "Pour une valeur donnée, je remplace la lettre puis je calcule." },
+    {
+      titre: "Je lis l'expression",
+      texte: "Coefficient, lettre, terme constant : je repère chaque partie.",
+      schema: anatomie,
+    },
+    {
+      titre: "Je réduis",
+      texte: "Je regroupe les termes semblables (même lettre) en additionnant les coefficients.",
+      schema: reduction,
+    },
+    {
+      titre: "Je substitue",
+      texte: "Pour une valeur donnée, je remplace la lettre puis je calcule.",
+      schema: modelise(
+        "2 coffres ouverts : x = 4",
+        2,
+        1,
+        "2x + 1 = 9",
+        "Chaque coffre contenait 4 : 4 + 4 + 1 = 9."
+      ),
+    },
   ],
   usages: [
-    { titre: "Augmenter / diminuer", detail: "« augmenté de 3 » → + 3 ; « diminué de 4 » → − 4." },
-    { titre: "Multiplier", detail: "« le double de x » → 2x ; « le triple de n » → 3n." },
-    { titre: "Partager", detail: "« le quart de x » → x/4." },
+    {
+      titre: "Augmenter / diminuer",
+      detail: "« augmenté de 3 » → + 3 ; « diminué de 4 » → − 4.",
+      schema: modelise(
+        "1 coffre et 3 pièces",
+        1,
+        3,
+        "x + 3",
+        "Un score inconnu, augmenté de 3 points."
+      ),
+    },
+    {
+      titre: "Multiplier",
+      detail: "« le double de x » → 2x ; « le triple de n » → 3n.",
+      schema: modelise("2 coffres identiques", 2, 0, "2x", "Le double d'un score inconnu."),
+    },
+    {
+      titre: "Partager",
+      detail: "« le quart de x » → x/4.",
+      schema: modelise(
+        "1 coffre partagé en 4",
+        1,
+        0,
+        "x/4",
+        "Le score inconnu, partagé en 4 parts égales."
+      ),
+    },
   ],
   exemples: [
     {
@@ -128,6 +226,13 @@ export const ficheCalculLitteral5e: FicheCoursData = {
       titre: "Traduire une phrase",
       donnees: "« Le double de x augmenté de 5 ».",
       question: "Écris l'expression littérale.",
+      schema: modelise(
+        "2 coffres et 5 pièces",
+        2,
+        5,
+        "2x + 5",
+        "Le double du score inconnu, puis 5 points de plus.",
+      ),
       solution:
         "Le double de x, c'est 2x. Augmenté de 5, on ajoute 5 : l'expression est 2x + 5 (et non 2(x + 5)).",
     },
@@ -135,6 +240,13 @@ export const ficheCalculLitteral5e: FicheCoursData = {
       titre: "Substituer une valeur",
       donnees: "L'expression 3x − 2, pour x = 6.",
       question: "Quelle est sa valeur ?",
+      schema: modelise(
+        "3 coffres ouverts : x = 6",
+        3,
+        0,
+        "3x − 2 = 16",
+        "Chaque coffre valait 6 : 18, moins 2, il reste 16.",
+      ),
       solution:
         "On remplace x par 6 : 3x − 2 = 3 × 6 − 2 = 18 − 2 = 16.",
     },
