@@ -749,18 +749,15 @@ export default function Header() {
                   pastille, dont le second était systématiquement coupé sous
                   `xl`. Quelqu'un qui n'a pas de compte ne cherche pas
                   « connexion ». Les deux mènent au même flux — l'email suffit,
-                  et le formulaire sait tout seul si le compte existe. */}
-              <Link
-                prefetch={false}
-                href="/auth/signin?mode=eleve"
-                className={`hidden items-center rounded-full px-3 py-2 text-sm font-black transition lg:inline-flex ${
-                  paper
-                    ? "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10"
-                    : "text-white/85 hover:bg-white/15 hover:text-white"
-                }`}
-              >
-                Connexion
-              </Link>
+                  et le formulaire sait tout seul si le compte existe.
+
+                  ⭐ INSCRIPTION D'ABORD (20/08) — l'ordre du téléphone. La barre
+                  mobile ne montre que « Inscription », en pastille : c'est
+                  l'action, et elle passe devant. Le desktop lisait l'inverse,
+                  « Connexion » puis la pastille, alors que la moitié gauche du
+                  regard est celle qu'on lit en premier. Deux écrans, deux
+                  hiérarchies contraires pour la même paire de boutons : c'est
+                  réglé, l'inscription mène partout. */}
               <Link
                 prefetch={false}
                 href="/auth/signin?mode=eleve&inscription=1"
@@ -772,6 +769,17 @@ export default function Header() {
               >
                 <GraduationCap className="h-4 w-4" />
                 Inscription
+              </Link>
+              <Link
+                prefetch={false}
+                href="/auth/signin?mode=eleve"
+                className={`hidden items-center rounded-full px-3 py-2 text-sm font-black transition lg:inline-flex ${
+                  paper
+                    ? "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10"
+                    : "text-white/85 hover:bg-white/15 hover:text-white"
+                }`}
+              >
+                Connexion
               </Link>
             </>
           )}
