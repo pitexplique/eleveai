@@ -124,6 +124,29 @@ const ROLES: { id: RoleId; label: string }[] = [
 const CLASSES = PROFILS.filter((p) => p.groupe === "eleve");
 
 /**
+ * ⭐ LE LIBELLÉ COURT DES TROIS CLASSES DE LYCÉE — DANS CETTE RANGÉE SEULEMENT
+ * (20/08/2026).
+ *
+ * « Seconde », « Première » et « Terminale » font 26 caractères à elles trois
+ * quand « 2de », « 1re », « Tle » en font 9. C'est ce qui manquait pour que les
+ * douze pastilles tiennent : mesuré à 1280 px avec la colonne de gauche
+ * ouverte, la douzième était rognée — on lisait « Termina… », c'est-à-dire que
+ * la classe la plus demandée du site était la seule illisible.
+ *
+ * ⛔ ON NE TOUCHE PAS À `label` DANS profils.ts. Ce champ sort partout ailleurs
+ * en toutes lettres — « Par où tu peux commencer en Terminale », le niveau
+ * enregistré dans l'historique, « Ce que j'ai compris : … ». L'abréger là-bas
+ * abrégerait des phrases, pas des pastilles.
+ * ⚠️ Et le bouton garde son `aria-label` en toutes lettres : « 2de » écrit se
+ * lit, « 2de » lu à voix haute par un lecteur d'écran ne veut rien dire.
+ */
+const CLASSE_COURTE: Record<string, string> = {
+  seconde: "2de",
+  premiere: "1re",
+  terminale: "Tle",
+};
+
+/**
  * ⭐ QUI A UNE CLASSE À DIRE (16/08/2026, Frédéric : « il faut afficher classe
  * et matière pas que pour l'élève mais aussi pour prof et parents »).
  *
@@ -1067,11 +1090,12 @@ export default function EntreeMatrice({
                   type="button"
                   onClick={() => choisirClasse(c.id)}
                   aria-pressed={actif}
+                  aria-label={c.label}
                   // px-2.5 et non px-3 : douze pastilles doivent tenir sur une
                   // ligne d'ordinateur, et ce sont ces 12 px qui manquaient.
                   className={`rounded-full px-2.5 py-1.5 text-[13px] transition ${bouton(actif)}`}
                 >
-                  {c.label}
+                  {CLASSE_COURTE[c.id] ?? c.label}
                 </button>
               );
             })}
@@ -1323,6 +1347,26 @@ export default function EntreeMatrice({
               le même trou, et c'est la même phrase qui le comble. */}
           Dis-moi d&apos;abord qui tu es —{" "}
           {POURQUOI_LE_PROFIL[matiereId ?? ""] ?? POURQUOI_SANS_MATIERE}.
+        </p>
+      )}
+
+      {/* ⭐ LE PREMIER ÉCRAN NE DISAIT PAS CE QU'IL ATTENDAIT (20/08/2026).
+          Tant qu'aucune classe n'est dite, le moteur ne répond rien — c'est la
+          règle, et elle est juste : la même phrase ne veut pas dire la même
+          chose en CP et en Terminale. Mais à l'écran, ça donnait quarante pour
+          cent de hauteur blanche sous la barre, et un blanc ne dit pas « il me
+          manque ta classe » : il dit « c'est tout ».
+          Le pire, c'est que la ligne prévue pour meubler cet endroit — « Par
+          exemple : … », juste en dessous — est justement morte là : elle exige
+          un `profil`, qui n'existe pas avant la classe. La seule chose capable
+          de remplir ce vide était éteinte exactement quand il apparaissait.
+          Une ligne suffit, et elle redit l'argument qui justifie la question.
+          ⚠️ Elle sort AUSSI pour un élève qui a cliqué son rôle sans sa classe —
+          c'est le même trou. Le parent, le prof et la direction, eux, ont un
+          profil dès leur rôle : leur écran répond, ils ne la voient jamais. */}
+      {!profil && !resultat && !demandeProfil && (
+        <p className="mt-3 text-center text-xs text-[#1d1c16]/70">
+          Choisis ta classe : les réponses ne sont pas les mêmes du CP à la Terminale.
         </p>
       )}
 
