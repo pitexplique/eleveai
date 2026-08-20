@@ -321,6 +321,20 @@ export type AngleCanvasData = {
       showArc?: boolean;
       showRightAngle?: boolean;
       placeholder?: string;
+      /**
+       * Pose le RAPPORTEUR sur l'angle (demi-disque gradué, 0 aligné sur le
+       * côté droit). Sans lui, aucun dessin du moteur ne montrait l'instrument
+       * — or « mesurer au rapporteur » est une capacité du BO en 6e et en 5e,
+       * et la méthode d'une fiche d'angles ne se raconte pas, elle se montre.
+       */
+      showProtractor?: boolean;
+      /**
+       * Le geste mis en avant sur le rapporteur, pour dérouler une méthode en
+       * trois temps sans changer de dessin :
+       * `vertex` le centre posé sur le sommet · `zero` le 0 aligné sur un côté ·
+       * `reading` la graduation atteinte par l'autre côté.
+       */
+      protractorStep?: "vertex" | "zero" | "reading";
     };
   };
   size?: { width?: number; height?: number };

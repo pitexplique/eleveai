@@ -381,6 +381,7 @@ export default function FicheCoursClient({
                   <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
                     {etape.texte}
                   </p>
+                  {etape.schema && <div className="mt-3">{etape.schema}</div>}
                 </div>
               );
             })}
@@ -404,6 +405,7 @@ export default function FicheCoursClient({
                   <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
                     {usage.detail}
                   </p>
+                  {usage.schema && <div className="mt-3">{usage.schema}</div>}
                 </div>
               ))}
             </div>

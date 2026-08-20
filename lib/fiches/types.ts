@@ -18,8 +18,8 @@ export type FicheIdentite = { label: string; valeur: string };
  * écrites avant lui ; sur les nouvelles, il se remplit.
  */
 export type FichePropriete = { titre: string; texte: string; schema?: ReactNode };
-export type FicheMethode = { titre: string; texte: string };
-export type FicheUsage = { titre: string; detail: string };
+export type FicheMethode = { titre: string; texte: string; schema?: ReactNode };
+export type FicheUsage = { titre: string; detail: string; schema?: ReactNode };
 export type FicheExemple = {
   titre: string;
   donnees: string;

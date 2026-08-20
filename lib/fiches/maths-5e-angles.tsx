@@ -17,7 +17,13 @@ import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 // Un angle dessiné par le moteur du coach (arc + éventuelle mesure).
 const angle = (
   angleDeg: number,
-  opts: { showMeasure?: boolean; placeholder?: string; showRightAngle?: boolean } = {}
+  opts: {
+    showMeasure?: boolean;
+    placeholder?: string;
+    showRightAngle?: boolean;
+    /** "pose" = l'instrument entier, sans geste allumé. */
+    rapporteur?: "pose" | "vertex" | "zero" | "reading";
+  } = {}
 ) => (
   <CanvasRenderer
     figure={{
@@ -31,6 +37,8 @@ const angle = (
           showArc: true,
           showRightAngle: opts.showRightAngle ?? angleDeg === 90,
           placeholder: opts.placeholder,
+          showProtractor: !!opts.rapporteur,
+          protractorStep: opts.rapporteur === "pose" ? undefined : opts.rapporteur,
         },
       },
     }}
@@ -41,7 +49,10 @@ const angle = (
 // parle de familles, un seul dessin ne montre rien — c'est la COMPARAISON qui
 // est la propriété.
 const rangee = (items: { deg: number; nom: string }[]) => (
-  <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+  // `items-end` : depuis que le cadre se serre sur le dessin, un angle plat est
+  // large et bas quand un angle droit est carré — sans cet alignement, leurs
+  // noms ne seraient plus sur la même ligne.
+  <div className="grid grid-cols-2 items-end gap-2 sm:grid-cols-4">
     {items.map((it) => (
       <div key={it.nom}>
         <CanvasRenderer
@@ -118,7 +129,9 @@ export const ficheAngles5e: FicheCoursData = {
     {
       titre: "Le rapporteur",
       texte: "Centre sur le sommet, le 0 aligné sur un côté, on lit la graduation sur l'autre côté.",
-      schema: angle(35, { showMeasure: false, placeholder: "?" }),
+      // La propriété montre l'INSTRUMENT posé ; les trois gestes, eux, sont
+      // déroulés plus bas dans la méthode.
+      schema: angle(35, { showMeasure: false, placeholder: "?", rapporteur: "pose" }),
     },
     {
       titre: "Estimer",
@@ -139,15 +152,42 @@ export const ficheAngles5e: FicheCoursData = {
     texte:
       "Le degré (360° pour un tour complet) nous vient des astronomes de Babylone, il y a plus de 4000 ans. Ils comptaient en base 60, ce qui explique aussi les 60 minutes d'une heure.",
   },
+  // Les trois gestes du rapporteur, DESSINÉS. Ici — et seulement ici — le même
+  // dessin revient trois fois : c'est un geste en trois temps, et c'est
+  // justement ce qui bouge d'une carte à l'autre qui est la méthode.
   methode: [
-    { titre: "Je place le centre", texte: "Le centre du rapporteur exactement sur le sommet de l'angle." },
-    { titre: "J'aligne le zéro", texte: "Le 0 du rapporteur sur un des deux côtés de l'angle." },
-    { titre: "Je lis / je trace", texte: "Je lis la graduation atteinte par l'autre côté (ou je marque la mesure voulue)." },
+    {
+      titre: "Je place le centre",
+      texte: "Le centre du rapporteur exactement sur le sommet de l'angle.",
+      schema: angle(55, { showMeasure: false, rapporteur: "vertex" }),
+    },
+    {
+      titre: "J'aligne le zéro",
+      texte: "Le 0 du rapporteur sur un des deux côtés de l'angle.",
+      schema: angle(55, { showMeasure: false, rapporteur: "zero" }),
+    },
+    {
+      titre: "Je lis / je trace",
+      texte: "Je lis la graduation atteinte par l'autre côté (ou je marque la mesure voulue).",
+      schema: angle(55, { showMeasure: false, rapporteur: "reading" }),
+    },
   ],
   usages: [
-    { titre: "Lire un angle", detail: "La mesure est écrite : on la lit directement en degrés." },
-    { titre: "Mesurer un angle", detail: "Avec le rapporteur, centre sur le sommet, 0 sur un côté." },
-    { titre: "Tracer un angle", detail: "Sommet, premier côté, on repère la graduation voulue, on trace le second côté." },
+    {
+      titre: "Lire un angle",
+      detail: "La mesure est écrite : on la lit directement en degrés.",
+      schema: angle(70),
+    },
+    {
+      titre: "Mesurer un angle",
+      detail: "Avec le rapporteur, centre sur le sommet, 0 sur un côté.",
+      schema: angle(70, { showMeasure: false, placeholder: "?", rapporteur: "reading" }),
+    },
+    {
+      titre: "Tracer un angle",
+      detail: "Sommet, premier côté, on repère la graduation voulue, on trace le second côté.",
+      schema: angle(70, { showMeasure: false, placeholder: "70° à tracer", rapporteur: "zero" }),
+    },
   ],
   exemples: [
     {
