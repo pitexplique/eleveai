@@ -120,6 +120,38 @@ export default function AccueilIA() {
               priority
               className="mx-auto mb-2 h-14 w-auto sm:h-16"
             />
+            {/* ⭐ L'ORIGINE PASSE AU-DESSUS DU TITRE (20/08/2026).
+                Elle était en bas de ce bloc, en `text-xs text-slate-500` : le
+                texte le plus petit ET le plus pâle de la page. C'est le seul
+                argument du site que personne d'autre ne peut recopier, et il
+                était rangé là où l'œil ne descend qu'après avoir décidé de
+                rester. Un badge le met sur le chemin du regard, avant le titre.
+                ⛔ AU SINGULIER, ET ÇA NE SE NÉGOCIE PAS : « par un enseignant ».
+                Le pluriel laisserait entendre une équipe pédagogique qui
+                n'existe pas — c'est une personne, et le dire est justement ce
+                qui rend la phrase vérifiable.
+                ⚠️ LES TROIS VERBES DE FRÉDÉRIC RESTENT en dessous, ils n'ont
+                pas été absorbés ici : « conçues, sélectionnées et vérifiées »
+                dit ce que sont les ressources, le badge dit d'où elles
+                viennent. La ligne du bas perd seulement « — à La Réunion », qui
+                vient de monter. */}
+            <p className="mb-2.5 flex justify-center">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-50 px-3 py-1 text-[13px] font-semibold text-teal-800">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  className="h-3.5 w-3.5"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+                Conçu à La Réunion par un enseignant
+              </span>
+            </p>
             {/* ⭐ DEUX LIGNES, ET PAS DE DEUX-POINTS (Frédéric, 19/08).
                 Les deux-points faisaient de la première moitié l'annonce de la
                 seconde, alors que ce sont deux phrases : l'une dit ce qu'on
@@ -140,12 +172,17 @@ export default function AccueilIA() {
                   écrit « Qui es-tu ? » en dur pour tout le monde, chef
                   d'établissement compris (EntreeMatrice.tsx). Le titre ne crée
                   donc pas d'incohérence, il en épouse une qui existe déjà.
-                  ⚠️ EN REVANCHE IL RÉPÈTE mot pour mot l'intitulé de la rangée,
-                  cinq centimètres plus bas — le même piège que la note des
-                  AUDIENCE_DOORS du 07/08 (« au singulier, la rangée demandait
-                  qui es-tu ? une deuxième fois »). À trancher : ou le titre
-                  porte la question et la rangée perd son intitulé, ou
-                  l'inverse. */}
+                  ⭐ LA RÉPÉTITION A ÉTÉ TRANCHÉE LE 19/08, ET DANS CE SENS-LÀ :
+                  le titre porte la question, la rangée a perdu son intitulé
+                  (EntreeMatrice.tsx, `<Etape intitule="">`). Cette note disait
+                  encore « à trancher » alors que c'était fait — d'où l'audit du
+                  20/08 qui a rouvert le dossier tout seul.
+                  ⛔ ET LE TITRE RESTE (Frédéric, 20/08). Une refonte proposait
+                  « Pose ta question. EleveAI t'explique, puis te fait
+                  travailler. » : ça promet le coach, alors que cet écran ouvre
+                  le moteur de ressources — et ça tutoie, ce que ce titre-ci
+                  évite exprès puisqu'il est lu par un CP ET par le parent assis
+                  à côté de lui. */}
               <span className="block">
                 Qui es-tu ? Que cherches-tu aujourd&rsquo;hui ?
               </span>
@@ -162,8 +199,11 @@ export default function AccueilIA() {
                 EleveAI propose ce qui correspond
               </span>
             </h1>
-            <p className="mt-1 text-xs text-slate-500">
-              Des ressources conçues, sélectionnées et vérifiées — à La Réunion
+            {/* ⚠️ `text-slate-600` ET NON `500` : à 12 px sur blanc, slate-500
+                tombe à 4,8:1 — au-dessus du seuil AA, mais c'est la marge la
+                plus mince de la page pour son texte le plus petit. */}
+            <p className="mt-1 text-xs text-slate-600">
+              Des ressources conçues, sélectionnées et vérifiées
             </p>
           </header>
 
@@ -177,7 +217,17 @@ export default function AccueilIA() {
           </div>
 
           <footer className="pt-10">
-            <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-xs text-slate-400">
+            {/* ⚠️ `text-slate-600`, ET C'ÉTAIT `slate-400` (20/08/2026).
+                #94a3b8 sur blanc, c'est 2,8:1 — sous le seuil AA (4,5:1), pour
+                les DIX liens qui portent les tarifs, la confidentialité et les
+                CGU. Un lien qu'on ne peut pas lire n'est pas un lien discret,
+                c'est un lien absent.
+                ⛔ ON GARDE LA RANGÉE À PLAT, pas les trois colonnes de la
+                maquette : ce pied de page est volontairement « des repères, pas
+                une seconde page d'accueil » (voir PIED en tête de fichier).
+                Trois colonnes titrées, c'est un vrai pied de page — c'est-à-dire
+                un deuxième écran à lire sous celui qu'on vient de finir. */}
+            <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-xs text-slate-600">
               {PIED.map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} prefetch={false} className="hover:text-slate-700">
