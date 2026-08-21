@@ -113,6 +113,20 @@ export const notions: NotionSource[] = [
     levels: [1, 2],
   },
 
+  // ⛔ OUVERTE LE 21/08/2026 — ELLE MANQUAIT ENTIÈREMENT. Le BO de 6e demande
+  // de savoir que le périmètre du disque est proportionnel à son diamètre, d'en
+  // connaître la formule et de le calculer. Le coach n'avait aucune micro
+  // cercle, disque, rayon ou diamètre — ni en 6e, ni dans AUCUNE classe de
+  // maths. Les vérificateurs comptent les items d'une micro ; aucun ne demande
+  // si une micro manque, et un chapitre entier restait donc invisible.
+  {
+    id: "cercle_disque",
+    label: "Le cercle et le périmètre du disque",
+    boId: "BO6G1",
+    prerequis: ["aire_perimetre"],
+    levels: [1, 2],
+  },
+
   {
     id: "volume_solide",
     label: "Volumes",

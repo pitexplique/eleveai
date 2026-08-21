@@ -685,6 +685,38 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     LE CERCLE ET LE PÉRIMÈTRE DU DISQUE
+     ⛔ Ouvert le 21/08/2026 : le BO de 6e le demande, le coach n'en avait
+     aucune micro — dans aucune classe. La proportionnalité vient AVANT la
+     formule, comme dans le BO : π n'est pas un nombre tombé du ciel, c'est le
+     quotient tour ÷ diamètre, le même pour tous les disques.
+  ========================= */
+  {
+    id: "cercle_vocabulaire",
+    label: "Centre, rayon, diamètre : le vocabulaire du cercle",
+    notionId: "cercle_disque",
+    prerequis: ["aire_longueur_mesurer"],
+  },
+  {
+    id: "cercle_proportionnel",
+    label: "Savoir que le tour du disque est proportionnel à son diamètre",
+    notionId: "cercle_disque",
+    prerequis: ["cercle_vocabulaire"],
+  },
+  {
+    id: "cercle_perimetre",
+    label: "Calculer le périmètre d’un disque (P = π × d)",
+    notionId: "cercle_disque",
+    prerequis: ["cercle_proportionnel"],
+  },
+  {
+    id: "cercle_defi",
+    label: "Défis : roues, rond-point et figures composées",
+    notionId: "cercle_disque",
+    prerequis: ["cercle_perimetre"],
+  },
+
+  /* =========================
      SYMETRIE
   ========================= */
   {

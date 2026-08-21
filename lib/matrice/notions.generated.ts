@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 688 notions, 40 paquets.
+// 689 notions, 40 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -491,6 +491,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       {
         "id": "aire_surface",
         "label": "Aires",
+        "prerequis": [
+          "aire_perimetre"
+        ]
+      },
+      {
+        "id": "cercle_disque",
+        "label": "Le cercle et le périmètre du disque",
         "prerequis": [
           "aire_perimetre"
         ]
