@@ -1009,13 +1009,37 @@ export default function EntreeMatrice({
 
   // Sur le journal on emprunte l'encre et le papier de la page ; sur l'accueil
   // on a notre propre calme. Deux habillages, un seul comportement.
-  const bouton = (actif: boolean) =>
+  /**
+   * ⭐ UNE TEINTE PAR RANGÉE (21/08/2026).
+   *
+   * Les trois rangées répondent à trois questions différentes — qui tu es, ta
+   * classe, ta matière — et allumaient toutes la même pastille teal. Résultat,
+   * les trois choix en cours se lisaient comme une seule liste : rien ne disait
+   * à l'œil que « Élève », « 6ᵉ » et « Mathématiques » sont trois réponses
+   * distinctes. La couleur porte l'appartenance, elle ne décore pas.
+   *
+   * ⚠️ Des aplats, pas des dégradés : sur une pastille de 26 px de haut, un
+   * dégradé ne se voit pas — il ne fait qu'ajouter du bruit au rendu.
+   * ⚠️ Les trois teintes sont prises au cran 700, seul niveau qui tienne le
+   * contraste AA en blanc sur 13 px (sky-700 6,4:1 · emerald-700 5,3:1 ·
+   * amber-700 5,9:1). Les crans 400 des tuiles du coach tombent sous 2:1 :
+   * ils valent pour une grande tuile à texte noir, pas pour une pastille.
+   * ⛔ La variante « accueil » (le journal, en papier noir sur crème) n'est PAS
+   * touchée : sa gamme est délibérée, la couleur n'y entre pas.
+   */
+  const TEINTE_ACTIVE = {
+    role: "border-sky-700 bg-sky-700",
+    classe: "border-emerald-700 bg-emerald-700",
+    matiere: "border-amber-700 bg-amber-700",
+  } as const;
+
+  const bouton = (actif: boolean, teinte: keyof typeof TEINTE_ACTIVE = "role") =>
     surAccueil
       ? actif
         ? "border-2 border-[#1d1c16] bg-[#1d1c16] text-[#f5fafb]"
         : "border-2 border-[#1d1c16]/40 bg-white/70 text-[#1d1c16] hover:border-[#1d1c16]"
       : actif
-        ? "border border-teal-700 bg-teal-700 text-white"
+        ? `border ${TEINTE_ACTIVE[teinte]} text-white`
         : "border border-slate-300 bg-white text-slate-700 hover:border-slate-500";
 
   return (
@@ -1093,7 +1117,7 @@ export default function EntreeMatrice({
                   aria-label={c.label}
                   // px-2.5 et non px-3 : douze pastilles doivent tenir sur une
                   // ligne d'ordinateur, et ce sont ces 12 px qui manquaient.
-                  className={`rounded-full px-2.5 py-1.5 text-[13px] transition ${bouton(actif)}`}
+                  className={`rounded-full px-2.5 py-1.5 text-[13px] transition ${bouton(actif, "classe")}`}
                 >
                   {CLASSE_COURTE[c.id] ?? c.label}
                 </button>
@@ -1124,7 +1148,7 @@ export default function EntreeMatrice({
                         ? "bg-[#0e7490] text-white"
                         : "bg-[#1d1c16]/[0.07] text-[#1d1c16] hover:bg-[#1d1c16]/15"
                       : actif
-                        ? "bg-teal-700 text-white"
+                        ? "bg-amber-700 text-white"
                         : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                   }`}
                 >
