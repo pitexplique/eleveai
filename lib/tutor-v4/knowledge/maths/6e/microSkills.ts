@@ -561,30 +561,42 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["angle_droit", "angle_comparer"],
   },
   {
+    id: "triangle_defi",
+    label: "Défis : reconnaître un triangle",
+    notionId: "triangle_figure",
+    prerequis: ["triangle_type_cote", "triangle_type_angle"],
+  },
+
+  /* =========================
+     TRIANGLES : ANGLES ET CONSTRUCTIBILITÉ
+     ⛔ Séparé de « Triangles » le 21/08/2026. Reconnaître une figure se joue
+     sur un DESSIN (canvas `triangle` : codages, angle droit marqué) ; ce qui
+     suit se joue sur des NOMBRES — 180°, un angle manquant, trois longueurs
+     qui ne ferment pas. Deux gestes, deux notions.
+  ========================= */
+  {
     id: "triangle_somme_angle",
     label: "Utiliser la somme des angles d’un triangle",
-    notionId: "triangle_figure",
+    notionId: "triangle_propriete",
     prerequis: ["triangle_type_angle"],
   },
   {
     id: "triangle_angle_manquant",
     label: "Déterminer un angle manquant",
-    notionId: "triangle_figure",
+    notionId: "triangle_propriete",
     prerequis: ["triangle_somme_angle"],
   },
   {
     id: "triangle_possible_ou_non",
     label: "Déterminer si un triangle est possible",
-    notionId: "triangle_figure",
+    notionId: "triangle_propriete",
     prerequis: ["triangle_sommet_cote"],
   },
   {
-    id: "triangle_defi",
-    label: "Défis triangles",
-    notionId: "triangle_figure",
+    id: "triangle_propriete_defi",
+    label: "Défis : angles et constructibilité",
+    notionId: "triangle_propriete",
     prerequis: [
-      "triangle_type_cote",
-      "triangle_type_angle",
       "triangle_somme_angle",
       "triangle_angle_manquant",
       "triangle_possible_ou_non",
@@ -607,9 +619,31 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["quadrilatere_nommer_vocabulaire"],
   },
   {
+    id: "quadrilatere_distinguer",
+    label: "Distinguer les quadrilatères",
+    notionId: "quadrilatere_figure",
+    prerequis: ["quadrilatere_identifier_nature"],
+  },
+  {
+    id: "quadrilatere_defi",
+    label: "Défis : reconnaître un quadrilatère",
+    notionId: "quadrilatere_figure",
+    prerequis: ["quadrilatere_identifier_nature", "quadrilatere_distinguer"],
+  },
+
+  /* =========================
+     QUADRILATÈRES : PROPRIÉTÉS ET CONSTRUCTION
+     ⛔ Séparé de « Quadrilatères » le 21/08/2026. Cinq des huit micros
+     tournaient autour d'un même geste ; couper plutôt que fusionner (choix de
+     Frédéric) sépare les deux moments réels du cours — reconnaître SUR UN
+     DESSIN (le canvas code les côtés égaux, les angles droits, les parallèles)
+     puis raisonner SANS dessin à partir des propriétés (« 4 côtés égaux et
+     aucun angle droit, donc losange », « un carré est-il un rectangle ? »).
+  ========================= */
+  {
     id: "quadrilatere_lire_propriete",
     label: "Lire les propriétés d’un quadrilatère",
-    notionId: "quadrilatere_figure",
+    notionId: "quadrilatere_propriete",
     prerequis: [
       "angle_droit",
       "angle_comparer",
@@ -619,54 +653,35 @@ export const microSkills: MicroSkillSource[] = [
   {
     id: "quadrilatere_lien_propriete",
     label: "Faire le lien entre propriétés et nature",
-    notionId: "quadrilatere_figure",
+    notionId: "quadrilatere_propriete",
     prerequis: [
       "quadrilatere_identifier_nature",
       "quadrilatere_lire_propriete",
-    ],
-  },
-  {
-    id: "quadrilatere_distinguer",
-    label: "Distinguer les quadrilatères",
-    notionId: "quadrilatere_figure",
-    prerequis: [
-      "quadrilatere_identifier_nature",
-      "quadrilatere_lien_propriete",
     ],
   },
   {
     id: "quadrilatere_conclusion",
     label: "Conclure sur la nature d’un quadrilatère",
-    notionId: "quadrilatere_figure",
+    notionId: "quadrilatere_propriete",
     prerequis: [
       "quadrilatere_lire_propriete",
       "quadrilatere_lien_propriete",
-      "quadrilatere_distinguer",
     ],
   },
   {
     id: "quadrilatere_completer_construire",
     label: "Compléter ou construire un quadrilatère",
-    notionId: "quadrilatere_figure",
+    notionId: "quadrilatere_propriete",
     prerequis: [
-      "quadrilatere_nommer_vocabulaire",
       "quadrilatere_lire_propriete",
       "quadrilatere_lien_propriete",
     ],
   },
   {
-    id: "quadrilatere_defi",
-    label: "Défis quadrilatères",
-    notionId: "quadrilatere_figure",
-    prerequis: [
-      "quadrilatere_nommer_vocabulaire",
-      "quadrilatere_identifier_nature",
-      "quadrilatere_lire_propriete",
-      "quadrilatere_lien_propriete",
-      "quadrilatere_distinguer",
-      "quadrilatere_conclusion",
-      "quadrilatere_completer_construire",
-    ],
+    id: "quadrilatere_propriete_defi",
+    label: "Défis : propriétés et inclusions",
+    notionId: "quadrilatere_propriete",
+    prerequis: ["quadrilatere_lien_propriete", "quadrilatere_conclusion"],
   },
 
   /* =========================

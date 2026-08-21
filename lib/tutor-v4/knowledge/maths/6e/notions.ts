@@ -131,17 +131,48 @@ export const notions: NotionSource[] = [
 
   {
     id: "triangle_figure",
-    label: "Triangles",
+    label: "Triangles : reconnaître et nommer",
     boId: "BO6G3",
     prerequis: ["angle_mesure"],
     levels: [1, 2, 3],
   },
 
+  // ⛔ COUPÉE EN DEUX LE 21/08/2026. « Triangles » portait huit micros et deux
+  // gestes qui n'ont rien à voir : RECONNAÎTRE une figure (la nommer, lire ses
+  // sommets, dire son type d'après ses côtés ou ses angles — ça se joue sur un
+  // dessin, et c'est le canvas `triangle` qui le montre) et RAISONNER sur ses
+  // mesures (la somme des angles vaut 180°, un angle manquant se calcule, trois
+  // longueurs ne font pas toujours un triangle). Un élève qui ne reconnaît pas
+  // un triangle isocèle n'a pas le même problème que celui qui rate 180 − 40 − 60.
+  {
+    id: "triangle_propriete",
+    label: "Triangles : angles et constructibilité",
+    boId: "BO6G3",
+    prerequis: ["triangle_figure"],
+    levels: [1, 2, 3],
+  },
+
   {
     id: "quadrilatere_figure",
-    label: "Quadrilatères",
+    label: "Quadrilatères : reconnaître et nommer",
     boId: "BO6G4",
     prerequis: ["angle_mesure"],
+    levels: [1, 2, 3],
+  },
+
+  // ⛔ COUPÉE EN DEUX LE 21/08/2026. « Quadrilatères » portait huit micros,
+  // dont CINQ qui tournaient autour du même geste (identifier la nature, lire
+  // les propriétés, faire le lien propriétés ↔ nature, distinguer, conclure).
+  // Frédéric a tranché : couper plutôt que fusionner — parce que ce sont bien
+  // deux moments du cours. D'abord RECONNAÎTRE sur un dessin (le canvas
+  // `quadrilatere` code les côtés égaux, les angles droits, les parallèles),
+  // ensuite RAISONNER à partir des propriétés, sans dessin : « 4 côtés égaux et
+  // aucun angle droit, donc losange », « un carré est-il un rectangle ? ».
+  {
+    id: "quadrilatere_propriete",
+    label: "Quadrilatères : propriétés et construction",
+    boId: "BO6G4",
+    prerequis: ["quadrilatere_figure"],
     levels: [1, 2, 3],
   },
 

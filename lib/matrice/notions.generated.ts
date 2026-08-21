@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 686 notions, 40 paquets.
+// 688 notions, 40 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -509,16 +509,30 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "triangle_figure",
-        "label": "Triangles",
+        "label": "Triangles : reconnaître et nommer",
         "prerequis": [
           "angle_mesure"
         ]
       },
       {
+        "id": "triangle_propriete",
+        "label": "Triangles : angles et constructibilité",
+        "prerequis": [
+          "triangle_figure"
+        ]
+      },
+      {
         "id": "quadrilatere_figure",
-        "label": "Quadrilatères",
+        "label": "Quadrilatères : reconnaître et nommer",
         "prerequis": [
           "angle_mesure"
+        ]
+      },
+      {
+        "id": "quadrilatere_propriete",
+        "label": "Quadrilatères : propriétés et construction",
+        "prerequis": [
+          "quadrilatere_figure"
         ]
       },
       {
