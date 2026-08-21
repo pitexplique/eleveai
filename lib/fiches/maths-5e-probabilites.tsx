@@ -37,6 +37,40 @@ const sacRouge = [
   { couleur: BLEU, label: "B" },
 ];
 
+// Une probabilite EST une part d'un tout : 3 issues favorables sur 6, ca se
+// preleve. La barre le montre a l'echelle la ou le de montre le materiel — deux
+// moments differents, deux canvas (lib/canvas/CATALOGUE.md).
+const part = (titre: string, total: string, fav: string, autres: string, question: string) => (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      title: titre,
+      total,
+      parts: [
+        { label: "favorables", value: fav },
+        { label: "les autres", value: autres },
+      ],
+      questionLabel: question,
+      size: { width: 320, height: 175 },
+    }}
+  />
+);
+
+// Deux situations l'une SOUS l'autre (§ 2 ter : dans une carte, on empile) :
+// une propriete qui oppose deux cas a besoin des deux dessins.
+const duo = (haut: React.ReactNode, hautLabel: string, bas: React.ReactNode, basLabel: string) => (
+  <div className="space-y-2">
+    <div>
+      {haut}
+      <p className="mt-1 text-center text-xs font-black text-emerald-700">{hautLabel}</p>
+    </div>
+    <div>
+      {bas}
+      <p className="mt-1 text-center text-xs font-black text-rose-700">{basLabel}</p>
+    </div>
+  </div>
+);
+
 const pieges = [
   "Écrire une probabilité plus grande que 1 : impossible, elle est toujours entre 0 et 1.",
   "Confondre « pair » et « 2/6 » : les issues paires sont 2, 4 et 6, donc 3/6 = 1/2.",
@@ -70,22 +104,60 @@ export const ficheProbabilites5e: FicheCoursData = {
     schema: de(),
     legende: "Un dé équilibré a 6 issues possibles : 1, 2, 3, 4, 5 et 6, toutes avec la même chance.",
   },
+  // Un dessin sous chaque propriete (REGLES.md § 2 bis), et quatre dessins de
+  // nature differente : le MATERIEL pour distinguer issue et evenement, la BARRE
+  // pour le calcul (une probabilite est une part d'un tout), DEUX roues pour
+  // l'equiprobabilite — qui oppose deux cas — et la droite graduee pour
+  // l'encadrement 0-1, qui est une POSITION.
   proprietes: [
     {
       titre: "Issue et événement",
       texte: "Une issue = un résultat possible ; un événement (ex. « pair ») peut regrouper plusieurs issues.",
+      schema: de([2, 4, 6]),
     },
     {
       titre: "Le calcul",
       texte: "Probabilité = nombre d'issues favorables ÷ nombre d'issues possibles.",
+      schema: part("« Obtenir un nombre pair »", "6 issues possibles", "3", "3", "3 ÷ 6 = 1/2"),
     },
     {
       titre: "Équiprobabilité",
       texte: "Toutes les issues ont la même chance (dé équilibré). Sinon, la situation est déséquilibrée.",
+      schema: duo(
+        roue([
+          { label: "A", poids: 1 },
+          { label: "B", poids: 1 },
+          { label: "C", poids: 1 },
+          { label: "D", poids: 1 },
+        ]),
+        "4 secteurs égaux : équiprobable",
+        roue([
+          { label: "A", poids: 3 },
+          { label: "B", poids: 1 },
+          { label: "C", poids: 1 },
+        ]),
+        "secteurs inégaux : A a plus de chances"
+      ),
     },
     {
       titre: "Entre 0 et 1",
       texte: "0 = impossible, 1 = certain. Une probabilité ne dépasse jamais 1.",
+      schema: (
+        <CanvasRenderer
+          figure={{
+            kind: "number_line",
+            size: { width: 340, height: 90 },
+            min: 0,
+            max: 1,
+            step: 0.25,
+            points: [
+              { value: 0, label: "impossible", color: ROUGE },
+              { value: 0.5, label: "1/2", color: BLEU },
+              { value: 1, label: "certain", color: "#16a34a" },
+            ],
+          }}
+        />
+      ),
     },
   ],
   reel: {
@@ -102,15 +174,46 @@ export const ficheProbabilites5e: FicheCoursData = {
     legende: "Exemple : P(obtenir un 3) = 1 ÷ 6 = 1/6.",
     schema: de([3]),
   },
+  // Les trois gestes sur LE MEME de : toutes les faces, puis les faces paires
+  // surlignees, puis le quotient. Ce qui bouge d'une carte a l'autre EST la
+  // methode.
   methode: [
-    { titre: "Je compte les possibles", texte: "Toutes les issues de l'expérience (un dé : 6)." },
-    { titre: "Je compte les favorables", texte: "Les issues qui réalisent mon événement (pair : 2, 4, 6 → 3)." },
-    { titre: "Je forme le quotient", texte: "Favorables ÷ possibles, puis je simplifie (3/6 = 1/2)." },
+    {
+      titre: "Je compte les possibles",
+      texte: "Toutes les issues de l'expérience (un dé : 6).",
+      schema: de(),
+    },
+    {
+      titre: "Je compte les favorables",
+      texte: "Les issues qui réalisent mon événement (pair : 2, 4, 6 → 3).",
+      schema: de([2, 4, 6]),
+    },
+    {
+      titre: "Je forme le quotient",
+      texte: "Favorables ÷ possibles, puis je simplifie (3/6 = 1/2).",
+      schema: part("Les faces paires", "6 issues possibles", "3", "3", "3/6, soit 1/2"),
+    },
   ],
   usages: [
-    { titre: "Un dé", detail: "6 issues. P(un nombre donné) = 1/6." },
-    { titre: "Un sac de billes", detail: "P(rouge) = nombre de rouges ÷ nombre total." },
-    { titre: "Une roue", detail: "Si les secteurs sont inégaux, les issues ne sont pas équiprobables." },
+    {
+      titre: "Un dé",
+      detail: "6 issues. P(un nombre donné) = 1/6.",
+      schema: de([5]),
+    },
+    {
+      titre: "Un sac de billes",
+      detail: "P(rouge) = nombre de rouges ÷ nombre total.",
+      schema: billes(sacRouge),
+    },
+    {
+      titre: "Une roue",
+      detail: "Si les secteurs sont inégaux, les issues ne sont pas équiprobables.",
+      schema: roue([
+        { label: "Rouge", poids: 3 },
+        { label: "Bleu", poids: 2 },
+        { label: "Vert", poids: 1 },
+      ]),
+    },
   ],
   exemples: [
     {
