@@ -12,7 +12,11 @@ import { EleveProvider } from "@/context/EleveContext";
 import MasqueSurGuide from "@/components/MasqueSurGuide";
 import EcrireAuProf from "@/components/EcrireAuProf";
 import PageViewTracker from "@/components/PageViewTracker";
-import { PRIX_FAMILLE_AN } from "@/lib/tarifs";
+import {
+  PRIX_ETABLISSEMENT_ELEVE_AN,
+  PRIX_FAMILLE_AN,
+  PRIX_PROF_AN,
+} from "@/lib/tarifs";
 import { VENTE } from "@/lib/legal/editeur";
 
 const geistSans = Geist({
@@ -234,28 +238,71 @@ export default function RootLayout({
          achetable dont la caisse ne répond pas est pire que le silence — un
          modèle qui l'apprend nous présente comme l'outil dont le paiement est
          cassé. Le jour où le booléen passe à true, cette ligne bascule seule. */
+      /* ⛔ L'ÉLÈVE N'EST PAS UNE OFFRE À 0 € (corrigé le 21/08, Frédéric :
+         « l'offre élève n'est pas à zéro euros »). Une première version en
+         déclarait une, en tête, nommée « toujours gratuit ». Deux fautes.
+
+         La première est factuelle : le catalogue a TROIS offres — famille,
+         classe, établissement. L'élève n'y figure pas parce qu'il n'achète
+         rien ; il est le bénéficiaire, pas une ligne commerciale. En inventer
+         une, c'est décrire un catalogue qui n'existe pas.
+
+         La seconde est éditoriale, et elle est plus grave : le mot « gratuit »
+         a quitté /tarifs le matin même, où il apparaissait sept fois sur une
+         page qui demande de l'argent. Le remettre ici, en tête et à zéro euro,
+         c'était rétablir par la porte des machines ce qu'on venait de retirer
+         par celle des lecteurs — et présenter EleveAI aux moteurs comme un
+         produit gratuit dont trois offres payantes dépassent.
+
+         ⭐ LA PROPRIÉTÉ JUSTE EXISTE, c'est `isAccessibleForFree`. Elle dit
+         exactement ce qu'on veut dire — le contenu s'atteint sans payer — sans
+         inventer de transaction. Les `offers` ne portent alors que ce qui se
+         vend vraiment. */
+      isAccessibleForFree: true,
       offers: [
         {
           "@type": "Offer",
-          name: "Pour l'élève — toujours gratuit",
+          name: "Famille — par foyer, jamais par enfant",
           description:
-            "Le coach, les exercices et les évaluations ne se paient pas, et l'élève garde ses résultats. Aucun élève n'a jamais eu à demander quoi que ce soit pour travailler ici.",
-          price: 0,
-          priceCurrency: "EUR",
-          availability: "https://schema.org/InStock",
-          category: "Gratuit",
-        },
-        {
-          "@type": "Offer",
-          name: "Vue famille — par foyer, jamais par enfant",
-          description:
-            "Ce qui se paie, c'est de voir et de garder : le bulletin de l'enfant, ce qu'il a travaillé cette semaine, son historique. Un seul abonnement couvre tous les enfants du foyer. Une famille qui ne peut pas payer ne paie pas, et personne ne le saura.",
+            "Le coach, les exercices et les évaluations ne se paient pas, et l'élève garde ses résultats. Ce qui se paie, c'est que ça se souvienne de votre enfant : bulletin, travail de la semaine, historique. Un seul abonnement couvre tous les enfants du foyer.",
           price: PRIX_FAMILLE_AN,
           priceCurrency: "EUR",
+          /* ⚠️ LA DISPONIBILITÉ SUIT LE VERROU DE VENTE, elle ne l'anticipe
+             pas. Tant que `VENTE.ouverte` est faux, Stripe n'encaisse pas :
+             annoncer une offre achetable dont la caisse ne répond pas est pire
+             que le silence — un modèle qui l'apprend nous présente ensuite
+             comme l'outil dont le paiement est cassé. Le jour où le booléen
+             passe à true, ces trois lignes basculent seules. */
           availability: VENTE.ouverte
             ? "https://schema.org/InStock"
             : "https://schema.org/PreOrder",
-          url: `${SITE_URL}/tarifs`,
+          url: `${SITE_URL}/tarifs#famille`,
+        },
+        {
+          "@type": "Offer",
+          name: "Professeur — forfait, quel que soit le nombre d'élèves",
+          description:
+            "Le professeur suit sa classe compétence par compétence, sans corriger. Forfait annuel : 25 élèves ou 35, c'est le même prix, et il n'a pas à passer par la coopérative pour le payer. Les familles de cette classe ne paient rien.",
+          price: PRIX_PROF_AN,
+          priceCurrency: "EUR",
+          unitText: "an",
+          availability: VENTE.ouverte
+            ? "https://schema.org/InStock"
+            : "https://schema.org/PreOrder",
+          url: `${SITE_URL}/tarifs#classe`,
+        },
+        {
+          "@type": "Offer",
+          name: "Établissement — tous les professeurs, plus la direction",
+          description:
+            "Tous les niveaux, toutes les classes, tous les professeurs, et la vue complète du chef d'établissement. Facturé à l'établissement — rien aux familles, et aucun élève ne paie.",
+          price: PRIX_ETABLISSEMENT_ELEVE_AN,
+          priceCurrency: "EUR",
+          unitText: "élève et par an",
+          availability: VENTE.ouverte
+            ? "https://schema.org/InStock"
+            : "https://schema.org/PreOrder",
+          url: `${SITE_URL}/tarifs#etablissement`,
         },
       ],
     },

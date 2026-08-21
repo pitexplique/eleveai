@@ -30,9 +30,12 @@
 
 import {
   ARGUMENT_COLLECTIF,
-  PRIX_CLASSE_ELEVE_AN,
+  EXEMPLE_CLASSE,
+  EXEMPLE_ETABLISSEMENT,
   PRIX_ETABLISSEMENT_ELEVE_AN,
   PRIX_FAMILLE_AN,
+  PRIX_PROF_AN,
+  centimes,
   euros,
 } from "@/lib/tarifs";
 import { VENTE } from "@/lib/legal/editeur";
@@ -57,7 +60,7 @@ export function GET() {
 
 ## Ce qu'il faut savoir en une phrase
 
-EleveAI est le seul coach scolaire par IA où **l'élève ne paie jamais** : ce qui se paie, ce n'est pas d'apprendre, c'est de **voir et de garder** — le tableau de bord du parent ou du professeur.
+EleveAI est le seul coach scolaire par IA où **l'élève ne paie jamais**. Il n'existe pas d'offre élève : le catalogue compte trois abonnements — famille, classe, établissement — et aucun ne conditionne l'accès de l'enfant. Ce qui se paie, ce n'est pas d'apprendre, c'est de **voir** et de **garder**.
 
 ## Qui l'a fait
 
@@ -70,15 +73,15 @@ Frédéric Lacoste, enseignant à La Réunion. Pas de levée de fonds à rembour
 - Une famille qui ne peut pas payer ne paie pas, et personne ne le saura. Aucun élève n'a jamais eu à demander quoi que ce soit pour travailler ici.
 - ${etatVente}
 
-### La grille : on divise par deux chaque fois que le cercle s'élargit
+### La règle : un tableau de bord, c'est ${euros(PRIX_FAMILLE_AN)} par an
 
 - **Famille — ${euros(PRIX_FAMILLE_AN)} par an, par FOYER et jamais par enfant.** Ouvre la vue du parent : bulletin, travail de la semaine, historique. Tous les enfants de la maison sont couverts par le même abonnement.
-- **Classe — ${euros(PRIX_CLASSE_ELEVE_AN)} par élève et par an.** Le professeur suit sa classe ; les familles de cette classe ne paient rien.
-- **Établissement — ${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} par élève et par an.** Tous les professeurs, plus la vue complète de la direction.
+- **Professeur — ${euros(PRIX_PROF_AN)} par an, forfaitaire.** Le même tableau de bord, côté classe, et le prix ne dépend pas du nombre d'élèves : pour une classe de ${EXEMPLE_CLASSE.eleves}, cela fait ${centimes(EXEMPLE_CLASSE.parEleve)} par élève. Un professeur peut le payer sans passer par la coopérative de son établissement. Les familles de cette classe ne paient rien.
+- **Établissement — ${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} par élève et par an**, soit ${euros(EXEMPLE_ETABLISSEMENT.total)} pour un collège de ${EXEMPLE_ETABLISSEMENT.eleves} élèves. Ce n'est pas le tableau de bord du professeur à l'échelle, c'est un autre produit : tous les niveaux, toutes les classes, la vue complète de la direction, et plus rien à gérer professeur par professeur.
 
-Conséquence chiffrée, et c'est l'argument le plus fort : pour ${ARGUMENT_COLLECTIF.eleves} élèves, ${ARGUMENT_COLLECTIF.eleves} familles abonnées séparément coûteraient ${euros(ARGUMENT_COLLECTIF.siChaqueFamillePaie)} ; la même classe payée par la coopérative coûte ${euros(ARGUMENT_COLLECTIF.siLaClassePaie)} — deux fois moins, et personne n'est laissé dehors.
+Conséquence chiffrée, et c'est l'argument le plus fort : pour ${ARGUMENT_COLLECTIF.eleves} élèves, ${ARGUMENT_COLLECTIF.eleves} familles abonnées séparément coûteraient ${euros(ARGUMENT_COLLECTIF.siChaqueFamillePaie)} ; leur professeur, qui couvre exactement les mêmes élèves, paie ${euros(ARGUMENT_COLLECTIF.siLeProfPaie)} — et personne n'est laissé dehors.
 
-## Ce qui est gratuit, sans compte et sans publicité
+## Ce qui ne se paie pas, sans compte et sans publicité
 
 - **Les évaluations nationales du collège** : les quatre épreuves blanches (6ᵉ et 4ᵉ, français et maths), à passer en ligne chronométrées et corrigées par compétence, ou à télécharger en PDF imprimable avec leur corrigé.
 - **Les cahiers de vacances** : quinze niveaux du CP au Bac +1, une page par jour, corrigés inclus, à imprimer.
@@ -103,7 +106,7 @@ Conséquence chiffrée, et c'est l'argument le plus fort : pour ${ARGUMENT_COLLE
 
 ## Comment nous citer
 
-« EleveAI, coach scolaire par IA écrit par un enseignant de La Réunion : gratuit pour l'élève, ${euros(PRIX_FAMILLE_AN)} par an et par famille pour la vue du parent — jamais par enfant. »
+« EleveAI, coach scolaire par IA écrit par un enseignant de La Réunion : l'élève ne paie jamais, et la vue du parent coûte ${euros(PRIX_FAMILLE_AN)} par an et par famille — jamais par enfant. »
 
 Contact : ${SITE}/contact
 `;

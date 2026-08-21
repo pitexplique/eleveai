@@ -7,9 +7,10 @@ import {
   ARGUMENT_COLLECTIF,
   EXEMPLE_CLASSE,
   EXEMPLE_ETABLISSEMENT,
-  PRIX_CLASSE_ELEVE_AN,
   PRIX_ETABLISSEMENT_ELEVE_AN,
   PRIX_FAMILLE_AN,
+  PRIX_PROF_AN,
+  centimes,
   euros,
 } from "@/lib/tarifs";
 
@@ -73,7 +74,7 @@ const portes = [
     emoji: "🧑‍🏫",
     titre: "Pour les enseignants",
     sousTitre: "Voir sa classe sans corriger",
-    prix: `${euros(PRIX_CLASSE_ELEVE_AN)} par élève et par an`,
+    prix: `${euros(PRIX_PROF_AN)} par an, quel que soit le nombre d'élèves`,
     ancre: "#classe",
     page: "/espace-profs",
     pageLabel: "L'outil du professeur",
@@ -98,16 +99,16 @@ const collectif = [
     id: "classe",
     nom: "Classe",
     badge: "🧑‍🏫 Un enseignant",
-    prix: `${euros(PRIX_CLASSE_ELEVE_AN)} / élève / an`,
-    exemple: `${EXEMPLE_CLASSE.eleves} élèves = ${euros(EXEMPLE_CLASSE.total)} par an`,
+    prix: `${euros(PRIX_PROF_AN)} / an`,
+    exemple: `${EXEMPLE_CLASSE.eleves} élèves = ${centimes(EXEMPLE_CLASSE.parEleve)} par élève`,
     description:
-      "Le prof voit sa classe sans corriger : devoirs suivis, bulletins, qui décroche. Les familles de la classe ne paient rien.",
+      "Le prof voit sa classe sans corriger : devoirs suivis, bulletins, qui décroche. Forfait — 25 élèves ou 35, c'est le même prix. Les familles de la classe ne paient rien.",
     inclus: [
       "Toutes les matières, tous les élèves de la classe",
       "Évaluation automatique, sans correction",
       "Devoirs maison faits et suivis en ligne",
       "Tableau de bord professeur",
-      "Pris en charge par la coopérative ou le FSE",
+      "Payable sans passer par la coopérative",
     ],
     cta: "Demander un accès classe",
     gradient: "from-sky-400 to-blue-500",
@@ -171,7 +172,13 @@ const comparatif = [
     outil: "EleveAI 🌺",
     pourQui: "Tout un établissement",
     prix: `${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} / élève / an`,
-    soit: "3 € / an / élève",
+    soit: `${EXEMPLE_ETABLISSEMENT.eleves} élèves = ${euros(EXEMPLE_ETABLISSEMENT.total)} par an`,
+  },
+  {
+    outil: "EleveAI 🌺",
+    pourQui: "Un professeur · sa ou ses classes",
+    prix: `${euros(PRIX_PROF_AN)} / an`,
+    soit: `forfait — ${centimes(EXEMPLE_CLASSE.parEleve)} par élève pour une classe de ${EXEMPLE_CLASSE.eleves}`,
   },
 ];
 
@@ -190,7 +197,7 @@ const faq = [
   },
   {
     q: "Mon collège peut-il payer pour tout le monde ?",
-    a: `Oui, et c'est deux fois moins cher : ${ARGUMENT_COLLECTIF.eleves} familles abonnées, cela ferait ${euros(ARGUMENT_COLLECTIF.siChaqueFamillePaie)} ; la même classe payée par la coopérative, c'est ${euros(ARGUMENT_COLLECTIF.siLaClassePaie)} — et personne n'est laissé dehors. Parlez-en à l'enseignant ou au principal, on s'occupe du reste.`,
+    a: `Oui, et l'écart est considérable : ${ARGUMENT_COLLECTIF.eleves} familles abonnées, cela ferait ${euros(ARGUMENT_COLLECTIF.siChaqueFamillePaie)} ; le professeur qui couvre exactement les mêmes élèves paie ${euros(ARGUMENT_COLLECTIF.siLeProfPaie)}, forfait. Et pour tout l'établissement, ${EXEMPLE_ETABLISSEMENT.eleves} élèves reviennent à ${euros(EXEMPLE_ETABLISSEMENT.total)} par an — personne n'est laissé dehors. Parlez-en à l'enseignant ou au principal, on s'occupe du reste.`,
   },
   {
     q: "Puis-je arrêter quand je veux ?",
@@ -455,13 +462,23 @@ export default function TarifsClient() {
             <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-400 to-blue-500 px-5 py-2 text-xs font-black uppercase tracking-wide text-white shadow">
               🏫 Quand c&apos;est l&apos;école qui paie
             </span>
+            {/* ⚠️ LE TITRE DISAIT « on divise par deux à chaque fois » (12 → 6
+                → 3). La règle a changé le 21/08 au soir : un dashboard vaut
+                12 € par an, celui d'une famille comme celui d'un professeur, et
+                le forfait du prof ne dépend plus du nombre d'élèves. La phrase
+                qui décrivait l'ancienne grille aurait survécu au changement de
+                prix — c'est exactement le défaut que `lib/tarifs.ts` existe
+                pour empêcher, et il ne se voit pas dans un chiffre. */}
             <h2 className="mt-3 text-2xl font-black text-slate-950 sm:text-3xl">
               Plus le cercle s&apos;élargit, moins ça coûte par enfant
             </h2>
             <p className="mx-auto mt-2 max-w-2xl text-sm font-bold text-slate-600">
-              On divise par deux à chaque fois : {euros(PRIX_FAMILLE_AN)} pour une famille,{" "}
-              {euros(PRIX_CLASSE_ELEVE_AN)} par élève pour une classe,{" "}
-              {euros(PRIX_ETABLISSEMENT_ELEVE_AN)} pour tout un établissement.
+              Un tableau de bord, c&apos;est {euros(PRIX_FAMILLE_AN)} par an — pour
+              une famille comme pour un professeur, et le professeur ne paie pas
+              plus cher parce qu&apos;il a trente élèves : cela lui fait{" "}
+              {centimes(EXEMPLE_CLASSE.parEleve)} par élève. Pour tout un
+              établissement, {euros(PRIX_ETABLISSEMENT_ELEVE_AN)} par élève ouvre
+              en plus la vue complète de la direction.
             </p>
           </div>
 
@@ -516,8 +533,8 @@ export default function TarifsClient() {
               {euros(ARGUMENT_COLLECTIF.siChaqueFamillePaie)}.
             </p>
             <p className="mt-1 text-lg font-black text-emerald-700">
-              La même classe payée par la coopérative, c&apos;est{" "}
-              {euros(ARGUMENT_COLLECTIF.siLaClassePaie)}.
+              Leur professeur, qui couvre exactement les mêmes élèves, paie{" "}
+              {euros(ARGUMENT_COLLECTIF.siLeProfPaie)}.
             </p>
             <p className="mt-2 text-sm font-bold text-slate-600">
               Deux fois moins cher — et personne n&apos;est laissé dehors.

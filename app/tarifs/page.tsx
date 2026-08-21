@@ -2,9 +2,10 @@
 import type { Metadata } from "next";
 import TarifsClient from "./TarifsClient";
 import {
-  PRIX_CLASSE_ELEVE_AN,
+  EXEMPLE_ETABLISSEMENT,
   PRIX_ETABLISSEMENT_ELEVE_AN,
   PRIX_FAMILLE_AN,
+  PRIX_PROF_AN,
   euros,
 } from "@/lib/tarifs";
 
@@ -24,7 +25,7 @@ const url = "https://www.eleveai.fr/tarifs";
 const resume =
   `Plusieurs portes pour apprendre, progresser et s'évaluer : cinq matières du CP au Bac, coachs, parcours, rituels, cahiers et fiches. ` +
   `Le suivi par les parents est à ${euros(PRIX_FAMILLE_AN)} par an et par famille, quel que soit le nombre d'enfants. ` +
-  `Pour une classe ${euros(PRIX_CLASSE_ELEVE_AN)} par élève et par an, pour un établissement ${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} — et là, les familles ne paient rien.`;
+  `Un professeur équipe sa classe pour ${euros(PRIX_PROF_AN)} par an, forfait, quel que soit le nombre d'élèves ; un établissement entier pour ${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} par élève et par an, soit ${euros(EXEMPLE_ETABLISSEMENT.total)} pour ${EXEMPLE_ETABLISSEMENT.eleves} élèves — et là, les familles ne paient rien.`;
 
 export const metadata: Metadata = {
   // ⚠️ Le titre suit le <h1> : une description ou un titre qui ne dit plus la
