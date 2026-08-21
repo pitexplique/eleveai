@@ -246,6 +246,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les fractions",
     resume: "Reconnaître des fractions égales, simplifier, comparer, et l'opposé.",
   },
+  "maths/5e/divisibilite": {
+    titre: "Multiples, diviseurs et divisibilité",
+    resume: "Multiples et diviseurs, critères par 2, 5, 10, 3 et 9, et la liste des diviseurs par paires.",
+  },
   "maths/5e/parallelogramme": {
     titre: "Le parallélogramme",
     resume: "Reconnaître, côtés et angles opposés, diagonales, losange/rectangle/carré et aire.",
